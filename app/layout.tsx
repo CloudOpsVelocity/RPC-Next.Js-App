@@ -5,6 +5,7 @@ import Header from "./components/layouts/primary/header";
 import Footer from "./components/layouts/primary/footer";
 import MantineTheme from "@/mantine.config";
 import { MantineProvider, ColorSchemeScript } from "@mantine/core";
+import "@mantine/core/styles.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,9 +29,11 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <Header />
         <main>
-          <MantineProvider theme={MantineTheme}>{children}</MantineProvider>
+          <MantineProvider theme={MantineTheme}>
+            <Header />
+            {children}
+          </MantineProvider>
         </main>
         {/* <Footer/> */}
       </body>
