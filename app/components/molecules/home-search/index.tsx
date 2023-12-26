@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useState } from "react";
 const propertyTypes = ["Buy", "Rent", "Plot"];
 import Searchbar from "./searchbar";
+
 const HomeSearch = () => {
   const [selectedType, setSelectedType] = useState(propertyTypes[0]);
 
