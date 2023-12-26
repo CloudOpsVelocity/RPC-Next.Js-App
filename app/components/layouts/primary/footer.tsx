@@ -1,70 +1,8 @@
+import { footerNavs } from "@/app/data/footer"
+
 const Footer =  () => {
 
-    const footerNavs = [
-        {
-            label: "Company",
-            items: [
-                {
-                    href: '#',
-                    name: 'Partners'
-                },
-                {
-                    href: '#',
-                    name: 'Blog'
-                },
-                {
-                    href: '#',
-                    name: 'Team'
-                },
-                {
-                    href: '#',
-                    name: 'Careers'
-                },
-            ],
-        },
-        {
-            label: "Resources",
-            items: [
-                {
-                    href: '#',
-                    name: 'contact'
-                },
-                {
-                    href: '#',
-                    name: 'Support'
-                },
-                {
-                    href: '#',
-                    name: 'Docs'
-                },
-                {
-                    href: '#',
-                    name: 'Pricing'
-                },
-            ],
-        },
-        {
-            label: "About",
-            items: [
-                {
-                    href: '#',
-                    name: 'Terms'
-                },
-                {
-                    href: '#',
-                    name: 'License'
-                },
-                {
-                    href: '#',
-                    name: 'Privacy'
-                },
-                {
-                    href: '#',
-                    name: 'About US'
-                },
-            ]
-        }
-    ]
+ 
 
     return (
         <footer className="text-gray-500 bg-white px-4 py-5 max-w-screen-xl mx-auto md:px-8">
