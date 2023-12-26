@@ -34,9 +34,9 @@ const WhyCHoose = () => {
                    <Features/>
                    
                   </div>
-                  <div className="absolute w-[279px] h-[25px] top-[471px] left-[341px] bg-[#ececec] rounded-[139.5px/12.5px] blur-[19px]" />
-                  <div className="absolute w-[279px] h-[25px] top-[438px] left-0 bg-[#ececec] rounded-[139.5px/12.5px] blur-[19px]" />
-                  <div className="absolute w-[279px] h-[25px] top-[438px] left-[678px] bg-[#ececec] rounded-[139.5px/12.5px] blur-[19px]" />
+                  <div className="absolute w-[279px] h-[25px] top-[471px] left-[341px] bg-[#ececec] rounded-[139.5px/12.5px] blur-[10px]" />
+                  <div className="absolute w-[279px] h-[25px] top-[438px] left-0 bg-[#ececec] rounded-[139.5px/12.5px] blur-[10px]" />
+                  <div className="absolute w-[279px] h-[25px] top-[438px] left-[678px] bg-[#ececec] rounded-[139.5px/12.5px] blur-[10px]" />
                 </div>
               </div>
             </div>
