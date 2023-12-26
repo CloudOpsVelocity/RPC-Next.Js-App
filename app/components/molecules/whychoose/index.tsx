@@ -1,4 +1,5 @@
 import React from "react";
+import Features from "./features";
 const WhyCHoose = () => {
   return (
     <div className="inline-flex flex-col items-start gap-[37px] relative top-[160px] left-[121px] w-[100%]">
@@ -30,62 +31,9 @@ const WhyCHoose = () => {
                 </div>
                 <div className="absolute w-[957px] h-[496px] top-0 left-[712px]">
                   <div className="inline-flex items-center gap-[44px] absolute top-0 left-[6px]">
-                    <div className="relative w-[287px] h-[377px]">
-                      <div className="relative w-[307px] h-[394px] top-[-6px] left-[-10px] bg-[100%_100%]">
-                        <div className="flex flex-col w-[245px] items-center justify-center gap-[32px] relative top-[60px] left-[31px]">
-                          <div className="inline-flex flex-col items-center gap-[15px] relative flex-[0_0_auto]">
-                            <img className="relative w-[158.68px] h-[143.48px]" alt="Group" src="group-2248.svg" />
-                            <div className="relative w-[140.85px] h-[13.01px] bg-[#cbd4e138] rounded-[70.42px/6.51px] blur-[4.1px]" />
-                          </div>
-                          <p className="relative w-[247px] ml-[-1.00px] mr-[-1.00px] [font-family:'Montserrat-Medium',Helvetica] font-normal text-transparent text-[24px] text-center tracking-[0.96px] leading-[31.2px]">
-                            <span className="font-medium text-[#666666]">
-                              Best in <br />
-                            </span>
-                            <span className="[font-family:'Montserrat-Bold',Helvetica] font-bold text-[#0072c5]">
-                              Property Listing
-                            </span>
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="relative w-[287px] h-[438px]">
-                      <div className="relative w-[307px] h-[458px] top-[-6px] left-[-10px]  bg-[100%_100%]">
-                        <div className="flex flex-col w-[232px] items-center gap-[32px] relative top-[84px] left-[38px]">
-                          <div className="relative w-[192px] h-[188px]">
-                            <div className="inline-flex flex-col items-center gap-[18px] relative">
-                              <img className="relative w-[191.24px] h-[157px]" alt="Group" src="group-2247.svg" />
-                              <div className="relative w-[192px] h-[13px] bg-[#cbd4e138] rounded-[96px/6.5px] blur-[4.1px]" />
-                            </div>
-                          </div>
-                          <p className="w-[232px] relative [font-family:'Montserrat-Medium',Helvetica] font-normal text-transparent text-[24px] text-center tracking-[0.96px] leading-[31.2px]">
-                            <span className="font-medium text-[#666666]">
-                              Best in <br />
-                            </span>
-                            <span className="[font-family:'Montserrat-Bold',Helvetica] font-bold text-[#0072c5]">
-                              Trusted Services
-                            </span>
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="relative w-[287px] h-[374px]">
-                      <div className="relative w-[307px] h-[394px] top-[-6px] left-[-10px]  bg-[100%_100%]">
-                        <div className="inline-flex flex-col items-center gap-[32px] relative top-[60px] left-[46px]">
-                          <div className="inline-flex flex-col items-center justify-center gap-[14px] relative flex-[0_0_auto]">
-                            <img className="relative w-[158.68px] h-[143.48px]" alt="Group" src="group-2246.svg" />
-                            <div className="relative w-[140.85px] h-[13.01px] bg-[#cbd4e138] rounded-[70.42px/6.51px] blur-[4.1px]" />
-                          </div>
-                          <p className="w-[209px] relative [font-family:'Montserrat-Medium',Helvetica] font-normal text-transparent text-[24px] text-center tracking-[0.96px] leading-[31.2px]">
-                            <span className="font-medium text-[#666666]">
-                              Best in <br />
-                            </span>
-                            <span className="[font-family:'Montserrat-Bold',Helvetica] font-bold text-[#0072c5]">
-                              Project Listing
-                            </span>
-                          </p>
-                        </div>
-                      </div>
-                    </div>
+                   <Features/>
+                   
+               
                   </div>
                   <div className="absolute w-[279px] h-[25px] top-[471px] left-[341px] bg-[#ececec] rounded-[139.5px/12.5px] blur-[19px]" />
                   <div className="absolute w-[279px] h-[25px] top-[438px] left-0 bg-[#ececec] rounded-[139.5px/12.5px] blur-[19px]" />
