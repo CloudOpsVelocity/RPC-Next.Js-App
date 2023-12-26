@@ -33,7 +33,6 @@ const WhyCHoose = () => {
                   <div className="inline-flex items-center gap-[44px] absolute top-0 left-[6px]">
                    <Features/>
                    
-               
                   </div>
                   <div className="absolute w-[279px] h-[25px] top-[471px] left-[341px] bg-[#ececec] rounded-[139.5px/12.5px] blur-[19px]" />
                   <div className="absolute w-[279px] h-[25px] top-[438px] left-0 bg-[#ececec] rounded-[139.5px/12.5px] blur-[19px]" />
