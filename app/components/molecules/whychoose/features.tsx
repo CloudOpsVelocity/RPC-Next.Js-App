@@ -21,10 +21,9 @@ type Props = {
 export  function Card({
     src,desc,name,index
 }: Props) {
-  console.log(index)
   return (
-    <div className={`relative w-[287px] `}>
-      <div className={`group relative w-[307px] h-[${index == 1 ? "394px" : "410px" }] top-[-6px] left-[-10px]  bg-[100%_100%] shadow-2xl rounded-xl transition-all duration-200 hover:w-[317px] hover:h-[${index == 1 ? "404px" : "420px" }] `}>
+    <div className={`relative flex justify-center items-center`}>
+      <div className={`group relative w-[287px] h-[${index !== 1 ? "394px" : "438px" }] top-[-6px] left-[-10px]  bg-[100%_100%] shadow-2xl rounded-2xl transition-all duration-200 hover:w-[300px] hover:h-[${index !== 1 ? "404px" : "450px" }] `}>
         <div className="inline-flex flex-col justify-center items-center gap-[32px] relative top-[60px] left-[46px]">
           <div className="inline-flex flex-col items-center justify-center gap-[14px] relative flex-[0_0_auto]">
             <Image className="relative w-[158.68px] transition-all duration-200 h-[143.48px] group-hover:w-[163.68px] group-hover:h-[153.48px]" alt="Group" src={src} width={158.68} height={143.48} />
@@ -40,6 +39,10 @@ export  function Card({
           </p>
         </div>
       </div>
+
+      {/* <div className="w-[279px] h-[25px]">
+        <div className="fixed w-[279px] h-[25px] top-0 left-0 bg-[#ececec] rounded-[139.5px/12.5px] blur-[19px]" />
+      </div> */}
     </div>
   )
 }
