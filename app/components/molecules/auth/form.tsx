@@ -4,16 +4,6 @@ const Form = () => {
       <div className="relative flex-1 hidden items-center justify-center h-screen bg-[#65BB671A] lg:flex">
         <div className="relative z-10 w-full max-w-md">
           <div className=" mt-16 space-y-3">
-            <div className="w-[323px] h-8 justify-center items-center gap-2.5 inline-flex">
-              <div>
-                <span style="text-black text-2xl font-semibold font-['Playfair Display'] capitalize tracking-widest">
-                  A name you can{" "}
-                </span>
-                <span style="text-emerald-600 text-2xl font-bold font-['Playfair Display'] capitalize tracking-widest">
-                  trust
-                </span>
-              </div>
-            </div>
             <h3 className="text-white text-3xl font-bold">
               A Name You Can Trust
             </h3>
