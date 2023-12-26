@@ -1,8 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import SessionProvider from './context/session'
-import ReactQueryProvider from './context/rquery'
 import Header from './components/layouts/primary/header'
 import Footer from './components/layouts/primary/footer'
 
