@@ -1,6 +1,10 @@
+"use client";
 import Link from "next/link";
 import Logo from "../../atoms/Logo";
+import { useDisclosure } from "@mantine/hooks";
 const Header = () => {
+  const [opened, { toggle }] = useDisclosure(false);
+
   return (
     <header className="h-[90px] bg-transparent px-10 flex items-center justify-between fixed top-0 z-50 w-full">
       <section>
