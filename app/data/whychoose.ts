@@ -1,4 +1,3 @@
-import {  homeSearchPropertyHomeIcon } from "../images/commonSvgs";
 
 export const data = [
     {
