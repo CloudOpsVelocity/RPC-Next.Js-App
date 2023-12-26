@@ -1,4 +1,5 @@
 import { data } from '@/app/data/whychoose';
+import { HomeSvg } from '@/app/images/commonSvgs';
 import Image from 'next/image';
 import React from 'react'
 

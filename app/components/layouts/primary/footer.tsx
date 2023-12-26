@@ -1,156 +1,129 @@
-import React from 'react';
+import React from "react";
 
-const footerData = {
-  logoUrl: "https://merakiui.com/images/full-logo.svg",
-  newsletterText: "Join 31,000+ others and never miss out on new tips, tutorials, and more.",
-  socialLinks: [
-    { platform: "Reddit", icon: "reddit" },
-    { platform: "Facebook", icon: "facebook" },
-    { platform: "Github", icon: "github" },
-  ],
-  aboutLinks: [
-    { title: "Company", url: "#" },
-    { title: "Community", url: "#" },
-    { title: "Careers", url: "#" },
-  ],
-  blogLinks: [
-    { title: "Tech", url: "#" },
-    { title: "Music", url: "#" },
-    { title: "Videos", url: "#" },
-  ],
-  productsLinks: [
-    { title: "Mega Cloud", url: "#" },
-    { title: "Aperion UI", url: "#" },
-    { title: "Meraki UI", url: "#" },
-  ],
-  contactInfo: {
-    phoneNumber: "+1 526 654 8965",
-    emailAddress: "example@email.com",
-  },
-  copyrightText: "© Brand 2020 - All rights reserved",
-};
-
-const footer = () => (
-  <footer className="bg-white dark:bg-gray-900">
-    <div className="container p-6 mx-auto">
-      <div className="lg:flex">
-        <div className="w-full -mx-6 lg:w-2/5">
-          <div className="px-6">
-            <a href="#">
-              <img
-                className="w-auto h-7"
-                src={footerData.logoUrl}
-                alt=""
-              />
-            </a>
-            <p className="max-w-sm mt-2 text-gray-500 dark:text-gray-400">
-              {footerData.newsletterText}
-            </p>
-            <div className="flex mt-6 -mx-2">
-              {footerData.socialLinks.map((link, index) => (
-                <a
-                  key={index}
-                  href="#"
-                  className="mx-2 text-gray-600 transition-colors duration-300 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
-                  aria-label={link.platform}
-                >
-                  {link.platform === "Reddit" && (
-                    <svg
-                      className="w-5 h-5 fill-current"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      {/* Reddit icon path */}
-                    </svg>
-                  )}
-                  {link.platform === "Facebook" && (
-                    <svg
-                      className="w-5 h-5 fill-current"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      {/* Facebook icon path */}
-                    </svg>
-                  )}
-                  {link.platform === "Github" && (
-                    <svg
-                      className="w-5 h-5 fill-current"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      {/* Github icon path */}
-                    </svg>
-                  )}
-                </a>
-              ))}
-            </div>
+ const Footer = () => {
+  return (
+    <div className=" w-[1920px] h-[552px] bg-[#f8f9fa]">
+      <div className="inline-flex items-start gap-[31px] ">
+        <div className="inline-flex items-center justify-center gap-[12px] relative flex-[0_0_auto]">
+          <img className="relative w-[14px] h-[20px]" alt="Footerlocation" src="footerlocation.svg" />
+          <div className="relative w-fit mt-[-1.00px] [font-family:'Montserrat-SemiBold',Helvetica] font-semibold text-[#767270] text-[18px] tracking-[0] leading-[27px] whitespace-nowrap">
+            Whitefield, Bengaluru-560066
           </div>
         </div>
-        <div className="mt-6 lg:mt-0 lg:flex-1">
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {/* About section */}
-            <div>
-              <h3 className="text-gray-700 uppercase dark:text-white">About</h3>
-              {footerData.aboutLinks.map((link, index) => (
-                <a
-                  key={index}
-                  href={link.url}
-                  className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline"
-                >
-                  {link.title}
-                </a>
-              ))}
-            </div>
-            {/* Blog section */}
-            <div>
-              <h3 className="text-gray-700 uppercase dark:text-white">Blog</h3>
-              {footerData.blogLinks.map((link, index) => (
-                <a
-                  key={index}
-                  href={link.url}
-                  className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline"
-                >
-                  {link.title}
-                </a>
-              ))}
-            </div>
-            {/* Products section */}
-            <div>
-              <h3 className="text-gray-700 uppercase dark:text-white">Products</h3>
-              {footerData.productsLinks.map((link, index) => (
-                <a
-                  key={index}
-                  href={link.url}
-                  className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline"
-                >
-                  {link.title}
-                </a>
-              ))}
-            </div>
-            {/* Contact section */}
-            <div>
-              <h3 className="text-gray-700 uppercase dark:text-white">Contact</h3>
-              <span className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline">
-                {footerData.contactInfo.phoneNumber}
-              </span>
-              <span className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline">
-                {footerData.contactInfo.emailAddress}
-              </span>
-            </div>
+        <div className="inline-flex items-center justify-center gap-[12px] relative flex-[0_0_auto]">
+          <img className="relative w-[24px] h-[24px]" alt="Contact" src="contact.svg" />
+          <div className="relative w-fit mt-[-1.00px] [font-family:'Montserrat-SemiBold',Helvetica] font-semibold text-[#767270] text-[18px] tracking-[0] leading-[27px] whitespace-nowrap">
+            +91-8884440963
           </div>
         </div>
       </div>
-      <hr className="h-px my-6 bg-gray-200 border-none dark:bg-gray-700" />
-      <div>
-        <p className="text-center text-gray-500 dark:text-gray-400">
-          {footerData.copyrightText}
+      <img className=" w-[1712px] h-px top-[400px] left-[104px] object-cover" alt="Divider" src="divider.svg" />
+      <div className="w-[115px] h-[204px] left-[1013px]  top-[64px]">
+        <div className="w-[99px] h-[156px] flex flex-col items-start gap-[16px]  top-[48px] left-0">
+          <p className="relative self-stretch [font-family:'Montserrat-Medium',Helvetica] font-medium text-[#767270] text-[18px] tracking-[0] leading-[27px]">
+            <span className="[font-family:'Montserrat-Medium',Helvetica] font-medium text-[#767270] text-[18px] tracking-[0] leading-[27px]">
+              Account
+              <br />
+            </span>
+          </p>
+          <p className="relative self-stretch [font-family:'Montserrat-Medium',Helvetica] font-medium text-[#767270] text-[18px] tracking-[0] leading-[27px]">
+            <span className="[font-family:'Montserrat-Medium',Helvetica] font-medium text-[#767270] text-[18px] tracking-[0] leading-[27px]">
+              Support <br />
+            </span>
+          </p>
+          <p className="relative self-stretch [font-family:'Montserrat-Medium',Helvetica] font-medium text-[#767270] text-[18px] tracking-[0] leading-[27px]">
+            <span className="[font-family:'Montserrat-Medium',Helvetica] font-medium text-[#767270] text-[18px] tracking-[0] leading-[27px]">
+              Feedback
+              <br />
+            </span>
+          </p>
+          <p className="relative self-stretch [font-family:'Montserrat-Medium',Helvetica] font-medium text-[#767270] text-[18px] tracking-[0] leading-[27px]">
+            <span className="[font-family:'Montserrat-Medium',Helvetica] font-medium text-[#767270] text-[18px] tracking-[0] leading-[27px]">
+              Contact us
+            </span>
+          </p>
+        </div>
+        <div className=" top-0 left-0 [font-family:'Montserrat-Bold',Helvetica] font-bold text-[#0072c5] text-[26px] tracking-[0] leading-[22px] whitespace-nowrap">
+          Support
+        </div>
+      </div>
+      <div className="w-[151px] h-[247px] left-[653px]  top-[64px]">
+        <div className="w-[95px] h-[199px] flex flex-col items-start gap-[16px]  top-[48px] left-0">
+          <p className="relative self-stretch [font-family:'Montserrat-Medium',Helvetica] font-medium text-[#767270] text-[18px] tracking-[0] leading-[27px]">
+            <span className="[font-family:'Montserrat-Medium',Helvetica] font-medium text-[#767270] text-[18px] tracking-[0] leading-[27px]">
+              Home
+              <br />
+            </span>
+          </p>
+          <p className="relative self-stretch [font-family:'Montserrat-Medium',Helvetica] font-medium text-[#767270] text-[18px] tracking-[0] leading-[27px]">
+            <span className="[font-family:'Montserrat-Medium',Helvetica] font-medium text-[#767270] text-[18px] tracking-[0] leading-[27px]">
+              About Us
+              <br />
+            </span>
+          </p>
+          <p className="relative self-stretch [font-family:'Montserrat-Medium',Helvetica] font-medium text-[#767270] text-[18px] tracking-[0] leading-[27px]">
+            <span className="[font-family:'Montserrat-Medium',Helvetica] font-medium text-[#767270] text-[18px] tracking-[0] leading-[27px]">
+              Properties
+              <br />
+            </span>
+          </p>
+          <p className="relative self-stretch [font-family:'Montserrat-Medium',Helvetica] font-medium text-[#767270] text-[18px] tracking-[0] leading-[27px]">
+            <span className="[font-family:'Montserrat-Medium',Helvetica] font-medium text-[#767270] text-[18px] tracking-[0] leading-[27px]">
+              Projects
+              <br />
+            </span>
+          </p>
+          <p className="relative self-stretch [font-family:'Montserrat-Medium',Helvetica] font-medium text-[#767270] text-[18px] tracking-[0] leading-[27px]">
+            <span className="[font-family:'Montserrat-Medium',Helvetica] font-medium text-[#767270] text-[18px] tracking-[0] leading-[27px]">
+              Blogs
+            </span>
+          </p>
+        </div>
+        <div className=" top-0 left-0 [font-family:'Montserrat-Bold',Helvetica] font-bold text-[#0072c5] text-[26px] tracking-[0] leading-[22px] whitespace-nowrap">
+          Quick Link
+        </div>
+      </div>
+      <div className=" w-[404px] h-[212px] top-[64px] left-[104px]">
+        <p className=" w-[402px] top-[68px] left-0 [font-family:'Montserrat-Medium',Helvetica] font-medium text-[#666666] text-[24px] tracking-[0] leading-[36px]">
+          We pride ourselves on delivering exceptional customer services &amp; building lasting relationships with our
+          clients
         </p>
+        <img
+          className=" w-[351px] h-[57px] top-0 left-[-4px]"
+          alt="Get right property"
+          src="get-right-property.png"
+        />
+      </div>
+      <div className=" top-[443px] left-[104px] [font-family:'Montserrat-Medium',Helvetica] font-medium text-[#4f4f4f] text-[18px] tracking-[0] leading-[27px] whitespace-nowrap">
+        Copyright @getrightproperty
+      </div>
+      <div className="inline-flex flex-col items-start gap-[26px]  top-[64px] left-[1344px]">
+        <div className="relative w-fit mt-[-1.00px] [font-family:'Montserrat-Bold',Helvetica] font-bold text-[#0072c5] text-[26px] tracking-[0] leading-[22px] whitespace-nowrap">
+          Join a Newsletter
+        </div>
+        <div className="inline-flex flex-col items-start gap-[12px] relative flex-[0_0_auto]">
+          <div className="relative w-[479px] h-[88px]">
+            <div className="inline-flex flex-col items-center gap-[10px] px-[48px] py-[16px]  top-[35px] left-[312px] bg-[#0072c5] rounded-[8px] shadow-SELECTED">
+              <div className="relative w-fit mt-[-1.00px] [font-family:'Montserrat-Medium',Helvetica] font-medium text-z-white-fff text-[14px] tracking-[0] leading-[21px] whitespace-nowrap">
+                Subscribe
+              </div>
+            </div>
+            <div className=" w-[298px] h-[88px] top-0 left-0">
+              <div className="relative w-[338px] h-[113px] left-[-21px]">
+                <img className=" w-[338px] h-[98px] top-[15px] left-0" alt="Form" src="form.png" />
+                <div className=" top-0 left-[21px] [font-family:'Montserrat-SemiBold',Helvetica] font-semibold text-[#767270] text-[18px] tracking-[0] leading-[27px] whitespace-nowrap">
+                  Your Email
+                </div>
+              </div>
+            </div>
+          </div>
+          <p className="relative w-[402px] [font-family:'Montserrat-Medium',Helvetica] font-medium text-[#767270] text-[20px] tracking-[0] leading-[30px]">
+            Subscribe to our newsletter and receive updates email
+          </p>
+        </div>
       </div>
     </div>
-  </footer>
-);
+  );
+};
 
-export default footer;
+export default Footer;
