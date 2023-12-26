@@ -2,8 +2,8 @@ import React from "react";
 import Features from "./features";
 const WhyCHoose = () => {
   return (
-    <div className="inline-flex flex-col items-start gap-[37px] relative top-[160px] left-[121px] w-[100%]">
-          <p className="relative w-fit mt-[-1.00px] [font-family:'Muna-Regular',Helvetica] font-normal text-transparent text-[64px] tracking-[2.56px] leading-[83.2px] whitespace-nowrap">
+    <div className="inline-flex justify-center items-start flex-col gap-[37px] relative top-[160px] left-[121px] w-[100%] max-w-[1920px] h-screen">
+          <p className="relative mt-[-1.00px] [font-family:'Muna-Regular',Helvetica] font-normal text-transparent text-[64px] tracking-[2.56px] leading-[83.2px] whitespace-nowrap">
             <span className="text-[#1f1f1f]">Why Choose</span>
             <span className="[font-family:'Muna-Bold',Helvetica] font-bold text-[#138b16]"> Get Right Property?</span>
           </p>
