@@ -1,3 +1,4 @@
+import Blogs from "./components/molecules/blogs"
 import HomeSearch from "./components/molecules/home-search"
 import WhyCHoose from "./components/molecules/whychoose"
 import YourList from "./components/molecules/your-llist"
@@ -12,6 +13,7 @@ export default function Home() {
   <HomeSearch/>
   <WhyCHoose />
   <YourList/>
+  <Blogs/>
  </div>
   )
 }

@@ -1,5 +1,4 @@
 import { data } from '@/app/data/whychoose';
-import { HomeSvg } from '@/app/images/commonSvgs';
 import Image from 'next/image';
 import React from 'react'
 
@@ -22,7 +21,6 @@ type Props = {
 export  function Card({
     src,desc,name,index
 }: Props) {
-  console.log(index)
   return (
     <div className={`relative w-[287px] `}>
       <div className={`group relative w-[307px] h-[${index == 1 ? "394px" : "410px" }] top-[-6px] left-[-10px]  bg-[100%_100%] shadow-2xl rounded-xl transition-all duration-200 hover:w-[317px] hover:h-[${index == 1 ? "404px" : "420px" }] `}>
