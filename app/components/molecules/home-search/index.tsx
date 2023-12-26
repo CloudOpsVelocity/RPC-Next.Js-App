@@ -8,7 +8,7 @@ const HomeSearch = () => {
   const [selectedType, setSelectedType] = useState(propertyTypes[0]);
 
   return (
-    <div className="h-screen w-screen border-2 grid grid-cols-[1.5fr_2fr] gap-2 px-20 ">
+    <div className="h-screen max-w-[1920px] w-screen border-2 grid grid-cols-[1.5fr_2fr] gap-2 px-20 ">
       <div className="flex items-center justify-center">
         <Image
           src={"/home-search.svg"}
