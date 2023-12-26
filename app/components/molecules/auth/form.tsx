@@ -42,12 +42,10 @@ const Form = () => {
 
 export default Form;
 
-import { Tabs, rem } from "@mantine/core";
-import Login from "./form2";
+import { Tabs } from "@mantine/core";
+import Login from "./login";
 
 function FormTabs() {
-  const iconStyle = { width: rem(12), height: rem(12) };
-
   return (
     <Tabs color="rgba(33, 97, 166, 1)" defaultValue="gallery">
       <Tabs.List>
