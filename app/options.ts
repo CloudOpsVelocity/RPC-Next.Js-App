@@ -1,6 +1,7 @@
 import type { NextAuthOptions } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
+import axios from "axios";
 
 export const options: NextAuthOptions = {
   providers: [
@@ -16,15 +17,12 @@ export const options: NextAuthOptions = {
       },
       // @ts-ignore
       async authorize(credentials) {
-        const user = users.find((user) => {
-          return (
-            credentials?.email === user.email &&
-            credentials?.password === user.password
-          );
-        });
+        const res = await axios.post(
+          `http://localhost:8081/user/v1/doLoginWithMobile`
+        );
 
-        if (user) {
-          return user;
+        if (res.data.status) {
+          return res.data.data;
         }
 
         throw new Error("Wrong Credentials");
@@ -55,8 +53,9 @@ export const options: NextAuthOptions = {
   },
 };
 
-const users =  [{
-  email:'test@gmail.com',
-  password:'123'
-  
- }]
+const users = [
+  {
+    email: "test@gmail.com",
+    password: "123",
+  },
+];
