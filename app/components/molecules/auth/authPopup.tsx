@@ -13,7 +13,6 @@ function AuthPopup() {
       <Modal
         opened={opened}
         onClose={close}
-        title="This is a fullscreen modal"
         transitionProps={{ transition: "fade", duration: 200 }}
         zIndex={1000}
         maw={"max-content"}
