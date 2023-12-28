@@ -15,7 +15,7 @@ export default function Page() {
           buttonClass={` whitespace-nowrap text-[26px] font-[500] text-[#148B16] font-bold border-solid border-b-7 border-green-900`}
         />
 
-        <Link href="/register">
+        <Link href="/register" prefetch>
           <Button
             key="loginBtn"
             title="Sign Up"
