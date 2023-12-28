@@ -5,7 +5,7 @@ import Logo from "../../atoms/Logo";
 const Form = () => {
   return (
     <main className="w-full flex">
-      <div className="relative flex-1 hidden items-center justify-center h-screen bg-[#65BB671A] lg:flex">
+      <div className="relative flex-1 hidden items-center justify-center bg-[#65BB671A] lg:flex h-full">
         <div className="relative z-10 w-full max-w-md">
           <div className=" mt-16 space-y-3">
             <h3 className=" text-2xl font-semibold tracking-[2.04px] capitalize self-stretch grow whitespace-nowrap text-center mb-10">
@@ -30,7 +30,7 @@ const Form = () => {
           </div>
         </div>
       </div>
-      <div className="flex-1 flex items-center justify-center h-screen">
+      <div className="flex-1 flex items-center justify-center">
         <div className="w-full max-w-md space-y-8 px-4 bg-white text-gray-600 sm:px-0 justify-center items-center">
           <Logo />
           <FormTabs />
