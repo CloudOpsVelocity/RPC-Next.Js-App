@@ -1,3 +1,4 @@
+"use client";
 import data from "@/app/data/auth";
 import Image from "next/image";
 import Logo from "../../atoms/Logo";
