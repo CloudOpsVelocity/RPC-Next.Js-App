@@ -3,6 +3,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { Modal } from "@mantine/core";
 import Form from "./form";
 import Button from "../../../elements/button";
+import { useSession } from "next-auth/react";
 
 function AuthPopup() {
   const { data: session } = useSession();
