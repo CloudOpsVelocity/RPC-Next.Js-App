@@ -1,3 +1,4 @@
+"use client";
 import { useForm } from "@mantine/form";
 import {
   NumberInput,
@@ -6,31 +7,36 @@ import {
   Box,
   PasswordInput,
 } from "@mantine/core";
+import useAuth from "@/app/hooks/useAuth";
 
 function Individual() {
+  const { register } = useAuth();
   const form = useForm({
-    initialValues: { fullname: "", email: "", password: "", contact: 0 },
+    initialValues: { name: "", email: "", password: "", mobile: 0 },
 
     // functions will be used to validate values at corresponding key
     validate: {
-      fullname: (value) => (value.length < 2 ? "Full name is required" : null),
+      name: (value) => (value.length < 2 ? "Full name is required" : null),
       email: (value) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return !value.match(emailRegex) ? "Valid email is required" : null;
       },
       password: (value) => (value.length < 1 ? "Password is required" : null),
-      contact: (value) =>
-        isNaN(value) || value <= 0 ? "Valid contact number is required" : null,
+      mobile: (value) =>
+        isNaN(value) || value <= 0 ? "Valid mobile number is required" : null,
     },
   });
-
+  const onSubmit = async (values: typeof form.values) => {
+    const data = await register({ ...values, usertype: "I" });
+    console.log(data);
+  };
   return (
     <Box mx="auto">
-      <form onSubmit={form.onSubmit(console.log)}>
+      <form onSubmit={form.onSubmit(onSubmit)}>
         <TextInput
           label="Full Name"
           placeholder="Full Name"
-          {...form.getInputProps("fullname")}
+          {...form.getInputProps("name")}
         />
         <TextInput
           mt="sm"
@@ -48,7 +54,7 @@ function Individual() {
           mt="sm"
           label="Contact Number"
           placeholder="Contact Number"
-          {...form.getInputProps("contact")}
+          {...form.getInputProps("mobile")}
         />
 
         <Button type="submit" mt="sm">
