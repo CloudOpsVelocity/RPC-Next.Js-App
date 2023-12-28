@@ -1,13 +1,15 @@
 "use client";
 
 import Login from "@/app/components/molecules/auth/login";
+import { data } from "@/app/data/userTypeDetails";
 import Button from "@/app/elements/button";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Page() {
   return (
-    <div className="w-full p-[2%]">
-      <div className="w-full flex justify-center items-center gap-[5%] mb-[5%] ">
+    <div className="w-full p-[2%] flex justify-center items-center flex-col">
+      <div className="w-full max-w-[459px] md:max-w-[597px] flex justify-center items-center gap-[5%] mb-[5%] ">
         <Link href="/login">
           <Button
             key="loginBtn"
@@ -25,7 +27,47 @@ export default function Page() {
         />
       </div>
 
-      <div></div>
+      <div>
+        <h1 className="md:text-[32px] text-[24px] font-[600] font-Playball text-[#333]">
+          Welcome !
+        </h1>
+        <p className="text-[26px] md:text-[20px] font-[400] font-Playball text-[#767270]">
+          New user, Select how you want to sign up as
+        </p>
+        <div className="w-full flex justify-between items-center mt-[4%]">
+          {data.map((each, ind) => {
+            return (
+              <div
+                key={ind}
+                className={`group cursor-pointer flex justify-center items-center flex-col rounded-[8px] bg-[#FAFAFA] w-[30%] h-[130px] md:h-[174px] shadow-lg hover:shadow-green-300/30`}
+              >
+                <Image
+                  className=""
+                  alt="User"
+                  src={each.src}
+                  width={83}
+                  height={83}
+                />
+
+                <p
+                  className={`text-[20px] font-[500] font-Playball text-[#7D7D7D] mt-[3%] group-hover:text-[#65BB67]`}
+                >
+                  {each.name}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+
+        <p className=" text-[24px] font-[400] font-Ledger text-[#282828] mt-[5%] ">
+          “ Your journey to{" "}
+          <span className="whitespace-nowrap text-[28px] font-[400] font-Playball text-[#009C59]">
+            {" "}
+            Get Right Property
+          </span>{" "}
+          starts here ”
+        </p>
+      </div>
     </div>
   );
 }
