@@ -8,7 +8,7 @@ import { MantineProvider, ColorSchemeScript } from "@mantine/core";
 import "@mantine/core/styles.css";
 import SessionProvider from "./context/session";
 import ReactQueryProvider from "./context/rquery";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -33,10 +33,10 @@ export default function RootLayout({
       </head>
       <body>
         <main className="flex justify-center items-center">
+          <Toaster position="bottom-center" reverseOrder={false} />
           <MantineProvider theme={MantineTheme}>
             <SessionProvider>
               <ReactQueryProvider>
-                <Toaster />
                 <Header />
                 {children}
               </ReactQueryProvider>
