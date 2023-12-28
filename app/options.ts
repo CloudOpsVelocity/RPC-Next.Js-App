@@ -12,20 +12,30 @@ export const options: NextAuthOptions = {
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        email: { label: "email", type: "text", placeholder: "email" },
+        username: {
+          label: "username",
+          type: "text",
+        },
         password: { label: "Password", type: "password" },
       },
       // @ts-ignore
       async authorize(credentials) {
         const res = await axios.post(
-          `http://localhost:8081/user/v1/doLoginWithMobile`
+          `http://localhost:8081/user/v1/doLoginWithMobile`,
+          {
+            username: credentials?.username,
+            password: credentials?.password,
+          }
         );
-
         if (res.data.status) {
-          return res.data.data;
+          return {
+            id: 1,
+            email: credentials?.username,
+          };
+        } else {
+          console.log(res.data);
+          throw new Error(res.data.message);
         }
-
-        throw new Error("Wrong Credentials");
       },
     }),
   ],
@@ -52,10 +62,3 @@ export const options: NextAuthOptions = {
     },
   },
 };
-
-const users = [
-  {
-    email: "test@gmail.com",
-    password: "123",
-  },
-];

@@ -6,6 +6,8 @@ import Footer from "./components/layouts/primary/footer";
 import MantineTheme from "@/mantine.config";
 import { MantineProvider, ColorSchemeScript } from "@mantine/core";
 import "@mantine/core/styles.css";
+import SessionProvider from "./context/session";
+import ReactQueryProvider from "./context/rquery";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,8 +33,12 @@ export default function RootLayout({
       <body>
         <main>
           <MantineProvider theme={MantineTheme}>
-            <Header />
-            {children}
+            <SessionProvider>
+              <ReactQueryProvider>
+                <Header />
+                {children}
+              </ReactQueryProvider>
+            </SessionProvider>
           </MantineProvider>
         </main>
         {/* <Footer/> */}

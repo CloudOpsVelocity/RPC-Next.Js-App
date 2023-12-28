@@ -6,6 +6,7 @@ import {
   TextInput,
   PasswordInput,
   Code,
+  NumberInput,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
@@ -14,35 +15,41 @@ function Agent() {
 
   const form = useForm({
     initialValues: {
-      username: "",
-      password: "",
-      name: "",
+      fullname: "",
       email: "",
-      website: "",
-      github: "",
+      password: "",
+      contact: 0,
+      address: "",
+      companyName: "",
     },
-
+    // @ts-ignore
     validate: (values) => {
       if (active === 0) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return {
-          username:
-            values.username.trim().length < 6
-              ? "Username must include at least 6 characters"
-              : null,
+          fullname:
+            values.fullname.trim().length < 2 ? "Full name is required" : null,
+          email: !values.email.match(emailRegex)
+            ? "Valid email is required"
+            : null,
+
           password:
-            values.password.length < 6
-              ? "Password must include at least 6 characters"
+            values.password.trim().length < 1 ? "Password is required" : null,
+          contact:
+            isNaN(values.contact) || values.contact <= 0
+              ? "Valid contact number is required"
               : null,
         };
       }
 
       if (active === 1) {
         return {
-          name:
-            values.name.trim().length < 2
-              ? "Name must include at least 2 characters"
+          address:
+            values.address.trim().length < 2 ? "Address is required" : null,
+          companyName:
+            values.companyName.trim().length < 2
+              ? "Company name is required"
               : null,
-          email: /^\S+@\S+$/.test(values.email) ? null : "Invalid email",
         };
       }
 
@@ -60,51 +67,49 @@ function Agent() {
 
   const prevStep = () =>
     setActive((current) => (current > 0 ? current - 1 : current));
-
   return (
     <>
       <Stepper active={active}>
-        <Stepper.Step label="First step" description="Profile settings">
+        <Stepper.Step label="First step" description="Personal Details">
           <TextInput
-            label="Username"
-            placeholder="Username"
-            {...form.getInputProps("username")}
-          />
-          <PasswordInput
-            mt="md"
-            label="Password"
-            placeholder="Password"
-            {...form.getInputProps("password")}
-          />
-        </Stepper.Step>
-
-        <Stepper.Step label="Second step" description="Personal information">
-          <TextInput
-            label="Name"
-            placeholder="Name"
-            {...form.getInputProps("name")}
+            label="Full Name"
+            placeholder="Full Name"
+            {...form.getInputProps("fullname")}
           />
           <TextInput
-            mt="md"
+            mt="sm"
             label="Email"
             placeholder="Email"
             {...form.getInputProps("email")}
           />
+          <PasswordInput
+            mt="sm"
+            label="Password"
+            placeholder="Password"
+            {...form.getInputProps("password")}
+          />
+          <NumberInput
+            mt="sm"
+            label="Contact Number"
+            placeholder="Contact Number"
+            {...form.getInputProps("contact")}
+          />
         </Stepper.Step>
 
-        <Stepper.Step label="Final step" description="Social media">
+        <Stepper.Step label="Second step" description="Company details">
           <TextInput
-            label="Website"
-            placeholder="Website"
-            {...form.getInputProps("website")}
+            label="Address"
+            placeholder="Address"
+            {...form.getInputProps("address")}
           />
           <TextInput
             mt="md"
-            label="GitHub"
-            placeholder="GitHub"
-            {...form.getInputProps("github")}
+            label="Company Name"
+            placeholder="Company Name"
+            {...form.getInputProps("companyName")}
           />
         </Stepper.Step>
+
         <Stepper.Completed>
           Completed! Form values:
           <Code block mt="xl">

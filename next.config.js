@@ -8,6 +8,7 @@ const nextConfig = {
       { hostname: "d1l03fubsuphsh.cloudfront.net" },
       { hostname: "s3-media0.fl.yelpcdn.com" },
       { hostname: "assets.thesparksite.com" },
+      { hostname: "res.cloudinary.com" },
     ],
   },
 };

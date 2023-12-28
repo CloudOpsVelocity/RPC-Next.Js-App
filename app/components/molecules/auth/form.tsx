@@ -48,7 +48,7 @@ import Login from "./login";
 function FormTabs() {
   return (
     <Tabs color="rgba(33, 97, 166, 1)" defaultValue="gallery">
-      <Tabs.List>
+      <Tabs.List className="">
         <Tabs.Tab value="login">Login</Tabs.Tab>
         <Tabs.Tab value="signup">Signup</Tabs.Tab>
       </Tabs.List>

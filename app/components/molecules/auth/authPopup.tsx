@@ -2,10 +2,11 @@
 import { useDisclosure } from "@mantine/hooks";
 import { Modal, Button } from "@mantine/core";
 import Form from "./form";
+import { useSession } from "next-auth/react";
 
 function AuthPopup() {
+  const { data: session } = useSession();
   const [opened, { open, close }] = useDisclosure(false);
-  console.log(opened);
 
   return (
     <>
@@ -17,6 +18,7 @@ function AuthPopup() {
         maw={"max-content"}
         size={"80%"}
       >
+        {JSON.stringify(session)}
         <Form />
       </Modal>
 
