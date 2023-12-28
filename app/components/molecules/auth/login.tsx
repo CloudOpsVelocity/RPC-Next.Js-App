@@ -1,12 +1,5 @@
 import { useForm } from "@mantine/form";
-import {
-  NumberInput,
-  TextInput,
-  Button,
-  Box,
-  PasswordInput,
-} from "@mantine/core";
-import { useRouter } from "next/navigation";
+import { TextInput, Button, Box, PasswordInput } from "@mantine/core";
 import useAuth from "@/app/hooks/useAuth";
 
 function Login() {

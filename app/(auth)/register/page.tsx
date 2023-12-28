@@ -37,7 +37,8 @@ export default function Page() {
         <div className="w-full flex justify-between items-center mt-[4%]">
           {data.map((each, ind) => {
             return (
-              <div
+              <Link
+                href={each.href}
                 key={ind}
                 className={`group cursor-pointer flex justify-center items-center flex-col rounded-[8px] bg-[#FAFAFA] w-[30%] h-[130px] md:h-[174px] shadow-lg hover:shadow-green-300/30`}
               >
@@ -54,7 +55,7 @@ export default function Page() {
                 >
                   {each.name}
                 </p>
-              </div>
+              </Link>
             );
           })}
         </div>
