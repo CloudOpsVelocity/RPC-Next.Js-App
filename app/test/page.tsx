@@ -45,13 +45,17 @@ import Individual from "../components/molecules/auth/signup/individual";
 // }
 // const getCarouselData = async () => {
 //   try {
-//     const res = await fetch(`http://localhost:8081/user/v1/apiForCachingTest`, {
-//       next: { revalidate: 30 },
-//     });
+//     const res = await fetch(
+//       `http://13.232.38.110:8081/user/v1/apiForCachingTest`,
+//       {
+//         next: { revalidate: 30 },
+//       }
+//     );
 //     return await res.json();
 //   } catch (error) {
 //     console.log(error);
 //   }
+//   // };
 // };
 
 import React from "react";

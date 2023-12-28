@@ -8,8 +8,10 @@ import {
   PasswordInput,
 } from "@mantine/core";
 import useAuth from "@/app/hooks/useAuth";
+import { useRouter } from "next/navigation";
 
 function Individual() {
+  const router = useRouter();
   const { register } = useAuth();
   const form = useForm({
     initialValues: { name: "", email: "", password: "", mobile: 0 },
@@ -59,6 +61,9 @@ function Individual() {
 
         <Button type="submit" mt="sm">
           Submit
+        </Button>
+        <Button type="submit" mt="sm" onClick={() => router.back()}>
+          Back
         </Button>
       </form>
     </Box>
