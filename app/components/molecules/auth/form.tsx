@@ -47,10 +47,10 @@ import Login from "./login";
 
 function FormTabs() {
   return (
-    <Tabs color="rgba(33, 97, 166, 1)" defaultValue="gallery">
-      <Tabs.List>
-        <Tabs.Tab value="login">Login</Tabs.Tab>
-        <Tabs.Tab value="signup">Signup</Tabs.Tab>
+    <Tabs color="#148B16" defaultValue="gallery">
+      <Tabs.List variant="" className="w-[100%] !flex !justify-center !items-center">
+        <Tabs.Tab value="login" className="!text-[#666666] !text-[26px] !mr-[20px]">Login</Tabs.Tab>
+        <Tabs.Tab value="signup" className="!text-[26px]">Signup</Tabs.Tab>
       </Tabs.List>
 
       <Tabs.Panel value="login">

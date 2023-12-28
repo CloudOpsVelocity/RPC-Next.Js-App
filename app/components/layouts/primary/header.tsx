@@ -4,7 +4,7 @@ import { useDisclosure } from "@mantine/hooks";
 import AuthPopup from "../../molecules/auth/authPopup";
 const Header = () => {
   return (
-    <header className="h-[90px] bg-transparent px-10 flex items-center justify-between fixed top-0 z-50 w-full bg-white">
+    <header className="h-[90px] w-[100%] max-w-[1920px] bg-transparent px-10 flex items-center justify-between fixed top-0 z-50 bg-white">
       <section>
         <Logo />
       </section>

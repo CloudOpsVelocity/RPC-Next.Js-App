@@ -10,10 +10,10 @@ export default function Home() {
 
   return (
  <div className="h-[100%] w-[100%] flex justify-center items-center flex-col">
-  <HomeSearch/>
-  <WhyCHoose />
-  <YourList/>
-  <Blogs/>
+    <HomeSearch/>
+    <WhyCHoose />
+    <YourList/>
+    <Blogs/>
  </div>
   )
 }

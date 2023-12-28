@@ -21,21 +21,23 @@ function Login() {
 
   return (
     <Box maw={340} mx="auto">
-      <form onSubmit={form.onSubmit(console.log)}>
+      <form onSubmit={form.onSubmit(console.log)} className="w-[100%] flex justify-center items-center flex-col">
         <TextInput
+          className="w-[100%]"
           label="User Name"
           placeholder="Name"
           {...form.getInputProps("identifier")}
         />
         <PasswordInput
+          className="w-[100%]"
           mt="sm"
           label="Password"
           placeholder="Password"
           {...form.getInputProps("password")}
         />
 
-        <Button type="submit" mt="sm">
-          Submit
+        <Button type="submit" className="!w-[100%] !h-[57px] !bg-[#0c7aca] rounded-[6px] mt-[10%] text-[20px">
+          LOGIN
         </Button>
       </form>
     </Box>
