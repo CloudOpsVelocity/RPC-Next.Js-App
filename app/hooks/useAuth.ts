@@ -35,7 +35,10 @@ export default function useAuth() {
     if (res?.ok) {
       router.push("/");
     } else {
-      alert(res?.error);
+      //alert(res?.error);
+
+      //toast.success("Successfully toasted!");
+      toast.error("This didn't work.");
     }
   };
 
