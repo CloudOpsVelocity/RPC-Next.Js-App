@@ -25,7 +25,7 @@ export default function Page() {
         />
       </div>
 
-      <div>Sign Up</div>
+      <div></div>
     </div>
   );
 }
