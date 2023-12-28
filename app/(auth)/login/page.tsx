@@ -8,20 +8,18 @@ export default function Page() {
   return (
     <div className="w-full p-[2%]">
       <div className="w-full flex justify-center items-center gap-[5%] mb-[5%] ">
-        <Button
-          key="loginBtn"
-          title="Log In"
-          onChange={() => ""}
-          buttonClass={` whitespace-nowrap text-[26px] font-[500] text-[#148B16] font-bold border-solid border-b-7 border-green-900`}
-        />
+        <Link
+          href="/login"
+          className="whitespace-nowrap text-[26px] text-[#148B16] font-bold border-solid border-b-7 border-green-900"
+        >
+          Log In
+        </Link>
 
-        <Link href="/register">
-          <Button
-            key="loginBtn"
-            title="Sign Up"
-            onChange={() => ""}
-            buttonClass={` whitespace-nowrap text-[26px] font-[500] text-[#666]`}
-          />
+        <Link
+          href="/register"
+          className="whitespace-nowrap text-[26px] font-[500] text-[#666]"
+        >
+          Sign Up
         </Link>
       </div>
 
