@@ -2,6 +2,7 @@ import Link from "next/link";
 import Logo from "../../atoms/Logo";
 import { useDisclosure } from "@mantine/hooks";
 import AuthPopup from "../../molecules/auth/authPopup";
+import AuthButton from "../../atoms/AuthButton";
 const Header = () => {
   return (
     <header className="h-[90px] w-[100%] max-w-[1920px] bg-transparent px-10 flex items-center justify-between fixed top-0 z-50 bg-white">
@@ -15,7 +16,7 @@ const Header = () => {
         <button className="text-[20px] font-semibold px-5 bg-[#227FBC] py-1.5 rounded-xl text-white">
           Post Listing
         </button>
-        <AuthPopup />
+        <AuthButton />
       </section>
     </header>
   );

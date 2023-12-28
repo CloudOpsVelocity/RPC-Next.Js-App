@@ -1,26 +1,28 @@
+import Link from "next/link";
+
 type props = {
   title: string;
   icon?: any;
   buttonConClass?: string;
   buttonClass?: string;
-  onChange: (e: any) => void;
+  href: string;
 };
 
-const Button = ({
+const ButtonLink = ({
   title,
   icon,
   buttonConClass,
   buttonClass,
-  onChange,
+  href,
 }: props) => {
   return (
-    <div className={buttonConClass}>
-      <button className={buttonClass} onClick={(e) => onChange(e)}>
+    <Link className={buttonConClass} href={href}>
+      <div className={buttonClass}>
         {icon}
         {title}
-      </button>
-    </div>
+      </div>
+    </Link>
   );
 };
 
-export default Button;
+export default ButtonLink;
