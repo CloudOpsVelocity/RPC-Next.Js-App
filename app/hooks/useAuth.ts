@@ -1,7 +1,7 @@
 import axios from "axios";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-
+import toast from "react-hot-toast";
 interface Login {
   username: string;
   password: string;
@@ -16,7 +16,13 @@ type AuthResult = {
   success: boolean;
   message: string;
 };
-
+interface RegistrationData {
+  email: string;
+  password: string;
+  name: string;
+  mobile: number;
+  usertype: string;
+}
 /**
  * A hook for handling authentication.
  * @returns An object with login and register functions.
@@ -27,7 +33,7 @@ export default function useAuth() {
   const loginWithCredentials = async (data: Login): Promise<any> => {
     const res = await signIn("credentials", { ...data, redirect: false });
     if (res?.ok) {
-      router.refresh();
+      router.push("/");
     } else {
       alert(res?.error);
     }
@@ -40,17 +46,28 @@ export default function useAuth() {
     });
   };
 
-  const register = async (data: any) => {
+  const register = async (data: RegistrationData): Promise<AuthResult> => {
     try {
-      const res = await signIn("credentials", {
-        email: data.email,
-        password: data.password,
-      });
-      // Handle the response here
+      // Assuming you have an API endpoint for user registration
+      const registrationResponse = await axios.post(
+        "http://localhost:8081/user/v1/registerUser",
+        data
+      );
+      // Check the registration response and handle accordingly
+      if (registrationResponse?.data.success) {
+        // Registration success, you might want to automatically log in the user
+        await loginWithCredentials({
+          username: data.email, // Assuming email is the username
+          password: data.password,
+        });
+        return { success: true, message: "Registration successful." };
+      } else {
+        return { success: false, message: "Registration failed." };
+      }
     } catch (error) {
-      throw new Error("Something went wrong");
+      console.error("Registration error:", error);
+      throw new Error("Something went wrong during registration.");
     }
   };
-
   return { login, register };
 }

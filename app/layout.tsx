@@ -8,6 +8,7 @@ import { MantineProvider, ColorSchemeScript } from "@mantine/core";
 import "@mantine/core/styles.css";
 import SessionProvider from "./context/session";
 import ReactQueryProvider from "./context/rquery";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -35,6 +36,7 @@ export default function RootLayout({
           <MantineProvider theme={MantineTheme}>
             <SessionProvider>
               <ReactQueryProvider>
+                <Toaster />
                 <Header />
                 {children}
               </ReactQueryProvider>

@@ -10,7 +10,6 @@ import { useRouter } from "next/navigation";
 import useAuth from "@/app/hooks/useAuth";
 
 function Login() {
-  const router = useRouter();
   const form = useForm({
     initialValues: { username: "", password: "" },
 
