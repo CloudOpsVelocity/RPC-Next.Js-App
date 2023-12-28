@@ -26,28 +26,34 @@ function Login() {
   };
 
   return (
-    <Box maw={340} mx="auto">
+    <Box maw={420} mx="auto">
       <form
-        onSubmit={form.onSubmit(console.log)}
+        onSubmit={form.onSubmit(onSubmit)}
         className="w-[100%] flex justify-center items-center flex-col"
       >
         <TextInput
-          className="w-[100%]"
+          size="md"
+          className="w-[100%] mb-[3%] "
           label="User Name"
           placeholder="Name"
           {...form.getInputProps("username")}
         />
         <PasswordInput
-          className="w-[100%]"
+          size="md"
+          className="w-[100%] mb-[3%]"
           mt="sm"
           label="Password"
           placeholder="Password"
           {...form.getInputProps("password")}
         />
 
+        <p className="text-[14px] font-400 text-[#767270] text-left w-full cursor-pointer ">
+          Forgot Password ?
+        </p>
+
         <Button
           type="submit"
-          className="!w-[100%] !h-[57px] !bg-[#0c7aca] rounded-[6px] mt-[10%] text-[20px"
+          className="!w-[100%] !h-[57px] mt-[4%] !bg-[#0c7aca] rounded-[6px] text-[20px]"
         >
           LOGIN
         </Button>
