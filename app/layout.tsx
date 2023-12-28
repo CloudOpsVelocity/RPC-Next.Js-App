@@ -31,7 +31,7 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <main>
+        <main className="flex justify-center items-center">
           <MantineProvider theme={MantineTheme}>
             <SessionProvider>
               <ReactQueryProvider>

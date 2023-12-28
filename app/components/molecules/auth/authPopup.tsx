@@ -1,8 +1,8 @@
 "use client";
 import { useDisclosure } from "@mantine/hooks";
-import { Modal, Button } from "@mantine/core";
+import { Modal } from "@mantine/core";
 import Form from "./form";
-import { useSession } from "next-auth/react";
+import Button from "../../../elements/button";
 
 function AuthPopup() {
   const { data: session } = useSession();
@@ -23,12 +23,11 @@ function AuthPopup() {
       </Modal>
 
       <Button
-        onClick={open}
-        radius={"xl"}
-        className="login-btn text-[20px] font-semibold px-5 py-2 rounded-full text-[#0073C6] border-2 border-white underline "
-      >
-        Login & Signup
-      </Button>
+        key={"loginBtn"}
+        onChange={() => open()}
+        buttonClass="login-btn text-[20px] font-semibold px-5 py-2 rounded-full text-[#0073C6] border-none underline bg-gradient-to-r from-[#EFF8FF] to-[#FFF] shadow-md"
+        title="Login/ Sign up"
+      />
     </>
   );
 }
