@@ -1,3 +1,4 @@
+import { Toaster } from "react-hot-toast";
 import Logo from "../components/atoms/Logo";
 import data from "../data/auth";
 
@@ -19,10 +20,18 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </div>
       </div>
       <div className="flex justify-center items-start w-full pt-[10%]">
-        <div className="w-full bg-white text-gray-600 justify-center items-center">
+        <div className="w-full bg-white text-gray-600 justify-center items-center ">
           <Logo />
 
           {children}
+          <div className="relative">
+            <Toaster
+              reverseOrder={false}
+              containerStyle={{
+                position: "absolute",
+              }}
+            />
+          </div>
         </div>
       </div>
     </main>
