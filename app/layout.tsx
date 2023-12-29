@@ -9,6 +9,7 @@ import "@mantine/core/styles.css";
 import SessionProvider from "./context/session";
 import ReactQueryProvider from "./context/rquery";
 import toast, { Toaster } from "react-hot-toast";
+import Layout from "@/app/components/layouts/primary";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -36,8 +37,7 @@ export default function RootLayout({
           <MantineProvider theme={MantineTheme}>
             <SessionProvider>
               <ReactQueryProvider>
-                <Header />
-                {children}
+                <Layout>{children}</Layout>
               </ReactQueryProvider>
             </SessionProvider>
           </MantineProvider>
