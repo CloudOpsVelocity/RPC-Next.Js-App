@@ -2,8 +2,10 @@ import { useForm } from "@mantine/form";
 import { TextInput, Button, Box, PasswordInput } from "@mantine/core";
 import useAuth from "@/app/hooks/useAuth";
 import Link from "next/link";
+import { useState } from "react";
 
 function Login() {
+  const [state, setState] = useState<"idle" | "pending" | "success">("idle");
   const form = useForm({
     initialValues: { username: "", password: "" },
 
@@ -15,7 +17,9 @@ function Login() {
   });
   const { login } = useAuth();
   const onSubmit = async (values: any) => {
-    login(values);
+    setState("pending");
+    await login(values);
+    setState("success");
   };
 
   return (
@@ -48,6 +52,7 @@ function Login() {
         </Link>
 
         <Button
+          loading={state === "pending"}
           type="submit"
           className="!w-[100%] !h-[57px] mt-[4%] !bg-[#0c7aca] rounded-[6px] text-[20px]"
         >

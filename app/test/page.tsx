@@ -59,7 +59,12 @@ import Individual from "../components/molecules/auth/signup/individual";
 // };
 
 import React from "react";
+import { DropZone } from "../components/molecules/auth/signup/dropzone";
 
 export default function page() {
-  return <div>page</div>;
+  return (
+    <div>
+      <DropZone />
+    </div>
+  );
 }

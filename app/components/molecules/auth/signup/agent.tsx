@@ -12,6 +12,7 @@ import {
 import { useForm } from "@mantine/form";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { DropZone } from "./dropzone";
 
 function Agent() {
   const [active, setActive] = useState(0);
@@ -119,6 +120,7 @@ function Agent() {
             placeholder="Company Name"
             {...form.getInputProps("companyName")}
           />
+          <DropZone />
         </Stepper.Step>
 
         <Stepper.Completed>
