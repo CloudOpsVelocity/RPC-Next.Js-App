@@ -1,5 +1,5 @@
 import { withAuth } from "next-auth/middleware";
-import {  NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 export default withAuth(
   function middleware(req) {
@@ -9,9 +9,9 @@ export default withAuth(
     //   return NextResponse.rewrite(new URL("/login", req.url));
     // }
 
-    if (req.nextUrl.pathname.startsWith("/admin")) {
-      if (req.nextauth.token?.role !== "admin") {
-        return NextResponse.rewrite(new URL("/login", req.url));
+    if (req.nextUrl.pathname.startsWith("/dashboard")) {
+      if (req.nextauth.token?.isOtpVerified !== "Y") {
+        return NextResponse.rewrite(new URL("/otp", req.url));
       }
       //   // Check profile condition
       //   if (req.nextauth.token.profile !== true) {
@@ -32,5 +32,5 @@ export default withAuth(
 );
 
 export const config = {
-  matcher: ["/admin/:path*", ],
+  matcher: ["/dashboard/:path*"],
 };

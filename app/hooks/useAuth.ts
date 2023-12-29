@@ -19,7 +19,7 @@ type AuthResult = {
 interface RegistrationData {
   email: string;
   password: string;
-  userName: string;
+  name: string;
   mobile: number;
   usertype: "I" | "A" | "B";
 }
@@ -66,8 +66,10 @@ export default function useAuth() {
       } else {
         return { success: false, message: "Registration failed." };
       }
-    } catch (error) {
-      console.error("Registration error:", error);
+    } catch (error: any) {
+      toast.error(
+        (error.message as string) || "Something went wrong. Please try again."
+      );
       throw new Error("Something went wrong during registration.");
     }
   };
