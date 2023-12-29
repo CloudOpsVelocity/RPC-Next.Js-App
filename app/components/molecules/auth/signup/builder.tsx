@@ -13,9 +13,12 @@ import {
   SimpleGrid,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 function Builder() {
   const [active, setActive] = useState(0);
+  const router = useRouter();
 
   const form = useForm({
     initialValues: {
@@ -74,27 +77,32 @@ function Builder() {
   const prevStep = () =>
     setActive((current) => (current > 0 ? current - 1 : current));
   return (
-    <>
-      <Stepper active={active}>
+    <div className="w-full max-w-[423px] flex justify-center items-center flex-col">
+      <Stepper active={active} className="w-full">
         <Stepper.Step label="First step" description="Personal Details">
           <TextInput
+            size="md"
             label="Full Name"
             placeholder="Full Name"
             {...form.getInputProps("fullname")}
           />
           <TextInput
+            size="md"
             mt="sm"
             label="Email"
             placeholder="Email"
             {...form.getInputProps("email")}
           />
           <PasswordInput
+            size="md"
             mt="sm"
             label="Password"
             placeholder="Password"
             {...form.getInputProps("password")}
           />
           <NumberInput
+            hideControls
+            size="md"
             mt="sm"
             label="Contact Number"
             placeholder="Contact Number"
@@ -104,11 +112,13 @@ function Builder() {
 
         <Stepper.Step label="Second step" description="Address & Other">
           <TextInput
+            size="md"
             label="Address"
             placeholder="Address"
             {...form.getInputProps("address")}
           />{" "}
           <Select
+            size="md"
             mt="md"
             label="State"
             placeholder="Pick value"
@@ -118,6 +128,7 @@ function Builder() {
           />
           <SimpleGrid cols={2}>
             <Select
+              size="md"
               mt="md"
               label="City"
               placeholder="Pick value"
@@ -126,6 +137,7 @@ function Builder() {
               {...form.getInputProps("city")}
             />
             <NumberInput
+              size="md"
               mt="md"
               hideControls
               label="Pincode"
@@ -134,14 +146,17 @@ function Builder() {
             />
           </SimpleGrid>
         </Stepper.Step>
-        <Stepper.Step label="Second step" description="Company details">
+
+        <Stepper.Step label="Third step" description="Company details">
           <TextInput
+            size="md"
             mt="md"
             label="Builder Owned By"
             placeholder="Company Name"
             {...form.getInputProps("companyName")}
           />{" "}
           <Select
+            size="md"
             mt="md"
             label="Branch"
             placeholder="Pick value"
@@ -149,12 +164,14 @@ function Builder() {
             searchable
           />
           <TextInput
+            size="md"
             mt="md"
             label="Founded By"
             placeholder="Company Name"
             {...form.getInputProps("companyName")}
           />
           <TextInput
+            size="md"
             mt="md"
             label="Ceo Name"
             placeholder="Company Name"
@@ -170,15 +187,45 @@ function Builder() {
         </Stepper.Completed>
       </Stepper>
 
-      <Group justify="flex-end" mt="xl">
-        {active !== 0 && (
-          <Button variant="default" onClick={prevStep}>
-            Back
-          </Button>
+      <Group justify="flex-end" mt="xl" className="w-full">
+        {active !== 3 && (
+          <div className="w-[100%] flex justify-between items-center flex-wrap">
+            <Button
+              type="submit"
+              mt="sm"
+              onClick={() => {
+                active !== 0 ? prevStep() : router.back();
+              }}
+              className="!rounded-[6px] !border-solid !border-1 !border-blue-600 !bg-[#FFF] !text-[#0073C6] !w-[100%] !max-w-[178px]  "
+            >
+              Back
+            </Button>
+
+            <Button
+              mt="sm"
+              className="!rounded-[6px] !w-[100%] !max-w-[225px]"
+              onClick={nextStep}
+            >
+              SAVE & VERIFY
+            </Button>
+          </div>
         )}
-        {active !== 3 && <Button onClick={nextStep}>Next step</Button>}
       </Group>
-    </>
+
+      <p className="text-[20px] font-[400] text-[#202020] mt-[5%]">
+        Already have an Account ?{" "}
+        <Link href="/login" className="text-[20px] font-[600] text-[#0073C6]">
+          Log In
+        </Link>
+      </p>
+
+      <Link
+        href="/"
+        className="text-[20px] font-[700] text-[#148B16] underline "
+      >
+        Continue Without Register
+      </Link>
+    </div>
   );
 }
 
