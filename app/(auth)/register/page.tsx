@@ -19,7 +19,7 @@ export default function Page() {
 
         <Link
           href="/register"
-          className=" whitespace-nowrap text-[26px] font-[500] text-[#148B16] font-bold border-solid border-b-7 border-green-900"
+          className="whitespace-nowrap text-[26px] text-[#148B16] font-bold border-solid border-b-2 border-green-600"
         >
           Sign Up
         </Link>

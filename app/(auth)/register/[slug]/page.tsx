@@ -22,7 +22,11 @@ const Page: React.FC<{ params: { slug: keyof PageType } }> = ({
   };
   const ComponentToRender = components[slug] || notFound();
 
-  return <div>{ComponentToRender}</div>;
+  return (
+    <div className="w-full flex justify-center items-center flex-col">
+      {ComponentToRender}
+    </div>
+  );
 };
 
 export default Page;

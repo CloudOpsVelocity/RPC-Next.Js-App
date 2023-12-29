@@ -10,7 +10,7 @@ export default function Page() {
       <div className="w-full flex justify-center items-center gap-[5%] mb-[5%] ">
         <Link
           href="/login"
-          className="whitespace-nowrap text-[26px] text-[#148B16] font-bold border-solid border-b-7 border-green-900"
+          className="whitespace-nowrap text-[26px] text-[#148B16] font-bold border-solid border-b-2 border-green-600"
         >
           Log In
         </Link>
