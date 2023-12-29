@@ -14,12 +14,15 @@ import { useRouter } from "next/navigation";
 function ForgotForm() {
   const router = useRouter();
   const form = useForm({
-    initialValues: { contact: 0 },
+    initialValues: { mobile: 0 },
 
     // functions will be used to validate values at corresponding key
-    // validate: {
-    //   contact: (value) => (value.length < 2 ? "User name is required" : null),
-    // },
+    validate: {
+      mobile: (value) =>
+        isNaN(value) || value <= 0 || value.toString().length !== 10
+          ? "Valid 10-digit contact number is required"
+          : null,
+    },
   });
   const { login } = useAuth();
   const onSubmit = async (values: any) => {
@@ -27,16 +30,18 @@ function ForgotForm() {
   };
 
   return (
-    <Box maw={420} mx="auto">
+    <Box mx="auto" className="w-full max-w-[423px] mt-[3%] ">
       <form
         onSubmit={form.onSubmit(onSubmit)}
         className="w-[100%] flex justify-center items-center flex-col "
       >
         <NumberInput
           hideControls
+          size="md"
           mt="sm"
-          label="Contact Number"
-          placeholder="Contact Number"
+          className="w-[100%] mb-[3%]"
+          label="Mobile Number"
+          placeholder="Enter your registerd mobile number..."
           {...form.getInputProps("mobile")}
         />
         <div className="w-full flex justify-between items-center flex-wrap">
@@ -47,7 +52,11 @@ function ForgotForm() {
           >
             Back
           </Button>
-          <Button mt="sm" className="!rounded-[6px] !w-[100%] !max-w-[225px] ">
+          <Button
+            type="submit"
+            mt="sm"
+            className="!rounded-[6px] !w-[100%] !max-w-[225px] "
+          >
             Continue
           </Button>
         </div>

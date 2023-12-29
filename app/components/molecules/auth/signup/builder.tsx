@@ -20,6 +20,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 import { styles } from "@/app/styles/Stepper";
+import { DropZone } from "./dropzone";
 function Builder() {
   const [active, setActive] = useState(0);
   const router = useRouter();
@@ -42,7 +43,6 @@ function Builder() {
       bd: "",
       cv: "",
     },
-    // @ts-ignore
     validate: (values) => {
       if (active === 0) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -55,8 +55,10 @@ function Builder() {
           password:
             values.password.trim().length < 1 ? "Password is required" : null,
           contact:
-            isNaN(values.contact) || values.contact <= 0
-              ? "Valid contact number is required"
+            isNaN(values.contact) ||
+            values.contact <= 0 ||
+            values.contact.toString().length !== 10
+              ? "Valid 10-digit contact number is required"
               : null,
         };
       }
@@ -67,10 +69,9 @@ function Builder() {
             values.address.trim().length < 2 ? "Address is required" : null,
           state: values.state.trim().length === 0 ? "State is required" : null,
           city: values.city.trim().length === 0 ? "City is required" : null,
-          pincode:
-            isNaN(values.pincode) || values.pincode <= 0
-              ? "Valid pincode is required"
-              : null,
+          pincode: !/^[1-9][0-9]{5}$/.test(String(values.pincode))
+            ? "Valid 6-digit PIN code is required"
+            : null,
         };
       }
 
@@ -80,6 +81,17 @@ function Builder() {
             values.companyName.trim().length < 2
               ? "Company name is required"
               : null,
+          branch:
+            values.branch.trim().length === 0 ? "Branch is required" : null,
+          ceo: values.ceo.trim().length === 0 ? "CEO name is required" : null,
+          fd: values.fd.trim().length === 0 ? "FD name is required" : null,
+        };
+      }
+
+      if (active === 3) {
+        return {
+          bd: values.bd.trim().length === 0 ? "BD name is required" : null,
+          cv: values.cv.trim().length === 0 ? "CV name is required" : null,
         };
       }
 
@@ -92,7 +104,7 @@ function Builder() {
       if (form.validate().hasErrors) {
         return current;
       }
-      return current < 3 ? current + 1 : current;
+      return current < 4 ? current + 1 : current;
     });
 
   const prevStep = () =>
@@ -174,6 +186,7 @@ function Builder() {
               {...form.getInputProps("pincode")}
             />
           </SimpleGrid>
+          <DropZone />
         </Stepper.Step>
 
         <Stepper.Step label="Company details">
@@ -192,6 +205,14 @@ function Builder() {
             placeholder=" --Select Branch--"
             data={["React", "Angular", "Vue", "Svelte"]}
             searchable
+            {...form.getInputProps("branch")}
+          />
+
+          <DateInput
+            mt="md"
+            label="Company Start Date"
+            placeholder="DD/MM/YYYY"
+            {...form.getInputProps("startDate")}
           />
 
           <DateInput
@@ -245,7 +266,7 @@ function Builder() {
       </Stepper>
 
       <Group justify="flex-end" mt="xl" className="w-full">
-        {active !== 3 && (
+        {active !== 4 && (
           <div className="w-[100%] flex justify-between items-center flex-wrap">
             <Button
               type="submit"

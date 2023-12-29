@@ -26,7 +26,9 @@ function Individual() {
       },
       password: (value) => (value.length < 1 ? "Password is required" : null),
       mobile: (value) =>
-        isNaN(value) || value <= 0 ? "Valid mobile number is required" : null,
+        isNaN(value) || value <= 0 || value.toString().length !== 10
+          ? "Valid 10-digit contact number is required"
+          : null,
     },
   });
   const onSubmit = async (values: typeof form.values) => {
