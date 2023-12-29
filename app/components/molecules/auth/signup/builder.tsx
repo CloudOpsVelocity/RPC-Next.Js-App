@@ -21,7 +21,7 @@ import { useRouter } from "next/navigation";
 import { styles } from "@/app/styles/Stepper";
 import { DropZone } from "./dropzone";
 function Builder() {
-  const [active, setActive] = useState(2);
+  const [active, setActive] = useState(0);
   const router = useRouter();
 
   const form = useForm({
@@ -199,8 +199,9 @@ function Builder() {
           <MultiSelect
             size="md"
             mt="md"
+            checkIconPosition="right"
             label="Branch"
-            placeholder="Pick value"
+            placeholder=" --Select Branch--"
             data={["React", "Angular", "Vue", "Svelte"]}
             {...form.getInputProps("branch")}
           />
