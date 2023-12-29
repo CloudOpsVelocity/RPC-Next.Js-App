@@ -9,8 +9,10 @@ import {
 } from "@mantine/core";
 import useAuth from "@/app/hooks/useAuth";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 function ForgotForm() {
+  const router = useRouter();
   const form = useForm({
     initialValues: { contact: 0 },
 
@@ -37,6 +39,18 @@ function ForgotForm() {
           placeholder="Contact Number"
           {...form.getInputProps("mobile")}
         />
+        <div className="w-full flex justify-between items-center flex-wrap">
+          <Button
+            mt="sm"
+            onClick={() => router.back()}
+            className="!rounded-[6px] !border-solid !border-1 !border-blue-600 !bg-[#FFF] !text-[#0073C6] !w-[100%] !max-w-[178px]  "
+          >
+            Back
+          </Button>
+          <Button mt="sm" className="!rounded-[6px] !w-[100%] !max-w-[225px] ">
+            Continue
+          </Button>
+        </div>
       </form>
     </Box>
   );

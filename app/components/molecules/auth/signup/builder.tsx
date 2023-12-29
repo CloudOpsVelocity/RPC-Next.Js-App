@@ -1,5 +1,185 @@
-import React from "react";
+"use client";
+import { useState } from "react";
+import {
+  Stepper,
+  Button,
+  Group,
+  TextInput,
+  PasswordInput,
+  Code,
+  NumberInput,
+  Select,
+  Grid,
+  SimpleGrid,
+} from "@mantine/core";
+import { useForm } from "@mantine/form";
 
-export default function Builder() {
-  return <div>Builder</div>;
+function Builder() {
+  const [active, setActive] = useState(0);
+
+  const form = useForm({
+    initialValues: {
+      fullname: "",
+      email: "",
+      password: "",
+      contact: 0,
+      address: "",
+      companyName: "",
+      state: "",
+      city: "",
+      pincode: 0,
+    },
+    // @ts-ignore
+    validate: (values) => {
+      if (active === 0) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return {
+          // fullname:
+          //   values.fullname.trim().length < 2 ? "Full name is required" : null,
+          // email: !values.email.match(emailRegex)
+          //   ? "Valid email is required"
+          //   : null,
+          // password:
+          //   values.password.trim().length < 1 ? "Password is required" : null,
+          // contact:
+          //   isNaN(values.contact) || values.contact <= 0
+          //     ? "Valid contact number is required"
+          //     : null,
+        };
+      }
+
+      if (active === 1) {
+        // return {
+        //   address:
+        //     values.address.trim().length < 2 ? "Address is required" : null,
+        //   companyName:
+        //     values.companyName.trim().length < 2
+        //       ? "Company name is required"
+        //       : null,
+        // };
+      }
+
+      return {};
+    },
+  });
+
+  const nextStep = () =>
+    setActive((current) => {
+      if (form.validate().hasErrors) {
+        return current;
+      }
+      return current < 3 ? current + 1 : current;
+    });
+
+  const prevStep = () =>
+    setActive((current) => (current > 0 ? current - 1 : current));
+  return (
+    <>
+      <Stepper active={active}>
+        <Stepper.Step label="First step" description="Personal Details">
+          <TextInput
+            label="Full Name"
+            placeholder="Full Name"
+            {...form.getInputProps("fullname")}
+          />
+          <TextInput
+            mt="sm"
+            label="Email"
+            placeholder="Email"
+            {...form.getInputProps("email")}
+          />
+          <PasswordInput
+            mt="sm"
+            label="Password"
+            placeholder="Password"
+            {...form.getInputProps("password")}
+          />
+          <NumberInput
+            mt="sm"
+            label="Contact Number"
+            placeholder="Contact Number"
+            {...form.getInputProps("contact")}
+          />
+        </Stepper.Step>
+
+        <Stepper.Step label="Second step" description="Address & Other">
+          <TextInput
+            label="Address"
+            placeholder="Address"
+            {...form.getInputProps("address")}
+          />{" "}
+          <Select
+            mt="md"
+            label="State"
+            placeholder="Pick value"
+            data={["React", "Angular", "Vue", "Svelte"]}
+            searchable
+            {...form.getInputProps("state")}
+          />
+          <SimpleGrid cols={2}>
+            <Select
+              mt="md"
+              label="City"
+              placeholder="Pick value"
+              data={["React", "Angular", "Vue", "Svelte"]}
+              searchable
+              {...form.getInputProps("city")}
+            />
+            <NumberInput
+              mt="md"
+              hideControls
+              label="Pincode"
+              placeholder="Pincode"
+              {...form.getInputProps("pincode")}
+            />
+          </SimpleGrid>
+        </Stepper.Step>
+        <Stepper.Step label="Second step" description="Company details">
+          <TextInput
+            mt="md"
+            label="Builder Owned By"
+            placeholder="Company Name"
+            {...form.getInputProps("companyName")}
+          />{" "}
+          <Select
+            mt="md"
+            label="Branch"
+            placeholder="Pick value"
+            data={["React", "Angular", "Vue", "Svelte"]}
+            searchable
+          />
+          <TextInput
+            mt="md"
+            label="Founded By"
+            placeholder="Company Name"
+            {...form.getInputProps("companyName")}
+          />
+          <TextInput
+            mt="md"
+            label="Ceo Name"
+            placeholder="Company Name"
+            {...form.getInputProps("companyName")}
+          />
+        </Stepper.Step>
+
+        <Stepper.Completed>
+          Completed! Form values:
+          <Code block mt="xl">
+            {JSON.stringify(form.values, null, 2)}
+          </Code>
+        </Stepper.Completed>
+      </Stepper>
+
+      <Group justify="flex-end" mt="xl">
+        {active !== 0 && (
+          <Button variant="default" onClick={prevStep}>
+            Back
+          </Button>
+        )}
+        {active !== 3 && <Button onClick={nextStep}>Next step</Button>}
+      </Group>
+    </>
+  );
 }
+
+export default Builder;

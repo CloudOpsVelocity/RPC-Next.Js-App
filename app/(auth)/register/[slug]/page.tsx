@@ -1,4 +1,5 @@
 import Agent from "@/app/components/molecules/auth/signup/agent";
+import Builder from "@/app/components/molecules/auth/signup/builder";
 import Individual from "@/app/components/molecules/auth/signup/individual";
 import { notFound } from "next/navigation";
 import React from "react";
@@ -11,6 +12,7 @@ interface Props {
 type PageType = {
   individual: React.ReactElement;
   agent: React.ReactElement;
+  builder: React.ReactElement;
 };
 
 const Page: React.FC<{ params: { slug: keyof PageType } }> = ({
@@ -19,6 +21,7 @@ const Page: React.FC<{ params: { slug: keyof PageType } }> = ({
   const components: PageType = {
     individual: <Individual />,
     agent: <Agent />,
+    builder: <Builder />,
   };
   const ComponentToRender = components[slug] || notFound();
 
