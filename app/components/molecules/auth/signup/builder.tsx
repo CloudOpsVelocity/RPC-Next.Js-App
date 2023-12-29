@@ -1,4 +1,5 @@
 "use client";
+import "@mantine/dates/styles.css";
 import { useState } from "react";
 import {
   Stepper,
@@ -9,10 +10,10 @@ import {
   Code,
   NumberInput,
   Select,
-  Grid,
   SimpleGrid,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
+import { DateInput } from "@mantine/dates";
 
 function Builder() {
   const [active, setActive] = useState(0);
@@ -28,35 +29,50 @@ function Builder() {
       state: "",
       city: "",
       pincode: 0,
+      startDate: new Date(),
+      branch: "",
+      ceo: "",
+      fd: "",
     },
     // @ts-ignore
     validate: (values) => {
       if (active === 0) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return {
-          // fullname:
-          //   values.fullname.trim().length < 2 ? "Full name is required" : null,
-          // email: !values.email.match(emailRegex)
-          //   ? "Valid email is required"
-          //   : null,
-          // password:
-          //   values.password.trim().length < 1 ? "Password is required" : null,
-          // contact:
-          //   isNaN(values.contact) || values.contact <= 0
-          //     ? "Valid contact number is required"
-          //     : null,
+          fullname:
+            values.fullname.trim().length < 2 ? "Full name is required" : null,
+          email: !values.email.match(emailRegex)
+            ? "Valid email is required"
+            : null,
+          password:
+            values.password.trim().length < 1 ? "Password is required" : null,
+          contact:
+            isNaN(values.contact) || values.contact <= 0
+              ? "Valid contact number is required"
+              : null,
         };
       }
 
       if (active === 1) {
-        // return {
-        //   address:
-        //     values.address.trim().length < 2 ? "Address is required" : null,
-        //   companyName:
-        //     values.companyName.trim().length < 2
-        //       ? "Company name is required"
-        //       : null,
-        // };
+        return {
+          address:
+            values.address.trim().length < 2 ? "Address is required" : null,
+          state: values.state.trim().length === 0 ? "State is required" : null,
+          city: values.city.trim().length === 0 ? "City is required" : null,
+          pincode:
+            isNaN(values.pincode) || values.pincode <= 0
+              ? "Valid pincode is required"
+              : null,
+        };
+      }
+
+      if (active === 2) {
+        return {
+          companyName:
+            values.companyName.trim().length < 2
+              ? "Company name is required"
+              : null,
+        };
       }
 
       return {};
@@ -107,7 +123,7 @@ function Builder() {
             label="Address"
             placeholder="Address"
             {...form.getInputProps("address")}
-          />{" "}
+          />
           <Select
             mt="md"
             label="State"
@@ -134,13 +150,13 @@ function Builder() {
             />
           </SimpleGrid>
         </Stepper.Step>
-        <Stepper.Step label="Second step" description="Company details">
+        <Stepper.Step label="Third step" description="Company details">
           <TextInput
             mt="md"
             label="Builder Owned By"
             placeholder="Company Name"
             {...form.getInputProps("companyName")}
-          />{" "}
+          />
           <Select
             mt="md"
             label="Branch"
@@ -152,13 +168,19 @@ function Builder() {
             mt="md"
             label="Founded By"
             placeholder="Company Name"
-            {...form.getInputProps("companyName")}
+            {...form.getInputProps("fd")}
+          />
+          <DateInput
+            mt="md"
+            label="Date input"
+            placeholder="Date input"
+            {...form.getInputProps("startDate")}
           />
           <TextInput
             mt="md"
             label="Ceo Name"
             placeholder="Company Name"
-            {...form.getInputProps("companyName")}
+            {...form.getInputProps("ceo")}
           />
         </Stepper.Step>
 
