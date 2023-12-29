@@ -18,7 +18,6 @@ import { useForm } from "@mantine/form";
 import { DateInput } from "@mantine/dates";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import dynamic from "next/dynamic";
 import { styles } from "@/app/styles/Stepper";
 import { DropZone } from "./dropzone";
 function Builder() {
@@ -37,7 +36,7 @@ function Builder() {
       city: "",
       pincode: 0,
       startDate: new Date(),
-      branch: "",
+      branch: [],
       ceo: "",
       fd: "",
       bd: "",
@@ -204,10 +203,8 @@ function Builder() {
             label="Branch"
             placeholder=" --Select Branch--"
             data={["React", "Angular", "Vue", "Svelte"]}
-            searchable
             {...form.getInputProps("branch")}
           />
-
           <DateInput
             mt="md"
             label="Company Start Date"
@@ -215,12 +212,6 @@ function Builder() {
             {...form.getInputProps("startDate")}
           />
 
-          <DateInput
-            mt="md"
-            label="Company Start Date"
-            placeholder="DD/MM/YYYY"
-            {...form.getInputProps("startDate")}
-          />
           <TextInput
             size="md"
             mt="md"
