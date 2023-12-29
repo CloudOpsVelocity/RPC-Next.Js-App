@@ -11,12 +11,13 @@ import {
   NumberInput,
   Select,
   SimpleGrid,
+  Textarea,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { DateInput } from "@mantine/dates";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-
+import dynamic from "next/dynamic";
 function Builder() {
   const [active, setActive] = useState(0);
   const router = useRouter();
@@ -36,6 +37,8 @@ function Builder() {
       branch: "",
       ceo: "",
       fd: "",
+      bd: "",
+      cv: "",
     },
     // @ts-ignore
     validate: (values) => {
@@ -198,6 +201,25 @@ function Builder() {
             label="Ceo Name"
             placeholder="Company Name"
             {...form.getInputProps("ceo")}
+          />
+        </Stepper.Step>
+        <Stepper.Step label="Forth step" description="Description">
+          <Textarea
+            placeholder="Enter your company vision you are going to provide buyers."
+            label="Companies Vision"
+            autosize
+            minRows={5}
+            required
+            {...form.getInputProps("cv")}
+          />
+          <Textarea
+            mt={"md"}
+            placeholder="Enter your company vision you are going to provide buyers."
+            label="Builders Description"
+            autosize
+            minRows={5}
+            required
+            {...form.getInputProps("bd")}
           />
         </Stepper.Step>
 
