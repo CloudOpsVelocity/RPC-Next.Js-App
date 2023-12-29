@@ -9,7 +9,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 
 export default function Home() {
   return (
-    <div className="h-[100%] w-[100%] flex justify-center items-center flex-col">
+    <div className="h-[100%] w-[100%] flex justify-center items-center flex-col overflow-hidden ">
       <HomeSearch />
       <WhyCHoose />
       <DynamiCarousel />

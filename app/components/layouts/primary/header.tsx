@@ -5,7 +5,7 @@ import AuthPopup from "../../molecules/auth/authPopup";
 import AuthButton from "../../atoms/AuthButton";
 const Header = () => {
   return (
-    <header className="h-[90px] w-[100%] bg-transparent px-10 flex items-center justify-between fixed top-0 z-50 bg-white">
+    <header className="h-[90px] w-[100%] bg-transparent flex items-center justify-between fixed top-0 z-50 bg-white pl-[3%] pr-[3%] ">
       <section>
         <Logo />
       </section>

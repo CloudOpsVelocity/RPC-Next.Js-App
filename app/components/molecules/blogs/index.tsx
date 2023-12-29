@@ -3,7 +3,7 @@ import React from "react";
 
 export default function Blogs() {
   return (
-    <div className="bg-gradient-to-r from-blue-100 to-sky-100  w-full max-w-[1920px]  mx-auto h-[100%] md:h-screen lg:h-screen">
+    <div className="bg-gradient-to-r from-blue-100 to-sky-100  w-full  mx-auto h-[100%] md:h-screen lg:h-screen">
       {/* Heading */}
       <div className=" justify-center items-center gap-9 flex flex-col pt-[6%]">
         <h1 className="text-[28px] lg:text-[46px] md:text-[36px] sm:text-[28px] text-5xl font-bold font-['Montserrat'] leading-10 tracking-widest">
@@ -16,7 +16,7 @@ export default function Blogs() {
         </div>
       </div>
       {/* Grids */}
-      <div className="flex justify-center items-center flex-col md:flex-row lg:flex-row gap-x-14 max-w-[1980px] m-auto mt-10 w-[100%]">
+      <div className="flex justify-center items-center flex-col md:flex-row lg:flex-row gap-x-14 m-auto mt-10 w-[100%]">
         <div className="relative h-[100%]">
           <Image
             src={
@@ -33,7 +33,7 @@ export default function Blogs() {
             </p>
           </div>
         </div>
-        
+
         <div className="flex flex-col items-center w-[90%] md:w-[50%] lg:w-[30%]">
           <div className="mt-5 relative h-[250px] overflow-hidden rounded-2xl w-[100%]">
             <Image
@@ -47,7 +47,7 @@ export default function Blogs() {
             />
             <div className="w-[90%] h-24 p-5 text-center flex justify-center items-center absolute bottom-5 left-10 bg-gradient-to-r from-[#B5BAC2] to-[#00223a] rounded-2xl shadow">
               <p className="  text-white text-2xl font-semibold font-['Montserrat'] ">
-               Start a Real Estate business in India 
+                Start a Real Estate business in India
               </p>
             </div>
           </div>

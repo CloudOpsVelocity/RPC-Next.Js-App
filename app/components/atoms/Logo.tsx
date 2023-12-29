@@ -1,9 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const Logo = () => {
+type props = {
+  styles?: string;
+};
+
+const Logo = ({ styles }: props) => {
   return (
-    <Link href={"/"} className="flex justify-center items-center w-full">
+    <Link href={"/"} className={styles}>
       <Image src={"/logo.png"} alt="logo" width={220} height={80} />
     </Link>
   );
