@@ -37,8 +37,7 @@ export default function useAuth() {
     } else {
       //alert(res?.error);
 
-      //toast.success("Successfully toasted!");
-      toast.error("This didn't work.");
+      toast.error(res?.error || "Something went wrong. Please try again.");
     }
   };
 

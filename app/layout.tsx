@@ -33,7 +33,6 @@ export default function RootLayout({
       </head>
       <body>
         <main className="flex justify-center items-center">
-          <Toaster position="bottom-center" reverseOrder={false} />
           <MantineProvider theme={MantineTheme}>
             <SessionProvider>
               <ReactQueryProvider>

@@ -21,7 +21,7 @@ function Login() {
     <Box maw={420} mx="auto">
       <form
         onSubmit={form.onSubmit(onSubmit)}
-        className="w-[100%] flex justify-center items-center flex-col"
+        className="w-[100%] flex justify-center items-center flex-col "
       >
         <TextInput
           size="md"
