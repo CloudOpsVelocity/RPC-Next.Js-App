@@ -273,7 +273,7 @@ function Builder() {
 
             <Button
               mt="sm"
-              className="!rounded-[6px] !w-[100%] !max-w-[225px]"
+              className="!rounded-[6px] !w-[100%] !max-w-[225px] !bg-[#0c7aca]"
               onClick={nextStep}
             >
               SAVE & VERIFY

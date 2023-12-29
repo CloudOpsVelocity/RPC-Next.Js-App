@@ -43,8 +43,10 @@ function Agent() {
           password:
             values.password.trim().length < 1 ? "Password is required" : null,
           contact:
-            isNaN(values.contact) || values.contact <= 0
-              ? "Valid contact number is required"
+            isNaN(values.contact) ||
+            values.contact <= 0 ||
+            values.contact.toString().length !== 10
+              ? "Valid 10-digit contact number is required"
               : null,
         };
       }
@@ -155,7 +157,7 @@ function Agent() {
 
             <Button
               mt="sm"
-              className="!rounded-[6px] !w-[100%] !max-w-[225px]"
+              className="!rounded-[6px] !w-[100%] !max-w-[225px] !bg-[#0c7aca]"
               onClick={nextStep}
             >
               SAVE & VERIFY
