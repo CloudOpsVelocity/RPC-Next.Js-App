@@ -41,7 +41,6 @@ function Builder() {
       bd: "",
       cv: "",
     },
-    // @ts-ignore
     validate: (values) => {
       if (active === 0) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -68,7 +67,7 @@ function Builder() {
             values.address.trim().length < 2 ? "Address is required" : null,
           state: values.state.trim().length === 0 ? "State is required" : null,
           city: values.city.trim().length === 0 ? "City is required" : null,
-          pincode: !/^[1-9][0-9]{5}$/.test(values.pincode)
+          pincode: !/^[1-9][0-9]{5}$/.test(String(values.pincode))
             ? "Valid 6-digit PIN code is required"
             : null,
         };
@@ -86,6 +85,7 @@ function Builder() {
           fd: values.fd.trim().length === 0 ? "FD name is required" : null,
         };
       }
+
       if (active === 3) {
         return {
           bd: values.bd.trim().length === 0 ? "BD name is required" : null,
