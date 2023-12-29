@@ -79,7 +79,7 @@ function Builder() {
   return (
     <div className="w-full max-w-[423px] flex justify-center items-center flex-col">
       <Stepper active={active} className="w-full">
-        <Stepper.Step label="First step" description="Personal Details">
+        <Stepper.Step label="Personal Details">
           <TextInput
             size="md"
             label="Full Name"
@@ -110,7 +110,7 @@ function Builder() {
           />
         </Stepper.Step>
 
-        <Stepper.Step label="Second step" description="Address & Other">
+        <Stepper.Step label="Address & Other">
           <TextInput
             size="md"
             label="Address"
@@ -147,7 +147,7 @@ function Builder() {
           </SimpleGrid>
         </Stepper.Step>
 
-        <Stepper.Step label="Third step" description="Company details">
+        <Stepper.Step label="Company details">
           <TextInput
             size="md"
             mt="md"
