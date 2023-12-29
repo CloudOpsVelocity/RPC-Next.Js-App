@@ -8,10 +8,12 @@ import {
   PasswordInput,
   Code,
   NumberInput,
+  rem,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { styles } from "@/app/styles/Stepper";
 
 function Agent() {
   const [active, setActive] = useState(0);
@@ -72,8 +74,15 @@ function Agent() {
   const prevStep = () =>
     setActive((current) => (current > 0 ? current - 1 : current));
   return (
-    <div className="w-full max-w-[423px] flex justify-center items-center flex-col">
-      <Stepper active={active} className="w-full">
+    <div className="w-full max-w-[423px] flex justify-center items-center flex-col m-[5%]">
+      <Stepper
+        color="green"
+        iconSize={24}
+        active={active}
+        className="w-full"
+        // @ts-ignore
+        styles={styles}
+      >
         <Stepper.Step label="Personal Details">
           <TextInput
             size="md"

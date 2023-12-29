@@ -12,12 +12,14 @@ import {
   Select,
   SimpleGrid,
   Textarea,
+  MultiSelect,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { DateInput } from "@mantine/dates";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
+import { styles } from "@/app/styles/Stepper";
 function Builder() {
   const [active, setActive] = useState(0);
   const router = useRouter();
@@ -96,8 +98,16 @@ function Builder() {
   const prevStep = () =>
     setActive((current) => (current > 0 ? current - 1 : current));
   return (
-    <div className="w-full max-w-[423px] flex justify-center items-center flex-col">
-      <Stepper active={active} className="w-full">
+    <div className="w-full max-w-[423px] flex justify-center items-center flex-col  m-[5%]">
+      <Stepper
+        //@ts-ignore
+        styles={styles}
+        size="xs"
+        active={active}
+        className="w-full"
+        color="green"
+        iconSize={24}
+      >
         <Stepper.Step label="Personal Details">
           <TextInput
             size="md"
@@ -174,13 +184,21 @@ function Builder() {
             placeholder="Company Name"
             {...form.getInputProps("companyName")}
           />
-          <Select
+          <MultiSelect
             size="md"
             mt="md"
+            checkIconPosition="right"
             label="Branch"
-            placeholder="Pick value"
+            placeholder=" --Select Branch--"
             data={["React", "Angular", "Vue", "Svelte"]}
             searchable
+          />
+
+          <DateInput
+            mt="md"
+            label="Company Start Date"
+            placeholder="DD/MM/YYYY"
+            {...form.getInputProps("startDate")}
           />
           <TextInput
             size="md"
@@ -189,12 +207,7 @@ function Builder() {
             placeholder="Company Name"
             {...form.getInputProps("fd")}
           />
-          <DateInput
-            mt="md"
-            label="Date input"
-            placeholder="Date input"
-            {...form.getInputProps("startDate")}
-          />
+
           <TextInput
             size="md"
             mt="md"
@@ -203,7 +216,7 @@ function Builder() {
             {...form.getInputProps("ceo")}
           />
         </Stepper.Step>
-        <Stepper.Step label="Forth step" description="Description">
+        <Stepper.Step label="Description">
           <Textarea
             placeholder="Enter your company vision you are going to provide buyers."
             label="Companies Vision"
