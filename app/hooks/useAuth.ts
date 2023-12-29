@@ -21,7 +21,7 @@ interface RegistrationData {
   password: string;
   name: string;
   mobile: number;
-  usertype: string;
+  usertype: "I" | "A" | "B";
 }
 /**
  * A hook for handling authentication.

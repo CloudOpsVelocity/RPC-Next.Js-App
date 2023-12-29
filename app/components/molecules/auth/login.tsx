@@ -1,6 +1,7 @@
 import { useForm } from "@mantine/form";
 import { TextInput, Button, Box, PasswordInput } from "@mantine/core";
 import useAuth from "@/app/hooks/useAuth";
+import Link from "next/link";
 
 function Login() {
   const form = useForm({
@@ -39,9 +40,12 @@ function Login() {
           {...form.getInputProps("password")}
         />
 
-        <p className="text-[14px] font-400 text-[#767270] text-left w-full cursor-pointer ">
+        <Link
+          href={"/forgot"}
+          className="text-[14px] font-400 text-[#767270] text-left w-full cursor-pointer "
+        >
           Forgot Password ?
-        </p>
+        </Link>
 
         <Button
           type="submit"
