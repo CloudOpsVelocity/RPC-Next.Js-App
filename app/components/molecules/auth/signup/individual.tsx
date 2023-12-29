@@ -15,11 +15,11 @@ function Individual() {
   const router = useRouter();
   const { register } = useAuth();
   const form = useForm({
-    initialValues: { name: "", email: "", password: "", mobile: 0 },
+    initialValues: { userName: "", email: "", password: "", mobile: 0 },
 
     // functions will be used to validate values at corresponding key
     validate: {
-      name: (value) => (value.length < 2 ? "Full name is required" : null),
+      userName: (value) => (value.length < 2 ? "Full name is required" : null),
       email: (value) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return !value.match(emailRegex) ? "Valid email is required" : null;
@@ -55,19 +55,22 @@ function Individual() {
         className="w-[100%] flex justify-center items-center flex-col"
       >
         <TextInput
+          size="md"
           label="Full Name"
           className="w-[100%] mb-[3%] "
           placeholder="Full Name"
-          {...form.getInputProps("name")}
+          {...form.getInputProps("userName")}
         />
         <TextInput
           mt="sm"
+          size="md"
           className="w-[100%] mb-[3%] "
           label="Email"
           placeholder="Email"
           {...form.getInputProps("email")}
         />
         <PasswordInput
+          size="md"
           mt="sm"
           className="w-[100%] mb-[3%] "
           label="Password"
@@ -76,6 +79,7 @@ function Individual() {
         />
         <NumberInput
           hideControls
+          size="md"
           mt="sm"
           className="w-[100%] mb-[3%]"
           label="Contact Number"

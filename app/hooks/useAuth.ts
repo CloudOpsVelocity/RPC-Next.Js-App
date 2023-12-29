@@ -19,7 +19,7 @@ type AuthResult = {
 interface RegistrationData {
   email: string;
   password: string;
-  name: string;
+  userName: string;
   mobile: number;
   usertype: "I" | "A" | "B";
 }
