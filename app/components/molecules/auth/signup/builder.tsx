@@ -1,4 +1,5 @@
 "use client";
+import "@mantine/dates/styles.css";
 import { useState } from "react";
 import {
   Stepper,
@@ -9,13 +10,14 @@ import {
   Code,
   NumberInput,
   Select,
-  Grid,
   SimpleGrid,
+  Textarea,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
+import { DateInput } from "@mantine/dates";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-
+import dynamic from "next/dynamic";
 function Builder() {
   const [active, setActive] = useState(0);
   const router = useRouter();
@@ -31,35 +33,52 @@ function Builder() {
       state: "",
       city: "",
       pincode: 0,
+      startDate: new Date(),
+      branch: "",
+      ceo: "",
+      fd: "",
+      bd: "",
+      cv: "",
     },
     // @ts-ignore
     validate: (values) => {
       if (active === 0) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return {
-          // fullname:
-          //   values.fullname.trim().length < 2 ? "Full name is required" : null,
-          // email: !values.email.match(emailRegex)
-          //   ? "Valid email is required"
-          //   : null,
-          // password:
-          //   values.password.trim().length < 1 ? "Password is required" : null,
-          // contact:
-          //   isNaN(values.contact) || values.contact <= 0
-          //     ? "Valid contact number is required"
-          //     : null,
+          fullname:
+            values.fullname.trim().length < 2 ? "Full name is required" : null,
+          email: !values.email.match(emailRegex)
+            ? "Valid email is required"
+            : null,
+          password:
+            values.password.trim().length < 1 ? "Password is required" : null,
+          contact:
+            isNaN(values.contact) || values.contact <= 0
+              ? "Valid contact number is required"
+              : null,
         };
       }
 
       if (active === 1) {
-        // return {
-        //   address:
-        //     values.address.trim().length < 2 ? "Address is required" : null,
-        //   companyName:
-        //     values.companyName.trim().length < 2
-        //       ? "Company name is required"
-        //       : null,
-        // };
+        return {
+          address:
+            values.address.trim().length < 2 ? "Address is required" : null,
+          state: values.state.trim().length === 0 ? "State is required" : null,
+          city: values.city.trim().length === 0 ? "City is required" : null,
+          pincode:
+            isNaN(values.pincode) || values.pincode <= 0
+              ? "Valid pincode is required"
+              : null,
+        };
+      }
+
+      if (active === 2) {
+        return {
+          companyName:
+            values.companyName.trim().length < 2
+              ? "Company name is required"
+              : null,
+        };
       }
 
       return {};
@@ -116,7 +135,7 @@ function Builder() {
             label="Address"
             placeholder="Address"
             {...form.getInputProps("address")}
-          />{" "}
+          />
           <Select
             size="md"
             mt="md"
@@ -154,7 +173,7 @@ function Builder() {
             label="Builder Owned By"
             placeholder="Company Name"
             {...form.getInputProps("companyName")}
-          />{" "}
+          />
           <Select
             size="md"
             mt="md"
@@ -168,14 +187,39 @@ function Builder() {
             mt="md"
             label="Founded By"
             placeholder="Company Name"
-            {...form.getInputProps("companyName")}
+            {...form.getInputProps("fd")}
+          />
+          <DateInput
+            mt="md"
+            label="Date input"
+            placeholder="Date input"
+            {...form.getInputProps("startDate")}
           />
           <TextInput
             size="md"
             mt="md"
             label="Ceo Name"
             placeholder="Company Name"
-            {...form.getInputProps("companyName")}
+            {...form.getInputProps("ceo")}
+          />
+        </Stepper.Step>
+        <Stepper.Step label="Forth step" description="Description">
+          <Textarea
+            placeholder="Enter your company vision you are going to provide buyers."
+            label="Companies Vision"
+            autosize
+            minRows={5}
+            required
+            {...form.getInputProps("cv")}
+          />
+          <Textarea
+            mt={"md"}
+            placeholder="Enter your company vision you are going to provide buyers."
+            label="Builders Description"
+            autosize
+            minRows={5}
+            required
+            {...form.getInputProps("bd")}
           />
         </Stepper.Step>
 
