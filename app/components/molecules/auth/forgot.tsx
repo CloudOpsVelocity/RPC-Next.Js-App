@@ -34,7 +34,9 @@ function ForgotForm() {
       >
         <NumberInput
           hideControls
+          size="md"
           mt="sm"
+          className="w-[100%] mb-[3%]"
           label="Contact Number"
           placeholder="Contact Number"
           {...form.getInputProps("mobile")}
