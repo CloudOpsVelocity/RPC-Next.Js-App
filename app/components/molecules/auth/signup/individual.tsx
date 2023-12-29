@@ -10,6 +10,7 @@ import {
 import useAuth from "@/app/hooks/useAuth";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import CountryInput from "@/app/countrySelect/page";
 
 function Individual() {
   const router = useRouter();
@@ -34,6 +35,13 @@ function Individual() {
   const onSubmit = async (values: typeof form.values) => {
     const data = await register({ ...values, usertype: "I" });
     console.log(data);
+  };
+
+  const displayCountryCode = (value: any) => {
+    console.log(value);
+    // var countrycode = document.getElementById("isdCodes");
+    // setIsdidValue(countrycode.options[countrycode.selectedIndex].text);
+    // countrycode.options[countrycode.selectedIndex].text = countrycode.value;
   };
   return (
     <Box className="w-full max-w-[423px] mt-[3%] " mx="auto">
@@ -83,11 +91,17 @@ function Individual() {
           hideControls
           size="md"
           mt="sm"
-          className="w-[100%] mb-[3%]"
+          className="w-[100%] mb-[3%] "
           label="Contact Number"
           placeholder="Contact Number"
           {...form.getInputProps("mobile")}
         />
+
+        <CountryInput
+          onSelect={displayCountryCode}
+          className="focus:outline-none min-w-[30px] max-w-[70px] self-start relative bottom-[60px] ml-[2px]"
+        />
+
         <div className="w-full flex justify-between items-center flex-wrap">
           <Button
             mt="sm"

@@ -75,7 +75,7 @@ const Searchbar = () => {
           <div className="grid items-center">
             <button
               onClick={toggle}
-              className="text-[24px] text-[#737579] text-center flex items-center justify-center gap-5"
+              className="text-[16px] md:text-[20px] lg:text-[24px] text-[#737579] text-center flex items-center justify-center gap-5"
             >
               Residential{" "}
               <FaCaretDown
@@ -92,7 +92,7 @@ const Searchbar = () => {
                 <FaLocationDot size={20} />
               </div>
               <input
-                className="h-full text-[24px] placeholder:text-slate-500 placeholder:text-[24px] w-full border-none outline-none "
+                className="text-[16px] md:text-[20px] lg:text-[24px] h-full placeholder:text-slate-500 placeholder:text-[24px] w-full border-none outline-none "
                 type="text"
                 name=""
                 id=""
@@ -101,7 +101,7 @@ const Searchbar = () => {
             </div>
 
             <div className="flex items-center px-3">
-              <button className="flex items-center gap-3 text-[24px] text-slate-500">
+              <button className="text-[16px] md:text-[20px] lg:text-[24px] flex items-center gap-3 text-slate-500">
                 <FaLocationCrosshairs size={22} />
                 Near Me
               </button>
