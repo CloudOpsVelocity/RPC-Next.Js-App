@@ -144,7 +144,6 @@ function Agent() {
         {active !== 3 && (
           <div className="w-[100%] flex justify-between items-center flex-wrap">
             <Button
-              type="submit"
               mt="sm"
               onClick={() => {
                 active !== 0 ? prevStep() : router.back();

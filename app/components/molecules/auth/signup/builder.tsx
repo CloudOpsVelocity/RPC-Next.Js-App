@@ -81,7 +81,9 @@ function Builder() {
               ? "Company name is required"
               : null,
           branch:
-            values.branch.trim().length === 0 ? "Branch is required" : null,
+            values.branch.length === 0
+              ? "At least one branch must be selected"
+              : null,
           ceo: values.ceo.trim().length === 0 ? "CEO name is required" : null,
           fd: values.fd.trim().length === 0 ? "FD name is required" : null,
         };
@@ -260,7 +262,6 @@ function Builder() {
         {active !== 4 && (
           <div className="w-[100%] flex justify-between items-center flex-wrap">
             <Button
-              type="submit"
               mt="sm"
               onClick={() => {
                 active !== 0 ? prevStep() : router.back();

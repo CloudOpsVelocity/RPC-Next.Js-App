@@ -28,9 +28,10 @@ export const options: NextAuthOptions = {
           }
         );
         if (res.data.status) {
+          console.log(res.data);
           return {
-            id: 1,
-            email: credentials?.username,
+            ...res.data,
+            isOtpVerified: "N",
           };
         } else {
           console.log(res.data);
