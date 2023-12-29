@@ -113,7 +113,7 @@ function Individual() {
           <Button
             type="submit"
             mt="sm"
-            className="!rounded-[6px] !w-[100%] !max-w-[225px] "
+            className="!rounded-[6px] !w-[100%] !max-w-[225px] !bg-[#0c7aca]"
           >
             SAVE & VERIFY
           </Button>
