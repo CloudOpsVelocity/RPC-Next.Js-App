@@ -15,10 +15,16 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { styles } from "@/app/styles/Stepper";
 import { DropZone } from "./dropzone";
+import { useDisclosure } from "@mantine/hooks";
+import AuthPopup from "../authPopup";
+import useAuth from "@/app/hooks/useAuth";
 
 function Agent() {
   const [active, setActive] = useState(0);
   const router = useRouter();
+  const { register } = useAuth();
+
+  const [opened, { open, close }] = useDisclosure(false);
 
   const form = useForm({
     initialValues: {
@@ -71,13 +77,29 @@ function Agent() {
       if (form.validate().hasErrors) {
         return current;
       }
+
+      let values = form.values;
+
+      console.log(values);
+      //const data = register({ ...values, usertype: "A" });
+      //console.log(data);
+      if (current == 0) {
+        open();
+      }
       return current < 3 ? current + 1 : current;
     });
 
   const prevStep = () =>
     setActive((current) => (current > 0 ? current - 1 : current));
+
   return (
     <div className="w-full max-w-[423px] flex justify-center items-center flex-col m-[5%]">
+      <AuthPopup
+        opened={opened}
+        open={open}
+        close={close}
+        userName={form.values.email}
+      />
       <Stepper
         color="green"
         iconSize={24}

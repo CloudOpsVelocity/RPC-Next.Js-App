@@ -39,8 +39,8 @@ function ForgotForm() {
           hideControls
           size="md"
           mt="sm"
-          className="w-[100%] mb-[3%]"
-          label="Mobile Number"
+          className="w-[100%] mb-[3%] rounded-[8px] bg-transparent shadow-md "
+          label=""
           placeholder="Enter your registerd mobile number..."
           {...form.getInputProps("mobile")}
         />

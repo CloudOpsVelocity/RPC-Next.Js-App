@@ -11,10 +11,14 @@ import useAuth from "@/app/hooks/useAuth";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import CountryInput from "@/app/countrySelect/page";
+import AuthPopup from "../authPopup";
+import { useDisclosure } from "@mantine/hooks";
 
 function Individual() {
   const router = useRouter();
   const { register } = useAuth();
+  const [opened, { open, close }] = useDisclosure(false);
+
   const form = useForm({
     initialValues: { name: "", email: "", password: "", mobile: 0 },
 
@@ -35,6 +39,9 @@ function Individual() {
   const onSubmit = async (values: typeof form.values) => {
     const data = await register({ ...values, usertype: "I" });
     console.log(data);
+    if (data.success) {
+      open();
+    }
   };
 
   const displayCountryCode = (value: any) => {
@@ -43,6 +50,12 @@ function Individual() {
     // setIsdidValue(countrycode.options[countrycode.selectedIndex].text);
     // countrycode.options[countrycode.selectedIndex].text = countrycode.value;
   };
+
+  // const openOtpBox = (open: any) => {
+  //   console.log("otp Box");
+  //   open();
+  // };
+
   return (
     <Box className="w-full max-w-[423px] mt-[3%] " mx="auto">
       <div className="w-full max-w-[459px] md:max-w-[597px] flex justify-center items-center gap-[5%] mb-[5%] ">
@@ -133,6 +146,12 @@ function Individual() {
           Continue Without Register
         </Link>
       </form>
+      <AuthPopup
+        opened={opened}
+        open={open}
+        close={close}
+        userName={form.values.email}
+      />
     </Box>
   );
 }

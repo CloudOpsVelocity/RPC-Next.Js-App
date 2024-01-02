@@ -8,9 +8,9 @@ interface Props {
 const Layout: React.FC<Props> = ({ children }) => {
   return (
     <div className="w-full">
-      <Header />
+      {/* <Header /> */}
       {children}
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
