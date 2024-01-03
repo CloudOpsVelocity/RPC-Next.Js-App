@@ -1,5 +1,5 @@
 "use client";
-import { useForm } from "@mantine/form";
+import { useForm, yupResolver } from "@mantine/form";
 import {
   NumberInput,
   TextInput,
@@ -10,26 +10,14 @@ import {
 import useAuth from "@/app/hooks/useAuth";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { individualSchema } from "@/app/validations/auth";
 
 function Individual() {
   const router = useRouter();
   const { register } = useAuth();
   const form = useForm({
     initialValues: { name: "", email: "", password: "", mobile: 0 },
-
-    // functions will be used to validate values at corresponding key
-    validate: {
-      name: (value) => (value.length < 2 ? "Full name is required" : null),
-      email: (value) => {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return !value.match(emailRegex) ? "Valid email is required" : null;
-      },
-      password: (value) => (value.length < 1 ? "Password is required" : null),
-      mobile: (value) =>
-        isNaN(value) || value <= 0 || value.toString().length !== 10
-          ? "Valid 10-digit contact number is required"
-          : null,
-    },
+    validate: yupResolver(individualSchema),
   });
   const onSubmit = async (values: typeof form.values) => {
     const data = await register({ ...values, usertype: "I" });

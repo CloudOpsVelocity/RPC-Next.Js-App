@@ -32,7 +32,7 @@ function Login() {
           size="md"
           className="w-[100%] mb-[3%] "
           label="User Name"
-          placeholder="Name"
+          placeholder="Enter your email or mobiile number"
           {...form.getInputProps("username")}
         />
         <PasswordInput

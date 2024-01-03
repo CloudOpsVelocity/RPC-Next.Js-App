@@ -21,7 +21,7 @@ import { useRouter } from "next/navigation";
 import { styles } from "@/app/styles/Stepper";
 import { DropZone } from "./dropzone";
 function Builder() {
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(3);
   const router = useRouter();
 
   const form = useForm({
@@ -238,8 +238,10 @@ function Builder() {
             minRows={5}
             required
             {...form.getInputProps("cv")}
+            description="maximum  5000 characters"
           />
           <Textarea
+            description="maximum  5000 characters"
             mt={"md"}
             placeholder="Enter your company vision you are going to provide buyers."
             label="Builders Description"
