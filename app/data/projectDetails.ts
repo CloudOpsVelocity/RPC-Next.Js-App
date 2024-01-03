@@ -1,0 +1,15 @@
+export const topics = [
+  "Overview",
+  "About",
+  "Property Details",
+  "Floor Plans",
+  "Galleria",
+  "Amenities",
+  "Near By",
+  "Specifications",
+  "Highlights",
+  "Ratings",
+  "Why Buy This Project?",
+  "FAQ?",
+  "Similar",
+];
