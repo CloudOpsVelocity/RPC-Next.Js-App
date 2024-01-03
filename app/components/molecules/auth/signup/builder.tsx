@@ -22,12 +22,15 @@ import { styles } from "@/app/styles/Stepper";
 import { DropZone } from "./dropzone";
 import AuthPopup from "../authPopup";
 import { useDisclosure } from "@mantine/hooks";
+import useAuth from "@/app/hooks/useAuth";
 
 function Builder() {
   const [active, setActive] = useState(0);
   const router = useRouter();
 
   const [opened, { open, close }] = useDisclosure(false);
+
+  const { registerOtherDetails, register } = useAuth();
 
   const form = useForm({
     initialValues: {
@@ -105,23 +108,36 @@ function Builder() {
     },
   });
 
-  const nextStep = () =>
-    setActive((current) => {
-      if (form.validate().hasErrors) {
-        return current;
+  const nextStep = async () => {
+    let values = form.values;
+
+    let data =
+      active == 0
+        ? await register({ ...values, usertype: "B" })
+        : await registerOtherDetails(values);
+
+    if (!form.validate().hasErrors) {
+      if (active == 0) {
+        console.log(data);
+        if (data.success) {
+          open();
+        }
+      } else {
+        const data = await registerOtherDetails(values);
+        console.log(data);
       }
+    }
 
-      let values = form.values;
-      console.log(values);
-      //const data = register({ ...values, usertype: "A" });
-      //console.log(data);
+    if (data.success) {
+      setActive((current) => {
+        if (form.validate().hasErrors) {
+          return current;
+        }
 
-      if (current == 0) {
-        open();
-      }
-
-      return current < 4 ? current + 1 : current;
-    });
+        return current < 4 ? current + 1 : current;
+      });
+    }
+  };
 
   const prevStep = () =>
     setActive((current) => (current > 0 ? current - 1 : current));

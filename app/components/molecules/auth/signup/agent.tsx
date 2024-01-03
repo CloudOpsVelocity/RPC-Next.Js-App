@@ -22,7 +22,7 @@ import useAuth from "@/app/hooks/useAuth";
 function Agent() {
   const [active, setActive] = useState(0);
   const router = useRouter();
-  const { register } = useAuth();
+  const { registerOtherDetails, register } = useAuth();
 
   const [opened, { open, close }] = useDisclosure(false);
 
@@ -72,22 +72,34 @@ function Agent() {
     },
   });
 
-  const nextStep = () =>
-    setActive((current) => {
-      if (form.validate().hasErrors) {
-        return current;
-      }
+  const nextStep = async () => {
+    let values = form.values;
+    let data =
+      active == 0
+        ? await register({ ...values, usertype: "A" })
+        : await registerOtherDetails(values);
 
-      let values = form.values;
-
-      console.log(values);
-      //const data = register({ ...values, usertype: "A" });
-      //console.log(data);
-      if (current == 0) {
-        open();
+    if (!form.validate().hasErrors) {
+      if (active == 0) {
+        console.log(data);
+        if (data.success) {
+          open();
+        }
+      } else {
+        console.log(data);
       }
-      return current < 3 ? current + 1 : current;
-    });
+    }
+
+    if (data.success) {
+      setActive((current) => {
+        if (form.validate().hasErrors) {
+          return current;
+        }
+
+        return current < 3 ? current + 1 : current;
+      });
+    }
+  };
 
   const prevStep = () =>
     setActive((current) => (current > 0 ? current - 1 : current));

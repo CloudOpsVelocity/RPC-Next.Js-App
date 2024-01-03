@@ -21,6 +21,7 @@ type AuthResult = {
   success: boolean;
   message: string;
 };
+
 interface RegistrationData {
   email?: string;
   password: string;
@@ -28,6 +29,26 @@ interface RegistrationData {
   mobile: number;
   usertype: "I" | "A" | "B";
 }
+
+interface RegistrationOthersData {
+  email: string;
+  password: string;
+  fullname: string;
+  contact: number;
+  address: string;
+  companyName: string;
+
+  state?: string;
+  city?: string;
+  pincode?: any;
+  startDate?: any;
+  branch?: string[];
+  ceo?: string;
+  fd?: string;
+  bd?: string;
+  cv?: string;
+}
+
 /**
  * A hook for handling authentication.
  * @returns An object with login and register functions.
@@ -80,6 +101,32 @@ export default function useAuth() {
     }
   };
 
+  const registerOtherDetails = async (
+    data: RegistrationOthersData
+  ): Promise<AuthResult> => {
+    try {
+      const formData = new FormData();
+      formData.append("data", JSON.stringify(data));
+      const response = await axios.post(
+        "http://localhost:8081/user/v1/registerUser-other",
+        formData
+      );
+
+      if (response?.data.status) {
+        // Registration success, you might want to automatically log in the user
+
+        return { success: true, message: "Registration successful." };
+      } else {
+        return { success: false, message: "Registration failed." };
+      }
+    } catch (error: any) {
+      toast.error(
+        (error.message as string) || "Something went wrong. Please try again."
+      );
+      throw new Error("Something went wrong during registration.");
+    }
+  };
+
   const verifyOtp = async (data: Otp): Promise<any> => {
     try {
       const otpResponse = await axios.post(
@@ -102,5 +149,5 @@ export default function useAuth() {
     }
   };
 
-  return { login, register, verifyOtp };
+  return { login, register, verifyOtp, registerOtherDetails };
 }
