@@ -28,25 +28,28 @@ interface RegistrationData {
   name: string;
   mobile: number;
   usertype: "I" | "A" | "B";
+  userName?: string;
 }
 
 interface RegistrationOthersData {
   email: string;
   password: string;
-  fullname: string;
-  contact: number;
+  userName: string;
+  mobile: number;
   address: string;
   companyName: string;
 
-  state?: string;
+  state?: any;
   city?: string;
   pincode?: any;
   startDate?: any;
   branch?: string[];
-  ceo?: string;
-  fd?: string;
-  bd?: string;
-  cv?: string;
+  ceoName?: string;
+  foundedBy?: string;
+  mission?: string;
+  vission?: string;
+  officeContact?: Number;
+  managingDirectorName?: string;
 }
 
 /**
@@ -77,14 +80,22 @@ export default function useAuth() {
   const register = async (data: RegistrationData): Promise<AuthResult> => {
     try {
       // Assuming you have an API endpoint for user registration
+      const userDetails = {
+        name: data.name != undefined ? data.name : data.userName,
+        email: data.email,
+        usertype: data.usertype,
+        password: data.password,
+        mobile: data.mobile,
+      };
       const registrationResponse = await axios.post(
         "http://localhost:8081/user/v1/registerUser",
-        data
+        userDetails
       );
       // Check the registration response and handle accordingly
       if (registrationResponse?.data.status) {
         // Registration success, you might want to automatically log in the user
         await loginWithCredentials({
+          //@ts-ignore
           username: data.email, // Assuming email is the username
           password: data.password,
         });

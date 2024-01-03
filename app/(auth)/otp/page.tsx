@@ -4,7 +4,7 @@ import useAuth from "@/app/hooks/useAuth";
 import { Box, Button, Modal, PinInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 
 type Props = {
   userName: string;
@@ -12,12 +12,19 @@ type Props = {
 
 export default function OtpBox({ userName }: Props) {
   const { verifyOtp } = useAuth();
+  const [error, setError] = useState(false);
 
   const onSubmit = async (value: any) => {
     console.log(value);
 
     const data = await verifyOtp({ ...value, username: userName });
     console.log(data);
+
+    if (data.success) {
+      //Close OTP Popup
+    } else {
+      setError(data.success);
+    }
   };
 
   const form = useForm({
@@ -64,11 +71,18 @@ export default function OtpBox({ userName }: Props) {
           {...form.getInputProps("otp")}
           className=""
           inputMode="numeric"
+          //error
         />
 
         <p className="text-[#666] font-[500] text-[16px] text-right w-[100%] !max-w-[423px] !mb-[6%] ">
           Resend OTP
         </p>
+
+        {error && (
+          <p className="text-[#F00] font-[500] text-[16px] w-[100%] !max-w-[423px] !mb-[6%] text-center ">
+            You’ve entered wrong OTP, Please enter your OTP again!
+          </p>
+        )}
 
         <Button
           type="submit"

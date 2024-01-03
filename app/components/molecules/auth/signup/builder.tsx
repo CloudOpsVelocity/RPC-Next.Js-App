@@ -1,6 +1,6 @@
 "use client";
 import "@mantine/dates/styles.css";
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 import {
   Stepper,
   Button,
@@ -13,6 +13,7 @@ import {
   SimpleGrid,
   Textarea,
   MultiSelect,
+  ComboboxItem,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { DateInput } from "@mantine/dates";
@@ -32,39 +33,83 @@ function Builder() {
 
   const { registerOtherDetails, register } = useAuth();
 
+  // const [value, setValue] = useState<number | ComboboxItem | null>(null);
+
+  const [statesData, setStatesData] = useState<
+    {
+      cid: number;
+      constDesc: string;
+      constGroup: string;
+      constType: string;
+      constParentGroup: any;
+      parentGroupId: any;
+      seq: number;
+    }[]
+  >([
+    {
+      cid: 1,
+      constDesc: "Andhra Pradesh",
+      constGroup: "state",
+      constType: "CON",
+      constParentGroup: null,
+      parentGroupId: null,
+      seq: 1,
+    },
+    {
+      cid: 2,
+      constDesc: "Arunachal Pradesh",
+      constGroup: "state",
+      constType: "CON",
+      constParentGroup: null,
+      parentGroupId: null,
+      seq: 2,
+    },
+    {
+      cid: 3,
+      constDesc: "Assam",
+      constGroup: "state",
+      constType: "CON",
+      constParentGroup: null,
+      parentGroupId: null,
+      seq: 3,
+    },
+  ]);
+
   const form = useForm({
     initialValues: {
-      fullname: "",
+      userName: "",
       email: "",
       password: "",
-      contact: 0,
+      mobile: 0,
       address: "",
       companyName: "",
       state: "",
       city: "",
       pincode: 0,
-      startDate: new Date(),
-      branch: [],
-      ceo: "",
-      fd: "",
-      bd: "",
-      cv: "",
+      companyStartDate: new Date(),
+      branchName: [],
+      ceoName: "",
+      foundedBy: "",
+      mission: "",
+      vission: "",
+      officeContact: 0,
+      managingDirectorName: "",
     },
     validate: (values) => {
       if (active === 0) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return {
-          fullname:
-            values.fullname.trim().length < 2 ? "Full name is required" : null,
+          userName:
+            values.userName.trim().length < 2 ? "Full name is required" : null,
           email: !values.email.match(emailRegex)
             ? "Valid email is required"
             : null,
           password:
             values.password.trim().length < 1 ? "Password is required" : null,
-          contact:
-            isNaN(values.contact) ||
-            values.contact <= 0 ||
-            values.contact.toString().length !== 10
+          mobile:
+            isNaN(values.mobile) ||
+            values.mobile <= 0 ||
+            values.mobile.toString().length !== 10
               ? "Valid 10-digit contact number is required"
               : null,
         };
@@ -88,19 +133,41 @@ function Builder() {
             values.companyName.trim().length < 2
               ? "Company name is required"
               : null,
-          branch:
-            values.branch.length === 0
+          branchName:
+            values.branchName.length === 0
               ? "At least one branch must be selected"
               : null,
-          ceo: values.ceo.trim().length === 0 ? "CEO name is required" : null,
-          fd: values.fd.trim().length === 0 ? "FD name is required" : null,
+          ceoName:
+            values.ceoName.trim().length === 0 ? "CEO name is required" : null,
+          foundedBy:
+            values.foundedBy.trim().length === 0
+              ? "Founded By name is required"
+              : null,
+
+          managingDirectorName:
+            values.managingDirectorName.trim().length === 0
+              ? "Managing Director name is required"
+              : null,
+
+          officeContact:
+            isNaN(values.officeContact) ||
+            values.officeContact <= 0 ||
+            values.officeContact.toString().length !== 10
+              ? "Valid 10-digit contact number is required"
+              : null,
         };
       }
 
       if (active === 3) {
         return {
-          bd: values.bd.trim().length === 0 ? "BD name is required" : null,
-          cv: values.cv.trim().length === 0 ? "CV name is required" : null,
+          mission:
+            values.mission.trim().length === 0
+              ? "Mission name is required"
+              : null,
+          vission:
+            values.vission.trim().length === 0
+              ? "Vission name is required"
+              : null,
         };
       }
 
@@ -113,7 +180,8 @@ function Builder() {
 
     let data =
       active == 0
-        ? await register({ ...values, usertype: "B" })
+        ? //@ts-ignore
+          await register({ ...values, usertype: "B" })
         : await registerOtherDetails(values);
 
     if (!form.validate().hasErrors) {
@@ -163,7 +231,7 @@ function Builder() {
             size="md"
             label="Full Name"
             placeholder="Full Name"
-            {...form.getInputProps("fullname")}
+            {...form.getInputProps("userName")}
           />
           <TextInput
             size="md"
@@ -183,9 +251,9 @@ function Builder() {
             hideControls
             size="md"
             mt="sm"
-            label="Contact Number"
-            placeholder="Contact Number"
-            {...form.getInputProps("contact")}
+            label="Contact"
+            placeholder="Enter Contact Number"
+            {...form.getInputProps("mobile")}
           />
         </Stepper.Step>
 
@@ -201,9 +269,24 @@ function Builder() {
             mt="md"
             label="State"
             placeholder="Pick value"
-            data={["React", "Angular", "Vue", "Svelte"]}
+            data={[
+              "React",
+              "Angular",
+              "Vue",
+              "Svelte",
+              "React",
+              "Angular",
+              "Vue",
+              "Svelte",
+            ]}
+            //value={value ? value.cid : null}
+            // onChange={(
+            //   _value: any,
+            //   option: any
+            // ) => setValue(option)}
             searchable
             {...form.getInputProps("state")}
+            maxDropdownHeight={200}
           />
           <SimpleGrid cols={2}>
             <Select
@@ -214,6 +297,7 @@ function Builder() {
               data={["React", "Angular", "Vue", "Svelte"]}
               searchable
               {...form.getInputProps("city")}
+              maxDropdownHeight={200}
             />
             <NumberInput
               size="md"
@@ -242,29 +326,47 @@ function Builder() {
             label="Branch"
             placeholder=" --Select Branch--"
             data={["React", "Angular", "Vue", "Svelte"]}
-            {...form.getInputProps("branch")}
+            {...form.getInputProps("branchName")}
           />
           <DateInput
             mt="md"
             label="Company Start Date"
             placeholder="DD/MM/YYYY"
-            {...form.getInputProps("startDate")}
+            {...form.getInputProps("companyStartDate")}
           />
 
           <TextInput
             size="md"
             mt="md"
             label="Founded By"
-            placeholder="Company Name"
-            {...form.getInputProps("fd")}
+            placeholder="Founded By"
+            {...form.getInputProps("foundedBy")}
           />
 
           <TextInput
             size="md"
             mt="md"
             label="Ceo Name"
-            placeholder="Company Name"
-            {...form.getInputProps("ceo")}
+            placeholder="Ceo Name"
+            {...form.getInputProps("ceoName")}
+          />
+
+          <TextInput
+            size="md"
+            mt="md"
+            label="Managing Director"
+            placeholder="Enter Managing Director Name"
+            {...form.getInputProps("managingDirectorName")}
+          />
+
+          <NumberInput
+            hideControls
+            size="md"
+            mt="sm"
+            className="w-[100%] mb-[3%] "
+            label="Office Contact"
+            placeholder="Enter Office Contact"
+            {...form.getInputProps("officeContact")}
           />
         </Stepper.Step>
         <Stepper.Step label="Description">
@@ -274,7 +376,7 @@ function Builder() {
             autosize
             minRows={5}
             required
-            {...form.getInputProps("cv")}
+            {...form.getInputProps("vission")}
           />
           <Textarea
             mt={"md"}
@@ -283,7 +385,7 @@ function Builder() {
             autosize
             minRows={5}
             required
-            {...form.getInputProps("bd")}
+            {...form.getInputProps("mission")}
           />
         </Stepper.Step>
 
@@ -292,6 +394,7 @@ function Builder() {
           <Code block mt="xl">
             {JSON.stringify(form.values, null, 2)}
           </Code>
+          {/* {(window.location.href = "http://localhost:3000/success")} */}
         </Stepper.Completed>
       </Stepper>
 

@@ -28,10 +28,10 @@ function Agent() {
 
   const form = useForm({
     initialValues: {
-      fullname: "",
+      userName: "",
       email: "",
       password: "",
-      contact: 0,
+      mobile: 0,
       address: "",
       companyName: "",
     },
@@ -40,18 +40,18 @@ function Agent() {
       if (active === 0) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return {
-          fullname:
-            values.fullname.trim().length < 2 ? "Full name is required" : null,
+          userName:
+            values.userName.trim().length < 2 ? "Full name is required" : null,
           email: !values.email.match(emailRegex)
             ? "Valid email is required"
             : null,
 
           password:
             values.password.trim().length < 1 ? "Password is required" : null,
-          contact:
-            isNaN(values.contact) ||
-            values.contact <= 0 ||
-            values.contact.toString().length !== 10
+          mobile:
+            isNaN(values.mobile) ||
+            values.mobile <= 0 ||
+            values.mobile.toString().length !== 10
               ? "Valid 10-digit contact number is required"
               : null,
         };
@@ -76,7 +76,8 @@ function Agent() {
     let values = form.values;
     let data =
       active == 0
-        ? await register({ ...values, usertype: "A" })
+        ? //@ts-ignore
+          await register({ ...values, usertype: "A" })
         : await registerOtherDetails(values);
 
     if (!form.validate().hasErrors) {
@@ -125,7 +126,7 @@ function Agent() {
             size="md"
             label="Full Name"
             placeholder="Full Name"
-            {...form.getInputProps("fullname")}
+            {...form.getInputProps("userName")}
           />
           <TextInput
             size="md"
@@ -145,9 +146,9 @@ function Agent() {
             hideControls
             size="md"
             mt="sm"
-            label="Contact Number"
-            placeholder="Contact Number"
-            {...form.getInputProps("contact")}
+            label="Contact"
+            placeholder="Enter Contact Number"
+            {...form.getInputProps("mobile")}
           />
         </Stepper.Step>
 
@@ -173,6 +174,7 @@ function Agent() {
           <Code block mt="xl">
             {JSON.stringify(form.values, null, 2)}
           </Code>
+          {/* {(window.location.href = "http://localhost:3000/success")} */}
         </Stepper.Completed>
       </Stepper>
 
