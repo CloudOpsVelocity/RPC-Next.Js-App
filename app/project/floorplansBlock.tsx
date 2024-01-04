@@ -74,13 +74,13 @@ export default function FloorplansBlock({
         <p className="text-[24px] font-[500] text-[#333] mr-[20px] ">
           Select one of the phase to see project details
         </p>
-        <div className=" flex justify-start items-start ">
+        <div className=" flex justify-start items-start gap-[10px] ">
           {phases.map((each, index) => {
             return (
               <Button
                 title={`Phase ${each}`}
                 onChange={() => setCurrentPhase(`${each}`)}
-                buttonClass={` text-[20px] bg-[#ECF7FF] p-[16px] mr-[40px] whitespace-nowrap text-[#000] rounded-[8px] ${
+                buttonClass={` mb-[5px] text-[20px] bg-[#ECF7FF] p-[8px] xl:p-[16px]  whitespace-nowrap text-[#000] rounded-[8px]${
                   currentPhase == `${each}`
                     ? " font-[600] border-solid border-[1px] border-[#0073C6] "
                     : " font-[400]"
