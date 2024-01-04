@@ -15,17 +15,23 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { styles } from "@/app/styles/Stepper";
 import { DropZone } from "./dropzone";
+import { useDisclosure } from "@mantine/hooks";
+import AuthPopup from "../authPopup";
+import useAuth from "@/app/hooks/useAuth";
 
 function Agent() {
   const [active, setActive] = useState(0);
   const router = useRouter();
+  const { registerOtherDetails, register } = useAuth();
+
+  const [opened, { open, close }] = useDisclosure(false);
 
   const form = useForm({
     initialValues: {
-      fullname: "",
+      userName: "",
       email: "",
       password: "",
-      contact: 0,
+      mobile: 0,
       address: "",
       companyName: "",
     },
@@ -34,18 +40,18 @@ function Agent() {
       if (active === 0) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return {
-          fullname:
-            values.fullname.trim().length < 2 ? "Full name is required" : null,
+          userName:
+            values.userName.trim().length < 2 ? "Full name is required" : null,
           email: !values.email.match(emailRegex)
             ? "Valid email is required"
             : null,
 
           password:
             values.password.trim().length < 1 ? "Password is required" : null,
-          contact:
-            isNaN(values.contact) ||
-            values.contact <= 0 ||
-            values.contact.toString().length !== 10
+          mobile:
+            isNaN(values.mobile) ||
+            values.mobile <= 0 ||
+            values.mobile.toString().length !== 10
               ? "Valid 10-digit contact number is required"
               : null,
         };
@@ -66,18 +72,47 @@ function Agent() {
     },
   });
 
-  const nextStep = () =>
-    setActive((current) => {
-      if (form.validate().hasErrors) {
-        return current;
+  const nextStep = async () => {
+    let values = form.values;
+    let data =
+      active == 0
+        ? //@ts-ignore
+          await register({ ...values, usertype: "A" })
+        : await registerOtherDetails(values);
+
+    if (!form.validate().hasErrors) {
+      if (active == 0) {
+        console.log(data);
+        if (data.success) {
+          open();
+        }
+      } else {
+        console.log(data);
       }
-      return current < 3 ? current + 1 : current;
-    });
+    }
+
+    if (data.success) {
+      setActive((current) => {
+        if (form.validate().hasErrors) {
+          return current;
+        }
+
+        return current < 3 ? current + 1 : current;
+      });
+    }
+  };
 
   const prevStep = () =>
     setActive((current) => (current > 0 ? current - 1 : current));
+
   return (
     <div className="w-full max-w-[423px] flex justify-center items-center flex-col m-[5%]">
+      <AuthPopup
+        opened={opened}
+        open={open}
+        close={close}
+        userName={form.values.email}
+      />
       <Stepper
         color="green"
         iconSize={24}
@@ -91,7 +126,7 @@ function Agent() {
             size="md"
             label="Full Name"
             placeholder="Full Name"
-            {...form.getInputProps("fullname")}
+            {...form.getInputProps("userName")}
           />
           <TextInput
             size="md"
@@ -111,9 +146,9 @@ function Agent() {
             hideControls
             size="md"
             mt="sm"
-            label="Contact Number"
-            placeholder="Contact Number"
-            {...form.getInputProps("contact")}
+            label="Contact"
+            placeholder="Enter Contact Number"
+            {...form.getInputProps("mobile")}
           />
         </Stepper.Step>
 
@@ -139,6 +174,7 @@ function Agent() {
           <Code block mt="xl">
             {JSON.stringify(form.values, null, 2)}
           </Code>
+          {/* {(window.location.href = "http://localhost:3000/success")} */}
         </Stepper.Completed>
       </Stepper>
 

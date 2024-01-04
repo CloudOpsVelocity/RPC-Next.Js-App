@@ -1,13 +1,20 @@
 "use client";
-import { useDisclosure } from "@mantine/hooks";
+// import { useDisclosure } from "@mantine/hooks";
 import { Modal } from "@mantine/core";
-import Form from "./form";
+// import Form from "./form";
 import Button from "../../../elements/button";
 import { useSession } from "next-auth/react";
+import OtpBox from "@/app/(auth)/otp/page";
 
-function AuthPopup() {
+type props = {
+  opened: any;
+  open: any;
+  close: any;
+  userName: string;
+};
+
+function AuthPopup({ opened, open, close, userName }: props) {
   const { data: session } = useSession();
-  const [opened, { open, close }] = useDisclosure(false);
 
   return (
     <>
@@ -19,16 +26,17 @@ function AuthPopup() {
         maw={"max-content"}
         size={"80%"}
       >
-        {JSON.stringify(session)}
-        <Form />
+        {/* {JSON.stringify(session)} */}
+        {/* <Form /> */}
+        <OtpBox userName={userName} />
       </Modal>
-
+      {/* 
       <Button
         key={"loginBtn"}
         onChange={() => open()}
-        buttonClass="login-btn text-[20px] font-semibold px-5 py-2 rounded-full text-[#0073C6] border-none underline bg-gradient-to-r from-[#EFF8FF] to-[#FFF] shadow-md"
-        title="Login/ Sign up"
-      />
+        buttonClass=""
+        title="OPEN"
+      /> */}
     </>
   );
 }

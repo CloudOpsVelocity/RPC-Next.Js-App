@@ -7,6 +7,11 @@ interface Login {
   password: string;
 }
 
+interface Otp {
+  username: string;
+  otp: any;
+}
+
 type Action = {
   username: string;
   password: string;
@@ -16,13 +21,37 @@ type AuthResult = {
   success: boolean;
   message: string;
 };
+
 interface RegistrationData {
-  email: string;
+  email?: string;
   password: string;
   name: string;
   mobile: number;
   usertype: "I" | "A" | "B";
+  userName?: string;
 }
+
+interface RegistrationOthersData {
+  email: string;
+  password: string;
+  userName: string;
+  mobile: number;
+  address: string;
+  companyName: string;
+
+  state?: any;
+  city?: string;
+  pincode?: any;
+  startDate?: any;
+  branch?: string[];
+  ceoName?: string;
+  foundedBy?: string;
+  mission?: string;
+  vission?: string;
+  officeContact?: Number;
+  managingDirectorName?: string;
+}
+
 /**
  * A hook for handling authentication.
  * @returns An object with login and register functions.
@@ -51,17 +80,26 @@ export default function useAuth() {
   const register = async (data: RegistrationData): Promise<AuthResult> => {
     try {
       // Assuming you have an API endpoint for user registration
+      const userDetails = {
+        name: data.name != undefined ? data.name : data.userName,
+        email: data.email,
+        usertype: data.usertype,
+        password: data.password,
+        mobile: data.mobile,
+      };
       const registrationResponse = await axios.post(
         "http://localhost:8081/user/v1/registerUser",
-        data
+        userDetails
       );
       // Check the registration response and handle accordingly
-      if (registrationResponse?.data.success) {
+      if (registrationResponse?.data.status) {
         // Registration success, you might want to automatically log in the user
         await loginWithCredentials({
+          //@ts-ignore
           username: data.email, // Assuming email is the username
           password: data.password,
         });
+
         return { success: true, message: "Registration successful." };
       } else {
         return { success: false, message: "Registration failed." };
@@ -73,5 +111,54 @@ export default function useAuth() {
       throw new Error("Something went wrong during registration.");
     }
   };
-  return { login, register };
+
+  const registerOtherDetails = async (
+    data: RegistrationOthersData
+  ): Promise<AuthResult> => {
+    try {
+      const formData = new FormData();
+      formData.append("data", JSON.stringify(data));
+      const response = await axios.post(
+        "http://localhost:8081/user/v1/registerUser-other",
+        formData
+      );
+
+      if (response?.data.status) {
+        // Registration success, you might want to automatically log in the user
+
+        return { success: true, message: "Registration successful." };
+      } else {
+        return { success: false, message: "Registration failed." };
+      }
+    } catch (error: any) {
+      toast.error(
+        (error.message as string) || "Something went wrong. Please try again."
+      );
+      throw new Error("Something went wrong during registration.");
+    }
+  };
+
+  const verifyOtp = async (data: Otp): Promise<any> => {
+    try {
+      const otpResponse = await axios.post(
+        "http://localhost:8081/user/v1/isMobileAndEmailOTPVerified",
+        data
+      );
+
+      if (otpResponse?.data.status) {
+        // Registration success, you might want to automatically log in the user
+
+        return { success: true, message: "Otp Verified successful." };
+      } else {
+        return { success: false, message: "Otp Verifing failed." };
+      }
+    } catch (error: any) {
+      toast.error(
+        (error.message as string) || "Something went wrong. Please try again."
+      );
+      throw new Error("Something went wrong during registration.");
+    }
+  };
+
+  return { login, register, verifyOtp, registerOtherDetails };
 }

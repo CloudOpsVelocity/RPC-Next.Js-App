@@ -1,5 +1,97 @@
-import React from "react";
+"use client";
 
-export default function page() {
-  return <div>page</div>;
+import useAuth from "@/app/hooks/useAuth";
+import { Box, Button, Modal, PinInput } from "@mantine/core";
+import { useForm } from "@mantine/form";
+import Link from "next/link";
+import React, { useState } from "react";
+
+type Props = {
+  userName: string;
+};
+
+export default function OtpBox({ userName }: Props) {
+  const { verifyOtp } = useAuth();
+  const [error, setError] = useState(false);
+
+  const onSubmit = async (value: any) => {
+    console.log(value);
+
+    const data = await verifyOtp({ ...value, username: userName });
+    console.log(data);
+
+    if (data.success) {
+      //Close OTP Popup
+    } else {
+      setError(data.success);
+    }
+  };
+
+  const form = useForm({
+    initialValues: { otp: 0 },
+
+    // functions will be used to validate values at corresponding key
+    validate: {
+      otp: (value) =>
+        isNaN(value) || value <= 0 || value.toString().length > 4
+          ? "You’ve entered wrong OTP, Please enter your OTP again!"
+          : null,
+    },
+  });
+
+  return (
+    <Box maw={551} mx="auto">
+      <form
+        onSubmit={form.onSubmit(onSubmit)}
+        className="w-[100%] h-[70vh] flex justify-center items-center flex-col "
+      >
+        {/* <div className="w-full max-w-[459px] md:max-w-[597px] flex justify-center items-center gap-[5%] mb-[5%] ">
+          <Link
+            href="/login"
+            className="whitespace-nowrap text-[26px] font-[500] text-[#666]"
+          >
+            Log In
+          </Link>
+
+          <Link
+            href="/register"
+            className="whitespace-nowrap text-[26px] text-[#148B16] font-bold border-solid border-b-2 border-green-600"
+          >
+            Individual Sign Up
+          </Link>
+        </div> */}
+        <h1 className="text-[#333] font-[600] text-[24px] text-center ">
+          Please enter your OTP to verify your account
+        </h1>
+        <p className="text-[#B5ABAC] font-[500] text-[20px] text-center mb-[3%]  ">
+          A One Time- Password has been sent to 8305575XXX
+        </p>
+        <PinInput
+          size="md"
+          {...form.getInputProps("otp")}
+          className=""
+          inputMode="numeric"
+          //error
+        />
+
+        <p className="text-[#666] font-[500] text-[16px] text-right w-[100%] !max-w-[423px] !mb-[6%] ">
+          Resend OTP
+        </p>
+
+        {error && (
+          <p className="text-[#F00] font-[500] text-[16px] w-[100%] !max-w-[423px] !mb-[6%] text-center ">
+            You’ve entered wrong OTP, Please enter your OTP again!
+          </p>
+        )}
+
+        <Button
+          type="submit"
+          mt="sm"
+          className="!rounded-[6px] !w-[100%] !max-w-[423px] "
+        >
+          VALIDATE
+        </Button>
+      </form>
+    </Box>
+  );
 }

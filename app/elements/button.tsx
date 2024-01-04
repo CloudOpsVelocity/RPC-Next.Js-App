@@ -1,5 +1,5 @@
 type props = {
-  title: string;
+  title: any;
   icon?: any;
   buttonConClass?: string;
   buttonClass?: string;

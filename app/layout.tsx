@@ -42,7 +42,7 @@ export default function RootLayout({
             </SessionProvider>
           </MantineProvider>
         </main>
-        {/* <Footer/> */}
+        {/* <Footer /> */}
       </body>
     </html>
   );
