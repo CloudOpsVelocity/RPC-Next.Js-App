@@ -22,6 +22,8 @@ import PriceBag, {
   TotalLandArea,
   WhatsAppButton,
 } from "../images/commonSvgs";
+import PropertyTypeDetailsCrad from "./propertyTypeDetailsCrad";
+import FloorplansBlock from "./floorplansBlock";
 
 type Props = {};
 
@@ -267,7 +269,7 @@ export default function ProjecctDetails({}: Props) {
           </p>
         </div>
 
-        {/* About */}
+        {/* Property Details */}
         <div className="w-[90%] mb-[5%]">
           <h1 className="text-[32px] font-[600] text-[#001F35]">
             Property Details
@@ -299,7 +301,7 @@ export default function ProjecctDetails({}: Props) {
             </div>
           </div>
 
-          <div className="flex justify-start items-start flex-wrap w-[80%] ">
+          <div className="flex justify-start items-start flex-wrap w-[80%]  ">
             <ProjBasicDetails
               key="launchDate"
               icon={<StartDate />}
@@ -336,7 +338,22 @@ export default function ProjecctDetails({}: Props) {
               className="mr-[5%]  p-[2%] shadow-md rounded-[10px] border-solid border-1 border-[#92B2C8]  "
             />
           </div>
+
+          <div className="flex justify-start items-start gap-[4%] flex-wrap mt-[3%] ">
+            <PropertyTypeDetailsCrad />
+            <PropertyTypeDetailsCrad />
+            <PropertyTypeDetailsCrad />
+            <PropertyTypeDetailsCrad />
+            <PropertyTypeDetailsCrad />
+          </div>
         </div>
+
+        {/* Floor Plan Block */}
+        <FloorplansBlock
+          phases={phases}
+          setCurrentPhase={setCurrentPhase}
+          currentPhase={currentPhase}
+        />
       </div>
 
       <Footer />
