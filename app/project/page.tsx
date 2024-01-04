@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Footer from "../components/layouts/primary/footer";
 import Header from "../components/layouts/primary/header";
-import { topics } from "../data/projectDetails";
+import { projectprops, topics } from "../data/projectDetails";
 import Button from "../elements/button";
 import Image from "next/image";
 import ProjBasicDetails from "./projBasicDetails";
@@ -17,6 +17,7 @@ import PriceBag, {
   ProjectStatus,
   PropertyAvailable,
   SecurityIcon,
+  ShearIcon,
   StartDate,
   State,
   TotalLandArea,
@@ -24,6 +25,7 @@ import PriceBag, {
 } from "../images/commonSvgs";
 import PropertyTypeDetailsCrad from "./propertyTypeDetailsCrad";
 import FloorplansBlock from "./floorplansBlock";
+import AboutBuilder from "./aboutBuilder";
 
 type Props = {};
 
@@ -38,7 +40,7 @@ export default function ProjecctDetails({}: Props) {
   const phases = [1, 2, 3, 4, 5];
 
   return (
-    <div className="w-full  ">
+    <div className="w-full">
       <Header />
       <div className="mt-[90px] w-full pb-[2%] flex items-center justify-center flex-col">
         <div className="p-[2%] w-full">
@@ -54,8 +56,21 @@ export default function ProjecctDetails({}: Props) {
 
           {/* Top Cover Image Card */}
           <div
-            className={` rounded-[10px] bg-gray-50 h-[680px] bg-cover flex justify-end items-center flex-col p-[2%] `}
+            className={` rounded-[10px] bg-gray-50 h-[680px] bg-cover flex justify-between items-start flex-col p-[2%] `}
           >
+            <div>
+              <p className="shadow-md rounded-[10px] bg-gradient-to-r p-[8px] from-[#EFF5FF] /0  to-[#F2FAFF]/100 text-[#000] text-[16px] font-[500]">
+                Current Project Status:{" "}
+                <span className="text-[#148B16] text-[16px] font-[700]">
+                  {" "}
+                  On-Going
+                </span>{" "}
+              </p>
+              <p className="shadow-md p-[8px] flex justify-center items-center rounded-[20px] bg-[#F3F7FF] text-[#0073C6] text-[14px] font-[600] mt-[13px] max-w-[140px] ">
+                <ShearIcon />
+                Share Project
+              </p>
+            </div>
             <div className="w-[100%] justify-between items-start border-solid border-white-500 rounded-[10px] bg-gradient-to-l from-[#EFEFEF] /50 to-[#c3c3c3bd]/50  shadow-md flex flex-row ">
               <div className=" w-[40%] ">
                 <p className=" rounded-tl-lg text-center text-[24px] font-[600] text-[#FFF] bg-gradient-to-r w-[122px] from-[#148B16] /50 to-[#00370100]/50">
@@ -131,8 +146,8 @@ export default function ProjecctDetails({}: Props) {
 
         {/* Details Contaioner */}
 
-        <div className="w-[90%] p-[2%] rounded-[24px] shadow-md mb-[5%] mt-[2%] ">
-          <div className=" flex justify-between items-center ">
+        <div className="pt-[2%] w-[90%] rounded-[24px] shadow-md mb-[5%] mt-[2%] bg-gradient-to-r from-[#F6F6F6] /0 via-[#FFF] /45 to-[#FEFFFF]/100 ">
+          <div className="pl-[2%] pr-[2%] flex justify-between items-center ">
             <div>
               <h2 className="text-[32px] text-[#148B16] font-[700]">
                 sarang by sumadhura
@@ -152,69 +167,67 @@ export default function ProjecctDetails({}: Props) {
             </div>
           </div>
 
-          <div className=" flex justify-between items-end w-full mb-[3%] mt-[3%]">
+          <div className="pl-[2%] pr-[2%] flex justify-between items-end w-full mb-[3%] mt-[3%]">
             <div className="flex justify-start items-start flex-wrap w-[80%] ">
               <ProjBasicDetails
-                key="startDate"
-                icon={<StartDate />}
-                title="Start Date"
-                value={""}
-                className="mr-[5%]  pt-[2%]"
-              />
-              <ProjBasicDetails
-                key="endDate"
-                icon={<EndDate />}
-                title="End Date"
-                value={""}
+                key="propertyAvailable"
+                icon={<PropertyAvailable />}
+                title="Property Available"
+                value={"Apartment, Rowhouse, Villa, Villament, Plot"}
                 className="mr-[5%]  pt-[2%]"
               />
               <ProjBasicDetails
                 key="projectStatus"
                 icon={<ProjectStatus />}
                 title="Project Status"
-                value={""}
+                value={"New Launch"}
                 className="mr-[5%]  pt-[2%]"
               />
+
               <ProjBasicDetails
                 key="totalLandArea"
                 icon={<TotalLandArea />}
                 title="Total Land Area"
-                value={""}
+                value={"81 Acers"}
                 className="mr-[5%]  pt-[2%]"
               />
+
               <ProjBasicDetails
-                key="state"
-                icon={<State />}
-                title="State"
-                value={""}
+                key="totalLandArea"
+                icon={<TotalLandArea />}
+                title="Elevation"
+                value={"G +3"}
                 className="mr-[5%]  pt-[2%]"
               />
+
               <ProjBasicDetails
-                key="city"
-                icon={<City />}
-                title="City"
-                value={""}
+                key="totalLandArea"
+                icon={<TotalLandArea />}
+                title="Total No: of Units"
+                value={"1500 Units"}
                 className="mr-[5%]  pt-[2%]"
               />
+
               <ProjBasicDetails
                 key="locality"
                 icon={<Locality />}
                 title="Locality"
-                value={""}
+                value={"Whitefield, Bengaluru"}
+                className="mr-[5%]  pt-[2%]"
+              />
+
+              <ProjBasicDetails
+                key="startDate"
+                icon={<StartDate />}
+                title="Start Date"
+                value={"12/ 03/ 2023"}
                 className="mr-[5%]  pt-[2%]"
               />
               <ProjBasicDetails
-                key="pincode"
-                icon={<Pincode />}
-                title="Pincode"
-                value={""}
-                className="mr-[5%]  pt-[2%]"
-              />
-              <ProjBasicDetails
-                key="propertyAvailable"
-                icon={<PropertyAvailable />}
-                title="Property Available"
-                value={""}
+                key="endDate"
+                icon={<EndDate />}
+                title="End Date"
+                value={"12/ 03/ 2023"}
                 className="mr-[5%]  pt-[2%]"
               />
             </div>
@@ -253,7 +266,10 @@ export default function ProjecctDetails({}: Props) {
 
         {/* About */}
         <div className="w-[90%] mb-[5%]">
-          <h1 className="text-[32px] font-[600] text-[#001F35]">About</h1>
+          <h1 className="text-[32px] font-[600] text-[#001F35]">
+            About{" "}
+            <span className="text-[#148B16] font-[700] uppercase">SARANG</span>{" "}
+          </h1>
           <p className="text-[24px] font-[500] text-[#233333]">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -272,7 +288,8 @@ export default function ProjecctDetails({}: Props) {
         {/* Property Details */}
         <div className="w-[90%] mb-[5%]">
           <h1 className="text-[32px] font-[600] text-[#001F35]">
-            Property Details
+            Property Details{" "}
+            <span className="text-[#148B16] font-[700] uppercase">SARANG</span>{" "}
           </h1>
 
           <p className="text-[24px] font-[500] text-[#4D6677]">
@@ -284,15 +301,15 @@ export default function ProjecctDetails({}: Props) {
             <p className="text-[24px] font-[500] text-[#333] mr-[20px] ">
               Select one of the phase to see project details
             </p>
-            <div className=" flex justify-start items-start ">
+            <div className=" flex justify-start items-start flex-wrap gap-[10px] ">
               {phases.map((each, index) => {
                 return (
                   <Button
                     title={`Phase ${each}`}
                     onChange={() => setCurrentPhase(`${each}`)}
-                    buttonClass={` text-[20px] bg-[#ECF7FF] p-[16px] mr-[40px] whitespace-nowrap text-[#000] rounded-[8px] ${
+                    buttonClass={` mb-[5px] text-[20px] bg-[#ECF7FF] p-[8px] xl:p-[16px]  whitespace-nowrap text-[#000] rounded-[8px] ${
                       currentPhase == `${each}`
-                        ? " font-[600] border-solid border-1 border-[#0073C6] "
+                        ? " font-[600] border-solid border-[1px] border-[#0073C6] "
                         : " font-[400]"
                     } `}
                   />
@@ -304,47 +321,47 @@ export default function ProjecctDetails({}: Props) {
           <div className="flex justify-start items-start flex-wrap w-[80%]  ">
             <ProjBasicDetails
               key="launchDate"
-              icon={<StartDate />}
+              icon={<EndDate />}
               title="Launch Date"
-              value={""}
-              className="mr-[5%]  p-[2%] shadow-md rounded-[10px] border-solid border-1 border-[#92B2C8]  "
+              value={"12/ 03/ 2023"}
+              className="mr-[3%] mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]  "
             />
             <ProjBasicDetails
               key="possessionDate"
-              icon={<EndDate />}
+              icon={<StartDate />}
               title="Possession Date"
-              value={""}
-              className="mr-[5%]  p-[2%] shadow-md rounded-[10px] border-solid border-1 border-[#92B2C8]  "
+              value={"12/ 03/ 2023"}
+              className="mr-[3%]  mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]  "
             />
             <ProjBasicDetails
               key="landArea"
               icon={<TotalLandArea />}
               title="Land Area"
-              value={""}
-              className="mr-[5%]  p-[2%] shadow-md rounded-[10px] border-solid border-1 border-[#92B2C8]  "
+              value={"81 Acers"}
+              className="mr-[3%]  mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]  "
             />
             <ProjBasicDetails
               key="reraStatus"
               icon={<SecurityIcon />}
               title="RERA STATUS"
-              value={""}
-              className="mr-[5%]  p-[2%] shadow-md rounded-[10px] border-solid border-1 border-[#92B2C8]  "
+              value={"New Launch"}
+              className="mr-[3%]  mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]  "
             />
             <ProjBasicDetails
               key="reraId"
               icon={<IdIcon />}
               title="RERA ID"
-              value={""}
-              className="mr-[5%]  p-[2%] shadow-md rounded-[10px] border-solid border-1 border-[#92B2C8]  "
+              value={"PRM/KA/RERA/1257/446/PR/180723/006075"}
+              className="mr-[3%] mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]  "
             />
           </div>
 
           <div className="flex justify-start items-start gap-[4%] flex-wrap mt-[3%] ">
-            <PropertyTypeDetailsCrad />
-            <PropertyTypeDetailsCrad />
-            <PropertyTypeDetailsCrad />
-            <PropertyTypeDetailsCrad />
-            <PropertyTypeDetailsCrad />
+            <PropertyTypeDetailsCrad cg={projectprops.apartment} />
+            <PropertyTypeDetailsCrad cg={projectprops.rowHouse} />
+            <PropertyTypeDetailsCrad cg={projectprops.villa} />
+            <PropertyTypeDetailsCrad cg={projectprops.villament} />
+            <PropertyTypeDetailsCrad cg={projectprops.plot} />
           </div>
         </div>
 
@@ -354,6 +371,9 @@ export default function ProjecctDetails({}: Props) {
           setCurrentPhase={setCurrentPhase}
           currentPhase={currentPhase}
         />
+
+        {/* About Builder */}
+        <AboutBuilder />
       </div>
 
       <Footer />

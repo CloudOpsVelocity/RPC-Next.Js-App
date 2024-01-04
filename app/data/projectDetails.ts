@@ -29,3 +29,45 @@ export const projectprops = {
   villament: 34,
   apartment: 35,
 };
+
+export const floorplanTypes = [
+  {
+    title: "By Type",
+    value: "type",
+  },
+  {
+    title: "By Unit",
+    value: "unit",
+  },
+  {
+    title: "By BHK",
+    value: "bhk",
+  },
+];
+
+export const bhkDetails = [
+  {
+    title: "All",
+    value: 0,
+  },
+  {
+    title: "1 BHK",
+    value: 41,
+  },
+  {
+    title: "2 BHK",
+    value: 42,
+  },
+  {
+    title: "3 BHK",
+    value: 43,
+  },
+  {
+    title: "4 BHK",
+    value: 44,
+  },
+  {
+    title: "5 BHK",
+    value: 45,
+  },
+];
