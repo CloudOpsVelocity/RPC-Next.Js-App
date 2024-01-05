@@ -88,7 +88,7 @@ export default function useAuth() {
         mobile: data.mobile,
       };
       const registrationResponse = await axios.post(
-        `${process.env.BACKEND_URL}/user/v1/registerUser`,
+        `/user/v1/registerUser`,
         userDetails
       );
       // Check the registration response and handle accordingly

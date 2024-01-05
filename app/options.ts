@@ -20,6 +20,7 @@ export const options: NextAuthOptions = {
       },
       // @ts-ignore
       async authorize(credentials) {
+        console.log(credentials);
         const res = await axios.post(
           `${process.env.BACKEND_URL}/user/v1/doLoginWithMobile`,
           {
