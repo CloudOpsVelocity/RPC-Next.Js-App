@@ -8,18 +8,15 @@ import Button from "../elements/button";
 import Image from "next/image";
 import ProjBasicDetails from "./projBasicDetails";
 import PriceBag, {
-  City,
   EndDate,
   IdIcon,
   Locality,
   Phone,
-  Pincode,
   ProjectStatus,
   PropertyAvailable,
   SecurityIcon,
   ShearIcon,
   StartDate,
-  State,
   TotalLandArea,
   WhatsAppButton,
 } from "../images/commonSvgs";
@@ -32,12 +29,11 @@ import Spec from "../components/project/spec";
 import Banner from "../components/project/banner";
 import Feature from "../components/project/feature";
 import Reviews from "../components/project/reviews";
-import DynamiCarousel from "../components/molecules/carousel";
-import HomeCarousel from "../components/molecules/carousel/carousel";
 import Amenties from "../components/project/amenties";
 import Loans from "../components/project/loans";
 import { FaqWithBg } from "../components/project/faq";
 import ProjectCarousel from "../components/project/ProjectCard";
+import Testimonials from "./testimonials";
 
 type Props = {};
 
