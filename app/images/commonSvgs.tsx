@@ -5248,6 +5248,7 @@ export const ByBhkSvg = ({ className }: { className?: string }) => {
 export const PopupOpenSvg = ({ className }: { className?: string }) => {
   return (
     <svg
+      className={className}
       xmlns="http://www.w3.org/2000/svg"
       width="33"
       height="33"
@@ -5269,6 +5270,7 @@ export const PopupOpenSvg = ({ className }: { className?: string }) => {
 export const SuperBuildupAreaIcon = ({ className }: { className?: string }) => {
   return (
     <svg
+      className={className}
       xmlns="http://www.w3.org/2000/svg"
       width="24"
       height="24"
@@ -5286,6 +5288,7 @@ export const SuperBuildupAreaIcon = ({ className }: { className?: string }) => {
 export const FacingIcon = ({ className }: { className?: string }) => {
   return (
     <svg
+      className={className}
       xmlns="http://www.w3.org/2000/svg"
       width="24"
       height="24"
@@ -5303,6 +5306,7 @@ export const FacingIcon = ({ className }: { className?: string }) => {
 export const FlooringIcon = ({ className }: { className?: string }) => {
   return (
     <svg
+      className={className}
       xmlns="http://www.w3.org/2000/svg"
       width="24"
       height="24"
@@ -5351,6 +5355,7 @@ export const FlooringIcon = ({ className }: { className?: string }) => {
 export const TowerTypeIcon = ({ className }: { className?: string }) => {
   return (
     <svg
+      className={className}
       xmlns="http://www.w3.org/2000/svg"
       width="24"
       height="24"
@@ -5368,6 +5373,7 @@ export const TowerTypeIcon = ({ className }: { className?: string }) => {
 export const CarParkingIcon = ({ className }: { className?: string }) => {
   return (
     <svg
+      className={className}
       xmlns="http://www.w3.org/2000/svg"
       width="24"
       height="24"
