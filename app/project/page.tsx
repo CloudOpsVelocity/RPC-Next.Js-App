@@ -26,6 +26,7 @@ import PriceBag, {
 import PropertyTypeDetailsCrad from "./propertyTypeDetailsCrad";
 import FloorplansBlock from "./floorplansBlock";
 import AboutBuilder from "./aboutBuilder";
+import GalleryBlock from "./galleryBlock";
 
 type Props = {};
 
@@ -371,6 +372,8 @@ export default function ProjecctDetails({}: Props) {
           setCurrentPhase={setCurrentPhase}
           currentPhase={currentPhase}
         />
+
+        <GalleryBlock />
 
         {/* About Builder */}
         <AboutBuilder />
