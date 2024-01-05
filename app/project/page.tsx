@@ -1,20 +1,6 @@
-"use client";
-
 import React, { useState } from "react";
 import Footer from "../components/layouts/primary/footer";
 import Header from "../components/layouts/primary/header";
-import { projectprops, topics } from "../data/projectDetails";
-import Button from "../elements/button";
-import Image from "next/image";
-import ProjBasicDetails from "./projBasicDetails";
-import {
-  EndDate,
-  IdIcon,
-  SecurityIcon,
-  StartDate,
-  TotalLandArea,
-} from "../images/commonSvgs";
-import PropertyTypeDetailsCrad from "./propertyTypeDetailsCrad";
 import FloorplansBlock from "./floorplansBlock";
 import AboutBuilder from "./aboutBuilder";
 import GalleryBlock from "./galleryBlock";
@@ -32,19 +18,11 @@ import Overview from "../components/project/overview";
 import Testimonials from "./testimonials";
 import ReadMore from "../components/atoms/readmore";
 import About from "../components/project/about";
+import Navigation from "../components/project/navigation";
 
 type Props = {};
 
 export default function ProjecctDetails({}: Props) {
-  const [currentBlock, setCurrentBlock] = useState("Overview");
-  const [currentPhase, setCurrentPhase] = useState("");
-
-  const scrollTopics = (side: string) => {
-    console.log(side);
-  };
-
-  const phases = [1, 2, 3, 4, 5];
-
   return (
     <div className="w-full">
       <Header />
@@ -63,45 +41,10 @@ export default function ProjecctDetails({}: Props) {
           {/* Top Cover Image Card */}
           <FirstBlock />
         </div>
-
         {/* Navigations Container */}
-        <div className=" flex justify-center items-center w-full ">
-          <Image
-            src="/auth/arrow.svg"
-            alt=""
-            className=" rotate-180 "
-            width={41}
-            height={64}
-            onClick={() => scrollTopics("L")}
-          />
-          <div className="h-[64px] pl-[24px] pr-[24px] w-[100%] bg-[#FCFCFC] shadow-sm flex justify-start items-center overflow-hidden ">
-            {topics.map((each, index) => {
-              return (
-                <Button
-                  title={each}
-                  onChange={() => setCurrentBlock(each)}
-                  buttonClass={` text-[24px]  mr-[40px] whitespace-nowrap ${
-                    currentBlock == each
-                      ? "text-[#0073C6] font-[700] decoration-solid underline "
-                      : "text-[#4D6677] font-[500]"
-                  } `}
-                />
-              );
-            })}
-          </div>
-          <Image
-            src="/auth/arrow.svg"
-            alt=""
-            className=" "
-            width={41}
-            height={64}
-            onClick={() => scrollTopics("R")}
-          />
-        </div>
-
+        <Navigation />
         {/* Overview */}
         <Overview />
-
         {/* About */}
         <About
           heading="about"
@@ -119,96 +62,10 @@ export default function ProjecctDetails({}: Props) {
       repllllllllll rehenderit in voluptate velit esse cillum dolore eu
       fugiat nulla pariatur. Excepteur sint occaecat cupidatatttt n"
         />
-
         {/* Property Details */}
-        <div className="w-[90%] mb-[5%]">
-          <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35]">
-            Property Details{" "}
-            <span className="text-[#148B16] font-[700] uppercase">SARANG</span>{" "}
-          </h1>
-
-          <p className="text-[16px] lg:text-[24px] font-[500] text-[#4D6677]">
-            Know about your dream project and its details; Where comfort meets
-            Luxury, Where every details matters
-          </p>
-
-          <div className=" flex justify-start items-center mt-[2%] mb-[2%]">
-            <p className="text-[20px] lg:text-[24px] font-[500] text-[#333] mr-[20px] ">
-              Select one of the phase to see project details
-            </p>
-            <div className=" flex justify-start items-start flex-wrap gap-[10px] ">
-              {phases.map((each, index) => {
-                return (
-                  <Button
-                    title={`Phase ${each}`}
-                    onChange={() => setCurrentPhase(`${each}`)}
-                    buttonClass={` mb-[5px] text-[16px] lg:text-[24px] bg-[#ECF7FF] p-[8px] xl:p-[16px]  whitespace-nowrap text-[#000] rounded-[8px] ${
-                      currentPhase == `${each}`
-                        ? " font-[600] border-solid border-[1px] border-[#0073C6] "
-                        : " font-[400]"
-                    } `}
-                  />
-                );
-              })}
-            </div>
-          </div>
-
-          <div className="flex justify-start items-start flex-wrap w-[80%]  ">
-            <ProjBasicDetails
-              key="launchDate"
-              icon={<EndDate />}
-              title="Launch Date"
-              value={"12/ 03/ 2023"}
-              className="mr-[3%] mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]  "
-            />
-            <ProjBasicDetails
-              key="possessionDate"
-              icon={<StartDate />}
-              title="Possession Date"
-              value={"12/ 03/ 2023"}
-              className="mr-[3%]  mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]  "
-            />
-            <ProjBasicDetails
-              key="landArea"
-              icon={<TotalLandArea />}
-              title="Land Area"
-              value={"81 Acers"}
-              className="mr-[3%]  mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]  "
-            />
-            <ProjBasicDetails
-              key="reraStatus"
-              icon={<SecurityIcon />}
-              title="RERA STATUS"
-              value={"New Launch"}
-              className="mr-[3%]  mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]  "
-            />
-            <ProjBasicDetails
-              key="reraId"
-              icon={<IdIcon />}
-              title="RERA ID"
-              value={"PRM/KA/RERA/1257/446/PR/180723/006075"}
-              className="mr-[3%] mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]  "
-            />
-          </div>
-
-          <div className="flex justify-start items-start gap-[4%] flex-wrap mt-[3%] ">
-            <PropertyTypeDetailsCrad cg={projectprops.apartment} />
-            <PropertyTypeDetailsCrad cg={projectprops.rowHouse} />
-            <PropertyTypeDetailsCrad cg={projectprops.villa} />
-            <PropertyTypeDetailsCrad cg={projectprops.villament} />
-            <PropertyTypeDetailsCrad cg={projectprops.plot} />
-          </div>
-        </div>
-
         {/* Floor Plan Block */}
-        <FloorplansBlock
-          phases={phases}
-          setCurrentPhase={setCurrentPhase}
-          currentPhase={currentPhase}
-        />
-
+        <FloorplansBlock />
         <GalleryBlock />
-
         {/* About Builder */}
         <AboutBuilder />
         <Nearby />

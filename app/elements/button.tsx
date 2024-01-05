@@ -1,9 +1,10 @@
+"use client";
 type props = {
   title: any;
   icon?: any;
   buttonConClass?: string;
   buttonClass?: string;
-  onChange: (e: any) => void;
+  onChange?: (e: any) => void;
 };
 
 const Button = ({
@@ -15,7 +16,7 @@ const Button = ({
 }: props) => {
   return (
     <div className={buttonConClass}>
-      <button className={buttonClass} onClick={(e) => onChange(e)}>
+      <button className={buttonClass} onClick={(e) => onChange && onChange(e)}>
         {icon}
         {title}
       </button>

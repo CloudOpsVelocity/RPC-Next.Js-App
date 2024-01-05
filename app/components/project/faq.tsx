@@ -1,3 +1,4 @@
+"use client";
 import { Title, Container, Accordion, ThemeIcon, rem } from "@mantine/core";
 import classes from "@/app/styles/FaqWithBg.module.css";
 

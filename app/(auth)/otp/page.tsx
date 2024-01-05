@@ -10,7 +10,7 @@ type Props = {
   userName: string;
 };
 
-export default function OtpBox({ userName }: Props) {
+export default function Page({ userName }: Props) {
   const { verifyOtp } = useAuth();
   const [error, setError] = useState(false);
 

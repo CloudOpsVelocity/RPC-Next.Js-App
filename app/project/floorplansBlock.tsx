@@ -1,3 +1,4 @@
+"use client";
 import {
   propertyDetailsTypes,
   projectprops,
@@ -20,22 +21,15 @@ import FloorplanDetailsCard from "./floorplanDetailsCard";
 import Byunitblock from "./byunitblock";
 import ByBhkBlock from "./byBhkBlock";
 
-type Props = {
-  phases: any[];
-  setCurrentPhase: any;
-  currentPhase: any;
-};
-
 const dummyProptypesList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 
-export default function FloorplansBlock({
-  phases,
-  setCurrentPhase,
-  currentPhase,
-}: Props) {
+export default function FloorplansBlock() {
   const [allKeys, setAllKeys] = useState([35, 33, 31, 34, 32]);
   const [propCgId, setPropCgId] = useState();
   const [floorPlanType, setFloorPlanType] = useState("type");
+  const [currentPhase, setCurrentPhase] = useState("");
+
+  const phases = [1, 2, 3, 4, 5];
 
   const getPropertyType = (data: any) => {
     setPropCgId(data.id);
@@ -46,17 +40,27 @@ export default function FloorplansBlock({
     " flex items-center justify-center w-[40px] h-[40px] bg-[#FAFDFF] rounded-[50%] ";
 
   const getIcon = (id: number) => {
-    if (id == projectprops.apartment) {
-      return <ApartmentIcon className={iconStyles} />;
-    } else if (id == projectprops.rowHouse) {
-      return <RowHouseIcon className={iconStyles} />;
-    } else if (id == projectprops.villa) {
-      return <VillaIcon className={iconStyles} />;
-    } else if (id == projectprops.villament) {
-      return <VillamentIcon className={iconStyles} />;
-    } else if (id == projectprops.plot) {
-      return <PlotIcon className={iconStyles} />;
+    let iconComponent;
+    switch (id) {
+      case projectprops.apartment:
+        iconComponent = <ApartmentIcon className={iconStyles} />;
+        break;
+      case projectprops.rowHouse:
+        iconComponent = <RowHouseIcon className={iconStyles} />;
+        break;
+      case projectprops.villa:
+        iconComponent = <VillaIcon className={iconStyles} />;
+        break;
+      case projectprops.villament:
+        iconComponent = <VillamentIcon className={iconStyles} />;
+        break;
+      case projectprops.plot:
+        iconComponent = <PlotIcon className={iconStyles} />;
+        break;
+      default:
+        break;
     }
+    return iconComponent;
   };
 
   return (
@@ -78,6 +82,7 @@ export default function FloorplansBlock({
           {phases.map((each, index) => {
             return (
               <Button
+                key={index}
                 title={`Phase ${each}`}
                 onChange={() => setCurrentPhase(`${each}`)}
                 buttonClass={` mb-[5px] text-[20px] bg-[#ECF7FF] p-[8px] xl:p-[16px]  whitespace-nowrap text-[#000] rounded-[8px]${
@@ -182,7 +187,7 @@ export default function FloorplansBlock({
         {floorPlanType == "type" && (
           <div className="w-[50%] h-[570px] border-solid overflow-auto ">
             {dummyProptypesList.map((eachItem, ind) => {
-              return <FloorplanDetailsCard propCgId={propCgId} />;
+              return <FloorplanDetailsCard key={ind} propCgId={propCgId} />;
             })}
           </div>
         )}

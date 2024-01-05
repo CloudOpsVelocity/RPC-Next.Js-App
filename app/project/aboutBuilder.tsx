@@ -43,13 +43,8 @@ export default function AboutBuilder({}: Props) {
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
           aliquip ex ea commodo consequat. Duis auteeeee irure dolor in
           repllllllllll rehen laborum"
-          className=" text-[#202020] text-[24px] font-[500] mt-[2%] "
           maxLines={4}
-        >
-          <span className=" text-[#0073C6] text-[24px] font-[600]">
-            Read More
-          </span>
-        </ReadMore>
+        />
 
         <p className=" text-[#212C33] text-[24px] font-[500] mt-[3%] italic ">
           Builder Address{" "}
@@ -60,7 +55,7 @@ export default function AboutBuilder({}: Props) {
         </p>
         <Button
           title="View Builder Details"
-          onChange={() => ""}
+          // onChange={() => ""}
           buttonClass=" bg-[#0073C6] rounded-[10px] text-[#FFF] text-[20px] font-[700] p-[10px] mt-[1%] "
         />
       </div>
