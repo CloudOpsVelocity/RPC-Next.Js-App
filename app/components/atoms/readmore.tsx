@@ -19,7 +19,7 @@ const ReadMore: React.FC<ReadMoreProps> = ({ text, maxLines = 4 }) => {
   };
 
   return (
-    <div className="w-[90%] mb-[5%]">
+    <div className="w-[90%] ">
       <p className="text-[24px] font-[500] text-[#233333]">
         {showMore ? text : getClampedText()}
         {!showMore && "... "}

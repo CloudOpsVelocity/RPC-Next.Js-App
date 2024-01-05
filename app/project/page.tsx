@@ -294,19 +294,6 @@ export default function ProjecctDetails({}: Props) {
             fugiat nulla pariatur. Excepteur sint occaecat cupidatatttt n"
             maxLines={10}
           />
-          {/* <p className="text-[24px] font-[500] text-[#233333]">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis auteeeee irure dolor in
-            repllllllllll rehenderit in voluptate velit esse cillum dolore eu
-            fugiat nulla pariatur. Excepteur sint occaecat cupidatatttt non
-            proident, sunt in culp a qui officia deserunt mollit anim id est
-            laborum...
-            <span className="text-[24px] font-[700] text-[#0073C6]">
-              Read More
-            </span>
-          </p> */}
         </div>
 
         {/* Property Details */}
