@@ -34,6 +34,7 @@ import Loans from "../components/project/loans";
 import { FaqWithBg } from "../components/project/faq";
 import ProjectCarousel from "../components/project/ProjectCard";
 import Testimonials from "./testimonials";
+import ReadMore from "../components/atoms/readmore";
 
 type Props = {};
 
@@ -278,7 +279,22 @@ export default function ProjecctDetails({}: Props) {
             About{" "}
             <span className="text-[#148B16] font-[700] uppercase">SARANG</span>{" "}
           </h1>
-          <p className="text-[24px] font-[500] text-[#233333]">
+          <ReadMore
+            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis auteeeee irure dolor in
+            repllllllllll rehenderit in voluptate velit esse cillum dolore eu
+            fugiat nulla pariatur. Excepteur sint occaecat cupidatatttt non
+            proident, sunt in culp a qui officia deserunt mollit anim id est
+            laborum por incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis auteeeee irure dolor in
+            repllllllllll rehenderit in voluptate velit esse cillum dolore eu
+            fugiat nulla pariatur. Excepteur sint occaecat cupidatatttt n"
+            maxLines={10}
+          />
+          {/* <p className="text-[24px] font-[500] text-[#233333]">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -290,7 +306,7 @@ export default function ProjecctDetails({}: Props) {
             <span className="text-[24px] font-[700] text-[#0073C6]">
               Read More
             </span>
-          </p>
+          </p> */}
         </div>
 
         {/* Property Details */}
