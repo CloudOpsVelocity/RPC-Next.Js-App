@@ -8,71 +8,79 @@ const placeholder =
 export function FaqWithBg() {
   return (
     <div className={classes.wrapper}>
-      <Container size="lg">
-        <h1 className="text-[32px] font-[600] text-[#001F35] mb-16 text-center">
-          Frequently Asked Questions of
-          <span className="text-[#148B16] font-[700] uppercase ml-5">
-            SARANG
-          </span>{" "}
-        </h1>
+      <h1 className="text-[32px] font-[600] text-[#001F35] mb-16 text-center">
+        Frequently Asked Questions of
+        <span className="text-[#148B16] font-[700] uppercase ml-5">
+          SARANG
+        </span>{" "}
+      </h1>
 
-        <Accordion
-          chevronPosition="right"
-          defaultValue="reset-password"
-          chevronSize={26}
-          variant="separated"
-          disableChevronRotation
-          styles={{
-            label: { color: "var(--mantine-color-black)" },
-            item: { border: 0 },
-          }}
-          chevron={
-            <ThemeIcon
-              radius="xl"
-              className={"!text-black !bg-transparent"}
-              size={26}
-            >
-              <FaPlus
-                style={{ width: rem(18), height: rem(18) }}
-                stroke={1.5}
-              />
-            </ThemeIcon>
-          }
-        >
-          <Accordion.Item className={classes.item} value="reset-password">
-            <Accordion.Control>How can I reset my password?</Accordion.Control>
-            <Accordion.Panel>{placeholder}</Accordion.Panel>
-          </Accordion.Item>
+      <Accordion
+        chevronPosition="right"
+        defaultValue="reset-password"
+        chevronSize={22}
+        variant="separated"
+        //disableChevronRotation
+        classNames={{ chevron: classes.chevron }}
+        styles={{
+          label: { color: "var(--mantine-color-black)" },
+          item: { border: 0 },
+        }}
+        chevron={
+          <ThemeIcon
+            radius="xl"
+            className={"!text-black !bg-transparent"}
+            size={26}
+          >
+            <FaPlus style={{ width: rem(18), height: rem(18) }} stroke={1.5} />
+          </ThemeIcon>
+        }
+      >
+        <Accordion.Item className={classes.item} value="reset-password">
+          <Accordion.Control className={classes.title}>
+            How can I reset my password?
+          </Accordion.Control>
+          <Accordion.Panel className={classes.content}>
+            {placeholder}
+          </Accordion.Panel>
+        </Accordion.Item>
 
-          <Accordion.Item className={classes.item} value="another-account">
-            <Accordion.Control>
-              Can I create more that one account?
-            </Accordion.Control>
-            <Accordion.Panel>{placeholder}</Accordion.Panel>
-          </Accordion.Item>
+        <Accordion.Item className={classes.item} value="another-account">
+          <Accordion.Control className={classes.title}>
+            Can I create more that one account?
+          </Accordion.Control>
+          <Accordion.Panel className={classes.content}>
+            {placeholder}
+          </Accordion.Panel>
+        </Accordion.Item>
 
-          <Accordion.Item className={classes.item} value="newsletter">
-            <Accordion.Control>
-              How can I subscribe to monthly newsletter?
-            </Accordion.Control>
-            <Accordion.Panel>{placeholder}</Accordion.Panel>
-          </Accordion.Item>
+        <Accordion.Item className={classes.item} value="newsletter">
+          <Accordion.Control className={classes.title}>
+            How can I subscribe to monthly newsletter?
+          </Accordion.Control>
+          <Accordion.Panel className={classes.content}>
+            {placeholder}
+          </Accordion.Panel>
+        </Accordion.Item>
 
-          <Accordion.Item className={classes.item} value="credit-card">
-            <Accordion.Control>
-              Do you store credit card information securely?
-            </Accordion.Control>
-            <Accordion.Panel>{placeholder}</Accordion.Panel>
-          </Accordion.Item>
+        <Accordion.Item className={classes.item} value="credit-card">
+          <Accordion.Control className={classes.title}>
+            Do you store credit card information securely?
+          </Accordion.Control>
+          <Accordion.Panel className={classes.content}>
+            {placeholder}
+          </Accordion.Panel>
+        </Accordion.Item>
 
-          <Accordion.Item className={classes.item} value="payment">
-            <Accordion.Control>
-              What payment systems to you work with?
-            </Accordion.Control>
-            <Accordion.Panel>{placeholder}</Accordion.Panel>
-          </Accordion.Item>
-        </Accordion>
-      </Container>
+        <Accordion.Item className={classes.item} value="payment">
+          <Accordion.Control className={classes.title}>
+            What payment systems to you work with?
+          </Accordion.Control>
+          <Accordion.Panel className={classes.content}>
+            {placeholder}
+          </Accordion.Panel>
+        </Accordion.Item>
+      </Accordion>
     </div>
   );
 }

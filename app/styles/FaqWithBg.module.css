@@ -9,13 +9,22 @@
   background-position: top left; */
   position: relative;
   color: var(--mantine-color-black);
+  width: 90% !important;
 }
 
 .title {
-  color: black;
+  /* color: black;
   font-size: 52px;
-  font-family: Greycliff CF, var(--mantine-font-family);
+  font-family: Greycliff CF, var(--mantine-font-family); */
   margin-bottom: calc(var(--mantine-spacing-xl) * 1.5);
+
+  color: #303a42;
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Montserrat;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 23.784px;
 }
 
 .item {
@@ -37,9 +46,16 @@
 }
 
 .content {
-  padding-left: var(--mantine-spacing-xl);
-  line-height: 1.6;
-  color: var(--mantine-color-black);
+  /* padding-left: var(--mantine-spacing-xl); */
+  /* line-height: 1.6;
+  color: var(--mantine-color-black); */
+  color: #303a42;
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Montserrat;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 34.983px;
 }
 
 .icon {
