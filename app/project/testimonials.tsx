@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Testimonials() {
   return (
-    <div className="bg-white p-8">
+    <div className="bg-white p-8 w-[90%]">
       <div className="flex flex-col lg:flex-row gap-8">
         <div className="flex-1">
           <h2 className="text-2xl font-bold text-gray-800">
@@ -11,7 +11,7 @@ export default function Testimonials() {
           <p className="text-sm text-gray-500 mt-2">
             Voice of Happy Homeowners: Testimonials
           </p>
-          <div className="mt-4 relative">
+          <div className="mt-4 relative w-full">
             <img
               src="youtube.png"
               alt="Testimonials video"

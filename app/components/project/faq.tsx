@@ -83,9 +83,9 @@ export function FaqWithBg() {
         </Accordion.Item>
       </Accordion>
       <>
-        <div className="max-w-[90%] mx-auto my-8   rounded-lg space-y-2">
-          <h2 className="font-semibold text-xl ">
-            <span> Ask your question related to </span>
+        <div className="max-w-[100%] mt-[2%] mx-auto my-8   rounded-lg space-y-2">
+          <h2 className="font-[700] text-[#233333] text-[20px]  ">
+            Ask your question related to
             <span className="!text-green-600">
               {" "}
               Sarang by Sumadhura Project!
@@ -94,18 +94,18 @@ export function FaqWithBg() {
 
           <div className=" gap-4">
             <div className="flex-1">
-              <label htmlFor="question" className="sr-only">
+              {/* <label htmlFor="question" className="sr-only">
                 Type your question here
-              </label>
+              </label> */}
               <textarea
                 id="question"
-                className="w-full p-2 border border-gray-300 rounded-md"
+                className="font-[500] text-[#4D6677] text-[20px] w-full p-2 border border-gray-300 rounded-md focus:outline-none h-[160px] mb-[1%] "
                 placeholder="Type your question here"
                 defaultValue={""}
                 rows={3}
               />
             </div>
-            <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 bg-[#0073C6] text-white">
+            <button className="inline-flex items-center justify-center rounded-md text-[20px] font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 bg-[#0073C6] text-white">
               Send
             </button>
           </div>
