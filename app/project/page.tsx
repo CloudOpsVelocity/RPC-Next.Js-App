@@ -32,6 +32,9 @@ import Spec from "../components/project/spec";
 import Banner from "../components/project/banner";
 import Feature from "../components/project/feature";
 import Reviews from "../components/project/reviews";
+import DynamiCarousel from "../components/molecules/carousel";
+import HomeCarousel from "../components/molecules/carousel/carousel";
+import Amenties from "../components/project/amenties";
 
 type Props = {};
 
@@ -387,7 +390,10 @@ export default function ProjecctDetails({}: Props) {
         <Banner />
         <Feature />
         {/* <Why /> */}
+        <Amenties />
         <Reviews />
+        <HomeCarousel />
+        <HomeCarousel />
       </div>
 
       <Footer />
