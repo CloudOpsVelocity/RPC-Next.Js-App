@@ -8,7 +8,8 @@ const placeholder =
 export function FaqWithBg() {
   return (
     <div className={classes.wrapper}>
-      <h1 className="text-[32px] font-[600] text-[#001F35] mb-16 text-center">
+      <h1 className="text-[32px] flex justify-center items-center font-[600] text-[#001F35] mb-16 text-center">
+        <div className="relative mr-[-70px] w-[168px] h-[74px] rounded-[50%] blur-[29.5px] bg-[#0093ff4d] "></div>
         Frequently Asked Questions of
         <span className="text-[#148B16] font-[700] uppercase ml-5">
           SARANG
