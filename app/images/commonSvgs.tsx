@@ -4984,9 +4984,10 @@ export const IdIcon = () => {
   );
 };
 
-export const TowerIcon = () => {
+export const TowerIcon = ({ className }: { className?: string }) => {
   return (
     <svg
+      className={className}
       xmlns="http://www.w3.org/2000/svg"
       width="24"
       height="24"
@@ -5264,7 +5265,7 @@ export const PopupOpenSvg = ({ className }: { className?: string }) => {
   );
 };
 
-export const SuperBuildupAreaIcon = () => {
+export const SuperBuildupAreaIcon = ({ className }: { className?: string }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -5281,7 +5282,7 @@ export const SuperBuildupAreaIcon = () => {
   );
 };
 
-export const FacingIcon = () => {
+export const FacingIcon = ({ className }: { className?: string }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -5298,7 +5299,7 @@ export const FacingIcon = () => {
   );
 };
 
-export const FlooringIcon = () => {
+export const FlooringIcon = ({ className }: { className?: string }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -5346,7 +5347,7 @@ export const FlooringIcon = () => {
   );
 };
 
-export const TowerTypeIcon = () => {
+export const TowerTypeIcon = ({ className }: { className?: string }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -5363,7 +5364,7 @@ export const TowerTypeIcon = () => {
   );
 };
 
-export const CarParkingIcon = () => {
+export const CarParkingIcon = ({ className }: { className?: string }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -5380,9 +5381,10 @@ export const CarParkingIcon = () => {
   );
 };
 
-export const LenseIcon = () => {
+export const LenseIcon = ({ className }: { className?: string }) => {
   return (
     <svg
+      className={className}
       xmlns="http://www.w3.org/2000/svg"
       width="24"
       height="24"
@@ -5400,9 +5402,10 @@ export const LenseIcon = () => {
   );
 };
 
-export const ShearIcon = () => {
+export const ShearIcon = ({ className }: { className?: string }) => {
   return (
     <svg
+      className={className}
       xmlns="http://www.w3.org/2000/svg"
       width="16"
       height="17"
@@ -5417,9 +5420,10 @@ export const ShearIcon = () => {
   );
 };
 
-export const FloorsIcon = () => {
+export const FloorsIcon = ({ className }: { className?: string }) => {
   return (
     <svg
+      className={className}
       xmlns="http://www.w3.org/2000/svg"
       width="24"
       height="24"
@@ -5443,9 +5447,10 @@ export const FloorsIcon = () => {
   );
 };
 
-export const QuotesIcon = () => {
+export const QuotesIcon = ({ className }: { className?: string }) => {
   return (
     <svg
+      className={className}
       xmlns="http://www.w3.org/2000/svg"
       width="21"
       height="18"

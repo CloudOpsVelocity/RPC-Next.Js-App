@@ -20,11 +20,11 @@ const ReadMore: React.FC<ReadMoreProps> = ({ text, maxLines = 4 }) => {
 
   return (
     <div className="w-[90%] ">
-      <p className="text-[24px] font-[500] text-[#233333]">
+      <p className="text-[20px] lg:text-[24px]  font-[500] text-[#233333]">
         {showMore ? text : getClampedText()}
         {!showMore && "... "}
         <span
-          className="text-[24px] font-[700] text-[#0073C6]"
+          className="text-[20px] lg:text-[24px] font-[700] text-[#0073C6]"
           onClick={toggleReadMore}
         >
           {showMore ? "Read Less" : "Read More"}

@@ -36,6 +36,7 @@ import FirstBlock from "../components/project/firstBlock";
 import Overview from "../components/project/overview";
 import Testimonials from "./testimonials";
 import ReadMore from "../components/atoms/readmore";
+import About from "../components/project/about";
 
 type Props = {};
 
@@ -107,42 +108,37 @@ export default function ProjecctDetails({}: Props) {
         <Overview />
 
         {/* About */}
-        <div className="w-[90%] mb-[5%]">
-          <h1 className="text-[32px] font-[600] text-[#001F35]">
-            About{" "}
-            <span className="text-[#148B16] font-[700] uppercase">SARANG</span>{" "}
-          </h1>
-          <ReadMore
-            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis auteeeee irure dolor in
-            repllllllllll rehenderit in voluptate velit esse cillum dolore eu
-            fugiat nulla pariatur. Excepteur sint occaecat cupidatatttt non
-            proident, sunt in culp a qui officia deserunt mollit anim id est
-            laborum por incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis auteeeee irure dolor in
-            repllllllllll rehenderit in voluptate velit esse cillum dolore eu
-            fugiat nulla pariatur. Excepteur sint occaecat cupidatatttt n"
-            maxLines={10}
-          />
-        </div>
+        <About
+          heading="about"
+          projName="sarang"
+          content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+      eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+      ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+      aliquip ex ea commodo consequat. Duis auteeeee irure dolor in
+      repllllllllll rehenderit in voluptate velit esse cillum dolore eu
+      fugiat nulla pariatur. Excepteur sint occaecat cupidatatttt non
+      proident, sunt in culp a qui officia deserunt mollit anim id est
+      laborum por incididunt ut labore et dolore magna aliqua. Ut enim
+      ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+      aliquip ex ea commodo consequat. Duis auteeeee irure dolor in
+      repllllllllll rehenderit in voluptate velit esse cillum dolore eu
+      fugiat nulla pariatur. Excepteur sint occaecat cupidatatttt n"
+        />
 
         {/* Property Details */}
         <div className="w-[90%] mb-[5%]">
-          <h1 className="text-[32px] font-[600] text-[#001F35]">
+          <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35]">
             Property Details{" "}
             <span className="text-[#148B16] font-[700] uppercase">SARANG</span>{" "}
           </h1>
 
-          <p className="text-[24px] font-[500] text-[#4D6677]">
+          <p className="text-[16px] lg:text-[24px] font-[500] text-[#4D6677]">
             Know about your dream project and its details; Where comfort meets
             Luxury, Where every details matters
           </p>
 
           <div className=" flex justify-start items-center mt-[2%] mb-[2%]">
-            <p className="text-[24px] font-[500] text-[#333] mr-[20px] ">
+            <p className="text-[20px] lg:text-[24px] font-[500] text-[#333] mr-[20px] ">
               Select one of the phase to see project details
             </p>
             <div className=" flex justify-start items-start flex-wrap gap-[10px] ">
@@ -151,7 +147,7 @@ export default function ProjecctDetails({}: Props) {
                   <Button
                     title={`Phase ${each}`}
                     onChange={() => setCurrentPhase(`${each}`)}
-                    buttonClass={` mb-[5px] text-[20px] bg-[#ECF7FF] p-[8px] xl:p-[16px]  whitespace-nowrap text-[#000] rounded-[8px] ${
+                    buttonClass={` mb-[5px] text-[16px] lg:text-[24px] bg-[#ECF7FF] p-[8px] xl:p-[16px]  whitespace-nowrap text-[#000] rounded-[8px] ${
                       currentPhase == `${each}`
                         ? " font-[600] border-solid border-[1px] border-[#0073C6] "
                         : " font-[400]"
@@ -227,6 +223,23 @@ export default function ProjecctDetails({}: Props) {
         <Loans />
         {/* <Why /> */}
         <Amenties />
+        {/* Why Buy This */}
+        <About
+          heading="Why Buy"
+          projName="SARANG BY SUMADHURA ?"
+          content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+      eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+      ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+      aliquip ex ea commodo consequat. Duis auteeeee irure dolor in
+      repllllllllll rehenderit in voluptate velit esse cillum dolore eu
+      fugiat nulla pariatur. Excepteur sint occaecat cupidatatttt non
+      proident, sunt in culp a qui officia deserunt mollit anim id est
+      laborum por incididunt ut labore et dolore magna aliqua. Ut enim
+      ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+      aliquip ex ea commodo consequat. Duis auteeeee irure dolor in
+      repllllllllll rehenderit in voluptate velit esse cillum dolore eu
+      fugiat nulla pariatur. Excepteur sint occaecat cupidatatttt n"
+        />
         <Testimonials />
         <Reviews />
         <FaqWithBg />
