@@ -1,3 +1,4 @@
+import ReadMore from "../components/atoms/readmore";
 import Button from "../elements/button";
 import React from "react";
 
@@ -28,7 +29,7 @@ export default function AboutBuilder({}: Props) {
             </p>
           </div>
 
-          <div className="w-[30%]">
+          <div className="w-[30%] ">
             <p className=" text-[#202020] text-[24px] font-[600]">35</p>
             <p className=" text-[#E3AC00] text-[20px] font-[700]">
               New Launch Projects
@@ -36,16 +37,19 @@ export default function AboutBuilder({}: Props) {
           </div>
         </div>
 
-        <p className=" text-[#202020] text-[24px] font-[500] mt-[2%] ">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+        <ReadMore
+          text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
           aliquip ex ea commodo consequat. Duis auteeeee irure dolor in
-          repllllllllll rehen laborum...
+          repllllllllll rehen laborum"
+          className=" text-[#202020] text-[24px] font-[500] mt-[2%] "
+          maxLines={4}
+        >
           <span className=" text-[#0073C6] text-[24px] font-[600]">
             Read More
           </span>
-        </p>
+        </ReadMore>
 
         <p className=" text-[#212C33] text-[24px] font-[500] mt-[3%] italic ">
           Builder Address{" "}

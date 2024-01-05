@@ -82,6 +82,35 @@ export function FaqWithBg() {
           </Accordion.Panel>
         </Accordion.Item>
       </Accordion>
+      <>
+        <div className="max-w-[90%] mx-auto my-8   rounded-lg space-y-2">
+          <h2 className="font-semibold text-xl ">
+            <span> Ask your question related to </span>
+            <span className="!text-green-600">
+              {" "}
+              Sarang by Sumadhura Project!
+            </span>
+          </h2>
+
+          <div className=" gap-4">
+            <div className="flex-1">
+              <label htmlFor="question" className="sr-only">
+                Type your question here
+              </label>
+              <textarea
+                id="question"
+                className="w-full p-2 border border-gray-300 rounded-md"
+                placeholder="Type your question here"
+                defaultValue={""}
+                rows={3}
+              />
+            </div>
+            <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 bg-[#0073C6] text-white">
+              Send
+            </button>
+          </div>
+        </div>
+      </>
     </div>
   );
 }
