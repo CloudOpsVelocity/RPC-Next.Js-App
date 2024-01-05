@@ -3,8 +3,8 @@ import React from "react";
 export default function Banner() {
   return (
     <>
-      <div className="bg-[#f0f9ff] px-8 py-12">
-        <div className="max-w-[1920px] mx-auto flex justify-between items-center">
+      <div className="bg-[#f0f9ff] w-[90%] px-8 py-12">
+        <div className=" mx-auto flex justify-between items-center">
           <div>
             <h2 className="text-2xl font-bold text-[#003366] mb-2">
               PROJECT RATING FOR <span className="text-green-600">SARANG</span>

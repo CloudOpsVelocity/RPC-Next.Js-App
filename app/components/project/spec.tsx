@@ -1,3 +1,4 @@
+import { QuotesIcon } from "@/app/images/commonSvgs";
 import React from "react";
 import { MdOutlineDoorSliding } from "react-icons/md";
 
@@ -8,16 +9,18 @@ export default function Spec() {
   // v0 by Vercel.
   // https://v0.dev/t/k36UExGzW14
   */}
-      <div className="max-w-[1920px] px-5    mx-auto mb-10">
-        <div className="bg-white  rounded-lg shadow-md flex  overflow-hidden max-h-[300px] ">
+      <div className="w-[90%] mx-auto mb-[5%] max-h-[539px]">
+        <div className="bg-white  rounded-lg shadow-md flex  overflow-hidden max-h-[539px] ">
           <div className="flex-1 bg-gradient-to-tr from-blue-100 p-8">
             <h2 className="text-2xl font-semibold">
               SPECIFICATION OF
               <span className="!text-green-600"> SARANG</span>
             </h2>
-            <p className="text-lg text-gray-600 mt-2 mb-4">
+            <p className="text-lg text-gray-600 mt-2 mb-4 flex items-start">
+              <QuotesIcon />
               Vital Details: Size, Amenities,
               <br /> Features- Unveiling your dream project
+              <QuotesIcon />
             </p>
             <div className="flex flex-wrap gap-4">
               <a

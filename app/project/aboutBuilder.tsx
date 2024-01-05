@@ -5,7 +5,7 @@ type Props = {};
 
 export default function AboutBuilder({}: Props) {
   return (
-    <div className="w-[90%]">
+    <div className="w-[90%] mt-[5%]">
       <div className="w-full justify-between items-center ">
         <h1 className=" text-[#023993] text-[32px] font-[700]">
           About Builder
