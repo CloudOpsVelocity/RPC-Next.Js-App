@@ -21,9 +21,7 @@ export const options: NextAuthOptions = {
       // @ts-ignore
       async authorize(credentials) {
         const res = await axios.post(
-          process.env.NODE_ENV === "development"
-            ? "http://localhost:8081/user/v1/doLoginWithMobile"
-            : `${process.env.BACKEND_URL!!}/user/v1/doLoginWithMobile`,
+          `${process.env.BACKEND_URL}/user/v1/doLoginWithMobile`,
           {
             username: credentials?.username,
             password: credentials?.password,
