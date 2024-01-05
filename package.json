@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "set APP_ENV=production && next start",
     "lint": "next lint",
     "test": "jest --config=jest.config.js"
   },
@@ -35,6 +35,7 @@
     "yup": "^1.3.3"
   },
   "devDependencies": {
+    "@babel/preset-react": "^7.23.3",
     "@types/jest": "^29.5.11",
     "@types/node": "^20",
     "@types/react": "^18",
