@@ -9,7 +9,7 @@ export default function Nearby() {
   const [selected, setSelected] = useState("commute");
   return (
     <div className="w-[90%] mx-auto mt-[5%] mb-[5%] ">
-      <h2 className="text-3xl font-semibold">
+      <h2 className="text-[24px] lg:text-[32px] font-semibold">
         <span className="!text-green-600">SARANG BY SUMADHARA </span>
         <span className="">Near BY LOCATIONS</span>
       </h2>
