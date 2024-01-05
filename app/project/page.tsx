@@ -398,6 +398,7 @@ export default function ProjecctDetails({}: Props) {
         <FaqWithBg />
         <ProjectCarousel />
         <ProjectCarousel />
+        <Testimonials />
       </div>
 
       <Footer />
