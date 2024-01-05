@@ -13,12 +13,8 @@ const schema = yup.object().shape({
       "is-valid-username",
       "Invalid username. Must be a valid email or a 10-digit mobile number",
       (value) => {
-        // Check if the value is a valid email
         const isEmail = yup.string().email().isValidSync(value);
-
-        // Check if the value is a 10-digit mobile number
         const isMobileNumber = /^[0-9]{10}$/i.test(value);
-
         return isEmail || isMobileNumber;
       }
     ),
