@@ -227,6 +227,7 @@ export default function ProjecctDetails({}: Props) {
         <Loans />
         {/* <Why /> */}
         <Amenties />
+        <Testimonials />
         <Reviews />
         <FaqWithBg />
         <ProjectCarousel
