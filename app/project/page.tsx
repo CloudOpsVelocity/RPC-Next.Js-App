@@ -26,6 +26,11 @@ import PriceBag, {
 import PropertyTypeDetailsCrad from "./propertyTypeDetailsCrad";
 import FloorplansBlock from "./floorplansBlock";
 import AboutBuilder from "./aboutBuilder";
+import Nearby from "../components/project/nearby";
+import Spec from "../components/project/spec";
+import Banner from "../components/project/banner";
+import Feature from "../components/project/feature";
+import Reviews from "../components/project/reviews";
 
 type Props = {};
 
@@ -374,6 +379,12 @@ export default function ProjecctDetails({}: Props) {
 
         {/* About Builder */}
         <AboutBuilder />
+        <Nearby />
+        <Spec />
+        <Banner />
+        <Feature />
+        {/* <Why /> */}
+        <Reviews />
       </div>
 
       <Footer />
