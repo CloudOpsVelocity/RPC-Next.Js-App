@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest"
+    "test": "jest --config=jest.config.js"
   },
   "dependencies": {
     "@mantine/carousel": "^7.3.2",

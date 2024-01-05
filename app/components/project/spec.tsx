@@ -5,10 +5,6 @@ import { MdOutlineDoorSliding } from "react-icons/md";
 export default function Spec() {
   return (
     <>
-      {/*
-  // v0 by Vercel.
-  // https://v0.dev/t/k36UExGzW14
-  */}
       <div className="w-[90%] mx-auto mb-[5%] max-h-[539px]">
         <div className="bg-white  rounded-lg shadow-md flex  overflow-hidden max-h-[539px] ">
           <div className="flex-1 bg-gradient-to-tr from-blue-100 p-8">
