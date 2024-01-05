@@ -7,18 +7,17 @@ import { projectprops, topics } from "../data/projectDetails";
 import Button from "../elements/button";
 import Image from "next/image";
 import ProjBasicDetails from "./projBasicDetails";
-import PriceBag, {
+import {
   EndDate,
   IdIcon,
   Locality,
   Phone,
+  Pincode,
   ProjectStatus,
   PropertyAvailable,
   SecurityIcon,
-  ShearIcon,
   StartDate,
   TotalLandArea,
-  WhatsAppButton,
 } from "../images/commonSvgs";
 import PropertyTypeDetailsCrad from "./propertyTypeDetailsCrad";
 import FloorplansBlock from "./floorplansBlock";
@@ -33,6 +32,8 @@ import Amenties from "../components/project/amenties";
 import Loans from "../components/project/loans";
 import { FaqWithBg } from "../components/project/faq";
 import ProjectCarousel from "../components/project/ProjectCard";
+import FirstBlock from "../components/project/firstBlock";
+import Overview from "../components/project/overview";
 import Testimonials from "./testimonials";
 import ReadMore from "../components/atoms/readmore";
 
@@ -64,58 +65,7 @@ export default function ProjecctDetails({}: Props) {
           </p>
 
           {/* Top Cover Image Card */}
-          <div
-            className={` rounded-[10px] bg-gray-50 h-[680px] bg-cover flex justify-between items-start flex-col p-[2%] `}
-          >
-            <div>
-              <p className="shadow-md rounded-[10px] bg-gradient-to-r p-[8px] from-[#EFF5FF] /0  to-[#F2FAFF]/100 text-[#000] text-[16px] font-[500]">
-                Current Project Status:{" "}
-                <span className="text-[#148B16] text-[16px] font-[700]">
-                  {" "}
-                  On-Going
-                </span>{" "}
-              </p>
-              <p className="shadow-md p-[8px] flex justify-center items-center rounded-[20px] bg-[#F3F7FF] text-[#0073C6] text-[14px] font-[600] mt-[13px] max-w-[140px] ">
-                <ShearIcon />
-                Share Project
-              </p>
-            </div>
-            <div className="w-[100%] justify-between items-start border-solid border-white-500 rounded-[10px] bg-gradient-to-l from-[#EFEFEF] /50 to-[#c3c3c3bd]/50  shadow-md flex flex-row ">
-              <div className=" w-[40%] ">
-                <p className=" rounded-tl-lg text-center text-[24px] font-[600] text-[#FFF] bg-gradient-to-r w-[122px] from-[#148B16] /50 to-[#00370100]/50">
-                  RERA
-                </p>
-
-                <div className=" ml-[2%]">
-                  <h3 className="text-[32px] font-[700] text-[#00487C]">
-                    sarang by sumadhura
-                  </h3>
-                  <p className="text-[24px] font-[600] text-[#001F35]">
-                    Start - End Date:
-                    <span className="text-[24px] font-[600] text-[#737579]">
-                      {" "}
-                      12 March, 2023 - 14 June, 2024
-                    </span>
-                  </p>
-                  <p className="text-[16px] font-[600] text-[#4D6677]">
-                    Posted By: Builder
-                  </p>
-                </div>
-              </div>
-
-              <div className="w-[40%] flex justify-end items-end flex-col p-[2%] ">
-                <h2 className="text-[32px] font-[700] text-[#001F35]">
-                  ₹ 2.52 Cr - ₹ 4.52 Cr
-                </h2>
-                <p className="text-[24px] font-[600] text-[#00487C] ">
-                  ₹ 1900/ Price per sqft onwards
-                </p>
-                <p className="text-[20px] font-[600] text-[#2A4C70] bg-[#FFF] rounded-[10px] shadow-md p-[8px] ">
-                  20 Floors Plans
-                </p>
-              </div>
-            </div>
-          </div>
+          <FirstBlock />
         </div>
 
         {/* Navigations Container */}
@@ -153,125 +103,8 @@ export default function ProjecctDetails({}: Props) {
           />
         </div>
 
-        {/* Details Contaioner */}
-
-        <div className="pt-[2%] w-[90%] rounded-[24px] shadow-md mb-[5%] mt-[2%] bg-gradient-to-r from-[#F6F6F6] /0 via-[#FFF] /45 to-[#FEFFFF]/100 ">
-          <div className="pl-[2%] pr-[2%] flex justify-between items-center ">
-            <div>
-              <h2 className="text-[32px] text-[#148B16] font-[700]">
-                sarang by sumadhura
-              </h2>
-              <p className="text-[24px] text-[#505050] font-[500]">
-                Folium by Sumadhura, Borewell Rd, Whitefield, Palm Meadows,
-                Ramagondanahalli, Bengaluru, Karnataka 560066
-              </p>
-            </div>
-            <div className=" flex justify-center items-end flex-col ">
-              <p className="text-[24px] text-[#4D6677] font-[700] whitespace-nowrap">
-                4.0 Ratings
-              </p>
-              <p className="text-[24px] text-[#0073C6] font-[600] decoration-dashed underline whitespace-nowrap ">
-                Call now
-              </p>
-            </div>
-          </div>
-
-          <div className="pl-[2%] pr-[2%] flex justify-between items-end w-full mb-[3%] mt-[3%]">
-            <div className="flex justify-start items-start flex-wrap w-[80%] ">
-              <ProjBasicDetails
-                key="propertyAvailable"
-                icon={<PropertyAvailable />}
-                title="Property Available"
-                value={"Apartment, Rowhouse, Villa, Villament, Plot"}
-                className="mr-[5%]  pt-[2%]"
-              />
-              <ProjBasicDetails
-                key="projectStatus"
-                icon={<ProjectStatus />}
-                title="Project Status"
-                value={"New Launch"}
-                className="mr-[5%]  pt-[2%]"
-              />
-
-              <ProjBasicDetails
-                key="totalLandArea"
-                icon={<TotalLandArea />}
-                title="Total Land Area"
-                value={"81 Acers"}
-                className="mr-[5%]  pt-[2%]"
-              />
-
-              <ProjBasicDetails
-                key="totalLandArea"
-                icon={<TotalLandArea />}
-                title="Elevation"
-                value={"G +3"}
-                className="mr-[5%]  pt-[2%]"
-              />
-
-              <ProjBasicDetails
-                key="totalLandArea"
-                icon={<TotalLandArea />}
-                title="Total No: of Units"
-                value={"1500 Units"}
-                className="mr-[5%]  pt-[2%]"
-              />
-
-              <ProjBasicDetails
-                key="locality"
-                icon={<Locality />}
-                title="Locality"
-                value={"Whitefield, Bengaluru"}
-                className="mr-[5%]  pt-[2%]"
-              />
-
-              <ProjBasicDetails
-                key="startDate"
-                icon={<StartDate />}
-                title="Start Date"
-                value={"12/ 03/ 2023"}
-                className="mr-[5%]  pt-[2%]"
-              />
-              <ProjBasicDetails
-                key="endDate"
-                icon={<EndDate />}
-                title="End Date"
-                value={"12/ 03/ 2023"}
-                className="mr-[5%]  pt-[2%]"
-              />
-            </div>
-            <div className=" flex justify-end items-end flex-col ">
-              <p className="text-[24px] text-[#0073C6] font-[600] underline decoration-dashed ">
-                Add to Compare
-              </p>
-              <p className="text-[24px] text-[#0073C6] font-[600] underline decoration-dashed ">
-                Add to Shortlist
-              </p>
-            </div>
-          </div>
-          <div className="flex justify-start items-center w-full flex-row bg-gradient-to-r from-[#EFF5FF] /50 to-[#F2FAFF ]/50 ">
-            <PriceBag />
-
-            <div className="flex justify-between items-center w-[100%] flex-row ml-[3%]">
-              <div className=" ">
-                <p className="text-[#212C33] text-[32px] font-[600]">
-                  PRICE RANGE{" "}
-                  <span className="text-[#00487C] text-[40px] font-[700]">
-                    ₹ 2.52 Cr - ₹ 4.52 Cr
-                  </span>
-                </p>
-                <Button
-                  icon={<Phone />}
-                  title="Request a Callback"
-                  onChange={() => ""}
-                  buttonClass=" text-[#FFF] text-[16px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[6px]  "
-                />
-              </div>
-
-              <WhatsAppButton className="cursor-pointer" onClick={""} />
-            </div>
-          </div>
-        </div>
+        {/* Overview */}
+        <Overview />
 
         {/* About */}
         <div className="w-[90%] mb-[5%]">
@@ -396,9 +229,16 @@ export default function ProjecctDetails({}: Props) {
         <Amenties />
         <Reviews />
         <FaqWithBg />
-        <ProjectCarousel />
-        <ProjectCarousel />
-        <Testimonials />
+        <ProjectCarousel
+          type="proj"
+          heading="nEAR BY pROJECTS OF sarang by sumadhura"
+          content="See what other customers also viewed"
+        />
+        <ProjectCarousel
+          type="prop"
+          heading="Projects By Developers"
+          content="See what developers has posted"
+        />
       </div>
 
       <Footer />

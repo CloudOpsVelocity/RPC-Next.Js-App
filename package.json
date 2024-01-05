@@ -19,6 +19,7 @@
     "axios": "^1.6.2",
     "crypto-js": "^4.2.0",
     "dayjs": "^1.11.10",
+    "embla-carousel-autoplay": "^7.1.0",
     "embla-carousel-react": "7.1.0",
     "mantine-form-yup-resolver": "^2.0.0",
     "next": "14.0.4",
