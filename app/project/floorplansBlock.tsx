@@ -61,17 +61,17 @@ export default function FloorplansBlock({
 
   return (
     <div className="w-[90%] mb-[5%]">
-      <h1 className="text-[32px] font-[600] text-[#001F35]">
+      <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35]">
         FLOOR PLANS for sarang by sumadhura{" "}
         <span className="text-[#148B16] font-[700] uppercase">
           sarang by sumadhura
         </span>{" "}
       </h1>
-      <p className="text-[24px] font-[500] text-[#4D6677]">
+      <p className="text-[16px] lg:text-[24px] font-[500] text-[#4D6677]">
         see floor plans as per your selected property type
       </p>
       <div className=" flex justify-start items-center mt-[2%] mb-[2%]">
-        <p className="text-[24px] font-[500] text-[#333] mr-[20px] ">
+        <p className="text-[20px] lg:text-[24px] font-[500] text-[#333] mr-[20px] ">
           Select one of the phase to see project details
         </p>
         <div className=" flex justify-start items-start gap-[10px] ">
@@ -80,7 +80,7 @@ export default function FloorplansBlock({
               <Button
                 title={`Phase ${each}`}
                 onChange={() => setCurrentPhase(`${each}`)}
-                buttonClass={` mb-[5px] text-[20px] bg-[#ECF7FF] p-[8px] xl:p-[16px]  whitespace-nowrap text-[#000] rounded-[8px]${
+                buttonClass={` mb-[5px] text-[18px] lg:text-[20px] bg-[#ECF7FF] p-[8px] xl:p-[16px]  whitespace-nowrap text-[#000] rounded-[8px]${
                   currentPhase == `${each}`
                     ? " font-[600] border-solid border-[1px] border-[#0073C6] "
                     : " font-[400]"
@@ -90,7 +90,7 @@ export default function FloorplansBlock({
           })}
         </div>
       </div>
-      <div className=" flex justify-start items-start mt-[3%] ">
+      <div className=" flex justify-start items-start flex-wrap mt-[3%] ">
         {propertyDetailsTypes != undefined &&
           propertyDetailsTypes != null &&
           allKeys.map((keyName, ind) => {
@@ -103,7 +103,7 @@ export default function FloorplansBlock({
             return (
               <Button
                 key={keyName}
-                buttonClass={`flex justify-start  rounded-[20px] gap-[8px] pr-[8px] items-center ml-[24px] text-[18px] ${
+                buttonClass={`flex justify-start mb-[3%] rounded-[20px] gap-[8px] pr-[8px] items-center ml-[24px] text-[18px] ${
                   propCgId == `${keyName}`
                     ? "text-[#001F35] font-[500] shadow-md bg-[#D5EDFF]"
                     : "text-[#303A42] font-[400] bg-[#EEF7FE]"
@@ -145,9 +145,11 @@ export default function FloorplansBlock({
 
         <Button
           title="By Type"
-          icon={<ByTypeSvg />}
+          icon={
+            <ByTypeSvg className=" w-[24px] h-[24px] lg:w-[30px] lg:h-[30px] " />
+          }
           onChange={() => setFloorPlanType("type")}
-          buttonClass={`text-[24px] mr-[40px] whitespace-nowrap flex justify-center items-center gap-[6px] ${
+          buttonClass={`text-[20px] lg:text-[24px] mr-[40px] whitespace-nowrap flex justify-center items-center gap-[6px] ${
             floorPlanType == "type"
               ? "font-[600] text-[#001F35]"
               : "font-[400] text-[#4D6677]"
@@ -156,9 +158,11 @@ export default function FloorplansBlock({
 
         <Button
           title="By Unit"
-          icon={<ByUnitSvg />}
+          icon={
+            <ByUnitSvg className=" w-[24px] h-[24px] lg:w-[30px] lg:h-[30px] " />
+          }
           onChange={() => setFloorPlanType("unit")}
-          buttonClass={`text-[24px] mr-[40px] whitespace-nowrap flex justify-center items-center gap-[6px] ${
+          buttonClass={`text-[20px] lg:text-[24px] mr-[40px] whitespace-nowrap flex justify-center items-center gap-[6px] ${
             floorPlanType == "unit"
               ? "font-[600] text-[#001F35]"
               : "font-[400] text-[#4D6677]"
@@ -167,9 +171,11 @@ export default function FloorplansBlock({
         {propCgId != projectprops.plot && (
           <Button
             title="By BHK"
-            icon={<ByBhkSvg />}
+            icon={
+              <ByBhkSvg className=" w-[24px] h-[24px] lg:w-[30px] lg:h-[30px] " />
+            }
             onChange={() => setFloorPlanType("bhk")}
-            buttonClass={`text-[24px] mr-[40px] whitespace-nowrap flex justify-center items-center gap-[6px] ${
+            buttonClass={`text-[20px] lg:text-[24px] mr-[40px] whitespace-nowrap flex justify-center items-center gap-[6px] ${
               floorPlanType == "bhk"
                 ? "font-[600] text-[#001F35]"
                 : "font-[400] text-[#4D6677]"
@@ -178,9 +184,9 @@ export default function FloorplansBlock({
         )}
       </div>
 
-      <div className="h-[570px] w-full rounded-[14px] mt-[2%] border-solid border-[1px] border-[#92B2C8] bg-[#FFF] shadow-md flex justify-center items-center ">
+      <div className=" h-[456px] lg:h-[570px] w-full rounded-[14px] mt-[2%] border-solid border-[1px] border-[#92B2C8] bg-[#FFF] shadow-md flex justify-center items-center ">
         {floorPlanType == "type" && (
-          <div className="w-[50%] h-[570px] border-solid overflow-auto ">
+          <div className="w-[50%] h-[456px] lg:h-[570px] border-solid overflow-auto ">
             {dummyProptypesList.map((eachItem, ind) => {
               return <FloorplanDetailsCard propCgId={propCgId} />;
             })}
@@ -188,29 +194,29 @@ export default function FloorplansBlock({
         )}
 
         {floorPlanType == "unit" && (
-          <div className="w-[50%] h-[570px] border-solid overflow-auto ">
+          <div className="w-[50%]  h-[456px] lg:h-[570px] border-solid overflow-auto ">
             <Byunitblock propCgId={propCgId} />
           </div>
         )}
 
         {floorPlanType == "bhk" && propCgId != projectprops.plot && (
-          <div className="w-[50%] h-[570px] border-solid overflow-auto ">
+          <div className="w-[50%]  h-[456px] lg:h-[570px] border-solid overflow-auto ">
             <ByBhkBlock propCgId={propCgId} />
           </div>
         )}
 
         <div className="w-[50%] flex justify-end items-end flex-col p-[2%] ">
-          <p className="text-[16px] font-[500] text-[#005DA0] ">
+          <p className=" text-[14px] lg:text-[16px] font-[500] text-[#005DA0] ">
             Sarang by sumadhura/2bhk/tower 1/ 04/north/1124 sq.ft
           </p>
-          <div className="flex justify-center items-center h-[450px]">
+          <div className="flex justify-center items-center h-[300px] lg:h-[450px]">
             {/* dISPLAY FLOOR PLAN HERE */}
           </div>
           <div className="bg-[#F4FBFF] p-[10px] rounded-[29px] gap-[12px] flex justify-end items-center  ">
-            <p className="text-[14px] font-[600] text-[#0073C6] underline ">
+            <p className="text-[12px] lg:text-[14px] font-[600] text-[#0073C6] underline ">
               Click on image to open floor plan details
             </p>
-            <PopupOpenSvg />
+            <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] " />
           </div>
         </div>
       </div>

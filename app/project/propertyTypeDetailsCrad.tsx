@@ -35,19 +35,19 @@ export default function PropertyTypeDetailsCrad({ cg }: Props) {
         <div className="flex justify-end items-end mb-[3%] gap-[16px]">
           {cg == projectprops.apartment || cg == projectprops.villament ? (
             <p className="text-[14px] lg:text-[20px] text-[#2A4C70] font-[500] flex justify-start items-start  ">
-              <TowerIcon />
+              <TowerIcon className="w-[16px] h-[16px] lg:w-[24px] lg:h-[24px] " />
               <span className="mr-[6px] ml-[6px]"> 4 </span> Towers
             </p>
           ) : (
             ""
           )}
           <p className="text-[14px] lg:text-[20px] text-[#2A4C70] font-[500] flex justify-start items-start  ">
-            <FlooringIcon />
+            <FlooringIcon className=" w-[16px] h-[16px] lg:w-[24px] lg:h-[24px]  " />
             <span className="mr-[6px] ml-[6px]">20 </span> Units
           </p>
           {cg == projectprops.apartment || cg == projectprops.villament ? (
             <p className="text-[14px] lg:text-[20px] text-[#2A4C70] font-[500] flex justify-start items-start  ">
-              <FloorsIcon />
+              <FloorsIcon className=" w-[16px] h-[16px] lg:w-[24px] lg:h-[24px]  " />
               <span className="mr-[6px] ml-[6px]">G+2 </span> Elevation
             </p>
           ) : (
