@@ -10,11 +10,6 @@ import ProjBasicDetails from "./projBasicDetails";
 import {
   EndDate,
   IdIcon,
-  Locality,
-  Phone,
-  Pincode,
-  ProjectStatus,
-  PropertyAvailable,
   SecurityIcon,
   StartDate,
   TotalLandArea,

@@ -88,7 +88,7 @@ export default function useAuth() {
         mobile: data.mobile,
       };
       const registrationResponse = await axios.post(
-        "http://localhost:8081/user/v1/registerUser",
+        `/user/v1/registerUser`,
         userDetails
       );
       // Check the registration response and handle accordingly
@@ -119,7 +119,7 @@ export default function useAuth() {
       const formData = new FormData();
       formData.append("data", JSON.stringify(data));
       const response = await axios.post(
-        "http://localhost:8081/user/v1/registerUser-other",
+        `${process.env.BACKEND_URL}/user/v1/registerUser-other`,
         formData
       );
 
@@ -141,7 +141,7 @@ export default function useAuth() {
   const verifyOtp = async (data: Otp): Promise<any> => {
     try {
       const otpResponse = await axios.post(
-        "http://localhost:8081/user/v1/isMobileAndEmailOTPVerified",
+        `${process.env.BACKEND_URL}/user/v1/isMobileAndEmailOTPVerified`,
         data
       );
 
