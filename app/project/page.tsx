@@ -37,6 +37,7 @@ import HomeCarousel from "../components/molecules/carousel/carousel";
 import Amenties from "../components/project/amenties";
 import Loans from "../components/project/loans";
 import { FaqWithBg } from "../components/project/faq";
+import ProjectCarousel from "../components/project/ProjectCard";
 
 type Props = {};
 
@@ -396,8 +397,8 @@ export default function ProjecctDetails({}: Props) {
         <Amenties />
         <Reviews />
         <FaqWithBg />
-        <HomeCarousel />
-        <HomeCarousel />
+        <ProjectCarousel />
+        <ProjectCarousel />
       </div>
 
       <Footer />

@@ -20,7 +20,7 @@ export function FaqWithBg() {
         defaultValue="reset-password"
         chevronSize={22}
         variant="separated"
-        //disableChevronRotation
+        //// disableChevronRotation
         classNames={{ chevron: classes.chevron }}
         styles={{
           label: { color: "var(--mantine-color-black)" },
