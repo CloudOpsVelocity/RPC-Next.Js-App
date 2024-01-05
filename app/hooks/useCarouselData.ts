@@ -6,7 +6,7 @@ let cachedProjectCount: number; // Cache the projectCount from the first page
 export default function useCarouselData(page: number = 1) {
   const getCarouselData = async () => {
     const res = await axios.get(
-      `http://localhost:8081/project/new-launch-project?page=${page}`
+      `${process.env.BACKEND_URL}/project/new-launch-project?page=${page}`
     );
     return res.data;
   };
