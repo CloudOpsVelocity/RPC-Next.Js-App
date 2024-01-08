@@ -1,3 +1,4 @@
+"use client";
 import axios from "axios";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -61,11 +62,10 @@ export default function useAuth() {
 
   const loginWithCredentials = async (data: Login): Promise<any> => {
     const res = await signIn("credentials", { ...data, redirect: false });
+    console.log(res);
     if (res?.ok) {
       router.push("/");
     } else {
-      //alert(res?.error);
-
       toast.error(res?.error || "Something went wrong. Please try again.");
     }
   };
@@ -121,8 +121,6 @@ export default function useAuth() {
       );
 
       if (response?.data.status) {
-        // Registration success, you might want to automatically log in the user
-
         return { success: true, message: "Registration successful." };
       } else {
         return { success: false, message: "Registration failed." };

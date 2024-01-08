@@ -1,5 +1,3 @@
-"use client";
-
 import Login from "@/app/components/molecules/auth/login";
 import Button from "@/app/elements/button";
 import Link from "next/link";

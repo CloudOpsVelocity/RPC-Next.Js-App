@@ -1,3 +1,4 @@
+"use client";
 import { useForm, yupResolver } from "@mantine/form";
 import { TextInput, Button, Box, PasswordInput } from "@mantine/core";
 import useAuth from "@/app/hooks/useAuth";
@@ -25,8 +26,6 @@ function Login() {
   const [state, setState] = useState<"idle" | "pending" | "success">("idle");
   const form = useForm({
     initialValues: { username: "", password: "" },
-
-    // functions will be used to validate values at corresponding key
     validate: yupResolver(schema),
   });
   const { login } = useAuth();

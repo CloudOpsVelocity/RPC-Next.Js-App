@@ -20,7 +20,6 @@ export const options: NextAuthOptions = {
       },
       // @ts-ignore
       async authorize(credentials) {
-        console.log(credentials);
         const res = await axios.post(
           `${process.env.BACKEND_URL}/user/v1/doLoginWithMobile`,
           {
@@ -32,7 +31,6 @@ export const options: NextAuthOptions = {
           console.log(res.data);
           return {
             ...res.data,
-            isOtpVerified: "N",
           };
         } else {
           console.log(res.data);
