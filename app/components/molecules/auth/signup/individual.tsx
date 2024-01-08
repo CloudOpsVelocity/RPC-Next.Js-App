@@ -10,10 +10,10 @@ import {
 import useAuth from "@/app/hooks/useAuth";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import CountryInput from "@/app/countrySelect/page";
 import AuthPopup from "../authPopup";
 import { useDisclosure } from "@mantine/hooks";
 import { individualSchema } from "@/app/validations/auth";
+import CountryInput from "@/app/components/atoms/CountryInput";
 
 function Individual() {
   const router = useRouter();

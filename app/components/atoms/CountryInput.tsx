@@ -1,7 +1,7 @@
 "use client";
 
+import { isdDetailsList } from "@/app/data/isdDetails";
 import React from "react";
-import { isdDetailsList } from "../data/isdDetails";
 
 type props = {
   onSelect: any;

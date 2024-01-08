@@ -4,7 +4,7 @@ import { Modal } from "@mantine/core";
 // import Form from "./form";
 import Button from "../../../elements/button";
 import { useSession } from "next-auth/react";
-import OtpBox from "@/app/(auth)/otp/page";
+import OtpBox from "../../atoms/OtpBox";
 
 type props = {
   opened: any;
