@@ -4,7 +4,8 @@ import { CarouselSlide } from "@mantine/carousel";
 
 type Props = {
   type: string;
-  heading: string;
+  title: string;
+  projName?: string;
   content: string;
 };
 
@@ -12,7 +13,7 @@ export function ProjectCard() {
   return (
     <>
       <div className="border text-card-foreground min-w-[350px] bg-white rounded-lg shadow-md overflow-hidden">
-        <div className="flex  space-y-1.5 p-6 bg-[#f5f5f5] px-4 py-2 justify-between items-center">
+        <div className="flex space-y-1.5 p-6 bg-[#f5f5f5] px-4 py-2 justify-between items-center">
           <h3 className="tracking-tight text-[18px] font-[600] text-[#565D70]">
             Sobha Dream Acres
           </h3>
@@ -58,12 +59,15 @@ export function ProjectCard() {
   );
 }
 
-const ProjectCarousel = ({ type, content, heading }: Props) => {
+const ProjectCarousel = ({ type, content, title, projName }: Props) => {
   return (
-    <div className="w-[90%] mx-auto mt-[5%] mb-[5%]">
-      <h2 className="text-3xl font-semibold uppercase">
+    <div className="w-[90%] mb-[5%]">
+      <h2 className="text-[24px] lg:text-[32px] font-semibold uppercase">
         {/* <span className="!text-green-600">SARANG BY SUMADHARA </span> */}
-        <span className="">{heading}</span>
+        {title}
+        <span className="text-[#148B16] font-[700] uppercase ml-4 ">
+          {projName}
+        </span>
       </h2>
       <p className="text-gray-500 mt-1 mb-2 text-lg italic ">{content}</p>
 

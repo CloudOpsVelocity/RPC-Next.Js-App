@@ -9,13 +9,16 @@ const placeholder =
 export function FaqWithBg() {
   return (
     <div className={classes.wrapper}>
-      <h1 className="text-[32px] flex justify-center items-center font-[600] text-[#001F35] mb-16 text-center">
-        <div className="relative mr-[-70px] w-[168px] h-[74px] rounded-[50%] blur-[29.5px] bg-[#0093ff4d] "></div>
-        Frequently Asked Questions of
-        <span className="text-[#148B16] font-[700] uppercase ml-5">
-          SARANG
-        </span>{" "}
-      </h1>
+      <div className="flex justify-center items-center w-full ">
+        <div className="relative mr-[-70px] bottom-[20px] w-[168px] h-[74px] rounded-[50%] blur-[29.5px] bg-[#0093ff4d] "></div>
+
+        <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35] mb-16">
+          Frequently Asked Questions of
+          <span className="text-[#148B16] font-[700] uppercase ml-4">
+            SARANG
+          </span>{" "}
+        </h1>
+      </div>
 
       <Accordion
         chevronPosition="right"

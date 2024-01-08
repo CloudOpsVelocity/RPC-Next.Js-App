@@ -3406,9 +3406,10 @@ export const PropertyAvailable = () => {
   );
 };
 
-export default function PriceBag() {
+export default function PriceBag({ className }: { className?: string }) {
   return (
     <svg
+      className={className}
       xmlns="http://www.w3.org/2000/svg"
       width="237"
       height="263"
@@ -5468,6 +5469,31 @@ export const QuotesIcon = ({ className }: { className?: string }) => {
         d="M8.34783 0L5.08696 13.0968L4.30435 9.35484C5.56522 9.35484 6.6087 9.74194 7.43478 10.5161C8.26087 11.2903 8.67391 12.3226 8.67391 13.6129C8.67391 14.9032 8.26087 15.957 7.43478 16.7742C6.6087 17.5914 5.58696 18 4.36957 18C3.1087 18 2.06522 17.5914 1.23913 16.7742C0.413043 15.914 0 14.8602 0 13.6129C0 13.1828 0.0217391 12.7742 0.0652173 12.3871C0.152174 12 0.282609 11.5484 0.456522 11.0323C0.630435 10.4731 0.869565 9.80645 1.17391 9.03226L4.23913 0H8.34783ZM20.6739 0L17.413 13.0968L16.6304 9.35484C17.8913 9.35484 18.9348 9.74194 19.7609 10.5161C20.587 11.2903 21 12.3226 21 13.6129C21 14.9032 20.587 15.957 19.7609 16.7742C18.9348 17.5914 17.913 18 16.6957 18C15.4348 18 14.3913 17.5914 13.5652 16.7742C12.7391 15.914 12.3261 14.8602 12.3261 13.6129C12.3261 13.1828 12.3478 12.7742 12.3913 12.3871C12.4783 12 12.6087 11.5484 12.7826 11.0323C12.9565 10.4731 13.1957 9.80645 13.5 9.03226L16.5652 0H20.6739Z"
         fill="#0073C6"
       />
+    </svg>
+  );
+};
+
+export const RatingStar = ({
+  className,
+  fill,
+}: {
+  className?: string;
+  fill?: string;
+}) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      fill={fill != undefined ? fill : "none"}
+      stroke={fill != undefined ? "" : "currentColor"}
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
     </svg>
   );
 };

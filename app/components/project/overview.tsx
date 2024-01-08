@@ -4,6 +4,7 @@ import PriceBag, {
   Phone,
   ProjectStatus,
   PropertyAvailable,
+  RatingStar,
   StartDate,
   TotalLandArea,
   WhatsAppButton,
@@ -28,8 +29,9 @@ export default function Overview({}: Props) {
           </p>
         </div>
         <div className=" flex justify-center items-end flex-col ">
-          <p className="text-[20px] lg:text-[24px] text-[#4D6677] font-[700] whitespace-nowrap">
+          <p className="text-[20px] flex justify-start items-start lg:text-[24px] text-[#4D6677] font-[700] whitespace-nowrap">
             4.0 Ratings
+            <RatingStar fill="#FFD600" className="h-[32px] w-[32px] " />
           </p>
           <p className="text-[20px] lg:text-[24px] text-[#0073C6] font-[600] decoration-dashed underline whitespace-nowrap ">
             Call now
@@ -37,21 +39,21 @@ export default function Overview({}: Props) {
         </div>
       </div>
 
-      <div className="pl-[2%] pr-[2%] flex justify-between items-end w-full mb-[3%] mt-[3%]">
-        <div className="flex justify-start items-start flex-wrap w-[80%] ">
+      <div className="pl-[2%] pr-[2%] flex justify-start md:justify-between items-start md:items-end w-full mb-[3%] mt-[3%] flex-col md:flex-row ">
+        <div className="flex justify-start items-start flex-wrap w-[100%] md:w-[80%] ">
           <ProjBasicDetails
             key="propertyAvailable"
             icon={<PropertyAvailable />}
             title="Property Available"
             value={"Apartment, Rowhouse, Villa, Villament, Plot"}
-            className="mr-[5%]  pt-[2%]"
+            className="mr-[5%]  pt-[2%] mb-[3%]  "
           />
           <ProjBasicDetails
             key="projectStatus"
             icon={<ProjectStatus />}
             title="Project Status"
             value={"New Launch"}
-            className="mr-[5%]  pt-[2%]"
+            className="mr-[5%]  pt-[2%] mb-[3%] "
           />
 
           <ProjBasicDetails
@@ -59,7 +61,7 @@ export default function Overview({}: Props) {
             icon={<TotalLandArea />}
             title="Total Land Area"
             value={"81 Acers"}
-            className="mr-[5%]  pt-[2%]"
+            className="mr-[5%]  pt-[2%] mb-[3%] "
           />
 
           <ProjBasicDetails
@@ -67,7 +69,7 @@ export default function Overview({}: Props) {
             icon={<TotalLandArea />}
             title="Elevation"
             value={"G +3"}
-            className="mr-[5%]  pt-[2%]"
+            className="mr-[5%]  pt-[2%] mb-[3%] "
           />
 
           <ProjBasicDetails
@@ -75,7 +77,7 @@ export default function Overview({}: Props) {
             icon={<TotalLandArea />}
             title="Total No: of Units"
             value={"1500 Units"}
-            className="mr-[5%]  pt-[2%]"
+            className="mr-[5%]  pt-[2%] mb-[3%] "
           />
 
           <ProjBasicDetails
@@ -83,7 +85,7 @@ export default function Overview({}: Props) {
             icon={<Locality />}
             title="Locality"
             value={"Whitefield, Bengaluru"}
-            className="mr-[5%]  pt-[2%]"
+            className="mr-[5%]  pt-[2%] mb-[3%] "
           />
 
           <ProjBasicDetails
@@ -91,33 +93,33 @@ export default function Overview({}: Props) {
             icon={<StartDate />}
             title="Start Date"
             value={"12/ 03/ 2023"}
-            className="mr-[5%]  pt-[2%]"
+            className="mr-[5%]  pt-[2%] mb-[3%] "
           />
           <ProjBasicDetails
             key="endDate"
             icon={<EndDate />}
             title="End Date"
             value={"12/ 03/ 2023"}
-            className="mr-[5%]  pt-[2%]"
+            className="mr-[5%]  pt-[2%] mb-[3%] "
           />
         </div>
-        <div className=" flex justify-end items-end flex-col ">
-          <p className="text-[20px] lg:text-[24px] text-[#0073C6] font-[600] underline decoration-dashed ">
+        <div className=" flex justify-start md:justify-end items-start md:items-end flex-col mt-[3%] md:mt-0 ">
+          <p className="text-[20px] lg:text-[24px] text-[#0073C6] font-[600] whitespace-nowrap underline decoration-dashed ">
             Add to Compare
           </p>
-          <p className="text-[20px] lg:text-[24px] text-[#0073C6] font-[600] underline decoration-dashed ">
+          <p className="text-[20px] lg:text-[24px] text-[#0073C6] font-[600] underline whitespace-nowrap decoration-dashed ">
             Add to Shortlist
           </p>
         </div>
       </div>
-      <div className="flex justify-start items-center w-full flex-row bg-gradient-to-r from-[#EFF5FF] /50 to-[#F2FAFF ]/50 ">
-        <PriceBag />
+      <div className="flex justify-start items-center w-full flex-col md:flex-row bg-gradient-to-r from-[#EFF5FF] /50 to-[#F2FAFF ]/50 ">
+        <PriceBag className="w-[150px] h-[170px] md:w-[237px] md:h-[263px] " />
 
-        <div className="flex justify-between items-center w-[100%] flex-row ml-[3%]">
-          <div className=" ">
+        <div className="flex justify-between items-center w-[100%] flex-row ml-[3%] p-[2%] flex-wrap">
+          <div className="">
             <p className="text-[#212C33] text-[24px] lg:text-[32px] font-[600]">
               PRICE RANGE{" "}
-              <span className="text-[#00487C] text-[32px] lg:text-[40px] whitespace-nowrap font-[700]">
+              <span className="text-[#00487C] text-[24px] md:text-[32px] lg:text-[40px] whitespace-nowrap font-[700]">
                 ₹ 2.52 Cr - ₹ 4.52 Cr
               </span>
             </p>

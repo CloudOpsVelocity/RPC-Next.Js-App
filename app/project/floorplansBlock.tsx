@@ -74,11 +74,11 @@ export default function FloorplansBlock() {
       <p className="text-[16px] lg:text-[24px] font-[500] text-[#4D6677]">
         see floor plans as per your selected property type
       </p>
-      <div className=" flex justify-start items-center mt-[2%] mb-[2%]">
-        <p className="text-[20px] lg:text-[24px] font-[500] text-[#333] mr-[20px] ">
+      <div className=" flex justify-start items-start md:items-center mt-[2%] mb-[2%] flex-col md:flex-row ">
+        <p className="text-[20px] lg:text-[24px] font-[500] mb-[3%] md:mb-0 text-[#333] mr-[20px] ">
           Select one of the phase to see project details
         </p>
-        <div className=" flex justify-start items-start gap-[10px] ">
+        <div className=" flex justify-start items-start gap-[10px] flex-wrap ">
           {phases.map((each, index) => {
             return (
               <Button
@@ -108,7 +108,7 @@ export default function FloorplansBlock() {
             return (
               <Button
                 key={keyName}
-                buttonClass={`flex justify-start mb-[3%] rounded-[20px] gap-[8px] pr-[8px] items-center ml-[24px] text-[18px] ${
+                buttonClass={`flex justify-start mb-[3%] rounded-[20px] gap-[8px] pr-[8px] items-center mr-[24px] md:ml-[24px] text-[18px] ${
                   propCgId == `${keyName}`
                     ? "text-[#001F35] font-[500] shadow-md bg-[#D5EDFF]"
                     : "text-[#303A42] font-[400] bg-[#EEF7FE]"
@@ -123,7 +123,7 @@ export default function FloorplansBlock() {
           })}
       </div>
 
-      <div className=" flex justify-start items-start mt-[3%] ">
+      <div className=" flex justify-start items-start mt-[3%] flex-wrap mb-[3%] md:mb-0 ">
         {/* {floorplanTypes.map((each, index) => {
           return (
             <Button

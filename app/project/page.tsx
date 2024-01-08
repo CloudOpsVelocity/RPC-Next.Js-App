@@ -97,12 +97,13 @@ export default function ProjecctDetails({}: Props) {
         <FaqWithBg />
         <ProjectCarousel
           type="proj"
-          heading="nEAR BY pROJECTS OF sarang by sumadhura"
+          title="nEAR BY pROJECTS OF"
+          projName="SARANG BY SUMADHURA"
           content="See what other customers also viewed"
         />
         <ProjectCarousel
           type="prop"
-          heading="Projects By Developers"
+          title="Projects By Developers"
           content="See what developers has posted"
         />
       </div>

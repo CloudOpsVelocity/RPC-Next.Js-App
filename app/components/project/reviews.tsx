@@ -5,48 +5,46 @@ import React from "react";
 
 export default function Reviews() {
   return (
-    <>
-      <div className="bg-gray-100 py-12">
-        <div className="max-w-[1920px] mx-auto px-6">
-          <h2 className="text-2xl font-semibold text-gray-800">
-            CUSTOMER REVIEWS FOR <span className="text-green-500">SARANG</span>
-          </h2>
-          <p className="text-lg text-gray-600 mt-2 italic">
-            Find helpful customer reviews and review ratings for Sarang By
-            Sumadhura
-          </p>
-          <div className="mt-8 relative">
-            <Carousel
-              slideGap={"md"}
-              align="start"
-              slideSize="33.333333%"
-              withIndicators
-              height={200}
-              slidesToScroll={1}
-            >
-              <Carousel.Slide>
-                <Review />
-              </Carousel.Slide>
-              <Carousel.Slide>
-                <Review />
-              </Carousel.Slide>
-              <Carousel.Slide>
-                <Review />
-              </Carousel.Slide>
-              <Carousel.Slide>
-                <Review />
-              </Carousel.Slide>
-              <Carousel.Slide>
-                <Review />
-              </Carousel.Slide>
-              <Carousel.Slide>
-                <Review />
-              </Carousel.Slide>
-            </Carousel>
-          </div>
+    <div className="bg-gray-100 py-12 w-full ">
+      <div className="max-w-[1920px] mx-auto px-6">
+        <h2 className="text-2xl font-semibold text-gray-800">
+          CUSTOMER REVIEWS FOR <span className="text-green-500">SARANG</span>
+        </h2>
+        <p className="text-lg text-gray-600 mt-2 italic">
+          Find helpful customer reviews and review ratings for Sarang By
+          Sumadhura
+        </p>
+        <div className="mt-8 relative">
+          <Carousel
+            slideGap={"md"}
+            align="start"
+            slideSize="33.333333%"
+            withIndicators
+            height={200}
+            slidesToScroll={1}
+          >
+            <Carousel.Slide>
+              <Review />
+            </Carousel.Slide>
+            <Carousel.Slide>
+              <Review />
+            </Carousel.Slide>
+            <Carousel.Slide>
+              <Review />
+            </Carousel.Slide>
+            <Carousel.Slide>
+              <Review />
+            </Carousel.Slide>
+            <Carousel.Slide>
+              <Review />
+            </Carousel.Slide>
+            <Carousel.Slide>
+              <Review />
+            </Carousel.Slide>
+          </Carousel>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

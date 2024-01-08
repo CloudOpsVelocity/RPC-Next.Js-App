@@ -18,7 +18,7 @@ export default function Nearby() {
         services
       </p>
 
-      <div className="flex gap-10 mb-5 mt-3">
+      <div className="flex gap-10 mb-5 mt-3 w-full flex-wrap ">
         {areas.map((area) => (
           <button
             onClick={() => {
