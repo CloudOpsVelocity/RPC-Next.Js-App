@@ -1,6 +1,8 @@
+import { Bank } from "@/app/validations/types/project";
+import Image from "next/image";
 import React from "react";
 
-export default function Loans() {
+export default function Loans({ data }: { data: Bank[] }) {
   return (
     <>
       <div className="bg-white py-8 w-[90%] mx-auto">
@@ -12,62 +14,17 @@ export default function Loans() {
             Lorem ipsum dolor sit amet, consectetur adipi
           </p>
           <div className="mt-6 flex justify-start items-start flex-wrap w-full gap-[3%]">
-            <img
-              src="bank.png"
-              alt="HDFC Home Loans"
-              width={100}
-              height={50}
-              style={{ aspectRatio: "100 / 50", objectFit: "cover" }}
-              className="mb-[3%]"
-            />
-            <img
-              src="bank.png"
-              alt="ICICI Bank Home Loans"
-              width={100}
-              height={50}
-              style={{ aspectRatio: "100 / 50", objectFit: "cover" }}
-              className="mb-[3%]"
-            />
-            <img
-              src="bank.png"
-              alt="IDFC FIRST Bank"
-              width={100}
-              height={50}
-              style={{ aspectRatio: "100 / 50", objectFit: "cover" }}
-              className="mb-[3%]"
-            />
-            <img
-              src="bank.png"
-              alt="SBI Home Loans"
-              width={100}
-              height={50}
-              style={{ aspectRatio: "100 / 50", objectFit: "cover" }}
-              className="mb-[3%]"
-            />
-            <img
-              src="bank.png"
-              alt="Bank of Baroda"
-              width={100}
-              height={50}
-              style={{ aspectRatio: "100 / 50", objectFit: "cover" }}
-              className="mb-[3%]"
-            />
-            <img
-              src="bank.png"
-              alt="AXIS BANK Home Loans"
-              width={100}
-              height={50}
-              style={{ aspectRatio: "100 / 50", objectFit: "cover" }}
-              className="mb-[3%]"
-            />
-            <img
-              src="bank.png"
-              alt="PNB Housing Finance Limited"
-              width={100}
-              height={50}
-              style={{ aspectRatio: "100 / 50", objectFit: "cover" }}
-              className="mb-[3%]"
-            />
+            {data.map((item, index) => (
+              <Image
+                key={index}
+                src={"/bank.png"}
+                alt={item.constDesc}
+                width={100}
+                height={50}
+                style={{ aspectRatio: "100 / 50", objectFit: "cover" }}
+                className="mb-[3%]"
+              />
+            ))}
           </div>
         </div>
       </div>

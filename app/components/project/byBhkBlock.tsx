@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { bhkDetails } from "../data/projectDetails";
-import Button from "../elements/button";
+import { bhkDetails } from "../../data/projectDetails";
+import Button from "../../elements/button";
 import FloorplanDetailsCard from "./floorplanDetailsCard";
 
 type Props = {

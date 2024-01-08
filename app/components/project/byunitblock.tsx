@@ -1,8 +1,8 @@
 import { Select } from "@mantine/core";
 import React, { useState } from "react";
-import Button from "../elements/button";
-import { LenseIcon } from "../images/commonSvgs";
-import { projectprops } from "../data/projectDetails";
+import Button from "../../elements/button";
+import { LenseIcon } from "../../images/commonSvgs";
+import { projectprops } from "../../data/projectDetails";
 
 type Props = {
   propCgId: any;

@@ -1,130 +1,68 @@
-import { QuotesIcon } from "@/app/images/commonSvgs";
-import React from "react";
+"use client";
+import { SpecificationList } from "@/app/validations/types/project";
+import React, { useState } from "react";
 import { MdOutlineDoorSliding } from "react-icons/md";
 
-export default function Spec() {
+export default function Spec({ data }: { data: SpecificationList[] }) {
+  const [specs, setSpecs] = useState<SpecificationList[]>(data);
+  const [selectedSpecIndex, setSelectedSpecIndex] = useState<number | null>(
+    null
+  );
+
+  const handleSpecClick = (index: number) => {
+    setSelectedSpecIndex(index);
+    const newData = [...specs];
+    newData.unshift(newData.splice(index, 1)[0]);
+    if (specs.length > 1 && specs.length < 4) {
+      newData.pop();
+    }
+    setSpecs(newData);
+  };
+
   return (
-    <div className="w-[90%] mx-auto mb-[5%] max-h-[539px]">
-      <div className="bg-white  rounded-lg shadow-md flex  overflow-hidden max-h-[539px] ">
+    <div className="w-[90%] mx-auto mb-[5%] max-h-[539px]" id="spec">
+      <div className="bg-white rounded-lg shadow-md flex overflow-hidden max-h-[539px]">
         <div className="flex-1 bg-gradient-to-tr from-blue-100 p-8">
           <h2 className="text-[24px] lg:text-[32px] font-semibold">
             SPECIFICATION OF
             <span className="!text-green-600"> SARANG</span>
           </h2>
-          <p className="text-[16px]  lg:text-[20px] text-gray-600 mt-2 mb-4 flex items-start justify-start ">
+          <p className="text-[16px] lg:text-[20px] text-gray-600 mt-2 mb-4 flex items-start justify-start">
             <span>
-              <QuotesIcon />
-            </span>
-            Vital Details: Size, Amenities, Features- Unveiling your dream
-            project
-            <span>
-              <QuotesIcon />
+              Vital Details: Size, Amenities, Features- Unveiling your dream
+              project
             </span>
           </p>
           <div className="flex flex-wrap gap-4">
-            <a
-              href="#structure"
-              className="border px-5 py-2 rounded-lg bg-white font-semibold flex gap-2 items-center"
-            >
-              <MdOutlineDoorSliding size={20} /> Structure
-            </a>
-
-            <a
-              href="#doors"
-              className="border px-5 py-2 rounded-lg bg-white font-semibold flex gap-2 items-center"
-            >
-              <MdOutlineDoorSliding size={20} /> Flooring
-            </a>
-
-            <a
-              href="#structure"
-              className="border px-5 py-2 rounded-lg bg-white font-semibold flex gap-2 items-center"
-            >
-              <MdOutlineDoorSliding size={20} /> Doors
-            </a>
-
-            <a
-              href="#structure"
-              className="border px-5 py-2 rounded-lg bg-white font-semibold flex gap-2 items-center"
-            >
-              <MdOutlineDoorSliding size={20} /> Power Backup
-            </a>
-            <a
-              href="#structure"
-              className="border px-5 py-2 rounded-lg bg-white font-semibold flex gap-2 items-center"
-            >
-              <MdOutlineDoorSliding size={20} /> Windows
-            </a>
+            {data.map((spec, index) => (
+              <a
+                key={index}
+                className={`border px-5 py-2 rounded-lg bg-white font-semibold flex gap-2 items-center ${
+                  selectedSpecIndex === index ? "bg-gray-300" : ""
+                }`}
+                onClick={() => handleSpecClick(index)}
+              >
+                <MdOutlineDoorSliding size={20} /> {spec.specName}
+              </a>
+            ))}
           </div>
         </div>
         <div className="flex-1 bg-gray-50 p-4 rounded-lg overflow-y-scroll">
-          <div id="structure">
-            <h1 className="bg-gradient-to-tr from-blue-100 flex items-center gap-2 text-xl py-2 px-2 rounded-xl">
-              <MdOutlineDoorSliding size={22} />{" "}
-              <span className="">Structure</span>
-            </h1>
-            <div>
-              <ul className=" list-disc ml-8 grid gap-2 my-2">
-                <li>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                </li>
-                <li>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                </li>
-                <li>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                </li>
-                <li>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                </li>
-              </ul>
+          {specs.map((spec, index) => (
+            <div key={index} id={spec.specName.toLowerCase()}>
+              <h1 className="bg-gradient-to-tr from-blue-100 flex items-center gap-2 text-xl py-2 px-2 rounded-xl">
+                <MdOutlineDoorSliding size={22} />{" "}
+                <span className="">{spec.specName}</span>
+              </h1>
+              <div>
+                <ul className="list-disc ml-8 grid gap-2 my-2">
+                  {spec.values.map((value, valueIndex) => (
+                    <li key={valueIndex}>{value}</li>
+                  ))}
+                </ul>
+              </div>
             </div>
-          </div>
-
-          <div id="flooring">
-            <h1 className="bg-gradient-to-tr from-blue-100 flex items-center gap-2 text-xl py-2 px-2 rounded-xl">
-              <MdOutlineDoorSliding size={22} />{" "}
-              <span className="">Flooring</span>
-            </h1>
-            <div>
-              <ul className=" list-disc ml-8 grid gap-2 my-2">
-                <li>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                </li>
-                <li>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                </li>
-                <li>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                </li>
-                <li>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div id="doors">
-            <h1 className="bg-gradient-to-tr from-blue-100 flex items-center gap-2 text-xl py-2 px-2 rounded-xl">
-              <MdOutlineDoorSliding size={22} /> <span className="">Doors</span>
-            </h1>
-            <div>
-              <ul className=" list-disc ml-8 grid gap-2 my-2">
-                <li>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                </li>
-                <li>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                </li>
-                <li>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                </li>
-                <li>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                </li>
-              </ul>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>

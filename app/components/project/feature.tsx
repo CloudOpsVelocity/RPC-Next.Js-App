@@ -1,7 +1,6 @@
 import React from "react";
 
-export default function Feature() {
-  const highlights = [1, 2, 3, 4, 5];
+export default function Feature({ data }: { data: string[] }) {
   return (
     <>
       <div className="w-[90%] m-[5%]">
@@ -13,7 +12,7 @@ export default function Feature() {
           Amenities
         </p>
         <ul className="list-inside mt-4 space-y-2 ml-[2%]">
-          {highlights.map((each, ind) => {
+          {data.map((each, ind) => {
             return (
               <li
                 key={ind}
@@ -35,7 +34,7 @@ export default function Feature() {
                   <polyline points="22 4 12 14.01 9 11.01" />
                 </svg>
                 <p className="text-[20px] lg:text-[24px] m-0 text-[#212C33] font-semibold ">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                  {each}
                 </p>
               </li>
             );

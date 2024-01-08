@@ -13,6 +13,7 @@ const nextConfig = {
       { hostname: "s3-media0.fl.yelpcdn.com" },
       { hostname: "assets.thesparksite.com" },
       { hostname: "res.cloudinary.com" },
+      { hostname: "imagesrpc.s3.ap-south-1.amazonaws.com" },
     ],
   },
   env: {

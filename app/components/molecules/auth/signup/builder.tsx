@@ -26,7 +26,7 @@ import { useDisclosure } from "@mantine/hooks";
 import useAuth from "@/app/hooks/useAuth";
 
 function Builder() {
-  const [active, setActive] = useState(3);
+  const [active, setActive] = useState(0);
   const router = useRouter();
 
   const [opened, { open, close }] = useDisclosure(false);

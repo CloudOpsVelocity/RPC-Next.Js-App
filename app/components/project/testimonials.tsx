@@ -1,5 +1,6 @@
 import React from "react";
-import { RatingStar } from "../images/commonSvgs";
+import { RatingStar } from "../../images/commonSvgs";
+import Image from "next/image";
 
 const videos = [1, 2, 3, 4, 5, 6, 7, 8];
 
@@ -12,8 +13,10 @@ const Card = ({}: Props) => {
       data-v0-t="card"
     >
       <div className="flex items-start justify-between  rounded-[10px] bg-[#FFF] ">
-        <img
-          src="youtube.png"
+        <Image
+          width={149}
+          height={149}
+          src="/youtube.png"
           alt="Ankita Soni"
           className="rounded-l-[10px] w-[285px] h-[149px] "
           style={{ aspectRatio: "80 / 80", objectFit: "cover" }}
@@ -59,8 +62,10 @@ export default function Testimonials() {
             Voice of Happy Homeowners: Testimonials
           </p>
           <div className="mt-4 relative w-full">
-            <img
-              src="youtube.png"
+            <Image
+              width={700}
+              height={400}
+              src="/youtube.png"
               alt="Testimonials video"
               className="rounded-lg !w-[100%]"
               //style={{ aspectRatio: "480 / 240", objectFit: "cover" }}

@@ -1,3 +1,4 @@
+import React from "react";
 import PriceBag, {
   EndDate,
   Locality,
@@ -9,29 +10,40 @@ import PriceBag, {
   TotalLandArea,
   WhatsAppButton,
 } from "@/app/images/commonSvgs";
-import ProjBasicDetails from "@/app/project/projBasicDetails";
+import ProjBasicDetails from "@/app/components/project/projBasicDetails";
 import Button from "../../elements/button";
-import React from "react";
+import { Main } from "@/app/validations/types/project";
 
-type Props = {};
+export default function Overview({
+  maxPrice,
+  minPrice,
+  postedBy,
+  projectName,
+  address,
+  projectStatus,
+  availableProperties,
 
-export default function Overview({}: Props) {
+  totalLandArea,
+  totalUnit,
+  localityName,
+  startDate,
+  endDate,
+}: Main) {
   return (
     <div className="pt-[2%] w-[90%] rounded-[24px] shadow-md mb-[5%] mt-[2%] bg-gradient-to-r from-[#F6F6F6] /0 via-[#FFF] /45 to-[#FEFFFF]/100 ">
       <div className="pl-[2%] pr-[2%] flex justify-between items-center ">
         <div>
           <h2 className="text-[24px] lg:text-[32px] text-[#148B16] font-[700]">
-            sarang by sumadhura
+            {projectName}
           </h2>
           <p className="text-[16px] lg:text-[24px] text-[#505050] font-[500]">
-            Folium by Sumadhura, Borewell Rd, Whitefield, Palm Meadows,
-            Ramagondanahalli, Bengaluru, Karnataka 560066
+            {address}
           </p>
         </div>
-        <div className=" flex justify-center items-end flex-col ">
+        <div className="flex justify-center items-end flex-col">
           <p className="text-[20px] flex justify-start items-start lg:text-[24px] text-[#4D6677] font-[700] whitespace-nowrap">
             4.0 Ratings
-            <RatingStar fill="#FFD600" className="h-[32px] w-[32px] " />
+            <RatingStar fill="#FFD600" className="h-[32px] w-[32px]" />
           </p>
           <p className="text-[20px] lg:text-[24px] text-[#0073C6] font-[600] decoration-dashed underline whitespace-nowrap ">
             Call now
@@ -45,62 +57,57 @@ export default function Overview({}: Props) {
             key="propertyAvailable"
             icon={<PropertyAvailable />}
             title="Property Available"
-            value={"Apartment, Rowhouse, Villa, Villament, Plot"}
-            className="mr-[5%]  pt-[2%] mb-[3%]  "
+            value={availableProperties.join(", ")}
+            className="mr-[5%] pt-[2%] mb-[3%]  "
           />
           <ProjBasicDetails
             key="projectStatus"
             icon={<ProjectStatus />}
             title="Project Status"
-            value={"New Launch"}
-            className="mr-[5%]  pt-[2%] mb-[3%] "
+            value={projectStatus}
+            className="mr-[5%] pt-[2%] mb-[3%] "
           />
-
           <ProjBasicDetails
             key="totalLandArea"
             icon={<TotalLandArea />}
             title="Total Land Area"
-            value={"81 Acers"}
-            className="mr-[5%]  pt-[2%] mb-[3%] "
+            value={totalLandArea}
+            className="mr-[5%] pt-[2%] mb-[3%] "
           />
-
           <ProjBasicDetails
-            key="totalLandArea"
-            icon={<TotalLandArea />}
+            key="elevation"
+            icon={<TotalLandArea />} // Adjust icon
             title="Elevation"
-            value={"G +3"}
-            className="mr-[5%]  pt-[2%] mb-[3%] "
+            value={"G + 3"}
+            className="mr-[5%] pt-[2%] mb-[3%] "
           />
-
           <ProjBasicDetails
-            key="totalLandArea"
-            icon={<TotalLandArea />}
+            key="totalUnits"
+            icon={<TotalLandArea />} // Adjust icon
             title="Total No: of Units"
-            value={"1500 Units"}
-            className="mr-[5%]  pt-[2%] mb-[3%] "
+            value={totalUnit}
+            className="mr-[5%] pt-[2%] mb-[3%] "
           />
-
           <ProjBasicDetails
             key="locality"
             icon={<Locality />}
             title="Locality"
-            value={"Whitefield, Bengaluru"}
-            className="mr-[5%]  pt-[2%] mb-[3%] "
+            value={localityName}
+            className="mr-[5%] pt-[2%] mb-[3%] "
           />
-
           <ProjBasicDetails
             key="startDate"
             icon={<StartDate />}
             title="Start Date"
-            value={"12/ 03/ 2023"}
-            className="mr-[5%]  pt-[2%] mb-[3%] "
+            value={startDate}
+            className="mr-[5%] pt-[2%] mb-[3%] "
           />
           <ProjBasicDetails
             key="endDate"
             icon={<EndDate />}
             title="End Date"
-            value={"12/ 03/ 2023"}
-            className="mr-[5%]  pt-[2%] mb-[3%] "
+            value={endDate}
+            className="mr-[5%] pt-[2%] mb-[3%] "
           />
         </div>
         <div className=" flex justify-start md:justify-end items-start md:items-end flex-col mt-[3%] md:mt-0 ">
@@ -120,7 +127,7 @@ export default function Overview({}: Props) {
             <p className="text-[#212C33] text-[24px] lg:text-[32px] font-[600]">
               PRICE RANGE{" "}
               <span className="text-[#00487C] text-[24px] md:text-[32px] lg:text-[40px] whitespace-nowrap font-[700]">
-                ₹ 2.52 Cr - ₹ 4.52 Cr
+                ₹ {minPrice} Cr - ₹ {maxPrice} Cr
               </span>
             </p>
             <Button

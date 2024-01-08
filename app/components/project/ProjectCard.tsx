@@ -1,6 +1,7 @@
 import React from "react";
 import MainCarousel from "../molecules/carousel/main";
 import { CarouselSlide } from "@mantine/carousel";
+import Image from "next/image";
 
 type Props = {
   type: string;
@@ -31,8 +32,8 @@ export function ProjectCard() {
           </div>
         </div>
         <div className="p-4">
-          <img
-            src="property.png"
+          <Image
+            src="/property.png"
             alt="Sobha Dream Acres"
             className="w-full h-auto mb-4"
             width={300}

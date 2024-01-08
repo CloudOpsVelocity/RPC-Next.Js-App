@@ -1,5 +1,5 @@
-import ReadMore from "../components/atoms/readmore";
-import Button from "../elements/button";
+import ReadMore from "../atoms/readmore";
+import Button from "../../elements/button";
 import React from "react";
 
 type Props = {};

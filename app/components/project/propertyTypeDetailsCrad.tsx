@@ -1,6 +1,6 @@
 import React from "react";
-import { FlooringIcon, FloorsIcon, TowerIcon } from "../images/commonSvgs";
-import { projectprops, propertyDetailsTypes } from "../data/projectDetails";
+import { FlooringIcon, FloorsIcon, TowerIcon } from "../../images/commonSvgs";
+import { projectprops, propertyDetailsTypes } from "../../data/projectDetails";
 
 type Props = {
   cg: any;

@@ -1,6 +1,7 @@
+import { AmenityList } from "@/app/validations/types/project";
 import React from "react";
 
-export default function Amenties() {
+export default function Amenties({ data }: { data: AmenityList[] }) {
   const amenities = [1, 2, 3, 4, , 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
   return (
     <>
@@ -11,13 +12,13 @@ export default function Amenties() {
             Experience the ultimate in comfort with our amenities
           </p>
           <div className="flex flex-wrap gap-4 ">
-            {amenities.map((each, ind) => {
+            {data.map((each, ind) => {
               return (
                 <div
                   key={ind}
                   className="flex items-center rounded-[10px] shadow-md border-solid border-[1px] border-[#a5bfd8] px-2.5 py-0.5 w-fit text-[#001F35] font-[500] text-[18px] lg:text-[20px] transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-[#FFF] text-secondary-foreground hover:bg-gray-100/80"
                 >
-                  Maintenance Staff
+                  {each.name}
                 </div>
               );
             })}

@@ -3,8 +3,8 @@ import {
   propertyDetailsTypes,
   projectprops,
   floorplanTypes,
-} from "../data/projectDetails";
-import Button from "../elements/button";
+} from "../../data/projectDetails";
+import Button from "../../elements/button";
 import React, { useState } from "react";
 import {
   PlotIcon,
@@ -16,14 +16,15 @@ import {
   ByUnitSvg,
   ByBhkSvg,
   PopupOpenSvg,
-} from "../images/commonSvgs";
+} from "../../images/commonSvgs";
 import FloorplanDetailsCard from "./floorplanDetailsCard";
 import Byunitblock from "./byunitblock";
 import ByBhkBlock from "./byBhkBlock";
+import { PhaseList } from "@/app/validations/types/project";
 
 const dummyProptypesList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 
-export default function FloorplansBlock() {
+export default function FloorplansBlock({ data }: { data: PhaseList[] }) {
   const [allKeys, setAllKeys] = useState([35, 33, 31, 34, 32]);
   const [propCgId, setPropCgId] = useState();
   const [floorPlanType, setFloorPlanType] = useState("type");
@@ -79,14 +80,14 @@ export default function FloorplansBlock() {
           Select one of the phase to see project details
         </p>
         <div className=" flex justify-start items-start gap-[10px] flex-wrap ">
-          {phases.map((each, index) => {
+          {data.map((each, index) => {
             return (
               <Button
                 key={index}
-                title={`Phase ${each}`}
-                onChange={() => setCurrentPhase(`${each}`)}
+                title={`Phase ${each.phaseName}`}
+                onChange={() => setCurrentPhase(`${each.phaseId}`)}
                 buttonClass={` mb-[5px] text-[18px] lg:text-[20px] bg-[#ECF7FF] p-[8px] xl:p-[16px]  whitespace-nowrap text-[#000] rounded-[8px]${
-                  currentPhase == `${each}`
+                  currentPhase == `${each.phaseId}`
                     ? " font-[600] border-solid border-[1px] border-[#0073C6] "
                     : " font-[400]"
                 } `}

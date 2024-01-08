@@ -60,11 +60,8 @@ import Individual from "../components/molecules/auth/signup/individual";
 
 import React from "react";
 import { DropZone } from "../components/molecules/auth/signup/dropzone";
+import Container from "../components/molecules/Utils/Container";
 
 export default function page() {
-  return (
-    <div>
-      <DropZone />
-    </div>
-  );
+  return <Container>hello</Container>;
 }

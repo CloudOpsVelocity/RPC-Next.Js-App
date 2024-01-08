@@ -8,13 +8,16 @@ import {
   StartDate,
   TotalLandArea,
 } from "@/app/images/commonSvgs";
-import ProjBasicDetails from "@/app/project/projBasicDetails";
-import PropertyTypeDetailsCrad from "@/app/project/propertyTypeDetailsCrad";
+import ProjBasicDetails from "@/app/components/project/projBasicDetails";
+import PropertyTypeDetailsCrad from "@/app/components/project/propertyTypeDetailsCrad";
 import React, { useState } from "react";
+import { PhaseList } from "@/app/validations/types/project";
 
-export default function ProjectDetailsP() {
-  const [currentPhase, setCurrentPhase] = useState("");
-
+export default function ProjectDetailsP({ data }: { data: PhaseList[] }) {
+  const [currentPhase, setCurrentPhase] = useState(1);
+  const handlePhaseChange = (phaseId: number) => {
+    setCurrentPhase(phaseId);
+  };
   const phases = [1, 2, 3, 4, 5];
   return (
     <div className="w-[90%] mb-[5%]">
@@ -33,20 +36,18 @@ export default function ProjectDetailsP() {
           Select one of the phase to see project details
         </p>
         <div className=" flex justify-start items-start flex-wrap gap-[10px] ">
-          {phases.map((each, index) => {
-            return (
-              <Button
-                key={index}
-                title={`Phase ${each}`}
-                onChange={() => setCurrentPhase(`${each}`)}
-                buttonClass={` mb-[5px] text-[16px] lg:text-[24px] bg-[#ECF7FF] p-[8px] xl:p-[16px]  whitespace-nowrap text-[#000] rounded-[8px] ${
-                  currentPhase == `${each}`
-                    ? " font-[600] border-solid border-[1px] border-[#0073C6] "
-                    : " font-[400]"
-                } `}
-              />
-            );
-          })}
+          {data.map((phase) => (
+            <Button
+              key={phase.phaseId}
+              title={phase.phaseName}
+              onChange={() => handlePhaseChange(phase.phaseId)}
+              buttonClass={` mb-[5px] text-[16px] lg:text-[24px] bg-[#ECF7FF] p-[8px] xl:p-[16px]  whitespace-nowrap text-[#000] rounded-[8px] ${
+                currentPhase === phase.phaseId
+                  ? " font-[600] border-solid border-[1px] border-[#0073C6] "
+                  : " font-[400]"
+              } `}
+            />
+          ))}
         </div>
       </div>
 

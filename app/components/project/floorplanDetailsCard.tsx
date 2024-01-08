@@ -6,8 +6,8 @@ import {
   SuperBuildupAreaIcon,
   TowerIcon,
   TowerTypeIcon,
-} from "../images/commonSvgs";
-import { projectprops } from "../data/projectDetails";
+} from "../../images/commonSvgs";
+import { projectprops } from "../../data/projectDetails";
 
 type Props = {
   propCgId?: any;

@@ -1,39 +1,27 @@
-const apiUrl: string = process.env.NEXT_PUBLIC_BACKEND_URL!; // Replace this with your API base URL
+// api.ts
+import axios, { AxiosInstance } from "axios";
 
-interface RequestOptions extends RequestInit {
-  // You can extend this interface with any additional properties you need
-}
+const baseURL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
-async function globalFetch<T>(
-  url: string,
-  options: RequestOptions = {}
-): Promise<T> {
-  const headers = {
+const api: AxiosInstance = axios.create({
+  baseURL,
+  headers: {
     "Content-Type": "application/json",
-    // Add any other headers if needed
-  };
+  },
+});
 
-  const mergedOptions: RequestOptions = {
-    ...options,
-    headers: {
-      ...options.headers,
-      ...headers,
-    },
-  };
-
-  try {
-    const response = await fetch(`${apiUrl}/${url}`, mergedOptions);
-
-    // if (!response.ok) {
-    //   throw new Error(`HTTP error! Status: ${response.status}`);
-    // }
-
-    return await response.json();
-  } catch (error: any) {
-    // Handle network errors or other exceptions
-    console.error("Error:", error.message);
-    throw error; // Propagate the error for further handling if needed
-  }
+interface BasicDetailsResponse {
+  data: any;
 }
 
-export default globalFetch;
+export const getBasicDetails = (
+  projIdEnc: string
+): Promise<BasicDetailsResponse> => {
+  return api.get(`/api/project/basicDetails?projIdEnc=1234`, {
+    params: {
+      projIdEnc,
+    },
+  });
+};
+
+export default api;
