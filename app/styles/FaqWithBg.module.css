@@ -21,7 +21,7 @@
   color: #303a42;
   font-feature-settings: "clig" off, "liga" off;
   font-family: Montserrat;
-  font-size: 28px;
+  font-size: 24px;
   font-style: normal;
   font-weight: 700;
   line-height: 23.784px;
@@ -52,7 +52,7 @@
   color: #303a42;
   font-feature-settings: "clig" off, "liga" off;
   font-family: Montserrat;
-  font-size: 28px;
+  font-size: 24px;
   font-style: normal;
   font-weight: 400;
   line-height: 34.983px;
@@ -85,12 +85,22 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 1280px) {
   .title {
-    font-size: 22px;
+    font-size: 20px;
   }
 
   .content {
     font-size: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .title {
+    font-size: 18px;
+  }
+
+  .content {
+    font-size: 18px;
   }
 }
