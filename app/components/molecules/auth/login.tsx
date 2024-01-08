@@ -32,7 +32,7 @@ function Login() {
   const { login } = useAuth();
   const onSubmit = async (values: any) => {
     setState("pending");
-    login(values);
+    await login(values);
     setState("success");
   };
 
@@ -66,6 +66,7 @@ function Login() {
         </Link>
 
         <Button
+          loading={state === "pending"}
           type="submit"
           className="!w-[100%] !h-[57px] mt-[4%] !bg-[#0c7aca] rounded-[6px] text-[20px]"
         >
