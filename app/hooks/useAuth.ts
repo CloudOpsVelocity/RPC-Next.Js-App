@@ -77,7 +77,7 @@ export default function useAuth() {
     });
   };
 
-  const register = async (data: RegistrationData): Promise<AuthResult> => {
+  const register = async (data: RegistrationData): Promise<any> => {
     try {
       // Assuming you have an API endpoint for user registration
       const userDetails = {
@@ -94,15 +94,12 @@ export default function useAuth() {
       // Check the registration response and handle accordingly
       if (registrationResponse?.data.status) {
         // Registration success, you might want to automatically log in the user
-        await loginWithCredentials({
+        const res = await loginWithCredentials({
           //@ts-ignore
           username: data.email, // Assuming email is the username
           password: data.password,
         });
-
-        return { success: true, message: "Registration successful." };
-      } else {
-        return { success: false, message: "Registration failed." };
+        return res;
       }
     } catch (error: any) {
       toast.error(
