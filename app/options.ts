@@ -2,6 +2,7 @@ import type { NextAuthOptions } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import axios from "axios";
+import { cookies } from "next/headers";
 
 export const options: NextAuthOptions = {
   providers: [
@@ -27,7 +28,10 @@ export const options: NextAuthOptions = {
             password: credentials?.password,
           }
         );
+        console.log(res.data);
         if (res.data.status) {
+          cookies().set("token", res.data.token);
+
           console.log(res.data);
           return {
             ...res.data,

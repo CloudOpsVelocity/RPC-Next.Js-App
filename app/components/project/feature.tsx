@@ -3,7 +3,7 @@ import React from "react";
 export default function Feature({ data }: { data: string[] }) {
   return (
     <>
-      <div className="w-[90%] m-[5%]">
+      <div className="w-[90%] m-[5%]" id="highlights">
         <h2 className="text-[24px] lg:text-[32px] font-semibold">
           HIGHLIGHTS OF <span className="text-green-500">SARANG</span>
         </h2>

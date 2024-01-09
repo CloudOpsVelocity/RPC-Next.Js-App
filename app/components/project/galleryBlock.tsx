@@ -11,7 +11,9 @@ export default function GalleryBlock({
   projReviewVideoUrl,
   projWalkThroughVideoUrl,
 }: Media) {
-  const [selectedMedia, setSelectedMedia] = useState<string | null>(null);
+  const [selectedMedia, setSelectedMedia] = useState<string | null>(
+    projMasterPlanUrl
+  );
 
   const images = [coverUrl, projMasterPlanUrl, projOtherImagesUrl];
   const videos = [projReviewVideoUrl, projWalkThroughVideoUrl];
@@ -20,7 +22,7 @@ export default function GalleryBlock({
     setSelectedMedia(media);
   };
   return (
-    <div className="w-[90%] mb-[5%] h-full ">
+    <div className="w-[90%] mb-[5%] h-full " id="galleria">
       <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35] uppercase">
         gALLERIA of{" "}
         <span className="text-[#148B16] font-[700] uppercase">sarang</span>{" "}
@@ -82,8 +84,23 @@ export default function GalleryBlock({
             Videos
           </h3>
           <div className="flex justify-start items-start w-full gap-[4%] flex-wrap ">
-            <div className="w-[110px] lg:w-[152px] h-[68px] lg:h-[94px] bg-[#dfdcdc] rounded-[5px] shadow-md mb-[4%] "></div>
-            <div className="w-[110px] lg:w-[152px] h-[68px] lg:h-[94px] bg-[#dfdcdc] rounded-[5px] shadow-md mb-[4%] "></div>
+            {videos.map((img, ind) => (
+              <div
+                key={ind}
+                className="w-[110px] lg:w-[152px] h-[68px] lg:h-[94px] bg-[#dfdcdc] rounded-[5px] shadow-md mb-[4%]"
+              >
+                <Image
+                  width={150}
+                  height={100}
+                  src={
+                    "https://imagesrpc.s3.ap-south-1.amazonaws.com/images/varify/project/197/other/0.jpg"
+                  }
+                  alt={`Image ${ind + 1}`}
+                  className="w-full h-full object-cover rounded-[5px]"
+                  onClick={() => handleMediaClick(img as string)}
+                />
+              </div>
+            ))}
           </div>
         </div>
       </div>

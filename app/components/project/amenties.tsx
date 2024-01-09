@@ -2,10 +2,9 @@ import { AmenityList } from "@/app/validations/types/project";
 import React from "react";
 
 export default function Amenties({ data }: { data: AmenityList[] }) {
-  const amenities = [1, 2, 3, 4, , 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
   return (
     <>
-      <div className="w-[90%] bg-white py-10 mb-[5%]">
+      <div className="w-[90%] bg-white py-10 mb-[5%]" id="amenities">
         <div className=" mx-auto px-4">
           <h2 className="text-2xl font-semibold">AMENITIES</h2>
           <p className="text-gray-600 mt-2 mb-6">

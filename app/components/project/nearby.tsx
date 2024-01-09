@@ -8,7 +8,7 @@ import { Text, Tabs, TextInput } from "@mantine/core";
 export default function Nearby() {
   const [selected, setSelected] = useState("commute");
   return (
-    <div className="w-[90%] mx-auto mt-[5%] mb-[5%] ">
+    <div className="w-[90%] mx-auto mt-[5%] mb-[5%] " id="nearBy">
       <h2 className="text-[24px] lg:text-[32px] font-semibold">
         <span className="!text-green-600">SARANG BY SUMADHARA </span>
         <span className="">Near BY LOCATIONS</span>

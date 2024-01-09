@@ -23,28 +23,25 @@ import { getProjectDetails } from "@/app/utils/project";
 import ProjectDetailsP from "@/app/components/project/projectDetailsP";
 
 type Props = { params: { slug: string } };
-
-export default async function ProjecctDetails({ params: { slug } }: Props) {
+export default async function ProjectDetails({ params: { slug } }: Props) {
   const data = await getProjectDetails(slug);
   return (
     <div className="w-full">
       <Header />
       <div className="mt-[90px] w-full pb-[2%] flex items-center justify-center flex-col">
         <div className="p-[2%] w-full">
-          <p className=" text-[16px] text-[#565D70] font-[500] mb-[1%] ">
-            <span>home</span>
-            {" > "}
+          <p className="text-[16px] text-[#565D70] font-[500] mb-[1%]">
+            <span>home</span> {" > "}
             <Link href={"/project/banglore"}>
               <span>Project In Bengaluru</span>
-            </Link>
+            </Link>{" "}
             {" > "}
             <Link href={"/project/banglore/whitefield"}>
               <span>Project In BTM Layout Bengaluru</span>
-            </Link>
+            </Link>{" "}
             {" > "}
             <span>Sarang By Sumadhura</span>
           </p>
-
           {/* Top Cover Image Card */}
           <FirstBlock projectDetails={data} />
         </div>
@@ -54,13 +51,12 @@ export default async function ProjecctDetails({ params: { slug } }: Props) {
         <Overview {...data} />
         {/* About */}
         <About
+          id="about"
           heading="about"
           projName={data.projectName}
           content={data.about}
         />
         {/* Property Details */}
-
-        {/* <Property /> */}
         <ProjectDetailsP data={data.phaseList} />
         {/* Floor Plan Block */}
         <FloorplansBlock data={data.phaseList} />
@@ -72,10 +68,10 @@ export default async function ProjecctDetails({ params: { slug } }: Props) {
         <Banner />
         <Feature data={data.highlights} />
         <Loans data={data.banks} />
-        {/* <Why /> */}
         <Amenties data={data.amenityList} />
         {/* Why Buy This */}
         <About
+          id="whyBuy"
           heading="Why Buy"
           projName="SARANG BY SUMADHURA ?"
           content={data.wbtp}
@@ -95,7 +91,6 @@ export default async function ProjecctDetails({ params: { slug } }: Props) {
           content="See what developers has posted"
         />
       </div>
-
       <Footer />
     </div>
   );

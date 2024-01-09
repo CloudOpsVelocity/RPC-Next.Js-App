@@ -65,7 +65,7 @@ export default function FloorplansBlock({ data }: { data: PhaseList[] }) {
   };
 
   return (
-    <div className="w-[90%] mb-[5%]">
+    <div className="w-[90%] mb-[5%]" id="floorPlans">
       <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35]">
         FLOOR PLANS for sarang by sumadhura{" "}
         <span className="text-[#148B16] font-[700] uppercase">

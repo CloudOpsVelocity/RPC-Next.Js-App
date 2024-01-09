@@ -20,7 +20,7 @@ export default function ProjectDetailsP({ data }: { data: PhaseList[] }) {
   };
   const phases = [1, 2, 3, 4, 5];
   return (
-    <div className="w-[90%] mb-[5%]">
+    <div className="w-[90%] mb-[5%]" id="propertyDetails">
       <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35]">
         Property Details{" "}
         <span className="text-[#148B16] font-[700] uppercase">SARANG</span>{" "}
