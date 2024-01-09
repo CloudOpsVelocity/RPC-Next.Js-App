@@ -7,8 +7,8 @@
     "build": "next build",
     "start": "cross-env APP_ENV=production next start -p 3000",
     "lint": "next lint",
-    "test": "jest",
-    "test:watch": "jest --watch"
+    "test": "set NODE_OPTIONS=--no-deprecation && jest --detectOpenHandles",
+    "test:watch": "set NODE_OPTIONS=--no-deprecation && jest --watch"
   },
   "dependencies": {
     "@mantine/carousel": "^7.3.2",
@@ -27,6 +27,7 @@
     "mantine-form-yup-resolver": "^2.0.0",
     "next": "14.0.4",
     "next-auth": "^4.24.5",
+    "punycode": "^2.3.1",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.49.2",
