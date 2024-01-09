@@ -3,7 +3,11 @@ import { SpecificationList } from "@/app/validations/types/project";
 import React, { useState } from "react";
 import { MdOutlineDoorSliding } from "react-icons/md";
 
-export default function Spec({ data }: { data: SpecificationList[] }) {
+export default function Specifications({
+  data,
+}: {
+  data: SpecificationList[];
+}) {
   const [specs, setSpecs] = useState<SpecificationList[]>(data);
   const [selectedSpecIndex, setSelectedSpecIndex] = useState<number | null>(
     null

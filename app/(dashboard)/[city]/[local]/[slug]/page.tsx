@@ -5,7 +5,6 @@ import FloorplansBlock from "@/app/components/project/floorplansBlock";
 import AboutBuilder from "@/app/components/project/aboutBuilder";
 import GalleryBlock from "@/app/components/project/galleryBlock";
 import Nearby from "@/app/components/project/nearby";
-import Spec from "@/app/components/project/spec";
 import Banner from "@/app/components/project/banner";
 import Feature from "@/app/components/project/feature";
 import Reviews from "@/app/components/project/reviews";
@@ -21,6 +20,7 @@ import Navigation from "@/app/components/project/navigation";
 import Link from "next/link";
 import { getProjectDetails } from "@/app/utils/project";
 import ProjectDetailsP from "@/app/components/project/projectDetailsP";
+import Specifications from "@/app/components/project/specification";
 
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
@@ -64,7 +64,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         {/* About Builder */}
         <AboutBuilder />
         <Nearby />
-        <Spec data={data.specificationList} />
+        <Specifications data={data.specificationList} />
         <Banner />
         <Feature data={data.highlights} />
         <Loans data={data.banks} />

@@ -1,4 +1,6 @@
-const { loadEnvConfig } = require("@next/env");
+// Learn more: https://github.com/testing-library/jest-dom
+import "@testing-library/jest-dom";
+import dotenv from "dotenv";
 
-// Load environment variables for testing
-loadEnvConfig(process.cwd(), true);
+dotenv.config({ path: ".env.test" });
+console.log("NEXT_PUBLIC_NAME:", process.env.NEXT_PUBLIC_NAME);
