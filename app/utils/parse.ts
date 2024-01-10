@@ -4,6 +4,12 @@ function stateParser(originalData: any) {
     label: item.constDesc,
   }));
 }
+function brachParser(originalData: any) {
+  return originalData?.map((item: any) => ({
+    value: item.id,
+    label: item.name,
+  }));
+}
 function cityParser(originalData: any) {
   return originalData?.map((item: any) => ({
     value: JSON.stringify(item.id),
@@ -11,4 +17,4 @@ function cityParser(originalData: any) {
   }));
 }
 
-export { stateParser, cityParser };
+export { stateParser, cityParser, brachParser };

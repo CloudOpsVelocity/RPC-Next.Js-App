@@ -31,7 +31,7 @@ function Individual() {
   const onSubmit = async (values: typeof form.values) => {
     const data = await register({ ...values, usertype: "I" });
     console.log(data);
-    if (data.status) {
+    if (data?.status) {
       open();
     }
   };

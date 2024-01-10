@@ -146,6 +146,10 @@ function Builder() {
     ["states"],
     getStatesDetails
   );
+  const { data: brachData, isLoading: isLoadingBrach } = useQuery(
+    ["brach"],
+    getAllCitiesDetails
+  );
   const { data: citiesData, isLoading: isLoadingCities } = useQuery(
     ["cities" + form.values.state],
     () => getCitiesDetails(parseInt(form.values.state)),
@@ -186,8 +190,20 @@ function Builder() {
           setActive((current) => (current < 3 ? current + 1 : current));
           break;
         case 3:
+          const date = new Date(values.companyStartDate);
+
+          const day = date.getDate();
+          const month = date.getMonth() + 1; // Months are zero-indexed, so add 1
+          const year = date.getFullYear();
+
+          const formattedDate = `${day}/${month}/${year}`;
+
           // API call for the third step
-          const otherDetailsData = await registerOtherDetails({ ...values });
+          const otherDetailsData = await registerOtherDetails({
+            ...values,
+            branchName: values.branchName.map((item) => parseInt(item)),
+            companyStartDate: formattedDate,
+          });
           await login({
             password: form.values.password,
             username: form.values.email,
@@ -313,7 +329,7 @@ function Builder() {
             checkIconPosition="right"
             label="Branch"
             placeholder=" --Select Branch--"
-            data={["React", "Angular", "Vue", "Svelte"]}
+            data={isLoadingBrach ? [] : cityParser(brachData) || []}
             {...form.getInputProps("branchName")}
           />
           <DateInput

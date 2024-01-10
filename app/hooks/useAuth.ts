@@ -43,8 +43,8 @@ interface RegistrationOthersData {
   state?: any;
   city?: string;
   pincode?: any;
-  startDate?: any;
-  branch?: string[];
+  companyStartDate?: any;
+  branchName?: number[];
   ceoName?: string;
   foundedBy?: string;
   mission?: string;
