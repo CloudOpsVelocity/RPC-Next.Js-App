@@ -5,6 +5,7 @@ import Button from "../../elements/button";
 import { useDisclosure } from "@mantine/hooks";
 import { Modal } from "@mantine/core";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 export default function OverviewBanner({
   minPrice,
   maxPrice,
@@ -67,21 +68,8 @@ const RequestCallBackModal = ({
               <p className="mt-2 text-green-600 font-semibold">
                 Builder: Sarang By Sumadhura
               </p>
-              <div className="mt-8">
-                <h3 className="text-xl font-semibold text-[#00487C]">
-                  Your Details
-                </h3>
-                <p className="mt-2 text-gray-600">Name: Ankit Soni</p>
-                <p className="mt-2 text-gray-600">Contact: 8888855555</p>
-                <p className="mt-2 text-gray-600">
-                  Email: ankitsoni12@gmail.com
-                </p>
-                <Button
-                  icon={<Phone />}
-                  title="Request a Callback"
-                  buttonClass=" text-[#FFF] text-[16px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[6px]  mt-5"
-                />
-              </div>
+              {/* There */}
+              <Content />
             </div>
             <div className="hidden md:block w-1/2 relative">
               <Image
@@ -97,6 +85,65 @@ const RequestCallBackModal = ({
           {/* </div> */}
         </>
       </Modal>
+    </>
+  );
+};
+
+const Content = () => {
+  const { data: session } = useSession();
+  return (
+    <>
+      {session ? (
+        <div className="mt-8">
+          <h3 className="text-xl font-semibold text-[#00487C]">Your Details</h3>
+          <p className="mt-2 text-gray-600">Name: Ankit Soni</p>
+          <p className="mt-2 text-gray-600">Contact: 8888855555</p>
+          <p className="mt-2 text-gray-600">Email: ankitsoni12@gmail.com</p>
+          <Content />
+        </div>
+      ) : (
+        <div className="w-full max-w-xs">
+          <h2 className="text-lg font-semibold mb-4">Your Details</h2>
+          <div className="flex flex-col gap-4">
+            <label className="block">
+              <span className="text-sm font-medium text-gray-700">
+                Your Name
+              </span>
+              <input
+                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                placeholder="Enter your name here"
+              />
+            </label>
+            <label className="block">
+              <span className="text-sm font-medium text-gray-700">
+                Add contact
+              </span>
+              <div className="flex">
+                <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 mr-2">
+                  01
+                </button>
+                <input
+                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                  placeholder="Phone number"
+                />
+              </div>
+            </label>
+            <label className="block">
+              <span className="text-sm font-medium text-gray-700">Email</span>
+              <input
+                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                placeholder="Enter your email here"
+                type="email"
+              />
+            </label>
+          </div>
+        </div>
+      )}
+      <Button
+        icon={<Phone />}
+        title="Request a Callback"
+        buttonClass=" text-[#FFF] text-[16px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[6px]  mt-5"
+      />
     </>
   );
 };
