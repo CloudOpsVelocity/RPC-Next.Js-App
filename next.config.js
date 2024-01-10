@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  basePath: "",
   assetPrefix: "https://test.getrightproperty.com",
   // eslint: {
   //   ignoreDuringBuilds: true,
