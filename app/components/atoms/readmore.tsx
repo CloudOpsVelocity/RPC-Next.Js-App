@@ -1,4 +1,6 @@
 "use client";
+import { readMoreAtom } from "@/app/store/drawer";
+import { useAtom } from "jotai";
 import React, { useState } from "react";
 
 interface ReadMoreProps {
@@ -7,11 +9,7 @@ interface ReadMoreProps {
 }
 
 const ReadMore: React.FC<ReadMoreProps> = ({ text, maxLines = 4 }) => {
-  const [showMore, setShowMore] = useState(false);
-
-  const toggleReadMore = () => {
-    setShowMore(!showMore);
-  };
+  const [{ expanded }, setReadMore] = useAtom(readMoreAtom);
 
   const getClampedText = () => {
     const words = text.split(" ");
@@ -21,13 +19,19 @@ const ReadMore: React.FC<ReadMoreProps> = ({ text, maxLines = 4 }) => {
   return (
     <div className="w-[90%] ">
       <p className="text-[20px] lg:text-[24px]  font-[500] text-[#233333]">
-        {showMore ? text : getClampedText()}
-        {!showMore && "... "}
+        {getClampedText()}
+        {!expanded && "... "}
         <span
           className="text-[20px] lg:text-[24px] font-[700] text-[#0073C6]"
-          onClick={toggleReadMore}
+          onClick={() =>
+            setReadMore((prev) => ({
+              ...prev,
+              expanded: !prev.expanded,
+              content: text,
+            }))
+          }
         >
-          {showMore ? "Read Less" : "Read More"}
+          {expanded ? "Read Less" : "Read More"}
         </span>
       </p>
     </div>

@@ -21,13 +21,13 @@ import Link from "next/link";
 import { getProjectDetails } from "@/app/utils/project";
 import ProjectDetailsP from "@/app/components/project/projectDetailsP";
 import Specifications from "@/app/components/project/specification";
+import ProjectDrawer from "@/app/components/project/Drawer";
 
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
   const data = await getProjectDetails(slug);
   return (
     <div className="w-full">
-      <Header />
       <div className="mt-[90px] w-full pb-[2%] flex items-center justify-center flex-col">
         <div className="p-[2%] w-full">
           <p className="text-[16px] text-[#565D70] font-[500] mb-[1%]">
@@ -90,8 +90,8 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           title="Projects By Developers"
           content="See what developers has posted"
         />
+        <ProjectDrawer />
       </div>
-      <Footer />
     </div>
   );
 }
