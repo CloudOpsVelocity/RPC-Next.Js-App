@@ -18,7 +18,7 @@ const ReadMore: React.FC<ReadMoreProps> = ({ text, maxLines = 4 }) => {
 
   return (
     <div className="w-[90%] ">
-      <p className="text-[20px] lg:text-[24px]  font-[500] text-[#233333]">
+      <p className="ext-[16px] md:text-[20px] lg:text-[24px]  font-[500] text-[#233333]">
         {getClampedText()}
         {!expanded && "... "}
         <span
