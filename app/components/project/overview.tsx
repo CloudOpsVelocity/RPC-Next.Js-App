@@ -13,6 +13,8 @@ import PriceBag, {
 import ProjBasicDetails from "@/app/components/project/projBasicDetails";
 import Button from "../../elements/button";
 import { Main } from "@/app/validations/types/project";
+import OverviewBanner from "./overviewBanner";
+import { useDisclosure } from "@mantine/hooks";
 
 export default function Overview({
   maxPrice,
@@ -122,28 +124,7 @@ export default function Overview({
           </p>
         </div>
       </div>
-      <div className="flex justify-start items-center w-full flex-col md:flex-row bg-gradient-to-r from-[#EFF5FF] /50 to-[#F2FAFF ]/50 ">
-        <PriceBag className="w-[150px] h-[170px] md:w-[237px] md:h-[263px] " />
-
-        <div className="flex justify-between items-center w-[100%] flex-row ml-[3%] p-[2%] flex-wrap">
-          <div className="">
-            <p className="text-[#212C33] text-[24px] lg:text-[32px] font-[600]">
-              PRICE RANGE{" "}
-              <span className="text-[#00487C] text-[24px] md:text-[32px] lg:text-[40px] whitespace-nowrap font-[700]">
-                ₹ {minPrice} Cr - ₹ {maxPrice} Cr
-              </span>
-            </p>
-            <Button
-              icon={<Phone />}
-              title="Request a Callback"
-              buttonClass=" text-[#FFF] text-[16px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[6px]  "
-              // onChange={() => console.log("hello")}
-            />
-          </div>
-
-          <WhatsAppButton className="cursor-pointer" onClick={""} />
-        </div>
-      </div>
+      <OverviewBanner maxPrice={maxPrice} minPrice={minPrice} />
     </div>
   );
 }

@@ -23,12 +23,12 @@ export default function OtpBox({ userName, close, callback }: Props) {
     const data = await verifyOtp({ ...value, username: userName });
     console.log(data);
 
-    if (data.success) {
+    if (data?.success) {
       callback();
       close();
       //Close OTP Popup
     } else {
-      setError(data.success);
+      setError(true);
     }
   };
 

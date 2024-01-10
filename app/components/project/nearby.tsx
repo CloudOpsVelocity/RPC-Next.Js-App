@@ -1,12 +1,108 @@
 "use client";
-
-import clsx from "clsx";
-import { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { LuTrain, LuSearch } from "react-icons/lu";
-import { IoLocationSharp } from "react-icons/io5";
 import { Text, Tabs, TextInput } from "@mantine/core";
-export default function Nearby() {
-  const [selected, setSelected] = useState("commute");
+import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
+import cslx, { clsx } from "clsx";
+interface Area {
+  name: string;
+  Icon?: string;
+  lat?: number;
+  lng?: number;
+}
+
+const Nearby = ({ lat, lang }: { lat: string; lang: string }) => {
+  const [selected, setSelected] = useState<string>("commute");
+  const [selectedLocation, setSelectedLocation] = useState<{
+    lat: number;
+    lng: number;
+  }>({
+    lat: parseInt(lat),
+    lng: parseInt(lang),
+  });
+  const [map, setMap] = useState<any | null>(null);
+
+  const { isLoaded } = useJsApiLoader({
+    id: "google-map-script",
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY!!,
+  });
+
+  const onLoad = useCallback((map: any) => {
+    setMap(map);
+  }, []);
+
+  const onUnmount = useCallback(() => {
+    setMap(null);
+  }, []);
+
+  const mapContainerStyle: React.CSSProperties = {
+    width: "100%",
+    height: "400px",
+  };
+
+  const showLocationOnMap = useCallback(
+    (location: { position: { lat: number; lng: number }; name: string }) => {
+      setSelectedLocation(location.position);
+      map?.panTo(location.position);
+    },
+    [map]
+  );
+
+  const areas: Area[] = [
+    {
+      name: "commute",
+      Icon: " ",
+    },
+    {
+      name: "train",
+      Icon: " ",
+    },
+    {
+      name: "bus",
+      Icon: " ",
+    },
+    {
+      name: "hospital",
+      Icon: " ",
+      lng: 77.55137057690479,
+      lat: 13.02542364337667,
+    },
+    {
+      name: "school",
+      Icon: " ",
+    },
+    {
+      name: "market",
+      Icon: " ",
+    },
+    {
+      name: "restaurant",
+      Icon: " ",
+    },
+    {
+      name: "bank",
+      Icon: " ",
+      lng: 77.5815168,
+      lat: 13.0318336,
+    },
+    {
+      name: "clinic",
+      Icon: " ",
+    },
+    //   {
+    //     name: "other1",
+    //     Icon: " ",
+    //   },
+    //   {
+    //     name: "other2",
+    //     Icon: " ",
+    //   },
+    //   {
+    //     name: "othre3",
+    //     Icon: " ",
+    //   },
+  ];
+
   return (
     <div className="w-[90%] mx-auto mt-[5%] mb-[5%] " id="nearBy">
       <h2 className="text-[24px] lg:text-[32px] font-semibold">
@@ -14,7 +110,7 @@ export default function Nearby() {
         <span className="">Near BY LOCATIONS</span>
       </h2>
       <p className="text-gray-500 mt-1 mb-2 text-lg italic ">
-        Explore near by convernient amenities, entertainment and essesntial
+        Explore near by convenient amenities, entertainment, and essential
         services
       </p>
 
@@ -23,6 +119,10 @@ export default function Nearby() {
           <button
             onClick={() => {
               setSelected(area.name);
+              showLocationOnMap({
+                position: { lat: area.lat || 0, lng: area.lng || 0 },
+                name: area.name,
+              });
             }}
             className={clsx(
               "capitalize text-gray-600 font-medium flex items-center gap-1.5",
@@ -60,113 +160,31 @@ export default function Nearby() {
 
                 <Tabs.Panel value="gallery">
                   <div id="location-listing" className="grid gap-2">
-                    <LocationList />
-                    <LocationList />
-                    <LocationList />
-                    <LocationList />
-                    <LocationList />
+                    {/* Your existing location list items */}
                   </div>
                 </Tabs.Panel>
 
-                <Tabs.Panel value="messages">
-                  <div id="location-listing" className="grid gap-2">
-                    <LocationList />
-                    <LocationList />
-                    <LocationList />
-                  </div>
-                </Tabs.Panel>
-
-                <Tabs.Panel value="settings">
-                  <div id="location-listing" className="grid gap-2">
-                    <LocationList />
-                    <LocationList />
-                    <LocationList />
-                    <LocationList />
-                  </div>
-                </Tabs.Panel>
+                {/* Other panels... */}
               </div>
             </Tabs>
           </div>
         </section>
-        <section
-          className="bg-cover-- bg-center bg-no-repeat"
-          style={{
-            backgroundImage:
-              "url(https://cdn.buttercms.com/Ym1iRZNbRHOeWv0X4x3w)",
-          }}
-        ></section>
+        <section>
+          {isLoaded && (
+            <GoogleMap
+              mapContainerStyle={mapContainerStyle}
+              center={selectedLocation}
+              zoom={15}
+              onLoad={onLoad}
+              onUnmount={onUnmount}
+            >
+              {selectedLocation && <Marker position={selectedLocation} />}
+            </GoogleMap>
+          )}
+        </section>
       </div>
     </div>
   );
-}
+};
 
-const LocationList = () => (
-  <div className="p-2 bg-gray-50 border rounded-lg">
-    <div className="flex items-center justify-between">
-      <h6 className="text-md">Internation Airport</h6>
-      <div className="flex gap-1 text-sm">
-        <span className="flex items-center">
-          <IoLocationSharp />
-          <span className="text-blue-800">10 Km</span>
-        </span>
-        <span>|</span>
-        <span>1hr</span>
-      </div>
-    </div>
-    <p className="flex items-center gap-1 text-sm text-gray-600">
-      <LuTrain size={15} />
-      Via public transport
-    </p>
-  </div>
-);
-
-const areas = [
-  {
-    name: "commute",
-    Icon: " ",
-  },
-  {
-    name: "train",
-    Icon: " ",
-  },
-  {
-    name: "bus",
-    Icon: " ",
-  },
-  {
-    name: "hospital",
-    Icon: " ",
-  },
-  {
-    name: "school",
-    Icon: " ",
-  },
-  {
-    name: "market",
-    Icon: " ",
-  },
-  {
-    name: "restaurant",
-    Icon: " ",
-  },
-  {
-    name: "bank",
-    Icon: " ",
-  },
-  {
-    name: "clinic",
-    Icon: " ",
-  },
-  //   {
-  //     name: "other1",
-  //     Icon: " ",
-  //   },
-  //   {
-  //     name: "other2",
-  //     Icon: " ",
-  //   },
-  //   {
-  //     name: "othre3",
-  //     Icon: " ",
-  //   },
-];
+export default Nearby;
