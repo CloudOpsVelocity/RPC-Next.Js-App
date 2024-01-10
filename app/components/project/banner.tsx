@@ -47,16 +47,23 @@ const AddRating = ({ opened, close }: { opened: any; close: any }) => {
   };
   return (
     <>
-      <Modal opened={opened} onClose={close} centered style={{}} size={"xl"}>
+      <Modal
+        opened={opened}
+        onClose={close}
+        centered
+        title="Add Rating"
+        size={"xl"}
+      >
         <div className="max-w-[100%] mt-[2%] mx-auto my-8   rounded-lg space-y-2">
-          <h2 className="font-[700] text-[#233333] text-[20px]  ">
-            Add your feedback for Sarang by Sumadhura Project !
-          </h2>
           <Rating
             maxStars={5}
             initialRating={userRating}
             onRatingChange={handleRatingChange}
           />
+          <h2 className="font-[700] text-[#233333] text-[20px]  ">
+            Add your feedback for Sarang by Sumadhura Project !
+          </h2>
+
           <div className=" gap-4">
             <div className="flex-1">
               <textarea
