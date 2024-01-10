@@ -11,11 +11,10 @@ type props = {
   open: any;
   close: any;
   userName: string;
+  callback: () => void;
 };
 
-function AuthPopup({ opened, open, close, userName }: props) {
-  const { data: session } = useSession();
-
+function AuthPopup({ opened, open, close, userName, callback }: props) {
   return (
     <>
       <Modal
@@ -28,7 +27,7 @@ function AuthPopup({ opened, open, close, userName }: props) {
       >
         {/* {JSON.stringify(session)} */}
         {/* <Form /> */}
-        <OtpBox userName={userName} />
+        <OtpBox callback={callback} userName={userName} close={close} />
       </Modal>
       {/* 
       <Button

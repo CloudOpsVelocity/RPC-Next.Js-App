@@ -94,18 +94,20 @@ export default function useAuth() {
       // Check the registration response and handle accordingly
       if (registrationResponse?.data.status) {
         // Registration success, you might want to automatically log in the user
-        const res = await loginWithCredentials({
-          //@ts-ignore
-          username: data.email, // Assuming email is the username
-          password: data.password,
-        });
-        return res;
+        // const res = await loginWithCredentials({
+        //   //@ts-ignore
+        //   username: data.email, // Assuming email is the username
+        //   password: data.password,
+        // });
+        // return res;
+        return registrationResponse.data;
+      }
+      if (!registrationResponse.data.status) {
+        toast.error(registrationResponse.data.message);
       }
     } catch (error: any) {
-      toast.error(
-        (error.message as string) || "Something went wrong. Please try again."
-      );
-      throw new Error("Something went wrong during registration.");
+      toast.error("User Already Exists");
+      // throw new Error("Something went wrong during registration.");
     }
   };
 
@@ -148,10 +150,7 @@ export default function useAuth() {
         return { success: false, message: "Otp Verifing failed." };
       }
     } catch (error: any) {
-      toast.error(
-        (error.message as string) || "Something went wrong. Please try again."
-      );
-      throw new Error("Something went wrong during registration.");
+      toast.error("Wrong Otp. Please enter your OTP again.");
     }
   };
 

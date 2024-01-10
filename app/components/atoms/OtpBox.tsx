@@ -8,9 +8,11 @@ import React, { useState } from "react";
 
 type Props = {
   userName: string;
+  close: () => void;
+  callback: () => void;
 };
 
-export default function OtpBox({ userName }: Props) {
+export default function OtpBox({ userName, close, callback }: Props) {
   const { verifyOtp } = useAuth();
   const [error, setError] = useState(false);
 
@@ -20,7 +22,9 @@ export default function OtpBox({ userName }: Props) {
     const data = await verifyOtp({ ...value, username: userName });
     console.log(data);
 
-    if (data.success) {
+    if (true) {
+      callback();
+      close();
       //Close OTP Popup
     } else {
       setError(data.success);

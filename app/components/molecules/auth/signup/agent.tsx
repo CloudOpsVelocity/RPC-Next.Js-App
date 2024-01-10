@@ -18,6 +18,8 @@ import { DropZone } from "./dropzone";
 import { useDisclosure } from "@mantine/hooks";
 import AuthPopup from "../authPopup";
 import useAuth from "@/app/hooks/useAuth";
+import { actionAsyncStorage } from "next/dist/client/components/action-async-storage.external";
+import Success from "../success";
 
 function Agent() {
   const [active, setActive] = useState(0);
@@ -71,34 +73,40 @@ function Agent() {
       return {};
     },
   });
-
+  const OtpCallback = () => {
+    close();
+    setActive((current) => (current < 3 ? current + 1 : current));
+  };
   const nextStep = async () => {
-    let values = form.values;
-    let data =
-      active == 0
-        ? //@ts-ignore
-          await register({ ...values, usertype: "A" })
-        : await registerOtherDetails(values);
-
-    if (!form.validate().hasErrors) {
-      if (active == 0) {
-        console.log(data);
-        if (data.success) {
-          open();
-        }
-      } else {
-        console.log(data);
-      }
+    // Validate the form
+    if (form.validate().hasErrors) {
+      return;
     }
 
-    if (data.success) {
-      setActive((current) => {
-        if (form.validate().hasErrors) {
-          return current;
-        }
-
-        return current < 3 ? current + 1 : current;
-      });
+    // Handle API call based on the current step
+    let values = form.values;
+    if (active === 0) {
+      // API call for the first step
+      //@ts-ignore
+      let data = await register({ ...values, usertype: "A" });
+      console.log(data);
+      if (data?.status) {
+        open();
+      }
+    } else if (active === 1) {
+      if (!form.validate().hasErrors) {
+        const data = await registerOtherDetails({ ...values });
+        console.log(data);
+        setActive((current) => (current < 3 ? current + 1 : current));
+      }
+      // API call for the second step
+      // Customize this based on your requirements
+    } else if (active === 2) {
+      // API call for the third step
+      // Customize this based on your requirements
+      console.log("API call for the third step");
+      // Proceed to the next step after the API call
+      setActive((current) => (current < 3 ? current + 1 : current));
     }
   };
 
@@ -108,6 +116,7 @@ function Agent() {
   return (
     <div className="w-full max-w-[423px] flex justify-center items-center flex-col m-[5%]">
       <AuthPopup
+        callback={OtpCallback}
         opened={opened}
         open={open}
         close={close}
@@ -170,16 +179,17 @@ function Agent() {
         </Stepper.Step>
 
         <Stepper.Completed>
-          Completed! Form values:
-          <Code block mt="xl">
+          {/* Completed! Form values: */}
+          <Success />
+          {/* <Code block mt="xl">
             {JSON.stringify(form.values, null, 2)}
-          </Code>
+          </Code> */}
           {/* {(window.location.href = "http://localhost:3000/success")} */}
         </Stepper.Completed>
       </Stepper>
 
       <Group justify="flex-end" mt="xl" className="w-full">
-        {active !== 3 && (
+        {active !== 2 && (
           <div className="w-[100%] flex justify-between items-center flex-wrap">
             <Button
               mt="sm"

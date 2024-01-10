@@ -1,6 +1,6 @@
 "use client";
 import "@mantine/dates/styles.css";
-import { SetStateAction, useState } from "react";
+import { useState } from "react";
 import {
   Stepper,
   Button,
@@ -24,9 +24,17 @@ import { DropZone } from "./dropzone";
 import AuthPopup from "../authPopup";
 import { useDisclosure } from "@mantine/hooks";
 import useAuth from "@/app/hooks/useAuth";
+import Success from "../success";
+import { useQuery } from "react-query";
+import {
+  getAllCitiesDetails,
+  getCitiesDetails,
+  getStatesDetails,
+} from "@/app/utils/stats_cities";
+import { cityParser, stateParser } from "@/app/utils/parse";
 
 function Builder() {
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(1);
   const router = useRouter();
 
   const [opened, { open, close }] = useDisclosure(false);
@@ -34,46 +42,6 @@ function Builder() {
   const { registerOtherDetails, register } = useAuth();
 
   // const [value, setValue] = useState<number | ComboboxItem | null>(null);
-
-  const [statesData, setStatesData] = useState<
-    {
-      cid: number;
-      constDesc: string;
-      constGroup: string;
-      constType: string;
-      constParentGroup: any;
-      parentGroupId: any;
-      seq: number;
-    }[]
-  >([
-    {
-      cid: 1,
-      constDesc: "Andhra Pradesh",
-      constGroup: "state",
-      constType: "CON",
-      constParentGroup: null,
-      parentGroupId: null,
-      seq: 1,
-    },
-    {
-      cid: 2,
-      constDesc: "Arunachal Pradesh",
-      constGroup: "state",
-      constType: "CON",
-      constParentGroup: null,
-      parentGroupId: null,
-      seq: 2,
-    },
-    {
-      cid: 3,
-      constDesc: "Assam",
-      constGroup: "state",
-      constType: "CON",
-      constParentGroup: null,
-      parentGroupId: null,
-      seq: 3,
-    },
-  ]);
 
   const form = useForm({
     initialValues: {
@@ -174,44 +142,55 @@ function Builder() {
       return {};
     },
   });
-
-  const nextStep = async () => {
-    let values = form.values;
-
-    let data =
-      active == 0
-        ? //@ts-ignore
-          await register({ ...values, usertype: "B" })
-        : await registerOtherDetails(values);
-
-    if (!form.validate().hasErrors) {
-      if (active == 0) {
-        console.log(data);
-        if (data.success) {
-          open();
-        }
-      } else {
-        const data = await registerOtherDetails(values);
-        console.log(data);
-      }
+  const { data: statesData, isLoading: isLoadingStates } = useQuery(
+    ["states"],
+    getStatesDetails
+  );
+  const { data: citiesData, isLoading: isLoadingCities } = useQuery(
+    ["cities" + form.values.state],
+    () => getCitiesDetails(parseInt(form.values.state)),
+    {
+      // The query will not execute until the userId exists
+      enabled: !!form.values.state,
     }
+  );
 
-    if (data.success) {
-      setActive((current) => {
-        if (form.validate().hasErrors) {
-          return current;
-        }
-
-        return current < 4 ? current + 1 : current;
-      });
-    }
+  const OtpCallback = () => {
+    close();
+    setActive((current) => (current < 3 ? current + 1 : current));
   };
+  const nextStep = async () => {
+    // Validate the form
+    if (form.validate().hasErrors) {
+      return;
+    }
 
+    // Handle API call based on the current step
+    let values = form.values;
+    if (active === 0) {
+      // API call for the first step
+      //@ts-ignore
+      let data = await register({ ...values, usertype: "B" });
+      console.log(data);
+      if (data?.status) {
+        open();
+      }
+    } else if (active === 3) {
+      // API call for the third step
+      // Customize this based on your requirements
+      console.log("API call for the third step");
+      // Proceed to the next step after the API call
+      setActive((current) => (current < 4 ? current + 1 : current));
+    }
+    setActive((current) => (current < 4 ? current + 1 : current));
+  };
   const prevStep = () =>
     setActive((current) => (current > 0 ? current - 1 : current));
+  console.log(citiesData);
   return (
     <div className="w-full max-w-[423px] flex justify-center items-center flex-col  m-[5%]">
       <AuthPopup
+        callback={OtpCallback}
         opened={opened}
         open={open}
         close={close}
@@ -269,21 +248,7 @@ function Builder() {
             mt="md"
             label="State"
             placeholder="Pick value"
-            data={[
-              "React",
-              "Angular",
-              "Vue",
-              "Svelte",
-              "React",
-              "Angular",
-              "Vue",
-              "Svelte",
-            ]}
-            //value={value ? value.cid : null}
-            // onChange={(
-            //   _value: any,
-            //   option: any
-            // ) => setValue(option)}
+            data={isLoadingStates ? [] : stateParser(statesData) || []}
             searchable
             {...form.getInputProps("state")}
             maxDropdownHeight={200}
@@ -294,7 +259,7 @@ function Builder() {
               mt="md"
               label="City"
               placeholder="Pick value"
-              data={["React", "Angular", "Vue", "Svelte"]}
+              data={isLoadingCities ? [] : cityParser(citiesData) || []}
               searchable
               {...form.getInputProps("city")}
               maxDropdownHeight={200}
@@ -391,10 +356,11 @@ function Builder() {
         </Stepper.Step>
 
         <Stepper.Completed>
-          Completed! Form values:
-          <Code block mt="xl">
+          {/* Completed! Form values: */}
+          <Success />
+          {/* <Code block mt="xl">
             {JSON.stringify(form.values, null, 2)}
-          </Code>
+          </Code> */}
           {/* {(window.location.href = "http://localhost:3000/success")} */}
         </Stepper.Completed>
       </Stepper>
