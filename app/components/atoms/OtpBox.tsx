@@ -1,8 +1,9 @@
 "use client";
 
 import useAuth from "@/app/hooks/useAuth";
+import { otpSchema } from "@/app/validations/auth";
 import { Box, Button, Modal, PinInput } from "@mantine/core";
-import { useForm } from "@mantine/form";
+import { useForm, yupResolver } from "@mantine/form";
 import Link from "next/link";
 import React, { useState } from "react";
 
@@ -22,7 +23,7 @@ export default function OtpBox({ userName, close, callback }: Props) {
     const data = await verifyOtp({ ...value, username: userName });
     console.log(data);
 
-    if (true) {
+    if (data.success) {
       callback();
       close();
       //Close OTP Popup
@@ -33,14 +34,7 @@ export default function OtpBox({ userName, close, callback }: Props) {
 
   const form = useForm({
     initialValues: { otp: 0 },
-
-    // functions will be used to validate values at corresponding key
-    validate: {
-      otp: (value) =>
-        isNaN(value) || value <= 0 || value.toString().length > 4
-          ? "You’ve entered wrong OTP, Please enter your OTP again!"
-          : null,
-    },
+    validate: yupResolver(otpSchema),
   });
 
   return (

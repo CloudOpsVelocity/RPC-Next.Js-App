@@ -16,11 +16,12 @@ import { individualSchema } from "@/app/validations/auth";
 import CountryInput from "@/app/components/atoms/CountryInput";
 import { useState } from "react";
 import Success from "../success";
+import Login from "../login";
 
 function Individual() {
   const [status, setStatus] = useState<"idle" | "pending" | "success">("idle");
   const router = useRouter();
-  const { register } = useAuth();
+  const { register, login } = useAuth();
   const [opened, { open, close }] = useDisclosure(false);
 
   const form = useForm({
@@ -41,7 +42,11 @@ function Individual() {
     // setIsdidValue(countrycode.options[countrycode.selectedIndex].text);
     // countrycode.options[countrycode.selectedIndex].text = countrycode.value;
   };
-  const OtpCallback = () => {
+  const OtpCallback = async () => {
+    const data = await login({
+      password: form.values.password,
+      username: form.values.email,
+    });
     form.reset();
     setStatus("success");
     close();

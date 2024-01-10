@@ -34,12 +34,12 @@ import {
 import { cityParser, stateParser } from "@/app/utils/parse";
 
 function Builder() {
-  const [active, setActive] = useState(1);
+  const [active, setActive] = useState(0);
   const router = useRouter();
 
   const [opened, { open, close }] = useDisclosure(false);
 
-  const { registerOtherDetails, register } = useAuth();
+  const { registerOtherDetails, register, login } = useAuth();
 
   // const [value, setValue] = useState<number | ComboboxItem | null>(null);
 
@@ -167,23 +167,46 @@ function Builder() {
 
     // Handle API call based on the current step
     let values = form.values;
-    if (active === 0) {
-      // API call for the first step
-      //@ts-ignore
-      let data = await register({ ...values, usertype: "B" });
-      console.log(data);
-      if (data?.status) {
-        open();
+
+    try {
+      switch (active) {
+        case 0:
+          // API call for the first step
+          //@ts-ignore
+          let data = await register({ ...values, usertype: "B" });
+          console.log(data);
+          if (data?.status) {
+            open();
+          }
+          break;
+        case 1:
+          setActive((current) => (current < 3 ? current + 1 : current));
+          break;
+        case 2:
+          setActive((current) => (current < 3 ? current + 1 : current));
+          break;
+        case 3:
+          // API call for the third step
+          const otherDetailsData = await registerOtherDetails({ ...values });
+          await login({
+            password: form.values.password,
+            username: form.values.email,
+          });
+          // Proceed to the next step after the API call
+          setActive((current) => (current < 4 ? current + 1 : current));
+          break;
+
+        // Add more cases if needed for other steps
+
+        default:
+          break;
       }
-    } else if (active === 3) {
-      // API call for the third step
-      // Customize this based on your requirements
-      console.log("API call for the third step");
-      // Proceed to the next step after the API call
-      setActive((current) => (current < 4 ? current + 1 : current));
+    } catch (error) {
+      console.error(error);
+      // Handle error (e.g., display an error message)
     }
-    setActive((current) => (current < 4 ? current + 1 : current));
   };
+
   const prevStep = () =>
     setActive((current) => (current > 0 ? current - 1 : current));
   console.log(citiesData);

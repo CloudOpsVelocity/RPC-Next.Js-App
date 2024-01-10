@@ -10,7 +10,7 @@ import {
   NumberInput,
   rem,
 } from "@mantine/core";
-import { useForm } from "@mantine/form";
+import { useForm, yupResolver } from "@mantine/form";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { styles } from "@/app/styles/Stepper";
@@ -20,11 +20,12 @@ import AuthPopup from "../authPopup";
 import useAuth from "@/app/hooks/useAuth";
 import { actionAsyncStorage } from "next/dist/client/components/action-async-storage.external";
 import Success from "../success";
+import { agentSchema } from "@/app/validations/auth";
 
 function Agent() {
   const [active, setActive] = useState(0);
   const router = useRouter();
-  const { registerOtherDetails, register } = useAuth();
+  const { registerOtherDetails, register, login } = useAuth();
 
   const [opened, { open, close }] = useDisclosure(false);
 
@@ -40,23 +41,8 @@ function Agent() {
     // @ts-ignore
     validate: (values) => {
       if (active === 0) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return {
-          userName:
-            values.userName.trim().length < 2 ? "Full name is required" : null,
-          email: !values.email.match(emailRegex)
-            ? "Valid email is required"
-            : null,
-
-          password:
-            values.password.trim().length < 1 ? "Password is required" : null,
-          mobile:
-            isNaN(values.mobile) ||
-            values.mobile <= 0 ||
-            values.mobile.toString().length !== 10
-              ? "Valid 10-digit contact number is required"
-              : null,
-        };
+        const data = yupResolver(agentSchema)(values);
+        return data;
       }
 
       if (active === 1) {
@@ -96,15 +82,17 @@ function Agent() {
     } else if (active === 1) {
       if (!form.validate().hasErrors) {
         const data = await registerOtherDetails({ ...values });
+        await login({
+          password: form.values.password,
+          username: form.values.email,
+        });
+
         console.log(data);
         setActive((current) => (current < 3 ? current + 1 : current));
       }
       // API call for the second step
       // Customize this based on your requirements
     } else if (active === 2) {
-      // API call for the third step
-      // Customize this based on your requirements
-      console.log("API call for the third step");
       // Proceed to the next step after the API call
       setActive((current) => (current < 3 ? current + 1 : current));
     }
