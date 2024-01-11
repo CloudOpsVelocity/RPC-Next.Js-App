@@ -1,4 +1,5 @@
 "use client";
+import S from "@/app/styles/Numinput.module.css";
 import { useForm, yupResolver } from "@mantine/form";
 import {
   NumberInput,
@@ -108,6 +109,9 @@ function Individual() {
             {...form.getInputProps("password")}
           />
           <NumberInput
+            classNames={{
+              input: S.input,
+            }}
             hideControls
             size="md"
             mt="sm"

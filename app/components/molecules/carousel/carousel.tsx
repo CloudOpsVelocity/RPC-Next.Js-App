@@ -12,7 +12,7 @@ const HomeCarousel = () => {
       img: "https://imagesrpc.s3.ap-south-1.amazonaws.com/images/varify/project/55/cover/cover.jpg",
       authorName: "Sidi dev",
       date: "Jan 4 2022",
-      href: "javascript:void(0)",
+      href: "#",
     },
     {
       title: "A Quick Guide to WordPress Hosting",
@@ -21,7 +21,7 @@ const HomeCarousel = () => {
       authorLogo: "https://api.uifaces.co/our-content/donated/FJkauyEa.jpg",
       authorName: "Micheal",
       date: "Jan 4 2022",
-      href: "javascript:void(0)",
+      href: "#",
     },
     {
       title: "7 Promising VS Code Extensions Introduced in 2022",
@@ -30,7 +30,7 @@ const HomeCarousel = () => {
       authorLogo: "https://randomuser.me/api/portraits/men/46.jpg",
       authorName: "Luis",
       date: "Jan 4 2022",
-      href: "javascript:void(0)",
+      href: "#",
     },
     {
       title: "How to Use Root C++ Interpreter Shell to Write C++ Programs",
@@ -39,7 +39,7 @@ const HomeCarousel = () => {
       authorLogo: "https://api.uifaces.co/our-content/donated/KtCFjlD4.jpg",
       authorName: "Lourin",
       date: "Jan 4 2022",
-      href: "javascript:void(0)",
+      href: "#",
     },
   ];
 

@@ -8,10 +8,6 @@ type props = {
   className: string;
 };
 
-// const str = "+91 India";
-
-// const result = str.split(/[ ]+/)[0];
-
 export default function CountryInput({ onSelect, className }: props) {
   return (
     <select
