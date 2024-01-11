@@ -48,7 +48,9 @@ const AddRating = ({ opened, close }: { opened: any; close: any }) => {
     <>
       <Modal
         classNames={{
-          title: "text-[#003366] font-[500] text-[100px]",
+          title: S.title,
+          root: S.root,
+          close: S.close,
         }}
         opened={opened}
         onClose={close}

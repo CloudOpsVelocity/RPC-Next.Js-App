@@ -6,6 +6,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { Modal } from "@mantine/core";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
+import S from "@/app/styles/Req.module.css";
 export default function OverviewBanner({
   minPrice,
   maxPrice,
@@ -52,11 +53,12 @@ const RequestCallBackModal = ({
       <Modal
         opened={opened}
         onClose={close}
-        title="Request Callback"
         centered
         size={"70%"}
         className="!rounded-full"
-        style={{}}
+        classNames={{
+          close: S.close,
+        }}
       >
         <>
           {/* <div className="bg-[#E0F7FF]  flex items-center justify-center p-4"> */}

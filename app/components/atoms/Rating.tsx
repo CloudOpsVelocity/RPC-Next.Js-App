@@ -21,10 +21,10 @@ const Rating: React.FC<RatingProps> = ({
   };
 
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex justify-center items-center pr-5">
       {[...Array(maxStars)].map((_, index) => (
         <span
-          className="text-5xl"
+          className="text-5xl "
           key={index}
           onClick={() => handleStarClick(index + 1)}
           style={{

@@ -1,2 +1,16 @@
 .title {
+  font-size: 32px;
+  font-weight: 600;
+  text-align: center !important;
+  width: 100%;
+  padding-top: 2px;
+}
+
+.root {
+  border-radius: 5rem;
+}
+.close {
+  background: red;
+  color: white;
+  border-radius: 100%;
 }
