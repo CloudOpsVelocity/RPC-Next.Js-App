@@ -4,7 +4,7 @@ import { useDisclosure } from "@mantine/hooks";
 import Image from "next/image";
 import React, { useState } from "react";
 import Rating from "../atoms/Rating";
-
+import S from "@/app/styles/Rating.module.css";
 export default function Banner() {
   const [opened, { open, close }] = useDisclosure(false);
   return (
@@ -47,6 +47,9 @@ const AddRating = ({ opened, close }: { opened: any; close: any }) => {
   return (
     <>
       <Modal
+        classNames={{
+          title: "text-[#003366] font-[500] text-[100px]",
+        }}
         opened={opened}
         onClose={close}
         centered

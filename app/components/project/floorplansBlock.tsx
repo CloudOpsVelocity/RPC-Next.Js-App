@@ -124,30 +124,6 @@ export default function FloorplansBlock({ data }: { data: PhaseList[] }) {
       </div>
 
       <div className=" flex justify-start items-start mt-[3%] flex-wrap mb-[3%] md:mb-0 ">
-        {/* {floorplanTypes.map((each, index) => {
-          return (
-            <Button
-              key={index}
-              title={each.title}
-              icon={
-                each.value == "type" ? (
-                  <ByTypeSvg />
-                ) : each.value == "unit" ? (
-                  <ByUnitSvg />
-                ) : (
-                  <ByBhkSvg />
-                )
-              }
-              onChange={() => setFloorPlanType(each.value)}
-              buttonClass={`text-[24px] mr-[40px] whitespace-nowrap flex justify-center items-center gap-[6px] ${
-                floorPlanType == each.value
-                  ? "font-[600] text-[#001F35]"
-                  : "font-[400] text-[#4D6677]"
-              } `}
-            />
-          );
-        })} */}
-
         <Button
           title="By Type"
           icon={
