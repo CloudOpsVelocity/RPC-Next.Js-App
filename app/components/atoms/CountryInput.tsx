@@ -12,8 +12,6 @@ type props = {
 
 // const result = str.split(/[ ]+/)[0];
 
-// console.log(result);
-
 export default function CountryInput({ onSelect, className }: props) {
   return (
     <select

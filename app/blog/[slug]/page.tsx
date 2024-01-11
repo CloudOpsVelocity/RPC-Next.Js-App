@@ -5,7 +5,6 @@ type Params = {
 };
 
 export async function generateMetadata({ params }: Params) {
-  console.log(process.env.NEXT_PUBLIC_NAME);
   return { title: `Post: ${params.slug}` };
 }
 

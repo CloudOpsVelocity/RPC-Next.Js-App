@@ -90,7 +90,6 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           title="Projects By Developers"
           content="See what developers has posted"
         />
-        {/* <ProjectDrawer /> */}
       </div>
     </div>
   );

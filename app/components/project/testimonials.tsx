@@ -19,7 +19,6 @@ const Card = ({}: Props) => {
           src="/youtube.png"
           alt="Ankita Soni"
           className="rounded-l-[10px] w-[285px] h-[149px] "
-          style={{ aspectRatio: "80 / 80", objectFit: "cover" }}
         />
         <div className="flex justify-start p-[2%] items-center flex-col ml-[20px] ">
           <div className=" flex justify-between w-full items-start flex-wrap">
@@ -68,7 +67,6 @@ export default function Testimonials() {
               src="/youtube.png"
               alt="Testimonials video"
               className="rounded-lg !w-[100%]"
-              //style={{ aspectRatio: "480 / 240", objectFit: "cover" }}
             />
             <button className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full p-4">
               <svg

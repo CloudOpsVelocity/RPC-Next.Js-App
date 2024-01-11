@@ -1,0 +1,10 @@
+.title {
+  font-size: larger;
+  text-align: center !important;
+  font-weight: 700;
+}
+
+.header {
+  background-color: #ededed;
+  margin-bottom: 4%;
+}

@@ -32,7 +32,6 @@ export default function Banner() {
           className="h-[200px] w-[400px]"
           width={400}
           height={200}
-          style={{ aspectRatio: "400 / 200", objectFit: "cover" }}
         />
       </div>
       <AddRating opened={opened} close={close} />

@@ -12,7 +12,6 @@ export default function AuthButton() {
     signOut();
   };
   const { data: session } = useSession();
-  console.log(session);
 
   const postProjectLink = session
     ? `${process.env.NEXT_PUBLIC_PROJECT_URL}/project/postProject`

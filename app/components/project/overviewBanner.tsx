@@ -78,7 +78,6 @@ const RequestCallBackModal = ({
                 alt="Customer Support"
                 width={500}
                 height={534}
-                style={{ aspectRatio: "500 / 534", objectFit: "cover" }}
               />
             </div>
           </div>

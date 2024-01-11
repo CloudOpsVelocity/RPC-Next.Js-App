@@ -21,6 +21,7 @@ import FloorplanDetailsCard from "./floorplanDetailsCard";
 import Byunitblock from "./byunitblock";
 import ByBhkBlock from "./byBhkBlock";
 import { PhaseList } from "@/app/validations/types/project";
+import FloorPlanModal from "./modals/FloorPlan";
 
 const dummyProptypesList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 
@@ -30,11 +31,8 @@ export default function FloorplansBlock({ data }: { data: PhaseList[] }) {
   const [floorPlanType, setFloorPlanType] = useState("type");
   const [currentPhase, setCurrentPhase] = useState("");
 
-  const phases = [1, 2, 3, 4, 5];
-
   const getPropertyType = (data: any) => {
     setPropCgId(data.id);
-    console.log(data);
   };
 
   const iconStyles: string =
@@ -105,7 +103,8 @@ export default function FloorplansBlock({ data }: { data: PhaseList[] }) {
               propertyDetailsTypes.get(keyName).name != undefined
                 ? //@ts-ignore
                   propertyDetailsTypes.get(keyName).name
-                : "";
+                : null;
+
             return (
               <Button
                 key={keyName}
@@ -218,12 +217,7 @@ export default function FloorplansBlock({ data }: { data: PhaseList[] }) {
           <div className="flex justify-center items-center h-[300px] lg:h-[450px]">
             {/* dISPLAY FLOOR PLAN HERE */}
           </div>
-          <div className="bg-[#F4FBFF] p-[10px] rounded-[29px] gap-[12px] flex justify-end items-center  ">
-            <p className="text-[12px] lg:text-[14px] font-[600] text-[#0073C6] underline ">
-              Click on image to open floor plan details
-            </p>
-            <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] " />
-          </div>
+          <FloorPlanModal />
         </div>
       </div>
     </div>

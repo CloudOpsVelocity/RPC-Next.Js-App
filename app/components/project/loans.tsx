@@ -21,7 +21,6 @@ export default function Loans({ data }: { data: Bank[] }) {
                 alt={item.constDesc}
                 width={100}
                 height={50}
-                style={{ aspectRatio: "100 / 50", objectFit: "cover" }}
                 className="mb-[3%]"
               />
             ))}

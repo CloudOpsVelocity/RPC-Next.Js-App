@@ -55,9 +55,12 @@ export default function PropertyTypeDetailsCrad({ cg }: Props) {
           )}
         </div>
 
-        <p className="text-[16px] lg:text-[18px] text-[#0073C6] font-[600] underline mb-[2%] cursor-pointer ">
+        <a
+          href="#floorPlans"
+          className="text-[16px] lg:text-[18px] text-[#0073C6] font-[600] underline mb-[2%] cursor-pointer "
+        >
           View Floor Plans
-        </p>
+        </a>
       </div>
     </div>
   );

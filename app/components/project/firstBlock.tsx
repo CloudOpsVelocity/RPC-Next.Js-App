@@ -50,7 +50,6 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
                       width={1000}
                       height={200}
                       alt="project image"
-                      objectFit="cover"
                       src={imageUrl}
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className={`w-full rounded-[10px] h-[545px] lg:h-[680px] bg-gray-${

@@ -62,7 +62,6 @@ export default function useAuth() {
 
   const loginWithCredentials = async (data: Login): Promise<any> => {
     const res = await signIn("credentials", { ...data, redirect: false });
-    console.log(res);
     if (res?.ok) {
       router.push("/");
     } else {

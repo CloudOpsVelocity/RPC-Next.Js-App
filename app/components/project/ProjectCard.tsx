@@ -61,7 +61,6 @@ export function ProjectCard({ type }: CardProps) {
             className="w-full h-auto mb-4"
             width={300}
             height={150}
-            style={{ aspectRatio: "300 / 150", objectFit: "cover" }}
           />
 
           <div className=" flex justify-end items-end w-[95%] ">
