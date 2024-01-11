@@ -4,8 +4,10 @@ import useAuth from "@/app/hooks/useAuth";
 import { otpSchema } from "@/app/validations/auth";
 import { Box, Button, Modal, PinInput } from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
+import { useInterval } from "@mantine/hooks";
+import clsx from "clsx";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 type Props = {
   userName: string;
@@ -68,9 +70,7 @@ export default function OtpBox({ userName, close, callback }: Props) {
           //error
         />
 
-        <p className=" font-[500] text-[16px] text-right w-[100%] !max-w-[423px] !mb-[6%] underline text-[#0c7aca] cursor-pointer">
-          Resend OTP
-        </p>
+        <Resend />
 
         {error && (
           <p className="text-[#F00] font-[500] text-[16px] w-[100%] !max-w-[423px] !mb-[6%] text-center ">
@@ -89,3 +89,51 @@ export default function OtpBox({ userName, close, callback }: Props) {
     </Box>
   );
 }
+
+/**
+ * Resend OTP component.
+ *
+ * @returns JSX.Element
+ */
+const Resend = (): JSX.Element => {
+  const [seconds, setSeconds] = useState<number>(0);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    intervalRef.current = setInterval(() => {
+      setSeconds((prevSeconds: number) => prevSeconds + 1);
+    }, 1000);
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (seconds >= 30 && intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+  }, [seconds]);
+
+  const handleResendClick = (): void => {
+    setSeconds(0);
+  };
+
+  const isResendDisabled: boolean = seconds > 1 ? true : false;
+  console.log(isResendDisabled);
+
+  return (
+    <>
+      <p
+        onClick={handleResendClick}
+        className={`font-[500] text-[16px] text-right w-[100%] !max-w-[423px] !mb-[6%] underline text-[#0c7aca] cursor-pointer mt-2 ${
+          isResendDisabled ? "pointer-events-none" : "pointer-events-auto"
+        }`}
+      >
+        {isResendDisabled ? `Resend OTP in ${30 - seconds}s` : "Resend OTP"}
+      </p>
+    </>
+  );
+};

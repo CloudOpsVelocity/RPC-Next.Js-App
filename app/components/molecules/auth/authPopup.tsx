@@ -23,7 +23,7 @@ function AuthPopup({ opened, open, close, userName, callback }: props) {
         transitionProps={{ transition: "fade", duration: 200 }}
         zIndex={1000}
         maw={"max-content"}
-        size={"80%"}
+        size={"40%"}
       >
         {/* {JSON.stringify(session)} */}
         {/* <Form /> */}

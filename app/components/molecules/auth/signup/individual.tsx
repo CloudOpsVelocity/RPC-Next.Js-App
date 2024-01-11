@@ -47,9 +47,6 @@ function Individual() {
   };
   const displayCountryCode = (value: any) => {
     console.log(value);
-    // var countrycode = document.getElementById("isdCodes");
-    // setIsdidValue(countrycode.options[countrycode.selectedIndex].text);
-    // countrycode.options[countrycode.selectedIndex].text = countrycode.value;
   };
   const OtpCallback = async () => {
     const data = await login({
