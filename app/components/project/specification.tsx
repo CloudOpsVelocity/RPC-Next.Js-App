@@ -15,10 +15,10 @@ export default function Specifications({
   const handleSpecClick = (index: number) => {
     setSelectedSpecIndex(index);
     const newData = [...specs];
+
+    // Move the selected item to the beginning
     newData.unshift(newData.splice(index, 1)[0]);
-    if (specs.length > 1 && specs.length < 4) {
-      newData.pop();
-    }
+
     setSpecs(newData);
   };
 
