@@ -65,7 +65,7 @@ export default function ProjectDetails({}: Props) {
                 <p className='text-[#00487C] text-[16px] lg:text-[20px] font-[600] underline '>+91- 8675497304</p>
             </div>
 
-            <div className='flex justify-start items-start flex-col mb-[2%] max-w-[40%] '>
+            <div className='flex justify-start items-start flex-col mb-[2%] w-[100%] md:w-[40%] '>
                 <p className='text-[#303030] text-[16px] lg:text-[24px] rounded-[30px] mb-[9px] font-[500] p-[8px] flex justify-center items-center bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 '>{lacationIconSvg} Address</p>
                 <p className='text-[#00487C] text-[16px] lg:text-[20px] font-[600] underline '>Folium by Sumadhura, Borewell Rd, Whitefield, Palm Meadows, Ramagondanahalli, Bengaluru, Karnataka 560066</p>
             </div>

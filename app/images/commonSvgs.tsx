@@ -5659,6 +5659,7 @@ export const shortlistIconSvg = (
 
 export const builderPageHomeSvg = (
   <svg
+    className="  h-[167px] md:h-[231px] lg:h-[296px] "
     xmlns="http://www.w3.org/2000/svg"
     width="714"
     height="296"
