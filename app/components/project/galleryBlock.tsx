@@ -63,7 +63,7 @@ export default function GalleryBlock({
             Photos
           </h3>
           <div className="flex justify-start items-start w-full gap-[4%] flex-wrap ">
-            {images.map((img, ind) => (
+            {images?.map((img, ind) => (
               <div
                 key={ind}
                 className="w-[110px] lg:w-[152px] h-[68px] lg:h-[94px] bg-[#dfdcdc] rounded-[5px] shadow-md mb-[4%]"
@@ -84,7 +84,7 @@ export default function GalleryBlock({
             Videos
           </h3>
           <div className="flex justify-start items-start w-full gap-[4%] flex-wrap ">
-            {videos.map((img, ind) => (
+            {videos?.map((img, ind) => (
               <div
                 key={ind}
                 className="w-[110px] lg:w-[152px] h-[68px] lg:h-[94px] bg-[#dfdcdc] rounded-[5px] shadow-md mb-[4%]"
