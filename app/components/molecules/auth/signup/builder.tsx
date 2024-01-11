@@ -15,7 +15,7 @@ import {
   MultiSelect,
   ComboboxItem,
 } from "@mantine/core";
-import { useForm } from "@mantine/form";
+import { useForm, yupResolver } from "@mantine/form";
 import { DateInput } from "@mantine/dates";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -32,6 +32,7 @@ import {
   getStatesDetails,
 } from "@/app/utils/stats_cities";
 import { cityParser, stateParser } from "@/app/utils/parse";
+import { agentSchema } from "@/app/validations/auth";
 
 function Builder() {
   const [active, setActive] = useState(0);
@@ -48,7 +49,7 @@ function Builder() {
       userName: "",
       email: "",
       password: "",
-      mobile: 0,
+      mobile: null,
       address: "",
       companyName: "",
       state: "",
@@ -65,22 +66,8 @@ function Builder() {
     },
     validate: (values) => {
       if (active === 0) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return {
-          userName:
-            values.userName.trim().length < 2 ? "Full name is required" : null,
-          email: !values.email.match(emailRegex)
-            ? "Valid email is required"
-            : null,
-          password:
-            values.password.trim().length < 1 ? "Password is required" : null,
-          mobile:
-            isNaN(values.mobile) ||
-            values.mobile <= 0 ||
-            values.mobile.toString().length !== 10
-              ? "Valid 10-digit contact number is required"
-              : null,
-        };
+        const data = yupResolver(agentSchema)(values);
+        return data;
       }
 
       if (active === 1) {
@@ -246,47 +233,53 @@ function Builder() {
       >
         <Stepper.Step label="Personal Details">
           <TextInput
+            required
             size="md"
             label="Full Name"
-            placeholder="Full Name"
+            placeholder="Enter your name here"
             {...form.getInputProps("userName")}
           />
           <TextInput
+            required
             size="md"
             mt="sm"
             label="Email"
-            placeholder="Email"
+            placeholder="Enter your email here"
             {...form.getInputProps("email")}
           />
           <PasswordInput
+            required
             size="md"
             mt="sm"
             label="Password"
-            placeholder="Password"
+            placeholder="Enter your password here"
             {...form.getInputProps("password")}
           />
           <NumberInput
+            required
             hideControls
             size="md"
             mt="sm"
             label="Contact"
-            placeholder="Enter Contact Number"
+            placeholder="Enter your contact here"
             {...form.getInputProps("mobile")}
           />
         </Stepper.Step>
 
         <Stepper.Step label="Address & Other">
           <TextInput
+            required
             size="md"
             label="Address"
-            placeholder="Address"
+            placeholder="Enter your address here"
             {...form.getInputProps("address")}
           />
           <Select
+            required
             size="md"
             mt="md"
             label="State"
-            placeholder="Pick value"
+            placeholder="Select state"
             data={isLoadingStates ? [] : stateParser(statesData) || []}
             searchable
             {...form.getInputProps("state")}
@@ -294,21 +287,23 @@ function Builder() {
           />
           <SimpleGrid cols={2}>
             <Select
+              required
               size="md"
               mt="md"
               label="City"
-              placeholder="Pick value"
+              placeholder="Select city"
               data={isLoadingCities ? [] : cityParser(citiesData) || []}
               searchable
               {...form.getInputProps("city")}
               maxDropdownHeight={200}
             />
             <NumberInput
+              required
               size="md"
               mt="md"
               hideControls
               label="Pincode"
-              placeholder="Pincode"
+              placeholder="Enter your pincode here"
               {...form.getInputProps("pincode")}
             />
           </SimpleGrid>
@@ -317,13 +312,15 @@ function Builder() {
 
         <Stepper.Step label="Company details">
           <TextInput
+            required
             size="md"
             mt="md"
             label="Builder Owned By"
-            placeholder="Company Name"
+            placeholder="Enter your builder name"
             {...form.getInputProps("companyName")}
           />
           <MultiSelect
+            required
             size="md"
             mt="md"
             checkIconPosition="right"
@@ -333,29 +330,33 @@ function Builder() {
             {...form.getInputProps("branchName")}
           />
           <DateInput
+            required
             mt="md"
             label="Company Start Date"
-            placeholder="DD/MM/YYYY"
+            placeholder="Select company start date"
             {...form.getInputProps("companyStartDate")}
           />
 
           <TextInput
+            required
             size="md"
             mt="md"
             label="Founded By"
-            placeholder="Founded By"
+            placeholder="Founder name"
             {...form.getInputProps("foundedBy")}
           />
 
           <TextInput
+            required
             size="md"
             mt="md"
             label="Ceo Name"
-            placeholder="Ceo Name"
+            placeholder="Enter Ceo Name"
             {...form.getInputProps("ceoName")}
           />
 
           <TextInput
+            required
             size="md"
             mt="md"
             label="Managing Director"
@@ -364,32 +365,33 @@ function Builder() {
           />
 
           <NumberInput
+            required
             hideControls
             size="md"
             mt="sm"
             className="w-[100%] mb-[3%] "
-            label="Office Contact"
+            label="Enter Office Contact"
             placeholder="Enter Office Contact"
             {...form.getInputProps("officeContact")}
           />
         </Stepper.Step>
         <Stepper.Step label="Description">
           <Textarea
+            required
             placeholder="Enter your company vision you are going to provide buyers."
             label="Companies Vision"
             autosize
             minRows={5}
-            required
             {...form.getInputProps("vission")}
           />
           <Textarea
+            required
             description="maximum  5000 characters"
             mt={"md"}
             placeholder="Enter your company vision you are going to provide buyers."
             label="Builders Description"
             autosize
             minRows={5}
-            required
             {...form.getInputProps("mission")}
           />
         </Stepper.Step>
