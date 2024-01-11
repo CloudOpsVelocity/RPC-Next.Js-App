@@ -3,6 +3,7 @@ import Button from "@/app/elements/button";
 import ButtonLink from "@/app/elements/link";
 import axios from "axios";
 import { signOut, useSession } from "next-auth/react";
+import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 
@@ -22,11 +23,14 @@ export default function AuthButton() {
     : "/login";
 
   const logoutButton = session?.user ? (
-    <Button
-      onChange={logOut}
-      buttonClass="login-btn text-[20px] font-semibold px-5 py-2 rounded-full text-[#0073C6] border-none underline bg-gradient-to-r from-[#EFF8FF] to-[#FFF] shadow-md"
-      title={`${session.user.userName} Logout`}
-    />
+    <>
+      <Button
+        icon={<Image width={10} height={10} alt="logout" src="/burger.svg" />}
+        onChange={logOut}
+        buttonClass="login-btn text-[20px] font-semibold px-5 py-2 rounded-full text-[#0073C6] border-none underline bg-gradient-to-r from-[#EFF8FF] to-[#FFF] shadow-md"
+        title={`${session.user.userName}`}
+      />
+    </>
   ) : (
     <ButtonLink
       href="/login"
@@ -38,19 +42,21 @@ export default function AuthButton() {
   return (
     <>
       {session && (
-        <Link
+        <a
+          target="_blank"
           href={postProjectLink}
           className="text-[20px] font-semibold px-5 bg-[#227FBC] py-1.5 rounded-xl text-white"
         >
           Post Your Project
-        </Link>
+        </a>
       )}
-      <Link
+      <a
+        target="_blank"
         href={postListingLink}
         className="text-[20px] font-semibold px-5 bg-[#227FBC] py-1.5 rounded-xl text-white"
       >
         Post Listing
-      </Link>
+      </a>
       {logoutButton}
     </>
   );

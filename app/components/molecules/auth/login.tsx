@@ -78,7 +78,7 @@ function Login() {
         </Button>
         <div className="text-center mt-2">
           <p className="text-sm">
-            Don't have an Account?{" "}
+            Don`&apos;t have an Account?{" "}
             <Link
               href={"/register"}
               className="inline-flex items-center justify-center rounded-md text-sm  ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary hover:bg-primary/90 h-10 px-4 py-2 text-[#0C7ACA] hover:underline font-bold"

@@ -39,7 +39,10 @@ function FloorPlanModal() {
             </p>
             <div className="flex flex-wrap gap-4 mb-4">
               {[...Array(10)].map((_, i) => (
-                <div className="flex items-center px-3 py-1.5 bg-white border border-[#c4f1f9] rounded-full">
+                <div
+                  className="flex items-center px-3 py-1.5 bg-white border border-[#c4f1f9] rounded-full"
+                  key={i}
+                >
                   <span className="text-[#57a773] font-semibold">01</span>
                   <span className="mx-1.5 text-[#6e798c]">|</span>
                   <span className="text-[#6e798c]">Unit Number</span>
