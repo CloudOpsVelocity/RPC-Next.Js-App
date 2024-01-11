@@ -13,7 +13,7 @@ export default function BuildersBlock() {
         <p className="text-lg text-gray-600 mt-2 italic">
           Check out some others builder in Bangalore
         </p>
-        <div className="mt-8 relative">
+        <div className="mt-8 relative ">
           <Carousel
             slideGap={"xs"}
             align="start"
@@ -23,23 +23,23 @@ export default function BuildersBlock() {
             slidesToScroll={1}
           >
             <Carousel.Slide>
-              <div className="rounded-[10px] w-[209px] h-[203px] shadow-md bg-[#c2bfbf] "></div>
+              <div className="rounded-[10px] w-[107px] h-[105px] md:w-[140] md:h-[136px] lg:w-[209px] lg:h-[203px] shadow-md bg-[#c2bfbf] "></div>
             </Carousel.Slide>
             <Carousel.Slide>
-            <div className="rounded-[10px] w-[209px] h-[203px] shadow-md bg-[#c2bfbf] "></div>
+            <div className="rounded-[10px]  w-[107px] h-[105px] md:w-[140] md:h-[136px] lg:w-[209px] lg:h-[203px] shadow-md bg-[#c2bfbf] "></div>
            
             </Carousel.Slide>
             <Carousel.Slide>
-            <div className="rounded-[10px] w-[209px] h-[203px] shadow-md bg-[#c2bfbf] "></div>
+            <div className="rounded-[10px]  w-[107px] h-[105px] md:w-[140] md:h-[136px] lg:w-[209px] lg:h-[203px] shadow-md bg-[#c2bfbf] "></div>
             </Carousel.Slide>
             <Carousel.Slide>
-            <div className="rounded-[10px] w-[209px] h-[203px] shadow-md bg-[#c2bfbf] "></div>
+            <div className="rounded-[10px]  w-[107px] h-[105px] md:w-[140] md:h-[136px] lg:w-[209px] lg:h-[203px] shadow-md bg-[#c2bfbf] "></div>
             </Carousel.Slide>
             <Carousel.Slide>
-            <div className="rounded-[10px] w-[209px] h-[203px] shadow-md bg-[#c2bfbf] "></div>
+            <div className="rounded-[10px]  w-[107px] h-[105px] md:w-[140] md:h-[136px] lg:w-[209px] lg:h-[203px] shadow-md bg-[#c2bfbf] "></div>
             </Carousel.Slide>
             <Carousel.Slide>
-            <div className="rounded-[10px] w-[209px] h-[203px] shadow-md bg-[#c2bfbf] "></div>
+            <div className="rounded-[10px]  w-[107px] h-[105px] md:w-[140] md:h-[136px] lg:w-[209px] lg:h-[203px] shadow-md bg-[#c2bfbf] "></div>
             </Carousel.Slide>
           </Carousel>
         </div>
