@@ -68,7 +68,7 @@ export default function OtpBox({ userName, close, callback }: Props) {
           //error
         />
 
-        <p className="text-[#666] font-[500] text-[16px] text-right w-[100%] !max-w-[423px] !mb-[6%] ">
+        <p className=" font-[500] text-[16px] text-right w-[100%] !max-w-[423px] !mb-[6%] underline text-[#0c7aca] cursor-pointer">
           Resend OTP
         </p>
 
@@ -81,7 +81,7 @@ export default function OtpBox({ userName, close, callback }: Props) {
         <Button
           type="submit"
           mt="sm"
-          className="!rounded-[6px] !w-[100%] !max-w-[423px] "
+          className="!rounded-[6px] !w-[100%] !max-w-[423px] !bg-[#0c7aca]"
         >
           VALIDATE
         </Button>

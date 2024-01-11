@@ -149,7 +149,7 @@ export default function useAuth() {
         return { success: false, message: "Otp Verifing failed." };
       }
     } catch (error: any) {
-      toast.error("Wrong Otp. Please enter your OTP again.");
+      console.log("Wrong Otp. Please enter your OTP again.");
     }
   };
 
