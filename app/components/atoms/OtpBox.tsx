@@ -18,11 +18,7 @@ export default function OtpBox({ userName, close, callback }: Props) {
   const [error, setError] = useState(false);
 
   const onSubmit = async (value: any) => {
-    console.log(value);
-
     const data = await verifyOtp({ ...value, username: userName });
-    console.log(data);
-
     if (data?.success) {
       callback();
       close();

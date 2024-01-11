@@ -97,7 +97,7 @@ export default function FloorplansBlock({ data }: { data: PhaseList[] }) {
       <div className=" flex justify-start items-start flex-wrap mt-[3%] ">
         {propertyDetailsTypes != undefined &&
           propertyDetailsTypes != null &&
-          allKeys.map((keyName, ind) => {
+          allKeys.map((keyName) => {
             let name =
               //@ts-ignore
               propertyDetailsTypes.get(keyName).name != undefined

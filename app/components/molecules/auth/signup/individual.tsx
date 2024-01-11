@@ -19,7 +19,9 @@ import Success from "../success";
 import Login from "../login";
 
 function Individual() {
-  const [status, setStatus] = useState<"idle" | "pending" | "success">("idle");
+  const [status, setStatus] = useState<
+    "idle" | "pending" | "success" | "error"
+  >("idle");
   const router = useRouter();
   const { register, login } = useAuth();
   const [opened, { open, close }] = useDisclosure(false);
@@ -29,13 +31,19 @@ function Individual() {
     validate: yupResolver(individualSchema),
   });
   const onSubmit = async (values: typeof form.values) => {
+    setStatus("pending");
     const data = await register({ ...values, usertype: "I" });
     console.log(data);
     if (data?.status) {
       open();
+    } else {
+      setStatus("error");
     }
   };
-
+  const onClose = () => {
+    setStatus("idle");
+    close();
+  };
   const displayCountryCode = (value: any) => {
     console.log(value);
     // var countrycode = document.getElementById("isdCodes");
@@ -123,6 +131,7 @@ function Individual() {
               Back
             </Button>
             <Button
+              loading={status === "pending"}
               type="submit"
               mt="sm"
               className="!rounded-[6px] !w-[100%] !max-w-[225px] !bg-[#0c7aca]"
@@ -154,7 +163,7 @@ function Individual() {
         callback={OtpCallback}
         opened={opened}
         open={open}
-        close={close}
+        close={onClose}
         userName={form.values.email}
       />
     </Box>
