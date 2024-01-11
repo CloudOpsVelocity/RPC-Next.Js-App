@@ -1,5 +1,6 @@
 "use client";
 import S from "@/app/styles/Numinput.module.css";
+import P from "@/app/styles/Pass.module.css";
 import { useForm, yupResolver } from "@mantine/form";
 import {
   NumberInput,
@@ -28,7 +29,7 @@ function Individual() {
   const [opened, { open, close }] = useDisclosure(false);
 
   const form = useForm({
-    initialValues: { name: "", email: "", password: "", mobile: 0 },
+    initialValues: { name: "", email: "", password: "", mobile: null },
     validate: yupResolver(individualSchema),
   });
   const onSubmit = async (values: typeof form.values) => {
@@ -58,8 +59,6 @@ function Individual() {
     close();
   };
 
-  console.log(form.errors.mobile);
-
   return (
     <Box className="w-full max-w-[423px] mt-[3%] " mx="auto">
       <div className="w-full max-w-[459px] md:max-w-[597px] flex justify-center items-center gap-[5%] mb-[5%] ">
@@ -85,29 +84,37 @@ function Individual() {
           className="w-[100%] flex justify-center items-center flex-col"
         >
           <TextInput
+            required
             size="md"
-            label="Full Name"
+            label="Enter your name here"
             className="w-[100%] mb-[3%] "
             placeholder="Full Name"
             {...form.getInputProps("name")}
           />
           <TextInput
+            type="email"
+            required
             mt="sm"
             size="md"
             className="w-[100%] mb-[3%] "
             label="Email"
-            placeholder="Email"
+            placeholder="Enter your email here"
             {...form.getInputProps("email")}
           />
           <PasswordInput
+            classNames={{
+              visibilityToggle: P.visibilityToggle,
+            }}
+            required
             size="md"
             mt="sm"
             className="w-[100%] mb-[3%] "
             label="Password"
-            placeholder="Password"
+            placeholder="Enter your password here"
             {...form.getInputProps("password")}
           />
           <NumberInput
+            required
             classNames={{
               input: S.input,
             }}
@@ -116,13 +123,18 @@ function Individual() {
             mt="sm"
             className="w-[100%] mb-[3%] "
             label="Contact Number"
-            placeholder="Contact Number"
+            placeholder="Enter your contact number here"
             {...form.getInputProps("mobile")}
+            maxLength={10}
           />
 
           <CountryInput
             onSelect={displayCountryCode}
-            className={`focus:outline-none min-w-[30px] max-w-[70px] self-start relative ${form.errors.mobile != undefined && form.errors.mobile != null ? "bottom-[65px]" : "bottom-[45px]" }  ml-[2px]`}
+            className={`focus:outline-none min-w-[30px] max-w-[70px] self-start relative ${
+              form.errors.mobile != undefined && form.errors.mobile != null
+                ? "bottom-[65px]"
+                : "bottom-[45px]"
+            }  ml-[2px]`}
           />
 
           <div className="w-full flex justify-between items-center flex-wrap">

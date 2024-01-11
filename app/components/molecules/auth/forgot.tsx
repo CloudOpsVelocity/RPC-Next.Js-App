@@ -10,7 +10,8 @@ import {
 import useAuth from "@/app/hooks/useAuth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-
+import CountryInput from "../../atoms/CountryInput";
+import S from "@/app/styles/Numinput.module.css";
 function ForgotForm() {
   const router = useRouter();
   const form = useForm({
@@ -28,7 +29,9 @@ function ForgotForm() {
   const onSubmit = async (values: any) => {
     login(values);
   };
-
+  const displayCountryCode = (value: any) => {
+    console.log(value);
+  };
   return (
     <Box mx="auto" className="w-full max-w-[423px] mt-[3%] ">
       <form
@@ -36,6 +39,7 @@ function ForgotForm() {
         className="w-[100%] flex justify-center items-center flex-col "
       >
         <NumberInput
+          classNames={{ input: S.input }}
           hideControls
           size="md"
           mt="sm"
@@ -44,6 +48,15 @@ function ForgotForm() {
           placeholder="Enter your registerd mobile number..."
           {...form.getInputProps("mobile")}
         />
+        <CountryInput
+          onSelect={displayCountryCode}
+          className={`focus:outline-none min-w-[30px] max-w-[70px] self-start relative ${
+            form.errors.mobile != undefined && form.errors.mobile != null
+              ? "bottom-[65px]"
+              : "bottom-[45px]"
+          }  ml-[2px]`}
+        />
+
         <div className="w-full flex justify-between items-center flex-wrap">
           <Button
             mt="sm"

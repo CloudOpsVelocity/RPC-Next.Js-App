@@ -27,7 +27,7 @@ interface RegistrationData {
   email?: string;
   password: string;
   name: string;
-  mobile: number;
+  mobile: number | null;
   usertype: "I" | "A" | "B";
   userName?: string;
 }
@@ -36,7 +36,7 @@ interface RegistrationOthersData {
   email: string;
   password: string;
   userName: string;
-  mobile: number;
+  mobile: number | null;
   address: string;
   companyName: string;
 

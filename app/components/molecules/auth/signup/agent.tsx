@@ -10,6 +10,7 @@ import {
   NumberInput,
   rem,
 } from "@mantine/core";
+import S from "@/app/styles/Pass.module.css";
 import { useForm, yupResolver } from "@mantine/form";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -34,7 +35,7 @@ function Agent() {
       userName: "",
       email: "",
       password: "",
-      mobile: 0,
+      mobile: null,
       address: "",
       companyName: "",
     },
@@ -120,47 +121,58 @@ function Agent() {
       >
         <Stepper.Step label="Personal Details">
           <TextInput
+            required
             size="md"
             label="Full Name"
-            placeholder="Full Name"
+            placeholder="Enter your name here"
             {...form.getInputProps("userName")}
           />
           <TextInput
+            type="email"
+            required
             size="md"
             mt="sm"
             label="Email"
-            placeholder="Email"
+            placeholder="Enter your email here"
             {...form.getInputProps("email")}
           />
           <PasswordInput
+            required
+            classNames={{
+              visibilityToggle: S.visibilityToggle,
+            }}
             size="md"
             mt="sm"
             label="Password"
-            placeholder="Password"
+            placeholder="Enter your password here"
             {...form.getInputProps("password")}
           />
           <NumberInput
+            required
             hideControls
             size="md"
             mt="sm"
             label="Contact"
-            placeholder="Enter Contact Number"
+            placeholder="Enter your mobile number here"
             {...form.getInputProps("mobile")}
+            maxLength={10}
           />
         </Stepper.Step>
 
         <Stepper.Step label="Company details">
           <TextInput
+            required
             size="md"
             label="Address"
-            placeholder="Address"
+            placeholder="Enter your address here"
             {...form.getInputProps("address")}
           />
           <TextInput
+            required
             size="md"
             mt="md"
             label="Company Name"
-            placeholder="Company Name"
+            placeholder="Enter your company name here"
             {...form.getInputProps("companyName")}
           />
           <DropZone />

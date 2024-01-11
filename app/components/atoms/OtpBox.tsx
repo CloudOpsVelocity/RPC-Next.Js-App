@@ -121,8 +121,7 @@ const Resend = (): JSX.Element => {
     setSeconds(0);
   };
 
-  const isResendDisabled: boolean = seconds > 1 ? true : false;
-  console.log(isResendDisabled);
+  const isResendDisabled: boolean = seconds > 0;
 
   return (
     <>

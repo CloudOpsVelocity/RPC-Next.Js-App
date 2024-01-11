@@ -58,7 +58,7 @@ function Login() {
           className="w-[100%] mb-[3%]"
           mt="sm"
           label="Password"
-          placeholder="Password"
+          placeholder="Enter Your Password"
           {...form.getInputProps("password")}
         />
 

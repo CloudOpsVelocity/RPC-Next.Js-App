@@ -13,11 +13,11 @@ export default function CountryInput({ onSelect, className }: props) {
     <select
       id="isdCodes"
       name="isd"
-      onChange={(e) => onSelect(e.target.value)}
+      onChange={(e) => onSelect(e.target.value.split(" ")[0])}
       className={className}
     >
       <option value="ISD" hidden>
-        ISD
+        +91
       </option>
       {isdDetailsList.map((eachOne, ind) => {
         return (
