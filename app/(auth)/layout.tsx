@@ -1,6 +1,12 @@
 import { Toaster } from "react-hot-toast";
 import Logo from "../components/atoms/Logo";
 import data from "../data/auth";
+import { TbBuilding } from "react-icons/tb";
+
+import {
+  homeSearchProjectHomeIcon,
+  homeSearchPropertyHomeIcon,
+} from "../images/commonSvgs";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -10,8 +16,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <div className=" mt-16 space-y-3">
             <ul className="flex flex-col justify-center items-center space-y-1 text-neutral-600 text-base font-semibold">
               {data.map((item, index) => (
-                <li key={index} className="w-full max-w-[16rem]">
-                  <p className="!text-left ">{item.text}</p>
+                <li
+                  key={index}
+                  className="w-full max-w-[16rem] flex items-center space-x-1"
+                >
+                  <TbBuilding /> <p className="!text-left ">{item.text}</p>
                 </li>
               ))}
             </ul>

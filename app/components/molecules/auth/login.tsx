@@ -31,7 +31,7 @@ function Login() {
   const { login } = useAuth();
   const onSubmit = async (values: any) => {
     setState("pending");
-    await login(values);
+    login(values);
     setState("success");
   };
 
