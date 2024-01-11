@@ -26,6 +26,7 @@ function FloorPlanModal() {
         opened={opened}
         classNames={{
           title: S.title,
+          close: S.close,
         }}
         onClose={close}
         title="Floor Plan"

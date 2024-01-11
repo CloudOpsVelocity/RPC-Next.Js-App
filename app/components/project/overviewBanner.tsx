@@ -54,7 +54,7 @@ const RequestCallBackModal = ({
         opened={opened}
         onClose={close}
         centered
-        size={"70%"}
+        size={"50%"}
         className="!rounded-full"
         classNames={{
           close: S.close,

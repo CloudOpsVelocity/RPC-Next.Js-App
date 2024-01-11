@@ -4,3 +4,8 @@
   text-align: center !important;
   font-weight: 700;
 }
+.close {
+  background: red;
+  color: white;
+  border-radius: 100%;
+}

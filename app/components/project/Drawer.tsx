@@ -16,6 +16,7 @@ function ProjectDrawer() {
         classNames={{
           title: S.title,
           header: S.header,
+          close: S.close,
         }}
         offset={8}
         radius="md"
@@ -25,7 +26,11 @@ function ProjectDrawer() {
         position="right"
         size={"50%"}
       >
-        <div className="w-[90%] text-[#233333] text-xl">{content}</div>
+        <h1 className="uppercase text-[24px] lg:text-[32px] font-[600] text-[#001F35]">
+          about{" "}
+          <span className="text-[#148B16] font-[700] uppercase">sarang</span>
+        </h1>
+        <div className="w-[90%] text-[#233333] text-xl mt-5">{content}</div>
         {/* Drawer content */}
       </Drawer>
     </>

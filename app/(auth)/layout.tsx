@@ -15,7 +15,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </li>
               ))}
             </ul>
-            <img src="/auth/sideCoverImage.svg" alt="" className="!my-12" />
+            <img src="/auth/login.svg" alt="" className="!my-12" />
           </div>
         </div>
       </div>

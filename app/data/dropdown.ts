@@ -1,0 +1,22 @@
+const baseUrl = process.env.NEXT_PUBLIC_PROJECT_URL; // Replace with your actual base URL
+
+const data = [
+  {
+    label: "My Profile",
+    url: `${baseUrl}/my-profile`,
+  },
+  {
+    label: "Post Project",
+    url: `${baseUrl}/post-project`,
+  },
+  {
+    label: "Post Listing",
+    url: `${baseUrl}/post-listing`,
+  },
+  {
+    label: "About Us",
+    url: `${baseUrl}/about-us`,
+  },
+];
+
+export default data;
