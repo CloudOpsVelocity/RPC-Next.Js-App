@@ -58,6 +58,8 @@ function Individual() {
     close();
   };
 
+  console.log(form.errors.mobile);
+
   return (
     <Box className="w-full max-w-[423px] mt-[3%] " mx="auto">
       <div className="w-full max-w-[459px] md:max-w-[597px] flex justify-center items-center gap-[5%] mb-[5%] ">
@@ -120,7 +122,7 @@ function Individual() {
 
           <CountryInput
             onSelect={displayCountryCode}
-            className="focus:outline-none min-w-[30px] max-w-[70px] self-start relative bottom-[60px] ml-[2px]"
+            className={`focus:outline-none min-w-[30px] max-w-[70px] self-start relative ${form.errors.mobile != undefined && form.errors.mobile != null ? "bottom-[65px]" : "bottom-[45px]" }  ml-[2px]`}
           />
 
           <div className="w-full flex justify-between items-center flex-wrap">
