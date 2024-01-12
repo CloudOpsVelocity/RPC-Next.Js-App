@@ -37,7 +37,7 @@ export default function Specifications({
             </span>
           </p>
           <div className="flex flex-wrap gap-4">
-            {data.map((spec, index) => (
+            {data?.map((spec, index) => (
               <a
                 key={index}
                 className={`border px-5 py-2 rounded-lg bg-white font-semibold flex gap-2 items-center ${
@@ -51,7 +51,7 @@ export default function Specifications({
           </div>
         </div>
         <div className="flex-1 bg-gray-50 p-4 rounded-lg overflow-y-scroll">
-          {specs.map((spec, index) => (
+          {specs?.map((spec, index) => (
             <div key={index} id={spec.specName.toLowerCase()}>
               <h1 className="bg-gradient-to-tr from-blue-100 flex items-center gap-2 text-xl py-2 px-2 rounded-xl">
                 <MdOutlineDoorSliding size={22} />{" "}

@@ -1,16 +1,25 @@
 import { atom } from "jotai";
+import { AmenityList } from "../validations/types/project";
 
 interface ReadMoreAtom {
   expanded: boolean;
-  content: string; // Replace with the actual type of your content
+  content: any; // Replace with the actual type of your content
+  type: "content" | "array";
 }
+export type AtomContent<T extends ReadMoreAtom["type"]> = T extends "content"
+  ? string
+  : AmenityList[];
 
 export const readMoreAtom = atom<ReadMoreAtom>({
   expanded: false,
   content: "",
+  type: "content",
 });
 
 // store.ts
-export const setReadMoreContent = atom(null, (get, set, newContent: string) => {
-  set(readMoreAtom, (prev) => ({ ...prev, content: newContent }));
-});
+export const setReadMoreContent = atom(
+  null,
+  (get, set, newContent: ReadMoreAtom) => {
+    set(readMoreAtom, (prev) => ({ ...prev, content: newContent }));
+  }
+);

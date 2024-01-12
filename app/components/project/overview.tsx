@@ -62,7 +62,7 @@ export default function Overview({
             key="propertyAvailable"
             icon={<PropertyAvailable />}
             title="Property Available"
-            value={availableProperties.join(", ")}
+            value={availableProperties?.join(", ")}
             className="mr-[5%] pt-[2%] mb-[3%]  "
           />
           <ProjBasicDetails
