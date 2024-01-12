@@ -1,13 +1,18 @@
 "use client";
 import "@mantine/dropzone/styles.css";
 import { mediaCloudIcon } from "@/app/images/commonSvgs";
-import { Group, Text, rem } from "@mantine/core";
+import { Group, Image, Text, rem } from "@mantine/core";
 import { Dropzone, DropzoneProps, IMAGE_MIME_TYPE } from "@mantine/dropzone";
 interface DropZoneProps extends Partial<DropzoneProps> {
   onLogoSelect: (logo: File) => void;
+  logo?: File;
 }
 
 export function DropZone(props: Partial<DropZoneProps>) {
+  const imageUrl = props.logo ? URL.createObjectURL(props.logo) : "";
+  const preview = (
+    <Image src={imageUrl} onLoad={() => URL.revokeObjectURL(imageUrl)} />
+  );
   return (
     <Dropzone
       mt={"md"}
@@ -38,6 +43,7 @@ export function DropZone(props: Partial<DropZoneProps>) {
             Attach as many files as you like, each file should not exceed 5mb
           </Text>
         </div>
+        {preview}
       </Group>
     </Dropzone>
   );

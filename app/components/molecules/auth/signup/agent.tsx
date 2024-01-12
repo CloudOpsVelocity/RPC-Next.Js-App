@@ -189,7 +189,10 @@ function Agent() {
             placeholder="Enter your company name here"
             {...form.getInputProps("companyName")}
           />
-          <DropZone onLogoSelect={handleLogoSelect} />
+          <DropZone
+            onLogoSelect={handleLogoSelect}
+            logo={form.values.companyLogo}
+          />
         </Stepper.Step>
 
         <Stepper.Completed>
