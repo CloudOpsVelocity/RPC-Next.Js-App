@@ -16,5 +16,12 @@ function cityParser(originalData: any) {
     label: item.name,
   }));
 }
-
-export { stateParser, cityParser, brachParser };
+function hideMobileNumber(mobile: number): string {
+  if (!mobile) return "";
+  const input = mobile.toString();
+  // Replace all but the last three digits with 'X'
+  const hiddenDigits = "X".repeat(input.length - 3);
+  const result = hiddenDigits + input.slice(-3);
+  return result;
+}
+export { stateParser, cityParser, brachParser, hideMobileNumber };

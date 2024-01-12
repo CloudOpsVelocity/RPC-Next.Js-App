@@ -3,12 +3,18 @@ import "@mantine/dropzone/styles.css";
 import { mediaCloudIcon } from "@/app/images/commonSvgs";
 import { Group, Text, rem } from "@mantine/core";
 import { Dropzone, DropzoneProps, IMAGE_MIME_TYPE } from "@mantine/dropzone";
+interface DropZoneProps extends Partial<DropzoneProps> {
+  onLogoSelect: (logo: File) => void;
+}
 
-export function DropZone(props: Partial<DropzoneProps>) {
+export function DropZone(props: Partial<DropZoneProps>) {
   return (
     <Dropzone
       mt={"md"}
-      onDrop={(files) => console.log("accepted files", files)}
+      onDrop={(files) => {
+        const logoFile = files[0];
+        props.onLogoSelect && props.onLogoSelect(logoFile);
+      }}
       onReject={(files) => console.log("rejected files", files)}
       maxSize={5 * 1024 ** 2}
       accept={IMAGE_MIME_TYPE}

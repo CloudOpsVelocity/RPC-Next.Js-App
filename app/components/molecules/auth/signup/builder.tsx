@@ -35,6 +35,9 @@ import { cityParser, stateParser } from "@/app/utils/parse";
 import { agentSchema } from "@/app/validations/auth";
 
 function Builder() {
+  const [status, setStatus] = useState<
+    "idle" | "pending" | "success" | "error" | "otp"
+  >("idle");
   const [active, setActive] = useState(0);
   const router = useRouter();
 
@@ -63,6 +66,7 @@ function Builder() {
       vission: "",
       officeContact: 0,
       managingDirectorName: "",
+      companyLogo: undefined,
     },
     validate: (values) => {
       if (active === 0) {
@@ -163,11 +167,15 @@ function Builder() {
       switch (active) {
         case 0:
           // API call for the first step
+          setStatus("pending");
           //@ts-ignore
           let data = await register({ ...values, usertype: "B" });
           console.log(data);
           if (data?.status) {
+            setStatus("otp");
             open();
+          } else {
+            setStatus("error");
           }
           break;
         case 1:
@@ -177,6 +185,7 @@ function Builder() {
           setActive((current) => (current < 3 ? current + 1 : current));
           break;
         case 3:
+          setStatus("pending");
           const date = new Date(values.companyStartDate);
 
           const day = date.getDate();
@@ -191,10 +200,12 @@ function Builder() {
             branchName: values.branchName.map((item) => parseInt(item)),
             companyStartDate: formattedDate,
           });
+
           await login({
             password: form.values.password,
             username: form.values.email,
           });
+          setStatus("success");
           // Proceed to the next step after the API call
           setActive((current) => (current < 4 ? current + 1 : current));
           break;
@@ -209,6 +220,11 @@ function Builder() {
       // Handle error (e.g., display an error message)
     }
   };
+  type LogoFile = File | null;
+  const handleLogoSelect = (logo: LogoFile): void => {
+    // @ts-ignore
+    form.setFieldValue("companyLogo", logo);
+  };
 
   const prevStep = () =>
     setActive((current) => (current > 0 ? current - 1 : current));
@@ -216,6 +232,7 @@ function Builder() {
   return (
     <div className="w-full max-w-[423px] flex justify-center items-center flex-col  m-[5%]">
       <AuthPopup
+        mobile={form.values.mobile}
         callback={OtpCallback}
         opened={opened}
         open={open}
@@ -263,6 +280,7 @@ function Builder() {
             label="Contact"
             placeholder="Enter your contact here"
             {...form.getInputProps("mobile")}
+            maxLength={10}
           />
         </Stepper.Step>
 
@@ -305,9 +323,10 @@ function Builder() {
               label="Pincode"
               placeholder="Enter your pincode here"
               {...form.getInputProps("pincode")}
+              maxLength={6}
             />
           </SimpleGrid>
-          <DropZone />
+          <DropZone onLogoSelect={handleLogoSelect} />
         </Stepper.Step>
 
         <Stepper.Step label="Company details">
@@ -373,6 +392,7 @@ function Builder() {
             label="Enter Office Contact"
             placeholder="Enter Office Contact"
             {...form.getInputProps("officeContact")}
+            maxLength={10}
           />
         </Stepper.Step>
         <Stepper.Step label="Description">
@@ -420,6 +440,7 @@ function Builder() {
             </Button>
 
             <Button
+              loading={status === "pending"}
               mt="sm"
               className="!rounded-[6px] !w-[100%] !max-w-[225px] !bg-[#0c7aca]"
               onClick={nextStep}

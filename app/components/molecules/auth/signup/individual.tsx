@@ -22,7 +22,7 @@ import Login from "../login";
 
 function Individual() {
   const [status, setStatus] = useState<
-    "idle" | "pending" | "success" | "error"
+    "idle" | "pending" | "success" | "error" | "otp"
   >("idle");
   const router = useRouter();
   const { register, login } = useAuth();
@@ -37,6 +37,7 @@ function Individual() {
     const data = await register({ ...values, usertype: "I" });
     console.log(data);
     if (data?.status) {
+      setStatus("otp");
       open();
     } else {
       setStatus("error");
@@ -86,9 +87,9 @@ function Individual() {
           <TextInput
             required
             size="md"
-            label="Enter your name here"
             className="w-[100%] mb-[3%] "
-            placeholder="Full Name"
+            label="Full Name"
+            placeholder="Enter your name here"
             {...form.getInputProps("name")}
           />
           <TextInput
@@ -180,6 +181,7 @@ function Individual() {
         open={open}
         close={onClose}
         userName={form.values.email}
+        mobile={form.values.mobile && form.values.mobile}
       />
     </Box>
   );
