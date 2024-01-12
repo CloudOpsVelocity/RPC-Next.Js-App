@@ -10,6 +10,7 @@ import {
   NumberInput,
   rem,
 } from "@mantine/core";
+import N from "@/app/styles/Numinput.module.css";
 import S from "@/app/styles/Pass.module.css";
 import { useForm, yupResolver } from "@mantine/form";
 import { useRouter } from "next/navigation";
@@ -22,6 +23,7 @@ import useAuth from "@/app/hooks/useAuth";
 import { actionAsyncStorage } from "next/dist/client/components/action-async-storage.external";
 import Success from "../success";
 import { agentSchema } from "@/app/validations/auth";
+import CountryInput from "@/app/components/atoms/CountryInput";
 
 function Agent() {
   const [status, setStatus] = useState<
@@ -114,7 +116,9 @@ function Agent() {
   };
   const prevStep = () =>
     setActive((current) => (current > 0 ? current - 1 : current));
-  console.log(form.values.companyLogo);
+  const displayCountryCode = (value: any) => {
+    console.log(value);
+  };
   return (
     <div className="w-full max-w-[423px] flex justify-center items-center flex-col m-[5%]">
       <AuthPopup
@@ -163,13 +167,26 @@ function Agent() {
           />
           <NumberInput
             required
+            classNames={{
+              input: N.input,
+            }}
             hideControls
             size="md"
             mt="sm"
-            label="Contact"
-            placeholder="Enter your mobile number here"
+            className="w-[100%] mb-[3%] "
+            label="Contact Number"
+            placeholder="Enter your contact number here"
             {...form.getInputProps("mobile")}
             maxLength={10}
+          />
+
+          <CountryInput
+            onSelect={displayCountryCode}
+            className={`focus:outline-none min-w-[30px] max-w-[70px] self-start relative ${
+              form.errors.mobile != undefined && form.errors.mobile != null
+                ? "bottom-[65px]"
+                : "bottom-[45px]"
+            }  ml-[2px]`}
           />
         </Stepper.Step>
 

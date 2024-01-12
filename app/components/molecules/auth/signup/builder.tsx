@@ -32,7 +32,9 @@ import {
   getStatesDetails,
 } from "@/app/utils/stats_cities";
 import { cityParser, stateParser } from "@/app/utils/parse";
-import { agentSchema } from "@/app/validations/auth";
+import { agentSchema, builderSchema } from "@/app/validations/auth";
+import CountryInput from "@/app/components/atoms/CountryInput";
+import N from "@/app/styles/Numinput.module.css";
 
 function Builder() {
   const [status, setStatus] = useState<
@@ -57,14 +59,14 @@ function Builder() {
       companyName: "",
       state: "",
       city: "",
-      pincode: 0,
+      pincode: null,
       companyStartDate: new Date(),
       branchName: [],
       ceoName: "",
       foundedBy: "",
       mission: "",
       vission: "",
-      officeContact: 0,
+      officeContact: null,
       managingDirectorName: "",
       companyLogo: undefined,
     },
@@ -87,34 +89,8 @@ function Builder() {
       }
 
       if (active === 2) {
-        return {
-          companyName:
-            values.companyName.trim().length < 2
-              ? "Company name is required"
-              : null,
-          branchName:
-            values.branchName.length === 0
-              ? "At least one branch must be selected"
-              : null,
-          ceoName:
-            values.ceoName.trim().length === 0 ? "CEO name is required" : null,
-          foundedBy:
-            values.foundedBy.trim().length === 0
-              ? "Founded By name is required"
-              : null,
-
-          managingDirectorName:
-            values.managingDirectorName.trim().length === 0
-              ? "Managing Director name is required"
-              : null,
-
-          officeContact:
-            isNaN(values.officeContact) ||
-            values.officeContact <= 0 ||
-            values.officeContact.toString().length !== 10
-              ? "Valid 10-digit contact number is required"
-              : null,
-        };
+        const data = yupResolver(builderSchema)(values);
+        return data;
       }
 
       if (active === 3) {
@@ -228,7 +204,9 @@ function Builder() {
 
   const prevStep = () =>
     setActive((current) => (current > 0 ? current - 1 : current));
-  console.log(citiesData);
+  const displayCountryCode = (value: any) => {
+    console.log(value);
+  };
   return (
     <div className="w-full max-w-[423px] flex justify-center items-center flex-col  m-[5%]">
       <AuthPopup
@@ -274,13 +252,26 @@ function Builder() {
           />
           <NumberInput
             required
+            classNames={{
+              input: N.input,
+            }}
             hideControls
             size="md"
             mt="sm"
-            label="Contact"
-            placeholder="Enter your contact here"
+            className="w-[100%] mb-[3%] "
+            label="Contact Number"
+            placeholder="Enter your contact number here"
             {...form.getInputProps("mobile")}
             maxLength={10}
+          />
+
+          <CountryInput
+            onSelect={displayCountryCode}
+            className={`focus:outline-none min-w-[30px] max-w-[70px] self-start relative ${
+              form.errors.mobile != undefined && form.errors.mobile != null
+                ? "bottom-[65px]"
+                : "bottom-[45px]"
+            }  ml-[2px]`}
           />
         </Stepper.Step>
 
@@ -388,6 +379,9 @@ function Builder() {
 
           <NumberInput
             required
+            classNames={{
+              input: N.input,
+            }}
             hideControls
             size="md"
             mt="sm"
@@ -396,6 +390,15 @@ function Builder() {
             placeholder="Enter Office Contact"
             {...form.getInputProps("officeContact")}
             maxLength={10}
+          />
+          <CountryInput
+            onSelect={displayCountryCode}
+            className={`focus:outline-none min-w-[30px] max-w-[70px] self-start relative ${
+              form.errors.officeContact != undefined &&
+              form.errors.officeContact != null
+                ? "bottom-[65px]"
+                : "bottom-[45px]"
+            }  ml-[2px]`}
           />
         </Stepper.Step>
         <Stepper.Step label="Description">
