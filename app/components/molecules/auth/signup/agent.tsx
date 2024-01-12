@@ -10,6 +10,7 @@ import {
   NumberInput,
   rem,
 } from "@mantine/core";
+import N from "@/app/styles/Numinput.module.css";
 import S from "@/app/styles/Pass.module.css";
 import { useForm, yupResolver } from "@mantine/form";
 import { useRouter } from "next/navigation";
@@ -22,8 +23,12 @@ import useAuth from "@/app/hooks/useAuth";
 import { actionAsyncStorage } from "next/dist/client/components/action-async-storage.external";
 import Success from "../success";
 import { agentSchema } from "@/app/validations/auth";
+import CountryInput from "@/app/components/atoms/CountryInput";
 
 function Agent() {
+  const [status, setStatus] = useState<
+    "idle" | "pending" | "success" | "error" | "otp"
+  >("idle");
   const [active, setActive] = useState(0);
   const router = useRouter();
   const { registerOtherDetails, register, login } = useAuth();
@@ -38,6 +43,7 @@ function Agent() {
       mobile: null,
       address: "",
       companyName: "",
+      companyLogo: undefined,
     },
     // @ts-ignore
     validate: (values) => {
@@ -73,12 +79,16 @@ function Agent() {
     // Handle API call based on the current step
     let values = form.values;
     if (active === 0) {
+      setStatus("pending");
       // API call for the first step
       //@ts-ignore
       let data = await register({ ...values, usertype: "A" });
       console.log(data);
       if (data?.status) {
+        setStatus("otp");
         open();
+      } else {
+        setStatus("error");
       }
     } else if (active === 1) {
       if (!form.validate().hasErrors) {
@@ -98,13 +108,21 @@ function Agent() {
       setActive((current) => (current < 3 ? current + 1 : current));
     }
   };
+  type LogoFile = File | null;
 
+  const handleLogoSelect = (logo: LogoFile): void => {
+    // @ts-ignore
+    form.setFieldValue("companyLogo", logo);
+  };
   const prevStep = () =>
     setActive((current) => (current > 0 ? current - 1 : current));
-
+  const displayCountryCode = (value: any) => {
+    console.log(value);
+  };
   return (
     <div className="w-full max-w-[423px] flex justify-center items-center flex-col m-[5%]">
       <AuthPopup
+        mobile={form.values.mobile}
         callback={OtpCallback}
         opened={opened}
         open={open}
@@ -149,13 +167,26 @@ function Agent() {
           />
           <NumberInput
             required
+            classNames={{
+              input: N.input,
+            }}
             hideControls
             size="md"
             mt="sm"
-            label="Contact"
-            placeholder="Enter your mobile number here"
+            className="w-[100%] mb-[3%] "
+            label="Contact Number"
+            placeholder="Enter your contact number here"
             {...form.getInputProps("mobile")}
             maxLength={10}
+          />
+
+          <CountryInput
+            onSelect={displayCountryCode}
+            className={`focus:outline-none min-w-[30px] max-w-[70px] self-start relative ${
+              form.errors.mobile != undefined && form.errors.mobile != null
+                ? "bottom-[65px]"
+                : "bottom-[45px]"
+            }  ml-[2px]`}
           />
         </Stepper.Step>
 
@@ -175,7 +206,10 @@ function Agent() {
             placeholder="Enter your company name here"
             {...form.getInputProps("companyName")}
           />
-          <DropZone />
+          <DropZone
+            onLogoSelect={handleLogoSelect}
+            logo={form.values.companyLogo}
+          />
         </Stepper.Step>
 
         <Stepper.Completed>
@@ -202,6 +236,7 @@ function Agent() {
             </Button>
 
             <Button
+              loading={status === "pending"}
               mt="sm"
               className="!rounded-[6px] !w-[100%] !max-w-[225px] !bg-[#0c7aca]"
               onClick={nextStep}

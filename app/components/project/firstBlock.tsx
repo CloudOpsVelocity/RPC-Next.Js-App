@@ -43,7 +43,7 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
               onMouseEnter={autoplay.current.stop}
               onMouseLeave={autoplay.current.reset}
             >
-              {projectDetails.media.projOtherImagesUrl.map(
+              {projectDetails?.media?.projOtherImagesUrl?.map(
                 (imageUrl, index) => (
                   <Carousel.Slide key={index} className="relative">
                     <Image
@@ -91,7 +91,7 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
                 ₹ {projectDetails.basePrice}/ Price per sqft onwards
               </p>
               <p className="text-[16px] lg:text-[20px] font-[600] text-[#2A4C70] bg-[#FFF] rounded-[10px] shadow-md p-[8px] ">
-                {projectDetails.phaseList.length} Floors Plans
+                {projectDetails?.phaseList?.length || 0} Floors Plans
               </p>
             </div>
           </div>

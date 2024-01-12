@@ -55,4 +55,35 @@ const otpSchema = yup.object().shape({
     .max(9999, "OTP must be exactly 4 digits")
     .required("OTP is required"),
 });
-export { schema as individualSchema, agentSchema, otpSchema };
+const builderSchema = yup.object().shape({
+  companyName: yup
+    .string()
+    .trim()
+    .min(2, "Company name must be at least 2 characters")
+    .required("Company name is required"),
+
+  branchName: yup
+    .array()
+    .min(1, "At least one branch must be selected")
+    .required("At least one branch must be selected"),
+
+  ceoName: yup.string().trim().required("CEO name is required"),
+
+  foundedBy: yup.string().trim().required("Founded By name is required"),
+
+  managingDirectorName: yup
+    .string()
+    .trim()
+    .required("Managing Director name is required"),
+
+  officeContact: yup
+    .string()
+    .matches(/^\d+$/, "Valid 10-digit contact number is required")
+    .min(10, "Valid 10-digit contact number is required")
+    .max(10, "Valid 10-digit contact number is required")
+    .required("Valid 10-digit contact number is required"),
+
+  // Add more validations for other fields as needed
+});
+
+export { schema as individualSchema, agentSchema, otpSchema, builderSchema };

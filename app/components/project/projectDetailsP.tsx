@@ -35,7 +35,7 @@ export default function ProjectDetailsP({ data }: { data: PhaseList[] }) {
           Select one of the phase to see project details
         </p>
         <div className=" flex justify-start items-start flex-wrap gap-[10px] ">
-          {data.map((phase) => (
+          {data?.map((phase) => (
             <Button
               key={phase.phaseId}
               title={phase.phaseName}

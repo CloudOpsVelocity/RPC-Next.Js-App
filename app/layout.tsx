@@ -10,6 +10,7 @@ import SessionProvider from "./context/session";
 import ReactQueryProvider from "./context/rquery";
 import toast, { Toaster } from "react-hot-toast";
 import Layout from "@/app/components/layouts/primary";
+import { Provider } from "jotai";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -37,7 +38,9 @@ export default function RootLayout({
           <MantineProvider theme={MantineTheme}>
             <SessionProvider>
               <ReactQueryProvider>
-                <Layout>{children}</Layout>
+                <Provider>
+                  <Layout>{children}</Layout>
+                </Provider>
               </ReactQueryProvider>
             </SessionProvider>
           </MantineProvider>

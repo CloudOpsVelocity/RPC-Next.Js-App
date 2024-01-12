@@ -12,7 +12,7 @@ export default function Feature({ data }: { data: string[] }) {
           Amenities
         </p>
         <ul className="list-inside mt-4 space-y-2 ml-[2%]">
-          {data.map((each, ind) => {
+          {data?.map((each, ind) => {
             return (
               <li
                 key={ind}

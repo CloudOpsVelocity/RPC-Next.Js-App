@@ -32,10 +32,15 @@ import {
   getStatesDetails,
 } from "@/app/utils/stats_cities";
 import { cityParser, stateParser } from "@/app/utils/parse";
-import { agentSchema } from "@/app/validations/auth";
+import { agentSchema, builderSchema } from "@/app/validations/auth";
+import CountryInput from "@/app/components/atoms/CountryInput";
+import N from "@/app/styles/Numinput.module.css";
 
 function Builder() {
-  const [active, setActive] = useState(0);
+  const [status, setStatus] = useState<
+    "idle" | "pending" | "success" | "error" | "otp"
+  >("idle");
+  const [active, setActive] = useState(3);
   const router = useRouter();
 
   const [opened, { open, close }] = useDisclosure(false);
@@ -54,15 +59,16 @@ function Builder() {
       companyName: "",
       state: "",
       city: "",
-      pincode: 0,
+      pincode: null,
       companyStartDate: new Date(),
       branchName: [],
       ceoName: "",
       foundedBy: "",
       mission: "",
       vission: "",
-      officeContact: 0,
+      officeContact: null,
       managingDirectorName: "",
+      companyLogo: undefined,
     },
     validate: (values) => {
       if (active === 0) {
@@ -83,34 +89,8 @@ function Builder() {
       }
 
       if (active === 2) {
-        return {
-          companyName:
-            values.companyName.trim().length < 2
-              ? "Company name is required"
-              : null,
-          branchName:
-            values.branchName.length === 0
-              ? "At least one branch must be selected"
-              : null,
-          ceoName:
-            values.ceoName.trim().length === 0 ? "CEO name is required" : null,
-          foundedBy:
-            values.foundedBy.trim().length === 0
-              ? "Founded By name is required"
-              : null,
-
-          managingDirectorName:
-            values.managingDirectorName.trim().length === 0
-              ? "Managing Director name is required"
-              : null,
-
-          officeContact:
-            isNaN(values.officeContact) ||
-            values.officeContact <= 0 ||
-            values.officeContact.toString().length !== 10
-              ? "Valid 10-digit contact number is required"
-              : null,
-        };
+        const data = yupResolver(builderSchema)(values);
+        return data;
       }
 
       if (active === 3) {
@@ -163,11 +143,15 @@ function Builder() {
       switch (active) {
         case 0:
           // API call for the first step
+          setStatus("pending");
           //@ts-ignore
           let data = await register({ ...values, usertype: "B" });
           console.log(data);
           if (data?.status) {
+            setStatus("otp");
             open();
+          } else {
+            setStatus("error");
           }
           break;
         case 1:
@@ -177,6 +161,7 @@ function Builder() {
           setActive((current) => (current < 3 ? current + 1 : current));
           break;
         case 3:
+          setStatus("pending");
           const date = new Date(values.companyStartDate);
 
           const day = date.getDate();
@@ -191,10 +176,12 @@ function Builder() {
             branchName: values.branchName.map((item) => parseInt(item)),
             companyStartDate: formattedDate,
           });
+
           await login({
             password: form.values.password,
             username: form.values.email,
           });
+          setStatus("success");
           // Proceed to the next step after the API call
           setActive((current) => (current < 4 ? current + 1 : current));
           break;
@@ -209,13 +196,21 @@ function Builder() {
       // Handle error (e.g., display an error message)
     }
   };
+  type LogoFile = File | null;
+  const handleLogoSelect = (logo: LogoFile): void => {
+    // @ts-ignore
+    form.setFieldValue("companyLogo", logo);
+  };
 
   const prevStep = () =>
     setActive((current) => (current > 0 ? current - 1 : current));
-  console.log(citiesData);
+  const displayCountryCode = (value: any) => {
+    console.log(value);
+  };
   return (
     <div className="w-full max-w-[423px] flex justify-center items-center flex-col  m-[5%]">
       <AuthPopup
+        mobile={form.values.mobile}
         callback={OtpCallback}
         opened={opened}
         open={open}
@@ -257,12 +252,26 @@ function Builder() {
           />
           <NumberInput
             required
+            classNames={{
+              input: N.input,
+            }}
             hideControls
             size="md"
             mt="sm"
-            label="Contact"
-            placeholder="Enter your contact here"
+            className="w-[100%] mb-[3%] "
+            label="Contact Number"
+            placeholder="Enter your contact number here"
             {...form.getInputProps("mobile")}
+            maxLength={10}
+          />
+
+          <CountryInput
+            onSelect={displayCountryCode}
+            className={`focus:outline-none min-w-[30px] max-w-[70px] self-start relative ${
+              form.errors.mobile != undefined && form.errors.mobile != null
+                ? "bottom-[65px]"
+                : "bottom-[45px]"
+            }  ml-[2px]`}
           />
         </Stepper.Step>
 
@@ -305,9 +314,13 @@ function Builder() {
               label="Pincode"
               placeholder="Enter your pincode here"
               {...form.getInputProps("pincode")}
+              maxLength={6}
             />
           </SimpleGrid>
-          <DropZone />
+          <DropZone
+            onLogoSelect={handleLogoSelect}
+            logo={form.values.companyLogo}
+          />
         </Stepper.Step>
 
         <Stepper.Step label="Company details">
@@ -366,6 +379,9 @@ function Builder() {
 
           <NumberInput
             required
+            classNames={{
+              input: N.input,
+            }}
             hideControls
             size="md"
             mt="sm"
@@ -373,6 +389,16 @@ function Builder() {
             label="Enter Office Contact"
             placeholder="Enter Office Contact"
             {...form.getInputProps("officeContact")}
+            maxLength={10}
+          />
+          <CountryInput
+            onSelect={displayCountryCode}
+            className={`focus:outline-none min-w-[30px] max-w-[70px] self-start relative ${
+              form.errors.officeContact != undefined &&
+              form.errors.officeContact != null
+                ? "bottom-[65px]"
+                : "bottom-[45px]"
+            }  ml-[2px]`}
           />
         </Stepper.Step>
         <Stepper.Step label="Description">
@@ -420,6 +446,7 @@ function Builder() {
             </Button>
 
             <Button
+              loading={status === "pending"}
               mt="sm"
               className="!rounded-[6px] !w-[100%] !max-w-[225px] !bg-[#0c7aca]"
               onClick={nextStep}

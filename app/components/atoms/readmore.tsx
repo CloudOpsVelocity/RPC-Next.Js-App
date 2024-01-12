@@ -16,12 +16,13 @@ const ReadMore: React.FC<ReadMoreProps> = ({ text, maxLines = 4 }) => {
       ...prev,
       expanded: !prev.expanded,
       content: text,
+      type: "content",
     }));
   };
 
   const getClampedText = () => {
-    const words = text.split(" ");
-    return words.slice(0, maxLines * 10).join(" ");
+    const words = text?.split(" ");
+    return words?.slice(0, maxLines * 10).join(" ");
   };
 
   return (

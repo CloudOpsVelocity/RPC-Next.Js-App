@@ -2955,7 +2955,7 @@ export const mediaCloudIcon = (
       <path
         d="M30.7336 30.7849L23.086 23.0888L15.3898 30.7364"
         stroke="black"
-        stroke-opacity="0.4"
+        strokeOpacity="0.4"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -2963,7 +2963,7 @@ export const mediaCloudIcon = (
       <path
         d="M23.0869 23.0884L23.0322 40.3502"
         stroke="black"
-        stroke-opacity="0.4"
+        strokeOpacity="0.4"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -2971,7 +2971,7 @@ export const mediaCloudIcon = (
       <path
         d="M39.1395 35.3954C41.0134 34.3815 42.4963 32.7724 43.3541 30.8221C44.212 28.8718 44.3959 26.6914 43.8769 24.6249C43.3579 22.5585 42.1655 20.7237 40.488 19.4102C38.8104 18.0967 36.7432 17.3792 34.6126 17.3711L32.1959 17.3634C31.6225 15.1161 30.5471 13.028 29.0505 11.2562C27.5539 9.48428 25.6751 8.07474 23.5553 7.1335C21.4356 6.19226 19.13 5.74381 16.812 5.82186C14.494 5.89991 12.2239 6.50244 10.1722 7.58415C8.12059 8.66586 6.34087 10.1986 4.96686 12.0671C3.59286 13.9356 2.66033 16.0914 2.23937 18.3722C1.81842 20.653 1.92 22.9995 2.53647 25.2354C3.15294 27.4713 4.26827 29.5384 5.7986 31.2812"
         stroke="black"
-        stroke-opacity="0.4"
+        strokeOpacity="0.4"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -2979,7 +2979,7 @@ export const mediaCloudIcon = (
       <path
         d="M30.7336 30.7849L23.086 23.0888L15.3898 30.7364"
         stroke="black"
-        stroke-opacity="0.4"
+        strokeOpacity="0.4"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"

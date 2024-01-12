@@ -14,7 +14,7 @@ export default function Loans({ data }: { data: Bank[] }) {
             Lorem ipsum dolor sit amet, consectetur adipi
           </p>
           <div className="mt-6 flex justify-start items-start flex-wrap w-full gap-[3%]">
-            {data.map((item, index) => (
+            {data?.map((item, index) => (
               <Image
                 key={index}
                 src={"/bank.png"}

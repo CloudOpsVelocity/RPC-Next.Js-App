@@ -78,7 +78,7 @@ export default function FloorplansBlock({ data }: { data: PhaseList[] }) {
           Select one of the phase to see project details
         </p>
         <div className=" flex justify-start items-start gap-[10px] flex-wrap ">
-          {data.map((each, index) => {
+          {data?.map((each, index) => {
             return (
               <Button
                 key={index}

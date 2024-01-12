@@ -44,7 +44,7 @@ export function FaqWithBg({ data }: FaqWithBgProps) {
           </ThemeIcon>
         }
       >
-        {data.map((faq, index) => (
+        {data?.map((faq, index) => (
           <Accordion.Item
             key={index}
             className={classes.item}

@@ -49,7 +49,7 @@ interface RegistrationOthersData {
   foundedBy?: string;
   mission?: string;
   vission?: string;
-  officeContact?: Number;
+  officeContact?: number | null;
   managingDirectorName?: string;
 }
 
