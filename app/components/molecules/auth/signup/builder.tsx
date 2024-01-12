@@ -326,7 +326,10 @@ function Builder() {
               maxLength={6}
             />
           </SimpleGrid>
-          <DropZone onLogoSelect={handleLogoSelect} />
+          <DropZone
+            onLogoSelect={handleLogoSelect}
+            logo={form.values.companyLogo}
+          />
         </Stepper.Step>
 
         <Stepper.Step label="Company details">
