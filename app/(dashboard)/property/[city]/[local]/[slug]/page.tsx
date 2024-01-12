@@ -23,6 +23,8 @@ import ProjectDetailsP from "@/app/components/project/projectDetailsP";
 import Specifications from "@/app/components/project/specification";
 import ProjectDrawer from "@/app/components/project/Drawer";
 import Container from "@/app/components/molecules/Utils/Container";
+import RoomDetails from "@/app/components/property/RoomDetails";
+import PropertyOverView from "@/app/components/property/Overview";
 
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
@@ -49,16 +51,16 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         {/* Navigations Container */}
         <Navigation />
         {/* Overview */}
-        <Overview {...data} />
+        <PropertyOverView {...data} />
         {/* About */}
         <About
           id="about"
           heading="about"
-          projName={data.projectName}
+          projName={"Listing"}
           content={data.about}
         />
         {/* Property Details */}
-        <ProjectDetailsP data={data.phaseList} />
+        <RoomDetails data={data.phaseList} />
         {/* Floor Plan Block */}
         <FloorplansBlock data={data.phaseList} />
         <GalleryBlock {...data.media} />
@@ -80,7 +82,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         <Testimonials />
         <Reviews />
         <FaqWithBg data={data.faqs} />
-        <Container>
+        <div className="flex flex-col justify-start items-start w-[95%]">
           <ProjectCarousel
             type="proj"
             title="nEAR BY pROJECTS OF"
@@ -92,7 +94,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             title="Projects By Developers"
             content="See what developers has posted"
           />
-        </Container>
+        </div>
 
         <ProjectDrawer />
       </div>

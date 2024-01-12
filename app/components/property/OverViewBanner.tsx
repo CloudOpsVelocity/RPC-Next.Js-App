@@ -11,7 +11,7 @@ import { Collapse, Modal } from "@mantine/core";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import S from "@/app/styles/Req.module.css";
-export default function OverviewBanner({
+export default function PropertyOverviewBanner({
   minPrice,
   maxPrice,
 }: {
@@ -19,6 +19,7 @@ export default function OverviewBanner({
   maxPrice: number;
 }) {
   const [opened, { open, close }] = useDisclosure(false);
+  const [collapsed, { toggle }] = useDisclosure(false);
 
   return (
     <>
@@ -40,12 +41,22 @@ export default function OverviewBanner({
               onChange={open}
             />
           </div>
-
-          <WhatsAppButton className="cursor-pointer" onClick={""} />
+          <div>
+            <button
+              onClick={toggle}
+              className="shadow-md cursor-pointer  p-[20px] flex justify-center items-center rounded-[20px]  text-[#0073C6] text-xl font-[600] mt-[13px]  "
+            >
+              {collapsed ? "Show Price Break Up" : "Hide Price Break Up"}
+            </button>
+            <WhatsAppButton className="cursor-pointer" onClick={""} />
+          </div>
         </div>
 
         <RequestCallBackModal close={close} opened={opened} />
       </div>
+      <Collapse in={collapsed}>
+        <PriceBreakUp />
+      </Collapse>
     </>
   );
 }
@@ -241,12 +252,12 @@ const SideCard = () => {
   background: var(--White-2, #fafafa) flex-col text-center ml-auto"
     >
       <p className="text-[color:var(--Pending,#F3A700)] text-center text-[22px] not-italic font-medium leading-[normal]">
-        The sum of total of your other charges you included in the &quot;Other
-        Charges Applicable&quot; is
+        The sum of total of your other charges you included in the &rdquo;Other
+        Charges Applicable&rdquo; is
       </p>
       <div className="mt-2 flex justify-center items-baseline text-[color:var(--newly-Added,#00ADE3)] text-[26px] not-italic font-bold leading-[normal] underline">
         <span className="text-lg font-semibold">₹</span>
-        <span className="text-3xl font-bold">2&quot;05&quot600</span>
+        <span className="text-3xl font-bold">2&ldquo;05&ldquo;600</span>
       </div>
     </div>
   );

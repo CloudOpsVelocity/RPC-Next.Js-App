@@ -1,0 +1,27 @@
+import React from "react";
+
+type props = {
+  icon: any;
+  title: string;
+  value: string | number;
+  className?: string;
+};
+
+export default function RoomBasicDetails({
+  icon,
+  title,
+  value,
+  className,
+}: props) {
+  return (
+    <div className={className}>
+      {icon}
+      <p className=" text-[#565D70] text-[16px] font-[500] mt-[8px] mb-[8px]  whitespace-nowrap  ">
+        {title}
+      </p>
+      <p className="text-[#233333] text-[20px] font-[500]  break-words ">
+        {value}
+      </p>
+    </div>
+  );
+}

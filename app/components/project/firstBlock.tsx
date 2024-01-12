@@ -5,6 +5,7 @@ import Autoplay from "embla-carousel-autoplay";
 import { ShearIcon } from "@/app/images/commonSvgs";
 import { Main } from "@/app/validations/types/project";
 import Image from "next/image";
+import SharePopup from "../atoms/SharePopup";
 
 type Props = {
   projectDetails: Main | null;
@@ -27,10 +28,7 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
                 {projectDetails.projectStatus}
               </span>{" "}
             </p>
-            <p className="shadow-md cursor-pointer gap-[4px] p-[8px] flex justify-center items-center rounded-[20px] bg-[#F3F7FF] text-[#0073C6] text-[14px] font-[600] mt-[13px] max-w-[140px] ">
-              <ShearIcon />
-              Share Project
-            </p>
+            <SharePopup />
           </div>
           <div className="relative w-full rounded-[10px]">
             <Carousel

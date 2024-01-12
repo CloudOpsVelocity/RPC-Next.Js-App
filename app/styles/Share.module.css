@@ -1,0 +1,9 @@
+.close {
+  background: red;
+  color: white;
+  border-radius: 100%;
+}
+
+.body {
+  border-radius: 20px;
+}

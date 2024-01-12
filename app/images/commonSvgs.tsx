@@ -5888,3 +5888,319 @@ export const builderPageHomeSvg = (
     />
   </svg>
 );
+
+export const WhatsAppIcon = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="72"
+    height="75"
+    viewBox="0 0 72 75"
+    fill="none"
+  >
+    <circle
+      cx="36"
+      cy="36"
+      r="35.5"
+      fill="#F0F6FF"
+      stroke="url(#paint0_linear_596_279686)"
+    />
+    <g filter="url(#filter0_d_596_279686)">
+      <path
+        d="M12.0669 35.7008C12.0657 39.9017 13.172 44.0037 15.2755 47.6192L11.8657 59.9723L24.6063 56.6576C28.1302 58.5611 32.0785 59.5585 36.0907 59.5587H36.1013C49.3464 59.5587 60.1282 48.8643 60.1339 35.7196C60.1364 29.35 57.6388 23.3605 53.1009 18.8543C48.5638 14.3485 42.5296 11.8657 36.1003 11.8628C22.8536 11.8628 12.0726 22.5566 12.0671 35.7008"
+        fill="url(#paint1_linear_596_279686)"
+      />
+      <path
+        d="M11.209 35.693C11.2076 40.0452 12.3535 44.2938 14.532 48.0388L11 60.8347L24.1975 57.4012C27.8338 59.3684 31.9279 60.4056 36.0939 60.4072H36.1047C49.825 60.4072 60.9941 49.3281 61 35.7128C61.0023 29.1143 58.4148 22.9095 53.7148 18.2419C49.0143 13.5748 42.7643 11.0027 36.1047 11C22.382 11 11.2145 22.0775 11.209 35.693ZM19.0686 47.3938L18.5758 46.6176C16.5043 43.3494 15.4109 39.5727 15.4125 35.6946C15.4168 24.3777 24.6988 15.1705 36.1125 15.1705C41.6398 15.1729 46.8344 17.3109 50.7414 21.1899C54.6482 25.0694 56.798 30.2264 56.7967 35.7112C56.7916 47.0281 47.5094 56.2364 36.1047 56.2364H36.0965C32.383 56.2345 28.741 55.245 25.5648 53.375L24.809 52.9302L16.9773 54.9676L19.0686 47.3938Z"
+        fill="url(#paint2_linear_596_279686)"
+      />
+      <path
+        d="M29.8823 25.3699C29.4163 24.3422 28.9259 24.3214 28.4827 24.3034C28.1198 24.2879 27.705 24.2891 27.2905 24.2891C26.8757 24.2891 26.2017 24.4439 25.6319 25.0612C25.0616 25.679 23.4546 27.172 23.4546 30.2087C23.4546 33.2455 25.6837 36.1802 25.9944 36.5924C26.3056 37.0038 30.2978 43.4348 36.6204 45.9088C41.8751 47.9649 42.9444 47.5559 44.0849 47.4528C45.2255 47.3501 47.7653 45.9602 48.2835 44.5189C48.802 43.0778 48.8021 41.8426 48.6466 41.5844C48.4911 41.3273 48.0763 41.1728 47.4542 40.8643C46.8319 40.5556 43.7737 39.0623 43.2036 38.8563C42.6333 38.6505 42.2187 38.5478 41.8038 39.1658C41.389 39.7829 40.1978 41.1728 39.8347 41.5844C39.472 41.997 39.1089 42.0484 38.487 41.7397C37.8645 41.43 35.8612 40.779 33.4845 38.6765C31.6353 37.0404 30.3868 35.0201 30.0239 34.4021C29.661 33.785 29.9851 33.4505 30.297 33.143C30.5765 32.8664 30.9192 32.4222 31.2306 32.062C31.5407 31.7015 31.6442 31.4443 31.8517 31.0327C32.0593 30.6207 31.9554 30.2602 31.8001 29.9515C31.6442 29.6428 30.4354 26.5902 29.8823 25.3699Z"
+        fill="white"
+      />
+    </g>
+    <defs>
+      <filter
+        id="filter0_d_596_279686"
+        x="1"
+        y="5"
+        width="70"
+        height="69.8345"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+          result="hardAlpha"
+        />
+        <feOffset dy="4" />
+        <feGaussianBlur stdDeviation="5" />
+        <feComposite in2="hardAlpha" operator="out" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.05 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow_596_279686"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect1_dropShadow_596_279686"
+          result="shape"
+        />
+      </filter>
+      <linearGradient
+        id="paint0_linear_596_279686"
+        x1="72"
+        y1="72"
+        x2="-1.87286"
+        y2="70.0242"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stop-color="#CEE0FF" />
+        <stop offset="1" stop-color="#F2FAFF" />
+      </linearGradient>
+      <linearGradient
+        id="paint1_linear_596_279686"
+        x1="2425.27"
+        y1="4822.81"
+        x2="2425.27"
+        y2="11.8628"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stop-color="#1FAF38" />
+        <stop offset="1" stop-color="#60D669" />
+      </linearGradient>
+      <linearGradient
+        id="paint2_linear_596_279686"
+        x1="2511"
+        y1="4994.47"
+        x2="2511"
+        y2="11"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stop-color="#F9F9F9" />
+        <stop offset="1" stop-color="white" />
+      </linearGradient>
+    </defs>
+  </svg>
+);
+
+export const FacbookIcon = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="73"
+    height="75"
+    viewBox="0 0 73 75"
+    fill="none"
+  >
+    <circle
+      cx="36.5"
+      cy="36"
+      r="35.5"
+      fill="#F0F6FF"
+      stroke="url(#paint0_linear_596_279701)"
+    />
+    <g filter="url(#filter0_d_596_279701)">
+      <path
+        d="M61.5 36C61.5 22.193 50.307 11 36.5 11C22.693 11 11.5 22.193 11.5 36C11.5 48.4781 20.6422 58.8209 32.5938 60.6963V43.2266H26.2461V36H32.5938V30.4922C32.5938 24.2266 36.3262 20.7656 42.0367 20.7656C44.7719 20.7656 47.6328 21.2539 47.6328 21.2539V27.4062H44.4805C41.3748 27.4062 40.4062 29.3334 40.4062 31.3105V36H47.3398L46.2314 43.2266H40.4062V60.6963C52.3578 58.8209 61.5 48.4783 61.5 36Z"
+        fill="#1877F2"
+      />
+      <path
+        d="M46.2314 43.2266L47.3398 36H40.4062V31.3105C40.4062 29.3332 41.3748 27.4062 44.4805 27.4062H47.6328V21.2539C47.6328 21.2539 44.7719 20.7656 42.0365 20.7656C36.3262 20.7656 32.5938 24.2266 32.5938 30.4922V36H26.2461V43.2266H32.5938V60.6963C33.886 60.8988 35.192 61.0003 36.5 61C37.808 61.0004 39.114 60.8988 40.4062 60.6963V43.2266H46.2314Z"
+        fill="white"
+      />
+    </g>
+    <defs>
+      <filter
+        id="filter0_d_596_279701"
+        x="1.5"
+        y="5"
+        width="70"
+        height="70"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+          result="hardAlpha"
+        />
+        <feOffset dy="4" />
+        <feGaussianBlur stdDeviation="5" />
+        <feComposite in2="hardAlpha" operator="out" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.05 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow_596_279701"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect1_dropShadow_596_279701"
+          result="shape"
+        />
+      </filter>
+      <linearGradient
+        id="paint0_linear_596_279701"
+        x1="72.5"
+        y1="72"
+        x2="-1.37286"
+        y2="70.0242"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stop-color="#CEE0FF" />
+        <stop offset="1" stop-color="#F2FAFF" />
+      </linearGradient>
+    </defs>
+  </svg>
+);
+
+export const Telegram = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="72"
+    height="75"
+    viewBox="0 0 72 75"
+    fill="none"
+  >
+    <circle
+      cx="36"
+      cy="36"
+      r="35.5"
+      fill="#F0F6FF"
+      stroke="url(#paint0_linear_596_279694)"
+    />
+    <g filter="url(#filter0_d_596_279694)">
+      <path
+        d="M36 11C29.3711 11 23.0078 13.6355 18.3242 18.3223C13.6358 23.0108 11.0013 29.3695 11 36C11 42.6277 13.6367 48.991 18.3242 53.6777C23.0078 58.3645 29.3711 61 36 61C42.6289 61 48.9922 58.3645 53.6758 53.6777C58.3633 48.991 61 42.6277 61 36C61 29.3723 58.3633 23.009 53.6758 18.3223C48.9922 13.6355 42.6289 11 36 11Z"
+        fill="url(#paint1_linear_596_279694)"
+      />
+      <path
+        d="M22.3163 35.7361C29.6053 32.5611 34.4647 30.4677 36.8944 29.4564C43.8397 26.5685 45.2811 26.0669 46.2225 26.05C46.4295 26.0466 46.8905 26.0978 47.1913 26.341C47.4413 26.546 47.5116 26.8234 47.5467 27.0181C47.578 27.2126 47.6209 27.656 47.5858 28.0021C47.2108 31.9552 45.5819 41.5482 44.7538 45.9759C44.4061 47.8494 43.7147 48.4775 43.0467 48.5388C41.5936 48.6724 40.492 47.5794 39.0858 46.658C36.8866 45.2154 35.6444 44.3177 33.5077 42.9103C31.0389 41.2837 32.6405 40.3896 34.0467 38.9287C34.4139 38.5462 40.8124 32.7279 40.9334 32.2001C40.9491 32.1341 40.9647 31.888 40.8163 31.7584C40.6717 31.6283 40.4569 31.6728 40.3006 31.708C40.078 31.758 36.5663 34.0814 29.7538 38.6779C28.7577 39.363 27.8553 39.697 27.0428 39.6794C26.1522 39.6603 24.4334 39.1748 23.1561 38.7599C21.5936 38.2509 20.3475 37.9818 20.4569 37.1173C20.5116 36.6673 21.1327 36.2068 22.3163 35.7361Z"
+        fill="white"
+      />
+    </g>
+    <defs>
+      <filter
+        id="filter0_d_596_279694"
+        x="1"
+        y="5"
+        width="70"
+        height="70"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+          result="hardAlpha"
+        />
+        <feOffset dy="4" />
+        <feGaussianBlur stdDeviation="5" />
+        <feComposite in2="hardAlpha" operator="out" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.05 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow_596_279694"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect1_dropShadow_596_279694"
+          result="shape"
+        />
+      </filter>
+      <linearGradient
+        id="paint0_linear_596_279694"
+        x1="72"
+        y1="72"
+        x2="-1.87286"
+        y2="70.0242"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stop-color="#CEE0FF" />
+        <stop offset="1" stop-color="#F2FAFF" />
+      </linearGradient>
+      <linearGradient
+        id="paint1_linear_596_279694"
+        x1="2511"
+        y1="11"
+        x2="2511"
+        y2="5011"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stop-color="#2AABEE" />
+        <stop offset="1" stop-color="#229ED9" />
+      </linearGradient>
+    </defs>
+  </svg>
+);
+
+export const EmailIcon = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="72"
+    height="72"
+    viewBox="0 0 72 72"
+    fill="none"
+  >
+    <circle
+      cx="36"
+      cy="36"
+      r="35.5"
+      fill="#F0F6FF"
+      stroke="url(#paint0_linear_596_281846)"
+    />
+    <path
+      d="M24 51.8375V34.9254L18.7278 30.1271L14 27.4644V48.853C14 50.5043 15.3449 51.8375 17.0001 51.8375H24Z"
+      fill="#4285F4"
+    />
+    <path
+      d="M48 51.8373H55C56.6601 51.8373 58 50.4992 58 48.8528V27.4644L52.6451 30.5142L48 34.9253V51.8373Z"
+      fill="#34A853"
+    />
+    <path
+      d="M24.0001 34.9253L23.2827 28.3172L24.0001 21.9927L36.0001 30.9461L48.0001 21.9927L48.8025 27.9758L48.0001 34.9253L36.0001 43.8787L24.0001 34.9253Z"
+      fill="#EA4335"
+    />
+    <path
+      d="M48 21.9933V34.9259L58 27.4649V23.4855C58 19.7948 53.765 17.6909 50.8002 19.9043L48 21.9933Z"
+      fill="#FBBC04"
+    />
+    <path
+      d="M14 27.4644L18.5992 30.8961L24 34.9255V21.9929L21.1998 19.9038C18.2298 17.6903 14 19.7944 14 23.4849V27.4644Z"
+      fill="#C5221F"
+    />
+    <defs>
+      <linearGradient
+        id="paint0_linear_596_281846"
+        x1="72"
+        y1="72"
+        x2="-1.87286"
+        y2="70.0242"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stop-color="#CEE0FF" />
+        <stop offset="1" stop-color="#F2FAFF" />
+      </linearGradient>
+    </defs>
+  </svg>
+);
