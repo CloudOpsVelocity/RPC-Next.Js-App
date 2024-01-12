@@ -1,4 +1,5 @@
 import ForgotForm from "@/app/components/molecules/auth/forgot";
+import { forgetPasswordLockImg } from "@/app/images/commonImages";
 import Image from "next/image";
 import React from "react";
 
@@ -11,9 +12,7 @@ export default function Page() {
         Forgot Password ?
       </h2>
       <Image
-        src={
-          "https://d1l03fubsuphsh.cloudfront.net/staticmedia-images-icons/lock.gif"
-        }
+        src={forgetPasswordLockImg}
         alt="lock"
         width={200}
         height={200}
