@@ -46,7 +46,7 @@ export default function PropertyOverviewBanner({
               onClick={toggle}
               className="shadow-md cursor-pointer  p-[20px] flex justify-center items-center rounded-[20px]  text-[#0073C6] text-xl font-[600] mt-[13px]  "
             >
-              {collapsed ? "Show Price Break Up" : "Hide Price Break Up"}
+              {collapsed ? "Hide Price Break Up" : "Show Price Break Up"}
             </button>
             <WhatsAppButton className="cursor-pointer" onClick={""} />
           </div>
