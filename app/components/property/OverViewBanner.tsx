@@ -48,7 +48,11 @@ export default function PropertyOverviewBanner({
             >
               {collapsed ? "Hide Price Break Up" : "Show Price Break Up"}
             </button>
-            <WhatsAppButton className="cursor-pointer" onClick={""} />
+            <WhatsAppButton
+              className="cursor-pointer"
+              onClick={""}
+              name="Sagar Samundra"
+            />
           </div>
         </div>
 

@@ -14,3 +14,7 @@
   color: white;
   border-radius: 100%;
 }
+
+.content {
+  border-radius: 20px;
+}

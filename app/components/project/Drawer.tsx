@@ -39,13 +39,13 @@ function ProjectDrawer() {
             <div className="grid grid-cols-5 gap-5">
               {content.map((item: AmenityList, index: number) => (
                 <div
-                  className="flex items-center px-3 py-1.5 bg-white border border-[#c4f1f9] rounded-full"
+                  className="flex justify-center items-center gap-2 p-2.5 border shadow-[0px_4px_10px_0px_rgba(202,233,255,0.30)] rounded-[10px] border-solid border-[#92B2C8];
+                  background: #fff"
                   key={item.id}
                 >
                   <span className="text-[#57a773] font-semibold">
                     {index + 1}
                   </span>
-                  <span className="mx-1.5 text-[#6e798c]">|</span>
                   <span className="text-[#6e798c]">{item.name}</span>
                 </div>
               ))}

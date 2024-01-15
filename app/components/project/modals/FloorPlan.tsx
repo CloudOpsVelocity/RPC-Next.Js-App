@@ -7,6 +7,8 @@ import Button from "@/app/elements/button";
 import { useForm } from "@mantine/form";
 import Grid from "../../molecules/Utils/Grid";
 import Image from "next/image";
+import CarouselModal from "./Carousel";
+import { useState } from "react";
 function FloorPlanModal() {
   const [opened, { open, close }] = useDisclosure(false);
   const form = useForm();
@@ -14,7 +16,7 @@ function FloorPlanModal() {
   return (
     <>
       <div
-        className="bg-[#F4FBFF] p-[10px] rounded-[29px] gap-[12px] flex justify-end items-center  "
+        className="bg-[#F4FBFF] p-[10px] rounded-[29px] gap-[12px] flex justify-end items-center  cursor-pointer"
         onClick={open}
       >
         <p className="text-[12px] lg:text-[14px] font-[600] text-[#0073C6] underline ">
@@ -27,6 +29,7 @@ function FloorPlanModal() {
         classNames={{
           title: S.title,
           close: S.close,
+          content: S.content,
         }}
         onClose={close}
         title="Floor Plan"
@@ -64,8 +67,10 @@ function FloorPlanModal() {
             </div>
             <Grid>
               <LeftSection />
-              <MiddleSection />
-              <RightSection />
+              <div className="flex w-[1073px] h-[501px] justify-center items-start gap-[45px] shrink-0">
+                <MiddleSection />
+                <RightSection />
+              </div>
             </Grid>
           </div>
         </>
@@ -440,6 +445,7 @@ const RightSection = () => {
 };
 
 const MiddleSection = () => {
+  const [opened, setOpened] = useState(false);
   return (
     <div className="col-span-1">
       <div className="relative">
@@ -451,6 +457,7 @@ const MiddleSection = () => {
           height={400}
           style={{ aspectRatio: "800 / 400", objectFit: "cover" }}
         />
+        <CarouselModal opened={opened} setOpened={setOpened} />
       </div>
       <div className="flex justify-between items-center mt-4">
         <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
@@ -531,3 +538,5 @@ const MiddleSection = () => {
     </div>
   );
 };
+
+export { MiddleSection, RightSection };

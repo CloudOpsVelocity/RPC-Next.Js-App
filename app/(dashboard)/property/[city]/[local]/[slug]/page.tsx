@@ -1,7 +1,4 @@
 import React from "react";
-import Footer from "@/app/components/layouts/primary/footer";
-import Header from "@/app/components/layouts/primary/header";
-import FloorplansBlock from "@/app/components/project/floorplansBlock";
 import AboutBuilder from "@/app/components/project/aboutBuilder";
 import GalleryBlock from "@/app/components/project/galleryBlock";
 import Nearby from "@/app/components/project/nearby";
@@ -19,12 +16,11 @@ import About from "@/app/components/project/about";
 import Navigation from "@/app/components/project/navigation";
 import Link from "next/link";
 import { getProjectDetails } from "@/app/utils/project";
-import ProjectDetailsP from "@/app/components/project/projectDetailsP";
 import Specifications from "@/app/components/project/specification";
 import ProjectDrawer from "@/app/components/project/Drawer";
-import Container from "@/app/components/molecules/Utils/Container";
 import RoomDetails from "@/app/components/property/RoomDetails";
 import PropertyOverView from "@/app/components/property/Overview";
+import RoomFloorplansBlock from "@/app/components/property/Floorplan";
 
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
@@ -62,7 +58,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         {/* Property Details */}
         <RoomDetails data={data.phaseList} />
         {/* Floor Plan Block */}
-        <FloorplansBlock data={data.phaseList} />
+        <RoomFloorplansBlock data={data.phaseList} />
         <GalleryBlock {...data.media} />
         {/* About Builder */}
         <AboutBuilder />

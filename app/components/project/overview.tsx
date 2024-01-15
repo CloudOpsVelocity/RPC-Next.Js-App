@@ -50,9 +50,12 @@ export default function Overview({
             4.0 Ratings
             <RatingStar fill="#FFD600" className="h-[32px] w-[32px]" />
           </p>
-          <p className="text-[20px] lg:text-[24px] text-[#0073C6] font-[600] decoration-dashed underline whitespace-nowrap ">
+          <a
+            href={`tel:${8766203976}`}
+            className="text-[20px] lg:text-[24px] text-[#0073C6] font-[600] decoration-dashed underline whitespace-nowrap "
+          >
             Call now
-          </p>
+          </a>
         </div>
       </div>
 
@@ -124,7 +127,11 @@ export default function Overview({
           </p>
         </div>
       </div>
-      <OverviewBanner maxPrice={maxPrice} minPrice={minPrice} />
+      <OverviewBanner
+        maxPrice={maxPrice}
+        minPrice={minPrice}
+        name={projectName}
+      />
     </div>
   );
 }

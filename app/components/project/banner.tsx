@@ -51,6 +51,7 @@ const AddRating = ({ opened, close }: { opened: any; close: any }) => {
           title: S.title,
           root: S.root,
           close: S.close,
+          content: S.content,
         }}
         opened={opened}
         onClose={close}

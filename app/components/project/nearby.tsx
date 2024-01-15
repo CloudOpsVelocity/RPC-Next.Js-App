@@ -4,6 +4,8 @@ import { LuTrain, LuSearch } from "react-icons/lu";
 import { Text, Tabs, TextInput } from "@mantine/core";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import cslx, { clsx } from "clsx";
+import axios from "axios";
+import { useQuery } from "react-query";
 interface Area {
   name: string;
   Icon?: string;
@@ -47,7 +49,7 @@ const Nearby = ({ lat, lang }: { lat: string; lang: string }) => {
     },
     [map]
   );
-
+  console.log(selectedLocation);
   const areas: Area[] = [
     {
       name: "commute",
@@ -89,20 +91,19 @@ const Nearby = ({ lat, lang }: { lat: string; lang: string }) => {
       name: "clinic",
       Icon: " ",
     },
-    //   {
-    //     name: "other1",
-    //     Icon: " ",
-    //   },
-    //   {
-    //     name: "other2",
-    //     Icon: " ",
-    //   },
-    //   {
-    //     name: "othre3",
-    //     Icon: " ",
-    //   },
   ];
+  const fetchNearbyPlaces = async () => {
+    const response = await fetch(
+      `/api/hello?lt=${13.0318336}&lng=${77.5815168}`
+    );
+    return await response.json();
+  };
 
+  const { data } = useQuery({
+    queryKey: ["nearbyPlaces"],
+    queryFn: fetchNearbyPlaces,
+  });
+  console.log(data);
   return (
     <div className="w-[90%] mx-auto mt-[5%] mb-[5%] " id="nearBy">
       <h2 className="text-[24px] lg:text-[32px] font-semibold">

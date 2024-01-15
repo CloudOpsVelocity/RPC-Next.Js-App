@@ -2,8 +2,9 @@
   background: red;
   color: white;
   border-radius: 100%;
+  margin-right: 10px;
 }
 
-.content {
+.body {
   border-radius: 20px;
 }

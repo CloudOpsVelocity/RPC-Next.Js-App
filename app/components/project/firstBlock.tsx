@@ -69,6 +69,9 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
                 <h3 className="text-[24px] lg:text-[32px] font-[700] text-[#00487C]">
                   {projectDetails.projectName}
                 </h3>
+                <p className="text-[#202020] text-2xl not-italic font-medium leading-[normal] tracking-[0.32px]">
+                  {projectDetails.address}
+                </p>
                 <p className="text-[16px] lg:text-[24px] font-[600] text-[#001F35]">
                   Start - End Date:
                   <span className="font-[600] text-[#737579]">

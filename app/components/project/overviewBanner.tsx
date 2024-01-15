@@ -11,12 +11,15 @@ import { Collapse, Modal } from "@mantine/core";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import S from "@/app/styles/Req.module.css";
+import { projectprops } from "@/app/data/projectDetails";
 export default function OverviewBanner({
   minPrice,
   maxPrice,
+  name,
 }: {
   minPrice: number;
   maxPrice: number;
+  name: string;
 }) {
   const [opened, { open, close }] = useDisclosure(false);
 
@@ -41,7 +44,7 @@ export default function OverviewBanner({
             />
           </div>
 
-          <WhatsAppButton className="cursor-pointer" onClick={""} />
+          <WhatsAppButton className="cursor-pointer" name={name} />
         </div>
 
         <RequestCallBackModal close={close} opened={opened} />
@@ -66,6 +69,7 @@ const RequestCallBackModal = ({
         className="!rounded-full"
         classNames={{
           close: S.close,
+          content: S.content,
         }}
       >
         <>
