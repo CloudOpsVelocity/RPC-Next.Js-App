@@ -50,10 +50,12 @@ export default function OtpBox({ userName, close, callback, mobile }: Props) {
           {hideMobileNumber((mobile && mobile) || 0)}
         </p>
         <PinInput
+          name="otp"
           size="md"
           {...form.getInputProps("otp")}
           className=""
           inputMode="numeric"
+          type={"number"}
         />
 
         <Resend userName={userName} />

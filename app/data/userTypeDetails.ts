@@ -1,16 +1,16 @@
 export const data = [
   {
-    src: "/home/homeSeachProperty.svg",
+    src: "/indi.png",
     name: "As Individual",
     href: "/register/individual",
   },
   {
-    src: "/home/homeSeachProperty.svg",
+    src: "/agent.png",
     name: "Agent",
     href: "/register/agent",
   },
   {
-    src: "/home/homeSeachProperty.svg",
+    src: "/builder.png",
     name: "Builder",
     href: "/register/builder",
   },
