@@ -22,7 +22,7 @@ export default function OtpBox({ userName, close, callback, mobile }: Props) {
   const { verifyOtp } = useAuth();
   const [error, setError] = useState(false);
   const onSubmit = async (value: any) => {
-    const data = await verifyOtp({ ...value, username: userName });
+    const data = await verifyOtp({ ...value, username: mobile });
     if (data?.success) {
       callback();
       close();
@@ -79,7 +79,7 @@ export default function OtpBox({ userName, close, callback, mobile }: Props) {
 const Resend = ({ userName }: { userName: string }): JSX.Element => {
   const [timeRemaining, setTimeRemaining] = useState({
     minutes: 0,
-    seconds: 5,
+    seconds: 30,
   });
 
   useEffect(() => {

@@ -1,11 +1,20 @@
 "use client";
 import React, { useState, useCallback } from "react";
 import { LuTrain, LuSearch } from "react-icons/lu";
-import { Text, Tabs, TextInput } from "@mantine/core";
+import { Text, Tabs, TextInput, Loader, ScrollArea } from "@mantine/core";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import cslx, { clsx } from "clsx";
 import axios from "axios";
 import { useQuery } from "react-query";
+import { IoLocationSharp } from "react-icons/io5";
+import Loading from "../atoms/Loader";
+import {
+  Coordinates,
+  calculateDistance,
+  calculateTime,
+} from "@/app/utils/maps";
+import { useDebouncedState } from "@mantine/hooks";
+
 interface Area {
   name: string;
   Icon?: string;
@@ -66,8 +75,6 @@ const Nearby = ({ lat, lang }: { lat: string; lang: string }) => {
     {
       name: "hospital",
       Icon: " ",
-      lng: 77.55137057690479,
-      lat: 13.02542364337667,
     },
     {
       name: "school",
@@ -84,8 +91,6 @@ const Nearby = ({ lat, lang }: { lat: string; lang: string }) => {
     {
       name: "bank",
       Icon: " ",
-      lng: 77.5815168,
-      lat: 13.0318336,
     },
     {
       name: "clinic",
@@ -94,16 +99,16 @@ const Nearby = ({ lat, lang }: { lat: string; lang: string }) => {
   ];
   const fetchNearbyPlaces = async () => {
     const response = await fetch(
-      `/api/hello?lt=${13.0318336}&lng=${77.5815168}`
+      `/api/hello?lt=${13.0318336}&lng=${77.5815168}&type=${selected}`
     );
     return await response.json();
   };
 
-  const { data } = useQuery({
-    queryKey: ["nearbyPlaces"],
+  const { data, isLoading } = useQuery({
+    queryKey: ["nearbyPlaces" + selected],
     queryFn: fetchNearbyPlaces,
   });
-  console.log(data);
+
   return (
     <div className="w-[90%] mx-auto mt-[5%] mb-[5%] " id="nearBy">
       <h2 className="text-[24px] lg:text-[32px] font-semibold">
@@ -121,7 +126,7 @@ const Nearby = ({ lat, lang }: { lat: string; lang: string }) => {
             onClick={() => {
               setSelected(area.name);
               showLocationOnMap({
-                position: { lat: area.lat || 0, lng: area.lng || 0 },
+                position: !isLoading && data[0].geometry.location,
                 name: area.name,
               });
             }}
@@ -139,33 +144,90 @@ const Nearby = ({ lat, lang }: { lat: string; lang: string }) => {
       <div className="border border-[#92B2C8] grid grid-cols-[2fr_3fr] rounded-xl overflow-hidden shadow-lg">
         <section className="bg-white">
           <div id="tabs">
-            <Tabs defaultValue="gallery">
+            <Tabs defaultValue="public">
               <div className="bg-blue-50 px-5 py-4">
                 <Text>Select how you want to travel</Text>
                 <Tabs.List>
-                  <Tabs.Tab value="gallery">Public Transport </Tabs.Tab>
-                  <Tabs.Tab value="messages">Drive</Tabs.Tab>
-                  <Tabs.Tab value="settings">Walk</Tabs.Tab>
+                  <Tabs.Tab value="public">Public Transport </Tabs.Tab>
+                  <Tabs.Tab value="drive">Drive</Tabs.Tab>
+                  <Tabs.Tab value="walk">Walk</Tabs.Tab>
                 </Tabs.List>
               </div>
 
               <div className="px-4 pb-3">
-                <div id="search" className="my-4">
-                  <Text>Add a location to calculate your travel time</Text>
-                  <TextInput
-                    size="sm"
-                    leftSection={<LuSearch />}
-                    placeholder="Enter location"
-                  />
-                </div>
+                {/* Search Section */}
+                <SearchSection setSelectedLocation={setSelectedLocation} />
 
-                <Tabs.Panel value="gallery">
+                <Tabs.Panel value="public">
                   <div id="location-listing" className="grid gap-2">
+                    {isLoading ? (
+                      <Loading />
+                    ) : (
+                      <ScrollArea h={250}>
+                        {Object.values(data).map(
+                          (location: any, index: number) => (
+                            <LocationList
+                              type="public"
+                              {...location}
+                              key={index}
+                              lat={13.0318336}
+                              lng={77.5815168}
+                              onClick={setSelectedLocation}
+                            />
+                          )
+                        )}
+                      </ScrollArea>
+                    )}
+
                     {/* Your existing location list items */}
                   </div>
                 </Tabs.Panel>
+                <Tabs.Panel value="drive">
+                  <div id="location-listing" className="grid gap-2">
+                    {isLoading ? (
+                      <Loading />
+                    ) : (
+                      <ScrollArea h={250}>
+                        {Object.values(data).map(
+                          (location: any, index: number) => (
+                            <LocationList
+                              type="drive"
+                              {...location}
+                              key={index}
+                              lat={13.0318336}
+                              lng={77.5815168}
+                              onClick={setSelectedLocation}
+                            />
+                          )
+                        )}
+                      </ScrollArea>
+                    )}
 
-                {/* Other panels... */}
+                    {/* Your existing location list items */}
+                  </div>
+                </Tabs.Panel>
+                <Tabs.Panel value="walk">
+                  <div id="location-listing" className="grid gap-2">
+                    {isLoading ? (
+                      <Loading />
+                    ) : (
+                      <ScrollArea h={250}>
+                        {Object.values(data).map(
+                          (location: any, index: number) => (
+                            <LocationList
+                              type="walk"
+                              {...location}
+                              key={index}
+                              lat={13.0318336}
+                              lng={77.5815168}
+                              onClick={setSelectedLocation}
+                            />
+                          )
+                        )}
+                      </ScrollArea>
+                    )}
+                  </div>
+                </Tabs.Panel>
               </div>
             </Tabs>
           </div>
@@ -189,3 +251,102 @@ const Nearby = ({ lat, lang }: { lat: string; lang: string }) => {
 };
 
 export default Nearby;
+
+const LocationList: React.FC<{
+  name: string;
+  geometry: Coordinates;
+  vicinity: string;
+  lat: number;
+  lng: number;
+  type: "public" | "drive" | "walk";
+  onClick: (location: any) => void;
+}> = ({ name, geometry, vicinity, lat, lng, onClick, type }) => {
+  const userLocation = { lat, lng }; // Replace with user's location
+  const distance = calculateDistance(
+    userLocation.lat,
+    userLocation.lng,
+    geometry.location.lat,
+    geometry.location.lng
+  );
+  const travelTime = calculateTime(distance, type); // Assuming an average speed of 30 km/h
+
+  return (
+    <div
+      className="p-2 bg-gray-50 border rounded-lg cursor-pointer"
+      onClick={() =>
+        onClick({ lat: geometry.location.lat, lng: geometry.location.lng })
+      }
+    >
+      <div className="flex items-center justify-between">
+        <h6 className="text-md">{name}</h6>
+        <div className="flex gap-1 text-sm">
+          <span className="flex items-center">
+            <IoLocationSharp />
+            <span className="text-blue-800">{distance.toFixed(2)} Km</span>
+          </span>
+          <span>|</span>
+          <span>
+            {travelTime.hours}h {travelTime.minutes}m
+          </span>
+        </div>
+      </div>
+      <p className="flex items-center gap-1 text-sm text-gray-600">
+        <LuTrain size={15} />
+        Via public transport
+      </p>
+      <p className="text-gray-600 mt-1">{vicinity}</p>
+    </div>
+  );
+};
+
+const SearchSection = ({ setSelectedLocation }: any) => {
+  const getSearchResults = async (input: string) => {
+    const res = await axios.get(`/api/googlesearch?input=${input}`);
+    return res.data;
+  };
+  const [value, setValue] = useDebouncedState("", 500);
+  const { data, isLoading } = useQuery({
+    queryKey: ["search", value],
+    queryFn: () => getSearchResults(value),
+    enabled: !!value,
+  });
+  const handleSearchClick = async (id: number) => {
+    const res = await axios.get(`/api/latlong?id=${id}`);
+    setSelectedLocation({
+      lat: res.data.location.lat,
+      lng: res.data.location.lng,
+    });
+    setValue("");
+  };
+  return (
+    <div id="search" className="my-4">
+      <Text>Add a location to calculate your travel time</Text>
+      <TextInput
+        size="sm"
+        leftSection={<LuSearch />}
+        placeholder="Enter location"
+        onChange={(e) => setValue(e.target.value)}
+      />
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <div className="mt-2">
+            {data?.autocompleteRes?.predictions?.map(
+              (result: any, index: number) => (
+                <div
+                  key={index}
+                  className="flex items-center my-1 cursor-pointer"
+                  onClick={() => handleSearchClick(result.place_id)}
+                >
+                  <IoLocationSharp className="text-gray-500" />
+                  <span className="ml-2">{result.description}</span>
+                </div>
+              )
+            )}
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
