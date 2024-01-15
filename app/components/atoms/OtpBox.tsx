@@ -58,11 +58,16 @@ export default function OtpBox({ userName, close, callback, mobile }: Props) {
           type={"number"}
         />
 
-        <Resend userName={userName} />
+        <Resend userName={mobile} />
 
         {error && (
           <p className="text-[#F00] font-[500] text-[16px] w-[100%] !max-w-[423px] !mb-[6%] text-center ">
             You&apos;ve entered wrong OTP, Please enter your OTP again!
+          </p>
+        )}
+        {form.errors.otp && (
+          <p className="text-[#F00] font-[500] text-[16px] w-[100%] !max-w-[423px] !mb-[6%] text-center ">
+            {form.errors.otp}
           </p>
         )}
 
@@ -78,7 +83,7 @@ export default function OtpBox({ userName, close, callback, mobile }: Props) {
   );
 }
 
-const Resend = ({ userName }: { userName: string }): JSX.Element => {
+const Resend = ({ userName }: { userName: number | null }): JSX.Element => {
   const [timeRemaining, setTimeRemaining] = useState({
     minutes: 0,
     seconds: 30,

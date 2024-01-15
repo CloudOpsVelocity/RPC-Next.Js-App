@@ -48,10 +48,10 @@ const agentSchema = yup.object().shape({
 const otpSchema = yup.object().shape({
   otp: yup
     .number()
-    .typeError("OTP must be a number")
+    .typeError("Plese enter a valid OTPr")
     .positive("OTP must be a positive number")
     .integer("OTP must be an integer")
-    .min(1000, "OTP must be exactly 4 digits")
+    .min(1000, "Plese enter a valid OTP")
     .max(9999, "OTP must be exactly 4 digits")
     .required("OTP is required"),
 });
