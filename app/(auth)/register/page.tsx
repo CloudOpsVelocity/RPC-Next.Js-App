@@ -60,11 +60,7 @@ export default function Page() {
 
         <p className=" text-[24px] font-[400] font-Ledger text-[#282828] mt-[5%] ">
           “ Your journey to{" "}
-          <span className="text-[#009C59] text-[28px] not-italic font-normal leading-[normal] ">
-            {" "}
-            Get Right Property
-          </span>{" "}
-          starts here ”
+          <span className="cursive "> Get Right Property</span> starts here ”
         </p>
       </div>
     </div>

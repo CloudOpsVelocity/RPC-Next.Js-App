@@ -35,6 +35,7 @@ import { cityParser, stateParser } from "@/app/utils/parse";
 import { agentSchema, builderSchema } from "@/app/validations/auth";
 import CountryInput from "@/app/components/atoms/CountryInput";
 import N from "@/app/styles/Numinput.module.css";
+import { EyeClosed, EyeOpen } from "@/app/images/commonSvgs";
 
 function Builder() {
   const [status, setStatus] = useState<
@@ -249,6 +250,9 @@ function Builder() {
             label="Password"
             placeholder="Enter your password here"
             {...form.getInputProps("password")}
+            visibilityToggleIcon={({ reveal }) =>
+              reveal ? <EyeOpen /> : <EyeClosed />
+            }
           />
           <NumberInput
             required

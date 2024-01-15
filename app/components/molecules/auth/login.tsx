@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useState } from "react";
 import * as yup from "yup";
 import S from "@/app/styles/Pass.module.css";
+import { EyeClosed, EyeOpen } from "@/app/images/commonSvgs";
 const schema = yup.object().shape({
   username: yup
     .string()
@@ -59,6 +60,9 @@ function Login() {
           mt="sm"
           label="Password"
           placeholder="Enter Your Password"
+          visibilityToggleIcon={({ reveal }) =>
+            reveal ? <EyeOpen /> : <EyeClosed />
+          }
           {...form.getInputProps("password")}
         />
 
@@ -76,21 +80,21 @@ function Login() {
         >
           LOGIN
         </Button>
-        <div className="text-center mt-2">
-          <p className="text-sm">
-            Don`&apos;t have an Account?{" "}
+        <div className="text-center mt-4 ">
+          <p className="text-[#282828] text-xl not-italic font-normal leading-[normal] mb-3">
+            Don&apos;t have an Account?{" "}
             <Link
               href={"/register"}
-              className="inline-flex items-center justify-center rounded-md text-sm  ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary hover:bg-primary/90 h-10 px-4 py-2 text-[#0C7ACA] hover:underline font-bold"
+              className="text-[#0C7ACA] text-xl not-italic font-bold leading-[normal]"
             >
               SIGN UP
             </Link>
           </p>
           <Link
             href={"/"}
-            className="text-sm mt-2 text-[#148B16]  underline cursor-pointer"
+            className="text-[#148B16] text-xl not-italic font-medium leading-[normal] underline "
           >
-            Continue without register.
+            Continue without register
           </Link>
         </div>
       </form>

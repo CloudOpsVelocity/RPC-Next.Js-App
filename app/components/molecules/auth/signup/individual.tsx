@@ -19,6 +19,7 @@ import CountryInput from "@/app/components/atoms/CountryInput";
 import { useState } from "react";
 import Success from "../success";
 import Login from "../login";
+import { EyeClosed, EyeOpen } from "@/app/images/commonSvgs";
 
 function Individual() {
   const [status, setStatus] = useState<
@@ -53,7 +54,7 @@ function Individual() {
   const OtpCallback = async () => {
     const data = await login({
       password: form.values.password,
-      username: form.values.email,
+      username: form.values.mobile as unknown as string,
     });
     form.reset();
     setStatus("success");
@@ -114,6 +115,9 @@ function Individual() {
                 className="w-[100%] mb-[3%] "
                 label="Password"
                 placeholder="Enter your password here"
+                visibilityToggleIcon={({ reveal }) =>
+                  reveal ? <EyeOpen /> : <EyeClosed />
+                }
                 {...form.getInputProps("password")}
               />
               <NumberInput

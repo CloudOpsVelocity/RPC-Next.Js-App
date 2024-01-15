@@ -1,7 +1,7 @@
 const data = [
   {
     icon: "/auth/building",
-    text: "Dedicated To Result",
+    text: "Dedicated To Results",
   },
   {
     icon: "/auth/building",
@@ -13,7 +13,7 @@ const data = [
   },
   {
     icon: "/auth/building",
-    text: "Thousand of new listings",
+    text: "Thousands of new listings",
   },
 ];
 export default data;

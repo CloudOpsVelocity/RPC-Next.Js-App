@@ -24,6 +24,7 @@ import { actionAsyncStorage } from "next/dist/client/components/action-async-sto
 import Success from "../success";
 import { agentSchema } from "@/app/validations/auth";
 import CountryInput from "@/app/components/atoms/CountryInput";
+import { EyeClosed, EyeOpen } from "@/app/images/commonSvgs";
 
 function Agent() {
   const [status, setStatus] = useState<
@@ -164,6 +165,9 @@ function Agent() {
             label="Password"
             placeholder="Enter your password here"
             {...form.getInputProps("password")}
+            visibilityToggleIcon={({ reveal }) =>
+              reveal ? <EyeOpen /> : <EyeClosed />
+            }
           />
           <NumberInput
             required
