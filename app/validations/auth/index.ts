@@ -26,7 +26,7 @@ const agentSchema = yup.object().shape({
   userName: yup
     .string()
     .matches(/^[a-zA-Z\s]*$/, "Only letters and spaces are allowed")
-    .max(128, "Name should not exceed 128 characters")
+    .max(20, "Name should not exceed 20 characters")
     .required("Full name is required"),
   email: yup.string().email("Invalid email").required("Email is required"),
   password: yup
