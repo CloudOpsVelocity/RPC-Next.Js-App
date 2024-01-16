@@ -209,7 +209,7 @@ function Builder() {
 
           await login({
             password: form.values.password,
-            username: form.values.email,
+            username: form.values.mobile as unknown as string,
           });
           setStatus("success");
           // Proceed to the next step after the API call
