@@ -295,7 +295,7 @@ function Agent() {
               onClick={() => {
                 active !== 0 ? prevStep() : router.back();
               }}
-              className="!rounded-[6px] !border-solid !border-1 !border-blue-600 !bg-[#FFF] !text-[#0073C6] !w-[100%] !max-w-[178px]  "
+              className="!rounded-[6px] !border-solid  !w-[49%] !border-1 !border-blue-600 !bg-[#FFF] !text-[#0073C6] md:!w-[100%] md:!max-w-[178px] "
             >
               <BackSvg />
               Back
@@ -304,7 +304,7 @@ function Agent() {
             <Button
               loading={status === "pending"}
               mt="sm"
-              className="!rounded-[6px] !w-[100%] !max-w-[225px] !bg-[#0c7aca]"
+              className="!rounded-[6px] !w-[49%] md:!w-[100%]  md:!max-w-[225px] !bg-[#0c7aca]"
               onClick={nextStep}
             >
               {active === 0 ? "SAVE & VERIFY" : "SAVE & CONTINUE"}
@@ -313,16 +313,16 @@ function Agent() {
         )}
       </Group>
 
-      <p className="text-[20px] font-[400] text-[#202020] mt-[5%]">
+      <p className="md:text-xl font-[400] text-[#202020] mt-[5%]">
         Already have an Account ?{" "}
-        <Link href="/login" className="text-[20px] font-[600] text-[#0073C6]">
+        <Link href="/login" className="md:text-xl font-[600] text-[#0073C6]">
           Log In
         </Link>
       </p>
 
       <Link
         href="/"
-        className="text-[20px] font-[700] text-[#148B16] underline "
+        className="md:text-xl font-[700] text-[#148B16] underline "
       >
         Continue Without Register
       </Link>
