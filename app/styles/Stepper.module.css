@@ -1,1 +1,38 @@
+.steps {
+  margin-bottom: 5%;
+}
 
+.step {
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.separator {
+  margin-left: -2rem;
+  margin-right: -2rem;
+  height: 0.1rem;
+  border: 1px dashed green;
+  width: 100%;
+  position: relative;
+  bottom: 13px;
+}
+.stepIcon {
+  /* background-color: green; */
+  color: green;
+  /* border-width: 4px; */
+}
+
+.stepLabelActive:nth-child(1) {
+  color: green;
+}
+
+.steplabel {
+  color: #333333;
+}
+
+.rootSuccess {
+  display: none;
+}

@@ -81,18 +81,18 @@ function Login() {
           LOGIN
         </Button>
         <div className="text-center mt-4 ">
-          <p className="text-[#282828] text-xl not-italic font-normal leading-[normal] mb-3">
+          <p className="text-[#282828] md:text-xl not-italic font-normal leading-[normal] mb-3">
             Don&apos;t have an Account?{" "}
             <Link
               href={"/register"}
-              className="text-[#0C7ACA] text-xl not-italic font-bold leading-[normal]"
+              className="text-[#0C7ACA] md:text-xl not-italic font-bold leading-[normal]"
             >
               SIGN UP
             </Link>
           </p>
           <Link
             href={"/"}
-            className="text-[#148B16] text-xl not-italic font-medium leading-[normal] underline "
+            className="text-[#148B16] md:text-xl not-italic font-medium leading-[normal] underline "
           >
             Continue without register
           </Link>

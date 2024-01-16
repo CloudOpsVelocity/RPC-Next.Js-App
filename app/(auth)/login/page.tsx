@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function Page() {
   return (
-    <div className="w-full p-[2%]">
+    <div className="w-full  p-[10%] md:p-[2%]">
       <div className="w-full flex justify-center items-center gap-[5%] mb-[5%] ">
         <Link
           href="/login"

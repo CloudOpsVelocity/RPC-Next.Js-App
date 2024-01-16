@@ -24,4 +24,15 @@ function hideMobileNumber(mobile: number): string {
   const result = hiddenDigits + input.slice(-3);
   return result;
 }
-export { stateParser, cityParser, brachParser, hideMobileNumber };
+function registerOtherParser(data: any) {
+  delete data.otp;
+  delete data.prevMobile;
+  return data;
+}
+export {
+  stateParser,
+  cityParser,
+  brachParser,
+  hideMobileNumber,
+  registerOtherParser,
+};

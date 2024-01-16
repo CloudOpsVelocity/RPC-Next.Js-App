@@ -24,7 +24,14 @@ import { actionAsyncStorage } from "next/dist/client/components/action-async-sto
 import Success from "../success";
 import { agentSchema } from "@/app/validations/auth";
 import CountryInput from "@/app/components/atoms/CountryInput";
-import { BackSvg, EyeClosed, EyeOpen } from "@/app/images/commonSvgs";
+import {
+  BackSvg,
+  EyeClosed,
+  EyeOpen,
+  StepperIcon,
+} from "@/app/images/commonSvgs";
+import StepCss from "@/app/styles/Stepper.module.css";
+import { registerOtherParser } from "@/app/utils/parse";
 
 function Agent() {
   const [status, setStatus] = useState<
@@ -104,7 +111,9 @@ function Agent() {
     }
     if (active === 1) {
       if (!form.validate().hasErrors) {
-        const data = await registerOtherDetails({ ...values });
+        const data = await registerOtherDetails(
+          registerOtherParser({ ...values })
+        );
         await login({
           password: form.values.password,
           username: form.values.email,
@@ -147,9 +156,23 @@ function Agent() {
         active={active}
         className="w-full"
         // @ts-ignore
-        styles={styles}
+        classNames={{
+          steps: StepCss.steps,
+          step: StepCss.step,
+          stepIcon: StepCss.stepIcon,
+          separator: StepCss.separator,
+          root: status === "success" ? StepCss.rootSuccess : StepCss.root,
+        }}
+        // styles={styles}
       >
-        <Stepper.Step label="Personal Details">
+        <Stepper.Step
+          icon={<StepperIcon />}
+          label="Personal Details"
+          classNames={{
+            stepLabel:
+              active !== 0 ? StepCss.stepLabelActive : StepCss.stepLabel,
+          }}
+        >
           <TextInput
             required
             size="md"
@@ -211,7 +234,12 @@ function Agent() {
           />
         </Stepper.Step>
 
-        <Stepper.Step label="Address & Others">
+        <Stepper.Step
+          label="Address & Others"
+          classNames={{
+            stepLabel: active > 1 ? StepCss.stepLabelActive : StepCss.stepLabel,
+          }}
+        >
           <TextInput
             required
             size="md"
