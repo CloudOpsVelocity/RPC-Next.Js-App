@@ -47,7 +47,7 @@ function Builder() {
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error" | "otp"
   >("idle");
-  const [active, setActive] = useState(2);
+  const [active, setActive] = useState(0);
   const router = useRouter();
 
   const [opened, { open, close }] = useDisclosure(false);
