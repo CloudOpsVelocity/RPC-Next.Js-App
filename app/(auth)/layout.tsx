@@ -29,7 +29,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <img src="/auth/login.svg" alt="" className="!my-12" />
         </div>
       </div>
-      <div className="flex justify-center items-start w-full pt-[10%] md:pt-[5%]">
+      <div className="flex justify-center items-start w-full pt-[10%] md:pt-[5.5%]">
         <div className="w-full bg-white text-gray-600 justify-center items-center ">
           <Logo styles="w-full flex justify-center items-center " />
 

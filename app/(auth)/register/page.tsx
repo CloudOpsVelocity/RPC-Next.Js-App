@@ -29,7 +29,7 @@ export default function Page() {
         <h1 className="md:text-[32px] text-[24px] font-[600] font-Playball text-[#333]">
           Welcome !
         </h1>
-        <p className="text-[20px] font-[400] font-Playball text-[#767270]">
+        <p className="text-[20px] font-[400] font-Playball text-[#282828]">
           New user, Select how you want to sign up as
         </p>
         <div className="w-full flex justify-between items-center mt-[4%]">
@@ -49,7 +49,7 @@ export default function Page() {
                 />
 
                 <p
-                  className={`text-xs md:text-[20px] font-[500] font-Playball text-[#7D7D7D] mt-[3%] group-hover:text-[#65BB67]`}
+                  className={`text-xs md:text-[20px] font-[500] font-Playball text-[#7D7D7D] mt-[8%] group-hover:text-[#65BB67] `}
                 >
                   {each.name}
                 </p>

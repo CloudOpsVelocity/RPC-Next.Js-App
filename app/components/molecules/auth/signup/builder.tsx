@@ -16,6 +16,7 @@ import {
   MultiSelect,
   ComboboxItem,
   Text,
+  ScrollArea,
 } from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
 import { DateInput } from "@mantine/dates";
@@ -52,7 +53,7 @@ function Builder() {
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error" | "otp"
   >("idle");
-  const [active, setActive] = useState(1);
+  const [active, setActive] = useState(0);
   const router = useRouter();
 
   const [opened, { open, close }] = useDisclosure(false);
@@ -388,75 +389,73 @@ function Builder() {
         </Stepper.Step>
 
         <Stepper.Step label="Company details">
-          <TextInput
-            required
-            size="md"
-            mt="md"
-            label="Builder Owned By"
-            placeholder="Enter your builder name"
-            {...form.getInputProps("companyName")}
-          />
-          <MultiSelect
-            required
-            size="md"
-            mt="md"
-            checkIconPosition="right"
-            label="Branch"
-            placeholder={`${
-              form.values.branchName.length === 0 ? "-- Select Brach--" : ""
-            }`}
-            data={isLoadingBrach ? [] : cityParser(brachData) || []}
-            {...form.getInputProps("branchName")}
-          />
-          <DateInput
-            required
-            mt="md"
-            label="Company Start Date"
-            rightSection={<DateIcons />}
-            rightSectionPointerEvents="none"
-            placeholder="DD//MM//YYYY"
-            {...form.getInputProps("companyStartDate")}
-            maxDate={dayjs(new Date()).toDate()}
-          />
-
-          <TextInput
-            required
-            size="md"
-            mt="md"
-            label="Founded By"
-            placeholder="Founder name"
-            {...form.getInputProps("foundedBy")}
-          />
-
-          <TextInput
-            required
-            size="md"
-            mt="md"
-            label="Ceo Name"
-            placeholder="Enter Ceo Name"
-            {...form.getInputProps("ceoName")}
-          />
-
-          <TextInput
-            required
-            size="md"
-            mt="md"
-            label="Managing Director"
-            placeholder="Enter Managing Director Name"
-            {...form.getInputProps("managingDirectorName")}
-          />
-
-          <NumberInput
-            required
-            hideControls
-            size="md"
-            mt="sm"
-            className="w-[100%] mb-[3%] "
-            label="Office Contact"
-            placeholder="Enter Office Contact"
-            {...form.getInputProps("officeContact")}
-            maxLength={17}
-          />
+          <div className="h-[420px] overflow-y-scroll">
+            <TextInput
+              required
+              size="md"
+              mt="md"
+              label="Builder Owned By"
+              placeholder="Enter your builder name"
+              {...form.getInputProps("companyName")}
+            />
+            <MultiSelect
+              required
+              size="md"
+              mt="md"
+              checkIconPosition="right"
+              label="Branch"
+              placeholder={`${
+                form.values.branchName.length === 0 ? "-- Select Brach--" : ""
+              }`}
+              data={isLoadingBrach ? [] : cityParser(brachData) || []}
+              {...form.getInputProps("branchName")}
+            />
+            <DateInput
+              required
+              mt="md"
+              label="Company Start Date"
+              rightSection={<DateIcons />}
+              rightSectionPointerEvents="none"
+              placeholder="DD//MM//YYYY"
+              {...form.getInputProps("companyStartDate")}
+              maxDate={dayjs(new Date()).toDate()}
+            />
+            <TextInput
+              required
+              size="md"
+              mt="md"
+              label="Founded By"
+              placeholder="Founder name"
+              {...form.getInputProps("foundedBy")}
+            />
+            <TextInput
+              required
+              size="md"
+              mt="md"
+              label="Ceo Name"
+              placeholder="Enter Ceo Name"
+              {...form.getInputProps("ceoName")}
+            />
+            <TextInput
+              required
+              size="md"
+              mt="md"
+              label="Managing Director"
+              placeholder="Enter Managing Director Name"
+              {...form.getInputProps("managingDirectorName")}
+            />
+            <NumberInput
+              required
+              hideControls
+              size="md"
+              mt="sm"
+              className="w-[100%] mb-[3%] "
+              label="Office Contact"
+              placeholder="Enter Office Contact"
+              {...form.getInputProps("officeContact")}
+              maxLength={17}
+            />{" "}
+          </div>
         </Stepper.Step>
         <Stepper.Step label="Description">
           <Textarea
