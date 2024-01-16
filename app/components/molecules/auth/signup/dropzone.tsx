@@ -4,7 +4,7 @@ import { mediaCloudIcon } from "@/app/images/commonSvgs";
 import { Button, Group, Image, Modal, Text, rem } from "@mantine/core";
 import { Dropzone, DropzoneProps, IMAGE_MIME_TYPE } from "@mantine/dropzone";
 import toast from "react-hot-toast";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Logo from "@/app/components/atoms/Logo";
 import ProjectDetailsP from "@/app/components/project/projectDetailsP";
 import { useDisclosure } from "@mantine/hooks";
@@ -65,6 +65,13 @@ export function DropZone(props: Partial<DropZoneProps>) {
 }
 
 const Preview = ({ main, logo }: any) => {
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const handleEditClick = () => {
+    // Trigger the file input click event when the edit icon is clicked
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
   const imageUrl = URL.createObjectURL(logo);
   const formatBytes = (bytes: number, decimals = 2) => {
     if (bytes === 0) return "0 Bytes";
@@ -99,8 +106,9 @@ const Preview = ({ main, logo }: any) => {
         </div>
         <div className="flex space-x-2">
           <ImagePreivewModal logo={logo} />
+          {/* THis Under Edit Icon */}
           <svg
-            onClick={() => main(null)}
+            onClick={handleEditClick}
             xmlns="http://www.w3.org/2000/svg"
             width={24}
             height={24}
@@ -133,6 +141,17 @@ const Preview = ({ main, logo }: any) => {
             <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
           </svg>
         </div>
+        <input
+          type="file"
+          // @ts-ignore
+          accept={IMAGE_MIME_TYPE}
+          style={{ display: "none" }}
+          onChange={(e) => {
+            const logoFile = e.target.files && e.target.files[0];
+            logoFile && main(logoFile);
+          }}
+          ref={fileInputRef}
+        />
       </div>
     </>
   );
