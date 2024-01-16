@@ -1,0 +1,13 @@
+.pinInput {
+  outline: none;
+  outline-offset: 0;
+  border: none;
+}
+
+.input {
+  outline: none;
+  outline-offset: 0;
+  border: none;
+  border-bottom: 1px solid #000; /* Adjust color and thickness as needed */
+  border-radius: 0;
+}

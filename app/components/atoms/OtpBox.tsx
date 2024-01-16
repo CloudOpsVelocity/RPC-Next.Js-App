@@ -6,10 +6,9 @@ import { hideMobileNumber } from "@/app/utils/parse";
 import { otpSchema } from "@/app/validations/auth";
 import { Box, Button, Modal, PinInput } from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
-import { useInterval } from "@mantine/hooks";
-import clsx from "clsx";
-import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
+import S from "@/app/styles/Otp.module.css";
+import { ref } from "yup";
 
 type Props = {
   userName: string;
@@ -34,6 +33,14 @@ export default function OtpBox({ userName, close, callback, mobile }: Props) {
   const form = useForm({
     initialValues: { otp: 0 },
     validate: yupResolver(otpSchema),
+    validateInputOnChange: true,
+    onValuesChange(values) {
+      if (values.otp.toString().length === 4) {
+        onSubmit(values);
+      } else {
+        setError(false);
+      }
+    },
   });
 
   return (
@@ -50,12 +57,17 @@ export default function OtpBox({ userName, close, callback, mobile }: Props) {
           {hideMobileNumber((mobile && mobile) || 0)}
         </p>
         <PinInput
+          classNames={{
+            pinInput: S.pinInput,
+            input: S.input,
+          }}
           name="otp"
-          size="md"
+          size="xl"
           {...form.getInputProps("otp")}
           className=""
           inputMode="numeric"
           type={"number"}
+          placeholder=""
         />
 
         <Resend userName={mobile} />
@@ -74,6 +86,7 @@ export default function OtpBox({ userName, close, callback, mobile }: Props) {
         <Button
           type="submit"
           mt="sm"
+          size="md"
           className="!rounded-[6px] !w-[100%] !max-w-[423px] !bg-[#0c7aca]"
         >
           VALIDATE
@@ -83,40 +96,50 @@ export default function OtpBox({ userName, close, callback, mobile }: Props) {
   );
 }
 
-const Resend = ({ userName }: { userName: number | null }): JSX.Element => {
+const Resend = ({ userName }: any): JSX.Element => {
   const [timeRemaining, setTimeRemaining] = useState({
     minutes: 0,
     seconds: 30,
   });
 
+  const [timerRunning, setTimerRunning] = useState(true);
+
   useEffect(() => {
-    const interval = setInterval(() => {
-      setTimeRemaining((prevTime) => {
-        if (prevTime.seconds > 0) {
-          return { ...prevTime, seconds: prevTime.seconds - 1 };
-        } else if (prevTime.minutes > 0) {
-          return { minutes: prevTime.minutes - 1, seconds: 59 };
-        } else {
-          clearInterval(interval);
-          return prevTime;
-        }
-      });
-    }, 1000);
+    let interval: NodeJS.Timeout;
+
+    if (timerRunning) {
+      interval = setInterval(() => {
+        setTimeRemaining((prevTime) => {
+          if (prevTime.seconds > 0) {
+            return { ...prevTime, seconds: prevTime.seconds - 1 };
+          } else if (prevTime.minutes > 0) {
+            return { minutes: prevTime.minutes - 1, seconds: 59 };
+          } else {
+            clearInterval(interval);
+            setTimerRunning(false);
+            return prevTime;
+          }
+        });
+      }, 1000);
+    }
 
     return () => {
       clearInterval(interval);
     };
-  }, []);
+  }, [timerRunning]);
 
-  const resendOTP = async () => {
-    setTimeRemaining({ minutes: 0, seconds: 30 });
-    await resendOtp(userName);
+  const resendOTP = () => {
+    if (!timerRunning) {
+      setTimeRemaining({ minutes: 0, seconds: 30 });
+      setTimerRunning(true);
+    }
+    // await resendOtp(userName);
   };
 
   const { minutes, seconds } = timeRemaining;
 
   return (
-    <div className="w-full flex justify-center my-2 flex-col items-end">
+    <div className="w-full flex justify-center my-4 flex-col items-end">
       {seconds > 0 || minutes > 0 ? (
         <p>
           Time Remaining: {minutes < 10 ? `0${minutes}` : minutes}:
@@ -127,9 +150,9 @@ const Resend = ({ userName }: { userName: number | null }): JSX.Element => {
       )}
 
       <button
-        disabled={seconds > 0 || minutes > 0}
+        disabled={timerRunning}
         style={{
-          color: seconds > 0 || minutes > 0 ? "#DFE3E8" : "#0073C6",
+          color: timerRunning ? "#DFE3E8" : "#0073C6",
         }}
         onClick={resendOTP}
       >

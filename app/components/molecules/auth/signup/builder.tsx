@@ -48,7 +48,7 @@ function Builder() {
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error" | "otp"
   >("idle");
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(2);
   const router = useRouter();
 
   const [opened, { open, close }] = useDisclosure(false);
@@ -413,6 +413,7 @@ function Builder() {
             label="Company Vision"
             autosize
             minRows={5}
+            maxRows={5}
             {...form.getInputProps("vission")}
           />
           <Text size="sm" ta={"right"}>
@@ -425,6 +426,7 @@ function Builder() {
             label="Builder's Description"
             autosize
             minRows={5}
+            maxRows={5}
             {...form.getInputProps("mission")}
           />{" "}
           <Text size="sm" ta={"right"}>

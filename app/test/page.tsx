@@ -1,3 +1,4 @@
+"use client";
 // import axios from "axios";
 // import React from "react";
 
@@ -62,7 +63,17 @@ import React from "react";
 import { DropZone } from "../components/molecules/auth/signup/dropzone";
 import Container from "../components/molecules/Utils/Container";
 import SharePopup from "../components/atoms/SharePopup";
+import AuthPopup from "../components/molecules/auth/authPopup";
 
 export default function page() {
-  return <SharePopup />;
+  return (
+    <AuthPopup
+      callback={() => console.log("virender")}
+      opened={true}
+      open={true}
+      close={() => {}}
+      userName={"virender"}
+      mobile={0}
+    />
+  );
 }
