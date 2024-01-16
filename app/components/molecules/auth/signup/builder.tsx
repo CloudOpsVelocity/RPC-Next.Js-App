@@ -1,4 +1,5 @@
 "use client";
+import dayjs from "dayjs";
 import "@mantine/dates/styles.css";
 import { useState } from "react";
 import {
@@ -363,6 +364,7 @@ function Builder() {
             rightSectionPointerEvents="none"
             placeholder="DD//MM//YYYY"
             {...form.getInputProps("companyStartDate")}
+            maxDate={dayjs(new Date()).toDate()}
           />
 
           <TextInput
