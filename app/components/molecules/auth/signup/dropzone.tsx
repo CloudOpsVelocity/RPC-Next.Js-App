@@ -31,17 +31,22 @@ export function DropZone(props: Partial<DropZoneProps>) {
         mih={100}
         style={{ pointerEvents: "none" }}
       >
-        <Dropzone.Accept>{mediaCloudIcon}</Dropzone.Accept>
+        {/* <Dropzone.Accept>{mediaCloudIcon}</Dropzone.Accept>
         <Dropzone.Reject>{mediaCloudIcon}</Dropzone.Reject>
-        <Dropzone.Idle>{mediaCloudIcon}</Dropzone.Idle>
+        <Dropzone.Idle>{mediaCloudIcon}</Dropzone.Idle> */}
 
-        <div>
-          <Text size="xl" inline>
-            Drag images here or click to select files
-          </Text>
-          <Text size="sm" c="dimmed" inline mt={7}>
-            Attach as many files as you like, each file should not exceed 5mb
-          </Text>
+        <div className="flex">
+          <div>
+            <p className="text-black text-sm not-italic font-medium leading-[normal]">
+              Select a file or drag and drop here
+            </p>
+            <p className="text-[#545353] text-[10px] not-italic font-normal leading-[normal]">
+              JPG, PNG or JPEG, file size no more than 10MB
+            </p>{" "}
+          </div>
+          <button className="flex h-[26px] items-center gap-2.5 px-4 py-3 rounded border border-[color:var(--Secondary-Blue-1,#0073C6)] border-solid text-[#0073C6] ">
+            Select File
+          </button>
         </div>
         {preview}
       </Group>

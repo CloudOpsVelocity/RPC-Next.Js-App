@@ -63,7 +63,7 @@ export default function useAuth() {
   const loginWithCredentials = async (data: Login): Promise<any> => {
     const res = await signIn("credentials", { ...data, redirect: false });
     if (res?.ok) {
-      // router.push("/");
+      router.push("/");
     } else {
       toast.error(res?.error || "Something went wrong. Please try again.");
     }
