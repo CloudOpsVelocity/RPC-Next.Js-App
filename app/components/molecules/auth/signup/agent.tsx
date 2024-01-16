@@ -24,7 +24,7 @@ import { actionAsyncStorage } from "next/dist/client/components/action-async-sto
 import Success from "../success";
 import { agentSchema } from "@/app/validations/auth";
 import CountryInput from "@/app/components/atoms/CountryInput";
-import { EyeClosed, EyeOpen } from "@/app/images/commonSvgs";
+import { BackSvg, EyeClosed, EyeOpen } from "@/app/images/commonSvgs";
 
 function Agent() {
   const [status, setStatus] = useState<
@@ -236,6 +236,7 @@ function Agent() {
               }}
               className="!rounded-[6px] !border-solid !border-1 !border-blue-600 !bg-[#FFF] !text-[#0073C6] !w-[100%] !max-w-[178px]  "
             >
+              <BackSvg />
               Back
             </Button>
 
@@ -245,7 +246,7 @@ function Agent() {
               className="!rounded-[6px] !w-[100%] !max-w-[225px] !bg-[#0c7aca]"
               onClick={nextStep}
             >
-              SAVE & VERIFY
+              {active === 0 ? "SAVE & VERIFY" : "SAVE & CONTINUE"}
             </Button>
           </div>
         )}

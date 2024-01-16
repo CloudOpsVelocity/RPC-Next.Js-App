@@ -59,8 +59,8 @@ const builderSchema = yup.object().shape({
   companyName: yup
     .string()
     .trim()
-    .min(2, "Company name must be at least 2 characters")
-    .required("Company name is required"),
+    .min(2, "Builder name must be at least 2 characters")
+    .required("Builder name is required"),
 
   branchName: yup
     .array()
@@ -79,9 +79,9 @@ const builderSchema = yup.object().shape({
   officeContact: yup
     .string()
     .matches(/^\d+$/, "Valid 10-digit contact number is required")
-    .min(10, "Valid 10-digit contact number is required")
-    .max(10, "Valid 10-digit contact number is required")
-    .required("Valid 10-digit contact number is required"),
+    .max(17, "Valid  contact number is required")
+    .required("Valid  contact number is required"),
+  companyStartDate: yup.date().required("Company start date is required"),
 
   // Add more validations for other fields as needed
 });

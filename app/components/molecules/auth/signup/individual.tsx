@@ -19,7 +19,7 @@ import CountryInput from "@/app/components/atoms/CountryInput";
 import { useState } from "react";
 import Success from "../success";
 import Login from "../login";
-import { EyeClosed, EyeOpen } from "@/app/images/commonSvgs";
+import { BackSvg, EyeClosed, EyeOpen } from "@/app/images/commonSvgs";
 
 function Individual() {
   const [status, setStatus] = useState<
@@ -150,7 +150,7 @@ function Individual() {
                   onClick={() => router.back()}
                   className="!rounded-[6px] !border-solid !border-1 !border-blue-600 !bg-[#FFF] !text-[#0073C6] !w-[100%] !max-w-[178px]  "
                 >
-                  Back
+                  <BackSvg /> Back
                 </Button>
                 <Button
                   loading={status === "pending"}

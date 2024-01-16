@@ -14,6 +14,7 @@ import {
   Textarea,
   MultiSelect,
   ComboboxItem,
+  Text,
 } from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
 import { DateInput } from "@mantine/dates";
@@ -35,13 +36,18 @@ import { cityParser, stateParser } from "@/app/utils/parse";
 import { agentSchema, builderSchema } from "@/app/validations/auth";
 import CountryInput from "@/app/components/atoms/CountryInput";
 import N from "@/app/styles/Numinput.module.css";
-import { EyeClosed, EyeOpen } from "@/app/images/commonSvgs";
+import {
+  BackSvg,
+  DateIcons,
+  EyeClosed,
+  EyeOpen,
+} from "@/app/images/commonSvgs";
 
 function Builder() {
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error" | "otp"
   >("idle");
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(2);
   const router = useRouter();
 
   const [opened, { open, close }] = useDisclosure(false);
@@ -61,7 +67,7 @@ function Builder() {
       state: "",
       city: "",
       pincode: null,
-      companyStartDate: new Date(),
+      companyStartDate: null,
       branchName: [],
       ceoName: "",
       foundedBy: "",
@@ -163,6 +169,7 @@ function Builder() {
           break;
         case 3:
           setStatus("pending");
+          if (!values.companyStartDate) return;
           const date = new Date(values.companyStartDate);
 
           const day = date.getDate();
@@ -342,7 +349,9 @@ function Builder() {
             mt="md"
             checkIconPosition="right"
             label="Branch"
-            placeholder=" --Select Branch--"
+            placeholder={`${
+              form.values.branchName.length === 0 ? "-- Select Brach--" : ""
+            }`}
             data={isLoadingBrach ? [] : cityParser(brachData) || []}
             {...form.getInputProps("branchName")}
           />
@@ -350,7 +359,9 @@ function Builder() {
             required
             mt="md"
             label="Company Start Date"
-            placeholder="Select company start date"
+            rightSection={<DateIcons />}
+            rightSectionPointerEvents="none"
+            placeholder="DD//MM//YYYY"
             {...form.getInputProps("companyStartDate")}
           />
 
@@ -383,26 +394,14 @@ function Builder() {
 
           <NumberInput
             required
-            classNames={{
-              input: N.input,
-            }}
             hideControls
             size="md"
             mt="sm"
             className="w-[100%] mb-[3%] "
-            label="Enter Office Contact"
+            label="Office Contact"
             placeholder="Enter Office Contact"
             {...form.getInputProps("officeContact")}
-            maxLength={10}
-          />
-          <CountryInput
-            onSelect={displayCountryCode}
-            className={`focus:outline-none min-w-[30px] max-w-[70px] self-start relative ${
-              form.errors.officeContact != undefined &&
-              form.errors.officeContact != null
-                ? "bottom-[65px]"
-                : "bottom-[45px]"
-            }  ml-[2px]`}
+            maxLength={17}
           />
         </Stepper.Step>
         <Stepper.Step label="Description">
@@ -414,16 +413,21 @@ function Builder() {
             minRows={5}
             {...form.getInputProps("vission")}
           />
+          <Text size="sm" ta={"right"}>
+            maximum 5000 characters
+          </Text>
           <Textarea
             required
-            description="maximum  5000 characters"
             mt={"md"}
             placeholder="Enter your company vision you are going to provide buyers."
             label="Builders Description"
             autosize
             minRows={5}
             {...form.getInputProps("mission")}
-          />
+          />{" "}
+          <Text size="sm" ta={"right"}>
+            maximum 5000 characters
+          </Text>
         </Stepper.Step>
 
         <Stepper.Completed>
@@ -446,7 +450,7 @@ function Builder() {
               }}
               className="!rounded-[6px] !border-solid !border-1 !border-blue-600 !bg-[#FFF] !text-[#0073C6] !w-[100%] !max-w-[178px]  "
             >
-              Back
+              <BackSvg /> Back
             </Button>
 
             <Button
@@ -455,7 +459,7 @@ function Builder() {
               className="!rounded-[6px] !w-[100%] !max-w-[225px] !bg-[#0c7aca]"
               onClick={nextStep}
             >
-              SAVE & VERIFY
+              {active === 0 ? "SAVE & VERIFY" : "SAVE & CONTINUE"}
             </Button>
           </div>
         )}
