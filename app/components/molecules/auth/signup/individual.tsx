@@ -151,11 +151,11 @@ function Individual() {
                 }  ml-[2px]`}
               />
 
-              <div className="w-full flex justify-between items-center flex-wrap">
+              <div className="w-full flex justify-between items-center flex-wrap-reverse">
                 <Button
                   mt="sm"
                   onClick={() => router.back()}
-                  className="!rounded-[6px] !border-solid !border-1 !border-blue-600 !bg-[#FFF] !text-[#0073C6] !w-[100%] !max-w-[178px]  "
+                  className="!rounded-[6px] !border-solid  !w-[49%] !border-1 !border-blue-600 !bg-[#FFF] !text-[#0073C6] md:!w-[100%] md:!max-w-[178px]  "
                 >
                   <BackSvg /> Back
                 </Button>
@@ -163,7 +163,7 @@ function Individual() {
                   loading={status === "pending"}
                   type="submit"
                   mt="sm"
-                  className="!rounded-[6px] !w-[100%] !max-w-[225px] !bg-[#0c7aca]"
+                  className="!rounded-[6px] !w-[49%] md:!w-[100%]  md:!max-w-[225px] !bg-[#0c7aca]"
                 >
                   SAVE & VERIFY
                 </Button>
