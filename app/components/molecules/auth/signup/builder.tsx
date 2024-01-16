@@ -408,7 +408,7 @@ function Builder() {
           <Textarea
             required
             placeholder="Enter your company vision you are going to provide buyers."
-            label="Companies Vision"
+            label="Companie Vision"
             autosize
             minRows={5}
             {...form.getInputProps("vission")}
@@ -420,7 +420,7 @@ function Builder() {
             required
             mt={"md"}
             placeholder="Enter your company vision you are going to provide buyers."
-            label="Builders Description"
+            label="Builder's Description"
             autosize
             minRows={5}
             {...form.getInputProps("mission")}
