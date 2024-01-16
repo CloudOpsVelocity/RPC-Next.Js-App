@@ -24,7 +24,7 @@ import { EyeClosed, EyeOpen } from "@/app/images/commonSvgs";
 function Individual() {
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error" | "otp"
-  >("success");
+  >("idle");
   const router = useRouter();
   const { register, login } = useAuth();
   const [opened, { open, close }] = useDisclosure(false);
