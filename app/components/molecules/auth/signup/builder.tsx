@@ -194,11 +194,14 @@ function Builder() {
           const formattedDate = `${day}/${month}/${year}`;
 
           // API call for the third step
-          const otherDetailsData = await registerOtherDetails({
-            ...values,
-            branchName: values.branchName.map((item) => parseInt(item)),
-            companyStartDate: formattedDate,
-          });
+          const otherDetailsData = await registerOtherDetails(
+            // @ts-ignore
+            registerOtherDetails({
+              ...values,
+              branchName: values.branchName.map((item) => parseInt(item)),
+              companyStartDate: formattedDate,
+            })
+          );
 
           await login({
             password: form.values.password,

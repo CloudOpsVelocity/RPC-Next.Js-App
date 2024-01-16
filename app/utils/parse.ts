@@ -25,9 +25,8 @@ function hideMobileNumber(mobile: number): string {
   return result;
 }
 function registerOtherParser(data: any) {
-  delete data.otp;
-  delete data.prevMobile;
-  return data;
+  const { otp, prevMobile, ...parsedData } = data;
+  return parsedData;
 }
 export {
   stateParser,

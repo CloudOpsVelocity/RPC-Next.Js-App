@@ -1,12 +1,13 @@
 "use client";
 import { useForm, yupResolver } from "@mantine/form";
-import { TextInput, Button, Box, PasswordInput } from "@mantine/core";
+import { TextInput, Button, Box, PasswordInput, em } from "@mantine/core";
 import useAuth from "@/app/hooks/useAuth";
 import Link from "next/link";
 import { useState } from "react";
 import * as yup from "yup";
 import S from "@/app/styles/Pass.module.css";
 import { EyeClosed, EyeOpen } from "@/app/images/commonSvgs";
+import { useMediaQuery } from "@mantine/hooks";
 const schema = yup.object().shape({
   username: yup
     .string()
@@ -35,6 +36,8 @@ function Login() {
     login(values);
     setState("success");
   };
+  const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
+  console.log(isMobile);
 
   return (
     <Box maw={420} mx="auto">
@@ -76,6 +79,7 @@ function Login() {
         <Button
           loading={state === "pending"}
           type="submit"
+          size={isMobile ? "compact-xs" : "md"}
           className="!w-[100%] !h-[57px] mt-[4%] !bg-[#0c7aca] rounded-[6px] text-[20px]"
         >
           LOGIN
