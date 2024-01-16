@@ -33,7 +33,11 @@ import {
   getCitiesDetails,
   getStatesDetails,
 } from "@/app/utils/stats_cities";
-import { cityParser, stateParser } from "@/app/utils/parse";
+import {
+  cityParser,
+  registerOtherParser,
+  stateParser,
+} from "@/app/utils/parse";
 import { agentSchema, builderSchema } from "@/app/validations/auth";
 import CountryInput from "@/app/components/atoms/CountryInput";
 import N from "@/app/styles/Numinput.module.css";
@@ -196,7 +200,7 @@ function Builder() {
           // API call for the third step
           const otherDetailsData = await registerOtherDetails(
             // @ts-ignore
-            registerOtherDetails({
+            registerOtherParser({
               ...values,
               branchName: values.branchName.map((item) => parseInt(item)),
               companyStartDate: formattedDate,
