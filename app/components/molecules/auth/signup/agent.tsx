@@ -37,7 +37,7 @@ function Agent() {
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error" | "otp"
   >("idle");
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(1);
   const router = useRouter();
   const { registerOtherDetails, register, login } = useAuth();
 
@@ -141,7 +141,22 @@ function Agent() {
     console.log(value);
   };
   return (
-    <div className="w-full max-w-[423px] flex justify-center items-center flex-col m-[5%]">
+    <div className="w-full max-w-[423px] flex justify-center items-center flex-col m-[2%] ">
+      <div className=" sm:max-w-[459px] md:max-w-[597px] flex justify-center items-center gap-[5%] mb-[5%] ">
+        <Link
+          href="/login"
+          className="whitespace-nowrap  text-xl md:text-[26px] font-[500] text-[#666]"
+        >
+          Log In
+        </Link>
+
+        <Link
+          href="/register"
+          className="whitespace-nowrap text-xl md:text-[26px] text-[#148B16] font-bold border-solid border-b-2 border-green-600"
+        >
+          Agent Sign Up
+        </Link>
+      </div>
       <AuthPopup
         mobile={form.values.mobile}
         callback={OtpCallback}
@@ -154,6 +169,7 @@ function Agent() {
         color="green"
         iconSize={24}
         active={active}
+        mt={"sm"}
         className="w-full"
         // @ts-ignore
         classNames={{
@@ -271,7 +287,7 @@ function Agent() {
         </Stepper.Completed>
       </Stepper>
 
-      <Group justify="flex-end" mt="xl" className="w-full">
+      <Group justify="flex-end" className="w-full">
         {active !== 2 && (
           <div className="w-[100%] flex justify-between items-center flex-wrap">
             <Button

@@ -71,7 +71,7 @@ function Individual() {
             <div className=" sm:max-w-[459px] md:max-w-[597px] flex justify-center items-center gap-[5%] mb-[5%] ">
               <Link
                 href="/login"
-                className="whitespace-nowrap  text-xl md:text-[26px font-[500] text-[#666]"
+                className="whitespace-nowrap  text-xl md:text-[26px] font-[500] text-[#666]"
               >
                 Log In
               </Link>
