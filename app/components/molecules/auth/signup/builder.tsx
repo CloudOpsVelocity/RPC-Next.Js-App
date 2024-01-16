@@ -77,6 +77,8 @@ function Builder() {
       officeContact: null,
       managingDirectorName: "",
       companyLogo: undefined,
+      otp: false,
+      prevMobile: 0,
     },
     validate: (values) => {
       if (active === 0) {
@@ -136,7 +138,11 @@ function Builder() {
 
   const OtpCallback = () => {
     close();
-    setActive((current) => (current < 3 ? current + 1 : current));
+    form.setValues({
+      otp: true,
+      prevMobile: form.values.mobile as unknown as number,
+    });
+    setActive(1);
   };
   const nextStep = async () => {
     // Validate the form
@@ -150,16 +156,24 @@ function Builder() {
     try {
       switch (active) {
         case 0:
-          // API call for the first step
-          setStatus("pending");
-          //@ts-ignore
-          let data = await register({ ...values, usertype: "B" });
-          console.log(data);
-          if (data?.status) {
-            setStatus("otp");
-            open();
+          if (
+            form.values.otp &&
+            form.values.mobile === form.values.prevMobile
+          ) {
+            // If OTP is already verified and mobile number is the same, move to the next step
+            setActive(1);
           } else {
-            setStatus("error");
+            // API call for the first step
+            setStatus("pending");
+            //@ts-ignore
+            let data = await register({ ...values, usertype: "B" });
+            console.log(data);
+            if (data?.status) {
+              setStatus("otp");
+              open();
+            } else {
+              setStatus("error");
+            }
           }
           break;
         case 1:
@@ -275,12 +289,18 @@ function Builder() {
             placeholder="Enter your contact number here"
             {...form.getInputProps("mobile")}
             maxLength={10}
+            error={
+              form.errors.mobile ||
+              (status === "error" &&
+                "Provided number is already registered with us")
+            }
           />
 
           <CountryInput
             onSelect={displayCountryCode}
             className={`focus:outline-none min-w-[30px] max-w-[70px] self-start relative ${
-              form.errors.mobile != undefined && form.errors.mobile != null
+              (form.errors.mobile != undefined && form.errors.mobile != null) ||
+              status === "error"
                 ? "bottom-[65px]"
                 : "bottom-[45px]"
             }  ml-[2px]`}

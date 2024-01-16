@@ -133,12 +133,19 @@ function Individual() {
                 placeholder="Enter your contact number here"
                 {...form.getInputProps("mobile")}
                 maxLength={10}
+                error={
+                  form.errors.mobile ||
+                  (status === "error" &&
+                    "Provided number is already registered with us")
+                }
               />
 
               <CountryInput
                 onSelect={displayCountryCode}
                 className={`focus:outline-none min-w-[30px] max-w-[70px] self-start relative ${
-                  form.errors.mobile != undefined && form.errors.mobile != null
+                  (form.errors.mobile != undefined &&
+                    form.errors.mobile != null) ||
+                  status === "error"
                     ? "bottom-[65px]"
                     : "bottom-[45px]"
                 }  ml-[2px]`}

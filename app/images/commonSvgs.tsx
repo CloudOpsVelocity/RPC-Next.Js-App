@@ -6222,7 +6222,7 @@ export function EyeClosed() {
       viewBox="0 0 21 22"
       fill="none"
     >
-      <g clip-path="url(#clip0_6_5495)">
+      <g clipPath="url(#clip0_6_5495)">
         <path
           d="M10.3391 7.94318L13.3452 10.9493L13.3596 10.7918C13.3596 9.21242 12.076 7.92886 10.4966 7.92886L10.3391 7.94318Z"
           fill="#148B16"

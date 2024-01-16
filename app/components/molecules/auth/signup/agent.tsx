@@ -45,6 +45,8 @@ function Agent() {
       address: "",
       companyName: "",
       companyLogo: undefined,
+      otp: false,
+      prevMobile: 0,
     },
     // @ts-ignore
     validate: (values) => {
@@ -69,7 +71,11 @@ function Agent() {
   });
   const OtpCallback = () => {
     close();
-    setActive((current) => (current < 3 ? current + 1 : current));
+    form.setValues({
+      otp: true,
+      prevMobile: form.values.mobile as unknown as number,
+    });
+    setActive(1);
   };
   const nextStep = async () => {
     // Validate the form
@@ -80,18 +86,23 @@ function Agent() {
     // Handle API call based on the current step
     let values = form.values;
     if (active === 0) {
-      setStatus("pending");
-      // API call for the first step
-      //@ts-ignore
-      let data = await register({ ...values, usertype: "A" });
-      console.log(data);
-      if (data?.status) {
-        setStatus("otp");
-        open();
+      if (form.values.otp && form.values.mobile === form.values.prevMobile) {
+        // If OTP is already verified and mobile number is the same, move to the next step
+        setActive(1);
       } else {
-        setStatus("error");
+        // If OTP is not verified or mobile number has changed, make the API call
+        setStatus("pending");
+        //@ts-ignore
+        let data = await register({ ...values, usertype: "A" });
+        if (data?.status) {
+          setStatus("otp");
+          open();
+        } else {
+          setStatus("error");
+        }
       }
-    } else if (active === 1) {
+    }
+    if (active === 1) {
       if (!form.validate().hasErrors) {
         const data = await registerOtherDetails({ ...values });
         await login({
@@ -182,19 +193,25 @@ function Agent() {
             placeholder="Enter your contact number here"
             {...form.getInputProps("mobile")}
             maxLength={10}
+            error={
+              form.errors.mobile ||
+              (status === "error" &&
+                "Provided number is already registered with us")
+            }
           />
 
           <CountryInput
             onSelect={displayCountryCode}
             className={`focus:outline-none min-w-[30px] max-w-[70px] self-start relative ${
-              form.errors.mobile != undefined && form.errors.mobile != null
+              (form.errors.mobile != undefined && form.errors.mobile != null) ||
+              status === "error"
                 ? "bottom-[65px]"
                 : "bottom-[45px]"
             }  ml-[2px]`}
           />
         </Stepper.Step>
 
-        <Stepper.Step label="Company details">
+        <Stepper.Step label="Address & Others">
           <TextInput
             required
             size="md"
