@@ -68,17 +68,17 @@ function Individual() {
       ) : (
         <>
           <Box className="w-full max-w-[423px] mt-[3%] " mx="auto">
-            <div className="w-full max-w-[459px] md:max-w-[597px] flex justify-center items-center gap-[5%] mb-[5%] ">
+            <div className=" sm:max-w-[459px] md:max-w-[597px] flex justify-center items-center gap-[5%] mb-[5%] ">
               <Link
                 href="/login"
-                className="whitespace-nowrap text-[26px] font-[500] text-[#666]"
+                className="whitespace-nowrap  text-xl md:text-[26px font-[500] text-[#666]"
               >
                 Log In
               </Link>
 
               <Link
                 href="/register"
-                className="whitespace-nowrap text-[26px] text-[#148B16] font-bold border-solid border-b-2 border-green-600"
+                className="whitespace-nowrap text-xl md:text-[26px] text-[#148B16] font-bold border-solid border-b-2 border-green-600"
               >
                 Individual Sign Up
               </Link>

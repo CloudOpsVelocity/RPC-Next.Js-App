@@ -49,7 +49,7 @@ export default function Page() {
                 />
 
                 <p
-                  className={`text-sm md:text-[20px] font-[500] font-Playball text-[#7D7D7D] mt-[3%] group-hover:text-[#65BB67]`}
+                  className={`text-xs md:text-[20px] font-[500] font-Playball text-[#7D7D7D] mt-[3%] group-hover:text-[#65BB67]`}
                 >
                   {each.name}
                 </p>
