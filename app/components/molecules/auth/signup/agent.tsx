@@ -37,7 +37,7 @@ function Agent() {
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error" | "otp"
   >("idle");
-  const [active, setActive] = useState(1);
+  const [active, setActive] = useState(0);
   const router = useRouter();
   const { registerOtherDetails, register, login } = useAuth();
 

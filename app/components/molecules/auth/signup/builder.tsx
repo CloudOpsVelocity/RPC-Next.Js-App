@@ -52,14 +52,12 @@ function Builder() {
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error" | "otp"
   >("idle");
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(1);
   const router = useRouter();
 
   const [opened, { open, close }] = useDisclosure(false);
 
   const { registerOtherDetails, register, login } = useAuth();
-
-  // const [value, setValue] = useState<number | ComboboxItem | null>(null);
 
   const form = useForm({
     initialValues: {
@@ -70,7 +68,7 @@ function Builder() {
       address: "",
       companyName: "",
       state: "",
-      city: "",
+      city: null,
       pincode: null,
       companyStartDate: null,
       branchName: [],
@@ -95,7 +93,11 @@ function Builder() {
           address:
             values.address.trim().length < 2 ? "Address is required" : null,
           state: values.state.trim().length === 0 ? "State is required" : null,
-          city: values.city.trim().length === 0 ? "City is required" : null,
+          city:
+            // @ts-ignore
+            values.city === null || values?.city.trim().length === 0
+              ? "City is required"
+              : null,
           pincode: !/^[1-9][0-9]{5}$/.test(String(values.pincode))
             ? "Valid 6-digit PIN code is required"
             : null,
@@ -237,6 +239,11 @@ function Builder() {
   const displayCountryCode = (value: any) => {
     console.log(value);
   };
+  const handleStateChange = (state: string) => {
+    form.setFieldValue("state", state);
+    // Clear the city field when the state changes
+    form.setFieldValue("city", null);
+  };
   return (
     <div className="w-full max-w-[423px] flex justify-center items-center flex-col mt-[2%]">
       <div className=" sm:max-w-[459px] md:max-w-[597px] flex justify-center items-center gap-[5%] mb-[5%] ">
@@ -345,9 +352,10 @@ function Builder() {
             label="State"
             placeholder="Select state"
             data={isLoadingStates ? [] : stateParser(statesData) || []}
-            searchable
+            // searchable
             {...form.getInputProps("state")}
             maxDropdownHeight={200}
+            onChange={(e) => handleStateChange(e as string)}
           />
           <SimpleGrid cols={2}>
             <Select
@@ -357,7 +365,8 @@ function Builder() {
               label="City"
               placeholder="Select city"
               data={isLoadingCities ? [] : cityParser(citiesData) || []}
-              searchable
+              // searchable
+
               {...form.getInputProps("city")}
               maxDropdownHeight={200}
             />
