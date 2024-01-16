@@ -47,7 +47,7 @@ function Builder() {
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error" | "otp"
   >("idle");
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(3);
   const router = useRouter();
 
   const [opened, { open, close }] = useDisclosure(false);
@@ -104,11 +104,11 @@ function Builder() {
         return {
           mission:
             values.mission.trim().length === 0
-              ? "Mission name is required"
+              ? "Builder's Description  is required"
               : null,
           vission:
             values.vission.trim().length === 0
-              ? "Vission name is required"
+              ? "Company Vision  is required"
               : null,
         };
       }
@@ -407,8 +407,8 @@ function Builder() {
         <Stepper.Step label="Description">
           <Textarea
             required
-            placeholder="Enter your company vision you are going to provide buyers."
-            label="Companie Vision"
+            placeholder="Enter your company vision that you are going to provide buyers."
+            label="Company Vision"
             autosize
             minRows={5}
             {...form.getInputProps("vission")}
@@ -419,7 +419,7 @@ function Builder() {
           <Textarea
             required
             mt={"md"}
-            placeholder="Enter your company vision you are going to provide buyers."
+            placeholder="Enter your bulder's description that you are going to provide buyers."
             label="Builder's Description"
             autosize
             minRows={5}
