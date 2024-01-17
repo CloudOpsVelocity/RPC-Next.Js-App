@@ -80,7 +80,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         <Testimonials />
         <Reviews />
         <FaqWithBg data={data.faqs} />
-        <Container>
+        <div className="flex flex-col justify-start items-start w-[95%]">
           <ProjectCarousel
             type="proj"
             title="nEAR BY pROJECTS OF"
@@ -92,7 +92,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             title="Projects By Developers"
             content="See what developers has posted"
           />
-        </Container>
+        </div>
 
         <ProjectDrawer />
       </div>

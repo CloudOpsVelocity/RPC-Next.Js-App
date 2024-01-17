@@ -7,8 +7,8 @@ import {
   Telegram,
   WhatsAppIcon,
 } from "@/app/images/commonSvgs";
-import { Button, CopyButton, Modal } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
+import { Button, CopyButton, Modal, em } from "@mantine/core";
+import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import React from "react";
 import {
   EmailShareButton,
@@ -20,14 +20,14 @@ import {
 
 export default function SharePopup() {
   const [opened, { open, close }] = useDisclosure(false);
-
+  const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
   return (
     <>
       <Modal
         opened={opened}
         onClose={close}
         centered
-        size={"30%"}
+        size={isMobile ? "70%" : "30%"}
         classNames={{
           close: S.close,
           content: S.body,

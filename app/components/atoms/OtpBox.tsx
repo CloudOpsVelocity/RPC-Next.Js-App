@@ -4,11 +4,12 @@ import useAuth from "@/app/hooks/useAuth";
 import { resendOtp } from "@/app/utils/auth";
 import { hideMobileNumber } from "@/app/utils/parse";
 import { otpSchema } from "@/app/validations/auth";
-import { Box, Button, Modal, PinInput } from "@mantine/core";
+import { Box, Button, Modal, PinInput, em } from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
 import React, { useEffect, useRef, useState } from "react";
 import S from "@/app/styles/Otp.module.css";
 import { ref } from "yup";
+import { useMediaQuery } from "@mantine/hooks";
 
 type Props = {
   userName: string;
@@ -49,10 +50,10 @@ export default function OtpBox({ userName, close, callback, mobile }: Props) {
         onSubmit={form.onSubmit(onSubmit)}
         className="w-[100%] h-[70vh] flex justify-center items-center flex-col "
       >
-        <h1 className="text-[#333] font-[600] text-[24px] text-center ">
+        <h1 className="text-[#333] font-[600] text-lg md:text-[24px] text-center ">
           Please enter your OTP to verify your account
         </h1>
-        <p className="text-[#B5ABAC] font-[500] text-[20px] text-center mb-[3%]  ">
+        <p className="text-[#B5ABAC] font-[500] md:text-[20px] text-center mb-[3%]  ">
           A One Time- Password has been sent to{" "}
           {hideMobileNumber((mobile && mobile) || 0)}
         </p>

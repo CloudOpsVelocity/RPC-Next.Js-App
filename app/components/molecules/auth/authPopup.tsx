@@ -1,10 +1,11 @@
 "use client";
 // import { useDisclosure } from "@mantine/hooks";
-import { Modal } from "@mantine/core";
+import { Modal, em } from "@mantine/core";
 // import Form from "./form";
 import Button from "../../../elements/button";
 import { useSession } from "next-auth/react";
 import OtpBox from "../../atoms/OtpBox";
+import { useMediaQuery } from "@mantine/hooks";
 
 type props = {
   opened: any;
@@ -16,6 +17,7 @@ type props = {
 };
 
 function AuthPopup({ opened, open, close, userName, callback, mobile }: props) {
+  const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
   return (
     <>
       <Modal
@@ -24,7 +26,7 @@ function AuthPopup({ opened, open, close, userName, callback, mobile }: props) {
         transitionProps={{ transition: "fade", duration: 200 }}
         zIndex={1000}
         maw={"max-content"}
-        size={"40%"}
+        size={isMobile ? "90%" : "40%"}
       >
         {/* {JSON.stringify(session)} */}
         {/* <Form /> */}

@@ -288,6 +288,8 @@ function Builder() {
         mt={"xs"}
         classNames={{
           steps: active === 4 ? StepCss.rootSuccess : StepCss.steps,
+          step: StepCss.step,
+          separator: StepCss.separator,
         }}
       >
         <Stepper.Step

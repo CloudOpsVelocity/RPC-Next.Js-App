@@ -62,13 +62,6 @@
   margin-left: var(--mantine-spacing-md);
 }
 
-.gradient {
-  /* background-image: radial-gradient(
-    var(--mantine-color-blue-6) 0%,
-    var(--mantine-color-blue-5) 100%
-  ); */
-}
-
 .itemOpened .icon {
   transform: rotate(45deg);
 }

@@ -99,7 +99,9 @@ const Preview = ({ main, logo }: any) => {
           />
         </div>
         <div className="flex flex-col flex-grow ml-4">
-          <span className="font-medium">{logo ? logo.name : "No File"}</span>
+          <span className="font-medium text-xs md:text-base">
+            {logo ? logo.name : "No File"}
+          </span>
           <span className="text-sm text-gray-500">
             {logo ? formatBytes(logo.size) : ""}
           </span>
@@ -163,7 +165,7 @@ const ImagePreivewModal = ({ logo }: any) => {
     <Image
       src={imageUrl}
       onLoad={() => URL.revokeObjectURL(imageUrl)}
-      className="h2"
+      className="h2 !min-w-16"
     />
   );
 

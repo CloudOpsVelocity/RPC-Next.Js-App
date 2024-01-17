@@ -42,3 +42,16 @@
   background-color: #0c7aca;
   color: white;
 }
+
+@media (max-width: 768px) {
+  .stepLabel {
+    max-width: 70px;
+    font-size: 12px;
+    text-align: center;
+  }
+  .stepLabelActive {
+    max-width: 70px;
+    font-size: 12px;
+    text-align: center;
+  }
+}
