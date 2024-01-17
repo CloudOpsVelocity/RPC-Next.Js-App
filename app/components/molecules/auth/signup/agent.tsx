@@ -194,7 +194,7 @@ function Agent() {
         >
           <TextInput
             required
-            size="md"
+            size="lg"
             label="Full Name"
             placeholder="Enter your name here"
             {...form.getInputProps("userName")}
@@ -202,8 +202,8 @@ function Agent() {
           <TextInput
             type="email"
             required
-            size="md"
-            mt="sm"
+            size="lg"
+            mt={"xs"}
             label="Email"
             placeholder="Enter your email here"
             {...form.getInputProps("email")}
@@ -213,8 +213,8 @@ function Agent() {
             classNames={{
               visibilityToggle: S.visibilityToggle,
             }}
-            size="md"
-            mt="sm"
+            size="lg"
+            mt={"xs"}
             label="Password"
             placeholder="Enter your password here"
             {...form.getInputProps("password")}
@@ -228,8 +228,8 @@ function Agent() {
               input: N.input,
             }}
             hideControls
-            size="md"
-            mt="sm"
+            size="lg"
+            mt={"xs"}
             className="w-[100%] mb-[3%] "
             label="Contact Number"
             placeholder="Enter your contact number here"
@@ -240,6 +240,12 @@ function Agent() {
               (status === "error" &&
                 "Provided number is already registered with us")
             }
+            onChange={(e) => {
+              form.setFieldValue("mobile", e as any);
+              if (status === "error") {
+                setStatus("idle");
+              }
+            }}
           />
 
           <CountryInput
@@ -263,15 +269,15 @@ function Agent() {
         >
           <TextInput
             required
-            size="md"
+            size="lg"
             label="Address"
             placeholder="Enter your address here"
             {...form.getInputProps("address")}
           />
           <TextInput
             required
-            size="md"
-            mt="md"
+            size="lg"
+            mt={"xs"}
             label="Company Name"
             placeholder="Enter your company name here"
             {...form.getInputProps("companyName")}

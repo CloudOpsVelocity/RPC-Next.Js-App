@@ -303,14 +303,14 @@ function Builder() {
         >
           <TextInput
             required
-            size="md"
+            size="lg"
             label="Full Name"
             placeholder="Enter your name here"
             {...form.getInputProps("userName")}
           />
           <TextInput
             required
-            size="md"
+            size="lg"
             mt="sm"
             label="Email"
             placeholder="Enter your email here"
@@ -318,7 +318,7 @@ function Builder() {
           />
           <PasswordInput
             required
-            size="md"
+            size="lg"
             mt="sm"
             label="Password"
             placeholder="Enter your password here"
@@ -333,7 +333,7 @@ function Builder() {
               input: N.input,
             }}
             hideControls
-            size="md"
+            size="lg"
             mt="sm"
             className="w-[100%] mb-[3%] "
             label="Contact Number"
@@ -345,6 +345,12 @@ function Builder() {
               (status === "error" &&
                 "Provided number is already registered with us")
             }
+            onChange={(e) => {
+              form.setFieldValue("mobile", e as any);
+              if (status === "error") {
+                setStatus("idle");
+              }
+            }}
           />
 
           <CountryInput
@@ -368,14 +374,14 @@ function Builder() {
         >
           <TextInput
             required
-            size="md"
+            size="lg"
             label="Address"
             placeholder="Enter your address here"
             {...form.getInputProps("address")}
           />
           <Select
             required
-            size="md"
+            size="lg"
             mt="md"
             label="State"
             placeholder="Select state"
@@ -388,7 +394,7 @@ function Builder() {
           <SimpleGrid cols={2}>
             <Select
               required
-              size="md"
+              size="lg"
               mt="md"
               label="City"
               placeholder="Select city"
@@ -400,7 +406,7 @@ function Builder() {
             />
             <NumberInput
               required
-              size="md"
+              size="lg"
               mt="md"
               hideControls
               label="Pincode"
@@ -426,7 +432,7 @@ function Builder() {
           <div className="h-[420px] overflow-y-scroll">
             <TextInput
               required
-              size="md"
+              size="lg"
               mt="md"
               label="Builder Owned By"
               placeholder="Enter your builder name"
@@ -434,7 +440,7 @@ function Builder() {
             />
             <MultiSelect
               required
-              size="md"
+              size="lg"
               mt="md"
               checkIconPosition="right"
               label="Branch"
@@ -449,6 +455,7 @@ function Builder() {
             />
             <DateInput
               required
+              size="lg"
               mt="md"
               label="Company Start Date"
               rightSection={<DateIcons />}
@@ -459,7 +466,7 @@ function Builder() {
             />
             <TextInput
               required
-              size="md"
+              size="lg"
               mt="md"
               label="Founded By"
               placeholder="Founder name"
@@ -467,7 +474,7 @@ function Builder() {
             />
             <TextInput
               required
-              size="md"
+              size="lg"
               mt="md"
               label="Ceo Name"
               placeholder="Enter Ceo Name"
@@ -475,7 +482,7 @@ function Builder() {
             />
             <TextInput
               required
-              size="md"
+              size="lg"
               mt="md"
               label="Managing Director"
               placeholder="Enter Managing Director Name"
@@ -484,7 +491,7 @@ function Builder() {
             <NumberInput
               required
               hideControls
-              size="md"
+              size="lg"
               mt="sm"
               className="w-[100%] mb-[3%] "
               label="Office Contact"
@@ -503,6 +510,7 @@ function Builder() {
           }}
         >
           <Textarea
+            size="lg"
             required
             placeholder="Enter your company vision that you are going to provide buyers."
             label="Company Vision"
@@ -515,6 +523,7 @@ function Builder() {
             maximum 5000 characters
           </Text>
           <Textarea
+            size="lg"
             required
             mt={"md"}
             placeholder="Enter your bulder's description that you are going to provide buyers."

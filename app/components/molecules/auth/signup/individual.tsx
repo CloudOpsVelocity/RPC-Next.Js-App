@@ -61,7 +61,6 @@ function Individual() {
     setStatus("success");
     close();
   };
-
   return (
     <>
       {status === "success" ? (
@@ -90,29 +89,30 @@ function Individual() {
             >
               <TextInput
                 required
-                size="md"
+                mt={"xs"}
+                size="lg"
                 className="w-[100%] mb-[3%] "
                 label="Full Name"
                 placeholder="Enter your name here"
                 {...form.getInputProps("name")}
               />
               <TextInput
+                mt={"xs"}
                 type="email"
                 required
-                mt="sm"
-                size="md"
+                size="lg"
                 className="w-[100%] mb-[3%] "
                 label="Email"
                 placeholder="Enter your email here"
                 {...form.getInputProps("email")}
               />
               <PasswordInput
+                mt={"xs"}
                 classNames={{
                   visibilityToggle: P.visibilityToggle,
                 }}
                 required
-                size="md"
-                mt="sm"
+                size="lg"
                 className="w-[100%] mb-[3%] "
                 label="Password"
                 placeholder="Enter your password here"
@@ -122,13 +122,13 @@ function Individual() {
                 {...form.getInputProps("password")}
               />
               <NumberInput
+                mt={"xs"}
                 required
                 classNames={{
                   input: S.input,
                 }}
                 hideControls
-                size="md"
-                mt="sm"
+                size="lg"
                 className="w-[100%] mb-[3%] "
                 label="Contact Number"
                 placeholder="Enter your contact number here"
@@ -139,6 +139,12 @@ function Individual() {
                   (status === "error" &&
                     "Provided number is already registered with us")
                 }
+                onChange={(e) => {
+                  form.setFieldValue("mobile", e as any);
+                  if (status === "error") {
+                    setStatus("idle");
+                  }
+                }}
               />
 
               <CountryInput
@@ -156,7 +162,7 @@ function Individual() {
                 <Button
                   mt="sm"
                   onClick={() => router.back()}
-                  className="!rounded-[6px] !border-solid  !w-[49%] !border-1 !border-blue-600 !bg-[#FFF] !text-[#0073C6] md:!w-[100%] md:!max-w-[178px]  "
+                  className="!rounded-[6px] !border-solid  !w-[49%] !border-1 !border-blue-600 !bg-[#FFF] !text-[#0073C6] lg:!w-[100%] md:!max-w-[178px]  "
                 >
                   <BackSvg /> Back
                 </Button>
