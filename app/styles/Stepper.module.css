@@ -37,3 +37,8 @@
 .rootSuccess {
   display: none;
 }
+
+.pill {
+  background-color: #0c7aca;
+  color: white;
+}

@@ -18,6 +18,8 @@ import {
   Text,
   ScrollArea,
 } from "@mantine/core";
+import StepCss from "@/app/styles/Stepper.module.css";
+
 import { useForm, yupResolver } from "@mantine/form";
 import { DateInput } from "@mantine/dates";
 import Link from "next/link";
@@ -47,6 +49,8 @@ import {
   DateIcons,
   EyeClosed,
   EyeOpen,
+  StepperDotGray,
+  StepperDotGreen,
 } from "@/app/images/commonSvgs";
 
 function Builder() {
@@ -247,21 +251,24 @@ function Builder() {
   };
   return (
     <div className="w-full max-w-[423px] flex justify-center items-center flex-col mt-[2%]">
-      <div className=" sm:max-w-[459px] md:max-w-[597px] flex justify-center items-center gap-[15%] mb-[5%] ">
-        <Link
-          href="/login"
-          className="whitespace-nowrap  text-xl md:text-[26px] font-[500] text-[#666]"
-        >
-          Log In
-        </Link>
+      {active !== 4 && (
+        <div className=" sm:max-w-[459px] md:max-w-[597px] flex justify-center items-center gap-[15%] mb-[5%] ">
+          <Link
+            href="/login"
+            className="whitespace-nowrap  text-xl md:text-[26px] font-[500] text-[#666]"
+          >
+            Log In
+          </Link>
 
-        <Link
-          href="/register"
-          className="whitespace-nowrap text-xl md:text-[26px] text-[#148B16] font-bold border-solid border-b-2 border-green-600"
-        >
-          Builder Sign Up
-        </Link>
-      </div>
+          <Link
+            href="/register"
+            className="whitespace-nowrap text-xl md:text-[26px] text-[#148B16] font-bold border-solid border-b-2 border-green-600"
+          >
+            Builder Sign Up
+          </Link>
+        </div>
+      )}
+
       <AuthPopup
         mobile={form.values.mobile}
         callback={OtpCallback}
@@ -279,8 +286,19 @@ function Builder() {
         color="green"
         iconSize={24}
         mt={"xs"}
+        classNames={{
+          steps: active === 4 ? StepCss.rootSuccess : StepCss.steps,
+        }}
       >
-        <Stepper.Step label="Personal Details">
+        <Stepper.Step
+          label="Personal Details"
+          icon={<StepperDotGreen />}
+          classNames={{
+            stepLabel:
+              active === 0 ? StepCss.stepLabel : StepCss.stepLabelActive,
+            stepIcon: active === 0 ? StepCss.stepIcon : "",
+          }}
+        >
           <TextInput
             required
             size="md"
@@ -338,7 +356,14 @@ function Builder() {
           />
         </Stepper.Step>
 
-        <Stepper.Step label="Address & Other">
+        <Stepper.Step
+          label="Address & Other"
+          icon={active > 1 ? <StepperDotGreen /> : <StepperDotGray />}
+          classNames={{
+            stepLabel: active > 1 ? StepCss.stepLabelActive : StepCss.stepLabel,
+            stepIcon: active > 1 ? StepCss.stepIconActive : StepCss.stepIcon,
+          }}
+        >
           <TextInput
             required
             size="md"
@@ -388,7 +413,14 @@ function Builder() {
           />
         </Stepper.Step>
 
-        <Stepper.Step label="Company details">
+        <Stepper.Step
+          label="Company details"
+          icon={active > 2 ? <StepperDotGreen /> : <StepperDotGray />}
+          classNames={{
+            stepLabel: active > 2 ? StepCss.stepLabelActive : StepCss.stepLabel,
+            stepIcon: active > 2 ? StepCss.stepIconActive : StepCss.stepIcon,
+          }}
+        >
           <div className="h-[420px] overflow-y-scroll">
             <TextInput
               required
@@ -407,6 +439,9 @@ function Builder() {
               placeholder={`${
                 form.values.branchName.length === 0 ? "-- Select Brach--" : ""
               }`}
+              classNames={{
+                pill: StepCss.pill,
+              }}
               data={isLoadingBrach ? [] : cityParser(brachData) || []}
               {...form.getInputProps("branchName")}
             />
@@ -457,7 +492,14 @@ function Builder() {
             />{" "}
           </div>
         </Stepper.Step>
-        <Stepper.Step label="Description">
+        <Stepper.Step
+          label="Description"
+          icon={active > 3 ? <StepperDotGreen /> : <StepperDotGray />}
+          classNames={{
+            stepLabel: active > 3 ? StepCss.stepLabelActive : StepCss.stepLabel,
+            stepIcon: active > 3 ? StepCss.stepIconActive : StepCss.stepIcon,
+          }}
+        >
           <Textarea
             required
             placeholder="Enter your company vision that you are going to provide buyers."
@@ -519,20 +561,26 @@ function Builder() {
           </div>
         )}
       </Group>
+      {active !== 4 && (
+        <>
+          <p className="md:text-xl] font-[400] text-[#202020] mt-[5%]">
+            Already have an Account ?{" "}
+            <Link
+              href="/login"
+              className="md:text-xl font-[600] text-[#0073C6]"
+            >
+              Log In
+            </Link>
+          </p>
 
-      <p className="md:text-xl] font-[400] text-[#202020] mt-[5%]">
-        Already have an Account ?{" "}
-        <Link href="/login" className="md:text-xl font-[600] text-[#0073C6]">
-          Log In
-        </Link>
-      </p>
-
-      <Link
-        href="/"
-        className="md:text-xl font-[700] text-[#148B16] underline "
-      >
-        Continue Without Register
-      </Link>
+          <Link
+            href="/"
+            className="md:text-xl font-[700] text-[#148B16] underline "
+          >
+            Continue Without Register
+          </Link>
+        </>
+      )}
     </div>
   );
 }

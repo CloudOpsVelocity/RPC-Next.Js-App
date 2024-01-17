@@ -39,7 +39,7 @@ function Agent() {
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error" | "otp"
   >("idle");
-  const [active, setActive] = useState(1);
+  const [active, setActive] = useState(0);
   const router = useRouter();
   const { registerOtherDetails, register, login } = useAuth();
 
@@ -121,7 +121,6 @@ function Agent() {
           username: form.values.mobile as unknown as string,
         });
 
-        console.log(data);
         setActive((current) => (current < 3 ? current + 1 : current));
       }
       // API call for the second step
@@ -144,21 +143,24 @@ function Agent() {
   };
   return (
     <div className="w-full max-w-[423px] flex justify-center items-center flex-col m-[2%] ">
-      <div className=" sm:max-w-[459px] md:max-w-[597px] flex justify-center items-center gap-[15%] mb-[5%] ">
-        <Link
-          href="/login"
-          className="whitespace-nowrap  text-xl md:text-[26px] font-[500] text-[#666]"
-        >
-          Log In
-        </Link>
+      {active !== 2 && (
+        <div className=" sm:max-w-[459px] md:max-w-[597px] flex justify-center items-center gap-[15%] mb-[5%] ">
+          <Link
+            href="/login"
+            className="whitespace-nowrap  text-xl md:text-[26px] font-[500] text-[#666]"
+          >
+            Log In
+          </Link>
 
-        <Link
-          href="/register"
-          className="whitespace-nowrap text-xl md:text-[26px] text-[#148B16] font-bold border-solid border-b-2 border-green-600"
-        >
-          Agent Sign Up
-        </Link>
-      </div>
+          <Link
+            href="/register"
+            className="whitespace-nowrap text-xl md:text-[26px] text-[#148B16] font-bold border-solid border-b-2 border-green-600"
+          >
+            Agent Sign Up
+          </Link>
+        </div>
+      )}
+
       <AuthPopup
         mobile={form.values.mobile}
         callback={OtpCallback}
@@ -175,16 +177,15 @@ function Agent() {
         className="w-full"
         // @ts-ignore
         classNames={{
-          steps: StepCss.steps,
+          steps: active === 2 ? StepCss.rootSuccess : StepCss.steps,
           step: StepCss.step,
           separator: StepCss.separator,
-          root: status === "success" ? StepCss.rootSuccess : StepCss.root,
         }}
         // styles={styles}
       >
         <Stepper.Step
-          icon={<StepperDotGreen />}
           label="Personal Details"
+          icon={<StepperDotGreen />}
           classNames={{
             stepLabel:
               active === 0 ? StepCss.stepLabel : StepCss.stepLabelActive,
@@ -253,8 +254,8 @@ function Agent() {
         </Stepper.Step>
 
         <Stepper.Step
-          icon={active > 0 ? <StepperDotGreen /> : <StepperDotGray />}
           label="Address & Others"
+          icon={active > 0 ? <StepperDotGreen /> : <StepperDotGray />}
           classNames={{
             stepLabel: active > 1 ? StepCss.stepLabelActive : StepCss.stepLabel,
             stepIcon: active > 1 ? StepCss.stepIconActive : StepCss.stepIcon,
@@ -316,20 +317,26 @@ function Agent() {
           </div>
         )}
       </Group>
+      {active !== 2 && (
+        <>
+          <p className="md:text-xl font-[400] text-[#202020] mt-[5%]">
+            Already have an Account ?{" "}
+            <Link
+              href="/login"
+              className="md:text-xl font-[600] text-[#0073C6]"
+            >
+              Log In
+            </Link>
+          </p>
 
-      <p className="md:text-xl font-[400] text-[#202020] mt-[5%]">
-        Already have an Account ?{" "}
-        <Link href="/login" className="md:text-xl font-[600] text-[#0073C6]">
-          Log In
-        </Link>
-      </p>
-
-      <Link
-        href="/"
-        className="md:text-xl font-[700] text-[#148B16] underline "
-      >
-        Continue Without Register
-      </Link>
+          <Link
+            href="/"
+            className="md:text-xl font-[700] text-[#148B16] underline "
+          >
+            Continue Without Register
+          </Link>
+        </>
+      )}
     </div>
   );
 }
