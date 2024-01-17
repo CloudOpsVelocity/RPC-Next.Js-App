@@ -30,7 +30,6 @@ export const options: NextAuthOptions = {
               password: credentials?.password,
             }
           );
-          console.log(res.data.status);
           if (res.data.status) {
             cookies().set("token", res.data.token);
             console.log(res.data);
@@ -38,11 +37,13 @@ export const options: NextAuthOptions = {
               ...res.data,
             };
           } else {
-            console.log(res.data);
+            if (res.data.message === "exception in logging in") {
+              throw new Error("Wrong Credentials");
+            }
             throw new Error(res.data.message);
           }
-        } catch (error) {
-          console.log(error);
+        } catch (error: any) {
+          throw new Error(error.message);
         }
       },
     }),
