@@ -6,6 +6,7 @@ import {
   Box,
   PasswordInput,
   NumberInput,
+  em,
 } from "@mantine/core";
 import useAuth from "@/app/hooks/useAuth";
 import Link from "next/link";
@@ -14,10 +15,10 @@ import CountryInput from "../../atoms/CountryInput";
 import S from "@/app/styles/Numinput.module.css";
 import * as yup from "yup";
 import { useState } from "react";
-import { useDisclosure } from "@mantine/hooks";
+import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import AuthPopup from "./authPopup";
 import { resendOtp } from "@/app/utils/auth";
-import { BackSvg } from "@/app/images/commonSvgs";
+import { BackSvg, EyeClosed, EyeOpen } from "@/app/images/commonSvgs";
 import Image from "next/image";
 import { forgetPasswordLockImg } from "@/app/images/commonImages";
 const schema = yup.object().shape({
@@ -35,8 +36,8 @@ const schema = yup.object().shape({
 });
 function ForgotForm() {
   const [status, setStatus] = useState<
-    "idle" | "pending" | "success" | "error" | "otp"
-  >("success");
+    "idle" | "pending" | "success" | "error" | "otp" | "form"
+  >("idle");
   const [opened, { open, close }] = useDisclosure(false);
   const router = useRouter();
   const form = useForm({
@@ -59,14 +60,14 @@ function ForgotForm() {
   };
   const OtpCallback = async () => {
     form.reset();
-    setStatus("success");
+    setStatus("form");
     close();
   };
 
   return (
     <div className="w-[100%]  max-w-[459px] flex justify-center items-center flex-col  mt-[3%] p-[10%] md:p-[2%]">
-      {status === "success" ? (
-        <div>Form</div>
+      {status === "form" ? (
+        <Form />
       ) : (
         <form
           onSubmit={form.onSubmit(onSubmit)}
@@ -140,3 +141,74 @@ function ForgotForm() {
 }
 
 export default ForgotForm;
+
+const Form = () => {
+  const [state, setState] = useState<"idle" | "pending" | "success" | "form">(
+    "idle"
+  );
+  const form = useForm({
+    initialValues: {
+      password: "secret",
+      confirmPassword: "sevret",
+    },
+
+    validate: {
+      confirmPassword: (value, values) =>
+        value !== values.password ? "Passwords did not match" : null,
+    },
+  });
+  const onSubmit = async (values: any) => {
+    setState("success");
+  };
+  const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
+  console.log(isMobile);
+
+  return (
+    <div className="w-full">
+      <form
+        onSubmit={form.onSubmit(onSubmit)}
+        className="w-[100%] flex justify-center items-center flex-col "
+      >
+        <PasswordInput
+          classNames={{
+            visibilityToggle: S.visibilityToggle,
+          }}
+          required
+          size="lg"
+          className="w-[100%] mb-[3%]"
+          mt="sm"
+          label="Enter New Password"
+          placeholder="Enter Your Password"
+          visibilityToggleIcon={({ reveal }) =>
+            reveal ? <EyeOpen /> : <EyeClosed />
+          }
+          {...form.getInputProps("password")}
+        />
+        <PasswordInput
+          classNames={{
+            visibilityToggle: S.visibilityToggle,
+          }}
+          required
+          size="lg"
+          className="w-[100%] mb-[3%]"
+          mt="sm"
+          label="Re-Enter New Password*"
+          placeholder="Enter Your Password"
+          visibilityToggleIcon={({ reveal }) =>
+            reveal ? <EyeOpen /> : <EyeClosed />
+          }
+          {...form.getInputProps("confirmPassword")}
+        />
+
+        <Button
+          loading={state === "pending"}
+          type="submit"
+          size={isMobile ? "compact-xs" : "md"}
+          className="!w-[100%] !h-[57px] mt-[4%] !bg-[#0c7aca] rounded-[6px] text-[20px]"
+        >
+          Update Password
+        </Button>
+      </form>
+    </div>
+  );
+};

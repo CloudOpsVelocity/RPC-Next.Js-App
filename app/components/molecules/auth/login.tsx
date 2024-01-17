@@ -47,7 +47,7 @@ function Login() {
       >
         <TextInput
           required
-          size="md"
+          size="lg"
           className="w-[100%] mb-[3%] "
           label="User Name"
           placeholder="Enter your email or mobiile number"
@@ -58,7 +58,7 @@ function Login() {
             visibilityToggle: S.visibilityToggle,
           }}
           required
-          size="md"
+          size="lg"
           className="w-[100%] mb-[3%]"
           mt="sm"
           label="Password"
