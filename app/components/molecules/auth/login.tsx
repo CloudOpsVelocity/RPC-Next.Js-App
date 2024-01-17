@@ -21,7 +21,10 @@ const schema = yup.object().shape({
         return isEmail || isMobileNumber;
       }
     ),
-  password: yup.string().required("Password is required"),
+  password: yup
+    .string()
+    .required("Password is required")
+    .min(6, "Password must be at least 6 characters"),
 });
 
 function Login() {
