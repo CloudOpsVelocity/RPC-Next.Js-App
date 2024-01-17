@@ -21,11 +21,12 @@
 }
 .stepIcon {
   /* background-color: green; */
-  color: green;
+  outline: none;
+  background: white;
+  border: none;
   /* border-width: 4px; */
 }
-
-.stepLabelActive:nth-child(1) {
+.stepLabelActive {
   color: green;
 }
 

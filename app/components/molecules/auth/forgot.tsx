@@ -1,5 +1,5 @@
 "use client";
-import { useForm } from "@mantine/form";
+import { useForm, yupResolver } from "@mantine/form";
 import {
   TextInput,
   Button,
@@ -12,23 +12,29 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import CountryInput from "../../atoms/CountryInput";
 import S from "@/app/styles/Numinput.module.css";
+import * as yup from "yup";
+const schema = yup.object().shape({
+  mobile: yup
+    .number()
+    .positive("Mobile number must be positive")
+    .integer("Mobile number must be an integer")
+    .typeError("Valid 10-digit contact number is required")
+    .test(
+      "len",
+      "Mobile number must be exactly 10 digits",
+      (val) => val?.toString().length === 10
+    )
+    .required("Mobile number is required"),
+});
 function ForgotForm() {
   const router = useRouter();
   const form = useForm({
-    initialValues: { mobile: 0 },
+    initialValues: { mobile: null },
 
     // functions will be used to validate values at corresponding key
-    validate: {
-      mobile: (value) =>
-        isNaN(value) || value <= 0 || value.toString().length !== 10
-          ? "Valid 10-digit contact number is required"
-          : null,
-    },
+    validate: yupResolver(schema),
   });
-  const { login } = useAuth();
-  const onSubmit = async (values: any) => {
-    login(values);
-  };
+  const onSubmit = async (values: any) => {};
   const displayCountryCode = (value: any) => {
     console.log(value);
   };
@@ -47,6 +53,7 @@ function ForgotForm() {
           label=""
           placeholder="Enter your registerd mobile number..."
           {...form.getInputProps("mobile")}
+          maxLength={10}
         />
         <CountryInput
           onSelect={displayCountryCode}

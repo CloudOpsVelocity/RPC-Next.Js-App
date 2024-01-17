@@ -33,7 +33,7 @@ export function DropZone(props: Partial<DropZoneProps>) {
           onReject={(files) =>
             setError("File size must not exceed more than 10 MB")
           }
-          maxSize={5 * 1024 ** 2}
+          maxSize={10 * 1024 ** 2}
           accept={IMAGE_MIME_TYPE}
           {...props}
         >
@@ -118,7 +118,7 @@ const Preview = ({ main, logo }: any) => {
             strokeWidth={2}
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="text-blue-500 cursor-pointer"
+            className="text-blue-500 cursor-pointer w-4"
           >
             <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
             <path d="m15 5 4 4" />
@@ -134,7 +134,7 @@ const Preview = ({ main, logo }: any) => {
             strokeWidth={2}
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="text-red-500 cursor-pointer"
+            className="text-red-500 cursor-pointer w-4"
           >
             <path d="M3 6h18" />
             <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
@@ -192,7 +192,7 @@ const ImagePreivewModal = ({ logo }: any) => {
         strokeWidth={2}
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="text-blue-500 cursor-pointer"
+        className="text-blue-500 cursor-pointer w-4"
       >
         <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
         <circle cx={12} cy={12} r={3} />

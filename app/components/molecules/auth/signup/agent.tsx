@@ -28,6 +28,8 @@ import {
   BackSvg,
   EyeClosed,
   EyeOpen,
+  StepperDotGray,
+  StepperDotGreen,
   StepperIcon,
 } from "@/app/images/commonSvgs";
 import StepCss from "@/app/styles/Stepper.module.css";
@@ -37,7 +39,7 @@ function Agent() {
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error" | "otp"
   >("idle");
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(1);
   const router = useRouter();
   const { registerOtherDetails, register, login } = useAuth();
 
@@ -142,7 +144,7 @@ function Agent() {
   };
   return (
     <div className="w-full max-w-[423px] flex justify-center items-center flex-col m-[2%] ">
-      <div className=" sm:max-w-[459px] md:max-w-[597px] flex justify-center items-center gap-[5%] mb-[5%] ">
+      <div className=" sm:max-w-[459px] md:max-w-[597px] flex justify-center items-center gap-[15%] mb-[5%] ">
         <Link
           href="/login"
           className="whitespace-nowrap  text-xl md:text-[26px] font-[500] text-[#666]"
@@ -175,18 +177,18 @@ function Agent() {
         classNames={{
           steps: StepCss.steps,
           step: StepCss.step,
-          stepIcon: StepCss.stepIcon,
           separator: StepCss.separator,
           root: status === "success" ? StepCss.rootSuccess : StepCss.root,
         }}
         // styles={styles}
       >
         <Stepper.Step
-          icon={<StepperIcon />}
+          icon={<StepperDotGreen />}
           label="Personal Details"
           classNames={{
             stepLabel:
-              active !== 0 ? StepCss.stepLabelActive : StepCss.stepLabel,
+              active === 0 ? StepCss.stepLabel : StepCss.stepLabelActive,
+            stepIcon: active === 0 ? StepCss.stepIcon : "",
           }}
         >
           <TextInput
@@ -251,9 +253,11 @@ function Agent() {
         </Stepper.Step>
 
         <Stepper.Step
+          icon={active > 0 ? <StepperDotGreen /> : <StepperDotGray />}
           label="Address & Others"
           classNames={{
             stepLabel: active > 1 ? StepCss.stepLabelActive : StepCss.stepLabel,
+            stepIcon: active > 1 ? StepCss.stepIconActive : StepCss.stepIcon,
           }}
         >
           <TextInput
