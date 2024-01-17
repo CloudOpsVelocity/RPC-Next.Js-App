@@ -18,15 +18,17 @@ import Testimonials from "@/app/components/project/testimonials";
 import About from "@/app/components/project/about";
 import Navigation from "@/app/components/project/navigation";
 import Link from "next/link";
-import { getProjectDetails } from "@/app/utils/project";
+import { getCachedUser, getProjectDetails } from "@/app/utils/project";
 import ProjectDetailsP from "@/app/components/project/projectDetailsP";
 import Specifications from "@/app/components/project/specification";
 import ProjectDrawer from "@/app/components/project/Drawer";
 import Container from "@/app/components/molecules/Utils/Container";
+import { unstable_cache } from "next/cache";
 
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
-  const data = await getProjectDetails(slug);
+  const data = await getCachedUser(slug);
+  // const data = await getProjectDetails(slug);
   return (
     <div className="w-full">
       <div className="mt-[90px] w-full pb-[2%] flex items-center justify-center flex-col">

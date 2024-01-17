@@ -44,12 +44,13 @@ function Individual() {
       setStatus("error");
     }
   };
+
+  const displayCountryCode = (value: any) => {
+    console.log(value);
+  };
   const onClose = () => {
     setStatus("idle");
     close();
-  };
-  const displayCountryCode = (value: any) => {
-    console.log(value);
   };
   const OtpCallback = async () => {
     const data = await login({

@@ -1,3 +1,4 @@
+import { unstable_cache } from "next/cache";
 import { Main } from "../validations/types/project";
 
 const getProjectDetails = async (slug: string): Promise<Main> => {
@@ -10,8 +11,14 @@ const getProjectDetails = async (slug: string): Promise<Main> => {
   const data = await response.json();
   return data as Main; // Assuming the response can be cast to Main
 };
-
-export { getProjectDetails };
+const getCachedUser = unstable_cache(
+  async (id: string): Promise<Main> => getCachedUser(id),
+  ["my-app-user"],
+  {
+    revalidate: 60,
+  }
+);
+export { getProjectDetails, getCachedUser };
 
 const fakeData = {
   projectName: "GRP Project",
