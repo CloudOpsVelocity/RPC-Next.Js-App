@@ -91,9 +91,9 @@ function ForgotForm() {
           <NumberInput
             classNames={{ input: S.input }}
             hideControls
-            size="md"
+            size="lg"
             mt="sm"
-            className="w-[100%] mb-[3%] rounded-[8px] bg-transparent shadow-md "
+            className="w-[100%] mb-[3%] rounded-[8px] bg-transparent "
             label=""
             placeholder="Enter your registerd mobile number..."
             {...form.getInputProps("mobile")}

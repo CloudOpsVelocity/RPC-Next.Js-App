@@ -429,7 +429,7 @@ function Builder() {
             stepIcon: active > 2 ? StepCss.stepIconActive : StepCss.stepIcon,
           }}
         >
-          <div className="h-[420px] overflow-y-scroll">
+          <div className="h-[420px] overflow-y-scroll mb-10">
             <TextInput
               required
               size="lg"
@@ -533,7 +533,7 @@ function Builder() {
             maxRows={5}
             {...form.getInputProps("mission")}
           />{" "}
-          <Text size="sm" ta={"right"}>
+          <Text size="sm" ta={"right"} mb={"lg"}>
             maximum 5000 characters
           </Text>
         </Stepper.Step>
@@ -572,7 +572,7 @@ function Builder() {
           </div>
         )}
       </Group>
-      {active !== 4 && (
+      {active === 0 && (
         <>
           <p className="md:text-xl] font-[400] text-[#202020] mt-[5%]">
             Already have an Account ?{" "}

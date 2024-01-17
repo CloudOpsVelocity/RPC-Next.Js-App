@@ -51,6 +51,7 @@ interface RegistrationOthersData {
   vission?: string;
   officeContact?: number | null;
   managingDirectorName?: string;
+  companyLogo?: File;
 }
 
 /**
@@ -104,6 +105,7 @@ export default function useAuth() {
       }
       if (!registrationResponse.data.status) {
         toast.error(registrationResponse.data.message);
+        return registrationResponse.data;
       }
     } catch (error: any) {
       toast.error("User Already Exists");
@@ -115,8 +117,11 @@ export default function useAuth() {
     data: RegistrationOthersData
   ): Promise<AuthResult> => {
     try {
+      console.log(data);
       const formData = new FormData();
       formData.append("data", JSON.stringify(data));
+      formData.append("logo", data.companyLogo as any);
+
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/registerUser-other`,
         formData

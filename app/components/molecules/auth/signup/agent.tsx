@@ -103,11 +103,16 @@ function Agent() {
         setStatus("pending");
         //@ts-ignore
         let data = await register({ ...values, usertype: "A" });
+        console.log(data);
         if (data?.status) {
           setStatus("otp");
           open();
         } else {
-          setStatus("error");
+          if (data.flag === "m") {
+            setStatus("error");
+          } else {
+            setStatus("idle");
+          }
         }
       }
     }
@@ -323,7 +328,7 @@ function Agent() {
           </div>
         )}
       </Group>
-      {active !== 2 && (
+      {active === 0 && (
         <>
           <p className="md:text-xl font-[400] text-[#202020] mt-[5%]">
             Already have an Account ?{" "}

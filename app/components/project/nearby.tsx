@@ -1,8 +1,14 @@
 "use client";
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useRef } from "react";
 import { LuTrain, LuSearch } from "react-icons/lu";
 import { Text, Tabs, TextInput, Loader, ScrollArea } from "@mantine/core";
-import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  Marker,
+  useJsApiLoader,
+  useGoogleMap,
+  DirectionsRenderer,
+} from "@react-google-maps/api";
 import cslx, { clsx } from "clsx";
 import axios from "axios";
 import { useQuery } from "react-query";
@@ -14,6 +20,7 @@ import {
   calculateTime,
 } from "@/app/utils/maps";
 import { useDebouncedState } from "@mantine/hooks";
+import { MapIcon } from "@/app/images/commonSvgs";
 
 interface Area {
   name: string;
@@ -22,7 +29,12 @@ interface Area {
   lng?: number;
 }
 
-const Nearby = ({ lat, lang }: { lat: string; lang: string }) => {
+const Nearby: React.FC<{ lat: string; lang: string }> = ({ lat, lang }) => {
+  const [directionsResponse, setDirectionsResponse] = useState<any | null>(
+    null
+  );
+  const [distance, setDistance] = useState<string>("");
+  const [duration, setDuration] = useState<string>("");
   const [selected, setSelected] = useState<string>("commute");
   const [selectedLocation, setSelectedLocation] = useState<{
     lat: number;
@@ -31,6 +43,8 @@ const Nearby = ({ lat, lang }: { lat: string; lang: string }) => {
     lat: parseInt(lat),
     lng: parseInt(lang),
   });
+  const [selectedTravelMode, setSelectedTravelMode] =
+    useState<string>("DRIVING"); // Default to driving
   const [map, setMap] = useState<any | null>(null);
 
   const { isLoaded } = useJsApiLoader({
@@ -55,48 +69,34 @@ const Nearby = ({ lat, lang }: { lat: string; lang: string }) => {
     (location: { position: { lat: number; lng: number }; name: string }) => {
       setSelectedLocation(location.position);
       map?.panTo(location.position);
+      calculateRoute();
     },
-    [map]
+    [map, selectedLocation]
   );
-  console.log(selectedLocation);
-  const areas: Area[] = [
-    {
-      name: "commute",
-      Icon: " ",
-    },
-    {
-      name: "train",
-      Icon: " ",
-    },
-    {
-      name: "bus",
-      Icon: " ",
-    },
-    {
-      name: "hospital",
-      Icon: " ",
-    },
-    {
-      name: "school",
-      Icon: " ",
-    },
-    {
-      name: "market",
-      Icon: " ",
-    },
-    {
-      name: "restaurant",
-      Icon: " ",
-    },
-    {
-      name: "bank",
-      Icon: " ",
-    },
-    {
-      name: "clinic",
-      Icon: " ",
-    },
-  ];
+
+  async function calculateRoute() {
+    if (!map || !selectedLocation) return;
+
+    const directionsService = new window.google.maps.DirectionsService();
+
+    directionsService.route(
+      {
+        origin: { lat: 13.0318336, lng: 77.5815168 }, // Default center
+        destination: selectedLocation,
+        travelMode: selectedTravelMode, // Use the selected travel mode
+      },
+      (result, status) => {
+        if (status === "OK" && result) {
+          setDirectionsResponse(result);
+          setDistance(result.routes[0].legs[0].distance?.text || "");
+          setDuration(result.routes[0].legs[0].duration?.text || "");
+        } else {
+          console.error(`Directions request failed: ${status}`);
+        }
+      }
+    );
+  }
+
   const fetchNearbyPlaces = async () => {
     const response = await fetch(
       `/api/hello?lt=${13.0318336}&lng=${77.5815168}&type=${selected}`
@@ -108,6 +108,10 @@ const Nearby = ({ lat, lang }: { lat: string; lang: string }) => {
     queryKey: ["nearbyPlaces" + selected],
     queryFn: fetchNearbyPlaces,
   });
+  const handleLocationListClick = (type: string) => {
+    // Set the selected travel mode when a location list is clicked
+    setSelectedTravelMode(type);
+  };
 
   return (
     <div className="w-[90%] mx-auto mt-[5%] mb-[5%] " id="nearBy">
@@ -148,9 +152,24 @@ const Nearby = ({ lat, lang }: { lat: string; lang: string }) => {
               <div className="bg-blue-50 px-5 py-4">
                 <Text>Select how you want to travel</Text>
                 <Tabs.List>
-                  <Tabs.Tab value="public">Public Transport </Tabs.Tab>
-                  <Tabs.Tab value="drive">Drive</Tabs.Tab>
-                  <Tabs.Tab value="walk">Walk</Tabs.Tab>
+                  <Tabs.Tab
+                    value="public"
+                    onClick={() => setSelectedTravelMode("TRANSIT")}
+                  >
+                    Public Transport
+                  </Tabs.Tab>
+                  <Tabs.Tab
+                    value="drive"
+                    onClick={() => setSelectedTravelMode("DRIVING")}
+                  >
+                    Drive
+                  </Tabs.Tab>
+                  <Tabs.Tab
+                    value="walk"
+                    onClick={() => setSelectedTravelMode("WALKING")}
+                  >
+                    Walk
+                  </Tabs.Tab>
                 </Tabs.List>
               </div>
 
@@ -170,16 +189,15 @@ const Nearby = ({ lat, lang }: { lat: string; lang: string }) => {
                               type="public"
                               {...location}
                               key={index}
-                              lat={13.0318336}
-                              lng={77.5815168}
+                              lat={lat}
+                              lng={lang}
                               onClick={setSelectedLocation}
+                              onChangeTravelMode={handleLocationListClick} // Pass the callback
                             />
                           )
                         )}
                       </ScrollArea>
                     )}
-
-                    {/* Your existing location list items */}
                   </div>
                 </Tabs.Panel>
                 <Tabs.Panel value="drive">
@@ -194,16 +212,15 @@ const Nearby = ({ lat, lang }: { lat: string; lang: string }) => {
                               type="drive"
                               {...location}
                               key={index}
-                              lat={13.0318336}
-                              lng={77.5815168}
+                              lat={lat}
+                              lng={lang}
                               onClick={setSelectedLocation}
+                              onChangeTravelMode={handleLocationListClick} // Pass the callback
                             />
                           )
                         )}
                       </ScrollArea>
                     )}
-
-                    {/* Your existing location list items */}
                   </div>
                 </Tabs.Panel>
                 <Tabs.Panel value="walk">
@@ -218,9 +235,10 @@ const Nearby = ({ lat, lang }: { lat: string; lang: string }) => {
                               type="walk"
                               {...location}
                               key={index}
-                              lat={13.0318336}
-                              lng={77.5815168}
+                              lat={lat}
+                              lng={lang}
                               onClick={setSelectedLocation}
+                              onChangeTravelMode={handleLocationListClick} // Pass the callback
                             />
                           )
                         )}
@@ -241,7 +259,17 @@ const Nearby = ({ lat, lang }: { lat: string; lang: string }) => {
               onLoad={onLoad}
               onUnmount={onUnmount}
             >
-              {selectedLocation && <Marker position={selectedLocation} />}
+              {selectedLocation && (
+                <Marker
+                  position={selectedLocation}
+                  icon={{
+                    url: "/mapIcon.svg",
+                  }}
+                />
+              )}
+              {directionsResponse && (
+                <DirectionsRenderer directions={directionsResponse} />
+              )}
             </GoogleMap>
           )}
         </section>
@@ -260,15 +288,32 @@ const LocationList: React.FC<{
   lng: number;
   type: "public" | "drive" | "walk";
   onClick: (location: any) => void;
-}> = ({ name, geometry, vicinity, lat, lng, onClick, type }) => {
-  const userLocation = { lat, lng }; // Replace with user's location
+  onChangeTravelMode: (mode: string) => void; // New prop for changing travel mode
+}> = ({
+  name,
+  geometry,
+  vicinity,
+  lat,
+  lng,
+  onClick,
+  type,
+  onChangeTravelMode,
+}) => {
+  const userLocation = { lat, lng };
   const distance = calculateDistance(
     userLocation.lat,
     userLocation.lng,
     geometry.location.lat,
     geometry.location.lng
   );
-  const travelTime = calculateTime(distance, type); // Assuming an average speed of 30 km/h
+  const travelTime = calculateTime(distance, type);
+
+  const handleClick = () => {
+    // Call the onClick callback
+    onClick({ lat: geometry.location.lat, lng: geometry.location.lng });
+    // Call the onChangeTravelMode callback with the selected travel mode
+    onChangeTravelMode(type);
+  }; // Assuming an average speed of 30 km/h
 
   return (
     <div
@@ -350,3 +395,41 @@ const SearchSection = ({ setSelectedLocation }: any) => {
     </div>
   );
 };
+const areas: Area[] = [
+  {
+    name: "commute",
+    Icon: " ",
+  },
+  {
+    name: "train",
+    Icon: " ",
+  },
+  {
+    name: "bus",
+    Icon: " ",
+  },
+  {
+    name: "hospital",
+    Icon: " ",
+  },
+  {
+    name: "school",
+    Icon: " ",
+  },
+  {
+    name: "market",
+    Icon: " ",
+  },
+  {
+    name: "restaurant",
+    Icon: " ",
+  },
+  {
+    name: "bank",
+    Icon: " ",
+  },
+  {
+    name: "clinic",
+    Icon: " ",
+  },
+];

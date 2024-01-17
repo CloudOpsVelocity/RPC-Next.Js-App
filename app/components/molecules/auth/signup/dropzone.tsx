@@ -17,7 +17,7 @@ interface DropZoneProps extends Partial<DropzoneProps> {
 export function DropZone(props: Partial<DropZoneProps>) {
   const [error, setError] = useState("");
   return (
-    <>
+    <div className="mb-10">
       <Text fw={500} mt={"md"}>
         Upload Logo
       </Text>
@@ -60,7 +60,7 @@ export function DropZone(props: Partial<DropZoneProps>) {
           </p>
         </Dropzone>
       )}
-    </>
+    </div>
   );
 }
 
