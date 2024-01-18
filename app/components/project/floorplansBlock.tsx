@@ -74,6 +74,9 @@ export default function FloorplansBlock({ data, slug }: Props) {
   const { data: projectUnitsData, isLoading } = useQuery({
     queryKey: [`/${propCgId}/${currentPhase}/${slug}`],
     queryFn: () => getProjectUnits(slug, currentPhase, propCgId),
+    keepPreviousData: true,
+    staleTime: 30000,
+    cacheTime: 300000,
   });
   return (
     <div className="w-[90%] mb-[5%]" id="floorPlans">
