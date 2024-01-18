@@ -10,12 +10,7 @@ import { projectprops } from "../../data/projectDetails";
 
 type Props = {
   propCgId?: any;
-  data: {
-    floor: number;
-    totalNumberofBathroom: number;
-    noOfCarParking: number;
-    tower?: string; // Optional tower property
-  };
+  data: any;
 };
 
 const FloorplanDetailsCard: React.FC<Props> = ({ propCgId, data }) => {

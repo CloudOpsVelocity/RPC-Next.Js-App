@@ -38,7 +38,9 @@ export default function ByBhkBlock({ propCgId }: Props) {
 
       <div className="h-full max-h-[468px] border-solid overflow-auto ">
         {dummyProptypesList.map((eachItem, ind) => {
-          return <FloorplanDetailsCard key={ind} propCgId={propCgId} />;
+          return (
+            <FloorplanDetailsCard key={ind} data={[]} propCgId={propCgId} />
+          );
         })}
       </div>
     </div>
