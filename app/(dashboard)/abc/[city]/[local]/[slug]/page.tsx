@@ -61,9 +61,9 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           content={data.about}
         />
         {/* Property Details */}
-        {/* <ProjectDetailsP data={data.phaseList} slug={slug} /> */}
+        <ProjectDetailsP data={data.phaseList} slug={slug} />
         {/* Floor Plan Block */}
-        {/* <FloorplansBlock data={data.phaseList} slug={slug} /> */}
+        <FloorplansBlock data={data.phaseList} slug={slug} />
         <GalleryBlock {...data.media} />
         {/* About Builder */}
         <AboutBuilder />
