@@ -56,6 +56,7 @@ export interface Media {
 export interface PhaseList {
   phaseId: number;
   phaseName: string;
+  slug: string;
 }
 
 export interface SpecificationList {

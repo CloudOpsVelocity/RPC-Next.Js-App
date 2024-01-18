@@ -29,6 +29,7 @@ const nextConfig = {
       { hostname: "assets.thesparksite.com" },
       { hostname: "res.cloudinary.com" },
       { hostname: "imagesrpc.s3.ap-south-1.amazonaws.com" },
+      { hostname: "imagesrpc.s3.ap-south-1.amazonaws.com" },
     ],
   },
   env: {

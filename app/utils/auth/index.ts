@@ -1,5 +1,6 @@
 import { BACKEND_BASE_URL } from "@/app/env";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const resendOtp = async (mobile: number | null) => {
   if (!mobile) return;
@@ -10,6 +11,10 @@ const resendOtp = async (mobile: number | null) => {
         username: mobile,
       }
     );
+    if (!res.data.status) {
+      toast.error(res.data.Message);
+      return res.data;
+    }
     console.log(res.data);
     return res.data;
   } catch (error) {
@@ -23,6 +28,7 @@ export const resetPasswordApi = async (password: string) => {
     const response = await axios.post(url, {
       password,
     });
+
     return response.data;
   } catch (error) {
     console.error(error);

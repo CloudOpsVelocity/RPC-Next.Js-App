@@ -183,7 +183,11 @@ function Builder() {
               setStatus("otp");
               open();
             } else {
-              setStatus("error");
+              if (data.flag === "m") {
+                setStatus("error");
+              } else {
+                setStatus("idle");
+              }
             }
           }
           break;

@@ -62,9 +62,9 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           content={data.about}
         />
         {/* Property Details */}
-        <ProjectDetailsP data={data.phaseList} />
+        <ProjectDetailsP data={data.phaseList} slug={slug} />
         {/* Floor Plan Block */}
-        <FloorplansBlock data={data.phaseList} />
+        <FloorplansBlock data={data.phaseList} slug={slug} />
         <GalleryBlock {...data.media} />
         <Amenties data={data.amenityList} />
         <Nearby lat={data.lat} lang={data.lang} />
@@ -106,7 +106,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
 }
 
 export async function generateStaticParams() {
-  const slugs = ["96ed572a1630741b975b7950bf0c2f99"];
+  const slugs = ["7f146b9e4154f8613745e501fb87d6b9"];
   return slugs.map((slug) => ({
     slug,
   }));
