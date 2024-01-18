@@ -16,7 +16,12 @@ type Props = {
   mobile: number | null;
 };
 
-export default function OtpBox({ userName, close, callback, mobile }: Props) {
+export default function ForgotOtpBox({
+  userName,
+  close,
+  callback,
+  mobile,
+}: Props) {
   const { verifyOtp } = useAuth();
   const [error, setError] = useState(false);
   const onSubmit = async (value: any) => {
@@ -49,7 +54,7 @@ export default function OtpBox({ userName, close, callback, mobile }: Props) {
         className="w-[100%] h-[70vh] flex justify-center items-center flex-col "
       >
         <h1 className="text-[#333] font-[600] text-lg md:text-[24px] text-center ">
-          Please enter your OTP to verify your account
+          OTP VERIFICATION
         </h1>
         <p className="text-[#B5ABAC] font-[500] md:text-[20px] text-center mb-[3%]  ">
           A One Time- Password has been sent to{" "}
@@ -81,15 +86,6 @@ export default function OtpBox({ userName, close, callback, mobile }: Props) {
             {form.errors.otp}
           </p>
         )}
-
-        {/* <Button
-          type="submit"
-          mt="sm"
-          size="md"
-          className="!rounded-[6px] !w-[100%] !max-w-[423px] !bg-[#0c7aca]"
-        >
-          VALIDATE
-        </Button> */}
       </form>
     </Box>
   );

@@ -22,6 +22,7 @@ import { BackSvg, EyeClosed, EyeOpen } from "@/app/images/commonSvgs";
 import Image from "next/image";
 import { forgetPasswordLockImg } from "@/app/images/commonImages";
 import { signIn } from "next-auth/react";
+import ForgotAuthPopup from "../../atoms/ForgotPopup";
 const schema = yup.object().shape({
   mobile: yup
     .number()
@@ -46,10 +47,13 @@ function ForgotForm() {
     validate: yupResolver(schema),
   });
   const onSubmit = async (values: any) => {
+    setStatus("pending");
     const data = await resendOtp(values.mobile);
     if (data?.status) {
+      setStatus("otp");
       open();
     }
+    setStatus("idle");
   };
   const displayCountryCode = (value: any) => {
     console.log(value);
@@ -81,7 +85,7 @@ function ForgotForm() {
           <h2
             className={`whitespace-nowrap text-2xl font-bold text-[#148B16] text-center mt-3`}
           >
-            Forgot Password ?
+            Forgot Password
           </h2>
           <Image
             src={forgetPasswordLockImg}
@@ -133,7 +137,7 @@ function ForgotForm() {
         </form>
       )}
 
-      <AuthPopup
+      <ForgotAuthPopup
         callback={OtpCallback}
         opened={opened}
         open={open}
@@ -184,7 +188,7 @@ const Form = () => {
         <h2
           className={`whitespace-nowrap text-2xl font-bold text-[#148B16] text-center mt-3 mb-10`}
         >
-          Forgot Password ?
+          Reset Password
         </h2>
         <PasswordInput
           classNames={{
@@ -209,7 +213,7 @@ const Form = () => {
           size="lg"
           className="w-[100%] mb-[3%]"
           mt="sm"
-          label="Re-Enter New Password*"
+          label="Re-Enter New Password"
           placeholder="Enter Your Password"
           visibilityToggleIcon={({ reveal }) =>
             reveal ? <EyeOpen /> : <EyeClosed />
