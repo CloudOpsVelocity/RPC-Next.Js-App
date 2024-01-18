@@ -24,6 +24,7 @@ import Specifications from "@/app/components/project/specification";
 import ProjectDrawer from "@/app/components/project/Drawer";
 import Container from "@/app/components/molecules/Utils/Container";
 import { unstable_cache } from "next/cache";
+import { projectprops } from "@/app/data/projectDetails";
 
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
@@ -66,7 +67,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         <GalleryBlock {...data.media} />
         {/* About Builder */}
         <AboutBuilder />
-        <Nearby lat={12.9715987} lang={77.5945627} />
+        <Nearby lat={data.lat} lang={data.lang} />
         <Specifications data={data.specificationList} />
         <Banner />
         <Feature data={data.highlights} />

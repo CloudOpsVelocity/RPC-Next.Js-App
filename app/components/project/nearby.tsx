@@ -83,6 +83,7 @@ const Nearby: React.FC<{ lat: string; lang: string }> = ({ lat, lang }) => {
       {
         origin: { lat: 13.0318336, lng: 77.5815168 }, // Default center
         destination: selectedLocation,
+        // @ts-ignore
         travelMode: selectedTravelMode, // Use the selected travel mode
       },
       (result, status) => {
