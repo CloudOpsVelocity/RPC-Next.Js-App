@@ -193,7 +193,7 @@ export default function FloorplansBlock({ data }: { data: PhaseList[] }) {
           <div className="flex justify-center items-center h-[300px] lg:h-[450px]">
             {/* dISPLAY FLOOR PLAN HERE */}
           </div>
-          <FloorPlanModal />
+          <FloorPlanModal propCgId={propCgId} />
         </div>
       </div>
     </div>

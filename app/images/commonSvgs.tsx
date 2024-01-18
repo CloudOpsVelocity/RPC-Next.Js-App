@@ -6437,3 +6437,14 @@ export const MapIcon = ({ className }: { className?: string }) => {
     </svg>
   );
 };
+
+export const postDetailsIcon = 
+<svg xmlns="http://www.w3.org/2000/svg" width="34" height="20" viewBox="0 0 34 20" fill="none">
+  <path d="M22.5714 2H31.7142V11.1429" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M31.7143 2L18.8 14.9143C18.5864 15.1237 18.2991 15.241 18 15.241C17.7009 15.241 17.4136 15.1237 17.2 14.9143L11.9429 9.65714C11.7292 9.44774 11.442 9.33045 11.1429 9.33045C10.8437 9.33045 10.5565 9.44774 10.3429 9.65714L2 18" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+export const downloadIcon = 
+<svg xmlns="http://www.w3.org/2000/svg" width="28" height="29" viewBox="0 0 28 29" fill="none">
+  <path d="M14 21L6.5 13.5L8.6 11.325L12.5 15.225V3H15.5V15.225L19.4 11.325L21.5 13.5L14 21ZM5 27C4.175 27 3.469 26.7065 2.882 26.1195C2.295 25.5325 2.001 24.826 2 24V19.5H5V24H23V19.5H26V24C26 24.825 25.7065 25.5315 25.1195 26.1195C24.5325 26.7075 23.826 27.001 23 27H5Z" fill="white"/>
+</svg>

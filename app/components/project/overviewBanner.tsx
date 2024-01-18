@@ -65,8 +65,8 @@ const RequestCallBackModal = ({
         opened={opened}
         onClose={close}
         centered
-        size={"50%"}
-        className="!rounded-full"
+        size={"60%"}
+        className="!rounded-full w-[90%] md:w-[70%] lg:w-[60%] "
         classNames={{
           close: S.close,
           content: S.content,
@@ -79,6 +79,8 @@ const RequestCallBackModal = ({
               <h2 className="text-2xl font-semibold text-gray-700">
                 Request A Callback
               </h2>
+              <p className="text-[#EA7A00] text-[16px] font-[600] ">Looks like you are not registered with us.</p>
+              <p className="text-[#4D6677] text-[14px] font-[600] ">No worries add your details to get callback from builder</p>
               <p className="mt-2 text-green-600 font-semibold">
                 Builder: Sarang By Sumadhura
               </p>
@@ -87,10 +89,10 @@ const RequestCallBackModal = ({
             </div>
             <div className="hidden md:block w-1/2 relative">
               <Image
-                className="absolute inset-0 h-full w-full object-cover"
+                className="absolute inset-0 !h-full !w-[100%] object-cover"
                 src="/requestcallback.png"
                 alt="Customer Support"
-                width={500}
+                width={600}
                 height={534}
               />
             </div>

@@ -119,10 +119,10 @@ export default function Overview({
           />
         </div>
         <div className=" flex justify-start md:justify-end items-start md:items-end flex-col mt-[3%] md:mt-0 ">
-          <p className="text-[20px] lg:text-[24px] text-[#0073C6] font-[600] whitespace-nowrap underline decoration-dashed ">
+          <p className="text-[20px] cursor-pointer lg:text-[24px] text-[#0073C6] font-[600] whitespace-nowrap underline decoration-dashed ">
             Add to Compare
           </p>
-          <p className="text-[20px] lg:text-[24px] text-[#0073C6] font-[600] underline whitespace-nowrap decoration-dashed ">
+          <p className="text-[20px] cursor-pointer lg:text-[24px] text-[#0073C6] font-[600] underline whitespace-nowrap decoration-dashed ">
             Add to Shortlist
           </p>
         </div>
