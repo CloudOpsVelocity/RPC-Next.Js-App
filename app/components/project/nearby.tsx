@@ -136,36 +136,41 @@ const Nearby: React.FC<{ lat: string; lang: string }> = ({ lat, lang }) => {
               });
             }}
             className={clsx(
-              "capitalize text-gray-600 font-medium flex items-center gap-1.5",
+              "text-[#4D6677] text-xl not-italic font-medium flex items-center   leading-[normal] capitalize",
               selected === area.name && "!text-green-600 font-semibold"
             )}
             key={area.name}
           >
-            <LuTrain size={20} /> {area.name}
+            <LuTrain className="mr-2" size={20} /> {area.name}
           </button>
         ))}
       </div>
 
-      <div className="border border-[#92B2C8] grid grid-cols-[2fr_3fr] rounded-xl overflow-hidden shadow-lg">
+      <div className="border border-[#92B2C8]  grid grid-cols-1 md:grid-cols-[2fr_3fr] rounded-xl overflow-hidden shadow-lg">
         <section className="bg-white">
           <div id="tabs">
             <Tabs defaultValue="public">
               <div className="bg-blue-50 px-5 py-4">
-                <Text>Select how you want to travel</Text>
+                <p className="text-[#001F35] text-[22px]  font-medium leading-[normal]">
+                  Select how you want to travel
+                </p>
                 <Tabs.List>
                   <Tabs.Tab
+                    className="text-[#737579] text-xl not-italic font-medium leading-[normal] capitalize"
                     value="public"
                     onClick={() => setSelectedTravelMode("TRANSIT")}
                   >
                     Public Transport
                   </Tabs.Tab>
                   <Tabs.Tab
+                    className="text-[#737579] text-xl not-italic font-medium leading-[normal] capitalize"
                     value="drive"
                     onClick={() => setSelectedTravelMode("DRIVING")}
                   >
                     Drive
                   </Tabs.Tab>
                   <Tabs.Tab
+                    className="text-[#737579] text-xl not-italic font-medium leading-[normal] capitalize"
                     value="walk"
                     onClick={() => setSelectedTravelMode("WALKING")}
                   >
@@ -260,7 +265,7 @@ const Nearby: React.FC<{ lat: string; lang: string }> = ({ lat, lang }) => {
               onLoad={onLoad}
               onUnmount={onUnmount}
             >
-              {selectedLocation && (
+              {selectedLocation && !directionsResponse && (
                 <Marker
                   position={selectedLocation}
                   icon={{
@@ -324,7 +329,9 @@ const LocationList: React.FC<{
       }
     >
       <div className="flex items-center justify-between">
-        <h6 className="text-md">{name}</h6>
+        <h6 className="text-black text-lg not-italic font-medium leading-[normal] capitalize">
+          {name}
+        </h6>
         <div className="flex gap-1 text-sm">
           <span className="flex items-center">
             <IoLocationSharp />
@@ -366,7 +373,9 @@ const SearchSection = ({ setSelectedLocation }: any) => {
   };
   return (
     <div id="search" className="my-4">
-      <Text>Add a location to calculate your travel time</Text>
+      <p className="text-[#212C33] text-lg not-italic font-medium leading-[normal] mb-1">
+        Add a location to calculate your travel time
+      </p>
       <TextInput
         size="sm"
         leftSection={<LuSearch />}

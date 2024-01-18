@@ -12,19 +12,23 @@ export default function Specifications({
   const [selectedSpecIndex, setSelectedSpecIndex] = useState<number | null>(
     null
   );
+
   const handleSpecClick = (index: number) => {
-    setSelectedSpecIndex(index);
-    const newData = [...specs];
+    if (selectedSpecIndex !== index) {
+      setSelectedSpecIndex(index);
 
-    // Move the selected item to the beginning
-    newData.unshift(newData.splice(index, 1)[0]);
+      // Move the selected item to the beginning
+      const newData = [...specs];
+      const selectedSpec = newData.splice(index, 1)[0];
+      newData.unshift(selectedSpec);
 
-    setSpecs(newData);
+      setSpecs(newData);
+    }
   };
 
   return (
     <div className="w-[90%] mx-auto mb-[5%] max-h-[539px]" id="specifications">
-      <div className="bg-white rounded-lg shadow-md flex overflow-hidden max-h-[539px]">
+      <div className="bg-white rounded-lg shadow-md flex overflow-hidden max-h-[539px] ">
         <div className="flex-1 bg-gradient-to-tr from-blue-100 p-8">
           <h2 className="text-[24px] lg:text-[32px] font-semibold">
             SPECIFICATION OF
@@ -40,7 +44,7 @@ export default function Specifications({
             {data?.map((spec, index) => (
               <a
                 key={index}
-                className={`border px-5 py-2 rounded-lg bg-white font-semibold flex gap-2 items-center ${
+                className={`border px-5 py-2 rounded-lg bg-white font-semibold flex gap-2 items-center cursor-pointer ${
                   selectedSpecIndex === index ? "bg-gray-300" : ""
                 }`}
                 onClick={() => handleSpecClick(index)}

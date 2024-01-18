@@ -11,7 +11,10 @@ const Header = () => {
         <Logo />
       </section>
       <section className="flex items-center gap-4">
-        <Link className="text-xl font-medium mr-3 text-slate-700" href={"#"}>
+        <Link
+          className="text-xl font-medium mr-3 hidden md:block text-slate-700"
+          href={"#"}
+        >
           Blogs
         </Link>
 

@@ -17,8 +17,12 @@ import {
   TelegramShareButton,
   WhatsappShareButton,
 } from "react-share";
+import { usePathname } from "next/navigation";
 
 export default function SharePopup() {
+  const pathname = usePathname();
+  const CopiedUrl = `${process.env.NEXT_PUBLIC_PROJECT_URL}/${pathname}`;
+
   const [opened, { open, close }] = useDisclosure(false);
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
   return (
@@ -42,14 +46,12 @@ export default function SharePopup() {
               Share this link via
             </p>
             <div className="flex space-x-4 mb-4">
-              <Share />
+              <Share shareUrl={CopiedUrl} />
             </div>
             <p className="text-sm font-medium mb-2">or Copy Link</p>
             <div className="flex items-center justify-between border rounded-md p-2">
-              <span className="text-xs truncate">
-                https://mnjhds.ee/002%2BzgbbDRRmVG8ZjrMDw%3D%3D
-              </span>
-              <CopyButton value="https://mantine.dev">
+              <span className="text-xs truncate">{CopiedUrl}</span>
+              <CopyButton value={CopiedUrl}>
                 {({ copied, copy }) => (
                   <Button color={copied ? "teal" : "blue"} onClick={copy}>
                     {copied ? "Copied url" : "Copy url"}
@@ -74,9 +76,8 @@ export default function SharePopup() {
   );
 }
 
-const Share = () => {
-  const shareUrl = "http://github.com";
-  const title = "GitHub";
+const Share = ({ shareUrl }: { shareUrl: string }) => {
+  const title = "Share with friends";
   return (
     <>
       <div className="Demo__some-network">

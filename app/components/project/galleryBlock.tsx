@@ -1,8 +1,10 @@
 "use client";
+import { PopupOpenSvg } from "@/app/images/commonSvgs";
 import { Media } from "@/app/validations/types/project";
 import Image from "next/image";
 import React, { useState } from "react";
 import ReactPlayer from "react-player";
+import Gallery from "./modals/Gallery";
 
 export default function GalleryBlock({
   coverUrl,
@@ -21,6 +23,7 @@ export default function GalleryBlock({
   const handleMediaClick = (media: string) => {
     setSelectedMedia(media);
   };
+
   return (
     <div className="w-[90%] mb-[5%] h-full " id="galleria">
       <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35] uppercase">
@@ -36,7 +39,7 @@ export default function GalleryBlock({
         {/* IMage display con */}
         <div className="w-[100%] md:w-[50%] bg-[#dfdcdc] h-[394px] lg:h-[462px] mb-[3%] md:mb-[0%] mr-[3%] rounded-[14px] shadow-md  ">
           {selectedMedia && (
-            <div className="w-[100%]  bg-[#dfdcdc] h-[394px] lg:h-[462px] mb-[3%] md:mb-[0%] mr-[3%] rounded-[14px] shadow-md">
+            <div className="w-[100%]  bg-[#dfdcdc] h-[394px] lg:h-[462px] mb-[3%] md:mb-[0%] mr-[3%] rounded-[14px] shadow-md relative">
               {/* You can customize the preview based on the selectedMedia type (image or video) */}
               {selectedMedia.includes(".mp4") ? (
                 <ReactPlayer
@@ -54,6 +57,7 @@ export default function GalleryBlock({
                   className="w-full h-full object-cover rounded-[14px]"
                 />
               )}
+              <Gallery />
             </div>
           )}
         </div>
