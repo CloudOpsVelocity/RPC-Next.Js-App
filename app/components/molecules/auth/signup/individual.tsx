@@ -36,12 +36,16 @@ function Individual() {
   const onSubmit = async (values: typeof form.values) => {
     setStatus("pending");
     const data = await register({ ...values, usertype: "I" });
-    console.log(data);
+    console.log({ data });
     if (data?.status) {
       setStatus("otp");
       open();
     } else {
-      setStatus("error");
+      if (data.flag === "m") {
+        setStatus("error");
+      } else {
+        setStatus("idle");
+      }
     }
   };
 
