@@ -5,7 +5,7 @@ const resendOtp = async (mobile: number | null) => {
   if (!mobile) return;
   try {
     const res = await axios.post(
-      `${BACKEND_BASE_URL}//user/v1/sendMobileAndEmailOTP`,
+      `${BACKEND_BASE_URL}/user/v1/sendMobileAndEmailOTP`,
       {
         username: mobile,
       }
@@ -16,5 +16,17 @@ const resendOtp = async (mobile: number | null) => {
     console.log(error);
   }
 };
+export const resetPasswordApi = async (password: string) => {
+  const url = `${BACKEND_BASE_URL}/user/v1/resetPassword`;
 
+  try {
+    const response = await axios.post(url, {
+      password,
+    });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    // Handle errors, maybe show an error message or take appropriate action
+  }
+};
 export { resendOtp };

@@ -17,10 +17,11 @@ import * as yup from "yup";
 import { useState } from "react";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import AuthPopup from "./authPopup";
-import { resendOtp } from "@/app/utils/auth";
+import { resendOtp, resetPasswordApi } from "@/app/utils/auth";
 import { BackSvg, EyeClosed, EyeOpen } from "@/app/images/commonSvgs";
 import Image from "next/image";
 import { forgetPasswordLockImg } from "@/app/images/commonImages";
+import { signIn } from "next-auth/react";
 const schema = yup.object().shape({
   mobile: yup
     .number()
@@ -41,15 +42,14 @@ function ForgotForm() {
   const [opened, { open, close }] = useDisclosure(false);
   const router = useRouter();
   const form = useForm({
-    initialValues: { mobile: null },
-
-    // functions will be used to validate values at corresponding key
+    initialValues: { mobile: null, otp: false },
     validate: yupResolver(schema),
   });
   const onSubmit = async (values: any) => {
-    // await resendOtp(values.mobile);
-    open();
-    console.log(values);
+    const data = await resendOtp(values.mobile);
+    if (data?.status) {
+      open();
+    }
   };
   const displayCountryCode = (value: any) => {
     console.log(value);
@@ -59,14 +59,19 @@ function ForgotForm() {
     close();
   };
   const OtpCallback = async () => {
-    form.reset();
-    setStatus("form");
+    // const res = await signIn("credentials", {
+    //   username: form.values.mobile,
+    //   password: form.values.otp,
+    //   type: "fogot",
+    //   redirect: false,
+    // });
+    form.setFieldValue("otp", true);
     close();
   };
 
   return (
     <div className="w-[100%]  max-w-[459px] flex justify-center items-center flex-col  mt-[3%] p-[10%] md:p-[2%]">
-      {status === "form" ? (
+      {form.values.otp ? (
         <Form />
       ) : (
         <form
@@ -158,6 +163,9 @@ const Form = () => {
     },
   });
   const onSubmit = async (values: any) => {
+    const data = await resetPasswordApi(values.password);
+    console.log(data);
+    console.log(values);
     setState("success");
   };
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
@@ -169,6 +177,11 @@ const Form = () => {
         onSubmit={form.onSubmit(onSubmit)}
         className="w-[100%] flex justify-center items-center flex-col "
       >
+        <h2
+          className={`whitespace-nowrap text-2xl font-bold text-[#148B16] text-center mt-3 mb-10`}
+        >
+          Forgot Password ?
+        </h2>
         <PasswordInput
           classNames={{
             visibilityToggle: S.visibilityToggle,
