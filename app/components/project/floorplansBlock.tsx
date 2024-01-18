@@ -22,14 +22,24 @@ import Byunitblock from "./byunitblock";
 import ByBhkBlock from "./byBhkBlock";
 import { PhaseList } from "@/app/validations/types/project";
 import FloorPlanModal from "./modals/FloorPlan";
+import { useQuery } from "react-query";
+import { getProjectUnits } from "@/app/utils/project";
 
 const dummyProptypesList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
-
-export default function FloorplansBlock({ data }: { data: PhaseList[] }) {
-  const [allKeys, setAllKeys] = useState([35, 33, 31, 34, 32]);
-  const [propCgId, setPropCgId] = useState();
+type Props = {
+  data: PhaseList[];
+  slug: string;
+};
+export default function FloorplansBlock({ data, slug }: Props) {
+  const phases = [
+    { phaseId: 554, phaseName: "Phase 1" },
+    { phaseId: 555, phaseName: "Phase 2" },
+    { phaseId: 559, phaseName: "Phase 3" },
+  ];
+  const allKeys = [35, 33, 31, 34, 32];
+  const [propCgId, setPropCgId] = useState(35);
   const [floorPlanType, setFloorPlanType] = useState("type");
-  const [currentPhase, setCurrentPhase] = useState("");
+  const [currentPhase, setCurrentPhase] = useState(554);
 
   const getPropertyType = (data: any) => {
     setPropCgId(data.id);
@@ -61,7 +71,10 @@ export default function FloorplansBlock({ data }: { data: PhaseList[] }) {
     }
     return iconComponent;
   };
-
+  const { data: projectUnitsData, isLoading } = useQuery({
+    queryKey: [`/${propCgId}/${currentPhase}/${slug}`],
+    queryFn: () => getProjectUnits(slug, currentPhase, propCgId),
+  });
   return (
     <div className="w-[90%] mb-[5%]" id="floorPlans">
       <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35]">
@@ -78,14 +91,14 @@ export default function FloorplansBlock({ data }: { data: PhaseList[] }) {
           Select one of the phase to see project details
         </p>
         <div className=" flex justify-start items-start gap-[10px] flex-wrap ">
-          {data?.map((each, index) => {
+          {phases?.map((each, index) => {
             return (
               <Button
                 key={index}
                 title={`Phase ${each.phaseName}`}
-                onChange={() => setCurrentPhase(`${each.phaseId}`)}
+                onChange={() => setCurrentPhase(each.phaseId)}
                 buttonClass={` mb-[5px] text-[18px] lg:text-[20px] bg-[#ECF7FF] p-[8px] xl:p-[16px]  whitespace-nowrap text-[#000] rounded-[8px]${
-                  currentPhase == `${each.phaseId}`
+                  currentPhase == each.phaseId
                     ? " font-[600] border-solid border-[1px] border-[#0073C6] "
                     : " font-[400]"
                 } `}
@@ -109,7 +122,7 @@ export default function FloorplansBlock({ data }: { data: PhaseList[] }) {
               <Button
                 key={keyName}
                 buttonClass={`flex justify-start mb-[3%] rounded-[20px] gap-[8px] pr-[8px] items-center mr-[24px] md:ml-[24px] text-[18px] ${
-                  propCgId == `${keyName}`
+                  propCgId == keyName
                     ? "text-[#001F35] font-[500] shadow-md bg-[#D5EDFF]"
                     : "text-[#303A42] font-[400] bg-[#EEF7FE]"
                 } `}
@@ -166,11 +179,11 @@ export default function FloorplansBlock({ data }: { data: PhaseList[] }) {
       </div>
 
       <div className=" h-[456px] lg:h-[570px] w-full rounded-[14px] mt-[2%] border-solid border-[1px] border-[#92B2C8] bg-[#FFF] shadow-md flex justify-center items-center ">
-        {floorPlanType == "type" && (
+        {floorPlanType === "type" && (
           <div className="w-[50%] h-[456px] lg:h-[570px] border-solid overflow-auto ">
-            {dummyProptypesList.map((eachItem, ind) => {
-              return <FloorplanDetailsCard key={ind} propCgId={propCgId} />;
-            })}
+            {projectUnitsData?.map((data: any, ind: number) => (
+              <FloorplanDetailsCard key={ind} propCgId={propCgId} data={data} />
+            ))}
           </div>
         )}
 
