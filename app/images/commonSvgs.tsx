@@ -5970,8 +5970,8 @@ export const WhatsAppIcon = (
         y2="70.0242"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#CEE0FF" />
-        <stop offset="1" stop-color="#F2FAFF" />
+        <stop stopColor="#CEE0FF" />
+        <stop offset="1" stopColor="#F2FAFF" />
       </linearGradient>
       <linearGradient
         id="paint1_linear_596_279686"
@@ -5981,8 +5981,8 @@ export const WhatsAppIcon = (
         y2="11.8628"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#1FAF38" />
-        <stop offset="1" stop-color="#60D669" />
+        <stop stopColor="#1FAF38" />
+        <stop offset="1" stopColor="#60D669" />
       </linearGradient>
       <linearGradient
         id="paint2_linear_596_279686"
@@ -5992,8 +5992,8 @@ export const WhatsAppIcon = (
         y2="11"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#F9F9F9" />
-        <stop offset="1" stop-color="white" />
+        <stop stopColor="#F9F9F9" />
+        <stop offset="1" stopColor="white" />
       </linearGradient>
     </defs>
   </svg>
@@ -6068,8 +6068,8 @@ export const FacbookIcon = (
         y2="70.0242"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#CEE0FF" />
-        <stop offset="1" stop-color="#F2FAFF" />
+        <stop stopColor="#CEE0FF" />
+        <stop offset="1" stopColor="#F2FAFF" />
       </linearGradient>
     </defs>
   </svg>
@@ -6144,8 +6144,8 @@ export const Telegram = (
         y2="70.0242"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#CEE0FF" />
-        <stop offset="1" stop-color="#F2FAFF" />
+        <stop stopColor="#CEE0FF" />
+        <stop offset="1" stopColor="#F2FAFF" />
       </linearGradient>
       <linearGradient
         id="paint1_linear_596_279694"
@@ -6155,8 +6155,8 @@ export const Telegram = (
         y2="5011"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#2AABEE" />
-        <stop offset="1" stop-color="#229ED9" />
+        <stop stopColor="#2AABEE" />
+        <stop offset="1" stopColor="#229ED9" />
       </linearGradient>
     </defs>
   </svg>
@@ -6206,8 +6206,8 @@ export const EmailIcon = (
         y2="70.0242"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#CEE0FF" />
-        <stop offset="1" stop-color="#F2FAFF" />
+        <stop stopColor="#CEE0FF" />
+        <stop offset="1" stopColor="#F2FAFF" />
       </linearGradient>
     </defs>
   </svg>
@@ -6433,6 +6433,37 @@ export const MapIcon = ({ className }: { className?: string }) => {
             result="shape"
           />
         </filter>
+      </defs>
+    </svg>
+  );
+};
+
+export const ReviewBoxIcon = ({ className }: { className?: string }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="42"
+      height="36"
+      viewBox="0 0 42 36"
+      fill="none"
+      className={className}
+    >
+      <path
+        d="M37.8001 36C38.914 36 39.9822 35.5786 40.7699 34.8284C41.5575 34.0783 42 33.0609 42 32V22.232C42 21.1711 41.5575 20.1537 40.7699 19.4036C39.9822 18.6534 38.914 18.232 37.8001 18.232H31.9706C31.9706 16.828 32.0588 15.42 32.231 14.016C32.4914 12.528 32.9282 11.204 33.5329 10.048C34.1419 8.888 34.9231 7.98 35.8807 7.316C36.8341 6.572 38.0479 6.2 39.5262 6.2V0C37.0945 0 34.9693 0.496 33.1424 1.488C31.3313 2.46994 29.7742 3.82581 28.5854 5.456C27.3923 7.25326 26.513 9.22279 25.9815 11.288C25.4459 13.567 25.1839 15.8966 25.2003 18.232V32C25.2003 33.0609 25.6428 34.0783 26.4304 34.8284C27.2181 35.5786 28.2863 36 29.4002 36H37.8001ZM12.6005 36C13.7144 36 14.7827 35.5786 15.5703 34.8284C16.3579 34.0783 16.8004 33.0609 16.8004 32V22.232C16.8004 21.1711 16.3579 20.1537 15.5703 19.4036C14.7827 18.6534 13.7144 18.232 12.6005 18.232H6.77101C6.77101 16.828 6.85921 15.42 7.03141 14.016C7.2918 12.528 7.7286 11.204 8.33338 10.048C8.94237 8.888 9.72356 7.98 10.6811 7.316C11.6345 6.572 12.8483 6.2 14.3267 6.2V0C11.8949 0 9.76976 0.496 7.94279 1.488C6.13172 2.46994 4.57463 3.82581 3.38587 5.456C2.19278 7.25326 1.31339 9.22279 0.781915 11.288C0.246365 13.567 -0.0157101 15.8966 0.000727756 18.232V32C0.000727756 33.0609 0.443219 34.0783 1.23086 34.8284C2.0185 35.5786 3.08677 36 4.20066 36H12.6005Z"
+        fill="url(#paint0_linear_1441_6576)"
+      />
+      <defs>
+        <linearGradient
+          id="paint0_linear_1441_6576"
+          x1="42"
+          y1="36"
+          x2="-1.08138"
+          y2="34.6557"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stopColor="#A8C7FF" />
+          <stop offset="1" stopColor="#D8EDFC" />
+        </linearGradient>
       </defs>
     </svg>
   );

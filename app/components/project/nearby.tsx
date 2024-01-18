@@ -146,7 +146,7 @@ const Nearby: React.FC<{ lat: string; lang: string }> = ({ lat, lang }) => {
         ))}
       </div>
 
-      <div className="border border-[#92B2C8] grid grid-cols-[2fr_3fr] rounded-xl overflow-hidden shadow-lg">
+      <div className="border border-[#92B2C8]  grid grid-cols-1 md:grid-cols-[2fr_3fr] rounded-xl overflow-hidden shadow-lg">
         <section className="bg-white">
           <div id="tabs">
             <Tabs defaultValue="public">
