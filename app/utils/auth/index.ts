@@ -23,6 +23,7 @@ export const resetPasswordApi = async (password: string) => {
     const response = await axios.post(url, {
       password,
     });
+
     return response.data;
   } catch (error) {
     console.error(error);

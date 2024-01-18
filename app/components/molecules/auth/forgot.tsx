@@ -164,8 +164,7 @@ const Form = () => {
   });
   const onSubmit = async (values: any) => {
     const data = await resetPasswordApi(values.password);
-    console.log(data);
-    console.log(values);
+
     setState("success");
   };
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
