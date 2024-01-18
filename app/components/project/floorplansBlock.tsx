@@ -181,9 +181,17 @@ export default function FloorplansBlock({ data, slug }: Props) {
       <div className=" h-[456px] lg:h-[570px] w-full rounded-[14px] mt-[2%] border-solid border-[1px] border-[#92B2C8] bg-[#FFF] shadow-md flex justify-center items-center ">
         {floorPlanType === "type" && (
           <div className="w-[50%] h-[456px] lg:h-[570px] border-solid overflow-auto ">
-            {projectUnitsData?.map((data: any, ind: number) => (
-              <FloorplanDetailsCard key={ind} propCgId={propCgId} data={data} />
-            ))}
+            {projectUnitsData?.length !== 0 ? (
+              projectUnitsData?.map((data: any, ind: number) => (
+                <FloorplanDetailsCard
+                  key={ind}
+                  propCgId={propCgId}
+                  data={data}
+                />
+              ))
+            ) : (
+              <NoProperties />
+            )}
           </div>
         )}
 
@@ -212,3 +220,19 @@ export default function FloorplansBlock({ data, slug }: Props) {
     </div>
   );
 }
+
+const NoProperties = () => {
+  return (
+    <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 h-full flex justify-center items-center">
+      <div className="mx-auto max-w-screen-sm text-center">
+        <h1 className="mb-4 text-2xl tracking-tight font-extrabold lg:text-3xl text-primary-600 ">
+          It seems we couldnt locate what you&rsquo;re looking for. Try
+          enhancing your search and attempting again.
+        </h1>
+        <p className="mb-4 text-lg text-gray-500 dark:text-gray-400">
+          Meanwhile, here are some of our other properties
+        </p>
+      </div>
+    </div>
+  );
+};

@@ -8,7 +8,13 @@ type props = {
 const Logo = ({ styles }: props) => {
   return (
     <Link href={"/"} className={styles}>
-      <Image src={"/logo.png"} alt="logo" width={220} height={80} />
+      <Image
+        src={"/logo.png"}
+        alt="logo"
+        className="w-[150px] md:w-[220px]"
+        width={220}
+        height={80}
+      />
     </Link>
   );
 };

@@ -1,6 +1,7 @@
 import ReadMore from "../atoms/readmore";
 import Button from "../../elements/button";
 import React from "react";
+import Link from "next/link";
 
 type Props = {};
 
@@ -55,15 +56,16 @@ export default function AboutBuilder({}: Props) {
         <p className=" text-[#212C33] text-[22px] lg:text-[24px] font-[500] mt-[3%] italic ">
           Builder Address{" "}
         </p>
-        <p className=" text-[#2A4C70] text-[18px] lg:text-[20px] font-[700] mt-[1%] italic ">
+        <p className=" text-[#2A4C70] text-[18px] lg:text-[20px] font-[700] mt-[1%] italic mb-[1%]">
           Folium by Sumadhura, Borewell Rd, Whitefield, Palm Meadows,
           Ramagondanahalli, Bengaluru, Karnataka 560066
         </p>
-        <Button
-          title="View Builder Details"
-          // onChange={() => ""}
-          buttonClass=" bg-[#0073C6] rounded-[10px] text-[#FFF] text-[18px] lg:text-[20px] font-[700] p-[10px] mt-[1%] "
-        />
+        <Link
+          className=" bg-[#0073C6] rounded-[10px] text-[#FFF] text-[18px] lg:text-[20px] font-[700] p-[10px]  "
+          href={"/builder"}
+        >
+          View Builder Details
+        </Link>
       </div>
     </div>
   );

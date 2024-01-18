@@ -42,7 +42,7 @@ export default function AuthButton() {
       <a
         target="_blank"
         href={postListingLink}
-        className="text-[20px] font-semibold px-5 bg-[#227FBC] py-1.5 rounded-xl text-white"
+        className="text-[20px] font-semibold md:px-5 bg-[#227FBC] md:py-1.5 rounded-xl text-white"
       >
         Post Listing
       </a>
