@@ -148,22 +148,27 @@ function ForgotForm() {
 export default ForgotForm;
 
 const Form = () => {
+  const router = useRouter();
   const [state, setState] = useState<"idle" | "pending" | "success" | "form">(
     "idle"
   );
   const form = useForm({
     initialValues: {
-      password: "secret",
-      confirmPassword: "sevret",
+      password: "",
+      confirmPassword: "",
     },
 
     validate: {
+      password: (value) =>
+        value.length < 6 ? "Password must be at least 6 characters long" : null,
+
       confirmPassword: (value, values) =>
         value !== values.password ? "Passwords did not match" : null,
     },
   });
   const onSubmit = async (values: any) => {
     const data = await resetPasswordApi(values.password);
+    router.push("/login");
 
     setState("success");
   };
