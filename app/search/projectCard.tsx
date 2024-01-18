@@ -2,7 +2,7 @@
 import React from 'react';
 import Button from "../elements/button";
 import { getAllCitiesDetails } from '../utils/stats_cities';
-import { Phone, callIconSvg } from '../images/commonSvgs';
+import { Phone, ReraIcon, callIconSvg } from '../images/commonSvgs';
 
 type Props = {
     type : any;
@@ -10,9 +10,15 @@ type Props = {
 
 const ProjectDetailsCard = ({type}: Props) => {
     return(
-        <div className=" flex  w-full mb-[5%] flex-col shadow-md ">
+        <div className=" flex w-full mb-[5%] flex-col shadow-md ">
             <div className=" flex justify-center items-center w-full  " >
-                <div className=" w-full max-w-[210px] h-[147px] bg-gray-300 "></div>
+                <div className="max-w-[210px] flex justify-start items-start w-full flex-col  " >
+                    {type == "proj" &&
+                    <p className='text-[#FFF] text-[12px] mb-[-26px] z-10 flex justify-center items-center p-[3px] font-[500] bg-gradient-to-r from-[#148B16] /0 to-[#E5F4FF]/100' > <ReraIcon/> RERA</p>
+                    }
+                    <div className=" w-full h-[147px] bg-gray-300 "></div>
+                    <p className='text-[#FFF] text-[12px] mt-[-40px] relative left-[4px] gap-[4px] z-10 flex justify-center rounded-[20px] items-center p-[7px] font-[500] bg-gradient-to-r from-[#000] /0 to-[#00000066]/100' > <ReraIcon/> Ready to move</p>
+                </div>
                 <div className='w-full p-[2%]'>
                     {type == "proj" ?
                         <p className='text-[#001F35] text-[15px] font-[600]'>Sarang By Samudhra Phase 1</p>
