@@ -3,9 +3,10 @@
 import React, { useState } from 'react';
 import { Select, Tabs } from '@mantine/core';
 import ProjectDetailsCard from './projectCard';
+import { emptyFilesIcon, strikeIconIcon } from '../images/commonSvgs';
 
 const LeftSideBlock = () => {
-    let projectsData = [1,2,];
+    let projectsData:any[] = [1,2,3,,4,5,6,7,8,];
     const [activeTab, setActiveTab] = useState<string | null>('proj');
    
     return (
@@ -25,30 +26,60 @@ const LeftSideBlock = () => {
                 </Tabs.List>
 
                 <Tabs.Panel value="proj">
-                    <div className=' p-[2%] max-h-[700px] overflow-y-auto '>
-                        {projectsData.map((eachOne, index)=>{
+                    <div className=' p-[2%] max-h-[700px] overflow-y-auto h-screen '>
+                        {projectsData != undefined && projectsData.length != undefined && projectsData.length > 0 ?
+                        projectsData.map((eachOne, index)=>{
                             return(
                                 <ProjectDetailsCard key={index} type={activeTab} />
                             )
-                        })}
+                        })
+                        :
+                        <div className="flex w-full h-full justify-center items-center flex-col ">
+                            {emptyFilesIcon}
+                            No Matching Results Found !
+                            <span className="relative left-[10%] ">
+                            {strikeIconIcon}
+                            </span>
+                        </div>
+                        }
                     </div>
                 </Tabs.Panel>
                 <Tabs.Panel value="owner-props">
-                    <div className=' p-[2%] max-h-[700px] overflow-y-auto '>
-                        {projectsData.map((eachOne, index)=>{
+                    <div className=' p-[2%] max-h-[700px] overflow-y-auto  h-screen '>
+                        {projectsData != undefined && projectsData.length != undefined && projectsData.length > 0 ?
+                        projectsData.map((eachOne, index)=>{
                             return(
                                 <ProjectDetailsCard key={index} type={activeTab} />
                             )
-                        })}
+                        })
+                        :
+                        <div className="flex w-full h-full justify-center items-center flex-col ">
+                            {emptyFilesIcon}
+                            No Matching Results Found !
+                            <span className="relative left-[10%] ">
+                            {strikeIconIcon}
+                            </span>
+                        </div>
+                        }
                     </div>
                 </Tabs.Panel>
                 <Tabs.Panel value="agent-props">
-                    <div className=' p-[2%] max-h-[700px] overflow-y-auto '>
-                        {projectsData.map((eachOne, index)=>{
+                    <div className=' p-[2%] max-h-[700px] overflow-y-auto  h-screen '>
+                        {projectsData != undefined && projectsData.length != undefined && projectsData.length > 0 ?
+                        projectsData.map((eachOne, index)=>{
                             return(
                                 <ProjectDetailsCard key={index} type={activeTab} />
                             )
-                        })}
+                        })
+                        :
+                        <div className="flex w-full h-full justify-center items-center flex-col ">
+                            {emptyFilesIcon}
+                            No Matching Results Found !
+                            <span className="relative left-[10%] ">
+                            {strikeIconIcon}
+                            </span>
+                        </div>
+                    }
                     </div>
                 </Tabs.Panel>
 
