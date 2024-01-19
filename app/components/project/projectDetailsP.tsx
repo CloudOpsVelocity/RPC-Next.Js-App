@@ -13,7 +13,7 @@ import PropertyTypeDetailsCrad from "@/app/components/project/propertyTypeDetail
 import React, { useState } from "react";
 import { PhaseList } from "@/app/validations/types/project";
 import { useQuery } from "react-query";
-import { getProjectWiseOverView } from "@/app/utils/project";
+import { getProjectWiseOverView } from "@/app/utils/api/project";
 type Props = {
   data: PhaseList[];
   slug: string;
