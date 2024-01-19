@@ -15,7 +15,7 @@ import Testimonials from "@/app/components/project/testimonials";
 import About from "@/app/components/project/about";
 import Navigation from "@/app/components/project/navigation";
 import Link from "next/link";
-import { getProjectDetails } from "@/app/utils/project";
+import { getProjectDetails } from "@/app/utils/api/project";
 import Specifications from "@/app/components/project/specification";
 import ProjectDrawer from "@/app/components/project/Drawer";
 import RoomDetails from "@/app/components/property/RoomDetails";

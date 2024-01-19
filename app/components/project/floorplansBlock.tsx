@@ -23,7 +23,7 @@ import ByBhkBlock from "./byBhkBlock";
 import { PhaseList } from "@/app/validations/types/project";
 import FloorPlanModal from "./modals/FloorPlan";
 import { useQuery } from "react-query";
-import { getProjectUnits } from "@/app/utils/project";
+import { getProjectUnits } from "@/app/utils/api/project";
 
 const dummyProptypesList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 type Props = {

@@ -1,5 +1,5 @@
 import { unstable_cache } from "next/cache";
-import { Main } from "../validations/types/project";
+import { Main } from "../../validations/types/project";
 
 const getProjectDetails = async (slug: string): Promise<Main> => {
   const response = await fetch(
