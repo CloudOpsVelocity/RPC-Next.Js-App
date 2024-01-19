@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { searchDetails } from '../data/searchDetails';
 import Button from "@/app/elements/button";
 import { LenseIcon, fourStarIcon, lensSvg, miniItemsCrossIcon, notificationIcon } from '../images/commonSvgs';
-import { Checkbox, MultiSelect, Radio, RangeSlider, Slider } from '@mantine/core';
+import { Checkbox, MultiSelect, Radio, RangeSlider } from '@mantine/core';
 import classes from '../styles/search.module.css';
 import { propertyDetailsTypes, projectprops } from '../data/projectDetails';
 import { useAmp } from 'next/amp';
@@ -50,7 +50,7 @@ const FilterPopup = () => {
                 <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
                     <Radio
                         iconColor="dark.8"
-                        color="lime.4"
+                        color="green"
                         label="Ready to Move"
                         name="propertyStatus"
                         value="check" 
@@ -58,7 +58,7 @@ const FilterPopup = () => {
 
                     <Radio
                         iconColor="dark.8"
-                        color="lime.4"
+                        color="green"
                         label="New Launch"
                         name="propertyStatus"
                         value="check" 
@@ -66,7 +66,7 @@ const FilterPopup = () => {
 
                     <Radio
                         iconColor="dark.8"
-                        color="lime.4"
+                        color="green"
                         label="Under Construction"
                         name="propertyStatus"
                         value="check" 
@@ -75,7 +75,7 @@ const FilterPopup = () => {
 
                 <h3 className=" text-[#202020] mb-[0%] text-[14px] font-[500] ">Locality</h3>
 
-                <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
+                <div className="flex mt-[2%] mb-[3%] justify-start items-start gap-[4%]">
                     {locality.map((eachLocality, index)=>{
                         return(
                             <div key={index} className='flex justify-center items-center p-[1%] rounded-[10px] border-[#92B2C8] border-solid border-[1px]  '>
@@ -114,9 +114,9 @@ const FilterPopup = () => {
                                 key={i}
                                 iconColor="dark.8"
                                 color="green"
-                                label={propertyDetailsTypes.get(keyName).name}
+                                label={propertyDetailsTypes?.get(keyName)?.name}
                                 name="propertyType"
-                                value="check" 
+                                value={propertyDetailsTypes?.get(keyName)?.id}
                                 style={{whiteSpace: "nowrap", marginBottom: "10px"}}
                             />    
                         )}
@@ -229,7 +229,7 @@ const FilterPopup = () => {
 
                 <h3 className=" text-[#202020] mb-12%] text-[14px] font-[500] ">Builder</h3>
 
-                <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
+                <div className="flex mt-[2%] mb-[3%] justify-start items-start gap-[4%]">
                     {locality.map((eachLocality, index)=>{
                         return(
                             <div key={index} className='flex justify-center items-center p-[1%] rounded-[10px] border-[#92B2C8] border-solid border-[1px]  '>

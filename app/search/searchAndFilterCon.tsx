@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { MultiSelect, Popover, Select } from '@mantine/core';
 import Button from "@/app/elements/button";
 import FilterPopup from './filterPopup';
+import classes from '../styles/search.module.css';
 
 
 const SearchAndFilterCon = () => {
@@ -12,32 +13,39 @@ const SearchAndFilterCon = () => {
    
     return (
        
-        <div className="m-[2%] w-full flex mt-[90px] gap-[20px] justify-start items-center ">
-            <p className="text-[16px] text-[#737579] font-[500] mb-[1%]">
+        <div className="m-[2%] w-full flex mt-[90px] pl-[2%] gap-[20px] justify-start items-center ">
+            <p className="text-[16px] text-[#737579] font-[500]">
                 <span>Home</span> {" > "}
                 <Link href={"/project/banglore"}>
-                    <span className="text-[16px] text-[#4D6677] font-[600] mb-[1%]">Properties for Sell in Bengaluru</span>
+                    <span className="text-[16px] text-[#4D6677] font-[600]">Properties for Sell in Bengaluru</span>
                 </Link>{" "}
             </p>
 
             <div className=' border-[#A0D7FF] rounded-[46px] gap-[8px] pl-[8px] border-[1px] border-solid flex items-center justify-center '>
                 <Select
                     label=""
-                    placeholder=""
+                    placeholder="Select"
                     data={['Buy', 'Rent', 'Plot']}
-                    style={{height: "32px", width: "120px", border: "none"}}
+                    classNames={{input : classes.wrapperSelect}}
+                    defaultValue={"Buy"}
                 />
             
                 <MultiSelect
                     label=""
                     placeholder="Enter City"
                     data={[
-                        { value: 'ben', label: 'Bengaluru' },
-                        { value: 'de', label: 'Delhi' },
+                        { value: '1', label: 'Bengaluru' },
+                        { value: '2', label: 'Delhi' },
+                        { value: '3', label: 'Bengaluru' },
+                        { value: '4', label: 'Delhi' },
+                        { value: '5', label: 'Bengaluru' },
+                        { value: '6', label: 'Delhi' },
+                        { value: '7', label: 'Bengaluru' },
+                        { value: '8', label: 'Delhi' },
                     ]}
                     searchable
                     nothingFoundMessage="Nothing found..."
-                    style={{height: "46px", maxWidth: "446px", width: "100%"  }}
+                    classNames={{input : classes.wrapperMultiSelection, pill: classes.MultiSelectionPill}}
                 />
             </div>
 

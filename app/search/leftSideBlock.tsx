@@ -11,7 +11,7 @@ const LeftSideBlock = () => {
    
     return (
        
-        <div className="w-full">
+        <div className="w-[50%]">
             <Tabs value={activeTab} onChange={setActiveTab} defaultValue="proj">
                 <Tabs.List className="h-[41px] w-full flex-row bg-gradient-to-b from-[#F5FBFF] /0 to-[#E5F4FF ]/100 w-full flex justify-center items-start ">
                     <Tabs.Tab value="proj">Projects</Tabs.Tab>
