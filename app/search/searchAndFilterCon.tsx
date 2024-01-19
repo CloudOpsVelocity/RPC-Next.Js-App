@@ -6,6 +6,7 @@ import { MultiSelect, Popover, Select } from '@mantine/core';
 import Button from "@/app/elements/button";
 import FilterPopup from './filterPopup';
 import classes from '../styles/search.module.css';
+// import { getAllCitiesDetails } from '../utils/stats_cities';
 
 
 const SearchAndFilterCon = () => {

@@ -1,8 +1,7 @@
 
 import React from 'react';
 import Button from "../elements/button";
-import { getAllCitiesDetails } from '../utils/stats_cities';
-import { Phone, ReraIcon, callIconSvg } from '../images/commonSvgs';
+import { Phone, ReraIcon } from '../images/commonSvgs';
 
 type Props = {
     type : any;

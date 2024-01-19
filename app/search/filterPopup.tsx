@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { searchDetails } from '../data/searchDetails';
 import Button from "@/app/elements/button";
-import { LenseIcon, fourStarIcon, lensSvg, miniItemsCrossIcon, notificationIcon } from '../images/commonSvgs';
+import { fourStarIcon, lensSvg, miniItemsCrossIcon, notificationIcon } from '../images/commonSvgs';
 import { Checkbox, MultiSelect, Radio, RangeSlider } from '@mantine/core';
 import classes from '../styles/search.module.css';
 import { propertyDetailsTypes, projectprops } from '../data/projectDetails';
-import { useAmp } from 'next/amp';
 
 const FilterPopup = () => {
     const [current, setCurrent] = useState("Project Status");
@@ -73,9 +72,10 @@ const FilterPopup = () => {
                     />    
                 </div>   
 
-                <h3 className=" text-[#202020] mb-[0%] text-[14px] font-[500] ">Locality</h3>
+                <h3 className=" text-[#202020] mb-[2%] text-[14px] font-[500] ">Locality</h3>
 
-                <div className="flex mt-[2%] mb-[3%] justify-start items-start gap-[4%]">
+                {locality.length > 0 &&
+                <div className="flex mb-[3%] justify-start items-start gap-[4%]">
                     {locality.map((eachLocality, index)=>{
                         return(
                             <div key={index} className='flex justify-center items-center p-[1%] rounded-[10px] border-[#92B2C8] border-solid border-[1px]  '>
@@ -87,6 +87,7 @@ const FilterPopup = () => {
                         )
                     })}
                 </div>
+                }
 
                 <MultiSelect
                     classNames={{pill : classes.pill}}
@@ -215,21 +216,22 @@ const FilterPopup = () => {
                 <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
                     <Checkbox
                         label="Builder"
-                        color="green"
+                        color="B"
                     />   
                     <Checkbox
                         label="Agent"
-                        color="green"
+                        color="A"
                     /> 
                     <Checkbox
                         label="Owner"
-                        color="green"
+                        color="O"
                     />   
                 </div>  
 
-                <h3 className=" text-[#202020] mb-12%] text-[14px] font-[500] ">Builder</h3>
+                <h3 className=" text-[#202020] mb-[2%] text-[14px] font-[500] ">Builder</h3>
 
-                <div className="flex mt-[2%] mb-[3%] justify-start items-start gap-[4%]">
+                {locality.length > 0 &&
+                <div className="flex mb-[3%] justify-start items-start gap-[4%]">
                     {locality.map((eachLocality, index)=>{
                         return(
                             <div key={index} className='flex justify-center items-center p-[1%] rounded-[10px] border-[#92B2C8] border-solid border-[1px]  '>
@@ -241,6 +243,7 @@ const FilterPopup = () => {
                         )
                     })}
                 </div>
+                }
 
                 <MultiSelect
                     classNames={{pill : classes.pill}}
