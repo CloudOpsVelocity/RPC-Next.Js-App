@@ -12,15 +12,15 @@ const Card = ({}: Props) => {
       className="rounded-lg border bg-card text-card-foreground mb-[1%] shadow-sm w-[95%]"
       data-v0-t="card"
     >
-      <div className="flex items-start justify-between  rounded-[10px] bg-[#FFF] ">
+      <div className="flex items-start justify-between flex-col md:flex-row rounded-[10px] bg-[#FFF] ">
         <Image
           width={149}
           height={149}
           src="/youtube.png"
           alt="Ankita Soni"
-          className="rounded-l-[10px] w-[285px] h-[149px] "
+          className="md:rounded-l-[10px] rounded-t-[10px] w-full md:w-[30%] h-[149px] "
         />
-        <div className="flex justify-start p-[2%] items-center flex-col ml-[20px] ">
+        <div className="flex justify-start p-[2%] items-center flex-col ml-[0px] md:ml-[20px] ">
           <div className=" flex justify-between w-full items-start flex-wrap">
             <div className="text-left">
               <h4 className="text-lg font-semibold">Ankita Soni</h4>

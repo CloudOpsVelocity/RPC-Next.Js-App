@@ -23,7 +23,7 @@ export default function AuthButton() {
   ) : (
     <ButtonLink
       href="/login"
-      buttonClass="login-btn text-[20px] font-semibold px-5 py-2 rounded-full text-[#0073C6] border-none underline bg-gradient-to-r from-[#EFF8FF] to-[#FFF] shadow-md"
+      buttonClass="login-btn text-[16px] lg:text-[20px] font-semibold px-5 py-2 rounded-full text-[#0073C6] border-none underline bg-gradient-to-r from-[#EFF8FF] to-[#FFF] shadow-md"
       title="Login/ Sign up"
     />
   );
@@ -34,16 +34,18 @@ export default function AuthButton() {
         <a
           target="_blank"
           href={postProjectLink}
-          className="text-[20px] font-semibold px-5 bg-[#227FBC] py-1.5 rounded-xl text-white"
+          className="text-[16px] gap-[10px] lg:text-[20px] flex justify-center items-center font-semibold px-5 bg-[#227FBC] py-1.5 rounded-xl text-white"
         >
+          {postDetailsIcon}
           Post Your Project
         </a>
       )}
       <a
         target="_blank"
         href={postListingLink}
-        className="text-[20px] font-semibold md:px-5 bg-[#227FBC] md:py-1.5 rounded-xl text-white"
+        className="text-[16px] gap-[10px] lg:text-[20px] flex justify-center items-center font-semibold px-5 bg-[#227FBC] py-1.5 rounded-xl text-white"
       >
+        {postDetailsIcon}
         Post Listing
       </a>
       {logoutButton}
@@ -53,6 +55,7 @@ export default function AuthButton() {
 
 import { Menu } from "@mantine/core";
 import data from "@/app/data/dropdown";
+import { postDetailsIcon } from "@/app/images/commonSvgs";
 
 function Dropdown() {
   const { data: session } = useSession();

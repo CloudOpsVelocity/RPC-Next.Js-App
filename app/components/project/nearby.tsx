@@ -62,7 +62,7 @@ const Nearby: React.FC<{ lat: string; lang: string }> = ({ lat, lang }) => {
 
   const mapContainerStyle: React.CSSProperties = {
     width: "100%",
-    height: "400px",
+    height: "100%",
   };
 
   const showLocationOnMap = useCallback(
@@ -125,7 +125,7 @@ const Nearby: React.FC<{ lat: string; lang: string }> = ({ lat, lang }) => {
         services
       </p>
 
-      <div className="flex gap-10 mb-5 mt-3 w-full flex-wrap ">
+      <div className="flex gap-6 mb-5 mt-1 w-full flex-wrap ">
         {areas.map((area) => (
           <button
             onClick={() => {

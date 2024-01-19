@@ -25,6 +25,7 @@ import ProjectDrawer from "@/app/components/project/Drawer";
 import Container from "@/app/components/molecules/Utils/Container";
 import { unstable_cache } from "next/cache";
 import { projectprops } from "@/app/data/projectDetails";
+import DownloadBroucher from "@/app/components/project/downloadBroucher";
 
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
@@ -65,14 +66,13 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         {/* Floor Plan Block */}
         <FloorplansBlock data={data.phaseList} slug={slug} />
         <GalleryBlock {...data.media} />
-        {/* About Builder */}
-        <AboutBuilder />
+        <Amenties data={data.amenityList} />
         <Nearby lat={data.lat} lang={data.lang} />
         <Specifications data={data.specificationList} />
+        <Feature data={data.highlights} />     
         <Banner />
-        <Feature data={data.highlights} />
         <Loans data={data.banks} />
-        <Amenties data={data.amenityList} />
+        <AboutBuilder />
         {/* Why Buy This */}
         <About
           id="whyBuy"
@@ -82,8 +82,10 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         />
         <Testimonials />
         <Reviews />
+        <DownloadBroucher/>
+        
         <FaqWithBg data={data.faqs} />
-        <div className="flex flex-col justify-start items-start w-[95%]">
+        <div className="flex flex-col justify-start items-start w-[90%]">
           <ProjectCarousel
             type="proj"
             title="nEAR BY pROJECTS OF"
@@ -109,3 +111,4 @@ export async function generateStaticParams() {
     slug,
   }));
 }
+

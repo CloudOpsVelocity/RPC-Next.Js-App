@@ -4672,9 +4672,10 @@ export default function PriceBag({ className }: { className?: string }) {
   );
 }
 
-export const Phone = () => {
+export const Phone = ({ className }: { className?: string }) => {
   return (
     <svg
+    className={className}
       xmlns="http://www.w3.org/2000/svg"
       width="30"
       height="31"
