@@ -1,12 +1,14 @@
+"use client"
 
-
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import { MultiSelect, Select } from '@mantine/core';
+import { MultiSelect, Popover, Select } from '@mantine/core';
 import Button from "@/app/elements/button";
+import FilterPopup from './filterPopup';
 
 
 const SearchAndFilterCon = () => {
+    const [opened, setOpened] = useState(false);
    
     return (
        
@@ -60,12 +62,22 @@ const SearchAndFilterCon = () => {
                         <circle cx="5" cy="5" r="5" fill="#148B16"/>
                     </svg>} 
             />
-            <Button 
-                title="Filters" 
-                buttonClass=' text-[#0073C6] text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md ' 
-                icon={
-                    <div className='text-[#FFF] bg-[#148B16] rounded-[50%] text-[16px] font-[700] w-[24px] h-[24px] flex justify-center items-center'>4</div>} 
-            />
+            
+
+            <Popover width={300} opened={opened} onChange={setOpened} trapFocus position="bottom" withArrow shadow="md">
+                <Popover.Target>
+                    <Button 
+                        onChange={() => setOpened((o) => !o)}
+                        title="Filters" 
+                        buttonClass=' text-[#0073C6] text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md ' 
+                        icon={
+                            <div className='text-[#FFF] bg-[#148B16] rounded-[50%] text-[16px] font-[700] w-[24px] h-[24px] flex justify-center items-center'>4</div>} 
+                    ></Button>
+                </Popover.Target>
+                <Popover.Dropdown>
+                    <FilterPopup />
+                </Popover.Dropdown>
+            </Popover>
 
 
 
