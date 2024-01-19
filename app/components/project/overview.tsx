@@ -15,6 +15,9 @@ import Button from "../../elements/button";
 import { Main } from "@/app/validations/types/project";
 import OverviewBanner from "./overviewBanner";
 import { useDisclosure } from "@mantine/hooks";
+import Ratings from "./Ratings";
+import ShortList from "./actions/shortList";
+import CompareList from "./actions/compareList";
 
 export default function Overview({
   maxPrice,
@@ -46,10 +49,7 @@ export default function Overview({
           </p>
         </div>
         <div className="flex justify-center items-end flex-col">
-          <p className="text-[20px] flex justify-start items-start lg:text-[24px] text-[#4D6677] font-[700] whitespace-nowrap">
-            4.0 Ratings
-            <RatingStar fill="#FFD600" className="h-[32px] w-[32px]" />
-          </p>
+          <Ratings />
           <a
             href={`tel:${8766203976}`}
             className="text-[20px] lg:text-[24px] text-[#0073C6] font-[600] decoration-dashed underline whitespace-nowrap "
@@ -119,12 +119,8 @@ export default function Overview({
           />
         </div>
         <div className=" flex justify-start md:justify-end items-start md:items-end flex-col mt-[3%] md:mt-0 ">
-          <p className="text-[20px] cursor-pointer lg:text-[24px] text-[#0073C6] font-[600] whitespace-nowrap underline decoration-dashed ">
-            Add to Compare
-          </p>
-          <p className="text-[20px] cursor-pointer lg:text-[24px] text-[#0073C6] font-[600] underline whitespace-nowrap decoration-dashed ">
-            Add to Shortlist
-          </p>
+          <CompareList />
+          <ShortList />
         </div>
       </div>
       <OverviewBanner
