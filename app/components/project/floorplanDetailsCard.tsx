@@ -7,6 +7,9 @@ import {
   TowerTypeIcon,
 } from "../../images/commonSvgs";
 import { projectprops } from "../../data/projectDetails";
+import { useAtom } from "jotai";
+import { floorImageATom } from "@/app/store/image";
+import { selectedFloorAtom } from "@/app/store/floor";
 
 type Props = {
   propCgId?: any;
@@ -14,6 +17,7 @@ type Props = {
 };
 
 const FloorplanDetailsCard: React.FC<Props> = ({ propCgId, data }) => {
+  const [, setImage] = useAtom(selectedFloorAtom);
   const mergedData = {
     bedCount: 2, // Example value, adjust as needed
     bathCount: data.totalNumberofBathroom,
@@ -24,9 +28,11 @@ const FloorplanDetailsCard: React.FC<Props> = ({ propCgId, data }) => {
     unitType: "50ft x 40 ft", // Example value, adjust as needed
     carParking: data.noOfCarParking,
   };
-
   return (
-    <div className="flex justify-between p-[2%] w-full border-[#92B2C8] border-solid border-b-[1px] border-r-[1px] ">
+    <div
+      className="flex justify-between p-[2%] w-full border-[#92B2C8] border-solid border-b-[1px] border-r-[1px] cursor-pointer"
+      onClick={() => setImage(data)}
+    >
       <div className="">
         <p className="font-[500] text-[16px] lg:text-[24px] mb-[20px] text-[#001F35] flex justify-start items-start">
           {mergedData.bedCount}BHK |

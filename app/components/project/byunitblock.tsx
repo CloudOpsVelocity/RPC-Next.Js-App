@@ -6,9 +6,10 @@ import { projectprops } from "../../data/projectDetails";
 
 type Props = {
   propCgId: any;
+  data: any;
 };
 
-export default function Byunitblock({ propCgId }: Props) {
+export default function Byunitblock({ propCgId, data }: Props) {
   return (
     <div className="p-[3%] w-full flex justify-start flex-col items-start">
       <h3 className=" text-[#001F35] text-[20px] lg:text-[24px] font-[500]  ">

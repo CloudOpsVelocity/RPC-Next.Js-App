@@ -82,7 +82,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         />
         <Testimonials />
         <Reviews />
-        <DownloadBroucher />
+        <DownloadBroucher url={data?.media?.projBroucherUrl} />
 
         <FaqWithBg data={data.faqs} />
         <div className="flex flex-col justify-start items-start w-[90%]">

@@ -25,6 +25,9 @@ import FloorPlanModal from "./modals/FloorPlan";
 import { useQuery } from "react-query";
 import { getProjectUnits } from "@/app/utils/api/project";
 import usePhaseWiseOverview from "@/app/hooks/usePhaseWiseOverview";
+import { useAtomValue } from "jotai";
+import { floorImageATom } from "@/app/store/image";
+import { selectedFloorAtom } from "@/app/store/floor";
 
 const dummyProptypesList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 type Props = {
@@ -38,7 +41,10 @@ export default function FloorplansBlock({ slug }: Props) {
   const [propCgId, setPropCgId] = useState(35);
   const [floorPlanType, setFloorPlanType] = useState("type");
   const [currentPhase, setCurrentPhase] = useState(554);
-
+  const selectedPhase = PhaseOverview?.find(
+    (phase: any) => phase.phaseId === currentPhase
+  );
+  const types = selectedPhase && Object?.keys(selectedPhase.propTypeOverview);
   const getPropertyType = (data: any) => {
     setPropCgId(data.id);
   };
@@ -76,6 +82,8 @@ export default function FloorplansBlock({ slug }: Props) {
     staleTime: 30000,
     cacheTime: 300000,
   });
+  const selectedFloor = useAtomValue(selectedFloorAtom);
+  console.log(selectedFloor);
   return (
     <div className="w-[90%] mb-[5%]" id="floorPlans">
       <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35]">
@@ -198,7 +206,7 @@ export default function FloorplansBlock({ slug }: Props) {
 
         {floorPlanType == "unit" && (
           <div className="w-[50%]  h-[456px] lg:h-[570px] border-solid overflow-auto ">
-            <Byunitblock propCgId={propCgId} />
+            <Byunitblock propCgId={propCgId} data={projectUnitsData} />
           </div>
         )}
 
@@ -212,7 +220,12 @@ export default function FloorplansBlock({ slug }: Props) {
           <p className=" text-[14px] lg:text-[16px] font-[500] text-[#005DA0] ">
             Sarang by sumadhura/2bhk/tower 1/ 04/north/1124 sq.ft
           </p>
-          <div className="flex justify-center items-center h-[300px] lg:h-[450px]">
+          <div className="flex justify-center items-center h-[300px] lg:h-[450px] w-full">
+            <img
+              src={selectedFloor?.floorPlanUrl as string}
+              className="w-full h-full"
+              alt="image"
+            />
             {/* dISPLAY FLOOR PLAN HERE */}
           </div>
           <FloorPlanModal propCgId={propCgId} />
