@@ -9,23 +9,16 @@ import Gallery from "./modals/Gallery";
 export default function GalleryBlock({
   coverUrl,
   projMasterPlanUrl,
-  projOtherImagesUrl,
   projReviewVideoUrl,
   projWalkThroughVideoUrl,
+  otherImgUrl,
 }: Media) {
   const [selectedMedia, setSelectedMedia] = useState<string | null>(
     projMasterPlanUrl
   );
 
-  // const images = [coverUrl, projMasterPlanUrl, projOtherImagesUrl];
-  const images = [
-    "https://images.unsplash.com/photo-1511884642898-4c92249e20b6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1703702756941-3504879af434?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw1fHx8ZW58MHx8fHx8",
-    "https://images.unsplash.com/photo-1683009680116-b5c04463551d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHx8",
-    "https://images.unsplash.com/photo-1683009680116-b5c04463551d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHx8",
-    "https://images.unsplash.com/photo-1683009680116-b5c04463551d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHx8",
-    "https://images.unsplash.com/photo-1683009680116-b5c04463551d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHx8",
-  ];
+  const images = [coverUrl, projMasterPlanUrl, otherImgUrl];
+
   const videos = [projReviewVideoUrl, projWalkThroughVideoUrl];
 
   const handleMediaClick = (media: string) => {

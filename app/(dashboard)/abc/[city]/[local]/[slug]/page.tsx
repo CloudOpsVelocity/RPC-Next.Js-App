@@ -69,7 +69,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         <Amenties data={data.amenityList} />
         <Nearby lat={data.lat} lang={data.lang} />
         <Specifications data={data.specificationList} />
-        <Feature data={data.highlights} />     
+        <Feature data={data.highlights} />
         <Banner />
         <Loans data={data.banks} />
         <AboutBuilder />
@@ -82,8 +82,8 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         />
         <Testimonials />
         <Reviews />
-        <DownloadBroucher/>
-        
+        <DownloadBroucher />
+
         <FaqWithBg data={data.faqs} />
         <div className="flex flex-col justify-start items-start w-[90%]">
           <ProjectCarousel
@@ -111,4 +111,3 @@ export async function generateStaticParams() {
     slug,
   }));
 }
-

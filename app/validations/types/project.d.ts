@@ -27,6 +27,7 @@ export interface Main {
   faqs: FAQ[];
   about: string;
   banks: Bank[];
+  floorPlanCount: number;
 }
 
 export interface AmenityList {
@@ -50,7 +51,7 @@ export interface Media {
   projReviewVideoUrl: string;
   projMasterPlanUrl: string;
   projWalkThroughVideoUrl: string;
-  projOtherImagesUrl: string[];
+  otherImgUrl: string[];
 }
 
 export interface PhaseList {

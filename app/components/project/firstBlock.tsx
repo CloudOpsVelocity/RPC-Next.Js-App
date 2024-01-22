@@ -41,30 +41,28 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
               onMouseEnter={autoplay.current.stop}
               onMouseLeave={autoplay.current.reset}
             >
-              {projectDetails?.media?.projOtherImagesUrl?.map(
-                (imageUrl, index) => (
-                  <Carousel.Slide key={index} className="relative">
-                    <Image
-                      width={1000}
-                      height={200}
-                      alt="project image"
-                      src={imageUrl}
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      className={`w-full rounded-[10px] h-[545px] lg:h-[680px] bg-gray-${
-                        index + 1
-                      }00`}
-                    />
-                    {/* {JSON.stringify(imageUrl)} */}
-                  </Carousel.Slide>
-                )
-              )}
+              {projectDetails?.media?.otherImgUrl?.map((imageUrl, index) => (
+                <Carousel.Slide key={index} className="relative">
+                  <Image
+                    width={1000}
+                    height={200}
+                    alt="project image"
+                    src={imageUrl}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className={`w-full rounded-[10px] h-[545px] lg:h-[680px] bg-gray-${
+                      index + 1
+                    }00`}
+                  />
+                  {/* {JSON.stringify(imageUrl)} */}
+                </Carousel.Slide>
+              ))}
             </Carousel>
           </div>
           <div className="absolute bottom-0 m-[2%] z-10 w-[95%] self-center justify-between items-start border-solid border-white-500 rounded-[10px] bg-gradient-to-l from-[#EFEFEF] /50 to-[#c3c3c3bd]/50 shadow-md flex flex-row">
             <div className="w-[60%]">
               <p className=" flex items-center pl-[8px] rounded-tl-lg text-center text-[24px] font-[600] text-[#FFF] bg-gradient-to-r w-[122px] from-[#148B16] /0 to-[#EFEFEF]/50">
                 <ReraIcon />
-                RERA 
+                RERA
               </p>
               <div className="ml-[2%]">
                 <h3 className="text-[24px] lg:text-[28px] font-[700] text-[#00487C] uppercase">
@@ -73,7 +71,8 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
 
                 <p className="text-[#202020] text-[16px] not-italic font-[500] leading-[normal] w-[100%] tracking-[0.32px]">
                   {projectDetails.address}
-                  Folium by Sumadhura, Borewell Rd, Whitefield, Palm Meadows, Ramagondanahalli, Bengaluru, Karnataka 560066
+                  Folium by Sumadhura, Borewell Rd, Whitefield, Palm Meadows,
+                  Ramagondanahalli, Bengaluru, Karnataka 560066
                 </p>
 
                 <p className="text-[16px] mt-[7px] mb-[7px] lg:text-[16px] font-[600] text-[#001F35]">
@@ -88,20 +87,19 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
                 <p className="text-[16px] font-[600] text-[#666]">
                   Posted By: {projectDetails.postedBy}
                 </p>
-
               </div>
             </div>
             <div className="w-[40%] flex justify-between items-end flex-col p-[2%]">
-                <h2 className="text-[24px] lg:text-[28px] font-[700] text-[#001F35]">
-                  ₹ {projectDetails.minPrice} Cr - ₹ {projectDetails.maxPrice} Cr
-                </h2>
-                <p className="text-[16px] text-right lg:text-[20px] font-[600] mb-[20px] text-[#00487C] ">
-                  ₹ {projectDetails.basePrice}/ Price per sqft onwards
-                </p>
+              <h2 className="text-[24px] lg:text-[28px] font-[700] text-[#001F35]">
+                ₹ {projectDetails.minPrice} Cr - ₹ {projectDetails.maxPrice} Cr
+              </h2>
+              <p className="text-[16px] text-right lg:text-[20px] font-[600] mb-[20px] text-[#00487C] ">
+                ₹ {projectDetails.basePrice}/ Price per sqft onwards
+              </p>
 
-                <p className="text-[16px] lg:text-[20px] font-[600] text-[#2A4C70] bg-[#FFF] rounded-[10px] shadow-md p-[8px] ">
-                  {projectDetails?.phaseList?.length || 0} Floors Plans
-                </p>
+              <p className="text-[16px] lg:text-[20px] font-[600] text-[#2A4C70] bg-[#FFF] rounded-[10px] shadow-md p-[8px] ">
+                {projectDetails?.floorPlanCount || 0} Floors Plans
+              </p>
             </div>
           </div>
         </>
