@@ -85,6 +85,48 @@ export default function FloorplansBlock({ slug }: Props) {
     }
     return iconComponent;
   };
+  const { data: projectUnitsData, isLoading } = useQuery({
+    queryKey: [`/${propCgId}/${currentPhase}/${slug}`],
+    queryFn: () => getProjectUnits(slug, currentPhase, propCgId),
+    keepPreviousData: true,
+    staleTime: 30000,
+    cacheTime: 300000,
+  });
+  const selectedFloor = useAtomValue(selectedFloorAtom);
+
+  const checkProperty = (key: any) => {
+    if (
+      key == projectprops.apartment &&
+      types != undefined &&
+      types.includes("apt")
+    ) {
+      return true;
+    } else if (
+      key == projectprops.rowHouse &&
+      types != undefined &&
+      types.includes("rowHouse")
+    ) {
+      return true;
+    } else if (
+      key == projectprops.villa &&
+      types != undefined &&
+      types.includes("villa")
+    ) {
+      return true;
+    } else if (
+      key == projectprops.villament &&
+      types != undefined &&
+      types.includes("villament")
+    ) {
+      return true;
+    } else if (
+      key == projectprops.plot &&
+      types != undefined &&
+      types.includes("plot")
+    ) {
+      return true;
+    }
+  };
 
   return (
     <div className="w-[90%] mb-[5%]" id="floorPlans">
@@ -128,22 +170,23 @@ export default function FloorplansBlock({ slug }: Props) {
                 ? //@ts-ignore
                   propertyDetailsTypes.get(keyName).name
                 : null;
-
-            return (
-              <Button
-                key={keyName}
-                buttonClass={`flex justify-start mb-[3%] rounded-[20px] gap-[8px] pr-[8px] items-center mr-[24px] md:ml-[24px] text-[18px] ${
-                  propCgId == keyName
-                    ? "text-[#001F35] font-[500] shadow-md bg-[#D5EDFF]"
-                    : "text-[#303A42] font-[400] bg-[#EEF7FE]"
-                } `}
-                onChange={() =>
-                  getPropertyType(propertyDetailsTypes.get(keyName))
-                }
-                title={name}
-                icon={getIcon(keyName)}
-              />
-            );
+            if (checkProperty(keyName)) {
+              return (
+                <Button
+                  key={keyName}
+                  buttonClass={`flex justify-start mb-[3%] rounded-[20px] gap-[8px] pr-[8px] items-center mr-[24px] md:ml-[24px] text-[18px] ${
+                    propCgId == keyName
+                      ? "text-[#001F35] font-[500] shadow-md bg-[#D5EDFF]"
+                      : "text-[#303A42] font-[400] bg-[#EEF7FE]"
+                  } `}
+                  onChange={() =>
+                    getPropertyType(propertyDetailsTypes.get(keyName))
+                  }
+                  title={name}
+                  icon={getIcon(keyName)}
+                />
+              );
+            }
           })}
       </div>
 
