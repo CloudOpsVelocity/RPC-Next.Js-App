@@ -16,6 +16,9 @@ export default function usePhaseWiseOverview() {
     onSuccess: (data) => {
       setCurrentPhase(data[0].phaseId);
     },
+    keepPreviousData: true,
+    staleTime: 30000,
+    cacheTime: 300000,
   });
   const phaseList = PhaseOverview?.map((phase: any) => {
     return {

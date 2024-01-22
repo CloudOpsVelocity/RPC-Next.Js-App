@@ -14,12 +14,16 @@ import {
   useForm,
   useFormContext,
 } from "@/app/context/floorplanContext";
+import { useAtom, useAtomValue } from "jotai";
+import { selectedFloorAtom } from "@/app/store/floor";
 
 type Props = {
   propCgId: any;
+  data?: any;
 };
 
-function FloorPlanModal({ propCgId }: Props) {
+function FloorPlanModal({ propCgId, data }: Props) {
+  const selectedFloor = useAtomValue(selectedFloorAtom);
   const [opened, { open, close }] = useDisclosure(false);
   const form = useForm();
 
@@ -86,10 +90,14 @@ function FloorPlanModal({ propCgId }: Props) {
               </button>
             </div>
             <Grid>
-              <LeftSection propCgId={propCgId} />
+              <LeftSection propCgId={propCgId} data={data} />
               <div className="flex rounded-[14px] shadow-md w-full h-[501px] justify-between items-start gap-[45px] shrink-0">
-                <MiddleSection />
-                <RightSection propCgId={propCgId} />
+                {selectedFloor && (
+                  <>
+                    <MiddleSection />
+                    <RightSection propCgId={propCgId} data={data} />
+                  </>
+                )}
               </div>
             </Grid>
           </div>
@@ -101,8 +109,23 @@ function FloorPlanModal({ propCgId }: Props) {
 
 export default FloorPlanModal;
 
-const LeftSection = ({ propCgId }: Props) => {
-  const { getInputProps } = useFormContext();
+const LeftSection = ({ propCgId, data }: Props) => {
+  const [, setFloor] = useAtom(selectedFloorAtom);
+  const { getInputProps, values } = useFormContext();
+  const getOptions = (property: string): string[] => {
+    return Array.from(new Set(data.map((item: any) => String(item[property]))));
+  };
+  const handleSearch = () => {
+    // Implement your filtering logic here based on selectedValues
+    const filteredData = data.filter((item: any) => {
+      return Object.keys(values).every(
+        (key) => !values[key] || String(item[key]) === values[key]
+      );
+    });
+    setFloor(filteredData[0]);
+    // Log the filtered data for demonstration purposes
+    console.log(filteredData);
+  };
   return (
     <div className="col-span-1 w-full max-w-[393px] ">
       <div className="w-[100%] flex justify-between items-start flex-wrap gap-[5%]">
@@ -126,7 +149,7 @@ const LeftSection = ({ propCgId }: Props) => {
             label="Select Tower"
             className="!w-[46%]"
             placeholder="-- select --"
-            data={["1", "2", "3", "4", "5"]}
+            data={getOptions("towerName")}
             searchable
             maxDropdownHeight={200}
             {...getInputProps("tower")}
@@ -141,7 +164,7 @@ const LeftSection = ({ propCgId }: Props) => {
               label="Select Block"
               className="!w-[46%]"
               placeholder="-- select --"
-              data={["1", "2", "3", "4", "5"]}
+              data={getOptions("block")}
               searchable
               maxDropdownHeight={200}
               {...getInputProps("block")}
@@ -160,7 +183,7 @@ const LeftSection = ({ propCgId }: Props) => {
             }`}
             className="!w-[46%]"
             placeholder="-- select --"
-            data={["1", "2", "3", "4", "5"]}
+            data={getOptions("floor")}
             searchable
             maxDropdownHeight={200}
             {...getInputProps("floor")}
@@ -173,7 +196,7 @@ const LeftSection = ({ propCgId }: Props) => {
           label="Select Unit Number"
           className="!w-[46%]"
           placeholder="-- select --"
-          data={["1", "2", "3", "4", "5"]}
+          data={getOptions("unitNumber")}
           searchable
           maxDropdownHeight={200}
           {...getInputProps("unit")}
@@ -189,7 +212,7 @@ const LeftSection = ({ propCgId }: Props) => {
           } `}
           className="!w-[46%]"
           placeholder="-- select --"
-          data={["1", "2", "3", "4", "5"]}
+          data={getOptions("facingName")}
           searchable
           maxDropdownHeight={200}
           {...getInputProps("facing")}
@@ -202,7 +225,7 @@ const LeftSection = ({ propCgId }: Props) => {
             label="Super Built-up Area "
             className="!w-[46%]"
             placeholder="-- select --"
-            data={["1", "2", "3", "4", "5"]}
+            data={getOptions("superBuildUparea")}
             searchable
             maxDropdownHeight={200}
             {...getInputProps("superArea")}
@@ -216,7 +239,7 @@ const LeftSection = ({ propCgId }: Props) => {
             label="Carpet Area"
             className="!w-[46%]"
             placeholder="-- select --"
-            data={["1", "2", "3", "4", "5"]}
+            data={getOptions("caretarea")}
             searchable
             maxDropdownHeight={200}
             {...getInputProps("carpetArea")}
@@ -260,7 +283,7 @@ const LeftSection = ({ propCgId }: Props) => {
             label="Select Car Parking"
             className="!w-[46%]"
             placeholder="-- select --"
-            data={["1", "2", "3", "4", "5"]}
+            data={getOptions("noOfCarParking")}
             searchable
             maxDropdownHeight={200}
             {...getInputProps("carParking")}
@@ -369,13 +392,15 @@ const LeftSection = ({ propCgId }: Props) => {
       <Button
         icon={<LenseIcon />}
         title="Search"
-        onChange={() => ""}
+        onChange={handleSearch}
         buttonClass=" flex items-center justify-center gap-[10px] border-none text-[#FFF] text-[20px] font-[600] bg-[#0073C6] rounded-[10px] p-[6px]  mt-10"
       />
     </div>
   );
 };
 const RightSection = ({ propCgId }: Props) => {
+  const data = useAtomValue(selectedFloorAtom);
+  console.log(data);
   return (
     <div className="col-span-1 w-full max-w-[342px] ">
       <div className="bg-[#F4FBFF] p-6 rounded-lg shadow max-w-sm">
@@ -398,7 +423,7 @@ const RightSection = ({ propCgId }: Props) => {
                 <polyline points="9 22 9 12 15 12 15 22" />
               </svg>
               <span className="font-medium">Unit Type</span>
-              <span>2 BHK</span>
+              <span>{data.bhkName}</span>
             </div>
           )}
 
@@ -429,7 +454,7 @@ const RightSection = ({ propCgId }: Props) => {
                 <path d="M8 14h.01" />
               </svg>
               <span className="font-medium">Tower</span>
-              <span>Tower 1</span>
+              <span>{data.towerName}</span>
             </div>
           )}
 
@@ -452,7 +477,7 @@ const RightSection = ({ propCgId }: Props) => {
                   <path d="M10 21V8a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1H3" />
                 </svg>
                 <span className="font-medium">Block</span>
-                <span>02</span>
+                <span>{data.block}</span>
               </div>
             )}
 
@@ -479,7 +504,7 @@ const RightSection = ({ propCgId }: Props) => {
                   ? "Elevation"
                   : "Floor"
               }`}</span>
-              <span>02</span>
+              <span>{data.floor}</span>
             </div>
           )}
 
@@ -503,7 +528,7 @@ const RightSection = ({ propCgId }: Props) => {
               <path d="M13 4.562v16.157a1 1 0 0 1-1.242.97L5 20V5.562a2 2 0 0 1 1.515-1.94l4-1A2 2 0 0 1 13 4.561Z" />
             </svg>
             <span className="font-medium">Unit Number</span>
-            <span>03</span>
+            <span>{data.unitNumber}</span>
           </div>
 
           <div className="flex items-center space-x-3">
@@ -525,7 +550,7 @@ const RightSection = ({ propCgId }: Props) => {
             <span className="font-medium">{`${
               propCgId == projectprops.plot ? "Plot Facing" : "Facing"
             } `}</span>
-            <span>North - East</span>
+            <span>{data.facingName}</span>
           </div>
 
           {propCgId != projectprops.plot && (
@@ -548,7 +573,7 @@ const RightSection = ({ propCgId }: Props) => {
                 <path d="M3 7.8V3m0 0h4.8M3 3l6 6" />
               </svg>
               <span className="font-medium">Super Builtup Area</span>
-              <span>1120 sq.ft</span>
+              <span>{data.superBuildUparea} sq.ft</span>
             </div>
           )}
 
@@ -573,7 +598,7 @@ const RightSection = ({ propCgId }: Props) => {
                 <path d="M12 4v9" />
               </svg>
               <span className="font-medium">Carpet Area</span>
-              <span>840 sq.ft</span>
+              <span>{data.caretarea} sq.ft</span>
             </div>
           )}
 
@@ -597,7 +622,7 @@ const RightSection = ({ propCgId }: Props) => {
                 <circle cx={17} cy={17} r={2} />
               </svg>
               <span className="font-medium">Car Parking</span>
-              <span>02</span>
+              <span>{data.noOfCarParking}</span>
             </div>
           )}
 
@@ -619,7 +644,7 @@ const RightSection = ({ propCgId }: Props) => {
                 <path d="M9 17V7h4a3 3 0 0 1 0 6H9" />
               </svg>
               <span className="font-medium">Open/Covered Parking</span>
-              <span>Open Parking</span>
+              <span>{data.parkingType} Parking</span>
             </div>
           )}
 
@@ -650,7 +675,7 @@ const RightSection = ({ propCgId }: Props) => {
                 <path d="M8 14h.01" />
               </svg>
               <span className="font-medium">Balconies</span>
-              <span>01</span>
+              <span>{data.totalNumberOfBalcony}</span>
             </div>
           )}
 
@@ -675,7 +700,7 @@ const RightSection = ({ propCgId }: Props) => {
                 <line x1={17} x2={17} y1={19} y2={21} />
               </svg>
               <span className="font-medium">Bathroom</span>
-              <span>02</span>
+              <span>{data.totalNumberofBathroom}</span>
             </div>
           )}
 
@@ -742,6 +767,8 @@ const RightSection = ({ propCgId }: Props) => {
 };
 
 const MiddleSection = () => {
+  const data = useAtomValue(selectedFloorAtom);
+
   const [opened, setOpened] = useState(false);
   return (
     <div className="col-span-1 w-full max-w-[686px]">
@@ -750,12 +777,12 @@ const MiddleSection = () => {
           Sarang by sumadhura/2bhk/tower 1/ 04/north/1124 sq.ft
         </p>
         <img
-          src="https://imagesrpc.s3.ap-south-1.amazonaws.com/images/varify/project/197/cover/cover.jpg"
+          src={data?.floorPlanUrl}
           alt="Floor Plan"
-          className="border"
+          className="border w-full min-w-[686px]"
           width={800}
           height={400}
-          style={{ aspectRatio: "800 / 400", objectFit: "cover" }}
+          // style={{ aspectRatio: "800 / 400", objectFit: "cover" }}
         />
         <CarouselModal opened={opened} setOpened={setOpened} />
       </div>

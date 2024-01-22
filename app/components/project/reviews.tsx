@@ -8,8 +8,8 @@ import useRatings from "@/app/hooks/useRatings";
 import { useParams } from "next/navigation";
 
 export default function Reviews() {
-  const {slug} = useParams<{slug:string}>()
-  const {data,isLoading} = useRatings({projectId:slug})
+  const { slug } = useParams<{ slug: string }>();
+  const { data, isLoading } = useRatings({ projectId: slug });
   return (
     <div className="bg-[#FFF] py-12 w-full ">
       <div className="max-w-[1920px] mx-auto px-6">
@@ -29,14 +29,11 @@ export default function Reviews() {
             height={250}
             slidesToScroll={1}
           >
-            {data?.data?.map((eachData:any,i:number)=>(
+            {data?.data?.map((eachData: any, i: number) => (
               <Carousel.Slide key={i}>
-                {/* {JSON.stringify(eachData)} */}
                 <Review {...eachData} />
               </Carousel.Slide>
             ))}
-           
-           
           </Carousel>
         </div>
       </div>
@@ -44,18 +41,18 @@ export default function Reviews() {
   );
 }
 
-
-const Review = ({rating, review}:any) => {
+const Review = ({ rating, review }: any) => {
   return (
     <>
       <div className="max-w-lg mx-auto mt-[20px] bg-white rounded-lg p-4 relative shadow-md border-solid border-[#DCE6ED] border-[1px] ">
-      <span className=" absolute top-[-20px] !z-30  ">{quotesIcon}</span>
+        <span className=" absolute top-[-20px] !z-30  ">{quotesIcon}</span>
         <div className="flex items-center space-x-2">
           <div className="flex-1">
-
             <div className="flex justify-between items-center">
               <div>
-                <p className="text-[18px] text-[#000] font-[500] mt-[20px]">GRP User</p>
+                <p className="text-[18px] text-[#000] font-[500] mt-[20px]">
+                  GRP User
+                </p>
                 <p className="text-[14px] text-[#212C33] font-[500]">Owner</p>
               </div>
               <div className="text-right">
