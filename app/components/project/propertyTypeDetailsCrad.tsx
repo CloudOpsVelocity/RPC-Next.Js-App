@@ -1,6 +1,8 @@
 import React from "react";
 import { FlooringIcon, FloorsIcon, TowerIcon } from "../../images/commonSvgs";
 import { projectprops, propertyDetailsTypes } from "../../data/projectDetails";
+import { apartmentCardImg, plotCardImg, rowhouseCardImg, villaCardImg, villamentCardImg } from "@/app/images/commonImages";
+import Image from "next/image";
 
 type Props = {
   cg: any;
@@ -8,13 +10,61 @@ type Props = {
 };
 
 export default function PropertyTypeDetailsCrad({ cg, propertyType }: Props) {
+  const propName = (key:string, type?: string) => {
+    switch(key){
+      case "apt":
+        if(type == "name"){
+          return "Apartment";
+        }else{
+          return apartmentCardImg;
+        }
+        break;
+      case "plot":
+        if(type == "name"){
+          return "Plot";
+        }else{
+          return plotCardImg;
+        }
+        break;  
+      case "rowHouse":
+        if(type == "name"){
+          return "Rowhouse";
+        }else{
+          return rowhouseCardImg;
+        }
+        break;
+      case "villa": 
+        if(type == "name"){
+          return "Villa";
+        }else{
+          return villaCardImg;
+        }
+        break;
+      case "villament":
+        if(type == "name"){
+          return "Villament";
+        }else{
+          return villamentCardImg;
+        }
+        break;
+    }
+  }
   return (
     <div className="flex flex-col justify-start items-start w-[100%] max-w-[359px] lg:max-w-[510px] rounded-[24px] shadow-md pr-[2%] pl-[1%] mt-[70px] bg-gradient-to-l from-[#EFF5FF] /50 to-[#F2FAFF]/50 mb-[2%]">
       <div className="flex justify-between items-start w-full">
-        <div className="max-w-[110px] lg:max-w-[130px] w-full h-[110px] lg:h-[130px] border-solid border-1 border-[#FFF] rounded-full bg-[#c9daee] relative bottom-[50px] lg:bottom-[60px] mb-[-40px]"></div>
+        <div className="max-w-[110px] lg:max-w-[130px] w-full h-[110px] lg:h-[130px] border-solid border-1 border-[#FFF] rounded-full bg-[#c9daee] relative bottom-[50px] lg:bottom-[60px] mb-[-40px]">
+          <Image
+            width={90}
+            height={90}
+            src={propName(propertyType, "img")}
+            alt="Preview"
+            className="w-full h-full object-cover rounded-[14px]"
+          />
+        </div>
         <div className="flex justify-between items-start mb-[3%] w-[90%] mt-[3%]">
           <p className="text-[16px] lg:text-[20px] text-[#00487C] font-[600] ml-[10px]">
-            {cg?.name}
+            {/* {cg?.name} */}
+            {propName(propertyType, "name")}
           </p>
 
           <div className="flex justify-end items-start flex-col">

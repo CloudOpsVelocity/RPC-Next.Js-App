@@ -29,7 +29,7 @@ export default function Reviews() {
             height={250}
             slidesToScroll={1}
           >
-            {data?.data.map((eachData:any,i:number)=>(
+            {data?.data?.map((eachData:any,i:number)=>(
               <Carousel.Slide key={i}>
                 {/* {JSON.stringify(eachData)} */}
                 <Review {...eachData} />
