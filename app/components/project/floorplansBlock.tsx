@@ -265,7 +265,7 @@ export default function FloorplansBlock({ slug }: Props) {
             />
             {/* dISPLAY FLOOR PLAN HERE */}
           </div>
-          <FloorPlanModal propCgId={propCgId} />
+          <FloorPlanModal propCgId={propCgId} data={projectUnitsData} />
         </div>
       </div>
     </div>

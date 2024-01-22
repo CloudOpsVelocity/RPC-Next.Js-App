@@ -4,12 +4,15 @@ import { Carousel } from "@mantine/carousel";
 import { PopupOpenSvg } from "@/app/images/commonSvgs";
 import { RightSection } from "./FloorPlan";
 import S from "@/app/styles/ModalCarousel.module.css";
+import { useAtomValue } from "jotai";
+import { selectedFloorAtom } from "@/app/store/floor";
 type CarouselModalProps = {
   opened: boolean;
   setOpened: Dispatch<SetStateAction<boolean>>;
 };
 
 function CarouselModal({ opened, setOpened }: CarouselModalProps) {
+  const data = useAtomValue(selectedFloorAtom);
   const TRANSITION_DURATION = 200;
   //   const [opened, setOpened] = useState(false);
 
@@ -36,7 +39,7 @@ function CarouselModal({ opened, setOpened }: CarouselModalProps) {
           <MiddleSection />
           <RightSection propCgId={""} />
         </div>
-        <Carousel
+        {/* <Carousel
           loop
           w={"70%"}
           m={"auto"}
@@ -104,7 +107,7 @@ function CarouselModal({ opened, setOpened }: CarouselModalProps) {
               style={{ width: rem(150), height: rem(100), objectFit: "cover" }}
             />
           </Carousel.Slide>
-        </Carousel>
+        </Carousel> */}
       </Modal>
     </>
   );
