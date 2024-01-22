@@ -30,6 +30,7 @@ const nextConfig = {
       { hostname: "res.cloudinary.com" },
       { hostname: "imagesrpc.s3.ap-south-1.amazonaws.com" },
       { hostname: "imagesrpc.s3.ap-south-1.amazonaws.com" },
+      { hostname: "images.unsplash.com" },
     ],
   },
   env: {

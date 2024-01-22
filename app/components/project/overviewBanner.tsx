@@ -6,13 +6,15 @@ import PriceBag, {
 } from "@/app/images/commonSvgs";
 import React from "react";
 import Button from "../../elements/button";
-import { useDisclosure } from "@mantine/hooks";
-import { Collapse, Modal, TextInput } from "@mantine/core";
+import { useDisclosure, useMediaQuery } from "@mantine/hooks";
+import { Collapse, Modal, NumberInput, TextInput, em } from "@mantine/core";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import S from "@/app/styles/Req.module.css";
 import { projectprops } from "@/app/data/projectDetails";
-import { useForm } from "@mantine/form";
+import { useForm, yupResolver } from "@mantine/form";
+import { reqSchema } from "@/app/validations/project";
+import { Button as B } from "@mantine/core";
 export default function OverviewBanner({
   minPrice,
   maxPrice,
@@ -60,13 +62,14 @@ const RequestCallBackModal = ({
   opened: any;
   close: any;
 }) => {
+  const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
   return (
     <>
       <Modal
         opened={opened}
         onClose={close}
         centered
-        size={"60%"}
+        size={isMobile ? "90%" : "60%"}
         className="!rounded-full w-[90%] md:w-[70%] lg:w-[60%] "
         classNames={{
           close: S.close,
@@ -110,13 +113,6 @@ const RequestCallBackModal = ({
 };
 
 const Content = () => {
-  const { getInputProps, onSubmit, onReset } = useForm({
-    initialValues: {
-      name: "",
-      email: "",
-      phone: "",
-    },
-  });
   const { data: session } = useSession();
   return (
     <>
@@ -126,44 +122,61 @@ const Content = () => {
           <p className="mt-2 text-gray-600">Name: Ankit Soni</p>
           <p className="mt-2 text-gray-600">Contact: 8888855555</p>
           <p className="mt-2 text-gray-600">Email: ankitsoni12@gmail.com</p>
+          <B type="submit" leftSection={<Phone />} mt={"md"}>
+            Request a Callback
+          </B>
         </div>
       ) : (
-        <form
-          className="w-full max-w-xs"
-          onSubmit={onSubmit((values) => console.log(values))}
-        >
-          <h2 className="text-lg font-semibold mb-4">Your Details</h2>
-          <div className="flex flex-col gap-4">
-            <label className="block">
-              <TextInput
-                label="Enter your name here"
-                {...getInputProps("name")}
-                placeholder="Enter your name here"
-              />
-            </label>
-            <label className="block">
-              <TextInput
-                label="Enter Your Phone Here"
-                {...getInputProps("phone")}
-                placeholder="Phone number"
-              />
-            </label>
-            <label>
-              <TextInput
-                label="Enter Your Email Here"
-                {...getInputProps("email")}
-                placeholder="Enter your email here"
-                type="email"
-              />
-            </label>
-          </div>
-        </form>
+        <ReqForm />
       )}
-      <Button
-        icon={<Phone />}
-        title="Request a Callback"
-        buttonClass=" text-[#FFF] text-[16px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[6px]  mt-5"
-      />
     </>
+  );
+};
+
+const ReqForm = () => {
+  const { getInputProps, onSubmit, onReset, errors } = useForm({
+    initialValues: {
+      name: "",
+      email: "",
+      phone: "",
+    },
+    validate: yupResolver(reqSchema),
+  });
+  return (
+    <form
+      className="w-full max-w-xs"
+      onSubmit={onSubmit((values) => alert(values))}
+    >
+      <h2 className="text-lg font-semibold mb-4">Your Details</h2>
+      <div className="flex flex-col gap-4">
+        <label className="block">
+          <TextInput
+            label="Enter your name here"
+            {...getInputProps("name")}
+            placeholder="Enter your name here"
+          />
+        </label>
+        <label className="block">
+          <NumberInput
+            hideControls
+            maxLength={10}
+            label="Enter Your Phone Here"
+            {...getInputProps("phone")}
+            placeholder="Phone number"
+          />
+        </label>
+        <label>
+          <TextInput
+            label="Enter Your Email Here"
+            {...getInputProps("email")}
+            placeholder="Enter your email here"
+            type="email"
+          />
+        </label>
+      </div>
+      <B type="submit" leftSection={<Phone />} mt={"md"}>
+        Request a Callback
+      </B>
+    </form>
   );
 };

@@ -1,0 +1,16 @@
+.close {
+  background: red;
+  color: white;
+  border-radius: 100%;
+  display: none;
+}
+
+.content {
+  border-radius: 20px;
+  background: transparent;
+}
+
+.header {
+  display: none;
+  background-color: transparent;
+}

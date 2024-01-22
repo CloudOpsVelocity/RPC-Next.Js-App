@@ -15,7 +15,7 @@ export default function AboutBuilder({}: Props) {
           About Builder
         </h1>
         <p className=" text-[#148B16] italic text-[20px] lg:text-[26px] font-[700]">
-          {data?.data.companyName}
+          {data?.data?.companyName}
         </p>
         <div className="rounded-[20px] mt-[1%] flex justify-between items-center bg-[#FFF] shadow-md w-[100%] mb-[2%] lg:w-[50%] p-[1%] ">
           <div className="w-[30%] border-solid border-[#92B2C8] border-r-[1px]">
@@ -59,7 +59,7 @@ export default function AboutBuilder({}: Props) {
           Builder Address{" "}
         </p>
         <p className=" text-[#2A4C70] text-[18px] lg:text-[20px] font-[700] mt-[1%] italic mb-[1%]">
-          {data?.data.builderAddress}
+          {data?.data?.builderAddress}
         </p>
         <Link
           className=" bg-[#0073C6] rounded-[10px] text-[#FFF] text-[18px] lg:text-[20px] font-[700] p-[10px]  "
