@@ -69,7 +69,7 @@ export default function ManagementBlock({
       </h1>
 
       <div className="flex justify-start items-start w-full flex-wrap gap-[3%] mb-[2%] mt-[1%] ">
-        {citiesName.map((item, index) => (
+        {citiesName?.map((item, index) => (
           <p
             className="text-[16px] md:text-[24px] font-[500] text-[#00487C] bg-[#FFF] rounded-[10px] mb-[3%] shadow-lg p-[1%] px-[16px] hover:bg-[#00487C] hover:text-[#FFF]  "
             key={index}

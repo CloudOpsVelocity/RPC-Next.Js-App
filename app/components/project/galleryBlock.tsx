@@ -26,7 +26,8 @@ export default function GalleryBlock({
     "https://images.unsplash.com/photo-1683009680116-b5c04463551d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHx8",
     "https://images.unsplash.com/photo-1683009680116-b5c04463551d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHx8",
   ];
-  const videos = [projReviewVideoUrl, projWalkThroughVideoUrl];
+  // const videos = [projReviewVideoUrl, projWalkThroughVideoUrl];
+  const videos =['https://getrightproperty-test-bucket.s3.ap-south-1.amazonaws.com/images/varify/project/252/walk-Through-video/video.mp4','https://getrightproperty-test-bucket.s3.ap-south-1.amazonaws.com/images/varify/project/252/walk-Through-video/video.mp4?v=0.458334283308651']
 
   const handleMediaClick = (media: string) => {
     setSelectedMedia(media);
@@ -65,7 +66,7 @@ export default function GalleryBlock({
                   className="w-full h-full object-cover rounded-[14px]"
                 />
               )}
-              <Gallery selectedMedia={selectedMedia} images={images} />
+              <Gallery selectedMedia={selectedMedia} images={images} videos={videos} isImage={selectedMedia.includes(".mp4") ? false : true} />
             </div>
           )}
         </div>

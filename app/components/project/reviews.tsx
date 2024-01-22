@@ -2,12 +2,12 @@
 import "@mantine/carousel/styles.css";
 import { Carousel } from "@mantine/carousel";
 import React from "react";
-import { ReviewBoxIcon } from "@/app/images/commonSvgs";
+import { ReviewBoxIcon, quotesIcon } from "@/app/images/commonSvgs";
 import { Rating } from "@mantine/core";
 
 export default function Reviews() {
   return (
-    <div className="bg-gray-100 py-12 w-full ">
+    <div className="bg-[#FFF] py-12 w-full ">
       <div className="max-w-[1920px] mx-auto px-6">
         <h2 className="text-2xl font-semibold text-gray-800">
           CUSTOMER REVIEWS FOR <span className="text-green-500">SARANG</span>
@@ -22,7 +22,7 @@ export default function Reviews() {
             align="start"
             slideSize={{ base: "100%", sm: "50%", md: "33.333333%" }}
             withIndicators
-            height={200}
+            height={250}
             slidesToScroll={1}
           >
             <Carousel.Slide>
@@ -53,11 +53,12 @@ export default function Reviews() {
 const Review = () => {
   return (
     <>
-      <div className="max-w-lg mx-auto bg-white rounded-lg p-4 shadow-lg relative">
+      <div className="max-w-lg mx-auto bg-white rounded-lg p-4 shadow-md border-solid border-[#DCE6ED] border-[1px] ">
         <div className="flex items-center space-x-2">
           <div className="flex-1">
             <div className="flex justify-between items-center">
               <div>
+                <span className=" relative mb-[-40px] bottom-[30px] !z-10 ">{quotesIcon}</span>
                 <p className="text-lg font-semibold">Ankita Soni</p>
                 <p className="text-sm text-gray-500">Owner</p>
               </div>

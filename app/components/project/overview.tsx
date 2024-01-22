@@ -9,6 +9,8 @@ import PriceBag, {
   StartDate,
   TotalLandArea,
   WhatsAppButton,
+  callIconSvg,
+  footerPhoneIcon,
 } from "@/app/images/commonSvgs";
 import ProjBasicDetails from "@/app/components/project/projBasicDetails";
 import Button from "../../elements/button";
@@ -52,8 +54,9 @@ export default function Overview({
           <Ratings />
           <a
             href={`tel:${8766203976}`}
-            className="text-[20px] lg:text-[24px] text-[#0073C6] font-[600] decoration-dashed underline whitespace-nowrap "
+            className="text-[20px] flex justify-center items-center gap-[8px] lg:text-[24px] text-[#0073C6] font-[600] decoration-dashed underline whitespace-nowrap "
           >
+            {footerPhoneIcon}
             Call now
           </a>
         </div>

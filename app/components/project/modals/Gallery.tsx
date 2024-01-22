@@ -5,13 +5,16 @@ import { Modal, Button, Image } from "@mantine/core";
 import { PopupOpenSvg } from "@/app/images/commonSvgs";
 import { Carousel } from "@mantine/carousel";
 import S from "@/app/styles/ImgCarousel.module.css";
+import ReactPlayer from "react-player";
 
 type GalleryProps = {
   selectedMedia: any;
   images: any[];
+  videos: any[];
+  isImage: boolean;
 };
 
-const Gallery: React.FC<GalleryProps> = ({ selectedMedia, images }) => {
+const Gallery: React.FC<GalleryProps> = ({ selectedMedia, images, videos, isImage }) => {
   const [opened, { open, close }] = useDisclosure(false);
   const [previewImage, setPreviewImage] = useState<string | null>(
     selectedMedia
@@ -37,6 +40,7 @@ const Gallery: React.FC<GalleryProps> = ({ selectedMedia, images }) => {
           header: S.header,
         }}
       >
+        {isImage ? 
         <Image
           radius="md"
           h={800}
@@ -46,6 +50,14 @@ const Gallery: React.FC<GalleryProps> = ({ selectedMedia, images }) => {
           src={previewImage}
           className="cursor-pointer border-[5px] border-white"
         />
+        :
+        <ReactPlayer
+          url={previewImage}
+          width="100%"
+          height="100%"
+          controls
+        />
+        }
         <div className="mt-4">
           <Carousel
             height={100}
@@ -59,23 +71,48 @@ const Gallery: React.FC<GalleryProps> = ({ selectedMedia, images }) => {
             mx={"auto"}
             slidesToScroll={5}
           >
-            {images.map((image, index) => (
-              <Carousel.Slide
-                key={index}
-                onClick={() => handleImageClick(image)}
-              >
-                <Image
-                  radius="md"
-                  h={100}
-                  w="auto"
-                  fit="contain"
-                  src={image}
-                  className={`cursor-pointer ${
-                    image === previewImage ? "border-[5px] border-white" : ""
-                  }`}
-                />
-              </Carousel.Slide>
-            ))}
+            {isImage ? 
+            <React.Fragment>
+              {images.map((image, index) => (
+                <Carousel.Slide
+                  key={index}
+                  onClick={() => handleImageClick(image)}
+                >
+                  <Image
+                    radius="md"
+                    h={100}
+                    w="auto"
+                    fit="contain"
+                    src={image}
+                    className={`cursor-pointer ${
+                      image === previewImage ? "border-[5px] border-white" : ""
+                    }`}
+                  />
+                </Carousel.Slide>
+              ))}
+            </React.Fragment>
+            :
+            <React.Fragment>
+              {videos.map((video, index) => (
+                <Carousel.Slide
+                  key={index}
+                  onClick={() => handleImageClick(video)}
+                >
+                  <Image
+                    radius="md"
+                    h={100}
+                    w="auto"
+                    fit="contain"
+                    src={"https://imagesrpc.s3.ap-south-1.amazonaws.com/images/varify/project/197/other/0.jpg"}
+                    className={`cursor-pointer ${
+                      video === previewImage ? "border-[5px] border-white" : ""
+                    }`}
+                  />
+                  
+                </Carousel.Slide>
+              ))}
+            </React.Fragment>
+              }
           </Carousel>
         </div>
       </Modal>
