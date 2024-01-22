@@ -10,8 +10,23 @@ type Props = {
 };
 
 export default function Byunitblock({ propCgId, data }: Props) {
+  const uniqueProperties = Array.from(
+    new Set(
+      data
+        .map((item: any) =>
+          Object.keys(item).filter((key) => key !== "floorPlanUrl")
+        )
+        .flat()
+    )
+  );
+
+  const getOptions = (property: string): string[] => {
+    return Array.from(new Set(data.map((item: any) => item[property])));
+  };
+
   return (
     <div className="p-[3%] w-full flex justify-start flex-col items-start">
+      {JSON.stringify(uniqueProperties)}
       <h3 className=" text-[#001F35] text-[20px] lg:text-[24px] font-[500]  ">
         See floor plan according to your selections
       </h3>
@@ -24,13 +39,11 @@ export default function Byunitblock({ propCgId, data }: Props) {
             label="Tower"
             className="!w-[46%]"
             placeholder="-- select Tower --"
-            data={["1", "2", "3", "4", "5"]}
+            data={(getOptions("towerName") as string[]) || []}
             searchable
             maxDropdownHeight={200}
           />
-        ) : (
-          ""
-        )}
+        ) : null}
 
         <Select
           size="md"
@@ -38,7 +51,7 @@ export default function Byunitblock({ propCgId, data }: Props) {
           label="unit Number"
           className="!w-[46%]"
           placeholder="-- select Unit Number--"
-          data={["1", "2", "3", "4", "5"]}
+          data={(getOptions("unitNumber") as string[]) || []}
           searchable
           maxDropdownHeight={200}
         />
@@ -61,13 +74,13 @@ export default function Byunitblock({ propCgId, data }: Props) {
             label="Block"
             className="!w-[46%]"
             placeholder="-- select Block --"
-            data={["1", "2", "3", "4", "5"]}
+            data={(getOptions("block") as string[]) || []}
             searchable
             maxDropdownHeight={200}
           />
         )}
 
-        {propCgId != projectprops.plot && (
+        {/* {propCgId != projectprops.plot && (
           <Select
             size="md"
             mt="md"
@@ -79,31 +92,31 @@ export default function Byunitblock({ propCgId, data }: Props) {
                 : "Floor"
             }
             placeholder="-- select Floor --"
-            data={["1", "2", "3", "4", "5"]}
+            data={getOptions("floor") || []}
             searchable
             maxDropdownHeight={200}
           />
-        )}
+        )} */}
 
-        {propCgId == projectprops.plot && (
+        {/* {propCgId == projectprops.plot && (
           <Select
             size="md"
             mt="md"
             label="Area"
             className="!w-[46%]"
             placeholder="-- select Area --"
-            data={["1", "2", "3", "4", "5"]}
+            data={getOptions("superBuildUparea") || []}
             searchable
             maxDropdownHeight={200}
           />
-        )}
+        )} */}
         <Select
           size="md"
           mt="md"
           label="Facing"
           className="!w-[46%]"
           placeholder="-- select facing --"
-          data={["1", "2", "3", "4", "5"]}
+          data={getOptions("facingName") || []}
           searchable
           maxDropdownHeight={200}
         />

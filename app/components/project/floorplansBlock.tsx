@@ -28,8 +28,8 @@ import usePhaseWiseOverview from "@/app/hooks/usePhaseWiseOverview";
 import { useAtomValue } from "jotai";
 import { floorImageATom } from "@/app/store/image";
 import { selectedFloorAtom } from "@/app/store/floor";
+import Loading from "../atoms/Loader";
 
-const dummyProptypesList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 type Props = {
   data: PhaseList[];
   slug: string;
@@ -44,6 +44,16 @@ export default function FloorplansBlock({ slug }: Props) {
   const selectedPhase = PhaseOverview?.find(
     (phase: any) => phase.phaseId === currentPhase
   );
+  const selectedFloor = useAtomValue(selectedFloorAtom);
+  const { data: projectUnitsData, isLoading } = useQuery({
+    queryKey: [`/${propCgId}/${currentPhase}/${slug}`],
+    queryFn: () => getProjectUnits(slug, currentPhase, propCgId),
+    keepPreviousData: true,
+    staleTime: 30000,
+    cacheTime: 300000,
+  });
+
+  if (isLoading) return <Loading />;
   const types = selectedPhase && Object?.keys(selectedPhase.propTypeOverview);
   const getPropertyType = (data: any) => {
     setPropCgId(data.id);
@@ -75,15 +85,7 @@ export default function FloorplansBlock({ slug }: Props) {
     }
     return iconComponent;
   };
-  const { data: projectUnitsData, isLoading } = useQuery({
-    queryKey: [`/${propCgId}/${currentPhase}/${slug}`],
-    queryFn: () => getProjectUnits(slug, currentPhase, propCgId),
-    keepPreviousData: true,
-    staleTime: 30000,
-    cacheTime: 300000,
-  });
-  const selectedFloor = useAtomValue(selectedFloorAtom);
-  console.log(selectedFloor);
+
   return (
     <div className="w-[90%] mb-[5%]" id="floorPlans">
       <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35]">
