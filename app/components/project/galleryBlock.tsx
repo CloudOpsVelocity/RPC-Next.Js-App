@@ -18,7 +18,7 @@ export default function GalleryBlock({
     projectPlanUrl
   );
 
-  const images = [coverImageUrl, projectPlanUrl, ...otherImgUrl];
+  const images = [coverImageUrl, projectPlanUrl, ];
 
   const videos = [walkThrowVideoUrl];
 
