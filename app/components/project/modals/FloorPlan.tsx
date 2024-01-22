@@ -21,11 +21,7 @@ type Props = {
 
 function FloorPlanModal({ propCgId }: Props) {
   const [opened, { open, close }] = useDisclosure(false);
-  const form = useForm({
-    initialValues: {
-      units: 0,
-    },
-  });
+  const form = useForm();
 
   return (
     <FormProvider form={form}>
@@ -56,26 +52,36 @@ function FloorPlanModal({ propCgId }: Props) {
               See floor plan according to your selections
             </p>
             <div className="flex flex-wrap gap-4 mb-4">
-              {[...Array(10)].map((_, i) => (
-                <div
-                  className="flex items-center px-3 py-1.5 bg-white border border-[#c4f1f9] rounded-full"
-                  key={i}
-                >
-                  <span className="text-[#57a773] font-semibold">01</span>
-                  <span className="mx-1.5 text-[#6e798c]">|</span>
-                  <span className="text-[#6e798c]">Unit Number</span>
-                  <button className="ml-2">
-                    <Image
-                      src={"/cross.svg"}
-                      alt="close"
-                      width={10}
-                      height={10}
-                    />
-                  </button>
-                </div>
-              ))}
+              {Object.entries(form.values).map(
+                ([key, value]) =>
+                  value !== null &&
+                  value !== 0 &&
+                  value !== "" && (
+                    <div
+                      className="flex items-center px-3 py-1.5 bg-white border border-[#c4f1f9] rounded-full"
+                      key={key}
+                    >
+                      <span className="text-[#57a773] font-semibold">
+                        {value}
+                      </span>
+                      <span className="mx-1.5 text-[#6e798c]">|</span>
+                      <span className="text-[#6e798c]">{key}</span>
+                      <button className="ml-2">
+                        <Image
+                          src={"/cross.svg"}
+                          alt="close"
+                          width={10}
+                          height={10}
+                        />
+                      </button>
+                    </div>
+                  )
+              )}
 
-              <button className="flex items-center rounded-[10px] shadow-md border-solid border-[1px] border-[#a5bfd8] px-2.5 py-0.5 w-fit  font-[500] text-[18px] lg:text-[20px] transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-[#FFF] text-secondary-foreground hover:bg-gray-100/80 fnt-[600] text-[#0073C6] underline">
+              <button
+                className="flex items-center rounded-[10px] shadow-md border-solid border-[1px] border-[#a5bfd8] px-2.5 py-0.5 w-fit  font-[500] text-[18px] lg:text-[20px] transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-[#FFF] text-secondary-foreground hover:bg-gray-100/80 fnt-[600] text-[#0073C6] underline"
+                onClick={form.reset}
+              >
                 Clear All Filter
               </button>
             </div>
@@ -110,6 +116,7 @@ const LeftSection = ({ propCgId }: Props) => {
             data={["1", "2", "3", "4", "5"]}
             searchable
             maxDropdownHeight={200}
+            {...getInputProps("unitType")}
           />
         )}
         {propCgId != projectprops.plot && (
@@ -122,6 +129,7 @@ const LeftSection = ({ propCgId }: Props) => {
             data={["1", "2", "3", "4", "5"]}
             searchable
             maxDropdownHeight={200}
+            {...getInputProps("tower")}
           />
         )}
 
@@ -136,6 +144,7 @@ const LeftSection = ({ propCgId }: Props) => {
               data={["1", "2", "3", "4", "5"]}
               searchable
               maxDropdownHeight={200}
+              {...getInputProps("block")}
             />
           )}
 
@@ -154,6 +163,7 @@ const LeftSection = ({ propCgId }: Props) => {
             data={["1", "2", "3", "4", "5"]}
             searchable
             maxDropdownHeight={200}
+            {...getInputProps("floor")}
           />
         )}
 
@@ -166,6 +176,7 @@ const LeftSection = ({ propCgId }: Props) => {
           data={["1", "2", "3", "4", "5"]}
           searchable
           maxDropdownHeight={200}
+          {...getInputProps("unit")}
         />
 
         <Select
@@ -181,6 +192,7 @@ const LeftSection = ({ propCgId }: Props) => {
           data={["1", "2", "3", "4", "5"]}
           searchable
           maxDropdownHeight={200}
+          {...getInputProps("facing")}
         />
 
         {propCgId != projectprops.plot && (
@@ -193,6 +205,7 @@ const LeftSection = ({ propCgId }: Props) => {
             data={["1", "2", "3", "4", "5"]}
             searchable
             maxDropdownHeight={200}
+            {...getInputProps("superArea")}
           />
         )}
 
@@ -206,6 +219,7 @@ const LeftSection = ({ propCgId }: Props) => {
             data={["1", "2", "3", "4", "5"]}
             searchable
             maxDropdownHeight={200}
+            {...getInputProps("carpetArea")}
           />
         )}
 
@@ -220,6 +234,7 @@ const LeftSection = ({ propCgId }: Props) => {
               data={["1", "2", "3", "4", "5"]}
               searchable
               maxDropdownHeight={200}
+              {...getInputProps("gardenArea")}
             />
           )}
 
@@ -234,6 +249,7 @@ const LeftSection = ({ propCgId }: Props) => {
               data={["1", "2", "3", "4", "5"]}
               searchable
               maxDropdownHeight={200}
+              {...getInputProps("terraceArea")}
             />
           )}
 
@@ -247,6 +263,7 @@ const LeftSection = ({ propCgId }: Props) => {
             data={["1", "2", "3", "4", "5"]}
             searchable
             maxDropdownHeight={200}
+            {...getInputProps("carParking")}
           />
         )}
 
@@ -260,6 +277,7 @@ const LeftSection = ({ propCgId }: Props) => {
             data={["1", "2", "3", "4", "5"]}
             searchable
             maxDropdownHeight={200}
+            {...getInputProps("openCoveredParking")}
           />
         )}
 
@@ -273,6 +291,7 @@ const LeftSection = ({ propCgId }: Props) => {
             data={["1", "2", "3", "4", "5"]}
             searchable
             maxDropdownHeight={200}
+            {...getInputProps("balcony")}
           />
         )}
 
@@ -286,6 +305,7 @@ const LeftSection = ({ propCgId }: Props) => {
             data={["1", "2", "3", "4", "5"]}
             searchable
             maxDropdownHeight={200}
+            {...getInputProps("bathroom")}
           />
         )}
 
@@ -300,6 +320,7 @@ const LeftSection = ({ propCgId }: Props) => {
               data={["1", "2", "3", "4", "5"]}
               searchable
               maxDropdownHeight={200}
+              {...getInputProps("balconySize")}
             />
           )}
 
@@ -313,6 +334,7 @@ const LeftSection = ({ propCgId }: Props) => {
             data={["1", "2", "3", "4", "5"]}
             searchable
             maxDropdownHeight={200}
+            {...getInputProps("plotArea")}
           />
         )}
 
@@ -326,6 +348,7 @@ const LeftSection = ({ propCgId }: Props) => {
             data={["1", "2", "3", "4", "5"]}
             searchable
             maxDropdownHeight={200}
+            {...getInputProps("lengthOfPlot")}
           />
         )}
 
@@ -339,6 +362,7 @@ const LeftSection = ({ propCgId }: Props) => {
             data={["1", "2", "3", "4", "5"]}
             searchable
             maxDropdownHeight={200}
+            {...getInputProps("breadthOfPlot")}
           />
         )}
       </div>
@@ -352,6 +376,7 @@ const LeftSection = ({ propCgId }: Props) => {
   );
 };
 const RightSection = ({ propCgId }: Props) => {
+  const { values, reset } = useFormContext();
   return (
     <div className="col-span-1 w-full max-w-[342px] ">
       <div className="bg-[#F4FBFF] p-6 rounded-lg shadow max-w-sm">

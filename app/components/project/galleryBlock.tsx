@@ -7,27 +7,20 @@ import ReactPlayer from "react-player";
 import Gallery from "./modals/Gallery";
 
 export default function GalleryBlock({
-  coverUrl,
-  projMasterPlanUrl,
-  projOtherImagesUrl,
+  coverImageUrl,
+  projectPlanUrl,
   projReviewVideoUrl,
   projWalkThroughVideoUrl,
+  otherImgUrl,
+  walkThrowVideoUrl,
 }: Media) {
   const [selectedMedia, setSelectedMedia] = useState<string | null>(
-    projMasterPlanUrl
+    projectPlanUrl
   );
 
-  // const images = [coverUrl, projMasterPlanUrl, projOtherImagesUrl];
-  const images = [
-    "https://images.unsplash.com/photo-1511884642898-4c92249e20b6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1703702756941-3504879af434?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw1fHx8ZW58MHx8fHx8",
-    "https://images.unsplash.com/photo-1683009680116-b5c04463551d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHx8",
-    "https://images.unsplash.com/photo-1683009680116-b5c04463551d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHx8",
-    "https://images.unsplash.com/photo-1683009680116-b5c04463551d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHx8",
-    "https://images.unsplash.com/photo-1683009680116-b5c04463551d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHx8",
-  ];
-  // const videos = [projReviewVideoUrl, projWalkThroughVideoUrl];
-  const videos =['https://getrightproperty-test-bucket.s3.ap-south-1.amazonaws.com/images/varify/project/252/walk-Through-video/video.mp4','https://getrightproperty-test-bucket.s3.ap-south-1.amazonaws.com/images/varify/project/252/walk-Through-video/video.mp4?v=0.458334283308651']
+  const images = [coverImageUrl, projectPlanUrl, ...otherImgUrl];
+
+  const videos = [walkThrowVideoUrl];
 
   const handleMediaClick = (media: string) => {
     setSelectedMedia(media);
@@ -66,7 +59,12 @@ export default function GalleryBlock({
                   className="w-full h-full object-cover rounded-[14px]"
                 />
               )}
-              <Gallery selectedMedia={selectedMedia} images={images} videos={videos} isImage={selectedMedia.includes(".mp4") ? false : true} />
+              <Gallery
+                selectedMedia={selectedMedia}
+                images={images}
+                videos={videos}
+                isImage={selectedMedia.includes(".mp4") ? false : true}
+              />
             </div>
           )}
         </div>
