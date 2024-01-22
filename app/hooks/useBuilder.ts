@@ -8,6 +8,9 @@ export default function useBuilder({ id }: Props) {
   const { data, isLoading } = useQuery({
     queryKey: [`builder/${id}`],
     queryFn: () => getBuilderDetails(id),
+    keepPreviousData: true,
+    staleTime: 30000,
+    cacheTime: 300000,
   });
   return { data, isLoading };
 }

@@ -1,6 +1,6 @@
 "use client";
-import { useDisclosure } from "@mantine/hooks";
-import { Drawer, Button } from "@mantine/core";
+import { useDisclosure, useMediaQuery } from "@mantine/hooks";
+import { Drawer, Button, em } from "@mantine/core";
 import { useAtom } from "jotai";
 import { AtomContent, readMoreAtom } from "@/app/store/drawer";
 import S from "@/app/styles/Drawer.module.css";
@@ -11,6 +11,7 @@ function ProjectDrawer() {
   const handleReadMoreClick = () => {
     setReadMore((prev) => ({ ...prev, expanded: !prev.expanded }));
   };
+  const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
 
   return (
     <>
@@ -26,7 +27,8 @@ function ProjectDrawer() {
         onClose={handleReadMoreClick}
         title="About Sarang By Sumadhura"
         position="right"
-        size={"50%"}
+        size={isMobile ? "80%" : "60%"}
+        // size={"50%"}
       >
         <h1 className="uppercase text-[24px] lg:text-[32px] font-[600] text-[#001F35]">
           about{" "}

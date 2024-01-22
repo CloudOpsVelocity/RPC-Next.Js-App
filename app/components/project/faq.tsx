@@ -1,9 +1,22 @@
 // Import necessary libraries/components
 "use client";
-import { Title, Container, Accordion, ThemeIcon, rem } from "@mantine/core";
+import {
+  Title,
+  Container,
+  Accordion,
+  ThemeIcon,
+  rem,
+  Textarea,
+  Button,
+} from "@mantine/core";
 import classes from "@/app/styles/FaqWithBg.module.css";
 import { FaPlus } from "react-icons/fa6";
 import { FAQ } from "@/app/validations/types/project";
+import { useState } from "react";
+import { addQna } from "@/app/utils/api/actions/Qna";
+import { useParams } from "next/navigation";
+import { useForm, yupResolver } from "@mantine/form";
+import { qnaSchema } from "@/app/validations/project";
 const placeholder =
   "It can’t help but hear a pin drop from over half a mile away, so it lives deep in the mountains where there aren’t many people or Pokémon.It was born from sludge on the ocean floor. In a sterile environment, the germs within its body can’t multiply, and it dies.It has no eyeballs, so it can’t see. It checks its surroundings via the ultrasonic waves it emits from its mouth.";
 
@@ -59,27 +72,62 @@ export function FaqWithBg({ data }: FaqWithBgProps) {
           </Accordion.Item>
         ))}
       </Accordion>
-      <div className="max-w-[100%] mt-[2%] mx-auto my-8   rounded-lg space-y-2">
-        <h2 className="font-[700] text-[#233333] text-[20px]  ">
-          Ask your question related to
-          <span className="!text-green-600"> Sarang by Sumadhura Project!</span>
-        </h2>
-
-        <div className=" gap-4">
-          <div className="flex-1">
-            <textarea
-              id="question"
-              className="font-[500] text-[#4D6677] text-[20px] w-full p-2 border border-gray-300 rounded-md focus:outline-none h-[160px] mb-[1%] "
-              placeholder="Type your question here"
-              defaultValue={""}
-              rows={3}
-            />
-          </div>
-          <button className="inline-flex items-center justify-center rounded-md text-[20px] font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 bg-[#0073C6] text-white">
-            Send
-          </button>
-        </div>
-      </div>
+      <AddQnaForm />
     </div>
   );
 }
+
+const AddQnaForm = () => {
+  const { slug } = useParams<{ slug: string }>();
+  const [status, setStatus] = useState<
+    "idle" | "pending" | "success" | "error"
+  >();
+  const { getInputProps, onSubmit, setErrors, reset } = useForm({
+    initialValues: {
+      question: "",
+    },
+    validate: yupResolver(qnaSchema),
+  });
+  const formSubmit = async (values: any) => {
+    setStatus("pending");
+    try {
+      await addQna({ question: values.question, projIdEnc: slug });
+      reset();
+      setStatus("success");
+    } catch (error: any) {
+      setErrors({ question: error.message });
+      setStatus("error");
+    }
+  };
+  return (
+    <form
+      className="max-w-[100%] mt-[2%] mx-auto my-8   rounded-lg space-y-2"
+      onSubmit={onSubmit(formSubmit)}
+    >
+      <h2 className="font-[700] text-[#233333] text-[20px]  ">
+        Ask your question related to
+        <span className="!text-green-600"> Sarang by Sumadhura Project!</span>
+      </h2>
+
+      <div className=" gap-4">
+        <div className="flex-1">
+          <Textarea
+            id="question"
+            name="question"
+            placeholder="Type your question here"
+            rows={5}
+            mb={"sm"}
+            {...getInputProps("question")}
+          />
+        </div>
+        <Button
+          type="submit"
+          loading={status === "pending"}
+          className="inline-flex items-center justify-center rounded-md text-[20px] font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 bg-[#0073C6] text-white"
+        >
+          Send
+        </Button>
+      </div>
+    </form>
+  );
+};
