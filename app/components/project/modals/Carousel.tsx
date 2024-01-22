@@ -34,7 +34,7 @@ function CarouselModal({ opened, setOpened }: CarouselModalProps) {
       >
         <div className="flex  mb-10 justify-center items-start gap-[45px] shrink-0">
           <MiddleSection />
-          <RightSection />
+          <RightSection propCgId={""} />
         </div>
         <Carousel
           loop

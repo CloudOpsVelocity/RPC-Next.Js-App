@@ -10,8 +10,10 @@ import Flex from "../molecules/Utils/Flex";
 import { ratingSchema } from "@/app/validations/project";
 import { addRating } from "@/app/utils/api/actions/ratings";
 import { useParams } from "next/navigation";
+import { useSession } from "next-auth/react";
 export default function Banner() {
   const [opened, { open, close }] = useDisclosure(false);
+  const { data: session } = useSession();
   return (
     <div className="bg-[#f0f9ff] w-[90%] px-8 py-12 mx-auto flex flex-col md:flex-row justify-between items-center">
       <div>
@@ -23,12 +25,14 @@ export default function Banner() {
           a problem or make a decision, offer something different or unexpected,
           and be clear and specific about what your review is about
         </p>
-        <button
-          onClick={open}
-          className="inline-flex items-center justify-center rounded-md text-sm  ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 bg-[#007ace] text-white font-semibold"
-        >
-          ADD RATINGS
-        </button>
+        {session && (
+          <button
+            onClick={open}
+            className="inline-flex items-center justify-center rounded-md text-sm  ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 bg-[#007ace] text-white font-semibold"
+          >
+            ADD RATINGS
+          </button>
+        )}
       </div>
       <div className="flex-shrink-0">
         <Image
@@ -39,7 +43,7 @@ export default function Banner() {
           height={200}
         />
       </div>
-      <AddRating opened={opened} close={close} />
+      {session && <AddRating opened={opened} close={close} />}
     </div>
   );
 }

@@ -16,6 +16,7 @@ import { Main } from "@/app/validations/types/project";
 import { useDisclosure } from "@mantine/hooks";
 import OverviewBanner from "../project/overviewBanner";
 import PropertyOverviewBanner from "./OverViewBanner";
+import { addShortList } from "@/app/utils/api/actions/shortlist";
 
 export default function PropertyOverView({
   maxPrice,
@@ -117,9 +118,12 @@ export default function PropertyOverView({
           />
         </div>
         <div className=" flex justify-start md:justify-end items-start md:items-end flex-col mt-[3%] md:mt-0 ">
-          <p className="text-[20px] cursor-pointer lg:text-[24px] text-[#0073C6] font-[600] whitespace-nowrap underline decoration-dashed ">
+          <button
+            // onClick={()=> addShortList(slug)}
+            className="text-[20px] cursor-pointer lg:text-[24px] text-[#0073C6] font-[600] whitespace-nowrap underline decoration-dashed "
+          >
             Add to Compare
-          </p>
+          </button>
           <p className="text-[20px] cursor-pointer lg:text-[24px] text-[#0073C6] font-[600] underline whitespace-nowrap decoration-dashed ">
             Add to Shortlist
           </p>

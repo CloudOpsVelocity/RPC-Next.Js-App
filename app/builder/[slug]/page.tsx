@@ -12,38 +12,34 @@ type Props = { params: { slug: string } };
 
 export default async function Page({ params: { slug } }: Props) {
   const data = await getBuilderDetails(slug);
+
   return (
     <div className="flex flex-col justify-start items-center w-full mt-[90px]  ">
-      {JSON.stringify(data)}
-      <Header />
-      <TopProfileBlock />
-      <div className="flex flex-col justify-start items-start w-[95%] ">
-        <ProjectDetails />
-        <ManagementBlock />
-        <ProjectCarousel
-          type="proj"
-          title="Newly launched PROJECT by"
-          projName="sumadhura"
-          content="See other newly launched projects by Sumadhura"
-        />
+      {data && (
+        <>
+          <Header />
+          <TopProfileBlock {...data.data} />
 
-        <ProjectCarousel
-          type="prop"
-          title="Ready to move listings by"
-          projName="sumadhura"
-          content="See other ready to move listings by Sumadhura"
-        />
+          <div className="flex flex-col justify-start items-start w-[95%] ">
+            <ProjectDetails {...data.data} />
+            <ManagementBlock {...data.data} />
 
-        <ProjectCarousel
-          type="prop"
-          title="Under construction listings by"
-          projName="sumadhura"
-          content="See other under-construction listings by Sumadhura"
-        />
+            {data.data.builderProjects.map((project) => (
+              <ProjectCarousel
+                key={project.projIdEnc}
+                type="proj"
+                title={`Newly launched PROJECT by ${data.data.companyName}`}
+                projName={project.projectName}
+                content={`See other newly launched projects by ${data.data.companyName}`}
+              />
+            ))}
 
-        <BuildersBlock />
-      </div>
-      <Footer />
+            <BuildersBlock data={data.data.otherBuilder} />
+          </div>
+
+          <Footer />
+        </>
+      )}
     </div>
   );
 }
