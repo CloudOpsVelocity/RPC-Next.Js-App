@@ -1,4 +1,5 @@
 "use client";
+import { specificationsList } from "@/app/images/commonSvgs";
 import { SpecificationList } from "@/app/validations/types/project";
 import React, { useState } from "react";
 import { MdOutlineDoorSliding } from "react-icons/md";
@@ -49,7 +50,7 @@ export default function Specifications({
                 }`}
                 onClick={() => handleSpecClick(index)}
               >
-                <MdOutlineDoorSliding size={20} /> {spec.specName}
+                {specificationsList?.get(spec?.specId)?.url} {spec.specName}
               </a>
             ))}
           </div>
@@ -58,7 +59,7 @@ export default function Specifications({
           {specs?.map((spec, index) => (
             <div key={index} id={spec.specName.toLowerCase()}>
               <h1 className="bg-gradient-to-tr from-blue-100 flex items-center gap-2 text-xl py-2 px-2 rounded-xl">
-                <MdOutlineDoorSliding size={22} />{" "}
+                {specificationsList?.get(spec?.specId)?.url}{" "}
                 <span className="">{spec.specName}</span>
               </h1>
               <div>
