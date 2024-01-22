@@ -49,9 +49,11 @@ export interface FAQ {
 export interface Media {
   coverUrl: string;
   projReviewVideoUrl: string;
-  projMasterPlanUrl: string;
   projWalkThroughVideoUrl: string;
   otherImgUrl: string[];
+  coverImageUrl: string;
+  projectPlanUrl: string;
+  walkThrowVideoUrl: string;
 }
 
 export interface PhaseList {

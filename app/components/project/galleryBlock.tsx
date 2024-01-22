@@ -7,19 +7,20 @@ import ReactPlayer from "react-player";
 import Gallery from "./modals/Gallery";
 
 export default function GalleryBlock({
-  coverUrl,
-  projMasterPlanUrl,
+  coverImageUrl,
+  projectPlanUrl,
   projReviewVideoUrl,
   projWalkThroughVideoUrl,
   otherImgUrl,
+  walkThrowVideoUrl,
 }: Media) {
   const [selectedMedia, setSelectedMedia] = useState<string | null>(
-    projMasterPlanUrl
+    projectPlanUrl
   );
 
-  const images = [coverUrl, projMasterPlanUrl, otherImgUrl];
+  const images = [coverImageUrl, projectPlanUrl, ...otherImgUrl];
 
-  const videos = [projReviewVideoUrl, projWalkThroughVideoUrl];
+  const videos = [walkThrowVideoUrl];
 
   const handleMediaClick = (media: string) => {
     setSelectedMedia(media);
