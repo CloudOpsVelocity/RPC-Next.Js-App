@@ -6,6 +6,7 @@ import { AtomContent, readMoreAtom } from "@/app/store/drawer";
 import S from "@/app/styles/Drawer.module.css";
 import { AmenityList } from "@/app/validations/types/project";
 import Flex from "../molecules/Utils/Flex";
+import { amenitiesGroupList } from "@/app/images/commonSvgs";
 function ProjectDrawer() {
   const [{ expanded, content, type }, setReadMore] = useAtom(readMoreAtom);
   const handleReadMoreClick = () => {
@@ -39,19 +40,25 @@ function ProjectDrawer() {
             <p>{content}</p>
           ) : (
             <div className="grid grid-cols-5 gap-5">
-              {content.map((item: AmenityList, index: number) => (
+              {content.map((item: AmenityList, index: number) => {
+                if(amenitiesGroupList.get(item.id) != null){
+                return(
+
                 <div
                   className="flex justify-center items-center gap-2 p-2.5 border shadow-[0px_4px_10px_0px_rgba(202,233,255,0.30)] rounded-[10px] border-solid border-[#92B2C8];
                   background: #fff"
                   key={item.id}
                 >
                   <span className="text-[#57a773] font-semibold">
-                    {index + 1}
+                    {amenitiesGroupList.get(item.id)}
                   </span>
                   <span className="text-[#6e798c]">{item.name}</span>
                 </div>
-              ))}
-            </div>
+                
+                )}
+              }
+              )}
+            </div>         
           )}
         </div>
         {/* Drawer content */}

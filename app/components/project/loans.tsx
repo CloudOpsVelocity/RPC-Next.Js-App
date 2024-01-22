@@ -14,19 +14,26 @@ export default function Loans({ data }: { data: Bank[] }) {
             Lorem ipsum dolor sit amet, consectetur adipi
           </p>
           <div className="mt-6 flex justify-start items-start flex-wrap w-full gap-[3%]">
-            {data?.map((item, index) => (
-              <Image
-                key={index}
-                src={"/bank.png"}
-                alt={item.constDesc}
-                width={100}
-                height={50}
-                className="mb-[3%]"
-              />
-            ))}
+            {data?.map((item, index) => {
+              console.log(item)
+              return(
+               
+                <p>{JSON.stringify(item)}</p>
+              )
+              
+            })}
           </div>
         </div>
       </div>
     </>
   );
 }
+
+ // <Image
+                //   key={index}
+                //   src={"/bank.png"}
+                //   alt={item.constDesc}
+                //   width={100}
+                //   height={50}
+                //   className="mb-[3%]"
+                // />

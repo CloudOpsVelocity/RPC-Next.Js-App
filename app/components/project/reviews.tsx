@@ -12,7 +12,6 @@ export default function Reviews() {
   const {data,isLoading} = useRatings({projectId:slug})
   return (
     <div className="bg-[#FFF] py-12 w-full ">
-      {JSON.stringify(data)}
       <div className="max-w-[1920px] mx-auto px-6">
         <h2 className="text-2xl font-semibold text-gray-800">
           CUSTOMER REVIEWS FOR <span className="text-green-500">SARANG</span>
@@ -30,24 +29,14 @@ export default function Reviews() {
             height={250}
             slidesToScroll={1}
           >
-            <Carousel.Slide>
-              <Review />
-            </Carousel.Slide>
-            <Carousel.Slide>
-              <Review />
-            </Carousel.Slide>
-            <Carousel.Slide>
-              <Review />
-            </Carousel.Slide>
-            <Carousel.Slide>
-              <Review />
-            </Carousel.Slide>
-            <Carousel.Slide>
-              <Review />
-            </Carousel.Slide>
-            <Carousel.Slide>
-              <Review />
-            </Carousel.Slide>
+            {data?.data.map((eachData:any,i:number)=>(
+              <Carousel.Slide key={i}>
+                {/* {JSON.stringify(eachData)} */}
+                <Review {...eachData} />
+              </Carousel.Slide>
+            ))}
+           
+           
           </Carousel>
         </div>
       </div>
@@ -55,7 +44,8 @@ export default function Reviews() {
   );
 }
 
-const Review = () => {
+
+const Review = ({rating, review}:any) => {
   return (
     <>
       <div className="max-w-lg mx-auto mt-[20px] bg-white rounded-lg p-4 relative shadow-md border-solid border-[#DCE6ED] border-[1px] ">
@@ -65,20 +55,16 @@ const Review = () => {
 
             <div className="flex justify-between items-center">
               <div>
-                <p className="text-[18px] text-[#000] font-[500] mt-[20px]">Ankita Soni</p>
+                <p className="text-[18px] text-[#000] font-[500] mt-[20px]">GRP User</p>
                 <p className="text-[14px] text-[#212C33] font-[500]">Owner</p>
               </div>
               <div className="text-right">
-                <Rating size={"sm"} value={5} fractions={2} readOnly />
+                <Rating size={"sm"} value={rating} readOnly />
                 <span className="text-xs text-gray-500">3 days ago</span>
               </div>
             </div>
             <p className="mt-2 text-[14px] text-[#3E3E3E] font-[400]">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ei
-              usmod tempor incididunt ut labore et dolore magna aliqua. Uten im
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Culpa,
-              asperiores tempora! Numquam doloremque sint error accusantium ex
-              tempore, aut blanditiis
+              {review}
             </p>
           </div>
         </div>
