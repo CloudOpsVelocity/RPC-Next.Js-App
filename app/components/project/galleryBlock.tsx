@@ -5,6 +5,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import ReactPlayer from "react-player";
 import Gallery from "./modals/Gallery";
+// import VideoThumbnail from "react-video-thumbnail";
 
 export default function GalleryBlock({
   coverImageUrl,
@@ -99,17 +100,15 @@ export default function GalleryBlock({
               <div
                 key={ind}
                 className="w-[110px] lg:w-[152px] h-[68px] lg:h-[94px] bg-[#dfdcdc] rounded-[5px] shadow-md mb-[4%]"
+                onClick={() => handleMediaClick(img as string)}
               >
-                <Image
+                {/* <VideoThumbnail
+                  videoUrl={img}
                   width={150}
                   height={100}
-                  src={
-                    "https://imagesrpc.s3.ap-south-1.amazonaws.com/images/varify/project/197/other/0.jpg"
-                  }
                   alt={`Image ${ind + 1}`}
                   className="w-full h-full object-cover rounded-[5px]"
-                  onClick={() => handleMediaClick(img as string)}
-                />
+                /> */}
               </div>
             ))}
           </div>
