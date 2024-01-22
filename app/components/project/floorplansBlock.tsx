@@ -85,14 +85,6 @@ export default function FloorplansBlock({ slug }: Props) {
     }
     return iconComponent;
   };
-  const { data: projectUnitsData, isLoading } = useQuery({
-    queryKey: [`/${propCgId}/${currentPhase}/${slug}`],
-    queryFn: () => getProjectUnits(slug, currentPhase, propCgId),
-    keepPreviousData: true,
-    staleTime: 30000,
-    cacheTime: 300000,
-  });
-  const selectedFloor = useAtomValue(selectedFloorAtom);
 
   const checkProperty = (key: any) => {
     if (
