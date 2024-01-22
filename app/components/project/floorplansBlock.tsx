@@ -24,18 +24,16 @@ import { PhaseList } from "@/app/validations/types/project";
 import FloorPlanModal from "./modals/FloorPlan";
 import { useQuery } from "react-query";
 import { getProjectUnits } from "@/app/utils/api/project";
+import usePhaseWiseOverview from "@/app/hooks/usePhaseWiseOverview";
 
 const dummyProptypesList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 type Props = {
   data: PhaseList[];
   slug: string;
 };
-export default function FloorplansBlock({ data, slug }: Props) {
-  const phases = [
-    { phaseId: 554, phaseName: "Phase 1" },
-    { phaseId: 555, phaseName: "Phase 2" },
-    { phaseId: 559, phaseName: "Phase 3" },
-  ];
+export default function FloorplansBlock({ slug }: Props) {
+  const { phaseList, PhaseOverview } = usePhaseWiseOverview();
+
   const allKeys = [35, 33, 31, 34, 32];
   const [propCgId, setPropCgId] = useState(35);
   const [floorPlanType, setFloorPlanType] = useState("type");
@@ -94,11 +92,11 @@ export default function FloorplansBlock({ data, slug }: Props) {
           Select one of the phase to see project details
         </p>
         <div className=" flex justify-start items-start gap-[10px] flex-wrap ">
-          {phases?.map((each, index) => {
+          {phaseList?.map((each: any, index: any) => {
             return (
               <Button
                 key={index}
-                title={`Phase ${each.phaseName}`}
+                title={`${each.phaseName}`}
                 onChange={() => setCurrentPhase(each.phaseId)}
                 buttonClass={` mb-[5px] text-[18px] lg:text-[20px] bg-[#ECF7FF] p-[8px] xl:p-[16px]  whitespace-nowrap text-[#000] rounded-[8px]${
                   currentPhase == each.phaseId
@@ -206,7 +204,7 @@ export default function FloorplansBlock({ data, slug }: Props) {
 
         {floorPlanType == "bhk" && propCgId != projectprops.plot && (
           <div className="w-[50%]  h-[456px] lg:h-[570px] border-solid overflow-auto ">
-            <ByBhkBlock propCgId={propCgId} />
+            <ByBhkBlock propCgId={propCgId} data={projectUnitsData} />
           </div>
         )}
 

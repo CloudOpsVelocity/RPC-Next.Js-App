@@ -14,24 +14,15 @@ import React, { useState } from "react";
 import { PhaseList } from "@/app/validations/types/project";
 import { useQuery } from "react-query";
 import { getProjectWiseOverView } from "@/app/utils/api/project";
+import usePhaseWiseOverview from "@/app/hooks/usePhaseWiseOverview";
+import { formatDate } from "@/app/utils/date";
 type Props = {
   data: PhaseList[];
   slug: string;
 };
-export default function ProjectDetailsP({ data, slug }: Props) {
-  const phases = [
-    { phaseId: 554, phaseName: "Phase 1" },
-    { phaseId: 555, phaseName: "Phase 2" },
-    { phaseId: 559, phaseName: "Phase 3" },
-  ];
-  const [currentPhase, setCurrentPhase] = useState(554);
-  const handlePhaseChange = (phaseId: number) => {
-    setCurrentPhase(phaseId);
-  };
-  const { data: PhaseOverview } = useQuery({
-    queryKey: [`phases`],
-    queryFn: () => getProjectWiseOverView(slug),
-  });
+export default function ProjectDetailsP({ slug }: Props) {
+  const { PhaseOverview, currentPhase, handlePhaseChange } =
+    usePhaseWiseOverview();
   const selectedPhase = PhaseOverview?.find(
     (phase: any) => phase.phaseId === currentPhase
   );
@@ -52,7 +43,7 @@ export default function ProjectDetailsP({ data, slug }: Props) {
           Select one of the phase to see project details
         </p>
         <div className=" flex justify-start items-start flex-wrap gap-[10px] ">
-          {phases?.map((phase, index) => (
+          {PhaseOverview?.map((phase: any, index: any) => (
             <Button
               key={phase.phaseId}
               title={phase.phaseName}
@@ -74,14 +65,14 @@ export default function ProjectDetailsP({ data, slug }: Props) {
               key="launchDate"
               icon={<EndDate />}
               title="Launch Date"
-              value={selectedPhase.launchDate}
+              value={formatDate(selectedPhase.launchDate)}
               className="mr-[3%] mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]"
             />
             <ProjBasicDetails
               key="possessionDate"
               icon={<StartDate />}
               title="Possession Date"
-              value={selectedPhase.possassionDate}
+              value={formatDate(selectedPhase.possassionDate)}
               className="mr-[3%] mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]"
             />
             <ProjBasicDetails

@@ -20,6 +20,8 @@ import { useDisclosure } from "@mantine/hooks";
 import Ratings from "./Ratings";
 import ShortList from "./actions/shortList";
 import CompareList from "./actions/compareList";
+import { formatDate } from "@/app/utils/date";
+import { start } from "repl";
 
 export default function Overview({
   maxPrice,
@@ -110,14 +112,14 @@ export default function Overview({
             key="startDate"
             icon={<StartDate />}
             title="Start Date"
-            value={startDate}
+            value={formatDate(startDate)}
             className="mr-[5%] pt-[2%] mb-[3%] "
           />
           <ProjBasicDetails
             key="endDate"
             icon={<EndDate />}
             title="End Date"
-            value={endDate}
+            value={formatDate(endDate)}
             className="mr-[5%] pt-[2%] mb-[3%] "
           />
         </div>
