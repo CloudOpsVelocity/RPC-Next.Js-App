@@ -58,7 +58,12 @@ export default function GalleryBlock({
                   className="w-full h-full object-cover rounded-[14px]"
                 />
               )}
-              <Gallery selectedMedia={selectedMedia} images={images} />
+              <Gallery
+                selectedMedia={selectedMedia}
+                images={images}
+                videos={videos}
+                isImage={selectedMedia.includes(".mp4") ? false : true}
+              />
             </div>
           )}
         </div>

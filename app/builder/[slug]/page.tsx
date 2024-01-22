@@ -24,17 +24,17 @@ export default async function Page({ params: { slug } }: Props) {
             <ProjectDetails {...data.data} />
             <ManagementBlock {...data.data} />
 
-            {data.data.builderProjects.map((project) => (
+            {data?.data?.builderProjects.map((project) => (
               <ProjectCarousel
                 key={project.projIdEnc}
                 type="proj"
-                title={`Newly launched PROJECT by ${data.data.companyName}`}
+                title={`Newly launched PROJECT by ${data?.data?.companyName}`}
                 projName={project.projectName}
-                content={`See other newly launched projects by ${data.data.companyName}`}
+                content={`See other newly launched projects by ${data?.data?.companyName}`}
               />
             ))}
 
-            <BuildersBlock data={data.data.otherBuilder} />
+            <BuildersBlock data={data?.data?.otherBuilder} />
           </div>
 
           <Footer />
