@@ -99,7 +99,7 @@ export default function GalleryBlock({
             {videos?.map((img, ind) => (
               <div
                 key={ind}
-                className="w-[110px] lg:w-[152px] h-[68px] lg:h-[94px] bg-[#dfdcdc] rounded-[5px] shadow-md mb-[4%]"
+                className="w-[110px] lg:w-[152px] h-[68px] lg:h-[94px] bg-[#dfdcdc] rounded-[5px] shadow-md mb-[4%] cursor-pointer"
                 onClick={() => handleMediaClick(img as string)}
               >
                 {/* <VideoThumbnail

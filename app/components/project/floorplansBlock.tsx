@@ -31,8 +31,8 @@ type Props = {
   data: PhaseList[];
   slug: string;
 };
-export default function FloorplansBlock({ data, slug }: Props) {
-  const { phaseList } = usePhaseWiseOverview();
+export default function FloorplansBlock({ slug }: Props) {
+  const { phaseList, PhaseOverview } = usePhaseWiseOverview();
 
   const allKeys = [35, 33, 31, 34, 32];
   const [propCgId, setPropCgId] = useState(35);
@@ -204,7 +204,7 @@ export default function FloorplansBlock({ data, slug }: Props) {
 
         {floorPlanType == "bhk" && propCgId != projectprops.plot && (
           <div className="w-[50%]  h-[456px] lg:h-[570px] border-solid overflow-auto ">
-            <ByBhkBlock propCgId={propCgId} />
+            <ByBhkBlock propCgId={propCgId} data={projectUnitsData} />
           </div>
         )}
 
