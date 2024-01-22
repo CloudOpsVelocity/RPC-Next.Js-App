@@ -4,7 +4,6 @@ import Image from "next/image";
 import React from "react";
 
 export default function Loans({ data }: { data: Bank[] }) {
-  
   return (
     <>
       <div className="bg-white py-8 w-[90%] mx-auto">
@@ -17,17 +16,17 @@ export default function Loans({ data }: { data: Bank[] }) {
           </p>
           <div className="mt-6 flex justify-start items-center flex-wrap w-full gap-[3%]">
             {data?.map((item, index) => {
-              if(item.bankid != undefined && item.bankid != null){
-              return(
-                <Image
-                  key={index}
-                  src={BankDetailsList?.get(item.bankid)?.url}
-                  alt={item.constDesc}
-                  width={100}
-                  height={50}
-                  className=""
-                />
-              )
+              if (item.bankid != undefined && item.bankid != null) {
+                return (
+                  <Image
+                    key={index}
+                    src={BankDetailsList?.get(item.bankid)?.url as string}
+                    alt={item.constDesc}
+                    width={100}
+                    height={50}
+                    className=""
+                  />
+                );
               }
             })}
           </div>
@@ -37,11 +36,11 @@ export default function Loans({ data }: { data: Bank[] }) {
   );
 }
 
- // <Image
-                //   key={index}
-                //   src={"/bank.png"}
-                //   alt={item.constDesc}
-                //   width={100}
-                //   height={50}
-                //   className="mb-[3%]"
-                // />
+// <Image
+//   key={index}
+//   src={"/bank.png"}
+//   alt={item.constDesc}
+//   width={100}
+//   height={50}
+//   className="mb-[3%]"
+// />

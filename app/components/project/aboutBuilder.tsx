@@ -7,7 +7,7 @@ import useBuilder from "@/app/hooks/useBuilder";
 type Props = {};
 
 export default function AboutBuilder({}: Props) {
-  const { data, isLoading } = useBuilder({ id: 1079 });
+  const { data, isLoading } = useBuilder({ id: 1079, y: "N" });
   return (
     <div className="w-[90%] mt-[5%] mb-[5%]">
       <div className="w-full justify-between items-center ">
@@ -20,7 +20,7 @@ export default function AboutBuilder({}: Props) {
         <div className="rounded-[20px] mt-[1%] flex justify-between items-center bg-[#FFF] shadow-md w-[100%] mb-[2%] lg:w-[50%] p-[1%] ">
           <div className="w-[30%] border-solid border-[#92B2C8] border-r-[1px]">
             <p className=" text-[#202020] text-[20px] lg:text-[24px] font-[600]">
-              05
+              {data?.data?.newProject}
             </p>
             <p className=" text-[#148B16] text-[16px] lg:text-[20px] font-[700]">
               New Launch Projects
@@ -29,7 +29,7 @@ export default function AboutBuilder({}: Props) {
 
           <div className="w-[30%] border-solid border-[#92B2C8] border-r-[1px]">
             <p className=" text-[#202020] text-[20px] lg:text-[24px] font-[600]">
-              15
+              {data?.data?.onGoingProject}
             </p>
             <p className=" text-[#0073C6] text-[16px] lg:text-[20px] font-[700]">
               New Launch Projects
@@ -38,7 +38,7 @@ export default function AboutBuilder({}: Props) {
 
           <div className="w-[30%] ">
             <p className=" text-[#202020] text-[20px] lg:text-[24px] font-[600]">
-              35
+              {data?.data?.completedProject}
             </p>
             <p className=" text-[#E3AC00] text-[16px] lg:text-[20px] font-[700]">
               New Launch Projects

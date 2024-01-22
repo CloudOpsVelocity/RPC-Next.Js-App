@@ -16,6 +16,9 @@ export interface Data {
   companyStartDate: string;
   otherBuilder: OtherBuilder[];
   builderProjects: BuilderProject[];
+  newProject: number;
+  onGoingProject: number;
+  completedProject: number;
 }
 
 export interface BuilderProject {

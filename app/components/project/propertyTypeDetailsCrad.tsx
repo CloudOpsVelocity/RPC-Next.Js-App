@@ -1,7 +1,13 @@
 import React from "react";
 import { FlooringIcon, FloorsIcon, TowerIcon } from "../../images/commonSvgs";
 import { projectprops, propertyDetailsTypes } from "../../data/projectDetails";
-import { apartmentCardImg, plotCardImg, rowhouseCardImg, villaCardImg, villamentCardImg } from "@/app/images/commonImages";
+import {
+  apartmentCardImg,
+  plotCardImg,
+  rowhouseCardImg,
+  villaCardImg,
+  villamentCardImg,
+} from "@/app/images/commonImages";
 import Image from "next/image";
 
 type Props = {
@@ -10,45 +16,45 @@ type Props = {
 };
 
 export default function PropertyTypeDetailsCrad({ cg, propertyType }: Props) {
-  const propName = (key:string, type?: string) => {
-    switch(key){
+  const propName = (key: string, type?: string) => {
+    switch (key) {
       case "apt":
-        if(type == "name"){
+        if (type == "name") {
           return "Apartment";
-        }else{
+        } else {
           return apartmentCardImg;
         }
         break;
       case "plot":
-        if(type == "name"){
+        if (type == "name") {
           return "Plot";
-        }else{
+        } else {
           return plotCardImg;
         }
-        break;  
+        break;
       case "rowHouse":
-        if(type == "name"){
+        if (type == "name") {
           return "Rowhouse";
-        }else{
+        } else {
           return rowhouseCardImg;
         }
         break;
-      case "villa": 
-        if(type == "name"){
+      case "villa":
+        if (type == "name") {
           return "Villa";
-        }else{
+        } else {
           return villaCardImg;
         }
         break;
       case "villament":
-        if(type == "name"){
+        if (type == "name") {
           return "Villament";
-        }else{
+        } else {
           return villamentCardImg;
         }
         break;
     }
-  }
+  };
   return (
     <div className="flex flex-col justify-start items-start w-[100%] max-w-[359px] lg:max-w-[510px] rounded-[24px] shadow-md pr-[2%] pl-[1%] mt-[70px] bg-gradient-to-l from-[#EFF5FF] /50 to-[#F2FAFF]/50 mb-[2%]">
       <div className="flex justify-between items-start w-full">
@@ -56,7 +62,7 @@ export default function PropertyTypeDetailsCrad({ cg, propertyType }: Props) {
           <Image
             width={90}
             height={90}
-            src={propName(propertyType, "img")}
+            src={propName(propertyType, "img") as string}
             alt="Preview"
             className="w-full h-full object-cover rounded-[14px]"
           />
@@ -93,7 +99,7 @@ export default function PropertyTypeDetailsCrad({ cg, propertyType }: Props) {
           )}
           <p className="text-[14px] lg:text-[20px] text-[#2A4C70] font-[500] flex justify-start items-start  ">
             <FlooringIcon className="w-[16px] h-[16px] lg:w-[24px] lg:h-[24px]" />
-            <span className="mr-[6px] ml-[6px]">{cg?.units} </span> Units
+            <span className="mr-[6px] ml-[6px]">{cg?.unitCount} </span> Units
           </p>
           {propertyType === "apartment" || propertyType === "villament" ? (
             <p className="text-[14px] lg:text-[20px] text-[#2A4C70] font-[500] flex justify-start items-start  ">

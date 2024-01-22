@@ -36,7 +36,7 @@ export interface AmenityList {
 }
 
 export interface Bank {
-  cid: number;
+  bankid: number;
   constDesc: string;
 }
 

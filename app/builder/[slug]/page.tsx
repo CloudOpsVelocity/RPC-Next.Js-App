@@ -11,7 +11,7 @@ import { getBuilderDetails } from "@/app/utils/api/builder";
 type Props = { params: { slug: string } };
 
 export default async function Page({ params: { slug } }: Props) {
-  const data = await getBuilderDetails(slug);
+  const data = await getBuilderDetails(slug, "Y");
 
   return (
     <div className="flex flex-col justify-start items-center w-full mt-[90px]  ">
