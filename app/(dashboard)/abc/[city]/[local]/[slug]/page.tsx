@@ -1,6 +1,4 @@
 import React from "react";
-import Footer from "@/app/components/layouts/primary/footer";
-import Header from "@/app/components/layouts/primary/header";
 import FloorplansBlock from "@/app/components/project/floorplansBlock";
 import AboutBuilder from "@/app/components/project/aboutBuilder";
 import GalleryBlock from "@/app/components/project/galleryBlock";

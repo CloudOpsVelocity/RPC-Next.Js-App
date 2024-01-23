@@ -2,7 +2,6 @@
 import {
   propertyDetailsTypes,
   projectprops,
-  floorplanTypes,
 } from "../../data/projectDetails";
 import Button from "../../elements/button";
 import React, { useState } from "react";
@@ -15,7 +14,6 @@ import {
   ByTypeSvg,
   ByUnitSvg,
   ByBhkSvg,
-  PopupOpenSvg,
 } from "../../images/commonSvgs";
 import FloorplanDetailsCard from "./floorplanDetailsCard";
 import Byunitblock from "./byunitblock";
@@ -26,7 +24,6 @@ import { useQuery } from "react-query";
 import { getProjectUnits } from "@/app/utils/api/project";
 import usePhaseWiseOverview from "@/app/hooks/usePhaseWiseOverview";
 import { useAtomValue } from "jotai";
-import { floorImageATom } from "@/app/store/image";
 import { selectedFloorAtom } from "@/app/store/floor";
 import Loading from "../atoms/Loader";
 

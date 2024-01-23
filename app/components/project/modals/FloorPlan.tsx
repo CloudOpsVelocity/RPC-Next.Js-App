@@ -1,10 +1,8 @@
 import { useDisclosure } from "@mantine/hooks";
 import { Modal, Select } from "@mantine/core";
-import { LenseIcon, PopupOpenSvg } from "@/app/images/commonSvgs";
+import { LenseIcon, PopupOpenSvg, emptyFilesIcon } from "@/app/images/commonSvgs";
 import S from "@/app/styles/Floorplan.module.css";
-import ButtonLink from "@/app/elements/link";
 import Button from "@/app/elements/button";
-import Grid from "../../molecules/Utils/Grid";
 import Image from "next/image";
 import CarouselModal from "./Carousel";
 import { useState } from "react";
@@ -15,7 +13,7 @@ import {
   useFormContext,
 } from "@/app/context/floorplanContext";
 import { useAtom, useAtomValue } from "jotai";
-import { selectedFloorAtom } from "@/app/store/floor";
+import { floorPlansArray, selectedFloorAtom } from "@/app/store/floor";
 
 type Props = {
   propCgId: any;
@@ -36,7 +34,6 @@ function FloorPlanModal({ propCgId, data }: Props) {
         <p className="text-[12px] lg:text-[14px] font-[600] text-[#0073C6] underline ">
           Click on image to open floor plan details
         </p>
-        <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] " />
       </div>
       <Modal
         opened={opened}
@@ -83,23 +80,21 @@ function FloorPlanModal({ propCgId, data }: Props) {
               )}
 
               <button
-                className="flex items-center rounded-[10px] shadow-md border-solid border-[1px] border-[#a5bfd8] px-2.5 py-0.5 w-fit  font-[500] text-[18px] lg:text-[20px] transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-[#FFF] text-secondary-foreground hover:bg-gray-100/80 fnt-[600] text-[#0073C6] underline"
+                className="flex items-center px-2.5 border-none py-0.5 w-fit font-[500] text-[18px] lg:text-[20px] transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-[#FFF] text-secondary-foreground hover:bg-gray-100/80 fnt-[600] text-[#0073C6] underline"
                 onClick={() => form.reset()}
               >
                 Clear All Filter
               </button>
             </div>
-            <Grid>
+            <div className="flex justify-between items-start gap-[45px] w-full">
               <LeftSection propCgId={propCgId} data={data} />
-              <div className="flex rounded-[14px] shadow-md w-full h-[501px] justify-between items-start gap-[45px] shrink-0">
-                {selectedFloor && (
-                  <>
-                    <MiddleSection />
-                    <RightSection propCgId={propCgId} data={data} />
-                  </>
-                )}
-              </div>
-            </Grid>
+              {selectedFloor && (
+                <MiddleSection />
+              )}
+              {selectedFloor && (
+                <RightSection propCgId={propCgId} data={data} />
+              )}
+            </div>
           </div>
         </>
       </Modal>
@@ -110,6 +105,7 @@ function FloorPlanModal({ propCgId, data }: Props) {
 export default FloorPlanModal;
 
 const LeftSection = ({ propCgId, data }: Props) => {
+  const [,setFloorsArray] = useAtom(floorPlansArray)
   const [, setFloor] = useAtom(selectedFloorAtom);
   const { getInputProps, values } = useFormContext();
   const getOptions = (property: string): string[] => {
@@ -123,12 +119,11 @@ const LeftSection = ({ propCgId, data }: Props) => {
         (key) => !values[key] || String(item[key]) === values[key]
       );
     });
-    setFloor(filteredData[0]);
-    // Log the filtered data for demonstration purposes
-    console.log(filteredData);
+    setFloor(filteredData[0])
+    setFloorsArray(filteredData)
   };
   return (
-    <div className="col-span-1 w-full max-w-[393px] ">
+    <div className="col-span-1 w-[30%] ">
       <div className="w-[100%] flex justify-between items-start flex-wrap gap-[5%]">
         {propCgId != projectprops.plot && (
           <Select
@@ -403,8 +398,7 @@ const RightSection = ({ propCgId }: Props) => {
   const data = useAtomValue(selectedFloorAtom);
   console.log(data);
   return (
-    <div className="col-span-1 w-full max-w-[342px] ">
-      <div className="bg-[#F4FBFF] p-6 rounded-lg shadow max-w-sm">
+      <div className="bg-[#F4FBFF] p-6 rounded-lg w-[20%] shadow">
         <div className="space-y-4">
           {propCgId != projectprops.plot && (
             <div className="flex items-center space-x-3">
@@ -423,8 +417,8 @@ const RightSection = ({ propCgId }: Props) => {
                 <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
                 <polyline points="9 22 9 12 15 12 15 22" />
               </svg>
-              <span className="font-medium">Unit Type</span>
-              <span>{data.bhkName}</span>
+              <p className="font-medium">Unit Type <span> {data.bhkName}</span></p>
+              
             </div>
           )}
 
@@ -454,8 +448,7 @@ const RightSection = ({ propCgId }: Props) => {
                 <path d="M8 10h.01" />
                 <path d="M8 14h.01" />
               </svg>
-              <span className="font-medium">Tower</span>
-              <span>{data.towerName}</span>
+              <p className="font-medium">Tower <span> {data.towerName}</span></p>
             </div>
           )}
 
@@ -477,8 +470,7 @@ const RightSection = ({ propCgId }: Props) => {
                   <rect width={7} height={7} x={14} y={3} rx={1} />
                   <path d="M10 21V8a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1H3" />
                 </svg>
-                <span className="font-medium">Block</span>
-                <span>{data.block}</span>
+                <p className="font-medium">Block <span> {data.block}</span></p>
               </div>
             )}
 
@@ -499,13 +491,13 @@ const RightSection = ({ propCgId }: Props) => {
                 <line x1={6} x2={6} y1={4} y2={20} />
                 <polygon points="10,4 20,12 10,20" />
               </svg>
-              <span className="font-medium">{`${
+              <p className="font-medium">{`${
                 propCgId == projectprops.rowHouse ||
                 propCgId == projectprops.villa
                   ? "Elevation"
                   : "Floor"
-              }`}</span>
-              <span>{data.floor}</span>
+              }`} <span> {data.floor}</span> </p>
+              
             </div>
           )}
 
@@ -528,8 +520,7 @@ const RightSection = ({ propCgId }: Props) => {
               <path d="M10 12v.01" />
               <path d="M13 4.562v16.157a1 1 0 0 1-1.242.97L5 20V5.562a2 2 0 0 1 1.515-1.94l4-1A2 2 0 0 1 13 4.561Z" />
             </svg>
-            <span className="font-medium">Unit Number</span>
-            <span>{data.unitNumber}</span>
+            <p className="font-medium">Unit Number <span> {data.unitNumber}</span></p>
           </div>
 
           <div className="flex items-center space-x-3">
@@ -548,10 +539,9 @@ const RightSection = ({ propCgId }: Props) => {
               <circle cx={12} cy={12} r={10} />
               <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
             </svg>
-            <span className="font-medium">{`${
+            <p className="font-medium">{`${
               propCgId == projectprops.plot ? "Plot Facing" : "Facing"
-            } `}</span>
-            <span>{data.facingName}</span>
+            } `} <span> {data.facingName}</span></p>
           </div>
 
           {propCgId != projectprops.plot && (
@@ -573,8 +563,7 @@ const RightSection = ({ propCgId }: Props) => {
                 <path d="M21 7.8V3m0 0h-4.8M21 3l-6 6" />
                 <path d="M3 7.8V3m0 0h4.8M3 3l6 6" />
               </svg>
-              <span className="font-medium">Super Builtup Area</span>
-              <span>{data.superBuildUparea} sq.ft</span>
+              <p className="font-medium">Super Builtup Area <span> {data.superBuildUparea} sq.ft</span></p>
             </div>
           )}
 
@@ -598,8 +587,7 @@ const RightSection = ({ propCgId }: Props) => {
                 <path d="M20 18v2" />
                 <path d="M12 4v9" />
               </svg>
-              <span className="font-medium">Carpet Area</span>
-              <span>{data.caretarea} sq.ft</span>
+              <p className="font-medium">Carpet Area <span> {data.caretarea} sq.ft</span></p>
             </div>
           )}
 
@@ -622,8 +610,8 @@ const RightSection = ({ propCgId }: Props) => {
                 <path d="M9 17h6" />
                 <circle cx={17} cy={17} r={2} />
               </svg>
-              <span className="font-medium">Car Parking</span>
-              <span>{data.noOfCarParking}</span>
+              <p className="font-medium">Car Parking <span> {data.noOfCarParking}</span></p>
+              
             </div>
           )}
 
@@ -644,8 +632,8 @@ const RightSection = ({ propCgId }: Props) => {
                 <rect width={18} height={18} x={3} y={3} rx={2} />
                 <path d="M9 17V7h4a3 3 0 0 1 0 6H9" />
               </svg>
-              <span className="font-medium">Open/Covered Parking</span>
-              <span>{data.parkingType} Parking</span>
+              <p className="font-medium">Open/Covered Parking <span>{data.parkingType} Parking</span></p>
+              
             </div>
           )}
 
@@ -675,8 +663,8 @@ const RightSection = ({ propCgId }: Props) => {
                 <path d="M8 10h.01" />
                 <path d="M8 14h.01" />
               </svg>
-              <span className="font-medium">Balconies</span>
-              <span>{data.totalNumberOfBalcony}</span>
+              <p className="font-medium">Balconies <span> {data.totalNumberOfBalcony}</span></p>
+              
             </div>
           )}
 
@@ -700,8 +688,7 @@ const RightSection = ({ propCgId }: Props) => {
                 <line x1={7} x2={7} y1={19} y2={21} />
                 <line x1={17} x2={17} y1={19} y2={21} />
               </svg>
-              <span className="font-medium">Bathroom</span>
-              <span>{data.totalNumberofBathroom}</span>
+              <p className="font-medium">Bathroom <span> {data.totalNumberofBathroom}</span></p>
             </div>
           )}
 
@@ -719,8 +706,7 @@ const RightSection = ({ propCgId }: Props) => {
                   fill="#4D6677"
                 />
               </svg>
-              <span className="font-medium">Plot Area</span>
-              <span>02</span>
+              <p className="font-medium">Plot Area <span> 02</span></p>
             </div>
           )}
 
@@ -738,8 +724,7 @@ const RightSection = ({ propCgId }: Props) => {
                   fill="#4D6677"
                 />
               </svg>
-              <span className="font-medium">Length of Plot</span>
-              <span>02</span>
+              <p className="font-medium">Length of Plot <span> 02</span></p>
             </div>
           )}
 
@@ -757,112 +742,108 @@ const RightSection = ({ propCgId }: Props) => {
                   fill="#4D6677"
                 />
               </svg>
-              <span className="font-medium">Breadth of Plot</span>
-              <span>02</span>
+              <p className="font-medium">Breadth of Plot <span >02</span></p>
             </div>
           )}
         </div>
       </div>
-    </div>
   );
 };
 
 const MiddleSection = () => {
   const data = useAtomValue(selectedFloorAtom);
 
+  const floorsArray = useAtomValue(floorPlansArray)
+  console.log(floorsArray, data)
   const [opened, setOpened] = useState(false);
+  const [currentImg, setCurrentImg] = useState(0);
   return (
-    <div className="col-span-1 w-full max-w-[686px]">
-      <div className="relative">
-        <p className="text-[#005DA0] text-[16px] font-[500] ">
+    <div className="flex flex-col justify-center items-start shrink-0 w-[40%]">
+        <p className="text-[#005DA0] w-full text-right mb-[1%] text-[16px] font-[500] ">
           Sarang by sumadhura/2bhk/tower 1/ 04/north/1124 sq.ft
         </p>
-        <img
-          src={data?.floorPlanUrl}
-          alt="Floor Plan"
-          className="border w-full min-w-[686px]"
-          width={800}
-          height={400}
-          // style={{ aspectRatio: "800 / 400", objectFit: "cover" }}
-        />
-        <CarouselModal opened={opened} setOpened={setOpened} />
-      </div>
-      <div className="flex justify-between items-center mt-4">
-        <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width={24}
-            height={24}
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={2}
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="text-gray-600"
-          >
-            <path d="m15 18-6-6 6-6" />
-          </svg>
-        </button>
-        <div className="grid grid-cols-5 gap-2">
-          <img
-            src="https://imagesrpc.s3.ap-south-1.amazonaws.com/images/varify/project/197/cover/cover.jpg"
-            alt="Floor Plan Thumbnail"
-            className="border"
-            width={100}
-            height={50}
-            style={{ aspectRatio: "100 / 50", objectFit: "cover" }}
-          />
-          <img
-            src="https://imagesrpc.s3.ap-south-1.amazonaws.com/images/varify/project/197/cover/cover.jpg"
-            alt="Floor Plan Thumbnail"
-            className="border"
-            width={100}
-            height={50}
-            style={{ aspectRatio: "100 / 50", objectFit: "cover" }}
-          />
-          <img
-            src="https://imagesrpc.s3.ap-south-1.amazonaws.com/images/varify/project/197/cover/cover.jpg"
-            alt="Floor Plan Thumbnail"
-            className="border"
-            width={100}
-            height={50}
-            style={{ aspectRatio: "100 / 50", objectFit: "cover" }}
-          />
-          <img
-            src="https://imagesrpc.s3.ap-south-1.amazonaws.com/images/varify/project/197/cover/cover.jpg"
-            alt="Floor Plan Thumbnail"
-            className="border"
-            width={100}
-            height={50}
-            style={{ aspectRatio: "100 / 50", objectFit: "cover" }}
-          />
-          <img
-            src="https://imagesrpc.s3.ap-south-1.amazonaws.com/images/varify/project/197/cover/cover.jpg"
-            alt="Floor Plan Thumbnail"
-            className="border"
-            width={100}
-            height={50}
-            style={{ aspectRatio: "100 / 50", objectFit: "cover" }}
-          />
+        <div className="relative shadow-md h-[401px] rounded-[14px] border-solid border-[1px] border-[#EFEFEF] w-full flex justify-center items-center ">
+          {floorsArray != undefined && floorsArray != null && floorsArray.length > 0 ?
+            <Image
+              src={floorsArray[currentImg].floorPlanUrl}
+              alt="Floor Plan"
+              height={300}
+              width={800}
+              className="border-none w-full"
+              style={{ aspectRatio: "800 / 400", objectFit: "cover" }}
+            />
+          :
+          (
+            <div>
+              {emptyFilesIcon}
+              <p>No Matching Results Found !</p>
+            </div>
+          )
+          }
+
+          {floorsArray != undefined && floorsArray != null && floorsArray.length > 0 &&
+            <PopupOpenSvg className="absolute bottom-0 right-0 w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] m-[1%] " />
+          }
+          
         </div>
-        <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width={24}
-            height={24}
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={2}
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="text-gray-600"
-          >
-            <path d="m9 18 6-6-6-6" />
-          </svg>
-        </button>
-      </div>
+        
+        <CarouselModal opened={opened} setOpened={setOpened} />
+        
+      {floorsArray != undefined && floorsArray != null && floorsArray.length > 1 &&
+        <div className="flex justify-between items-center mt-4 w-full">
+          <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width={24}
+              height={24}
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="text-gray-600"
+            >
+              <path d="m15 18-6-6 6-6" />
+            </svg>
+          </button>
+
+          <div className="flex w-full justify-start items-start">
+            {floorsArray.map((eachObj, ind)=>{
+              return(
+                <div key={ind} className="rounded-[5px] h-[50px] w-[70px] flex justify-center items-center shadow-md border-solid border-[1px] border-[#EFEFEF]">
+                  <Image
+                    src={eachObj.floorPlanUrl}
+                    alt="Floor Plan"
+                    width={57}
+                    height={37}
+                    style={{ aspectRatio: "100 / 50", objectFit: "cover" }}
+                    onClick={()=>setCurrentImg(ind)}
+                  />
+                </div>
+              )
+            })}
+           
+          </div>
+
+          <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width={24}
+              height={24}
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="text-gray-600"
+            >
+              <path d="m9 18 6-6-6-6" />
+            </svg>
+          </button>
+        </div>
+      }
     </div>
   );
 };

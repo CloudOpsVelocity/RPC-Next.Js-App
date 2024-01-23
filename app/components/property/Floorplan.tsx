@@ -1,35 +1,14 @@
 "use client";
+
+import React from "react";
 import {
-  propertyDetailsTypes,
-  projectprops,
-  floorplanTypes,
-} from "../../data/projectDetails";
-import Button from "../../elements/button";
-import React, { useState } from "react";
-import {
-  PlotIcon,
-  VillamentIcon,
-  VillaIcon,
-  RowHouseIcon,
-  ApartmentIcon,
-  ByTypeSvg,
-  ByUnitSvg,
-  ByBhkSvg,
-  PopupOpenSvg,
   EndDate,
   StartDate,
   TotalLandArea,
-  SecurityIcon,
 } from "../../images/commonSvgs";
 import { PhaseList } from "@/app/validations/types/project";
-import FloorplanDetailsCard from "../project/floorplanDetailsCard";
-import Byunitblock from "../project/byunitblock";
-import ByBhkBlock from "../project/byBhkBlock";
-import FloorPlanModal from "../project/modals/FloorPlan";
 import RoomBasicDetails from "./RoomBasicDetails";
 import PFloorPlanModal from "./modals/Floor";
-
-const dummyProptypesList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 
 export default function RoomFloorplansBlock({ data }: { data: PhaseList[] }) {
   return (

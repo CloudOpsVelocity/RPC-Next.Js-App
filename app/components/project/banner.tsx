@@ -15,7 +15,7 @@ export default function Banner() {
   const [opened, { open, close }] = useDisclosure(false);
   const { data: session } = useSession();
   return (
-    <div className="bg-[#f0f9ff] w-[90%] px-8 py-12 mx-auto flex flex-col md:flex-row justify-between items-center">
+    <div className="bg-[#f0f9ff] w-[90%] px-8 py-12 mx-auto mb-[5%] flex flex-col md:flex-row justify-between items-center">
       <div>
         <h2 className="text-[24px] lg:text-[32px] font-bold text-[#003366] mb-2">
           PROJECT RATING FOR <span className="text-green-600">SARANG</span>
