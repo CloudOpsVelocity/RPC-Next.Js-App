@@ -4,9 +4,9 @@ import PriceBag, {
   ShearIcon,
   WhatsAppButton,
 } from "@/app/images/commonSvgs";
-import React from "react";
+import React, { useState } from "react";
 import Button from "../../elements/button";
-import { useDisclosure, useMediaQuery } from "@mantine/hooks";
+import { useDisclosure, useMediaQuery, useSetState } from "@mantine/hooks";
 import { Collapse, Modal, NumberInput, TextInput, em } from "@mantine/core";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
@@ -15,6 +15,9 @@ import { projectprops } from "@/app/data/projectDetails";
 import { useForm, yupResolver } from "@mantine/form";
 import { reqSchema } from "@/app/validations/project";
 import { Button as B } from "@mantine/core";
+import ReqOtpForm from "./forms/otpform";
+import { addContact } from "@/app/utils/api/actions/contact";
+import { useParams } from "next/navigation";
 export default function OverviewBanner({
   minPrice,
   maxPrice,
@@ -134,19 +137,35 @@ const Content = () => {
 };
 
 const ReqForm = () => {
-  const { getInputProps, onSubmit, onReset, errors } = useForm({
+  const { slug } = useParams<{ slug: string }>();
+  const [status, setStatus] = useState<
+    "idle" | "pending" | "success" | "error" | "otp"
+  >("idle");
+  const { getInputProps, onSubmit, onReset, errors, values } = useForm({
     initialValues: {
       name: "",
       email: "",
-      phone: "",
+      mobile: 0,
     },
     validate: yupResolver(reqSchema),
   });
-  return (
-    <form
-      className="w-full max-w-xs"
-      onSubmit={onSubmit((values) => alert(values))}
-    >
+  const formSubmit = async (values: any) => {
+    const data = await addContact({
+      ...values,
+      isProjContact: "Y",
+      projIdEnc: slug,
+      src: "searchcard",
+    });
+    console.log(data);
+    setStatus("otp");
+  };
+  const onSuccess = async () => {
+    setStatus("success");
+  };
+  return status === "otp" ? (
+    <ReqOtpForm callback={onSuccess} mobile={values.mobile} />
+  ) : (
+    <form className="w-full max-w-xs" onSubmit={onSubmit(formSubmit)}>
       <h2 className="text-lg font-semibold mb-4">Your Details</h2>
       <div className="flex flex-col gap-4">
         <label className="block">
@@ -161,7 +180,7 @@ const ReqForm = () => {
             hideControls
             maxLength={10}
             label="Enter Your Phone Here"
-            {...getInputProps("phone")}
+            {...getInputProps("mobile")}
             placeholder="Phone number"
           />
         </label>

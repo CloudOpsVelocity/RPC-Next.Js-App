@@ -10650,7 +10650,6 @@ export const amenitiesGroupList = new Map([
   ],
 ]);
 
-
 export const specificationsList = new Map([
   [
     401,

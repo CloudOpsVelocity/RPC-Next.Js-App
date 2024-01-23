@@ -34,7 +34,7 @@ export default function Navigation() {
         onClick={() => handleArrowClick("L")}
       />
       <div
-        className="h-[64px] scroll-smooth pl-[24px] pr-[24px] w-[100%] bg-[#FCFCFC] shadow-sm flex justify-start items-center no-scrollbar overflow-x-auto"
+        className="h-[64px] scroll-smooth pl-[24px] pr-[24px] w-[100%] bg-[#FCFCFC] shadow-sm flex justify-start items-center scrollbar-hide overflow-x-auto"
         ref={scrollContainerRef}
       >
         {topics.map((topic) => (

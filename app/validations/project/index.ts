@@ -20,7 +20,7 @@ const reqSchema = yup.object().shape({
     .max(20, "Name should not exceed 20 characters")
     .required("Full name is required"),
   email: yup.string().email("Invalid email").required("Email is required"),
-  phone: yup
+  mobile: yup
     .number()
     .positive("Mobile number must be positive")
     .integer("Mobile number must be an integer")
