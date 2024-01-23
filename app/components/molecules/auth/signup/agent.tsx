@@ -56,6 +56,7 @@ function Agent() {
       companyLogo: undefined,
       otp: false,
       prevMobile: 0,
+      prevEmail: "",
     },
     // @ts-ignore
     validate: (values) => {
@@ -83,6 +84,7 @@ function Agent() {
     form.setValues({
       otp: true,
       prevMobile: form.values.mobile as unknown as number,
+      prevEmail: form.values.email as unknown as string,
     });
     setActive(1);
   };
@@ -95,7 +97,11 @@ function Agent() {
     // Handle API call based on the current step
     let values = form.values;
     if (active === 0) {
-      if (form.values.otp && form.values.mobile === form.values.prevMobile) {
+      if (
+        form.values.otp &&
+        form.values.mobile === form.values.prevMobile &&
+        form.values.email === form.values.prevEmail
+      ) {
         // If OTP is already verified and mobile number is the same, move to the next step
         setActive(1);
       } else {
