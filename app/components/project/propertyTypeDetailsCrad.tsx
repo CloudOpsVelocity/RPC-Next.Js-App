@@ -89,7 +89,7 @@ export default function PropertyTypeDetailsCrad({ cg, propertyType }: Props) {
           UNITS: {cg?.unitTypes.join(", ")}
         </p>
         <div className="flex justify-end items-end mb-[3%] gap-[16px]">
-          {propertyType === "apartment" || propertyType === "villament" ? (
+          {propertyType == "apt" || propertyType == "villament" ? (
             <p className="text-[14px] lg:text-[20px] text-[#2A4C70] font-[500] flex justify-start items-start  ">
               <TowerIcon className="w-[16px] h-[16px] lg:w-[24px] lg:h-[24px]" />
               <span className="mr-[6px] ml-[6px]"> {cg?.towers} </span> Towers
@@ -101,7 +101,7 @@ export default function PropertyTypeDetailsCrad({ cg, propertyType }: Props) {
             <FlooringIcon className="w-[16px] h-[16px] lg:w-[24px] lg:h-[24px]" />
             <span className="mr-[6px] ml-[6px]">{cg?.unitCount} </span> Units
           </p>
-          {propertyType === "apartment" || propertyType === "villament" ? (
+          {propertyType === "apt" || propertyType === "villament" ? (
             <p className="text-[14px] lg:text-[20px] text-[#2A4C70] font-[500] flex justify-start items-start  ">
               <FloorsIcon className="w-[16px] h-[16px] lg:w-[24px] lg:h-[24px]" />
               <span className="mr-[6px] ml-[6px]">{cg?.elevation}</span>{" "}
