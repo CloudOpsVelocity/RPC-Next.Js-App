@@ -86,6 +86,7 @@ function Builder() {
       companyLogo: undefined,
       otp: false,
       prevMobile: 0,
+      prevEmail: "",
     },
     validate: (values) => {
       if (active === 0) {
@@ -152,6 +153,7 @@ function Builder() {
     form.setValues({
       otp: true,
       prevMobile: form.values.mobile as unknown as number,
+      prevEmail: form.values.email as unknown as string,
     });
     setActive(1);
   };
@@ -169,7 +171,8 @@ function Builder() {
         case 0:
           if (
             form.values.otp &&
-            form.values.mobile === form.values.prevMobile
+            form.values.mobile === form.values.prevMobile &&
+            form.values.email === form.values.prevEmail
           ) {
             // If OTP is already verified and mobile number is the same, move to the next step
             setActive(1);

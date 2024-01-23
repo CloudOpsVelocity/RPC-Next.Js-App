@@ -119,6 +119,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
     // Implement your filtering logic here based on selectedValues
     const filteredData = data.filter((item: any) => {
       return Object.keys(values).every(
+        // @ts-ignore
         (key) => !values[key] || String(item[key]) === values[key]
       );
     });
