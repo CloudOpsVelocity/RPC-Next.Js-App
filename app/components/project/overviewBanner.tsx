@@ -16,7 +16,7 @@ import { useForm, yupResolver } from "@mantine/form";
 import { reqSchema } from "@/app/validations/project";
 import { Button as B } from "@mantine/core";
 import ReqOtpForm from "./forms/otpform";
-import { addContact } from "@/app/utils/api/actions/contact";
+import { addContact, sendContact } from "@/app/utils/api/actions/contact";
 import { useParams } from "next/navigation";
 export default function OverviewBanner({
   minPrice,
@@ -160,6 +160,16 @@ const ReqForm = () => {
     setStatus("otp");
   };
   const onSuccess = async () => {
+    const data = await sendContact({
+      name: values.name,
+      email: values.email,
+      mobile: values.mobile,
+      isProjContact: "Y",
+      projIdEnc: slug,
+      src: "searchCard",
+      otp: 3873,
+    });
+    console.log(data);
     setStatus("success");
   };
   return status === "otp" ? (

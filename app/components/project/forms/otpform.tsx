@@ -40,10 +40,10 @@ export default function ReqOtpForm({ callback, mobile }: Props) {
   });
 
   return (
-    <Box maw={551} mx="auto">
+    <div>
       <form
         onSubmit={form.onSubmit(onSubmit)}
-        className="w-[100%] h-[70vh] flex justify-center items-center flex-col "
+        className="w-[100%] py-10 flex justify-start items-start flex-col "
       >
         <h1 className="text-[#333] font-[600] text-lg md:text-[24px] text-center ">
           OTP VERIFICATION
@@ -80,7 +80,7 @@ export default function ReqOtpForm({ callback, mobile }: Props) {
         )}
         <Button>Submit</Button>
       </form>
-    </Box>
+    </div>
   );
 }
 

@@ -16,3 +16,13 @@ export const addContact = async (data: Props) => {
     console.error(error);
   }
 };
+
+export const sendContact = async (data: any) => {
+  const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/contact/v1/generate-contact`;
+  try {
+    const response = await axios.post(url, data);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
