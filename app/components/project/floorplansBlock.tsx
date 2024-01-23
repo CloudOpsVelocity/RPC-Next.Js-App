@@ -23,9 +23,11 @@ import FloorPlanModal from "./modals/FloorPlan";
 import { useQuery } from "react-query";
 import { getProjectUnits } from "@/app/utils/api/project";
 import usePhaseWiseOverview from "@/app/hooks/usePhaseWiseOverview";
-import { useAtomValue } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
+import { floorImageATom } from "@/app/store/image";
 import { selectedFloorAtom } from "@/app/store/floor";
 import Loading from "../atoms/Loader";
+import { currentPhaseAtom, propCgIdAtom } from "@/app/store/vewfloor";
 
 type Props = {
   data: PhaseList[];
@@ -35,9 +37,9 @@ export default function FloorplansBlock({ slug }: Props) {
   const { phaseList, PhaseOverview } = usePhaseWiseOverview();
 
   const allKeys = [35, 33, 31, 34, 32];
-  const [propCgId, setPropCgId] = useState(35);
+  const [propCgId, setPropCgId] = useAtom(propCgIdAtom);
+  const [currentPhase, setCurrentPhase] = useAtom(currentPhaseAtom);
   const [floorPlanType, setFloorPlanType] = useState("type");
-  const [currentPhase, setCurrentPhase] = useState(554);
   const selectedPhase = PhaseOverview?.find(
     (phase: any) => phase.phaseId === currentPhase
   );

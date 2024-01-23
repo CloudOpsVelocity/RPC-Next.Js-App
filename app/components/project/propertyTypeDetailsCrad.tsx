@@ -9,13 +9,28 @@ import {
   villamentCardImg,
 } from "@/app/images/commonImages";
 import Image from "next/image";
+import { useSetAtom } from "jotai";
+import { currentPhaseAtom, propCgIdAtom } from "@/app/store/vewfloor";
 
 type Props = {
   cg: any;
   propertyType: string;
+  phase: number;
 };
 
-export default function PropertyTypeDetailsCrad({ cg, propertyType }: Props) {
+export default function PropertyTypeDetailsCrad({
+  cg,
+  propertyType,
+  phase,
+}: Props) {
+  const setcurrentPhase = useSetAtom(currentPhaseAtom);
+  const setPrpCgId = useSetAtom(propCgIdAtom);
+  const updateValues = (newCurrentPhase: number, newPropCgId: number) => {
+    setcurrentPhase(newCurrentPhase);
+    setPrpCgId(newPropCgId);
+    scrollToTopic("floorPlans");
+  };
+
   const propName = (key: string, type?: string) => {
     switch (key) {
       case "apt":
@@ -55,6 +70,35 @@ export default function PropertyTypeDetailsCrad({ cg, propertyType }: Props) {
         break;
     }
   };
+
+  const getPropId = (key: string) => {
+    switch (key) {
+      case "apt":
+        return projectprops.apartment;
+        break;
+      case "plot":
+        return projectprops.plot;
+        break;
+      case "rowHouse":
+        return projectprops.rowHouse;
+        break;
+      case "villa":
+        return projectprops.villa;
+        break;
+      case "villament":
+        return projectprops.villament;
+        break;
+      default:
+        return 35;
+    }
+  };
+  const scrollToTopic = (id: string): void => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <div className="flex flex-col justify-start items-start w-[100%] max-w-[359px] lg:max-w-[510px] rounded-[24px] shadow-md pr-[2%] pl-[1%] mt-[70px] bg-gradient-to-l from-[#EFF5FF] /50 to-[#F2FAFF]/50 mb-[2%]">
       <div className="flex justify-between items-start w-full">
@@ -112,12 +156,12 @@ export default function PropertyTypeDetailsCrad({ cg, propertyType }: Props) {
           )}
         </div>
 
-        <a
-          href="#floorPlans"
+        <button
+          onClick={() => updateValues(phase, getPropId(propertyType as string))}
           className="text-[16px] lg:text-[18px] text-[#0073C6] font-[600] underline mb-[2%] cursor-pointer "
         >
           View Floor Plans
-        </a>
+        </button>
       </div>
     </div>
   );

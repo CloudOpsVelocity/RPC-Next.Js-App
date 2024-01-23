@@ -5,7 +5,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import ReactPlayer from "react-player";
 import Gallery from "./modals/Gallery";
-// import VideoThumbnail from "react-video-thumbnail";
+import ReactVideoThumbnail from "react-video-thumbnail";
 
 export default function GalleryBlock({
   coverImageUrl,
@@ -98,17 +98,19 @@ export default function GalleryBlock({
           <div className="flex justify-start items-start w-full gap-[4%] flex-wrap ">
             {videos?.map((img, ind) => (
               <div
-                key={ind}
-                className="w-[110px] lg:w-[152px] h-[68px] lg:h-[94px] bg-[#dfdcdc] rounded-[5px] shadow-md mb-[4%] cursor-pointer"
+                className="w-52 h-28 cursor-pointer"
                 onClick={() => handleMediaClick(img as string)}
               >
-                {/* <VideoThumbnail
-                  videoUrl={img}
+                <ReactVideoThumbnail
                   width={150}
                   height={100}
-                  alt={`Image ${ind + 1}`}
-                  className="w-full h-full object-cover rounded-[5px]"
-                /> */}
+                  onClick={() => handleMediaClick(img as string)}
+                  videoUrl={img}
+                  thumbnailHandler={(thumbnail: any) => {
+                    // Handle the generated thumbnail
+                    console.log("Generated Thumbnail:", thumbnail);
+                  }}
+                />
               </div>
             ))}
           </div>

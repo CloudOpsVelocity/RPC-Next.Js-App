@@ -11,6 +11,7 @@ import { ratingSchema } from "@/app/validations/project";
 import { addRating } from "@/app/utils/api/actions/ratings";
 import { useParams } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { IconSun, RatingStar } from "@/app/images/commonSvgs";
 export default function Banner() {
   const [opened, { open, close }] = useDisclosure(false);
   const { data: session } = useSession();
@@ -36,9 +37,9 @@ export default function Banner() {
         <Image
           src="/project/rating.svg"
           alt="Project Rating Illustration"
-          className="h-[200px] w-[400px]"
-          width={400}
-          height={200}
+          className="h-[200px] w-[600px]"
+          width={600}
+          height={300}
         />
       </div>
       <AddRating opened={opened} close={close} />
@@ -88,7 +89,14 @@ const AddRating = ({ opened, close }: { opened: any; close: any }) => {
         className="max-w-[100%] mt-[2%] mx-auto my-8   rounded-lg space-y-2"
       >
         <Flex>
-          <Rating size={"xl"} mr={"xl"} {...getInputProps("rating")} />
+          <Rating
+            emptySymbol={<IconSun className="w-[82px] h-[82px]" />}
+            mr={"xl"}
+            fullSymbol={
+              <RatingStar fill="#FFD600" className="w-[50px] h-[50px]" />
+            }
+            {...getInputProps("rating")}
+          />
         </Flex>
 
         <h2 className="font-[700] text-[#233333] text-[20px]  ">

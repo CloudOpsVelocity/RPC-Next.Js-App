@@ -65,7 +65,8 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         <FloorplansBlock data={data.phaseList} slug={slug} />
         <GalleryBlock {...data.media} />
         <Amenties data={data.amenityList} />
-        <Nearby lat={data.lat} lang={data.lang} />
+        {/* <Nearby lat={data.lat} lang={data.lang} /> */}
+        <Nearby lat="12.9662976" lang="77.5716864" />
         <Specifications data={data.specificationList} />
         <Feature data={data.highlights} />
         <Banner />
