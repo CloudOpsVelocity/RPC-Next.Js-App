@@ -96,7 +96,14 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
                 ₹ {projectDetails.basePrice}/ Price per sqft onwards
               </p>
 
-              <p className="text-[16px] lg:text-[20px] font-[600] text-[#2A4C70] bg-[#FFF] rounded-[10px] shadow-md p-[8px] ">
+              <p className="text-[16px] lg:text-[20px] font-[600] text-[#2A4C70] bg-[#FFF] rounded-[10px] shadow-md p-[8px] flex gap-2">
+                <Image
+                  width={100}
+                  height={100}
+                  src={"/project/floorplan.png"}
+                  alt="no of floors"
+                  className="w-8"
+                />
                 {projectDetails?.floorPlanCount || 0} Floors Plans
               </p>
             </div>

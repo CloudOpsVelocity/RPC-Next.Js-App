@@ -1,8 +1,11 @@
 import axios from "axios";
 type Props = {
+  name: string;
+  email: string;
+  mobile: number;
+  isProjContact: "Y" | "N";
   projIdEnc: string;
-  rating: number;
-  review: string;
+  src: string;
 };
 export const addContact = async (data: Props) => {
   const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/contact/v1/sendContactOtp`;
