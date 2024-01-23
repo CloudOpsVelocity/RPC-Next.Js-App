@@ -18,6 +18,8 @@ export default function ProjectDetails({
   companyName,
   builderAddress,
   officecontact,
+  newProject,
+  onGoingProject,
 }: Data) {
   return (
     <React.Fragment>
@@ -25,7 +27,7 @@ export default function ProjectDetails({
         <div className="w-[30%] border-solid border-[#92B2C8] border-r-[1px]">
           <div className="flex justify-between items-center w-[90%] ">
             <span className=" text-[#202020] text-[20px] lg:text-[24px] font-[600]">
-              05
+              {newProject}
             </span>
             {newLaunchProjIconSvg}
           </div>

@@ -105,6 +105,7 @@ export default function ProjectDetailsP({ slug }: Props) {
             {Object.keys(selectedPhase.propTypeOverview).map(
               (propertyTypeKey) => (
                 <PropertyTypeDetailsCrad
+                  phase={currentPhase}
                   key={propertyTypeKey}
                   cg={selectedPhase.propTypeOverview[propertyTypeKey]}
                   propertyType={propertyTypeKey}

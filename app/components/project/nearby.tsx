@@ -181,7 +181,7 @@ const Nearby: React.FC<{ lat: string; lang: string }> = ({ lat, lang }) => {
 
               <div className="px-4 pb-3">
                 {/* Search Section */}
-                <SearchSection setSelectedLocation={setSelectedLocation} />
+                <SearchSection setSelectedLocation={showLocationOnMap} />
 
                 <Tabs.Panel value="public">
                   <div id="location-listing" className="grid gap-2">
@@ -198,7 +198,9 @@ const Nearby: React.FC<{ lat: string; lang: string }> = ({ lat, lang }) => {
                               lat={lat}
                               lng={lang}
                               onClick={setSelectedLocation}
+                              setDirection={showLocationOnMap}
                               onChangeTravelMode={handleLocationListClick} // Pass the callback
+                              showLocationOnMap={showLocationOnMap}
                             />
                           )
                         )}
@@ -222,6 +224,7 @@ const Nearby: React.FC<{ lat: string; lang: string }> = ({ lat, lang }) => {
                               lng={lang}
                               onClick={setSelectedLocation}
                               onChangeTravelMode={handleLocationListClick} // Pass the callback
+                              showLocationOnMap={showLocationOnMap}
                             />
                           )
                         )}
@@ -245,6 +248,7 @@ const Nearby: React.FC<{ lat: string; lang: string }> = ({ lat, lang }) => {
                               lng={lang}
                               onClick={setSelectedLocation}
                               onChangeTravelMode={handleLocationListClick} // Pass the callback
+                              showLocationOnMap={showLocationOnMap}
                             />
                           )
                         )}
@@ -295,6 +299,7 @@ const LocationList: React.FC<{
   type: "public" | "drive" | "walk";
   onClick: (location: any) => void;
   onChangeTravelMode: (mode: string) => void; // New prop for changing travel mode
+  showLocationOnMap: (location: any) => void;
 }> = ({
   name,
   geometry,
@@ -304,6 +309,7 @@ const LocationList: React.FC<{
   onClick,
   type,
   onChangeTravelMode,
+  showLocationOnMap,
 }) => {
   const userLocation = { lat, lng };
   const distance = calculateDistance(
@@ -325,7 +331,12 @@ const LocationList: React.FC<{
     <div
       className="p-2 bg-gray-50 border rounded-lg cursor-pointer"
       onClick={() =>
-        onClick({ lat: geometry.location.lat, lng: geometry.location.lng })
+        showLocationOnMap({
+          position: {
+            lat: geometry.location.lat,
+            lng: geometry.location.lng,
+          },
+        })
       }
     >
       <div className="flex items-center justify-between">
@@ -366,8 +377,10 @@ const SearchSection = ({ setSelectedLocation }: any) => {
   const handleSearchClick = async (id: number) => {
     const res = await axios.get(`/api/latlong?id=${id}`);
     setSelectedLocation({
-      lat: res.data.location.lat,
-      lng: res.data.location.lng,
+      position: {
+        lat: res.data.location.lat,
+        lng: res.data.location.lng,
+      },
     });
     setValue("");
   };
