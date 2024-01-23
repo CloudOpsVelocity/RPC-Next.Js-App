@@ -155,6 +155,7 @@ export default function useAuth() {
         return { success: false, message: "Otp Verifing failed." };
       }
     } catch (error: any) {
+      console.log(error);
       console.log("Wrong Otp. Please enter your OTP again.");
     }
   };

@@ -26,12 +26,10 @@ import { start } from "repl";
 export default function Overview({
   maxPrice,
   minPrice,
-  postedBy,
   projectName,
   address,
   projectStatus,
   availableProperties,
-
   totalLandArea,
   totalUnit,
   localityName,
