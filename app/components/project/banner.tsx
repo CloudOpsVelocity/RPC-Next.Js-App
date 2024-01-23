@@ -37,9 +37,9 @@ export default function Banner() {
         <Image
           src="/project/rating.svg"
           alt="Project Rating Illustration"
-          className="h-[200px] w-[400px]"
-          width={400}
-          height={200}
+          className="h-[200px] w-[600px]"
+          width={600}
+          height={300}
         />
       </div>
       <AddRating opened={opened} close={close} />
