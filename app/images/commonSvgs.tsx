@@ -11052,3 +11052,10 @@ export const FillStar = ({
 export const downLoadIcon = (<svg xmlns="http://www.w3.org/2000/svg" width="28" height="29" viewBox="0 0 28 29" fill="none">
 <path d="M14 21L6.5 13.5L8.6 11.325L12.5 15.225V3H15.5V15.225L19.4 11.325L21.5 13.5L14 21ZM5 27C4.175 27 3.469 26.7065 2.882 26.1195C2.295 25.5325 2.001 24.826 2 24V19.5H5V24H23V19.5H26V24C26 24.825 25.7065 25.5315 25.1195 26.1195C24.5325 26.7075 23.826 27.001 23 27H5Z" fill="white"/>
 </svg>)
+
+export const videoPlayIcon = (
+  <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26" fill="none">
+    <circle cx="13" cy="13" r="13" transform="matrix(-1 0 0 1 26 0)" fill="#EEF7FE"/>
+    <path d="M15.6631 13.8383C16.1123 13.3752 16.1123 12.6248 15.6631 12.1617L11.9658 8.35007C11.2406 7.60248 10 8.13156 10 9.18842V16.8116C10 17.8684 11.2406 18.3975 11.9658 17.6499L15.6631 13.8383Z" fill="#4D6677"/>
+  </svg>
+);
