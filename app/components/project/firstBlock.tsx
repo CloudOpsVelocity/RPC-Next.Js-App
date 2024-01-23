@@ -2,7 +2,7 @@
 import React, { useRef } from "react";
 import { Carousel } from "@mantine/carousel";
 import Autoplay from "embla-carousel-autoplay";
-import { ReraIcon, ShearIcon } from "@/app/images/commonSvgs";
+import { FlooringIcon, FloorsIcon, ReraIcon, ShearIcon } from "@/app/images/commonSvgs";
 import { Main } from "@/app/validations/types/project";
 import Image from "next/image";
 import SharePopup from "../atoms/SharePopup";
