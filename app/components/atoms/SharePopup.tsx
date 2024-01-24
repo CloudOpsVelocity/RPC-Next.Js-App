@@ -53,7 +53,11 @@ export default function SharePopup() {
               <span className="text-xs truncate">{CopiedUrl}</span>
               <CopyButton value={CopiedUrl}>
                 {({ copied, copy }) => (
-                  <Button color={copied ? "teal" : "blue"} onClick={copy}>
+                  <Button
+                    color={copied ? "teal" : "#0073C6"}
+                    onClick={copy}
+                    miw={100}
+                  >
                     {copied ? "Copied url" : "Copy url"}
                   </Button>
                 )}
