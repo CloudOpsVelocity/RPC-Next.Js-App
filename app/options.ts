@@ -32,7 +32,7 @@ export const options: NextAuthOptions = {
           );
           console.log(res.data);
           if (res.data.status) {
-            cookies().set("token", res.data.token);
+            // cookies().set("token", res.data.token);
             console.log(res.data);
             return {
               ...res.data,
