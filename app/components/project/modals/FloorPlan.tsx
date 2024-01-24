@@ -122,10 +122,9 @@ function FloorPlanModal({ propCgId, data }: Props) {
 export default FloorPlanModal;
 
 const LeftSection = ({ propCgId, data }: Props) => {
-  console.log(data);
   const [, setFloorsArray] = useAtom(floorPlansArray);
   const [, setFloor] = useAtom(selectedFloorAtom);
-  const { getInputProps, values } = useFormContext();
+  const { getInputProps, values,setFieldValue } = useFormContext();
   const getOptions = (property: string): string[] => {
     return Array.from(new Set(data.map((item: any) => String(item[property]))));
   };
@@ -142,7 +141,11 @@ const LeftSection = ({ propCgId, data }: Props) => {
     setFloor(filteredData[0]);
     setFloorsArray(filteredData);
   };
-  console.log(values);
+  // const handleOnChange = (value:string,key:string)=> {
+  //   setFieldValue(key,value)
+  //   handleSearch()
+  // }
+  // console.log(values);
   return (
     <div className="col-span-1 w-[30%] ">
       <div className="w-[100%] flex justify-between items-start flex-wrap gap-[5%]">
@@ -154,10 +157,10 @@ const LeftSection = ({ propCgId, data }: Props) => {
             label="Select Unit Type"
             className="!w-[46%]"
             placeholder="-- select --"
-            data={["1", "2", "3", "4", "5"]}
+            data={getOptions('bhkName')}
             searchable
             maxDropdownHeight={200}
-            // {...getInputProps("unitType")}
+            {...getInputProps("bhkName")}
           />
         )}
         {propCgId != projectprops.plot && (
@@ -172,6 +175,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             searchable
             maxDropdownHeight={200}
             {...getInputProps("towerName")}
+            // onChange={(value)=> handleOnChange(value as string,'towerName')}
           />
         )}
 
@@ -456,8 +460,8 @@ const RightSection = ({ propCgId }: Props) => {
               <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
               <polyline points="9 22 9 12 15 12 15 22" />
             </svg>
-            <p className="font-medium">
-              Unit Type <span> {data.bhkName}</span>
+            <p className="text-[#4D6677] text-[14px] font-[500]">
+              Unit Type <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] "> {data.bhkName}</span>
             </p>
           </div>
         )}
@@ -488,8 +492,8 @@ const RightSection = ({ propCgId }: Props) => {
               <path d="M8 10h.01" />
               <path d="M8 14h.01" />
             </svg>
-            <p className="font-medium">
-              Tower <span> {data.towerName}</span>
+            <p className="text-[#4D6677] text-[14px] font-[500]">
+              Tower <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] "> {data.towerName}</span>
             </p>
           </div>
         )}
@@ -512,8 +516,8 @@ const RightSection = ({ propCgId }: Props) => {
                 <rect width={7} height={7} x={14} y={3} rx={1} />
                 <path d="M10 21V8a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1H3" />
               </svg>
-              <p className="font-medium">
-                Block <span> {data.block}</span>
+              <p className="text-[#4D6677] text-[14px] font-[500]">
+                Block <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] "> {data.block}</span>
               </p>
             </div>
           )}
@@ -535,14 +539,14 @@ const RightSection = ({ propCgId }: Props) => {
               <line x1={6} x2={6} y1={4} y2={20} />
               <polygon points="10,4 20,12 10,20" />
             </svg>
-            <p className="font-medium">
+            <p className="text-[#4D6677] text-[14px] font-[500]">
               {`${
                 propCgId == projectprops.rowHouse ||
                 propCgId == projectprops.villa
                   ? "Elevation"
                   : "Floor"
               }`}{" "}
-              <span> {data.floor}</span>{" "}
+              <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] "> {data.floor}</span>{" "}
             </p>
           </div>
         )}
@@ -566,8 +570,8 @@ const RightSection = ({ propCgId }: Props) => {
             <path d="M10 12v.01" />
             <path d="M13 4.562v16.157a1 1 0 0 1-1.242.97L5 20V5.562a2 2 0 0 1 1.515-1.94l4-1A2 2 0 0 1 13 4.561Z" />
           </svg>
-          <p className="font-medium">
-            Unit Number <span> {data.unitNumber}</span>
+          <p className="text-[#4D6677] text-[14px] font-[500]">
+            Unit Number <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] "> {data.unitNumber}</span>
           </p>
         </div>
 
@@ -587,9 +591,9 @@ const RightSection = ({ propCgId }: Props) => {
             <circle cx={12} cy={12} r={10} />
             <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
           </svg>
-          <p className="font-medium">
+          <p className="text-[#4D6677] text-[14px] font-[500]">
             {`${propCgId == projectprops.plot ? "Plot Facing" : "Facing"} `}{" "}
-            <span> {data.facingName}</span>
+            <span className="text-[#303A42] text-[14px] font-[600] ml-[10px] "> {data.facingName}</span>
           </p>
         </div>
 
@@ -612,8 +616,8 @@ const RightSection = ({ propCgId }: Props) => {
               <path d="M21 7.8V3m0 0h-4.8M21 3l-6 6" />
               <path d="M3 7.8V3m0 0h4.8M3 3l6 6" />
             </svg>
-            <p className="font-medium">
-              Super Builtup Area <span> {data.superBuildUparea} sq.ft</span>
+            <p className="text-[#4D6677] text-[14px] font-[500]">
+              Super Builtup Area <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] "> {data.superBuildUparea} sq.ft</span>
             </p>
           </div>
         )}
@@ -638,8 +642,8 @@ const RightSection = ({ propCgId }: Props) => {
               <path d="M20 18v2" />
               <path d="M12 4v9" />
             </svg>
-            <p className="font-medium">
-              Carpet Area <span> {data.caretarea} sq.ft</span>
+            <p className="text-[#4D6677] text-[14px] font-[500]">
+              Carpet Area <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] "> {data.caretarea} sq.ft</span>
             </p>
           </div>
         )}
@@ -663,8 +667,8 @@ const RightSection = ({ propCgId }: Props) => {
               <path d="M9 17h6" />
               <circle cx={17} cy={17} r={2} />
             </svg>
-            <p className="font-medium">
-              Car Parking <span> {data.noOfCarParking}</span>
+            <p className="text-[#4D6677] text-[14px] font-[500]">
+              Car Parking <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] "> {data.noOfCarParking}</span>
             </p>
           </div>
         )}
@@ -686,8 +690,8 @@ const RightSection = ({ propCgId }: Props) => {
               <rect width={18} height={18} x={3} y={3} rx={2} />
               <path d="M9 17V7h4a3 3 0 0 1 0 6H9" />
             </svg>
-            <p className="font-medium">
-              Open/Covered Parking <span>{data.parkingType} Parking</span>
+            <p className="text-[#4D6677] text-[14px] font-[500]">
+              Open/Covered Parking <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">{data.parkingType} Parking</span>
             </p>
           </div>
         )}
@@ -718,8 +722,8 @@ const RightSection = ({ propCgId }: Props) => {
               <path d="M8 10h.01" />
               <path d="M8 14h.01" />
             </svg>
-            <p className="font-medium">
-              Balconies <span> {data.totalNumberOfBalcony}</span>
+            <p className="text-[#4D6677] text-[14px] font-[500]">
+              Balconies <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] "> {data.totalNumberOfBalcony}</span>
             </p>
           </div>
         )}
@@ -744,8 +748,8 @@ const RightSection = ({ propCgId }: Props) => {
               <line x1={7} x2={7} y1={19} y2={21} />
               <line x1={17} x2={17} y1={19} y2={21} />
             </svg>
-            <p className="font-medium">
-              Bathroom <span> {data.totalNumberofBathroom}</span>
+            <p className="text-[#4D6677] text-[14px] font-[500]">
+              Bathroom <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] "> {data.totalNumberofBathroom}</span>
             </p>
           </div>
         )}
@@ -764,8 +768,8 @@ const RightSection = ({ propCgId }: Props) => {
                 fill="#4D6677"
               />
             </svg>
-            <p className="font-medium">
-              Plot Area <span> 02</span>
+            <p className="text-[#4D6677] text-[14px] font-[500]">
+              Plot Area <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] "> 02</span>
             </p>
           </div>
         )}
@@ -784,8 +788,8 @@ const RightSection = ({ propCgId }: Props) => {
                 fill="#4D6677"
               />
             </svg>
-            <p className="font-medium">
-              Length of Plot <span> 02</span>
+            <p className="text-[#4D6677] text-[14px] font-[500]">
+              Length of Plot <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] "> 02</span>
             </p>
           </div>
         )}
@@ -804,8 +808,8 @@ const RightSection = ({ propCgId }: Props) => {
                 fill="#4D6677"
               />
             </svg>
-            <p className="font-medium">
-              Breadth of Plot <span>02</span>
+            <p className="text-[#4D6677] text-[14px] font-[500]">
+              Breadth of Plot <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] "> 02</span>
             </p>
           </div>
         )}
@@ -820,6 +824,15 @@ const MiddleSection = () => {
   const floorsArray = useAtomValue(floorPlansArray);
   const [opened, setOpened] = useState(false);
   const [currentImg, setCurrentImg] = useState(0);
+  const [, setFloor] = useAtom(selectedFloorAtom);
+
+  
+
+  const selectImg = (index:number) => {
+    setFloor(floorsArray[index]);
+    setCurrentImg(index);
+  };
+
   return (
     <div className="flex flex-col justify-center items-start shrink-0 w-[40%]">
       <p className="text-[#005DA0] w-full text-right mb-[1%] text-[16px] font-[500] ">
@@ -848,7 +861,7 @@ const MiddleSection = () => {
 
         {floorsArray != undefined &&
           floorsArray != null &&
-          floorsArray.length > 1 && (
+          floorsArray.length > 0 && (
             <PopupOpenSvg className="absolute bottom-0 right-0 w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] m-[1%] " />
           )}
       </div>
@@ -890,7 +903,7 @@ const MiddleSection = () => {
                       width={57}
                       height={37}
                       style={{ aspectRatio: "100 / 50", objectFit: "cover" }}
-                      onClick={() => setCurrentImg(ind)}
+                      onClick={()=>selectImg(ind)}
                     />
                   </div>
                 );
