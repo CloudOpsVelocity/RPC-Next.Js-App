@@ -24,7 +24,7 @@ export default function Navigation() {
   };
 
   return (
-    <div className="flex justify-center items-center w-full">
+    <div className="flex justify-center items-center shadow-lg w-full">
       <Image
         src="/auth/arrow.svg"
         alt=""

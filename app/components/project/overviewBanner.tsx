@@ -75,23 +75,22 @@ const RequestCallBackModal = ({
         opened={opened}
         onClose={close}
         centered
-        size={isMobile ? "90%" : "60%"}
+        size={isMobile ? "90%" : "52%"}
         className="!rounded-full w-[90%] md:w-[70%] lg:w-[60%] "
         classNames={{
           close: S.close,
           content: S.content,
         }}
       >
-        <>
-          <div className="bg-white rounded-lg  overflow-hidden flex ">
-            <div className="w-full p-8">
-              <h2 className="text-2xl font-semibold text-gray-700">
+        <div className="bg-white rounded-lg w-full overflow-hidden flex ">
+            <div className="w-[50%] p-8">
+              <h2 className="text-[24px] font-[600] text-[#202020] ">
                 Request A Callback
               </h2>
 
               <Content />
             </div>
-            <div className="hidden md:block w-1/2 relative">
+            <div className="hidden md:block w-[50%] relative">
               <Image
                 className="absolute inset-0 !h-full !w-[100%] object-cover"
                 src="/requestcallback.png"
@@ -100,8 +99,7 @@ const RequestCallBackModal = ({
                 height={534}
               />
             </div>
-          </div>
-        </>
+        </div>
       </Modal>
     </>
   );
@@ -122,11 +120,14 @@ const LoggedInUserForm = () => {
     validate: yupResolver(reqSchema),
   });
   return (
-    <div className="mt-8">
-      <h3 className="text-xl font-semibold text-[#00487C]">Your Details</h3>
-      <p className="mt-2 text-gray-600">Name: Ankit Soni</p>
-      <p className="mt-2 text-gray-600">Contact: {session?.user.userName}</p>
-      <p className="mt-2 text-gray-600">Email: ankitsoni12@gmail.com</p>
+    <div className="mt-8 w-full">
+      <p className="text-[#148B16] mb-[4%] text-base italic font-bold leading-[normal] tracking-[0.64px]">Builder: Sarang By Sumadhura</p>
+
+      <h3 className="text-[#00487C] mb-[2%] text-xl not-italic font-semibold leading-[normal] tracking-[0.8px]">Your Details</h3>
+            
+      <p className="mb-[2%] text-[#202020] text-base not-italic font-medium leading-[normal] tracking-[0.64px]">Name: Ankit Soni</p>
+      <p className="mb-[2%] text-[#202020] text-base not-italic font-medium leading-[normal] tracking-[0.64px]">Contact: {session?.user.userName}</p>
+      <p className="mb-[2%] text-[#202020] text-base not-italic font-medium leading-[normal] tracking-[0.64px]">Email: ankitsoni12@gmail.com</p>
       <B
         type="submit"
         leftSection={<Phone />}
@@ -200,7 +201,7 @@ const ReqForm = ({ close }: { close: any }) => {
           placeholder="Enter your name here"
         />
         <NumberInput
-          mt={"xs"}
+          mt={"lg"}
           classNames={{
             input: N.input,
           }}
