@@ -63,7 +63,7 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
               ))}
             </Carousel>
           </div>
-          <div className="absolute bottom-0 m-[2%] z-10 w-[95%] self-center justify-between items-start border-solid border-white-500 rounded-[10px] bg-gradient-to-l from-[#EFEFEF] /50 to-[#c3c3c3bd]/50 shadow-md flex flex-row">
+          <div className="absolute bottom-0 m-[2%] z-10 w-[95%] self-center justify-between items-start border-solid border-white-500 rounded-[10px] bg-gradient-to-r from-[#EFEFEF] /20 to-[#c3c3c3bd]/80 shadow-md flex flex-row">
             <div className="w-[60%]">
               <p className=" flex items-center pl-[8px] rounded-tl-lg text-center text-[24px] font-[600] text-[#FFF] bg-gradient-to-r w-[122px] from-[#148B16] /0 to-[#EFEFEF]/50">
                 <ReraIcon />
