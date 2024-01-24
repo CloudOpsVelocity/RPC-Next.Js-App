@@ -42,7 +42,7 @@ export default function OverviewBanner({
             <p className="text-[#212C33] text-[24px] lg:text-[32px] font-[600]">
               PRICE RANGE{" "}
               <span className="text-[#00487C] text-[24px] md:text-[32px] lg:text-[40px] whitespace-nowrap font-[700]">
-                ₹ {minPrice} Cr - ₹ {formatCurrency(maxPrice)}
+                {formatCurrency(minPrice)} Cr - {formatCurrency(maxPrice)}
               </span>
             </p>
             <Button

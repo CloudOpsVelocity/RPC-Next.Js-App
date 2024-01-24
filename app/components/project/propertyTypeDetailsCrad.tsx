@@ -11,6 +11,7 @@ import {
 import Image from "next/image";
 import { useSetAtom } from "jotai";
 import { currentPhaseAtom, propCgIdAtom } from "@/app/store/vewfloor";
+import { formatCurrency } from "@/app/utils/numbers";
 
 type Props = {
   cg: any;
@@ -119,7 +120,7 @@ export default function PropertyTypeDetailsCrad({
 
           <div className="flex justify-end items-start flex-col">
             <p className="text-[16px] text-right lg:text-[20px] text-[#148B16] font-[700]">
-              ₹ {cg?.minPrice} - ₹ {cg?.maxPrice}
+              {formatCurrency(cg?.minPrice)} - {formatCurrency(cg?.maxPrice)}
             </p>
             <p className="text-[12px] text-right lg:text-[14px] text-[#00487C] font-[500]">
               ₹ {cg?.basePrice} Base Price/ sq.ft

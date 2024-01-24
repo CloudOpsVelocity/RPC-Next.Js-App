@@ -1,17 +1,15 @@
-function formatCurrency(valueInCrore: number): string {
-  const crore: number = 10000000; // 1 crore = 10 million
-  const lakh: number = 100000; // 1 lakh = 100 thousand
-  const thousand: number = 1000;
-
-  if (isNaN(valueInCrore) || valueInCrore < 0) {
-    return "Invalid input";
-  }
-
-  if (valueInCrore >= crore) {
-    const formattedValue: number = valueInCrore / crore;
-    return `${formattedValue.toFixed(2)} Cr`;
+function formatCurrency(value: number) {
+  if (value >= 10000000) {
+    // If value is 1 crore or more, format in crores
+    const croreValue = (value / 10000000).toFixed(2);
+    return `₹ ${croreValue} Cr`;
+  } else if (value >= 100000) {
+    // If value is 1 lakh or more, format in lakhs
+    const lakhValue = (value / 100000).toFixed(2);
+    return `₹ ${lakhValue} Lac`;
   } else {
-    return `${valueInCrore} `;
+    // If value is less than 1 lakh, format as is
+    return `₹ ${value}`;
   }
 }
 
