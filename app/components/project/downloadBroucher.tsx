@@ -5,10 +5,10 @@ import React from "react";
 
 const DownloadBroucher = ({ url }: { url: string }) => {
   const onButtonClick = () => {
-    const pdfUrl = "Sample.pdf";
+    const pdfUrl = url;
     const link = document.createElement("a");
     link.href = pdfUrl;
-    link.download = url; // specify the filename
+    link.download = pdfUrl; // specify the filename
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

@@ -10,12 +10,41 @@ import { ratingSchema } from "@/app/validations/project";
 import { addRating } from "@/app/utils/api/actions/ratings";
 import { useParams } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { IconSun, RatingStar } from "@/app/images/commonSvgs";
+import { IconSun, RatingStar, infoIcon } from "@/app/images/commonSvgs";
+import toast, { Toaster } from "react-hot-toast";
+import Link from "next/link";
+
 export default function Banner() {
   const [opened, { open, close }] = useDisclosure(false);
   const { data: session } = useSession();
+
+  const onAddingRatings = () => {
+    session ? open() :  toast.custom((t) => (
+      <div
+        className={`${
+          t.visible ? 'animate-enter' : 'animate-leave'
+        } ml-auto w-full pointer-events-auto flex justify-end items-end ring-1 ring-transparent ring-opacity-5`}
+      >
+        <p className=" text-[#565D70] p-[8px] pr-[16px] pl-[16px] bg-white shadow-lg flex items-center rounded-lg gap-[10px] text-[20px] whitespace-nowrap font-[600] ">
+          {infoIcon}  Please 
+          <Link rel="shortcut icon" href="/login" >
+            <span className=" cursor-pointer text-[#0073C6] ">
+              login/ Signup
+            </span>
+          </Link> 
+          to add Ratings
+        </p>
+      </div>
+    ))
+    
+  };
+
   return (
     <div className="bg-[#f0f9ff] w-[90%] px-8 py-12 mx-auto mb-[5%] flex flex-col md:flex-row justify-between items-center">
+      <Toaster
+        position="top-right"
+        reverseOrder={false}
+      />
       <div>
         <h2 className="text-[24px] lg:text-[32px] font-bold text-[#003366] mb-2">
           PROJECT RATING FOR <span className="text-green-600">SARANG</span>
@@ -26,7 +55,7 @@ export default function Banner() {
           and be clear and specific about what your review is about
         </p>
         <button
-          onClick={open}
+          onClick={()=>onAddingRatings()}
           className="inline-flex items-center justify-center rounded-md text-sm  ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 bg-[#007ace] text-white font-semibold"
         >
           ADD RATINGS
