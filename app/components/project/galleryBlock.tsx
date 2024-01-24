@@ -93,17 +93,17 @@ export default function GalleryBlock({
           </h3>
           <div className="flex justify-start items-start w-full gap-[4%] flex-wrap ">
             {videos?.map((img, ind) => (
-              <div className="relative w-[110px] lg:w-[152px] h-[68px] lg:h-[94px] bg-[#dfdcdc] rounded-[5px] shadow-md mb-[4%] cursor-pointer">
-                <ReactPlayer
+              <div className="relative w-[110px] lg:w-[152px] flex justify-center items-center h-[68px] lg:h-[94px] bg-[#dfdcdc] rounded-[5px] shadow-md mb-[4%] cursor-pointer">
+                <video
                   key={ind}
                   // width={150}
                   // height={100}
-                  url={img as string}
-                  alt={`Image ${ind + 1}`}
-                  className="!w-[110px] !lg:w-[152px] !h-[68px] !lg:h-[94px] bg-[#dfdcdc] rounded-[5px] shadow-md mb-[4%] cursor-pointer"
+                  src={img as string}
+                  //alt={`Image ${ind + 1}`}
+                  className="!w-full rounded-[5px] cursor-pointer"
                   onClick={() => handleMediaClick(img as string)}
                 />
-                <span className="absolute top-[40px] left-[60px] pointer-events-none ">
+                <span className="absolute top-[40%] left-[40%] pointer-events-none ">
                   {videoPlayIcon}
                 </span>
               </div>

@@ -1,15 +1,11 @@
 import React from "react";
-import PriceBag, {
+import {
   EndDate,
   Locality,
-  Phone,
   ProjectStatus,
   PropertyAvailable,
-  RatingStar,
   StartDate,
   TotalLandArea,
-  WhatsAppButton,
-  callIconSvg,
   footerPhoneIcon,
 } from "@/app/images/commonSvgs";
 import ProjBasicDetails from "@/app/components/project/projBasicDetails";
