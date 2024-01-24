@@ -147,6 +147,7 @@ const ReqForm = () => {
     validate: yupResolver(reqSchema),
   });
   const formSubmit = async (values: any) => {
+    setStatus("pending");
     const data = await addContact({
       ...values,
       isProjContact: "Y",
@@ -157,20 +158,20 @@ const ReqForm = () => {
     setStatus("otp");
   };
   const onSuccess = async () => {
-    const data = await sendContact({
-      name: values.name,
-      email: values.email,
-      mobile: values.mobile,
-      isProjContact: "Y",
-      projIdEnc: slug,
-      src: "searchCard",
-      otp: 3873,
-    });
-    console.log(data);
     setStatus("success");
   };
-  return status === "otp" ? (
-    <ReqOtpForm callback={onSuccess} mobile={values.mobile} />
+  return status === "success" ? (
+    <Success />
+  ) : status === "otp" ? (
+    <ReqOtpForm
+      callback={onSuccess}
+      values={{
+        ...values,
+        projIdEnc: slug,
+        isProjContact: "Y",
+        src: "searchCard",
+      }}
+    />
   ) : (
     <form className="w-full max-w-xs" onSubmit={onSubmit(formSubmit)}>
       <h2 className="text-lg font-semibold mb-4">Your Details</h2>
@@ -200,9 +201,28 @@ const ReqForm = () => {
           />
         </label>
       </div>
-      <B type="submit" leftSection={<Phone />} mt={"md"}>
+      <B
+        type="submit"
+        leftSection={<Phone />}
+        mt={"md"}
+        loading={status === "pending"}
+      >
         Request a Callback
       </B>
     </form>
+  );
+};
+
+const Success = () => {
+  return (
+    <div className="flex flex-col gap-4">
+      <p className="text-[#00487C] text-2xl not-italic font-semibold leading-8 tracking-[0.96px]">
+        Your call request has been sent to builder😇
+      </p>
+      <p className="text-[#202020] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px]">
+        Please wait for callback !
+      </p>
+      <B maw={100}>Go To Project</B>
+    </div>
   );
 };

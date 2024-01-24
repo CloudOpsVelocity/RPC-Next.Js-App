@@ -9,18 +9,20 @@ import { useForm, yupResolver } from "@mantine/form";
 import React, { useEffect, useRef, useState } from "react";
 import S from "@/app/styles/Otp.module.css";
 import axios from "axios";
+import { sendContact } from "@/app/utils/api/actions/contact";
 
 type Props = {
   callback: () => void;
-  mobile: number | null;
+  values: any;
 };
 
-export default function ReqOtpForm({ callback, mobile }: Props) {
+export default function ReqOtpForm({ callback, values }: Props) {
   const { verifyOtp } = useAuth();
   const [error, setError] = useState(false);
   const onSubmit = async (value: any) => {
-    const data = await verifyOtp({ ...value, username: mobile });
-    if (data?.success) {
+    const data = await sendContact({ ...values, otp: value.otp });
+    console.log(data);
+    if (data?.status) {
       callback();
     } else {
       setError(true);
@@ -51,7 +53,7 @@ export default function ReqOtpForm({ callback, mobile }: Props) {
         </h1>
         <p className="text-[#B5ABAC] font-[500] md:text-[20px] text-center mb-[3%]  ">
           A One Time- Password has been sent to{" "}
-          {hideMobileNumber((mobile && mobile) || 0)}
+          {hideMobileNumber((values.mobile && values.mobile) || 0)}
         </p>
         <PinInput
           classNames={{
@@ -67,7 +69,7 @@ export default function ReqOtpForm({ callback, mobile }: Props) {
           placeholder=""
         />
 
-        <Resend userName={mobile} />
+        <Resend userName={values.mobile} />
 
         {error && (
           <p className="text-[#F00] font-[500] text-[16px] w-[100%] !max-w-[423px] !mb-[6%] text-center ">
