@@ -30,6 +30,7 @@ export const options: NextAuthOptions = {
               password: credentials?.password,
             }
           );
+          console.log(res.data);
           if (res.data.status) {
             cookies().set("token", res.data.token);
             console.log(res.data);

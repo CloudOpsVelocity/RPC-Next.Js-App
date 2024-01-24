@@ -35,6 +35,32 @@ const DownloadBroucher = ({ url }: { url: string }) => {
 
     
   };
+  const handleDownload = () => {
+    fetch(url)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(
+            `Network response was not ok: ${response.statusText}`
+          );
+        }
+        return response.blob();
+      })
+      .then((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "brochure.pdf";
+        document.body.appendChild(link);
+
+        link.click();
+
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+      })
+      .catch((error) => {
+        console.error("Error fetching or downloading the file:", error);
+      });
+  };
 
   return (
     <div className="flex justify-start mt-[5%] items-center flex-wrap w-[90%] gap-[2%] ">
@@ -42,7 +68,7 @@ const DownloadBroucher = ({ url }: { url: string }) => {
         Brochure{" "}
       </p>
       <button
-        onClick={() => onButtonClick()}
+        onClick={() => handleDownload()}
         className="flex border-0 justify-center items-center text-[20px] lg:text-[24px] text-[#FFF] font-[700] rounded-[10px] bg-[#0073C6] gap-[8px] p-[5px]  "
       >
         {/* {downloadIcon} */}

@@ -7,6 +7,16 @@ type Props = {
   projIdEnc: string;
   src: string;
 };
+type User = {
+  name: string;
+  email: string;
+  mobile: string;
+  isProjContact: "Y" | "N"; // Assuming it's a binary choice
+  projIdEnc: string;
+  src: string;
+  otp?: number;
+};
+
 export const addContact = async (data: Props) => {
   const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/contact/v1/sendContactOtp`;
   try {
@@ -17,7 +27,7 @@ export const addContact = async (data: Props) => {
   }
 };
 
-export const sendContact = async (data: any) => {
+export const sendContact = async (data: User) => {
   const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/contact/v1/generate-contact`;
   try {
     const response = await axios.post(url, data);

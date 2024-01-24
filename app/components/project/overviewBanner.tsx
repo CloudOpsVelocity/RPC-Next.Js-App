@@ -4,6 +4,7 @@ import PriceBag, {
   ShearIcon,
   WhatsAppButton,
 } from "@/app/images/commonSvgs";
+import N from "@/app/styles/Numinput.module.css";
 import React, { useState } from "react";
 import Button from "../../elements/button";
 import { useDisclosure, useMediaQuery, useSetState } from "@mantine/hooks";
@@ -18,6 +19,7 @@ import { Button as B } from "@mantine/core";
 import ReqOtpForm from "./forms/otpform";
 import { addContact, sendContact } from "@/app/utils/api/actions/contact";
 import { useParams } from "next/navigation";
+import CountryInput from "../atoms/CountryInput";
 export default function OverviewBanner({
   minPrice,
   maxPrice,
@@ -80,22 +82,12 @@ const RequestCallBackModal = ({
         }}
       >
         <>
-          {/* <div className="bg-[#E0F7FF]  flex items-center justify-center p-4"> */}
           <div className="bg-white rounded-lg  overflow-hidden flex ">
             <div className="w-full p-8">
               <h2 className="text-2xl font-semibold text-gray-700">
                 Request A Callback
               </h2>
-              <p className="text-[#EA7A00] text-[16px] font-[600] ">
-                Looks like you are not registered with us.
-              </p>
-              <p className="text-[#4D6677] text-[14px] font-[600] ">
-                No worries add your details to get callback from builder
-              </p>
-              <p className="mt-2 text-green-600 font-semibold">
-                Builder: Sarang By Sumadhura
-              </p>
-              {/* There */}
+
               <Content />
             </div>
             <div className="hidden md:block w-1/2 relative">
@@ -108,7 +100,6 @@ const RequestCallBackModal = ({
               />
             </div>
           </div>
-          {/* </div> */}
         </>
       </Modal>
     </>
@@ -125,23 +116,28 @@ const Content = () => {
           <p className="mt-2 text-gray-600">Name: Ankit Soni</p>
           <p className="mt-2 text-gray-600">Contact: 8888855555</p>
           <p className="mt-2 text-gray-600">Email: ankitsoni12@gmail.com</p>
-          <B type="submit" leftSection={<Phone />} mt={"md"}>
+          <B
+            type="submit"
+            leftSection={<Phone />}
+            mt={"md"}
+            className="!text-[#0073C6]"
+          >
             Request a Callback
           </B>
         </div>
       ) : (
-        <ReqForm />
+        <ReqForm close={close} />
       )}
     </>
   );
 };
 
-const ReqForm = () => {
+const ReqForm = ({ close }: { close: any }) => {
   const { slug } = useParams<{ slug: string }>();
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error" | "otp"
   >("idle");
-  const { getInputProps, onSubmit, onReset, errors, values } = useForm({
+  const { getInputProps, onSubmit, errors, values } = useForm({
     initialValues: {
       name: "",
       email: "",
@@ -149,7 +145,11 @@ const ReqForm = () => {
     },
     validate: yupResolver(reqSchema),
   });
+  const displayCountryCode = (value: any) => {
+    console.log(value);
+  };
   const formSubmit = async (values: any) => {
+    setStatus("pending");
     const data = await addContact({
       ...values,
       isProjContact: "Y",
@@ -160,52 +160,96 @@ const ReqForm = () => {
     setStatus("otp");
   };
   const onSuccess = async () => {
-    const data = await sendContact({
-      name: values.name,
-      email: values.email,
-      mobile: values.mobile,
-      isProjContact: "Y",
-      projIdEnc: slug,
-      src: "searchCard",
-      otp: 3873,
-    });
-    console.log(data);
     setStatus("success");
   };
-  return status === "otp" ? (
-    <ReqOtpForm callback={onSuccess} mobile={values.mobile} />
+  return status === "success" ? (
+    <Success close={close} />
+  ) : status === "otp" ? (
+    <ReqOtpForm
+      callback={onSuccess}
+      values={{
+        ...values,
+        projIdEnc: slug,
+        isProjContact: "Y",
+        src: "searchCard",
+      }}
+    />
   ) : (
-    <form className="w-full max-w-xs" onSubmit={onSubmit(formSubmit)}>
+    <form className="w-full max-w-sm" onSubmit={onSubmit(formSubmit)}>
+      <p className="text-[#EA7A00] text-[16px] font-[600] ">
+        Looks like you are not registered with us.
+      </p>
+      <p className="text-[#4D6677] text-[14px] font-[600] ">
+        No worries add your details to get callback from builder
+      </p>
+      <p className="mt-2 text-green-600 font-semibold">
+        Builder: Sarang By Sumadhura
+      </p>
       <h2 className="text-lg font-semibold mb-4">Your Details</h2>
-      <div className="flex flex-col gap-4">
-        <label className="block">
-          <TextInput
-            label="Enter your name here"
-            {...getInputProps("name")}
-            placeholder="Enter your name here"
-          />
-        </label>
-        <label className="block">
-          <NumberInput
-            hideControls
-            maxLength={10}
-            label="Enter Your Phone Here"
-            {...getInputProps("mobile")}
-            placeholder="Phone number"
-          />
-        </label>
-        <label>
-          <TextInput
-            label="Enter Your Email Here"
-            {...getInputProps("email")}
-            placeholder="Enter your email here"
-            type="email"
-          />
-        </label>
+      <div className="flex flex-col ">
+        <TextInput
+          size="lg"
+          label="Enter your name here"
+          {...getInputProps("name")}
+          placeholder="Enter your name here"
+        />
+        <NumberInput
+          mt={"xs"}
+          classNames={{
+            input: N.input,
+          }}
+          hideControls
+          size="lg"
+          className="w-[100%]"
+          label="Contact Number"
+          placeholder="Enter your contact number here"
+          {...getInputProps("mobile")}
+          maxLength={10}
+        />
+
+        <CountryInput
+          onSelect={displayCountryCode}
+          className={`focus:outline-none min-w-[30px] max-w-[70px] self-start relative mt-[3%] ${
+            (errors.mobile != undefined && errors.mobile != null) ||
+            status === "error"
+              ? "bottom-[65px]"
+              : "bottom-[45px]"
+          }  ml-[2px]`}
+        />
+        <TextInput
+          size="lg"
+          label="Enter Your Email Here"
+          {...getInputProps("email")}
+          placeholder="Enter your email here"
+          type="email"
+        />
       </div>
-      <B type="submit" leftSection={<Phone />} mt={"md"}>
+      <B
+        className="!text-[#0073C6]"
+        type="submit"
+        color="#0073C6"
+        leftSection={<Phone />}
+        mt={"md"}
+        loading={status === "pending"}
+      >
         Request a Callback
       </B>
     </form>
+  );
+};
+
+const Success = ({ close }: { close: any }) => {
+  return (
+    <div className="flex flex-col gap-4">
+      <p className="text-[#00487C] text-2xl not-italic font-semibold leading-8 tracking-[0.96px] mt-2">
+        Your call request has been sent to builder😇
+      </p>
+      <p className="text-[#202020] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px]">
+        Please wait for callback !
+      </p>
+      <B maw={150} onClick={close} className="!text-[#0073C6]">
+        Go To Project
+      </B>
+    </div>
   );
 };

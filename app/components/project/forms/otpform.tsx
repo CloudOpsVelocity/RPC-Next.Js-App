@@ -8,18 +8,20 @@ import { Box, Button, Modal, PinInput, em } from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
 import React, { useEffect, useRef, useState } from "react";
 import S from "@/app/styles/Otp.module.css";
+import axios from "axios";
+import { sendContact } from "@/app/utils/api/actions/contact";
 
 type Props = {
   callback: () => void;
-  mobile: number | null;
+  values: any;
 };
 
-export default function ReqOtpForm({ callback, mobile }: Props) {
-  const { verifyOtp } = useAuth();
+export default function ReqOtpForm({ callback, values }: Props) {
   const [error, setError] = useState(false);
   const onSubmit = async (value: any) => {
-    const data = await verifyOtp({ ...value, username: mobile });
-    if (data?.success) {
+    const data = await sendContact({ ...values, otp: value.otp });
+    console.log(data);
+    if (data?.status) {
       callback();
     } else {
       setError(true);
@@ -43,15 +45,30 @@ export default function ReqOtpForm({ callback, mobile }: Props) {
     <div>
       <form
         onSubmit={form.onSubmit(onSubmit)}
-        className="w-[100%] py-10 flex justify-start items-start flex-col "
+        className="w-[100%]  flex justify-start items-start flex-col "
       >
-        <h1 className="text-[#333] font-[600] text-lg md:text-[24px] text-center ">
+        <p className="text-[#EA7A00] text-base not-italic font-semibold leading-[normal] tracking-[0.64px] py-1">
+          You are one step away to get callback. Please verify your contact !
+        </p>
+        <p className="text-[#4D6677] text-[14px] font-[600] ">
+          Please verify your contact !
+        </p>
+        <p className="mt-2 text-green-600 font-semibold">
+          Builder: Sarang By Sumadhura
+        </p>
+        <p className="text-[#4D6677] text-base not-italic font-semibold leading-[normal] tracking-[0.64px] mt-2">
+          An OTP has been sent to your mobile number
+        </p>
+        <p className="text-[#333] text-xl not-italic font-semibold leading-[normal] tracking-[0.8px] mt-4">
+          Enter OTP
+        </p>
+        {/* <h1 className="text-[#333] font-[600] text-lg md:text-[24px] text-center ">
           OTP VERIFICATION
         </h1>
         <p className="text-[#B5ABAC] font-[500] md:text-[20px] text-center mb-[3%]  ">
           A One Time- Password has been sent to{" "}
-          {hideMobileNumber((mobile && mobile) || 0)}
-        </p>
+          {hideMobileNumber((values.mobile && values.mobile) || 0)}
+        </p> */}
         <PinInput
           classNames={{
             pinInput: S.pinInput,
@@ -66,15 +83,15 @@ export default function ReqOtpForm({ callback, mobile }: Props) {
           placeholder=""
         />
 
-        <Resend userName={mobile} />
+        <Resend userName={values.mobile} />
 
         {error && (
-          <p className="text-[#F00] font-[500] text-[16px] w-[100%] !max-w-[423px] !mb-[6%] text-center ">
+          <p className="text-[#F00] font-[500] text-[14px] w-[100%] !max-w-[423px] !mb-[6%]  ">
             You&apos;ve entered wrong OTP, Please enter your OTP again!
           </p>
         )}
         {form.errors.otp && (
-          <p className="text-[#F00] font-[500] text-[16px] w-[100%] !max-w-[423px] !mb-[6%] text-center ">
+          <p className="text-[#F00] font-[500] text-[14px] w-[100%] !max-w-[423px] !mb-[6%]  ">
             {form.errors.otp}
           </p>
         )}
@@ -127,24 +144,30 @@ const Resend = ({ userName }: any): JSX.Element => {
   const { minutes, seconds } = timeRemaining;
 
   return (
-    <div className="w-full flex justify-center my-4 flex-col items-end">
-      {seconds > 0 || minutes > 0 ? (
-        <p>
-          Time Remaining: {minutes < 10 ? `0${minutes}` : minutes}:
-          {seconds < 10 ? `0${seconds}` : seconds}
-        </p>
-      ) : (
-        <p>Didn&apos;t receive otp?</p>
-      )}
+    <div className="w-full flex justify-center my-4 flex-col items-end max-w-[280px]">
+      <button disabled={timerRunning} onClick={resendOTP}>
+        <span
+          style={{
+            color: timerRunning ? "#DFE3E8" : "#0073C6",
+          }}
+        >
+          {" "}
+          Resend OTP
+        </span>
 
-      <button
-        disabled={timerRunning}
-        style={{
-          color: timerRunning ? "#DFE3E8" : "#0073C6",
-        }}
-        onClick={resendOTP}
-      >
-        Resend OTP
+        <span
+          style={{
+            color: "#0073C6",
+          }}
+        >
+          {seconds > 0 || minutes > 0 ? (
+            <>
+              {" "}
+              in {minutes < 10 ? `0${minutes}` : minutes}:
+              {seconds < 10 ? `0${seconds}` : seconds}
+            </>
+          ) : null}
+        </span>
       </button>
     </div>
   );
