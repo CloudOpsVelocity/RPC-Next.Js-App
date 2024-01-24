@@ -26,6 +26,13 @@ export default function ProjectDetailsP({ slug }: Props) {
   const selectedPhase = PhaseOverview?.find(
     (phase: any) => phase.phaseId === currentPhase
   );
+  const propertyTypeOrder = ["apt", "rowHouse", "villa", "villament", "plot"];
+  const orderedPropertyTypes =
+    selectedPhase &&
+    propertyTypeOrder.filter((propertyType) =>
+      Object.keys(selectedPhase.propTypeOverview).includes(propertyType)
+    );
+
   return (
     <div className="w-[90%] mb-[5%]" id="propertyDetails">
       <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35]">
@@ -102,19 +109,18 @@ export default function ProjectDetailsP({ slug }: Props) {
       <div className="flex justify-start items-start gap-[4%] flex-wrap mt-[3%]">
         {selectedPhase && (
           <>
-            {Object.keys(selectedPhase.propTypeOverview).map(
-              (propertyTypeKey) => (
-                <PropertyTypeDetailsCrad
-                  phase={currentPhase}
-                  key={propertyTypeKey}
-                  cg={selectedPhase.propTypeOverview[propertyTypeKey]}
-                  propertyType={propertyTypeKey}
-                />
-              )
-            )}
+            {orderedPropertyTypes.map((propertyTypeKey: any) => (
+              <PropertyTypeDetailsCrad
+                phase={currentPhase}
+                key={propertyTypeKey}
+                cg={selectedPhase.propTypeOverview[propertyTypeKey]}
+                propertyType={propertyTypeKey}
+              />
+            ))}
           </>
         )}
       </div>
     </div>
   );
 }
+// apt,plot,rowHouse,villa,villament

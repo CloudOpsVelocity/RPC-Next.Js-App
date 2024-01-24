@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 export default function Feature({ data }: { data: string[] }) {
@@ -16,23 +17,15 @@ export default function Feature({ data }: { data: string[] }) {
             return (
               <li
                 key={ind}
-                className="flex items-start justify-start gap-[1%] mb-[1%] "
+                className="flex items-center justify-start gap-[1%] mb-[1%] "
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width={24}
-                  height={24}
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="text-green-500 mt-[4px]"
-                >
-                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                  <polyline points="22 4 12 14.01 9 11.01" />
-                </svg>
+                <Image
+                  width={20}
+                  height={20}
+                  className=""
+                  alt="Checked"
+                  src={"/project/Checked.png"}
+                />
                 <p className="text-[20px] lg:text-[24px] m-0 text-[#212C33] font-semibold ">
                   {each}
                 </p>

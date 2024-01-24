@@ -98,7 +98,7 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
           label="Unit Type"
           className="!w-[46%]"
           placeholder="-- select Unit Type --"
-          data={["1", "2", "3", "4", "5"]}
+          data={getOptions("bhkName")}
           searchable
           maxDropdownHeight={200}
           onChange={(value) => handleInputChange("unitType", value as string)}

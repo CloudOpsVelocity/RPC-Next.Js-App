@@ -1,5 +1,6 @@
 import { useDisclosure } from "@mantine/hooks";
 import { Modal, Select } from "@mantine/core";
+import { useId } from "react";
 import {
   LenseIcon,
   PopupOpenSvg,
@@ -29,7 +30,6 @@ function FloorPlanModal({ propCgId, data }: Props) {
   const setFloorsArray = useSetAtom(floorPlansArray);
   const [opened, { open, close }] = useDisclosure(false);
   const form = useForm();
-  console.log(form.values);
   const handleOpen = () => {
     setFloorsArray(data);
     open();
@@ -39,6 +39,10 @@ function FloorPlanModal({ propCgId, data }: Props) {
     form.reset();
   };
 
+  const handleReset = () => {
+    const keys = Object.keys(form.values);
+    keys.forEach((key) => form.setFieldValue(key, null));
+  };
   return (
     <FormProvider form={form}>
       <div
@@ -99,7 +103,7 @@ function FloorPlanModal({ propCgId, data }: Props) {
               ) && (
                 <button
                   className="flex items-center px-2.5 border-none py-0.5 w-fit font-[500] text-[18px] lg:text-[20px] transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-[#FFF] text-secondary-foreground hover:bg-gray-100/80 fnt-[600] text-[#0073C6] underline"
-                  onClick={() => form.reset()}
+                  onClick={handleReset}
                 >
                   Clear All Filter
                 </button>
@@ -124,7 +128,7 @@ export default FloorPlanModal;
 const LeftSection = ({ propCgId, data }: Props) => {
   const [, setFloorsArray] = useAtom(floorPlansArray);
   const [, setFloor] = useAtom(selectedFloorAtom);
-  const { getInputProps, values,setFieldValue } = useFormContext();
+  const { getInputProps, values, setFieldValue } = useFormContext();
   const getOptions = (property: string): string[] => {
     return Array.from(new Set(data.map((item: any) => String(item[property]))));
   };
@@ -141,6 +145,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
     setFloor(filteredData[0]);
     setFloorsArray(filteredData);
   };
+  console.log(values);
   // const handleOnChange = (value:string,key:string)=> {
   //   setFieldValue(key,value)
   //   handleSearch()
@@ -151,13 +156,13 @@ const LeftSection = ({ propCgId, data }: Props) => {
       <div className="w-[100%] flex justify-between items-start flex-wrap gap-[5%]">
         {propCgId != projectprops.plot && (
           <Select
-            key={"unitType"}
+            key={useId()}
             w={"full"}
             mt="md"
             label="Select Unit Type"
             className="!w-[46%]"
             placeholder="-- select --"
-            data={getOptions('bhkName')}
+            data={getOptions("bhkName")}
             searchable
             maxDropdownHeight={200}
             {...getInputProps("bhkName")}
@@ -165,7 +170,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
         )}
         {propCgId != projectprops.plot && (
           <Select
-            key={values.towerName}
+            key={useId()}
             w={"full"}
             mt="md"
             label="Select Tower"
@@ -182,7 +187,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
         {propCgId == projectprops.apartment &&
           propCgId != projectprops.plot && (
             <Select
-              key={values.block}
+              key={useId()}
               w={"full"}
               mt="md"
               label="Select Block"
@@ -197,7 +202,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
 
         {propCgId != projectprops.plot && (
           <Select
-            key={values.floor}
+            key={useId()}
             w={"full"}
             mt="md"
             label={`${
@@ -216,7 +221,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
         )}
 
         <Select
-          key={values.unitNumber}
+          key={useId()}
           w={"full"}
           mt="md"
           label="Select Unit Number"
@@ -229,7 +234,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
         />
 
         <Select
-          key={values.facingName}
+          key={useId()}
           w={"full"}
           mt="md"
           label={`${
@@ -247,7 +252,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
 
         {propCgId != projectprops.plot && (
           <Select
-            key={values.superBuildUparea}
+            key={useId()}
             w={"full"}
             mt="md"
             label="Super Built-up Area "
@@ -262,7 +267,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
 
         {propCgId != projectprops.plot && (
           <Select
-            key={values.caretarea}
+            key={useId()}
             w={"full"}
             mt="md"
             label="Carpet Area"
@@ -278,7 +283,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
         {propCgId != projectprops.apartment &&
           propCgId != projectprops.plot && (
             <Select
-              key={values.gardenArea}
+              key={useId()}
               w={"full"}
               mt="md"
               label="Select Garden Area"
@@ -294,7 +299,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
         {propCgId != projectprops.apartment &&
           propCgId != projectprops.plot && (
             <Select
-              key={values.terraceArea}
+              key={useId()}
               w={"full"}
               mt="md"
               label="Select Terrace Area"
@@ -309,7 +314,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
 
         {propCgId != projectprops.plot && (
           <Select
-            key={values.noOfCarParking}
+            key={useId()}
             w={"full"}
             mt="md"
             label="Select Car Parking"
@@ -324,7 +329,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
 
         {propCgId != projectprops.plot && (
           <Select
-            key={values.openCoveredParking}
+            key={useId()}
             w={"full"}
             mt="md"
             label="Open/ Covered Parking"
@@ -339,7 +344,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
 
         {propCgId != projectprops.plot && (
           <Select
-            key={values.totalNumberOfBalcony}
+            key={useId()}
             w={"full"}
             mt="md"
             label="No: of Balcony"
@@ -354,7 +359,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
 
         {propCgId != projectprops.plot && (
           <Select
-            key={values.totalNumberofBathroom}
+            key={useId()}
             w={"full"}
             mt="md"
             label="No: of Bathroom"
@@ -370,7 +375,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
         {propCgId == projectprops.villament &&
           propCgId != projectprops.plot && (
             <Select
-              key={values.balconySize}
+              key={useId()}
               w={"full"}
               mt="md"
               label="Choose Balcony Size"
@@ -385,7 +390,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
 
         {propCgId == projectprops.plot && (
           <Select
-            key={values.plotArea}
+            key={useId()}
             w={"full"}
             mt="md"
             label="Select Plot Area"
@@ -400,7 +405,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
 
         {propCgId == projectprops.plot && (
           <Select
-            key={values.length}
+            key={useId()}
             w={"full"}
             mt="md"
             label="length Of Plot"
@@ -415,7 +420,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
 
         {propCgId == projectprops.plot && (
           <Select
-            key={values.width}
+            key={useId()}
             w={"full"}
             mt="md"
             label="Breadth of Plot"
@@ -461,7 +466,11 @@ const RightSection = ({ propCgId }: Props) => {
               <polyline points="9 22 9 12 15 12 15 22" />
             </svg>
             <p className="text-[#4D6677] text-[14px] font-[500]">
-              Unit Type <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] "> {data.bhkName}</span>
+              Unit Type{" "}
+              <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
+                {" "}
+                {data.bhkName}
+              </span>
             </p>
           </div>
         )}
@@ -493,7 +502,11 @@ const RightSection = ({ propCgId }: Props) => {
               <path d="M8 14h.01" />
             </svg>
             <p className="text-[#4D6677] text-[14px] font-[500]">
-              Tower <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] "> {data.towerName}</span>
+              Tower{" "}
+              <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
+                {" "}
+                {data.towerName}
+              </span>
             </p>
           </div>
         )}
@@ -517,7 +530,11 @@ const RightSection = ({ propCgId }: Props) => {
                 <path d="M10 21V8a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1H3" />
               </svg>
               <p className="text-[#4D6677] text-[14px] font-[500]">
-                Block <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] "> {data.block}</span>
+                Block{" "}
+                <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
+                  {" "}
+                  {data.block}
+                </span>
               </p>
             </div>
           )}
@@ -546,7 +563,10 @@ const RightSection = ({ propCgId }: Props) => {
                   ? "Elevation"
                   : "Floor"
               }`}{" "}
-              <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] "> {data.floor}</span>{" "}
+              <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
+                {" "}
+                {data.floor}
+              </span>{" "}
             </p>
           </div>
         )}
@@ -571,7 +591,11 @@ const RightSection = ({ propCgId }: Props) => {
             <path d="M13 4.562v16.157a1 1 0 0 1-1.242.97L5 20V5.562a2 2 0 0 1 1.515-1.94l4-1A2 2 0 0 1 13 4.561Z" />
           </svg>
           <p className="text-[#4D6677] text-[14px] font-[500]">
-            Unit Number <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] "> {data.unitNumber}</span>
+            Unit Number{" "}
+            <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
+              {" "}
+              {data.unitNumber}
+            </span>
           </p>
         </div>
 
@@ -593,7 +617,10 @@ const RightSection = ({ propCgId }: Props) => {
           </svg>
           <p className="text-[#4D6677] text-[14px] font-[500]">
             {`${propCgId == projectprops.plot ? "Plot Facing" : "Facing"} `}{" "}
-            <span className="text-[#303A42] text-[14px] font-[600] ml-[10px] "> {data.facingName}</span>
+            <span className="text-[#303A42] text-[14px] font-[600] ml-[10px] ">
+              {" "}
+              {data.facingName}
+            </span>
           </p>
         </div>
 
@@ -617,7 +644,11 @@ const RightSection = ({ propCgId }: Props) => {
               <path d="M3 7.8V3m0 0h4.8M3 3l6 6" />
             </svg>
             <p className="text-[#4D6677] text-[14px] font-[500]">
-              Super Builtup Area <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] "> {data.superBuildUparea} sq.ft</span>
+              Super Builtup Area{" "}
+              <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
+                {" "}
+                {data.superBuildUparea} sq.ft
+              </span>
             </p>
           </div>
         )}
@@ -643,7 +674,11 @@ const RightSection = ({ propCgId }: Props) => {
               <path d="M12 4v9" />
             </svg>
             <p className="text-[#4D6677] text-[14px] font-[500]">
-              Carpet Area <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] "> {data.caretarea} sq.ft</span>
+              Carpet Area{" "}
+              <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
+                {" "}
+                {data.caretarea} sq.ft
+              </span>
             </p>
           </div>
         )}
@@ -668,7 +703,11 @@ const RightSection = ({ propCgId }: Props) => {
               <circle cx={17} cy={17} r={2} />
             </svg>
             <p className="text-[#4D6677] text-[14px] font-[500]">
-              Car Parking <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] "> {data.noOfCarParking}</span>
+              Car Parking{" "}
+              <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
+                {" "}
+                {data.noOfCarParking}
+              </span>
             </p>
           </div>
         )}
@@ -691,7 +730,10 @@ const RightSection = ({ propCgId }: Props) => {
               <path d="M9 17V7h4a3 3 0 0 1 0 6H9" />
             </svg>
             <p className="text-[#4D6677] text-[14px] font-[500]">
-              Open/Covered Parking <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">{data.parkingType} Parking</span>
+              Open/Covered Parking{" "}
+              <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
+                {data.parkingType} Parking
+              </span>
             </p>
           </div>
         )}
@@ -723,7 +765,11 @@ const RightSection = ({ propCgId }: Props) => {
               <path d="M8 14h.01" />
             </svg>
             <p className="text-[#4D6677] text-[14px] font-[500]">
-              Balconies <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] "> {data.totalNumberOfBalcony}</span>
+              Balconies{" "}
+              <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
+                {" "}
+                {data.totalNumberOfBalcony}
+              </span>
             </p>
           </div>
         )}
@@ -749,7 +795,11 @@ const RightSection = ({ propCgId }: Props) => {
               <line x1={17} x2={17} y1={19} y2={21} />
             </svg>
             <p className="text-[#4D6677] text-[14px] font-[500]">
-              Bathroom <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] "> {data.totalNumberofBathroom}</span>
+              Bathroom{" "}
+              <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
+                {" "}
+                {data.totalNumberofBathroom}
+              </span>
             </p>
           </div>
         )}
@@ -769,7 +819,11 @@ const RightSection = ({ propCgId }: Props) => {
               />
             </svg>
             <p className="text-[#4D6677] text-[14px] font-[500]">
-              Plot Area <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] "> 02</span>
+              Plot Area{" "}
+              <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
+                {" "}
+                02
+              </span>
             </p>
           </div>
         )}
@@ -789,7 +843,11 @@ const RightSection = ({ propCgId }: Props) => {
               />
             </svg>
             <p className="text-[#4D6677] text-[14px] font-[500]">
-              Length of Plot <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] "> 02</span>
+              Length of Plot{" "}
+              <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
+                {" "}
+                02
+              </span>
             </p>
           </div>
         )}
@@ -809,7 +867,11 @@ const RightSection = ({ propCgId }: Props) => {
               />
             </svg>
             <p className="text-[#4D6677] text-[14px] font-[500]">
-              Breadth of Plot <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] "> 02</span>
+              Breadth of Plot{" "}
+              <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
+                {" "}
+                02
+              </span>
             </p>
           </div>
         )}
@@ -826,9 +888,7 @@ const MiddleSection = () => {
   const [currentImg, setCurrentImg] = useState(0);
   const [, setFloor] = useAtom(selectedFloorAtom);
 
-  
-
-  const selectImg = (index:number) => {
+  const selectImg = (index: number) => {
     setFloor(floorsArray[index]);
     setCurrentImg(index);
   };
@@ -903,7 +963,7 @@ const MiddleSection = () => {
                       width={57}
                       height={37}
                       style={{ aspectRatio: "100 / 50", objectFit: "cover" }}
-                      onClick={()=>selectImg(ind)}
+                      onClick={() => selectImg(ind)}
                     />
                   </div>
                 );
