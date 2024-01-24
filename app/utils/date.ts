@@ -23,7 +23,7 @@ function formatDate(inputDate: string | undefined): string {
   const formattedDate = newDate.toLocaleDateString("en-US", {
     weekday: "short",
     month: "short",
-    day: "numeric",
+    // day: "numeric",
     year: "numeric",
   });
 

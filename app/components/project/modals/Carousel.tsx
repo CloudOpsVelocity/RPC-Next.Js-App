@@ -21,12 +21,7 @@ function CarouselModal({ opened, setOpened }: CarouselModalProps) {
 
   return (
     <>
-      <button
-        onClick={() => setOpened(true)}
-        className="absolute bottom-2 right-2 cursor-pointer"
-      >
-        <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] " />
-      </button>
+      
       <Modal
         opened={opened}
         size={"90%"}
@@ -39,7 +34,7 @@ function CarouselModal({ opened, setOpened }: CarouselModalProps) {
         }}
       >
         <div className="flex  mb-10 justify-center items-start gap-[45px] shrink-0">
-          <MiddleSection />
+          <MiddleSection hide={true} />
           <RightSection propCgId={""} />
         </div>
        
