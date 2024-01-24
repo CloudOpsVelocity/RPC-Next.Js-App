@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useDisclosure } from "@mantine/hooks";
 import { Modal, Button, Image } from "@mantine/core";
-import { PopupOpenSvg } from "@/app/images/commonSvgs";
+import { PopupOpenSvg, videoPlayIcon } from "@/app/images/commonSvgs";
 import { Carousel } from "@mantine/carousel";
 import S from "@/app/styles/ImgCarousel.module.css";
 import ReactPlayer from "react-player";
@@ -105,20 +105,20 @@ const Gallery: React.FC<GalleryProps> = ({
                     key={index}
                     onClick={() => handleImageClick(video)}
                   >
-                    <Image
-                      radius="md"
-                      h={100}
-                      w="auto"
-                      fit="contain"
-                      src={
-                        "https://imagesrpc.s3.ap-south-1.amazonaws.com/images/varify/project/197/other/0.jpg"
-                      }
-                      className={`cursor-pointer ${
-                        video === previewImage
-                          ? "border-[5px] border-white"
-                          : ""
-                      }`}
-                    />
+                    <div className="relative">
+                      <ReactPlayer
+                        key={index}
+                        width={150}
+                        height={100}
+                        url={video as string}
+                        alt={`Image ${index + 1}`}
+                        className={`w-[110px] lg:w-[152px] h-[68px] lg:h-[94px] rounded-[5px] shadow-md mb-[4%] cursor-pointer`}
+                      />
+                      <span className="absolute top-[40px] left-[60px] pointer-events-none ">
+                    {videoPlayIcon}
+                  </span>
+                </div>
+                    
                   </Carousel.Slide>
                 ))}
               </React.Fragment>

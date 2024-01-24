@@ -1,12 +1,11 @@
 "use client";
-import { PopupOpenSvg } from "@/app/images/commonSvgs";
+import { PopupOpenSvg, videoPlayIcon } from "@/app/images/commonSvgs";
 import { Media } from "@/app/validations/types/project";
 import Image from "next/image";
 import React, { useState } from "react";
 import ReactPlayer from "react-player";
 import Gallery from "./modals/Gallery";
-
-import ReactVideoThumbnail from "react-video-thumbnail";
+// import ReactVideoThumbnail from "react-video-thumbnail";
 
 export default function GalleryBlock({
   coverImageUrl,
@@ -77,19 +76,15 @@ export default function GalleryBlock({
           </h3>
           <div className="flex justify-start items-start w-full gap-[4%] flex-wrap ">
             {images?.map((img, ind) => (
-              <div
+              <Image
                 key={ind}
+                width={150}
+                height={100}
+                src={img as string}
+                alt={`Image ${ind + 1}`}
                 className="w-[110px] lg:w-[152px] h-[68px] lg:h-[94px] bg-[#dfdcdc] rounded-[5px] shadow-md mb-[4%] cursor-pointer"
-              >
-                <Image
-                  width={150}
-                  height={100}
-                  src={img as string}
-                  alt={`Image ${ind + 1}`}
-                  className="w-full h-full object-cover rounded-[5px]"
-                  onClick={() => handleMediaClick(img as string)}
-                />
-              </div>
+                onClick={() => handleMediaClick(img as string)}
+              />
             ))}
           </div>
 
@@ -98,20 +93,19 @@ export default function GalleryBlock({
           </h3>
           <div className="flex justify-start items-start w-full gap-[4%] flex-wrap ">
             {videos?.map((img, ind) => (
-              <div
-                className="w-52 h-28 cursor-pointer"
-                onClick={() => handleMediaClick(img as string)}
-              >
-                <ReactVideoThumbnail
-                  width={150}
-                  height={100}
+              <div className="relative w-[110px] lg:w-[152px] h-[68px] lg:h-[94px] bg-[#dfdcdc] rounded-[5px] shadow-md mb-[4%] cursor-pointer">
+                <ReactPlayer
+                  key={ind}
+                  // width={150}
+                  // height={100}
+                  url={img as string}
+                  alt={`Image ${ind + 1}`}
+                  className="!w-[110px] !lg:w-[152px] !h-[68px] !lg:h-[94px] bg-[#dfdcdc] rounded-[5px] shadow-md mb-[4%] cursor-pointer"
                   onClick={() => handleMediaClick(img as string)}
-                  videoUrl={img}
-                  thumbnailHandler={(thumbnail: any) => {
-                    // Handle the generated thumbnail
-                    console.log("Generated Thumbnail:", thumbnail);
-                  }}
                 />
+                <span className="absolute top-[40px] left-[60px] pointer-events-none ">
+                  {videoPlayIcon}
+                </span>
               </div>
             ))}
           </div>
