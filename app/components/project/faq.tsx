@@ -17,6 +17,10 @@ import { addQna } from "@/app/utils/api/actions/Qna";
 import { useParams } from "next/navigation";
 import { useForm, yupResolver } from "@mantine/form";
 import { qnaSchema } from "@/app/validations/project";
+import { useSession } from "next-auth/react";
+import { infoIcon } from "@/app/images/commonSvgs";
+import Link from "next/link";
+import toast from "react-hot-toast";
 
 type FaqWithBgProps = {
   data: FAQ[];
@@ -77,6 +81,7 @@ export function FaqWithBg({ data }: FaqWithBgProps) {
 
 const AddQnaForm = () => {
   const { slug } = useParams<{ slug: string }>();
+  const { data: session } = useSession();
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error"
   >();
@@ -87,15 +92,36 @@ const AddQnaForm = () => {
     validate: yupResolver(qnaSchema),
   });
   const formSubmit = async (values: any) => {
-    setStatus("pending");
-    try {
-      await addQna({ question: values.question, projIdEnc: slug });
-      reset();
-      setStatus("success");
-    } catch (error: any) {
-      setErrors({ question: error.message });
-      setStatus("error");
+    if(session){
+      setStatus("pending");
+      try {
+        await addQna({ question: values.question, projIdEnc: slug });
+        reset();
+        setStatus("success");
+      } catch (error: any) {
+        setErrors({ question: error.message });
+        setStatus("error");
+      }
+    }else{
+      toast.custom((t) => (
+        <div
+          className={`${
+            t.visible ? 'animate-enter' : 'animate-leave'
+          } ml-auto w-full pointer-events-auto flex justify-end items-end ring-1 ring-transparent ring-opacity-5`}
+        >
+          <p className=" text-[#565D70] p-[8px] pr-[16px] pl-[16px] bg-white shadow-lg flex items-center rounded-lg gap-[10px] text-[20px] whitespace-nowrap font-[600] ">
+            {infoIcon}  Please 
+            <Link rel="shortcut icon" href="/login" >
+              <span className=" cursor-pointer text-[#0073C6] ">
+                login/ Signup
+              </span>
+            </Link> 
+            to ask QNAs
+          </p>
+        </div>
+      ))
     }
+
   };
   return (
     <form

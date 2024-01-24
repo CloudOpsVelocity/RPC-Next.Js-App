@@ -8,6 +8,7 @@ import {
   useJsApiLoader,
   useGoogleMap,
   DirectionsRenderer,
+  InfoWindow,
 } from "@react-google-maps/api";
 import cslx, { clsx } from "clsx";
 import axios from "axios";
@@ -276,11 +277,23 @@ const Nearby: React.FC<{ lat: string; lang: string }> = ({ lat, lang }) => {
                     icon={{
                       url: "/mapIcon.svg",
                     }}
+                    
                   >
-                    <div className="bg-black text-white absolute ">
-                      Map Details There{" "}
-                    </div>
+                    <InfoWindow >
+                      <div className=" ">
+                        <p className="text-[#00487C] text-[10px] italic font-medium leading-[normal]">Project you are exploring</p>
+                        <p className="text-[#006A02] text-sm not-italic font-semibold leading-[normal]">Sarang By Sumadhura</p>
+                      </div>
+                    </InfoWindow>
                   </Marker>
+
+                  {/* <MarkerWithLabel
+                    position={{ lat: -34.397, lng: 150.644 }}
+                    labelAnchor={new google.maps.Point(0, 0)}
+                    labelStyle={{backgroundColor: "yellow", fontSize: "32px", padding: "16px"}}
+                  >
+                    <div>Hello There!</div>
+                  </MarkerWithLabel> */}
                 </div>
               )}
               {directionsResponse && (
