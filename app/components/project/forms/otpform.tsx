@@ -8,6 +8,7 @@ import { Box, Button, Modal, PinInput, em } from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
 import React, { useEffect, useRef, useState } from "react";
 import S from "@/app/styles/Otp.module.css";
+import axios from "axios";
 
 type Props = {
   callback: () => void;

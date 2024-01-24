@@ -80,7 +80,6 @@ const RequestCallBackModal = ({
         }}
       >
         <>
-          {/* <div className="bg-[#E0F7FF]  flex items-center justify-center p-4"> */}
           <div className="bg-white rounded-lg  overflow-hidden flex ">
             <div className="w-full p-8">
               <h2 className="text-2xl font-semibold text-gray-700">
@@ -95,7 +94,6 @@ const RequestCallBackModal = ({
               <p className="mt-2 text-green-600 font-semibold">
                 Builder: Sarang By Sumadhura
               </p>
-              {/* There */}
               <Content />
             </div>
             <div className="hidden md:block w-1/2 relative">
@@ -108,7 +106,6 @@ const RequestCallBackModal = ({
               />
             </div>
           </div>
-          {/* </div> */}
         </>
       </Modal>
     </>
