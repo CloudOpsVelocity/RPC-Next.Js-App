@@ -66,7 +66,6 @@ function FloorPlanModal({ propCgId, data }: Props) {
       >
         <>
           <div className="bg-white pl-5">
-            <h1 className="text-2xl font-bold">Floor Plan</h1>
             <p className="text-sm mt-2 mb-6">
               See floor plan according to your selections
             </p>
@@ -880,7 +879,7 @@ const RightSection = ({ propCgId }: Props) => {
   );
 };
 
-const MiddleSection = () => {
+const MiddleSection = ({hide = false}:any) => {
   const data = useAtomValue(selectedFloorAtom);
 
   const floorsArray = useAtomValue(floorPlansArray);
@@ -921,8 +920,11 @@ const MiddleSection = () => {
 
         {floorsArray != undefined &&
           floorsArray != null &&
-          floorsArray.length > 0 && (
-            <PopupOpenSvg className="absolute bottom-0 right-0 w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] m-[1%] " />
+          floorsArray.length > 0 && hide === false  &&  (
+            <button onClick={()=> setOpened(true)}>
+
+              <PopupOpenSvg className="absolute bottom-0 right-0 w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] m-[1%] "  />
+            </button>
           )}
       </div>
 

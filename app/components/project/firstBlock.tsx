@@ -12,6 +12,7 @@ import { Main } from "@/app/validations/types/project";
 import Image from "next/image";
 import SharePopup from "../atoms/SharePopup";
 import { formatCurrency } from "@/app/utils/numbers";
+import { formatDate } from "@/app/utils/date";
 
 type Props = {
   projectDetails: Main | null;
@@ -71,26 +72,24 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
               </p>
               <div className="ml-[2%]">
                 <h3 className="text-[24px] lg:text-[28px] font-[700] text-[#00487C] uppercase">
-                  {projectDetails.projectName} sarang by sumadhura
+                  {projectDetails.projectName}
                 </h3>
 
                 <p className="text-[#202020] text-[16px] not-italic font-[500] leading-[normal] w-[100%] tracking-[0.32px]">
                   {projectDetails.address}
-                  Folium by Sumadhura, Borewell Rd, Whitefield, Palm Meadows,
-                  Ramagondanahalli, Bengaluru, Karnataka 560066
+                  
                 </p>
 
                 <p className="text-[16px] mt-[7px] mb-[7px] lg:text-[16px] font-[600] text-[#001F35]">
                   Start - End Date:
                   <span className="font-[600] text-[#202020]">
                     {" "}
-                    {projectDetails.startDate} - {projectDetails.endDate}
-                    12 March, 2023 - 14 June, 2024
+                    {formatDate(projectDetails.startDate)} - {formatDate(projectDetails.endDate)}
                   </span>
                 </p>
 
                 <p className="text-[16px] font-[600] text-[#666]">
-                  Posted By: {projectDetails.postedBy}
+                  Posted By: Builder
                 </p>
               </div>
             </div>
