@@ -9,15 +9,12 @@ import {
   footerPhoneIcon,
 } from "@/app/images/commonSvgs";
 import ProjBasicDetails from "@/app/components/project/projBasicDetails";
-import Button from "../../elements/button";
 import { Main } from "@/app/validations/types/project";
 import OverviewBanner from "./overviewBanner";
-import { useDisclosure } from "@mantine/hooks";
 import Ratings from "./Ratings";
 import ShortList from "./actions/shortList";
 import CompareList from "./actions/compareList";
-import { formatDate } from "@/app/utils/date";
-import { start } from "repl";
+import { formatDateDDMMYYYY } from "@/app/utils/date";
 
 export default function Overview({
   maxPrice,
@@ -106,14 +103,14 @@ export default function Overview({
             key="startDate"
             icon={<StartDate />}
             title="Start Date"
-            value={formatDate(startDate)}
+            value={formatDateDDMMYYYY(startDate)}
             className="mr-[5%] pt-[2%] mb-[3%] "
           />
           <ProjBasicDetails
             key="endDate"
             icon={<EndDate />}
             title="End Date"
-            value={formatDate(endDate)}
+            value={formatDateDDMMYYYY(endDate)}
             className="mr-[5%] pt-[2%] mb-[3%] "
           />
         </div>
