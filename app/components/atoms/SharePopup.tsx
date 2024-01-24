@@ -54,6 +54,7 @@ export default function SharePopup() {
               <CopyButton value={CopiedUrl}>
                 {({ copied, copy }) => (
                   <Button
+                    className="!text-[#0073C6]"
                     color={copied ? "teal" : "#0073C6"}
                     onClick={copy}
                     miw={100}

@@ -116,7 +116,12 @@ const Content = () => {
           <p className="mt-2 text-gray-600">Name: Ankit Soni</p>
           <p className="mt-2 text-gray-600">Contact: 8888855555</p>
           <p className="mt-2 text-gray-600">Email: ankitsoni12@gmail.com</p>
-          <B type="submit" leftSection={<Phone />} mt={"md"} color="#0073C6">
+          <B
+            type="submit"
+            leftSection={<Phone />}
+            mt={"md"}
+            className="!text-[#0073C6]"
+          >
             Request a Callback
           </B>
         </div>
@@ -220,6 +225,7 @@ const ReqForm = ({ close }: { close: any }) => {
         />
       </div>
       <B
+        className="!text-[#0073C6]"
         type="submit"
         color="#0073C6"
         leftSection={<Phone />}
@@ -241,7 +247,7 @@ const Success = ({ close }: { close: any }) => {
       <p className="text-[#202020] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px]">
         Please wait for callback !
       </p>
-      <B maw={150} onClick={close} color="#0073C6">
+      <B maw={150} onClick={close} className="!text-[#0073C6]">
         Go To Project
       </B>
     </div>
