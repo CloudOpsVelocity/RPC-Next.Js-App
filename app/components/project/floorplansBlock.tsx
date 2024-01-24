@@ -257,11 +257,23 @@ export default function FloorplansBlock({ slug }: Props) {
             Sarang by sumadhura/2bhk/tower 1/ 04/north/1124 sq.ft
           </p>
           <div className="flex justify-center items-center h-[300px] lg:h-[450px] w-full">
+            {selectedFloor?.floorPlanUrl ? 
             <img
               src={selectedFloor?.floorPlanUrl as string}
               className="w-full h-full"
               alt="image"
             />
+            :
+            <div className="flex justify-center items-center flex-col ">
+              <img
+                src='/project/noimage.svg'
+                className="w-[80%] h-full"
+                alt="image"
+              />
+              <p className=" text-[#000] text-center text-[18px] md:text-[28px] lg:text-[32px] font-[600] ">Image is not available</p>
+            </div>
+            }
+
             {/* dISPLAY FLOOR PLAN HERE */}
           </div>
           <FloorPlanModal propCgId={propCgId} data={projectUnitsData} />
