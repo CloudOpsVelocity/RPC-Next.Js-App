@@ -42,8 +42,8 @@ export interface Bank {
 
 export interface FAQ {
   qnaId: null;
-  que: string;
-  ans: string;
+  faqQuestion: string;
+  faqAnswer: string;
 }
 
 export interface Media {

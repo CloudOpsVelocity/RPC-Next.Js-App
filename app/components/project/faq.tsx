@@ -17,8 +17,6 @@ import { addQna } from "@/app/utils/api/actions/Qna";
 import { useParams } from "next/navigation";
 import { useForm, yupResolver } from "@mantine/form";
 import { qnaSchema } from "@/app/validations/project";
-const placeholder =
-  "It can’t help but hear a pin drop from over half a mile away, so it lives deep in the mountains where there aren’t many people or Pokémon.It was born from sludge on the ocean floor. In a sterile environment, the germs within its body can’t multiply, and it dies.It has no eyeballs, so it can’t see. It checks its surroundings via the ultrasonic waves it emits from its mouth.";
 
 type FaqWithBgProps = {
   data: FAQ[];
@@ -64,10 +62,10 @@ export function FaqWithBg({ data }: FaqWithBgProps) {
             value={`faq-${index}`}
           >
             <Accordion.Control className={classes.title}>
-              {faq.que}
+              {faq.faqQuestion}
             </Accordion.Control>
             <Accordion.Panel className={classes.content}>
-              {faq.ans}
+              {faq.faqAnswer}
             </Accordion.Panel>
           </Accordion.Item>
         ))}
