@@ -115,7 +115,11 @@ const Gallery: React.FC<GalleryProps> = ({
                           height={100}
                           url={video as string}
                           alt={`Image ${index + 1}`}
-                          className={`w-[110px] lg:w-[152px] h-[68px] lg:h-[94px] rounded-[5px] shadow-md mb-[4%] cursor-pointer`}
+                          className={`w-[110px] lg:w-[152px] h-[68px] lg:h-[94px] rounded-[5px] shadow-md mb-[4%] cursor-pointer  ${
+                            video === previewImage
+                              ? "border-[5px] border-white"
+                              : ""
+                          }`}
                         />
                         <span className="absolute top-[40px] left-[60px] pointer-events-none ">
                           {videoPlayIcon}
