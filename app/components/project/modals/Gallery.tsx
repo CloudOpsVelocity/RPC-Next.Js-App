@@ -38,8 +38,8 @@ const Gallery: React.FC<GalleryProps> = ({
           setPreviewImage(null);
           close();
         }}
-        className="h-[90vh]"
-        size={"80%"}
+        className="md:h-[90vh] w-full"
+        size={"100%"}
         classNames={{
           close: S.close,
           content: S.content,
@@ -78,6 +78,7 @@ const Gallery: React.FC<GalleryProps> = ({
               align="start"
               mx={"auto"}
               slidesToScroll={5}
+              className="!h-[50px] !md:h-[100px]"
             >
               {isImage ? (
                 <React.Fragment>
@@ -92,7 +93,7 @@ const Gallery: React.FC<GalleryProps> = ({
                         w="auto"
                         fit="contain"
                         src={image}
-                        className={`cursor-pointer ${
+                        className={`cursor-pointer !h-[50px] !md:h-[100px] ${
                           image === previewImage
                             ? "border-[5px] border-white"
                             : ""

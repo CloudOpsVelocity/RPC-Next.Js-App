@@ -108,7 +108,7 @@ function FloorPlanModal({ propCgId, data }: Props) {
                 </button>
               )}
             </div>
-            <div className="flex justify-between items-start gap-[45px] w-full">
+            <div className="flex justify-between items-start gap-[45px] flex-col md:flex-row w-full">
               <LeftSection propCgId={propCgId} data={data} />
               {selectedFloor && <MiddleSection />}
               {selectedFloor && (
@@ -157,7 +157,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
   // }
   // console.log(values);
   return (
-    <div className="col-span-1 w-[30%] ">
+    <div className="col-span-1 w-full md:w-[30%]  ">
       <div className="w-[100%] flex justify-between items-start flex-wrap gap-[5%]">
         {propCgId != projectprops.plot && (
           <Select
@@ -451,7 +451,7 @@ const RightSection = ({ propCgId }: Props) => {
   const data = useAtomValue(selectedFloorAtom);
   console.log(data);
   return (
-    <div className="bg-[#F4FBFF] p-6 rounded-lg w-[20%] shadow">
+    <div className="bg-[#F4FBFF] p-6 rounded-lg w-full md:w-[20%] shadow">
       <div className="space-y-4">
         {propCgId != projectprops.plot && (
           <div className="flex items-center space-x-3">
@@ -899,7 +899,7 @@ const MiddleSection = ({hide = false}:any) => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-start shrink-0 w-[40%]">
+    <div className="flex flex-col justify-center items-start shrink-0 w-full md:w-[40%]">
       <p className="text-[#005DA0] w-full text-right mb-[1%] text-[16px] font-[500] ">
         Sarang by sumadhura/2bhk/tower 1/ 04/north/1124 sq.ft
       </p>
@@ -928,7 +928,6 @@ const MiddleSection = ({hide = false}:any) => {
           floorsArray != null &&
           floorsArray.length > 0 && hide === false  &&  (
             <button onClick={()=> setOpened(true)}>
-
               <PopupOpenSvg className="absolute bottom-0 right-0 w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] m-[1%] "  />
             </button>
           )}
@@ -957,7 +956,7 @@ const MiddleSection = ({hide = false}:any) => {
               </svg>
             </button>
 
-            <div className="flex w-full justify-start items-start">
+            <div className="flex w-full justify-start items-start overflow-x-auto ">
               {floorsArray.map((eachObj, ind) => {
                 return (
                   <div

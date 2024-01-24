@@ -165,7 +165,7 @@ export default function FloorplansBlock({ slug }: Props) {
               return (
                 <Button
                   key={keyName}
-                  buttonClass={`flex justify-start mb-[3%] rounded-[20px] gap-[8px] pr-[8px] items-center mr-[24px] md:ml-[24px] text-[18px] ${
+                  buttonClass={`flex justify-start mb-[3%] w-full rounded-[20px] gap-[8px] pr-[8px] items-center mr-[24px] md:ml-[24px] text-[18px] ${
                     propCgId == keyName
                       ? "text-[#001F35] font-[500] shadow-md bg-[#D5EDFF]"
                       : "text-[#303A42] font-[400] bg-[#EEF7FE]"
@@ -223,9 +223,9 @@ export default function FloorplansBlock({ slug }: Props) {
         )}
       </div>
 
-      <div className=" h-[456px] lg:h-[570px] w-full rounded-[14px] mt-[2%] border-solid border-[1px] border-[#92B2C8] bg-[#FFF] shadow-md flex justify-center items-center ">
+      <div className="  h-full md:h-[456px] lg:h-[570px] w-full rounded-[14px] mt-[2%] border-solid border-[1px] border-[#92B2C8] bg-[#FFF] shadow-md flex flex-col md:flex-row justify-center items-center ">
         {floorPlanType === "type" && (
-          <div className="w-[50%] h-[456px] lg:h-[570px] border-solid overflow-auto ">
+          <div className="w-full md:w-[50%] h-[456px] lg:h-[570px] border-solid overflow-auto ">
             {projectUnitsData?.length !== 0 ? (
               projectUnitsData?.map((data: any, ind: number) => (
                 <FloorplanDetailsCard
@@ -241,18 +241,18 @@ export default function FloorplansBlock({ slug }: Props) {
         )}
 
         {floorPlanType == "unit" && (
-          <div className="w-[50%]  h-[456px] lg:h-[570px] border-solid overflow-auto ">
+          <div className="w-full md:w-[50%]  h-[456px] lg:h-[570px] border-solid overflow-auto ">
             <Byunitblock propCgId={propCgId} data={projectUnitsData} />
           </div>
         )}
 
         {floorPlanType == "bhk" && propCgId != projectprops.plot && (
-          <div className="w-[50%]  h-[456px] lg:h-[570px] border-solid overflow-auto ">
+          <div className="w-full md:w-[50%]  h-[456px] lg:h-[570px] border-solid overflow-auto ">
             <ByBhkBlock propCgId={propCgId} data={projectUnitsData} />
           </div>
         )}
 
-        <div className="w-[50%] flex justify-end items-end flex-col p-[2%] ">
+        <div className="w-full md:w-[50%] flex justify-end items-end flex-col p-[2%] shadow-inner md:shadow-none ">
           <p className=" text-[14px] lg:text-[16px] font-[500] text-[#005DA0] ">
             Sarang by sumadhura/2bhk/tower 1/ 04/north/1124 sq.ft
           </p>
