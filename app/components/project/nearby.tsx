@@ -270,12 +270,18 @@ const Nearby: React.FC<{ lat: string; lang: string }> = ({ lat, lang }) => {
               onUnmount={onUnmount}
             >
               {selectedLocation && !directionsResponse && (
-                <Marker
-                  position={selectedLocation}
-                  icon={{
-                    url: "/mapIcon.svg",
-                  }}
-                />
+                <div className="relative">
+                  <Marker
+                    position={selectedLocation}
+                    icon={{
+                      url: "/mapIcon.svg",
+                    }}
+                  >
+                    <div className="bg-black text-white absolute ">
+                      Map Details There{" "}
+                    </div>
+                  </Marker>
+                </div>
               )}
               {directionsResponse && (
                 <DirectionsRenderer directions={directionsResponse} />

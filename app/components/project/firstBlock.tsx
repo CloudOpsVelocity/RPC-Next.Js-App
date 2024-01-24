@@ -96,7 +96,7 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
             </div>
             <div className="w-[40%] flex justify-between items-end flex-col p-[2%]">
               <h2 className="text-[24px] lg:text-[28px] font-[700] text-[#001F35]">
-                ₹ {formatCurrency(projectDetails.minPrice)} - ₹{" "}
+                {formatCurrency(projectDetails.minPrice)} -{" "}
                 {formatCurrency(projectDetails.maxPrice)}
               </h2>
               <p className="text-[16px] text-right lg:text-[20px] font-[600] mb-[20px] text-[#00487C] ">
