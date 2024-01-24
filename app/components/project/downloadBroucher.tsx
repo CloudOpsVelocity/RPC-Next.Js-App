@@ -1,17 +1,39 @@
 "use client";
+import { pdfFileIcon } from "@/app/images/commonSvgs";
+import { useSession } from "next-auth/react";
+import Link from "next/link";
 import React from "react";
+import toast from "react-hot-toast";
 
 // import { downloadIcon } from '@/app/images/commonSvgs';
 
 const DownloadBroucher = ({ url }: { url: string }) => {
+  const { data: session } = useSession();
+
   const onButtonClick = () => {
-    const pdfUrl = url;
-    const link = document.createElement("a");
-    link.href = pdfUrl;
-    link.download = pdfUrl; // specify the filename
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    if(session){
+      const pdfUrl = url;
+      const link = document.createElement("a");
+      link.href = pdfUrl;
+      link.download = "downloaded-file"; // specify the filename
+      document.body.appendChild(link);
+      //link.click();
+      document.body.removeChild(link);
+    }else{
+      toast.custom((t) => (
+        <div
+          className={`${
+            t.visible ? 'animate-enter' : 'animate-leave'
+          } ml-auto w-full pointer-events-auto flex justify-end items-end ring-1 ring-transparent ring-opacity-5`}
+        >
+          <p className=" text-[#148B16] p-[8px] pr-[16px] pl-[16px] bg-white shadow-lg flex items-center rounded-lg gap-[10px] text-[20px] whitespace-nowrap font-[600] ">
+            {pdfFileIcon} Brochure Downloaded Successfully!
+          </p>
+        </div>
+      ))
+    }
+
+    
   };
 
   return (
