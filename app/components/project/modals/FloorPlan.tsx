@@ -29,10 +29,16 @@ function FloorPlanModal({ propCgId, data }: Props) {
   const setFloorsArray = useSetAtom(floorPlansArray);
   const [opened, { open, close }] = useDisclosure(false);
   const form = useForm();
+  console.log(form.values);
   const handleOpen = () => {
     setFloorsArray(data);
     open();
   };
+  const handleClose = () => {
+    close();
+    form.reset();
+  };
+
   return (
     <FormProvider form={form}>
       <div
@@ -50,7 +56,7 @@ function FloorPlanModal({ propCgId, data }: Props) {
           close: S.close,
           content: S.content,
         }}
-        onClose={close}
+        onClose={handleClose}
         title="Floor Plan"
         size={"90%"}
       >
@@ -71,12 +77,14 @@ function FloorPlanModal({ propCgId, data }: Props) {
                       key={key}
                     >
                       <span className="text-[#57a773] font-semibold">
+                        {/* @ts-ignore */}
                         {value}
                       </span>
                       <span className="mx-1.5 text-[#6e798c]">|</span>
                       <span className="text-[#6e798c]">{key}</span>
                       <button className="ml-2">
                         <Image
+                          onClick={() => form.setFieldValue(key, null)}
                           src={"/cross.svg"}
                           alt="close"
                           width={10}
@@ -86,13 +94,16 @@ function FloorPlanModal({ propCgId, data }: Props) {
                     </div>
                   )
               )}
-
-              <button
-                className="flex items-center px-2.5 border-none py-0.5 w-fit font-[500] text-[18px] lg:text-[20px] transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-[#FFF] text-secondary-foreground hover:bg-gray-100/80 fnt-[600] text-[#0073C6] underline"
-                onClick={() => form.reset()}
-              >
-                Clear All Filter
-              </button>
+              {Object.values(form.values).some(
+                (value) => value !== null && value !== "" && value !== 0
+              ) && (
+                <button
+                  className="flex items-center px-2.5 border-none py-0.5 w-fit font-[500] text-[18px] lg:text-[20px] transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-[#FFF] text-secondary-foreground hover:bg-gray-100/80 fnt-[600] text-[#0073C6] underline"
+                  onClick={() => form.reset()}
+                >
+                  Clear All Filter
+                </button>
+              )}
             </div>
             <div className="flex justify-between items-start gap-[45px] w-full">
               <LeftSection propCgId={propCgId} data={data} />
@@ -111,6 +122,7 @@ function FloorPlanModal({ propCgId, data }: Props) {
 export default FloorPlanModal;
 
 const LeftSection = ({ propCgId, data }: Props) => {
+  console.log(data);
   const [, setFloorsArray] = useAtom(floorPlansArray);
   const [, setFloor] = useAtom(selectedFloorAtom);
   const { getInputProps, values } = useFormContext();
@@ -121,8 +133,9 @@ const LeftSection = ({ propCgId, data }: Props) => {
     // Implement your filtering logic here based on selectedValues
     const filteredData = data.filter((item: any) => {
       return Object.keys(values).every(
-        // @ts-ignore
-        (key) => !values[key] || String(item[key]) === values[key]
+        (key) =>
+          !values[key] ||
+          String(item[key]).toLowerCase() === values[key].toLowerCase()
       );
     });
     console.log(filteredData);
@@ -144,12 +157,12 @@ const LeftSection = ({ propCgId, data }: Props) => {
             data={["1", "2", "3", "4", "5"]}
             searchable
             maxDropdownHeight={200}
-            {...getInputProps("unitType")}
+            // {...getInputProps("unitType")}
           />
         )}
         {propCgId != projectprops.plot && (
           <Select
-            key={values.tower}
+            key={values.towerName}
             w={"full"}
             mt="md"
             label="Select Tower"
@@ -158,7 +171,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             data={getOptions("towerName")}
             searchable
             maxDropdownHeight={200}
-            {...getInputProps("tower")}
+            {...getInputProps("towerName")}
           />
         )}
 
@@ -199,7 +212,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
         )}
 
         <Select
-          key={values.unit}
+          key={values.unitNumber}
           w={"full"}
           mt="md"
           label="Select Unit Number"
@@ -208,11 +221,11 @@ const LeftSection = ({ propCgId, data }: Props) => {
           data={getOptions("unitNumber")}
           searchable
           maxDropdownHeight={200}
-          {...getInputProps("unit")}
+          {...getInputProps("unitNumber")}
         />
 
         <Select
-          key={values.facing}
+          key={values.facingName}
           w={"full"}
           mt="md"
           label={`${
@@ -225,12 +238,12 @@ const LeftSection = ({ propCgId, data }: Props) => {
           data={getOptions("facingName")}
           searchable
           maxDropdownHeight={200}
-          {...getInputProps("facing")}
+          {...getInputProps("facingName")}
         />
 
         {propCgId != projectprops.plot && (
           <Select
-            key={values.superArea}
+            key={values.superBuildUparea}
             w={"full"}
             mt="md"
             label="Super Built-up Area "
@@ -239,13 +252,13 @@ const LeftSection = ({ propCgId, data }: Props) => {
             data={getOptions("superBuildUparea")}
             searchable
             maxDropdownHeight={200}
-            {...getInputProps("superArea")}
+            {...getInputProps("superBuildUparea")}
           />
         )}
 
         {propCgId != projectprops.plot && (
           <Select
-            key={values.carpetArea}
+            key={values.caretarea}
             w={"full"}
             mt="md"
             label="Carpet Area"
@@ -254,7 +267,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             data={getOptions("caretarea")}
             searchable
             maxDropdownHeight={200}
-            {...getInputProps("carpetArea")}
+            {...getInputProps("caretarea")}
           />
         )}
 
@@ -267,7 +280,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
               label="Select Garden Area"
               className="!w-[46%]"
               placeholder="-- select --"
-              data={["1", "2", "3", "4", "5"]}
+              data={getOptions("gardenArea")}
               searchable
               maxDropdownHeight={200}
               {...getInputProps("gardenArea")}
@@ -283,7 +296,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
               label="Select Terrace Area"
               className="!w-[46%]"
               placeholder="-- select --"
-              data={["1", "2", "3", "4", "5"]}
+              data={getOptions("terraceArea")}
               searchable
               maxDropdownHeight={200}
               {...getInputProps("terraceArea")}
@@ -292,7 +305,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
 
         {propCgId != projectprops.plot && (
           <Select
-            key={values.carParking}
+            key={values.noOfCarParking}
             w={"full"}
             mt="md"
             label="Select Car Parking"
@@ -301,7 +314,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             data={getOptions("noOfCarParking")}
             searchable
             maxDropdownHeight={200}
-            {...getInputProps("carParking")}
+            {...getInputProps("noOfCarParking")}
           />
         )}
 
@@ -313,7 +326,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             label="Open/ Covered Parking"
             className="!w-[46%]"
             placeholder="-- select --"
-            data={["1", "2", "3", "4", "5"]}
+            data={getOptions("openCoveredParking")}
             searchable
             maxDropdownHeight={200}
             {...getInputProps("openCoveredParking")}
@@ -322,31 +335,31 @@ const LeftSection = ({ propCgId, data }: Props) => {
 
         {propCgId != projectprops.plot && (
           <Select
-            key={values.balcony}
+            key={values.totalNumberOfBalcony}
             w={"full"}
             mt="md"
             label="No: of Balcony"
             className="!w-[46%]"
             placeholder="-- select --"
-            data={["1", "2", "3", "4", "5"]}
+            data={getOptions("totalNumberOfBalcony")}
             searchable
             maxDropdownHeight={200}
-            {...getInputProps("balcony")}
+            {...getInputProps("totalNumberOfBalcony")}
           />
         )}
 
         {propCgId != projectprops.plot && (
           <Select
-            key={values.bathroom}
+            key={values.totalNumberofBathroom}
             w={"full"}
             mt="md"
             label="No: of Bathroom"
             className="!w-[46%]"
             placeholder="-- select --"
-            data={["1", "2", "3", "4", "5"]}
+            data={getOptions("totalNumberofBathroom")}
             searchable
             maxDropdownHeight={200}
-            {...getInputProps("bathroom")}
+            {...getInputProps("totalNumberofBathroom")}
           />
         )}
 
@@ -374,7 +387,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             label="Select Plot Area"
             className="!w-[46%]"
             placeholder="-- select --"
-            data={["1", "2", "3", "4", "5"]}
+            data={getOptions("plotArea")}
             searchable
             maxDropdownHeight={200}
             {...getInputProps("plotArea")}
@@ -383,31 +396,31 @@ const LeftSection = ({ propCgId, data }: Props) => {
 
         {propCgId == projectprops.plot && (
           <Select
-            key={values.lengthOfPlot}
+            key={values.length}
             w={"full"}
             mt="md"
             label="length Of Plot"
             className="!w-[46%]"
             placeholder="-- select --"
-            data={["1", "2", "3", "4", "5"]}
+            data={getOptions("length")}
             searchable
             maxDropdownHeight={200}
-            {...getInputProps("lengthOfPlot")}
+            {...getInputProps("length")}
           />
         )}
 
         {propCgId == projectprops.plot && (
           <Select
-            key={values.breadthOfPlot}
+            key={values.width}
             w={"full"}
             mt="md"
             label="Breadth of Plot"
             className="!w-[46%]"
             placeholder="-- select --"
-            data={["1", "2", "3", "4", "5"]}
+            data={getOptions("width")}
             searchable
             maxDropdownHeight={200}
-            {...getInputProps("breadthOfPlot")}
+            {...getInputProps("width")}
           />
         )}
       </div>
@@ -818,6 +831,7 @@ const MiddleSection = () => {
           floorsArray.length > 0) ||
         data.floorPlanUrl ? (
           <Image
+            // @ts-ignore
             src={floorsArray[currentImg]?.floorPlanUrl || data.floorPlanUrl}
             alt="Floor Plan"
             height={300}
@@ -832,9 +846,11 @@ const MiddleSection = () => {
           </div>
         )}
 
-          {floorsArray != undefined && floorsArray != null && floorsArray.length > 1 &&
+        {floorsArray != undefined &&
+          floorsArray != null &&
+          floorsArray.length > 1 && (
             <PopupOpenSvg className="absolute bottom-0 right-0 w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] m-[1%] " />
-          }
+          )}
       </div>
 
       <CarouselModal opened={opened} setOpened={setOpened} />
@@ -868,7 +884,8 @@ const MiddleSection = () => {
                     className="rounded-[5px] h-[50px] w-[70px] flex justify-center items-center shadow-md border-solid border-[1px] border-[#EFEFEF]"
                   >
                     <Image
-                      src={eachObj.floorPlanUrl}
+                      // @ts-ignore
+                      src={eachObj?.floorPlanUrl}
                       alt="Floor Plan"
                       width={57}
                       height={37}

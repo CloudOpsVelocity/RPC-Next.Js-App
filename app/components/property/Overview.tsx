@@ -81,13 +81,13 @@ export default function PropertyOverView({
             value={totalLandArea}
             className="mr-[5%] pt-[2%] mb-[3%] "
           />
-          <ProjBasicDetails
+          {/* <ProjBasicDetails
             key="elevation"
             icon={<TotalLandArea />} // Adjust icon
             title="Elevation"
             value={"G + 3"}
             className="mr-[5%] pt-[2%] mb-[3%] "
-          />
+          /> */}
           <ProjBasicDetails
             key="totalUnits"
             icon={<TotalLandArea />} // Adjust icon

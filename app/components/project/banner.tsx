@@ -3,7 +3,6 @@ import { Button, Modal, Rating, Textarea } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import Image from "next/image";
 import React, { useState } from "react";
-// import Rating from "../atoms/Rating";
 import S from "@/app/styles/Rating.module.css";
 import { useForm, yupResolver } from "@mantine/form";
 import Flex from "../molecules/Utils/Flex";
@@ -95,8 +94,9 @@ const AddRating = ({ opened, close }: { opened: any; close: any }) => {
 
   const formSubmit = async (values: any) => {
     setStatus("pending");
-    const data = await addRating({ ...values, projIdEnc: params?.slug });
-    console.log(data);
+    await addRating({ ...values, projIdEnc: params?.slug });
+    reset();
+    close();
     setStatus("success");
   };
   return (
