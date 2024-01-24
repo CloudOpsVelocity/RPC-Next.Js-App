@@ -15,7 +15,7 @@ import { PhaseList } from "@/app/validations/types/project";
 import { useQuery } from "react-query";
 import { getProjectWiseOverView } from "@/app/utils/api/project";
 import usePhaseWiseOverview from "@/app/hooks/usePhaseWiseOverview";
-import { formatDate } from "@/app/utils/date";
+import { formatDate, formatDateDDMMYYYY } from "@/app/utils/date";
 type Props = {
   data: PhaseList[];
   slug: string;
@@ -72,14 +72,14 @@ export default function ProjectDetailsP({ slug }: Props) {
               key="launchDate"
               icon={<EndDate />}
               title="Launch Date"
-              value={formatDate(selectedPhase.launchDate)}
+              value={formatDateDDMMYYYY(selectedPhase.launchDate)}
               className="mr-[3%] mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]"
             />
             <ProjBasicDetails
               key="possessionDate"
               icon={<StartDate />}
               title="Possession Date"
-              value={formatDate(selectedPhase.possassionDate)}
+              value={formatDateDDMMYYYY(selectedPhase.possassionDate)}
               className="mr-[3%] mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]"
             />
             <ProjBasicDetails

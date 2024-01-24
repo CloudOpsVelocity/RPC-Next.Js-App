@@ -77,14 +77,14 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
 
                 <p className="text-[#202020] text-[16px] not-italic font-[500] leading-[normal] w-[100%] tracking-[0.32px]">
                   {projectDetails.address}
-                  
                 </p>
 
                 <p className="text-[16px] mt-[7px] mb-[7px] lg:text-[16px] font-[600] text-[#001F35]">
                   Start - End Date:
                   <span className="font-[600] text-[#202020]">
                     {" "}
-                    {formatDate(projectDetails.startDate)} - {formatDate(projectDetails.endDate)}
+                    {formatDate(projectDetails.startDate)} -{" "}
+                    {formatDate(projectDetails.endDate)}
                   </span>
                 </p>
 
