@@ -850,7 +850,7 @@ const MiddleSection = () => {
           floorsArray != null &&
           floorsArray.length > 1 && (
             <PopupOpenSvg className="absolute bottom-0 right-0 w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] m-[1%] " />
-          }
+          )}
       </div>
 
       <CarouselModal opened={opened} setOpened={setOpened} />
