@@ -38,7 +38,7 @@ const Gallery: React.FC<GalleryProps> = ({
           setPreviewImage(null);
           close();
         }}
-        className="!scrollbar-hide"
+        className=" h-[90vh] "
         size={"80%"}
         classNames={{
           close: S.close,
@@ -46,84 +46,87 @@ const Gallery: React.FC<GalleryProps> = ({
           header: S.header,
         }}
       >
-        {isImage ? (
-          <Image
-            radius="md"
-            h={800}
-            m={"auto"}
-            w={1600}
-            fit="fill"
-            src={previewImage}
-            className="cursor-pointer border-[5px] border-white"
-          />
-        ) : (
-          <ReactPlayer
-            url={previewImage as string}
-            width="100%"
-            height="100%"
-            controls
-          />
-        )}
-        <div className="mt-4">
-          <Carousel
-            height={100}
-            slideSize="15.333333%"
-            slideGap="xs"
-            loop
-            mt={"lg"}
-            maw={1200}
-            pl={"90px"}
-            align="start"
-            mx={"auto"}
-            slidesToScroll={5}
-          >
-            {isImage ? (
-              <React.Fragment>
-                {images.map((image, index) => (
-                  <Carousel.Slide
-                    key={index}
-                    onClick={() => handleImageClick(image)}
-                  >
-                    <Image
-                      radius="md"
-                      h={100}
-                      w="auto"
-                      fit="contain"
-                      src={image}
-                      className={`cursor-pointer ${
-                        image === previewImage
-                          ? "border-[5px] border-white"
-                          : ""
-                      }`}
-                    />
-                  </Carousel.Slide>
-                ))}
-              </React.Fragment>
-            ) : (
-              <React.Fragment>
-                {videos.map((video, index) => (
-                  <Carousel.Slide
-                    key={index}
-                    onClick={() => handleImageClick(video)}
-                  >
-                    <div className="relative">
-                      <ReactPlayer
-                        key={index}
-                        width={150}
-                        height={100}
-                        url={video as string}
-                        alt={`Image ${index + 1}`}
-                        className={`w-[110px] lg:w-[152px] h-[68px] lg:h-[94px] rounded-[5px] shadow-md mb-[4%] cursor-pointer`}
+        <div className="h-[80vh]">
+          {isImage ? (
+            <Image
+              radius="md"
+              h={800}
+              m={"auto"}
+              w={1600}
+              fit="fill"
+              src={previewImage}
+              className="cursor-pointer border-[5px] !h-[80%] border-white"
+            />
+          ) : (
+            <ReactPlayer
+              url={previewImage as string}
+              width="100%"
+              height={800}
+              controls
+              class="!h-[80%]"
+            />
+          )}
+          <div className="mt-4 ">
+            <Carousel
+              height={100}
+              slideSize="15.333333%"
+              slideGap="xs"
+              loop
+              mt={"lg"}
+              maw={1200}
+              pl={"90px"}
+              align="start"
+              mx={"auto"}
+              slidesToScroll={5}
+            >
+              {isImage ? (
+                <React.Fragment>
+                  {images.map((image, index) => (
+                    <Carousel.Slide
+                      key={index}
+                      onClick={() => handleImageClick(image)}
+                    >
+                      <Image
+                        radius="md"
+                        h={100}
+                        w="auto"
+                        fit="contain"
+                        src={image}
+                        className={`cursor-pointer ${
+                          image === previewImage
+                            ? "border-[5px] border-white"
+                            : ""
+                        }`}
                       />
-                      <span className="absolute top-[40px] left-[60px] pointer-events-none ">
-                        {videoPlayIcon}
-                      </span>
-                    </div>
-                  </Carousel.Slide>
-                ))}
-              </React.Fragment>
-            )}
-          </Carousel>
+                    </Carousel.Slide>
+                  ))}
+                </React.Fragment>
+              ) : (
+                <React.Fragment>
+                  {videos.map((video, index) => (
+                    <Carousel.Slide
+                      key={index}
+                      onClick={() => handleImageClick(video)}
+                    >
+                      <div className="relative">
+                        <ReactPlayer
+                          key={index}
+                          width={150}
+                          height={100}
+                          url={video as string}
+                          alt={`Image ${index + 1}`}
+                          className={`w-[110px] lg:w-[152px] h-[68px] lg:h-[94px] rounded-[5px] shadow-md mb-[4%] cursor-pointer`}
+                        />
+                        <span className="absolute top-[40px] left-[60px] pointer-events-none ">
+                          {videoPlayIcon}
+                        </span>
+                      </div>
+                    </Carousel.Slide>
+                  ))}
+                </React.Fragment>
+              )}
+            </Carousel>
+          </div>
         </div>
       </Modal>
 
