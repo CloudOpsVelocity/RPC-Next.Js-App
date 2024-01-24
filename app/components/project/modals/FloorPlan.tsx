@@ -128,8 +128,14 @@ const LeftSection = ({ propCgId, data }: Props) => {
   const [, setFloorsArray] = useAtom(floorPlansArray);
   const [, setFloor] = useAtom(selectedFloorAtom);
   const { getInputProps, values, setFieldValue } = useFormContext();
+
   const getOptions = (property: string): string[] => {
-    return Array.from(new Set(data.map((item: any) => String(item[property]))));
+    if(data[0][property] != undefined){
+      return Array.from(new Set(data.map((item: any) => String(item[property]))));
+    }else{
+      return [];
+    }
+    
   };
   const handleSearch = () => {
     // Implement your filtering logic here based on selectedValues
@@ -140,7 +146,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
           String(item[key]).toLowerCase() === values[key].toLowerCase()
       );
     });
-    console.log(filteredData);
+    //console.log(filteredData);
     setFloor(filteredData[0]);
     setFloorsArray(filteredData);
   };
@@ -334,7 +340,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             label="Open/ Covered Parking"
             className="!w-[46%]"
             placeholder="-- select --"
-            data={getOptions("openCoveredParking")}
+            data={getOptions("openCoveredParking") }
             searchable
             maxDropdownHeight={200}
             {...getInputProps("openCoveredParking")}

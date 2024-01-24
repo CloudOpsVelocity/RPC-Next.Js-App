@@ -38,7 +38,7 @@ const Gallery: React.FC<GalleryProps> = ({
           setPreviewImage(null);
           close();
         }}
-        className=" h-[90vh] "
+        className="h-[90vh]"
         size={"80%"}
         classNames={{
           close: S.close,
