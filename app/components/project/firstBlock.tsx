@@ -2,10 +2,16 @@
 import React, { useRef } from "react";
 import { Carousel } from "@mantine/carousel";
 import Autoplay from "embla-carousel-autoplay";
-import { FlooringIcon, FloorsIcon, ReraIcon, ShearIcon } from "@/app/images/commonSvgs";
+import {
+  FlooringIcon,
+  FloorsIcon,
+  ReraIcon,
+  ShearIcon,
+} from "@/app/images/commonSvgs";
 import { Main } from "@/app/validations/types/project";
 import Image from "next/image";
 import SharePopup from "../atoms/SharePopup";
+import { formatCurrency } from "@/app/utils/numbers";
 
 type Props = {
   projectDetails: Main | null;
@@ -90,7 +96,8 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
             </div>
             <div className="w-[40%] flex justify-between items-end flex-col p-[2%]">
               <h2 className="text-[24px] lg:text-[28px] font-[700] text-[#001F35]">
-                ₹ {projectDetails.minPrice} Cr - ₹ {projectDetails.maxPrice} Cr
+                ₹ {formatCurrency(projectDetails.minPrice)} - ₹{" "}
+                {formatCurrency(projectDetails.maxPrice)}
               </h2>
               <p className="text-[16px] text-right lg:text-[20px] font-[600] mb-[20px] text-[#00487C] ">
                 ₹ {projectDetails.basePrice}/ Price per sqft onwards

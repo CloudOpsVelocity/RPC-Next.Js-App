@@ -38,6 +38,7 @@ const Gallery: React.FC<GalleryProps> = ({
           setPreviewImage(null);
           close();
         }}
+        className="!scrollbar-hide"
         size={"80%"}
         classNames={{
           close: S.close,
@@ -115,10 +116,9 @@ const Gallery: React.FC<GalleryProps> = ({
                         className={`w-[110px] lg:w-[152px] h-[68px] lg:h-[94px] rounded-[5px] shadow-md mb-[4%] cursor-pointer`}
                       />
                       <span className="absolute top-[40px] left-[60px] pointer-events-none ">
-                    {videoPlayIcon}
-                  </span>
-                </div>
-                    
+                        {videoPlayIcon}
+                      </span>
+                    </div>
                   </Carousel.Slide>
                 ))}
               </React.Fragment>

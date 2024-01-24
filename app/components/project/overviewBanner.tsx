@@ -20,6 +20,7 @@ import ReqOtpForm from "./forms/otpform";
 import { addContact, sendContact } from "@/app/utils/api/actions/contact";
 import { useParams } from "next/navigation";
 import CountryInput from "../atoms/CountryInput";
+import { formatCurrency } from "@/app/utils/numbers";
 export default function OverviewBanner({
   minPrice,
   maxPrice,
@@ -41,7 +42,7 @@ export default function OverviewBanner({
             <p className="text-[#212C33] text-[24px] lg:text-[32px] font-[600]">
               PRICE RANGE{" "}
               <span className="text-[#00487C] text-[24px] md:text-[32px] lg:text-[40px] whitespace-nowrap font-[700]">
-                ₹ {minPrice} Cr - ₹ {maxPrice} Cr
+                ₹ {minPrice} Cr - ₹ {formatCurrency(maxPrice)}
               </span>
             </p>
             <Button
@@ -108,30 +109,35 @@ const RequestCallBackModal = ({
 
 const Content = () => {
   const { data: session } = useSession();
+  return session ? <LoggedInUserForm /> : <ReqForm close={close} />;
+};
+const LoggedInUserForm = () => {
+  const { data: session } = useSession();
+  const {} = useForm({
+    initialValues: {
+      name: "",
+      email: "",
+      mobile: session?.user.userName,
+    },
+    validate: yupResolver(reqSchema),
+  });
   return (
-    <>
-      {session ? (
-        <div className="mt-8">
-          <h3 className="text-xl font-semibold text-[#00487C]">Your Details</h3>
-          <p className="mt-2 text-gray-600">Name: Ankit Soni</p>
-          <p className="mt-2 text-gray-600">Contact: 8888855555</p>
-          <p className="mt-2 text-gray-600">Email: ankitsoni12@gmail.com</p>
-          <B
-            type="submit"
-            leftSection={<Phone />}
-            mt={"md"}
-            className="!text-[#0073C6]"
-          >
-            Request a Callback
-          </B>
-        </div>
-      ) : (
-        <ReqForm close={close} />
-      )}
-    </>
+    <div className="mt-8">
+      <h3 className="text-xl font-semibold text-[#00487C]">Your Details</h3>
+      <p className="mt-2 text-gray-600">Name: Ankit Soni</p>
+      <p className="mt-2 text-gray-600">Contact: {session?.user.userName}</p>
+      <p className="mt-2 text-gray-600">Email: ankitsoni12@gmail.com</p>
+      <B
+        type="submit"
+        leftSection={<Phone />}
+        mt={"md"}
+        className="!bg-[#0073C6]"
+      >
+        Request a Callback
+      </B>
+    </div>
   );
 };
-
 const ReqForm = ({ close }: { close: any }) => {
   const { slug } = useParams<{ slug: string }>();
   const [status, setStatus] = useState<
@@ -225,7 +231,7 @@ const ReqForm = ({ close }: { close: any }) => {
         />
       </div>
       <B
-        className="!text-[#0073C6]"
+        className="!bg-[#0073C6]"
         type="submit"
         color="#0073C6"
         leftSection={<Phone />}
@@ -247,7 +253,7 @@ const Success = ({ close }: { close: any }) => {
       <p className="text-[#202020] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px]">
         Please wait for callback !
       </p>
-      <B maw={150} onClick={close} className="!text-[#0073C6]">
+      <B maw={150} onClick={close} className="!bg-[#0073C6]">
         Go To Project
       </B>
     </div>

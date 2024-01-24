@@ -1,5 +1,5 @@
 "use client";
-import { pdfFileIcon } from "@/app/images/commonSvgs";
+import { downLoadIcon, pdfFileIcon } from "@/app/images/commonSvgs";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import React from "react";
@@ -11,7 +11,7 @@ const DownloadBroucher = ({ url }: { url: string }) => {
   const { data: session } = useSession();
 
   const onButtonClick = () => {
-    if(session){
+    if (session) {
       const pdfUrl = url;
       const link = document.createElement("a");
       link.href = pdfUrl;
@@ -19,21 +19,19 @@ const DownloadBroucher = ({ url }: { url: string }) => {
       document.body.appendChild(link);
       //link.click();
       document.body.removeChild(link);
-    }else{
+    } else {
       toast.custom((t) => (
         <div
           className={`${
-            t.visible ? 'animate-enter' : 'animate-leave'
+            t.visible ? "animate-enter" : "animate-leave"
           } ml-auto w-full pointer-events-auto flex justify-end items-end ring-1 ring-transparent ring-opacity-5`}
         >
           <p className=" text-[#148B16] p-[8px] pr-[16px] pl-[16px] bg-white shadow-lg flex items-center rounded-lg gap-[10px] text-[20px] whitespace-nowrap font-[600] ">
             {pdfFileIcon} Brochure Downloaded Successfully!
           </p>
         </div>
-      ))
+      ));
     }
-
-    
   };
   const handleDownload = () => {
     fetch(url)
@@ -71,7 +69,7 @@ const DownloadBroucher = ({ url }: { url: string }) => {
         onClick={() => handleDownload()}
         className="flex border-0 justify-center items-center text-[20px] lg:text-[24px] text-[#FFF] font-[700] rounded-[10px] bg-[#0073C6] gap-[8px] p-[5px]  "
       >
-        {/* {downloadIcon} */}
+        {downLoadIcon}
         Download Brochure
       </button>
     </div>
