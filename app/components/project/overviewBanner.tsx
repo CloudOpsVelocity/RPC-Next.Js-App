@@ -12,7 +12,6 @@ import { Collapse, Modal, NumberInput, TextInput, em } from "@mantine/core";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import S from "@/app/styles/Req.module.css";
-import { projectprops } from "@/app/data/projectDetails";
 import { useForm, yupResolver } from "@mantine/form";
 import { reqSchema } from "@/app/validations/project";
 import { Button as B } from "@mantine/core";
@@ -83,52 +82,80 @@ const RequestCallBackModal = ({
         }}
       >
         <div className="bg-white rounded-lg w-full overflow-hidden flex ">
-            <div className="w-[50%] p-8">
-              <h2 className="text-[24px] font-[600] text-[#202020] ">
-                Request A Callback
-              </h2>
+          <div className="w-[50%] p-8">
+            <h2 className="text-[24px] font-[600] text-[#202020] ">
+              Request A Callback
+            </h2>
 
-              <Content />
-            </div>
-            <div className="hidden md:block w-[50%] relative">
-              <Image
-                className="absolute inset-0 !h-full !w-[100%] object-cover"
-                src="/requestcallback.png"
-                alt="Customer Support"
-                width={600}
-                height={534}
-              />
-            </div>
+            <Content close={close} />
+          </div>
+          <div className="hidden md:block w-[50%] relative">
+            <Image
+              className="absolute inset-0 !h-full !w-[100%] object-cover"
+              src="/requestcallback.png"
+              alt="Customer Support"
+              width={600}
+              height={534}
+            />
+          </div>
         </div>
       </Modal>
     </>
   );
 };
 
-const Content = () => {
+const Content = ({ close }: any) => {
   const { data: session } = useSession();
   return session ? <LoggedInUserForm /> : <ReqForm close={close} />;
 };
 const LoggedInUserForm = () => {
+  const { slug } = useParams<{ slug: string }>();
+  const [status, setStatus] = useState<
+    "idle" | "pending" | "success" | "error" | "otp"
+  >("idle");
   const { data: session } = useSession();
   const {} = useForm({
     initialValues: {
-      name: "",
-      email: "",
+      name: session?.user.name,
+      email: session?.user.email,
       mobile: session?.user.userName,
     },
     validate: yupResolver(reqSchema),
   });
+  const onSubmit = async () => {
+    const data = {
+      name: session?.user?.name,
+      email: session?.user?.email,
+      mobile: session?.user?.userName,
+      projIdEnc: slug,
+      isProjContact: "Y",
+      src: "searchCard",
+    };
+    console.log(data);
+    const res = await sendContact(data);
+    console.log(res);
+  };
   return (
     <div className="mt-8 w-full">
-      <p className="text-[#148B16] mb-[4%] text-base italic font-bold leading-[normal] tracking-[0.64px]">Builder: Sarang By Sumadhura</p>
+      <p className="text-[#148B16] mb-[4%] text-base italic font-bold leading-[normal] tracking-[0.64px]">
+        Builder: Sarang By Sumadhura
+      </p>
 
-      <h3 className="text-[#00487C] mb-[2%] text-xl not-italic font-semibold leading-[normal] tracking-[0.8px]">Your Details</h3>
-            
-      <p className="mb-[2%] text-[#202020] text-base not-italic font-medium leading-[normal] tracking-[0.64px]">Name: Ankit Soni</p>
-      <p className="mb-[2%] text-[#202020] text-base not-italic font-medium leading-[normal] tracking-[0.64px]">Contact: {session?.user.userName}</p>
-      <p className="mb-[2%] text-[#202020] text-base not-italic font-medium leading-[normal] tracking-[0.64px]">Email: ankitsoni12@gmail.com</p>
+      <h3 className="text-[#00487C] mb-[2%] text-xl not-italic font-semibold leading-[normal] tracking-[0.8px]">
+        Your Details
+      </h3>
+
+      <p className="mb-[2%] text-[#202020] text-base not-italic font-medium leading-[normal] tracking-[0.64px]">
+        Name: {session?.user.name}
+      </p>
+      <p className="mb-[2%] text-[#202020] text-base not-italic font-medium leading-[normal] tracking-[0.64px]">
+        Contact: {session?.user.userName}
+      </p>
+      <p className="mb-[2%] text-[#202020] text-base not-italic font-medium leading-[normal] tracking-[0.64px]">
+        Email: {session?.user.email}
+      </p>
       <B
+        onClick={onSubmit}
         type="submit"
         leftSection={<Phone />}
         mt={"md"}
