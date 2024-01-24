@@ -27,7 +27,7 @@ export const addContact = async (data: Props) => {
   }
 };
 
-export const sendContact = async (data: User) => {
+export const sendContact = async (data: any) => {
   const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/contact/v1/generate-contact`;
   try {
     const response = await axios.post(url, data);
