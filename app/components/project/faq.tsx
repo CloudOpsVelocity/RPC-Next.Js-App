@@ -24,7 +24,7 @@ type FaqWithBgProps = {
 
 export function FaqWithBg({ data }: FaqWithBgProps) {
   return (
-    <div className={classes.wrapper}>
+    <div className={classes.wrapper} id="faq">
       <div className="flex justify-center items-center w-full ">
         <div className="relative mr-[-70px] bottom-[20px] w-[168px] h-[74px] rounded-[50%] blur-[29.5px] bg-[#0093ff4d] "></div>
 

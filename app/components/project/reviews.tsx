@@ -44,7 +44,10 @@ export default function Reviews() {
 const Review = ({ rating, review }: any) => {
   return (
     <>
-      <div className="max-w-lg mx-auto mt-[20px] bg-white rounded-lg p-4 relative shadow-md border-solid border-[#DCE6ED] border-[1px] min-h-[220px]">
+      <div
+        className="max-w-lg mx-auto mt-[20px] bg-white rounded-lg p-4 relative shadow-md border-solid border-[#DCE6ED] border-[1px] min-h-[220px]"
+        id="ratings"
+      >
         <span className=" absolute top-[-20px] !z-30  ">{quotesIcon}</span>
         <div className="flex items-center space-x-2">
           <div className="flex-1">
