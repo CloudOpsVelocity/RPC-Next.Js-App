@@ -21,6 +21,6 @@ interface FormValues {
   plotLength: string;
   plotBreadth: string;
 }
-const [FormProvider, useFormContext, useForm] = createFormContext<FormValues>();
+const [FormProvider, useFormContext, useForm] = createFormContext<any>();
 
 export { FormProvider, useFormContext, useForm };

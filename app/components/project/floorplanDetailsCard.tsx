@@ -8,7 +8,6 @@ import {
 } from "../../images/commonSvgs";
 import { projectprops } from "../../data/projectDetails";
 import { useAtom } from "jotai";
-import { floorImageATom } from "@/app/store/image";
 import { selectedFloorAtom } from "@/app/store/floor";
 
 type Props = {

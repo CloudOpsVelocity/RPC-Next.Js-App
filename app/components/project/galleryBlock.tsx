@@ -5,6 +5,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import ReactPlayer from "react-player";
 import Gallery from "./modals/Gallery";
+
 import ReactVideoThumbnail from "react-video-thumbnail";
 
 export default function GalleryBlock({
