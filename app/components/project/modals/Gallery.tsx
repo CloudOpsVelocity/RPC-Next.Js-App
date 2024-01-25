@@ -66,7 +66,7 @@ const Gallery: React.FC<GalleryProps> = ({
               class="!h-[80%]"
             />
           )}
-          <div className="mt-4 ">
+          <div className="mt-4 flex items-center justify-center ">
             <Carousel
               height={100}
               slideSize="15.333333%"
@@ -78,10 +78,10 @@ const Gallery: React.FC<GalleryProps> = ({
               align="start"
               mx={"auto"}
               slidesToScroll={5}
-              className="!h-[50px] !md:h-[100px]"
+              className="w-full min-w-[80px] !h-auto max-h-[100px] min-h-[50px]"
             >
               {isImage ? (
-                <React.Fragment>
+                <div className="flex items-center w-full">
                   {images.map((image, index) => (
                     <Carousel.Slide
                       key={index}
@@ -93,7 +93,7 @@ const Gallery: React.FC<GalleryProps> = ({
                         w="auto"
                         fit="contain"
                         src={image}
-                        className={`cursor-pointer !h-[50px] !md:h-[100px] ${
+                        className={`cursor-pointer w-full min-w-[80px] !h-auto max-h-[100px] min-h-[50px]  ${
                           image === previewImage
                             ? "border-[5px] border-white"
                             : ""
@@ -101,34 +101,34 @@ const Gallery: React.FC<GalleryProps> = ({
                       />
                     </Carousel.Slide>
                   ))}
-                </React.Fragment>
+                </div>
               ) : (
-                <React.Fragment>
+                <div className="flex items-center w-full">
                   {videos.map((video, index) => (
                     <Carousel.Slide
                       key={index}
                       onClick={() => handleImageClick(video)}
                     >
                       <div className="relative">
-                        <ReactPlayer
+                        <video
                           key={index}
                           width={150}
                           height={100}
-                          url={video as string}
-                          alt={`Image ${index + 1}`}
-                          className={`w-[110px] lg:w-[152px] h-[68px] lg:h-[94px] rounded-[5px] shadow-md mb-[4%] cursor-pointer  ${
+                          src={video as string}
+                          //alt={`Image ${index + 1}`}
+                          className={`cursor-pointer w-full min-w-[80px] !h-auto max-h-[100px] min-h-[50px]  ${
                             video === previewImage
                               ? "border-[5px] border-white"
                               : ""
                           }`}
                         />
-                        <span className="absolute top-[40px] left-[60px] pointer-events-none ">
+                        <span className="absolute top-[25%] md:top-[40%] left-[30%] md:left-[40%] h-[18px] w-[18px] md:h-[26px] md:w-[26px] pointer-events-none ">
                           {videoPlayIcon}
                         </span>
                       </div>
                     </Carousel.Slide>
                   ))}
-                </React.Fragment>
+                </div>
               )}
             </Carousel>
           </div>

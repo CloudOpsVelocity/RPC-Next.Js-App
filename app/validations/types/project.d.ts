@@ -55,6 +55,7 @@ export interface Media {
   projectPlanUrl: string;
   walkThrowVideoUrl: string;
   projBroucherUrl: string;
+  projName?:string;
 }
 
 export interface PhaseList {

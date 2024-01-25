@@ -1,12 +1,12 @@
 import Image from "next/image";
 import React from "react";
 
-export default function Feature({ data }: { data: string[] }) {
+export default function Feature({ data, projName }: { data: string[]; projName:string }) {
   return (
     <>
       <div className="w-[90%] mb-[5%]" id="highlights">
         <h2 className="text-[24px] lg:text-[32px] font-semibold">
-          HIGHLIGHTS OF <span className="text-green-500">SARANG</span>
+          HIGHLIGHTS OF <span className="text-green-500">{projName}</span>
         </h2>
         <p className="text-[20px] lg:text-[24px] text-gray-500 mt-1 italic">
           Key Features: Elegant Design, Spacious Layout, Stunning Views, Modern

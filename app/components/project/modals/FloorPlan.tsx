@@ -157,6 +157,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
   //   handleSearch()
   // }
   // console.log(values);
+
   return (
     <div className="col-span-1 w-full md:w-[30%]  ">
       <div className="w-[100%] flex justify-between items-start flex-wrap gap-[5%]">
@@ -318,6 +319,22 @@ const LeftSection = ({ propCgId, data }: Props) => {
             />
           )}
 
+
+        {propCgId != projectprops.apartment && propCgId != projectprops.plot && (
+          <Select
+            key={useId()}
+            w={"full"}
+            mt="md"
+            label="Select Parking Area"
+            className="!w-[46%]"
+            placeholder="-- select --"
+            data={getOptions("parkingArea")}
+            searchable
+            maxDropdownHeight={200}
+            {...getInputProps("parkingArea")}
+          />
+        )}
+
         {propCgId != projectprops.plot && (
           <Select
             key={useId()}
@@ -333,7 +350,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
           />
         )}
 
-        {propCgId != projectprops.plot && (
+        {propCgId == projectprops.apartment && (
           <Select
             key={useId()}
             w={"full"}

@@ -7,18 +7,17 @@ import { Rating } from "@mantine/core";
 import useRatings from "@/app/hooks/useRatings";
 import { useParams } from "next/navigation";
 
-export default function Reviews() {
+export default function Reviews({projName}:{projName:string}) {
   const { slug } = useParams<{ slug: string }>();
   const { data, isLoading } = useRatings({ projectId: slug });
   return (
     <div className="bg-[#FFF] py-12 w-full ">
       <div className="max-w-[1920px] mx-auto px-6">
         <h2 className="text-2xl font-semibold text-gray-800">
-          CUSTOMER REVIEWS FOR <span className="text-green-500">SARANG</span>
+          CUSTOMER REVIEWS FOR <span className="text-green-500">{projName}</span>
         </h2>
         <p className="text-lg text-gray-600 mt-2 italic">
-          Find helpful customer reviews and review ratings for Sarang By
-          Sumadhura
+          Find helpful customer reviews and review ratings for {projName}
         </p>
         <div className="mt-8 relative">
           <Carousel

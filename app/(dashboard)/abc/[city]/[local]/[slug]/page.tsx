@@ -29,6 +29,7 @@ type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
   // const data = await getCachedUser(slug);
   const data = await getProjectDetails(slug);
+  console.log(data);
   return (
     <div className="w-full">
       <div className="mt-[90px] w-full pb-[2%] flex items-center justify-center flex-col">
@@ -43,7 +44,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
               <span>Project In BTM Layout Bengaluru</span>
             </Link>{" "}
             {" > "}
-            <span>Sarang By Sumadhura</span>
+            <span>{data.projectName}</span>
           </p>
           {/* Top Cover Image Card */}
           <FirstBlock projectDetails={data} />
@@ -60,35 +61,35 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           content={data.about}
         />
         {/* Property Details */}
-        <ProjectDetailsP data={data.phaseList} slug={slug} />
+        <ProjectDetailsP projName={data.projectName} data={data.phaseList} slug={slug} />
         {/* Floor Plan Block */}
-        <FloorplansBlock data={data.phaseList} slug={slug} />
-        <GalleryBlock {...data.media} />
+        <FloorplansBlock projName={data.projectName} data={data.phaseList} slug={slug} />
+        <GalleryBlock {...data.media} projName={data.projectName} />
         <Amenties data={data.amenityList} />
         {/* <Nearby lat={data.lat} lang={data.lang} /> */}
-        <Nearby lat="12.9662976" lang="77.5716864" />
-        <Specifications data={data.specificationList} />
-        <Feature data={data.highlights} />
-        <Banner />
-        <Loans data={data.banks} />
+        <Nearby lat="12.9662976" lang="77.5716864" projName={data.projectName} />
+        <Specifications data={data.specificationList} projName={data.projectName} />
+        <Feature data={data.highlights} projName={data.projectName} />
+        <Banner projName={data.projectName} />
+        <Loans data={data.banks} projName={data.projectName} />
         <AboutBuilder />
         {/* Why Buy This */}
         <About
           id="whyBuy"
           heading="Why Buy"
-          projName="SARANG BY SUMADHURA ?"
+          projName={`${data.projectName} ?`}
           content={data.wbtp}
         />
-        <Testimonials />
-        <Reviews />
+        <Testimonials projName={data.projectName} />
+        <Reviews projName={data.projectName} />
         <DownloadBroucher url={data?.media?.projBroucherUrl} />
 
-        <FaqWithBg data={data.faqs} />
+        <FaqWithBg data={data.faqs} projName={data.projectName} />
         <div className="flex flex-col justify-start items-start w-[90%]">
           <ProjectCarousel
             type="proj"
             title="nEAR BY pROJECTS OF"
-            projName="SARANG BY SUMADHURA"
+            projName={data.projectName}
             content="See what other customers also viewed"
           />
           <ProjectCarousel
@@ -98,7 +99,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           />
         </div>
 
-        <ProjectDrawer />
+        <ProjectDrawer projName={data.projectName} />
       </div>
     </div>
   );

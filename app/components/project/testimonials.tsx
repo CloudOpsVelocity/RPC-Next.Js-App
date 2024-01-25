@@ -49,13 +49,13 @@ const Card = ({}: Props) => {
   );
 };
 
-export default function Testimonials() {
+export default function Testimonials({projName}:{projName:string}) {
   return (
     <div className="bg-white p-0 w-[90%] mb-[3%] ">
       <div className="flex flex-col md:flex-row gap-[1%]">
         <div className="flex-1 w-[100%] md:w-[47%] ">
           <h2 className="text-2xl font-semibold">
-            TESTIMONIALS OF <span className="text-green-500">SARANG</span>
+            TESTIMONIALS OF <span className="text-green-500">{projName}</span>
           </h2>
           <p className="text-sm text-gray-500 mt-2 italic">
             Voice of Happy Homeowners: Testimonials

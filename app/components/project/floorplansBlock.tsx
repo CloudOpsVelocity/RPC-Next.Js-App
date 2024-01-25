@@ -29,8 +29,9 @@ import { currentPhaseAtom, propCgIdAtom } from "@/app/store/vewfloor";
 type Props = {
   data: PhaseList[];
   slug: string;
+  projName:string;
 };
-export default function FloorplansBlock({ slug }: Props) {
+export default function FloorplansBlock({ projName, slug }: Props) {
   const { phaseList, PhaseOverview } = usePhaseWiseOverview();
 
   const allKeys = [35, 33, 31, 34, 32];
@@ -119,9 +120,9 @@ export default function FloorplansBlock({ slug }: Props) {
   return (
     <div className="w-[90%] mb-[5%]" id="floorPlans">
       <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35]">
-        FLOOR PLANS for sarang by sumadhura{" "}
+        FLOOR PLANS for {" "}
         <span className="text-[#148B16] font-[700] uppercase">
-          sarang by sumadhura
+        {projName}
         </span>{" "}
       </h1>
       <p className="text-[16px] lg:text-[24px] font-[500] text-[#4D6677]">
@@ -148,7 +149,7 @@ export default function FloorplansBlock({ slug }: Props) {
           })}
         </div>
       </div>
-      <div className=" flex justify-start items-start flex-wrap mt-[3%] ">
+      <div className=" flex justify-start items-start flex-wrap mt-[3%] gap-[2%] ">
         {propertyDetailsTypes != undefined &&
           propertyDetailsTypes != null &&
           allKeys.map((keyName) => {
@@ -251,7 +252,7 @@ export default function FloorplansBlock({ slug }: Props) {
 
         <div className="w-full md:w-[50%] flex justify-end items-end flex-col p-[2%] shadow-inner md:shadow-none ">
           <p className=" text-[14px] lg:text-[16px] font-[500] text-[#005DA0] ">
-            Sarang by sumadhura/2bhk/tower 1/ 04/north/1124 sq.ft
+            {projName}/2bhk/tower 1/ 04/north/1124 sq.ft
           </p>
           <div className="flex justify-center items-center h-[300px] lg:h-[450px] w-full">
             {selectedFloor?.floorPlanUrl ? (
