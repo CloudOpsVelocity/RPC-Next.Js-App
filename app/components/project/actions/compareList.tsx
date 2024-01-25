@@ -16,7 +16,7 @@ export default function CompareList() {
   const onAddingCompare = () => {
     if(session){
       toggle()
-      addShortList({ projIdEnc: slug, type: 3 })
+      addShortList({ projIdEnc: slug, type: 3, isactive: value == "Add to" ? "Y" : "N" });
     }else{
       toast.custom((t) => (
         <div
