@@ -23,13 +23,13 @@ export default function BuildersBlock({ data }: { data: OtherBuilder[] }) {
             align="start"
             slideSize="15%"
             // withIndicators
-            height={300}
+            className=" flex justify-start items-center "
             slidesToScroll={1}
           >
             {data?.map((builder, index) => (
               <Carousel.Slide key={index} >
                 <div
-                  className="rounded-[10px] w-[107px] h-[105px] md:w-[140] md:h-[136px] lg:w-[209px] lg:h-[203px] shadow-lg bg-gray-300"
+                  className="rounded-[10px] w-[107px] h-[105px] md:w-[140px] md:h-[136px] lg:w-[209px] lg:h-[203px] shadow-lg bg-gray-300"
                   style={{
                     backgroundImage: `url(${
                       builder.logo || "fallback-image-url"
