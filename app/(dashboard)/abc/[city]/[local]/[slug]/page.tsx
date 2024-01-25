@@ -105,7 +105,11 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
 }
 
 export async function generateStaticParams() {
-  const slugs = ["7f146b9e4154f8613745e501fb87d6b9"];
+  const slugs = [
+    "7f146b9e4154f8613745e501fb87d6b9",
+    "1a108fb4ef25e2ae31cf002cb005289e",
+    "4f313de2f95cd9d761098b8f6c09417c",
+  ];
   return slugs.map((slug) => ({
     slug,
   }));

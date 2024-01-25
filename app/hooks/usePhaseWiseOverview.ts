@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { getProjectWiseOverView } from "../utils/api/project";
 import { useParams } from "next/navigation";
+import { currentPhaseAtom } from "../store/vewfloor";
+import { useAtom } from "jotai";
 
 export default function usePhaseWiseOverview() {
+  const [, setFloorPhase] = useAtom(currentPhaseAtom);
   const [currentPhase, setCurrentPhase] = useState(0);
   const handlePhaseChange = (phaseId: number) => {
     console.log(phaseId);
@@ -15,6 +18,7 @@ export default function usePhaseWiseOverview() {
     queryFn: () => getProjectWiseOverView(slug),
     onSuccess: (data) => {
       setCurrentPhase(data[0].phaseId);
+      setFloorPhase(data[0].phaseId);
     },
     keepPreviousData: true,
     staleTime: 30000,
