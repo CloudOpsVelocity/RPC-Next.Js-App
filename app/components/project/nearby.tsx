@@ -2,6 +2,8 @@
 import React, { useState, useCallback, useRef } from "react";
 import { LuTrain, LuSearch } from "react-icons/lu";
 import { Text, Tabs, TextInput, Loader, ScrollArea } from "@mantine/core";
+import style from '../../styles/ModalCarousel.module.css'
+
 import {
   GoogleMap,
   Marker,
@@ -21,7 +23,7 @@ import {
   calculateTime,
 } from "@/app/utils/maps";
 import { useDebouncedState } from "@mantine/hooks";
-import { MapIcon } from "@/app/images/commonSvgs";
+import { MapIcon, nearbyLocationIcon } from "@/app/images/commonSvgs";
 
 interface Area {
   name: string;
@@ -151,28 +153,28 @@ const Nearby: React.FC<{ lat: string; lang: string, projName:string }> = ({ lat,
       <div className="border border-[#92B2C8] grid grid-cols-1 md:grid-cols-[2fr_3fr] rounded-xl overflow-hidden shadow-lg">
         <section className="bg-white">
           <div id="tabs">
-            <Tabs defaultValue="public">
+            <Tabs defaultValue="public" >
               <div className="bg-blue-50 px-5 py-4">
                 <p className="text-[#001F35] text-[22px]  font-medium leading-[normal]">
                   Select how you want to travel
                 </p>
                 <Tabs.List>
                   <Tabs.Tab
-                    className="text-[#737579] text-xl not-italic font-medium leading-[normal] capitalize"
+                    className={`  not-italic leading-[normal] no-underline capitalize ${selectedTravelMode == "TRANSIT" ? "!text-[#148B16] font-[700] underline" : "!text-[#737579] no-underline font-[500]" } `}
                     value="public"
                     onClick={() => setSelectedTravelMode("TRANSIT")}
                   >
                     Public Transport
                   </Tabs.Tab>
                   <Tabs.Tab
-                    className="text-[#737579] text-xl not-italic font-medium leading-[normal] capitalize"
+                    className={`  not-italic leading-[normal] no-underline capitalize ${selectedTravelMode == "DRIVING" ? "!text-[#148B16] font-[700] underline" : "!text-[#737579] no-underline font-[500]" } `}
                     value="drive"
                     onClick={() => setSelectedTravelMode("DRIVING")}
                   >
                     Drive
                   </Tabs.Tab>
                   <Tabs.Tab
-                    className="text-[#737579] text-xl not-italic font-medium leading-[normal] capitalize"
+                    className={`  not-italic leading-[normal] no-underline capitalize ${selectedTravelMode == "WALKING" ? "!text-[#148B16] font-[700] underline" : "!text-[#737579] no-underline font-[500]" } `}
                     value="walk"
                     onClick={() => setSelectedTravelMode("WALKING")}
                   >
@@ -365,16 +367,16 @@ const LocationList: React.FC<{
         </h6>
         <div className="flex gap-1 text-sm">
           <span className="flex items-center">
-            <IoLocationSharp />
-            <span className="text-blue-800">{distance.toFixed(2)} Km</span>
+            {nearbyLocationIcon}
+            <span className="ml-[4px] text-[#005DA0] text-lg not-italic font-medium leading-[normal] ">{distance.toFixed(2)} Km</span>
           </span>
           <span>|</span>
-          <span>
+          <span className="text-[#001F35] text-lg not-italic font-medium leading-[normal]">
             {travelTime.hours}h {travelTime.minutes}m
           </span>
         </div>
       </div>
-      <p className="flex items-center gap-1 text-sm text-gray-600">
+      <p className="flex items-center gap-1 text-[#565D70] text-lg not-italic font-normal leading-[normal] lowercase">
         <LuTrain size={15} />
         Via public transport
       </p>

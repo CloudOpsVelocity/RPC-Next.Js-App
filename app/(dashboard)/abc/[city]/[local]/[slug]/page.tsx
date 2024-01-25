@@ -89,16 +89,19 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           projName={data.projectName}
         />
         <Feature data={data.highlights} projName={data.projectName} />
+        
         <Banner projName={data.projectName} />
         <Loans data={data.banks} projName={data.projectName} />
         <AboutBuilder id={data.builderId} />
         {/* Why Buy This */}
+        {data.wbtp &&
         <About
           id="whyBuy"
           heading="Why Buy"
           projName={`${data.projectName} ?`}
           content={data.wbtp}
         />
+        }
         <Testimonials projName={data.projectName} />
         <Reviews projName={data.projectName} />
         <DownloadBroucher url={data?.media?.projBroucherUrl} />

@@ -24,7 +24,7 @@ export default function CompareList() {
             t.visible ? 'animate-enter' : 'animate-leave'
           } ml-auto w-full pointer-events-auto flex justify-end items-end ring-1 ring-transparent ring-opacity-5`}
         >
-          <p className=" text-[#565D70] p-[8px] pr-[16px] pl-[16px] bg-white shadow-lg flex items-center rounded-lg gap-[10px] text-[20px] whitespace-nowrap font-[600] ">
+          <p className=" text-[#565D70] border-[#148B16] border-[1px] border-solid p-[8px] pr-[16px] pl-[16px] bg-white shadow-lg flex items-center rounded-lg gap-[10px] text-[20px] whitespace-nowrap font-[600] ">
             {infoIcon}  Please 
             <Link rel="shortcut icon" href="/login" >
               <span className=" cursor-pointer text-[#0073C6] ">
