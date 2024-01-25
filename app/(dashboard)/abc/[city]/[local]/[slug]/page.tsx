@@ -69,17 +69,21 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         {/* <Nearby lat={data.lat} lang={data.lang} /> */}
         <Nearby lat="12.9662976" lang="77.5716864" projName={data.projectName} />
         <Specifications data={data.specificationList} projName={data.projectName} />
+        {data.highlights &&
         <Feature data={data.highlights} projName={data.projectName} />
+        }
         <Banner projName={data.projectName} />
         <Loans data={data.banks} projName={data.projectName} />
         <AboutBuilder />
         {/* Why Buy This */}
+        {data.wbtp &&
         <About
           id="whyBuy"
           heading="Why Buy"
           projName={`${data.projectName} ?`}
           content={data.wbtp}
         />
+        }
         <Testimonials projName={data.projectName} />
         <Reviews projName={data.projectName} />
         <DownloadBroucher url={data?.media?.projBroucherUrl} />
@@ -92,7 +96,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             projName={data.projectName}
             content="See what other customers also viewed"
           />
-          
+
           <ProjectCarousel
             type="prop"
             title="Projects By Developers"

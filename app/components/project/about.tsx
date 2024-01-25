@@ -9,6 +9,7 @@ type Props = {
 };
 
 export default function About({ heading, projName, content, id }: Props) {
+  console.log(content)
   return (
     <div className="w-[90%] mb-[5%]" id={id ?? ""}>
       <h1 className="uppercase text-[24px] lg:text-[32px] font-[600] text-[#001F35]">
