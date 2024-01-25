@@ -106,9 +106,13 @@ const RequestCallBackModal = ({
 
 const Content = ({ close }: any) => {
   const { data: session } = useSession();
-  return session ? <LoggedInUserForm /> : <ReqForm close={close} />;
+  return session ? (
+    <LoggedInUserForm close={close} />
+  ) : (
+    <ReqForm close={close} />
+  );
 };
-const LoggedInUserForm = () => {
+const LoggedInUserForm = ({ close }: any) => {
   const { slug } = useParams<{ slug: string }>();
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error" | "otp"
@@ -123,6 +127,7 @@ const LoggedInUserForm = () => {
     validate: yupResolver(reqSchema),
   });
   const onSubmit = async () => {
+    setStatus("pending");
     const data = {
       name: session?.user?.name,
       email: session?.user?.email,
@@ -133,9 +138,28 @@ const LoggedInUserForm = () => {
     };
     console.log(data);
     const res = await sendContact(data);
+    setStatus("success");
+    // res.status ? setStatus("success") : setStatus("error");
     console.log(res);
   };
-  return (
+  const onSuccess = async () => {
+    setStatus("success");
+  };
+  return status === "success" ? (
+    <Success close={close} />
+  ) : status === "otp" ? (
+    <ReqOtpForm
+      callback={onSuccess}
+      values={{
+        name: session?.user?.name,
+        email: session?.user?.email,
+        mobile: session?.user?.userName,
+        projIdEnc: slug,
+        isProjContact: "Y",
+        src: "searchCard",
+      }}
+    />
+  ) : (
     <div className="mt-8 w-full">
       <p className="text-[#148B16] mb-[4%] text-base italic font-bold leading-[normal] tracking-[0.64px]">
         Builder: Sarang By Sumadhura

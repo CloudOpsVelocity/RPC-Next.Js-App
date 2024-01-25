@@ -7,40 +7,43 @@ import { Rating } from "@mantine/core";
 import useRatings from "@/app/hooks/useRatings";
 import { useParams } from "next/navigation";
 
-export default function Reviews({projName}:{projName:string}) {
+export default function Reviews({ projName }: { projName: string }) {
   const { slug } = useParams<{ slug: string }>();
   const { data, isLoading } = useRatings({ projectId: slug });
   return (
-    <div className="bg-[#FFF] py-12 w-full ">
-      <div className="max-w-[1920px] mx-auto px-6">
-        <h2 className="text-2xl font-semibold text-gray-800">
-          CUSTOMER REVIEWS FOR <span className="text-green-500">{projName}</span>
-        </h2>
-        <p className="text-lg text-gray-600 mt-2 italic">
-          Find helpful customer reviews and review ratings for {projName}
-        </p>
-        <div className="mt-8 relative">
-          <Carousel
-            slideGap={"md"}
-            align="start"
-            slideSize={{ base: "100%", sm: "50%", md: "33.333333%" }}
-            withIndicators
-            height={250}
-            slidesToScroll={1}
-          >
-            {data?.data?.map((eachData: any, i: number) => (
-              <Carousel.Slide key={i}>
-                <Review {...eachData} />
-              </Carousel.Slide>
-            ))}
-          </Carousel>
+    data?.status && (
+      <div className="bg-[#FFF] py-12 w-full ">
+        <div className="max-w-[1920px] mx-auto px-6">
+          <h2 className="text-2xl font-semibold text-gray-800">
+            CUSTOMER REVIEWS FOR{" "}
+            <span className="text-green-500">{projName}</span>
+          </h2>
+          <p className="text-lg text-gray-600 mt-2 italic">
+            Find helpful customer reviews and review ratings for {projName}
+          </p>
+          <div className="mt-8 relative">
+            <Carousel
+              slideGap={"md"}
+              align="start"
+              slideSize={{ base: "100%", sm: "50%", md: "33.333333%" }}
+              withIndicators
+              height={250}
+              slidesToScroll={1}
+            >
+              {data?.data?.map((eachData: any, i: number) => (
+                <Carousel.Slide key={i}>
+                  <Review {...eachData} />
+                </Carousel.Slide>
+              ))}
+            </Carousel>
+          </div>
         </div>
       </div>
-    </div>
+    )
   );
 }
 
-const Review = ({ rating, review }: any) => {
+const Review = ({ rating, review, name, days }: any) => {
   return (
     <>
       <div
@@ -53,13 +56,13 @@ const Review = ({ rating, review }: any) => {
             <div className="flex justify-between items-center">
               <div>
                 <p className="text-[18px] text-[#000] font-[500] mt-[20px]">
-                  GRP User
+                  {name ?? "GRP USER"}
                 </p>
                 <p className="text-[14px] text-[#212C33] font-[500]">Owner</p>
               </div>
               <div className="text-right">
                 <Rating size={"sm"} value={rating} readOnly />
-                <span className="text-xs text-gray-500">3 days ago</span>
+                <span className="text-xs text-gray-500">{days} days ago</span>
               </div>
             </div>
             <p className="mt-2 text-[14px] text-[#3E3E3E] font-[400]">

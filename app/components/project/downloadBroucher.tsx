@@ -8,6 +8,8 @@ import toast from "react-hot-toast";
 // import { downloadIcon } from '@/app/images/commonSvgs';
 
 const DownloadBroucher = ({ url }: { url: string }) => {
+  console.log(url);
+
   const { data: session } = useSession();
 
   const onButtonClick = () => {
@@ -61,18 +63,22 @@ const DownloadBroucher = ({ url }: { url: string }) => {
   };
 
   return (
-    <div className="flex justify-start mt-[5%] items-center flex-wrap w-[90%] gap-[2%] ">
-      <p className="text-[28px] lg:text-[32px] text-[#023993] font-[700]">
-        Brochure{" "}
-      </p>
-      <button
-        onClick={() => handleDownload()}
-        className="flex border-0 justify-center items-center text-[20px] lg:text-[24px] text-[#FFF] font-[700] rounded-[10px] bg-[#0073C6] gap-[8px] p-[5px]  "
-      >
-        {downLoadIcon}
-        Download Brochure
-      </button>
-    </div>
+    url && (
+      <div className="flex justify-start mt-[5%] items-center flex-wrap w-[90%] gap-[2%] ">
+        <p className="text-[28px] lg:text-[32px] text-[#023993] font-[700]">
+          Brochure{" "}
+        </p>
+        <a
+          href={url}
+          download={true}
+          target="_blank"
+          className="flex border-0 justify-center items-center text-[20px] lg:text-[24px] text-[#FFF] font-[700] rounded-[10px] bg-[#0073C6] gap-[8px] p-[5px]  "
+        >
+          {downLoadIcon}
+          Download Brochure
+        </a>
+      </div>
+    )
   );
 };
 
