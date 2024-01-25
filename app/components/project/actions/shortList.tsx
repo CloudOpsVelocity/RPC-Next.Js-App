@@ -18,7 +18,11 @@ export default function ShortList() {
     if (session) {
       toggle();
       value === "Add to"
-        ? addShortList({ projIdEnc: slug, type: 3, isactive: value == "Add to" ? "Y" : "N" })
+        ? addShortList({
+            projIdEnc: slug,
+            type: 3,
+            isactive: value == "Add to" ? "Y" : "N",
+          })
         : () => toast.success("Property Removed from Shortlisted");
     } else {
       toast.custom((t) => (

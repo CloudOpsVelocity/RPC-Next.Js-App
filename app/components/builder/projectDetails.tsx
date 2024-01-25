@@ -88,7 +88,7 @@ export default function ProjectDetails({
           </p>
         </div>
       </div>
-      <ProjectDrawer />
+      {/* <ProjectDrawer /> */}
     </React.Fragment>
   );
 }
