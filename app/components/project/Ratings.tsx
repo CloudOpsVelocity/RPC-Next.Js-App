@@ -9,7 +9,10 @@ export default function Ratings() {
   const { data, isLoading } = useRatings({ projectId: slug });
   return (
     <p className="text-[20px] flex justify-start items-start lg:text-[24px] text-[#4D6677] font-[700] whitespace-nowrap">
-      {isLoading ? "..." : data?.rating ?? 0}.0 Ratings
+      {isLoading
+        ? "..."
+        : `${data?.rating ? `${data?.rating}.0` : "No"}` ?? "No"}{" "}
+      Ratings
       <RatingStar fill="#FFD600" className="h-[32px] w-[32px]" />
     </p>
   );

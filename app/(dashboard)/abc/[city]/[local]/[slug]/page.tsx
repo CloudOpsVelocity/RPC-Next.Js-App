@@ -61,14 +61,29 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           content={data.about}
         />
         {/* Property Details */}
-        <ProjectDetailsP projName={data.projectName} data={data.phaseList} slug={slug} />
+        <ProjectDetailsP
+          projName={data.projectName}
+          data={data.phaseList}
+          slug={slug}
+        />
         {/* Floor Plan Block */}
-        <FloorplansBlock projName={data.projectName} data={data.phaseList} slug={slug} />
+        <FloorplansBlock
+          projName={data.projectName}
+          data={data.phaseList}
+          slug={slug}
+        />
         <GalleryBlock {...data.media} projName={data.projectName} />
         <Amenties data={data.amenityList} />
-        {/* <Nearby lat={data.lat} lang={data.lang} /> */}
-        <Nearby lat="12.9662976" lang="77.5716864" projName={data.projectName} />
-        <Specifications data={data.specificationList} projName={data.projectName} />
+        <Nearby lat={data.lat} lang={data.lang} projName={data.projectName} />
+        {/* <Nearby
+          lat="12.9662976"
+          lang="77.5716864"
+          projName={data.projectName}
+        /> */}
+        <Specifications
+          data={data.specificationList}
+          projName={data.projectName}
+        />
         <Feature data={data.highlights} projName={data.projectName} />
         <Banner projName={data.projectName} />
         <Loans data={data.banks} projName={data.projectName} />
@@ -92,7 +107,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             projName={data.projectName}
             content="See what other customers also viewed"
           />
-          
+
           <ProjectCarousel
             type="prop"
             title="Projects By Developers"
