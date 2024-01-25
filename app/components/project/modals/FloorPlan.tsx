@@ -26,11 +26,12 @@ type Props = {
 };
 
 function FloorPlanModal({ propCgId, data }: Props) {
-  const selectedFloor = useAtomValue(selectedFloorAtom);
+  const [selectedFloor,setSelectedFloor] = useAtom(selectedFloorAtom);
   const setFloorsArray = useSetAtom(floorPlansArray);
   const [opened, { open, close }] = useDisclosure(false);
   const form = useForm();
   const handleOpen = () => {
+    setSelectedFloor(data[0])
     setFloorsArray(data);
     open();
   };
@@ -108,9 +109,9 @@ function FloorPlanModal({ propCgId, data }: Props) {
                 </button>
               )}
             </div>
-            <div className="flex justify-between items-start gap-[45px] flex-col md:flex-row w-full">
+            <div className="flex justify-start items-start gap-[45px] flex-col md:flex-row w-full">
               <LeftSection propCgId={propCgId} data={data} />
-              {selectedFloor && <MiddleSection />}
+              <MiddleSection />
               {selectedFloor && (
                 <RightSection propCgId={propCgId} data={data} />
               )}
@@ -925,7 +926,7 @@ const MiddleSection = ({ hide = false }: any) => {
         {(floorsArray != undefined &&
           floorsArray != null &&
           floorsArray.length > 0) ||
-        data.floorPlanUrl ? (
+        data?.floorPlanUrl ? (
           <Image
             // @ts-ignore
             src={floorsArray[currentImg]?.floorPlanUrl || data.floorPlanUrl}
