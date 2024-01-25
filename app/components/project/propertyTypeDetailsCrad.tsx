@@ -62,7 +62,7 @@ export default function PropertyTypeDetailsCrad({
           return villaCardImg;
         }
         break;
-      case "villament":
+      case "vlmt":
         if (type == "name") {
           return "Villament";
         } else {
@@ -86,7 +86,7 @@ export default function PropertyTypeDetailsCrad({
       case "villa":
         return projectprops.villa;
         break;
-      case "villament":
+      case "vlmt":
         return projectprops.villament;
         break;
       default:
@@ -134,7 +134,7 @@ export default function PropertyTypeDetailsCrad({
           UNITS: {cg?.unitTypes.join(", ")}
         </p>
         <div className="flex justify-end items-end mb-[3%] gap-[16px]">
-          {propertyType == "apt" || propertyType == "villament" ? (
+          {propertyType == "apt" || propertyType == "vlmt" ? (
             <p className="text-[14px] lg:text-[20px] text-[#2A4C70] font-[500] flex justify-start items-start  ">
               <TowerIcon className="w-[16px] h-[16px] lg:w-[24px] lg:h-[24px]" />
               <span className="mr-[6px] ml-[6px]"> {cg?.towers} </span> Towers

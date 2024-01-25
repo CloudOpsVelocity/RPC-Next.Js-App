@@ -64,8 +64,8 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
               ))}
             </Carousel>
           </div>
-          <div className="absolute bottom-0 m-[2%] z-10 w-[95%] self-center justify-between items-start border-solid border-white-500 rounded-[10px] bg-gradient-to-r from-[#EFEFEF] /20 to-[#c3c3c3bd]/80 shadow-md flex flex-row">
-            <div className="w-[60%]">
+          <div className="absolute bottom-0 m-[2%] z-10 w-[95%] self-center justify-between items-start flex-col md:flex-row border-solid border-white-500 rounded-[10px] bg-gradient-to-r from-[#EFEFEF] /20 to-[#c3c3c3bd]/80 shadow-md flex">
+            <div className=" w-full md:w-[60%]">
               <p className=" flex items-center pl-[8px] rounded-tl-lg text-center text-[24px] font-[600] text-[#FFF] bg-gradient-to-r w-[122px] from-[#148B16] /0 to-[#EFEFEF]/50">
                 <ReraIcon />
                 RERA
@@ -93,22 +93,22 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
                 </p>
               </div>
             </div>
-            <div className="w-[40%] flex justify-between items-end flex-col p-[2%]">
-              <h2 className="text-[24px] lg:text-[28px] font-[700] text-[#001F35]">
+            <div className="w-full md:w-[40%] flex justify-between md:items-end flex-col p-[2%]">
+              <h2 className="text-[20px] md:text-[24px] lg:text-[28px] font-[700] text-[#001F35]">
                 {formatCurrency(projectDetails.minPrice)} -{" "}
                 {formatCurrency(projectDetails.maxPrice)}
               </h2>
-              <p className="text-[16px] text-right lg:text-[20px] font-[600] mb-[20px] text-[#00487C] ">
+              <p className="text-[16px] md:text-right lg:text-[20px] font-[600] mb-[10px] md:mb-[20px] text-[#00487C] ">
                 ₹ {projectDetails.basePrice}/ Price per sqft onwards
               </p>
 
-              <p className="text-[16px] lg:text-[20px] font-[600] text-[#2A4C70] bg-[#FFF] rounded-[10px] shadow-md p-[8px] flex gap-2">
+              <p className="text-[16px] lg:text-[20px] font-[600] mr-auto md:mr-0 text-[#2A4C70] bg-[#FFF] rounded-[10px] shadow-md p-[8px] flex items-center gap-2">
                 <Image
                   width={100}
                   height={100}
                   src={"/project/floorplan.png"}
                   alt="no of floors"
-                  className="w-8"
+                  className="h-[24px] w-[24px] "
                 />
                 {projectDetails?.floorPlanCount || 0} Floors Plans
               </p>

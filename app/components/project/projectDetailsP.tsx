@@ -26,7 +26,7 @@ export default function ProjectDetailsP({ slug }: Props) {
   const selectedPhase = PhaseOverview?.find(
     (phase: any) => phase.phaseId === currentPhase
   );
-  const propertyTypeOrder = ["apt", "rowHouse", "villa", "villament", "plot"];
+  const propertyTypeOrder = ["apt", "rowHouse", "villa", "vlmt", "plot"];
   const orderedPropertyTypes =
     selectedPhase &&
     propertyTypeOrder.filter((propertyType) =>
