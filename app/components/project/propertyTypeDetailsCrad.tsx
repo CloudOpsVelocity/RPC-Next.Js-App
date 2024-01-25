@@ -118,11 +118,11 @@ export default function PropertyTypeDetailsCrad({
             {propName(propertyType, "name")}
           </p>
 
-          <div className="flex justify-end items-start flex-col">
+          <div className="flex justify-end items-end flex-col">
             <p className="text-[16px] text-right lg:text-[20px] text-[#148B16] font-[700]">
               {formatCurrency(cg?.minPrice)} - {formatCurrency(cg?.maxPrice)}
             </p>
-            <p className="text-[12px] text-right lg:text-[14px] text-[#00487C] font-[500]">
+            <p className="text-[12px] lg:text-[14px] text-[#00487C] font-[500]">
               ₹ {cg?.basePrice} Base Price/ sq.ft
             </p>
           </div>

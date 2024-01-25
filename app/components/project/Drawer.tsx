@@ -8,7 +8,7 @@ import { AmenityList } from "@/app/validations/types/project";
 import Flex from "../molecules/Utils/Flex";
 import { amenitiesGroupList } from "@/app/images/commonSvgs";
 import React from "react";
-function ProjectDrawer() {
+function ProjectDrawer({projName}:{projName:string}) {
   const [{ expanded, content, type }, setReadMore] = useAtom(readMoreAtom);
   const handleReadMoreClick = () => {
     setReadMore((prev) => ({ ...prev, expanded: !prev.expanded }));
@@ -28,14 +28,14 @@ function ProjectDrawer() {
         radius="md"
         opened={expanded}
         onClose={handleReadMoreClick}
-        title="About Sarang By Sumadhura"
+        title={`About ${projName}`}
         position="right"
         size={isMobile ? "80%" : "60%"}
         // size={"50%"}
       >
         <h1 className="uppercase text-[24px] lg:text-[32px] font-[600] text-[#001F35]">
           about{" "}
-          <span className="text-[#148B16] font-[700] uppercase">sarang</span>
+          <span className="text-[#148B16] font-[700] uppercase">{projName}</span>
         </h1>
         <div className="w-[90%] text-[#233333] text-xl mt-5">
           {type === "content" ? (

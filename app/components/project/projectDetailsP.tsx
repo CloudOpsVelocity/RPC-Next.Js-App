@@ -19,8 +19,9 @@ import { formatDate, formatDateDDMMYYYY } from "@/app/utils/date";
 type Props = {
   data: PhaseList[];
   slug: string;
+  projName: string;
 };
-export default function ProjectDetailsP({ slug }: Props) {
+export default function ProjectDetailsP({ projName, slug }: Props) {
   const { PhaseOverview, currentPhase, handlePhaseChange } =
     usePhaseWiseOverview();
   const selectedPhase = PhaseOverview?.find(
@@ -37,7 +38,7 @@ export default function ProjectDetailsP({ slug }: Props) {
     <div className="w-[90%] mb-[5%]" id="propertyDetails">
       <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35]">
         Property Details{" "}
-        <span className="text-[#148B16] font-[700] uppercase">SARANG</span>{" "}
+        <span className="text-[#148B16] font-[700] uppercase">{projName}</span>{" "}
       </h1>
 
       <p className="text-[16px] lg:text-[24px] font-[500] text-[#4D6677]">

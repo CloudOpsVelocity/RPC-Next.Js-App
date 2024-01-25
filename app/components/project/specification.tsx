@@ -8,8 +8,10 @@ import { MdOutlineDoorSliding } from "react-icons/md";
 
 export default function Specifications({
   data,
+  projName
 }: {
   data: SpecificationList[];
+  projName: string;
 }) {
   const [specs, setSpecs] = useState<SpecificationList[]>(data);
   const [selectedSpecIndex, setSelectedSpecIndex] = useState<number | null>(
@@ -45,7 +47,7 @@ export default function Specifications({
         <div className="flex-1 bg-gradient-to-tr from-blue-100 p-8">
           <h2 className="text-[24px] lg:text-[32px] font-semibold">
             SPECIFICATION OF
-            <span className="!text-green-600"> SARANG</span>
+            <span className="!text-green-600"> {projName}</span>
           </h2>
           <p className="text-[16px] lg:text-[22px] text-[#212C33] font-[500] mt-2 mb-4 flex justify-start items-start ">
 

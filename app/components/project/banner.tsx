@@ -14,7 +14,7 @@ import { IconSun, RatingStar, infoIcon } from "@/app/images/commonSvgs";
 import toast, { Toaster } from "react-hot-toast";
 import Link from "next/link";
 
-export default function Banner() {
+export default function Banner({projName}:{projName:string;}) {
   const [opened, { open, close }] = useDisclosure(false);
   const { data: session } = useSession();
 
@@ -47,7 +47,7 @@ export default function Banner() {
       />
       <div>
         <h2 className="text-[24px] lg:text-[32px] font-bold text-[#003366] mb-2">
-          PROJECT RATING FOR <span className="text-green-600">SARANG</span>
+          PROJECT RATING FOR <span className="text-green-600">{projName}</span>
         </h2>
         <p className="text-lg text-[#003366] mb-4">
           Your headline should show readers how your review can help them solve

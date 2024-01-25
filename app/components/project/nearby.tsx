@@ -28,9 +28,10 @@ interface Area {
   Icon?: string;
   lat?: number;
   lng?: number;
+  projName?: string;
 }
 
-const Nearby: React.FC<{ lat: string; lang: string }> = ({ lat, lang }) => {
+const Nearby: React.FC<{ lat: string; lang: string, projName:string }> = ({ lat, lang, projName }) => {
   const [directionsResponse, setDirectionsResponse] = useState<any | null>(
     null
   );
@@ -118,7 +119,7 @@ const Nearby: React.FC<{ lat: string; lang: string }> = ({ lat, lang }) => {
   return (
     <div className="w-[90%] mx-auto mt-[5%] mb-[5%] " id="nearBy">
       <h2 className="text-[24px] lg:text-[32px] font-semibold">
-        <span className="!text-green-600">SARANG BY SUMADHARA </span>
+        <span className="!text-green-600">{projName} </span>
         <span className="">Near BY LOCATIONS</span>
       </h2>
       <p className="text-gray-500 mt-1 mb-2 text-lg italic ">
@@ -147,7 +148,7 @@ const Nearby: React.FC<{ lat: string; lang: string }> = ({ lat, lang }) => {
         ))}
       </div>
 
-      <div className="border border-[#92B2C8]  grid grid-cols-1 md:grid-cols-[2fr_3fr] rounded-xl overflow-hidden shadow-lg">
+      <div className="border border-[#92B2C8] grid grid-cols-1 md:grid-cols-[2fr_3fr] rounded-xl overflow-hidden shadow-lg">
         <section className="bg-white">
           <div id="tabs">
             <Tabs defaultValue="public">
@@ -282,7 +283,7 @@ const Nearby: React.FC<{ lat: string; lang: string }> = ({ lat, lang }) => {
                     <InfoWindow >
                       <div className=" ">
                         <p className="text-[#00487C] text-[10px] italic font-medium leading-[normal]">Project you are exploring</p>
-                        <p className="text-[#006A02] text-sm not-italic font-semibold leading-[normal]">Sarang By Sumadhura</p>
+                        <p className="text-[#006A02] text-sm not-italic font-semibold leading-[normal]">{projName}</p>
                       </div>
                     </InfoWindow>
                   </Marker>

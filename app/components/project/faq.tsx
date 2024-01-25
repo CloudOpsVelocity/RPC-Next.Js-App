@@ -24,9 +24,10 @@ import toast from "react-hot-toast";
 
 type FaqWithBgProps = {
   data: FAQ[];
+  projName:string;
 };
 
-export function FaqWithBg({ data }: FaqWithBgProps) {
+export function FaqWithBg({ data, projName }: FaqWithBgProps) {
   return (
     <div className={classes.wrapper} id="faq">
       <div className="flex justify-center items-center w-full ">
@@ -35,7 +36,7 @@ export function FaqWithBg({ data }: FaqWithBgProps) {
         <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35] mb-16">
           Frequently Asked Questions of
           <span className="text-[#148B16] font-[700] uppercase ml-4">
-            SARANG
+            {projName}
           </span>{" "}
         </h1>
       </div>
@@ -74,12 +75,12 @@ export function FaqWithBg({ data }: FaqWithBgProps) {
           </Accordion.Item>
         ))}
       </Accordion>
-      <AddQnaForm />
+      <AddQnaForm projName={projName} />
     </div>
   );
 }
 
-const AddQnaForm = () => {
+const AddQnaForm = ({projName}:{projName:string}) => {
   const { slug } = useParams<{ slug: string }>();
   const { data: session } = useSession();
   const [status, setStatus] = useState<
@@ -130,7 +131,7 @@ const AddQnaForm = () => {
     >
       <h2 className="font-[700] text-[#233333] text-[20px]  ">
         Ask your question related to
-        <span className="!text-green-600"> Sarang by Sumadhura Project!</span>
+        <span className="!text-green-600"> {projName} Project!</span>
       </h2>
 
       <div className=" gap-4">

@@ -14,6 +14,7 @@ export default function GalleryBlock({
   projWalkThroughVideoUrl,
   otherImgUrl,
   walkThrowVideoUrl,
+  projName
 }: Media) {
   const [selectedMedia, setSelectedMedia] = useState<string | null>(
     projectPlanUrl
@@ -31,7 +32,7 @@ export default function GalleryBlock({
     <div className="w-[90%] mb-[5%] h-full " id="galleria">
       <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35] uppercase">
         gALLERIA of{" "}
-        <span className="text-[#148B16] font-[700] uppercase">sarang</span>{" "}
+        <span className="text-[#148B16] font-[700] uppercase">{projName}</span>{" "}
       </h1>
 
       <p className="text-[20px] lg:text-[24px] font-[500] text-[#4D6677]">
