@@ -1,6 +1,7 @@
 export interface Main {
   projectName: string;
   projIdEnc: string;
+  builderId: number;
   projectStatus: string;
   postedBy: string;
   minPrice: number;
@@ -55,7 +56,8 @@ export interface Media {
   projectPlanUrl: string;
   walkThrowVideoUrl: string;
   projBroucherUrl: string;
-  projName?:string;
+  projName?: string;
+  media: any;
 }
 
 export interface PhaseList {

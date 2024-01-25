@@ -4,10 +4,12 @@ import React from "react";
 import Link from "next/link";
 import useBuilder from "@/app/hooks/useBuilder";
 
-type Props = {};
+type Props = {
+  id: number;
+};
 
-export default function AboutBuilder({}: Props) {
-  const { data, isLoading } = useBuilder({ id: 1079, y: "N" });
+export default function AboutBuilder({ id }: Props) {
+  const { data, isLoading } = useBuilder({ id, y: "N" });
   return (
     <div className="w-[90%] mt-[5%] mb-[5%]">
       <div className="w-full justify-between items-center ">
@@ -32,7 +34,7 @@ export default function AboutBuilder({}: Props) {
               {data?.data?.onGoingProject}
             </p>
             <p className=" text-[#0073C6] text-[16px] lg:text-[20px] font-[700]">
-              New Launch Projects
+              Ongoing Projects
             </p>
           </div>
 
@@ -41,7 +43,7 @@ export default function AboutBuilder({}: Props) {
               {data?.data?.completedProject}
             </p>
             <p className=" text-[#E3AC00] text-[16px] lg:text-[20px] font-[700]">
-              New Launch Projects
+              Completed Projects
             </p>
           </div>
         </div>
@@ -63,7 +65,7 @@ export default function AboutBuilder({}: Props) {
         </p>
         <Link
           className=" bg-[#0073C6] rounded-[10px] text-[#FFF] text-[18px] lg:text-[20px] font-[700] p-[10px]  "
-          href={`/builder/1079`}
+          href={`/builder/${id}`}
         >
           View Builder Details
         </Link>

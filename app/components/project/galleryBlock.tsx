@@ -5,6 +5,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import ReactPlayer from "react-player";
 import Gallery from "./modals/Gallery";
+import { getImageUrls } from "@/app/utils/image";
 // import ReactVideoThumbnail from "react-video-thumbnail";
 
 export default function GalleryBlock({
@@ -14,13 +15,15 @@ export default function GalleryBlock({
   projWalkThroughVideoUrl,
   otherImgUrl,
   walkThrowVideoUrl,
-  projName
+  projName,
+  media,
 }: Media) {
   const [selectedMedia, setSelectedMedia] = useState<string | null>(
     projectPlanUrl
   );
 
-  const images = [coverImageUrl, projectPlanUrl];
+  const images = getImageUrls(media);
+  // const images = [coverImageUrl, projectPlanUrl];
 
   const videos = [walkThrowVideoUrl];
 

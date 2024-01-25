@@ -58,7 +58,7 @@ const Review = ({ rating, review, name, days }: any) => {
                 <p className="text-[18px] text-[#000] font-[500] mt-[20px]">
                   {name ?? "GRP USER"}
                 </p>
-                <p className="text-[14px] text-[#212C33] font-[500]">Owner</p>
+                <p className="text-[14px] text-[#212C33] font-[500]"></p>
               </div>
               <div className="text-right">
                 <Rating size={"sm"} value={rating} readOnly />

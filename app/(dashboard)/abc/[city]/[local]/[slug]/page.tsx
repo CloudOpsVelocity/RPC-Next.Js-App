@@ -72,7 +72,11 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           data={data.phaseList}
           slug={slug}
         />
-        <GalleryBlock {...data.media} projName={data.projectName} />
+        <GalleryBlock
+          {...data.media}
+          projName={data.projectName}
+          media={data.media}
+        />
         <Amenties data={data.amenityList} />
         <Nearby lat={data.lat} lang={data.lang} projName={data.projectName} />
         {/* <Nearby
@@ -87,7 +91,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         <Feature data={data.highlights} projName={data.projectName} />
         <Banner projName={data.projectName} />
         <Loans data={data.banks} projName={data.projectName} />
-        <AboutBuilder />
+        <AboutBuilder id={data.builderId} />
         {/* Why Buy This */}
         <About
           id="whyBuy"

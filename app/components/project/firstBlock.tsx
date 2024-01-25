@@ -13,12 +13,14 @@ import Image from "next/image";
 import SharePopup from "../atoms/SharePopup";
 import { formatCurrency } from "@/app/utils/numbers";
 import { formatDate } from "@/app/utils/date";
+import { getImageUrls } from "@/app/utils/image";
 
 type Props = {
   projectDetails: Main | null;
 };
 
 const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
+  const images = getImageUrls(projectDetails?.media as any);
   const autoplay = useRef(Autoplay({ delay: 10000 }));
 
   return (
@@ -48,7 +50,7 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
               onMouseEnter={autoplay.current.stop}
               onMouseLeave={autoplay.current.reset}
             >
-              {projectDetails?.media?.otherImgUrl?.map((imageUrl, index) => (
+              {images.map((imageUrl, index) => (
                 <Carousel.Slide key={index} className="relative">
                   <Image
                     width={1000}
