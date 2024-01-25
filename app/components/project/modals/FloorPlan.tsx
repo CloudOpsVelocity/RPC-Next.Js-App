@@ -130,12 +130,13 @@ const LeftSection = ({ propCgId, data }: Props) => {
   const { getInputProps, values, setFieldValue } = useFormContext();
 
   const getOptions = (property: string): string[] => {
-    if(data[0][property] != undefined){
-      return Array.from(new Set(data.map((item: any) => String(item[property]))));
-    }else{
+    if (data[0][property] != undefined) {
+      return Array.from(
+        new Set(data.map((item: any) => String(item[property])))
+      );
+    } else {
       return [];
     }
-    
   };
   const handleSearch = () => {
     // Implement your filtering logic here based on selectedValues
@@ -340,10 +341,10 @@ const LeftSection = ({ propCgId, data }: Props) => {
             label="Open/ Covered Parking"
             className="!w-[46%]"
             placeholder="-- select --"
-            data={getOptions("openCoveredParking") }
+            data={getOptions("parkingType")}
             searchable
             maxDropdownHeight={200}
-            {...getInputProps("openCoveredParking")}
+            {...getInputProps("parkingType")}
           />
         )}
 
@@ -885,7 +886,7 @@ const RightSection = ({ propCgId }: Props) => {
   );
 };
 
-const MiddleSection = ({hide = false}:any) => {
+const MiddleSection = ({ hide = false }: any) => {
   const data = useAtomValue(selectedFloorAtom);
 
   const floorsArray = useAtomValue(floorPlansArray);
@@ -926,9 +927,10 @@ const MiddleSection = ({hide = false}:any) => {
 
         {floorsArray != undefined &&
           floorsArray != null &&
-          floorsArray.length > 0 && hide === false  &&  (
-            <button onClick={()=> setOpened(true)}>
-              <PopupOpenSvg className="absolute bottom-0 right-0 w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] m-[1%] "  />
+          floorsArray.length > 0 &&
+          hide === false && (
+            <button onClick={() => setOpened(true)}>
+              <PopupOpenSvg className="absolute bottom-0 right-0 w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] m-[1%] " />
             </button>
           )}
       </div>

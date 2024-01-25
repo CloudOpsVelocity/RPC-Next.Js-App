@@ -96,13 +96,15 @@ export default function ProjectDetailsP({ slug }: Props) {
               value={selectedPhase.rerastatus}
               className="mr-[3%] mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]"
             />
-            <ProjBasicDetails
-              key="reraId"
-              icon={<IdIcon />}
-              title="RERA ID"
-              value={selectedPhase.reraId}
-              className="mr-[3%] mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]"
-            />
+            {selectedPhase.reraId && (
+              <ProjBasicDetails
+                key="reraId"
+                icon={<IdIcon />}
+                title="RERA ID"
+                value={selectedPhase.reraId}
+                className="mr-[3%] mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]"
+              />
+            )}
           </>
         )}
       </div>
