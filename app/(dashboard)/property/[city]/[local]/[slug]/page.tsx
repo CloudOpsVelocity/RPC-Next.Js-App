@@ -62,14 +62,14 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         <GalleryBlock {...data.media} />
         {/* About Builder */}
         <AboutBuilder />
-        <Nearby lat={data.lat} lang={data.lang} />
+        {/* <Nearby lat={data.lat} lang={data.lang} />
         <Specifications data={data.specificationList} />
         <Banner />
         <Feature data={data.highlights} />
         <Loans data={data.banks} />
-        <Amenties data={data.amenityList} />
+        <Amenties data={data.amenityList} /> */}
         {/* Why Buy This */}
-        <About
+        {/* <About
           id="whyBuy"
           heading="Why Buy"
           projName="SARANG BY SUMADHURA ?"
@@ -77,7 +77,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         />
         <Testimonials />
         <Reviews />
-        <FaqWithBg data={data.faqs} />
+        <FaqWithBg data={data.faqs} /> */}
         <div className="flex flex-col justify-start items-start w-[95%]">
           <ProjectCarousel
             type="proj"
@@ -92,7 +92,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           />
         </div>
 
-        <ProjectDrawer />
+        {/* <ProjectDrawer /> */}
       </div>
     </div>
   );
