@@ -92,6 +92,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             projName={data.projectName}
             content="See what other customers also viewed"
           />
+          
           <ProjectCarousel
             type="prop"
             title="Projects By Developers"
