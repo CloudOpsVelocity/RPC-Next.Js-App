@@ -13,6 +13,7 @@ type Props = { params: { slug: string } };
 export default async function Page({ params: { slug } }: Props) {
   const data = await getBuilderDetails(slug, "Y");
 
+  console.log(data)
   return (
     <div className="flex flex-col justify-start items-center w-full mt-[90px]  ">
       {data && (
@@ -24,18 +25,20 @@ export default async function Page({ params: { slug } }: Props) {
             <ProjectDetails {...data.data} />
             <ManagementBlock {...data.data} />
 
-            {data?.data?.builderProjects.map((project) => (
+            {data?.data?.builderProjects && (
               <ProjectCarousel
-                key={project.projIdEnc}
+                key=""
                 type="proj"
-                title={`Newly launched PROJECT by ${data?.data?.companyName}`}
-                projName={project.projectName}
+                title={`Newly launched PROJECT by`}
+                projName={data?.data?.companyName}
                 content={`See other newly launched projects by ${data?.data?.companyName}`}
+                data={data?.data?.builderProjects}
               />
-            ))}
+            )}
 
             <BuildersBlock data={data?.data?.otherBuilder} />
           </div>
+
 
           <Footer />
         </>

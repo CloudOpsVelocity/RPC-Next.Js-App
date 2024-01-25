@@ -27,7 +27,8 @@ export default function TopProfileBlock({
               {companyName}
             </p>
             <p className=" text-[#303A42] text-[14px] md:text-[16px] lg:text-[20px] font-[500] ">
-              {companyStartDate} since January, 2017
+            since {companyStartDate}
+            
             </p>
           </div>
         </div>

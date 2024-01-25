@@ -11,11 +11,12 @@ export default function ManagementBlock({
   founderName,
   vision,
   citiesName,
+  officecontact
 }: Data) {
   return (
-    <div className=" p-[1%] mb-[4%] pt-[2%] pb-[2%] bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 shadow-md shadow-[#5b8fb630] ">
-      <h1 className="uppercase text-[24px] lg:text-[32px] font-[600] text-[#001F35]">
-        <span className="text-[#148B16] font-[700] uppercase">
+    <div className="w-full p-[1%] mb-[4%] pt-[2%] pb-[2%] bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 shadow-md shadow-[#5b8fb630] ">
+      <h1 className=" text-[24px] lg:text-[32px] font-[600] text-[#001F35]">
+        <span className="text-[#148B16] font-[700] ">
           {companyName}{" "}
         </span>
         Management{" "}
@@ -41,14 +42,15 @@ export default function ManagementBlock({
         </div>
       </div>
 
+      <h1 className=" text-[24px] lg:text-[32px] font-[600] text-[#001F35]">
+        <span className="text-[#148B16] font-[700]">{companyName}'s</span>{" "}
+        Vision
+      </h1>
       <About
-        id="whyBuy"
-        heading="Vision"
-        projName={companyName}
-        content={
-          vision +
-          "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquam quo sunt, veniam consectetur cupiditate dicta? Eaque aliquam, veniam officia, suscipit magni fugit cupiditate incidunt libero asperiores molestias fugiat expedita eligendi."
-        }
+        id="builder_vision"
+        heading=""
+        projName={""}
+        content={vision}
       />
 
       <div className=" flex justify-start items-center w-full gap-[8px] mt-[-3%] mb-[2%] ">
@@ -57,12 +59,12 @@ export default function ManagementBlock({
           Office Contact
         </p>
         <p className="text-[16px] md:text-[24px] font-[600] text-[#00487C] underline">
-          +91- 8675497304
+          +91- {officecontact}
         </p>
       </div>
 
-      <h1 className="uppercase text-[24px] lg:text-[32px] font-[600] text-[#001F35]">
-        <span className="text-[#148B16] font-[700] uppercase">
+      <h1 className=" text-[24px] lg:text-[32px] font-[600] text-[#001F35]">
+        <span className="text-[#148B16] font-[700] ">
           {companyName} Projects{" "}
         </span>
         in Different Branches{" "}
