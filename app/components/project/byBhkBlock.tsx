@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { bhkDetails } from "../../data/projectDetails";
 import Button from "../../elements/button";
 import FloorplanDetailsCard from "./floorplanDetailsCard";
+import cookie from "js-cookie";
 
 type Props = {
   propCgId: any;
@@ -11,6 +12,9 @@ type Props = {
 const dummyProptypesList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 
 export default function ByBhkBlock({ propCgId, data }: Props) {
+  const getOptions = (property: string): string[] => {
+    return Array.from(new Set(data.map((item: any) => String(item[property]))));
+  };
   const [bhk, setBhk] = useState("0");
 
   // Filter data based on selected BHK
@@ -18,6 +22,7 @@ export default function ByBhkBlock({ propCgId, data }: Props) {
     bhk === "0"
       ? data
       : data.filter((item: any) => item.bhk === parseInt(bhk, 10));
+  const test = getOptions("bhkName");
 
   return (
     <div className="">

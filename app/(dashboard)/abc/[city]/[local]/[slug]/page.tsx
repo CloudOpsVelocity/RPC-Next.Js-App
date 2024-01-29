@@ -16,13 +16,10 @@ import Testimonials from "@/app/components/project/testimonials";
 import About from "@/app/components/project/about";
 import Navigation from "@/app/components/project/navigation";
 import Link from "next/link";
-import { getCachedUser, getProjectDetails } from "@/app/utils/api/project";
+import { getProjectDetails } from "@/app/utils/api/project";
 import ProjectDetailsP from "@/app/components/project/projectDetailsP";
 import Specifications from "@/app/components/project/specification";
 import ProjectDrawer from "@/app/components/project/Drawer";
-import Container from "@/app/components/molecules/Utils/Container";
-import { unstable_cache } from "next/cache";
-import { projectprops } from "@/app/data/projectDetails";
 import DownloadBroucher from "@/app/components/project/downloadBroucher";
 
 type Props = { params: { slug: string } };
@@ -89,19 +86,19 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           projName={data.projectName}
         />
         <Feature data={data.highlights} projName={data.projectName} />
-        
+
         <Banner projName={data.projectName} />
         <Loans data={data.banks} projName={data.projectName} />
         <AboutBuilder id={data.builderId} />
         {/* Why Buy This */}
-        {data.wbtp &&
-        <About
-          id="whyBuy"
-          heading="Why Buy"
-          projName={`${data.projectName} ?`}
-          content={data.wbtp}
-        />
-        }
+        {data.wbtp && (
+          <About
+            id="whyBuy"
+            heading="Why Buy"
+            projName={`${data.projectName} ?`}
+            content={data.wbtp}
+          />
+        )}
         <Testimonials projName={data.projectName} />
         <Reviews projName={data.projectName} />
         <DownloadBroucher url={data?.media?.projBroucherUrl} />

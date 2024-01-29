@@ -12,6 +12,9 @@ export default function useAmenities() {
   const { data, error, isLoading } = useQuery({
     queryKey: ["amenities"],
     queryFn: getAmenties,
+    keepPreviousData: true,
+    staleTime: 30000,
+    cacheTime: 300000,
   });
   return { data, isLoading, error };
 }
