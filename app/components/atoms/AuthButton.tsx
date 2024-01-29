@@ -36,7 +36,7 @@ export default function AuthButton() {
           href={postProjectLink}
           className="text-[16px] gap-[10px] lg:text-[20px] flex justify-center items-center font-semibold px-5 bg-[#227FBC] py-1.5 rounded-xl text-white"
         >
-          {/* {postDetailsIcon} */}
+          {postDetailsIcon}
           Post Your Project
         </a>
       )}
@@ -55,6 +55,7 @@ export default function AuthButton() {
 
 import { Menu } from "@mantine/core";
 import data from "@/app/data/dropdown";
+import { postDetailsIcon } from "@/app/images/commonSvgs";
 
 function Dropdown() {
   const { data: session } = useSession();
