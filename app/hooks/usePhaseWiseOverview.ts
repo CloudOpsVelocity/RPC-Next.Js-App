@@ -30,6 +30,9 @@ export default function usePhaseWiseOverview() {
       phaseName: phase.phaseName,
     };
   });
+  const hasReraStatus =
+    PhaseOverview && PhaseOverview.some((phase: any) => phase.rerastatus);
+
   return {
     phaseList,
     PhaseOverview,
@@ -37,5 +40,6 @@ export default function usePhaseWiseOverview() {
     handlePhaseChange,
     currentPhase,
     setCurrentPhase,
+    hasReraStatus,
   };
 }

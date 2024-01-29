@@ -14,6 +14,7 @@ import SharePopup from "../atoms/SharePopup";
 import { formatCurrency } from "@/app/utils/numbers";
 import { formatDate } from "@/app/utils/date";
 import { getImageUrls } from "@/app/utils/image";
+import usePhaseWiseOverview from "@/app/hooks/usePhaseWiseOverview";
 
 type Props = {
   projectDetails: Main | null;
@@ -22,6 +23,7 @@ type Props = {
 const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
   const images = getImageUrls(projectDetails?.media as any);
   const autoplay = useRef(Autoplay({ delay: 10000 }));
+  const { hasReraStatus } = usePhaseWiseOverview();
 
   return (
     <div
@@ -68,11 +70,14 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
           </div>
           <div className="absolute bottom-0 m-[2%] z-10 w-[95%] self-center justify-between items-start flex-col md:flex-row border-solid border-white-500 rounded-[10px] bg-gradient-to-r from-[#EFEFEF] /20 to-[#c3c3c3bd]/80 shadow-md flex">
             <div className=" w-full md:w-[60%]">
-              <p className=" flex items-center pl-[8px] rounded-tl-lg text-center text-[24px] font-[600] text-[#FFF] bg-gradient-to-r w-[122px] from-[#148B16] /0 to-[#EFEFEF]/50">
-                <ReraIcon />
-                RERA
-              </p>
-              <div className="ml-[2%]">
+              {hasReraStatus && (
+                <p className=" flex items-center pl-[8px] rounded-tl-lg text-center text-[24px] font-[600] text-[#FFF] bg-gradient-to-r w-[122px] from-[#148B16] /0 to-[#EFEFEF]/50">
+                  <ReraIcon />
+                  RERA
+                </p>
+              )}
+
+              <div className={`ml-[2%] ${!hasReraStatus && "mt-8"}`}>
                 <h3 className="text-[24px] lg:text-[28px] font-[700] text-[#00487C] uppercase">
                   {projectDetails.projectName}
                 </h3>
