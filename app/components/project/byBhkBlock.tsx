@@ -10,9 +10,6 @@ type Props = {
 };
 
 export default function ByBhkBlock({ propCgId, data }: Props) {
-  const getOptions = (property: string): string[] => {
-    return Array.from(new Set(data.map((item: any) => String(item[property]))));
-  };
   const [bhk, setBhk] = useState("0");
 
   // Filter data based on selected BHK
