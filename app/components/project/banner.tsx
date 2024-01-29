@@ -12,8 +12,6 @@ import { useParams } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { IconSun, RatingStar, infoIcon } from "@/app/images/commonSvgs";
 import toast, { Toaster } from "react-hot-toast";
-import Link from "next/link";
-import Login from "../molecules/auth/login";
 import LoginPopup from "../molecules/popups/login";
 
 export default function Banner({ projName }: { projName: string }) {

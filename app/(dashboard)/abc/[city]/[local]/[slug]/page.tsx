@@ -22,6 +22,7 @@ import Specifications from "@/app/components/project/specification";
 import ProjectDrawer from "@/app/components/project/Drawer";
 import DownloadBroucher from "@/app/components/project/downloadBroucher";
 import Download from "@/app/components/project/modals/Download";
+import LoginPopup from "@/app/components/molecules/popups/login";
 
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
