@@ -20,7 +20,7 @@ import FloorPlanModal from "./modals/FloorPlan";
 import { useQuery } from "react-query";
 import { getProjectUnits } from "@/app/utils/api/project";
 import usePhaseWiseOverview from "@/app/hooks/usePhaseWiseOverview";
-import { useAtom, useAtomValue } from "jotai";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { floorImageATom } from "@/app/store/image";
 import { selectedFloorAtom } from "@/app/store/floor";
 import Loading from "../atoms/Loader";
@@ -29,7 +29,7 @@ import { currentPhaseAtom, propCgIdAtom } from "@/app/store/vewfloor";
 type Props = {
   data: PhaseList[];
   slug: string;
-  projName:string;
+  projName: string;
 };
 export default function FloorplansBlock({ projName, slug }: Props) {
   const { phaseList, PhaseOverview } = usePhaseWiseOverview();
@@ -38,6 +38,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
   const [propCgId, setPropCgId] = useAtom(propCgIdAtom);
   const [currentPhase, setCurrentPhase] = useAtom(currentPhaseAtom);
   const [floorPlanType, setFloorPlanType] = useState("type");
+  const setSelectedFloor = useSetAtom(selectedFloorAtom);
   const selectedPhase = PhaseOverview?.find(
     (phase: any) => phase.phaseId === currentPhase
   );
@@ -120,10 +121,8 @@ export default function FloorplansBlock({ projName, slug }: Props) {
   return (
     <div className="w-[90%] mb-[5%]" id="floorPlans">
       <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35]">
-        FLOOR PLANS for {" "}
-        <span className="text-[#148B16] font-[700] uppercase">
-        {projName}
-        </span>{" "}
+        FLOOR PLANS for{" "}
+        <span className="text-[#148B16] font-[700] uppercase">{projName}</span>{" "}
       </h1>
       <p className="text-[16px] lg:text-[24px] font-[500] text-[#4D6677]">
         see floor plans as per your selected property type
@@ -168,9 +167,10 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                       ? "text-[#001F35] font-[500] shadow-md bg-[#D5EDFF]"
                       : "text-[#303A42] font-[400] bg-[#EEF7FE]"
                   } `}
-                  onChange={() =>
-                    getPropertyType(propertyDetailsTypes.get(keyName))
-                  }
+                  onChange={() => {
+                    getPropertyType(propertyDetailsTypes.get(keyName));
+                    setSelectedFloor(projectUnitsData[0]);
+                  }}
                   title={name}
                   icon={getIcon(keyName)}
                 />
@@ -254,28 +254,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
           <p className=" text-[14px] lg:text-[16px] font-[500] text-[#005DA0] ">
             {projName}/2bhk/tower 1/ 04/north/1124 sq.ft
           </p>
-          <div className="flex justify-center items-center h-[300px] lg:h-[450px] w-full">
-            {selectedFloor?.floorPlanUrl ? (
-              <img
-                src={selectedFloor?.floorPlanUrl as string}
-                className="w-full h-full"
-                alt="image"
-              />
-            ) : (
-              <div className="flex justify-center items-center flex-col ">
-                <img
-                  src="/project/noimage.svg"
-                  className="w-[80%] h-full"
-                  alt="image"
-                />
-                <p className=" text-[#000] text-center text-[18px] md:text-[28px] lg:text-[32px] font-[600] ">
-                  Image is not available
-                </p>
-              </div>
-            )}
 
-            {/* dISPLAY FLOOR PLAN HERE */}
-          </div>
           <FloorPlanModal propCgId={propCgId} data={projectUnitsData} />
         </div>
       </div>

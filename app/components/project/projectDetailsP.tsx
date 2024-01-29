@@ -16,6 +16,7 @@ import { useQuery } from "react-query";
 import { getProjectWiseOverView } from "@/app/utils/api/project";
 import usePhaseWiseOverview from "@/app/hooks/usePhaseWiseOverview";
 import { formatDate, formatDateDDMMYYYY } from "@/app/utils/date";
+import useUnitTypes from "@/app/hooks/useUnitTypes";
 type Props = {
   data: PhaseList[];
   slug: string;
@@ -24,6 +25,7 @@ type Props = {
 export default function ProjectDetailsP({ projName, slug }: Props) {
   const { PhaseOverview, currentPhase, handlePhaseChange } =
     usePhaseWiseOverview();
+  const { projectUnitsData } = useUnitTypes();
   const selectedPhase = PhaseOverview?.find(
     (phase: any) => phase.phaseId === currentPhase
   );
@@ -114,6 +116,7 @@ export default function ProjectDetailsP({ projName, slug }: Props) {
           <>
             {orderedPropertyTypes.map((propertyTypeKey: any) => (
               <PropertyTypeDetailsCrad
+                data={projectUnitsData}
                 phase={currentPhase}
                 key={propertyTypeKey}
                 cg={selectedPhase.propTypeOverview[propertyTypeKey]}

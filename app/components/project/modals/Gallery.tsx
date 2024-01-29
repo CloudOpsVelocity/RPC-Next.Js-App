@@ -6,6 +6,7 @@ import { PopupOpenSvg, videoPlayIcon } from "@/app/images/commonSvgs";
 import { Carousel } from "@mantine/carousel";
 import S from "@/app/styles/ImgCarousel.module.css";
 import ReactPlayer from "react-player";
+import { useGallery } from "@/app/hooks/useGallery";
 
 type GalleryProps = {
   selectedMedia: any;
@@ -20,30 +21,32 @@ const Gallery: React.FC<GalleryProps> = ({
   videos,
   isImage,
 }) => {
-  const [opened, { open, close }] = useDisclosure(false);
+  const [content, { open, close }] = useGallery();
   const [previewImage, setPreviewImage] = useState<string | null>(
     selectedMedia
   );
 
   const handleImageClick = (image: string) => {
     setPreviewImage(image);
-    open();
+    open(isImage ? "image" : "video");
   };
+
   return (
     <>
       <Modal
         centered
-        opened={opened}
+        opened={content ? true : false}
         onClose={() => {
           setPreviewImage(null);
           close();
         }}
-        className="md:h-[90vh] w-full"
+        className="md:h-[90vh] w-full "
         size={"100%"}
         classNames={{
           close: S.close,
           content: S.content,
           header: S.header,
+          overlay: S.overlay,
         }}
       >
         <div className="h-[80vh]">
@@ -55,15 +58,15 @@ const Gallery: React.FC<GalleryProps> = ({
               w={1600}
               fit="fill"
               src={previewImage}
-              className="cursor-pointer border-[5px] !h-[80%] border-white"
+              className="cursor-pointer border-[5px] bg-white border-white"
             />
           ) : (
             <ReactPlayer
               url={previewImage as string}
               width="100%"
-              height={800}
               controls
-              class="!h-[80%]"
+              height="80vh"
+              // class="!h-[80%]"
             />
           )}
           <div className="mt-4 flex items-center justify-center ">
@@ -136,7 +139,7 @@ const Gallery: React.FC<GalleryProps> = ({
       </Modal>
 
       <button onClick={() => handleImageClick(selectedMedia)}>
-        <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] absolute bottom-3 right-3 z-50 " />
+        <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] absolute bottom-10 right-3 z-50 " />
       </button>
     </>
   );

@@ -24,6 +24,7 @@ import Container from "@/app/components/molecules/Utils/Container";
 import { unstable_cache } from "next/cache";
 import { projectprops } from "@/app/data/projectDetails";
 import DownloadBroucher from "@/app/components/project/downloadBroucher";
+import Download from "@/app/components/project/modals/Download";
 
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
@@ -31,7 +32,8 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
   const data = await getProjectDetails(slug);
   console.log(data);
   return (
-    <div className="w-full">
+    <div className="w-full relative">
+      <Download />
       <div className="mt-[90px] w-full pb-[2%] flex items-center justify-center flex-col">
         <div className="p-[2%] w-full">
           <p className="text-[16px] text-[#565D70] font-[500] mb-[1%]">
@@ -79,35 +81,31 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         />
         <Amenties data={data.amenityList} />
         <Nearby lat={data.lat} lang={data.lang} projName={data.projectName} />
-        {/* <Nearby
-          lat="12.9662976"
-          lang="77.5716864"
-          projName={data.projectName}
-        /> */}
+
         <Specifications
           data={data.specificationList}
           projName={data.projectName}
         />
         <Feature data={data.highlights} projName={data.projectName} />
-        
+
         <Banner projName={data.projectName} />
         <Loans data={data.banks} projName={data.projectName} />
         <AboutBuilder id={data.builderId} />
         {/* Why Buy This */}
-        {data.wbtp &&
-        <About
-          id="whyBuy"
-          heading="Why Buy"
-          projName={`${data.projectName} ?`}
-          content={data.wbtp}
-        />
-        }
-        <Testimonials projName={data.projectName} />
+        {data.wbtp && (
+          <About
+            id="whyBuy"
+            heading="Why Buy"
+            projName={`${data.projectName} ?`}
+            content={data.wbtp}
+          />
+        )}
+        {/* <Testimonials projName={data.projectName} /> */}
         <Reviews projName={data.projectName} />
         <DownloadBroucher url={data?.media?.projBroucherUrl} />
 
         <FaqWithBg data={data.faqs} projName={data.projectName} />
-        <div className="flex flex-col justify-start items-start w-[90%]">
+        {/* <div className="flex flex-col justify-start items-start w-[90%]">
           <ProjectCarousel
             type="proj"
             title="nEAR BY pROJECTS OF"
@@ -120,7 +118,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             title="Projects By Developers"
             content="See what developers has posted"
           />
-        </div>
+        </div> */}
 
         <ProjectDrawer projName={data.projectName} />
       </div>

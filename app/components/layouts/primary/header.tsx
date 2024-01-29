@@ -6,7 +6,7 @@ import { useSession } from "next-auth/react";
 const Header = () => {
   const { data: session } = useSession();
   return (
-    <header className="h-[90px] w-[100%] bg-transparent flex items-center justify-between fixed top-0 z-50 bg-white pl-[3%] pr-[3%] ">
+    <header className="h-[90px] w-[100%] bg-transparent flex items-center justify-between fixed top-0  bg-white pl-[3%] pr-[3%] z-[1000]">
       <section>
         <Logo />
       </section>

@@ -1,11 +1,11 @@
 "use client";
 import { PopupOpenSvg, videoPlayIcon } from "@/app/images/commonSvgs";
 import { Media } from "@/app/validations/types/project";
-import Image from "next/image";
 import React, { useState } from "react";
 import ReactPlayer from "react-player";
 import Gallery from "./modals/Gallery";
 import { getImageUrls } from "@/app/utils/image";
+import { Image } from "@mantine/core";
 // import ReactVideoThumbnail from "react-video-thumbnail";
 
 export default function GalleryBlock({
@@ -32,7 +32,7 @@ export default function GalleryBlock({
   };
 
   return (
-    <div className="w-[90%] mb-[5%] h-full " id="galleria">
+    <div className="w-[90%] mb-[10%]  " id="galleria">
       <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35] uppercase">
         gALLERIA of{" "}
         <span className="text-[#148B16] font-[700] uppercase">{projName}</span>{" "}
@@ -44,10 +44,9 @@ export default function GalleryBlock({
 
       <div className=" flex justify-center flex-col md:flex-row items-center-full mt-[1%] ">
         {/* IMage display con */}
-        <div className="w-[100%] md:w-[50%] bg-[#dfdcdc] h-[394px] lg:h-[462px] mb-[3%] md:mb-[0%] mr-[3%] rounded-[14px] shadow-md  ">
+        <div className="w-[100%] md:w-[50%] bg-white h-[394px] lg:h-[462px] mb-[3%] md:mb-[0%] mr-[3%] rounded-[14px]  ">
           {selectedMedia && (
-            <div className="w-[100%]  bg-[#dfdcdc] h-[394px] lg:h-[462px] mb-[3%] md:mb-[0%] mr-[3%] rounded-[14px] shadow-md relative">
-              {/* You can customize the preview based on the selectedMedia type (image or video) */}
+            <div className="w-[100%]  bg-white  mb-[3%] md:mb-[0%] mr-[3%] rounded-[14px]  relative">
               {selectedMedia.includes(".mp4") ? (
                 <ReactPlayer
                   url={selectedMedia}
@@ -57,11 +56,11 @@ export default function GalleryBlock({
                 />
               ) : (
                 <Image
-                  width={680}
-                  height={460}
+                  radius="md"
+                  h={550}
+                  // fit="contain"
                   src={selectedMedia}
                   alt="Preview"
-                  className="w-full h-full object-cover rounded-[14px]"
                 />
               )}
               <Gallery
@@ -97,7 +96,7 @@ export default function GalleryBlock({
           </h3>
           <div className="flex justify-start items-start w-full gap-[4%] flex-wrap ">
             {videos?.map((img, ind) => (
-              <div className="relative w-[110px] lg:w-[152px] flex justify-center items-center h-[68px] lg:h-[94px] bg-[#dfdcdc] rounded-[5px] shadow-md mb-[4%] cursor-pointer">
+              <div className="relative w-[110px] lg:w-[152px] flex justify-center items-center h-[68px] lg:h-[94px] bg-white rounded-[5px]  mb-[4%] cursor-pointer">
                 <video
                   key={ind}
                   // width={150}

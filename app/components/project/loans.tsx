@@ -3,7 +3,14 @@ import { Bank } from "@/app/validations/types/project";
 import Image from "next/image";
 import React from "react";
 
-export default function Loans({ data, projName }: { data: Bank[], projName:string }) {
+export default function Loans({
+  data,
+  projName,
+}: {
+  data: Bank[];
+  projName: string;
+}) {
+  console.log(data);
   return (
     <>
       <div className="bg-white py-8 w-[90%] mx-auto">
@@ -18,14 +25,19 @@ export default function Loans({ data, projName }: { data: Bank[], projName:strin
             {data?.map((item, index) => {
               if (item.bankid != undefined && item.bankid != null) {
                 return (
-                  <Image
-                    key={index}
-                    src={BankDetailsList?.get(item.bankid)?.url as string}
-                    alt={item.constDesc}
-                    width={100}
-                    height={50}
-                    className=""
-                  />
+                  <div className="flex  flex-col justify-center items-center">
+                    <Image
+                      key={index}
+                      src={BankDetailsList?.get(item.bankid)?.url as string}
+                      alt={item.bankName}
+                      width={100}
+                      height={50}
+                      className="min-h-[55px] aspect-video"
+                    />
+                    <p className="mt-3 font-semibold text-xl">
+                      {item.bankName}
+                    </p>
+                  </div>
                 );
               }
             })}

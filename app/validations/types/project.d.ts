@@ -39,6 +39,7 @@ export interface AmenityList {
 export interface Bank {
   bankid: number;
   constDesc: string;
+  bankName: string;
 }
 
 export interface FAQ {

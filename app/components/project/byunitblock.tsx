@@ -18,6 +18,8 @@ type SelectedValues = {
   floor: string;
   area: string;
   facingName: string;
+  width: string;
+  length: string;
 };
 
 const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
@@ -34,6 +36,8 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
     floor: "",
     area: "",
     facingName: "",
+    width: "",
+    length: "",
   });
 
   const handleInputChange = (property: keyof SelectedValues, value: string) => {
@@ -41,6 +45,7 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
       ...prevValues,
       [property]: value,
     }));
+    handleSearch();
   };
 
   const handleSearch = () => {
@@ -91,18 +96,19 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
           maxDropdownHeight={200}
           onChange={(value) => handleInputChange("unitNumber", value as string)}
         />
-
-        <Select
-          size="md"
-          mt="md"
-          label="Unit Type"
-          className="!w-[46%]"
-          placeholder="-- select Unit Type --"
-          data={getOptions("bhkName")}
-          searchable
-          maxDropdownHeight={200}
-          onChange={(value) => handleInputChange("unitType", value as string)}
-        />
+        {propCgId !== projectprops.plot && (
+          <Select
+            size="md"
+            mt="md"
+            label="Unit Type"
+            className="!w-[46%]"
+            placeholder="-- select Unit Type --"
+            data={getOptions("bhkName")}
+            searchable
+            maxDropdownHeight={200}
+            onChange={(value) => handleInputChange("unitType", value as string)}
+          />
+        )}
 
         {propCgId == projectprops.apartment && (
           <Select
@@ -161,6 +167,34 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
           maxDropdownHeight={200}
           onChange={(value) => handleInputChange("facingName", value as string)}
         />
+        {propCgId == projectprops.plot && (
+          <Select
+            w={"full"}
+            size="md"
+            mt="md"
+            label="Breadth of Plot"
+            className="!w-[46%]"
+            placeholder="-- select --"
+            data={getOptions("width")}
+            searchable
+            maxDropdownHeight={200}
+            onChange={(value) => handleInputChange("width", value as string)}
+          />
+        )}
+        {propCgId == projectprops.plot && (
+          <Select
+            w={"full"}
+            size="md"
+            mt="md"
+            label="length Of Plot"
+            className="!w-[46%]"
+            placeholder="-- select --"
+            data={getOptions("length")}
+            searchable
+            maxDropdownHeight={200}
+            onChange={(value) => handleInputChange("length", value as string)}
+          />
+        )}
       </div>
 
       <div className="w-[90%] flex items-end justify-end mt-[3%]">

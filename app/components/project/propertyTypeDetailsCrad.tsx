@@ -12,24 +12,36 @@ import Image from "next/image";
 import { useSetAtom } from "jotai";
 import { currentPhaseAtom, propCgIdAtom } from "@/app/store/vewfloor";
 import { formatCurrency } from "@/app/utils/numbers";
+import { useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
+import { floorPlansArray, selectedFloorAtom } from "@/app/store/floor";
 
 type Props = {
   cg: any;
   propertyType: string;
   phase: number;
+  data: any;
 };
 
 export default function PropertyTypeDetailsCrad({
   cg,
   propertyType,
   phase,
+  data,
 }: Props) {
+  const [opened, { open, close }] = useFloorPlanPopup();
   const setcurrentPhase = useSetAtom(currentPhaseAtom);
   const setPrpCgId = useSetAtom(propCgIdAtom);
+  const setSelectedFloor = useSetAtom(selectedFloorAtom);
+  const setFloorsArray = useSetAtom(floorPlansArray);
+  const handleOpen = () => {
+    setSelectedFloor(data[0]);
+    setFloorsArray(data);
+    open();
+  };
   const updateValues = (newCurrentPhase: number, newPropCgId: number) => {
     setcurrentPhase(newCurrentPhase);
     setPrpCgId(newPropCgId);
-    scrollToTopic("floorPlans");
+    handleOpen();
   };
 
   const propName = (key: string, type?: string) => {
@@ -93,12 +105,6 @@ export default function PropertyTypeDetailsCrad({
         return 35;
     }
   };
-  const scrollToTopic = (id: string): void => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
 
   return (
     <div className="flex flex-col justify-start items-start min-h-[235px] w-[100%] max-w-[359px] lg:max-w-[510px] rounded-[24px] shadow-md pr-[2%] pl-[1%] mt-[70px] bg-gradient-to-l from-[#EFF5FF] /50 to-[#F2FAFF]/50 mb-[2%]">
@@ -119,10 +125,10 @@ export default function PropertyTypeDetailsCrad({
           </p>
 
           <div className="flex justify-end items-end flex-col">
-            <p className="text-[16px] text-right lg:text-[20px] text-[#148B16] font-[700]">
+            <p className="text-[16px] text-right lg:text-[18.5px] text-[#148B16] font-[700]">
               {formatCurrency(cg?.minPrice)} - {formatCurrency(cg?.maxPrice)}
             </p>
-            <p className="text-[12px] lg:text-[14px] text-[#00487C] font-[500]">
+            <p className="text-[14px] lg:text-[18px] text-[#00487C] font-[500]">
               ₹ {cg?.basePrice} Base Price/ sq.ft
             </p>
           </div>
