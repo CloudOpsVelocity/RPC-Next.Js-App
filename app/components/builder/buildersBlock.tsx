@@ -8,7 +8,7 @@ import { BackgroundImage } from "@mantine/core";
 
 export default function BuildersBlock({ data }: { data: OtherBuilder[] }) {
   return (
-    <div className=" py-12 w-full mb-[5%] flex justify-center items-center ">
+    <div className=" py-12 w-full flex justify-center items-center ">
       <div className="max-w-[1920px] w-[90%] ">
         <h2 className="text-2xl font-semibold text-gray-800 uppercase">
           Builder’s in <span className="text-green-500">Bangalore</span>
@@ -16,20 +16,20 @@ export default function BuildersBlock({ data }: { data: OtherBuilder[] }) {
         <p className="text-lg text-gray-600 mt-2 italic">
           Check out some other builders in Bangalore
         </p>
-        <div className="mt-8 relative ">
+        <div className="mt-8 relative  ">
           <Carousel
-            mih={"200px"}
+            //mih={"200px"}
             slideGap={"xs"}
             align="start"
             slideSize="15%"
             // withIndicators
-            height={200}
+            className=" flex justify-start items-center "
             slidesToScroll={1}
           >
-            {data.map((builder, index) => (
-              <Carousel.Slide key={index} mih={"30rem"}>
+            {data?.map((builder, index) => (
+              <Carousel.Slide key={index} >
                 <div
-                  className="rounded-[10px] w-[107px] h-[105px] md:w-[140] md:h-[136px] lg:w-[209px] lg:h-[203px] shadow-md bg-[#c2bfbf]"
+                  className="rounded-[10px] w-[107px] h-[105px] md:w-[140px] md:h-[136px] lg:w-[209px] lg:h-[203px] shadow-lg bg-gray-300"
                   style={{
                     backgroundImage: `url(${
                       builder.logo || "fallback-image-url"

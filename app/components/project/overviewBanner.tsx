@@ -79,6 +79,8 @@ const RequestCallBackModal = ({
         classNames={{
           close: S.close,
           content: S.content,
+          body: S.body,
+          overlay: S.overlay,
         }}
       >
         <div className="bg-white rounded-lg w-full overflow-hidden flex ">

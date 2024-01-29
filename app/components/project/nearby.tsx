@@ -2,7 +2,7 @@
 import React, { useState, useCallback, useRef } from "react";
 import { LuTrain, LuSearch } from "react-icons/lu";
 import { Text, Tabs, TextInput, Loader, ScrollArea } from "@mantine/core";
-import style from '../../styles/ModalCarousel.module.css'
+import style from "../../styles/ModalCarousel.module.css";
 
 import {
   GoogleMap,
@@ -33,7 +33,11 @@ interface Area {
   projName?: string;
 }
 
-const Nearby: React.FC<{ lat: string; lang: string, projName:string }> = ({ lat, lang, projName }) => {
+const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
+  lat,
+  lang,
+  projName,
+}) => {
   const [directionsResponse, setDirectionsResponse] = useState<any | null>(
     null
   );
@@ -153,28 +157,40 @@ const Nearby: React.FC<{ lat: string; lang: string, projName:string }> = ({ lat,
       <div className="border border-[#92B2C8] grid grid-cols-1 md:grid-cols-[2fr_3fr] rounded-xl overflow-hidden shadow-lg">
         <section className="bg-white">
           <div id="tabs">
-            <Tabs defaultValue="public" >
+            <Tabs defaultValue="public">
               <div className="bg-blue-50 px-5 py-4">
                 <p className="text-[#001F35] text-[22px]  font-medium leading-[normal]">
                   Select how you want to travel
                 </p>
                 <Tabs.List>
                   <Tabs.Tab
-                    className={`  not-italic leading-[normal] no-underline capitalize ${selectedTravelMode == "TRANSIT" ? "!text-[#148B16] font-[700] underline" : "!text-[#737579] no-underline font-[500]" } `}
+                    className={`  not-italic leading-[normal] no-underline capitalize ${
+                      selectedTravelMode == "TRANSIT"
+                        ? "!text-[#148B16] font-[700] underline"
+                        : "!text-[#737579] no-underline font-[500]"
+                    } `}
                     value="public"
                     onClick={() => setSelectedTravelMode("TRANSIT")}
                   >
                     Public Transport
                   </Tabs.Tab>
                   <Tabs.Tab
-                    className={`  not-italic leading-[normal] no-underline capitalize ${selectedTravelMode == "DRIVING" ? "!text-[#148B16] font-[700] underline" : "!text-[#737579] no-underline font-[500]" } `}
+                    className={`  not-italic leading-[normal] no-underline capitalize ${
+                      selectedTravelMode == "DRIVING"
+                        ? "!text-[#148B16] font-[700] underline"
+                        : "!text-[#737579] no-underline font-[500]"
+                    } `}
                     value="drive"
                     onClick={() => setSelectedTravelMode("DRIVING")}
                   >
                     Drive
                   </Tabs.Tab>
                   <Tabs.Tab
-                    className={`  not-italic leading-[normal] no-underline capitalize ${selectedTravelMode == "WALKING" ? "!text-[#148B16] font-[700] underline" : "!text-[#737579] no-underline font-[500]" } `}
+                    className={`  not-italic leading-[normal] no-underline capitalize ${
+                      selectedTravelMode == "WALKING"
+                        ? "!text-[#148B16] font-[700] underline"
+                        : "!text-[#737579] no-underline font-[500]"
+                    } `}
                     value="walk"
                     onClick={() => setSelectedTravelMode("WALKING")}
                   >
@@ -280,12 +296,15 @@ const Nearby: React.FC<{ lat: string; lang: string, projName:string }> = ({ lat,
                     icon={{
                       url: "/mapIcon.svg",
                     }}
-                    
                   >
-                    <InfoWindow >
+                    <InfoWindow>
                       <div className=" ">
-                        <p className="text-[#00487C] text-[10px] italic font-medium leading-[normal]">Project you are exploring</p>
-                        <p className="text-[#006A02] text-sm not-italic font-semibold leading-[normal]">{projName}</p>
+                        <p className="text-[#00487C] text-[10px] italic font-medium leading-[normal]">
+                          Project you are exploring
+                        </p>
+                        <p className="text-[#006A02] text-sm not-italic font-semibold leading-[normal]">
+                          {projName}
+                        </p>
                       </div>
                     </InfoWindow>
                   </Marker>
@@ -368,7 +387,9 @@ const LocationList: React.FC<{
         <div className="flex gap-1 text-sm">
           <span className="flex items-center">
             {nearbyLocationIcon}
-            <span className="ml-[4px] text-[#005DA0] text-lg not-italic font-medium leading-[normal] ">{distance.toFixed(2)} Km</span>
+            <span className="ml-[4px] text-[#005DA0] text-lg not-italic font-medium leading-[normal] ">
+              {distance.toFixed(2)} Km
+            </span>
           </span>
           <span>|</span>
           <span className="text-[#001F35] text-lg not-italic font-medium leading-[normal]">

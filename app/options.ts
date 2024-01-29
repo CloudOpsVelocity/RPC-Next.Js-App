@@ -23,7 +23,7 @@ export const options: NextAuthOptions = {
       async authorize(credentials) {
         try {
           const res = await axios.post(
-            `${process.env.BACKEND_URL}/user/v1/doLoginWithMobile`,
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/doLoginWithMobile`,
             {
               username: credentials?.username,
               password: credentials?.password,

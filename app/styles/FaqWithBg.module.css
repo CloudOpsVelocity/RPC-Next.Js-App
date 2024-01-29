@@ -16,7 +16,7 @@
   /* color: black;
   font-size: 52px;
   font-family: Greycliff CF, var(--mantine-font-family); */
-  margin-bottom: calc(var(--mantine-spacing-xl) * 1.5);
+  padding-bottom: calc(var(--mantine-spacing-xl) * 1.5);
 
   color: #303a42;
   font-feature-settings: "clig" off, "liga" off;

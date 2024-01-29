@@ -10,7 +10,7 @@ export default function Navigation() {
   const scrollToTopic = (id: string): void => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      element.scrollIntoView({ behavior: "smooth", block: "nearest" });
       setCurrentBlock(id);
     }
   };

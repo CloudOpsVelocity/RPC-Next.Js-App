@@ -9,8 +9,6 @@ type Props = {
   data: any;
 };
 
-const dummyProptypesList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
-
 export default function ByBhkBlock({ propCgId, data }: Props) {
   const getOptions = (property: string): string[] => {
     return Array.from(new Set(data.map((item: any) => String(item[property]))));
@@ -19,10 +17,13 @@ export default function ByBhkBlock({ propCgId, data }: Props) {
 
   // Filter data based on selected BHK
   const filteredData =
-    bhk === "0"
-      ? data
-      : data.filter((item: any) => item.bhk === parseInt(bhk, 10));
-  const test = getOptions("bhkName");
+    bhk === "0" ? data : data.filter((item: any) => item.bhkName === bhk);
+
+  const getOptions = (property: string): string[] => {
+    return Array.from(new Set(data.map((item: any) => String(item[property]))));
+  };
+
+  const availBhks = getOptions("bhkName");
 
   return (
     <div className="">
@@ -32,13 +33,23 @@ export default function ByBhkBlock({ propCgId, data }: Props) {
         </h3>
 
         <div className="flex justify-start items-start flex-wrap ">
-          {bhkDetails.map((eachBhk, ind) => (
+          <Button
+            key="all"
+            title="All"
+            onChange={() => setBhk("0")}
+            buttonClass={` text-[18px] lg:text-[24px] mr-[10px] lg:mr-[20px] whitespace-nowrap  ${
+              bhk === "0"
+                ? " font-[600] text-[#148B16] underline "
+                : " font-[500] text-[#737579]"
+            } `}
+          />
+          {availBhks.map((bhkOption, ind) => (
             <Button
               key={ind}
-              title={eachBhk.title}
-              onChange={() => setBhk(`${eachBhk.value}`)}
+              title={bhkOption}
+              onChange={() => setBhk(bhkOption)}
               buttonClass={` text-[18px] lg:text-[24px] mr-[10px] lg:mr-[20px] whitespace-nowrap  ${
-                bhk === `${eachBhk.value}`
+                bhk === bhkOption
                   ? " font-[600] text-[#148B16] underline "
                   : " font-[500] text-[#737579]"
               } `}

@@ -35,11 +35,12 @@ export default function SharePopup() {
         classNames={{
           close: S.close,
           content: S.body,
+          overlay: S.overlay,
         }}
       >
         <>
           <div className="p-5">
-            <h3 className="text-[#202020] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px]">
+            <h3 className="text-[#202020] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px] ">
               SHARE PROJECT
             </h3>
             <p className="text-[#565D70] text-xl not-italic font-semibold leading-[normal] tracking-[0.8px] my-5">
@@ -72,7 +73,7 @@ export default function SharePopup() {
 
       <button
         onClick={open}
-        className="shadow-md cursor-pointer gap-[4px] p-[8px] flex justify-center items-center rounded-[20px] bg-[#F3F7FF] text-[#0073C6] text-[14px] font-[600] mt-[13px] max-w-[140px] "
+        className="shadow-md cursor-pointer gap-[4px] p-[8px] flex justify-center items-center rounded-[20px] bg-[#F3F7FF] text-[#0073C6] text-[14px] font-[600] mt-[13px] max-w-[140px] ml-auto"
       >
         <ShearIcon />
         Share Project

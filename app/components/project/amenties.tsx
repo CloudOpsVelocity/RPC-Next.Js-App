@@ -22,7 +22,7 @@ export default function Amenties({ data }: { data: AmenityList[] }) {
   };
 
   return (
-    <div className="w-[90%] bg-white py-10" id="amenities">
+    <div className="w-[90%] bg-white py-10 mt-12" id="amenities">
       <div className=" mx-auto px-4">
         <h2 className="text-2xl font-semibold">AMENITIES</h2>
         <p className="text-gray-600 mt-2 mb-6">

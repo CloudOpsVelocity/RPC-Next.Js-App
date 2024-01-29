@@ -19,6 +19,7 @@ import {
 } from "@/app/context/floorplanContext";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { floorPlansArray, selectedFloorAtom } from "@/app/store/floor";
+import { useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
 
 type Props = {
   propCgId: any;
@@ -26,12 +27,12 @@ type Props = {
 };
 
 function FloorPlanModal({ propCgId, data }: Props) {
-  const [selectedFloor,setSelectedFloor] = useAtom(selectedFloorAtom);
+  const [selectedFloor, setSelectedFloor] = useAtom(selectedFloorAtom);
   const setFloorsArray = useSetAtom(floorPlansArray);
-  const [opened, { open, close }] = useDisclosure(false);
+  const [opened, { open, close }] = useFloorPlanPopup();
   const form = useForm();
   const handleOpen = () => {
-    setSelectedFloor(data[0])
+    setSelectedFloor(data[0]);
     setFloorsArray(data);
     open();
   };
@@ -39,13 +40,71 @@ function FloorPlanModal({ propCgId, data }: Props) {
     close();
     form.reset();
   };
+  const handleSearch = (): void => {
+    // Implement your filtering logic here based on selectedValues
+    const filteredData = data.filter((item: any) => {
+      const matches = Object.values(form.values).some((value) => {
+        if (value !== null) {
+          // @ts-ignore
+          const itemValue = String(item[value]).toLowerCase();
+          // @ts-ignore
+          const formValue = String(form.values[value]).toLowerCase();
+          return itemValue === formValue;
+        }
+        return false;
+      });
 
+      return matches;
+    });
+
+    console.log("Filtered Data:", filteredData);
+    setSelectedFloor(filteredData[0]);
+    setFloorsArray(filteredData);
+  };
   const handleReset = () => {
+    setSelectedFloor(data[0]);
+    setFloorsArray(data);
     const keys = Object.keys(form.values);
     keys.forEach((key) => form.setFieldValue(key, null));
   };
+  const handleRemoveFilter = (key: string) => {
+    const keysWithNonNullValues = Object.keys(form.values).filter(
+      (key) => form.values[key] !== null
+    );
+    if (keysWithNonNullValues.length === 1) {
+      form.setFieldValue(key, null);
+      setSelectedFloor(data[0]);
+      setFloorsArray(data);
+    }
+    handleSearch();
+    form.setFieldValue(key, null);
+  };
   return (
     <FormProvider form={form}>
+      <div className="flex justify-center items-center h-[300px] lg:h-[450px] w-full">
+        {selectedFloor?.floorPlanUrl ? (
+          <img
+            onClick={handleOpen}
+            src={selectedFloor?.floorPlanUrl as string}
+            className="w-full h-full"
+            alt="image"
+          />
+        ) : (
+          <div className="flex justify-center items-center flex-col ">
+            <img
+              onClick={handleOpen}
+              src="/project/noimage.svg"
+              className="w-[80%] h-full"
+              alt="image"
+            />
+            <p className=" text-[#000] text-center text-[18px] md:text-[28px] lg:text-[32px] font-[600] ">
+              Image is not available
+            </p>
+          </div>
+        )}
+
+        {/* dISPLAY FLOOR PLAN HERE */}
+      </div>
       <div
         className="bg-[#F4FBFF] p-[10px] rounded-[29px] gap-[12px] flex justify-end items-center  cursor-pointer"
         onClick={handleOpen}
@@ -60,10 +119,12 @@ function FloorPlanModal({ propCgId, data }: Props) {
           title: S.title,
           close: S.close,
           content: S.content,
+          overlay: S.overlay,
         }}
+        centered
         onClose={handleClose}
         title="Floor Plan"
-        size={"90%"}
+        size={"100%"}
       >
         <>
           <div className="bg-white pl-5">
@@ -88,7 +149,7 @@ function FloorPlanModal({ propCgId, data }: Props) {
                       <span className="text-[#6e798c]">{key}</span>
                       <button className="ml-2">
                         <Image
-                          onClick={() => form.setFieldValue(key, null)}
+                          onClick={() => handleRemoveFilter(key)}
                           src={"/cross.svg"}
                           alt="close"
                           width={10}
@@ -152,12 +213,10 @@ const LeftSection = ({ propCgId, data }: Props) => {
     setFloor(filteredData[0]);
     setFloorsArray(filteredData);
   };
-  console.log(values);
-  // const handleOnChange = (value:string,key:string)=> {
-  //   setFieldValue(key,value)
-  //   handleSearch()
-  // }
-  // console.log(values);
+  const handleOnChange = (value: string, key: string) => {
+    setFieldValue(key, value);
+    handleSearch();
+  };
 
   return (
     <div className="col-span-1 w-full md:w-[30%]  ">
@@ -174,6 +233,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             searchable
             maxDropdownHeight={200}
             {...getInputProps("bhkName")}
+            onChange={(value) => handleOnChange(value as string, "bhkName")}
           />
         )}
         {propCgId != projectprops.plot && (
@@ -188,7 +248,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             searchable
             maxDropdownHeight={200}
             {...getInputProps("towerName")}
-            // onChange={(value)=> handleOnChange(value as string,'towerName')}
+            onChange={(value) => handleOnChange(value as string, "towerName")}
           />
         )}
 
@@ -205,6 +265,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
               searchable
               maxDropdownHeight={200}
               {...getInputProps("block")}
+              onChange={(value) => handleOnChange(value as string, "block")}
             />
           )}
 
@@ -225,6 +286,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             searchable
             maxDropdownHeight={200}
             {...getInputProps("floor")}
+            onChange={(value) => handleOnChange(value as string, "floor")}
           />
         )}
 
@@ -239,6 +301,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
           searchable
           maxDropdownHeight={200}
           {...getInputProps("unitNumber")}
+          onChange={(value) => handleOnChange(value as string, "unitNumber")}
         />
 
         <Select
@@ -256,6 +319,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
           searchable
           maxDropdownHeight={200}
           {...getInputProps("facingName")}
+          onChange={(value) => handleOnChange(value as string, "facingName")}
         />
 
         {propCgId != projectprops.plot && (
@@ -270,6 +334,9 @@ const LeftSection = ({ propCgId, data }: Props) => {
             searchable
             maxDropdownHeight={200}
             {...getInputProps("superBuildUparea")}
+            onChange={(value) =>
+              handleOnChange(value as string, "superBuildUparea")
+            }
           />
         )}
 
@@ -285,6 +352,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             searchable
             maxDropdownHeight={200}
             {...getInputProps("caretarea")}
+            onChange={(value) => handleOnChange(value as string, "caretarea")}
           />
         )}
 
@@ -301,6 +369,9 @@ const LeftSection = ({ propCgId, data }: Props) => {
               searchable
               maxDropdownHeight={200}
               {...getInputProps("gardenArea")}
+              onChange={(value) =>
+                handleOnChange(value as string, "gardenArea")
+              }
             />
           )}
 
@@ -317,24 +388,30 @@ const LeftSection = ({ propCgId, data }: Props) => {
               searchable
               maxDropdownHeight={200}
               {...getInputProps("terraceArea")}
+              onChange={(value) =>
+                handleOnChange(value as string, "terraceArea")
+              }
             />
           )}
 
-
-        {propCgId != projectprops.apartment && propCgId != projectprops.plot && (
-          <Select
-            key={useId()}
-            w={"full"}
-            mt="md"
-            label="Select Parking Area"
-            className="!w-[46%]"
-            placeholder="-- select --"
-            data={getOptions("parkingArea")}
-            searchable
-            maxDropdownHeight={200}
-            {...getInputProps("parkingArea")}
-          />
-        )}
+        {propCgId != projectprops.apartment &&
+          propCgId != projectprops.plot && (
+            <Select
+              key={useId()}
+              w={"full"}
+              mt="md"
+              label="Select Parking Area"
+              className="!w-[46%]"
+              placeholder="-- select --"
+              data={getOptions("parkingArea")}
+              searchable
+              maxDropdownHeight={200}
+              {...getInputProps("parkingArea")}
+              onChange={(value) =>
+                handleOnChange(value as string, "parkingArea")
+              }
+            />
+          )}
 
         {propCgId != projectprops.plot && (
           <Select
@@ -348,6 +425,9 @@ const LeftSection = ({ propCgId, data }: Props) => {
             searchable
             maxDropdownHeight={200}
             {...getInputProps("noOfCarParking")}
+            onChange={(value) =>
+              handleOnChange(value as string, "noOfCarParking")
+            }
           />
         )}
 
@@ -363,6 +443,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             searchable
             maxDropdownHeight={200}
             {...getInputProps("parkingType")}
+            onChange={(value) => handleOnChange(value as string, "parkingType")}
           />
         )}
 
@@ -378,6 +459,9 @@ const LeftSection = ({ propCgId, data }: Props) => {
             searchable
             maxDropdownHeight={200}
             {...getInputProps("totalNumberOfBalcony")}
+            onChange={(value) =>
+              handleOnChange(value as string, "totalNumberOfBalcony")
+            }
           />
         )}
 
@@ -409,6 +493,9 @@ const LeftSection = ({ propCgId, data }: Props) => {
               searchable
               maxDropdownHeight={200}
               {...getInputProps("balconySize")}
+              onChange={(value) =>
+                handleOnChange(value as string, "balconySize")
+              }
             />
           )}
 
@@ -424,6 +511,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             searchable
             maxDropdownHeight={200}
             {...getInputProps("plotArea")}
+            onChange={(value) => handleOnChange(value as string, "plotArea")}
           />
         )}
 
@@ -439,6 +527,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             searchable
             maxDropdownHeight={200}
             {...getInputProps("length")}
+            onChange={(value) => handleOnChange(value as string, "length")}
           />
         )}
 
@@ -454,6 +543,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             searchable
             maxDropdownHeight={200}
             {...getInputProps("width")}
+            onChange={(value) => handleOnChange(value as string, "width")}
           />
         )}
       </div>

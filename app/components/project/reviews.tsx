@@ -13,7 +13,7 @@ export default function Reviews({ projName }: { projName: string }) {
   return (
     data?.status && (
       <div className="bg-[#FFF] py-12 w-full ">
-        <div className="max-w-[1920px] mx-auto px-6">
+        <div className="w-[90%] mx-auto px-6">
           <h2 className="text-2xl font-semibold text-gray-800">
             CUSTOMER REVIEWS FOR{" "}
             <span className="text-green-500">{projName}</span>
