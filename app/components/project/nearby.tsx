@@ -128,7 +128,7 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
         <span className="!text-green-600">{projName} </span>
         <span className="">Near BY LOCATIONS</span>
       </h2>
-      <p className="text-gray-500 mt-1 mb-2 text-lg italic ">
+      <p className="text-[#4D6677] text-2xl italic font-medium leading-[normal] tracking-[0.96px]mt-1 mb-2  ">
         Explore near by convenient amenities, entertainment, and essential
         services
       </p>

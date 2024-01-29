@@ -15,13 +15,10 @@ type CarouselModalProps = {
 
 function CarouselModal({ opened, setOpened }: CarouselModalProps) {
   const data = useAtomValue(selectedFloorAtom);
-  console.log({data})
   const TRANSITION_DURATION = 200;
-  //   const [opened, setOpened] = useState(false);
 
   return (
     <>
-      
       <Modal
         opened={opened}
         size={"90%"}
@@ -37,7 +34,6 @@ function CarouselModal({ opened, setOpened }: CarouselModalProps) {
           <MiddleSection hide={true} />
           <RightSection propCgId={""} />
         </div>
-       
       </Modal>
     </>
   );

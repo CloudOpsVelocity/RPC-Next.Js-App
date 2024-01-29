@@ -28,7 +28,7 @@ const Gallery: React.FC<GalleryProps> = ({
 
   const handleImageClick = (image: string) => {
     setPreviewImage(image);
-    open(isImage ? "image" : "video");
+    open(isImage ? "image" : "video", image);
   };
 
   return (
@@ -55,7 +55,7 @@ const Gallery: React.FC<GalleryProps> = ({
               radius="md"
               h={800}
               m={"auto"}
-              w={1600}
+              w={1400}
               fit="fill"
               src={previewImage}
               className="cursor-pointer border-[5px] bg-white border-white"

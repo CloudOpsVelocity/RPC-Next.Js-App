@@ -2,9 +2,31 @@
 import { useGallery } from "@/app/hooks/useGallery";
 import { ShearIcon } from "@/app/images/commonSvgs";
 import React from "react";
+import SharePopup from "../../atoms/SharePopup";
 
 export default function Download() {
   const [opened, { close }] = useGallery();
+  const handleDownload = async () => {
+    if (opened && opened.url) {
+      try {
+        const response = await fetch(opened.url);
+        const blob = await response.blob();
+        const url = URL.createObjectURL(blob);
+
+        const downloadLink = document.createElement("a");
+        downloadLink.href = url;
+        downloadLink.download = "gallery.jpg"; // Set the filename with extension
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+
+        // Clean up the URL object after download
+        URL.revokeObjectURL(url);
+      } catch (error) {
+        console.error("Error downloading image:", error);
+      }
+    }
+  };
   return (
     opened && (
       <div className="w-full bg-[#EDEDED] fixed   h-[57px] flex items-center justify-between  z-[1000] px-10">
@@ -12,17 +34,13 @@ export default function Download() {
           {opened.type === "image" ? "Gallery" : "Videos"}
         </div>
         <div className="flex justify-center items-center gap-5">
-          {" "}
-          <button
-            //   onClick={open}
-            className="shadow-md cursor-pointer gap-[4px] p-[8px] flex justify-center items-center rounded-[20px] bg-[#F3F7FF] text-[#0073C6] text-[14px] font-[600]  max-w-[140px] ml-auto"
-          >
-            <ShearIcon />
-            Share
-          </button>
+          <SharePopup title="Share" />
           {opened.type === "image" && (
-            <button className="flex justify-center items-center gap-2 px-4 py-2 rounded bg-[#0073C6] text-white">
-              DownLoad Image
+            <button
+              className="flex justify-center items-center gap-2 px-4 py-2 rounded bg-[#0073C6] text-white"
+              onClick={handleDownload}
+            >
+              Download Image
             </button>
           )}
           <Close close={close} />

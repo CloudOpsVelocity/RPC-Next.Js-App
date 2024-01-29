@@ -34,7 +34,7 @@ export default function Loans({
                       height={50}
                       className="min-h-[55px] aspect-video"
                     />
-                    <p className="mt-3 font-semibold text-xl">
+                    <p className="mt-3 text-[#001F35] text-xl not-italic font-semibold leading-[normal] tracking-[0.8px]">
                       {item.bankName}
                     </p>
                   </div>

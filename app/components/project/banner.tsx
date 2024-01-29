@@ -64,7 +64,7 @@ export default function Banner({ projName }: { projName: string }) {
       </div>
       <div className="flex-shrink-0">
         <Image
-          src="/project/rating.svg"
+          src="/abc/rating.svg"
           alt="Project Rating Illustration"
           className="h-[200px] w-[600px]"
           width={600}
@@ -114,7 +114,7 @@ const AddRating = ({ opened, close }: { opened: any; close: any }) => {
       onClose={onClose}
       centered
       title="Add Rating"
-      size={session ? "xl" : "90%"}
+      size={session ? "xl" : "35%"}
     >
       {session ? (
         <form

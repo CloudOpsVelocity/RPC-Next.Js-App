@@ -14,11 +14,11 @@ export default function Reviews({ projName }: { projName: string }) {
     data?.status && (
       <div className="bg-[#FFF] py-12 w-full ">
         <div className="w-[90%] mx-auto px-6">
-          <h2 className="text-2xl font-semibold text-gray-800">
+          <h2 className="text-[#001F35] text-[32px] not-italic font-semibold leading-[normal] uppercase">
             CUSTOMER REVIEWS FOR{" "}
             <span className="text-green-500">{projName}</span>
           </h2>
-          <p className="text-lg text-gray-600 mt-2 italic">
+          <p className="text-[#4D6677] text-2xl italic font-medium leading-[normal] tracking-[0.96px] mt-2 ">
             Find helpful customer reviews and review ratings for {projName}
           </p>
           <div className="mt-8 relative">

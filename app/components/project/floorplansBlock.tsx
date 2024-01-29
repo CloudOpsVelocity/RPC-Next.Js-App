@@ -124,7 +124,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
         FLOOR PLANS for{" "}
         <span className="text-[#148B16] font-[700] uppercase">{projName}</span>{" "}
       </h1>
-      <p className="text-[16px] lg:text-[24px] font-[500] text-[#4D6677]">
+      <p className="text-[16px] text-[#4D6677] md:text-2xl italic font-medium leading-[normal] capitalize">
         see floor plans as per your selected property type
       </p>
       <div className=" flex justify-start items-start md:items-center mt-[2%] mb-[2%] flex-col md:flex-row ">

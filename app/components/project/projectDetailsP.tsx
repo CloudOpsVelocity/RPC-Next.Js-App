@@ -43,7 +43,7 @@ export default function ProjectDetailsP({ projName, slug }: Props) {
         <span className="text-[#148B16] font-[700] uppercase">{projName}</span>{" "}
       </h1>
 
-      <p className="text-[16px] lg:text-[24px] font-[500] text-[#4D6677]">
+      <p className="text-[#4D6677] text-2xl italic font-medium leading-[normal] capitalize">
         Know about your dream project and its details; Where comfort meets
         Luxury, Where every details matters
       </p>

@@ -23,7 +23,6 @@ export default function GalleryBlock({
   );
 
   const images = getImageUrls(media);
-  // const images = [coverImageUrl, projectPlanUrl];
 
   const videos = [walkThrowVideoUrl];
 
@@ -38,7 +37,7 @@ export default function GalleryBlock({
         <span className="text-[#148B16] font-[700] uppercase">{projName}</span>{" "}
       </h1>
 
-      <p className="text-[20px] lg:text-[24px] font-[500] text-[#4D6677]">
+      <p className="text-[20px] text-[#4D6677] lg:text-2xl italic font-medium leading-[normal] capitalize">
         Gallery Highlights : A Glimpse into good project
       </p>
 

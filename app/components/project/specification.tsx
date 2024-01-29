@@ -49,16 +49,12 @@ export default function Specifications({
             SPECIFICATION OF
             <span className="!text-green-600"> {projName}</span>
           </h2>
-          <p className="text-[16px] lg:text-[22px] text-[#212C33] font-[500] mt-2 mb-4 flex justify-start items-start ">
-            <QuotesIcon className="mr-[4px]" />
-
+          <p className="text-[16px] text-[#212C33] md:text-[22px] italic font-semibold leading-[normal] tracking-[0.88px] mt-2 mb-4 flex justify-start items-start ">
             <span>
               {" "}
               Vital Details: Size, Amenities, Features- Unveiling your dream
               project{" "}
             </span>
-
-            <QuotesIcon className="self-end" />
           </p>
           <div className="flex flex-wrap gap-4">
             {data?.map((spec, index) => (
@@ -98,7 +94,7 @@ export default function Specifications({
                       className="p-[2%] w-full items-start justify-start flex-col"
                     >
                       <h1
-                        className={` flex items-center gap-2 text-[#00487C] min-w-[10%] max-w-[50%] text-[24px] italic font-[600] py-2 px-2 rounded-xl ${
+                        className={` flex items-center gap-2 text-[#00487C] min-w-[10%] max-w-[20%] text-[24px] italic font-[600] py-2 px-2 rounded-xl ${
                           index == 0
                             ? "bg-gradient-to-tr from-blue-100"
                             : "bg-transparent"

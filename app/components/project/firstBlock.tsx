@@ -77,11 +77,11 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
                   {projectDetails.projectName}
                 </h3>
 
-                <p className="text-[#202020] text-[16px] not-italic font-[500] leading-[normal] w-[100%] tracking-[0.32px]">
+                <p className="text-[#202020] text-[20px] not-italic font-[500] leading-[normal] w-[100%] tracking-[0.32px]">
                   {projectDetails.address}
                 </p>
 
-                <p className="text-[16px] mt-[7px] mb-[7px] lg:text-[16px] font-[600] text-[#001F35]">
+                <p className="text-[16px] mt-[7px] mb-[7px] lg:text-[20px] font-[600] text-[#001F35]">
                   Start - End Date:
                   <span className="font-[600] text-[#202020]">
                     {" "}
@@ -90,17 +90,17 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
                   </span>
                 </p>
 
-                <p className="text-[16px] font-[600] text-[#666]">
+                <p className="text-[20px] font-[600] text-[#666]">
                   Posted By: Builder
                 </p>
               </div>
             </div>
             <div className="w-full md:w-[40%] flex justify-between md:items-end flex-col p-[2%]">
-              <h2 className="text-[20px] md:text-[24px] lg:text-[28px] font-[700] text-[#001F35]">
+              <h2 className="text-[20px] md:text-[28px] lg:text-[32px] font-[700] text-[#001F35]">
                 {formatCurrency(projectDetails.minPrice)} -{" "}
                 {formatCurrency(projectDetails.maxPrice)}
               </h2>
-              <p className="text-[16px] md:text-right lg:text-[20px] font-[600] mb-[10px] md:mb-[20px] text-[#00487C] ">
+              <p className="text-[16px] md:text-right lg:text-[24px] font-[600] mb-[10px] md:mb-[20px] text-[#00487C] ">
                 ₹ {projectDetails.basePrice}/ Price per sqft onwards
               </p>
 

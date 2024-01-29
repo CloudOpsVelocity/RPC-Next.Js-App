@@ -93,7 +93,7 @@ function FloorPlanModal({ propCgId, data }: Props) {
           <div className="flex justify-center items-center flex-col ">
             <img
               onClick={handleOpen}
-              src="/project/noimage.svg"
+              src="/abc/noimage.svg"
               className="w-[80%] h-full"
               alt="image"
             />

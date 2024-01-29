@@ -19,7 +19,11 @@ import {
 } from "react-share";
 import { usePathname } from "next/navigation";
 
-export default function SharePopup() {
+export default function SharePopup({
+  title = "Share Project",
+}: {
+  title?: string;
+}) {
   const pathname = usePathname();
   const CopiedUrl = `${process.env.NEXT_PUBLIC_PROJECT_URL}/${pathname}`;
 
@@ -41,7 +45,7 @@ export default function SharePopup() {
         <>
           <div className="p-5">
             <h3 className="text-[#202020] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px] ">
-              SHARE PROJECT
+              {title}
             </h3>
             <p className="text-[#565D70] text-xl not-italic font-semibold leading-[normal] tracking-[0.8px] my-5">
               Share this link via
@@ -73,10 +77,12 @@ export default function SharePopup() {
 
       <button
         onClick={open}
-        className="shadow-md cursor-pointer gap-[4px] p-[8px] flex justify-center items-center rounded-[20px] bg-[#F3F7FF] text-[#0073C6] text-[14px] font-[600] mt-[13px] max-w-[140px] ml-auto"
+        className={`shadow-md cursor-pointer gap-[4px] p-[8px] flex justify-center items-center rounded-[20px] bg-[#F3F7FF] text-[#0073C6] text-[14px] font-[600]  max-w-[140px] ml-auto ${
+          title === "Share Project" ? "mt-[13px]" : ""
+        }`}
       >
         <ShearIcon />
-        Share Project
+        {title}
       </button>
     </>
   );

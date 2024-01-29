@@ -1,7 +1,13 @@
 import Image from "next/image";
 import React from "react";
 
-export default function Feature({ data, projName }: { data: string[]; projName:string }) {
+export default function Feature({
+  data,
+  projName,
+}: {
+  data: string[];
+  projName: string;
+}) {
   return (
     <>
       <div className="w-[90%] mb-[5%]" id="highlights">
@@ -24,7 +30,7 @@ export default function Feature({ data, projName }: { data: string[]; projName:s
                   height={20}
                   className=""
                   alt="Checked"
-                  src={"/project/Checked.png"}
+                  src={"/abc/Checked.png"}
                 />
                 <p className="text-[20px] lg:text-[24px] m-0 text-[#212C33] font-semibold ">
                   {each}
