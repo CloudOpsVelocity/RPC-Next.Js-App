@@ -36,30 +36,32 @@ const DownloadBroucher = ({ url }: { url: string }) => {
     }
   };
   const handleDownload = () => {
-    fetch(url)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(
-            `Network response was not ok: ${response.statusText}`
-          );
-        }
-        return response.blob();
-      })
-      .then((blob) => {
-        const url = window.URL.createObjectURL(blob);
-        const link = document.createElement("a");
-        link.href = url;
-        link.download = "brochure.pdf";
-        document.body.appendChild(link);
+    window.open(`/pdf/${encodeURIComponent(url)}`, "_blank");
 
-        link.click();
+    // fetch(url)
+    //   .then((response) => {
+    //     if (!response.ok) {
+    //       throw new Error(
+    //         `Network response was not ok: ${response.statusText}`
+    //       );
+    //     }
+    //     return response.blob();
+    //   })
+    //   .then((blob) => {
+    //     const url = window.URL.createObjectURL(blob);
+    //     const link = document.createElement("a");
+    //     link.href = url;
+    //     link.download = "brochure.pdf";
+    //     document.body.appendChild(link);
 
-        document.body.removeChild(link);
-        window.URL.revokeObjectURL(url);
-      })
-      .catch((error) => {
-        console.error("Error fetching or downloading the file:", error);
-      });
+    //     link.click();
+
+    //     document.body.removeChild(link);
+    //     window.URL.revokeObjectURL(url);
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error fetching or downloading the file:", error);
+    //   });
   };
 
   return (
@@ -68,15 +70,16 @@ const DownloadBroucher = ({ url }: { url: string }) => {
         <p className="text-[28px] lg:text-[32px] text-[#023993] font-[700]">
           Brochure{" "}
         </p>
-        <a
-          href={url}
-          download={true}
-          target="_blank"
+        <button
+          // href={url}
+          // download={true}
+          // target="_blank"
+          onClick={handleDownload}
           className="flex border-0 justify-center items-center text-[20px] lg:text-[24px] text-[#FFF] font-[700] rounded-[10px] bg-[#0073C6] gap-[8px] p-[5px]  "
         >
           {downLoadIcon}
           Download Brochure
-        </a>
+        </button>
       </div>
     )
   );

@@ -78,7 +78,9 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
                 </h3>
 
                 <p className="text-[#202020] text-[20px] not-italic font-[500] leading-[normal] w-[100%] tracking-[0.32px]">
-                  {projectDetails.address}
+                  {projectDetails.address} {projectDetails.localityName}
+                  {projectDetails.stateName} {projectDetails.cityName}{" "}
+                  {projectDetails.pinCode}
                 </p>
 
                 <p className="text-[16px] mt-[7px] mb-[7px] lg:text-[20px] font-[600] text-[#001F35]">
