@@ -137,7 +137,7 @@ export default function PropertyTypeDetailsCrad({
 
       <div className="flex justify-end items-end flex-col w-full">
         <p className="text-[14px] lg:text-[18px] text-[#233] font-[500] mb-[3%] text-right">
-          UNITS: {cg?.unitTypes.join(", ")}
+          UNITS: {cg?.unitTypes?.join(", ")}
         </p>
         <div className="flex justify-end items-end mb-[3%] gap-[16px]">
           {propertyType == "apt" || propertyType == "vlmt" ? (
