@@ -54,3 +54,12 @@
     font-size: 18px;
   }
 }
+
+.specification {
+  border-radius: 10px;
+  background: linear-gradient(
+    90deg,
+    #d4edff -44.59%,
+    rgba(245, 251, 255, 0.12) 100%
+  );
+}

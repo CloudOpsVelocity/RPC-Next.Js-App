@@ -39,7 +39,7 @@ export default function ProjectDetailsP({ projName, slug }: Props) {
   return (
     <div className="w-[90%] mb-[5%]" id="propertyDetails">
       <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35]">
-        Property Details{" "}
+        Property Details Of{" "}
         <span className="text-[#148B16] font-[700] uppercase">{projName}</span>{" "}
       </h1>
 
@@ -47,25 +47,28 @@ export default function ProjectDetailsP({ projName, slug }: Props) {
         Know about your dream project and its details; Where comfort meets
         Luxury, Where every details matters
       </p>
-
       <div className=" flex justify-start items-center mt-[2%] mb-[2%]">
-        <p className="text-[20px] lg:text-[24px] font-[500] text-[#333] mr-[20px] ">
-          Select one of the phase to see project details
-        </p>
-        <div className=" flex justify-start items-start flex-wrap gap-[10px] ">
-          {PhaseOverview?.map((phase: any, index: any) => (
-            <Button
-              key={phase.phaseId}
-              title={phase.phaseName}
-              onChange={() => handlePhaseChange(phase.phaseId)}
-              buttonClass={` mb-[5px] text-[16px] lg:text-[24px] bg-[#ECF7FF] p-[8px] xl:p-[16px]  whitespace-nowrap text-[#000] rounded-[8px] ${
-                currentPhase === phase.phaseId
-                  ? " font-[600] border-solid border-[1px] border-[#0073C6] "
-                  : " font-[400]"
-              } `}
-            />
-          ))}
-        </div>
+        {PhaseOverview && PhaseOverview?.length > 1 && (
+          <>
+            <p className="text-[20px] lg:text-[24px] font-[500] text-[#333] mr-[20px] ">
+              Select one of the phase to see project details
+            </p>
+            <div className=" flex justify-start items-start flex-wrap gap-[10px] ">
+              {PhaseOverview?.map((phase: any, index: any) => (
+                <Button
+                  key={phase.phaseId}
+                  title={phase.phaseName}
+                  onChange={() => handlePhaseChange(phase.phaseId)}
+                  buttonClass={` mb-[5px] text-[16px] lg:text-[24px] bg-[#ECF7FF] p-[8px] xl:p-[16px]  whitespace-nowrap text-[#000] rounded-[8px] ${
+                    currentPhase === phase.phaseId
+                      ? " font-[600] border-solid border-[1px] border-[#0073C6] "
+                      : " font-[400]"
+                  } `}
+                />
+              ))}
+            </div>
+          </>
+        )}
       </div>
 
       <div className="flex justify-start items-start flex-wrap w-[80%]">

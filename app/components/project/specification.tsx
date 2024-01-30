@@ -60,7 +60,7 @@ export default function Specifications({
             {data?.map((spec, index) => (
               <a
                 key={index}
-                className={`border px-5 py-2 rounded-lg text-[20px] flex gap-2 bg-[#fafafafa] items-center cursor-pointer ${
+                className={` px-5 py-2 text-[20px] flex gap-2 bg-[#fafafafa] items-center cursor-pointer rounded-[10px] border-[0.5px] border-solid border-[#76AEFF] ${
                   selectedSpecIndex === index
                     ? "shadow-md text-[#00487C] font-[700]"
                     : "shadow-none text-[#233] font-[500]"
@@ -94,11 +94,9 @@ export default function Specifications({
                       className="p-[2%] w-full items-start justify-start flex-col"
                     >
                       <h1
-                        className={` flex items-center gap-2 text-[#00487C] min-w-[10%] max-w-[20%] text-[24px] italic font-[600] py-2 px-2 rounded-xl ${
-                          index == 0
-                            ? "bg-gradient-to-tr from-blue-100"
-                            : "bg-transparent"
-                        } `}
+                        className={` flex items-center gap-2 text-[#00487C] min-w-[10%] max-w-[15%] text-[24px] italic font-[600] py-2 px-2 rounded-xl  ${
+                          index == 0 ? "specification" : "bg-transparent"
+                        }  `}
                       >
                         {specificationsList?.get(spec?.specId)?.url}{" "}
                         <span className="">{spec.specName}</span>

@@ -53,6 +53,7 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
   });
   const [selectedTravelMode, setSelectedTravelMode] =
     useState<string>("DRIVING"); // Default to driving
+  console.log(selectedTravelMode);
   const [map, setMap] = useState<any | null>(null);
 
   const { isLoaded } = useJsApiLoader({
@@ -108,15 +109,16 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
 
   const fetchNearbyPlaces = async () => {
     const response = await fetch(
-      `/api/hello?lt=${13.0318336}&lng=${77.5815168}&type=${selected}`
+      `/api/hello?lt=${13.0318336}&lng=${77.5815168}&type=${selected}&travelType=${selectedTravelMode}`
     );
     return await response.json();
   };
 
   const { data, isLoading } = useQuery({
-    queryKey: ["nearbyPlaces" + selected],
+    queryKey: ["nearbyPlaces" + selected + selectedTravelMode],
     queryFn: fetchNearbyPlaces,
   });
+  console.log(data);
   const handleLocationListClick = (type: string) => {
     // Set the selected travel mode when a location list is clicked
     setSelectedTravelMode(type);
@@ -157,7 +159,7 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
       <div className="border border-[#92B2C8] grid grid-cols-1 md:grid-cols-[2fr_3fr] rounded-xl overflow-hidden shadow-lg">
         <section className="bg-white">
           <div id="tabs">
-            <Tabs defaultValue="public">
+            <Tabs defaultValue="drive">
               <div className="bg-blue-50 px-5 py-4">
                 <p className="text-[#001F35] text-[22px]  font-medium leading-[normal]">
                   Select how you want to travel
@@ -341,6 +343,8 @@ const LocationList: React.FC<{
   onClick: (location: any) => void;
   onChangeTravelMode: (mode: string) => void; // New prop for changing travel mode
   showLocationOnMap: (location: any) => void;
+  distance: any;
+  duration: any;
 }> = ({
   name,
   geometry,
@@ -349,16 +353,18 @@ const LocationList: React.FC<{
   lng,
   onClick,
   type,
+  distance,
+  duration,
   onChangeTravelMode,
   showLocationOnMap,
 }) => {
   const userLocation = { lat, lng };
-  const distance = calculateDistance(
-    userLocation.lat,
-    userLocation.lng,
-    geometry.location.lat,
-    geometry.location.lng
-  );
+  // const distance = calculateDistance(
+  //   userLocation.lat,
+  //   userLocation.lng,
+  //   geometry.location.lat,
+  //   geometry.location.lng
+  // );
   const travelTime = calculateTime(distance, type);
 
   const handleClick = () => {
@@ -388,12 +394,12 @@ const LocationList: React.FC<{
           <span className="flex items-center">
             {nearbyLocationIcon}
             <span className="ml-[4px] text-[#005DA0] text-lg not-italic font-medium leading-[normal] ">
-              {distance.toFixed(2)} Km
+              {distance.text}
             </span>
           </span>
           <span>|</span>
           <span className="text-[#001F35] text-lg not-italic font-medium leading-[normal]">
-            {travelTime.hours}h {travelTime.minutes}m
+            {duration.text}
           </span>
         </div>
       </div>

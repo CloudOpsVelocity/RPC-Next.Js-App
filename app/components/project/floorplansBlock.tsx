@@ -138,7 +138,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                 key={index}
                 title={`${each.phaseName}`}
                 onChange={() => setCurrentPhase(each.phaseId)}
-                buttonClass={` mb-[5px] text-[18px] lg:text-[20px] bg-[#ECF7FF] p-[8px] xl:p-[16px]  whitespace-nowrap text-[#000] rounded-[8px]${
+                buttonClass={` mb-[5px] text-[18px] lg:text-[20px] bg-[#ECF7FF] p-[8px] xl:px-[8px]  whitespace-nowrap text-[#000] rounded-[8px]${
                   currentPhase == each.phaseId
                     ? " font-[600] border-solid border-[1px] border-[#0073C6] "
                     : " font-[400]"
@@ -162,7 +162,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
               return (
                 <Button
                   key={keyName}
-                  buttonClass={`flex justify-start mb-[3%] w-full rounded-[20px] gap-[8px] pr-[8px] items-center mr-[24px] md:ml-[24px] text-[18px] ${
+                  buttonClass={`flex justify-start mb-[3%] w-full rounded-[20px] gap-[8px]  items-center mr-[24px] md:ml-[0px] text-[18px] ${
                     propCgId == keyName
                       ? "text-[#001F35] font-[500] shadow-md bg-[#D5EDFF]"
                       : "text-[#303A42] font-[400] bg-[#EEF7FE]"

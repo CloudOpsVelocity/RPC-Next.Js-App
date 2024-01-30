@@ -8,7 +8,7 @@ import { AmenityList } from "@/app/validations/types/project";
 import Flex from "../molecules/Utils/Flex";
 import { amenitiesGroupList } from "@/app/images/commonSvgs";
 import React from "react";
-function ProjectDrawer({projName}:{projName:string}) {
+function ProjectDrawer({ projName }: { projName: string }) {
   const [{ expanded, content, type }, setReadMore] = useAtom(readMoreAtom);
   const handleReadMoreClick = () => {
     setReadMore((prev) => ({ ...prev, expanded: !prev.expanded }));
@@ -16,13 +16,14 @@ function ProjectDrawer({projName}:{projName:string}) {
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
 
   return (
-
     <>
       <Drawer
         classNames={{
           title: S.title,
           header: S.header,
           close: S.close,
+          overlay: S.overlay,
+          content: S.content,
         }}
         offset={8}
         radius="md"
@@ -35,7 +36,9 @@ function ProjectDrawer({projName}:{projName:string}) {
       >
         <h1 className="uppercase text-[24px] lg:text-[32px] font-[600] text-[#001F35]">
           about{" "}
-          <span className="text-[#148B16] font-[700] uppercase">{projName}</span>
+          <span className="text-[#148B16] font-[700] uppercase">
+            {projName}
+          </span>
         </h1>
         <div className="w-[90%] text-[#233333] text-xl mt-5">
           {type === "content" ? (
@@ -43,41 +46,43 @@ function ProjectDrawer({projName}:{projName:string}) {
           ) : (
             <div className="flex flex-wrap w-full">
               {content.data.map((eachItem: AmenityList, index: number) => {
-                if(amenitiesGroupList.get(eachItem.id) != null){
-                const amenitiesFromDB = content.amenitiesFromDB;
-                return(
-
-                  <React.Fragment>
-                  {amenitiesFromDB != undefined && amenitiesFromDB != null && Object.keys(amenitiesFromDB).map((group, ind) => {
-                      return (
-                        <React.Fragment>
-                          {amenitiesFromDB != undefined &&
-                            amenitiesFromDB != null &&
-                            amenitiesFromDB[`${group}`] != undefined &&
-                            amenitiesFromDB[`${group}`] != null &&
-                            amenitiesFromDB[`${group}`].length != 0 &&
-                            amenitiesFromDB[group].map((eachOne:any, index:number) => {
-                              if (eachOne.cid == eachItem.id) {
-                                return (
-                                <div
-                                  key={ind}
-                                  className="flex items-center rounded-[10px] gap-[8px] shadow-md border-solid border-[1px] mr-[24px] mb-[24px] border-[#a5bfd8] px-2.5 py-0.5 w-fit text-[#001F35] font-[500] text-[18px] lg:text-[20px] transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-[#FFF] text-secondary-foreground hover:bg-gray-100/80"
-                                >
-                                  {amenitiesGroupList.get(eachItem.id)}
-                                  {eachOne.constDesc}
-                                </div>
-                                );
-                              }
-                            })}
-                        </React.Fragment>
-                      );
-                  })}
-                </React.Fragment>
-                
-                )}
-              }
-              )}
-            </div>         
+                if (amenitiesGroupList.get(eachItem.id) != null) {
+                  const amenitiesFromDB = content.amenitiesFromDB;
+                  return (
+                    <React.Fragment>
+                      {amenitiesFromDB != undefined &&
+                        amenitiesFromDB != null &&
+                        Object.keys(amenitiesFromDB).map((group, ind) => {
+                          return (
+                            <React.Fragment>
+                              {amenitiesFromDB != undefined &&
+                                amenitiesFromDB != null &&
+                                amenitiesFromDB[`${group}`] != undefined &&
+                                amenitiesFromDB[`${group}`] != null &&
+                                amenitiesFromDB[`${group}`].length != 0 &&
+                                amenitiesFromDB[group].map(
+                                  (eachOne: any, index: number) => {
+                                    if (eachOne.cid == eachItem.id) {
+                                      return (
+                                        <div
+                                          key={ind}
+                                          className="flex items-center rounded-[10px] gap-[8px] shadow-md border-solid border-[1px] mr-[24px] mb-[24px] border-[#a5bfd8] px-2.5 py-0.5 w-fit text-[#001F35] font-[500] text-[18px] lg:text-[20px] transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-[#FFF] text-secondary-foreground hover:bg-gray-100/80"
+                                        >
+                                          {amenitiesGroupList.get(eachItem.id)}
+                                          {eachOne.constDesc}
+                                        </div>
+                                      );
+                                    }
+                                  }
+                                )}
+                            </React.Fragment>
+                          );
+                        })}
+                    </React.Fragment>
+                  );
+                }
+              })}
+            </div>
           )}
         </div>
         {/* Drawer content */}

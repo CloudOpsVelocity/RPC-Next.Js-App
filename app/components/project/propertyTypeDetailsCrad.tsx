@@ -109,7 +109,7 @@ export default function PropertyTypeDetailsCrad({
   return (
     <div className="flex flex-col justify-start items-start min-h-[235px] w-[100%] max-w-[359px] lg:max-w-[510px] rounded-[24px] shadow-md pr-[2%] pl-[1%] mt-[70px] bg-gradient-to-l from-[#EFF5FF] /50 to-[#F2FAFF]/50 mb-[2%]">
       <div className="flex justify-between items-start w-full">
-        <div className="max-w-[110px] lg:max-w-[130px] w-full h-[110px] lg:h-[130px] border-solid border-1 border-[#FFF] rounded-full bg-[#c9daee] relative bottom-[50px] lg:bottom-[60px] mb-[-40px]">
+        <div className="max-w-[110px] lg:max-w-[115px] w-full h-[110px] lg:h-[115px] border-solid border-1 border-[#FFF] rounded-full bg-[#c9daee] relative bottom-[50px] lg:bottom-[60px] mb-[-40px]">
           <Image
             width={90}
             height={90}
@@ -119,8 +119,7 @@ export default function PropertyTypeDetailsCrad({
           />
         </div>
         <div className="flex justify-between items-start mb-[3%] w-[90%] mt-[3%]">
-          <p className="text-[16px] lg:text-[20px] text-[#00487C] font-[600] ml-[10px]">
-            {/* {cg?.name} */}
+          <p className="text-[16px] lg:text-[18px] text-[#00487C] font-[600] ml-[10px]">
             {propName(propertyType, "name")}
           </p>
 
@@ -128,7 +127,7 @@ export default function PropertyTypeDetailsCrad({
             <p className="text-[16px] text-right lg:text-[18.5px] text-[#148B16] font-[700]">
               {formatCurrency(cg?.minPrice)} - {formatCurrency(cg?.maxPrice)}
             </p>
-            <p className="text-[14px] lg:text-[18px] text-[#00487C] font-[500]">
+            <p className="text-[14px] lg:text-[16px] italic text-[#00487C] font-[500]">
               ₹ {cg?.basePrice} Base Price/ sq.ft
             </p>
           </div>
