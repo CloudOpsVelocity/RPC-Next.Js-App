@@ -51,7 +51,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         </div>
         {/* Navigations Container */}
         <Navigation />
-        {/* Overview */}
+        Overview
         <Overview {...data} />
         {/* About */}
         <About
@@ -66,7 +66,6 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           data={data.phaseList}
           slug={slug}
         />
-        {/* Floor Plan Block */}
         <FloorplansBlock
           projName={data.projectName}
           data={data.phaseList}
@@ -79,13 +78,11 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         />
         <Amenties data={data.amenityList} />
         <Nearby lat={data.lat} lang={data.lang} projName={data.projectName} />
-
         <Specifications
           data={data.specificationList}
           projName={data.projectName}
         />
         <Feature data={data.highlights} projName={data.projectName} />
-
         <Banner projName={data.projectName} />
         <Loans data={data.banks} projName={data.projectName} />
         <AboutBuilder id={data.builderId} />
@@ -98,10 +95,9 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             content={data.wbtp}
           />
         )}
-        {/* <Testimonials projName={data.projectName} /> */}
+        <Testimonials projName={data.projectName} />
         <Reviews projName={data.projectName} />
         <DownloadBroucher url={data?.media?.projBroucherUrl} />
-
         <FaqWithBg data={data.faqs} projName={data.projectName} />
         {/* <div className="flex flex-col justify-start items-start w-[90%]">
           <ProjectCarousel
@@ -117,7 +113,6 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             content="See what developers has posted"
           />
         </div> */}
-
         <ProjectDrawer projName={data.projectName} />
       </div>
     </div>
