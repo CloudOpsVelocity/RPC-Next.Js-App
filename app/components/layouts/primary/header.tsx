@@ -1,12 +1,10 @@
-"use client";
 import Link from "next/link";
 import Logo from "../../atoms/Logo";
 import AuthButton from "../../atoms/AuthButton";
 import { useSession } from "next-auth/react";
 const Header = () => {
-  const { data: session } = useSession();
   return (
-    <header className="h-[90px] w-[100%] bg-transparent flex items-center justify-between fixed top-0  bg-white pl-[3%] pr-[3%] z-[1000]">
+    <header className="h-[90px] w-[100%] bg-transparent flex items-center justify-between fixed top-0 bg-gradient-to-l from-[#EFF5FF] /50 to-[#F2FAFF ]/50 pl-[3%] pr-[3%] z-[1000]">
       <section>
         <Logo />
       </section>

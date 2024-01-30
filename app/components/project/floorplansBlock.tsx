@@ -128,25 +128,29 @@ export default function FloorplansBlock({ projName, slug }: Props) {
         see floor plans as per your selected property type
       </p>
       <div className=" flex justify-start items-start md:items-center mt-[2%] mb-[2%] flex-col md:flex-row ">
-        <p className="text-[20px] lg:text-[24px] font-[500] mb-[3%] md:mb-0 text-[#333] mr-[20px] ">
-          Select one of the phase to see project details
-        </p>
-        <div className=" flex justify-start items-start gap-[10px] flex-wrap ">
-          {phaseList?.map((each: any, index: any) => {
-            return (
-              <Button
-                key={index}
-                title={`${each.phaseName}`}
-                onChange={() => setCurrentPhase(each.phaseId)}
-                buttonClass={` mb-[5px] text-[18px] lg:text-[20px] bg-[#ECF7FF] p-[8px] xl:px-[8px]  whitespace-nowrap text-[#000] rounded-[8px]${
-                  currentPhase == each.phaseId
-                    ? " font-[600] border-solid border-[1px] border-[#0073C6] "
-                    : " font-[400]"
-                } `}
-              />
-            );
-          })}
-        </div>
+        {phaseList?.length > 1 && (
+          <>
+            <p className="text-[20px] lg:text-[24px] font-[500] mb-[3%] md:mb-0 text-[#333] mr-[20px] ">
+              Select one of the phase to see project details
+            </p>
+            <div className=" flex justify-start items-start gap-[10px] flex-wrap ">
+              {phaseList?.map((each: any, index: any) => {
+                return (
+                  <Button
+                    key={index}
+                    title={`${each.phaseName}`}
+                    onChange={() => setCurrentPhase(each.phaseId)}
+                    buttonClass={` mb-[5px] text-[18px] lg:text-[20px] bg-[#ECF7FF] p-[8px] xl:px-[8px]  whitespace-nowrap text-[#000] rounded-[8px]${
+                      currentPhase == each.phaseId
+                        ? " font-[600] border-solid border-[1px] border-[#0073C6] "
+                        : " font-[400]"
+                    } `}
+                  />
+                );
+              })}
+            </div>
+          </>
+        )}
       </div>
       <div className=" flex justify-start items-start flex-wrap mt-[3%] gap-[2%] ">
         {propertyDetailsTypes != undefined &&

@@ -1,14 +1,12 @@
-import axios from "axios";
-import React from "react";
+import { useParams } from "next/navigation";
 import { useQuery } from "react-query";
-type Prosp = {
-  projectId: string;
-};
-export default function useRatings({ projectId }: Prosp) {
+
+export default function useRatings() {
+  const { slug } = useParams<{ slug: string }>();
   const getProjRatings = async () => {
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/get-proj-review?projIdEnc=${projectId}`
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/get-proj-review?projIdEnc=${slug}`
       );
       return await res.json();
     } catch (error) {
@@ -16,7 +14,7 @@ export default function useRatings({ projectId }: Prosp) {
     }
   };
   const { data, isLoading } = useQuery({
-    queryKey: [`rating/${projectId}`],
+    queryKey: [`rating/${slug}`],
     queryFn: getProjRatings,
     keepPreviousData: true,
     staleTime: 30000,

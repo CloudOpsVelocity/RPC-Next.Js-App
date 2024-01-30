@@ -13,20 +13,23 @@ type Props = {
   title: string;
   projName?: string;
   content: string;
-  data?:any;
+  data?: any;
 };
 
 type CardProps = {
   type: string;
   projName?: string;
-  cardData?:any
+  cardData?: any;
 };
 
 export function ProjectCard({ type, cardData }: CardProps) {
-  console.log(cardData)
+  console.log(type);
   return (
     <>
-      <div key={cardData.projIdEnc} className="border text-card-foreground min-w-[350px] bg-white rounded-lg shadow-md overflow-hidden">
+      <div
+        key={cardData.projIdEnc}
+        className="border text-card-foreground min-w-[350px] bg-white rounded-lg shadow-md overflow-hidden"
+      >
         {type == "proj" && (
           <div className="flex space-y-1.5 p-6 bg-[#f5f5f5] px-4 py-2 justify-between items-center">
             <h3 className="tracking-tight text-[18px] font-[600] text-[#565D70]">
@@ -70,9 +73,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
 
           <div className=" flex justify-end items-end w-[95%] ">
             <p className="mt-[-30px] rounded-[10px] relative bottom-[50px] z-10 p-[8px] text-[#0073C6] text-[18px] font-[700] flex pl-[4px] justify-center items-center bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100">
-              <span className=" w-[24px] h-[24px] ">
-                {shortlistIconSvg}
-              </span>
+              <span className=" w-[24px] h-[24px] ">{shortlistIconSvg}</span>
               Shortlist
             </p>
           </div>
@@ -92,13 +93,14 @@ export function ProjectCard({ type, cardData }: CardProps) {
               <p className="text-[14px] mb-[6px] font-[600] text-[#565D70] ">
                 Start - End Date:
                 <span className="ml-[4px] text-[#001F35]">
-                  {formatDate(cardData.startDate)} - {formatDate(cardData.endDate)}
+                  {formatDate(cardData.startDate)} -{" "}
+                  {formatDate(cardData.endDate)}
                 </span>
               </p>
             )}
 
             <p className="text-[14px] mb-[6px] font-[600] text-[#00487C]">
-              {cardData.availableProperties.map((eachCity:string)=>eachCity)}
+              {cardData.availableProperties.map((eachCity: string) => eachCity)}
             </p>
 
             {type != "proj" && (
@@ -128,7 +130,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
   );
 }
 
-const ProjectCarousel = ({ type, content, title, projName, data}: Props) => {
+const ProjectCarousel = ({ type, content, title, projName, data }: Props) => {
   return (
     <div className="w-[100%] mb-[5%]">
       <h2 className="text-[24px] lg:text-[32px] font-semibold uppercase">
@@ -140,13 +142,12 @@ const ProjectCarousel = ({ type, content, title, projName, data}: Props) => {
       </h2>
       <p className="text-gray-500 mt-1 mb-2 text-lg italic ">{content}</p>
 
-      <MainCarousel >
+      <MainCarousel>
         <CarouselSlide>
-          {data && data?.map((project:any, index:number) => {
-            return(
-            <ProjectCard key={index} type={type} cardData={project} />
-            )
-          })} 
+          {data &&
+            data?.map((project: any, index: number) => {
+              return <ProjectCard key={index} type={type} cardData={project} />;
+            })}
         </CarouselSlide>
       </MainCarousel>
     </div>

@@ -59,7 +59,7 @@ export default function ProjectDetailsP({ projName, slug }: Props) {
                   key={phase.phaseId}
                   title={phase.phaseName}
                   onChange={() => handlePhaseChange(phase.phaseId)}
-                  buttonClass={` mb-[5px] text-[16px] lg:text-[24px] bg-[#ECF7FF] p-[8px] xl:p-[16px]  whitespace-nowrap text-[#000] rounded-[8px] ${
+                  buttonClass={` mb-[5px] text-[18px] lg:text-[20px] bg-[#ECF7FF] p-[8px] xl:px-[8px]  whitespace-nowrap text-[#000] rounded-[8px] ${
                     currentPhase === phase.phaseId
                       ? " font-[600] border-solid border-[1px] border-[#0073C6] "
                       : " font-[400]"

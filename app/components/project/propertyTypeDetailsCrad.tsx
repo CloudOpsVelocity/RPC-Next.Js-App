@@ -14,6 +14,7 @@ import { currentPhaseAtom, propCgIdAtom } from "@/app/store/vewfloor";
 import { formatCurrency } from "@/app/utils/numbers";
 import { useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
 import { floorPlansArray, selectedFloorAtom } from "@/app/store/floor";
+import { parseUnits } from "@/app/utils/unitparser";
 
 type Props = {
   cg: any;
@@ -136,7 +137,7 @@ export default function PropertyTypeDetailsCrad({
 
       <div className="flex justify-end items-end flex-col w-full">
         <p className="text-[14px] lg:text-[18px] text-[#233] font-[500] mb-[3%] text-right">
-          UNITS: {cg?.unitTypes?.join(", ")}
+          UNITS: {parseUnits(cg?.unitTypes)}
         </p>
         <div className="flex justify-end items-end mb-[3%] gap-[16px]">
           {propertyType == "apt" || propertyType == "vlmt" ? (

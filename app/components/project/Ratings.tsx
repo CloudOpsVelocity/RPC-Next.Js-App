@@ -5,8 +5,7 @@ import { useParams } from "next/navigation";
 import React from "react";
 
 export default function Ratings() {
-  const { slug } = useParams<{ slug: string }>();
-  const { data, isLoading } = useRatings({ projectId: slug });
+  const { data, isLoading } = useRatings();
   return (
     <p className="text-[20px] flex justify-start items-start lg:text-[24px] text-[#4D6677] font-[700] whitespace-nowrap">
       {isLoading

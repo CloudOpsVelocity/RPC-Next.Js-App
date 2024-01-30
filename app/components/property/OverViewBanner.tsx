@@ -193,23 +193,23 @@ const PriceBreakUp = () => {
             <h3 className="text-[#034AB6] text-[28px] not-italic font-bold leading-[normal] underline uppercase">
               applicable charges
             </h3>
-            <li className="flex max-w-[771px]  items-start gap-[26px] text-[#4D6677]  text-2xl  font-bold leading-[23.784px]  border-b-2 border-black pb-5">
+            <li className="flex max-w-[771px]  items-start gap-[26px] text-[#4D6677]  text-2xl  font-bold leading-[23.784px]  border-b border-[#00000080] pb-5">
               <div>Price/SQ.FT</div>{" "}
               <div className="font-semibold">₹ 72,52,050</div>
             </li>
-            <li className="flex max-w-[771px]  items-start gap-[26px] text-[#4D6677]  text-2xl  font-bold leading-[23.784px]  border-b-2 border-black pb-5">
+            <li className="flex max-w-[771px]  items-start gap-[26px] text-[#4D6677]  text-2xl  font-bold leading-[23.784px]  border-b border-[#00000080] pb-5">
               <div>Price/SQ.FT</div>{" "}
               <div className="font-semibold">₹ 72,52,050</div>
             </li>
-            <li className="flex max-w-[771px]  items-start gap-[26px] text-[#4D6677]  text-2xl  font-bold leading-[23.784px]  border-b-2 border-black pb-5">
+            <li className="flex max-w-[771px]  items-start gap-[26px] text-[#4D6677]  text-2xl  font-bold leading-[23.784px]  border-b border-[#00000080] pb-5">
               <div>Price/SQ.FT</div>{" "}
               <div className="font-semibold">₹ 72,52,050</div>
             </li>
-            <li className="flex max-w-[771px]  items-start gap-[26px] text-[#4D6677]  text-2xl  font-bold leading-[23.784px]  border-b-2 border-black pb-5">
+            <li className="flex max-w-[771px]  items-start gap-[26px] text-[#4D6677]  text-2xl  font-bold leading-[23.784px]  border-b border-[#00000080] pb-5">
               <div>Price/SQ.FT</div>{" "}
               <div className="font-semibold">₹ 72,52,050</div>
             </li>
-            <li className="flex max-w-[771px]  items-start gap-[26px] text-[#4D6677]  text-2xl  font-bold leading-[23.784px]  border-b-2 border-black pb-5">
+            <li className="flex max-w-[771px]  items-start gap-[26px] text-[#4D6677]  text-2xl  font-bold leading-[23.784px]  border-b border-[#00000080] pb-5">
               <div>Price/SQ.FT</div>{" "}
               <div className="font-semibold">₹ 72,52,050</div>
             </li>
@@ -219,7 +219,7 @@ const PriceBreakUp = () => {
         <div className="w-full grid grid-cols-2 justify-between items-center">
           <div className=" border-t border-gray-400 mt-4 space-y-4 py-8 ">
             <h3 className="text-[#034AB6] text-[28px] not-italic font-bold leading-[normal] underline uppercase">
-              applicable charges
+              Other charges
             </h3>
             <li className="flex max-w-[771px]  items-start gap-[26px] text-[#4D6677]  text-2xl  font-bold leading-[23.784px]  border-b-2 border-black pb-5">
               <div>Price/SQ.FT</div>{" "}
@@ -242,7 +242,7 @@ const PriceBreakUp = () => {
               <div className="font-semibold">₹ 72,52,050</div>
             </li>
           </div>
-          <SideCard />
+          <OtherSideCard />
         </div>
       </div>
     </>
@@ -262,6 +262,23 @@ const SideCard = () => {
       <div className="mt-2 flex justify-center items-baseline text-[color:var(--newly-Added,#00ADE3)] text-[26px] not-italic font-bold leading-[normal] underline">
         <span className="text-lg font-semibold">₹</span>
         <span className="text-3xl font-bold">2&ldquo;05&ldquo;600</span>
+      </div>
+    </div>
+  );
+};
+
+const OtherSideCard = () => {
+  return (
+    <div
+      className=" text-[#4D6677] flex w-96 h-[197px] justify-center items-center shrink-0 pt-7 pb-[27px] px-[27px] border-[color:var(--White-1,#F1F1F1)] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[20px] border-[0.6px] border-solid;
+  background: var(--White-2, #fafafa) flex-col text-center ml-auto"
+    >
+      <p className="text-[#343A44] text-center text-[20px] not-italic font-medium leading-[normal]">
+        The sum of total of your other charges you included in the &rdquo;Other
+        Charges Applicable&rdquo; is
+      </p>
+      <div className="text-[#148B16] text-[32px] not-italic font-semibold leading-[normal]">
+        <span className="text-3xl font-bold mt-1">₹ 8,85,6000</span>
       </div>
     </div>
   );

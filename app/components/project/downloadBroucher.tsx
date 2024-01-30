@@ -36,7 +36,7 @@ const DownloadBroucher = ({ url }: { url: string }) => {
     }
   };
   const handleDownload = () => {
-    window.open(`/pdf/${encodeURIComponent(url)}`, "_blank");
+    window.open(`/pdf/${encodeURIComponent(url.split(".net")[1])}`, "_blank");
 
     // fetch(url)
     //   .then((response) => {

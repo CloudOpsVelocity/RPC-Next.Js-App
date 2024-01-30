@@ -2,7 +2,6 @@
 import React, { useState, useCallback, useRef } from "react";
 import { LuTrain, LuSearch } from "react-icons/lu";
 import { Text, Tabs, TextInput, Loader, ScrollArea } from "@mantine/core";
-import style from "../../styles/ModalCarousel.module.css";
 
 import {
   GoogleMap,
@@ -11,8 +10,9 @@ import {
   useGoogleMap,
   DirectionsRenderer,
   InfoWindow,
+  DirectionsService,
 } from "@react-google-maps/api";
-import cslx, { clsx } from "clsx";
+import { clsx } from "clsx";
 import axios from "axios";
 import { useQuery } from "react-query";
 import { IoLocationSharp } from "react-icons/io5";
@@ -41,8 +41,6 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
   const [directionsResponse, setDirectionsResponse] = useState<any | null>(
     null
   );
-  const [distance, setDistance] = useState<string>("");
-  const [duration, setDuration] = useState<string>("");
   const [selected, setSelected] = useState<string>("commute");
   const [selectedLocation, setSelectedLocation] = useState<{
     lat: number;
@@ -52,8 +50,7 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
     lng: parseInt(lang),
   });
   const [selectedTravelMode, setSelectedTravelMode] =
-    useState<string>("DRIVING"); // Default to driving
-  console.log(selectedTravelMode);
+    useState<string>("TRANSIT");
   const [map, setMap] = useState<any | null>(null);
 
   const { isLoaded } = useJsApiLoader({
@@ -80,26 +77,33 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
       map?.panTo(location.position);
       calculateRoute();
     },
-    [map, selectedLocation]
+    [map, selectedLocation, selectedTravelMode, selected]
   );
-
+  const originRef = useRef();
+  /** @type React.MutableRefObject<HTMLInputElement> */
+  const destiantionRef = useRef();
   async function calculateRoute() {
-    if (!map || !selectedLocation) return;
+    if ((!map && !selectedLocation) || !selectedTravelMode) return;
 
     const directionsService = new window.google.maps.DirectionsService();
 
     directionsService.route(
       {
-        origin: { lat: 13.0318336, lng: 77.5815168 }, // Default center
-        destination: selectedLocation,
+        origin: {
+          lat: parseInt(lat),
+          lng: parseInt(lang),
+        }, // Default center
+        destination: new window.google.maps.LatLng(
+          selectedLocation.lat,
+          selectedLocation.lng
+        ),
         // @ts-ignore
-        travelMode: selectedTravelMode, // Use the selected travel mode
+        travelMode: selectedTravelMode,
       },
       (result, status) => {
+        console.log(result);
         if (status === "OK" && result) {
           setDirectionsResponse(result);
-          setDistance(result.routes[0].legs[0].distance?.text || "");
-          setDuration(result.routes[0].legs[0].duration?.text || "");
         } else {
           console.error(`Directions request failed: ${status}`);
         }
@@ -109,7 +113,9 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
 
   const fetchNearbyPlaces = async () => {
     const response = await fetch(
-      `/api/hello?lt=${13.0318336}&lng=${77.5815168}&type=${selected}&travelType=${selectedTravelMode}`
+      `/api/hello?lt=${parseInt(lat)}&lng=${parseInt(
+        lang
+      )}&type=${selected}&travelType=${selectedTravelMode}`
     );
     return await response.json();
   };
@@ -117,10 +123,16 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
   const { data, isLoading } = useQuery({
     queryKey: ["nearbyPlaces" + selected + selectedTravelMode],
     queryFn: fetchNearbyPlaces,
+    onSuccess: (data) => {
+      if (Object.keys(data).length > 0) {
+        showLocationOnMap({
+          position: data[0].geometry.location,
+          name: data[0].name,
+        });
+      }
+    },
   });
-  console.log(data);
   const handleLocationListClick = (type: string) => {
-    // Set the selected travel mode when a location list is clicked
     setSelectedTravelMode(type);
   };
 
@@ -140,10 +152,6 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
           <button
             onClick={() => {
               setSelected(area.name);
-              showLocationOnMap({
-                position: !isLoading && data[0].geometry.location,
-                name: area.name,
-              });
             }}
             className={clsx(
               "text-[#4D6677] text-xl not-italic font-medium flex items-center   leading-[normal] capitalize",
@@ -156,10 +164,10 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
         ))}
       </div>
 
-      <div className="border border-[#92B2C8] grid grid-cols-1 md:grid-cols-[2fr_3fr] rounded-xl overflow-hidden shadow-lg">
+      <div className="border border-[#92B2C8] grid grid-cols-1 md:grid-cols-[2fr_3fr] rounded-xl overflow-hidden shadow-lg md:h-[600px]">
         <section className="bg-white">
           <div id="tabs">
-            <Tabs defaultValue="drive">
+            <Tabs defaultValue="public">
               <div className="bg-blue-50 px-5 py-4">
                 <p className="text-[#001F35] text-[22px]  font-medium leading-[normal]">
                   Select how you want to travel
@@ -210,21 +218,25 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
                     {isLoading ? (
                       <Loading />
                     ) : (
-                      <ScrollArea h={250}>
-                        {Object.values(data).map(
-                          (location: any, index: number) => (
-                            <LocationList
-                              type="public"
-                              {...location}
-                              key={index}
-                              lat={lat}
-                              lng={lang}
-                              onClick={setSelectedLocation}
-                              setDirection={showLocationOnMap}
-                              onChangeTravelMode={handleLocationListClick} // Pass the callback
-                              showLocationOnMap={showLocationOnMap}
-                            />
+                      <ScrollArea h={400}>
+                        {data && Object.values(data).length > 0 ? (
+                          Object.values(data).map(
+                            (location: any, index: number) => (
+                              <LocationList
+                                type="public"
+                                {...location}
+                                key={index}
+                                lat={lat}
+                                lng={lang}
+                                onClick={setSelectedLocation}
+                                setDirection={showLocationOnMap}
+                                onChangeTravelMode={handleLocationListClick}
+                                showLocationOnMap={showLocationOnMap}
+                              />
+                            )
                           )
+                        ) : (
+                          <p>No locations found.</p>
                         )}
                       </ScrollArea>
                     )}
@@ -235,20 +247,25 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
                     {isLoading ? (
                       <Loading />
                     ) : (
-                      <ScrollArea h={250}>
-                        {Object.values(data).map(
-                          (location: any, index: number) => (
-                            <LocationList
-                              type="drive"
-                              {...location}
-                              key={index}
-                              lat={lat}
-                              lng={lang}
-                              onClick={setSelectedLocation}
-                              onChangeTravelMode={handleLocationListClick} // Pass the callback
-                              showLocationOnMap={showLocationOnMap}
-                            />
+                      <ScrollArea h={400}>
+                        {data && Object.values(data).length > 0 ? (
+                          Object.values(data).map(
+                            (location: any, index: number) => (
+                              <LocationList
+                                type="public"
+                                {...location}
+                                key={index}
+                                lat={lat}
+                                lng={lang}
+                                onClick={setSelectedLocation}
+                                setDirection={showLocationOnMap}
+                                onChangeTravelMode={handleLocationListClick}
+                                showLocationOnMap={showLocationOnMap}
+                              />
+                            )
                           )
+                        ) : (
+                          <p>No locations found.</p>
                         )}
                       </ScrollArea>
                     )}
@@ -259,20 +276,25 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
                     {isLoading ? (
                       <Loading />
                     ) : (
-                      <ScrollArea h={250}>
-                        {Object.values(data).map(
-                          (location: any, index: number) => (
-                            <LocationList
-                              type="walk"
-                              {...location}
-                              key={index}
-                              lat={lat}
-                              lng={lang}
-                              onClick={setSelectedLocation}
-                              onChangeTravelMode={handleLocationListClick} // Pass the callback
-                              showLocationOnMap={showLocationOnMap}
-                            />
+                      <ScrollArea h={400}>
+                        {data && Object.values(data).length > 0 ? (
+                          Object.values(data).map(
+                            (location: any, index: number) => (
+                              <LocationList
+                                type="public"
+                                {...location}
+                                key={index}
+                                lat={lat}
+                                lng={lang}
+                                onClick={setSelectedLocation}
+                                setDirection={showLocationOnMap}
+                                onChangeTravelMode={handleLocationListClick}
+                                showLocationOnMap={showLocationOnMap}
+                              />
+                            )
                           )
+                        ) : (
+                          <p>No locations found.</p>
                         )}
                       </ScrollArea>
                     )}
@@ -285,6 +307,7 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
         <section>
           {isLoaded && (
             <GoogleMap
+              key={selectedTravelMode}
               mapContainerStyle={mapContainerStyle}
               center={selectedLocation}
               zoom={15}
@@ -294,7 +317,10 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
               {selectedLocation && !directionsResponse && (
                 <div className="relative">
                   <Marker
-                    position={selectedLocation}
+                    position={{
+                      lat: parseInt(lat),
+                      lng: parseInt(lang),
+                    }}
                     icon={{
                       url: "/mapIcon.svg",
                     }}
@@ -310,18 +336,14 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
                       </div>
                     </InfoWindow>
                   </Marker>
-
-                  {/* <MarkerWithLabel
-                    position={{ lat: -34.397, lng: 150.644 }}
-                    labelAnchor={new google.maps.Point(0, 0)}
-                    labelStyle={{backgroundColor: "yellow", fontSize: "32px", padding: "16px"}}
-                  >
-                    <div>Hello There!</div>
-                  </MarkerWithLabel> */}
                 </div>
               )}
               {directionsResponse && (
-                <DirectionsRenderer directions={directionsResponse} />
+                <DirectionsRenderer
+                  options={{
+                    directions: directionsResponse,
+                  }}
+                />
               )}
             </GoogleMap>
           )}
@@ -345,46 +367,20 @@ const LocationList: React.FC<{
   showLocationOnMap: (location: any) => void;
   distance: any;
   duration: any;
-}> = ({
-  name,
-  geometry,
-  vicinity,
-  lat,
-  lng,
-  onClick,
-  type,
-  distance,
-  duration,
-  onChangeTravelMode,
-  showLocationOnMap,
-}) => {
-  const userLocation = { lat, lng };
-  // const distance = calculateDistance(
-  //   userLocation.lat,
-  //   userLocation.lng,
-  //   geometry.location.lat,
-  //   geometry.location.lng
-  // );
-  const travelTime = calculateTime(distance, type);
-
+}> = ({ name, geometry, vicinity, distance, duration, showLocationOnMap }) => {
   const handleClick = () => {
-    // Call the onClick callback
-    onClick({ lat: geometry.location.lat, lng: geometry.location.lng });
-    // Call the onChangeTravelMode callback with the selected travel mode
-    onChangeTravelMode(type);
-  }; // Assuming an average speed of 30 km/h
+    showLocationOnMap({
+      position: {
+        lat: geometry.location.lat,
+        lng: geometry.location.lng,
+      },
+    });
+  };
 
   return (
     <div
       className="p-2 bg-gray-50 border rounded-lg cursor-pointer"
-      onClick={() =>
-        showLocationOnMap({
-          position: {
-            lat: geometry.location.lat,
-            lng: geometry.location.lng,
-          },
-        })
-      }
+      onClick={handleClick}
     >
       <div className="flex items-center justify-between">
         <h6 className="text-black text-lg not-italic font-medium leading-[normal] capitalize">
@@ -394,12 +390,12 @@ const LocationList: React.FC<{
           <span className="flex items-center">
             {nearbyLocationIcon}
             <span className="ml-[4px] text-[#005DA0] text-lg not-italic font-medium leading-[normal] ">
-              {distance.text}
+              {distance?.text ?? "N/A"}
             </span>
           </span>
           <span>|</span>
           <span className="text-[#001F35] text-lg not-italic font-medium leading-[normal]">
-            {duration.text}
+            {duration?.text ?? "N/A"}
           </span>
         </div>
       </div>

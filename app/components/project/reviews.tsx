@@ -8,8 +8,7 @@ import useRatings from "@/app/hooks/useRatings";
 import { useParams } from "next/navigation";
 
 export default function Reviews({ projName }: { projName: string }) {
-  const { slug } = useParams<{ slug: string }>();
-  const { data, isLoading } = useRatings({ projectId: slug });
+  const { data, isLoading } = useRatings();
   return (
     data?.status && (
       <div className="bg-[#FFF] py-12 w-full ">

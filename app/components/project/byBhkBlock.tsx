@@ -20,7 +20,7 @@ export default function ByBhkBlock({ propCgId, data }: Props) {
     return Array.from(new Set(data.map((item: any) => String(item[property]))));
   };
 
-  const availBhks = getOptions("bhkName");
+  const availBhks = getOptions("bhkName").sort((a, b) => a.localeCompare(b));
 
   return (
     <div className="">

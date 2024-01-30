@@ -5,7 +5,8 @@ import React, { useState } from "react";
 import ReactPlayer from "react-player";
 import Gallery from "./modals/Gallery";
 import { getImageUrls } from "@/app/utils/image";
-import { Image } from "@mantine/core";
+import { AspectRatio, Image, Overlay } from "@mantine/core";
+import { useGallery } from "@/app/hooks/useGallery";
 // import ReactVideoThumbnail from "react-video-thumbnail";
 
 export default function GalleryBlock({
@@ -29,7 +30,7 @@ export default function GalleryBlock({
   const handleMediaClick = (media: string) => {
     setSelectedMedia(media);
   };
-
+  // const limitedImages = images.slice(0, 5);
   return (
     <div className="w-[90%] mb-[10%]  " id="galleria">
       <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35] uppercase">
@@ -88,6 +89,29 @@ export default function GalleryBlock({
                 onClick={() => handleMediaClick(img as string)}
               />
             ))}
+            {/* {images.length > 5 && (
+              <div className="relative">
+                <Image
+                  width={150}
+                  height={100}
+                  className="w-[110px] lg:w-[152px] h-[68px] lg:h-[94px] bg-[#dfdcdc] rounded-[5px] shadow-md mb-[4%] cursor-pointer"
+                  src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-3.png"
+                  alt="Demo"
+                />
+                <Overlay
+                  color="#000"
+                  backgroundOpacity={0.35}
+                  blur={15}
+                  title="View More"
+                  onClick={() => open("image")}
+                >
+                  <div className="flex justify-center items-center text-white h-full cursor-pointer">
+                    View More
+                  </div>
+                </Overlay>
+              </div>
+              // <button onClick={() => open("image")}>View More</button>
+            )} */}
           </div>
 
           <h3 className="text-[#737579] font-[600] text-[20px] lg:text-[24px] mb-[2%] ">

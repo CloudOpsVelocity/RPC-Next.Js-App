@@ -1,9 +1,11 @@
 "use client";
 import { topics } from "@/app/data/projectDetails";
+import useRatings from "@/app/hooks/useRatings";
 import Image from "next/image";
 import React, { useState, useRef } from "react";
 
 export default function Navigation() {
+  const { data } = useRatings();
   const [currentBlock, setCurrentBlock] = useState("overview");
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
@@ -47,7 +49,9 @@ export default function Navigation() {
             }`}
             onClick={() => scrollToTopic(topic.id)}
           >
-            {topic.label}
+            {topic.id === "ratings" && data?.status && <span>Ratings</span>}
+
+            {topic.id !== "ratings" && topic.label}
           </div>
         ))}
       </div>

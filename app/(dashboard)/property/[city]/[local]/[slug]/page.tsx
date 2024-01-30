@@ -21,6 +21,8 @@ import ProjectDrawer from "@/app/components/project/Drawer";
 import RoomDetails from "@/app/components/property/RoomDetails";
 import PropertyOverView from "@/app/components/property/Overview";
 import RoomFloorplansBlock from "@/app/components/property/Floorplan";
+import fakeData from "@/app/data/listing";
+import PropertyBanner from "@/app/components/property/propertyBanner";
 
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
@@ -61,24 +63,31 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         <RoomFloorplansBlock data={data.phaseList} />
         <GalleryBlock {...data.media} />
         {/* About Builder */}
-        {/* <AboutBuilder data={data.aboutBuilder} /> */}
-        {/* <Nearby lat={data.lat} lang={data.lang} />
-        <Specifications data={data.specificationList} />
-        <Banner />
-        <Feature data={data.highlights} />
-        <Loans data={data.banks} />
-        <Amenties data={data.amenityList} /> */}
-        {/* Why Buy This */}
-        {/* <About
-          id="whyBuy"
-          heading="Why Buy"
-          projName="SARANG BY SUMADHURA ?"
-          content={data.wbtp}
+        <AboutBuilder id={data.builderId} />
+        <PropertyBanner />
+        {/* {/* <Nearby lat={data.lat} lang={data.lang} /> */}
+        <Specifications
+          data={data.specificationList}
+          projName={data.projectName}
         />
-        <Testimonials />
-        <Reviews />
-        <FaqWithBg data={data.faqs} /> */}
-        <div className="flex flex-col justify-start items-start w-[95%]">
+        <Banner projName={data.projectName} />
+        <Feature data={data.highlights} projName={data.projectName} />
+        <Loans data={data.banks} projName={data.projectName} />
+        <Amenties data={data.amenityList} />
+        {/* Why Buy This */}
+        {data.wbtp && (
+          <About
+            id="whyBuy"
+            heading="Why Buy"
+            projName={`${data.projectName} ?`}
+            content={data.wbtp}
+          />
+        )}
+        {/* <Testimonials projName={data.projectName} /> */}
+        <Reviews projName={data.projectName} />
+
+        <FaqWithBg data={data.faqs} projName={data.projectName} />
+        {/* <div className="flex flex-col justify-start items-start w-[95%]">
           <ProjectCarousel
             type="proj"
             title="nEAR BY pROJECTS OF"
@@ -89,10 +98,10 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             type="prop"
             title="Projects By Developers"
             content="See what developers has posted"
-          />
-        </div>
+          /> */}
+        {/* </div> */}
 
-        {/* <ProjectDrawer /> */}
+        <ProjectDrawer projName="Sarang By Sumadhura" />
       </div>
     </div>
   );
