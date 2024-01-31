@@ -44,30 +44,27 @@ export default function Reviews({ projName }: { projName: string }) {
 
 const Review = ({ rating, review, name, days }: any) => {
   return (
-      <div
-        className="max-w-lg mx-auto mt-[20px] bg-white rounded-lg p-4 relative shadow-md border-solid border-[#DCE6ED] border-[1px] min-h-[220px]"
-       
-      >
-        <span className=" absolute top-[-20px] !z-30  ">{quotesIcon}</span>
-        <div className="flex items-center space-x-2">
-          <div className="flex-1">
-            <div className="flex justify-between items-center">
-              <div>
-                <p className="text-[18px] text-[#000] font-[500] mt-[20px]">
-                  {name ?? "GRP USER"}
-                </p>
-                <p className="text-[14px] text-[#212C33] font-[500]"></p>
-              </div>
-              <div className="text-right">
-                <Rating size={"sm"} value={rating} readOnly />
-                <span className="text-xs text-gray-500">{days} days ago</span>
-              </div>
+    <div className="max-w-lg mx-auto mt-[20px] bg-white rounded-lg p-4 relative shadow-md border-solid border-[#DCE6ED] border-[1px] min-h-[220px]">
+      <span className=" absolute top-[-20px] !z-30  ">{quotesIcon}</span>
+      <div className="flex items-center space-x-2">
+        <div className="flex-1">
+          <div className="flex justify-between items-center">
+            <div>
+              <p className="text-black text-lg not-italic font-medium leading-[normal]">
+                {name ?? "GRP USER"}
+              </p>
+              <p className="text-[14px] text-[#212C33] font-[500]"></p>
             </div>
-            <p className="mt-2 text-[14px] text-[#3E3E3E] font-[400]">
-              {review}
-            </p>
+            <div className="text-right">
+              <Rating size={"sm"} value={rating} readOnly />
+              <span className="text-xs text-gray-500">{days} days ago</span>
+            </div>
           </div>
+          <p className="mt-2 text-[#3E3E3E] text-sm not-italic font-normal leading-[normal] tracking-[0.56px]">
+            {review}
+          </p>
         </div>
       </div>
+    </div>
   );
 };
