@@ -23,13 +23,7 @@ import {
   calculateTime,
 } from "@/app/utils/maps";
 import { useDebouncedState } from "@mantine/hooks";
-import {
-  Drive,
-  Hostpital,
-  MapIcon,
-  Walk,
-  nearbyLocationIcon,
-} from "@/app/images/commonSvgs";
+import { nearbyLocationIcon } from "@/app/images/commonSvgs";
 
 interface Area {
   name: string;
@@ -52,10 +46,7 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
   const [selectedLocation, setSelectedLocation] = useState<{
     lat: number;
     lng: number;
-  }>({
-    lat: parseFloat(lat),
-    lng: parseFloat(lang),
-  });
+  }>();
   const [selectedTravelMode, setSelectedTravelMode] =
     useState<string>("TRANSIT");
   const [map, setMap] = useState<any | null>(null);
@@ -80,39 +71,32 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
 
   const showLocationOnMap = useCallback(
     (location: { position: { lat: number; lng: number }; name: string }) => {
-      setSelectedLocation(location.position);
-      map?.panTo(location.position);
-      calculateRoute();
+      console.log({ t: location });
+      setSelectedLocation({
+        lat: location.position.lat,
+        lng: location.position.lng,
+      });
+      // map?.panTo(location.position);
+      calculateRoute(location);
     },
     [map, selectedLocation, selectedTravelMode, selected]
   );
-  async function calculateRoute() {
+  async function calculateRoute(location: {
+    position: { lat: number; lng: number };
+    name: string;
+  }) {
     if ((!map && !selectedLocation) || !selectedTravelMode) return;
-    const config = {
-      origin: {
-        lat: parseFloat(lat),
-        lng: parseFloat(lang),
-      }, // Default center
-      destination: new window.google.maps.LatLng(
-        selectedLocation.lat,
-        selectedLocation.lng
-      ),
-      // @ts-ignore
-      travelMode: selectedTravelMode,
-    };
-    console.log(config);
     const directionsService = new window.google.maps.DirectionsService();
-
     directionsService.route(
       {
         origin: {
           lat: parseFloat(lat),
           lng: parseFloat(lang),
         }, // Default center
-        destination: new window.google.maps.LatLng(
-          selectedLocation.lat,
-          selectedLocation.lng
-        ),
+        destination: {
+          lat: location?.position?.lat ?? 0,
+          lng: location.position?.lng ?? 0,
+        },
         // @ts-ignore
         travelMode: selectedTravelMode,
       },
@@ -146,7 +130,10 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
   };
 
   return (
-    <div className="w-[90%] scroll-mt-[90px] mx-auto mt-[5%] mb-[5%] " id="nearBy">
+    <div
+      className="w-[90%] scroll-mt-[90px] mx-auto mt-[5%] mb-[5%] "
+      id="nearBy"
+    >
       <h2 className="text-[24px] lg:text-[32px] font-semibold">
         <span className="!text-green-600">{projName} </span>
         <span className="">Near BY LOCATIONS</span>
@@ -161,6 +148,7 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
           <button
             onClick={() => {
               setSelected(area.name);
+              setDirectionsResponse(null);
             }}
             className={clsx(
               "text-[#4D6677] text-xl not-italic font-medium flex items-center   leading-[normal] capitalize",
@@ -318,12 +306,12 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
             <GoogleMap
               key={selectedTravelMode}
               mapContainerStyle={mapContainerStyle}
-              center={selectedLocation}
+              center={origin}
               zoom={15}
               onLoad={onLoad}
               onUnmount={onUnmount}
             >
-              {selectedLocation && !directionsResponse && (
+              {origin && !directionsResponse && (
                 <div className="relative">
                   <Marker
                     position={origin}
@@ -331,7 +319,7 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
                       url: "/mapIcon.svg",
                     }}
                   >
-                    <InfoWindow>
+                    <InfoWindow position={origin}>
                       <div className=" ">
                         <p className="text-[#00487C] text-[10px] italic font-medium leading-[normal]">
                           Project you are exploring
@@ -358,12 +346,28 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
                 </div>
               )}
               {directionsResponse && (
-                <DirectionsRenderer
-                  key={selectedLocation.lat}
-                  options={{
-                    directions: directionsResponse,
-                  }}
-                />
+                <>
+                  <DirectionsRenderer
+                    options={{
+                      directions: directionsResponse,
+                    }}
+                  />{" "}
+                  <InfoWindow
+                    position={
+                      directionsResponse.routes[0].legs[0].start_location
+                    }
+                    // onCloseClick={() => setInfoWindowPosition(null)}
+                  >
+                    <div className=" ">
+                      <p className="text-[#00487C] text-[10px] italic font-medium leading-[normal]">
+                        Project you are exploring
+                      </p>
+                      <p className="text-[#006A02] text-sm not-italic font-semibold leading-[normal]">
+                        {projName}
+                      </p>
+                    </div>
+                  </InfoWindow>
+                </>
               )}
             </GoogleMap>
           )}
