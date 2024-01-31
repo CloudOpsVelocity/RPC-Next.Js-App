@@ -26,7 +26,6 @@ import LoginPopup from "@/app/components/molecules/popups/login";
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
   const data = await getProjectDetails(slug);
-  console.log(data);
   return (
     <div className="w-full relative">
       <Download />
@@ -49,7 +48,6 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         </div>
         {/* Navigations Container */}
         <Navigation />
-        Overview
         <Overview {...data} />
         {/* About */}
         <About

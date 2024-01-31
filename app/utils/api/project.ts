@@ -5,18 +5,21 @@ const getProjectDetails = async (slug: string): Promise<Main> => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/basicDetails?projIdEnc=${slug}`,
     {
-      next: { revalidate: 30 },
+      cache: "no-cache",
     }
+    // {
+    //   next: { revalidate: 30 },
+    // }
   );
   const data = await response.json();
   return data as Main; // Assuming the response can be cast to Main
 };
 const getProjectWiseOverView = async (slug: string): Promise<any> => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/overviewData?projIdEnc=${slug}`,
-    {
-      next: { revalidate: 90 },
-    }
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/overviewData?projIdEnc=${slug}`
+    // {
+    //   next: { revalidate: 90 },
+    // }
   );
   const data = await response.json();
   return data; // Assuming the response can be cast to Main
@@ -27,10 +30,10 @@ const getProjectUnits = async (
   propType: any
 ): Promise<any> => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/projectUnit?projIdEnc=${slug}&phaseId=${phaseId}&propType=${propType}`,
-    {
-      next: { revalidate: 60 },
-    }
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/projectUnit?projIdEnc=${slug}&phaseId=${phaseId}&propType=${propType}`
+    // {
+    //   next: { revalidate: 60 },
+    // }
   );
 
   const data = await response.json();
