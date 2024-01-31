@@ -2,7 +2,11 @@
 import "@mantine/carousel/styles.css";
 import { Carousel } from "@mantine/carousel";
 import React from "react";
-import { ReviewBoxIcon, quotesIcon } from "@/app/images/commonSvgs";
+import {
+  NextCarouselButton,
+  PrevCarouselButton,
+  quotesIcon,
+} from "@/app/images/commonSvgs";
 import { Rating } from "@mantine/core";
 import useRatings from "@/app/hooks/useRatings";
 import { useParams } from "next/navigation";
@@ -22,6 +26,8 @@ export default function Reviews({ projName }: { projName: string }) {
           </p>
           <div className="mt-8 relative">
             <Carousel
+              nextControlIcon={<NextCarouselButton />}
+              previousControlIcon={<PrevCarouselButton />}
               slideGap={"md"}
               align="start"
               slideSize={{ base: "100%", sm: "50%", md: "33.333333%" }}

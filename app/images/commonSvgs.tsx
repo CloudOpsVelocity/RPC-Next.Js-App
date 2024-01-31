@@ -11269,3 +11269,44 @@ export const Restaurant = () => {
     </svg>
   );
 };
+
+export const NextCarouselButton = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="51"
+      height="52"
+      viewBox="0 0 51 52"
+      fill="none"
+    >
+      <circle
+        cx="25.5"
+        cy="25.5"
+        r="25.5"
+        transform="matrix(-1 0 0 1 51 0.5)"
+        fill="#EEF7FE"
+      />
+      <path
+        d="M31.27 27.7605C32.2433 26.788 32.2433 25.212 31.27 24.2395L23.2592 16.2352C21.6879 14.6652 19 15.7763 19 17.9957V34.0043C19 36.2237 21.6879 37.3348 23.2592 35.7648L31.27 27.7605Z"
+        fill="#4D6677"
+      />
+    </svg>
+  );
+};
+export const PrevCarouselButton = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="51"
+      height="52"
+      viewBox="0 0 51 52"
+      fill="none"
+    >
+      <circle cx="25.5" cy="26" r="25.5" fill="#EEF7FE" />
+      <path
+        d="M19.73 27.7605C18.7567 26.788 18.7567 25.212 19.73 24.2395L27.7408 16.2352C29.3121 14.6652 32 15.7763 32 17.9957V34.0043C32 36.2237 29.3121 37.3348 27.7408 35.7648L19.73 27.7605Z"
+        fill="#4D6677"
+      />
+    </svg>
+  );
+};
