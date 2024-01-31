@@ -11,7 +11,7 @@ type Props = {
 export default function AboutBuilder({ id }: Props) {
   const { data, isLoading } = useBuilder({ id, y: "N" });
   return (
-    <div className="w-[90%] mt-[5%] mb-[5%]">
+    <div className="w-[90%] scroll-mt-[90px] mt-[5%] mb-[5%]">
       <div className="w-full justify-between items-center ">
         <h1 className=" text-[#023993] text-[24px] lg:text-[32px] font-[700]">
           About Builder

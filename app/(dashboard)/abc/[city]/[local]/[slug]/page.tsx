@@ -27,7 +27,7 @@ type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
   const data = await getProjectDetails(slug);
   return (
-    <div className="w-full relative">
+    <div className="w-full relative   ">
       <Download />
       <FloorDownload />
       <div className="mt-[90px] w-full pb-[2%] flex items-center justify-center flex-col">

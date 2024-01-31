@@ -37,7 +37,7 @@ export default function ProjectDetailsP({ projName, slug }: Props) {
     );
 
   return (
-    <div className="w-[90%] mb-[5%]" id="propertyDetails">
+    <div className="w-[90%] mb-[5%] scroll-mt-[90px]" id="propertyDetails">
       <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35]">
         Property Details Of{" "}
         <span className="text-[#148B16] font-[700] uppercase">{projName}</span>{" "}

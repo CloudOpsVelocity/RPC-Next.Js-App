@@ -11,7 +11,7 @@ export default function Reviews({ projName }: { projName: string }) {
   const { data, isLoading } = useRatings();
   return (
     data?.status && (
-      <div className="bg-[#FFF] py-12 w-full ">
+      <div id="ratings" className="bg-[#FFF] scroll-mt-[100px] py-12 w-full ">
         <div className="w-[90%] mx-auto px-6">
           <h2 className="text-[#001F35] text-[32px] not-italic font-semibold leading-[normal] uppercase">
             CUSTOMER REVIEWS FOR{" "}
@@ -44,10 +44,9 @@ export default function Reviews({ projName }: { projName: string }) {
 
 const Review = ({ rating, review, name, days }: any) => {
   return (
-    <>
       <div
         className="max-w-lg mx-auto mt-[20px] bg-white rounded-lg p-4 relative shadow-md border-solid border-[#DCE6ED] border-[1px] min-h-[220px]"
-        id="ratings"
+       
       >
         <span className=" absolute top-[-20px] !z-30  ">{quotesIcon}</span>
         <div className="flex items-center space-x-2">
@@ -70,6 +69,5 @@ const Review = ({ rating, review, name, days }: any) => {
           </div>
         </div>
       </div>
-    </>
   );
 };

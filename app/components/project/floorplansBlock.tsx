@@ -119,7 +119,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
   };
 
   return (
-    <div className="w-[90%] mb-[5%]" id="floorPlans">
+    <div className="w-[90%] scroll-mt-[90px] mb-[5%]" id="floorPlans">
       <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35]">
         FLOOR PLANS for{" "}
         <span className="text-[#148B16] font-[700] uppercase">{projName}</span>{" "}
