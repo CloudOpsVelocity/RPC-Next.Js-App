@@ -18,7 +18,7 @@ export default function Feature({
           Key Features: Elegant Design, Spacious Layout, Stunning Views, Modern
           Amenities
         </p>
-        <ul className="list-inside mt-4 space-y-2 ml-[2%]">
+        <ul className="list-inside mt-4  ml-[2%]">
           {data?.map((each, ind) => {
             return (
               <li
