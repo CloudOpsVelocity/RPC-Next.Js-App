@@ -3,7 +3,7 @@ import useNearby from "@/app/hooks/useNearby";
 import React from "react";
 import ProjectCarousel from "./ProjectCard";
 
-export default function NearByCarousel() {
+export default function NearByCarousel({projName}:{projName:string}) {
   const { data } = useNearby();
   console.log(data != undefined && data.builderProj != undefined ? data.builderProj : []);
   return (
@@ -11,7 +11,7 @@ export default function NearByCarousel() {
           <ProjectCarousel
             type="proj"
             title="nEAR BY pROJECTS OF"
-            // projName={data.projectName}
+            projName={projName}
             content="See what other customers also viewed"
             data={data != undefined && data.nearbyProj != undefined ? data.nearbyProj : [] }
           />
