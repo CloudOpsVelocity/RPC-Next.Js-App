@@ -104,7 +104,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             content={data.wbtp}
           />
         )}
-        <Testimonials projName={data.projectName} />
+        {/* <Testimonials projName={data.projectName} /> */}
         <Reviews projName={data.projectName} />
         <DownloadBroucher url={data?.media?.projBroucherUrl} />
         <FaqWithBg data={data.faqs} projName={data.projectName} />
