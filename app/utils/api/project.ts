@@ -3,10 +3,10 @@ import { Main } from "../../validations/types/project";
 
 const getProjectDetails = async (slug: string): Promise<Main> => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/basicDetails?projIdEnc=${slug}`,
-    {
-      cache: "no-cache",
-    }
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/basicDetails?projIdEnc=${slug}`
+    // {
+    //   cache: "no-cache",
+    // }
     // {
     //   next: { revalidate: 30 },
     // }
