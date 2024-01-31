@@ -125,9 +125,9 @@ const Footer = () => {
         <div className="flex items-start gap-[31px] flex-wrap">
           <div className="inline-flex items-center justify-center gap-[12px] relative flex-[0_0_auto]">
             <img
-              className="relative w-[14px] h-[20px]"
+              className="relative w-[25px] "
               alt="Footerlocation"
-              src="location.svg"
+              src="/location.svg"
             />
             <p className="relative w-fit mt-[-1.00px] [font-family:'Montserrat-SemiBold',Helvetica] font-semibold text-[#767270] text-[18px] tracking-[0] leading-[27px] whitespace-nowrap">
               Whitefield, Bengaluru-560066

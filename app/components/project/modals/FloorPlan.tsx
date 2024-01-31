@@ -87,7 +87,7 @@ function FloorPlanModal({ propCgId, data }: Props) {
           <img
             onClick={handleOpen}
             src={selectedFloor?.floorPlanUrl as string}
-            className="w-full h-full"
+            className="w-full h-full cursor-pointer"
             alt="image"
           />
         ) : (
@@ -95,7 +95,7 @@ function FloorPlanModal({ propCgId, data }: Props) {
             <img
               onClick={handleOpen}
               src="/abc/noimage.svg"
-              className="w-[80%] h-full"
+              className="w-[80%] h-full cursor-pointer"
               alt="image"
             />
             <p className=" text-[#000] text-center text-[18px] md:text-[28px] lg:text-[32px] font-[600] ">
@@ -103,8 +103,6 @@ function FloorPlanModal({ propCgId, data }: Props) {
             </p>
           </div>
         )}
-
-        {/* dISPLAY FLOOR PLAN HERE */}
       </div>
       <div
         className="bg-[#F4FBFF] p-[10px] rounded-[29px] gap-[12px] flex justify-end items-center  cursor-pointer"
