@@ -112,11 +112,11 @@ export function ProjectCard({ type, cardData }: CardProps) {
               </p>
             )}
 
-            {cardData.pinCode &&
+            
             <p className="text-[18px] mb-[6px] font-[600] text-[#8791AE]">
               {cardData.city} {cardData.pinCode}
             </p>
-            }
+            
 
             {type != "proj" && (
               <p className="text-[16px] font-[500] text-[#4D6677]">
