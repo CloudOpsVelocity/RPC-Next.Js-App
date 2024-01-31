@@ -151,7 +151,7 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
         <span className="!text-green-600">{projName} </span>
         <span className="">Near BY LOCATIONS</span>
       </h2>
-      <p className="text-[#4D6677] text-2xl italic font-medium leading-[normal] tracking-[0.96px]mt-1 mb-2  ">
+      <p className="text-[#4D6677] text-2xl italic font-medium leading-[normal] tracking-[0.96px] mt-2 mb-8  ">
         Explore near by convenient amenities, entertainment, and essential
         services
       </p>
@@ -391,13 +391,7 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
 
 export default Nearby;
 
-const MapCard = ({
-  name,
-  distance,
-  duration,
-  showLocationOnMap,
-  geometry,
-}: any) => {
+const MapCard = ({ name, distance, showLocationOnMap, geometry }: any) => {
   return (
     <div
       className="flex flex-col items-start gap-3 px-2 py-3.5 shadow-[0px_4px_20px_0px_rgba(91,143,182,0.10)] rounded-[10px] border-[0.5px] border-solid border-[#D9D9D9] bg-[#fcfcfc] cursor-pointer"

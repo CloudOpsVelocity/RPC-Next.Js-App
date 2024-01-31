@@ -11,7 +11,6 @@ import Loans from "@/app/components/project/loans";
 import { FaqWithBg } from "@/app/components/project/faq";
 import FirstBlock from "@/app/components/project/firstBlock";
 import Overview from "@/app/components/project/overview";
-import Testimonials from "@/app/components/project/testimonials";
 import About from "@/app/components/project/about";
 import Navigation from "@/app/components/project/navigation";
 import Link from "next/link";
@@ -21,8 +20,8 @@ import Specifications from "@/app/components/project/specification";
 import ProjectDrawer from "@/app/components/project/Drawer";
 import DownloadBroucher from "@/app/components/project/downloadBroucher";
 import Download from "@/app/components/project/modals/Download";
-import LoginPopup from "@/app/components/molecules/popups/login";
 import FloorDownload from "@/app/components/project/modals/FloorDownload";
+import NearByCarousel from "@/app/components/project/NearByCarousel";
 
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
@@ -108,20 +107,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         <Reviews projName={data.projectName} />
         <DownloadBroucher url={data?.media?.projBroucherUrl} />
         <FaqWithBg data={data.faqs} projName={data.projectName} />
-        {/* <div className="flex flex-col justify-start items-start w-[90%]">
-          <ProjectCarousel
-            type="proj"
-            title="nEAR BY pROJECTS OF"
-            projName={data.projectName}
-            content="See what other customers also viewed"
-          />
-
-          <ProjectCarousel
-            type="prop"
-            title="Projects By Developers"
-            content="See what developers has posted"
-          />
-        </div> */}
+        <NearByCarousel />
         <ProjectDrawer projName={data.projectName} />
       </div>
     </div>
