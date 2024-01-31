@@ -42,7 +42,7 @@ export default function Banner({ projName }: { projName: string }) {
   };
 
   return (
-    <div className="bg-[#f0f9ff] w-[90%] px-8 py-12 mx-auto mb-[5%] flex flex-col md:flex-row justify-between items-center">
+    <div className="bg-[#f0f9ff] scroll-mt-[90px] w-[90%] px-8 py-12 mx-auto mb-[5%] flex flex-col md:flex-row justify-between items-center">
       <Toaster position="top-right" reverseOrder={false} />
       <div>
         <h2 className="text-[24px] lg:text-[32px] font-bold text-[#003366] mb-2">

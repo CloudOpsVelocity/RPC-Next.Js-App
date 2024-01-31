@@ -10,7 +10,7 @@ export default function Feature({
 }) {
   return (
     <>
-      <div className="w-[90%] mb-[5%]" id="highlights">
+      <div className="w-[90%] scroll-mt-[90px] mb-[5%]" id="highlights">
         <h2 className="text-[24px] lg:text-[32px] font-semibold">
           HIGHLIGHTS OF <span className="text-green-500">{projName}</span>
         </h2>

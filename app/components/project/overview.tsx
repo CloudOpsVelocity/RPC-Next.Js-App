@@ -34,7 +34,7 @@ export default function Overview({
 }: Main) {
   return (
     <div
-      className="pt-[2%] w-[90%] rounded-[24px] shadow-md mb-[5%] mt-[2%] bg-gradient-to-r from-[#F6F6F6] /0 via-[#FFF] /45 to-[#FEFFFF]/100 "
+      className="pt-[2%] scroll-mt-[90px] w-[90%] rounded-[24px] shadow-md mb-[5%] mt-[2%] bg-gradient-to-r from-[#F6F6F6] /0 via-[#FFF] /45 to-[#FEFFFF]/100 "
       id="overview"
     >
       <div className="pl-[2%] pr-[2%] flex justify-between items-center ">

@@ -146,7 +146,7 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
   };
 
   return (
-    <div className="w-[90%] mx-auto mt-[5%] mb-[5%] " id="nearBy">
+    <div className="w-[90%] scroll-mt-[90px] mx-auto mt-[5%] mb-[5%] " id="nearBy">
       <h2 className="text-[24px] lg:text-[32px] font-semibold">
         <span className="!text-green-600">{projName} </span>
         <span className="">Near BY LOCATIONS</span>

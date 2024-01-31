@@ -12,9 +12,15 @@ export default function Navigation() {
   const scrollToTopic = (id: string): void => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      element.scrollIntoView({ behavior: "smooth", block: "start", inline :"center" });
       setCurrentBlock(id);
     }
+
+    // var scrolledY = window.scrollY;
+
+    // if(scrolledY){
+    //   window.scroll(0, scrolledY - 300);
+    // }
   };
 
   const handleArrowClick = (side: "R" | "L"): void => {

@@ -12,8 +12,7 @@ export default function Loans({
 }) {
   console.log(data);
   return (
-    <>
-      <div className="bg-white py-8 w-[90%] mx-auto">
+      <div className="bg-white scroll-mt-[90px] py-8 w-[90%] mx-auto">
         <div className="  px-4">
           <h2 className="text-[24px] lg:text-[32px] font-bold">
             BANK APPROVALS OF <span className="text-green-500">{projName}</span>
@@ -44,7 +43,6 @@ export default function Loans({
           </div>
         </div>
       </div>
-    </>
   );
 }
 
