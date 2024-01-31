@@ -12,7 +12,7 @@ import useRatings from "@/app/hooks/useRatings";
 import { useParams } from "next/navigation";
 
 export default function Reviews({ projName }: { projName: string }) {
-  const { data, isLoading } = useRatings();
+  const { data } = useRatings();
   return (
     data?.status && (
       <div id="ratings" className="bg-[#FFF] scroll-mt-[100px] py-12 w-full ">
@@ -34,6 +34,7 @@ export default function Reviews({ projName }: { projName: string }) {
               withIndicators
               height={250}
               slidesToScroll={1}
+              pl={80}
             >
               {data?.data?.map((eachData: any, i: number) => (
                 <Carousel.Slide key={i}>
