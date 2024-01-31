@@ -68,13 +68,15 @@ const RequestCallBackModal = ({
   close: any;
 }) => {
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
+  const isTab = useMediaQuery(`(max-width: ${em(1280)})`);
+
   return (
     <>
       <Modal
         opened={opened}
         onClose={close}
         centered
-        size={isMobile ? "90%" : "52%"}
+        size={isTab ? "70%" : ( isMobile ? "90%" : "52%" ) }
         className="!rounded-full w-[90%] md:w-[70%] lg:w-[60%] "
         classNames={{
           close: S.close,
@@ -84,7 +86,7 @@ const RequestCallBackModal = ({
         }}
       >
         <div className="bg-white rounded-lg w-full overflow-hidden flex ">
-          <div className="w-[50%] p-8">
+          <div className={`w-[100%] md:[50%] p-4 md:p-8`}>
             <h2 className="text-[24px] font-[600] text-[#202020] ">
               Request A Callback
             </h2>
@@ -282,6 +284,7 @@ const ReqForm = ({ close }: { close: any }) => {
           {...getInputProps("email")}
           placeholder="Enter your email here"
           type="email"
+          style={{marginTop: "-10px"}}
         />
       </div>
       <B
