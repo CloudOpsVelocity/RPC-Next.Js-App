@@ -6320,8 +6320,8 @@ export const StepperIcon = () => {
       fill="none"
     >
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M4.00763 12.0094C4.01519 9.62251 4.97065 7.33633 6.66381 5.65386C8.35697 3.97139 10.6492 3.03043 13.0361 3.03799C15.423 3.04555 17.7092 4.00101 19.3917 5.69417C21.0741 7.38734 22.0151 9.67951 22.0075 12.0665C22 14.4534 21.0445 16.7396 19.3514 18.422C17.6582 20.1045 15.366 21.0455 12.9791 21.0379C10.5921 21.0303 8.30597 20.0749 6.6235 18.3817C4.94103 16.6886 4.00007 14.3964 4.00763 12.0094ZM12.4818 15.8883L17.6839 9.42714L16.7503 8.67538L12.3144 14.1826L9.19306 11.5651L8.42215 12.4842L12.4818 15.8895L12.4818 15.8883Z"
         fill="#148B16"
       />
@@ -6583,8 +6583,8 @@ export const fourStarIcon = (
       d="M2.47635 6.67479L4.99588 7.37557C5.02595 7.38425 5.05334 7.40041 5.07547 7.42254C5.0976 7.44467 5.11377 7.47206 5.12244 7.50213L5.82322 10.0217C5.83414 10.0599 5.8572 10.0935 5.88891 10.1174C5.92063 10.1413 5.95928 10.1543 5.99901 10.1543C6.03873 10.1543 6.07738 10.1413 6.1091 10.1174C6.14082 10.0935 6.16387 10.0599 6.17479 10.0217L6.87557 7.50213C6.88425 7.47206 6.90041 7.44467 6.92254 7.42254C6.94467 7.40041 6.97206 7.38425 7.00213 7.37557L9.52166 6.67479C9.55986 6.66387 9.59347 6.64082 9.61739 6.6091C9.64132 6.57738 9.65426 6.53873 9.65426 6.49901C9.65426 6.45928 9.64132 6.42063 9.61739 6.38891C9.59347 6.3572 9.55986 6.33414 9.52166 6.32322L7.00213 5.62244C6.97206 5.61377 6.94467 5.5976 6.92254 5.57547C6.90041 5.55334 6.88425 5.52595 6.87557 5.49588L6.17479 2.97635C6.16387 2.93815 6.14082 2.90454 6.1091 2.88062C6.07738 2.85669 6.03873 2.84375 5.99901 2.84375C5.95928 2.84375 5.92063 2.85669 5.88891 2.88062C5.8572 2.90454 5.83414 2.93815 5.82322 2.97635L5.12244 5.49588C5.11377 5.52595 5.0976 5.55334 5.07547 5.57547C5.05334 5.5976 5.02595 5.61377 4.99588 5.62244L2.47635 6.32322C2.43815 6.33414 2.40454 6.3572 2.38062 6.38891C2.35669 6.42063 2.34375 6.45928 2.34375 6.49901C2.34375 6.53873 2.35669 6.57738 2.38062 6.6091C2.40454 6.64082 2.43815 6.66387 2.47635 6.67479Z"
       fill="url(#paint0_linear_1_3625)"
       stroke="#FCD34D"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
     <defs>
       <linearGradient
@@ -6595,9 +6595,9 @@ export const fourStarIcon = (
         y2="9.26229"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#FCD966" />
-        <stop offset="0.5" stop-color="#FCD966" />
-        <stop offset="1" stop-color="#FCCD34" />
+        <stop stopColor="#FCD966" />
+        <stop offset="0.5" stopColor="#FCD966" />
+        <stop offset="1" stopColor="#FCCD34" />
       </linearGradient>
     </defs>
   </svg>
@@ -6629,8 +6629,8 @@ export const lensSvg = (
     <path
       d="M14.4999 14.5537L11.6046 11.6583M11.6046 11.6583C12.0998 11.1631 12.4927 10.5751 12.7607 9.92802C13.0287 9.28094 13.1667 8.58739 13.1667 7.88699C13.1667 7.18659 13.0287 6.49305 12.7607 5.84596C12.4927 5.19887 12.0998 4.61092 11.6046 4.11566C11.1093 3.6204 10.5213 3.22754 9.87426 2.95951C9.22717 2.69147 8.53363 2.55352 7.83323 2.55352C7.13283 2.55352 6.43928 2.69147 5.7922 2.95951C5.14511 3.22754 4.55715 3.6204 4.06189 4.11566C3.06167 5.11588 2.49976 6.47247 2.49976 7.88699C2.49976 9.30152 3.06167 10.6581 4.06189 11.6583C5.06211 12.6585 6.4187 13.2205 7.83323 13.2205C9.24775 13.2205 10.6043 12.6585 11.6046 11.6583Z"
       stroke="#98A5B8"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 );
@@ -6665,16 +6665,16 @@ export const postDetailsIcon = (
     <path
       d="M22.5713 2H31.7141V11.1429"
       stroke="white"
-      stroke-width="2.6"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
     <path
       d="M31.7143 2L18.8 14.9143C18.5864 15.1237 18.2991 15.241 18 15.241C17.7009 15.241 17.4136 15.1237 17.2 14.9143L11.9429 9.65714C11.7292 9.44774 11.442 9.33045 11.1429 9.33045C10.8437 9.33045 10.5565 9.44774 10.3429 9.65714L2 18"
       stroke="white"
-      stroke-width="2.6"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 );
@@ -6738,8 +6738,8 @@ export const quotesIcon = (
         y2="34.6557"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#A8C7FF" />
-        <stop offset="1" stop-color="#D8EDFC" />
+        <stop stopColor="#A8C7FF" />
+        <stop offset="1" stopColor="#D8EDFC" />
       </linearGradient>
     </defs>
   </svg>
@@ -6758,55 +6758,55 @@ export const amenitiesGroupList = new Map([
       <path
         d="M17.5484 7.71585L19.3009 5.15234L24.9963 12.9054V25.0195H14.2383V17.0394"
         stroke="#545353"
-        stroke-miterlimit="10"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M16.3047 17.332H18.7873V25.0225H16.3047V17.332Z"
         stroke="#545353"
-        stroke-miterlimit="10"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M20.8555 17.332H23.3381V20.5364H20.8555V17.332Z"
         stroke="#545353"
-        stroke-miterlimit="10"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M16.5117 5.15234H17.753V7.07497"
         stroke="#545353"
-        stroke-miterlimit="10"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M7.82276 25.0225V20.4255L5.75391 17.332"
         stroke="#545353"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M8.04297 20.3584L9.21981 18.4609"
         stroke="#545353"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M15.4844 8.57655C15.4844 6.45378 14.0591 4.72969 12.301 4.72969C12.1541 4.73155 12.0074 4.74571 11.8615 4.77212C11.1169 2.5577 9.50028 1.01953 7.62036 1.01953C5.03521 1.01953 2.93971 3.9218 2.93971 7.50161C2.94021 7.73822 2.94993 7.97458 2.96884 8.20933C1.81331 8.78625 1 10.1601 1 11.7645C1 13.8872 2.42527 15.6113 4.18338 15.6113C4.85166 15.6202 5.50976 15.3536 6.09239 14.8378C6.8445 15.7841 8.04803 16.4006 9.40892 16.4006C11.689 16.4006 13.5374 14.6782 13.5374 12.5537C13.537 12.4133 13.5285 12.2732 13.512 12.1351C14.6692 11.5573 15.4844 10.1826 15.4844 8.57655Z"
         stroke="#148B16"
-        stroke-miterlimit="10"
-        stroke-linecap="round"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
       />
       <path
         d="M24.7907 13.4883H16.1016"
         stroke="#545353"
-        stroke-miterlimit="10"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>,
   ],
@@ -6822,68 +6822,68 @@ export const amenitiesGroupList = new Map([
       <path
         d="M7.05089 11.0585C9.09609 13.3871 8.48796 16.9978 8.48796 16.9978C8.48796 16.9978 4.56357 16.8324 2.51786 14.5038C0.47216 12.1751 1.0808 8.56445 1.0808 8.56445C1.0808 8.56445 5.0057 8.73174 7.05089 11.0585Z"
         stroke="#148B16"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M12.7785 15.1387C11.0171 16.8296 8.84592 20.0219 9.79218 25.0209"
         stroke="#545353"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M17.9041 7.77173C17.9041 7.77173 19.4564 5.9049 17.8672 4.19727"
         stroke="#148B16"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M19.6482 9.03711C19.6482 9.82683 18.9601 10.4669 18.1112 10.4669C17.2623 10.4669 16.5742 9.82683 16.5742 9.03711"
         stroke="#148B16"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M16.5838 9.033C15.7349 9.033 15.0469 8.39293 15.0469 7.60321C15.0469 6.93455 15.5402 6.37312 16.2068 6.2168"
         stroke="#148B16"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M11.6376 5.89594C10.7236 4.83838 11.2585 3.06831 12.8329 1.94211C14.4067 0.816398 16.4243 0.761589 17.3382 1.81915"
         stroke="#545353"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M11.6376 5.89594C10.7236 4.83838 11.2585 3.06831 12.8329 1.94211C14.4067 0.816398 16.4243 0.761589 17.3382 1.81915"
         stroke="#545353"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M14.0164 12.2515C12.6459 12.7171 11.0157 11.6767 10.3753 9.92856C9.73492 8.17993 10.3272 6.38555 11.6976 5.91992"
         stroke="#545353"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M17.3906 1.87012C18.2247 0.756319 20.2012 0.736302 21.8053 1.82532C23.4089 2.91386 24.0329 4.69919 23.1988 5.81251"
         stroke="#545353"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M23.2719 5.79492C24.6797 6.15094 25.3647 7.87573 24.8022 9.64724C24.2391 11.4183 22.6422 12.5654 21.2344 12.2094"
         stroke="#545353"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M21.2207 12.2012C21.2709 13.5576 19.7021 14.6761 17.7169 14.6995C15.7316 14.7228 14.0815 13.6424 14.0312 12.286"
         stroke="#545353"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M20.3795 7.6153C20.6625 7.6153 20.8918 7.40192 20.8918 7.1387C20.8918 6.87549 20.6625 6.66211 20.3795 6.66211C20.0966 6.66211 19.8672 6.87549 19.8672 7.1387C19.8672 7.40192 20.0966 7.6153 20.3795 7.6153Z"
@@ -6907,44 +6907,44 @@ export const amenitiesGroupList = new Map([
       <path
         d="M13.9688 9.99023C15.1054 13.394 15.9717 18.3328 15.3458 25.021"
         stroke="#545353"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M12.214 7.94069C11.1349 5.81537 8.30881 5.20259 5.90175 6.57199C3.49469 7.94139 2.41815 10.7744 3.49722 12.8997C4.34549 11.9466 5.30638 11.1033 6.34724 10.3883"
         stroke="#148B16"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M21.6844 3.33839C20.7174 1.15311 17.9273 0.376341 15.4523 1.60341C13.8842 2.38083 12.819 3.77615 12.4947 5.25008C12.3071 6.1025 12.3675 6.98124 12.7218 7.782"
         stroke="#148B16"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M12.7056 7.90663C11.6101 7.46985 10.3875 7.82696 9.46342 8.72287C8.97939 9.19211 8.57721 9.80923 8.3181 10.5375C7.56432 12.656 8.30658 14.9129 9.97593 15.5784C10.076 12.8066 11.0533 10.0596 12.7056 7.90663Z"
         stroke="#148B16"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M24.1386 11.1945C24.8407 8.37196 22.8184 5.36163 19.6217 4.47069C19.1264 4.33264 18.6319 4.25357 18.1472 4.22903C15.5046 4.09524 13.1557 5.58301 12.5625 7.9681C16.6045 7.69135 20.7494 8.84659 24.1386 11.1945Z"
         stroke="#148B16"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M11.2595 3.33084C11.2183 3.2887 11.1763 3.24691 11.1335 3.20557C10.302 2.40054 9.18511 1.74497 7.91089 1.41186C4.70172 0.572823 1.58691 2.37511 1 5.22692C2.07309 5.10428 3.15762 5.08291 4.23717 5.159"
         stroke="#148B16"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M21.6779 3.33726L21.0078 3.27539"
         stroke="#148B16"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>,
   ],
@@ -6960,68 +6960,68 @@ export const amenitiesGroupList = new Map([
       <path
         d="M25 25.0211H1V19.0488C4.77179 21.011 8.8618 22.0288 13 22.0349C17.1384 22.0304 21.2287 21.0126 25 19.0488V25.0211Z"
         stroke="#148B16"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M10.125 9.31048C11.9567 10.0645 13.9614 10.0423 15.7803 9.24805"
         stroke="#148B16"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M5.26172 12.7051C6.913 13.3711 8.35137 14.5961 9.38859 16.2199C10.4258 17.8436 11.0136 19.7904 11.075 21.8056"
         stroke="black"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M20.7351 12.5332C19.0838 13.1992 17.6455 14.4242 16.6082 16.048C15.571 17.6717 14.9833 19.6186 14.9219 21.6337"
         stroke="black"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M10.125 9.31836C10.5356 9.75286 10.8811 10.2625 11.1475 10.8268C11.5659 11.7243 11.7772 12.7307 11.761 13.7495"
         stroke="#148B16"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M15.7462 9.31836C15.3356 9.75287 14.9902 10.2626 14.7237 10.8268C14.3053 11.7244 14.0941 12.7308 14.1102 13.7495"
         stroke="#148B16"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M20.0547 11.3442V9.70673C20.0568 9.22476 20.2243 8.76335 20.5207 8.42339C20.8172 8.08343 21.2183 7.89258 21.6365 7.89258C22.0547 7.89258 22.4558 8.08343 22.7523 8.42339C23.0487 8.76335 23.2163 9.22476 23.2183 9.70673V18.0738"
         stroke="black"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M14.2266 7.2897V2.84345C14.2286 2.36148 14.3962 1.90007 14.6926 1.56011C14.989 1.22014 15.3902 1.0293 15.8084 1.0293C16.2266 1.0293 16.6277 1.22014 16.9241 1.56011C17.2206 1.90007 17.3881 2.36148 17.3902 2.84345V11.2104"
         stroke="black"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M5.81595 11.3454V9.70789C5.81595 9.22436 5.64929 8.76065 5.35265 8.41875C5.056 8.07684 4.65367 7.88477 4.23415 7.88477C3.81463 7.88477 3.41229 8.07684 3.11564 8.41875C2.819 8.76065 2.65234 9.22436 2.65234 9.70789V18.0749"
         stroke="black"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M11.648 7.29086V2.84461C11.648 2.36108 11.4813 1.89737 11.1847 1.55546C10.888 1.21356 10.4857 1.02148 10.0662 1.02148C9.64666 1.02148 9.24432 1.21356 8.94767 1.55546C8.65103 1.89737 8.48438 2.36108 8.48438 2.84461V11.2116"
         stroke="black"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M5.26172 12.7038C7.7947 13.7455 10.4695 14.254 13.1585 14.2051C15.7499 14.1565 18.3143 13.5908 20.7381 12.5332"
         stroke="black"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>,
   ],
@@ -7037,32 +7037,32 @@ export const amenitiesGroupList = new Map([
       <path
         d="M1.875 17.2227V25.0227H7.875"
         stroke="#148B16"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M6.07812 19.0215H17.4781"
         stroke="#148B16"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M7.27734 13.0215L16.8773 25.0215"
         stroke="#148B16"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M20.4797 10.6215C23.1307 10.6215 25.2797 8.47245 25.2797 5.82148C25.2797 3.17052 23.1307 1.02148 20.4797 1.02148C17.8287 1.02148 15.6797 3.17052 15.6797 5.82148C15.6797 8.47245 17.8287 10.6215 20.4797 10.6215Z"
         stroke="#545353"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M1.27734 13.0215H13.0031L22.8773 25.0215H10.5347L1.27734 13.0215Z"
         stroke="#545353"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>,
   ],
@@ -7078,50 +7078,50 @@ export const amenitiesGroupList = new Map([
       <path
         d="M17.6041 7.37607C18.1146 7.37607 18.5284 6.95216 18.5284 6.42925C18.5284 5.90633 18.1146 5.48242 17.6041 5.48242C17.0935 5.48242 16.6797 5.90633 16.6797 6.42925C16.6797 6.95216 17.0935 7.37607 17.6041 7.37607Z"
         stroke="#148B16"
-        stroke-miterlimit="10"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M20.2369 9.68857C20.7474 9.68857 21.1612 9.26466 21.1612 8.74175C21.1612 8.21883 20.7474 7.79492 20.2369 7.79492C19.7264 7.79492 19.3125 8.21883 19.3125 8.74175C19.3125 9.26466 19.7264 9.68857 20.2369 9.68857Z"
         stroke="#148B16"
-        stroke-miterlimit="10"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M23.3306 7.37607C23.8411 7.37607 24.255 6.95216 24.255 6.42925C24.255 5.90633 23.8411 5.48242 23.3306 5.48242C22.8201 5.48242 22.4062 5.90633 22.4062 6.42925C22.4062 6.95216 22.8201 7.37607 23.3306 7.37607Z"
         stroke="#148B16"
-        stroke-miterlimit="10"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M25.2753 1.02148H24.1719L24.2419 6.4289"
         stroke="#148B16"
-        stroke-miterlimit="10"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M22.1972 3.33398H21.0938L21.1637 8.7414"
         stroke="#148B16"
-        stroke-miterlimit="10"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M19.5722 1.02148H18.4688L18.5387 6.4289"
         stroke="#148B16"
-        stroke-miterlimit="10"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M8.39104 25.0218V16.6348M1.99404 24.8818H17.7614M14.9219 7.32316C14.9219 4.45245 12.6479 2.12305 9.84542 2.12305C7.04298 2.12305 4.76896 4.45245 4.76896 7.32316C4.76896 7.70024 4.81052 8.07125 4.88177 8.424M11.0618 14.9987V25.0218M8.39032 19.463C7.88565 19.6209 7.34535 19.7062 6.78723 19.7062C3.74729 19.7062 1.27734 17.1822 1.27734 14.062C1.27734 10.942 3.74136 8.41794 6.78723 8.41794M13.4482 6.79387C16.8681 7.74266 18.8809 11.3554 17.9546 14.8586C17.1115 18.0273 14.1547 20.0161 11.0673 19.6633M13.8994 14.9077C13.1157 15.7105 11.851 15.7105 11.0673 14.9077M9.23953 15.9295C8.21236 16.9817 6.5499 16.9817 5.52273 15.9295"
         stroke="#545353"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>,
   ],
@@ -7137,32 +7137,32 @@ export const amenitiesGroupList = new Map([
       <path
         d="M12.7847 1.3491C13.9559 2.30304 13.8945 3.98231 13.8945 3.98231C13.8945 3.98231 11.9341 4.11479 10.7627 3.16085C9.59129 2.20697 9.6529 0.527649 9.6529 0.527649C9.6529 0.527649 11.6137 0.396032 12.7847 1.3491Z"
         stroke="#148B16"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M6.16826 9.4471C8.24781 10.7703 8.5315 13.4517 8.5315 13.4517C8.5315 13.4517 5.44318 13.9874 3.36323 12.6642C1.28328 11.341 1 8.65952 1 8.65952C1 8.65952 4.08912 8.12517 6.16826 9.4471Z"
         stroke="#148B16"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M16.3207 22.2228C13.2155 23.0655 10.0352 21.2481 10.0352 21.2481C10.0352 21.2481 11.89 18.0643 14.9954 17.2212C18.1007 16.3781 21.2809 18.1958 21.2809 18.1958C21.2809 18.1958 19.424 21.3794 16.3207 22.2228Z"
         stroke="#148B16"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M21.0014 11.4822C18.5408 12.0856 16.0898 10.5983 16.0898 10.5983C16.0898 10.5983 17.6289 8.13266 20.0897 7.52893C22.5505 6.92521 25.0013 8.41286 25.0013 8.41286C25.0013 8.41286 23.4606 10.8783 21.0014 11.4822Z"
         stroke="#148B16"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M14.8408 5.7793C14.8408 8.52813 12.8962 11.5668 11.5538 13.3368C11.0059 14.0592 10.3833 14.7331 9.7336 15.3911C7.99949 17.1475 6.21615 20.1183 7.12364 24.5212"
         stroke="#686767"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>,
   ],
@@ -7178,77 +7178,77 @@ export const amenitiesGroupList = new Map([
       <path
         d="M20.4059 2.84397C21.0529 2.84397 21.5774 2.32406 21.5774 1.68272C21.5774 1.04139 21.0529 0.521484 20.4059 0.521484C19.7589 0.521484 19.2344 1.04139 19.2344 1.68272C19.2344 2.32406 19.7589 2.84397 20.4059 2.84397Z"
         stroke="#148B16"
-        stroke-miterlimit="10"
+        strokeMiterlimit="10"
       />
       <path
         d="M18.0777 12.1002L16.8875 23.7164C16.844 24.1401 17.1094 24.4867 17.4771 24.4867C17.8447 24.4867 18.2382 24.1507 18.3511 23.7398L20.4936 15.9536C20.6065 15.5427 20.9009 14.9213 21.1472 14.5727L22.006 13.3574C22.2524 13.0089 22.4369 12.3754 22.4164 11.9501L22.2242 8.0332"
         stroke="black"
-        stroke-miterlimit="10"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M22.0311 13.3145L22.7419 17.7757C22.8087 18.1964 23.0463 18.8383 23.269 19.2019L25.1528 22.2755C25.3755 22.6392 25.2947 23.1113 24.9725 23.3241C24.6502 23.5369 24.1781 23.4311 23.923 23.0882L21.8656 20.3261C21.6104 19.9833 21.2741 19.3785 21.1181 18.9819L20.2578 16.7936"
         stroke="black"
-        stroke-miterlimit="10"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M22.3429 10.0034L22.0958 5.92113C22.0443 5.07118 21.2991 4.35938 20.44 4.35938H20.4197C19.5605 4.35938 18.7795 5.06796 18.6834 5.91431L18.5 7.54505"
         stroke="black"
-        stroke-miterlimit="10"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M20.4865 6.29492L19.2883 8.78938C19.1037 9.17383 18.653 9.67015 18.2865 9.89206L15.3203 11.6899"
         stroke="black"
-        stroke-miterlimit="10"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M4.01562 20.6165L5.96815 18.6811C5.96815 18.6811 12.6067 16.3586 15.3159 11.6895"
         stroke="black"
-        stroke-miterlimit="10"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M14.5596 16.7461C15.3406 18.6815 12.9976 19.8427 11.8261 19.0686C11.5248 18.8697 10.3213 18.5598 9.09255 18.6815L5.84039 18.8085L5.1875 18.4154"
         stroke="#148B16"
-        stroke-miterlimit="10"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M9.48438 21.0043C9.48438 21.7784 9.97251 22.7465 9.97251 22.7465C9.97251 22.7465 10.122 23.2243 9.87488 23.7138C9.48438 24.488 10.6559 24.8751 11.0464 24.1009C11.4369 23.3267 11.3713 22.6826 11.4369 22.5526C11.5944 22.2404 12.2175 21.8106 12.2179 21.0043C12.2179 20.6172 12.2179 20.6172 12.2179 20.6172"
         stroke="#148B16"
-        stroke-miterlimit="10"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M9.48342 21.7793C8.6864 22.5538 7.67733 22.5535 6.35938 22.5535"
         stroke="#148B16"
-        stroke-miterlimit="10"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M4.40971 21.3926C4.01311 21.7521 3.6287 21.7797 3.23819 22.1667C2.84769 22.5538 2.84769 23.328 3.23819 23.7151"
         stroke="#148B16"
-        stroke-miterlimit="10"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M4.40706 17.1328L4.01655 17.907C4.01655 17.907 3.14022 18.023 2.84504 18.2941C2.6185 18.502 2.45453 19.4553 2.45453 19.4553C2.45453 19.4553 1.3307 20.0718 1.28301 20.2295C1.24642 20.3504 1.78794 21.0036 2.06403 21.0036C2.45453 21.0036 3.62605 20.6165 3.62605 20.6165C4.40706 20.6165 4.40706 21.7778 4.79756 22.1649C4.95775 22.3236 4.79756 23.3261 4.66713 23.6973C4.40171 24.4537 5.57857 24.8744 5.90426 24.036C6.02324 23.7287 6.35958 22.939 6.35958 22.1649"
         stroke="#148B16"
-        stroke-miterlimit="10"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>,
   ],
@@ -7265,20 +7265,20 @@ export const amenitiesGroupList = new Map([
       <path
         d="M5.5 12.5C5.5 13.0304 5.28929 13.5391 4.91421 13.9142C4.53914 14.2893 4.03043 14.5 3.5 14.5H2V10.5H3.5C4.03043 10.5 4.53914 10.7107 4.91421 11.0858C5.28929 11.4609 5.5 11.9696 5.5 12.5ZM18.5 12.5C18.5 13.0304 18.7107 13.5391 19.0858 13.9142C19.4609 14.2893 19.9696 14.5 20.5 14.5H22V10.5H20.5C19.9696 10.5 19.4609 10.7107 19.0858 11.0858C18.7107 11.4609 18.5 11.9696 18.5 12.5Z"
         stroke="#148B16"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M12 18.5H22V6.5H2V18.5H12ZM12 18.5V14.5M12 6.5V10.5"
         stroke="#545353"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M12 14.5C13.1046 14.5 14 13.6046 14 12.5C14 11.3954 13.1046 10.5 12 10.5C10.8954 10.5 10 11.3954 10 12.5C10 13.6046 10.8954 14.5 12 14.5Z"
         stroke="#148B16"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>,
   ],
@@ -7295,14 +7295,14 @@ export const amenitiesGroupList = new Map([
       <path
         d="M21 3H3C2.44772 3 2 3.44772 2 4V16C2 16.5523 2.44772 17 3 17H21C21.5523 17 22 16.5523 22 16V4C22 3.44772 21.5523 3 21 3Z"
         stroke="black"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M15.5 11.5V8H8.5V11.5M9 20H15M9 20L8 14M9 20L8.5 22M15 20L16 14M15 20L15.5 22M8.5 17H15.5M12 14V22M17 14H7"
         stroke="#148B16"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>,
   ],
@@ -7329,8 +7329,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12 2.52148) rotate(90.0037) scale(20.4219 20.6791)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -7347,20 +7347,20 @@ export const amenitiesGroupList = new Map([
       <path
         d="M12 22.0215C17.5228 22.0215 22 19.7829 22 17.0215C22 14.2601 17.5228 12.0215 12 12.0215C6.47715 12.0215 2 14.2601 2 17.0215C2 19.7829 6.47715 22.0215 12 22.0215Z"
         stroke="#148B16"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M16 18.0215C16.5523 18.0215 17 17.5738 17 17.0215C17 16.4692 16.5523 16.0215 16 16.0215C15.4477 16.0215 15 16.4692 15 17.0215C15 17.5738 15.4477 18.0215 16 18.0215Z"
         stroke="#148B16"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M6.5 17.0215V7.02148M6.5 7.02148V2.02148L12 4.52148L6.5 7.02148Z"
         stroke="#545353"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>,
   ],
@@ -7376,20 +7376,20 @@ export const amenitiesGroupList = new Map([
       <path
         d="M5.5 12.0215C5.5 12.5519 5.28929 13.0606 4.91421 13.4357C4.53914 13.8108 4.03043 14.0215 3.5 14.0215H2V10.0215H3.5C4.03043 10.0215 4.53914 10.2322 4.91421 10.6073C5.28929 10.9823 5.5 11.4911 5.5 12.0215ZM18.5 12.0215C18.5 12.5519 18.7107 13.0606 19.0858 13.4357C19.4609 13.8108 19.9696 14.0215 20.5 14.0215H22V10.0215H20.5C19.9696 10.0215 19.4609 10.2322 19.0858 10.6073C18.7107 10.9823 18.5 11.4911 18.5 12.0215Z"
         stroke="#148B16"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M12 18.0215H22V6.02148H2V18.0215H12ZM12 18.0215V14.0215M12 6.02148V10.0215"
         stroke="#545353"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M12 14.0215C13.1046 14.0215 14 13.1261 14 12.0215C14 10.9169 13.1046 10.0215 12 10.0215C10.8954 10.0215 10 10.9169 10 12.0215C10 13.1261 10.8954 14.0215 12 14.0215Z"
         stroke="#148B16"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>,
   ],
@@ -7415,8 +7415,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(2.00391 12.0215) scale(20 24.0562)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -7444,7 +7444,7 @@ export const amenitiesGroupList = new Map([
           gradientTransform="translate(11.9961 1.02148) rotate(90) scale(22 20)"
         >
           <stop />
-          <stop offset="1" stop-color="#148B16" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -7459,7 +7459,7 @@ export const amenitiesGroupList = new Map([
       viewBox="0 0 25 24"
       fill="none"
     >
-      <g clip-path="url(#clip0_421_47730)">
+      <g clipPath="url(#clip0_421_47730)">
         <path
           d="M18.3234 15.9705L18.7929 16.4408L18.4377 16.7966L17.8572 16.2165C17.7137 16.3074 17.5773 16.409 17.4492 16.5206L22.2732 21.3442C22.3861 21.2137 22.4877 21.0784 22.5774 20.9363L21.9965 20.3561L22.3531 20.0002L22.8234 20.4705C23.3645 19.2195 23.1267 17.7124 22.1041 16.6898C21.0815 15.6671 19.5744 15.4298 18.3234 15.9705ZM18.7929 17.1525L19.1491 16.7966L19.8605 17.5087L19.5054 17.865L18.7929 17.1525ZM19.8609 18.2205L20.2175 17.8654L20.9285 18.5767L20.5734 18.9323L19.8609 18.2205ZM21.6414 20.0002L20.9289 19.2885L21.2851 18.9326L21.9965 19.6444L21.6414 20.0002ZM16.7892 17.2845L17.3701 17.8654L17.0139 18.2205L16.5436 17.7502C16.0025 19.0016 16.2399 20.5091 17.2625 21.5314C18.2851 22.5536 19.7922 22.791 21.0436 22.2499L20.5737 21.78L20.9289 21.4237L21.5097 22.0042C21.6515 21.915 21.7872 21.813 21.9177 21.7001L17.093 16.8761C16.9805 17.0066 16.8792 17.1424 16.7892 17.2845ZM20.5734 21.0682L20.2175 21.4237L19.5057 20.7124L19.8609 20.3565L20.5734 21.0682ZM19.5057 20.0002L19.1495 20.3561L18.4381 19.6444L18.7932 19.2885L19.5057 20.0002ZM18.4377 18.9323L18.0811 19.2881L17.3701 18.5767L17.7252 18.2205L18.4377 18.9323ZM19.1262 9.50475C19.1262 9.315 19.0509 9.13275 18.9159 8.9985L18.1411 8.223C18.1374 8.19112 18.131 8.16 18.1306 8.12738C18.128 7.99495 18.1522 7.86337 18.2018 7.74054C18.2513 7.61771 18.3252 7.50617 18.419 7.41263L23.4687 2.36212L23.4279 2.21175C23.3376 1.87101 23.159 1.56015 22.91 1.31062C22.6606 1.06191 22.3502 0.883065 22.01 0.792L21.8589 0.75L16.8076 5.80162C16.5931 6.01612 16.2849 6.102 15.9871 6.069L15.2217 5.304C15.1553 5.23748 15.0764 5.1847 14.9896 5.14869C14.9028 5.11269 14.8097 5.09415 14.7157 5.09415C14.6217 5.09415 14.5286 5.11269 14.4417 5.14869C14.3549 5.1847 14.276 5.23748 14.2096 5.304L1.28036 18.2332C0.997611 18.516 0.763236 19.0583 1.25149 20.0363C1.51774 20.5688 1.96511 21.1628 2.51149 21.7091C2.87299 22.0702 4.13449 23.25 5.19086 23.25C5.59211 23.25 5.84524 23.0813 5.98699 22.9395L18.9159 10.0106C19.0509 9.87638 19.1262 9.6945 19.1262 9.50475ZM17.1875 6.18112L21.5967 1.77187C21.7801 1.85362 21.9534 1.96538 22.1045 2.11613C22.2552 2.26688 22.3662 2.44012 22.448 2.6235L18.0391 7.03275C17.8491 7.22273 17.7133 7.46004 17.6457 7.72013L17.6334 7.71525L16.5042 6.58575L16.4994 6.5745C16.7597 6.50705 16.9973 6.37124 17.1875 6.18112ZM1.91374 18.6124L14.7155 5.81025L16.4277 7.52175L5.34499 18.6049C5.08961 18.8603 4.52711 19.1194 4.16599 19.0931C3.64286 19.0541 1.91374 18.6124 1.91374 18.6124ZM5.60824 22.3065C5.60824 22.3065 5.16649 20.5777 5.12786 20.0531C5.10124 19.6931 5.36074 19.1299 5.61574 18.8749C8.38586 16.1033 16.6985 7.79175 16.6985 7.79175L18.4096 9.504L5.60824 22.3065Z"
           fill="url(#paint0_angular_421_47730)"
@@ -7474,8 +7474,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12.2187 12) rotate(90) scale(11.25 11.25)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
         <clipPath id="clip0_421_47730">
           <rect
@@ -7510,8 +7510,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12.001 12.5225) rotate(90) scale(11.3214 11.3214)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -7528,13 +7528,13 @@ export const amenitiesGroupList = new Map([
       <path
         d="M18.1875 14.0215C17.4829 14.0215 16.7941 14.2304 16.2083 14.6219C15.6224 15.0133 15.1658 15.5697 14.8962 16.2207C14.6265 16.8716 14.556 17.5879 14.6935 18.279C14.8309 18.9701 15.1702 19.6048 15.6684 20.1031C16.1667 20.6013 16.8014 20.9406 17.4925 21.078C18.1835 21.2155 18.8999 21.1449 19.5508 20.8753C20.2018 20.6057 20.7582 20.1491 21.1496 19.5632C21.5411 18.9774 21.75 18.2886 21.75 17.584C21.747 16.6401 21.3707 15.7357 20.7033 15.0682C20.0358 14.4007 19.1314 14.0245 18.1875 14.0215ZM5.8125 14.0215C5.10791 14.0215 4.41913 14.2304 3.83328 14.6219C3.24743 15.0133 2.79082 15.5697 2.52118 16.2207C2.25154 16.8716 2.18099 17.5879 2.31845 18.279C2.45591 18.9701 2.79521 19.6048 3.29343 20.1031C3.79166 20.6013 4.42643 20.9406 5.11749 21.078C5.80855 21.2155 6.52485 21.1449 7.17581 20.8753C7.82677 20.6057 8.38316 20.1491 8.77461 19.5632C9.16606 18.9774 9.375 18.2886 9.375 17.584C9.37203 16.6401 8.99575 15.7357 8.32829 15.0682C7.66084 14.4007 6.75642 14.0245 5.8125 14.0215Z"
         stroke="#148B16"
-        stroke-miterlimit="10"
+        strokeMiterlimit="10"
       />
       <path
         d="M12 17.3965V13.3652L9 11.3965L12.75 7.27148L14.625 10.6465H17.25"
         stroke="#545353"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M14.9992 6.89653C15.1968 6.89722 15.3925 6.85873 15.5751 6.7833C15.7578 6.70787 15.9236 6.59698 16.0631 6.45706C16.2026 6.31714 16.3129 6.15095 16.3878 5.96812C16.4627 5.78528 16.5005 5.58941 16.4992 5.39184C16.5014 5.19527 16.4644 5.00022 16.3903 4.81812C16.3162 4.63602 16.2066 4.47052 16.0678 4.33129C15.929 4.19206 15.7638 4.0819 15.582 4.00725C15.4001 3.9326 15.2052 3.89496 15.0086 3.89653C14.8116 3.89592 14.6164 3.9341 14.4342 4.00892C14.252 4.08373 14.0863 4.1937 13.9466 4.33256C13.6644 4.61298 13.5052 4.99402 13.5039 5.39184C13.5027 5.78967 13.6595 6.17169 13.9399 6.45388C14.2204 6.73606 14.6014 6.89529 14.9992 6.89653Z"
@@ -7560,8 +7560,8 @@ export const amenitiesGroupList = new Map([
         fill="#148B16"
       />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M11.2008 7.63193C11.2986 7.61709 11.3976 7.6112 11.4965 7.61431C11.5294 7.61595 11.5667 7.61841 11.6085 7.6225C12.5861 7.72409 13.311 8.45646 13.7942 9.17982L13.8201 9.21833C13.9418 9.40065 14.1068 9.55014 14.3003 9.65353C14.4938 9.75693 14.7098 9.81102 14.9293 9.81102H15.6923C15.7739 9.81102 15.8522 9.84339 15.9099 9.901C15.9676 9.95861 16 10.0368 16 10.1182C16 10.1997 15.9676 10.2778 15.9099 10.3355C15.8522 10.3931 15.7739 10.4254 15.6923 10.4254H14.9293C14.6085 10.4254 14.2927 10.3463 14.0099 10.1952C13.7271 10.0441 13.486 9.8256 13.3081 9.55912L13.2823 9.52062C13.173 9.35573 13.053 9.19823 12.9229 9.04916L12.15 10.0138C11.9749 10.2325 11.8571 10.38 11.778 10.5012C11.7012 10.6184 11.6795 10.6835 11.6733 10.733C11.6639 10.815 11.6742 10.8981 11.7033 10.9751C11.7213 11.0218 11.7587 11.08 11.8616 11.1746C11.9683 11.2729 12.1184 11.3868 12.3424 11.5555L12.3814 11.5854C12.6768 11.8091 12.8819 11.9639 13.0238 12.1704C13.1042 12.2879 13.1678 12.4161 13.2133 12.5513C13.2925 12.7889 13.2925 13.0453 13.2925 13.4155V14.2143C13.2925 14.2958 13.2601 14.3739 13.2024 14.4315C13.1447 14.4891 13.0664 14.5215 12.9848 14.5215C12.9032 14.5215 12.825 14.4891 12.7673 14.4315C12.7096 14.3739 12.6772 14.2958 12.6772 14.2143V13.4647C12.6772 13.0264 12.6731 12.8769 12.6296 12.7458C12.6025 12.6648 12.5643 12.5878 12.5159 12.5173C12.438 12.4034 12.3207 12.3104 11.9703 12.0454L11.9589 12.0368C11.7496 11.8787 11.5761 11.7472 11.4453 11.6268C11.3087 11.5011 11.1946 11.3667 11.1286 11.1943C11.0638 11.0247 11.041 10.842 11.0621 10.6618C11.0838 10.4783 11.1614 10.3198 11.2631 10.1645C11.3603 10.0162 11.4969 9.84584 11.6602 9.64145L12.4741 8.62604C12.1923 8.41181 11.8817 8.26927 11.5458 8.23445C11.5205 8.2318 11.4952 8.22989 11.4699 8.22872C11.4081 8.22729 11.3463 8.2314 11.2853 8.24101C10.8484 8.30163 10.4107 8.54412 9.45976 9.08357L8.87068 9.41739C8.83552 9.43804 8.7966 9.45151 8.75618 9.457C8.71576 9.46249 8.67465 9.4599 8.63525 9.44939C8.59584 9.43887 8.55892 9.42063 8.52663 9.39574C8.49435 9.37084 8.46735 9.33979 8.44719 9.30438C8.42704 9.26897 8.41414 9.22991 8.40925 9.18947C8.40435 9.14904 8.40756 9.10803 8.41868 9.06885C8.4298 9.02966 8.44861 8.99307 8.47402 8.96121C8.49944 8.92936 8.53094 8.90286 8.5667 8.88327L9.21814 8.51381C10.0874 8.02064 10.6326 7.71098 11.2012 7.63274"
         fill="#148B16"
       />
@@ -7583,21 +7583,21 @@ export const amenitiesGroupList = new Map([
       <path
         d="M14.5 5.02148C14.5 5.68453 14.2366 6.32041 13.7678 6.78925C13.2989 7.25809 12.663 7.52148 12 7.52148C11.337 7.52148 10.7011 7.25809 10.2322 6.78925C9.76339 6.32041 9.5 5.68453 9.5 5.02148C9.5 4.35844 9.76339 3.72256 10.2322 3.25372C10.7011 2.78488 11.337 2.52148 12 2.52148C12.663 2.52148 13.2989 2.78488 13.7678 3.25372C14.2366 3.72256 14.5 4.35844 14.5 5.02148Z"
         stroke="#545353"
-        stroke-width="1.5"
+        strokeWidth="1.5"
       />
       <path
         d="M3 17.5209L5.589 16.2129C5.71294 16.1499 5.81697 16.0537 5.88953 15.9351C5.96208 15.8164 6.00033 15.68 6 15.5409C6 12.6009 8.138 10.0869 11.007 9.60395C11.6644 9.494 12.3356 9.494 12.993 9.60395C15.863 10.0869 18 12.6009 18 15.5409C18 15.8249 18.16 16.0859 18.411 16.2129L21 17.5209"
         stroke="#148B16"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M9.5 16.5215L8.458 17.9105L8.395 17.9945C8.13178 18.327 7.76968 18.5672 7.361 18.6805L7.259 18.7065L5.774 19.0775C5.26697 19.2042 4.81691 19.4969 4.49544 19.909C4.17397 20.3211 3.99957 20.8289 4 21.3515C4 21.9975 4.524 22.5215 5.171 22.5215H6.727C7.327 22.5215 7.627 22.5215 7.917 22.4875C8.59725 22.4075 9.25383 22.1887 9.846 21.8445C10.099 21.6975 10.339 21.5175 10.818 21.1575L11 21.0215M11 21.0215L13 19.5215M11 21.0215L13.54 21.9735C14.15 22.2025 14.454 22.3165 14.769 22.3905C14.932 22.4285 15.097 22.4585 15.262 22.4805C15.583 22.5215 15.909 22.5215 16.56 22.5215H18.829C18.9828 22.5216 19.1351 22.4914 19.2773 22.4326C19.4194 22.3738 19.5486 22.2876 19.6573 22.1788C19.7661 22.07 19.8523 21.9409 19.9111 21.7988C19.9699 21.6566 20.0001 21.5043 20 21.3505C20.0002 20.828 19.8257 20.3205 19.5043 19.9086C19.1828 19.4968 18.7329 19.2042 18.226 19.0775L16.741 18.7075L16.639 18.6805C16.2303 18.5672 15.8682 18.327 15.605 17.9945L15.542 17.9105L14.5 16.5215"
         stroke="#545353"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>,
   ],
@@ -7623,8 +7623,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12 15.709) rotate(90) scale(8.0625 11.25)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -7651,8 +7651,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12 13.022) rotate(90) scale(8.5005 9)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -7679,8 +7679,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12 12.5215) rotate(90) scale(10)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -7707,8 +7707,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12.4219 12.5202) rotate(90) scale(11.0398 10.2656)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -7725,28 +7725,28 @@ export const amenitiesGroupList = new Map([
       <path
         d="M1.58984 14.1855C2.54318 14.1855 4.44984 15.1389 6.35618 15.1389C8.26251 15.1389 9.53351 14.1855 11.4402 14.1855C13.3468 14.1855 14.9355 15.1389 16.5242 15.1389C18.1128 15.1389 18.7485 14.1855 21.2908 14.1855M14.6175 16.7279C15.2342 16.926 15.8766 17.033 16.5242 17.0455C17.3825 17.0455 17.9862 16.7595 18.7488 16.5055M4.06818 16.6962C4.81223 16.9125 5.58149 17.0299 6.35618 17.0455C8.26284 17.0455 9.53351 16.0922 11.4402 16.0922M8.26251 18.9522C9.27918 18.6662 10.2325 18.2849 11.4402 18.2849C12.8382 18.2849 14.0775 18.7932 15.2535 19.0792"
         stroke="#148B16"
-        stroke-width="0.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M4.76583 6.27385C5.29234 6.27385 5.71917 5.84703 5.71917 5.32052C5.71917 4.79401 5.29234 4.36719 4.76583 4.36719C4.23932 4.36719 3.8125 4.79401 3.8125 5.32052C3.8125 5.84703 4.23932 6.27385 4.76583 6.27385Z"
         stroke="#545353"
-        stroke-width="0.5"
-        stroke-miterlimit="10"
+        strokeWidth="0.5"
+        strokeMiterlimit="10"
       />
       <path
         d="M11.1211 7.91016C11.6734 7.91016 12.1211 7.46244 12.1211 6.91016C12.1211 6.35787 11.6734 5.91016 11.1211 5.91016C10.5688 5.91016 10.1211 6.35787 10.1211 6.91016C10.1211 7.46244 10.5688 7.91016 11.1211 7.91016Z"
         stroke="#545353"
-        stroke-width="0.5"
-        stroke-miterlimit="10"
+        strokeWidth="0.5"
+        strokeMiterlimit="10"
       />
       <path
         d="M9.53217 14.1864V11.9624C9.53297 11.586 9.47942 11.2115 9.37317 10.8504C9.27783 10.5961 9.2145 10.3738 9.2145 10.3738M13.3452 11.6448L13.0275 14.1868M5.6875 5.60742L6.48183 7.86342C6.55932 8.04074 6.67272 8.20006 6.81489 8.33133C6.95707 8.4626 7.12491 8.56297 7.30783 8.62609L8.61083 8.94375C9.01536 9.05366 9.43098 9.11762 9.84983 9.13442L12.7098 9.35676C13.1131 9.41289 13.4898 9.59015 13.7902 9.86509L13.8535 9.92875C14.1341 10.2378 14.3599 10.5924 14.5212 10.9774L14.7752 11.6764C14.9022 11.9941 15.0928 12.5344 15.2202 12.8521L16.1415 14.9811"
         stroke="#545353"
-        stroke-width="0.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>,
   ],
@@ -7773,8 +7773,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12.0016 12.524) rotate(90) scale(8.40289 8.4)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -7791,14 +7791,14 @@ export const amenitiesGroupList = new Map([
       <path
         d="M14.9182 12.9927V6.59375M9.01469 12.9927V6.59375M20.4447 14.7143C17.9914 16.5007 15.0345 17.4629 11.9997 17.4622C8.96494 17.4632 6.00813 16.5014 3.55469 14.7153"
         stroke="#148B16"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M3.57422 6.59399V20.5905C3.57383 20.7452 3.60391 20.8984 3.66274 21.0415C3.72158 21.1846 3.80802 21.3147 3.91713 21.4243C4.02624 21.534 4.15588 21.6211 4.29865 21.6807C4.44142 21.7402 4.59453 21.7711 4.74922 21.7715H19.2397C19.3944 21.7718 19.5477 21.7417 19.6907 21.6828C19.8338 21.6239 19.9638 21.5374 20.0734 21.4282C20.183 21.3191 20.2701 21.1894 20.3296 21.0466C20.3891 20.9038 20.4199 20.7507 20.4202 20.596V6.59399M3.57422 6.59399H20.4202M3.57422 6.59399V4.45249C3.57383 4.29775 3.60392 4.14445 3.66279 4.00134C3.72166 3.85824 3.80814 3.72813 3.91731 3.61846C4.02647 3.50879 4.15617 3.4217 4.299 3.36216C4.44182 3.30263 4.59498 3.27181 4.74972 3.27149H19.2397C19.3944 3.27116 19.5477 3.3013 19.6907 3.3602C19.8338 3.4191 19.9638 3.50559 20.0734 3.61475C20.183 3.7239 20.2701 3.85358 20.3296 3.99638C20.3891 4.13917 20.4199 4.29229 20.4202 4.44699V6.59399"
         stroke="#545353"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>,
   ],
@@ -7824,8 +7824,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12.0001 12.022) rotate(90) scale(9.5005 10.4845)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -7852,8 +7852,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12.2188 12) rotate(90) scale(9 10)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -7880,8 +7880,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12.0001 12.022) rotate(90) scale(9.5005 10.4845)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -7908,8 +7908,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(11.9998 12.5179) rotate(90) scale(10.0042 6.99979)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -7923,7 +7923,7 @@ export const amenitiesGroupList = new Map([
       viewBox="0 0 24 25"
       fill="none"
     >
-      <g clip-path="url(#clip0_413_24804)">
+      <g clipPath="url(#clip0_413_24804)">
         <path
           d="M18 3.52148V5.52148H20M1 20.0215H8M7.5 14.5215V7.02148H6.328C5.66203 7.02149 5.015 7.24309 4.48886 7.65137C3.96272 8.05964 3.58738 8.63138 3.422 9.27648L1.5 16.7715V17.0215H10.5V18.5215C10.5 20.0215 10.5 21.0215 11.25 22.5215C11.25 22.5215 12 24.0215 13 24.0215M18 10.0215C16.8065 10.0215 15.6619 9.54738 14.818 8.70346C13.9741 7.85955 13.5 6.71496 13.5 5.52148C13.5 4.32801 13.9741 3.18342 14.818 2.3395C15.6619 1.49559 16.8065 1.02148 18 1.02148C19.1935 1.02148 20.3381 1.49559 21.182 2.3395C22.0259 3.18342 22.5 4.32801 22.5 5.52148C22.5 6.71496 22.0259 7.85955 21.182 8.70346C20.3381 9.54738 19.1935 10.0215 18 10.0215ZM7.35 5.02148C7.35 5.02148 5.75 4.02148 5.75 2.77148C5.75 2.54193 5.79521 2.31463 5.88306 2.10255C5.9709 1.89048 6.09966 1.69778 6.26198 1.53546C6.42429 1.37314 6.61699 1.24439 6.82907 1.15654C7.04115 1.0687 7.26845 1.02348 7.498 1.02348C7.72755 1.02348 7.95485 1.0687 8.16693 1.15654C8.37901 1.24439 8.57171 1.37314 8.73402 1.53546C8.89634 1.69778 9.0251 1.89048 9.11294 2.10255C9.20079 2.31463 9.246 2.54193 9.246 2.77148C9.246 4.02148 7.65 5.02148 7.65 5.02148H7.35Z"
           stroke="url(#paint0_angular_413_24804)"
@@ -7938,8 +7938,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(11.75 12.5215) rotate(90) scale(11.5 10.75)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
         <clipPath id="clip0_413_24804">
           <rect
@@ -7971,8 +7971,8 @@ export const amenitiesGroupList = new Map([
         fill="#148B16"
       />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M11.2008 7.63193C11.2986 7.61709 11.3976 7.6112 11.4965 7.61431C11.5294 7.61595 11.5667 7.61841 11.6085 7.6225C12.5861 7.72409 13.311 8.45646 13.7942 9.17982L13.8201 9.21833C13.9418 9.40065 14.1068 9.55014 14.3003 9.65353C14.4938 9.75693 14.7098 9.81102 14.9293 9.81102H15.6923C15.7739 9.81102 15.8522 9.84339 15.9099 9.901C15.9676 9.95861 16 10.0368 16 10.1182C16 10.1997 15.9676 10.2778 15.9099 10.3355C15.8522 10.3931 15.7739 10.4254 15.6923 10.4254H14.9293C14.6085 10.4254 14.2927 10.3463 14.0099 10.1952C13.7271 10.0441 13.486 9.8256 13.3081 9.55912L13.2823 9.52062C13.173 9.35573 13.053 9.19823 12.9229 9.04916L12.15 10.0138C11.9749 10.2325 11.8571 10.38 11.778 10.5012C11.7012 10.6184 11.6795 10.6835 11.6733 10.733C11.6639 10.815 11.6742 10.8981 11.7033 10.9751C11.7213 11.0218 11.7587 11.08 11.8616 11.1746C11.9683 11.2729 12.1184 11.3868 12.3424 11.5555L12.3814 11.5854C12.6768 11.8091 12.8819 11.9639 13.0238 12.1704C13.1042 12.2879 13.1678 12.4161 13.2133 12.5513C13.2925 12.7889 13.2925 13.0453 13.2925 13.4155V14.2143C13.2925 14.2958 13.2601 14.3739 13.2024 14.4315C13.1447 14.4891 13.0664 14.5215 12.9848 14.5215C12.9032 14.5215 12.825 14.4891 12.7673 14.4315C12.7096 14.3739 12.6772 14.2958 12.6772 14.2143V13.4647C12.6772 13.0264 12.6731 12.8769 12.6296 12.7458C12.6025 12.6648 12.5643 12.5878 12.5159 12.5173C12.438 12.4034 12.3207 12.3104 11.9703 12.0454L11.9589 12.0368C11.7496 11.8787 11.5761 11.7472 11.4453 11.6268C11.3087 11.5011 11.1946 11.3667 11.1286 11.1943C11.0638 11.0247 11.041 10.842 11.0621 10.6618C11.0838 10.4783 11.1614 10.3198 11.2631 10.1645C11.3603 10.0162 11.4969 9.84584 11.6602 9.64145L12.4741 8.62604C12.1923 8.41181 11.8817 8.26927 11.5458 8.23445C11.5205 8.2318 11.4952 8.22989 11.4699 8.22872C11.4081 8.22729 11.3463 8.2314 11.2853 8.24101C10.8484 8.30163 10.4107 8.54412 9.45976 9.08357L8.87068 9.41739C8.83552 9.43804 8.7966 9.45151 8.75618 9.457C8.71576 9.46249 8.67465 9.4599 8.63525 9.44939C8.59584 9.43887 8.55892 9.42063 8.52663 9.39574C8.49435 9.37084 8.46735 9.33979 8.44719 9.30438C8.42704 9.26897 8.41414 9.22991 8.40925 9.18947C8.40435 9.14904 8.40756 9.10803 8.41868 9.06885C8.4298 9.02966 8.44861 8.99307 8.47402 8.96121C8.49944 8.92936 8.53094 8.90286 8.5667 8.88327L9.21814 8.51381C10.0874 8.02064 10.6326 7.71098 11.2012 7.63274"
         fill="#148B16"
       />
@@ -8005,8 +8005,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12 12.5215) rotate(90) scale(9.375)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -8034,8 +8034,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12.0001 12.022) rotate(90) scale(9.5005 10.4845)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -8063,8 +8063,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(9.99609 20.5215) rotate(-66.1941) scale(18.5809 16.1573)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -8092,7 +8092,7 @@ export const amenitiesGroupList = new Map([
           gradientTransform="translate(12 4.02148) rotate(90.0101) scale(16.231 14.2436)"
         >
           <stop />
-          <stop offset="1" stop-color="#148B16" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -8109,8 +8109,8 @@ export const amenitiesGroupList = new Map([
       <path
         d="M11.9961 8.77148V2.27148H5.49609V8.77148M11.9961 8.77148H5.49609M11.9961 8.77148V15.2715M5.49609 8.77148V15.2715M11.9961 15.2715H5.49609M11.9961 15.2715V21.7715M11.9961 15.2715H18.4961V21.7715H11.9961M5.49609 15.2715V21.7715H11.9961"
         stroke="url(#paint0_angular_425_2045)"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <defs>
         <radialGradient
@@ -8121,8 +8121,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(8.49609 1.52148) rotate(80.1939) scale(20.5502 13.7002)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -8141,8 +8141,8 @@ export const amenitiesGroupList = new Map([
         fill="#148B16"
       />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M4.58128 9.08789C4.16734 9.08774 3.76111 9.22718 3.40576 9.49138C3.05041 9.75558 2.75924 10.1347 2.56319 10.5884C2.36713 11.042 2.27354 11.5534 2.29234 12.0679C2.31114 12.5825 2.44164 13.0812 2.66997 13.5108L1.64285 14.789H0V15.9293H1.37438V17.6396H2.29064V15.5952L3.31776 14.317C3.6806 14.6157 4.11491 14.789 4.58128 14.789H5.95566V17.0695H5.03941C4.5534 17.0695 4.08729 17.3098 3.74363 17.7374C3.39996 18.1651 3.2069 18.7451 3.2069 19.35C2.72088 19.35 2.25478 19.5902 1.91111 20.0179C1.56745 20.4456 1.37438 21.0256 1.37438 21.6304C1.37438 22.2352 1.56745 22.8153 1.91111 23.2429C2.25478 23.6706 2.72088 23.9109 3.2069 23.9109H11.4532C11.9392 23.9109 12.4053 23.6706 12.749 23.2429C13.0926 22.8153 13.2857 22.2352 13.2857 21.6304C13.2857 21.0256 13.0926 20.4456 12.749 20.0179C12.4053 19.5902 11.9392 19.35 11.4532 19.35C11.4532 18.7451 11.2601 18.1651 10.9165 17.7374C10.5728 17.3098 10.1067 17.0695 9.62069 17.0695V13.0787C9.62069 12.0203 9.28282 11.0052 8.68141 10.2568C8.08 9.50835 7.26431 9.08789 6.41379 9.08789H4.58128ZM3.2069 11.9385C3.2069 11.4849 3.3517 11.0498 3.60944 10.7291C3.86719 10.4083 4.21677 10.2281 4.58128 10.2281H6.41379C7.02131 10.2281 7.60394 10.5284 8.03352 11.063C8.4631 11.5976 8.70443 12.3227 8.70443 13.0787V17.6396L9.16256 18.2097H9.62069C9.8637 18.2097 10.0967 18.3299 10.2686 18.5437C10.4404 18.7575 10.5369 19.0476 10.5369 19.35V20.4902H11.4532C11.6962 20.4902 11.9293 20.6103 12.1011 20.8242C12.2729 21.038 12.3695 21.328 12.3695 21.6304C12.3695 21.9328 12.2729 22.2228 12.1011 22.4367C11.9293 22.6505 11.6962 22.7706 11.4532 22.7706H3.2069C2.96389 22.7706 2.73084 22.6505 2.55901 22.4367C2.38717 22.2228 2.29064 21.9328 2.29064 21.6304C2.29064 21.328 2.38717 21.038 2.55901 20.8242C2.73084 20.6103 2.96389 20.4902 3.2069 20.4902H4.12315V19.35C4.12315 19.0476 4.21969 18.7575 4.39152 18.5437C4.56335 18.3299 4.7964 18.2097 5.03941 18.2097H6.41379L6.87192 17.6396V14.2189L6.41379 13.6488H4.58128C4.21677 13.6488 3.86719 13.4686 3.60944 13.1479C3.3517 12.8271 3.2069 12.3921 3.2069 11.9385Z"
         fill="#148B16"
       />
@@ -8161,7 +8161,7 @@ export const amenitiesGroupList = new Map([
       viewBox="0 0 24 25"
       fill="none"
     >
-      <g clip-path="url(#clip0_425_15206)">
+      <g clipPath="url(#clip0_425_15206)">
         <path
           d="M4.95907 0.912109L6.16375 3.66836C6.19657 3.67305 6.25282 3.68055 6.34657 3.66836C6.56688 3.64164 6.89969 3.53711 7.21375 3.3932C7.52313 3.2493 7.82313 3.06414 8.00125 2.91039C8.07157 2.84805 8.10438 2.80398 8.12782 2.77164L7.31688 0.912109H4.95907ZM8.48875 3.60227C8.22625 3.8132 7.9075 4.00211 7.56532 4.15914C7.21844 4.31805 6.86219 4.44273 6.52469 4.49477L7.28875 6.25117L8.49813 6.31211L9.26688 5.38867L8.48875 3.60227ZM13.6497 4.46102C12.7356 4.44461 11.4559 4.73242 10.1059 5.1918L10.2513 5.5293L9.00907 7.01523L8.87313 7.17461L6.72625 7.0668L6.57157 6.71523C4.48657 7.8168 2.88672 9.08711 3.08266 9.94961C4.81375 15.8184 7.88407 21.0449 10.5888 23.3043L11.1278 22.6574C8.73719 20.6559 5.71375 15.6543 4.00235 10.0668L5.97157 9.20899C7.72469 14.8902 10.7059 19.9059 13.3403 22.1043L13.8794 21.4574C11.4841 19.4559 8.46063 14.459 6.745 8.87149L8.71844 8.00898C10.4716 13.6902 13.4528 18.7059 16.0919 20.9043L16.6263 20.2574C14.2356 18.2559 11.2075 13.259 9.49657 7.67148L11.47 6.80898C13.2231 12.4902 16.2044 17.5059 18.8388 19.7043L19.3778 19.0574C16.9872 17.0559 13.9591 12.059 12.2481 6.47149L14.2216 5.60898C15.9747 11.2855 18.9559 16.3105 21.5903 18.5043L22.1247 17.8574C19.6825 15.8137 16.5794 10.6434 14.8872 4.91523C14.6856 4.61102 14.245 4.47133 13.6497 4.46102Z"
           fill="url(#paint0_linear_425_15206)"
@@ -8176,9 +8176,9 @@ export const amenitiesGroupList = new Map([
           y2="21.5215"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#282828" />
-          <stop offset="0.40625" stop-color="#282828" />
-          <stop offset="0.989583" stop-color="#148B16" />
+          <stop stopColor="#282828" />
+          <stop offset="0.40625" stopColor="#282828" />
+          <stop offset="0.989583" stopColor="#148B16" />
         </linearGradient>
         <clipPath id="clip0_425_15206">
           <rect
@@ -8214,8 +8214,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(8.5 0.0214822) rotate(68.1986) scale(24.2332 30.2539)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -8232,9 +8232,9 @@ export const amenitiesGroupList = new Map([
       <path
         d="M4 20.0215H20M20 16.0215V6.02148C20 5.49105 19.7893 4.98234 19.4142 4.60727C19.0391 4.2322 18.5304 4.02148 18 4.02148H6C5.46957 4.02148 4.96086 4.2322 4.58579 4.60727C4.21071 4.98234 4 5.49105 4 6.02148V16.0215L8 10.0215C10.667 11.3545 13.333 11.3545 16 10.0215L20 16.0215Z"
         stroke="url(#paint0_angular_425_16994)"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <defs>
         <radialGradient
@@ -8245,8 +8245,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12 -3.97852) rotate(90) scale(24)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -8273,8 +8273,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(22 2.02148) rotate(140.194) scale(31.241 34.3651)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -8301,8 +8301,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(54 15.5215) rotate(-176.359) scale(55.1112 55.8157)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -8330,8 +8330,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12 -2.97656) rotate(90) scale(24.5)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -8348,26 +8348,26 @@ export const amenitiesGroupList = new Map([
       <path
         d="M5.5 12.5234C5.5 13.628 4.60457 14.5234 3.5 14.5234H2V10.5234H3.5C4.60457 10.5234 5.5 11.4189 5.5 12.5234Z"
         stroke="#148B16"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M18.5 12.5234C18.5 13.628 19.3954 14.5234 20.5 14.5234H22V10.5234H20.5C19.3954 10.5234 18.5 11.4189 18.5 12.5234Z"
         stroke="#148B16"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M12 18.5234H22V6.52344H2V18.5234H12ZM12 18.5234V14.5234M12 6.52344V10.5234"
         stroke="#545353"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M12 14.5234C13.1046 14.5234 14 13.628 14 12.5234C14 11.4189 13.1046 10.5234 12 10.5234C10.8954 10.5234 10 11.4189 10 12.5234C10 13.628 10.8954 14.5234 12 14.5234Z"
         stroke="#148B16"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>,
   ],
@@ -8420,8 +8420,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(22.5 -2.47852) rotate(111.038) scale(27.8568 25.714)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -8436,14 +8436,14 @@ export const amenitiesGroupList = new Map([
       fill="none"
     >
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M8.46962 13.5496C8.49451 13.3749 8.45471 13.1971 8.35769 13.0497C8.26067 12.9023 8.11313 12.7954 7.94282 12.7492C7.8618 12.7294 7.7775 12.7271 7.69551 12.7424C7.61353 12.7577 7.53573 12.7903 7.4673 12.8379C7.39886 12.8856 7.34135 12.9473 7.29858 13.0189C7.25581 13.0905 7.22875 13.1703 7.21922 13.2532V13.2568L7.21802 13.2616L7.21562 13.2736C7.20816 13.3294 7.20295 13.3854 7.20002 13.4416C7.19046 13.583 7.18886 13.7248 7.19522 13.8664C7.21082 14.206 7.27682 14.6836 7.50242 15.16C7.72682 15.634 8.05082 15.9856 8.30042 16.2112C8.44626 16.3426 8.60235 16.4622 8.76722 16.5688L8.77802 16.5748L8.78162 16.5772L8.78402 16.5784L9.06482 16L8.78522 16.5796C8.85544 16.6244 8.93439 16.6539 9.01684 16.6659C9.09929 16.6779 9.18335 16.6723 9.26346 16.6494C9.34356 16.6264 9.41788 16.5868 9.48149 16.5329C9.5451 16.4791 9.59655 16.4124 9.63242 16.3372C9.70493 16.1756 9.71566 15.9931 9.66258 15.8241C9.60951 15.6551 9.4963 15.5115 9.34442 15.4204L9.34802 15.4228L9.33842 15.4168C9.2482 15.3561 9.16238 15.2892 9.08162 15.2164C8.89297 15.0513 8.73811 14.8512 8.62562 14.6272C8.5234 14.3963 8.46715 14.1476 8.46002 13.8952C8.45504 13.7843 8.45785 13.6733 8.46842 13.5628L8.46962 13.5496Z"
         fill="#148B16"
       />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M15.9929 2.49219C16.6409 2.81619 16.3553 3.39339 16.0529 4.00059C15.7241 4.66539 15.3761 5.36619 16.2281 5.80539C17.7324 6.58194 18.9727 7.78715 19.7921 9.26861C20.6114 10.7501 20.9731 12.4412 20.8313 14.1282C20.6895 15.8152 20.0507 17.4223 18.9955 18.7462C17.9404 20.0702 16.5163 21.0514 14.9035 21.566C13.2906 22.0806 11.5614 22.1053 9.93447 21.6371C8.30755 21.1689 6.85601 20.2287 5.76342 18.9355C4.67083 17.6424 3.98625 16.0542 3.79626 14.372C3.60628 12.6897 3.91941 10.9889 4.69607 9.48459C5.98007 6.99699 9.61847 3.41379 15.3965 2.56899C15.5921 2.54019 15.7925 2.51499 15.9929 2.49219ZM14.7737 3.89499C9.86927 4.87419 6.82367 7.97859 5.76047 10.0354C5.09269 11.3288 4.82345 12.7911 4.98679 14.2375C5.15012 15.6839 5.7387 17.0494 6.67809 18.1613C7.61748 19.2732 8.8655 20.0816 10.2643 20.4842C11.6631 20.8868 13.1499 20.8656 14.5366 20.4232C15.9234 19.9808 17.1478 19.1371 18.0551 17.9988C18.9623 16.8606 19.5117 15.4788 19.6336 14.0283C19.7556 12.5779 19.4447 11.1238 18.7403 9.85001C18.0358 8.57622 16.9695 7.53993 15.6761 6.87219C15.3176 6.69588 15.0126 6.42702 14.7929 6.09339C14.5856 5.76604 14.4819 5.3838 14.4953 4.99659C14.5061 4.58259 14.6441 4.19019 14.7737 3.89499Z"
         fill="#545353"
       />
@@ -8471,8 +8471,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12 3.875) rotate(90) scale(19.5234 22.6472)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -8520,8 +8520,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(11.4961 0.523438) rotate(88.7692) scale(20.2367 13.5136)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -8548,8 +8548,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(9.49609 -5.47656) rotate(81.4692) scale(30.3356 25.9693)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -8567,20 +8567,20 @@ export const amenitiesGroupList = new Map([
       <path
         d="M4.69641 12.6973H11.5014C11.634 12.6973 11.7612 12.75 11.855 12.8437C11.9487 12.9375 12.0014 13.0647 12.0014 13.1973V15.6973H4.19141V13.1973C4.1914 13.1312 4.2045 13.0658 4.22994 13.0048C4.25538 12.9438 4.29266 12.8885 4.33962 12.842C4.38658 12.7955 4.44229 12.7587 4.50353 12.7339C4.56477 12.7091 4.63033 12.6966 4.69641 12.6973Z"
         stroke="#148B16"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M4.19021 13.202V8.16203C4.19021 7.97505 4.26449 7.79573 4.3967 7.66352C4.52891 7.53131 4.70823 7.45703 4.89521 7.45703H11.2952C11.4822 7.45703 11.6615 7.53131 11.7937 7.66352C11.9259 7.79573 12.0002 7.97505 12.0002 8.16203M12.0002 8.16203V13.202M12.0002 8.16203C12.0002 7.97505 12.0745 7.79573 12.2067 7.66352C12.3389 7.53131 12.5182 7.45703 12.7052 7.45703H19.1052C19.2922 7.45703 19.4715 7.53131 19.6037 7.66352C19.7359 7.79573 19.8102 7.97505 19.8102 8.16203V13.202M2.68021 10.307H3.76021C3.87425 10.307 3.98363 10.3523 4.06427 10.433C4.14491 10.5136 4.19021 10.623 4.19021 10.737V15.737H2.78521C2.71367 15.7371 2.64286 15.7227 2.57695 15.6949C2.51104 15.6671 2.45139 15.6263 2.4015 15.5751C2.35162 15.5238 2.31253 15.463 2.28655 15.3964C2.26056 15.3297 2.2482 15.2585 2.25021 15.187V10.737C2.25021 10.623 2.29551 10.5136 2.37615 10.433C2.4568 10.3523 2.56617 10.307 2.68021 10.307ZM21.2152 15.727H19.8102V10.727C19.8102 10.613 19.8555 10.5036 19.9362 10.423C20.0168 10.3423 20.1262 10.297 20.2402 10.297H21.3202C21.4343 10.297 21.5436 10.3423 21.6243 10.423C21.7049 10.5036 21.7502 10.613 21.7502 10.727V15.177C21.7502 15.3189 21.6938 15.455 21.5935 15.5553C21.4932 15.6557 21.3571 15.712 21.2152 15.712V15.727Z"
         stroke="#545353"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M12.5014 12.6973H19.3064C19.439 12.6973 19.5662 12.7499 19.66 12.8437C19.7537 12.9375 19.8064 13.0647 19.8064 13.1973V15.6973H12.0014V13.1973C12.0014 13.0647 12.0541 12.9375 12.1479 12.8437C12.2416 12.7499 12.3688 12.6973 12.5014 12.6973ZM4.19141 15.7273H5.72641V17.5923H4.19141V15.7273ZM18.2764 15.7273H19.8114V17.5923H18.2764V15.7273Z"
         stroke="#148B16"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>,
   ],
@@ -8607,8 +8607,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12.0012 12.1489) rotate(90) scale(9.352 9.13404)"
         >
-          <stop stop-color="#767676" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#767676" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -8628,8 +8628,8 @@ export const amenitiesGroupList = new Map([
         fill="#148B16"
       />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M1.43859 14.3691C1.22481 14.3691 1.0515 14.5758 1.0515 14.8307V20.8306H0.664424C0.450645 20.8306 0.277344 21.0372 0.277344 21.2921C0.277344 21.547 0.450645 21.7537 0.664424 21.7537H1.0515V24.0613C1.0515 24.3162 1.22481 24.5229 1.43859 24.5229C1.65236 24.5229 1.82567 24.3162 1.82567 24.0613V21.7537H9.56728V24.0613C9.56728 24.3162 9.74057 24.5229 9.95436 24.5229C10.1681 24.5229 10.3414 24.3162 10.3414 24.0613V21.7537H10.7285C10.9423 21.7537 11.1156 21.547 11.1156 21.2921C11.1156 21.0372 10.9423 20.8306 10.7285 20.8306H10.3414C10.3414 18.2889 10.3414 16.6468 10.3414 14.8307C10.3414 14.5758 10.1681 14.3691 9.95436 14.3691H1.43859ZM1.82567 20.8306H9.56728V19.9075H1.82567V20.8306ZM1.82567 17.5999H9.56728V16.6768H1.82567V17.5999Z"
         fill="#545353"
       />
@@ -8645,20 +8645,20 @@ export const amenitiesGroupList = new Map([
       fill="none"
     >
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M1.26562 22.3561C1.26562 21.4357 1.97247 20.6895 2.84441 20.6895H22.4213C23.2933 20.6895 24.0001 21.4357 24.0001 22.3561C24.0001 23.2766 23.2933 24.0228 22.4213 24.0228H2.84441C1.97247 24.0228 1.26562 23.2766 1.26562 22.3561ZM2.84441 22.0228C2.67002 22.0228 2.52865 22.1721 2.52865 22.3561C2.52865 22.5402 2.67002 22.6895 2.84441 22.6895H22.4213C22.5957 22.6895 22.7371 22.5402 22.7371 22.3561C22.7371 22.1721 22.5957 22.0228 22.4213 22.0228H2.84441Z"
         fill="#545353"
       />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M9.16497 5.73901L9.4083 4.62374C9.45029 4.43147 9.47271 4.23013 9.47271 4.02153C9.47271 2.54875 8.34173 1.35483 6.94665 1.35483C5.55158 1.35483 4.4206 2.54875 4.4206 4.02153C4.4206 4.23013 4.44302 4.43147 4.48501 4.62374L4.72834 5.73901L3.72098 6.16195C3.0188 6.45682 2.52606 7.18003 2.52606 8.02157C2.52606 8.22171 2.55351 8.41271 2.60383 8.59185L2.90426 9.66119L1.96026 10.1622C1.54412 10.3831 1.26303 10.8355 1.26303 11.3549C1.26303 12.0914 1.8285 12.6883 2.52606 12.6883H11.3673C12.0648 12.6883 12.6303 12.0914 12.6303 11.3549C12.6303 10.8355 12.3492 10.3831 11.933 10.1622L10.989 9.66119L11.2895 8.59185C11.3398 8.41271 11.3673 8.22171 11.3673 8.02157C11.3673 7.18003 10.8745 6.45682 10.1723 6.16195L9.16497 5.73901ZM12.5004 8.97092C13.3265 9.40939 13.8933 10.3123 13.8933 11.3549C13.8933 12.8277 12.7623 14.0216 11.3673 14.0216H2.52606C1.13095 14.0216 0 12.8277 0 11.3549C0 10.3123 0.566834 9.40939 1.39294 8.97092C1.30841 8.67005 1.26303 8.35144 1.26303 8.02157C1.26303 6.61556 2.08765 5.41281 3.25419 4.923C3.19097 4.63327 3.15757 4.33153 3.15757 4.02153C3.15757 1.81236 4.85401 0.0214844 6.94665 0.0214844C9.0393 0.0214844 10.7357 1.81236 10.7357 4.02153C10.7357 4.33153 10.7023 4.63327 10.6391 4.923C11.8057 5.41281 12.6303 6.61556 12.6303 8.02157C12.6303 8.35144 12.5849 8.67005 12.5004 8.97092Z"
         fill="#545353"
       />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M6.09766 20.8396V13.9004H7.50621V20.8396H6.09766Z"
         fill="#545353"
       />
@@ -8680,14 +8680,14 @@ export const amenitiesGroupList = new Map([
       <path
         d="M21 3H3C2.44772 3 2 3.44772 2 4V16C2 16.5523 2.44772 17 3 17H21C21.5523 17 22 16.5523 22 16V4C22 3.44772 21.5523 3 21 3Z"
         stroke="black"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M15.5 11.5V8H8.5V11.5M9 20H15M9 20L8 14M9 20L8.5 22M15 20L16 14M15 20L15.5 22M8.5 17H15.5M12 14V22M17 14H7"
         stroke="#148B16"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>,
   ],
@@ -8700,13 +8700,13 @@ export const amenitiesGroupList = new Map([
       viewBox="0 0 24 25"
       fill="none"
     >
-      <g clip-path="url(#clip0_425_1794)">
+      <g clipPath="url(#clip0_425_1794)">
         <path
           d="M0.855469 23.6646L5.99833 1.37891M11.9983 1.37891V4.80748M11.9983 10.8075V14.236M11.9983 20.236V23.6646M23.1412 23.6646L17.9983 1.37891"
           stroke="url(#paint0_angular_425_1794)"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </g>
       <defs>
@@ -8718,9 +8718,9 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(11.9983 0.521764) rotate(90) scale(23.1429)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="0.171875" stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="0.171875" stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
         <clipPath id="clip0_425_1794">
           <rect
@@ -8755,9 +8755,9 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(17.2251 4.76312) rotate(88.8493) scale(16.3392 20.6214)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="0.5" stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="0.5" stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -8785,8 +8785,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(11.9997 5.20898) rotate(90) scale(16.875 19.1244)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -8813,9 +8813,9 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12 -7.97851) rotate(90) scale(30.5 33.7586)"
         >
-          <stop stop-color="#148B16" />
+          <stop stopColor="#148B16" />
           <stop offset="0.826835" stop-opacity="0" />
-          <stop offset="1" stop-color="#545353" />
+          <stop offset="1" stopColor="#545353" />
         </radialGradient>
       </defs>
     </svg>,
@@ -8832,9 +8832,9 @@ export const amenitiesGroupList = new Map([
       <path
         d="M15 4.52344H5V18.5234C5 19.0539 5.21071 19.5626 5.58579 19.9377C5.96086 20.3127 6.46957 20.5234 7 20.5234H15M16 15.5234L19 12.5234M19 12.5234L16 9.52344M19 12.5234H9"
         stroke="url(#paint0_angular_425_3889)"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <defs>
         <radialGradient
@@ -8845,8 +8845,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12 12.5234) rotate(90) scale(8 7)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -8863,9 +8863,9 @@ export const amenitiesGroupList = new Map([
       <path
         d="M15 4.52344H5V18.5234C5 19.0539 5.21071 19.5626 5.58579 19.9377C5.96086 20.3127 6.46957 20.5234 7 20.5234H15M16 15.5234L19 12.5234M19 12.5234L16 9.52344M19 12.5234H9"
         stroke="url(#paint0_angular_425_3889)"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <defs>
         <radialGradient
@@ -8876,8 +8876,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12 12.5234) rotate(90) scale(8 7)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -8904,8 +8904,8 @@ export const amenitiesGroupList = new Map([
           y2="22.3555"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </linearGradient>
       </defs>
     </svg>,
@@ -8932,8 +8932,8 @@ export const amenitiesGroupList = new Map([
           y2="22.3555"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </linearGradient>
       </defs>
     </svg>,
@@ -8950,9 +8950,9 @@ export const amenitiesGroupList = new Map([
       <path
         d="M15 4.52344H5V18.5234C5 19.0539 5.21071 19.5626 5.58579 19.9377C5.96086 20.3127 6.46957 20.5234 7 20.5234H15M16 15.5234L19 12.5234M19 12.5234L16 9.52344M19 12.5234H9"
         stroke="url(#paint0_angular_425_5402)"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <defs>
         <radialGradient
@@ -8963,8 +8963,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12 12.5234) rotate(90) scale(8 7)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -8991,8 +8991,8 @@ export const amenitiesGroupList = new Map([
           y2="22.5215"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </linearGradient>
       </defs>
     </svg>,
@@ -9009,7 +9009,7 @@ export const amenitiesGroupList = new Map([
       <path
         d="M9.73047 14.4785H9.48047V14.7285V20.5919V20.8419H9.73047H13.2759H13.5259V20.5919V14.7285V14.4785H13.2759H9.73047Z"
         stroke="#282828"
-        stroke-width="0.5"
+        strokeWidth="0.5"
       />
       <path d="M5 20.5918H18V21.569H5V20.5918Z" fill="#282828" />
       <path
@@ -9030,14 +9030,14 @@ export const amenitiesGroupList = new Map([
       <path
         d="M3 4.02148C3 3.75627 3.10536 3.50191 3.29289 3.31438C3.48043 3.12684 3.73478 3.02148 4 3.02148H20C20.2652 3.02148 20.5196 3.12684 20.7071 3.31438C20.8946 3.50191 21 3.75627 21 4.02148V6.02148C21 6.2867 20.8946 6.54105 20.7071 6.72859C20.5196 6.91613 20.2652 7.02148 20 7.02148H4C3.73478 7.02148 3.48043 6.91613 3.29289 6.72859C3.10536 6.54105 3 6.2867 3 6.02148V4.02148ZM8 14.0215C8 15.0824 8.42143 16.0998 9.17157 16.8499C9.92172 17.6001 10.9391 18.0215 12 18.0215C13.0609 18.0215 14.0783 17.6001 14.8284 16.8499C15.5786 16.0998 16 15.0824 16 14.0215C16 12.9606 15.5786 11.9432 14.8284 11.1931C14.0783 10.4429 13.0609 10.0215 12 10.0215C10.9391 10.0215 9.92172 10.4429 9.17157 11.1931C8.42143 11.9432 8 12.9606 8 14.0215Z"
         stroke="#148B16"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M19 7.02148V14.0215C19 15.878 18.2625 17.6585 16.9497 18.9712C15.637 20.284 13.8565 21.0215 12 21.0215C10.1435 21.0215 8.36301 20.284 7.05025 18.9712C5.7375 17.6585 5 15.878 5 14.0215V7.02148M12 14.0215H12.01"
         stroke="#282828"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>,
   ],
@@ -9051,16 +9051,16 @@ export const amenitiesGroupList = new Map([
       viewBox="0 0 24 25"
       fill="none"
     >
-      <g clip-path="url(#clip0_425_13115)">
+      <g clipPath="url(#clip0_425_13115)">
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M16.613 10.6361H13.0933L15.1914 5.74104C15.2215 5.67081 15.2337 5.5942 15.2269 5.51809C15.2201 5.44198 15.1945 5.36874 15.1524 5.30497C15.1103 5.24119 15.0531 5.18886 14.9858 5.15268C14.9185 5.11649 14.8432 5.09759 14.7668 5.09766H10.1514C10.061 5.09758 9.97261 5.12404 9.89712 5.17376C9.82164 5.22348 9.76241 5.29427 9.7268 5.37735L6.95757 11.8389C6.92746 11.9091 6.91527 11.9857 6.92207 12.0618C6.92888 12.138 6.95447 12.2112 6.99657 12.275C7.03866 12.3387 7.09593 12.3911 7.16323 12.4273C7.23054 12.4634 7.30577 12.4823 7.38219 12.4823H9.66588L6.95388 19.2337C6.76926 19.6924 7.3388 20.081 7.6988 19.7413L12.3363 15.3632L16.913 11.4484C16.9847 11.3871 17.0359 11.3053 17.0596 11.214C17.0834 11.1227 17.0786 11.0263 17.0459 10.9378C17.0133 10.8492 16.9542 10.7729 16.8768 10.719C16.7994 10.665 16.7073 10.6361 16.613 10.6361ZM12.3936 11.5592H15.3631L11.7188 14.6773L8.59419 17.6266L10.7773 12.1924C10.8053 12.1224 10.8158 12.0466 10.8078 11.9715C10.7997 11.8965 10.7734 11.8246 10.7311 11.7622C10.6889 11.6997 10.6319 11.6485 10.5653 11.6131C10.4987 11.5777 10.4244 11.5592 10.349 11.5592H8.08188L10.456 6.02073H14.0671L11.969 10.9158C11.9388 10.986 11.9266 11.0627 11.9335 11.1388C11.9403 11.2149 11.9659 11.2881 12.008 11.3519C12.05 11.4157 12.1073 11.468 12.1746 11.5042C12.2419 11.5404 12.3172 11.5593 12.3936 11.5592Z"
           fill="#148B16"
         />
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M11.9994 22.6363C17.8619 22.6363 22.6148 17.8833 22.6148 12.0209C22.6148 6.15842 17.8619 1.4055 11.9994 1.4055C6.13694 1.4055 1.38401 6.15842 1.38401 12.0209C1.38401 17.8833 6.13694 22.6363 11.9994 22.6363ZM11.9994 23.5593C18.3723 23.5593 23.5379 18.3938 23.5379 12.0209C23.5379 5.64796 18.3723 0.482422 11.9994 0.482422C5.62648 0.482422 0.460938 5.64796 0.460938 12.0209C0.460938 18.3938 5.62648 23.5593 11.9994 23.5593Z"
           fill="#282828"
         />
@@ -9089,8 +9089,8 @@ export const amenitiesGroupList = new Map([
       <path
         d="M3 13.0215V21.0215M3 16.5215H6.5L8.5 13.5215M3.5 10.0215L16.737 18.846C16.8158 18.8984 16.9078 18.9275 17.0024 18.9297C17.0971 18.9319 17.1904 18.9072 17.2715 18.8585L22 16.0215"
         stroke="#282828"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M3.53933 6.38189C3.47565 6.3395 3.42255 6.28306 3.38411 6.21693C3.34568 6.15079 3.32293 6.07672 3.31761 6.00041C3.3123 5.9241 3.32457 5.84759 3.35347 5.77676C3.38237 5.70594 3.42714 5.64269 3.48433 5.59189L7.21433 2.27689C7.29637 2.20387 7.40018 2.1599 7.50971 2.15176C7.61924 2.14363 7.7284 2.17179 7.82033 2.23189L21.3528 11.0979C21.4227 11.1437 21.48 11.2062 21.5195 11.2799C21.5589 11.3535 21.5793 11.4358 21.5788 11.5194C21.5782 11.6029 21.5568 11.685 21.5163 11.7581C21.4759 11.8312 21.4178 11.893 21.3473 11.9379L16.7753 14.8479C16.6935 14.8999 16.5984 14.9271 16.5014 14.926C16.4045 14.9249 16.31 14.8957 16.2293 14.8419L3.53933 6.38189Z"
@@ -9120,8 +9120,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(13 1.52148) rotate(80.5377) scale(18.2483 17.2345)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -9169,15 +9169,15 @@ export const amenitiesGroupList = new Map([
       <path
         d="M3.5 20.5215V22.4215C3.5 22.5806 3.56321 22.7332 3.67574 22.8457C3.78826 22.9583 3.94087 23.0215 4.1 23.0215H6.9C7.05913 23.0215 7.21174 22.9583 7.32426 22.8457C7.43679 22.7332 7.5 22.5806 7.5 22.4215V20.5215M14.5 20.5215V22.4215C14.5 22.5806 14.5632 22.7332 14.6757 22.8457C14.7883 22.9583 14.9409 23.0215 15.1 23.0215H16"
         stroke="#148B16"
-        stroke-width="1.5"
-        stroke-linecap="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
       />
       <path
         d="M16 16.5315L16.01 16.5205M6 16.5315L6.01 16.5205M20 22.5215V8.52148M20 8.52148H18V2.52148H22V8.52148H20ZM16 20.5215H2.6C2.44087 20.5215 2.28826 20.4583 2.17574 20.3457C2.06321 20.2332 2 20.0806 2 19.9215V13.1215C2 12.9624 2.06321 12.8097 2.17574 12.6972C2.28826 12.5847 2.44087 12.5215 2.6 12.5215H16M14 8.52148H6M14 2.52148H6C4.93913 2.52148 3.92172 2.94291 3.17157 3.69306C2.42143 4.4432 2 5.46062 2 6.52148V8.52148"
         stroke="#545353"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>,
   ],
@@ -9203,8 +9203,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12 12.7559) rotate(90) scale(8)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -9231,8 +9231,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12.7812 12.7564) rotate(90) scale(8.0005 9)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -9247,24 +9247,24 @@ export const amenitiesGroupList = new Map([
       fill="none"
     >
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M3.78125 8.31786C3.78125 7.98133 3.84755 7.64809 3.97637 7.33719C4.10518 7.02629 4.29399 6.74381 4.532 6.5059C4.77001 6.26798 5.05256 6.07929 5.36351 5.95059C5.67446 5.8219 6.00772 5.75573 6.34425 5.75586H7.78125V3.75586H12.7812V5.75586H14.7832C16.6392 5.75586 18.4192 6.49315 19.7316 7.80553C21.044 9.11791 21.7812 10.8979 21.7812 12.7539V19.1959C21.7813 19.5324 21.7149 19.8656 21.5861 20.1765C21.4573 20.4874 21.2685 20.7699 21.0305 21.0078C20.7925 21.2457 20.5099 21.4344 20.199 21.5631C19.888 21.6918 19.5548 21.758 19.2183 21.7579H6.34425C5.66484 21.7573 5.01339 21.4873 4.53287 21.0069C4.05236 20.5266 3.78204 19.8753 3.78125 19.1959V8.31786Z"
         stroke="#545353"
-        stroke-width="1.493"
-        stroke-miterlimit="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.493"
+        strokeMiterlimit="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M12.7812 9.75586C12.7812 9.75586 15.7812 12.7489 15.7812 14.6429C15.7812 16.2979 14.4362 17.6429 12.7812 17.6429C11.1252 17.6429 9.79325 16.2979 9.78125 14.6429C9.79125 12.7479 12.7812 9.75586 12.7812 9.75586Z"
         stroke="#148B16"
-        stroke-width="1.5"
-        stroke-miterlimit="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeMiterlimit="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>,
   ],
@@ -9291,8 +9291,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12 12.0005) rotate(90) scale(8.0005 9)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -9308,24 +9308,24 @@ export const amenitiesGroupList = new Map([
       fill="none"
     >
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M3 7.562C3 7.22547 3.0663 6.89224 3.19512 6.58133C3.32393 6.27043 3.51274 5.98796 3.75075 5.75004C3.98876 5.51212 4.27131 5.32343 4.58226 5.19473C4.89321 5.06604 5.22647 4.99987 5.563 5H7V3H12V5H14.002C15.858 5 17.638 5.73729 18.9503 7.04967C20.2627 8.36205 21 10.142 21 11.998V18.44C21 18.7765 20.9337 19.1098 20.8049 19.4207C20.6761 19.7316 20.4873 20.014 20.2493 20.252C20.0112 20.4899 19.7287 20.6786 19.4177 20.8073C19.1068 20.936 18.7735 21.0021 18.437 21.002H5.563C4.88359 21.0015 4.23214 20.7314 3.75162 20.2511C3.27111 19.7708 3.00079 19.1194 3 18.44V7.562Z"
         stroke="#545353"
-        stroke-width="1.493"
-        stroke-miterlimit="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.493"
+        strokeMiterlimit="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M12 9C12 9 15 11.993 15 13.887C15 15.542 13.655 16.887 12 16.887C10.344 16.887 9.012 15.542 9 13.887C9.01 11.992 12 9 12 9Z"
         stroke="#148B16"
-        stroke-width="1.5"
-        stroke-miterlimit="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeMiterlimit="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>,
   ],
@@ -9352,8 +9352,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12.7812 12.9219) rotate(90) scale(8)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -9380,8 +9380,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(13 1.52148) rotate(80.5377) scale(18.2483 17.2345)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -9408,8 +9408,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12 12.7559) rotate(90) scale(11)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -9436,8 +9436,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12.2188 11.1185) rotate(90) scale(8.25129 10.125)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -9464,8 +9464,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12 12.5781) rotate(90) scale(8)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -9493,8 +9493,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12 12.5781) rotate(90) scale(8)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -9548,8 +9548,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12 12.0781) rotate(90) scale(7.7695 9.5)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -9563,10 +9563,10 @@ export const amenitiesGroupList = new Map([
       viewBox="0 0 24 25"
       fill="none"
     >
-      <g clip-path="url(#clip0_431_15167)">
+      <g clipPath="url(#clip0_431_15167)">
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M12 19.5781C12.2449 19.5782 12.4813 19.6681 12.6644 19.8308C12.8474 19.9936 12.9643 20.2179 12.993 20.4611L13 20.5781V21.5781C12.9997 21.833 12.9021 22.0782 12.7272 22.2635C12.5522 22.4488 12.313 22.5604 12.0586 22.5753C11.8042 22.5902 11.5536 22.5075 11.3582 22.3439C11.1627 22.1803 11.0371 21.9482 11.007 21.6951L11 21.5781V20.5781C11 20.3129 11.1054 20.0586 11.2929 19.871C11.4804 19.6835 11.7348 19.5781 12 19.5781ZM7.05 17.5281C7.23747 17.7157 7.34279 17.97 7.34279 18.2351C7.34279 18.5003 7.23747 18.7546 7.05 18.9421L6.343 19.6491C6.25075 19.7446 6.14041 19.8208 6.0184 19.8732C5.8964 19.9256 5.76518 19.9532 5.6324 19.9544C5.49962 19.9555 5.36794 19.9302 5.24505 19.8799C5.12215 19.8297 5.0105 19.7554 4.9166 19.6615C4.82271 19.5676 4.74846 19.456 4.69818 19.3331C4.6479 19.2102 4.6226 19.0785 4.62375 18.9457C4.6249 18.8129 4.65249 18.6817 4.7049 18.5597C4.75731 18.4377 4.83349 18.3274 4.929 18.2351L5.636 17.5281C5.82353 17.3407 6.07784 17.2353 6.343 17.2353C6.60816 17.2353 6.86247 17.3407 7.05 17.5281ZM18.364 17.5281L19.071 18.2351C19.2532 18.4237 19.354 18.6763 19.3517 18.9385C19.3494 19.2007 19.2442 19.4515 19.0588 19.6369C18.8734 19.8224 18.6226 19.9275 18.3604 19.9298C18.0982 19.9321 17.8456 19.8313 17.657 19.6491L16.95 18.9421C16.7678 18.7535 16.667 18.5009 16.6693 18.2387C16.6716 17.9765 16.7768 17.7257 16.9622 17.5403C17.1476 17.3549 17.3984 17.2497 17.6606 17.2475C17.9228 17.2452 18.1754 17.346 18.364 17.5281ZM12.617 2.57813C13.1046 2.57802 13.5754 2.75601 13.9409 3.07865C14.3064 3.40128 14.5415 3.84633 14.602 4.33013L14.982 7.37012C16.1297 8.02745 17.028 9.04556 17.5373 10.2661C18.0466 11.4867 18.1383 12.8414 17.7982 14.1195C17.4581 15.3976 16.7053 16.5275 15.6567 17.3336C14.6081 18.1396 13.3226 18.5766 12 18.5766C10.6774 18.5766 9.39189 18.1396 8.34331 17.3336C7.29474 16.5275 6.54187 15.3976 6.20177 14.1195C5.86167 12.8414 5.9534 11.4867 6.4627 10.2661C6.972 9.04556 7.87033 8.02745 9.018 7.37012L9.398 4.33013C9.45846 3.84633 9.69356 3.40128 10.0591 3.07865C10.4246 2.75601 10.8954 2.57802 11.383 2.57813H12.617ZM12 8.57812C10.9391 8.57812 9.92172 8.99955 9.17157 9.7497C8.42143 10.4998 8 11.5173 8 12.5781C8 13.639 8.42143 14.6564 9.17157 15.4066C9.92172 16.1567 10.9391 16.5781 12 16.5781C13.0609 16.5781 14.0783 16.1567 14.8284 15.4066C15.5786 14.6564 16 13.639 16 12.5781C16 11.5173 15.5786 10.4998 14.8284 9.7497C14.0783 8.99955 13.0609 8.57812 12 8.57812ZM4 11.5781C4.26522 11.5781 4.51957 11.6835 4.70711 11.871C4.89464 12.0586 5 12.3129 5 12.5781C5 12.8433 4.89464 13.0977 4.70711 13.2852C4.51957 13.4728 4.26522 13.5781 4 13.5781H3C2.73478 13.5781 2.48043 13.4728 2.29289 13.2852C2.10536 13.0977 2 12.8433 2 12.5781C2 12.3129 2.10536 12.0586 2.29289 11.871C2.48043 11.6835 2.73478 11.5781 3 11.5781H4ZM21 11.5781C21.2652 11.5781 21.5196 11.6835 21.7071 11.871C21.8946 12.0586 22 12.3129 22 12.5781C22 12.8433 21.8946 13.0977 21.7071 13.2852C21.5196 13.4728 21.2652 13.5781 21 13.5781H20C19.7348 13.5781 19.4804 13.4728 19.2929 13.2852C19.1054 13.0977 19 12.8433 19 12.5781C19 12.3129 19.1054 12.0586 19.2929 11.871C19.4804 11.6835 19.7348 11.5781 20 11.5781H21ZM19.071 5.50812C19.2585 5.69565 19.3638 5.94996 19.3638 6.21513C19.3638 6.48029 19.2585 6.7346 19.071 6.92212L18.364 7.62913C18.2718 7.72464 18.1614 7.80082 18.0394 7.85323C17.9174 7.90564 17.7862 7.93322 17.6534 7.93438C17.5206 7.93553 17.3889 7.91023 17.266 7.85995C17.1432 7.80967 17.0315 7.73541 16.9376 7.64152C16.8437 7.54763 16.7695 7.43598 16.7192 7.31308C16.6689 7.19018 16.6436 7.0585 16.6447 6.92572C16.6459 6.79294 16.6735 6.66172 16.7259 6.53972C16.7783 6.41772 16.8545 6.30737 16.95 6.21513L17.657 5.50812C17.8445 5.32065 18.0988 5.21534 18.364 5.21534C18.6292 5.21534 18.8835 5.32065 19.071 5.50812ZM6.343 5.50812L7.05 6.21513C7.22766 6.40458 7.32463 6.65571 7.32042 6.91539C7.3162 7.17508 7.21112 7.42293 7.02741 7.60652C6.84369 7.7901 6.59576 7.89501 6.33608 7.89904C6.07639 7.90307 5.82533 7.80591 5.636 7.62813L4.929 6.92112C4.75134 6.73167 4.65437 6.48054 4.65858 6.22086C4.6628 5.96117 4.76788 5.71332 4.95159 5.52973C5.13531 5.34615 5.38324 5.24124 5.64292 5.23721C5.90261 5.23318 6.15368 5.33034 6.343 5.50812ZM12.617 4.57812H11.383L11.133 6.57812H12.867L12.617 4.57812Z"
           fill="url(#paint0_angular_431_15167)"
         />
@@ -9580,8 +9580,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12 12.5776) rotate(90) scale(9.99945 10)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
         <clipPath id="clip0_431_15167">
           <rect
@@ -9616,8 +9616,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12 12.5781) rotate(90) scale(9 7)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -9644,8 +9644,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12.2188 12) rotate(90) scale(9.5)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -9672,8 +9672,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12.0012 12) rotate(90) scale(10 10.0012)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -9700,8 +9700,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12.2203 12.0025) rotate(90) scale(8.40289 8.4)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -9728,8 +9728,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(11.9982 11.9997) rotate(90) scale(8.99966 11.2482)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -9746,37 +9746,37 @@ export const amenitiesGroupList = new Map([
       <path
         d="M2.71875 12V20C2.71875 20.5523 3.16646 21 3.71875 21H20.7188C21.271 21 21.7188 20.5523 21.7188 20V12"
         stroke="url(#paint0_angular_431_6454)"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M21.7188 15.5H2.71875"
         stroke="url(#paint1_angular_431_6454)"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M16.2188 11.5C16.2188 9.29085 14.4279 7.5 12.2188 7.5C10.0096 7.5 8.21875 9.29085 8.21875 11.5"
         stroke="url(#paint2_angular_431_6454)"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <path
         d="M12.2188 3V4"
         stroke="url(#paint3_angular_431_6454)"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M17.9259 5L17.2188 5.7071"
         stroke="url(#paint4_angular_431_6454)"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M6.21875 5L6.92585 5.7071"
         stroke="url(#paint5_angular_431_6454)"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <defs>
         <radialGradient
@@ -9787,8 +9787,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12.2188 16.5) rotate(90) scale(4.5 9.5)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
         <radialGradient
           id="paint1_angular_431_6454"
@@ -9798,8 +9798,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12.2188 16) rotate(90) scale(0.5 9.5)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
         <radialGradient
           id="paint2_angular_431_6454"
@@ -9809,8 +9809,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12.2188 9.5) rotate(90) scale(2 4)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
         <radialGradient
           id="paint3_angular_431_6454"
@@ -9820,8 +9820,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12.7188 3.5) rotate(90) scale(0.5)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
         <radialGradient
           id="paint4_angular_431_6454"
@@ -9831,8 +9831,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(17.5723 5.35355) rotate(90) scale(0.35355 0.353575)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
         <radialGradient
           id="paint5_angular_431_6454"
@@ -9842,8 +9842,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(6.5723 5.35355) rotate(90) scale(0.35355)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -9857,7 +9857,7 @@ export const amenitiesGroupList = new Map([
       viewBox="0 0 24 25"
       fill="none"
     >
-      <g clip-path="url(#clip0_431_66)">
+      <g clipPath="url(#clip0_431_66)">
         <path
           d="M12 7V7.5M12 7C12 5.4087 12.6321 3.88258 13.7574 2.75736C14.8826 1.63214 16.4087 1 18 1H18.5V7.5C18.5 9.22391 17.8152 10.8772 16.5962 12.0962C15.3772 13.3152 13.7239 14 12 14M12 7C12 5.4087 11.3679 3.88258 10.2426 2.75736C9.11742 1.63214 7.5913 1 6 1H5.5V7.5C5.5 9.22391 6.18482 10.8772 7.40381 12.0962C8.62279 13.3152 10.2761 14 12 14M12 14V23.5M12 14V23M12 24H7.5C5.9087 24 4.38258 23.3679 3.25736 22.2426C2.13214 21.1174 1.5 19.5913 1.5 18H6C7.5913 18 9.11742 18.6321 10.2426 19.7574C11.3679 20.8826 12 22.4087 12 24ZM12 24H16.5C18.0913 24 19.6174 23.3679 20.7426 22.2426C21.8679 21.1174 22.5 19.5913 22.5 18H18C16.4087 18 14.8826 18.6321 13.7574 19.7574C12.6321 20.8826 12 22.4087 12 24Z"
           stroke="url(#paint0_angular_431_66)"
@@ -9872,8 +9872,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12 12.5) rotate(90) scale(11.5 10.5)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
         <clipPath id="clip0_431_66">
           <rect
@@ -9898,8 +9898,8 @@ export const amenitiesGroupList = new Map([
       <path
         d="M4.5 15C4.8283 15 5.15339 14.9353 5.45671 14.8097C5.76002 14.6841 6.03562 14.4999 6.26777 14.2678C6.49991 14.0356 6.68406 13.76 6.8097 13.4567C6.93534 13.1534 7 12.8283 7 12.5C7 13.163 7.26339 13.7989 7.73223 14.2678C8.20107 14.7366 8.83696 15 9.5 15C10.163 15 10.7989 14.7366 11.2678 14.2678C11.7366 13.7989 12 13.163 12 12.5C12 13.163 12.2634 13.7989 12.7322 14.2678C13.2011 14.7366 13.837 15 14.5 15C15.163 15 15.7989 14.7366 16.2678 14.2678C16.7366 13.7989 17 13.163 17 12.5C17 13.163 17.2634 13.7989 17.7322 14.2678C18.2011 14.7366 18.837 15 19.5 15C20.163 15 20.7989 14.7366 21.2678 14.2678C21.7366 13.7989 22 13.163 22 12.5C22 18.023 17.523 22.5 12 22.5C6.477 22.5 2 18.023 2 12.5C2 13.163 2.26339 13.7989 2.73223 14.2678C3.20107 14.7366 3.83696 15 4.5 15ZM14 7C14 7.53043 13.7893 8.03914 13.4142 8.41421C13.0391 8.78929 12.5304 9 12 9C11.4696 9 10.9609 8.78929 10.5858 8.41421C10.2107 8.03914 10 7.53043 10 7C10 5.895 12 2.5 12 2.5C12 2.5 14 5.895 14 7Z"
         stroke="url(#paint0_angular_431_16912)"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <defs>
         <radialGradient
@@ -9910,8 +9910,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12 12.5) rotate(90) scale(10)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -9926,8 +9926,8 @@ export const amenitiesGroupList = new Map([
       fill="none"
     >
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M7.2522 7.75086V7.63086C7.2522 6.37108 7.75264 5.1629 8.64344 4.2721C9.53424 3.3813 10.7424 2.88086 12.0022 2.88086C13.262 2.88086 14.4702 3.3813 15.361 4.2721C16.2518 5.1629 16.7522 6.37108 16.7522 7.63086V7.75086H18.2532C18.8242 7.75086 19.3092 8.16986 19.3932 8.73486L19.6112 10.2279C20.0412 13.1659 20.0412 16.1519 19.6112 19.0899C19.5102 19.7797 19.182 20.4162 18.6788 20.8986C18.1755 21.3811 17.5257 21.682 16.8322 21.7539L16.2032 21.8189C13.41 22.1089 10.5944 22.1089 7.8012 21.8189L7.1722 21.7539C6.47871 21.682 5.82894 21.3811 5.32564 20.8986C4.82235 20.4162 4.49424 19.7797 4.3932 19.0899C3.96268 16.1515 3.96268 13.1662 4.3932 10.2279L4.6122 8.73486C4.6523 8.46142 4.78944 8.21154 4.99856 8.03088C5.20769 7.85021 5.47484 7.75082 5.7512 7.75086H7.2522ZM11.1922 4.48386C11.6723 4.3603 12.1743 4.34822 12.6598 4.44853C13.1453 4.54884 13.6014 4.75889 13.9933 5.06261C14.3851 5.36632 14.7022 5.75565 14.9204 6.20079C15.1386 6.64594 15.2521 7.13511 15.2522 7.63086V7.75086H8.7522V7.63086C8.7523 6.90998 8.99206 6.2096 9.43377 5.6399C9.87549 5.0702 10.4941 4.66352 11.1922 4.48386ZM7.2522 9.25086V11.5009C7.2522 11.6998 7.33122 11.8905 7.47187 12.0312C7.61252 12.1718 7.80329 12.2509 8.0022 12.2509C8.20111 12.2509 8.39188 12.1718 8.53253 12.0312C8.67318 11.8905 8.7522 11.6998 8.7522 11.5009V9.25086H15.2522V11.5009C15.2522 11.6998 15.3312 11.8905 15.4719 12.0312C15.6125 12.1718 15.8033 12.2509 16.0022 12.2509C16.2011 12.2509 16.3919 12.1718 16.5325 12.0312C16.6732 11.8905 16.7522 11.6998 16.7522 11.5009V9.25086H17.9522L18.1272 10.4449C18.5362 13.2393 18.5362 16.0784 18.1272 18.8729C18.0746 19.2328 17.9034 19.565 17.6408 19.8168C17.3782 20.0685 17.0391 20.2255 16.6772 20.2629L16.0482 20.3269C13.3582 20.6069 10.6462 20.6069 7.9562 20.3269L7.3262 20.2619C6.96449 20.2243 6.62562 20.0672 6.36319 19.8155C6.10076 19.5637 5.92975 19.2317 5.8772 18.8719C5.46785 16.0778 5.46785 13.2389 5.8772 10.4449L6.0522 9.25086H7.2522Z"
         fill="url(#paint0_angular_431_1915)"
       />
@@ -9940,8 +9940,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12.002 12.4586) rotate(90) scale(9.57775 7.93169)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -9960,8 +9960,8 @@ export const amenitiesGroupList = new Map([
         fill="url(#paint0_angular_431_6481)"
       />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M3 5C3 4.60218 3.15804 4.22064 3.43934 3.93934C3.72064 3.65804 4.10218 3.5 4.5 3.5H19.5C19.8978 3.5 20.2794 3.65804 20.5607 3.93934C20.842 4.22064 21 4.60218 21 5V20C21 20.3978 20.842 20.7794 20.5607 21.0607C20.2794 21.342 19.8978 21.5 19.5 21.5H4.5C4.10218 21.5 3.72064 21.342 3.43934 21.0607C3.15804 20.7794 3 20.3978 3 20V5ZM4 5C4 4.86739 4.05268 4.74021 4.14645 4.64645C4.24021 4.55268 4.36739 4.5 4.5 4.5H19.5C19.6326 4.5 19.7598 4.55268 19.8536 4.64645C19.9473 4.74021 20 4.86739 20 5V20C20 20.1326 19.9473 20.2598 19.8536 20.3536C19.7598 20.4473 19.6326 20.5 19.5 20.5H4.5C4.36739 20.5 4.24021 20.4473 4.14645 20.3536C4.05268 20.2598 4 20.1326 4 20V5Z"
         fill="url(#paint1_angular_431_6481)"
       />
@@ -9974,8 +9974,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12 12.5) rotate(90) scale(4 7)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
         <radialGradient
           id="paint1_angular_431_6481"
@@ -9985,8 +9985,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12 12.5) rotate(90) scale(9)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -10013,8 +10013,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12.2188 12) rotate(90) scale(9.375)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -10041,8 +10041,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12.2203 12.0025) rotate(90) scale(8.40289 8.4)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -10061,8 +10061,8 @@ export const amenitiesGroupList = new Map([
         fill="url(#paint0_angular_431_6493)"
       />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M12.1267 3.00919L12.1228 3.01019L12.1112 3.01219L12.0697 3.02019L11.9148 3.05119C11.7818 3.07819 11.5923 3.11819 11.3658 3.16969C10.9133 3.27269 10.3058 3.42319 9.69575 3.61169C9.09175 3.79819 8.45925 4.03019 7.96875 4.30169C7.72475 4.43669 7.49075 4.59519 7.31225 4.78169C7.13475 4.96619 6.96875 5.22469 6.96875 5.54919C6.96875 6.42169 7.21375 7.06069 7.47275 7.48919C7.60025 7.70019 7.72975 7.85769 7.83175 7.96569C7.83675 8.02319 7.84425 8.08769 7.85825 8.15769C7.90875 8.42069 8.03525 8.75569 8.32525 9.08119C8.18716 9.66832 8.18363 10.2791 8.31493 10.8678C8.44623 11.4564 8.70896 12.0078 9.08346 12.4806C9.45796 12.9534 9.93453 13.3354 10.4775 13.598C11.0205 13.8606 11.6158 13.997 12.219 13.997C12.8222 13.997 13.4175 13.8606 13.9605 13.598C14.5035 13.3354 14.98 12.9534 15.3545 12.4806C15.729 12.0078 15.9918 11.4564 16.1231 10.8678C16.2544 10.2791 16.2508 9.66832 16.1128 9.08119C16.4023 8.75569 16.5288 8.42119 16.5793 8.15769C16.5933 8.08769 16.6012 8.02319 16.6057 7.96569C16.7419 7.82 16.8623 7.66027 16.9648 7.48919C17.2242 7.06069 17.4688 6.42169 17.4688 5.54919C17.4688 5.22469 17.3027 4.96619 17.1252 4.78169C16.9467 4.59519 16.7128 4.43669 16.4688 4.30169C15.9782 4.03019 15.3457 3.79819 14.7413 3.61169C14.1904 3.44379 13.6335 3.29635 13.0717 3.16969C12.8378 3.11638 12.6031 3.06637 12.3678 3.01969L12.3263 3.01219L12.3147 3.01019L12.3108 3.00919L12.2188 2.99219L12.1267 3.00919ZM12.2188 9.25069C13.3222 9.25069 14.0633 9.10769 14.5588 8.92169C14.9783 8.76419 15.2228 8.57619 15.3638 8.41769C15.4153 8.36019 15.4558 8.30419 15.4878 8.25069H8.94975C8.98175 8.30419 9.02225 8.36069 9.07325 8.41769C9.21525 8.57619 9.45925 8.76419 9.87825 8.92169C10.3743 9.10769 11.1153 9.25069 12.2188 9.25069ZM15.9047 7.25069H8.53275C8.45611 7.16421 8.38765 7.07081 8.32825 6.97169C8.15675 6.68819 7.97075 6.22969 7.96875 5.55969C7.98545 5.52759 8.00743 5.49852 8.03375 5.47369C8.11475 5.38919 8.25175 5.28769 8.45325 5.17669C8.85325 4.95519 9.40825 4.74719 9.99125 4.56669C10.5179 4.40656 11.0502 4.26596 11.5872 4.14519C11.7971 4.09741 12.0077 4.05241 12.2188 4.01019C12.2473 4.01519 12.2822 4.02269 12.3228 4.03069C12.4497 4.05669 12.6318 4.09569 12.8503 4.14519C13.2883 4.24469 13.8688 4.38869 14.4462 4.56719C15.0293 4.74719 15.5843 4.95519 15.9843 5.17669C16.1858 5.28769 16.3227 5.38919 16.4042 5.47369C16.4492 5.52119 16.4642 5.54919 16.4688 5.55969C16.4668 6.22969 16.2808 6.68819 16.1088 6.97169C16.0496 7.07087 15.9813 7.16428 15.9047 7.25069ZM9.21875 10.0007C9.21875 9.91069 9.22275 9.82169 9.23025 9.73369C9.89925 10.0472 10.8572 10.2507 12.2188 10.2507C13.3913 10.2507 14.2632 10.1007 14.9097 9.85819C15.0147 9.81919 15.1137 9.77719 15.2072 9.73319C15.2427 10.1364 15.1961 10.5427 15.0703 10.9275C14.9446 11.3123 14.7423 11.6676 14.4756 11.9721C14.2089 12.2766 13.8833 12.524 13.5184 12.6994C13.1536 12.8748 12.757 12.9745 12.3526 12.9926C11.9482 13.0106 11.5443 12.9467 11.1653 12.8045C10.7863 12.6624 10.4399 12.445 10.1471 12.1655C9.85435 11.8859 9.62116 11.55 9.4616 11.178C9.30205 10.806 9.21944 10.4055 9.21875 10.0007Z"
         fill="url(#paint1_angular_431_6493)"
       />
@@ -10071,8 +10071,8 @@ export const amenitiesGroupList = new Map([
         fill="url(#paint2_angular_431_6493)"
       />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M10.4688 15.5C10.4688 15.2348 10.5741 14.9804 10.7616 14.7929C10.9492 14.6054 11.2035 14.5 11.4688 14.5H12.9688C13.234 14.5 13.4883 14.6054 13.6759 14.7929C13.8634 14.9804 13.9688 15.2348 13.9688 15.5V16.191C13.9687 16.3538 13.929 16.5142 13.8529 16.6581C13.7768 16.8021 13.6668 16.9253 13.5323 17.017L13.5887 17.3L15.3048 15.2165C15.3626 15.1462 15.4385 15.0931 15.5243 15.0628C15.6101 15.0324 15.7026 15.0261 15.7917 15.0445C17.0737 15.3105 18.3853 15.7135 19.3892 16.2665C20.3603 16.8015 21.2188 17.578 21.2188 18.649V20.5C21.2188 20.6326 21.1661 20.7598 21.0723 20.8536C20.9785 20.9473 20.8514 21 20.7188 21H3.71875C3.58614 21 3.45896 20.9473 3.3652 20.8536C3.27143 20.7598 3.21875 20.6326 3.21875 20.5V18.649C3.21875 17.584 4.09375 16.8125 5.06475 16.282C6.07275 15.7305 7.38475 15.3245 8.65125 15.055C8.7408 15.036 8.83385 15.0419 8.92025 15.0722C9.00666 15.1024 9.0831 15.1558 9.14125 15.2265L10.8562 17.3095L10.9102 17.0205C10.7743 16.9289 10.6629 16.8054 10.5859 16.6606C10.5089 16.5159 10.4687 16.3544 10.4688 16.1905V15.5ZM12.4788 16.848L12.7683 18.2965L12.2188 18.9635L11.6868 18.3175L11.9602 16.841C11.9801 16.7343 11.9646 16.6241 11.9163 16.5269C11.8679 16.4298 11.7893 16.351 11.6923 16.3025L11.4688 16.191V15.5H12.9688V16.191L12.7452 16.303C12.6471 16.352 12.5679 16.4319 12.5196 16.5304C12.4714 16.6288 12.4568 16.7404 12.4782 16.848M12.6602 20L15.8822 16.0875C17.0122 16.3405 18.0957 16.696 18.9062 17.1425C19.8207 17.646 20.2188 18.1665 20.2188 18.649V20H12.6602ZM8.56325 16.0985L11.7767 20H4.21875V18.649C4.21875 18.182 4.61875 17.6655 5.54425 17.159C6.36075 16.7125 7.44625 16.355 8.56425 16.0985"
         fill="url(#paint3_angular_431_6493)"
       />
@@ -10085,8 +10085,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12.2188 5.75) rotate(90) scale(0.75)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
         <radialGradient
           id="paint1_angular_431_6493"
@@ -10096,8 +10096,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12.2188 8.49459) rotate(90) scale(5.50241 5.25)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
         <radialGradient
           id="paint2_angular_431_6493"
@@ -10107,8 +10107,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(16.7188 18) rotate(90)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
         <radialGradient
           id="paint3_angular_431_6493"
@@ -10118,8 +10118,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12.2188 17.75) rotate(90) scale(3.25 9)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -10146,8 +10146,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12 13) rotate(90) scale(10.5 11)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -10174,8 +10174,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12.305 12.5009) rotate(90) scale(10.6611 10.1956)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -10202,8 +10202,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(11.3162 12.7461) rotate(90) scale(11.0742 9.48027)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -10230,8 +10230,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(10.0001 9.875) rotate(90) scale(9.375 9.50011)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -10258,8 +10258,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12.2188 11.1185) rotate(90) scale(8.25129 10.125)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -10273,7 +10273,7 @@ export const amenitiesGroupList = new Map([
       viewBox="0 0 25 25"
       fill="none"
     >
-      <g clip-path="url(#clip0_431_13378)">
+      <g clipPath="url(#clip0_431_13378)">
         <path
           d="M23.9967 4.04956C23.986 3.86608 23.9083 3.69292 23.7783 3.56295C23.6484 3.43299 23.4752 3.35527 23.2917 3.34456C18.4392 3.06331 14.543 4.53893 12.8686 7.30268C11.7623 9.12987 11.7642 11.3489 12.8536 13.4658C12.2335 14.204 11.7804 15.0674 11.5252 15.9971L9.99984 14.4661C10.733 12.9352 10.7048 11.3396 9.90609 10.0139C8.66859 7.97112 5.81203 6.87612 2.26546 7.08425C2.08198 7.09496 1.90882 7.17268 1.77886 7.30264C1.64889 7.4326 1.57118 7.60576 1.56046 7.78925C1.3514 11.3358 2.44734 14.1924 4.49015 15.4299C5.16427 15.8417 5.93892 16.0597 6.7289 16.0599C7.49568 16.0504 8.25053 15.8688 8.93765 15.5283L11.2814 17.8721V20.5599C11.2814 20.7588 11.3604 20.9496 11.5011 21.0902C11.6417 21.2309 11.8325 21.3099 12.0314 21.3099C12.2303 21.3099 12.4211 21.2309 12.5617 21.0902C12.7024 20.9496 12.7814 20.7588 12.7814 20.5599V17.7952C12.7781 16.602 13.1841 15.4438 13.9317 14.5139C14.8964 15.0181 15.9662 15.2878 17.0545 15.3014C18.1068 15.3048 19.1394 15.0174 20.0386 14.4708C22.8023 12.7983 24.2817 8.90206 23.9967 4.04956ZM5.26359 14.1474C3.82546 13.2764 3.01171 11.2149 3.0314 8.55987C5.6864 8.53737 7.74796 9.35393 8.6189 10.7921C9.07359 11.5421 9.14765 12.4167 8.84952 13.3177L6.56109 11.0292C6.41929 10.8945 6.23048 10.8205 6.03491 10.823C5.83934 10.8255 5.65248 10.9043 5.51418 11.0427C5.37588 11.181 5.29707 11.3678 5.29457 11.5634C5.29207 11.759 5.36606 11.9478 5.50078 12.0896L7.78921 14.378C6.88828 14.6761 6.01453 14.6021 5.26359 14.1474ZM19.2614 13.1892C18.0051 13.9496 16.5286 14.0077 15.0286 13.3767L20.062 8.34237C20.1967 8.20058 20.2707 8.01176 20.2682 7.81619C20.2657 7.62062 20.1869 7.43376 20.0486 7.29546C19.9103 7.15716 19.7235 7.07836 19.5279 7.07585C19.3323 7.07335 19.1435 7.14734 19.0017 7.28206L13.9673 12.3099C13.3336 10.8099 13.3908 9.33237 14.1548 8.07706C15.4617 5.92081 18.5611 4.71893 22.5295 4.81175C22.6195 8.77925 21.4195 11.8824 19.2614 13.1892Z"
           fill="url(#paint0_angular_431_13378)"
@@ -10288,8 +10288,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12.7833 12.3102) rotate(90) scale(8.99966 11.2482)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
         <clipPath id="clip0_431_13378">
           <rect
@@ -10324,8 +10324,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12.7795 11.6942) rotate(90) scale(7.327 7.385)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -10339,13 +10339,13 @@ export const amenitiesGroupList = new Map([
       viewBox="0 0 24 25"
       fill="none"
     >
-      <g clip-path="url(#clip0_431_1794)">
+      <g clipPath="url(#clip0_431_1794)">
         <path
           d="M0.855469 23.6646L5.99833 1.37891M11.9983 1.37891V4.80748M11.9983 10.8075V14.236M11.9983 20.236V23.6646M23.1412 23.6646L17.9983 1.37891"
           stroke="url(#paint0_angular_431_1794)"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </g>
       <defs>
@@ -10357,9 +10357,9 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(11.9983 0.521764) rotate(90) scale(23.1429)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="0.171875" stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="0.171875" stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
         <clipPath id="clip0_431_1794">
           <rect
@@ -10392,20 +10392,20 @@ export const amenitiesGroupList = new Map([
       <path
         d="M5.5 12.5C5.5 13.0304 5.28929 13.5391 4.91421 13.9142C4.53914 14.2893 4.03043 14.5 3.5 14.5H2V10.5H3.5C4.03043 10.5 4.53914 10.7107 4.91421 11.0858C5.28929 11.4609 5.5 11.9696 5.5 12.5ZM18.5 12.5C18.5 13.0304 18.7107 13.5391 19.0858 13.9142C19.4609 14.2893 19.9696 14.5 20.5 14.5H22V10.5H20.5C19.9696 10.5 19.4609 10.7107 19.0858 11.0858C18.7107 11.4609 18.5 11.9696 18.5 12.5Z"
         stroke="#148B16"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M12 18.5H22V6.5H2V18.5H12ZM12 18.5V14.5M12 6.5V10.5"
         stroke="#545353"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M12 14.5C13.1046 14.5 14 13.6046 14 12.5C14 11.3954 13.1046 10.5 12 10.5C10.8954 10.5 10 11.3954 10 12.5C10 13.6046 10.8954 14.5 12 14.5Z"
         stroke="#148B16"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>,
   ],
@@ -10431,8 +10431,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12.0011 11.4448) rotate(90) scale(7.269 8.923)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -10459,8 +10459,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12 12.0215) rotate(90) scale(8 9)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -10474,7 +10474,7 @@ export const amenitiesGroupList = new Map([
       viewBox="0 0 24 25"
       fill="none"
     >
-      <g clip-path="url(#clip0_431_4131)">
+      <g clipPath="url(#clip0_431_4131)">
         <path
           d="M12 0.821458L12.3584 0.106258C12.2472 0.0505112 12.1244 0.0214844 12 0.0214844C11.8756 0.0214844 11.7528 0.0505112 11.6416 0.106258L12 0.821458ZM2.4 5.62146L2.0416 4.90626C1.90888 4.97276 1.79729 5.07488 1.7193 5.20119C1.64131 5.3275 1.60001 5.47301 1.6 5.62146H2.4ZM21.6 5.62146H22.4C22.4 5.47301 22.3587 5.3275 22.2807 5.20119C22.2027 5.07488 22.0911 4.97276 21.9584 4.90626L21.6 5.62146ZM8.8 16.8215V16.0215H8V16.8215H8.8ZM15.2 16.8215H16V16.0215H15.2V16.8215ZM0 24.0215H24V22.4215H0V24.0215ZM11.6416 0.106258L2.0416 4.90626L2.7584 6.33666L12.3584 1.53666L11.6416 0.106258ZM21.9584 4.90626L12.3584 0.106258L11.6416 1.53666L21.2416 6.33666L21.9584 4.90626ZM11.2 4.82146V8.82146H12.8V4.82146H11.2ZM11.2 8.82146V12.8215H12.8V8.82146H11.2ZM8 9.62146H12V8.02146H8V9.62146ZM12 9.62146H16V8.02146H12V9.62146ZM1.6 5.62146V23.2215H3.2V5.62146H1.6ZM20.8 5.62146V23.2215H22.4V5.62146H20.8ZM9.6 23.2215V16.8215H8V23.2215H9.6ZM8.8 17.6215H15.2V16.0215H8.8V17.6215ZM14.4 16.8215V23.2215H16V16.8215H14.4Z"
           fill="url(#paint0_angular_431_4131)"
@@ -10489,8 +10489,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12 12.0215) rotate(90) scale(12 12)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
         <clipPath id="clip0_431_4131">
           <rect
@@ -10517,8 +10517,8 @@ export const amenitiesGroupList = new Map([
         fill="url(#paint0_angular_431_5220)"
       />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M4.7145 10.0215C4.8115 10.0215 4.907 10.0135 5 9.99748V14.0215H3.75C3.6837 14.0215 3.62011 14.0478 3.57322 14.0947C3.52634 14.1416 3.5 14.2052 3.5 14.2715V14.7715C3.5 14.8378 3.52634 14.9014 3.57322 14.9483C3.62011 14.9951 3.6837 15.0215 3.75 15.0215H20.25C20.3163 15.0215 20.3799 14.9951 20.4268 14.9483C20.4737 14.9014 20.5 14.8378 20.5 14.7715V14.2715C20.5 14.2052 20.4737 14.1416 20.4268 14.0947C20.3799 14.0478 20.3163 14.0215 20.25 14.0215H19V9.99748C19.093 10.0135 19.1885 10.0215 19.2855 10.0215C20.2365 10.0215 21 9.24548 21 8.29698V7.10198C21 6.94343 20.9725 6.78607 20.9185 6.63698L19.8285 3.63198C19.7638 3.45313 19.6456 3.29855 19.4899 3.18931C19.3343 3.08006 19.1487 3.02146 18.9585 3.02148H5.041C4.85093 3.02171 4.66553 3.08048 4.51005 3.1898C4.35456 3.29913 4.23652 3.4537 4.172 3.63248L3.082 6.63698C3.02784 6.78604 3.00009 6.9434 3 7.10198V8.29698C3 9.24548 3.7635 10.0215 4.7145 10.0215ZM4.022 6.97798L5.0945 4.02148H18.905L19.9775 6.97798C19.9925 7.01798 19.9995 7.05948 19.9995 7.10198V8.29698C20.0007 8.48777 19.9261 8.67123 19.7922 8.80707C19.6582 8.94291 19.4758 9.02003 19.285 9.02148C18.895 9.02148 18.571 8.70148 18.571 8.29698C18.571 8.16438 18.5183 8.0372 18.4246 7.94343C18.3308 7.84966 18.2036 7.79698 18.071 7.79698C17.9384 7.79698 17.8112 7.84966 17.7174 7.94343C17.6237 8.0372 17.571 8.16438 17.571 8.29698C17.5722 8.48777 17.4976 8.67123 17.3637 8.80707C17.2297 8.94291 17.0473 9.02003 16.8565 9.02148C16.4665 9.02148 16.1425 8.70148 16.1425 8.29748C16.1425 8.16488 16.0898 8.0377 15.9961 7.94393C15.9023 7.85016 15.7751 7.79748 15.6425 7.79748C15.5099 7.79748 15.3827 7.85016 15.2889 7.94393C15.1952 8.0377 15.1425 8.16488 15.1425 8.29748C15.1425 8.70148 14.8185 9.02148 14.428 9.02148C14.0375 9.02148 13.714 8.70148 13.714 8.29698C13.714 8.16438 13.6613 8.0372 13.5676 7.94343C13.4738 7.84966 13.3466 7.79698 13.214 7.79698C13.0814 7.79698 12.9542 7.84966 12.8604 7.94343C12.7667 8.0372 12.714 8.16438 12.714 8.29698C12.7153 8.48772 12.6409 8.67118 12.507 8.80704C12.3731 8.9429 12.1907 9.02003 12 9.02148C11.8093 9.02003 11.627 8.94298 11.493 8.80725C11.3591 8.67151 11.2844 8.48818 11.2855 8.29748C11.2855 8.16488 11.2328 8.0377 11.1391 7.94393C11.0453 7.85016 10.9181 7.79748 10.7855 7.79748C10.6529 7.79748 10.5257 7.85016 10.4319 7.94393C10.3382 8.0377 10.2855 8.16488 10.2855 8.29748C10.2855 8.70148 9.962 9.02148 9.5715 9.02148C9.181 9.02148 8.857 8.70148 8.857 8.29698C8.857 8.16438 8.80432 8.0372 8.71055 7.94343C8.61679 7.84966 8.48961 7.79698 8.357 7.79698C8.22439 7.79698 8.09721 7.84966 8.00345 7.94343C7.90968 8.0372 7.857 8.16438 7.857 8.29698C7.857 8.70098 7.5335 9.02148 7.143 9.02148C6.7525 9.02148 6.4285 8.70148 6.4285 8.29698C6.4285 8.16438 6.37582 8.0372 6.28205 7.94343C6.18829 7.84966 6.06111 7.79698 5.9285 7.79698C5.79589 7.79698 5.66871 7.84966 5.57495 7.94343C5.48118 8.0372 5.4285 8.16438 5.4285 8.29698C5.4285 8.70098 5.105 9.02148 4.7145 9.02148C4.3235 9.02148 4 8.70148 4 8.29698V7.10198C3.99999 7.05968 4.00744 7.0177 4.022 6.97798ZM18 9.58248C17.6867 9.86566 17.2793 10.0222 16.857 10.0215C16.6311 10.0218 16.4075 9.97707 16.199 9.89003C15.9906 9.80298 15.8016 9.67532 15.643 9.51448C15.4844 9.67538 15.2953 9.80308 15.0867 9.89012C14.8782 9.97717 14.6545 10.0218 14.4285 10.0215C14.2026 10.0218 13.979 9.97707 13.7705 9.89003C13.5621 9.80298 13.3731 9.67532 13.2145 9.51448C13.0559 9.67538 12.8668 9.80308 12.6582 9.89012C12.4497 9.97717 12.226 10.0218 12 10.0215C11.774 10.0218 11.5503 9.97717 11.3418 9.89012C11.1332 9.80308 10.9441 9.67538 10.7855 9.51448C10.6269 9.67532 10.4379 9.80298 10.2295 9.89003C10.021 9.97707 9.79737 10.0218 9.5715 10.0215C9.096 10.0215 8.6665 9.82698 8.357 9.51448C8.19841 9.67532 8.0094 9.80298 7.80097 9.89003C7.59254 9.97707 7.36887 10.0218 7.143 10.0215C6.703 10.0215 6.303 9.85498 6 9.58248V14.0215H7.25C7.1837 14.0215 7.12011 13.9951 7.07322 13.9483C7.02634 13.9014 7 13.8378 7 13.7715V12.7715C7 12.7052 7.02634 12.6416 7.07322 12.5947C7.12011 12.5478 7.1837 12.5215 7.25 12.5215H8.75C8.8163 12.5215 8.87989 12.5478 8.92678 12.5947C8.97366 12.6416 9 12.7052 9 12.7715V13.0215H9.75C9.8163 13.0215 9.87989 13.0478 9.92678 13.0947C9.97366 13.1416 10 13.2052 10 13.2715V13.7715C10 13.8378 9.97366 13.9014 9.92678 13.9483C9.87989 13.9951 9.8163 14.0215 9.75 14.0215H18V9.58248ZM4 16.5215C4 16.3889 4.05268 16.2617 4.14645 16.1679C4.24021 16.0742 4.36739 16.0215 4.5 16.0215H19.5C19.6326 16.0215 19.7598 16.0742 19.8536 16.1679C19.9473 16.2617 20 16.3889 20 16.5215V20.5215C20 20.6541 19.9473 20.7813 19.8536 20.875C19.7598 20.9688 19.6326 21.0215 19.5 21.0215H4.5C4.36739 21.0215 4.24021 20.9688 4.14645 20.875C4.05268 20.7813 4 20.6541 4 20.5215V16.5215ZM5 20.0215V17.0215H19V20.0215H5Z"
         fill="url(#paint1_angular_431_5220)"
       />
@@ -10531,8 +10531,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(11.25 13.2715) rotate(90) scale(0.75)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
         <radialGradient
           id="paint1_angular_431_5220"
@@ -10542,8 +10542,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12 12.0215) rotate(90) scale(9)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -10560,44 +10560,44 @@ export const amenitiesGroupList = new Map([
       <path
         d="M14.8056 7.15117V6.10117C14.8043 5.97958 14.7554 5.86333 14.6695 5.77734C14.5835 5.69135 14.4672 5.64247 14.3456 5.64117H9.65562C9.53403 5.64247 9.41778 5.69135 9.33179 5.77734C9.24581 5.86333 9.19693 5.97958 9.19562 6.10117V7.15117M7.82562 19.3912L4.64062 21.7712M16.1756 19.3912L19.3606 21.7712M10.9306 3.32617H13.0706"
         stroke="#148B16"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M8.34016 17.0416C8.92282 17.0416 9.39516 16.5693 9.39516 15.9866C9.39516 15.404 8.92282 14.9316 8.34016 14.9316C7.7575 14.9316 7.28516 15.404 7.28516 15.9866C7.28516 16.5693 7.7575 17.0416 8.34016 17.0416Z"
         stroke="#148B16"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M15.6605 17.0416C16.2431 17.0416 16.7155 16.5693 16.7155 15.9866C16.7155 15.404 16.2431 14.9316 15.6605 14.9316C15.0778 14.9316 14.6055 15.404 14.6055 15.9866C14.6055 16.5693 15.0778 17.0416 15.6605 17.0416Z"
         stroke="#148B16"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M8.81844 3.32617H7.81844C7.21017 3.32749 6.6272 3.56971 6.19709 3.99982C5.76698 4.42993 5.52476 5.01291 5.52344 5.62117V17.1212C5.52476 17.7294 5.76698 18.3124 6.19709 18.7425C6.6272 19.1726 7.21017 19.4149 7.81844 19.4162H16.1684C16.7767 19.4149 17.3597 19.1726 17.7898 18.7425C18.2199 18.3124 18.4621 17.7294 18.4634 17.1212V5.62117C18.4621 5.01291 18.2199 4.42993 17.7898 3.99982C17.3597 3.56971 16.7767 3.32749 16.1684 3.32617H15.1684"
         stroke="#545353"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M9.87531 4.38148C10.458 4.38148 10.9303 3.90914 10.9303 3.32648C10.9303 2.74382 10.458 2.27148 9.87531 2.27148C9.29265 2.27148 8.82031 2.74382 8.82031 3.32648C8.82031 3.90914 9.29265 4.38148 9.87531 4.38148Z"
         stroke="#148B16"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M15.8731 7.15234H8.11812C7.61278 7.15234 7.20312 7.562 7.20312 8.06734V11.2023C7.20312 11.7077 7.61278 12.1173 8.11812 12.1173H15.8731C16.3785 12.1173 16.7881 11.7077 16.7881 11.2023V8.06734C16.7881 7.562 16.3785 7.15234 15.8731 7.15234Z"
         stroke="#545353"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M14.1253 4.38148C14.708 4.38148 15.1803 3.90914 15.1803 3.32648C15.1803 2.74382 14.708 2.27148 14.1253 2.27148C13.5427 2.27148 13.0703 2.74382 13.0703 3.32648C13.0703 3.90914 13.5427 4.38148 14.1253 4.38148Z"
         stroke="#148B16"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>,
   ],
@@ -10642,8 +10642,8 @@ export const amenitiesGroupList = new Map([
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12 12.0215) rotate(90) scale(10)"
         >
-          <stop stop-color="#545353" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#545353" />
+          <stop offset="1" stopColor="#148B16" />
         </radialGradient>
       </defs>
     </svg>,
@@ -10709,8 +10709,8 @@ export const specificationsList = new Map([
           <path
             d="M20 15.8027V3.80273C15.184 8.39673 14.977 12.1217 15 15.8027H20ZM20 15.8027V21.8027H19V18.8027M8 12.8027V18.8027M4 3.80273H12L11 12.8027H5L4 3.80273ZM7 18.8027H9V21.8027H7V18.8027Z"
             stroke="#5B5957"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </svg>
       ),
@@ -10745,8 +10745,8 @@ export const specificationsList = new Map([
           <path
             d="M17.0361 22.6742H9.3111C9.24101 22.6746 9.17163 22.6602 9.10746 22.632C9.0433 22.6038 8.98577 22.5624 8.93862 22.5106C8.89148 22.4587 8.85576 22.3975 8.83379 22.3309C8.81182 22.2644 8.80409 22.194 8.8111 22.1242V13.6992H19.0311C18.0497 15.1239 17.5264 16.8142 17.5311 18.5442V22.1242C17.5379 22.2627 17.4897 22.3982 17.397 22.5012C17.3042 22.6043 17.1745 22.6665 17.0361 22.6742Z"
             stroke="#5B5957"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             d="M14.426 13.6992V22.6992H6.75601C6.645 22.6998 6.53642 22.6668 6.44453 22.6045C6.35264 22.5422 6.28175 22.4536 6.24118 22.3503C6.20061 22.2469 6.19225 22.1337 6.21721 22.0256C6.24216 21.9174 6.29927 21.8193 6.38101 21.7442C7.25638 20.9759 7.92365 19.9991 8.32101 18.9042C8.85365 17.2286 9.13175 15.4824 9.14601 13.7242L14.426 13.6992Z"
@@ -10759,8 +10759,8 @@ export const specificationsList = new Map([
           <path
             d="M14.426 13.6992V22.6992H6.75601C6.645 22.6998 6.53642 22.6668 6.44453 22.6045C6.35264 22.5422 6.28175 22.4536 6.24118 22.3503C6.20061 22.2469 6.19225 22.1337 6.21721 22.0256C6.24216 21.9174 6.29927 21.8193 6.38101 21.7442C7.25638 20.9759 7.92365 19.9991 8.32101 18.9042C8.85365 17.2286 9.13175 15.4824 9.14601 13.7242L14.426 13.6992Z"
             stroke="#5B5957"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             d="M14.9336 4.0332H20.2236V13.1482C20.2236 13.2941 20.1656 13.434 20.0625 13.5371C19.9594 13.6403 19.8195 13.6982 19.6736 13.6982H15.4986C15.3527 13.6982 15.2128 13.6403 15.1097 13.5371C15.0065 13.434 14.9486 13.2941 14.9486 13.1482V4.0332H14.9336Z"
@@ -10773,15 +10773,15 @@ export const specificationsList = new Map([
           <path
             d="M14.9336 4.0332H20.2236V13.1482C20.2236 13.2941 20.1656 13.434 20.0625 13.5371C19.9594 13.6403 19.8195 13.6982 19.6736 13.6982H15.4986C15.3527 13.6982 15.2128 13.6403 15.1097 13.5371C15.0065 13.434 14.9486 13.2941 14.9486 13.1482V4.0332H14.9336Z"
             stroke="#5B5957"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             d="M14.4766 2.6543H20.6916V4.0343H14.4766V2.6543Z"
             fill="white"
             stroke="#5B5957"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             d="M15.6264 13.6992C15.6264 16.5592 13.1514 18.8792 10.1264 18.8792C5.92641 18.8792 3.44141 16.5592 3.44141 13.6992H15.6264Z"
@@ -10794,15 +10794,15 @@ export const specificationsList = new Map([
           <path
             d="M15.6264 13.6992C15.6264 16.5592 13.1514 18.8792 10.1264 18.8792C5.92641 18.8792 3.44141 16.5592 3.44141 13.6992H15.6264Z"
             stroke="#5B5957"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             d="M3.60634 12.3188C3.50876 12.307 3.40978 12.316 3.31596 12.3453C3.22213 12.3746 3.13559 12.4235 3.06205 12.4887C2.9885 12.5539 2.92962 12.634 2.8893 12.7236C2.84897 12.8133 2.82812 12.9105 2.82812 13.0087C2.82812 13.107 2.84897 13.2042 2.8893 13.2939C2.92962 13.3835 2.9885 13.4636 3.06205 13.5288C3.13559 13.594 3.22213 13.6429 3.31596 13.6722C3.40978 13.7015 3.50876 13.7105 3.60634 13.6987H14.9363V12.3188H3.60634ZM14.4763 5.34375H14.9363V7.27875H14.4763C14.3305 7.27875 14.1906 7.2208 14.0874 7.11766C13.9843 7.01451 13.9263 6.87462 13.9263 6.72875V5.89875C13.9257 5.8261 13.9394 5.75405 13.9668 5.68674C13.9941 5.61943 14.0345 5.55821 14.0857 5.50661C14.1368 5.455 14.1976 5.41404 14.2647 5.38609C14.3318 5.35814 14.4037 5.34375 14.4763 5.34375Z"
             fill="white"
             stroke="#5B5957"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </svg>
       ),
@@ -10889,8 +10889,8 @@ export const specificationsList = new Map([
             fill="#5B5957"
           />
           <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M18.9548 10.4392C18.8031 11.7269 18.2855 12.9441 17.4633 13.9467C16.9823 14.5347 15.7598 16.2127 15.4998 17.3027H8.49983C8.23983 16.2117 7.01583 14.5332 6.53483 13.9452C5.71306 12.9422 5.19598 11.7246 5.04483 10.4367C4.89581 9.15162 5.12009 7.85077 5.69083 6.68974C6.26694 5.51985 7.16247 4.53695 8.27383 3.85474C9.39484 3.16585 10.6851 2.80167 12.0008 2.80274C13.3198 2.80274 14.6118 3.16774 15.7278 3.85624C16.8389 4.53871 17.7341 5.52178 18.3098 6.69174C18.8803 7.85302 19.1043 9.15405 18.9548 10.4392ZM14.7913 16.3027H9.20783C8.99483 15.8112 8.71033 15.3187 8.44533 14.9002C8.09663 14.3503 7.71737 13.8203 7.30933 13.3127C6.60844 12.4576 6.16735 11.4194 6.03833 10.3212C5.91132 9.22682 6.10226 8.11898 6.58833 7.13024C7.08138 6.1298 7.84759 5.28939 8.79833 4.70624C9.76163 4.11447 10.8703 3.80169 12.0008 3.80274C13.1358 3.80274 14.2458 4.11724 15.2033 4.70774C16.1537 5.29102 16.9196 6.13142 17.4123 7.13174C17.8982 8.12073 18.0888 9.22875 17.9613 10.3232C17.8318 11.4211 17.3904 12.4589 16.6893 13.3137C16.2811 13.821 15.902 14.351 15.5538 14.9012C15.2888 15.3197 15.0043 15.8112 14.7913 16.3027Z"
             fill="#5B5957"
           />
@@ -10899,8 +10899,8 @@ export const specificationsList = new Map([
             fill="#5B5957"
           />
           <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M8.5 20.3027H15.5V21.8027C15.5 22.068 15.3946 22.3223 15.2071 22.5098C15.0196 22.6974 14.7652 22.8027 14.5 22.8027H9.5C9.23478 22.8027 8.98043 22.6974 8.79289 22.5098C8.60536 22.3223 8.5 22.068 8.5 21.8027V20.3027ZM9.5 21.3027H14.5V21.8027H9.5V21.3027Z"
             fill="#5B5957"
           />
@@ -10922,14 +10922,14 @@ export const specificationsList = new Map([
           fill="none"
         >
           <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M4 6.42383V3.42383H3V21.4238H4V11.4238H5.5V12.4238H12.5V10.7573H14C14.2652 10.7573 14.5196 10.8627 14.7071 11.0502C14.8946 11.2378 15 11.4921 15 11.7573V11.9238H14V15.9238H21V11.9238H20V11.4238C20 8.66233 17.7615 6.42383 15 6.42383H12.5V5.42383H9.5V4.42383H13C13.1326 4.42383 13.2598 4.37115 13.3536 4.27738C13.4473 4.18361 13.5 4.05644 13.5 3.92383C13.5 3.79122 13.4473 3.66404 13.3536 3.57027C13.2598 3.47651 13.1326 3.42383 13 3.42383H5C4.86739 3.42383 4.74021 3.47651 4.64645 3.57027C4.55268 3.66404 4.5 3.79122 4.5 3.92383C4.5 4.05644 4.55268 4.18361 4.64645 4.27738C4.74021 4.37115 4.86739 4.42383 5 4.42383H8.5V5.42383H5.5V6.42383H4ZM19 11.4238C19 10.363 18.5786 9.34555 17.8284 8.5954C17.0783 7.84526 16.0609 7.42383 15 7.42383H12.5V9.75733H14C14.5304 9.75733 15.0391 9.96804 15.4142 10.3431C15.7893 10.7182 16 11.2269 16 11.7573V11.9238H19V11.4238ZM20 12.9238H15V14.9238H20V12.9238ZM11.5 6.42383H6.5V11.4238H11.5V6.42383ZM5.5 10.4238H4V7.42383H5.5V10.4238Z"
             fill="#5B5957"
           />
           <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M17.75 21.4238C18.7165 21.4238 19.5 20.6098 19.5 19.6058C19.5 18.0148 17.75 16.4238 17.75 16.4238C17.75 16.4238 16 18.0148 16 19.6058C16 20.6098 16.7835 21.4238 17.75 21.4238ZM17.75 20.4238C18.1285 20.4238 18.5 20.0938 18.5 19.6058C18.5 19.1398 18.224 18.5623 17.8185 18.0093C17.796 17.9786 17.7731 17.9481 17.75 17.9178C17.727 17.9478 17.704 17.9783 17.6815 18.0093C17.2765 18.5618 17 19.1393 17 19.6058C17 20.0938 17.3715 20.4238 17.75 20.4238Z"
             fill="#5B5957"
           />
@@ -10974,9 +10974,9 @@ export const specificationsList = new Map([
           <path
             d="M4 13.8027V21.8027M8 13.8027V21.8027M16 13.8027V21.8027M12 13.8027V21.8027M20 13.8027V21.8027M2 21.8027H22M2 13.8027H22M18 10.8027V4.40273C18 4.2436 17.9368 4.09099 17.8243 3.97847C17.7117 3.86595 17.5591 3.80273 17.4 3.80273H6.6C6.44087 3.80273 6.28826 3.86595 6.17574 3.97847C6.06321 4.09099 6 4.2436 6 4.40273V10.8027"
             stroke="#5B5957"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </svg>
       ),
@@ -11017,9 +11017,9 @@ export const IconSun = ({ className }: any) => {
       <path
         d="M41.6018 7.43492C41.611 7.45471 41.6204 7.47439 41.6301 7.49394L50.9231 26.2552C51.3131 27.1085 51.9156 27.8478 52.6733 28.4022C53.433 28.9581 54.3228 29.309 55.2569 29.4216L75.7768 32.4616C75.7876 32.4632 75.7983 32.4647 75.8091 32.4661C75.8142 32.4668 75.8194 32.4675 75.8245 32.4682C75.9492 32.4842 76.0669 32.5354 76.1636 32.6158C76.2604 32.6962 76.3322 32.8024 76.3708 32.9221C76.4095 33.0418 76.4132 33.17 76.3817 33.2918L78.8018 33.9186L76.3817 33.2918C76.3502 33.4136 76.2846 33.5238 76.1928 33.6098C76.1748 33.6266 76.1571 33.6436 76.1396 33.6609L61.3438 48.3398C60.6766 48.9728 60.1753 49.7604 59.8844 50.6332C59.5896 51.5175 59.5201 52.4613 59.682 53.3792C59.6824 53.3815 59.6828 53.3837 59.6832 53.386L63.254 74.05L63.2546 74.0531C63.2777 74.1862 63.2631 74.3231 63.2123 74.4482L65.5288 75.3884L63.2123 74.4482C63.1615 74.5733 63.0766 74.6817 62.9673 74.761C62.8579 74.8402 62.7285 74.8872 62.5938 74.8966C62.4591 74.906 62.3245 74.8773 62.2052 74.8139L62.1999 74.8111L43.6913 65.0297C43.6694 65.0181 43.6472 65.0068 43.6249 64.9958C42.8081 64.5948 41.9103 64.3864 41.0004 64.3864C40.0904 64.3864 39.1926 64.5948 38.3758 64.9958C38.3535 65.0068 38.3313 65.0181 38.3094 65.0297L19.8008 74.8111L19.7955 74.8139C19.6762 74.8773 19.5416 74.906 19.4069 74.8966C19.2722 74.8872 19.1428 74.8402 19.0334 74.761C18.9241 74.6817 18.8392 74.5733 18.7884 74.4482L16.4719 75.3884L18.7884 74.4482C18.7376 74.3231 18.723 74.1862 18.7462 74.0531L18.7475 74.0453L22.3175 53.1517C22.3181 53.1486 22.3186 53.1455 22.3192 53.1423C22.4805 52.2253 22.4108 51.2824 22.1164 50.399L19.7446 51.1895L22.1163 50.3989C21.8233 49.5198 21.3169 48.7272 20.6425 48.0919L5.6605 33.6366L5.64592 33.6227C5.55296 33.5344 5.48757 33.4211 5.4577 33.2964C5.42783 33.1717 5.43475 33.0411 5.47762 32.9203C5.52048 32.7995 5.59747 32.6937 5.69924 32.6157C5.801 32.5378 5.92319 32.491 6.051 32.4811C6.10883 32.4766 6.16649 32.4701 6.22387 32.4616L26.7438 29.4216C27.6779 29.309 28.5677 28.9581 29.3274 28.4022L27.8511 26.3846L29.3274 28.4022C30.0851 27.8478 30.6876 27.1085 31.0776 26.2552L40.3706 7.49394C40.3803 7.47439 40.3897 7.45471 40.3989 7.43492C40.452 7.32015 40.5369 7.22299 40.6435 7.1549C40.75 7.08681 40.8739 7.05063 41.0004 7.05063C41.1268 7.05063 41.2507 7.08681 41.3572 7.1549C41.4638 7.22299 41.5487 7.32015 41.6018 7.43492Z"
         stroke="#FFD600"
-        stroke-width="5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
@@ -11094,7 +11094,7 @@ export const infoIcon = (
     viewBox="0 0 24 24"
     fill="none"
   >
-    <g clip-path="url(#clip0_1741_75794)">
+    <g clipPath="url(#clip0_1741_75794)">
       <path
         d="M12.9325 5.93623C12.8125 5.84436 12.6737 5.77686 12.5125 5.73936C12.3531 5.70373 12.1843 5.68311 12.0025 5.68311C11.8206 5.68311 11.65 5.70186 11.4887 5.73936C11.3256 5.77498 11.1868 5.84248 11.065 5.93623C10.945 6.02811 10.8512 6.14998 10.7818 6.30186C10.7143 6.45373 10.6787 6.64498 10.6787 6.87186C10.6787 7.09498 10.7143 7.28248 10.7818 7.43811C10.8512 7.58998 10.945 7.71561 11.065 7.80748C11.185 7.89936 11.3256 7.96686 11.4887 8.00623C11.65 8.04561 11.8206 8.06623 12.0025 8.06623C12.1825 8.06623 12.3531 8.04561 12.5125 8.00623C12.6737 7.96686 12.8125 7.89936 12.9325 7.80748C13.0525 7.71561 13.1481 7.58998 13.2193 7.43811C13.2906 7.28248 13.3262 7.09498 13.3262 6.87186C13.3262 6.64311 13.2906 6.45186 13.2193 6.30186C13.1481 6.14998 13.0525 6.02811 12.9325 5.93623ZM10.7856 9.17623H13.2175V18.0844H10.7856V9.17623Z"
         fill="#148B16"
@@ -11136,8 +11136,8 @@ export const nearbyLocationIcon = (
     fill="none"
   >
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M8.49314 11.0426C9.44427 9.26367 10 7.30263 10 6C10 3.51472 7.98528 1.5 5.5 1.5C3.01472 1.5 1 3.51472 1 6C1 7.29254 1.54915 9.12352 2.50005 10.8425C3.3566 12.391 4.45178 13.6908 5.56521 14.39C6.57617 13.8743 7.63215 12.6529 8.49314 11.0426ZM5.5 15.5C8.5 14.5 11 9.03757 11 6C11 2.96243 8.53757 0.5 5.5 0.5C2.46243 0.5 0 2.96243 0 6C0 9.03757 2.5 14 5.5 15.5Z"
       fill="#001F35"
     />
@@ -11160,9 +11160,9 @@ export const Drive = () => {
       <path
         d="M13.761 7.83125C13.5462 7.52719 12.7485 7.31781 12.411 6.77063C12.0735 6.22344 11.7972 5.03844 10.9382 4.58313C10.0792 4.12781 8.43743 4 7.49993 4C6.56243 4 4.9218 4.125 4.06165 4.58219C3.20149 5.03938 2.92639 6.22344 2.58889 6.76969C2.25139 7.31594 1.45364 7.52719 1.23889 7.83125C1.02415 8.13531 0.872973 10.0575 0.964966 11C1.05696 11.9425 1.22864 12.5 1.22864 12.5H3.74817C4.16067 12.5 4.29485 12.3347 5.1386 12.25C6.06438 12.1562 6.97258 12.125 7.49993 12.125C8.02727 12.125 8.96477 12.1562 9.88997 12.25C10.7337 12.3353 10.8723 12.5 11.2804 12.5H13.7706C13.7706 12.5 13.9423 11.9425 14.0343 11C14.1263 10.0575 13.9745 8.13531 13.761 7.83125ZM11.7187 12.5H13.3593V13H11.7187V12.5ZM1.64055 12.5H3.28118V13H1.64055V12.5Z"
         stroke="black"
-        stroke-width="0.8"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="0.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M10.6779 10.161C10.5048 9.94754 9.94051 9.76941 9.19343 9.65004C8.44636 9.53066 8.1739 9.49972 7.50594 9.49972C6.83797 9.49972 6.53416 9.55097 5.81814 9.65004C5.10213 9.7491 4.56453 9.92535 4.33396 10.161C3.98797 10.5185 4.4948 10.9197 4.89265 10.9685C5.2782 11.0153 6.049 10.9982 7.50916 10.9982C8.96931 10.9982 9.74011 11.0153 10.1257 10.9685C10.5229 10.9169 10.9934 10.5435 10.6779 10.161ZM12.6437 8.09504C12.6421 8.07022 12.6319 8.04692 12.6151 8.02962C12.5984 8.01231 12.5762 8.00223 12.5529 8.00129C12.2069 7.98816 11.8556 8.01441 11.2325 8.21035C10.9146 8.30935 10.616 8.46878 10.3512 8.68097C10.2845 8.7366 10.3082 8.88691 10.392 8.90285C10.9056 8.96711 11.4223 8.99945 11.9394 8.99972C12.2497 8.99972 12.5699 8.90597 12.6294 8.61097C12.6597 8.44088 12.6645 8.26674 12.6437 8.09504ZM2.35642 8.09504C2.35807 8.07022 2.36825 8.04692 2.38501 8.02962C2.40177 8.01231 2.42393 8.00223 2.44724 8.00129C2.79324 7.98816 3.14451 8.01441 3.76765 8.21035C4.08557 8.30935 4.38411 8.46878 4.6489 8.68097C4.7157 8.7366 4.69197 8.88691 4.60818 8.90285C4.09456 8.96711 3.57786 8.99945 3.06072 8.99972C2.75047 8.99972 2.43025 8.90597 2.37078 8.61097C2.34046 8.44088 2.33561 8.26674 2.35642 8.09504Z"
@@ -11171,9 +11171,9 @@ export const Drive = () => {
       <path
         d="M12.6562 6.5H13.125M1.875 6.5H2.34375M2.28516 7.09375C2.28516 7.09375 3.64307 6.71875 7.5 6.71875C11.3569 6.71875 12.7148 7.09375 12.7148 7.09375"
         stroke="#148B16"
-        stroke-width="0.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
@@ -11188,8 +11188,8 @@ export const Walk = () => {
       fill="none"
     >
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M7.67711 7.66918C7.62339 7.66679 7.56962 7.66613 7.51586 7.66718H6.83398L6.77711 8.27517C6.66836 9.43517 6.63023 9.90184 6.72711 10.3425C6.82461 10.7838 7.05336 11.1832 7.63523 12.1705L9.24461 14.9012C9.2782 14.9568 9.30112 15.0189 9.31203 15.084C9.32294 15.1491 9.32163 15.2159 9.30818 15.2805C9.29473 15.3451 9.2694 15.4061 9.23366 15.4602C9.19793 15.5142 9.15249 15.5602 9.09998 15.5954C9.04748 15.6306 8.98895 15.6543 8.92779 15.6652C8.86663 15.6761 8.80404 15.6739 8.74367 15.6588C8.68329 15.6438 8.62633 15.616 8.57606 15.5773C8.5258 15.5386 8.48324 15.4896 8.45086 15.4332L6.84148 12.7025L6.79586 12.6252C6.27398 11.7405 5.95211 11.1945 5.81461 10.5718C5.67711 9.94851 5.73773 9.30651 5.83586 8.26584L5.84398 8.17518L5.89148 7.66784C5.57898 7.66984 5.34648 7.67584 5.16023 7.70051C4.92398 7.73051 4.81398 7.78384 4.73586 7.85051C4.65836 7.91717 4.58586 8.01984 4.50648 8.25917C4.42336 8.51051 4.35148 8.85118 4.24461 9.36384L4.05461 10.2758C4.04195 10.3407 4.01733 10.4022 3.98219 10.4568C3.94705 10.5114 3.90209 10.5581 3.84991 10.594C3.79774 10.6299 3.73939 10.6544 3.67826 10.6661C3.61713 10.6778 3.55443 10.6764 3.49382 10.662C3.4332 10.6476 3.37587 10.6205 3.32516 10.5822C3.27444 10.544 3.23136 10.4954 3.1984 10.4392C3.16545 10.3831 3.14328 10.3205 3.13319 10.2552C3.12309 10.1898 3.12528 10.123 3.13961 10.0585L3.33586 9.11784C3.43461 8.64184 3.51836 8.24184 3.62273 7.92584C3.73336 7.59117 3.88461 7.29717 4.14961 7.07051C4.41461 6.84384 4.71586 6.75051 5.04648 6.70718C5.35836 6.66718 5.74273 6.66718 6.19961 6.66718H7.53148C7.61648 6.66718 7.68211 6.66718 7.74398 6.67184C8.08442 6.69784 8.4099 6.83137 8.67893 7.05541C8.94796 7.27945 9.14837 7.58386 9.25461 7.92984C9.27336 7.99251 9.28961 8.06117 9.31086 8.14917L9.31398 8.16518C9.34898 8.31451 9.35961 8.35718 9.36961 8.38651C9.50086 8.79051 9.89773 9.02318 10.2877 8.92451C10.3165 8.91784 10.3559 8.90384 10.4927 8.85517L10.949 8.69317C11.0654 8.65696 11.1904 8.67027 11.2978 8.73029C11.4052 8.79031 11.4866 8.89237 11.5249 9.01506C11.5633 9.13775 11.5556 9.27151 11.5034 9.38825C11.4512 9.505 11.3587 9.59565 11.2452 9.64118L10.789 9.80384C10.6954 9.83954 10.6003 9.87069 10.504 9.89718C10.0897 10.0021 9.6536 9.93916 9.28028 9.72066C8.90696 9.50216 8.62298 9.14361 8.48336 8.71451C8.45522 8.62077 8.43082 8.52579 8.41023 8.42984L8.40461 8.40717C8.39242 8.35119 8.37867 8.29561 8.36336 8.24051C8.31502 8.0834 8.22395 7.94518 8.10175 7.84344C7.97955 7.7417 7.83173 7.68104 7.67711 7.66918Z"
         fill="#001F35"
       />
@@ -11233,28 +11233,39 @@ export const Market = () => {
       <path
         d="M30.9085 13.2657L28.5087 4.86625C28.4579 4.68867 28.3506 4.53246 28.2031 4.42127C28.0557 4.31008 27.876 4.24996 27.6913 4.25H21.958L22.6309 12.3307C22.6411 12.4606 22.6821 12.5862 22.7506 12.6971C22.8191 12.808 22.9131 12.9009 23.0248 12.9682C23.5773 13.2983 24.6568 13.9074 25.4997 14.1667C26.939 14.6101 29.0413 14.45 30.2398 14.3027C30.3564 14.2876 30.4682 14.2473 30.5675 14.1846C30.6668 14.1218 30.7513 14.0382 30.815 13.9394C30.8786 13.8407 30.92 13.7292 30.9361 13.6129C30.9523 13.4965 30.9429 13.378 30.9085 13.2657Z"
         stroke="#4D6677"
-        stroke-width="2"
+        strokeWidth="2"
       />
       <path
         d="M19.8331 14.1667C20.6377 13.9187 21.6577 13.3535 22.2272 13.0163C22.36 12.9373 22.4677 12.8224 22.5379 12.6847C22.608 12.5471 22.6379 12.3924 22.6239 12.2386L21.9581 4.25H12.0414L11.3756 12.2386C11.3613 12.3927 11.391 12.5476 11.4612 12.6855C11.5314 12.8234 11.6392 12.9386 11.7722 13.0177C12.3417 13.3535 13.3617 13.9187 14.1664 14.1667C16.2815 14.8183 17.718 14.8183 19.8331 14.1667Z"
         stroke="#4D6677"
-        stroke-width="2"
+        strokeWidth="2"
       />
       <path
         d="M5.49095 4.86625L3.09112 13.2671C3.05724 13.3793 3.04819 13.4975 3.06458 13.6135C3.08097 13.7295 3.12242 13.8406 3.18604 13.939C3.24966 14.0374 3.33393 14.1207 3.43301 14.1833C3.53209 14.2459 3.64359 14.2861 3.75979 14.3013C4.95687 14.45 7.06062 14.6087 8.49995 14.1667C9.34287 13.9074 10.4238 13.2982 10.9749 12.9696C11.0867 12.9022 11.1808 12.809 11.2493 12.6979C11.3178 12.5868 11.3587 12.4608 11.3687 12.3307L12.0416 4.25H6.30837C6.12367 4.24996 5.94397 4.31008 5.79649 4.42127C5.649 4.53246 5.54175 4.68867 5.49095 4.86625Z"
         stroke="#4D6677"
-        stroke-width="2"
+        strokeWidth="2"
       />
       <path
         d="M4.25 14.1666V26.9166C4.25 27.6681 4.54851 28.3887 5.07986 28.9201C5.61122 29.4514 6.33189 29.75 7.08333 29.75H26.9167C27.6681 29.75 28.3888 29.4514 28.9201 28.9201C29.4515 28.3887 29.75 27.6681 29.75 26.9166V14.1666"
         stroke="#4D6677"
-        stroke-width="2"
+        strokeWidth="2"
       />
     </svg>
   );
 };
-export const Restaurant = ()=> {
-            return <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 34 34" fill="none">
-            <path d="M7.4375 2.125C7.71929 2.125 7.98954 2.23694 8.1888 2.4362C8.38806 2.63546 8.5 2.90571 8.5 3.1875V9.5625C8.49965 10.2219 8.70385 10.8653 9.08443 11.4038C9.46502 11.9423 10.0033 12.3496 10.625 12.5694V3.1875C10.625 2.90571 10.7369 2.63546 10.9362 2.4362C11.1355 2.23694 11.4057 2.125 11.6875 2.125C11.9693 2.125 12.2395 2.23694 12.4388 2.4362C12.6381 2.63546 12.75 2.90571 12.75 3.1875V12.5694C13.3717 12.3496 13.91 11.9423 14.2906 11.4038C14.6712 10.8653 14.8753 10.2219 14.875 9.5625V3.1875C14.875 2.90571 14.9869 2.63546 15.1862 2.4362C15.3855 2.23694 15.6557 2.125 15.9375 2.125C16.2193 2.125 16.4895 2.23694 16.6888 2.4362C16.8881 2.63546 17 2.90571 17 3.1875V9.5625C17.0002 10.7872 16.5774 11.9744 15.8029 12.9231C15.0284 13.8718 13.9499 14.5238 12.75 14.7687V30.8125C12.75 31.0943 12.6381 31.3645 12.4388 31.5638C12.2395 31.7631 11.9693 31.875 11.6875 31.875C11.4057 31.875 11.1355 31.7631 10.9362 31.5638C10.7369 31.3645 10.625 31.0943 10.625 30.8125V14.7687C9.42505 14.5238 8.34658 13.8718 7.57211 12.9231C6.79764 11.9744 6.37475 10.7872 6.375 9.5625V3.1875C6.375 2.90571 6.48694 2.63546 6.6862 2.4362C6.88546 2.23694 7.15571 2.125 7.4375 2.125ZM22.2679 5.26788C22.6058 4.92788 22.9861 4.6665 23.375 4.49437V14.875H21.25V7.4375C21.25 6.72137 21.6198 5.91388 22.2679 5.26788ZM23.375 17V30.8125C23.375 31.0943 23.4869 31.3645 23.6862 31.5638C23.8855 31.7631 24.1557 31.875 24.4375 31.875C24.7193 31.875 24.9895 31.7631 25.1888 31.5638C25.3881 31.3645 25.5 31.0943 25.5 30.8125V3.1875C25.5 2.90571 25.3881 2.63546 25.1888 2.4362C24.9895 2.23694 24.7193 2.125 24.4375 2.125C23.0286 2.125 21.7111 2.81775 20.7634 3.76338C19.8177 4.71113 19.125 6.02863 19.125 7.4375V15.9375C19.125 16.2193 19.2369 16.4895 19.4362 16.6888C19.6355 16.8881 19.9057 17 20.1875 17H23.375Z" fill="#4D6677"/>
-          </svg>
-}
+export const Restaurant = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="34"
+      height="34"
+      viewBox="0 0 34 34"
+      fill="none"
+    >
+      <path
+        d="M7.4375 2.125C7.71929 2.125 7.98954 2.23694 8.1888 2.4362C8.38806 2.63546 8.5 2.90571 8.5 3.1875V9.5625C8.49965 10.2219 8.70385 10.8653 9.08443 11.4038C9.46502 11.9423 10.0033 12.3496 10.625 12.5694V3.1875C10.625 2.90571 10.7369 2.63546 10.9362 2.4362C11.1355 2.23694 11.4057 2.125 11.6875 2.125C11.9693 2.125 12.2395 2.23694 12.4388 2.4362C12.6381 2.63546 12.75 2.90571 12.75 3.1875V12.5694C13.3717 12.3496 13.91 11.9423 14.2906 11.4038C14.6712 10.8653 14.8753 10.2219 14.875 9.5625V3.1875C14.875 2.90571 14.9869 2.63546 15.1862 2.4362C15.3855 2.23694 15.6557 2.125 15.9375 2.125C16.2193 2.125 16.4895 2.23694 16.6888 2.4362C16.8881 2.63546 17 2.90571 17 3.1875V9.5625C17.0002 10.7872 16.5774 11.9744 15.8029 12.9231C15.0284 13.8718 13.9499 14.5238 12.75 14.7687V30.8125C12.75 31.0943 12.6381 31.3645 12.4388 31.5638C12.2395 31.7631 11.9693 31.875 11.6875 31.875C11.4057 31.875 11.1355 31.7631 10.9362 31.5638C10.7369 31.3645 10.625 31.0943 10.625 30.8125V14.7687C9.42505 14.5238 8.34658 13.8718 7.57211 12.9231C6.79764 11.9744 6.37475 10.7872 6.375 9.5625V3.1875C6.375 2.90571 6.48694 2.63546 6.6862 2.4362C6.88546 2.23694 7.15571 2.125 7.4375 2.125ZM22.2679 5.26788C22.6058 4.92788 22.9861 4.6665 23.375 4.49437V14.875H21.25V7.4375C21.25 6.72137 21.6198 5.91388 22.2679 5.26788ZM23.375 17V30.8125C23.375 31.0943 23.4869 31.3645 23.6862 31.5638C23.8855 31.7631 24.1557 31.875 24.4375 31.875C24.7193 31.875 24.9895 31.7631 25.1888 31.5638C25.3881 31.3645 25.5 31.0943 25.5 30.8125V3.1875C25.5 2.90571 25.3881 2.63546 25.1888 2.4362C24.9895 2.23694 24.7193 2.125 24.4375 2.125C23.0286 2.125 21.7111 2.81775 20.7634 3.76338C19.8177 4.71113 19.125 6.02863 19.125 7.4375V15.9375C19.125 16.2193 19.2369 16.4895 19.4362 16.6888C19.6355 16.8881 19.9057 17 20.1875 17H23.375Z"
+        fill="#4D6677"
+      />
+    </svg>
+  );
+};

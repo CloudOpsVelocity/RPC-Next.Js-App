@@ -7,14 +7,16 @@ import S from "@/app/styles/ModalCarousel.module.css";
 import { useAtom, useAtomValue } from "jotai";
 import { floorPlansArray, selectedFloorAtom } from "@/app/store/floor";
 import { Image } from "@mantine/core";
+import { useSubFloorPlanPopup } from "@/app/hooks/useSubFloorplanPopup";
 
 type CarouselModalProps = {
   opened: boolean;
   setOpened: Dispatch<SetStateAction<boolean>>;
+  close: () => void;
 };
 
-function CarouselModal({ opened, setOpened }: CarouselModalProps) {
-  const data = useAtomValue(selectedFloorAtom);
+function CarouselModal() {
+  const [opened, { close }] = useSubFloorPlanPopup();
   const TRANSITION_DURATION = 200;
 
   return (
@@ -24,10 +26,11 @@ function CarouselModal({ opened, setOpened }: CarouselModalProps) {
         size={"90%"}
         padding={0}
         transitionProps={{ duration: TRANSITION_DURATION }}
-        onClose={() => setOpened(false)}
+        onClose={close}
         classNames={{
           content: S.body,
           close: S.close,
+          header: S.header,
         }}
       >
         <div className="flex flex-col md:flex-row p-[2%]  mb-10 justify-center items-center gap-[45px] shrink-0">
@@ -54,7 +57,7 @@ const MiddleSection = () => {
           // @ts-ignore
           src={data.floorPlanUrl}
           radius="md"
-          h={750}
+          h={600}
           w={1500}
           fit="cover"
         />

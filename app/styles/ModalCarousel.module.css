@@ -13,3 +13,7 @@
 .overlay {
   margin-top: 150px;
 }
+
+.header {
+  display: none;
+}

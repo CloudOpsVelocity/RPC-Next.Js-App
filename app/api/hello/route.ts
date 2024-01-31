@@ -7,7 +7,6 @@ export async function GET(req: Request) {
   const lng = params.get("lng");
   const type = params.get("type");
   const travelType = params.get("travelType");
-  console.log(travelType);
 
   if (!lat || !lng || !type) {
     // Handle the case where 'lt', 'lng', or 'type' is not provided
@@ -36,9 +35,10 @@ export async function GET(req: Request) {
     return Response.json({ error: "Invalid type specified" });
   }
   try {
-    let url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=2500&rank=radius&type=${keyword}&keyword=${keyword}&key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`;
+    let url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=1000&rank=distance&type=${keyword}&keyword=${keyword}&key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`;
     console.log(url);
     const res = await axios.get(url);
+    console.log(res.data.results);
 
     const distanceUrl = `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&units=imperial&origins=${lat},${lng}&destinations=${res.data.results
       .map(

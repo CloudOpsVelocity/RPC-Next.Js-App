@@ -18,10 +18,10 @@ export default function Loans({
           <h2 className="text-[24px] lg:text-[32px] font-bold">
             BANK APPROVALS OF <span className="text-green-500">{projName}</span>
           </h2>
-          <p className="mt-2 text-[18px] lg:text-[20px] text-gray-600">
-            Lorem ipsum dolor sit amet, consectetur adipi
+          <p className="mt-4 text-[#4D6677] text-2xl italic font-medium leading-[normal] tracking-[0.96px]">
+            Unlock Your Dream Home with Hassle-Free Bank Approval Loans
           </p>
-          <div className="mt-6 flex justify-start items-center flex-wrap w-full gap-[3%]">
+          <div className="mt-16 flex justify-start items-center flex-wrap w-full gap-[3%]">
             {data?.map((item, index) => {
               if (item.bankid != undefined && item.bankid != null) {
                 return (

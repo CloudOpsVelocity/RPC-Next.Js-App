@@ -44,6 +44,7 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
   lang,
   projName,
 }) => {
+  const origin = { lat: parseFloat(lat), lng: parseFloat(lang) };
   const [directionsResponse, setDirectionsResponse] = useState<any | null>(
     null
   );
@@ -52,8 +53,8 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
     lat: number;
     lng: number;
   }>({
-    lat: parseInt(lat),
-    lng: parseInt(lang),
+    lat: parseFloat(lat),
+    lng: parseFloat(lang),
   });
   const [selectedTravelMode, setSelectedTravelMode] =
     useState<string>("TRANSIT");
@@ -85,19 +86,28 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
     },
     [map, selectedLocation, selectedTravelMode, selected]
   );
-  const originRef = useRef();
-  /** @type React.MutableRefObject<HTMLInputElement> */
-  const destiantionRef = useRef();
   async function calculateRoute() {
     if ((!map && !selectedLocation) || !selectedTravelMode) return;
-
+    const config = {
+      origin: {
+        lat: parseFloat(lat),
+        lng: parseFloat(lang),
+      }, // Default center
+      destination: new window.google.maps.LatLng(
+        selectedLocation.lat,
+        selectedLocation.lng
+      ),
+      // @ts-ignore
+      travelMode: selectedTravelMode,
+    };
+    console.log(config);
     const directionsService = new window.google.maps.DirectionsService();
 
     directionsService.route(
       {
         origin: {
-          lat: parseInt(lat),
-          lng: parseInt(lang),
+          lat: parseFloat(lat),
+          lng: parseFloat(lang),
         }, // Default center
         destination: new window.google.maps.LatLng(
           selectedLocation.lat,
@@ -109,6 +119,7 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
       (result, status) => {
         console.log(result);
         if (status === "OK" && result) {
+          console.log("Directions response:", result);
           setDirectionsResponse(result);
         } else {
           console.error(`Directions request failed: ${status}`);
@@ -119,7 +130,7 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
 
   const fetchNearbyPlaces = async () => {
     const response = await fetch(
-      `/api/hello?lt=${parseInt(lat)}&lng=${parseInt(
+      `/api/hello?lt=${parseFloat(lat)}&lng=${parseFloat(
         lang
       )}&type=${selected}&travelType=${selectedTravelMode}`
     );
@@ -315,10 +326,7 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
               {selectedLocation && !directionsResponse && (
                 <div className="relative">
                   <Marker
-                    position={{
-                      lat: parseInt(lat),
-                      lng: parseInt(lang),
-                    }}
+                    position={origin}
                     icon={{
                       url: "/mapIcon.svg",
                     }}
@@ -351,6 +359,7 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
               )}
               {directionsResponse && (
                 <DirectionsRenderer
+                  key={selectedLocation.lat}
                   options={{
                     directions: directionsResponse,
                   }}
@@ -360,24 +369,22 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
           )}
         </section>
       </div>
-      {/* <div className="mt-8">
-        <h1 className="text-[#303030] text-xl not-italic font-medium leading-[normal] tracking-[0.8px]">
-          School Nearby
-        </h1>
-        <div className="flex gap-2 mt-2">
-          {data &&
-            Object.values(data).length > 0 &&
-            Object.values(data)
-              ?.slice(5)
-              .map((item: any, index: any) => (
-                <MapCard
-                  key={index}
-                  {...item}
-                  showLocationOnMap={showLocationOnMap}
-                />
-              ))}
+      {data && Object.values(data).length > 0 && (
+        <div className="mt-8 ">
+          <h1 className="text-[#303030] text-xl not-italic font-medium leading-[normal] tracking-[0.8px] capitalize">
+            {selected} Nearby
+          </h1>
+          <div className="flex gap-2 mt-2 flex-wrap">
+            {Object.values(data).map((item: any, index: any) => (
+              <MapCard
+                key={index}
+                {...item}
+                showLocationOnMap={showLocationOnMap}
+              />
+            ))}
+          </div>
         </div>
-      </div> */}
+      )}
     </div>
   );
 };
@@ -393,43 +400,25 @@ const MapCard = ({
 }: any) => {
   return (
     <div
-      className="flex w-[450px] flex-col items-start gap-3 px-4 py-3.5 shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] border-[0.5px] border-solid border-[#D9D9D9] bg-[#fcfcfc] cursor-pointer"
+      className="flex flex-col items-start gap-3 px-2 py-3.5 shadow-[0px_4px_20px_0px_rgba(91,143,182,0.10)] rounded-[10px] border-[0.5px] border-solid border-[#D9D9D9] bg-[#fcfcfc] cursor-pointer"
       onClick={() =>
         showLocationOnMap({
           position: { lat: geometry.location.lat, lng: geometry.location.lng },
         })
       }
     >
-      <div className=" flex justify-between items-center w-full ">
+      <div className="flex justify-center items-start gap-[17px]">
         <p className="text-black text-base not-italic font-medium leading-[normal] capitalize">
           {name}
         </p>
         <div className="flex gap-1 text-sm">
-          <span className="flex items-center">
+          <span className="flex items-center min-w-[70px]">
             {nearbyLocationIcon}
-            <span className="ml-[4px] text-[#005DA0]  not-italic font-medium leading-[normal] ">
-              {distance.text}
+            <span className="ml-[4px] text-[#005DA0] text-base not-italic font-medium leading-[normal]">
+              {distance?.text ?? "N/A"}
             </span>
           </span>
-          <span>|</span>
-          <span className="text-[#001F35]  not-italic font-medium leading-[normal]">
-            {duration.text}
-          </span>
         </div>
-      </div>
-      <div className="flex items-center space-x-4 mt-2">
-        <p className="flex items-center gap-1 text-[#565D70] text-lg not-italic font-normal leading-[normal] lowercase">
-          <LuTrain size={15} />
-          Via public transport
-        </p>
-        <p className="flex items-center gap-1 text-[#565D70] text-lg not-italic font-normal leading-[normal] lowercase">
-          <Drive />
-          Drive
-        </p>
-        <p className="flex items-center gap-1 text-[#565D70] text-lg not-italic font-normal leading-[normal] lowercase">
-          <Walk />
-          Walk
-        </p>
       </div>
     </div>
   );

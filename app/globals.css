@@ -63,3 +63,7 @@
     rgba(245, 251, 255, 0.12) 100%
   );
 }
+
+.headerBg {
+  background: var(--header-bg, linear-gradient(287deg, #eff8ff 0%, #fff 100%));
+}

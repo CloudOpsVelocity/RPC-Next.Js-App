@@ -22,6 +22,7 @@ import ProjectDrawer from "@/app/components/project/Drawer";
 import DownloadBroucher from "@/app/components/project/downloadBroucher";
 import Download from "@/app/components/project/modals/Download";
 import LoginPopup from "@/app/components/molecules/popups/login";
+import FloorDownload from "@/app/components/project/modals/FloorDownload";
 
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
@@ -29,6 +30,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
   return (
     <div className="w-full relative">
       <Download />
+      <FloorDownload />
       <div className="mt-[90px] w-full pb-[2%] flex items-center justify-center flex-col">
         <div className="p-[2%] w-full">
           <p className="text-[16px] text-[#565D70] font-[500] mb-[1%]">

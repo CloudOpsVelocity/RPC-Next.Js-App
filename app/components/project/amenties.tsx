@@ -37,7 +37,7 @@ export default function Amenties({ data }: { data: AmenityList[] }) {
                     amenitiesFromDB != null &&
                     Object.keys(amenitiesFromDB).map((group, ind) => {
                       return (
-                        <div key={group + ind}>
+                        <div key={group}>
                           {amenitiesFromDB != undefined &&
                             amenitiesFromDB != null &&
                             amenitiesFromDB[`${group}`] != undefined &&

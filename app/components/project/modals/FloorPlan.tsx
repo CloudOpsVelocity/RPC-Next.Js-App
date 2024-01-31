@@ -20,6 +20,7 @@ import {
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { floorPlansArray, selectedFloorAtom } from "@/app/store/floor";
 import { useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
+import { useSubFloorPlanPopup } from "@/app/hooks/useSubFloorplanPopup";
 
 type Props = {
   propCgId: any;
@@ -998,7 +999,9 @@ const MiddleSection = ({ hide = false }: any) => {
   const data = useAtomValue(selectedFloorAtom);
 
   const floorsArray = useAtomValue(floorPlansArray);
-  const [opened, setOpened] = useState(false);
+  const [opened, { open, close }] = useSubFloorPlanPopup();
+  console.log(opened);
+  // const [opened, setOpened] = useState(false);
   const [currentImg, setCurrentImg] = useState(0);
   const [, setFloor] = useAtom(selectedFloorAtom);
 
@@ -1037,13 +1040,13 @@ const MiddleSection = ({ hide = false }: any) => {
           floorsArray != null &&
           floorsArray.length > 0 &&
           hide === false && (
-            <button onClick={() => setOpened(true)}>
+            <button onClick={open}>
               <PopupOpenSvg className="absolute bottom-0 right-0 w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] m-[1%] " />
             </button>
           )}
       </div>
 
-      <CarouselModal opened={opened} setOpened={setOpened} />
+      <CarouselModal />
 
       {floorsArray != undefined &&
         floorsArray != null &&
