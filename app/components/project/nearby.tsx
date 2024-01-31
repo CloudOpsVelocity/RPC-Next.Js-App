@@ -349,11 +349,61 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
           )}
         </section>
       </div>
+      <div className="mt-8">
+        <h1 className="text-[#303030] text-xl not-italic font-medium leading-[normal] tracking-[0.8px]">
+          School Nearby
+        </h1>
+        <div className="flex gap-2">
+          <MapCard />
+        </div>
+      </div>
     </div>
   );
 };
 
 export default Nearby;
+
+const MapCard = () => {
+  return (
+    <div className="flex w-[395px] flex-col items-start gap-3 px-4 py-3.5 shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] border-[0.5px] border-solid border-[#D9D9D9] bg-[#fcfcfc]">
+      <div className=" flex justify-between items-center w-full ">
+        <p className="text-black text-base not-italic font-medium leading-[normal] capitalize">
+          {" "}
+          DAV Public School
+        </p>
+        <div className="flex gap-1 text-sm">
+          <span className="flex items-center">
+            {nearbyLocationIcon}
+            <span className="ml-[4px] text-[#005DA0] text-lg not-italic font-medium leading-[normal] ">
+              {"N/A"}
+            </span>
+          </span>
+          <span>|</span>
+          <span className="text-[#001F35] text-lg not-italic font-medium leading-[normal]">
+            {"N/A"}
+          </span>
+        </div>
+      </div>
+      <div className="flex items-center space-x-4 mt-2">
+        {/* <BusIcon className="text-blue-500" /> */}
+        <p className="flex items-center gap-1 text-[#565D70] text-lg not-italic font-normal leading-[normal] lowercase">
+          <LuTrain size={15} />
+          Via public transport
+        </p>
+        {/* <CarIcon className="text-green-500" /> */}
+        <p className="flex items-center gap-1 text-[#565D70] text-lg not-italic font-normal leading-[normal] lowercase">
+          <LuTrain size={15} />
+          Drive
+        </p>
+        <p className="flex items-center gap-1 text-[#565D70] text-lg not-italic font-normal leading-[normal] lowercase">
+          <LuTrain size={15} />
+          Walk
+        </p>
+        {/* <TrafficConeIcon className="text-gray-500" /> */}
+      </div>
+    </div>
+  );
+};
 
 const LocationList: React.FC<{
   name: string;
