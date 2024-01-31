@@ -360,7 +360,7 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
           )}
         </section>
       </div>
-      <div className="mt-8">
+      {/* <div className="mt-8">
         <h1 className="text-[#303030] text-xl not-italic font-medium leading-[normal] tracking-[0.8px]">
           School Nearby
         </h1>
@@ -377,7 +377,7 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
                 />
               ))}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -127,7 +127,7 @@ const Footer = () => {
             <img
               className="relative w-[14px] h-[20px]"
               alt="Footerlocation"
-              src="footerlocation.svg"
+              src="location.svg"
             />
             <p className="relative w-fit mt-[-1.00px] [font-family:'Montserrat-SemiBold',Helvetica] font-semibold text-[#767270] text-[18px] tracking-[0] leading-[27px] whitespace-nowrap">
               Whitefield, Bengaluru-560066
@@ -137,11 +137,14 @@ const Footer = () => {
             <img
               className="relative w-[24px] h-[24px]"
               alt="Contact"
-              src="contact.svg"
+              src="/contact.svg"
             />
-            <p className="relative w-fit mt-[-1.00px] [font-family:'Montserrat-SemiBold',Helvetica] font-semibold text-[#767270] text-[18px] tracking-[0] leading-[27px] whitespace-nowrap">
+            <a
+              href={`tel:${8884440963}`}
+              className="relative w-fit mt-[-1.00px] [font-family:'Montserrat-SemiBold',Helvetica] font-semibold text-[#767270] text-[18px] tracking-[0] leading-[27px] whitespace-nowrap"
+            >
               +91-8884440963
-            </p>
+            </a>
           </div>
         </div>
       </div>
