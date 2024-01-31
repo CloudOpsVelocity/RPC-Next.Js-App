@@ -28,7 +28,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
     <>
       <div
         key={cardData.projIdEnc}
-        className="border text-card-foreground min-w-[350px] bg-white rounded-lg shadow-md overflow-hidden"
+        className="border text-card-foreground min-w-[350px] bg-white rounded-lg shadow-md min-h-[400px] overflow-hidden"
       >
         {type == "proj" && (
           <div className="flex space-y-1.5 p-6 bg-[#f5f5f5] px-4 py-2 justify-between items-center">
