@@ -23,11 +23,17 @@ import {
   calculateTime,
 } from "@/app/utils/maps";
 import { useDebouncedState } from "@mantine/hooks";
-import { MapIcon, nearbyLocationIcon } from "@/app/images/commonSvgs";
+import {
+  Drive,
+  Hostpital,
+  MapIcon,
+  Walk,
+  nearbyLocationIcon,
+} from "@/app/images/commonSvgs";
 
 interface Area {
   name: string;
-  Icon?: string;
+  Icon?: any;
   lat?: number;
   lng?: number;
   projName?: string;
@@ -123,14 +129,6 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
   const { data, isLoading } = useQuery({
     queryKey: ["nearbyPlaces" + selected + selectedTravelMode],
     queryFn: fetchNearbyPlaces,
-    onSuccess: (data) => {
-      if (Object.keys(data).length > 0) {
-        showLocationOnMap({
-          position: data[0].geometry.location,
-          name: data[0].name,
-        });
-      }
-    },
   });
   const handleLocationListClick = (type: string) => {
     setSelectedTravelMode(type);
@@ -336,6 +334,19 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
                       </div>
                     </InfoWindow>
                   </Marker>
+                  {data && Object.values(data).length > 0 && (
+                    <>
+                      {Object.values(data).map((item: any, index: any) => (
+                        <Marker
+                          key={index}
+                          position={{
+                            lat: item.geometry.location.lat,
+                            lng: item.geometry.location.lng,
+                          }}
+                        />
+                      ))}
+                    </>
+                  )}
                 </div>
               )}
               {directionsResponse && (
@@ -353,8 +364,18 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
         <h1 className="text-[#303030] text-xl not-italic font-medium leading-[normal] tracking-[0.8px]">
           School Nearby
         </h1>
-        <div className="flex gap-2">
-          <MapCard />
+        <div className="flex gap-2 mt-2">
+          {data &&
+            Object.values(data).length > 0 &&
+            Object.values(data)
+              ?.slice(5)
+              .map((item: any, index: any) => (
+                <MapCard
+                  key={index}
+                  {...item}
+                  showLocationOnMap={showLocationOnMap}
+                />
+              ))}
         </div>
       </div>
     </div>
@@ -363,43 +384,52 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
 
 export default Nearby;
 
-const MapCard = () => {
+const MapCard = ({
+  name,
+  distance,
+  duration,
+  showLocationOnMap,
+  geometry,
+}: any) => {
   return (
-    <div className="flex w-[395px] flex-col items-start gap-3 px-4 py-3.5 shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] border-[0.5px] border-solid border-[#D9D9D9] bg-[#fcfcfc]">
+    <div
+      className="flex w-[450px] flex-col items-start gap-3 px-4 py-3.5 shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] border-[0.5px] border-solid border-[#D9D9D9] bg-[#fcfcfc] cursor-pointer"
+      onClick={() =>
+        showLocationOnMap({
+          position: { lat: geometry.location.lat, lng: geometry.location.lng },
+        })
+      }
+    >
       <div className=" flex justify-between items-center w-full ">
         <p className="text-black text-base not-italic font-medium leading-[normal] capitalize">
-          {" "}
-          DAV Public School
+          {name}
         </p>
         <div className="flex gap-1 text-sm">
           <span className="flex items-center">
             {nearbyLocationIcon}
-            <span className="ml-[4px] text-[#005DA0] text-lg not-italic font-medium leading-[normal] ">
-              {"N/A"}
+            <span className="ml-[4px] text-[#005DA0]  not-italic font-medium leading-[normal] ">
+              {distance.text}
             </span>
           </span>
           <span>|</span>
-          <span className="text-[#001F35] text-lg not-italic font-medium leading-[normal]">
-            {"N/A"}
+          <span className="text-[#001F35]  not-italic font-medium leading-[normal]">
+            {duration.text}
           </span>
         </div>
       </div>
       <div className="flex items-center space-x-4 mt-2">
-        {/* <BusIcon className="text-blue-500" /> */}
         <p className="flex items-center gap-1 text-[#565D70] text-lg not-italic font-normal leading-[normal] lowercase">
           <LuTrain size={15} />
           Via public transport
         </p>
-        {/* <CarIcon className="text-green-500" /> */}
         <p className="flex items-center gap-1 text-[#565D70] text-lg not-italic font-normal leading-[normal] lowercase">
-          <LuTrain size={15} />
+          <Drive />
           Drive
         </p>
         <p className="flex items-center gap-1 text-[#565D70] text-lg not-italic font-normal leading-[normal] lowercase">
-          <LuTrain size={15} />
+          <Walk />
           Walk
         </p>
-        {/* <TrafficConeIcon className="text-gray-500" /> */}
       </div>
     </div>
   );
@@ -528,7 +558,7 @@ const areas: Area[] = [
   },
   {
     name: "hospital",
-    Icon: " ",
+    Icon: "/areas/hospital.svg",
   },
   {
     name: "school",
@@ -544,10 +574,10 @@ const areas: Area[] = [
   },
   {
     name: "bank",
-    Icon: " ",
+    Icon: "/areas/bank.svg",
   },
   {
     name: "clinic",
-    Icon: " ",
+    Icon: "",
   },
 ];

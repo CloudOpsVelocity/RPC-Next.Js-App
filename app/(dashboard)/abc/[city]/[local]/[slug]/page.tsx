@@ -9,7 +9,6 @@ import Reviews from "@/app/components/project/reviews";
 import Amenties from "@/app/components/project/amenties";
 import Loans from "@/app/components/project/loans";
 import { FaqWithBg } from "@/app/components/project/faq";
-import ProjectCarousel from "@/app/components/project/ProjectCard";
 import FirstBlock from "@/app/components/project/firstBlock";
 import Overview from "@/app/components/project/overview";
 import Testimonials from "@/app/components/project/testimonials";
@@ -26,7 +25,6 @@ import LoginPopup from "@/app/components/molecules/popups/login";
 
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
-  // const data = await getCachedUser(slug);
   const data = await getProjectDetails(slug);
   console.log(data);
   return (

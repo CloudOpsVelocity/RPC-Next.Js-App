@@ -63,7 +63,6 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
                       index + 1
                     }00`}
                   />
-                  {/* {JSON.stringify(imageUrl)} */}
                 </Carousel.Slide>
               ))}
             </Carousel>
@@ -83,10 +82,10 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
                 </h3>
 
                 <p className="text-[#202020] text-[20px] not-italic font-[500] leading-[normal] w-[100%] tracking-[0.32px]">
-                  {projectDetails.address}
-                  {/* {projectDetails.localityName}
-                  {projectDetails.stateName} {projectDetails.cityName}{" "}
-                  {projectDetails.pinCode} */}
+                  {projectDetails.address} {`${projectDetails.localityName} `}
+                  {`${projectDetails.cityName} `}
+                  {`${projectDetails?.stateName ?? ""} `}
+                  {projectDetails.pinCode}
                 </p>
 
                 <p className="text-[16px] mt-[7px] mb-[7px] lg:text-[20px] font-[600] text-[#001F35]">

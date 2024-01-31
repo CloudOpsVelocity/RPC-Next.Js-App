@@ -14,9 +14,7 @@ export default function Specifications({
   projName: string;
 }) {
   const [specs, setSpecs] = useState<SpecificationList[]>(data);
-  const [selectedSpecIndex, setSelectedSpecIndex] = useState<number | null>(
-    null
-  );
+  const [selectedSpecIndex, setSelectedSpecIndex] = useState<number | null>(0);
 
   const { scrollIntoView, targetRef, scrollableRef } = useScrollIntoView<
     HTMLDivElement,

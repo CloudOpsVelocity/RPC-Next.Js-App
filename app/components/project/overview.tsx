@@ -28,6 +28,9 @@ export default function Overview({
   localityName,
   startDate,
   endDate,
+  cityName,
+  stateName,
+  pinCode,
 }: Main) {
   return (
     <div
@@ -40,7 +43,10 @@ export default function Overview({
             {projectName}
           </h2>
           <p className="text-[16px] lg:text-[24px] text-[#505050] font-[500]">
-            {address}
+            {address} {`${localityName} `}
+            {`${cityName} `}
+            {`${stateName ?? ""} `}
+            {pinCode}
           </p>
         </div>
         <div className="flex justify-center items-end flex-col">
