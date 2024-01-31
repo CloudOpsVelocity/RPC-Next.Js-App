@@ -107,7 +107,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         <Reviews projName={data.projectName} />
         <DownloadBroucher url={data?.media?.projBroucherUrl} />
         <FaqWithBg data={data.faqs} projName={data.projectName} />
-        {/* <NearByCarousel /> */}
+        <NearByCarousel />
         <ProjectDrawer projName={data.projectName} />
       </div>
     </div>

@@ -1,27 +1,35 @@
 "use client";
 import useNearby from "@/app/hooks/useNearby";
 import React from "react";
+import ProjectCarousel from "./ProjectCard";
 
 export default function NearByCarousel() {
   const { data } = useNearby();
-  console.log(data);
+  console.log(data != undefined && data.builderProj != undefined ? data.builderProj : []);
   return (
-    <div>
-      {JSON.stringify(data)}
-      {/* <div className="flex flex-col justify-start items-start w-[90%]">
+      <div className="flex flex-col justify-start items-start w-[90%]">
           <ProjectCarousel
             type="proj"
             title="nEAR BY pROJECTS OF"
-            projName={data.projectName}
+            // projName={data.projectName}
             content="See what other customers also viewed"
+            data={data != undefined && data.nearbyProj != undefined ? data.nearbyProj : [] }
           />
 
+          
+          <ProjectCarousel
+            type="proj"
+            title="Projects By Developers"
+            content="See what developers has posted"
+            data={data != undefined && data.builderProj != undefined ? data.builderProj : [] }
+          />
+
+        {/* 
           <ProjectCarousel
             type="prop"
             title="Projects By Developers"
             content="See what developers has posted"
-          />
-        </div> */}
-    </div>
+          /> */}
+        </div>
   );
 }

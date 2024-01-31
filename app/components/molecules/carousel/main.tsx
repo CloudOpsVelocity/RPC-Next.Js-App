@@ -11,9 +11,10 @@ const MainCarousel = ({ children }: { children: React.ReactNode }) => {
       // withIndicators
       height={"auto"}
       slideSize={{ base: "100%", sm: "50%", md: "25.333333%" }}
-      slideGap={{ base: 0, sm: "md" }}
+      slideGap={{  sm: "md" }}
       loop
       align="start"
+      //orientation="horizontal"
     >
       {children}
     </Carousel>

@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import MainCarousel from "../molecules/carousel/main";
-import { CarouselSlide } from "@mantine/carousel";
+import { Carousel, CarouselSlide } from "@mantine/carousel";
 import Image from "next/image";
 import Button from "../../elements/button";
 import { Phone, ReraIcon, shortlistIconSvg } from "@/app/images/commonSvgs";
@@ -33,7 +33,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
         {type == "proj" && (
           <div className="flex space-y-1.5 p-6 bg-[#f5f5f5] px-4 py-2 justify-between items-center">
             <h3 className="tracking-tight text-[18px] font-[600] text-[#565D70]">
-              {cardData.projectName}
+              {cardData.projName}
             </h3>
             <div className="text-xs font-semibold text-right ">
               <span className="text-[16px] font-[700] text-[#148B16]">
@@ -49,6 +49,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
             </div>
           </div>
         )}
+
         <div className="p-4">
           {type == "proj" && (
             <p className="mb-[-30px] relative z-10 p-[2px] text-[#FFF] text-[14px] font-[700] w-[30%] flex pl-[4px] items-center bg-gradient-to-r from-[#006102] /0 to-[#FFF]/100">
@@ -93,15 +94,17 @@ export function ProjectCard({ type, cardData }: CardProps) {
               <p className="text-[14px] mb-[6px] font-[600] text-[#565D70] ">
                 Start - End Date:
                 <span className="ml-[4px] text-[#001F35]">
-                  {formatDate(cardData.startDate)} -{" "}
-                  {formatDate(cardData.endDate)}
+                  {formatDate(cardData.launchDate)} -{" "}
+                  {formatDate(cardData.possassionDate)}
                 </span>
               </p>
             )}
 
+            {cardData.propTypes && 
             <p className="text-[14px] mb-[6px] font-[600] text-[#00487C]">
-              {cardData.availableProperties.map((eachCity: string) => eachCity)}
+              {cardData.propTypes.map((eachCity: string) => eachCity)}
             </p>
+            }
 
             {type != "proj" && (
               <p className="text-[16px] mb-[6px] font-[600] text-[#4D6677]">
@@ -109,9 +112,12 @@ export function ProjectCard({ type, cardData }: CardProps) {
               </p>
             )}
 
+            {cardData.pinCode &&
             <p className="text-[18px] mb-[6px] font-[600] text-[#8791AE]">
-              {cardData.cityName} {cardData.pinCode}
+              {cardData.city} {cardData.pinCode}
             </p>
+            }
+
             {type != "proj" && (
               <p className="text-[16px] font-[500] text-[#4D6677]">
                 Posted by Agent
@@ -142,13 +148,15 @@ const ProjectCarousel = ({ type, content, title, projName, data }: Props) => {
       </h2>
       <p className="text-gray-500 mt-1 mb-2 text-lg italic ">{content}</p>
 
-      <MainCarousel>
-        <CarouselSlide>
+      <MainCarousel >
           {data &&
             data?.map((project: any, index: number) => {
-              return <ProjectCard key={index} type={type} cardData={project} />;
+              
+              return  <CarouselSlide >
+                  <ProjectCard key={index} type={type} cardData={project} />
+                </CarouselSlide>
             })}
-        </CarouselSlide>
+        
       </MainCarousel>
     </div>
   );
