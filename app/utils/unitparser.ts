@@ -3,7 +3,7 @@ const SQUARE_FOOT_SUFFIX = " sq.ft";
 const parseUnitStrings = (unitStrings: string[]): string => {
   const parsedUnits: string[] = [];
 
-  unitStrings.forEach((unit) => {
+  unitStrings?.forEach((unit) => {
     const parts = unit.split("_").map((part) => part.trim());
     const [length, width] = parts.map(parseFloat);
     if (!isNaN(length) && !isNaN(width)) {
