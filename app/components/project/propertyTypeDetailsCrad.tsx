@@ -29,7 +29,7 @@ export default function PropertyTypeDetailsCrad({
   phase,
   data,
 }: Props) {
-  const [opened, { open, close }] = useFloorPlanPopup();
+  const [, { open }] = useFloorPlanPopup();
   const setcurrentPhase = useSetAtom(currentPhaseAtom);
   const setPrpCgId = useSetAtom(propCgIdAtom);
   const setSelectedFloor = useSetAtom(selectedFloorAtom);
