@@ -263,30 +263,30 @@ export default function FloorplansBlock({ projName, slug }: Props) {
           <p className=" text-[14px] lg:text-[16px] font-[500] text-[#005DA0] ">
             {projName}
 
-            {propCgId != projectprops.plot && selectedFloor.bhkName &&
-              "_" + selectedFloor.bhkName 
+            {propCgId != projectprops.plot && selectedFloor?.bhkName &&
+              "_" + selectedFloor?.bhkName 
             }
 
-            {propCgId == projectprops.apartment && selectedFloor.towerName && selectedFloor.towerName != "NA" &&
-              "_" + selectedFloor.towerName
+            {propCgId == projectprops.apartment && selectedFloor?.towerName && selectedFloor?.towerName != "NA" &&
+              "_" + selectedFloor?.towerName
             }
 
-            {propCgId != projectprops.apartment && propCgId != projectprops.villament && selectedFloor.unitNumber &&
-              "_" + selectedFloor.unitNumber
+            {propCgId != projectprops.apartment && propCgId != projectprops.villament && selectedFloor?.unitNumber &&
+              "_" + selectedFloor?.unitNumber
             }
 
-            {propCgId != projectprops.plot && selectedFloor.floor &&
-              "_" + selectedFloor.floor
+            {propCgId != projectprops.plot && selectedFloor?.floor &&
+              "_" + selectedFloor?.floor
             }
 
-            _{selectedFloor.facingName}
+            _{selectedFloor?.facingName}
 
-            {propCgId != projectprops.plot && selectedFloor.superBuildUparea &&
-              "_" + selectedFloor.superBuildUparea + " sq.ft"
+            {propCgId != projectprops.plot && selectedFloor?.superBuildUparea &&
+              "_" + selectedFloor?.superBuildUparea + " sq.ft"
             }
 
-            {propCgId == projectprops.plot && selectedFloor.plotArea &&
-              "_" + selectedFloor.plotArea + " sq.ft"
+            {propCgId == projectprops.plot && selectedFloor?.plotArea &&
+              "_" + selectedFloor?.plotArea + " sq.ft"
             }
             
           </p>
