@@ -436,7 +436,7 @@ const MapCard = ({
               |
             </span>
             <span className="text-black text-base not-italic font-medium leading-[normal] capitalize">
-              {duration.text ?? "N/A"}
+              {duration?.text ?? "N/A"}
             </span>
           </span>
         </div>
