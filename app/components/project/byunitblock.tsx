@@ -24,10 +24,20 @@ type SelectedValues = {
 
 const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
   const [, setFloor] = useAtom(selectedFloorAtom);
-
   const getOptions = (property: string): string[] => {
-    return Array.from(new Set(data.map((item: any) => String(item[property]))));
+    const filteredData = data.filter((item: any) => {
+      return Object.keys(selectedValues).every(
+        (key) =>
+          !selectedValues[key as keyof SelectedValues] ||
+          String(item[key]) === selectedValues[key as keyof SelectedValues]
+      );
+    });
+    const op = Array.from(
+      new Set(filteredData.map((item: any) => String(item[property])))
+    );
+    return op as string[];
   };
+
   const [selectedValues, setSelectedValues] = useState<SelectedValues>({
     towerName: "",
     unitNumber: "",
@@ -39,11 +49,10 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
     width: "",
     length: "",
   });
-
   const handleInputChange = (property: keyof SelectedValues, value: string) => {
     setSelectedValues((prevValues) => ({
       ...prevValues,
-      [property]: value,
+      [property]: prevValues[property] === value ? "" : value,
     }));
     handleSearch();
   };
@@ -61,7 +70,9 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
     // Log the filtered data for demonstration purposes
     console.log(filteredData);
   };
-
+  const towerName = getOptions("towerName");
+  const facing = getOptions("facingName");
+  console.log({ towerName, facing });
   return (
     <div className="p-[3%] w-full flex justify-start flex-col items-start">
       <h3 className="text-[#001F35] text-[20px] lg:text-[24px] font-[500]">

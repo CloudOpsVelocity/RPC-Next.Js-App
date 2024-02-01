@@ -42,7 +42,6 @@ function FloorPlanModal({ propCgId, data }: Props) {
     form.reset();
   };
   const handleSearch = (): void => {
-    // Implement your filtering logic here based on selectedValues
     const filteredData = data.filter((item: any) => {
       const matches = Object.values(form.values).some((value) => {
         if (value !== null) {
@@ -58,7 +57,6 @@ function FloorPlanModal({ propCgId, data }: Props) {
       return matches;
     });
 
-    console.log("Filtered Data:", filteredData);
     setSelectedFloor(filteredData[0]);
     setFloorsArray(filteredData);
   };
@@ -188,18 +186,25 @@ export default FloorPlanModal;
 const LeftSection = ({ propCgId, data }: Props) => {
   const [, setFloorsArray] = useAtom(floorPlansArray);
   const [, setFloor] = useAtom(selectedFloorAtom);
-  const { getInputProps, values, setFieldValue } = useFormContext();
+  const { getInputProps, values, setFieldValue, setValues } = useFormContext();
 
   const getOptions = (property: string): string[] => {
+    const filteredData = data?.filter((item: any) => {
+      return Object.keys(values).every(
+        (key) =>
+          !values[key] ||
+          String(item[key]).toLowerCase() === values[key].toLowerCase()
+      );
+    });
     if (data[0][property] != undefined) {
       return Array.from(
-        new Set(data.map((item: any) => String(item[property])))
+        new Set(filteredData.map((item: any) => String(item[property])))
       );
     } else {
       return [];
     }
   };
-  const handleSearch = () => {
+  const handleSearch = (key: string) => {
     // Implement your filtering logic here based on selectedValues
     const filteredData = data.filter((item: any) => {
       return Object.keys(values).every(
@@ -208,13 +213,25 @@ const LeftSection = ({ propCgId, data }: Props) => {
           String(item[key]).toLowerCase() === values[key].toLowerCase()
       );
     });
+
     //console.log(filteredData);
     setFloor(filteredData[0]);
     setFloorsArray(filteredData);
+    if (key === "unitNumber" && filteredData.length > 0) {
+      const filteredItem = filteredData[0];
+      const filteredValues: { [key: string]: string } = {};
+
+      // Convert all values to strings before setting them
+      Object.keys(filteredItem).forEach((prop) => {
+        filteredValues[prop] = String(filteredItem[prop]);
+      });
+
+      setValues(filteredValues);
+    }
   };
   const handleOnChange = (value: string, key: string) => {
     setFieldValue(key, value);
-    handleSearch();
+    handleSearch(key);
   };
 
   return (
@@ -1015,18 +1032,14 @@ const MiddleSection = ({ hide = false }: any) => {
         Sarang by sumadhura/2bhk/tower 1/ 04/north/1124 sq.ft
       </p>
       <div className="relative shadow-md h-[401px] rounded-[14px] border-solid border-[1px] border-[#EFEFEF] w-full flex justify-center items-center ">
-        {(type == "overview" && data == null ) ? 
-        
+        {type == "overview" && data == null ? (
           <div className="flex justify-center items-center flex-col ">
             {emptyFilesIcon}
             <p>No Matching Results Found !</p>
           </div>
-          :
-
-          (floorsArray != undefined &&
-          floorsArray != null &&
-          floorsArray.length > 0) ||
-
+        ) : (floorsArray != undefined &&
+            floorsArray != null &&
+            floorsArray.length > 0) ||
           data?.floorPlanUrl ? (
           <Image
             // @ts-ignore
