@@ -217,25 +217,29 @@ const LeftSection = ({ propCgId, data }: Props) => {
       );
     });
 
-    //console.log(filteredData);
     setFloor(filteredData[0]);
     setFloorsArray(filteredData);
-    if (key === "unitNumber" && filteredData.length > 0) {
-      const filteredItem = filteredData[0];
-      const filteredValues: { [key: string]: string } = {};
+    // if (key === "unitNumber" && filteredData.length > 0) {
+    //   const filteredItem = filteredData[0];
+    //   const filteredValues: { [key: string]: string } = {};
 
-      // Convert all values to strings before setting them
-      Object.keys(filteredItem).forEach((prop) => {
-        filteredValues[prop] = String(filteredItem[prop]);
-      });
+    //   // Convert all values to strings before setting them
+    //   Object.keys(filteredItem).forEach((prop) => {
+    //     filteredValues[prop] = String(filteredItem[prop]);
+    //   });
 
-      setValues(filteredValues);
-    }
+    //   setValues(filteredValues);
+    // }
   };
   const handleOnChange = (value: string, key: string) => {
     setFieldValue(key, value);
+    let prevObj = values;
+    prevObj[key] = value;
+    setValues(prevObj);
     handleSearch(key);
   };
+
+  //console.log(values)
 
   return (
     <div className="col-span-1 w-full md:w-[30%]  ">
@@ -577,7 +581,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
 };
 const RightSection = ({ propCgId }: Props) => {
   const data = useAtomValue(selectedFloorAtom);
-  console.log(data);
+  // console.log(data);
   return (
     <div className="bg-[#F4FBFF] p-6 rounded-lg w-full md:w-[20%] shadow">
       <div className="space-y-4">
@@ -1016,7 +1020,7 @@ const RightSection = ({ propCgId }: Props) => {
 const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
   const type = useAtomValue(typeAtom);
   const data = useAtomValue(selectedFloorAtom);
-  console.log(type, data);
+  // console.log(type, data);
 
   const floorsArray = useAtomValue(floorPlansArray);
   const [opened, { open, close }] = useSubFloorPlanPopup();

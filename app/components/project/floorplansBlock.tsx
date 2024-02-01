@@ -52,8 +52,8 @@ export default function FloorplansBlock({ projName, slug }: Props) {
     cacheTime: 300000,
   });
 
-  console.log(projectUnitsData);
-  console.log(selectedFloor);
+  // console.log(projectUnitsData)
+  // console.log(selectedFloor);
 
   if (isLoading) return <Loading />;
   const types = selectedPhase && Object?.keys(selectedPhase.propTypeOverview);
