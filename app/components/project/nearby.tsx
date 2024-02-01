@@ -166,7 +166,7 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
         })}
       </div>
 
-      <div className="border border-[#92B2C8] grid grid-cols-1 md:grid-cols-[2fr_3fr] rounded-xl overflow-hidden shadow-lg md:h-[600px]">
+      <div className="border border-[#92B2C8] grid grid-cols-1 md:grid-cols-[2fr_3fr] rounded-xl overflow-hidden shadow-lg md:h-[620px]">
         <section className="bg-white">
           <div id="tabs">
             <Tabs defaultValue="public">
@@ -220,7 +220,7 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
                     {isLoading ? (
                       <Loading />
                     ) : (
-                      <ScrollArea h={400}>
+                      <ScrollArea h={420}>
                         {data && Object.values(data).length > 0 ? (
                           Object.values(data).map(
                             (location: any, index: number) => (
@@ -249,7 +249,7 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
                     {isLoading ? (
                       <Loading />
                     ) : (
-                      <ScrollArea h={400}>
+                      <ScrollArea h={420}>
                         {data && Object.values(data).length > 0 ? (
                           Object.values(data).map(
                             (location: any, index: number) => (
@@ -278,7 +278,7 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
                     {isLoading ? (
                       <Loading />
                     ) : (
-                      <ScrollArea h={400}>
+                      <ScrollArea h={420}>
                         {data && Object.values(data).length > 0 ? (
                           Object.values(data).map(
                             (location: any, index: number) => (
@@ -390,7 +390,7 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
           <h1 className="text-[#303030] text-xl not-italic font-medium leading-[normal] tracking-[0.8px] capitalize">
             {selected} Nearby
           </h1>
-          <div className="flex gap-2 mt-2 flex-wrap">
+          <div className="flex gap-2 mt-3 flex-wrap">
             {Object.values(data).map((item: any, index: any) => (
               <MapCard
                 key={index}
@@ -407,25 +407,37 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
 
 export default Nearby;
 
-const MapCard = ({ name, distance, showLocationOnMap, geometry }: any) => {
+const MapCard = ({
+  name,
+  distance,
+  showLocationOnMap,
+  geometry,
+  duration,
+}: any) => {
   return (
     <div
-      className="flex flex-col items-start gap-3 px-2 py-3.5 shadow-[0px_4px_20px_0px_rgba(91,143,182,0.10)] rounded-[10px] border-[0.5px] border-solid border-[#D9D9D9] bg-[#fcfcfc] cursor-pointer"
+      className="flex flex-col items-start gap-3 px-2 py-3.5 cursor-pointer shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] border-[0.5px] border-solid border-[#D9D9D9] bg-[#fcfcfc] min-w-[385px]"
       onClick={() =>
         showLocationOnMap({
           position: { lat: geometry.location.lat, lng: geometry.location.lng },
         })
       }
     >
-      <div className="flex justify-center items-start gap-[17px]">
+      <div className="">
         <p className="text-black text-base not-italic font-medium leading-[normal] capitalize">
           {name}
         </p>
-        <div className="flex gap-1 text-sm">
+        <div className="flex gap-1 text-sm mt-[14px]">
           <span className="flex items-center min-w-[70px]">
             {nearbyLocationIcon}
-            <span className="ml-[4px] text-[#005DA0] text-base not-italic font-medium leading-[normal]">
+            <span className="ml-[4px] text-[#005DA0] text-base not-italic font-medium leading-[normal] ]">
               {distance?.text ?? "N/A"}
+            </span>{" "}
+            <span className=" px-2 text-black text-base not-italic font-medium leading-[normal] capitalize">
+              |
+            </span>
+            <span className="text-black text-base not-italic font-medium leading-[normal] capitalize">
+              {duration.text ?? "N/A"}
             </span>
           </span>
         </div>
@@ -459,7 +471,7 @@ const LocationList: React.FC<{
 
   return (
     <div
-      className="p-2 bg-gray-50 border rounded-lg cursor-pointer"
+      className="p-2 bg-gray-50 border rounded-lg cursor-pointer mt-[12px] max-w-[640px]"
       onClick={handleClick}
     >
       <div className="flex items-center justify-between">

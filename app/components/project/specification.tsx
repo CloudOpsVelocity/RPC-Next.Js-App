@@ -92,7 +92,7 @@ export default function Specifications({
                     <div
                       key={index}
                       id={spec.specName.toLowerCase()}
-                      className="p-[2%] w-full items-start justify-start flex-col"
+                      className="px-[2%] mt-10 w-full items-start justify-start flex-col"
                     >
                       <h1
                         className={` flex items-center gap-2 text-[#00487C] min-w-[10%] max-w-[15%] text-[24px] italic font-[600] py-2 px-2 rounded-xl  ${
