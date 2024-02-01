@@ -38,7 +38,9 @@ export default function FloorplansBlock({ projName, slug }: Props) {
   const [propCgId, setPropCgId] = useAtom(propCgIdAtom);
   const [currentPhase, setCurrentPhase] = useAtom(currentPhaseAtom);
   const [floorPlanType, setFloorPlanType] = useState("type");
-  const setSelectedFloor = useSetAtom(selectedFloorAtom);
+  // const setSelectedFloor = useSetAtom(selectedFloorAtom);
+  const [selectedFloor, setSelectedFloor] = useAtom(selectedFloorAtom);
+
   const selectedPhase = PhaseOverview?.find(
     (phase: any) => phase.phaseId === currentPhase
   );
@@ -49,6 +51,10 @@ export default function FloorplansBlock({ projName, slug }: Props) {
     staleTime: 30000,
     cacheTime: 300000,
   });
+
+  console.log(projectUnitsData)
+  console.log(selectedFloor);
+
 
   if (isLoading) return <Loading />;
   const types = selectedPhase && Object?.keys(selectedPhase.propTypeOverview);
@@ -255,10 +261,37 @@ export default function FloorplansBlock({ projName, slug }: Props) {
 
         <div className="w-full md:w-[50%] flex justify-end items-end flex-col p-[2%] shadow-inner md:shadow-none ">
           <p className=" text-[14px] lg:text-[16px] font-[500] text-[#005DA0] ">
-            {projName}/2bhk/tower 1/ 04/north/1124 sq.ft
+            {projName}
+
+            {propCgId != projectprops.plot && selectedFloor.bhkName &&
+              "_" + selectedFloor.bhkName 
+            }
+
+            {propCgId == projectprops.apartment && selectedFloor.towerName && selectedFloor.towerName != "NA" &&
+              "_" + selectedFloor.towerName
+            }
+
+            {propCgId != projectprops.apartment && propCgId != projectprops.villament && selectedFloor.unitNumber &&
+              "_" + selectedFloor.unitNumber
+            }
+
+            {propCgId != projectprops.plot && selectedFloor.floor &&
+              "_" + selectedFloor.floor
+            }
+
+            _{selectedFloor.facingName}
+
+            {propCgId != projectprops.plot && selectedFloor.superBuildUparea &&
+              "_" + selectedFloor.superBuildUparea + " sq.ft"
+            }
+
+            {propCgId == projectprops.plot && selectedFloor.plotArea &&
+              "_" + selectedFloor.plotArea + " sq.ft"
+            }
+            
           </p>
 
-          <FloorPlanModal propCgId={propCgId} data={projectUnitsData} />
+          <FloorPlanModal projName={projName} propCgId={propCgId} data={projectUnitsData} />
         </div>
       </div>
     </div>

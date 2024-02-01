@@ -22,6 +22,7 @@ import DownloadBroucher from "@/app/components/project/downloadBroucher";
 import Download from "@/app/components/project/modals/Download";
 import FloorDownload from "@/app/components/project/modals/FloorDownload";
 import NearByCarousel from "@/app/components/project/NearByCarousel";
+import Image from "next/image";
 
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
@@ -109,7 +110,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         <FaqWithBg data={data.faqs} projName={data.projectName} />
         <NearByCarousel projName={data.projectName} />
         <ProjectDrawer projName={data.projectName} />
-      </div>
+      </div> 
     </div>
   );
 }
