@@ -48,7 +48,7 @@ const Gallery: React.FC<GalleryProps> = ({
           overlay: S.overlay,
         }}
       >
-        <div className="h-[80vh]">
+        <div className="h-[80vh] ">
           {isImage ? (
             <Image
               radius="md"
