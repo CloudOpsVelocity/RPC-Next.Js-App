@@ -40,13 +40,13 @@ export default function Navigation() {
         onClick={() => handleArrowClick("L")}
       />
       <div
-        className="h-[64px] scroll-smooth pl-[24px] pr-[24px] w-[100%] bg-[#FCFCFC] shadow-sm flex justify-start items-center scrollbar-hide overflow-x-auto"
+        className="h-[64px] scroll-smooth  w-[100%] bg-[#FCFCFC] shadow-sm flex justify-start items-center scrollbar-hide overflow-x-auto"
         ref={scrollContainerRef}
       >
         {topics.map((topic) => (
           <div
             key={topic.id}
-            className={`cursor-pointer text-[24px] mr-[40px]  whitespace-nowrap ${
+            className={`cursor-pointer text-[21px] mr-[25px]  whitespace-nowrap ${
               currentBlock === topic.id
                 ? "text-[#0073C6] font-[700] decoration-solid underline"
                 : "text-[#4D6677] font-[500]"
