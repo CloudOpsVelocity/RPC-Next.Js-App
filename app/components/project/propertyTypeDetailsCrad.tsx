@@ -35,9 +35,9 @@ export default function PropertyTypeDetailsCrad({
   const setSelectedFloor = useSetAtom(selectedFloorAtom);
   const setFloorsArray = useSetAtom(floorPlansArray);
   const handleOpen = () => {
-    setSelectedFloor(data[0]);
+    setSelectedFloor(null);
     setFloorsArray(data);
-    open();
+    open("overview");
   };
   const updateValues = (newCurrentPhase: number, newPropCgId: number) => {
     setcurrentPhase(newCurrentPhase);

@@ -19,7 +19,7 @@ import {
 } from "@/app/context/floorplanContext";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { floorPlansArray, selectedFloorAtom } from "@/app/store/floor";
-import { useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
+import { typeAtom, useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
 import { useSubFloorPlanPopup } from "@/app/hooks/useSubFloorplanPopup";
 
 type Props = {
@@ -35,7 +35,7 @@ function FloorPlanModal({ propCgId, data }: Props) {
   const handleOpen = () => {
     setSelectedFloor(data[0]);
     setFloorsArray(data);
-    open();
+    open("floor");
   };
   const handleClose = () => {
     close();
@@ -994,11 +994,12 @@ const RightSection = ({ propCgId }: Props) => {
 };
 
 const MiddleSection = ({ hide = false }: any) => {
+  const type = useAtomValue(typeAtom);
   const data = useAtomValue(selectedFloorAtom);
+  console.log(type, data);
 
   const floorsArray = useAtomValue(floorPlansArray);
   const [opened, { open, close }] = useSubFloorPlanPopup();
-  console.log(opened);
   // const [opened, setOpened] = useState(false);
   const [currentImg, setCurrentImg] = useState(0);
   const [, setFloor] = useAtom(selectedFloorAtom);
@@ -1014,10 +1015,19 @@ const MiddleSection = ({ hide = false }: any) => {
         Sarang by sumadhura/2bhk/tower 1/ 04/north/1124 sq.ft
       </p>
       <div className="relative shadow-md h-[401px] rounded-[14px] border-solid border-[1px] border-[#EFEFEF] w-full flex justify-center items-center ">
-        {(floorsArray != undefined &&
+        {(type == "overview" && data == null ) ? 
+        
+          <div className="flex justify-center items-center flex-col ">
+            {emptyFilesIcon}
+            <p>No Matching Results Found !</p>
+          </div>
+          :
+
+          (floorsArray != undefined &&
           floorsArray != null &&
           floorsArray.length > 0) ||
-        data?.floorPlanUrl ? (
+
+          data?.floorPlanUrl ? (
           <Image
             // @ts-ignore
             src={floorsArray[currentImg]?.floorPlanUrl || data.floorPlanUrl}
@@ -1028,7 +1038,7 @@ const MiddleSection = ({ hide = false }: any) => {
             style={{ aspectRatio: "800 / 400", objectFit: "cover" }}
           />
         ) : (
-          <div>
+          <div className="flex justify-center items-center flex-col ">
             {emptyFilesIcon}
             <p>No Matching Results Found !</p>
           </div>
