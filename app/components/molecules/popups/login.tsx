@@ -5,9 +5,13 @@ import Logo from "../../atoms/Logo";
 import Login from "../auth/login";
 import Link from "next/link";
 import LoginPopupForm from "../auth/popups/login";
-export default function LoginPopup() {
+export default function LoginPopup({ type = "C/S" }: { type?: string }) {
   return (
-    <div className="flex justify-center items-start w-full pt-[10%] md:pt-[0%]">
+    <div
+      className={`flex justify-center items-start w-full pt-[10%] md:pt-[${
+        type == "RATING" ? "8%" : "0%"
+      }]`}
+    >
       <div className="w-full bg-white text-gray-600 justify-center items-center ">
         <Logo styles="w-full flex justify-center items-center " />
 

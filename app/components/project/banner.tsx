@@ -157,7 +157,7 @@ const AddRating = ({ opened, close }: { opened: any; close: any }) => {
           </div>
         </form>
       ) : (
-        <LoginPopup />
+        <LoginPopup type="RATING" />
       )}
     </Modal>
   );
