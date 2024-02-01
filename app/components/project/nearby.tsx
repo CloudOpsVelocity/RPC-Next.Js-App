@@ -130,8 +130,6 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
     setSelectedTravelMode(type);
   };
 
-  console.log(data);
-
   return (
     <div
       className="w-[90%] scroll-mt-[90px] mx-auto mt-[5%] mb-[5%] "

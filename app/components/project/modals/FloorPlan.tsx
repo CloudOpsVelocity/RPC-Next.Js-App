@@ -186,7 +186,6 @@ function FloorPlanModal({ propCgId, data, projName }: Props) {
 export default FloorPlanModal;
 
 const LeftSection = ({ propCgId, data }: Props) => {
-  const [newState, setNewState] = useAtom(filterDataAtom);
   const [, setFloorsArray] = useAtom(floorPlansArray);
   const [, setFloor] = useAtom(selectedFloorAtom);
   const { getInputProps, values, setFieldValue, setValues } = useFormContext();
@@ -219,17 +218,15 @@ const LeftSection = ({ propCgId, data }: Props) => {
 
     setFloor(filteredData[0]);
     setFloorsArray(filteredData);
-    // if (key === "unitNumber" && filteredData.length > 0) {
-    //   const filteredItem = filteredData[0];
-    //   const filteredValues: { [key: string]: string } = {};
+    if (key === "unitNumber" && filteredData.length > 0) {
+      const filteredItem = filteredData[0];
+      const filteredValues: { [key: string]: string } = {};
+      Object.keys(filteredItem).forEach((prop) => {
+        filteredValues[prop] = String(filteredItem[prop]);
+      });
 
-    //   // Convert all values to strings before setting them
-    //   Object.keys(filteredItem).forEach((prop) => {
-    //     filteredValues[prop] = String(filteredItem[prop]);
-    //   });
-
-    //   setValues(filteredValues);
-    // }
+      setValues(filteredValues);
+    }
   };
   const handleOnChange = (value: string, key: string) => {
     setFieldValue(key, value);
