@@ -1038,26 +1038,27 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
       <p className="text-[#005DA0] w-full text-right mb-[1%] text-[16px] font-[500] ">
         {projName}
         {propCgId != projectprops.plot &&
-          selectedFloor.bhkName &&
-          "_" + selectedFloor.bhkName}
+          selectedFloor?.bhkName &&
+          "_" + selectedFloor?.bhkName}
         {propCgId == projectprops.apartment &&
-          selectedFloor.towerName &&
-          selectedFloor.towerName != "NA" &&
-          "_" + selectedFloor.towerName}
+          selectedFloor?.towerName &&
+          selectedFloor?.towerName != "NA" &&
+          "_" + selectedFloor?.towerName}
+        ?
         {propCgId != projectprops.apartment &&
           propCgId != projectprops.villament &&
-          selectedFloor.unitNumber &&
-          "_" + selectedFloor.unitNumber}
+          selectedFloor?.unitNumber &&
+          "_" + selectedFloor?.unitNumber}
         {propCgId != projectprops.plot &&
-          selectedFloor.floor &&
-          "_" + selectedFloor.floor}
-        _{selectedFloor.facingName}
+          selectedFloor?.floor &&
+          "_" + selectedFloor?.floor}
+        _{selectedFloor?.facingName}
         {propCgId != projectprops.plot &&
-          selectedFloor.superBuildUparea &&
-          "_" + selectedFloor.superBuildUparea + " sq.ft"}
+          selectedFloor?.superBuildUparea &&
+          "_" + selectedFloor?.superBuildUparea + " sq.ft"}
         {propCgId == projectprops.plot &&
-          selectedFloor.plotArea &&
-          "_" + selectedFloor.plotArea + " sq.ft"}
+          selectedFloor?.plotArea &&
+          "_" + selectedFloor?.plotArea + " sq.ft"}
       </p>
       <div className="relative shadow-md h-[401px] rounded-[14px] border-solid border-[1px] border-[#EFEFEF] w-full flex justify-center items-center ">
         {type == "overview" && data == null ? (

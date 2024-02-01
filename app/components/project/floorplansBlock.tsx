@@ -262,26 +262,26 @@ export default function FloorplansBlock({ projName, slug }: Props) {
           <p className=" text-[14px] lg:text-[16px] font-[500] text-[#005DA0] ">
             {projName}
             {propCgId != projectprops.plot &&
-              selectedFloor.bhkName &&
-              "_" + selectedFloor.bhkName}
+              selectedFloor?.bhkName &&
+              "_" + selectedFloor?.bhkName}
             {propCgId == projectprops.apartment &&
-              selectedFloor.towerName &&
-              selectedFloor.towerName != "NA" &&
-              "_" + selectedFloor.towerName}
+              selectedFloor?.towerName &&
+              selectedFloor?.towerName != "NA" &&
+              "_" + selectedFloor?.towerName}
             {propCgId != projectprops.apartment &&
               propCgId != projectprops.villament &&
-              selectedFloor.unitNumber &&
-              "_" + selectedFloor.unitNumber}
+              selectedFloor?.unitNumber &&
+              "_" + selectedFloor?.unitNumber}
             {propCgId != projectprops.plot &&
-              selectedFloor.floor &&
-              "_" + selectedFloor.floor}
-            _{selectedFloor.facingName}
+              selectedFloor?.floor &&
+              "_" + selectedFloor?.floor}
+            _{selectedFloor?.facingName}
             {propCgId != projectprops.plot &&
-              selectedFloor.superBuildUparea &&
-              "_" + selectedFloor.superBuildUparea + " sq.ft"}
+              selectedFloor?.superBuildUparea &&
+              "_" + selectedFloor?.superBuildUparea + " sq.ft"}
             {propCgId == projectprops.plot &&
-              selectedFloor.plotArea &&
-              "_" + selectedFloor.plotArea + " sq.ft"}
+              selectedFloor?.plotArea &&
+              "_" + selectedFloor?.plotArea + " sq.ft"}
           </p>
 
           <FloorPlanModal
