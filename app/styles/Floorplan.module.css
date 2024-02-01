@@ -18,3 +18,40 @@
 .overlay {
   margin-top: 90px;
 }
+
+.input{
+  color: #4D6677;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: capitalize;
+  height: 33px;
+  border-radius: 5px;
+  border: 0.3px solid #4D6677;
+  background: #FFF;
+  box-sizing: border-box;
+  align-self: flex-end;
+}
+
+.label{
+  color: #4D6677;
+  font-family: Montserrat;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: capitalize;
+  
+}
+
+.root{
+  padding-top: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding-top: auto;
+  
+}

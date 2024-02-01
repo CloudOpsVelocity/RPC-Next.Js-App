@@ -71,3 +71,32 @@ export const bhkDetails = [
     value: 45,
   },
 ];
+
+export const filterKeysDetails = new Map([
+  ["bhkName", { name: "Unit type" }],
+  ["facingName", { name: "Facing" }],
+  ["towerName", { name: "Tower" }],
+  ["unitNumber", { name: "Unit Number" }],
+  ["superBuildUparea", { name: "Super Built Up Area" }],
+  ["caretarea", { name: "Carpet Area" }],
+  ["parkingType", { name: "Open/ Covered Parking" }],
+  ["totalNumberOfBalcony", { name: "Balconies" }],
+  ["totalNumberofBathroom", { name: "Bathroom" }],
+  ["floor", { name: "Floor" }],
+  ["block", { name: "Block" }],
+  ["gardenArea", { name: "Garden  Area" }],
+  ["terraceArea", { name: "Terrace  Area" }],
+  ["parkingArea", { name: "Parking  Area" }],
+  ["plotArea", { name: "Plot Area" }],
+  ["length", { name: "Length of Plot" }],
+  ["width", { name: "Breadth of Plot" }],
+  ["noOfCarParking", { name: "Car Parking" }],
+
+  ["projIdEnc", { name: "Project ID" }],
+  ["phaseId", { name: "Phase ID" }],
+  ["propType", { name: "Property Type" }],
+  ["bhk", { name: "BHK ID" }],
+  ["towerId", { name: "Tower ID" }],
+  ["facingId", { name: "Facing ID" }],
+  ["floorPlanUrl", { name: "FloorPlan URL" }],
+]);
