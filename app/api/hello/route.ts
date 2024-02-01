@@ -35,7 +35,7 @@ export async function GET(req: Request) {
     return Response.json({ error: "Invalid type specified" });
   }
   try {
-    let url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=1000&rank=distance&type=${keyword}&keyword=${keyword}&key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`;
+    let url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=1000&rank=distance&type=${keyword}&keyword=${keyword}&maxResultCount=10&key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`;
     console.log(url);
     const res = await axios.get(url);
     console.log(res.data.results);

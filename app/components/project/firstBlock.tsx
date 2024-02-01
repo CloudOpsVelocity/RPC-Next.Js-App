@@ -24,6 +24,16 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
   const images = getImageUrls(projectDetails?.media as any);
   const autoplay = useRef(Autoplay({ delay: 10000 }));
   const { hasReraStatus } = usePhaseWiseOverview();
+  const scrollToTopic = (): void => {
+    const element = document.getElementById("floorPlans");
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "center",
+      });
+    }
+  };
 
   return (
     <div
@@ -111,7 +121,10 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
                 ₹ {projectDetails.basePrice}/ Price per sqft onwards
               </p>
 
-              <p className="text-[16px] lg:text-[20px] font-[600] mr-auto md:mr-0 text-[#2A4C70] bg-[#FFF] rounded-[10px] shadow-md p-[8px] flex items-center gap-2 cursor-pointer">
+              <p
+                className="text-[16px] lg:text-[20px] font-[600] mr-auto md:mr-0 text-[#2A4C70] bg-[#FFF] rounded-[10px] shadow-md p-[8px] flex items-center gap-2 cursor-pointer"
+                onClick={scrollToTopic}
+              >
                 <Image
                   width={100}
                   height={100}
