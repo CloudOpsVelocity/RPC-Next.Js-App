@@ -7,11 +7,11 @@ import Link from "next/link";
 import LoginPopupForm from "../auth/popups/login";
 export default function LoginPopup() {
   return (
-    <div className="flex justify-center items-start w-full pt-[10%] md:pt-[10%]">
+    <div className="flex justify-center items-start w-full pt-[10%] md:pt-[0%]">
       <div className="w-full bg-white text-gray-600 justify-center items-center ">
         <Logo styles="w-full flex justify-center items-center " />
 
-        <div className="w-full  p-[10%] md:p-[2%]">
+        <div className="w-full  p-[10%] md:p-[2%] mt-6">
           <div className="w-full flex justify-center items-center gap-[5%] mb-[5%] ">
             <Link
               href="/login"

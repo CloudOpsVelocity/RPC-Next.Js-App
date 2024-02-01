@@ -69,7 +69,6 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
     width: "100%",
     height: "100%",
   };
-  console.log(selectedLocation);
 
   const showLocationOnMap = useCallback(
     (location: { position: { lat: number; lng: number }; name: string }) => {
@@ -130,12 +129,14 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
     setSelectedTravelMode(type);
   };
 
+  console.log(data);
+
   return (
     <div
       className="w-[90%] scroll-mt-[90px] mx-auto mt-[5%] mb-[5%] "
       id="nearBy"
     >
-      <h2 className="text-[24px] lg:text-[32px] font-semibold">
+      <h2 className="text-[24px] lg:text-[32px] font-semibold mb-[12px]">
         <span className="!text-green-600">{projName} </span>
         <span className="">Near BY LOCATIONS</span>
       </h2>
@@ -146,23 +147,22 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
 
       <div className="flex gap-6 mb-5 mt-1 w-full flex-wrap ">
         {areas.map((area) => {
-            return(
-              <button
-                onClick={() => {
-                  setSelected(area.name);
-                  setDirectionsResponse(null);
-                }}
-                className={clsx(
-                  "text-[#4D6677] text-xl not-italic font-medium flex items-center gap-[5px] leading-[normal] capitalize",
-                  selected === area.name && "!text-green-600 font-semibold"
-                )}
-                key={area.name}
-              >
-                {area.Icon} {area.name}
-              </button>
-            )
-          }
-        )}
+          return (
+            <button
+              onClick={() => {
+                setSelected(area.name);
+                setDirectionsResponse(null);
+              }}
+              className={clsx(
+                "text-[#4D6677] text-xl not-italic font-medium flex items-center gap-[5px] leading-[normal] capitalize",
+                selected === area.name && "!text-green-600 font-semibold"
+              )}
+              key={area.name}
+            >
+              {area.Icon} {area.name}
+            </button>
+          );
+        })}
       </div>
 
       <div className="border border-[#92B2C8] grid grid-cols-1 md:grid-cols-[2fr_3fr] rounded-xl overflow-hidden shadow-lg md:h-[600px]">
@@ -548,9 +548,23 @@ const SearchSection = ({ setSelectedLocation }: any) => {
 export const areas: Area[] = [
   {
     name: "commute",
-    Icon: (<svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 34 34" fill="none">
-            <path d="M11.3337 9.9169V9.93107M22.667 21.2502V21.2644M15.34 13.9232C16.1327 13.1308 16.6725 12.1211 16.8913 11.0218C17.1101 9.92256 16.998 8.78309 16.5691 7.74755C16.1403 6.712 15.414 5.82688 14.4821 5.20415C13.5502 4.58141 12.4545 4.24902 11.3337 4.24902C10.2128 4.24902 9.11717 4.58141 8.18525 5.20415C7.25334 5.82688 6.52703 6.712 6.09818 7.74755C5.66933 8.78309 5.55722 9.92256 5.776 11.0218C5.99479 12.1211 6.53466 13.1308 7.32733 13.9232L11.3337 17.931L15.34 13.9232ZM26.6733 25.2566C27.466 24.4641 28.0059 23.4544 28.2247 22.3552C28.4434 21.2559 28.3313 20.1164 27.9025 19.0809C27.4736 18.0453 26.7473 17.1602 25.8154 16.5375C24.8835 15.9147 23.7878 15.5824 22.667 15.5824C21.5462 15.5824 20.4505 15.9147 19.5186 16.5375C18.5867 17.1602 17.8604 18.0453 17.4315 19.0809C17.0027 20.1164 16.8905 21.2559 17.1093 22.3552C17.3281 23.4544 17.868 24.4641 18.6607 25.2566L22.667 29.2643L26.6733 25.2566Z" stroke="#4D6677" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>),
+    Icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="34"
+        height="34"
+        viewBox="0 0 34 34"
+        fill="none"
+      >
+        <path
+          d="M11.3337 9.9169V9.93107M22.667 21.2502V21.2644M15.34 13.9232C16.1327 13.1308 16.6725 12.1211 16.8913 11.0218C17.1101 9.92256 16.998 8.78309 16.5691 7.74755C16.1403 6.712 15.414 5.82688 14.4821 5.20415C13.5502 4.58141 12.4545 4.24902 11.3337 4.24902C10.2128 4.24902 9.11717 4.58141 8.18525 5.20415C7.25334 5.82688 6.52703 6.712 6.09818 7.74755C5.66933 8.78309 5.55722 9.92256 5.776 11.0218C5.99479 12.1211 6.53466 13.1308 7.32733 13.9232L11.3337 17.931L15.34 13.9232ZM26.6733 25.2566C27.466 24.4641 28.0059 23.4544 28.2247 22.3552C28.4434 21.2559 28.3313 20.1164 27.9025 19.0809C27.4736 18.0453 26.7473 17.1602 25.8154 16.5375C24.8835 15.9147 23.7878 15.5824 22.667 15.5824C21.5462 15.5824 20.4505 15.9147 19.5186 16.5375C18.5867 17.1602 17.8604 18.0453 17.4315 19.0809C17.0027 20.1164 16.8905 21.2559 17.1093 22.3552C17.3281 23.4544 17.868 24.4641 18.6607 25.2566L22.667 29.2643L26.6733 25.2566Z"
+          stroke="#4D6677"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    ),
   },
   {
     name: "Train",

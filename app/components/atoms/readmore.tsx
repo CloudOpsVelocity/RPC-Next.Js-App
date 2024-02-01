@@ -37,7 +37,7 @@ const ReadMore: React.FC<ReadMoreProps> = ({ text, maxLines = 4 }) => {
             className="text-[20px] lg:text-[24px] font-[700] text-[#0073C6] cursor-pointer"
             onClick={handleReadMoreClick}
           >
-            {expanded ? " Read Less" : "Read More"}
+            {expanded ? "" : "Read More"}
           </span>
         )}
       </p>

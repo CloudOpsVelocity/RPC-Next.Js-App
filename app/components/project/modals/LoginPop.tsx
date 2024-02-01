@@ -18,7 +18,7 @@ function LoginPopup({ type }: { type: "Shortlist" | "Compare" }) {
           content: S.content,
           overlay: S.overlay,
         }}
-        size={"35%"}
+        size={"30%"}
       >
         <LoginPop />
       </Modal>

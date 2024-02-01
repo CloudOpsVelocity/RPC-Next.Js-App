@@ -91,7 +91,7 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
                   {projectDetails.projectName}
                 </h3>
 
-                <p className="text-[#202020] text-[20px] not-italic font-[500] leading-[normal] w-[100%] tracking-[0.32px]">
+                <p className="text-[#202020] text-[20px] not-italic font-[500] leading-[normal] w-[100%] tracking-[0.32px] capitalize">
                   {projectDetails.address} {`${projectDetails.localityName} `}
                   {`${projectDetails.cityName} `}
                   {`${projectDetails?.stateName ?? ""} `}

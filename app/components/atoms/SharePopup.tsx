@@ -55,16 +55,21 @@ export default function SharePopup({
             </div>
             <p className="text-sm font-medium mb-2">or Copy Link</p>
             <div className="flex items-center justify-between border rounded-md p-2">
-              <span className="text-xs truncate">{CopiedUrl}</span>
+              <span
+                className="text-xs truncate"
+                onClick={() => navigator.clipboard.writeText(CopiedUrl)}
+              >
+                {CopiedUrl}
+              </span>
               <CopyButton value={CopiedUrl}>
                 {({ copied, copy }) => (
                   <Button
-                    className="!bg-[#0073C6]"
+                    className={`${copied ? "!bg-[#148B16]" : "!bg-[#0073C6]"}`}
                     color={copied ? "teal" : "#0073C6"}
                     onClick={copy}
                     miw={100}
                   >
-                    {copied ? "Copied url" : "Copy url"}
+                    {copied ? "Copied" : "Copy url"}
                   </Button>
                 )}
               </CopyButton>
