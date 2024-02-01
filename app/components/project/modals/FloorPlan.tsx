@@ -25,9 +25,10 @@ import { useSubFloorPlanPopup } from "@/app/hooks/useSubFloorplanPopup";
 type Props = {
   propCgId: any;
   data?: any;
+  projName?: string;
 };
 
-function FloorPlanModal({ propCgId, data }: Props) {
+function FloorPlanModal({ propCgId, data, projName }: Props) {
   const [selectedFloor, setSelectedFloor] = useAtom(selectedFloorAtom);
   const setFloorsArray = useSetAtom(floorPlansArray);
   const [opened, { open, close }] = useFloorPlanPopup();
@@ -169,7 +170,7 @@ function FloorPlanModal({ propCgId, data }: Props) {
             </div>
             <div className="flex justify-start items-start gap-[45px] flex-col md:flex-row w-full">
               <LeftSection propCgId={propCgId} data={data} />
-              <MiddleSection />
+              <MiddleSection projName={projName} propCgId={propCgId} />
               {selectedFloor && (
                 <RightSection propCgId={propCgId} data={data} />
               )}
@@ -1010,7 +1011,7 @@ const RightSection = ({ propCgId }: Props) => {
   );
 };
 
-const MiddleSection = ({ hide = false }: any) => {
+const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
   const type = useAtomValue(typeAtom);
   const data = useAtomValue(selectedFloorAtom);
   console.log(type, data);
@@ -1019,7 +1020,7 @@ const MiddleSection = ({ hide = false }: any) => {
   const [opened, { open, close }] = useSubFloorPlanPopup();
   // const [opened, setOpened] = useState(false);
   const [currentImg, setCurrentImg] = useState(0);
-  const [, setFloor] = useAtom(selectedFloorAtom);
+  const [selectedFloor, setFloor] = useAtom(selectedFloorAtom);
 
   const selectImg = (index: number) => {
     setFloor(floorsArray[index]);
@@ -1029,7 +1030,33 @@ const MiddleSection = ({ hide = false }: any) => {
   return (
     <div className="flex flex-col justify-center items-start shrink-0 w-full md:w-[40%]">
       <p className="text-[#005DA0] w-full text-right mb-[1%] text-[16px] font-[500] ">
-        Sarang by sumadhura/2bhk/tower 1/ 04/north/1124 sq.ft
+            {projName}
+
+            {propCgId != projectprops.plot && selectedFloor.bhkName &&
+              "_" + selectedFloor.bhkName 
+            }
+
+            {propCgId == projectprops.apartment && selectedFloor.towerName && selectedFloor.towerName != "NA" &&
+              "_" + selectedFloor.towerName
+            }
+
+            {propCgId != projectprops.apartment && propCgId != projectprops.villament && selectedFloor.unitNumber &&
+              "_" + selectedFloor.unitNumber
+            }
+
+            {propCgId != projectprops.plot && selectedFloor.floor &&
+              "_" + selectedFloor.floor
+            }
+
+            _{selectedFloor.facingName}
+
+            {propCgId != projectprops.plot && selectedFloor.superBuildUparea &&
+              "_" + selectedFloor.superBuildUparea + " sq.ft"
+            }
+
+            {propCgId == projectprops.plot && selectedFloor.plotArea &&
+              "_" + selectedFloor.plotArea + " sq.ft"
+            }
       </p>
       <div className="relative shadow-md h-[401px] rounded-[14px] border-solid border-[1px] border-[#EFEFEF] w-full flex justify-center items-center ">
         {type == "overview" && data == null ? (
@@ -1067,7 +1094,7 @@ const MiddleSection = ({ hide = false }: any) => {
           )}
       </div>
 
-      <CarouselModal />
+      <CarouselModal projName={projName} propCgId={propCgId} />
 
       {floorsArray != undefined &&
         floorsArray != null &&

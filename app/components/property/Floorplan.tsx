@@ -50,7 +50,7 @@ export default function RoomFloorplansBlock({ data }: { data: PhaseList[] }) {
       <div className=" h-[456px] lg:h-[570px] w-full rounded-[14px]  border-solid border-[1px] border-[#92B2C8] bg-[#FFF] shadow-md flex justify-center items-center ">
         <div className="w-[70%] flex justify-center items-center flex-col p-[2%] ">
           <p className=" text-[14px] lg:text-[16px] font-[500] text-[#005DA0] ">
-            Sarang by sumadhura/2bhk/tower 1/ 04/north/1124 sq.ft
+            Sarang by sumadhura/2bhk/tower 1/ 04/north/1124 sq.ft - 2
           </p>
           <div className="flex justify-center items-center h-[300px] lg:h-[450px]">
             {/* dISPLAY FLOOR PLAN HERE */}
@@ -61,3 +61,4 @@ export default function RoomFloorplansBlock({ data }: { data: PhaseList[] }) {
     </div>
   );
 }
+

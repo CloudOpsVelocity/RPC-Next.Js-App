@@ -23,7 +23,6 @@ type CardProps = {
 };
 
 export function ProjectCard({ type, cardData }: CardProps) {
-  console.log(type);
   return (
     <>
       <div
