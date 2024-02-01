@@ -69,7 +69,7 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
     width: "100%",
     height: "100%",
   };
-  console.log(selectedLocation);
+  // console.log(selectedLocation);
 
   const showLocationOnMap = useCallback(
     (location: { position: { lat: number; lng: number }; name: string }) => {
