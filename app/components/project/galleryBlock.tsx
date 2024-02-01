@@ -19,17 +19,16 @@ export default function GalleryBlock({
   projName,
   media,
 }: Media) {
-  const [selectedMedia, setSelectedMedia] = useState<string | null>(
-    projectPlanUrl
-  );
-
   const images = getImageUrls(media);
+  const [selectedMedia, setSelectedMedia] = useState<string | null>(images[0]);
 
   const videos = [walkThrowVideoUrl];
 
   const handleMediaClick = (media: string) => {
     setSelectedMedia(media);
   };
+  const [content, { open, close }] = useGallery();
+
   // const limitedImages = images.slice(0, 5);
   return (
     <div className="w-[90%] scroll-mt-[90px] mb-[10%]  " id="galleria">
@@ -58,9 +57,12 @@ export default function GalleryBlock({
                 <Image
                   radius="md"
                   h={550}
-                  // fit="contain"
                   src={selectedMedia}
                   alt="Preview"
+                  onClick={() => {
+                    console.log(selectedMedia);
+                    open("image", selectedMedia);
+                  }}
                 />
               )}
               <Gallery
