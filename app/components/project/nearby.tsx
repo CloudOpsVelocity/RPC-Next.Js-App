@@ -414,10 +414,11 @@ const MapCard = ({
 }: any) => {
   return (
     <div
-      className="flex flex-col items-start gap-3 px-2 py-3.5 cursor-pointer shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] border-[0.5px] border-solid border-[#D9D9D9] bg-[#fcfcfc] min-w-[385px]"
+      className="flex flex-col items-start gap-3 px-2 py-3.5 cursor-pointer shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] border-[0.5px] border-solid border-[#D9D9D9] bg-[#fcfcfc] min-w-[385px] max-w-[385px]"
       onClick={() =>
         showLocationOnMap({
           position: { lat: geometry.location.lat, lng: geometry.location.lng },
+          name: name,
         })
       }
     >
@@ -509,13 +510,15 @@ const SearchSection = ({ setSelectedLocation }: any) => {
     queryFn: () => getSearchResults(value),
     enabled: !!value,
   });
-  const handleSearchClick = async (id: number) => {
+  console.log(data);
+  const handleSearchClick = async (id: number, name: string) => {
     const res = await axios.get(`/api/latlong?id=${id}`);
     setSelectedLocation({
       position: {
         lat: res.data.location.lat,
         lng: res.data.location.lng,
       },
+      name: name,
     });
     setValue("");
   };
@@ -536,16 +539,24 @@ const SearchSection = ({ setSelectedLocation }: any) => {
         <>
           <div className="mt-2">
             {data?.autocompleteRes?.predictions?.map(
-              (result: any, index: number) => (
-                <div
-                  key={index}
-                  className="flex items-center my-1 cursor-pointer"
-                  onClick={() => handleSearchClick(result.place_id)}
-                >
-                  <IoLocationSharp className="text-gray-500" />
-                  <span className="ml-2">{result.description}</span>
-                </div>
-              )
+              (result: any, index: number) => {
+                console.log(result);
+                return (
+                  <div
+                    key={index}
+                    className="flex items-center my-1 cursor-pointer"
+                    onClick={() =>
+                      handleSearchClick(
+                        result.place_id,
+                        result.structured_formatting.main_text
+                      )
+                    }
+                  >
+                    <IoLocationSharp className="text-gray-500" />
+                    <span className="ml-2">{result.description}</span>
+                  </div>
+                );
+              }
             )}
           </div>
         </>
