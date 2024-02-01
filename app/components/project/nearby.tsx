@@ -46,6 +46,7 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
   const [selectedLocation, setSelectedLocation] = useState<{
     lat: number;
     lng: number;
+    name?: string;
   }>();
   const [selectedTravelMode, setSelectedTravelMode] =
     useState<string>("TRANSIT");
@@ -68,15 +69,15 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
     width: "100%",
     height: "100%",
   };
+  console.log(selectedLocation);
 
   const showLocationOnMap = useCallback(
     (location: { position: { lat: number; lng: number }; name: string }) => {
-      console.log({ t: location });
       setSelectedLocation({
         lat: location.position.lat,
         lng: location.position.lng,
+        name: location.name,
       });
-      // map?.panTo(location.position);
       calculateRoute(location);
     },
     [map, selectedLocation, selectedTravelMode, selected]
@@ -351,7 +352,7 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
                     options={{
                       directions: directionsResponse,
                     }}
-                  />{" "}
+                  />
                   <InfoWindow
                     position={
                       directionsResponse.routes[0].legs[0].start_location
@@ -359,13 +360,20 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
                     // onCloseClick={() => setInfoWindowPosition(null)}
                   >
                     <div className=" ">
-                      <p className="text-[#00487C] text-[10px] italic font-medium leading-[normal]">
+                      <p className="text-[#00487C] text-[15px] italic font-medium leading-[normal]">
                         Project you are exploring
                       </p>
                       <p className="text-[#006A02] text-sm not-italic font-semibold leading-[normal]">
                         {projName}
                       </p>
                     </div>
+                  </InfoWindow>
+                  <InfoWindow
+                    position={directionsResponse.routes[0].legs[0].end_location}
+                  >
+                    <p className="text-[#00487C] text-[17px] italic font-medium leading-[normal]">
+                      {selectedLocation?.name}
+                    </p>
                   </InfoWindow>
                 </>
               )}
@@ -441,6 +449,7 @@ const LocationList: React.FC<{
         lat: geometry.location.lat,
         lng: geometry.location.lng,
       },
+      name,
     });
   };
 

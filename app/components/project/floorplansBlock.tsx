@@ -42,7 +42,6 @@ export default function FloorplansBlock({ projName, slug }: Props) {
   const selectedPhase = PhaseOverview?.find(
     (phase: any) => phase.phaseId === currentPhase
   );
-  const selectedFloor = useAtomValue(selectedFloorAtom);
   const { data: projectUnitsData, isLoading } = useQuery({
     queryKey: [`/${propCgId}/${currentPhase}/${slug}`],
     queryFn: () => getProjectUnits(slug, currentPhase, propCgId),
