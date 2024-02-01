@@ -19,21 +19,20 @@ export default function GalleryBlock({
   projName,
   media,
 }: Media) {
-  const [selectedMedia, setSelectedMedia] = useState<string | null>(
-    projectPlanUrl
-  );
-
   const images = getImageUrls(media);
+  const [selectedMedia, setSelectedMedia] = useState<string | null>(images[0]);
 
   const videos = [walkThrowVideoUrl];
 
   const handleMediaClick = (media: string) => {
     setSelectedMedia(media);
   };
+  const [content, { open, close }] = useGallery();
+
   // const limitedImages = images.slice(0, 5);
   return (
     <div className="w-[90%] scroll-mt-[90px] mb-[10%]  " id="galleria">
-      <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35] uppercase">
+      <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35] uppercase mb-[12px]">
         gALLERIA of{" "}
         <span className="text-[#148B16] font-[700] uppercase">{projName}</span>{" "}
       </h1>
@@ -58,9 +57,12 @@ export default function GalleryBlock({
                 <Image
                   radius="md"
                   h={550}
-                  // fit="contain"
                   src={selectedMedia}
                   alt="Preview"
+                  onClick={() => {
+                    console.log(selectedMedia);
+                    open("image", selectedMedia);
+                  }}
                 />
               )}
               <Gallery
@@ -85,7 +87,11 @@ export default function GalleryBlock({
                 height={100}
                 src={img as string}
                 alt={`Image ${ind + 1}`}
-                className="w-[110px] lg:w-[152px] h-[68px] lg:h-[94px] bg-[#dfdcdc] rounded-[5px] shadow-md mb-[4%] cursor-pointer"
+                className={`w-[110px] lg:w-[152px] h-[68px] lg:h-[94px] bg-[#dfdcdc] !rounded-[5px] shadow-md mb-[4%] cursor-pointer  ${
+                  selectedMedia === img
+                    ? "border-2 border-[#4d6677] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)]"
+                    : ""
+                }`}
                 onClick={() => handleMediaClick(img as string)}
               />
             ))}
@@ -126,7 +132,11 @@ export default function GalleryBlock({
                   // height={100}
                   src={img as string}
                   //alt={`Image ${ind + 1}`}
-                  className="!w-full rounded-[5px] cursor-pointer"
+                  className={`!w-full rounded-[5px] cursor-pointer ${
+                    selectedMedia === img
+                      ? "border-2 border-[#4d6677] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)]"
+                      : ""
+                  }`}
                   onClick={() => handleMediaClick(img as string)}
                 />
                 <span className="absolute top-[40%] left-[40%] pointer-events-none ">

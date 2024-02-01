@@ -22,6 +22,7 @@ import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { floorPlansArray, selectedFloorAtom } from "@/app/store/floor";
 import { typeAtom, useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
 import { useSubFloorPlanPopup } from "@/app/hooks/useSubFloorplanPopup";
+import filterDataAtom from "@/app/store/filterdata";
 
 type Props = {
   propCgId: any;
@@ -278,7 +279,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
       const filteredItem = filteredData[0];
       const filteredValues: { [key: string]: string } = {};
 
-      // Convert all values to strings before setting them
+
       Object.keys(filteredItem).forEach((prop) => {
         filteredValues[prop] = String(filteredItem[prop]);
       });
@@ -288,7 +289,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
   };
   const handleOnChange = (value: string, key: string) => {
     setFieldValue(key, value);
-    let prevObj = values
+    let prevObj = values;
     prevObj[key] = value;
     setValues(prevObj);
     handleSearch(key);
@@ -878,33 +879,29 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
   return (
     <div className="flex flex-col justify-center items-start shrink-0 w-full max-w-[686px]">
       <p className="text-[#005DA0] w-full text-right mb-[1%] text-[16px] font-[500] ">
-            {projName}
-
-            {propCgId != projectprops.plot && selectedFloor?.bhkName &&
-              "_" + selectedFloor?.bhkName 
-            }
-
-            {propCgId == projectprops.apartment && selectedFloor?.towerName && selectedFloor?.towerName != "NA" &&
-              "_" + selectedFloor?.towerName
-            }?
-
-            {propCgId != projectprops.apartment && propCgId != projectprops.villament && selectedFloor?.unitNumber &&
-              "_" + selectedFloor?.unitNumber
-            }
-
-            {propCgId != projectprops.plot && selectedFloor?.floor &&
-              "_" + selectedFloor?.floor
-            }
-
-            _{selectedFloor?.facingName}
-
-            {propCgId != projectprops.plot && selectedFloor?.superBuildUparea &&
-              "_" + selectedFloor?.superBuildUparea + " sq.ft"
-            }
-
-            {propCgId == projectprops.plot && selectedFloor?.plotArea &&
-              "_" + selectedFloor?.plotArea + " sq.ft"
-            }
+        {projName}
+        {propCgId != projectprops.plot &&
+          selectedFloor?.bhkName &&
+          "_" + selectedFloor?.bhkName}
+        {propCgId == projectprops.apartment &&
+          selectedFloor?.towerName &&
+          selectedFloor?.towerName != "NA" &&
+          "_" + selectedFloor?.towerName}
+        ?
+        {propCgId != projectprops.apartment &&
+          propCgId != projectprops.villament &&
+          selectedFloor?.unitNumber &&
+          "_" + selectedFloor?.unitNumber}
+        {propCgId != projectprops.plot &&
+          selectedFloor?.floor &&
+          "_" + selectedFloor?.floor}
+        _{selectedFloor?.facingName}
+        {propCgId != projectprops.plot &&
+          selectedFloor?.superBuildUparea &&
+          "_" + selectedFloor?.superBuildUparea + " sq.ft"}
+        {propCgId == projectprops.plot &&
+          selectedFloor?.plotArea &&
+          "_" + selectedFloor?.plotArea + " sq.ft"}
       </p>
       <div className="relative shadow-md rounded-[14px] border-solid border-[1px] border-[#EFEFEF] w-full flex justify-center items-center ">
         {type == "overview" && data == null ? (

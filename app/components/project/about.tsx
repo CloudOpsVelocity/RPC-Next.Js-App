@@ -9,10 +9,10 @@ type Props = {
 };
 
 export default function About({ heading, projName, content, id }: Props) {
-  console.log(content)
+  console.log(content);
   return (
     <div className="w-[90%] mb-[5%] scroll-mt-[90px]" id={id ?? ""}>
-      <h1 className="uppercase text-[24px] lg:text-[32px] font-[600] text-[#001F35]">
+      <h1 className="uppercase text-[24px] lg:text-[32px] font-[600] text-[#001F35] mb-[24px]">
         {heading}{" "}
         <span className="text-[#148B16] font-[700] uppercase">{projName}</span>{" "}
       </h1>

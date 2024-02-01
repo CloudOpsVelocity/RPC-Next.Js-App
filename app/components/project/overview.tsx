@@ -42,7 +42,7 @@ export default function Overview({
           <h2 className="text-[24px] lg:text-[32px] text-[#148B16] font-[700]">
             {projectName}
           </h2>
-          <p className="text-[16px] lg:text-[24px] text-[#505050] font-[500]">
+          <p className="text-[16px] lg:text-[24px] text-[#505050] font-[500] capitalize">
             {address} {`${localityName} `}
             {`${cityName} `}
             {`${stateName ?? ""} `}

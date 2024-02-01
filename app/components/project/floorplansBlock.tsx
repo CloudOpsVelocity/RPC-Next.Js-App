@@ -55,7 +55,6 @@ export default function FloorplansBlock({ projName, slug }: Props) {
   // console.log(projectUnitsData)
   // console.log(selectedFloor);
 
-
   if (isLoading) return <Loading />;
   const types = selectedPhase && Object?.keys(selectedPhase.propTypeOverview);
   const getPropertyType = (data: any) => {
@@ -125,14 +124,14 @@ export default function FloorplansBlock({ projName, slug }: Props) {
 
   return (
     <div className="w-[90%] scroll-mt-[90px] mb-[5%]" id="floorPlans">
-      <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35]">
+      <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35] mb-[12px]">
         FLOOR PLANS for{" "}
         <span className="text-[#148B16] font-[700] uppercase">{projName}</span>{" "}
       </h1>
       <p className="text-[16px] text-[#4D6677] md:text-2xl italic font-medium leading-[normal] capitalize">
         see floor plans as per your selected property type
       </p>
-      <div className=" flex justify-start items-start md:items-center mt-[2%] mb-[2%] flex-col md:flex-row ">
+      <div className=" flex justify-start items-start md:items-center mt-[0%] mb-[2%] flex-col md:flex-row ">
         {phaseList?.length > 1 && (
           <>
             <p className="text-[20px] lg:text-[24px] font-[500] mb-[3%] md:mb-0 text-[#333] mr-[20px] ">
@@ -262,36 +261,34 @@ export default function FloorplansBlock({ projName, slug }: Props) {
         <div className="w-full md:w-[50%] flex justify-end items-end flex-col p-[2%] shadow-inner md:shadow-none ">
           <p className=" text-[14px] lg:text-[16px] font-[500] text-[#005DA0] ">
             {projName}
-
-            {propCgId != projectprops.plot && selectedFloor?.bhkName &&
-              "_" + selectedFloor?.bhkName 
-            }
-
-            {propCgId == projectprops.apartment && selectedFloor?.towerName && selectedFloor?.towerName != "NA" &&
-              "_" + selectedFloor?.towerName
-            }
-
-            {propCgId != projectprops.apartment && propCgId != projectprops.villament && selectedFloor?.unitNumber &&
-              "_" + selectedFloor?.unitNumber
-            }
-
-            {propCgId != projectprops.plot && selectedFloor?.floor &&
-              "_" + selectedFloor?.floor
-            }
-
+            {propCgId != projectprops.plot &&
+              selectedFloor?.bhkName &&
+              "_" + selectedFloor?.bhkName}
+            {propCgId == projectprops.apartment &&
+              selectedFloor?.towerName &&
+              selectedFloor?.towerName != "NA" &&
+              "_" + selectedFloor?.towerName}
+            {propCgId != projectprops.apartment &&
+              propCgId != projectprops.villament &&
+              selectedFloor?.unitNumber &&
+              "_" + selectedFloor?.unitNumber}
+            {propCgId != projectprops.plot &&
+              selectedFloor?.floor &&
+              "_" + selectedFloor?.floor}
             _{selectedFloor?.facingName}
-
-            {propCgId != projectprops.plot && selectedFloor?.superBuildUparea &&
-              "_" + selectedFloor?.superBuildUparea + " sq.ft"
-            }
-
-            {propCgId == projectprops.plot && selectedFloor?.plotArea &&
-              "_" + selectedFloor?.plotArea + " sq.ft"
-            }
-            
+            {propCgId != projectprops.plot &&
+              selectedFloor?.superBuildUparea &&
+              "_" + selectedFloor?.superBuildUparea + " sq.ft"}
+            {propCgId == projectprops.plot &&
+              selectedFloor?.plotArea &&
+              "_" + selectedFloor?.plotArea + " sq.ft"}
           </p>
 
-          <FloorPlanModal projName={projName} propCgId={propCgId} data={projectUnitsData} />
+          <FloorPlanModal
+            projName={projName}
+            propCgId={propCgId}
+            data={projectUnitsData}
+          />
         </div>
       </div>
     </div>

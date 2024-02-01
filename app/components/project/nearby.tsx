@@ -135,7 +135,7 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
       className="w-[90%] scroll-mt-[90px] mx-auto mt-[5%] mb-[5%] "
       id="nearBy"
     >
-      <h2 className="text-[24px] lg:text-[32px] font-semibold">
+      <h2 className="text-[24px] lg:text-[32px] font-semibold mb-[12px]">
         <span className="!text-green-600">{projName} </span>
         <span className="">Near BY LOCATIONS</span>
       </h2>
@@ -146,26 +146,25 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
 
       <div className="flex gap-6 mb-5 mt-1 w-full flex-wrap ">
         {areas.map((area) => {
-            return(
-              <button
-                onClick={() => {
-                  setSelected(area.name);
-                  setDirectionsResponse(null);
-                }}
-                className={clsx(
-                  "text-[#4D6677] text-xl not-italic font-medium flex items-center gap-[5px] leading-[normal] capitalize",
-                  selected === area.name && "!text-green-600 font-semibold"
-                )}
-                key={area.name}
-              >
-                {area.Icon} {area.name}
-              </button>
-            )
-          }
-        )}
+          return (
+            <button
+              onClick={() => {
+                setSelected(area.name);
+                setDirectionsResponse(null);
+              }}
+              className={clsx(
+                "text-[#4D6677] text-xl not-italic font-medium flex items-center gap-[5px] leading-[normal] capitalize",
+                selected === area.name && "!text-green-600 font-semibold"
+              )}
+              key={area.name}
+            >
+              {area.Icon} {area.name}
+            </button>
+          );
+        })}
       </div>
 
-      <div className="border border-[#92B2C8] grid grid-cols-1 md:grid-cols-[2fr_3fr] rounded-xl overflow-hidden shadow-lg md:h-[600px]">
+      <div className="border border-[#92B2C8] grid grid-cols-1 md:grid-cols-[2fr_3fr] rounded-xl overflow-hidden shadow-lg md:h-[620px]">
         <section className="bg-white">
           <div id="tabs">
             <Tabs defaultValue="public">
@@ -219,7 +218,7 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
                     {isLoading ? (
                       <Loading />
                     ) : (
-                      <ScrollArea h={400}>
+                      <ScrollArea h={420}>
                         {data && Object.values(data).length > 0 ? (
                           Object.values(data).map(
                             (location: any, index: number) => (
@@ -248,7 +247,7 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
                     {isLoading ? (
                       <Loading />
                     ) : (
-                      <ScrollArea h={400}>
+                      <ScrollArea h={420}>
                         {data && Object.values(data).length > 0 ? (
                           Object.values(data).map(
                             (location: any, index: number) => (
@@ -277,7 +276,7 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
                     {isLoading ? (
                       <Loading />
                     ) : (
-                      <ScrollArea h={400}>
+                      <ScrollArea h={420}>
                         {data && Object.values(data).length > 0 ? (
                           Object.values(data).map(
                             (location: any, index: number) => (
@@ -389,7 +388,7 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
           <h1 className="text-[#303030] text-xl not-italic font-medium leading-[normal] tracking-[0.8px] capitalize">
             {selected} Nearby
           </h1>
-          <div className="flex gap-2 mt-2 flex-wrap">
+          <div className="flex gap-2 mt-3 flex-wrap">
             {Object.values(data).map((item: any, index: any) => (
               <MapCard
                 key={index}
@@ -406,25 +405,38 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
 
 export default Nearby;
 
-const MapCard = ({ name, distance, showLocationOnMap, geometry }: any) => {
+const MapCard = ({
+  name,
+  distance,
+  showLocationOnMap,
+  geometry,
+  duration,
+}: any) => {
   return (
     <div
-      className="flex flex-col items-start gap-3 px-2 py-3.5 shadow-[0px_4px_20px_0px_rgba(91,143,182,0.10)] rounded-[10px] border-[0.5px] border-solid border-[#D9D9D9] bg-[#fcfcfc] cursor-pointer"
+      className="flex flex-col items-start gap-3 px-2 py-3.5 cursor-pointer shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] border-[0.5px] border-solid border-[#D9D9D9] bg-[#fcfcfc] min-w-[385px] max-w-[385px]"
       onClick={() =>
         showLocationOnMap({
           position: { lat: geometry.location.lat, lng: geometry.location.lng },
+          name: name,
         })
       }
     >
-      <div className="flex justify-center items-start gap-[17px]">
+      <div className="">
         <p className="text-black text-base not-italic font-medium leading-[normal] capitalize">
           {name}
         </p>
-        <div className="flex gap-1 text-sm">
+        <div className="flex gap-1 text-sm mt-[14px]">
           <span className="flex items-center min-w-[70px]">
             {nearbyLocationIcon}
-            <span className="ml-[4px] text-[#005DA0] text-base not-italic font-medium leading-[normal]">
+            <span className="ml-[4px] text-[#005DA0] text-base not-italic font-medium leading-[normal] ]">
               {distance?.text ?? "N/A"}
+            </span>{" "}
+            <span className=" px-2 text-black text-base not-italic font-medium leading-[normal] capitalize">
+              |
+            </span>
+            <span className="text-black text-base not-italic font-medium leading-[normal] capitalize">
+              {duration?.text ?? "N/A"}
             </span>
           </span>
         </div>
@@ -458,7 +470,7 @@ const LocationList: React.FC<{
 
   return (
     <div
-      className="p-2 bg-gray-50 border rounded-lg cursor-pointer"
+      className="p-2 bg-gray-50 border rounded-lg cursor-pointer mt-[12px] max-w-[640px]"
       onClick={handleClick}
     >
       <div className="flex items-center justify-between">
@@ -498,13 +510,15 @@ const SearchSection = ({ setSelectedLocation }: any) => {
     queryFn: () => getSearchResults(value),
     enabled: !!value,
   });
-  const handleSearchClick = async (id: number) => {
+  console.log(data);
+  const handleSearchClick = async (id: number, name: string) => {
     const res = await axios.get(`/api/latlong?id=${id}`);
     setSelectedLocation({
       position: {
         lat: res.data.location.lat,
         lng: res.data.location.lng,
       },
+      name: name,
     });
     setValue("");
   };
@@ -525,16 +539,24 @@ const SearchSection = ({ setSelectedLocation }: any) => {
         <>
           <div className="mt-2">
             {data?.autocompleteRes?.predictions?.map(
-              (result: any, index: number) => (
-                <div
-                  key={index}
-                  className="flex items-center my-1 cursor-pointer"
-                  onClick={() => handleSearchClick(result.place_id)}
-                >
-                  <IoLocationSharp className="text-gray-500" />
-                  <span className="ml-2">{result.description}</span>
-                </div>
-              )
+              (result: any, index: number) => {
+                console.log(result);
+                return (
+                  <div
+                    key={index}
+                    className="flex items-center my-1 cursor-pointer"
+                    onClick={() =>
+                      handleSearchClick(
+                        result.place_id,
+                        result.structured_formatting.main_text
+                      )
+                    }
+                  >
+                    <IoLocationSharp className="text-gray-500" />
+                    <span className="ml-2">{result.description}</span>
+                  </div>
+                );
+              }
             )}
           </div>
         </>
@@ -548,9 +570,23 @@ const SearchSection = ({ setSelectedLocation }: any) => {
 export const areas: Area[] = [
   {
     name: "commute",
-    Icon: (<svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 34 34" fill="none">
-            <path d="M11.3337 9.9169V9.93107M22.667 21.2502V21.2644M15.34 13.9232C16.1327 13.1308 16.6725 12.1211 16.8913 11.0218C17.1101 9.92256 16.998 8.78309 16.5691 7.74755C16.1403 6.712 15.414 5.82688 14.4821 5.20415C13.5502 4.58141 12.4545 4.24902 11.3337 4.24902C10.2128 4.24902 9.11717 4.58141 8.18525 5.20415C7.25334 5.82688 6.52703 6.712 6.09818 7.74755C5.66933 8.78309 5.55722 9.92256 5.776 11.0218C5.99479 12.1211 6.53466 13.1308 7.32733 13.9232L11.3337 17.931L15.34 13.9232ZM26.6733 25.2566C27.466 24.4641 28.0059 23.4544 28.2247 22.3552C28.4434 21.2559 28.3313 20.1164 27.9025 19.0809C27.4736 18.0453 26.7473 17.1602 25.8154 16.5375C24.8835 15.9147 23.7878 15.5824 22.667 15.5824C21.5462 15.5824 20.4505 15.9147 19.5186 16.5375C18.5867 17.1602 17.8604 18.0453 17.4315 19.0809C17.0027 20.1164 16.8905 21.2559 17.1093 22.3552C17.3281 23.4544 17.868 24.4641 18.6607 25.2566L22.667 29.2643L26.6733 25.2566Z" stroke="#4D6677" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>),
+    Icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="34"
+        height="34"
+        viewBox="0 0 34 34"
+        fill="none"
+      >
+        <path
+          d="M11.3337 9.9169V9.93107M22.667 21.2502V21.2644M15.34 13.9232C16.1327 13.1308 16.6725 12.1211 16.8913 11.0218C17.1101 9.92256 16.998 8.78309 16.5691 7.74755C16.1403 6.712 15.414 5.82688 14.4821 5.20415C13.5502 4.58141 12.4545 4.24902 11.3337 4.24902C10.2128 4.24902 9.11717 4.58141 8.18525 5.20415C7.25334 5.82688 6.52703 6.712 6.09818 7.74755C5.66933 8.78309 5.55722 9.92256 5.776 11.0218C5.99479 12.1211 6.53466 13.1308 7.32733 13.9232L11.3337 17.931L15.34 13.9232ZM26.6733 25.2566C27.466 24.4641 28.0059 23.4544 28.2247 22.3552C28.4434 21.2559 28.3313 20.1164 27.9025 19.0809C27.4736 18.0453 26.7473 17.1602 25.8154 16.5375C24.8835 15.9147 23.7878 15.5824 22.667 15.5824C21.5462 15.5824 20.4505 15.9147 19.5186 16.5375C18.5867 17.1602 17.8604 18.0453 17.4315 19.0809C17.0027 20.1164 16.8905 21.2559 17.1093 22.3552C17.3281 23.4544 17.868 24.4641 18.6607 25.2566L22.667 29.2643L26.6733 25.2566Z"
+          stroke="#4D6677"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    ),
   },
   {
     name: "Train",

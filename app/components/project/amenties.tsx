@@ -22,10 +22,13 @@ export default function Amenties({ data }: { data: AmenityList[] }) {
   };
 
   return (
-    <div className="w-[90%] scroll-mt-[90px] bg-white py-10 mt-12" id="amenities">
+    <div
+      className="w-[90%] scroll-mt-[90px] bg-white py-10 mt-12"
+      id="amenities"
+    >
       <div className=" mx-auto px-4">
         <h2 className="text-2xl font-semibold">AMENITIES</h2>
-        <p className="text-[#4D6677] text-2xl italic font-medium leading-[normal] tracking-[0.96px] mt-2 mb-6">
+        <p className="text-[#4D6677] text-2xl italic font-medium leading-[normal] tracking-[0.96px] mt-2 mb-[12px]">
           Experience the ultimate in comfort with our amenities
         </p>
         <div className="flex flex-wrap ">

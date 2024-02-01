@@ -2,10 +2,9 @@
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import { Drawer, Button, em } from "@mantine/core";
 import { useAtom } from "jotai";
-import { AtomContent, readMoreAtom } from "@/app/store/drawer";
+import { readMoreAtom } from "@/app/store/drawer";
 import S from "@/app/styles/Drawer.module.css";
 import { AmenityList } from "@/app/validations/types/project";
-import Flex from "../molecules/Utils/Flex";
 import { amenitiesGroupList } from "@/app/images/commonSvgs";
 import React from "react";
 function ProjectDrawer({ projName }: { projName: string }) {
@@ -31,16 +30,16 @@ function ProjectDrawer({ projName }: { projName: string }) {
         onClose={handleReadMoreClick}
         title={`About ${projName}`}
         position="right"
-        size={isMobile ? "80%" : "60%"}
+        size={isMobile ? "70%" : "60%"}
         // size={"50%"}
       >
-        <h1 className="uppercase text-[24px] lg:text-[32px] font-[600] text-[#001F35]">
+        <h1 className="uppercase text-[24px] lg:text-[32px] font-[600] text-[#001F35] pl-[57px]">
           about{" "}
           <span className="text-[#148B16] font-[700] uppercase">
             {projName}
           </span>
         </h1>
-        <div className="w-[90%] text-[#233333] text-xl mt-5">
+        <div className="w-[90%] text-[#233333] text-xl mt-5 pl-[57px]">
           {type === "content" ? (
             <p>{content}</p>
           ) : (

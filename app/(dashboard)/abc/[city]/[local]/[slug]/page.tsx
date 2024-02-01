@@ -34,7 +34,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
       <div className="mt-[90px] w-full pb-[2%] flex items-center justify-center flex-col">
         <div className="p-[2%] w-full">
           <p className="text-[16px] text-[#565D70] font-[500] mb-[1%]">
-            <span>home</span> {" > "}
+            <span>Home</span> {" > "}
             <Link href={"/project/banglore"}>
               <span>Project In Bengaluru</span>
             </Link>{" "}
@@ -109,7 +109,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         <FaqWithBg data={data.faqs} projName={data.projectName} />
         <NearByCarousel projName={data.projectName} />
         <ProjectDrawer projName={data.projectName} />
-      </div> 
+      </div>
     </div>
   );
 }

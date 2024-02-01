@@ -1,5 +1,4 @@
 import axios from "axios";
-import { Console } from "console";
 
 export async function GET(req: Request) {
   const params = new URLSearchParams(req.url.split("?")[1]);
@@ -9,12 +8,11 @@ export async function GET(req: Request) {
   const travelType = params.get("travelType");
 
   if (!lat || !lng || !type) {
-    // Handle the case where 'lt', 'lng', or 'type' is not provided
     return Response.json({
       error: "Latitude, Longitude, and Type are required parameters",
     });
   }
-
+  console.log(type);
   // Define a mapping of types to corresponding keyword values
   const typeMappings: Record<string, string> = {
     commute: "public transport",
@@ -26,9 +24,12 @@ export async function GET(req: Request) {
     restaurant: "restaurant & food",
     bank: "bank",
     clinic: "clinic",
+    atm: "atm",
+    "post office": "post office",
+    mall: "malls",
   };
 
-  const keyword = typeMappings[type];
+  const keyword = typeMappings[type.toLowerCase()];
 
   if (!keyword) {
     // Handle the case where an invalid type is provided
