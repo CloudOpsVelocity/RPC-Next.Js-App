@@ -12,18 +12,16 @@ export default function Specifications({
   data: SpecificationList[];
   projName: string;
 }) {
-  const [selectedSpecIndex, setSelectedSpecIndex] = useState<number | null>(
-    null
-  );
+  const [selectedSpecIndex, setSelectedSpecIndex] = useState<number | null>(null);
 
   const handleSpecClick = (index: number) => {
     setSelectedSpecIndex(index);
-    scrollWhereIsSelected();
+    scrollWhereIsSelected(index);
   };
   const viewport = useRef<HTMLDivElement>(null);
-  const scrollWhereIsSelected = () => {
+  const scrollWhereIsSelected = (index:number) => {
     // @ts-ignore
-    const selectedSpecId = data[selectedSpecIndex]?.specName.toLowerCase();
+    const selectedSpecId = data[index]?.specName.toLowerCase();
     const selectedElement = document.getElementById(selectedSpecId);
 
     if (selectedElement) {
@@ -89,7 +87,7 @@ export default function Specifications({
                 >
                   <h1
                     className={` flex items-center gap-2 text-[#00487C] min-w-[10%] max-w-[15%] text-[24px] italic font-[600] py-2 px-2 rounded-xl  ${
-                      index == 0 ? "specification" : "bg-transparent"
+                      selectedSpecIndex == index ? "specification" : "specificationRemove"
                     }  `}
                   >
                     {specificationsList?.get(spec?.specId)?.url}{" "}
