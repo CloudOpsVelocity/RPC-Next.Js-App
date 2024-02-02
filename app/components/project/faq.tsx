@@ -34,7 +34,6 @@ export function FaqWithBg({ data, projName }: FaqWithBgProps) {
   const [value, setValue] = useState<string | null>(null);
   console.log(value);
 
-  const [currentIndex, setCurrentIndex] = useState<number>();
   return (
     <div className={classes.wrapper} id="faq">
       <div className="flex justify-center items-center w-full ">
@@ -72,7 +71,7 @@ export function FaqWithBg({ data, projName }: FaqWithBgProps) {
             <Accordion.Item
               key={index}
               value={`faq-${index}`}
-              className=" !border-0 !border-b-[3px] !border-[#00000080] mb-[3%] !rounded-0 !border-solid "
+              className=" !border-0 !border-b-[1px] !border-[#c4c4c4] mb-[3%] !rounded-0 !border-solid "
             >
               <Accordion.Control
                 classNames={{ label: classes.title, icon: classes.icon }}

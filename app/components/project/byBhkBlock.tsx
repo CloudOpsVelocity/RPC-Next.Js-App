@@ -55,7 +55,7 @@ export default function ByBhkBlock({ propCgId, data }: Props) {
         </div>
       </div>
 
-      <div className="h-full max-h-[468px] border-solid overflow-auto scrollbar-hide">
+      <div className="h-full lg:max-h-[447px] max-h-[487px] border-solid overflow-auto ">
         {filteredData.map((eachItem: any, ind: number) => (
           <FloorplanDetailsCard key={ind} data={eachItem} propCgId={propCgId} />
         ))}
