@@ -41,10 +41,8 @@ function FloorPlanModal({ propCgId, data, projName }: Props) {
     setFloorsArray(data);
     open("floor");
   };
-
   const handleArrowClick = (side: "R" | "L"): void => {
     const scrollAmount = side === "R" ? 100 : -100;
-
     if (scrollFiltersRef.current) {
       scrollFiltersRef.current.scrollLeft += scrollAmount;
     }
@@ -892,33 +890,37 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
   return (
     <div className="flex flex-col justify-center items-start shrink-0 w-full max-w-[686px]">
       <p className="text-[#005DA0] w-full text-right mb-[1%] text-[16px] font-[500] ">
-        {projName}
-        {propCgId != projectprops.plot &&
-          selectedFloor?.bhkName &&
-          "_" + selectedFloor?.bhkName}
-        {propCgId == projectprops.apartment &&
-          selectedFloor?.towerName &&
-          selectedFloor?.towerName != "NA" &&
-          "_" + selectedFloor?.towerName}
-        ?
-        {propCgId != projectprops.apartment &&
-          propCgId != projectprops.villament &&
-          selectedFloor?.unitNumber &&
-          "_" + selectedFloor?.unitNumber}
-        {propCgId != projectprops.plot &&
-          selectedFloor?.floor &&
-          "_" + selectedFloor?.floor}
-        _{selectedFloor?.facingName}
-        {propCgId != projectprops.plot &&
-          selectedFloor?.superBuildUparea &&
-          "_" + selectedFloor?.superBuildUparea + " sq.ft"}
-        {propCgId == projectprops.plot &&
-          selectedFloor?.plotArea &&
-          "_" + selectedFloor?.plotArea + " sq.ft"}
+        {selectedFloor && (
+          <>
+            {projName}
+            {propCgId != projectprops.plot &&
+              selectedFloor?.bhkName &&
+              "_" + selectedFloor?.bhkName}
+            {propCgId == projectprops.apartment &&
+              selectedFloor?.towerName &&
+              selectedFloor?.towerName != "NA" &&
+              "_" + selectedFloor?.towerName}
+            ?
+            {propCgId != projectprops.apartment &&
+              propCgId != projectprops.villament &&
+              selectedFloor?.unitNumber &&
+              "_" + selectedFloor?.unitNumber}
+            {propCgId != projectprops.plot &&
+              selectedFloor?.floor &&
+              "_" + selectedFloor?.floor}
+            _{selectedFloor?.facingName}
+            {propCgId != projectprops.plot &&
+              selectedFloor?.superBuildUparea &&
+              "_" + selectedFloor?.superBuildUparea + " sq.ft"}
+            {propCgId == projectprops.plot &&
+              selectedFloor?.plotArea &&
+              "_" + selectedFloor?.plotArea + " sq.ft"}
+          </>
+        )}
       </p>
       <div className="relative shadow-md rounded-[14px] border-solid border-[1px] border-[#EFEFEF] w-full flex justify-center items-center ">
         {type == "overview" && data == null ? (
-          <div className="flex justify-center items-center flex-col ">
+          <div className="flex justify-center items-center flex-col h-[350px]">
             {emptyFilesIcon}
             <p>No Matching Results Found !</p>
           </div>
@@ -946,7 +948,8 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
         {floorsArray != undefined &&
           floorsArray != null &&
           floorsArray.length > 0 &&
-          hide === false && (
+          hide === false &&
+          selectedFloor && (
             <button onClick={open}>
               <PopupOpenSvg className="absolute bottom-0 right-0 w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] m-[1%] " />
             </button>
@@ -957,7 +960,7 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
 
       {floorsArray != undefined &&
         floorsArray != null &&
-        floorsArray.length > 1 && (
+        floorsArray.length > 0 && (
           <div className="flex justify-between items-center mt-4 w-full">
             {floorsArray.length > 5 && (
               <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
