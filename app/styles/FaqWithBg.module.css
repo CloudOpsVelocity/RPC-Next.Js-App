@@ -14,32 +14,44 @@
 }
 
 .title {
-  /* color: black;
-  font-size: 52px;
-  font-family: Greycliff CF, var(--mantine-font-family); */
+  margin: 0;
+  padding: 0;
   padding-bottom: calc(var(--mantine-spacing-xl) * 1.5);
 
-  color: #303a42;
-  font-feature-settings: "clig" off, "liga" off;
+  color: #303A42;
+  font-feature-settings: 'clig' off, 'liga' off;
   font-family: Montserrat;
-  font-size: 24px;
+  font-size: 28px;
   font-style: normal;
   font-weight: 700;
-  line-height: 23.784px;
+  line-height: 23.784px; /* 84.942% */
+  
 }
 
 .item {
-  background-color: var(--mantine-color-white);
-  border-bottom: 0;
-  border-radius: var(--mantine-radius-md);
-  box-shadow: var(--mantine-shadow-lg);
-  overflow: hidden;
+  background-color: white;
+  padding: 0;
+  padding-right: 2%;
+}
+
+.panel{
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+  padding-bottom: 3%;
 }
 
 .control {
   font-size: var(--mantine-font-size-lg);
   padding: var(--mantine-spacing-lg) var(--mantine-spacing-xl);
   color: var(--mantine-color-black);
+  padding: 0;
+  margin: 0;
+}
+
+.chevron{
+  width: 22px;
+  height: 22px;
 }
 
 .control:hover {
@@ -47,16 +59,15 @@
 }
 
 .content {
-  /* padding-left: var(--mantine-spacing-xl); */
-  /* line-height: 1.6;
-  color: var(--mantine-color-black); */
-  color: #303a42;
-  font-feature-settings: "clig" off, "liga" off;
+  color: #303A42;
+  font-feature-settings: 'clig' off, 'liga' off;
   font-family: Montserrat;
-  font-size: 24px;
+  font-size: 28px;
   font-style: normal;
   font-weight: 400;
-  line-height: 34.983px;
+  line-height: 34.983px; /* 124.938% */
+  margin: 0;
+  padding: 0;
 }
 
 .icon {

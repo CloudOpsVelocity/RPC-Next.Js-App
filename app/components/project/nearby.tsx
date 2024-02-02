@@ -510,7 +510,7 @@ const SearchSection = ({ setSelectedLocation }: any) => {
     queryFn: () => getSearchResults(value),
     enabled: !!value,
   });
-  console.log(data);
+  // console.log(data);
   const handleSearchClick = async (id: number, name: string) => {
     const res = await axios.get(`/api/latlong?id=${id}`);
     setSelectedLocation({
