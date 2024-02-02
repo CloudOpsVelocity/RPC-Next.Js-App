@@ -76,7 +76,7 @@ export default function Specifications({
 
         <div className="flex-1 bg-gray-50 rounded-lg ">
           <Stack align="center">
-            <ScrollArea w={"100%"} h={458} viewportRef={viewport} pb={80}>
+            <ScrollArea w={"100%"} h={458} viewportRef={viewport} pb={20}>
               {data?.map((spec, index) => (
                 <div
                   key={index}

@@ -18,24 +18,6 @@ type Props = {
 
 export default function ReqOtpForm({ callback, values }: Props) {
   const [error, setError] = useState(false);
-  const [hideErrors, setHideErrors] = useState(false);
-
-
-  const onSubmit = async (value: any) => {
-    console.log(form.values, "click")
-    if (form.values.otp.toString().length >= 4) {
-      const data = await sendContact({ ...values, otp: value.otp });
-      console.log(data);
-      if (data?.status) {
-        callback();
-      } else {
-        setError(true);
-        setHideErrors(true);
-      }
-    }else{
-      setError(false);
-    }
-  };
 
   const form = useForm({
     initialValues: { otp: 0 },
@@ -48,12 +30,28 @@ export default function ReqOtpForm({ callback, values }: Props) {
       //   setError(false);
       // }
       setError(false);
-      setHideErrors(false);
+      form.setErrors({})
     },
   });
 
-  //console.log(error, form.values)
+  const onSubmit = async (value: any) => {
 
+    if (form.values.otp.toString().length == 4) {
+      const data = await sendContact({ ...values, otp: value.otp });
+      console.log(data);
+      if (data?.status) {
+        callback();
+      } else {
+        setError(true);
+      }
+    }else{
+      setError(false);
+    }
+  };
+
+ 
+  //console.log(error, form.values)
+console.log(form.errors)
   return (
     <div>
       <form
@@ -88,7 +86,7 @@ export default function ReqOtpForm({ callback, values }: Props) {
             You&apos;ve entered wrong OTP, Please enter your OTP again!
           </p>
         )}
-        {form.errors.otp && hideErrors && (
+        {form.errors.otp && (
           <p className="text-[#F00] font-[500] text-[14px] w-[100%] !max-w-[423px] !mb-[6%]  ">
             {form.errors.otp}
           </p>
