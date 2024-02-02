@@ -4,9 +4,15 @@ import MainCarousel from "../molecules/carousel/main";
 import { Carousel, CarouselSlide } from "@mantine/carousel";
 import Image from "next/image";
 import Button from "../../elements/button";
-import { Phone, ReraIcon, shortlistIconSvg } from "@/app/images/commonSvgs";
+import {
+  Phone,
+  RERAsvg,
+  ReraIcon,
+  shortlistIconSvg,
+} from "@/app/images/commonSvgs";
 import { formatCurrency } from "@/app/utils/numbers";
-import { formatDate } from "@/app/utils/date";
+import { useToggle } from "@mantine/hooks";
+// import { formatDate } from "@/app/utils/date";
 
 type Props = {
   type: string;
@@ -23,17 +29,22 @@ type CardProps = {
 };
 
 export function ProjectCard({ type, cardData }: CardProps) {
+  const [value, toggle] = useToggle(["Shortlist", "Shortlisted"]);
   return (
     <>
       <div
         key={cardData.projIdEnc}
-        className="border text-card-foreground min-w-[350px] bg-white rounded-lg shadow-md min-h-[400px] overflow-hidden"
+        className="border text-card-foreground min-w-[350px] bg-[#FAFAFA]  min-h-[400px] overflow-hidden  shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[14px]"
       >
         {type == "proj" && (
-          <div className="flex space-y-1.5 p-6 bg-[#f5f5f5] px-4 py-2 justify-between items-center">
-            <h3 className="tracking-tight text-[18px] font-[600] text-[#565D70]">
+          <div className="flex space-y-1.5 p-6  px-4 pt-2 pb-3 justify-between items-center">
+            <a
+              target="_blank"
+              className="tracking-tight text-[18px] font-[600] text-[#565D70] cursor-pointer"
+              href={`/abc/karnataka/banglore/${cardData.projIdEnc}`}
+            >
               {cardData.projName}
-            </h3>
+            </a>
             <div className="text-xs font-semibold text-right ">
               <span className="text-[16px] font-[700] text-[#148B16]">
                 {formatCurrency(cardData.minPrice)}
@@ -42,40 +53,39 @@ export function ProjectCard({ type, cardData }: CardProps) {
               <span className="text-[16px] font-[700] text-[#148B16]">
                 {formatCurrency(cardData.maxPrice)}
               </span>
-              {/* <p className="text-[12px] font-[600] text-[#00487C] ">
-              ₹ 1900/ Price per sqft onwards
-            </p> */}
             </div>
           </div>
         )}
 
-        <div className="p-4">
-          {type == "proj" && (
-            <p className="mb-[-30px] relative z-10 p-[2px] text-[#FFF] text-[14px] font-[700] w-[30%] flex pl-[4px] items-center bg-gradient-to-r from-[#006102] /0 to-[#FFF]/100">
-              <ReraIcon />
-              RERA
-            </p>
-          )}
-
+        <div className="px-3 pb-3">
           {type != "proj" && (
             <p className="mb-[-30px] relative z-10 p-[2px] text-[#148B16] text-[14px] font-[700] w-[40%] flex pl-[4px] justify-center items-center bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 shadow-md rounded-[18px] border-[#92B2C8] border-[0.5px] border-solid ">
               Ready to move
             </p>
           )}
+          <div className="relative  max-h-[212px]">
+            <Image
+              src="/property.jpeg"
+              alt="Sobha Dream Acres"
+              className="w-full  mb-4 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] max-h-[212px]"
+              width={300}
+              height={212}
+            />
+            {type == "proj" && (
+              <p className="absolute top-[1px] left-[0.8px]">
+                <Image src={"/r.svg"} alt="rera" width={100} height={100} />
+              </p>
+            )}
 
-          <Image
-            src="/property.png"
-            alt="Sobha Dream Acres"
-            className="w-full h-auto mb-4"
-            width={300}
-            height={150}
-          />
-
-          <div className=" flex justify-end items-end w-[95%] ">
-            <p className="mt-[-30px] rounded-[10px] relative bottom-[50px] z-10 p-[8px] text-[#0073C6] text-[18px] font-[700] flex pl-[4px] justify-center items-center bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100">
-              <span className=" w-[24px] h-[24px] ">{shortlistIconSvg}</span>
-              Shortlist
-            </p>
+            <div className=" right-2 absolute ">
+              <button
+                className="mt-[-30px] rounded-[10px] relative bottom-[35px] z-10 p-[8px] text-[#0073C6] text-[18px] font-[700] flex pl-[4px] justify-center items-center bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100"
+                onClick={() => toggle()}
+              >
+                <span className=" w-[24px] h-[24px] ">{shortlistIconSvg}</span>
+                {value}
+              </button>
+            </div>
           </div>
 
           <div className="text-sm">
@@ -90,20 +100,20 @@ export function ProjectCard({ type, cardData }: CardProps) {
             )}
 
             {type == "proj" && (
-              <p className="text-[14px] mb-[6px] font-[600] text-[#565D70] ">
+              <p className="mb-[6px] text-[#565D70] text-sm not-italic font-semibold leading-[normal]">
                 Start - End Date:
-                <span className="ml-[4px] text-[#001F35]">
+                <span className="ml-[4px] text-[#001F35] text-sm not-italic font-semibold leading-[normal]">
                   {formatDate(cardData.launchDate)} -{" "}
                   {formatDate(cardData.possassionDate)}
                 </span>
               </p>
             )}
 
-            {cardData.propTypes && 
-            <p className="text-[14px] mb-[6px] font-[600] text-[#00487C]">
-              {cardData.propTypes.map((eachCity: string) => eachCity)}
-            </p>
-            }
+            {cardData.propTypes && (
+              <p className="mb-[6px] text-[#00487C] text-sm not-italic font-semibold leading-[normal] tracking-[0.56px]">
+                {cardData.propTypes.map((eachCity: string) => eachCity)}
+              </p>
+            )}
 
             {type != "proj" && (
               <p className="text-[16px] mb-[6px] font-[600] text-[#4D6677]">
@@ -111,11 +121,9 @@ export function ProjectCard({ type, cardData }: CardProps) {
               </p>
             )}
 
-            
-            <p className="text-[18px] mb-[6px] font-[600] text-[#8791AE]">
-              {cardData.city} {cardData.pinCode}
+            <p className="text-[#565D70]  not-italic font-semibold leading-[normal] tracking-[0.56px]">
+              {cardData?.cityv ?? "N/A"} {cardData.pinCode}
             </p>
-            
 
             {type != "proj" && (
               <p className="text-[16px] font-[500] text-[#4D6677]">
@@ -136,29 +144,53 @@ export function ProjectCard({ type, cardData }: CardProps) {
 }
 
 const ProjectCarousel = ({ type, content, title, projName, data }: Props) => {
+  console.log(data);
   return (
     <div className="w-[100%] mb-[5%]">
-      <h2 className="text-[24px] lg:text-[32px] font-semibold uppercase">
+      <h2 className="text-[24px] lg:text-[32px] font-semibold uppercase cursor-pointer">
         {/* <span className="!text-green-600">SARANG BY SUMADHARA </span> */}
         {title}
         <span className="text-[#148B16] font-[700] uppercase ml-4 ">
           {projName}
         </span>
       </h2>
-      <p className="text-gray-500 mt-1 mb-2 text-lg italic ">{content}</p>
+      <p className="mt-3 mb-[44px]  text-[#4D6677] text-2xl italic font-medium leading-[normal] tracking-[0.96px]">
+        {content}
+      </p>
 
-      <MainCarousel >
-          {data &&
-            data?.map((project: any, index: number) => {
-              
-              return  <CarouselSlide >
-                  <ProjectCard key={index} type={type} cardData={project} />
-                </CarouselSlide>
-            })}
-        
+      <MainCarousel>
+        {data &&
+          data?.map((project: any, index: number) => {
+            return (
+              <CarouselSlide>
+                <ProjectCard key={index} type={type} cardData={project} />
+              </CarouselSlide>
+            );
+          })}
       </MainCarousel>
     </div>
   );
 };
 
 export default ProjectCarousel;
+function formatDate(inputDate: string | undefined): string {
+  if (inputDate == null) {
+    return ""; // You can return an empty string or any default value
+  }
+
+  const date = new Date(inputDate.replace(/IST/, "GMT+0530"));
+
+  if (isNaN(date.getTime())) {
+    return "Invalid Date";
+  }
+
+  const day = date.getDate();
+  const month = new Intl.DateTimeFormat("en-US", { month: "short" }).format(
+    date
+  );
+  const year = date.getFullYear();
+
+  const formattedDate = `${day} ${month}, ${year}`;
+
+  return formattedDate;
+}

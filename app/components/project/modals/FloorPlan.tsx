@@ -317,7 +317,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
           <Select
             key={useId()}
             w={"full"}
-            mt="md"
+            // mt="md"
             label="Select Unit Type"
             className="!w-[46%]"
             placeholder="-- select --"
@@ -333,7 +333,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
           <Select
             key={useId()}
             w={"full"}
-            mt="md"
+            // mt="md"
             label="Select Tower"
             className="!w-[46%]"
             placeholder="-- select --"

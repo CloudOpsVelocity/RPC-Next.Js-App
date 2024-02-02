@@ -117,7 +117,10 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
     const response = await fetch(
       `/api/hello?lt=${parseFloat(lat)}&lng=${parseFloat(
         lang
-      )}&type=${selected}&travelType=${selectedTravelMode}`
+      )}&type=${selected}&travelType=${selectedTravelMode}`,
+      {
+        cache: "force-cache",
+      }
     );
     return await response.json();
   };
