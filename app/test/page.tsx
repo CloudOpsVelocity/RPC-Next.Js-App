@@ -116,5 +116,12 @@
 import React from "react";
 
 export default function Page() {
-  return <div>Page</div>;
+  return (
+    <embed
+      src="https://d1l03fubsuphsh.cloudfront.net/images/varify/project/296/brochure/brochure.pdf"
+      width="100%"
+      height={500}
+      type="application/pdf"
+    />
+  );
 }

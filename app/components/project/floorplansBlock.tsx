@@ -33,7 +33,6 @@ type Props = {
 };
 export default function FloorplansBlock({ projName, slug }: Props) {
   const { phaseList, PhaseOverview } = usePhaseWiseOverview();
-
   const allKeys = [35, 33, 31, 34, 32];
   const [propCgId, setPropCgId] = useAtom(propCgIdAtom);
   const [currentPhase, setCurrentPhase] = useAtom(currentPhaseAtom);
@@ -54,13 +53,11 @@ export default function FloorplansBlock({ projName, slug }: Props) {
       setSelectedFloor(data[0]);
     },
   });
-
   if (isLoading) return <Loading />;
   const types = selectedPhase && Object?.keys(selectedPhase.propTypeOverview);
   const getPropertyType = (data: any) => {
     setPropCgId(data.id);
   };
-
   const iconStyles: string =
     " flex items-center justify-center w-[40px] h-[40px] bg-[#FAFDFF] rounded-[50%] ";
 
