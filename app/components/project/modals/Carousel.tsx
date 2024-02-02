@@ -16,7 +16,13 @@ type CarouselModalProps = {
   close: () => void;
 };
 
-function CarouselModal({projName, propCgId}:{projName: string,propCgId: number }) {
+function CarouselModal({
+  projName,
+  propCgId,
+}: {
+  projName: string;
+  propCgId: number;
+}) {
   const [opened, { close }] = useSubFloorPlanPopup();
   const TRANSITION_DURATION = 200;
 
@@ -45,41 +51,41 @@ function CarouselModal({projName, propCgId}:{projName: string,propCgId: number }
 
 export default CarouselModal;
 
-const MiddleSection = ({projName, propCgId}:{projName: string,propCgId: number }) => {
+const MiddleSection = ({
+  projName,
+  propCgId,
+}: {
+  projName: string;
+  propCgId: number;
+}) => {
   const selectedFloor = useAtomValue(selectedFloorAtom);
-
 
   return (
     <div className="max-w-[1400px]">
       <p className="text-[#005DA0] w-full  mb-[1%] text-[16px] font-[500]  text-left">
         {/* Sarang by sumadhura/2bhk/tower 1/ 04/north/1124 sq.ft - 3 */}
-          {projName}
-
-          {propCgId != projectprops.plot && selectedFloor.bhkName &&
-            "_" + selectedFloor.bhkName 
-          }
-
-          {propCgId == projectprops.apartment && selectedFloor.towerName && selectedFloor.towerName != "NA" &&
-            "_" + selectedFloor.towerName
-          }
-
-          {propCgId != projectprops.apartment && propCgId != projectprops.villament && selectedFloor.unitNumber &&
-            "_" + selectedFloor.unitNumber
-          }
-
-          {propCgId != projectprops.plot && selectedFloor.floor &&
-            "_" + selectedFloor.floor
-          }
-
-          _{selectedFloor.facingName}
-
-          {propCgId != projectprops.plot && selectedFloor.superBuildUparea &&
-            "_" + selectedFloor.superBuildUparea + " sq.ft"
-          }
-
-          {propCgId == projectprops.plot && selectedFloor.plotArea &&
-            "_" + selectedFloor.plotArea + " sq.ft"
-          }
+        {projName}
+        {propCgId != projectprops.plot &&
+          selectedFloor.bhkName &&
+          "_" + selectedFloor.bhkName}
+        {propCgId == projectprops.apartment &&
+          selectedFloor.towerName &&
+          selectedFloor.towerName != "NA" &&
+          "_" + selectedFloor.towerName}
+        {propCgId != projectprops.apartment &&
+          propCgId != projectprops.villament &&
+          selectedFloor.unitNumber &&
+          "_" + selectedFloor.unitNumber}
+        {propCgId != projectprops.plot &&
+          selectedFloor.floor &&
+          "_" + selectedFloor.floor}
+        _{selectedFloor.facingName}
+        {propCgId != projectprops.plot &&
+          selectedFloor.superBuildUparea &&
+          "_" + selectedFloor.superBuildUparea + " sq.ft"}
+        {propCgId == projectprops.plot &&
+          selectedFloor.plotArea &&
+          "_" + selectedFloor.plotArea + " sq.ft"}
       </p>
       {selectedFloor?.floorPlanUrl ? (
         <Image
@@ -99,4 +105,3 @@ const MiddleSection = ({projName, propCgId}:{projName: string,propCgId: number }
     </div>
   );
 };
-

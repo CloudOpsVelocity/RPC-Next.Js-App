@@ -41,6 +41,7 @@ export default function PropertyTypeDetailsCrad({
   };
   const updateValues = (newCurrentPhase: number, newPropCgId: number) => {
     setcurrentPhase(newCurrentPhase);
+    setFloorsArray(data);
     setPrpCgId(newPropCgId);
     handleOpen();
   };

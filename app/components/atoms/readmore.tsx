@@ -6,9 +6,10 @@ import React, { useState } from "react";
 interface ReadMoreProps {
   text: string;
   maxLines?: number;
+  title: string;
 }
 
-const ReadMore: React.FC<ReadMoreProps> = ({ text, maxLines = 4 }) => {
+const ReadMore: React.FC<ReadMoreProps> = ({ text, maxLines = 4, title }) => {
   const [{ expanded }, setReadMore] = useAtom(readMoreAtom);
 
   const handleReadMoreClick = () => {
@@ -17,6 +18,7 @@ const ReadMore: React.FC<ReadMoreProps> = ({ text, maxLines = 4 }) => {
       expanded: !prev.expanded,
       content: text,
       type: "content",
+      title: title,
     }));
   };
 

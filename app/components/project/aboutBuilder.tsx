@@ -48,14 +48,14 @@ export default function AboutBuilder({ id }: Props) {
           </div>
         </div>
 
-        <ReadMore
+        {/* <ReadMore
           text={
             data?.data?.mission +
               "orem jksdfjdsfjljjkl jdslfjlsdf sdfmlsdfj kljsdfljsd flkjlkdsjflkds  sdfjsldkjfds  kljsdflsdjfl" ??
             "orem jksdfjdsfjljjkl jdslfjlsdf sdfmlsdfj kljsdfljsd flkjlkdsjflkds  sdfjsldkjfds  kljsdflsdjfl"
           }
           maxLines={4}
-        />
+        /> */}
 
         <p className=" text-[#212C33] text-[22px] lg:text-[24px] font-[500] mt-[3%] italic ">
           Builder Address{" "}

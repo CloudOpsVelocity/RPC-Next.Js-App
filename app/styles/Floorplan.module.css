@@ -19,8 +19,8 @@
   margin-top: 90px;
 }
 
-.input{
-  color: #4D6677;
+.input {
+  color: #4d6677;
   font-family: Montserrat;
   font-size: 14px;
   font-style: normal;
@@ -29,29 +29,31 @@
   text-transform: capitalize;
   height: 33px;
   border-radius: 5px;
-  border: 0.3px solid #4D6677;
-  background: #FFF;
+  border: 0.3px solid #4d6677;
+  background: #fff;
   box-sizing: border-box;
   align-self: flex-end;
 }
 
-.label{
-  color: #4D6677;
+.label {
+  color: #4d6677;
   font-family: Montserrat;
   font-size: 15px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
   text-transform: capitalize;
-  
 }
 
-.root{
+.root {
   padding-top: auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-start;
   padding-top: auto;
-  
+}
+
+.hidden {
+  display: none;
 }
