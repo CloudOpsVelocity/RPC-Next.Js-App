@@ -25,7 +25,7 @@ import toast from "react-hot-toast";
 
 type FaqWithBgProps = {
   data: FAQ[];
-  projName:string;
+  projName: string;
 };
 
 let ind = 0;
@@ -49,7 +49,12 @@ export function FaqWithBg({ data, projName }: FaqWithBgProps) {
         defaultValue="reset-password"
         chevronSize={22}
         variant="separated"
-        classNames={{ chevron: classes.chevron, panel : classes.panel, item:classes.item, control: classes.control }}
+        classNames={{
+          chevron: classes.chevron,
+          panel: classes.panel,
+          item: classes.item,
+          control: classes.control,
+        }}
         styles={{
           label: { color: "var(--mantine-color-black)" },
           item: { border: 0 },
@@ -62,34 +67,40 @@ export function FaqWithBg({ data, projName }: FaqWithBgProps) {
             <FaPlus style={{ width: rem(18), height: rem(18) }} stroke={1.5} />
           </ThemeIcon>
         }
+        transitionDuration={0}
       >
         {data?.map((faq, index) => {
-          return(
-            
+          return (
             <Accordion.Item
               key={index}
-              //className={classes.item}
               value={`faq-${index}`}
-              className=" !border-0 !border-b-2 !border-[#38373780] mb-[3%] !rounded-0 !border-solid "
-              onClick={()=>setCurrentIndex(index)}
+              className=" !border-0 !border-b-[3px] !border-[#00000080] mb-[3%] !rounded-0 !border-solid "
+              onClick={() => setCurrentIndex(index)}
             >
-              <Accordion.Control classNames={{label: classes.title}}>
-                <span className={`${currentIndex == index ? "!text-[#046DBA]" : "!text-[#303A42]"}`}>
+              <Accordion.Control classNames={{ label: classes.title }}>
+                <span
+                  className={`${
+                    currentIndex == index
+                      ? "!text-[#046DBA]"
+                      : "!text-[#303A42]"
+                  }`}
+                >
                   {faq.faqQuestion} ?
                 </span>
               </Accordion.Control>
-              <Accordion.Panel classNames={{content:classes.content}}>
+              <Accordion.Panel classNames={{ content: classes.content }}>
                 {faq.faqAnswer}
               </Accordion.Panel>
             </Accordion.Item>
-          )})}
+          );
+        })}
       </Accordion>
       <AddQnaForm projName={projName} />
     </div>
   );
 }
 
-const AddQnaForm = ({projName}:{projName:string}) => {
+const AddQnaForm = ({ projName }: { projName: string }) => {
   const { slug } = useParams<{ slug: string }>();
   const { data: session } = useSession();
   const [status, setStatus] = useState<
@@ -102,7 +113,7 @@ const AddQnaForm = ({projName}:{projName:string}) => {
     validate: yupResolver(qnaSchema),
   });
   const formSubmit = async (values: any) => {
-    if(session){
+    if (session) {
       setStatus("pending");
       try {
         await addQna({ question: values.question, projIdEnc: slug });
@@ -112,26 +123,25 @@ const AddQnaForm = ({projName}:{projName:string}) => {
         setErrors({ question: error.message });
         setStatus("error");
       }
-    }else{
+    } else {
       toast.custom((t) => (
         <div
           className={`${
-            t.visible ? 'animate-enter' : 'animate-leave'
+            t.visible ? "animate-enter" : "animate-leave"
           } ml-auto w-full pointer-events-auto flex justify-end items-end ring-1 ring-transparent ring-opacity-5`}
         >
           <p className=" text-[#565D70] p-[8px] pr-[16px] pl-[16px] border-[#148B16] border-[1px] border-solid bg-white shadow-lg flex items-center rounded-lg gap-[10px] text-[20px] whitespace-nowrap font-[600] ">
-            {infoIcon}  Please 
-            <Link rel="shortcut icon" href="/login" >
+            {infoIcon} Please
+            <Link rel="shortcut icon" href="/login">
               <span className=" cursor-pointer text-[#0073C6] ">
                 login/ Signup
               </span>
-            </Link> 
+            </Link>
             to ask QNAs
           </p>
         </div>
-      ))
+      ));
     }
-
   };
   return (
     <form

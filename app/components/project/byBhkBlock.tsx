@@ -24,7 +24,7 @@ export default function ByBhkBlock({ propCgId, data }: Props) {
 
   return (
     <div className="">
-      <div className="h-[100] lg:h-[100px] p-[2%] border-[#92B2C8] border-solid border-b-[1px] border-r-[1px] ">
+      <div className="lg:h-[100px] px-[2%] border-[#92B2C8] border-solid border-b-[1px] border-r-[1px] ">
         <h3 className=" text-[#001F35]  text-[20px] lg:text-[24px] font-[500] ">
           Select BHK to see floor plans
         </h3>

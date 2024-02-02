@@ -131,7 +131,11 @@ export default function FloorplansBlock({ projName, slug }: Props) {
       <p className="text-[16px] text-[#4D6677] md:text-2xl italic font-medium leading-[normal] capitalize">
         see floor plans as per your selected property type
       </p>
-      <div className=" flex justify-start items-start md:items-center mt-[0%] mb-[2%] flex-col md:flex-row ">
+      <div
+        className={`flex justify-start items-start md:items-center  mb-[2%] flex-col md:flex-row  ${
+          phaseList.length > 1 ? "mt-4" : "mt-[0%]"
+        }`}
+      >
         {phaseList?.length > 1 && (
           <>
             <p className="text-[20px] lg:text-[24px] font-[500] mb-[3%] md:mb-0 text-[#333] mr-[20px] ">
