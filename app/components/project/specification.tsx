@@ -12,9 +12,7 @@ export default function Specifications({
   data: SpecificationList[];
   projName: string;
 }) {
-  const [selectedSpecIndex, setSelectedSpecIndex] = useState<number | null>(
-    null
-  );
+  const [selectedSpecIndex, setSelectedSpecIndex] = useState<number | null>(0);
 
   const handleSpecClick = (index: number) => {
     setSelectedSpecIndex(index);
