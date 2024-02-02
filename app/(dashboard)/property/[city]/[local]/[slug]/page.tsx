@@ -64,7 +64,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         <GalleryBlock {...data.media} />
         {/* About Builder */}
         <AboutBuilder id={data.builderId} />
-        <PropertyBanner />
+        <PropertyBanner projName={data.projectName} />
         {/* {/* <Nearby lat={data.lat} lang={data.lang} /> */}
         <Specifications
           data={data.specificationList}
