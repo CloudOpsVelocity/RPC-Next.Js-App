@@ -233,9 +233,9 @@ export default function FloorplansBlock({ projName, slug }: Props) {
         )}
       </div>
 
-      <div className="  h-full md:h-[456px] lg:h-[547px] w-full rounded-[14px] mt-[2%] border-solid border-[1px] border-[#92B2C8] bg-[#FFF] shadow-md flex flex-col md:flex-row justify-center items-center ">
+      <div className="   h-full md:h-[547px] w-full rounded-[14px] mt-[2%] border-solid border-[1px] border-[#92B2C8] bg-[#FFF] shadow-md flex flex-col md:flex-row justify-center items-center ">
         {floorPlanType === "type" && (
-          <div className="w-full md:w-[50%] h-[456px] lg:h-[547px] border-solid overflow-auto ">
+          <div className="w-full md:w-[50%] h-[456px] md:h-[547px] border-solid overflow-auto ">
             {projectUnitsData?.length !== 0 ? (
               projectUnitsData?.map((data: any, ind: number) => (
                 <FloorplanDetailsCard
@@ -251,13 +251,13 @@ export default function FloorplansBlock({ projName, slug }: Props) {
         )}
 
         {floorPlanType == "unit" && (
-          <div className="w-full md:w-[50%]  h-[456px] !lg:h-[570px] border-solid overflow-auto ">
+          <div className="w-full md:w-[50%]  h-[456px] !md:h-[547px] border-solid overflow-auto ">
             <Byunitblock propCgId={propCgId} data={projectUnitsData} />
           </div>
         )}
 
         {floorPlanType == "bhk" && propCgId != projectprops.plot && (
-          <div className="w-full md:w-[50%]  h-[456px] !lg:h-[570px] border-solid overflow-auto ">
+          <div className="w-full md:w-[50%] h-[547px] border-solid overflow-auto ">
             <ByBhkBlock propCgId={propCgId} data={projectUnitsData} />
           </div>
         )}
