@@ -12,14 +12,16 @@ export default function Specifications({
   data: SpecificationList[];
   projName: string;
 }) {
-  const [selectedSpecIndex, setSelectedSpecIndex] = useState<number | null>(null);
+  const [selectedSpecIndex, setSelectedSpecIndex] = useState<number | null>(
+    null
+  );
 
   const handleSpecClick = (index: number) => {
     setSelectedSpecIndex(index);
     scrollWhereIsSelected(index);
   };
   const viewport = useRef<HTMLDivElement>(null);
-  const scrollWhereIsSelected = (index:number) => {
+  const scrollWhereIsSelected = (index: number) => {
     // @ts-ignore
     const selectedSpecId = data[index]?.specName.toLowerCase();
     const selectedElement = document.getElementById(selectedSpecId);
@@ -58,11 +60,10 @@ export default function Specifications({
           </p>
           <div className="flex flex-wrap gap-4">
             {data?.map((spec, index) => (
-
               <a
                 key={index}
                 className={` px-5 py-2 text-[20px] flex gap-2 bg-[#fafafafa] items-center cursor-pointer rounded-[10px] border-[0.5px] border-solid border-[#76AEFF] ${
-                  selectedSpecIndex == spec?.specId
+                  selectedSpecIndex == index
                     ? "shadow-md text-[#00487C] font-[700]"
                     : "shadow-none text-[#233] font-[500]"
                 }`}
@@ -70,7 +71,6 @@ export default function Specifications({
               >
                 {spec.specName}
               </a>
-
             ))}
           </div>
         </div>
@@ -87,7 +87,9 @@ export default function Specifications({
                 >
                   <h1
                     className={` flex items-center gap-2 text-[#00487C] min-w-[10%] max-w-[15%] text-[24px] italic font-[600] py-2 px-2 rounded-xl  ${
-                      selectedSpecIndex == index ? "specification" : "specificationRemove"
+                      selectedSpecIndex == index
+                        ? "specification"
+                        : "specificationRemove"
                     }  `}
                   >
                     {specificationsList?.get(spec?.specId)?.url}{" "}
