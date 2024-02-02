@@ -23,7 +23,7 @@ export default function ByBhkBlock({ propCgId, data }: Props) {
   const availBhks = getOptions("bhkName").sort((a, b) => a.localeCompare(b));
 
   return (
-    <div className="">
+    <React.Fragment>
       <div className="lg:h-[100px] px-[2%] border-[#92B2C8] border-solid border-b-[1px] border-r-[1px] ">
         <h3 className=" text-[#001F35]  text-[20px] lg:text-[24px] font-[500] ">
           Select BHK to see floor plans
@@ -60,6 +60,6 @@ export default function ByBhkBlock({ propCgId, data }: Props) {
           <FloorplanDetailsCard key={ind} data={eachItem} propCgId={propCgId} />
         ))}
       </div>
-    </div>
+    </React.Fragment>
   );
 }
