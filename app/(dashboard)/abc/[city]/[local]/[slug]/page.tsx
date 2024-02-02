@@ -75,9 +75,9 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           media={data.media}
         />
         <Amenties data={data.amenityList} />
-        {data.lat && data.lang && (
+        {/* {data.lat && data.lang && (
           <Nearby lat={data.lat} lang={data.lang} projName={data.projectName} />
-        )}
+        )} */}
         <Specifications
           data={data.specificationList}
           projName={data.projectName}
