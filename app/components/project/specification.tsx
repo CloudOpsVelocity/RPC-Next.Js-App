@@ -22,6 +22,7 @@ export default function Specifications({
   };
   const viewport = useRef<HTMLDivElement>(null);
   const scrollWhereIsSelected = () => {
+    // @ts-ignore
     const selectedSpecId = data[selectedSpecIndex]?.specName.toLowerCase();
     const selectedElement = document.getElementById(selectedSpecId);
 
@@ -74,7 +75,7 @@ export default function Specifications({
 
         <div className="flex-1 bg-gray-50 rounded-lg">
           <Stack align="center">
-            <ScrollArea w={"100%"} h={600} viewportRef={viewport}>
+            <ScrollArea w={"100%"} h={458} viewportRef={viewport}>
               {data?.map((spec, index) => (
                 <div
                   key={index}
