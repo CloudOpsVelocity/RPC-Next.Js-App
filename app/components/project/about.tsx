@@ -16,7 +16,7 @@ export default function About({ heading, projName, content, id }: Props) {
         {heading}{" "}
         <span className="text-[#148B16] font-[700] uppercase">{projName}</span>{" "}
       </h1>
-      <ReadMore text={content} maxLines={10} />
+      <ReadMore text={content} maxLines={10} title={heading} />
     </div>
   );
 }

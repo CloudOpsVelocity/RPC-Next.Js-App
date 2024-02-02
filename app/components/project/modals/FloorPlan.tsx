@@ -52,7 +52,7 @@ function FloorPlanModal({ propCgId, data, projName }: Props) {
 
   const handleClose = () => {
     close();
-    form.reset();
+    handleReset();
   };
   const handleSearch = (): void => {
     const filteredData = data.filter((item: any) => {
