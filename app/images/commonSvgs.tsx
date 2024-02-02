@@ -11714,3 +11714,10 @@ export const RERAsvg = () => {
     </svg>
   );
 };
+
+
+export const MinusIcon = ()=> {
+  return <svg xmlns="http://www.w3.org/2000/svg" width="28" height="6" viewBox="0 0 28 6" fill="none">
+  <path d="M3 3H25" stroke="#0093FF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+}

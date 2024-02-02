@@ -19,7 +19,7 @@ import { useParams } from "next/navigation";
 import { useForm, yupResolver } from "@mantine/form";
 import { qnaSchema } from "@/app/validations/project";
 import { useSession } from "next-auth/react";
-import { infoIcon } from "@/app/images/commonSvgs";
+import { MinusIcon, infoIcon } from "@/app/images/commonSvgs";
 import Link from "next/link";
 import toast from "react-hot-toast";
 
@@ -31,6 +31,9 @@ type FaqWithBgProps = {
 let ind = 0;
 
 export function FaqWithBg({ data, projName }: FaqWithBgProps) {
+  const [value, setValue] = useState<string | null>(null);
+  console.log(value);
+
   const [currentIndex, setCurrentIndex] = useState<number>();
   return (
     <div className={classes.wrapper} id="faq">
@@ -45,6 +48,8 @@ export function FaqWithBg({ data, projName }: FaqWithBgProps) {
         </h1>
       </div>
       <Accordion
+        value={value}
+        onChange={setValue}
         chevronPosition="right"
         defaultValue="reset-password"
         chevronSize={22}
@@ -59,14 +64,7 @@ export function FaqWithBg({ data, projName }: FaqWithBgProps) {
           label: { color: "var(--mantine-color-black)" },
           item: { border: 0 },
         }}
-        chevron={
-          <ThemeIcon
-            className={"!text-black !bg-transparent !h-[22px] !w-[22px] "}
-            size={22}
-          >
-            <FaPlus style={{ width: rem(18), height: rem(18) }} stroke={1.5} />
-          </ThemeIcon>
-        }
+        chevron={false}
         transitionDuration={0}
       >
         {data?.map((faq, index) => {
@@ -75,12 +73,30 @@ export function FaqWithBg({ data, projName }: FaqWithBgProps) {
               key={index}
               value={`faq-${index}`}
               className=" !border-0 !border-b-[3px] !border-[#00000080] mb-[3%] !rounded-0 !border-solid "
-              onClick={() => setCurrentIndex(index)}
             >
-              <Accordion.Control classNames={{ label: classes.title }}>
+              <Accordion.Control
+                classNames={{ label: classes.title, icon: classes.icon }}
+                icon={
+                  value == `faq-${index}` ? (
+                    <MinusIcon />
+                  ) : (
+                    <ThemeIcon
+                      className={
+                        "!text-black !bg-transparent !h-[22px] !w-[22px] "
+                      }
+                      size={22}
+                    >
+                      <FaPlus
+                        style={{ width: rem(18), height: rem(18) }}
+                        stroke={1.5}
+                      />
+                    </ThemeIcon>
+                  )
+                }
+              >
                 <span
                   className={`${
-                    currentIndex == index
+                    value == `faq-${index}`
                       ? "!text-[#046DBA]"
                       : "!text-[#303A42]"
                   }`}
