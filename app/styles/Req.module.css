@@ -12,6 +12,7 @@
 .body {
   border-radius: 20px;
   /* margin-top: 90px; */
+  padding: 0;
 }
 .overlay {
   margin-top: 90px;

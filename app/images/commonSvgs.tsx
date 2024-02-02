@@ -2830,7 +2830,13 @@ export const loginPopupBuildingIcon = (
   </svg>
 );
 
-export const PopupCrossIcon = ({ className, iconId, onClick }: any) => {
+type CrossProps = {
+  className?: string;
+  iconId?: any;
+  onClick?:any;
+}
+
+export const PopupCrossIcon = ({ className, iconId, onClick }: CrossProps) => {
   return (
     <svg
       id={iconId}

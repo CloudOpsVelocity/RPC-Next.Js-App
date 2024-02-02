@@ -18,13 +18,22 @@ type Props = {
 
 export default function ReqOtpForm({ callback, values }: Props) {
   const [error, setError] = useState(false);
+  const [hideErrors, setHideErrors] = useState(false);
+
+
   const onSubmit = async (value: any) => {
-    const data = await sendContact({ ...values, otp: value.otp });
-    console.log(data);
-    if (data?.status) {
-      callback();
-    } else {
-      setError(true);
+    console.log(form.values, "click")
+    if (form.values.otp.toString().length >= 4) {
+      const data = await sendContact({ ...values, otp: value.otp });
+      console.log(data);
+      if (data?.status) {
+        callback();
+      } else {
+        setError(true);
+        setHideErrors(true);
+      }
+    }else{
+      setError(false);
     }
   };
 
@@ -33,13 +42,17 @@ export default function ReqOtpForm({ callback, values }: Props) {
     validate: yupResolver(otpSchema),
     validateInputOnChange: true,
     onValuesChange(values) {
-      if (values.otp.toString().length === 4) {
-        onSubmit(values);
-      } else {
-        setError(false);
-      }
+      // if (values.otp.toString().length === 4) {
+      //   onSubmit(values);
+      // } else {
+      //   setError(false);
+      // }
+      setError(false);
+      setHideErrors(false);
     },
   });
+
+  //console.log(error, form.values)
 
   return (
     <div>
@@ -48,12 +61,12 @@ export default function ReqOtpForm({ callback, values }: Props) {
         className="w-[100%]  flex justify-start items-start flex-col "
       >
         <p className="text-[#EA7A00] text-base not-italic font-semibold leading-[normal] tracking-[0.64px] py-1">
-          You are one step away to get callback. Please verify your contact !
+          You are one step away to get callback.
         </p>
-        <p className="text-[#4D6677] text-[14px] font-[600] ">
+        <p className="text-[#4D6677] text-base not-italic font-semibold leading-[normal] tracking-[0.64px] mb-[2%] ">
           Please verify your contact !
         </p>
-        <p className="mt-2 text-green-600 font-semibold">
+        <p className="mt-2 text-[#148B16] text-base italic font-bold leading-[normal] tracking-[0.64px]">
           Builder: Sarang By Sumadhura
         </p>
         <p className="text-[#4D6677] text-base not-italic font-semibold leading-[normal] tracking-[0.64px] mt-2">
@@ -69,15 +82,27 @@ export default function ReqOtpForm({ callback, values }: Props) {
           A One Time- Password has been sent to{" "}
           {hideMobileNumber((values.mobile && values.mobile) || 0)}
         </p> */}
+
+        {error && (
+          <p className="text-[#F00] font-[500] text-[14px] w-[100%] !max-w-[423px] !mb-[6%]  ">
+            You&apos;ve entered wrong OTP, Please enter your OTP again!
+          </p>
+        )}
+        {form.errors.otp && hideErrors && (
+          <p className="text-[#F00] font-[500] text-[14px] w-[100%] !max-w-[423px] !mb-[6%]  ">
+            {form.errors.otp}
+          </p>
+        )}
+
+
         <PinInput
           classNames={{
             pinInput: S.pinInput,
-            input: S.input,
+            input: (error || form.errors.otp) && form.values.otp.toString().length == 4 ? S.errorInput : S.input,
           }}
           name="otp"
           size="xl"
           {...form.getInputProps("otp")}
-          className=""
           inputMode="numeric"
           type={"number"}
           placeholder=""
@@ -85,17 +110,7 @@ export default function ReqOtpForm({ callback, values }: Props) {
 
         <Resend userName={values.mobile} />
 
-        {error && (
-          <p className="text-[#F00] font-[500] text-[14px] w-[100%] !max-w-[423px] !mb-[6%]  ">
-            You&apos;ve entered wrong OTP, Please enter your OTP again!
-          </p>
-        )}
-        {form.errors.otp && (
-          <p className="text-[#F00] font-[500] text-[14px] w-[100%] !max-w-[423px] !mb-[6%]  ">
-            {form.errors.otp}
-          </p>
-        )}
-        <Button>Submit</Button>
+        <Button type="submit">Submit</Button>
       </form>
     </div>
   );
@@ -144,9 +159,10 @@ const Resend = ({ userName }: any): JSX.Element => {
   const { minutes, seconds } = timeRemaining;
 
   return (
-    <div className="w-full flex justify-center my-4 flex-col items-end max-w-[280px]">
+    <div className="w-full flex justify-center my-3 flex-col items-end max-w-[280px]">
       <button disabled={timerRunning} onClick={resendOTP}>
         <span
+          className=" text-sm not-italic font-semibold leading-[normal] tracking-[0.56px] underline"
           style={{
             color: timerRunning ? "#DFE3E8" : "#0073C6",
           }}
@@ -156,9 +172,7 @@ const Resend = ({ userName }: any): JSX.Element => {
         </span>
 
         <span
-          style={{
-            color: "#0073C6",
-          }}
+          className=""
         >
           {seconds > 0 || minutes > 0 ? (
             <>
