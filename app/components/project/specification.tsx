@@ -30,7 +30,7 @@ export default function Specifications({
       const position = selectedElement.offsetTop - titleHeight; // Adjust the position by subtracting the title height
 
       viewport.current!.scrollTo({
-        top: position,
+        top: position - 20,
         behavior: "smooth",
       });
     }
@@ -74,9 +74,9 @@ export default function Specifications({
           </div>
         </div>
 
-        <div className="flex-1 bg-gray-50 rounded-lg">
+        <div className="flex-1 bg-gray-50 rounded-lg ">
           <Stack align="center">
-            <ScrollArea w={"100%"} h={458} viewportRef={viewport}>
+            <ScrollArea w={"100%"} h={458} viewportRef={viewport} pb={80}>
               {data?.map((spec, index) => (
                 <div
                   key={index}

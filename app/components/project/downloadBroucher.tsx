@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 // import { downloadIcon } from '@/app/images/commonSvgs';
 
 const DownloadBroucher = ({ url }: { url: string }) => {
+  console.log(url);
   const { data: session } = useSession();
 
   const onButtonClick = () => {
