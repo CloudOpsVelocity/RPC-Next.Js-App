@@ -247,13 +247,13 @@ export default function FloorplansBlock({ projName, slug }: Props) {
         )}
 
         {floorPlanType == "unit" && (
-          <div className="w-full md:w-[50%]  h-[456px] lg:h-[570px] border-solid overflow-auto ">
+          <div className="w-full md:w-[50%]  h-[456px] !lg:h-[570px] border-solid overflow-auto ">
             <Byunitblock propCgId={propCgId} data={projectUnitsData} />
           </div>
         )}
 
         {floorPlanType == "bhk" && propCgId != projectprops.plot && (
-          <div className="w-full md:w-[50%]  h-[456px] lg:h-[570px] border-solid overflow-auto ">
+          <div className="w-full md:w-[50%]  h-[456px] !lg:h-[570px] border-solid overflow-auto ">
             <ByBhkBlock propCgId={propCgId} data={projectUnitsData} />
           </div>
         )}
