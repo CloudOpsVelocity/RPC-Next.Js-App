@@ -64,6 +64,12 @@
   );
 }
 
+
+.specificationRemove{
+  border-radius: none;
+  background: transparent;
+}
+
 .headerBg {
   background: var(--header-bg, linear-gradient(287deg, #eff8ff 0%, #fff 100%));
 }

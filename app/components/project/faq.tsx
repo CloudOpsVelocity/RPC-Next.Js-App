@@ -1,5 +1,6 @@
 // Import necessary libraries/components
 "use client";
+import React, { useState } from "react";
 import {
   Title,
   Container,
@@ -12,7 +13,7 @@ import {
 import classes from "@/app/styles/FaqWithBg.module.css";
 import { FaPlus } from "react-icons/fa6";
 import { FAQ } from "@/app/validations/types/project";
-import { useState } from "react";
+
 import { addQna } from "@/app/utils/api/actions/Qna";
 import { useParams } from "next/navigation";
 import { useForm, yupResolver } from "@mantine/form";
@@ -27,7 +28,10 @@ type FaqWithBgProps = {
   projName:string;
 };
 
+let ind = 0;
+
 export function FaqWithBg({ data, projName }: FaqWithBgProps) {
+  const [currentIndex, setCurrentIndex] = useState<number>();
   return (
     <div className={classes.wrapper} id="faq">
       <div className="flex justify-center items-center w-full ">
@@ -45,35 +49,40 @@ export function FaqWithBg({ data, projName }: FaqWithBgProps) {
         defaultValue="reset-password"
         chevronSize={22}
         variant="separated"
-        classNames={{ chevron: classes.chevron }}
+        classNames={{ chevron: classes.chevron, panel : classes.panel, item:classes.item, control: classes.control }}
         styles={{
           label: { color: "var(--mantine-color-black)" },
           item: { border: 0 },
         }}
         chevron={
           <ThemeIcon
-            radius="xl"
-            className={"!text-black !bg-transparent"}
-            size={26}
+            className={"!text-black !bg-transparent !h-[22px] !w-[22px] "}
+            size={22}
           >
             <FaPlus style={{ width: rem(18), height: rem(18) }} stroke={1.5} />
           </ThemeIcon>
         }
       >
-        {data?.map((faq, index) => (
-          <Accordion.Item
-            key={index}
-            className={classes.item}
-            value={`faq-${index}`}
-          >
-            <Accordion.Control className={classes.title}>
-              {faq.faqQuestion}
-            </Accordion.Control>
-            <Accordion.Panel className={classes.content}>
-              {faq.faqAnswer}
-            </Accordion.Panel>
-          </Accordion.Item>
-        ))}
+        {data?.map((faq, index) => {
+          return(
+            
+            <Accordion.Item
+              key={index}
+              //className={classes.item}
+              value={`faq-${index}`}
+              className=" !border-0 !border-b-2 !border-[#38373780] mb-[3%] !rounded-0 !border-solid "
+              onClick={()=>setCurrentIndex(index)}
+            >
+              <Accordion.Control classNames={{label: classes.title}}>
+                <span className={`${currentIndex == index ? "!text-[#046DBA]" : "!text-[#303A42]"}`}>
+                  {faq.faqQuestion} ?
+                </span>
+              </Accordion.Control>
+              <Accordion.Panel classNames={{content:classes.content}}>
+                {faq.faqAnswer}
+              </Accordion.Panel>
+            </Accordion.Item>
+          )})}
       </Accordion>
       <AddQnaForm projName={projName} />
     </div>
@@ -126,7 +135,7 @@ const AddQnaForm = ({projName}:{projName:string}) => {
   };
   return (
     <form
-      className="max-w-[100%] mt-[2%] mx-auto my-8   rounded-lg space-y-2"
+      className="max-w-[100%] mx-auto my-8 mt-[5%] rounded-lg space-y-2"
       onSubmit={onSubmit(formSubmit)}
     >
       <h2 className="font-[700] text-[#233333] text-[20px]  ">
