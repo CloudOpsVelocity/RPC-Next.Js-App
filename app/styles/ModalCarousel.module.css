@@ -7,15 +7,13 @@
 
 .body {
   border-radius: 20px;
-  margin-top: 150px;
+  margin-top: 130px;
 }
 
 .overlay {
-  margin-top: 150px;
+  margin-top: 130px;
 }
 
 .header {
   display: none;
 }
-
-

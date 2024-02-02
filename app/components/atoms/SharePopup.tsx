@@ -8,7 +8,7 @@ import {
   WhatsAppIcon,
 } from "@/app/images/commonSvgs";
 import { Button, CopyButton, Modal, em } from "@mantine/core";
-import { useDisclosure, useMediaQuery } from "@mantine/hooks";
+import { useClipboard, useDisclosure, useMediaQuery } from "@mantine/hooks";
 import React from "react";
 import {
   EmailShareButton,
@@ -24,6 +24,7 @@ export default function SharePopup({
 }: {
   title?: string;
 }) {
+  const clipboard = useClipboard({ timeout: 500 });
   const pathname = usePathname();
   const CopiedUrl = `${process.env.NEXT_PUBLIC_PROJECT_URL}/${pathname}`;
 
@@ -56,28 +57,28 @@ export default function SharePopup({
             <p className="text-sm font-medium mb-2">or Copy Link</p>
             <div className="flex items-center justify-between border rounded-md p-2">
               <span
-                className="text-xs truncate"
-                onClick={() => navigator.clipboard.writeText(CopiedUrl)}
+                className="text-xs truncate cursor-pointer"
+                onClick={() => clipboard.copy(CopiedUrl)}
               >
                 {CopiedUrl}
               </span>
               <CopyButton value={CopiedUrl}>
                 {({ copied, copy }) => (
                   <Button
-                    className={`${copied ? "!bg-[#148B16]" : "!bg-[#0073C6]"}`}
-                    color={copied ? "teal" : "#0073C6"}
-                    onClick={copy}
+                    className={`${
+                      clipboard.copied ? "!bg-[#148B16]" : "!bg-[#0073C6]"
+                    }`}
+                    color={clipboard.copied ? "teal" : "#0073C6"}
                     miw={100}
+                    onClick={() => clipboard.copy(CopiedUrl)}
                   >
-                    {copied ? "Copied" : "Copy url"}
+                    {clipboard.copied ? "Copied" : "Copy url"}
                   </Button>
                 )}
               </CopyButton>
             </div>
           </div>
         </>
-
-        {/* Modal content */}
       </Modal>
 
       <button

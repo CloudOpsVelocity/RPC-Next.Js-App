@@ -7,25 +7,29 @@ import SharePopup from "../../atoms/SharePopup";
 export default function Download() {
   const [opened, { close }] = useGallery();
   const handleDownload = async () => {
-    if (opened && opened.url) {
-      try {
-        const response = await fetch(opened.url);
-        const blob = await response.blob();
-        const url = URL.createObjectURL(blob);
-
-        const downloadLink = document.createElement("a");
-        downloadLink.href = url;
-        downloadLink.download = "gallery.jpg"; // Set the filename with extension
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-        document.body.removeChild(downloadLink);
-
-        // Clean up the URL object after download
-        URL.revokeObjectURL(url);
-      } catch (error) {
-        console.error("Error downloading image:", error);
-      }
-    }
+    // var link = document.createElement("a");
+    // link.href = "images.jpg";
+    // link.download = opened?.url || "gallery.jpg";
+    // document.body.appendChild(link);
+    // link.click();
+    // document.body.removeChild(link);
+    // if (opened && opened.url) {
+    //   try {
+    //     const response = await fetch(opened.url);
+    //     const blob = await response.blob();
+    //     const url = URL.createObjectURL(blob);
+    //     const downloadLink = document.createElement("a");
+    //     downloadLink.href = url;
+    //     downloadLink.download = "gallery.jpg"; // Set the filename with extension
+    //     document.body.appendChild(downloadLink);
+    //     downloadLink.click();
+    //     document.body.removeChild(downloadLink);
+    //     // Clean up the URL object after download
+    //     URL.revokeObjectURL(url);
+    //   } catch (error) {
+    //     console.error("Error downloading image:", error);
+    //   }
+    // }
   };
   return (
     opened && (

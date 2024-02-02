@@ -91,7 +91,7 @@ function FloorPlanModal({ propCgId, data, projName }: Props) {
     handleSearch();
     form.setFieldValue(key, null);
   };
-
+  const [o, {}] = useSubFloorPlanPopup();
   return (
     <FormProvider form={form}>
       <div className="flex justify-center items-center h-[300px] lg:h-[450px] w-full">
@@ -131,6 +131,7 @@ function FloorPlanModal({ propCgId, data, projName }: Props) {
           close: S.close,
           content: S.content,
           overlay: S.overlay,
+          inner: o ? S.hidden : undefined,
         }}
         centered
         onClose={handleClose}
@@ -144,9 +145,13 @@ function FloorPlanModal({ propCgId, data, projName }: Props) {
             </p>
 
             <div className="flex justify-start items-center w-full h-[35px] relative bottom-[20px] mb-[-35px] ">
-                {/* scroll buttons */}
-                {Object.values(form.values).filter(each=>each!= null).length > 4 &&
-                <button onClick={() => handleArrowClick("L")} className="flex mr-8 h-[32px] w-[32px] rounded-[50%] items-center justify-center bg-[#FCFCFC] ">
+              {/* scroll buttons */}
+              {Object.values(form.values).filter((each) => each != null)
+                .length > 4 && (
+                <button
+                  onClick={() => handleArrowClick("L")}
+                  className="flex mr-8 h-[32px] w-[32px] rounded-[50%] items-center justify-center bg-[#FCFCFC] "
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width={24}
@@ -161,42 +166,53 @@ function FloorPlanModal({ propCgId, data, projName }: Props) {
                     <path d="m15 18-6-6 6-6" />
                   </svg>
                 </button>
-                }
-              
-                <div ref={scrollFiltersRef} className="flex max-w-[60%] scroll-smooth overflow-x-auto overflow-y-hidden scrollbar-hide gap-4">
-                  {Object.entries(form.values).map(
-                    ([key, value]) =>
-                      value !== null &&
-                      value !== 0 &&
-                      value !== "" && (
-                        <div
-                          className="flex h-[33px] items-center px-3 whitespace-nowrap py-1.5 bg-white border border-[#c4f1f9] rounded-full"
-                          key={key}
-                        >
-                          <span className="text-[#57a773] font-semibold">
-                            {/* @ts-ignore */}
-                            {value}
-                          </span>
-                          <span className="mx-1.5 text-[#6e798c]">|</span>
-                          <span className="text-[#6e798c]">{filterKeysDetails?.get(key)?.name != undefined ? filterKeysDetails?.get(key)?.name : key }</span>
-                          <button className="ml-2 !w-[10px] !h-[10px]">
-                            <Image
-                              onClick={() => handleRemoveFilter(key)}
-                              src={"/cross.svg"}
-                              alt="close"
-                              width={10}
-                              height={10}
-                              className="!w-[10px] !h-[10px]"
-                            />
-                          </button>
-                        </div>
-                      )
-                  )}
-                </div>
-                
-                {/* scroll buttons */}
-                {Object.values(form.values).filter(each=>each!= null).length > 4 &&
-                <button onClick={() => handleArrowClick("R")}  className="flex h-[32px] ml-8 w-[32px] rounded-[50%] items-center justify-center bg-[#FCFCFC] ">
+              )}
+
+              <div
+                ref={scrollFiltersRef}
+                className="flex max-w-[60%] scroll-smooth overflow-x-auto overflow-y-hidden scrollbar-hide gap-4"
+              >
+                {Object.entries(form.values).map(
+                  ([key, value]) =>
+                    value !== null &&
+                    value !== 0 &&
+                    value !== "" && (
+                      <div
+                        className="flex h-[33px] items-center px-3 whitespace-nowrap py-1.5 bg-white border border-[#c4f1f9] rounded-full"
+                        key={key}
+                      >
+                        <span className="text-[#57a773] font-semibold">
+                          {/* @ts-ignore */}
+                          {value}
+                        </span>
+                        <span className="mx-1.5 text-[#6e798c]">|</span>
+                        <span className="text-[#6e798c] capitalize">
+                          {filterKeysDetails?.get(key)?.name != undefined
+                            ? filterKeysDetails?.get(key)?.name
+                            : key}
+                        </span>
+                        <button className="ml-2 !w-[10px] !h-[10px]">
+                          <Image
+                            onClick={() => handleRemoveFilter(key)}
+                            src={"/cross.svg"}
+                            alt="close"
+                            width={10}
+                            height={10}
+                            className="!w-[10px] !h-[10px]"
+                          />
+                        </button>
+                      </div>
+                    )
+                )}
+              </div>
+
+              {/* scroll buttons */}
+              {Object.values(form.values).filter((each) => each != null)
+                .length > 4 && (
+                <button
+                  onClick={() => handleArrowClick("R")}
+                  className="flex h-[32px] ml-8 w-[32px] rounded-[50%] items-center justify-center bg-[#FCFCFC] "
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width={24}
@@ -208,24 +224,24 @@ function FloorPlanModal({ propCgId, data, projName }: Props) {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     className="text-gray-600"
-                                     >
+                  >
                     <path d="m9 18 6-6-6-6" />
                   </svg>
-              </button>
-              }
+                </button>
+              )}
 
-                {Object.values(form.values).some(
-                  (value) => value !== null && value !== "" && value !== 0
-                ) && (
-                  <button
-                    className="flex whitespace-nowrap items-center px-2.5 border-none py-0.5 w-fit font-[500] text-[18px] lg:text-[20px] transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-[#FFF] text-secondary-foreground hover:bg-gray-100/80 fnt-[600] text-[#0073C6] underline"
-                    onClick={handleReset}
-                  >
-                    Clear All Filter
-                  </button>
-                )}
+              {Object.values(form.values).some(
+                (value) => value !== null && value !== "" && value !== 0
+              ) && (
+                <button
+                  className="flex whitespace-nowrap items-center px-2.5 border-none py-0.5 w-fit font-[500] text-[18px] lg:text-[20px] transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-[#FFF] text-secondary-foreground hover:bg-gray-100/80 fnt-[600] text-[#0073C6] underline"
+                  onClick={handleReset}
+                >
+                  Clear All Filter
+                </button>
+              )}
             </div>
-            
+
             <div className="flex justify-start items-start gap-[45px] flex-col mt-[1.5%] md:flex-row w-full pb-[3%] ">
               <LeftSection propCgId={propCgId} data={data} />
               <MiddleSection projName={projName} propCgId={propCgId} />
@@ -279,7 +295,6 @@ const LeftSection = ({ propCgId, data }: Props) => {
       const filteredItem = filteredData[0];
       const filteredValues: { [key: string]: string } = {};
 
-
       Object.keys(filteredItem).forEach((prop) => {
         filteredValues[prop] = String(filteredItem[prop]);
       });
@@ -313,7 +328,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             maxDropdownHeight={200}
             {...getInputProps("bhkName")}
             onChange={(value) => handleOnChange(value as string, "bhkName")}
-            classNames={{input: S.input, label: S.label }}
+            classNames={{ input: S.input, label: S.label }}
           />
         )}
         {propCgId != projectprops.plot && (
@@ -329,7 +344,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             maxDropdownHeight={200}
             {...getInputProps("towerName")}
             onChange={(value) => handleOnChange(value as string, "towerName")}
-            classNames={{input: S.input, label: S.label }}
+            classNames={{ input: S.input, label: S.label }}
           />
         )}
 
@@ -347,7 +362,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
               maxDropdownHeight={200}
               {...getInputProps("block")}
               onChange={(value) => handleOnChange(value as string, "block")}
-              classNames={{input: S.input, label: S.label }}
+              classNames={{ input: S.input, label: S.label }}
             />
           )}
 
@@ -369,7 +384,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             maxDropdownHeight={200}
             {...getInputProps("floor")}
             onChange={(value) => handleOnChange(value as string, "floor")}
-            classNames={{input: S.input, label: S.label }}
+            classNames={{ input: S.input, label: S.label }}
           />
         )}
 
@@ -385,7 +400,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
           maxDropdownHeight={200}
           {...getInputProps("unitNumber")}
           onChange={(value) => handleOnChange(value as string, "unitNumber")}
-          classNames={{input: S.input, label: S.label }}
+          classNames={{ input: S.input, label: S.label }}
         />
 
         <Select
@@ -404,7 +419,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
           maxDropdownHeight={200}
           {...getInputProps("facingName")}
           onChange={(value) => handleOnChange(value as string, "facingName")}
-          classNames={{input: S.input, label: S.label, root: S.root }}
+          classNames={{ input: S.input, label: S.label, root: S.root }}
         />
 
         {propCgId != projectprops.plot && (
@@ -422,7 +437,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             onChange={(value) =>
               handleOnChange(value as string, "superBuildUparea")
             }
-            classNames={{input: S.input, label: S.label }}
+            classNames={{ input: S.input, label: S.label }}
           />
         )}
 
@@ -439,7 +454,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             maxDropdownHeight={200}
             {...getInputProps("caretarea")}
             onChange={(value) => handleOnChange(value as string, "caretarea")}
-            classNames={{input: S.input, label: S.label }}
+            classNames={{ input: S.input, label: S.label }}
           />
         )}
 
@@ -459,7 +474,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
               onChange={(value) =>
                 handleOnChange(value as string, "gardenArea")
               }
-              classNames={{input: S.input, label: S.label }}
+              classNames={{ input: S.input, label: S.label }}
             />
           )}
 
@@ -479,7 +494,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
               onChange={(value) =>
                 handleOnChange(value as string, "terraceArea")
               }
-              classNames={{input: S.input, label: S.label }}
+              classNames={{ input: S.input, label: S.label }}
             />
           )}
 
@@ -499,7 +514,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
               onChange={(value) =>
                 handleOnChange(value as string, "parkingArea")
               }
-              classNames={{input: S.input, label: S.label }}
+              classNames={{ input: S.input, label: S.label }}
             />
           )}
 
@@ -518,7 +533,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             onChange={(value) =>
               handleOnChange(value as string, "noOfCarParking")
             }
-            classNames={{input: S.input, label: S.label }}
+            classNames={{ input: S.input, label: S.label }}
           />
         )}
 
@@ -535,7 +550,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             maxDropdownHeight={200}
             {...getInputProps("parkingType")}
             onChange={(value) => handleOnChange(value as string, "parkingType")}
-            classNames={{input: S.input, label: S.label }}
+            classNames={{ input: S.input, label: S.label }}
           />
         )}
 
@@ -554,7 +569,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             onChange={(value) =>
               handleOnChange(value as string, "totalNumberOfBalcony")
             }
-            classNames={{input: S.input, label: S.label }}
+            classNames={{ input: S.input, label: S.label }}
           />
         )}
 
@@ -570,7 +585,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             searchable
             maxDropdownHeight={200}
             {...getInputProps("totalNumberofBathroom")}
-            classNames={{input: S.input, label: S.label }}
+            classNames={{ input: S.input, label: S.label }}
           />
         )}
 
@@ -590,7 +605,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
               onChange={(value) =>
                 handleOnChange(value as string, "balconySize")
               }
-              classNames={{input: S.input, label: S.label }}
+              classNames={{ input: S.input, label: S.label }}
             />
           )}
 
@@ -607,7 +622,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             maxDropdownHeight={200}
             {...getInputProps("plotArea")}
             onChange={(value) => handleOnChange(value as string, "plotArea")}
-            classNames={{input: S.input, label: S.label }}
+            classNames={{ input: S.input, label: S.label }}
           />
         )}
 
@@ -624,7 +639,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             maxDropdownHeight={200}
             {...getInputProps("length")}
             onChange={(value) => handleOnChange(value as string, "length")}
-            classNames={{input: S.input, label: S.label }}
+            classNames={{ input: S.input, label: S.label }}
           />
         )}
 
@@ -641,7 +656,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             maxDropdownHeight={200}
             {...getInputProps("width")}
             onChange={(value) => handleOnChange(value as string, "width")}
-            classNames={{input: S.input, label: S.label }}
+            classNames={{ input: S.input, label: S.label }}
           />
         )}
       </div>
@@ -863,11 +878,9 @@ const RightSection = ({ propCgId }: Props) => {
 const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
   const type = useAtomValue(typeAtom);
   const data = useAtomValue(selectedFloorAtom);
-  // console.log(type, data);
 
   const floorsArray = useAtomValue(floorPlansArray);
-  const [opened, { open, close }] = useSubFloorPlanPopup();
-  // const [opened, setOpened] = useState(false);
+  const [opened, { open }] = useSubFloorPlanPopup();
   const [currentImg, setCurrentImg] = useState(0);
   const [selectedFloor, setFloor] = useAtom(selectedFloorAtom);
 
@@ -946,24 +959,23 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
         floorsArray != null &&
         floorsArray.length > 1 && (
           <div className="flex justify-between items-center mt-4 w-full">
-            
             {floorsArray.length > 5 && (
-            <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width={24}
-                height={24}
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="text-gray-600"
-              >
-                <path d="m15 18-6-6 6-6" />
-              </svg>
-            </button>
+              <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width={24}
+                  height={24}
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="text-gray-600"
+                >
+                  <path d="m15 18-6-6 6-6" />
+                </svg>
+              </button>
             )}
 
             <div className="flex w-full justify-center gap-[2%] items-center overflow-x-auto ">
@@ -988,22 +1000,22 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
             </div>
 
             {floorsArray.length > 5 && (
-            <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width={24}
-                height={24}
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="text-gray-600"
-              >
-                <path d="m9 18 6-6-6-6" />
-              </svg>
-            </button>
+              <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width={24}
+                  height={24}
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="text-gray-600"
+                >
+                  <path d="m9 18 6-6-6-6" />
+                </svg>
+              </button>
             )}
           </div>
         )}

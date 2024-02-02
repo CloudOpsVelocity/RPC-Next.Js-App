@@ -11,23 +11,29 @@ export default function FloorDownload() {
   const [opened, { close }] = useSubFloorPlanPopup();
   const data = useAtomValue(selectedFloorAtom);
   const handleDownload = async () => {
-    if (opened && data.floorPlanUrl) {
-      try {
-        const response = await fetch(data.floorPlanUrl);
-        const blob = await response.blob();
-        const url = URL.createObjectURL(blob);
-        const downloadLink = document.createElement("a");
-        downloadLink.href = url;
-        downloadLink.download = "floor_plan.jpg"; // Set the filename with extension
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-        document.body.removeChild(downloadLink);
-        // Clean up the URL object after download
-        URL.revokeObjectURL(url);
-      } catch (error) {
-        console.error("Error downloading image:", error);
-      }
-    }
+    // var link = document.createElement("a");
+    // link.href = "images.jpg";
+    // link.download = data.floorPlanUrl || "gallery.jpg";
+    // document.body.appendChild(link);
+    // link.click();
+    // document.body.removeChild(link);
+    // if (opened && data.floorPlanUrl) {
+    //   try {
+    //     const response = await fetch(data.floorPlanUrl);
+    //     const blob = await response.blob();
+    //     const url = URL.createObjectURL(blob);
+    //     const downloadLink = document.createElement("a");
+    //     downloadLink.href = url;
+    //     downloadLink.download = "floor_plan.jpg"; // Set the filename with extension
+    //     document.body.appendChild(downloadLink);
+    //     downloadLink.click();
+    //     document.body.removeChild(downloadLink);
+    //     // Clean up the URL object after download
+    //     URL.revokeObjectURL(url);
+    //   } catch (error) {
+    //     console.error("Error downloading image:", error);
+    //   }
+    // }
   };
   return (
     opened && (

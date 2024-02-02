@@ -3,6 +3,7 @@ import { QuotesIcon, specificationsList } from "@/app/images/commonSvgs";
 import { SpecificationList } from "@/app/validations/types/project";
 import { Box, Group, Paper } from "@mantine/core";
 import { useScrollIntoView } from "@mantine/hooks";
+import { spec } from "node:test/reporters";
 import React, { useState } from "react";
 import { MdOutlineDoorSliding } from "react-icons/md";
 
@@ -25,7 +26,6 @@ export default function Specifications({
     if (selectedSpecIndex !== index) {
       setSelectedSpecIndex(index);
 
-      // Move the selected item to the beginning
       const newData = [...specs];
 
       const itemIndex = newData.indexOf(obj);
@@ -88,7 +88,7 @@ export default function Specifications({
                     width: "100%",
                   }}
                 >
-                  {specs?.map((spec, index) => (
+                  {data?.map((spec, index) => (
                     <div
                       key={index}
                       id={spec.specName.toLowerCase()}
