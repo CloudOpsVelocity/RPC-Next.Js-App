@@ -41,7 +41,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
       addShortList({
         projIdEnc: cardData.projIdEnc,
         type: 3,
-        isactive: value == "Add to" ? "Y" : "N",
+        isactive: value == "Shortlist" ? "Y" : "N",
       });
     }
   };
