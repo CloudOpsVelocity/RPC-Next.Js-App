@@ -130,7 +130,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
       </p>
       <div
         className={`flex justify-start items-start md:items-center  mb-[2%] flex-col md:flex-row  ${
-          phaseList.length > 1 ? "mt-4" : "mt-[0%]"
+          phaseList?.length > 1 ? "mt-4" : "mt-[0%]"
         }`}
       >
         {phaseList?.length > 1 && (
