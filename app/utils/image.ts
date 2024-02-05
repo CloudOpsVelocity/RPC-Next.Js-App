@@ -23,7 +23,7 @@ function getImageUrls(
   return imageUrls;
 }
 const imageUrlParser = (originalUrl: string) => {
-  if (!originalUrl) return false;
+  if (!originalUrl) return "";
   const urlParts = originalUrl.split("/");
 
   const imagesIndex = urlParts.indexOf("images");
