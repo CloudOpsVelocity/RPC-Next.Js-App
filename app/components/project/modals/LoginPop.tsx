@@ -8,7 +8,7 @@ function LoginPopup({
   card,
 }: {
   type: "Shortlist" | "Compare";
-  card: boolean;
+  card?: boolean;
 }) {
   const [opened, { open, close }] = useDisclosure(false);
   return (
