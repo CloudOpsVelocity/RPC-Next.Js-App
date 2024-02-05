@@ -28,7 +28,6 @@ function CarouselModal({
   const [opened, { close }] = useSubFloorPlanPopup();
   const TRANSITION_DURATION = 200;
   const selectedFloor = useAtomValue(selectedFloorAtom);
-  console.log(selectedFloor.floorPlanUrl);
   return (
     <>
       <Modal
