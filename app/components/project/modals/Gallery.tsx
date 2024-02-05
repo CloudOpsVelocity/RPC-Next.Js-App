@@ -91,15 +91,15 @@ const Gallery: React.FC<GalleryProps> = ({
               loop
               mt={"lg"}
               maw={1200}
-              pl={"90px"}
+              // pl={"90px"}
               align="center"
-              mx={"auto"}
+              // mx={"auto"}
               slidesToScroll={5}
               className="w-full min-w-[80px] !h-auto max-h-[100px] min-h-[50px]"
               withControls={Image.length > 6 ? true : false}
             >
               {isImage ? (
-                <div className="flex items-center w-full">
+                <div className="flex items-center w-full justify-center">
                   {images.map((image, index) => (
                     <Carousel.Slide
                       key={index}
@@ -121,7 +121,7 @@ const Gallery: React.FC<GalleryProps> = ({
                   ))}
                 </div>
               ) : (
-                <div className="flex items-center w-full">
+                <div className="flex items-center w-full justify-center">
                   {videos.map((video, index) => (
                     <Carousel.Slide
                       key={index}

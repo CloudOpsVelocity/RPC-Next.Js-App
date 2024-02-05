@@ -58,6 +58,7 @@ export default function GalleryBlock({
                   h={550}
                   src={selectedMedia}
                   alt="Preview"
+                  className="cursor-pointer"
                   onClick={() => {
                     console.log(selectedMedia);
                     open("image", selectedMedia);

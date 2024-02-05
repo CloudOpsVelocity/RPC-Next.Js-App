@@ -7,6 +7,7 @@ import S from "@/app/styles/Drawer.module.css";
 import { AmenityList } from "@/app/validations/types/project";
 import { amenitiesGroupList } from "@/app/images/commonSvgs";
 import React from "react";
+import Close from "./button/close";
 function ProjectDrawer({ projName }: { projName: string }) {
   const [{ expanded, content, type, title }, setReadMore] =
     useAtom(readMoreAtom);
@@ -29,16 +30,19 @@ function ProjectDrawer({ projName }: { projName: string }) {
         radius="md"
         opened={expanded}
         onClose={handleReadMoreClick}
-        title={`${title}`}
         position="right"
         size={isMobile ? "70%" : "60%"}
       >
-        <h1 className="uppercase text-[24px] lg:text-[32px] font-[600] text-[#001F35] pl-[57px]">
-          {title}{" "}
-          <span className="text-[#148B16] font-[700] uppercase">
-            {projName}
-          </span>
-        </h1>
+        <div className="mt-4 flex justify-between mb-8">
+          <h1 className="uppercase text-[24px] lg:text-[32px] font-[600] text-[#001F35] pl-[57px] ">
+            {title}{" "}
+            <span className="text-[#148B16] font-[700] uppercase">
+              {projName}
+            </span>
+          </h1>
+          <Close close={handleReadMoreClick} />
+        </div>
+
         <div className="w-[90%] text-[#233333] text-xl mt-5 pl-[57px] pb-20">
           {type === "content" ? (
             <p>{content}</p>
