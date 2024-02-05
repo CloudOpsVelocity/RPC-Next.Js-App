@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 
-export default function PropertyBanner() {
+export default function PropertyBanner({projName}:{projName:string}) {
   return (
     <div className="w-[1920px] h-[339px] shrink-0 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] bg-[#fcfcfc] mb-20 relative">
       <Image
@@ -15,7 +15,7 @@ export default function PropertyBanner() {
         <h2 className="text-[#212C33] text-[32px] not-italic font-semibold leading-[normal] tracking-[1.28px]">
           About{" "}
           <span className="text-[#148B16] text-[32px] not-italic font-semibold leading-[normal] tracking-[1.28px]">
-            SARANG BY SUMADHURA
+            {projName}
           </span>
         </h2>
         <div className="flex justify-between items-center p-5">
@@ -30,7 +30,7 @@ export default function PropertyBanner() {
             />
             <div className="mt-4">
               <h2 className="text-[#001F35] text-2xl not-italic font-semibold leading-[normal] min-w-[350px]">
-                About SARANG BY SUMADHURA
+                About {projName}
               </h2>
 
               <p className="text-[#768AA9] text-xl not-italic font-semibold leading-[normal]">

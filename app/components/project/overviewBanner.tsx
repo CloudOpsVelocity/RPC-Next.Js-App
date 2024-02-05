@@ -134,15 +134,20 @@ const RequestCallBackModal = ({
   );
 };
 
-const Content = ({ close, status, setStatus }: any) => {
+const Content = ({ close, status, setStatus, name }: any) => {
   const { data: session } = useSession();
   return session ? (
-    <LoggedInUserForm close={close} status={status} setStatus={setStatus} />
+    <LoggedInUserForm
+      close={close}
+      status={status}
+      setStatus={setStatus}
+      name={name}
+    />
   ) : (
-    <ReqForm close={close} status={status} setStatus={setStatus} />
+    <ReqForm close={close} status={status} setStatus={setStatus} name={name} />
   );
 };
-const LoggedInUserForm = ({ close, status, setStatus }: any) => {
+const LoggedInUserForm = ({ close, status, setStatus, name }: any) => {
   const { slug } = useParams<{ slug: string }>();
   // const [status, setStatus] = useState<
   //   "idle" | "pending" | "success" | "error" | "otp"
@@ -192,7 +197,7 @@ const LoggedInUserForm = ({ close, status, setStatus }: any) => {
   ) : (
     <div className="mt-8 w-full">
       <p className="text-[#148B16] mb-[6%] text-[14px] lg:text-[16px] italic font-bold leading-[normal] tracking-[0.64px]">
-        Builder: Sarang By Sumadhura
+        Builder: {name}
       </p>
 
       <h3 className="text-[#00487C] mb-[2%] text-xl not-italic font-semibold leading-[normal] tracking-[0.8px]">
@@ -224,10 +229,12 @@ const ReqForm = ({
   close,
   status,
   setStatus,
+  name,
 }: {
   close: any;
   status: string;
   setStatus: any;
+  name: string;
 }) => {
   const { slug } = useParams<{ slug: string }>();
   // const [status, setStatus] = useState<
@@ -279,7 +286,7 @@ const ReqForm = ({
         No worries add your details to get callback from builder
       </p>
       <p className="text-[#148B16] text-base italic font-bold leading-[normal] tracking-[0.64px] mb-[2%]">
-        Builder: Sarang By Sumadhura
+        Builder: {name}
       </p>
       <h2 className="text-[#00487C] text-lg not-italic font-semibold leading-[normal] tracking-[0.72px] mb-[2%]">
         Your Details

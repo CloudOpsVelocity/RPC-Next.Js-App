@@ -74,12 +74,12 @@ export default function Banner({ projName }: { projName: string }) {
             height={300}
           />
         </div>
-        <AddRating opened={opened} close={close} />
+        <AddRating opened={opened} close={close} projName={projName} />
       </div>
     </div>
   );
 }
-const AddRating = ({ opened, close }: { opened: any; close: any }) => {
+const AddRating = ({ opened, close, projName }: { opened: any; close: any; projName:string }) => {
   const params = useParams<{ slug: string }>();
   const { data: session } = useSession();
   const [status, setStatus] = useState<
@@ -141,7 +141,7 @@ const AddRating = ({ opened, close }: { opened: any; close: any }) => {
           </div>
 
           <h2 className="text-[#4D6677] text-2xl not-italic font-bold leading-[23.784px]  !mb-[24px]">
-            Add your feedback for Sarang by Sumadhura Project !
+            Add your feedback for {projName} Project !
           </h2>
 
           <div className=" gap-4 ">
