@@ -15,6 +15,7 @@ import { useToggle } from "@mantine/hooks";
 import { useSession } from "next-auth/react";
 import { addShortList } from "@/app/utils/api/actions/shortlist";
 import LoginPopup from "./modals/LoginPop";
+import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 // import { formatDate } from "@/app/utils/date";
 
 type Props = {
@@ -32,6 +33,7 @@ type CardProps = {
 };
 
 export function ProjectCard({ type, cardData }: CardProps) {
+  const [, { open }] = useReqCallPopup();
   const { data: session } = useSession();
 
   const [value, toggle] = useToggle(["Shortlist", "Shortlisted"]);
@@ -155,7 +157,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
               icon={<Phone />}
               title="Request a Callback"
               buttonClass=" text-[#FFF] mt-[12px] text-[16px] font-[600] bg-[#0073C6] rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[6px]  "
-              onChange={() => ""}
+              onChange={() => open()}
             />
           </div>
         </div>

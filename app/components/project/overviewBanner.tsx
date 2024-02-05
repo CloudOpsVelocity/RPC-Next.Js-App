@@ -21,6 +21,7 @@ import { addContact, sendContact } from "@/app/utils/api/actions/contact";
 import { useParams } from "next/navigation";
 import CountryInput from "../atoms/CountryInput";
 import { formatCurrency } from "@/app/utils/numbers";
+import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 export default function OverviewBanner({
   minPrice,
   maxPrice,
@@ -30,7 +31,7 @@ export default function OverviewBanner({
   maxPrice: number;
   name: string;
 }) {
-  const [opened, { open, close }] = useDisclosure(false);
+  const [opened, { open, close }] = useReqCallPopup();
 
   return (
     <>
