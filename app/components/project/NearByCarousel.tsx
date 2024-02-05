@@ -5,9 +5,11 @@ import ProjectCarousel from "./ProjectCard";
 
 export default function NearByCarousel({ projName }: { projName: string }) {
   const { data } = useNearby();
-  // console.log(data != undefined && data.builderProj != undefined ? data.builderProj : []);
   return (
-    <div className="flex flex-col justify-start items-start w-[90%]">
+    <div
+      className="flex flex-col justify-start items-start w-[90%]"
+      id="similar"
+    >
       <ProjectCarousel
         type="proj"
         title="nEAR BY pROJECTS OF"

@@ -12,6 +12,9 @@ import {
 } from "@/app/images/commonSvgs";
 import { formatCurrency } from "@/app/utils/numbers";
 import { useToggle } from "@mantine/hooks";
+import { useSession } from "next-auth/react";
+import { addShortList } from "@/app/utils/api/actions/shortlist";
+import LoginPopup from "./modals/LoginPop";
 // import { formatDate } from "@/app/utils/date";
 
 type Props = {
@@ -29,7 +32,19 @@ type CardProps = {
 };
 
 export function ProjectCard({ type, cardData }: CardProps) {
+  const { data: session } = useSession();
+
   const [value, toggle] = useToggle(["Shortlist", "Shortlisted"]);
+  const onAddingShortList = () => {
+    if (session) {
+      toggle();
+      addShortList({
+        projIdEnc: cardData.projIdEnc,
+        type: 3,
+        isactive: value == "Add to" ? "Y" : "N",
+      });
+    }
+  };
   return (
     <>
       <div
@@ -78,13 +93,19 @@ export function ProjectCard({ type, cardData }: CardProps) {
             )}
 
             <div className=" right-2 absolute ">
-              <button
-                className="mt-[-30px] rounded-[10px] relative bottom-[35px] z-10 p-[8px] text-[#0073C6] text-[18px] font-[700] flex pl-[4px] justify-center items-center bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100"
-                onClick={() => toggle()}
-              >
-                <span className=" w-[24px] h-[24px] ">{shortlistIconSvg}</span>
-                {value}
-              </button>
+              {!session ? (
+                <LoginPopup type="Shortlist" card={true} />
+              ) : (
+                <button
+                  className="mt-[-30px] rounded-[10px] relative bottom-[35px] z-10 p-[8px] text-[#0073C6] text-[18px] font-[700] flex pl-[4px] justify-center items-center bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100"
+                  onClick={() => onAddingShortList()}
+                >
+                  <span className=" w-[24px] h-[24px] ">
+                    {shortlistIconSvg}
+                  </span>
+                  {value}
+                </button>
+              )}
             </div>
           </div>
 

@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React from "react";
 import {
   EndDate,
@@ -34,7 +34,7 @@ export default function Overview({
   stateName,
   pinCode,
 }: Main) {
-  const { PhaseOverview, currentPhase ,phaseList} = usePhaseWiseOverview();
+  const { PhaseOverview, phaseList } = usePhaseWiseOverview();
   return (
     <div
       className="pt-[2%] scroll-mt-[90px] w-[90%] rounded-[24px] shadow-md mb-[5%] mt-[2%] bg-gradient-to-r from-[#F6F6F6] /0 via-[#FFF] /45 to-[#FEFFFF]/100 "
@@ -122,25 +122,25 @@ export default function Overview({
             value={formatDateDDMMYYYY(endDate)}
             className="mr-[5%] pt-[2%] mb-[3%] "
           />
-           {phaseList?.length == 1 &&
-          <ProjBasicDetails
-            key="rerastatus"
-            icon={<EndDate />}
-            title="Rera status"
-            value={PhaseOverview[0]?.rerastatus}
-            className="mr-[5%] pt-[2%] mb-[3%] "
-          />
-          }
+          {phaseList?.length == 1 && (
+            <ProjBasicDetails
+              key="rerastatus"
+              icon={<EndDate />}
+              title="Rera status"
+              value={PhaseOverview[0]?.rerastatus}
+              className="mr-[5%] pt-[2%] mb-[3%] "
+            />
+          )}
 
-          {phaseList?.length == 1 &&
-          <ProjBasicDetails
-            key="reraId"
-            icon={<EndDate />}
-            title="Rera Id"
-            value={PhaseOverview[0]?.reraId}
-            className="mr-[5%] pt-[2%] mb-[3%] "
-          />
-          }
+          {phaseList?.length == 1 && (
+            <ProjBasicDetails
+              key="reraId"
+              icon={<EndDate />}
+              title="Rera Id"
+              value={PhaseOverview[0]?.reraId}
+              className="mr-[5%] pt-[2%] mb-[3%] "
+            />
+          )}
         </div>
         <div className=" flex justify-start md:justify-end items-start md:items-end flex-col mt-[3%] md:mt-0 ">
           <CompareList />
