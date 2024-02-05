@@ -91,12 +91,12 @@ const Gallery: React.FC<GalleryProps> = ({
               loop
               mt={"lg"}
               maw={1200}
-              // pl={"90px"}
+              pl={"90px"}
               align="center"
               // mx={"auto"}
               slidesToScroll={5}
               className="w-full min-w-[80px] !h-auto max-h-[100px] min-h-[50px]"
-              withControls={Image.length > 6 ? true : false}
+              withControls={images.length > 5 ? true : false}
             >
               {isImage ? (
                 <div className="flex items-center w-full justify-center">
