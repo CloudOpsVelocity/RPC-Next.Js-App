@@ -8,6 +8,7 @@ import S from "@/app/styles/ImgCarousel.module.css";
 import ReactPlayer from "react-player";
 import { useGallery } from "@/app/hooks/useGallery";
 import SharePopup from "../../atoms/SharePopup";
+import { imageUrlParser } from "@/app/utils/image";
 
 type GalleryProps = {
   selectedMedia: any;
@@ -31,7 +32,6 @@ const Gallery: React.FC<GalleryProps> = ({
     setPreviewImage(image);
     open(isImage ? "image" : "video", image);
   };
-
   return (
     <>
       <Modal
@@ -48,6 +48,7 @@ const Gallery: React.FC<GalleryProps> = ({
           overlay: S.overlay,
           inner: S.inner,
         }}
+        className="!styleScroll"
       >
         <div className="h-auto scrollbar-hide">
           <div className="w-full bg-transparent    h-[57px] flex items-center justify-between  z-[1000] px-10 max-w-[91rem] m-auto">
@@ -55,7 +56,10 @@ const Gallery: React.FC<GalleryProps> = ({
               {isImage ? "Gallery" : "Videos"}
             </div>
             <div className="flex justify-center items-center gap-5">
-              <SharePopup title="Share" />
+              <SharePopup
+                title="Share"
+                url={imageUrlParser(content?.url || "")}
+              />
 
               <Close close={close} />
             </div>

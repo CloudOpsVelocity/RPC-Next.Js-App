@@ -1014,6 +1014,7 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
                       alt="Floor Plan"
                       width={57}
                       height={37}
+                      className="w-[88px] h-[58px]  border-[#92B2C8] cursor-pointer border-[color:var(--grey-gradient,#EFEFEF)] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-xl border-[0.5px] border-solid"
                       style={{ aspectRatio: "100 / 50", objectFit: "cover" }}
                       onClick={() => selectImg(ind)}
                     />

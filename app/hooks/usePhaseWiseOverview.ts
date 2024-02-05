@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { getProjectWiseOverView } from "../utils/api/project";

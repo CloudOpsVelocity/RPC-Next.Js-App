@@ -10,6 +10,7 @@ import { Image } from "@mantine/core";
 import { useSubFloorPlanPopup } from "@/app/hooks/useSubFloorplanPopup";
 import { projectprops } from "@/app/data/projectDetails";
 import SharePopup from "../../atoms/SharePopup";
+import { imageUrlParser } from "@/app/utils/image";
 
 type CarouselModalProps = {
   opened: boolean;
@@ -26,7 +27,8 @@ function CarouselModal({
 }) {
   const [opened, { close }] = useSubFloorPlanPopup();
   const TRANSITION_DURATION = 200;
-
+  const selectedFloor = useAtomValue(selectedFloorAtom);
+  console.log(selectedFloor.floorPlanUrl);
   return (
     <>
       <Modal
@@ -49,7 +51,10 @@ function CarouselModal({
             <button className="text-white flex justify-center items-center gap-1 p-2 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] rounded-[10px] bg-[#0073c6]">
               Download Floor Plan
             </button>
-            <SharePopup title="Share" />
+            <SharePopup
+              title="Share"
+              url={imageUrlParser(selectedFloor.floorPlanUrl)}
+            />
 
             <Close close={close} />
           </div>
