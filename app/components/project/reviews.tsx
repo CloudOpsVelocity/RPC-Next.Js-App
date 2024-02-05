@@ -53,7 +53,7 @@ export default function Reviews({ projName }: { projName: string }) {
 
 const Review = ({ rating, review, name, days }: any) => {
   return (
-    <div className="max-w-lg mx-auto mt-[20px] bg-white rounded-lg p-4 relative shadow-md border-solid border-[#DCE6ED] border-[1px] min-h-[220px]">
+    <div className="shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] max-w-lg mx-auto mt-[20px] bg-[#fff] p-4 relative   min-h-[220px] border rounded-[10px] border-solid border-[#DCE6ED]">
       <span className=" absolute top-[-20px] !z-30  ">{quotesIcon}</span>
       <div className="flex items-center space-x-2">
         <div className="flex-1">
@@ -62,14 +62,14 @@ const Review = ({ rating, review, name, days }: any) => {
               <p className="text-black text-lg not-italic font-medium leading-[normal]">
                 {name ?? "GRP USER"}
               </p>
-              <p className="text-[14px] text-[#212C33] font-[500]"></p>
+              <p className="text-[14px] text-[#212C33] font-[500]">Grp User</p>
             </div>
             <div className="text-right">
               <Rating size={"sm"} value={rating} readOnly />
               <span className="text-xs text-gray-500">{days} days ago</span>
             </div>
           </div>
-          <p className="mt-2 text-[#3E3E3E] text-sm not-italic font-normal leading-[normal] tracking-[0.56px]">
+          <p className="mt-2 text-[#3E3E3E] text-base not-italic font-normal leading-[normal] tracking-[0.56px]">
             {review}
           </p>
         </div>

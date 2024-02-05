@@ -10,7 +10,6 @@ export default function Loans({
   data: Bank[];
   projName: string;
 }) {
-  console.log(data);
   return (
     <div className="bg-white scroll-mt-[90px] py-8 w-[90%] mx-auto">
       <div className="  px-4">
@@ -27,7 +26,7 @@ export default function Loans({
           {data?.map((item, index) => {
             if (item.bankid != undefined && item.bankid != null) {
               return (
-                <div className="flex  flex-col justify-center items-center mt-4">
+                <div className="flex  flex-col justify-center items-center mt-4 sm:max-w-[150px] md:max-w-max text-center">
                   <Image
                     key={index}
                     src={BankDetailsList?.get(item.bankid)?.url as string}

@@ -11762,3 +11762,9 @@ export const PlusIcon = () => {
     </svg>
   );
 };
+
+export const DropDownIcon = ()=> {
+  return <svg xmlns="http://www.w3.org/2000/svg" width="16" height="9" viewBox="0 0 16 9" fill="none">
+  <path d="M8.83307 8.21057C8.34201 8.59648 7.65798 8.59648 7.16693 8.21057L0.535303 2.99899C-0.497831 2.18708 0.0645781 0.5 1.36837 0.5H14.6316C15.9354 0.5 16.4978 2.18708 15.4647 2.99899L8.83307 8.21057Z" fill="#D9D9D9"/>
+</svg>
+}

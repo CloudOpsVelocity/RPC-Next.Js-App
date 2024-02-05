@@ -2,6 +2,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { Modal, Select } from "@mantine/core";
 import { useId, useRef } from "react";
 import {
+  DropDownIcon,
   LenseIcon,
   PopupOpenSvg,
   emptyFilesIcon,
@@ -327,6 +328,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             {...getInputProps("bhkName")}
             onChange={(value) => handleOnChange(value as string, "bhkName")}
             classNames={{ input: S.input, label: S.label }}
+            rightSection={<DropDownIcon />}
           />
         )}
         {propCgId != projectprops.plot && (
@@ -343,6 +345,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             {...getInputProps("towerName")}
             onChange={(value) => handleOnChange(value as string, "towerName")}
             classNames={{ input: S.input, label: S.label }}
+            rightSection={<DropDownIcon />}
           />
         )}
 
@@ -361,6 +364,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
               {...getInputProps("block")}
               onChange={(value) => handleOnChange(value as string, "block")}
               classNames={{ input: S.input, label: S.label }}
+              rightSection={<DropDownIcon />}
             />
           )}
 
@@ -383,6 +387,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             {...getInputProps("floor")}
             onChange={(value) => handleOnChange(value as string, "floor")}
             classNames={{ input: S.input, label: S.label }}
+            rightSection={<DropDownIcon />}
           />
         )}
 
@@ -399,6 +404,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
           {...getInputProps("unitNumber")}
           onChange={(value) => handleOnChange(value as string, "unitNumber")}
           classNames={{ input: S.input, label: S.label }}
+          rightSection={<DropDownIcon />}
         />
 
         <Select
@@ -418,6 +424,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
           {...getInputProps("facingName")}
           onChange={(value) => handleOnChange(value as string, "facingName")}
           classNames={{ input: S.input, label: S.label, root: S.root }}
+          rightSection={<DropDownIcon />}
         />
 
         {propCgId != projectprops.plot && (
@@ -436,6 +443,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
               handleOnChange(value as string, "superBuildUparea")
             }
             classNames={{ input: S.input, label: S.label }}
+            rightSection={<DropDownIcon />}
           />
         )}
 
@@ -453,6 +461,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             {...getInputProps("caretarea")}
             onChange={(value) => handleOnChange(value as string, "caretarea")}
             classNames={{ input: S.input, label: S.label }}
+            rightSection={<DropDownIcon />}
           />
         )}
 
@@ -473,6 +482,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
                 handleOnChange(value as string, "gardenArea")
               }
               classNames={{ input: S.input, label: S.label }}
+              rightSection={<DropDownIcon />}
             />
           )}
 
@@ -493,6 +503,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
                 handleOnChange(value as string, "terraceArea")
               }
               classNames={{ input: S.input, label: S.label }}
+              rightSection={<DropDownIcon />}
             />
           )}
 
@@ -513,6 +524,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
                 handleOnChange(value as string, "parkingArea")
               }
               classNames={{ input: S.input, label: S.label }}
+              rightSection={<DropDownIcon />}
             />
           )}
 
@@ -532,6 +544,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
               handleOnChange(value as string, "noOfCarParking")
             }
             classNames={{ input: S.input, label: S.label }}
+            rightSection={<DropDownIcon />}
           />
         )}
 
@@ -549,6 +562,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             {...getInputProps("parkingType")}
             onChange={(value) => handleOnChange(value as string, "parkingType")}
             classNames={{ input: S.input, label: S.label }}
+            rightSection={<DropDownIcon />}
           />
         )}
 
@@ -568,6 +582,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
               handleOnChange(value as string, "totalNumberOfBalcony")
             }
             classNames={{ input: S.input, label: S.label }}
+            rightSection={<DropDownIcon />}
           />
         )}
 
@@ -584,6 +599,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             maxDropdownHeight={200}
             {...getInputProps("totalNumberofBathroom")}
             classNames={{ input: S.input, label: S.label }}
+            rightSection={<DropDownIcon />}
           />
         )}
 
@@ -604,6 +620,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
                 handleOnChange(value as string, "balconySize")
               }
               classNames={{ input: S.input, label: S.label }}
+              rightSection={<DropDownIcon />}
             />
           )}
 
@@ -621,6 +638,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             {...getInputProps("plotArea")}
             onChange={(value) => handleOnChange(value as string, "plotArea")}
             classNames={{ input: S.input, label: S.label }}
+            rightSection={<DropDownIcon />}
           />
         )}
 
@@ -638,6 +656,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             {...getInputProps("length")}
             onChange={(value) => handleOnChange(value as string, "length")}
             classNames={{ input: S.input, label: S.label }}
+            rightSection={<DropDownIcon />}
           />
         )}
 
@@ -655,6 +674,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             {...getInputProps("width")}
             onChange={(value) => handleOnChange(value as string, "width")}
             classNames={{ input: S.input, label: S.label }}
+            rightSection={<DropDownIcon />}
           />
         )}
       </div>

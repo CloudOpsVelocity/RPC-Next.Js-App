@@ -30,7 +30,6 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
   return (
     <div className="w-full relative">
       <Download />
-      <FloorDownload />
       <div className="mt-[90px] w-full pb-[2%] flex items-center justify-center flex-col">
         <div className="p-[2%] w-full">
           <p className="text-[16px] text-[#565D70] font-[500] mb-[1%]">

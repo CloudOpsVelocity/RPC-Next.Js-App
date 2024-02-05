@@ -1,6 +1,6 @@
 import React, { useId, useState } from "react";
 import { Button, Select } from "@mantine/core";
-import { LenseIcon } from "../../images/commonSvgs";
+import { DropDownIcon, LenseIcon } from "../../images/commonSvgs";
 import { projectprops } from "../../data/projectDetails";
 import { useAtom } from "jotai";
 import { selectedFloorAtom } from "@/app/store/floor";
@@ -101,6 +101,7 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
             placeholder="-- select Tower --"
             data={(getOptions("towerName") as string[]) || []}
             searchable
+            rightSection={<DropDownIcon />}
             maxDropdownHeight={200}
             value={selectedValues.towerName}
             onChange={(value) =>
@@ -110,6 +111,7 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
         ) : null}
 
         <Select
+          rightSection={<DropDownIcon />}
           size="md"
           mt="md"
           label="Unit Number"
@@ -122,6 +124,7 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
         />
         {propCgId !== projectprops.plot && (
           <Select
+            rightSection={<DropDownIcon />}
             size="md"
             mt="md"
             label="Unit Type"
@@ -136,6 +139,7 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
 
         {propCgId == projectprops.apartment && (
           <Select
+            rightSection={<DropDownIcon />}
             size="md"
             mt="md"
             label="Block"
@@ -150,6 +154,7 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
 
         {propCgId !== projectprops.plot && (
           <Select
+            rightSection={<DropDownIcon />}
             size="md"
             mt="md"
             className="!w-[46%]"
@@ -169,6 +174,7 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
 
         {propCgId == projectprops.plot && (
           <Select
+            rightSection={<DropDownIcon />}
             size="md"
             mt="md"
             label="Area"
@@ -183,6 +189,7 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
           />
         )}
         <Select
+          rightSection={<DropDownIcon />}
           size="md"
           mt="md"
           label="Facing"
@@ -195,6 +202,7 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
         />
         {propCgId == projectprops.plot && (
           <Select
+            rightSection={<DropDownIcon />}
             w={"full"}
             size="md"
             mt="md"
@@ -209,6 +217,7 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
         )}
         {propCgId == projectprops.plot && (
           <Select
+            rightSection={<DropDownIcon />}
             w={"full"}
             size="md"
             mt="md"
@@ -227,7 +236,7 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
         <Button
           leftSection={<LenseIcon />}
           title="Search"
-          onClick={handleSearch}
+          onClick={() => handleSearch()}
           className="flex items-center justify-center gap-[10px] border-none text-[#FFF] text-[20px] font-[600] bg-[#0073C6] rounded-[10px] p-[6px]"
         >
           Search
