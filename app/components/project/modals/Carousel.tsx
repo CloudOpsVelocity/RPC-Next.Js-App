@@ -52,7 +52,7 @@ function CarouselModal({
             </button>
             <SharePopup
               title="Share"
-              url={imageUrlParser(selectedFloor.floorPlanUrl)}
+              url={imageUrlParser(selectedFloor?.floorPlanUrl)}
             />
 
             <Close close={close} />

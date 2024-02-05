@@ -1001,12 +1001,12 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
               </button>
             )}
 
-            <div className="flex w-full justify-center gap-[2%] items-center overflow-x-auto ">
+            <div className="flex w-full justify-center gap-[2%] items-center overflow-x-auto scrollbar-hide">
               {floorsArray.map((eachObj, ind) => {
                 return (
                   <div
                     key={ind}
-                    className="rounded-[5px] h-[50px] w-[70px] flex justify-center items-center shadow-md border-solid border-[1px] border-[#EFEFEF]"
+                    className="rounded-[5px] h-[50px] w-[70px] flex justify-center items-center shadow-md border-solid border-[1px] border-[#EFEFEF] scrollbar-hide"
                   >
                     <Image
                       // @ts-ignore
