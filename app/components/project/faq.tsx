@@ -19,7 +19,7 @@ import { useParams } from "next/navigation";
 import { useForm, yupResolver } from "@mantine/form";
 import { qnaSchema } from "@/app/validations/project";
 import { useSession } from "next-auth/react";
-import { MinusIcon, infoIcon } from "@/app/images/commonSvgs";
+import { MinusIcon, PlusIcon, infoIcon } from "@/app/images/commonSvgs";
 import Link from "next/link";
 import toast from "react-hot-toast";
 
@@ -75,23 +75,7 @@ export function FaqWithBg({ data, projName }: FaqWithBgProps) {
             >
               <Accordion.Control
                 classNames={{ label: classes.title, icon: classes.icon }}
-                icon={
-                  value == `faq-${index}` ? (
-                    <MinusIcon />
-                  ) : (
-                    <ThemeIcon
-                      className={
-                        "!text-black !bg-transparent !h-[22px] !w-[22px] "
-                      }
-                      size={22}
-                    >
-                      <FaPlus
-                        style={{ width: rem(18), height: rem(18) }}
-                        stroke={1.5}
-                      />
-                    </ThemeIcon>
-                  )
-                }
+                icon={value == `faq-${index}` ? <MinusIcon /> : <PlusIcon />}
               >
                 <span
                   className={`${

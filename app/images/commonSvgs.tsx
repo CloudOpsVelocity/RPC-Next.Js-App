@@ -2833,8 +2833,8 @@ export const loginPopupBuildingIcon = (
 type CrossProps = {
   className?: string;
   iconId?: any;
-  onClick?:any;
-}
+  onClick?: any;
+};
 
 export const PopupCrossIcon = ({ className, iconId, onClick }: CrossProps) => {
   return (
@@ -10664,7 +10664,7 @@ export const specificationsList = new Map([
       name: "Structure",
       url: (
         <svg
-        className="!fill-red-900"
+          className="!fill-red-900"
           xmlns="http://www.w3.org/2000/svg"
           width="21"
           height="19"
@@ -11716,9 +11716,49 @@ export const RERAsvg = () => {
   );
 };
 
+export const MinusIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="28"
+      height="6"
+      viewBox="0 0 28 6"
+      fill="none"
+    >
+      <path
+        d="M3 3H25"
+        stroke="#0093FF"
+        stroke-width="6"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  );
+};
 
-export const MinusIcon = ()=> {
-  return <svg xmlns="http://www.w3.org/2000/svg" width="28" height="6" viewBox="0 0 28 6" fill="none">
-  <path d="M3 3H25" stroke="#0093FF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-}
+export const PlusIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="28"
+      height="28"
+      viewBox="0 0 28 28"
+      fill="none"
+    >
+      <path
+        d="M14 3V25"
+        stroke="#303A42"
+        stroke-width="5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M3 14H25"
+        stroke="#303A42"
+        stroke-width="5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  );
+};
