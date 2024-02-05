@@ -117,6 +117,9 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
       try {
         await addQna({ question: values.question, projIdEnc: slug });
         reset();
+        toast.success("QnA added successfully", {
+          position: "bottom-center",
+        });
         setStatus("success");
       } catch (error: any) {
         setErrors({ question: error.message });
