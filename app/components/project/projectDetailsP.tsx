@@ -23,8 +23,8 @@ type Props = {
   projName: string;
 };
 export default function ProjectDetailsP({ projName, slug }: Props) {
-  const { PhaseOverview, currentPhase, handlePhaseChange } =
-    usePhaseWiseOverview();
+  
+  const { PhaseOverview, currentPhase, handlePhaseChange ,phaseList} = usePhaseWiseOverview();
   const { projectUnitsData } = useUnitTypes();
   const selectedPhase = PhaseOverview?.find(
     (phase: any) => phase.phaseId === currentPhase
@@ -35,6 +35,8 @@ export default function ProjectDetailsP({ projName, slug }: Props) {
     propertyTypeOrder.filter((propertyType) =>
       Object.keys(selectedPhase.propTypeOverview).includes(propertyType)
     );
+
+    // console.log(PhaseOverview[0])
 
   return (
     <div className="w-[90%] mb-[5%] scroll-mt-[90px]" id="propertyDetails">
@@ -71,6 +73,7 @@ export default function ProjectDetailsP({ projName, slug }: Props) {
         )}
       </div>
 
+      {phaseList?.length > 1 &&
       <div className="flex justify-start items-start flex-wrap w-[80%]">
         {selectedPhase && (
           <>
@@ -114,6 +117,8 @@ export default function ProjectDetailsP({ projName, slug }: Props) {
           </>
         )}
       </div>
+      }
+
       <div className="flex justify-start items-start gap-[4%] flex-wrap mt-[3%]">
         {selectedPhase && (
           <>

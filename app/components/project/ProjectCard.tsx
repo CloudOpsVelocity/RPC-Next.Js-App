@@ -144,7 +144,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
 }
 
 const ProjectCarousel = ({ type, content, title, projName, data }: Props) => {
-  console.log(data);
+  // console.log(data);
   return (
     <div className="w-[100%] mb-[5%]">
       <h2 className="text-[24px] lg:text-[32px] font-semibold uppercase cursor-pointer">
