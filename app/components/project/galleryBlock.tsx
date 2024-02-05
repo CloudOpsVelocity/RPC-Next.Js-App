@@ -30,7 +30,7 @@ export default function GalleryBlock({
   const [content, { open, close }] = useGallery();
 
   return (
-    <div className="w-[90%] scroll-mt-[90px] mb-[10%]  " id="galleria">
+    <div className="w-[90%] scroll-mt-[90px] mb-[5%]  " id="galleria">
       <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35] uppercase mb-[12px]">
         gALLERIA of{" "}
         <span className="text-[#148B16] font-[700] uppercase">{projName}</span>{" "}
