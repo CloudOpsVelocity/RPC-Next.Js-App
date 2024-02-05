@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useId, useState } from "react";
 import { Button, Select } from "@mantine/core";
 import { LenseIcon } from "../../images/commonSvgs";
 import { projectprops } from "../../data/projectDetails";
 import { useAtom } from "jotai";
 import { selectedFloorAtom } from "@/app/store/floor";
+import { randomUUID } from "crypto";
 
 type Props = {
   propCgId: any;
@@ -16,10 +17,11 @@ type SelectedValues = {
   unitType: string;
   block: string;
   floor: string;
-  area: string;
+  superBuildUparea: string;
   facingName: string;
   width: string;
   length: string;
+  bhkName: string;
 };
 
 const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
@@ -44,20 +46,23 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
     unitType: "",
     block: "",
     floor: "",
-    area: "",
+    superBuildUparea: "",
     facingName: "",
     width: "",
     length: "",
+    bhkName: "",
   });
+  console.log(selectedValues);
   const handleInputChange = (property: keyof SelectedValues, value: string) => {
     setSelectedValues((prevValues) => ({
       ...prevValues,
       [property]: prevValues[property] === value ? "" : value,
     }));
-    handleSearch();
+    console.log(property);
+    handleSearch(property);
   };
 
-  const handleSearch = () => {
+  const handleSearch = (type?: string) => {
     const filteredData = data.filter((item: any) => {
       return Object.keys(selectedValues).every(
         (key) =>
@@ -66,10 +71,19 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
       );
     });
     setFloor(filteredData[0]);
+    if (type === "unitNumber") {
+      // setSelectedValues({
+      //   ...selectedValues,
+      //   towerName: filteredData[0].towerName,
+      //   unitNumber: filteredData[0].unitNumber,
+      //   unitType: filteredData[0].unitType,
+      //   block: filteredData[0].block,
+      //   floor: filteredData[0].floor,
+      //   facingName: filteredData[0].facingName,
+      // });
+    }
   };
-  const towerName = getOptions("towerName");
-  const facing = getOptions("facingName");
-  console.log({ towerName, facing });
+
   return (
     <div className="px-[3%] w-full flex justify-start flex-col items-start">
       <h3 className="text-[#001F35] text-[20px] lg:text-[24px] font-[500]">
@@ -79,6 +93,7 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
         {propCgId == projectprops.apartment ||
         propCgId == projectprops.villament ? (
           <Select
+            key={selectedValues.towerName}
             size="md"
             mt="md"
             label="Tower"
@@ -87,6 +102,7 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
             data={(getOptions("towerName") as string[]) || []}
             searchable
             maxDropdownHeight={200}
+            value={selectedValues.towerName}
             onChange={(value) =>
               handleInputChange("towerName", value as string)
             }
@@ -114,7 +130,7 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
             data={getOptions("bhkName")}
             searchable
             maxDropdownHeight={200}
-            onChange={(value) => handleInputChange("unitType", value as string)}
+            onChange={(value) => handleInputChange("bhkName", value as string)}
           />
         )}
 
@@ -161,7 +177,9 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
             data={(getOptions("superBuildUparea") as string[]) || []}
             searchable
             maxDropdownHeight={200}
-            onChange={(value) => handleInputChange("area", value as string)}
+            onChange={(value) =>
+              handleInputChange("superBuildUparea", value as string)
+            }
           />
         )}
         <Select
