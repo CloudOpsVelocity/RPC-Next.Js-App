@@ -16,17 +16,13 @@ export default function CompareList() {
   const { toggleCompare, compareItems } = useShortlistAndCompare();
   const isItemCompared =
     compareItems.length > 0 && compareItems.some((item) => item.status === "Y");
-  const [value, toggle] = useToggle(
-    isItemCompared ? ["Remove From", "Add to"] : ["Add to", "Remove From"]
-  );
 
   const onAddingCompare = () => {
     if (session) {
-      toggle();
       toggleCompare({
         id: slug,
         type: 3,
-        status: value == "Add to" ? "Y" : "N",
+        status: isItemCompared ? "Y" : "N",
       });
     } else {
       open();
@@ -58,7 +54,7 @@ export default function CompareList() {
       className="text-[20px] flex justify-center items-center gap-[8px] cursor-pointer lg:text-[24px] text-[#0073C6] font-[600] underline whitespace-nowrap decoration-dashed "
     >
       {comparingIcon}
-      {value} Compare
+      {isItemCompared ? "Remove from" : "Add to"} Compare
     </button>
   );
 }

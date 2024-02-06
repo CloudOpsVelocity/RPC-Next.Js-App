@@ -4,7 +4,7 @@ import { useToggle } from "@mantine/hooks";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
 import LoginPopup from "../modals/LoginPop";
 import { useShortlistAndCompare } from "@/app/hooks/storage";
@@ -17,16 +17,11 @@ export default function ShortList() {
     shortlistedItems.length > 0 &&
     shortlistedItems.some((item) => item.status === "Y");
 
-  const [value, toggle] = useToggle(
-    isItemInShortlist ? ["Remove From", "Add to"] : ["Add to", "Remove From"]
-  );
-
   const onAddingShortList = () => {
     if (session) {
-      toggle();
       toggleShortlist({
         id: slug,
-        status: value === "Add to" ? "Y" : "N",
+        status: isItemInShortlist ? "Y" : "N",
         type: 2,
       });
     }
@@ -40,7 +35,7 @@ export default function ShortList() {
       className="text-[20px] flex justify-center items-center gap-[8px]  cursor-pointer lg:text-[24px] text-[#0073C6] font-[600] underline whitespace-nowrap decoration-dashed "
     >
       {tagIcon}
-      {value} Shortlist
+      {isItemInShortlist ? "Remove from" : "Add to"} Shortlist
     </button>
   );
 }
