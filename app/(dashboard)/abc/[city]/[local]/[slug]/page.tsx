@@ -19,10 +19,7 @@ import ProjectDetailsP from "@/app/components/project/projectDetailsP";
 import Specifications from "@/app/components/project/specification";
 import ProjectDrawer from "@/app/components/project/Drawer";
 import DownloadBroucher from "@/app/components/project/downloadBroucher";
-import Download from "@/app/components/project/modals/Download";
-import FloorDownload from "@/app/components/project/modals/FloorDownload";
 import NearByCarousel from "@/app/components/project/NearByCarousel";
-import Image from "next/image";
 
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {

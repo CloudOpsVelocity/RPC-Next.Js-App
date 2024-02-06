@@ -185,12 +185,12 @@ const LoggedInUserForm = ({ close, status, setStatus, name }: any) => {
       name: session?.user?.name,
       email: session?.user?.email,
       mobile: session?.user?.userName,
-      projIdEnc: slug,
+      projIdEnc: popupState.projectID ?? "",
       isProjContact: "Y",
       src: "searchCard",
     };
 
-    await pushToRequestCallbacks(data.projIdEnc, async () => {
+    await pushToRequestCallbacks(popupState.projectID ?? "", async () => {
       const res = await sendContact(data);
     });
     setStatus("success");
