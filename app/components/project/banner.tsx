@@ -71,7 +71,7 @@ export default function Banner({ projName }: { projName: string }) {
           <Image
             src="/abc/rating.svg"
             alt="Project Rating Illustration"
-            className="h-[320px] w-[600px] absolute -top-[87px]"
+            className="h-[320px] w-[320px] absolute -top-[87px] right-0"
             width={600}
             height={300}
           />
