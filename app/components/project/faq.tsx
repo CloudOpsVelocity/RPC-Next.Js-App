@@ -150,7 +150,7 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
       className="max-w-[100%] mx-auto my-8 mt-[5%] rounded-lg space-y-2"
       onSubmit={onSubmit(formSubmit)}
     >
-      <h2 className="font-[700] text-[#233333] text-[20px]  ">
+      <h2 className="font-[700] text-[#233333] text-[20px] md:text-[28px]  ">
         Ask your question related to
         <span className="!text-green-600"> {projName} Project!</span>
       </h2>
@@ -161,9 +161,12 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
             id="question"
             name="question"
             placeholder="Type your question here"
-            rows={5}
+            rows={4}
             mb={"sm"}
             {...getInputProps("question")}
+            className="placeholder:!text-[#4D6677] placeholder:!text-[28px] italic font-medium leading-[23.784px] !border !border-solid !border-[#737579] rounded-[10px]"
+            size="lg"
+            radius={"10px"}
           />
         </div>
         <Button

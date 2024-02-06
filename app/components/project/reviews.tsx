@@ -11,8 +11,10 @@ import { Rating, em } from "@mantine/core";
 import useRatings from "@/app/hooks/useRatings";
 import { useParams } from "next/navigation";
 import { useMediaQuery } from "@mantine/hooks";
+import { usePopUpRatings } from "@/app/hooks/popups/usePopUpRatings";
 
 export default function Reviews({ projName }: { projName: string }) {
+  const [opened, { open, close }] = usePopUpRatings();
   const { data } = useRatings();
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
   return (
@@ -25,10 +27,17 @@ export default function Reviews({ projName }: { projName: string }) {
               {projName}
             </span>
           </h2>
-          <p className="text-[#4D6677] text-2xl italic font-medium leading-[normal] tracking-[0.96px] mt-2 mb-[40px]">
+          <p className="text-[#4D6677] text-2xl italic font-medium leading-[normal] tracking-[0.96px] mt-2 mb-5">
             Find helpful customer reviews and review ratings for {projName}
           </p>
-
+          <div className="w-full flex justify-end mb-[20px]">
+            <button
+              className="text-[#0073C6] text-xl not-italic font-bold leading-[normal] tracking-[0.8px] underline "
+              onClick={open}
+            >
+              Add Review
+            </button>
+          </div>
           <div className="relative">
             <Carousel
               nextControlIcon={<NextCarouselButton />}

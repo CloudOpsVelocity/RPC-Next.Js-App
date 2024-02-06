@@ -1,4 +1,6 @@
-const Close = ({ close }: { close: any }) => {
+import clsx from "clsx";
+
+const Close = ({ close, className }: { close: any; className?: string }) => {
   return (
     <svg
       cursor={"pointer"}
@@ -8,6 +10,7 @@ const Close = ({ close }: { close: any }) => {
       viewBox="0 0 36 36"
       fill="none"
       onClick={close}
+      className={clsx(className)}
     >
       <rect width="36" height="36" rx="18" fill="#FF0000" />
       <path
