@@ -8,21 +8,32 @@ import { useParams } from "next/navigation";
 import React from "react";
 import toast from "react-hot-toast";
 import LoginPopup from "../modals/LoginPop";
+import { useShortlistAndCompare } from "@/app/hooks/storage";
 
 export default function ShortList() {
   const { data: session } = useSession();
 
   const { slug } = useParams<{ slug: string }>();
-  const [value, toggle] = useToggle(["Add to", "Remove From"]);
+  const { toggleShortlist, shortlistedItems } = useShortlistAndCompare();
+  const [value, toggle] = useToggle(
+    shortlistedItems.some((item) => item.id === slug)
+      ? ["Remove From", "Add to"]
+      : ["Add to", "Remove From"]
+  );
 
   const onAddingShortList = () => {
     if (session) {
       toggle();
-      addShortList({
-        projIdEnc: slug,
+      toggleShortlist({
+        id: slug,
+        status: value === "Add to" ? "Y" : "N",
         type: 3,
-        isactive: value == "Add to" ? "Y" : "N",
       });
+      // addShortList({
+      //   projIdEnc: slug,
+      //   type: 3,
+      //   isactive: value == "Add to" ? "Y" : "N",
+      // });
     }
   };
 
