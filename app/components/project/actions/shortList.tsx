@@ -1,4 +1,3 @@
-"use client";
 import { infoIcon, tagIcon } from "@/app/images/commonSvgs";
 import { addShortList } from "@/app/utils/api/actions/shortlist";
 import { useToggle } from "@mantine/hooks";
@@ -12,13 +11,14 @@ import { useShortlistAndCompare } from "@/app/hooks/storage";
 
 export default function ShortList() {
   const { data: session } = useSession();
-
   const { slug } = useParams<{ slug: string }>();
   const { toggleShortlist, shortlistedItems } = useShortlistAndCompare();
+  const isItemInShortlist =
+    shortlistedItems.length > 0 &&
+    shortlistedItems.some((item) => item.status === "Y");
+
   const [value, toggle] = useToggle(
-    shortlistedItems.some((item) => item.id === slug)
-      ? ["Remove From", "Add to"]
-      : ["Add to", "Remove From"]
+    isItemInShortlist ? ["Remove From", "Add to"] : ["Add to", "Remove From"]
   );
 
   const onAddingShortList = () => {
@@ -27,13 +27,8 @@ export default function ShortList() {
       toggleShortlist({
         id: slug,
         status: value === "Add to" ? "Y" : "N",
-        type: 3,
+        type: 2,
       });
-      // addShortList({
-      //   projIdEnc: slug,
-      //   type: 3,
-      //   isactive: value == "Add to" ? "Y" : "N",
-      // });
     }
   };
 

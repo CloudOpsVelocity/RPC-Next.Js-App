@@ -18,7 +18,7 @@ interface HookReturnValue {
   shortlistedItems: Item[];
   compareItems: Item[];
   toggleShortlist: (item: Item) => void;
-  //   toggleCompare: (item: Item) => void;
+  toggleCompare: (item: Item) => void;
   requestCallback: (data: any) => Promise<any>;
 }
 
@@ -77,7 +77,14 @@ export const useShortlistAndCompare = (): HookReturnValue => {
           isactive: item.status,
         })
       ),
-    // toggleCompare: (item: Item) => addOrUpdateItem("compareItems", item),
+    toggleCompare: (item: Item) =>
+      addOrUpdateItem("compareItems", item, () =>
+        addShortList({
+          projIdEnc: item.id,
+          type: item.type,
+          isactive: item.status,
+        })
+      ),
     requestCallback,
   };
 };
