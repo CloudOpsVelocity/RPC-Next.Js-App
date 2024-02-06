@@ -21,7 +21,6 @@ export default function CompareList() {
     if (session) {
       toggleCompare({
         id: slug,
-        type: 3,
         status: isItemCompared ? "Y" : "N",
       });
     } else {

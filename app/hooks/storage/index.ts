@@ -1,12 +1,9 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
 import { useLocalStorage } from "@mantine/hooks";
 import { addShortList } from "@/app/utils/api/actions/shortlist";
 
 interface Item {
   id: string;
   status: "Y" | "N";
-  type: number;
 }
 
 interface GlobalData {
@@ -54,17 +51,7 @@ export const useShortlistAndCompare = (): HookReturnValue => {
     callback(updatedItems);
   };
 
-  const requestCallback = async (data: any): Promise<any> => {
-    try {
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/contact/v1/generate-contact`,
-        data
-      );
-      return response.data;
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const requestCallback = async () => {};
 
   return {
     shortlistedItems: globalData.shortlistedItems,
@@ -73,7 +60,7 @@ export const useShortlistAndCompare = (): HookReturnValue => {
       addOrUpdateItem("shortlistedItems", item, () =>
         addShortList({
           projIdEnc: item.id,
-          type: item.type,
+          type: 2,
           isactive: item.status,
         })
       ),
@@ -81,8 +68,8 @@ export const useShortlistAndCompare = (): HookReturnValue => {
       addOrUpdateItem("compareItems", item, () =>
         addShortList({
           projIdEnc: item.id,
-          type: item.type,
           isactive: item.status,
+          type: 3,
         })
       ),
     requestCallback,

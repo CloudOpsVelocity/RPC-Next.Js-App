@@ -22,7 +22,6 @@ export default function ShortList() {
       toggleShortlist({
         id: slug,
         status: isItemInShortlist ? "Y" : "N",
-        type: 2,
       });
     }
   };
