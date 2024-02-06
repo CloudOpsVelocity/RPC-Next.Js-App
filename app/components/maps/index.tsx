@@ -13,21 +13,8 @@ import CustomMarker from "./customarker";
 import clsx from "clsx";
 import { MapIcon, areas, fakeDataMaps, markers } from "@/app/data/map";
 
-const Map = () => {
-  const HotelIcon = L.icon({
-    iconUrl: "https://img2.pic.in.th/pic/icons8-hotel-64.png",
-    iconSize: [38, 38],
-    iconAnchor: [19, 38],
-    popupAnchor: [0, -38],
-  });
+const Map = ({ data }: any) => {
   const [selected, setSelected] = useState("commute");
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const PropertyIcon = L.icon({
-    iconUrl: "/mapIcon.svg",
-    iconSize: [38, 38],
-    iconAnchor: [19, 38],
-    popupAnchor: [0, -38],
-  });
 
   const position: LatLngTuple = [12.9856503, 77.60569269999999];
 
@@ -49,9 +36,19 @@ const Map = () => {
             A pretty CSS3 popup. <br /> Easily customizable.
           </Popup>
         </Marker> */}
-        {fakeDataMaps.map((item, index) => (
-          <CustomMarker location={[item.lat, item.lng]} iconType="Hotel" />
-        ))}
+        {data &&
+          Object.values(data).length > 0 &&
+          Object.values(data)?.map((item: any, index: any) => (
+            <CustomMarker
+              key={index}
+              location={[
+                item?.geometry?.location?.lat,
+                item?.geometry?.location?.lng,
+              ]}
+              iconType="Hotel"
+            />
+          ))}
+
         <Marker position={position} icon={MapIcon}>
           <Tooltip opacity={1} permanent direction="top" offset={[30, -40]}>
             <div className=" ">

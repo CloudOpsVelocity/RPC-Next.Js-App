@@ -6,12 +6,6 @@ const Footer = () => {
     <div className=" w-full bg-[#f8f9fa] flex justify-between items-start flex-col p-[4%] flex-wrap ">
       <div className="w-full flex justify-between items-start flex-wrap flex-row ">
         <div className=" w-[100%]  lg:w-[30%] top-[64px] left-[104px] min-w-[202px] md:min-w-[402px] md:w-[60%] mb-[4%]">
-          {/* <h1>{JSON.stringify(process.env.NODE_ENV)}</h1> */}
-          {/* <img
-            className=" h-[57px] top-0 left-[-4px]"
-            alt="Get right property"
-            src="get-right-property.png"
-          /> */}
           <Logo />
           <p className=" top-[68px] left-0 [font-family:'Montserrat-Medium',Helvetica] font-medium text-[#666666] text-[24px] tracking-[0] leading-[36px]">
             We pride ourselves on delivering exceptional customer services &amp;
