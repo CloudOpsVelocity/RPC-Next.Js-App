@@ -9,6 +9,7 @@ interface Item {
 interface GlobalData {
   shortlistedItems: Item[];
   compareItems: Item[];
+  requestCallbacks: any; // Array of strings representing project IDs
 }
 
 interface HookReturnValue {
@@ -16,7 +17,8 @@ interface HookReturnValue {
   compareItems: Item[];
   toggleShortlist: (item: Item) => void;
   toggleCompare: (item: Item) => void;
-  requestCallback: (data: any) => Promise<any>;
+  pushToRequestCallbacks: (id: string, callback: () => void) => void;
+  isCallbackSubmitted: (id: string) => boolean;
 }
 
 export const useShortlistAndCompare = (): HookReturnValue => {
@@ -25,6 +27,7 @@ export const useShortlistAndCompare = (): HookReturnValue => {
     defaultValue: {
       shortlistedItems: [],
       compareItems: [],
+      requestCallbacks: [], // Initialize an empty array
     },
   });
 
@@ -51,8 +54,16 @@ export const useShortlistAndCompare = (): HookReturnValue => {
     callback(updatedItems);
   };
 
-  const requestCallback = async () => {};
-
+  const pushToRequestCallbacks = (id: string, callback: () => void): void => {
+    setGlobalData((prevGlobalData) => ({
+      ...prevGlobalData,
+      requestCallbacks: [...prevGlobalData.requestCallbacks, id],
+    }));
+    callback();
+  };
+  const isCallbackSubmitted = (id: string): boolean => {
+    return globalData.requestCallbacks.includes(id);
+  };
   return {
     shortlistedItems: globalData.shortlistedItems,
     compareItems: globalData.compareItems,
@@ -72,6 +83,7 @@ export const useShortlistAndCompare = (): HookReturnValue => {
           type: 3,
         })
       ),
-    requestCallback,
+    pushToRequestCallbacks,
+    isCallbackSubmitted,
   };
 };

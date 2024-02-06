@@ -23,6 +23,7 @@ import CountryInput from "../atoms/CountryInput";
 import { formatCurrency } from "@/app/utils/numbers";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import useBuilder from "@/app/hooks/useBuilder";
+import { useShortlistAndCompare } from "@/app/hooks/storage";
 export default function OverviewBanner({
   minPrice,
   maxPrice,
@@ -163,9 +164,8 @@ const Content = ({ close, status, setStatus, name }: any) => {
 };
 const LoggedInUserForm = ({ close, status, setStatus, name }: any) => {
   const { slug } = useParams<{ slug: string }>();
-  // const [status, setStatus] = useState<
-  //   "idle" | "pending" | "success" | "error" | "otp"
-  // >("idle");
+  const { pushToRequestCallbacks, isCallbackSubmitted } =
+    useShortlistAndCompare();
   const { data: session } = useSession();
   const {} = useForm({
     initialValues: {
@@ -185,17 +185,23 @@ const LoggedInUserForm = ({ close, status, setStatus, name }: any) => {
       isProjContact: "Y",
       src: "searchCard",
     };
-    console.log(data);
-    const res = await sendContact(data);
+
+    await pushToRequestCallbacks(data.projIdEnc, async () => {
+      const res = await sendContact(data);
+    });
     setStatus("success");
     // res.status ? setStatus("success") : setStatus("error");
-    console.log(res);
+    // console.log(res);
   };
   const onSuccess = async () => {
     setStatus("success");
   };
-  return status === "success" ? (
-    <Success close={close} />
+  const handleClose = () => {
+    setStatus("idle");
+    close();
+  };
+  return status === "success" || isCallbackSubmitted(slug) ? (
+    <Success close={handleClose} />
   ) : status === "otp" ? (
     <ReqOtpForm
       callback={onSuccess}
