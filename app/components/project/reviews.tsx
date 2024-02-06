@@ -7,12 +7,14 @@ import {
   PrevCarouselButton,
   quotesIcon,
 } from "@/app/images/commonSvgs";
-import { Rating } from "@mantine/core";
+import { Rating, em } from "@mantine/core";
 import useRatings from "@/app/hooks/useRatings";
 import { useParams } from "next/navigation";
+import { useMediaQuery } from "@mantine/hooks";
 
 export default function Reviews({ projName }: { projName: string }) {
   const { data } = useRatings();
+  const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
   return (
     data?.status && (
       <div id="ratings" className="bg-[#FFF] scroll-mt-[100px] py-12 w-full ">
@@ -23,10 +25,11 @@ export default function Reviews({ projName }: { projName: string }) {
               {projName}
             </span>
           </h2>
-          <p className="text-[#4D6677] text-2xl italic font-medium leading-[normal] tracking-[0.96px] mt-2 ">
+          <p className="text-[#4D6677] text-2xl italic font-medium leading-[normal] tracking-[0.96px] mt-2 mb-[40px]">
             Find helpful customer reviews and review ratings for {projName}
           </p>
-          <div className="mt-8 relative">
+
+          <div className="relative">
             <Carousel
               nextControlIcon={<NextCarouselButton />}
               previousControlIcon={<PrevCarouselButton />}
@@ -36,10 +39,15 @@ export default function Reviews({ projName }: { projName: string }) {
               withIndicators
               height={250}
               slidesToScroll={1}
-              pl={80}
+              style={{
+                display: "flex",
+                justifyContent: "start",
+                alignItems: "center",
+              }}
+              withControls={isMobile ? true : data?.data.length > 3}
             >
               {data?.data?.map((eachData: any, i: number) => (
-                <Carousel.Slide key={i}>
+                <Carousel.Slide key={i} miw={457}>
                   <Review {...eachData} />
                 </Carousel.Slide>
               ))}
@@ -55,7 +63,7 @@ const Review = ({ rating, review, name, days }: any) => {
   return (
     <div className="shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] max-w-lg mx-auto mt-[20px] bg-[#fff] p-4 relative   min-h-[220px] border rounded-[10px] border-solid border-[#DCE6ED]">
       <span className=" absolute top-[-20px] !z-30  ">{quotesIcon}</span>
-      <div className="flex items-center space-x-2">
+      <div className="flex items-center space-x-2 mt-8">
         <div className="flex-1">
           <div className="flex justify-between items-center">
             <div>
