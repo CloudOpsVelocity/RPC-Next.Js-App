@@ -46,7 +46,7 @@ export default function Navigation() {
         {topics.map((topic) => (
           <div
             key={topic.id}
-            className={`cursor-pointer text-[20px] mr-[40px]  whitespace-nowrap  ${
+            className={`cursor-pointer text-[20px] mr-[36px]  whitespace-nowrap  ${
               currentBlock === topic.id
                 ? "text-[#0073C6] font-[700] decoration-solid underline"
                 : "text-[#4D6677] font-[500]"

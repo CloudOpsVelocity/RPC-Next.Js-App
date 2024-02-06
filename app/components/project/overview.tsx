@@ -33,6 +33,7 @@ export default function Overview({
   cityName,
   stateName,
   pinCode,
+  builderId,
 }: Main) {
   const { PhaseOverview, phaseList } = usePhaseWiseOverview();
   return (
@@ -151,6 +152,7 @@ export default function Overview({
         maxPrice={maxPrice}
         minPrice={minPrice}
         name={projectName}
+        builderId={builderId}
       />
     </div>
   );

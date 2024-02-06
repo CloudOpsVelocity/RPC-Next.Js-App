@@ -22,14 +22,17 @@ import { useParams } from "next/navigation";
 import CountryInput from "../atoms/CountryInput";
 import { formatCurrency } from "@/app/utils/numbers";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
+import useBuilder from "@/app/hooks/useBuilder";
 export default function OverviewBanner({
   minPrice,
   maxPrice,
   name,
+  builderId,
 }: {
   minPrice: number;
   maxPrice: number;
   name: string;
+  builderId: number;
 }) {
   const [opened, { open, close }] = useReqCallPopup();
 
@@ -57,7 +60,11 @@ export default function OverviewBanner({
           <WhatsAppButton className="cursor-pointer" name={name} />
         </div>
 
-        <RequestCallBackModal close={close} opened={opened} />
+        <RequestCallBackModal
+          close={close}
+          opened={opened}
+          builderId={builderId}
+        />
       </div>
     </>
   );
@@ -65,17 +72,19 @@ export default function OverviewBanner({
 const RequestCallBackModal = ({
   opened,
   close,
+  builderId,
 }: {
   opened: any;
   close: any;
+  builderId: number;
 }) => {
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
   const isTab = useMediaQuery(`(max-width: ${em(1280)})`);
+  const { data } = useBuilder({ id: builderId, y: "N" });
 
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error" | "otp"
   >("idle");
-
   return (
     <>
       <Modal
@@ -91,7 +100,6 @@ const RequestCallBackModal = ({
           overlay: S.overlay,
         }}
         withCloseButton={false}
-        //h="534px"
       >
         <div className="bg-white relative rounded-lg min-h-[534px] w-full overflow-hidden flex ">
           <svg
@@ -118,7 +126,12 @@ const RequestCallBackModal = ({
               </h2>
             )}
 
-            <Content close={close} status={status} setStatus={setStatus} />
+            <Content
+              close={close}
+              status={status}
+              setStatus={setStatus}
+              name={data?.data.ceoName}
+            />
           </div>
           <div className="hidden md:block w-[50%] relative">
             <Image
