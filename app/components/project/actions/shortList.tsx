@@ -15,7 +15,7 @@ export default function ShortList() {
   const { toggleShortlist, shortlistedItems } = useShortlistAndCompare();
   const isItemInShortlist =
     shortlistedItems.length > 0 &&
-    shortlistedItems.some((item) => item.status === "Y");
+    shortlistedItems.some((item) => item.id === slug && item.status === "Y");
 
   const onAddingShortList = () => {
     if (session) {

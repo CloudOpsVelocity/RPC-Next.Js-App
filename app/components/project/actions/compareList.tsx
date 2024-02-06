@@ -14,9 +14,10 @@ export default function CompareList() {
   const { data: session } = useSession();
   const { slug } = useParams<{ slug: string }>();
   const { toggleCompare, compareItems } = useShortlistAndCompare();
-  const isItemCompared =
-    compareItems.length > 0 && compareItems.some((item) => item.status === "Y");
 
+  const isItemCompared =
+    compareItems.length > 0 &&
+    compareItems.some((item) => item.id === slug && item.status === "Y");
   const onAddingCompare = () => {
     if (session) {
       toggleCompare({

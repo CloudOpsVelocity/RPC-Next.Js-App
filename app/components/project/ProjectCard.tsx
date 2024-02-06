@@ -16,6 +16,7 @@ import { useSession } from "next-auth/react";
 import { addShortList } from "@/app/utils/api/actions/shortlist";
 import LoginPopup from "./modals/LoginPop";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
+import { useShortlistAndCompare } from "@/app/hooks/storage";
 // import { formatDate } from "@/app/utils/date";
 
 type Props = {
@@ -35,15 +36,18 @@ type CardProps = {
 export function ProjectCard({ type, cardData }: CardProps) {
   const [, { open }] = useReqCallPopup();
   const { data: session } = useSession();
+  const { toggleShortlist, shortlistedItems } = useShortlistAndCompare();
+  const isItemInShortlist =
+    shortlistedItems.length > 0 &&
+    shortlistedItems.some(
+      (item) => item.id === cardData.projIdEnc && item.status === "Y"
+    );
 
-  const [value, toggle] = useToggle(["Shortlist", "Shortlisted"]);
   const onAddingShortList = () => {
     if (session) {
-      toggle();
-      addShortList({
-        projIdEnc: cardData.projIdEnc,
-        type: 3,
-        isactive: value == "Shortlist" ? "Y" : "N",
+      toggleShortlist({
+        id: cardData.projIdEnc,
+        status: isItemInShortlist ? "Y" : "N",
       });
     }
   };
@@ -105,7 +109,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
                   <span className=" w-[24px] h-[24px] ">
                     {shortlistIconSvg}
                   </span>
-                  {value}
+                  {isItemInShortlist ? "Shortlisted" : "Shortlist"}
                 </button>
               )}
             </div>
