@@ -9,6 +9,7 @@ import ReactPlayer from "react-player";
 import { useGallery } from "@/app/hooks/useGallery";
 import SharePopup from "../../atoms/SharePopup";
 import { imageUrlParser } from "@/app/utils/image";
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
 type GalleryProps = {
   selectedMedia: any;
@@ -50,7 +51,7 @@ const Gallery: React.FC<GalleryProps> = ({
         }}
         className="!styleScroll"
       >
-        <div className="h-auto scrollbar-hide">
+        <div className="h-auto scrollbar-hide flex justify-end flex-col items-center">
           <div className="w-full bg-transparent    h-[57px] flex items-center justify-between  z-[1000] px-10 max-w-[91rem] m-auto">
             <div className="text-white text-2xl not-italic font-bold leading-[normal]">
               {isImage ? "Gallery" : "Videos"}
@@ -65,15 +66,19 @@ const Gallery: React.FC<GalleryProps> = ({
             </div>
           </div>
           {isImage ? (
-            <Image
-              radius="md"
-              h={800}
-              m={"auto"}
-              w={1400}
-              fit="fill"
-              src={previewImage ?? content?.url}
-              className="cursor-pointer border-[5px] bg-white border-white"
-            />
+            <TransformWrapper>
+              <TransformComponent>
+                <Image
+                  radius="md"
+                  h={800}
+                  m={"auto"}
+                  w={1400}
+                  fit="fill"
+                  src={previewImage ?? content?.url}
+                  className="cursor-pointer border-[5px] bg-white border-white min-w-[1400px] min-h-[800px]"
+                />
+              </TransformComponent>
+            </TransformWrapper>
           ) : (
             <ReactPlayer
               url={previewImage as string}
@@ -83,7 +88,7 @@ const Gallery: React.FC<GalleryProps> = ({
               // class="!h-[80%]"
             />
           )}
-          <div className="mt-4 flex items-center justify-center ">
+          <div className="mt-4 flex items-center justify-center  w-full">
             <Carousel
               height={100}
               slideSize="15.333333%"

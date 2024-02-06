@@ -7,7 +7,6 @@ import Gallery from "./modals/Gallery";
 import { getImageUrls } from "@/app/utils/image";
 import { AspectRatio, Image, Overlay } from "@mantine/core";
 import { useGallery } from "@/app/hooks/useGallery";
-// import ReactVideoThumbnail from "react-video-thumbnail";
 
 export default function GalleryBlock({
   coverImageUrl,

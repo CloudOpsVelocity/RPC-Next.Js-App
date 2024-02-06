@@ -9,6 +9,9 @@
   border-radius: 20px;
   background: transparent;
   margin-top: 45px;
+  scrollbar-color: gray;
+  scrollbar-width: thin;
+  scrollbar-track-color: gray;
 }
 
 .header {
