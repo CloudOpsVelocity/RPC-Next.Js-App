@@ -1,4 +1,9 @@
-import { infoIcon, tagIcon } from "@/app/images/commonSvgs";
+import {
+  Shorlisted,
+  infoIcon,
+  shortlistIconSvg,
+  tagIcon,
+} from "@/app/images/commonSvgs";
 import { addShortList } from "@/app/utils/api/actions/shortlist";
 import { useToggle } from "@mantine/hooks";
 import { useSession } from "next-auth/react";
@@ -33,7 +38,7 @@ export default function ShortList() {
       onClick={() => onAddingShortList()}
       className="text-[20px] flex justify-center items-center gap-[8px]  cursor-pointer lg:text-[24px] text-[#0073C6] font-[600] underline whitespace-nowrap decoration-dashed "
     >
-      {tagIcon}
+      {isItemInShortlist ? Shorlisted : shortlistIconSvg}
       {isItemInShortlist ? "Remove from" : "Add to"} Shortlist
     </button>
   );

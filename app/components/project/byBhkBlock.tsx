@@ -25,7 +25,7 @@ export default function ByBhkBlock({ propCgId, data }: Props) {
   return (
     <React.Fragment>
       <div className="lg:h-[100px] px-[2%] border-[#92B2C8] border-solid border-b-[1px] border-r-[1px] ">
-        <h3 className=" text-[#001F35]  text-[20px] lg:text-[24px] font-[500] mt-5 ">
+        <h3 className=" text-[#001F35]  text-[20px] lg:text-[24px] font-[500] mt-5 mb-2">
           Select BHK to see floor plans
         </h3>
 
@@ -45,7 +45,7 @@ export default function ByBhkBlock({ propCgId, data }: Props) {
               key={ind}
               title={bhkOption}
               onChange={() => setBhk(bhkOption)}
-              buttonClass={` text-[18px] lg:text-[24px] mr-[10px] lg:mr-[20px] whitespace-nowrap  ${
+              buttonClass={` text-[18px] lg:text-[24px] mr-[10px] lg:mr-[25px] whitespace-nowrap  ${
                 bhk === bhkOption
                   ? " font-[600] text-[#148B16] underline "
                   : " font-[500] text-[#737579]"
@@ -55,7 +55,7 @@ export default function ByBhkBlock({ propCgId, data }: Props) {
         </div>
       </div>
 
-      <div className="h-full lg:max-h-[447px] max-h-[487px] border-solid overflow-auto scrollbar-hide">
+      <div className="h-full lg:max-h-[447px] max-h-[487px] border-solid overflow-auto scrollbar-hide ">
         {filteredData.map((eachItem: any, ind: number) => (
           <FloorplanDetailsCard key={ind} data={eachItem} propCgId={propCgId} />
         ))}
