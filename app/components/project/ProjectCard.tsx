@@ -15,8 +15,9 @@ import { useToggle } from "@mantine/hooks";
 import { useSession } from "next-auth/react";
 import { addShortList } from "@/app/utils/api/actions/shortlist";
 import LoginPopup from "./modals/LoginPop";
-import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
+import { popupStateAtom, useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import { useShortlistAndCompare } from "@/app/hooks/storage";
+import { useAtomValue } from "jotai";
 // import { formatDate } from "@/app/utils/date";
 
 type Props = {
@@ -34,9 +35,11 @@ type CardProps = {
 };
 
 export function ProjectCard({ type, cardData }: CardProps) {
+  console.log(cardData);
   const [, { open }] = useReqCallPopup();
   const { data: session } = useSession();
   const { toggleShortlist, shortlistedItems } = useShortlistAndCompare();
+
   const isItemInShortlist =
     shortlistedItems.length > 0 &&
     shortlistedItems.some(
@@ -161,7 +164,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
               icon={<Phone />}
               title="Request a Callback"
               buttonClass=" text-[#FFF] mt-[12px] text-[16px] font-[600] bg-[#0073C6] rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[6px]  "
-              onChange={() => open()}
+              onChange={() => open("card", cardData.projIdEnc)}
             />
           </div>
         </div>
@@ -171,7 +174,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
 }
 
 const ProjectCarousel = ({ type, content, title, projName, data }: Props) => {
-  // console.log(data);
+  console.log(data);
   return (
     <div className="w-[100%] mb-[5%]">
       <h2 className="text-[24px] lg:text-[32px] font-semibold uppercase cursor-pointer">

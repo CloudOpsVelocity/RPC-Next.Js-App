@@ -21,9 +21,10 @@ import { addContact, sendContact } from "@/app/utils/api/actions/contact";
 import { useParams } from "next/navigation";
 import CountryInput from "../atoms/CountryInput";
 import { formatCurrency } from "@/app/utils/numbers";
-import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
+import { popupStateAtom, useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import useBuilder from "@/app/hooks/useBuilder";
 import { useShortlistAndCompare } from "@/app/hooks/storage";
+import { useAtomValue } from "jotai";
 export default function OverviewBanner({
   minPrice,
   maxPrice,
@@ -36,6 +37,7 @@ export default function OverviewBanner({
   builderId: number;
 }) {
   const [opened, { open, close }] = useReqCallPopup();
+  const { slug } = useParams<{ slug: string }>();
 
   return (
     <>
@@ -54,7 +56,7 @@ export default function OverviewBanner({
               icon={<Phone />}
               title="Request a Callback"
               buttonClass=" text-[#FFF] text-[16px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[6px]  "
-              onChange={open}
+              onChange={() => open("banner", slug)}
             />
           </div>
 
@@ -166,6 +168,8 @@ const LoggedInUserForm = ({ close, status, setStatus, name }: any) => {
   const { slug } = useParams<{ slug: string }>();
   const { pushToRequestCallbacks, isCallbackSubmitted } =
     useShortlistAndCompare();
+  const popupState = useAtomValue(popupStateAtom);
+
   const { data: session } = useSession();
   const {} = useForm({
     initialValues: {
@@ -200,7 +204,8 @@ const LoggedInUserForm = ({ close, status, setStatus, name }: any) => {
     setStatus("idle");
     close();
   };
-  return status === "success" || isCallbackSubmitted(slug) ? (
+  return status === "success" ||
+    isCallbackSubmitted(popupState.projectID || "") ? (
     <Success close={handleClose} />
   ) : status === "otp" ? (
     <ReqOtpForm

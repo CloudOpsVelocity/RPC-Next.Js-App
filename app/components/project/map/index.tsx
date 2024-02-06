@@ -23,7 +23,7 @@ import { useDebouncedState } from "@mantine/hooks";
 import { nearbyLocationIcon } from "@/app/images/commonSvgs";
 import Loading from "../../atoms/Loader";
 import dynamic from "next/dynamic";
-import { MapSkeleton } from "@/app/test/page";
+import MapSkeleton from "../../maps/Skeleton";
 
 interface Area {
   name: string;
