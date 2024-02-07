@@ -15,9 +15,7 @@ import { MapIcon, areas, fakeDataMaps, markers } from "@/app/data/map";
 
 const Map = ({ data }: any) => {
   const [selected, setSelected] = useState("commute");
-
   const position: LatLngTuple = [12.9856503, 77.60569269999999];
-
   return (
     // <div className="">MAp</div>
     <>
@@ -36,17 +34,26 @@ const Map = ({ data }: any) => {
             A pretty CSS3 popup. <br /> Easily customizable.
           </Popup>
         </Marker> */}
-        {data &&
-          Object.values(data).length > 0 &&
-          Object.values(data)?.map((item: any, index: any) => (
+        {/* {data &&
+          data.length > 0 &&
+          data?.map((item: any, index: any) => (
             <CustomMarker
               key={index}
-              location={[
-                item?.geometry?.location?.lat,
-                item?.geometry?.location?.lng,
-              ]}
+              location={[parseFloat(item?.lat), parseFloat(item?.lang)]}
               iconType="Hotel"
             />
+          ))} */}
+        {data &&
+          data.length > 0 &&
+          data?.map((item: any) => (
+            <Marker
+              position={[parseFloat(item?.lat), parseFloat(item?.lang)]}
+              title="Hell"
+            >
+              <Popup>
+                {item.name} <br /> Rating | {item.rating}
+              </Popup>
+            </Marker>
           ))}
 
         <Marker position={position} icon={MapIcon}>

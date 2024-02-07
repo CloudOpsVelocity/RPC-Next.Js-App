@@ -11,9 +11,6 @@ import {
 } from "@mantine/core";
 
 import { clsx } from "clsx";
-import axios from "axios";
-import { useQuery } from "react-query";
-import { IoLocationSharp } from "react-icons/io5";
 import {
   Coordinates,
   calculateDistance,
@@ -24,6 +21,7 @@ import { nearbyLocationIcon } from "@/app/images/commonSvgs";
 import Loading from "../../atoms/Loader";
 import dynamic from "next/dynamic";
 import MapSkeleton from "../../maps/Skeleton";
+import useMapData from "@/app/hooks/project/useMapData";
 
 interface Area {
   name: string;
@@ -31,6 +29,7 @@ interface Area {
   lat?: number;
   lng?: number;
   projName?: string;
+  key?: string;
 }
 
 const LeafMap: React.FC<{ lat: string; lang: string; projName: string }> = ({
@@ -46,7 +45,7 @@ const LeafMap: React.FC<{ lat: string; lang: string; projName: string }> = ({
       }),
     []
   );
-  const [selected, setSelected] = useState<string>("commute");
+  const [selected, setSelected] = useState<string>("bank");
   const [selectedLocation, setSelectedLocation] = useState<{
     lat: number;
     lng: number;
@@ -54,9 +53,6 @@ const LeafMap: React.FC<{ lat: string; lang: string; projName: string }> = ({
   }>();
   const [selectedTravelMode, setSelectedTravelMode] =
     useState<string>("TRANSIT");
-
-  // console.log(selectedLocation);
-
   const showLocationOnMap = useCallback(
     (location: { position: { lat: number; lng: number }; name: string }) => {
       setSelectedLocation({
@@ -65,25 +61,10 @@ const LeafMap: React.FC<{ lat: string; lang: string; projName: string }> = ({
         name: location.name,
       });
     },
-    [selectedLocation, selectedTravelMode, selected]
+    [selectedLocation, selected]
   );
 
-  const fetchNearbyPlaces = async () => {
-    const response = await fetch(
-      `/api/hello?lt=${parseFloat(lat)}&lng=${parseFloat(
-        lang
-      )}&type=${selected}&travelType=${selectedTravelMode}`,
-      {
-        cache: "force-cache",
-      }
-    );
-    return await response.json();
-  };
-
-  const { data, isLoading } = useQuery({
-    queryKey: ["nearbyPlaces" + selected + selectedTravelMode],
-    queryFn: fetchNearbyPlaces,
-  });
+  const { data: mapData, isLoading } = useMapData();
   const handleLocationListClick = (type: string) => {
     setSelectedTravelMode(type);
   };
@@ -107,11 +88,11 @@ const LeafMap: React.FC<{ lat: string; lang: string; projName: string }> = ({
           return (
             <button
               onClick={() => {
-                setSelected(area.name);
+                setSelected(area.key as string);
               }}
               className={clsx(
                 "text-[#4D6677] text-xl not-italic font-medium flex items-center gap-[5px] leading-[normal] capitalize",
-                selected === area.name && "!text-green-600 font-semibold"
+                selected === area.key && "!text-green-600 font-semibold"
               )}
               key={area.name}
             >
@@ -129,152 +110,57 @@ const LeafMap: React.FC<{ lat: string; lang: string; projName: string }> = ({
                 <p className="text-[#001F35] text-[22px]  font-medium leading-[normal]">
                   Select how you want to travel
                 </p>
-                <Tabs.List>
-                  <Tabs.Tab
-                    className={`  not-italic leading-[normal] no-underline capitalize ${
-                      selectedTravelMode == "TRANSIT"
-                        ? "!text-[#148B16] font-[700] underline"
-                        : "!text-[#737579] no-underline font-[500]"
-                    } `}
-                    value="public"
-                    onClick={() => setSelectedTravelMode("TRANSIT")}
-                  >
-                    Public Transport
-                  </Tabs.Tab>
-                  <Tabs.Tab
-                    className={`  not-italic leading-[normal] no-underline capitalize ${
-                      selectedTravelMode == "DRIVING"
-                        ? "!text-[#148B16] font-[700] underline"
-                        : "!text-[#737579] no-underline font-[500]"
-                    } `}
-                    value="drive"
-                    onClick={() => setSelectedTravelMode("DRIVING")}
-                  >
-                    Drive
-                  </Tabs.Tab>
-                  <Tabs.Tab
-                    className={`  not-italic leading-[normal] no-underline capitalize ${
-                      selectedTravelMode == "WALKING"
-                        ? "!text-[#148B16] font-[700] underline"
-                        : "!text-[#737579] no-underline font-[500]"
-                    } `}
-                    value="walk"
-                    onClick={() => setSelectedTravelMode("WALKING")}
-                  >
-                    Walk
-                  </Tabs.Tab>
-                </Tabs.List>
-              </div>
-
-              <div className="px-4 pb-3">
-                {/* Search Section */}
-                <SearchSection setSelectedLocation={showLocationOnMap} />
-
-                <Tabs.Panel value="public">
-                  <div id="location-listing" className="grid gap-2">
-                    {isLoading ? (
-                      <Loading />
-                    ) : (
-                      <ScrollArea h={420}>
-                        {data && Object.values(data).length > 0 ? (
-                          Object.values(data).map(
-                            (location: any, index: number) => (
-                              <LocationList
-                                type="public"
-                                {...location}
-                                key={index}
-                                lat={lat}
-                                lng={lang}
-                                onClick={setSelectedLocation}
-                                setDirection={showLocationOnMap}
-                                onChangeTravelMode={handleLocationListClick}
-                                showLocationOnMap={showLocationOnMap}
-                              />
-                            )
-                          )
-                        ) : (
-                          <p>No locations found.</p>
-                        )}
-                      </ScrollArea>
-                    )}
-                  </div>
-                </Tabs.Panel>
-                <Tabs.Panel value="drive">
-                  <div id="location-listing" className="grid gap-2">
-                    {isLoading ? (
-                      <Loading />
-                    ) : (
-                      <ScrollArea h={420}>
-                        {data && Object.values(data).length > 0 ? (
-                          Object.values(data).map(
-                            (location: any, index: number) => (
-                              <LocationList
-                                type="public"
-                                {...location}
-                                key={index}
-                                lat={lat}
-                                lng={lang}
-                                onClick={setSelectedLocation}
-                                setDirection={showLocationOnMap}
-                                onChangeTravelMode={handleLocationListClick}
-                                showLocationOnMap={showLocationOnMap}
-                              />
-                            )
-                          )
-                        ) : (
-                          <p>No locations found.</p>
-                        )}
-                      </ScrollArea>
-                    )}
-                  </div>
-                </Tabs.Panel>
-                <Tabs.Panel value="walk">
-                  <div id="location-listing" className="grid gap-2">
-                    {isLoading ? (
-                      <Loading />
-                    ) : (
-                      <ScrollArea h={420}>
-                        {data && Object.values(data).length > 0 ? (
-                          Object.values(data).map(
-                            (location: any, index: number) => (
-                              <LocationList
-                                type="public"
-                                {...location}
-                                key={index}
-                                lat={lat}
-                                lng={lang}
-                                onClick={setSelectedLocation}
-                                setDirection={showLocationOnMap}
-                                onChangeTravelMode={handleLocationListClick}
-                                showLocationOnMap={showLocationOnMap}
-                              />
-                            )
-                          )
-                        ) : (
-                          <p>No locations found.</p>
-                        )}
-                      </ScrollArea>
-                    )}
-                  </div>
-                </Tabs.Panel>
               </div>
             </Tabs>
+            <div id="location-listing" className="grid gap-2 pl-5">
+              {isLoading ? (
+                <Loading />
+              ) : (
+                <ScrollArea h={420}>
+                  {mapData &&
+                  mapData[selected] &&
+                  mapData[selected].length > 0 ? (
+                    mapData[selected].map((location: any, index: number) => (
+                      <LocationList
+                        type="public"
+                        {...location}
+                        key={index}
+                        origin={{
+                          lat: Number(lat),
+                          lng: Number(lang),
+                        }}
+                        onClick={setSelectedLocation}
+                        setDirection={showLocationOnMap}
+                        onChangeTravelMode={handleLocationListClick}
+                        showLocationOnMap={showLocationOnMap}
+                      />
+                    ))
+                  ) : (
+                    <p>No locations found.</p>
+                  )}
+                </ScrollArea>
+              )}
+            </div>
           </div>
         </section>
         <section>
-          <Map data={data} />
+          <Map data={mapData && mapData[selected] ? mapData[selected] : []} />
         </section>
       </div>
-      {data && Object.values(data).length > 0 && (
+      {mapData && mapData[selected] && mapData[selected].length > 0 && (
         <div className="mt-8 ">
           <h1 className="text-[#303030] text-xl not-italic font-medium leading-[normal] tracking-[0.8px] capitalize">
             {selected} Nearby
           </h1>
           <div className="flex gap-2 mt-3 flex-wrap">
-            {Object.values(data).map((item: any, index: any) => (
+            {mapData[selected].map((item: any, index: any) => (
               <MapCard
                 key={index}
                 {...item}
+                origin={{
+                  lat: Number(lat),
+                  lng: Number(lang),
+                }}
                 showLocationOnMap={showLocationOnMap}
               />
             ))}
@@ -287,19 +173,17 @@ const LeafMap: React.FC<{ lat: string; lang: string; projName: string }> = ({
 
 export default LeafMap;
 
-const MapCard = ({
-  name,
-  distance,
-  showLocationOnMap,
-  geometry,
-  duration,
-}: any) => {
+const MapCard = ({ name, showLocationOnMap, lat, lang, origin }: any) => {
+  const distance = calculateDistance(origin, {
+    lat: Number(lat),
+    lng: Number(lang),
+  });
   return (
     <div
       className="flex flex-col items-start gap-3 px-2 py-3.5 cursor-pointer shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] border-[0.5px] border-solid border-[#D9D9D9] bg-[#fcfcfc] min-w-[385px] max-w-[385px]"
       onClick={() =>
         showLocationOnMap({
-          position: { lat: geometry.location.lat, lng: geometry.location.lng },
+          position: { lat: Number(lat), lng: Number(lang) },
           name: name,
         })
       }
@@ -312,14 +196,8 @@ const MapCard = ({
           <span className="flex items-center min-w-[70px]">
             {nearbyLocationIcon}
             <span className="ml-[4px] text-[#005DA0] text-base not-italic font-medium leading-[normal] ]">
-              {distance?.text ?? "N/A"}
+              {distance.toFixed(1) + "Km" ?? "N/A"}
             </span>{" "}
-            <span className=" px-2 text-black text-base not-italic font-medium leading-[normal] capitalize">
-              |
-            </span>
-            <span className="text-black text-base not-italic font-medium leading-[normal] capitalize">
-              {duration?.text ?? "N/A"}
-            </span>
           </span>
         </div>
       </div>
@@ -332,19 +210,29 @@ const LocationList: React.FC<{
   geometry: Coordinates;
   vicinity: string;
   lat: number;
-  lng: number;
+  lang: number;
   type: "public" | "drive" | "walk";
   onClick: (location: any) => void;
   onChangeTravelMode: (mode: string) => void; // New prop for changing travel mode
   showLocationOnMap: (location: any) => void;
   distance: any;
   duration: any;
-}> = ({ name, geometry, vicinity, distance, duration, showLocationOnMap }) => {
+  rating?: number;
+  origin: {
+    lat: number;
+    lng: number;
+  };
+}> = ({ name, vicinity, showLocationOnMap, rating, lat, lang, origin }) => {
+  const distance = calculateDistance(origin, {
+    lat: Number(lat),
+    lng: Number(lang),
+  });
+  console.log(origin, { lat, lang });
   const handleClick = () => {
     showLocationOnMap({
       position: {
-        lat: geometry.location.lat,
-        lng: geometry.location.lng,
+        lat,
+        lng: lang,
       },
       name,
     });
@@ -363,12 +251,8 @@ const LocationList: React.FC<{
           <span className="flex items-center">
             {nearbyLocationIcon}
             <span className="ml-[4px] text-[#005DA0] text-lg not-italic font-medium leading-[normal] ">
-              {distance?.text ?? "N/A"}
+              {distance.toFixed(1) + "Km" ?? "N/A"}
             </span>
-          </span>
-          <span>|</span>
-          <span className="text-[#001F35] text-lg not-italic font-medium leading-[normal]">
-            {duration?.text ?? "N/A"}
           </span>
         </div>
       </div>
@@ -376,78 +260,9 @@ const LocationList: React.FC<{
         <LuTrain size={15} />
         Via public transport
       </p>
-      <p className="text-gray-600 mt-1">{vicinity}</p>
     </div>
   );
 };
-
-const SearchSection = ({ setSelectedLocation }: any) => {
-  const getSearchResults = async (input: string) => {
-    const res = await axios.get(`/api/googlesearch?input=${input}`);
-    return res.data;
-  };
-  const [value, setValue] = useDebouncedState("", 500);
-  const { data, isLoading } = useQuery({
-    queryKey: ["search", value],
-    queryFn: () => getSearchResults(value),
-    enabled: !!value,
-  });
-  // console.log(data);
-  const handleSearchClick = async (id: number, name: string) => {
-    const res = await axios.get(`/api/latlong?id=${id}`);
-    setSelectedLocation({
-      position: {
-        lat: res.data.location.lat,
-        lng: res.data.location.lng,
-      },
-      name: name,
-    });
-    setValue("");
-  };
-  return (
-    <div id="search" className="my-4">
-      <p className="text-[#212C33] text-lg not-italic font-medium leading-[normal] mb-1">
-        Add a location to calculate your travel time
-      </p>
-      <TextInput
-        size="sm"
-        leftSection={<LuSearch />}
-        placeholder="Enter location"
-        onChange={(e) => setValue(e.target.value)}
-      />
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <>
-          <div className="mt-2">
-            {data?.autocompleteRes?.predictions?.map(
-              (result: any, index: number) => {
-                console.log(result);
-                return (
-                  <div
-                    key={index}
-                    className="flex items-center my-1 cursor-pointer"
-                    onClick={() =>
-                      handleSearchClick(
-                        result.place_id,
-                        result.structured_formatting.main_text
-                      )
-                    }
-                  >
-                    <IoLocationSharp className="text-gray-500" />
-                    <span className="ml-2">{result.description}</span>
-                  </div>
-                );
-              }
-            )}
-          </div>
-        </>
-      )}
-    </div>
-  );
-};
-
-//stroke="#148B16" for selected
 
 export const areas: Area[] = [
   {
@@ -469,6 +284,7 @@ export const areas: Area[] = [
         />
       </svg>
     ),
+    key: "train_station",
   },
   {
     name: "Train",
@@ -501,6 +317,7 @@ export const areas: Area[] = [
         </defs>
       </svg>
     ),
+    key: "train_station",
   },
   {
     name: "Bus",
@@ -518,6 +335,7 @@ export const areas: Area[] = [
         />
       </svg>
     ),
+    key: "bus_station",
   },
 
   {
@@ -540,6 +358,7 @@ export const areas: Area[] = [
         />
       </svg>
     ),
+    key: "hospital",
   },
 
   {
@@ -571,6 +390,7 @@ export const areas: Area[] = [
         </defs>
       </svg>
     ),
+    key: "school",
   },
 
   {
@@ -605,6 +425,7 @@ export const areas: Area[] = [
         />
       </svg>
     ),
+    key: "supermarket",
   },
 
   {
@@ -641,6 +462,7 @@ export const areas: Area[] = [
         />
       </svg>
     ),
+    key: "bank",
   },
 
   {
@@ -663,6 +485,7 @@ export const areas: Area[] = [
         />
       </svg>
     ),
+    key: "clinic",
   },
 
   {
@@ -698,6 +521,7 @@ export const areas: Area[] = [
         />
       </svg>
     ),
+    key: "atm",
   },
 
   {
@@ -736,5 +560,6 @@ export const areas: Area[] = [
         />
       </svg>
     ),
+    key: "shopping_mall",
   },
 ];

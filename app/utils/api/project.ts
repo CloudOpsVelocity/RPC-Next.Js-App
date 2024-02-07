@@ -12,7 +12,9 @@ const getProjectDetails = async (slug: string): Promise<Main> => {
     // }
   );
   const data = await response.json();
-  { console.log(data)}
+  {
+    console.log(data);
+  }
   return data as Main; // Assuming the response can be cast to Main
 };
 const getProjectWiseOverView = async (slug: string): Promise<any> => {
@@ -48,9 +50,19 @@ const getCachedUser = unstable_cache(
     revalidate: 60,
   }
 );
+
+const getNearByLocations = async (slug: string): Promise<any> => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/get-nearby?projIdEnc=2f68ddd8033756154f4d6abb50c4417e`
+  );
+  const data = await response.json();
+  console.log(data);
+  return data;
+};
 export {
   getProjectDetails,
   getCachedUser,
   getProjectWiseOverView,
   getProjectUnits,
+  getNearByLocations,
 };

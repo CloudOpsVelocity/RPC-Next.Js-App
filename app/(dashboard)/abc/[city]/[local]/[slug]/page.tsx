@@ -21,6 +21,7 @@ import ProjectDrawer from "@/app/components/project/Drawer";
 import DownloadBroucher from "@/app/components/project/downloadBroucher";
 import NearByCarousel from "@/app/components/project/NearByCarousel";
 import MasterPlan from "@/app/components/project/masterplan";
+import LeafMap from "@/app/components/project/map";
 
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
@@ -60,7 +61,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           data={data.phaseList}
           slug={slug}
         />
-        {/* <MasterPlan projName={data.projectName} /> */}
+        <MasterPlan projName={data.projectName} />
         <FloorplansBlock
           projName={data.projectName}
           data={data.phaseList}
@@ -72,9 +73,13 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           media={data.media}
         />
         <Amenties data={data.amenityList} />
-        {/* {data.lat && data.lang && (
-          <Nearby lat={data.lat} lang={data.lang} projName={data.projectName} />
-        )} */}
+        {data.lat && data.lang && (
+          <LeafMap
+            lat={data.lat}
+            lang={data.lang}
+            projName={data.projectName}
+          />
+        )}
         <Specifications
           data={data.specificationList}
           projName={data.projectName}
