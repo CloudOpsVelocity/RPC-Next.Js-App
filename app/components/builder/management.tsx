@@ -11,14 +11,12 @@ export default function ManagementBlock({
   founderName,
   vision,
   citiesName,
-  officecontact
+  officecontact,
 }: Data) {
   return (
-    <div className="w-full p-[1%] mb-[4%] pt-[2%] pb-[2%] bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 shadow-md shadow-[#5b8fb630] ">
+    <div className="shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] w-full p-[1%] mb-[6%] pt-[2%] pb-[2%] bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100  shadow-[#5b8fb630] ">
       <h1 className=" text-[24px] lg:text-[32px] font-[600] text-[#001F35]">
-        <span className="text-[#148B16] font-[700] ">
-          {companyName}{" "}
-        </span>
+        <span className="text-[#148B16] font-[700] ">{companyName} </span>
         Management{" "}
       </h1>
 
@@ -46,12 +44,7 @@ export default function ManagementBlock({
         <span className="text-[#148B16] font-[700]">{companyName}'s</span>{" "}
         Vision
       </h1>
-      <About
-        id="builder_vision"
-        heading=""
-        projName={""}
-        content={vision}
-      />
+      <About id="builder_vision" heading="" projName={""} content={vision} />
 
       <div className=" flex justify-start items-center w-full gap-[8px] mt-[-3%] mb-[2%] ">
         {callIconSvg}
@@ -73,7 +66,7 @@ export default function ManagementBlock({
       <div className="flex justify-start items-start w-full flex-wrap gap-[3%] mb-[2%] mt-[1%] ">
         {citiesName?.map((item, index) => (
           <p
-            className="text-[16px] md:text-[24px] font-[500] text-[#00487C] bg-[#FFF] rounded-[10px] mb-[3%] shadow-lg p-[1%] px-[16px] hover:bg-[#00487C] hover:text-[#FFF]  "
+            className="text-[16px] md:text-[24px] font-[500] text-[#00487C] bg-[#FFF] rounded-[10px] mb-[3%] shadow-lg p-[1%] px-[16px] hover:bg-[#00487C] hover:text-[#FFF] cursor-pointer "
             key={index}
           >
             {item}
