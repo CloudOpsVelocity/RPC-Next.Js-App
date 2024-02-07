@@ -180,15 +180,19 @@ const MapCard = ({ name, showLocationOnMap, lat, lang, origin }: any) => {
     lat: Number(lat),
     lng: Number(lang),
   });
+  const handleClick = () => {
+    showLocationOnMap({
+      position: {
+        lat,
+        lng: lang,
+      },
+      name,
+    });
+  };
   return (
     <div
       className="flex flex-col items-start gap-3 px-2 py-3.5 cursor-pointer shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] border-[0.5px] border-solid border-[#D9D9D9] bg-[#fcfcfc] min-w-[385px] max-w-[385px]"
-      onClick={() =>
-        showLocationOnMap({
-          position: { lat: Number(lat), lng: Number(lang) },
-          name: name,
-        })
-      }
+      onClick={handleClick}
     >
       <div className="">
         <p className="text-black text-base not-italic font-medium leading-[normal] capitalize">
