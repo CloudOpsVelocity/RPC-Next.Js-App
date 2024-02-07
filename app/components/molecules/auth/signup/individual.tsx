@@ -20,6 +20,7 @@ import { useState } from "react";
 import Success from "../success";
 import Login from "../login";
 import { BackSvg, EyeClosed, EyeOpen } from "@/app/images/commonSvgs";
+import handleTrimAndReplace from "@/app/utils/input/validations";
 
 function Individual() {
   const [status, setStatus] = useState<
@@ -99,6 +100,7 @@ function Individual() {
                 label="Full Name"
                 placeholder="Enter your name here"
                 {...form.getInputProps("name")}
+                onBlur={(e) => handleTrimAndReplace(e, "name", form)}
               />
               <TextInput
                 mt={"xs"}
@@ -109,6 +111,7 @@ function Individual() {
                 label="Email"
                 placeholder="Enter your email here"
                 {...form.getInputProps("email")}
+                onBlur={(e) => handleTrimAndReplace(e, "email", form)}
               />
               <PasswordInput
                 mt={"xs"}
@@ -124,6 +127,7 @@ function Individual() {
                   reveal ? <EyeOpen /> : <EyeClosed />
                 }
                 {...form.getInputProps("password")}
+                onBlur={(e) => handleTrimAndReplace(e, "password", form)}
               />
               <NumberInput
                 mt={"xs"}

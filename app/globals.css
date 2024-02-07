@@ -54,3 +54,30 @@
 .headerBg {
   background: var(--header-bg, linear-gradient(287deg, #eff8ff 0%, #fff 100%));
 }
+.scrollUnique {
+  border-radius: 20px;
+  background: transparent;
+  margin-left: 5px;
+  /* margin-top: 45px; */
+  /* scrollbar-color: gray;
+  scrollbar-width: thin;
+  scrollbar-track-color: gray; */
+}
+/* Webkit scrollbar */
+.scrollUnique::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track of the scrollbar */
+.scrollUnique::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle of the scrollbar */
+.scrollUnique::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+.scrollUnique::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

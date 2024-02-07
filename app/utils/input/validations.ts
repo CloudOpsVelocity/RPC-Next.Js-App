@@ -3,7 +3,7 @@ import { useForm } from "@mantine/form";
 
 // Utility function to trim and replace multiple spaces with a single space
 const handleTrimAndReplace = (
-  e: ChangeEvent<HTMLInputElement>,
+  e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   fieldName: string,
   form: any
 ) => {

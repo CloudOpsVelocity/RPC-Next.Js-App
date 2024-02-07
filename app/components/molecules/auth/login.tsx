@@ -8,6 +8,7 @@ import * as yup from "yup";
 import S from "@/app/styles/Pass.module.css";
 import { EyeClosed, EyeOpen } from "@/app/images/commonSvgs";
 import { useMediaQuery } from "@mantine/hooks";
+import handleTrimAndReplace from "@/app/utils/input/validations";
 const schema = yup.object().shape({
   username: yup
     .string()
@@ -54,6 +55,7 @@ function Login() {
           label="User Name"
           placeholder="Enter your email or mobiile number"
           {...form.getInputProps("username")}
+          onBlur={(e) => handleTrimAndReplace(e, "username", form)}
         />
         <PasswordInput
           classNames={{
@@ -69,6 +71,7 @@ function Login() {
             reveal ? <EyeOpen /> : <EyeClosed />
           }
           {...form.getInputProps("password")}
+          onBlur={(e) => handleTrimAndReplace(e, "password", form)}
         />
 
         <Link

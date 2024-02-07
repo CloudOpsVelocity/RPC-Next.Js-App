@@ -34,6 +34,7 @@ import {
 } from "@/app/images/commonSvgs";
 import StepCss from "@/app/styles/Stepper.module.css";
 import { registerOtherParser } from "@/app/utils/parse";
+import handleTrimAndReplace from "@/app/utils/input/validations";
 
 function Agent() {
   const [status, setStatus] = useState<
@@ -209,6 +210,7 @@ function Agent() {
             label="Full Name"
             placeholder="Enter your name here"
             {...form.getInputProps("userName")}
+            onBlur={(e) => handleTrimAndReplace(e, "userName", form)}
           />
           <TextInput
             type="email"
@@ -218,6 +220,7 @@ function Agent() {
             label="Email"
             placeholder="Enter your email here"
             {...form.getInputProps("email")}
+            onBlur={(e) => handleTrimAndReplace(e, "email", form)}
           />
           <PasswordInput
             required
@@ -232,6 +235,7 @@ function Agent() {
             visibilityToggleIcon={({ reveal }) =>
               reveal ? <EyeOpen /> : <EyeClosed />
             }
+            onBlur={(e) => handleTrimAndReplace(e, "password", form)}
           />
           <NumberInput
             required
@@ -284,6 +288,7 @@ function Agent() {
             label="Address"
             placeholder="Enter your address here"
             {...form.getInputProps("address")}
+            onBlur={(e) => handleTrimAndReplace(e, "address", form)}
           />
           <TextInput
             required
@@ -292,6 +297,7 @@ function Agent() {
             label="Company Name"
             placeholder="Enter your company name here"
             {...form.getInputProps("companyName")}
+            onBlur={(e) => handleTrimAndReplace(e, "companyName", form)}
           />
           <DropZone
             onLogoSelect={handleLogoSelect}

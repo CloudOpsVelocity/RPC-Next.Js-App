@@ -1,7 +1,7 @@
 "use client";
 import dayjs from "dayjs";
 import "@mantine/dates/styles.css";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   Stepper,
   Button,
@@ -52,6 +52,7 @@ import {
   StepperDotGray,
   StepperDotGreen,
 } from "@/app/images/commonSvgs";
+import handleTrimAndReplace from "@/app/utils/input/validations";
 
 function Builder() {
   const [status, setStatus] = useState<
@@ -256,6 +257,12 @@ function Builder() {
     // Clear the city field when the state changes
     form.setFieldValue("city", null);
   };
+  const viewport = useRef<HTMLDivElement>(null);
+  const scrollToBottom = () =>
+    viewport.current!.scrollTo({
+      top: viewport.current!.scrollHeight,
+      behavior: "smooth",
+    });
   return (
     <div className="w-full max-w-[423px] flex justify-center items-center flex-col mt-[2%]">
       {active !== 4 && (
@@ -314,6 +321,7 @@ function Builder() {
             label="Full Name"
             placeholder="Enter your name here"
             {...form.getInputProps("userName")}
+            onBlur={(e) => handleTrimAndReplace(e, "userName", form)}
           />
           <TextInput
             required
@@ -322,6 +330,7 @@ function Builder() {
             label="Email"
             placeholder="Enter your email here"
             {...form.getInputProps("email")}
+            onBlur={(e) => handleTrimAndReplace(e, "email", form)}
           />
           <PasswordInput
             required
@@ -333,6 +342,7 @@ function Builder() {
             visibilityToggleIcon={({ reveal }) =>
               reveal ? <EyeOpen /> : <EyeClosed />
             }
+            onBlur={(e) => handleTrimAndReplace(e, "password", form)}
           />
           <NumberInput
             required
@@ -385,6 +395,7 @@ function Builder() {
             label="Address"
             placeholder="Enter your address here"
             {...form.getInputProps("address")}
+            onBlur={(e) => handleTrimAndReplace(e, "address", form)}
           />
           <Select
             required
@@ -436,7 +447,7 @@ function Builder() {
             stepIcon: active > 2 ? StepCss.stepIconActive : StepCss.stepIcon,
           }}
         >
-          <div className="h-[420px] overflow-y-scroll mb-10">
+          <ScrollArea h={420} pr={10} viewportRef={viewport}>
             <TextInput
               required
               size="lg"
@@ -444,6 +455,7 @@ function Builder() {
               label="Builder Owned By"
               placeholder="Enter your builder name"
               {...form.getInputProps("companyName")}
+              onBlur={(e) => handleTrimAndReplace(e, "companyName", form)}
             />
             <MultiSelect
               required
@@ -478,6 +490,10 @@ function Builder() {
               label="Founded By"
               placeholder="Founder name"
               {...form.getInputProps("foundedBy")}
+              onBlur={(e) => {
+                handleTrimAndReplace(e, "foundedBy", form);
+                e.target.value !== "" && scrollToBottom();
+              }}
             />
             <TextInput
               required
@@ -486,6 +502,7 @@ function Builder() {
               label="Ceo Name"
               placeholder="Enter Ceo Name"
               {...form.getInputProps("ceoName")}
+              onBlur={(e) => handleTrimAndReplace(e, "ceoName", form)}
             />
             <TextInput
               required
@@ -494,6 +511,9 @@ function Builder() {
               label="Managing Director"
               placeholder="Enter Managing Director Name"
               {...form.getInputProps("managingDirectorName")}
+              onBlur={(e) =>
+                handleTrimAndReplace(e, "managingDirectorName", form)
+              }
             />
             <NumberInput
               required
@@ -506,7 +526,7 @@ function Builder() {
               {...form.getInputProps("officeContact")}
               maxLength={17}
             />{" "}
-          </div>
+          </ScrollArea>
         </Stepper.Step>
         <Stepper.Step
           label="Description"
@@ -525,6 +545,7 @@ function Builder() {
             minRows={5}
             maxRows={5}
             {...form.getInputProps("vission")}
+            onBlur={(e) => handleTrimAndReplace(e, "vission", form)}
           />
           <Text size="sm" ta={"right"}>
             maximum 5000 characters
@@ -539,6 +560,7 @@ function Builder() {
             minRows={5}
             maxRows={5}
             {...form.getInputProps("mission")}
+            onBlur={(e) => handleTrimAndReplace(e, "mission", form)}
           />{" "}
           <Text size="sm" ta={"right"} mb={"lg"}>
             maximum 5000 characters
