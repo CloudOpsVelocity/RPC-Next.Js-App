@@ -20,9 +20,9 @@ import CustomMarker from "./customarker";
 import clsx from "clsx";
 import { MapIcon, areas, fakeDataMaps, markers } from "@/app/data/map";
 
-const Map = ({ data, selectedLocation }: any) => {
+const Map = ({ data, selectedLocation, projName, lat, lang }: any) => {
   console.log(selectedLocation);
-  const position: LatLngTuple = [12.9856503, 77.60569269999999];
+  const position: LatLngTuple = [lat, lang];
 
   return (
     <>
@@ -82,7 +82,7 @@ const Map = ({ data, selectedLocation }: any) => {
                 Project you are exploring
               </p>
               <p className="text-[#006A02] text-lg not-italic font-semibold leading-[normal]">
-                Sagar Samudhara
+                {projName}
               </p>
             </div>
           </Tooltip>

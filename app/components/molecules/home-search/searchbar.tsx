@@ -40,6 +40,7 @@ const Searchbar = () => {
           // Extract latitude and longitude from the position object
           const { latitude, longitude } = position.coords;
           // Set user's location in state
+          // @ts-ignore
           setUserLocation({ latitude, longitude });
         },
         (error) => {

@@ -111,29 +111,45 @@ const LeafMap: React.FC<{ lat: string; lang: string; projName: string }> = ({
                 </p>
               </div>
             </Tabs>
-            <div id="location-listing" className="grid gap-2 pl-5">
+            <div id="location-listing" className="grid gap-2 pl-5 ">
               {isLoading ? (
                 <Loading />
               ) : (
-                <ScrollArea h={600}>
+                <ScrollArea h={600} pb={50}>
                   {mapData &&
                   mapData[selected] &&
                   mapData[selected].length > 0 ? (
-                    mapData[selected].map((location: any, index: number) => (
-                      <LocationList
-                        type="public"
-                        {...location}
-                        key={index}
-                        origin={{
-                          lat: Number(lat),
-                          lng: Number(lang),
-                        }}
-                        onClick={setSelectedLocation}
-                        setDirection={showLocationOnMap}
-                        onChangeTravelMode={handleLocationListClick}
-                        showLocationOnMap={showLocationOnMap}
-                      />
-                    ))
+                    // Calculate distance and sort locations
+                    mapData[selected]
+                      .map((location: any) => ({
+                        ...location,
+                        distance: calculateDistance(
+                          {
+                            lat: Number(lat),
+                            lng: Number(lang),
+                          },
+                          {
+                            lat: Number(location.lat),
+                            lng: Number(location.lang),
+                          }
+                        ),
+                      }))
+                      .sort((a: any, b: any) => a.distance - b.distance)
+                      .map((location: any, index: number) => (
+                        <LocationList
+                          type="public"
+                          {...location}
+                          key={index}
+                          origin={{
+                            lat: Number(lat),
+                            lng: Number(lang),
+                          }}
+                          onClick={setSelectedLocation}
+                          setDirection={showLocationOnMap}
+                          onChangeTravelMode={handleLocationListClick}
+                          showLocationOnMap={showLocationOnMap}
+                        />
+                      ))
                   ) : (
                     <p>No locations found.</p>
                   )}
@@ -146,6 +162,9 @@ const LeafMap: React.FC<{ lat: string; lang: string; projName: string }> = ({
           <Map
             data={mapData && mapData[selected] ? mapData[selected] : []}
             selectedLocation={selectedLocation}
+            projName={projName}
+            lat={lat}
+            lang={lang}
           />
         </section>
       </div>
