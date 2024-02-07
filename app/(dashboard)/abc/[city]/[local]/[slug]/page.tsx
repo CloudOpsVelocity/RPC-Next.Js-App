@@ -20,6 +20,7 @@ import Specifications from "@/app/components/project/specification";
 import ProjectDrawer from "@/app/components/project/Drawer";
 import DownloadBroucher from "@/app/components/project/downloadBroucher";
 import NearByCarousel from "@/app/components/project/NearByCarousel";
+import MasterPlan from "@/app/components/project/masterplan";
 
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
@@ -59,6 +60,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           data={data.phaseList}
           slug={slug}
         />
+        {/* <MasterPlan projName={data.projectName} /> */}
         <FloorplansBlock
           projName={data.projectName}
           data={data.phaseList}

@@ -1,0 +1,40 @@
+import { PopupOpenSvg } from "@/app/images/commonSvgs";
+import { Image } from "@mantine/core";
+import React from "react";
+
+export default function MasterPlan({ projName }: { projName: string }) {
+  return (
+    <div className="w-[90%] mb-[5%] scroll-mt-[90px]" id="masterPlan">
+      <div className="flex justify-between w-full items-cente mb-[32px]">
+        <div>
+          <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35] mb-[12px]">
+            Master Plan Of{" "}
+            <span className="text-[#148B16] font-[700] uppercase">
+              {projName}
+            </span>
+          </h1>
+
+          <p className="text-[#4D6677] text-2xl italic font-medium leading-[normal] capitalize">
+            Crafting Tomorrow's Landscapes, Today's Masterpiece: Your Vision,
+            Our Expertise.
+          </p>
+        </div>
+        <button className="inline-flex flex-col items-center justify-center gap-2.5 p-5 rounded-[10px] bg-[#0073C6] text-white text-2xl not-italic font-bold leading-[normal] tracking-[0.96px] ">
+          DownLoad MasterPlan
+        </button>
+      </div>
+      <div className="relative">
+        <Image
+          radius="md"
+          src={`https://d1l03fubsuphsh.cloudfront.net/images/varify/project/296/cover/cover.jpg`}
+          h={863}
+          w="100%"
+          fit="cover"
+        />
+        <button>
+          <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] absolute bottom-10 right-3 z-50 " />
+        </button>
+      </div>
+    </div>
+  );
+}
