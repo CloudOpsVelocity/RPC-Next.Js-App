@@ -12,7 +12,7 @@ import useRatings from "@/app/hooks/useRatings";
 import { useParams } from "next/navigation";
 import { useMediaQuery } from "@mantine/hooks";
 import { usePopUpRatings } from "@/app/hooks/popups/usePopUpRatings";
-
+import S from "@/app/styles/Rating.module.css";
 export default function Reviews({ projName }: { projName: string }) {
   const [opened, { open, close }] = usePopUpRatings();
   const { data } = useRatings();
@@ -20,25 +20,27 @@ export default function Reviews({ projName }: { projName: string }) {
   return (
     data?.status && (
       <div id="ratings" className="bg-[#FFF] scroll-mt-[100px] py-12 w-full ">
-        <div className="w-[90%] mx-auto px-6">
-          <h2 className="text-[#001F35] text-[32px] not-italic font-semibold leading-[normal] uppercase">
-            CUSTOMER REVIEWS FOR{" "}
-            <span className="text-[#148B16] text-[32px] not-italic font-bold leading-[normal] uppercase">
-              {projName}
-            </span>
-          </h2>
-          <p className="text-[#4D6677] text-2xl italic font-medium leading-[normal] tracking-[0.96px] mt-2 mb-5">
-            Find helpful customer reviews and review ratings for {projName}
-          </p>
-          <div className="w-full flex justify-end mb-[20px]">
-            <button
-              className="text-[#0073C6] text-xl not-italic font-bold leading-[normal] tracking-[0.8px] underline "
-              onClick={open}
-            >
-              Add Review
-            </button>
+        <div className="">
+          <div className="w-[90%] mx-auto px-6">
+            <h2 className="text-[#001F35] text-[32px] not-italic font-semibold leading-[normal] uppercase">
+              CUSTOMER REVIEWS FOR{" "}
+              <span className="text-[#148B16] text-[32px] not-italic font-bold leading-[normal] uppercase">
+                {projName}
+              </span>
+            </h2>
+            <p className="text-[#4D6677] text-2xl italic font-medium leading-[normal] tracking-[0.96px] mt-2 mb-5">
+              Find helpful customer reviews and review ratings for {projName}
+            </p>
+            <div className="w-full flex justify-end mb-[20px]">
+              <button
+                className="text-[#0073C6] text-xl not-italic font-bold leading-[normal] tracking-[0.8px] underline "
+                onClick={open}
+              >
+                Add Review
+              </button>
+            </div>
           </div>
-          <div className="relative">
+          <div className="relative w-[96%] mx-auto px-6">
             <Carousel
               nextControlIcon={<NextCarouselButton />}
               previousControlIcon={<PrevCarouselButton />}
@@ -48,6 +50,10 @@ export default function Reviews({ projName }: { projName: string }) {
               withIndicators
               height={250}
               slidesToScroll={1}
+              px={70}
+              classNames={{
+                controls: S.controls,
+              }}
               style={{
                 display: "flex",
                 justifyContent: "start",
@@ -56,7 +62,7 @@ export default function Reviews({ projName }: { projName: string }) {
               withControls={isMobile ? true : data?.data.length > 3}
             >
               {data?.data?.map((eachData: any, i: number) => (
-                <Carousel.Slide key={i} miw={457}>
+                <Carousel.Slide key={i} miw={487}>
                   <Review {...eachData} />
                 </Carousel.Slide>
               ))}

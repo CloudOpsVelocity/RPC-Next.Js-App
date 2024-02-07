@@ -1,7 +1,6 @@
 // Gallery.tsx
 import React, { useState } from "react";
-import { useDisclosure } from "@mantine/hooks";
-import { Modal, Button, Image } from "@mantine/core";
+import { Modal, Image } from "@mantine/core";
 import { PopupOpenSvg, videoPlayIcon } from "@/app/images/commonSvgs";
 import { Carousel } from "@mantine/carousel";
 import S from "@/app/styles/ImgCarousel.module.css";

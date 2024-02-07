@@ -3,8 +3,16 @@ import useNearby from "@/app/hooks/useNearby";
 import React from "react";
 import ProjectCarousel from "./ProjectCard";
 
-export default function NearByCarousel({ projName }: { projName: string }) {
-  const { data } = useNearby();
+export default function NearByCarousel({
+  projName,
+  lat,
+  lng,
+}: {
+  projName: string;
+  lat: string;
+  lng: string;
+}) {
+  const { data } = useNearby({ lat, lng });
   return (
     <div
       className="flex flex-col justify-start items-start w-[90%] mt-[5%]"
