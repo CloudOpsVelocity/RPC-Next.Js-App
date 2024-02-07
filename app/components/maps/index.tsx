@@ -1,7 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
-import { MapContainer, TileLayer, Marker, Popup, Tooltip } from "react-leaflet";
+import React, { useEffect, useState } from "react";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup,
+  Tooltip,
+  useMap,
+} from "react-leaflet";
 import "leaflet/dist/leaflet.css"; // Import Leaflet CSS
 import { LatLngTuple } from "leaflet";
 import L from "leaflet";
@@ -13,15 +20,15 @@ import CustomMarker from "./customarker";
 import clsx from "clsx";
 import { MapIcon, areas, fakeDataMaps, markers } from "@/app/data/map";
 
-const Map = ({ data }: any) => {
-  const [selected, setSelected] = useState("commute");
+const Map = ({ data, selectedLocation }: any) => {
+  console.log(selectedLocation);
   const position: LatLngTuple = [12.9856503, 77.60569269999999];
+
   return (
-    // <div className="">MAp</div>
     <>
       <MapContainer
         center={position}
-        zoom={15}
+        zoom={13}
         style={{ height: "700px", width: "100%" }}
         scrollWheelZoom={true}
       >
@@ -50,8 +57,20 @@ const Map = ({ data }: any) => {
               position={[parseFloat(item?.lat), parseFloat(item?.lang)]}
               title="Hell"
             >
+              {selectedLocation?.lat === item?.lat && (
+                <Tooltip opacity={1} permanent direction="top">
+                  <div className=" ">
+                    <p className="text-[#00487C] text-lg not-italic font-semibold leading-[normal]">
+                      {item.name}
+                    </p>
+                  </div>
+                </Tooltip>
+              )}
+
               <Popup>
-                {item.name} <br /> Rating | {item.rating}
+                <p className="text-[#00487C] text-[17px] italic font-medium leading-[normal]">
+                  {item.name}
+                </p>
               </Popup>
             </Marker>
           ))}
@@ -59,10 +78,10 @@ const Map = ({ data }: any) => {
         <Marker position={position} icon={MapIcon}>
           <Tooltip opacity={1} permanent direction="top" offset={[30, -40]}>
             <div className=" ">
-              <p className="text-[#00487C] text-[10px] italic font-medium leading-[normal]">
+              <p className="text-[#00487C] text-base italic font-medium leading-[normal]">
                 Project you are exploring
               </p>
-              <p className="text-[#006A02] text-sm not-italic font-semibold leading-[normal]">
+              <p className="text-[#006A02] text-lg not-italic font-semibold leading-[normal]">
                 Sagar Samudhara
               </p>
             </div>
@@ -97,25 +116,6 @@ const Map = ({ data }: any) => {
         </Marker>
         <polyline />
       </MapContainer>
-      <div className="flex gap-6 mb-5 mt-1 w-full flex-wrap ">
-        {areas.map((area) => {
-          return (
-            <button
-              onClick={() => {
-                setSelected(area.name);
-              }}
-              className={clsx(
-                "text-[#4D6677] text-xl not-italic font-medium flex items-center gap-[5px] leading-[normal] capitalize",
-                selected === area.name && "!text-green-600 font-semibold"
-              )}
-              key={area.name}
-            >
-              <Image src={area.Icon} alt="hello" height={30} width={30} />{" "}
-              {area.name}
-            </button>
-          );
-        })}
-      </div>
     </>
   );
 };

@@ -68,7 +68,6 @@ const LeafMap: React.FC<{ lat: string; lang: string; projName: string }> = ({
   const handleLocationListClick = (type: string) => {
     setSelectedTravelMode(type);
   };
-
   return (
     <div
       className="w-[90%] scroll-mt-[90px] mx-auto mt-[5%] mb-[5%] "
@@ -116,7 +115,7 @@ const LeafMap: React.FC<{ lat: string; lang: string; projName: string }> = ({
               {isLoading ? (
                 <Loading />
               ) : (
-                <ScrollArea h={420}>
+                <ScrollArea h={600}>
                   {mapData &&
                   mapData[selected] &&
                   mapData[selected].length > 0 ? (
@@ -144,7 +143,10 @@ const LeafMap: React.FC<{ lat: string; lang: string; projName: string }> = ({
           </div>
         </section>
         <section>
-          <Map data={mapData && mapData[selected] ? mapData[selected] : []} />
+          <Map
+            data={mapData && mapData[selected] ? mapData[selected] : []}
+            selectedLocation={selectedLocation}
+          />
         </section>
       </div>
       {mapData && mapData[selected] && mapData[selected].length > 0 && (
@@ -227,7 +229,6 @@ const LocationList: React.FC<{
     lat: Number(lat),
     lng: Number(lang),
   });
-  console.log(origin, { lat, lang });
   const handleClick = () => {
     showLocationOnMap({
       position: {
@@ -240,7 +241,7 @@ const LocationList: React.FC<{
 
   return (
     <div
-      className="p-2 bg-gray-50 border rounded-lg cursor-pointer mt-[12px] max-w-[640px]"
+      className="p-2 bg-gray-50 border rounded-lg cursor-pointer mt-[12px] max-w-[640px] py-3 px-2"
       onClick={handleClick}
     >
       <div className="flex items-center justify-between">
@@ -256,10 +257,6 @@ const LocationList: React.FC<{
           </span>
         </div>
       </div>
-      <p className="flex items-center gap-1 text-[#565D70] text-lg not-italic font-normal leading-[normal] lowercase">
-        <LuTrain size={15} />
-        Via public transport
-      </p>
     </div>
   );
 };
@@ -284,7 +281,7 @@ export const areas: Area[] = [
         />
       </svg>
     ),
-    key: "train_station",
+    key: "transit_station",
   },
   {
     name: "Train",
@@ -485,7 +482,7 @@ export const areas: Area[] = [
         />
       </svg>
     ),
-    key: "clinic",
+    key: "hospital",
   },
 
   {

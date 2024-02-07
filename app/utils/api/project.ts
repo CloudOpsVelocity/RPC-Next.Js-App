@@ -53,7 +53,7 @@ const getCachedUser = unstable_cache(
 
 const getNearByLocations = async (slug: string): Promise<any> => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/get-nearby?projIdEnc=2f68ddd8033756154f4d6abb50c4417e`
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/get-nearby?projIdEnc=${slug}`
   );
   const data = await response.json();
   console.log(data);
