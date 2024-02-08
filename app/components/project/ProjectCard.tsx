@@ -129,10 +129,12 @@ export function ProjectCard({ type, cardData }: CardProps) {
               </p>
             )}
 
-            {cardData.propTypes && (
+            {cardData.propTypes ? (
               <p className="mb-[6px] text-[#00487C] text-sm not-italic font-semibold leading-[normal] tracking-[0.56px]">
                 {cardData.propTypes.map((eachCity: string) => eachCity)}
               </p>
+            ) : (
+              "N/A"
             )}
 
             {type != "proj" && (
@@ -142,7 +144,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
             )}
 
             <p className="text-[#565D70]  not-italic font-semibold leading-[normal] tracking-[0.56px]">
-              {cardData?.cityv ?? "N/A"} {cardData.pinCode}
+              {cardData?.city ?? "N/A"} {cardData.locality}
             </p>
 
             {type != "proj" && (

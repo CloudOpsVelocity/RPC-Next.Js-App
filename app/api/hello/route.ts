@@ -49,7 +49,6 @@ export async function GET(req: Request) {
       .join("|")}&mode=${travelType?.toLowerCase()}&key=${
       process.env.NEXT_PUBLIC_GOOGLE_API_KEY
     }`;
-    console.log(distanceUrl);
     const distanceRes = await axios.get(distanceUrl);
     console.log(distanceRes.data);
 
