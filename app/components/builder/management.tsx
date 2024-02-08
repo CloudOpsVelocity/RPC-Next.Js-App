@@ -51,12 +51,15 @@ export default function ManagementBlock({
         <p className="text-[16px] md:text-[24px] font-[500] text-[#00487C]">
           Office Contact
         </p>
-        <p className="text-[16px] md:text-[24px] font-[600] text-[#00487C] underline">
+        <a
+          href={`tel:${officecontact}`}
+          className="text-[16px] md:text-[24px] font-[600] text-[#00487C] underline"
+        >
           +91- {officecontact}
-        </p>
+        </a>
       </div>
 
-      <h1 className=" text-[24px] lg:text-[32px] font-[600] text-[#001F35]">
+      <h1 className=" text-[24px] lg:text-[32px] font-[600] text-[#001F35] ">
         <span className="text-[#148B16] font-[700] ">
           {companyName} Projects{" "}
         </span>
@@ -66,7 +69,7 @@ export default function ManagementBlock({
       <div className="flex justify-start items-start w-full flex-wrap gap-[3%] mb-[2%] mt-[1%] ">
         {citiesName?.map((item, index) => (
           <p
-            className="text-[16px] md:text-[24px]  text-[#00487C] bg-[#FFF] rounded-[10px] shadow-lg p-[1%] px-[16px] hover:bg-[#00487C] hover:text-[#FFF] cursor-pointer ] text-2xl not-italic  font-semibold leading-[normal] tracking-[0.96px]"
+            className="text-[16px] md:text-[24px]  text-[#00487C] bg-[#FFF]  border border-[color:var(--ll1,#EFF5FF)] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[10px] border-solid p-[1%] px-[16px] hover:bg-[#00487C] hover:text-[#FFF] cursor-pointer  text-2xl not-italic  font-semibold leading-[normal] tracking-[0.96px]"
             key={index}
           >
             Project in <span className="capitalize">{item}</span>

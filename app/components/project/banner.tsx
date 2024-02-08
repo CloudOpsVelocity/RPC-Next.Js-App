@@ -18,7 +18,6 @@ import { usePopUpRatings } from "@/app/hooks/popups/usePopUpRatings";
 
 export default function Banner({ projName }: { projName: string }) {
   const [opened, { open, close }] = usePopUpRatings();
-  const { data: session } = useSession();
 
   const onAddingRatings = () => {
     open();

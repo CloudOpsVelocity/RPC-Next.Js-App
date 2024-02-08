@@ -8,11 +8,13 @@ import ProjectCarousel from "../../components/project/ProjectCard";
 import BuildersBlock from "../../components/builder/buildersBlock";
 import { getBuilderDetails } from "@/app/utils/api/builder";
 import BuilderCarousel from "@/app/components/builder/Carousel";
+import Reqcallback from "@/app/components/builder/Reqcallback";
 
 type Props = { params: { slug: string } };
 
 export default async function Page({ params: { slug } }: Props) {
   const data = await getBuilderDetails(slug, "Y");
+
   return (
     <div className="flex flex-col justify-start items-center w-full mt-[90px]  ">
       {data && (
@@ -37,6 +39,7 @@ export default async function Page({ params: { slug } }: Props) {
 
             <BuildersBlock data={data?.data?.otherBuilder} />
           </div>
+          <Reqcallback builderId={Number(slug) as number} />
 
           <Footer />
         </>

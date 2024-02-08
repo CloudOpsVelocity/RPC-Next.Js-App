@@ -19,6 +19,8 @@ export interface Data {
   newProject: number;
   onGoingProject: number;
   completedProject: number;
+  email: string;
+  mobile: number;
 }
 
 export interface BuilderProject {

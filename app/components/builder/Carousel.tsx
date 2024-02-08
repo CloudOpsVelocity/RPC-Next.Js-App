@@ -80,7 +80,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
           )}
           <div className="relative  max-h-[212px]">
             <Image
-              src={cardData.coverUrl}
+              src={cardData.media.coverImageUrl}
               alt="Sobha Dream Acres"
               className="w-full  mb-4 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] max-h-[212px]"
               width={300}
@@ -124,8 +124,8 @@ export function ProjectCard({ type, cardData }: CardProps) {
               <p className="mb-[6px] text-[#565D70] text-sm not-italic font-semibold leading-[normal]">
                 Start - End Date:
                 <span className="ml-[4px] text-[#001F35] text-sm not-italic font-semibold leading-[normal]">
-                  {formatDate(cardData.launchDate)} -{" "}
-                  {formatDate(cardData.possassionDate)}
+                  {formatDate(cardData.startDate)} -{" "}
+                  {formatDate(cardData.endDate)}
                 </span>
               </p>
             )}
@@ -143,7 +143,11 @@ export function ProjectCard({ type, cardData }: CardProps) {
             )}
 
             <p className="text-[#565D70]  not-italic font-semibold leading-[normal] tracking-[0.56px]">
-              {cardData?.cityv ?? "N/A"} {cardData.pinCode}
+              {cardData.address} {`${cardData.localityName} `}
+              {`${cardData.cityName} `}
+              {`${cardData.stateName ?? ""} `}
+              {cardData.pinCode}
+              {/* {cardData?.cityv ?? "N/A"} {cardData.pinCode} */}
             </p>
 
             {type != "proj" && (
@@ -165,6 +169,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
 }
 
 const BuilderCarousel = ({ type, content, title, projName, data }: Props) => {
+  console.log(data);
   return (
     <div className="w-[100%] mb-[5%]">
       <h2 className="text-[24px] lg:text-[32px] font-semibold uppercase cursor-pointer">

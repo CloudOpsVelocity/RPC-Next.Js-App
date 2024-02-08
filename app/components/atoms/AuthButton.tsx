@@ -7,6 +7,8 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import S from "@/app/styles/DropDown.module.css";
+import { deleteCookie } from "cookies-next";
+
 export default function AuthButton() {
   const { data: session } = useSession();
 
@@ -58,6 +60,14 @@ import data from "@/app/data/dropdown";
 import { postDetailsIcon } from "@/app/images/commonSvgs";
 
 function Dropdown() {
+  const handleLogout = async () => {
+    try {
+      await signOut();
+      deleteCookie("token");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const { data: session } = useSession();
   return (
     <Menu width={200} shadow="md">
@@ -95,7 +105,7 @@ function Dropdown() {
           }}
           component="button"
           className="block text-gray-700 hover:text-green-500 transition-colors"
-          onClick={() => signOut()}
+          onClick={handleLogout}
         >
           Log Out
         </Menu.Item>
