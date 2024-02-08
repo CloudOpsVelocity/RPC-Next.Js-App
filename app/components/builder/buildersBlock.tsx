@@ -34,7 +34,7 @@ export default function BuildersBlock({ data }: { data: OtherBuilder[] }) {
             slidesToScroll={1}
             nextControlIcon={<NextCarouselButton />}
             previousControlIcon={<PrevCarouselButton />}
-            px={120}
+            px={140}
           >
             {data?.map((builder, index) => (
               <Carousel.Slide key={index}>
