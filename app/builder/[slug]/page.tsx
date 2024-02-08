@@ -4,7 +4,6 @@ import Footer from "../../components/layouts/primary/footer";
 import TopProfileBlock from "../../components/builder/topProfileBlock";
 import ProjectDetails from "../../components/builder/projectDetails";
 import ManagementBlock from "../../components/builder/management";
-import ProjectCarousel from "../../components/project/ProjectCard";
 import BuildersBlock from "../../components/builder/buildersBlock";
 import { getBuilderDetails } from "@/app/utils/api/builder";
 import BuilderCarousel from "@/app/components/builder/Carousel";

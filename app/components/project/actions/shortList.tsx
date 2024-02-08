@@ -26,7 +26,7 @@ export default function ShortList() {
     if (session) {
       toggleShortlist({
         id: slug,
-        status: isItemInShortlist ? "Y" : "N",
+        status: isItemInShortlist ? "N" : "Y",
       });
     }
   };

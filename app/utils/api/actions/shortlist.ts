@@ -7,6 +7,7 @@ type Props = {
 };
 export const addShortList = async (data: Props) => {
   console.log(data);
+
   const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/add?type=${data.type}`;
   try {
     const response = await axios.post(url, {

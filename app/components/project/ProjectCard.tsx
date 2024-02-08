@@ -40,7 +40,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
     if (session) {
       toggleShortlist({
         id: cardData.projIdEnc,
-        status: isItemInShortlist ? "Y" : "N",
+        status: isItemInShortlist ? "N" : "Y",
       });
     }
   };
