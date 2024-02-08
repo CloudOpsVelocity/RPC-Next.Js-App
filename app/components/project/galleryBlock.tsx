@@ -118,32 +118,35 @@ export default function GalleryBlock({
               // <button onClick={() => open("image")}>View More</button>
             )} */}
           </div>
-
-          <h3 className="text-[#737579] font-[600] text-[20px] lg:text-[24px] mb-[2%] ">
-            Videos
-          </h3>
-          <div className="flex justify-start items-start w-full gap-[4%] flex-wrap ">
-            {videos?.map((img, ind) => (
-              <div className="relative w-[110px] lg:w-[152px] flex justify-center items-center h-[68px] lg:h-[94px] bg-white rounded-[5px]  mb-[4%] cursor-pointer">
-                <video
-                  key={ind}
-                  // width={150}
-                  // height={100}
-                  src={img as string}
-                  //alt={`Image ${ind + 1}`}
-                  className={`!w-full rounded-[5px] cursor-pointer ${
-                    selectedMedia === img
-                      ? "border-2 border-[#4d6677] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)]"
-                      : ""
-                  }`}
-                  onClick={() => handleMediaClick(img as string)}
-                />
-                <span className="absolute top-[40%] left-[40%] pointer-events-none ">
-                  {videoPlayIcon}
-                </span>
+          {videos && videos.length > 0 && (
+            <>
+              <h3 className="text-[#737579] font-[600] text-[20px] lg:text-[24px] mb-[2%] ">
+                Videos
+              </h3>
+              <div className="flex justify-start items-start w-full gap-[4%] flex-wrap ">
+                {videos?.map((img, ind) => (
+                  <div className="relative w-[110px] lg:w-[152px] flex justify-center items-center h-[68px] lg:h-[94px] bg-white rounded-[5px]  mb-[4%] cursor-pointer">
+                    <video
+                      key={ind}
+                      // width={150}
+                      // height={100}
+                      src={img as string}
+                      //alt={`Image ${ind + 1}`}
+                      className={`!w-full rounded-[5px] cursor-pointer ${
+                        selectedMedia === img
+                          ? "border-2 border-[#4d6677] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)]"
+                          : ""
+                      }`}
+                      onClick={() => handleMediaClick(img as string)}
+                    />
+                    <span className="absolute top-[40%] left-[40%] pointer-events-none ">
+                      {videoPlayIcon}
+                    </span>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </>
+          )}
         </div>
       </div>
     </div>

@@ -7,9 +7,9 @@ import Button from "../../elements/button";
 import { Phone, Shorlisted, shortlistIconSvg } from "@/app/images/commonSvgs";
 import { formatCurrency } from "@/app/utils/numbers";
 import { useSession } from "next-auth/react";
-import LoginPopup from "./modals/LoginPop";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import { useShortlistAndCompare } from "@/app/hooks/storage";
+import LoginPopup from "../project/modals/LoginPop";
 
 type Props = {
   type: string;
@@ -26,6 +26,7 @@ type CardProps = {
 };
 
 export function ProjectCard({ type, cardData }: CardProps) {
+  console.log(cardData);
   const [, { open }] = useReqCallPopup();
   const { data: session } = useSession();
   const { toggleShortlist, shortlistedItems } = useShortlistAndCompare();
@@ -57,7 +58,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
               className="tracking-tight text-[18px] font-[600] text-[#565D70] cursor-pointer"
               href={`/abc/karnataka/banglore/${cardData.projIdEnc}`}
             >
-              {cardData.projName}
+              {cardData.projectName}
             </a>
             <div className="text-xs font-semibold text-right ">
               <span className="text-[16px] font-[700] text-[#148B16]">
@@ -163,7 +164,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
   );
 }
 
-const ProjectCarousel = ({ type, content, title, projName, data }: Props) => {
+const BuilderCarousel = ({ type, content, title, projName, data }: Props) => {
   return (
     <div className="w-[100%] mb-[5%]">
       <h2 className="text-[24px] lg:text-[32px] font-semibold uppercase cursor-pointer">
@@ -191,7 +192,7 @@ const ProjectCarousel = ({ type, content, title, projName, data }: Props) => {
   );
 };
 
-export default ProjectCarousel;
+export default BuilderCarousel;
 function formatDate(inputDate: string | undefined): string {
   if (inputDate == null) {
     return "";
