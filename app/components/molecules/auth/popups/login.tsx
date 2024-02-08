@@ -10,6 +10,7 @@ import { EyeClosed, EyeOpen } from "@/app/images/commonSvgs";
 import { useMediaQuery } from "@mantine/hooks";
 import toast from "react-hot-toast";
 import { signIn } from "next-auth/react";
+import handleTrimAndReplace from "@/app/utils/input/validations";
 const schema = yup.object().shape({
   username: yup
     .string()
@@ -78,6 +79,7 @@ function LoginPopupForm() {
           label="User Name"
           placeholder="Enter your email or mobiile number"
           {...form.getInputProps("username")}
+          onBlur={(e) => handleTrimAndReplace(e, "username", form)}
         />
         <PasswordInput
           classNames={{
@@ -93,6 +95,7 @@ function LoginPopupForm() {
             reveal ? <EyeOpen /> : <EyeClosed />
           }
           {...form.getInputProps("password")}
+          onBlur={(e) => handleTrimAndReplace(e, "password", form)}
         />
 
         <Link

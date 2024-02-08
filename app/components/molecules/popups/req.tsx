@@ -23,6 +23,7 @@ import { useAtomValue } from "jotai";
 import Image from "next/image";
 import ReqOtpForm from "../../project/forms/otpform";
 import CountryInput from "../../atoms/CountryInput";
+import handleTrimAndReplace from "@/app/utils/input/validations";
 const RequestCallBackModal = ({
   opened,
   close,
@@ -216,7 +217,7 @@ const ReqForm = ({
   // const [status, setStatus] = useState<
   //   "idle" | "pending" | "success" | "error" | "otp"
   // >("idle");
-  const { getInputProps, onSubmit, errors, values } = useForm({
+  const form = useForm({
     initialValues: {
       name: "",
       email: "",
@@ -247,14 +248,14 @@ const ReqForm = ({
     <ReqOtpForm
       callback={onSuccess}
       values={{
-        ...values,
+        ...form.values,
         projIdEnc: slug,
         isProjContact: "Y",
         src: "searchCard",
       }}
     />
   ) : (
-    <form className="w-full max-w-sm" onSubmit={onSubmit(formSubmit)}>
+    <form className="w-full max-w-sm" onSubmit={form.onSubmit(formSubmit)}>
       <p className="text-[#EA7A00] text-base not-italic font-semibold leading-[normal] tracking-[0.64px] mb-[1%] ">
         Looks like you are not registered with us.
       </p>
@@ -271,7 +272,7 @@ const ReqForm = ({
         <TextInput
           size="lg"
           label="Enter your name here"
-          {...getInputProps("name")}
+          {...form.getInputProps("name")}
           placeholder="Enter your name here"
           classNames={{
             input: N.input,
@@ -279,6 +280,7 @@ const ReqForm = ({
             wrapper: N.wrapper,
             label: N.label,
           }}
+          onBlur={(e) => handleTrimAndReplace(e, "name", form)}
         />
         <NumberInput
           mt={"lg"}
@@ -293,14 +295,14 @@ const ReqForm = ({
           className="w-[100%]  "
           label="Contact Number"
           placeholder=""
-          {...getInputProps("mobile")}
+          {...form.getInputProps("mobile")}
           maxLength={10}
         />
 
         <CountryInput
           onSelect={displayCountryCode}
           className={`focus:outline-none min-w-[30px] max-w-[70px] border-t-0 border-l-0 h-[27px] border-b-0 border-r-[#4D6677] border-[2px] border-solid self-start relative mt-[2%] ${
-            (errors.mobile != undefined && errors.mobile != null) ||
+            (form.errors.mobile != undefined && form.errors.mobile != null) ||
             status === "error"
               ? "bottom-[65px]"
               : "bottom-[45px]"
@@ -309,7 +311,7 @@ const ReqForm = ({
         <TextInput
           size="lg"
           label="Enter Your Email Here"
-          {...getInputProps("email")}
+          {...form.getInputProps("email")}
           placeholder="Enter your email here"
           type="email"
           style={{ marginTop: "-10px" }}
@@ -319,6 +321,7 @@ const ReqForm = ({
             wrapper: N.wrapper,
             label: N.label,
           }}
+          onBlur={(e) => handleTrimAndReplace(e, "email", form)}
         />
       </div>
       <B

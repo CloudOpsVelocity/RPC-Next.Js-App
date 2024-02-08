@@ -15,6 +15,7 @@ import toast, { Toaster } from "react-hot-toast";
 import LoginPopup from "../molecules/popups/login";
 import Close from "./button/close";
 import { usePopUpRatings } from "@/app/hooks/popups/usePopUpRatings";
+import handleTrimAndReplace from "@/app/utils/input/validations";
 
 export default function Banner({ projName }: { projName: string }) {
   const [opened, { open, close }] = usePopUpRatings();
@@ -94,7 +95,7 @@ const AddRating = ({
   const [status, setStatus] = useState<
     "pending" | "idle" | "success" | "error"
   >("idle");
-  const { getInputProps, onSubmit, reset } = useForm({
+  const form = useForm({
     initialValues: {
       review: "",
       rating: 0,
@@ -102,14 +103,14 @@ const AddRating = ({
     validate: yupResolver(ratingSchema),
   });
   const onClose = () => {
-    reset();
+    form.reset();
     close();
   };
 
   const formSubmit = async (values: any) => {
     setStatus("pending");
     await addRating({ ...values, projIdEnc: params?.slug });
-    reset();
+    form.reset();
     close();
     setStatus("success");
   };
@@ -136,7 +137,7 @@ const AddRating = ({
 
         {session ? (
           <form
-            onSubmit={onSubmit(formSubmit)}
+            onSubmit={form.onSubmit(formSubmit)}
             className="max-w-[100%] mt-[2%] mx-auto my-8   rounded-lg space-y-2 p-5"
           >
             <div className="flex justify-center items-center mb-[32px]">
@@ -149,7 +150,7 @@ const AddRating = ({
                 fullSymbol={
                   <RatingStar fill="#FFD600" className="w-[70px] h-[70px]" />
                 }
-                {...getInputProps("rating")}
+                {...form.getInputProps("rating")}
               />
             </div>
 
@@ -162,7 +163,7 @@ const AddRating = ({
                 <Textarea
                   size="lg"
                   name="review"
-                  {...getInputProps("review")}
+                  {...form.getInputProps("review")}
                   w={"100%"}
                   h={"100%"}
                   id="review"
@@ -171,6 +172,7 @@ const AddRating = ({
                   radius={"10px"}
                   rows={4}
                   maxLength={200}
+                  onBlur={(e) => handleTrimAndReplace(e, "review", form)}
                 />
               </div>
               <Button

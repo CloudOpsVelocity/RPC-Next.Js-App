@@ -22,6 +22,7 @@ import { useSession } from "next-auth/react";
 import { MinusIcon, PlusIcon, infoIcon } from "@/app/images/commonSvgs";
 import Link from "next/link";
 import toast from "react-hot-toast";
+import handleTrimAndReplace from "@/app/utils/input/validations";
 
 type FaqWithBgProps = {
   data: FAQ[];
@@ -105,7 +106,7 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error"
   >();
-  const { getInputProps, onSubmit, setErrors, reset } = useForm({
+  const { getInputProps, onSubmit, setErrors, reset, setFieldValue } = useForm({
     initialValues: {
       question: "",
     },
@@ -167,6 +168,9 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
             className="placeholder:!text-[#4D6677] placeholder:!text-[28px] italic font-medium leading-[23.784px] !border !border-solid !border-[#737579] rounded-[10px]"
             size="lg"
             radius={"10px"}
+            onBlur={(e) =>
+              handleTrimAndReplace(e, "question", setFieldValue, "dis")
+            }
           />
         </div>
         <Button

@@ -5,10 +5,13 @@ import { useForm } from "@mantine/form";
 const handleTrimAndReplace = (
   e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   fieldName: string,
-  form: any
+  form: any,
+  type?: "dis" | "full"
 ) => {
   const value = e.target.value.trim().replace(/\s+/g, " ");
-  form.setFieldValue(fieldName, value);
+  type === "dis"
+    ? form(fieldName, value)
+    : form.setFieldValue(fieldName, value);
 };
 
 export default handleTrimAndReplace;
