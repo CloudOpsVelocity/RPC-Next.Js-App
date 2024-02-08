@@ -8,6 +8,7 @@ import BuildersBlock from "../../components/builder/buildersBlock";
 import { getBuilderDetails } from "@/app/utils/api/builder";
 import BuilderCarousel from "@/app/components/builder/Carousel";
 import Reqcallback from "@/app/components/builder/Reqcallback";
+import ProjectDrawer from "@/app/components/project/Drawer";
 
 type Props = { params: { slug: string } };
 
@@ -41,6 +42,7 @@ export default async function Page({ params: { slug } }: Props) {
           <Reqcallback builderId={Number(slug) as number} />
 
           <Footer />
+          <ProjectDrawer projName={data?.data?.companyName} />
         </>
       )}
     </div>
