@@ -44,12 +44,7 @@ export default function ManagementBlock({
         <span className="text-[#148B16] font-[700]">{companyName}'s</span>{" "}
         Vision
       </h1>
-      <About
-        id="builder_vision"
-        heading="Vision"
-        projName={"Vision"}
-        content={vision}
-      />
+      <About id="builder_vision" heading="" projName={""} content={vision} />
 
       <div className=" flex justify-start items-center w-full gap-[8px] mt-[-3%] mb-[2%] ">
         {callIconSvg}
