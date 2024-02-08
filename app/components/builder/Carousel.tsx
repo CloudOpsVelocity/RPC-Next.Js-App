@@ -26,7 +26,6 @@ type CardProps = {
 };
 
 export function ProjectCard({ type, cardData }: CardProps) {
-  console.log(cardData);
   const [, { open }] = useReqCallPopup();
   const { data: session } = useSession();
   const { toggleShortlist, shortlistedItems } = useShortlistAndCompare();
@@ -41,7 +40,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
     if (session) {
       toggleShortlist({
         id: cardData.projIdEnc,
-        status: isItemInShortlist ? "Y" : "N",
+        status: isItemInShortlist ? "N" : "Y",
       });
     }
   };
@@ -130,9 +129,11 @@ export function ProjectCard({ type, cardData }: CardProps) {
               </p>
             )}
 
-            {cardData.propTypes && (
+            {cardData.availableProperties && (
               <p className="mb-[6px] text-[#00487C] text-sm not-italic font-semibold leading-[normal] tracking-[0.56px]">
-                {cardData.propTypes.map((eachCity: string) => eachCity)}
+                {cardData.availableProperties.map(
+                  (eachCity: string) => eachCity
+                )}
               </p>
             )}
 
