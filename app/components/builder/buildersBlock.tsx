@@ -4,6 +4,10 @@ import { Carousel } from "@mantine/carousel";
 import React from "react";
 import { OtherBuilder } from "@/app/validations/types/builder";
 import { BackgroundImage } from "@mantine/core";
+import {
+  NextCarouselButton,
+  PrevCarouselButton,
+} from "@/app/images/commonSvgs";
 // ... (imports remain the same)
 
 export default function BuildersBlock({ data }: { data: OtherBuilder[] }) {
@@ -22,12 +26,15 @@ export default function BuildersBlock({ data }: { data: OtherBuilder[] }) {
         <div className="mt-8 relative  ">
           <Carousel
             //mih={"200px"}
-            slideGap={"xs"}
+            slideGap={"72px"}
             align="start"
             slideSize="15%"
             // withIndicators
             className=" flex justify-start items-center "
             slidesToScroll={1}
+            nextControlIcon={<NextCarouselButton />}
+            previousControlIcon={<PrevCarouselButton />}
+            px={120}
           >
             {data?.map((builder, index) => (
               <Carousel.Slide key={index}>

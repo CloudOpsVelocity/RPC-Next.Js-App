@@ -14,7 +14,7 @@ export default function ManagementBlock({
   officecontact,
 }: Data) {
   return (
-    <div className="shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] w-full p-[1%] mb-[6%] pt-[2%] pb-[2%] bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100  shadow-[#5b8fb630] ">
+    <div className="shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] w-full p-[1%] mb-[6%] pt-[2%]  bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100  shadow-[#5b8fb630] ">
       <h1 className=" text-[24px] lg:text-[32px] font-[600] text-[#001F35]">
         <span className="text-[#148B16] font-[700] ">{companyName} </span>
         Management{" "}
@@ -66,10 +66,10 @@ export default function ManagementBlock({
       <div className="flex justify-start items-start w-full flex-wrap gap-[3%] mb-[2%] mt-[1%] ">
         {citiesName?.map((item, index) => (
           <p
-            className="text-[16px] md:text-[24px] font-[500] text-[#00487C] bg-[#FFF] rounded-[10px] mb-[3%] shadow-lg p-[1%] px-[16px] hover:bg-[#00487C] hover:text-[#FFF] cursor-pointer "
+            className="text-[16px] md:text-[24px]  text-[#00487C] bg-[#FFF] rounded-[10px] shadow-lg p-[1%] px-[16px] hover:bg-[#00487C] hover:text-[#FFF] cursor-pointer ] text-2xl not-italic  font-semibold leading-[normal] tracking-[0.96px]"
             key={index}
           >
-            {item}
+            Project in <span className="capitalize">{item}</span>
           </p>
         ))}
       </div>
