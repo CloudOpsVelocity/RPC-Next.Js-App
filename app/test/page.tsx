@@ -1,4 +1,4 @@
-// "use client";
+"use client";
 // import dynamic from "next/dynamic";
 // import { useMemo } from "react";
 
@@ -21,15 +21,18 @@
 
 import React from "react";
 import LeafMap from "../components/project/map";
+import { Button, Popover, Text } from "@mantine/core";
+import FilterPopup from "../search/filterPopup";
 
 export default function Page() {
   return (
-    <div>
-      <LeafMap
-        lang={"77.60569269999999"}
-        lat="12.9856503"
-        projName="The Boss Naruto Uchimaru"
-      />
-    </div>
+    <Popover width={"auto"} position="bottom" withArrow shadow="md">
+      <Popover.Target>
+        <Button>Toggle popover</Button>
+      </Popover.Target>
+      <Popover.Dropdown>
+        <FilterPopup />
+      </Popover.Dropdown>
+    </Popover>
   );
 }
