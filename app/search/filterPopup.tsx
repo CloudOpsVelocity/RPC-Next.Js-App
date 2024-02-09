@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import { searchDetails } from "../data/searchDetails";
 import Button from "@/app/elements/button";
@@ -11,6 +12,7 @@ import { Checkbox, MultiSelect, Radio, RangeSlider } from "@mantine/core";
 import classes from "../styles/search.module.css";
 import { propertyDetailsTypes, projectprops } from "../data/projectDetails";
 import ClearAll from "./components/ClearAll";
+import { SEARCH_FILTER_DATA } from "../data/search";
 
 const FilterPopup = () => {
   const [current, setCurrent] = useState("Project Status");
@@ -58,29 +60,17 @@ const FilterPopup = () => {
             Property Status
           </h3>
           <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
-            <Radio
-              iconColor="dark.8"
-              color="green"
-              label="Ready to Move"
-              name="propertyStatus"
-              value="check"
-            />
-
-            <Radio
-              iconColor="dark.8"
-              color="green"
-              label="New Launch"
-              name="propertyStatus"
-              value="check"
-            />
-
-            <Radio
-              iconColor="dark.8"
-              color="green"
-              label="Under Construction"
-              name="propertyStatus"
-              value="check"
-            />
+            {SEARCH_FILTER_DATA.projectstatus.map((eachStatus, index) => {
+              return (
+                <Radio
+                  iconColor="dark.8"
+                  color="green"
+                  label={eachStatus.Label}
+                  name="propertyStatus"
+                  value="check"
+                />
+              );
+            })}
           </div>
 
           <h3 className=" text-[#202020] mb-[2%] text-[14px] font-[500] ">
@@ -119,6 +109,7 @@ const FilterPopup = () => {
             searchable
             nothingFoundMessage="Nothing found..."
             value={locality}
+            comboboxProps={{ withinPortal: false }}
             onChange={setLocality}
             leftSectionPointerEvents="none"
             leftSection={lensSvg}
@@ -136,8 +127,8 @@ const FilterPopup = () => {
                   iconColor="dark.8"
                   color="green"
                   label={propertyDetailsTypes?.get(keyName)?.name}
-                  name="propertyType"
                   value={propertyDetailsTypes?.get(keyName)?.id}
+                  name="propertyType"
                   style={{ whiteSpace: "nowrap", marginBottom: "10px" }}
                 />
               );
@@ -148,7 +139,11 @@ const FilterPopup = () => {
             Unit Type
           </h3>
           <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
-            <Checkbox label="1 RK" color="green" />
+            {SEARCH_FILTER_DATA.bhkDetails.map((eachStatus, index) => {
+              return (
+                <Checkbox label={eachStatus.title} color="green" key={index} />
+              );
+            })}
           </div>
 
           <h3 className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] ">
@@ -241,7 +236,7 @@ const FilterPopup = () => {
           <Checkbox label="RERA Verified" color="green" />
 
           <h3 className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] ">
-            Amenities
+            Listed By
           </h3>
           <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
             <Checkbox label="Builder" color="green" />
@@ -287,6 +282,7 @@ const FilterPopup = () => {
             leftSectionPointerEvents="none"
             leftSection={lensSvg}
             style={{ width: "50%" }}
+            comboboxProps={{ withinPortal: false }}
           />
         </div>
       </div>

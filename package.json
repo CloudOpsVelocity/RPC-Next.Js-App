@@ -21,6 +21,7 @@
     "@mantine/hooks": "^7.3.2",
     "@mantine/modals": "^7.3.2",
     "@react-google-maps/api": "^2.19.2",
+    "@tanstack/react-query-devtools": "^5.18.1",
     "@vidstack/react": "^1.9.8",
     "axios": "^1.6.2",
     "clsx": "^2.1.0",

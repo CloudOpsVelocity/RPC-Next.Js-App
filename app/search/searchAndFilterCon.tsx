@@ -10,13 +10,14 @@ import classes from "../styles/search.module.css";
 import { useQueryState } from "nuqs";
 import { useClickOutside } from "@mantine/hooks";
 import BhkFilter from "./components/bhk";
+import { useAtom } from "jotai";
+import { searachFilterAtom } from "../store/search";
+import PropTypeFilter from "./components/proptype";
+import BugdetFilter from "./components/buget";
 
 const SearchAndFilterCon = () => {
-  const [opened, setOpened] = useState(false);
-  const ref = useClickOutside(() => setOpened(false));
-  const [selected, setSelected] = useState("");
+  const [filters, setFilters] = useAtom(searachFilterAtom);
   const [name, setName] = useQueryState("q");
-
 
   return (
     <div className="m-[2%] w-full flex mt-[90px] pl-[2%] gap-[20px] justify-start items-center ">
@@ -65,84 +66,94 @@ const SearchAndFilterCon = () => {
       </div>
       <Popover
         width={"auto"}
-      
         trapFocus
         position="bottom"
         withArrow
         shadow="md"
-        offset={{ mainAxis: 10, crossAxis: 0}}
+        offset={{ mainAxis: 10, crossAxis: 0 }}
       >
         <Popover.Target>
           <button
             // onClick={() => setOpened((o) => !o)}
             className=" text-[#0073C6] text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md "
           >
-             <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="10"
-            height="10"
-            viewBox="0 0 10 10"
-            fill="none"
-          >
-            <circle cx="5" cy="5" r="5" fill="#148B16" />
-          </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="10"
+              height="10"
+              viewBox="0 0 10 10"
+              fill="none"
+            >
+              <circle cx="5" cy="5" r="5" fill="#148B16" />
+            </svg>
             BHK
           </button>
         </Popover.Target>
-        <Popover.Dropdown ref={ref} className="!z-50">
+        <Popover.Dropdown className="!z-50" p={0}>
           <BhkFilter />
         </Popover.Dropdown>
       </Popover>
-      {/* <Button
-        title="BHK"
-        buttonClass=" text-[#0073C6] text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md "
-        icon={
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="10"
-            height="10"
-            viewBox="0 0 10 10"
-            fill="none"
-          >
-            <circle cx="5" cy="5" r="5" fill="#148B16" />
-          </svg>
-        }
-      /> */}
-      <Button
-        title="Property Type"
-        buttonClass="whitespace-nowrap text-[#0073C6] text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md "
-        icon={
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="10"
-            height="10"
-            viewBox="0 0 10 10"
-            fill="none"
-          >
-            <circle cx="5" cy="5" r="5" fill="#148B16" />
-          </svg>
-        }
-      />
-      <Button
-        title="Budget"
-        buttonClass=" text-[#0073C6] text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md "
-        icon={
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="10"
-            height="10"
-            viewBox="0 0 10 10"
-            fill="none"
-          >
-            <circle cx="5" cy="5" r="5" fill="#148B16" />
-          </svg>
-        }
-      />
-
-    
       <Popover
         width={"auto"}
-  
+        trapFocus
+        position="bottom"
+        withArrow
+        shadow="md"
+        offset={{ mainAxis: 10, crossAxis: 0 }}
+      >
+        <Popover.Target>
+          <button
+            // onClick={() => setOpened((o) => !o)}
+            className=" text-[#0073C6] text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md "
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="10"
+              height="10"
+              viewBox="0 0 10 10"
+              fill="none"
+            >
+              <circle cx="5" cy="5" r="5" fill="#148B16" />
+            </svg>
+            Property Type
+          </button>
+        </Popover.Target>
+        <Popover.Dropdown className="!z-50" p={0}>
+          <PropTypeFilter />
+        </Popover.Dropdown>
+      </Popover>
+      <Popover
+        width={"auto"}
+        trapFocus
+        position="bottom"
+        withArrow
+        shadow="md"
+        offset={{ mainAxis: 10, crossAxis: 0 }}
+      >
+        <Popover.Target>
+          <button
+            // onClick={() => setOpened((o) => !o)}
+            className=" text-[#0073C6] text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md "
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="10"
+              height="10"
+              viewBox="0 0 10 10"
+              fill="none"
+            >
+              <circle cx="5" cy="5" r="5" fill="#148B16" />
+            </svg>
+            Budget
+          </button>
+        </Popover.Target>
+        <Popover.Dropdown className="!z-50" p={0}>
+          <BugdetFilter />
+        </Popover.Dropdown>
+      </Popover>
+
+      <Popover
+        width={"auto"}
         trapFocus
         position="bottom"
         withArrow
@@ -150,17 +161,14 @@ const SearchAndFilterCon = () => {
         offset={{ mainAxis: 10, crossAxis: -200 }}
       >
         <Popover.Target>
-          <button
-           
-            className=" text-[#0073C6] text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md "
-          >
+          <button className=" text-[#0073C6] text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md ">
             <div className="text-[#FFF] bg-[#148B16] rounded-[50%] text-[16px] font-[700] w-[24px] h-[24px] flex justify-center items-center">
               4
             </div>
             Filters
           </button>
         </Popover.Target>
-        <Popover.Dropdown ref={ref} className="!z-50">
+        <Popover.Dropdown className="!z-50">
           <FilterPopup />
         </Popover.Dropdown>
       </Popover>

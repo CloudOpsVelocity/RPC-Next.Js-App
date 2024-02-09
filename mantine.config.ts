@@ -6,5 +6,6 @@ const Mantine = createTheme({
   fontFamily: "Josefin Sans, sans-serif",
   fontFamilyMonospace: "Monaco, Courier, monospace",
   headings: { fontFamily: "Gabarito, sans-serif" },
+  cursorType: "pointer",
 });
 export default Mantine;

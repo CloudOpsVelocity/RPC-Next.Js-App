@@ -2,8 +2,10 @@ import { SEARCH_FILTER_DATA } from "@/app/data/search";
 import { Checkbox } from "@mantine/core";
 import React from "react";
 import ClearAll from "../ClearAll";
+import { propertyDetailsTypes } from "@/app/data/projectDetails";
 
-export default function BhkFilter() {
+export default function PropTypeFilter() {
+  const keys = [35, 33, 31, 34, 32];
   return (
     <div className="max-w-[300px] ">
       <ClearAll />
@@ -13,14 +15,15 @@ export default function BhkFilter() {
           Unit Type
         </h3>
         <div className="flex  mb-[3%] t gap-[4%]  flex-wrap justify-start items-center ">
-          {SEARCH_FILTER_DATA.bhkDetails.map((eachItem, index) => {
+          {keys.map((keyName, index) => {
             return (
               <Checkbox
-                w={80}
+                w={130}
                 key={index}
                 color="green"
                 mt={10}
-                label={eachItem.title}
+                label={propertyDetailsTypes?.get(keyName)?.name}
+                value={propertyDetailsTypes?.get(keyName)?.id}
               />
             );
           })}
