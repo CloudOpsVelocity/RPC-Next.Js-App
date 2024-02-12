@@ -1,15 +1,37 @@
 import {
   initialState,
   searachFilterAtom,
-  appliedFiltersAtom,
   SearchFilter,
+  appliedFiltersParams,
 } from "@/app/store/search";
 import { useAtom } from "jotai";
-import React from "react";
-
+import { useSearchParams } from "next/navigation";
+import { useQueryStates, parseAsString, parseAsInteger } from "nuqs";
+import { useEffect } from "react";
+import { useQuery } from "react-query";
+const paramsInit = {
+  current: parseAsString,
+  locality: parseAsString,
+  propTypes: parseAsString,
+  unitTypes: parseAsString,
+  bathRooms: parseAsString,
+  parkings: parseAsString,
+  amenities: parseAsString,
+  listedBy: parseAsString,
+  reraVerified: parseAsString,
+  minArea: parseAsInteger,
+  maxArea: parseAsInteger,
+  minPrice: parseAsInteger,
+  maxPrice: parseAsInteger,
+};
 export default function useSearchFilters() {
   const [filters, setFilters] = useAtom(searachFilterAtom);
-  const [appliedFilters, setAppliedFilters] = useAtom(appliedFiltersAtom);
+  const p = useSearchParams();
+  const [appliedFilters, setAppliedFilters] = useAtom(appliedFiltersParams);
+  const [params, setParams] = useQueryStates(paramsInit, {
+    history: "push",
+  });
+
   const setStatus = (currentItem: number) => {
     setFilters({ ...filters, current: currentItem });
   };
@@ -87,21 +109,28 @@ export default function useSearchFilters() {
           ...prev,
           unitTypes: [],
         }));
+        setParams({ unitTypes: null });
         break;
       case "price":
         setFilters((prev) => ({
           ...prev,
           bugdetValue: [0, 5],
         }));
+        setParams({ minPrice: null, maxPrice: null });
         break;
       case "all":
         setFilters(initialState);
+        Object.keys(paramsInit).map((key) => {
+          setParams({ [key]: null });
+        });
+
         break;
       case "propType":
         setFilters((prev) => ({
           ...prev,
           propTypes: null,
         }));
+        setParams({ propTypes: null });
         break;
       default:
         setFilters(initialState);
@@ -109,13 +138,9 @@ export default function useSearchFilters() {
     }
   };
   const handleAppliedFilters = () => {
-    setAppliedFilters(filters);
+    setAppliedFilters({ runner: setParams });
   };
-  const getSearchData = async () => {
-    const parseData = filtersParser(appliedFilters);
-    // before doing something i need to do something parseData Means change data into what is required data to api call
-    return [];
-  };
+
   return {
     filters,
     setStatus,
@@ -126,29 +151,7 @@ export default function useSearchFilters() {
     handleSliderChange,
     handleReset,
     handleAppliedFilters,
+    setParams,
+    params,
   };
 }
-
-const filtersParser = (data: SearchFilter) => {
-  const parsedData: any = {}; // Initialize an empty object to store parsed data
-
-  // Map properties from appliedFilters to API parameters
-  parsedData.localities = data.locality;
-  parsedData.city = data.current; // Assuming current represents city ID
-  parsedData.projStatus = null; // Need to handle project status
-  parsedData.propType = data.propTypes;
-  parsedData.bhk = data.unitTypes;
-  parsedData.minPrice = data.bugdetValue[0];
-  parsedData.maxPrice = data.bugdetValue[1];
-  parsedData.minArea = data.areaValue[0];
-  parsedData.maxArea = data.areaValue[1];
-  parsedData.bathroom = data.bathRooms;
-  parsedData.parking = data.parkings;
-  parsedData.amenities = data.amenities;
-  parsedData.postedBy = null; // Need to handle postedBy
-  parsedData.builderIds = null; // Need to handle builderIds
-
-  // You may need to handle additional properties as per the API requirements
-
-  return parsedData;
-};

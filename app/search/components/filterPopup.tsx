@@ -1,21 +1,19 @@
 "use client";
 import React, { useState } from "react";
-import { searchDetails } from "../data/searchDetails";
+import { searchDetails } from "../../data/searchDetails";
 import Button from "@/app/elements/button";
 import {
   fourStarIcon,
   lensSvg,
   miniItemsCrossIcon,
   notificationIcon,
-} from "../images/commonSvgs";
+} from "../../images/commonSvgs";
 import { Checkbox, MultiSelect, Radio, RangeSlider } from "@mantine/core";
-import classes from "../styles/search.module.css";
-import { propertyDetailsTypes, projectprops } from "../data/projectDetails";
-import ClearAll from "./components/ClearAll";
-import { SEARCH_FILTER_DATA } from "../data/search";
-import { useAtom } from "jotai";
-import { searachFilterAtom } from "../store/search";
-import useSearchFilters from "../hooks/search";
+import classes from "@/app/styles/search.module.css";
+import { propertyDetailsTypes } from "../../data/projectDetails";
+import ClearAll from "./ClearAll";
+import { SEARCH_FILTER_DATA } from "../../data/search";
+import useSearchFilters from "../../hooks/search";
 
 const FilterPopup = () => {
   const [current, setCurrent] = useState("Project Status");
@@ -205,17 +203,24 @@ const FilterPopup = () => {
             key="budgetSlider"
             marks={[
               { value: 0, label: "₹ 0" },
+              { value: 0.5, label: "₹ 0.5 Cr" },
               { value: 1, label: "₹ 1 Cr" },
+              { value: 1.5, label: "₹ 1.5 Cr" },
               { value: 2, label: "₹ 2 Cr" },
+              { value: 2.5, label: "₹ 2.5 Cr" },
               { value: 3, label: "₹ 3 Cr" },
+              { value: 3.5, label: "₹ 3.5 Cr" },
               { value: 4, label: "₹ 4 Cr" },
-              { value: 5, label: "₹ 5 Cr+" },
+              { value: 4.5, label: "₹ 4.5 Cr" },
+              { value: 5, label: "₹ 5 Cr" },
             ]}
+            minRange={0.2}
             min={0}
             max={5}
-            value={filters.bugdetValue}
+            step={0.05}
             onChange={(value) => handleSliderChange("bugdetValue", value)}
             style={{ width: "80%" }}
+            defaultValue={[filters.bugdetValue[0], filters.bugdetValue[1]]}
           />
 
           <h3 className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[5%] ">
@@ -325,4 +330,4 @@ const FilterPopup = () => {
   );
 };
 
-export default FilterPopup;
+export { FilterPopup };

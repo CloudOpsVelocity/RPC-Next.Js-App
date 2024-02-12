@@ -29,7 +29,10 @@ export default function Loans({
                 <div className="flex  flex-col justify-center items-center mt-4 sm:max-w-[150px] md:max-w-max text-center">
                   <Image
                     key={index}
-                    src={BankDetailsList?.get(item.bankid)?.url as string}
+                    src={
+                      (BankDetailsList?.get(item.bankid)?.url as string) ??
+                      "https://d1l03fubsuphsh.cloudfront.net/staticmedia-images-icons/project-detail/Bank-projectproperty.png"
+                    }
                     alt={item.bankName}
                     width={100}
                     height={50}

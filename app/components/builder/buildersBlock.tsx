@@ -8,6 +8,7 @@ import {
   NextCarouselButton,
   PrevCarouselButton,
 } from "@/app/images/commonSvgs";
+import build from "next/dist/build";
 // ... (imports remain the same)
 
 export default function BuildersBlock({ data }: { data: OtherBuilder[] }) {
@@ -36,23 +37,27 @@ export default function BuildersBlock({ data }: { data: OtherBuilder[] }) {
             previousControlIcon={<PrevCarouselButton />}
             px={140}
           >
-            {data?.map((builder, index) => (
-              <Carousel.Slide key={index}>
-                <div
-                  className="rounded-[10px] w-[107px] h-[105px] md:w-[140px] md:h-[136px] lg:w-[209px] lg:h-[203px] shadow-lg bg-gray-300"
-                  style={{
-                    backgroundImage: `url(${
-                      builder.logo || "fallback-image-url"
-                    })`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                  }}
-                ></div>
-                <p className="text-black text-center w-[209px]">
-                  {builder.name}
-                </p>
-              </Carousel.Slide>
-            ))}
+            {data?.map((builder, index) => {
+              const logo =
+                builder.logo === null
+                  ? "https://d1l03fubsuphsh.cloudfront.net/staticmedia-images-icons/builderpage/builder-noimage.png"
+                  : builder.logo;
+              return (
+                <Carousel.Slide key={index}>
+                  <div
+                    className=" w-[107px] h-[105px] md:w-[140px] md:h-[136px] lg:w-[209px] lg:h-[203px]  bg-gray-300 shadow-[0px_4px_15px_0px_rgba(0,0,0,0.10)] rounded-[10px]"
+                    style={{
+                      backgroundImage: `url(${logo})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                    }}
+                  ></div>
+                  <p className="text-[#202020] text-xl not-italic font-semibold leading-[normal] text-center mt-4 w-[209px]">
+                    {builder.name}
+                  </p>
+                </Carousel.Slide>
+              );
+            })}
           </Carousel>
         </div>
       </div>

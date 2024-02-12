@@ -5,6 +5,7 @@ export interface Main {
 }
 
 export interface Data {
+  logo: string | null;
   companyName: string;
   builderAddress: string;
   mission: string;

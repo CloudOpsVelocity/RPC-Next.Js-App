@@ -7,7 +7,7 @@ import {
   DropDownIcon,
   emptyFilesIcon,
   strikeIconIcon,
-} from "../images/commonSvgs";
+} from "../../images/commonSvgs";
 
 const LeftSideBlock = () => {
   let projectsData: any[] = [1, 2, 3, , 4, 5, 6, 7, 8];
@@ -90,4 +90,4 @@ const LeftSideBlock = () => {
   );
 };
 
-export default LeftSideBlock;
+export { LeftSideBlock };

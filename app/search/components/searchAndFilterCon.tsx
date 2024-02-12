@@ -3,22 +3,20 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { MultiSelect, Popover, Select } from "@mantine/core";
-import Button from "@/app/elements/button";
-import FilterPopup from "./filterPopup";
-import classes from "../styles/search.module.css";
-// import { getAllCitiesDetails } from '../utils/stats_cities';
+import { FilterPopup } from "./filterPopup";
+import classes from "@/app/styles/search.module.css";
 import { useQueryState } from "nuqs";
-import { useClickOutside } from "@mantine/hooks";
-import BhkFilter from "./components/bhk";
-import { useAtom } from "jotai";
-import { searachFilterAtom } from "../store/search";
-import PropTypeFilter from "./components/proptype";
-import BugdetFilter from "./components/buget";
-import useSearchFilters from "../hooks/search";
+import BhkFilter from "./bhk";
+import PropTypeFilter from "./proptype";
+import BugdetFilter from "./buget";
+import useSearchFilters from "../../hooks/search";
 
 const SearchAndFilterCon = () => {
   const { countAppliedFilters } = useSearchFilters();
   const [name, setName] = useQueryState("q");
+  const onSearchChange = (value: string) => {
+    !value ? setName(null) : setName(value);
+  };
 
   return (
     <div className="m-[2%] w-full flex mt-[90px] pl-[2%] gap-[20px] justify-start items-center ">
@@ -55,7 +53,7 @@ const SearchAndFilterCon = () => {
             { value: "8", label: "Delhi" },
           ]}
           rightSection={<span></span>}
-          onSearchChange={(value) => setName(value)}
+          onSearchChange={onSearchChange}
           searchable
           clearable
           nothingFoundMessage="Nothing found..."
@@ -74,10 +72,7 @@ const SearchAndFilterCon = () => {
         offset={{ mainAxis: 10, crossAxis: 0 }}
       >
         <Popover.Target>
-          <button
-            // onClick={() => setOpened((o) => !o)}
-            className=" text-[#0073C6] text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md "
-          >
+          <button className=" text-[#0073C6] text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md ">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="10"
@@ -177,7 +172,7 @@ const SearchAndFilterCon = () => {
   );
 };
 
-export default SearchAndFilterCon;
+export { SearchAndFilterCon };
 
 const DropDownIcon = () => {
   return (

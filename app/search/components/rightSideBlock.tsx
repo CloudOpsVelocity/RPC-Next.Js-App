@@ -1,7 +1,7 @@
 "use client";
 import dynamic from "next/dynamic";
 import React, { useMemo } from "react";
-import MapSkeleton from "../components/maps/Skeleton";
+import MapSkeleton from "../../components/maps/Skeleton";
 
 const RightSideBlock = () => {
   const Map = useMemo(
@@ -19,4 +19,4 @@ const RightSideBlock = () => {
   );
 };
 
-export default RightSideBlock;
+export { RightSideBlock };

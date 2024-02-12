@@ -5,7 +5,7 @@ import ClearAll from "../ClearAll";
 import useSearchFilters from "@/app/hooks/search";
 
 export default function BhkFilter() {
-  const { filters, handleCheckboxClick } = useSearchFilters();
+  const { filters, handleCheckboxClick, params } = useSearchFilters();
   return (
     <div className="max-w-[300px] ">
       <ClearAll type="unitType" />

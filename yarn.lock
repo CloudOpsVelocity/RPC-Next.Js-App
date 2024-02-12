@@ -3773,7 +3773,12 @@ jose@^4.11.4, jose@^4.15.4:
   resolved "https://registry.npmjs.org/jose/-/jose-4.15.4.tgz"
   integrity sha512-W+oqK4H+r5sITxfxpSU+MMdr/YSWGvgZMQDIsNoBDGGy4i7GBPTtvFKibQzW06n3U3TqHjhvBJsirShsEJ6eeQ==
 
-jotai@^2.6.1:
+jotai-location@^0.5.2:
+  version "0.5.2"
+  resolved "https://registry.npmjs.org/jotai-location/-/jotai-location-0.5.2.tgz"
+  integrity sha512-4S9hDh1wYp4SG4Laq3+Xd0GdW7jwnWlbEuL8U22kv3wUZW892n6gXlNhwU0LaoXnWoGG0gtjSLBuFm5iodFKLg==
+
+jotai@^2.6.1, jotai@>=1.11.0:
   version "2.6.1"
   resolved "https://registry.npmjs.org/jotai/-/jotai-2.6.1.tgz"
   integrity sha512-GLQtAnA9iEKRMXnyCjf1azIxfQi5JausX2EI5qSlb59j4i73ZEyV/EXPDEAQj4uQNZYEefi3degv/Pw3+L/Dtg==

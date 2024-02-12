@@ -1,4 +1,11 @@
+import {
+  filterParser,
+  filtersParserToQueryParams,
+  propertiesToProcess,
+} from "@/app/utils/search";
+import { convertToOriginalState } from "@/app/utils/search/transform";
 import { atom } from "jotai";
+import { atomWithLocation } from "jotai-location";
 
 export interface SearchFilter {
   current: number | null;
@@ -29,4 +36,23 @@ export const initialState: SearchFilter = {
 };
 
 export const searachFilterAtom = atom<SearchFilter>(initialState);
-export const appliedFiltersAtom = atom<SearchFilter>(initialState);
+
+const locationAtom = atomWithLocation();
+
+export const appliedFiltersParams = atom(
+  (get) => {
+    let queryData = {};
+    const location = get(locationAtom);
+    location.searchParams?.forEach((value, key) => {
+      // @ts-ignore
+      queryData[key] = value;
+    });
+    const data = convertToOriginalState(queryData);
+    return data;
+  },
+  (get, set, t: any) => {
+    const appliedFilters = get(searachFilterAtom);
+    const parsedData = filterParser(appliedFilters);
+    t.runner(parsedData);
+  }
+);
