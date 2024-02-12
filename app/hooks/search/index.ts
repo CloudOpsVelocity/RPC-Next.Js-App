@@ -1,11 +1,15 @@
-import { initialState, searachFilterAtom } from "@/app/store/search";
+import {
+  initialState,
+  searachFilterAtom,
+  appliedFiltersAtom,
+  SearchFilter,
+} from "@/app/store/search";
 import { useAtom } from "jotai";
 import React from "react";
 
 export default function useSearchFilters() {
   const [filters, setFilters] = useAtom(searachFilterAtom);
-  console.log("🚀 ~ useSearchFilters ~ filters:", filters);
-
+  const [appliedFilters, setAppliedFilters] = useAtom(appliedFiltersAtom);
   const setStatus = (currentItem: number) => {
     setFilters({ ...filters, current: currentItem });
   };
@@ -64,27 +68,6 @@ export default function useSearchFilters() {
     return count;
   };
 
-  //   const countAppliedFilters1 = (): number => {
-  //     let count: number = 0;
-  //     for (const key in filters) {
-  //       if (Object.prototype.hasOwnProperty.call(filters, key)) {
-  //         if (
-  //           filters[key] !== null &&
-  //           filters[key] !== undefined &&
-  //           filters[key] !== false && // For boolean values
-  //           !(Array.isArray(filters[key]) && filters[key].length === 0) && // For arrays
-  //           !(
-  //             typeof filters[key] === "object" &&
-  //             Object.keys(filters[key]).length === 0
-  //           ) // For objects
-  //         ) {
-  //           count++;
-  //         }
-  //       }
-  //     }
-  //     return count;
-  //   };
-
   const handleBooleanCheck = () => {
     setFilters((prevFilters) => ({
       ...prevFilters,
@@ -97,8 +80,41 @@ export default function useSearchFilters() {
       [key]: newValue,
     }));
   };
-  const handleReset = () => {
-    setFilters(initialState);
+  const handleReset = (type: "unitType" | "price" | "all" | "propType") => {
+    switch (type) {
+      case "unitType":
+        setFilters((prev) => ({
+          ...prev,
+          unitTypes: [],
+        }));
+        break;
+      case "price":
+        setFilters((prev) => ({
+          ...prev,
+          bugdetValue: [0, 5],
+        }));
+        break;
+      case "all":
+        setFilters(initialState);
+        break;
+      case "propType":
+        setFilters((prev) => ({
+          ...prev,
+          propTypes: null,
+        }));
+        break;
+      default:
+        setFilters(initialState);
+        break;
+    }
+  };
+  const handleAppliedFilters = () => {
+    setAppliedFilters(filters);
+  };
+  const getSearchData = async () => {
+    const parseData = filtersParser(appliedFilters);
+    // before doing something i need to do something parseData Means change data into what is required data to api call
+    return [];
   };
   return {
     filters,
@@ -109,5 +125,30 @@ export default function useSearchFilters() {
     handleBooleanCheck,
     handleSliderChange,
     handleReset,
+    handleAppliedFilters,
   };
 }
+
+const filtersParser = (data: SearchFilter) => {
+  const parsedData: any = {}; // Initialize an empty object to store parsed data
+
+  // Map properties from appliedFilters to API parameters
+  parsedData.localities = data.locality;
+  parsedData.city = data.current; // Assuming current represents city ID
+  parsedData.projStatus = null; // Need to handle project status
+  parsedData.propType = data.propTypes;
+  parsedData.bhk = data.unitTypes;
+  parsedData.minPrice = data.bugdetValue[0];
+  parsedData.maxPrice = data.bugdetValue[1];
+  parsedData.minArea = data.areaValue[0];
+  parsedData.maxArea = data.areaValue[1];
+  parsedData.bathroom = data.bathRooms;
+  parsedData.parking = data.parkings;
+  parsedData.amenities = data.amenities;
+  parsedData.postedBy = null; // Need to handle postedBy
+  parsedData.builderIds = null; // Need to handle builderIds
+
+  // You may need to handle additional properties as per the API requirements
+
+  return parsedData;
+};

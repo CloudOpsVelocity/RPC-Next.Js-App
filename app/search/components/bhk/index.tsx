@@ -8,7 +8,7 @@ export default function BhkFilter() {
   const { filters, handleCheckboxClick } = useSearchFilters();
   return (
     <div className="max-w-[300px] ">
-      <ClearAll />
+      <ClearAll type="unitType" />
       <div className="p-3">
         {" "}
         <h3 className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] ">

@@ -62,7 +62,7 @@ const FilterPopup = () => {
         </div>
       </div>
       <div className="w-full">
-        <ClearAll />
+        <ClearAll type="all" />
         {/* Right Side Fields Con */}
         <div className="w-full p-[1%] pl-[2%] max-h-[400px] overflow-y-auto pb-[5%] ">
           <h3 className=" text-[#202020] mb-[2%] text-[14px] font-[500] ">
@@ -229,6 +229,7 @@ const FilterPopup = () => {
                   label={`${i == 5 ? "+5" : i + 1} Bath`}
                   color="green"
                   onClick={() => handleCheckboxClick("bathRooms", i + 1)}
+                  checked={filters.bathRooms.includes(i + 1)}
                 />
               );
             })}
@@ -252,6 +253,7 @@ const FilterPopup = () => {
                   label={`${i == 6 ? "+6" : i + 1}`}
                   color="green"
                   onClick={() => handleCheckboxClick("parkings", i + 1)}
+                  checked={filters.parkings.includes(i + 1)}
                 />
               );
             })}
@@ -265,6 +267,7 @@ const FilterPopup = () => {
             color="green"
             mb={"3%"}
             onClick={() => handleBooleanCheck()}
+            checked={filters.reraVerified}
           />
 
           {/* <h3 className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] ">

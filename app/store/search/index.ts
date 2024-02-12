@@ -29,3 +29,4 @@ export const initialState: SearchFilter = {
 };
 
 export const searachFilterAtom = atom<SearchFilter>(initialState);
+export const appliedFiltersAtom = atom<SearchFilter>(initialState);
