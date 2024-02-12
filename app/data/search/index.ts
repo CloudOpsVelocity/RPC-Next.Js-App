@@ -76,4 +76,38 @@ export const SEARCH_FILTER_DATA = {
       seq: 3,
     },
   ],
+  listedBy: [
+    {
+      cid: 1,
+      constDesc: "RERA",
+      constGroup: "listedBy",
+      constType: "IN",
+      constParentGroup: "listedBy",
+      parentGroupId: 100,
+      seq: 1,
+    },
+    {
+      cid: 2,
+      constDesc: "Builder",
+      constGroup: "listedBy",
+      constType: "CON",
+      constParentGroup: "listedBy",
+      parentGroupId: 100,
+      seq: 2,
+    },
+    {
+      cid: 3,
+      constDesc: "Agent",
+      constGroup: "listedBy",
+      constType: "CON",
+      constParentGroup: "listedBy",
+      parentGroupId: 100,
+      seq: 3,
+    },
+  ],
+  amenities: [
+    {
+      label: "Lift",
+    },
+  ],
 };

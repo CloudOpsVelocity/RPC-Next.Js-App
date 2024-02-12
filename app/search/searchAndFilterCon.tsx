@@ -14,9 +14,10 @@ import { useAtom } from "jotai";
 import { searachFilterAtom } from "../store/search";
 import PropTypeFilter from "./components/proptype";
 import BugdetFilter from "./components/buget";
+import useSearchFilters from "../hooks/search";
 
 const SearchAndFilterCon = () => {
-  const [filters, setFilters] = useAtom(searachFilterAtom);
+  const { countAppliedFilters } = useSearchFilters();
   const [name, setName] = useQueryState("q");
 
   return (
@@ -163,7 +164,7 @@ const SearchAndFilterCon = () => {
         <Popover.Target>
           <button className=" text-[#0073C6] text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md ">
             <div className="text-[#FFF] bg-[#148B16] rounded-[50%] text-[16px] font-[700] w-[24px] h-[24px] flex justify-center items-center">
-              4
+              {countAppliedFilters()}
             </div>
             Filters
           </button>

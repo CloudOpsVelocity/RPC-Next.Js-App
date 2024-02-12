@@ -9,7 +9,6 @@ import React from "react";
 
 export default function Amenties({ data }: { data: AmenityList[] }) {
   const { data: amenitiesFromDB, error, isLoading } = useAmenities();
-  // const keys = Object.keys(amenitiesFromDB);
 
   const [{ expanded }, setReadMore] = useAtom(readMoreAtom);
   const handleReadMoreClick = () => {

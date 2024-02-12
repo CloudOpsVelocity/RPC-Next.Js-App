@@ -13,13 +13,14 @@ import classes from "../styles/search.module.css";
 import { propertyDetailsTypes, projectprops } from "../data/projectDetails";
 import ClearAll from "./components/ClearAll";
 import { SEARCH_FILTER_DATA } from "../data/search";
+import { useAtom } from "jotai";
+import { searachFilterAtom } from "../store/search";
+import useSearchFilters from "../hooks/search";
 
 const FilterPopup = () => {
   const [current, setCurrent] = useState("Project Status");
   const [locality, setLocality] = useState<string[]>([]);
-  const [sliderValue, setSliderValue] = useState<[number, number]>([0, 5000]);
-  const [sliderBudget, setSliderBudget] = useState<[number, number]>([0, 5]);
-  const [propKeys, setPropKeys] = useState([35, 33, 31, 34, 32]);
+  const propKeys = [35, 33, 31, 34, 32];
 
   const removeLocality = (index: any) => {
     let oldArray = [...locality];
@@ -27,6 +28,14 @@ const FilterPopup = () => {
     setLocality(oldArray);
     console.log(index);
   };
+  const {
+    filters,
+    handleCheckboxClick,
+    setPropTypes,
+    setStatus,
+    handleBooleanCheck,
+    handleSliderChange,
+  } = useSearchFilters();
 
   return (
     <div className=" flex justify-start items-start w-[70vw] top-[160px] left-[70%]  rounded-[10px] shadow-md bg-[#FFF] ">
@@ -63,11 +72,13 @@ const FilterPopup = () => {
             {SEARCH_FILTER_DATA.projectstatus.map((eachStatus, index) => {
               return (
                 <Radio
+                  checked={eachStatus.cid == filters.current}
+                  value={eachStatus.cid}
                   iconColor="dark.8"
                   color="green"
+                  onChange={() => setStatus(eachStatus.cid)}
                   label={eachStatus.Label}
                   name="propertyStatus"
-                  value="check"
                 />
               );
             })}
@@ -130,6 +141,14 @@ const FilterPopup = () => {
                   value={propertyDetailsTypes?.get(keyName)?.id}
                   name="propertyType"
                   style={{ whiteSpace: "nowrap", marginBottom: "10px" }}
+                  onClick={() =>
+                    setPropTypes(
+                      propertyDetailsTypes?.get(keyName)?.id as number
+                    )
+                  }
+                  checked={
+                    filters.propTypes === propertyDetailsTypes?.get(keyName)?.id
+                  }
                 />
               );
             })}
@@ -141,7 +160,15 @@ const FilterPopup = () => {
           <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
             {SEARCH_FILTER_DATA.bhkDetails.map((eachStatus, index) => {
               return (
-                <Checkbox label={eachStatus.title} color="green" key={index} />
+                <Checkbox
+                  label={eachStatus.title}
+                  color="green"
+                  key={index}
+                  onClick={() =>
+                    handleCheckboxClick("unitTypes", eachStatus.value)
+                  }
+                  checked={filters.unitTypes.includes(eachStatus.value)}
+                />
               );
             })}
           </div>
@@ -150,10 +177,9 @@ const FilterPopup = () => {
             Area
           </h3>
           <p className="text-[#4D6677] text-[16px] font-[600] mb-[2%] ">
-            {sliderValue[0]} sq.ft - {sliderValue[1]} sq.ft
+            {filters.areaValue[0]} sq.ft - {filters.areaValue[1]} sq.ft
           </p>
           <RangeSlider
-            defaultValue={sliderValue}
             marks={[
               { value: 0, label: "0 sq.ft" },
               { value: 1000, label: "1000 sq.ft" },
@@ -164,8 +190,8 @@ const FilterPopup = () => {
             ]}
             min={0}
             max={5000}
-            value={sliderValue}
-            onChange={setSliderValue}
+            value={filters.areaValue}
+            onChange={(value) => handleSliderChange("areaValue", value)}
             style={{ width: "80%" }}
           />
 
@@ -173,11 +199,10 @@ const FilterPopup = () => {
             Budget
           </h3>
           <p className="text-[#4D6677] text-[16px] font-[600] mb-[2%] ">
-            ₹ {sliderBudget[0]} - ₹ {sliderBudget[1]} Cr
+            ₹ {filters.bugdetValue[0]} - ₹ {filters.bugdetValue[1]} Cr
           </p>
           <RangeSlider
             key="budgetSlider"
-            defaultValue={sliderBudget}
             marks={[
               { value: 0, label: "₹ 0" },
               { value: 1, label: "₹ 1 Cr" },
@@ -188,8 +213,8 @@ const FilterPopup = () => {
             ]}
             min={0}
             max={5}
-            value={sliderBudget}
-            onChange={setSliderBudget}
+            value={filters.bugdetValue}
+            onChange={(value) => handleSliderChange("bugdetValue", value)}
             style={{ width: "80%" }}
           />
 
@@ -203,6 +228,7 @@ const FilterPopup = () => {
                   key={i}
                   label={`${i == 5 ? "+5" : i + 1} Bath`}
                   color="green"
+                  onClick={() => handleCheckboxClick("bathRooms", i + 1)}
                 />
               );
             })}
@@ -225,6 +251,7 @@ const FilterPopup = () => {
                   key={i}
                   label={`${i == 6 ? "+6" : i + 1}`}
                   color="green"
+                  onClick={() => handleCheckboxClick("parkings", i + 1)}
                 />
               );
             })}
@@ -233,16 +260,21 @@ const FilterPopup = () => {
           <h3 className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] ">
             RERA
           </h3>
-          <Checkbox label="RERA Verified" color="green" />
+          <Checkbox
+            label="RERA Verified"
+            color="green"
+            mb={"3%"}
+            onClick={() => handleBooleanCheck()}
+          />
 
-          <h3 className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] ">
+          {/* <h3 className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] ">
             Listed By
           </h3>
           <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
             <Checkbox label="Builder" color="green" />
             <Checkbox label="Agent" color="green" />
             <Checkbox label="Owner" color="green" />
-          </div>
+          </div> */}
 
           <h3 className=" text-[#202020] mb-[2%] text-[14px] font-[500] ">
             Builder

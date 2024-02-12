@@ -3,9 +3,10 @@ import { Checkbox, RangeSlider } from "@mantine/core";
 import React, { useState } from "react";
 import ClearAll from "../ClearAll";
 import { propertyDetailsTypes } from "@/app/data/projectDetails";
+import useSearchFilters from "@/app/hooks/search";
 
 export default function BugdetFilter() {
-  const [value, setValue] = useState<[number, number]>([20, 80]);
+  const { filters, handleSliderChange } = useSearchFilters();
 
   return (
     <div className="w-[559px] ">
@@ -16,23 +17,28 @@ export default function BugdetFilter() {
           Budget
         </h3>
         <div className=" mb-[3%] px-5 gap-[4%]   ">
+          <h3 className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] ">
+            Budget
+          </h3>
           <p className="text-[#4D6677] text-[16px] font-[600] mb-[2%] ">
-            {value[0]} sq.ft - {value[1]} sq.ft
+            ₹ {filters.bugdetValue[0]} - ₹ {filters.bugdetValue[1]} Cr
           </p>
           <RangeSlider
-            w={"100%"}
+            key="budgetSlider"
             marks={[
-              { value: 0, label: "0 sq.ft" },
-              { value: 1000, label: "1000 sq.ft" },
-              { value: 2000, label: "2000 sq.ft" },
-              { value: 3000, label: "3000 sq.ft" },
-              { value: 4000, label: "4000 sq.ft" },
-              { value: 5000, label: "5000 sq.ft" },
+              { value: 0, label: "₹ 0" },
+              { value: 0.1, label: "₹ 5 Lacs" },
+              { value: 0.5, label: "₹ 1 Cr" },
+              { value: 1, label: "₹ 2 Cr" },
+              { value: 1.5, label: "₹ 3 Cr" },
+              { value: 2, label: "₹ 4 Cr" },
+              { value: 2.5, label: "₹ 5 Cr+" },
             ]}
+            step={0.1}
             min={0}
-            max={5000}
-            value={value}
-            onChange={setValue}
+            max={2.5}
+            value={[0, 5]}
+            onChange={(value) => handleSliderChange("bugdetValue", value)}
             style={{ width: "80%" }}
           />
         </div>
