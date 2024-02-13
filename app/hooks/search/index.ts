@@ -5,10 +5,7 @@ import {
   appliedFiltersParams,
 } from "@/app/store/search";
 import { useAtom } from "jotai";
-import { useSearchParams } from "next/navigation";
 import { useQueryStates, parseAsString, parseAsInteger } from "nuqs";
-import { useEffect } from "react";
-import { useQuery } from "react-query";
 const paramsInit = {
   current: parseAsString,
   locality: parseAsString,
@@ -26,7 +23,6 @@ const paramsInit = {
 };
 export default function useSearchFilters() {
   const [filters, setFilters] = useAtom(searachFilterAtom);
-  const p = useSearchParams();
   const [appliedFilters, setAppliedFilters] = useAtom(appliedFiltersParams);
   const [params, setParams] = useQueryStates(paramsInit, {
     history: "push",
@@ -52,7 +48,7 @@ export default function useSearchFilters() {
     filterType: keyof SearchFilter,
     value: number
   ) => {
-    if (!filters[filterType].includes(value)) {
+    if (!filters[filterType].includes(value) && filters[filterType]) {
       setFilters((prevFilters) => ({
         ...prevFilters,
         [filterType]: [...prevFilters[filterType], value],

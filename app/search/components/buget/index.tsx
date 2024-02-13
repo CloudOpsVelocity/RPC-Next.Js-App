@@ -44,7 +44,10 @@ export default function BugdetFilter() {
             step={0.05}
             onChange={(value) => handleSliderChange("bugdetValue", value)}
             style={{ width: "100%" }}
-            defaultValue={[filters.bugdetValue[0], filters.bugdetValue[1]]}
+            defaultValue={[
+              filters?.bugdetValue[0] ?? 0,
+              filters?.bugdetValue[1] ?? 5,
+            ]}
           />
         </div>
       </div>

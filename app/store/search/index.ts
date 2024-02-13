@@ -16,7 +16,7 @@ export interface SearchFilter {
   parkings: number[];
   amenities: number[];
   listedBy: number[];
-  reraVerified: boolean;
+  reraVerified: boolean | null;
   areaValue: [number, number];
   bugdetValue: [number, number];
 }
@@ -30,7 +30,7 @@ export const initialState: SearchFilter = {
   parkings: [],
   amenities: [],
   listedBy: [],
-  reraVerified: false,
+  reraVerified: null,
   areaValue: [0, 5000],
   bugdetValue: [0, 5],
 };
