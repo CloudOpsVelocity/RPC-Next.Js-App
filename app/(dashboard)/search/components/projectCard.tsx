@@ -13,6 +13,7 @@ import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import { useShortlistAndCompare } from "@/app/hooks/storage";
 import { useSession } from "next-auth/react";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
+import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 
 type Props = {
   type: any;
@@ -38,6 +39,7 @@ const ProjectDetailsCard = ({
   const { data: session } = useSession();
 
   const [, { open }] = useReqCallPopup();
+  const [, { open: openLogin }] = usePopShortList();
   const { toggleShortlist, shortlistedItems, compareItems, toggleCompare } =
     useShortlistAndCompare();
 
@@ -53,6 +55,8 @@ const ProjectDetailsCard = ({
         id: projIdEnc,
         status: isItemInShortlist ? "N" : "Y",
       });
+    } else {
+      openLogin();
     }
   };
   const isItemCompared =
@@ -64,6 +68,8 @@ const ProjectDetailsCard = ({
         id: projIdEnc,
         status: isItemCompared ? "N" : "Y",
       });
+    } else {
+      openLogin();
     }
   };
   return (
@@ -167,22 +173,16 @@ const ProjectDetailsCard = ({
         )}
 
         <div className="flex justify-end items-end p-[1%] gap-[10px] ml-auto ">
-          {!session ? (
-            <LoginPopup type="Shortlist" card={true} />
-          ) : (
-            <>
-              <Button
-                onChange={() => onAddingShortList()}
-                title={isItemInShortlist ? "Shortlisted" : "Shortlist"}
-                buttonClass="text-[#FF7A00] text-[12px] font-[700] underline"
-              />
-              <Button
-                onChange={() => onAddingCompare()}
-                title={isItemCompared ? "Remove Compare" : "Compare"}
-                buttonClass="text-[#148B16] text-[12px] font-[700] underline"
-              />
-            </>
-          )}
+          <Button
+            onChange={() => onAddingShortList()}
+            title={isItemInShortlist ? "Shortlisted" : "Shortlist"}
+            buttonClass="text-[#FF7A00] text-[12px] font-[700] underline"
+          />
+          <Button
+            onChange={() => onAddingCompare()}
+            title={isItemCompared ? "Remove Compare" : "Compare"}
+            buttonClass="text-[#148B16] text-[12px] font-[700] underline"
+          />
 
           <Button
             onChange={() => open("card", projIdEnc)}

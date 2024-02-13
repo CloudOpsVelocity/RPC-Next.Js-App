@@ -12,6 +12,7 @@ import useSearchFilters from "@/app/hooks/search";
 import Loading from "@/app/components/atoms/Loader";
 import RequestCallBackModal from "@/app/components/molecules/popups/req";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
+import LoginPopup from "@/app/components/project/modals/LoginPop";
 
 const LeftSideBlock = () => {
   const [opned, { close, open }] = useReqCallPopup();
@@ -102,6 +103,7 @@ const LeftSideBlock = () => {
         </Tabs.Panel>
       </Tabs>
       <RequestCallBackModal close={close} opened={opned} builderId={1112} />
+      <LoginPopup hidden card />
     </div>
   );
 };

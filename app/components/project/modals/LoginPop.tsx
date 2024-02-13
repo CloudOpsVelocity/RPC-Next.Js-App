@@ -3,14 +3,17 @@ import { Modal, Button } from "@mantine/core";
 import { comparingIcon, tagIcon } from "@/app/images/commonSvgs";
 import LoginPop from "@/app/components/molecules/popups/login";
 import S from "@/app/styles/Rating.module.css";
+import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 function LoginPopup({
   type,
   card,
+  hidden,
 }: {
-  type: "Shortlist" | "Compare";
+  type?: "Shortlist" | "Compare";
   card?: boolean;
+  hidden?: boolean;
 }) {
-  const [opened, { open, close }] = useDisclosure(false);
+  const [opened, { open, close }] = usePopShortList();
   return (
     <>
       <Modal
@@ -28,7 +31,7 @@ function LoginPopup({
       >
         <LoginPop />
       </Modal>
-      {card ? (
+      {!hidden && card ? (
         <button
           className="mt-[-30px] rounded-[10px] relative bottom-[35px] z-10 p-[8px] text-[#0073C6] text-[18px] font-[700] flex pl-[4px] justify-center items-center bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100"
           onClick={() => open()}

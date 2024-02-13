@@ -7,7 +7,7 @@ import useSearchFilters from "@/app/hooks/search";
 const RightSideBlock = () => {
   const Map = useMemo(
     () =>
-      dynamic(() => import("@/app/components/maps"), {
+      dynamic(() => import("@/app/components/maps/search"), {
         loading: () => <MapSkeleton />,
         ssr: false,
       }),
@@ -17,7 +17,7 @@ const RightSideBlock = () => {
     searchProps: { data, isLoading },
   } = useSearchFilters();
   return (
-    <div className=" w-[50%] flex justify-center items-start ">
+    <div className=" w-[50%] flex justify-center items-start z-[1]">
       <Map
         projName={"Searched Location"}
         lat={(data && data[0].lat) ?? 47.46489}
