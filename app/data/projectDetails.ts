@@ -22,7 +22,6 @@ export const Propertytopics = [
   { label: "Amenities", id: "amenities" },
   { label: "Near By", id: "nearBy" },
   { label: "Ratings", id: "ratings" },
-  { label: "Why Buy This Property ?", id: "whyBuy" },
   { label: "FAQ?", id: "faq" },
   { label: "Similar", id: "similar" },
 ];

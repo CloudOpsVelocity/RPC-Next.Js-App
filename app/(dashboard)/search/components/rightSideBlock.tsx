@@ -2,6 +2,7 @@
 import dynamic from "next/dynamic";
 import React, { useMemo } from "react";
 import MapSkeleton from "@/app/components/maps/Skeleton";
+import useSearchFilters from "@/app/hooks/search";
 
 const RightSideBlock = () => {
   const Map = useMemo(
@@ -12,9 +13,17 @@ const RightSideBlock = () => {
       }),
     []
   );
+  const {
+    searchProps: { data, isLoading },
+  } = useSearchFilters();
   return (
     <div className=" w-[50%] flex justify-center items-start ">
-      <Map projName={"Searched Location"} lat={47.46489} lang={15.34043} />
+      <Map
+        projName={"Searched Location"}
+        lat={(data && data[0].lat) ?? 47.46489}
+        lang={(data && data[0].lang) ?? 15.34043}
+        data={data}
+      />
     </div>
   );
 };

@@ -2,6 +2,7 @@
 
 import React from "react";
 import {
+  Block,
   DateIcons,
   EndDate,
   Marble,
@@ -42,8 +43,8 @@ export default function RoomFloorplansBlock({ data }: { data: PhaseList[] }) {
           />
           <RoomBasicDetails
             key="landArea"
-            icon={<TotalLandArea />}
-            title="Convered Car Parking"
+            icon={<Block />}
+            title="Block"
             value={"02"}
             className="mr-[3%]  mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]  "
           />{" "}

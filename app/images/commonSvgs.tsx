@@ -12098,3 +12098,10 @@ export const ParkingIcon = () => {
     </svg>
   );
 };
+
+
+export const Block = ()=> {
+ return  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+  <path d="M12 20H4V28H12V20ZM12 20H20V12M12 20V12H20M20 12H28V4H20V12Z" stroke="#00487C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+}

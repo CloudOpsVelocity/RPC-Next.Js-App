@@ -52,9 +52,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         {/* Floor Plan Block */}
         <RoomFloorplansBlock data={data.phaseList} />
         <GalleryBlock {...data.media} />
-        {/* About Builder */}
-        <AboutBuilder id={data.builderId} />
-        <PropertyBanner projName={data.projectName} />
+        <Amenties data={data.amenityList} />
         {data.lat && data.lang && (
           <LeafMap
             lat={data.lat}
@@ -64,17 +62,10 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         )}
         <Banner projName={data.projectName} />
         <Loans data={data.banks} projName={data.projectName} />
-        <Amenties data={data.amenityList} />
-        {/* Why Buy This */}
-        {data.wbtp && (
-          <About
-            id="whyBuy"
-            heading="Why Buy"
-            projName={`${data.projectName} ?`}
-            content={data.wbtp}
-          />
-        )}
-        {/* <Testimonials projName={data.projectName} /> */}
+        {/* About Builder */}
+        <AboutBuilder id={data.builderId} />
+        <PropertyBanner projName={data.projectName} />
+
         <Reviews projName={data.projectName} />
 
         <FaqWithBg data={data.faqs} projName={data.projectName} />

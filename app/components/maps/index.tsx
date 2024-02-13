@@ -18,9 +18,7 @@ import Image from "next/image";
 import { MapIcon } from "@/app/data/map";
 
 const Map = ({ data, selectedLocation, projName, lat, lang }: any) => {
-  console.log(selectedLocation);
   const position: LatLngTuple = [lat, lang];
-  console.log(lat, lang);
 
   return (
     <>
