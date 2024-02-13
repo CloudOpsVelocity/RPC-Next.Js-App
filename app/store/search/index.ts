@@ -36,7 +36,9 @@ export const initialState: SearchFilter = {
 };
 const locationAtom = atomWithLocation();
 export const searachFilterAtom = atom<SearchFilter>(initialState);
-
+searachFilterAtom.onMount = (setAtom) => {
+  setAtom(getAppliedFilters());
+};
 export const appliedFiltersParams = atom(
   (get) => {
     let queryData = {};

@@ -13,6 +13,19 @@ export const topics = [
   { label: "FAQ?", id: "faq" },
   { label: "Similar", id: "similar" },
 ];
+export const Propertytopics = [
+  { label: "Overview", id: "overview" },
+  { label: "About", id: "about" },
+  { label: "Property Details", id: "propertyDetails" },
+  { label: "Floor Plans", id: "floorPlans" },
+  { label: "Galleria", id: "galleria" },
+  { label: "Amenities", id: "amenities" },
+  { label: "Near By", id: "nearBy" },
+  { label: "Ratings", id: "ratings" },
+  { label: "Why Buy This Property ?", id: "whyBuy" },
+  { label: "FAQ?", id: "faq" },
+  { label: "Similar", id: "similar" },
+];
 
 export const propertyDetailsTypes = new Map([
   [35, { id: 35, name: "Apartment", url: "" }],
