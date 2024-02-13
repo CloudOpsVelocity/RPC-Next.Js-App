@@ -34,10 +34,8 @@ export const initialState: SearchFilter = {
   areaValue: [0, 5000],
   bugdetValue: [0, 5],
 };
-
-export const searachFilterAtom = atom<SearchFilter>(initialState);
-
 const locationAtom = atomWithLocation();
+export const searachFilterAtom = atom<SearchFilter>(initialState);
 
 export const appliedFiltersParams = atom(
   (get) => {
@@ -56,3 +54,13 @@ export const appliedFiltersParams = atom(
     t.runner(parsedData);
   }
 );
+
+function getAppliedFilters(): SearchFilter {
+  const searchParams = new URLSearchParams(window.location.search);
+  let queryData: Record<string, string> = {};
+  searchParams.forEach((value, key) => {
+    queryData[key] = value;
+  });
+  const data: SearchFilter = convertToOriginalState(queryData);
+  return data;
+}

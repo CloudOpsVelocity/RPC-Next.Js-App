@@ -36,7 +36,6 @@ export default function PropertyOverView({
   endDate,
 }: Main) {
   const { PhaseOverview, currentPhase, phaseList } = usePhaseWiseOverview();
-  console.log(PhaseOverview[0]);
 
   return (
     <div

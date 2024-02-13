@@ -272,7 +272,7 @@ const FilterPopup = () => {
             color="green"
             mb={"3%"}
             onClick={() => handleBooleanCheck()}
-            checked={filters.reraVerified}
+            checked={filters.reraVerified === true}
           />
 
           {/* <h3 className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] ">
