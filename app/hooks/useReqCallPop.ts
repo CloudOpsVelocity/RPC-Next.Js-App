@@ -16,6 +16,7 @@ export const popupStateAtom = atom<PopupState>({
 
 export const useReqCallPopup = () => {
   const [popupState, setPopupState] = useAtom(popupStateAtom);
+  console.log(popupState);
 
   const open = (type: string, projectID: string) => {
     setPopupState({ opened: true, type, projectID });

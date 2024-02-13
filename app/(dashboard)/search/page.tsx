@@ -1,9 +1,10 @@
 import React from "react";
-import Header from "../components/layouts/primary/header";
+import Header from "@/app/components/layouts/primary/header";
 import { SearchAndFilterCon } from "./components/searchAndFilterCon";
 import { LeftSideBlock } from "./components/leftSideBlock";
 import { RightSideBlock } from "./components/rightSideBlock";
-import Footer from "../components/layouts/primary/footer";
+import Footer from "@/app/components/layouts/primary/footer";
+import { Toaster } from "react-hot-toast";
 type Props = { searchParams: {} };
 const SearchingPage = ({ searchParams }: Props) => {
   return (
@@ -15,6 +16,7 @@ const SearchingPage = ({ searchParams }: Props) => {
         <RightSideBlock />
       </div>
       <Footer />
+      <Toaster />
     </div>
   );
 };

@@ -1,5 +1,3 @@
-import BhkFilter from "@/app/search/components/bhk";
-
 export const SEARCH_FILTER_DATA = {
   projectstatus: [
     {

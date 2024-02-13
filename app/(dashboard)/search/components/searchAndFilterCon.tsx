@@ -9,7 +9,7 @@ import { useQueryState } from "nuqs";
 import BhkFilter from "./bhk";
 import PropTypeFilter from "./proptype";
 import BugdetFilter from "./buget";
-import useSearchFilters from "../../hooks/search";
+import useSearchFilters from "@/app/hooks/search";
 
 const SearchAndFilterCon = () => {
   const { countAppliedFilters } = useSearchFilters();

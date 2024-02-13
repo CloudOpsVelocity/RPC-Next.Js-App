@@ -1,7 +1,7 @@
 "use client";
 import dynamic from "next/dynamic";
 import React, { useMemo } from "react";
-import MapSkeleton from "../../components/maps/Skeleton";
+import MapSkeleton from "@/app/components/maps/Skeleton";
 
 const RightSideBlock = () => {
   const Map = useMemo(

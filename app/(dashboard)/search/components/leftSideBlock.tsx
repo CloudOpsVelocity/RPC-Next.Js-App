@@ -7,11 +7,18 @@ import {
   DropDownIcon,
   emptyFilesIcon,
   strikeIconIcon,
-} from "../../images/commonSvgs";
+} from "@/app/images/commonSvgs";
+import useSearchFilters from "@/app/hooks/search";
+import Loading from "@/app/components/atoms/Loader";
+import RequestCallBackModal from "@/app/components/molecules/popups/req";
+import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 
 const LeftSideBlock = () => {
-  let projectsData: any[] = [1, 2, 3, , 4, 5, 6, 7, 8];
+  const [opned, { close, open }] = useReqCallPopup();
   const [activeTab, setActiveTab] = useState<string | null>("proj");
+  const {
+    searchProps: { data, isLoading },
+  } = useSearchFilters();
 
   return (
     <div className="w-[50%]">
@@ -36,11 +43,19 @@ const LeftSideBlock = () => {
 
         <Tabs.Panel value="proj">
           <div className=" p-[2%] max-h-[700px] overflow-y-auto h-screen ">
-            {projectsData != undefined &&
-            projectsData.length != undefined &&
-            projectsData.length > 0 ? (
-              projectsData.map((eachOne, index) => {
-                return <ProjectDetailsCard key={index} type={activeTab} />;
+            {isLoading ? (
+              <Loading />
+            ) : data != undefined &&
+              data.length != undefined &&
+              data.length > 0 ? (
+              data.map((eachOne, index: number) => {
+                return (
+                  <ProjectDetailsCard
+                    key={index}
+                    type={activeTab}
+                    {...eachOne}
+                  />
+                );
               })
             ) : (
               <div className="flex w-full h-full justify-center items-center flex-col ">
@@ -53,7 +68,7 @@ const LeftSideBlock = () => {
         </Tabs.Panel>
         <Tabs.Panel value="owner-props">
           <div className=" p-[2%] max-h-[700px] overflow-y-auto  h-screen ">
-            {projectsData != undefined &&
+            {/* {projectsData != undefined &&
             projectsData.length != undefined &&
             projectsData.length > 0 ? (
               projectsData.map((eachOne, index) => {
@@ -65,12 +80,12 @@ const LeftSideBlock = () => {
                 No Matching Results Found !
                 <span className="relative left-[10%] ">{strikeIconIcon}</span>
               </div>
-            )}
+            )} */}
           </div>
         </Tabs.Panel>
         <Tabs.Panel value="agent-props">
           <div className=" p-[2%] max-h-[700px] overflow-y-auto  h-screen ">
-            {projectsData != undefined &&
+            {/* {projectsData != undefined &&
             projectsData.length != undefined &&
             projectsData.length > 0 ? (
               projectsData.map((eachOne, index) => {
@@ -82,10 +97,11 @@ const LeftSideBlock = () => {
                 No Matching Results Found !
                 <span className="relative left-[10%] ">{strikeIconIcon}</span>
               </div>
-            )}
+            )} */}
           </div>
         </Tabs.Panel>
       </Tabs>
+      <RequestCallBackModal close={close} opened={opned} builderId={1112} />
     </div>
   );
 };

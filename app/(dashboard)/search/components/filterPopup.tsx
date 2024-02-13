@@ -1,19 +1,19 @@
 "use client";
 import React, { useState } from "react";
-import { searchDetails } from "../../data/searchDetails";
+import { searchDetails } from "@/app/data/searchDetails";
 import Button from "@/app/elements/button";
 import {
   fourStarIcon,
   lensSvg,
   miniItemsCrossIcon,
   notificationIcon,
-} from "../../images/commonSvgs";
+} from "@/app/images/commonSvgs";
 import { Checkbox, MultiSelect, Radio, RangeSlider } from "@mantine/core";
 import classes from "@/app/styles/search.module.css";
-import { propertyDetailsTypes } from "../../data/projectDetails";
+import { propertyDetailsTypes } from "@/app/data/projectDetails";
 import ClearAll from "./ClearAll";
-import { SEARCH_FILTER_DATA } from "../../data/search";
-import useSearchFilters from "../../hooks/search";
+import { SEARCH_FILTER_DATA } from "@/app/data/search";
+import useSearchFilters from "@/app/hooks/search";
 
 const FilterPopup = () => {
   const [current, setCurrent] = useState("Project Status");

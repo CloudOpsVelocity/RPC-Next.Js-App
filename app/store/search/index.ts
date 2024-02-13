@@ -1,8 +1,4 @@
-import {
-  filterParser,
-  filtersParserToQueryParams,
-  propertiesToProcess,
-} from "@/app/utils/search";
+import { filterParser } from "@/app/utils/search";
 import { convertToOriginalState } from "@/app/utils/search/transform";
 import { atom } from "jotai";
 import { atomWithLocation } from "jotai-location";
@@ -39,23 +35,11 @@ export const searachFilterAtom = atom<SearchFilter>(initialState);
 searachFilterAtom.onMount = (setAtom) => {
   setAtom(getAppliedFilters());
 };
-export const appliedFiltersParams = atom(
-  (get) => {
-    let queryData = {};
-    const location = get(locationAtom);
-    location.searchParams?.forEach((value, key) => {
-      // @ts-ignore
-      queryData[key] = value;
-    });
-    const data = convertToOriginalState(queryData);
-    return data;
-  },
-  (get, set, t: any) => {
-    const appliedFilters = get(searachFilterAtom);
-    const parsedData = filterParser(appliedFilters);
-    t.runner(parsedData);
-  }
-);
+export const appliedFiltersParams = atom(null, (get, set, t: any) => {
+  const appliedFilters = get(searachFilterAtom);
+  const parsedData = filterParser(appliedFilters);
+  t.runner(parsedData);
+});
 
 function getAppliedFilters(): SearchFilter {
   const searchParams = new URLSearchParams(window.location.search);

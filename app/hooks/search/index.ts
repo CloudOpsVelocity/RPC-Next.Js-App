@@ -4,10 +4,13 @@ import {
   SearchFilter,
   appliedFiltersParams,
 } from "@/app/store/search";
-import { useAtom } from "jotai";
+import { convertToQueryParams } from "@/app/utils/search/query";
+import { Search } from "@/app/validations/types/search";
+import { useAtom, useSetAtom } from "jotai";
 import { useQueryStates, parseAsString, parseAsInteger } from "nuqs";
+import { useQuery } from "react-query";
 const paramsInit = {
-  current: parseAsString,
+  projStatus: parseAsString,
   locality: parseAsString,
   propTypes: parseAsString,
   unitTypes: parseAsString,
@@ -23,7 +26,7 @@ const paramsInit = {
 };
 export default function useSearchFilters() {
   const [filters, setFilters] = useAtom(searachFilterAtom);
-  const [appliedFilters, setAppliedFilters] = useAtom(appliedFiltersParams);
+  const setAppliedFilters = useSetAtom(appliedFiltersParams);
   const [params, setParams] = useQueryStates(paramsInit, {
     history: "push",
   });
@@ -136,7 +139,10 @@ export default function useSearchFilters() {
   const handleAppliedFilters = () => {
     setAppliedFilters({ runner: setParams });
   };
-
+  const searchProps = useQuery({
+    queryFn: () => getFilteredData(convertToQueryParams(params as any)),
+    queryKey: ["srp" + convertToQueryParams(params as any)],
+  });
   return {
     filters,
     setStatus,
@@ -149,5 +155,19 @@ export default function useSearchFilters() {
     handleAppliedFilters,
     setParams,
     params,
+    searchProps,
   };
 }
+
+const getFilteredData = async (query: string): Promise<Search[]> => {
+  try {
+    const response = await fetch(
+      `http://localhost:8081/srp/projSearch?city=21&${query}`
+    );
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching filtered data:", error);
+    throw error; // Re-throw the error for handling further up the call stack
+  }
+};
