@@ -20,8 +20,8 @@ const RightSideBlock = () => {
     <div className=" w-[50%] flex justify-center items-start z-[1]">
       <Map
         projName={"Searched Location"}
-        lat={(data && data[0].lat) ?? 47.46489}
-        lang={(data && data[0].lang) ?? 15.34043}
+        lat={(data && data[0]?.lat) ?? 47.46489}
+        lang={(data && data[0]?.lang) ?? 15.34043}
         data={data}
       />
     </div>
