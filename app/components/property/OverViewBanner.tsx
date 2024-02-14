@@ -12,6 +12,7 @@ import Image from "next/image";
 import { useSession } from "next-auth/react";
 import S from "@/app/styles/Req.module.css";
 import RequestCallBackModal from "../molecules/popups/req";
+import { formatCurrency } from "@/app/utils/numbers";
 export default function PropertyOverviewBanner({
   minPrice,
   maxPrice,
@@ -32,7 +33,7 @@ export default function PropertyOverviewBanner({
             <p className="text-[#212C33] text-[24px] lg:text-[40px] font-[600]">
               PRICE{"  "}
               <span className="text-[#00487C] text-[24px] md:text-[32px] lg:text-[40px] whitespace-nowrap font-[700]">
-                ₹ {minPrice} Cr,{" "}
+                {formatCurrency(minPrice)},{" "}
                 <span className="text-[#545353] text-[32px] not-italic font-medium leading-[normal]">
                   ₹ 1824 / price sq.ft
                 </span>
