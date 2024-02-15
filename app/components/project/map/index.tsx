@@ -107,7 +107,7 @@ const LeafMap: React.FC<{ lat: string; lang: string; projName: string }> = ({
             <Tabs defaultValue="public">
               <div className="bg-blue-50 px-5 py-4">
                 <p className="text-[#001F35] text-[22px]  font-medium leading-[normal]">
-                  Select how you want to travel
+                  Explore Your Surroundings, Everywhere Nearby!
                 </p>
               </div>
             </Tabs>
@@ -123,16 +123,7 @@ const LeafMap: React.FC<{ lat: string; lang: string; projName: string }> = ({
                     mapData[selected]
                       .map((location: any) => ({
                         ...location,
-                        distance: calculateDistance(
-                          {
-                            lat: Number(lat),
-                            lng: Number(lang),
-                          },
-                          {
-                            lat: Number(location.lat),
-                            lng: Number(location.lang),
-                          }
-                        ),
+                        distance: location.distance,
                       }))
                       .sort((a: any, b: any) => a.distance - b.distance)
                       .map((location: any, index: number) => (
@@ -194,11 +185,15 @@ const LeafMap: React.FC<{ lat: string; lang: string; projName: string }> = ({
 
 export default LeafMap;
 
-const MapCard = ({ name, showLocationOnMap, lat, lang, origin }: any) => {
-  const distance = calculateDistance(origin, {
-    lat: Number(lat),
-    lng: Number(lang),
-  });
+const MapCard = ({
+  name,
+  showLocationOnMap,
+  lat,
+  lang,
+  origin,
+  distance,
+  time,
+}: any) => {
   const handleClick = () => {
     showLocationOnMap({
       position: {
@@ -221,8 +216,12 @@ const MapCard = ({ name, showLocationOnMap, lat, lang, origin }: any) => {
           <span className="flex items-center min-w-[70px]">
             {nearbyLocationIcon}
             <span className="ml-[4px] text-[#005DA0] text-base not-italic font-medium leading-[normal] ]">
-              {distance.toFixed(1) + "Km" ?? "N/A"}
+              {distance ?? "N/A"}
             </span>{" "}
+          </span>
+          <span className="mx-1">|</span>
+          <span className="text-[#001F35] text-lg not-italic font-medium leading-[normal]">
+            {time ?? "N/A"}
           </span>
         </div>
       </div>
@@ -247,11 +246,8 @@ const LocationList: React.FC<{
     lat: number;
     lng: number;
   };
-}> = ({ name, vicinity, showLocationOnMap, rating, lat, lang, origin }) => {
-  const distance = calculateDistance(origin, {
-    lat: Number(lat),
-    lng: Number(lang),
-  });
+  time: string;
+}> = ({ name, showLocationOnMap, lat, lang, distance, time }) => {
   const handleClick = () => {
     showLocationOnMap({
       position: {
@@ -275,7 +271,11 @@ const LocationList: React.FC<{
           <span className="flex items-center">
             {nearbyLocationIcon}
             <span className="ml-[4px] text-[#005DA0] text-lg not-italic font-medium leading-[normal] ">
-              {distance.toFixed(1) + "Km" ?? "N/A"}
+              {distance ?? "N/A"}
+            </span>
+            <span className="mx-2">|</span>
+            <span className="text-[#001F35] text-lg not-italic font-medium leading-[normal]">
+              {time ?? "N/A"}
             </span>
           </span>
         </div>

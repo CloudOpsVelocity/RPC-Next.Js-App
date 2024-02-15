@@ -19,7 +19,7 @@ const SearchAndFilterCon = () => {
   };
 
   return (
-    <div className="m-[2%] w-full flex mt-[90px] pl-[2%] gap-[20px] justify-start items-center ">
+    <div className="m-[2%] w-full flex mt-[100px] pl-[2%] gap-[20px] justify-start items-center ">
       <p className="text-[16px] text-[#737579] font-[500]">
         <span>Home</span> {" > "}
         <Link href={"/project/banglore"}>
@@ -164,7 +164,7 @@ const SearchAndFilterCon = () => {
             Filters
           </button>
         </Popover.Target>
-        <Popover.Dropdown className="!z-50">
+        <Popover.Dropdown className="!z-50" p={0}>
           <FilterPopup />
         </Popover.Dropdown>
       </Popover>

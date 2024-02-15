@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { searchDetails } from "@/app/data/searchDetails";
 import Button from "@/app/elements/button";
 import {
@@ -8,7 +8,13 @@ import {
   miniItemsCrossIcon,
   notificationIcon,
 } from "@/app/images/commonSvgs";
-import { Checkbox, MultiSelect, Radio, RangeSlider } from "@mantine/core";
+import {
+  Checkbox,
+  MultiSelect,
+  Radio,
+  RangeSlider,
+  ScrollArea,
+} from "@mantine/core";
 import classes from "@/app/styles/search.module.css";
 import { propertyDetailsTypes } from "@/app/data/projectDetails";
 import ClearAll from "./ClearAll";
@@ -35,10 +41,27 @@ const FilterPopup = () => {
     handleSliderChange,
   } = useSearchFilters();
 
+  const viewport = useRef<HTMLDivElement>(null);
+  const scrollWhereIsSelected = (item: string) => {
+    setCurrent(item);
+    // @ts-ignore
+    const selectedElement = document.getElementById(item);
+
+    if (selectedElement) {
+      // const titleElement = selectedElement.querySelector("h2"); // Assuming the title is wrapped in an <h1> tag
+      const titleHeight = selectedElement?.offsetHeight || 0;
+      const position = selectedElement.offsetTop - titleHeight; // Adjust the position by subtracting the title height
+
+      viewport.current!.scrollTo({
+        top: position - 20,
+        behavior: "smooth",
+      });
+    }
+  };
   return (
-    <div className=" flex justify-start items-start w-[70vw] top-[160px] left-[70%]  rounded-[10px] shadow-md bg-[#FFF] ">
+    <div className=" flex justify-start items-start w-[70vw] top-[160px] left-[70%]">
       <div className="w-[20%] flex shadow-md justify-start items-center flex-col ">
-        <p className=" text-[#000] text-[16px] flex justify-center items-center font-[500] p-[2%] w-full ">
+        <p className=" text-[#000] text-[16px] bg-[#F4F4F4] flex justify-start px-6  items-center font-[500] py-[3.5%] w-full ">
           Quick Filters
         </p>
         <div className="w-full ">
@@ -47,11 +70,11 @@ const FilterPopup = () => {
               <Button
                 key={index}
                 title={eachItem}
-                onChange={() => setCurrent(eachItem)}
-                buttonClass={` whitespace-nowrap w-full text-[12px] flex flex-row-reverse  justify-end pl-[10%] items-center border-solid border-b-[0.5px] items-start font-[500] p-[2%] h-[31px] gap-[8px] ${
+                onChange={() => scrollWhereIsSelected(eachItem)}
+                buttonClass={` whitespace-nowrap w-full text-[15px] flex flex-row-reverse  justify-end pl-[10%] items-center border-solid border-b-[0.5px] items-start  px-4 py-4 h-[31px] gap-[8px] ${
                   current == eachItem
-                    ? "text-[#148B16] bg-[#F1F9FF]"
-                    : "text-[#202020] bg-[#FCFCFC] "
+                    ? "text-[#148B16] bg-[#F1F9FF] font-[700]"
+                    : "text-[#202020] bg-[#FCFCFC] font-[500]"
                 } `}
                 icon={current == eachItem ? fourStarIcon : ""}
               />
@@ -62,8 +85,15 @@ const FilterPopup = () => {
       <div className="w-full">
         <ClearAll type="all" />
         {/* Right Side Fields Con */}
-        <div className="w-full p-[1%] pl-[2%] max-h-[400px] overflow-y-auto pb-[5%] ">
-          <h3 className=" text-[#202020] mb-[2%] text-[14px] font-[500] ">
+        <ScrollArea
+          h={350}
+          className="w-full pt-[1%] pl-[2%]    "
+          viewportRef={viewport}
+        >
+          <h3
+            className=" text-[#202020] mb-[2%] text-[14px] font-[500] "
+            id="Project Status"
+          >
             Property Status
           </h3>
           <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
@@ -82,7 +112,10 @@ const FilterPopup = () => {
             })}
           </div>
 
-          <h3 className=" text-[#202020] mb-[2%] text-[14px] font-[500] ">
+          <h3
+            className=" text-[#202020] mb-[2%] text-[14px] font-[500] "
+            id="Locality"
+          >
             Locality
           </h3>
 
@@ -125,7 +158,10 @@ const FilterPopup = () => {
             style={{ width: "50%" }}
           />
 
-          <h3 className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] flex items-center gap-[5px] ">
+          <h3
+            className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] flex items-center gap-[5px] "
+            id="Property Type"
+          >
             Property Type {notificationIcon}
           </h3>
           <div className="flex  mb-[3%] justify-start items-start flex-wrap gap-[4%]">
@@ -152,7 +188,10 @@ const FilterPopup = () => {
             })}
           </div>
 
-          <h3 className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] ">
+          <h3
+            className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] "
+            id="Unit Type"
+          >
             Unit Type
           </h3>
           <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
@@ -171,7 +210,10 @@ const FilterPopup = () => {
             })}
           </div>
 
-          <h3 className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] ">
+          <h3
+            className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] "
+            id="Area"
+          >
             Area
           </h3>
           <p className="text-[#4D6677] text-[16px] font-[600] mb-[2%] ">
@@ -193,7 +235,10 @@ const FilterPopup = () => {
             style={{ width: "80%" }}
           />
 
-          <h3 className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] ">
+          <h3
+            className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[5%] "
+            id="Budget"
+          >
             Budget
           </h3>
           <p className="text-[#4D6677] text-[16px] font-[600] mb-[2%] ">
@@ -223,7 +268,10 @@ const FilterPopup = () => {
             defaultValue={[filters.bugdetValue[0], filters.bugdetValue[1]]}
           />
 
-          <h3 className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[5%] ">
+          <h3
+            className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[5%] "
+            id="Bath"
+          >
             Bath
           </h3>
           <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
@@ -240,14 +288,20 @@ const FilterPopup = () => {
             })}
           </div>
 
-          <h3 className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] ">
+          <h3
+            className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] "
+            id="Amenities"
+          >
             Amenities
           </h3>
           <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
             <Checkbox label="Lift" color="green" />
           </div>
 
-          <h3 className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[5%] ">
+          <h3
+            className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[5%] "
+            id="Parking"
+          >
             Parking
           </h3>
           <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
@@ -264,7 +318,10 @@ const FilterPopup = () => {
             })}
           </div>
 
-          <h3 className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] ">
+          <h3
+            className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] "
+            id="RERA"
+          >
             RERA
           </h3>
           <Checkbox
@@ -284,7 +341,10 @@ const FilterPopup = () => {
             <Checkbox label="Owner" color="green" />
           </div> */}
 
-          <h3 className=" text-[#202020] mb-[2%] text-[14px] font-[500] ">
+          <h3
+            className=" text-[#202020] mb-[2%] text-[14px] font-[500] "
+            id="Builder"
+          >
             Builder
           </h3>
 
@@ -324,7 +384,7 @@ const FilterPopup = () => {
             style={{ width: "50%" }}
             comboboxProps={{ withinPortal: false }}
           />
-        </div>
+        </ScrollArea>
       </div>
     </div>
   );

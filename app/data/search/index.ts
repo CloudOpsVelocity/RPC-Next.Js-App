@@ -96,4 +96,18 @@ export const SEARCH_FILTER_DATA = {
       label: "Lift",
     },
   ],
+  categoryData: [
+    {
+      label: "Projects",
+      value: "proj",
+    },
+    {
+      label: "Owner Listing",
+      value: "owner-props",
+    },
+    {
+      label: "Agent Listing",
+      value: "agent-props",
+    },
+  ],
 };

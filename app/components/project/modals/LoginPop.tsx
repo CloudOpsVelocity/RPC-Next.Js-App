@@ -31,7 +31,7 @@ function LoginPopup({
       >
         <LoginPop />
       </Modal>
-      {!hidden && card ? (
+      {!hidden && card && (
         <button
           className="mt-[-30px] rounded-[10px] relative bottom-[35px] z-10 p-[8px] text-[#0073C6] text-[18px] font-[700] flex pl-[4px] justify-center items-center bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100"
           onClick={() => open()}
@@ -41,7 +41,9 @@ function LoginPopup({
           </div>
           <div>ShortList</div>
         </button>
-      ) : (
+      )}
+
+      {!hidden && !card && (
         <button
           onClick={open}
           className="text-[20px] flex justify-center items-center gap-[8px]  cursor-pointer lg:text-[24px] text-[#0073C6] font-[600] underline whitespace-nowrap decoration-dashed "

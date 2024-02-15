@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "@/app/elements/button";
+import S from "@/app/styles/seach/Index.module.css";
 import {
   Phone,
   ReraIcon,
@@ -92,7 +93,9 @@ const ProjectDetailsCard = ({
         </div>
         <div className="w-full p-[2%]">
           {type == "proj" ? (
-            <p className="text-[#001F35] text-[15px] font-[600]">{projName}</p>
+            <p className="text-[#001F35] text-[15px] not-italic font-semibold leading-[normal]">
+              {projName}
+            </p>
           ) : (
             <p className="text-[#001F35] text-[15px] font-[600]">
               3BHK Apartment for Sell in Kadugodi,{" "}
@@ -102,14 +105,14 @@ const ProjectDetailsCard = ({
               </span>
             </p>
           )}
-          <p className="text-[#768AA9] text-[14px] font-[600]">
+          <p className="text-[#768AA9] text-sm not-italic font-semibold leading-[normal]">
             {propTypes && propTypes?.length > 0 ? propTypes?.join(" ,") : "N/A"}
             {}
           </p>
           <div className=" flex justify-between items-start w-full ">
             <div className=" flex justify-start items-start flex-col">
               {type == "proj" && (
-                <p className="text-[#148B16] text-[15px] font-[800]">
+                <p className="text-[#148B16] text-[15px] not-italic font-extrabold leading-[normal]">
                   ₹ {minPrice} Cr - ₹ {maxPrice} Cr
                 </p>
               )}
@@ -163,10 +166,10 @@ const ProjectDetailsCard = ({
       <div className="flex justify-between items-center p-[1%] w-full">
         {type == "proj" && (
           <div>
-            <p className="text-[#0073C6] text-[12px] font-[500]">
+            <p className="text-[#0073C6] text-xs not-italic font-medium leading-[normal] underline">
               Agent Listing Available : {agentListing}{" "}
             </p>
-            <p className="text-[#4D6677] text-[12px] font-[500]">
+            <p className="text-[#4D6677] text-xs not-italic font-medium leading-[normal] underline">
               Owner Listing Available : {ownerListing}{" "}
             </p>
           </div>
@@ -180,7 +183,7 @@ const ProjectDetailsCard = ({
           />
           <Button
             onChange={() => onAddingCompare()}
-            title={isItemCompared ? "Remove Compare" : "Compare"}
+            title={isItemCompared ? "Remove Compare" : " Add to Compare"}
             buttonClass="text-[#148B16] text-[12px] font-[700] underline"
           />
 

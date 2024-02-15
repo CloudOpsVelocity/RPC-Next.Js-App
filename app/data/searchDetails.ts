@@ -11,3 +11,6 @@ export const searchDetails = [
   "RERA",
   "Builder",
 ];
+export const convertIntoId = (title: string) => {
+  return title.replace(/\s+/g, "-").toLowerCase();
+};
