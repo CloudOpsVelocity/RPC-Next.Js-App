@@ -9,7 +9,6 @@ import React from "react";
 
 export default function Amenties({ data }: { data: AmenityList[] }) {
   const { data: amenitiesFromDB, error, isLoading } = useAmenities();
-  // const keys = Object.keys(amenitiesFromDB);
 
   const [{ expanded }, setReadMore] = useAtom(readMoreAtom);
   const handleReadMoreClick = () => {
@@ -18,17 +17,18 @@ export default function Amenties({ data }: { data: AmenityList[] }) {
       expanded: !prev.expanded,
       content: { data: data, amenitiesFromDB: amenitiesFromDB },
       type: "array",
+      title: "Amenities",
     }));
   };
 
   return (
     <div
-      className="w-[90%] scroll-mt-[90px] bg-white py-10 mt-12"
+      className="w-[90%] scroll-mt-[90px] bg-white pt-10 pb-20 mt-12"
       id="amenities"
     >
       <div className=" mx-auto px-4">
         <h2 className="text-2xl font-semibold">AMENITIES</h2>
-        <p className="text-[#4D6677] text-2xl italic font-medium leading-[normal] tracking-[0.96px] mt-2 mb-[12px]">
+        <p className="text-[#4D6677] text-2xl italic font-medium leading-[normal] tracking-[0.96px] mt-2 mb-[40px]">
           Experience the ultimate in comfort with our amenities
         </p>
         <div className="flex flex-wrap ">
@@ -68,12 +68,12 @@ export default function Amenties({ data }: { data: AmenityList[] }) {
               );
             }
           })}
-          {data && data?.length > 50 && (
+          {data && data?.length > 20 && (
             <button
-              className="inline-flex items-center justify-center text-[18px] lg:text-[20px] text-[#0073C6] font-[700] ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 mt-2"
+              className="inline-flex items-center justify-center text-[18px] lg:text-[20px] text-[#0073C6] font-[700] ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 "
               onClick={handleReadMoreClick}
             >
-              {expanded ? "Collapse" : `+ ${data?.length - 50} More`}
+              {expanded ? "Collapse" : `+ ${data?.length - 20} More`}
             </button>
           )}
         </div>

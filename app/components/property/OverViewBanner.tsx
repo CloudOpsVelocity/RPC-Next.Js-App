@@ -11,6 +11,8 @@ import { Collapse, Modal } from "@mantine/core";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import S from "@/app/styles/Req.module.css";
+import RequestCallBackModal from "../molecules/popups/req";
+import { formatCurrency } from "@/app/utils/numbers";
 export default function PropertyOverviewBanner({
   minPrice,
   maxPrice,
@@ -28,10 +30,13 @@ export default function PropertyOverviewBanner({
 
         <div className="flex justify-between items-center w-[100%] flex-row ml-[3%] p-[2%] flex-wrap">
           <div className="">
-            <p className="text-[#212C33] text-[24px] lg:text-[32px] font-[600]">
-              PRICE RANGE{" "}
+            <p className="text-[#212C33] text-[24px] lg:text-[40px] font-[600]">
+              PRICE{"  "}
               <span className="text-[#00487C] text-[24px] md:text-[32px] lg:text-[40px] whitespace-nowrap font-[700]">
-                ₹ {minPrice} Cr - ₹ {maxPrice} Cr
+                {formatCurrency(minPrice)},{" "}
+                <span className="text-[#545353] text-[32px] not-italic font-medium leading-[normal]">
+                  ₹ 1824 / price sq.ft
+                </span>
               </span>
             </p>
             <Button
@@ -41,10 +46,10 @@ export default function PropertyOverviewBanner({
               onChange={open}
             />
           </div>
-          <div>
+          <div className="flex justify-center items-center flex-col">
             <button
               onClick={toggle}
-              className="shadow-md cursor-pointer  p-[20px] flex justify-center items-center rounded-[20px]  text-[#0073C6] text-xl font-[600] mt-[13px]  "
+              className="inline-flex items-start gap-2.5 p-5 mt-[13px]  shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[42px] text-[#0073C6] text-xl not-italic font-bold leading-[normal]"
             >
               {collapsed ? "Hide Price Break Up" : "Show Price Break Up"}
             </button>
@@ -56,7 +61,7 @@ export default function PropertyOverviewBanner({
           </div>
         </div>
 
-        <RequestCallBackModal close={close} opened={opened} />
+        <RequestCallBackModal close={close} opened={opened} builderId={1112} />
       </div>
       <Collapse in={collapsed}>
         <PriceBreakUp />
@@ -64,113 +69,6 @@ export default function PropertyOverviewBanner({
     </>
   );
 }
-const RequestCallBackModal = ({
-  opened,
-  close,
-}: {
-  opened: any;
-  close: any;
-}) => {
-  return (
-    <>
-      <Modal
-        opened={opened}
-        onClose={close}
-        centered
-        size={"50%"}
-        className="!rounded-full"
-        classNames={{
-          close: S.close,
-        }}
-      >
-        <>
-          {/* <div className="bg-[#E0F7FF]  flex items-center justify-center p-4"> */}
-          <div className="bg-white rounded-lg  overflow-hidden flex ">
-            <div className="w-full p-8">
-              <h2 className="text-2xl font-semibold text-gray-700">
-                Request A Callback
-              </h2>
-              <p className="mt-2 text-green-600 font-semibold">
-                Builder: Sarang By Sumadhura
-              </p>
-              {/* There */}
-              <Content />
-            </div>
-            <div className="hidden md:block w-1/2 relative">
-              <Image
-                className="absolute inset-0 h-full w-full object-cover"
-                src="/requestcallback.png"
-                alt="Customer Support"
-                width={500}
-                height={534}
-              />
-            </div>
-          </div>
-          {/* </div> */}
-        </>
-      </Modal>
-    </>
-  );
-};
-
-const Content = () => {
-  const { data: session } = useSession();
-  return (
-    <>
-      {session ? (
-        <div className="mt-8">
-          <h3 className="text-xl font-semibold text-[#00487C]">Your Details</h3>
-          <p className="mt-2 text-gray-600">Name: Ankit Soni</p>
-          <p className="mt-2 text-gray-600">Contact: 8888855555</p>
-          <p className="mt-2 text-gray-600">Email: ankitsoni12@gmail.com</p>
-          <Content />
-        </div>
-      ) : (
-        <div className="w-full max-w-xs">
-          <h2 className="text-lg font-semibold mb-4">Your Details</h2>
-          <div className="flex flex-col gap-4">
-            <label className="block">
-              <span className="text-sm font-medium text-gray-700">
-                Your Name
-              </span>
-              <input
-                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                placeholder="Enter your name here"
-              />
-            </label>
-            <label className="block">
-              <span className="text-sm font-medium text-gray-700">
-                Add contact
-              </span>
-              <div className="flex">
-                <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 mr-2">
-                  01
-                </button>
-                <input
-                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                  placeholder="Phone number"
-                />
-              </div>
-            </label>
-            <label className="block">
-              <span className="text-sm font-medium text-gray-700">Email</span>
-              <input
-                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                placeholder="Enter your email here"
-                type="email"
-              />
-            </label>
-          </div>
-        </div>
-      )}
-      <Button
-        icon={<Phone />}
-        title="Request a Callback"
-        buttonClass=" text-[#FFF] text-[16px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[6px]  mt-5"
-      />
-    </>
-  );
-};
 
 const PriceBreakUp = () => {
   return (

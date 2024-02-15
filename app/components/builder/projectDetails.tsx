@@ -20,10 +20,10 @@ export default function ProjectDetails({
   officecontact,
   newProject,
   onGoingProject,
-  completedProject
-  
+  completedProject,
+  email,
+  mobile,
 }: Data) {
-  
   return (
     <React.Fragment>
       <div className="rounded-[20px] mt-[3%] flex justify-between items-center bg-[#FFF] shadow-md w-[100%] mb-[3%] lg:w-[50%] p-[1%] ">
@@ -74,28 +74,43 @@ export default function ProjectDetails({
 
       <div className="w-full flex justify-start items-start mb-[4%] mt-[-2%] flex-wrap gap-[5%]  ">
         <div className="flex justify-start items-start flex-col mb-[2%] ">
-          <p className="text-[#303030] text-[16px] lg:text-[24px] rounded-[30px] mb-[9px] font-[500] p-[8px] flex justify-center items-center bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 ">
-            {emailIconSvg} Email
+          <p className="inline-flex justify-center items-center gap-1 rounded-[20px] p-2 bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 space-x-2 mb-2">
+            {emailIconSvg}{" "}
+            <span className="text-[#303030] text-2xl not-italic font-medium leading-[normal] tracking-[0.96px]">
+              Email
+            </span>
           </p>
-          <p className="text-[#00487C] text-[16px] lg:text-[20px] font-[600] underline ">
-            {""}
-          </p>
+          <a
+            href={`mailto:${email}`}
+            className="text-[#00487C] text-[16px] lg:text-[20px] font-[600] underline "
+          >
+            {email}
+          </a>
         </div>
 
-        {/* <div className="flex justify-start items-start flex-col mb-[2%] ">
-          <p className="text-[#303030] text-[16px] lg:text-[24px] rounded-[30px] mb-[9px] font-[500] p-[8px] flex justify-center items-center bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 ">
-            {callIconSvg} Contact
+        <div className="flex justify-start items-start flex-col mb-[2%] ">
+          <p className="inline-flex justify-center items-center gap-1 rounded-[20px] p-2 bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 space-x-2 mb-2">
+            {callIconSvg}{" "}
+            <span className="text-[#303030] text-2xl not-italic font-medium leading-[normal] tracking-[0.96px]">
+              Contact
+            </span>
           </p>
-          <p className="text-[#00487C] text-[16px] lg:text-[20px] font-[600] underline ">
-            +91- {officecontact}
-          </p>
-        </div> */}
+          <a
+            href={`tel:${mobile}`}
+            className="text-[#00487C] text-[16px] lg:text-[20px] font-[600] underline "
+          >
+            +91- {mobile}
+          </a>
+        </div>
 
         <div className="flex justify-start items-start flex-col mb-[2%] w-[100%] md:w-[40%] ">
-          <p className="text-[#303030] text-[16px] lg:text-[24px] rounded-[30px] mb-[9px] font-[500] p-[8px] flex justify-center items-center bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 ">
-            {lacationIconSvg} Address
+          <p className="inline-flex justify-center items-center gap-1 rounded-[20px] p-2 bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 space-x-2 mb-2">
+            {lacationIconSvg}{" "}
+            <span className="text-[#303030] text-2xl not-italic font-medium leading-[normal] tracking-[0.96px]">
+              Address
+            </span>
           </p>
-          <p className="text-[#00487C] text-[16px] lg:text-[20px] font-[600] underline ">
+          <p className="text-[#00487C] text-xl not-italic font-semibold leading-8">
             {builderAddress} sdfsdf dfdf
           </p>
         </div>

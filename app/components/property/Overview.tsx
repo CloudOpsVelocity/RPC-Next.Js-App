@@ -1,12 +1,18 @@
+"use client";
 import React from "react";
 import PriceBag, {
+  Compass,
   EndDate,
+  Furnishing,
   Locality,
+  Marble,
+  OwnerShip,
   Phone,
   ProjectStatus,
   PropertyAvailable,
   RatingStar,
   StartDate,
+  Status,
   TotalLandArea,
   WhatsAppButton,
 } from "@/app/images/commonSvgs";
@@ -22,7 +28,6 @@ import usePhaseWiseOverview from "@/app/hooks/usePhaseWiseOverview";
 export default function PropertyOverView({
   maxPrice,
   minPrice,
-  postedBy,
   projectName,
   address,
   projectStatus,
@@ -34,10 +39,6 @@ export default function PropertyOverView({
   startDate,
   endDate,
 }: Main) {
-
-  const { PhaseOverview, currentPhase ,phaseList} = usePhaseWiseOverview();
-  console.log(PhaseOverview[0])
-
   return (
     <div
       className="pt-[2%] w-[90%] rounded-[24px] shadow-md mb-[5%] mt-[2%] bg-gradient-to-r from-[#F6F6F6] /0 via-[#FFF] /45 to-[#FEFFFF]/100 "
@@ -45,7 +46,7 @@ export default function PropertyOverView({
     >
       <div className="pl-[2%] pr-[2%] flex justify-between items-center ">
         <div>
-          <h2 className="text-[24px] lg:text-[32px] text-[#148B16] font-[700]">
+          <h2 className="text-[24px] lg:text-[32px] text-[#00487C] not-italic font-bold leading-[normal] uppercase">
             {projectName}
           </h2>
           <p className="text-[16px] lg:text-[24px] text-[#505050] font-[500]">
@@ -67,23 +68,30 @@ export default function PropertyOverView({
         <div className="flex justify-start items-start flex-wrap w-[100%] md:w-[80%] ">
           <ProjBasicDetails
             key="propertyAvailable"
-            icon={<PropertyAvailable />}
-            title="Property Available"
-            value={availableProperties?.join(", ")}
+            icon={<OwnerShip />}
+            title="Ownership"
+            value={"Leasehold"}
             className="mr-[5%] pt-[2%] mb-[3%]  "
           />
           <ProjBasicDetails
             key="projectStatus"
-            icon={<ProjectStatus />}
-            title="Project Status"
-            value={projectStatus}
+            icon={<Status />}
+            title="Availability Status"
+            value={"Ready To Move"}
             className="mr-[5%] pt-[2%] mb-[3%] "
           />
           <ProjBasicDetails
             key="totalLandArea"
             icon={<TotalLandArea />}
-            title="Total Land Area"
-            value={totalLandArea}
+            title="Super built-up Area"
+            value={totalLandArea + " sq.ft"}
+            className="mr-[5%] pt-[2%] mb-[3%] "
+          />
+          <ProjBasicDetails
+            key="totalLandArea"
+            icon={<TotalLandArea />}
+            title="Carpet Area"
+            value={totalLandArea + " sq.ft"}
             className="mr-[5%] pt-[2%] mb-[3%] "
           />
           {/* <ProjBasicDetails
@@ -95,53 +103,25 @@ export default function PropertyOverView({
           /> */}
           <ProjBasicDetails
             key="totalUnits"
-            icon={<TotalLandArea />} // Adjust icon
-            title="Total No: of Units"
-            value={totalUnit}
+            icon={<Compass />} // Adjust icon
+            title="Property Facing"
+            value={"North- East"}
             className="mr-[5%] pt-[2%] mb-[3%] "
           />
           <ProjBasicDetails
             key="locality"
-            icon={<Locality />}
-            title="Locality"
-            value={localityName}
+            icon={<Furnishing />}
+            title="Furnishing"
+            value={"Semi- Furnished"}
             className="mr-[5%] pt-[2%] mb-[3%] "
           />
           <ProjBasicDetails
             key="startDate"
-            icon={<StartDate />}
-            title="Start Date"
-            value={startDate}
+            icon={<Marble />}
+            title="Flooring Type"
+            value={"Marble"}
             className="mr-[5%] pt-[2%] mb-[3%] "
           />
-          <ProjBasicDetails
-            key="endDate"
-            icon={<EndDate />}
-            title="End Date"
-            value={endDate}
-            className="mr-[5%] pt-[2%] mb-[3%] "
-          />
-
-          {phaseList?.length == 1 &&
-          <ProjBasicDetails
-            key="rerastatus"
-            icon={<EndDate />}
-            title="Rera status"
-            value={PhaseOverview[0]?.rerastatus}
-            className="mr-[5%] pt-[2%] mb-[3%] "
-          />
-          }
-
-          {phaseList?.length == 1 &&
-          <ProjBasicDetails
-            key="reraId"
-            icon={<EndDate />}
-            title="Rera Id"
-            value={PhaseOverview[0]?.reraId}
-            className="mr-[5%] pt-[2%] mb-[3%] "
-          />
-          }
-
         </div>
         <div className=" flex justify-start md:justify-end items-start md:items-end flex-col mt-[3%] md:mt-0 ">
           <button

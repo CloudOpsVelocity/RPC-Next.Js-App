@@ -23,6 +23,7 @@ import Image from "next/image";
 import { forgetPasswordLockImg } from "@/app/images/commonImages";
 import { signIn } from "next-auth/react";
 import ForgotAuthPopup from "../../atoms/ForgotPopup";
+import handleTrimAndReplace from "@/app/utils/input/validations";
 const schema = yup.object().shape({
   mobile: yup
     .number()
@@ -204,6 +205,7 @@ const Form = () => {
             reveal ? <EyeOpen /> : <EyeClosed />
           }
           {...form.getInputProps("password")}
+          onBlur={(e) => handleTrimAndReplace(e, "password", form)}
         />
         <PasswordInput
           classNames={{
@@ -219,6 +221,7 @@ const Form = () => {
             reveal ? <EyeOpen /> : <EyeClosed />
           }
           {...form.getInputProps("confirmPassword")}
+          onBlur={(e) => handleTrimAndReplace(e, "confirmPassword", form)}
         />
 
         <Button

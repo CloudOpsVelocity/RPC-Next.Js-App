@@ -8,7 +8,6 @@ import { MantineProvider, ColorSchemeScript } from "@mantine/core";
 import "@mantine/core/styles.css";
 import SessionProvider from "./context/session";
 import ReactQueryProvider from "./context/rquery";
-import toast, { Toaster } from "react-hot-toast";
 import Layout from "@/app/components/layouts/primary";
 import { Provider } from "jotai";
 

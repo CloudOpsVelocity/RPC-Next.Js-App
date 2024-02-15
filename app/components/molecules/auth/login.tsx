@@ -1,6 +1,13 @@
 "use client";
 import { useForm, yupResolver } from "@mantine/form";
-import { TextInput, Button, Box, PasswordInput, em } from "@mantine/core";
+import {
+  TextInput,
+  Button,
+  Box,
+  PasswordInput,
+  em,
+  NumberInput,
+} from "@mantine/core";
 import useAuth from "@/app/hooks/useAuth";
 import Link from "next/link";
 import { useState } from "react";
@@ -8,19 +15,19 @@ import * as yup from "yup";
 import S from "@/app/styles/Pass.module.css";
 import { EyeClosed, EyeOpen } from "@/app/images/commonSvgs";
 import { useMediaQuery } from "@mantine/hooks";
+import handleTrimAndReplace from "@/app/utils/input/validations";
 const schema = yup.object().shape({
   username: yup
-    .string()
-    .required("User name is required")
+    .number()
+    .positive("Mobile number must be positive")
+    .integer("Mobile number must be an integer")
+    .typeError("Valid 10-digit contact number is required")
     .test(
-      "is-valid-username",
-      "Invalid username. Must be a valid email or a 10-digit mobile number",
-      (value) => {
-        const isEmail = yup.string().email().isValidSync(value);
-        const isMobileNumber = /^[0-9]{10}$/i.test(value);
-        return isEmail || isMobileNumber;
-      }
-    ),
+      "len",
+      "Mobile number must be exactly 10 digits",
+      (val) => val?.toString().length === 10
+    )
+    .required("Mobile number is required"),
   password: yup
     .string()
     .required("Password is required")
@@ -47,14 +54,21 @@ function Login() {
         onSubmit={form.onSubmit(onSubmit)}
         className="w-[100%] flex justify-center items-center flex-col "
       >
-        <TextInput
+        <NumberInput
+          mt={"xs"}
           required
+          classNames={{
+            input: S.input,
+          }}
+          hideControls
           size="lg"
           className="w-[100%] mb-[3%] "
-          label="User Name"
-          placeholder="Enter your email or mobiile number"
+          label="Mobile Number"
+          placeholder="Enter your registered mobile number"
           {...form.getInputProps("username")}
+          maxLength={10}
         />
+
         <PasswordInput
           classNames={{
             visibilityToggle: S.visibilityToggle,
@@ -69,6 +83,7 @@ function Login() {
             reveal ? <EyeOpen /> : <EyeClosed />
           }
           {...form.getInputProps("password")}
+          onBlur={(e) => handleTrimAndReplace(e, "password", form)}
         />
 
         <Link

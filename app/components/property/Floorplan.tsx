@@ -2,9 +2,13 @@
 
 import React from "react";
 import {
+  Block,
+  DateIcons,
   EndDate,
+  Marble,
   StartDate,
   TotalLandArea,
+  TowerIcon,
 } from "../../images/commonSvgs";
 import { PhaseList } from "@/app/validations/types/project";
 import RoomBasicDetails from "./RoomBasicDetails";
@@ -18,31 +22,45 @@ export default function RoomFloorplansBlock({ data }: { data: PhaseList[] }) {
           Floor Plan Block
         </h1>
 
-        <p className="text-[16px] lg:text-[24px] font-[500] text-[#4D6677] italic">
-          Parkings details include area and other
+        <p className="text-[16px] lg:text-[24px] font-[500] text-[#4D6677] italic capitalize">
+          see floor plan OF your selected property
         </p>
 
-        <div className="flex justify-start items-start flex-wrap w-[80%]  ">
+        <div className="flex justify-start items-start flex-wrap ">
           <RoomBasicDetails
             key="launchDate"
-            icon={<EndDate />}
-            title="Opening Car Parking"
+            icon={<Marble />}
+            title="Unit Number"
             value={"02"}
             className="mr-[3%] mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]  "
           />
           <RoomBasicDetails
             key="possessionDate"
-            icon={<StartDate />}
-            title="Opening Live Parking"
-            value={"02"}
+            icon={<TowerIcon />}
+            title="Tower"
+            value={"Tower 1"}
             className="mr-[3%]  mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]  "
           />
           <RoomBasicDetails
             key="landArea"
-            icon={<TotalLandArea />}
-            title="Convered Car Parking"
+            icon={<Block />}
+            title="Block"
             value={"02"}
             className="mr-[3%]  mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]  "
+          />{" "}
+          <RoomBasicDetails
+            key="launchDate"
+            icon={<Marble />}
+            title="Floor"
+            value={"02"}
+            className="mr-[3%] mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]  "
+          />
+          <RoomBasicDetails
+            key="launchDate"
+            icon={<StartDate />}
+            title="Possession Date"
+            value={"12/ 03/ 2023"}
+            className="mr-[3%] mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]  "
           />
         </div>
       </div>
@@ -61,4 +79,3 @@ export default function RoomFloorplansBlock({ data }: { data: PhaseList[] }) {
     </div>
   );
 }
-

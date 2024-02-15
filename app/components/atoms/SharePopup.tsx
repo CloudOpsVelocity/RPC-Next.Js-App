@@ -21,12 +21,16 @@ import { usePathname } from "next/navigation";
 
 export default function SharePopup({
   title = "Share Project",
+  url,
 }: {
   title?: string;
+  url?: string;
 }) {
   const clipboard = useClipboard({ timeout: 500 });
   const pathname = usePathname();
-  const CopiedUrl = `${process.env.NEXT_PUBLIC_PROJECT_URL}/${pathname}`;
+  const CopiedUrl = url
+    ? url
+    : `${process.env.NEXT_PUBLIC_PROJECT_URL}/${pathname}`;
 
   const [opened, { open, close }] = useDisclosure(false);
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);

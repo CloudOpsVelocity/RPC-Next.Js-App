@@ -9,7 +9,7 @@ type Props = {
 };
 
 export default function AboutBuilder({ id }: Props) {
-  const { data, isLoading } = useBuilder({ id, y: "N" });
+  const { data } = useBuilder({ id, y: "N" });
   return (
     <div className="w-[90%] scroll-mt-[90px] mt-[5%] mb-[5%]">
       <div className="w-full justify-between items-center ">
@@ -17,7 +17,7 @@ export default function AboutBuilder({ id }: Props) {
           About Builder
         </h1>
         <p className=" text-[#148B16] italic text-[20px] lg:text-[26px] font-[700]">
-          {data?.data?.companyName}
+          {data?.data?.ceoName}
         </p>
         <div className="rounded-[20px] mt-[1%] flex justify-between items-center bg-[#FFF] shadow-md w-[100%] mb-[2%] lg:w-[50%] p-[1%] ">
           <div className="w-[30%] border-solid border-[#92B2C8] border-r-[1px]">

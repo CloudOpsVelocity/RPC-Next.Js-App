@@ -4,15 +4,12 @@ import MainCarousel from "../molecules/carousel/main";
 import { Carousel, CarouselSlide } from "@mantine/carousel";
 import Image from "next/image";
 import Button from "../../elements/button";
-import {
-  Phone,
-  RERAsvg,
-  ReraIcon,
-  shortlistIconSvg,
-} from "@/app/images/commonSvgs";
+import { Phone, Shorlisted, shortlistIconSvg } from "@/app/images/commonSvgs";
 import { formatCurrency } from "@/app/utils/numbers";
-import { useToggle } from "@mantine/hooks";
-// import { formatDate } from "@/app/utils/date";
+import { useSession } from "next-auth/react";
+import LoginPopup from "./modals/LoginPop";
+import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
+import { useShortlistAndCompare } from "@/app/hooks/storage";
 
 type Props = {
   type: string;
@@ -29,7 +26,24 @@ type CardProps = {
 };
 
 export function ProjectCard({ type, cardData }: CardProps) {
-  const [value, toggle] = useToggle(["Shortlist", "Shortlisted"]);
+  const [, { open }] = useReqCallPopup();
+  const { data: session } = useSession();
+  const { toggleShortlist, shortlistedItems } = useShortlistAndCompare();
+
+  const isItemInShortlist =
+    shortlistedItems.length > 0 &&
+    shortlistedItems.some(
+      (item) => item.id === cardData.projIdEnc && item.status === "Y"
+    );
+
+  const onAddingShortList = () => {
+    if (session) {
+      toggleShortlist({
+        id: cardData.projIdEnc,
+        status: isItemInShortlist ? "N" : "Y",
+      });
+    }
+  };
   return (
     <>
       <div
@@ -65,7 +79,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
           )}
           <div className="relative  max-h-[212px]">
             <Image
-              src="/property.jpeg"
+              src={cardData.coverUrl}
               alt="Sobha Dream Acres"
               className="w-full  mb-4 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] max-h-[212px]"
               width={300}
@@ -78,13 +92,19 @@ export function ProjectCard({ type, cardData }: CardProps) {
             )}
 
             <div className=" right-2 absolute ">
-              <button
-                className="mt-[-30px] rounded-[10px] relative bottom-[35px] z-10 p-[8px] text-[#0073C6] text-[18px] font-[700] flex pl-[4px] justify-center items-center bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100"
-                onClick={() => toggle()}
-              >
-                <span className=" w-[24px] h-[24px] ">{shortlistIconSvg}</span>
-                {value}
-              </button>
+              {!session ? (
+                <LoginPopup type="Shortlist" card={true} />
+              ) : (
+                <button
+                  className="mt-[-30px] rounded-[10px] relative bottom-[35px] z-10 p-[8px] text-[#0073C6] text-[18px] font-[700] flex pl-[4px] justify-center items-center bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100"
+                  onClick={() => onAddingShortList()}
+                >
+                  <span className=" w-[24px] h-[24px] ">
+                    {isItemInShortlist ? Shorlisted : shortlistIconSvg}
+                  </span>
+                  {isItemInShortlist ? "Shortlisted" : "Shortlist"}
+                </button>
+              )}
             </div>
           </div>
 
@@ -109,10 +129,12 @@ export function ProjectCard({ type, cardData }: CardProps) {
               </p>
             )}
 
-            {cardData.propTypes && (
+            {cardData.propTypes ? (
               <p className="mb-[6px] text-[#00487C] text-sm not-italic font-semibold leading-[normal] tracking-[0.56px]">
                 {cardData.propTypes.map((eachCity: string) => eachCity)}
               </p>
+            ) : (
+              "N/A"
             )}
 
             {type != "proj" && (
@@ -122,7 +144,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
             )}
 
             <p className="text-[#565D70]  not-italic font-semibold leading-[normal] tracking-[0.56px]">
-              {cardData?.cityv ?? "N/A"} {cardData.pinCode}
+              {cardData?.city ?? "N/A"} {cardData.locality}
             </p>
 
             {type != "proj" && (
@@ -134,7 +156,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
               icon={<Phone />}
               title="Request a Callback"
               buttonClass=" text-[#FFF] mt-[12px] text-[16px] font-[600] bg-[#0073C6] rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[6px]  "
-              onChange={() => ""}
+              onChange={() => open("card", cardData.projIdEnc)}
             />
           </div>
         </div>
@@ -144,7 +166,6 @@ export function ProjectCard({ type, cardData }: CardProps) {
 }
 
 const ProjectCarousel = ({ type, content, title, projName, data }: Props) => {
-  // console.log(data);
   return (
     <div className="w-[100%] mb-[5%]">
       <h2 className="text-[24px] lg:text-[32px] font-semibold uppercase cursor-pointer">
@@ -175,7 +196,7 @@ const ProjectCarousel = ({ type, content, title, projName, data }: Props) => {
 export default ProjectCarousel;
 function formatDate(inputDate: string | undefined): string {
   if (inputDate == null) {
-    return ""; // You can return an empty string or any default value
+    return "";
   }
 
   const date = new Date(inputDate.replace(/IST/, "GMT+0530"));

@@ -7,7 +7,6 @@ import Gallery from "./modals/Gallery";
 import { getImageUrls } from "@/app/utils/image";
 import { AspectRatio, Image, Overlay } from "@mantine/core";
 import { useGallery } from "@/app/hooks/useGallery";
-// import ReactVideoThumbnail from "react-video-thumbnail";
 
 export default function GalleryBlock({
   coverImageUrl,
@@ -29,9 +28,8 @@ export default function GalleryBlock({
   };
   const [content, { open, close }] = useGallery();
 
-  // const limitedImages = images.slice(0, 5);
   return (
-    <div className="w-[90%] scroll-mt-[90px] mb-[10%]  " id="galleria">
+    <div className="w-[90%] scroll-mt-[90px] mb-[5%]  " id="galleria">
       <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35] uppercase mb-[12px]">
         gALLERIA of{" "}
         <span className="text-[#148B16] font-[700] uppercase">{projName}</span>{" "}
@@ -59,6 +57,7 @@ export default function GalleryBlock({
                   h={550}
                   src={selectedMedia}
                   alt="Preview"
+                  className="cursor-pointer"
                   onClick={() => {
                     console.log(selectedMedia);
                     open("image", selectedMedia);
@@ -119,32 +118,35 @@ export default function GalleryBlock({
               // <button onClick={() => open("image")}>View More</button>
             )} */}
           </div>
-
-          <h3 className="text-[#737579] font-[600] text-[20px] lg:text-[24px] mb-[2%] ">
-            Videos
-          </h3>
-          <div className="flex justify-start items-start w-full gap-[4%] flex-wrap ">
-            {videos?.map((img, ind) => (
-              <div className="relative w-[110px] lg:w-[152px] flex justify-center items-center h-[68px] lg:h-[94px] bg-white rounded-[5px]  mb-[4%] cursor-pointer">
-                <video
-                  key={ind}
-                  // width={150}
-                  // height={100}
-                  src={img as string}
-                  //alt={`Image ${ind + 1}`}
-                  className={`!w-full rounded-[5px] cursor-pointer ${
-                    selectedMedia === img
-                      ? "border-2 border-[#4d6677] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)]"
-                      : ""
-                  }`}
-                  onClick={() => handleMediaClick(img as string)}
-                />
-                <span className="absolute top-[40%] left-[40%] pointer-events-none ">
-                  {videoPlayIcon}
-                </span>
+          {videos && videos.length > 0 && (
+            <>
+              <h3 className="text-[#737579] font-[600] text-[20px] lg:text-[24px] mb-[2%] ">
+                Videos
+              </h3>
+              <div className="flex justify-start items-start w-full gap-[4%] flex-wrap ">
+                {videos?.map((img, ind) => (
+                  <div className="relative w-[110px] lg:w-[152px] flex justify-center items-center h-[68px] lg:h-[94px] bg-white rounded-[5px]  mb-[4%] cursor-pointer">
+                    <video
+                      key={ind}
+                      // width={150}
+                      // height={100}
+                      src={img as string}
+                      //alt={`Image ${ind + 1}`}
+                      className={`!w-full rounded-[5px] cursor-pointer ${
+                        selectedMedia === img
+                          ? "border-2 border-[#4d6677] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)]"
+                          : ""
+                      }`}
+                      onClick={() => handleMediaClick(img as string)}
+                    />
+                    <span className="absolute top-[40%] left-[40%] pointer-events-none ">
+                      {videoPlayIcon}
+                    </span>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </>
+          )}
         </div>
       </div>
     </div>

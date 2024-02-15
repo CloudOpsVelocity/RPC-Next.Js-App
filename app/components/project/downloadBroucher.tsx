@@ -65,7 +65,7 @@ const DownloadBroucher = ({ url }: { url: string }) => {
 
   return (
     url && (
-      <div className="flex scroll-mt-[90px] justify-start mt-[5%] items-center flex-wrap w-[90%] gap-[2%] ">
+      <div className="flex scroll-mt-[90px] justify-start mt-[5%] items-center flex-wrap w-[90%] gap-[2%] mb-[3%]">
         <p className="text-[28px] lg:text-[32px] text-[#023993] font-[700]">
           Brochure{" "}
         </p>

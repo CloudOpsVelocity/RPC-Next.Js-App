@@ -1,32 +1,32 @@
-.pill{
-    display: none;
+.pill {
+  display: none;
 }
 
-.wrapperSelect{
-    border-radius: 46px!important;
-    background: #0073C6!important;
-    color: #FFF;
-    font-family: Montserrat;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 24px;
-    width: 100px;
+.wrapperSelect {
+  border-radius: 46px !important;
+  background: #0073c6 !important;
+  color: #fff;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+  width: 100px;
 }
 
-.MultiSelectionPill{
-    border-radius: 26px;
-    background: #CBE9FF;
-    box-shadow: 0px 4px 20px 0px rgba(112, 144, 176, 0.08);
+.MultiSelectionPill {
+  border-radius: 26px;
+  background: #cbe9ff;
+  box-shadow: 0px 4px 20px 0px rgba(112, 144, 176, 0.08);
 }
 
-.wrapperMultiSelection{
-    min-height: 46px;
-    max-width:446px;
-    border-radius: 57px;
-    border-left: 0.3px solid #98A5B8;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-left: 5%;
+.wrapperMultiSelection {
+  min-height: 46px;
+  max-width: 446px;
+  border-radius: 57px;
+  border-left: 0.3px solid #98a5b8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 1rem;
 }

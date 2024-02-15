@@ -19,18 +19,15 @@ import ProjectDetailsP from "@/app/components/project/projectDetailsP";
 import Specifications from "@/app/components/project/specification";
 import ProjectDrawer from "@/app/components/project/Drawer";
 import DownloadBroucher from "@/app/components/project/downloadBroucher";
-import Download from "@/app/components/project/modals/Download";
-import FloorDownload from "@/app/components/project/modals/FloorDownload";
 import NearByCarousel from "@/app/components/project/NearByCarousel";
-import Image from "next/image";
+import MasterPlan from "@/app/components/project/masterplan";
+import LeafMap from "@/app/components/project/map";
 
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
   const data = await getProjectDetails(slug);
   return (
     <div className="w-full relative">
-      <Download />
-      <FloorDownload />
       <div className="mt-[90px] w-full pb-[2%] flex items-center justify-center flex-col">
         <div className="p-[2%] w-full">
           <p className="text-[16px] text-[#565D70] font-[500] mb-[1%]">
@@ -64,6 +61,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           data={data.phaseList}
           slug={slug}
         />
+        <MasterPlan projName={data.projectName} />
         <FloorplansBlock
           projName={data.projectName}
           data={data.phaseList}
@@ -75,9 +73,13 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           media={data.media}
         />
         <Amenties data={data.amenityList} />
-        {/* {data.lat && data.lang && (
-          <Nearby lat={data.lat} lang={data.lang} projName={data.projectName} />
-        )} */}
+        {data.lat && data.lang && (
+          <LeafMap
+            lat={data.lat}
+            lang={data.lang}
+            projName={data.projectName}
+          />
+        )}
         <Specifications
           data={data.specificationList}
           projName={data.projectName}
@@ -107,7 +109,11 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         <Reviews projName={data.projectName} />
         <DownloadBroucher url={data?.media?.projBroucherUrl} />
         <FaqWithBg data={data.faqs} projName={data.projectName} />
-        <NearByCarousel projName={data.projectName} />
+        <NearByCarousel
+          projName={data.projectName}
+          lat={data.lat}
+          lng={data.lang}
+        />
         <ProjectDrawer projName={data.projectName} />
       </div>
     </div>

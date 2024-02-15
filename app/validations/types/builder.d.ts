@@ -5,6 +5,7 @@ export interface Main {
 }
 
 export interface Data {
+  logo: string | null;
   companyName: string;
   builderAddress: string;
   mission: string;
@@ -19,6 +20,8 @@ export interface Data {
   newProject: number;
   onGoingProject: number;
   completedProject: number;
+  email: string;
+  mobile: number;
 }
 
 export interface BuilderProject {

@@ -22,6 +22,7 @@ import { useSession } from "next-auth/react";
 import { MinusIcon, PlusIcon, infoIcon } from "@/app/images/commonSvgs";
 import Link from "next/link";
 import toast from "react-hot-toast";
+import handleTrimAndReplace from "@/app/utils/input/validations";
 
 type FaqWithBgProps = {
   data: FAQ[];
@@ -105,7 +106,7 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error"
   >();
-  const { getInputProps, onSubmit, setErrors, reset } = useForm({
+  const { getInputProps, onSubmit, setErrors, reset, setFieldValue } = useForm({
     initialValues: {
       question: "",
     },
@@ -117,6 +118,9 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
       try {
         await addQna({ question: values.question, projIdEnc: slug });
         reset();
+        toast.success("QnA added successfully", {
+          position: "bottom-center",
+        });
         setStatus("success");
       } catch (error: any) {
         setErrors({ question: error.message });
@@ -147,7 +151,7 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
       className="max-w-[100%] mx-auto my-8 mt-[5%] rounded-lg space-y-2"
       onSubmit={onSubmit(formSubmit)}
     >
-      <h2 className="font-[700] text-[#233333] text-[20px]  ">
+      <h2 className="font-[700] text-[#233333] text-[20px] md:text-[28px]  ">
         Ask your question related to
         <span className="!text-green-600"> {projName} Project!</span>
       </h2>
@@ -158,9 +162,15 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
             id="question"
             name="question"
             placeholder="Type your question here"
-            rows={5}
+            rows={4}
             mb={"sm"}
             {...getInputProps("question")}
+            className="placeholder:!text-[#4D6677] placeholder:!text-[28px] italic font-medium leading-[23.784px] !border !border-solid !border-[#737579] rounded-[10px]"
+            size="lg"
+            radius={"10px"}
+            onBlur={(e) =>
+              handleTrimAndReplace(e, "question", setFieldValue, "dis")
+            }
           />
         </div>
         <Button

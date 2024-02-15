@@ -22,5 +22,20 @@ function getImageUrls(
 
   return imageUrls;
 }
+const imageUrlParser = (originalUrl: string) => {
+  if (!originalUrl) return "";
+  const urlParts = originalUrl.split("/");
 
-export { getImageUrls };
+  const imagesIndex = urlParts.indexOf("images");
+
+  if (imagesIndex !== -1) {
+    const imagePath = urlParts.slice(imagesIndex + 1).join("/");
+
+    const modifiedUrl = `${process.env.NEXT_PUBLIC_URL}/image?path=/images/${imagePath}`;
+
+    return modifiedUrl;
+  }
+
+  return originalUrl;
+};
+export { getImageUrls, imageUrlParser };

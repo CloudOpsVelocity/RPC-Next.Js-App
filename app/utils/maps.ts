@@ -5,27 +5,6 @@ export interface Coordinates {
   };
 }
 
-function calculateDistance(
-  lat1: number,
-  lon1: number,
-  lat2: number,
-  lon2: number
-): number {
-  const R = 6371; // Radius of the Earth in kilometers
-  const dLat = deg2rad(lat2 - lat1);
-  const dLon = deg2rad(lon2 - lon1);
-  const a =
-    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.cos(deg2rad(lat1)) *
-      Math.cos(deg2rad(lat2)) *
-      Math.sin(dLon / 2) *
-      Math.sin(dLon / 2);
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  const distance = R * c; // Distance in kilometers
-
-  return distance;
-}
-
 function deg2rad(deg: number): number {
   return deg * (Math.PI / 180);
 }
@@ -51,6 +30,32 @@ function calculateTime(
   const minutes = Math.round((timeInHours - hours) * 60);
 
   return { hours, minutes };
+}
+function calculateDistance(
+  origin: { lat: number; lng: number },
+  destination: { lat: number; lng: number }
+): number {
+  const earthRadiusKm = 6371; // Radius of the Earth in kilometers
+  const dLat = degreesToRadians(destination.lat - origin.lat);
+  const dLng = degreesToRadians(destination.lng - origin.lng);
+
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(degreesToRadians(origin.lat)) *
+      Math.cos(degreesToRadians(destination.lat)) *
+      Math.sin(dLng / 2) *
+      Math.sin(dLng / 2);
+
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+  const distance = earthRadiusKm * c; // Distance in kilometers
+
+  return distance;
+}
+
+// Function to convert degrees to radians
+function degreesToRadians(degrees: number): number {
+  return degrees * (Math.PI / 180);
 }
 
 export { calculateDistance, calculateTime, deg2rad };

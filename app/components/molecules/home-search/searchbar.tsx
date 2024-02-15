@@ -27,6 +27,30 @@ const initialFilters: filters = {
 };
 
 const Searchbar = () => {
+  const [userLocation, setUserLocation] = useState(null);
+  console.log(userLocation);
+
+  // Function to get user's current location
+  const getUserLocation = () => {
+    if (navigator.geolocation) {
+      // Request user's current location
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          console.log(position);
+          // Extract latitude and longitude from the position object
+          const { latitude, longitude } = position.coords;
+          // Set user's location in state
+          // @ts-ignore
+          setUserLocation({ latitude, longitude });
+        },
+        (error) => {
+          console.error("Error getting user location:", error.message);
+        }
+      );
+    } else {
+      console.error("Geolocation is not supported by this browser.");
+    }
+  };
   const [filters, setFilters] = useState<filters>(initialFilters);
   const [opened, { close, toggle }] = useDisclosure(false);
   const wrapperRef = useClickOutside(() => close());
@@ -101,7 +125,10 @@ const Searchbar = () => {
             </div>
 
             <div className="flex items-center px-3">
-              <button className="text-[16px] md:text-[20px] lg:text-[24px] flex items-center gap-3 text-slate-500">
+              <button
+                className="text-[16px] md:text-[20px] lg:text-[24px] flex items-center gap-3 text-slate-500"
+                onClick={getUserLocation}
+              >
                 <FaLocationCrosshairs size={22} />
                 Near Me
               </button>
@@ -165,7 +192,7 @@ const Searchbar = () => {
                 />
               </div>
 
-              <div className="w-[100%] md:w-[40%] mb-[3%]">
+              {/* <div className="w-[100%] md:w-[40%] mb-[3%]">
                 <h5 className="text-sm font-semibold mb-2">Posted by</h5>
                 <div className="flex gap-5">
                   {config.postedBy.map((by) => (
@@ -177,7 +204,7 @@ const Searchbar = () => {
                     />
                   ))}
                 </div>
-              </div>
+              </div> */}
             </div>
           </section>
         )}

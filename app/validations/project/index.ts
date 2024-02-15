@@ -2,8 +2,7 @@ import * as yup from "yup";
 const ratingSchema = yup.object().shape({
   review: yup
     .string()
-    .matches(/^[a-zA-Z\s]*$/, "Only letters and spaces are allowed")
-    .max(1500, "Review should not exceed 1500 characters")
+    .max(200, "Review should not exceed 200 characters")
     .required("Review is required"),
 
   rating: yup

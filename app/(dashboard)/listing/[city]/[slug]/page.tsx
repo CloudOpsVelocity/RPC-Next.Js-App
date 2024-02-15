@@ -1,28 +1,22 @@
 import React from "react";
 import AboutBuilder from "@/app/components/project/aboutBuilder";
 import GalleryBlock from "@/app/components/project/galleryBlock";
-import Nearby from "@/app/components/project/nearby";
 import Banner from "@/app/components/project/banner";
-import Feature from "@/app/components/project/feature";
 import Reviews from "@/app/components/project/reviews";
 import Amenties from "@/app/components/project/amenties";
 import Loans from "@/app/components/project/loans";
 import { FaqWithBg } from "@/app/components/project/faq";
-import ProjectCarousel from "@/app/components/project/ProjectCard";
-import FirstBlock from "@/app/components/project/firstBlock";
-import Overview from "@/app/components/project/overview";
-import Testimonials from "@/app/components/project/testimonials";
 import About from "@/app/components/project/about";
-import Navigation from "@/app/components/project/navigation";
+import Navigation from "@/app/components/property/Navigation";
 import Link from "next/link";
 import { getProjectDetails } from "@/app/utils/api/project";
-import Specifications from "@/app/components/project/specification";
 import ProjectDrawer from "@/app/components/project/Drawer";
 import RoomDetails from "@/app/components/property/RoomDetails";
 import PropertyOverView from "@/app/components/property/Overview";
 import RoomFloorplansBlock from "@/app/components/property/Floorplan";
-import fakeData from "@/app/data/listing";
 import PropertyBanner from "@/app/components/property/propertyBanner";
+import PropertyFirstBlock from "@/app/components/property/fistblock";
+import LeafMap from "@/app/components/project/map";
 
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
@@ -34,17 +28,13 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           <p className="text-[16px] text-[#565D70] font-[500] mb-[1%]">
             <span>home</span> {" > "}
             <Link href={"/project/banglore"}>
-              <span>Project In Bengaluru</span>
+              <span>Property In Bengaluru</span>
             </Link>{" "}
             {" > "}
-            <Link href={"/project/banglore/whitefield"}>
-              <span>Project In BTM Layout Bengaluru</span>
-            </Link>{" "}
-            {" > "}
-            <span>Sarang By Sumadhura</span>
+            <span>2 BHK Apartment In Whitefield</span>
           </p>
           {/* Top Cover Image Card */}
-          <FirstBlock projectDetails={data} />
+          <PropertyFirstBlock projectDetails={data} />
         </div>
         {/* Navigations Container */}
         <Navigation />
@@ -62,28 +52,20 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         {/* Floor Plan Block */}
         <RoomFloorplansBlock data={data.phaseList} />
         <GalleryBlock {...data.media} />
+        <Amenties data={data.amenityList} />
+        {data.lat && data.lang && (
+          <LeafMap
+            lat={data.lat}
+            lang={data.lang}
+            projName={data.projectName}
+          />
+        )}
+        <Banner projName={data.projectName} />
+        <Loans data={data.banks} projName={data.projectName} />
         {/* About Builder */}
         <AboutBuilder id={data.builderId} />
         <PropertyBanner projName={data.projectName} />
-        {/* {/* <Nearby lat={data.lat} lang={data.lang} /> */}
-        <Specifications
-          data={data.specificationList}
-          projName={data.projectName}
-        />
-        <Banner projName={data.projectName} />
-        <Feature data={data.highlights} projName={data.projectName} />
-        <Loans data={data.banks} projName={data.projectName} />
-        <Amenties data={data.amenityList} />
-        {/* Why Buy This */}
-        {data.wbtp && (
-          <About
-            id="whyBuy"
-            heading="Why Buy"
-            projName={`${data.projectName} ?`}
-            content={data.wbtp}
-          />
-        )}
-        {/* <Testimonials projName={data.projectName} /> */}
+
         <Reviews projName={data.projectName} />
 
         <FaqWithBg data={data.faqs} projName={data.projectName} />
