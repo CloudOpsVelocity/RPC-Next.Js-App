@@ -30,7 +30,6 @@ export const initialState: SearchFilter = {
   areaValue: [0, 5000],
   bugdetValue: [0, 5],
 };
-const locationAtom = atomWithLocation();
 export const searachFilterAtom = atom<SearchFilter>(initialState);
 searachFilterAtom.onMount = (setAtom) => {
   setAtom(getAppliedFilters());

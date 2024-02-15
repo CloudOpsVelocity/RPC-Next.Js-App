@@ -46,6 +46,7 @@ export default function useSearchFilters() {
     listedBy: string;
     areaValue: [number, number];
     bugdetValue: [number, number];
+    // locality: string;
   };
   const handleCheckboxClick = (
     filterType: keyof SearchFilter,

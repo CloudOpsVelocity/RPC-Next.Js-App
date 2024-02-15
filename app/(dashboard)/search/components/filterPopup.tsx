@@ -20,17 +20,33 @@ import { propertyDetailsTypes } from "@/app/data/projectDetails";
 import ClearAll from "./ClearAll";
 import { SEARCH_FILTER_DATA } from "@/app/data/search";
 import useSearchFilters from "@/app/hooks/search";
+import { useDebouncedState } from "@mantine/hooks";
+import useSearch from "@/app/hooks/search/useSearch";
+import { useQuery } from "react-query";
+import { getData } from "@/app/utils/api/search";
 
 const FilterPopup = () => {
   const [current, setCurrent] = useState("Project Status");
   const [locality, setLocality] = useState<string[]>([]);
+  const [builders, setBuilders] = useState<string[]>([]);
   const propKeys = [35, 33, 31, 34, 32];
+  const [localitySearch, setSearchLocality] = useDebouncedState("w", 500);
+  const [builderSearch, setBuilderSearch] = useDebouncedState("w", 500);
 
+  const { isLoading, data } = useQuery({
+    queryFn: () => getData(localitySearch, "loc"),
+    queryKey: ["search" + "loc" + localitySearch],
+    enabled: localitySearch !== "",
+  });
+  const { isLoading: builderDataLoading, data: builderData } = useQuery({
+    queryFn: () => getData(builderSearch, "builders"),
+    queryKey: ["search" + "builders" + builderSearch],
+    enabled: builderSearch !== "",
+  });
   const removeLocality = (index: any) => {
     let oldArray = [...locality];
     oldArray.splice(index, 1);
     setLocality(oldArray);
-    console.log(index);
   };
   const {
     filters,
@@ -48,9 +64,8 @@ const FilterPopup = () => {
     const selectedElement = document.getElementById(item);
 
     if (selectedElement) {
-      // const titleElement = selectedElement.querySelector("h2"); // Assuming the title is wrapped in an <h1> tag
       const titleHeight = selectedElement?.offsetHeight || 0;
-      const position = selectedElement.offsetTop - titleHeight; // Adjust the position by subtracting the title height
+      const position = selectedElement.offsetTop - titleHeight;
 
       viewport.current!.scrollTo({
         top: position - 20,
@@ -127,7 +142,7 @@ const FilterPopup = () => {
                     key={index}
                     className="flex justify-center items-center p-[1%] rounded-[10px] border-[#92B2C8] border-solid border-[1px]  "
                   >
-                    {eachLocality}
+                    {eachLocality.split("+")[0]}
                     <span
                       className="cursor-pointer"
                       onClick={() => removeLocality(index)}
@@ -144,18 +159,18 @@ const FilterPopup = () => {
             classNames={{ pill: classes.pill }}
             label=""
             placeholder="Search Locality"
-            data={[
-              { value: "1", label: "Whitefield" },
-              { value: "2", label: "KR Puram" },
-            ]}
+            data={data}
             searchable
-            nothingFoundMessage="Nothing found..."
+            nothingFoundMessage={
+              localitySearch !== "" ? "Nothing found..." : "Search somehitng..."
+            }
             value={locality}
             comboboxProps={{ withinPortal: false }}
             onChange={setLocality}
             leftSectionPointerEvents="none"
             leftSection={lensSvg}
             style={{ width: "50%" }}
+            onSearchChange={(value) => setSearchLocality(value)}
           />
 
           <h3
@@ -347,42 +362,44 @@ const FilterPopup = () => {
           >
             Builder
           </h3>
-
-          <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
-            {locality.map((eachLocality, index) => {
-              return (
-                <div
-                  key={index}
-                  className="flex justify-center items-center p-[1%] rounded-[10px] border-[#92B2C8] border-solid border-[1px]  "
-                >
-                  {eachLocality}
-                  <span
-                    className="cursor-pointer"
-                    onClick={() => removeLocality(index)}
+          {builders.length > 0 && (
+            <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
+              {builders.map((eachLocality, index) => {
+                return (
+                  <div
+                    key={index}
+                    className="flex justify-center items-center p-[1%] rounded-[10px] border-[#92B2C8] border-solid border-[1px]  "
                   >
-                    {miniItemsCrossIcon}
-                  </span>
-                </div>
-              );
-            })}
-          </div>
+                    {eachLocality.split("+")[0]}
+                    <span
+                      className="cursor-pointer"
+                      onClick={() => removeLocality(index)}
+                    >
+                      {miniItemsCrossIcon}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          )}
 
           <MultiSelect
             classNames={{ pill: classes.pill }}
             label=""
             placeholder="Search Locality"
-            data={[
-              { value: "1", label: "Whitefield" },
-              { value: "2", label: "KR Puram" },
-            ]}
+            data={builderData || []}
             searchable
-            nothingFoundMessage="Nothing found..."
+            nothingFoundMessage={
+              builderDataLoading ? "Loading..." : "Nothing found..."
+            }
             value={locality}
-            onChange={setLocality}
+            // onChange={(value) => handleCheckboxClick()}
             leftSectionPointerEvents="none"
             leftSection={lensSvg}
             style={{ width: "50%" }}
             comboboxProps={{ withinPortal: false }}
+            onSearchChange={(value) => setBuilderSearch(value)}
+            pb={50}
           />
         </ScrollArea>
       </div>
