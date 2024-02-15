@@ -14,6 +14,23 @@
   background: #FFF;
 }
 
+.classForContact{
+  height: 40px !important;
+  color: #212C33;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.64px;
+
+  border-radius: 5px;
+  border: 1px solid #92B2C8;
+
+  background: #FFF;
+  padding-left: 80px;
+}
+
 .contectInput{
   height: 40px !important;
   color: #212C33;

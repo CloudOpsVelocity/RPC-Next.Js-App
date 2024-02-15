@@ -129,7 +129,7 @@ function Individual() {
                 mt={"xs"}
                 required
                 classNames={{
-                  input: S.input,
+                  input: S.classForContact,
                 }}
                 hideControls
                 size="lg"
