@@ -46,7 +46,6 @@ export default function useSearchFilters() {
     listedBy: string;
     areaValue: [number, number];
     bugdetValue: [number, number];
-    // locality: string;
   };
   const handleCheckboxClick = (
     filterType: keyof SearchFilter,
@@ -144,6 +143,18 @@ export default function useSearchFilters() {
     queryFn: () => getFilteredData(convertToQueryParams(params as any)),
     queryKey: ["srp" + convertToQueryParams(params as any)],
   });
+
+  const handleSeachChange = (data: string[]) => {
+    // @ts-ignore
+    setFilters((prev) => {
+      return {
+        ...prev,
+        locality: data.map((item) => {
+          return Number(item.split("+")[1].trim());
+        }),
+      };
+    });
+  };
   return {
     filters,
     setStatus,
@@ -157,6 +168,7 @@ export default function useSearchFilters() {
     setParams,
     params,
     searchProps,
+    handleSeachChange,
   };
 }
 

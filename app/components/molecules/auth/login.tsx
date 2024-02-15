@@ -17,7 +17,7 @@ import { EyeClosed, EyeOpen } from "@/app/images/commonSvgs";
 import { useMediaQuery } from "@mantine/hooks";
 import handleTrimAndReplace from "@/app/utils/input/validations";
 const schema = yup.object().shape({
-  mobile: yup
+  username: yup
     .number()
     .positive("Mobile number must be positive")
     .integer("Mobile number must be an integer")
@@ -65,7 +65,7 @@ function Login() {
           className="w-[100%] mb-[3%] "
           label="Mobile Number"
           placeholder="Enter your registered mobile number"
-          {...form.getInputProps("mobile")}
+          {...form.getInputProps("username")}
           maxLength={10}
         />
 

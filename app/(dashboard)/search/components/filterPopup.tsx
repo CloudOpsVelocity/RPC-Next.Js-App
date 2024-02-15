@@ -55,7 +55,9 @@ const FilterPopup = () => {
     setStatus,
     handleBooleanCheck,
     handleSliderChange,
+    handleSeachChange,
   } = useSearchFilters();
+  console.log("🚀 ~ FilterPopup ~ filters:", filters);
 
   const viewport = useRef<HTMLDivElement>(null);
   const scrollWhereIsSelected = (item: string) => {
@@ -73,6 +75,7 @@ const FilterPopup = () => {
       });
     }
   };
+  console.log(filters);
   return (
     <div className=" flex justify-start items-start w-[70vw] top-[160px] left-[70%]">
       <div className="w-[20%] flex shadow-md justify-start items-center flex-col ">
@@ -166,7 +169,7 @@ const FilterPopup = () => {
             }
             value={locality}
             comboboxProps={{ withinPortal: false }}
-            onChange={setLocality}
+            onChange={handleSeachChange}
             leftSectionPointerEvents="none"
             leftSection={lensSvg}
             style={{ width: "50%" }}
