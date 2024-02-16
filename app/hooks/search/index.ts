@@ -137,8 +137,9 @@ export default function useSearchFilters() {
         break;
     }
   };
-  const handleAppliedFilters = () => {
+  const handleAppliedFilters = (callback?: () => void) => {
     setAppliedFilters({ runner: setParams });
+    callback && callback();
   };
   const searchProps = useQuery({
     queryFn: () => getFilteredData(convertToQueryParams(params as any)),

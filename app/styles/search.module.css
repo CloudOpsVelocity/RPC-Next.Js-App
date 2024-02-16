@@ -18,6 +18,12 @@
   border-radius: 26px;
   background: #cbe9ff;
   box-shadow: 0px 4px 20px 0px rgba(112, 144, 176, 0.08);
+  color: #202020;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 150% */
 }
 
 .wrapperMultiSelection {
@@ -25,6 +31,7 @@
   max-width: 446px;
   border-radius: 57px;
   border-left: 0.3px solid #98a5b8;
+  border-right: none;
   display: flex;
   justify-content: center;
   align-items: center;

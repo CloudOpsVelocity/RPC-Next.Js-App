@@ -32,7 +32,7 @@ const Card = ({ type }: { type: "sell" | "rent" }) => {
   return (
     <div
       className={clsx(
-        "w-[489px] h-[85px] shadow-[0px_4px_30px_0px_rgba(0,0,0,0.15)] rounded-[31px] relative"
+        "w-[489px] h-[85px] shadow-[0px_4px_30px_0px_rgba(0,0,0,0.15)] rounded-[31px] relative cursor-pointer"
       )}
     >
       <AvailListSideSvg type={type} />

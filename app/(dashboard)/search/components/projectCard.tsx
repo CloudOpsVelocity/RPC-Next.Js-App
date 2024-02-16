@@ -84,7 +84,13 @@ const ProjectDetailsCard = ({
             </p>
           )}
           <div className=" w-full h-[147px] bg-gray-300 ">
-            {/* <Image src={coverUrl} width={147} height={147} alt="conver" /> */}
+            <Image
+              src={coverUrl}
+              width={147}
+              height={147}
+              alt="conver"
+              className="w-full h-full"
+            />
           </div>
           <p className="text-[#FFF] text-[12px] mt-[-40px] relative left-[4px] gap-[4px] z-10 flex justify-center rounded-[20px] items-center p-[7px] font-[500] bg-gradient-to-r from-[#000] /0 to-[#00000066]/100">
             {" "}

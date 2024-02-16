@@ -17,7 +17,7 @@ const RightSideBlock = () => {
     searchProps: { data, isLoading },
   } = useSearchFilters();
   return (
-    <div className=" w-[50%] flex justify-center items-start z-[1]">
+    <div className=" w-[50%] flex justify-start items-start z-[1]">
       <Map
         projName={"Searched Location"}
         lat={(data && data[0]?.lat) ?? 47.46489}

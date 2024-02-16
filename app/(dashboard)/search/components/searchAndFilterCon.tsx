@@ -1,7 +1,14 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-import { Drawer, MultiSelect, Popover, Select } from "@mantine/core";
+import {
+  Drawer,
+  MultiSelect,
+  Pill,
+  PillsInput,
+  Popover,
+  Select,
+} from "@mantine/core";
 import { FilterPopup } from "./filterPopup";
 import classes from "@/app/styles/search.module.css";
 import { useQueryState } from "nuqs";
@@ -55,7 +62,8 @@ const DropDownIcon = () => {
 };
 
 const SearchHeader = ({ open, close }: any) => {
-  const { countAppliedFilters } = useSearchFilters();
+  const { countAppliedFilters, filters, remnoveSearchOptions } =
+    useSearchFilters();
   const [name, setName] = useQueryState("q");
 
   const onSearchChange = (value: string) => {
@@ -82,35 +90,29 @@ const SearchHeader = ({ open, close }: any) => {
           rightSection={<DropDownIcon />}
         />
 
-        <MultiSelect
-          label=""
-          placeholder="Enter City"
-          data={[
-            {
-              group: "State",
-              items: [
-                { value: "1", label: "Bengaluru" },
-                { value: "2", label: "Delhi" },
-              ],
-            },
-            {
-              group: "Projects",
-              items: [
-                { value: "2*2", label: "Bengaluru" },
-                { value: "2*3", label: "Delhi" },
-              ],
-            },
-          ]}
-          rightSection={<span></span>}
-          clearable
-          nothingFoundMessage="Nothing found..."
-          classNames={{
-            input: classes.wrapperMultiSelection,
-            pill: classes.MultiSelectionPill,
-          }}
-          dropdownOpened={false}
-          onClick={open}
-        />
+        <PillsInput classNames={{ input: classes.wrapperMultiSelection }}>
+          <Pill.Group>
+            {filters.locality?.map((each, index) => (
+              <Pill
+                onRemove={() => remnoveSearchOptions(each, "locality")}
+                key={index}
+                withRemoveButton
+                classNames={{ root: classes.MultiSelectionPill }}
+              >
+                {each.split("+")[0]}
+              </Pill>
+            ))}
+
+            <PillsInput.Field
+              placeholder={
+                filters.locality.length > 0
+                  ? "Add More"
+                  : "Enter City,Locality & Project"
+              }
+              onClick={open}
+            />
+          </Pill.Group>
+        </PillsInput>
       </div>
       <Popover
         width={"auto"}

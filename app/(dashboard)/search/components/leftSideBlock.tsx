@@ -46,7 +46,14 @@ const LeftSideBlock = () => {
             rightSection={<DropDownIcon />}
             label=""
             placeholder="Sort By"
-            data={["Buy", "Rent", "Plot"]}
+            data={[
+              "Relevance",
+              "Newest first",
+              "Price Low to High",
+              "Price High to Low",
+              "Price / sq.ft. : Low to High",
+              "Price / sq.ft. : High to Low",
+            ]}
             style={{
               height: "32px",
               width: "120px",

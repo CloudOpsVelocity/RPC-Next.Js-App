@@ -18,7 +18,7 @@ export default function ClearAll({
       </button>
       <button
         className="flex justify-center items-center gap-1 px-2 py-1 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] rounded-[10px] bg-[#0073C6] text-white text-lg not-italic font-semibold leading-[normal]"
-        onClick={handleAppliedFilters}
+        onClick={() => handleAppliedFilters()}
       >
         Apply Filters
       </button>
