@@ -347,7 +347,7 @@ function Builder() {
           <NumberInput
             required
             classNames={{
-              input: N.input,
+              input: N.classForContact,
             }}
             hideControls
             size="lg"

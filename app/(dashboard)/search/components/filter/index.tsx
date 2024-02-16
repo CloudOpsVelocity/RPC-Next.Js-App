@@ -1,22 +1,13 @@
 import React, { useState } from "react";
 import Link from "next/link";
-import {
-  Checkbox,
-  Drawer,
-  MultiSelect,
-  Popover,
-  RangeSlider,
-  Select,
-} from "@mantine/core";
+import { MultiSelect, RangeSlider, Select } from "@mantine/core";
 import classes from "@/app/styles/search.module.css";
 import { useQueryState } from "nuqs";
 import useSearchFilters from "@/app/hooks/search";
 import { useQuery } from "react-query";
 import { getData } from "@/app/utils/api/search";
-import { useDebouncedValue, useDisclosure } from "@mantine/hooks";
-import S from "@/app/styles/seach/Drawer.module.css";
+import { useDebouncedValue } from "@mantine/hooks";
 import { DropDownIcon } from "@/app/images/commonSvgs";
-import config from "@/app/components/molecules/home-search/config";
 import Button from "@/app/components/molecules/home-search/button";
 import { SEARCH_FILTER_DATA } from "@/app/data/search";
 import { propertyDetailsTypes } from "@/app/data/projectDetails";

@@ -85,7 +85,7 @@ const RequestCallBackModal = ({
               close={close}
               status={status}
               setStatus={setStatus}
-              name={data?.data.ceoName}
+              name={data?.data?.ceoName ?? ""}
             />
           </div>
           <div className="hidden md:block w-[50%] relative">

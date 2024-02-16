@@ -16,11 +16,11 @@ import S from "@/app/styles/seach/Drawer.module.css";
 import SearchDrawerHeader from "./filter";
 
 const SearchAndFilterCon = () => {
-  const [opened, { open, close }] = useDisclosure(false);
+  const [opened, { open, close, toggle }] = useDisclosure(false);
 
   return (
     <>
-      <SearchHeader open={open} />
+      <SearchHeader open={open} close={close} />
       <Drawer
         opened={opened}
         onClose={close}
@@ -54,16 +54,10 @@ const DropDownIcon = () => {
   );
 };
 
-const SearchHeader = ({ open }: any) => {
+const SearchHeader = ({ open, close }: any) => {
   const { countAppliedFilters } = useSearchFilters();
   const [name, setName] = useQueryState("q");
-  const [debounced] = useDebouncedValue(name, 500);
 
-  const { data, isLoading } = useQuery({
-    queryKey: ["search"],
-    queryFn: () => getData(debounced, "full"),
-    enabled: !!debounced,
-  });
   const onSearchChange = (value: string) => {
     !value ? setName(null) : setName(value);
   };

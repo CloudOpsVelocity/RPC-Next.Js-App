@@ -22,6 +22,7 @@ import DownloadBroucher from "@/app/components/project/downloadBroucher";
 import NearByCarousel from "@/app/components/project/NearByCarousel";
 import MasterPlan from "@/app/components/project/masterplan";
 import LeafMap from "@/app/components/project/map";
+import ListingRentAvail from "@/app/components/project/listingRentAvail";
 
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
@@ -48,6 +49,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         {/* Navigations Container */}
         <Navigation />
         <Overview {...data} />
+        <ListingRentAvail projName={data.projectName} />
         {/* About */}
         <About
           id="about"
