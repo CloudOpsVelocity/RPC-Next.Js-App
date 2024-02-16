@@ -115,6 +115,7 @@ export const filterParser = (data: SearchFilter) => {
     minPrice: "bugdetValue",
     maxPrice: "bugdetValue",
     builderIds: "builderIds",
+    city: "city",
   };
 
   // Iterate through each property

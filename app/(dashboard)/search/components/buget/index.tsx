@@ -21,6 +21,7 @@ export default function BugdetFilter() {
             ₹ {filters.bugdetValue[0]} - ₹ {filters.bugdetValue[1]} Cr
           </p>
           <RangeSlider
+            color="green"
             key="budgetSlider"
             marks={[
               { value: 0, label: "₹ 0" },

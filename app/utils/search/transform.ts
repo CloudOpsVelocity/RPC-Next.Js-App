@@ -11,6 +11,7 @@ interface SearchFilter {
   areaValue: [number, number];
   bugdetValue: [number, number];
   builderIds: string[];
+  city: string | null;
 }
 
 const convertToOriginalState = (data: any): SearchFilter => {
@@ -27,6 +28,7 @@ const convertToOriginalState = (data: any): SearchFilter => {
     areaValue: [0, 5000],
     bugdetValue: [0, 5],
     builderIds: [],
+    city: null,
   };
 
   if (data.unitTypes !== undefined) {

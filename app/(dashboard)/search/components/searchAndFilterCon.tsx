@@ -36,6 +36,7 @@ const SearchAndFilterCon = () => {
           overlay: S.overlay,
           content: S.content,
           header: S.header,
+          body: classes.body,
         }}
       >
         <SearchDrawerHeader open={open} close={close} />
@@ -97,7 +98,10 @@ const SearchHeader = ({ open, close }: any) => {
                 onRemove={() => remnoveSearchOptions(each, "locality")}
                 key={index}
                 withRemoveButton
-                classNames={{ root: classes.MultiSelectionPill }}
+                classNames={{
+                  root: classes.MultiSelectionPill,
+                  remove: classes.removeButton,
+                }}
               >
                 {each.split("+")[0]}
               </Pill>
@@ -119,7 +123,8 @@ const SearchHeader = ({ open, close }: any) => {
         trapFocus
         position="bottom"
         withArrow
-        shadow="md"
+        shadow="lg"
+        radius={10}
         offset={{ mainAxis: 10, crossAxis: 0 }}
       >
         <Popover.Target>
@@ -145,7 +150,8 @@ const SearchHeader = ({ open, close }: any) => {
         trapFocus
         position="bottom"
         withArrow
-        shadow="md"
+        shadow="lg"
+        radius={10}
         offset={{ mainAxis: 10, crossAxis: 0 }}
       >
         <Popover.Target>
@@ -174,7 +180,8 @@ const SearchHeader = ({ open, close }: any) => {
         trapFocus
         position="bottom"
         withArrow
-        shadow="md"
+        shadow="lg"
+        radius={10}
         offset={{ mainAxis: 10, crossAxis: 0 }}
       >
         <Popover.Target>
@@ -204,7 +211,8 @@ const SearchHeader = ({ open, close }: any) => {
         trapFocus
         position="bottom"
         withArrow
-        shadow="md"
+        shadow="lg"
+        radius={10}
         offset={{ mainAxis: 10, crossAxis: -200 }}
       >
         <Popover.Target>

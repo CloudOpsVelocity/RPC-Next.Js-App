@@ -10,7 +10,7 @@ import React from "react";
 export default function Results() {
   const { push } = useRouter();
   const { data, isLoading, handleResetQuery } = useQsearch();
-  const { filters, setFilters } = useSearchFilters();
+  const { filters, setFilters, setSingleType } = useSearchFilters();
 
   if (isLoading) {
     return <Loading />;
@@ -48,11 +48,11 @@ export default function Results() {
         <h2 className="text-[#5F81B2] text-xl flex space-x-2 items-center">
           <SearchLocationIcon /> <span> Location</span>
         </h2>
-        <SubHeading text="City" />
+        {cities.length > 0 && <SubHeading text="City" />}
+
         <ul>
           {cities?.map((locality: any) => (
             <li
-              onClick={() => handleAddSearch(`${locality.name}+${locality.id}`)}
               className="text-[#737579] text-xl not-italic font-medium leading-[normal] cursor-pointer"
               key={locality.id}
             >
@@ -60,8 +60,8 @@ export default function Results() {
             </li>
           ))}
         </ul>
+        {localities.length > 0 && <SubHeading text="Locality" />}
 
-        <SubHeading text="Locality" />
         <ul>
           {localities?.map((locality: any) => (
             <li

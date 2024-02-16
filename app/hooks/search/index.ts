@@ -39,6 +39,9 @@ export default function useSearchFilters() {
   const setPropTypes = (propertyType: number) => {
     setFilters({ ...filters, propTypes: propertyType });
   };
+  const setSingleType = (key: keyof SearchFilter, value: string) => {
+    setFilters({ ...filters, [key]: value });
+  };
   type SearchFilter = {
     unitTypes: string;
     bathRooms: string;
@@ -166,10 +169,12 @@ export default function useSearchFilters() {
     searchProps,
     setFilters,
     remnoveSearchOptions,
+    setSingleType,
   };
 }
 
 const getFilteredData = async (query: string): Promise<Search[]> => {
+  console.log(query);
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_PROJECT_URL}/srp/projSearch?city=21&${query}`

@@ -10,7 +10,7 @@ const Button: React.FC<ButtonProps> = ({ selected, value, onClick }) => {
     <button
       onClick={onClick}
       className={clsx(
-        "px-6 py-1 border border-[#CBE9FF]  rounded-full text-sm",
+        "px-4 py-2 border border-[#CBE9FF]  rounded-full text-sm text-[color:var(--Field-colour-stroke,#282828)]  not-italic font-medium leading-[normal]",
         selected && " bg-[#AEDDFF] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)]",
         !selected && "bg-[#F9FCFF]"
       )}

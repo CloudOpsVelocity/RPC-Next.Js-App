@@ -40,7 +40,7 @@ const SearchDrawerHeader = ({ open, close }: any) => {
             <Select
               label=""
               placeholder="Select"
-              data={["Buy", "Rent", "Plot"]}
+              data={["Buy", "Rent"]}
               classNames={{ input: classes.wrapperSelect }}
               defaultValue={"Buy"}
               rightSection={<DropDownIcon />}
@@ -59,7 +59,11 @@ const SearchDrawerHeader = ({ open, close }: any) => {
                 ))}
 
                 <PillsInput.Field
-                  placeholder="Enter City,Locality & Project"
+                  placeholder={
+                    filters.locality.length > 0
+                      ? "Add More"
+                      : "Enter City,Locality & Project"
+                  }
                   value={name ?? ""}
                   onChange={(e) => onSearchChange(e.target.value)}
                 />

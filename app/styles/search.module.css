@@ -37,3 +37,21 @@
   align-items: center;
   padding-left: 1rem;
 }
+
+.body {
+  overflow: hidden;
+}
+
+.button {
+  color: var(--Field-colour-stroke, #282828);
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.remove {
+  color: red;
+}

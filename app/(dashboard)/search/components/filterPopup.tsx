@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react";
 import { searchDetails } from "@/app/data/searchDetails";
 import Button from "@/app/elements/button";
 import {
+  DropDownIcon,
   fourStarIcon,
   lensSvg,
   miniItemsCrossIcon,
@@ -137,11 +138,11 @@ const FilterPopup = () => {
                 return (
                   <div
                     key={index}
-                    className="flex justify-center items-center p-[1%] rounded-[10px] border-[#92B2C8] border-solid border-[1px]  "
+                    className="capitalize flex justify-center items-center p-[1%] r shadow-[0px_4px_10px_0px_rgba(202,233,255,0.30)]   border rounded-[5px] border-solid border-[#92B2C8]"
                   >
                     {eachLocality.split("+")[0]}
                     <span
-                      className="cursor-pointer"
+                      className="cursor-pointer "
                       onClick={() => remnoveSearchOptions(index, "locality")}
                     >
                       {miniItemsCrossIcon}
@@ -168,6 +169,7 @@ const FilterPopup = () => {
             leftSection={lensSvg}
             style={{ width: "50%" }}
             onSearchChange={(value) => setSearchLocality(value)}
+            rightSection={<DropDownIcon />}
           />
 
           <h3
@@ -232,6 +234,7 @@ const FilterPopup = () => {
             {filters.areaValue[0]} sq.ft - {filters.areaValue[1]} sq.ft
           </p>
           <RangeSlider
+            color="green"
             marks={[
               { value: 0, label: "0 sq.ft" },
               { value: 1000, label: "1000 sq.ft" },
@@ -257,6 +260,7 @@ const FilterPopup = () => {
             ₹ {filters.bugdetValue[0]} - ₹ {filters.bugdetValue[1]} Cr
           </p>
           <RangeSlider
+            color="green"
             key="budgetSlider"
             marks={[
               { value: 0, label: "₹ 0" },
@@ -399,6 +403,7 @@ const FilterPopup = () => {
             comboboxProps={{ withinPortal: false }}
             onSearchChange={(value) => setBuilderSearch(value)}
             pb={50}
+            rightSection={<DropDownIcon />}
           />
         </ScrollArea>
       </div>

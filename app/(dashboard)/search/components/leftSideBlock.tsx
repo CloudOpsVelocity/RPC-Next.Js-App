@@ -24,7 +24,7 @@ const LeftSideBlock = () => {
   } = useSearchFilters();
 
   return (
-    <div className="w-[50%] bg">
+    <div className="w-[50%] bg min-w-[500px]">
       <Tabs value={activeTab} onChange={setActiveTab} defaultValue="proj">
         <Tabs.List className={S.bg}>
           {SEARCH_FILTER_DATA.categoryData.map((eachItem, index) => {
@@ -54,13 +54,7 @@ const LeftSideBlock = () => {
               "Price / sq.ft. : Low to High",
               "Price / sq.ft. : High to Low",
             ]}
-            style={{
-              height: "32px",
-              width: "120px",
-              border: "none",
-              marginLeft: "auto",
-            }}
-            className="placeholder:!text-[#0073C6] text-base not-italic font-medium leading-[normal]"
+            className="placeholder:!text-[#0073C6] text-base not-italic font-medium leading-[normal] ml-auto"
           />
         </Tabs.List>
 

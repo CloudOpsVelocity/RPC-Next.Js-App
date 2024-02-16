@@ -16,6 +16,7 @@ export interface SearchFilter {
   areaValue: [number, number];
   bugdetValue: [number, number];
   builderIds: string[];
+  city: string | null;
 }
 
 export const initialState: SearchFilter = {
@@ -31,6 +32,7 @@ export const initialState: SearchFilter = {
   areaValue: [0, 5000],
   bugdetValue: [0, 5],
   builderIds: [],
+  city: null,
 };
 export const searachFilterAtom = atom<SearchFilter>(initialState);
 searachFilterAtom.onMount = (setAtom) => {
