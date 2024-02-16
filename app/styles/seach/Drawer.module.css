@@ -1,0 +1,18 @@
+.overlay {
+  margin-top: 90px;
+}
+
+.content {
+  margin-top: 90.2px;
+}
+.header {
+  display: none;
+}
+
+.close {
+  background: white;
+  color: red;
+  border-radius: 100%;
+  fill: #fff;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}

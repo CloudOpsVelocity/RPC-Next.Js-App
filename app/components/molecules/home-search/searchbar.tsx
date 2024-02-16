@@ -28,7 +28,6 @@ const initialFilters: filters = {
 
 const Searchbar = () => {
   const [userLocation, setUserLocation] = useState(null);
-  console.log(userLocation);
 
   // Function to get user's current location
   const getUserLocation = () => {

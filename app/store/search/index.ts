@@ -15,6 +15,7 @@ export interface SearchFilter {
   reraVerified: boolean | null;
   areaValue: [number, number];
   bugdetValue: [number, number];
+  builderIds: string[];
 }
 
 export const initialState: SearchFilter = {
@@ -29,6 +30,7 @@ export const initialState: SearchFilter = {
   reraVerified: null,
   areaValue: [0, 5000],
   bugdetValue: [0, 5],
+  builderIds: [],
 };
 export const searachFilterAtom = atom<SearchFilter>(initialState);
 searachFilterAtom.onMount = (setAtom) => {
@@ -37,6 +39,7 @@ searachFilterAtom.onMount = (setAtom) => {
 export const appliedFiltersParams = atom(null, (get, set, t: any) => {
   const appliedFilters = get(searachFilterAtom);
   const parsedData = filterParser(appliedFilters);
+  console.log(parsedData);
   t.runner(parsedData);
 });
 

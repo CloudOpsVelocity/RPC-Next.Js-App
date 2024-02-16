@@ -43,11 +43,7 @@ const FilterPopup = () => {
     queryKey: ["search" + "builders" + builderSearch],
     enabled: builderSearch !== "",
   });
-  const removeLocality = (index: any) => {
-    let oldArray = [...locality];
-    oldArray.splice(index, 1);
-    setLocality(oldArray);
-  };
+
   const {
     filters,
     handleCheckboxClick,
@@ -55,10 +51,9 @@ const FilterPopup = () => {
     setStatus,
     handleBooleanCheck,
     handleSliderChange,
-    handleSeachChange,
+    setFilters,
+    remnoveSearchOptions,
   } = useSearchFilters();
-  console.log("🚀 ~ FilterPopup ~ filters:", filters);
-
   const viewport = useRef<HTMLDivElement>(null);
   const scrollWhereIsSelected = (item: string) => {
     setCurrent(item);
@@ -75,7 +70,6 @@ const FilterPopup = () => {
       });
     }
   };
-  console.log(filters);
   return (
     <div className=" flex justify-start items-start w-[70vw] top-[160px] left-[70%]">
       <div className="w-[20%] flex shadow-md justify-start items-center flex-col ">
@@ -137,9 +131,9 @@ const FilterPopup = () => {
             Locality
           </h3>
 
-          {locality.length > 0 && (
+          {filters.locality.length > 0 && (
             <div className="flex mb-[3%] justify-start items-start gap-[4%]">
-              {locality.map((eachLocality, index) => {
+              {filters.locality.map((eachLocality, index) => {
                 return (
                   <div
                     key={index}
@@ -148,7 +142,7 @@ const FilterPopup = () => {
                     {eachLocality.split("+")[0]}
                     <span
                       className="cursor-pointer"
-                      onClick={() => removeLocality(index)}
+                      onClick={() => remnoveSearchOptions(index, "locality")}
                     >
                       {miniItemsCrossIcon}
                     </span>
@@ -167,9 +161,9 @@ const FilterPopup = () => {
             nothingFoundMessage={
               localitySearch !== "" ? "Nothing found..." : "Search somehitng..."
             }
-            value={locality}
+            value={filters.locality}
             comboboxProps={{ withinPortal: false }}
-            onChange={handleSeachChange}
+            onChange={(value) => setFilters({ ...filters, locality: value })}
             leftSectionPointerEvents="none"
             leftSection={lensSvg}
             style={{ width: "50%" }}
@@ -365,9 +359,9 @@ const FilterPopup = () => {
           >
             Builder
           </h3>
-          {builders.length > 0 && (
+          {filters.builderIds.length > 0 && (
             <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
-              {builders.map((eachLocality, index) => {
+              {filters.builderIds.map((eachLocality, index) => {
                 return (
                   <div
                     key={index}
@@ -376,7 +370,7 @@ const FilterPopup = () => {
                     {eachLocality.split("+")[0]}
                     <span
                       className="cursor-pointer"
-                      onClick={() => removeLocality(index)}
+                      onClick={() => remnoveSearchOptions(index, "builderIds")}
                     >
                       {miniItemsCrossIcon}
                     </span>
@@ -395,8 +389,10 @@ const FilterPopup = () => {
             nothingFoundMessage={
               builderDataLoading ? "Loading..." : "Nothing found..."
             }
-            value={locality}
-            // onChange={(value) => handleCheckboxClick()}
+            value={filters.builderIds}
+            onChange={(value) =>
+              setFilters((prev) => ({ ...prev, builderIds: value }))
+            }
             leftSectionPointerEvents="none"
             leftSection={lensSvg}
             style={{ width: "50%" }}

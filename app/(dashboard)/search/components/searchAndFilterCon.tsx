@@ -1,8 +1,7 @@
 "use client";
-
 import React, { useState } from "react";
 import Link from "next/link";
-import { MultiSelect, Popover, Select } from "@mantine/core";
+import { Drawer, MultiSelect, Popover, Select } from "@mantine/core";
 import { FilterPopup } from "./filterPopup";
 import classes from "@/app/styles/search.module.css";
 import { useQueryState } from "nuqs";
@@ -10,14 +9,64 @@ import BhkFilter from "./bhk";
 import PropTypeFilter from "./proptype";
 import BugdetFilter from "./buget";
 import useSearchFilters from "@/app/hooks/search";
+import { useQuery } from "react-query";
+import { getData } from "@/app/utils/api/search";
+import { useDebouncedValue, useDisclosure } from "@mantine/hooks";
+import S from "@/app/styles/seach/Drawer.module.css";
+import SearchDrawerHeader from "./filter";
 
 const SearchAndFilterCon = () => {
+  const [opened, { open, close }] = useDisclosure(false);
+
+  return (
+    <>
+      <SearchHeader open={open} />
+      <Drawer
+        opened={opened}
+        onClose={close}
+        position="top"
+        classNames={{
+          overlay: S.overlay,
+          content: S.content,
+          header: S.header,
+        }}
+      >
+        <SearchDrawerHeader open={open} close={close} />
+        {/* Drawer content */}
+      </Drawer>
+    </>
+  );
+};
+
+export { SearchAndFilterCon };
+
+const DropDownIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="14"
+      height="8"
+      viewBox="0 0 14 8"
+      fill="none"
+    >
+      <path d="M0 0.5L7 7.5L14 0.5L0 0.5Z" fill="white" />
+    </svg>
+  );
+};
+
+const SearchHeader = ({ open }: any) => {
   const { countAppliedFilters } = useSearchFilters();
   const [name, setName] = useQueryState("q");
+  const [debounced] = useDebouncedValue(name, 500);
+
+  const { data, isLoading } = useQuery({
+    queryKey: ["search"],
+    queryFn: () => getData(debounced, "full"),
+    enabled: !!debounced,
+  });
   const onSearchChange = (value: string) => {
     !value ? setName(null) : setName(value);
   };
-
   return (
     <div className="m-[2%] w-full flex mt-[100px] pl-[2%] gap-[20px] justify-start items-center ">
       <p className="text-[16px] text-[#737579] font-[500]">
@@ -43,24 +92,30 @@ const SearchAndFilterCon = () => {
           label=""
           placeholder="Enter City"
           data={[
-            { value: "1", label: "Bengaluru" },
-            { value: "2", label: "Delhi" },
-            { value: "3", label: "Bengaluru" },
-            { value: "4", label: "Delhi" },
-            { value: "5", label: "Bengaluru" },
-            { value: "6", label: "Delhi" },
-            { value: "7", label: "Bengaluru" },
-            { value: "8", label: "Delhi" },
+            {
+              group: "State",
+              items: [
+                { value: "1", label: "Bengaluru" },
+                { value: "2", label: "Delhi" },
+              ],
+            },
+            {
+              group: "Projects",
+              items: [
+                { value: "2*2", label: "Bengaluru" },
+                { value: "2*3", label: "Delhi" },
+              ],
+            },
           ]}
           rightSection={<span></span>}
-          onSearchChange={onSearchChange}
-          searchable
           clearable
           nothingFoundMessage="Nothing found..."
           classNames={{
             input: classes.wrapperMultiSelection,
             pill: classes.MultiSelectionPill,
           }}
+          dropdownOpened={false}
+          onClick={open}
         />
       </div>
       <Popover
@@ -169,21 +224,5 @@ const SearchAndFilterCon = () => {
         </Popover.Dropdown>
       </Popover>
     </div>
-  );
-};
-
-export { SearchAndFilterCon };
-
-const DropDownIcon = () => {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="14"
-      height="8"
-      viewBox="0 0 14 8"
-      fill="none"
-    >
-      <path d="M0 0.5L7 7.5L14 0.5L0 0.5Z" fill="white" />
-    </svg>
   );
 };

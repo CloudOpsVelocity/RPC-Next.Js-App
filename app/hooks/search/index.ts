@@ -11,7 +11,8 @@ import { useQueryStates, parseAsString, parseAsInteger } from "nuqs";
 import { useQuery } from "react-query";
 const paramsInit = {
   projStatus: parseAsString,
-  locality: parseAsString,
+  localities: parseAsString,
+  builderIds: parseAsString,
   propTypes: parseAsString,
   unitTypes: parseAsString,
   bathRooms: parseAsString,
@@ -143,18 +144,12 @@ export default function useSearchFilters() {
     queryFn: () => getFilteredData(convertToQueryParams(params as any)),
     queryKey: ["srp" + convertToQueryParams(params as any)],
   });
-
-  const handleSeachChange = (data: string[]) => {
-    // @ts-ignore
-    setFilters((prev) => {
-      return {
-        ...prev,
-        locality: data.map((item) => {
-          return Number(item.split("+")[1].trim());
-        }),
-      };
-    });
+  const remnoveSearchOptions = (index: any, key: "locality" | "builderIds") => {
+    let oldArray = [...filters[key]];
+    oldArray.splice(index, 1);
+    setFilters((prev) => ({ ...prev, [key]: oldArray }));
   };
+
   return {
     filters,
     setStatus,
@@ -168,7 +163,8 @@ export default function useSearchFilters() {
     setParams,
     params,
     searchProps,
-    handleSeachChange,
+    setFilters,
+    remnoveSearchOptions,
   };
 }
 

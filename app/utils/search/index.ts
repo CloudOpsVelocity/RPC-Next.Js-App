@@ -114,6 +114,7 @@ export const filterParser = (data: SearchFilter) => {
     maxArea: "areaValue",
     minPrice: "bugdetValue",
     maxPrice: "bugdetValue",
+    builderIds: "builderIds",
   };
 
   // Iterate through each property
@@ -152,7 +153,13 @@ export const filterParser = (data: SearchFilter) => {
           parsedKey !== "minPrice" &&
           parsedKey !== "maxPrice"
         ) {
-          parsedData[parsedKey] = value.join(",");
+          if (parsedKey === "localities" || parsedKey === "builderIds") {
+            parsedData[parsedKey] = value
+              .map((v: string) => v.split("+")[1])
+              .join(",");
+          } else {
+            parsedData[parsedKey] = value.join(",");
+          }
         }
       } else if (value !== null && value !== "" && !Array.isArray(value)) {
         parsedData[parsedKey] = value;

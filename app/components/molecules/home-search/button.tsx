@@ -11,7 +11,8 @@ const Button: React.FC<ButtonProps> = ({ selected, value, onClick }) => {
       onClick={onClick}
       className={clsx(
         "px-6 py-1 border border-[#CBE9FF] bg-[#F7FBFF] rounded-full text-sm",
-        selected && "custom-shadow"
+        selected &&
+          "custom-shadow bg-[#EAF6FF] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)]"
       )}
     >
       {value}

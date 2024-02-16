@@ -1,4 +1,4 @@
-export const getData = async (query: string, type: string) => {
+export const getData = async (query: string | null, type: string) => {
   if (query === "") {
     return [];
   }

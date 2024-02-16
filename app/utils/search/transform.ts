@@ -10,6 +10,7 @@ interface SearchFilter {
   reraVerified: boolean | null;
   areaValue: [number, number];
   bugdetValue: [number, number];
+  builderIds: string[];
 }
 
 const convertToOriginalState = (data: any): SearchFilter => {
@@ -25,6 +26,7 @@ const convertToOriginalState = (data: any): SearchFilter => {
     reraVerified: null,
     areaValue: [0, 5000],
     bugdetValue: [0, 5],
+    builderIds: [],
   };
 
   if (data.unitTypes !== undefined) {
