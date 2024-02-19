@@ -163,7 +163,13 @@ export const filterParser = (data: SearchFilter) => {
           }
         }
       } else if (value !== null && value !== "" && !Array.isArray(value)) {
-        parsedData[parsedKey] = value;
+        if (parsedKey === "city") {
+          console.log(parsedKey);
+          parsedData[parsedKey] = value.split("+")[1];
+        } else {
+          parsedData[parsedKey] = value;
+        }
+        // parsedData[parsedKey] = value;
       }
     }
   }

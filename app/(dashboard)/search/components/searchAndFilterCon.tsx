@@ -63,8 +63,13 @@ const DropDownIcon = () => {
 };
 
 const SearchHeader = ({ open, close }: any) => {
-  const { countAppliedFilters, filters, remnoveSearchOptions } =
-    useSearchFilters();
+  const {
+    countAppliedFilters,
+    filters,
+    remnoveSearchOptions,
+    setFilters,
+    handleAppliedFilters,
+  } = useSearchFilters();
   const [name, setName] = useQueryState("q");
 
   const onSearchChange = (value: string) => {
@@ -93,6 +98,18 @@ const SearchHeader = ({ open, close }: any) => {
 
         <PillsInput classNames={{ input: classes.wrapperMultiSelection }}>
           <Pill.Group>
+            {filters.city && (
+              <Pill
+                withRemoveButton
+                classNames={{ root: classes.MultiSelectionPill }}
+                onRemove={() => {
+                  setFilters((prev) => ({ ...prev, city: null }));
+                  handleAppliedFilters();
+                }}
+              >
+                {filters.city.split("+")[0]}
+              </Pill>
+            )}
             {filters.locality?.map((each, index) => (
               <Pill
                 onRemove={() => remnoveSearchOptions(each, "locality")}
