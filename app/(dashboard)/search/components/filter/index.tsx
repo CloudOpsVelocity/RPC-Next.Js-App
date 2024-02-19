@@ -21,7 +21,7 @@ import Results from "./results";
 
 const SearchDrawerHeader = ({ open, close }: any) => {
   const { onSearchChange, debounced, name } = useQsearch();
-  const { filters, handleAppliedFilters, remnoveSearchOptions } =
+  const { filters, handleAppliedFilters, remnoveSearchOptions, setFilters } =
     useSearchFilters();
   return (
     <div className="m-[2%] w-full flex  pl-[2%] gap-[20px] justify-start   relative flex-wrap">
@@ -47,6 +47,17 @@ const SearchDrawerHeader = ({ open, close }: any) => {
             />
             <PillsInput classNames={{ input: classes.wrapperMultiSelection }}>
               <Pill.Group>
+                {filters.city && (
+                  <Pill
+                    withRemoveButton
+                    classNames={{ root: classes.MultiSelectionPill }}
+                    onClick={() =>
+                      setFilters((prev) => ({ ...prev, city: null }))
+                    }
+                  >
+                    {filters.city}
+                  </Pill>
+                )}
                 {filters.locality?.map((each, index) => (
                   <Pill
                     onRemove={() => remnoveSearchOptions(each, "locality")}

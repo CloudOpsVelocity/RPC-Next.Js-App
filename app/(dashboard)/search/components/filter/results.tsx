@@ -38,6 +38,14 @@ export default function Results() {
     });
     handleResetQuery();
   };
+  const handleAddcity = (newItem: string) => {
+    filters.city === newItem && null;
+    setFilters({
+      ...filters,
+      city: newItem,
+    });
+    handleResetQuery();
+  };
   const handlePush = async (id: number) => {
     const enc = await encodeProID(id);
     push(`/abc/delhi/palika/${enc}`);
@@ -53,6 +61,7 @@ export default function Results() {
         <ul>
           {cities?.map((locality: any) => (
             <li
+              onClick={() => handleAddcity(`${locality.name}+${locality.id}`)}
               className="text-[#737579] text-xl not-italic font-medium leading-[normal] cursor-pointer"
               key={locality.id}
             >
