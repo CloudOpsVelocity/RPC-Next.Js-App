@@ -28,13 +28,11 @@ import { getData } from "@/app/utils/api/search";
 
 const FilterPopup = () => {
   const [current, setCurrent] = useState("Project Status");
-  const [locality, setLocality] = useState<string[]>([]);
-  const [builders, setBuilders] = useState<string[]>([]);
   const propKeys = [35, 33, 31, 34, 32];
   const [localitySearch, setSearchLocality] = useDebouncedState("w", 500);
   const [builderSearch, setBuilderSearch] = useDebouncedState("w", 500);
 
-  const { isLoading, data } = useQuery({
+  const { data } = useQuery({
     queryFn: () => getData(localitySearch, "loc"),
     queryKey: ["search" + "loc" + localitySearch],
     enabled: localitySearch !== "",

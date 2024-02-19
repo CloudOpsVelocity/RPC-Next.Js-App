@@ -16,14 +16,12 @@ import BhkFilter from "./bhk";
 import PropTypeFilter from "./proptype";
 import BugdetFilter from "./buget";
 import useSearchFilters from "@/app/hooks/search";
-import { useQuery } from "react-query";
-import { getData } from "@/app/utils/api/search";
-import { useDebouncedValue, useDisclosure } from "@mantine/hooks";
+import { useDisclosure } from "@mantine/hooks";
 import S from "@/app/styles/seach/Drawer.module.css";
 import SearchDrawerHeader from "./filter";
 
 const SearchAndFilterCon = () => {
-  const [opened, { open, close, toggle }] = useDisclosure(false);
+  const [opened, { open, close }] = useDisclosure(false);
 
   return (
     <>

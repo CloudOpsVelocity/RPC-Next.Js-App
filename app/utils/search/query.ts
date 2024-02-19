@@ -20,6 +20,7 @@ const convertToQueryParams = (params: Params): string => {
     minPrice: "minPrice",
     maxPrice: "maxPrice",
     projStatus: "projStatus",
+    builderIds: "builderIds",
   };
 
   for (const key in params) {
@@ -40,8 +41,7 @@ const convertToQueryParams = (params: Params): string => {
           value *= 10000000;
         } else if (key === "city") {
           value = params[key].split("+")[1];
-        } else if (key === "localities") {
-          console.log(value);
+        } else if (key === "localities" || key === "builderIds") {
           params[key] = extractNumbersFromString(value);
         }
         // Otherwise, add the key-value pair directly
@@ -52,7 +52,17 @@ const convertToQueryParams = (params: Params): string => {
 
   return queryParams.join("&");
 };
+function createQueryString(params: Record<string, any>): string {
+  const queryStringParts: string[] = [];
 
+  for (const [key, value] of Object.entries(params)) {
+    if (value !== null && value !== undefined) {
+      queryStringParts.push(`${key}=${value}`);
+    }
+  }
+
+  return queryStringParts.join("&");
+}
 const createRequestParams = (params: Params): Params => {
   const requestParams: Params = {};
 
@@ -78,4 +88,4 @@ function extractNumbersFromString(str: string): string {
   return values.join(",");
 }
 
-export { convertToQueryParams, createRequestParams };
+export { convertToQueryParams, createRequestParams, createQueryString };

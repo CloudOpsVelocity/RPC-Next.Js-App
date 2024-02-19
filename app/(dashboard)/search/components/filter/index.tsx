@@ -21,13 +21,8 @@ import Results from "./results";
 
 const SearchDrawerHeader = ({ open, close }: any) => {
   const { onSearchChange, debounced, name } = useQsearch();
-  const {
-    filters,
-    handleAppliedFilters,
-    remnoveSearchOptions,
-    setFilters,
-    handleCityReset,
-  } = useSearchFilters();
+  const { filters, handleAppliedFilters, remnoveSearchOptions, setFilters } =
+    useSearchFilters();
   return (
     <div className="m-[2%] w-full flex  pl-[2%] gap-[20px] justify-start   relative flex-wrap">
       <p className="text-[16px] text-[#737579] font-[500] mt-3">

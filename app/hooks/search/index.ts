@@ -1,7 +1,6 @@
 import {
   initialState,
   searachFilterAtom,
-  SearchFilter,
   appliedFiltersParams,
 } from "@/app/store/search";
 import { convertToQueryParams } from "@/app/utils/search/query";

@@ -37,6 +37,15 @@ const convertToOriginalState = (data: any): SearchFilter => {
   if (data.localities !== undefined) {
     convertedData.locality = data.localities.split(",");
   }
+  if (data.builderIds !== undefined) {
+    convertedData.builderIds = data.builderIds.split(",");
+  }
+  if (data.amenities !== undefined) {
+    convertedData.amenities = data.amenities.split(",").map(Number);
+  }
+  if (data.listedBy !== undefined) {
+    convertedData.listedBy = data.listedBy.split(",").map(Number);
+  }
   if (data.city !== undefined) {
     convertedData.city = data.city;
   }

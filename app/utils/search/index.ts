@@ -154,13 +154,13 @@ export const filterParser = (data: SearchFilter) => {
           parsedKey !== "minPrice" &&
           parsedKey !== "maxPrice"
         ) {
-          if (parsedKey === "builderIds") {
-            parsedData[parsedKey] = value
-              .map((v: string) => v.split("+")[1])
-              .join(",");
-          } else {
-            parsedData[parsedKey] = value.join(",");
-          }
+          // if (parsedKey === "builderIds") {
+          //   parsedData[parsedKey] = value
+          //     .map((v: string) => v.split("+")[1])
+          //     .join(",");
+          // } else {
+          parsedData[parsedKey] = value.join(",");
+          // }
         }
       } else if (value !== null && value !== "" && !Array.isArray(value)) {
         // if (parsedKey === "city") {
