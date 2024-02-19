@@ -181,6 +181,7 @@ export default function useSearchFilters() {
 }
 
 const getFilteredData = async (query: string): Promise<Search[]> => {
+  console.log(query);
   const url = `${process.env.NEXT_PUBLIC_PROJECT_URL}/srp/projSearch?${query}`;
   try {
     const response = await fetch(url);

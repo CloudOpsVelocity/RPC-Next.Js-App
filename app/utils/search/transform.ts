@@ -34,6 +34,13 @@ const convertToOriginalState = (data: any): SearchFilter => {
   if (data.unitTypes !== undefined) {
     convertedData.unitTypes = data.unitTypes.split(",").map(Number);
   }
+  if (data.localities !== undefined) {
+    convertedData.locality = data.localities.split(",");
+  }
+  if (data.city !== undefined) {
+    convertedData.city = data.city;
+  }
+
   if (data.propTypes !== undefined) {
     convertedData.propTypes = parseInt(data.propTypes);
   }

@@ -154,7 +154,7 @@ export const filterParser = (data: SearchFilter) => {
           parsedKey !== "minPrice" &&
           parsedKey !== "maxPrice"
         ) {
-          if (parsedKey === "localities" || parsedKey === "builderIds") {
+          if (parsedKey === "builderIds") {
             parsedData[parsedKey] = value
               .map((v: string) => v.split("+")[1])
               .join(",");
@@ -163,12 +163,12 @@ export const filterParser = (data: SearchFilter) => {
           }
         }
       } else if (value !== null && value !== "" && !Array.isArray(value)) {
-        if (parsedKey === "city") {
-          console.log(parsedKey);
-          parsedData[parsedKey] = value.split("+")[1];
-        } else {
-          parsedData[parsedKey] = value;
-        }
+        // if (parsedKey === "city") {
+        //   console.log(parsedKey);
+        //   parsedData[parsedKey] = value.split("+")[1];
+        // } else {
+        parsedData[parsedKey] = value;
+        // }
         // parsedData[parsedKey] = value;
       }
     }
