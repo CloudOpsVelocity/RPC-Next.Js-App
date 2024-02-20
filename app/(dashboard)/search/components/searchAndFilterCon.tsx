@@ -71,8 +71,8 @@ const SearchHeader = ({ open, close }: any) => {
     !value ? setName(null) : setName(value);
   };
   return (
-    <div className="m-[2%] w-full flex mt-[100px] pl-[2%] gap-[20px] justify-start items-center ">
-      <p className="text-[16px] text-[#737579] font-[500]">
+    <div className="m-[2%] w-full flex mt-[100px] pl-[2%] gap-[20px] flex-wrap md:flex-nowrap justify-between md:justify-start items-start md:items-center ">
+      <p className="text-[16px] text-[#737579] font-[500] w-full md:w-auto">
         <span>Home</span> {" > "}
         <Link href={"/project/banglore"}>
           <span className="text-[16px] text-[#4D6677] font-[600]">
@@ -125,10 +125,10 @@ const SearchHeader = ({ open, close }: any) => {
         withArrow
         shadow="lg"
         radius={10}
-        offset={{ mainAxis: 10, crossAxis: 0 }}
+        offset={{ mainAxis: 10, crossAxis: 0 }} 
       >
         <Popover.Target>
-          <button className=" text-[#0073C6] text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md ">
+          <button className=" text-[#0073C6] text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] hidden justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md md:flex ">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="10"
@@ -157,7 +157,7 @@ const SearchHeader = ({ open, close }: any) => {
         <Popover.Target>
           <button
             // onClick={() => setOpened((o) => !o)}
-            className=" text-[#0073C6] text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md "
+            className=" text-[#0073C6] hidden text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] lg:flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md "
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -187,7 +187,7 @@ const SearchHeader = ({ open, close }: any) => {
         <Popover.Target>
           <button
             // onClick={() => setOpened((o) => !o)}
-            className=" text-[#0073C6] text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md "
+            className=" text-[#0073C6] text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] hidden lg:flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md "
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -216,7 +216,7 @@ const SearchHeader = ({ open, close }: any) => {
         offset={{ mainAxis: 10, crossAxis: -200 }}
       >
         <Popover.Target>
-          <button className=" text-[#0073C6] text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md ">
+          <button className=" text-[#0073C6] mr-[5%] md:m-0 text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md ">
             <div className="text-[#FFF] bg-[#148B16] rounded-[50%] text-[16px] font-[700] w-[24px] h-[24px] flex justify-center items-center">
               {countAppliedFilters()}
             </div>

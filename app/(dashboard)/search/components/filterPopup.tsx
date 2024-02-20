@@ -17,7 +17,7 @@ import {
   ScrollArea,
 } from "@mantine/core";
 import classes from "@/app/styles/search.module.css";
-import { propertyDetailsTypes } from "@/app/data/projectDetails";
+import { projectprops, propertyDetailsTypes } from "@/app/data/projectDetails";
 import ClearAll from "./ClearAll";
 import { SEARCH_FILTER_DATA } from "@/app/data/search";
 import useSearchFilters from "@/app/hooks/search";
@@ -202,6 +202,8 @@ const FilterPopup = () => {
             })}
           </div>
 
+          {filters?.propTypes != projectprops.plot &&
+          <React.Fragment>
           <h3
             className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] "
             id="Unit Type"
@@ -223,6 +225,8 @@ const FilterPopup = () => {
               );
             })}
           </div>
+          </React.Fragment>
+          }
 
           <h3
             className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] "
@@ -284,6 +288,8 @@ const FilterPopup = () => {
             defaultValue={[filters.bugdetValue[0], filters.bugdetValue[1]]}
           />
 
+          {filters?.propTypes != projectprops.plot &&
+          <React.Fragment>
           <h3
             className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[5%] "
             id="Bath"
@@ -303,6 +309,8 @@ const FilterPopup = () => {
               );
             })}
           </div>
+          </React.Fragment>
+          }
 
           <h3
             className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] "
@@ -314,6 +322,8 @@ const FilterPopup = () => {
             <Checkbox label="Lift" color="green" />
           </div>
 
+          {filters?.propTypes != projectprops.plot &&
+          <React.Fragment>
           <h3
             className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[5%] "
             id="Parking"
@@ -333,6 +343,8 @@ const FilterPopup = () => {
               );
             })}
           </div>
+          </React.Fragment>
+          }
 
           <h3
             className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] "
