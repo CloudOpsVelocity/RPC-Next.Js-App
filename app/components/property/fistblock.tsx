@@ -100,23 +100,18 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails }) => {
                     {formatDate(projectDetails.startDate)}
                   </span>
                 </p>
-
-                <p className="text-[#4D6677] text-base not-italic font-semibold leading-[normal]">
-                  Posted By:{" "}
-                  <span className="text-[#4D6677] text-base not-italic font-semibold leading-[normal] uppercase">
-                    Agent
-                  </span>
-                </p>
               </div>
             </div>
             <div className="w-full md:w-[40%] flex justify-between md:items-end flex-col p-[2%]">
               <h2 className="text-[20px] md:text-[28px] lg:text-[32px] font-[700] text-[#001F35]">
                 {formatCurrency(projectDetails.minPrice)}
               </h2>
-              <p className="text-[16px] md:text-right lg:text-[24px] font-[600] mb-[10px] md:mb-[20px] text-[#00487C] ">
+              <p className="text-[16px] md:text-right lg:text-[24px] font-[600] mb-[10px] md:mb-[10px] text-[#00487C] ">
                 ₹ {projectDetails.basePrice}/ Price per sqft onwards
               </p>
-
+              <p className="text-[#001F35] text-xl not-italic font-semibold leading-[normal] mb-[13px]">
+                Posted By: Agent
+              </p>
               <p
                 className="text-[16px] lg:text-[20px] font-[600] mr-auto md:mr-0 text-[#2A4C70] bg-[#FFF] rounded-[10px] shadow-md p-[8px] flex items-center gap-2 cursor-pointer"
                 onClick={scrollToTopic}

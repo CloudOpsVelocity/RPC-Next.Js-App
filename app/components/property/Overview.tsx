@@ -6,10 +6,13 @@ import PriceBag, {
   Furnishing,
   Locality,
   Marble,
+  Others,
   OwnerShip,
+  PhaseIcon,
   Phone,
   ProjectStatus,
   PropertyAvailable,
+  PropertyBuilding,
   RatingStar,
   StartDate,
   Status,
@@ -68,6 +71,28 @@ export default function PropertyOverView({
         <div className="flex justify-start items-start flex-wrap w-[100%] md:w-[80%] ">
           <ProjBasicDetails
             key="propertyAvailable"
+            icon={<Others />}
+            title="Unit Type"
+            value={"2 BHK"}
+            className="mr-[5%] pt-[2%] mb-[3%]  "
+          />
+          <ProjBasicDetails
+            key="propertyAvailable"
+            icon={<PropertyBuilding />}
+            title="Property Type"
+            value={"Apartment"}
+            className="mr-[5%] pt-[2%] mb-[3%]  "
+          />
+          <ProjBasicDetails
+            key="propertyAvailable"
+            icon={<PhaseIcon />}
+            title="Phase"
+            value={"Phase 1"}
+            className="mr-[5%] pt-[2%] mb-[3%]  "
+          />
+
+          <ProjBasicDetails
+            key="propertyAvailable"
             icon={<OwnerShip />}
             title="Ownership"
             value={"Leasehold"}
@@ -120,6 +145,13 @@ export default function PropertyOverView({
             icon={<Marble />}
             title="Flooring Type"
             value={"Marble"}
+            className="mr-[5%] pt-[2%] mb-[3%] "
+          />
+          <ProjBasicDetails
+            key="startDate"
+            icon={<Furnishing />}
+            title="Furnishing"
+            value={"Semi- Furnished"}
             className="mr-[5%] pt-[2%] mb-[3%] "
           />
         </div>

@@ -117,6 +117,7 @@ const Searchbar = () => {
                 <Pill.Group>
                   {f.city && (
                     <Pill
+                      className="capitalize"
                       withRemoveButton
                       classNames={{ root: classes.MultiSelectionPill }}
                       onRemove={() =>
@@ -128,6 +129,7 @@ const Searchbar = () => {
                   )}
                   {f.locality?.map((each, index) => (
                     <Pill
+                      className="capitalize"
                       onRemove={() => remnoveSearchOptions(each, "locality")}
                       key={index}
                       withRemoveButton

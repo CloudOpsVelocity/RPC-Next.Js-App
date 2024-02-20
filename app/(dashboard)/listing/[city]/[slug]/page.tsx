@@ -17,6 +17,7 @@ import RoomFloorplansBlock from "@/app/components/property/Floorplan";
 import PropertyBanner from "@/app/components/property/propertyBanner";
 import PropertyFirstBlock from "@/app/components/property/fistblock";
 import LeafMap from "@/app/components/project/map";
+import PropertyHeading from "@/app/components/property/heading";
 
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
@@ -47,6 +48,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           projName={"Listing"}
           content={data.about}
         />
+
         {/* Property Details */}
         <RoomDetails data={data.phaseList} />
         {/* Floor Plan Block */}
