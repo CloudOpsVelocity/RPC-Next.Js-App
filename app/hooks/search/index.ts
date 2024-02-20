@@ -6,6 +6,7 @@ import {
 import { convertToQueryParams } from "@/app/utils/search/query";
 import { Search } from "@/app/validations/types/search";
 import { useAtom, useSetAtom } from "jotai";
+import { usePathname } from "next/navigation";
 import { useQueryStates, parseAsString, parseAsInteger } from "nuqs";
 import { useQuery } from "react-query";
 const paramsInit = {
@@ -26,6 +27,8 @@ const paramsInit = {
   city: parseAsString,
 };
 export default function useSearchFilters() {
+  const path = usePathname();
+
   const [filters, setFilters] = useAtom(searachFilterAtom);
   const setAppliedFilters = useSetAtom(appliedFiltersParams);
   const [params, setParams] = useQueryStates(paramsInit, {
@@ -147,6 +150,7 @@ export default function useSearchFilters() {
   const searchProps = useQuery({
     queryFn: () => getFilteredData(convertToQueryParams(params as any)),
     queryKey: ["srp" + convertToQueryParams(params as any)],
+    enabled: path === "/search",
   });
   const remnoveSearchOptions = (index: any, key: "locality" | "builderIds") => {
     let oldArray = [...filters[key]];
@@ -180,8 +184,7 @@ export default function useSearchFilters() {
 }
 
 const getFilteredData = async (query: string): Promise<Search[]> => {
-  console.log(query);
-  const url = `${process.env.NEXT_PUBLIC_PROJECT_URL}/srp/projSearch?${query}`;
+  const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?${query}`;
   try {
     const response = await fetch(url);
     const data = await response.json();

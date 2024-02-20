@@ -41,8 +41,8 @@ const LeftSideBlock = () => {
               </Tabs.Tab>
             );
           })}
-
-          <Select
+          <SortBy />
+          {/* <Select
             rightSection={<DropDownIcon />}
             label=""
             placeholder="Sort By"
@@ -55,7 +55,7 @@ const LeftSideBlock = () => {
               "Price / sq.ft. : High to Low",
             ]}
             className="placeholder:!text-[#0073C6] text-base not-italic font-medium leading-[normal] ml-auto"
-          />
+          /> */}
         </Tabs.List>
 
         <Tabs.Panel value="proj">
@@ -125,3 +125,43 @@ const LeftSideBlock = () => {
 };
 
 export { LeftSideBlock };
+import { Menu, Button, Text, rem } from "@mantine/core";
+
+function SortBy() {
+  const [selected, setSort] = useState("");
+  return (
+    <Menu shadow="md" width={200}>
+      <Menu.Target>
+        <button className="flex h-7 justify-center items-center gap-2.5 p-3.5 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.05)] border-[0.5px] border-solid border-[#CBD4E1] bg-white ml-auto mt-1 mr-3">
+          <span className="text-[#0073C6] text-base not-italic font-medium leading-[normal] ">
+            {selected === "" ? "Sort By" : selected}
+          </span>
+          <DropDownIcon />
+        </button>
+      </Menu.Target>
+
+      <Menu.Dropdown>
+        {[
+          "Relevance",
+          "Newest first",
+          "Price Low to High",
+          "Price High to Low",
+          "Price / sq.ft. : Low to High",
+          "Price / sq.ft. : High to Low",
+        ].map((eachItem, index) => {
+          return (
+            <Menu.Item
+              key={index}
+              value={eachItem}
+              onClick={() =>
+                eachItem !== selected ? setSort(eachItem) : setSort("")
+              }
+            >
+              {eachItem}
+            </Menu.Item>
+          );
+        })}
+      </Menu.Dropdown>
+    </Menu>
+  );
+}

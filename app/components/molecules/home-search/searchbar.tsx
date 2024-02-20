@@ -46,29 +46,29 @@ const Searchbar = () => {
   } = useSearchFilters();
   const { onSearchChange, debounced, name } = useQsearch();
 
-  const [userLocation, setUserLocation] = useState(null);
+  // const [userLocation, setUserLocation] = useState(null);
 
   // Function to get user's current location
-  const getUserLocation = () => {
-    if (navigator.geolocation) {
-      // Request user's current location
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          console.log(position);
-          // Extract latitude and longitude from the position object
-          const { latitude, longitude } = position.coords;
-          // Set user's location in state
-          // @ts-ignore
-          setUserLocation({ latitude, longitude });
-        },
-        (error) => {
-          console.error("Error getting user location:", error.message);
-        }
-      );
-    } else {
-      console.error("Geolocation is not supported by this browser.");
-    }
-  };
+  // const getUserLocation = () => {
+  //   if (navigator.geolocation) {
+  //     // Request user's current location
+  //     navigator.geolocation.getCurrentPosition(
+  //       (position) => {
+  //         console.log(position);
+  //         // Extract latitude and longitude from the position object
+  //         const { latitude, longitude } = position.coords;
+  //         // Set user's location in state
+  //         // @ts-ignore
+  //         setUserLocation({ latitude, longitude });
+  //       },
+  //       (error) => {
+  //         console.error("Error getting user location:", error.message);
+  //       }
+  //     );
+  //   } else {
+  //     console.error("Geolocation is not supported by this browser.");
+  //   }
+  // };
   const [opened, { close, toggle, open }] = useDisclosure(false);
   const wrapperRef = useClickOutside(() => close());
 
@@ -111,7 +111,7 @@ const Searchbar = () => {
           <div className="grid grid-cols-[auto_auto_auto] ">
             <div className="border-l flex gap-3 px-3 place-items-center">
               <div className="flex items-center ">
-                <FaLocationDot size={20} />
+                <FaLocationDot color="red" size={25} />
               </div>
               <PillsInput classNames={{ input: classes.homePageSearch }}>
                 <Pill.Group>
@@ -154,13 +154,13 @@ const Searchbar = () => {
             </div>
 
             <div className="flex items-center px-3">
-              <button
+              {/* <button
                 className="text-[16px] md:text-[20px] lg:text-[24px] flex items-center gap-3 text-slate-500"
                 onClick={getUserLocation}
               >
                 <FaLocationCrosshairs size={22} />
                 Near Me
-              </button>
+              </button> */}
             </div>
 
             <div className="flex items-center">

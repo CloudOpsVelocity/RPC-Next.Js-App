@@ -12,7 +12,7 @@ export default function useSearch({
       return [];
     }
 
-    let url = `${process.env.NEXT_PUBLIC_PROJECT_URL}/matcher?word=${query}`;
+    let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/matcher?word=${query}`;
     if (type === "locality") {
       url += `&isLocality=Y`;
     } else if (type === "builder") {
