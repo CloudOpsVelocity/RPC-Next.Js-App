@@ -59,6 +59,7 @@ export interface Media {
   projBroucherUrl: string;
   projName?: string;
   media: any;
+  type?: "proj" | "prop";
 }
 
 export interface PhaseList {

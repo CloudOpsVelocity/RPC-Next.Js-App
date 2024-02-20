@@ -2,26 +2,40 @@ import { BankDetailsList } from "@/app/images/commonImages";
 import { Bank } from "@/app/validations/types/project";
 import Image from "next/image";
 import React from "react";
+import PropertyHeading from "../property/heading";
 
 export default function Loans({
   data,
   projName,
+  type,
 }: {
   data: Bank[];
   projName: string;
+  type?: "prop" | "proj";
 }) {
   return (
     <div className="bg-white scroll-mt-[90px] py-8 w-[90%] mx-auto">
-      <div className="  px-4">
-        <h2 className="text-[24px] lg:text-[32px] font-bold">
-          BANK APPROVALS OF{" "}
-          <span className="text-[#148B16] text-[32px] not-italic font-bold leading-[normal] uppercase">
-            {projName}
-          </span>
-        </h2>
-        <p className="mt-4 text-[#4D6677] text-2xl italic font-medium leading-[normal] tracking-[0.96px]">
-          Unlock Your Dream Home with Hassle-Free Bank Approval Loans
-        </p>
+      <div className="">
+        {type === "prop" ? (
+          <PropertyHeading
+            title="BANK APPROVALS FOR THE LISTING"
+            desc="Check the available bank approvals for the listing"
+          />
+        ) : (
+          <>
+            {" "}
+            <h2 className="text-[24px] lg:text-[32px] font-bold">
+              BANK APPROVALS OF{" "}
+              <span className="text-[#148B16] text-[32px] not-italic font-bold leading-[normal] uppercase">
+                {projName}
+              </span>
+            </h2>
+            <p className="mt-4 text-[#4D6677] text-2xl italic font-medium leading-[normal] tracking-[0.96px]">
+              Unlock Your Dream Home with Hassle-Free Bank Approval Loans
+            </p>
+          </>
+        )}
+
         <div className="mt-16 flex justify-start items-center flex-wrap w-full gap-[3%] ">
           {data?.map((item, index) => {
             if (item.bankid != undefined && item.bankid != null) {

@@ -17,8 +17,8 @@ import PropertyHeading from "./heading";
 
 export default function RoomFloorplansBlock({ data }: { data: PhaseList[] }) {
   return (
-    <div className="w-[90%] mb-[5%] relative " id="floorPlans">
-      <div className="w-[90%] mb-[5%] space-y-4" id="propertyDetails ">
+    <div className="w-[90%] mb-[5%] mt-[2.5%] relative " id="floorPlans">
+      <div className="w-[90%] mb-[40px] space-y-4" id="propertyDetails ">
         <PropertyHeading
           title="Floor Plans"
           desc="see floor plan OF your selected property"

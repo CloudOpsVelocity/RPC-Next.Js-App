@@ -12,7 +12,10 @@ export default function PropertyHeading({
 }) {
   return (
     <div
-      className={clsx("inline-flex  gap-[26px] mb-[40px] w-[90%]", className)}
+      className={clsx(
+        "inline-flex  gap-[26px]  w-[90%] items-center",
+        className
+      )}
     >
       {Svg}{" "}
       <div>

@@ -6,8 +6,15 @@ import { AmenityList } from "@/app/validations/types/project";
 import { Console } from "console";
 import { useAtom } from "jotai";
 import React from "react";
+import PropertyHeading from "../property/heading";
 
-export default function Amenties({ data }: { data: AmenityList[] }) {
+export default function Amenties({
+  data,
+  type,
+}: {
+  data: AmenityList[];
+  type?: string;
+}) {
   const { data: amenitiesFromDB, error, isLoading } = useAmenities();
 
   const [{ expanded }, setReadMore] = useAtom(readMoreAtom);
@@ -26,11 +33,23 @@ export default function Amenties({ data }: { data: AmenityList[] }) {
       className="w-[90%] scroll-mt-[90px] bg-white pt-10 pb-20 mt-12"
       id="amenities"
     >
-      <div className=" mx-auto px-4">
-        <h2 className="text-2xl font-semibold">AMENITIES</h2>
-        <p className="text-[#4D6677] text-2xl italic font-medium leading-[normal] tracking-[0.96px] mt-2 mb-[40px]">
-          Experience the ultimate in comfort with our amenities
-        </p>
+      <div className=" mx-auto ">
+        {type === "prop" ? (
+          <PropertyHeading
+            title="AMENITIES"
+            desc="Experience the ultimate in comfort with our amenities"
+            className="mb-[40px]"
+          />
+        ) : (
+          <>
+            {" "}
+            <h2 className="text-2xl font-semibold">AMENITIES</h2>
+            <p className="text-[#4D6677] text-2xl italic font-medium leading-[normal] tracking-[0.96px] mt-2 mb-[40px]">
+              Experience the ultimate in comfort with our amenities
+            </p>
+          </>
+        )}
+
         <div className="flex flex-wrap ">
           {data?.map((eachItem, ind) => {
             if (amenitiesGroupList.get(eachItem.id) != null) {

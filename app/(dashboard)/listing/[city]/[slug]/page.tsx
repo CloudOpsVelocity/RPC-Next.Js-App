@@ -43,6 +43,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         <PropertyOverView {...data} />
         {/* About */}
         <About
+          type="prop"
           id="about"
           heading="about"
           projName={"Listing"}
@@ -53,19 +54,20 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         <RoomDetails data={data.phaseList} />
         {/* Floor Plan Block */}
         <RoomFloorplansBlock data={data.phaseList} />
-        <GalleryBlock {...data.media} />
-        <Amenties data={data.amenityList} />
+        <GalleryBlock {...data.media} type="prop" />
+        <Amenties type="prop" data={data.amenityList} />
         {data.lat && data.lang && (
           <LeafMap
             lat={data.lat}
             lang={data.lang}
             projName={data.projectName}
+            type="prop"
           />
         )}
         <Banner projName={data.projectName} />
-        <Loans data={data.banks} projName={data.projectName} />
+        <Loans type="prop" data={data.banks} projName={data.projectName} />
         {/* About Builder */}
-        <AboutBuilder id={data.builderId} />
+        <AboutBuilder type="prop" id={data.builderId} />
         <PropertyBanner projName={data.projectName} />
 
         <Reviews projName={data.projectName} />

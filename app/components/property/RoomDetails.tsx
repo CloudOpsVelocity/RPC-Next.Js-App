@@ -31,24 +31,29 @@ import React, { useState } from "react";
 import { PhaseList } from "@/app/validations/types/project";
 import RoomBasicDetails from "./RoomBasicDetails";
 import PropertyHeading from "./heading";
-
+const style = {
+  card: "mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]",
+  heading: {
+    h1: "text-[24px] lg:text-[24px] font-[600] text-[#001F35] mb-1",
+    p: "text-[16px] lg:text-[24px] font-[500] text-[#4D6677] italic mb-8",
+  },
+};
 export default function RoomDetails({ data }: { data: PhaseList[] }) {
   return (
     <>
       <PropertyHeading
         title="Listing details"
         desc="Check the details for 2BHK apartment for sell"
+        className="mb-[40px]"
       />
       <UnitBlock />
       <div
-        className="w-[90%] mb-[5%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] px-[53px] py-[39px]"
+        className="w-[90%] mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] px-[53px] py-[39px]"
         id="propertyDetails "
       >
-        <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35] mb-4">
-          Room Details
-        </h1>
+        <h1 className={style.heading.h1}>Room Details</h1>
 
-        <p className="text-[16px] lg:text-[24px] font-[500] text-[#4D6677] italic mb-8">
+        <p className={style.heading.p}>
           See the rooms that are available in This property
         </p>
 
@@ -56,41 +61,41 @@ export default function RoomDetails({ data }: { data: PhaseList[] }) {
           2 BHK FOR SELL
         </div> */}
 
-        <div className="flex justify-start items-start flex-wrap w-[100%]  ">
+        <div className={"flex justify-start items-start flex-wrap w-[100%]  "}>
           <RoomBasicDetails
             key="launchDate"
             icon={<Bathrooms />}
             title="Bathroom"
             value={"02"}
-            className="mr-[3%] mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]  "
+            className={style.card}
           />
           <RoomBasicDetails
             key="possessionDate"
             icon={<BedRooms />}
             title="Bedroom"
             value={"02"}
-            className="mr-[3%]  mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]  "
+            className={style.card}
           />
           <RoomBasicDetails
             key="landArea"
             icon={<Balcony />}
             title="Balcony"
             value={"02"}
-            className="mr-[3%]  mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]  "
+            className={style.card}
           />
           <RoomBasicDetails
             key="reraStatus"
             icon={<Others />}
             title="Other rooms"
             value={"Store Room , Puja Room"}
-            className="mr-[3%]  mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]  "
+            className={style.card}
           />
           <RoomBasicDetails
             key="reraStatus"
             icon={<Furnishing />}
             title="Furnishing"
             value={"Semi- Furnished"}
-            className="mr-[3%]  mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]  "
+            className={style.card}
           />
         </div>
       </div>
@@ -103,16 +108,12 @@ export default function RoomDetails({ data }: { data: PhaseList[] }) {
 const Parking = () => {
   return (
     <div
-      className="w-[90%] mb-[5%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] px-[53px] py-[39px]"
+      className="w-[90%] mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] px-[53px] py-[39px]"
       id="propertyDetails "
     >
-      <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35] mb-4 ">
-        Parking
-      </h1>
+      <h1 className={style.heading.h1}>Parking</h1>
 
-      <p className="text-[16px] lg:text-[24px] font-[500] text-[#4D6677] italic mb-8">
-        Parkings details include area and other
-      </p>
+      <p className={style.heading.p}>Parkings details include area and other</p>
 
       <div className="flex justify-start items-start flex-wrap   ">
         <RoomBasicDetails
@@ -120,28 +121,28 @@ const Parking = () => {
           icon={<Car />}
           title="Open Car Parking"
           value={"02"}
-          className="mr-[3%] mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]  "
+          className={style.card}
         />
         <RoomBasicDetails
           key="possessionDate"
           icon={<ParkingIcon />}
           title="Covered Car Parking"
           value={"02"}
-          className="mr-[3%]  mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]  "
+          className={style.card}
         />
         <RoomBasicDetails
           key="landArea"
           icon={<OpenBike />}
           title="Open Bike Parking"
           value={"02"}
-          className="mr-[3%]  mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]  "
+          className={style.card}
         />
         <RoomBasicDetails
           key="reraStatus"
           icon={<CloseBike />}
           title="Covered Bike Parking"
           value={"03"}
-          className="mr-[3%]  mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]  "
+          className={style.card}
         />
       </div>
     </div>
@@ -150,14 +151,12 @@ const Parking = () => {
 const OtherDetails = () => {
   return (
     <div
-      className="w-[90%] mb-[5%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] px-[53px] py-[39px]"
+      className="w-[90%] mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] px-[53px] py-[39px]"
       id="propertyDetails "
     >
-      <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35] mb-4 ">
-        Other Details
-      </h1>
+      <h1 className={style.heading.h1}>Other Details</h1>
 
-      <p className="text-[16px] lg:text-[24px] font-[500] text-[#4D6677] italic mb-8">
+      <p className={style.heading.p}>
         See the rooms that are available in This property
       </p>
 
@@ -167,35 +166,35 @@ const OtherDetails = () => {
           icon={<OwnerShip />}
           title="Ownership"
           value={"Freehold"}
-          className="mr-[3%] mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]  "
+          className={style.card}
         />
         <RoomBasicDetails
           key="possessionDate"
           icon={<Status />}
           title="Availability Status"
           value={"Ready to Move"}
-          className="mr-[3%]  mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]  "
+          className={style.card}
         />
         <RoomBasicDetails
           key="landArea"
           icon={<StartDate />}
           title="Available From"
           value={"12/ 03/ 2023"}
-          className="mr-[3%]  mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]  "
+          className={style.card}
         />
         <RoomBasicDetails
           key="reraStatus"
           icon={<FlatIcon />}
           title="Age of Property"
           value={"03"}
-          className="mr-[3%]  mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]  "
+          className={style.card}
         />
         <RoomBasicDetails
           key="reraStatus"
           icon={<Marble />}
           title="Type of Flooring"
           value={"03"}
-          className="mr-[3%]  mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]  "
+          className={style.card}
         />
       </div>
     </div>
@@ -204,14 +203,12 @@ const OtherDetails = () => {
 const UnitBlock = () => {
   return (
     <div
-      className="w-[90%] mb-[5%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] px-[53px] py-[39px]"
+      className="w-[90%] mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] px-[53px] py-[39px]"
       id="propertyDetails "
     >
-      <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35] mb-4 ">
-        Unit Details
-      </h1>
+      <h1 className={style.heading.h1}>Unit Details</h1>
 
-      <p className="text-[16px] lg:text-[24px] font-[500] text-[#4D6677] italic mb-8 capitalize">
+      <p className={style.heading.p}>
         unit details including BHK, PHASE, TOWER,...etc
       </p>
 
@@ -221,77 +218,77 @@ const UnitBlock = () => {
           icon={<Marble />}
           title="Unit Type"
           value={"2 BHK"}
-          className="mr-[3%] mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]  "
+          className="mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]"
         />
         <RoomBasicDetails
           key="launchDate"
           icon={<Marble />}
           title="Property Type"
           value={"Apartment"}
-          className="mr-[3%] mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]  "
+          className="mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]"
         />
         <RoomBasicDetails
           key="launchDate"
           icon={<Marble />}
           title="Phase"
           value={"Phase 1"}
-          className="mr-[3%] mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]  "
+          className="mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]"
         />
         <RoomBasicDetails
           key="possessionDate"
           icon={<TowerIcon />}
           title="Tower"
           value={"Tower 1"}
-          className="mr-[3%]  mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]  "
+          className="mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]"
         />{" "}
         <RoomBasicDetails
           key="launchDate"
           icon={<Marble />}
           title="Floor"
           value={"02"}
-          className="mr-[3%] mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]  "
+          className="mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]"
         />
         <RoomBasicDetails
           key="landArea"
           icon={<Block />}
           title="Block"
           value={"02"}
-          className="mr-[3%]  mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]  "
+          className="mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]"
         />{" "}
         <RoomBasicDetails
           key="launchDate"
           icon={<Marble />}
           title="Unit Number"
           value={"01"}
-          className="mr-[3%] mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]  "
+          className="mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]"
         />
         <RoomBasicDetails
           key="launchDate"
           icon={<Marble />}
           title="Facing"
           value={"North"}
-          className="mr-[3%] mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]  "
+          className="mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]"
         />
         <RoomBasicDetails
           key="launchDate"
           icon={<TotalLandArea />}
           title="Super built-up Area"
           value={"2180 sq.ft"}
-          className="mr-[3%] mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]  "
+          className="mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]"
         />
         <RoomBasicDetails
           key="launchDate"
           icon={<TotalLandArea />}
           title="Carpet Area"
           value={"2180 sq.ft"}
-          className="mr-[3%] mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]  "
+          className="mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]"
         />
         <RoomBasicDetails
           key="launchDate"
           icon={<TotalLandArea />}
           title="Built-up Area"
           value={"2180 sq.ft"}
-          className="mr-[3%] mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]  "
+          className="mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]"
         />
       </div>
     </div>
