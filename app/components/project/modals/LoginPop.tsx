@@ -1,5 +1,5 @@
-import { useDisclosure } from "@mantine/hooks";
-import { Modal, Button } from "@mantine/core";
+import { useDisclosure, useMediaQuery } from "@mantine/hooks";
+import { Modal, Button, em } from "@mantine/core";
 import { comparingIcon, tagIcon } from "@/app/images/commonSvgs";
 import LoginPop from "@/app/components/molecules/popups/login";
 import S from "@/app/styles/Rating.module.css";
@@ -14,6 +14,7 @@ function LoginPopup({
   hidden?: boolean;
 }) {
   const [opened, { open, close }] = usePopShortList();
+  const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
   return (
     <>
       <Modal
@@ -27,7 +28,7 @@ function LoginPopup({
           content: S.content,
           overlay: S.overlay,
         }}
-        size={"30%"}
+        size={isMobile ? "100%" : "30%"}
       >
         <LoginPop />
       </Modal>

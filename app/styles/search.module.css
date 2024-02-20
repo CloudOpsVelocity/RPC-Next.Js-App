@@ -70,3 +70,10 @@
 .homePageSearch::placeholder {
   color: black;
 }
+.markLabel {
+  display: none;
+}
+
+.header {
+  display: none;
+}

@@ -15,6 +15,7 @@ import { useShortlistAndCompare } from "@/app/hooks/storage";
 import { useSession } from "next-auth/react";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
+import { formatCurrency } from "@/app/utils/numbers";
 
 type Props = {
   type: any;
@@ -29,10 +30,7 @@ const ProjectDetailsCard = ({
   possassionDate,
   agentListing,
   ownerListing,
-  builderId,
   coverUrl,
-  lang,
-  lat,
   postedDate,
   projIdEnc,
   propTypes,
@@ -76,14 +74,14 @@ const ProjectDetailsCard = ({
   return (
     <div className=" flex w-full mb-[5%] flex-col shadow-md ">
       <div className=" flex justify-center items-center w-full  ">
-        <div className="max-w-[210px] flex justify-start items-start w-full flex-col  ">
+        <div className="md:max-w-[210px] max-w-[120px] flex justify-start items-start w-full flex-col  ">
           {type == "proj" && (
             <p className="text-[#FFF] text-[12px] mb-[-26px] z-10 flex justify-center items-center p-[3px] font-[500] bg-gradient-to-r from-[#148B16] /0 to-[#E5F4FF]/100">
               {" "}
               <ReraIcon /> RERA
             </p>
           )}
-          <div className=" w-full h-[147px] bg-gray-300 ">
+          <div className="w-full h-[120px]  md:h-[147px] bg-gray-300 ">
             <Image
               src={coverUrl}
               width={147}
@@ -92,9 +90,9 @@ const ProjectDetailsCard = ({
               className="w-full h-full"
             />
           </div>
-          <p className="text-[#FFF] text-[12px] mt-[-40px] relative left-[4px] gap-[4px] z-10 flex justify-center rounded-[20px] items-center p-[7px] font-[500] bg-gradient-to-r from-[#000] /0 to-[#00000066]/100">
+          <p className="text-[#FFF] text-[10px] md:text-[12px] mt-[-40px] relative left-[4px] gap-[4px] z-10 flex justify-center rounded-[20px] items-center p-[7px] font-[500] bg-gradient-to-r from-[#000] /0 to-[#00000066]/100">
             {" "}
-            <ReraIcon /> Ready to move
+            <ReraIcon className="hidden md:block" /> Ready to move
           </p>
         </div>
         <div className="w-full p-[2%]">
@@ -111,19 +109,20 @@ const ProjectDetailsCard = ({
               </span>
             </p>
           )}
-          <p className="text-[#768AA9] text-sm not-italic font-semibold leading-[normal]">
+          <p className="text-[#768AA9] text-[12px] md:text-sm not-italic font-semibold leading-[normal]">
             {propTypes && propTypes?.length > 0 ? propTypes?.join(" ,") : "N/A"}
             {}
           </p>
           <div className=" flex justify-between items-start w-full ">
             <div className=" flex justify-start items-start flex-col">
               {type == "proj" && (
-                <p className="text-[#148B16] text-[15px] not-italic font-extrabold leading-[normal]">
-                  ₹ {minPrice} Cr - ₹ {maxPrice} Cr
+                <p className="text-[#148B16] text-[12px] md:text-[15px] not-italic font-extrabold leading-[normal]">
+                  {formatCurrency(Number(minPrice))} -{" "}
+                  {formatCurrency(Number(maxPrice))}
                 </p>
               )}
               {type == "proj" && (
-                <p className="text-[#333] text-[13px] font-[500]">
+                <p className="text-[#333] text-[12px] md:text-[13px] font-[500]">
                   Possession Date:{" "}
                   <span className=" font-[600]">
                     {formatDateDDMMYYYY(possassionDate)}
@@ -132,7 +131,7 @@ const ProjectDetailsCard = ({
               )}
 
               {type != "proj" && (
-                <p className="text-[#333] text-[13px] font-[500]">
+                <p className="text-[#333] text-[12px] md:text-[13px] font-[500]">
                   Super Builtup Area:{" "}
                   <span className=" font-[600]">2,617 sq.ft</span>
                 </p>

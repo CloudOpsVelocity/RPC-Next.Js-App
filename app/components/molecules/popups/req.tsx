@@ -36,7 +36,6 @@ const RequestCallBackModal = ({
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
   const isTab = useMediaQuery(`(max-width: ${em(1280)})`);
   const { data } = useBuilder({ id: builderId, y: "N" });
-
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error" | "otp"
   >("idle");
@@ -46,7 +45,7 @@ const RequestCallBackModal = ({
         opened={opened}
         onClose={close}
         centered
-        size={isTab ? "70%" : isMobile ? "90%" : "52%"}
+        size={isTab ? "70%" : isMobile ? "100%" : "52%"}
         className="!rounded-full w-[90%]  md:w-[70%] lg:w-[65%] !p-0 "
         classNames={{
           close: S.close,

@@ -17,6 +17,8 @@ import "leaflet-defaulticon-compatibility";
 import Image from "next/image";
 import { MapIcon } from "@/app/data/map";
 import L from "leaflet";
+import { useMediaQuery } from "@mantine/hooks";
+import { em } from "@mantine/core";
 
 const Map = ({ data, selectedLocation, projName, lat, lang }: any) => {
   const position: LatLngTuple = [lat, lang];
@@ -26,12 +28,19 @@ const Map = ({ data, selectedLocation, projName, lat, lang }: any) => {
     iconAnchor: [19, 38],
     popupAnchor: [0, -38],
   });
+  const MobileIcon = L.icon({
+    iconUrl: "/searchmarker.png",
+    iconSize: [30, 30],
+    iconAnchor: [19, 38],
+    popupAnchor: [0, -38],
+  });
+  const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
   return (
     <>
       <MapContainer
         center={position}
-        zoom={12}
-        style={{ height: "740px", width: "100%", zIndex: -1 }}
+        zoom={isMobile ? 10 : 12}
+        className="md:h-[740px] h-[250px] w-full -z-[1]"
         scrollWheelZoom={true}
       >
         <TileLayer
@@ -44,7 +53,7 @@ const Map = ({ data, selectedLocation, projName, lat, lang }: any) => {
           data?.map((item: any) => (
             <Marker
               position={[parseFloat(item?.lat), parseFloat(item?.lang)]}
-              icon={MapIcon}
+              icon={isMobile ? MobileIcon : MapIcon}
             >
               {/* {selectedLocation?.lat === item?.lat && (
                 <Tooltip opacity={1} permanent direction="top">

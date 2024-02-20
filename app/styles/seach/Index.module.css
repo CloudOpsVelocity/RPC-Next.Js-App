@@ -1,10 +1,15 @@
 .tab {
   color: #4d6677;
-  font-size: 16px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
   border: none;
+}
+@media screen and (min-width: 768px) {
+  .tab {
+    font-size: 16px;
+  }
 }
 .tab:hover {
   background-color: transparent;

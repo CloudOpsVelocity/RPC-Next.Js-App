@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Select, Tabs } from "@mantine/core";
 import ProjectDetailsCard from "./projectCard";
 import S from "@/app/styles/seach/Index.module.css";
@@ -22,9 +22,14 @@ const LeftSideBlock = () => {
   const {
     searchProps: { data, isLoading },
   } = useSearchFilters();
+  const containerRef = useRef<HTMLDivElement>(null);
 
+  const { ref, entry } = useIntersection({
+    root: containerRef.current,
+    threshold: 0.1,
+  });
   return (
-    <div className="w-[50%] bg min-w-[500px]">
+    <div className="md:w-[50%] sm:w-[100%]  md:bg-white  min-w-[400px] md:min-w-[500px]">
       <Tabs value={activeTab} onChange={setActiveTab} defaultValue="proj">
         <Tabs.List className={S.bg}>
           {SEARCH_FILTER_DATA.categoryData.map((eachItem, index) => {
@@ -59,7 +64,10 @@ const LeftSideBlock = () => {
         </Tabs.List>
 
         <Tabs.Panel value="proj">
-          <div className=" p-[2%] max-h-[700px] overflow-y-auto h-screen ">
+          <div
+            className=" p-[2%] max-h-[700px] overflow-y-auto h-screen "
+            ref={containerRef}
+          >
             {isLoading ? (
               <Loading />
             ) : data != undefined &&
@@ -81,6 +89,7 @@ const LeftSideBlock = () => {
                 <span className="relative left-[10%] ">{strikeIconIcon}</span>
               </div>
             )}
+            <div ref={ref}>sdfdf</div>
           </div>
         </Tabs.Panel>
         <Tabs.Panel value="owner-props">
@@ -125,15 +134,16 @@ const LeftSideBlock = () => {
 };
 
 export { LeftSideBlock };
-import { Menu, Button, Text, rem } from "@mantine/core";
+import { Menu } from "@mantine/core";
+import { useIntersection } from "@mantine/hooks";
 
 function SortBy() {
   const [selected, setSort] = useState("");
   return (
     <Menu shadow="md" width={200}>
       <Menu.Target>
-        <button className="flex h-7 justify-center items-center gap-2.5 p-3.5 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.05)] border-[0.5px] border-solid border-[#CBD4E1] bg-white ml-auto mt-1 mr-3">
-          <span className="text-[#0073C6] text-base not-italic font-medium leading-[normal] ">
+        <button className="flex h-7 justify-center items-center gap-2.5 p-3.5 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.05)] border-[0.5px] border-solid border-[#CBD4E1] bg-white mr-auto md:mr-2 mt-1 mb-2 ml-4 md:ml-auto">
+          <span className="text-[#0073C6] text-xs md:text-base not-italic   md:font-medium leading-[normal] ">
             {selected === "" ? "Sort By" : selected}
           </span>
           <DropDownIcon />

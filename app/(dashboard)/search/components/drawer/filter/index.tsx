@@ -18,14 +18,16 @@ import {
 } from "@mantine/core";
 import classes from "@/app/styles/search.module.css";
 import { projectprops, propertyDetailsTypes } from "@/app/data/projectDetails";
-import ClearAll from "./ClearAll";
 import { SEARCH_FILTER_DATA } from "@/app/data/search";
 import useSearchFilters from "@/app/hooks/search";
 import { useDebouncedState } from "@mantine/hooks";
+import useSearch from "@/app/hooks/search/useSearch";
 import { useQuery } from "react-query";
 import { getData } from "@/app/utils/api/search";
+import ClearAll from "../../ClearAll";
+import Close from "@/app/components/project/button/close";
 
-const FilterPopup = () => {
+const MobileFilter = ({ close }: any) => {
   const [current, setCurrent] = useState("Project Status");
   const propKeys = [35, 33, 31, 34, 32];
   const [localitySearch, setSearchLocality] = useDebouncedState("w", 500);
@@ -68,10 +70,11 @@ const FilterPopup = () => {
       });
     }
   };
+
   return (
     <div className=" flex justify-start items-start w-[70vw] top-[160px] left-[70%]">
-      <div className="w-[20%] flex shadow-md justify-start items-center flex-col ">
-        <p className=" text-[#000] text-[16px] bg-[#F4F4F4] flex justify-start px-6  items-center font-[500] py-[3.5%] w-full ">
+      <div className="w-[50%] flex shadow-md justify-start items-center flex-col ">
+        <p className=" text-[#000] text-[14px] bg-[#F4F4F4] flex justify-start px-6  items-center font-[500] py-[3.5%] w-full ">
           Quick Filters
         </p>
         <div className="w-full ">
@@ -81,7 +84,7 @@ const FilterPopup = () => {
                 key={index}
                 title={eachItem}
                 onChange={() => scrollWhereIsSelected(eachItem)}
-                buttonClass={` whitespace-nowrap w-full text-[15px] flex flex-row-reverse  justify-end pl-[10%] items-center border-solid border-b-[0.5px] items-start  px-4 py-4 h-[31px] gap-[8px] ${
+                buttonClass={` whitespace-nowrap w-full text-[12px] flex flex-row-reverse  justify-end pl-[10%] items-center border-solid border-b-[0.5px] items-start  px-4 py-4 h-[31px] gap-[8px] ${
                   current == eachItem
                     ? "text-[#148B16] bg-[#F1F9FF] font-[700]"
                     : "text-[#202020] bg-[#FCFCFC] font-[500]"
@@ -92,21 +95,23 @@ const FilterPopup = () => {
           })}
         </div>
       </div>
-      <div className="w-full">
-        <ClearAll type="all" />
+      <div className="w-full min-w-full">
+        <ClearAll type="all" close={close} />
         {/* Right Side Fields Con */}
         <ScrollArea
-          h={350}
+          h={"80vh"}
           className="w-full pt-[1%] pl-[2%]    "
           viewportRef={viewport}
+          miw={"full"}
+          p={20}
         >
           <h3
-            className=" text-[#202020] mb-[2%] text-[14px] font-[500] "
+            className=" text-[#202020] mb-[4%] text-[14px] font-[500] "
             id="Project Status"
           >
             Property Status
           </h3>
-          <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
+          <div className="flex  mb-[3%] justify-start items-start gap-[4%] flex-wrap ">
             {SEARCH_FILTER_DATA.projectstatus.map((eachStatus, index) => {
               return (
                 <Radio
@@ -117,20 +122,21 @@ const FilterPopup = () => {
                   onChange={() => setStatus(eachStatus.cid)}
                   label={eachStatus.Label}
                   name="propertyStatus"
+                  style={{ whiteSpace: "nowrap", marginBottom: "10px" }}
                 />
               );
             })}
           </div>
 
           <h3
-            className=" text-[#202020] mb-[2%] text-[14px] font-[500] "
+            className=" text-[#202020] mb-[4%] text-[14px] font-[500] "
             id="Locality"
           >
             Locality
           </h3>
 
           {filters.locality.length > 0 && (
-            <div className="flex mb-[3%] justify-start items-start gap-[4%]">
+            <div className="flex mb-[3%] justify-start items-start gap-[4%] flex-wrap">
               {filters.locality.map((eachLocality, index) => {
                 return (
                   <div
@@ -164,13 +170,13 @@ const FilterPopup = () => {
             onChange={(value) => setFilters({ ...filters, locality: value })}
             leftSectionPointerEvents="none"
             leftSection={lensSvg}
-            style={{ width: "50%" }}
+            style={{ width: "80%" }}
             onSearchChange={(value) => setSearchLocality(value)}
             rightSection={<DropDownIcon />}
           />
 
           <h3
-            className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] flex items-center gap-[5px] "
+            className=" text-[#202020] mb-[4%] text-[14px] font-[500] mt-[6%] flex items-center gap-[5px] "
             id="Property Type"
           >
             Property Type {notificationIcon}
@@ -202,12 +208,12 @@ const FilterPopup = () => {
           {filters?.propTypes != projectprops.plot && (
             <React.Fragment>
               <h3
-                className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] "
+                className=" text-[#202020] mb-[4%] text-[14px] font-[500] mt-[3%] "
                 id="Unit Type"
               >
                 Unit Type
               </h3>
-              <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
+              <div className="flex  mb-[3%] justify-start items-start gap-[4%] flex-wrap">
                 {SEARCH_FILTER_DATA.bhkDetails.map((eachStatus, index) => {
                   return (
                     <Checkbox
@@ -218,6 +224,7 @@ const FilterPopup = () => {
                         handleCheckboxClick("unitTypes", eachStatus.value)
                       }
                       checked={filters.unitTypes.includes(eachStatus.value)}
+                      style={{ whiteSpace: "nowrap", marginBottom: "10px" }}
                     />
                   );
                 })}
@@ -226,12 +233,12 @@ const FilterPopup = () => {
           )}
 
           <h3
-            className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] "
+            className=" text-[#202020] mb-[4%] text-[14px] font-[500] mt-[3%] "
             id="Area"
           >
             Area
           </h3>
-          <p className="text-[#4D6677] text-[16px] font-[600] mb-[2%] ">
+          <p className="text-[#4D6677] text-[16px] font-[600] mb-[4%] ">
             {filters.areaValue[0]} sq.ft - {filters.areaValue[1]} sq.ft
           </p>
           <RangeSlider
@@ -249,15 +256,18 @@ const FilterPopup = () => {
             value={filters.areaValue}
             onChange={(value) => handleSliderChange("areaValue", value)}
             style={{ width: "80%" }}
+            classNames={{
+              markLabel: classes.markLabel,
+            }}
           />
 
           <h3
-            className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[5%] "
+            className=" text-[#202020] mb-[4%] text-[14px] font-[500] mt-[5%] "
             id="Budget"
           >
             Budget
           </h3>
-          <p className="text-[#4D6677] text-[16px] font-[600] mb-[2%] ">
+          <p className="text-[#4D6677] text-[16px] font-[600] mb-[4%] ">
             ₹ {filters.bugdetValue[0]} - ₹ {filters.bugdetValue[1]} Cr
           </p>
           <RangeSlider
@@ -283,17 +293,18 @@ const FilterPopup = () => {
             onChange={(value) => handleSliderChange("bugdetValue", value)}
             style={{ width: "80%" }}
             defaultValue={[filters.bugdetValue[0], filters.bugdetValue[1]]}
+            classNames={{ markLabel: classes.markLabel }}
           />
 
           {filters?.propTypes != projectprops.plot && (
             <React.Fragment>
               <h3
-                className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[5%] "
+                className=" text-[#202020] mb-[4%] text-[14px] font-[500] mt-[5%] "
                 id="Bath"
               >
                 Bath
               </h3>
-              <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
+              <div className="flex  mb-[3%] justify-start items-start gap-[4%] flex-wrap">
                 {[...Array(6)].map((x, i) => {
                   return (
                     <Checkbox
@@ -302,6 +313,7 @@ const FilterPopup = () => {
                       color="green"
                       onClick={() => handleCheckboxClick("bathRooms", i + 1)}
                       checked={filters.bathRooms.includes(i + 1)}
+                      style={{ whiteSpace: "nowrap", marginBottom: "10px" }}
                     />
                   );
                 })}
@@ -310,7 +322,7 @@ const FilterPopup = () => {
           )}
 
           <h3
-            className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] "
+            className=" text-[#202020] mb-[4%] text-[14px] font-[500] mt-[3%] "
             id="Amenities"
           >
             Amenities
@@ -322,12 +334,12 @@ const FilterPopup = () => {
           {filters?.propTypes != projectprops.plot && (
             <React.Fragment>
               <h3
-                className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[5%] "
+                className=" text-[#202020] mb-[4%] text-[14px] font-[500] mt-[5%] "
                 id="Parking"
               >
                 Parking
               </h3>
-              <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
+              <div className="flex  mb-[3%] justify-start items-start gap-[4%] flex-wrap">
                 {[...Array(7)].map((x, i) => {
                   return (
                     <Checkbox
@@ -336,6 +348,7 @@ const FilterPopup = () => {
                       color="green"
                       onClick={() => handleCheckboxClick("parkings", i + 1)}
                       checked={filters.parkings.includes(i + 1)}
+                      style={{ whiteSpace: "nowrap", marginBottom: "10px" }}
                     />
                   );
                 })}
@@ -344,7 +357,7 @@ const FilterPopup = () => {
           )}
 
           <h3
-            className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] "
+            className=" text-[#202020] mb-[4%] text-[14px] font-[500] mt-[3%] "
             id="RERA"
           >
             RERA
@@ -357,7 +370,7 @@ const FilterPopup = () => {
             checked={filters.reraVerified === true}
           />
 
-          {/* <h3 className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] ">
+          {/* <h3 className=" text-[#202020] mb-[4%] text-[14px] font-[500] mt-[3%] ">
             Listed By
           </h3>
           <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
@@ -367,13 +380,13 @@ const FilterPopup = () => {
           </div> */}
 
           <h3
-            className=" text-[#202020] mb-[2%] text-[14px] font-[500] "
+            className=" text-[#202020] mb-[4%] text-[14px] font-[500] mt-[6%]"
             id="Builder"
           >
             Builder
           </h3>
           {filters.builderIds.length > 0 && (
-            <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
+            <div className="flex  mb-[3%] justify-start items-start gap-[4%] flex-wrap">
               {filters.builderIds.map((eachLocality, index) => {
                 return (
                   <div
@@ -408,7 +421,7 @@ const FilterPopup = () => {
             }
             leftSectionPointerEvents="none"
             leftSection={lensSvg}
-            style={{ width: "50%" }}
+            style={{ width: "80%" }}
             comboboxProps={{ withinPortal: false }}
             onSearchChange={(value) => setBuilderSearch(value)}
             pb={50}
@@ -420,4 +433,4 @@ const FilterPopup = () => {
   );
 };
 
-export { FilterPopup };
+export { MobileFilter };

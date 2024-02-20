@@ -3,7 +3,7 @@ export const getData = async (query: string | null, type: string) => {
     return [];
   }
 
-  let url = `${process.env.NEXT_PUBLIC_PROJECT_URL}/matcher?word=${query}`;
+  let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/matcher?word=${query}`;
   if (type === "loc") {
     url += `&isLocality=Y`;
   } else if (type === "builders") {

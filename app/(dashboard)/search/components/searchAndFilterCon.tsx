@@ -8,6 +8,7 @@ import {
   PillsInput,
   Popover,
   Select,
+  em,
 } from "@mantine/core";
 import { FilterPopup } from "./filterPopup";
 import classes from "@/app/styles/search.module.css";
@@ -16,9 +17,10 @@ import BhkFilter from "./bhk";
 import PropTypeFilter from "./proptype";
 import BugdetFilter from "./buget";
 import useSearchFilters from "@/app/hooks/search";
-import { useDisclosure } from "@mantine/hooks";
+import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import S from "@/app/styles/seach/Drawer.module.css";
 import SearchDrawerHeader from "./filter";
+import SearchDrawer from "./drawer";
 
 const SearchAndFilterCon = () => {
   const [opened, { open, close }] = useDisclosure(false);
@@ -73,18 +75,19 @@ const SearchHeader = ({ open, close }: any) => {
   const onSearchChange = (value: string) => {
     !value ? setName(null) : setName(value);
   };
+  const isMobile = useMediaQuery(em("max-width: 768px"));
   return (
-    <div className="m-[2%] w-full flex mt-[100px] pl-[2%] gap-[20px] flex-wrap md:flex-nowrap justify-between md:justify-start items-start md:items-center ">
-      <p className="text-[16px] text-[#737579] font-[500] w-full md:w-auto">
+    <div className="m-[2%] w-full flex mt-[100px] pl-[2%] gap-2 md:gap-[20px] flex-wrap md:flex-nowrap justify-between md:justify-start items-start md:items-center ">
+      <p className="text-[14px] md:text-[16px] text-[#737579] font-[500] w-full md:w-auto">
         <span>Home</span> {" > "}
         <Link href={"/project/banglore"}>
-          <span className="text-[16px] text-[#4D6677] font-[600]">
+          <span className="text-[14px] md:text-[16px] text-[#4D6677] font-[600]">
             Properties for Sell in Bengaluru
           </span>
         </Link>{" "}
       </p>
 
-      <div className=" border-[#A0D7FF] rounded-[46px] gap-[8px] pl-[8px] border-[1px] border-solid flex items-center justify-center ">
+      <div className=" border-[#A0D7FF] rounded-[40px] gap-[8px] pl-[8px] border-[1px] border-solid flex items-center justify-center ">
         <Select
           label=""
           placeholder="Select"
@@ -92,6 +95,7 @@ const SearchHeader = ({ open, close }: any) => {
           classNames={{ input: classes.wrapperSelect }}
           defaultValue={"Buy"}
           rightSection={<DropDownIcon />}
+          size="xs"
         />
 
         <PillsInput classNames={{ input: classes.wrapperMultiSelection }}>
@@ -123,6 +127,7 @@ const SearchHeader = ({ open, close }: any) => {
             ))}
 
             <PillsInput.Field
+              miw={225}
               placeholder={
                 filters.locality.length > 0
                   ? "Add More"
@@ -140,7 +145,7 @@ const SearchHeader = ({ open, close }: any) => {
         withArrow
         shadow="lg"
         radius={10}
-        offset={{ mainAxis: 10, crossAxis: 0 }} 
+        offset={{ mainAxis: 10, crossAxis: 0 }}
       >
         <Popover.Target>
           <button className=" text-[#0073C6] text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] hidden justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md md:flex ">
@@ -231,7 +236,7 @@ const SearchHeader = ({ open, close }: any) => {
         offset={{ mainAxis: 10, crossAxis: -200 }}
       >
         <Popover.Target>
-          <button className=" text-[#0073C6] mr-[5%] md:m-0 text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md ">
+          <button className=" text-[#0073C6] mr-[5%] md:m-0 text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] md:flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md hidden">
             <div className="text-[#FFF] bg-[#148B16] rounded-[50%] text-[16px] font-[700] w-[24px] h-[24px] flex justify-center items-center">
               {countAppliedFilters()}
             </div>
@@ -242,6 +247,7 @@ const SearchHeader = ({ open, close }: any) => {
           <FilterPopup />
         </Popover.Dropdown>
       </Popover>
+      <SearchDrawer />
     </div>
   );
 };
