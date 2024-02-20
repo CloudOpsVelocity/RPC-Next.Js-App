@@ -3,22 +3,30 @@ import ReadMore from "../atoms/readmore";
 import React from "react";
 import Link from "next/link";
 import useBuilder from "@/app/hooks/useBuilder";
+import { Svg } from "../property/heading";
 
 type Props = {
   id: number;
+  type?: "prop" | "proj";
 };
 
-export default function AboutBuilder({ id }: Props) {
+export default function AboutBuilder({ id, type }: Props) {
   const { data } = useBuilder({ id, y: "N" });
   return (
     <div className="w-[90%] scroll-mt-[90px] mt-[5%] mb-[5%]">
       <div className="w-full justify-between items-center ">
-        <h1 className=" text-[#023993] text-[24px] lg:text-[32px] font-[700]">
-          About Builder
-        </h1>
-        <p className=" text-[#148B16] italic text-[20px] lg:text-[26px] font-[700]">
-          {data?.data?.ceoName}
-        </p>
+        <div className="inline-flex  gap-[26px]  w-[90%] items-center">
+          {type === "prop" && Svg}
+          <div>
+            <h1 className=" text-[#023993] text-[24px] lg:text-[32px] font-[700]">
+              About Builder
+            </h1>
+            <p className=" text-[#148B16] italic text-[20px] lg:text-[26px] font-[700]">
+              {data?.data?.ceoName}
+            </p>
+          </div>
+        </div>
+
         <div className="rounded-[20px] mt-[1%] flex justify-between items-center bg-[#FFF] shadow-md w-[100%] mb-[2%] lg:w-[50%] p-[1%] ">
           <div className="w-[30%] border-solid border-[#92B2C8] border-r-[1px]">
             <p className=" text-[#202020] text-[20px] lg:text-[24px] font-[600]">

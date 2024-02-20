@@ -83,28 +83,21 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails }) => {
                 <h3 className="text-[24px] lg:text-[32px] font-[700] text-[#00487C] uppercase ">
                   {projectDetails.projectName}
                 </h3>
-
-                <p className="text-[#202020] text-[20px] not-italic font-[500] leading-[normal] w-[100%] tracking-[0.32px] capitalize">
+                <p className="text-[#001F35] text-2xl not-italic font-semibold leading-[normal] mt-1">
+                  Sarang By Sumadhura
+                </p>
+                <p className="text-[#202020] text-[20px] not-italic font-[500] leading-[normal] w-[100%] tracking-[0.32px] capitalize mt-[8px]">
                   {projectDetails.address} {`${projectDetails.localityName} `}
                   {`${projectDetails.cityName} `}
                   {`${projectDetails?.stateName ?? ""} `}
                   {projectDetails.pinCode}
                 </p>
-                <p className="text-[#001F35] text-2xl not-italic font-semibold leading-[normal] mt-1">
-                  Sarang By Sumadhura
-                </p>
+
                 <p className="text-[16px] mt-[7px] mb-[7px] lg:text-[20px] font-[600] text-[#001F35]">
                   Available From:
                   <span className="font-[600] text-[#202020]">
                     {" "}
                     {formatDate(projectDetails.startDate)}
-                  </span>
-                </p>
-
-                <p className="text-[#4D6677] text-base not-italic font-semibold leading-[normal]">
-                  Posted By:{" "}
-                  <span className="text-[#4D6677] text-base not-italic font-semibold leading-[normal] uppercase">
-                    Agent
                   </span>
                 </p>
               </div>
@@ -113,10 +106,12 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails }) => {
               <h2 className="text-[20px] md:text-[28px] lg:text-[32px] font-[700] text-[#001F35]">
                 {formatCurrency(projectDetails.minPrice)}
               </h2>
-              <p className="text-[16px] md:text-right lg:text-[24px] font-[600] mb-[10px] md:mb-[20px] text-[#00487C] ">
+              <p className="text-[16px] md:text-right lg:text-[24px] font-[600] mb-[10px] md:mb-[10px] text-[#00487C] ">
                 ₹ {projectDetails.basePrice}/ Price per sqft onwards
               </p>
-
+              <p className="text-[#001F35] text-xl not-italic font-semibold leading-[normal] mb-[13px]">
+                Posted By: Agent
+              </p>
               <p
                 className="text-[16px] lg:text-[20px] font-[600] mr-auto md:mr-0 text-[#2A4C70] bg-[#FFF] rounded-[10px] shadow-md p-[8px] flex items-center gap-2 cursor-pointer"
                 onClick={scrollToTopic}

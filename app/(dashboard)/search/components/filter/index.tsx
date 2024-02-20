@@ -51,11 +51,12 @@ const SearchDrawerHeader = ({ open, close }: any) => {
                   <Pill
                     withRemoveButton
                     classNames={{ root: classes.MultiSelectionPill }}
-                    onClick={() =>
-                      setFilters((prev) => ({ ...prev, city: null }))
-                    }
+                    onRemove={() => {
+                      setFilters((prev) => ({ ...prev, city: null }));
+                      handleAppliedFilters();
+                    }}
                   >
-                    {filters.city}
+                    {filters.city.split("+")[0]}
                   </Pill>
                 )}
                 {filters.locality?.map((each, index) => (

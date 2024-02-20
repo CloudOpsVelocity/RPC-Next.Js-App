@@ -55,3 +55,18 @@
 .remove {
   color: red;
 }
+
+.homePageSearch {
+  min-height: 46px;
+  max-width: 746px;
+  border-radius: 57px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 1rem;
+  outline: none;
+  border: none;
+}
+.homePageSearch::placeholder {
+  color: black;
+}

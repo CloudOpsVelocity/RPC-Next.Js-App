@@ -1,9 +1,9 @@
 import Image from "next/image";
 import React from "react";
 
-export default function PropertyBanner({projName}:{projName:string}) {
+export default function PropertyBanner({ projName }: { projName: string }) {
   return (
-    <div className="w-[1920px] h-[339px] shrink-0 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] bg-[#fcfcfc] mb-20 relative">
+    <div className="w-[1920px] mt-[2%] h-[339px] shrink-0 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] bg-[#fcfcfc] mb-20 relative">
       <Image
         src="/property/propertybanner.png"
         alt="Sobha Dream Acres"
@@ -12,7 +12,7 @@ export default function PropertyBanner({projName}:{projName:string}) {
         height={312}
       />
       <div className="max-w-[90%] mx-auto p-5">
-        <h2 className="text-[#212C33] text-[32px] not-italic font-semibold leading-[normal] tracking-[1.28px]">
+        <h2 className="text-[#212C33] text-[32px] not-italic font-semibold leading-[normal] tracking-[1.28px] ml-8">
           About{" "}
           <span className="text-[#148B16] text-[32px] not-italic font-semibold leading-[normal] tracking-[1.28px]">
             {projName}

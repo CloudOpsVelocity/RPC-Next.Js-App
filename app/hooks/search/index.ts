@@ -1,7 +1,6 @@
 import {
   initialState,
   searachFilterAtom,
-  SearchFilter,
   appliedFiltersParams,
 } from "@/app/store/search";
 import { convertToQueryParams } from "@/app/utils/search/query";
@@ -24,6 +23,7 @@ const paramsInit = {
   maxArea: parseAsInteger,
   minPrice: parseAsInteger,
   maxPrice: parseAsInteger,
+  city: parseAsString,
 };
 export default function useSearchFilters() {
   const [filters, setFilters] = useAtom(searachFilterAtom);
@@ -153,7 +153,12 @@ export default function useSearchFilters() {
     oldArray.splice(index, 1);
     setFilters((prev) => ({ ...prev, [key]: oldArray }));
   };
-
+  const handleCityReset = () => {
+    setFilters((prev) => ({
+      ...prev,
+      city: null,
+    }));
+  };
   return {
     filters,
     setStatus,
@@ -170,15 +175,15 @@ export default function useSearchFilters() {
     setFilters,
     remnoveSearchOptions,
     setSingleType,
+    handleCityReset,
   };
 }
 
 const getFilteredData = async (query: string): Promise<Search[]> => {
   console.log(query);
+  const url = `${process.env.NEXT_PUBLIC_PROJECT_URL}/srp/projSearch?${query}`;
   try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_PROJECT_URL}/srp/projSearch?city=21&${query}`
-    );
+    const response = await fetch(url);
     const data = await response.json();
     return data;
   } catch (error) {

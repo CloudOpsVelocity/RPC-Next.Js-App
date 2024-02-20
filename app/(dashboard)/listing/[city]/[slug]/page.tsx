@@ -17,6 +17,7 @@ import RoomFloorplansBlock from "@/app/components/property/Floorplan";
 import PropertyBanner from "@/app/components/property/propertyBanner";
 import PropertyFirstBlock from "@/app/components/property/fistblock";
 import LeafMap from "@/app/components/project/map";
+import PropertyHeading from "@/app/components/property/heading";
 
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
@@ -42,28 +43,31 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         <PropertyOverView {...data} />
         {/* About */}
         <About
+          type="prop"
           id="about"
           heading="about"
           projName={"Listing"}
           content={data.about}
         />
+
         {/* Property Details */}
         <RoomDetails data={data.phaseList} />
         {/* Floor Plan Block */}
         <RoomFloorplansBlock data={data.phaseList} />
-        <GalleryBlock {...data.media} />
-        <Amenties data={data.amenityList} />
+        <GalleryBlock {...data.media} type="prop" />
+        <Amenties type="prop" data={data.amenityList} />
         {data.lat && data.lang && (
           <LeafMap
             lat={data.lat}
             lang={data.lang}
             projName={data.projectName}
+            type="prop"
           />
         )}
         <Banner projName={data.projectName} />
-        <Loans data={data.banks} projName={data.projectName} />
+        <Loans type="prop" data={data.banks} projName={data.projectName} />
         {/* About Builder */}
-        <AboutBuilder id={data.builderId} />
+        <AboutBuilder type="prop" id={data.builderId} />
         <PropertyBanner projName={data.projectName} />
 
         <Reviews projName={data.projectName} />

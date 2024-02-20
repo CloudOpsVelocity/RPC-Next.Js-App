@@ -7,6 +7,7 @@ import Gallery from "./modals/Gallery";
 import { getImageUrls } from "@/app/utils/image";
 import { AspectRatio, Image, Overlay } from "@mantine/core";
 import { useGallery } from "@/app/hooks/useGallery";
+import PropertyHeading from "../property/heading";
 
 export default function GalleryBlock({
   coverImageUrl,
@@ -17,6 +18,7 @@ export default function GalleryBlock({
   walkThrowVideoUrl,
   projName,
   media,
+  type = "proj",
 }: Media) {
   const images = getImageUrls(media);
   const [selectedMedia, setSelectedMedia] = useState<string | null>(images[0]);
@@ -30,14 +32,25 @@ export default function GalleryBlock({
 
   return (
     <div className="w-[90%] scroll-mt-[90px] mb-[5%]  " id="galleria">
-      <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35] uppercase mb-[12px]">
-        gALLERIA of{" "}
-        <span className="text-[#148B16] font-[700] uppercase">{projName}</span>{" "}
-      </h1>
+      {type === "prop" ? (
+        <PropertyHeading
+          title="GALLERIA"
+          desc="Gallery Highlights : A Glimpse into good project"
+        />
+      ) : (
+        <>
+          <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35] uppercase mb-[12px]">
+            gALLERIA of{" "}
+            <span className="text-[#148B16] font-[700] uppercase">
+              {projName}
+            </span>{" "}
+          </h1>
 
-      <p className="text-[20px] text-[#4D6677] lg:text-2xl italic font-medium leading-[normal] capitalize">
-        Gallery Highlights : A Glimpse into good project
-      </p>
+          <p className="text-[20px] text-[#4D6677] lg:text-2xl italic font-medium leading-[normal] capitalize">
+            Gallery Highlights : A Glimpse into good project
+          </p>
+        </>
+      )}
 
       <div className=" flex justify-center flex-col md:flex-row items-center-full mt-[1%] ">
         {/* IMage display con */}

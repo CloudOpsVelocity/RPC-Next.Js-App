@@ -51,6 +51,8 @@ function getAppliedFilters(): SearchFilter {
   searchParams.forEach((value, key) => {
     queryData[key] = value;
   });
+  console.log(queryData);
   const data: SearchFilter = convertToOriginalState(queryData);
+  console.log(data);
   return data;
 }

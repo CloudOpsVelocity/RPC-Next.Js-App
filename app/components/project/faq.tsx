@@ -33,7 +33,6 @@ let ind = 0;
 
 export function FaqWithBg({ data, projName }: FaqWithBgProps) {
   const [value, setValue] = useState<string | null>(null);
-  console.log(value);
 
   return (
     <div className={classes.wrapper} id="faq">

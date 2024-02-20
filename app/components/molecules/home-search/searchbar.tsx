@@ -1,7 +1,7 @@
 import config from "./config";
 import Button from "./button";
 import { useState } from "react";
-import { Checkbox, Transition } from "@mantine/core";
+import { Checkbox, Pill, PillsInput, Transition } from "@mantine/core";
 import { RangeSlider } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { FaLocationDot } from "react-icons/fa6";
@@ -9,6 +9,15 @@ import { useClickOutside } from "@mantine/hooks";
 import { FaLocationCrosshairs } from "react-icons/fa6";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import { Transform } from "stream";
+import useSearchFilters from "@/app/hooks/search";
+import { propertyDetailsTypes } from "@/app/data/projectDetails";
+import { SEARCH_FILTER_DATA } from "@/app/data/search";
+import useQsearch from "@/app/hooks/search/useQsearch";
+import FilterSection from "@/app/(dashboard)/search/components/filter/filter";
+import Results from "@/app/(dashboard)/search/components/filter/results";
+import classes from "@/app/styles/search.module.css";
+import { filterParser } from "@/app/utils/search";
+import { createQueryString } from "@/app/utils/search/query";
 
 interface filters {
   bhks: string[];
@@ -27,6 +36,16 @@ const initialFilters: filters = {
 };
 
 const Searchbar = () => {
+  const {
+    filters: f,
+    setPropTypes,
+    handleCheckboxClick,
+    handleSliderChange,
+    remnoveSearchOptions,
+    setFilters,
+  } = useSearchFilters();
+  const { onSearchChange, debounced, name } = useQsearch();
+
   const [userLocation, setUserLocation] = useState(null);
 
   // Function to get user's current location
@@ -50,8 +69,7 @@ const Searchbar = () => {
       console.error("Geolocation is not supported by this browser.");
     }
   };
-  const [filters, setFilters] = useState<filters>(initialFilters);
-  const [opened, { close, toggle }] = useDisclosure(false);
+  const [opened, { close, toggle, open }] = useDisclosure(false);
   const wrapperRef = useClickOutside(() => close());
 
   // styles
@@ -61,34 +79,15 @@ const Searchbar = () => {
   };
 
   // handlers
-  const handlePropertyType = (type: string) => {
-    return setFilters((prev) => ({
-      ...prev,
-      houseType: prev.houseType.includes(type)
-        ? prev.houseType.filter((b) => b !== type)
-        : [...prev.houseType, type],
-    }));
-  };
 
-  const handleBHK = (bhk: string) => {
-    return setFilters((prev) => ({
-      ...prev,
-      bhks: prev.bhks.includes(bhk)
-        ? prev.bhks.filter((b) => b !== bhk)
-        : [...prev.bhks, bhk],
-    }));
+  const keys = [35, 33, 31, 34, 32];
+  const handleSearch = () => {
+    const parsedData = filterParser(f);
+    const query = createQueryString(parsedData);
+    return query.replace("+", "%2B");
   };
-  const handlePostedBy = (by: string) => {
-    return setFilters((prev) => ({ ...prev, postedBy: by }));
-  };
-  const rangeSlider = (range: [number, number]) => {
-    return setFilters((prev) => ({ ...prev, priceRange: range }));
-  };
-
   return (
     <>
-      {/* {JSON.stringify(filters)} */}
-      {/* uncomment this to see the filters state in action */}
       <div
         ref={wrapperRef}
         className="border border-[#CBE9FF] rounded-3xl bg-white  w-full overflow-hidden relative"
@@ -110,17 +109,48 @@ const Searchbar = () => {
             </button>
           </div>
           <div className="grid grid-cols-[auto_auto_auto] ">
-            <div className="border-l flex gap-3 px-3">
-              <div className="flex items-center">
+            <div className="border-l flex gap-3 px-3 place-items-center">
+              <div className="flex items-center ">
                 <FaLocationDot size={20} />
               </div>
-              <input
-                className="text-[16px] md:text-[20px] lg:text-[24px] h-full placeholder:text-slate-500 placeholder:text-[24px] w-full border-none outline-none "
-                type="text"
-                name=""
-                id=""
-                placeholder="Search By Location"
-              />
+              <PillsInput classNames={{ input: classes.homePageSearch }}>
+                <Pill.Group>
+                  {f.city && (
+                    <Pill
+                      className="capitalize"
+                      withRemoveButton
+                      classNames={{ root: classes.MultiSelectionPill }}
+                      onRemove={() =>
+                        setFilters((prev) => ({ ...prev, city: null }))
+                      }
+                    >
+                      {f.city.split("+")[0]}
+                    </Pill>
+                  )}
+                  {f.locality?.map((each, index) => (
+                    <Pill
+                      className="capitalize"
+                      onRemove={() => remnoveSearchOptions(each, "locality")}
+                      key={index}
+                      withRemoveButton
+                      classNames={{ root: classes.MultiSelectionPill }}
+                    >
+                      {each.split("+")[0]}
+                    </Pill>
+                  ))}
+
+                  <PillsInput.Field
+                    onFocus={open}
+                    placeholder={
+                      f.locality.length > 0
+                        ? "Add More"
+                        : "Enter City,Locality & Project"
+                    }
+                    value={name ?? ""}
+                    onChange={(e) => onSearchChange(e.target.value)}
+                  />
+                </Pill.Group>
+              </PillsInput>
             </div>
 
             <div className="flex items-center px-3">
@@ -134,79 +164,98 @@ const Searchbar = () => {
             </div>
 
             <div className="flex items-center">
-              <button className="bg-green-600  text-[24px] text-white py-2 rounded-xl  px-5 ">
+              <a
+                target="_blank"
+                href={`/search?${handleSearch()}`}
+                className="bg-green-600  text-[24px] text-white py-2 rounded-xl  px-5 "
+              >
                 Search
-              </button>
+              </a>
             </div>
           </div>
         </section>
-        {opened && (
-          <section className="p-5 grid gap-5 border-t  ">
-            <div className="flex gap-14 my-2 flex-wrap">
-              {config.houseType.map((type) => (
-                <Checkbox
-                  size="md"
-                  key={type}
-                  label={type}
-                  onClick={() => handlePropertyType(type)}
-                >
-                  {type}
-                </Checkbox>
-              ))}
-            </div>
-
-            <div>
-              <h5 className="text-sm font-semibold mb-2">BHKs</h5>
-              <div className="flex gap-6 flex-wrap">
-                {config.bhks.map((bhk) => (
+        {opened &&
+          (!debounced ? (
+            <section className="p-5 grid gap-5 border-t  ">
+              <h5 className="text-sm font-semibold ">Select Property Type</h5>
+              <div className="flex gap-14 my-2 flex-wrap">
+                {keys.map((keyName) => (
                   <Button
-                    key={bhk}
-                    value={bhk}
-                    onClick={() => handleBHK(bhk)}
-                    selected={filters.bhks.includes(bhk)}
+                    key={keyName}
+                    value={propertyDetailsTypes?.get(keyName)?.name ?? ""}
+                    onClick={() =>
+                      setPropTypes(
+                        propertyDetailsTypes?.get(keyName)?.id as number
+                      )
+                    }
+                    selected={
+                      f.propTypes === propertyDetailsTypes?.get(keyName)?.id
+                    }
                   ></Button>
                 ))}
               </div>
-            </div>
 
-            <div className="w-full flex justify-start items-start flex-col md:flex-row">
-              <div className="w-[100%] md:w-[40%] mb-[3%] ">
-                <h5 className="text-sm font-semibold mb-2">Budget</h5>
-                <p className="flex">
-                  Price Range
-                  <p className="text-green-600 font-semibold ml-2">
-                    ₹{filters.priceRange.at(0)} - ₹{filters.priceRange.at(1)}
-                  </p>
-                </p>
-
-                <RangeSlider
-                  min={0}
-                  step={1}
-                  max={1000}
-                  minRange={0}
-                  thumbSize={14}
-                  onChange={rangeSlider}
-                  classNames={rangeSliderClasses}
-                  defaultValue={filters.priceRange}
-                />
-              </div>
-
-              {/* <div className="w-[100%] md:w-[40%] mb-[3%]">
-                <h5 className="text-sm font-semibold mb-2">Posted by</h5>
-                <div className="flex gap-5">
-                  {config.postedBy.map((by) => (
+              <div>
+                <h5 className="text-sm font-semibold mb-6">Select BHK Type</h5>
+                <div className="flex gap-6  flex-wrap">
+                  {SEARCH_FILTER_DATA.bhkDetails.map((bhk) => (
                     <Button
-                      key={by}
-                      value={by}
-                      selected={filters.postedBy === by}
-                      onClick={() => handlePostedBy(by)}
-                    />
+                      key={bhk.value}
+                      value={bhk.title}
+                      onClick={() =>
+                        handleCheckboxClick("unitTypes", bhk.value)
+                      }
+                      selected={f.unitTypes.includes(bhk.value)}
+                    ></Button>
                   ))}
                 </div>
-              </div> */}
-            </div>
-          </section>
-        )}
+              </div>
+
+              <div className="w-full flex justify-start items-start flex-col md:flex-row">
+                <div className="w-[100%] md:w-[70%] mb-[3%] ">
+                  <h5 className="text-sm font-semibold mb-2">Budget</h5>
+                  <p className="flex">
+                    Price Range
+                    <p className="text-green-600 font-semibold ml-2">
+                      ₹{f.bugdetValue.at(0)} - ₹{f.bugdetValue.at(1)}
+                    </p>
+                  </p>
+
+                  <RangeSlider
+                    color="green"
+                    key="budgetSlider"
+                    marks={[
+                      { value: 0, label: "₹ 0" },
+                      { value: 0.5, label: "₹ 0.5 Cr" },
+                      { value: 1, label: "₹ 1 Cr" },
+                      { value: 1.5, label: "₹ 1.5 Cr" },
+                      { value: 2, label: "₹ 2 Cr" },
+                      { value: 2.5, label: "₹ 2.5 Cr" },
+                      { value: 3, label: "₹ 3 Cr" },
+                      { value: 3.5, label: "₹ 3.5 Cr" },
+                      { value: 4, label: "₹ 4 Cr" },
+                      { value: 4.5, label: "₹ 4.5 Cr" },
+                      { value: 5, label: "₹ 5 Cr" },
+                    ]}
+                    minRange={0.2}
+                    min={0}
+                    max={5}
+                    step={0.05}
+                    onChange={(value) =>
+                      handleSliderChange("bugdetValue", value)
+                    }
+                    style={{ width: "100%" }}
+                    defaultValue={[
+                      f?.bugdetValue[0] ?? 0,
+                      f?.bugdetValue[1] ?? 5,
+                    ]}
+                  />
+                </div>
+              </div>
+            </section>
+          ) : (
+            <Results />
+          ))}
       </div>
     </>
   );

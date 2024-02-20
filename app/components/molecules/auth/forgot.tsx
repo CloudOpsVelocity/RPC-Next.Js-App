@@ -99,7 +99,9 @@ function ForgotForm() {
             the OTP in this phone number.
           </h3>
           <NumberInput
-            classNames={{ input: S.input }}
+            classNames={{
+              input: S.classForContact,
+            }}
             hideControls
             size="lg"
             mt="sm"

@@ -22,6 +22,7 @@ import Loading from "../../atoms/Loader";
 import dynamic from "next/dynamic";
 import MapSkeleton from "../../maps/Skeleton";
 import useMapData from "@/app/hooks/project/useMapData";
+import PropertyHeading from "../../property/heading";
 
 interface Area {
   name: string;
@@ -30,13 +31,15 @@ interface Area {
   lng?: number;
   projName?: string;
   key?: string;
+  type?: "proj" | "prop";
 }
 
-const LeafMap: React.FC<{ lat: string; lang: string; projName: string }> = ({
-  lat,
-  lang,
-  projName,
-}) => {
+const LeafMap: React.FC<{
+  lat: string;
+  lang: string;
+  projName: string;
+  type?: "proj" | "prop";
+}> = ({ lat, lang, projName, type }) => {
   const Map = useMemo(
     () =>
       dynamic(() => import("@/app/components/maps"), {
@@ -69,18 +72,26 @@ const LeafMap: React.FC<{ lat: string; lang: string; projName: string }> = ({
     setSelectedTravelMode(type);
   };
   return (
-    <div
-      className="w-[90%] scroll-mt-[90px] mx-auto mt-[5%] mb-[5%] "
-      id="nearBy"
-    >
-      <h2 className="text-[24px] lg:text-[32px] font-semibold mb-[12px]">
-        <span className="!text-green-600">{projName} </span>
-        <span className="">Near BY LOCATIONS</span>
-      </h2>
-      <p className="text-[#4D6677] text-2xl italic font-medium leading-[normal] tracking-[0.96px] mt-2 mb-8  ">
-        Explore near by convenient amenities, entertainment, and essential
-        services
-      </p>
+    <div className="w-[90%] scroll-mt-[90px] mx-auto  mb-[5%] " id="nearBy">
+      {type === "prop" ? (
+        <PropertyHeading
+          title="Near BY LOCATIONS"
+          desc=" Explore near by convenient amenities, entertainment, and essential
+        services"
+          className="mb-[40px]"
+        />
+      ) : (
+        <>
+          <h2 className="text-[24px] lg:text-[32px] font-semibold mb-[12px]">
+            <span className="!text-green-600">{projName} </span>
+            <span className="">Near BY LOCATIONS</span>
+          </h2>
+          <p className="text-[#4D6677] text-2xl italic font-medium leading-[normal] tracking-[0.96px] mt-2 mb-8">
+            Explore near by convenient amenities, entertainment, and essential
+            services
+          </p>
+        </>
+      )}
 
       <div className="flex gap-6 mb-5 mt-1 w-full flex-wrap ">
         {areas.map((area) => {

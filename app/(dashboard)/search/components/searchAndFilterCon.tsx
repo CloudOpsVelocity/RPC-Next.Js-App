@@ -16,14 +16,12 @@ import BhkFilter from "./bhk";
 import PropTypeFilter from "./proptype";
 import BugdetFilter from "./buget";
 import useSearchFilters from "@/app/hooks/search";
-import { useQuery } from "react-query";
-import { getData } from "@/app/utils/api/search";
-import { useDebouncedValue, useDisclosure } from "@mantine/hooks";
+import { useDisclosure } from "@mantine/hooks";
 import S from "@/app/styles/seach/Drawer.module.css";
 import SearchDrawerHeader from "./filter";
 
 const SearchAndFilterCon = () => {
-  const [opened, { open, close, toggle }] = useDisclosure(false);
+  const [opened, { open, close }] = useDisclosure(false);
 
   return (
     <>
@@ -63,8 +61,13 @@ const DropDownIcon = () => {
 };
 
 const SearchHeader = ({ open, close }: any) => {
-  const { countAppliedFilters, filters, remnoveSearchOptions } =
-    useSearchFilters();
+  const {
+    countAppliedFilters,
+    filters,
+    remnoveSearchOptions,
+    setFilters,
+    handleAppliedFilters,
+  } = useSearchFilters();
   const [name, setName] = useQueryState("q");
 
   const onSearchChange = (value: string) => {
@@ -93,6 +96,18 @@ const SearchHeader = ({ open, close }: any) => {
 
         <PillsInput classNames={{ input: classes.wrapperMultiSelection }}>
           <Pill.Group>
+            {filters.city && (
+              <Pill
+                withRemoveButton
+                classNames={{ root: classes.MultiSelectionPill }}
+                onRemove={() => {
+                  setFilters((prev) => ({ ...prev, city: null }));
+                  handleAppliedFilters();
+                }}
+              >
+                {filters.city.split("+")[0]}
+              </Pill>
+            )}
             {filters.locality?.map((each, index) => (
               <Pill
                 onRemove={() => remnoveSearchOptions(each, "locality")}
