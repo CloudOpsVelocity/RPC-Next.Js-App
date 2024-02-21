@@ -70,8 +70,25 @@
 .homePageSearch::placeholder {
   color: black;
 }
-.markLabel {
-  display: none;
+@media screen and (max-width: 767px) {
+  .markLabel {
+    display: none;
+  }
+  .wrapperSelect {
+    width: 75px;
+    font-size: 14px;
+  }
+  .wrapperMultiSelection {
+    min-height: 40px;
+    max-width: 400px;
+    border-radius: 57px;
+    border-left: 0.3px solid #98a5b8;
+    border-right: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 1rem;
+  }
 }
 
 .header {

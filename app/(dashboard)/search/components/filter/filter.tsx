@@ -3,7 +3,7 @@ import { propertyDetailsTypes } from "@/app/data/projectDetails";
 import { SEARCH_FILTER_DATA } from "@/app/data/search";
 import useSearchFilters from "@/app/hooks/search";
 import { RangeSlider } from "@mantine/core";
-
+import S from "@/app/styles/search.module.css";
 const FilterSection = ({ open, close }: any) => {
   const { filters, handleSliderChange, setPropTypes, handleCheckboxClick } =
     useSearchFilters();
@@ -69,6 +69,9 @@ const FilterSection = ({ open, close }: any) => {
             { value: 4.5, label: "₹ 4.5 Cr" },
             { value: 5, label: "₹ 5 Cr" },
           ]}
+          classNames={{
+            markLabel: S.markLabel,
+          }}
           minRange={0.2}
           min={0}
           max={5}

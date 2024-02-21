@@ -6,25 +6,23 @@ import {
   PillsInput,
   RangeSlider,
   Select,
+  em,
 } from "@mantine/core";
 import classes from "@/app/styles/search.module.css";
-import { useQueryState } from "nuqs";
 import useSearchFilters from "@/app/hooks/search";
-import { useQuery } from "react-query";
-import { getData } from "@/app/utils/api/search";
-import { useDebouncedValue } from "@mantine/hooks";
-import { DropDownIcon } from "@/app/images/commonSvgs";
-import Button from "@/app/components/molecules/home-search/button";
+import { DropDownIcon, SearchIcon } from "@/app/images/commonSvgs";
 import FilterSection from "./filter";
 import useQsearch from "@/app/hooks/search/useQsearch";
 import Results from "./results";
+import { useMediaQuery } from "@mantine/hooks";
 
 const SearchDrawerHeader = ({ open, close }: any) => {
   const { onSearchChange, debounced, name } = useQsearch();
   const { filters, handleAppliedFilters, remnoveSearchOptions, setFilters } =
     useSearchFilters();
+  const isMobile = useMediaQuery(em("max-width: 768px"));
   return (
-    <div className="m-[2%] w-full flex  pl-[2%] gap-[20px] justify-start   relative flex-wrap">
+    <div className="sm:m-[2%] w-full flex  sm:pl-[2%] gap-[20px] justify-start   relative flex-wrap">
       <p className="text-[16px] text-[#737579] font-[500] mt-3">
         <span>Home</span> {" > "}
         <Link href={"/project/banglore"}>
@@ -33,7 +31,7 @@ const SearchDrawerHeader = ({ open, close }: any) => {
           </span>
         </Link>{" "}
       </p>
-      <div className="w-[789px] h-[379px] shrink-0 border rounded-[10px] ">
+      <div className="w-[100%] md:w-[789px] h-[50%] md:h-[379px] shrink-0 border rounded-[10px] ">
         <div className="  gap-[8px] px-[8px] border-[1px] border-solid flex items-center justify-between ">
           <div className="gap-[8px]  flex items-center">
             {" "}
@@ -44,6 +42,7 @@ const SearchDrawerHeader = ({ open, close }: any) => {
               classNames={{ input: classes.wrapperSelect }}
               defaultValue={"Buy"}
               rightSection={<DropDownIcon />}
+              size="xs"
             />
             <PillsInput classNames={{ input: classes.wrapperMultiSelection }}>
               <Pill.Group>
@@ -84,10 +83,10 @@ const SearchDrawerHeader = ({ open, close }: any) => {
           </div>
 
           <button
-            className="flex justify-center items-center gap-2.5 px-4 py-2 rounded-[9.29px] bg-[#0073c6] ext-white text-base not-italic font-bold text-white"
+            className="flex justify-center items-center gap-2.5 px-2 md:px-4 py-2 rounded-[9.29px] bg-[#0073c6] text-xs md:text-base not-italic font-bold text-white"
             onClick={() => handleAppliedFilters(close)}
           >
-            Search
+            {isMobile ? <SearchIcon /> : "Search"}
           </button>
         </div>
         {debounced ? <Results /> : <FilterSection />}
@@ -106,7 +105,7 @@ const CloseSvg = ({ onClick }: any) => {
       height="46"
       viewBox="0 0 46 46"
       fill="none"
-      className="absolute top-0 right-10 cursor-pointer"
+      className="absolute top-0 right-0 md:right-10 cursor-pointer w-6 md:w-11"
     >
       <g filter="url(#filter0_d_1706_56774)">
         <rect x="4" width="38" height="38" rx="19" fill="white" />

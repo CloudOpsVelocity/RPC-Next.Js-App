@@ -25,7 +25,7 @@ export default function AuthButton() {
   ) : (
     <ButtonLink
       href="/login"
-      buttonClass="login-btn text-[16px] lg:text-[20px] font-semibold px-5 py-2 rounded-full text-[#0073C6] border-none underline bg-gradient-to-r from-[#EFF8FF] to-[#FFF] shadow-md"
+      buttonClass="login-btn text-[12px] md:text-[16px] lg:text-[20px] font-semibold px-5 py-2 rounded-full text-[#0073C6] border-none underline bg-gradient-to-r from-[#EFF8FF] to-[#FFF] shadow-md"
       title="Login/ Sign up"
     />
   );
@@ -45,12 +45,13 @@ export default function AuthButton() {
       <a
         target="_blank"
         href={postListingLink}
-        className="text-[16px] gap-[10px] lg:text-[20px] flex justify-center items-center font-semibold px-5 bg-[#227FBC] py-1.5 rounded-xl text-white"
+        className="hidden md:flex text-[12px] py-1 px-1 gap-[10px] lg:text-[20px]  justify-center items-center font-semibold md:px-5 bg-[#227FBC] md:py-1.5 rounded-xl text-white"
       >
         {postDetailsIcon}
         Post Listing
       </a>
-      {logoutButton}
+      <Dropdown />
+      {/* {logoutButton} */}
     </>
   );
 }
@@ -72,10 +73,19 @@ function Dropdown() {
   return (
     <Menu width={200} shadow="md">
       <Menu.Target>
-        <button className="login-btn text-[20px] font-semibold px-5 py-2 rounded-full flex flex-row-reverse justify-center gap- items-center text-[#0073C6] border-none underline bg-gradient-to-r from-[#EFF8FF] to-[#FFF] shadow-md">
-          <Image width={30} height={30} alt="logout" src="/burger.svg" />{" "}
-          {session?.user.name}
-        </button>
+        {session ? (
+          <button className="login-btn text-[20px] font-semibold px-5 py-2 rounded-full flex flex-row-reverse justify-center gap- items-center text-[#0073C6] border-none underline bg-gradient-to-r from-[#EFF8FF] to-[#FFF] shadow-md">
+            <Image width={30} height={30} alt="logout" src="/burger.svg" />{" "}
+            {session?.user.name}
+          </button>
+        ) : (
+          <div className="login-btn text-[20px] font-semibold px-5 py-2 rounded-full flex flex-row-reverse justify-center gap- items-center text-[#0073C6] border-none underline bg-gradient-to-r from-[#EFF8FF] to-[#FFF] shadow-md">
+            <Image width={30} height={30} alt="logout" src="/burger.svg" />{" "}
+            <Link href={"/login"} className="text-[16px] mr-1">
+              Login/Singup
+            </Link>
+          </div>
+        )}
       </Menu.Target>
 
       <Menu.Dropdown
@@ -111,54 +121,5 @@ function Dropdown() {
         </Menu.Item>
       </Menu.Dropdown>
     </Menu>
-  );
-}
-
-export function Test() {
-  return (
-    <>
-      <nav className="bg-white rounded-lg shadow p-4 w-48">
-        <ul className="space-y-2">
-          <li>
-            <a
-              href="#"
-              className="block text-gray-700 hover:text-green-500 transition-colors"
-            >
-              My Profile
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              className="block text-gray-700 hover:text-green-500 transition-colors"
-            >
-              Post Project
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              className="block text-gray-700 hover:text-green-500 transition-colors"
-            >
-              Post Listing
-            </a>
-          </li>
-          <li>
-            <a href="#" className="block text-green-600 font-semibold">
-              About us
-            </a>
-            <hr className="border-green-600 my-2" />
-          </li>
-          <li>
-            <a
-              href="#"
-              className="block text-gray-700 hover:text-green-500 transition-colors"
-            >
-              Log out
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </>
   );
 }

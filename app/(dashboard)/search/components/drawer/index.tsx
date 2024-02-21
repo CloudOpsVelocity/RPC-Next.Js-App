@@ -13,7 +13,6 @@ function SearchDrawer() {
       <Drawer
         opened={opened}
         onClose={close}
-        title="Authentication"
         classNames={{
           overlay: S.overlay,
           content: S.content,

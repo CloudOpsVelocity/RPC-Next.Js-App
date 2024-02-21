@@ -70,7 +70,12 @@ const MobileFilter = ({ close }: any) => {
       });
     }
   };
-
+  const filteredSearchDetails =
+    filters.propTypes === projectprops.plot
+      ? searchDetails.filter(
+          (item) => !["Parking", "Unit Type", "Bath"].includes(item)
+        )
+      : searchDetails;
   return (
     <div className=" flex justify-start items-start w-[70vw] top-[160px] left-[70%]">
       <div className="w-[50%] flex shadow-md justify-start items-center flex-col ">
@@ -78,7 +83,7 @@ const MobileFilter = ({ close }: any) => {
           Quick Filters
         </p>
         <div className="w-full ">
-          {searchDetails.map((eachItem, index) => {
+          {filteredSearchDetails.map((eachItem, index) => {
             return (
               <Button
                 key={index}

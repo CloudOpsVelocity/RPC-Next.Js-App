@@ -24,7 +24,7 @@ import SearchDrawer from "./drawer";
 
 const SearchAndFilterCon = () => {
   const [opened, { open, close }] = useDisclosure(false);
-
+  const isMobile = useMediaQuery("(max-width: 768px)");
   return (
     <>
       <SearchHeader open={open} close={close} />
@@ -38,6 +38,7 @@ const SearchAndFilterCon = () => {
           header: S.header,
           body: classes.body,
         }}
+        size={isMobile ? "100%" : "45%"}
       >
         <SearchDrawerHeader open={open} close={close} />
         {/* Drawer content */}
@@ -75,7 +76,6 @@ const SearchHeader = ({ open, close }: any) => {
   const onSearchChange = (value: string) => {
     !value ? setName(null) : setName(value);
   };
-  const isMobile = useMediaQuery(em("max-width: 768px"));
   return (
     <div className="m-[2%] w-full flex mt-[100px] pl-[2%] gap-2 md:gap-[20px] flex-wrap md:flex-nowrap justify-between md:justify-start items-start md:items-center ">
       <p className="text-[14px] md:text-[16px] text-[#737579] font-[500] w-full md:w-auto">

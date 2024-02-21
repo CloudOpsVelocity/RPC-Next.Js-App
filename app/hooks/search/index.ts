@@ -8,7 +8,8 @@ import { Search } from "@/app/validations/types/search";
 import { useAtom, useSetAtom } from "jotai";
 import { usePathname } from "next/navigation";
 import { useQueryStates, parseAsString, parseAsInteger } from "nuqs";
-import { useQuery } from "react-query";
+import { useState } from "react";
+import { useInfiniteQuery, useQuery } from "react-query";
 const paramsInit = {
   projStatus: parseAsString,
   localities: parseAsString,
@@ -147,11 +148,42 @@ export default function useSearchFilters() {
     setAppliedFilters({ runner: setParams });
     callback && callback();
   };
-  const searchProps = useQuery({
-    queryFn: () => getFilteredData(convertToQueryParams(params as any)),
-    queryKey: ["srp" + convertToQueryParams(params as any)],
+  // const searchProps = useQuery({
+  //   queryFn: () => getFilteredData(convertToQueryParams(params as any), 0),
+  //   queryKey: ["srp" + convertToQueryParams(params as any)],
+  //   enabled: path === "/search",
+  // });
+
+  const {
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    data,
+    error,
+    isLoading,
+    hasPreviousPage,
+  } = useInfiniteQuery({
+    queryKey: ["srptest" + convertToQueryParams(params as any)],
+
+    queryFn: ({ pageParam = 0 }) =>
+      getFilteredData(convertToQueryParams(params as any), pageParam),
+
+    getNextPageParam: (lastPage, allPages) => {
+      const nextPage = allPages.length;
+      if (lastPage.length < 20) {
+        return undefined;
+      }
+      return nextPage;
+    },
     enabled: path === "/search",
+    cacheTime: 300000,
+    staleTime: 30000,
   });
+  const fetchMoreData = () => {
+    if (!hasNextPage || isFetchingNextPage) return;
+    fetchNextPage();
+  };
+
   const remnoveSearchOptions = (index: any, key: "locality" | "builderIds") => {
     let oldArray = [...filters[key]];
     oldArray.splice(index, 1);
@@ -175,7 +207,14 @@ export default function useSearchFilters() {
     handleAppliedFilters,
     setParams,
     params,
-    searchProps,
+    searchProps: {
+      data: data?.pages.flat() || [],
+      isLoading,
+      error,
+      hasPreviousPage,
+      fetchMoreData,
+      hasNextPage,
+    },
     setFilters,
     remnoveSearchOptions,
     setSingleType,
@@ -183,8 +222,14 @@ export default function useSearchFilters() {
   };
 }
 
-const getFilteredData = async (query: string): Promise<Search[]> => {
-  const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=0&${query}`;
+const getFilteredData = async (
+  query: string,
+  page: number
+): Promise<Search[]> => {
+  console.log(query ? console.log(1) : 0);
+  const url = `${
+    process.env.NEXT_PUBLIC_BACKEND_URL
+  }/srp/searchproj?page=${page}${query && `&${query}`}`;
   try {
     const response = await fetch(url);
     const data = await response.json();

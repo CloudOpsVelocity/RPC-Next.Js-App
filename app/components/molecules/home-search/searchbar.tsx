@@ -93,7 +93,7 @@ const Searchbar = () => {
         className="border border-[#CBE9FF] rounded-3xl bg-white  w-full overflow-hidden relative"
         style={{ boxShadow: "0px 4px 14px 0px rgba(116, 196, 255, 0.19)" }}
       >
-        <section className="w-full grid grid-cols-[300px_auto] h-[80px]">
+        <section className="w-full flex md:grid md:grid-cols-[300px_auto] h-[80px]">
           <div className="grid items-center">
             <button
               onClick={toggle}
@@ -109,7 +109,7 @@ const Searchbar = () => {
             </button>
           </div>
           <div className="grid grid-cols-[auto_auto_auto] ">
-            <div className="border-l flex gap-3 px-3 place-items-center">
+            <div className="border-l flex gap-3 px-1 md:px-3 place-items-center">
               <div className="flex items-center ">
                 <FaLocationDot color="red" size={25} />
               </div>
@@ -153,7 +153,7 @@ const Searchbar = () => {
               </PillsInput>
             </div>
 
-            <div className="flex items-center px-3">
+            <div className="hidden md:flex items-center px-3">
               {/* <button
                 className="text-[16px] md:text-[20px] lg:text-[24px] flex items-center gap-3 text-slate-500"
                 onClick={getUserLocation}
@@ -167,7 +167,8 @@ const Searchbar = () => {
               <a
                 target="_blank"
                 href={`/search?${handleSearch()}`}
-                className="bg-green-600  text-[24px] text-white py-2 rounded-xl  px-5 "
+                className="bg-green-600  md:text-[24px] px-1 py-1
+                 text-white md:py-2 rounded-xl  md:px-5 "
               >
                 Search
               </a>
@@ -217,13 +218,16 @@ const Searchbar = () => {
                   <p className="flex">
                     Price Range
                     <p className="text-green-600 font-semibold ml-2">
-                      ₹{f.bugdetValue.at(0)} - ₹{f.bugdetValue.at(1)}
+                      ₹{f.bugdetValue.at(0)} Cr - ₹{f.bugdetValue.at(1)} Cr
                     </p>
                   </p>
 
                   <RangeSlider
                     color="green"
                     key="budgetSlider"
+                    classNames={{
+                      markLabel: classes.markLabel,
+                    }}
                     marks={[
                       { value: 0, label: "₹ 0" },
                       { value: 0.5, label: "₹ 0.5 Cr" },

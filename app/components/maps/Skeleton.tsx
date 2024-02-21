@@ -2,7 +2,7 @@ const MapSkeleton = () => {
   return (
     <div
       role="status"
-      className="flex items-center justify-center h-[740px] w-full bg-gray-300 rounded-lg animate-pulse dark:bg-gray-700"
+      className="flex items-center justify-center h-[250px] md:h-[740px] w-full bg-gray-300 rounded-lg animate-pulse dark:bg-gray-700"
     >
       <svg
         className="w-10 h-10 text-gray-200 dark:text-gray-600"

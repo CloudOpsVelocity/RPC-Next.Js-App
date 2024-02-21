@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Select, Tabs } from "@mantine/core";
 import ProjectDetailsCard from "./projectCard";
 import S from "@/app/styles/seach/Index.module.css";
@@ -20,7 +20,7 @@ const LeftSideBlock = () => {
   const [opned, { close, open }] = useReqCallPopup();
   const [activeTab, setActiveTab] = useState<string | null>("proj");
   const {
-    searchProps: { data, isLoading },
+    searchProps: { isLoading, data, hasNextPage, fetchMoreData },
   } = useSearchFilters();
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -28,6 +28,12 @@ const LeftSideBlock = () => {
     root: containerRef.current,
     threshold: 0.1,
   });
+  useEffect(() => {
+    if (entry?.isIntersecting && hasNextPage) {
+      fetchMoreData();
+    }
+  }, [entry?.isIntersecting, hasNextPage]);
+
   return (
     <div className="md:w-[50%] sm:w-[100%]  md:bg-white  min-w-[400px] md:min-w-[500px]">
       <Tabs value={activeTab} onChange={setActiveTab} defaultValue="proj">
@@ -73,7 +79,7 @@ const LeftSideBlock = () => {
             ) : data != undefined &&
               data.length != undefined &&
               data.length > 0 ? (
-              data.map((eachOne, index: number) => {
+              data?.map((eachOne, index: number) => {
                 return (
                   <ProjectDetailsCard
                     key={index}
@@ -89,7 +95,11 @@ const LeftSideBlock = () => {
                 <span className="relative left-[10%] ">{strikeIconIcon}</span>
               </div>
             )}
-            <div ref={ref}>sdfdf</div>
+            {hasNextPage && (
+              <div ref={ref} onClick={() => fetchMoreData()}>
+                Loading More Data
+              </div>
+            )}
           </div>
         </Tabs.Panel>
         <Tabs.Panel value="owner-props">

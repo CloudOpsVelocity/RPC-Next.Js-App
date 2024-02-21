@@ -28,8 +28,8 @@ import { getData } from "@/app/utils/api/search";
 const FilterPopup = () => {
   const [current, setCurrent] = useState("Project Status");
   const propKeys = [35, 33, 31, 34, 32];
-  const [localitySearch, setSearchLocality] = useDebouncedState("w", 500);
-  const [builderSearch, setBuilderSearch] = useDebouncedState("w", 500);
+  const [localitySearch, setSearchLocality] = useDebouncedState("", 500);
+  const [builderSearch, setBuilderSearch] = useDebouncedState("", 500);
 
   const { data } = useQuery({
     queryFn: () => getData(localitySearch, "loc"),
@@ -68,6 +68,12 @@ const FilterPopup = () => {
       });
     }
   };
+  const filteredSearchDetails =
+    filters.propTypes === projectprops.plot
+      ? searchDetails.filter(
+          (item) => !["Parking", "Unit Type", "Bath"].includes(item)
+        )
+      : searchDetails;
   return (
     <div className=" flex justify-start items-start w-[70vw] top-[160px] left-[70%]">
       <div className="w-[20%] flex shadow-md justify-start items-center flex-col ">
@@ -75,13 +81,13 @@ const FilterPopup = () => {
           Quick Filters
         </p>
         <div className="w-full ">
-          {searchDetails.map((eachItem, index) => {
+          {filteredSearchDetails.map((eachItem, index) => {
             return (
               <Button
                 key={index}
                 title={eachItem}
                 onChange={() => scrollWhereIsSelected(eachItem)}
-                buttonClass={` whitespace-nowrap w-full text-[15px] flex flex-row-reverse  justify-end pl-[10%] items-center border-solid border-b-[0.5px] items-start  px-4 py-4 h-[31px] gap-[8px] ${
+                buttonClass={`whitespace-nowrap w-full text-[15px] flex flex-row-reverse justify-end pl-[10%] items-center border-solid border-b-[0.5px] items-start px-4 py-4 h-[31px] gap-[8px] ${
                   current == eachItem
                     ? "text-[#148B16] bg-[#F1F9FF] font-[700]"
                     : "text-[#202020] bg-[#FCFCFC] font-[500]"

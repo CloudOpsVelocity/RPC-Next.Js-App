@@ -14,13 +14,11 @@ import { LatLngTuple } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css"; // Re-uses images from ~leaflet package
 import "leaflet-defaulticon-compatibility";
-import Image from "next/image";
-import { MapIcon } from "@/app/data/map";
 import L from "leaflet";
 import { useMediaQuery } from "@mantine/hooks";
 import { em } from "@mantine/core";
 
-const Map = ({ data, selectedLocation, projName, lat, lang }: any) => {
+const Map = ({ data, lat, lang }: any) => {
   const position: LatLngTuple = [lat, lang];
   const MapIcon = L.icon({
     iconUrl: "/searchmarker.png",
@@ -35,6 +33,7 @@ const Map = ({ data, selectedLocation, projName, lat, lang }: any) => {
     popupAnchor: [0, -38],
   });
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
+  console.log(data);
   return (
     <>
       <MapContainer
@@ -55,21 +54,28 @@ const Map = ({ data, selectedLocation, projName, lat, lang }: any) => {
               position={[parseFloat(item?.lat), parseFloat(item?.lang)]}
               icon={isMobile ? MobileIcon : MapIcon}
             >
-              {/* {selectedLocation?.lat === item?.lat && (
-                <Tooltip opacity={1} permanent direction="top">
-                  <div className=" ">
-                    <p className="text-[#00487C] text-lg not-italic font-semibold leading-[normal]">
-                      {item.projName}
-                    </p>
-                  </div>
-                </Tooltip>
-              )} */}
+              {/* <Tooltip opacity={1} permanent direction="top">
+                <div className=" ">
+                  <p className="text-[#00487C] text-lg not-italic font-semibold leading-[normal]">
+                    {item.projName}
+                  </p>
+                </div>
+              </Tooltip> */}
 
               <Popup>
                 <>
-                  <p className="text-[#006A02] text-xl not-italic font-semibold leading-[normal]">
-                    {item.projName}
-                  </p>
+                  <div>
+                    <p className="text-[#202020] text-2xl not-italic font-medium leading-[normal] p-0 !m-0">
+                      {item.projName}
+                    </p>
+
+                    <p className="text-[#0073C6] text-xs not-italic font-medium leading-[normal] underline">
+                      Agent Listing Available : {item.agentListing}{" "}
+                    </p>
+                    <p className="text-[#4D6677] text-xs not-italic font-medium leading-[normal] underline">
+                      Owner Listing Available : {item.ownerListing}{" "}
+                    </p>
+                  </div>
                 </>
               </Popup>
             </Marker>
