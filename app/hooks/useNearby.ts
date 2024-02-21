@@ -13,7 +13,7 @@ export default function useNearby({ lat, lng }: { lat: string; lng: string }) {
     return res.data;
   };
   const { isLoading, data } = useQuery({
-    queryKey: "nearby",
+    queryKey: [`nearby` + slug],
     queryFn: getData,
   });
   return { isLoading, data };

@@ -57,7 +57,7 @@ export default function AuthButton() {
 }
 
 import { Menu } from "@mantine/core";
-import data from "@/app/data/dropdown";
+import data, { unAuthorizedData } from "@/app/data/dropdown";
 import { postDetailsIcon } from "@/app/images/commonSvgs";
 
 function Dropdown() {
@@ -87,39 +87,64 @@ function Dropdown() {
           </div>
         )}
       </Menu.Target>
-
-      <Menu.Dropdown
-        className="!z-[1000]"
-        classNames={{
-          dropdown: S.dropdown,
-        }}
-      >
-        {data.map((item, index) => (
-          <Menu.Item
-            key={index}
+      {session ? (
+        <>
+          <Menu.Dropdown
+            className="!z-[1000]"
             classNames={{
-              itemLabel: S.itemLabel,
+              dropdown: S.dropdown,
             }}
-            component="a"
-            className="block text-gray-700 hover:text-green-500 transition-colors"
-            href={item.url}
-            target="_blank"
           >
-            {item.label}
-          </Menu.Item>
-        ))}
-        <hr className=" bg-[#768AA9] h-0.5 max-w-[90%] m-auto" />
-        <Menu.Item
+            {data.map((item, index) => (
+              <Menu.Item
+                key={index}
+                classNames={{
+                  itemLabel: S.itemLabel,
+                }}
+                component="a"
+                className="block text-gray-700 hover:text-green-500 transition-colors"
+                href={item.url}
+                target="_blank"
+              >
+                {item.label}
+              </Menu.Item>
+            ))}
+            <hr className=" bg-[#768AA9] h-0.5 max-w-[90%] m-auto" />
+            <Menu.Item
+              classNames={{
+                itemLabel: S.itemLabel,
+              }}
+              component="button"
+              className="block text-gray-700 hover:text-green-500 transition-colors"
+              onClick={handleLogout}
+            >
+              Log Out
+            </Menu.Item>
+          </Menu.Dropdown>
+        </>
+      ) : (
+        <Menu.Dropdown
+          className="!z-[1000]"
           classNames={{
-            itemLabel: S.itemLabel,
+            dropdown: S.dropdown,
           }}
-          component="button"
-          className="block text-gray-700 hover:text-green-500 transition-colors"
-          onClick={handleLogout}
         >
-          Log Out
-        </Menu.Item>
-      </Menu.Dropdown>
+          {unAuthorizedData.map((item, index) => (
+            <Menu.Item
+              key={index}
+              classNames={{
+                itemLabel: S.itemLabel,
+              }}
+              component="a"
+              className="block text-gray-700 hover:text-green-500 transition-colors"
+              href={item.url}
+              target="_blank"
+            >
+              {item.label}
+            </Menu.Item>
+          ))}
+        </Menu.Dropdown>
+      )}
     </Menu>
   );
 }

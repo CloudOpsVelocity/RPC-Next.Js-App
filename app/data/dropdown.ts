@@ -18,5 +18,14 @@ const data = [
     url: `${baseUrl}/about-us`,
   },
 ];
-
+export const unAuthorizedData = [
+  {
+    label: "Login",
+    url: `${baseUrl}/login`,
+  },
+  {
+    label: "Sign Up",
+    url: `${baseUrl}/register`,
+  },
+];
 export default data;

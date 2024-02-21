@@ -10,12 +10,11 @@ export default function usePhaseWiseOverview() {
   const [, setFloorPhase] = useAtom(currentPhaseAtom);
   const [currentPhase, setCurrentPhase] = useState(0);
   const handlePhaseChange = (phaseId: number) => {
-    console.log(phaseId);
     setCurrentPhase(phaseId);
   };
   const { slug } = useParams<{ slug: string }>();
   const { data: PhaseOverview, isLoading } = useQuery({
-    queryKey: [`phases`],
+    queryKey: [`phases` + slug],
     queryFn: () => getProjectWiseOverView(slug),
     onSuccess: (data) => {
       setCurrentPhase(data[0].phaseId);
