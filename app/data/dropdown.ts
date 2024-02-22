@@ -22,11 +22,11 @@ const data = [
 export const unAuthorizedData = [
   {
     label: "Login",
-    url: `${process.env.NEXT_PUBLIC_URL}/login`,
+    url: `https://test.getrightproperty.com/login`,
   },
   {
     label: "Sign Up",
-    url: `${process.env.NEXT_PUBLIC_URL}/register`,
+    url: `https://test.getrightproperty.com/register`,
   },
 ];
 export default data;
