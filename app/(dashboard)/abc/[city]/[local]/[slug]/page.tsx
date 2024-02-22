@@ -1,9 +1,8 @@
 import React from "react";
-import FloorplansBlock from "@/app/components/project/floorplansBlock";
+// import FloorplansBlock from "@/app/components/project/floorplansBlock";
 import AboutBuilder from "@/app/components/project/aboutBuilder";
-import GalleryBlock from "@/app/components/project/galleryBlock";
-import Nearby from "@/app/components/project/nearby";
-import Banner from "@/app/components/project/banner";
+// import GalleryBlock from "@/app/components/project/galleryBlock";
+// import Banner from "@/app/components/project/banner";
 import Feature from "@/app/components/project/feature";
 import Reviews from "@/app/components/project/reviews";
 import Amenties from "@/app/components/project/amenties";
@@ -16,13 +15,62 @@ import Navigation from "@/app/components/project/navigation";
 import Link from "next/link";
 import { getProjectDetails } from "@/app/utils/api/project";
 import ProjectDetailsP from "@/app/components/project/projectDetailsP";
-import Specifications from "@/app/components/project/specification";
+// import Specifications from "@/app/components/project/specification";
 import ProjectDrawer from "@/app/components/project/Drawer";
 import DownloadBroucher from "@/app/components/project/downloadBroucher";
-import NearByCarousel from "@/app/components/project/NearByCarousel";
+// import NearByCarousel from "@/app/components/project/NearByCarousel";
 import MasterPlan from "@/app/components/project/masterplan";
 import LeafMap from "@/app/components/project/map";
 import ListingRentAvail from "@/app/components/project/listingRentAvail";
+import dynamic from "next/dynamic";
+// import LoginPopup from "@/app/components/project/modals/LoginPop";
+import SectionSkeleton from "@/app/components/atoms/skeleton/section";
+const FloorplansBlock = dynamic(
+  () => import("@/app/components/project/floorplansBlock"),
+  {
+    loading: () => <SectionSkeleton />,
+    ssr: false,
+  }
+);
+const GalleryBlock = dynamic(
+  () => import("@/app/components/project/galleryBlock"),
+  {
+    loading: () => <SectionSkeleton />,
+    ssr: false,
+  }
+);
+const NearByCarousel = dynamic(
+  () => import("@/app/components/project/NearByCarousel"),
+  {
+    loading: () => <SectionSkeleton />,
+    ssr: false,
+  }
+);
+const Specifications = dynamic(
+  () => import("@/app/components/project/specification"),
+  {
+    loading: () => <SectionSkeleton />,
+    ssr: false,
+  }
+);
+const LoginPopup = dynamic(
+  () => import("@/app/components/project/modals/LoginPop"),
+  {
+    loading: () => <SectionSkeleton />,
+    ssr: false,
+  }
+);
+const Banner = dynamic(() => import("@/app/components/project/banner"), {
+  loading: () => <SectionSkeleton />,
+  ssr: false,
+});
+// const ProjectDetailsP = dynamic(
+//   () => import("@/app/components/project/projectDetailsP"),
+//   {
+//     loading: () => <MapSkeleton />,
+//     ssr: false,
+//   }
+// );
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
   const data = await getProjectDetails(slug);
@@ -116,6 +164,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           lng={data.lang}
         />
         <ProjectDrawer projName={data.projectName} />
+        <LoginPopup />
       </div>
     </div>
   );

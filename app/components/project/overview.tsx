@@ -17,6 +17,7 @@ import ShortList from "./actions/shortList";
 import CompareList from "./actions/compareList";
 import { formatDateDDMMYYYY } from "@/app/utils/date";
 import usePhaseWiseOverview from "@/app/hooks/usePhaseWiseOverview";
+import LoginPopup from "./modals/LoginPop";
 
 export default function Overview({
   maxPrice,

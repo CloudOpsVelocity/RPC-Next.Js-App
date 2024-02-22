@@ -92,19 +92,15 @@ export function ProjectCard({ type, cardData }: CardProps) {
             )}
 
             <div className=" right-2 absolute ">
-              {!session ? (
-                <LoginPopup type="Shortlist" card={true} />
-              ) : (
-                <button
-                  className="mt-[-30px] rounded-[10px] relative bottom-[35px] z-10 p-[8px] text-[#0073C6] text-[18px] font-[700] flex pl-[4px] justify-center items-center bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100"
-                  onClick={() => onAddingShortList()}
-                >
-                  <span className=" w-[24px] h-[24px] ">
-                    {isItemInShortlist ? Shorlisted : shortlistIconSvg}
-                  </span>
-                  {isItemInShortlist ? "Shortlisted" : "Shortlist"}
-                </button>
-              )}
+              <button
+                className="mt-[-30px] rounded-[10px] relative bottom-[35px] z-10 p-[8px] text-[#0073C6] text-[18px] font-[700] flex pl-[4px] justify-center items-center bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100"
+                onClick={() => onAddingShortList()}
+              >
+                <span className=" w-[24px] h-[24px] ">
+                  {isItemInShortlist ? Shorlisted : shortlistIconSvg}
+                </span>
+                {isItemInShortlist ? "Shortlisted" : "Shortlist"}
+              </button>
             </div>
           </div>
 

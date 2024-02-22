@@ -1,7 +1,5 @@
 "use client";
-import Button from "@/app/elements/button";
 import ButtonLink from "@/app/elements/link";
-import axios from "axios";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -81,7 +79,13 @@ function Dropdown() {
         ) : (
           <div className="login-btn text-[20px] font-semibold px-5 py-2 rounded-full flex flex-row-reverse justify-center gap- items-center text-[#0073C6] border-none underline bg-gradient-to-r from-[#EFF8FF] to-[#FFF] shadow-md">
             <Image width={30} height={30} alt="logout" src="/burger.svg" />{" "}
-            <Link href={"/login"} className="text-[16px] mr-1">
+            <Link
+              href={"/login"}
+              className="text-[16px] md:text-[20px] mr-1"
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+            >
               Login/Singup
             </Link>
           </div>

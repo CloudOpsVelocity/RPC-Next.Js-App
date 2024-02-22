@@ -1,18 +1,10 @@
 "use client";
-import PriceBag, {
-  Phone,
-  PopupCrossIcon,
-  ShearIcon,
-  WhatsAppButton,
-} from "@/app/images/commonSvgs";
+import PriceBag, { Phone, WhatsAppButton } from "@/app/images/commonSvgs";
 import N from "@/app/styles/Numinput.module.css";
-import React, { useState } from "react";
+import React from "react";
 import Button from "../../elements/button";
-import { useDisclosure, useMediaQuery, useSetState } from "@mantine/hooks";
-import { Collapse, Modal, NumberInput, TextInput, em } from "@mantine/core";
-import Image from "next/image";
+import { NumberInput, TextInput } from "@mantine/core";
 import { useSession } from "next-auth/react";
-import S from "@/app/styles/Req.module.css";
 import { useForm, yupResolver } from "@mantine/form";
 import { reqSchema } from "@/app/validations/project";
 import { Button as B } from "@mantine/core";
@@ -22,7 +14,6 @@ import { useParams } from "next/navigation";
 import CountryInput from "../atoms/CountryInput";
 import { formatCurrency } from "@/app/utils/numbers";
 import { popupStateAtom, useReqCallPopup } from "@/app/hooks/useReqCallPop";
-import useBuilder from "@/app/hooks/useBuilder";
 import { useShortlistAndCompare } from "@/app/hooks/storage";
 import { useAtomValue } from "jotai";
 import RequestCallBackModal from "../molecules/popups/req";

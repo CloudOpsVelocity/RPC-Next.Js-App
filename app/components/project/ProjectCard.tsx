@@ -10,6 +10,7 @@ import { useSession } from "next-auth/react";
 import LoginPopup from "./modals/LoginPop";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import { useShortlistAndCompare } from "@/app/hooks/storage";
+import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 
 type Props = {
   type: string;
@@ -29,7 +30,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
   const [, { open }] = useReqCallPopup();
   const { data: session } = useSession();
   const { toggleShortlist, shortlistedItems } = useShortlistAndCompare();
-
+  const [, { open: openS }] = usePopShortList();
   const isItemInShortlist =
     shortlistedItems.length > 0 &&
     shortlistedItems.some(
@@ -42,6 +43,8 @@ export function ProjectCard({ type, cardData }: CardProps) {
         id: cardData.projIdEnc,
         status: isItemInShortlist ? "N" : "Y",
       });
+    } else {
+      openS();
     }
   };
   return (
@@ -92,19 +95,15 @@ export function ProjectCard({ type, cardData }: CardProps) {
             )}
 
             <div className=" right-2 absolute ">
-              {!session ? (
-                <LoginPopup type="Shortlist" card={true} />
-              ) : (
-                <button
-                  className="mt-[-30px] rounded-[10px] relative bottom-[35px] z-10 p-[8px] text-[#0073C6] text-[18px] font-[700] flex pl-[4px] justify-center items-center bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100"
-                  onClick={() => onAddingShortList()}
-                >
-                  <span className=" w-[24px] h-[24px] ">
-                    {isItemInShortlist ? Shorlisted : shortlistIconSvg}
-                  </span>
-                  {isItemInShortlist ? "Shortlisted" : "Shortlist"}
-                </button>
-              )}
+              <button
+                className="mt-[-30px] rounded-[10px] relative bottom-[35px] z-10 p-[8px] text-[#0073C6] text-[18px] font-[700] flex pl-[4px] justify-center items-center bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100"
+                onClick={() => onAddingShortList()}
+              >
+                <span className=" w-[24px] h-[24px] ">
+                  {isItemInShortlist ? Shorlisted : shortlistIconSvg}
+                </span>
+                {isItemInShortlist ? "Shortlisted" : "Shortlist"}
+              </button>
             </div>
           </div>
 

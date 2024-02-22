@@ -94,7 +94,7 @@ export default function GalleryBlock({
           <div className="flex justify-start items-start w-full gap-[4%] flex-wrap ">
             {images?.map((img, ind) => (
               <Image
-                key={ind}
+                key={img}
                 width={150}
                 height={100}
                 src={img as string}

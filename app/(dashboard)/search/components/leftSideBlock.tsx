@@ -75,7 +75,7 @@ const LeftSideBlock = () => {
             ref={containerRef}
           >
             {isLoading ? (
-              <Loading />
+              <SearchSkeleton />
             ) : data != undefined &&
               data.length != undefined &&
               data.length > 0 ? (
@@ -138,7 +138,7 @@ const LeftSideBlock = () => {
         </Tabs.Panel>
       </Tabs>
       <RequestCallBackModal close={close} opened={opned} builderId={1112} />
-      <LoginPopup hidden card />
+      <LoginPopup />
     </div>
   );
 };
@@ -146,6 +146,7 @@ const LeftSideBlock = () => {
 export { LeftSideBlock };
 import { Menu } from "@mantine/core";
 import { useIntersection } from "@mantine/hooks";
+import SearchSkeleton from "@/app/components/atoms/skeleton/search";
 
 function SortBy() {
   const [selected, setSort] = useState("");
