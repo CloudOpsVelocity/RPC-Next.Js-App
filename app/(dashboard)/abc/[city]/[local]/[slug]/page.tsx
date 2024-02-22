@@ -110,7 +110,10 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           data={data.phaseList}
           slug={slug}
         />
-        <MasterPlan projName={data.projectName} />
+        <MasterPlan
+          projName={data.projectName}
+          media={data.media.projectPlanUrl}
+        />
         <FloorplansBlock
           projName={data.projectName}
           data={data.phaseList}
