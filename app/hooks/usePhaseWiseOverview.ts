@@ -14,7 +14,7 @@ export default function usePhaseWiseOverview() {
   };
   const { slug } = useParams<{ slug: string }>();
   const { data: PhaseOverview, isLoading } = useQuery({
-    queryKey: [`phases` + slug],
+    queryKey: [`phaseoverview` + slug],
     queryFn: () => getProjectWiseOverView(slug),
     onSuccess: (data) => {
       setCurrentPhase(data[0].phaseId);

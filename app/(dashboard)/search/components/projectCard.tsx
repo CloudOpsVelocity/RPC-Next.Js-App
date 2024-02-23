@@ -2,6 +2,7 @@ import React from "react";
 import Button from "@/app/elements/button";
 import S from "@/app/styles/seach/Index.module.css";
 import {
+  GradientLocation,
   Phone,
   ReraIcon,
   Shorlisted,
@@ -16,6 +17,8 @@ import { useSession } from "next-auth/react";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import { formatCurrency } from "@/app/utils/numbers";
+import { useAtom, useSetAtom } from "jotai";
+import selectedSearchAtom from "@/app/store/search/map";
 
 type Props = {
   type: any;
@@ -34,6 +37,8 @@ const ProjectDetailsCard = ({
   postedDate,
   projIdEnc,
   propTypes,
+  lat,
+  lang,
 }: Props) => {
   const { data: session } = useSession();
 
@@ -71,6 +76,7 @@ const ProjectDetailsCard = ({
       openLogin();
     }
   };
+  const setSelected = useSetAtom(selectedSearchAtom);
   return (
     <div className=" flex w-full mb-[5%] flex-col shadow-md ">
       <div className=" flex justify-center items-center w-full  ">
@@ -152,6 +158,20 @@ const ProjectDetailsCard = ({
             </div>
 
             <div className=" flex justify-end items-end flex-col">
+              <button
+                className="inline-flex justify-center items-center gap-1 p-2 border rounded-[21px] border-solid border-[#0094FF] text-[#202020] text-[12px] not-italic font-semibold leading-[normal] mb-1"
+                onClick={() =>
+                  setSelected({
+                    agentListing,
+                    ownerListing,
+                    projName,
+                    lat,
+                    lang,
+                  })
+                }
+              >
+                View on Map <GradientLocation />
+              </button>
               <p className="text-[#F9D728] text-[12px] font-[600]">
                 No Rating Yet
               </p>

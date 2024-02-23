@@ -1,5 +1,6 @@
 "use client";
 import { PopupOpenSvg } from "@/app/images/commonSvgs";
+import { imageUrlParser } from "@/app/utils/image";
 import { Image } from "@mantine/core";
 import React from "react";
 
@@ -43,12 +44,13 @@ export default function MasterPlan({
             Our Expertise.
           </p>
         </div>
-        <button
+        <a
+          target="_blank"
           className="inline-flex flex-col items-center justify-center gap-2.5 p-5 rounded-[10px] bg-[#0073C6] text-white text-2xl not-italic font-bold leading-[normal] tracking-[0.96px] "
-          onClick={handleDownload}
+          href={imageUrlParser(media)}
         >
           DownLoad MasterPlan
-        </button>
+        </a>
       </div>
       <div className="relative">
         <Image radius="md" src={`${media}`} h={863} w="100%" fit="cover" />

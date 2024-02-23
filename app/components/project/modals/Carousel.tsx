@@ -47,9 +47,13 @@ function CarouselModal({
             Floor Plan
           </div>
           <div className="flex justify-center items-center gap-5">
-            <button className="text-white flex justify-center items-center gap-1 p-2 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] rounded-[10px] bg-[#0073c6]">
+            <a
+              target="_blank"
+              href={imageUrlParser(selectedFloor?.floorPlanUrl)}
+              className="text-white flex justify-center items-center gap-1 p-2 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] rounded-[10px] bg-[#0073c6]"
+            >
               Download Floor Plan
-            </button>
+            </a>
             <SharePopup
               title="Share"
               url={imageUrlParser(selectedFloor?.floorPlanUrl)}

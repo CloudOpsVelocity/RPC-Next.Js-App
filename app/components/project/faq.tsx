@@ -31,7 +31,7 @@ type FaqWithBgProps = {
 
 let ind = 0;
 
-export function FaqWithBg({ data, projName }: FaqWithBgProps) {
+export default function FaqWithBg({ data, projName }: FaqWithBgProps) {
   const [value, setValue] = useState<string | null>(null);
 
   return (

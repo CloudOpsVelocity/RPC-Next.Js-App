@@ -5,7 +5,7 @@ import Banner from "@/app/components/project/banner";
 import Reviews from "@/app/components/project/reviews";
 import Amenties from "@/app/components/project/amenties";
 import Loans from "@/app/components/project/loans";
-import { FaqWithBg } from "@/app/components/project/faq";
+import FaqWithBg from "@/app/components/project/faq";
 import About from "@/app/components/project/about";
 import Navigation from "@/app/components/property/Navigation";
 import Link from "next/link";

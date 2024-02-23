@@ -1,13 +1,13 @@
 import React from "react";
 // import FloorplansBlock from "@/app/components/project/floorplansBlock";
-import AboutBuilder from "@/app/components/project/aboutBuilder";
+// import AboutBuilder from "@/app/components/project/aboutBuilder";
 // import GalleryBlock from "@/app/components/project/galleryBlock";
 // import Banner from "@/app/components/project/banner";
 import Feature from "@/app/components/project/feature";
 import Reviews from "@/app/components/project/reviews";
 import Amenties from "@/app/components/project/amenties";
 import Loans from "@/app/components/project/loans";
-import { FaqWithBg } from "@/app/components/project/faq";
+// import { FaqWithBg } from "@/app/components/project/faq";
 import FirstBlock from "@/app/components/project/firstBlock";
 import Overview from "@/app/components/project/overview";
 import About from "@/app/components/project/about";
@@ -64,13 +64,18 @@ const Banner = dynamic(() => import("@/app/components/project/banner"), {
   loading: () => <SectionSkeleton />,
   ssr: false,
 });
-// const ProjectDetailsP = dynamic(
-//   () => import("@/app/components/project/projectDetailsP"),
-//   {
-//     loading: () => <MapSkeleton />,
-//     ssr: false,
-//   }
-// );
+const AboutBuilder = dynamic(
+  () => import("@/app/components/project/aboutBuilder"),
+  {
+    loading: () => <SectionSkeleton />,
+    ssr: false,
+  }
+);
+const FaqWithBg = dynamic(() => import("@/app/components/project/faq"), {
+  loading: () => <SectionSkeleton />,
+  ssr: false,
+});
+
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
   const data = await getProjectDetails(slug);
