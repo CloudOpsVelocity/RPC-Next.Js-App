@@ -1,0 +1,35 @@
+import { SEARCH_FILTER_DATA } from "@/app/data/search";
+import { Checkbox } from "@mantine/core";
+import React from "react";
+import ClearAll from "../ClearAll";
+import useSearchFilters from "@/app/hooks/search";
+
+export default function BhkFilter() {
+  const { filters, handleCheckboxClick, params } = useSearchFilters();
+  return (
+    <div className="max-w-[300px] ">
+      <ClearAll type="unitType" />
+      <div className="p-3">
+        {" "}
+        <h3 className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] ">
+          Unit Type
+        </h3>
+        <div className="flex  mb-[3%] t gap-[4%]  flex-wrap justify-start items-center ">
+          {SEARCH_FILTER_DATA.bhkDetails.map((eachItem, index) => {
+            return (
+              <Checkbox
+                w={80}
+                key={index}
+                color="green"
+                mt={10}
+                checked={filters.unitTypes.includes(eachItem.value)}
+                label={eachItem.title}
+                onClick={() => handleCheckboxClick("unitTypes", eachItem.value)}
+              />
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
