@@ -159,7 +159,7 @@ const ProjectDetailsCard = ({
 
             <div className=" flex justify-end items-end flex-col">
               <button
-                className="inline-flex justify-center items-center gap-1 p-2 border rounded-[21px] border-solid border-[#0094FF] text-[#202020] text-[12px] not-italic font-semibold leading-[normal] mb-1"
+                className="md:inline-flex justify-center items-center gap-1 p-2 border rounded-[21px] border-solid border-[#0094FF] text-[#202020] text-[12px] not-italic font-semibold leading-[normal] mb-1 hidden"
                 onClick={() =>
                   setSelected({
                     agentListing,

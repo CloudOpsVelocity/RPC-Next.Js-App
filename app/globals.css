@@ -81,3 +81,12 @@
 .scrollUnique::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+.rtm {
+  display: inline-flex;
+  padding: 6px 8px 7.522px 7px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+  background: linear-gradient(91deg, #000 0.74%, rgba(0, 0, 0, 0.4) 103.26%);
+}

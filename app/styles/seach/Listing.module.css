@@ -1,18 +1,14 @@
 .tab {
+  position: relative;
+  border-radius: 5px;
+  border: 1px solid #0073c6;
   color: #0073c6;
   font-family: Montserrat;
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-}
-@media screen and (min-width: 768px) {
-  .tab {
-    font-size: 16px;
-  }
-}
-.tab:hover {
-  background-color: transparent;
+  margin: 0px 10px 25px 10px;
 }
 .tab:first-of-type {
   border-radius: rem(4px) 0 0 rem(4px);
@@ -20,16 +16,21 @@
 .tab:last-of-type {
   border-radius: 0 rem(4px) rem(4px) 0;
 }
-.tab + .tab {
-  border-left-width: 0;
-}
+
 .tab[data-active] {
   z-index: 1;
-  color: #0073c6;
+  border-radius: 5px;
+  background: #cae9ff;
+  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.1),
+    0px 4px 10px 0px rgba(0, 0, 0, 0.05) inset;
+  color: #00487c;
+  font-family: Montserrat;
+  font-size: 20px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
   line-height: normal;
-  text-decoration-line: underline;
+  border: none;
+  outline: none;
 }
 
 .bg {
@@ -40,4 +41,22 @@
 .searchCardbg {
   border-radius: 30px;
   background: linear-gradient(91deg, #000 0.74%, rgba(0, 0, 0, 0.4) 103.26%);
+}
+
+.lists {
+  border: none;
+  outline: none;
+  --_list-border-width: 0 !important;
+}
+@media only screen and (max-width: 600px) {
+  .tab {
+    font-size: 14px;
+    margin: 0 5px;
+    padding: 4px;
+    margin-left: 12px;
+  }
+
+  .tab[data-active] {
+    font-size: 14px;
+  }
 }

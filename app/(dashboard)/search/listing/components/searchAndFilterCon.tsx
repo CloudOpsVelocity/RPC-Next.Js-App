@@ -77,7 +77,7 @@ const SearchHeader = ({ open, close }: any) => {
     !value ? setName(null) : setName(value);
   };
   return (
-    <div className="m-[2%] w-full flex mt-[100px] pl-[2%] gap-2 md:gap-[20px] flex-wrap md:flex-nowrap justify-between md:justify-start items-start md:items-center ">
+    <div className="mx-[2%] w-full flex mt-[80px] pl-[2%] gap-2 md:gap-[20px] flex-wrap md:flex-nowrap justify-between md:justify-start items-start md:items-center bg-[#FCFCFC] py-4">
       <p className="text-[14px] md:text-[16px] text-[#737579] font-[500] w-full md:w-auto">
         <span>Home</span> {" > "}
         <Link href={"/project/banglore"}>
