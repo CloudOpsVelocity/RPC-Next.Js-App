@@ -295,7 +295,7 @@ const MobileDetails = ({
           buttonClass="flex justify-center items-center text-[#FFF] p-[5px] bg-[#0073C6] rounded-[5px] shadow-md text-[12px] font-[700]"
         />
       </div>
-      <div className="flex justify-center items-center gap-[5px]">
+      <div className=" justify-center items-center  gap-[5px]">
         <button
           className=" justify-center items-center gap-1 p-2 border rounded-[21px] border-solid border-[#0094FF] text-[#202020] text-[12px] not-italic font-semibold leading-[normal] mb-1 inline-flex  bg-white"
           onClick={() =>

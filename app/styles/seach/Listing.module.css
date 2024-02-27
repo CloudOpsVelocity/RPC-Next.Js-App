@@ -43,11 +43,6 @@
   background: linear-gradient(91deg, #000 0.74%, rgba(0, 0, 0, 0.4) 103.26%);
 }
 
-.lists {
-  border: none;
-  outline: none;
-  --_list-border-width: 0 !important;
-}
 @media only screen and (max-width: 600px) {
   .tab {
     font-size: 14px;

@@ -90,3 +90,7 @@
   border-radius: 30px;
   background: linear-gradient(91deg, #000 0.74%, rgba(0, 0, 0, 0.4) 103.26%);
 }
+
+.m-89d60db1[data-variant="default"] {
+  --_list-border-width: 0 !important;
+}
