@@ -78,39 +78,33 @@ const ProjectDetailsCard = ({
   const setSelectedSearch = useSetAtom(listingSearchAtom);
   return (
     <div className=" flex w-full mb-[5%] flex-col shadow-md ">
-      <div className=" flex justify-center items-start w-full">
-        <div className="md:max-w-[210px] max-w-[120px] flex justify-start items-start w-full flex-col  ">
-          {type == "proj" && (
-            <p className="text-[#FFF] text-[12px] mb-[-26px] z-10 flex justify-center items-center p-[3px] font-[500] bg-gradient-to-r from-[#148B16] /0 to-[#E5F4FF]/100">
-              {" "}
-              <ReraIcon /> RERA
-            </p>
-          )}
-          <div className="w-full h-[120px]  md:h-[190px] bg-gray-300 p-4">
+      <div className=" flex justify-center items-center w-full h-full">
+        <div className="md:max-w-[320px] max-w-[150px] flex justify-center items-center w-full flex-col h-fit md:h-full    relative">
+          <div className="relative">
             <Image
               src={coverUrl}
-              width={190}
-              height={190}
+              width={320}
+              height={174}
               alt="conver"
-              className="w-full h-full"
+              className="w-full h-[110px] md:h-[174px]  shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] object-cover relative"
             />
-            <div className="flex-col flex md:hidden">
-              <p className="text-[#202020] text-[10px] md:text-[16px] font-[400]">
-                Posted By: <span className=" font-[600]">Builder</span>
-              </p>
-              <p className="text-[#202020] text-[10px] md:text-[16px] font-[400]">
-                Date:{" "}
-                <span className=" font-[600]">
-                  {formatDateDDMMYYYY(postedDate)}
-                </span>
-              </p>
-            </div>
+            <p className="absolute text-[#FFF] text-[8px] md:text-[12px] bottom-2 left-5 md:mt-[-60px]  md:left-[10px] gap-[4px] z-10 flex justify-center rounded-[20px] items-center p-[7px] font-[500] rtm ">
+              {" "}
+              Ready to move
+            </p>
           </div>
 
-          <p className="text-[#FFF] text-[10px] md:text-[12px] mt-[-40px] relative left-[4px] gap-[4px] z-10 flex justify-center rounded-[20px] items-center p-[7px] font-[500] rtm">
-            {" "}
-            Ready to move
-          </p>
+          <div className="flex-col flex md:hidden min-w-[100px] mt-2">
+            <p className="text-[#202020] text-[10px] md:text-[16px] font-[400]">
+              Posted By: <span className=" font-[600]">Builder</span>
+            </p>
+            <p className="text-[#202020] text-[10px] md:text-[16px] font-[400]">
+              Date:{" "}
+              <span className=" font-[600]">
+                {formatDateDDMMYYYY(postedDate)}
+              </span>
+            </p>
+          </div>
         </div>
         <div className="w-full px-[2%]">
           <div>
@@ -119,12 +113,8 @@ const ProjectDetailsCard = ({
                 {projName}
               </p>
             ) : (
-              <p className="text-[#001F35] text-[12px]  md:text-[20px] font-[600] mt-[30px]">
+              <p className="text-[#001F35] text-[12px]  md:text-[20px] font-[600]   md:mb-0">
                 3BHK Apartment for Sell in Kadugodi,{" "}
-                {/* <span className="text-[#148B16] text-[16px] font-[700]">
-                      {" "}
-                      ₹ 2.36 Cr
-                    </span> */}
               </p>
             )}
             <p className=" text-[#148B16] text-[12px] md:text-base not-italic font-semibold mb-[19px]">
@@ -172,7 +162,7 @@ const ProjectDetailsCard = ({
               </div>
             </div>
 
-            <div className="  justify-end items-end flex-col hidden md:flex">
+            <div className="  justify-end items-end flex-col hidden md:flex mt-auto ">
               <p className="text-[#202020] text-[12px] md:text-[16px] font-[400]">
                 Posted By: <span className=" font-[600]">Builder</span>
               </p>
@@ -284,7 +274,7 @@ const MobileDetails = ({
   };
   const setSelectedSearch = useSetAtom(listingSearchAtom);
   return (
-    <div className="flex md:hidden items-center justify-between gap-[10px] px-[12px] py-[11px] rounded-[10px] bg-[#E9F6FF] ">
+    <div className="flex md:hidden items-center justify-between gap-[10px] px-[12px] py-[11px] rounded-[10px] bg-[#E9F6FF] mt-5">
       <div className="flex flex-col justify-center items-start gap-2.5">
         <div className="flex justify-center items-center gap-2.5">
           <Button
