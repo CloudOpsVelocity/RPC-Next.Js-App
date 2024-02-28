@@ -53,20 +53,6 @@ const LeftSideBlock = () => {
             );
           })}
           <SortBy />
-          {/* <Select
-            rightSection={<DropDownIcon />}
-            label=""
-            placeholder="Sort By"
-            data={[
-              "Relevance",
-              "Newest first",
-              "Price Low to High",
-              "Price High to Low",
-              "Price / sq.ft. : Low to High",
-              "Price / sq.ft. : High to Low",
-            ]}
-            className="placeholder:!text-[#0073C6] text-base not-italic font-medium leading-[normal] ml-auto"
-          /> */}
         </Tabs.List>
 
         <Tabs.Panel value="proj">

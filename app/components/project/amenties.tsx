@@ -54,36 +54,34 @@ export default function Amenties({
           {data?.map((eachItem, ind) => {
             if (amenitiesGroupList.get(eachItem.id) != null) {
               return (
-                <React.Fragment>
-                  {amenitiesFromDB != undefined &&
-                    amenitiesFromDB != null &&
-                    Object.keys(amenitiesFromDB).map((group, ind) => {
-                      return (
-                        <div key={group}>
-                          {amenitiesFromDB != undefined &&
-                            amenitiesFromDB != null &&
-                            amenitiesFromDB[`${group}`] != undefined &&
-                            amenitiesFromDB[`${group}`] != null &&
-                            amenitiesFromDB[`${group}`].length != 0 &&
-                            amenitiesFromDB[group].map(
-                              (eachOne: any, index: number) => {
-                                if (eachOne.cid == eachItem.id) {
-                                  return (
-                                    <div
-                                      key={ind}
-                                      className="flex items-center rounded-[10px] gap-[8px] shadow-md border-solid border-[1px] mr-[24px] mb-[24px] border-[#a5bfd8] px-2.5 py-0.5 w-fit text-[#001F35] font-[500] text-[18px] lg:text-[20px] transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-[#FFF] text-secondary-foreground hover:bg-gray-100/80"
-                                    >
-                                      {amenitiesGroupList.get(eachItem.id)}
-                                      {eachOne.constDesc}
-                                    </div>
-                                  );
-                                }
-                              }
-                            )}
-                        </div>
-                      );
-                    })}
-                </React.Fragment>
+                amenitiesFromDB != undefined &&
+                amenitiesFromDB != null &&
+                Object.keys(amenitiesFromDB).map((group, ind) => {
+                  return (
+                    <div key={ind}>
+                      {amenitiesFromDB != undefined &&
+                        amenitiesFromDB != null &&
+                        amenitiesFromDB[`${group}`] != undefined &&
+                        amenitiesFromDB[`${group}`] != null &&
+                        amenitiesFromDB[`${group}`].length != 0 &&
+                        amenitiesFromDB[group].map(
+                          (eachOne: any, index: number) => {
+                            if (eachOne.cid == eachItem.id) {
+                              return (
+                                <div
+                                  key={index}
+                                  className="flex items-center rounded-[10px] gap-[8px] shadow-md border-solid border-[1px] mr-[24px] mb-[24px] border-[#a5bfd8] px-2.5 py-0.5 w-fit text-[#001F35] font-[500] text-[18px] lg:text-[20px] transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-[#FFF] text-secondary-foreground hover:bg-gray-100/80"
+                                >
+                                  {amenitiesGroupList.get(eachItem.id)}
+                                  {eachOne.constDesc}
+                                </div>
+                              );
+                            }
+                          }
+                        )}
+                    </div>
+                  );
+                })
               );
             }
           })}

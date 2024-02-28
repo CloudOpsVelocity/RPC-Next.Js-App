@@ -689,7 +689,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
 };
 const RightSection = ({ propCgId }: Props) => {
   const data = useAtomValue(selectedFloorAtom);
-  // console.log(data);
+  console.log(data);
   return (
     <div className="bg-[#F4FBFF] p-6 rounded-lg w-full max-w-[342px] shadow">
       <div className="space-y-4">

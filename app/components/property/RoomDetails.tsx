@@ -31,6 +31,8 @@ import React, { useState } from "react";
 import { PhaseList } from "@/app/validations/types/project";
 import RoomBasicDetails from "./RoomBasicDetails";
 import PropertyHeading from "./heading";
+import { Main } from "@/app/validations/property";
+import { formatDateDDMMYYYY } from "@/app/utils/date";
 const style = {
   card: "mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]",
   heading: {
@@ -38,7 +40,29 @@ const style = {
     p: "text-[16px] lg:text-[24px] font-[500] text-[#4D6677] italic mb-8",
   },
 };
-export default function RoomDetails({ data }: { data: PhaseList[] }) {
+export default function RoomDetails({
+  address,
+  agrementduration,
+  amenities,
+  atFloor,
+  availableFrom,
+  availablityStatus,
+  bhkName,
+  block,
+  ca,
+  cg,
+  ctName,
+  facingName,
+  flooringType,
+  furnshName,
+  isOkWithBrokerContact,
+  nobt,
+  nobl,
+  noocp,
+  noobp,
+  noccp,
+  nocbp,
+}: Main) {
   return (
     <>
       <PropertyHeading
@@ -66,21 +90,21 @@ export default function RoomDetails({ data }: { data: PhaseList[] }) {
             key="launchDate"
             icon={<Bathrooms />}
             title="Bathroom"
-            value={"02"}
+            value={nobt}
             className={style.card}
           />
           <RoomBasicDetails
             key="possessionDate"
             icon={<BedRooms />}
             title="Bedroom"
-            value={"02"}
+            value={bhkName.split(" ")[0]}
             className={style.card}
           />
           <RoomBasicDetails
             key="landArea"
             icon={<Balcony />}
             title="Balcony"
-            value={"02"}
+            value={nobl}
             className={style.card}
           />
           <RoomBasicDetails
@@ -94,18 +118,24 @@ export default function RoomDetails({ data }: { data: PhaseList[] }) {
             key="reraStatus"
             icon={<Furnishing />}
             title="Furnishing"
-            value={"Semi- Furnished"}
+            value={furnshName}
             className={style.card}
           />
         </div>
       </div>
-      <Parking />
-      <OtherDetails />
+      <Parking noocp={noocp} noobp={noobp} noccp={noccp} nocbp={nocbp} />
+      <OtherDetails
+        af={availableFrom}
+        status={
+          availablityStatus == "U" ? "Under Construction" : "Ready to Move"
+        }
+        ft={flooringType}
+      />
     </>
   );
 }
 
-const Parking = () => {
+const Parking = ({ noocp, noobp, noccp, nocbp }: any) => {
   return (
     <div
       className="w-[90%] mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] px-[53px] py-[39px]"
@@ -120,35 +150,35 @@ const Parking = () => {
           key="launchDate"
           icon={<Car />}
           title="Open Car Parking"
-          value={"02"}
+          value={noocp}
           className={style.card}
         />
         <RoomBasicDetails
           key="possessionDate"
           icon={<ParkingIcon />}
           title="Covered Car Parking"
-          value={"02"}
+          value={noobp}
           className={style.card}
         />
         <RoomBasicDetails
           key="landArea"
           icon={<OpenBike />}
           title="Open Bike Parking"
-          value={"02"}
+          value={noccp}
           className={style.card}
         />
         <RoomBasicDetails
           key="reraStatus"
           icon={<CloseBike />}
           title="Covered Bike Parking"
-          value={"03"}
+          value={nocbp}
           className={style.card}
         />
       </div>
     </div>
   );
 };
-const OtherDetails = () => {
+const OtherDetails = ({ af, status, ft }: any) => {
   return (
     <div
       className="w-[90%] mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] px-[53px] py-[39px]"
@@ -172,14 +202,14 @@ const OtherDetails = () => {
           key="possessionDate"
           icon={<Status />}
           title="Availability Status"
-          value={"Ready to Move"}
+          value={status}
           className={style.card}
         />
         <RoomBasicDetails
           key="landArea"
           icon={<StartDate />}
           title="Available From"
-          value={"12/ 03/ 2023"}
+          value={formatDateDDMMYYYY(af)}
           className={style.card}
         />
         <RoomBasicDetails
@@ -193,7 +223,7 @@ const OtherDetails = () => {
           key="reraStatus"
           icon={<Marble />}
           title="Type of Flooring"
-          value={"03"}
+          value={ft}
           className={style.card}
         />
       </div>

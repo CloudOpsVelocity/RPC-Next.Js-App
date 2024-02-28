@@ -54,7 +54,7 @@ export default function GalleryBlock({
 
       <div className=" flex justify-center flex-col md:flex-row items-center-full mt-[1%] ">
         {/* IMage display con */}
-        <div className="w-[100%] md:w-[50%] bg-white h-[394px] lg:h-[462px] mb-[3%] md:mb-[0%] mr-[3%] rounded-[14px]  ">
+        {/* <div className="w-[100%] md:w-[50%] bg-white h-[394px] lg:h-[462px] mb-[3%] md:mb-[0%] mr-[3%] rounded-[14px]  ">
           {selectedMedia && (
             <div className="w-[100%]  bg-white  mb-[3%] md:mb-[0%] mr-[3%] rounded-[14px]  relative">
               {selectedMedia.includes(".mp4") ? (
@@ -85,16 +85,16 @@ export default function GalleryBlock({
               />
             </div>
           )}
-        </div>
+        </div> */}
         {/* all media display con */}
-        <div className="w-[100%] md:w-[47%]">
+        {/* <div className="w-[100%] md:w-[47%]">
           <h3 className="text-[#737579] font-[600] text-[20px] lg:text-[24px] mb-[2%] ">
             Photos
           </h3>
           <div className="flex justify-start items-start w-full gap-[4%] flex-wrap ">
             {images?.map((img, ind) => (
               <Image
-                key={img}
+                key={ind}
                 width={150}
                 height={100}
                 src={img as string}
@@ -107,29 +107,6 @@ export default function GalleryBlock({
                 onClick={() => handleMediaClick(img as string)}
               />
             ))}
-            {/* {images.length > 5 && (
-              <div className="relative">
-                <Image
-                  width={150}
-                  height={100}
-                  className="w-[110px] lg:w-[152px] h-[68px] lg:h-[94px] bg-[#dfdcdc] rounded-[5px] shadow-md mb-[4%] cursor-pointer"
-                  src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-3.png"
-                  alt="Demo"
-                />
-                <Overlay
-                  color="#000"
-                  backgroundOpacity={0.35}
-                  blur={15}
-                  title="View More"
-                  onClick={() => open("image")}
-                >
-                  <div className="flex justify-center items-center text-white h-full cursor-pointer">
-                    View More
-                  </div>
-                </Overlay>
-              </div>
-              // <button onClick={() => open("image")}>View More</button>
-            )} */}
           </div>
           {videos && videos.length > 0 && (
             <>
@@ -141,10 +118,7 @@ export default function GalleryBlock({
                   <div className="relative w-[110px] lg:w-[152px] flex justify-center items-center h-[68px] lg:h-[94px] bg-white rounded-[5px]  mb-[4%] cursor-pointer">
                     <video
                       key={ind}
-                      // width={150}
-                      // height={100}
                       src={img as string}
-                      //alt={`Image ${ind + 1}`}
                       className={`!w-full rounded-[5px] cursor-pointer ${
                         selectedMedia === img
                           ? "border-2 border-[#4d6677] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)]"
@@ -160,7 +134,7 @@ export default function GalleryBlock({
               </div>
             </>
           )}
-        </div>
+        </div> */}
       </div>
     </div>
   );

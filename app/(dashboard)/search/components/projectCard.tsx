@@ -80,28 +80,26 @@ const ProjectDetailsCard = ({
   return (
     <div className=" flex w-full mb-[5%] flex-col shadow-md ">
       <div className=" flex justify-center items-center w-full  ">
-        <div className="md:max-w-[210px] max-w-[120px] flex justify-start items-start w-full flex-col  ">
+        <div className="w-full h-[120px]  md:h-[140px] md:max-w-[210px] max-w-[120px] bg-gray-300 relative">
           {type == "proj" && (
-            <p className="text-[#FFF] text-[12px] mb-[-26px] z-10 flex justify-center items-center p-[3px] font-[500] bg-gradient-to-r from-[#148B16] /0 to-[#E5F4FF]/100">
+            <p className="text-[#FFF] text-[12px] absolute left-[0px] top-0 z-10 flex justify-center items-center p-[3px] font-[500] bg-gradient-to-r from-[#148B16] /0 to-[#E5F4FF]/100">
               {" "}
               <ReraIcon /> RERA
             </p>
           )}
-          <div className="w-full h-[120px]  md:h-[147px] bg-gray-300 ">
-            <Image
-              src={coverUrl}
-              width={147}
-              height={147}
-              alt="conver"
-              className="w-full h-full"
-            />
-          </div>
-          <p className="text-[#FFF] text-[10px] md:text-[12px] mt-[-40px] relative left-[4px] gap-[4px] z-10 flex justify-center rounded-[20px] items-center p-[7px] font-[500] bg-gradient-to-r from-[#000] /0 to-[#00000066]/100">
+          <Image
+            src={coverUrl}
+            width={147}
+            height={147}
+            alt="conver"
+            className="w-full h-full"
+          />
+          <p className="text-[#FFF] text-[10px] md:text-[12px] mt-[-40px] absolute left-[4px] gap-[4px] z-10 flex justify-center rounded-[20px] items-center p-[7px] font-[500] rtm">
             {" "}
-            <ReraIcon className="hidden md:block" /> Ready to move
+            Ready to move
           </p>
         </div>
-        <div className="w-full p-[2%]">
+        <div className="w-full p-[2%] justify-center  flex flex-col">
           {type == "proj" ? (
             <p className="text-[#001F35] text-[15px] not-italic font-semibold leading-[normal]">
               {projName}
@@ -120,7 +118,7 @@ const ProjectDetailsCard = ({
             {}
           </p>
           <div className=" flex justify-between items-start w-full ">
-            <div className=" flex justify-start items-start flex-col">
+            <div className=" flex justify-start items-start flex-col mt-auto">
               {type == "proj" && (
                 <p className="text-[#148B16] text-[12px] md:text-[15px] not-italic font-extrabold leading-[normal]">
                   {formatCurrency(Number(minPrice))} -{" "}
@@ -128,7 +126,7 @@ const ProjectDetailsCard = ({
                 </p>
               )}
               {type == "proj" && (
-                <p className="text-[#333] text-[12px] md:text-[13px] font-[500]">
+                <p className="text-[#333] text-[12px] md:text-[13px] font-[500] ">
                   Possession Date:{" "}
                   <span className=" font-[600]">
                     {formatDateDDMMYYYY(possassionDate)}
@@ -172,9 +170,7 @@ const ProjectDetailsCard = ({
               >
                 View on Map <GradientLocation />
               </button>
-              <p className="text-[#F9D728] text-[12px] font-[600]">
-                No Rating Yet
-              </p>
+
               <p className="text-[#202020] text-[12px] font-[400]">
                 Posted By: <span className=" font-[600]">Builder</span>
               </p>

@@ -4,7 +4,12 @@ interface MediaObject {
 
 function getImageUrls(
   mediaObject: MediaObject,
-  propertyNames = ["coverImageUrl", "otherImgUrl", "projectPlanUrl"]
+  propertyNames = [
+    "coverImageUrl",
+    "otherImgUrl",
+    "projectPlanUrl",
+    "floorPlanUrl",
+  ]
 ): string[] {
   const imageUrls: string[] = [];
 

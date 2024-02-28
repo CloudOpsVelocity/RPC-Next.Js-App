@@ -3,15 +3,43 @@ import { Modal } from "@mantine/core";
 import { PopupOpenSvg } from "@/app/images/commonSvgs";
 import S from "@/app/styles/ModalCarousel.module.css";
 import { RightSection } from "../../project/modals/FloorPlan";
+import { Main } from "@/app/validations/property";
+import { selectedFloorAtom } from "@/app/store/floor";
+import { useAtomValue, useSetAtom } from "jotai";
 
-function PFloorPlanModal() {
+function PFloorPlanModal({ data }: { data: Main }) {
   const TRANSITION_DURATION = 200;
   const [opened, setOpened] = useState(false);
-
+  const setValue = useSetAtom(selectedFloorAtom);
+  const handleOpen = () => {
+    setValue({
+      projIdEnc: "4f313de2f95cd9d761098b8f6c09417c",
+      phaseId: 670,
+      propType: 35,
+      bhk: 42,
+      bhkName: data.bhkName,
+      towerName: data.tower,
+      towerId: 1163,
+      block: "2",
+      floor: 2,
+      unitNumber: data.unitNumber,
+      facingId: 61,
+      facingName: data.facingName,
+      caretarea: data.ca,
+      superBuildUparea: data.sba,
+      terraceArea: "null",
+      parkingType: "Open",
+      totalNumberofBathroom: data.nobt,
+      totalNumberOfBalcony: data.nobl,
+      noOfCarParking: 1,
+      floorPlanUrl: data.projMedia.floorPlanUrl,
+    });
+    setOpened(true);
+  };
   return (
     <>
       <button
-        onClick={() => setOpened(true)}
+        onClick={handleOpen}
         className="absolute bottom-2 right-2 cursor-pointer"
       >
         <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] " />
@@ -39,11 +67,12 @@ function PFloorPlanModal() {
 export default PFloorPlanModal;
 
 const MiddleSection = () => {
+  const data = useAtomValue(selectedFloorAtom);
   return (
     <div className="col-span-1">
       <div className="relative">
         <img
-          src="https://imagesrpc.s3.ap-south-1.amazonaws.com/images/varify/project/197/cover/cover.jpg"
+          src={data.floorPlanUrl}
           alt="Floor Plan"
           className="border"
           width={800}

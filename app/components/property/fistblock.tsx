@@ -8,7 +8,7 @@ import {
   ReraIcon,
   ShearIcon,
 } from "@/app/images/commonSvgs";
-import { Main } from "@/app/validations/types/project";
+import { Main } from "@/app/validations/property/index";
 import Image from "next/image";
 import SharePopup from "../atoms/SharePopup";
 import { formatCurrency } from "@/app/utils/numbers";
@@ -20,7 +20,7 @@ type Props = {
 };
 
 const PropertyFirstBlock: React.FC<Props> = ({ projectDetails }) => {
-  const images = getImageUrls(projectDetails?.media as any);
+  const images = getImageUrls(projectDetails?.projMedia as any);
   const autoplay = useRef(Autoplay({ delay: 10000 }));
   const scrollToTopic = (): void => {
     const element = document.getElementById("floorPlans");
@@ -44,7 +44,9 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails }) => {
               Availability Status:{" "}
               <span className="text-[#148B16] text-[16px] font-[700]">
                 {" "}
-                Ready To Move
+                {projectDetails.availablityStatus === "U"
+                  ? "Under Construction"
+                  : "Ready to Move"}
               </span>{" "}
             </p>
             <div className="mt-4">
@@ -81,14 +83,15 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails }) => {
             <div className=" w-full md:w-[60%]">
               <div className={`ml-[2%] mt-8`}>
                 <h3 className="text-[24px] lg:text-[32px] font-[700] text-[#00487C] uppercase ">
-                  {projectDetails.projectName}
+                  {projectDetails.bhkName} {projectDetails.propTypeName} In{" "}
+                  {projectDetails.ltName}
                 </h3>
                 <p className="text-[#001F35] text-2xl not-italic font-semibold leading-[normal] mt-1">
                   Sarang By Sumadhura
                 </p>
                 <p className="text-[#202020] text-[20px] not-italic font-[500] leading-[normal] w-[100%] tracking-[0.32px] capitalize mt-[8px]">
-                  {projectDetails.address} {`${projectDetails.localityName} `}
-                  {`${projectDetails.cityName} `}
+                  {projectDetails.address} {`${projectDetails.ltName} `}
+                  {`${projectDetails.ctName} `}
                   {`${projectDetails?.stateName ?? ""} `}
                   {projectDetails.pinCode}
                 </p>
@@ -97,20 +100,21 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails }) => {
                   Available From:
                   <span className="font-[600] text-[#202020]">
                     {" "}
-                    {formatDate(projectDetails.startDate)}
+                    {formatDate(projectDetails.availableFrom)}
                   </span>
                 </p>
               </div>
             </div>
             <div className="w-full md:w-[40%] flex justify-between md:items-end flex-col p-[2%]">
               <h2 className="text-[20px] md:text-[28px] lg:text-[32px] font-[700] text-[#001F35]">
-                {formatCurrency(projectDetails.minPrice)}
+                {formatCurrency(projectDetails.price)}
               </h2>
               <p className="text-[16px] md:text-right lg:text-[24px] font-[600] mb-[10px] md:mb-[10px] text-[#00487C] ">
-                ₹ {projectDetails.basePrice}/ Price per sqft onwards
+                ₹ {1000}/ Price per sqft onwards
               </p>
               <p className="text-[#001F35] text-xl not-italic font-semibold leading-[normal] mb-[13px]">
-                Posted By: Agent
+                Posted By:{" "}
+                {projectDetails.postedByType === "B" ? "Builder" : "Agent"}
               </p>
               <p
                 className="text-[16px] lg:text-[20px] font-[600] mr-auto md:mr-0 text-[#2A4C70] bg-[#FFF] rounded-[10px] shadow-md p-[8px] flex items-center gap-2 cursor-pointer"

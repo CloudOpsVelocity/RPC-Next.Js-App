@@ -21,7 +21,7 @@ import PriceBag, {
 } from "@/app/images/commonSvgs";
 import ProjBasicDetails from "@/app/components/project/projBasicDetails";
 import Button from "../../elements/button";
-import { Main } from "@/app/validations/types/project";
+import { Main } from "@/app/validations/property/index";
 import { useDisclosure } from "@mantine/hooks";
 import OverviewBanner from "../project/overviewBanner";
 import PropertyOverviewBanner from "./OverViewBanner";
@@ -29,18 +29,19 @@ import { addShortList } from "@/app/utils/api/actions/shortlist";
 import usePhaseWiseOverview from "@/app/hooks/usePhaseWiseOverview";
 
 export default function PropertyOverView({
-  maxPrice,
-  minPrice,
-  projectName,
+  bhkName,
+  ltName,
+  propTypeName,
   address,
-  projectStatus,
-  availableProperties,
-
-  totalLandArea,
-  totalUnit,
-  localityName,
-  startDate,
-  endDate,
+  sba,
+  ca,
+  availablityStatus,
+  facingName,
+  furnshName,
+  flooringType,
+  ctName,
+  stateName,
+  pinCode,
 }: Main) {
   return (
     <div
@@ -50,10 +51,13 @@ export default function PropertyOverView({
       <div className="pl-[2%] pr-[2%] flex justify-between items-center ">
         <div>
           <h2 className="text-[24px] lg:text-[32px] text-[#00487C] not-italic font-bold leading-[normal] uppercase">
-            {projectName}
+            {bhkName} {propTypeName} In {ltName}
           </h2>
           <p className="text-[16px] lg:text-[24px] text-[#505050] font-[500]">
-            {address}
+            {address} {`${ltName} `}
+            {`${ctName} `}
+            {`${stateName ?? ""} `}
+            {pinCode}
           </p>
         </div>
         <div className="flex justify-center items-end flex-col">
@@ -73,14 +77,14 @@ export default function PropertyOverView({
             key="propertyAvailable"
             icon={<Others />}
             title="Unit Type"
-            value={"2 BHK"}
+            value={bhkName}
             className="mr-[5%] pt-[2%] mb-[3%]  "
           />
           <ProjBasicDetails
             key="propertyAvailable"
             icon={<PropertyBuilding />}
             title="Property Type"
-            value={"Apartment"}
+            value={propTypeName}
             className="mr-[5%] pt-[2%] mb-[3%]  "
           />
           <ProjBasicDetails
@@ -102,21 +106,23 @@ export default function PropertyOverView({
             key="projectStatus"
             icon={<Status />}
             title="Availability Status"
-            value={"Ready To Move"}
+            value={
+              availablityStatus === "U" ? "Under Construction" : "Ready To Move"
+            }
             className="mr-[5%] pt-[2%] mb-[3%] "
           />
           <ProjBasicDetails
             key="totalLandArea"
             icon={<TotalLandArea />}
             title="Super built-up Area"
-            value={totalLandArea + " sq.ft"}
+            value={sba + " sq.ft"}
             className="mr-[5%] pt-[2%] mb-[3%] "
           />
           <ProjBasicDetails
             key="totalLandArea"
             icon={<TotalLandArea />}
             title="Carpet Area"
-            value={totalLandArea + " sq.ft"}
+            value={ca + " sq.ft"}
             className="mr-[5%] pt-[2%] mb-[3%] "
           />
           {/* <ProjBasicDetails
@@ -130,28 +136,21 @@ export default function PropertyOverView({
             key="totalUnits"
             icon={<Compass />} // Adjust icon
             title="Property Facing"
-            value={"North- East"}
+            value={facingName}
             className="mr-[5%] pt-[2%] mb-[3%] "
           />
           <ProjBasicDetails
             key="locality"
             icon={<Furnishing />}
             title="Furnishing"
-            value={"Semi- Furnished"}
+            value={furnshName}
             className="mr-[5%] pt-[2%] mb-[3%] "
           />
           <ProjBasicDetails
             key="startDate"
             icon={<Marble />}
             title="Flooring Type"
-            value={"Marble"}
-            className="mr-[5%] pt-[2%] mb-[3%] "
-          />
-          <ProjBasicDetails
-            key="startDate"
-            icon={<Furnishing />}
-            title="Furnishing"
-            value={"Semi- Furnished"}
+            value={flooringType}
             className="mr-[5%] pt-[2%] mb-[3%] "
           />
         </div>
@@ -167,7 +166,7 @@ export default function PropertyOverView({
           </p>
         </div>
       </div>
-      <PropertyOverviewBanner maxPrice={maxPrice} minPrice={minPrice} />
+      {/* <PropertyOverviewBanner maxPrice={maxPrice} minPrice={minPrice} /> */}
     </div>
   );
 }
