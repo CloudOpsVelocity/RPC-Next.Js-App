@@ -2,15 +2,17 @@ import { Main } from "@/app/validations/types/builder";
 
 export const getBuilderDetails = async (
   slug: string | number,
-  y: string
+  y: string,
+  type: "prop" | "proj"
 ): Promise<Main> => {
+  const url =
+    type === "proj"
+      ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/builder-details?builderId=${slug}&isBuilderPage=${y}`
+      : `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/fetch/listing/builder/data?userId=${slug}`;
   try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/builder-details?builderId=${slug}&isBuilderPage=${y}`,
-      {
-        next: { revalidate: 90 },
-      }
-    );
+    const response = await fetch(url, {
+      next: { revalidate: 90 },
+    });
     const data: Main = await response.json();
     console.log(data);
     return data as Main;

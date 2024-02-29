@@ -62,6 +62,13 @@ export default function RoomDetails({
   noobp,
   noccp,
   nocbp,
+  propTypeName,
+  phaseName,
+  tower,
+  unitNumber,
+  sba,
+  ownershipName,
+  possassionDate,
 }: Main) {
   return (
     <>
@@ -70,7 +77,18 @@ export default function RoomDetails({
         desc="Check the details for 2BHK apartment for sell"
         className="mb-[40px]"
       />
-      <UnitBlock />
+      <UnitBlock
+        bhkName={bhkName}
+        propTypeName={propTypeName}
+        phaseName={phaseName}
+        tower={tower}
+        atFloor={atFloor}
+        block={block}
+        unitNumber={unitNumber}
+        facingName={facingName}
+        sba={sba}
+        ca={ca}
+      />
       <div
         className="w-[90%] mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] px-[53px] py-[39px]"
         id="propertyDetails "
@@ -130,6 +148,8 @@ export default function RoomDetails({
           availablityStatus == "U" ? "Under Construction" : "Ready to Move"
         }
         ft={flooringType}
+        ownershipName={ownershipName}
+        possassionDate={possassionDate}
       />
     </>
   );
@@ -178,7 +198,14 @@ const Parking = ({ noocp, noobp, noccp, nocbp }: any) => {
     </div>
   );
 };
-const OtherDetails = ({ af, status, ft }: any) => {
+const OtherDetails = ({
+  af,
+  status,
+  ft,
+  ownershipName,
+  possassionDate,
+}: any) => {
+  console.log(status);
   return (
     <div
       className="w-[90%] mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] px-[53px] py-[39px]"
@@ -195,7 +222,7 @@ const OtherDetails = ({ af, status, ft }: any) => {
           key="launchDate"
           icon={<OwnerShip />}
           title="Ownership"
-          value={"Freehold"}
+          value={ownershipName}
           className={style.card}
         />
         <RoomBasicDetails
@@ -212,13 +239,25 @@ const OtherDetails = ({ af, status, ft }: any) => {
           value={formatDateDDMMYYYY(af)}
           className={style.card}
         />
-        <RoomBasicDetails
-          key="reraStatus"
-          icon={<FlatIcon />}
-          title="Age of Property"
-          value={"03"}
-          className={style.card}
-        />
+
+        {status === "Ready to Move" ? (
+          <RoomBasicDetails
+            key="reraStatus"
+            icon={<FlatIcon />}
+            title="Age of Property"
+            value={"03"}
+            className={style.card}
+          />
+        ) : (
+          <RoomBasicDetails
+            key="reraStatus"
+            icon={<StartDate />}
+            title="Possession Date"
+            value={formatDateDDMMYYYY(possassionDate)}
+            className={style.card}
+          />
+        )}
+
         <RoomBasicDetails
           key="reraStatus"
           icon={<Marble />}
@@ -230,7 +269,18 @@ const OtherDetails = ({ af, status, ft }: any) => {
     </div>
   );
 };
-const UnitBlock = () => {
+const UnitBlock = ({
+  bhkName,
+  propTypeName,
+  phaseName,
+  tower,
+  unitNumber,
+  sba,
+  atFloor,
+  block,
+  facingName,
+  ca,
+}: any) => {
   return (
     <div
       className="w-[90%] mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] px-[53px] py-[39px]"
@@ -247,77 +297,70 @@ const UnitBlock = () => {
           key="launchDate"
           icon={<Marble />}
           title="Unit Type"
-          value={"2 BHK"}
+          value={bhkName}
           className="mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]"
         />
         <RoomBasicDetails
           key="launchDate"
           icon={<Marble />}
           title="Property Type"
-          value={"Apartment"}
+          value={propTypeName}
           className="mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]"
         />
         <RoomBasicDetails
           key="launchDate"
           icon={<Marble />}
           title="Phase"
-          value={"Phase 1"}
+          value={phaseName}
           className="mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]"
         />
         <RoomBasicDetails
           key="possessionDate"
           icon={<TowerIcon />}
           title="Tower"
-          value={"Tower 1"}
+          value={tower}
           className="mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]"
         />{" "}
         <RoomBasicDetails
           key="launchDate"
           icon={<Marble />}
           title="Floor"
-          value={"02"}
+          value={atFloor}
           className="mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]"
         />
         <RoomBasicDetails
           key="landArea"
           icon={<Block />}
           title="Block"
-          value={"02"}
+          value={block}
           className="mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]"
         />{" "}
         <RoomBasicDetails
           key="launchDate"
           icon={<Marble />}
           title="Unit Number"
-          value={"01"}
+          value={unitNumber}
           className="mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]"
         />
         <RoomBasicDetails
           key="launchDate"
           icon={<Marble />}
           title="Facing"
-          value={"North"}
+          value={facingName}
           className="mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]"
         />
         <RoomBasicDetails
           key="launchDate"
           icon={<TotalLandArea />}
           title="Super built-up Area"
-          value={"2180 sq.ft"}
+          value={sba + " sq.ft"}
           className="mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]"
         />
         <RoomBasicDetails
           key="launchDate"
           icon={<TotalLandArea />}
           title="Carpet Area"
-          value={"2180 sq.ft"}
-          className="mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]"
-        />
-        <RoomBasicDetails
-          key="launchDate"
-          icon={<TotalLandArea />}
-          title="Built-up Area"
-          value={"2180 sq.ft"}
+          value={ca + " sq.ft"}
           className="mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]"
         />
       </div>

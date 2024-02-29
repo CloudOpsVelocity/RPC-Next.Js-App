@@ -20,13 +20,7 @@ import PriceBag, {
   WhatsAppButton,
 } from "@/app/images/commonSvgs";
 import ProjBasicDetails from "@/app/components/project/projBasicDetails";
-import Button from "../../elements/button";
 import { Main } from "@/app/validations/property/index";
-import { useDisclosure } from "@mantine/hooks";
-import OverviewBanner from "../project/overviewBanner";
-import PropertyOverviewBanner from "./OverViewBanner";
-import { addShortList } from "@/app/utils/api/actions/shortlist";
-import usePhaseWiseOverview from "@/app/hooks/usePhaseWiseOverview";
 
 export default function PropertyOverView({
   bhkName,
@@ -42,6 +36,8 @@ export default function PropertyOverView({
   ctName,
   stateName,
   pinCode,
+  ownershipName,
+  phaseName,
 }: Main) {
   return (
     <div
@@ -91,7 +87,7 @@ export default function PropertyOverView({
             key="propertyAvailable"
             icon={<PhaseIcon />}
             title="Phase"
-            value={"Phase 1"}
+            value={phaseName}
             className="mr-[5%] pt-[2%] mb-[3%]  "
           />
 
@@ -99,7 +95,7 @@ export default function PropertyOverView({
             key="propertyAvailable"
             icon={<OwnerShip />}
             title="Ownership"
-            value={"Leasehold"}
+            value={ownershipName}
             className="mr-[5%] pt-[2%] mb-[3%]  "
           />
           <ProjBasicDetails

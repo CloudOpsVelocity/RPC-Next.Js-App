@@ -93,7 +93,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         />
         {/* About Builder */}
         <AboutBuilder type="prop" id={projData.builderId} />
-        <PropertyBanner projName={projData.projectName} />
+        <PropertyBanner {...projData} />
 
         <Reviews projName={projData.projectName} />
 

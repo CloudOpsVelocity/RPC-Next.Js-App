@@ -54,7 +54,7 @@ export default function GalleryBlock({
 
       <div className=" flex justify-center flex-col md:flex-row items-center-full mt-[1%] ">
         {/* IMage display con */}
-        {/* <div className="w-[100%] md:w-[50%] bg-white h-[394px] lg:h-[462px] mb-[3%] md:mb-[0%] mr-[3%] rounded-[14px]  ">
+        <div className="w-[100%] md:w-[50%] bg-white h-[394px] lg:h-[462px] mb-[3%] md:mb-[0%] mr-[3%] rounded-[14px]  ">
           {selectedMedia && (
             <div className="w-[100%]  bg-white  mb-[3%] md:mb-[0%] mr-[3%] rounded-[14px]  relative">
               {selectedMedia.includes(".mp4") ? (
@@ -85,9 +85,9 @@ export default function GalleryBlock({
               />
             </div>
           )}
-        </div> */}
+        </div>
         {/* all media display con */}
-        {/* <div className="w-[100%] md:w-[47%]">
+        <div className="w-[100%] md:w-[47%]">
           <h3 className="text-[#737579] font-[600] text-[20px] lg:text-[24px] mb-[2%] ">
             Photos
           </h3>
@@ -117,7 +117,7 @@ export default function GalleryBlock({
                 {videos?.map((img, ind) => (
                   <div className="relative w-[110px] lg:w-[152px] flex justify-center items-center h-[68px] lg:h-[94px] bg-white rounded-[5px]  mb-[4%] cursor-pointer">
                     <video
-                      key={ind}
+                      key={img}
                       src={img as string}
                       className={`!w-full rounded-[5px] cursor-pointer ${
                         selectedMedia === img
@@ -134,7 +134,7 @@ export default function GalleryBlock({
               </div>
             </>
           )}
-        </div> */}
+        </div>
       </div>
     </div>
   );

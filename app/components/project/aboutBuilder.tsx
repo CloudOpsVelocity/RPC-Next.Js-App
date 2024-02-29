@@ -10,8 +10,10 @@ type Props = {
   type?: "prop" | "proj";
 };
 
-export default function AboutBuilder({ id, type }: Props) {
-  const { data } = useBuilder({ id, y: "N" });
+export default function AboutBuilder({ id, type = "proj" }: Props) {
+  const { data } = useBuilder({ id, y: "N", type });
+  const nzData = normalizeData(data, type);
+
   return (
     <div className="w-[90%] scroll-mt-[90px] mt-[5%] mb-[5%]">
       <div className="w-full justify-between items-center ">
@@ -22,7 +24,7 @@ export default function AboutBuilder({ id, type }: Props) {
               About Builder
             </h1>
             <p className=" text-[#148B16] italic text-[20px] lg:text-[26px] font-[700]">
-              {data?.data?.ceoName}
+              {nzData.ceoName}
             </p>
           </div>
         </div>
@@ -30,7 +32,7 @@ export default function AboutBuilder({ id, type }: Props) {
         <div className="rounded-[20px] mt-[1%] flex justify-between items-center bg-[#FFF] shadow-md w-[100%] mb-[2%] lg:w-[50%] p-[1%] ">
           <div className="w-[30%] border-solid border-[#92B2C8] border-r-[1px]">
             <p className=" text-[#202020] text-[20px] lg:text-[24px] font-[600]">
-              {data?.data?.newProject}
+              {nzData.newProject}
             </p>
             <p className=" text-[#148B16] text-[16px] lg:text-[20px] font-[700]">
               New Launch Projects
@@ -39,7 +41,7 @@ export default function AboutBuilder({ id, type }: Props) {
 
           <div className="w-[30%] border-solid border-[#92B2C8] border-r-[1px]">
             <p className=" text-[#202020] text-[20px] lg:text-[24px] font-[600]">
-              {data?.data?.onGoingProject}
+              {nzData.onGoingProject}
             </p>
             <p className=" text-[#0073C6] text-[16px] lg:text-[20px] font-[700]">
               Ongoing Projects
@@ -48,7 +50,7 @@ export default function AboutBuilder({ id, type }: Props) {
 
           <div className="w-[30%] ">
             <p className=" text-[#202020] text-[20px] lg:text-[24px] font-[600]">
-              {data?.data?.completedProject}
+              {nzData.completedProject}
             </p>
             <p className=" text-[#E3AC00] text-[16px] lg:text-[20px] font-[700]">
               Completed Projects
@@ -56,20 +58,11 @@ export default function AboutBuilder({ id, type }: Props) {
           </div>
         </div>
 
-        {/* <ReadMore
-          text={
-            data?.data?.mission +
-              "orem jksdfjdsfjljjkl jdslfjlsdf sdfmlsdfj kljsdfljsd flkjlkdsjflkds  sdfjsldkjfds  kljsdflsdjfl" ??
-            "orem jksdfjdsfjljjkl jdslfjlsdf sdfmlsdfj kljsdfljsd flkjlkdsjflkds  sdfjsldkjfds  kljsdflsdjfl"
-          }
-          maxLines={4}
-        /> */}
-
         <p className=" text-[#212C33] text-[22px] lg:text-[24px] font-[500] mt-[3%] italic ">
           Builder Address{" "}
         </p>
         <p className=" text-[#2A4C70] text-[18px] lg:text-[20px] font-[700] mt-[1%] italic mb-[1%]">
-          {data?.data?.builderAddress}
+          {nzData.builderAddress}
         </p>
         <Link
           className=" bg-[#0073C6] rounded-[10px] text-[#FFF] text-[18px] lg:text-[20px] font-[700] p-[10px]  "
@@ -80,4 +73,26 @@ export default function AboutBuilder({ id, type }: Props) {
       </div>
     </div>
   );
+}
+
+function normalizeData(data: any, type: string) {
+  if (type === "proj") {
+    return {
+      propertyName: data?.data?.propertyName,
+      newProject: data?.data?.newProject,
+      onGoingProject: data?.data?.onGoingProject,
+      completedProject: data?.data?.completedProject,
+      builderAddress: data?.data?.builderAddress,
+      ceoName: data?.data?.ceoName,
+    };
+  } else {
+    return {
+      propertyName: data?.propertyName,
+      newProject: data?.newProject,
+      onGoingProject: data?.onGoingProject,
+      completedProject: data?.completedProject,
+      builderAddress: data?.builderAddress,
+      ceoName: data?.ceoName,
+    };
+  }
 }
