@@ -33,6 +33,7 @@ import RoomBasicDetails from "./RoomBasicDetails";
 import PropertyHeading from "./heading";
 import { Main } from "@/app/validations/property";
 import { formatDateDDMMYYYY } from "@/app/utils/date";
+import { generatePropertyDetails } from "@/app/data/property";
 const style = {
   card: "mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]",
   heading: {
@@ -40,36 +41,7 @@ const style = {
     p: "text-[16px] lg:text-[24px] font-[500] text-[#4D6677] italic mb-8",
   },
 };
-export default function RoomDetails({
-  address,
-  agrementduration,
-  amenities,
-  atFloor,
-  availableFrom,
-  availablityStatus,
-  bhkName,
-  block,
-  ca,
-  cg,
-  ctName,
-  facingName,
-  flooringType,
-  furnshName,
-  isOkWithBrokerContact,
-  nobt,
-  nobl,
-  noocp,
-  noobp,
-  noccp,
-  nocbp,
-  propTypeName,
-  phaseName,
-  tower,
-  unitNumber,
-  sba,
-  ownershipName,
-  possassionDate,
-}: Main) {
+export default function RoomDetails({ data }: { data: Main }) {
   return (
     <>
       <PropertyHeading
@@ -77,18 +49,7 @@ export default function RoomDetails({
         desc="Check the details for 2BHK apartment for sell"
         className="mb-[40px]"
       />
-      <UnitBlock
-        bhkName={bhkName}
-        propTypeName={propTypeName}
-        phaseName={phaseName}
-        tower={tower}
-        atFloor={atFloor}
-        block={block}
-        unitNumber={unitNumber}
-        facingName={facingName}
-        sba={sba}
-        ca={ca}
-      />
+      <UnitBlock data={data} />
       <div
         className="w-[90%] mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] px-[53px] py-[39px]"
         id="propertyDetails "
@@ -108,21 +69,21 @@ export default function RoomDetails({
             key="launchDate"
             icon={<Bathrooms />}
             title="Bathroom"
-            value={nobt}
+            value={data.nobt}
             className={style.card}
           />
           <RoomBasicDetails
             key="possessionDate"
             icon={<BedRooms />}
             title="Bedroom"
-            value={bhkName.split(" ")[0]}
+            value={data.bhkName.split(" ")[0]}
             className={style.card}
           />
           <RoomBasicDetails
             key="landArea"
             icon={<Balcony />}
             title="Balcony"
-            value={nobl}
+            value={data.nobl}
             className={style.card}
           />
           <RoomBasicDetails
@@ -136,20 +97,21 @@ export default function RoomDetails({
             key="reraStatus"
             icon={<Furnishing />}
             title="Furnishing"
-            value={furnshName}
+            value={data.furnshName}
             className={style.card}
           />
         </div>
       </div>
-      <Parking noocp={noocp} noobp={noobp} noccp={noccp} nocbp={nocbp} />
+      <Parking {...data} />
       <OtherDetails
-        af={availableFrom}
+        af={data.availableFrom}
         status={
-          availablityStatus == "U" ? "Under Construction" : "Ready to Move"
+          data.availablityStatus == "U" ? "Under Construction" : "Ready to Move"
         }
-        ft={flooringType}
-        ownershipName={ownershipName}
-        possassionDate={possassionDate}
+        ft={data.flooringType}
+        ownershipName={data.ownershipName}
+        possassionDate={data.possassionDate}
+        age={data.ageofBuilding}
       />
     </>
   );
@@ -204,6 +166,7 @@ const OtherDetails = ({
   ft,
   ownershipName,
   possassionDate,
+  age,
 }: any) => {
   console.log(status);
   return (
@@ -245,7 +208,7 @@ const OtherDetails = ({
             key="reraStatus"
             icon={<FlatIcon />}
             title="Age of Property"
-            value={"03"}
+            value={age}
             className={style.card}
           />
         ) : (
@@ -269,18 +232,8 @@ const OtherDetails = ({
     </div>
   );
 };
-const UnitBlock = ({
-  bhkName,
-  propTypeName,
-  phaseName,
-  tower,
-  unitNumber,
-  sba,
-  atFloor,
-  block,
-  facingName,
-  ca,
-}: any) => {
+const UnitBlock = ({ data }: { data: Main }) => {
+  console.log(data.propTypeName);
   return (
     <div
       className="w-[90%] mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] px-[53px] py-[39px]"
@@ -293,76 +246,108 @@ const UnitBlock = ({
       </p>
 
       <div className="flex justify-start items-start flex-wrap   ">
-        <RoomBasicDetails
-          key="launchDate"
+        {generatePropertyDetails(
+          data,
+          data.propTypeName,
+          data.cg,
+          data.availablityStatus
+        ).map(({ value, Icon, title }) => (
+          <RoomBasicDetails
+            icon={<Icon />}
+            title={title}
+            value={value}
+            className="mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]"
+          />
+        ))}
+
+        {/* <RoomBasicDetails
           icon={<Marble />}
           title="Unit Type"
           value={bhkName}
           className="mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]"
         />
+        
         <RoomBasicDetails
-          key="launchDate"
-          icon={<Marble />}
-          title="Property Type"
-          value={propTypeName}
-          className="mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]"
-        />
-        <RoomBasicDetails
-          key="launchDate"
           icon={<Marble />}
           title="Phase"
           value={phaseName}
           className="mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]"
         />
+        {propTypeName === "Apartment" ||
+          (propTypeName === "Villament" && (
+            <>
+              <RoomBasicDetails
+                icon={<TowerIcon />}
+                title="Tower"
+                value={tower}
+                className="mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]"
+              />{" "}
+              <RoomBasicDetails
+                icon={<Marble />}
+                title="Floor"
+                value={atFloor}
+                className="mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]"
+              />
+            </>
+          ))}
+        {propTypeName !== "Apartment" && (
+          <RoomBasicDetails
+            icon={<Marble />}
+            title="Elevation"
+            value={atFloor}
+            className="mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]"
+          />
+        )}
         <RoomBasicDetails
-          key="possessionDate"
-          icon={<TowerIcon />}
-          title="Tower"
-          value={tower}
-          className="mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]"
-        />{" "}
-        <RoomBasicDetails
-          key="launchDate"
-          icon={<Marble />}
-          title="Floor"
-          value={atFloor}
-          className="mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]"
-        />
-        <RoomBasicDetails
-          key="landArea"
-          icon={<Block />}
-          title="Block"
-          value={block}
-          className="mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]"
-        />{" "}
-        <RoomBasicDetails
-          key="launchDate"
           icon={<Marble />}
           title="Unit Number"
           value={unitNumber}
           className="mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]"
         />
+        {
+          <RoomBasicDetails
+            icon={<Block />}
+            title="Block"
+            value={block}
+            className="mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]"
+          />
+        }
+
         <RoomBasicDetails
-          key="launchDate"
           icon={<Marble />}
           title="Facing"
           value={facingName}
           className="mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]"
         />
+
         <RoomBasicDetails
-          key="launchDate"
           icon={<TotalLandArea />}
           title="Super built-up Area"
           value={sba + " sq.ft"}
           className="mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]"
         />
         <RoomBasicDetails
-          key="launchDate"
           icon={<TotalLandArea />}
           title="Carpet Area"
           value={ca + " sq.ft"}
           className="mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]"
         />
+        {propTypeName !== "Apartment" && (
+          <>
+            <RoomBasicDetails
+              icon={<TotalLandArea />}
+              title="Garden Area"
+              value={ga + " sq.ft"}
+              className="mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]"
+            />
+            <RoomBasicDetails
+              icon={<TotalLandArea />}
+              title="Terrace Area"
+              value={ta + " sq.ft"}
+              className="mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]"
+            />
+          </>
+        )} */}
       </div>
     </div>
   );

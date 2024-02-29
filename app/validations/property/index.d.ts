@@ -42,6 +42,11 @@ export interface Main {
   phaseName: string;
   otherRooms: string;
   ownershipName: string;
+  ageofBuilding: string;
+  plotArea: string;
+  ga: number;
+  ta: string;
+  ba: string;
 }
 
 export interface OtherPrice {

@@ -38,6 +38,7 @@ export default function PropertyOverView({
   pinCode,
   ownershipName,
   phaseName,
+  plotArea,
 }: Main) {
   return (
     <div
@@ -121,6 +122,15 @@ export default function PropertyOverView({
             value={ca + " sq.ft"}
             className="mr-[5%] pt-[2%] mb-[3%] "
           />
+          {propTypeName !== "Apartment" && (
+            <ProjBasicDetails
+              key="plotAred"
+              icon={<TotalLandArea />}
+              title="Plot Area"
+              value={plotArea + " sq.ft"}
+              className="mr-[5%] pt-[2%] mb-[3%] "
+            />
+          )}
           {/* <ProjBasicDetails
             key="elevation"
             icon={<TotalLandArea />} // Adjust icon
@@ -135,6 +145,7 @@ export default function PropertyOverView({
             value={facingName}
             className="mr-[5%] pt-[2%] mb-[3%] "
           />
+
           <ProjBasicDetails
             key="locality"
             icon={<Furnishing />}

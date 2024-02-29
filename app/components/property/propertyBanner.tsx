@@ -49,12 +49,6 @@ export default function PropertyBanner({
               <p className="text-[#202020] text-2xl not-italic font-normal leading-[normal]">
                 Posted By: <span className="font-semibold">Builder</span>{" "}
               </p>
-              <p className="text-[#202020] text-2xl not-italic font-normal leading-[normal]">
-                Date:{" "}
-                <span className="font-semibold">
-                  {formatDateDDMMYYYY(startDate)}
-                </span>
-              </p>
             </div>
           </div>
           <div className="flex justify-start items-start h-[200px]">
