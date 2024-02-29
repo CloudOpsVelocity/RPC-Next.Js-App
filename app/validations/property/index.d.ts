@@ -47,6 +47,8 @@ export interface Main {
   ga: number;
   ta: string;
   ba: string;
+  length: number;
+  width: number;
 }
 
 export interface OtherPrice {

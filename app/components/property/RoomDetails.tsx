@@ -72,13 +72,13 @@ export default function RoomDetails({ data }: { data: Main }) {
             value={data.nobt}
             className={style.card}
           />
-          <RoomBasicDetails
+          {/* <RoomBasicDetails
             key="possessionDate"
             icon={<BedRooms />}
             title="Bedroom"
             value={data.bhkName.split(" ")[0]}
             className={style.card}
-          />
+          /> */}
           <RoomBasicDetails
             key="landArea"
             icon={<Balcony />}

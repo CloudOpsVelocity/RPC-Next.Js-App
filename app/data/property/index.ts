@@ -111,14 +111,10 @@ export function generatePropertyDetails(
         { title: "Unit Type", value: data.bhkName, Icon: Marble },
         { title: "Property Type", value: data.propTypeName, Icon: Marble },
         { title: "Phase", value: data.phaseName, Icon: Marble },
-        { title: "Elevation", value: data.atFloor, Icon: TowerIcon },
+        { title: "Tower", value: data.tower, Icon: TowerIcon },
         { title: "Unit Number", value: data.unitNumber, Icon: Marble },
         { title: "Facing", value: data.facingName, Icon: Marble },
-        {
-          title: "Plot Area",
-          Icon: TotalLandArea,
-          value: `${data.plotArea} sq.ft`,
-        },
+
         {
           title: "Super built-up Area",
           value: `${data.sba} sq.ft`,
@@ -127,6 +123,11 @@ export function generatePropertyDetails(
         {
           title: "Carpet Area",
           value: `${data.ca} sq.ft`,
+          Icon: TotalLandArea,
+        },
+        {
+          title: "Garden Area",
+          value: `${data.ga} sq.ft`,
           Icon: TotalLandArea,
         },
         {
@@ -219,6 +220,46 @@ export function generatePropertyDetails(
       // Logic for Villament property details
       break;
     case "Plot":
+      propertyDetails = [
+        { title: "Property Type", value: data.propTypeName, Icon: Marble },
+        { title: "Phase", value: data.phaseName, Icon: Marble },
+        { title: "Unit Number", value: data.unitNumber, Icon: Marble },
+        { title: "Facing", value: data.facingName, Icon: Marble },
+        {
+          title: "Plot Area",
+          Icon: TotalLandArea,
+          value: `${data.plotArea} sq.ft`,
+        },
+        {
+          title: "Length of Plot ",
+          value: `${data.length} sq.ft`,
+          Icon: TotalLandArea,
+        },
+        {
+          title: "Width of Plot",
+          value: `${data.width} sq.ft`,
+          Icon: TotalLandArea,
+        },
+      ];
+
+      if (cg === "R") {
+        if (availablityStatus === "R") {
+          // For Rent, Ready to Move
+          propertyDetails
+            .push
+            // Add Rent, Ready to Move specific details
+            ();
+        } else if (availablityStatus === "U") {
+          // For Rent, Under Construction
+          propertyDetails
+            .push
+            // Add Rent, Under Construction specific details
+            ();
+        }
+      } else if (cg === "S") {
+        // For Sale
+        // Add Sale specific details
+      }
       // Logic for Plot property details
       break;
     case "Row House":
