@@ -45,7 +45,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         {/* Navigations Container */}
         <Navigation />
         {/* Overview */}
-        <PropertyOverView {...data} />
+        <PropertyOverView data={data} />
         {/* About */}
         <About
           type="prop"

@@ -72,13 +72,7 @@ export default function RoomDetails({ data }: { data: Main }) {
             value={data.nobt}
             className={style.card}
           />
-          {/* <RoomBasicDetails
-            key="possessionDate"
-            icon={<BedRooms />}
-            title="Bedroom"
-            value={data.bhkName.split(" ")[0]}
-            className={style.card}
-          /> */}
+
           <RoomBasicDetails
             key="landArea"
             icon={<Balcony />}
@@ -233,7 +227,6 @@ const OtherDetails = ({
   );
 };
 const UnitBlock = ({ data }: { data: Main }) => {
-  console.log(data.propTypeName);
   return (
     <div
       className="w-[90%] mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] px-[53px] py-[39px]"

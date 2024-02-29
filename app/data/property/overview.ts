@@ -1,8 +1,13 @@
 import {
-  Block,
+  Compass,
+  Furnishing,
   Marble,
+  Others,
+  OwnerShip,
+  PhaseIcon,
+  PropertyBuilding,
+  Status,
   TotalLandArea,
-  TowerIcon,
 } from "@/app/images/commonSvgs";
 import { Main } from "@/app/validations/property";
 
@@ -12,7 +17,7 @@ type PropertyDetail = {
   value: string | number;
   Icon: React.FC<React.SVGProps<SVGSVGElement>>;
 };
-export function generatePropertyDetails(
+export function generatePropertyOverViewData(
   data: Main,
   propertyType: string,
   cg: string,
@@ -22,14 +27,23 @@ export function generatePropertyDetails(
   switch (propertyType.trim()) {
     case "Apartment":
       propertyDetails = [
-        { title: "Unit Type", value: data.bhkName, Icon: Marble },
-        { title: "Property Type", value: data.propTypeName, Icon: Marble },
-        { title: "Phase", value: data.phaseName, Icon: Marble },
-        { title: "Tower", value: data.tower, Icon: TowerIcon },
-        { title: "Floor", value: data.atFloor, Icon: Marble },
-        { title: "Block", value: data.block, Icon: Block },
-        { title: "Unit Number", value: data.unitNumber, Icon: Marble },
-        { title: "Facing", value: data.facingName, Icon: Marble },
+        { title: "Unit Type", value: data.bhkName, Icon: Others },
+        {
+          title: "Property Type",
+          value: data.propTypeName,
+          Icon: PropertyBuilding,
+        },
+        { title: "Phase", value: data.phaseName, Icon: PhaseIcon },
+        { title: "Ownership", value: data.ownershipName, Icon: OwnerShip },
+        {
+          title: "Availability Status",
+          value:
+            data.availablityStatus === "U"
+              ? "Under Construction"
+              : "Ready to Move",
+          Icon: Status,
+        },
+        { title: "Property Facing", value: data.phaseName, Icon: Compass },
         {
           title: "Super built-up Area",
           value: `${data.sba} sq.ft`,
@@ -39,6 +53,16 @@ export function generatePropertyDetails(
           title: "Carpet Area",
           value: `${data.ca} sq.ft`,
           Icon: TotalLandArea,
+        },
+        {
+          title: "Flooring Type",
+          value: `${data.flooringType} sq.ft`,
+          Icon: Marble,
+        },
+        {
+          title: "Furnishing",
+          value: `${data.furnshName} sq.ft`,
+          Icon: Furnishing,
         },
       ];
 
@@ -63,18 +87,23 @@ export function generatePropertyDetails(
       break;
     case "Villa":
       propertyDetails = [
-        { title: "Unit Type", value: data.bhkName, Icon: Marble },
-        { title: "Property Type", value: data.propTypeName, Icon: Marble },
-        { title: "Phase", value: data.phaseName, Icon: Marble },
-        { title: "Elevation", value: data.atFloor, Icon: TowerIcon },
-        { title: "Unit Number", value: data.unitNumber, Icon: Marble },
-        { title: "Facing", value: data.facingName, Icon: Marble },
-
+        { title: "Unit Type", value: data.bhkName, Icon: Others },
         {
-          title: "Plot Area",
-          value: `${data.sba} sq.ft`,
-          Icon: TotalLandArea,
+          title: "Property Type",
+          value: data.propTypeName,
+          Icon: PropertyBuilding,
         },
+        { title: "Phase", value: data.phaseName, Icon: PhaseIcon },
+        { title: "Ownership", value: data.ownershipName, Icon: OwnerShip },
+        {
+          title: "Availability Status",
+          value:
+            data.availablityStatus === "U"
+              ? "Under Construction"
+              : "Ready to Move",
+          Icon: Status,
+        },
+        { title: "Property Facing", value: data.phaseName, Icon: Compass },
         {
           title: "Super built-up Area",
           value: `${data.sba} sq.ft`,
@@ -86,19 +115,14 @@ export function generatePropertyDetails(
           Icon: TotalLandArea,
         },
         {
-          title: "Garden Area",
-          value: `${data.ga} sq.ft`,
-          Icon: TotalLandArea,
+          title: "Flooring Type",
+          value: `${data.flooringType} sq.ft`,
+          Icon: Marble,
         },
         {
-          title: "Terrace Area",
-          value: `${data.ta} sq.ft`,
-          Icon: TotalLandArea,
-        },
-        {
-          title: "Balcony Size",
-          value: `${data.ba} sq.ft`,
-          Icon: TotalLandArea,
+          title: "Furnishing",
+          value: `${data.furnshName} sq.ft`,
+          Icon: Furnishing,
         },
       ];
 
@@ -124,14 +148,23 @@ export function generatePropertyDetails(
       break;
     case "Villament":
       propertyDetails = [
-        { title: "Unit Type", value: data.bhkName, Icon: Marble },
-        { title: "Property Type", value: data.propTypeName, Icon: Marble },
-        { title: "Phase", value: data.phaseName, Icon: Marble },
-        { title: "Tower", value: data.tower, Icon: TowerIcon },
-
-        { title: "Unit Number", value: data.unitNumber, Icon: Marble },
-        { title: "Facing", value: data.facingName, Icon: Marble },
-
+        { title: "Unit Type", value: data.bhkName, Icon: Others },
+        {
+          title: "Property Type",
+          value: data.propTypeName,
+          Icon: PropertyBuilding,
+        },
+        { title: "Phase", value: data.phaseName, Icon: PhaseIcon },
+        { title: "Ownership", value: data.ownershipName, Icon: OwnerShip },
+        {
+          title: "Availability Status",
+          value:
+            data.availablityStatus === "U"
+              ? "Under Construction"
+              : "Ready to Move",
+          Icon: Status,
+        },
+        { title: "Property Facing", value: data.phaseName, Icon: Compass },
         {
           title: "Super built-up Area",
           value: `${data.sba} sq.ft`,
@@ -143,19 +176,14 @@ export function generatePropertyDetails(
           Icon: TotalLandArea,
         },
         {
-          title: "Garden Area",
-          value: `${data.ga} sq.ft`,
-          Icon: TotalLandArea,
+          title: "Flooring Type",
+          value: `${data.flooringType} sq.ft`,
+          Icon: Marble,
         },
         {
-          title: "Terrace Area",
-          value: `${data.ta} sq.ft`,
-          Icon: TotalLandArea,
-        },
-        {
-          title: "Balcony Size",
-          value: `${data.ba} sq.ft`,
-          Icon: TotalLandArea,
+          title: "Furnishing",
+          value: `${data.furnshName} sq.ft`,
+          Icon: Furnishing,
         },
       ];
 
@@ -176,23 +204,31 @@ export function generatePropertyDetails(
       break;
     case "Plot":
       propertyDetails = [
-        { title: "Property Type", value: data.propTypeName, Icon: Marble },
-        { title: "Phase", value: data.phaseName, Icon: Marble },
-        { title: "Unit Number", value: data.unitNumber, Icon: Marble },
-        { title: "Facing", value: data.facingName, Icon: Marble },
+        { title: "Unit Type", value: data.bhkName, Icon: Others },
+        {
+          title: "Property Type",
+          value: data.propTypeName,
+          Icon: PropertyBuilding,
+        },
+        { title: "Phase", value: data.phaseName, Icon: PhaseIcon },
+        { title: "Ownership", value: data.ownershipName, Icon: OwnerShip },
+        {
+          title: "Availability Status",
+          value:
+            data.availablityStatus === "U"
+              ? "Under Construction"
+              : "Ready to Move",
+          Icon: Status,
+        },
+        { title: "Property Facing", value: data.phaseName, Icon: Compass },
         {
           title: "Plot Area",
-          Icon: TotalLandArea,
           value: `${data.plotArea} sq.ft`,
-        },
-        {
-          title: "Length of Plot ",
-          value: `${data.length} sq.ft`,
           Icon: TotalLandArea,
         },
         {
-          title: "Width of Plot",
-          value: `${data.width} sq.ft`,
+          title: "Length of Plot",
+          value: `${data.length} sq.ft`,
           Icon: TotalLandArea,
         },
       ];
@@ -219,16 +255,27 @@ export function generatePropertyDetails(
       break;
     case "Row House":
       propertyDetails = [
-        { title: "Unit Type", value: data.bhkName, Icon: Marble },
-        { title: "Property Type", value: data.propTypeName, Icon: Marble },
-        { title: "Phase", value: data.phaseName, Icon: Marble },
-        { title: "Elevation", value: data.atFloor, Icon: TowerIcon },
-        { title: "Unit Number", value: data.unitNumber, Icon: Marble },
-        { title: "Facing", value: data.facingName, Icon: Marble },
+        { title: "Unit Type", value: data.bhkName, Icon: Others },
+        {
+          title: "Property Type",
+          value: data.propTypeName,
+          Icon: PropertyBuilding,
+        },
+        { title: "Phase", value: data.phaseName, Icon: PhaseIcon },
+        { title: "Ownership", value: data.ownershipName, Icon: OwnerShip },
+        {
+          title: "Availability Status",
+          value:
+            data.availablityStatus === "U"
+              ? "Under Construction"
+              : "Ready to Move",
+          Icon: Status,
+        },
+        { title: "Property Facing", value: data.phaseName, Icon: Compass },
         {
           title: "Plot Area",
-          Icon: TotalLandArea,
           value: `${data.plotArea} sq.ft`,
+          Icon: TotalLandArea,
         },
         {
           title: "Super built-up Area",
@@ -240,24 +287,13 @@ export function generatePropertyDetails(
           value: `${data.ca} sq.ft`,
           Icon: TotalLandArea,
         },
-        {
-          title: "Garden Area",
-          value: `${data.ga} sq.ft`,
-          Icon: TotalLandArea,
-        },
 
         {
-          title: "Terrace Area",
-          value: `${data.ta} sq.ft`,
-          Icon: TotalLandArea,
-        },
-        {
-          title: "Balcony Size",
-          value: `${data.ba} sq.ft`,
-          Icon: TotalLandArea,
+          title: "Furnishing",
+          value: `${data.furnshName} sq.ft`,
+          Icon: Furnishing,
         },
       ];
-
       if (cg === "R") {
         if (availablityStatus === "R") {
           // For Rent, Ready to Move
@@ -279,7 +315,6 @@ export function generatePropertyDetails(
       // Logic for Rowhouse property details
       break;
     default:
-      // Default property details
       break;
   }
 

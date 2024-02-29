@@ -21,25 +21,9 @@ import PriceBag, {
 } from "@/app/images/commonSvgs";
 import ProjBasicDetails from "@/app/components/project/projBasicDetails";
 import { Main } from "@/app/validations/property/index";
+import { generatePropertyOverViewData } from "@/app/data/property/overview";
 
-export default function PropertyOverView({
-  bhkName,
-  ltName,
-  propTypeName,
-  address,
-  sba,
-  ca,
-  availablityStatus,
-  facingName,
-  furnshName,
-  flooringType,
-  ctName,
-  stateName,
-  pinCode,
-  ownershipName,
-  phaseName,
-  plotArea,
-}: Main) {
+export default function PropertyOverView({ data }: { data: Main }) {
   return (
     <div
       className="pt-[2%] w-[90%] rounded-[24px] shadow-md mb-[5%] mt-[2%] bg-gradient-to-r from-[#F6F6F6] /0 via-[#FFF] /45 to-[#FEFFFF]/100 "
@@ -48,13 +32,13 @@ export default function PropertyOverView({
       <div className="pl-[2%] pr-[2%] flex justify-between items-center ">
         <div>
           <h2 className="text-[24px] lg:text-[32px] text-[#00487C] not-italic font-bold leading-[normal] uppercase">
-            {bhkName} {propTypeName} In {ltName}
+            {data.bhkName} {data.propTypeName} In {data.ltName}
           </h2>
           <p className="text-[16px] lg:text-[24px] text-[#505050] font-[500]">
-            {address} {`${ltName} `}
-            {`${ctName} `}
-            {`${stateName ?? ""} `}
-            {pinCode}
+            {data.address} {`${data.ltName} `}
+            {`${data.ctName} `}
+            {`${data.stateName ?? ""} `}
+            {data.pinCode}
           </p>
         </div>
         <div className="flex justify-center items-end flex-col">
@@ -70,96 +54,19 @@ export default function PropertyOverView({
 
       <div className="pl-[2%] pr-[2%] flex justify-start md:justify-between items-start md:items-end w-full mb-[3%] mt-[3%] flex-col md:flex-row ">
         <div className="flex justify-start items-start flex-wrap w-[100%] md:w-[80%] ">
-          <ProjBasicDetails
-            key="propertyAvailable"
-            icon={<Others />}
-            title="Unit Type"
-            value={bhkName}
-            className="mr-[5%] pt-[2%] mb-[3%]  "
-          />
-          <ProjBasicDetails
-            key="propertyAvailable"
-            icon={<PropertyBuilding />}
-            title="Property Type"
-            value={propTypeName}
-            className="mr-[5%] pt-[2%] mb-[3%]  "
-          />
-          <ProjBasicDetails
-            key="propertyAvailable"
-            icon={<PhaseIcon />}
-            title="Phase"
-            value={phaseName}
-            className="mr-[5%] pt-[2%] mb-[3%]  "
-          />
-
-          <ProjBasicDetails
-            key="propertyAvailable"
-            icon={<OwnerShip />}
-            title="Ownership"
-            value={ownershipName}
-            className="mr-[5%] pt-[2%] mb-[3%]  "
-          />
-          <ProjBasicDetails
-            key="projectStatus"
-            icon={<Status />}
-            title="Availability Status"
-            value={
-              availablityStatus === "U" ? "Under Construction" : "Ready To Move"
-            }
-            className="mr-[5%] pt-[2%] mb-[3%] "
-          />
-          <ProjBasicDetails
-            key="totalLandArea"
-            icon={<TotalLandArea />}
-            title="Super built-up Area"
-            value={sba + " sq.ft"}
-            className="mr-[5%] pt-[2%] mb-[3%] "
-          />
-          <ProjBasicDetails
-            key="totalLandArea"
-            icon={<TotalLandArea />}
-            title="Carpet Area"
-            value={ca + " sq.ft"}
-            className="mr-[5%] pt-[2%] mb-[3%] "
-          />
-          {propTypeName !== "Apartment" && (
+          {generatePropertyOverViewData(
+            data,
+            data.propTypeName,
+            data.cg,
+            data.availablityStatus
+          ).map(({ title, Icon, value }) => (
             <ProjBasicDetails
-              key="plotAred"
-              icon={<TotalLandArea />}
-              title="Plot Area"
-              value={plotArea + " sq.ft"}
-              className="mr-[5%] pt-[2%] mb-[3%] "
+              icon={<Icon />}
+              title={title}
+              value={value}
+              className="mr-[5%] pt-[2%] mb-[3%]  "
             />
-          )}
-          {/* <ProjBasicDetails
-            key="elevation"
-            icon={<TotalLandArea />} // Adjust icon
-            title="Elevation"
-            value={"G + 3"}
-            className="mr-[5%] pt-[2%] mb-[3%] "
-          /> */}
-          <ProjBasicDetails
-            key="totalUnits"
-            icon={<Compass />} // Adjust icon
-            title="Property Facing"
-            value={facingName}
-            className="mr-[5%] pt-[2%] mb-[3%] "
-          />
-
-          <ProjBasicDetails
-            key="locality"
-            icon={<Furnishing />}
-            title="Furnishing"
-            value={furnshName}
-            className="mr-[5%] pt-[2%] mb-[3%] "
-          />
-          <ProjBasicDetails
-            key="startDate"
-            icon={<Marble />}
-            title="Flooring Type"
-            value={flooringType}
-            className="mr-[5%] pt-[2%] mb-[3%] "
-          />
+          ))}
         </div>
         <div className=" flex justify-start md:justify-end items-start md:items-end flex-col mt-[3%] md:mt-0 ">
           <button
