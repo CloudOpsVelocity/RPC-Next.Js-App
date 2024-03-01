@@ -66,6 +66,7 @@ function Individual() {
     setStatus("success");
     close();
   };
+
   return (
     <>
       {status === "success" ? (
