@@ -64,8 +64,8 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           type="prop"
           coverUrl={""}
           projReviewVideoUrl={""}
-          projWalkThroughVideoUrl={""}
           otherImgUrl={[]}
+          projectVideoIUrl=""
           coverImageUrl={""}
           projectPlanUrl={""}
           walkThrowVideoUrl={""}

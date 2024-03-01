@@ -9,6 +9,7 @@ import { useGallery } from "@/app/hooks/useGallery";
 import SharePopup from "../../atoms/SharePopup";
 import { imageUrlParser } from "@/app/utils/image";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import clsx from "clsx";
 
 type GalleryProps = {
   selectedMedia: any;
@@ -115,11 +116,10 @@ const Gallery: React.FC<GalleryProps> = ({
                         w="auto"
                         fit="contain"
                         src={image}
-                        className={`cursor-pointer w-full min-w-[80px] !h-auto max-h-[100px] min-h-[50px]  ${
-                          image === previewImage
-                            ? "border-[5px] border-white"
-                            : ""
-                        }`}
+                        className={clsx(
+                          `cursor-pointer w-full min-w-[80px] !h-auto max-h-[100px] min-h-[50px]`,
+                          image === previewImage && "border-[5px] border-white"
+                        )}
                       />
                     </Carousel.Slide>
                   ))}

@@ -19,7 +19,7 @@ import ProjectDetailsP from "@/app/components/project/projectDetailsP";
 import ProjectDrawer from "@/app/components/project/Drawer";
 import DownloadBroucher from "@/app/components/project/downloadBroucher";
 // import NearByCarousel from "@/app/components/project/NearByCarousel";
-import MasterPlan from "@/app/components/project/masterplan";
+// import MasterPlan from "@/app/components/project/masterplan";
 import LeafMap from "@/app/components/project/map";
 import ListingRentAvail from "@/app/components/project/listingRentAvail";
 import dynamic from "next/dynamic";
@@ -38,6 +38,13 @@ const GalleryBlock = dynamic(
   {
     loading: () => <SectionSkeleton />,
     ssr: false,
+  }
+);
+const MasterPlan = dynamic(
+  () => import("@/app/components/project/masterplan"),
+  {
+    loading: () => <SectionSkeleton />,
+    ssr: true,
   }
 );
 const NearByCarousel = dynamic(

@@ -3,6 +3,8 @@ import { PopupOpenSvg } from "@/app/images/commonSvgs";
 import { imageUrlParser } from "@/app/utils/image";
 import { Image } from "@mantine/core";
 import React from "react";
+import MasterPlanPopup from "../modals/MasterPlan";
+import Gallery from "../modals/Gallery";
 
 export default function MasterPlan({
   projName,
@@ -11,23 +13,23 @@ export default function MasterPlan({
   projName: string;
   media: string;
 }) {
-  const handleDownload = async () => {
-    try {
-      const response = await fetch(media);
-      const blob = await response.blob();
-      const url = URL.createObjectURL(blob);
-      const downloadLink = document.createElement("a");
-      downloadLink.href = url;
-      downloadLink.download = "floor_plan.jpg"; // Set the filename with extension
-      document.body.appendChild(downloadLink);
-      downloadLink.click();
-      document.body.removeChild(downloadLink);
-      // Clean up the URL object after download
-      URL.revokeObjectURL(url);
-    } catch (error) {
-      console.error("Error downloading image:", error);
-    }
-  };
+  // const handleDownload = async () => {
+  //   try {
+  //     const response = await fetch(media);
+  //     const blob = await response.blob();
+  //     const url = URL.createObjectURL(blob);
+  //     const downloadLink = document.createElement("a");
+  //     downloadLink.href = url;
+  //     downloadLink.download = "floor_plan.jpg"; // Set the filename with extension
+  //     document.body.appendChild(downloadLink);
+  //     downloadLink.click();
+  //     document.body.removeChild(downloadLink);
+  //     // Clean up the URL object after download
+  //     URL.revokeObjectURL(url);
+  //   } catch (error) {
+  //     console.error("Error downloading image:", error);
+  //   }
+  // };
   return (
     <div className="w-[90%] mb-[5%] scroll-mt-[90px]" id="masterPlan">
       <div className="flex justify-between w-full items-cente mb-[32px]">
@@ -54,9 +56,7 @@ export default function MasterPlan({
       </div>
       <div className="relative">
         <Image radius="md" src={`${media}`} h={863} w="100%" fit="cover" />
-        {/* <button>
-          <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] absolute bottom-10 right-3 z-50 " />
-        </button> */}
+        <MasterPlanPopup url={media} />
       </div>
     </div>
   );
