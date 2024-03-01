@@ -51,7 +51,7 @@ export interface FAQ {
 export interface Media {
   coverUrl: string;
   projReviewVideoUrl: string;
-  projWalkThroughVideoUrl: string;
+  projectVideoIUrl: string;
   otherImgUrl: string[];
   coverImageUrl: string;
   projectPlanUrl: string;

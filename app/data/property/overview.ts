@@ -24,7 +24,7 @@ export function generatePropertyOverViewData(
   availablityStatus: string
 ): PropertyDetail[] {
   let propertyDetails: PropertyDetail[] = [];
-  switch (propertyType.trim()) {
+  switch (propertyType?.trim()) {
     case "Apartment":
       propertyDetails = [
         { title: "Unit Type", value: data.bhkName, Icon: Others },

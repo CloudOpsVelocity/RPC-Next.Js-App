@@ -47,7 +47,6 @@ function Login() {
     setState("success");
   };
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
-
   return (
     <Box maw={420} mx="auto">
       <form

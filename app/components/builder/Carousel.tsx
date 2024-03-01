@@ -10,6 +10,7 @@ import { useSession } from "next-auth/react";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import { useShortlistAndCompare } from "@/app/hooks/storage";
 import LoginPopup from "../project/modals/LoginPop";
+import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 
 type Props = {
   type: string;
@@ -29,6 +30,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
   const [, { open }] = useReqCallPopup();
   const { data: session } = useSession();
   const { toggleShortlist, shortlistedItems } = useShortlistAndCompare();
+  const [, { open: openShort }] = usePopShortList();
 
   const isItemInShortlist =
     shortlistedItems.length > 0 &&
@@ -42,6 +44,8 @@ export function ProjectCard({ type, cardData }: CardProps) {
         id: cardData.projIdEnc,
         status: isItemInShortlist ? "N" : "Y",
       });
+    } else {
+      openShort();
     }
   };
   return (

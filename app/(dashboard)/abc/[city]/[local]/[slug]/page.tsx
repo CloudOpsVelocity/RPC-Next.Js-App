@@ -19,12 +19,13 @@ import ProjectDetailsP from "@/app/components/project/projectDetailsP";
 import ProjectDrawer from "@/app/components/project/Drawer";
 import DownloadBroucher from "@/app/components/project/downloadBroucher";
 // import NearByCarousel from "@/app/components/project/NearByCarousel";
-import MasterPlan from "@/app/components/project/masterplan";
+// import MasterPlan from "@/app/components/project/masterplan";
 import LeafMap from "@/app/components/project/map";
 import ListingRentAvail from "@/app/components/project/listingRentAvail";
 import dynamic from "next/dynamic";
 // import LoginPopup from "@/app/components/project/modals/LoginPop";
 import SectionSkeleton from "@/app/components/atoms/skeleton/section";
+import ErrorContainer from "@/app/components/project/error/container";
 const FloorplansBlock = dynamic(
   () => import("@/app/components/project/floorplansBlock"),
   {
@@ -37,6 +38,13 @@ const GalleryBlock = dynamic(
   {
     loading: () => <SectionSkeleton />,
     ssr: false,
+  }
+);
+const MasterPlan = dynamic(
+  () => import("@/app/components/project/masterplan"),
+  {
+    loading: () => <SectionSkeleton />,
+    ssr: true,
   }
 );
 const NearByCarousel = dynamic(
@@ -129,7 +137,10 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           projName={data.projectName}
           media={data.media}
         />
-        <Amenties data={data.amenityList} />
+        <ErrorContainer data={data.amenityList}>
+          <Amenties data={data.amenityList} />
+        </ErrorContainer>
+
         {data.lat && data.lang && (
           <LeafMap
             lat={data.lat}
@@ -137,22 +148,20 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             projName={data.projectName}
           />
         )}
-        <Specifications
-          data={data.specificationList}
-          projName={data.projectName}
-        />
-        <Feature
-          data={
-            data.highlights ?? [
-              "Why buy this project",
-              "Why buy this project",
-              "Why buy this project",
-            ]
-          }
-          projName={data.projectName}
-        />
+        <ErrorContainer data={data.specificationList}>
+          <Specifications
+            data={data.specificationList}
+            projName={data.projectName}
+          />
+        </ErrorContainer>
+        <ErrorContainer data={data.highlights}>
+          <Feature data={data.highlights} projName={data.projectName} />
+        </ErrorContainer>
         <Banner projName={data.projectName} />
-        <Loans data={data.banks} projName={data.projectName} />
+        <ErrorContainer data={data.banks}>
+          <Loans data={data.banks} projName={data.projectName} />
+        </ErrorContainer>
+
         <AboutBuilder id={data.builderId} />
         {/* Why Buy This */}
         {data.wbtp && (

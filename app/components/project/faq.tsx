@@ -23,6 +23,8 @@ import { MinusIcon, PlusIcon, infoIcon } from "@/app/images/commonSvgs";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import handleTrimAndReplace from "@/app/utils/input/validations";
+import clsx from "clsx";
+import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 
 type FaqWithBgProps = {
   data: FAQ[];
@@ -101,16 +103,18 @@ export default function FaqWithBg({ data, projName }: FaqWithBgProps) {
 
 const AddQnaForm = ({ projName }: { projName: string }) => {
   const { slug } = useParams<{ slug: string }>();
+  const [, { open }] = usePopShortList();
   const { data: session } = useSession();
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error"
   >();
-  const { getInputProps, onSubmit, setErrors, reset, setFieldValue } = useForm({
-    initialValues: {
-      question: "",
-    },
-    validate: yupResolver(qnaSchema),
-  });
+  const { getInputProps, onSubmit, setErrors, reset, setFieldValue, errors } =
+    useForm({
+      initialValues: {
+        question: "",
+      },
+      validate: yupResolver(qnaSchema),
+    });
   const formSubmit = async (values: any) => {
     if (session) {
       setStatus("pending");
@@ -126,23 +130,7 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
         setStatus("error");
       }
     } else {
-      toast.custom((t) => (
-        <div
-          className={`${
-            t.visible ? "animate-enter" : "animate-leave"
-          } ml-auto w-full pointer-events-auto flex justify-end items-end ring-1 ring-transparent ring-opacity-5`}
-        >
-          <p className=" text-[#565D70] p-[8px] pr-[16px] pl-[16px] border-[#148B16] border-[1px] border-solid bg-white shadow-lg flex items-center rounded-lg gap-[10px] text-[20px] whitespace-nowrap font-[600] ">
-            {infoIcon} Please
-            <Link rel="shortcut icon" href="/login">
-              <span className=" cursor-pointer text-[#0073C6] ">
-                login/ Signup
-              </span>
-            </Link>
-            to ask QNAs
-          </p>
-        </div>
-      ));
+      open();
     }
   };
   return (
@@ -164,7 +152,10 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
             rows={4}
             mb={"sm"}
             {...getInputProps("question")}
-            className="placeholder:!text-[#4D6677] placeholder:!text-[28px] italic font-medium leading-[23.784px] !border !border-solid !border-[#737579] rounded-[10px]"
+            className={clsx(
+              "placeholder:!text-[#4D6677] placeholder:!text-[28px] italic font-medium leading-[23.784px]  rounded-[10px]",
+              !errors.question && "!border !border-solid !border-[#737579]"
+            )}
             size="lg"
             radius={"10px"}
             onBlur={(e) =>

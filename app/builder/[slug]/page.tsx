@@ -9,7 +9,15 @@ import { getBuilderDetails } from "@/app/utils/api/builder";
 import BuilderCarousel from "@/app/components/builder/Carousel";
 import Reqcallback from "@/app/components/builder/Reqcallback";
 import ProjectDrawer from "@/app/components/project/Drawer";
-
+import dynamic from "next/dynamic";
+import SectionSkeleton from "@/app/components/atoms/skeleton/section";
+const LoginPopup = dynamic(
+  () => import("@/app/components/project/modals/LoginPop"),
+  {
+    loading: () => <SectionSkeleton />,
+    ssr: false,
+  }
+);
 type Props = { params: { slug: string } };
 
 export default async function Page({ params: { slug } }: Props) {
@@ -43,6 +51,7 @@ export default async function Page({ params: { slug } }: Props) {
 
           <Footer />
           <ProjectDrawer projName={data?.data?.companyName} />
+          <LoginPopup />
         </>
       )}
     </div>

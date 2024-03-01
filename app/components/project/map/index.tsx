@@ -55,8 +55,7 @@ const LeafMap: React.FC<{
     lng: number;
     name?: string;
   }>();
-  const [selectedTravelMode, setSelectedTravelMode] =
-    useState<string>("TRANSIT");
+
   const showLocationOnMap = useCallback(
     (location: { position: { lat: number; lng: number }; name: string }) => {
       setSelectedLocation({
@@ -69,9 +68,7 @@ const LeafMap: React.FC<{
   );
 
   const { data: mapData, isLoading } = useMapData({ projSlug: projId });
-  const handleLocationListClick = (type: string) => {
-    setSelectedTravelMode(type);
-  };
+  console.log(mapData);
   return (
     <div className="w-[90%] scroll-mt-[90px] mx-auto  mb-[5%] " id="nearBy">
       {type === "prop" ? (
@@ -137,7 +134,11 @@ const LeafMap: React.FC<{
                         ...location,
                         distance: location.distance,
                       }))
-                      .sort((a: any, b: any) => a.distance - b.distance)
+                      .sort(
+                        (a: any, b: any) =>
+                          Number(a.distance.split("")[0]) -
+                          Number(b.distance.split("")[0])
+                      )
                       .map((location: any, index: number) => (
                         <LocationList
                           type="public"
@@ -149,7 +150,6 @@ const LeafMap: React.FC<{
                           }}
                           onClick={setSelectedLocation}
                           setDirection={showLocationOnMap}
-                          onChangeTravelMode={handleLocationListClick}
                           showLocationOnMap={showLocationOnMap}
                         />
                       ))
@@ -174,7 +174,7 @@ const LeafMap: React.FC<{
       {mapData && mapData[selected] && mapData[selected].length > 0 && (
         <div className="mt-8 ">
           <h1 className="text-[#303030] text-xl not-italic font-medium leading-[normal] tracking-[0.8px] capitalize">
-            {selected} Nearby
+            {selected.split("_").join(" ")} Nearby
           </h1>
           <div className="flex gap-2 mt-3 flex-wrap">
             {mapData[selected].map((item: any, index: any) => (
@@ -276,7 +276,7 @@ const LocationList: React.FC<{
       onClick={handleClick}
     >
       <div className="flex items-center justify-between">
-        <h6 className="text-black text-lg not-italic font-medium leading-[normal] capitalize">
+        <h6 className="text-black text-lg not-italic font-medium leading-[normal] capitalize w-[70%]">
           {name}
         </h6>
         <div className="flex gap-1 text-sm">
