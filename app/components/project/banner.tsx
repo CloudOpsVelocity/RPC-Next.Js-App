@@ -16,6 +16,7 @@ import LoginPopup from "../molecules/popups/login";
 import Close from "./button/close";
 import { usePopUpRatings } from "@/app/hooks/popups/usePopUpRatings";
 import handleTrimAndReplace from "@/app/utils/input/validations";
+import clsx from "clsx";
 
 export default function Banner({ projName }: { projName: string }) {
   const [opened, { open, close }] = usePopUpRatings();
@@ -167,7 +168,11 @@ const AddRating = ({
                   w={"100%"}
                   h={"100%"}
                   id="review"
-                  className="border  rounded-[10px] border-solid border-[#737579]  placeholder:!text-[#4D6677]  placeholder:!text-2xl italic font-medium leading-[23.784px] "
+                  className={clsx(
+                    " rounded-[10px]   placeholder:!text-[#4D6677]  placeholder:!text-2xl italic font-medium leading-[23.784px] ",
+                    !form.errors.review &&
+                      "border-solid border-[#737579] border "
+                  )}
                   placeholder="Start typing here"
                   radius={"10px"}
                   rows={4}
