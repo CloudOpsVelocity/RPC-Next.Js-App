@@ -95,6 +95,7 @@ export function generatePropertyDetails(
           value: `${data.ta} sq.ft`,
           Icon: TotalLandArea,
         },
+
         {
           title: "Balcony Size",
           value: `${data.ba} sq.ft`,
@@ -245,7 +246,6 @@ export function generatePropertyDetails(
           value: `${data.ga} sq.ft`,
           Icon: TotalLandArea,
         },
-
         {
           title: "Terrace Area",
           value: `${data.ta} sq.ft`,

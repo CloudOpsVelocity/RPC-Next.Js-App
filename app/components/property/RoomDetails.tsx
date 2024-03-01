@@ -25,8 +25,6 @@ import {
   TotalLandArea,
   TowerIcon,
 } from "@/app/images/commonSvgs";
-import ProjBasicDetails from "@/app/components/project/projBasicDetails";
-import PropertyTypeDetailsCrad from "@/app/components/project/propertyTypeDetailsCrad";
 import React, { useState } from "react";
 import { PhaseList } from "@/app/validations/types/project";
 import RoomBasicDetails from "./RoomBasicDetails";
