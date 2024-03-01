@@ -73,18 +73,19 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         />
         <Amenties
           type="prop"
-          data={data.amenities.map((item) => {
+          data={data?.amenities?.map((item) => {
             return { id: item, name: String(item) };
           })}
         />
-        {/* {data.lat && data.lang && (
+        {data.projIdEnc && (
           <LeafMap
-            lat={data.lat}
-            lang={data.lang}
+            lat={projData.lat}
+            lang={projData.lang}
             projName={data.bhkName}
+            projId={data.projIdEnc}
             type="prop"
           />
-        )} */}
+        )}
         <Banner projName={data.bhkName} />
         <Loans
           type="prop"

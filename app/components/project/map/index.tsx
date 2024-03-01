@@ -39,7 +39,8 @@ const LeafMap: React.FC<{
   lang: string;
   projName: string;
   type?: "proj" | "prop";
-}> = ({ lat, lang, projName, type }) => {
+  projId?: string;
+}> = ({ lat, lang, projName, type, projId }) => {
   const Map = useMemo(
     () =>
       dynamic(() => import("@/app/components/maps"), {
@@ -67,7 +68,7 @@ const LeafMap: React.FC<{
     [selectedLocation, selected]
   );
 
-  const { data: mapData, isLoading } = useMapData();
+  const { data: mapData, isLoading } = useMapData({ projSlug: projId });
   const handleLocationListClick = (type: string) => {
     setSelectedTravelMode(type);
   };
