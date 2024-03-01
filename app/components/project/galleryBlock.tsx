@@ -13,22 +13,24 @@ export default function GalleryBlock({
   coverImageUrl,
   projectPlanUrl,
   projReviewVideoUrl,
-  projWalkThroughVideoUrl,
   otherImgUrl,
   walkThrowVideoUrl,
   projName,
   media,
+  projectVideoIUrl,
   type = "proj",
 }: Media) {
   const images = getImageUrls(media);
   const [selectedMedia, setSelectedMedia] = useState<string | null>(images[0]);
 
-  const videos = [walkThrowVideoUrl];
+  const videos = [walkThrowVideoUrl, projectVideoIUrl].filter(
+    (url) => url !== undefined
+  );
 
   const handleMediaClick = (media: string) => {
     setSelectedMedia(media);
   };
-  const [content, { open, close }] = useGallery();
+  const [, { open }] = useGallery();
 
   return (
     <div className="w-[90%] scroll-mt-[90px] mb-[5%]  " id="galleria">
@@ -54,7 +56,7 @@ export default function GalleryBlock({
 
       <div className=" flex justify-center flex-col md:flex-row items-center-full mt-[1%] ">
         {/* IMage display con */}
-        <div className="w-[100%] md:w-[50%] bg-white h-[394px] lg:h-[462px] mb-[3%] md:mb-[0%] mr-[3%] rounded-[14px]  ">
+        <div className="w-[100%] md:w-[50%] bg-white h-[394px] lg:h-auto mb-[3%] md:mb-[0%] mr-[3%] rounded-[14px]  ">
           {selectedMedia && (
             <div className="w-[100%]  bg-white  mb-[3%] md:mb-[0%] mr-[3%] rounded-[14px]  relative">
               {selectedMedia.includes(".mp4") ? (

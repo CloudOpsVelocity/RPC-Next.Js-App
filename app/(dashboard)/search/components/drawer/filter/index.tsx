@@ -120,6 +120,7 @@ const MobileFilter = ({ close }: any) => {
             {SEARCH_FILTER_DATA.projectstatus.map((eachStatus, index) => {
               return (
                 <Radio
+                  key={index}
                   checked={eachStatus.cid == filters.current}
                   value={eachStatus.cid}
                   iconColor="dark.8"
