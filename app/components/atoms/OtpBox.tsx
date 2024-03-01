@@ -43,33 +43,36 @@ export default function OtpBox({ userName, close, callback, mobile }: Props) {
   });
 
   return (
-    <Box maw={551} mx="auto">
+    <Box className="w-full">
       <form
         onSubmit={form.onSubmit(onSubmit)}
-        className="w-[100%] h-[70vh] flex justify-center items-center flex-col "
+        className="w-[100%] h-[70vh] flex justify-center items-center flex-col text-center "
       >
-        <h1 className="text-[#333] font-[600] text-lg md:text-[24px] text-center ">
+        <h1 className="text-[#545353] text-2xl not-italic font-semibold leading-[normal] text-center  ">
           Please enter your OTP to verify your account
         </h1>
-        <p className="text-[#B5ABAC] font-[500] md:text-[20px] text-center mb-[3%]  ">
+        <p className="text-[#7D7D7D] text-xl not-italic font-medium leading-[normal] mb-[3%] text-center   ">
           A One Time- Password has been sent to{" "}
           {hideMobileNumber((mobile && mobile) || 0)}
         </p>
-        <PinInput
-          classNames={{
-            pinInput: S.pinInput,
-            input: S.input,
-          }}
-          name="otp"
-          size="xl"
-          {...form.getInputProps("otp")}
-          className=""
-          inputMode="numeric"
-          type={"number"}
-          placeholder=""
-        />
 
-        <Resend userName={mobile} />
+        <div className=" mr-auto ml-auto ">
+          <PinInput
+            classNames={{
+              pinInput: S.pinInput,
+              input: S.input,
+            }}
+            name="otp"
+            size="xl"
+            {...form.getInputProps("otp")}
+            className=""
+            inputMode="numeric"
+            type={"number"}
+            placeholder=""
+          />
+
+          <Resend userName={mobile} />
+        </div>
 
         {error && (
           <p className="text-[#F00] font-[500] text-[16px] w-[100%] !max-w-[423px] !mb-[6%] text-center ">
@@ -154,6 +157,7 @@ const Resend = ({ userName }: any): JSX.Element => {
           color: timerRunning ? "#DFE3E8" : "#0073C6",
         }}
         onClick={resendOTP}
+        className="text-[#0C7ACA] text-base not-italic font-medium leading-[normal] underline"
       >
         Resend OTP
       </button>

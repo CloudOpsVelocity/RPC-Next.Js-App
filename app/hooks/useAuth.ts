@@ -65,7 +65,9 @@ export default function useAuth() {
     const res = await signIn("credentials", { ...data, redirect: false });
     console.log(res);
     if (res?.ok) {
-      router.push("/");
+      setTimeout(()=>{
+        router.push("/");
+      },10000);
     } else {
       toast.error(res?.error || "Something went wrong. Please try again.");
     }

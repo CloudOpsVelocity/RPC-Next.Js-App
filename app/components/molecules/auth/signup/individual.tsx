@@ -21,6 +21,8 @@ import Success from "../success";
 import Login from "../login";
 import { BackSvg, EyeClosed, EyeOpen } from "@/app/images/commonSvgs";
 import handleTrimAndReplace from "@/app/utils/input/validations";
+import StepCss from "@/app/styles/Stepper.module.css";
+
 
 function Individual() {
   const [status, setStatus] = useState<
@@ -101,6 +103,11 @@ function Individual() {
                 placeholder="Enter your name here"
                 {...form.getInputProps("name")}
                 onBlur={(e) => handleTrimAndReplace(e, "name", form)}
+                classNames={{
+                  root: StepCss.inputRoot,
+                  input: StepCss.textInput,
+                  error: StepCss.errorMsg,
+                }}
               />
               <TextInput
                 mt={"xs"}
@@ -112,11 +119,20 @@ function Individual() {
                 placeholder="Enter your email here"
                 {...form.getInputProps("email")}
                 onBlur={(e) => handleTrimAndReplace(e, "email", form)}
+                classNames={{
+                  root: StepCss.inputRoot,
+                  input: StepCss.textInput,
+                  error: StepCss.errorMsg,
+                }}
               />
               <PasswordInput
                 mt={"xs"}
                 classNames={{
                   visibilityToggle: P.visibilityToggle,
+                  root: StepCss.inputRoot,
+                  input: StepCss.textInput,
+                  innerInput: StepCss.textInput,
+                  error: StepCss.errorMsg,
                 }}
                 required
                 size="lg"
@@ -133,7 +149,10 @@ function Individual() {
                 mt={"xs"}
                 required
                 classNames={{
-                  input: S.classForContact,
+                  //input: S.classForContact,
+                  root: StepCss.inputRoot,
+                  input: StepCss.textInput,
+                  error: StepCss.errorMsg,
                 }}
                 hideControls
                 size="lg"

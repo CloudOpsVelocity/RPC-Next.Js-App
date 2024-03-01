@@ -47,6 +47,7 @@ import N from "@/app/styles/Numinput.module.css";
 import {
   BackSvg,
   DateIcons,
+  DropdownArrowIcon,
   EyeClosed,
   EyeOpen,
   StepperDotGray,
@@ -296,23 +297,28 @@ function Builder() {
         styles={styles}
         size="xs"
         active={active}
-        className="w-full "
+        className="w-full"
         color="green"
         iconSize={24}
         mt={"xs"}
         classNames={{
+          root: StepCss.root,
           steps: active === 4 ? StepCss.rootSuccess : StepCss.steps,
           step: StepCss.step,
           separator: StepCss.separator,
+          stepLabel: StepCss.steplabelCommonForAll,
+          content:StepCss.content,
         }}
       >
         <Stepper.Step
           label="Personal Details"
           icon={<StepperDotGreen />}
           classNames={{
-            stepLabel:
-              active === 0 ? StepCss.stepLabel : StepCss.stepLabelActive,
             stepIcon: active === 0 ? StepCss.stepIcon : "",
+            stepLabel: active === 0 ? 
+              StepCss.stepLabelActive : 
+              active > 0 ? StepCss.stepLabelDone:
+              StepCss.stepLabel
           }}
         >
           <TextInput
@@ -322,6 +328,12 @@ function Builder() {
             placeholder="Enter your name here"
             {...form.getInputProps("userName")}
             onBlur={(e) => handleTrimAndReplace(e, "userName", form)}
+            classNames={{
+              root: StepCss.inputRoot,
+              input: StepCss.textInput,
+              error: StepCss.errorMsg,
+            }}
+             
           />
           <TextInput
             required
@@ -331,11 +343,21 @@ function Builder() {
             placeholder="Enter your email here"
             {...form.getInputProps("email")}
             onBlur={(e) => handleTrimAndReplace(e, "email", form)}
+            classNames={{
+              root: StepCss.inputRoot,
+              input: StepCss.textInput,
+              error: StepCss.errorMsg,
+            }}
           />
           <PasswordInput
             required
             size="lg"
             mt="sm"
+            classNames={{
+              innerInput: StepCss.textInput,
+              input: StepCss.textInput,
+              error: StepCss.errorMsg,
+            }}
             label="Password"
             placeholder="Enter your password here"
             {...form.getInputProps("password")}
@@ -343,11 +365,13 @@ function Builder() {
               reveal ? <EyeOpen /> : <EyeClosed />
             }
             onBlur={(e) => handleTrimAndReplace(e, "password", form)}
+            
           />
           <NumberInput
             required
             classNames={{
               input: N.classForContact,
+              error: StepCss.errorMsg,
             }}
             hideControls
             size="lg"
@@ -368,6 +392,8 @@ function Builder() {
                 setStatus("idle");
               }
             }}
+            onBlur={(e) => handleTrimAndReplace(e, "mobile", form)}
+            withErrorStyles={true}
           />
 
           <CountryInput
@@ -383,9 +409,12 @@ function Builder() {
 
         <Stepper.Step
           label="Address & Other"
-          icon={active > 1 ? <StepperDotGreen /> : <StepperDotGray />}
+          icon={active >= 1 ? <StepperDotGreen /> : <StepperDotGray />}
           classNames={{
-            stepLabel: active > 1 ? StepCss.stepLabelActive : StepCss.stepLabel,
+            stepLabel: active === 1 ? 
+            StepCss.stepLabelActive : 
+              active > 1 ? StepCss.stepLabelDone:
+              StepCss.stepLabel,
             stepIcon: active > 1 ? StepCss.stepIconActive : StepCss.stepIcon,
           }}
         >
@@ -396,8 +425,14 @@ function Builder() {
             placeholder="Enter your address here"
             {...form.getInputProps("address")}
             onBlur={(e) => handleTrimAndReplace(e, "address", form)}
+            classNames={{
+              root: StepCss.inputRoot,
+              input: StepCss.textInput,
+              error: StepCss.errorMsg,
+            }}
           />
           <Select
+            rightSection={<DropdownArrowIcon />}
             required
             size="lg"
             mt="md"
@@ -408,9 +443,15 @@ function Builder() {
             {...form.getInputProps("state")}
             maxDropdownHeight={200}
             onChange={(e) => handleStateChange(e as string)}
+            classNames={{
+              root: StepCss.inputRoot,
+              input: StepCss.textInput,
+              error: StepCss.errorMsg,
+            }}
           />
           <SimpleGrid cols={2}>
             <Select
+              rightSection={<DropdownArrowIcon />}
               required
               size="lg"
               mt="md"
@@ -421,6 +462,11 @@ function Builder() {
 
               {...form.getInputProps("city")}
               maxDropdownHeight={200}
+              classNames={{
+                root: StepCss.inputRoot,
+                input: StepCss.textInput,
+                error: StepCss.errorMsg,
+              }}
             />
             <NumberInput
               required
@@ -428,9 +474,14 @@ function Builder() {
               mt="md"
               hideControls
               label="Pincode"
-              placeholder="Enter your pincode here"
+              placeholder="Enter pincode"
               {...form.getInputProps("pincode")}
               maxLength={6}
+              classNames={{
+                root: StepCss.inputRoot,
+                input: StepCss.textInput,
+                error: StepCss.errorMsg,
+              }}
             />
           </SimpleGrid>
           <DropZone
@@ -441,13 +492,16 @@ function Builder() {
 
         <Stepper.Step
           label="Company details"
-          icon={active > 2 ? <StepperDotGreen /> : <StepperDotGray />}
+          icon={active >= 2 ? <StepperDotGreen /> : <StepperDotGray />}
           classNames={{
-            stepLabel: active > 2 ? StepCss.stepLabelActive : StepCss.stepLabel,
+            stepLabel: active === 2 ? 
+            StepCss.stepLabelActive : 
+            active > 2 ? StepCss.stepLabelDone:
+              StepCss.stepLabel,
             stepIcon: active > 2 ? StepCss.stepIconActive : StepCss.stepIcon,
           }}
         >
-          <ScrollArea h={420} pr={10} viewportRef={viewport}>
+          <ScrollArea h={420} pr={10} viewportRef={viewport} offsetScrollbars>
             <TextInput
               required
               size="lg"
@@ -456,8 +510,14 @@ function Builder() {
               placeholder="Enter your builder name"
               {...form.getInputProps("companyName")}
               onBlur={(e) => handleTrimAndReplace(e, "companyName", form)}
+              classNames={{
+                root: StepCss.inputRoot,
+                input: StepCss.textInput,
+                error: StepCss.errorMsg,
+              }}
             />
             <MultiSelect
+              rightSection={<DropdownArrowIcon />}
               required
               size="lg"
               mt="md"
@@ -468,9 +528,12 @@ function Builder() {
               }`}
               classNames={{
                 pill: StepCss.pill,
+                inputField: StepCss.textInput,
+                error: StepCss.errorMsg,
               }}
               data={isLoadingBrach ? [] : cityParser(brachData) || []}
               {...form.getInputProps("branchName")}
+              
             />
             <DateInput
               required
@@ -482,6 +545,11 @@ function Builder() {
               placeholder="DD//MM//YYYY"
               {...form.getInputProps("companyStartDate")}
               maxDate={dayjs(new Date()).toDate()}
+              classNames={{
+                root: StepCss.inputRoot,
+                input: StepCss.textInput,
+                error: StepCss.errorMsg,
+              }}
             />
             <TextInput
               required
@@ -494,6 +562,11 @@ function Builder() {
                 handleTrimAndReplace(e, "foundedBy", form);
                 e.target.value !== "" && scrollToBottom();
               }}
+              classNames={{
+                root: StepCss.inputRoot,
+                input: StepCss.textInput,
+                error: StepCss.errorMsg,
+              }}
             />
             <TextInput
               required
@@ -503,6 +576,11 @@ function Builder() {
               placeholder="Enter Ceo Name"
               {...form.getInputProps("ceoName")}
               onBlur={(e) => handleTrimAndReplace(e, "ceoName", form)}
+              classNames={{
+                root: StepCss.inputRoot,
+                input: StepCss.textInput,
+                error: StepCss.errorMsg,
+              }}
             />
             <TextInput
               required
@@ -514,6 +592,11 @@ function Builder() {
               onBlur={(e) =>
                 handleTrimAndReplace(e, "managingDirectorName", form)
               }
+              classNames={{
+                root: StepCss.inputRoot,
+                input: StepCss.textInput,
+                error: StepCss.errorMsg,
+              }}
             />
             <NumberInput
               required
@@ -525,14 +608,23 @@ function Builder() {
               placeholder="Enter Office Contact"
               {...form.getInputProps("officeContact")}
               maxLength={17}
+              classNames={{
+                root: StepCss.inputRoot,
+                input: StepCss.textInput,
+                error: StepCss.errorMsg,
+              }}
             />{" "}
           </ScrollArea>
         </Stepper.Step>
+
         <Stepper.Step
           label="Description"
-          icon={active > 3 ? <StepperDotGreen /> : <StepperDotGray />}
+          icon={active >= 3 ? <StepperDotGreen /> : <StepperDotGray />}
           classNames={{
-            stepLabel: active > 3 ? StepCss.stepLabelActive : StepCss.stepLabel,
+            stepLabel: active === 3 ? 
+            StepCss.stepLabelActive : 
+            active > 3 ? StepCss.stepLabelDone:
+              StepCss.stepLabel,
             stepIcon: active > 3 ? StepCss.stepIconActive : StepCss.stepIcon,
           }}
         >
@@ -546,6 +638,11 @@ function Builder() {
             maxRows={5}
             {...form.getInputProps("vission")}
             onBlur={(e) => handleTrimAndReplace(e, "vission", form)}
+            classNames={{
+              root: StepCss.inputRoot,
+              input: StepCss.textInput,
+              error: StepCss.errorMsg,
+            }}
           />
           <Text size="sm" ta={"right"}>
             maximum 5000 characters
@@ -561,6 +658,11 @@ function Builder() {
             maxRows={5}
             {...form.getInputProps("mission")}
             onBlur={(e) => handleTrimAndReplace(e, "mission", form)}
+            classNames={{
+              root: StepCss.inputRoot,
+              input: StepCss.textInput,
+              error: StepCss.errorMsg,
+            }}
           />{" "}
           <Text size="sm" ta={"right"} mb={"lg"}>
             maximum 5000 characters
@@ -579,7 +681,7 @@ function Builder() {
 
       <Group justify="flex-end" className="w-full">
         {active !== 4 && (
-          <div className="w-[100%] flex justify-between items-center flex-wrap">
+          <div className="w-full lg:w-full flex justify-between items-center flex-wrap md:flex-nowrap">
             <Button
               mt="sm"
               onClick={() => {
