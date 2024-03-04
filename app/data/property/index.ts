@@ -105,6 +105,7 @@ export function generatePropertyDetails(
       ];
 
       if (cg === "R") {
+        propertyDetails.splice(2, 1);
         if (availablityStatus === "R") {
           // For Rent, Ready to Move
           propertyDetails
@@ -162,6 +163,12 @@ export function generatePropertyDetails(
       ];
 
       if (cg === "R") {
+        propertyDetails.splice(2, 1);
+        propertyDetails.splice(2, 0, {
+          Icon: Marble,
+          title: "Floor",
+          value: data.atFloor,
+        });
         if (availablityStatus === "R") {
           propertyDetails.push();
         } else if (availablityStatus === "U") {
@@ -260,6 +267,8 @@ export function generatePropertyDetails(
       ];
 
       if (cg === "R") {
+        propertyDetails.splice(2, 2);
+
         if (availablityStatus === "R") {
           // For Rent, Ready to Move
           propertyDetails

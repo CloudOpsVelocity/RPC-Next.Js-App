@@ -131,6 +131,12 @@ export function generatePropertyOverViewData(
       ];
 
       if (cg === "R") {
+        propertyDetails.splice(2, 2);
+        propertyDetails.splice(3, 0, {
+          title: "Available For",
+          value: data.availablityStatus,
+          Icon: Status,
+        });
         if (availablityStatus === "R") {
           // For Rent, Ready to Move
           propertyDetails
@@ -192,13 +198,20 @@ export function generatePropertyOverViewData(
       ];
 
       if (cg === "R") {
+        propertyDetails.splice(2, 2);
+        propertyDetails.splice(3, 0, {
+          title: "Available For",
+          value: data.availablityStatus,
+          Icon: Status,
+        });
+
         if (availablityStatus === "R") {
-          propertyDetails.push();
+          // propertyDetails.push();
         } else if (availablityStatus === "U") {
-          propertyDetails
-            .push
-            // Add Rent, Under Construction specific details
-            ();
+          // propertyDetails
+          //   .push
+          //   // Add Rent, Under Construction specific details
+          //   ();
         }
       } else if (cg === "S") {
         // For Sale
@@ -304,6 +317,12 @@ export function generatePropertyOverViewData(
         },
       ];
       if (cg === "R") {
+        propertyDetails.splice(2, 2);
+        propertyDetails.splice(3, 0, {
+          title: "Available For",
+          value: data.availablityStatus,
+          Icon: Status,
+        });
         if (availablityStatus === "R") {
           // For Rent, Ready to Move
           propertyDetails
