@@ -107,18 +107,21 @@ function ForgotForm() {
             mt="sm"
             className="w-[100%] mb-[3%] rounded-[8px] bg-transparent "
             label=""
-            placeholder="Enter your registerd mobile number..."
+            placeholder="Enter registerd mobile number..."
             {...form.getInputProps("mobile")}
             maxLength={10}
           />
-          <CountryInput
-            onSelect={displayCountryCode}
-            className={`focus:outline-none min-w-[30px] max-w-[70px] self-start relative ${
-              form.errors.mobile != undefined && form.errors.mobile != null
-                ? "bottom-[65px]"
-                : "bottom-[45px]"
-            }  ml-[2px]`}
-          />
+          <div className="min-w-[30px] self-start !max-w-[75px] flex justify-center items-center ">
+            <CountryInput
+              onSelect={displayCountryCode}
+              className={`focus:outline-none min-w-[30px] !max-w-[75px] relative ${
+                (form.errors.mobile != undefined && form.errors.mobile != null) ||
+                status === "error"
+                  ? "bottom-[71px]"
+                  : "bottom-[47px]"
+              }  ml-[2px]`}
+            />
+          </div>
 
           <div className="w-full flex justify-between items-center flex-wrap-reverse">
             <Button

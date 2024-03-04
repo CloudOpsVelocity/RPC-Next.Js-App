@@ -93,7 +93,7 @@ function Individual() {
             </div>
             <form
               onSubmit={form.onSubmit(onSubmit)}
-              className="w-[100%] flex justify-center items-center flex-col"
+              className="w-[100%] flex flex-col"
             >
               <TextInput
                 required
@@ -139,7 +139,7 @@ function Individual() {
                 size="lg"
                 className="w-[100%] mb-[3%] "
                 label="Password"
-                placeholder="Enter your password here"
+                placeholder="Enter your password"
                 visibilityToggleIcon={({ reveal }) =>
                   reveal ? <EyeOpen /> : <EyeClosed />
                 }
@@ -150,16 +150,15 @@ function Individual() {
                 mt={"xs"}
                 required
                 classNames={{
-                  //input: S.classForContact,
                   root: StepCss.inputRoot,
-                  input: StepCss.textInput,
+                  input: S.classForContact,
                   error: StepCss.errorMsg,
                 }}
                 hideControls
                 size="lg"
                 className="w-[100%] mb-[3%] "
                 label="Contact Number"
-                placeholder="Enter your contact number here"
+                placeholder="Enter your contact number"
                 {...form.getInputProps("mobile")}
                 maxLength={10}
                 error={
@@ -175,16 +174,17 @@ function Individual() {
                 }}
               />
 
-              <CountryInput
-                onSelect={displayCountryCode}
-                className={`focus:outline-none min-w-[30px] max-w-[70px] self-start relative ${
-                  (form.errors.mobile != undefined &&
-                    form.errors.mobile != null) ||
-                  status === "error"
-                    ? "bottom-[65px]"
-                    : "bottom-[45px]"
-                }  ml-[2px]`}
-              />
+              <div className="min-w-[30px] !max-w-[75px] flex justify-center items-center ">
+                <CountryInput
+                  onSelect={displayCountryCode}
+                  className={`focus:outline-none min-w-[30px] !max-w-[75px] relative ${
+                    (form.errors.mobile != undefined && form.errors.mobile != null) ||
+                    status === "error"
+                      ? "bottom-[65px]"
+                      : "bottom-[45px]"
+                  }  ml-[2px]`}
+                />
+              </div>
 
               <div className="w-full flex justify-between items-center flex-wrap-reverse">
                 <Button

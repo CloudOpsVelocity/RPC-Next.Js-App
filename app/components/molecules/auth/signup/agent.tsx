@@ -185,9 +185,11 @@ function Agent() {
         color="green"
         iconSize={24}
         active={active}
-        mt={"sm"}
+        mt={"xs"}
+        size="xs"
         className="w-full"
         // @ts-ignore
+        styles={styles}  
         classNames={{
           root: StepCss.root,
           steps: active === 2 ? StepCss.rootSuccess : StepCss.steps,
@@ -261,7 +263,7 @@ function Agent() {
             mt={"xs"}
             className="w-[100%] mb-[3%] "
             label="Contact Number"
-            placeholder="Enter your contact number here"
+            placeholder="Enter your contact number"
             {...form.getInputProps("mobile")}
             maxLength={10}
             error={
@@ -282,16 +284,17 @@ function Agent() {
             }}
             onBlur={(e) => handleTrimAndReplace(e, "mobile", form)}
           />
-
-          <CountryInput
-            onSelect={displayCountryCode}
-            className={`focus:outline-none min-w-[30px] max-w-[70px] self-start relative ${
-              (form.errors.mobile != undefined && form.errors.mobile != null) ||
-              status === "error"
-                ? "bottom-[65px]"
-                : "bottom-[45px]"
-            }  ml-[2px]`}
-          />
+          <div className="min-w-[30px] !max-w-[75px] flex justify-center items-center ">
+            <CountryInput
+              onSelect={displayCountryCode}
+              className={`focus:outline-none min-w-[30px] !max-w-[75px] relative ${
+                (form.errors.mobile != undefined && form.errors.mobile != null) ||
+                status === "error"
+                  ? "bottom-[65px]"
+                  : "bottom-[45px]"
+              }  ml-[2px]`}
+            />
+          </div>
         </Stepper.Step>
 
         <Stepper.Step

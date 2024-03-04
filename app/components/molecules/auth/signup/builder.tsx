@@ -396,15 +396,17 @@ function Builder() {
             withErrorStyles={true}
           />
 
-          <CountryInput
-            onSelect={displayCountryCode}
-            className={`focus:outline-none min-w-[30px] max-w-[70px] self-start relative ${
-              (form.errors.mobile != undefined && form.errors.mobile != null) ||
-              status === "error"
-                ? "bottom-[65px]"
-                : "bottom-[45px]"
-            }  ml-[2px]`}
-          />
+          <div className="min-w-[30px] !max-w-[75px] flex justify-center items-center ">
+            <CountryInput
+              onSelect={displayCountryCode}
+              className={`focus:outline-none min-w-[30px] !max-w-[75px] relative ${
+                (form.errors.mobile != undefined && form.errors.mobile != null) ||
+                status === "error"
+                  ? "bottom-[65px]"
+                  : "bottom-[45px]"
+              }  ml-[2px]`}
+            />
+          </div>
         </Stepper.Step>
 
         <Stepper.Step

@@ -1,7 +1,7 @@
 "use client";
 
 import { isdDetailsList } from "@/app/data/isdDetails";
-import React, {useRef} from "react";
+import React, {useRef, useState} from "react";
 
 type props = {
   onSelect: any;
@@ -9,32 +9,31 @@ type props = {
 };
 
 export default function CountryInput({ onSelect, className }: props) {
-    // let Country = 
-  
-    // useEffect(() => {
-    //   var countrycode = document.getElementById("isdCodes");
-    //   countrycode.options[countrycode.selectedIndex].text = "+91";
-    // }, []);
+    const [isdValue, setIsdidValue] = useState("+91 India");
+    console.log(isdValue)
 
-    // const [isdValue, setIsdidValue] = useState("");
+    const countryRef = useRef<any>(null);
 
-    // const displayCountryCode = () => {
-    //   var countrycode = document.getElementById("isdCodes");
-    //   setIsdidValue(countrycode.options[countrycode.selectedIndex].text);
-    //   countrycode.options[countrycode.selectedIndex].text = countrycode.value;
-    // };
+    const displayCountryCode = () => {
+    console.log(countryRef.current)
+       setIsdidValue(countryRef.current.options[countryRef.current?.selectedIndex].text);
+       countryRef.current.options[countryRef.current.selectedIndex].text = countryRef.current.value;
+       onSelect(countryRef.current.value);
+    };
 
-    // $("#isdCodes").mousedown(function () {
-    //   var countrycode = document.getElementById("isdCodes");
-    //   countrycode.options[countrycode.selectedIndex].text = isdValue;
-    // });
+    countryRef.current?.addEventListener("mousedown", () => {
+      countryRef.current.options[countryRef.current.selectedIndex].text = countryRef.current.value;
+    });
 
   return (
     <select
-      id="isdCodes"
+      //id="isdCodes"
+      ref={countryRef}
       name="isd"
-      onChange={(e) => onSelect(e.target.value.split(" ")[0])}
+      //onChange={(e) => onSelect(e.target.value.split(" ")[0])}
+      onChange={() => displayCountryCode()}
       className={className}
+      style={{width: `${isdValue.length * 6}px`}}
       // value={}
     >
       <option value="ISD" hidden>
