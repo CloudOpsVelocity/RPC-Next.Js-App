@@ -14,6 +14,10 @@
   background: #FFF;
 }
 
+.errorMsg{
+  text-align: right;
+}
+
 .classForContact{
   height: 40px !important;
   color: #212C33;
@@ -25,10 +29,26 @@
   letter-spacing: 0.64px;
 
   border-radius: 5px;
-  border: 1px solid #92B2C8;
 
   background: #FFF;
-  padding-left: 80px;
+  padding-left: 78px;
+  padding-right: 0;
+}
+
+.classForContact::placeholder {
+  color: #556477 !important;
+  font-family: Montserrat;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.classForContact::-ms-input-placeholder { /* Edge 12-18 */
+  color: #556477 !important;
+  font-family: Montserrat;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 }
 
 .contectInput{

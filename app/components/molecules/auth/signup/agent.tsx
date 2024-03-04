@@ -185,23 +185,28 @@ function Agent() {
         color="green"
         iconSize={24}
         active={active}
-        mt={"sm"}
+        mt={"xs"}
+        size="xs"
         className="w-full"
         // @ts-ignore
+        styles={styles}  
         classNames={{
+          root: StepCss.root,
           steps: active === 2 ? StepCss.rootSuccess : StepCss.steps,
           step: StepCss.step,
-          separator: StepCss.separator,
+          separator: StepCss.separatorForAgent,
+          stepLabel: StepCss.steplabelCommonForAll,
+          content:StepCss.content,
         }}
         // styles={styles}
       >
         <Stepper.Step
           label="Personal Details"
-          icon={<StepperDotGreen />}
+          icon={<StepperDotGreen className={StepCss.stepperIcon} />}
           classNames={{
             stepLabel:
-              active === 0 ? StepCss.stepLabel : StepCss.stepLabelActive,
-            stepIcon: active === 0 ? StepCss.stepIcon : "",
+              active === 0 ? StepCss.stepLabelActive : StepCss.stepLabel,
+              stepIcon: active === 0 ? StepCss.stepIcon : "",
           }}
         >
           <TextInput
@@ -211,6 +216,11 @@ function Agent() {
             placeholder="Enter your name here"
             {...form.getInputProps("userName")}
             onBlur={(e) => handleTrimAndReplace(e, "userName", form)}
+            classNames={{
+              root: StepCss.inputRoot,
+              input: StepCss.textInput,
+              error: StepCss.errorMsg,
+            }}
           />
           <TextInput
             type="email"
@@ -221,11 +231,20 @@ function Agent() {
             placeholder="Enter your email here"
             {...form.getInputProps("email")}
             onBlur={(e) => handleTrimAndReplace(e, "email", form)}
+            classNames={{
+              root: StepCss.inputRoot,
+              input: StepCss.textInput,
+              error: StepCss.errorMsg,
+            }}
           />
           <PasswordInput
             required
             classNames={{
               visibilityToggle: S.visibilityToggle,
+              root: StepCss.inputRoot,
+              innerInput: StepCss.textInput,
+              input: StepCss.textInput,
+              error: StepCss.errorMsg,
             }}
             size="lg"
             mt={"xs"}
@@ -239,15 +258,12 @@ function Agent() {
           />
           <NumberInput
             required
-            classNames={{
-              input: N.classForContact,
-            }}
             hideControls
             size="lg"
             mt={"xs"}
             className="w-[100%] mb-[3%] "
             label="Contact Number"
-            placeholder="Enter your contact number here"
+            placeholder="Enter your contact number"
             {...form.getInputProps("mobile")}
             maxLength={10}
             error={
@@ -261,17 +277,24 @@ function Agent() {
                 setStatus("idle");
               }
             }}
+            classNames={{
+              root: StepCss.inputRoot,
+              input: N.classForContact,
+              error: StepCss.errorMsg,
+            }}
+            onBlur={(e) => handleTrimAndReplace(e, "mobile", form)}
           />
-
-          <CountryInput
-            onSelect={displayCountryCode}
-            className={`focus:outline-none min-w-[30px] max-w-[70px] self-start relative ${
-              (form.errors.mobile != undefined && form.errors.mobile != null) ||
-              status === "error"
-                ? "bottom-[65px]"
-                : "bottom-[45px]"
-            }  ml-[2px]`}
-          />
+          <div className="min-w-[30px] !max-w-[75px] flex justify-center items-center ">
+            <CountryInput
+              onSelect={displayCountryCode}
+              className={`focus:outline-none min-w-[30px] !max-w-[75px] relative ${
+                (form.errors.mobile != undefined && form.errors.mobile != null) ||
+                status === "error"
+                  ? "bottom-[65px]"
+                  : "bottom-[45px]"
+              }  ml-[2px]`}
+            />
+          </div>
         </Stepper.Step>
 
         <Stepper.Step
@@ -289,6 +312,11 @@ function Agent() {
             placeholder="Enter your address here"
             {...form.getInputProps("address")}
             onBlur={(e) => handleTrimAndReplace(e, "address", form)}
+            classNames={{
+              root: StepCss.inputRoot,
+              input: StepCss.textInput,
+              error: StepCss.errorMsg,
+            }}
           />
           <TextInput
             required
@@ -298,6 +326,11 @@ function Agent() {
             placeholder="Enter your company name here"
             {...form.getInputProps("companyName")}
             onBlur={(e) => handleTrimAndReplace(e, "companyName", form)}
+            classNames={{
+              root: StepCss.inputRoot,
+              input: StepCss.textInput,
+              error: StepCss.errorMsg,
+            }}
           />
           <DropZone
             onLogoSelect={handleLogoSelect}

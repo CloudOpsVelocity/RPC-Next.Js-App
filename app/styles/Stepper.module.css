@@ -1,3 +1,12 @@
+.root{
+  width: 100%;
+}
+
+.content{
+  margin-top: 18px !important;
+  width: 100% !important;
+}
+
 .steps {
   margin-bottom: 5%;
 }
@@ -8,17 +17,41 @@
   align-items: center;
   flex-direction: column;
   gap: 5px;
+  position: relative;
+}
+
+.errorMsg{
+  text-align: right;
 }
 
 .separator {
   margin-left: -2rem;
   margin-right: -2rem;
   height: 0.1rem;
-  border: 1px dashed green;
+  border: 1px dashed #B5ABAC !important;
   width: 100%;
   position: relative;
-  bottom: 13px;
+  top: -3px;
+  overflow-x: hidden;
 }
+
+.separatorForAgent {
+  margin-left: -2rem;
+  margin-right: -2rem;
+  height: 0.1rem;
+  border: 1px dashed #B5ABAC !important;
+  width: 80% !important;
+  position: relative;
+  top: -3px;
+  z-index: 0;
+}
+
+.stepperIcon{
+  position: relative;
+  z-index: 3;
+  background-color: white;
+}
+
 .stepIcon {
   /* background-color: green; */
   outline: none;
@@ -26,12 +59,69 @@
   border: none;
   /* border-width: 4px; */
 }
-.stepLabelActive {
-  color: #148b16;
+
+.steplabelCommonForAll{
+  color: var(--Grey-2, #767270);
+  text-align: center;
+  font-family: Montserrat;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  
+  position: absolute;
+  right: -30px;
+  white-space: nowrap;
 }
 
-.steplabel {
-  color: #333333;
+.stepLabelActive {
+  color: var(--Brand-green-primary, #148B16) !important;
+  text-align: center !important;
+  font-family: Montserrat !important;
+  font-size: 12px !important;
+  font-weight: bold !important;
+}
+
+.stepLabelDone {
+  color: var(--Brand-green-primary, #148B16) !important;
+  text-align: center !important;
+  font-family: Montserrat !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+}
+
+.steplabel{
+  color: var(--Black-2, #333);
+  text-align: center;
+  font-family: Montserrat;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.textInput{
+  color: var(--Black-2, #333);
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 500;
+  opacity: 1;
+}
+
+.textInput::placeholder {
+  color: #556477 !important;
+  font-family: Montserrat;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.textInput::-ms-input-placeholder { /* Edge 12-18 */
+  color: #556477 !important;
+  font-family: Montserrat;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 }
 
 .rootSuccess {
@@ -43,20 +133,39 @@
   color: white;
 }
 
-@media (max-width: 768px) {
-  .stepLabel {
-    max-width: 70px;
-    font-size: 12px;
-    text-align: center;
-  }
-  .stepLabelActive {
-    max-width: 70px;
-    font-size: 12px;
-    text-align: center;
-  }
+.inputRoot{
+  width: 100% !important;
+  max-width: 423px !important;
 }
 
-@media (max-width: 400px) {
+@media only screen and (min-width: 641px) and (max-width: 1280px) {
+  .stepLabel {
+    max-width: 70px;
+    font-size: 12px;
+    text-align: center;
+  }
+  .stepLabelActive {
+    max-width: 70px;
+    font-size: 12px;
+    text-align: center;
+  }
+
+  .steplabelCommonForAll{
+    white-space: normal;
+    right: -15px !important;
+  }
+
+  .root{
+    width: 90%;
+  }
+
+  /* .content{
+    width: 100% !important;
+    max-width: 423px !important;
+  } */
+}
+
+@media (max-width: 640px) {
   .stepLabel {
     max-width: 60px;
     font-size: 12px;
@@ -67,4 +176,15 @@
     font-size: 12px;
     text-align: center;
   }
+
+  .steplabelCommonForAll{
+    white-space: normal;
+    right: -15px !important;
+  }
+
+  /* .content{
+    margin-top: 28px !important;
+  } */
+
+
 }
