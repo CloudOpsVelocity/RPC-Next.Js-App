@@ -25,27 +25,13 @@ const Map = ({ data, selectedLocation, projName, lat, lang }: any) => {
       <MapContainer
         center={position}
         zoom={13}
-        style={{ height: "700px", width: "100%", zIndex: -1 }}
+        style={{ height: "700px", width: "100%" }}
         scrollWheelZoom={true}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {/* <Marker position={position} icon={MapIcon}>
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
-        </Marker> */}
-        {/* {data &&
-          data.length > 0 &&
-          data?.map((item: any, index: any) => (
-            <CustomMarker
-              key={index}
-              location={[parseFloat(item?.lat), parseFloat(item?.lang)]}
-              iconType="Hotel"
-            />
-          ))} */}
         {data &&
           data.length > 0 &&
           data?.map((item: any) => (

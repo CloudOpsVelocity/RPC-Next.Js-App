@@ -33,7 +33,7 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
           </p>
           <div className="flex justify-center items-center h-[300px] lg:h-[450px]">
             <img
-              src={data.projMedia.floorPlanUrl}
+              src={data?.projMedia?.floorPlanUrl}
               alt=""
               className="h-full w-full"
             />

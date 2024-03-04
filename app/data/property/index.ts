@@ -43,6 +43,7 @@ export function generatePropertyDetails(
       ];
 
       if (cg === "R") {
+        propertyDetails.splice(2, 1);
         if (availablityStatus === "R") {
           // For Rent, Ready to Move
           propertyDetails
@@ -98,7 +99,7 @@ export function generatePropertyDetails(
 
         {
           title: "Balcony Size",
-          value: `${data.ba} sq.ft`,
+          value: data.ba && `${data.ba} sq.ft`,
           Icon: TotalLandArea,
         },
       ];

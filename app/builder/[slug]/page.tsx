@@ -22,7 +22,6 @@ type Props = { params: { slug: string } };
 
 export default async function Page({ params: { slug } }: Props) {
   const data = await getBuilderDetails(slug, "Y", "proj");
-
   return (
     <div className="flex flex-col justify-start items-center w-full mt-[90px]  ">
       {data && (
@@ -36,7 +35,6 @@ export default async function Page({ params: { slug } }: Props) {
 
             {data?.data?.builderProjects && (
               <BuilderCarousel
-                key=""
                 type="proj"
                 title={`Newly launched PROJECT by`}
                 projName={data?.data?.companyName}

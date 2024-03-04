@@ -8,10 +8,10 @@ import {
   NextCarouselButton,
   PrevCarouselButton,
 } from "@/app/images/commonSvgs";
-import build from "next/dist/build";
-// ... (imports remain the same)
+import { useMediaQuery } from "@mantine/hooks";
 
 export default function BuildersBlock({ data }: { data: OtherBuilder[] }) {
+  const isMobile = useMediaQuery("(max-width: 750px)");
   return (
     <div className=" py-12 w-full flex justify-center items-center ">
       <div className="max-w-[1920px] w-[90%] ">
@@ -27,19 +27,23 @@ export default function BuildersBlock({ data }: { data: OtherBuilder[] }) {
         <div className="mt-8 relative  ">
           <Carousel
             //mih={"200px"}
-            slideGap={"72px"}
-            align="start"
-            slideSize="15%"
+            // slideGap={"72px"}
+            // align="start"
+            // slideSize="15%"
             // withIndicators
             className=" flex justify-start items-center "
             slidesToScroll={1}
             nextControlIcon={<NextCarouselButton />}
             previousControlIcon={<PrevCarouselButton />}
-            px={140}
+            height={"auto"}
+            slideSize={{ base: "40%", sm: "50%", md: "25%" }}
+            slideGap={{ sm: "md", md: "72px" }}
+            align={"start"}
+            px={isMobile ? 0 : 130}
           >
             {data?.map((builder, index) => {
               const logo =
-                builder.logo === null
+                builder.logo === "null"
                   ? "https://d1l03fubsuphsh.cloudfront.net/staticmedia-images-icons/builderpage/builder-noimage.png"
                   : builder.logo;
               return (
@@ -52,7 +56,7 @@ export default function BuildersBlock({ data }: { data: OtherBuilder[] }) {
                       backgroundPosition: "center",
                     }}
                   ></div>
-                  <p className="text-[#202020] text-xl not-italic font-semibold leading-[normal] text-center mt-4 w-[209px]">
+                  <p className="text-[#202020] text-xl not-italic font-semibold leading-[normal] text-center mt-4 w-[107px] md:w-[209px]">
                     {builder.name}
                   </p>
                 </Carousel.Slide>

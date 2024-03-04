@@ -170,7 +170,6 @@ export function ProjectCard({ type, cardData }: CardProps) {
 }
 
 const BuilderCarousel = ({ type, content, title, projName, data }: Props) => {
-  console.log(data);
   return (
     <div className="w-[100%] mb-[5%]">
       <h2 className="text-[24px] lg:text-[32px] font-semibold uppercase cursor-pointer">
@@ -188,8 +187,8 @@ const BuilderCarousel = ({ type, content, title, projName, data }: Props) => {
         {data &&
           data?.map((project: any, index: number) => {
             return (
-              <CarouselSlide>
-                <ProjectCard key={index} type={type} cardData={project} />
+              <CarouselSlide key={index}>
+                <ProjectCard type={type} cardData={project} />
               </CarouselSlide>
             );
           })}

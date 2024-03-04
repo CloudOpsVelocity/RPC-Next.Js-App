@@ -32,7 +32,8 @@ export default function PropertyOverView({ data }: { data: Main }) {
       <div className="pl-[2%] pr-[2%] flex justify-between items-center ">
         <div>
           <h2 className="text-[24px] lg:text-[32px] text-[#00487C] not-italic font-bold leading-[normal] uppercase">
-            {data.bhkName} {data.propTypeName} In {data.ltName}
+            {data.bhkName} {data.propTypeName} FOR{" "}
+            {data.cg === "S" ? " Sell" : " Rent"} In {data.ltName}
           </h2>
           <p className="text-[16px] lg:text-[24px] text-[#505050] font-[500]">
             {data.address} {`${data.ltName} `}

@@ -5,7 +5,7 @@ import React from "react";
 type Props = { searchParams: { path: string } };
 export default function Page({ searchParams: { path } }: Props) {
   const handleDownload = () => {
-    const url = `${process.env.NEXT_PUBLIC_IMG_BASE}${path}`;
+    const url = `${process.env.NEXT_PUBLIC_PROJECT_URL}/image?path=${path}`;
     const link = document.createElement("a");
 
     const file = new Blob([url], { type: "text/plain" });

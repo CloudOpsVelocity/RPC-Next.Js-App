@@ -7,8 +7,10 @@ import {
   NextCarouselButton,
   PrevCarouselButton,
 } from "@/app/images/commonSvgs";
+import { useMediaQuery } from "@mantine/hooks";
 
 const MainCarousel = ({ children }: { children: React.ReactNode }) => {
+  const isMobile = useMediaQuery("(max-width: 750px)");
   return (
     <Carousel
       nextControlIcon={<NextCarouselButton />}
@@ -19,7 +21,8 @@ const MainCarousel = ({ children }: { children: React.ReactNode }) => {
       slideSize={{ base: "100%", sm: "50%", md: "31%" }}
       slideGap={{ sm: "md", md: "72px" }}
       align="start"
-      px={100}
+      px={isMobile ? 5 : 100}
+
       //orientation="horizontal"
     >
       {children}

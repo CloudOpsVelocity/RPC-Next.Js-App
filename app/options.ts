@@ -53,10 +53,13 @@ export const options: NextAuthOptions = {
   },
   session: {
     strategy: "jwt",
+    maxAge: 1000 * 24 * 60 * 60,
   },
   jwt: {
     secret: process.env.NEXTAUTH_SECRET,
+    maxAge: 1000 * 24 * 60 * 60,
   },
+
   callbacks: {
     async jwt({ token, user, trigger, session }) {
       if (trigger === "update") {

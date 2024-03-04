@@ -67,18 +67,22 @@ export function generatePropertyOverViewData(
       ];
 
       if (cg === "R") {
+        propertyDetails.splice(2, 2);
+        propertyDetails.splice(3, 0, {
+          title: "Available For",
+          value: data.availablityStatus,
+          Icon: Status,
+        });
+
         if (availablityStatus === "R") {
           // For Rent, Ready to Move
-          propertyDetails
-            .push
-            // Add Rent, Ready to Move specific details
-            ();
+          // propertyDetails.push();
         } else if (availablityStatus === "U") {
           // For Rent, Under Construction
-          propertyDetails
-            .push
-            // Add Rent, Under Construction specific details
-            ();
+          // propertyDetails
+          //   .push
+          //   // Add Rent, Under Construction specific details
+          //   ();
         }
       } else if (cg === "S") {
         // For Sale
@@ -271,7 +275,7 @@ export function generatePropertyOverViewData(
               : "Ready to Move",
           Icon: Status,
         },
-        { title: "Property Facing", value: data.phaseName, Icon: Compass },
+        { title: "Property Facing", value: data.facingName, Icon: Compass },
         {
           title: "Plot Area",
           value: `${data.plotArea} sq.ft`,
@@ -286,6 +290,11 @@ export function generatePropertyOverViewData(
           title: "Carpet Area",
           value: `${data.ca} sq.ft`,
           Icon: TotalLandArea,
+        },
+        {
+          title: "Flooring Type",
+          value: `${data.flooringType} sq.ft`,
+          Icon: Marble,
         },
 
         {

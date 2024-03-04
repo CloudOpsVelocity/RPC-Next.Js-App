@@ -2,6 +2,8 @@
 import { projectprops } from "@/app/data/projectDetails";
 import Button from "@/app/elements/button";
 import {
+  AgreementDuration,
+  AvailableFor,
   Balcony,
   Bathrooms,
   BedRooms,
@@ -14,10 +16,12 @@ import {
   Furnishing,
   IdIcon,
   Marble,
+  NoticeMonth,
   OpenBike,
   Others,
   OwnerShip,
   ParkingIcon,
+  PetFreindly,
   PropertyAvailable,
   SecurityIcon,
   StartDate,
@@ -32,6 +36,7 @@ import PropertyHeading from "./heading";
 import { Main } from "@/app/validations/property";
 import { formatDateDDMMYYYY } from "@/app/utils/date";
 import { generatePropertyDetails } from "@/app/data/property";
+import { map } from "leaflet";
 const style = {
   card: "mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]",
   heading: {
@@ -70,6 +75,13 @@ export default function RoomDetails({ data }: { data: Main }) {
             value={data.nobt}
             className={style.card}
           />
+          <RoomBasicDetails
+            key="launchDate"
+            icon={<BedRooms />}
+            title="Bedrooms"
+            value={data?.bhkName?.split(" ")[0]}
+            className={style.card}
+          />
 
           <RoomBasicDetails
             key="landArea"
@@ -96,71 +108,83 @@ export default function RoomDetails({ data }: { data: Main }) {
       </div>
       <Parking {...data} />
       <OtherDetails
-        af={data.availableFrom}
-        status={
-          data.availablityStatus == "U" ? "Under Construction" : "Ready to Move"
-        }
-        ft={data.flooringType}
-        ownershipName={data.ownershipName}
-        possassionDate={data.possassionDate}
-        age={data.ageofBuilding}
+        // af={data.availableFrom}
+        // status={
+        //   data.availablityStatus == "U" ? "Under Construction" : "Ready to Move"
+        // }
+        // ft={data.flooringType}
+        // ownershipName={data.ownershipName}
+        // possassionDate={data.possassionDate}
+        // age={data.ageofBuilding}
+        // agreement={data.agrementduration}
+        // availfor={data.availableFrom}
+        // pet={"Pet Are Not Allowed"}
+        {...data}
       />
     </>
   );
 }
 
 const Parking = ({ noocp, noobp, noccp, nocbp }: any) => {
+  const isAvail =
+    [noocp, noobp, noccp, nocbp].filter((i) => i !== undefined).length > 0;
   return (
-    <div
-      className="w-[90%] mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] px-[53px] py-[39px]"
-      id="propertyDetails "
-    >
-      <h1 className={style.heading.h1}>Parking</h1>
+    isAvail && (
+      <div
+        className="w-[90%] mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] px-[53px] py-[39px]"
+        id="propertyDetails "
+      >
+        <h1 className={style.heading.h1}>Parking</h1>
 
-      <p className={style.heading.p}>Parkings details include area and other</p>
+        <p className={style.heading.p}>
+          Parkings details include area and other
+        </p>
 
-      <div className="flex justify-start items-start flex-wrap   ">
-        <RoomBasicDetails
-          key="launchDate"
-          icon={<Car />}
-          title="Open Car Parking"
-          value={noocp}
-          className={style.card}
-        />
-        <RoomBasicDetails
-          key="possessionDate"
-          icon={<ParkingIcon />}
-          title="Covered Car Parking"
-          value={noobp}
-          className={style.card}
-        />
-        <RoomBasicDetails
-          key="landArea"
-          icon={<OpenBike />}
-          title="Open Bike Parking"
-          value={noccp}
-          className={style.card}
-        />
-        <RoomBasicDetails
-          key="reraStatus"
-          icon={<CloseBike />}
-          title="Covered Bike Parking"
-          value={nocbp}
-          className={style.card}
-        />
+        <div className="flex justify-start items-start flex-wrap   ">
+          <RoomBasicDetails
+            key="launchDate"
+            icon={<Car />}
+            title="Open Car Parking"
+            value={noocp}
+            className={style.card}
+          />
+          <RoomBasicDetails
+            key="possessionDate"
+            icon={<ParkingIcon />}
+            title="Covered Car Parking"
+            value={noobp}
+            className={style.card}
+          />
+          <RoomBasicDetails
+            key="landArea"
+            icon={<OpenBike />}
+            title="Open Bike Parking"
+            value={noccp}
+            className={style.card}
+          />
+          <RoomBasicDetails
+            key="reraStatus"
+            icon={<CloseBike />}
+            title="Covered Bike Parking"
+            value={nocbp}
+            className={style.card}
+          />
+        </div>
       </div>
-    </div>
+    )
   );
 };
 const OtherDetails = ({
-  af,
-  status,
-  ft,
   ownershipName,
   possassionDate,
-  age,
-}: any) => {
-  console.log(status);
+  ageofBuilding,
+  availableFrom,
+  flooringType,
+  availablityStatus,
+  agrementduration,
+  cg,
+  noticemonth,
+}: Main) => {
   return (
     <div
       className="w-[90%] mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] px-[53px] py-[39px]"
@@ -173,6 +197,22 @@ const OtherDetails = ({
       </p>
 
       <div className="flex justify-start items-start flex-wrap   w-full">
+        {cg === "R" && (
+          <RoomBasicDetails
+            key="launchDate"
+            icon={<NoticeMonth />}
+            title="Notice Month"
+            value={noticemonth}
+            className={style.card}
+          />
+        )}
+        <RoomBasicDetails
+          key="launchDate"
+          icon={<OwnerShip />}
+          title="Ownership"
+          value={ownershipName}
+          className={style.card}
+        />
         <RoomBasicDetails
           key="launchDate"
           icon={<OwnerShip />}
@@ -184,23 +224,25 @@ const OtherDetails = ({
           key="possessionDate"
           icon={<Status />}
           title="Availability Status"
-          value={status}
+          value={
+            availablityStatus == "R" ? "Ready to Move" : "Under Construction"
+          }
           className={style.card}
         />
         <RoomBasicDetails
           key="landArea"
           icon={<StartDate />}
           title="Available From"
-          value={formatDateDDMMYYYY(af)}
+          value={formatDateDDMMYYYY(availableFrom)}
           className={style.card}
         />
 
-        {status === "Ready to Move" ? (
+        {availablityStatus === "R" ? (
           <RoomBasicDetails
             key="reraStatus"
             icon={<FlatIcon />}
             title="Age of Property"
-            value={age}
+            value={ageofBuilding}
             className={style.card}
           />
         ) : (
@@ -217,9 +259,34 @@ const OtherDetails = ({
           key="reraStatus"
           icon={<Marble />}
           title="Type of Flooring"
-          value={ft}
+          value={flooringType}
           className={style.card}
         />
+        {cg === "R" && (
+          <>
+            <RoomBasicDetails
+              key="reraStatus"
+              icon={<AgreementDuration />}
+              title="Agreement Duration"
+              value={agrementduration}
+              className={style.card}
+            />
+            <RoomBasicDetails
+              key="reraStatus"
+              icon={<AvailableFor />}
+              title="Available for"
+              value={"Humans"}
+              className={style.card}
+            />
+            <RoomBasicDetails
+              key="reraStatus"
+              icon={<PetFreindly />}
+              title="Pet Friendly"
+              value={"Pets Are Not Allowed"}
+              className={style.card}
+            />
+          </>
+        )}
       </div>
     </div>
   );

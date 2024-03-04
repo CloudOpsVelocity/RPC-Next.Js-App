@@ -136,8 +136,8 @@ const LeafMap: React.FC<{
                       }))
                       .sort(
                         (a: any, b: any) =>
-                          Number(a.distance.split("")[0]) -
-                          Number(b.distance.split("")[0])
+                          Number(a.distance?.split("")[0]) -
+                          Number(b.distance?.split("")[0])
                       )
                       .map((location: any, index: number) => (
                         <LocationList

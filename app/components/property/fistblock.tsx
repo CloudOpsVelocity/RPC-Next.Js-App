@@ -83,7 +83,8 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails }) => {
             <div className=" w-full md:w-[60%]">
               <div className={`ml-[2%] mt-8`}>
                 <h3 className="text-[24px] lg:text-[32px] font-[700] text-[#00487C] uppercase ">
-                  {projectDetails.bhkName} {projectDetails.propTypeName} In{" "}
+                  {projectDetails.bhkName} {projectDetails.propTypeName} FOR{" "}
+                  {projectDetails.cg === "S" ? " Sell" : " Rent"} In{" "}
                   {projectDetails.ltName}
                 </h3>
                 <p className="text-[#001F35] text-2xl not-italic font-semibold leading-[normal] mt-1">
