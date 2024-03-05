@@ -9,7 +9,7 @@ import { useAtom, useSetAtom } from "jotai";
 import { usePathname } from "next/navigation";
 import { useQueryStates, parseAsString, parseAsInteger } from "nuqs";
 import { useState } from "react";
-import { useInfiniteQuery, useQuery } from "react-query";
+import { useInfiniteQuery } from "react-query";
 const paramsInit = {
   projStatus: parseAsString,
   localities: parseAsString,
@@ -27,9 +27,10 @@ const paramsInit = {
   maxPrice: parseAsInteger,
   city: parseAsString,
 };
-export default function useSearchFilters() {
+export default function useSearchFilters(
+  input?: "project" | "owner" | "agent"
+) {
   const path = usePathname();
-
   const [filters, setFilters] = useAtom(searachFilterAtom);
   const setAppliedFilters = useSetAtom(appliedFiltersParams);
   const [params, setParams] = useQueryStates(paramsInit, {
@@ -163,10 +164,14 @@ export default function useSearchFilters() {
     isLoading,
     hasPreviousPage,
   } = useInfiniteQuery({
-    queryKey: ["srptest" + convertToQueryParams(params as any)],
+    queryKey: ["srptest" + convertToQueryParams(params as any) + input],
 
     queryFn: ({ pageParam = 0 }) =>
-      getFilteredData(convertToQueryParams(params as any), pageParam),
+      getFilteredData(
+        convertToQueryParams(params as any),
+        pageParam,
+        input === undefined ? "project" : input
+      ),
 
     getNextPageParam: (lastPage, allPages) => {
       const nextPage = allPages.length;
@@ -175,7 +180,9 @@ export default function useSearchFilters() {
       }
       return nextPage;
     },
-    enabled: path === "/search",
+    enabled:
+      ["/search", "/search/listing"].includes(path) && input !== undefined,
+
     cacheTime: 300000,
     staleTime: 30000,
   });
@@ -224,11 +231,17 @@ export default function useSearchFilters() {
 
 const getFilteredData = async (
   query: string,
-  page: number
+  page: number,
+  type: "project" | "owner" | "agent"
 ): Promise<Search[]> => {
-  const url = `${
-    process.env.NEXT_PUBLIC_BACKEND_URL
-  }/srp/searchproj?page=${page}${query && `&${query}`}`;
+  const url =
+    type === "project"
+      ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=${page}${
+          query && `&${query}`
+        }`
+      : `${
+          process.env.NEXT_PUBLIC_BACKEND_URL
+        }/srp/prop-search?city=9&page=${page}${query && `&${query}`}`;
   try {
     const response = await fetch(url);
     const data = await response.json();

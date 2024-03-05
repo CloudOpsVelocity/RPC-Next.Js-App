@@ -21,7 +21,7 @@ const LeftSideBlock = () => {
 
   const {
     searchProps: { isLoading, data, hasNextPage, fetchMoreData },
-  } = useSearchFilters();
+  } = useSearchFilters("owner");
   const containerRef = useRef<HTMLDivElement>(null);
 
   // const { ref, entry } = useIntersection({
@@ -70,10 +70,10 @@ const LeftSideBlock = () => {
             className=" p-[2%]  overflow-y-auto  h-screen mt-2"
             h={700}
           >
-            {projectsData != undefined &&
-            projectsData.length != undefined &&
-            projectsData.length > 0 ? (
-              projectsData.map((eachOne, index) => {
+            {data != undefined &&
+            data.length != undefined &&
+            data.length > 0 ? (
+              data.map((eachOne, index) => {
                 return (
                   <ProjectDetailsCard
                     key={index}
@@ -96,10 +96,10 @@ const LeftSideBlock = () => {
             className=" p-[2%]  overflow-y-auto  h-screen mt-2"
             h={700}
           >
-            {projectsData != undefined &&
-            projectsData.length != undefined &&
-            projectsData.length > 0 ? (
-              projectsData.map((eachOne, index) => {
+            {data != undefined &&
+            data.length != undefined &&
+            data.length > 0 ? (
+              data.map((eachOne, index) => {
                 return (
                   <ProjectDetailsCard
                     key={index}

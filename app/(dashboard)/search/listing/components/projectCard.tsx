@@ -18,26 +18,26 @@ import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import { formatCurrency } from "@/app/utils/numbers";
 import { useSetAtom } from "jotai";
 import { listingSearchAtom } from "@/app/store/search/map";
+import { Main } from "@/app/validations/property/search";
 
 type Props = {
   type: any;
 } & Search;
 
 const ProjectDetailsCard = ({
-  type,
-  projName,
-  minPrice,
-  maxPrice,
-  launchDate,
-  possassionDate,
-  agentListing,
-  ownerListing,
-  coverUrl,
-  postedDate,
+  category,
+  localityName,
+  postedBy,
+  price,
   projIdEnc,
-  propTypes,
-  lat,
-  lang,
+  propName,
+  propStatus,
+  propTypeName,
+  propertyIdEnc,
+  bhkName,
+  ca,
+  pa,
+  sba,
 }: any) => {
   const { data: session } = useSession();
 
@@ -82,7 +82,7 @@ const ProjectDetailsCard = ({
         <div className="md:max-w-[320px] max-w-[150px] flex justify-center items-center w-full flex-col h-fit md:h-full    relative">
           <div className="relative">
             <Image
-              src={coverUrl}
+              src={"/images/cover.png"}
               width={320}
               height={174}
               alt="conver"
@@ -90,7 +90,7 @@ const ProjectDetailsCard = ({
             />
             <p className="absolute text-[#FFF] text-[8px] md:text-[12px] bottom-2 left-5 md:mt-[-60px]  md:left-[10px] gap-[4px] z-10 flex justify-center rounded-[20px] items-center p-[7px] font-[500] rtm ">
               {" "}
-              Ready to move
+              {propStatus}
             </p>
           </div>
 
@@ -101,62 +101,36 @@ const ProjectDetailsCard = ({
             <p className="text-[#202020] text-[10px] md:text-[16px] font-[400]">
               Date:{" "}
               <span className=" font-[600]">
-                {formatDateDDMMYYYY(postedDate)}
+                {formatDateDDMMYYYY("Wed Jan 30 00:00:00 IST 2030")}
               </span>
             </p>
           </div>
         </div>
         <div className="w-full px-[2%]">
           <div>
-            {type == "proj" ? (
-              <p className="text-[#001F35] text-[15px] not-italic font-semibold leading-[normal]">
-                {projName}
-              </p>
-            ) : (
-              <p className="text-[#001F35] text-[12px]  md:text-[20px] font-[600]   md:mb-0">
-                3BHK Apartment for Sell in Kadugodi,{" "}
-              </p>
-            )}
+            <p className="text-[#001F35] text-[12px]  md:text-[20px] font-[600]   md:mb-0">
+              {bhkName} {propTypeName} for {category} in {localityName},{" "}
+            </p>
             <p className=" text-[#148B16] text-[12px] md:text-base not-italic font-semibold mb-[19px]">
-              Marthapathi Grand Field
+              {localityName}
             </p>
           </div>
           <div className="  justify-between items-start  flex ">
             <div className=" flex  items-start flex-col  ">
               <div>
-                {type == "proj" && (
-                  <p className="text-[#148B16] text-[12px] md:text-[15px] not-italic font-extrabold leading-[normal]">
-                    {formatCurrency(Number(minPrice))} -{" "}
-                    {formatCurrency(Number(maxPrice))}
-                  </p>
-                )}
-                {type == "proj" && (
-                  <p className="text-[#333] text-[12px] md:text-[16px] font-[500]">
-                    Possession Date:{" "}
-                    <span className=" font-[600]">
-                      {formatDateDDMMYYYY(possassionDate)}
-                    </span>
-                  </p>
-                )}
+                <p className="text-[#333] text-[12px] md:text-[16px] font-[500]">
+                  Super Builtup Area:{" "}
+                  <span className=" font-[600]">{sba} sq.ft</span>
+                </p>
 
-                {type != "proj" && (
-                  <p className="text-[#333] text-[12px] md:text-[16px] font-[500]">
-                    Super Builtup Area:{" "}
-                    <span className=" font-[600]">2,617 sq.ft</span>
-                  </p>
-                )}
-
-                {type != "proj" && (
-                  <p className="text-[#333] text-[12px] md:text-[16px] font-[500]">
-                    Carpet Area:{" "}
-                    <span className=" font-[600]"> 2,617 sq.ft </span>₹ 9626/
-                    sqft
-                  </p>
-                )}
+                <p className="text-[#333] text-[12px] md:text-[16px] font-[500]">
+                  Carpet Area: <span className=" font-[600]"> {ca} sq.ft </span>
+                  ₹ 9626/ sqft
+                </p>
                 <p className="text-[#333] text-[12px] md:text-[16px] font-[500]">
                   Available From:{" "}
                   <span className=" font-[600]">
-                    {formatDateDDMMYYYY(launchDate)}
+                    {formatDateDDMMYYYY("Wed Jan 30 00:00:00 IST 2030")}
                   </span>
                 </p>
               </div>
@@ -169,7 +143,7 @@ const ProjectDetailsCard = ({
               <p className="text-[#202020] text-[12px] md:text-[16px] font-[400]">
                 Date:{" "}
                 <span className=" font-[600]">
-                  {formatDateDDMMYYYY(postedDate)}
+                  {formatDateDDMMYYYY("Wed Jan 30 00:00:00 IST 2030")}
                 </span>
               </p>
             </div>
@@ -179,20 +153,20 @@ const ProjectDetailsCard = ({
           <div className="flex justify-center items-center gap-2 px-2.5 py-2 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.05)_inset] rounded-[5px] border-[0.5px] border-solid border-[#CAE9FF] bg-white">
             <Wallet />{" "}
             <span className="text-[#233333] text-xl not-italic font-semibold">
-              ₹ 2.36 Cr
+              {formatCurrency(price)}
             </span>
           </div>
           <button
             className=" justify-center items-center gap-1 p-2 border rounded-[21px] border-solid border-[#0094FF] text-[#202020] text-[12px] not-italic font-semibold leading-[normal] mb-1 md:inline-flex hidden bg-white"
-            onClick={() =>
-              setSelectedSearch({
-                agentListing,
-                ownerListing,
-                projName,
-                lat,
-                lang,
-              })
-            }
+            // onClick={() =>
+            //   setSelectedSearch({
+            //     agentListing,
+            //     ownerListing,
+            //     projName,
+            //     lat,
+            //     lang,
+            //   })
+            // }
           >
             View on Map <GradientLocation />
           </button>
@@ -218,11 +192,12 @@ const ProjectDetailsCard = ({
       </div>
       <MobileDetails
         projIdEnc={projIdEnc}
-        agentListing={agentListing}
-        ownerListing={ownerListing}
-        projName={projName}
-        lat={lat}
-        lang={lang}
+        agentListing={10}
+        ownerListing={10}
+        projName={propName}
+        price={price}
+        // lat={lat}
+        // lang={lang}
       />
     </div>
   );
@@ -237,6 +212,7 @@ const MobileDetails = ({
   projName,
   lat,
   lang,
+  price,
 }: any) => {
   const [, { open }] = useReqCallPopup();
   const { data: session } = useSession();
@@ -312,7 +288,7 @@ const MobileDetails = ({
         </button>{" "}
         <div className="flex justify-center items-center gap-2 px-2 py-2 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.05)_inset] rounded-[5px] border-[0.5px] border-solid border-[#CAE9FF] bg-white ">
           <span className="text-[#233333] text-xs not-italic font-semibold">
-            ₹ 2.36 Cr
+            ₹ {price} Cr
           </span>
         </div>
       </div>

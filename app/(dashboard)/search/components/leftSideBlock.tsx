@@ -21,7 +21,7 @@ const LeftSideBlock = () => {
   const [activeTab, setActiveTab] = useState<string | null>("proj");
   const {
     searchProps: { isLoading, data, hasNextPage, fetchMoreData },
-  } = useSearchFilters();
+  } = useSearchFilters("project");
   const containerRef = useRef<HTMLDivElement>(null);
 
   const { ref, entry } = useIntersection({
