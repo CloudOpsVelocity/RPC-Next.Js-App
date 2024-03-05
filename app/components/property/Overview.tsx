@@ -1,24 +1,5 @@
 "use client";
 import React from "react";
-import PriceBag, {
-  Compass,
-  EndDate,
-  Furnishing,
-  Locality,
-  Marble,
-  Others,
-  OwnerShip,
-  PhaseIcon,
-  Phone,
-  ProjectStatus,
-  PropertyAvailable,
-  PropertyBuilding,
-  RatingStar,
-  StartDate,
-  Status,
-  TotalLandArea,
-  WhatsAppButton,
-} from "@/app/images/commonSvgs";
 import ProjBasicDetails from "@/app/components/project/projBasicDetails";
 import { Main } from "@/app/validations/property/index";
 import { generatePropertyOverViewData } from "@/app/data/property/overview";
@@ -28,7 +9,6 @@ import ShortList from "./actions/shortList";
 import PropertyOverviewBanner from "./OverViewBanner";
 
 export default function PropertyOverView({ data }: { data: Main }) {
-  console.log(data.projIdEnc);
   return (
     <div
       className="pt-[2%] w-[90%] rounded-[24px] shadow-md mb-[5%] mt-[2%] bg-gradient-to-r from-[#F6F6F6] /0 via-[#FFF] /45 to-[#FEFFFF]/100 "
@@ -49,10 +29,6 @@ export default function PropertyOverView({ data }: { data: Main }) {
         </div>
         <div className="flex justify-center items-end flex-col">
           <Ratings slug={data.projIdEnc} />
-          {/* <p className="text-[20px] flex justify-start items-start lg:text-[24px] text-[#4D6677] font-[700] whitespace-nowrap">
-            4.0 Ratings
-            <RatingStar fill="#FFD600" className="h-[32px] w-[32px]" />
-          </p> */}
           <p className="text-[20px] lg:text-[24px] text-[#0073C6] font-[600] decoration-dashed underline whitespace-nowrap ">
             Call now
           </p>
@@ -89,7 +65,7 @@ export default function PropertyOverView({ data }: { data: Main }) {
           <ShortList />
         </div>
       </div>
-      <PropertyOverviewBanner maxPrice={10} minPrice={10} />
+      <PropertyOverviewBanner price={data.price} otherPrice={data.otherPrice} />
     </div>
   );
 }

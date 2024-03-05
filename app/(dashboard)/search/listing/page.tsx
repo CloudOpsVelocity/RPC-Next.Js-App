@@ -5,8 +5,7 @@ import { LeftSideBlock } from "./components/leftSideBlock";
 import { RightSideBlock } from "./components/rightSideBlock";
 import Footer from "@/app/components/layouts/primary/footer";
 import { Toaster } from "react-hot-toast";
-type Props = { searchParams: {} };
-const SearchingPage = ({ searchParams }: Props) => {
+const SearchingPage = () => {
   return (
     <div className="w-full flex justify-center items-center flex-col ">
       <Header />

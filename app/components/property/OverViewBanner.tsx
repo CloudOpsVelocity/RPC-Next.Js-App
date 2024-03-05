@@ -13,15 +13,19 @@ import { useSession } from "next-auth/react";
 import S from "@/app/styles/Req.module.css";
 import RequestCallBackModal from "../molecules/popups/req";
 import { formatCurrency } from "@/app/utils/numbers";
+import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
+import { useParams } from "next/navigation";
+import { Main } from "@/app/validations/property";
 export default function PropertyOverviewBanner({
-  minPrice,
-  maxPrice,
+  price,
+  otherPrice,
 }: {
-  minPrice: number;
-  maxPrice: number;
+  price: number;
+  otherPrice: Main["otherPrice"];
 }) {
-  const [opened, { open, close }] = useDisclosure(false);
+  const [opened, { open, close }] = useReqCallPopup();
   const [collapsed, { toggle }] = useDisclosure(false);
+  const { slug } = useParams<{ slug: string }>();
 
   return (
     <>
@@ -33,7 +37,7 @@ export default function PropertyOverviewBanner({
             <p className="text-[#212C33] text-[24px] lg:text-[40px] font-[600]">
               PRICE{"  "}
               <span className="text-[#00487C] text-[24px] md:text-[32px] lg:text-[40px] whitespace-nowrap font-[700]">
-                {formatCurrency(minPrice)},{" "}
+                {formatCurrency(price)},{" "}
                 <span className="text-[#545353] text-[32px] not-italic font-medium leading-[normal]">
                   ₹ 1824 / price sq.ft
                 </span>
@@ -43,7 +47,7 @@ export default function PropertyOverviewBanner({
               icon={<Phone />}
               title="Request a Callback"
               buttonClass=" text-[#FFF] text-[16px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[6px]  "
-              onChange={open}
+              onChange={() => open("prop", slug)}
             />
           </div>
           <div className="flex justify-center items-center flex-col">
@@ -64,13 +68,20 @@ export default function PropertyOverviewBanner({
         <RequestCallBackModal close={close} opened={opened} builderId={1112} />
       </div>
       <Collapse in={collapsed}>
-        <PriceBreakUp />
+        <PriceBreakUp otherPrice={otherPrice} />
       </Collapse>
     </>
   );
 }
 
-const PriceBreakUp = () => {
+const PriceBreakUp = ({ otherPrice }: { otherPrice: Main["otherPrice"] }) => {
+  const filterOtherDetails = Object.keys(otherPrice).filter(
+    (item) => !["otherCharge", "price"].includes(item)
+  );
+  const sum = filterOtherDetails.reduce(
+    (a, b) => Number(a) + Number(otherPrice[b] || "0"),
+    0
+  );
   return (
     <>
       <div className="max-w-[90%] mx-auto p-6 bg-white rounded-lg shadow my-10">
@@ -83,7 +94,7 @@ const PriceBreakUp = () => {
           </h3>
           <li className="flex w-[771px]  items-start gap-[26px] text-[#4D6677] text-2xl not-italic font-bold leading-[23.784px] border-dashed border-b pb-5">
             <div>Price/SQ.FT</div>{" "}
-            <div className="font-semibold">₹ 72,52,050</div>
+            <div className="font-semibold">₹ {otherPrice.price}</div>
           </li>
         </div>
         <div className="w-full grid grid-cols-2 justify-between items-center">
@@ -91,28 +102,21 @@ const PriceBreakUp = () => {
             <h3 className="text-[#034AB6] text-[28px] not-italic font-bold leading-[normal] underline uppercase">
               applicable charges
             </h3>
-            <li className="flex max-w-[771px]  items-start gap-[26px] text-[#4D6677]  text-2xl  font-bold leading-[23.784px]  border-b border-[#00000080] pb-5">
-              <div>Price/SQ.FT</div>{" "}
-              <div className="font-semibold">₹ 72,52,050</div>
-            </li>
-            <li className="flex max-w-[771px]  items-start gap-[26px] text-[#4D6677]  text-2xl  font-bold leading-[23.784px]  border-b border-[#00000080] pb-5">
-              <div>Price/SQ.FT</div>{" "}
-              <div className="font-semibold">₹ 72,52,050</div>
-            </li>
-            <li className="flex max-w-[771px]  items-start gap-[26px] text-[#4D6677]  text-2xl  font-bold leading-[23.784px]  border-b border-[#00000080] pb-5">
-              <div>Price/SQ.FT</div>{" "}
-              <div className="font-semibold">₹ 72,52,050</div>
-            </li>
-            <li className="flex max-w-[771px]  items-start gap-[26px] text-[#4D6677]  text-2xl  font-bold leading-[23.784px]  border-b border-[#00000080] pb-5">
-              <div>Price/SQ.FT</div>{" "}
-              <div className="font-semibold">₹ 72,52,050</div>
-            </li>
-            <li className="flex max-w-[771px]  items-start gap-[26px] text-[#4D6677]  text-2xl  font-bold leading-[23.784px]  border-b border-[#00000080] pb-5">
-              <div>Price/SQ.FT</div>{" "}
-              <div className="font-semibold">₹ 72,52,050</div>
-            </li>
+            {filterOtherDetails.map((key, i) => {
+              return (
+                <li
+                  key={i}
+                  className="flex max-w-[771px]  items-start gap-[26px] text-[#4D6677]  text-2xl  font-bold leading-[23.784px]  border-b border-[#00000080] pb-5"
+                >
+                  <div>{key}</div>{" "}
+                  <div className="font-semibold">
+                    ₹ {otherPrice[key] as string}
+                  </div>
+                </li>
+              );
+            })}
           </div>
-          <SideCard />
+          <SideCard price={sum} />
         </div>
         <div className="w-full grid grid-cols-2 justify-between items-center">
           <div className=" border-t border-gray-400 mt-4 space-y-4 py-8 ">
@@ -120,34 +124,18 @@ const PriceBreakUp = () => {
               Other charges
             </h3>
             <li className="flex max-w-[771px]  items-start gap-[26px] text-[#4D6677]  text-2xl  font-bold leading-[23.784px]  border-b-2 border-black pb-5">
-              <div>Price/SQ.FT</div>{" "}
-              <div className="font-semibold">₹ 72,52,050</div>
-            </li>
-            <li className="flex max-w-[771px]  items-start gap-[26px] text-[#4D6677]  text-2xl  font-bold leading-[23.784px]  border-b-2 border-black pb-5">
-              <div>Price/SQ.FT</div>{" "}
-              <div className="font-semibold">₹ 72,52,050</div>
-            </li>
-            <li className="flex max-w-[771px]  items-start gap-[26px] text-[#4D6677]  text-2xl  font-bold leading-[23.784px]  border-b-2 border-black pb-5">
-              <div>Price/SQ.FT</div>{" "}
-              <div className="font-semibold">₹ 72,52,050</div>
-            </li>
-            <li className="flex max-w-[771px]  items-start gap-[26px] text-[#4D6677]  text-2xl  font-bold leading-[23.784px]  border-b-2 border-black pb-5">
-              <div>Price/SQ.FT</div>{" "}
-              <div className="font-semibold">₹ 72,52,050</div>
-            </li>
-            <li className="flex max-w-[771px]  items-start gap-[26px] text-[#4D6677]  text-2xl  font-bold leading-[23.784px]  border-b-2 border-black pb-5">
-              <div>Price/SQ.FT</div>{" "}
-              <div className="font-semibold">₹ 72,52,050</div>
+              <div>Other Charges</div>{" "}
+              <div className="font-semibold">₹ {otherPrice.otherCharge}</div>
             </li>
           </div>
-          <OtherSideCard />
+          <OtherSideCard price={sum + Number(otherPrice.price)} />
         </div>
       </div>
     </>
   );
 };
 
-const SideCard = () => {
+const SideCard = ({ price }: { price: number }) => {
   return (
     <div
       className=" text-[#4D6677] flex w-96 h-[197px] justify-center items-center shrink-0 pt-7 pb-[27px] px-[27px] border-[color:var(--White-1,#F1F1F1)] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[20px] border-[0.6px] border-solid;
@@ -158,14 +146,13 @@ const SideCard = () => {
         Charges Applicable&rdquo; is
       </p>
       <div className="mt-2 flex justify-center items-baseline text-[color:var(--newly-Added,#00ADE3)] text-[26px] not-italic font-bold leading-[normal] underline">
-        <span className="text-lg font-semibold">₹</span>
-        <span className="text-3xl font-bold">2&ldquo;05&ldquo;600</span>
+        <span className="text-3xl font-bold">₹ {price}</span>
       </div>
     </div>
   );
 };
 
-const OtherSideCard = () => {
+const OtherSideCard = ({ price }: { price: number }) => {
   return (
     <div
       className=" text-[#4D6677] flex w-96 h-[197px] justify-center items-center shrink-0 pt-7 pb-[27px] px-[27px] border-[color:var(--White-1,#F1F1F1)] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[20px] border-[0.6px] border-solid;
@@ -176,7 +163,7 @@ const OtherSideCard = () => {
         Charges Applicable&rdquo; is
       </p>
       <div className="text-[#148B16] text-[32px] not-italic font-semibold leading-[normal]">
-        <span className="text-3xl font-bold mt-1">₹ 8,85,6000</span>
+        <span className="text-3xl font-bold mt-1">₹ {price}</span>
       </div>
     </div>
   );

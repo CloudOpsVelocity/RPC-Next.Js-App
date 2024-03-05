@@ -52,11 +52,7 @@ export interface Main {
 }
 
 export interface OtherPrice {
-  price: string;
-  otherCharge: string;
-  elctCharge: string;
-  waterCharge: string;
-  maintananceChargess: string;
+  [key: string]: string;
 }
 
 export interface ProjMedia {

@@ -1,14 +1,9 @@
 import useBuilder from "@/app/hooks/useBuilder";
-import PriceBag, {
-  Phone,
-  PopupCrossIcon,
-  ShearIcon,
-  WhatsAppButton,
-} from "@/app/images/commonSvgs";
+import { Phone } from "@/app/images/commonSvgs";
 import N from "@/app/styles/Numinput.module.css";
 import React, { useState } from "react";
-import { useDisclosure, useMediaQuery, useSetState } from "@mantine/hooks";
-import { Collapse, Modal, NumberInput, TextInput, em } from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
+import { Modal, NumberInput, TextInput, em } from "@mantine/core";
 import { useSession } from "next-auth/react";
 import S from "@/app/styles/Req.module.css";
 import { useForm, yupResolver } from "@mantine/form";
@@ -16,8 +11,7 @@ import { reqSchema } from "@/app/validations/project";
 import { Button as B } from "@mantine/core";
 import { addContact, sendContact } from "@/app/utils/api/actions/contact";
 import { useParams } from "next/navigation";
-import { formatCurrency } from "@/app/utils/numbers";
-import { popupStateAtom, useReqCallPopup } from "@/app/hooks/useReqCallPop";
+import { popupStateAtom } from "@/app/hooks/useReqCallPop";
 import { useShortlistAndCompare } from "@/app/hooks/storage";
 import { useAtomValue } from "jotai";
 import Image from "next/image";
@@ -131,12 +125,14 @@ const LoggedInUserForm = ({ close, status, setStatus, name }: any) => {
     validate: yupResolver(reqSchema),
   });
   const onSubmit = async () => {
+    const propName = popupState.type === "prop" ? "propIdEnc" : "projIdEnc";
+    console.log(propName, popupState.type);
     setStatus("pending");
     const data = {
       name: session?.user?.name,
       email: session?.user?.email,
       mobile: session?.user?.userName,
-      projIdEnc: popupState.projectID ?? "",
+      [propName]: popupState.projectID ?? "",
       isProjContact: "Y",
       src: "searchCard",
     };

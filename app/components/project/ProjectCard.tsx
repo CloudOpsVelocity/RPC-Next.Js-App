@@ -175,7 +175,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
               icon={<Phone />}
               title="Request a Callback"
               buttonClass=" text-[#FFF] mt-[12px] text-[16px] font-[600] bg-[#0073C6] rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[6px]  "
-              onChange={() => open("card", cardData.projIdEnc)}
+              onChange={() => open("proj", cardData.projIdEnc)}
             />
           </div>
         </div>

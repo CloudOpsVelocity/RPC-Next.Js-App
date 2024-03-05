@@ -226,6 +226,7 @@ const getFilteredData = async (
   query: string,
   page: number
 ): Promise<Search[]> => {
+  console.log(query ? console.log(1) : 0);
   const url = `${
     process.env.NEXT_PUBLIC_BACKEND_URL
   }/srp/searchproj?page=${page}${query && `&${query}`}`;
@@ -235,6 +236,6 @@ const getFilteredData = async (
     return data;
   } catch (error) {
     console.error("Error fetching filtered data:", error);
-    throw error;
+    throw error; // Re-throw the error for handling further up the call stack
   }
 };
