@@ -4,6 +4,7 @@ import { addShortList } from "@/app/utils/api/actions/shortlist";
 interface Item {
   id: string;
   status: "Y" | "N";
+  source?: "proj" | "prop";
 }
 
 interface GlobalData {
@@ -73,6 +74,7 @@ export const useShortlistAndCompare = (): HookReturnValue => {
           projIdEnc: item.id,
           type: 2,
           isactive: item.status,
+          source: item.source || "proj",
         })
       ),
     toggleCompare: (item: Item) =>
@@ -81,6 +83,7 @@ export const useShortlistAndCompare = (): HookReturnValue => {
           projIdEnc: item.id,
           isactive: item.status,
           type: 3,
+          source: item.source || "proj",
         })
       ),
     pushToRequestCallbacks,

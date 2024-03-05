@@ -22,8 +22,13 @@ import PriceBag, {
 import ProjBasicDetails from "@/app/components/project/projBasicDetails";
 import { Main } from "@/app/validations/property/index";
 import { generatePropertyOverViewData } from "@/app/data/property/overview";
+import Ratings from "./Ratings";
+import CompareList from "./actions/compareList";
+import ShortList from "./actions/shortList";
+import PropertyOverviewBanner from "./OverViewBanner";
 
 export default function PropertyOverView({ data }: { data: Main }) {
+  console.log(data.projIdEnc);
   return (
     <div
       className="pt-[2%] w-[90%] rounded-[24px] shadow-md mb-[5%] mt-[2%] bg-gradient-to-r from-[#F6F6F6] /0 via-[#FFF] /45 to-[#FEFFFF]/100 "
@@ -43,6 +48,7 @@ export default function PropertyOverView({ data }: { data: Main }) {
           </p>
         </div>
         <div className="flex justify-center items-end flex-col">
+          <Ratings slug={data.projIdEnc} />
           {/* <p className="text-[20px] flex justify-start items-start lg:text-[24px] text-[#4D6677] font-[700] whitespace-nowrap">
             4.0 Ratings
             <RatingStar fill="#FFD600" className="h-[32px] w-[32px]" />
@@ -70,7 +76,7 @@ export default function PropertyOverView({ data }: { data: Main }) {
           ))}
         </div>
         <div className=" flex justify-start md:justify-end items-start md:items-end flex-col mt-[3%] md:mt-0 ">
-          <button
+          {/* <button
             // onClick={()=> addShortList(slug)}
             className="text-[20px] cursor-pointer lg:text-[24px] text-[#0073C6] font-[600] whitespace-nowrap underline decoration-dashed "
           >
@@ -78,10 +84,12 @@ export default function PropertyOverView({ data }: { data: Main }) {
           </button>
           <p className="text-[20px] cursor-pointer lg:text-[24px] text-[#0073C6] font-[600] underline whitespace-nowrap decoration-dashed ">
             Add to Shortlist
-          </p>
+          </p> */}
+          <CompareList />
+          <ShortList />
         </div>
       </div>
-      {/* <PropertyOverviewBanner maxPrice={maxPrice} minPrice={minPrice} /> */}
+      <PropertyOverviewBanner maxPrice={10} minPrice={10} />
     </div>
   );
 }

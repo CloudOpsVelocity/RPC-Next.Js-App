@@ -12,6 +12,7 @@ import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import { useShortlistAndCompare } from "@/app/hooks/storage";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import clsx from "clsx";
+import { GlobalPageType } from "@/app/validations/global";
 
 type Props = {
   type: string;
@@ -43,6 +44,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
       toggleShortlist({
         id: cardData.projIdEnc,
         status: isItemInShortlist ? "N" : "Y",
+        source: type as GlobalPageType["types"],
       });
     } else {
       openS();

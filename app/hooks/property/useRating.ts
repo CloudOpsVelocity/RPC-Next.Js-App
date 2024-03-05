@@ -18,6 +18,7 @@ export default function usePropRatings({ slug }: { slug: string }) {
     keepPreviousData: true,
     staleTime: 30000,
     cacheTime: 300000,
+    enabled: !!slug,
   });
   return { data, isLoading };
 }

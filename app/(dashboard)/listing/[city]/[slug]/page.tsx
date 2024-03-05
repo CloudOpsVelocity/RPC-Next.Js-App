@@ -1,8 +1,6 @@
 import React from "react";
 import AboutBuilder from "@/app/components/project/aboutBuilder";
 import GalleryBlock from "@/app/components/project/galleryBlock";
-import Banner from "@/app/components/project/banner";
-import Reviews from "@/app/components/project/reviews";
 import Amenties from "@/app/components/project/amenties";
 import Loans from "@/app/components/project/loans";
 import FaqWithBg from "@/app/components/project/faq";
@@ -23,6 +21,8 @@ import NearByCarousel from "@/app/components/project/NearByCarousel";
 import ProjectCarousel from "@/app/components/project/ProjectCard";
 import NearByCarouselProperty from "@/app/components/property/carousel";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
+import Reviews from "@/app/components/property/reviews";
+import Banner from "@/app/components/property/banner";
 
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
@@ -86,12 +86,12 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           <LeafMap
             lat={projData.lat}
             lang={projData.lang}
-            projName={data.bhkName}
+            projName={projData.projectName}
             projId={data.projIdEnc}
             type="prop"
           />
         )}
-        <Banner projName={title} />
+        <Banner slug={data.projIdEnc} projName={title} />
         <Loans
           type="prop"
           data={projData.banks}
@@ -101,7 +101,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         <AboutBuilder type="prop" id={projData.builderId} />
         <PropertyBanner {...projData} />
 
-        <Reviews projName={projData.projectName} />
+        <Reviews slug={data.projIdEnc} projName={projData.projectName} />
 
         <FaqWithBg data={projData.faqs} projName={projData.projectName} />
         <NearByCarouselProperty

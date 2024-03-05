@@ -4,14 +4,14 @@ type Props = {
   projIdEnc: string;
   type: number;
   isactive: string;
+  source: "proj" | "prop";
 };
 export const addShortList = async (data: Props) => {
-  console.log(data);
-
   const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/add?type=${data.type}`;
+  const propName = data.source == "proj" ? "projIdEnc" : "propIdEnc";
   try {
     const response = await axios.post(url, {
-      projIdEnc: data.projIdEnc,
+      [propName]: data.projIdEnc,
       isactive: data.isactive,
     });
     toast.success(data.isactive == "Y" ? "Property Added" : "Property Removed");
