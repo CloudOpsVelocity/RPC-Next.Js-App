@@ -43,10 +43,10 @@ export default function PropertyOverView({ data }: { data: Main }) {
           </p>
         </div>
         <div className="flex justify-center items-end flex-col">
-          <p className="text-[20px] flex justify-start items-start lg:text-[24px] text-[#4D6677] font-[700] whitespace-nowrap">
+          {/* <p className="text-[20px] flex justify-start items-start lg:text-[24px] text-[#4D6677] font-[700] whitespace-nowrap">
             4.0 Ratings
             <RatingStar fill="#FFD600" className="h-[32px] w-[32px]" />
-          </p>
+          </p> */}
           <p className="text-[20px] lg:text-[24px] text-[#0073C6] font-[600] decoration-dashed underline whitespace-nowrap ">
             Call now
           </p>

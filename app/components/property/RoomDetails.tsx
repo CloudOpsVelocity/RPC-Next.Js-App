@@ -206,13 +206,7 @@ const OtherDetails = ({
             className={style.card}
           />
         )}
-        <RoomBasicDetails
-          key="launchDate"
-          icon={<OwnerShip />}
-          title="Ownership"
-          value={ownershipName}
-          className={style.card}
-        />
+
         <RoomBasicDetails
           key="launchDate"
           icon={<OwnerShip />}

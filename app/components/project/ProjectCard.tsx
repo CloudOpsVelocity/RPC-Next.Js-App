@@ -11,6 +11,7 @@ import LoginPopup from "./modals/LoginPop";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import { useShortlistAndCompare } from "@/app/hooks/storage";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
+import clsx from "clsx";
 
 type Props = {
   type: string;
@@ -51,7 +52,10 @@ export function ProjectCard({ type, cardData }: CardProps) {
     <>
       <div
         key={cardData.projIdEnc}
-        className="border text-card-foreground min-w-[350px] bg-[#FAFAFA]  min-h-[400px] overflow-hidden  shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[14px]"
+        className={clsx(
+          "border text-card-foreground min-w-[350px]   min-h-[400px] overflow-hidden  shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[14px]",
+          type == "proj" ? "bg-[#FAFAFA] " : "bg-[#FFFEFE] pt-4"
+        )}
       >
         {type == "proj" && (
           <div className="flex space-y-1.5 p-6  px-4 pt-2 pb-3 justify-between items-center">
@@ -77,12 +81,18 @@ export function ProjectCard({ type, cardData }: CardProps) {
         <div className="px-3 pb-3">
           {type != "proj" && (
             <p className="mb-[-30px] relative z-10 p-[2px] text-[#148B16] text-[14px] font-[700] w-[40%] flex pl-[4px] justify-center items-center bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 shadow-md rounded-[18px] border-[#92B2C8] border-[0.5px] border-solid ">
-              Ready to move
+              {cardData.availablityStatus == "R"
+                ? "Ready to move"
+                : "Under Construction"}
             </p>
           )}
           <div className="relative  max-h-[212px]">
             <Image
-              src={cardData.coverUrl}
+              src={
+                type === "proj"
+                  ? cardData.coverUrl
+                  : cardData.projMedia.coverImageUrl
+              }
               alt="Sobha Dream Acres"
               className="w-full  mb-4 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] max-h-[212px]"
               width={300}
@@ -110,10 +120,12 @@ export function ProjectCard({ type, cardData }: CardProps) {
           <div className="text-sm">
             {type != "proj" && (
               <p className="text-[18px] font-[600] text-[#303030] mb-[8px] ">
-                3BHK Villa for Sale in {cardData.cityName},{" "}
+                {cardData.bhkName} {cardData.propTypeName} for{" "}
+                {cardData.cg === "R" ? "Rent" : "Sale"} in {cardData.ltName},{" "}
+                <br />
                 <span className="text-[18px] font-[700] text-[#148B16] ">
                   {" "}
-                  Rs 3.2 Lakh
+                  {formatCurrency(cardData.price)}
                 </span>{" "}
               </p>
             )}
@@ -138,17 +150,23 @@ export function ProjectCard({ type, cardData }: CardProps) {
 
             {type != "proj" && (
               <p className="text-[16px] mb-[6px] font-[600] text-[#4D6677]">
-                Available From: 12/ 02/ 2023
+                Available From: {formatDate(cardData.availableFrom)}
               </p>
             )}
 
             <p className="text-[#565D70]  not-italic font-semibold leading-[normal] tracking-[0.56px]">
-              {cardData?.city ?? "N/A"} {cardData.locality}
+              {type === "proj" && cardData?.city}
+              {cardData.locality} {cardData.address}
+              {type === "prop " &&
+                `${cardData.ltName} 
+                ${cardData.ctName} 
+                ${cardData.stateName ?? ""} 
+                ${cardData.pinCode}`}
             </p>
 
             {type != "proj" && (
               <p className="text-[16px] font-[500] text-[#4D6677]">
-                Posted by Agent
+                Posted by {cardData.postedByType === "B" ? "Builder" : "Agent"}
               </p>
             )}
             <Button

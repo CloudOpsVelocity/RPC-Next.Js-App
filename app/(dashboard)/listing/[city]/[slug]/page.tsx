@@ -19,12 +19,17 @@ import PropertyFirstBlock from "@/app/components/property/fistblock";
 import LeafMap from "@/app/components/project/map";
 import PropertyHeading from "@/app/components/property/heading";
 import { getListingDetails } from "@/app/utils/api/property";
+import NearByCarousel from "@/app/components/project/NearByCarousel";
+import ProjectCarousel from "@/app/components/project/ProjectCard";
+import NearByCarouselProperty from "@/app/components/property/carousel";
+import LoginPopup from "@/app/components/project/modals/LoginPop";
 
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
   const data = await getListingDetails(slug);
   const projData = await getProjectDetails(data.projIdEnc);
-
+  const title = `  ${data.bhkName} ${data.propTypeName} FOR 
+  ${data.cg === "S" ? " Sell" : " Rent"} In ${data.ltName}`;
   return (
     <div className="w-full">
       <div className="mt-[90px] w-full pb-[2%] flex items-center justify-center flex-col">
@@ -86,7 +91,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             type="prop"
           />
         )}
-        <Banner projName={data.bhkName} />
+        <Banner projName={title} />
         <Loans
           type="prop"
           data={projData.banks}
@@ -99,20 +104,20 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         <Reviews projName={projData.projectName} />
 
         <FaqWithBg data={projData.faqs} projName={projData.projectName} />
-        {/* <div className="flex flex-col justify-start items-start w-[95%]">
-          <ProjectCarousel
-            type="proj"
-            title="nEAR BY pROJECTS OF"
-            projName="SARANG BY SUMADHURA"
-            content="See what other customers also viewed"
-          />
-          <ProjectCarousel
-            type="prop"
-            title="Projects By Developers"
-            content="See what developers has posted"
-          /> */}
-        {/* </div> */}
-
+        <NearByCarouselProperty
+          projName={projData.projectName}
+          lat={projData.lat}
+          lng={projData.lang}
+          projId={data.projIdEnc}
+          cg={data.cg}
+        />
+        <NearByCarousel
+          projName={projData.projectName}
+          lat={projData.lat}
+          lng={projData.lang}
+          projId={data.projIdEnc}
+        />
+        <LoginPopup />
         <ProjectDrawer projName="Sarang By Sumadhura" />
       </div>
     </div>
