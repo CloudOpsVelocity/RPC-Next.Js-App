@@ -17,7 +17,7 @@ type Props = {
 };
 
 export default function OtpBox({ userName, close, callback, mobile }: Props) {
-  const { verifyOtp } = useAuth();
+  const { verifyOtp } = useAuth({ type: "otp" });
   const [error, setError] = useState(false);
   const onSubmit = async (value: any) => {
     const data = await verifyOtp({ ...value, username: mobile });

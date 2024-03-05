@@ -40,7 +40,7 @@ function Login() {
     initialValues: { username: "", password: "" },
     validate: yupResolver(schema),
   });
-  const { login } = useAuth();
+  const { login } = useAuth({ type: "login" });
   const onSubmit = async (values: any) => {
     setState("pending");
     login(values);

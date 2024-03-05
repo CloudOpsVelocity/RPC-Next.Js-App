@@ -64,7 +64,9 @@ function Builder() {
 
   const [opened, { open, close }] = useDisclosure(false);
 
-  const { registerOtherDetails, register, login } = useAuth();
+  const { registerOtherDetails, register, login } = useAuth({
+    type: "register",
+  });
 
   const form = useForm({
     initialValues: {
@@ -307,7 +309,7 @@ function Builder() {
           step: StepCss.step,
           separator: StepCss.separator,
           stepLabel: StepCss.steplabelCommonForAll,
-          content:StepCss.content,
+          content: StepCss.content,
         }}
       >
         <Stepper.Step
@@ -315,10 +317,12 @@ function Builder() {
           icon={<StepperDotGreen />}
           classNames={{
             stepIcon: active === 0 ? StepCss.stepIcon : "",
-            stepLabel: active === 0 ? 
-              StepCss.stepLabelActive : 
-              active > 0 ? StepCss.stepLabelDone:
-              StepCss.stepLabel
+            stepLabel:
+              active === 0
+                ? StepCss.stepLabelActive
+                : active > 0
+                ? StepCss.stepLabelDone
+                : StepCss.stepLabel,
           }}
         >
           <TextInput
@@ -333,7 +337,6 @@ function Builder() {
               input: StepCss.textInput,
               error: StepCss.errorMsg,
             }}
-             
           />
           <TextInput
             required
@@ -365,7 +368,6 @@ function Builder() {
               reveal ? <EyeOpen /> : <EyeClosed />
             }
             onBlur={(e) => handleTrimAndReplace(e, "password", form)}
-            
           />
           <NumberInput
             required
@@ -400,7 +402,8 @@ function Builder() {
             <CountryInput
               onSelect={displayCountryCode}
               className={`focus:outline-none min-w-[30px] !max-w-[75px] relative ${
-                (form.errors.mobile != undefined && form.errors.mobile != null) ||
+                (form.errors.mobile != undefined &&
+                  form.errors.mobile != null) ||
                 status === "error"
                   ? "bottom-[65px]"
                   : "bottom-[45px]"
@@ -413,10 +416,12 @@ function Builder() {
           label="Address & Other"
           icon={active >= 1 ? <StepperDotGreen /> : <StepperDotGray />}
           classNames={{
-            stepLabel: active === 1 ? 
-            StepCss.stepLabelActive : 
-              active > 1 ? StepCss.stepLabelDone:
-              StepCss.stepLabel,
+            stepLabel:
+              active === 1
+                ? StepCss.stepLabelActive
+                : active > 1
+                ? StepCss.stepLabelDone
+                : StepCss.stepLabel,
             stepIcon: active > 1 ? StepCss.stepIconActive : StepCss.stepIcon,
           }}
         >
@@ -496,10 +501,12 @@ function Builder() {
           label="Company details"
           icon={active >= 2 ? <StepperDotGreen /> : <StepperDotGray />}
           classNames={{
-            stepLabel: active === 2 ? 
-            StepCss.stepLabelActive : 
-            active > 2 ? StepCss.stepLabelDone:
-              StepCss.stepLabel,
+            stepLabel:
+              active === 2
+                ? StepCss.stepLabelActive
+                : active > 2
+                ? StepCss.stepLabelDone
+                : StepCss.stepLabel,
             stepIcon: active > 2 ? StepCss.stepIconActive : StepCss.stepIcon,
           }}
         >
@@ -535,7 +542,6 @@ function Builder() {
               }}
               data={isLoadingBrach ? [] : cityParser(brachData) || []}
               {...form.getInputProps("branchName")}
-              
             />
             <DateInput
               required
@@ -623,10 +629,12 @@ function Builder() {
           label="Description"
           icon={active >= 3 ? <StepperDotGreen /> : <StepperDotGray />}
           classNames={{
-            stepLabel: active === 3 ? 
-            StepCss.stepLabelActive : 
-            active > 3 ? StepCss.stepLabelDone:
-              StepCss.stepLabel,
+            stepLabel:
+              active === 3
+                ? StepCss.stepLabelActive
+                : active > 3
+                ? StepCss.stepLabelDone
+                : StepCss.stepLabel,
             stepIcon: active > 3 ? StepCss.stepIconActive : StepCss.stepIcon,
           }}
         >

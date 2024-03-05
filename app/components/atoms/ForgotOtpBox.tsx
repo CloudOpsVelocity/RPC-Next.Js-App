@@ -22,7 +22,7 @@ export default function ForgotOtpBox({
   callback,
   mobile,
 }: Props) {
-  const { verifyOtp } = useAuth();
+  const { verifyOtp } = useAuth({ type: "otp" });
   const [error, setError] = useState(false);
   const onSubmit = async (value: any) => {
     const data = await verifyOtp({ ...value, username: mobile });

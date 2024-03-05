@@ -23,13 +23,12 @@ import { BackSvg, EyeClosed, EyeOpen } from "@/app/images/commonSvgs";
 import handleTrimAndReplace from "@/app/utils/input/validations";
 import StepCss from "@/app/styles/Stepper.module.css";
 
-
 function Individual() {
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error" | "otp"
   >("idle");
   const router = useRouter();
-  const { register, login } = useAuth();
+  const { register, login } = useAuth({ type: "register" });
   const [opened, { open, close }] = useDisclosure(false);
 
   const form = useForm({
@@ -178,7 +177,8 @@ function Individual() {
                 <CountryInput
                   onSelect={displayCountryCode}
                   className={`focus:outline-none min-w-[30px] !max-w-[75px] relative ${
-                    (form.errors.mobile != undefined && form.errors.mobile != null) ||
+                    (form.errors.mobile != undefined &&
+                      form.errors.mobile != null) ||
                     status === "error"
                       ? "bottom-[65px]"
                       : "bottom-[45px]"

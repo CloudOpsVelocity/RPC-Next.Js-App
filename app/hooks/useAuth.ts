@@ -58,16 +58,22 @@ interface RegistrationOthersData {
  * A hook for handling authentication.
  * @returns An object with login and register functions.
  */
-export default function useAuth() {
+export default function useAuth({
+  type = "register",
+}: {
+  type?: "login" | "register" | "otp";
+}) {
   const router = useRouter();
 
   const loginWithCredentials = async (data: Login): Promise<any> => {
     const res = await signIn("credentials", { ...data, redirect: false });
     console.log(res);
     if (res?.ok) {
-      setTimeout(()=>{
-        router.push("/");
-      },10000);
+      type === "register"
+        ? setTimeout(() => {
+            router.push("/");
+          }, 10000)
+        : router.push("/");
     } else {
       toast.error(res?.error || "Something went wrong. Please try again.");
     }

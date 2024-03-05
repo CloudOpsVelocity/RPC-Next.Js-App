@@ -42,7 +42,9 @@ function Agent() {
   >("idle");
   const [active, setActive] = useState(0);
   const router = useRouter();
-  const { registerOtherDetails, register, login } = useAuth();
+  const { registerOtherDetails, register, login } = useAuth({
+    type: "register",
+  });
 
   const [opened, { open, close }] = useDisclosure(false);
 
@@ -189,14 +191,14 @@ function Agent() {
         size="xs"
         className="w-full"
         // @ts-ignore
-        styles={styles}  
+        styles={styles}
         classNames={{
           root: StepCss.root,
           steps: active === 2 ? StepCss.rootSuccess : StepCss.steps,
           step: StepCss.step,
           separator: StepCss.separatorForAgent,
           stepLabel: StepCss.steplabelCommonForAll,
-          content:StepCss.content,
+          content: StepCss.content,
         }}
         // styles={styles}
       >
@@ -206,7 +208,7 @@ function Agent() {
           classNames={{
             stepLabel:
               active === 0 ? StepCss.stepLabelActive : StepCss.stepLabel,
-              stepIcon: active === 0 ? StepCss.stepIcon : "",
+            stepIcon: active === 0 ? StepCss.stepIcon : "",
           }}
         >
           <TextInput
@@ -288,7 +290,8 @@ function Agent() {
             <CountryInput
               onSelect={displayCountryCode}
               className={`focus:outline-none min-w-[30px] !max-w-[75px] relative ${
-                (form.errors.mobile != undefined && form.errors.mobile != null) ||
+                (form.errors.mobile != undefined &&
+                  form.errors.mobile != null) ||
                 status === "error"
                   ? "bottom-[65px]"
                   : "bottom-[45px]"
