@@ -33,7 +33,9 @@ const LeftSideBlock = () => {
       fetchMoreData();
     }
   }, [entry?.isIntersecting, hasNextPage]);
-
+  const onChnageTab = (value: string) => {
+    return;
+  };
   return (
     <div className="md:w-[50%] sm:w-[100%]  md:bg-white  min-w-[400px] md:min-w-[500px]">
       <Tabs value={activeTab} onChange={setActiveTab} defaultValue="proj">

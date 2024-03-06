@@ -21,6 +21,8 @@ const convertToQueryParams = (params: Params): string => {
     maxPrice: "maxPrice",
     projStatus: "projStatus",
     builderIds: "builderIds",
+    facings: 'facing',
+    furnish: 'furnish'
   };
 
   for (const key in params) {

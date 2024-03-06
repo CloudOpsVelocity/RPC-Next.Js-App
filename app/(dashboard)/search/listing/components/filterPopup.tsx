@@ -26,20 +26,14 @@ import { useQuery } from "react-query";
 import { getData } from "@/app/utils/api/search";
 
 const FilterPopup = () => {
-  const [current, setCurrent] = useState("Project Status");
+  const [current, setCurrent] = useState("Bhk");
   const propKeys = [35, 33, 31, 34, 32];
   const [localitySearch, setSearchLocality] = useDebouncedState("", 500);
-  const [builderSearch, setBuilderSearch] = useDebouncedState("", 500);
 
   const { data } = useQuery({
     queryFn: () => getData(localitySearch, "loc"),
     queryKey: ["search" + "loc" + localitySearch],
     enabled: localitySearch !== "",
-  });
-  const { isLoading: builderDataLoading, data: builderData } = useQuery({
-    queryFn: () => getData(builderSearch, "builders"),
-    queryKey: ["search" + "builders" + builderSearch],
-    enabled: builderSearch !== "",
   });
 
   const {
@@ -51,6 +45,7 @@ const FilterPopup = () => {
     handleSliderChange,
     setFilters,
     remnoveSearchOptions,
+    setSingleType,
   } = useSearchFilters();
   const viewport = useRef<HTMLDivElement>(null);
   const scrollWhereIsSelected = (item: string) => {
@@ -102,7 +97,7 @@ const FilterPopup = () => {
         <ClearAll type="all" />
         {/* Right Side Fields Con */}
         <ScrollArea
-          h={350}
+          h={400}
           className="w-full pt-[1%] pl-[2%]    "
           viewportRef={viewport}
         >
@@ -110,7 +105,7 @@ const FilterPopup = () => {
             <React.Fragment>
               <h3
                 className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[1%] "
-                id="Unit Type"
+                id="Bhk"
               >
                 BHK
               </h3>
@@ -138,14 +133,14 @@ const FilterPopup = () => {
             Property Status
           </h3>
           <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
-            {SEARCH_FILTER_DATA.projectstatus.map((eachStatus, index) => {
+            {SEARCH_FILTER_DATA.listingStatus.map((eachStatus, index) => {
               return (
                 <Radio
-                  checked={eachStatus.cid == filters.current}
+                  checked={eachStatus.cid == filters.propStatus}
                   value={eachStatus.cid}
                   iconColor="dark.8"
                   color="green"
-                  onChange={() => setStatus(eachStatus.cid)}
+                  onChange={() => setSingleType("propStatus", eachStatus.cid)}
                   label={eachStatus.Label}
                   name="propertyStatus"
                 />
@@ -183,7 +178,7 @@ const FilterPopup = () => {
           </div>
           <h3
             className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] flex items-center gap-[5px] "
-            id="Property Type"
+            id="Posted By"
           >
             Listed By
           </h3>
@@ -196,16 +191,10 @@ const FilterPopup = () => {
                   color="green"
                   label={constDesc}
                   value={value}
-                  name="propertyType"
+                  name="ListedBy"
                   style={{ whiteSpace: "nowrap", marginBottom: "10px" }}
-                  // onClick={() =>
-                  //   setPropTypes(
-                  //     propertyDetailsTypes?.get(keyName)?.id as number
-                  //   )
-                  // }
-                  // checked={
-                  //   filters.propTypes === propertyDetailsTypes?.get(keyName)?.id
-                  // }
+                  onClick={() => setSingleType("listedBy", value)}
+                  checked={filters.listedBy === value}
                 />
               );
             })}
@@ -273,8 +262,8 @@ const FilterPopup = () => {
                       key={i}
                       label={x.constDesc}
                       color="green"
-                      onClick={() => handleCheckboxClick("bathRooms", i + 1)}
-                      checked={filters.bathRooms.includes(x.cid + 1)}
+                      onClick={() => handleCheckboxClick("facings", x.cid + 1)}
+                      checked={filters.facings.includes(x.cid + 1)}
                     />
                   );
                 })}
@@ -337,6 +326,7 @@ const FilterPopup = () => {
             onChange={(value) => handleSliderChange("bugdetValue", value)}
             style={{ width: "80%" }}
             defaultValue={[filters.bugdetValue[0], filters.bugdetValue[1]]}
+            mb={"5%"}
           />
           <h3
             className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] "
@@ -362,11 +352,12 @@ const FilterPopup = () => {
             value={filters.areaValue}
             onChange={(value) => handleSliderChange("areaValue", value)}
             style={{ width: "80%" }}
+            mb={"5%"}
           />
 
           <h3
             className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] flex items-center gap-[5px] "
-            id="Property Type"
+            id="Photos & Videos"
           >
             Photos & Videos
           </h3>
@@ -396,19 +387,23 @@ const FilterPopup = () => {
           <React.Fragment>
             <h3
               className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[5%] "
-              id="Parking"
+              id="Furnishing"
             >
               Furnishing
             </h3>
             <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
-              {SEARCH_FILTER_DATA.furnish.map((x, i) => {
+              {SEARCH_FILTER_DATA.furnish.map(({ constDesc, cid }, i) => {
                 return (
-                  <Checkbox
+                  <Radio
                     key={i}
-                    label={x.constDesc}
+                    iconColor="dark.8"
                     color="green"
-                    onClick={() => handleCheckboxClick("parkings", i + 1)}
-                    checked={filters.parkings.includes(i + 1)}
+                    label={constDesc}
+                    value={cid}
+                    name="ListedBy"
+                    style={{ whiteSpace: "nowrap", marginBottom: "10px" }}
+                    onClick={() => setSingleType("furnish", cid)}
+                    checked={filters.furnish === cid}
                   />
                 );
               })}
@@ -447,29 +442,6 @@ const FilterPopup = () => {
               </div>
             </React.Fragment>
           )}
-
-          <h3
-            className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] "
-            id="RERA"
-          >
-            RERA
-          </h3>
-          <Checkbox
-            label="RERA Verified"
-            color="green"
-            mb={"3%"}
-            onClick={() => handleBooleanCheck()}
-            checked={filters.reraVerified === true}
-          />
-
-          {/* <h3 className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] ">
-            Listed By
-          </h3>
-          <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
-            <Checkbox label="Builder" color="green" />
-            <Checkbox label="Agent" color="green" />
-            <Checkbox label="Owner" color="green" />
-          </div> */}
         </ScrollArea>
       </div>
     </div>

@@ -16,6 +16,19 @@ export const SEARCH_FILTER_DATA = {
       Label: "New Launch",
     },
   ],
+  listingStatus: [
+    {
+      cid: "U",
+      constDesc: "On Going",
+      Label: "Under Construction",
+    },
+    {
+      cid: "R",
+      constDesc: "Completed",
+      Label: "Ready to Move",
+    },
+
+  ],
   bhkDetails: [
     {
       title: "1 RK",

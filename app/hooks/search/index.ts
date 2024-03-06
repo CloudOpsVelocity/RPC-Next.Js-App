@@ -2,13 +2,13 @@ import {
   initialState,
   searachFilterAtom,
   appliedFiltersParams,
+  SearchFilter,
 } from "@/app/store/search";
 import { convertToQueryParams } from "@/app/utils/search/query";
 import { Search } from "@/app/validations/types/search";
 import { useAtom, useSetAtom } from "jotai";
 import { usePathname } from "next/navigation";
 import { useQueryStates, parseAsString, parseAsInteger } from "nuqs";
-import { useState } from "react";
 import { useInfiniteQuery } from "react-query";
 const paramsInit = {
   projStatus: parseAsString,
@@ -26,7 +26,14 @@ const paramsInit = {
   minPrice: parseAsInteger,
   maxPrice: parseAsInteger,
   city: parseAsString,
+  facings: parseAsString,
+  furnish: parseAsInteger,
+  propStatus: parseAsString,
 };
+interface ExtentSearchFilters extends SearchFilter {
+  listedBy: string;
+  furnish: number;
+}
 export default function useSearchFilters(
   input?: "project" | "owner" | "agent"
 ) {
@@ -44,7 +51,11 @@ export default function useSearchFilters(
   const setPropTypes = (propertyType: number) => {
     setFilters({ ...filters, propTypes: propertyType });
   };
-  const setSingleType = (key: keyof SearchFilter, value: string) => {
+
+  const setSingleType = (
+    key: keyof ExtentSearchFilters,
+    value: string | number
+  ) => {
     setFilters({ ...filters, [key]: value });
   };
   type SearchFilter = {
@@ -52,9 +63,9 @@ export default function useSearchFilters(
     bathRooms: string;
     parkings: string;
     amenities: string;
-    listedBy: string;
     areaValue: [number, number];
     bugdetValue: [number, number];
+    facings: number[];
   };
   const handleCheckboxClick = (
     filterType: keyof SearchFilter,
@@ -79,7 +90,10 @@ export default function useSearchFilters(
         if (
           key === "current" ||
           key === "propTypes" ||
-          key === "reraVerified"
+          key === "reraVerified" ||
+          key === "listedBy" ||
+          key === "furnish" ||
+          key === "propStatus"
         ) {
           count += filters[key] ? 1 : 0;
         } else if (key === "areaValue") {
@@ -110,7 +124,9 @@ export default function useSearchFilters(
       [key]: newValue,
     }));
   };
-  const handleReset = (type: "unitType" | "price" | "all" | "propType") => {
+  const handleReset = (
+    type: "unitType" | "price" | "all" | "propType" | "listedBy"
+  ) => {
     switch (type) {
       case "unitType":
         setFilters((prev) => ({
@@ -118,6 +134,13 @@ export default function useSearchFilters(
           unitTypes: [],
         }));
         setParams({ unitTypes: null });
+        break;
+      case "listedBy":
+        setFilters((prev) => ({
+          ...prev,
+          listedBy: null,
+        }));
+        setParams({ listedBy: null });
         break;
       case "price":
         setFilters((prev) => ({

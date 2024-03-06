@@ -51,7 +51,6 @@ export default function useSearchFilters() {
     bathRooms: string;
     parkings: string;
     amenities: string;
-    listedBy: string;
     areaValue: [number, number];
     bugdetValue: [number, number];
   };

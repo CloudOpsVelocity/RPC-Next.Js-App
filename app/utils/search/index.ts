@@ -50,52 +50,6 @@ export const propertiesToProcess: { [key: string]: string } = {
   maxPrice: "bugdetValue",
 };
 
-// export const filterParser = (data: SearchFilter) => {
-//   const parsedData: any = {};
-
-//   for (const [parsedKey, dataKey] of Object.entries(propertiesToProcess)) {
-//     // @ts-ignore
-//     const value = data[dataKey];
-
-//     // Check if the value is a default value (null, empty array, or default range)
-//     const isDefaultValue =
-//       (Array.isArray(value) && value.length === 0) ||
-//       (Array.isArray(value) && value[0] === 0 && value[1] === 5000) ||
-//       (Array.isArray(value) && value[0] === 0 && value[1] === 5) ||
-//       value === null;
-
-//     // Skip processing if it's a default value
-//     if (isDefaultValue) continue;
-
-//     // Process non-default values
-//     if (
-//       parsedKey === "minArea" ||
-//       parsedKey === "maxArea" ||
-//       parsedKey === "minPrice" ||
-//       parsedKey === "maxPrice"
-//     ) {
-//       const intValue = parseInt(value[parsedKey.includes("min") ? 0 : 1], 10);
-//       if (!isNaN(intValue)) {
-//         parsedData[parsedKey] = intValue;
-//       }
-//     }
-
-//     if (Array.isArray(value) && value.length > 0) {
-//       if (
-//         parsedKey !== "minArea" &&
-//         parsedKey !== "maxArea" &&
-//         parsedKey !== "minPrice" &&
-//         parsedKey !== "maxPrice"
-//       ) {
-//         parsedData[parsedKey] = value.join(",");
-//       }
-//     } else if (value !== null && value !== "" && !Array.isArray(value)) {
-//       parsedData[parsedKey] = value;
-//     }
-//   }
-
-//   return parsedData;
-// };
 export const filterParser = (data: SearchFilter) => {
   const parsedData: any = {};
 
@@ -116,6 +70,9 @@ export const filterParser = (data: SearchFilter) => {
     maxPrice: "bugdetValue",
     builderIds: "builderIds",
     city: "city",
+    facings: "facings",
+    furnish: "furnish",
+    propStatus: "propStatus",
   };
 
   // Iterate through each property

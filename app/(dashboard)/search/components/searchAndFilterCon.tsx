@@ -11,6 +11,7 @@ import {
   em,
 } from "@mantine/core";
 import { FilterPopup } from "./filterPopup";
+import { FilterPopup as ListingPopup } from "../listing/components/filterPopup";
 import classes from "@/app/styles/search.module.css";
 import { useQueryState } from "nuqs";
 import BhkFilter from "./bhk";
@@ -70,12 +71,8 @@ const SearchHeader = ({ open, close }: any) => {
     remnoveSearchOptions,
     setFilters,
     handleAppliedFilters,
+    params,
   } = useSearchFilters();
-  const [name, setName] = useQueryState("q");
-
-  const onSearchChange = (value: string) => {
-    !value ? setName(null) : setName(value);
-  };
   return (
     <div className="m-[2%] w-full flex mt-[100px] pl-[2%] gap-2 md:gap-[20px] flex-wrap md:flex-nowrap justify-between md:justify-start items-start md:items-center ">
       <p className="text-[14px] md:text-[16px] text-[#737579] font-[500] w-full md:w-auto">
@@ -244,7 +241,7 @@ const SearchHeader = ({ open, close }: any) => {
           </button>
         </Popover.Target>
         <Popover.Dropdown className="!z-50" p={0}>
-          <FilterPopup />
+          {params.listedBy ? <ListingPopup /> : <FilterPopup />}
         </Popover.Dropdown>
       </Popover>
       <SearchDrawer />

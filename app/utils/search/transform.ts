@@ -1,18 +1,4 @@
-interface SearchFilter {
-  current: number | null;
-  locality: string[];
-  propTypes: number | null;
-  unitTypes: number[];
-  bathRooms: number[];
-  parkings: number[];
-  amenities: number[];
-  listedBy: number[];
-  reraVerified: boolean | null;
-  areaValue: [number, number];
-  bugdetValue: [number, number];
-  builderIds: string[];
-  city: string | null;
-}
+import { SearchFilter } from "@/app/store/search";
 
 const convertToOriginalState = (data: any): SearchFilter => {
   const convertedData: SearchFilter = {
@@ -23,12 +9,15 @@ const convertToOriginalState = (data: any): SearchFilter => {
     bathRooms: [],
     parkings: [],
     amenities: [],
-    listedBy: [],
+    listedBy: null,
     reraVerified: null,
     areaValue: [0, 5000],
     bugdetValue: [0, 5],
     builderIds: [],
     city: null,
+    facings: [],
+    furnish: null,
+    propStatus: null,
   };
 
   if (data.unitTypes !== undefined) {
@@ -44,10 +33,16 @@ const convertToOriginalState = (data: any): SearchFilter => {
     convertedData.amenities = data.amenities.split(",").map(Number);
   }
   if (data.listedBy !== undefined) {
-    convertedData.listedBy = data.listedBy.split(",").map(Number);
+    convertedData.listedBy = data.listedBy;
   }
   if (data.city !== undefined) {
     convertedData.city = data.city;
+  }
+  if (data.furnish !== undefined) {
+    convertedData.furnish = Number(data.furnish);
+  }
+  if (data.propStatus !== undefined) {
+    convertedData.propStatus = data.propStatus;
   }
 
   if (data.propTypes !== undefined) {
@@ -58,6 +53,9 @@ const convertToOriginalState = (data: any): SearchFilter => {
   }
   if (data.parkings !== undefined) {
     convertedData.parkings = data.parkings.split(",").map(Number);
+  }
+  if (data.facings !== undefined) {
+    convertedData.facings = data.facings.split(",").map(Number);
   }
   if (data.reraVerified !== undefined) {
     convertedData.reraVerified = data.reraVerified === "true";

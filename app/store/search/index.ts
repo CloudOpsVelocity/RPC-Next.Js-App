@@ -11,12 +11,15 @@ export interface SearchFilter {
   bathRooms: number[];
   parkings: number[];
   amenities: number[];
-  listedBy: number[];
+  listedBy: null | string;
   reraVerified: boolean | null;
   areaValue: [number, number];
   bugdetValue: [number, number];
   builderIds: string[];
   city: string | null;
+  facings: number[];
+  furnish: number | null;
+  propStatus: string | null;
 }
 
 export const initialState: SearchFilter = {
@@ -27,12 +30,15 @@ export const initialState: SearchFilter = {
   bathRooms: [],
   parkings: [],
   amenities: [],
-  listedBy: [],
+  listedBy: null,
   reraVerified: null,
   areaValue: [0, 5000],
   bugdetValue: [0, 5],
   builderIds: [],
   city: null,
+  facings: [],
+  furnish: null,
+  propStatus: null,
 };
 export const searachFilterAtom = atom<SearchFilter>(initialState);
 searachFilterAtom.onMount = (setAtom) => {
@@ -51,7 +57,6 @@ function getAppliedFilters(): SearchFilter {
   searchParams.forEach((value, key) => {
     queryData[key] = value;
   });
-  console.log(queryData);
   const data: SearchFilter = convertToOriginalState(queryData);
   console.log(data);
   return data;

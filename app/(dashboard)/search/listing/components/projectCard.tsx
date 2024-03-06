@@ -38,6 +38,8 @@ const ProjectDetailsCard = ({
   ca,
   pa,
   sba,
+  coverImage,
+  availableFrom,
 }: any) => {
   const { data: session } = useSession();
 
@@ -82,7 +84,7 @@ const ProjectDetailsCard = ({
         <div className="md:max-w-[320px] max-w-[150px] flex justify-center items-center w-full flex-col h-fit md:h-full    relative">
           <div className="relative">
             <Image
-              src={"/images/cover.png"}
+              src={coverImage}
               width={320}
               height={174}
               alt="conver"
@@ -130,7 +132,7 @@ const ProjectDetailsCard = ({
                 <p className="text-[#333] text-[12px] md:text-[16px] font-[500]">
                   Available From:{" "}
                   <span className=" font-[600]">
-                    {formatDateDDMMYYYY("Wed Jan 30 00:00:00 IST 2030")}
+                    {formatDateDDMMYYYY(availableFrom)}
                   </span>
                 </p>
               </div>
