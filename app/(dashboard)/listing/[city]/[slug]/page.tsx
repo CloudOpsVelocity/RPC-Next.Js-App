@@ -91,7 +91,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             type="prop"
           />
         )}
-        <Banner slug={data.projIdEnc} projName={title} />
+        <Banner slug={data.projIdEnc} projName={projData.projectName} />
         <Loans
           type="prop"
           data={projData.banks}
