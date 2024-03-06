@@ -12,7 +12,7 @@ import {
 import "leaflet/dist/leaflet.css"; // Import Leaflet CSS
 import { LatLngTuple } from "leaflet";
 import "leaflet/dist/leaflet.css";
-import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css"; // Re-uses images from ~leaflet package
+import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css";
 import "leaflet-defaulticon-compatibility";
 import Image from "next/image";
 import { MapIcon } from "@/app/data/map";
@@ -25,7 +25,7 @@ const Map = ({ data, selectedLocation, projName, lat, lang }: any) => {
       <MapContainer
         center={position}
         zoom={13}
-        style={{ height: "700px", width: "100%" }}
+        style={{ height: "700px", width: "100%", zIndex: 1 }}
         scrollWheelZoom={true}
       >
         <TileLayer

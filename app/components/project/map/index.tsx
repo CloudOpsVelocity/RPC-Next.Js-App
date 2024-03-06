@@ -68,7 +68,6 @@ const LeafMap: React.FC<{
   );
 
   const { data: mapData, isLoading } = useMapData({ projSlug: projId });
-  console.log(mapData);
   return (
     <div className="w-[90%] scroll-mt-[90px] mx-auto  mb-[5%] " id="nearBy">
       {type === "prop" ? (

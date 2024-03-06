@@ -32,6 +32,7 @@ function ProjectDrawer({ projName }: { projName: string }) {
         onClose={handleReadMoreClick}
         position="right"
         size={isMobile ? "70%" : "60%"}
+        zIndex={100}
       >
         <div className="mt-4 flex justify-between mb-8">
           <h1 className="uppercase text-[24px] lg:text-[32px] font-[600] text-[#001F35] pl-[57px] ">
