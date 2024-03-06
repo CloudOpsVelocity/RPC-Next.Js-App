@@ -258,32 +258,53 @@ const FilterPopup = () => {
             rightSection={<DropDownIcon />}
           />
 
-          <h3
-            className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] "
-            id="Area"
-          >
-            Area
-          </h3>
-          <p className="text-[#4D6677] text-[16px] font-[600] mb-[2%] ">
-            {filters.areaValue[0]} sq.ft - {filters.areaValue[1]} sq.ft
-          </p>
-          <RangeSlider
-            color="green"
-            marks={[
-              { value: 0, label: "0 sq.ft" },
-              { value: 1000, label: "1000 sq.ft" },
-              { value: 2000, label: "2000 sq.ft" },
-              { value: 3000, label: "3000 sq.ft" },
-              { value: 4000, label: "4000 sq.ft" },
-              { value: 5000, label: "5000 sq.ft" },
-            ]}
-            min={0}
-            max={5000}
-            value={filters.areaValue}
-            onChange={(value) => handleSliderChange("areaValue", value)}
-            style={{ width: "80%" }}
-          />
+          {filters?.propTypes != projectprops.plot && (
+            <React.Fragment>
+              <h3
+                className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[5%] "
+                id="Facing"
+              >
+                Facing
+              </h3>
+              <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
+                {SEARCH_FILTER_DATA.facing.map((x, i) => {
+                  return (
+                    <Checkbox
+                      key={i}
+                      label={x.constDesc}
+                      color="green"
+                      onClick={() => handleCheckboxClick("bathRooms", i + 1)}
+                      checked={filters.bathRooms.includes(x.cid + 1)}
+                    />
+                  );
+                })}
+              </div>
+            </React.Fragment>
+          )}
 
+          {filters?.propTypes != projectprops.plot && (
+            <React.Fragment>
+              <h3
+                className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[5%] "
+                id="Bath"
+              >
+                Bath
+              </h3>
+              <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
+                {[...Array(6)].map((x, i) => {
+                  return (
+                    <Checkbox
+                      key={i}
+                      label={`${i == 5 ? "+5" : i + 1} Bath`}
+                      color="green"
+                      onClick={() => handleCheckboxClick("bathRooms", i + 1)}
+                      checked={filters.bathRooms.includes(i + 1)}
+                    />
+                  );
+                })}
+              </div>
+            </React.Fragment>
+          )}
           <h3
             className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[5%] "
             id="Budget"
@@ -317,31 +338,82 @@ const FilterPopup = () => {
             style={{ width: "80%" }}
             defaultValue={[filters.bugdetValue[0], filters.bugdetValue[1]]}
           />
+          <h3
+            className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] "
+            id="Area"
+          >
+            Area
+          </h3>
+          <p className="text-[#4D6677] text-[16px] font-[600] mb-[2%] ">
+            {filters.areaValue[0]} sq.ft - {filters.areaValue[1]} sq.ft
+          </p>
+          <RangeSlider
+            color="green"
+            marks={[
+              { value: 0, label: "0 sq.ft" },
+              { value: 1000, label: "1000 sq.ft" },
+              { value: 2000, label: "2000 sq.ft" },
+              { value: 3000, label: "3000 sq.ft" },
+              { value: 4000, label: "4000 sq.ft" },
+              { value: 5000, label: "5000 sq.ft" },
+            ]}
+            min={0}
+            max={5000}
+            value={filters.areaValue}
+            onChange={(value) => handleSliderChange("areaValue", value)}
+            style={{ width: "80%" }}
+          />
 
-          {filters?.propTypes != projectprops.plot && (
-            <React.Fragment>
-              <h3
-                className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[5%] "
-                id="Bath"
-              >
-                Bath
-              </h3>
-              <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
-                {[...Array(6)].map((x, i) => {
-                  return (
-                    <Checkbox
-                      key={i}
-                      label={`${i == 5 ? "+5" : i + 1} Bath`}
-                      color="green"
-                      onClick={() => handleCheckboxClick("bathRooms", i + 1)}
-                      checked={filters.bathRooms.includes(i + 1)}
-                    />
-                  );
-                })}
-              </div>
-            </React.Fragment>
-          )}
-
+          <h3
+            className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] flex items-center gap-[5px] "
+            id="Property Type"
+          >
+            Photos & Videos
+          </h3>
+          <div className="flex  mb-[3%] justify-start items-start flex-wrap gap-[4%]">
+            {SEARCH_FILTER_DATA.photoAvail.map(({ id, label }, i) => {
+              return (
+                <Radio
+                  key={i}
+                  iconColor="dark.8"
+                  color="green"
+                  label={label}
+                  value={id}
+                  name="propertyType"
+                  style={{ whiteSpace: "nowrap", marginBottom: "10px" }}
+                  // onClick={() =>
+                  //   setPropTypes(
+                  //     propertyDetailsTypes?.get(keyName)?.id as number
+                  //   )
+                  // }
+                  // checked={
+                  //   filters.propTypes === propertyDetailsTypes?.get(keyName)?.id
+                  // }
+                />
+              );
+            })}
+          </div>
+          <React.Fragment>
+            <h3
+              className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[5%] "
+              id="Parking"
+            >
+              Furnishing
+            </h3>
+            <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
+              {SEARCH_FILTER_DATA.furnish.map((x, i) => {
+                return (
+                  <Checkbox
+                    key={i}
+                    label={x.constDesc}
+                    color="green"
+                    onClick={() => handleCheckboxClick("parkings", i + 1)}
+                    checked={filters.parkings.includes(i + 1)}
+                  />
+                );
+              })}
+            </div>
+          </React.Fragment>
           <h3
             className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] "
             id="Amenities"
@@ -398,55 +470,6 @@ const FilterPopup = () => {
             <Checkbox label="Agent" color="green" />
             <Checkbox label="Owner" color="green" />
           </div> */}
-
-          <h3
-            className=" text-[#202020] mb-[2%] text-[14px] font-[500] "
-            id="Builder"
-          >
-            Builder
-          </h3>
-          {filters.builderIds.length > 0 && (
-            <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
-              {filters.builderIds.map((eachLocality, index) => {
-                return (
-                  <div
-                    key={index}
-                    className="flex justify-center items-center p-[1%] rounded-[10px] border-[#92B2C8] border-solid border-[1px]  "
-                  >
-                    {eachLocality.split("+")[0]}
-                    <span
-                      className="cursor-pointer"
-                      onClick={() => remnoveSearchOptions(index, "builderIds")}
-                    >
-                      {miniItemsCrossIcon}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
-          )}
-
-          <MultiSelect
-            classNames={{ pill: classes.pill }}
-            label=""
-            placeholder="Search Locality"
-            data={builderData || []}
-            searchable
-            nothingFoundMessage={
-              builderDataLoading ? "Loading..." : "Nothing found..."
-            }
-            value={filters.builderIds}
-            onChange={(value) =>
-              setFilters((prev) => ({ ...prev, builderIds: value }))
-            }
-            leftSectionPointerEvents="none"
-            leftSection={lensSvg}
-            style={{ width: "50%" }}
-            comboboxProps={{ withinPortal: false }}
-            onSearchChange={(value) => setBuilderSearch(value)}
-            pb={50}
-            rightSection={<DropDownIcon />}
-          />
         </ScrollArea>
       </div>
     </div>

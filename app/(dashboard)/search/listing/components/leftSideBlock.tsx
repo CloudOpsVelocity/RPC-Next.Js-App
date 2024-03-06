@@ -70,9 +70,11 @@ const LeftSideBlock = () => {
             className=" p-[2%]  overflow-y-auto  h-screen mt-2"
             h={700}
           >
-            {data != undefined &&
-            data.length != undefined &&
-            data.length > 0 ? (
+            {isLoading ? (
+              <Loading />
+            ) : data != undefined &&
+              data.length != undefined &&
+              data.length > 0 ? (
               data.map((eachOne, index) => {
                 return (
                   <ProjectDetailsCard
@@ -128,6 +130,7 @@ const LeftSideBlock = () => {
 export { LeftSideBlock };
 import { Menu } from "@mantine/core";
 import MapModal from "./modals";
+import Loading from "@/app/components/atoms/Loader";
 
 function SortBy() {
   const [selected, setSort] = useState("");

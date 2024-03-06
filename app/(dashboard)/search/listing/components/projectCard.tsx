@@ -96,7 +96,7 @@ const ProjectDetailsCard = ({
 
           <div className="flex-col flex md:hidden min-w-[100px] mt-2">
             <p className="text-[#202020] text-[10px] md:text-[16px] font-[400]">
-              Posted By: <span className=" font-[600]">Builder</span>
+              Posted By: <span className=" font-[600]">{postedBy}</span>
             </p>
             <p className="text-[#202020] text-[10px] md:text-[16px] font-[400]">
               Date:{" "}
@@ -138,7 +138,7 @@ const ProjectDetailsCard = ({
 
             <div className="  justify-end items-end flex-col hidden md:flex mt-auto ">
               <p className="text-[#202020] text-[12px] md:text-[16px] font-[400]">
-                Posted By: <span className=" font-[600]">Builder</span>
+                Posted By: <span className=" font-[600]">{postedBy}</span>
               </p>
               <p className="text-[#202020] text-[12px] md:text-[16px] font-[400]">
                 Date:{" "}
