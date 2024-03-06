@@ -1,6 +1,6 @@
 "use client";
 import React, { useRef, useState } from "react";
-import { searchDetails } from "@/app/data/searchDetails";
+import { ListingSearchDetails, searchDetails } from "@/app/data/searchDetails";
 import Button from "@/app/elements/button";
 import {
   DropDownIcon,
@@ -70,10 +70,10 @@ const FilterPopup = () => {
   };
   const filteredSearchDetails =
     filters.propTypes === projectprops.plot
-      ? searchDetails.filter(
+      ? ListingSearchDetails.filter(
           (item) => !["Parking", "Unit Type", "Bath"].includes(item)
         )
-      : searchDetails;
+      : ListingSearchDetails;
   return (
     <div className=" flex justify-start items-start w-[70vw] top-[160px] left-[70%]">
       <div className="w-[20%] flex shadow-md justify-start items-center flex-col ">
@@ -106,6 +106,31 @@ const FilterPopup = () => {
           className="w-full pt-[1%] pl-[2%]    "
           viewportRef={viewport}
         >
+          {filters?.propTypes != projectprops.plot && (
+            <React.Fragment>
+              <h3
+                className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[1%] "
+                id="Unit Type"
+              >
+                BHK
+              </h3>
+              <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
+                {SEARCH_FILTER_DATA.bhkDetails.map((eachStatus, index) => {
+                  return (
+                    <Checkbox
+                      label={eachStatus.title}
+                      color="green"
+                      key={index}
+                      onClick={() =>
+                        handleCheckboxClick("unitTypes", eachStatus.value)
+                      }
+                      checked={filters.unitTypes.includes(eachStatus.value)}
+                    />
+                  );
+                })}
+              </div>
+            </React.Fragment>
+          )}
           <h3
             className=" text-[#202020] mb-[2%] text-[14px] font-[500] "
             id="Project Status"
@@ -123,6 +148,64 @@ const FilterPopup = () => {
                   onChange={() => setStatus(eachStatus.cid)}
                   label={eachStatus.Label}
                   name="propertyStatus"
+                />
+              );
+            })}
+          </div>
+          <h3
+            className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] flex items-center gap-[5px] "
+            id="Property Type"
+          >
+            Property Type {notificationIcon}
+          </h3>
+          <div className="flex  mb-[3%] justify-start items-start flex-wrap gap-[4%]">
+            {propKeys.map((keyName, i) => {
+              return (
+                <Radio
+                  key={i}
+                  iconColor="dark.8"
+                  color="green"
+                  label={propertyDetailsTypes?.get(keyName)?.name}
+                  value={propertyDetailsTypes?.get(keyName)?.id}
+                  name="propertyType"
+                  style={{ whiteSpace: "nowrap", marginBottom: "10px" }}
+                  onClick={() =>
+                    setPropTypes(
+                      propertyDetailsTypes?.get(keyName)?.id as number
+                    )
+                  }
+                  checked={
+                    filters.propTypes === propertyDetailsTypes?.get(keyName)?.id
+                  }
+                />
+              );
+            })}
+          </div>
+          <h3
+            className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] flex items-center gap-[5px] "
+            id="Property Type"
+          >
+            Listed By
+          </h3>
+          <div className="flex  mb-[3%] justify-start items-start flex-wrap gap-[4%]">
+            {SEARCH_FILTER_DATA.listedBy.map(({ value, constDesc }, i) => {
+              return (
+                <Radio
+                  key={i}
+                  iconColor="dark.8"
+                  color="green"
+                  label={constDesc}
+                  value={value}
+                  name="propertyType"
+                  style={{ whiteSpace: "nowrap", marginBottom: "10px" }}
+                  // onClick={() =>
+                  //   setPropTypes(
+                  //     propertyDetailsTypes?.get(keyName)?.id as number
+                  //   )
+                  // }
+                  // checked={
+                  //   filters.propTypes === propertyDetailsTypes?.get(keyName)?.id
+                  // }
                 />
               );
             })}
@@ -174,62 +257,6 @@ const FilterPopup = () => {
             onSearchChange={(value) => setSearchLocality(value)}
             rightSection={<DropDownIcon />}
           />
-
-          <h3
-            className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] flex items-center gap-[5px] "
-            id="Property Type"
-          >
-            Property Type {notificationIcon}
-          </h3>
-          <div className="flex  mb-[3%] justify-start items-start flex-wrap gap-[4%]">
-            {propKeys.map((keyName, i) => {
-              return (
-                <Radio
-                  key={i}
-                  iconColor="dark.8"
-                  color="green"
-                  label={propertyDetailsTypes?.get(keyName)?.name}
-                  value={propertyDetailsTypes?.get(keyName)?.id}
-                  name="propertyType"
-                  style={{ whiteSpace: "nowrap", marginBottom: "10px" }}
-                  onClick={() =>
-                    setPropTypes(
-                      propertyDetailsTypes?.get(keyName)?.id as number
-                    )
-                  }
-                  checked={
-                    filters.propTypes === propertyDetailsTypes?.get(keyName)?.id
-                  }
-                />
-              );
-            })}
-          </div>
-
-          {filters?.propTypes != projectprops.plot && (
-            <React.Fragment>
-              <h3
-                className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] "
-                id="Unit Type"
-              >
-                Unit Type
-              </h3>
-              <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
-                {SEARCH_FILTER_DATA.bhkDetails.map((eachStatus, index) => {
-                  return (
-                    <Checkbox
-                      label={eachStatus.title}
-                      color="green"
-                      key={index}
-                      onClick={() =>
-                        handleCheckboxClick("unitTypes", eachStatus.value)
-                      }
-                      checked={filters.unitTypes.includes(eachStatus.value)}
-                    />
-                  );
-                })}
-              </div>
-            </React.Fragment>
-          )}
 
           <h3
             className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] "

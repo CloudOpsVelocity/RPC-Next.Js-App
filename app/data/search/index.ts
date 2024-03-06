@@ -65,12 +65,13 @@ export const SEARCH_FILTER_DATA = {
   listedBy: [
     {
       cid: 1,
-      constDesc: "RERA",
+      constDesc: "Individual",
       constGroup: "listedBy",
       constType: "IN",
       constParentGroup: "listedBy",
       parentGroupId: 100,
       seq: 1,
+      value: "I",
     },
     {
       cid: 2,
@@ -80,6 +81,7 @@ export const SEARCH_FILTER_DATA = {
       constParentGroup: "listedBy",
       parentGroupId: 100,
       seq: 2,
+      value: "B",
     },
     {
       cid: 3,
@@ -89,6 +91,7 @@ export const SEARCH_FILTER_DATA = {
       constParentGroup: "listedBy",
       parentGroupId: 100,
       seq: 3,
+      value: "A",
     },
   ],
   amenities: [

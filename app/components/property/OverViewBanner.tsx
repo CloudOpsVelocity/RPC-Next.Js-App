@@ -75,10 +75,14 @@ export default function PropertyOverviewBanner({
 }
 
 const PriceBreakUp = ({ otherPrice }: { otherPrice: Main["otherPrice"] }) => {
-  const filterOtherDetails = Object.keys(otherPrice).filter(
-    (item) => !["otherCharge", "price"].includes(item)
-  );
-  const sum = filterOtherDetails.reduce(
+  const filterOtherDetails =
+    otherPrice &&
+    Object?.keys(otherPrice).filter(
+      (item) =>
+        !["otherCharge", "price", "securetyType"].includes(item) &&
+        otherPrice[item] !== "NA"
+    );
+  const sum = filterOtherDetails?.reduce(
     (a, b) => Number(a) + Number(otherPrice[b] || "0"),
     0
   );
@@ -94,7 +98,7 @@ const PriceBreakUp = ({ otherPrice }: { otherPrice: Main["otherPrice"] }) => {
           </h3>
           <li className="flex w-[771px]  items-start gap-[26px] text-[#4D6677] text-2xl not-italic font-bold leading-[23.784px] border-dashed border-b pb-5">
             <div>Price/SQ.FT</div>{" "}
-            <div className="font-semibold">₹ {otherPrice.price}</div>
+            <div className="font-semibold">₹ {otherPrice?.price}</div>
           </li>
         </div>
         <div className="w-full grid grid-cols-2 justify-between items-center">
@@ -102,7 +106,7 @@ const PriceBreakUp = ({ otherPrice }: { otherPrice: Main["otherPrice"] }) => {
             <h3 className="text-[#034AB6] text-[28px] not-italic font-bold leading-[normal] underline uppercase">
               applicable charges
             </h3>
-            {filterOtherDetails.map((key, i) => {
+            {filterOtherDetails?.map((key, i) => {
               return (
                 <li
                   key={i}
@@ -125,10 +129,10 @@ const PriceBreakUp = ({ otherPrice }: { otherPrice: Main["otherPrice"] }) => {
             </h3>
             <li className="flex max-w-[771px]  items-start gap-[26px] text-[#4D6677]  text-2xl  font-bold leading-[23.784px]  border-b-2 border-black pb-5">
               <div>Other Charges</div>{" "}
-              <div className="font-semibold">₹ {otherPrice.otherCharge}</div>
+              <div className="font-semibold">₹ {otherPrice?.otherCharge}</div>
             </li>
           </div>
-          <OtherSideCard price={sum + Number(otherPrice.price)} />
+          <OtherSideCard price={sum + Number(otherPrice?.price)} />
         </div>
       </div>
     </>
