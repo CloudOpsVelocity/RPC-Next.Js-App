@@ -13,4 +13,6 @@ export interface Search {
   lang: number;
   coverUrl: string;
   propTypes?: string[];
+  availableFrom: string;
+  coverImage: string;
 }

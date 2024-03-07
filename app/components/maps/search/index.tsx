@@ -22,7 +22,6 @@ import selectedSearchAtom from "@/app/store/search/map";
 
 const Map = ({ data, lat, lang }: any) => {
   const position: LatLngTuple = [lat, lang];
-
   return (
     <>
       <MapContainer
@@ -72,7 +71,7 @@ const MapContent = ({ data }: any) => {
         data.length > 0 &&
         data?.map((item: any) => (
           <Marker
-            position={[parseFloat(item?.lat), parseFloat(item?.lang)]}
+            position={[parseFloat(item?.lat || 0), parseFloat(item?.lang || 0)]}
             icon={isMobile ? MobileIcon : MapIcon}
           >
             {selected?.projName === item.projName && (

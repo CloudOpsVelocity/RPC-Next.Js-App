@@ -25,6 +25,7 @@ import { useDebouncedState } from "@mantine/hooks";
 import { useQuery } from "react-query";
 import { getData } from "@/app/utils/api/search";
 import { usePathname } from "next/navigation";
+import clsx from "clsx";
 
 const FilterPopup = () => {
   const path = usePathname();
@@ -46,6 +47,7 @@ const FilterPopup = () => {
     setFilters,
     remnoveSearchOptions,
     setSingleType,
+    isFilterApplied,
   } = useSearchFilters();
   const viewport = useRef<HTMLDivElement>(null);
   const scrollWhereIsSelected = (item: string) => {
@@ -82,12 +84,17 @@ const FilterPopup = () => {
                 key={index}
                 title={eachItem}
                 onChange={() => scrollWhereIsSelected(eachItem)}
-                buttonClass={`whitespace-nowrap w-full text-[15px] flex flex-row-reverse justify-end pl-[10%] items-center border-solid border-b-[0.5px] items-start px-4 py-4 h-[31px] gap-[8px] ${
+                buttonClass={clsx(
+                  `whitespace-nowrap w-full text-[15px] flex flex-row-reverse justify-end pl-[10%] items-center border-solid border-b-[0.5px] items-start px-4 py-4 h-[31px] gap-[8px]`,
                   current == eachItem
                     ? "text-[#148B16] bg-[#F1F9FF] font-[700]"
                     : "text-[#202020] bg-[#FCFCFC] font-[500]"
-                } `}
-                icon={current == eachItem ? fourStarIcon : ""}
+                )}
+                icon={
+                  current == eachItem || isFilterApplied(eachItem)
+                    ? fourStarIcon
+                    : ""
+                }
               />
             );
           })}

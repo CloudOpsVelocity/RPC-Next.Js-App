@@ -124,6 +124,64 @@ export default function useSearchFilters(
     count += unitTypes.length || 0;
     return count;
   };
+  const isFilterApplied = (filterKey: string): boolean => {
+    const {
+      propTypes,
+      reraVerified,
+      listedBy,
+      furnish,
+      propStatus,
+      areaValue,
+      bugdetValue,
+      amenities,
+      bathRooms,
+      builderIds,
+      city,
+      facings,
+      locality,
+      parkings,
+      unitTypes,
+      current,
+    } = filters;
+
+    switch (filterKey) {
+      case "Project Status":
+        return !!current;
+      case "Locality":
+        return !!locality.length;
+      case "Property Type":
+        return !!propTypes;
+      case "Unit Type":
+        return !!unitTypes.length;
+      case "Area":
+        return areaValue[0] !== 0 || areaValue[1] !== 5000;
+      case "Budget":
+        return bugdetValue[0] !== 0 || bugdetValue[1] !== 5;
+      case "Bath":
+        return !!bathRooms.length;
+      case "Amenities":
+        return !!amenities?.length;
+      case "Parking":
+        return !!parkings.length;
+      case "RERA":
+        return !!reraVerified;
+      case "Builder":
+        return !!builderIds.length;
+      // case "Bhk":
+      //   return !!current;
+
+      case "Facing":
+        return !!facings.length;
+      case "Posted By":
+        return !!listedBy;
+      case "Furnishing":
+        return !!furnish;
+      case "City":
+        return !!city;
+      default:
+        return false;
+    }
+  };
 
   const handleBooleanCheck = () => {
     setFilters((prevFilters) => ({
@@ -197,6 +255,12 @@ export default function useSearchFilters(
     setAppliedFilters({ runner: setParams });
     callback && callback();
   };
+  const listByCondition = filters.listedBy === "I" || filters.listedBy === "A";
+  const value = listByCondition
+    ? "owner"
+    : input === undefined
+    ? "project"
+    : input;
 
   const {
     fetchNextPage,
@@ -207,14 +271,9 @@ export default function useSearchFilters(
     isLoading,
     hasPreviousPage,
   } = useInfiniteQuery({
-    queryKey: ["srptest" + convertToQueryParams(params as any) + input],
-
+    queryKey: ["srptest" + convertToQueryParams(params as any) + value],
     queryFn: ({ pageParam = 0 }) =>
-      getFilteredData(
-        convertToQueryParams(params as any),
-        pageParam,
-        input === undefined ? "project" : input
-      ),
+      getFilteredData(convertToQueryParams(params as any), pageParam, value),
 
     getNextPageParam: (lastPage, allPages) => {
       const nextPage = allPages.length;
@@ -269,6 +328,7 @@ export default function useSearchFilters(
     remnoveSearchOptions,
     setSingleType,
     handleCityReset,
+    isFilterApplied,
   };
 }
 

@@ -14,7 +14,8 @@ import selectedSearchAtom from "@/app/store/search/map";
 
 type Props = {
   type: any;
-} & Search;
+} & Search &
+  any;
 
 const ProjectDetailsCard = ({
   type,
@@ -29,8 +30,19 @@ const ProjectDetailsCard = ({
   postedDate,
   projIdEnc,
   propTypes,
-  lat,
-  lang,
+  lat = 22.176912,
+  lang = 75.66009,
+  availableFrom,
+  coverImage,
+  ca,
+  sba,
+  propName,
+  bhkName,
+  propTypeName,
+  category,
+  localityName,
+  price,
+  propStatus,
 }: Props) => {
   const { data: session } = useSession();
 
@@ -80,7 +92,7 @@ const ProjectDetailsCard = ({
             </p>
           )}
           <Image
-            src={coverUrl}
+            src={coverUrl ?? coverImage}
             width={147}
             height={147}
             alt="conver"
@@ -88,7 +100,7 @@ const ProjectDetailsCard = ({
           />
           <p className="text-[#FFF] text-[10px] md:text-[12px] mt-[-40px] absolute left-[4px] gap-[4px] z-10 flex justify-center rounded-[20px] items-center p-[7px] font-[500] rtm">
             {" "}
-            Ready to move
+            {propStatus ?? "Ready To Move"}
           </p>
         </div>
         <div className="w-full p-[2%] justify-center  flex flex-col">
@@ -98,16 +110,17 @@ const ProjectDetailsCard = ({
             </p>
           ) : (
             <p className="text-[#001F35] text-[15px] font-[600]">
-              3BHK Apartment for Sell in Kadugodi,{" "}
+              {bhkName} {propTypeName} for {category} in {localityName},{" "}
               <span className="text-[#148B16] text-[16px] font-[700]">
                 {" "}
-                ₹ 2.36 Cr
+                {formatCurrency(price)}
               </span>
             </p>
           )}
           <p className="text-[#768AA9] text-[10px] md:text-[12px] md:text-sm not-italic font-semibold leading-[normal]">
-            {propTypes && propTypes?.length > 0 ? propTypes?.join(" ,") : "N/A"}
-            {}
+            {propTypes && propTypes?.length > 0
+              ? propTypes?.join(" ,")
+              : propName}
           </p>
           <div className=" flex justify-between items-start w-full ">
             <div className=" flex justify-start items-start flex-col mt-auto">
@@ -129,20 +142,20 @@ const ProjectDetailsCard = ({
               {type != "proj" && (
                 <p className="text-[#333] text-[10px]  md:text-[13px] font-[500]">
                   Super Builtup Area:{" "}
-                  <span className=" font-[600]">2,617 sq.ft</span>
+                  <span className=" font-[600]">{sba} sq.ft</span>
                 </p>
               )}
 
               {type != "proj" && (
                 <p className="text-[#333] text-[13px] font-[500]">
-                  Carpet Area:{" "}
-                  <span className=" font-[600]"> 2,617 sq.ft </span>₹ 9626/ sqft
+                  Carpet Area: <span className=" font-[600]"> {ca} sq.ft </span>
+                  ₹ {calculateDivision(price, sba)}/ sqft
                 </p>
               )}
               <p className="text-[#333] text-[10px]  md:text-[13px] font-[500]">
                 Available From:{" "}
                 <span className=" font-[600]">
-                  {formatDateDDMMYYYY(launchDate)}
+                  {formatDateDDMMYYYY(launchDate ?? availableFrom)}
                 </span>
               </p>
             </div>
@@ -164,7 +177,8 @@ const ProjectDetailsCard = ({
               </button>
 
               <p className="text-[#202020] text-[10px]  md:text-[12px] font-[400]">
-                Posted By: <span className=" font-[600]">Builder</span>
+                Posted By:{" "}
+                <span className=" font-[600]">{getTypeText(type)}</span>
               </p>
               <p className="text-[#202020] text-[10px]  md:text-[12px] font-[400]">
                 Date:{" "}
@@ -213,3 +227,31 @@ const ProjectDetailsCard = ({
 };
 
 export default ProjectDetailsCard;
+function getTypeText(type: string) {
+  let text;
+
+  if (type === "proj") {
+    text = "Builder";
+  } else if (type === "I") {
+    text = "Owner";
+  } else if (type === "A") {
+    text = "Agent";
+  } else {
+    text = "Unknown";
+  }
+
+  return text;
+}
+
+function calculateDivision(price: string, sba: string): string {
+  const priceValue: number = parseFloat(price);
+  const sbaValue: number = parseFloat(sba);
+
+  if (isNaN(priceValue) || isNaN(sbaValue) || sbaValue === 0) {
+    return "N/A";
+  }
+
+  const result: string = (priceValue / sbaValue).toFixed(2);
+
+  return result;
+}
