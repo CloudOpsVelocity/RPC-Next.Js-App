@@ -19,8 +19,6 @@ const LeftSideBlock = () => {
   const [opned, { close }] = useReqCallPopup();
   const {
     searchProps: { isLoading, data, hasNextPage, fetchMoreData },
-    handleReset,
-    setSingleType,
     handleAppliedFilters,
     filters,
     params,
@@ -37,56 +35,35 @@ const LeftSideBlock = () => {
       fetchMoreData();
     }
   }, [entry?.isIntersecting, hasNextPage]);
-  const onTabChange = (value: string) => {
-    switch (value) {
-      case "proj":
-        handleReset("searchProj", diffToProjFromListing.proj);
-        break;
-      case "A":
-        {
-          const updatedFilters = { ...filters };
-          for (const key in updatedFilters) {
-            if (diffToProjFromListing.listing.includes(key)) {
-              // @ts-ignore
-              updatedFilters[key] = initialState[key];
-            }
-          }
-          setFilters({ ...updatedFilters, listedBy: value });
-          handleAppliedFilters();
-        }
 
-        break;
-      case "I":
-        {
-          const updatedFilters = { ...filters };
-          for (const key in updatedFilters) {
-            if (diffToProjFromListing.listing.includes(key)) {
-              // @ts-ignore
-              updatedFilters[key] = initialState[key];
-            }
-          }
-          setFilters({ ...updatedFilters, listedBy: value });
-          handleAppliedFilters();
-        }
-        break;
-      default:
-        handleReset("all");
-        break;
+  const onTabChange = (listedBy: "A" | "I" | "proj"): void => {
+    if (!listedBy) {
+      console.error(`Invalid value passed to onTabChange: ${listedBy}`);
+      return;
     }
-    // handleReset("all");
-    // if (value === "proj") {
-    //   handleReset("searchProj");
-    //   return null;
-    // } else {
-    // setSingleType("listedBy", value);
-    // handleAppliedFilters();
-    // }
+    const updatedFilters =
+      listedBy === "proj"
+        ? { ...filters, listedBy: null }
+        : {
+            ...filters,
+            ...Object.fromEntries(
+              (diffToProjFromListing[listedBy] ?? []).map((key: string) => [
+                key,
+                // @ts-ignore
+                (initialState[key] ?? null) as any,
+              ])
+            ),
+            listedBy,
+          };
+    setFilters(updatedFilters);
+    handleAppliedFilters();
   };
+
   return (
     <div className="md:w-[50%] sm:w-[100%]  md:bg-white  min-w-[400px] md:min-w-[500px]">
       <Tabs
         value={params.listedBy ?? "proj"}
-        onChange={(value) => onTabChange(value ?? "proj")}
+        onChange={(value) => onTabChange((value as "proj") || "proj")}
         defaultValue="proj"
       >
         <Tabs.List className={S.bg}>
