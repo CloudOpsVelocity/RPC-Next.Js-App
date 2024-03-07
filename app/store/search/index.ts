@@ -40,6 +40,11 @@ export const initialState: SearchFilter = {
   furnish: null,
   propStatus: null,
 };
+export const diffToProjFromListing = {
+  proj: ["facings", "furnish", "propStatus", "listedBy"],
+  listing: ["current", "reraVerified", "builderIds"],
+};
+
 export const searachFilterAtom = atom<SearchFilter>(initialState);
 searachFilterAtom.onMount = (setAtom) => {
   setAtom(getAppliedFilters());
@@ -47,7 +52,6 @@ searachFilterAtom.onMount = (setAtom) => {
 export const appliedFiltersParams = atom(null, (get, set, t: any) => {
   const appliedFilters = get(searachFilterAtom);
   const parsedData = filterParser(appliedFilters);
-  console.log(parsedData);
   t.runner(parsedData);
 });
 
@@ -58,6 +62,5 @@ function getAppliedFilters(): SearchFilter {
     queryData[key] = value;
   });
   const data: SearchFilter = convertToOriginalState(queryData);
-  console.log(data);
   return data;
 }

@@ -3,6 +3,7 @@ import {
   searachFilterAtom,
   appliedFiltersParams,
   SearchFilter,
+  diffToProjFromListing,
 } from "@/app/store/search";
 import { convertToQueryParams } from "@/app/utils/search/query";
 import { Search } from "@/app/validations/types/search";
@@ -54,9 +55,11 @@ export default function useSearchFilters(
 
   const setSingleType = (
     key: keyof ExtentSearchFilters,
-    value: string | number
+    value: string | number,
+    callback?: () => void
   ) => {
     setFilters({ ...filters, [key]: value });
+    callback && callback();
   };
   type SearchFilter = {
     unitTypes: string;
@@ -125,7 +128,8 @@ export default function useSearchFilters(
     }));
   };
   const handleReset = (
-    type: "unitType" | "price" | "all" | "propType" | "listedBy"
+    type: "unitType" | "price" | "all" | "propType" | "listedBy" | "searchProj",
+    keys?: string[]
   ) => {
     switch (type) {
       case "unitType":
@@ -162,6 +166,17 @@ export default function useSearchFilters(
           propTypes: null,
         }));
         setParams({ propTypes: null });
+        break;
+      case "searchProj":
+        const updatedFilters = { ...filters };
+        for (const key in updatedFilters) {
+          if (keys && keys.includes(key)) {
+            // @ts-ignore
+            updatedFilters[key] = initialState[key];
+          }
+        }
+        setFilters(updatedFilters);
+        handleAppliedFilters();
         break;
       default:
         setFilters(initialState);

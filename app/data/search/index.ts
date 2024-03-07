@@ -27,7 +27,6 @@ export const SEARCH_FILTER_DATA = {
       constDesc: "Completed",
       Label: "Ready to Move",
     },
-
   ],
   bhkDetails: [
     {
@@ -119,11 +118,11 @@ export const SEARCH_FILTER_DATA = {
     },
     {
       label: "Owner Listing",
-      value: "owner-props",
+      value: "I",
     },
     {
       label: "Agent Listing",
-      value: "agent-props",
+      value: "A",
     },
   ],
   facing: [

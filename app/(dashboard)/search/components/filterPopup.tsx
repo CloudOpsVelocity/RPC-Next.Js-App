@@ -380,7 +380,7 @@ const FilterPopup = () => {
           </h3>
           {filters.builderIds.length > 0 && (
             <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
-              {filters.builderIds.map((eachLocality, index) => {
+              {filters.builderIds?.map((eachLocality, index) => {
                 return (
                   <div
                     key={index}

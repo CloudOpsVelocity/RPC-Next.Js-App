@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { Select, Tabs } from "@mantine/core";
+import { Tabs } from "@mantine/core";
 import ProjectDetailsCard from "./projectCard";
 import S from "@/app/styles/seach/Index.module.css";
 import {
@@ -10,17 +10,21 @@ import {
   strikeIconIcon,
 } from "@/app/images/commonSvgs";
 import useSearchFilters from "@/app/hooks/search";
-import Loading from "@/app/components/atoms/Loader";
 import RequestCallBackModal from "@/app/components/molecules/popups/req";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
 import { SEARCH_FILTER_DATA } from "@/app/data/search";
 
 const LeftSideBlock = () => {
-  const [opned, { close, open }] = useReqCallPopup();
-  const [activeTab, setActiveTab] = useState<string | null>("proj");
+  const [opned, { close }] = useReqCallPopup();
   const {
     searchProps: { isLoading, data, hasNextPage, fetchMoreData },
+    handleReset,
+    setSingleType,
+    handleAppliedFilters,
+    filters,
+    params,
+    setFilters,
   } = useSearchFilters("project");
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -33,12 +37,58 @@ const LeftSideBlock = () => {
       fetchMoreData();
     }
   }, [entry?.isIntersecting, hasNextPage]);
-  const onChnageTab = (value: string) => {
-    return;
+  const onTabChange = (value: string) => {
+    switch (value) {
+      case "proj":
+        handleReset("searchProj", diffToProjFromListing.proj);
+        break;
+      case "A":
+        {
+          const updatedFilters = { ...filters };
+          for (const key in updatedFilters) {
+            if (diffToProjFromListing.listing.includes(key)) {
+              // @ts-ignore
+              updatedFilters[key] = initialState[key];
+            }
+          }
+          setFilters({ ...updatedFilters, listedBy: value });
+          handleAppliedFilters();
+        }
+
+        break;
+      case "I":
+        {
+          const updatedFilters = { ...filters };
+          for (const key in updatedFilters) {
+            if (diffToProjFromListing.listing.includes(key)) {
+              // @ts-ignore
+              updatedFilters[key] = initialState[key];
+            }
+          }
+          setFilters({ ...updatedFilters, listedBy: value });
+          handleAppliedFilters();
+        }
+        break;
+      default:
+        handleReset("all");
+        break;
+    }
+    // handleReset("all");
+    // if (value === "proj") {
+    //   handleReset("searchProj");
+    //   return null;
+    // } else {
+    // setSingleType("listedBy", value);
+    // handleAppliedFilters();
+    // }
   };
   return (
     <div className="md:w-[50%] sm:w-[100%]  md:bg-white  min-w-[400px] md:min-w-[500px]">
-      <Tabs value={activeTab} onChange={setActiveTab} defaultValue="proj">
+      <Tabs
+        value={params.listedBy ?? "proj"}
+        onChange={(value) => onTabChange(value ?? "proj")}
+        defaultValue="proj"
+      >
         <Tabs.List className={S.bg}>
           {SEARCH_FILTER_DATA.categoryData.map((eachItem, index) => {
             return (
@@ -71,7 +121,7 @@ const LeftSideBlock = () => {
                 return (
                   <ProjectDetailsCard
                     key={index}
-                    type={activeTab}
+                    type={filters.listedBy ?? "proj"}
                     {...eachOne}
                   />
                 );
@@ -90,13 +140,19 @@ const LeftSideBlock = () => {
             )}
           </div>
         </Tabs.Panel>
-        <Tabs.Panel value="owner-props">
+        <Tabs.Panel value="I">
           <div className=" p-[2%] max-h-[700px] overflow-y-auto  h-screen ">
-            {/* {projectsData != undefined &&
-            projectsData.length != undefined &&
-            projectsData.length > 0 ? (
-              projectsData.map((eachOne, index) => {
-                return <ProjectDetailsCard key={index} type={activeTab} />;
+            {data != undefined &&
+            data.length != undefined &&
+            data.length > 0 ? (
+              data.map((eachOne, index) => {
+                return (
+                  <ProjectDetailsCard
+                    key={index}
+                    type={filters.listedBy}
+                    {...eachOne}
+                  />
+                );
               })
             ) : (
               <div className="flex w-full h-full justify-center items-center flex-col ">
@@ -104,16 +160,22 @@ const LeftSideBlock = () => {
                 No Matching Results Found !
                 <span className="relative left-[10%] ">{strikeIconIcon}</span>
               </div>
-            )} */}
+            )}
           </div>
         </Tabs.Panel>
-        <Tabs.Panel value="agent-props">
+        <Tabs.Panel value="A">
           <div className=" p-[2%] max-h-[700px] overflow-y-auto  h-screen ">
-            {/* {projectsData != undefined &&
-            projectsData.length != undefined &&
-            projectsData.length > 0 ? (
-              projectsData.map((eachOne, index) => {
-                return <ProjectDetailsCard key={index} type={activeTab} />;
+            {data != undefined &&
+            data.length != undefined &&
+            data.length > 0 ? (
+              data.map((eachOne, index) => {
+                return (
+                  <ProjectDetailsCard
+                    key={index}
+                    type={filters.listedBy}
+                    {...eachOne}
+                  />
+                );
               })
             ) : (
               <div className="flex w-full h-full justify-center items-center flex-col ">
@@ -121,7 +183,7 @@ const LeftSideBlock = () => {
                 No Matching Results Found !
                 <span className="relative left-[10%] ">{strikeIconIcon}</span>
               </div>
-            )} */}
+            )}
           </div>
         </Tabs.Panel>
       </Tabs>
@@ -135,6 +197,7 @@ export { LeftSideBlock };
 import { Menu } from "@mantine/core";
 import { useIntersection } from "@mantine/hooks";
 import SearchSkeleton from "@/app/components/atoms/skeleton/search";
+import { diffToProjFromListing, initialState } from "@/app/store/search";
 
 function SortBy() {
   const [selected, setSort] = useState("");

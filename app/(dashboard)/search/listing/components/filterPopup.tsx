@@ -24,8 +24,10 @@ import useSearchFilters from "@/app/hooks/search";
 import { useDebouncedState } from "@mantine/hooks";
 import { useQuery } from "react-query";
 import { getData } from "@/app/utils/api/search";
+import { usePathname } from "next/navigation";
 
 const FilterPopup = () => {
+  const path = usePathname();
   const [current, setCurrent] = useState("Bhk");
   const propKeys = [35, 33, 31, 34, 32];
   const [localitySearch, setSearchLocality] = useDebouncedState("", 500);
@@ -40,8 +42,6 @@ const FilterPopup = () => {
     filters,
     handleCheckboxClick,
     setPropTypes,
-    setStatus,
-    handleBooleanCheck,
     handleSliderChange,
     setFilters,
     remnoveSearchOptions,
@@ -183,8 +183,9 @@ const FilterPopup = () => {
             Listed By
           </h3>
           <div className="flex  mb-[3%] justify-start items-start flex-wrap gap-[4%]">
-            {SEARCH_FILTER_DATA.listedBy.map(({ value, constDesc }, i) => {
-              return (
+            {SEARCH_FILTER_DATA.listedBy
+              .filter(({ value }) => !(value === "B" && path === "/search"))
+              .map(({ value, constDesc }, i) => (
                 <Radio
                   key={i}
                   iconColor="dark.8"
@@ -196,8 +197,7 @@ const FilterPopup = () => {
                   onClick={() => setSingleType("listedBy", value)}
                   checked={filters.listedBy === value}
                 />
-              );
-            })}
+              ))}
           </div>
 
           <h3
