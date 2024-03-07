@@ -87,31 +87,41 @@ export default function useSearchFilters(
     }
   };
   const countAppliedFilters = (): number => {
-    let count: number = 0;
-    for (const key in filters) {
-      if (Object.prototype.hasOwnProperty.call(filters, key)) {
-        if (
-          key === "current" ||
-          key === "propTypes" ||
-          key === "reraVerified" ||
-          key === "listedBy" ||
-          key === "furnish" ||
-          key === "propStatus"
-        ) {
-          count += filters[key] ? 1 : 0;
-        } else if (key === "areaValue") {
-          count +=
-            JSON.stringify(filters[key]) !== JSON.stringify([0, 5000]) ? 1 : 0;
-        } else if (key === "bugdetValue") {
-          count +=
-            JSON.stringify(filters[key]) !== JSON.stringify([0, 5]) ? 1 : 0;
-        } else {
-          count += Array.isArray(filters[key as keyof SearchFilter])
-            ? filters[key as keyof SearchFilter].length
-            : 0;
-        }
-      }
-    }
+    let count = 0;
+    const {
+      current,
+      propTypes,
+      reraVerified,
+      listedBy,
+      furnish,
+      propStatus,
+      areaValue,
+      bugdetValue,
+      amenities,
+      bathRooms,
+      builderIds,
+      city,
+      facings,
+      locality,
+      parkings,
+      unitTypes,
+    } = filters;
+    count += current ? 1 : 0;
+    count += propTypes ? 1 : 0;
+    count += reraVerified ? 1 : 0;
+    count += listedBy ? 1 : 0;
+    count += furnish ? 1 : 0;
+    count += propStatus?.length || 0;
+    count += areaValue[0] !== 0 || areaValue[1] !== 5000 ? 1 : 0;
+    count += bugdetValue[0] !== 0 || bugdetValue[1] !== 5 ? 1 : 0;
+    count += amenities?.length || 0;
+    count += bathRooms.length || 0;
+    count += builderIds.length || 0;
+    count += city ? 1 : 0;
+    count += locality.length || 0;
+    count += parkings.length || 0;
+    count += facings.length || 0;
+    count += unitTypes.length || 0;
     return count;
   };
 
@@ -187,11 +197,6 @@ export default function useSearchFilters(
     setAppliedFilters({ runner: setParams });
     callback && callback();
   };
-  // const searchProps = useQuery({
-  //   queryFn: () => getFilteredData(convertToQueryParams(params as any), 0),
-  //   queryKey: ["srp" + convertToQueryParams(params as any)],
-  //   enabled: path === "/search",
-  // });
 
   const {
     fetchNextPage,
