@@ -83,7 +83,7 @@ const ProjectDetailsCard = ({
   };
   const setSelected = useSetAtom(selectedSearchAtom);
   return (
-    <div className=" flex w-full mb-[5%] flex-col shadow-md ">
+    <div className=" flex w-full mb-[5%] flex-col shadow-md " id={reqId}>
       <div className=" flex justify-center items-center w-full  ">
         <div className="w-full h-[120px]  md:h-[140px] md:max-w-[210px] max-w-[120px] bg-gray-300 relative">
           {type == "proj" && (
@@ -216,7 +216,7 @@ const ProjectDetailsCard = ({
           />
 
           <Button
-            onChange={() => open("prop", reqId)}
+            onChange={() => open(type === "proj" ? type : "prop", reqId)}
             title="Request Callback"
             icon={<Phone className="h-[16px] w-[16px] " />}
             buttonClass="flex justify-center items-center text-[#FFF] p-[2px] md:p-[5px] bg-[#0073C6] rounded-[5px] shadow-md text-[10px] md:text-[12px] font-[700]"

@@ -33,11 +33,15 @@ const RequestCallBackModal = ({
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error" | "otp"
   >("idle");
+  const handleClose = () => {
+    setStatus("idle");
+    close();
+  };
   return (
     <>
       <Modal
         opened={opened}
-        onClose={close}
+        onClose={handleClose}
         centered
         size={isMobile ? "100%" : "52%"}
         className="!rounded-full w-[90%]  md:w-[70%] lg:w-[65%] !p-0 "

@@ -80,38 +80,37 @@ const ProjectDetailsCard = ({
   };
   const setSelectedSearch = useSetAtom(listingSearchAtom);
   return (
-    <Link
-      href={`/listing/test/${reqId}`}
-      className=" flex w-full mb-[5%] flex-col shadow-md "
-    >
+    <div className=" flex w-full mb-[5%] flex-col shadow-md ">
       <div className=" flex justify-center items-center w-full h-full">
-        <div className="md:max-w-[320px] max-w-[150px] flex justify-center items-center w-full flex-col h-fit md:h-full    relative">
-          <div className="relative">
-            <Image
-              src={coverImage}
-              width={320}
-              height={174}
-              alt="conver"
-              className="w-full h-[110px] md:h-[174px]  shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] object-cover relative"
-            />
-            <p className="absolute text-[#FFF] text-[8px] md:text-[12px] bottom-2 left-5 md:mt-[-60px]  md:left-[10px] gap-[4px] z-10 flex justify-center rounded-[20px] items-center p-[7px] font-[500] rtm ">
-              {" "}
-              {propStatus}
-            </p>
-          </div>
+        <Link href={`/listing/test/${reqId}`}>
+          <div className="md:max-w-[320px] max-w-[150px] flex justify-center items-center w-full flex-col h-fit md:h-full    relative">
+            <div className="relative">
+              <Image
+                src={coverImage}
+                width={320}
+                height={174}
+                alt="conver"
+                className="w-full h-[110px] md:h-[174px]  shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] object-cover relative"
+              />
+              <p className="absolute text-[#FFF] text-[8px] md:text-[12px] bottom-2 left-5 md:mt-[-60px]  md:left-[10px] gap-[4px] z-10 flex justify-center rounded-[20px] items-center p-[7px] font-[500] rtm ">
+                {" "}
+                {propStatus}
+              </p>
+            </div>
 
-          <div className="flex-col flex md:hidden min-w-[100px] mt-2">
-            <p className="text-[#202020] text-[10px] md:text-[16px] font-[400]">
-              Posted By: <span className=" font-[600]">{postedBy}</span>
-            </p>
-            <p className="text-[#202020] text-[10px] md:text-[16px] font-[400]">
-              Date:{" "}
-              <span className=" font-[600]">
-                {formatDateDDMMYYYY("Wed Jan 30 00:00:00 IST 2030")}
-              </span>
-            </p>
+            <div className="flex-col flex md:hidden min-w-[100px] mt-2">
+              <p className="text-[#202020] text-[10px] md:text-[16px] font-[400]">
+                Posted By: <span className=" font-[600]">{postedBy}</span>
+              </p>
+              <p className="text-[#202020] text-[10px] md:text-[16px] font-[400]">
+                Date:{" "}
+                <span className=" font-[600]">
+                  {formatDateDDMMYYYY("Wed Jan 30 00:00:00 IST 2030")}
+                </span>
+              </p>
+            </div>
           </div>
-        </div>
+        </Link>
         <div className="w-full px-[2%]">
           <div>
             <p className="text-[#001F35] text-[12px]  md:text-[20px] font-[600]   md:mb-0">
@@ -155,6 +154,7 @@ const ProjectDetailsCard = ({
             </div>
           </div>
         </div>
+
         <div className="md:flex w-[197px] flex-col justify-center items-center gap-[6px] shrink-0 px-[22px] py-4 bg-[#E9F6FF] hidden">
           <div className="flex justify-center items-center gap-2 px-2.5 py-2 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.05)_inset] rounded-[5px] border-[0.5px] border-solid border-[#CAE9FF] bg-white">
             <Wallet />{" "}
@@ -205,7 +205,7 @@ const ProjectDetailsCard = ({
         // lat={lat}
         // lang={lang}
       />
-    </Link>
+    </div>
   );
 };
 
