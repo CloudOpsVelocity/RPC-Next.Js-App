@@ -43,6 +43,7 @@ const ProjectDetailsCard = ({
   localityName,
   price,
   propStatus,
+  propIdEnc,
 }: Props) => {
   const { data: session } = useSession();
 
@@ -50,18 +51,17 @@ const ProjectDetailsCard = ({
   const [, { open: openLogin }] = usePopShortList();
   const { toggleShortlist, shortlistedItems, compareItems, toggleCompare } =
     useShortlistAndCompare();
-
+  const reqId = type === "proj" ? projIdEnc : propIdEnc;
   const isItemInShortlist =
     shortlistedItems.length > 0 &&
-    shortlistedItems.some(
-      (item) => item.id === projIdEnc && item.status === "Y"
-    );
+    shortlistedItems.some((item) => item.id === reqId && item.status === "Y");
 
   const onAddingShortList = () => {
     if (session) {
       toggleShortlist({
-        id: projIdEnc,
+        id: reqId,
         status: isItemInShortlist ? "N" : "Y",
+        source: type,
       });
     } else {
       openLogin();
@@ -69,12 +69,13 @@ const ProjectDetailsCard = ({
   };
   const isItemCompared =
     compareItems.length > 0 &&
-    compareItems.some((item) => item.id === projIdEnc && item.status === "Y");
+    compareItems.some((item) => item.id === reqId && item.status === "Y");
   const onAddingCompare = () => {
     if (session) {
       toggleCompare({
-        id: projIdEnc,
+        id: reqId,
         status: isItemCompared ? "N" : "Y",
+        source: type,
       });
     } else {
       openLogin();
@@ -215,7 +216,7 @@ const ProjectDetailsCard = ({
           />
 
           <Button
-            onChange={() => open("card", projIdEnc)}
+            onChange={() => open("prop", reqId)}
             title="Request Callback"
             icon={<Phone className="h-[16px] w-[16px] " />}
             buttonClass="flex justify-center items-center text-[#FFF] p-[2px] md:p-[5px] bg-[#0073C6] rounded-[5px] shadow-md text-[10px] md:text-[12px] font-[700]"

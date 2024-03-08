@@ -19,6 +19,7 @@ import { formatCurrency } from "@/app/utils/numbers";
 import { useSetAtom } from "jotai";
 import { listingSearchAtom } from "@/app/store/search/map";
 import { Main } from "@/app/validations/property/search";
+import Link from "next/link";
 
 type Props = {
   type: any;
@@ -79,7 +80,10 @@ const ProjectDetailsCard = ({
   };
   const setSelectedSearch = useSetAtom(listingSearchAtom);
   return (
-    <div className=" flex w-full mb-[5%] flex-col shadow-md ">
+    <Link
+      href={`/listing/test/${propertyIdEnc}`}
+      className=" flex w-full mb-[5%] flex-col shadow-md "
+    >
       <div className=" flex justify-center items-center w-full h-full">
         <div className="md:max-w-[320px] max-w-[150px] flex justify-center items-center w-full flex-col h-fit md:h-full    relative">
           <div className="relative">
@@ -201,7 +205,7 @@ const ProjectDetailsCard = ({
         // lat={lat}
         // lang={lang}
       />
-    </div>
+    </Link>
   );
 };
 
