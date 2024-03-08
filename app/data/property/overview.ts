@@ -221,7 +221,6 @@ export function generatePropertyOverViewData(
       break;
     case "Plot":
       propertyDetails = [
-        { title: "Unit Type", value: data.bhkName, Icon: Others },
         {
           title: "Property Type",
           value: data.propTypeName,
@@ -246,6 +245,11 @@ export function generatePropertyOverViewData(
         {
           title: "Length of Plot",
           value: `${data.length} sq.ft`,
+          Icon: TotalLandArea,
+        },
+        {
+          title: "Breadth of Plot",
+          value: `${data.width} sq.ft`,
           Icon: TotalLandArea,
         },
       ];

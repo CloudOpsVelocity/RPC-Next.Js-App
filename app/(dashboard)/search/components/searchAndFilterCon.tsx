@@ -42,7 +42,6 @@ const SearchAndFilterCon = () => {
         size={isMobile ? "100%" : "45%"}
       >
         <SearchDrawerHeader open={open} close={close} />
-        {/* Drawer content */}
       </Drawer>
     </>
   );
@@ -88,7 +87,7 @@ const SearchHeader = ({ open, close }: any) => {
         <Select
           label=""
           placeholder="Select"
-          data={["Buy", "Rent", "Plot"]}
+          data={["Buy", "Rent"]}
           classNames={{ input: classes.wrapperSelect }}
           defaultValue={"Buy"}
           rightSection={<DropDownIcon />}

@@ -1,16 +1,27 @@
 "use client";
 import React, { useState, useCallback, useRef, useMemo } from "react";
 import { LuTrain, LuSearch } from "react-icons/lu";
-import { Tabs, ScrollArea } from "@mantine/core";
+import {
+  Text,
+  Tabs,
+  TextInput,
+  Loader,
+  ScrollArea,
+  Skeleton,
+} from "@mantine/core";
 
 import { clsx } from "clsx";
-import { Coordinates } from "@/app/utils/maps";
+import {
+  Coordinates,
+  calculateDistance,
+  calculateTime,
+} from "@/app/utils/maps";
 import { useDebouncedState } from "@mantine/hooks";
 import { nearbyLocationIcon } from "@/app/images/commonSvgs";
 import Loading from "../../atoms/Loader";
 import dynamic from "next/dynamic";
 import MapSkeleton from "../../maps/Skeleton";
-import useMapData from "@/app/hooks/property/useMapData";
+import useMapData from "@/app/hooks/project/useMapData";
 import PropertyHeading from "../../property/heading";
 
 interface Area {

@@ -1,4 +1,4 @@
 interface GlobalPageType {
-  types: "prop" | "prop";
+  types: "proj" | "prop";
 }
 export { GlobalPageType };

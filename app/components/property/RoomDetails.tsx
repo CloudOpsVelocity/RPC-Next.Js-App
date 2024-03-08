@@ -11,6 +11,7 @@ import {
   Car,
   CarParkingIcon,
   CloseBike,
+  CornorIcon,
   EndDate,
   FlatIcon,
   Furnishing,
@@ -18,16 +19,19 @@ import {
   Marble,
   NoticeMonth,
   OpenBike,
+  OpenSides,
   Others,
   OwnerShip,
   ParkingIcon,
   PetFreindly,
+  PlotConstruction,
   PropertyAvailable,
   SecurityIcon,
   StartDate,
   Status,
   TotalLandArea,
   TowerIcon,
+  WallIcons,
 } from "@/app/images/commonSvgs";
 import React, { useState } from "react";
 import { PhaseList } from "@/app/validations/types/project";
@@ -53,78 +57,68 @@ export default function RoomDetails({ data }: { data: Main }) {
         className="mb-[40px]"
       />
       <UnitBlock data={data} />
-      <div
-        className="w-[90%] mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] px-[53px] py-[39px]"
-        id="propertyDetails "
-      >
-        <h1 className={style.heading.h1}>Room Details</h1>
+      {data.propTypeName === "Plot" ? (
+        <PlotBlock data={data} />
+      ) : (
+        <RoomSection data={data} />
+      )}
 
-        <p className={style.heading.p}>
-          See the rooms that are available in This property
-        </p>
-
-        {/* <div className="text-[#148B16] font-[700] uppercase text-3xl mb-6">
-          2 BHK FOR SELL
-        </div> */}
-
-        <div className={"flex justify-start items-start flex-wrap w-[100%]  "}>
-          <RoomBasicDetails
-            key="launchDate"
-            icon={<Bathrooms />}
-            title="Bathroom"
-            value={data.nobt}
-            className={style.card}
-          />
-          <RoomBasicDetails
-            key="launchDate"
-            icon={<BedRooms />}
-            title="Bedrooms"
-            value={data?.bhkName?.split(" ")[0]}
-            className={style.card}
-          />
-
-          <RoomBasicDetails
-            key="landArea"
-            icon={<Balcony />}
-            title="Balcony"
-            value={data.nobl}
-            className={style.card}
-          />
-          <RoomBasicDetails
-            key="reraStatus"
-            icon={<Others />}
-            title="Other rooms"
-            value={"Store Room , Puja Room"}
-            className={style.card}
-          />
-          <RoomBasicDetails
-            key="reraStatus"
-            icon={<Furnishing />}
-            title="Furnishing"
-            value={data.furnshName}
-            className={style.card}
-          />
-        </div>
-      </div>
       <Parking {...data} />
-      <OtherDetails
-        // af={data.availableFrom}
-        // status={
-        //   data.availablityStatus == "U" ? "Under Construction" : "Ready to Move"
-        // }
-        // ft={data.flooringType}
-        // ownershipName={data.ownershipName}
-        // possassionDate={data.possassionDate}
-        // age={data.ageofBuilding}
-        // agreement={data.agrementduration}
-        // availfor={data.availableFrom}
-        // pet={"Pet Are Not Allowed"}
-        {...data}
-      />
+      <OtherDetails {...data} />
     </>
   );
 }
+const RoomSection = ({ data }: { data: Main }) => {
+  return (
+    <div
+      className="w-[90%] mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] px-[53px] py-[39px]"
+      id="propertyDetails "
+    >
+      <h1 className={style.heading.h1}>Room Details</h1>
 
+      <p className={style.heading.p}>
+        See the rooms that are available in This property
+      </p>
+
+      <div className={"flex justify-start items-start flex-wrap w-[100%]  "}>
+        <RoomBasicDetails
+          key="launchDate"
+          icon={<Bathrooms />}
+          title="Bathroom"
+          value={data.nobt}
+          className={style.card}
+        />
+        <RoomBasicDetails
+          key="launchDate"
+          icon={<BedRooms />}
+          title="Bedrooms"
+          value={data?.bhkName?.split(" ")[0]}
+          className={style.card}
+        />
+
+        <RoomBasicDetails
+          key="landArea"
+          icon={<Balcony />}
+          title="Balcony"
+          value={data.nobl}
+          className={style.card}
+        />
+        <RoomBasicDetails
+          icon={<Others />}
+          title="Other rooms"
+          value={"Store Room , Puja Room"}
+          className={style.card}
+        />
+        <RoomBasicDetails
+          icon={<Furnishing />}
+          title="Furnishing"
+          value={data.furnshName}
+          className={style.card}
+        />
+      </div>
+    </div>
+  );
+};
 const Parking = ({ noocp, noobp, noccp, nocbp }: any) => {
   const isAvail =
     [noocp, noobp, noccp, nocbp].filter((i) => i !== undefined).length > 0;
@@ -163,7 +157,6 @@ const Parking = ({ noocp, noobp, noccp, nocbp }: any) => {
             className={style.card}
           />
           <RoomBasicDetails
-            key="reraStatus"
             icon={<CloseBike />}
             title="Covered Bike Parking"
             value={nocbp}
@@ -184,6 +177,8 @@ const OtherDetails = ({
   agrementduration,
   cg,
   noticemonth,
+  propTypeName,
+  approvedByName,
 }: Main) => {
   return (
     <div
@@ -199,7 +194,6 @@ const OtherDetails = ({
       <div className="flex justify-start items-start flex-wrap   w-full">
         {cg === "R" && (
           <RoomBasicDetails
-            key="launchDate"
             icon={<NoticeMonth />}
             title="Notice Month"
             value={noticemonth}
@@ -208,14 +202,21 @@ const OtherDetails = ({
         )}
 
         <RoomBasicDetails
-          key="launchDate"
           icon={<OwnerShip />}
           title="Ownership"
           value={ownershipName}
           className={style.card}
         />
+        {propTypeName === "Plot" && (
+          <RoomBasicDetails
+            icon={<OpenSides />}
+            title="Open Sides"
+            value={2}
+            className={style.card}
+          />
+        )}
+
         <RoomBasicDetails
-          key="possessionDate"
           icon={<Status />}
           title="Availability Status"
           value={
@@ -224,7 +225,6 @@ const OtherDetails = ({
           className={style.card}
         />
         <RoomBasicDetails
-          key="landArea"
           icon={<StartDate />}
           title="Available From"
           value={formatDateDDMMYYYY(availableFrom)}
@@ -233,7 +233,6 @@ const OtherDetails = ({
 
         {availablityStatus === "R" ? (
           <RoomBasicDetails
-            key="reraStatus"
             icon={<FlatIcon />}
             title="Age of Property"
             value={ageofBuilding}
@@ -241,7 +240,6 @@ const OtherDetails = ({
           />
         ) : (
           <RoomBasicDetails
-            key="reraStatus"
             icon={<StartDate />}
             title="Possession Date"
             value={formatDateDDMMYYYY(possassionDate)}
@@ -250,7 +248,6 @@ const OtherDetails = ({
         )}
 
         <RoomBasicDetails
-          key="reraStatus"
           icon={<Marble />}
           title="Type of Flooring"
           value={flooringType}
@@ -259,27 +256,32 @@ const OtherDetails = ({
         {cg === "R" && (
           <>
             <RoomBasicDetails
-              key="reraStatus"
               icon={<AgreementDuration />}
               title="Agreement Duration"
               value={agrementduration}
               className={style.card}
             />
             <RoomBasicDetails
-              key="reraStatus"
               icon={<AvailableFor />}
               title="Available for"
               value={"Humans"}
               className={style.card}
             />
             <RoomBasicDetails
-              key="reraStatus"
               icon={<PetFreindly />}
               title="Pet Friendly"
               value={"Pets Are Not Allowed"}
               className={style.card}
             />
           </>
+        )}
+        {propTypeName === "Plot" && (
+          <RoomBasicDetails
+            icon={<Marble />}
+            title="Approved Authority"
+            value={approvedByName.join(" ,")}
+            className={style.card}
+          />
         )}
       </div>
     </div>
@@ -311,6 +313,44 @@ const UnitBlock = ({ data }: { data: Main }) => {
             className="mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]"
           />
         ))}
+      </div>
+    </div>
+  );
+};
+const PlotBlock = ({ data }: { data: Main }) => {
+  return (
+    <div
+      className="w-[90%] mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] px-[53px] py-[39px]"
+      id="propertyDetails "
+    >
+      <h1 className={style.heading.h1}>Plot Details</h1>
+
+      <p className={style.heading.p}>
+        See the Plot details that are available in This property
+      </p>
+
+      <div className={"flex justify-start items-start flex-wrap w-[100%]  "}>
+        <RoomBasicDetails
+          icon={<CornorIcon />}
+          title="Property on"
+          value={data.isCornerPlot && "Corner Plot"}
+          className={style.card}
+        />
+        <RoomBasicDetails
+          icon={<PlotConstruction />}
+          title="Plot Undergone any Construction"
+          value={`${data.cunstructionStatus ? "Yes" : "No"}, ${
+            data.cunstructionType
+          }`}
+          className={style.card}
+        />
+
+        <RoomBasicDetails
+          icon={<WallIcons />}
+          title="Plot Enclosed with wall"
+          value={data.boundryWallEnclose && "Yes"}
+          className={style.card}
+        />
       </div>
     </div>
   );

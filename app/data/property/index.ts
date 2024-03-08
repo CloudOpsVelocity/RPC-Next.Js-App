@@ -200,7 +200,7 @@ export function generatePropertyDetails(
           Icon: TotalLandArea,
         },
         {
-          title: "Width of Plot",
+          title: "Breadth of Plot",
           value: `${data.width} sq.ft`,
           Icon: TotalLandArea,
         },

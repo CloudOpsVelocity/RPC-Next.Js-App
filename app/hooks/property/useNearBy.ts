@@ -18,7 +18,9 @@ export default function useNearby({
   const { slug } = useParams<{ slug: string }>();
   const getData = async () => {
     const res = await axios.get(
-      `${BACKEND_BASE_URL}/api/v1/fetch/nearbyProperties?lat=${lat}&lng=${lng}&cg=${cg.toLowerCase()}&propIdEnc=${slug}&projIdEnc=${projId}`
+      `${BACKEND_BASE_URL}/api/v1/fetch/nearbyProperties?lat=${lat}&lng=${lng}&cg=${cg.toLowerCase()}&propIdEnc=${slug}${
+        projId && `&projIdEnc=${projId}`
+      }  `
     );
     return res.data;
   };

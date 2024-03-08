@@ -15,10 +15,9 @@ import RoomFloorplansBlock from "@/app/components/property/Floorplan";
 import PropertyBanner from "@/app/components/property/propertyBanner";
 import PropertyFirstBlock from "@/app/components/property/fistblock";
 import LeafMap from "@/app/components/project/map";
-import PropertyHeading from "@/app/components/property/heading";
+import PropertyMap from "@/app/components/property/map";
 import { getListingDetails } from "@/app/utils/api/property";
 import NearByCarousel from "@/app/components/project/NearByCarousel";
-import ProjectCarousel from "@/app/components/project/ProjectCard";
 import NearByCarouselProperty from "@/app/components/property/carousel";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
 import Reviews from "@/app/components/property/reviews";
@@ -28,8 +27,6 @@ type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
   const data = await getListingDetails(slug);
   const projData = await getProjectDetails(data.projIdEnc);
-  const title = `  ${data.bhkName} ${data.propTypeName} FOR 
-  ${data.cg === "S" ? " Sell" : " Rent"} In ${data.ltName}`;
   return (
     <div className="w-full">
       <div className="mt-[90px] w-full pb-[2%] flex items-center justify-center flex-col">
@@ -57,7 +54,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           id="about"
           heading="about"
           projName={"Listing"}
-          content={"hello this is listing "}
+          content={data.usp || "About Listing Not Avail"}
         />
 
         {/* Property Details */}
@@ -83,27 +80,39 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           })}
         />
         {data.projIdEnc && (
-          <LeafMap
-            lat={projData.lat}
-            lang={projData.lang}
+          <>
+            <LeafMap
+              lat={projData.lat}
+              lang={projData.lang}
+              projName={projData.projectName}
+              projId={data.projIdEnc}
+              type="prop"
+            />
+            <Banner slug={data.projIdEnc} projName={projData.projectName} />
+            <Loans
+              type="prop"
+              data={projData.banks}
+              projName={projData.projectName}
+            />
+            {/* About Builder */}
+            <AboutBuilder type="prop" id={projData.builderId} />
+            <PropertyBanner {...projData} />
+
+            <Reviews slug={data.projIdEnc} projName={projData.projectName} />
+
+            <FaqWithBg data={projData.faqs} projName={projData.projectName} />
+          </>
+        )}
+        {!data.projIdEnc && (
+          <PropertyMap
+            lat={projData.lat ?? 0}
+            lang={projData.lang ?? 0}
             projName={projData.projectName}
-            projId={data.projIdEnc}
+            projId={data.propIdEnc}
             type="prop"
           />
         )}
-        <Banner slug={data.projIdEnc} projName={projData.projectName} />
-        <Loans
-          type="prop"
-          data={projData.banks}
-          projName={projData.projectName}
-        />
-        {/* About Builder */}
-        <AboutBuilder type="prop" id={projData.builderId} />
-        <PropertyBanner {...projData} />
 
-        <Reviews slug={data.projIdEnc} projName={projData.projectName} />
-
-        <FaqWithBg data={projData.faqs} projName={projData.projectName} />
         <NearByCarouselProperty
           projName={projData.projectName}
           lat={projData.lat}
@@ -111,12 +120,15 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           projId={data.projIdEnc}
           cg={data.cg}
         />
-        <NearByCarousel
-          projName={projData.projectName}
-          lat={projData.lat}
-          lng={projData.lang}
-          projId={data.projIdEnc}
-        />
+        {data.projIdEnc && (
+          <NearByCarousel
+            projName={projData.projectName}
+            lat={projData.lat}
+            lng={projData.lang}
+            projId={data.propIdEnc}
+          />
+        )}
+
         <LoginPopup />
         <ProjectDrawer projName="Sarang By Sumadhura" />
       </div>

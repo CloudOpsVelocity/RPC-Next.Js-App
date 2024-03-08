@@ -14,7 +14,7 @@ const getProjectDetails = async (slug: string): Promise<M> => {
   );
   const data = await response.json();
 
-  return data as M; // Assuming the response can be cast to Main
+  return data as M;
 };
 
 const getListingDetails = async (slug: string): Promise<Main> => {

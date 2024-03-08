@@ -49,6 +49,12 @@ export interface Main {
   ba: string;
   length: number;
   width: number;
+  isCornerPlot: number;
+  cunstructionStatus: number;
+  cunstructionType: string;
+  boundryWallEnclose: string;
+  approvedByName: string[];
+  usp: string;
 }
 
 export interface OtherPrice {

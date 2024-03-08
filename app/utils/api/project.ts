@@ -1,5 +1,6 @@
 import { unstable_cache } from "next/cache";
 import { Main } from "../../validations/types/project";
+import { GlobalPageType } from "@/app/validations/global";
 
 const getProjectDetails = async (slug: string): Promise<Main> => {
   const response = await fetch(
@@ -51,12 +52,14 @@ const getCachedUser = unstable_cache(
   }
 );
 
-const getNearByLocations = async (slug: string): Promise<any> => {
+const getNearByLocations = async (
+  slug: string,
+  type?: GlobalPageType["types"]
+): Promise<any> => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/get-nearby?projIdEnc=${slug}`
   );
   const data = await response.json();
-  console.log(data);
   return data;
 };
 export {
