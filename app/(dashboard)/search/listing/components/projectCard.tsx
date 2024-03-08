@@ -41,6 +41,8 @@ const ProjectDetailsCard = ({
   sba,
   coverImage,
   availableFrom,
+  type,
+  propIdEnc,
 }: any) => {
   const { data: session } = useSession();
 
@@ -48,17 +50,15 @@ const ProjectDetailsCard = ({
   const [, { open: openLogin }] = usePopShortList();
   const { toggleShortlist, shortlistedItems, compareItems, toggleCompare } =
     useShortlistAndCompare();
-
+  const reqId = type === "proj" ? projIdEnc : propIdEnc;
   const isItemInShortlist =
     shortlistedItems.length > 0 &&
-    shortlistedItems.some(
-      (item) => item.id === projIdEnc && item.status === "Y"
-    );
+    shortlistedItems.some((item) => item.id === reqId && item.status === "Y");
 
   const onAddingShortList = () => {
     if (session) {
       toggleShortlist({
-        id: projIdEnc,
+        id: reqId,
         status: isItemInShortlist ? "N" : "Y",
       });
     } else {
@@ -67,11 +67,11 @@ const ProjectDetailsCard = ({
   };
   const isItemCompared =
     compareItems.length > 0 &&
-    compareItems.some((item) => item.id === projIdEnc && item.status === "Y");
+    compareItems.some((item) => item.id === reqId && item.status === "Y");
   const onAddingCompare = () => {
     if (session) {
       toggleCompare({
-        id: projIdEnc,
+        id: reqId,
         status: isItemCompared ? "N" : "Y",
       });
     } else {
@@ -81,7 +81,7 @@ const ProjectDetailsCard = ({
   const setSelectedSearch = useSetAtom(listingSearchAtom);
   return (
     <Link
-      href={`/listing/test/${propertyIdEnc}`}
+      href={`/listing/test/${reqId}`}
       className=" flex w-full mb-[5%] flex-col shadow-md "
     >
       <div className=" flex justify-center items-center w-full h-full">
@@ -189,7 +189,7 @@ const ProjectDetailsCard = ({
           />
 
           <Button
-            onChange={() => open("card", projIdEnc)}
+            onChange={() => open("prop", reqId)}
             title="Request Callback"
             icon={<Phone className="h-[16px] w-[16px] " />}
             buttonClass="flex justify-center items-center text-[#FFF] p-[5px] bg-[#0073C6] rounded-[5px] shadow-md text-[12px] font-[700]"
@@ -197,7 +197,7 @@ const ProjectDetailsCard = ({
         </div>
       </div>
       <MobileDetails
-        projIdEnc={projIdEnc}
+        projIdEnc={reqId}
         agentListing={10}
         ownerListing={10}
         projName={propName}

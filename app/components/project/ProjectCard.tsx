@@ -1,13 +1,12 @@
 "use client";
 import React from "react";
 import MainCarousel from "../molecules/carousel/main";
-import { Carousel, CarouselSlide } from "@mantine/carousel";
+import { CarouselSlide } from "@mantine/carousel";
 import Image from "next/image";
 import Button from "../../elements/button";
 import { Phone, Shorlisted, shortlistIconSvg } from "@/app/images/commonSvgs";
 import { formatCurrency } from "@/app/utils/numbers";
 import { useSession } from "next-auth/react";
-import LoginPopup from "./modals/LoginPop";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import { useShortlistAndCompare } from "@/app/hooks/storage";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
@@ -33,16 +32,15 @@ export function ProjectCard({ type, cardData }: CardProps) {
   const { data: session } = useSession();
   const { toggleShortlist, shortlistedItems } = useShortlistAndCompare();
   const [, { open: openS }] = usePopShortList();
+  const reqId = type === "proj" ? cardData.projIdEnc : cardData.propIdEnc;
   const isItemInShortlist =
     shortlistedItems.length > 0 &&
-    shortlistedItems.some(
-      (item) => item.id === cardData.projIdEnc && item.status === "Y"
-    );
+    shortlistedItems.some((item) => item.id === reqId && item.status === "Y");
 
   const onAddingShortList = () => {
     if (session) {
       toggleShortlist({
-        id: cardData.projIdEnc,
+        id: reqId,
         status: isItemInShortlist ? "N" : "Y",
         source: type as GlobalPageType["types"],
       });
@@ -53,7 +51,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
   return (
     <>
       <div
-        key={cardData.projIdEnc}
+        key={reqId}
         className={clsx(
           "border text-card-foreground min-w-[350px]   min-h-[400px] overflow-hidden  shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[14px]",
           type == "proj" ? "bg-[#FAFAFA] " : "bg-[#FFFEFE] pt-4"
@@ -64,7 +62,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
             <a
               target="_blank"
               className="tracking-tight text-[18px] font-[600] text-[#565D70] cursor-pointer"
-              href={`/abc/karnataka/banglore/${cardData.projIdEnc}`}
+              href={`/abc/karnataka/banglore/${reqId}`}
             >
               {cardData.projName}
             </a>
@@ -175,7 +173,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
               icon={<Phone />}
               title="Request a Callback"
               buttonClass=" text-[#FFF] mt-[12px] text-[16px] font-[600] bg-[#0073C6] rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[6px]  "
-              onChange={() => open("proj", cardData.projIdEnc)}
+              onChange={() => open(type, reqId)}
             />
           </div>
         </div>

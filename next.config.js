@@ -25,6 +25,9 @@ const nextConfig = {
   env: {
     APP_ENV: process.env.APP_ENV || process.env.NODE_ENV || "development",
   },
+  compiler: {
+    removeConsole: true,
+  },
 };
 
 module.exports = nextConfig;
