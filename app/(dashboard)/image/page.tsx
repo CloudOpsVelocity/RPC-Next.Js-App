@@ -1,7 +1,7 @@
 "use client";
 import { Image } from "@mantine/core";
 import React from "react";
-
+import NextImage from "next/image";
 type Props = { searchParams: { path: string } };
 export default function Page({ searchParams: { path } }: Props) {
   const handleDownload = () => {
@@ -29,9 +29,12 @@ export default function Page({ searchParams: { path } }: Props) {
       <Image
         radius="md"
         src={`${process.env.NEXT_PUBLIC_IMG_BASE}${path}`}
-        h={650}
+        height={650}
+        width={700}
         w="auto"
         fit="contain"
+        alt="post"
+        component={NextImage}
       />
     </div>
   );
