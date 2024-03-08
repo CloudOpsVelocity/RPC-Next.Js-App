@@ -1,6 +1,13 @@
 "use client";
 import { useForm, yupResolver } from "@mantine/form";
-import { TextInput, Button, Box, PasswordInput, em } from "@mantine/core";
+import {
+  TextInput,
+  Button,
+  Box,
+  PasswordInput,
+  em,
+  NumberInput,
+} from "@mantine/core";
 import useAuth from "@/app/hooks/useAuth";
 import Link from "next/link";
 import { useState } from "react";
@@ -72,14 +79,19 @@ function LoginPopupForm() {
         onSubmit={form.onSubmit(onSubmit)}
         className="w-[100%] flex justify-center items-center flex-col "
       >
-        <TextInput
+        <NumberInput
+          mt={"xs"}
           required
+          classNames={{
+            input: S.input,
+          }}
+          hideControls
           size="lg"
           className="w-[100%] mb-[3%] "
-          label="User Name"
-          placeholder="Enter your email or mobiile number"
+          label="Mobile Number"
+          placeholder="Enter your registered mobile number"
           {...form.getInputProps("username")}
-          onBlur={(e) => handleTrimAndReplace(e, "username", form)}
+          maxLength={10}
         />
         <PasswordInput
           classNames={{
