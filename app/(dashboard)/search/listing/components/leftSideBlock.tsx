@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ScrollArea, Tabs } from "@mantine/core";
 import ProjectDetailsCard from "./projectCard";
 import S from "@/app/styles/seach/Listing.module.css";
@@ -23,15 +23,15 @@ const LeftSideBlock = () => {
   } = useSearchFilters("owner");
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // const { ref, entry } = useIntersection({
-  //   root: containerRef.current,
-  //   threshold: 0.1,
-  // });
-  // useEffect(() => {
-  //   if (entry?.isIntersecting && hasNextPage) {
-  //     fetchMoreData();
-  //   }
-  // }, [entry?.isIntersecting, hasNextPage]);
+  const { ref, entry } = useIntersection({
+    root: containerRef.current,
+    threshold: 0.1,
+  });
+  useEffect(() => {
+    if (entry?.isIntersecting && hasNextPage) {
+      fetchMoreData();
+    }
+  }, [entry?.isIntersecting, hasNextPage]);
   const onTabChange = (value: string) => {
     if (value === "All") {
       handleReset("listedBy");
@@ -74,6 +74,7 @@ const LeftSideBlock = () => {
           <ScrollArea
             className=" p-[2%]  overflow-y-auto  h-screen mt-2"
             h={700}
+            ref={containerRef}
           >
             {isLoading ? (
               <Loading />
@@ -94,6 +95,11 @@ const LeftSideBlock = () => {
                 {emptyFilesIcon}
                 No Matching Results Found !
                 <span className="relative left-[10%] ">{strikeIconIcon}</span>
+              </div>
+            )}
+            {hasNextPage && (
+              <div ref={ref}>
+                <SearchSkeleton />
               </div>
             )}
           </ScrollArea>
@@ -195,6 +201,8 @@ import { Menu } from "@mantine/core";
 import MapModal from "./modals";
 import Loading from "@/app/components/atoms/Loader";
 import { Vast_Shadow } from "next/font/google";
+import { useIntersection } from "@mantine/hooks";
+import SearchSkeleton from "@/app/components/atoms/skeleton/search";
 
 function SortBy() {
   const [selected, setSort] = useState("");

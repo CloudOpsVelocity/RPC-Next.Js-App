@@ -57,6 +57,7 @@ const ListingMobileFilter = ({ close }: any) => {
     setFilters,
     remnoveSearchOptions,
     setSingleType,
+    isFilterApplied,
   } = useSearchFilters();
   const path = usePathname();
   const viewport = useRef<HTMLDivElement>(null);
@@ -99,7 +100,11 @@ const ListingMobileFilter = ({ close }: any) => {
                     ? "text-[#148B16] bg-[#F1F9FF] font-[700]"
                     : "text-[#202020] bg-[#FCFCFC] font-[500]"
                 } `}
-                icon={current == eachItem ? fourStarIcon : ""}
+                icon={
+                  current == eachItem || isFilterApplied(eachItem)
+                    ? fourStarIcon
+                    : ""
+                }
               />
             );
           })}

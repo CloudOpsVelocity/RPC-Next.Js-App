@@ -18,6 +18,7 @@ import { useMediaQuery } from "@mantine/hooks";
 import toast from "react-hot-toast";
 import { signIn } from "next-auth/react";
 import handleTrimAndReplace from "@/app/utils/input/validations";
+import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 const schema = yup.object().shape({
   username: yup
     .string()
@@ -45,6 +46,8 @@ interface Login {
   password: string;
 }
 function LoginPopupForm() {
+  const [opened, { close }] = usePopShortList();
+
   const [state, setState] = useState<"idle" | "pending" | "success">("idle");
   const form = useForm({
     initialValues: { username: "", password: "" },
@@ -55,6 +58,7 @@ function LoginPopupForm() {
     const res = await signIn("credentials", { ...data, redirect: false });
     console.log(res);
     if (res?.ok) {
+      close();
     } else {
       toast.error(res?.error || "Something went wrong. Please try again.");
     }

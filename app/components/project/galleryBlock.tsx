@@ -25,7 +25,6 @@ export default function GalleryBlock({
   const videos = [walkThrowVideoUrl, projectVideoIUrl].filter(
     (url) => url !== "" && undefined && null
   );
-  console.log(videos);
   const handleMediaClick = (media: string) => {
     setSelectedMedia(media);
   };

@@ -53,6 +53,7 @@ const MobileFilter = ({ close }: any) => {
     handleSliderChange,
     setFilters,
     remnoveSearchOptions,
+    isFilterApplied,
   } = useSearchFilters();
   const viewport = useRef<HTMLDivElement>(null);
   const scrollWhereIsSelected = (item: string) => {
@@ -94,7 +95,11 @@ const MobileFilter = ({ close }: any) => {
                     ? "text-[#148B16] bg-[#F1F9FF] font-[700]"
                     : "text-[#202020] bg-[#FCFCFC] font-[500]"
                 } `}
-                icon={current == eachItem ? fourStarIcon : ""}
+                icon={
+                  current == eachItem || isFilterApplied(eachItem)
+                    ? fourStarIcon
+                    : ""
+                }
               />
             );
           })}
