@@ -6,14 +6,14 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  // theme: {
-  //   colors: {
-  //     'primary': '#148B16',
-  //     'secondary': '#227FBC',
-  //     'accent': '#222222',
 
-  //   },
-  // },
+  theme: {
+    extend: {
+      colors: {
+        btnPrimary: "#0073C6",
+      },
+    },
+  },
 
   plugins: [require("tailwind-scrollbar-hide")],
 };

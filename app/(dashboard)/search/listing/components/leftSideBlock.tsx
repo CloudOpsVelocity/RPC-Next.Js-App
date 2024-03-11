@@ -201,8 +201,8 @@ function SortBy() {
   return (
     <Menu shadow="md" width={200}>
       <Menu.Target>
-        <button className="flex h-7 justify-center items-center gap-2.5 p-3.5 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.05)] border-[0.5px] border-solid border-[#CBD4E1] bg-white mr-auto md:mr-2 md:mt-1 mb-2 ml-4 md:ml-auto">
-          <span className="text-[#0073C6] text-xs md:text-base not-italic   md:font-medium leading-[normal] ">
+        <button className="flex h-7 justify-center items-center gap-2.5 p-3.5 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.05)] border-[0.5px] border-solid border-[#CBD4E1] bg-white mr-auto md:mr-2 md:mt-1 mb-2 ml-4 md:ml-auto hover:bg-btnPrimary hover:text-white group">
+          <span className="text-[#0073C6] text-xs md:text-base not-italic   md:font-medium leading-[normal] group-hover:text-white">
             {selected === "" ? "Sort By" : selected}
           </span>
           <DropDownIcon />
