@@ -2,10 +2,10 @@ import { useDisclosure } from "@mantine/hooks";
 import { Drawer, Button } from "@mantine/core";
 import useSearchFilters from "@/app/hooks/search";
 import S from "@/app/styles/seach/Drawer.module.css";
-import { FilterPopup } from "../filterPopup";
 import { MobileFilter } from "./filter";
+import { ListingMobileFilter } from "../../listing/components/drawer/filter";
 function SearchDrawer() {
-  const { countAppliedFilters } = useSearchFilters();
+  const { countAppliedFilters, params } = useSearchFilters();
   const [opened, { open, close }] = useDisclosure(false);
 
   return (
@@ -21,7 +21,11 @@ function SearchDrawer() {
         }}
         size={"100%"}
       >
-        <MobileFilter close={close} />
+        {params.listedBy ? (
+          <ListingMobileFilter close={close} />
+        ) : (
+          <MobileFilter close={close} />
+        )}
       </Drawer>
 
       <button

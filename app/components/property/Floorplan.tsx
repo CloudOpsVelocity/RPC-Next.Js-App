@@ -1,17 +1,6 @@
 "use client";
 
 import React from "react";
-import {
-  Block,
-  DateIcons,
-  EndDate,
-  Marble,
-  StartDate,
-  TotalLandArea,
-  TowerIcon,
-} from "../../images/commonSvgs";
-import { PhaseList } from "@/app/validations/types/project";
-import RoomBasicDetails from "./RoomBasicDetails";
 import PFloorPlanModal from "./modals/Floor";
 import PropertyHeading from "./heading";
 import { Main } from "@/app/validations/property";

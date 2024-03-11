@@ -6,32 +6,35 @@ import { RightSection } from "../../project/modals/FloorPlan";
 import { Main } from "@/app/validations/property";
 import { selectedFloorAtom } from "@/app/store/floor";
 import { useAtomValue, useSetAtom } from "jotai";
+import { listingProps } from "@/app/data/projectDetails";
 
 function PFloorPlanModal({ data }: { data: Main }) {
+  console.log(data.propTypeName);
   const TRANSITION_DURATION = 200;
   const [opened, setOpened] = useState(false);
   const setValue = useSetAtom(selectedFloorAtom);
+  const type = listingProps[data.propTypeName as keyof typeof listingProps];
   const handleOpen = () => {
     setValue({
       projIdEnc: "4f313de2f95cd9d761098b8f6c09417c",
       phaseId: 670,
-      propType: 35,
+      propType: type,
       bhk: 42,
       bhkName: data.bhkName,
       towerName: data.tower,
-      towerId: 1163,
-      block: "2",
-      floor: 2,
+      towerId: data.tower,
+      block: data.block,
+      floor: data.atFloor,
       unitNumber: data.unitNumber,
-      facingId: 61,
+      facingId: data.facingName,
       facingName: data.facingName,
       caretarea: data.ca,
       superBuildUparea: data.sba,
-      terraceArea: "null",
-      parkingType: "Open",
+      terraceArea: data.ta,
+      parkingType: "Opened",
       totalNumberofBathroom: data.nobt,
       totalNumberOfBalcony: data.nobl,
-      noOfCarParking: 1,
+      noOfCarParking: data.noocp,
       floorPlanUrl: data.projMedia.floorPlanUrl,
     });
     setOpened(true);
@@ -57,7 +60,7 @@ function PFloorPlanModal({ data }: { data: Main }) {
       >
         <div className="flex  mb-10 justify-center items-start gap-[45px] shrink-0">
           <MiddleSection />
-          <RightSection propCgId={""} />
+          <RightSection propCgId={type} />
         </div>
       </Modal>
     </>

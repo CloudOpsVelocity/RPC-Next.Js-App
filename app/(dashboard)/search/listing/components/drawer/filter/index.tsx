@@ -1,6 +1,6 @@
 "use client";
 import React, { useRef, useState } from "react";
-import { searchDetails } from "@/app/data/searchDetails";
+import { ListingSearchDetails, searchDetails } from "@/app/data/searchDetails";
 import Button from "@/app/elements/button";
 import {
   DropDownIcon,
@@ -21,13 +21,16 @@ import { projectprops, propertyDetailsTypes } from "@/app/data/projectDetails";
 import { SEARCH_FILTER_DATA } from "@/app/data/search";
 import useSearchFilters from "@/app/hooks/search";
 import { useDebouncedState } from "@mantine/hooks";
-import useSearch from "@/app/hooks/search/useSearch";
 import { useQuery } from "react-query";
 import { getData } from "@/app/utils/api/search";
 import ClearAll from "../../ClearAll";
-import Close from "@/app/components/project/button/close";
+import Heading from "./Heading";
+import { usePathname } from "next/navigation";
 
-const MobileFilter = ({ close }: any) => {
+const styles = {
+  heading: "",
+};
+const ListingMobileFilter = ({ close }: any) => {
   const [current, setCurrent] = useState("Project Status");
   const propKeys = [35, 33, 31, 34, 32];
   const [localitySearch, setSearchLocality] = useDebouncedState("w", 500);
@@ -53,7 +56,9 @@ const MobileFilter = ({ close }: any) => {
     handleSliderChange,
     setFilters,
     remnoveSearchOptions,
+    setSingleType,
   } = useSearchFilters();
+  const path = usePathname();
   const viewport = useRef<HTMLDivElement>(null);
   const scrollWhereIsSelected = (item: string) => {
     setCurrent(item);
@@ -72,10 +77,10 @@ const MobileFilter = ({ close }: any) => {
   };
   const filteredSearchDetails =
     filters.propTypes === projectprops.plot
-      ? searchDetails.filter(
+      ? ListingSearchDetails.filter(
           (item) => !["Parking", "Unit Type", "Bath"].includes(item)
         )
-      : searchDetails;
+      : ListingSearchDetails;
   return (
     <div className=" flex justify-start items-start w-[70vw] top-[160px] left-[70%]">
       <div className="w-[50%] flex shadow-md justify-start items-center flex-col ">
@@ -110,12 +115,37 @@ const MobileFilter = ({ close }: any) => {
           miw={"full"}
           p={20}
         >
-          <h3
+          {filters?.propTypes != projectprops.plot && (
+            <React.Fragment>
+              <h3
+                className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[1%] "
+                id="Bhk"
+              >
+                BHK
+              </h3>
+              <div className="flex  mb-[3%] justify-start items-start gap-[4%] flex-wrap">
+                {SEARCH_FILTER_DATA.bhkDetails.map((eachStatus, index) => {
+                  return (
+                    <Checkbox
+                      label={eachStatus.title}
+                      color="green"
+                      key={index}
+                      onClick={() =>
+                        handleCheckboxClick("unitTypes", eachStatus.value)
+                      }
+                      checked={filters.unitTypes.includes(eachStatus.value)}
+                      style={{ whiteSpace: "nowrap", marginBottom: "10px" }}
+                    />
+                  );
+                })}
+              </div>
+            </React.Fragment>
+          )}
+          <Heading
             className=" text-[#202020] mb-[4%] text-[14px] font-[500] "
             id="Project Status"
-          >
-            Property Status
-          </h3>
+            text="Property Status"
+          />
           <div className="flex  mb-[3%] justify-start items-start gap-[4%] flex-wrap ">
             {SEARCH_FILTER_DATA.projectstatus.map((eachStatus, index) => {
               return (
@@ -132,7 +162,58 @@ const MobileFilter = ({ close }: any) => {
               );
             })}
           </div>
-
+          <h3
+            className=" text-[#202020] mb-[4%] text-[14px] font-[500] mt-[6%] flex items-center gap-[5px] "
+            id="Property Type"
+          >
+            Property Type {notificationIcon}
+          </h3>
+          <div className="flex  mb-[3%] justify-start items-start flex-wrap gap-[4%]">
+            {propKeys.map((keyName, i) => {
+              return (
+                <Radio
+                  key={i}
+                  iconColor="dark.8"
+                  color="green"
+                  label={propertyDetailsTypes?.get(keyName)?.name}
+                  value={propertyDetailsTypes?.get(keyName)?.id}
+                  name="propertyType"
+                  style={{ whiteSpace: "nowrap", marginBottom: "10px" }}
+                  onClick={() =>
+                    setPropTypes(
+                      propertyDetailsTypes?.get(keyName)?.id as number
+                    )
+                  }
+                  checked={
+                    filters.propTypes === propertyDetailsTypes?.get(keyName)?.id
+                  }
+                />
+              );
+            })}
+          </div>
+          <h3
+            className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] flex items-center gap-[5px] "
+            id="Posted By"
+          >
+            Listed By
+          </h3>
+          <div className="flex  mb-[3%] justify-start items-start flex-wrap gap-[4%]">
+            {SEARCH_FILTER_DATA.listedBy
+              .filter(({ value }) => !(value === "B" && path === "/search"))
+              .map(({ value, constDesc }, i) => (
+                <Radio
+                  key={i}
+                  iconColor="dark.8"
+                  color="green"
+                  label={constDesc}
+                  value={value}
+                  name="ListedBy"
+                  style={{ whiteSpace: "nowrap", marginBottom: "10px" }}
+                  onClick={() => setSingleType("listedBy", value)}
+                  checked={filters.listedBy === value}
+                />
+              ))}
+          </div>
           <h3
             className=" text-[#202020] mb-[4%] text-[14px] font-[500] "
             id="Locality"
@@ -180,55 +261,47 @@ const MobileFilter = ({ close }: any) => {
             rightSection={<DropDownIcon />}
           />
 
-          <h3
-            className=" text-[#202020] mb-[4%] text-[14px] font-[500] mt-[6%] flex items-center gap-[5px] "
-            id="Property Type"
-          >
-            Property Type {notificationIcon}
-          </h3>
-          <div className="flex  mb-[3%] justify-start items-start flex-wrap gap-[4%]">
-            {propKeys.map((keyName, i) => {
-              return (
-                <Radio
-                  key={i}
-                  iconColor="dark.8"
-                  color="green"
-                  label={propertyDetailsTypes?.get(keyName)?.name}
-                  value={propertyDetailsTypes?.get(keyName)?.id}
-                  name="propertyType"
-                  style={{ whiteSpace: "nowrap", marginBottom: "10px" }}
-                  onClick={() =>
-                    setPropTypes(
-                      propertyDetailsTypes?.get(keyName)?.id as number
-                    )
-                  }
-                  checked={
-                    filters.propTypes === propertyDetailsTypes?.get(keyName)?.id
-                  }
-                />
-              );
-            })}
-          </div>
-
           {filters?.propTypes != projectprops.plot && (
             <React.Fragment>
               <h3
-                className=" text-[#202020] mb-[4%] text-[14px] font-[500] mt-[3%] "
-                id="Unit Type"
+                className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[5%] "
+                id="Facing"
               >
-                Unit Type
+                Facing
               </h3>
               <div className="flex  mb-[3%] justify-start items-start gap-[4%] flex-wrap">
-                {SEARCH_FILTER_DATA.bhkDetails.map((eachStatus, index) => {
+                {SEARCH_FILTER_DATA.facing.map((x, i) => {
                   return (
                     <Checkbox
-                      label={eachStatus.title}
+                      key={i}
+                      label={x.constDesc}
                       color="green"
-                      key={index}
-                      onClick={() =>
-                        handleCheckboxClick("unitTypes", eachStatus.value)
-                      }
-                      checked={filters.unitTypes.includes(eachStatus.value)}
+                      onClick={() => handleCheckboxClick("facings", x.cid + 1)}
+                      checked={filters.facings.includes(x.cid + 1)}
+                      mb={10}
+                    />
+                  );
+                })}
+              </div>
+            </React.Fragment>
+          )}
+          {filters?.propTypes != projectprops.plot && (
+            <React.Fragment>
+              <h3
+                className=" text-[#202020] mb-[4%] text-[14px] font-[500] mt-[5%] "
+                id="Bath"
+              >
+                Bath
+              </h3>
+              <div className="flex  mb-[3%] justify-start items-start gap-[4%] flex-wrap">
+                {[...Array(6)].map((x, i) => {
+                  return (
+                    <Checkbox
+                      key={i}
+                      label={`${i == 5 ? "+5" : i + 1} Bath`}
+                      color="green"
+                      onClick={() => handleCheckboxClick("bathRooms", i + 1)}
+                      checked={filters.bathRooms.includes(i + 1)}
                       style={{ whiteSpace: "nowrap", marginBottom: "10px" }}
                     />
                   );
@@ -236,35 +309,6 @@ const MobileFilter = ({ close }: any) => {
               </div>
             </React.Fragment>
           )}
-
-          <h3
-            className=" text-[#202020] mb-[4%] text-[14px] font-[500] mt-[3%] "
-            id="Area"
-          >
-            Area
-          </h3>
-          <p className="text-[#4D6677] text-[16px] font-[600] mb-[4%] ">
-            {filters.areaValue[0]} sq.ft - {filters.areaValue[1]} sq.ft
-          </p>
-          <RangeSlider
-            color="green"
-            marks={[
-              { value: 0, label: "0 sq.ft" },
-              { value: 1000, label: "1000 sq.ft" },
-              { value: 2000, label: "2000 sq.ft" },
-              { value: 3000, label: "3000 sq.ft" },
-              { value: 4000, label: "4000 sq.ft" },
-              { value: 5000, label: "5000 sq.ft" },
-            ]}
-            min={0}
-            max={5000}
-            value={filters.areaValue}
-            onChange={(value) => handleSliderChange("areaValue", value)}
-            style={{ width: "80%" }}
-            classNames={{
-              markLabel: classes.markLabel,
-            }}
-          />
 
           <h3
             className=" text-[#202020] mb-[4%] text-[14px] font-[500] mt-[5%] "
@@ -300,32 +344,88 @@ const MobileFilter = ({ close }: any) => {
             defaultValue={[filters.bugdetValue[0], filters.bugdetValue[1]]}
             classNames={{ markLabel: classes.markLabel }}
           />
-
-          {filters?.propTypes != projectprops.plot && (
-            <React.Fragment>
-              <h3
-                className=" text-[#202020] mb-[4%] text-[14px] font-[500] mt-[5%] "
-                id="Bath"
-              >
-                Bath
-              </h3>
-              <div className="flex  mb-[3%] justify-start items-start gap-[4%] flex-wrap">
-                {[...Array(6)].map((x, i) => {
-                  return (
-                    <Checkbox
-                      key={i}
-                      label={`${i == 5 ? "+5" : i + 1} Bath`}
-                      color="green"
-                      onClick={() => handleCheckboxClick("bathRooms", i + 1)}
-                      checked={filters.bathRooms.includes(i + 1)}
-                      style={{ whiteSpace: "nowrap", marginBottom: "10px" }}
-                    />
-                  );
-                })}
-              </div>
-            </React.Fragment>
-          )}
-
+          <h3
+            className=" text-[#202020] mb-[4%] text-[14px] font-[500] mt-[3%] "
+            id="Area"
+          >
+            Area
+          </h3>
+          <p className="text-[#4D6677] text-[16px] font-[600] mb-[4%] ">
+            {filters.areaValue[0]} sq.ft - {filters.areaValue[1]} sq.ft
+          </p>
+          <RangeSlider
+            color="green"
+            marks={[
+              { value: 0, label: "0 sq.ft" },
+              { value: 1000, label: "1000 sq.ft" },
+              { value: 2000, label: "2000 sq.ft" },
+              { value: 3000, label: "3000 sq.ft" },
+              { value: 4000, label: "4000 sq.ft" },
+              { value: 5000, label: "5000 sq.ft" },
+            ]}
+            min={0}
+            max={5000}
+            value={filters.areaValue}
+            onChange={(value) => handleSliderChange("areaValue", value)}
+            style={{ width: "80%" }}
+            classNames={{
+              markLabel: classes.markLabel,
+            }}
+          />
+          <h3
+            className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] flex items-center gap-[5px] "
+            id="Photos & Videos"
+          >
+            Photos & Videos
+          </h3>
+          <div className="flex  mb-[3%] justify-start items-start flex-wrap gap-[4%] ">
+            {SEARCH_FILTER_DATA.photoAvail.map(({ id, label }, i) => {
+              return (
+                <Radio
+                  key={i}
+                  iconColor="dark.8"
+                  color="green"
+                  label={label}
+                  value={id}
+                  name="propertyType"
+                  style={{ whiteSpace: "nowrap", marginBottom: "10px" }}
+                  // onClick={() =>
+                  //   setPropTypes(
+                  //     propertyDetailsTypes?.get(keyName)?.id as number
+                  //   )
+                  // }
+                  // checked={
+                  //   filters.propTypes === propertyDetailsTypes?.get(keyName)?.id
+                  // }
+                />
+              );
+            })}
+          </div>
+          <React.Fragment>
+            <h3
+              className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[5%] "
+              id="Furnishing"
+            >
+              Furnishing
+            </h3>
+            <div className="flex  mb-[3%] justify-start items-start gap-[4%] flex-wrap">
+              {SEARCH_FILTER_DATA.furnish.map(({ constDesc, cid }, i) => {
+                return (
+                  <Radio
+                    key={i}
+                    iconColor="dark.8"
+                    color="green"
+                    label={constDesc}
+                    value={cid}
+                    name="ListedBy"
+                    style={{ whiteSpace: "nowrap", marginBottom: "10px" }}
+                    onClick={() => setSingleType("furnish", cid)}
+                    checked={filters.furnish === cid}
+                  />
+                );
+              })}
+            </div>
+          </React.Fragment>
           <h3
             className=" text-[#202020] mb-[4%] text-[14px] font-[500] mt-[3%] "
             id="Amenities"
@@ -438,4 +538,4 @@ const MobileFilter = ({ close }: any) => {
   );
 };
 
-export { MobileFilter };
+export { ListingMobileFilter };

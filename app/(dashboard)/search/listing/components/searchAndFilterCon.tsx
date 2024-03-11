@@ -41,7 +41,6 @@ const SearchAndFilterCon = () => {
         size={isMobile ? "100%" : "45%"}
       >
         <SearchDrawerHeader open={open} close={close} />
-        {/* Drawer content */}
       </Drawer>
     </>
   );

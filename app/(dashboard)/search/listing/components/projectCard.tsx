@@ -82,7 +82,7 @@ const ProjectDetailsCard = ({
   return (
     <div className=" flex w-full mb-[5%] flex-col shadow-md ">
       <div className=" flex justify-center items-center w-full h-full">
-        <Link href={`/listing/test/${reqId}`}>
+        <Link target="_blank" href={`/listing/test/${reqId}`}>
           <div className="md:max-w-[320px] max-w-[150px] flex justify-center items-center w-full flex-col h-fit md:h-full    relative">
             <div className="relative">
               <Image

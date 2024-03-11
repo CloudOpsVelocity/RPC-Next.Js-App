@@ -41,6 +41,13 @@ export const projectprops = {
   villament: 34,
   apartment: 35,
 };
+export const listingProps = {
+  Villa: 31,
+  Plot: 32,
+  "Row House": 33,
+  Villament: 34,
+  Apartment: 35,
+};
 
 export const floorplanTypes = [
   {
