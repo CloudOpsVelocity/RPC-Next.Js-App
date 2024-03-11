@@ -1,6 +1,6 @@
 "use client";
 import { Button, Modal, Rating, Textarea } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
+import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import Image from "next/image";
 import React, { useState } from "react";
 import S from "@/app/styles/Rating.module.css";
@@ -46,16 +46,16 @@ export default function Banner({ projName }: { projName: string }) {
 
   return (
     <div className="bg-[#f0f9ff] scroll-mt-[90px]  px-8 py-12 mx-auto mb-[5%] ">
-      <div className="w-[90%] m-auto flex flex-col md:flex-row justify-between items-center">
-        <Toaster position="top-right" reverseOrder={false} />
+      <Toaster position="top-right" reverseOrder={false} />
+      <div className="w-[90%] m-auto flex flex-col md:flex-row justify-between items-center ">
         <div>
-          <h2 className="text-[#023993] text-[32px] not-italic font-bold leading-[normal] tracking-[1.28px] mb-4">
+          <h2 className="text-[#023993] text-2xl sm:text-[32px] not-italic font-bold leading-[normal] tracking-[1.28px] mb-4">
             PROJECT RATING FOR{" "}
-            <span className="text-[#148B16] text-[32px] not-italic font-bold leading-[normal] tracking-[1.28px]">
+            <span className="text-[#148B16] text-2xl sm:text-[32px] not-italic font-bold leading-[normal] tracking-[1.28px]">
               {projName}
             </span>
           </h2>
-          <p className="text-black text-2xl not-italic font-medium leading-[normal] tracking-[0.96px] mb-8">
+          <p className="text-black text-lg sm:text-2xl not-italic font-medium leading-[normal] tracking-[0.96px] mb-8">
             Your headline should show readers how your review can help them
             solve a problem or make a decision, offer something different or
             unexpected, and be clear and specific about what your review is
@@ -68,7 +68,7 @@ export default function Banner({ projName }: { projName: string }) {
             ADD RATINGS
           </button>
         </div>
-        <div className="flex-shrink-0 relative h-[200px] w-[600px]">
+        <div className="hidden md:block flex-shrink-0 relative h-[200px] w-full md:w-[600px]">
           <Image
             src="/abc/rating.svg"
             alt="Project Rating Illustration"
@@ -115,6 +115,8 @@ const AddRating = ({
     close();
     setStatus("success");
   };
+  const isMobile = useMediaQuery(`(max-width: 750px)`);
+  // const isMobile
   return (
     <Modal
       classNames={{
@@ -129,7 +131,7 @@ const AddRating = ({
       onClose={onClose}
       centered
       title="Add Rating"
-      size={session ? "xl" : "35%"}
+      size={isMobile ? "100%" : session ? "xl" : "35%"}
     >
       <div className="relative">
         {!session && (
@@ -141,15 +143,20 @@ const AddRating = ({
             onSubmit={form.onSubmit(formSubmit)}
             className="max-w-[100%] mt-[2%] mx-auto my-8   rounded-lg space-y-2 p-5"
           >
-            <div className="flex justify-center items-center mb-[32px]">
+            <div className="flex md:justify-center items-center mb-[32px]">
               <Rating
                 classNames={{
                   starSymbol: S.star,
                   symbolBody: S.star,
                 }}
-                emptySymbol={<IconSun className="w-[70px] h-[70px]" />}
+                emptySymbol={
+                  <IconSun className="w-[45px] h-[45px]  md:w-[70px] md:h-[70px]" />
+                }
                 fullSymbol={
-                  <RatingStar fill="#FFD600" className="w-[70px] h-[70px]" />
+                  <RatingStar
+                    fill="#FFD600"
+                    className="w-[45px] h-[45px]  md:w-[70px] md:h-[70px]"
+                  />
                 }
                 {...form.getInputProps("rating")}
               />

@@ -31,7 +31,7 @@ function ProjectDrawer({ projName }: { projName: string }) {
         opened={expanded}
         onClose={handleReadMoreClick}
         position="right"
-        size={isMobile ? "70%" : "60%"}
+        size={isMobile ? "100%" : "60%"}
         zIndex={100}
       >
         <div className="mt-4 flex justify-between mb-8">

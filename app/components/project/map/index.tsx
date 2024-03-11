@@ -5,7 +5,7 @@ import { Tabs, ScrollArea } from "@mantine/core";
 
 import { clsx } from "clsx";
 import { Coordinates } from "@/app/utils/maps";
-import { useDebouncedState } from "@mantine/hooks";
+import { useDebouncedState, useMediaQuery } from "@mantine/hooks";
 import { nearbyLocationIcon } from "@/app/images/commonSvgs";
 import Loading from "../../atoms/Loader";
 import dynamic from "next/dynamic";
@@ -57,6 +57,7 @@ const LeafMap: React.FC<{
   );
 
   const { data: mapData, isLoading } = useMapData({ projSlug: projId });
+  const isMobile = useMediaQuery(`(max-width: 750px)`);
   return (
     <div className="w-[90%] scroll-mt-[90px] mx-auto  mb-[5%] " id="nearBy">
       {type === "prop" ? (
@@ -98,7 +99,7 @@ const LeafMap: React.FC<{
         })}
       </div>
 
-      <div className="border border-[#92B2C8] grid grid-cols-1 md:grid-cols-[2fr_3fr] rounded-xl overflow-hidden shadow-lg md:h-[620px]">
+      <div className="border border-[#92B2C8] grid grid-cols-1 md:grid-cols-[2fr_3fr] rounded-xl overflow-hidden  shadow-lg md:h-[620px]">
         <section className="bg-white">
           <div id="tabs">
             <Tabs defaultValue="public">
@@ -112,7 +113,7 @@ const LeafMap: React.FC<{
               {isLoading ? (
                 <Loading />
               ) : (
-                <ScrollArea h={600} pb={50}>
+                <ScrollArea h={isMobile ? 300 : 600} pb={50}>
                   {mapData &&
                   mapData[selected] &&
                   mapData[selected].length > 0 ? (

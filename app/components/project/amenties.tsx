@@ -7,6 +7,7 @@ import { Console } from "console";
 import { useAtom } from "jotai";
 import React from "react";
 import PropertyHeading from "../property/heading";
+import { useMediaQuery } from "@mantine/hooks";
 
 export default function Amenties({
   data,
@@ -27,6 +28,8 @@ export default function Amenties({
       title: "Amenities",
     }));
   };
+  const isMobile = useMediaQuery(`(max-width: 750px)`);
+  const maxShow = isMobile ? 6 : 20;
   return (
     <div
       className="w-[90%] scroll-mt-[90px] bg-white pt-10 pb-20 "
@@ -50,7 +53,7 @@ export default function Amenties({
         )}
 
         <div className="flex flex-wrap ">
-          {data?.slice(0, 25).map((eachItem, ind) => {
+          {data?.slice(0, maxShow).map((eachItem, ind) => {
             if (amenitiesGroupList.get(eachItem.id) != null) {
               return (
                 amenitiesFromDB != undefined &&
@@ -84,12 +87,12 @@ export default function Amenties({
               );
             }
           })}
-          {data && data?.length > 20 && (
+          {data && data?.length > maxShow && (
             <button
               className="inline-flex items-center justify-center text-[18px] lg:text-[20px] text-[#0073C6] font-[700] ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 "
               onClick={handleReadMoreClick}
             >
-              {expanded ? "Collapse" : `+ ${data?.length - 25} More`}
+              {expanded ? "Collapse" : `+ ${data?.length - maxShow} More`}
             </button>
           )}
         </div>

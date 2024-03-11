@@ -40,3 +40,9 @@
 .star {
   margin-right: 31px;
 }
+
+@media screen and (max-width: 767px) {
+  .star {
+    margin-right: 16px;
+  }
+}

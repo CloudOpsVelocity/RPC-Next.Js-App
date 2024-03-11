@@ -32,7 +32,7 @@ export default function MasterPlan({
   // };
   return (
     <div className="w-[90%] mb-[5%] scroll-mt-[90px]" id="masterPlan">
-      <div className="flex justify-between w-full items-cente mb-[32px]">
+      <div className="flex justify-between w-full items-cente mb-[32px] flex-wrap">
         <div>
           <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35] mb-[12px]">
             Master Plan Of{" "}
@@ -48,14 +48,14 @@ export default function MasterPlan({
         </div>
         <a
           target="_blank"
-          className="inline-flex flex-col items-center justify-center gap-2.5 p-5 rounded-[10px] bg-[#0073C6] text-white text-2xl not-italic font-bold leading-[normal] tracking-[0.96px] "
+          className="inline-flex flex-col items-center justify-center gap-2.5  p-5 rounded-[10px] bg-[#0073C6] text-white text-2xl not-italic font-bold leading-[normal] tracking-[0.96px] max-h-[50%] mt-5 md:mt-0"
           href={imageUrlParser(media)}
         >
           DownLoad MasterPlan
         </a>
       </div>
       <div className="relative">
-        <Image radius="md" src={`${media}`} h={863} w="100%" fit="cover" />
+        <Image radius="md" src={`${media}`} mah={863} w="100%" fit="cover" />
         <MasterPlanPopup url={media} />
       </div>
     </div>

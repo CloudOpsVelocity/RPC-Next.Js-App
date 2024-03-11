@@ -22,9 +22,12 @@ type Props = {
   slug: string;
   projName: string;
 };
+const styles = {
+  box: "mr-[3%] mb-[4%] md:mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8] ",
+};
 export default function ProjectDetailsP({ projName, slug }: Props) {
-  
-  const { PhaseOverview, currentPhase, handlePhaseChange ,phaseList} = usePhaseWiseOverview();
+  const { PhaseOverview, currentPhase, handlePhaseChange, phaseList } =
+    usePhaseWiseOverview();
   const { projectUnitsData } = useUnitTypes();
   const selectedPhase = PhaseOverview?.find(
     (phase: any) => phase.phaseId === currentPhase
@@ -36,7 +39,7 @@ export default function ProjectDetailsP({ projName, slug }: Props) {
       Object.keys(selectedPhase.propTypeOverview).includes(propertyType)
     );
 
-    // console.log(PhaseOverview[0])
+  // console.log(PhaseOverview[0])
 
   return (
     <div className="w-[90%] mb-[5%] scroll-mt-[90px]" id="propertyDetails">
@@ -73,51 +76,51 @@ export default function ProjectDetailsP({ projName, slug }: Props) {
         )}
       </div>
 
-      {phaseList?.length > 1 &&
-      <div className="flex justify-start items-start flex-wrap w-[80%]">
-        {selectedPhase && (
-          <>
-            <ProjBasicDetails
-              key="launchDate"
-              icon={<EndDate />}
-              title="Launch Date"
-              value={formatDateDDMMYYYY(selectedPhase.launchDate)}
-              className="mr-[3%] mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]"
-            />
-            <ProjBasicDetails
-              key="possessionDate"
-              icon={<StartDate />}
-              title="Possession Date"
-              value={formatDateDDMMYYYY(selectedPhase.possassionDate)}
-              className="mr-[3%] mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]"
-            />
-            <ProjBasicDetails
-              key="landArea"
-              icon={<TotalLandArea />}
-              title="Land Area"
-              value={`${selectedPhase.landArea} Acers`}
-              className="mr-[3%] mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]"
-            />
-            <ProjBasicDetails
-              key="reraStatus"
-              icon={<SecurityIcon />}
-              title="RERA STATUS"
-              value={selectedPhase.rerastatus}
-              className="mr-[3%] mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]"
-            />
-            {selectedPhase.reraId && (
+      {phaseList?.length > 1 && (
+        <div className="flex justify-start items-start flex-wrap w-[80%] ">
+          {selectedPhase && (
+            <>
               <ProjBasicDetails
-                key="reraId"
-                icon={<IdIcon />}
-                title="RERA ID"
-                value={selectedPhase.reraId}
-                className="mr-[3%] mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8]"
+                key="launchDate"
+                icon={<EndDate />}
+                title="Launch Date"
+                value={formatDateDDMMYYYY(selectedPhase.launchDate)}
+                className={styles.box}
               />
-            )}
-          </>
-        )}
-      </div>
-      }
+              <ProjBasicDetails
+                key="possessionDate"
+                icon={<StartDate />}
+                title="Possession Date"
+                value={formatDateDDMMYYYY(selectedPhase.possassionDate)}
+                className={styles.box}
+              />
+              <ProjBasicDetails
+                key="landArea"
+                icon={<TotalLandArea />}
+                title="Land Area"
+                value={`${selectedPhase.landArea} Acers`}
+                className={styles.box}
+              />
+              <ProjBasicDetails
+                key="reraStatus"
+                icon={<SecurityIcon />}
+                title="RERA STATUS"
+                value={selectedPhase.rerastatus}
+                className={styles.box}
+              />
+              {selectedPhase.reraId && (
+                <ProjBasicDetails
+                  key="reraId"
+                  icon={<IdIcon />}
+                  title="RERA ID"
+                  value={selectedPhase.reraId}
+                  className={styles.box}
+                />
+              )}
+            </>
+          )}
+        </div>
+      )}
 
       <div className="flex justify-start items-start gap-[4%] flex-wrap mt-[3%]">
         {selectedPhase && (

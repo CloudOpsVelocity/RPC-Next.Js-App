@@ -67,7 +67,7 @@ export default function GalleryBlock({
               ) : (
                 <Image
                   radius="md"
-                  h={550}
+                  mah={550}
                   src={selectedMedia}
                   alt="Preview"
                   className="cursor-pointer"

@@ -16,7 +16,7 @@ export default function ListingRentAvail({ projName }: { projName: string }) {
         <span className="text-[#148B16] font-[700] uppercase">{projName}</span>{" "}
       </h1>
 
-      <p className="text-[#4D6677] text-2xl italic font-medium leading-[normal] capitalize">
+      <p className="text-[#4D6677] md:text-2xl italic font-medium leading-[normal] capitalize">
         "Unlock the Door to Your Dream Home: Explore Our Array of Available
         Properties Today!"
       </p>
@@ -39,10 +39,10 @@ const Card = ({ type }: { type: "sell" | "rent" }) => {
       <div className="inline-flex justify-center items-center gap-[22px] h-full">
         {type === "rent" ? <RentSvg /> : <SellSvg />}
         <div>
-          <h2 className="text-black text-xl  font-medium leading-6">
+          <h2 className="text-black sm:text-xl  font-medium leading-6">
             <span className="capitalize">{type}</span> Listings in{" "}
           </h2>
-          <h2 className="text-[#148B16] text-xl  font-medium leading-6 mt-1">
+          <h2 className="text-[#148B16] sm:text-xl  font-medium leading-6 mt-1">
             Sarang By Sumadhura
           </h2>
         </div>

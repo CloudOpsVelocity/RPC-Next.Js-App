@@ -1,6 +1,6 @@
 import { PopupOpenSvg } from "@/app/images/commonSvgs";
 import { Flex, Image, Modal } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
+import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import SharePopup from "../../atoms/SharePopup";
 import { imageUrlParser } from "@/app/utils/image";
 import Close from "../button/close";
@@ -9,7 +9,7 @@ import S from "@/app/styles/ImgCarousel.module.css";
 import NextImage from "next/image";
 export default function MasterPlanPopup({ url }: { url: string }) {
   const [opened, { open, close }] = useDisclosure(false);
-
+  const isMobile = useMediaQuery(`(max-width: 750px`);
   return (
     <>
       <Modal
@@ -22,10 +22,11 @@ export default function MasterPlanPopup({ url }: { url: string }) {
           overlay: S.overlay,
           inner: S.inner,
         }}
-        size={"90%"}
+        size={isMobile ? "100%" : "90%"}
+        centered={isMobile}
       >
         <div className="h-auto scrollbar-hide flex justify-end flex-col items-center">
-          <div className="w-full bg-transparent    h-[57px] flex items-center justify-between  z-[1000] px-10 max-w-[91rem] m-auto">
+          <div className="w-full bg-transparent    h-[57px] flex items-center justify-between  z-[1000] md:px-10 max-w-[91rem] m-auto">
             <div className="text-white text-2xl not-italic font-bold leading-[normal]">
               Master Plan
             </div>
@@ -39,13 +40,14 @@ export default function MasterPlanPopup({ url }: { url: string }) {
               <Image
                 radius="md"
                 m={"auto"}
-                fit="fill"
+                // fit="fill"
                 src={url}
-                component={NextImage}
-                height={800}
-                width={1400}
+                // component={NextImage}
+                mah={863}
+                w="100%"
+                fit="cover"
                 alt="master plan"
-                className="cursor-pointer border-[5px] bg-white border-white min-w-[1400px] max-h-[770px]"
+                className="cursor-pointer border-[5px] bg-white border-white md:min-w-[1400px] max-h-[770px]"
               />
             </TransformComponent>
           </TransformWrapper>
