@@ -20,7 +20,10 @@ export default function PropertyOverviewBanner({
   const [opened, { open, close }] = useReqCallPopup();
   const [collapsed, { toggle }] = useDisclosure(false);
   const { slug } = useParams<{ slug: string }>();
-
+  const pricePerSq = calculatePerSqPrice(
+    price,
+    propTypeName === "Plot" ? plotArea : sba
+  );
   return (
     <>
       <div className="flex justify-start items-center w-full flex-col md:flex-row bg-gradient-to-r from-[#EFF5FF] /50 to-[#F2FAFF ]/50 ">
@@ -33,12 +36,7 @@ export default function PropertyOverviewBanner({
               <span className="text-[#00487C] text-[24px] md:text-[32px] lg:text-[40px] whitespace-nowrap font-[700]">
                 {formatCurrency(price)},{" "}
                 <span className="text-[#545353] text-lg md:text-[32px] not-italic font-medium leading-[normal]">
-                  ₹{" "}
-                  {calculatePerSqPrice(
-                    price,
-                    propTypeName === "Plot" ? plotArea : sba
-                  )}{" "}
-                  / price sq.ft
+                  ₹ {pricePerSq} / price sq.ft
                 </span>
               </span>
             </p>
@@ -67,13 +65,19 @@ export default function PropertyOverviewBanner({
         <RequestCallBackModal close={close} opened={opened} builderId={1112} />
       </div>
       <Collapse in={collapsed}>
-        <PriceBreakUp otherPrice={otherPrice} />
+        <PriceBreakUp otherPrice={otherPrice} price={pricePerSq} />
       </Collapse>
     </>
   );
 }
 
-const PriceBreakUp = ({ otherPrice }: { otherPrice: Main["otherPrice"] }) => {
+const PriceBreakUp = ({
+  otherPrice,
+  price,
+}: {
+  otherPrice: Main["otherPrice"];
+  price: string;
+}) => {
   const filterOtherDetails =
     otherPrice &&
     Object?.keys(otherPrice).filter(
@@ -81,10 +85,37 @@ const PriceBreakUp = ({ otherPrice }: { otherPrice: Main["otherPrice"] }) => {
         !["otherCharge", "price", "securetyType"].includes(item) &&
         otherPrice[item] !== "NA"
     );
+
   const sum = filterOtherDetails?.reduce(
-    (a, b) => Number(a) + Number(otherPrice[b] || "0"),
+    (a, b) =>
+      b !== "price"
+        ? Number(a) +
+          (b === "otherCharge"
+            ? parseOtherCharge(otherPrice[b])
+            : Number(otherPrice[b] || "0"))
+        : Number(a),
     0
   );
+  function parseOtherCharge(otherChargeString: string): number {
+    let sum = 0;
+
+    if (otherChargeString) {
+      const charges: string[] = otherChargeString.split(",");
+      charges.forEach((charge: string) => {
+        const parts: string[] = charge.split("|");
+        if (parts.length === 2) {
+          const value: number = parseFloat(parts[1].trim());
+          if (!isNaN(value)) {
+            sum += value;
+          }
+        }
+      });
+    }
+
+    return sum;
+  }
+  const otherChangeTotal = parseOtherCharge(otherPrice.otherCharge);
+  const chargesArray = otherPrice.otherCharge.split(",");
   return (
     <>
       <div className="max-w-[90%] mx-auto p-6 bg-white rounded-lg shadow my-10">
@@ -97,7 +128,7 @@ const PriceBreakUp = ({ otherPrice }: { otherPrice: Main["otherPrice"] }) => {
           </h3>
           <li className="flex w-[771px]  items-start gap-[26px] text-[#4D6677] text-2xl not-italic font-bold leading-[23.784px] border-dashed border-b pb-5">
             <div>Price/SQ.FT</div>{" "}
-            <div className="font-semibold">₹ {otherPrice?.price}</div>
+            <div className="font-semibold">₹ {price}</div>
           </li>
         </div>
         {sum > 0 && (
@@ -120,7 +151,7 @@ const PriceBreakUp = ({ otherPrice }: { otherPrice: Main["otherPrice"] }) => {
                 );
               })}
             </div>
-            <SideCard price={sum} />
+            <SideCard price={sum + otherChangeTotal} />
           </div>
         )}
 
@@ -130,12 +161,20 @@ const PriceBreakUp = ({ otherPrice }: { otherPrice: Main["otherPrice"] }) => {
               <h3 className="text-[#034AB6] text-[28px] not-italic font-bold leading-[normal] underline uppercase">
                 Other charges
               </h3>
-              <li className="flex max-w-[771px]  items-start gap-[26px] text-[#4D6677]  text-2xl  font-bold leading-[23.784px]  border-b-2 border-black pb-5">
-                <div>Other Charges</div>{" "}
-                <div className="font-semibold">₹ {otherPrice?.otherCharge}</div>
-              </li>
+              {chargesArray.map((charge, index) => {
+                const [chargeName, chargeValue] = charge.split("|");
+                return (
+                  <li
+                    key={index}
+                    className="flex max-w-[771px] items-start gap-[26px] text-[#4D6677] text-2xl font-bold leading-[23.784px] border-b-2 border-black pb-5"
+                  >
+                    <div>{chargeName.trim()}</div>
+                    <div className="font-semibold">₹ {chargeValue.trim()}</div>
+                  </li>
+                );
+              })}
             </div>
-            <OtherSideCard price={sum + Number(otherPrice?.price)} />
+            <OtherSideCard price={sum + otherChangeTotal + Number(price)} />
           </div>
         )}
       </div>
