@@ -20,6 +20,7 @@ import { useSetAtom } from "jotai";
 import { listingSearchAtom } from "@/app/store/search/map";
 import { Main } from "@/app/validations/property/search";
 import Link from "next/link";
+import { calculatePerSqPrice } from "@/app/utils/price";
 
 type Props = {
   type: any;
@@ -43,6 +44,7 @@ const ProjectDetailsCard = ({
   availableFrom,
   type,
   propIdEnc,
+  possassionDate,
 }: any) => {
   const { data: session } = useSession();
 
@@ -123,21 +125,40 @@ const ProjectDetailsCard = ({
           <div className="  justify-between items-start  flex ">
             <div className=" flex  items-start flex-col  ">
               <div>
-                <p className="text-[#333] text-[12px] md:text-[16px] font-[500]">
-                  Super Builtup Area:{" "}
-                  <span className=" font-[600]">{sba} sq.ft</span>
-                </p>
-
-                <p className="text-[#333] text-[12px] md:text-[16px] font-[500]">
-                  Carpet Area: <span className=" font-[600]"> {ca} sq.ft </span>
-                  ₹ 9626/ sqft
-                </p>
-                <p className="text-[#333] text-[12px] md:text-[16px] font-[500]">
-                  Available From:{" "}
-                  <span className=" font-[600]">
-                    {formatDateDDMMYYYY(availableFrom)}
-                  </span>
-                </p>
+                {propTypeName !== "Plot" ? (
+                  <>
+                    {" "}
+                    <p className="text-[#333] text-[12px] md:text-[16px] font-[500]">
+                      Super Builtup Area:{" "}
+                      <span className=" font-[600]">{sba} sq.ft</span>
+                    </p>
+                    <p className="text-[#333] text-[12px] md:text-[16px] font-[500]">
+                      Carpet Area:{" "}
+                      <span className=" font-[600]"> {ca} sq.ft </span>₹{" "}
+                      {calculatePerSqPrice(price, sba)}/ sqft
+                    </p>
+                    <p className="text-[#333] text-[12px] md:text-[16px] font-[500]">
+                      Available From:{" "}
+                      <span className=" font-[600]">
+                        {formatDateDDMMYYYY(availableFrom)}
+                      </span>
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <p className="text-[#333] text-[12px] md:text-[16px] font-[500]">
+                      Plot Area:{" "}
+                      <span className=" font-[600]"> {pa} sq.ft </span>₹{" "}
+                      {calculatePerSqPrice(price, pa)}/ sqft
+                    </p>
+                    <p className="text-[#333] text-[12px] md:text-[16px] font-[500]">
+                      Possession Date:{" "}
+                      <span className=" font-[600]">
+                        {formatDateDDMMYYYY(possassionDate)}
+                      </span>
+                    </p>
+                  </>
+                )}
               </div>
             </div>
 

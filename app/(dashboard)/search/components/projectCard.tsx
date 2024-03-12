@@ -154,8 +154,8 @@ const ProjectDetailsCard = ({
                   {type != "proj" && (
                     <p className="text-[#333] text-[13px] font-[500]">
                       Carpet Area:{" "}
-                      <span className=" font-[600]"> {pa} sq.ft </span>₹{" "}
-                      {calculatePerSqPrice(price, pa)}/ sqft
+                      <span className=" font-[600]"> {ca} sq.ft </span>₹{" "}
+                      {calculatePerSqPrice(price, sba)}/ sqft
                     </p>
                   )}
                   <p className="text-[#333] text-[10px]  md:text-[13px] font-[500]">
