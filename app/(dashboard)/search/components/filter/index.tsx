@@ -54,6 +54,11 @@ const SearchDrawerHeader = ({ open, close }: any) => {
                       setFilters((prev) => ({ ...prev, city: null }));
                       handleAppliedFilters();
                     }}
+                    removeButtonProps={{
+                      style: {
+                        color: "red",
+                      },
+                    }}
                   >
                     {filters.city.split("+")[0]}
                   </Pill>
@@ -64,6 +69,11 @@ const SearchDrawerHeader = ({ open, close }: any) => {
                     key={index}
                     withRemoveButton
                     classNames={{ root: classes.MultiSelectionPill }}
+                    removeButtonProps={{
+                      style: {
+                        color: "red",
+                      },
+                    }}
                   >
                     {each.split("+")[0]}
                   </Pill>

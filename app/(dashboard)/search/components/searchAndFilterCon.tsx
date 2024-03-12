@@ -107,6 +107,11 @@ const SearchHeader = ({ open, close }: any) => {
                   setFilters((prev) => ({ ...prev, city: null }));
                   handleAppliedFilters();
                 }}
+                removeButtonProps={{
+                  style: {
+                    color: "red",
+                  },
+                }}
               >
                 {filters.city.split("+")[0]}
               </Pill>
@@ -122,6 +127,11 @@ const SearchHeader = ({ open, close }: any) => {
                 classNames={{
                   root: classes.MultiSelectionPill,
                   remove: classes.removeButton,
+                }}
+                removeButtonProps={{
+                  style: {
+                    color: "red",
+                  },
                 }}
               >
                 {each.split("+")[0]}

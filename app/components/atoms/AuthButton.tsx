@@ -139,10 +139,9 @@ function Dropdown() {
               classNames={{
                 itemLabel: S.itemLabel,
               }}
-              component="a"
+              component={Link}
               className="block text-gray-700 hover:text-green-500 transition-colors"
               href={item.url}
-              target="_blank"
             >
               {item.label}
             </Menu.Item>

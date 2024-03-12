@@ -7,6 +7,7 @@ import {
   Pill,
   PillsInput,
   Popover,
+  ScrollArea,
   Select,
   em,
 } from "@mantine/core";
@@ -109,6 +110,11 @@ const SearchHeader = ({ open }: any) => {
                   setFilters((prev) => ({ ...prev, city: null }));
                   handleAppliedFilters();
                 }}
+                removeButtonProps={{
+                  style: {
+                    color: "red",
+                  },
+                }}
               >
                 {filters.city.split("+")[0]}
               </Pill>
@@ -125,11 +131,15 @@ const SearchHeader = ({ open }: any) => {
                   root: classes.MultiSelectionPill,
                   remove: classes.removeButton,
                 }}
+                removeButtonProps={{
+                  style: {
+                    color: "red",
+                  },
+                }}
               >
                 {each.split("+")[0]}
               </Pill>
             ))}
-
             <PillsInput.Field
               miw={225}
               placeholder={
