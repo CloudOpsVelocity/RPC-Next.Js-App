@@ -132,7 +132,7 @@ const PriceBreakUp = ({
           </li>
         </div>
         {sum > 0 && (
-          <div className="w-full grid grid-cols-2 justify-between items-center">
+          <div className="w-full grid md:grid-cols-2 justify-between items-center">
             <div className=" border-t border-gray-400 mt-4 space-y-4 py-8 ">
               <h3 className="text-[#034AB6] text-[28px] not-italic font-bold leading-[normal] underline uppercase">
                 applicable charges
@@ -156,7 +156,7 @@ const PriceBreakUp = ({
         )}
 
         {otherPrice?.otherCharge && (
-          <div className="w-full grid grid-cols-2 justify-between items-center">
+          <div className="w-full grid md:grid-cols-2 justify-between items-center">
             <div className=" border-t border-gray-400 mt-4 space-y-4 py-8 ">
               <h3 className="text-[#034AB6] text-[28px] not-italic font-bold leading-[normal] underline uppercase">
                 Other charges
