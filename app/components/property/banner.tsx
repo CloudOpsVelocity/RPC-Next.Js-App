@@ -57,7 +57,7 @@ export default function Banner({
         <div>
           <h2 className="text-[#023993] text-2xl sm:text-[32px] not-italic font-bold leading-[normal] tracking-[1.28px] mb-4">
             PROJECT RATING FOR{" "}
-            <span className="text-[#148B16] text-2xl sm:text-[32px]] not-italic font-bold leading-[normal] tracking-[1.28px]">
+            <span className="text-[#148B16] text-2xl sm:text-[32px] not-italic font-bold leading-[normal] tracking-[1.28px] capitalize">
               {projName}
             </span>
           </h2>
