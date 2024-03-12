@@ -45,6 +45,8 @@ const ProjectDetailsCard = ({
   type,
   propIdEnc,
   possassionDate,
+  lat,
+  lang,
 }: any) => {
   const { data: session } = useSession();
 
@@ -81,6 +83,17 @@ const ProjectDetailsCard = ({
     }
   };
   const setSelectedSearch = useSetAtom(listingSearchAtom);
+  const openMap = () => {
+    if (lat && lang) {
+      setSelectedSearch({
+        projName: propName,
+        lat,
+        lang,
+      });
+    } else {
+      alert("Lat Lang Not Available");
+    }
+  };
   return (
     <div className=" flex w-full mb-[5%] flex-col shadow-md ">
       <div className=" flex justify-center items-center w-full h-full">
@@ -185,15 +198,7 @@ const ProjectDetailsCard = ({
           </div>
           <button
             className=" justify-center items-center gap-1 p-2 border rounded-[21px] border-solid border-[#0094FF] text-[#202020] text-[12px] not-italic font-semibold leading-[normal] mb-1 md:inline-flex hidden bg-white"
-            // onClick={() =>
-            //   setSelectedSearch({
-            //     agentListing,
-            //     ownerListing,
-            //     projName,
-            //     lat,
-            //     lang,
-            //   })
-            // }
+            onClick={openMap}
           >
             View on Map <GradientLocation />
           </button>
@@ -223,8 +228,8 @@ const ProjectDetailsCard = ({
         ownerListing={10}
         projName={propName}
         price={price}
-        // lat={lat}
-        // lang={lang}
+        lat={lat}
+        lang={lang}
       />
     </div>
   );
@@ -276,6 +281,20 @@ const MobileDetails = ({
     }
   };
   const setSelectedSearch = useSetAtom(listingSearchAtom);
+
+  const openMap = () => {
+    if (lat && lang) {
+      setSelectedSearch({
+        agentListing,
+        ownerListing,
+        projName,
+        lat,
+        lang,
+      });
+    } else {
+      alert("Lat Lang Not Available");
+    }
+  };
   return (
     <div className="flex md:hidden items-center justify-between gap-[10px] px-[12px] py-[11px] rounded-[10px] bg-[#E9F6FF] mt-5">
       <div className="flex flex-col justify-center items-start gap-2.5">
@@ -301,15 +320,7 @@ const MobileDetails = ({
       <div className=" justify-center items-center  gap-[5px]">
         <button
           className=" justify-center items-center gap-1 p-2 border rounded-[21px] border-solid border-[#0094FF] text-[#202020] text-[12px] not-italic font-semibold leading-[normal] mb-1 inline-flex  bg-white"
-          onClick={() =>
-            setSelectedSearch({
-              agentListing,
-              ownerListing,
-              projName,
-              lat,
-              lang,
-            })
-          }
+          onClick={openMap}
         >
           View on Map
         </button>{" "}
