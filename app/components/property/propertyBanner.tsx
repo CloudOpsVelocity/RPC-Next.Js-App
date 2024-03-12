@@ -1,6 +1,8 @@
+"use client";
 import { formatDate, formatDateDDMMYYYY } from "@/app/utils/date";
 import { formatCurrency } from "@/app/utils/numbers";
 import { Main } from "@/app/validations/types/project";
+import { useMediaQuery } from "@mantine/hooks";
 import Image from "next/image";
 import React from "react";
 
@@ -12,12 +14,22 @@ export default function PropertyBanner({
   minPrice,
   maxPrice,
 }: Main) {
-  return (
-    <div className="w-[1920px] mt-[2%] h-[339px] shrink-0 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] bg-[#fcfcfc] mb-20 relative">
+  const isMobile = useMediaQuery(`(max-width: 750px)`);
+  return isMobile ? (
+    <PropertyBannerForMobile
+      projectName={projectName}
+      availableProperties={availableProperties}
+      startDate={startDate}
+      endDate={endDate}
+      minPrice={minPrice}
+      maxPrice={maxPrice}
+    />
+  ) : (
+    <div className="w-full mt-[2%] h-[339px] shrink-0 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] bg-[#fcfcfc] mb-20 relative">
       <Image
         src="/property/propertybanner.png"
         alt="Sobha Dream Acres"
-        className="w-[312px] h-auto absolute right-0 -top-[180px]"
+        className="w-[312px] h-auto absolute right-0 -top-[180px] hidden md:block"
         width={312}
         height={312}
       />
@@ -28,7 +40,7 @@ export default function PropertyBanner({
             {projectName}
           </span>
         </h2>
-        <div className="flex justify-between items-center p-5">
+        <div className="flex justify-between items-center p-5 ">
           <div className=" flex space-x-4">
             {" "}
             <Image
@@ -62,6 +74,59 @@ export default function PropertyBanner({
                   {formatDate(startDate)} - {formatDate(endDate)}
                 </span>
               </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function PropertyBannerForMobile({
+  projectName,
+  availableProperties,
+  startDate,
+  endDate,
+  minPrice,
+  maxPrice,
+}: any) {
+  return (
+    <div className="w-full md:w-[90%] mx-auto mt-5 md:mt-[2%] mb-10 md:mb-20 relative bg-[#fcfcfc]">
+      <div className="max-w-[90%] mx-auto p-5">
+        <h2 className="text-[#212C33] text-2xl md:text-[32px] not-italic font-semibold leading-[normal] tracking-[1.28px] ml-0 md:ml-8 mb-4 md:mb-0">
+          About{" "}
+          <span className="text-[#148B16] font-semibold">{projectName}</span>
+        </h2>
+        <div className="flex flex-col md:flex-row justify-between items-center p-5 ">
+          <div className="flex flex-col md:flex-row md:space-x-4 w-full md:w-auto">
+            <Image
+              src="/property.png"
+              alt="Sobha Dream Acres"
+              className="w-full h-auto mb-4 md:w-auto md:mb-0"
+              width={350}
+              height={185}
+            />
+            <div className="md:mt-4">
+              <h2 className="text-[#001F35] text-xl md:text-2xl not-italic font-semibold leading-[normal] mb-2">
+                About {projectName}
+              </h2>
+              <p className="text-[#768AA9] text-base md:text-xl not-italic font-semibold leading-[normal] mb-2">
+                {availableProperties.join(", ")}
+              </p>
+              <p className="text-[#202020] text-base md:text-2xl not-italic font-normal leading-[normal]">
+                Posted By: <span className="font-semibold">Builder</span>{" "}
+              </p>
+            </div>
+          </div>
+          <div className="flex flex-col md:flex-row justify-start items-start mt-4 md:mt-0">
+            <div className="text-[#148B16] text-lg md:text-[28px] not-italic font-bold leading-[normal] mr-4">
+              {formatCurrency(minPrice)} - {formatCurrency(maxPrice)}
+            </div>
+            <div className="text-[#333] text-base md:text-xl not-italic font-medium leading-[normal]">
+              Start- End Date:{" "}
+              <span className="font-semibold">
+                {formatDate(startDate)} - {formatDate(endDate)}
+              </span>
             </div>
           </div>
         </div>

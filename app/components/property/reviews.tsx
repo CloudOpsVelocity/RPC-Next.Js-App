@@ -22,7 +22,7 @@ export default function Reviews({
 }) {
   const [, { open }] = usePopUpRatings();
   const { data } = usePropRatings({ slug });
-  const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
+  const isMobile = useMediaQuery(`(max-width: 750px)`);
   return (
     data?.status && (
       <div id="ratings" className="bg-[#FFF] scroll-mt-[100px] py-12 w-full ">
@@ -46,7 +46,7 @@ export default function Reviews({
               </button>
             </div>
           </div>
-          <div className="relative w-[96%] mx-auto px-6">
+          <div className="relative sm:w-[96%] mx-auto px-2 sm:px-6">
             <Carousel
               nextControlIcon={<NextCarouselButton />}
               previousControlIcon={<PrevCarouselButton />}
@@ -56,7 +56,7 @@ export default function Reviews({
               withIndicators
               height={250}
               slidesToScroll={1}
-              px={70}
+              px={isMobile ? 0 : 70}
               classNames={{
                 controls: S.controls,
               }}
@@ -68,7 +68,7 @@ export default function Reviews({
               withControls={isMobile ? true : data?.data.length > 3}
             >
               {data?.data?.map((eachData: any, i: number) => (
-                <Carousel.Slide key={i} miw={487}>
+                <Carousel.Slide key={i} miw={isMobile ? "auto" : 487}>
                   <Review {...eachData} />
                 </Carousel.Slide>
               ))}

@@ -55,13 +55,13 @@ export default function Banner({
       <div className="w-[90%] m-auto flex flex-col md:flex-row justify-between items-center">
         <Toaster position="top-right" reverseOrder={false} />
         <div>
-          <h2 className="text-[#023993] text-[32px] not-italic font-bold leading-[normal] tracking-[1.28px] mb-4">
+          <h2 className="text-[#023993] text-2xl sm:text-[32px] not-italic font-bold leading-[normal] tracking-[1.28px] mb-4">
             PROJECT RATING FOR{" "}
-            <span className="text-[#148B16] text-[32px] not-italic font-bold leading-[normal] tracking-[1.28px]">
+            <span className="text-[#148B16] text-2xl sm:text-[32px]] not-italic font-bold leading-[normal] tracking-[1.28px]">
               {projName}
             </span>
           </h2>
-          <p className="text-black text-2xl not-italic font-medium leading-[normal] tracking-[0.96px] mb-8">
+          <p className="text-black text-lg sm:text-2xl not-italic font-medium leading-[normal] tracking-[0.96px] mb-8">
             Your headline should show readers how your review can help them
             solve a problem or make a decision, offer something different or
             unexpected, and be clear and specific about what your review is
@@ -74,7 +74,7 @@ export default function Banner({
             ADD RATINGS
           </button>
         </div>
-        <div className="flex-shrink-0 relative h-[200px] w-[600px]">
+        <div className="flex-shrink-0 relative h-[200px] w-[600px] hidden md:block">
           <Image
             src="/abc/rating.svg"
             alt="Project Rating Illustration"

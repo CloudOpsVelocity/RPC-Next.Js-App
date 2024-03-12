@@ -15,14 +15,14 @@ export default function RoomBasicDetails({
 }: props) {
   return value ? (
     <div className={className}>
-      <div className="flex justify-start items-center space-x-3">
+      <div className="flex justify-start items-center space-x-3 ">
         {icon}
-        <p className="text-[#00487C] text-2xl not-italic font-medium leading-[normal]">
+        <p className="text-[#00487C] text-lg md:text-2xl not-italic font-medium leading-[normal]">
           {title}
         </p>
       </div>
 
-      <p className="text-[#202020] text-2xl not-italic font-semibold leading-[normal] mt-2">
+      <p className="text-[#202020] sm:text-2xl not-italic font-semibold leading-[normal] mt-2">
         {value}
       </p>
     </div>

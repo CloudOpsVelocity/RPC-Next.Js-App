@@ -33,16 +33,14 @@ import {
   TowerIcon,
   WallIcons,
 } from "@/app/images/commonSvgs";
-import React, { useState } from "react";
-import { PhaseList } from "@/app/validations/types/project";
+import React from "react";
 import RoomBasicDetails from "./RoomBasicDetails";
 import PropertyHeading from "./heading";
 import { Main } from "@/app/validations/property";
 import { formatDateDDMMYYYY } from "@/app/utils/date";
 import { generatePropertyDetails } from "@/app/data/property";
-import { map } from "leaflet";
 const style = {
-  card: "mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]",
+  card: "mr-[3%] mb-[1%]  p-[2%] md:p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8] ",
   heading: {
     h1: "text-[24px] lg:text-[24px] font-[600] text-[#001F35] mb-1",
     p: "text-[16px] lg:text-[24px] font-[500] text-[#4D6677] italic mb-8",
