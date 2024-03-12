@@ -66,10 +66,10 @@ export default function ManagementBlock({
         in Different Branches{" "}
       </h1>
 
-      <div className="flex justify-start items-start w-full flex-wrap gap-[3%] mb-[2%] mt-[1%] space-y-3 md:space-y-0">
+      <div className="flex justify-start items-start w-full flex-wrap gap-[3%] mb-[2%] mt-[1%] space-y-3 md:space-y-0 md:gap-y-4">
         {citiesName?.map((item, index) => (
           <p
-            className="text-[16px] md:text-[24px]  text-[#00487C] bg-[#FFF]  border border-[color:var(--ll1,#EFF5FF)] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[10px] border-solid p-[1%] px-[16px] hover:bg-[#00487C] hover:text-[#FFF] cursor-pointer  text-2xl not-italic  font-semibold leading-[normal] tracking-[0.96px]"
+            className="text-[16px] md:text-[24px]  text-[#00487C] bg-[#FFF]  border border-[color:var(--ll1,#EFF5FF)] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[10px] border-solid p-[1%] px-[16px] hover:bg-[#00487C] hover:text-[#FFF] cursor-pointer  text-2xl not-italic  font-semibold leading-[normal] tracking-[0.96px] "
             key={index}
           >
             Project in <span className="capitalize">{item}</span>

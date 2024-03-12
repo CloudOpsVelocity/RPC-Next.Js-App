@@ -84,6 +84,7 @@ const ProjectDetailsCard = ({
     }
   };
   const setSelected = useSetAtom(selectedSearchAtom);
+
   return (
     <div className=" flex w-full mb-[5%] flex-col shadow-md " id={reqId}>
       <div className=" flex justify-center items-center w-full  ">
@@ -141,26 +142,46 @@ const ProjectDetailsCard = ({
                   </span>
                 </p>
               )}
+              {propTypeName !== "Plot" ? (
+                <>
+                  {type != "proj" && (
+                    <p className="text-[#333] text-[10px]  md:text-[13px] font-[500]">
+                      Super Builtup Area:{" "}
+                      <span className=" font-[600]">{sba} sq.ft</span>
+                    </p>
+                  )}
 
-              {type != "proj" && (
-                <p className="text-[#333] text-[10px]  md:text-[13px] font-[500]">
-                  Super Builtup Area:{" "}
-                  <span className=" font-[600]">{sba} sq.ft</span>
-                </p>
+                  {type != "proj" && (
+                    <p className="text-[#333] text-[13px] font-[500]">
+                      Carpet Area:{" "}
+                      <span className=" font-[600]"> {pa} sq.ft </span>₹{" "}
+                      {calculatePerSqPrice(price, pa)}/ sqft
+                    </p>
+                  )}
+                  <p className="text-[#333] text-[10px]  md:text-[13px] font-[500]">
+                    Available From:{" "}
+                    <span className=" font-[600]">
+                      {formatDateDDMMYYYY(launchDate ?? availableFrom)}
+                    </span>
+                  </p>
+                </>
+              ) : (
+                <>
+                  {type != "proj" && (
+                    <p className="text-[#333] text-[13px] font-[500]">
+                      Plot Area:{" "}
+                      <span className=" font-[600]"> {pa} sq.ft </span>₹{" "}
+                      {calculatePerSqPrice(price, pa)}/ sqft
+                    </p>
+                  )}
+                  <p className="text-[#333] text-[10px]  md:text-[13px] font-[500]">
+                    Possession Date:{" "}
+                    <span className=" font-[600]">
+                      {formatDateDDMMYYYY(possassionDate)}
+                    </span>
+                  </p>
+                </>
               )}
-
-              {type != "proj" && (
-                <p className="text-[#333] text-[13px] font-[500]">
-                  Carpet Area: <span className=" font-[600]"> {ca} sq.ft </span>
-                  ₹ {calculatePerSqPrice(price, propTypeName ? pa : sba)}/ sqft
-                </p>
-              )}
-              <p className="text-[#333] text-[10px]  md:text-[13px] font-[500]">
-                Available From:{" "}
-                <span className=" font-[600]">
-                  {formatDateDDMMYYYY(launchDate ?? availableFrom)}
-                </span>
-              </p>
             </div>
 
             <div className=" flex justify-end items-end flex-col">
