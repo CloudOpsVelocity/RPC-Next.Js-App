@@ -1,28 +1,22 @@
 "use client";
-import PriceBag, {
-  Phone,
-  ShearIcon,
-  WhatsAppButton,
-} from "@/app/images/commonSvgs";
+import PriceBag, { Phone, WhatsAppButton } from "@/app/images/commonSvgs";
 import React from "react";
 import Button from "../../elements/button";
 import { useDisclosure } from "@mantine/hooks";
 import { Collapse, Modal } from "@mantine/core";
-import Image from "next/image";
-import { useSession } from "next-auth/react";
-import S from "@/app/styles/Req.module.css";
 import RequestCallBackModal from "../molecules/popups/req";
 import { formatCurrency } from "@/app/utils/numbers";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import { useParams } from "next/navigation";
 import { Main } from "@/app/validations/property";
+import { calculatePerSqPrice } from "@/app/utils/price";
 export default function PropertyOverviewBanner({
   price,
   otherPrice,
-}: {
-  price: number;
-  otherPrice: Main["otherPrice"];
-}) {
+  propTypeName,
+  plotArea,
+  sba,
+}: Main) {
   const [opened, { open, close }] = useReqCallPopup();
   const [collapsed, { toggle }] = useDisclosure(false);
   const { slug } = useParams<{ slug: string }>();
@@ -38,8 +32,13 @@ export default function PropertyOverviewBanner({
               PRICE{"  "}
               <span className="text-[#00487C] text-[24px] md:text-[32px] lg:text-[40px] whitespace-nowrap font-[700]">
                 {formatCurrency(price)},{" "}
-                <span className="text-[#545353] text-[32px] not-italic font-medium leading-[normal]">
-                  ₹ 1824 / price sq.ft
+                <span className="text-[#545353] text-lg md:text-[32px] not-italic font-medium leading-[normal]">
+                  ₹{" "}
+                  {calculatePerSqPrice(
+                    price,
+                    propTypeName === "Plot" ? plotArea : sba
+                  )}{" "}
+                  / price sq.ft
                 </span>
               </span>
             </p>
@@ -101,39 +100,44 @@ const PriceBreakUp = ({ otherPrice }: { otherPrice: Main["otherPrice"] }) => {
             <div className="font-semibold">₹ {otherPrice?.price}</div>
           </li>
         </div>
-        <div className="w-full grid grid-cols-2 justify-between items-center">
-          <div className=" border-t border-gray-400 mt-4 space-y-4 py-8 ">
-            <h3 className="text-[#034AB6] text-[28px] not-italic font-bold leading-[normal] underline uppercase">
-              applicable charges
-            </h3>
-            {filterOtherDetails?.map((key, i) => {
-              return (
-                <li
-                  key={i}
-                  className="flex max-w-[771px]  items-start gap-[26px] text-[#4D6677]  text-2xl  font-bold leading-[23.784px]  border-b border-[#00000080] pb-5"
-                >
-                  <div>{key}</div>{" "}
-                  <div className="font-semibold">
-                    ₹ {otherPrice[key] as string}
-                  </div>
-                </li>
-              );
-            })}
+        {sum > 0 && (
+          <div className="w-full grid grid-cols-2 justify-between items-center">
+            <div className=" border-t border-gray-400 mt-4 space-y-4 py-8 ">
+              <h3 className="text-[#034AB6] text-[28px] not-italic font-bold leading-[normal] underline uppercase">
+                applicable charges
+              </h3>
+              {filterOtherDetails?.map((key, i) => {
+                return (
+                  <li
+                    key={i}
+                    className="flex max-w-[771px]  items-start gap-[26px] text-[#4D6677]  text-2xl  font-bold leading-[23.784px]  border-b border-[#00000080] pb-5"
+                  >
+                    <div>{key}</div>{" "}
+                    <div className="font-semibold">
+                      ₹ {otherPrice[key] as string}
+                    </div>
+                  </li>
+                );
+              })}
+            </div>
+            <SideCard price={sum} />
           </div>
-          <SideCard price={sum} />
-        </div>
-        <div className="w-full grid grid-cols-2 justify-between items-center">
-          <div className=" border-t border-gray-400 mt-4 space-y-4 py-8 ">
-            <h3 className="text-[#034AB6] text-[28px] not-italic font-bold leading-[normal] underline uppercase">
-              Other charges
-            </h3>
-            <li className="flex max-w-[771px]  items-start gap-[26px] text-[#4D6677]  text-2xl  font-bold leading-[23.784px]  border-b-2 border-black pb-5">
-              <div>Other Charges</div>{" "}
-              <div className="font-semibold">₹ {otherPrice?.otherCharge}</div>
-            </li>
+        )}
+
+        {otherPrice?.otherCharge && (
+          <div className="w-full grid grid-cols-2 justify-between items-center">
+            <div className=" border-t border-gray-400 mt-4 space-y-4 py-8 ">
+              <h3 className="text-[#034AB6] text-[28px] not-italic font-bold leading-[normal] underline uppercase">
+                Other charges
+              </h3>
+              <li className="flex max-w-[771px]  items-start gap-[26px] text-[#4D6677]  text-2xl  font-bold leading-[23.784px]  border-b-2 border-black pb-5">
+                <div>Other Charges</div>{" "}
+                <div className="font-semibold">₹ {otherPrice?.otherCharge}</div>
+              </li>
+            </div>
+            <OtherSideCard price={sum + Number(otherPrice?.price)} />
           </div>
-          <OtherSideCard price={sum + Number(otherPrice?.price)} />
-        </div>
+        )}
       </div>
     </>
   );

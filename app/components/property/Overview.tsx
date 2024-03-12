@@ -65,7 +65,7 @@ export default function PropertyOverView({ data }: { data: Main }) {
           <ShortList />
         </div>
       </div>
-      <PropertyOverviewBanner price={data.price} otherPrice={data.otherPrice} />
+      <PropertyOverviewBanner {...data} />
     </div>
   );
 }

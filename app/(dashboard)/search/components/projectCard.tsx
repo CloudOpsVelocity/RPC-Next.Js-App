@@ -11,6 +11,7 @@ import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import { formatCurrency } from "@/app/utils/numbers";
 import { useSetAtom } from "jotai";
 import selectedSearchAtom from "@/app/store/search/map";
+import { calculatePerSqPrice } from "@/app/utils/price";
 
 type Props = {
   type: any;
@@ -44,6 +45,7 @@ const ProjectDetailsCard = ({
   price,
   propStatus,
   propIdEnc,
+  pa,
 }: Props) => {
   const { data: session } = useSession();
 
@@ -150,7 +152,7 @@ const ProjectDetailsCard = ({
               {type != "proj" && (
                 <p className="text-[#333] text-[13px] font-[500]">
                   Carpet Area: <span className=" font-[600]"> {ca} sq.ft </span>
-                  ₹ {calculateDivision(price, sba)}/ sqft
+                  ₹ {calculatePerSqPrice(price, propTypeName ? pa : sba)}/ sqft
                 </p>
               )}
               <p className="text-[#333] text-[10px]  md:text-[13px] font-[500]">
@@ -242,17 +244,4 @@ function getTypeText(type: string) {
   }
 
   return text;
-}
-
-function calculateDivision(price: string, sba: string): string {
-  const priceValue: number = parseFloat(price);
-  const sbaValue: number = parseFloat(sba);
-
-  if (isNaN(priceValue) || isNaN(sbaValue) || sbaValue === 0) {
-    return "N/A";
-  }
-
-  const result: string = (priceValue / sbaValue).toFixed(2);
-
-  return result;
 }

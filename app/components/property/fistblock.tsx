@@ -14,6 +14,7 @@ import SharePopup from "../atoms/SharePopup";
 import { formatCurrency } from "@/app/utils/numbers";
 import { formatDate } from "@/app/utils/date";
 import { getImageUrls } from "@/app/utils/image";
+import { calculatePerSqPrice } from "@/app/utils/price";
 
 type Props = {
   projectDetails: Main | null;
@@ -111,7 +112,14 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails }) => {
                 {formatCurrency(projectDetails.price)}
               </h2>
               <p className="text-[16px] md:text-right lg:text-[24px] font-[600] mb-[10px] md:mb-[10px] text-[#00487C] ">
-                ₹ {1000}/ Price per sqft onwards
+                ₹{" "}
+                {calculatePerSqPrice(
+                  projectDetails.price,
+                  projectDetails.propTypeName === "Plot"
+                    ? projectDetails.plotArea
+                    : projectDetails.sba
+                )}
+                / Price per sqft onwards
               </p>
               <p className="text-[#001F35] text-xl not-italic font-semibold leading-[normal] mb-[13px]">
                 Posted By:{" "}
