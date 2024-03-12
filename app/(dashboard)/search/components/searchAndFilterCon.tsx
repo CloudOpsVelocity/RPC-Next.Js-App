@@ -94,7 +94,10 @@ const SearchHeader = ({ open, close }: any) => {
           size="xs"
         />
 
-        <PillsInput classNames={{ input: classes.wrapperMultiSelection }}>
+        <PillsInput
+          classNames={{ input: classes.wrapperMultiSelection }}
+          onClick={open}
+        >
           <Pill.Group>
             {filters.city && (
               <Pill
@@ -110,7 +113,10 @@ const SearchHeader = ({ open, close }: any) => {
             )}
             {filters.locality?.map((each, index) => (
               <Pill
-                onRemove={() => remnoveSearchOptions(each, "locality")}
+                onRemove={() => {
+                  remnoveSearchOptions(each, "locality");
+                  handleAppliedFilters();
+                }}
                 key={index}
                 withRemoveButton
                 classNames={{
@@ -129,7 +135,7 @@ const SearchHeader = ({ open, close }: any) => {
                   ? "Add More"
                   : "Enter City,Locality & Project"
               }
-              onClick={open}
+              readOnly
             />
           </Pill.Group>
         </PillsInput>

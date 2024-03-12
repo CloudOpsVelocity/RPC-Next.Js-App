@@ -62,7 +62,7 @@ const DropDownIcon = () => {
   );
 };
 
-const SearchHeader = ({ open, close }: any) => {
+const SearchHeader = ({ open }: any) => {
   const {
     countAppliedFilters,
     filters,
@@ -70,10 +70,9 @@ const SearchHeader = ({ open, close }: any) => {
     setFilters,
     handleAppliedFilters,
   } = useSearchFilters();
-  const [name, setName] = useQueryState("q");
 
-  const onSearchChange = (value: string) => {
-    !value ? setName(null) : setName(value);
+  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    open();
   };
   return (
     <div className="mx-[2%] w-full flex mt-[80px] pl-[2%] gap-2 md:gap-[20px] flex-wrap md:flex-nowrap justify-between md:justify-start items-start md:items-center bg-[#FCFCFC] py-4">
@@ -97,7 +96,10 @@ const SearchHeader = ({ open, close }: any) => {
           size="xs"
         />
 
-        <PillsInput classNames={{ input: classes.wrapperMultiSelection }}>
+        <PillsInput
+          classNames={{ input: classes.wrapperMultiSelection }}
+          onClick={handleClick}
+        >
           <Pill.Group>
             {filters.city && (
               <Pill
@@ -113,7 +115,10 @@ const SearchHeader = ({ open, close }: any) => {
             )}
             {filters.locality?.map((each, index) => (
               <Pill
-                onRemove={() => remnoveSearchOptions(each, "locality")}
+                onRemove={() => {
+                  remnoveSearchOptions(each, "locality");
+                  handleAppliedFilters();
+                }}
                 key={index}
                 withRemoveButton
                 classNames={{
@@ -132,7 +137,10 @@ const SearchHeader = ({ open, close }: any) => {
                   ? "Add More"
                   : "Enter City,Locality & Project"
               }
-              onClick={open}
+              // onClick={() => {
+              //   open();
+              // }}
+              readOnly
             />
           </Pill.Group>
         </PillsInput>

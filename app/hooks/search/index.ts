@@ -337,14 +337,16 @@ const getFilteredData = async (
   page: number,
   type: "project" | "owner" | "agent"
 ): Promise<Search[]> => {
+  const hasCityParam = /(?:^|&)city=/.test(query);
+
   const url =
     type === "project"
       ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=${page}${
           query && `&${query}`
         }`
-      : `${
-          process.env.NEXT_PUBLIC_BACKEND_URL
-        }/srp/prop-search?city=9&page=${page}${query && `&${query}`}`;
+      : `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/prop-search?page=${page}${
+          query && `&${query}`
+        }${hasCityParam ? "" : "&city=9"}`;
   try {
     const response = await fetch(url);
     const data = await response.json();

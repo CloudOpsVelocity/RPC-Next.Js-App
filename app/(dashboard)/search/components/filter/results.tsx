@@ -6,6 +6,7 @@ import { encodeProID } from "@/app/utils/api/encode";
 import { ScrollArea } from "@mantine/core";
 import { useRouter } from "next/navigation";
 import React from "react";
+import toast from "react-hot-toast";
 
 export default function Results() {
   const { push } = useRouter();
@@ -30,21 +31,27 @@ export default function Results() {
     id: item.id,
   }));
   const handleAddSearch = (newItem: string) => {
-    filters.locality.includes(newItem) && null;
-
-    setFilters({
-      ...filters,
-      locality: [...filters.locality, newItem],
-    });
-    handleResetQuery();
+    if (!filters.locality.includes(newItem)) {
+      setFilters((prevFilters) => ({
+        ...prevFilters,
+        locality: [...prevFilters.locality, newItem],
+      }));
+      handleResetQuery();
+    } else {
+      toast.error("The locality already exists.");
+    }
   };
+
   const handleAddcity = (newItem: string) => {
-    filters.city === newItem && null;
-    setFilters({
-      ...filters,
-      city: newItem,
-    });
-    handleResetQuery();
+    if (filters.city !== newItem) {
+      setFilters({
+        ...filters,
+        city: newItem,
+      });
+      handleResetQuery();
+    } else {
+      toast.error("The city already exists.");
+    }
   };
   const handlePush = async (id: number) => {
     const enc = await encodeProID(id);
