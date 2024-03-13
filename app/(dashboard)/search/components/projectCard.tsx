@@ -46,6 +46,8 @@ const ProjectDetailsCard = ({
   propStatus,
   propIdEnc,
   pa,
+  projstatus,
+  rerastatus,
 }: Props) => {
   const { data: session } = useSession();
 
@@ -89,7 +91,7 @@ const ProjectDetailsCard = ({
     <div className=" flex w-full mb-[5%] flex-col shadow-md " id={reqId}>
       <div className=" flex justify-center items-center w-full  ">
         <div className="w-full h-[120px]  md:h-[140px] md:max-w-[210px] max-w-[120px] bg-gray-300 relative">
-          {type == "proj" && (
+          {type == "proj" && rerastatus === "Applied" && (
             <p className="text-[#FFF] text-[12px] absolute left-[0px] top-0 z-10 flex justify-center items-center p-[3px] font-[500] bg-gradient-to-r from-[#148B16] /0 to-[#E5F4FF]/100">
               {" "}
               <ReraIcon /> RERA
@@ -104,7 +106,7 @@ const ProjectDetailsCard = ({
           />
           <p className="text-[#FFF] text-[10px] md:text-[12px] mt-[-40px] absolute left-[4px] gap-[4px] z-10 flex justify-center rounded-[20px] items-center p-[7px] font-[500] rtm">
             {" "}
-            {propStatus ?? "Ready To Move"}
+            {type === "proj" ? projstatus : propStatus}
           </p>
         </div>
         <div className="w-full p-[2%] justify-center  flex flex-col">

@@ -109,7 +109,11 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         {/* Navigations Container */}
         <Navigation />
         <Overview {...data} />
-        <ListingRentAvail projName={data.projectName} />
+        <ListingRentAvail
+          projName={data.projectName}
+          r={data.rentListing}
+          s={data.saleListing}
+        />
         {/* About */}
         <About
           id="about"

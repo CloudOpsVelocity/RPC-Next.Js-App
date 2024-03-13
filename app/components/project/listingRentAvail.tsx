@@ -8,7 +8,15 @@ import {
 import clsx from "clsx";
 import React from "react";
 
-export default function ListingRentAvail({ projName }: { projName: string }) {
+export default function ListingRentAvail({
+  projName,
+  r,
+  s,
+}: {
+  projName: string;
+  r: string;
+  s: string;
+}) {
   return (
     <div className="w-[90%] mb-[5%] scroll-mt-[90px]">
       <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35] mb-[12px]">
@@ -21,14 +29,22 @@ export default function ListingRentAvail({ projName }: { projName: string }) {
         Properties Today!"
       </p>
       <div className="flex  items-center gap-[58px] mt-[35px] flex-wrap">
-        <Card type="sell" />
-        <Card type="rent" />
+        <Card type="sell" s={s} r={r} />
+        <Card type="rent" s={s} r={r} />
       </div>
     </div>
   );
 }
 
-const Card = ({ type }: { type: "sell" | "rent" }) => {
+const Card = ({
+  type,
+  r,
+  s,
+}: {
+  type: "sell" | "rent";
+  r: string;
+  s: string;
+}) => {
   return (
     <div
       className={clsx(
@@ -54,7 +70,7 @@ const Card = ({ type }: { type: "sell" | "rent" }) => {
               : "border-[#0073C6] bg-[#DBF0FF]"
           )}
         >
-          150 <StockIcon />
+          {type === "rent" ? r : s} <StockIcon />
         </div>
       </div>
     </div>

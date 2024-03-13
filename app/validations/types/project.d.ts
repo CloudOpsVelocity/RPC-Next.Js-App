@@ -29,6 +29,8 @@ export interface Main {
   about: string;
   banks: Bank[];
   floorPlanCount: number;
+  saleListing: string;
+  rentListing: string;
 }
 
 export interface AmenityList {

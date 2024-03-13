@@ -55,6 +55,8 @@ export interface Main {
   boundryWallEnclose: string;
   approvedByName: string[];
   usp: string;
+  ispetFriendly: number;
+  availavleFor: string;
 }
 
 export interface OtherPrice {

@@ -114,8 +114,8 @@ const PriceBreakUp = ({
 
     return sum;
   }
-  const otherChangeTotal = parseOtherCharge(otherPrice.otherCharge);
-  const chargesArray = otherPrice.otherCharge.split(",");
+  const otherChangeTotal = parseOtherCharge(otherPrice?.otherCharge);
+  const chargesArray = otherPrice?.otherCharge?.split(",");
   return (
     <>
       <div className="max-w-[90%] mx-auto p-6 bg-white rounded-lg shadow my-10">

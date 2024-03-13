@@ -177,6 +177,8 @@ const OtherDetails = ({
   noticemonth,
   propTypeName,
   approvedByName,
+  ispetFriendly,
+  availavleFor,
 }: Main) => {
   return (
     <div
@@ -262,13 +264,13 @@ const OtherDetails = ({
             <RoomBasicDetails
               icon={<AvailableFor />}
               title="Available for"
-              value={"Humans"}
+              value={availavleFor}
               className={style.card}
             />
             <RoomBasicDetails
               icon={<PetFreindly />}
               title="Pet Friendly"
-              value={"Pets Are Not Allowed"}
+              value={`Pets Are ${ispetFriendly ? "" : "Not"} Allowed`}
               className={style.card}
             />
           </>
