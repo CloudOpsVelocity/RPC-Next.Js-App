@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Logo from "../../atoms/Logo";
 import AuthButton from "../../atoms/AuthButton";
-import { useSession } from "next-auth/react";
 const Header = () => {
   return (
     <header className="h-[90px] w-[100%] bg-transparent flex items-center justify-between fixed top-0 headerBg pl-[3%] pr-[3%] z-[1000]">

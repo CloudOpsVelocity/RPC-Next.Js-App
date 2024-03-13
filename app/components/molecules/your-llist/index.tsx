@@ -16,15 +16,15 @@ const YourList = () => {
           height={443.03}
         />
         <div className="inline-flex flex-col items-start relative flex-[0_0_auto]">
-          <p className="relative [font-family:'Montserrat-SemiBold',Helvetica] sm:mb-[20px] md:mb-[24px] lg:mb-[45px]  font-normal text-transparent sm:text-[24px] md:text-[36px] lg:text-[46px] tracking-[1.84px] leading-[59.8px]">
+          <p className="relative [font-family:'Montserrat-SemiBold',Helvetica] sm:mb-[20px] md:mb-[24px] lg:mb-[35px]  font-normal text-transparent sm:text-[24px] md:text-[36px] lg:text-[46px] tracking-[1.84px] leading-[59.8px]">
             <span className="font-semibold text-[#1f1f1f]">Post Your </span>
             <span className="[font-family:'Montserrat-Bold',Helvetica] font-bold text-[#138b16]">
               Listing Today!
             </span>
           </p>
-          <div className="relative">
-            <div className="inline-flex flex-col items-start">
-              <p className="relativ [font-family:'Montserrat-Medium',Helvetica] font-medium text-[#B5ABAC] sm:text-[16px] md:text-[24px] lg:text-[36px] tracking-[1.44px] leading-[46.8px]">
+          <div className="">
+            <div className="inline-flex flex-col items-start space-y-4">
+              <p className="text-[color:var(--Grey-3,#B5ABAC)] text-4xl not-italic font-medium  tracking-[1.44px]">
                 Your listings deserves the spotlight. <br />
                 Add it to our platform today!
               </p>
