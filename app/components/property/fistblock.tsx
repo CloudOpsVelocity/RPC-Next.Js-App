@@ -132,7 +132,7 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails }) => {
                 <Image
                   width={100}
                   height={100}
-                  src={"/project/floorplan.png"}
+                  src={"/abc/floorplan.png"}
                   alt="no of floors"
                   className="h-[24px] w-[24px] "
                 />

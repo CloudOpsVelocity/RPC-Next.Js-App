@@ -339,8 +339,8 @@ const PlotBlock = ({ data }: { data: Main }) => {
         <RoomBasicDetails
           icon={<PlotConstruction />}
           title="Plot Undergone any Construction"
-          value={`${data.cunstructionStatus ? "Yes" : "No"}, ${
-            data.cunstructionType
+          value={`${data.cunstructionStatus ? "Yes" : "No"} ${
+            data.cunstructionType ? `, ${data.cunstructionType}` : ""
           }`}
           className={style.card}
         />
