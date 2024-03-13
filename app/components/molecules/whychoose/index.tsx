@@ -26,10 +26,6 @@ const WhyCHoose = () => {
           <div className="w-[100%] flex justify-between items-center">
             <Features />
           </div>
-
-          {/* <div className="absolute w-[30%] h-[25px] top-[471px] left-[341px] bg-[#ececec] rounded-[139.5px/12.5px] blur-[10px]" />
-              <div className="absolute w-[30%] h-[25px] top-[438px] left-0 bg-[#ececec] rounded-[139.5px/12.5px] blur-[10px]" />
-              <div className="absolute w-[30%] h-[25px] top-[438px] left-[678px] bg-[#ececec] rounded-[139.5px/12.5px] blur-[10px]" /> */}
         </div>
       </div>
     </div>
