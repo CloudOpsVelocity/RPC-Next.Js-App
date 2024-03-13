@@ -4,8 +4,10 @@ import { Carousel } from "@mantine/carousel";
 import S from "@/app/styles/home/Carousel.module.css";
 import "@mantine/carousel/styles.css";
 import { ImagesScrollIcon } from "@/app/images/commonSvgs";
+import { useMediaQuery } from "@mantine/hooks";
 
 const HomeCarousel = () => {
+  const isMobile = useMediaQuery(`(max-width: 750px)`);
   const posts = [
     {
       title: "What is SaaS? Software as a Service Explained",
@@ -51,7 +53,7 @@ const HomeCarousel = () => {
       slideSize={{ base: "100%", sm: "50%", md: "25.333333%" }}
       slideGap={{ base: 0, sm: "md" }}
       loop
-      align="start"
+      align={isMobile ? "center" : "start"}
       classNames={{ controls: S.controls, root: S.root, control: S.control }}
       nextControlIcon={
         <ImagesScrollIcon className="bg-[#c6ddf0] rounded-xl " />
@@ -59,6 +61,7 @@ const HomeCarousel = () => {
       previousControlIcon={
         <ImagesScrollIcon className="bg-[#c6ddf0]  rounded-xl transform rotate-180" />
       }
+      px={10}
     >
       {posts.map((post, index) => (
         <Carousel.Slide key={index} className="">
