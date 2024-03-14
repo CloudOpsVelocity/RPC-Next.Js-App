@@ -6,12 +6,13 @@ import { Tabs, ScrollArea } from "@mantine/core";
 import { clsx } from "clsx";
 import { Coordinates } from "@/app/utils/maps";
 import { useDebouncedState, useMediaQuery } from "@mantine/hooks";
-import { nearbyLocationIcon } from "@/app/images/commonSvgs";
+import { GradientLocation, nearbyLocationIcon } from "@/app/images/commonSvgs";
 import Loading from "../../atoms/Loader";
 import dynamic from "next/dynamic";
 import MapSkeleton from "../../maps/Skeleton";
 import useMapData from "@/app/hooks/property/useMapData";
 import PropertyHeading from "../../property/heading";
+import Button from "@/app/elements/button";
 
 interface Area {
   name: string;
@@ -60,26 +61,37 @@ const LeafMap: React.FC<{
   const isMobile = useMediaQuery(`(max-width: 750px)`);
   return (
     <div className="w-[90%] scroll-mt-[90px] mx-auto  mb-[5%] " id="nearBy">
-      {type === "prop" ? (
-        <PropertyHeading
-          title="Near BY LOCATIONS"
-          desc=" Explore near by convenient amenities, entertainment, and essential
+      <div className="flex justify-between ">
+        {type === "prop" ? (
+          <PropertyHeading
+            title="Near BY LOCATIONS"
+            desc=" Explore near by convenient amenities, entertainment, and essential
         services"
-          className="mb-[40px]"
-        />
-      ) : (
-        <>
-          <h2 className="text-[24px] lg:text-[32px] font-semibold mb-[12px]">
-            <span className="!text-green-600">{projName} </span>
-            <span className="">Near BY LOCATIONS</span>
-          </h2>
-          <p className="text-[#4D6677] text-2xl italic font-medium leading-[normal] tracking-[0.96px] mt-2 mb-8">
-            Explore near by convenient amenities, entertainment, and essential
-            services
+            className="mb-[40px]"
+          />
+        ) : (
+          <div>
+            <h2 className="text-[24px] lg:text-[32px] font-semibold mb-[12px] capitalize">
+              <span className="!text-green-600">{projName} </span>
+              <span className="">Near BY LOCATIONS</span>
+            </h2>
+            <p className="text-[#4D6677] text-2xl italic font-medium leading-[normal] tracking-[0.96px] mt-2 mb-8">
+              Explore near by convenient amenities, entertainment, and essential
+              services
+            </p>
+          </div>
+        )}
+        <div className="flex  flex-col">
+          <p className="text-[#666] text-xl not-italic font-medium leading-[normal] tracking-[0.8px]">
+            Click to locate project
           </p>
-        </>
-      )}
-
+          <Button
+            buttonClass="flex justify-center items-center gap-1 p-2.5 border rounded-[21px] border-solid border-[#0094FF] text-[#202020] text-xl not-italic font-semibold leading-[normal] bg-[#F2FAFF] mt-3 ml-auto "
+            title={"Localte Project"}
+            icon={<GradientLocation />}
+          />
+        </div>
+      </div>
       <div className="flex gap-6 mb-5 mt-1 w-full flex-wrap ">
         {areas.map((area) => {
           return (

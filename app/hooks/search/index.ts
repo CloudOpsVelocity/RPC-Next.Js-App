@@ -351,7 +351,6 @@ const getFilteredData = async (
       : `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/prop-search?page=${page}${
           query && `&${query}`
         }${hasCityParam ? "" : "&city=9"}`;
-  console.log(url);
   try {
     const response = await fetch(url);
     const data = await response.json();

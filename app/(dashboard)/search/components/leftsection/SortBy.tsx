@@ -62,22 +62,22 @@ export default function SortBy({}: Props) {
 const config = [
   {
     label: "Price Low to High",
-    value: 1,
+    value: 2,
     type: "price",
   },
   {
     label: "Price High to Low",
-    value: 2,
+    value: 1,
     type: "price",
   },
   {
     label: "Price / sq.ft. : Low to High",
-    value: 1,
+    value: 2,
     type: "sqftPrice",
   },
   {
     label: "Price / sq.ft. : High to Low",
-    value: 2,
+    value: 1,
     type: "sqftPrice",
   },
 ];

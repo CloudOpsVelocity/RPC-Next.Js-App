@@ -19,6 +19,9 @@ const convertToOriginalState = (data: any): SearchFilter => {
     furnish: null,
     propStatus: null,
     pnb: null,
+    cg: null,
+    sortByfield: null,
+    sortType: null,
   };
 
   if (data.unitTypes !== undefined) {
