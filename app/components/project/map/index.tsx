@@ -88,7 +88,7 @@ const LeafMap: React.FC<{
           <Button
             buttonClass="flex justify-center items-center gap-1 p-2.5 border rounded-[21px] border-solid border-[#0094FF] text-[#202020] text-xl not-italic font-semibold leading-[normal] bg-[#F2FAFF] mt-3 ml-auto "
             title={"Localte Project"}
-            icon={<GradientLocation />}
+            icon={<GradientLocation className="w-8 h-8" />}
           />
         </div>
       </div>
