@@ -18,6 +18,7 @@ const convertToOriginalState = (data: any): SearchFilter => {
     facings: [],
     furnish: null,
     propStatus: null,
+    pnb: null,
   };
 
   if (data.unitTypes !== undefined) {

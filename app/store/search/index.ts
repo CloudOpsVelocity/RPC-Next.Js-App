@@ -20,6 +20,10 @@ export interface SearchFilter {
   facings: number[];
   furnish: number | null;
   propStatus: string | null;
+  pnb: number | null;
+  sortByfield: string | null;
+  sortType: number | null;
+  cg: string | null;
 }
 
 export const initialState: SearchFilter = {
@@ -39,6 +43,10 @@ export const initialState: SearchFilter = {
   facings: [],
   furnish: null,
   propStatus: null,
+  pnb: null,
+  sortByfield: null,
+  sortType: null,
+  cg: null,
 };
 export const diffToProjFromListing = {
   proj: ["facings", "furnish", "propStatus", "listedBy"],

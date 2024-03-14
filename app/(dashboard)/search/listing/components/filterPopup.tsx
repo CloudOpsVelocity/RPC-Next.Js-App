@@ -379,14 +379,8 @@ const FilterPopup = () => {
                   value={id}
                   name="propertyType"
                   style={{ whiteSpace: "nowrap", marginBottom: "10px" }}
-                  // onClick={() =>
-                  //   setPropTypes(
-                  //     propertyDetailsTypes?.get(keyName)?.id as number
-                  //   )
-                  // }
-                  // checked={
-                  //   filters.propTypes === propertyDetailsTypes?.get(keyName)?.id
-                  // }
+                  onClick={() => setSingleType("pnb", id)}
+                  checked={filters.pnb === id}
                 />
               );
             })}

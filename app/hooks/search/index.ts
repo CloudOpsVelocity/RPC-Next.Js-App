@@ -3,7 +3,6 @@ import {
   searachFilterAtom,
   appliedFiltersParams,
   SearchFilter,
-  diffToProjFromListing,
 } from "@/app/store/search";
 import { convertToQueryParams } from "@/app/utils/search/query";
 import { Search } from "@/app/validations/types/search";
@@ -30,6 +29,10 @@ const paramsInit = {
   facings: parseAsString,
   furnish: parseAsInteger,
   propStatus: parseAsString,
+  pnb: parseAsInteger,
+  sortByfield: parseAsString,
+  sortType: parseAsInteger,
+  cg: parseAsString,
 };
 interface ExtentSearchFilters extends SearchFilter {
   listedBy: string;
@@ -105,6 +108,7 @@ export default function useSearchFilters(
       locality,
       parkings,
       unitTypes,
+      pnb,
     } = filters;
     count += current ? 1 : 0;
     count += propTypes ? 1 : 0;
@@ -122,6 +126,7 @@ export default function useSearchFilters(
     count += parkings.length || 0;
     count += facings.length || 0;
     count += unitTypes.length || 0;
+    count += pnb ? 1 : 0;
     return count;
   };
   const isFilterApplied = (filterKey: string): boolean => {
@@ -130,7 +135,6 @@ export default function useSearchFilters(
       reraVerified,
       listedBy,
       furnish,
-      propStatus,
       areaValue,
       bugdetValue,
       amenities,
@@ -347,6 +351,7 @@ const getFilteredData = async (
       : `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/prop-search?page=${page}${
           query && `&${query}`
         }${hasCityParam ? "" : "&city=9"}`;
+  console.log(url);
   try {
     const response = await fetch(url);
     const data = await response.json();

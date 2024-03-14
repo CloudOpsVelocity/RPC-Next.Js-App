@@ -23,7 +23,7 @@ const WhyCHoose = () => {
           </p>
         </div>
         <div className="relative lg:w-[50%] w-[100%] flex justify-between items-center mt-[32px] md:mt-[32px]">
-          <div className="w-[100%] flex justify-between items-center">
+          <div className="w=[150%] md:w-[100%] flex justify-between items-center overflow-x-scroll scrollbar-hide md:overflow-hidden">
             <Features />
           </div>
         </div>

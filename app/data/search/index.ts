@@ -227,15 +227,15 @@ export const SEARCH_FILTER_DATA = {
   ],
   photoAvail: [
     {
-      id: 1,
+      id: 3,
       label: "Both",
     },
     {
-      id: 2,
+      id: 1,
       label: "Photo Available",
     },
     {
-      id: 3,
+      id: 2,
       label: "Video Available",
     },
   ],

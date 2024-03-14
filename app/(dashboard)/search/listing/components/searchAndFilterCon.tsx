@@ -22,6 +22,7 @@ import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import S from "@/app/styles/seach/Drawer.module.css";
 import SearchDrawerHeader from "./filter";
 import SearchDrawer from "./drawer";
+import BuyRent from "../../components/filter/BuyRent";
 
 const SearchAndFilterCon = () => {
   const [opened, { open, close }] = useDisclosure(false);
@@ -87,15 +88,7 @@ const SearchHeader = ({ open }: any) => {
       </p>
 
       <div className=" border-[#A0D7FF] rounded-[40px] gap-[8px] pl-[8px] border-[1px] border-solid flex items-center justify-center ">
-        <Select
-          label=""
-          placeholder="Select"
-          data={["Buy", "Rent", "Plot"]}
-          classNames={{ input: classes.wrapperSelect }}
-          defaultValue={"Buy"}
-          rightSection={<DropDownIcon />}
-          size="xs"
-        />
+        <BuyRent />
 
         <PillsInput
           classNames={{ input: classes.wrapperMultiSelection }}

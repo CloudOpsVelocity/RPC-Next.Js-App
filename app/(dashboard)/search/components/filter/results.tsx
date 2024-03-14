@@ -63,7 +63,7 @@ export default function Results() {
         <h2 className="text-[#5F81B2] text-xl flex space-x-2 items-center">
           <SearchLocationIcon /> <span> Location</span>
         </h2>
-        {cities.length > 0 && <SubHeading text="City" />}
+        {cities?.length > 0 && <SubHeading text="City" />}
 
         <ul>
           {cities?.map((locality: any) => (
@@ -76,7 +76,7 @@ export default function Results() {
             </li>
           ))}
         </ul>
-        {localities.length > 0 && <SubHeading text="Locality" />}
+        {localities?.length > 0 && <SubHeading text="Locality" />}
 
         <ul>
           {localities?.map((locality: any) => (

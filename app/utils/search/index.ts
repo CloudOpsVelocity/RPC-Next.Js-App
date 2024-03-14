@@ -73,6 +73,10 @@ export const filterParser = (data: SearchFilter) => {
     facings: "facings",
     furnish: "furnish",
     propStatus: "propStatus",
+    pnb: "pnb",
+    sortByfield: "sortByfield",
+    sortType: "sortType",
+    cg: "cg",
   };
 
   // Iterate through each property

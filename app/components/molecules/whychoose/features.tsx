@@ -14,8 +14,6 @@ type Props = {
   index: number;
 };
 
-// h-[${index !== 1 ? "374px" : "438px" }]
-
 export function Card({ src, desc, name, index }: Props) {
   return (
     <div

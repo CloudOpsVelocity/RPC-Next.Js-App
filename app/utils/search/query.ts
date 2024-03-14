@@ -24,6 +24,10 @@ const convertToQueryParams = (params: Params): string => {
     facings: "facing",
     furnish: "furnish",
     propStatus: "propStatus",
+    pnb: "pnb",
+    sortByfield: "sortByfield",
+    sortType: "sortType",
+    cg: "cg",
   };
 
   for (const key in params) {
