@@ -3,6 +3,7 @@ import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import axios from "axios";
 import { cookies } from "next/headers";
+import CryptoJS from "crypto-js";
 
 export const options: NextAuthOptions = {
   providers: [
@@ -21,12 +22,18 @@ export const options: NextAuthOptions = {
       },
       // @ts-ignore
       async authorize(credentials) {
+        console.log(credentials);
+        const decryptedPassword = CryptoJS.AES.decrypt(
+          credentials?.password!!,
+          process.env.NEXT_PUBLIC_SECRET!!
+        ).toString(CryptoJS.enc.Utf8);
+
         try {
           const res = await axios.post(
             `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/doLoginWithMobile`,
             {
               username: credentials?.username,
-              password: credentials?.password,
+              password: decryptedPassword,
             }
           );
           console.log(res.data);

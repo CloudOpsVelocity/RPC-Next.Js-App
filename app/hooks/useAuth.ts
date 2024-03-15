@@ -3,6 +3,8 @@ import axios from "axios";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import CryptoJS from "crypto-js";
+
 interface Login {
   username: string | number;
   password: string;
@@ -66,7 +68,18 @@ export default function useAuth({
   const router = useRouter();
 
   const loginWithCredentials = async (data: Login): Promise<any> => {
-    const res = await signIn("credentials", { ...data, redirect: false });
+    const encryptedPassword = CryptoJS.AES.encrypt(
+      data.password,
+      process.env.NEXT_PUBLIC_SECRET!!
+    ).toString();
+    const requestData = {
+      username: data.username,
+      password: encryptedPassword,
+    };
+    const res = await signIn("credentials", {
+      ...requestData,
+      redirect: false,
+    });
     console.log(res);
     if (res?.ok) {
       type === "register"
