@@ -1,3 +1,4 @@
+"use client";
 import { ForgotPass } from "@/app/images/commonSvgs";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
