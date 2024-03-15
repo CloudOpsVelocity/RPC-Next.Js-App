@@ -18,7 +18,6 @@ import { individualSchema } from "@/app/validations/auth";
 import CountryInput from "@/app/components/atoms/CountryInput";
 import { useState } from "react";
 import Success from "../success";
-import Login from "../login";
 import { BackSvg, EyeClosed, EyeOpen } from "@/app/images/commonSvgs";
 import handleTrimAndReplace from "@/app/utils/input/validations";
 import StepCss from "@/app/styles/Stepper.module.css";

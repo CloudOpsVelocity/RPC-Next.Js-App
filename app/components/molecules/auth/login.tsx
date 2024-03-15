@@ -1,13 +1,6 @@
 "use client";
 import { useForm, yupResolver } from "@mantine/form";
-import {
-  TextInput,
-  Button,
-  Box,
-  PasswordInput,
-  em,
-  NumberInput,
-} from "@mantine/core";
+import { Button, Box, PasswordInput, em, NumberInput } from "@mantine/core";
 import useAuth from "@/app/hooks/useAuth";
 import Link from "next/link";
 import { useState } from "react";
@@ -16,6 +9,7 @@ import S from "@/app/styles/Pass.module.css";
 import { EyeClosed, EyeOpen } from "@/app/images/commonSvgs";
 import { useMediaQuery } from "@mantine/hooks";
 import handleTrimAndReplace from "@/app/utils/input/validations";
+import StepCss from "@/app/styles/Stepper.module.css";
 const schema = yup.object().shape({
   username: yup
     .number()
@@ -57,7 +51,9 @@ function Login() {
           mt={"xs"}
           required
           classNames={{
-            input: S.input,
+            root: StepCss.inputRoot,
+            input: StepCss.textInput,
+            error: StepCss.errorMsg,
           }}
           hideControls
           size="lg"
@@ -70,7 +66,9 @@ function Login() {
 
         <PasswordInput
           classNames={{
-            visibilityToggle: S.visibilityToggle,
+            root: StepCss.inputRoot,
+            error: StepCss.errorMsg,
+            innerInput: StepCss.textInput,
           }}
           required
           size="lg"

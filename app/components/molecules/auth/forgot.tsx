@@ -115,7 +115,8 @@ function ForgotForm() {
             <CountryInput
               onSelect={displayCountryCode}
               className={`focus:outline-none min-w-[30px] !max-w-[75px] relative ${
-                (form.errors.mobile != undefined && form.errors.mobile != null) ||
+                (form.errors.mobile != undefined &&
+                  form.errors.mobile != null) ||
                 status === "error"
                   ? "bottom-[71px]"
                   : "bottom-[47px]"
@@ -156,7 +157,7 @@ function ForgotForm() {
 }
 
 export default ForgotForm;
-
+import StepCss from "@/app/styles/Stepper.module.css";
 const Form = () => {
   const router = useRouter();
   const [state, setState] = useState<"idle" | "pending" | "success" | "form">(
@@ -183,8 +184,6 @@ const Form = () => {
     setState("success");
   };
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
-  console.log(isMobile);
-
   return (
     <div className="w-full">
       <form
@@ -197,9 +196,6 @@ const Form = () => {
           Reset Password
         </h2>
         <PasswordInput
-          classNames={{
-            visibilityToggle: S.visibilityToggle,
-          }}
           required
           size="lg"
           className="w-[100%] mb-[3%]"
@@ -211,11 +207,14 @@ const Form = () => {
           }
           {...form.getInputProps("password")}
           onBlur={(e) => handleTrimAndReplace(e, "password", form)}
+          type="text"
+          classNames={{
+            root: StepCss.inputRoot,
+            error: StepCss.errorMsg,
+            innerInput: StepCss.textInput,
+          }}
         />
         <PasswordInput
-          classNames={{
-            visibilityToggle: S.visibilityToggle,
-          }}
           required
           size="lg"
           className="w-[100%] mb-[3%]"
@@ -227,6 +226,12 @@ const Form = () => {
           }
           {...form.getInputProps("confirmPassword")}
           onBlur={(e) => handleTrimAndReplace(e, "confirmPassword", form)}
+          type="text"
+          classNames={{
+            root: StepCss.inputRoot,
+            error: StepCss.errorMsg,
+            innerInput: StepCss.textInput,
+          }}
         />
 
         <Button
