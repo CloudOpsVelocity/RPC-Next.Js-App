@@ -428,7 +428,7 @@ function Builder() {
           <TextInput
             required
             size="lg"
-            label="Address"
+            label="Office Address"
             placeholder="Enter your address here"
             {...form.getInputProps("address")}
             onBlur={(e) => handleTrimAndReplace(e, "address", form)}
@@ -446,7 +446,7 @@ function Builder() {
             label="State"
             placeholder="Select state"
             data={isLoadingStates ? [] : stateParser(statesData) || []}
-            // searchable
+            searchable
             {...form.getInputProps("state")}
             maxDropdownHeight={200}
             onChange={(e) => handleStateChange(e as string)}
@@ -465,8 +465,7 @@ function Builder() {
               label="City"
               placeholder="Select city"
               data={isLoadingCities ? [] : cityParser(citiesData) || []}
-              // searchable
-
+              searchable
               {...form.getInputProps("city")}
               maxDropdownHeight={200}
               classNames={{
@@ -532,6 +531,7 @@ function Builder() {
               mt="md"
               checkIconPosition="right"
               label="Branch"
+              searchable
               placeholder={`${
                 form.values.branchName.length === 0 ? "-- Select Brach--" : ""
               }`}

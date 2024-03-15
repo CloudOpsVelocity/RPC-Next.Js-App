@@ -204,7 +204,7 @@ function Individual() {
                 </Button>
               </div>
 
-              <p className="md:text-xl font-[400] text-[#202020] mt-[5%]">
+              <p className="md:text-xl font-[400] text-[#202020] mt-[5%] text-center">
                 Already have an Account ?{" "}
                 <Link
                   href="/login"
@@ -216,7 +216,7 @@ function Individual() {
 
               <Link
                 href="/"
-                className="md:text-xl font-[700] text-[#148B16] underline "
+                className="md:text-xl font-[700] text-[#148B16] underline  text-center"
               >
                 Continue Without Register
               </Link>

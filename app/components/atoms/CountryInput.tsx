@@ -12,7 +12,6 @@ export default function CountryInput({ onSelect, className }: props) {
   const [isdValue, setIsdidValue] = useState("+91 India");
   const countryRef = useRef<any>(null);
   const displayCountryCode = () => {
-    console.log(countryRef.current);
     setIsdidValue(
       countryRef.current.options[countryRef.current?.selectedIndex].text
     );
