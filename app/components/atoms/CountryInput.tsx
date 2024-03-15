@@ -1,7 +1,8 @@
 "use client";
 
 import { isdDetailsList } from "@/app/data/isdDetails";
-import React, { useRef, useState } from "react";
+import clsx from "clsx";
+import React, { useEffect, useRef, useState } from "react";
 
 type props = {
   onSelect: any;
@@ -9,32 +10,14 @@ type props = {
 };
 
 export default function CountryInput({ onSelect, className }: props) {
-  const [isdValue, setIsdidValue] = useState("+91 India");
-  const countryRef = useRef<any>(null);
-  const displayCountryCode = () => {
-    setIsdidValue(
-      countryRef.current.options[countryRef.current?.selectedIndex].text
-    );
-    countryRef.current.options[countryRef.current.selectedIndex].text =
-      countryRef.current.value;
-    onSelect(countryRef.current.value);
-  };
-
-  countryRef.current?.addEventListener("mousedown", () => {
-    countryRef.current.options[countryRef.current.selectedIndex].text =
-      countryRef.current.value;
-  });
-
+  const [selected, setSelected] = useState("+91");
   return (
     <select
-      //id="isdCodes"
-      ref={countryRef}
       name="isd"
-      //onChange={(e) => onSelect(e.target.value.split(" ")[0])}
-      onChange={() => displayCountryCode()}
-      className={className}
-      style={{ width: `${isdValue.length * 6}px` }}
-      // value={}
+      onChange={(e) => setSelected(e.target.value)}
+      className={clsx(className, "text-black font-medium")}
+      style={{ width: `${selected.length * 16.5}px` }}
+      value={selected}
     >
       <option value="ISD" hidden>
         +91

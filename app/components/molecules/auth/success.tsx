@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
-import { useParams } from "next/navigation";
-import React from "react";
+import { useParams, useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
 export default function Success() {
   const P = useParams();
@@ -23,10 +23,46 @@ export default function Success() {
           height={200}
           className="m-auto"
         />
-        <p className="text-[color:var(--Grey-2,#767270)] text-center text-[26px] not-italic font-medium leading-[normal] ">
-          You will be redirected to homepage in 5 sec
-        </p>
+        <Countdown />
       </div>
     </div>
   );
 }
+const Countdown = ({ initialCount = 5, redirectPath = "/" }) => {
+  const [timeRemaining, setTimeRemaining] = useState({
+    minutes: 0,
+    seconds: 5,
+  });
+
+  const [timerRunning, setTimerRunning] = useState(true);
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+
+    if (timerRunning) {
+      interval = setInterval(() => {
+        setTimeRemaining((prevTime) => {
+          if (prevTime.seconds > 0) {
+            return { ...prevTime, seconds: prevTime.seconds - 1 };
+          } else if (prevTime.minutes > 0) {
+            return { minutes: prevTime.minutes - 1, seconds: 59 };
+          } else {
+            clearInterval(interval);
+            setTimerRunning(false);
+            return prevTime;
+          }
+        });
+      }, 1000);
+    }
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [timerRunning]);
+
+  return (
+    <p className="text-[color:var(--Grey-2,#767270)] text-center text-[26px] not-italic font-medium leading-[normal]">
+      You will be redirected to homepage in {timeRemaining.seconds} sec
+    </p>
+  );
+};

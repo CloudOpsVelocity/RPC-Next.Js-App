@@ -311,8 +311,8 @@ function Agent() {
           <TextInput
             required
             size="lg"
-            label="Address"
-            placeholder="Enter your address here"
+            label="Office Address"
+            placeholder="Enter your office address here"
             {...form.getInputProps("address")}
             onBlur={(e) => handleTrimAndReplace(e, "address", form)}
             classNames={{
