@@ -550,7 +550,7 @@ function Builder() {
               label="Company Start Date"
               rightSection={<DateIcons />}
               rightSectionPointerEvents="none"
-              placeholder="DD//MM//YYYY"
+              placeholder="DD/MM/YYYY"
               {...form.getInputProps("companyStartDate")}
               maxDate={dayjs(new Date()).toDate()}
               classNames={{

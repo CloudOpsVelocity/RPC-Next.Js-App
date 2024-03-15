@@ -130,12 +130,12 @@ const Resend = ({ userName }: any): JSX.Element => {
     };
   }, [timerRunning]);
 
-  const resendOTP = () => {
+  const resendOTP = async () => {
     if (!timerRunning) {
       setTimeRemaining({ minutes: 0, seconds: 30 });
       setTimerRunning(true);
     }
-    // await resendOtp(userName);
+    await resendOtp(userName);
   };
 
   const { minutes, seconds } = timeRemaining;
