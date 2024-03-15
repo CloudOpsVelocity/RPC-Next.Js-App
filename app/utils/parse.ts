@@ -25,9 +25,14 @@ function hideMobileNumber(mobile: number): string {
   return result;
 }
 function registerOtherParser(data: any) {
-  const { otp, prevMobile, ...parsedData } = data;
-  return parsedData;
+  const { otp, prevMobile, companyLogo, ...parsedData } = data;
+  if (companyLogo) {
+    return { ...parsedData, isLogoChange: "Y" };
+  } else {
+    return parsedData;
+  }
 }
+
 export {
   stateParser,
   cityParser,

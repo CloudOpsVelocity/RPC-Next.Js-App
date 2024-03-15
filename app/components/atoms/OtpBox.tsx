@@ -154,7 +154,7 @@ const Resend = ({ userName }: any): JSX.Element => {
       <button
         disabled={timerRunning}
         style={{
-          color: timerRunning ? "#DFE3E8" : "#0073C6",
+          color: timerRunning ? "#b1b5ba" : "#0073C6",
         }}
         onClick={resendOTP}
         className="text-[#0C7ACA] text-base not-italic font-medium leading-[normal] underline"
