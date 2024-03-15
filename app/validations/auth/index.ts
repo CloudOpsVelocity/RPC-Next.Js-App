@@ -62,7 +62,7 @@ const builderSchema = yup.object().shape({
     .min(2, "Builder name must be at least 2 characters")
     .required("Builder name is required"),
 
-  branchName: yup
+  branch: yup
     .array()
     .min(1, "At least one branch must be selected")
     .required("At least one branch must be selected"),
@@ -86,4 +86,20 @@ const builderSchema = yup.object().shape({
   // Add more validations for other fields as needed
 });
 
-export { schema as individualSchema, agentSchema, otpSchema, builderSchema };
+const textAreaScema = yup.object().shape({
+  vission: yup
+    .string()
+    .max(5000, "Vission should not exceed 5000 characters")
+    .required("Vission is required"),
+  mission: yup
+    .string()
+    .max(5000, "Mission should not exceed 5000 characters")
+    .required("Mission is required"),
+});
+export {
+  schema as individualSchema,
+  agentSchema,
+  otpSchema,
+  builderSchema,
+  textAreaScema,
+};

@@ -39,8 +39,8 @@ import handleTrimAndReplace from "@/app/utils/input/validations";
 function Agent() {
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error" | "otp"
-  >("idle");
-  const [active, setActive] = useState(0);
+  >("success");
+  const [active, setActive] = useState(1);
   const router = useRouter();
   const { registerOtherDetails, register, login } = useAuth({
     type: "register",
@@ -207,7 +207,11 @@ function Agent() {
           icon={<StepperDotGreen className={StepCss.stepperIcon} />}
           classNames={{
             stepLabel:
-              active === 0 ? StepCss.stepLabelActive : StepCss.stepLabel,
+              active === 0
+                ? StepCss.stepLabelActive
+                : active > 0
+                ? StepCss.stepLabelDone
+                : StepCss.stepLabel,
             stepIcon: active === 0 ? StepCss.stepIcon : "",
           }}
         >

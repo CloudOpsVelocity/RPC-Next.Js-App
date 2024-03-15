@@ -41,7 +41,11 @@ import {
   registerOtherParser,
   stateParser,
 } from "@/app/utils/parse";
-import { agentSchema, builderSchema } from "@/app/validations/auth";
+import {
+  agentSchema,
+  builderSchema,
+  textAreaScema,
+} from "@/app/validations/auth";
 import CountryInput from "@/app/components/atoms/CountryInput";
 import N from "@/app/styles/Numinput.module.css";
 import {
@@ -80,7 +84,7 @@ function Builder() {
       city: null,
       pincode: null,
       companyStartDate: null,
-      branchName: [],
+      branch: [],
       ceoName: "",
       foundedBy: "",
       mission: "",
@@ -120,16 +124,8 @@ function Builder() {
       }
 
       if (active === 3) {
-        return {
-          mission:
-            values.mission.trim().length === 0
-              ? "Builder's Description  is required"
-              : null,
-          vission:
-            values.vission.trim().length === 0
-              ? "Company Vision  is required"
-              : null,
-        };
+        const data = yupResolver(textAreaScema)(values);
+        return data;
       }
 
       return {};
@@ -220,7 +216,7 @@ function Builder() {
             // @ts-ignore
             registerOtherParser({
               ...values,
-              branchName: values.branchName.map((item) => parseInt(item)),
+              branch: values.branch.map((item) => parseInt(item)),
               companyStartDate: formattedDate,
             })
           );
@@ -533,7 +529,7 @@ function Builder() {
               label="Branch"
               searchable
               placeholder={`${
-                form.values.branchName.length === 0 ? "-- Select Brach--" : ""
+                form.values.branch.length === 0 ? "-- Select Brach--" : ""
               }`}
               classNames={{
                 pill: StepCss.pill,
@@ -541,7 +537,7 @@ function Builder() {
                 error: StepCss.errorMsg,
               }}
               data={isLoadingBrach ? [] : cityParser(brachData) || []}
-              {...form.getInputProps("branchName")}
+              {...form.getInputProps("branch")}
             />
             <DateInput
               required

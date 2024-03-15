@@ -148,7 +148,7 @@ const Resend = ({ userName }: any): JSX.Element => {
           {seconds < 10 ? `0${seconds}` : seconds}
         </p>
       ) : (
-        <p>Didn&apos;t receive otp?</p>
+        <p>Didn&apos;t receive OTP?</p>
       )}
 
       <button

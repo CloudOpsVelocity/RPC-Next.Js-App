@@ -22,13 +22,18 @@ export function DropZone(props: Partial<DropZoneProps>) {
         Upload Logo
       </Text>
       {props.logo ? (
-        <Preview main={props.onLogoSelect} logo={props.logo} />
+        <Preview
+          main={props.onLogoSelect}
+          logo={props.logo}
+          setError={setError}
+        />
       ) : (
         <Dropzone
           title="Upload LOGO"
           onDrop={(files) => {
             const logoFile = files[0];
             props.onLogoSelect && props.onLogoSelect(logoFile);
+            setError("");
           }}
           onReject={(files) =>
             setError("File size must not exceed more than 10 MB")
@@ -63,11 +68,11 @@ export function DropZone(props: Partial<DropZoneProps>) {
     </div>
   );
 }
+const MAX_FILE_SIZE_BYTES = 10 * 1024 * 1024;
 
-const Preview = ({ main, logo }: any) => {
+const Preview = ({ main, logo, setError }: any) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const handleEditClick = () => {
-    // Trigger the file input click event when the edit icon is clicked
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
@@ -84,7 +89,17 @@ const Preview = ({ main, logo }: any) => {
 
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
   };
-
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const logoFile = e.target.files && e.target.files[0];
+    if (logoFile) {
+      if (logoFile.size > MAX_FILE_SIZE_BYTES) {
+        setError("File size exceeds 10MB limit");
+        main(null);
+      } else {
+        main(logoFile);
+      }
+    }
+  };
   return (
     <>
       <div className="flex items-center p-4 bg-white border border-gray-300 rounded-lg">
@@ -110,7 +125,7 @@ const Preview = ({ main, logo }: any) => {
           <ImagePreivewModal logo={logo} />
           {/* THis Under Edit Icon */}
           <svg
-            onClick={handleEditClick}
+            onClick={() => handleEditClick()}
             xmlns="http://www.w3.org/2000/svg"
             width={24}
             height={24}
@@ -148,10 +163,7 @@ const Preview = ({ main, logo }: any) => {
           // @ts-ignore
           accept={IMAGE_MIME_TYPE}
           style={{ display: "none" }}
-          onChange={(e) => {
-            const logoFile = e.target.files && e.target.files[0];
-            logoFile && main(logoFile);
-          }}
+          onChange={handleFileChange}
           ref={fileInputRef}
         />
       </div>
