@@ -1,13 +1,25 @@
 "use client";
+import clsx from "clsx";
 import Image from "next/image";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 export default function Success() {
   const P = useParams();
+  const path = usePathname();
   return (
-    <div className="flex  max-w-3xl flex-col items-center justify-center  p-4 ">
-      <div className="w-full  rounded-lg bg-white p-8 text-center ">
+    <div
+      className={clsx(
+        "flex  max-w-3xl flex-col items-center justify-center   ",
+        path === "/register/individual" && "p-4"
+      )}
+    >
+      <div
+        className={clsx(
+          "w-full  rounded-lg bg-white  text-center ",
+          path === "/register/individual" && "p-8"
+        )}
+      >
         <h1 className="text-[color:var(--Brand-green-primary,#148B16)] text-[28px] not-italic font-bold leading-[normal]">
           Congratulations!
         </h1>
