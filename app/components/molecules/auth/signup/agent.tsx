@@ -229,10 +229,9 @@ function Agent() {
             }}
           />
           <TextInput
-            type="email"
             required
             size="lg"
-            mt={"xs"}
+            mt="sm"
             label="Email"
             placeholder="Enter your email here"
             {...form.getInputProps("email")}

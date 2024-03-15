@@ -110,11 +110,9 @@ function Individual() {
                 }}
               />
               <TextInput
-                mt={"xs"}
-                type="email"
                 required
                 size="lg"
-                className="w-[100%] mb-[3%] "
+                mt="xs"
                 label="Email"
                 placeholder="Enter your email here"
                 {...form.getInputProps("email")}
@@ -124,6 +122,7 @@ function Individual() {
                   input: StepCss.textInput,
                   error: StepCss.errorMsg,
                 }}
+                mb={"3%"}
               />
               <PasswordInput
                 mt={"xs"}
