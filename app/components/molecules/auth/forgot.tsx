@@ -164,6 +164,7 @@ const Form = () => {
   const [state, setState] = useState<"idle" | "pending" | "success" | "form">(
     "idle"
   );
+  console.log(state);
   const form = useForm({
     initialValues: {
       password: "",
@@ -180,8 +181,7 @@ const Form = () => {
   });
   const onSubmit = async (values: any) => {
     const data = await resetPasswordApi(values.password);
-    router.push("/login");
-
+    // router.push("/login");
     setState("success");
   };
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
