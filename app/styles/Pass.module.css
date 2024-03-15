@@ -2,3 +2,28 @@
   color: #148b16;
   font-weight: 800;
 }
+
+.inputRoot {
+  width: 100% !important;
+  max-width: 423px !important;
+}
+.textInput {
+  color: var(--Black-2, #333);
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 500;
+  opacity: 1;
+}
+.textInput:focus::placeholder {
+  color: transparent !important;
+}
+.textInput::placeholder {
+  color: #556477 !important;
+  font-family: Montserrat;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.errorMsg {
+  text-align: right;
+}

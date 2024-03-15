@@ -1,26 +1,27 @@
 .input {
   height: 40px !important;
-  color: #212C33;
+  color: #212c33;
   font-family: Montserrat;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
   letter-spacing: 0.64px;
-
   border-radius: 5px;
-  border: 1px solid #92B2C8;
-
-  background: #FFF;
+  border: 1px solid #92b2c8;
+  background: #fff;
+}
+.classForContact:focus::placeholder {
+  color: transparent !important;
 }
 
-.errorMsg{
+.errorMsg {
   text-align: right;
 }
 
-.classForContact{
+.classForContact {
   height: 40px !important;
-  color: #212C33;
+  color: #212c33;
   font-family: Montserrat;
   font-size: 16px;
   font-style: normal;
@@ -30,7 +31,7 @@
 
   border-radius: 5px;
 
-  background: #FFF;
+  background: #fff;
   padding-left: 78px;
   padding-right: 0;
 }
@@ -42,7 +43,8 @@
   font-weight: 500;
 }
 
-.classForContact::-ms-input-placeholder { /* Edge 12-18 */
+.classForContact::-ms-input-placeholder {
+  /* Edge 12-18 */
   color: #556477 !important;
   font-family: Montserrat;
   font-size: 18px;
@@ -51,9 +53,9 @@
   line-height: normal;
 }
 
-.contectInput{
+.contectInput {
   height: 40px !important;
-  color: #212C33;
+  color: #212c33;
   font-family: Montserrat;
   font-size: 16px;
   font-style: normal;
@@ -62,13 +64,13 @@
   letter-spacing: 0.64px;
 
   border-radius: 5px;
-  border: 1px solid #92B2C8;
+  border: 1px solid #92b2c8;
 
-  background: #FFF;
+  background: #fff;
   padding-left: 73px;
 }
 
-.description{
+.description {
   display: none;
 }
 
@@ -76,8 +78,8 @@
   height: 40px !important;
 } */
 
-.label{
-  color: #303A42;
+.label {
+  color: #303a42;
   font-family: Montserrat;
   font-size: 14px;
   font-style: normal;

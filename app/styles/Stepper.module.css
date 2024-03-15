@@ -107,7 +107,9 @@
   font-weight: 500;
   opacity: 1;
 }
-
+.textInput:focus::placeholder {
+  color: transparent !important;
+}
 .textInput::placeholder {
   color: #556477 !important;
   font-family: Montserrat;
