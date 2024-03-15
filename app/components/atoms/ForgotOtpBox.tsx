@@ -123,12 +123,12 @@ const Resend = ({ userName }: any): JSX.Element => {
     };
   }, [timerRunning]);
 
-  const resendOTP = () => {
+  const resendOTP = async () => {
     if (!timerRunning) {
       setTimeRemaining({ minutes: 0, seconds: 30 });
       setTimerRunning(true);
     }
-    // await resendOtp(userName);
+    await resendOtp(userName);
   };
 
   const { minutes, seconds } = timeRemaining;
@@ -147,7 +147,7 @@ const Resend = ({ userName }: any): JSX.Element => {
       <button
         disabled={timerRunning}
         style={{
-          color: timerRunning ? "#DFE3E8" : "#0073C6",
+          color: timerRunning ? "#b1b5ba" : "#0073C6",
         }}
         onClick={resendOTP}
       >

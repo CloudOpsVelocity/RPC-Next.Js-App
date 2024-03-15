@@ -76,8 +76,15 @@ function ForgotForm() {
   };
 
   return (
-    <div className="w-[100%]  max-w-[459px] flex justify-center items-center flex-col  mt-[3%] p-[10%] md:p-[2%]">
-      {form.values.otp ? (
+    <div
+      className={clsx(
+        "w-[100%]   flex justify-center items-center flex-col  mt-[3%] p-[10%] md:p-[2%]",
+        status === "success" ? "max-w-[90%]" : "max-w-[459px]"
+      )}
+    >
+      {status === "success" ? (
+        <ForgotSucess />
+      ) : form.values.otp ? (
         <Form />
       ) : (
         <form
@@ -159,6 +166,8 @@ function ForgotForm() {
 
 export default ForgotForm;
 import StepCss from "@/app/styles/Stepper.module.css";
+import ForgotSucess from "./complete/page";
+import clsx from "clsx";
 const Form = () => {
   const router = useRouter();
   const [state, setState] = useState<"idle" | "pending" | "success" | "form">(
