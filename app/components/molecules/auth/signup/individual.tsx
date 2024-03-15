@@ -110,6 +110,7 @@ function Individual() {
                 }}
               />
               <TextInput
+                type="email"
                 required
                 size="lg"
                 mt="xs"
