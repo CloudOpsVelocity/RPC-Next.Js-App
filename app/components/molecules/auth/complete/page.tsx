@@ -42,7 +42,7 @@ const Countdown = ({ initialCount = 5, redirectPath = "/" }) => {
           } else {
             clearInterval(interval);
             setTimerRunning(false);
-            router.push("/");
+            router.push("/login");
             return prevTime;
           }
         });

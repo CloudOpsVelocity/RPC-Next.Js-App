@@ -65,12 +65,6 @@ function ForgotForm() {
     close();
   };
   const OtpCallback = async () => {
-    // const res = await signIn("credentials", {
-    //   username: form.values.mobile,
-    //   password: form.values.otp,
-    //   type: "fogot",
-    //   redirect: false,
-    // });
     form.setFieldValue("otp", true);
     close();
   };
@@ -85,7 +79,7 @@ function ForgotForm() {
       {status === "success" ? (
         <ForgotSucess />
       ) : form.values.otp ? (
-        <Form />
+        <Form status={status} setStatus={setStatus} />
       ) : (
         <form
           onSubmit={form.onSubmit(onSubmit)}
@@ -168,12 +162,8 @@ export default ForgotForm;
 import StepCss from "@/app/styles/Stepper.module.css";
 import ForgotSucess from "./complete/page";
 import clsx from "clsx";
-const Form = () => {
+const Form = ({ status, setStatus }: any) => {
   const router = useRouter();
-  const [state, setState] = useState<"idle" | "pending" | "success" | "form">(
-    "idle"
-  );
-  console.log(state);
   const form = useForm({
     initialValues: {
       password: "",
@@ -189,9 +179,9 @@ const Form = () => {
     },
   });
   const onSubmit = async (values: any) => {
-    const data = await resetPasswordApi(values.password);
+    // const data = await resetPasswordApi(values.password);
     // router.push("/login");
-    setState("success");
+    setStatus("success");
   };
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
   return (
@@ -245,7 +235,6 @@ const Form = () => {
         />
 
         <Button
-          loading={state === "pending"}
           type="submit"
           size={isMobile ? "compact-xs" : "md"}
           className="!w-[100%] !h-[57px] mt-[4%] !bg-[#0c7aca] rounded-[6px] text-[20px]"
