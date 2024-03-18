@@ -36,14 +36,7 @@ export default function LoginPopup({ type = "C/S" }: { type?: string }) {
             <LoginPopupForm />
           </div>
         </div>
-        <div className="relative">
-          <Toaster
-            reverseOrder={false}
-            containerStyle={{
-              position: "absolute",
-            }}
-          />
-        </div>
+        <div className="relative"></div>
       </div>
     </div>
   );

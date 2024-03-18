@@ -19,6 +19,7 @@ import toast from "react-hot-toast";
 import { signIn } from "next-auth/react";
 import handleTrimAndReplace from "@/app/utils/input/validations";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
+import CryptoJS from "crypto-js";
 const schema = yup.object().shape({
   username: yup
     .string()
@@ -53,13 +54,27 @@ function LoginPopupForm() {
     initialValues: { username: "", password: "" },
     validate: yupResolver(schema),
   });
-  console.log(state);
   const loginWithCredentials = async (data: Login): Promise<any> => {
-    const res = await signIn("credentials", { ...data, redirect: false });
-    console.log(res);
+    const encryptedPassword = CryptoJS.AES.encrypt(
+      data.password,
+      process.env.NEXT_PUBLIC_SECRET!!
+    ).toString();
+    const requestData = {
+      username: data.username,
+      password: encryptedPassword,
+    };
+    const res = await signIn("credentials", {
+      ...requestData,
+      redirect: false,
+    });
     if (res?.ok) {
       close();
     } else {
+      const errorsParam =
+        res?.error === "Wrong Credentials" ? "password" : "username";
+      form.setErrors({
+        [errorsParam]: res?.error || "Something went wrong. Please try again.",
+      });
       toast.error(res?.error || "Something went wrong. Please try again.");
     }
   };
