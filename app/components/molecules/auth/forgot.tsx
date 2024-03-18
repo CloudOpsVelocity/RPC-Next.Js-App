@@ -179,7 +179,7 @@ const Form = ({ status, setStatus }: any) => {
     },
   });
   const onSubmit = async (values: any) => {
-    // const data = await resetPasswordApi(values.password);
+    const data = await resetPasswordApi(values.password);
     // router.push("/login");
     setStatus("success");
   };
