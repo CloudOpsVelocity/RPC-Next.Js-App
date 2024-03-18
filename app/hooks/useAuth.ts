@@ -88,7 +88,9 @@ export default function useAuth({
           }, 5000)
         : router.push("/");
     } else {
-      toast.error(res?.error || "Something went wrong. Please try again.");
+      toast.error(res?.error || "Something went wrong. Please try again.", {
+        duration: 1000,
+      });
     }
   };
 
