@@ -22,6 +22,7 @@ const convertToOriginalState = (data: any): SearchFilter => {
     cg: null,
     sortByfield: null,
     sortType: null,
+    projIdEnc: null,
   };
 
   if (data.unitTypes !== undefined) {
@@ -38,6 +39,9 @@ const convertToOriginalState = (data: any): SearchFilter => {
   }
   if (data.listedBy !== undefined) {
     convertedData.listedBy = data.listedBy;
+  }
+  if (data.projIdEnc !== undefined) {
+    convertedData.projIdEnc = data.projIdEnc;
   }
   if (data.city !== undefined) {
     convertedData.city = data.city;

@@ -21,7 +21,7 @@ export default function useMapData({ projSlug }: { projSlug?: string }) {
 
 const getNearByLocations = async (slug: string): Promise<any> => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/fetch/get-nearby?propIdEnc=${slug}`
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/get-nearby?projIdEnc=${slug}`
   );
   const data = await response.json();
   return data;

@@ -1,7 +1,7 @@
 "use client";
 import { PopupOpenSvg } from "@/app/images/commonSvgs";
 import { imageUrlParser } from "@/app/utils/image";
-import { Image } from "@mantine/core";
+
 import React from "react";
 import MasterPlanPopup from "../modals/MasterPlan";
 import Gallery from "../modals/Gallery";
@@ -55,7 +55,6 @@ export default function MasterPlan({
         </a>
       </div>
       <div className="relative">
-        <Image radius="md" src={`${media}`} mah={863} w="100%" fit="cover" />
         <MasterPlanPopup url={media} />
       </div>
     </div>

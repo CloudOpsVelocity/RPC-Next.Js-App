@@ -1,26 +1,14 @@
-// Import necessary libraries/components
 "use client";
 import React, { useState } from "react";
-import {
-  Title,
-  Container,
-  Accordion,
-  ThemeIcon,
-  rem,
-  Textarea,
-  Button,
-} from "@mantine/core";
+import { Accordion, Textarea, Button } from "@mantine/core";
 import classes from "@/app/styles/FaqWithBg.module.css";
-import { FaPlus } from "react-icons/fa6";
 import { FAQ } from "@/app/validations/types/project";
-
 import { addQna } from "@/app/utils/api/actions/Qna";
 import { useParams } from "next/navigation";
 import { useForm, yupResolver } from "@mantine/form";
 import { qnaSchema } from "@/app/validations/project";
 import { useSession } from "next-auth/react";
-import { MinusIcon, PlusIcon, infoIcon } from "@/app/images/commonSvgs";
-import Link from "next/link";
+import { MinusIcon, PlusIcon } from "@/app/images/commonSvgs";
 import toast from "react-hot-toast";
 import handleTrimAndReplace from "@/app/utils/input/validations";
 import clsx from "clsx";
@@ -34,8 +22,9 @@ type FaqWithBgProps = {
 let ind = 0;
 
 export default function FaqWithBg({ data, projName }: FaqWithBgProps) {
-  const [value, setValue] = useState<string | null>(null);
-
+  const [value, setValue] = useState<string[]>(
+    data?.map((_, index) => `faq-${index}`)
+  );
   return (
     <div className={classes.wrapper} id="faq">
       <div className="flex justify-center items-center w-full ">
@@ -48,7 +37,18 @@ export default function FaqWithBg({ data, projName }: FaqWithBgProps) {
           </span>{" "}
         </h1>
       </div>
-      <Accordion
+      <div>
+        {data?.map((faq, index) => {
+          return (
+            <FaqCard
+              faqQuestion={faq.faqQuestion}
+              faqAnswer={faq.faqAnswer}
+              key={index}
+            />
+          );
+        })}
+      </div>
+      {/* <Accordion
         value={value}
         onChange={setValue}
         chevronPosition="right"
@@ -77,11 +77,13 @@ export default function FaqWithBg({ data, projName }: FaqWithBgProps) {
             >
               <Accordion.Control
                 classNames={{ label: classes.title, icon: classes.icon }}
-                icon={value == `faq-${index}` ? <MinusIcon /> : <PlusIcon />}
+                icon={
+                  value.includes(`faq-${index}`) ? <MinusIcon /> : <PlusIcon />
+                }
               >
                 <span
                   className={`${
-                    value == `faq-${index}`
+                    value.includes(`faq-${index}`)
                       ? "!text-[#046DBA]"
                       : "!text-[#303A42]"
                   }`}
@@ -95,7 +97,7 @@ export default function FaqWithBg({ data, projName }: FaqWithBgProps) {
             </Accordion.Item>
           );
         })}
-      </Accordion>
+      </Accordion> */}
       <AddQnaForm projName={projName} />
     </div>
   );
@@ -172,5 +174,24 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
         </Button>
       </div>
     </form>
+  );
+};
+
+const FaqCard = ({
+  faqQuestion,
+  faqAnswer,
+}: {
+  faqQuestion: string;
+  faqAnswer: string;
+}) => {
+  return (
+    <div>
+      <h4 className=" text-[#046DBA] text-[28px] not-italic font-bold leading-[normal] mb-[27px]">
+        {faqQuestion}
+      </h4>
+      <p className="text-[#303A42] text-[28px] not-italic font-normal leading-9">
+        {faqAnswer}
+      </p>
+    </div>
   );
 };

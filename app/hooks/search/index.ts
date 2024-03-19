@@ -33,6 +33,7 @@ const paramsInit = {
   sortByfield: parseAsString,
   sortType: parseAsInteger,
   cg: parseAsString,
+  projIdEnc: parseAsString,
 };
 interface ExtentSearchFilters extends SearchFilter {
   listedBy: string;

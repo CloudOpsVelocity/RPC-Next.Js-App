@@ -129,7 +129,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         />
         <MasterPlan
           projName={data.projectName}
-          media={data.media.projectPlanUrl}
+          media={data?.media?.projectPlanUrl}
         />
         <FloorplansBlock
           projName={data.projectName}
@@ -150,6 +150,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             lat={data.lat}
             lang={data.lang}
             projName={data.projectName}
+            type="proj"
           />
         )}
         <ErrorContainer data={data.specificationList}>

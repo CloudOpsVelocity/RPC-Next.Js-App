@@ -77,6 +77,7 @@ export const filterParser = (data: SearchFilter) => {
     sortByfield: "sortByfield",
     sortType: "sortType",
     cg: "cg",
+    projIdEnc: "projIdEnc",
   };
 
   // Iterate through each property

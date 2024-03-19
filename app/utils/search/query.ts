@@ -28,6 +28,7 @@ const convertToQueryParams = (params: Params): string => {
     sortByfield: "sortByfield",
     sortType: "sortType",
     cg: "cg",
+    projIdEnc: "projIdEnc",
   };
 
   for (const key in params) {

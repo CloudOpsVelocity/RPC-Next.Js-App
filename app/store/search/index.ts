@@ -24,6 +24,7 @@ export interface SearchFilter {
   sortByfield: string | null;
   sortType: number | null;
   cg: string | null;
+  projIdEnc: string | null;
 }
 
 export const initialState: SearchFilter = {
@@ -47,6 +48,7 @@ export const initialState: SearchFilter = {
   sortByfield: null,
   sortType: null,
   cg: null,
+  projIdEnc: null,
 };
 export const diffToProjFromListing = {
   proj: ["facings", "furnish", "propStatus", "listedBy"],
@@ -61,6 +63,7 @@ searachFilterAtom.onMount = (setAtom) => {
 export const appliedFiltersParams = atom(null, (get, set, t: any) => {
   const appliedFilters = get(searachFilterAtom);
   const parsedData = filterParser(appliedFilters);
+  console.log(parsedData);
   t.runner(parsedData);
 });
 

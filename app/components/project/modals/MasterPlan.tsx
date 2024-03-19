@@ -53,7 +53,15 @@ export default function MasterPlanPopup({ url }: { url: string }) {
           </TransformWrapper>
         </div>
       </Modal>
-
+      <Image
+        radius="md"
+        src={`${url}`}
+        mah={863}
+        w="100%"
+        fit="cover"
+        onClick={open}
+        className="cursor-pointer"
+      />
       <button onClick={open}>
         <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] absolute bottom-10 right-3 z-50 " />
       </button>

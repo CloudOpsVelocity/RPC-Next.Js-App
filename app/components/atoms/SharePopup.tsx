@@ -106,6 +106,8 @@ const Share = ({ shareUrl }: { shareUrl: string }) => {
         <FacebookShareButton
           url={shareUrl}
           className="Demo__some-network__share-button"
+          windowWidth={1200}
+          windowHeight={700}
         >
           {FacbookIcon}
         </FacebookShareButton>
@@ -125,6 +127,8 @@ const Share = ({ shareUrl }: { shareUrl: string }) => {
           url={shareUrl}
           title={title}
           className="Demo__some-network__share-button"
+          windowWidth={1200}
+          windowHeight={700}
         >
           {Telegram}
         </TelegramShareButton>
@@ -136,6 +140,8 @@ const Share = ({ shareUrl }: { shareUrl: string }) => {
           title={title}
           separator=":: "
           className="Demo__some-network__share-button"
+          windowWidth={1200}
+          windowHeight={700}
         >
           {WhatsAppIcon}
         </WhatsappShareButton>

@@ -5,7 +5,7 @@ import { Tabs, ScrollArea } from "@mantine/core";
 
 import { clsx } from "clsx";
 import { Coordinates } from "@/app/utils/maps";
-import { useDebouncedState, useMediaQuery } from "@mantine/hooks";
+import { useMediaQuery } from "@mantine/hooks";
 import { GradientLocation, nearbyLocationIcon } from "@/app/images/commonSvgs";
 import Loading from "../../atoms/Loader";
 import dynamic from "next/dynamic";
@@ -477,6 +477,7 @@ export const areas: Area[] = [
         />
       </svg>
     ),
+    key: "food",
   },
 
   {
