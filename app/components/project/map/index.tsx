@@ -46,16 +46,6 @@ const LeafMap: React.FC<{
     name?: string;
   }>();
 
-  // const showLocationOnMap = useCallback(
-  //   (location: { position: { lat: number; lng: number }; name: string }) => {
-  //     setSelectedLocation({
-  //       lat: location.position.lat,
-  //       lng: location.position.lng,
-  //       name: location.name,
-  //     });
-  //   },
-  //   [selectedLocation, selected]
-  // );
   const showLocationOnMap = useCallback(
     (location: { position: { lat: number; lng: number }; name: string }) => {
       setSelectedLocation({
@@ -66,6 +56,16 @@ const LeafMap: React.FC<{
     },
     [selectedLocation, selected]
   );
+  // function showLocationOnMap(location: {
+  //   position: { lat: number; lng: number };
+  //   name: string;
+  // }): void {
+  //   setSelectedLocation({
+  //     lat: location.position.lat,
+  //     lng: location.position.lng,
+  //     name: location.name,
+  //   });
+  // }
 
   const { data: mapData, isLoading } = useMapData({ projSlug: projId });
   const isMobile = useMediaQuery(`(max-width: 750px)`);

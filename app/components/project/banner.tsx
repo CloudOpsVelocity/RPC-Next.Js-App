@@ -132,10 +132,9 @@ const AddRating = ({
       size={isMobile ? "100%" : session ? "xl" : "35%"}
     >
       <div className="relative">
-        {session && status === "success" && (
+        {(!session || status === "success") && (
           <Close close={onClose} className="absolute top-3 right-1" />
         )}
-
         {session ? (
           status === "success" ? (
             <Success
