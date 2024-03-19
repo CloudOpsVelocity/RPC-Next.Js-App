@@ -6,6 +6,7 @@ interface ReadMoreAtom {
   content: any; // Replace with the actual type of your content
   type: "content" | "array";
   title: string;
+  showProjName: boolean;
 }
 export type AtomContent<T extends ReadMoreAtom["type"]> = T extends "content"
   ? string
@@ -16,6 +17,7 @@ export const readMoreAtom = atom<ReadMoreAtom>({
   content: "",
   type: "content",
   title: "",
+  showProjName: true,
 });
 
 // store.ts

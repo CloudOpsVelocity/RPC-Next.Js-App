@@ -46,6 +46,16 @@ const LeafMap: React.FC<{
     name?: string;
   }>();
 
+  // const showLocationOnMap = useCallback(
+  //   (location: { position: { lat: number; lng: number }; name: string }) => {
+  //     setSelectedLocation({
+  //       lat: location.position.lat,
+  //       lng: location.position.lng,
+  //       name: location.name,
+  //     });
+  //   },
+  //   [selectedLocation, selected]
+  // );
   const showLocationOnMap = useCallback(
     (location: { position: { lat: number; lng: number }; name: string }) => {
       setSelectedLocation({
@@ -89,6 +99,13 @@ const LeafMap: React.FC<{
             buttonClass="flex justify-center items-center gap-1 p-2.5 border rounded-[21px] border-solid border-[#0094FF] text-[#202020] text-xl not-italic font-semibold leading-[normal] bg-[#F2FAFF] mt-3 ml-auto "
             title={"Localte Project"}
             icon={<GradientLocation className="w-8 h-8" />}
+            onChange={() => {
+              setSelectedLocation({
+                lat: Number(lat),
+                lng: Number(lang),
+                name: projName,
+              });
+            }}
           />
         </div>
       </div>

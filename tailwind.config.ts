@@ -11,6 +11,7 @@ const config: Config = {
     extend: {
       colors: {
         btnPrimary: "#0073C6",
+        greenPrimary: "#148B16",
       },
     },
   },

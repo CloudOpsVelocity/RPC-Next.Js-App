@@ -48,8 +48,16 @@ const Content: React.FC<any> = ({
   lat,
   lang,
 }) => {
-  const map = useMap();
   const position: LatLngTuple = [lat, lang];
+  const map = useMap();
+  useEffect(() => {
+    if (selectedLocation && selectedLocation.name) {
+      map.panTo([
+        parseFloat(selectedLocation.lat),
+        parseFloat(selectedLocation.lng),
+      ]);
+    }
+  }, [map, selectedLocation?.name]);
   return (
     <>
       <TileLayer
@@ -92,7 +100,7 @@ const Content: React.FC<any> = ({
             </p>
           </div>
         </Tooltip>
-        <Popup maxWidth={200} minWidth={200}>
+        {/* <Popup maxWidth={200} minWidth={200}>
           <Image
             src="https://ak-d.tripcdn.com/images/220a0r000000gwne24089_R_960_660_R5_D.jpg"
             width={500}
@@ -101,7 +109,7 @@ const Content: React.FC<any> = ({
           />
           <div className="my-2">
             <div className="flex items-center justify-between">
-              <div className="font-bold text-sm">The Scene Condo</div>
+              <div className="font-bold text-sm">{projName}</div>
               <div className="">123</div>
             </div>
             <div className="overflow-x-scroll mt-1">
@@ -118,7 +126,7 @@ const Content: React.FC<any> = ({
               </div>
             </div>
           </div>
-        </Popup>
+        </Popup> */}
       </Marker>
       <polyline />
     </>

@@ -13,6 +13,8 @@ import toast from "react-hot-toast";
 import handleTrimAndReplace from "@/app/utils/input/validations";
 import clsx from "clsx";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
+import About from "./about";
+import FaqReadMore from "../atoms/faq/FaqReadmore";
 
 type FaqWithBgProps = {
   data: FAQ[];
@@ -186,12 +188,12 @@ const FaqCard = ({
 }) => {
   return (
     <div>
-      <h4 className=" text-[#046DBA] text-[28px] not-italic font-bold leading-[normal] mb-[27px]">
+      <h4 className=" text-[#046DBA] text-[28px] not-italic font-bold leading-[normal] mb-4">
         {faqQuestion}
       </h4>
-      <p className="text-[#303A42] text-[28px] not-italic font-normal leading-9">
-        {faqAnswer}
-      </p>
+      <FaqReadMore text={faqAnswer} title={faqQuestion} />
+
+      <hr className="bg-[#00000080] my-[59px] h-[2px]" />
     </div>
   );
 };
