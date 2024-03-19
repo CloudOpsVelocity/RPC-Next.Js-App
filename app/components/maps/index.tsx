@@ -20,22 +20,20 @@ import { MapIcon } from "@/app/data/map";
 const Map = ({ data, selectedLocation, projName, lat, lang }: any) => {
   const position: LatLngTuple = [lat, lang];
   return (
-    <>
-      <MapContainer
-        center={position}
-        zoom={13}
-        className=" h-[400px] sm:h-[700px] w-full z-[1]"
-        scrollWheelZoom={true}
-      >
-        <Content
-          data={data}
-          selectedLocation={selectedLocation}
-          projName={projName}
-          lat={lat}
-          lang={lang}
-        />
-      </MapContainer>
-    </>
+    <MapContainer
+      center={position}
+      zoom={13}
+      className=" h-[400px] sm:h-[700px] w-full z-[1]"
+      scrollWheelZoom={true}
+    >
+      <Content
+        data={data}
+        selectedLocation={selectedLocation}
+        projName={projName}
+        lat={lat}
+        lang={lang}
+      />
+    </MapContainer>
   );
 };
 
@@ -57,7 +55,7 @@ const Content: React.FC<any> = ({
         parseFloat(selectedLocation.lng),
       ]);
     }
-  }, [map, selectedLocation?.name]);
+  }, [selectedLocation]);
   return (
     <>
       <TileLayer

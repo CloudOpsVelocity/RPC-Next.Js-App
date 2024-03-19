@@ -56,6 +56,7 @@ const LeafMap: React.FC<{
     },
     [selectedLocation, selected]
   );
+
   // function showLocationOnMap(location: {
   //   position: { lat: number; lng: number };
   //   name: string;
