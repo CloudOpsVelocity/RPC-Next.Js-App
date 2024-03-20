@@ -15,8 +15,9 @@ import { formatCurrency } from "@/app/utils/numbers";
 import { useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
 import { floorPlansArray, selectedFloorAtom } from "@/app/store/floor";
 import { parseUnits } from "@/app/utils/unitparser";
-import { QueryCache } from "react-query";
+import { QueryCache, useQuery } from "react-query";
 import { queryClient } from "@/app/utils/query";
+import { getProjectUnits } from "@/app/utils/api/project";
 
 type Props = {
   cg: any;
@@ -25,22 +26,52 @@ type Props = {
   data: any;
   isLoading: boolean;
 };
-
+const getPropId = (key: string) => {
+  switch (key) {
+    case "apt":
+      return projectprops.apartment;
+      break;
+    case "plot":
+      return projectprops.plot;
+      break;
+    case "rowHouse":
+      return projectprops.rowHouse;
+      break;
+    case "villa":
+      return projectprops.villa;
+      break;
+    case "vlmt":
+      return projectprops.villament;
+      break;
+    default:
+      return 35;
+  }
+};
 export default function PropertyTypeDetailsCrad({
   cg,
   propertyType,
   phase,
   data,
-  isLoading,
 }: Props) {
   const [, { open }] = useFloorPlanPopup();
   const setcurrentPhase = useSetAtom(currentPhaseAtom);
   const setPrpCgId = useSetAtom(propCgIdAtom);
   const setSelectedFloor = useSetAtom(selectedFloorAtom);
   const setFloorsArray = useSetAtom(floorPlansArray);
+  const { data: projectUnitsData, isLoading } = useQuery({
+    queryKey: [
+      `/${getPropId(propertyType)}/${phase}/27c1a062e598c442e878d8e957500488`,
+    ],
+    queryFn: () =>
+      getProjectUnits(
+        "27c1a062e598c442e878d8e957500488",
+        phase,
+        getPropId(propertyType)
+      ),
+  });
   const handleOpen = () => {
     setSelectedFloor(null);
-    setFloorsArray(data);
+    setFloorsArray(projectUnitsData);
     open("overview");
   };
   const updateValues = (newCurrentPhase: number, newPropCgId: number) => {
@@ -87,28 +118,6 @@ export default function PropertyTypeDetailsCrad({
           return villamentCardImg;
         }
         break;
-    }
-  };
-
-  const getPropId = (key: string) => {
-    switch (key) {
-      case "apt":
-        return projectprops.apartment;
-        break;
-      case "plot":
-        return projectprops.plot;
-        break;
-      case "rowHouse":
-        return projectprops.rowHouse;
-        break;
-      case "villa":
-        return projectprops.villa;
-        break;
-      case "vlmt":
-        return projectprops.villament;
-        break;
-      default:
-        return 35;
     }
   };
 

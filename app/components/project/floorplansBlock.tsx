@@ -49,11 +49,6 @@ export default function FloorplansBlock({ projName, slug }: Props) {
     keepPreviousData: true,
     staleTime: 30000,
     cacheTime: 300000,
-
-    onSuccess: (data) => {
-      console.log("working");
-      setSelectedFloor(data[0]);
-    },
   });
 
   const types = selectedPhase && Object?.keys(selectedPhase.propTypeOverview);
@@ -180,7 +175,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                   } `}
                   onChange={() => {
                     getPropertyType(propertyDetailsTypes.get(keyName));
-                    setSelectedFloor(projectUnitsData[0]);
+                    // setSelectedFloor(projectUnitsData[0]);
                   }}
                   title={name}
                   icon={getIcon(keyName)}
