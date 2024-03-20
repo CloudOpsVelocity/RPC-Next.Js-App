@@ -49,11 +49,13 @@ export default function FloorplansBlock({ projName, slug }: Props) {
     keepPreviousData: true,
     staleTime: 30000,
     cacheTime: 300000,
+
     onSuccess: (data) => {
+      console.log("working");
       setSelectedFloor(data[0]);
     },
   });
-  if (isLoading) return <Loading />;
+
   const types = selectedPhase && Object?.keys(selectedPhase.propTypeOverview);
   const getPropertyType = (data: any) => {
     setPropCgId(data.id);
@@ -118,7 +120,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
       return true;
     }
   };
-
+  if (isLoading) return <Loading />;
   return (
     <div className="w-[90%] scroll-mt-[90px] mb-[5%]" id="floorPlans">
       <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35] mb-[12px]">

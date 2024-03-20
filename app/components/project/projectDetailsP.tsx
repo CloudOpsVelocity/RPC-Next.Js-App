@@ -38,9 +38,6 @@ export default function ProjectDetailsP({ projName, slug }: Props) {
     propertyTypeOrder.filter((propertyType) =>
       Object.keys(selectedPhase.propTypeOverview).includes(propertyType)
     );
-
-  // console.log(PhaseOverview[0])
-
   return (
     <div className="w-[90%] mb-[5%] scroll-mt-[90px]" id="propertyDetails">
       <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35] mb-[12px]">

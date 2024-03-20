@@ -24,6 +24,7 @@ import { floorPlansArray, selectedFloorAtom } from "@/app/store/floor";
 import { typeAtom, useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
 import { useSubFloorPlanPopup } from "@/app/hooks/useSubFloorplanPopup";
 import filterDataAtom from "@/app/store/filterdata";
+import useUnitTypes from "@/app/hooks/useUnitTypes";
 
 type Props = {
   propCgId: any;
@@ -896,12 +897,11 @@ const RightSection = ({ propCgId }: Props) => {
 const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
   const type = useAtomValue(typeAtom);
   const data = useAtomValue(selectedFloorAtom);
-
   const floorsArray = useAtomValue(floorPlansArray);
-  const [opened, { open }] = useSubFloorPlanPopup();
+  const [, { open }] = useSubFloorPlanPopup();
   const [currentImg, setCurrentImg] = useState(0);
   const [selectedFloor, setFloor] = useAtom(selectedFloorAtom);
-
+  const { projectUnitsData } = useUnitTypes();
   const selectImg = (index: number) => {
     setFloor(floorsArray[index]);
     setCurrentImg(index);
@@ -1002,7 +1002,7 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
             )}
 
             <div className="flex w-full justify-center gap-[16px] items-center overflow-x-auto scrollbar-hide">
-              {floorsArray.map((eachObj, ind) => {
+              {projectUnitsData?.map((eachObj: any, ind: number) => {
                 return (
                   <div
                     key={ind}
