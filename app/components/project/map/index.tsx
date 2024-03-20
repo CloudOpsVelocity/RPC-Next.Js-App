@@ -195,7 +195,7 @@ const LeafMap: React.FC<{
           <h1 className="text-[#303030] text-xl not-italic font-medium leading-[normal] tracking-[0.8px] capitalize">
             {selected.split("_").join(" ")} Nearby
           </h1>
-          <div className="flex gap-2 mt-3 flex-wrap">
+          <div className="flex gap-2 mt-3 flex-wrap ">
             {mapData[selected].map((item: any, index: any) => (
               <MapCard
                 key={index}
@@ -233,10 +233,21 @@ const MapCard = ({
       },
       name,
     });
+    scrollToTopic("nearBy");
+  };
+  const scrollToTopic = (id: string): void => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "center",
+      });
+    }
   };
   return (
     <div
-      className="flex flex-col items-start gap-3 px-2 py-3.5 cursor-pointer shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] border-[0.5px] border-solid border-[#D9D9D9] bg-[#fcfcfc] w-full md:min-w-[385px] max-w-[385px]"
+      className="flex flex-col items-start gap-3 px-2 py-3.5 cursor-pointer shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] border-[0.5px] border-solid border-[#D9D9D9] bg-[#fcfcfc] w-full md:min-w-[385px] max-w-[385px] ml-5 mb-5"
       onClick={handleClick}
     >
       <div className="">

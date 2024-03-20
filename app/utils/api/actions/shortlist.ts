@@ -14,10 +14,13 @@ export const addShortList = async (data: Props) => {
       [propName]: data.projIdEnc,
       isactive: data.isactive,
     });
-    toast.success(data.isactive == "Y" ? "Property Added" : "Property Removed");
+    console.log(data.isactive == "Y" ? "Property Added" : "Property Removed", {
+      [propName]: data.projIdEnc,
+    });
+    // toast.success(data.isactive == "Y" ? "Property Added" : "Property Removed");
     return response.data;
   } catch (error) {
-    toast.error("Something went wrong");
-    console.error(error);
+    // toast.error("Something went wrong");
+    console.error(error + "user not logged in");
   }
 };

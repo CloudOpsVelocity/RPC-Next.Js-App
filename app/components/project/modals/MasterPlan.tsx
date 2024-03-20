@@ -56,7 +56,7 @@ export default function MasterPlanPopup({ url }: { url: string }) {
       <Image
         radius="md"
         src={`${url}`}
-        mah={863}
+        mah={600}
         w="100%"
         fit="cover"
         onClick={open}

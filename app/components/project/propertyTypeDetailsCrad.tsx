@@ -15,12 +15,15 @@ import { formatCurrency } from "@/app/utils/numbers";
 import { useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
 import { floorPlansArray, selectedFloorAtom } from "@/app/store/floor";
 import { parseUnits } from "@/app/utils/unitparser";
+import { QueryCache } from "react-query";
+import { queryClient } from "@/app/utils/query";
 
 type Props = {
   cg: any;
   propertyType: string;
   phase: number;
   data: any;
+  isLoading: boolean;
 };
 
 export default function PropertyTypeDetailsCrad({
@@ -28,6 +31,7 @@ export default function PropertyTypeDetailsCrad({
   propertyType,
   phase,
   data,
+  isLoading,
 }: Props) {
   const [, { open }] = useFloorPlanPopup();
   const setcurrentPhase = useSetAtom(currentPhaseAtom);

@@ -67,8 +67,7 @@ export default function Specifications({
                 }`}
                 onClick={() => handleSpecClick(index)}
               >
-                {specificationsList?.get(spec?.specId)?.url}{" "}
-                {spec.specName}
+                {specificationsList?.get(spec?.specId)?.url} {spec.specName}
               </a>
             ))}
           </div>
@@ -76,7 +75,12 @@ export default function Specifications({
 
         <div className="flex-1 bg-gray-50 rounded-lg ">
           <Stack align="center">
-            <ScrollArea w={"100%"} h={458} viewportRef={viewport} pb={20}>
+            <ScrollArea
+              w={"100%"}
+              h={458 > data?.length * 270 ? data.length * 270 : 458}
+              viewportRef={viewport}
+              pb={20}
+            >
               {data?.map((spec, index) => (
                 <div
                   key={index}

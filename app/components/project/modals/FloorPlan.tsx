@@ -901,7 +901,6 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
   const [, { open }] = useSubFloorPlanPopup();
   const [currentImg, setCurrentImg] = useState(0);
   const [selectedFloor, setFloor] = useAtom(selectedFloorAtom);
-  const { projectUnitsData } = useUnitTypes();
   const selectImg = (index: number) => {
     setFloor(floorsArray[index]);
     setCurrentImg(index);
@@ -1002,7 +1001,7 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
             )}
 
             <div className="flex w-full justify-center gap-[16px] items-center overflow-x-auto scrollbar-hide">
-              {projectUnitsData?.map((eachObj: any, ind: number) => {
+              {floorsArray?.map((eachObj: any, ind: number) => {
                 return (
                   <div
                     key={ind}

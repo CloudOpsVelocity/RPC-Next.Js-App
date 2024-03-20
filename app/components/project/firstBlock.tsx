@@ -86,7 +86,7 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
                 </p>
               )}
 
-              <div className={`ml-[2%] ${!hasReraStatus && "mt-8"}`}>
+              <div className={`ml-[2%] ${!hasReraStatus ? "mt-8" : "mt-2"}`}>
                 <h3 className="text-xl sm:text-[24px] lg:text-[28px] font-[700] text-[#00487C] uppercase">
                   {projectDetails.projectName}
                 </h3>

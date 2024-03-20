@@ -28,7 +28,7 @@ const styles = {
 export default function ProjectDetailsP({ projName, slug }: Props) {
   const { PhaseOverview, currentPhase, handlePhaseChange, phaseList } =
     usePhaseWiseOverview();
-  const { projectUnitsData } = useUnitTypes();
+  const { projectUnitsData, isLoading } = useUnitTypes();
   const selectedPhase = PhaseOverview?.find(
     (phase: any) => phase.phaseId === currentPhase
   );
@@ -129,6 +129,7 @@ export default function ProjectDetailsP({ projName, slug }: Props) {
                 key={propertyTypeKey}
                 cg={selectedPhase.propTypeOverview[propertyTypeKey]}
                 propertyType={propertyTypeKey}
+                isLoading={isLoading}
               />
             ))}
           </>

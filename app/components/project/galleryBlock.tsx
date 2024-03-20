@@ -23,15 +23,14 @@ export default function GalleryBlock({
   const images = getImageUrls(media);
   const [selectedMedia, setSelectedMedia] = useState<string | null>(images[0]);
   const videos = [walkThrowVideoUrl, projectVideoIUrl].filter(
-    (url) => url !== "" && undefined && null
+    (url) => url !== undefined
   );
   const handleMediaClick = (media: string) => {
     setSelectedMedia(media);
   };
   const [, { open }] = useGallery();
-
   return (
-    <div className="w-[90%] scroll-mt-[90px] mb-[5%]  " id="galleria">
+    <div className="w-[90%] scroll-mt-[90px] mb-[5%]" id="galleria">
       {type === "prop" ? (
         <PropertyHeading
           title="GALLERIA"
@@ -72,7 +71,6 @@ export default function GalleryBlock({
                   alt="Preview"
                   className="cursor-pointer"
                   onClick={() => {
-                    console.log(selectedMedia);
                     open("image", selectedMedia);
                   }}
                 />

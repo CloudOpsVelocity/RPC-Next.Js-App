@@ -5,6 +5,7 @@ import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { currentPhaseAtom, propCgIdAtom } from "../store/vewfloor";
 import { useParams } from "next/navigation";
 import { floorPlansArray } from "../store/floor";
+import { QueryCache } from "@tanstack/react-query";
 
 export default function useUnitTypes() {
   const setFloorPlans = useSetAtom(floorPlansArray);

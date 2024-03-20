@@ -1,17 +1,7 @@
-import {
-  Shorlisted,
-  infoIcon,
-  shortlistIconSvg,
-  tagIcon,
-} from "@/app/images/commonSvgs";
-import { addShortList } from "@/app/utils/api/actions/shortlist";
-import { useToggle } from "@mantine/hooks";
+import { Shorlisted, shortlistIconSvg } from "@/app/images/commonSvgs";
 import { useSession } from "next-auth/react";
-import Link from "next/link";
 import { useParams } from "next/navigation";
-import React, { useState } from "react";
-import toast from "react-hot-toast";
-import LoginPopup from "../modals/LoginPop";
+import React from "react";
 import { useShortlistAndCompare } from "@/app/hooks/storage";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 

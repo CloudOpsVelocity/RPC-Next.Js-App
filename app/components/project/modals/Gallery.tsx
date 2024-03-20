@@ -118,7 +118,8 @@ const Gallery: React.FC<GalleryProps> = ({
                         src={image}
                         className={clsx(
                           `cursor-pointer w-full min-w-[80px] !h-auto max-h-[100px] min-h-[50px]`,
-                          image === previewImage && "border-[5px] border-white"
+                          image === (previewImage || content?.url) &&
+                            "border-[5px] border-white"
                         )}
                       />
                     </Carousel.Slide>

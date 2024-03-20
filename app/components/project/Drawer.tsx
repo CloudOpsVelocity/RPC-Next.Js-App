@@ -35,7 +35,7 @@ function ProjectDrawer({ projName }: { projName: string }) {
         zIndex={100}
       >
         <div className="mt-4 flex justify-between mb-8">
-          <h1 className="uppercase text-[24px] lg:text-[32px] font-[600] text-[#001F35] pl-[57px] ">
+          <h1 className="uppercase text-[24px] lg:text-[32px] font-[600] text-[#001F35] pl-[57px] max-w-[950px]">
             {title}{" "}
             {showProjName && (
               <span className="text-[#148B16] font-[700] uppercase">

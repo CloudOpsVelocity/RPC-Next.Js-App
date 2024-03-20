@@ -1,5 +1,5 @@
 "use client";
-import { comparingIcon, infoIcon } from "@/app/images/commonSvgs";
+import { comparingIcon } from "@/app/images/commonSvgs";
 import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
 import React from "react";
