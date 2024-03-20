@@ -49,6 +49,9 @@ export default function FloorplansBlock({ projName, slug }: Props) {
     keepPreviousData: true,
     staleTime: 30000,
     cacheTime: 300000,
+    onSuccess: (data) => {
+      setSelectedFloor(data[0]);
+    },
   });
 
   const types = selectedPhase && Object?.keys(selectedPhase.propTypeOverview);
