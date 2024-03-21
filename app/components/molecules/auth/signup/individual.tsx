@@ -33,6 +33,8 @@ function Individual() {
   const form = useForm({
     initialValues: { name: "", email: "", password: "", mobile: null },
     validate: yupResolver(individualSchema),
+    validateInputOnBlur: true,
+    validateInputOnChange: true,
   });
   const onSubmit = async (values: typeof form.values) => {
     setStatus("pending");

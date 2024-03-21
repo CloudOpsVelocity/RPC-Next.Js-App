@@ -33,6 +33,8 @@ function Login() {
   const form = useForm({
     initialValues: { username: "", password: "" },
     validate: yupResolver(schema),
+    validateInputOnBlur: true,
+    validateInputOnChange: true,
   });
   const { login } = useAuth({ type: "login" });
   const onSubmit = async (values: any) => {

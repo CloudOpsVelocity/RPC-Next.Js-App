@@ -130,6 +130,8 @@ function Builder() {
 
       return {};
     },
+    validateInputOnBlur: true,
+    validateInputOnChange: true,
   });
   const { data: statesData, isLoading: isLoadingStates } = useQuery(
     ["states"],
