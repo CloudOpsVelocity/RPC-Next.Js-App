@@ -83,15 +83,13 @@ const builderSchema = yup.object().shape({
     .string()
     .trim()
     .required("Managing Director name is required"),
-
   officeContact: yup
     .string()
-    .matches(/^\d+$/, "Valid 10-digit contact number is required")
-    .max(17, "Valid  contact number is required")
-    .required("Valid  contact number is required"),
-  companyStartDate: yup.date().required("Company start date is required"),
+    .matches(/^[\d()+-]+$/, "Invalid office contact number")
+    .required("office contact number is required")
+    .max(17, "Mobile number should not exceed 17 digits"),
 
-  // Add more validations for other fields as needed
+  companyStartDate: yup.date().required("Company start date is required"),
 });
 
 const textAreaScema = yup.object().shape({

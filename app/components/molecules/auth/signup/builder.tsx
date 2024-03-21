@@ -604,16 +604,14 @@ function Builder() {
                 error: StepCss.errorMsg,
               }}
             />
-            <NumberInput
+            <TextInput
               required
-              hideControls
               size="lg"
               mt="sm"
               className="w-[100%] mb-[3%] "
               label="Office Contact"
               placeholder="Enter Office Contact"
               {...form.getInputProps("officeContact")}
-              maxLength={17}
               classNames={{
                 root: StepCss.inputRoot,
                 input: StepCss.textInput,
