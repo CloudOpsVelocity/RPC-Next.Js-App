@@ -5,7 +5,6 @@ import useAuth from "@/app/hooks/useAuth";
 import Link from "next/link";
 import { useState } from "react";
 import * as yup from "yup";
-import S from "@/app/styles/Pass.module.css";
 import { EyeClosed, EyeOpen } from "@/app/images/commonSvgs";
 import { useMediaQuery } from "@mantine/hooks";
 import handleTrimAndReplace from "@/app/utils/input/validations";
@@ -15,17 +14,17 @@ const schema = yup.object().shape({
     .number()
     .positive("Mobile number must be positive")
     .integer("Mobile number must be an integer")
-    .typeError("Valid 10-digit contact number is required")
     .test(
       "len",
-      "Mobile number must be exactly 10 digits",
+      "Mobile number should be 10 digit",
       (val) => val?.toString().length === 10
     )
-    .required("Mobile number is required"),
+    .required("Mobile number is required")
+    .typeError("Mobile number is required"),
   password: yup
     .string()
-    .required("Password is required")
-    .min(6, "Password must be at least 6 characters"),
+    .min(6, "Password must be at least 6 characters")
+    .required("Password is required"),
 });
 
 function Login() {
@@ -63,7 +62,6 @@ function Login() {
           label="Mobile Number"
           placeholder="Enter your registered mobile number"
           {...form.getInputProps("username")}
-          maxLength={10}
         />
 
         <PasswordInput

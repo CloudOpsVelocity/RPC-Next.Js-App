@@ -112,7 +112,9 @@ function Builder() {
             values.city === null || values?.city.trim().length === 0
               ? "City is required"
               : null,
-          pincode: !/^[1-9][0-9]{5}$/.test(String(values.pincode))
+          pincode: !values.pincode
+            ? "PIN code is required"
+            : !/^[1-9][0-9]{5}$/.test(String(values.pincode))
             ? "Valid 6-digit PIN code is required"
             : null,
         };
@@ -380,7 +382,6 @@ function Builder() {
             label="Contact Number"
             placeholder="Enter your contact number here"
             {...form.getInputProps("mobile")}
-            maxLength={10}
             error={
               form.errors.mobile ||
               (status === "error" &&
@@ -480,7 +481,6 @@ function Builder() {
               label="Pincode"
               placeholder="Enter pincode"
               {...form.getInputProps("pincode")}
-              maxLength={6}
               classNames={{
                 root: StepCss.inputRoot,
                 input: StepCss.textInput,

@@ -4,6 +4,7 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import CryptoJS from "crypto-js";
+import { WarningIcon } from "../images/commonSvgs";
 
 interface Login {
   username: string | number;
@@ -89,7 +90,7 @@ export default function useAuth({
         : router.push("/");
     } else {
       toast.error(res?.error || "Something went wrong. Please try again.", {
-        duration: 1000,
+        duration: 1500,
       });
     }
   };

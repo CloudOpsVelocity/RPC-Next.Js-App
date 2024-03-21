@@ -44,10 +44,21 @@ export const options: NextAuthOptions = {
               ...res.data,
             };
           } else {
-            if (res.data.message === "exception in logging in") {
-              throw new Error("Wrong Credentials");
+            console.log(res.data.identifer);
+            switch (res.data.identifer) {
+              case "NF":
+                throw new Error("We can’t find user. Please Sign Up!");
+                break;
+              case "IU":
+                throw new Error(
+                  "User is under review. Please wait for Approval"
+                );
+                break;
+
+              default:
+                throw new Error("Please enter correct password");
+                break;
             }
-            throw new Error(res.data.message);
           }
         } catch (error: any) {
           throw new Error(error.message);

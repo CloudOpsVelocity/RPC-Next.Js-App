@@ -272,7 +272,6 @@ function Agent() {
             label="Contact Number"
             placeholder="Enter your contact number"
             {...form.getInputProps("mobile")}
-            maxLength={10}
             error={
               form.errors.mobile ||
               (status === "error" &&

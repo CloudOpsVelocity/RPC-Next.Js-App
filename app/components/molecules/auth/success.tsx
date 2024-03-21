@@ -24,7 +24,7 @@ export default function Success() {
           Congratulations!
         </h1>
         <p className="text-[color:var(--Grey-1,#666)] text-center text-[26px] not-italic font-medium leading-[normal] mt-10">
-          Your account for {P.slug} has been created successfully
+          Your account has been created successfully
         </p>
         <Image
           src={

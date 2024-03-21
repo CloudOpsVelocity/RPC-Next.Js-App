@@ -14,7 +14,11 @@ const schema = yup.object().shape({
     .number()
     .positive("Mobile number must be positive")
     .integer("Mobile number must be an integer")
-    .typeError("Valid 10-digit contact number is required")
+    .typeError("Mobile number is required")
+    .test("mvalid", "Invalid mobile number", (val) => {
+      const strVal = val?.toString();
+      return /^[6-9]\d{9}$/.test(strVal ?? "");
+    })
     .test(
       "len",
       "Mobile number must be exactly 10 digits",
@@ -37,7 +41,11 @@ const agentSchema = yup.object().shape({
     .number()
     .positive("Mobile number must be positive")
     .integer("Mobile number must be an integer")
-    .typeError("Valid 10-digit contact number is required")
+    .typeError("Mobile number is required")
+    .test("mvalid", "Invalid mobile number", (val) => {
+      const strVal = val?.toString();
+      return /^[6-9]\d{9}$/.test(strVal ?? "");
+    })
     .test(
       "len",
       "Mobile number must be exactly 10 digits",
@@ -67,7 +75,7 @@ const builderSchema = yup.object().shape({
     .min(1, "At least one branch must be selected")
     .required("At least one branch must be selected"),
 
-  ceoName: yup.string().trim().required("CEO name is required"),
+  ceoName: yup.string().required("CEO name is required"),
 
   foundedBy: yup.string().trim().required("Founded By name is required"),
 
