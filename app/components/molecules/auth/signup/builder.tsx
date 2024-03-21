@@ -617,6 +617,7 @@ function Builder() {
                 input: StepCss.textInput,
                 error: StepCss.errorMsg,
               }}
+              onBlur={(e) => handleTrimAndReplace(e, "officeContact", form)}
             />{" "}
           </ScrollArea>
         </Stepper.Step>

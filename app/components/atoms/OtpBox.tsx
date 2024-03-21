@@ -4,7 +4,7 @@ import useAuth from "@/app/hooks/useAuth";
 import { resendOtp } from "@/app/utils/auth";
 import { hideMobileNumber } from "@/app/utils/parse";
 import { otpSchema } from "@/app/validations/auth";
-import { Box, Button, Modal, PinInput, em } from "@mantine/core";
+import { Box, Button, FocusTrap, Modal, PinInput, em } from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
 import React, { useEffect, useRef, useState } from "react";
 import S from "@/app/styles/Otp.module.css";
@@ -57,20 +57,22 @@ export default function OtpBox({ userName, close, callback, mobile }: Props) {
         </p>
 
         <div className=" mr-auto ml-auto ">
-          <PinInput
-            classNames={{
-              pinInput: S.pinInput,
-              input: S.input,
-            }}
-            name="otp"
-            size="xl"
-            {...form.getInputProps("otp")}
-            className=""
-            inputMode="numeric"
-            type={"number"}
-            placeholder=""
-          />
-
+          <FocusTrap active>
+            <PinInput
+              classNames={{
+                pinInput: S.pinInput,
+                input: S.input,
+              }}
+              name="otp"
+              size="xl"
+              {...form.getInputProps("otp")}
+              className=""
+              inputMode="numeric"
+              type={"number"}
+              placeholder=""
+              data-autofocus
+            />
+          </FocusTrap>
           <Resend userName={mobile} />
         </div>
 
