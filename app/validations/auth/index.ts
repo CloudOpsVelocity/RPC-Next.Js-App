@@ -5,7 +5,11 @@ const schema = yup.object().shape({
     .matches(/^[a-zA-Z\s]*$/, "Only letters and spaces are allowed")
     .max(40, "Name should not exceed 40 characters")
     .required("Full name is required"),
-  email: yup.string().email("Invalid email").required("Email is required"),
+  email: yup
+    .string()
+    .matches(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, "Invalid email")
+    .required("Email is required")
+    .email("Invalid email"),
   password: yup
     .string()
     .min(6, "Password must be at least 6 characters")

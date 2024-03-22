@@ -521,6 +521,15 @@ function Builder() {
                 input: StepCss.textInput,
                 error: StepCss.errorMsg,
               }}
+              maxLength={6}
+              onPaste={(event) => {
+                const pastedText = event.clipboardData.getData("text/plain");
+                const trimmedText = pastedText.replace(/\s/g, "");
+                const first10Digits = trimmedText
+                  .replace(/\D/g, "")
+                  .slice(0, 6);
+                form.setFieldValue("mobile", first10Digits as any);
+              }}
             />
           </SimpleGrid>
           <DropZone
