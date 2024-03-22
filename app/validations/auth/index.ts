@@ -105,7 +105,7 @@ const builderSchema = yup.object().shape({
   officeContact: yup
     .string()
     .matches(/^[\d()+-]+$/, "Invalid office contact number")
-    .required("office contact number is required")
+    .required("Office contact number is required")
     .max(17, "Mobile number should not exceed 17 digits"),
 
   companyStartDate: yup.date().required("Company start date is required"),
