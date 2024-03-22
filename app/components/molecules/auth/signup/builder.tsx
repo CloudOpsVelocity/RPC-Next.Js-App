@@ -57,7 +57,9 @@ import {
   StepperDotGray,
   StepperDotGreen,
 } from "@/app/images/commonSvgs";
-import handleTrimAndReplace from "@/app/utils/input/validations";
+import handleTrimAndReplace, {
+  handleAllTrimAndReplace,
+} from "@/app/utils/input/validations";
 
 function Builder() {
   const [status, setStatus] = useState<
@@ -164,6 +166,12 @@ function Builder() {
   const nextStep = async () => {
     // Validate the form
     if (form.validate().hasErrors) {
+      const errorsKeys = Object.keys(form.errors);
+      if (active === 2 && errorsKeys[0]) {
+        scrollWhereIsSelected(errorsKeys[0]);
+        return;
+      }
+
       return;
     }
 
@@ -266,6 +274,26 @@ function Builder() {
       top: viewport.current!.scrollHeight,
       behavior: "smooth",
     });
+  const scrollWhereIsSelected = (item: string) => {
+    const data = [
+      "companyName",
+      "branch",
+      "ceoName",
+      "foundedBy",
+      "managingDirectorName",
+      "officeContact",
+      "companyStartDate",
+    ];
+    const errorPosition = data.findIndex((element) => element === item) * 60;
+    const selectedElement = document.getElementById(item);
+    if (selectedElement && viewport.current) {
+      viewport.current.scrollTo({
+        top: errorPosition,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <div className="w-full max-w-[423px] flex justify-center items-center flex-col mt-[2%]">
       {active !== 4 && (
@@ -509,6 +537,7 @@ function Builder() {
         >
           <ScrollArea h={420} pr={10} viewportRef={viewport} offsetScrollbars>
             <TextInput
+              id="companyName"
               required
               size="lg"
               mt="md"
@@ -523,6 +552,7 @@ function Builder() {
               }}
             />
             <MultiSelect
+              id="branch"
               rightSection={<DropdownArrowIcon />}
               required
               size="lg"
@@ -542,6 +572,7 @@ function Builder() {
               {...form.getInputProps("branch")}
             />
             <DateInput
+              id="companyStartDate"
               required
               size="lg"
               mt="md"
@@ -558,6 +589,7 @@ function Builder() {
               }}
             />
             <TextInput
+              id="foundedBy"
               required
               size="lg"
               mt="md"
@@ -575,6 +607,7 @@ function Builder() {
               }}
             />
             <TextInput
+              id="ceoName"
               required
               size="lg"
               mt="md"
@@ -589,6 +622,7 @@ function Builder() {
               }}
             />
             <TextInput
+              id="managingDirectorName"
               required
               size="lg"
               mt="md"
@@ -605,10 +639,10 @@ function Builder() {
               }}
             />
             <TextInput
+              id="officeContact"
               required
               size="lg"
-              mt="sm"
-              className="w-[100%] mb-[3%] "
+              mt="md"
               label="Office Contact"
               placeholder="Enter Office Contact"
               {...form.getInputProps("officeContact")}
@@ -617,8 +651,9 @@ function Builder() {
                 input: StepCss.textInput,
                 error: StepCss.errorMsg,
               }}
-              onBlur={(e) => handleTrimAndReplace(e, "officeContact", form)}
-            />{" "}
+              {...form.getInputProps("officeContact")}
+              onBlur={(e) => handleAllTrimAndReplace(e, "officeContact", form)}
+            />
           </ScrollArea>
         </Stepper.Step>
 

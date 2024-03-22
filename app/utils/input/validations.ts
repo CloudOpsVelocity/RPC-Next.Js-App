@@ -13,5 +13,13 @@ const handleTrimAndReplace = (
     ? form(fieldName, value)
     : form.setFieldValue(fieldName, value);
 };
-
+export const handleAllTrimAndReplace = (
+  e: React.FocusEvent<HTMLInputElement>,
+  fieldName: string,
+  form: any
+) => {
+  const value = e.target.value;
+  const trimmedValue = value.replace(/\s+/g, "");
+  form.setFieldValue(fieldName, trimmedValue);
+};
 export default handleTrimAndReplace;
