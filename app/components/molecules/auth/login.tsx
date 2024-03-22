@@ -7,7 +7,9 @@ import { useState } from "react";
 import * as yup from "yup";
 import { EyeClosed, EyeOpen } from "@/app/images/commonSvgs";
 import { useMediaQuery } from "@mantine/hooks";
-import handleTrimAndReplace from "@/app/utils/input/validations";
+import handleTrimAndReplace, {
+  handleAllTrimAndReplace,
+} from "@/app/utils/input/validations";
 import StepCss from "@/app/styles/Stepper.module.css";
 const schema = yup.object().shape({
   username: yup
@@ -62,6 +64,14 @@ function Login() {
           label="Mobile Number"
           placeholder="Enter your registered mobile number"
           {...form.getInputProps("username")}
+          maxLength={10}
+          allowDecimal={false}
+          onPaste={(event) => {
+            const pastedText = event.clipboardData.getData("text/plain");
+            const trimmedText = pastedText.replace(/\s/g, "");
+            const first10Digits = trimmedText.replace(/\D/g, "").slice(0, 10);
+            form.setFieldValue("username", first10Digits);
+          }}
         />
 
         <PasswordInput

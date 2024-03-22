@@ -68,7 +68,6 @@ function Individual() {
     setStatus("success");
     close();
   };
-
   return (
     <>
       {status === "success" ? (
@@ -170,6 +169,16 @@ function Individual() {
                   if (status === "error") {
                     setStatus("idle");
                   }
+                }}
+                allowDecimal={false}
+                maxLength={10}
+                onPaste={(event) => {
+                  const pastedText = event.clipboardData.getData("text/plain");
+                  const trimmedText = pastedText.replace(/\s/g, "");
+                  const first10Digits = trimmedText
+                    .replace(/\D/g, "")
+                    .slice(0, 10);
+                  form.setFieldValue("mobile", first10Digits as any);
                 }}
               />
 

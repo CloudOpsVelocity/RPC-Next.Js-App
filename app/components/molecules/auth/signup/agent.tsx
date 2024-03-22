@@ -288,7 +288,14 @@ function Agent() {
               input: N.classForContact,
               error: StepCss.errorMsg,
             }}
-            onBlur={(e) => handleTrimAndReplace(e, "mobile", form)}
+            maxLength={10}
+            allowDecimal={false}
+            onPaste={(event) => {
+              const pastedText = event.clipboardData.getData("text/plain");
+              const trimmedText = pastedText.replace(/\s/g, "");
+              const first10Digits = trimmedText.replace(/\D/g, "").slice(0, 10);
+              form.setFieldValue("mobile", first10Digits as any);
+            }}
           />
           <div className="min-w-[30px] !max-w-[75px] flex justify-center items-center ">
             <CountryInput
