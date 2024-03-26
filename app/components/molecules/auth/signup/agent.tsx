@@ -61,6 +61,7 @@ function Agent() {
       prevMobile: 0,
       prevEmail: "",
     },
+
     // @ts-ignore
     validate: (values) => {
       if (active === 0) {
@@ -320,7 +321,6 @@ function Agent() {
           }}
         >
           <TextInput
-            onBlur={(e) => handleTrimAndReplace(e, "address", form)}
             required
             size="lg"
             label="Office Address"
@@ -331,10 +331,10 @@ function Agent() {
               input: StepCss.textInput,
               error: StepCss.errorMsg,
             }}
+            onBlurCapture={(e) => handleTrimAndReplace(e, "address", form)}
           />
           <TextInput
             required
-            onBlur={(e) => handleTrimAndReplace(e, "companyName", form)}
             size="lg"
             mt={"xs"}
             label="Company Name"
@@ -345,6 +345,7 @@ function Agent() {
               input: StepCss.textInput,
               error: StepCss.errorMsg,
             }}
+            onBlurCapture={(e) => handleTrimAndReplace(e, "companyName", form)}
           />
           <DropZone
             onLogoSelect={handleLogoSelect}

@@ -21,6 +21,5 @@ export const handleAllTrimAndReplace = (
   const value = e.target.value;
   const trimmedValue = value.replace(/\s+/g, "");
   form.setFieldValue(fieldName, trimmedValue);
-  form.validateField(fieldName);
 };
 export default handleTrimAndReplace;

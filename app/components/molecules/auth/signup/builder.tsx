@@ -101,7 +101,7 @@ function Builder() {
     },
     validateInputOnBlur: true,
     validateInputOnChange: true,
-
+    name: "builder" + active,
     validate: (values) => {
       if (active === 0) {
         const data = yupResolver(agentSchema)(values);
@@ -143,7 +143,6 @@ function Builder() {
       enabled: !!form.values.state,
     }
   );
-  console.log(form.errors);
 
   const OtpCallback = () => {
     close();
@@ -456,12 +455,12 @@ function Builder() {
             label="Office Address"
             placeholder="Enter your office address"
             {...form.getInputProps("address")}
-            onBlur={(e) => handleTrimAndReplace(e, "address", form)}
             classNames={{
               root: StepCss.inputRoot,
               input: StepCss.textInput,
               error: StepCss.errorMsg,
             }}
+            onBlurCapture={(e) => handleTrimAndReplace(e, "address", form)}
           />
           <Select
             rightSection={<DropdownArrowIcon />}
@@ -551,12 +550,14 @@ function Builder() {
               label="Builder Owned By"
               placeholder="Enter your builder name"
               {...form.getInputProps("companyName")}
-              onBlur={(e) => handleTrimAndReplace(e, "companyName", form)}
               classNames={{
                 root: StepCss.inputRoot,
                 input: StepCss.textInput,
                 error: StepCss.errorMsg,
               }}
+              onBlurCapture={(e) =>
+                handleTrimAndReplace(e, "companyName", form)
+              }
             />
             <MultiSelect
               id="branch"
@@ -612,6 +613,10 @@ function Builder() {
                 input: StepCss.textInput,
                 error: StepCss.errorMsg,
               }}
+              onBlurCapture={(e) => {
+                handleTrimAndReplace(e, "foundedBy", form);
+                e.target.value !== "" && scrollToBottom();
+              }}
             />
             <TextInput
               id="ceoName"
@@ -621,11 +626,13 @@ function Builder() {
               label="Ceo Name"
               placeholder="Enter Ceo Name"
               {...form.getInputProps("ceoName")}
-              onBlur={(e) => handleTrimAndReplace(e, "ceoName", form)}
               classNames={{
                 root: StepCss.inputRoot,
                 input: StepCss.textInput,
                 error: StepCss.errorMsg,
+              }}
+              onBlurCapture={(e) => {
+                handleTrimAndReplace(e, "ceoName", form);
               }}
             />
             <TextInput
@@ -636,13 +643,13 @@ function Builder() {
               label="Managing Director"
               placeholder="Enter Managing Director Name"
               {...form.getInputProps("managingDirectorName")}
-              onBlur={(e) =>
-                handleTrimAndReplace(e, "managingDirectorName", form)
-              }
               classNames={{
                 root: StepCss.inputRoot,
                 input: StepCss.textInput,
                 error: StepCss.errorMsg,
+              }}
+              onBlurCapture={(e) => {
+                handleTrimAndReplace(e, "managingDirectorName", form);
               }}
             />
             <TextInput
@@ -658,8 +665,9 @@ function Builder() {
                 input: StepCss.textInput,
                 error: StepCss.errorMsg,
               }}
-              {...form.getInputProps("officeContact")}
-              onBlur={(e) => handleAllTrimAndReplace(e, "officeContact", form)}
+              onBlurCapture={(e) => {
+                handleTrimAndReplace(e, "officeContact", form);
+              }}
             />
           </ScrollArea>
         </Stepper.Step>
@@ -686,11 +694,13 @@ function Builder() {
             minRows={5}
             maxRows={5}
             {...form.getInputProps("vission")}
-            onBlur={(e) => handleTrimAndReplace(e, "vission", form)}
             classNames={{
               root: StepCss.inputRoot,
               input: StepCss.textInput,
               error: StepCss.errorMsg,
+            }}
+            onBlurCapture={(e) => {
+              handleTrimAndReplace(e, "vission", form);
             }}
           />
           <Text size="sm" ta={"right"}>
@@ -706,11 +716,13 @@ function Builder() {
             minRows={5}
             maxRows={5}
             {...form.getInputProps("mission")}
-            onBlur={(e) => handleTrimAndReplace(e, "mission", form)}
             classNames={{
               root: StepCss.inputRoot,
               input: StepCss.textInput,
               error: StepCss.errorMsg,
+            }}
+            onBlurCapture={(e) => {
+              handleTrimAndReplace(e, "mission", form);
             }}
           />{" "}
           <Text size="sm" ta={"right"} mb={"lg"}>

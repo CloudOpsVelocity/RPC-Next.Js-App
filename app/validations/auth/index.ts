@@ -111,7 +111,7 @@ const builderSchema = yup.object().shape({
   companyStartDate: yup.date().required("Company start date is required"),
 });
 export const builderSchemaIndex1 = yup.object().shape({
-  address: yup.string().trim().min(2, "Office Address is required"),
+  address: yup.string().min(2, "Office Address is required"),
   state: yup.string().trim().required("State is required"),
   city: yup.string().trim().required("City is required"),
   pincode: yup
