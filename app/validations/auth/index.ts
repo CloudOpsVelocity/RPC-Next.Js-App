@@ -110,6 +110,15 @@ const builderSchema = yup.object().shape({
 
   companyStartDate: yup.date().required("Company start date is required"),
 });
+export const builderSchemaIndex1 = yup.object().shape({
+  address: yup.string().trim().min(2, "Office Address is required"),
+  state: yup.string().trim().required("State is required"),
+  city: yup.string().trim().required("City is required"),
+  pincode: yup
+    .string()
+    .required("PIN code is required")
+    .matches(/^[1-9][0-9]{5}$/, "Valid 6-digit PIN code is required"),
+});
 
 const textAreaScema = yup.object().shape({
   vission: yup

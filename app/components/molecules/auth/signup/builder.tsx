@@ -1,7 +1,7 @@
 "use client";
 import dayjs from "dayjs";
 import "@mantine/dates/styles.css";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Stepper,
   Button,
@@ -44,6 +44,7 @@ import {
 import {
   agentSchema,
   builderSchema,
+  builderSchemaIndex1,
   textAreaScema,
 } from "@/app/validations/auth";
 import CountryInput from "@/app/components/atoms/CountryInput";
@@ -98,6 +99,9 @@ function Builder() {
       prevMobile: 0,
       prevEmail: "",
     },
+    validateInputOnBlur: true,
+    validateInputOnChange: true,
+
     validate: (values) => {
       if (active === 0) {
         const data = yupResolver(agentSchema)(values);
@@ -105,21 +109,9 @@ function Builder() {
       }
 
       if (active === 1) {
-        return {
-          address:
-            values.address.trim().length < 2 ? "Address is required" : null,
-          state: values.state.trim().length === 0 ? "State is required" : null,
-          city:
-            // @ts-ignore
-            values.city === null || values?.city.trim().length === 0
-              ? "City is required"
-              : null,
-          pincode: !values.pincode
-            ? "PIN code is required"
-            : !/^[1-9][0-9]{5}$/.test(String(values.pincode))
-            ? "Valid 6-digit PIN code is required"
-            : null,
-        };
+        const data = yupResolver(builderSchemaIndex1)(values);
+        console.log(data);
+        return data;
       }
 
       if (active === 2) {
@@ -134,8 +126,6 @@ function Builder() {
 
       return {};
     },
-    validateInputOnBlur: true,
-    validateInputOnChange: true,
   });
   const { data: statesData, isLoading: isLoadingStates } = useQuery(
     ["states"],
@@ -153,6 +143,7 @@ function Builder() {
       enabled: !!form.values.state,
     }
   );
+  console.log(form.errors);
 
   const OtpCallback = () => {
     close();
@@ -463,7 +454,7 @@ function Builder() {
             required
             size="lg"
             label="Office Address"
-            placeholder="Enter your office address here"
+            placeholder="Enter your office address"
             {...form.getInputProps("address")}
             onBlur={(e) => handleTrimAndReplace(e, "address", form)}
             classNames={{
