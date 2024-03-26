@@ -320,12 +320,12 @@ function Agent() {
           }}
         >
           <TextInput
+            onBlur={(e) => handleTrimAndReplace(e, "address", form)}
             required
             size="lg"
             label="Office Address"
             placeholder="Enter your office address here"
             {...form.getInputProps("address")}
-            onBlur={(e) => handleTrimAndReplace(e, "address", form)}
             classNames={{
               root: StepCss.inputRoot,
               input: StepCss.textInput,
@@ -334,12 +334,12 @@ function Agent() {
           />
           <TextInput
             required
+            onBlur={(e) => handleTrimAndReplace(e, "companyName", form)}
             size="lg"
             mt={"xs"}
             label="Company Name"
             placeholder="Enter your company name here"
             {...form.getInputProps("companyName")}
-            onBlur={(e) => handleTrimAndReplace(e, "companyName", form)}
             classNames={{
               root: StepCss.inputRoot,
               input: StepCss.textInput,
