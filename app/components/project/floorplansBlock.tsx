@@ -22,9 +22,10 @@ import { getProjectUnits } from "@/app/utils/api/project";
 import usePhaseWiseOverview from "@/app/hooks/usePhaseWiseOverview";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { floorImageATom } from "@/app/store/image";
-import { selectedFloorAtom } from "@/app/store/floor";
+import { floorPlansArray, selectedFloorAtom } from "@/app/store/floor";
 import Loading from "../atoms/Loader";
 import { currentPhaseAtom, propCgIdAtom } from "@/app/store/vewfloor";
+import { useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
 
 type Props = {
   data: PhaseList[];
@@ -37,8 +38,9 @@ export default function FloorplansBlock({ projName, slug }: Props) {
   const [propCgId, setPropCgId] = useAtom(propCgIdAtom);
   const [currentPhase, setCurrentPhase] = useAtom(currentPhaseAtom);
   const [floorPlanType, setFloorPlanType] = useState("type");
-  // const setSelectedFloor = useSetAtom(selectedFloorAtom);
+  const setFloorsArray = useSetAtom(floorPlansArray);
   const [selectedFloor, setSelectedFloor] = useAtom(selectedFloorAtom);
+  const [opened, { open, close }] = useFloorPlanPopup();
 
   const selectedPhase = PhaseOverview?.find(
     (phase: any) => phase.phaseId === currentPhase
@@ -116,6 +118,19 @@ export default function FloorplansBlock({ projName, slug }: Props) {
       types.includes("plot")
     ) {
       return true;
+    }
+  };
+
+  const handleOpen = () => {
+    setSelectedFloor(projectUnitsData[0]);
+    setFloorsArray(projectUnitsData);
+    open("floor");
+  };
+  const handleContainerClick = () => {
+    if (floorPlanType === "type") {
+      setSelectedFloor(projectUnitsData[0]);
+      setFloorsArray(projectUnitsData);
+      open("floor");
     }
   };
   if (isLoading) return <Loading />;
@@ -230,7 +245,10 @@ export default function FloorplansBlock({ projName, slug }: Props) {
         )}
       </div>
 
-      <div className="   h-full md:h-[547px] w-full rounded-[14px] mt-[2%] border-solid border-[1px] border-[#92B2C8] bg-[#FFF] shadow-md flex flex-col md:flex-row justify-center items-center ">
+      <div
+        className="   h-full md:h-[547px] w-full rounded-[14px] mt-[2%] border-solid border-[1px] border-[#92B2C8] bg-[#FFF] shadow-md flex flex-col md:flex-row justify-center items-center "
+        onClick={handleContainerClick}
+      >
         {floorPlanType === "type" && (
           <div className="w-full md:w-[50%] h-[456px] md:h-[547px] border-solid overflow-auto ">
             {projectUnitsData?.length !== 0 ? (
@@ -254,7 +272,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
         )}
 
         {floorPlanType == "bhk" && propCgId != projectprops.plot && (
-          <div className="w-full md:w-[50%] h-[547px] border-solid overflow-auto ">
+          <div className="w-full md:w-[50%] h-[547px] border-solid overflow-auto">
             <ByBhkBlock propCgId={propCgId} data={projectUnitsData} />
           </div>
         )}
@@ -284,14 +302,43 @@ export default function FloorplansBlock({ projName, slug }: Props) {
               selectedFloor?.plotArea &&
               "_" + selectedFloor?.plotArea + " sq.ft"}
           </p>
-
-          <FloorPlanModal
-            projName={projName}
-            propCgId={propCgId}
-            data={projectUnitsData}
-          />
+          <div className="flex justify-center items-center h-[300px] lg:h-[450px] w-full">
+            {selectedFloor?.floorPlanUrl ? (
+              <img
+                onClick={handleOpen}
+                src={selectedFloor?.floorPlanUrl as string}
+                className="w-full h-full cursor-pointer"
+                alt="image"
+              />
+            ) : (
+              <div className="flex justify-center items-center flex-col ">
+                <img
+                  onClick={handleOpen}
+                  src="/abc/noimage.svg"
+                  className="w-[80%] h-full cursor-pointer"
+                  alt="image"
+                />
+                <p className=" text-[#000] text-center text-[18px] md:text-[28px] lg:text-[32px] font-[600] ">
+                  Image is not available
+                </p>
+              </div>
+            )}
+          </div>
+          <div
+            className="bg-[#F4FBFF] p-[10px] rounded-[29px] gap-[12px] flex justify-end items-center  cursor-pointer"
+            onClick={handleOpen}
+          >
+            <p className="text-[12px] lg:text-[14px] font-[600] text-[#0073C6] underline ">
+              Click on image to open floor plan details
+            </p>
+          </div>
         </div>
       </div>
+      <FloorPlanModal
+        projName={projName}
+        propCgId={propCgId}
+        data={projectUnitsData}
+      />
     </div>
   );
 }

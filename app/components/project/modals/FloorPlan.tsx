@@ -38,11 +38,7 @@ function FloorPlanModal({ propCgId, data, projName }: Props) {
   const [opened, { open, close }] = useFloorPlanPopup();
   const scrollFiltersRef = useRef<HTMLDivElement>(null);
   const form = useForm();
-  const handleOpen = () => {
-    setSelectedFloor(data[0]);
-    setFloorsArray(data);
-    open("floor");
-  };
+
   const handleArrowClick = (side: "R" | "L"): void => {
     const scrollAmount = side === "R" ? 100 : -100;
     if (scrollFiltersRef.current) {
@@ -94,36 +90,6 @@ function FloorPlanModal({ propCgId, data, projName }: Props) {
   const [o, {}] = useSubFloorPlanPopup();
   return (
     <FormProvider form={form}>
-      <div className="flex justify-center items-center h-[300px] lg:h-[450px] w-full">
-        {selectedFloor?.floorPlanUrl ? (
-          <img
-            onClick={handleOpen}
-            src={selectedFloor?.floorPlanUrl as string}
-            className="w-full h-full cursor-pointer"
-            alt="image"
-          />
-        ) : (
-          <div className="flex justify-center items-center flex-col ">
-            <img
-              onClick={handleOpen}
-              src="/abc/noimage.svg"
-              className="w-[80%] h-full cursor-pointer"
-              alt="image"
-            />
-            <p className=" text-[#000] text-center text-[18px] md:text-[28px] lg:text-[32px] font-[600] ">
-              Image is not available
-            </p>
-          </div>
-        )}
-      </div>
-      <div
-        className="bg-[#F4FBFF] p-[10px] rounded-[29px] gap-[12px] flex justify-end items-center  cursor-pointer"
-        onClick={handleOpen}
-      >
-        <p className="text-[12px] lg:text-[14px] font-[600] text-[#0073C6] underline ">
-          Click on image to open floor plan details
-        </p>
-      </div>
       <Modal
         opened={opened}
         classNames={{
@@ -949,7 +915,7 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
           data?.floorPlanUrl ? (
           <Image
             // @ts-ignore
-            src={floorsArray[currentImg]?.floorPlanUrl || data.floorPlanUrl}
+            src={data.floorPlanUrl || floorsArray[currentImg]?.floorPlanUrl}
             alt="Floor Plan"
             height={350}
             width={800}
