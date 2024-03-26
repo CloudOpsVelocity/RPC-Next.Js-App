@@ -27,10 +27,10 @@ export default function AuthButton() {
       title="Login/ Sign up"
     />
   );
-
+  console.log(session);
   return (
     <>
-      {session && (
+      {session?.user.isActive === "Y" && session?.user.userType === "B" && (
         <a
           target="_blank"
           href={postProjectLink}
@@ -40,14 +40,17 @@ export default function AuthButton() {
           Post Your Project
         </a>
       )}
-      <a
-        target="_blank"
-        href={postListingLink}
-        className="hidden md:flex text-[12px] py-1 px-1 gap-[10px] lg:text-[20px]  justify-center items-center font-semibold md:px-5 bg-[#227FBC] md:py-1.5 rounded-xl text-white"
-      >
-        {postDetailsIcon}
-        Post Listing
-      </a>
+      {session?.user.isActive === "Y" && (
+        <a
+          target="_blank"
+          href={postListingLink}
+          className="hidden md:flex text-[12px] py-1 px-1 gap-[10px] lg:text-[20px]  justify-center items-center font-semibold md:px-5 bg-[#227FBC] md:py-1.5 rounded-xl text-white"
+        >
+          {postDetailsIcon}
+          Post Listing
+        </a>
+      )}
+
       <Dropdown />
       {/* {logoutButton} */}
     </>
@@ -99,21 +102,27 @@ function Dropdown() {
               dropdown: S.dropdown,
             }}
           >
-            {data.map((item, index) => (
-              <Menu.Item
-                key={index}
-                classNames={{
-                  itemLabel: S.itemLabel,
-                }}
-                component="a"
-                className="block text-gray-700 hover:text-green-500 transition-colors"
-                href={item.url}
-                target="_blank"
-              >
-                {item.label}
-              </Menu.Item>
-            ))}
-            <hr className=" bg-[#768AA9] h-0.5 max-w-[90%] m-auto" />
+            {session.user.isActive === "Y" && (
+              <>
+                {" "}
+                {data.map((item, index) => (
+                  <Menu.Item
+                    key={index}
+                    classNames={{
+                      itemLabel: S.itemLabel,
+                    }}
+                    component="a"
+                    className="block text-gray-700 hover:text-green-500 transition-colors"
+                    href={item.url}
+                    target="_blank"
+                  >
+                    {item.label}
+                  </Menu.Item>
+                ))}
+                <hr className=" bg-[#768AA9] h-0.5 max-w-[90%] m-auto" />
+              </>
+            )}
+
             <Menu.Item
               classNames={{
                 itemLabel: S.itemLabel,

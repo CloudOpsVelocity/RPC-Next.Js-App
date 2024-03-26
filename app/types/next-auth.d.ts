@@ -7,6 +7,8 @@ declare module "next-auth" {
       mobile: number;
       name: string;
       email: string;
+      isActive: "Y" | "N";
+      userType: "I" | "A" | "B";
     };
   }
 }
