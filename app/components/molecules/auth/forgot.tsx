@@ -112,6 +112,13 @@ function ForgotForm() {
             placeholder="Enter registerd mobile number..."
             {...form.getInputProps("mobile")}
             maxLength={10}
+            allowDecimal={false}
+            onPaste={(event) => {
+              const pastedText = event.clipboardData.getData("text/plain");
+              const trimmedText = pastedText.replace(/\s/g, "");
+              const first10Digits = trimmedText.replace(/\D/g, "").slice(0, 10);
+              form.setFieldValue("mobile", first10Digits as any);
+            }}
           />
           <div className="min-w-[30px] self-start !max-w-[75px] flex justify-center items-center ">
             <CountryInput
@@ -162,6 +169,17 @@ export default ForgotForm;
 import StepCss from "@/app/styles/Stepper.module.css";
 import ForgotSucess from "./complete/page";
 import clsx from "clsx";
+const validationSchema = yup.object().shape({
+  password: yup
+    .string()
+    .min(6, "Password must be at least 6 characters long")
+    .required("Password is required"),
+
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref("password")], "Passwords did not match")
+    .required("Please confirm your password"),
+});
 const Form = ({ status, setStatus }: any) => {
   const router = useRouter();
   const form = useForm({
@@ -170,13 +188,9 @@ const Form = ({ status, setStatus }: any) => {
       confirmPassword: "",
     },
 
-    validate: {
-      password: (value) =>
-        value.length < 6 ? "Password must be at least 6 characters long" : null,
-
-      confirmPassword: (value, values) =>
-        value !== values.password ? "Passwords did not match" : null,
-    },
+    validate: yupResolver(validationSchema),
+    validateInputOnBlur: true,
+    clearInputErrorOnChange: true,
   });
   const onSubmit = async (values: any) => {
     const data = await resetPasswordApi(values.password);
@@ -206,7 +220,7 @@ const Form = ({ status, setStatus }: any) => {
             reveal ? <EyeOpen /> : <EyeClosed />
           }
           {...form.getInputProps("password")}
-          onBlur={(e) => handleTrimAndReplace(e, "password", form)}
+          onBlurCapture={(e) => handleTrimAndReplace(e, "password", form)}
           type="text"
           classNames={{
             root: StepCss.inputRoot,
@@ -225,7 +239,9 @@ const Form = ({ status, setStatus }: any) => {
             reveal ? <EyeOpen /> : <EyeClosed />
           }
           {...form.getInputProps("confirmPassword")}
-          onBlur={(e) => handleTrimAndReplace(e, "confirmPassword", form)}
+          onBlurCapture={(e) =>
+            handleTrimAndReplace(e, "confirmPassword", form)
+          }
           type="text"
           classNames={{
             root: StepCss.inputRoot,
