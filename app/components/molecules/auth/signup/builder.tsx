@@ -388,6 +388,9 @@ function Builder() {
             onBlur={(e) => handleTrimAndReplace(e, "password", form)}
           />
           <NumberInput
+            leftSection={
+              <span className="text-[#212c33] font-medium">+91</span>
+            }
             required
             classNames={{
               input: N.classForContact,
@@ -422,7 +425,7 @@ function Builder() {
             }}
           />
 
-          <div className="min-w-[30px] !max-w-[75px] flex justify-center items-center ">
+          {/* <div className="min-w-[30px] !max-w-[75px] flex justify-center items-center ">
             <CountryInput
               onSelect={displayCountryCode}
               className={`focus:outline-none min-w-[30px] !max-w-[75px] relative ${
@@ -433,7 +436,7 @@ function Builder() {
                   : "bottom-[45px]"
               }  ml-[2px]`}
             />
-          </div>
+          </div> */}
         </Stepper.Step>
 
         <Stepper.Step

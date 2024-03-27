@@ -101,6 +101,9 @@ function ForgotForm() {
             the OTP in this phone number.
           </h3>
           <NumberInput
+            leftSection={
+              <span className="text-[#212c33] font-medium">+91</span>
+            }
             classNames={{
               input: S.classForContact,
             }}
@@ -120,7 +123,7 @@ function ForgotForm() {
               form.setFieldValue("mobile", first10Digits as any);
             }}
           />
-          <div className="min-w-[30px] self-start !max-w-[75px] flex justify-center items-center ">
+          {/* <div className="min-w-[30px] self-start !max-w-[75px] flex justify-center items-center ">
             <CountryInput
               onSelect={displayCountryCode}
               className={`focus:outline-none min-w-[30px] !max-w-[75px] relative ${
@@ -131,7 +134,7 @@ function ForgotForm() {
                   : "bottom-[47px]"
               }  ml-[2px]`}
             />
-          </div>
+          </div> */}
 
           <div className="w-full flex justify-between items-center flex-wrap-reverse">
             <Button

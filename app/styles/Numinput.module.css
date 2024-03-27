@@ -35,8 +35,8 @@
   border-radius: 5px;
 
   background: #fff;
-  padding-left: 78px;
-  padding-right: 0;
+  /* padding-left: 78px; */
+  /* padding-right: 0; */
 }
 
 .classForContact::placeholder {

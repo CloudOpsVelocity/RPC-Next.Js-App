@@ -146,6 +146,9 @@ function Individual() {
                 onBlur={(e) => handleTrimAndReplace(e, "password", form)}
               />
               <NumberInput
+                leftSection={
+                  <span className="text-[#212c33] font-medium">+91</span>
+                }
                 mt={"xs"}
                 required
                 classNames={{
@@ -182,7 +185,7 @@ function Individual() {
                 }}
               />
 
-              <div className="min-w-[30px] !max-w-[75px] flex justify-center items-center ">
+              {/* <div className="min-w-[30px] !max-w-[75px] flex justify-center items-center ">
                 <CountryInput
                   onSelect={displayCountryCode}
                   className={`focus:outline-none min-w-[30px] !max-w-[75px] relative ${
@@ -193,7 +196,7 @@ function Individual() {
                       : "bottom-[45px]"
                   }  ml-[2px]`}
                 />
-              </div>
+              </div> */}
 
               <div className="w-full flex justify-between items-center flex-wrap-reverse">
                 <Button
