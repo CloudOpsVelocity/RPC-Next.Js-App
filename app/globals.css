@@ -94,3 +94,12 @@
 .m-89d60db1[data-variant="default"] {
   --_list-border-width: 0 !important;
 }
+
+.map {
+  background-color: #148b16 !important;
+  border-radius: 5% !important;
+  border: none !important;
+}
+.leaflet-tooltip-top:before {
+  border-top-color: #148b16 !important;
+}

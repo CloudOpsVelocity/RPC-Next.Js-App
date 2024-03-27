@@ -157,7 +157,7 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
             mb={"sm"}
             {...getInputProps("question")}
             className={clsx(
-              "placeholder:!text-[#4D6677] placeholder:!text-[28px] italic font-medium leading-[23.784px]  rounded-[10px]",
+              "placeholder:!text-[#4D6677] placeholder:!text-[28px] italic font-medium leading-[23.784px]  rounded-[10px] ",
               !errors.question && "!border !border-solid !border-[#737579]"
             )}
             size="lg"

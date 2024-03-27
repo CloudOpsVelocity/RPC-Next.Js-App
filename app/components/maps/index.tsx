@@ -88,12 +88,18 @@ const Content: React.FC<any> = ({
         ))}
 
       <Marker position={position} icon={MapIcon}>
-        <Tooltip opacity={1} permanent direction="top" offset={[30, -40]}>
-          <div className=" ">
-            <p className="text-[#00487C] text-base italic font-medium leading-[normal]">
+        <Tooltip
+          opacity={1}
+          permanent
+          direction="top"
+          offset={[30, -40]}
+          className="map"
+        >
+          <div className="p-2">
+            <p className="text-white text-base italic font-medium leading-[normal]">
               Project you are exploring
             </p>
-            <p className="text-[#006A02] text-lg not-italic font-semibold leading-[normal]">
+            <p className="text-white text-lg not-italic font-semibold leading-[normal] mt-2">
               {projName}
             </p>
           </div>
