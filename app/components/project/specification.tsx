@@ -20,23 +20,18 @@ export default function Specifications({
   };
   const viewport = useRef<HTMLDivElement>(null);
   const scrollWhereIsSelected = (index: number) => {
-    // @ts-ignore
     const selectedSpecId = data[index]?.specName.toLowerCase();
     const selectedElement = document.getElementById(selectedSpecId);
-
     if (selectedElement) {
-      const titleElement = selectedElement.querySelector("h2"); // Assuming the title is wrapped in an <h1> tag
+      const titleElement = selectedElement.querySelector("h2");
       const titleHeight = titleElement?.offsetHeight || 0;
-      const position = selectedElement.offsetTop - titleHeight; // Adjust the position by subtracting the title height
-
+      const position = selectedElement.offsetTop - titleHeight;
       viewport.current!.scrollTo({
         top: position - 20,
         behavior: "smooth",
       });
     }
   };
-
-  //console.log(specs)
 
   return (
     <div

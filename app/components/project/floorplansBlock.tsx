@@ -40,7 +40,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
   const [floorPlanType, setFloorPlanType] = useState("type");
   const setFloorsArray = useSetAtom(floorPlansArray);
   const [selectedFloor, setSelectedFloor] = useAtom(selectedFloorAtom);
-  const [opened, { open, close }] = useFloorPlanPopup();
+  const [, { open }] = useFloorPlanPopup();
 
   const selectedPhase = PhaseOverview?.find(
     (phase: any) => phase.phaseId === currentPhase
