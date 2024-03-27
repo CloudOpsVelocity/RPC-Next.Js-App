@@ -95,7 +95,7 @@ function Login() {
 
         <Link
           href={"/forgot"}
-          className="text-[14px] font-400 text-[#767270] text-right w-full cursor-pointer "
+          className="text-[14px] font-medium text-[#767270] text-right w-full cursor-pointer "
         >
           Forgot Password ?
         </Link>
