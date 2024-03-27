@@ -47,42 +47,40 @@ export default function SharePopup({
           overlay: S.overlay,
         }}
       >
-        <>
-          <div className="p-5">
-            <h3 className="text-[#202020] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px] ">
-              {title}
-            </h3>
-            <p className="text-[#565D70] text-xl not-italic font-semibold leading-[normal] tracking-[0.8px] my-5">
-              Share this link via
-            </p>
-            <div className="flex space-x-4 mb-4">
-              <Share shareUrl={CopiedUrl} />
-            </div>
-            <p className="text-sm font-medium mb-2">or Copy Link</p>
-            <div className="flex items-center justify-between border rounded-md p-2">
-              <span
-                className="text-xs truncate cursor-pointer"
-                onClick={() => clipboard.copy(CopiedUrl)}
-              >
-                {CopiedUrl}
-              </span>
-              <CopyButton value={CopiedUrl}>
-                {({ copied, copy }) => (
-                  <Button
-                    className={`${
-                      clipboard.copied ? "!bg-[#148B16]" : "!bg-[#0073C6]"
-                    }`}
-                    color={clipboard.copied ? "teal" : "#0073C6"}
-                    miw={100}
-                    onClick={() => clipboard.copy(CopiedUrl)}
-                  >
-                    {clipboard.copied ? "Copied" : "Copy url"}
-                  </Button>
-                )}
-              </CopyButton>
-            </div>
+        <div className="p-5">
+          <h3 className="text-[#202020] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px] ">
+            {title}
+          </h3>
+          <p className="text-[#565D70] text-xl not-italic font-semibold leading-[normal] tracking-[0.8px] my-5">
+            Share this link via
+          </p>
+          <div className="flex space-x-4 mb-4">
+            <Share shareUrl={CopiedUrl} />
           </div>
-        </>
+          <p className="text-sm font-medium mb-2">or Copy Link</p>
+          <div className="flex items-center justify-between border rounded-md p-2">
+            <span
+              className="text-xs truncate cursor-pointer"
+              onClick={() => clipboard.copy(CopiedUrl)}
+            >
+              {CopiedUrl}
+            </span>
+            <CopyButton value={CopiedUrl}>
+              {() => (
+                <Button
+                  className={`${
+                    clipboard.copied ? "!bg-[#148B16]" : "!bg-[#0073C6]"
+                  }`}
+                  color={clipboard.copied ? "teal" : "#0073C6"}
+                  miw={100}
+                  onClick={() => clipboard.copy(CopiedUrl)}
+                >
+                  {clipboard.copied ? "Copied" : "Copy url"}
+                </Button>
+              )}
+            </CopyButton>
+          </div>
+        </div>
       </Modal>
 
       <button
