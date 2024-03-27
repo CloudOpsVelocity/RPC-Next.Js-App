@@ -4,72 +4,53 @@ import Image from "next/image";
 import React from "react";
 import PropertyHeading from "../property/heading";
 
-export default function Loans({
-  data,
-  projName,
-  type,
+export default function ProjectLoans({
+  banks,
+  name,
 }: {
-  data: Bank[];
-  projName: string;
-  type?: "prop" | "proj";
+  banks: Bank[];
+  name: string;
 }) {
   return (
     <div className="bg-white scroll-mt-[90px] py-8 w-[90%] mx-auto">
-      <div className="">
-        {type === "prop" ? (
-          <PropertyHeading
-            title="BANK APPROVALS FOR THE LISTING"
-            desc="Check the available bank approvals for the listing"
-          />
-        ) : (
-          <>
-            {" "}
-            <h2 className="text-[24px] lg:text-[32px] font-bold">
-              BANK APPROVALS OF{" "}
-              <span className="text-[#148B16] text-[32px] not-italic font-bold leading-[normal] uppercase">
-                {projName}
-              </span>
-            </h2>
-            <p className="mt-4 text-[#4D6677] text-2xl italic font-medium leading-[normal] tracking-[0.96px]">
-              Unlock Your Dream Home with Hassle-Free Bank Approval Loans
-            </p>
-          </>
-        )}
+      <h2 className="text-[24px] lg:text-[32px] font-bold">
+        BANK APPROVALS OF{" "}
+        <span className="text-[#148B16] text-[32px] not-italic font-bold leading-[normal] uppercase">
+          {name}
+        </span>
+      </h2>
+      <p className="mt-4 text-[#4D6677] text-2xl italic font-medium leading-[normal] tracking-[0.96px]">
+        Unlock Your Dream Home with Hassle-Free Bank Approval Loans
+      </p>
 
-        <div className="mt-16 flex justify-start items-center flex-wrap w-full gap-[3%] ">
-          {data?.map((item, index) => {
-            if (item.bankid != undefined && item.bankid != null) {
-              return (
-                <div className="flex  flex-col justify-center items-center mt-4 sm:max-w-[150px] md:max-w-max text-center">
+      <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 md:flex justify-start items-center flex-wrap w-full gap-[3%] h-auto">
+        {banks.map((bank, index) => {
+          return (
+            <>
+              {bank.bankid && (
+                <div
+                  key={index}
+                  className="flex  flex-col justify-center items-center mt-4 sm:max-w-[150px] md:max-w-max text-center"
+                >
                   <Image
-                    key={index}
                     src={
-                      (BankDetailsList?.get(item.bankid)?.url as string) ??
+                      BankDetailsList?.get(bank.bankid)?.url ??
                       "https://d1l03fubsuphsh.cloudfront.net/staticmedia-images-icons/project-detail/Bank-projectproperty.png"
                     }
-                    alt={item.bankName}
+                    alt={bank.bankName}
                     width={100}
                     height={50}
                     className="min-h-[55px] aspect-video"
                   />
                   <p className="mt-3 text-[#001F35] text-xl not-italic font-semibold leading-[normal] tracking-[0.8px]">
-                    {item.bankName}
+                    {bank.bankName}
                   </p>
                 </div>
-              );
-            }
-          })}
-        </div>
+              )}
+            </>
+          );
+        })}
       </div>
     </div>
   );
 }
-
-// <Image
-//   key={index}
-//   src={"/bank.png"}
-//   alt={item.constDesc}
-//   width={100}
-//   height={50}
-//   className="mb-[3%]"
-// />
