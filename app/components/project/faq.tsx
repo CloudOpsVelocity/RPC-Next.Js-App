@@ -13,8 +13,8 @@ import toast from "react-hot-toast";
 import handleTrimAndReplace from "@/app/utils/input/validations";
 import clsx from "clsx";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
-import About from "./about";
 import FaqReadMore from "../atoms/faq/FaqReadmore";
+import StepCscs from "@/app/styles/Stepper.module.css";
 
 type FaqWithBgProps = {
   data: FAQ[];
@@ -165,6 +165,9 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
             onBlur={(e) =>
               handleTrimAndReplace(e, "question", setFieldValue, "dis")
             }
+            classNames={{
+              input: StepCscs.textInput,
+            }}
           />
         </div>
         <Button
