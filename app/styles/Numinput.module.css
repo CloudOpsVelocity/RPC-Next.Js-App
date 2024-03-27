@@ -14,6 +14,9 @@
 .classForContact:focus::placeholder {
   color: transparent !important;
 }
+.input:focus::placeholder {
+  color: transparent !important;
+}
 
 .errorMsg {
   text-align: right;
@@ -69,7 +72,9 @@
   background: #fff;
   padding-left: 73px;
 }
-
+.contectInput:focus::placeholder {
+  color: transparent !important;
+}
 .description {
   display: none;
 }

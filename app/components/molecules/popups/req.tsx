@@ -213,16 +213,16 @@ const ReqForm = ({
   name: string;
 }) => {
   const { slug } = useParams<{ slug: string }>();
-  // const [status, setStatus] = useState<
-  //   "idle" | "pending" | "success" | "error" | "otp"
-  // >("idle");
+
   const form = useForm({
     initialValues: {
       name: "",
       email: "",
-      mobile: 0,
+      mobile: null,
     },
     validate: yupResolver(reqSchema),
+    validateInputOnBlur: true,
+    validateInputOnChange: true,
   });
   const displayCountryCode = (value: any) => {
     console.log(value);
@@ -293,9 +293,15 @@ const ReqForm = ({
           size="lg"
           className="w-[100%]  "
           label="Contact Number"
-          placeholder=""
+          placeholder="Enter your contact number"
           {...form.getInputProps("mobile")}
           maxLength={10}
+          onPaste={(event) => {
+            const pastedText = event.clipboardData.getData("text/plain");
+            const trimmedText = pastedText.replace(/\s/g, "");
+            const first10Digits = trimmedText.replace(/\D/g, "").slice(0, 10);
+            form.setFieldValue("mobile", first10Digits as any);
+          }}
         />
 
         <CountryInput

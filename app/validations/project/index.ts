@@ -18,12 +18,20 @@ const reqSchema = yup.object().shape({
     .matches(/^[a-zA-Z\s]*$/, "Only letters and spaces are allowed")
     .max(20, "Name should not exceed 20 characters")
     .required("Full name is required"),
-  email: yup.string().email("Invalid email").required("Email is required"),
+  email: yup
+    .string()
+    .matches(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, "Invalid email")
+    .required("Email is required")
+    .email("Invalid email"),
   mobile: yup
     .number()
     .positive("Mobile number must be positive")
     .integer("Mobile number must be an integer")
-    .typeError("Valid 10-digit contact number is required")
+    .typeError("Mobile number is required")
+    .test("mvalid", "Invalid mobile number", (val) => {
+      const strVal = val?.toString();
+      return /^[6-9]\d{9}$/.test(strVal ?? "");
+    })
     .test(
       "len",
       "Mobile number must be exactly 10 digits",
