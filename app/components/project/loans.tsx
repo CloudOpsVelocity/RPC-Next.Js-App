@@ -7,21 +7,33 @@ import PropertyHeading from "../property/heading";
 export default function ProjectLoans({
   banks,
   name,
+  type,
 }: {
+  type: string;
   banks: Bank[];
   name: string;
 }) {
   return (
     <div className="bg-white scroll-mt-[90px] py-8 w-[90%] mx-auto">
-      <h2 className="text-[24px] lg:text-[32px] font-bold">
-        BANK APPROVALS OF{" "}
-        <span className="text-[#148B16] text-[32px] not-italic font-bold leading-[normal] uppercase">
-          {name}
-        </span>
-      </h2>
-      <p className="mt-4 text-[#4D6677] text-2xl italic font-medium leading-[normal] tracking-[0.96px]">
-        Unlock Your Dream Home with Hassle-Free Bank Approval Loans
-      </p>
+      {type === "prop" ? (
+        <PropertyHeading
+          title="BANK APPROVALS OF"
+          desc="Unlock Your Dream Home with Hassle-Free Bank Approval Loans"
+          className="mb-[40px]"
+        />
+      ) : (
+        <>
+          <h2 className="text-[24px] lg:text-[32px] font-bold">
+            BANK APPROVALS OF{" "}
+            <span className="text-[#148B16] text-[32px] not-italic font-bold leading-[normal] uppercase">
+              {name}
+            </span>
+          </h2>
+          <p className="mt-4 text-[#4D6677] text-2xl italic font-medium leading-[normal] tracking-[0.96px]">
+            Unlock Your Dream Home with Hassle-Free Bank Approval Loans
+          </p>
+        </>
+      )}
 
       <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 md:flex justify-start items-center flex-wrap w-full gap-[3%] h-auto">
         {banks.map((bank, index) => {
