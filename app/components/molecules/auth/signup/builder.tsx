@@ -521,7 +521,7 @@ function Builder() {
                 const first10Digits = trimmedText
                   .replace(/\D/g, "")
                   .slice(0, 6);
-                form.setFieldValue("mobile", first10Digits as any);
+                form.setFieldValue("pincode", first10Digits as any);
               }}
             />
           </SimpleGrid>
