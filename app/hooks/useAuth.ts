@@ -142,6 +142,7 @@ export default function useAuth({
   ): Promise<AuthResult> => {
     try {
       const formData = new FormData();
+      console.log(data.companyLogo);
       formData.append("data", JSON.stringify(data));
       formData.append("logo", data.companyLogo as any);
 
