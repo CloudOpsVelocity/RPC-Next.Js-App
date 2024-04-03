@@ -9,6 +9,7 @@ import {
   Code,
   NumberInput,
   rem,
+  FocusTrap,
 } from "@mantine/core";
 import N from "@/app/styles/Numinput.module.css";
 import S from "@/app/styles/Pass.module.css";
@@ -327,19 +328,22 @@ function Agent() {
               stepIcon: active > 1 ? StepCss.stepIconActive : StepCss.stepIcon,
             }}
           >
-            <TextInput
-              required
-              size="lg"
-              label="Office Address"
-              placeholder="Enter your office address here"
-              {...form.getInputProps("address")}
-              classNames={{
-                root: StepCss.inputRoot,
-                input: StepCss.textInput,
-                error: StepCss.errorMsg,
-              }}
-              onBlurCapture={(e) => handleTrimAndReplace(e, "address", form)}
-            />
+            <FocusTrap active={form.values.address.trim().length < 1}>
+              <TextInput
+                required
+                size="lg"
+                label="Office Address"
+                placeholder="Enter your office address here"
+                {...form.getInputProps("address")}
+                classNames={{
+                  root: StepCss.inputRoot,
+                  input: StepCss.textInput,
+                  error: StepCss.errorMsg,
+                }}
+                onBlurCapture={(e) => handleTrimAndReplace(e, "address", form)}
+                data-autofocus
+              />
+            </FocusTrap>
             <TextInput
               required
               size="lg"
