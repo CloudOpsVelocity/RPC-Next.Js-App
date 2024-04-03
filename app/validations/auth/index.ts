@@ -1,8 +1,9 @@
 import * as yup from "yup";
+const nameRegex = /^[a-zA-Z\s.]*$/;
 const schema = yup.object().shape({
   name: yup
     .string()
-    .matches(/^[a-zA-Z\s]*$/, "Only letters and spaces are allowed")
+    .matches(nameRegex, "Only letters, spaces, and periods are allowed")
     .max(40, "Name should not exceed 40 characters")
     .required("Full name is required"),
   email: yup
@@ -33,7 +34,8 @@ const schema = yup.object().shape({
 const agentSchema = yup.object().shape({
   userName: yup
     .string()
-    .matches(/^[a-zA-Z\s]*$/, "Only letters and spaces are allowed")
+    .matches(nameRegex, "Only letters, spaces, and periods are allowed")
+
     .max(40, "Name should not exceed 40 characters")
     .required("Full name is required"),
   email: yup
@@ -86,21 +88,21 @@ const builderSchema = yup.object().shape({
   ceoName: yup
     .string()
     .required("CEO name is required")
-    .matches(/^[a-zA-Z\s]*$/, "Only letters and spaces are allowed")
+    .matches(nameRegex, "Only letters and spaces are allowed")
     .max(40, "Name should not exceed 40 characters"),
 
   foundedBy: yup
     .string()
     .trim()
     .required("Founded By name is required")
-    .matches(/^[a-zA-Z\s]*$/, "Only letters and spaces are allowed")
+    .matches(nameRegex, "Only letters and spaces are allowed")
     .max(40, "Name should not exceed 40 characters"),
 
   managingDirectorName: yup
     .string()
     .trim()
     .required("Managing Director name is required")
-    .matches(/^[a-zA-Z\s]*$/, "Only letters and spaces are allowed")
+    .matches(nameRegex, "Only letters and spaces are allowed")
     .max(40, "Name should not exceed 40 characters"),
   officeContact: yup
     .string()

@@ -12,7 +12,7 @@ import {
 } from "@mantine/core";
 import N from "@/app/styles/Numinput.module.css";
 import S from "@/app/styles/Pass.module.css";
-import { useForm, yupResolver } from "@mantine/form";
+import { Form, useForm, yupResolver } from "@mantine/form";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { styles } from "@/app/styles/Stepper";
@@ -186,122 +186,125 @@ function Agent() {
         close={close}
         userName={form.values.email}
       />
-      <Stepper
-        color="green"
-        iconSize={24}
-        active={active}
-        mt={"xs"}
-        size="xs"
-        className="w-full"
-        // @ts-ignore
-        styles={styles}
-        classNames={{
-          root: StepCss.root,
-          steps: active === 2 ? StepCss.rootSuccess : StepCss.steps,
-          step: StepCss.step,
-          separator: StepCss.separatorForAgent,
-          stepLabel: StepCss.steplabelCommonForAll,
-          content: StepCss.content,
-        }}
-        // styles={styles}
-      >
-        <Stepper.Step
-          label="Personal Details"
-          icon={<StepperDotGreen className={StepCss.stepperIcon} />}
+      <form onSubmit={form.onSubmit(nextStep)} className="w-full">
+        <Stepper
+          color="green"
+          iconSize={24}
+          active={active}
+          mt={"xs"}
+          size="xs"
+          className="w-full"
+          // @ts-ignore
+          styles={styles}
           classNames={{
-            stepLabel:
-              active === 0
-                ? StepCss.stepLabelActive
-                : active > 0
-                ? StepCss.stepLabelDone
-                : StepCss.stepLabel,
-            stepIcon: active === 0 ? StepCss.stepIcon : "",
+            root: StepCss.root,
+            steps: active === 2 ? StepCss.rootSuccess : StepCss.steps,
+            step: StepCss.step,
+            separator: StepCss.separatorForAgent,
+            stepLabel: StepCss.steplabelCommonForAll,
+            content: StepCss.content,
           }}
         >
-          <TextInput
-            required
-            size="lg"
-            label="Full Name"
-            placeholder="Enter your name here"
-            {...form.getInputProps("userName")}
-            onBlur={(e) => handleTrimAndReplace(e, "userName", form)}
+          <Stepper.Step
+            autoSave={"true"}
+            label="Personal Details"
+            icon={<StepperDotGreen className={StepCss.stepperIcon} />}
             classNames={{
-              root: StepCss.inputRoot,
-              input: StepCss.textInput,
-              error: StepCss.errorMsg,
+              stepLabel:
+                active === 0
+                  ? StepCss.stepLabelActive
+                  : active > 0
+                  ? StepCss.stepLabelDone
+                  : StepCss.stepLabel,
+              stepIcon: active === 0 ? StepCss.stepIcon : "",
             }}
-          />
-          <TextInput
-            required
-            size="lg"
-            mt="sm"
-            label="Email"
-            placeholder="Enter your email here"
-            {...form.getInputProps("email")}
-            onBlur={(e) => handleTrimAndReplace(e, "email", form)}
-            classNames={{
-              root: StepCss.inputRoot,
-              input: StepCss.textInput,
-              error: StepCss.errorMsg,
-            }}
-          />
-          <PasswordInput
-            required
-            classNames={{
-              visibilityToggle: S.visibilityToggle,
-              root: StepCss.inputRoot,
-              innerInput: StepCss.textInput,
-              input: StepCss.textInput,
-              error: StepCss.errorMsg,
-            }}
-            size="lg"
-            mt={"xs"}
-            label="Password"
-            placeholder="Enter your password here"
-            {...form.getInputProps("password")}
-            visibilityToggleIcon={({ reveal }) =>
-              reveal ? <EyeOpen /> : <EyeClosed />
-            }
-            onBlur={(e) => handleTrimAndReplace(e, "password", form)}
-          />
-          <NumberInput
-            leftSection={
-              <span className="text-[#212c33] font-medium">+91</span>
-            }
-            required
-            hideControls
-            size="lg"
-            mt={"xs"}
-            className="w-[100%] mb-[3%] "
-            label="Contact Number"
-            placeholder="Enter your contact number"
-            {...form.getInputProps("mobile")}
-            error={
-              form.errors.mobile ||
-              (status === "error" &&
-                "Provided number is already registered with us")
-            }
-            onChange={(e) => {
-              form.setFieldValue("mobile", e as any);
-              if (status === "error") {
-                setStatus("idle");
+          >
+            <TextInput
+              required
+              size="lg"
+              label="Full Name"
+              placeholder="Enter your name here"
+              {...form.getInputProps("userName")}
+              onBlur={(e) => handleTrimAndReplace(e, "userName", form)}
+              classNames={{
+                root: StepCss.inputRoot,
+                input: StepCss.textInput,
+                error: StepCss.errorMsg,
+              }}
+            />
+            <TextInput
+              required
+              size="lg"
+              mt="sm"
+              label="Email"
+              placeholder="Enter your email here"
+              {...form.getInputProps("email")}
+              onBlur={(e) => handleTrimAndReplace(e, "email", form)}
+              classNames={{
+                root: StepCss.inputRoot,
+                input: StepCss.textInput,
+                error: StepCss.errorMsg,
+              }}
+            />
+            <PasswordInput
+              required
+              classNames={{
+                visibilityToggle: S.visibilityToggle,
+                root: StepCss.inputRoot,
+                innerInput: StepCss.textInput,
+                input: StepCss.textInput,
+                error: StepCss.errorMsg,
+              }}
+              size="lg"
+              mt={"xs"}
+              label="Password"
+              placeholder="Enter your password here"
+              {...form.getInputProps("password")}
+              visibilityToggleIcon={({ reveal }) =>
+                reveal ? <EyeOpen /> : <EyeClosed />
               }
-            }}
-            classNames={{
-              root: StepCss.inputRoot,
-              input: N.classForContact,
-              error: StepCss.errorMsg,
-            }}
-            maxLength={10}
-            allowDecimal={false}
-            onPaste={(event) => {
-              const pastedText = event.clipboardData.getData("text/plain");
-              const trimmedText = pastedText.replace(/\s/g, "");
-              const first10Digits = trimmedText.replace(/\D/g, "").slice(0, 10);
-              form.setFieldValue("mobile", first10Digits as any);
-            }}
-          />
-          {/* <div className="min-w-[30px] !max-w-[75px] flex justify-center items-center ">
+              onBlur={(e) => handleTrimAndReplace(e, "password", form)}
+            />
+            <NumberInput
+              leftSection={
+                <span className="text-[#212c33] font-medium">+91</span>
+              }
+              required
+              hideControls
+              size="lg"
+              mt={"xs"}
+              className="w-[100%] mb-[3%] "
+              label="Contact Number"
+              placeholder="Enter your contact number"
+              {...form.getInputProps("mobile")}
+              error={
+                form.errors.mobile ||
+                (status === "error" &&
+                  "Provided number is already registered with us")
+              }
+              onChange={(e) => {
+                form.setFieldValue("mobile", e as any);
+                if (status === "error") {
+                  setStatus("idle");
+                }
+              }}
+              classNames={{
+                root: StepCss.inputRoot,
+                input: N.classForContact,
+                error: StepCss.errorMsg,
+              }}
+              maxLength={10}
+              allowDecimal={false}
+              onPaste={(event) => {
+                const pastedText = event.clipboardData.getData("text/plain");
+                const trimmedText = pastedText.replace(/\s/g, "");
+                const first10Digits = trimmedText
+                  .replace(/\D/g, "")
+                  .slice(0, 10);
+                form.setFieldValue("mobile", first10Digits as any);
+              }}
+            />
+            {/* <div className="min-w-[30px] !max-w-[75px] flex justify-center items-center ">
             <CountryInput
               onSelect={displayCountryCode}
               className={`focus:outline-none min-w-[30px] !max-w-[75px] relative ${
@@ -313,84 +316,89 @@ function Agent() {
               }  ml-[2px]`}
             />
           </div> */}
-        </Stepper.Step>
+          </Stepper.Step>
 
-        <Stepper.Step
-          label="Address & Others"
-          icon={active > 0 ? <StepperDotGreen /> : <StepperDotGray />}
-          classNames={{
-            stepLabel: active > 1 ? StepCss.stepLabelActive : StepCss.stepLabel,
-            stepIcon: active > 1 ? StepCss.stepIconActive : StepCss.stepIcon,
-          }}
-        >
-          <TextInput
-            required
-            size="lg"
-            label="Office Address"
-            placeholder="Enter your office address here"
-            {...form.getInputProps("address")}
+          <Stepper.Step
+            label="Address & Others"
+            icon={active > 0 ? <StepperDotGreen /> : <StepperDotGray />}
             classNames={{
-              root: StepCss.inputRoot,
-              input: StepCss.textInput,
-              error: StepCss.errorMsg,
+              stepLabel:
+                active > 1 ? StepCss.stepLabelActive : StepCss.stepLabel,
+              stepIcon: active > 1 ? StepCss.stepIconActive : StepCss.stepIcon,
             }}
-            onBlurCapture={(e) => handleTrimAndReplace(e, "address", form)}
-          />
-          <TextInput
-            required
-            size="lg"
-            mt={"xs"}
-            label="Company Name"
-            placeholder="Enter your company name here"
-            {...form.getInputProps("companyName")}
-            classNames={{
-              root: StepCss.inputRoot,
-              input: StepCss.textInput,
-              error: StepCss.errorMsg,
-            }}
-            onBlurCapture={(e) => handleTrimAndReplace(e, "companyName", form)}
-          />
-          <DropZone
-            onLogoSelect={handleLogoSelect}
-            logo={form.values.companyLogo}
-          />
-        </Stepper.Step>
+          >
+            <TextInput
+              required
+              size="lg"
+              label="Office Address"
+              placeholder="Enter your office address here"
+              {...form.getInputProps("address")}
+              classNames={{
+                root: StepCss.inputRoot,
+                input: StepCss.textInput,
+                error: StepCss.errorMsg,
+              }}
+              onBlurCapture={(e) => handleTrimAndReplace(e, "address", form)}
+            />
+            <TextInput
+              required
+              size="lg"
+              mt={"xs"}
+              label="Company Name"
+              placeholder="Enter your company name here"
+              {...form.getInputProps("companyName")}
+              classNames={{
+                root: StepCss.inputRoot,
+                input: StepCss.textInput,
+                error: StepCss.errorMsg,
+              }}
+              onBlurCapture={(e) =>
+                handleTrimAndReplace(e, "companyName", form)
+              }
+            />
+            <DropZone
+              onLogoSelect={handleLogoSelect}
+              logo={form.values.companyLogo}
+            />
+          </Stepper.Step>
 
-        <Stepper.Completed>
-          {/* Completed! Form values: */}
-          <Success />
-          {/* <Code block mt="xl">
+          <Stepper.Completed>
+            {/* Completed! Form values: */}
+            <Success />
+            {/* <Code block mt="xl">
             {JSON.stringify(form.values, null, 2)}
           </Code> */}
-          {/* {(window.location.href = "http://localhost:3000/success")} */}
-        </Stepper.Completed>
-      </Stepper>
+            {/* {(window.location.href = "http://localhost:3000/success")} */}
+          </Stepper.Completed>
+        </Stepper>
 
-      <Group justify="flex-end" className="w-full">
-        {active !== 2 && (
-          <div className="w-[100%] flex justify-between items-center flex-wrap">
-            <Button
-              mt="sm"
-              onClick={() => {
-                active !== 0 ? prevStep() : router.back();
-              }}
-              className="!rounded-[6px] !border-solid  !w-[49%] !border-1 !border-blue-600 !bg-[#FFF] !text-[#0073C6] md:!w-[100%] md:!max-w-[178px] "
-            >
-              <BackSvg />
-              Back
-            </Button>
+        <Group justify="flex-end" className="w-full">
+          {active !== 2 && (
+            <div className="w-[100%] flex justify-between items-center flex-wrap">
+              <Button
+                mt="sm"
+                onClick={() => {
+                  active !== 0 ? prevStep() : router.back();
+                }}
+                className="!rounded-[6px] !border-solid  !w-[49%] !border-1 !border-blue-600 !bg-[#FFF] !text-[#0073C6] md:!w-[100%] md:!max-w-[178px] "
+              >
+                <BackSvg />
+                Back
+              </Button>
 
-            <Button
-              loading={status === "pending"}
-              mt="sm"
-              className="!rounded-[6px] !w-[49%] md:!w-[100%]  md:!max-w-[225px] !bg-[#0c7aca]"
-              onClick={nextStep}
-            >
-              {active === 0 ? "SAVE & VERIFY" : "SAVE & CONTINUE"}
-            </Button>
-          </div>
-        )}
-      </Group>
+              <Button
+                loading={status === "pending"}
+                mt="sm"
+                className="!rounded-[6px] !w-[49%] md:!w-[100%]  md:!max-w-[225px] !bg-[#0c7aca]"
+                // onClick={nextStep}
+                type="submit"
+              >
+                {active === 0 ? "SAVE & VERIFY" : "SAVE & CONTINUE"}
+              </Button>
+            </div>
+          )}
+        </Group>
+      </form>
       {active === 0 && (
         <>
           <p className="md:text-xl font-[400] text-[#202020] mt-[5%]">

@@ -35,6 +35,7 @@ export default function Overview({
   stateName,
   pinCode,
   builderId,
+  state,
 }: Main) {
   const { PhaseOverview, phaseList } = usePhaseWiseOverview();
   return (
@@ -51,7 +52,7 @@ export default function Overview({
             {address} {`${localityName} `}
             {`${cityName} `}
             {`${stateName ?? ""} `}
-            {pinCode}
+            {`${state} `} {pinCode}
           </p>
         </div>
         <div className="flex justify-center items-end flex-col">

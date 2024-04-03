@@ -46,6 +46,8 @@ function ForgotForm() {
   const form = useForm({
     initialValues: { mobile: null, otp: false },
     validate: yupResolver(schema),
+    validateInputOnChange: true,
+    validateInputOnBlur: true,
   });
   const onSubmit = async (values: any) => {
     setStatus("pending");
@@ -56,10 +58,7 @@ function ForgotForm() {
     }
     setStatus("idle");
   };
-  const displayCountryCode = (value: any) => {
-    // production ready display country code
-    console.log(value);
-  };
+
   const onClose = () => {
     setStatus("idle");
     close();

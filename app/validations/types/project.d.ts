@@ -31,6 +31,7 @@ export interface Main {
   floorPlanCount: number;
   saleListing: string;
   rentListing: string;
+  state: string;
 }
 
 export interface AmenityList {

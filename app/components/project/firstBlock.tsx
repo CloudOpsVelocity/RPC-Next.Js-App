@@ -5,6 +5,8 @@ import Autoplay from "embla-carousel-autoplay";
 import {
   FlooringIcon,
   FloorsIcon,
+  NextCarouselButton,
+  PrevCarouselButton,
   ReraIcon,
   ShearIcon,
 } from "@/app/images/commonSvgs";
@@ -15,7 +17,7 @@ import { formatCurrency } from "@/app/utils/numbers";
 import { formatDate } from "@/app/utils/date";
 import { getImageUrls } from "@/app/utils/image";
 import usePhaseWiseOverview from "@/app/hooks/usePhaseWiseOverview";
-
+import styles from "@/app/styles/Carousel.module.css";
 type Props = {
   projectDetails: Main | null;
 };
@@ -53,6 +55,7 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
           </div>
           <div className="relative w-full rounded-[10px]">
             <Carousel
+              classNames={styles}
               slideGap={{ base: 0, sm: "md" }}
               withIndicators
               slidesToScroll={1}
@@ -61,6 +64,8 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
               plugins={[autoplay.current]}
               onMouseEnter={autoplay.current.stop}
               onMouseLeave={autoplay.current.reset}
+              nextControlIcon={<NextCarouselButton />}
+              previousControlIcon={<PrevCarouselButton />}
             >
               {images.map((imageUrl, index) => (
                 <Carousel.Slide key={index} className="relative">
@@ -94,7 +99,7 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
                 <p className="text-[#202020]  text-sm sm:text-[20px] not-italic font-[500] leading-[normal] w-[100%] tracking-[0.32px] capitalize">
                   {projectDetails.address} {`${projectDetails.localityName} `}
                   {`${projectDetails.cityName} `}
-                  {`${projectDetails?.stateName ?? ""} `}
+                  {`${projectDetails?.stateName ?? ""} `} {projectDetails.state}{" "}
                   {projectDetails.pinCode}
                 </p>
 

@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { Carousel } from "@mantine/carousel";
-
+import styles from "@/app/styles/Carousel.module.css";
 import "@mantine/carousel/styles.css";
 import {
   NextCarouselButton,
@@ -13,6 +13,7 @@ const MainCarousel = ({ children }: { children: React.ReactNode }) => {
   const isMobile = useMediaQuery("(max-width: 750px)");
   return (
     <Carousel
+      classNames={styles}
       nextControlIcon={<NextCarouselButton />}
       previousControlIcon={<PrevCarouselButton />}
       mt={30}
@@ -22,8 +23,6 @@ const MainCarousel = ({ children }: { children: React.ReactNode }) => {
       slideGap={{ sm: "md", md: "72px" }}
       align="start"
       px={isMobile ? 5 : 100}
-
-      //orientation="horizontal"
     >
       {children}
     </Carousel>

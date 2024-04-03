@@ -312,120 +312,123 @@ function Builder() {
         close={close}
         userName={form.values.email}
       />
-      <Stepper
-        //@ts-ignore
-        styles={styles}
-        size="xs"
-        active={active}
-        className="w-full"
-        color="green"
-        iconSize={24}
-        mt={"xs"}
-        classNames={{
-          root: StepCss.root,
-          steps: active === 4 ? StepCss.rootSuccess : StepCss.steps,
-          step: StepCss.step,
-          separator: StepCss.separator,
-          stepLabel: StepCss.steplabelCommonForAll,
-          content: StepCss.content,
-        }}
-      >
-        <Stepper.Step
-          label="Personal Details"
-          icon={<StepperDotGreen />}
+      <form onSubmit={form.onSubmit(nextStep)} className="w-full">
+        <Stepper
+          //@ts-ignore
+          styles={styles}
+          size="xs"
+          active={active}
+          className="w-full"
+          color="green"
+          iconSize={24}
+          mt={"xs"}
           classNames={{
-            stepIcon: active === 0 ? StepCss.stepIcon : "",
-            stepLabel:
-              active === 0
-                ? StepCss.stepLabelActive
-                : active > 0
-                ? StepCss.stepLabelDone
-                : StepCss.stepLabel,
+            root: StepCss.root,
+            steps: active === 4 ? StepCss.rootSuccess : StepCss.steps,
+            step: StepCss.step,
+            separator: StepCss.separator,
+            stepLabel: StepCss.steplabelCommonForAll,
+            content: StepCss.content,
           }}
         >
-          <TextInput
-            required
-            size="lg"
-            label="Full Name"
-            placeholder="Enter your name here"
-            {...form.getInputProps("userName")}
-            onBlur={(e) => handleTrimAndReplace(e, "userName", form)}
+          <Stepper.Step
+            label="Personal Details"
+            icon={<StepperDotGreen />}
             classNames={{
-              root: StepCss.inputRoot,
-              input: StepCss.textInput,
-              error: StepCss.errorMsg,
+              stepIcon: active === 0 ? StepCss.stepIcon : "",
+              stepLabel:
+                active === 0
+                  ? StepCss.stepLabelActive
+                  : active > 0
+                  ? StepCss.stepLabelDone
+                  : StepCss.stepLabel,
             }}
-          />
-          <TextInput
-            required
-            size="lg"
-            mt="sm"
-            label="Email"
-            placeholder="Enter your email here"
-            {...form.getInputProps("email")}
-            onBlur={(e) => handleTrimAndReplace(e, "email", form)}
-            classNames={{
-              root: StepCss.inputRoot,
-              input: StepCss.textInput,
-              error: StepCss.errorMsg,
-            }}
-          />
-          <PasswordInput
-            required
-            size="lg"
-            mt="sm"
-            classNames={{
-              innerInput: StepCss.textInput,
-              input: StepCss.textInput,
-              error: StepCss.errorMsg,
-            }}
-            label="Password"
-            placeholder="Enter your password here"
-            {...form.getInputProps("password")}
-            visibilityToggleIcon={({ reveal }) =>
-              reveal ? <EyeOpen /> : <EyeClosed />
-            }
-            onBlur={(e) => handleTrimAndReplace(e, "password", form)}
-          />
-          <NumberInput
-            leftSection={
-              <span className="text-[#212c33] font-medium">+91</span>
-            }
-            required
-            classNames={{
-              input: N.classForContact,
-              error: StepCss.errorMsg,
-            }}
-            hideControls
-            size="lg"
-            mt="sm"
-            className="w-[100%] mb-[3%] "
-            label="Contact Number"
-            placeholder="Enter your contact number here"
-            {...form.getInputProps("mobile")}
-            error={
-              form.errors.mobile ||
-              (status === "error" &&
-                "Provided number is already registered with us")
-            }
-            onChange={(e) => {
-              form.setFieldValue("mobile", e as any);
-              if (status === "error") {
-                setStatus("idle");
+          >
+            <TextInput
+              required
+              size="lg"
+              label="Full Name"
+              placeholder="Enter your name here"
+              {...form.getInputProps("userName")}
+              onBlur={(e) => handleTrimAndReplace(e, "userName", form)}
+              classNames={{
+                root: StepCss.inputRoot,
+                input: StepCss.textInput,
+                error: StepCss.errorMsg,
+              }}
+            />
+            <TextInput
+              required
+              size="lg"
+              mt="sm"
+              label="Email"
+              placeholder="Enter your email here"
+              {...form.getInputProps("email")}
+              onBlur={(e) => handleTrimAndReplace(e, "email", form)}
+              classNames={{
+                root: StepCss.inputRoot,
+                input: StepCss.textInput,
+                error: StepCss.errorMsg,
+              }}
+            />
+            <PasswordInput
+              required
+              size="lg"
+              mt="sm"
+              classNames={{
+                innerInput: StepCss.textInput,
+                input: StepCss.textInput,
+                error: StepCss.errorMsg,
+              }}
+              label="Password"
+              placeholder="Enter your password here"
+              {...form.getInputProps("password")}
+              visibilityToggleIcon={({ reveal }) =>
+                reveal ? <EyeOpen /> : <EyeClosed />
               }
-            }}
-            maxLength={10}
-            withErrorStyles={true}
-            allowDecimal={false}
-            onPaste={(event) => {
-              const pastedText = event.clipboardData.getData("text/plain");
-              const trimmedText = pastedText.replace(/\s/g, "");
-              const first10Digits = trimmedText.replace(/\D/g, "").slice(0, 10);
-              form.setFieldValue("mobile", first10Digits as any);
-            }}
-          />
+              onBlur={(e) => handleTrimAndReplace(e, "password", form)}
+            />
+            <NumberInput
+              leftSection={
+                <span className="text-[#212c33] font-medium">+91</span>
+              }
+              required
+              classNames={{
+                input: N.classForContact,
+                error: StepCss.errorMsg,
+              }}
+              hideControls
+              size="lg"
+              mt="sm"
+              className="w-[100%] mb-[3%] "
+              label="Contact Number"
+              placeholder="Enter your contact number here"
+              {...form.getInputProps("mobile")}
+              error={
+                form.errors.mobile ||
+                (status === "error" &&
+                  "Provided number is already registered with us")
+              }
+              onChange={(e) => {
+                form.setFieldValue("mobile", e as any);
+                if (status === "error") {
+                  setStatus("idle");
+                }
+              }}
+              maxLength={10}
+              withErrorStyles={true}
+              allowDecimal={false}
+              onPaste={(event) => {
+                const pastedText = event.clipboardData.getData("text/plain");
+                const trimmedText = pastedText.replace(/\s/g, "");
+                const first10Digits = trimmedText
+                  .replace(/\D/g, "")
+                  .slice(0, 10);
+                form.setFieldValue("mobile", first10Digits as any);
+              }}
+            />
 
-          {/* <div className="min-w-[30px] !max-w-[75px] flex justify-center items-center ">
+            {/* <div className="min-w-[30px] !max-w-[75px] flex justify-center items-center ">
             <CountryInput
               onSelect={displayCountryCode}
               className={`focus:outline-none min-w-[30px] !max-w-[75px] relative ${
@@ -437,336 +440,338 @@ function Builder() {
               }  ml-[2px]`}
             />
           </div> */}
-        </Stepper.Step>
+          </Stepper.Step>
 
-        <Stepper.Step
-          label="Address & Other"
-          icon={active >= 1 ? <StepperDotGreen /> : <StepperDotGray />}
-          classNames={{
-            stepLabel:
-              active === 1
-                ? StepCss.stepLabelActive
-                : active > 1
-                ? StepCss.stepLabelDone
-                : StepCss.stepLabel,
-            stepIcon: active > 1 ? StepCss.stepIconActive : StepCss.stepIcon,
-          }}
-        >
-          <TextInput
-            required
-            size="lg"
-            label="Office Address"
-            placeholder="Enter your office address"
-            {...form.getInputProps("address")}
+          <Stepper.Step
+            label="Address & Other"
+            icon={active >= 1 ? <StepperDotGreen /> : <StepperDotGray />}
             classNames={{
-              root: StepCss.inputRoot,
-              input: StepCss.textInput,
-              error: StepCss.errorMsg,
+              stepLabel:
+                active === 1
+                  ? StepCss.stepLabelActive
+                  : active > 1
+                  ? StepCss.stepLabelDone
+                  : StepCss.stepLabel,
+              stepIcon: active > 1 ? StepCss.stepIconActive : StepCss.stepIcon,
             }}
-            onBlurCapture={(e) => handleTrimAndReplace(e, "address", form)}
-          />
-          <Select
-            rightSection={<DropdownArrowIcon />}
-            required
-            size="lg"
-            mt="md"
-            label="State"
-            placeholder="Select state"
-            data={isLoadingStates ? [] : stateParser(statesData) || []}
-            searchable
-            {...form.getInputProps("state")}
-            maxDropdownHeight={200}
-            onChange={(e) => handleStateChange(e as string)}
-            classNames={{
-              root: StepCss.inputRoot,
-              input: StepCss.textInput,
-              error: StepCss.errorMsg,
-            }}
-          />
-          <SimpleGrid cols={2}>
+          >
+            <TextInput
+              required
+              size="lg"
+              label="Office Address"
+              placeholder="Enter your office address"
+              {...form.getInputProps("address")}
+              classNames={{
+                root: StepCss.inputRoot,
+                input: StepCss.textInput,
+                error: StepCss.errorMsg,
+              }}
+              onBlurCapture={(e) => handleTrimAndReplace(e, "address", form)}
+            />
             <Select
               rightSection={<DropdownArrowIcon />}
               required
               size="lg"
               mt="md"
-              label="City"
-              placeholder="Select city"
-              data={isLoadingCities ? [] : cityParser(citiesData) || []}
+              label="State"
+              placeholder="Select state"
+              data={isLoadingStates ? [] : stateParser(statesData) || []}
               searchable
-              {...form.getInputProps("city")}
+              {...form.getInputProps("state")}
               maxDropdownHeight={200}
+              onChange={(e) => handleStateChange(e as string)}
               classNames={{
                 root: StepCss.inputRoot,
                 input: StepCss.textInput,
                 error: StepCss.errorMsg,
               }}
             />
-            <NumberInput
-              required
-              size="lg"
-              mt="md"
-              hideControls
-              label="Pincode"
-              placeholder="Enter pincode"
-              {...form.getInputProps("pincode")}
-              classNames={{
-                root: StepCss.inputRoot,
-                input: StepCss.textInput,
-                error: StepCss.errorMsg,
-              }}
-              maxLength={6}
-              onPaste={(event) => {
-                const pastedText = event.clipboardData.getData("text/plain");
-                const trimmedText = pastedText.replace(/\s/g, "");
-                const first10Digits = trimmedText
-                  .replace(/\D/g, "")
-                  .slice(0, 6);
-                form.setFieldValue("pincode", first10Digits as any);
-              }}
+            <SimpleGrid cols={2}>
+              <Select
+                rightSection={<DropdownArrowIcon />}
+                required
+                size="lg"
+                mt="md"
+                label="City"
+                placeholder="Select city"
+                data={isLoadingCities ? [] : cityParser(citiesData) || []}
+                searchable
+                {...form.getInputProps("city")}
+                maxDropdownHeight={200}
+                classNames={{
+                  root: StepCss.inputRoot,
+                  input: StepCss.textInput,
+                  error: StepCss.errorMsg,
+                }}
+              />
+              <NumberInput
+                required
+                size="lg"
+                mt="md"
+                hideControls
+                label="Pincode"
+                placeholder="Enter pincode"
+                {...form.getInputProps("pincode")}
+                classNames={{
+                  root: StepCss.inputRoot,
+                  input: StepCss.textInput,
+                  error: StepCss.errorMsg,
+                }}
+                maxLength={6}
+                onPaste={(event) => {
+                  const pastedText = event.clipboardData.getData("text/plain");
+                  const trimmedText = pastedText.replace(/\s/g, "");
+                  const first10Digits = trimmedText
+                    .replace(/\D/g, "")
+                    .slice(0, 6);
+                  form.setFieldValue("pincode", first10Digits as any);
+                }}
+              />
+            </SimpleGrid>
+            <DropZone
+              onLogoSelect={handleLogoSelect}
+              logo={form.values.companyLogo}
             />
-          </SimpleGrid>
-          <DropZone
-            onLogoSelect={handleLogoSelect}
-            logo={form.values.companyLogo}
-          />
-        </Stepper.Step>
+          </Stepper.Step>
 
-        <Stepper.Step
-          label="Company details"
-          icon={active >= 2 ? <StepperDotGreen /> : <StepperDotGray />}
-          classNames={{
-            stepLabel:
-              active === 2
-                ? StepCss.stepLabelActive
-                : active > 2
-                ? StepCss.stepLabelDone
-                : StepCss.stepLabel,
-            stepIcon: active > 2 ? StepCss.stepIconActive : StepCss.stepIcon,
-          }}
-        >
-          <ScrollArea h={420} pr={10} viewportRef={viewport} offsetScrollbars>
-            <TextInput
-              id="companyName"
-              required
-              size="lg"
-              mt="md"
-              label="Builder Owned By"
-              placeholder="Enter your builder name"
-              {...form.getInputProps("companyName")}
-              classNames={{
-                root: StepCss.inputRoot,
-                input: StepCss.textInput,
-                error: StepCss.errorMsg,
-              }}
-              onBlurCapture={(e) =>
-                handleTrimAndReplace(e, "companyName", form)
-              }
-            />
-            <MultiSelect
-              id="branch"
-              rightSection={<DropdownArrowIcon />}
-              required
-              size="lg"
-              mt="md"
-              checkIconPosition="right"
-              label="Branch"
-              searchable
-              placeholder={`${
-                form.values.branch.length === 0 ? "-- Select Brach--" : ""
-              }`}
-              classNames={{
-                pill: StepCss.pill,
-                inputField: StepCss.textInput,
-                error: StepCss.errorMsg,
-              }}
-              data={isLoadingBrach ? [] : cityParser(brachData) || []}
-              {...form.getInputProps("branch")}
-            />
-            <DateInput
-              id="companyStartDate"
-              required
-              size="lg"
-              mt="md"
-              label="Company Start Date"
-              rightSection={<DateIcons />}
-              rightSectionPointerEvents="none"
-              placeholder="DD/MM/YYYY"
-              {...form.getInputProps("companyStartDate")}
-              maxDate={dayjs(new Date()).toDate()}
-              classNames={{
-                root: StepCss.inputRoot,
-                input: StepCss.textInput,
-                error: StepCss.errorMsg,
-              }}
-            />
-            <TextInput
-              id="foundedBy"
-              required
-              size="lg"
-              mt="md"
-              label="Founded By"
-              placeholder="Founder name"
-              {...form.getInputProps("foundedBy")}
-              onBlur={(e) => {
-                handleTrimAndReplace(e, "foundedBy", form);
-                e.target.value !== "" && scrollToBottom();
-              }}
-              classNames={{
-                root: StepCss.inputRoot,
-                input: StepCss.textInput,
-                error: StepCss.errorMsg,
-              }}
-              onBlurCapture={(e) => {
-                handleTrimAndReplace(e, "foundedBy", form);
-                e.target.value !== "" && scrollToBottom();
-              }}
-            />
-            <TextInput
-              id="ceoName"
-              required
-              size="lg"
-              mt="md"
-              label="Ceo Name"
-              placeholder="Enter Ceo Name"
-              {...form.getInputProps("ceoName")}
-              classNames={{
-                root: StepCss.inputRoot,
-                input: StepCss.textInput,
-                error: StepCss.errorMsg,
-              }}
-              onBlurCapture={(e) => {
-                handleTrimAndReplace(e, "ceoName", form);
-              }}
-            />
-            <TextInput
-              id="managingDirectorName"
-              required
-              size="lg"
-              mt="md"
-              label="Managing Director"
-              placeholder="Enter Managing Director Name"
-              {...form.getInputProps("managingDirectorName")}
-              classNames={{
-                root: StepCss.inputRoot,
-                input: StepCss.textInput,
-                error: StepCss.errorMsg,
-              }}
-              onBlurCapture={(e) => {
-                handleTrimAndReplace(e, "managingDirectorName", form);
-              }}
-            />
-            <TextInput
-              id="officeContact"
-              required
-              size="lg"
-              mt="md"
-              label="Office Contact"
-              placeholder="Enter Office Contact"
-              {...form.getInputProps("officeContact")}
-              classNames={{
-                root: StepCss.inputRoot,
-                input: StepCss.textInput,
-                error: StepCss.errorMsg,
-              }}
-              onBlurCapture={(e) => {
-                handleTrimAndReplace(e, "officeContact", form);
-              }}
-            />
-          </ScrollArea>
-        </Stepper.Step>
-
-        <Stepper.Step
-          label="Description"
-          icon={active >= 3 ? <StepperDotGreen /> : <StepperDotGray />}
-          classNames={{
-            stepLabel:
-              active === 3
-                ? StepCss.stepLabelActive
-                : active > 3
-                ? StepCss.stepLabelDone
-                : StepCss.stepLabel,
-            stepIcon: active > 3 ? StepCss.stepIconActive : StepCss.stepIcon,
-          }}
-        >
-          <Textarea
-            size="lg"
-            required
-            placeholder="Enter your company vision that you are going to provide buyers."
-            label="Company Vision"
-            autosize
-            minRows={5}
-            maxRows={5}
-            {...form.getInputProps("vission")}
+          <Stepper.Step
+            label="Company details"
+            icon={active >= 2 ? <StepperDotGreen /> : <StepperDotGray />}
             classNames={{
-              root: StepCss.inputRoot,
-              input: StepCss.textInput,
-              error: StepCss.errorMsg,
+              stepLabel:
+                active === 2
+                  ? StepCss.stepLabelActive
+                  : active > 2
+                  ? StepCss.stepLabelDone
+                  : StepCss.stepLabel,
+              stepIcon: active > 2 ? StepCss.stepIconActive : StepCss.stepIcon,
             }}
-            onBlurCapture={(e) => {
-              handleTrimAndReplace(e, "vission", form);
-            }}
-          />
-          <Text size="sm" ta={"right"}>
-            maximum 5000 characters
-          </Text>
-          <Textarea
-            size="lg"
-            required
-            mt={"md"}
-            placeholder="Enter your bulder's description that you are going to provide buyers."
-            label="Builder's Description"
-            autosize
-            minRows={5}
-            maxRows={5}
-            {...form.getInputProps("mission")}
-            classNames={{
-              root: StepCss.inputRoot,
-              input: StepCss.textInput,
-              error: StepCss.errorMsg,
-            }}
-            onBlurCapture={(e) => {
-              handleTrimAndReplace(e, "mission", form);
-            }}
-          />{" "}
-          <Text size="sm" ta={"right"} mb={"lg"}>
-            maximum 5000 characters
-          </Text>
-        </Stepper.Step>
+          >
+            <ScrollArea h={420} pr={10} viewportRef={viewport} offsetScrollbars>
+              <TextInput
+                id="companyName"
+                required
+                size="lg"
+                mt="md"
+                label="Builder Owned By"
+                placeholder="Enter your builder name"
+                {...form.getInputProps("companyName")}
+                classNames={{
+                  root: StepCss.inputRoot,
+                  input: StepCss.textInput,
+                  error: StepCss.errorMsg,
+                }}
+                onBlurCapture={(e) =>
+                  handleTrimAndReplace(e, "companyName", form)
+                }
+              />
+              <MultiSelect
+                id="branch"
+                rightSection={<DropdownArrowIcon />}
+                required
+                size="lg"
+                mt="md"
+                checkIconPosition="right"
+                label="Branch"
+                searchable
+                placeholder={`${
+                  form.values.branch.length === 0 ? "-- Select Brach--" : ""
+                }`}
+                classNames={{
+                  pill: StepCss.pill,
+                  inputField: StepCss.textInput,
+                  error: StepCss.errorMsg,
+                }}
+                data={isLoadingBrach ? [] : cityParser(brachData) || []}
+                {...form.getInputProps("branch")}
+              />
+              <DateInput
+                id="companyStartDate"
+                required
+                size="lg"
+                mt="md"
+                label="Company Start Date"
+                rightSection={<DateIcons />}
+                rightSectionPointerEvents="none"
+                placeholder="DD/MM/YYYY"
+                {...form.getInputProps("companyStartDate")}
+                maxDate={dayjs(new Date()).toDate()}
+                classNames={{
+                  root: StepCss.inputRoot,
+                  input: StepCss.textInput,
+                  error: StepCss.errorMsg,
+                }}
+              />
+              <TextInput
+                id="foundedBy"
+                required
+                size="lg"
+                mt="md"
+                label="Founded By"
+                placeholder="Founder name"
+                {...form.getInputProps("foundedBy")}
+                onBlur={(e) => {
+                  handleTrimAndReplace(e, "foundedBy", form);
+                  e.target.value !== "" && scrollToBottom();
+                }}
+                classNames={{
+                  root: StepCss.inputRoot,
+                  input: StepCss.textInput,
+                  error: StepCss.errorMsg,
+                }}
+                onBlurCapture={(e) => {
+                  handleTrimAndReplace(e, "foundedBy", form);
+                  e.target.value !== "" && scrollToBottom();
+                }}
+              />
+              <TextInput
+                id="ceoName"
+                required
+                size="lg"
+                mt="md"
+                label="Ceo Name"
+                placeholder="Enter Ceo Name"
+                {...form.getInputProps("ceoName")}
+                classNames={{
+                  root: StepCss.inputRoot,
+                  input: StepCss.textInput,
+                  error: StepCss.errorMsg,
+                }}
+                onBlurCapture={(e) => {
+                  handleTrimAndReplace(e, "ceoName", form);
+                }}
+              />
+              <TextInput
+                id="managingDirectorName"
+                required
+                size="lg"
+                mt="md"
+                label="Managing Director"
+                placeholder="Enter Managing Director Name"
+                {...form.getInputProps("managingDirectorName")}
+                classNames={{
+                  root: StepCss.inputRoot,
+                  input: StepCss.textInput,
+                  error: StepCss.errorMsg,
+                }}
+                onBlurCapture={(e) => {
+                  handleTrimAndReplace(e, "managingDirectorName", form);
+                }}
+              />
+              <TextInput
+                id="officeContact"
+                required
+                size="lg"
+                mt="md"
+                label="Office Contact"
+                placeholder="Enter Office Contact"
+                {...form.getInputProps("officeContact")}
+                classNames={{
+                  root: StepCss.inputRoot,
+                  input: StepCss.textInput,
+                  error: StepCss.errorMsg,
+                }}
+                onBlurCapture={(e) => {
+                  handleTrimAndReplace(e, "officeContact", form);
+                }}
+              />
+            </ScrollArea>
+          </Stepper.Step>
 
-        <Stepper.Completed>
-          {/* Completed! Form values: */}
-          <Success />
-          {/* <Code block mt="xl">
+          <Stepper.Step
+            label="Description"
+            icon={active >= 3 ? <StepperDotGreen /> : <StepperDotGray />}
+            classNames={{
+              stepLabel:
+                active === 3
+                  ? StepCss.stepLabelActive
+                  : active > 3
+                  ? StepCss.stepLabelDone
+                  : StepCss.stepLabel,
+              stepIcon: active > 3 ? StepCss.stepIconActive : StepCss.stepIcon,
+            }}
+          >
+            <Textarea
+              size="lg"
+              required
+              placeholder="Enter your company vision that you are going to provide buyers."
+              label="Company Vision"
+              autosize
+              minRows={5}
+              maxRows={5}
+              {...form.getInputProps("vission")}
+              classNames={{
+                root: StepCss.inputRoot,
+                input: StepCss.textInput,
+                error: StepCss.errorMsg,
+              }}
+              onBlurCapture={(e) => {
+                handleTrimAndReplace(e, "vission", form);
+              }}
+            />
+            <Text size="sm" ta={"right"}>
+              maximum 5000 characters
+            </Text>
+            <Textarea
+              size="lg"
+              required
+              mt={"md"}
+              placeholder="Enter your bulder's description that you are going to provide buyers."
+              label="Builder's Description"
+              autosize
+              minRows={5}
+              maxRows={5}
+              {...form.getInputProps("mission")}
+              classNames={{
+                root: StepCss.inputRoot,
+                input: StepCss.textInput,
+                error: StepCss.errorMsg,
+              }}
+              onBlurCapture={(e) => {
+                handleTrimAndReplace(e, "mission", form);
+              }}
+            />{" "}
+            <Text size="sm" ta={"right"} mb={"lg"}>
+              maximum 5000 characters
+            </Text>
+          </Stepper.Step>
+
+          <Stepper.Completed>
+            {/* Completed! Form values: */}
+            <Success />
+            {/* <Code block mt="xl">
             {JSON.stringify(form.values, null, 2)}
           </Code> */}
-          {/* {(window.location.href = "http://localhost:3000/success")} */}
-        </Stepper.Completed>
-      </Stepper>
+            {/* {(window.location.href = "http://localhost:3000/success")} */}
+          </Stepper.Completed>
+        </Stepper>
+        <Group justify="flex-end" className="w-full">
+          {active !== 4 && (
+            <div className="w-full lg:w-full flex justify-between items-center flex-wrap md:flex-nowrap">
+              <Button
+                mt="sm"
+                onClick={() => {
+                  active !== 0 ? prevStep() : router.back();
+                }}
+                className="!rounded-[6px] !border-solid  !w-[49%] !border-1 !border-blue-600 !bg-[#FFF] !text-[#0073C6] md:!w-[100%] md:!max-w-[178px]"
+              >
+                <BackSvg /> Back
+              </Button>
 
-      <Group justify="flex-end" className="w-full">
-        {active !== 4 && (
-          <div className="w-full lg:w-full flex justify-between items-center flex-wrap md:flex-nowrap">
-            <Button
-              mt="sm"
-              onClick={() => {
-                active !== 0 ? prevStep() : router.back();
-              }}
-              className="!rounded-[6px] !border-solid  !w-[49%] !border-1 !border-blue-600 !bg-[#FFF] !text-[#0073C6] md:!w-[100%] md:!max-w-[178px]"
-            >
-              <BackSvg /> Back
-            </Button>
+              <Button
+                loading={status === "pending"}
+                mt="sm"
+                className="!rounded-[6px] !w-[49%] md:!w-[100%]  md:!max-w-[225px] !bg-[#0c7aca]"
+                // onClick={nextStep}
+                type="submit"
+              >
+                {active === 0 ? "SAVE & VERIFY" : "SAVE & CONTINUE"}
+              </Button>
+            </div>
+          )}
+        </Group>
+      </form>
 
-            <Button
-              loading={status === "pending"}
-              mt="sm"
-              className="!rounded-[6px] !w-[49%] md:!w-[100%]  md:!max-w-[225px] !bg-[#0c7aca]"
-              onClick={nextStep}
-            >
-              {active === 0 ? "SAVE & VERIFY" : "SAVE & CONTINUE"}
-            </Button>
-          </div>
-        )}
-      </Group>
       {active === 0 && (
         <>
           <p className="md:text-xl] font-[400] text-[#202020] mt-[5%]">

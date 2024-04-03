@@ -18,6 +18,7 @@ import { parseUnits } from "@/app/utils/unitparser";
 import { QueryCache, useQuery } from "react-query";
 import { queryClient } from "@/app/utils/query";
 import { getProjectUnits } from "@/app/utils/api/project";
+import { useParams } from "next/navigation";
 
 type Props = {
   cg: any;
@@ -53,31 +54,24 @@ export default function PropertyTypeDetailsCrad({
   phase,
   data,
 }: Props) {
+  const { slug } = useParams<{ slug: string }>();
   const [, { open }] = useFloorPlanPopup();
   const setcurrentPhase = useSetAtom(currentPhaseAtom);
   const setPrpCgId = useSetAtom(propCgIdAtom);
   const setSelectedFloor = useSetAtom(selectedFloorAtom);
   const setFloorsArray = useSetAtom(floorPlansArray);
   const { data: projectUnitsData, isLoading } = useQuery({
-    queryKey: [
-      `/${getPropId(propertyType)}/${phase}/27c1a062e598c442e878d8e957500488`,
-    ],
-    queryFn: () =>
-      getProjectUnits(
-        "27c1a062e598c442e878d8e957500488",
-        phase,
-        getPropId(propertyType)
-      ),
+    queryKey: [`/${getPropId(propertyType)}/${phase}/${slug}`],
+    queryFn: () => getProjectUnits(slug, phase, getPropId(propertyType)),
   });
   const handleOpen = () => {
-    setSelectedFloor(null);
-    setFloorsArray(projectUnitsData);
     open("overview");
   };
   const updateValues = (newCurrentPhase: number, newPropCgId: number) => {
     setcurrentPhase(newCurrentPhase);
     setPrpCgId(newPropCgId);
-    setFloorsArray(data);
+    setFloorsArray(projectUnitsData);
+    setSelectedFloor(projectUnitsData[0]);
     handleOpen();
   };
 
