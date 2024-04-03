@@ -283,7 +283,7 @@ function Builder() {
       });
     }
   };
-
+  const ref = useRef<HTMLInputElement>(null);
   return (
     <div className="w-full max-w-[423px] flex justify-center items-center flex-col mt-[2%]">
       {active !== 4 && (
@@ -564,8 +564,15 @@ function Builder() {
                 onBlurCapture={(e) =>
                   handleTrimAndReplace(e, "companyName", form)
                 }
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    ref?.current?.focus();
+                  }
+                }}
               />
               <MultiSelect
+                ref={ref}
                 id="branch"
                 rightSection={<DropdownArrowIcon />}
                 required
@@ -584,6 +591,12 @@ function Builder() {
                 }}
                 data={isLoadingBrach ? [] : cityParser(brachData) || []}
                 {...form.getInputProps("branch")}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    form.values.branch.length === 0 && e.preventDefault();
+                  }
+                }}
+                hidePickedOptions
               />
               <DateInput
                 id="companyStartDate"
@@ -620,8 +633,7 @@ function Builder() {
                   error: StepCss.errorMsg,
                 }}
                 onBlurCapture={(e) => {
-                  handleTrimAndReplace(e, "foundedBy", form);
-                  e.target.value !== "" && scrollToBottom();
+                  form.validateField("foundedBy");
                 }}
               />
               <TextInput
