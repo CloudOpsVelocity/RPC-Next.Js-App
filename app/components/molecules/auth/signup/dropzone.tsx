@@ -114,8 +114,14 @@ const Preview = ({ main, logo, setError }: any) => {
           />
         </div>
         <div className="flex flex-col flex-grow ml-4">
-          <span className="font-medium text-xs md:text-base">
-            {logo ? logo.name : "No File"}
+          <span className="font-medium text-xs md:text-base text-wrap ">
+            {logo
+              ? logo.name.length > 15
+                ? `${logo.name.substring(0, 12)}...${logo.name.substring(
+                    logo.name.lastIndexOf(".") - 1
+                  )}`
+                : logo.name
+              : "No File"}
           </span>
           <span className="text-sm text-gray-500">
             {logo ? formatBytes(logo.size) : ""}
