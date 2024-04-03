@@ -99,7 +99,7 @@ function Individual() {
                 mt={"xs"}
                 size="lg"
                 className="w-[100%] mb-[3%] "
-                label="Full Name"
+                label="Your Name"
                 placeholder="Enter your name here"
                 {...form.getInputProps("name")}
                 onBlur={(e) => handleTrimAndReplace(e, "name", form)}

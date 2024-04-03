@@ -346,7 +346,7 @@ function Builder() {
             <TextInput
               required
               size="lg"
-              label="Full Name"
+              label="Your Name"
               placeholder="Enter your name here"
               {...form.getInputProps("userName")}
               onBlur={(e) => handleTrimAndReplace(e, "userName", form)}
@@ -671,8 +671,8 @@ function Builder() {
                 required
                 size="lg"
                 mt="md"
-                label="Office Contact"
-                placeholder="Enter Office Contact"
+                label="Office Contact Number"
+                placeholder="Enter Office Contact Number"
                 {...form.getInputProps("officeContact")}
                 classNames={{
                   root: StepCss.inputRoot,

@@ -222,7 +222,7 @@ function Agent() {
             <TextInput
               required
               size="lg"
-              label="Full Name"
+              label="Your Name"
               placeholder="Enter your name here"
               {...form.getInputProps("userName")}
               onBlur={(e) => handleTrimAndReplace(e, "userName", form)}
