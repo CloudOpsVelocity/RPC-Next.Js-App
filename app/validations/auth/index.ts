@@ -63,6 +63,18 @@ const agentSchema = yup.object().shape({
     )
     .required("Mobile number is required"),
 });
+export const agentSchema1 = yup.object().shape({
+  address: yup
+    .string()
+    .trim()
+    .min(2, "Address must be at least 2 characters")
+    .required("Address is required"),
+  companyName: yup
+    .string()
+    .trim()
+    .min(2, "Company name must be at least 2 characters")
+    .required("Company name is required"),
+});
 const otpSchema = yup.object().shape({
   otp: yup
     .number()
@@ -113,7 +125,7 @@ const builderSchema = yup.object().shape({
   companyStartDate: yup.date().required("Company start date is required"),
 });
 export const builderSchemaIndex1 = yup.object().shape({
-  address: yup.string().min(2, "Office Address is required"),
+  address: yup.string().min(1, "Office Address is required"),
   state: yup.string().trim().required("State is required"),
   city: yup.string().trim().required("City is required"),
   pincode: yup
