@@ -4,10 +4,10 @@ import { GlobalPageType } from "@/app/validations/global";
 
 const getProjectDetails = async (slug: string): Promise<Main> => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/basicDetails?projIdEnc=${slug}`
-    // {
-    //   cache: "no-cache",
-    // }
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/basicDetails?projIdEnc=${slug}`,
+    {
+      cache: "no-store",
+    }
     // {
     //   next: { revalidate: 30 },
     // }
