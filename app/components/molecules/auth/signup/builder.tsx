@@ -110,7 +110,6 @@ function Builder() {
 
       if (active === 1) {
         const data = yupResolver(builderSchemaIndex1)(values);
-        console.log(data);
         return data;
       }
 
@@ -623,17 +622,14 @@ function Builder() {
                 label="Founded By"
                 placeholder="Founder name"
                 {...form.getInputProps("foundedBy")}
-                onBlur={(e) => {
-                  handleTrimAndReplace(e, "foundedBy", form);
-                  e.target.value !== "" && scrollToBottom();
-                }}
                 classNames={{
                   root: StepCss.inputRoot,
                   input: StepCss.textInput,
                   error: StepCss.errorMsg,
                 }}
                 onBlurCapture={(e) => {
-                  form.validateField("foundedBy");
+                  handleTrimAndReplace(e, "foundedBy", form);
+                  e.target.value !== "" && scrollToBottom();
                 }}
               />
               <TextInput
