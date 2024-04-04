@@ -45,7 +45,7 @@ export default function Overview({
     >
       <div className="pl-[2%] pr-[2%] flex justify-between items-center ">
         <div>
-          <h2 className="text-[24px] lg:text-[32px] text-[#148B16] font-[700]">
+          <h2 className="text-[24px] lg:text-[32px] text-[#148B16] font-[700] capitalize">
             {projectName}
           </h2>
           <p className="text-[16px] lg:text-[24px] text-[#505050] font-[500] capitalize max-w-[85%]">
