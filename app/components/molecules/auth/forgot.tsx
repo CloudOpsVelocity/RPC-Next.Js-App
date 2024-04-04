@@ -105,6 +105,7 @@ function ForgotForm() {
             }
             classNames={{
               input: S.classForContact,
+              error: S.errorMsg,
             }}
             hideControls
             size="lg"
