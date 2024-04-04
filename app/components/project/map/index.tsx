@@ -39,7 +39,7 @@ const LeafMap: React.FC<{
       }),
     []
   );
-  const [selected, setSelected] = useState<string>("commute");
+  const [selected, setSelected] = useState<string>("transit_station");
   const [selectedLocation, setSelectedLocation] = useState<{
     lat: number;
     lng: number;
