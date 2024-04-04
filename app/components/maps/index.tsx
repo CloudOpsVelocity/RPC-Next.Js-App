@@ -66,7 +66,7 @@ const Content: React.FC<any> = ({
         data?.map((item: any) => (
           <Marker
             position={[parseFloat(item?.lat), parseFloat(item?.lang)]}
-            title="Hell"
+            title={item.name}
           >
             {selectedLocation?.lat === item?.lat && (
               <Tooltip opacity={1} permanent direction="top">
