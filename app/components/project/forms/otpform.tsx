@@ -30,12 +30,11 @@ export default function ReqOtpForm({ callback, values }: Props) {
       //   setError(false);
       // }
       setError(false);
-      form.setErrors({})
+      form.setErrors({});
     },
   });
 
   const onSubmit = async (value: any) => {
-
     if (form.values.otp.toString().length == 4) {
       const data = await sendContact({ ...values, otp: value.otp });
       console.log(data);
@@ -44,14 +43,13 @@ export default function ReqOtpForm({ callback, values }: Props) {
       } else {
         setError(true);
       }
-    }else{
+    } else {
       setError(false);
     }
   };
 
- 
   //console.log(error, form.values)
-console.log(form.errors)
+  console.log(form.errors);
   return (
     <div>
       <form
@@ -92,11 +90,14 @@ console.log(form.errors)
           </p>
         )}
 
-
         <PinInput
           classNames={{
             pinInput: S.pinInput,
-            input: (error || form.errors.otp) && form.values.otp.toString().length == 4 ? S.errorInput : S.input,
+            input:
+              (error || form.errors.otp) &&
+              form.values.otp.toString().length == 4
+                ? S.errorInput
+                : S.input,
           }}
           name="otp"
           size="xl"
@@ -108,7 +109,9 @@ console.log(form.errors)
 
         <Resend userName={values.mobile} />
 
-        <Button type="submit">Submit</Button>
+        <Button type="submit" className="!bg-[#0073C6]">
+          Submit
+        </Button>
       </form>
     </div>
   );
@@ -146,12 +149,12 @@ const Resend = ({ userName }: any): JSX.Element => {
     };
   }, [timerRunning]);
 
-  const resendOTP = () => {
+  const resendOTP = async () => {
     if (!timerRunning) {
       setTimeRemaining({ minutes: 0, seconds: 30 });
       setTimerRunning(true);
     }
-    // await resendOtp(userName);
+    await resendOtp(userName);
   };
 
   const { minutes, seconds } = timeRemaining;
@@ -169,9 +172,7 @@ const Resend = ({ userName }: any): JSX.Element => {
           Resend OTP
         </span>
 
-        <span
-          className=""
-        >
+        <span className="">
           {seconds > 0 || minutes > 0 ? (
             <>
               {" "}

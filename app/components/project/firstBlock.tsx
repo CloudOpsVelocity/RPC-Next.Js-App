@@ -91,19 +91,23 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
                 </p>
               )}
 
-              <div className={`ml-[2%] ${!hasReraStatus ? "mt-8" : "mt-2"}`}>
+              <div
+                className={`ml-[2%] ${
+                  !hasReraStatus ? "mt-8" : "mt-2"
+                } mb-[7px]`}
+              >
                 <h3 className="text-xl sm:text-[24px] lg:text-[28px] font-[700] text-[#00487C] uppercase">
                   {projectDetails.projectName}
                 </h3>
 
-                <p className="text-[#202020]  text-sm sm:text-[20px] not-italic font-[500] leading-[normal] w-[100%] tracking-[0.32px] capitalize">
+                <p className="text-[#202020]  text-sm sm:text-[22px] not-italic font-[600] leading-[normal] w-[100%] tracking-[0.32px] capitalize mt-3 ">
                   {projectDetails.address} {`${projectDetails.localityName} `}
                   {`${projectDetails.cityName} `}
                   {`${projectDetails?.stateName ?? ""} `} {projectDetails.state}{" "}
                   {projectDetails.pinCode}
                 </p>
 
-                <p className="text-sm sm:text-[16px] mt-[7px] mb-[7px] lg:text-[20px] font-[600] text-[#001F35]">
+                <p className="text-sm sm:text-[16px] mt-3 lg:text-[22px] font-[600] text-[#001F35]">
                   Start - End Date:
                   <span className="font-[600] text-[#202020]">
                     {" "}
@@ -112,7 +116,7 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
                   </span>
                 </p>
 
-                <p className="text-sm md:text-[20px] font-[600] text-[#666]">
+                <p className="text-sm md:text-[22px] font-[600] text-[#666] mt-3">
                   Posted By: Builder
                 </p>
               </div>

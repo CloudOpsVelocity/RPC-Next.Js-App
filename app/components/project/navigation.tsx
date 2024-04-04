@@ -1,8 +1,9 @@
 "use client";
 import { topics } from "@/app/data/projectDetails";
 import useRatings from "@/app/hooks/useRatings";
+import clsx from "clsx";
 import Image from "next/image";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 export default function Navigation() {
   const { data } = useRatings();
@@ -28,9 +29,34 @@ export default function Navigation() {
       scrollContainerRef.current.scrollLeft += scrollAmount;
     }
   };
+  const [isSticky, setIsSticky] = useState(false);
+
+  useEffect(() => {
+    function handleScroll() {
+      const sections = topics.map((topic) => document.getElementById(topic.id));
+
+      if (window.scrollY > 800) {
+        setIsSticky(true);
+      } else {
+        setIsSticky(false);
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll);
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
-    <div className="flex justify-center items-center shadow-lg w-full">
+    <div
+      className={clsx(
+        "flex justify-center items-center shadow-lg w-full",
+        isSticky && "fixed top-[90px] bg-white shadow-md z-10"
+      )}
+    >
       <Image
         src="/auth/arrow.svg"
         alt=""

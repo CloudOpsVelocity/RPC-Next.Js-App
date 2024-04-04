@@ -85,7 +85,7 @@ export default function SharePopup({
 
       <button
         onClick={open}
-        className={`shadow-md cursor-pointer gap-[4px] p-[8px] flex justify-center items-center rounded-[20px] bg-[#F3F7FF] text-[#0073C6] text-[14px] font-[600]  max-w-[140px] ml-auto ${
+        className={`shadow-md cursor-pointer gap-[4px] p-[8px] flex justify-center items-center rounded-[20px] bg-[#F3F7FF] text-[#0073C6] text-[16px] font-[600]  max-w-[150px] ml-auto ${
           title === "Share Project" ? "mt-[13px]" : ""
         }`}
       >

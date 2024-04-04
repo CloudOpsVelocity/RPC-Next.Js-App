@@ -29,8 +29,8 @@ export default function ListingRentAvail({
         Properties Today!"
       </p>
       <div className="flex  items-center gap-[58px] mt-[35px] flex-wrap">
-        <Card type="sell" s={s} r={r} />
-        <Card type="rent" s={s} r={r} />
+        <Card type="sell" s={s} r={r} projName={projName} />
+        <Card type="rent" s={s} r={r} projName={projName} />
       </div>
     </div>
   );
@@ -40,10 +40,12 @@ const Card = ({
   type,
   r,
   s,
+  projName,
 }: {
   type: "sell" | "rent";
   r: string;
   s: string;
+  projName: string;
 }) => {
   return (
     <div
@@ -59,7 +61,7 @@ const Card = ({
             <span className="capitalize">{type}</span> Listings in{" "}
           </h2>
           <h2 className="text-[#148B16] sm:text-xl  font-medium leading-6 mt-1">
-            Sarang By Sumadhura
+            {projName}
           </h2>
         </div>
         <div

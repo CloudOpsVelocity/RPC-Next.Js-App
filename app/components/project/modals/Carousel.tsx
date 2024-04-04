@@ -11,6 +11,7 @@ import { useSubFloorPlanPopup } from "@/app/hooks/useSubFloorplanPopup";
 import { projectprops } from "@/app/data/projectDetails";
 import SharePopup from "../../atoms/SharePopup";
 import { imageUrlParser } from "@/app/utils/image";
+import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 
 type CarouselModalProps = {
   opened: boolean;
@@ -110,14 +111,25 @@ const MiddleSection = ({
           "_" + selectedFloor.plotArea + " sq.ft"}
       </p>
       {selectedFloor?.floorPlanUrl ? (
-        <Image
-          // @ts-ignore
-          src={selectedFloor.floorPlanUrl}
-          radius="md"
-          h={600}
-          w={1500}
-          fit="cover"
-        />
+        <div className="w-full flex justify-center items-center">
+          <TransformWrapper>
+            <TransformComponent
+              contentStyle={{
+                width: "100%",
+                display: "block",
+              }}
+            >
+              <Image
+                // @ts-ignore
+                src={selectedFloor.floorPlanUrl}
+                radius="md"
+                h={600}
+                w={1500}
+                fit="contain"
+              />
+            </TransformComponent>
+          </TransformWrapper>
+        </div>
       ) : (
         <div>
           {emptyFilesIcon}

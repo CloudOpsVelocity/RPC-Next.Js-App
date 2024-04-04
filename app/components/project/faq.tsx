@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Accordion, Textarea, Button } from "@mantine/core";
+import { Accordion, Textarea, Button, Modal, ScrollArea } from "@mantine/core";
 import classes from "@/app/styles/FaqWithBg.module.css";
 import { FAQ } from "@/app/validations/types/project";
 import { addQna } from "@/app/utils/api/actions/Qna";
@@ -15,7 +15,10 @@ import clsx from "clsx";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import FaqReadMore from "../atoms/faq/FaqReadmore";
 import StepCscs from "@/app/styles/Stepper.module.css";
-
+import { useDisclosure, useMediaQuery } from "@mantine/hooks";
+import S from "@/app/styles/Rating.module.css";
+import { getRandomValues } from "crypto";
+import Close from "./button/close";
 type FaqWithBgProps = {
   data: FAQ[];
   projName: string;
@@ -46,6 +49,7 @@ export default function FaqWithBg({ data, projName }: FaqWithBgProps) {
               faqQuestion={faq.faqQuestion}
               faqAnswer={faq.faqAnswer}
               key={index}
+              last={index === data.length - 1}
             />
           );
         })}
@@ -112,22 +116,27 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error"
   >();
-  const { getInputProps, onSubmit, setErrors, reset, setFieldValue, errors } =
-    useForm({
-      initialValues: {
-        question: "",
-      },
-      validate: yupResolver(qnaSchema),
-    });
+  const {
+    getInputProps,
+    onSubmit,
+    setErrors,
+    reset,
+    setFieldValue,
+    errors,
+    values,
+  } = useForm({
+    initialValues: {
+      question: "",
+    },
+    validate: yupResolver(qnaSchema),
+  });
+  const [opened, { close, open: openSuccesPopup }] = useDisclosure(false);
   const formSubmit = async (values: any) => {
     if (session) {
       setStatus("pending");
       try {
         await addQna({ question: values.question, projIdEnc: slug });
-        reset();
-        toast.success("QnA added successfully", {
-          position: "bottom-center",
-        });
+        openSuccesPopup();
         setStatus("success");
       } catch (error: any) {
         setErrors({ question: error.message });
@@ -136,6 +145,10 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
     } else {
       open();
     }
+  };
+  const onClose = () => {
+    close();
+    reset();
   };
   return (
     <form
@@ -178,6 +191,12 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
           Send
         </Button>
       </div>
+      <Success
+        text={values.question}
+        opened={opened}
+        onClose={onClose}
+        projName={projName}
+      />
     </form>
   );
 };
@@ -185,9 +204,11 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
 const FaqCard = ({
   faqQuestion,
   faqAnswer,
+  last,
 }: {
   faqQuestion: string;
   faqAnswer: string;
+  last: boolean;
 }) => {
   return (
     <div>
@@ -195,8 +216,53 @@ const FaqCard = ({
         {faqQuestion}
       </h4>
       <FaqReadMore text={faqAnswer} title={faqQuestion} />
-
-      <hr className="bg-[#00000080] my-[59px] h-[2px]" />
+      {!last && <hr className="bg-[#00000080] my-[59px] h-[2px]" />}
     </div>
+  );
+};
+
+const Success = ({ text, opened, onClose, projName }: any) => {
+  const isMobile = useMediaQuery(`(max-width: 750px)`);
+  console.log(text);
+  return (
+    <Modal
+      classNames={{
+        title: S.title,
+        root: S.root,
+        close: S.close,
+        content: S.content,
+        overlay: S.overlay,
+        header: S.disabled,
+      }}
+      opened={opened}
+      onClose={onClose}
+      centered
+      title="Add Rating"
+      size={isMobile ? "100%" : "45%"}
+    >
+      <Close close={onClose} className="absolute top-8 right-6" />
+      <div className="px-5 py-8">
+        <h1 className="text-[#001F35] text-4xl not-italic font-semibold leading-[normal] mb-[20px]">
+          Congratulations 🎉
+        </h1>
+        <p className="text-[#202020] text-2xl not-italic font-medium leading-[normal] mb-5">
+          Your Question has been submitted successfully!
+        </p>
+        <p className="text-[#202020] text-2xl not-italic font-medium leading-[normal] mb-[30px]">
+          Project:{" "}
+          <span className="text-[#148B16] text-2xl not-italic font-bold leading-[normal] capitalize">
+            {projName}
+          </span>
+        </p>
+        <div className="inline-flex flex-col justify-center items-start gap-[19px] px-4 py-[15px] rounded bg-[#cae9ff4d] w-full">
+          <ScrollArea
+            mah={200}
+            className="text-black text-xl not-italic font-medium leading-8 tracking-[0.8px] ml-2 "
+          >
+            {text}
+          </ScrollArea>
+        </div>
+      </div>
+    </Modal>
   );
 };
