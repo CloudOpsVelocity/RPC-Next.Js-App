@@ -302,6 +302,9 @@ function Agent() {
               maxLength={10}
               allowDecimal={false}
               onPaste={(event) => {
+                if (status === "error") {
+                  setStatus("idle");
+                }
                 const pastedText = event.clipboardData.getData("text/plain");
                 const trimmedText = pastedText.replace(/\s/g, "");
                 const first10Digits = trimmedText
