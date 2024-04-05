@@ -165,6 +165,7 @@ function Agent() {
   const displayCountryCode = (value: any) => {
     console.log(value);
   };
+  console.log(form.values);
   return (
     <div className="w-full max-w-[423px] flex justify-center items-center flex-col m-[2%] ">
       {active !== 2 && (

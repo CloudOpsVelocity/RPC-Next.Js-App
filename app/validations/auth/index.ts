@@ -43,6 +43,7 @@ const agentSchema = yup.object().shape({
     .required("Full name is required"),
   email: yup
     .string()
+    .trim()
     .matches(
       /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
       "Please enter a valid Email address"
