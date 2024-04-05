@@ -184,7 +184,6 @@ function Builder() {
             setStatus("pending");
             //@ts-ignore
             let data = await register({ ...values, usertype: "B" });
-            console.log(data);
             if (data?.status) {
               setStatus("otp");
               open();
@@ -409,7 +408,7 @@ function Builder() {
               mt="sm"
               className={clsx(
                 "w-[100%] mb-[3%] ",
-                status === "error" && "mb-[2px]"
+                status === "error" && "!mb-[2px]"
               )}
               label="Contact Number"
               placeholder="Enter your contact number here"

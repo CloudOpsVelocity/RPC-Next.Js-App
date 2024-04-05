@@ -166,7 +166,7 @@ function Individual() {
                 size="lg"
                 className={clsx(
                   "w-[100%] mb-[3%] ",
-                  status === "error" && "mb-[2px]"
+                  status === "error" && "!mb-[2px]"
                 )}
                 label="Contact Number"
                 placeholder="Enter your contact number"
