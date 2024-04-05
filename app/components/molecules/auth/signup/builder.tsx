@@ -62,6 +62,7 @@ import {
 import handleTrimAndReplace, {
   handleAllTrimAndReplace,
 } from "@/app/utils/input/validations";
+import clsx from "clsx";
 
 function Builder() {
   const [status, setStatus] = useState<
@@ -190,6 +191,12 @@ function Builder() {
             } else {
               if (data.flag === "m") {
                 setStatus("error");
+              } else if (data.flag === "e") {
+                form.setFieldError(
+                  "email",
+                  "Email already exists. Kindly use Login below"
+                );
+                setStatus("idle");
               } else {
                 setStatus("idle");
               }
@@ -400,15 +407,14 @@ function Builder() {
               hideControls
               size="lg"
               mt="sm"
-              className="w-[100%] mb-[3%] "
+              className={clsx(
+                "w-[100%] mb-[3%] ",
+                status === "error" && "mb-[2px]"
+              )}
               label="Contact Number"
               placeholder="Enter your contact number here"
               {...form.getInputProps("mobile")}
-              error={
-                form.errors.mobile ||
-                (status === "error" &&
-                  "Provided number is already registered with us")
-              }
+              error={form.errors.mobile || status === "error"}
               onChange={(e) => {
                 form.setFieldValue("mobile", e as any);
                 if (status === "error") {
@@ -427,7 +433,18 @@ function Builder() {
                 form.setFieldValue("mobile", first10Digits as any);
               }}
             />
-
+            {status === "error" && (
+              <p className="text-red-500 text-right">
+                Account already exists. Kindly use{" "}
+                <Link
+                  href={"/login"}
+                  className="text-[#0073C6] text-[15px] italic font-bold leading-[normal] underline"
+                >
+                  Login
+                </Link>{" "}
+                below
+              </p>
+            )}
             {/* <div className="min-w-[30px] !max-w-[75px] flex justify-center items-center ">
             <CountryInput
               onSelect={displayCountryCode}
@@ -792,7 +809,7 @@ function Builder() {
 
       {active === 0 && (
         <>
-          <p className="md:text-xl] font-[400] text-[#202020] mt-[5%]">
+          <p className="md:text-xl font-[400] text-[#202020] mt-[5%]">
             Already have an Account ?{" "}
             <Link
               href="/login"
@@ -801,7 +818,17 @@ function Builder() {
               Log In
             </Link>
           </p>
-
+          {status === "error" && (
+            <p className="text-center text-[#556477] text-xl not-italic font-medium leading-[normal] mt-3 mb-[21px]">
+              Forget Password?{" "}
+              <Link
+                href={"/forgot"}
+                className="text-[color:var(--Brand-green-primary,#148B16)] text-xl not-italic font-medium leading-[normal] underline"
+              >
+                Reset
+              </Link>
+            </p>
+          )}
           <Link
             href="/"
             className="md:text-xl font-[700] text-[#148B16] underline "
