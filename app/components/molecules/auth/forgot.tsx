@@ -201,6 +201,19 @@ const Form = ({ status, setStatus }: any) => {
     setStatus("success");
   };
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
+  const isPasswordMatched = () => {
+    const password = form.values.password;
+    const confirmPassword = form.values.confirmPassword;
+
+    // Check if password length is greater than or equal to 6 characters
+    if (password.length >= 6) {
+      // If password length is valid, check if passwords match
+      return password === confirmPassword;
+    } else {
+      // If password length is less than 6 characters, return false
+      return false;
+    }
+  };
   return (
     <div className="w-full">
       <form
@@ -252,7 +265,11 @@ const Form = ({ status, setStatus }: any) => {
             innerInput: StepCss.textInput,
           }}
         />
-
+        {isPasswordMatched() && (
+          <p className="text-right ml-auto text-[color:var(--Brand-green-primary,#148B16)] text-sm italic font-semibold leading-[normal]">
+            Password matched
+          </p>
+        )}
         <Button
           type="submit"
           size={isMobile ? "compact-xs" : "md"}
