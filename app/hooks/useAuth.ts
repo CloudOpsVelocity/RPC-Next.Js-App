@@ -128,7 +128,9 @@ export default function useAuth({
         return registrationResponse.data;
       }
       if (!registrationResponse.data.status) {
-        toast.error(registrationResponse.data.message);
+        toast.error(registrationResponse.data.message, {
+          duration: 1000,
+        });
         return registrationResponse.data;
       }
     } catch (error: any) {
