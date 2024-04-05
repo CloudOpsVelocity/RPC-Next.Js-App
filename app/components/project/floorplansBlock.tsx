@@ -192,7 +192,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                   } `}
                   onChange={() => {
                     getPropertyType(propertyDetailsTypes.get(keyName));
-                    // setSelectedFloor(projectUnitsData[0]);
+                    setSelectedFloor(projectUnitsData[0]);
                   }}
                   title={name}
                   icon={getIcon(keyName)}

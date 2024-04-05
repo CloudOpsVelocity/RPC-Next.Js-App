@@ -1,4 +1,3 @@
-import { useDisclosure } from "@mantine/hooks";
 import { Modal, Select } from "@mantine/core";
 import { useId, useRef } from "react";
 import {
@@ -23,8 +22,6 @@ import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { floorPlansArray, selectedFloorAtom } from "@/app/store/floor";
 import { typeAtom, useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
 import { useSubFloorPlanPopup } from "@/app/hooks/useSubFloorplanPopup";
-import filterDataAtom from "@/app/store/filterdata";
-import useUnitTypes from "@/app/hooks/useUnitTypes";
 
 type Props = {
   propCgId: any;
@@ -920,7 +917,7 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
             height={350}
             width={800}
             className="border-none w-full cursor-pointer"
-            style={{ aspectRatio: "800 / 400", objectFit: "cover" }}
+            style={{ aspectRatio: "800 / 400", objectFit: "contain" }}
             onClick={open}
           />
         ) : (

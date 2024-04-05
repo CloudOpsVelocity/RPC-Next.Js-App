@@ -15,16 +15,37 @@ import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css";
 import "leaflet-defaulticon-compatibility";
 import { MapIcon } from "@/app/data/map";
+import Button from "@/app/elements/button";
+import { GradientLocation, ProjectMapIcon } from "@/app/images/commonSvgs";
 
-const Map = ({ data, selectedLocation, projName, lat, lang }: any) => {
+const Map = ({
+  data,
+  selectedLocation,
+  projName,
+  lat,
+  lang,
+  setSelectedLocation,
+}: any) => {
   const position: LatLngTuple = [lat, lang];
   return (
     <MapContainer
       center={position}
       zoom={13}
-      className=" h-[400px] sm:h-[700px] w-full z-[1]"
+      className=" h-[400px] sm:h-[700px] w-full z-[1] relative"
       scrollWheelZoom={true}
     >
+      <Button
+        buttonClass="flex justify-center items-center gap-1 p-2.5 border rounded-[21px] border-solid border-[#0094FF] text-[#202020] text-xl not-italic font-semibold leading-[normal] bg-[#F2FAFF] mt-3 ml-auto absolute right-4 top-2 top-0 z-[400] shadow-[0px_4px_12px_0px_rgba(0,0,0,0.40)] rounded-[21px] border-[3px] border-solid border-[#0094FF]"
+        title={"Locate Project"}
+        icon={<ProjectMapIcon className="w-8 h-8" />}
+        onChange={() => {
+          setSelectedLocation({
+            lat: Number(lat),
+            lng: Number(lang),
+            name: projName,
+          });
+        }}
+      />
       <Content
         data={data}
         selectedLocation={selectedLocation}
@@ -69,7 +90,11 @@ const Content: React.FC<any> = ({
             title={item.name}
           >
             {selectedLocation?.lat === item?.lat && (
-              <Tooltip opacity={1} permanent direction="top">
+              <Tooltip
+                opacity={1}
+                direction="top"
+                permanent={selectedLocation?.lat === item?.lat}
+              >
                 <div className=" ">
                   <p className="text-[#00487C] text-lg not-italic font-semibold leading-[normal]">
                     {item.name}

@@ -11,7 +11,12 @@ import { useSubFloorPlanPopup } from "@/app/hooks/useSubFloorplanPopup";
 import { projectprops } from "@/app/data/projectDetails";
 import SharePopup from "../../atoms/SharePopup";
 import { imageUrlParser } from "@/app/utils/image";
-import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
+import {
+  TransformComponent,
+  TransformWrapper,
+  useControls,
+} from "react-zoom-pan-pinch";
+import ContactInput from "../../molecules/auth/ContactInput";
 
 type CarouselModalProps = {
   opened: boolean;
@@ -113,21 +118,7 @@ const MiddleSection = ({
       {selectedFloor?.floorPlanUrl ? (
         <div className="w-full flex justify-center items-center">
           <TransformWrapper>
-            <TransformComponent
-              contentStyle={{
-                width: "100%",
-                display: "block",
-              }}
-            >
-              <Image
-                // @ts-ignore
-                src={selectedFloor.floorPlanUrl}
-                radius="md"
-                h={600}
-                w={1500}
-                fit="contain"
-              />
-            </TransformComponent>
+            <ImageContainer url={selectedFloor?.floorPlanUrl} />
           </TransformWrapper>
         </div>
       ) : (
@@ -140,6 +131,38 @@ const MiddleSection = ({
   );
 };
 
+const ImageContainer = ({ url }: any) => {
+  return (
+    <>
+      <Controls />
+      <TransformComponent
+        contentStyle={{
+          width: "100%",
+          display: "block",
+        }}
+      >
+        <Image src={url} radius="md" h={600} w={1500} fit="contain" />
+      </TransformComponent>
+    </>
+  );
+};
+const Controls = () => {
+  const { zoomIn, zoomOut, resetTransform } = useControls();
+
+  return (
+    <div className="flex justify-center items-center flex-col">
+      <button onClick={() => zoomIn()} className="text-2xl">
+        Zoom In
+      </button>
+      <button onClick={() => zoomOut()} className="text-2xl">
+        Zoom Out
+      </button>
+      <button onClick={() => resetTransform()} className="text-2xl">
+        Reset
+      </button>
+    </div>
+  );
+};
 const Close = ({ close }: { close: any }) => {
   return (
     <svg

@@ -6,13 +6,12 @@ import { Tabs, ScrollArea } from "@mantine/core";
 import { clsx } from "clsx";
 import { Coordinates } from "@/app/utils/maps";
 import { useMediaQuery } from "@mantine/hooks";
-import { GradientLocation, nearbyLocationIcon } from "@/app/images/commonSvgs";
+import { nearbyLocationIcon } from "@/app/images/commonSvgs";
 import Loading from "../../atoms/Loader";
 import dynamic from "next/dynamic";
 import MapSkeleton from "../../maps/Skeleton";
 import useMapData from "@/app/hooks/property/useMapData";
 import PropertyHeading from "../../property/heading";
-import Button from "@/app/elements/button";
 
 interface Area {
   name: string;
@@ -57,17 +56,6 @@ const LeafMap: React.FC<{
     [selectedLocation, selected]
   );
 
-  // function showLocationOnMap(location: {
-  //   position: { lat: number; lng: number };
-  //   name: string;
-  // }): void {
-  //   setSelectedLocation({
-  //     lat: location.position.lat,
-  //     lng: location.position.lng,
-  //     name: location.name,
-  //   });
-  // }
-
   const { data: mapData, isLoading } = useMapData({ projSlug: projId });
   const isMobile = useMediaQuery(`(max-width: 750px)`);
   return (
@@ -92,7 +80,7 @@ const LeafMap: React.FC<{
             </p>
           </div>
         )}
-        <div className="flex  flex-col">
+        {/* <div className="flex  flex-col">
           <p className="text-[#666] text-xl not-italic font-medium leading-[normal] tracking-[0.8px]">
             Click to locate project
           </p>
@@ -108,7 +96,7 @@ const LeafMap: React.FC<{
               });
             }}
           />
-        </div>
+        </div> */}
       </div>
       <div className="flex gap-6 mb-5 mt-1 w-full flex-wrap ">
         {areas.map((area) => {
@@ -187,6 +175,7 @@ const LeafMap: React.FC<{
             projName={projName}
             lat={lat}
             lang={lang}
+            setSelectedLocation={setSelectedLocation}
           />
         </section>
       </div>
@@ -195,7 +184,7 @@ const LeafMap: React.FC<{
           <h1 className="text-[#303030] text-xl not-italic font-medium leading-[normal] tracking-[0.8px] capitalize">
             {selected.split("_").join(" ")} Nearby
           </h1>
-          <div className="flex gap-2 mt-3 flex-wrap ">
+          <div className="flex gap-2 mt-3 flex-wrap gap-x-5 ">
             {mapData[selected].map((item: any, index: any) => (
               <MapCard
                 key={index}
@@ -247,7 +236,7 @@ const MapCard = ({
   };
   return (
     <div
-      className="flex flex-col items-start gap-3 px-2 py-3.5 cursor-pointer shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] border-[0.5px] border-solid border-[#D9D9D9] bg-[#fcfcfc] w-full md:min-w-[385px] max-w-[385px] ml-5 mb-5"
+      className="flex flex-col items-start gap-3 px-2 py-3.5 cursor-pointer shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] border-[0.5px] border-solid border-[#D9D9D9] bg-[#fcfcfc] w-full md:min-w-[385px] max-w-[385px]  mb-5"
       onClick={handleClick}
     >
       <div className="">
