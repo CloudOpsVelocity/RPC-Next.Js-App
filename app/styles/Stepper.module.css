@@ -22,6 +22,12 @@
 
 .errorMsg {
   text-align: right;
+  color: var(--Mandatory, #f00);
+  font-family: Montserrat;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 500;
+  line-height: normal;
 }
 
 .separator {

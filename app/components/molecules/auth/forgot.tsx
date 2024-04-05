@@ -87,7 +87,7 @@ function ForgotForm() {
           <h2
             className={`whitespace-nowrap text-2xl font-bold text-[#148B16] text-center mt-3`}
           >
-            Forgot Password
+            Forgot Password ?
           </h2>
           <Image
             src={forgetPasswordLockImg}
@@ -112,7 +112,7 @@ function ForgotForm() {
             mt="sm"
             className="w-[100%] mb-[3%] rounded-[8px] bg-transparent "
             label=""
-            placeholder="Enter registerd mobile number..."
+            placeholder="Enter Registerd Mobile Number..."
             {...form.getInputProps("mobile")}
             maxLength={10}
             allowDecimal={false}
@@ -175,13 +175,13 @@ import clsx from "clsx";
 const validationSchema = yup.object().shape({
   password: yup
     .string()
-    .min(6, "Password must be at least 6 characters long")
-    .required("Password is required"),
+    .min(6, "Password must be at-least 6 digits")
+    .required("New password is required"),
 
   confirmPassword: yup
     .string()
-    .oneOf([yup.ref("password")], "Passwords did not match")
-    .required("Please confirm your password"),
+    .oneOf([yup.ref("password")], "Password not matched")
+    .required("Re- enter password is required"),
 });
 const Form = ({ status, setStatus }: any) => {
   const router = useRouter();

@@ -193,7 +193,7 @@ function Builder() {
               } else if (data.flag === "e") {
                 form.setFieldError(
                   "email",
-                  "Email already exists. Kindly use Login below"
+                  "Email already registered with us."
                 );
                 setStatus("idle");
               } else {

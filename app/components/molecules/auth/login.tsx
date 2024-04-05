@@ -62,7 +62,7 @@ function Login() {
           size="lg"
           className="w-[100%] mb-[3%] "
           label="Mobile Number"
-          placeholder="Enter your registered mobile number"
+          placeholder="Enter Your Registered Mobile Number"
           {...form.getInputProps("username")}
           maxLength={10}
           allowDecimal={false}

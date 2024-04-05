@@ -47,10 +47,7 @@ function Individual() {
       if (data.flag === "m") {
         setStatus("error");
       } else if (data.flag === "e") {
-        form.setFieldError(
-          "email",
-          "Email already exists. Kindly use Login below"
-        );
+        form.setFieldError("email", "Email already registered with us.");
         setStatus("idle");
       } else {
         setStatus("idle");

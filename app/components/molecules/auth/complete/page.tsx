@@ -56,7 +56,7 @@ const Countdown = ({ initialCount = 5, redirectPath = "/" }) => {
 
   return (
     <p className="text-[color:var(--Grey-2,#767270)] text-center text-[26px] not-italic font-medium leading-[normal] mt-4">
-      You will be redirected to homepage in {timeRemaining.seconds} sec
+      You will be redirected to login page in {timeRemaining.seconds} sec
     </p>
   );
 };
