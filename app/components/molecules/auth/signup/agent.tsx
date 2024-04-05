@@ -345,22 +345,20 @@ function Agent() {
               stepIcon: active > 1 ? StepCss.stepIconActive : StepCss.stepIcon,
             }}
           >
-            <FocusTrap active={form.values.address.trim().length < 1}>
-              <TextInput
-                required
-                size="lg"
-                label="Office Address"
-                placeholder="Enter your office address here"
-                {...form.getInputProps("address")}
-                classNames={{
-                  root: StepCss.inputRoot,
-                  input: StepCss.textInput,
-                  error: StepCss.errorMsg,
-                }}
-                onBlurCapture={(e) => handleTrimAndReplace(e, "address", form)}
-                data-autofocus
-              />
-            </FocusTrap>
+            <TextInput
+              required
+              size="lg"
+              label="Office Address"
+              placeholder="Enter your office address here"
+              {...form.getInputProps("address")}
+              classNames={{
+                root: StepCss.inputRoot,
+                input: StepCss.textInput,
+                error: StepCss.errorMsg,
+              }}
+              onBlurCapture={(e) => handleTrimAndReplace(e, "address", form)}
+              data-autofocus
+            />
             <TextInput
               required
               size="lg"

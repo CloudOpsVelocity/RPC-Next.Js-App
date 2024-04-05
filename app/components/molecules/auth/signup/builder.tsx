@@ -471,22 +471,19 @@ function Builder() {
               stepIcon: active > 1 ? StepCss.stepIconActive : StepCss.stepIcon,
             }}
           >
-            <FocusTrap active={form.values.address.trim().length < 1}>
-              <TextInput
-                required
-                size="lg"
-                label="Office Address"
-                placeholder="Enter your office address"
-                {...form.getInputProps("address")}
-                classNames={{
-                  root: StepCss.inputRoot,
-                  input: StepCss.textInput,
-                  error: StepCss.errorMsg,
-                }}
-                onBlurCapture={(e) => handleTrimAndReplace(e, "address", form)}
-                data-autofocus
-              />
-            </FocusTrap>
+            <TextInput
+              required
+              size="lg"
+              label="Office Address"
+              placeholder="Enter your office address"
+              {...form.getInputProps("address")}
+              classNames={{
+                root: StepCss.inputRoot,
+                input: StepCss.textInput,
+                error: StepCss.errorMsg,
+              }}
+              onBlurCapture={(e) => handleTrimAndReplace(e, "address", form)}
+            />
 
             <Select
               rightSection={<DropdownArrowIcon />}
@@ -568,32 +565,29 @@ function Builder() {
             }}
           >
             <ScrollArea h={420} pr={10} viewportRef={viewport} offsetScrollbars>
-              <FocusTrap active={form.values.companyName.trim().length < 1}>
-                <TextInput
-                  id="companyName"
-                  required
-                  size="lg"
-                  mt="md"
-                  label="Builder Owned By"
-                  placeholder="Enter your builder name"
-                  {...form.getInputProps("companyName")}
-                  classNames={{
-                    root: StepCss.inputRoot,
-                    input: StepCss.textInput,
-                    error: StepCss.errorMsg,
-                  }}
-                  onBlurCapture={(e) =>
-                    handleTrimAndReplace(e, "companyName", form)
+              <TextInput
+                id="companyName"
+                required
+                size="lg"
+                mt="md"
+                label="Builder Owned By"
+                placeholder="Enter your builder name"
+                {...form.getInputProps("companyName")}
+                classNames={{
+                  root: StepCss.inputRoot,
+                  input: StepCss.textInput,
+                  error: StepCss.errorMsg,
+                }}
+                onBlurCapture={(e) =>
+                  handleTrimAndReplace(e, "companyName", form)
+                }
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    ref?.current?.focus();
                   }
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                      e.preventDefault();
-                      ref?.current?.focus();
-                    }
-                  }}
-                  data-autofocus
-                />
-              </FocusTrap>
+                }}
+              />
               <MultiSelect
                 ref={ref}
                 id="branch"
@@ -723,26 +717,24 @@ function Builder() {
               stepIcon: active > 3 ? StepCss.stepIconActive : StepCss.stepIcon,
             }}
           >
-            <FocusTrap active={form.values.vission.trim().length < 1}>
-              <Textarea
-                size="lg"
-                required
-                placeholder="Enter your company vision that you are going to provide buyers."
-                label="Company Vision"
-                autosize
-                minRows={5}
-                maxRows={5}
-                {...form.getInputProps("vission")}
-                classNames={{
-                  root: StepCss.inputRoot,
-                  input: StepCss.textInput,
-                  error: StepCss.errorMsg,
-                }}
-                onBlurCapture={(e) => {
-                  handleTrimAndReplace(e, "vission", form);
-                }}
-              />
-            </FocusTrap>
+            <Textarea
+              size="lg"
+              required
+              placeholder="Enter your company vision that you are going to provide buyers."
+              label="Company Vision"
+              autosize
+              minRows={5}
+              maxRows={5}
+              {...form.getInputProps("vission")}
+              classNames={{
+                root: StepCss.inputRoot,
+                input: StepCss.textInput,
+                error: StepCss.errorMsg,
+              }}
+              onBlurCapture={(e) => {
+                handleTrimAndReplace(e, "vission", form);
+              }}
+            />
             <Text size="sm" ta={"right"}>
               maximum 5000 characters
             </Text>
