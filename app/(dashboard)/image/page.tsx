@@ -7,13 +7,9 @@ export default function Page({ searchParams: { path } }: Props) {
   const handleDownload = () => {
     const url = `${process.env.NEXT_PUBLIC_PROJECT_URL}/image?path=${path}`;
     const link = document.createElement("a");
-
     const file = new Blob([url], { type: "text/plain" });
-
     link.href = URL.createObjectURL(file);
-
     link.download = "grp.txt";
-
     link.click();
     URL.revokeObjectURL(link.href);
   };

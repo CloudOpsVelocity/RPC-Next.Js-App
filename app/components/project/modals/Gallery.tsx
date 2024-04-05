@@ -70,12 +70,12 @@ const Gallery: React.FC<GalleryProps> = ({
               <TransformComponent>
                 <Image
                   radius="md"
-                  h={800}
+                  h={600}
                   m={"auto"}
                   w={1400}
-                  fit="fill"
+                  fit="contain"
                   src={previewImage ?? content?.url}
-                  className="cursor-pointer border-[5px] bg-white border-white min-w-[1400px] min-h-[800px]"
+                  className="cursor-pointer border-[5px] bg-white border-white min-w-[1400px] min-h-[650px]"
                 />
               </TransformComponent>
             </TransformWrapper>
@@ -159,7 +159,7 @@ const Gallery: React.FC<GalleryProps> = ({
       </Modal>
 
       <button onClick={() => handleImageClick(selectedMedia)}>
-        <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] absolute bottom-10 right-3 z-50 " />
+        <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] absolute bottom-7 right-3 z-50 " />
       </button>
     </>
   );

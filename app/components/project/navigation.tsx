@@ -33,8 +33,17 @@ export default function Navigation() {
 
   useEffect(() => {
     function handleScroll() {
-      const sections = topics.map((topic) => document.getElementById(topic.id));
-
+      // const sections = topics.map((topic) => document.getElementById(topic.id));
+      // const sectionOffsets = Array.from(sections).map(
+      //   (section) => section.getBoundingClientRect().top
+      // );
+      // console.log(sectionOffsets);
+      // const currentSectionIndex = sectionOffsets.findIndex(
+      //   (offset) => offset > 0
+      // );
+      // if (currentSectionIndex !== -1) {
+      //   setCurrentBlock(sections[currentSectionIndex].id);
+      // }
       if (window.scrollY > 800) {
         setIsSticky(true);
       } else {
@@ -48,7 +57,7 @@ export default function Navigation() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [topics]);
 
   return (
     <div

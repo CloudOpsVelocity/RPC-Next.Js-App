@@ -58,7 +58,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
         )}
       >
         {type == "proj" && (
-          <div className="flex space-y-1.5 p-6  px-4 pt-2 pb-3 justify-between items-center">
+          <div className=" space-y-1.5 p-6  px-4 pt-2 pb-3 justify-between items-center">
             <a
               target="_blank"
               className="tracking-tight text-[18px] font-[600] text-[#565D70] cursor-pointer"
@@ -66,7 +66,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
             >
               {cardData.projName}
             </a>
-            <div className="text-xs font-semibold text-right ">
+            <div className="text-xs font-semibold  ">
               <span className="text-[16px] font-[700] text-[#148B16]">
                 {formatCurrency(cardData.minPrice)}
               </span>{" "}

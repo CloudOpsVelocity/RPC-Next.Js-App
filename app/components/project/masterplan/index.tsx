@@ -13,6 +13,19 @@ export default function MasterPlan({
   projName: string;
   media: string;
 }) {
+  const handleDownload = () => {
+    const url = imageUrlParser(media);
+    const link = document.createElement("a");
+
+    const file = new Blob([url], { type: "text/plain" });
+
+    link.href = URL.createObjectURL(file);
+
+    link.download = "grp.txt";
+
+    link.click();
+    URL.revokeObjectURL(link.href);
+  };
   // const handleDownload = async () => {
   //   try {
   //     const response = await fetch(media);
@@ -31,7 +44,7 @@ export default function MasterPlan({
   //   }
   // };
   return (
-    <div className="w-[90%] mb-[5%] scroll-mt-[90px]" id="masterPlan">
+    <div className="w-[90%] mb-[5%] scroll-mt-[90px] " id="masterPlan">
       <div className="flex justify-between w-full items-cente mb-[32px] flex-wrap">
         <div>
           <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35] mb-[12px]">
@@ -46,13 +59,12 @@ export default function MasterPlan({
             Our Expertise.
           </p>
         </div>
-        <a
-          target="_blank"
+        <button
           className="inline-flex flex-col items-center justify-center gap-2.5  p-5 rounded-[10px] bg-[#0073C6] text-white text-2xl not-italic font-bold leading-[normal] tracking-[0.96px] max-h-[50%] mt-5 md:mt-0"
-          href={imageUrlParser(media)}
+          onClick={handleDownload}
         >
           DownLoad MasterPlan
-        </a>
+        </button>
       </div>
       <div className="relative">
         <MasterPlanPopup url={media} />

@@ -10,10 +10,6 @@ import { useGallery } from "@/app/hooks/useGallery";
 import PropertyHeading from "../property/heading";
 
 export default function GalleryBlock({
-  coverImageUrl,
-  projectPlanUrl,
-  projReviewVideoUrl,
-  otherImgUrl,
   walkThrowVideoUrl,
   projName,
   media,
@@ -55,7 +51,7 @@ export default function GalleryBlock({
         {/* IMage display con */}
         <div className="w-[100%] md:w-[50%] bg-white h-[394px] lg:h-auto mb-[3%] md:mb-[0%] mr-[3%] rounded-[14px]  ">
           {selectedMedia && (
-            <div className="w-[100%]  bg-white  mb-[3%] md:mb-[0%] mr-[3%] rounded-[14px]  relative">
+            <div className="w-[100%]  bg-white  mb-[3%] md:mb-[0%] mr-[3%]   relative shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[14px]">
               {selectedMedia.includes(".mp4") ? (
                 <ReactPlayer
                   url={selectedMedia}
@@ -69,10 +65,11 @@ export default function GalleryBlock({
                   mah={550}
                   src={selectedMedia}
                   alt="Preview"
-                  className="cursor-pointer"
+                  className="cursor-pointer object-contain"
                   onClick={() => {
                     open("image", selectedMedia);
                   }}
+                  fit="contain"
                 />
               )}
               <Gallery

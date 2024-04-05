@@ -16,7 +16,11 @@ import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import "leaflet-defaulticon-compatibility";
 import { MapIcon } from "@/app/data/map";
 import Button from "@/app/elements/button";
-import { GradientLocation, ProjectMapIcon } from "@/app/images/commonSvgs";
+import {
+  GradientLocation,
+  ProjectMapIcon,
+  RecenterIcon,
+} from "@/app/images/commonSvgs";
 
 const Map = ({
   data,
@@ -34,18 +38,19 @@ const Map = ({
       className=" h-[400px] sm:h-[700px] w-full z-[1] relative"
       scrollWheelZoom={true}
     >
-      <Button
-        buttonClass="flex justify-center items-center gap-1 p-2.5 border rounded-[21px] border-solid border-[#0094FF] text-[#202020] text-xl not-italic font-semibold leading-[normal] bg-[#F2FAFF] mt-3 ml-auto absolute right-4 top-2 top-0 z-[400] shadow-[0px_4px_12px_0px_rgba(0,0,0,0.40)] rounded-[21px] border-[3px] border-solid border-[#0094FF]"
-        title={"Locate Project"}
-        icon={<ProjectMapIcon className="w-8 h-8" />}
-        onChange={() => {
+      <button
+        className="z-[1000] inline-flex justify-center items-center gap-1 p-2.5 shadow-[0px_4px_12px_0px_rgba(0,0,0,0.40)] rounded-[21px] bg-[#0073c6] absolute top-[20px] right-[20px] text-white text-xl not-italic font-bold leading-[normal]"
+        onClick={() => {
           setSelectedLocation({
             lat: Number(lat),
             lng: Number(lang),
             name: projName,
           });
         }}
-      />
+      >
+        Re- Center
+        <RecenterIcon />
+      </button>
       <Content
         data={data}
         selectedLocation={selectedLocation}

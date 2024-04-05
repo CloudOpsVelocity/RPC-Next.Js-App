@@ -306,7 +306,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
               <img
                 onClick={handleOpen}
                 src={selectedFloor?.floorPlanUrl as string}
-                className="w-full h-full cursor-pointer"
+                className="w-full h-full cursor-pointer  object-contain"
                 alt="image"
               />
             ) : (

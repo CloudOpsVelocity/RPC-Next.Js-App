@@ -43,11 +43,11 @@ export default function MasterPlanPopup({ url }: { url: string }) {
                 // fit="fill"
                 src={url}
                 // component={NextImage}
-                mah={863}
-                w="100%"
-                fit="cover"
+                mah={750}
+                // w="100%"
+                fit="contain"
                 alt="master plan"
-                className="cursor-pointer border-[5px] bg-white border-white md:min-w-[1400px] max-h-[770px]"
+                className="cursor-pointer border-[5px] bg-white border-white md:min-w-[1400px] max-h-[770px] object-contain"
               />
             </TransformComponent>
           </TransformWrapper>
@@ -58,9 +58,9 @@ export default function MasterPlanPopup({ url }: { url: string }) {
         src={`${url}`}
         mah={600}
         w="100%"
-        fit="cover"
+        fit="contain"
         onClick={open}
-        className="cursor-pointer"
+        className="cursor-pointer shadow-[0px_4px_30px_0px_rgba(0,0,0,0.25)] rounded-[14px] border-[0.5px] border-solid border-[#D2CDCD] py-4"
       />
       <button onClick={open}>
         <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] absolute bottom-10 right-3 z-50 " />

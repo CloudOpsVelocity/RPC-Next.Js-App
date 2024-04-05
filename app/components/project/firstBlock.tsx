@@ -36,7 +36,6 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
       });
     }
   };
-
   return (
     <div
       className={`relative rounded-[10px] w-full bg-gray-50 h-[545px] lg:h-[680px] bg-cover flex justify-between items-start flex-col`}
@@ -74,9 +73,9 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
                     height={200}
                     alt="project image"
                     src={imageUrl}
-                    className={`!w-full rounded-[10px] bg-cover h-[545px] lg:h-[680px] bg-gray-${
+                    className={`!w-full rounded-[10px]  h-[545px] lg:h-[680px] bg-gray-${
                       index + 1
-                    }00`}
+                    } object-contain`}
                   />
                 </Carousel.Slide>
               ))}
