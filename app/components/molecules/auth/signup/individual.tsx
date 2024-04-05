@@ -187,7 +187,7 @@ function Individual() {
                 }}
               />
               {status === "error" && (
-                <p className="text-red-500 text-right">
+                <p className=" text-right text-[color:var(--Mandatory,#F00)] text-[15px] italic font-medium leading-[normal]">
                   Account already exists. Kindly use{" "}
                   <Link
                     href={"/login"}
