@@ -27,7 +27,6 @@ export default function AuthButton() {
       title="Login/ Sign up"
     />
   );
-  console.log(session);
   return (
     <>
       {session?.user.isActive === "Y" && session?.user.userType === "B" && (
@@ -89,7 +88,7 @@ function Dropdown() {
                 e.stopPropagation();
               }}
             >
-              Login/Singup
+              Login/Signup
             </Link>
           </div>
         )}

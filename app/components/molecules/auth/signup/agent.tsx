@@ -74,7 +74,9 @@ function Agent() {
       if (active === 1) {
         return {
           address:
-            values.address.trim().length < 1 ? "Address is required" : null,
+            values.address.trim().length < 1
+              ? "Office Address is required"
+              : null,
           companyName:
             values.companyName.trim().length < 1
               ? "Company name is required"

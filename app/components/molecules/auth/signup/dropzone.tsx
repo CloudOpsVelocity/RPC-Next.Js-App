@@ -60,7 +60,7 @@ export function DropZone(props: Partial<DropZoneProps>) {
               Select File
             </Button>
           </div>
-          <p className="text-[color:var(--Mandatory,#F00)] text-[10px] italic font-medium leading-[normal]">
+          <p className="text-[color:var(--Mandatory,#F00)]  text-sm italic font-medium leading-[normal]">
             {error}
           </p>
         </Dropzone>
