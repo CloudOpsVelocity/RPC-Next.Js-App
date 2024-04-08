@@ -44,10 +44,10 @@ function FloorPlanModal({ propCgId, data, projName }: Props) {
       unitNumber: selectedFloor.unitNumber,
       caretarea: selectedFloor.caretarea,
       superBuildUparea: selectedFloor.superBuildUparea,
-      // parkingType: selectedFloor.parkingType,
-      // totalNumberofBathroom: selectedFloor.totalNumberofBathroom,
-      // totalNumberOfBalcony: selectedFloor.totalNumberOfBalcony,
-      // noOfCarParking: selectedFloor.noOfCarParking,
+      parkingType: selectedFloor.parkingType,
+      totalNumberofBathroom: selectedFloor.totalNumberofBathroom.toString(),
+      totalNumberOfBalcony: selectedFloor.totalNumberOfBalcony.toString(),
+      noOfCarParking: selectedFloor.noOfCarParking.toString(),
     },
   });
   const handleArrowClick = (side: "R" | "L"): void => {
