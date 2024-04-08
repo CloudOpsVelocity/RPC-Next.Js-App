@@ -555,7 +555,7 @@ function Builder() {
           </Stepper.Step>
 
           <Stepper.Step
-            label="Company details"
+            label="Company Details"
             icon={active >= 2 ? <StepperDotGreen /> : <StepperDotGray />}
             classNames={{
               stepLabel:
@@ -658,8 +658,8 @@ function Builder() {
                 required
                 size="lg"
                 mt="md"
-                label="Ceo Name"
-                placeholder="Enter Ceo Name"
+                label="CEO Name"
+                placeholder="Enter CEO Name"
                 {...form.getInputProps("ceoName")}
                 classNames={{
                   root: StepCss.inputRoot,
@@ -701,7 +701,7 @@ function Builder() {
                   error: StepCss.errorMsg,
                 }}
                 onBlurCapture={(e) => {
-                  handleTrimAndReplace(e, "officeContact", form);
+                  handleAllTrimAndReplace(e, "officeContact", form);
                 }}
               />
             </ScrollArea>
@@ -746,7 +746,7 @@ function Builder() {
               required
               mt={"md"}
               placeholder="Enter your bulder's description that you are going to provide buyers."
-              label="Builder's Description"
+              label="Builder's Descriptions"
               autosize
               minRows={5}
               maxRows={5}

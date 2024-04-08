@@ -193,7 +193,12 @@ const Form = ({ status, setStatus }: any) => {
 
     validate: yupResolver(validationSchema),
     validateInputOnBlur: true,
-    clearInputErrorOnChange: true,
+    validateInputOnChange: true,
+    onValuesChange(values) {
+      if (values.password.length >= 6) {
+        form.setFieldError("confirmPassword", null);
+      }
+    },
   });
   const onSubmit = async (values: any) => {
     const data = await resetPasswordApi(values.password);

@@ -16,7 +16,7 @@ import {
   TransformWrapper,
   useControls,
 } from "react-zoom-pan-pinch";
-import ContactInput from "../../molecules/auth/ContactInput";
+import clsx from "clsx";
 
 type CarouselModalProps = {
   opened: boolean;
@@ -134,30 +134,37 @@ const MiddleSection = ({
 const ImageContainer = ({ url }: any) => {
   return (
     <>
-      <Controls />
       <TransformComponent
         contentStyle={{
           width: "100%",
           display: "block",
+          position: "relative",
         }}
       >
         <Image src={url} radius="md" h={600} w={1500} fit="contain" />
+        <Controls />
       </TransformComponent>
     </>
   );
 };
-const Controls = () => {
+const Controls = ({ className }: { className?: string }) => {
   const { zoomIn, zoomOut, resetTransform } = useControls();
-
+  const styles =
+    "text-2xl flex justify-center items-center gap-2.5 px-[7px] py-1.5 rounded-2xl border-[0.8px] border-solid border-[#616D75] bg-[#eaeaea]";
   return (
-    <div className="flex justify-center items-center flex-col">
-      <button onClick={() => zoomIn()} className="text-2xl">
+    <div
+      className={clsx(
+        "flex justify-center items-center flex-col sticky bottom-0 right-0",
+        className
+      )}
+    >
+      <button onClick={() => zoomIn()} className={styles}>
         Zoom In
       </button>
-      <button onClick={() => zoomOut()} className="text-2xl">
+      <button onClick={() => zoomOut()} className={styles}>
         Zoom Out
       </button>
-      <button onClick={() => resetTransform()} className="text-2xl">
+      <button onClick={() => resetTransform()} className={styles}>
         Reset
       </button>
     </div>

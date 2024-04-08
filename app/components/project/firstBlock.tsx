@@ -75,7 +75,7 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
                     src={imageUrl}
                     className={`!w-full rounded-[10px]  h-[545px] lg:h-[680px] bg-gray-${
                       index + 1
-                    } object-contain`}
+                    }`}
                   />
                 </Carousel.Slide>
               ))}

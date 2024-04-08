@@ -144,12 +144,12 @@ export const builderSchemaIndex1 = yup.object().shape({
 const textAreaScema = yup.object().shape({
   vission: yup
     .string()
-    .max(5000, "Vission should not exceed 5000 characters")
-    .required("Vission is required"),
+    .max(5000, "Vision should not exceed 5000 characters")
+    .required("Company Vision is required"),
   mission: yup
     .string()
-    .max(5000, "Mission should not exceed 5000 characters")
-    .required("Mission is required"),
+    .max(5000, "Description should not exceed 5000 characters")
+    .required("Builder's Description is required"),
 });
 export {
   schema as individualSchema,
