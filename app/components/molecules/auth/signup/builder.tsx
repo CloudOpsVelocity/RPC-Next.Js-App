@@ -794,7 +794,12 @@ function Builder() {
                 // onClick={nextStep}
                 type="submit"
               >
-                {active === 0 ? "SAVE & VERIFY" : "SAVE & CONTINUE"}
+                {form.values.otp &&
+                form.values.mobile === form.values.prevMobile &&
+                form.values.email === form.values.prevEmail
+                  ? "Save & CONTINUE"
+                  : "SAVE & VERIFY"}
+                {/* {active === 0 ? "SAVE & VERIFY" : "SAVE & CONTINUE"} */}
               </Button>
             </div>
           )}
