@@ -36,18 +36,18 @@ function FloorPlanModal({ propCgId, data, projName }: Props) {
   const scrollFiltersRef = useRef<HTMLDivElement>(null);
   const form = useForm({
     initialValues: {
-      facingName: selectedFloor.facingName,
-      floor: selectedFloor.atFloor,
-      towerName: selectedFloor.towerName,
-      bhkName: selectedFloor.bhkName,
-      block: selectedFloor.block,
-      unitNumber: selectedFloor.unitNumber,
-      caretarea: selectedFloor.caretarea,
-      superBuildUparea: selectedFloor.superBuildUparea,
-      parkingType: selectedFloor.parkingType,
-      totalNumberofBathroom: selectedFloor.totalNumberofBathroom.toString(),
-      totalNumberOfBalcony: selectedFloor.totalNumberOfBalcony.toString(),
-      noOfCarParking: selectedFloor.noOfCarParking.toString(),
+      facingName: selectedFloor?.facingName,
+      floor: selectedFloor?.atFloor,
+      towerName: selectedFloor?.towerName,
+      bhkName: selectedFloor?.bhkName,
+      block: selectedFloor?.block,
+      unitNumber: selectedFloor?.unitNumber,
+      caretarea: selectedFloor?.caretarea,
+      superBuildUparea: selectedFloor?.superBuildUparea,
+      parkingType: selectedFloor?.parkingType,
+      totalNumberofBathroom: selectedFloor?.totalNumberofBathroom.toString(),
+      totalNumberOfBalcony: selectedFloor?.totalNumberOfBalcony.toString(),
+      noOfCarParking: selectedFloor?.noOfCarParking.toString(),
     },
   });
   const handleArrowClick = (side: "R" | "L"): void => {

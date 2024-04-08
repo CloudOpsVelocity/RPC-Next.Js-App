@@ -71,7 +71,7 @@ export default function PropertyTypeDetailsCrad({
     setcurrentPhase(newCurrentPhase);
     setPrpCgId(newPropCgId);
     setFloorsArray(projectUnitsData);
-    setSelectedFloor(projectUnitsData[0]);
+    setSelectedFloor(null);
     handleOpen();
   };
 
