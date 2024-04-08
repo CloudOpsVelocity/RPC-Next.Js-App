@@ -19,7 +19,7 @@ export default function Reviews({ projName }: { projName: string }) {
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
   return (
     data?.status && (
-      <div id="ratings" className="bg-[#FFF] scroll-mt-[100px] py-12 w-full ">
+      <div id="ratings" className="bg-[#FFF] scroll-mt-[180px] py-12 w-full ">
         <div className="">
           <div className="w-[90%] mx-auto px-6">
             <h2 className="text-[#001F35] text-[32px] not-italic font-semibold leading-[normal] uppercase">

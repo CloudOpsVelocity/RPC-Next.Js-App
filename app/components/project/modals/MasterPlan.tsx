@@ -7,6 +7,7 @@ import Close from "../button/close";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 import S from "@/app/styles/ImgCarousel.module.css";
 import NextImage from "next/image";
+import { Controls } from "./Carousel";
 export default function MasterPlanPopup({ url }: { url: string }) {
   const [opened, { open, close }] = useDisclosure(false);
   const isMobile = useMediaQuery(`(max-width: 750px`);
@@ -35,22 +36,24 @@ export default function MasterPlanPopup({ url }: { url: string }) {
               <Close close={close} />
             </div>
           </div>
-          <TransformWrapper>
-            <TransformComponent>
-              <Image
-                radius="md"
-                m={"auto"}
-                // fit="fill"
-                src={url}
-                // component={NextImage}
-                mah={750}
-                // w="100%"
-                fit="contain"
-                alt="master plan"
-                className="cursor-pointer border-[5px] bg-white border-white md:min-w-[1400px] max-h-[770px] object-contain"
-              />
-            </TransformComponent>
-          </TransformWrapper>
+          <div className="relative">
+            <TransformWrapper>
+              <TransformComponent>
+                <Image
+                  radius="md"
+                  m={"auto"}
+                  // fit="fill"
+                  src={url}
+                  // component={NextImage}
+                  mah={750}
+                  // w="100%"
+                  fit="contain"
+                  alt="master plan"
+                  className="cursor-pointer border-[5px] bg-white border-white md:min-w-[1400px] max-h-[770px] object-contain"
+                />
+              </TransformComponent>
+            </TransformWrapper>
+          </div>
         </div>
       </Modal>
       <Image

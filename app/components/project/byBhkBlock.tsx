@@ -57,7 +57,12 @@ export default function ByBhkBlock({ propCgId, data }: Props) {
 
       <div className="h-full lg:max-h-[447px] max-h-[487px] border-solid overflow-auto scrollbar-hide ">
         {filteredData.map((eachItem: any, ind: number) => (
-          <FloorplanDetailsCard key={ind} data={eachItem} propCgId={propCgId} />
+          <FloorplanDetailsCard
+            key={ind}
+            data={eachItem}
+            propCgId={propCgId}
+            projData={data}
+          />
         ))}
       </div>
     </React.Fragment>

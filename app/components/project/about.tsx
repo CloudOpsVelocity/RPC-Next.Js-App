@@ -12,7 +12,7 @@ type Props = {
 
 export default function About({ heading, projName, content, id, type }: Props) {
   return (
-    <div className="w-[90%] mb-[5%] scroll-mt-[150px]" id={id ?? ""}>
+    <div className="w-[90%] mb-[5%] scroll-mt-[180px]" id={id ?? ""}>
       <h1 className="uppercase text-[24px] lg:text-[32px] font-[600] text-[#001F35] mb-[24px]">
         {heading}{" "}
         <span

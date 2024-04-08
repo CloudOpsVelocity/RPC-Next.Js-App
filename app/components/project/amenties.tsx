@@ -32,7 +32,7 @@ export default function Amenties({
   const maxShow = isMobile ? 6 : 20;
   return (
     <div
-      className="w-[90%] scroll-mt-[90px] bg-white pt-10 pb-20 "
+      className="w-[90%] scroll-mt-[180px] bg-white pt-10 pb-20 "
       id="amenities"
     >
       <div className=" mx-auto ">

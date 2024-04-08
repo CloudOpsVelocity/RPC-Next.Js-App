@@ -7,17 +7,24 @@ import {
   TowerTypeIcon,
 } from "../../images/commonSvgs";
 import { projectprops } from "../../data/projectDetails";
-import { useAtom } from "jotai";
-import { selectedFloorAtom } from "@/app/store/floor";
+import { useAtom, useSetAtom } from "jotai";
+import { floorPlansArray, selectedFloorAtom } from "@/app/store/floor";
 import { useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
 
 type Props = {
   propCgId?: any;
   data: any;
+  projData: any;
 };
 
-const FloorplanDetailsCard: React.FC<Props> = ({ propCgId, data }) => {
+const FloorplanDetailsCard: React.FC<Props> = ({
+  propCgId,
+  data,
+  projData,
+}) => {
   const [, setImage] = useAtom(selectedFloorAtom);
+  const setFloorsArray = useSetAtom(floorPlansArray);
+
   const mergedData = {
     bhk: data.bhkName,
     bedCount: data.bhkName ? data.bhkName.split(" ")[0][0] : "", // Example value, adjust as needed
@@ -36,7 +43,7 @@ const FloorplanDetailsCard: React.FC<Props> = ({ propCgId, data }) => {
   const handleCardClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();
     setImage(data);
-
+    setFloorsArray(projData);
     open("floor");
   };
 

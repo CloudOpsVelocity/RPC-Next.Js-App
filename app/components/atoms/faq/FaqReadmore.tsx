@@ -1,51 +1,49 @@
-"use client";
-import { readMoreAtom } from "@/app/store/drawer";
-import { useAtom } from "jotai";
-import React from "react";
+import React, { useState, useMemo } from "react";
 
 interface ReadMoreProps {
   text: string;
   maxLines?: number;
   title: string;
+  showReadMoreButton?: boolean; // Add a prop to control Read More/Less visibility
 }
 
 const FaqReadMore: React.FC<ReadMoreProps> = ({
   text,
   maxLines = 4,
   title,
+  showReadMoreButton = true,
 }) => {
-  const [{ expanded }, setReadMore] = useAtom(readMoreAtom);
+  const [isReadMore, setIsReadMore] = useState(false);
 
   const handleReadMoreClick = () => {
-    setReadMore((prev) => ({
-      ...prev,
-      expanded: !prev.expanded,
-      content: text,
-      type: "content",
-      title: title,
-      showProjName: false,
-    }));
+    setIsReadMore(!isReadMore);
   };
 
-  const getClampedText = () => {
+  const getClampedText = useMemo(() => {
     const words = text?.split(" ");
-    return words?.slice(0, maxLines * 10).join(" ");
-  };
+    return !isReadMore ? words?.slice(0, maxLines * 10).join(" ") : text;
+  }, [text, maxLines, isReadMore]);
 
-  const shouldShowReadMore = text?.split(" ").length > 50;
+  const shouldShowReadMore = useMemo(
+    () => text?.split(" ").length > 50,
+    [text]
+  );
 
   return (
     <div className="w-[90%]">
       <p className="text-[#303A42] text-[28px] not-italic font-normal leading-9">
-        {getClampedText()}
+        {getClampedText}
 
-        {shouldShowReadMore && (
+        {showReadMoreButton && shouldShowReadMore && (
           <span
-            className=" text-[28px] not-italic font-normal leading-9 text-greenPrimary cursor-pointer"
+            className="text-[28px] not-italic font-normal leading-9 text-greenPrimary cursor-pointer"
             onClick={handleReadMoreClick}
+            role="button" // Add role for accessibility
+            tabIndex={0} // Add tabIndex for accessibility
+            aria-label={isReadMore ? "Read Less" : "Read More"} // Add ARIA label
           >
-            {expanded ? "" : " Read More"}
-            {!expanded && shouldShowReadMore && "... "}
+            {isReadMore ? " Read Less" : " Read More"}
+            {!isReadMore && "... "}
           </span>
         )}
       </p>

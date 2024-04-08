@@ -10,7 +10,7 @@ export default function Navigation() {
   const [currentBlock, setCurrentBlock] = useState("overview");
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [isSticky, setIsSticky] = useState(false);
-  const [isScrolling, setIsScrolling] = useState(false); // Add state for tracking scrolling status
+  const [isScrolling, setIsScrolling] = useState(false);
 
   useEffect(() => {
     function handleScroll() {
@@ -60,7 +60,7 @@ export default function Navigation() {
     }
   }
   function scrollToTopic(id: string): void {
-    setIsScrolling(true); // Set scrolling flag to true when scrolling
+    setIsScrolling(true);
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({
@@ -70,7 +70,7 @@ export default function Navigation() {
       });
       setCurrentBlock(id);
     }
-    setTimeout(() => setIsScrolling(false), 500); // Reset scrolling flag after 500ms delay
+    setTimeout(() => setIsScrolling(false), 500);
   }
   return (
     <div
@@ -82,7 +82,7 @@ export default function Navigation() {
       <Image
         src="/auth/arrow.svg"
         alt=""
-        className="rotate-180 cursor-pointer lg:hidden"
+        className="rotate-180 cursor-pointer"
         width={41}
         height={64}
         onClick={() => handleArrowClick("L")}
@@ -112,7 +112,7 @@ export default function Navigation() {
       <Image
         src="/auth/arrow.svg"
         alt=""
-        className="cursor-pointer lg:hidden"
+        className="cursor-pointer"
         width={41}
         height={64}
         onClick={() => handleArrowClick("R")}

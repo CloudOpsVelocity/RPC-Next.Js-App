@@ -17,7 +17,7 @@ export default function NearByCarousel({
   const { data } = useNearby({ lat, lng, projId });
   return (
     <div
-      className="flex flex-col justify-start items-start w-[90%] mt-[5%]"
+      className="flex flex-col justify-start items-start w-[90%] mt-[5%] scroll-mt-[180px]"
       id="similar"
     >
       <ProjectCarousel

@@ -39,7 +39,7 @@ export default function ProjectDetailsP({ projName, slug }: Props) {
       Object.keys(selectedPhase.propTypeOverview).includes(propertyType)
     );
   return (
-    <div className="w-[90%] mb-[5%] scroll-mt-[90px]" id="propertyDetails">
+    <div className="w-[90%] mb-[5%] scroll-mt-[180px]" id="propertyDetails">
       <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35] mb-[12px]">
         Property Details Of{" "}
         <span className="text-[#148B16] font-[700] uppercase">{projName}</span>{" "}

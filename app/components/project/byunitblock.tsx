@@ -52,7 +52,6 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
     length: "",
     bhkName: "",
   });
-  console.log(selectedValues);
   const handleInputChange = (property: keyof SelectedValues, value: string) => {
     setSelectedValues((prevValues) => ({
       ...prevValues,

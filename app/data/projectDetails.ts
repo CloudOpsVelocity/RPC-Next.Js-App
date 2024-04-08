@@ -1,15 +1,19 @@
+import { Labrada } from "next/font/google";
+
 export const topics = [
   { label: "Overview", id: "overview" },
+  { label: "Available Listings", id: "listings" },
   { label: "About", id: "about" },
   { label: "Property Details", id: "propertyDetails" },
+  { label: "Master Plan", id: "masterPlan" },
   { label: "Floor Plans", id: "floorPlans" },
   { label: "Galleria", id: "galleria" },
   { label: "Amenities", id: "amenities" },
   { label: "Near By", id: "nearBy" },
   { label: "Specifications", id: "specifications" },
   { label: "Highlights", id: "highlights" },
-  { label: "Ratings", id: "ratings" },
   { label: "Why Buy This Project?", id: "whyBuy" },
+  { label: "Ratings", id: "ratings" },
   { label: "FAQ?", id: "faq" },
   { label: "Similar", id: "similar" },
 ];

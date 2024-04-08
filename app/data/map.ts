@@ -77,6 +77,12 @@ export const MapIcon = L.icon({
   iconAnchor: [19, 38],
   popupAnchor: [0, -38],
 });
+export const NearLocation = L.icon({
+  iconUrl: "/proj/nearlocaltion.svg",
+  iconSize: [50, 50],
+  iconAnchor: [19, 38],
+  popupAnchor: [0, -38],
+});
 export const fakeDataMaps = [
   { lat: 12.9850828, lng: 77.603585 },
   { lat: 12.982889, lng: 77.606296 },

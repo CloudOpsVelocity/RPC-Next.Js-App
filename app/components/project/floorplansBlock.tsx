@@ -1,7 +1,7 @@
 "use client";
 import { propertyDetailsTypes, projectprops } from "../../data/projectDetails";
 import Button from "../../elements/button";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   PlotIcon,
   VillamentIcon,
@@ -132,9 +132,14 @@ export default function FloorplansBlock({ projName, slug }: Props) {
       open("floor");
     }
   };
+  useEffect(() => {
+    if (projectUnitsData && projectUnitsData.length > 0) {
+      setSelectedFloor(projectUnitsData[0]);
+    }
+  }, [projectUnitsData]);
   if (isLoading) return <Loading />;
   return (
-    <div className="w-[90%] scroll-mt-[90px] mb-[5%]" id="floorPlans">
+    <div className="w-[90%] scroll-mt-[180px] mb-[5%]" id="floorPlans">
       <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35] mb-[12px]">
         FLOOR PLANS for{" "}
         <span className="text-[#148B16] font-[700] uppercase">{projName}</span>{" "}
@@ -192,7 +197,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                   } `}
                   onChange={() => {
                     getPropertyType(propertyDetailsTypes.get(keyName));
-                    setSelectedFloor(projectUnitsData[0]);
+                    // setSelectedFloor(projectUnitsData[0]);
                   }}
                   title={name}
                   icon={getIcon(keyName)}
@@ -256,6 +261,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                   key={ind}
                   propCgId={propCgId}
                   data={data}
+                  projData={projectUnitsData}
                 />
               ))
             ) : (

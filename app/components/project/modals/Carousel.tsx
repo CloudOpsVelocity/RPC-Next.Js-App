@@ -1,7 +1,12 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import { Button, Modal, rem } from "@mantine/core";
 import { Carousel } from "@mantine/carousel";
-import { PopupOpenSvg, emptyFilesIcon } from "@/app/images/commonSvgs";
+import {
+  PopupOpenSvg,
+  ZoomInIcon,
+  ZoomOutIcon,
+  emptyFilesIcon,
+} from "@/app/images/commonSvgs";
 import { RightSection } from "./FloorPlan";
 import S from "@/app/styles/ModalCarousel.module.css";
 import { useAtom, useAtomValue } from "jotai";
@@ -17,12 +22,6 @@ import {
   useControls,
 } from "react-zoom-pan-pinch";
 import clsx from "clsx";
-
-type CarouselModalProps = {
-  opened: boolean;
-  setOpened: Dispatch<SetStateAction<boolean>>;
-  close: () => void;
-};
 
 function CarouselModal({
   projName,
@@ -133,7 +132,7 @@ const MiddleSection = ({
 
 const ImageContainer = ({ url }: any) => {
   return (
-    <>
+    <div className="relative">
       <TransformComponent
         contentStyle={{
           width: "100%",
@@ -142,27 +141,27 @@ const ImageContainer = ({ url }: any) => {
         }}
       >
         <Image src={url} radius="md" h={600} w={1500} fit="contain" />
-        <Controls />
       </TransformComponent>
-    </>
+      {/* <Controls /> */}
+    </div>
   );
 };
-const Controls = ({ className }: { className?: string }) => {
+export const Controls = ({ className }: { className?: string }) => {
   const { zoomIn, zoomOut, resetTransform } = useControls();
   const styles =
     "text-2xl flex justify-center items-center gap-2.5 px-[7px] py-1.5 rounded-2xl border-[0.8px] border-solid border-[#616D75] bg-[#eaeaea]";
   return (
     <div
       className={clsx(
-        "flex justify-center items-center flex-col sticky bottom-0 right-0",
+        "flex justify-center items-center  absolute bottom-2 right-2 space-x-4",
         className
       )}
     >
       <button onClick={() => zoomIn()} className={styles}>
-        Zoom In
+        <ZoomInIcon />
       </button>
       <button onClick={() => zoomOut()} className={styles}>
-        Zoom Out
+        <ZoomOutIcon />
       </button>
       <button onClick={() => resetTransform()} className={styles}>
         Reset

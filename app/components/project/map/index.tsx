@@ -59,7 +59,7 @@ const LeafMap: React.FC<{
   const { data: mapData, isLoading } = useMapData({ projSlug: projId });
   const isMobile = useMediaQuery(`(max-width: 750px)`);
   return (
-    <div className="w-[90%] scroll-mt-[90px] mx-auto  mb-[5%] " id="nearBy">
+    <div className="w-[90%] scroll-mt-[180px] mx-auto  mb-[5%] " id="nearBy">
       <div className="flex justify-between ">
         {type === "prop" ? (
           <PropertyHeading
