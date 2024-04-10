@@ -20,7 +20,7 @@ import {
 } from "@/app/context/floorplanContext";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { floorPlansArray, selectedFloorAtom } from "@/app/store/floor";
-import { typeAtom, useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
+import { useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
 import { useSubFloorPlanPopup } from "@/app/hooks/useSubFloorplanPopup";
 import clsx from "clsx";
 
@@ -35,25 +35,7 @@ function FloorPlanModal({ propCgId, data, projName }: Props) {
   const setFloorsArray = useSetAtom(floorPlansArray);
   const [opened, { close, type }] = useFloorPlanPopup();
   const scrollFiltersRef = useRef<HTMLDivElement>(null);
-  const form = useForm();
-  // useEffect(() => {
-  //   if (selectedFloor) {
-  //     form.setValues({
-  //       facingName: selectedFloor?.facingName,
-  //       bhkName: selectedFloor?.bhkName,
-  //       towerName: selectedFloor?.towerName,
-  //       unitNumber: selectedFloor?.unitNumber,
-  //       block: selectedFloor?.block,
-  //       superBuildUparea: selectedFloor?.superBuildUparea,
-  //       caretarea: selectedFloor?.caretarea,
-  //       floor: selectedFloor?.floor?.toString(),
-  //       parkingType: selectedFloor?.parkingType,
-  //       noOfCarParking: selectedFloor?.noOfCarParking?.toString(),
-  //       totalNumberOfBalcony: selectedFloor?.totalNumberOfBalcony?.toString(),
-  //       totalNumberofBathroom: selectedFloor?.totalNumberofBathroom?.toString(),
-  //     });
-  //   }
-  // }, [selectedFloor?.unitNumber]);
+  const form = useFormContext();
   const handleArrowClick = (side: "R" | "L"): void => {
     const scrollAmount = side === "R" ? 100 : -100;
     if (scrollFiltersRef.current) {
@@ -63,7 +45,10 @@ function FloorPlanModal({ propCgId, data, projName }: Props) {
 
   const handleClose = () => {
     close();
-    handleReset();
+    setSelectedFloor(data[0]);
+    setFloorsArray(data);
+    const keys = Object.keys(form.values);
+    keys.forEach((key) => form.setFieldValue(key, null));
   };
   const handleSearch = (): void => {
     const filteredData = data.filter((item: any) => {
@@ -77,7 +62,6 @@ function FloorPlanModal({ propCgId, data, projName }: Props) {
         }
         return false;
       });
-
       return matches;
     });
 
@@ -85,7 +69,7 @@ function FloorPlanModal({ propCgId, data, projName }: Props) {
     setFloorsArray(filteredData);
   };
   const handleReset = () => {
-    setSelectedFloor(data[0]);
+    setSelectedFloor(null);
     setFloorsArray(data);
     const keys = Object.keys(form.values);
     keys.forEach((key) => form.setFieldValue(key, null));
@@ -104,7 +88,7 @@ function FloorPlanModal({ propCgId, data, projName }: Props) {
   };
   const [o, {}] = useSubFloorPlanPopup();
   return (
-    <FormProvider form={form}>
+    <>
       <Modal
         opened={opened}
         classNames={{
@@ -233,7 +217,7 @@ function FloorPlanModal({ propCgId, data, projName }: Props) {
           </div>
         </>
       </Modal>
-    </FormProvider>
+    </>
   );
 }
 
@@ -886,15 +870,39 @@ const RightSection = ({ propCgId }: Props) => {
 
 const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
   const data = useAtomValue(selectedFloorAtom);
-  const floorsArray = useAtomValue(floorPlansArray);
+  const { setValues } = useFormContext();
+  const [floorsArray, setFloorsArray] = useAtom<any>(floorPlansArray);
   const [, { open }] = useSubFloorPlanPopup();
   const [currentImg, setCurrentImg] = useState(0);
   const [selectedFloor, setFloor] = useAtom(selectedFloorAtom);
   const selectImg = (index: number) => {
     setFloor(floorsArray[index]);
     setCurrentImg(index);
+    setValues({
+      facingName: floorsArray[index]?.facingName,
+      bhkName: floorsArray[index]?.bhkName,
+      towerName: floorsArray[index]?.towerName,
+      unitNumber: floorsArray[index]?.unitNumber,
+      block: floorsArray[index]?.block,
+      superBuildUparea: floorsArray[index]?.superBuildUparea,
+      caretarea: floorsArray[index]?.caretarea,
+      floor: floorsArray[index]?.floor?.toString(),
+      parkingType: floorsArray[index]?.parkingType,
+      noOfCarParking: floorsArray[index]?.noOfCarParking?.toString(),
+      totalNumberOfBalcony:
+        floorsArray[index]?.totalNumberOfBalcony?.toString(),
+      totalNumberofBathroom:
+        floorsArray[index]?.totalNumberofBathroom?.toString(),
+    });
+    handleSearch(index);
   };
-  console.log(selectedFloor);
+  const handleSearch = (index: number): void => {
+    const filteredFloors = floorsArray?.filter(
+      (floor: any) => floor.unitNumber === floorsArray[index].unitNumber
+    );
+    // @ts-ignore
+    setFloorsArray(filteredFloors);
+  };
   return (
     <div className="flex flex-col justify-center items-start shrink-0 w-full max-w-[686px]">
       <p className="text-[#005DA0] w-full text-right mb-[1%] text-[16px] font-[500] ">

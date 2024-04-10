@@ -7,9 +7,10 @@ import cookie from "js-cookie";
 type Props = {
   propCgId: any;
   data: any;
+  setValues: any;
 };
 
-export default function ByBhkBlock({ propCgId, data }: Props) {
+export default function ByBhkBlock({ propCgId, data, setValues }: Props) {
   const [bhk, setBhk] = useState("0");
 
   // Filter data based on selected BHK
@@ -62,6 +63,7 @@ export default function ByBhkBlock({ propCgId, data }: Props) {
             data={eachItem}
             propCgId={propCgId}
             projData={data}
+            setValues={setValues}
           />
         ))}
       </div>

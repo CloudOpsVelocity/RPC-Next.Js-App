@@ -15,12 +15,14 @@ type Props = {
   propCgId?: any;
   data: any;
   projData: any;
+  setValues: any;
 };
 
 const FloorplanDetailsCard: React.FC<Props> = ({
   propCgId,
   data,
   projData,
+  setValues,
 }) => {
   const [, setImage] = useAtom(selectedFloorAtom);
   const setFloorsArray = useSetAtom(floorPlansArray);
@@ -43,8 +45,28 @@ const FloorplanDetailsCard: React.FC<Props> = ({
   const handleCardClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();
     setImage(data);
-    setFloorsArray(projData);
+    setValues({
+      facingName: data?.facingName,
+      bhkName: data?.bhkName,
+      towerName: data?.towerName,
+      unitNumber: data?.unitNumber,
+      block: data?.block,
+      superBuildUparea: data?.superBuildUparea,
+      caretarea: data?.caretarea,
+      floor: data?.floor?.toString(),
+      parkingType: data?.parkingType,
+      noOfCarParking: data?.noOfCarParking?.toString(),
+      totalNumberOfBalcony: data?.totalNumberOfBalcony?.toString(),
+      totalNumberofBathroom: data?.totalNumberofBathroom?.toString(),
+    });
+    handleSearch();
     open("floor");
+  };
+  const handleSearch = (): void => {
+    const filteredFloors = projData.filter(
+      (floor: any) => floor.unitNumber === mergedData.unitNumber
+    );
+    setFloorsArray(filteredFloors);
   };
 
   return (

@@ -25,6 +25,8 @@ import { floorPlansArray, selectedFloorAtom } from "@/app/store/floor";
 import Loading from "../atoms/Loader";
 import { currentPhaseAtom, propCgIdAtom } from "@/app/store/vewfloor";
 import { useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
+import { FormProvider, useForm } from "@/app/context/floorplanContext";
+import filterDataAtom from "@/app/store/filterdata";
 
 type Props = {
   data: PhaseList[];
@@ -40,7 +42,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
   const setFloorsArray = useSetAtom(floorPlansArray);
   const [selectedFloor, setSelectedFloor] = useAtom(selectedFloorAtom);
   const [, { open, type }] = useFloorPlanPopup();
-
+  const form = useForm();
   const selectedPhase = PhaseOverview?.find(
     (phase: any) => phase.phaseId === currentPhase
   );
@@ -119,7 +121,24 @@ export default function FloorplansBlock({ projName, slug }: Props) {
 
   const handleOpen = () => {
     setSelectedFloor(projectUnitsData[0]);
-    setFloorsArray(projectUnitsData);
+    form.setValues({
+      facingName: projectUnitsData[0]?.facingName,
+      bhkName: projectUnitsData[0]?.bhkName,
+      towerName: projectUnitsData[0]?.towerName,
+      unitNumber: projectUnitsData[0]?.unitNumber,
+      block: projectUnitsData[0]?.block,
+      superBuildUparea: projectUnitsData[0]?.superBuildUparea,
+      caretarea: projectUnitsData[0]?.caretarea,
+      floor: projectUnitsData[0]?.floor?.toString(),
+      parkingType: projectUnitsData[0]?.parkingType,
+      noOfCarParking: projectUnitsData[0]?.noOfCarParking?.toString(),
+      totalNumberOfBalcony:
+        projectUnitsData[0]?.totalNumberOfBalcony?.toString(),
+      totalNumberofBathroom:
+        projectUnitsData[0]?.totalNumberofBathroom?.toString(),
+    });
+
+    handleSearch();
     open("floor");
   };
   const handleContainerClick = () => {
@@ -128,6 +147,12 @@ export default function FloorplansBlock({ projName, slug }: Props) {
       setFloorsArray(projectUnitsData);
       open("container");
     }
+  };
+  const handleSearch = (): void => {
+    const filteredFloors = projectUnitsData.filter(
+      (floor: any) => floor.unitNumber === projectUnitsData[0].unitNumber
+    );
+    setFloorsArray(filteredFloors);
   };
   useEffect(() => {
     if (
@@ -263,6 +288,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                   propCgId={propCgId}
                   data={data}
                   projData={projectUnitsData}
+                  setValues={form.setValues}
                 />
               ))
             ) : (
@@ -279,7 +305,11 @@ export default function FloorplansBlock({ projName, slug }: Props) {
 
         {floorPlanType == "bhk" && propCgId != projectprops.plot && (
           <div className="w-full md:w-[50%] h-[547px] border-solid overflow-auto">
-            <ByBhkBlock propCgId={propCgId} data={projectUnitsData} />
+            <ByBhkBlock
+              propCgId={propCgId}
+              data={projectUnitsData}
+              setValues={form.setValues}
+            />
           </div>
         )}
 
@@ -355,11 +385,13 @@ export default function FloorplansBlock({ projName, slug }: Props) {
           </div>
         </div>
       </div>
-      <FloorPlanModal
-        projName={projName}
-        propCgId={propCgId}
-        data={projectUnitsData}
-      />
+      <FormProvider form={form}>
+        <FloorPlanModal
+          projName={projName}
+          propCgId={propCgId}
+          data={projectUnitsData}
+        />
+      </FormProvider>
     </div>
   );
 }
