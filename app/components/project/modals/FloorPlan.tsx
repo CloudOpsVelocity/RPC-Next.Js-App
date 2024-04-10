@@ -1,7 +1,8 @@
 import { Modal, Select } from "@mantine/core";
-import { useId, useRef } from "react";
+import { useEffect, useId, useRef } from "react";
 import {
   DropDownIcon,
+  FloorPlanModalIcon,
   LenseIcon,
   PopupOpenSvg,
   emptyFilesIcon,
@@ -22,6 +23,7 @@ import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { floorPlansArray, selectedFloorAtom } from "@/app/store/floor";
 import { typeAtom, useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
 import { useSubFloorPlanPopup } from "@/app/hooks/useSubFloorplanPopup";
+import clsx from "clsx";
 
 type Props = {
   propCgId: any;
@@ -34,22 +36,26 @@ function FloorPlanModal({ propCgId, data, projName }: Props) {
   const setFloorsArray = useSetAtom(floorPlansArray);
   const [opened, { open, close }] = useFloorPlanPopup();
   const scrollFiltersRef = useRef<HTMLDivElement>(null);
-  const form = useForm({
-    initialValues: {
-      facingName: selectedFloor?.facingName,
-      floor: selectedFloor?.atFloor,
-      towerName: selectedFloor?.towerName,
-      bhkName: selectedFloor?.bhkName,
-      block: selectedFloor?.block,
-      unitNumber: selectedFloor?.unitNumber,
-      caretarea: selectedFloor?.caretarea,
-      superBuildUparea: selectedFloor?.superBuildUparea,
-      parkingType: selectedFloor?.parkingType,
-      totalNumberofBathroom: selectedFloor?.totalNumberofBathroom.toString(),
-      totalNumberOfBalcony: selectedFloor?.totalNumberOfBalcony.toString(),
-      noOfCarParking: selectedFloor?.noOfCarParking.toString(),
-    },
-  });
+  const form = useForm();
+  useEffect(() => {
+    console.log(selectedFloor, "selected one");
+    if (selectedFloor) {
+      form.setValues({
+        facingName: selectedFloor?.facingName,
+        bhkName: selectedFloor?.bhkName,
+        towerName: selectedFloor?.towerName,
+        unitNumber: selectedFloor?.unitNumber,
+        block: selectedFloor?.block,
+        superBuildUparea: selectedFloor?.superBuildUparea,
+        caretarea: selectedFloor?.caretarea,
+        floor: selectedFloor?.floor.toString(),
+        parkingType: selectedFloor?.parkingType,
+        noOfCarParking: selectedFloor?.noOfCarParking.toString(),
+        totalNumberOfBalcony: selectedFloor?.totalNumberOfBalcony.toString(),
+        totalNumberofBathroom: selectedFloor?.totalNumberofBathroom.toString(),
+      });
+    }
+  }, [selectedFloor?.unitNumber]);
   const handleArrowClick = (side: "R" | "L"): void => {
     const scrollAmount = side === "R" ? 100 : -100;
     if (scrollFiltersRef.current) {
@@ -271,12 +277,23 @@ const LeftSection = ({ propCgId, data }: Props) => {
     if (key === "unitNumber" && filteredData.length > 0) {
       const filteredItem = filteredData[0];
       const filteredValues: { [key: string]: string } = {};
-
       Object.keys(filteredItem).forEach((prop) => {
         filteredValues[prop] = String(filteredItem[prop]);
       });
-
-      setValues(filteredValues);
+      setValues({
+        facingName: filteredValues?.facingName,
+        bhkName: filteredValues?.bhkName,
+        towerName: filteredValues?.towerName,
+        unitNumber: filteredValues?.unitNumber,
+        block: filteredValues?.block,
+        superBuildUparea: filteredValues?.superBuildUparea,
+        caretarea: filteredValues?.caretarea,
+        floor: filteredValues?.floor.toString(),
+        parkingType: filteredValues?.parkingType,
+        noOfCarParking: filteredValues?.noOfCarParking.toString(),
+        totalNumberOfBalcony: filteredValues?.totalNumberOfBalcony.toString(),
+        totalNumberofBathroom: filteredValues?.totalNumberofBathroom.toString(),
+      });
     }
   };
   const handleOnChange = (value: string, key: string) => {
@@ -286,8 +303,6 @@ const LeftSection = ({ propCgId, data }: Props) => {
     setValues(prevObj);
     handleSearch(key);
   };
-
-  //console.log(values)
 
   return (
     <div className="col-span-1 w-full max-w-[392px] mr-[3%]  ">
@@ -872,7 +887,6 @@ const RightSection = ({ propCgId }: Props) => {
 };
 
 const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
-  const type = useAtomValue(typeAtom);
   const data = useAtomValue(selectedFloorAtom);
   const floorsArray = useAtomValue(floorPlansArray);
   const [, { open }] = useSubFloorPlanPopup();
@@ -882,7 +896,7 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
     setFloor(floorsArray[index]);
     setCurrentImg(index);
   };
-
+  console.log(selectedFloor);
   return (
     <div className="flex flex-col justify-center items-start shrink-0 w-full max-w-[686px]">
       <p className="text-[#005DA0] w-full text-right mb-[1%] text-[16px] font-[500] ">
@@ -914,19 +928,14 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
           </>
         )}
       </p>
-      <div className="relative shadow-md rounded-[14px] border-solid border-[1px] border-[#EFEFEF] w-full flex justify-center items-center ">
-        {type == "overview" && data == null ? (
-          <div className="flex justify-center items-center flex-col h-[350px]">
-            {emptyFilesIcon}
-            <p>No Matching Results Found !</p>
-          </div>
-        ) : (floorsArray != undefined &&
-            floorsArray != null &&
-            floorsArray.length > 0) ||
-          data?.floorPlanUrl ? (
+      <div className="relative  w-full flex justify-center items-center border shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[14px] border-solid border-[#7591A6]">
+        {floorsArray != undefined &&
+        floorsArray != null &&
+        floorsArray.length > 0 &&
+        data?.floorPlanUrl ? (
           <Image
             // @ts-ignore
-            src={data.floorPlanUrl || floorsArray[currentImg]?.floorPlanUrl}
+            src={data?.floorPlanUrl}
             alt="Floor Plan"
             height={350}
             width={800}
@@ -935,9 +944,15 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
             onClick={open}
           />
         ) : (
-          <div className="flex justify-center items-center flex-col ">
-            {emptyFilesIcon}
-            <p>No Matching Results Found !</p>
+          <div className="flex justify-center items-center flex-col h-[391px] ">
+            <FloorPlanModalIcon />
+            <p className="text-[#303030] text-2xl not-italic font-medium leading-[normal] tracking-[0.96px] mt-4">
+              No Floor Plan Selected
+            </p>
+            <p className="text-[#303030] text-[15px] not-italic font-medium leading-[normal] tracking-[0.6px]">
+              Please select any floor plan to view details or filter to see
+              floor plans
+            </p>
           </div>
         )}
 
@@ -982,7 +997,11 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
                 return (
                   <div
                     key={ind}
-                    className=" h-[50px] w-[70px] flex justify-center items-center shadow-md  scrollbar-hide rounded-[5px] border-[0.5px] border-solid border-[#92B2C8]"
+                    className={clsx(
+                      " h-[50px] w-[70px] flex justify-center items-center shadow-md  scrollbar-hide rounded-[5px] border-[0.5px] border-solid border-[#92B2C8]",
+                      selectedFloor?.floorPlanUrl == eachObj?.floorPlanUrl &&
+                        "shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] border-2 border-solid border-[#59A1D6]"
+                    )}
                   >
                     <Image
                       // @ts-ignore

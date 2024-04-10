@@ -11,9 +11,12 @@ export default function Navigation() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [isSticky, setIsSticky] = useState(false);
   const [isScrolling, setIsScrolling] = useState(false);
-
+  const [lastScrollY, setLastScrollY] = useState(0);
   useEffect(() => {
     function handleScroll() {
+      const currentScrollY = window.scrollY;
+      const scrollDirection = currentScrollY > lastScrollY ? "down" : "up";
+      setLastScrollY(currentScrollY);
       if (!isScrolling) {
         const sections = topics.map((topic) =>
           document.getElementById(topic.id)
@@ -22,26 +25,28 @@ export default function Navigation() {
           (section) => section?.getBoundingClientRect().top ?? 0
         );
         const windowHeight = window.innerHeight;
-
         let closestSectionIndex = -1;
         let closestSectionDistance = Number.MAX_VALUE;
-
         for (let i = 0; i < sections.length; i++) {
           const distance = Math.abs(sectionTops[i] - 0.5 * windowHeight);
+
           if (distance < closestSectionDistance) {
             closestSectionDistance = distance;
             closestSectionIndex = i;
           }
         }
-
         if (closestSectionIndex !== -1) {
           setCurrentBlock(sections[closestSectionIndex]?.id ?? "");
         }
-
-        if (window.scrollY > 800) {
+        if (currentScrollY > 800) {
           setIsSticky(true);
         } else {
           setIsSticky(false);
+        }
+        if (scrollDirection === "down") {
+          handleArrowClick("R");
+        } else {
+          handleArrowClick("L");
         }
       }
     }
@@ -51,10 +56,9 @@ export default function Navigation() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [topics, isScrolling]); // Add isScrolling to dependency array
+  }, [topics, isScrolling, lastScrollY]);
   function handleArrowClick(side: "R" | "L"): void {
     const scrollAmount = side === "R" ? 100 : -100;
-
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollLeft += scrollAmount;
     }
@@ -70,13 +74,13 @@ export default function Navigation() {
       });
       setCurrentBlock(id);
     }
-    setTimeout(() => setIsScrolling(false), 500);
+    setTimeout(() => setIsScrolling(false), 3000);
   }
   return (
     <div
       className={clsx(
         "flex justify-center items-center shadow-lg w-full",
-        isSticky && "fixed top-[90px] bg-white shadow-md z-10"
+        isSticky && "fixed top-[90px] bg-white shadow-md z-[100]"
       )}
     >
       <Image

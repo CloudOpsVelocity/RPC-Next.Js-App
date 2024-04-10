@@ -127,7 +127,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
   };
   const handleContainerClick = () => {
     if (floorPlanType === "type") {
-      setSelectedFloor(projectUnitsData[0]);
+      setSelectedFloor(null);
       setFloorsArray(projectUnitsData);
       open("floor");
     }
@@ -283,7 +283,13 @@ export default function FloorplansBlock({ projName, slug }: Props) {
         )}
 
         <div className="w-full md:w-[50%] flex justify-end items-end flex-col p-[2%] shadow-inner md:shadow-none ">
-          <p className=" text-[14px] lg:text-[16px] font-[500] text-[#005DA0] ">
+          <p
+            className=" text-[14px] lg:text-[16px] font-[500] text-[#005DA0] "
+            onClick={(e) => {
+              e.stopPropagation();
+              handleOpen();
+            }}
+          >
             {projName}
             {propCgId != projectprops.plot &&
               selectedFloor?.bhkName &&
@@ -310,7 +316,10 @@ export default function FloorplansBlock({ projName, slug }: Props) {
           <div className="flex justify-center items-center h-[300px] lg:h-[450px] w-full">
             {selectedFloor?.floorPlanUrl ? (
               <img
-                onClick={handleOpen}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleOpen();
+                }}
                 src={selectedFloor?.floorPlanUrl as string}
                 className="w-full h-full cursor-pointer  object-contain"
                 alt="image"
@@ -318,7 +327,10 @@ export default function FloorplansBlock({ projName, slug }: Props) {
             ) : (
               <div className="flex justify-center items-center flex-col ">
                 <img
-                  onClick={handleOpen}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleOpen();
+                  }}
                   src="/abc/noimage.svg"
                   className="w-[80%] h-full cursor-pointer"
                   alt="image"
@@ -331,7 +343,10 @@ export default function FloorplansBlock({ projName, slug }: Props) {
           </div>
           <div
             className="bg-[#F4FBFF] p-[10px] rounded-[29px] gap-[12px] flex justify-end items-center  cursor-pointer"
-            onClick={handleOpen}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleOpen();
+            }}
           >
             <p className="text-[12px] lg:text-[14px] font-[600] text-[#0073C6] underline ">
               Click on image to open floor plan details

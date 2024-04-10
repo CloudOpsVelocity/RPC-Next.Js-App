@@ -26,7 +26,7 @@ export default function GalleryBlock({
   };
   const [, { open }] = useGallery();
   return (
-    <div className="w-[90%] scroll-mt-[180px] mb-[5%]" id="galleria">
+    <div className="w-[90%] scroll-mt-[200px] mb-[5%]" id="galleria">
       {type === "prop" ? (
         <PropertyHeading
           title="GALLERIA"

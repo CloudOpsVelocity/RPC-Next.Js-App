@@ -9,7 +9,7 @@ import {
   villamentCardImg,
 } from "@/app/images/commonImages";
 import Image from "next/image";
-import { useSetAtom } from "jotai";
+import { useAtom, useSetAtom } from "jotai";
 import { currentPhaseAtom, propCgIdAtom } from "@/app/store/vewfloor";
 import { formatCurrency } from "@/app/utils/numbers";
 import { useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
@@ -52,14 +52,13 @@ export default function PropertyTypeDetailsCrad({
   cg,
   propertyType,
   phase,
-  data,
 }: Props) {
   const { slug } = useParams<{ slug: string }>();
   const [, { open }] = useFloorPlanPopup();
   const setcurrentPhase = useSetAtom(currentPhaseAtom);
   const setPrpCgId = useSetAtom(propCgIdAtom);
   const setSelectedFloor = useSetAtom(selectedFloorAtom);
-  const setFloorsArray = useSetAtom(floorPlansArray);
+  const [testData, setFloorsArray] = useAtom(floorPlansArray);
   const { data: projectUnitsData, isLoading } = useQuery({
     queryKey: [`/${getPropId(propertyType)}/${phase}/${slug}`],
     queryFn: () => getProjectUnits(slug, phase, getPropId(propertyType)),
@@ -74,6 +73,7 @@ export default function PropertyTypeDetailsCrad({
     setSelectedFloor(null);
     handleOpen();
   };
+  console.log(projectUnitsData, { testData });
 
   const propName = (key: string, type?: string) => {
     switch (key) {
