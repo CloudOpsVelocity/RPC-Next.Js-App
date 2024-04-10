@@ -23,6 +23,7 @@ import { floorPlansArray, selectedFloorAtom } from "@/app/store/floor";
 import { useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
 import { useSubFloorPlanPopup } from "@/app/hooks/useSubFloorplanPopup";
 import clsx from "clsx";
+import { setPropertyValues } from "@/app/utils/dyanamic/projects";
 
 type Props = {
   propCgId: any;
@@ -325,7 +326,8 @@ const LeftSection = ({ propCgId, data }: Props) => {
         )}
 
         {propCgId == projectprops.apartment &&
-          propCgId != projectprops.plot && (
+          propCgId != projectprops.plot &&
+          getOptions("block").length > 0 && (
             <Select
               key={useId()}
               w={"full"}
@@ -587,12 +589,12 @@ const LeftSection = ({ propCgId, data }: Props) => {
               label="Choose Balcony Size"
               className="!w-[46%]"
               placeholder="-- select --"
-              data={["1", "2", "3", "4", "5"]}
+              data={getOptions("totalBalconySize")}
               searchable
               maxDropdownHeight={200}
-              {...getInputProps("balconySize")}
+              {...getInputProps("totalBalconySize")}
               onChange={(value) =>
-                handleOnChange(value as string, "balconySize")
+                handleOnChange(value as string, "totalBalconySize")
               }
               classNames={{ input: S.input, label: S.label }}
               rightSection={<DropDownIcon />}
@@ -878,22 +880,7 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
   const selectImg = (index: number) => {
     setFloor(floorsArray[index]);
     setCurrentImg(index);
-    setValues({
-      facingName: floorsArray[index]?.facingName,
-      bhkName: floorsArray[index]?.bhkName,
-      towerName: floorsArray[index]?.towerName,
-      unitNumber: floorsArray[index]?.unitNumber,
-      block: floorsArray[index]?.block,
-      superBuildUparea: floorsArray[index]?.superBuildUparea,
-      caretarea: floorsArray[index]?.caretarea,
-      floor: floorsArray[index]?.floor?.toString(),
-      parkingType: floorsArray[index]?.parkingType,
-      noOfCarParking: floorsArray[index]?.noOfCarParking?.toString(),
-      totalNumberOfBalcony:
-        floorsArray[index]?.totalNumberOfBalcony?.toString(),
-      totalNumberofBathroom:
-        floorsArray[index]?.totalNumberofBathroom?.toString(),
-    });
+    setValues(setPropertyValues(floorsArray[index], propCgId));
     handleSearch(index);
   };
   const handleSearch = (index: number): void => {
@@ -904,7 +891,7 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
     setFloorsArray(filteredFloors);
   };
   return (
-    <div className="flex flex-col justify-center items-start shrink-0 w-full max-w-[686px]">
+    <div className="flex flex-col justify-center items-start shrink-0 w-full sm:max-w-[300px] md:max-w-[500px] xl:max-w-[686px]">
       <p className="text-[#005DA0] w-full text-right mb-[1%] text-[16px] font-[500] ">
         {selectedFloor && (
           <>

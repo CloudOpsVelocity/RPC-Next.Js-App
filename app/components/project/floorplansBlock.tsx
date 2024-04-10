@@ -27,6 +27,7 @@ import { currentPhaseAtom, propCgIdAtom } from "@/app/store/vewfloor";
 import { useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
 import { FormProvider, useForm } from "@/app/context/floorplanContext";
 import filterDataAtom from "@/app/store/filterdata";
+import { setPropertyValues } from "@/app/utils/dyanamic/projects";
 
 type Props = {
   data: PhaseList[];
@@ -121,22 +122,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
 
   const handleOpen = () => {
     setSelectedFloor(projectUnitsData[0]);
-    form.setValues({
-      facingName: projectUnitsData[0]?.facingName,
-      bhkName: projectUnitsData[0]?.bhkName,
-      towerName: projectUnitsData[0]?.towerName,
-      unitNumber: projectUnitsData[0]?.unitNumber,
-      block: projectUnitsData[0]?.block,
-      superBuildUparea: projectUnitsData[0]?.superBuildUparea,
-      caretarea: projectUnitsData[0]?.caretarea,
-      floor: projectUnitsData[0]?.floor?.toString(),
-      parkingType: projectUnitsData[0]?.parkingType,
-      noOfCarParking: projectUnitsData[0]?.noOfCarParking?.toString(),
-      totalNumberOfBalcony:
-        projectUnitsData[0]?.totalNumberOfBalcony?.toString(),
-      totalNumberofBathroom:
-        projectUnitsData[0]?.totalNumberofBathroom?.toString(),
-    });
+    form.setValues(setPropertyValues(projectUnitsData[0], propCgId));
 
     handleSearch();
     open("floor");

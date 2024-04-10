@@ -10,6 +10,7 @@ import { projectprops } from "../../data/projectDetails";
 import { useAtom, useSetAtom } from "jotai";
 import { floorPlansArray, selectedFloorAtom } from "@/app/store/floor";
 import { useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
+import { setPropertyValues } from "@/app/utils/dyanamic/projects";
 
 type Props = {
   propCgId?: any;
@@ -26,7 +27,7 @@ const FloorplanDetailsCard: React.FC<Props> = ({
 }) => {
   const [, setImage] = useAtom(selectedFloorAtom);
   const setFloorsArray = useSetAtom(floorPlansArray);
-
+  console.log(propCgId);
   const mergedData = {
     bhk: data.bhkName,
     bedCount: data.bhkName ? data.bhkName.split(" ")[0][0] : "", // Example value, adjust as needed
@@ -41,24 +42,12 @@ const FloorplanDetailsCard: React.FC<Props> = ({
     plotArea: data.plotArea,
   };
   const [opened, { open, close }] = useFloorPlanPopup();
-
+  ////  Villament =garden area , parking area , Terrace Area Balcony Size
   const handleCardClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();
+    const setted = setPropertyValues(data, propCgId);
     setImage(data);
-    setValues({
-      facingName: data?.facingName,
-      bhkName: data?.bhkName,
-      towerName: data?.towerName,
-      unitNumber: data?.unitNumber,
-      block: data?.block,
-      superBuildUparea: data?.superBuildUparea,
-      caretarea: data?.caretarea,
-      floor: data?.floor?.toString(),
-      parkingType: data?.parkingType,
-      noOfCarParking: data?.noOfCarParking?.toString(),
-      totalNumberOfBalcony: data?.totalNumberOfBalcony?.toString(),
-      totalNumberofBathroom: data?.totalNumberofBathroom?.toString(),
-    });
+    setValues(setted);
     handleSearch();
     open("floor");
   };
