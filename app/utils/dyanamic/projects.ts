@@ -48,14 +48,12 @@ export function setPropertyValues(data: any, propCgId: number): any {
         superBuildUparea: data?.superBuildUparea,
         caretarea: data?.caretarea,
         floor: data?.floor?.toString(),
-        parkingType: data?.parkingType,
         noOfCarParking: data?.noOfCarParking?.toString(),
         totalNumberOfBalcony: data?.totalNumberOfBalcony?.toString(),
         totalNumberofBathroom: data?.totalNumberofBathroom?.toString(),
         gardenArea: data?.gardenArea,
         parkingArea: data?.parkingArea,
         terraceArea: data?.terraceArea,
-        balconySize: data?.totalBalconySize?.toString(),
       };
       break;
     case projectprops.villa:
@@ -67,14 +65,12 @@ export function setPropertyValues(data: any, propCgId: number): any {
         superBuildUparea: data?.superBuildUparea,
         caretarea: data?.caretarea,
         floor: data?.floor?.toString(),
-        parkingType: data?.parkingType,
         noOfCarParking: data?.noOfCarParking?.toString(),
         totalNumberOfBalcony: data?.totalNumberOfBalcony?.toString(),
         totalNumberofBathroom: data?.totalNumberofBathroom?.toString(),
         gardenArea: data?.gardenArea,
         parkingArea: data?.parkingArea,
         terraceArea: data?.terraceArea,
-        balconySize: data?.totalBalconySize?.toString(),
       };
       break;
     case projectprops.plot:

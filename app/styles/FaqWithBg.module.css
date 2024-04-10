@@ -10,7 +10,7 @@
   position: relative;
   color: var(--mantine-color-black);
   width: 90% !important;
-  scroll-margin-top: 90px;
+  scroll-margin-top: 180px;
 }
 
 .title {

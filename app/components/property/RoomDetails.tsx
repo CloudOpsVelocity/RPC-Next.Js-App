@@ -48,7 +48,7 @@ const style = {
 };
 export default function RoomDetails({ data }: { data: Main }) {
   return (
-    <>
+    <div id="propertyDetails" className="scroll-mt-[220px]">
       <PropertyHeading
         title="Listing details"
         desc="Check the details for 2BHK apartment for sell"
@@ -63,15 +63,12 @@ export default function RoomDetails({ data }: { data: Main }) {
 
       <Parking {...data} />
       <OtherDetails {...data} />
-    </>
+    </div>
   );
 }
 const RoomSection = ({ data }: { data: Main }) => {
   return (
-    <div
-      className="w-[90%] mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] px-[53px] py-[39px]"
-      id="propertyDetails "
-    >
+    <div className="w-[90%] mb-[3%]  shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] px-[53px] py-[39px]">
       <h1 className={style.heading.h1}>Room Details</h1>
 
       <p className={style.heading.p}>

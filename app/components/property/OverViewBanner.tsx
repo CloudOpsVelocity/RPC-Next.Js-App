@@ -82,8 +82,9 @@ const PriceBreakUp = ({
     otherPrice &&
     Object?.keys(otherPrice).filter(
       (item) =>
-        !["otherCharge", "price", "securetyType"].includes(item) &&
-        otherPrice[item] !== "NA"
+        !["otherCharge", "price", "securetyType", "clubHouseTill"].includes(
+          item
+        ) && otherPrice[item] !== "NA"
     );
 
   const sum = filterOtherDetails?.reduce(
@@ -143,7 +144,11 @@ const PriceBreakUp = ({
                     key={i}
                     className="flex max-w-[771px]  items-start gap-[26px] text-[#4D6677]  text-2xl  font-bold leading-[23.784px]  border-b border-[#00000080] pb-5"
                   >
-                    <div>{key}</div>{" "}
+                    <div>
+                      {key === "clubHouseCharge"
+                        ? `${displayNameMap[key]} (${otherPrice?.clubHouseTill} year)`
+                        : displayNameMap[key]}
+                    </div>{" "}
                     <div className="font-semibold">
                       ₹ {otherPrice[key] as string}
                     </div>
@@ -214,4 +219,14 @@ const OtherSideCard = ({ price }: { price: number }) => {
       </div>
     </div>
   );
+};
+type DisplayNameMap = {
+  [key: string]: string;
+};
+const displayNameMap: DisplayNameMap = {
+  clubHouseCharge: "Club House Subscription",
+  mncCharge: "Maintenance & Corpus Fund",
+  taxGovtCharge: "Tax & Government Charges",
+  ownershipCharge: "Ownership Transfer Fees",
+  legalCharge: "Legal Charges",
 };

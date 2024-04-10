@@ -8,10 +8,16 @@ import { selectedFloorAtom } from "@/app/store/floor";
 import { useAtomValue, useSetAtom } from "jotai";
 import { listingProps } from "@/app/data/projectDetails";
 
-function PFloorPlanModal({ data }: { data: Main }) {
-  console.log(data.propTypeName);
+function PFloorPlanModal({
+  data,
+  opened,
+  setOpened,
+}: {
+  data: Main;
+  opened: boolean;
+  setOpened: Dispatch<SetStateAction<boolean>>;
+}) {
   const TRANSITION_DURATION = 200;
-  const [opened, setOpened] = useState(false);
   const setValue = useSetAtom(selectedFloorAtom);
   const type = listingProps[data.propTypeName as keyof typeof listingProps];
   const handleOpen = () => {
@@ -41,12 +47,6 @@ function PFloorPlanModal({ data }: { data: Main }) {
   };
   return (
     <>
-      <button
-        onClick={handleOpen}
-        className="absolute bottom-2 right-2 cursor-pointer"
-      >
-        <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] " />
-      </button>
       <Modal
         opened={opened}
         size={"90%"}

@@ -42,7 +42,10 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             </span>
           </p>
           {/* Top Cover Image Card */}
-          <PropertyFirstBlock projectDetails={data} />
+          <PropertyFirstBlock
+            projectDetails={data}
+            projName={projData.projectName}
+          />
         </div>
         {/* Navigations Container */}
         <Navigation />

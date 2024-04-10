@@ -263,20 +263,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
       Object.keys(filteredItem).forEach((prop) => {
         filteredValues[prop] = String(filteredItem[prop]);
       });
-      setValues({
-        facingName: filteredValues?.facingName,
-        bhkName: filteredValues?.bhkName,
-        towerName: filteredValues?.towerName,
-        unitNumber: filteredValues?.unitNumber,
-        block: filteredValues?.block,
-        superBuildUparea: filteredValues?.superBuildUparea,
-        caretarea: filteredValues?.caretarea,
-        floor: filteredValues?.floor.toString(),
-        parkingType: filteredValues?.parkingType,
-        noOfCarParking: filteredValues?.noOfCarParking.toString(),
-        totalNumberOfBalcony: filteredValues?.totalNumberOfBalcony.toString(),
-        totalNumberofBathroom: filteredValues?.totalNumberofBathroom.toString(),
-      });
+      setValues(setPropertyValues(filteredValues, propCgId));
     }
   };
   const handleOnChange = (value: string, key: string) => {
@@ -666,7 +653,6 @@ const LeftSection = ({ propCgId, data }: Props) => {
 };
 const RightSection = ({ propCgId }: Props) => {
   const data = useAtomValue(selectedFloorAtom);
-  console.log(data);
   return (
     <div className="bg-[#F4FBFF] p-6 rounded-lg w-full max-w-[342px] shadow">
       <div className="space-y-4">

@@ -1,15 +1,64 @@
 "use client";
 import { Propertytopics as topics } from "@/app/data/projectDetails";
 import useRatings from "@/app/hooks/useRatings";
+import clsx from "clsx";
 import Image from "next/image";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 export default function Navigation() {
   const { data } = useRatings();
   const [currentBlock, setCurrentBlock] = useState("overview");
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [isSticky, setIsSticky] = useState(false);
+  const [isScrolling, setIsScrolling] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  useEffect(() => {
+    function handleScroll() {
+      const currentScrollY = window.scrollY;
+      setLastScrollY(currentScrollY);
+      if (!isScrolling) {
+        const sections = topics.map((topic) =>
+          document.getElementById(topic.id)
+        );
+        const sectionTops = sections.map(
+          (section) => section?.getBoundingClientRect().top ?? 0
+        );
+        const windowHeight = window.innerHeight;
+        let closestSectionIndex = -1;
+        let closestSectionDistance = Number.MAX_VALUE;
+        for (let i = 0; i < sections.length; i++) {
+          const distance = Math.abs(sectionTops[i] - 0.5 * windowHeight);
 
-  const scrollToTopic = (id: string): void => {
+          if (distance < closestSectionDistance) {
+            closestSectionDistance = distance;
+            closestSectionIndex = i;
+          }
+        }
+        if (closestSectionIndex !== -1) {
+          setCurrentBlock(sections[closestSectionIndex]?.id ?? "");
+        }
+        if (currentScrollY > 800) {
+          setIsSticky(true);
+        } else {
+          setIsSticky(false);
+        }
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [topics, isScrolling, lastScrollY]);
+  function handleArrowClick(side: "R" | "L"): void {
+    const scrollAmount = side === "R" ? 100 : -100;
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollLeft += scrollAmount;
+    }
+  }
+  function scrollToTopic(id: string): void {
+    setIsScrolling(true);
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({
@@ -19,18 +68,16 @@ export default function Navigation() {
       });
       setCurrentBlock(id);
     }
-  };
-
-  const handleArrowClick = (side: "R" | "L"): void => {
-    const scrollAmount = side === "R" ? 100 : -100;
-
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollLeft += scrollAmount;
-    }
-  };
+    setTimeout(() => setIsScrolling(false), 3000);
+  }
 
   return (
-    <div className="flex justify-center items-center shadow-lg w-full">
+    <div
+      className={clsx(
+        "flex justify-center items-center shadow-lg w-full",
+        isSticky && "fixed top-[90px] bg-white shadow-md z-[100]"
+      )}
+    >
       <Image
         src="/auth/arrow.svg"
         alt=""

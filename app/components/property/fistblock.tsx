@@ -5,6 +5,8 @@ import Autoplay from "embla-carousel-autoplay";
 import {
   FlooringIcon,
   FloorsIcon,
+  NextCarouselButton,
+  PrevCarouselButton,
   ReraIcon,
   ShearIcon,
 } from "@/app/images/commonSvgs";
@@ -15,12 +17,14 @@ import { formatCurrency } from "@/app/utils/numbers";
 import { formatDate } from "@/app/utils/date";
 import { getImageUrls } from "@/app/utils/image";
 import { calculatePerSqPrice } from "@/app/utils/price";
+import styles from "@/app/styles/Carousel.module.css";
 
 type Props = {
   projectDetails: Main | null;
+  projName: string;
 };
 
-const PropertyFirstBlock: React.FC<Props> = ({ projectDetails }) => {
+const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
   const images = getImageUrls(projectDetails?.projMedia as any);
   const autoplay = useRef(Autoplay({ delay: 10000 }));
   const scrollToTopic = (): void => {
@@ -56,6 +60,7 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails }) => {
           </div>
           <div className="relative w-full rounded-[10px]">
             <Carousel
+              classNames={styles}
               slideGap={{ base: 0, sm: "md" }}
               withIndicators
               slidesToScroll={1}
@@ -64,6 +69,8 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails }) => {
               plugins={[autoplay.current]}
               onMouseEnter={autoplay.current.stop}
               onMouseLeave={autoplay.current.reset}
+              nextControlIcon={<NextCarouselButton />}
+              previousControlIcon={<PrevCarouselButton />}
             >
               {images.map((imageUrl, index) => (
                 <Carousel.Slide key={index} className="relative">
@@ -88,10 +95,10 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails }) => {
                   {projectDetails.cg === "S" ? " Sell" : " Rent"} In{" "}
                   {projectDetails.ltName}
                 </h3>
-                <p className="text-[#001F35] text-2xl not-italic font-semibold leading-[normal] mt-1">
-                  Sarang By Sumadhura
+                <p className="text-[#001F35] text-2xl not-italic font-semibold leading-[normal] mt-1 capitalize">
+                  {projName}
                 </p>
-                <p className="text-[#202020] text-[20px] not-italic font-[500] leading-[normal] w-[100%] tracking-[0.32px] capitalize mt-[8px]">
+                <p className="text-[#202020]  text-sm sm:text-[22px] not-italic font-[600] leading-[normal] w-[100%] tracking-[0.32px] capitalize mt-2 ">
                   {projectDetails.address} {`${projectDetails.ltName} `}
                   {`${projectDetails.ctName} `}
                   {`${projectDetails?.stateName ?? ""} `}

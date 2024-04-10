@@ -158,8 +158,11 @@ const Gallery: React.FC<GalleryProps> = ({
         </div>
       </Modal>
 
-      <button onClick={() => handleImageClick(selectedMedia)}>
-        <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] absolute bottom-7 right-3 z-50 " />
+      <button
+        onClick={() => handleImageClick(selectedMedia)}
+        className="absolute bottom-3 right-3 z-50 "
+      >
+        <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] " />
       </button>
     </>
   );
