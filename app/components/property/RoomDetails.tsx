@@ -101,7 +101,7 @@ const RoomSection = ({ data }: { data: Main }) => {
         <RoomBasicDetails
           icon={<Others />}
           title="Other rooms"
-          value={"Store Room , Puja Room"}
+          value={data.otherRooms}
           className={style.card}
         />
         <RoomBasicDetails
