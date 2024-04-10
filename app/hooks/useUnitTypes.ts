@@ -8,7 +8,7 @@ import { floorPlansArray } from "../store/floor";
 import { QueryCache } from "@tanstack/react-query";
 
 export default function useUnitTypes() {
-  const setFloorPlans = useSetAtom(floorPlansArray);
+  // const setFloorPlans = useSetAtom(floorPlansArray);
   const { slug } = useParams<{ slug: string }>();
   const propCgId = useAtomValue(propCgIdAtom);
   const currentPhase = useAtomValue(currentPhaseAtom);
@@ -18,9 +18,6 @@ export default function useUnitTypes() {
     keepPreviousData: true,
     staleTime: 30000,
     cacheTime: 300000,
-    onSuccess: (data) => {
-      setFloorPlans(data);
-    },
   });
   return {
     projectUnitsData,

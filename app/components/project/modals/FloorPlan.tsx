@@ -5,7 +5,6 @@ import {
   FloorPlanModalIcon,
   LenseIcon,
   PopupOpenSvg,
-  emptyFilesIcon,
   propertyDetailsSvgs,
 } from "@/app/images/commonSvgs";
 import S from "@/app/styles/Floorplan.module.css";
@@ -34,28 +33,27 @@ type Props = {
 function FloorPlanModal({ propCgId, data, projName }: Props) {
   const [selectedFloor, setSelectedFloor] = useAtom(selectedFloorAtom);
   const setFloorsArray = useSetAtom(floorPlansArray);
-  const [opened, { open, close }] = useFloorPlanPopup();
+  const [opened, { close, type }] = useFloorPlanPopup();
   const scrollFiltersRef = useRef<HTMLDivElement>(null);
   const form = useForm();
-  useEffect(() => {
-    console.log(selectedFloor, "selected one");
-    if (selectedFloor) {
-      form.setValues({
-        facingName: selectedFloor?.facingName,
-        bhkName: selectedFloor?.bhkName,
-        towerName: selectedFloor?.towerName,
-        unitNumber: selectedFloor?.unitNumber,
-        block: selectedFloor?.block,
-        superBuildUparea: selectedFloor?.superBuildUparea,
-        caretarea: selectedFloor?.caretarea,
-        floor: selectedFloor?.floor.toString(),
-        parkingType: selectedFloor?.parkingType,
-        noOfCarParking: selectedFloor?.noOfCarParking.toString(),
-        totalNumberOfBalcony: selectedFloor?.totalNumberOfBalcony.toString(),
-        totalNumberofBathroom: selectedFloor?.totalNumberofBathroom.toString(),
-      });
-    }
-  }, [selectedFloor?.unitNumber]);
+  // useEffect(() => {
+  //   if (selectedFloor) {
+  //     form.setValues({
+  //       facingName: selectedFloor?.facingName,
+  //       bhkName: selectedFloor?.bhkName,
+  //       towerName: selectedFloor?.towerName,
+  //       unitNumber: selectedFloor?.unitNumber,
+  //       block: selectedFloor?.block,
+  //       superBuildUparea: selectedFloor?.superBuildUparea,
+  //       caretarea: selectedFloor?.caretarea,
+  //       floor: selectedFloor?.floor?.toString(),
+  //       parkingType: selectedFloor?.parkingType,
+  //       noOfCarParking: selectedFloor?.noOfCarParking?.toString(),
+  //       totalNumberOfBalcony: selectedFloor?.totalNumberOfBalcony?.toString(),
+  //       totalNumberofBathroom: selectedFloor?.totalNumberofBathroom?.toString(),
+  //     });
+  //   }
+  // }, [selectedFloor?.unitNumber]);
   const handleArrowClick = (side: "R" | "L"): void => {
     const scrollAmount = side === "R" ? 100 : -100;
     if (scrollFiltersRef.current) {

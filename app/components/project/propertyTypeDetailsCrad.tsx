@@ -24,8 +24,6 @@ type Props = {
   cg: any;
   propertyType: string;
   phase: number;
-  data: any;
-  isLoading: boolean;
 };
 const getPropId = (key: string) => {
   switch (key) {
@@ -58,8 +56,8 @@ export default function PropertyTypeDetailsCrad({
   const setcurrentPhase = useSetAtom(currentPhaseAtom);
   const setPrpCgId = useSetAtom(propCgIdAtom);
   const setSelectedFloor = useSetAtom(selectedFloorAtom);
-  const [testData, setFloorsArray] = useAtom(floorPlansArray);
-  const { data: projectUnitsData, isLoading } = useQuery({
+  const [, setFloorsArray] = useAtom(floorPlansArray);
+  const { data: projectUnitsData } = useQuery({
     queryKey: [`/${getPropId(propertyType)}/${phase}/${slug}`],
     queryFn: () => getProjectUnits(slug, phase, getPropId(propertyType)),
   });
@@ -73,7 +71,6 @@ export default function PropertyTypeDetailsCrad({
     setSelectedFloor(null);
     handleOpen();
   };
-  console.log(projectUnitsData, { testData });
 
   const propName = (key: string, type?: string) => {
     switch (key) {

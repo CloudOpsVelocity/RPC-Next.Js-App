@@ -1,18 +1,17 @@
 import { useAtom, atom, useSetAtom } from "jotai";
 
 const openedAtom = atom(false);
-export const typeAtom = atom('type')
+export const typeAtom = atom("type");
 
 export const useFloorPlanPopup = () => {
   const [opened, setOpened] = useAtom(openedAtom);
-  const setType = useSetAtom(typeAtom)
+  const [type, setType] = useAtom(typeAtom);
 
-  const open = (type:"overview" | "floor") => {
- setType(type)
+  const open = (type: "overview" | "floor" | "container") => {
+    setType(type);
     setOpened(true);
-  } 
+  };
   const close = () => setOpened(false);
 
-
-  return [opened, { open, close }] as const;
+  return [opened, { open, close, type }] as const;
 };

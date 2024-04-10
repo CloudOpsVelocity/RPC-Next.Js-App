@@ -39,7 +39,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
   const [floorPlanType, setFloorPlanType] = useState("type");
   const setFloorsArray = useSetAtom(floorPlansArray);
   const [selectedFloor, setSelectedFloor] = useAtom(selectedFloorAtom);
-  const [, { open }] = useFloorPlanPopup();
+  const [, { open, type }] = useFloorPlanPopup();
 
   const selectedPhase = PhaseOverview?.find(
     (phase: any) => phase.phaseId === currentPhase
@@ -50,9 +50,6 @@ export default function FloorplansBlock({ projName, slug }: Props) {
     keepPreviousData: true,
     staleTime: 30000,
     cacheTime: 300000,
-    onSuccess: (data) => {
-      setSelectedFloor(data[0]);
-    },
   });
 
   const types = selectedPhase && Object?.keys(selectedPhase.propTypeOverview);
@@ -129,11 +126,15 @@ export default function FloorplansBlock({ projName, slug }: Props) {
     if (floorPlanType === "type") {
       setSelectedFloor(null);
       setFloorsArray(projectUnitsData);
-      open("floor");
+      open("container");
     }
   };
   useEffect(() => {
-    if (projectUnitsData && projectUnitsData.length > 0) {
+    if (
+      projectUnitsData &&
+      projectUnitsData.length > 0 &&
+      type !== "overview"
+    ) {
       setSelectedFloor(projectUnitsData[0]);
     }
   }, [projectUnitsData]);

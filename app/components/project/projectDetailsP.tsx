@@ -25,10 +25,9 @@ type Props = {
 const styles = {
   box: "mr-[3%] mb-[4%] md:mb-[1%] p-[2%] shadow-md rounded-[10px] border-solid border-[1px] border-[#92B2C8] ",
 };
-export default function ProjectDetailsP({ projName, slug }: Props) {
+export default function ProjectDetailsP({ projName }: Props) {
   const { PhaseOverview, currentPhase, handlePhaseChange, phaseList } =
     usePhaseWiseOverview();
-  const { projectUnitsData, isLoading } = useUnitTypes();
   const selectedPhase = PhaseOverview?.find(
     (phase: any) => phase.phaseId === currentPhase
   );
@@ -124,12 +123,10 @@ export default function ProjectDetailsP({ projName, slug }: Props) {
           <>
             {orderedPropertyTypes.map((propertyTypeKey: any) => (
               <PropertyTypeDetailsCrad
-                data={projectUnitsData}
                 phase={currentPhase}
                 key={propertyTypeKey}
                 cg={selectedPhase.propTypeOverview[propertyTypeKey]}
                 propertyType={propertyTypeKey}
-                isLoading={isLoading}
               />
             ))}
           </>

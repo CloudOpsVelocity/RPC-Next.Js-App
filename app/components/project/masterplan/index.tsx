@@ -63,7 +63,7 @@ export default function MasterPlan({
           className="inline-flex flex-col items-center justify-center gap-2.5  p-5 rounded-[10px] bg-[#0073C6] text-white text-2xl not-italic font-bold leading-[normal] tracking-[0.96px] max-h-[50%] mt-5 md:mt-0"
           onClick={handleDownload}
         >
-          DownLoad MasterPlan
+          Download MasterPlan
         </button>
       </div>
       <div className="relative">
