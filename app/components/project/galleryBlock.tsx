@@ -19,7 +19,7 @@ export default function GalleryBlock({
   const images = getImageUrls(media);
   const [selectedMedia, setSelectedMedia] = useState<string | null>(images[0]);
   const videos = [walkThrowVideoUrl, projectVideoIUrl].filter(
-    (video) => video !== "" && vide
+    (video) => video !== "" && video !== undefined
   );
 
   const handleMediaClick = (media: string) => {
