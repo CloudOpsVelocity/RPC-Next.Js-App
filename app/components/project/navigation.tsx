@@ -29,7 +29,7 @@ export default function Navigation() {
         let closestSectionDistance = Number.MAX_VALUE;
         for (let i = 0; i < sections.length; i++) {
           const distance = Math.abs(sectionTops[i] - 0.5 * windowHeight);
-
+          console.log(distance);
           if (distance < closestSectionDistance) {
             closestSectionDistance = distance;
             closestSectionIndex = i;

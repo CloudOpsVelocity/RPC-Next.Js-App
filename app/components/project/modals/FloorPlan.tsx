@@ -1,5 +1,5 @@
 import { Modal, Select } from "@mantine/core";
-import { useEffect, useId, useRef } from "react";
+import { useId, useRef } from "react";
 import {
   DropDownIcon,
   FloorPlanModalIcon,
@@ -84,8 +84,9 @@ function FloorPlanModal({ propCgId, data, projName }: Props) {
       setSelectedFloor(data[0]);
       setFloorsArray(data);
     }
-    handleSearch();
+
     form.setFieldValue(key, null);
+    handleSearch();
   };
   const [o, {}] = useSubFloorPlanPopup();
   return (
@@ -177,7 +178,7 @@ function FloorPlanModal({ propCgId, data, projName }: Props) {
                 .length > 4 && (
                 <button
                   onClick={() => handleArrowClick("R")}
-                  className="flex h-[32px] ml-8 w-[32px] rounded-[50%] items-center justify-center bg-[#FCFCFC] "
+                  className="flex h-[32px] ml-8 w-[32px] rounded-[50%] items-center justify-center bg-[#FCFCFC]"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

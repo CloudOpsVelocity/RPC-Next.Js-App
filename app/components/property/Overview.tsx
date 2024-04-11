@@ -52,15 +52,6 @@ export default function PropertyOverView({ data }: { data: Main }) {
           ))}
         </div>
         <div className=" flex justify-start md:justify-end items-start md:items-end flex-col mt-[3%] md:mt-0 ">
-          {/* <button
-            // onClick={()=> addShortList(slug)}
-            className="text-[20px] cursor-pointer lg:text-[24px] text-[#0073C6] font-[600] whitespace-nowrap underline decoration-dashed "
-          >
-            Add to Compare
-          </button>
-          <p className="text-[20px] cursor-pointer lg:text-[24px] text-[#0073C6] font-[600] underline whitespace-nowrap decoration-dashed ">
-            Add to Shortlist
-          </p> */}
           <CompareList />
           <ShortList />
         </div>

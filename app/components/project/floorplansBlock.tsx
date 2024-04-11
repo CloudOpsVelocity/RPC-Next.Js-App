@@ -28,6 +28,7 @@ import { useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
 import { FormProvider, useForm } from "@/app/context/floorplanContext";
 import filterDataAtom from "@/app/store/filterdata";
 import { setPropertyValues } from "@/app/utils/dyanamic/projects";
+import { isSingleLetterOrNumber } from "@/app/utils/letters";
 
 type Props = {
   data: PhaseList[];
@@ -174,7 +175,11 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                 return (
                   <Button
                     key={index}
-                    title={`${each.phaseName}`}
+                    title={
+                      isSingleLetterOrNumber(each.phaseName)
+                        ? `Phase: ${each.phaseName}`
+                        : each.phaseName
+                    }
                     onChange={() => setCurrentPhase(each.phaseId)}
                     buttonClass={` mb-[5px] text-[18px] lg:text-[20px] bg-[#ECF7FF] p-[8px] xl:px-[8px]  whitespace-nowrap text-[#000] rounded-[8px]${
                       currentPhase == each.phaseId

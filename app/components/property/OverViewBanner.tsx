@@ -1,5 +1,9 @@
 "use client";
-import PriceBag, { Phone, WhatsAppButton } from "@/app/images/commonSvgs";
+import PriceBag, {
+  Phone,
+  SVGBackground,
+  WhatsAppButton,
+} from "@/app/images/commonSvgs";
 import React from "react";
 import Button from "../../elements/button";
 import { useDisclosure } from "@mantine/hooks";
@@ -10,6 +14,7 @@ import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import { useParams } from "next/navigation";
 import { Main } from "@/app/validations/property";
 import { calculatePerSqPrice } from "@/app/utils/price";
+import ListItem from "./pricingbreakup";
 export default function PropertyOverviewBanner({
   price,
   otherPrice,
@@ -123,59 +128,58 @@ const PriceBreakUp = ({
         <h2 className="text-[#202020] text-[32px] not-italic font-semibold leading-[normal] uppercase;">
           PRICE BREAKUP
         </h2>
-        <div className=" border-t border-gray-400 mt-4 space-y-4 py-8">
-          <h3 className="text-[#034AB6] text-[28px] not-italic font-bold leading-[normal] underline uppercase">
+        <div className=" border-t border-gray-400 mt-4 space-y-4 py-5 ">
+          <h3 className="text-[#034AB6] text-[28px] not-italic font-bold leading-[normal] underline uppercase mb-[30px]">
             PRICE / SQ.FT
           </h3>
-          <li className="flex w-[771px]  items-start gap-[26px] text-[#4D6677] text-2xl not-italic font-bold leading-[23.784px] border-dashed border-b pb-5">
-            <div>Price/SQ.FT</div>{" "}
-            <div className="font-semibold">₹ {price}</div>
-          </li>
+          <ListItem
+            label="Price/SQ.FT"
+            value={price}
+            className="max-w-[747px] border-none"
+          />
         </div>
+        <SVGBackground width={"100%"} className="my-8" />
         {sum > 0 && (
           <div className="w-full grid md:grid-cols-2 justify-between items-center">
-            <div className=" border-t border-gray-400 mt-4 space-y-4 py-8 ">
-              <h3 className="text-[#034AB6] text-[28px] not-italic font-bold leading-[normal] underline uppercase">
+            <div className=" space-y-4 py-8 ">
+              <h3 className="text-[#034AB6] text-[28px] not-italic font-bold leading-[normal] underline uppercase mb-[30px]">
                 applicable charges
               </h3>
               {filterOtherDetails?.map((key, i) => {
                 return (
-                  <li
+                  <ListItem
                     key={i}
-                    className="flex max-w-[771px]  items-start gap-[26px] text-[#4D6677]  text-2xl  font-bold leading-[23.784px]  border-b border-[#00000080] pb-5"
-                  >
-                    <div>
-                      {key === "clubHouseCharge"
+                    value={otherPrice[key] as string}
+                    label={
+                      key === "clubHouseCharge"
                         ? `${displayNameMap[key]} (${otherPrice?.clubHouseTill} year)`
-                        : displayNameMap[key]}
-                    </div>{" "}
-                    <div className="font-semibold">
-                      ₹ {otherPrice[key] as string}
-                    </div>
-                  </li>
+                        : displayNameMap[key]
+                    }
+                    className={
+                      filterOtherDetails?.length - 1 === i ? "border-none" : ""
+                    }
+                  />
                 );
               })}
             </div>
             <SideCard price={sum + otherChangeTotal} />
           </div>
         )}
-
+        <SVGBackground width={"100%"} className="my-8" />
         {otherPrice?.otherCharge && (
-          <div className="w-full grid md:grid-cols-2 justify-between items-center">
-            <div className=" border-t border-gray-400 mt-4 space-y-4 py-8 ">
-              <h3 className="text-[#034AB6] text-[28px] not-italic font-bold leading-[normal] underline uppercase">
+          <div className="w-full grid md:grid-cols-2 justify-between ">
+            <div className="   space-y-4 py-8 ">
+              <h3 className="text-[#034AB6] text-[28px] not-italic font-bold leading-[normal] underline uppercase mb-[30px]">
                 Other charges
               </h3>
               {chargesArray.map((charge, index) => {
                 const [chargeName, chargeValue] = charge.split("|");
                 return (
-                  <li
+                  <ListItem
                     key={index}
-                    className="flex max-w-[771px] items-start gap-[26px] text-[#4D6677] text-2xl font-bold leading-[23.784px] border-b-2 border-black pb-5"
-                  >
-                    <div>{chargeName.trim()}</div>
-                    <div className="font-semibold">₹ {chargeValue.trim()}</div>
-                  </li>
+                    label={chargeName.trim()}
+                    value={chargeValue.trim()}
+                  />
                 );
               })}
             </div>
@@ -208,7 +212,7 @@ const OtherSideCard = ({ price }: { price: number }) => {
   return (
     <div
       className=" text-[#4D6677] flex w-96 h-[197px] justify-center items-center shrink-0 pt-7 pb-[27px] px-[27px] border-[color:var(--White-1,#F1F1F1)] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[20px] border-[0.6px] border-solid;
-  background: var(--White-2, #fafafa) flex-col text-center ml-auto"
+  background: var(--White-2, #fafafa) flex-col text-center ml-auto mt-4"
     >
       <p className="text-[#343A44] text-center text-[20px] not-italic font-medium leading-[normal]">
         The sum of total of your other charges you included in the &rdquo;Other

@@ -6,7 +6,7 @@ export function setPropertyValues(data: any, propCgId: number): any {
     bhkName: data?.bhkName,
     towerName: data?.towerName,
     unitNumber: data?.unitNumber,
-    block: data?.block,
+
     superBuildUparea: data?.superBuildUparea,
     caretarea: data?.caretarea,
     floor: data?.floor?.toString(),
@@ -14,6 +14,7 @@ export function setPropertyValues(data: any, propCgId: number): any {
     noOfCarParking: data?.noOfCarParking?.toString(),
     totalNumberOfBalcony: data?.totalNumberOfBalcony?.toString(),
     totalNumberofBathroom: data?.totalNumberofBathroom?.toString(),
+    ...(data?.block && { block: data?.block }),
   };
 
   switch (propCgId) {

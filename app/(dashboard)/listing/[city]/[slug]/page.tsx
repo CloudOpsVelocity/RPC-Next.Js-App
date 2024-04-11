@@ -22,6 +22,7 @@ import NearByCarouselProperty from "@/app/components/property/carousel";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
 import Reviews from "@/app/components/property/reviews";
 import Banner from "@/app/components/property/banner";
+import { SVGBackground } from "@/app/images/commonSvgs";
 
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {

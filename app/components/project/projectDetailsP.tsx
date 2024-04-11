@@ -17,6 +17,7 @@ import { getProjectWiseOverView } from "@/app/utils/api/project";
 import usePhaseWiseOverview from "@/app/hooks/usePhaseWiseOverview";
 import { formatDate, formatDateDDMMYYYY } from "@/app/utils/date";
 import useUnitTypes from "@/app/hooks/useUnitTypes";
+import { isSingleLetterOrNumber } from "@/app/utils/letters";
 type Props = {
   data: PhaseList[];
   slug: string;
@@ -58,7 +59,11 @@ export default function ProjectDetailsP({ projName }: Props) {
               {PhaseOverview?.map((phase: any, index: any) => (
                 <Button
                   key={phase.phaseId}
-                  title={phase.phaseName}
+                  title={
+                    isSingleLetterOrNumber(phase.phaseName)
+                      ? `Phase: ${phase.phaseName}`
+                      : phase.phaseName
+                  }
                   onChange={() => handlePhaseChange(phase.phaseId)}
                   buttonClass={` mb-[5px] text-[18px] lg:text-[20px] bg-[#ECF7FF] p-[8px] xl:px-[8px]  whitespace-nowrap text-[#000] rounded-[8px] ${
                     currentPhase === phase.phaseId
@@ -135,4 +140,3 @@ export default function ProjectDetailsP({ projName }: Props) {
     </div>
   );
 }
-// apt,plot,rowHouse,villa,villament
