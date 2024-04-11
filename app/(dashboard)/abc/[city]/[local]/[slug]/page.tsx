@@ -26,6 +26,7 @@ import dynamic from "next/dynamic";
 // import LoginPopup from "@/app/components/project/modals/LoginPop";
 import SectionSkeleton from "@/app/components/atoms/skeleton/section";
 import ErrorContainer from "@/app/components/project/error/container";
+import MobileHidden from "@/app/components/molecules/MobileHidden";
 const FloorplansBlock = dynamic(
   () => import("@/app/components/project/floorplansBlock"),
   {
@@ -110,7 +111,9 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           <FirstBlock projectDetails={data} />
         </div>
         {/* Navigations Container */}
-        <Navigation />
+        <MobileHidden>
+          <Navigation />
+        </MobileHidden>
         <Overview {...data} />
         <ListingRentAvail
           projName={data.projectName}

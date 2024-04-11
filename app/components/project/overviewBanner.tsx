@@ -36,9 +36,9 @@ export default function OverviewBanner({
       <div className="flex justify-start items-center w-full flex-col md:flex-row bg-gradient-to-r from-[#EFF5FF] /50 to-[#F2FAFF ]/50 ">
         <PriceBag className="w-[150px] h-[170px] md:w-[237px] md:h-[263px] " />
 
-        <div className="flex justify-between items-center w-[100%] flex-row ml-[3%] p-[2%] flex-wrap">
-          <div className="">
-            <p className="text-[#212C33] text-[24px] lg:text-[32px] font-[600] mb-4">
+        <div className="flex justify-center sm:justify-between items-center w-[100%] flex-row ml-[3%] p-[2%] flex-wrap">
+          <div className=" grid place-items-center md:block">
+            <p className="text-[#212C33] text-[24px] lg:text-[32px] font-[600] mb-4 md:text-start text-center">
               PRICE RANGE{" "}
               <span className="text-[#00487C] text-[24px] md:text-[32px] lg:text-[40px] whitespace-nowrap font-[700]">
                 {formatCurrency(minPrice)} - {formatCurrency(maxPrice)}

@@ -25,7 +25,7 @@ export default function ProjectLoans({
         <>
           <h2 className="text-[24px] lg:text-[32px] font-bold">
             BANK APPROVALS OF{" "}
-            <span className="text-[#148B16] text-[32px] not-italic font-bold leading-[normal] uppercase">
+            <span className="text-[#148B16] text-[24px] lg:text-[32px] not-italic font-bold leading-[normal] uppercase">
               {name}
             </span>
           </h2>

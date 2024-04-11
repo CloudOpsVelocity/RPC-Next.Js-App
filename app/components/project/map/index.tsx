@@ -127,7 +127,7 @@ const LeafMap: React.FC<{
                 </p>
               </div>
             </Tabs>
-            <div id="location-listing" className="grid gap-2 pl-5 ">
+            <div id="location-listing" className="grid gap-2 px-2 sm:pl-5 ">
               {isLoading ? (
                 <Loading />
               ) : (
@@ -291,10 +291,10 @@ const LocationList: React.FC<{
 
   return (
     <div
-      className="p-2 bg-gray-50 border rounded-lg cursor-pointer mt-[12px] max-w-[640px] py-3 px-2"
+      className=" bg-gray-50 border rounded-lg cursor-pointer mt-[12px] md:max-w-[640px] py-3 px-2"
       onClick={handleClick}
     >
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between flex-wrap">
         <h6 className="text-black text-lg not-italic font-medium leading-[normal] capitalize w-[70%]">
           {name}
         </h6>

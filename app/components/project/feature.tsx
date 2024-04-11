@@ -13,7 +13,7 @@ export default function Feature({
       <div className="w-[90%] scroll-mt-[180px] mb-[5%]" id="highlights">
         <h2 className="text-[24px] lg:text-[32px] font-semibold mb-[10px]">
           HIGHLIGHTS OF{" "}
-          <span className="text-[#148B16] text-[32px] not-italic font-bold leading-[normal] uppercase">
+          <span className="text-[#148B16] text-[24px] lg:text-[32px] not-italic font-bold leading-[normal] uppercase">
             {projName}
           </span>
         </h2>

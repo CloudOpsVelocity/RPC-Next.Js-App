@@ -21,7 +21,9 @@ export default function ListingRentAvail({
     <div className="w-[90%] mb-[5%] scroll-mt-[350px]" id="listings">
       <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35] mb-[12px]">
         Listings Available in{" "}
-        <span className="text-[#148B16] font-[700] uppercase">{projName}</span>{" "}
+        <span className="text-[#148B16] font-[700] uppercase text-[24px] lg:text-[32px]">
+          {projName}
+        </span>{" "}
       </h1>
 
       <p className="text-[#4D6677] md:text-2xl italic font-medium leading-[normal] capitalize">

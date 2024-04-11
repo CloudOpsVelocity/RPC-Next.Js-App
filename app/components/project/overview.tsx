@@ -43,19 +43,19 @@ export default function Overview({
       className="pt-[2%] scroll-mt-[150px] w-[90%] rounded-[24px] shadow-md mb-[5%] mt-[2%] bg-gradient-to-r from-[#F6F6F6] /0 via-[#FFF] /45 to-[#FEFFFF]/100 "
       id="overview"
     >
-      <div className="pl-[2%] pr-[2%] flex justify-between items-center">
+      <div className="pl-[2%] pr-[2%] flex justify-between items-center flex-wrap">
         <div>
           <h2 className="text-[24px] lg:text-[32px] text-[#148B16] font-[700] capitalize">
             {projectName}
           </h2>
-          <p className="text-[16px] lg:text-[24px] text-[#505050] font-[500] capitalize max-w-[85%]">
+          <p className="text-[16px] lg:text-[24px] text-[#505050] font-[500] capitalize sm:max-w-[85%]">
             {address} {`${localityName} `}
             {`${cityName} `}
             {`${stateName ?? ""} `}
             {`${state} `} {pinCode}
           </p>
         </div>
-        <div className="flex justify-center items-end flex-col">
+        <div className="flex justify-center sm:items-end flex-col">
           <Ratings />
           <a
             href={`tel:${8766203976}`}
