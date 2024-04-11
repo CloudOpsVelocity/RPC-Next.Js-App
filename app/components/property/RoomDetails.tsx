@@ -48,7 +48,10 @@ const style = {
 };
 export default function RoomDetails({ data }: { data: Main }) {
   return (
-    <div id="propertyDetails" className="scroll-mt-[220px]">
+    <div
+      id="propertyDetails"
+      className="scroll-mt-[220px] flex justify-center items-center flex-col space-y-4 mb-5"
+    >
       <PropertyHeading
         title="Listing details"
         desc="Check the details for 2BHK apartment for sell"

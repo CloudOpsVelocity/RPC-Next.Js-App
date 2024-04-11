@@ -14,7 +14,7 @@ export default function ProjectLoans({
   name: string;
 }) {
   return (
-    <div className="bg-white scroll-mt-[90px] py-8 w-[90%] mx-auto">
+    <div className="bg-white scroll-mt-[90px] py-8 w-[90%] mx-auto  overflow-hidden">
       {type === "prop" ? (
         <PropertyHeading
           title="BANK APPROVALS OF"
@@ -35,7 +35,7 @@ export default function ProjectLoans({
         </>
       )}
 
-      <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 md:flex justify-start items-center flex-wrap w-full gap-[3%] h-auto">
+      <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 md:flex justify-start items-center flex-wrap w-full gap-[3%] ">
         {banks.map((bank, index) => {
           return (
             <>

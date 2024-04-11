@@ -58,7 +58,7 @@ function PFloorPlanModal({
           close: S.close,
         }}
       >
-        <div className="flex  mb-10 justify-center items-start gap-[45px] shrink-0">
+        <div className="flex  mb-10 justify-center items-start gap-[45px] shrink-0 flex-wrap">
           <MiddleSection />
           <RightSection propCgId={type} />
         </div>
