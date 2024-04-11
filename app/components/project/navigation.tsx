@@ -15,6 +15,7 @@ export default function Navigation() {
   useEffect(() => {
     function handleScroll() {
       const currentScrollY = window.scrollY;
+      console.log(currentScrollY);
       const scrollDirection = currentScrollY > lastScrollY ? "down" : "up";
       setLastScrollY(currentScrollY);
       if (!isScrolling) {
@@ -42,7 +43,7 @@ export default function Navigation() {
         } else {
           setIsSticky(false);
         }
-        if (scrollDirection === "down") {
+        if (scrollDirection === "down" && window.scrollY > 900) {
           handleArrowClick("R");
         } else {
           handleArrowClick("L");
