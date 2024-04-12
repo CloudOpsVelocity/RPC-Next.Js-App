@@ -122,13 +122,9 @@ export default function FloorplansBlock({ projName, slug }: Props) {
   };
 
   const handleOpen = () => {
-    setSelectedFloor({
-      ...projectUnitsData[0],
-      floorPlanUrl: projectUnitsData[0].floorPlanUrl
-        ? projectUnitsData[0].floorPlanType
-        : "/proj/not-found.png",
-    });
+    setSelectedFloor(projectUnitsData[0]);
     form.setValues(setPropertyValues(projectUnitsData[0], propCgId));
+
     handleSearch();
     open("floor");
   };

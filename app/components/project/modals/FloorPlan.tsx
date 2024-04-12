@@ -13,7 +13,11 @@ import Image from "next/image";
 import CarouselModal from "./Carousel";
 import { useState } from "react";
 import { filterKeysDetails, projectprops } from "@/app/data/projectDetails";
-import { useFormContext } from "@/app/context/floorplanContext";
+import {
+  FormProvider,
+  useForm,
+  useFormContext,
+} from "@/app/context/floorplanContext";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { floorPlansArray, selectedFloorAtom } from "@/app/store/floor";
 import { useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
@@ -252,12 +256,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
       );
     });
 
-    setFloor({
-      ...filteredData[0],
-      floorPlanUrl: data.floorPlanUrl
-        ? data.floorPlanType
-        : "/proj/not-found.png",
-    });
+    setFloor(filteredData[0]);
     setFloorsArray(filteredData);
     if (key === "unitNumber" && filteredData.length > 0) {
       const filteredItem = filteredData[0];
@@ -866,10 +865,7 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
   const [currentImg, setCurrentImg] = useState(0);
   const [selectedFloor, setFloor] = useAtom(selectedFloorAtom);
   const selectImg = (index: number) => {
-    setFloor({
-      ...floorsArray[index],
-      floorPlanUrl: floorsArray[index].floorPlanUrl ?? "/proj/not-found.png",
-    });
+    setFloor(floorsArray[index]);
     setCurrentImg(index);
     setValues(setPropertyValues(floorsArray[index], propCgId));
     handleSearch(index);
@@ -989,7 +985,7 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
                   >
                     <Image
                       // @ts-ignore
-                      src={eachObj?.floorPlanUrl ?? "/proj/not-found.png"}
+                      src={eachObj?.floorPlanUrl}
                       alt="Floor Plan"
                       width={57}
                       height={37}

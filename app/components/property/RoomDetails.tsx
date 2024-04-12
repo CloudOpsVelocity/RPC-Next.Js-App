@@ -50,7 +50,7 @@ export default function RoomDetails({ data }: { data: Main }) {
   return (
     <div
       id="propertyDetails"
-      className="scroll-mt-[220px] flex justify-center items-center flex-col  mb-5  w-[90%] m-auto"
+      className="scroll-mt-[220px] flex justify-center items-center flex-col  mb-5 sm:block"
     >
       <PropertyHeading
         title="Listing details"
