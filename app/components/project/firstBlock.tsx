@@ -23,6 +23,7 @@ type Props = {
 };
 
 const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
+  console.log(styles);
   const images = getImageUrls(projectDetails?.media as any);
   const autoplay = useRef(Autoplay({ delay: 10000 }));
   const { hasReraStatus } = usePhaseWiseOverview();
@@ -54,7 +55,10 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
           </div>
           <div className="relative w-full rounded-[10px]">
             <Carousel
-              classNames={styles}
+              classNames={{
+                control: styles.control,
+                indicator: styles.indicator,
+              }}
               slideGap={{ base: 0, sm: "md" }}
               withIndicators
               slidesToScroll={1}

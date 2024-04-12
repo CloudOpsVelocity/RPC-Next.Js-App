@@ -53,7 +53,7 @@ const Card = ({
     <div
       className={clsx(
         "w-[489px] h-[85px] shadow-[0px_4px_30px_0px_rgba(0,0,0,0.15)] rounded-[31px] relative cursor-pointer",
-        projName.length > 20 && `w-[589px]`
+        projName?.length > 20 && `w-[589px]`
       )}
     >
       <AvailListSideSvg type={type} />

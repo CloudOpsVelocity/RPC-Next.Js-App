@@ -27,7 +27,6 @@ const FloorplanDetailsCard: React.FC<Props> = ({
 }) => {
   const [, setImage] = useAtom(selectedFloorAtom);
   const setFloorsArray = useSetAtom(floorPlansArray);
-  console.log(propCgId);
   const mergedData = {
     bhk: data.bhkName,
     bedCount: data.bhkName ? data.bhkName.split(" ")[0][0] : "", // Example value, adjust as needed
@@ -46,7 +45,12 @@ const FloorplanDetailsCard: React.FC<Props> = ({
   const handleCardClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();
     const setted = setPropertyValues(data, propCgId);
-    setImage(data);
+    setImage({
+      ...data,
+      floorPlanUrl: data.floorPlanUrl
+        ? data.floorPlanType
+        : "/proj/not-found.png",
+    });
     setValues(setted);
     handleSearch();
     open("floor");
@@ -57,7 +61,7 @@ const FloorplanDetailsCard: React.FC<Props> = ({
     );
     setFloorsArray(filteredFloors);
   };
-
+  console.log(data);
   return (
     <div
       className="flex justify-between p-[2%] w-full border-[#92B2C8] border-solid border-b-[1px] border-r-[1px] cursor-pointer"

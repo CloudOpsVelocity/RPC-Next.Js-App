@@ -138,7 +138,8 @@ const PriceBreakUp = ({
             className="max-w-[747px] border-none"
           />
         </div>
-        <SVGBackground width={"100%"} className="my-8" />
+
+        {sum > 0 && <SVGBackground width={"100%"} className="my-8" />}
         {sum > 0 && (
           <div className="w-full grid md:grid-cols-2 justify-between items-center">
             <div className=" space-y-4 py-8 ">
@@ -165,7 +166,9 @@ const PriceBreakUp = ({
             <SideCard price={sum + otherChangeTotal} />
           </div>
         )}
-        <SVGBackground width={"100%"} className="my-8" />
+        {otherPrice?.otherCharge && (
+          <SVGBackground width={"100%"} className="my-8" />
+        )}
         {otherPrice?.otherCharge && (
           <div className="w-full grid md:grid-cols-2 justify-between ">
             <div className="   space-y-4 py-8 ">

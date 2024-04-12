@@ -22,7 +22,6 @@ import NearByCarouselProperty from "@/app/components/property/carousel";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
 import Reviews from "@/app/components/property/reviews";
 import Banner from "@/app/components/property/banner";
-import { SVGBackground } from "@/app/images/commonSvgs";
 import MobileHidden from "@/app/components/molecules/MobileHidden";
 
 type Props = { params: { slug: string } };
