@@ -5,7 +5,7 @@ import clsx from "clsx";
 import Image from "next/image";
 import React, { useState, useRef, useEffect } from "react";
 
-export default function Navigation() {
+export default function Navigation({ isProj }: { isProj: boolean }) {
   const { data } = useRatings();
   const [currentBlock, setCurrentBlock] = useState("overview");
   const scrollContainerRef = useRef<HTMLDivElement>(null);

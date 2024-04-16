@@ -24,6 +24,7 @@ import Reviews from "@/app/components/property/reviews";
 import Banner from "@/app/components/property/banner";
 import { SVGBackground } from "@/app/images/commonSvgs";
 import MobileHidden from "@/app/components/molecules/MobileHidden";
+import ErrorContainer from "@/app/components/project/error/container";
 
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
@@ -44,14 +45,11 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             </span>
           </p>
           {/* Top Cover Image Card */}
-          <PropertyFirstBlock
-            projectDetails={data}
-            projName={projData.projectName}
-          />
+          <PropertyFirstBlock projectDetails={data} projName={data.propName} />
         </div>
         {/* Navigations Container */}
         <MobileHidden>
-          <Navigation />
+          <Navigation isProj={!!data.projIdEnc} />
         </MobileHidden>
         {/* Overview */}
         <PropertyOverView data={data} />
@@ -91,47 +89,45 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             <LeafMap
               lat={projData.lat}
               lang={projData.lang}
-              projName={projData.projectName}
+              projName={data.propName}
               projId={data.projIdEnc}
               type="prop"
             />
-            <Banner slug={data.projIdEnc} projName={projData.projectName} />
-            <Loans
-              type="prop"
-              banks={projData.banks}
-              name={projData.projectName}
-            />
+            <Banner slug={data.projIdEnc} projName={data.propName} />
+            <ErrorContainer data={projData.banks}>
+              <Loans type="prop" banks={projData.banks} name={data.propName} />
+            </ErrorContainer>
             {/* About Builder */}
             <AboutBuilder type="prop" id={projData.builderId} />
             <PropertyBanner {...projData} />
 
-            <Reviews slug={data.projIdEnc} projName={projData.projectName} />
+            <Reviews slug={data.projIdEnc} projName={data.propName} />
 
-            <FaqWithBg data={projData.faqs} projName={projData.projectName} />
+            <FaqWithBg data={projData.faqs} projName={data.propName} />
           </>
         )}
         {!data.projIdEnc && (
           <PropertyMap
-            lat={projData.lat ?? 0}
-            lang={projData.lang ?? 0}
-            projName={projData.projectName}
+            lat={projData?.lat ?? 0}
+            lang={projData?.lang ?? 0}
+            projName={data.propName}
             projId={data.propIdEnc}
             type="prop"
           />
         )}
 
         <NearByCarouselProperty
-          projName={projData.projectName}
-          lat={projData.lat}
-          lng={projData.lang}
+          projName={data.propName}
+          lat={projData?.lat}
+          lng={projData?.lang}
           projId={data.projIdEnc}
           cg={data.cg}
         />
         {data.projIdEnc && (
           <NearByCarousel
-            projName={projData.projectName}
-            lat={projData.lat}
-            lng={projData.lang}
+            projName={data.propName}
+            lat={projData?.lat}
+            lng={projData?.lang}
             projId={data.propIdEnc}
           />
         )}

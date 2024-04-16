@@ -2,19 +2,21 @@ import { Main } from "@/app/validations/property";
 import { Main as M } from "@/app/validations/types/project";
 import { unstable_cache } from "next/cache";
 
-const getProjectDetails = async (slug: string): Promise<M> => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/fetch/listing/project/data?projIdEnc=cf912233ef5d23fae30f214f20a2c748`
-    // {
-    //   cache: "no-cache",
-    // }
-    // {
-    //   next: { revalidate: 30 },
-    // }
-  );
-  const data = await response.json();
+const getProjectDetails = async (slug: string): Promise<M | any> => {
+  if (slug) {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/fetch/listing/project/data?projIdEnc=${slug}`
+      // {
+      //   cache: "no-cache",
+      // }
+      // {
+      //   next: { revalidate: 30 },
+      // }
+    );
+    const data = await response.json();
 
-  return data as M;
+    return data as M;
+  }
 };
 
 const getListingDetails = async (slug: string): Promise<Main> => {

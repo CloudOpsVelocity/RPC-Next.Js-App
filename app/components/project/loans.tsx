@@ -36,7 +36,7 @@ export default function ProjectLoans({
       )}
 
       <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 md:flex justify-start items-center flex-wrap w-full gap-[3%] ">
-        {banks.map((bank, index) => {
+        {banks?.map((bank, index) => {
           return (
             <>
               {bank.bankid && (

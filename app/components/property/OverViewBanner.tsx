@@ -138,53 +138,61 @@ const PriceBreakUp = ({
             className="max-w-[747px] border-none"
           />
         </div>
-        <SVGBackground width={"100%"} className="my-8" />
+
         {sum > 0 && (
-          <div className="w-full grid md:grid-cols-2 justify-between items-center">
-            <div className=" space-y-4 py-8 ">
-              <h3 className="text-[#034AB6] text-[28px] not-italic font-bold leading-[normal] underline uppercase mb-[30px]">
-                applicable charges
-              </h3>
-              {filterOtherDetails?.map((key, i) => {
-                return (
-                  <ListItem
-                    key={i}
-                    value={otherPrice[key] as string}
-                    label={
-                      key === "clubHouseCharge"
-                        ? `${displayNameMap[key]} (${otherPrice?.clubHouseTill} year)`
-                        : displayNameMap[key]
-                    }
-                    className={
-                      filterOtherDetails?.length - 1 === i ? "border-none" : ""
-                    }
-                  />
-                );
-              })}
+          <>
+            <SVGBackground width={"100%"} className="my-8" />
+            <div className="w-full grid md:grid-cols-2 justify-between items-center">
+              <div className=" space-y-4 py-8 ">
+                <h3 className="text-[#034AB6] text-[28px] not-italic font-bold leading-[normal] underline uppercase mb-[30px]">
+                  applicable charges
+                </h3>
+                {filterOtherDetails?.map((key, i) => {
+                  return (
+                    <ListItem
+                      key={i}
+                      value={otherPrice[key] as string}
+                      label={
+                        key === "clubHouseCharge"
+                          ? `${displayNameMap[key]} (${otherPrice?.clubHouseTill} year)`
+                          : displayNameMap[key]
+                      }
+                      className={
+                        filterOtherDetails?.length - 1 === i
+                          ? "border-none"
+                          : ""
+                      }
+                    />
+                  );
+                })}
+              </div>
+              <SideCard price={sum + otherChangeTotal} />
             </div>
-            <SideCard price={sum + otherChangeTotal} />
-          </div>
+          </>
         )}
-        <SVGBackground width={"100%"} className="my-8" />
+
         {otherPrice?.otherCharge && (
-          <div className="w-full grid md:grid-cols-2 justify-between ">
-            <div className="   space-y-4 py-8 ">
-              <h3 className="text-[#034AB6] text-[28px] not-italic font-bold leading-[normal] underline uppercase mb-[30px]">
-                Other charges
-              </h3>
-              {chargesArray.map((charge, index) => {
-                const [chargeName, chargeValue] = charge.split("|");
-                return (
-                  <ListItem
-                    key={index}
-                    label={chargeName.trim()}
-                    value={chargeValue.trim()}
-                  />
-                );
-              })}
+          <>
+            <SVGBackground width={"100%"} className="my-8" />
+            <div className="w-full grid md:grid-cols-2 justify-between ">
+              <div className="   space-y-4 py-8 ">
+                <h3 className="text-[#034AB6] text-[28px] not-italic font-bold leading-[normal] underline uppercase mb-[30px]">
+                  Other charges
+                </h3>
+                {chargesArray.map((charge, index) => {
+                  const [chargeName, chargeValue] = charge.split("|");
+                  return (
+                    <ListItem
+                      key={index}
+                      label={chargeName.trim()}
+                      value={chargeValue.trim()}
+                    />
+                  );
+                })}
+              </div>
+              <OtherSideCard price={sum + otherChangeTotal + Number(price)} />
             </div>
-            <OtherSideCard price={sum + otherChangeTotal + Number(price)} />
-          </div>
+          </>
         )}
       </div>
     </>

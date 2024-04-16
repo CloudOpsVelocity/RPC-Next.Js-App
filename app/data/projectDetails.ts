@@ -26,6 +26,7 @@ export const Propertytopics = [
   { label: "Galleria", id: "galleria" },
   { label: "Amenities", id: "amenities" },
   { label: "Near By", id: "nearBy" },
+  { label: "Builder Details", id: "aboutBuilder" },
   { label: "Ratings", id: "ratings" },
   { label: "FAQ?", id: "faq" },
   { label: "Similar", id: "similar" },
