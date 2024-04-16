@@ -87,7 +87,7 @@ export default function Overview({
             key="totalLandArea"
             icon={<TotalLandArea />}
             title="Total Land Area"
-            value={totalLandArea}
+            value={`${totalLandArea} sq.ft.`}
             className="mr-[5%] pt-[2%] mb-[3%] "
           />
           {/* <ProjBasicDetails
@@ -101,7 +101,7 @@ export default function Overview({
             key="totalUnits"
             icon={<TotalLandArea />} // Adjust icon
             title="Total No: of Units"
-            value={totalUnit}
+            value={`${totalUnit} Units`}
             className="mr-[5%] pt-[2%] mb-[3%] "
           />
           <ProjBasicDetails

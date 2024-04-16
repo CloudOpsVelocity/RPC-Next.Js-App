@@ -50,7 +50,7 @@ export default function RoomDetails({ data }: { data: Main }) {
   return (
     <div
       id="propertyDetails"
-      className="scroll-mt-[220px] flex justify-center items-center flex-col  mb-5 sm:block"
+      className="scroll-mt-[220px] m-auto w-[90%]  mb-5 sm:block"
     >
       <PropertyHeading
         title="Listing details"
@@ -78,7 +78,9 @@ const RoomSection = ({ data }: { data: Main }) => {
         See the rooms that are available in This property
       </p>
 
-      <div className={"flex justify-start items-start flex-wrap w-[100%]  "}>
+      <div
+        className={"flex justify-start items-start flex-wrap w-[90%] m-auto  "}
+      >
         <RoomBasicDetails
           key="launchDate"
           icon={<Bathrooms />}
