@@ -8,7 +8,7 @@ import { nearbyLocationIcon } from "@/app/images/commonSvgs";
 import Loading from "../../atoms/Loader";
 import dynamic from "next/dynamic";
 import MapSkeleton from "../../maps/Skeleton";
-import useMapData from "@/app/hooks/property/useMapData";
+import useMapData from "@/app/hooks/project/useMapData";
 import PropertyHeading from "../../property/heading";
 import { useAtom, useSetAtom } from "jotai";
 import { isScrollingAtom } from "../navigation";
