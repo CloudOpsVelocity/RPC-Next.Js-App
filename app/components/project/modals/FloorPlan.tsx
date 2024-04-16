@@ -563,6 +563,9 @@ const LeftSection = ({ propCgId, data }: Props) => {
             searchable
             maxDropdownHeight={200}
             {...getInputProps("totalNumberofBathroom")}
+            onChange={(value) =>
+              handleOnChange(value as string, "totalNumberofBathroom")
+            }
             classNames={{ input: S.input, label: S.label }}
             rightSection={<DropDownIcon />}
           />
