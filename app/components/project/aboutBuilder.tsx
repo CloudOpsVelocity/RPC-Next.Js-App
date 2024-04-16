@@ -15,7 +15,10 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
   const nzData = normalizeData(data, type);
 
   return (
-    <div className="w-[90%] scroll-mt-[90px] mt-[5%] mb-[5%]">
+    <div
+      className="w-[90%] scroll-mt-[220px] mt-[5%] mb-[5%]"
+      id="aboutBuilder"
+    >
       <div className="w-full justify-between items-center ">
         <div className="inline-flex  gap-[26px]  w-[90%] items-center">
           {type === "prop" && Svg}

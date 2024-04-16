@@ -38,6 +38,7 @@ export default function ProjectDetailsP({ projName }: Props) {
     propertyTypeOrder.filter((propertyType) =>
       Object.keys(selectedPhase.propTypeOverview).includes(propertyType)
     );
+
   return (
     <div className="w-[90%] mb-[5%] scroll-mt-[180px]" id="propertyDetails">
       <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35] mb-[12px]">
@@ -113,7 +114,11 @@ export default function ProjectDetailsP({ projName }: Props) {
                 <ProjBasicDetails
                   key="reraId"
                   icon={<IdIcon />}
-                  title="RERA ID"
+                  title={
+                    selectedPhase.rerastatus === "Applied"
+                      ? "Acknowledgement No"
+                      : "RERA ID"
+                  }
                   value={selectedPhase.reraId}
                   className={styles.box}
                 />

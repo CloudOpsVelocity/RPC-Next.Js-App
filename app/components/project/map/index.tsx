@@ -10,7 +10,7 @@ import dynamic from "next/dynamic";
 import MapSkeleton from "../../maps/Skeleton";
 import useMapData from "@/app/hooks/property/useMapData";
 import PropertyHeading from "../../property/heading";
-import { useAtom } from "jotai";
+import { useAtom, useSetAtom } from "jotai";
 import { isScrollingAtom } from "../navigation";
 
 interface Area {
@@ -197,7 +197,7 @@ const MapCard = ({
   distance,
   time,
 }: any) => {
-  const [isScrolling, setIsScrolling] = useAtom(isScrollingAtom);
+  const setIsScrolling = useSetAtom(isScrollingAtom);
   const handleClick = () => {
     showLocationOnMap({
       position: {
