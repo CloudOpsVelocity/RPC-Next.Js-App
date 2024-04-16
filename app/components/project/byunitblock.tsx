@@ -82,7 +82,6 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
       // });
     }
   };
-
   return (
     <div className="px-[3%] w-full flex justify-start flex-col items-start">
       <h3 className="text-[#001F35] text-[20px] lg:text-[24px] font-[500]">
@@ -137,7 +136,8 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
         )}
 
         {propCgId == projectprops.apartment &&
-          getOptions("block").length > 0 && (
+          getOptions("block").filter((item) => item !== "undefined").length >
+            0 && (
             <Select
               rightSection={<DropDownIcon />}
               size="md"
