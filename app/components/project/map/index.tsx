@@ -1,8 +1,6 @@
 "use client";
 import React, { useState, useCallback, useRef, useMemo } from "react";
-import { LuTrain, LuSearch } from "react-icons/lu";
 import { Tabs, ScrollArea } from "@mantine/core";
-
 import { clsx } from "clsx";
 import { Coordinates } from "@/app/utils/maps";
 import { useMediaQuery } from "@mantine/hooks";
@@ -12,6 +10,8 @@ import dynamic from "next/dynamic";
 import MapSkeleton from "../../maps/Skeleton";
 import useMapData from "@/app/hooks/property/useMapData";
 import PropertyHeading from "../../property/heading";
+import { useAtom } from "jotai";
+import { isScrollingAtom } from "../navigation";
 
 interface Area {
   name: string;
@@ -80,23 +80,6 @@ const LeafMap: React.FC<{
             </p>
           </div>
         )}
-        {/* <div className="flex  flex-col">
-          <p className="text-[#666] text-xl not-italic font-medium leading-[normal] tracking-[0.8px]">
-            Click to locate project
-          </p>
-          <Button
-            buttonClass="flex justify-center items-center gap-1 p-2.5 border rounded-[21px] border-solid border-[#0094FF] text-[#202020] text-xl not-italic font-semibold leading-[normal] bg-[#F2FAFF] mt-3 ml-auto "
-            title={"Locate Project"}
-            icon={<GradientLocation className="w-8 h-8" />}
-            onChange={() => {
-              setSelectedLocation({
-                lat: Number(lat),
-                lng: Number(lang),
-                name: projName,
-              });
-            }}
-          />
-        </div> */}
       </div>
       <div className="flex gap-6 mb-5 mt-1 w-full flex-wrap ">
         {areas.map((area) => {
@@ -214,6 +197,7 @@ const MapCard = ({
   distance,
   time,
 }: any) => {
+  const [isScrolling, setIsScrolling] = useAtom(isScrollingAtom);
   const handleClick = () => {
     showLocationOnMap({
       position: {
@@ -225,6 +209,8 @@ const MapCard = ({
     scrollToTopic("nearBy");
   };
   const scrollToTopic = (id: string): void => {
+    setIsScrolling(true);
+
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({
@@ -233,6 +219,7 @@ const MapCard = ({
         inline: "center",
       });
     }
+    setTimeout(() => setIsScrolling(false), 3000);
   };
   return (
     <div

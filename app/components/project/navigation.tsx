@@ -2,20 +2,20 @@
 import { topics } from "@/app/data/projectDetails";
 import useRatings from "@/app/hooks/useRatings";
 import clsx from "clsx";
+import { atom, useAtom } from "jotai";
 import Image from "next/image";
 import React, { useState, useRef, useEffect } from "react";
-
+export const isScrollingAtom = atom(false);
 export default function Navigation() {
   const { data } = useRatings();
   const [currentBlock, setCurrentBlock] = useState("overview");
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [isSticky, setIsSticky] = useState(false);
-  const [isScrolling, setIsScrolling] = useState(false);
+  const [isScrolling, setIsScrolling] = useAtom(isScrollingAtom);
   const [lastScrollY, setLastScrollY] = useState(0);
   useEffect(() => {
     function handleScroll() {
       const currentScrollY = window.scrollY;
-      console.log(currentScrollY);
       const scrollDirection = currentScrollY > lastScrollY ? "down" : "up";
       setLastScrollY(currentScrollY);
       if (!isScrolling) {
