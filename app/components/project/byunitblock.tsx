@@ -136,20 +136,21 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
           />
         )}
 
-        {propCgId == projectprops.apartment && (
-          <Select
-            rightSection={<DropDownIcon />}
-            size="md"
-            mt="md"
-            label="Block"
-            className="!w-[46%]"
-            placeholder="-- select Block --"
-            data={(getOptions("block") as string[]) || []}
-            searchable
-            maxDropdownHeight={200}
-            onChange={(value) => handleInputChange("block", value as string)}
-          />
-        )}
+        {propCgId == projectprops.apartment &&
+          getOptions("block").length > 0 && (
+            <Select
+              rightSection={<DropDownIcon />}
+              size="md"
+              mt="md"
+              label="Block"
+              className="!w-[46%]"
+              placeholder="-- select Block --"
+              data={(getOptions("block") as string[]) || []}
+              searchable
+              maxDropdownHeight={200}
+              onChange={(value) => handleInputChange("block", value as string)}
+            />
+          )}
 
         {propCgId !== projectprops.plot && (
           <Select
