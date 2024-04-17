@@ -130,18 +130,33 @@ function Builder() {
   });
   const { data: statesData, isLoading: isLoadingStates } = useQuery(
     ["states"],
-    getStatesDetails
+    getStatesDetails,
+    {
+      staleTime: 30000,
+      refetchOnWindowFocus: false,
+      cacheTime: 30000,
+      refetchIntervalInBackground: false,
+    }
   );
   const { data: brachData, isLoading: isLoadingBrach } = useQuery(
     ["brach"],
-    getAllCitiesDetails
+    getAllCitiesDetails,
+    {
+      staleTime: 30000,
+      refetchOnWindowFocus: false,
+      cacheTime: 30000,
+      refetchIntervalInBackground: false,
+    }
   );
   const { data: citiesData, isLoading: isLoadingCities } = useQuery(
     ["cities" + form.values.state],
     () => getCitiesDetails(parseInt(form.values.state)),
     {
-      // The query will not execute until the userId exists
       enabled: !!form.values.state,
+      staleTime: 30000,
+      refetchOnWindowFocus: false,
+      cacheTime: 30000,
+      refetchIntervalInBackground: false,
     }
   );
 
