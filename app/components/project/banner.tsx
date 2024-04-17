@@ -163,6 +163,7 @@ const AddRating = ({
                     />
                   }
                   {...form.getInputProps("rating")}
+                  fractions={2}
                 />
               </div>
 
@@ -236,6 +237,7 @@ const Success = ({ text, rating }: any) => {
                 className="w-[45px] h-[45px]  md:w-[70px] md:h-[70px]"
               />
             }
+            fractions={2}
           />
         </div>
 
