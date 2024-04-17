@@ -93,26 +93,26 @@ const MiddleSection = ({
         {/* Sarang by sumadhura/2bhk/tower 1/ 04/north/1124 sq.ft - 3 */}
         {projName}
         {propCgId != projectprops.plot &&
-          selectedFloor.bhkName &&
-          "_" + selectedFloor.bhkName}
+          selectedFloor?.bhkName &&
+          " | " + selectedFloor?.bhkName}
         {propCgId == projectprops.apartment &&
-          selectedFloor.towerName &&
-          selectedFloor.towerName != "NA" &&
-          "_" + selectedFloor.towerName}
+          selectedFloor?.towerName &&
+          selectedFloor?.towerName != "NA" &&
+          " | Tower " + selectedFloor?.towerName}
+        {propCgId != projectprops.plot &&
+          selectedFloor?.floor &&
+          " | Floor " + selectedFloor?.floor}
         {propCgId != projectprops.apartment &&
           propCgId != projectprops.villament &&
-          selectedFloor.unitNumber &&
-          "_" + selectedFloor.unitNumber}
+          selectedFloor?.unitNumber &&
+          " | Unit No. " + selectedFloor?.unitNumber}
+        {" | Facing " + selectedFloor?.facingName}
         {propCgId != projectprops.plot &&
-          selectedFloor.floor &&
-          "_" + selectedFloor.floor}
-        _{selectedFloor.facingName}
-        {propCgId != projectprops.plot &&
-          selectedFloor.superBuildUparea &&
-          "_" + selectedFloor.superBuildUparea + " sq.ft"}
+          selectedFloor?.superBuildUparea &&
+          " | Area. " + selectedFloor?.superBuildUparea + " sq.ft"}
         {propCgId == projectprops.plot &&
-          selectedFloor.plotArea &&
-          "_" + selectedFloor.plotArea + " sq.ft"}
+          selectedFloor?.plotArea &&
+          " | Area. " + selectedFloor?.plotArea + " sq.ft"}
       </p>
       {selectedFloor?.floorPlanUrl ? (
         <div className="w-full flex justify-center items-center">

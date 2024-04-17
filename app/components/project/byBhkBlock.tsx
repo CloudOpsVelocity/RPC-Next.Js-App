@@ -3,6 +3,7 @@ import { bhkDetails } from "../../data/projectDetails";
 import Button from "../../elements/button";
 import FloorplanDetailsCard from "./floorplanDetailsCard";
 import cookie from "js-cookie";
+import filterDataAtom from "@/app/store/filterdata";
 
 type Props = {
   propCgId: any;
@@ -16,7 +17,6 @@ export default function ByBhkBlock({ propCgId, data, setValues }: Props) {
   // Filter data based on selected BHK
   const filteredData =
     bhk === "0" ? data : data.filter((item: any) => item.bhkName === bhk);
-
   const getOptions = (property: string): string[] => {
     return Array.from(new Set(data.map((item: any) => String(item[property]))));
   };
