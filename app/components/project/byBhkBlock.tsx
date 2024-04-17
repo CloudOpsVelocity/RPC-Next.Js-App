@@ -9,11 +9,17 @@ type Props = {
   propCgId: any;
   data: any;
   setValues: any;
+  bhk: string;
+  setBhk: (value: string) => void;
 };
 
-export default function ByBhkBlock({ propCgId, data, setValues }: Props) {
-  const [bhk, setBhk] = useState("0");
-
+export default function ByBhkBlock({
+  propCgId,
+  data,
+  setValues,
+  bhk,
+  setBhk,
+}: Props) {
   // Filter data based on selected BHK
   const filteredData =
     bhk === "0" ? data : data.filter((item: any) => item.bhkName === bhk);

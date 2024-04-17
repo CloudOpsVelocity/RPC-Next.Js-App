@@ -141,6 +141,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
     );
     setFloorsArray(filteredFloors);
   };
+  const [bhk, setBhk] = useState("0");
   useEffect(() => {
     if (
       projectUnitsData &&
@@ -180,7 +181,10 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                         ? `Phase: ${each.phaseName}`
                         : each.phaseName
                     }
-                    onChange={() => setCurrentPhase(each.phaseId)}
+                    onChange={() => {
+                      setCurrentPhase(each.phaseId);
+                      setBhk("0");
+                    }}
                     buttonClass={` mb-[5px] text-[18px] lg:text-[20px] bg-[#ECF7FF] p-[8px] xl:px-[8px]  whitespace-nowrap text-[#000] rounded-[8px]${
                       currentPhase == each.phaseId
                         ? " font-[600] border-solid border-[1px] border-[#0073C6] "
@@ -214,6 +218,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                   } `}
                   onChange={() => {
                     getPropertyType(propertyDetailsTypes.get(keyName));
+                    setBhk("0");
                     // setSelectedFloor(projectUnitsData[0]);
                   }}
                   title={name}
@@ -300,6 +305,8 @@ export default function FloorplansBlock({ projName, slug }: Props) {
               propCgId={propCgId}
               data={projectUnitsData}
               setValues={form.setValues}
+              bhk={bhk}
+              setBhk={setBhk}
             />
           </div>
         )}

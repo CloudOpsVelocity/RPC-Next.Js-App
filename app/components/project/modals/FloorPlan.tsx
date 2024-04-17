@@ -274,7 +274,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
     setValues(prevObj);
     handleSearch(key);
   };
-
+  console.log(getOptions("block"));
   return (
     <div className="col-span-1 w-full max-w-[392px] mr-[3%]  ">
       <div className="w-[100%] flex justify-between items-start flex-wrap gap-[5%]">
@@ -323,7 +323,10 @@ const LeftSection = ({ propCgId, data }: Props) => {
               label="Select Block"
               className="!w-[46%]"
               placeholder="-- select --"
-              data={getOptions("block")}
+              data={getOptions("block").filter(
+                (option: string) =>
+                  option !== undefined && option !== "undefined"
+              )}
               searchable
               maxDropdownHeight={200}
               {...getInputProps("block")}
