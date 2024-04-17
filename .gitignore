@@ -37,4 +37,4 @@ next-env.d.ts
 
 
 # test directly
-/app/test/
+/app/test
