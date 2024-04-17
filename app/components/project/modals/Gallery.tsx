@@ -1,7 +1,12 @@
 // Gallery.tsx
 import React, { useState } from "react";
 import { Modal, Image } from "@mantine/core";
-import { PopupOpenSvg, videoPlayIcon } from "@/app/images/commonSvgs";
+import {
+  ImgCarouselIcon,
+  PopupOpenSvg,
+  PrevCarouselIcon,
+  videoPlayIcon,
+} from "@/app/images/commonSvgs";
 import { Carousel } from "@mantine/carousel";
 import S from "@/app/styles/ImgCarousel.module.css";
 import ReactPlayer from "react-player";
@@ -10,7 +15,7 @@ import SharePopup from "../../atoms/SharePopup";
 import { imageUrlParser } from "@/app/utils/image";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import clsx from "clsx";
-
+import styles from "@/app/styles/Carousel.module.css";
 type GalleryProps = {
   selectedMedia: any;
   images: any[];
@@ -90,6 +95,7 @@ const Gallery: React.FC<GalleryProps> = ({
           )}
           <div className="mt-4 flex items-center justify-center  w-full">
             <Carousel
+              classNames={styles}
               height={100}
               slideSize="15.333333%"
               slideGap="xs"
@@ -97,34 +103,37 @@ const Gallery: React.FC<GalleryProps> = ({
               mt={"lg"}
               maw={1200}
               pl={"90px"}
-              align="center"
-              // mx={"auto"}
+              align={images.length > 5 ? "start" : "center"}
               slidesToScroll={5}
               className="w-full min-w-[80px] !h-auto max-h-[100px] min-h-[50px]"
-              withControls={images.length > 5 ? true : false}
+              withControls={
+                (content?.type == "image" ? images.length : videos.length) > 5
+                  ? true
+                  : false
+              }
+              nextControlIcon={<ImgCarouselIcon />}
+              previousControlIcon={<PrevCarouselIcon />}
             >
               {isImage ? (
-                <div className="flex items-center w-full justify-center">
-                  {images.map((image, index) => (
-                    <Carousel.Slide
-                      key={index}
-                      onClick={() => handleImageClick(image)}
-                    >
-                      <Image
-                        radius="md"
-                        h={100}
-                        w="auto"
-                        fit="contain"
-                        src={image}
-                        className={clsx(
-                          `cursor-pointer w-full min-w-[80px] !h-auto max-h-[100px] min-h-[50px]`,
-                          image === (previewImage || content?.url) &&
-                            "border-[5px] border-white"
-                        )}
-                      />
-                    </Carousel.Slide>
-                  ))}
-                </div>
+                images.map((image, index) => (
+                  <Carousel.Slide
+                    key={index}
+                    onClick={() => handleImageClick(image)}
+                  >
+                    <Image
+                      radius="md"
+                      h={100}
+                      w="auto"
+                      fit="cover"
+                      src={image}
+                      className={clsx(
+                        `cursor-pointer w-full min-w-[150px] max-w-[150px] !h-auto max-h-[100px] min-h-[100px] object-cover`,
+                        image === (previewImage || content?.url) &&
+                          "border-[5px] border-white"
+                      )}
+                    />
+                  </Carousel.Slide>
+                ))
               ) : (
                 <div className="flex items-center w-full justify-center">
                   {videos.map((video, index) => (
