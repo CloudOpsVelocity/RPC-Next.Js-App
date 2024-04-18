@@ -47,7 +47,9 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
               Current Project Status:{" "}
               <span className="text-[#148B16] text-[16px] font-[700]">
                 {" "}
-                {projectDetails.projectStatus}
+                {projectDetails.projectStatus === "Completed"
+                  ? "Completed"
+                  : "On-Going"}
               </span>{" "}
             </p>
             <SharePopup />
@@ -100,10 +102,7 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
                 </h3>
 
                 <p className="text-[#202020]  text-sm sm:text-[22px] not-italic font-[600] leading-[normal] w-[100%] tracking-[0.32px] capitalize mt-3 ">
-                  {projectDetails.address} {`${projectDetails.localityName} `}
-                  {`${projectDetails.cityName} `}
-                  {`${projectDetails?.stateName ?? ""} `} {projectDetails.state}{" "}
-                  {projectDetails.pinCode}
+                  {`${projectDetails.address}, ${projectDetails.localityName}, ${projectDetails.cityName}, ${projectDetails.state}, ${projectDetails.pinCode}`}
                 </p>
 
                 <p className="text-sm sm:text-[16px] mt-3 lg:text-[22px] font-[600] text-[#001F35]">
@@ -126,7 +125,7 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
                 {formatCurrency(projectDetails.maxPrice)}
               </h2>
               <p className="text-[16px] md:text-right lg:text-[24px] font-[600] mb-[10px] md:mb-[20px] text-[#00487C] ">
-                ₹ {projectDetails.basePrice}/ Price per sqft onwards
+                ₹ {projectDetails.basePrice}/- Price per sqft onwards
               </p>
 
               <p

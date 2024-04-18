@@ -10,8 +10,8 @@ export default function Ratings() {
       {isLoading
         ? "..."
         : `${
-            data?.reviewOverviewData.averageRating
-              ? `${data?.reviewOverviewData.averageRating}.0`
+            data?.reviewOverviewData?.averageRating
+              ? `${data?.reviewOverviewData?.averageRating}.0`
               : "No"
           }` ?? "No"}{" "}
       Ratings

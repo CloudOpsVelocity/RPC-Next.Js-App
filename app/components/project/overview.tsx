@@ -49,10 +49,7 @@ export default function Overview({
             {projectName}
           </h2>
           <p className="text-[16px] lg:text-[24px] text-[#505050] font-[500] capitalize sm:max-w-[85%]">
-            {address} {`${localityName} `}
-            {`${cityName} `}
-            {`${stateName ?? ""} `}
-            {`${state} `} {pinCode}
+            {`${address}, ${localityName}, ${cityName}, ${state}, ${pinCode}`}
           </p>
         </div>
         <div className="flex justify-center sm:items-end flex-col">
@@ -87,7 +84,7 @@ export default function Overview({
             key="totalLandArea"
             icon={<TotalLandArea />}
             title="Total Land Area"
-            value={`${totalLandArea} sq.ft.`}
+            value={`${totalLandArea} Acers`}
             className="mr-[5%] pt-[2%] mb-[3%] "
           />
           {/* <ProjBasicDetails
@@ -125,25 +122,6 @@ export default function Overview({
             value={formatDateDDMMYYYY(endDate)}
             className="mr-[5%] pt-[2%] mb-[3%] "
           />
-          {phaseList?.length == 1 && (
-            <ProjBasicDetails
-              key="rerastatus"
-              icon={<EndDate />}
-              title="Rera status"
-              value={PhaseOverview[0]?.rerastatus}
-              className="mr-[5%] pt-[2%] mb-[3%] "
-            />
-          )}
-
-          {phaseList?.length == 1 && (
-            <ProjBasicDetails
-              key="reraId"
-              icon={<EndDate />}
-              title="Rera Id"
-              value={PhaseOverview[0]?.reraId}
-              className="mr-[5%] pt-[2%] mb-[3%] "
-            />
-          )}
         </div>
         <div className=" flex justify-start md:justify-end items-start md:items-end flex-col mt-[3%] md:mt-0 ">
           <CompareList />
