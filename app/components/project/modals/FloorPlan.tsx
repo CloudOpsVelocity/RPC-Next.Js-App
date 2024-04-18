@@ -3,6 +3,7 @@ import { useId, useRef } from "react";
 import {
   DropDownIcon,
   FloorPlanModalIcon,
+  ImgCarouselIcon,
   LenseIcon,
   PopupOpenSvg,
   propertyDetailsSvgs,
@@ -13,11 +14,7 @@ import Image from "next/image";
 import CarouselModal from "./Carousel";
 import { useState } from "react";
 import { filterKeysDetails, projectprops } from "@/app/data/projectDetails";
-import {
-  FormProvider,
-  useForm,
-  useFormContext,
-} from "@/app/context/floorplanContext";
+import { useFormContext } from "@/app/context/floorplanContext";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { floorPlansArray, selectedFloorAtom } from "@/app/store/floor";
 import { useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
@@ -34,7 +31,7 @@ type Props = {
 function FloorPlanModal({ propCgId, data, projName }: Props) {
   const [selectedFloor, setSelectedFloor] = useAtom(selectedFloorAtom);
   const setFloorsArray = useSetAtom(floorPlansArray);
-  const [opened, { close, type }] = useFloorPlanPopup();
+  const [opened, { close }] = useFloorPlanPopup();
   const scrollFiltersRef = useRef<HTMLDivElement>(null);
   const form = useFormContext();
   const handleArrowClick = (side: "R" | "L"): void => {
@@ -51,21 +48,23 @@ function FloorPlanModal({ propCgId, data, projName }: Props) {
     const keys = Object.keys(form.values);
     keys.forEach((key) => form.setFieldValue(key, null));
   };
-  const handleSearch = (): void => {
+  const handleSearch = (excludeKey: string): void => {
     const filteredData = data.filter((item: any) => {
-      const matches = Object.values(form.values).some((value) => {
+      const matches = Object.entries(form.values).every(([formKey, value]) => {
+        if (formKey === excludeKey) {
+          return true;
+        }
         if (value !== null) {
           // @ts-ignore
-          const itemValue = String(item[value]).toLowerCase();
+          const itemValue = String(item[formKey]).toLowerCase();
           // @ts-ignore
-          const formValue = String(form.values[value]).toLowerCase();
+          const formValue = String(value).toLowerCase();
           return itemValue === formValue;
         }
-        return false;
+        return true;
       });
       return matches;
     });
-
     setSelectedFloor(filteredData[0]);
     setFloorsArray(filteredData);
   };
@@ -81,14 +80,15 @@ function FloorPlanModal({ propCgId, data, projName }: Props) {
     );
     if (keysWithNonNullValues.length === 1) {
       form.setFieldValue(key, null);
-      setSelectedFloor(data[0]);
+      setSelectedFloor(null);
       setFloorsArray(data);
+      return;
     }
-
     form.setFieldValue(key, null);
-    handleSearch();
+    handleSearch(key);
   };
   const [o, {}] = useSubFloorPlanPopup();
+
   return (
     <>
       <Modal
@@ -180,20 +180,7 @@ function FloorPlanModal({ propCgId, data, projName }: Props) {
                   onClick={() => handleArrowClick("R")}
                   className="flex h-[32px] ml-8 w-[32px] rounded-[50%] items-center justify-center bg-[#FCFCFC]"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width={24}
-                    height={24}
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#D2D5D7"
-                    strokeWidth={2}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="text-gray-600"
-                  >
-                    <path d="m9 18 6-6-6-6" />
-                  </svg>
+                  <ImgCarouselIcon />
                 </button>
               )}
 
@@ -247,6 +234,12 @@ const LeftSection = ({ propCgId, data }: Props) => {
     }
   };
   const handleSearch = (key: string) => {
+    const keysWithNonNullValues = Object.keys(values).filter(
+      (key) => values[key] !== null
+    );
+    if (keysWithNonNullValues.length === 0) {
+      return;
+    }
     // Implement your filtering logic here based on selectedValues
     const filteredData = data.filter((item: any) => {
       return Object.keys(values).every(
@@ -274,7 +267,6 @@ const LeftSection = ({ propCgId, data }: Props) => {
     setValues(prevObj);
     handleSearch(key);
   };
-  console.log(getOptions("block"));
   return (
     <div className="col-span-1 w-full max-w-[392px] mr-[3%]  ">
       <div className="w-[100%] flex justify-between items-start flex-wrap gap-[5%]">

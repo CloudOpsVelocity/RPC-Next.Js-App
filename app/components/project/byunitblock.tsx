@@ -4,7 +4,8 @@ import { DropDownIcon, LenseIcon } from "../../images/commonSvgs";
 import { projectprops } from "../../data/projectDetails";
 import { useAtom } from "jotai";
 import { selectedFloorAtom } from "@/app/store/floor";
-import { randomUUID } from "crypto";
+import S from "@/app/styles/Floorplan.module.css";
+import { setPropertyValues } from "@/app/utils/dyanamic/projects";
 
 type Props = {
   propCgId: any;
@@ -57,10 +58,8 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
       ...prevValues,
       [property]: prevValues[property] === value ? "" : value,
     }));
-    console.log(property);
     handleSearch(property);
   };
-
   const handleSearch = (type?: string) => {
     const filteredData = data.filter((item: any) => {
       return Object.keys(selectedValues).every(
@@ -71,15 +70,7 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
     });
     setFloor(filteredData[0]);
     if (type === "unitNumber") {
-      // setSelectedValues({
-      //   ...selectedValues,
-      //   towerName: filteredData[0].towerName,
-      //   unitNumber: filteredData[0].unitNumber,
-      //   unitType: filteredData[0].unitType,
-      //   block: filteredData[0].block,
-      //   floor: filteredData[0].floor,
-      //   facingName: filteredData[0].facingName,
-      // });
+      setSelectedValues(setPropertyValues(filteredData[0], propCgId));
     }
   };
   return (
@@ -105,6 +96,7 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
             onChange={(value) =>
               handleInputChange("towerName", value as string)
             }
+            classNames={{ input: S.input, label: S.label }}
           />
         ) : null}
 
@@ -119,6 +111,8 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
           searchable
           maxDropdownHeight={200}
           onChange={(value) => handleInputChange("unitNumber", value as string)}
+          classNames={{ input: S.input, label: S.label }}
+          clearable
         />
         {propCgId !== projectprops.plot && (
           <Select
@@ -132,6 +126,7 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
             searchable
             maxDropdownHeight={200}
             onChange={(value) => handleInputChange("bhkName", value as string)}
+            classNames={{ input: S.input, label: S.label }}
           />
         )}
 
@@ -149,6 +144,7 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
               searchable
               maxDropdownHeight={200}
               onChange={(value) => handleInputChange("block", value as string)}
+              classNames={{ input: S.input, label: S.label }}
             />
           )}
 
@@ -169,6 +165,7 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
             searchable
             maxDropdownHeight={200}
             onChange={(value) => handleInputChange("floor", value as string)}
+            classNames={{ input: S.input, label: S.label }}
           />
         )}
 
@@ -186,6 +183,7 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
             onChange={(value) =>
               handleInputChange("superBuildUparea", value as string)
             }
+            classNames={{ input: S.input, label: S.label }}
           />
         )}
         <Select
@@ -199,6 +197,7 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
           searchable
           maxDropdownHeight={200}
           onChange={(value) => handleInputChange("facingName", value as string)}
+          classNames={{ input: S.input, label: S.label }}
         />
         {propCgId == projectprops.plot && (
           <Select
@@ -213,6 +212,7 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
             searchable
             maxDropdownHeight={200}
             onChange={(value) => handleInputChange("width", value as string)}
+            classNames={{ input: S.input, label: S.label }}
           />
         )}
         {propCgId == projectprops.plot && (
@@ -228,6 +228,7 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
             searchable
             maxDropdownHeight={200}
             onChange={(value) => handleInputChange("length", value as string)}
+            classNames={{ input: S.input, label: S.label }}
           />
         )}
       </div>

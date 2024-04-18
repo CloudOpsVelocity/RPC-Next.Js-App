@@ -36,7 +36,18 @@
   box-sizing: border-box;
   align-self: flex-end;
 }
-
+.input::placeholder {
+  color: #4d6677;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: capitalize;
+}
+.input:focus::placeholder {
+  color: transparent !important;
+}
 .label {
   color: #4d6677;
   font-family: Montserrat;

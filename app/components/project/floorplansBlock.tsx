@@ -26,7 +26,6 @@ import Loading from "../atoms/Loader";
 import { currentPhaseAtom, propCgIdAtom } from "@/app/store/vewfloor";
 import { useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
 import { FormProvider, useForm } from "@/app/context/floorplanContext";
-import filterDataAtom from "@/app/store/filterdata";
 import { setPropertyValues } from "@/app/utils/dyanamic/projects";
 import { isSingleLetterOrNumber } from "@/app/utils/letters";
 
@@ -129,7 +128,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
     open("floor");
   };
   const handleContainerClick = () => {
-    if (floorPlanType === "type") {
+    if (floorPlanType === "type" || floorPlanType === "bhk") {
       setSelectedFloor(null);
       setFloorsArray(projectUnitsData);
       open("container");

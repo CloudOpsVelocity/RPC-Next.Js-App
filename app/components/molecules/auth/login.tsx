@@ -37,6 +37,7 @@ function Login() {
     validateInputOnBlur: true,
     validateInputOnChange: true,
   });
+
   const { login } = useAuth({ type: "login" });
   const onSubmit = async (values: any) => {
     setState("pending");
