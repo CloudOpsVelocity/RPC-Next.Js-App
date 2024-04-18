@@ -24,7 +24,7 @@ import dynamic from "next/dynamic";
 import MapSkeleton from "../../maps/Skeleton";
 import useMapData from "@/app/hooks/project/useMapData";
 import PropertyHeading from "../../property/heading";
-import { useAtom, useSetAtom } from "jotai";
+import { useSetAtom } from "jotai";
 import { isScrollingAtom } from "../navigation";
 
 interface Area {

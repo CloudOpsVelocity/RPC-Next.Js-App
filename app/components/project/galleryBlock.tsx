@@ -50,9 +50,9 @@ export default function GalleryBlock({
 
       <div className=" flex justify-center flex-col md:flex-row items-center-full mt-[1%] ">
         {/* IMage display con */}
-        <div className="w-[100%] md:w-[50%] bg-white  h-[250px] overflow-hidden sm:h-[394px] lg:h-auto mb-[3%] md:mb-[0%] mr-[3%] rounded-[14px]  shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)]">
+        <div className="w-[100%] md:w-[50%] bg-white  h-[250px] overflow-hidden sm:h-[394px] lg:h-auto mb-[3%] md:mb-[0%] mr-[3%] rounded-[14px]   flex justify-center items-center">
           {selectedMedia && (
-            <div className="w-[100%]  bg-white  mb-[3%] md:mb-[0%] mr-[3%]   relative shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[14px]">
+            <div className="w-[100%]  bg-white  mb-[3%] md:mb-[0%] mr-[3%]   relative  rounded-[14px] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] h-fit">
               {selectedMedia.includes(".mp4") ? (
                 <ReactPlayer
                   url={selectedMedia}

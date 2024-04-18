@@ -15,7 +15,6 @@ import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css";
 import "leaflet-defaulticon-compatibility";
 import { MapIcon, NearLocation } from "@/app/data/map";
-import Button from "@/app/elements/button";
 import {
   GradientLocation,
   ProjectMapIcon,
@@ -93,13 +92,27 @@ const Content: React.FC<any> = ({
           <Marker
             position={[parseFloat(item?.lat), parseFloat(item?.lang)]}
             title={item.name}
-            // icon={NearLocation}
           >
+            {/* {selectedLocation?.lat === item?.lat && ( */}
+            <Tooltip
+              key={item.lat}
+              opacity={1}
+              direction="top"
+              permanent={selectedLocation?.lat === item?.lat}
+            >
+              <div className=" ">
+                <p className="text-[#00487C] text-lg not-italic font-semibold leading-[normal]">
+                  {item.name}
+                </p>
+              </div>
+            </Tooltip>
+            {/* )} */}
             {selectedLocation?.lat === item?.lat && (
               <Tooltip
                 opacity={1}
                 direction="top"
                 permanent={selectedLocation?.lat === item?.lat}
+                key={item.lang}
               >
                 <div className=" ">
                   <p className="text-[#00487C] text-lg not-italic font-semibold leading-[normal]">

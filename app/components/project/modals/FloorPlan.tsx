@@ -240,7 +240,6 @@ const LeftSection = ({ propCgId, data }: Props) => {
     if (keysWithNonNullValues.length === 0) {
       return;
     }
-    // Implement your filtering logic here based on selectedValues
     const filteredData = data.filter((item: any) => {
       return Object.keys(values).every(
         (key) =>
