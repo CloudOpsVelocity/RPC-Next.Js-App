@@ -1,6 +1,6 @@
 "use client";
 import { Button, Modal, Rating, Textarea } from "@mantine/core";
-import { useDisclosure, useMediaQuery } from "@mantine/hooks";
+import { useDisclosure, useLocalStorage, useMediaQuery } from "@mantine/hooks";
 import Image from "next/image";
 import React, { useState } from "react";
 import S from "@/app/styles/Rating.module.css";
@@ -10,7 +10,7 @@ import { ratingSchema } from "@/app/validations/project";
 import { addRating } from "@/app/utils/api/actions/ratings";
 import { useParams } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { IconSun, RatingStar, infoIcon } from "@/app/images/commonSvgs";
+import { IconSun, RatingStar } from "@/app/images/commonSvgs";
 import toast, { Toaster } from "react-hot-toast";
 import LoginPopup from "../molecules/popups/login";
 import Close from "./button/close";
@@ -18,7 +18,13 @@ import { usePopUpRatings } from "@/app/hooks/popups/usePopUpRatings";
 import handleTrimAndReplace from "@/app/utils/input/validations";
 import clsx from "clsx";
 
-export default function Banner({ projName }: { projName: string }) {
+export default function Banner({
+  projName,
+  projIdEnc,
+}: {
+  projName: string;
+  projIdEnc: string;
+}) {
   const [opened, { open, close }] = usePopUpRatings();
 
   const onAddingRatings = () => {
@@ -77,22 +83,38 @@ export default function Banner({ projName }: { projName: string }) {
             height={300}
           />
         </div>
-        <AddRating opened={opened} close={close} projName={projName} />
+        <AddRating
+          opened={opened}
+          close={close}
+          projName={projName}
+          projIdEnc={projIdEnc}
+        />
       </div>
     </div>
   );
+}
+interface Props {
+  review: string;
+  rating: number;
+  proj: string;
 }
 const AddRating = ({
   opened,
   close,
   projName,
+  projIdEnc,
 }: {
   opened: any;
   close: any;
   projName: string;
+  projIdEnc: string;
 }) => {
   const params = useParams<{ slug: string }>();
   const { data: session } = useSession();
+  const [value, setValue] = useLocalStorage<Props[]>({
+    key: "ur",
+    defaultValue: [],
+  });
   const [status, setStatus] = useState<
     "pending" | "idle" | "success" | "error"
   >("idle");
@@ -107,11 +129,11 @@ const AddRating = ({
     status !== "success" && form.reset();
     close();
   };
-
+  const isSubmitted = value?.find((val) => val.proj === projIdEnc);
   const formSubmit = async (values: any) => {
     setStatus("pending");
     await addRating({ ...values, projIdEnc: params?.slug });
-
+    setValue((prev: any) => [...prev, { ...values, proj: projIdEnc }]);
     setStatus("success");
   };
   const isMobile = useMediaQuery(`(max-width: 750px)`);
@@ -123,7 +145,10 @@ const AddRating = ({
         close: S.close,
         content: S.content,
         overlay: S.overlay,
-        header: !session || status === "success" ? S.disabled : S.header,
+        header:
+          !session || status === "success" || isSubmitted
+            ? S.disabled
+            : S.header,
       }}
       opened={opened}
       onClose={onClose}
@@ -132,15 +157,15 @@ const AddRating = ({
       size={isMobile ? "100%" : session ? "xl" : "35%"}
     >
       <div className="relative">
-        {(!session || status === "success") && (
+        {(!session || status === "success" || isSubmitted) && (
           <Close close={onClose} className="absolute top-3 right-1" />
         )}
         {session ? (
-          status === "success" ? (
+          status === "success" || isSubmitted ? (
             <Success
               close={onClose}
-              text={form.values.review}
-              rating={form.values.rating}
+              text={form.values.review || isSubmitted?.review}
+              rating={form.values.rating || isSubmitted?.rating}
             />
           ) : (
             <form
@@ -163,7 +188,6 @@ const AddRating = ({
                     />
                   }
                   {...form.getInputProps("rating")}
-                  fractions={2}
                 />
               </div>
 
@@ -237,7 +261,6 @@ const Success = ({ text, rating }: any) => {
                 className="w-[45px] h-[45px]  md:w-[70px] md:h-[70px]"
               />
             }
-            fractions={2}
           />
         </div>
 

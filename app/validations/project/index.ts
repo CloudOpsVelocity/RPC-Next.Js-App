@@ -1,13 +1,13 @@
 import * as yup from "yup";
 const ratingSchema = yup.object().shape({
-  review: yup
-    .string()
-    .max(200, "Review should not exceed 200 characters")
-    .required("Review is required"),
+  // review: yup
+  //   .string()
+  //   .max(200, "Review should not exceed 200 characters")
+  //   .required("Review is required"),
 
   rating: yup
     .number()
-    .min(0, " Rating must be at least 0")
+    .min(1, " Rating must be at least 1")
     .max(5, " Rating must be at most 5")
     .required("Rating is required"),
 });

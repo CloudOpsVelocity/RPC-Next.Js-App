@@ -159,7 +159,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         <ErrorContainer data={data.highlights}>
           <Feature data={data.highlights} projName={data.projectName} />
         </ErrorContainer>
-        <Banner projName={data.projectName} />
+        <Banner projName={data.projectName} projIdEnc={data.projIdEnc} />
         <ErrorContainer data={data.banks}>
           <Loans type="proj" banks={data.banks} name={data.projectName} />
         </ErrorContainer>
