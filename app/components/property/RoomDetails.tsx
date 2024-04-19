@@ -79,7 +79,9 @@ const RoomSection = ({ data }: { data: Main }) => {
       </p>
 
       <div
-        className={"flex justify-start items-start flex-wrap w-[90%] m-auto  "}
+        className={
+          "flex justify-start items-start flex-wrap w-[90%] md:w-full m-auto  "
+        }
       >
         <RoomBasicDetails
           key="launchDate"

@@ -5,7 +5,7 @@ export default function usePropRatings({ slug }: { slug: string }) {
   const getProjRatings = async () => {
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/get-proj-review?projIdEnc=${slug}`
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/project/get-proj-review-data?projIdEnc=${slug}&identifier=PD&page=0`
       );
       return await res.json();
     } catch (error) {

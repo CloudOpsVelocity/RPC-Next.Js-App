@@ -14,7 +14,7 @@ export default function ProjectLoans({
   name: string;
 }) {
   return (
-    <div className="bg-white scroll-mt-[90px] py-8 w-[90%] mx-auto  overflow-hidden">
+    <div className="bg-white scroll-mt-[90px] py-8 w-[90%] mb-[4%] mx-auto  overflow-hidden">
       {type === "prop" ? (
         <PropertyHeading
           title="BANK APPROVALS OF"

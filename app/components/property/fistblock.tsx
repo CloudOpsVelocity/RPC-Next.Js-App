@@ -3,12 +3,14 @@ import React, { useRef } from "react";
 import { Carousel } from "@mantine/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import {
+  DarkCarouseIcon,
   FlooringIcon,
   FloorsIcon,
   NextCarouselButton,
   PrevCarouselButton,
   ReraIcon,
   ShearIcon,
+  DarkNextCarouselButton,
 } from "@/app/images/commonSvgs";
 import { Main } from "@/app/validations/property/index";
 import Image from "next/image";
@@ -69,8 +71,8 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
               plugins={[autoplay.current]}
               onMouseEnter={autoplay.current.stop}
               onMouseLeave={autoplay.current.reset}
-              nextControlIcon={<NextCarouselButton />}
-              previousControlIcon={<PrevCarouselButton />}
+              nextControlIcon={<DarkNextCarouselButton />}
+              previousControlIcon={<DarkCarouseIcon />}
             >
               {images.map((imageUrl, index) => (
                 <Carousel.Slide key={index} className="relative">
@@ -126,7 +128,7 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
                     ? projectDetails.plotArea
                     : projectDetails.sba
                 )}
-                / Price per sqft onwards
+                /- Price per sqft onwards
               </p>
               <p className="text-[#001F35] text-xl not-italic font-semibold leading-[normal] mb-[13px]">
                 Posted By:{" "}
