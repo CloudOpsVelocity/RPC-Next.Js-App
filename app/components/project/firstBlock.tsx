@@ -18,6 +18,8 @@ import { formatDate } from "@/app/utils/date";
 import { getImageUrls } from "@/app/utils/image";
 import usePhaseWiseOverview from "@/app/hooks/usePhaseWiseOverview";
 import styles from "@/app/styles/Carousel.module.css";
+import { isScrollingAtom } from "./navigation";
+import { useSetAtom } from "jotai";
 type Props = {
   projectDetails: Main | null;
 };
@@ -26,7 +28,9 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
   const images = getImageUrls(projectDetails?.media as any);
   const autoplay = useRef(Autoplay({ delay: 10000 }));
   const { hasReraStatus } = usePhaseWiseOverview();
+  const setIsScrolling = useSetAtom(isScrollingAtom);
   const scrollToTopic = (): void => {
+    setIsScrolling(true);
     const element = document.getElementById("floorPlans");
     if (element) {
       element.scrollIntoView({
@@ -35,6 +39,7 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
         inline: "center",
       });
     }
+    setTimeout(() => setIsScrolling(false), 3000);
   };
   return (
     <div
