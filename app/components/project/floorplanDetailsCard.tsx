@@ -11,6 +11,7 @@ import { useAtom, useSetAtom } from "jotai";
 import { floorPlansArray, selectedFloorAtom } from "@/app/store/floor";
 import { useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
 import { setPropertyValues } from "@/app/utils/dyanamic/projects";
+import { ImgNotAvail } from "@/app/data/project";
 
 type Props = {
   propCgId?: any;
@@ -46,7 +47,7 @@ const FloorplanDetailsCard: React.FC<Props> = ({
   const handleCardClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();
     const setted = setPropertyValues(data, propCgId);
-    setImage(data);
+    setImage({ ...data, floorPlanUrl: data.floorPlanUrl ?? ImgNotAvail });
     setValues(setted);
     handleSearch();
     open("floor");

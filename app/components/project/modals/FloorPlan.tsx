@@ -21,6 +21,7 @@ import { useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
 import { useSubFloorPlanPopup } from "@/app/hooks/useSubFloorplanPopup";
 import clsx from "clsx";
 import { setPropertyValues } from "@/app/utils/dyanamic/projects";
+import { ImgNotAvail } from "@/app/data/project";
 
 type Props = {
   propCgId: any;
@@ -65,7 +66,10 @@ function FloorPlanModal({ propCgId, data, projName }: Props) {
       });
       return matches;
     });
-    setSelectedFloor(filteredData[0]);
+    setSelectedFloor({
+      ...filteredData[0],
+      floorPlanUrl: filteredData[0].floorPlanUrl || ImgNotAvail,
+    });
     setFloorsArray(filteredData);
   };
   const handleReset = () => {
@@ -862,7 +866,10 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
   const [currentImg, setCurrentImg] = useState(0);
   const [selectedFloor, setFloor] = useAtom(selectedFloorAtom);
   const selectImg = (index: number) => {
-    setFloor(floorsArray[index]);
+    setFloor({
+      ...floorsArray[index],
+      floorPlanUrl: floorsArray[index].floorPlanUrl ?? ImgNotAvail,
+    });
     setCurrentImg(index);
     setValues(setPropertyValues(floorsArray[index], propCgId));
     handleSearch(index);
@@ -981,7 +988,7 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
                   >
                     <Image
                       // @ts-ignore
-                      src={eachObj?.floorPlanUrl}
+                      src={eachObj?.floorPlanUrl ?? ImgNotAvail}
                       alt="Floor Plan"
                       width={57}
                       height={37}

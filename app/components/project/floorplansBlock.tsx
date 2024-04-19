@@ -28,6 +28,7 @@ import { useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
 import { FormProvider, useForm } from "@/app/context/floorplanContext";
 import { setPropertyValues } from "@/app/utils/dyanamic/projects";
 import { isSingleLetterOrNumber } from "@/app/utils/letters";
+import { ImgNotAvail } from "@/app/data/project";
 
 type Props = {
   data: PhaseList[];
@@ -121,7 +122,10 @@ export default function FloorplansBlock({ projName, slug }: Props) {
   };
 
   const handleOpen = () => {
-    setSelectedFloor(projectUnitsData[0]);
+    setSelectedFloor({
+      ...projectUnitsData[0],
+      floorPlanUrl: projectUnitsData[0].floorPlanUrl ?? ImgNotAvail,
+    });
     form.setValues(setPropertyValues(projectUnitsData[0], propCgId));
 
     handleSearch();
