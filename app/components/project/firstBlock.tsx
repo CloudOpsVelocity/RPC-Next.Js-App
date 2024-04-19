@@ -3,6 +3,8 @@ import React, { useRef } from "react";
 import { Carousel } from "@mantine/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import {
+  DarkCarouseIcon,
+  DarkNextCarouselButton,
   FlooringIcon,
   FloorsIcon,
   NextCarouselButton,
@@ -70,8 +72,8 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
               plugins={[autoplay.current]}
               onMouseEnter={autoplay.current.stop}
               onMouseLeave={autoplay.current.reset}
-              nextControlIcon={<NextCarouselButton />}
-              previousControlIcon={<PrevCarouselButton />}
+              nextControlIcon={<DarkNextCarouselButton />}
+              previousControlIcon={<DarkCarouseIcon />}
             >
               {images.map((imageUrl, index) => (
                 <Carousel.Slide key={index} className="relative">
