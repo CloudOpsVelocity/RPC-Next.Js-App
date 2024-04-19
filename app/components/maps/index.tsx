@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -14,12 +14,8 @@ import { LatLngTuple } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css";
 import "leaflet-defaulticon-compatibility";
-import { MapIcon, NearLocation } from "@/app/data/map";
-import {
-  GradientLocation,
-  ProjectMapIcon,
-  RecenterIcon,
-} from "@/app/images/commonSvgs";
+import { MapIcon } from "@/app/data/map";
+import { RecenterIcon } from "@/app/images/commonSvgs";
 
 const Map = ({
   data,
