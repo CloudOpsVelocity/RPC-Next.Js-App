@@ -90,11 +90,11 @@ const Searchbar = () => {
     <>
       <div
         ref={wrapperRef}
-        className="border border-[#CBE9FF] rounded-3xl bg-white  max-w-[800px] overflow-hidden relative px-3"
+        className="border border-[#CBE9FF] rounded-3xl bg-white max-w-[320px]  md:max-w-[800px] overflow-hidden relative px-3"
         style={{ boxShadow: "0px 4px 14px 0px rgba(116, 196, 255, 0.19)" }}
       >
         <section className="w-full flex md:grid md:grid-cols-[300px_auto] h-[80px]">
-          <div className="grid items-center">
+          <div className="md:grid items-center hidden">
             <button
               onClick={toggle}
               className="text-[16px] md:text-[20px] lg:text-[24px] text-[#737579] text-center flex items-center justify-center gap-5"
