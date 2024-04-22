@@ -19,7 +19,7 @@ export default function ProjBasicDetails({
       <p className=" text-[#565D70] text-[16px] md:text-[20px] font-[500] mt-[8px] mb-[8px]  whitespace-nowrap  ">
         {title}
       </p>
-      <p className="text-[#233333] text-[20px] font-[500]  break-words ">
+      <p className="text-[#233333] text-[16px] sm:text-[20px] font-[500]  break-words ">
         {value}
       </p>
     </div>

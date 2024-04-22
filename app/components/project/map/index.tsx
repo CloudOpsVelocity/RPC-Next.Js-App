@@ -84,11 +84,11 @@ const LeafMap: React.FC<{
           />
         ) : (
           <div>
-            <h2 className="text-[24px] lg:text-[32px] font-semibold mb-[12px] capitalize">
+            <h2 className="text-[20px] lg:text-[32px] font-semibold mb-[12px] capitalize">
               <span className="!text-green-600">{projName} </span>
-              <span className="">Near BY LOCATIONS</span>
+              <span>Near BY LOCATIONS</span>
             </h2>
-            <p className="text-[#4D6677] text-2xl italic font-medium leading-[normal] tracking-[0.96px] mt-2 mb-8">
+            <p className="text-[#4D6677] text-[16px] md:text-2xl italic font-medium leading-[normal] tracking-[0.96px] mt-2 mb-8">
               Explore near by convenient amenities, entertainment, and essential
               services
             </p>
@@ -115,7 +115,7 @@ const LeafMap: React.FC<{
         })}
       </div>
 
-      <div className="border border-[#92B2C8] grid grid-cols-1 md:grid-cols-[2fr_3fr] rounded-xl overflow-hidden  shadow-lg md:h-[620px]">
+      <div className="border border-[#92B2C8] flex flex-col-reverse md:grid grid-cols-1 md:grid-cols-[2fr_3fr] rounded-xl overflow-hidden  shadow-lg md:h-[620px]">
         <section className="bg-white">
           <div id="tabs">
             <Tabs defaultValue="public">
@@ -129,7 +129,7 @@ const LeafMap: React.FC<{
               {isLoading ? (
                 <Loading />
               ) : (
-                <ScrollArea h={isMobile ? 300 : 600} pb={50}>
+                <ScrollArea h={isMobile ? 300 : 600} pb={isMobile ? 0 : 50}>
                   {mapData &&
                   mapData[selected] &&
                   mapData[selected].length > 0 ? (

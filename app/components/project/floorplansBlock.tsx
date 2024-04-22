@@ -157,7 +157,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
   if (isLoading) return <Loading />;
   return (
     <div className="w-[90%] scroll-mt-[180px] mb-[5%]" id="floorPlans">
-      <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35] mb-[12px]">
+      <h1 className="text-[20px] lg:text-[32px] font-[600] text-[#001F35] mb-[12px]">
         FLOOR PLANS for{" "}
         <span className="text-[#148B16] font-[700] uppercase">{projName}</span>{" "}
       </h1>
@@ -188,7 +188,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                       setCurrentPhase(each.phaseId);
                       setBhk("0");
                     }}
-                    buttonClass={` mb-[5px] text-[18px] lg:text-[20px] bg-[#ECF7FF] p-[8px] xl:px-[8px]  whitespace-nowrap text-[#000] rounded-[8px]${
+                    buttonClass={` mb-[5px] text-[14px] sm:text-[18px] lg:text-[20px] bg-[#ECF7FF] p-[8px] xl:px-[8px]  whitespace-nowrap text-[#000] rounded-[8px]${
                       currentPhase == each.phaseId
                         ? " font-[600] border-solid border-[1px] border-[#0073C6] "
                         : " font-[400]"
@@ -214,7 +214,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
               return (
                 <Button
                   key={keyName}
-                  buttonClass={`flex justify-start mb-[3%] w-full rounded-[20px] gap-[8px]  items-center mr-[24px] md:ml-[0px] text-[18px] ${
+                  buttonClass={`flex justify-start mb-[3%] w-full rounded-[20px] gap-[8px]  items-center mr-[24px] md:ml-[0px] text-[14px] sm:text-[18px] ${
                     propCgId == keyName
                       ? "text-[#001F35] font-[500] shadow-md bg-[#D5EDFF]"
                       : "text-[#303A42] font-[400] bg-[#EEF7FE]"
@@ -275,11 +275,11 @@ export default function FloorplansBlock({ projName, slug }: Props) {
       </div>
 
       <div
-        className="   h-full md:h-[547px] w-full rounded-[14px] mt-[2%] border-solid border-[1px] border-[#92B2C8] bg-[#FFF] shadow-md flex flex-col md:flex-row justify-center items-center "
+        className="   h-full md:h-[547px] w-full rounded-[14px] mt-[2%] border-solid border-[1px] border-[#92B2C8] bg-[#FFF] shadow-md flex flex-col-reverse md:flex-row justify-center items-center "
         onClick={handleContainerClick}
       >
         {floorPlanType === "type" && (
-          <div className="w-full md:w-[50%] h-[456px] md:h-[547px] border-solid overflow-auto ">
+          <div className="w-full md:w-[50%] max-h-[456px] md:h-[547px] border-solid overflow-auto ">
             {projectUnitsData?.length !== 0 ? (
               projectUnitsData?.map((data: any, ind: number) => (
                 <FloorplanDetailsCard
@@ -303,7 +303,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
         )}
 
         {floorPlanType == "bhk" && propCgId != projectprops.plot && (
-          <div className="w-full md:w-[50%] h-[547px] border-solid overflow-auto">
+          <div className="w-full md:w-[50%] max-h-[456px] md:h-[547px] border-solid overflow-auto">
             <ByBhkBlock
               propCgId={propCgId}
               data={projectUnitsData}
@@ -345,7 +345,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
               selectedFloor?.plotArea &&
               " | Area. " + selectedFloor?.plotArea + " sq.ft"}
           </p>
-          <div className="flex justify-center items-center h-[300px] lg:h-[450px] w-full">
+          <div className="flex justify-center items-center h-[240px] lg:h-[450px] w-full">
             {selectedFloor?.floorPlanUrl ? (
               <img
                 onClick={(e) => {

@@ -1,4 +1,5 @@
 import React from "react";
-export default function page() {
-  return <></>;
+
+export default async function page() {
+  return <>sdfsdfd</>;
 }

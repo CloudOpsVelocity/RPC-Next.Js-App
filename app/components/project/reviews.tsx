@@ -22,13 +22,13 @@ export default function Reviews({ projName }: { projName: string }) {
       <div id="ratings" className="bg-[#FFF] scroll-mt-[180px] py-12 w-full ">
         <div className="">
           <div className="w-[90%] mx-auto px-6">
-            <h2 className="text-[#001F35] text-[32px] not-italic font-semibold leading-[normal] uppercase">
+            <h2 className="text-[#001F35] text-[20px] md:text-[32px] not-italic font-semibold leading-[normal] uppercase">
               CUSTOMER REVIEWS FOR{" "}
-              <span className="text-[#148B16] text-[32px] not-italic font-bold leading-[normal] uppercase">
+              <span className="text-[#148B16]  not-italic font-bold leading-[normal] uppercase">
                 {projName}
               </span>
             </h2>
-            <p className="text-[#4D6677] text-2xl italic font-medium leading-[normal] tracking-[0.96px] mt-2 mb-5">
+            <p className="text-[#4D6677] text-[16px] md:text-2xl italic font-medium leading-[normal] tracking-[0.96px] mt-2 mb-5">
               Find helpful customer reviews and review ratings for {projName}
             </p>
             <div className="w-full flex justify-end mb-[20px]">

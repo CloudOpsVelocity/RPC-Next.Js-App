@@ -23,13 +23,13 @@ export default function ProjectLoans({
         />
       ) : (
         <>
-          <h2 className="text-[24px] lg:text-[32px] font-bold">
+          <h2 className="text-[20px] lg:text-[32px] font-bold">
             BANK APPROVALS OF{" "}
-            <span className="text-[#148B16] text-[24px] lg:text-[32px] not-italic font-bold leading-[normal] uppercase">
+            <span className="text-[#148B16] text-[20px] lg:text-[32px] not-italic font-bold leading-[normal] uppercase">
               {name}
             </span>
           </h2>
-          <p className="mt-4 text-[#4D6677] text-2xl italic font-medium leading-[normal] tracking-[0.96px]">
+          <p className="mt-4 text-[#4D6677] text-[16px] md:text-2xl italic font-medium leading-[normal] tracking-[0.96px]">
             Unlock Your Dream Home with Hassle-Free Bank Approval Loans
           </p>
         </>

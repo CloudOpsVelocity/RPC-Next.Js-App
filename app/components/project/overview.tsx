@@ -52,7 +52,7 @@ export default function Overview({
             {`${address}, ${localityName}, ${cityName}, ${state}, ${pinCode}`}
           </p>
         </div>
-        <div className="flex justify-center sm:items-end flex-col">
+        <div className="flex justify-center sm:items-end sm:flex-col">
           <Ratings />
           <a
             href={`tel:${8766203976}`}

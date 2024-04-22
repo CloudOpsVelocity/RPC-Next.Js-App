@@ -81,9 +81,9 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
   const data = await getProjectDetails(slug);
   return (
     <div className="w-full relative">
-      <div className="mt-[70px] w-full pb-[2%] flex items-center justify-center flex-col">
+      <div className="mt-[100px] sm:mt-[70px] w-full pb-[2%] flex items-center justify-center flex-col">
         <div className="p-[2%] w-full">
-          <p className="text-[16px] text-[#565D70] font-[500] mb-[1%]">
+          <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%]">
             <span>Home</span> {" > "}
             <Link href={"/project/banglore"}>
               <span>Project In {data.state}</span>

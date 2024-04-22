@@ -35,14 +35,14 @@ export default function GalleryBlock({
         />
       ) : (
         <>
-          <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35] uppercase mb-[12px]">
+          <h1 className="text-[20px] lg:text-[32px] font-[600] text-[#001F35] uppercase mb-[12px]">
             gALLERIA of{" "}
             <span className="text-[#148B16] font-[700] uppercase">
               {projName}
             </span>{" "}
           </h1>
 
-          <p className="text-[20px] text-[#4D6677] lg:text-2xl italic font-medium leading-[normal] capitalize">
+          <p className="text-[16px] text-[#4D6677] lg:text-2xl italic font-medium leading-[normal] capitalize">
             Gallery Highlights : A Glimpse into good project
           </p>
         </>

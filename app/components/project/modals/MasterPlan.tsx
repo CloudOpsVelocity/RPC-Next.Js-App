@@ -28,7 +28,7 @@ export default function MasterPlanPopup({ url }: { url: string }) {
       >
         <div className="h-auto scrollbar-hide flex justify-end flex-col items-center">
           <div className="w-full bg-transparent    h-[57px] flex items-center justify-between  z-[1000] md:px-10 max-w-[91rem] m-auto">
-            <div className="text-white text-2xl not-italic font-bold leading-[normal]">
+            <div className="text-white sm:text-2xl not-italic font-bold leading-[normal]">
               Master Plan
             </div>
             <div className="flex justify-center items-center gap-5">

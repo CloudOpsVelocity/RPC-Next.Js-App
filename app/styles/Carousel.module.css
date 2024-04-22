@@ -12,3 +12,7 @@
 .indicator[data-active] {
   background: #fff !important;
 }
+
+.indicators {
+  padding: 0 4%;
+}

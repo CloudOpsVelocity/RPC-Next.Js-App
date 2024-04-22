@@ -30,7 +30,7 @@ const Map = ({
     <MapContainer
       center={position}
       zoom={13}
-      className=" h-[400px] sm:h-[700px] w-full z-[1] relative"
+      className=" h-[291px] sm:h-[700px] w-full z-[1] relative"
       scrollWheelZoom={true}
     >
       <button
@@ -43,7 +43,7 @@ const Map = ({
           });
         }}
       >
-        Re- Center
+        <span className="hidden sm:block">Re- Center</span>
         <RecenterIcon />
       </button>
       <Content

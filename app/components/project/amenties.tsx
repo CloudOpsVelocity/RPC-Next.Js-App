@@ -45,8 +45,8 @@ export default function Amenties({
         ) : (
           <>
             {" "}
-            <h2 className="text-2xl font-semibold">AMENITIES</h2>
-            <p className="text-[#4D6677] text-2xl italic font-medium leading-[normal] tracking-[0.96px] mt-2 mb-[40px]">
+            <h2 className="text-[20px] md:text-2xl font-semibold">AMENITIES</h2>
+            <p className="text-[#4D6677] text-[16px] md:text-2xl italic font-medium leading-[normal] tracking-[0.96px] mt-2 mb-[40px]">
               Experience the ultimate in comfort with our amenities
             </p>
           </>
