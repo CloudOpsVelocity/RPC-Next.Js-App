@@ -61,7 +61,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
         <p className=" text-[#212C33] text-[22px] lg:text-[24px] font-[500] mt-[3%] italic ">
           Builder Address{" "}
         </p>
-        <p className=" text-[#2A4C70] text-[18px] lg:text-[20px] font-[700] mt-[1%] italic mb-[1%]">
+        <p className=" text-[#2A4C70] text-[18px] lg:text-[20px] font-[700] mt-[1%] italic mb-[14px] md:mb-[1%]">
           {nzData.builderAddress}
         </p>
         <Link

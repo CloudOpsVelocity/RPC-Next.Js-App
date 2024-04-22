@@ -50,9 +50,10 @@ export default function Reviews({ projName }: { projName: string }) {
               withIndicators
               height={250}
               slidesToScroll={1}
-              px={70}
+              px={isMobile ? 0 : 70}
               classNames={{
                 controls: S.controls,
+                root: S.Ccontrols,
               }}
               style={{
                 display: "flex",
@@ -64,7 +65,7 @@ export default function Reviews({ projName }: { projName: string }) {
               {data?.reviewDataList
                 ?.filter((item: any) => item.userReview)
                 .map((eachData: any, i: number) => (
-                  <Carousel.Slide key={i} miw={487}>
+                  <Carousel.Slide key={i} miw={isMobile ? 300 : 487}>
                     <Review {...eachData} />
                   </Carousel.Slide>
                 ))}
@@ -78,7 +79,7 @@ export default function Reviews({ projName }: { projName: string }) {
 
 const Review = ({ userRating, userName, userReview, postedDays }: any) => {
   return (
-    <div className="shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] max-w-lg mx-auto mt-[20px] bg-[#fff] p-4 relative   min-h-[220px] border rounded-[10px] border-solid border-[#DCE6ED]">
+    <div className="shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] md:max-w-lg mx-auto mt-[20px] bg-[#fff] p-4 relative   min-h-[220px] border rounded-[10px] border-solid border-[#DCE6ED]">
       <span className=" absolute top-[-20px] !z-30  ">{quotesIcon}</span>
       <div className="flex items-center space-x-2 mt-8">
         <div className="flex-1">

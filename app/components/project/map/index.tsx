@@ -129,7 +129,7 @@ const LeafMap: React.FC<{
               {isLoading ? (
                 <Loading />
               ) : (
-                <ScrollArea h={isMobile ? 300 : 600} pb={isMobile ? 0 : 50}>
+                <ScrollArea h={isMobile ? 300 : 600} pb={isMobile ? 10 : 50}>
                   {mapData &&
                   mapData[selected] &&
                   mapData[selected].length > 0 ? (
@@ -238,7 +238,7 @@ const MapCard = ({
   };
   return (
     <div
-      className="flex flex-col items-start gap-3 px-2 py-3.5 cursor-pointer shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] border-[0.5px] border-solid border-[#D9D9D9] bg-[#fcfcfc] w-full md:min-w-[385px] max-w-[385px]  mb-5"
+      className="flex flex-col items-start gap-3 px-2 py-3.5 cursor-pointer shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] border-[0.5px] border-solid border-[#D9D9D9] bg-[#fcfcfc] w-full md:min-w-[385px] max-w-[385px] mb-1 md:mb-5"
       onClick={handleClick}
     >
       <div className="">
@@ -297,7 +297,7 @@ const LocationList: React.FC<{
       onClick={handleClick}
     >
       <div className="flex items-center justify-between flex-wrap">
-        <h6 className="text-black text-lg not-italic font-medium leading-[normal] capitalize w-[70%]">
+        <h6 className="text-black md:text-lg not-italic font-medium leading-[normal] capitalize w-[70%]">
           {name}
         </h6>
         <div className="flex gap-1 text-sm">

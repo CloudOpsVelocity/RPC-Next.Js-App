@@ -1,11 +1,10 @@
 "use client";
 import { Button, Modal, Rating, Textarea } from "@mantine/core";
-import { useDisclosure, useLocalStorage, useMediaQuery } from "@mantine/hooks";
+import { useLocalStorage, useMediaQuery } from "@mantine/hooks";
 import Image from "next/image";
 import React, { useState } from "react";
 import S from "@/app/styles/Rating.module.css";
 import { useForm, yupResolver } from "@mantine/form";
-import Flex from "../molecules/Utils/Flex";
 import { ratingSchema } from "@/app/validations/project";
 import { addRating } from "@/app/utils/api/actions/ratings";
 import { useParams } from "next/navigation";
@@ -55,13 +54,13 @@ export default function Banner({
       <Toaster position="top-right" reverseOrder={false} />
       <div className="w-[90%] m-auto flex flex-col md:flex-row justify-between items-center ">
         <div>
-          <h2 className="text-[#023993] text-2xl sm:text-[32px] not-italic font-bold leading-[normal] tracking-[1.28px] mb-4">
+          <h2 className="text-[#023993] text-[20px] sm:text-[32px] not-italic font-bold leading-[normal] tracking-[1.28px] mb-4">
             PROJECT RATING FOR{" "}
-            <span className="text-[#148B16] text-2xl sm:text-[32px] not-italic font-bold leading-[normal] tracking-[1.28px] capitalize">
+            <span className="text-[#148B16]  sm:text-[32px] not-italic font-bold leading-[normal] tracking-[1.28px] capitalize">
               {projName}
             </span>
           </h2>
-          <p className="text-black text-lg sm:text-2xl not-italic font-medium leading-[normal] tracking-[0.96px] mb-8">
+          <p className="text-black text-[16px] sm:text-2xl not-italic font-medium leading-[normal] tracking-[0.96px] mb-8">
             Your headline should show readers how your review can help them
             solve a problem or make a decision, offer something different or
             unexpected, and be clear and specific about what your review is
