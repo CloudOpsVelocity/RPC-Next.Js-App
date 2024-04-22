@@ -16,6 +16,7 @@ import { imageUrlParser } from "@/app/utils/image";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import clsx from "clsx";
 import styles from "@/app/styles/Carousel.module.css";
+import { useMediaQuery } from "@mantine/hooks";
 type GalleryProps = {
   selectedMedia: any;
   images: any[];
@@ -38,6 +39,7 @@ const Gallery: React.FC<GalleryProps> = ({
     setPreviewImage(image);
     open(isImage ? "image" : "video", image);
   };
+  const isMobile = useMediaQuery(`(max-width: 750px`);
   return (
     <>
       <Modal
@@ -75,12 +77,12 @@ const Gallery: React.FC<GalleryProps> = ({
               <TransformComponent>
                 <Image
                   radius="md"
-                  h={600}
+                  h={isMobile ? "auto" : 650}
                   m={"auto"}
                   w={1400}
                   fit="contain"
                   src={previewImage ?? content?.url}
-                  className="cursor-pointer border-[5px] bg-white border-white min-w-[1400px] min-h-[650px]"
+                  className="cursor-pointer border-[5px] bg-white border-white md:min-w-[1400px] md:min-h-[650px]"
                 />
               </TransformComponent>
             </TransformWrapper>
@@ -102,7 +104,7 @@ const Gallery: React.FC<GalleryProps> = ({
               loop
               mt={"lg"}
               maw={1200}
-              pl={"90px"}
+              pl={isMobile ? "30px" : "90px"}
               align={images.length > 5 ? "start" : "center"}
               slidesToScroll={5}
               className="w-full min-w-[80px] !h-auto max-h-[100px] min-h-[50px]"
