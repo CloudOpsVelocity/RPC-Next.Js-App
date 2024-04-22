@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useQuery } from "react-query";
+import { Main } from "../types/home";
 
 let cachedProjectCount: number; // Cache the projectCount from the first page
 
@@ -8,7 +9,7 @@ export default function useCarouselData(page: number = 1) {
     const res = await axios.get(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/project/new-launch-project?page=${page}`
     );
-    return res.data;
+    return res.data as Main;
   };
 
   const { data, isLoading, isPreviousData } = useQuery({

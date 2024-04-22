@@ -90,7 +90,7 @@ const Searchbar = () => {
     <>
       <div
         ref={wrapperRef}
-        className="border border-[#CBE9FF] rounded-3xl bg-white  w-full overflow-hidden relative px-3"
+        className="border border-[#CBE9FF] rounded-3xl bg-white  max-w-[800px] overflow-hidden relative px-3"
         style={{ boxShadow: "0px 4px 14px 0px rgba(116, 196, 255, 0.19)" }}
       >
         <section className="w-full flex md:grid md:grid-cols-[300px_auto] h-[80px]">

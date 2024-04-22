@@ -5,7 +5,7 @@ import React, { useCallback, useState } from "react";
 export default function Page() {
   const [currentPage, setCurrentPage] = useState(1);
   const { isLoading, data, pageCount } = useCarouselData(currentPage);
-  const totalPages = Math.ceil(pageCount / 4);
+  const totalPages = Math.ceil(pageCount ?? 0 / 4);
 
   const handleLoadNextData = useCallback(() => {
     setCurrentPage((prevPage) => {
