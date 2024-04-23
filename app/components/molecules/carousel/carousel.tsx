@@ -41,7 +41,7 @@ const HomeCarousel = () => {
       }
       px={10}
     >
-      {data?.project.map((post, index) => (
+      {data?.project?.map((post, index) => (
         <Carousel.Slide key={index} className="">
           <ProjectCard type="proj" key={index} cardData={post} />
         </Carousel.Slide>
