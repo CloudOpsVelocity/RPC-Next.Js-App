@@ -1,7 +1,7 @@
 // api.ts
 import axios, { AxiosInstance } from "axios";
 
-const baseURL = process.env.NEXT_PUBLIC_BACKEND_URL;
+export const baseURL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 const api: AxiosInstance = axios.create({
   baseURL,

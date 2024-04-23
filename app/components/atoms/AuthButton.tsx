@@ -59,11 +59,13 @@ export default function AuthButton() {
 import { Menu } from "@mantine/core";
 import data, { unAuthorizedData } from "@/app/data/dropdown";
 import { postDetailsIcon } from "@/app/images/commonSvgs";
+import axios from "axios";
 
 function Dropdown() {
   const handleLogout = async () => {
     try {
       await signOut();
+      await axios.post(`${baseURL}/user/v1/logOut`);
       deleteCookie("token");
     } catch (error) {
       console.log(error);
