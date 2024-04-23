@@ -28,7 +28,6 @@ const FloorplanDetailsCard: React.FC<Props> = ({
 }) => {
   const [, setImage] = useAtom(selectedFloorAtom);
   const setFloorsArray = useSetAtom(floorPlansArray);
-  console.log(propCgId);
   const mergedData = {
     bhk: data.bhkName,
     bedCount: data.bhkName ? data.bhkName.split(" ")[0][0] : "", // Example value, adjust as needed
@@ -58,7 +57,6 @@ const FloorplanDetailsCard: React.FC<Props> = ({
     );
     setFloorsArray(filteredFloors);
   };
-
   return (
     <div
       className="flex justify-between p-[2%] w-full border-[#92B2C8] border-solid border-b-[1px] border-r-[1px] cursor-pointer"
@@ -122,7 +120,8 @@ const FloorplanDetailsCard: React.FC<Props> = ({
         {(propCgId != projectprops.plot || !propCgId) && (
           <p className="gap-[4px] flex justify-end items-end text-[#303A4] font-[500] text-[14px] lg:text-[16px] mb-[20px] ">
             <CarParkingIcon className="w-[20px] h-[20px] lg:w-[24px] lg:h-[24px]" />
-            Car Parking: {mergedData.carParking}
+            Car Parking:{" "}
+            {mergedData.carParking === 0 ? "N/A" : mergedData.carParking}
           </p>
         )}
       </div>

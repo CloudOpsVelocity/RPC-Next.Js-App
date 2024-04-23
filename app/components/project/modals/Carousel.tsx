@@ -100,11 +100,13 @@ const MiddleSection = ({
           selectedFloor?.towerName != "NA" &&
           " | Tower " + selectedFloor?.towerName}
         {propCgId != projectprops.plot &&
-          selectedFloor?.floor &&
-          " | Floor " + selectedFloor?.floor}
-        {propCgId != projectprops.apartment &&
-          propCgId != projectprops.villament &&
-          selectedFloor?.unitNumber &&
+          " | Floor " +
+            `${
+              selectedFloor?.floor?.toString() === "0"
+                ? "G"
+                : selectedFloor?.floor
+            }`}
+        {selectedFloor?.unitNumber &&
           " | Unit No. " + selectedFloor?.unitNumber}
         {" | Facing " + selectedFloor?.facingName}
         {propCgId != projectprops.plot &&

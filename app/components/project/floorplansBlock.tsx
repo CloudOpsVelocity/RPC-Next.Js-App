@@ -154,6 +154,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
       setSelectedFloor(projectUnitsData[0]);
     }
   }, [projectUnitsData]);
+
   if (isLoading) return <Loading />;
   return (
     <div className="w-[90%] scroll-mt-[180px] mb-[5%]" id="floorPlans">
@@ -316,7 +317,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
 
         <div className="w-full md:w-[50%] flex justify-end items-end flex-col p-[2%] shadow-inner md:shadow-none ">
           <p
-            className=" text-[14px] lg:text-[16px] font-[500] text-[#005DA0] "
+            className="text-[14px] font-[500] text-[#005DA0] "
             onClick={(e) => {
               e.stopPropagation();
               handleOpen();
@@ -331,11 +332,13 @@ export default function FloorplansBlock({ projName, slug }: Props) {
               selectedFloor?.towerName != "NA" &&
               " | Tower " + selectedFloor?.towerName}
             {propCgId != projectprops.plot &&
-              selectedFloor?.floor &&
-              " | Floor " + selectedFloor?.floor}
-            {propCgId != projectprops.apartment &&
-              propCgId != projectprops.villament &&
-              selectedFloor?.unitNumber &&
+              " | Floor " +
+                `${
+                  selectedFloor?.floor?.toString() === "0"
+                    ? "G"
+                    : selectedFloor?.floor
+                }`}
+            {selectedFloor?.unitNumber &&
               " | Unit No. " + selectedFloor?.unitNumber}
             {" | Facing " + selectedFloor?.facingName}
             {propCgId != projectprops.plot &&

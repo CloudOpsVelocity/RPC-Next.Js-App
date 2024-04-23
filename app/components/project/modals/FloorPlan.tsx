@@ -154,7 +154,7 @@ function FloorPlanModal({ propCgId, data, projName }: Props) {
                       >
                         <span className="text-[#57a773] font-semibold">
                           {/* @ts-ignore */}
-                          {value}
+                          {value === "0" && key === "floor" ? "G" : value}
                         </span>
                         <span className="mx-1.5 text-[#6e798c]">|</span>
                         <span className="text-[#6e798c] capitalize">
@@ -344,7 +344,11 @@ const LeftSection = ({ propCgId, data }: Props) => {
             }`}
             className="!w-[46%]"
             placeholder="-- select --"
-            data={getOptions("floor")}
+            data={getOptions("floor").map((item) =>
+              item === "0"
+                ? { value: "0", label: "G" }
+                : { value: item, label: item }
+            )}
             searchable
             maxDropdownHeight={200}
             {...getInputProps("floor")}
@@ -491,35 +495,37 @@ const LeftSection = ({ propCgId, data }: Props) => {
             />
           )}
 
-        {propCgId != projectprops.plot && (
-          <Select
-            key={useId()}
-            w={"full"}
-            mt="md"
-            label="Select Car Parking"
-            className="!w-[46%]"
-            placeholder="-- select --"
-            data={getOptions("noOfCarParking")}
-            searchable
-            maxDropdownHeight={200}
-            {...getInputProps("noOfCarParking")}
-            onChange={(value) =>
-              handleOnChange(value as string, "noOfCarParking")
-            }
-            classNames={{ input: S.input, label: S.label }}
-            rightSection={<DropDownIcon />}
-          />
-        )}
+        {propCgId != projectprops.plot &&
+          getOptions("noOfCarParking").filter((item) => item !== "0").length >
+            0 && (
+            <Select
+              key={"#esdfsd"}
+              w={"full"}
+              mt="md"
+              label="Select Car Parking"
+              className="!w-[46%]"
+              placeholder="-- select --"
+              data={getOptions("noOfCarParking").filter((item) => item !== "0")}
+              searchable
+              maxDropdownHeight={200}
+              {...getInputProps("noOfCarParking")}
+              onChange={(value) =>
+                handleOnChange(value as string, "noOfCarParking")
+              }
+              classNames={{ input: S.input, label: S.label }}
+              rightSection={<DropDownIcon />}
+            />
+          )}
 
         {propCgId == projectprops.apartment && (
           <Select
-            key={useId()}
+            key={"#sfgf"}
             w={"full"}
             mt="md"
             label="Open/ Covered Parking"
             className="!w-[46%]"
             placeholder="-- select --"
-            data={getOptions("parkingType")}
+            data={getOptions("parkingType").filter((item) => item !== "None")}
             searchable
             maxDropdownHeight={200}
             {...getInputProps("parkingType")}
@@ -529,29 +535,33 @@ const LeftSection = ({ propCgId, data }: Props) => {
           />
         )}
 
-        {propCgId != projectprops.plot && (
-          <Select
-            key={useId()}
-            w={"full"}
-            mt="md"
-            label="No: of Balcony"
-            className="!w-[46%]"
-            placeholder="-- select --"
-            data={getOptions("totalNumberOfBalcony")}
-            searchable
-            maxDropdownHeight={200}
-            {...getInputProps("totalNumberOfBalcony")}
-            onChange={(value) =>
-              handleOnChange(value as string, "totalNumberOfBalcony")
-            }
-            classNames={{ input: S.input, label: S.label }}
-            rightSection={<DropDownIcon />}
-          />
-        )}
+        {propCgId != projectprops.plot &&
+          getOptions("totalNumberOfBalcony").filter((item) => item !== "0")
+            .length > 0 && (
+            <Select
+              key={"Iweruhjksdfjk"}
+              w={"full"}
+              mt="md"
+              label="No: of Balcony"
+              className="!w-[46%]"
+              placeholder="-- select --"
+              data={getOptions("totalNumberOfBalcony").filter(
+                (item) => item !== "0"
+              )}
+              searchable
+              maxDropdownHeight={200}
+              {...getInputProps("totalNumberOfBalcony")}
+              onChange={(value) =>
+                handleOnChange(value as string, "totalNumberOfBalcony")
+              }
+              classNames={{ input: S.input, label: S.label }}
+              rightSection={<DropDownIcon />}
+            />
+          )}
 
         {propCgId != projectprops.plot && (
           <Select
-            key={useId()}
+            key={"324sdgsfgf"}
             w={"full"}
             mt="md"
             label="No: of Bathroom"
@@ -711,7 +721,7 @@ const RightSection = ({ propCgId }: Props) => {
               }`}{" "}
               <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                 {" "}
-                {data.floor}
+                {data?.floor === 0 ? "G" : data?.floor}
               </span>{" "}
             </p>
           </div>
@@ -884,7 +894,7 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
   };
   return (
     <div className="flex flex-col justify-center items-start shrink-0 w-full sm:max-w-[300px] md:max-w-[500px] xl:max-w-[686px]">
-      <p className="text-[#005DA0] w-full text-right mb-[1%] text-[16px] font-[500] ">
+      <p className="text-[#005DA0] w-full text-right mb-[1%] text-[14px] font-[500] ">
         {selectedFloor && (
           <>
             {projName}
@@ -896,11 +906,13 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
               selectedFloor?.towerName != "NA" &&
               " | Tower " + selectedFloor?.towerName}
             {propCgId != projectprops.plot &&
-              selectedFloor?.floor &&
-              " | Floor " + selectedFloor?.floor}
-            {propCgId != projectprops.apartment &&
-              propCgId != projectprops.villament &&
-              selectedFloor?.unitNumber &&
+              " | Floor " +
+                `${
+                  selectedFloor?.floor?.toString() === "0"
+                    ? "G"
+                    : selectedFloor?.floor
+                }`}
+            {selectedFloor?.unitNumber &&
               " | Unit No. " + selectedFloor?.unitNumber}
             {" | Facing " + selectedFloor?.facingName}
             {propCgId != projectprops.plot &&
