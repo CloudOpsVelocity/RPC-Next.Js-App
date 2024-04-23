@@ -13,9 +13,7 @@ const getProjectDetails = async (slug: string): Promise<Main> => {
     // }
   );
   const data = await response.json();
-  {
-    console.log(data);
-  }
+
   return data as Main; // Assuming the response can be cast to Main
 };
 const getProjectWiseOverView = async (slug: string): Promise<any> => {

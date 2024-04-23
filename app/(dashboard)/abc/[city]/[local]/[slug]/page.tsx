@@ -18,6 +18,7 @@ import dynamic from "next/dynamic";
 import SectionSkeleton from "@/app/components/atoms/skeleton/section";
 import ErrorContainer from "@/app/components/project/error/container";
 import MobileHidden from "@/app/components/molecules/MobileHidden";
+import { notFound } from "next/navigation";
 const FloorplansBlock = dynamic(
   () => import("@/app/components/project/floorplansBlock"),
   {
@@ -79,6 +80,9 @@ const FaqWithBg = dynamic(() => import("@/app/components/project/faq"), {
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
   const data = await getProjectDetails(slug);
+  if (!data.projIdEnc) {
+    notFound();
+  }
   return (
     <div className="w-full relative">
       <div className="mt-[100px] sm:mt-[70px] w-full pb-[2%] flex items-center justify-center flex-col">
