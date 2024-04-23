@@ -65,7 +65,7 @@ function Dropdown() {
   const handleLogout = async () => {
     try {
       await signOut();
-      await axios.post(`${baseURL}/user/v1/logOut`);
+      await axios.get(`${baseURL}/user/v1/logOut`);
       deleteCookie("token");
     } catch (error) {
       console.log(error);
