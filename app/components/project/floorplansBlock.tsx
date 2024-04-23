@@ -56,7 +56,16 @@ export default function FloorplansBlock({ projName, slug }: Props) {
     cacheTime: 300000,
   });
 
-  const types = selectedPhase && Object?.keys(selectedPhase.propTypeOverview);
+  const types =
+    selectedPhase &&
+    Object?.keys(selectedPhase.propTypeOverview).map((v) => {
+      if (selectedPhase?.propTypeOverview[v].unitTypes?.length > 0) {
+        return v;
+      } else {
+        return null;
+      }
+    });
+  console.log(types);
   const getPropertyType = (data: any) => {
     setPropCgId(data.id);
   };
