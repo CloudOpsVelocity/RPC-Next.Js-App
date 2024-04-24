@@ -32,6 +32,25 @@ export default function MasterPlanPopup({ url }: { url: string }) {
               Master Plan
             </div>
             <div className="flex justify-center items-center gap-5">
+              <a
+                className="flex justify-center items-center gap-1 p-2 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] rounded-[10px] bg-[#F3F7FF] text-[#0073C6] text-base not-italic font-semibold leading-[normal] tracking-[0.32px]"
+                target="_blank"
+                href={imageUrlParser(url || "")}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                >
+                  <path
+                    d="M12 16L7 11L8.4 9.55L11 12.15V4H13V12.15L15.6 9.55L17 11L12 16ZM4 20V15H6V18H18V15H20V20H4Z"
+                    fill="#0073C6"
+                  />
+                </svg>{" "}
+                Download
+              </a>
               <SharePopup title="Share" url={imageUrlParser(url || "")} />
               <Close close={close} />
             </div>
@@ -66,6 +85,11 @@ export default function MasterPlanPopup({ url }: { url: string }) {
         className="cursor-pointer shadow-[0px_4px_30px_0px_rgba(0,0,0,0.25)] rounded-[14px] border-[0.5px] border-solid border-[#D2CDCD] py-4"
       />
       <button onClick={open}>
+        <div className="bg-[#F4FBFF] p-[10px] rounded-[29px] gap-[12px] flex justify-end items-center  cursor-pointer absolute bottom-9 right-12 z-50">
+          <p className="text-[12px] lg:text-[14px] font-[600] text-[#0073C6] underline ">
+            Click on image to open master plan
+          </p>
+        </div>{" "}
         <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] absolute bottom-10 right-3 z-50 " />
       </button>
     </>

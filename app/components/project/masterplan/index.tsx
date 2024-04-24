@@ -66,7 +66,7 @@ export default function MasterPlan({
           href={url}
           target="_blank"
         >
-          Download MasterPlan
+          Download Master Plan
         </a>
       </div>
       <div className="relative">
