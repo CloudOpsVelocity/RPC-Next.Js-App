@@ -90,14 +90,11 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%]">
             <span>Home</span> {" > "}
             <Link href={"/project/banglore"}>
-              <span>Project In {data.state}</span>
+              <span>Projects In {data.cityName}</span>
             </Link>{" "}
             {" > "}
             <Link href={"/project/banglore/whitefield"}>
-              <span>
-                Project In {`${data.localityName} `}
-                {`${data.cityName} `}
-              </span>
+              <span>Projects In {`${data.localityName} `}</span>
             </Link>{" "}
             {" > "}
             <span>{data.projectName}</span>
