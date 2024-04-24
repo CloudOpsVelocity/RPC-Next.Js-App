@@ -111,7 +111,6 @@ export default function PropertyTypeDetailsCrad({
         break;
     }
   };
-
   return (
     <div className="flex flex-col justify-start items-start min-h-[235px] w-[100%] max-w-[359px] lg:max-w-[510px] rounded-[24px] shadow-md pr-[2%] pl-[1%] mt-[70px] bg-gradient-to-l from-[#EFF5FF] /50 to-[#F2FAFF]/50 mb-[2%] ">
       <div className="flex justify-between items-start w-full ">
@@ -161,7 +160,7 @@ export default function PropertyTypeDetailsCrad({
           {propertyType === "rowHouse" || propertyType === "villa" ? (
             <p className="text-[14px] lg:text-[20px] text-[#2A4C70] font-[500] flex justify-start items-start  ">
               <FloorsIcon className="w-[16px] h-[16px] lg:w-[24px] lg:h-[24px]" />
-              <span className="mr-[6px] ml-[6px]">{cg?.elevation}</span>{" "}
+              <span className="mr-[6px] ml-[6px]">{"G+" + cg?.elevation}</span>{" "}
               Elevation
             </p>
           ) : (

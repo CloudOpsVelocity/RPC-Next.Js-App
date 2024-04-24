@@ -45,7 +45,7 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
   };
   return (
     <div
-      className={`relative rounded-[10px] w-full bg-gray-50  lg:h-[680px] bg-cover flex justify-between items-start flex-col`}
+      className={`relative rounded-[10px] w-full m-auto bg-gray-50  lg:h-[680px] bg-cover flex justify-between items-start flex-col`}
     >
       {projectDetails && (
         <>
