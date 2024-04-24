@@ -60,6 +60,7 @@ import { Menu } from "@mantine/core";
 import data, { unAuthorizedData } from "@/app/data/dropdown";
 import { postDetailsIcon } from "@/app/images/commonSvgs";
 import axios from "axios";
+import { usePathname } from "next/navigation";
 
 function Dropdown() {
   const handleLogout = async () => {
@@ -71,6 +72,8 @@ function Dropdown() {
       console.log(error);
     }
   };
+  const path = usePathname();
+  const redirectPath = path.split("/")[path.split("/").length - 1];
   const { data: session } = useSession();
   return (
     <Menu width={200} shadow="md">
@@ -84,7 +87,10 @@ function Dropdown() {
           <div className="login-btn text-[20px] font-semibold px-5 py-2 rounded-full flex flex-row-reverse justify-center gap- items-center text-[#0073C6] border-none underline bg-gradient-to-r from-[#EFF8FF] to-[#FFF] shadow-md">
             <Image width={30} height={30} alt="logout" src="/burger.svg" />{" "}
             <Link
-              href={"/login"}
+              href={{
+                pathname: `/login`,
+                search: `?projId=${redirectPath}`,
+              }}
               className="text-[16px] md:text-[20px] mr-1"
               onClick={(e) => {
                 e.stopPropagation();
@@ -151,7 +157,10 @@ function Dropdown() {
               }}
               component={Link}
               className="block text-gray-700 hover:text-green-500 transition-colors"
-              href={item.url}
+              href={{
+                pathname: `/login`,
+                search: `?projId=${redirectPath}`,
+              }}
             >
               {item.label}
             </Menu.Item>

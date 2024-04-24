@@ -24,7 +24,7 @@ import StepCss from "@/app/styles/Stepper.module.css";
 import { useForm, yupResolver } from "@mantine/form";
 import { DateInput } from "@mantine/dates";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { styles } from "@/app/styles/Stepper";
 import { DropZone } from "./dropzone";
 import AuthPopup from "../authPopup";
@@ -304,20 +304,27 @@ function Builder() {
       });
     }
   };
+  const params = useSearchParams();
   const ref = useRef<HTMLInputElement>(null);
   return (
     <div className="w-full max-w-[423px] flex justify-center items-center flex-col mt-[2%]">
       {active !== 4 && (
         <div className=" sm:max-w-[459px] md:max-w-[597px] flex justify-center items-center gap-[15%] mb-[5%] ">
           <Link
-            href="/login"
+            href={{
+              pathname: "/login",
+              search: params.get("projId") && `?projId=${params.get("projId")}`,
+            }}
             className="whitespace-nowrap  text-xl md:text-[26px] font-[500] text-[#666]"
           >
             Log In
           </Link>
 
           <Link
-            href="/register"
+            href={{
+              pathname: "/register",
+              search: params.get("projId") && `?projId=${params.get("projId")}`,
+            }}
             className="whitespace-nowrap text-xl md:text-[26px] text-[#148B16] font-bold border-solid border-b-2 border-green-600"
           >
             Builder Sign Up

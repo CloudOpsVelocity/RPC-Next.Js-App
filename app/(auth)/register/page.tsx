@@ -1,24 +1,28 @@
-"use client";
-
 import Login from "@/app/components/molecules/auth/login";
 import { data } from "@/app/data/userTypeDetails";
 import Button from "@/app/elements/button";
 import Link from "next/link";
 import Image from "next/image";
 
-export default function Page() {
+export default function Page({ searchParams }: any) {
   return (
     <div className="w-full p-[10%] md:p-[2%] flex justify-center items-center flex-col">
       <div className="w-full max-w-[459px] md:max-w-[597px] flex justify-center items-center gap-[5%] mb-[5%] ">
         <Link
-          href="/login"
+          href={{
+            pathname: "/login",
+            search: searchParams.projId && `?projId=${searchParams.projId}`,
+          }}
           className="whitespace-nowrap text-xl md:text-[26px] font-[500] text-[#666]"
         >
           Log In
         </Link>
 
         <Link
-          href="/register"
+          href={{
+            pathname: "/register",
+            search: searchParams.projId && `?projId=${searchParams.projId}`,
+          }}
           className="whitespace-nowrap text-xl md:text-[26px] text-[#148B16] font-bold border-solid border-b-2 border-green-600"
         >
           Sign Up
@@ -36,7 +40,11 @@ export default function Page() {
           {data.map((each, ind) => {
             return (
               <Link
-                href={each.href}
+                href={{
+                  pathname: each.href,
+                  search:
+                    searchParams.projId && `?projId=${searchParams.projId}`,
+                }}
                 key={ind}
                 className={`group cursor-pointer flex justify-center items-center flex-col rounded-[8px] bg-[#FAFAFA] w-[30%] h-[130px] md:h-[174px] shadow-lg hover:shadow-green-300/30`}
               >

@@ -102,7 +102,7 @@ export default function ProjectDetailsP({ projName }: Props) {
                 key="landArea"
                 icon={<TotalLandArea />}
                 title="Land Area"
-                value={`${selectedPhase.landArea} Acers`}
+                value={`${selectedPhase.landArea} sq.ft.`}
                 className={styles.box}
               />
               <ProjBasicDetails

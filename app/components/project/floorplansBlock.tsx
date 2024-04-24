@@ -65,7 +65,6 @@ export default function FloorplansBlock({ projName, slug }: Props) {
         return null;
       }
     });
-  console.log(types);
   const getPropertyType = (data: any) => {
     setPropCgId(data.id);
   };

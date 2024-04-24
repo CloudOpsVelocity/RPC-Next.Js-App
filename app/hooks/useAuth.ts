@@ -1,7 +1,7 @@
 "use client";
 import axios from "axios";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
 import CryptoJS from "crypto-js";
 import { WarningIcon } from "../images/commonSvgs";
@@ -65,8 +65,12 @@ export default function useAuth({
   type = "register",
 }: {
   type?: "login" | "register" | "otp";
+  redirectUrl?: string;
 }) {
   const router = useRouter();
+  const params = useSearchParams();
+  const projId = params.get("projId");
+  const redirectPath = `/abc/delhi/some/${projId}`;
 
   const loginWithCredentials = async (data: Login): Promise<any> => {
     const encryptedPassword = CryptoJS.AES.encrypt(
@@ -85,9 +89,9 @@ export default function useAuth({
     if (res?.ok) {
       type === "register"
         ? setTimeout(() => {
-            router.push("/");
+            router.push(projId ? redirectPath : "/");
           }, 5000)
-        : router.push("/");
+        : router.push(projId ? redirectPath : "/");
     } else {
       toast.error(res?.error || "Something went wrong. Please try again.", {
         duration: 1000,

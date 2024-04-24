@@ -10,7 +10,7 @@ import {
   PasswordInput,
 } from "@mantine/core";
 import useAuth from "@/app/hooks/useAuth";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import AuthPopup from "../authPopup";
 import { useDisclosure } from "@mantine/hooks";
@@ -71,6 +71,7 @@ function Individual() {
     setStatus("success");
     close();
   };
+  const params = useSearchParams();
   return (
     <>
       {status === "success" ? (
@@ -80,14 +81,22 @@ function Individual() {
           <Box className="w-full max-w-[423px] mt-[3%] " mx="auto">
             <div className=" sm:max-w-[459px] md:max-w-[597px] flex justify-center items-center gap-[15%] mb-[5%] ">
               <Link
-                href="/login"
+                href={{
+                  pathname: "/login",
+                  search:
+                    params.get("projId") && `?projId=${params.get("projId")}`,
+                }}
                 className="whitespace-nowrap  text-xl md:text-[26px] font-[500] text-[#666]"
               >
                 Log In
               </Link>
 
               <Link
-                href="/register"
+                href={{
+                  pathname: "/register",
+                  search:
+                    params.get("projId") && `?projId=${params.get("projId")}`,
+                }}
                 className="whitespace-nowrap text-xl md:text-[26px] text-[#148B16] font-bold border-solid border-b-2 border-green-600"
               >
                 Individual Sign Up

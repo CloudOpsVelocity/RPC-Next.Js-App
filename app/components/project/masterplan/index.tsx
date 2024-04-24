@@ -14,6 +14,7 @@ export default function MasterPlan({
   media: string;
 }) {
   const url = imageUrlParser(media);
+
   // const handleDownload = () => {
   //   const url = imageUrlParser(media);
   //   const link = document.createElement("a");
@@ -62,7 +63,7 @@ export default function MasterPlan({
         </div>
         <a
           className="inline-flex flex-col items-center justify-center gap-2.5 p-3 md:p-5 rounded-[10px] bg-[#0073C6] text-white md:text-2xl text-[16px] not-italic font-bold leading-[normal] tracking-[0.96px] max-h-[50%] mt-5 md:mt-0"
-          href={media}
+          href={url}
           target="_blank"
         >
           Download MasterPlan

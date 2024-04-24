@@ -14,7 +14,7 @@ import {
 import N from "@/app/styles/Numinput.module.css";
 import S from "@/app/styles/Pass.module.css";
 import { Form, useForm, yupResolver } from "@mantine/form";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { styles } from "@/app/styles/Stepper";
 import { DropZone } from "./dropzone";
@@ -165,20 +165,27 @@ function Agent() {
   const displayCountryCode = (value: any) => {
     console.log(value);
   };
+  const params = useSearchParams();
   console.log(form.values);
   return (
     <div className="w-full max-w-[423px] flex justify-center items-center flex-col m-[2%] ">
       {active !== 2 && (
         <div className=" sm:max-w-[459px] md:max-w-[597px] flex justify-center items-center gap-[15%] mb-[5%] ">
           <Link
-            href="/login"
+            href={{
+              pathname: "/login",
+              search: params.get("projId") && `?projId=${params.get("projId")}`,
+            }}
             className="whitespace-nowrap  text-xl md:text-[26px] font-[500] text-[#666]"
           >
             Log In
           </Link>
 
           <Link
-            href="/register"
+            href={{
+              pathname: "/register",
+              search: params.get("projId") && `?projId=${params.get("projId")}`,
+            }}
             className="whitespace-nowrap text-xl md:text-[26px] text-[#148B16] font-bold border-solid border-b-2 border-green-600"
           >
             Agent Sign Up

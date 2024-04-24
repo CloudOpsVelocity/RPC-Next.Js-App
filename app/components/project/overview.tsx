@@ -133,11 +133,15 @@ export default function Overview({
           )}
 
           {phaseList?.length == 1 &&
-            PhaseOverview[0]?.rerastatus === "Recieved" && (
+            PhaseOverview[0]?.rerastatus !== "Not Applied" && (
               <ProjBasicDetails
                 key="reraId"
                 icon={<EndDate />}
-                title="Rera Id"
+                title={
+                  PhaseOverview[0]?.rerastatus === "Recieved"
+                    ? "Rera Id"
+                    : "Acknowledgement Id"
+                }
                 value={PhaseOverview[0]?.reraId}
                 className="mr-[5%] pt-[2%] mb-[3%] "
               />

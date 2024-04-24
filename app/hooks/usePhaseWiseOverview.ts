@@ -31,7 +31,8 @@ export default function usePhaseWiseOverview() {
     };
   });
   const hasReraStatus =
-    PhaseOverview && PhaseOverview.some((phase: any) => phase.rerastatus);
+    PhaseOverview &&
+    PhaseOverview.some((phase: any) => phase.rerastatus === "Recieved");
 
   return {
     phaseList,
