@@ -2,21 +2,22 @@ import { Labrada } from "next/font/google";
 
 export const topics = [
   { label: "Overview", id: "overview" },
-  { label: "Available Listings", id: "listings" },
+  { label: "Listings Available", id: "listings" },
   { label: "About", id: "about" },
   { label: "Property Details", id: "propertyDetails" },
   { label: "Master Plan", id: "masterPlan" },
   { label: "Floor Plans", id: "floorPlans" },
-  { label: "Galleria", id: "galleria" },
+  { label: "Gallery", id: "galleria" },
   { label: "Amenities", id: "amenities" },
   { label: "Near By", id: "nearBy" },
   { label: "Specifications", id: "specifications" },
   { label: "Highlights", id: "highlights" },
-  { label: "Builder Details", id: "aboutBuilder" },
+  { label: "About Builder", id: "aboutBuilder" },
   { label: "Why Buy This Project?", id: "whyBuy" },
-  { label: "Ratings", id: "ratings" },
+  { label: "Customer Reviews", id: "ratings" },
+  { label: "Brochure", id: "brochure" },
   { label: "FAQ?", id: "faq" },
-  { label: "Near By", id: "similar" },
+  { label: "Similar Projects", id: "similar" },
 ];
 export const Propertytopics = [
   { label: "Overview", id: "overview" },
@@ -27,7 +28,7 @@ export const Propertytopics = [
   { label: "Amenities", id: "amenities" },
   { label: "Near By", id: "nearBy" },
   { label: "Builder Details", id: "aboutBuilder" },
-  { label: "Ratings", id: "ratings" },
+  { label: "Customer Reviews", id: "ratings" },
   { label: "FAQ?", id: "faq" },
   { label: "Similar", id: "similar" },
 ];

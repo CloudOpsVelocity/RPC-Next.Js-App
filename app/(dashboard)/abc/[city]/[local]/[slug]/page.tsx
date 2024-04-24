@@ -107,7 +107,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         </div>
         {/* Navigations Container */}
         <MobileHidden>
-          <Navigation />
+          <Navigation isBrochure={!!data?.media?.projBroucherUrl} />
         </MobileHidden>
         <Overview {...data} />
         <ListingRentAvail

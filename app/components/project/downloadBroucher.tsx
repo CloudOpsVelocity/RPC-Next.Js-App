@@ -8,7 +8,6 @@ import toast from "react-hot-toast";
 // import { downloadIcon } from '@/app/images/commonSvgs';
 
 const DownloadBroucher = ({ url }: { url: string }) => {
-  console.log(url);
   const { data: session } = useSession();
 
   const onButtonClick = () => {
@@ -65,7 +64,10 @@ const DownloadBroucher = ({ url }: { url: string }) => {
 
   return (
     url && (
-      <div className="flex scroll-mt-[90px] justify-start mt-[5%] items-center flex-wrap w-[90%] gap-[2%] mb-[3%]">
+      <div
+        className="flex scroll-mt-[90px] justify-start mt-[5%] items-center flex-wrap w-[90%] gap-[2%] mb-[3%]"
+        id="brochure"
+      >
         <p className="text-[28px] lg:text-[32px] text-[#023993] font-[700]">
           Brochure{" "}
         </p>

@@ -6,13 +6,14 @@ import { atom, useAtom } from "jotai";
 import Image from "next/image";
 import React, { useState, useRef, useEffect } from "react";
 export const isScrollingAtom = atom(false);
-export default function Navigation() {
+export default function Navigation({ isBrochure }: { isBrochure: boolean }) {
   const { data } = useRatings();
   const [currentBlock, setCurrentBlock] = useState("overview");
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [isSticky, setIsSticky] = useState(false);
   const [isScrolling, setIsScrolling] = useAtom(isScrollingAtom);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [leftScroll, setLeftScroll] = useState(0);
   useEffect(() => {
     function handleScroll() {
       const currentScrollY = window.scrollY;
@@ -61,6 +62,7 @@ export default function Navigation() {
     const scrollAmount = side === "R" ? 100 : -100;
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollLeft += scrollAmount;
+      setLeftScroll((scrollContainerRef.current.scrollLeft += scrollAmount));
     }
   }
   function scrollToTopic(id: string): void {
@@ -76,6 +78,7 @@ export default function Navigation() {
     }
     setTimeout(() => setIsScrolling(false), 3000);
   }
+
   return (
     <div
       className={clsx(
@@ -83,14 +86,17 @@ export default function Navigation() {
         isSticky && "fixed top-[90px] bg-white shadow-md z-[100]"
       )}
     >
-      <Image
-        src="/auth/arrow.svg"
-        alt=""
-        className="rotate-180 cursor-pointer"
-        width={41}
-        height={64}
-        onClick={() => handleArrowClick("L")}
-      />
+      {leftScroll > 0 && (
+        <Image
+          src="/auth/arrow.svg"
+          alt=""
+          className="rotate-180 cursor-pointer"
+          width={41}
+          height={64}
+          onClick={() => handleArrowClick("L")}
+        />
+      )}
+
       <div
         className="h-[64px] scroll-smooth w-[100%] bg-[#FCFCFC] shadow-sm flex justify-start items-center scrollbar-hide overflow-x-auto lg:px-14"
         ref={scrollContainerRef}
@@ -98,18 +104,28 @@ export default function Navigation() {
         {topics.map((topic) => (
           <div
             key={topic.id}
-            className={`cursor-pointer text-[20px] mr-[36px]  whitespace-nowrap  ${
+            className={clsx(
+              `cursor-pointer text-[20px] mr-[36px]  whitespace-nowrap`,
               currentBlock === topic.id
                 ? "text-[#0073C6] font-[700] decoration-solid underline"
-                : "text-[#4D6677] font-[500]"
-            }`}
+                : "text-[#4D6677] font-[500]",
+              (topic.id === "ratings" && data?.status === false) ||
+                (isBrochure === false && topic.id === "brochure")
+                ? "hidden"
+                : ""
+            )}
             onClick={() => {
               scrollToTopic(topic.id);
               setCurrentBlock(topic.id);
             }}
           >
-            {topic.id === "ratings" && data?.status && <span>Ratings</span>}
-            {topic.id !== "ratings" && topic.label}
+            {topic.id === "ratings" && data?.status && (
+              <span>Customer Reviews</span>
+            )}
+            {topic.id === "brochure" && isBrochure && (
+              <span>{topic.label}</span>
+            )}
+            {topic.id !== "ratings" && topic.id !== "brochure" && topic.label}
           </div>
         ))}
       </div>
