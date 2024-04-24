@@ -88,8 +88,8 @@ const FloorplanDetailsCard: React.FC<Props> = ({
             Plot Area: {mergedData.plotArea}sq.ft
           </p>
           <p className="gap-[4px] font-[500] text-[14px] lg:text-[16px] text-[#303A42] mb-[20px] flex justify-start items-start">
-            <SuperBuildupAreaIcon className="w-[20px] h-[20px] lg:w-[24px] lg:h-[24px]" />
-            Plot Area: {mergedData.plotArea} sq.ft
+            <FlooringIcon className="w-[20px] h-[20px] lg:w-[24px] lg:h-[24px]" />
+            Unit Type: {data.length} ft x {data.width} ft
           </p>
           <p className="gap-[4px] font-[500] text-[14px] lg:text-[16px] text-[#001F35] mb-[20px] flex justify-start items-start">
             <FacingIcon className="w-[20px] h-[20px] lg:w-[24px] lg:h-[24px]" />
@@ -111,6 +111,8 @@ const FloorplanDetailsCard: React.FC<Props> = ({
           <FlooringIcon className="w-[20px] h-[20px] lg:w-[24px] lg:h-[24px]" />
           Unit Number: {mergedData.unitNumber}
         </p>
+        {propCgId === projectprops.plot && <p className="mb-[45px]"></p>}
+
         {/* {(propCgId == projectprops.plot || !propCgId) && (
           <p className="gap-[4px] flex justify-end items-end text-[#303A4] font-[500] text-[14px] lg:text-[16px] mb-[20px] ">
             <FlooringIcon className="w-[20px] h-[20px] lg:w-[24px] lg:h-[24px]" />

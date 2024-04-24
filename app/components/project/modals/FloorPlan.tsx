@@ -833,7 +833,7 @@ const RightSection = ({ propCgId }: Props) => {
               Plot Area{" "}
               <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
                 {" "}
-                02
+                {data.plotArea} sq.ft
               </span>
             </p>
           </div>
@@ -846,7 +846,7 @@ const RightSection = ({ propCgId }: Props) => {
               Length of Plot{" "}
               <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
                 {" "}
-                02
+                {data.length} sq.ft
               </span>
             </p>
           </div>
@@ -859,7 +859,7 @@ const RightSection = ({ propCgId }: Props) => {
               Breadth of Plot{" "}
               <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
                 {" "}
-                02
+                {data.width} sq.ft
               </span>
             </p>
           </div>

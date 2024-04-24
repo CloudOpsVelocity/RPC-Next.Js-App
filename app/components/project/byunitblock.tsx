@@ -23,6 +23,7 @@ type SelectedValues = {
   width: string;
   length: string;
   bhkName: string;
+  plotArea: string;
 };
 
 const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
@@ -52,6 +53,7 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
     width: "",
     length: "",
     bhkName: "",
+    plotArea: "",
   });
   const handleInputChange = (property: keyof SelectedValues, value: string) => {
     setSelectedValues((prevValues) => ({
@@ -177,12 +179,10 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
             label="Area"
             className="!w-[46%]"
             placeholder="-- select Area --"
-            data={(getOptions("superBuildUparea") as string[]) || []}
+            data={(getOptions("plotArea") as string[]) || []}
             searchable
             maxDropdownHeight={200}
-            onChange={(value) =>
-              handleInputChange("superBuildUparea", value as string)
-            }
+            onChange={(value) => handleInputChange("plotArea", value as string)}
             classNames={{ input: S.input, label: S.label }}
           />
         )}
