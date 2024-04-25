@@ -1,4 +1,5 @@
 import Login from "@/app/components/molecules/auth/login";
+import { getQueryParam } from "@/app/hooks/custom/useRedirect";
 import Link from "next/link";
 
 export default function Page({ searchParams }: any) {
@@ -8,7 +9,7 @@ export default function Page({ searchParams }: any) {
         <Link
           href={{
             pathname: "/login",
-            search: searchParams.projId && `?projId=${searchParams.projId}`,
+            search: getQueryParam(searchParams),
           }}
           className="whitespace-nowrap text-xl md:text-[26px] text-[#148B16] font-bold border-solid border-b-2 border-green-600"
         >
@@ -18,7 +19,7 @@ export default function Page({ searchParams }: any) {
         <Link
           href={{
             pathname: "/register",
-            search: searchParams.projId && `?projId=${searchParams.projId}`,
+            search: getQueryParam(searchParams),
           }}
           className="whitespace-nowrap text-xl md:text-[26px] font-[500] text-[#666]"
         >
@@ -27,7 +28,7 @@ export default function Page({ searchParams }: any) {
       </div>
 
       <div>
-        <Login />
+        <Login params={searchParams} />
       </div>
     </div>
   );

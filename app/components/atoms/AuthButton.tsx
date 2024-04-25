@@ -61,6 +61,7 @@ import data, { unAuthorizedData } from "@/app/data/dropdown";
 import { postDetailsIcon } from "@/app/images/commonSvgs";
 import axios from "axios";
 import { usePathname, useSearchParams } from "next/navigation";
+import usePathToOrigin from "@/app/hooks/custom/useRedirect";
 
 function Dropdown() {
   const handleLogout = async () => {
@@ -72,10 +73,8 @@ function Dropdown() {
       console.log(error);
     }
   };
-  const path = usePathname();
-  const redirectPath = path.split("/")[path.split("/").length - 1];
+  const { redirectQueryParam } = usePathToOrigin();
   const { data: session } = useSession();
-  console.log(path);
   return (
     <Menu width={200} shadow="md">
       <Menu.Target>
@@ -90,7 +89,7 @@ function Dropdown() {
             <Link
               href={{
                 pathname: `/login`,
-                search: `?projId=${redirectPath}`,
+                search: redirectQueryParam,
               }}
               className="text-[16px] md:text-[20px] mr-1"
               onClick={(e) => {
@@ -160,7 +159,7 @@ function Dropdown() {
               className="block text-gray-700 hover:text-green-500 transition-colors"
               href={{
                 pathname: `/login`,
-                search: `?projId=${redirectPath}`,
+                search: redirectQueryParam,
               }}
             >
               {item.label}

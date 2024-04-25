@@ -37,6 +37,7 @@ import StepCss from "@/app/styles/Stepper.module.css";
 import { registerOtherParser } from "@/app/utils/parse";
 import handleTrimAndReplace from "@/app/utils/input/validations";
 import clsx from "clsx";
+import { getQueryParamClient } from "@/app/hooks/custom/useRedirect";
 
 function Agent() {
   const [status, setStatus] = useState<
@@ -165,8 +166,7 @@ function Agent() {
   const displayCountryCode = (value: any) => {
     console.log(value);
   };
-  const params = useSearchParams();
-  console.log(form.values);
+  const queryParam = getQueryParamClient();
   return (
     <div className="w-full max-w-[423px] flex justify-center items-center flex-col m-[2%] ">
       {active !== 2 && (
@@ -174,7 +174,7 @@ function Agent() {
           <Link
             href={{
               pathname: "/login",
-              search: params.get("projId") && `?projId=${params.get("projId")}`,
+              search: queryParam.query,
             }}
             className="whitespace-nowrap  text-xl md:text-[26px] font-[500] text-[#666]"
           >
@@ -184,7 +184,7 @@ function Agent() {
           <Link
             href={{
               pathname: "/register",
-              search: params.get("projId") && `?projId=${params.get("projId")}`,
+              search: queryParam.query,
             }}
             className="whitespace-nowrap text-xl md:text-[26px] text-[#148B16] font-bold border-solid border-b-2 border-green-600"
           >
@@ -325,7 +325,7 @@ function Agent() {
               <p className=" text-right text-[color:var(--Mandatory,#F00)] text-[15px] italic font-medium leading-[normal]">
                 Account already exists. Kindly use{" "}
                 <Link
-                  href={"/login"}
+                  href={{ pathname: "/login", search: queryParam.query }}
                   className="text-[#0073C6] text-[15px] italic font-bold leading-[normal] underline"
                 >
                   Login
@@ -440,7 +440,7 @@ function Agent() {
           <p className="md:text-xl font-[400] text-[#202020] mt-[5%]">
             Already have an Account ?{" "}
             <Link
-              href="/login"
+              href={{ pathname: "/login", search: queryParam.query }}
               className="md:text-xl font-[600] text-[#0073C6]"
             >
               Log In
@@ -450,7 +450,7 @@ function Agent() {
             <p className="text-center text-[#556477] text-xl not-italic font-medium leading-[normal] mt-3 mb-[21px]">
               Forget Password?{" "}
               <Link
-                href={"/forgot"}
+                href={{ pathname: "/forgot", search: queryParam.query }}
                 className="text-[color:var(--Brand-green-primary,#148B16)] text-xl not-italic font-medium leading-[normal] underline"
               >
                 Reset
@@ -458,7 +458,7 @@ function Agent() {
             </p>
           )}
           <Link
-            href="/"
+            href={{ pathname: queryParam.rediectPath }}
             className="md:text-xl font-[700] text-[#148B16] underline "
           >
             Continue Without Register

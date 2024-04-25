@@ -11,6 +11,10 @@ import handleTrimAndReplace, {
   handleAllTrimAndReplace,
 } from "@/app/utils/input/validations";
 import StepCss from "@/app/styles/Stepper.module.css";
+import {
+  getCallPathServer,
+  getQueryParam,
+} from "@/app/hooks/custom/useRedirect";
 const schema = yup.object().shape({
   username: yup
     .number()
@@ -29,7 +33,7 @@ const schema = yup.object().shape({
     .required("Password is required"),
 });
 
-function Login() {
+function Login({ params }: any) {
   const [state, setState] = useState<"idle" | "pending" | "success">("idle");
   const form = useForm({
     initialValues: { username: "", password: "" },
@@ -95,7 +99,7 @@ function Login() {
         />
 
         <Link
-          href={"/forgot"}
+          href={{ pathname: "/forgot", search: getQueryParam(params) }}
           className="text-[14px] font-medium text-[#767270]  w-full cursor-pointer "
         >
           Forgot Password ?
@@ -113,17 +117,17 @@ function Login() {
           <p className="text-[#282828] md:text-xl not-italic font-normal leading-[normal] mb-3">
             Don&apos;t have an Account?{" "}
             <Link
-              href={"/register"}
+              href={{ pathname: "/register", search: getQueryParam(params) }}
               className="text-[#0C7ACA] md:text-xl not-italic font-bold leading-[normal]"
             >
               SIGN UP
             </Link>
           </p>
           <Link
-            href={"/"}
+            href={{ pathname: getCallPathServer(params) }}
             className="text-[#148B16] md:text-xl not-italic font-medium leading-[normal] underline "
           >
-            Continue without register
+            Continue without login
           </Link>
         </div>
       </form>

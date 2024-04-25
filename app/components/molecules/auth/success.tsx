@@ -1,4 +1,5 @@
 "use client";
+import { getPathTypeFromQueryParams } from "@/app/hooks/custom/useRedirect";
 import clsx from "clsx";
 import Image from "next/image";
 import { useParams, usePathname, useRouter } from "next/navigation";
@@ -50,7 +51,6 @@ const Countdown = ({ initialCount = 5, redirectPath = "/" }) => {
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
-
     if (timerRunning) {
       interval = setInterval(() => {
         setTimeRemaining((prevTime) => {
@@ -71,10 +71,10 @@ const Countdown = ({ initialCount = 5, redirectPath = "/" }) => {
       clearInterval(interval);
     };
   }, [timerRunning]);
-
+  const page = getPathTypeFromQueryParams();
   return (
-    <p className="text-[color:var(--Grey-2,#767270)] text-center text-[26px] not-italic font-medium leading-[normal]">
-      You will be redirected to homepage in {timeRemaining.seconds} sec
+    <p className="text-[color:var(--Grey-2,#767270)] text-center text-[24px] not-italic font-medium leading-[normal]">
+      You will be redirected to {page} in {timeRemaining.seconds} sec
     </p>
   );
 };

@@ -5,6 +5,7 @@ import { useParams, useRouter, useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
 import CryptoJS from "crypto-js";
 import { WarningIcon } from "../images/commonSvgs";
+import { getCallPath } from "./custom/useRedirect";
 
 interface Login {
   username: string | number;
@@ -68,9 +69,8 @@ export default function useAuth({
   redirectUrl?: string;
 }) {
   const router = useRouter();
-  const params = useSearchParams();
-  const projId = params.get("projId");
-  const redirectPath = `/abc/delhi/some/${projId}`;
+
+  const redirectPath = getCallPath();
 
   const loginWithCredentials = async (data: Login): Promise<any> => {
     const encryptedPassword = CryptoJS.AES.encrypt(
@@ -89,9 +89,9 @@ export default function useAuth({
     if (res?.ok) {
       type === "register"
         ? setTimeout(() => {
-            router.push(projId ? redirectPath : "/");
+            router.push(redirectPath);
           }, 5000)
-        : router.push(projId ? redirectPath : "/");
+        : router.push(redirectPath);
     } else {
       toast.error(res?.error || "Something went wrong. Please try again.", {
         duration: 1000,

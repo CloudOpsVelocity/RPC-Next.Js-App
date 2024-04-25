@@ -3,6 +3,7 @@ import { data } from "@/app/data/userTypeDetails";
 import Button from "@/app/elements/button";
 import Link from "next/link";
 import Image from "next/image";
+import { getQueryParam } from "@/app/hooks/custom/useRedirect";
 
 export default function Page({ searchParams }: any) {
   return (
@@ -11,7 +12,7 @@ export default function Page({ searchParams }: any) {
         <Link
           href={{
             pathname: "/login",
-            search: searchParams.projId && `?projId=${searchParams.projId}`,
+            search: getQueryParam(searchParams),
           }}
           className="whitespace-nowrap text-xl md:text-[26px] font-[500] text-[#666]"
         >
@@ -21,7 +22,7 @@ export default function Page({ searchParams }: any) {
         <Link
           href={{
             pathname: "/register",
-            search: searchParams.projId && `?projId=${searchParams.projId}`,
+            search: getQueryParam(searchParams),
           }}
           className="whitespace-nowrap text-xl md:text-[26px] text-[#148B16] font-bold border-solid border-b-2 border-green-600"
         >
@@ -42,8 +43,7 @@ export default function Page({ searchParams }: any) {
               <Link
                 href={{
                   pathname: each.href,
-                  search:
-                    searchParams.projId && `?projId=${searchParams.projId}`,
+                  search: getQueryParam(searchParams),
                 }}
                 key={ind}
                 className={`group cursor-pointer flex justify-center items-center flex-col rounded-[8px] bg-[#FAFAFA] w-[30%] h-[130px] md:h-[174px] shadow-lg hover:shadow-green-300/30`}
