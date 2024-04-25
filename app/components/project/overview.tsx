@@ -5,6 +5,8 @@ import {
   Locality,
   ProjectStatus,
   PropertyAvailable,
+  ReraIcon,
+  ReraStatusProj,
   StartDate,
   TotalLandArea,
   footerPhoneIcon,
@@ -124,8 +126,8 @@ export default function Overview({
           {phaseList?.length == 1 && (
             <ProjBasicDetails
               key="rerastatus"
-              icon={<EndDate />}
-              title="Rera status"
+              icon={<ReraStatusProj />}
+              title="RERA Status"
               value={PhaseOverview[0]?.rerastatus}
               className="mr-[5%] pt-[2%] mb-[3%] "
             />
@@ -138,7 +140,7 @@ export default function Overview({
                 icon={<EndDate />}
                 title={
                   PhaseOverview[0]?.rerastatus === "Recieved"
-                    ? "Rera Id"
+                    ? "RERA ID"
                     : "Acknowledgement Id"
                 }
                 value={PhaseOverview[0]?.reraId}

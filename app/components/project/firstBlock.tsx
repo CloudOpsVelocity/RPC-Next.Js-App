@@ -50,9 +50,9 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
       {projectDetails && (
         <>
           <div className="absolute m-[2%] z-10 right-2">
-            <p className="shadow-md rounded-[10px] bg-gradient-to-r p-[8px] from-[#EFF5FF] /0  to-[#F2FAFF]/100 text-[#000] text-[14px] sm:text-[16px] font-[500]">
+            <p className="shadow-md rounded-[10px] bg-gradient-to-r p-[8px] from-[#EFF5FF] /0  to-[#F2FAFF]/100 text-[#000] text-[14px] sm:text-[16px] md:text-xl not-italic font-medium leading-[normal]">
               Current Project Status:{" "}
-              <span className="text-[#148B16] text-[14px] sm:text-[16px] font-[700]">
+              <span className="text-[#148B16] text-[14px] sm:text-[16px]   md:text-xl not-italic font-bold leading-[normal]">
                 {" "}
                 {projectDetails.projectStatus === "Completed"
                   ? "Completed"

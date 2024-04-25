@@ -170,7 +170,7 @@ export default function PropertyTypeDetailsCrad({
 
         <button
           onClick={() => updateValues(phase, getPropId(propertyType as string))}
-          className="text-[16px] lg:text-[18px] text-[#0073C6] font-[600] underline mb-[2%] cursor-pointer "
+          className="text-[16px] lg:text-[18px] text-[#0073C6] font-[600] underline mb-[2%] cursor-pointer mt-[28px]"
         >
           View Floor Plans
         </button>

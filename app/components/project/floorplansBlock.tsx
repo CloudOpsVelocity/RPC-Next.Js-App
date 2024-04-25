@@ -35,6 +35,7 @@ type Props = {
   slug: string;
   projName: string;
 };
+
 export default function FloorplansBlock({ projName, slug }: Props) {
   const { phaseList, PhaseOverview } = usePhaseWiseOverview();
   const allKeys = [35, 33, 31, 34, 32];

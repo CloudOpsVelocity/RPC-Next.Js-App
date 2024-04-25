@@ -85,11 +85,11 @@ export default function SharePopup({
 
       <button
         onClick={open}
-        className={`shadow-md cursor-pointer gap-[4px] p-[8px] flex justify-center items-center rounded-[20px] bg-[#F3F7FF] text-[#0073C6] text-[14px] sm:text-[16px] font-[600]  max-w-[150px] ml-auto ${
+        className={`flex justify-center items-center gap-1 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] p-2 rounded-[10px] bg-[#F3F7FF] ml-auto text-[#0073C6] text-xl not-italic font-semibold leading-[normal] tracking-[0.4px] ${
           title === "Share Project" ? "mt-[13px]" : ""
         }`}
       >
-        <ShearIcon />
+        <ShearIcon className="w-[26px] h-[26px]" />
         {title}
       </button>
     </>

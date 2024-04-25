@@ -52,8 +52,7 @@ const Card = ({
   return (
     <div
       className={clsx(
-        "w-[489px] sm:h-[85px] shadow-[0px_4px_30px_0px_rgba(0,0,0,0.15)] rounded-[31px] relative cursor-pointer",
-        projName.length > 20 && `w-[589px]`
+        " sm:h-[85px] shadow-[0px_4px_30px_0px_rgba(0,0,0,0.15)] rounded-[31px] relative cursor-pointer"
       )}
     >
       <AvailListSideSvg type={type} />
@@ -69,7 +68,7 @@ const Card = ({
         </div>
         <div
           className={clsx(
-            "flex justify-center items-center p-2 gap-[12px] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-lg border-[3px] border-solid max-w-[80px] mt-[14px] ml-5 mb-5 ",
+            "flex justify-center items-center p-2 gap-[12px] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-lg border-[3px] border-solid max-w-[80px] mt-[14px] ml-5 mb-5 mr-5",
             type === "sell"
               ? "border-[#FFD600] bg-[#ffef9b]"
               : "border-[#0073C6] bg-[#DBF0FF]"
