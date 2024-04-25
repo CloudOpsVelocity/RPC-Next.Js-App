@@ -112,20 +112,23 @@ function Dropdown() {
             {session.user.isActive === "Y" && (
               <>
                 {" "}
-                {data.map((item, index) => (
-                  <Menu.Item
-                    key={index}
-                    classNames={{
-                      itemLabel: S.itemLabel,
-                    }}
-                    component="a"
-                    className="block text-gray-700 hover:text-green-500 transition-colors"
-                    href={item.url}
-                    target="_blank"
-                  >
-                    {item.label}
-                  </Menu.Item>
-                ))}
+                {data.map((item, index) =>
+                  session.user.userType !== "B" &&
+                  item.label === "Post Project" ? null : (
+                    <Menu.Item
+                      key={index}
+                      classNames={{
+                        itemLabel: S.itemLabel,
+                      }}
+                      component="a"
+                      className="block text-gray-700 hover:text-green-500 transition-colors"
+                      href={item.url}
+                      target="_blank"
+                    >
+                      {item.label}
+                    </Menu.Item>
+                  )
+                )}
                 <hr className=" bg-[#768AA9] h-0.5 max-w-[90%] m-auto" />
               </>
             )}
@@ -158,7 +161,7 @@ function Dropdown() {
               component={Link}
               className="block text-gray-700 hover:text-green-500 transition-colors"
               href={{
-                pathname: `/login`,
+                pathname: item.url,
                 search: redirectQueryParam,
               }}
             >
