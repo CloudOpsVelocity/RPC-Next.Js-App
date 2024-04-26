@@ -89,10 +89,9 @@ const Gallery: React.FC<GalleryProps> = ({
           ) : (
             <ReactPlayer
               url={previewImage as string}
-              width="100%"
+              width="auto"
               controls
               height="80vh"
-              // class="!h-[80%]"
             />
           )}
           <div className="mt-4 flex items-center justify-center  w-full">
@@ -150,7 +149,7 @@ const Gallery: React.FC<GalleryProps> = ({
                           height={100}
                           src={video as string}
                           //alt={`Image ${index + 1}`}
-                          className={`cursor-pointer w-full min-w-[80px] !h-auto max-h-[100px] min-h-[50px]  ${
+                          className={`cursor-pointer w-full min-w-[80px] !h-auto max-h-[100px] min-h-[50px] object-cover  ${
                             video === previewImage
                               ? "border-[5px] border-white"
                               : ""

@@ -65,7 +65,7 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
                   : "On-Going"}
               </span>{" "}
             </p>
-            <SharePopup />
+            <SharePopup className="text-xl" />
           </div>
           <div className="relative w-full rounded-[10px]">
             <Carousel

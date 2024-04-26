@@ -8,6 +8,7 @@ import { getImageUrls } from "@/app/utils/image";
 import { AspectRatio, Image, Overlay } from "@mantine/core";
 import { useGallery } from "@/app/hooks/useGallery";
 import PropertyHeading from "../property/heading";
+import clsx from "clsx";
 
 export default function GalleryBlock({
   walkThrowVideoUrl,
@@ -52,12 +53,18 @@ export default function GalleryBlock({
         {/* IMage display con */}
         <div className="w-[100%] md:w-[50%] bg-white  h-[250px] overflow-hidden sm:h-[394px] lg:h-auto mb-[3%] md:mb-[0%] mr-[3%] rounded-[14px]   flex justify-center items-center">
           {selectedMedia && (
-            <div className="w-[100%]  bg-white  mb-[3%] md:mb-[0%] mr-[3%]   relative  rounded-[14px] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] h-fit">
+            <div
+              className={clsx(
+                "w-[100%]  bg-white  mb-[3%] md:mb-[0%] mr-[3%]   relative  rounded-[14px] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] h-fit",
+                selectedMedia.includes(".mp4") &&
+                  "flex justify-center items-center"
+              )}
+            >
               {selectedMedia.includes(".mp4") ? (
                 <ReactPlayer
                   url={selectedMedia}
-                  width="100%"
-                  height="100%"
+                  width="auto"
+                  height="550px"
                   controls
                 />
               ) : (
@@ -112,11 +119,11 @@ export default function GalleryBlock({
               </h3>
               <div className="flex justify-start items-start w-full gap-[4%] flex-wrap ">
                 {videos?.map((img, ind) => (
-                  <div className="relative w-[110px] lg:w-[152px] flex justify-center items-center h-[68px] lg:h-[94px] bg-white rounded-[5px]  mb-[4%] cursor-pointer">
+                  <div className="relative w-[110px] lg:w-[152px] flex justify-center items-center h-[68px] lg:max-h-[94px]  bg-white rounded-[5px]  mb-[4%] cursor-pointer">
                     <video
                       key={img}
                       src={img as string}
-                      className={`!w-full rounded-[5px] cursor-pointer ${
+                      className={`!w-full rounded-[5px] cursor-pointer h-[94px] object-cover ${
                         selectedMedia === img
                           ? "border-2 border-[#4d6677] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)]"
                           : ""

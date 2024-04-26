@@ -27,9 +27,7 @@ type FaqWithBgProps = {
 let ind = 0;
 
 export default function FaqWithBg({ data, projName }: FaqWithBgProps) {
-  const [value, setValue] = useState<string[]>(
-    data?.map((_, index) => `faq-${index}`)
-  );
+  console.log(data);
   return (
     <div className={classes.wrapper} id="faq">
       <div className="flex justify-center items-center w-full ">
@@ -45,12 +43,15 @@ export default function FaqWithBg({ data, projName }: FaqWithBgProps) {
       <div>
         {data?.map((faq, index) => {
           return (
-            <FaqCard
-              faqQuestion={faq.faqQuestion}
-              faqAnswer={faq.faqAnswer}
-              key={index}
-              last={index === data.length - 1}
-            />
+            faq.faqAnswer &&
+            faq.faqQuestion && (
+              <FaqCard
+                faqQuestion={faq.faqQuestion}
+                faqAnswer={faq.faqAnswer}
+                key={index}
+                last={index === data.length - 1}
+              />
+            )
           );
         })}
       </div>

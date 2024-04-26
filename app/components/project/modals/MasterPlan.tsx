@@ -6,8 +6,6 @@ import { imageUrlParser } from "@/app/utils/image";
 import Close from "../button/close";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 import S from "@/app/styles/ImgCarousel.module.css";
-import NextImage from "next/image";
-import { Controls } from "./Carousel";
 export default function MasterPlanPopup({ url }: { url: string }) {
   const [opened, { open, close }] = useDisclosure(false);
   const isMobile = useMediaQuery(`(max-width: 750px`);
@@ -18,9 +16,9 @@ export default function MasterPlanPopup({ url }: { url: string }) {
         onClose={close}
         classNames={{
           close: S.close,
-          content: S.content,
+          content: S.mContent,
           header: S.header,
-          overlay: S.overlay,
+          overlay: S.mOverlay,
           inner: S.inner,
         }}
         size={isMobile ? "100%" : "90%"}
@@ -51,7 +49,11 @@ export default function MasterPlanPopup({ url }: { url: string }) {
                 </svg>{" "}
                 Download
               </a>
-              <SharePopup title="Share" url={imageUrlParser(url || "")} />
+              <SharePopup
+                title="Share"
+                url={imageUrlParser(url || "")}
+                className="text-[#0073C6] text-base not-italic font-semibold leading-[normal] tracking-[0.32px]"
+              />
               <Close close={close} />
             </div>
           </div>

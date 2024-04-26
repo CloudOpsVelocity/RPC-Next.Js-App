@@ -32,7 +32,6 @@ export default function Specifications({
       });
     }
   };
-
   return (
     <div
       className="w-[90%] scroll-mt-[220px] mx-auto mb-[5%]"
@@ -97,9 +96,10 @@ export default function Specifications({
                   </span>
                   <div>
                     <ul className="list-disc ml-8 grid gap-2 my-2 text-[#233333] text-[20px] font-[500]">
-                      {spec.values.map((value, valueIndex) => (
-                        <li key={valueIndex}>{value}</li>
-                      ))}
+                      {spec.values.map(
+                        (value, valueIndex) =>
+                          value && <li key={valueIndex}>{value}</li>
+                      )}
                     </ul>
                   </div>
                 </div>

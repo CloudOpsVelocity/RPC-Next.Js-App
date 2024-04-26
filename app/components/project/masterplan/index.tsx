@@ -14,42 +14,11 @@ export default function MasterPlan({
   media: string;
 }) {
   const url = imageUrlParser(media);
-
-  // const handleDownload = () => {
-  //   const url = imageUrlParser(media);
-  //   const link = document.createElement("a");
-
-  //   const file = new Blob([url], { type: "text/plain" });
-
-  //   link.href = URL.createObjectURL(file);
-
-  //   link.download = "grp.txt";
-
-  //   link.click();
-  //   URL.revokeObjectURL(link.href);
-  // };
-  // const handleDownload = async () => {
-  //   try {
-  //     const response = await fetch(media);
-  //     const blob = await response.blob();
-  //     const url = URL.createObjectURL(blob);
-  //     const downloadLink = document.createElement("a");
-  //     downloadLink.href = url;
-  //     downloadLink.download = "floor_plan.jpg"; // Set the filename with extension
-  //     document.body.appendChild(downloadLink);
-  //     downloadLink.click();
-  //     document.body.removeChild(downloadLink);
-  //     // Clean up the URL object after download
-  //     URL.revokeObjectURL(url);
-  //   } catch (error) {
-  //     console.error("Error downloading image:", error);
-  //   }
-  // };
   return (
     <div className="w-[90%] mb-[5%] scroll-mt-[180px] " id="masterPlan">
       <div className="flex justify-between w-full items-cente mb-[32px] flex-wrap">
         <div>
-          <h1 className="text-[20px] lg:text-[32px] font-[600] text-[#001F35] mb-[12px]">
+          <h1 className="text-[20px] lg:text-[32px] font-[600] text-[#001F35] mb-[12px] uppercase">
             Master Plan Of{" "}
             <span className="text-[#148B16] font-[700] uppercase">
               {projName}
@@ -63,7 +32,7 @@ export default function MasterPlan({
         </div>
         <div className="h-full flex justify-center items-center ">
           <a
-            className="inline-flex flex-col items-center justify-center gap-2.5 p-3 md:p-5 rounded-[10px] bg-[#0073C6] text-white md:text-2xl text-[16px] not-italic font-bold leading-[normal] tracking-[0.96px] max-h-[50%] mt-5 md:mt-0 h-[60px]"
+            className="inline-flex flex-col items-center justify-center gap-2.5 p-3 md:p-5 rounded-[10px] bg-[#0073C6] text-white md:text-2xl text-[16px] not-italic font-bold leading-[normal] tracking-[0.96px] max-h-[50%] mt-5 md:mt-0 h-[60px] uppercase"
             href={url}
             target="_blank"
           >

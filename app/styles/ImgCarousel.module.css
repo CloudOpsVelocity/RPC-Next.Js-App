@@ -43,3 +43,13 @@
 .inner {
   overflow-y: hidden;
 }
+
+.mContent {
+  border-radius: 20px;
+  background: transparent;
+  margin-top: 65px;
+}
+.mOverlay {
+  margin-top: 60px;
+  background: rgba(0, 0, 0, 0.78);
+}

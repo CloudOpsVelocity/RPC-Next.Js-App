@@ -18,13 +18,16 @@ import {
   WhatsappShareButton,
 } from "react-share";
 import { usePathname } from "next/navigation";
+import clsx from "clsx";
 
 export default function SharePopup({
   title = "Share Project",
   url,
+  className,
 }: {
   title?: string;
   url?: string;
+  className?: string;
 }) {
   const clipboard = useClipboard({ timeout: 500 });
   const pathname = usePathname();
@@ -85,9 +88,11 @@ export default function SharePopup({
 
       <button
         onClick={open}
-        className={`flex justify-center items-center gap-1 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] p-2 rounded-[10px] bg-[#F3F7FF] ml-auto text-[#0073C6] text-xl not-italic font-semibold leading-[normal] tracking-[0.4px] ${
-          title === "Share Project" ? "mt-[13px]" : ""
-        }`}
+        className={clsx(
+          "flex justify-center items-center gap-1 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] p-2 rounded-[10px] bg-[#F3F7FF] ml-auto text-[#0073C6]  not-italic font-semibold leading-[normal] tracking-[0.4px]",
+          title === "Share Project" && "mt-[13px]",
+          className
+        )}
       >
         <ShearIcon className="w-[26px] h-[26px]" />
         {title}
