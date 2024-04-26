@@ -149,7 +149,7 @@ export default function Overview({
               />
             )}
         </div>
-        <div className=" flex justify-start md:justify-end items-start md:items-end flex-col mt-[3%] md:mt-0 relative">
+        <div className=" flex justify-start md:justify-end items-start md:items-end flex-col mt-[3%] md:mt-0 relative pb-10">
           <ShortList />
           <CompareList />
           <Message />

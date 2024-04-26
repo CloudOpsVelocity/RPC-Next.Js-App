@@ -148,14 +148,14 @@ const Parking = ({ noocp, noobp, noccp, nocbp }: any) => {
             key="possessionDate"
             icon={<ParkingIcon />}
             title="Covered Car Parking"
-            value={noobp}
+            value={noccp}
             className={style.card}
           />
           <RoomBasicDetails
             key="landArea"
             icon={<OpenBike />}
             title="Open Bike Parking"
-            value={noccp}
+            value={noobp}
             className={style.card}
           />
           <RoomBasicDetails

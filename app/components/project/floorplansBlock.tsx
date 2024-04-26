@@ -213,7 +213,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
       {projectUnitsData.length == 0 ? (
         <NoProperties
           phase={
-            phaseList.find((phase: any) => phase.phaseId == currentPhase)
+            phaseList?.find((phase: any) => phase.phaseId == currentPhase)
               ?.phaseName as any
           }
         />
@@ -312,7 +312,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                 ) : (
                   <NoProperties
                     phase={
-                      phaseList.find(
+                      phaseList?.find(
                         (phase: any) => phase.phaseId == currentPhase
                       )?.phaseName as any
                     }

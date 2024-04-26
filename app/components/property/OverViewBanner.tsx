@@ -21,6 +21,9 @@ export default function PropertyOverviewBanner({
   propTypeName,
   plotArea,
   sba,
+  propName,
+  bhkName,
+  cg,
 }: Main) {
   const [opened, { open, close }] = useReqCallPopup();
   const [collapsed, { toggle }] = useDisclosure(false);
@@ -62,7 +65,8 @@ export default function PropertyOverviewBanner({
             <WhatsAppButton
               className="cursor-pointer"
               onClick={""}
-              name="Sagar Samundra"
+              name={`${bhkName} ${propTypeName} FOR
+              ${cg === "S" ? " Sell" : " Rent"} In ${propName}`}
             />
           </div>
         </div>

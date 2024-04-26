@@ -43,7 +43,7 @@ export function generatePropertyOverViewData(
               : "Ready to Move",
           Icon: Status,
         },
-        { title: "Property Facing", value: data.phaseName, Icon: Compass },
+        { title: "Property Facing", value: data.facingName, Icon: Compass },
         {
           title: "Super built-up Area",
           value: `${data.sba} sq.ft`,
@@ -56,12 +56,12 @@ export function generatePropertyOverViewData(
         },
         {
           title: "Flooring Type",
-          value: `${data.flooringType} sq.ft`,
+          value: `${data.flooringType}`,
           Icon: Marble,
         },
         {
           title: "Furnishing",
-          value: `${data.furnshName} sq.ft`,
+          value: `${data.furnshName}`,
           Icon: Furnishing,
         },
       ];
@@ -107,7 +107,7 @@ export function generatePropertyOverViewData(
               : "Ready to Move",
           Icon: Status,
         },
-        { title: "Property Facing", value: data.phaseName, Icon: Compass },
+        { title: "Property Facing", value: data.facingName, Icon: Compass },
         {
           title: "Super built-up Area",
           value: `${data.sba} sq.ft`,
@@ -120,12 +120,12 @@ export function generatePropertyOverViewData(
         },
         {
           title: "Flooring Type",
-          value: `${data.flooringType} sq.ft`,
+          value: `${data.flooringType}`,
           Icon: Marble,
         },
         {
           title: "Furnishing",
-          value: `${data.furnshName} sq.ft`,
+          value: `${data.furnshName}`,
           Icon: Furnishing,
         },
       ];
@@ -174,7 +174,7 @@ export function generatePropertyOverViewData(
               : "Ready to Move",
           Icon: Status,
         },
-        { title: "Property Facing", value: data.phaseName, Icon: Compass },
+        { title: "Property Facing", value: data.facingName, Icon: Compass },
         {
           title: "Super built-up Area",
           value: `${data.sba} sq.ft`,
@@ -187,12 +187,12 @@ export function generatePropertyOverViewData(
         },
         {
           title: "Flooring Type",
-          value: `${data.flooringType} sq.ft`,
+          value: `${data.flooringType}`,
           Icon: Marble,
         },
         {
           title: "Furnishing",
-          value: `${data.furnshName} sq.ft`,
+          value: `${data.furnshName}`,
           Icon: Furnishing,
         },
       ];
@@ -236,7 +236,7 @@ export function generatePropertyOverViewData(
               : "Ready to Move",
           Icon: Status,
         },
-        { title: "Property Facing", value: data.phaseName, Icon: Compass },
+        { title: "Property Facing", value: data.facingName, Icon: Compass },
         {
           title: "Plot Area",
           value: `${data.plotArea} sq.ft`,
@@ -310,13 +310,13 @@ export function generatePropertyOverViewData(
         },
         {
           title: "Flooring Type",
-          value: `${data.flooringType} sq.ft`,
+          value: `${data.flooringType}`,
           Icon: Marble,
         },
 
         {
           title: "Furnishing",
-          value: `${data.furnshName} sq.ft`,
+          value: `${data.furnshName}`,
           Icon: Furnishing,
         },
       ];

@@ -1,6 +1,5 @@
 import { Main } from "@/app/validations/property";
 import { Main as M } from "@/app/validations/types/project";
-import { unstable_cache } from "next/cache";
 
 const getProjectDetails = async (slug: string): Promise<M | any> => {
   if (slug) {
@@ -21,7 +20,10 @@ const getProjectDetails = async (slug: string): Promise<M | any> => {
 
 const getListingDetails = async (slug: string): Promise<Main> => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/fetch/listing/data?propIdEnc=${slug}`
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/fetch/listing/data?propIdEnc=${slug}`,
+    {
+      cache: "no-cache",
+    }
   );
   const data = await response.json();
   return data;

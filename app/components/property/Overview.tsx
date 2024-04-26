@@ -29,9 +29,12 @@ export default function PropertyOverView({ data }: { data: Main }) {
         </div>
         <div className="flex justify-center md:items-end flex-col">
           <Ratings slug={data.projIdEnc} />
-          <p className="text-[20px] lg:text-[24px] text-[#0073C6] font-[600] decoration-dashed underline whitespace-nowrap ">
+          <a
+            href={`tel:${8766203976}`}
+            className="text-[20px] lg:text-[24px] text-[#0073C6] font-[600] decoration-dashed underline whitespace-nowrap "
+          >
             Call now
-          </p>
+          </a>
         </div>
       </div>
 
