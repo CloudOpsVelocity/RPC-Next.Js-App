@@ -7,9 +7,9 @@ const ratingSchema = yup.object().shape({
 
   rating: yup
     .number()
-    .min(1, " Rating must be at least 1")
-    .max(5, " Rating must be at most 5")
-    .required("Rating is required"),
+    .min(1, "Note: Ratings are required. Please give the project rating!")
+    .max(5, " Note: Ratings are required. Please give the project rating!")
+    .required("Note: Ratings are required. Please give the project rating!"),
 });
 
 const reqSchema = yup.object().shape({

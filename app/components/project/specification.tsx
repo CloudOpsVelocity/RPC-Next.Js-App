@@ -4,7 +4,7 @@ import { useScrollIntoView } from "@mantine/hooks";
 import { SpecificationList } from "@/app/validations/types/project";
 import { Box, Group, Paper, ScrollArea, Stack } from "@mantine/core";
 import { specificationsList } from "@/app/images/commonSvgs";
-
+import styles from "@/app/styles/Scrollbar.module.css";
 export default function Specifications({
   data,
   projName,
@@ -74,6 +74,8 @@ export default function Specifications({
               w={"100%"}
               h={458 > data?.length * 270 ? data.length * 270 : 458}
               viewportRef={viewport}
+              classNames={styles}
+              className="scrollUnique"
               pb={20}
             >
               {data?.map((spec, index) => (

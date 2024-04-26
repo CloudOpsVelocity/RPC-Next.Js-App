@@ -171,7 +171,7 @@ const AddRating = ({
               onSubmit={form.onSubmit(formSubmit)}
               className="max-w-[100%] mt-[2%] mx-auto my-8   rounded-lg space-y-2 p-5"
             >
-              <div className="flex md:justify-center items-center mb-[32px]">
+              <div className="flex md:justify-center items-center mb-[32px] flex-col">
                 <Rating
                   classNames={{
                     starSymbol: S.star,
@@ -188,6 +188,10 @@ const AddRating = ({
                   }
                   {...form.getInputProps("rating")}
                 />
+
+                <p className="text-[#F00] text-xl italic font-normal leading-[23.784px] mt-5">
+                  {form.errors.rating}
+                </p>
               </div>
 
               <h2 className="text-[#4D6677] text-2xl not-italic font-bold leading-[23.784px]  !mb-[24px]">

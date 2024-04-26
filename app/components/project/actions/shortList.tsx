@@ -1,9 +1,14 @@
-import { Shorlisted, shortlistIconSvg } from "@/app/images/commonSvgs";
+import {
+  Shorlisted,
+  ShortListIcon,
+  shortlistIconSvg,
+} from "@/app/images/commonSvgs";
 import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
 import React from "react";
 import { useShortlistAndCompare } from "@/app/hooks/storage";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
+import clsx from "clsx";
 
 export default function ShortList() {
   const { data: session } = useSession();
@@ -28,10 +33,14 @@ export default function ShortList() {
   return (
     <button
       onClick={() => onAddingShortList()}
-      className="text-[20px] flex justify-center items-center gap-[8px]  cursor-pointer lg:text-[24px] text-[#0073C6] font-[600] underline whitespace-nowrap decoration-dashed "
+      className={clsx(
+        "flex justify-center items-center gap-1 p-2 rounded-lg border-[0.8px] border-solid border-[#0073C6] bg-[#fafafa] text-[#0073C6] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px]",
+        isItemInShortlist &&
+          "bg-[#E4F4FF] text-[#148B16] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px]"
+      )}
     >
-      {isItemInShortlist ? Shorlisted : shortlistIconSvg}
-      {isItemInShortlist ? "Remove from" : "Add to"} Shortlist
+      <ShortListIcon color={isItemInShortlist ? "#148B16" : "#0073C6"} />
+      {isItemInShortlist ? "Added to" : "Add to"} Shortlist
     </button>
   );
 }
