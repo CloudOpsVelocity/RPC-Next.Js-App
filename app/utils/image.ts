@@ -36,7 +36,9 @@ const imageUrlParser = (originalUrl: string) => {
   if (imagesIndex !== -1) {
     const imagePath = urlParts.slice(imagesIndex + 1).join("/");
 
-    const modifiedUrl = `${process.env.NEXT_PUBLIC_URL}/image?path=/images/${imagePath}`;
+    const modifiedUrl = `${
+      process.env.NEXT_PUBLIC_URL
+    }/image?path=/images/${imagePath}?v=${Math.random()}`;
 
     return modifiedUrl;
   }

@@ -13,7 +13,18 @@ export default function Page({ searchParams: { path } }: Props) {
   //   link.click();
   //   URL.revokeObjectURL(link.href);
   // };
+  let isDownloading = false; // Flag to track whether a download is in progress
+
   const handleDownload = async () => {
+    // If already downloading, return immediately
+    if (isDownloading) {
+      console.log("Download in progress, please wait.");
+      return;
+    }
+
+    // Set downloading flag to true
+    isDownloading = true;
+
     try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_IMG_BASE}${path}`
@@ -31,6 +42,9 @@ export default function Page({ searchParams: { path } }: Props) {
       URL.revokeObjectURL(url);
     } catch (error) {
       console.error("Error downloading image:", error);
+    } finally {
+      // Reset downloading flag after completion
+      isDownloading = false;
     }
   };
   // const onButtonClick = () => {

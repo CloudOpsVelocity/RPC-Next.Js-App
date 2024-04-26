@@ -428,7 +428,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
 
 const NoProperties = ({ phase }: { phase: string }) => {
   return (
-    <div className="flex items-center gap-4 p-2.5 bg-[#E9FFE9]">
+    <div className="flex items-center gap-4 p-2.5 bg-[#E9FFE9] max-w-[47.5%]">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="58"
@@ -441,9 +441,9 @@ const NoProperties = ({ phase }: { phase: string }) => {
           fill="#148B16"
         />
       </svg>
-      <p className="text-[#242424] text-[26px] not-italic font-semibold leading-[normal]">
-        Currently, no units are available in {phase}. Stay tuned! Thank you for
-        your patience.
+      <p className="text-[#242424] text-[26px] not-italic font-medium leading-[normal] ">
+        Currently, no units are available in {phase}. Stay tuned!
+        <br /> Thank you for your patience.
       </p>
     </div>
   );

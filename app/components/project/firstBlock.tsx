@@ -49,6 +49,12 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
     >
       {projectDetails && (
         <>
+          {hasReraStatus && (
+            <p className=" flex items-center pl-[8px] rounded-tl-lg text-center text-[24px] font-[600] text-[#FFF] bg-gradient-to-r w-[122px] from-[#148B16] /0 to-[#EFEFEF]/50  z-10 left-0 absolute">
+              <ReraIcon />
+              RERA
+            </p>
+          )}
           <div className="absolute m-[2%] z-10 right-2">
             <p className="shadow-md rounded-[10px] bg-gradient-to-r p-[8px] from-[#EFF5FF] /0  to-[#F2FAFF]/100 text-[#000] text-[14px] sm:text-[16px] md:text-xl not-italic font-medium leading-[normal]">
               Current Project Status:{" "}
@@ -92,18 +98,7 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
           </div>
           <div className="sm:absolute bottom-0 m-[2%] z-10 w-[95%] self-center justify-between items-start flex-col md:flex-row border-solid border-white-500 rounded-[10px] bg-gradient-to-r from-[#EFEFEF] /20 to-[#c3c3c3bd]/80 shadow-md  sm:flex ">
             <div className=" w-full md:w-[60%]">
-              {hasReraStatus && (
-                <p className=" flex items-center pl-[8px] rounded-tl-lg text-center text-[24px] font-[600] text-[#FFF] bg-gradient-to-r w-[122px] from-[#148B16] /0 to-[#EFEFEF]/50">
-                  <ReraIcon />
-                  RERA
-                </p>
-              )}
-
-              <div
-                className={`ml-[2%] ${
-                  !hasReraStatus ? "mt-8" : "mt-2"
-                } mb-[7px]`}
-              >
+              <div className={`ml-[2%] mt-10 mb-[7px]`}>
                 <h3 className="text-xl sm:text-[24px] lg:text-[28px] font-[700] text-[#00487C] uppercase">
                   {projectDetails.projectName}
                 </h3>
