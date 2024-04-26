@@ -20,6 +20,7 @@ import CompareList from "./actions/compareList";
 import { formatDateDDMMYYYY } from "@/app/utils/date";
 import usePhaseWiseOverview from "@/app/hooks/usePhaseWiseOverview";
 import LoginPopup from "./modals/LoginPop";
+import Message from "./actions/Message";
 
 export default function Overview({
   maxPrice,
@@ -148,9 +149,10 @@ export default function Overview({
               />
             )}
         </div>
-        <div className=" flex justify-start md:justify-end items-start md:items-end flex-col mt-[3%] md:mt-0 ">
+        <div className=" flex justify-start md:justify-end items-start md:items-end flex-col mt-[3%] md:mt-0 relative">
           <ShortList />
           <CompareList />
+          <Message />
         </div>
       </div>
       <OverviewBanner

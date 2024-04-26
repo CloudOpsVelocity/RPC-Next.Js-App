@@ -28,6 +28,7 @@ import ErrorContainer from "@/app/components/project/error/container";
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
   const data = await getListingDetails(slug);
+  console.log(data);
   const projData = await getProjectDetails(data.projIdEnc);
   return (
     <div className="w-full">
