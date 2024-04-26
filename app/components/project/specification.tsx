@@ -73,8 +73,7 @@ export default function Specifications({
               w={"100%"}
               h={458 > data?.length * 270 ? data.length * 270 : 458}
               viewportRef={viewport}
-              classNames={styles}
-              className="scrollUnique"
+              // classNames={styles}
               pb={20}
             >
               {data?.map((spec, index) => (

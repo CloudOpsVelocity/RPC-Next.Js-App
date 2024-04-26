@@ -190,6 +190,8 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
   );
 }
 
+export const fetchCache = "force-no-store";
+
 // export async function generateStaticParams() {
 //   const slugs = [
 //     "7f146b9e4154f8613745e501fb87d6b9",
