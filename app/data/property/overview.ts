@@ -70,7 +70,7 @@ export function generatePropertyOverViewData(
         propertyDetails.splice(2, 2);
         propertyDetails.splice(3, 0, {
           title: "Available For",
-          value: data.availablityStatus,
+          value: data.availavleFor,
           Icon: Status,
         });
 
@@ -134,7 +134,7 @@ export function generatePropertyOverViewData(
         propertyDetails.splice(2, 2);
         propertyDetails.splice(3, 0, {
           title: "Available For",
-          value: data.availablityStatus,
+          value: data.availavleFor,
           Icon: Status,
         });
         if (availablityStatus === "R") {
@@ -201,7 +201,7 @@ export function generatePropertyOverViewData(
         propertyDetails.splice(2, 2);
         propertyDetails.splice(3, 0, {
           title: "Available For",
-          value: data.availablityStatus,
+          value: data.availavleFor,
           Icon: Status,
         });
 

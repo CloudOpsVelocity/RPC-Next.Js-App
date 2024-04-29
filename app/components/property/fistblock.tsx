@@ -120,7 +120,7 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
               <h2 className="text-[20px] md:text-[28px] lg:text-[32px] font-[700] text-[#001F35]">
                 {formatCurrency(projectDetails.price)}
               </h2>
-              <p className="text-[16px] md:text-right lg:text-[24px] font-[600] mb-[10px] md:mb-[10px] text-[#00487C] ">
+              {/* <p className="text-[16px] md:text-right lg:text-[24px] font-[600] mb-[10px] md:mb-[10px] text-[#00487C] ">
                 ₹{" "}
                 {calculatePerSqPrice(
                   projectDetails.price,
@@ -129,7 +129,7 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
                     : projectDetails.sba
                 )}
                 /- Price per sqft onwards
-              </p>
+              </p> */}
               <p className="text-[#001F35] text-xl not-italic font-semibold leading-[normal] mb-[13px]">
                 Posted By:{" "}
                 {projectDetails.postedByType === "B" ? "Builder" : "Agent"}

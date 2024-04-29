@@ -126,6 +126,7 @@ const PriceBreakUp = ({
   }
   const otherChangeTotal = parseOtherCharge(otherPrice?.otherCharge);
   const chargesArray = otherPrice?.otherCharge?.split(",");
+
   return (
     <>
       <div className="max-w-[90%] mx-auto p-6 bg-white rounded-lg shadow my-10">
@@ -159,6 +160,14 @@ const PriceBreakUp = ({
                       label={
                         key === "clubHouseCharge"
                           ? `${displayNameMap[key]} (${otherPrice?.clubHouseTill} year)`
+                          : key === "security"
+                          ? `Security Deposit ${
+                              otherPrice.securetyType === "F"
+                                ? "Fixed"
+                                : otherPrice.securetyType === "M"
+                                ? "Multiple Of Rent"
+                                : "NA"
+                            }`
                           : displayNameMap[key]
                       }
                       className={
@@ -245,4 +254,10 @@ const displayNameMap: DisplayNameMap = {
   taxGovtCharge: "Tax & Government Charges",
   ownershipCharge: "Ownership Transfer Fees",
   legalCharge: "Legal Charges",
+  otherCharge: "otherCharge",
+  elctCharge: "Electricity Charges",
+  waterCharge: "Water Charges",
+  maintananceChargess: "Maintenance Charges",
+  securetyType: "securetyType",
+  security: "Security Deposit",
 };
