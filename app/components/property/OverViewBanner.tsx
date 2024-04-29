@@ -91,21 +91,37 @@ const PriceBreakUp = ({
     otherPrice &&
     Object?.keys(otherPrice).filter(
       (item) =>
-        !["otherCharge", "price", "securetyType", "clubHouseTill"].includes(
-          item
-        ) && otherPrice[item] !== "NA"
+        ![
+          "otherCharge",
+          "price",
+          "securetyType",
+          "clubHouseTill",
+          "securityMonth",
+        ].includes(item) && otherPrice[item] !== "NA"
     );
 
-  const sum = filterOtherDetails?.reduce(
-    (a, b) =>
-      b !== "price"
-        ? Number(a) +
+  const sum = filterOtherDetails?.reduce((a, b) => {
+    if (b !== "price") {
+      console.log(b);
+      if (b === "security" && otherPrice.securetyType === "M") {
+        // If securityType is "M", multiply security with securityMonth
+        return (
+          Number(a) +
+          Number(otherPrice["security"]) * Number(otherPrice["securityMonth"])
+        );
+      } else {
+        // Otherwise, proceed with normal addition
+        return (
+          Number(a) +
           (b === "otherCharge"
             ? parseOtherCharge(otherPrice[b])
             : Number(otherPrice[b] || "0"))
-        : Number(a),
-    0
-  );
+        );
+      }
+    } else {
+      return Number(a);
+    }
+  }, 0);
   function parseOtherCharge(otherChargeString: string): number {
     let sum = 0;
 
@@ -126,7 +142,6 @@ const PriceBreakUp = ({
   }
   const otherChangeTotal = parseOtherCharge(otherPrice?.otherCharge);
   const chargesArray = otherPrice?.otherCharge?.split(",");
-
   return (
     <>
       <div className="max-w-[90%] mx-auto p-6 bg-white rounded-lg shadow my-10">
@@ -156,7 +171,12 @@ const PriceBreakUp = ({
                   return (
                     <ListItem
                       key={i}
-                      value={otherPrice[key] as string}
+                      value={
+                        key === "security"
+                          ? Number(otherPrice[key]) *
+                            Number(otherPrice.securityMonth)
+                          : (otherPrice[key] as string)
+                      }
                       label={
                         key === "clubHouseCharge"
                           ? `${displayNameMap[key]} (${otherPrice?.clubHouseTill} year)`
@@ -260,4 +280,5 @@ const displayNameMap: DisplayNameMap = {
   maintananceChargess: "Maintenance Charges",
   securetyType: "securetyType",
   security: "Security Deposit",
+  securityMonth: "securityMonth",
 };
