@@ -100,28 +100,18 @@ const PriceBreakUp = ({
         ].includes(item) && otherPrice[item] !== "NA"
     );
 
-  const sum = filterOtherDetails?.reduce((a, b) => {
-    if (b !== "price") {
-      console.log(b);
-      if (b === "security" && otherPrice.securetyType === "M") {
-        // If securityType is "M", multiply security with securityMonth
-        return (
-          Number(a) +
-          Number(otherPrice["security"]) * Number(otherPrice["securityMonth"])
-        );
-      } else {
-        // Otherwise, proceed with normal addition
-        return (
-          Number(a) +
+  const sum = filterOtherDetails?.reduce(
+    (a, b) =>
+      b !== "price" &&
+      !(b === "clubHouseCharge" && otherPrice.clubHouseCharge === "A")
+        ? Number(a) +
           (b === "otherCharge"
             ? parseOtherCharge(otherPrice[b])
             : Number(otherPrice[b] || "0"))
-        );
-      }
-    } else {
-      return Number(a);
-    }
-  }, 0);
+        : Number(a),
+    0
+  );
+
   function parseOtherCharge(otherChargeString: string): number {
     let sum = 0;
 
@@ -175,11 +165,18 @@ const PriceBreakUp = ({
                         key === "security"
                           ? Number(otherPrice[key]) *
                             Number(otherPrice.securityMonth)
+                          : key === "clubHouseCharge" &&
+                            otherPrice.clubHouseCharge === "A"
+                          ? "Lifetime"
                           : (otherPrice[key] as string)
                       }
                       label={
                         key === "clubHouseCharge"
-                          ? `${displayNameMap[key]} (${otherPrice?.clubHouseTill} year)`
+                          ? `${displayNameMap[key]} ${
+                              otherPrice.clubHouseCharge !== "A"
+                                ? `(${otherPrice?.clubHouseTill} year)`
+                                : ""
+                            } `
                           : key === "security"
                           ? `Security Deposit ${
                               otherPrice.securetyType === "F"

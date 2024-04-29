@@ -23,7 +23,7 @@ export default function ListItem({ label, value, className }: Props) {
         {label}
       </div>{" "}
       <span className="text-[#4D6677] text-2xl not-italic font-medium leading-[normal]">
-        ₹ {value}
+        {value === "Lifetime" ? value : `₹ ${value}`}
       </span>
     </li>
   );
