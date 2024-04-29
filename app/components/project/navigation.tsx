@@ -1,12 +1,20 @@
 "use client";
 import { topics } from "@/app/data/projectDetails";
 import useRatings from "@/app/hooks/useRatings";
+import { Main } from "@/app/validations/types/project";
 import clsx from "clsx";
 import { atom, useAtom } from "jotai";
 import Image from "next/image";
 import React, { useState, useRef, useEffect } from "react";
+import { TbRuler2Off } from "react-icons/tb";
 export const isScrollingAtom = atom(false);
-export default function Navigation({ isBrochure }: { isBrochure: boolean }) {
+export default function Navigation({
+  isBrochure,
+  detailsData,
+}: {
+  isBrochure: boolean;
+  detailsData: Main;
+}) {
   const { data } = useRatings();
   const [currentBlock, setCurrentBlock] = useState("overview");
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -79,6 +87,31 @@ export default function Navigation({ isBrochure }: { isBrochure: boolean }) {
     setTimeout(() => setIsScrolling(false), 3000);
   }
 
+  const conditionsArray = [
+    { key: "ratings", condtion: !!data?.status },
+    { key: "brochure", condtion: isBrochure },
+    { condtion: true, key: "overview" },
+    { condtion: true, key: "listings" },
+    { condtion: true, key: "about" },
+    { condtion: true, key: "propertyDetails" },
+    { condtion: true, key: "masterPlan" },
+    { condtion: true, key: "floorPlans" },
+    { condtion: true, key: "galleria" },
+    { condtion: detailsData?.amenityList?.length > 0, key: "amenities" },
+    { condtion: true, key: "nearBy" },
+    {
+      condtion: detailsData?.specificationList?.length > 0,
+      key: "specifications",
+    },
+    { condtion: detailsData?.highlights?.length > 0, key: "highlights" },
+    { condtion: true, key: "aboutBuilder" },
+    { condtion: true, key: "whyBuy" },
+    { condtion: true, key: "ratings" },
+    { condtion: true, key: "brochure" },
+    { condtion: true, key: "faq" },
+    { condtion: true, key: "similar" },
+  ];
+
   return (
     <div
       className={clsx(
@@ -101,33 +134,43 @@ export default function Navigation({ isBrochure }: { isBrochure: boolean }) {
         className="h-[64px] scroll-smooth w-[100%] bg-[#FCFCFC] shadow-sm flex justify-start items-center scrollbar-hide overflow-x-auto lg:px-14"
         ref={scrollContainerRef}
       >
-        {topics.map((topic) => (
-          <div
-            key={topic.id}
-            className={clsx(
-              `cursor-pointer text-[20px] mr-[36px]  whitespace-nowrap`,
-              currentBlock === topic.id
-                ? "text-[#0073C6] font-[700] decoration-solid underline"
-                : "text-[#4D6677] font-[500]",
-              (topic.id === "ratings" && data?.status === false) ||
-                (isBrochure === false && topic.id === "brochure")
-                ? "hidden"
-                : ""
-            )}
-            onClick={() => {
-              scrollToTopic(topic.id);
-              setCurrentBlock(topic.id);
-            }}
-          >
-            {topic.id === "ratings" && data?.status && (
-              <span>Customer Reviews</span>
-            )}
-            {topic.id === "brochure" && isBrochure && (
-              <span>{topic.label}</span>
-            )}
-            {topic.id !== "ratings" && topic.id !== "brochure" && topic.label}
-          </div>
-        ))}
+        {topics.map((topic) => {
+          const conditions = conditionsArray.find(
+            (item) => item.key === topic.id
+          );
+
+          return (
+            conditions?.condtion && (
+              <div
+                key={topic.id}
+                className={clsx(
+                  `cursor-pointer text-[20px] mr-[36px]  whitespace-nowrap`,
+                  currentBlock === topic.id
+                    ? "text-[#0073C6] font-[700] decoration-solid underline"
+                    : "text-[#4D6677] font-[500]",
+                  (topic.id === "ratings" && data?.status === false) ||
+                    (isBrochure === false && topic.id === "brochure")
+                    ? "hidden"
+                    : ""
+                )}
+                onClick={() => {
+                  scrollToTopic(topic.id);
+                  setCurrentBlock(topic.id);
+                }}
+              >
+                {topic.id === "ratings" && data?.status && (
+                  <span>Customer Reviews</span>
+                )}
+                {topic.id === "brochure" && isBrochure && (
+                  <span>{topic.label}</span>
+                )}
+                {topic.id !== "ratings" &&
+                  topic.id !== "brochure" &&
+                  topic.label}
+              </div>
+            )
+          );
+        })}
       </div>
       <Image
         src="/auth/arrow.svg"

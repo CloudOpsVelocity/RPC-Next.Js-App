@@ -1,12 +1,10 @@
 .scrollbar,
 .scrollbar:hover {
-  background-color: light-dark(
-    var(--mantine-color-gray-0),
-    var(--mantine-color-dark-6)
-  );
+  background: #dce6ed;
 }
 .scrollbar[data-orientation="vertical"] .thumb {
-  background-color: var(--mantine-color-red-6);
+  background: #779fbb;
+  border-radius: 5px;
 }
 
 .corner {

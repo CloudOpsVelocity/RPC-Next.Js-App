@@ -1,4 +1,3 @@
-import { addRating } from "@/app/utils/api/actions/ratings";
 import axios from "axios";
 
 export async function POST(req: Request) {
@@ -10,6 +9,5 @@ export async function POST(req: Request) {
     return Response.json(response.data);
   } catch (error) {
     return Response.json({ ok: true });
-    console.error(error);
   }
 }

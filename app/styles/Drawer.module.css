@@ -29,3 +29,23 @@
 .content {
   margin-top: 90.2px;
 }
+
+/* Webkit scrollbar */
+.content::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track of the scrollbar */
+.content::-webkit-scrollbar-track {
+  background: #dce6ed;
+}
+
+/* Handle of the scrollbar */
+.content::-webkit-scrollbar-thumb {
+  background: #779fbb;
+  border-radius: 5px;
+  height: 1px;
+}
+.content::-webkit-scrollbar-thumb:hover {
+  background: #779fbb;
+}
