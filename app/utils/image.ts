@@ -17,9 +17,13 @@ function getImageUrls(
     propertyNames.forEach((propertyName) => {
       if (mediaObject[propertyName]) {
         if (Array.isArray(mediaObject[propertyName])) {
-          imageUrls.push(...(mediaObject[propertyName] as string[]));
+          imageUrls.push(
+            ...(mediaObject[propertyName] as string[]).map(
+              (url) => `${url}?v=${Math.random()}`
+            )
+          );
         } else {
-          imageUrls.push(mediaObject[propertyName] as string);
+          imageUrls.push(`${mediaObject[propertyName]}?v=${Math.random()}`);
         }
       }
     });
@@ -27,6 +31,7 @@ function getImageUrls(
 
   return imageUrls;
 }
+
 const imageUrlParser = (originalUrl: string) => {
   if (!originalUrl) return "";
   const urlParts = originalUrl.split("/");

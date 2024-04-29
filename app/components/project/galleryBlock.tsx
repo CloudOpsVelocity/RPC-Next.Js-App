@@ -22,7 +22,7 @@ export default function GalleryBlock({
   const videos = [walkThrowVideoUrl, projectVideoIUrl].filter(
     (video) => video !== "" && video !== undefined
   );
-
+  console.log(images);
   const handleMediaClick = (media: string) => {
     setSelectedMedia(media);
   };
