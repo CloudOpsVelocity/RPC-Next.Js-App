@@ -8,11 +8,22 @@ type Props = {
   content: string;
   id?: string;
   type?: "prop" | "proj";
+  className?: string;
 };
 
-export default function About({ heading, projName, content, id, type }: Props) {
+export default function About({
+  heading,
+  projName,
+  content,
+  id,
+  type,
+  className,
+}: Props) {
   return (
-    <div className="w-[90%] mb-[5%] scroll-mt-[180px]" id={id ?? ""}>
+    <div
+      className={clsx("w-[90%] mb-[5%] scroll-mt-[180px]", className)}
+      id={id ?? ""}
+    >
       <h1 className="uppercase text-[20px] lg:text-[32px] font-[600] text-[#001F35] mb-[24px]">
         {heading}{" "}
         <span

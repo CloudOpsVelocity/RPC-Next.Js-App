@@ -1,9 +1,10 @@
 "use client";
-import ReadMore from "../atoms/readmore";
 import React from "react";
 import Link from "next/link";
 import useBuilder from "@/app/hooks/useBuilder";
 import { Svg } from "../property/heading";
+import About from "./about";
+import Image from "next/image";
 
 type Props = {
   id: number;
@@ -12,12 +13,13 @@ type Props = {
 
 export default function AboutBuilder({ id, type = "proj" }: Props) {
   const { data } = useBuilder({ id, y: "N", type });
+  console.log(data);
   const nzData = normalizeData(data, type);
-
+  console.log(nzData);
   return (
     <div className="w-[90%] scroll-mt-[220px]  mb-[5%]" id="aboutBuilder">
       <div className="w-full justify-between items-center ">
-        <div className="inline-flex  gap-[26px]  w-[90%] items-center">
+        <div className="inline-flex  gap-[26px] justify-between  w-[100%] items-center">
           {type === "prop" && Svg}
           <div>
             <h1 className=" text-[#023993] text-[24px] lg:text-[32px] font-[700]">
@@ -27,6 +29,8 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
               {nzData.ceoName}
             </p>
           </div>
+
+          <Image src={nzData.logo} width={130} height={130} alt="logo" />
         </div>
 
         <div className="rounded-[20px] mt-[1%] flex justify-between items-center bg-[#FFF] shadow-md w-[100%] mb-[2%] lg:w-[50%] p-[1%] ">
@@ -57,8 +61,15 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
             </p>
           </div>
         </div>
+        <About
+          id="builder_vision"
+          heading=""
+          projName={""}
+          content={nzData.vission}
+          className="!mb-[12px] text-[#202020] text-2xl not-italic font-medium leading-[normal] tracking-[0.96px]"
+        />
 
-        <p className=" text-[#212C33] text-[22px] lg:text-[24px] font-[500] mt-[3%] italic ">
+        <p className=" text-[#212C33] text-[22px] lg:text-[24px] font-[500]  italic ">
           Builder Address{" "}
         </p>
         <p className=" text-[#2A4C70] text-[18px] lg:text-[20px] font-[700] mt-[1%] italic mb-[14px] md:mb-[1%]">
@@ -84,6 +95,8 @@ function normalizeData(data: any, type: string) {
       completedProject: data?.data?.completedProject,
       builderAddress: data?.data?.builderAddress,
       ceoName: data?.data?.ceoName,
+      logo: data?.data?.logoUrl,
+      vission: data?.data?.vision,
     };
   } else {
     return {
@@ -93,6 +106,8 @@ function normalizeData(data: any, type: string) {
       completedProject: data?.completedProject,
       builderAddress: data?.builderAddress,
       ceoName: data?.ceoName,
+      logo: data?.data?.logoUrl,
+      vission: data?.data?.vision,
     };
   }
 }
