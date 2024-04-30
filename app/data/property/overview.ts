@@ -228,14 +228,7 @@ export function generatePropertyOverViewData(
         },
         { title: "Phase", value: data.phaseName, Icon: PhaseIcon },
         { title: "Ownership", value: data.ownershipName, Icon: OwnerShip },
-        {
-          title: "Availability Status",
-          value:
-            data.availablityStatus === "U"
-              ? "Under Construction"
-              : "Ready to Move",
-          Icon: Status,
-        },
+
         { title: "Property Facing", value: data.facingName, Icon: Compass },
         {
           title: "Plot Area",

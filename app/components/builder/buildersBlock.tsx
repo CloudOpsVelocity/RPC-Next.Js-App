@@ -45,8 +45,12 @@ export default function BuildersBlock({
             slideSize={{ base: "40%", sm: "50%", md: "25%" }}
             slideGap={{ sm: "md", md: "72px" }}
             align={"start"}
-            px={isMobile ? 0 : 130}
-            withControls={false}
+            px={isMobile ? 0 : 100}
+            withControls={
+              data?.filter((builder) => builder.name !== name).length > 5
+                ? true
+                : false
+            }
           >
             {data
               ?.filter((builder) => builder.name !== name)

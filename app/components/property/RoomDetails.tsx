@@ -219,15 +219,17 @@ const OtherDetails = ({
             className={style.card}
           />
         )}
+        {propTypeName !== "Plot" && (
+          <RoomBasicDetails
+            icon={<Status />}
+            title="Availability Status"
+            value={
+              availablityStatus == "R" ? "Ready to Move" : "Under Construction"
+            }
+            className={style.card}
+          />
+        )}
 
-        <RoomBasicDetails
-          icon={<Status />}
-          title="Availability Status"
-          value={
-            availablityStatus == "R" ? "Ready to Move" : "Under Construction"
-          }
-          className={style.card}
-        />
         <RoomBasicDetails
           icon={<StartDate />}
           title="Available From"
