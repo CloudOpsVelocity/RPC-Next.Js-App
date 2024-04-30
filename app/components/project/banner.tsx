@@ -152,7 +152,7 @@ const AddRating = ({
       opened={opened}
       onClose={onClose}
       centered
-      title="Add Rating"
+      title="Add Ratings"
       size={isMobile ? "100%" : session ? "xl" : "35%"}
     >
       <div className="relative">

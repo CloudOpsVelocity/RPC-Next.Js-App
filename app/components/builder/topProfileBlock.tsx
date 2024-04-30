@@ -20,7 +20,7 @@ export default function TopProfileBlock({
           {" > "}
           <span>Builder</span>
           {" > "}
-          <span>{ceoName}</span>
+          <span>{companyName}</span>
         </p>
 
         <div className="flex justify-start items-end ">

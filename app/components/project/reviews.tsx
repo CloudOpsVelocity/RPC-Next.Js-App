@@ -18,7 +18,8 @@ export default function Reviews({ projName }: { projName: string }) {
   const { data } = useRatings();
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
   return (
-    data?.status && (
+    data?.status &&
+    data?.reviewDataList?.filter((item: any) => item.userReview) > 0 && (
       <div id="ratings" className="bg-[#FFF] scroll-mt-[180px] py-12 w-full ">
         <div className="">
           <div className="w-[90%] mx-auto px-6">
