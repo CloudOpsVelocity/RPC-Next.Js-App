@@ -134,12 +134,12 @@ const AddRating = ({
   };
 
   const formSubmit = async (values: any) => {
-    if (!form.values.review) {
-      onClose();
-      return;
-    }
     setStatus("pending");
     if (isSubmitted) {
+      if (!form.values.review) {
+        onClose();
+        return;
+      }
       await addRating({
         projIdEnc: params?.slug,
         rating: isSubmitted?.rating,
