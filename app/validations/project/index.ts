@@ -1,12 +1,15 @@
 import * as yup from "yup";
 const ratingSchema = yup.object().shape({
-  review: yup.string().max(500, "Review should not exceed 500 characters"),
+  review: yup.string().max(400, "Review should not exceed 400 characters"),
 
   rating: yup
     .number()
     .min(1, "Note: Ratings are required. Please give the project rating!")
     .max(5, " Note: Ratings are required. Please give the project rating!")
     .required("Note: Ratings are required. Please give the project rating!"),
+});
+const ratingSchema2 = yup.object().shape({
+  review: yup.string().max(400, "Review should not exceed 400 characters"),
 });
 
 const reqSchema = yup.object().shape({
@@ -42,4 +45,4 @@ const qnaSchema = yup.object().shape({
     .required("Question is required")
     .max(1500, "Question should not exceed 1500 characters"),
 });
-export { ratingSchema, reqSchema, qnaSchema };
+export { ratingSchema, reqSchema, qnaSchema, ratingSchema2 };

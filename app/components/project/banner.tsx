@@ -4,8 +4,8 @@ import { useLocalStorage, useMediaQuery } from "@mantine/hooks";
 import Image from "next/image";
 import React, { useState } from "react";
 import S from "@/app/styles/Rating.module.css";
-import { useForm, yupResolver } from "@mantine/form";
-import { ratingSchema } from "@/app/validations/project";
+import { yupResolver } from "@mantine/form";
+import { ratingSchema, ratingSchema2 } from "@/app/validations/project";
 import { addRating } from "@/app/utils/api/actions/ratings";
 import { useParams } from "next/navigation";
 import { useSession } from "next-auth/react";
@@ -16,6 +16,9 @@ import Close from "./button/close";
 import { usePopUpRatings } from "@/app/hooks/popups/usePopUpRatings";
 import handleTrimAndReplace from "@/app/utils/input/validations";
 import clsx from "clsx";
+import { RatingForm, Success } from "./success/rating";
+import { FormProvider, useForm } from "@/app/context/rating";
+import ForgotForm from "../molecules/auth/forgot";
 
 export default function Banner({
   projName,
@@ -114,6 +117,7 @@ const AddRating = ({
     key: "ur",
     defaultValue: [],
   });
+  const isSubmitted = value?.find((val) => val.proj === projIdEnc);
   const [status, setStatus] = useState<
     "pending" | "idle" | "success" | "error"
   >("idle");
@@ -122,17 +126,36 @@ const AddRating = ({
       review: "",
       rating: 0,
     },
-    validate: yupResolver(ratingSchema),
+    validate: yupResolver(isSubmitted ? ratingSchema2 : ratingSchema),
   });
   const onClose = () => {
     status !== "success" && form.reset();
     close();
   };
-  const isSubmitted = value?.find((val) => val.proj === projIdEnc);
+
   const formSubmit = async (values: any) => {
+    if (!form.values.review) {
+      onClose();
+      return;
+    }
     setStatus("pending");
-    await addRating({ ...values, projIdEnc: params?.slug });
-    setValue((prev: any) => [...prev, { ...values, proj: projIdEnc }]);
+    if (isSubmitted) {
+      await addRating({
+        projIdEnc: params?.slug,
+        rating: isSubmitted?.rating,
+        review: form.values?.review,
+      });
+      const udpatedData = value?.map((val) => {
+        if (val.proj === projIdEnc) {
+          return { ...val, review: form.values?.review };
+        }
+        return val;
+      });
+      setValue(udpatedData);
+    } else {
+      await addRating({ ...values, projIdEnc: params?.slug });
+      setValue((prev: any) => [...prev, { ...values, proj: projIdEnc }]);
+    }
     setStatus("success");
   };
   const isMobile = useMediaQuery(`(max-width: 750px)`);
@@ -153,124 +176,29 @@ const AddRating = ({
       onClose={onClose}
       centered
       title="Add Ratings"
-      size={isMobile ? "100%" : session ? "xl" : "35%"}
+      size={isMobile ? "100%" : session ? "55%" : "35%"}
     >
-      <div className="relative">
-        {(!session || status === "success" || isSubmitted) && (
-          <Close close={onClose} className="absolute top-3 right-1" />
-        )}
-        {session ? (
-          status === "success" || isSubmitted ? (
-            <Success
-              close={onClose}
-              text={form.values.review || isSubmitted?.review}
-              rating={form.values.rating || isSubmitted?.rating}
-            />
-          ) : (
-            <form
-              onSubmit={form.onSubmit(formSubmit)}
-              className="max-w-[100%] mt-[2%] mx-auto my-8   rounded-lg space-y-2 p-5"
-            >
-              <div className="flex md:justify-center items-center mb-[32px] flex-col">
-                <Rating
-                  classNames={{
-                    starSymbol: S.star,
-                    symbolBody: S.star,
-                  }}
-                  emptySymbol={
-                    <IconSun className="w-[45px] h-[45px]  md:w-[70px] md:h-[70px]" />
-                  }
-                  fullSymbol={
-                    <RatingStar
-                      fill="#FFD600"
-                      className="w-[45px] h-[45px]  md:w-[70px] md:h-[70px]"
-                    />
-                  }
-                  {...form.getInputProps("rating")}
-                />
-
-                <p className="text-[#F00] text-xl italic font-normal leading-[23.784px] mt-5">
-                  {form.errors.rating}
-                </p>
-              </div>
-
-              <h2 className="text-[#4D6677] text-2xl not-italic font-bold leading-[23.784px]  !mb-[24px]">
-                Add your feedback for {projName} Project !
-              </h2>
-
-              <div className=" gap-4 ">
-                <div className="flex-1">
-                  <Textarea
-                    size="lg"
-                    name="review"
-                    w={"100%"}
-                    h={"100%"}
-                    id="review"
-                    className={clsx(
-                      " rounded-[10px]   placeholder:!text-[#4D6677]  placeholder:!text-2xl italic font-medium leading-[23.784px] ",
-                      !form.errors.review &&
-                        "border-solid border-[#737579] border "
-                    )}
-                    placeholder="Start typing here"
-                    radius={"10px"}
-                    rows={4}
-                    // maxLength={200}
-                    {...form.getInputProps("review")}
-                    onBlur={(e) => handleTrimAndReplace(e, "review", form)}
-                  />
-                </div>
-                <Button
-                  loading={status === "pending"}
-                  type="submit"
-                  className="inline-flex items-center justify-center rounded-md !text-[20px] font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 !bg-[#0073C6] text-white mt-6"
-                >
-                  Submit
-                </Button>
-              </div>
-            </form>
-          )
-        ) : (
-          <LoginPopup type="RATING" />
-        )}
-      </div>
-    </Modal>
-  );
-};
-
-const Success = ({ text, rating }: any) => {
-  return (
-    <div className="px-5 py-8">
-      <h1 className="text-[#001F35] text-4xl not-italic font-semibold leading-[normal] mb-[20px]">
-        Congratulations 🎉
-      </h1>
-      <p className="text-[#202020] text-2xl not-italic font-medium leading-[normal] mb-[30px]">
-        Your rating has been submitted successfully!
-      </p>
-      <div className="inline-flex flex-col justify-center items-start gap-[19px] px-4 py-[15px] rounded bg-[#cae9ff4d] w-full">
-        <div className="flex md:justify-center items-center ">
-          <Rating
-            value={rating}
-            readOnly
-            classNames={{
-              starSymbol: S.star,
-              symbolBody: S.star,
-            }}
-            emptySymbol={
-              <IconSun className="w-[45px] h-[45px]  md:w-[70px] md:h-[70px]" />
-            }
-            fullSymbol={
-              <RatingStar
-                fill="#FFD600"
-                className="w-[45px] h-[45px]  md:w-[70px] md:h-[70px]"
+      <FormProvider form={form}>
+        <div className="relative">
+          {(!session || status === "success" || isSubmitted) && (
+            <Close close={onClose} className="absolute top-3 right-1" />
+          )}
+          {session ? (
+            status === "success" || isSubmitted ? (
+              <Success
+                close={onClose}
+                projIdEnc={projIdEnc}
+                projName={projName}
+                formSubmit={formSubmit}
               />
-            }
-          />
+            ) : (
+              <RatingForm projName={projName} formSubmit={formSubmit} />
+            )
+          ) : (
+            <LoginPopup type="RATING" />
+          )}
         </div>
-
-        <p className="text-black text-xl not-italic font-medium leading-8 tracking-[0.8px] ml-2">
-          {text}
-        </p>
-      </div>
-    </div>
+      </FormProvider>
+    </Modal>
   );
 };

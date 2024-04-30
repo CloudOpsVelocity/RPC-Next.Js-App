@@ -1,3 +1,3 @@
 import { createFormContext } from "@mantine/form";
-const [RatingProvider, useRatingContext, useForm] = createFormContext<any>();
-export { RatingProvider, useRatingContext, useForm };
+const [FormProvider, useFormContext, useForm] = createFormContext<any>();
+export { FormProvider, useFormContext, useForm };
