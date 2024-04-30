@@ -7,9 +7,17 @@ interface ReadMoreProps {
   text: string;
   maxLines?: number;
   title: string;
+  showProjName?: boolean;
+  builderName?: string;
 }
 
-const ReadMore: React.FC<ReadMoreProps> = ({ text, maxLines = 4, title }) => {
+const ReadMore: React.FC<ReadMoreProps> = ({
+  text,
+  maxLines = 4,
+  title,
+  showProjName = true,
+  builderName,
+}) => {
   const [{ expanded }, setReadMore] = useAtom(readMoreAtom);
 
   const handleReadMoreClick = () => {
@@ -19,6 +27,8 @@ const ReadMore: React.FC<ReadMoreProps> = ({ text, maxLines = 4, title }) => {
       content: text,
       type: "content",
       title: title,
+      showProjName: showProjName,
+      ...(builderName && { builderName }),
     }));
   };
 

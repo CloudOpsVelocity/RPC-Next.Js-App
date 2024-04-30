@@ -49,12 +49,13 @@ export default function Message() {
         </svg>{" "}
         <span className="text-[#242424] text-lg not-italic font-medium leading-[normal]">
           Please check your{" "}
-          <Link
-            href={"/profile"}
+          <a
+            href={"/my-profile"}
+            target="_blank"
             className="!text-[#0073C6] text-lg italic font-semibold leading-[normal] !underline"
           >
             Dashboard
-          </Link>
+          </a>
           {"   "}
           for {dynamicText} Project
         </span>

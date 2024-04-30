@@ -110,8 +110,8 @@ export default function ProjectDetails({
               Address
             </span>
           </p>
-          <p className="text-[#00487C] text-xl not-italic font-semibold leading-8">
-            {builderAddress} sdfsdf dfdf
+          <p className="text-[#00487C] text-xl not-italic font-semibold leading-8 pl-2">
+            {builderAddress}
           </p>
         </div>
       </div>

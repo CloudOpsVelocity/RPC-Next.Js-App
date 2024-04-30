@@ -9,13 +9,18 @@ import { amenitiesGroupList } from "@/app/images/commonSvgs";
 import React from "react";
 import Close from "./button/close";
 function ProjectDrawer({ projName }: { projName: string }) {
-  const [{ expanded, content, type, title, showProjName }, setReadMore] =
-    useAtom(readMoreAtom);
+  const [
+    { expanded, content, type, title, showProjName, builderName },
+    setReadMore,
+  ] = useAtom(readMoreAtom);
   const handleReadMoreClick = () => {
-    setReadMore((prev) => ({ ...prev, expanded: !prev.expanded }));
+    setReadMore((prev) => ({
+      ...prev,
+      expanded: false,
+      builderName: "",
+    }));
   };
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
-
   return (
     <>
       <Drawer
@@ -36,10 +41,10 @@ function ProjectDrawer({ projName }: { projName: string }) {
       >
         <div className="mt-4 flex justify-between mb-8">
           <h1 className="uppercase text-[24px] lg:text-[32px] font-[600] text-[#001F35] pl-[57px] max-w-[950px]">
-            {title}{" "}
+            {builderName ? "About Builder" : title}{" "}
             {showProjName && (
               <span className="text-[#148B16] font-[700] uppercase">
-                {projName}
+                {builderName || projName}
               </span>
             )}
           </h1>

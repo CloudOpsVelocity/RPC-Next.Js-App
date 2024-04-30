@@ -9,6 +9,8 @@ type Props = {
   id?: string;
   type?: "prop" | "proj";
   className?: string;
+  showProjName?: boolean;
+  builderName?: string;
 };
 
 export default function About({
@@ -18,6 +20,8 @@ export default function About({
   id,
   type,
   className,
+  showProjName,
+  builderName,
 }: Props) {
   return (
     <div
@@ -35,7 +39,13 @@ export default function About({
           {projName}
         </span>{" "}
       </h1>
-      <ReadMore text={content} maxLines={4} title={heading} />
+      <ReadMore
+        text={content}
+        maxLines={4}
+        title={heading}
+        showProjName={showProjName}
+        builderName={builderName}
+      />
     </div>
   );
 }

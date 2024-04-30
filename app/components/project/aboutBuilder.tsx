@@ -13,9 +13,7 @@ type Props = {
 
 export default function AboutBuilder({ id, type = "proj" }: Props) {
   const { data } = useBuilder({ id, y: "N", type });
-  console.log(data);
   const nzData = normalizeData(data, type);
-  console.log(nzData);
   return (
     <div className="w-[90%] scroll-mt-[220px]  mb-[5%]" id="aboutBuilder">
       <div className="w-full justify-between items-center ">
@@ -26,11 +24,13 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
               About Builder
             </h1>
             <p className=" text-[#148B16] italic text-[20px] lg:text-[26px] font-[700]">
-              {nzData.ceoName}
+              {nzData.companyName}
             </p>
           </div>
 
-          <Image src={nzData.logo} width={130} height={130} alt="logo" />
+          {nzData.logo && (
+            <Image src={nzData.logo} width={130} height={130} alt="logo" />
+          )}
         </div>
 
         <div className="rounded-[20px] mt-[1%] flex justify-between items-center bg-[#FFF] shadow-md w-[100%] mb-[2%] lg:w-[50%] p-[1%] ">
@@ -63,10 +63,11 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
         </div>
         <About
           id="builder_vision"
-          heading=""
+          heading={""}
           projName={""}
+          builderName={nzData.companyName}
           content={nzData.vission}
-          className="!mb-[12px] text-[#202020] text-2xl not-italic font-medium leading-[normal] tracking-[0.96px]"
+          className="!mb-[12px] text-[#202020] text-2xl not-italic font-medium leading-[normal] tracking-[0.96px] w-full"
         />
 
         <p className=" text-[#212C33] text-[22px] lg:text-[24px] font-[500]  italic ">
@@ -97,6 +98,7 @@ function normalizeData(data: any, type: string) {
       ceoName: data?.data?.ceoName,
       logo: data?.data?.logoUrl,
       vission: data?.data?.vision,
+      companyName: data?.data?.companyName,
     };
   } else {
     return {
@@ -108,6 +110,7 @@ function normalizeData(data: any, type: string) {
       ceoName: data?.ceoName,
       logo: data?.data?.logoUrl,
       vission: data?.data?.vision,
+      companyName: data?.data?.companyName,
     };
   }
 }

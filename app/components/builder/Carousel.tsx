@@ -89,7 +89,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
               width={300}
               height={212}
             />
-            {type == "proj" && (
+            {type == "proj" && cardData.reraStatus === "Recieved" && (
               <p className="absolute top-[1px] left-[0.8px]">
                 <Image src={"/r.svg"} alt="rera" width={100} height={100} />
               </p>
@@ -143,7 +143,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
               </p>
             )}
 
-            <p className="text-[#565D70]  not-italic font-semibold leading-[normal] tracking-[0.56px]">
+            <p className="text-[#565D70]  not-italic font-semibold leading-[normal] tracking-[0.56px] min-h-[54px]">
               {cardData.address} {`${cardData.localityName} `}
               {`${cardData.cityName} `}
               {`${cardData.stateName ?? ""} `}

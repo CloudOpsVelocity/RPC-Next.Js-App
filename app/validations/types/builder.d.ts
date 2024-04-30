@@ -22,6 +22,7 @@ export interface Data {
   completedProject: number;
   email: string;
   mobile: number;
+  logoUrl: string | null;
 }
 
 export interface BuilderProject {

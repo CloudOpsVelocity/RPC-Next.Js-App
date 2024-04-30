@@ -43,4 +43,34 @@ function formatDateDDMMYYYY(inputDate: string | undefined): string {
   const formattedDate = `${day}/ ${month}/ ${year}`;
   return formattedDate;
 }
-export { formatDate, formatDateDDMMYYYY };
+
+function convertDateToMonthYear(dateString: string): string {
+  // Split the date string into day, month, and year
+  const parts: string[] = dateString.split("/");
+  const day: number = parseInt(parts[0], 10);
+  const month: number = parseInt(parts[1], 10);
+  const year: number = parseInt(parts[2], 10);
+
+  // Define month names array
+  const monthNames: string[] = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  // Convert the month number to month name
+  const monthName: string = monthNames[month - 1];
+
+  // Return the formatted date string
+  return `${monthName}, ${year}`;
+}
+export { formatDate, formatDateDDMMYYYY, convertDateToMonthYear };

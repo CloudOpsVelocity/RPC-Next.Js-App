@@ -1,4 +1,5 @@
 import { builderPageHomeSvg } from "@/app/images/commonSvgs";
+import { convertDateToMonthYear } from "@/app/utils/date";
 import { Data } from "@/app/validations/types/builder";
 import Image from "next/image";
 import React from "react";
@@ -9,7 +10,7 @@ export default function TopProfileBlock({
   ceoName,
   companyName,
   companyStartDate,
-  logo,
+  logoUrl,
 }: Data) {
   return (
     <div className="w-full flex justify-between items-center bg-gradient-to-r  from-[#E0EBFF] /0 via-[#F0F6FF]/46  to-[#C9E8FF]/100 ">
@@ -27,9 +28,10 @@ export default function TopProfileBlock({
             <Image
               alt="builder"
               src={
-                logo ??
+                `${logoUrl}?v=${Math.random()}` ??
                 "https://d1l03fubsuphsh.cloudfront.net/staticmedia-images-icons/builderpage/builder-noimage.png"
               }
+              className="object-contain w-[150px] h-[150px]"
               width={158}
               height={158}
             />
@@ -39,7 +41,7 @@ export default function TopProfileBlock({
               {companyName}
             </p>
             <p className=" text-[#303A42] text-[14px] md:text-[16px] lg:text-[20px] font-[500] ">
-              since {companyStartDate}
+              since {convertDateToMonthYear(companyStartDate)}
             </p>
           </div>
         </div>

@@ -3,8 +3,6 @@ import About from "../project/about";
 import { callIconSvg } from "@/app/images/commonSvgs";
 import { Data } from "@/app/validations/types/builder";
 
-type Props = {};
-
 export default function ManagementBlock({
   companyName,
   ceoName,
@@ -55,7 +53,7 @@ export default function ManagementBlock({
           href={`tel:${officecontact}`}
           className="text-[16px] md:text-[24px] font-[600] text-[#00487C] underline"
         >
-          +91- {officecontact}
+          {officecontact}
         </a>
       </div>
 

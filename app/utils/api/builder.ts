@@ -11,10 +11,9 @@ export const getBuilderDetails = async (
       : `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/fetch/listing/builder/data?userId=${slug}`;
   try {
     const response = await fetch(url, {
-      next: { revalidate: 90 },
+      cache: "no-store",
     });
     const data: Main = await response.json();
-    console.log(data);
     return data as Main;
   } catch (error) {
     return error as Main;
