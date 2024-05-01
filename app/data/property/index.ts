@@ -288,8 +288,49 @@ export function generatePropertyDetails(
       }
       // Logic for Rowhouse property details
       break;
+    case "Independent House/Building":
+      propertyDetails = [
+        { title: "Unit Type", value: data.bhkName, Icon: Marble },
+        { title: "Property Type", value: data.propTypeName, Icon: Marble },
+        { title: "Phase", value: data.phaseName, Icon: Marble },
+        { title: "Tower", value: data.tower, Icon: TowerIcon },
+        { title: "Floor", value: data.atFloor, Icon: Marble },
+        { title: "Block", value: data.block, Icon: Block },
+        { title: "Unit Number", value: data.unitNumber, Icon: Marble },
+        { title: "Facing", value: data.facingName, Icon: Marble },
+        {
+          title: "Super built-up Area",
+          value: `${data.sba} sq.ft`,
+          Icon: TotalLandArea,
+        },
+        {
+          title: "Carpet Area",
+          value: `${data.ca} sq.ft`,
+          Icon: TotalLandArea,
+        },
+      ];
+
+      if (cg === "R") {
+        propertyDetails.splice(2, 1);
+        if (availablityStatus === "R") {
+          // For Rent, Ready to Move
+          propertyDetails
+            .push
+            // Add Rent, Ready to Move specific details
+            ();
+        } else if (availablityStatus === "U") {
+          // For Rent, Under Construction
+          propertyDetails
+            .push
+            // Add Rent, Under Construction specific details
+            ();
+        }
+      } else if (cg === "S") {
+        // For Sale
+        // Add Sale specific details
+      }
+      break;
     default:
-      // Default property details
       break;
   }
 

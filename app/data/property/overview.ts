@@ -339,6 +339,70 @@ export function generatePropertyOverViewData(
       }
       // Logic for Rowhouse property details
       break;
+    case "Independent House/Building":
+      propertyDetails = [
+        { title: "Unit Type", value: data.bhkName, Icon: Others },
+        {
+          title: "Property Type",
+          value: data.propTypeName,
+          Icon: PropertyBuilding,
+        },
+        { title: "Phase", value: data.phaseName, Icon: PhaseIcon },
+        { title: "Ownership", value: data.ownershipName, Icon: OwnerShip },
+        {
+          title: "Availability Status",
+          value:
+            data.availablityStatus === "U"
+              ? "Under Construction"
+              : "Ready to Move",
+          Icon: Status,
+        },
+        { title: "Property Facing", value: data.facingName, Icon: Compass },
+        {
+          title: "Super built-up Area",
+          value: `${data.sba} sq.ft`,
+          Icon: TotalLandArea,
+        },
+        {
+          title: "Carpet Area",
+          value: `${data.ca} sq.ft`,
+          Icon: TotalLandArea,
+        },
+        {
+          title: "Flooring Type",
+          value: `${data.flooringType}`,
+          Icon: Marble,
+        },
+        {
+          title: "Furnishing",
+          value: `${data.furnshName}`,
+          Icon: Furnishing,
+        },
+      ];
+
+      if (cg === "R") {
+        propertyDetails.splice(2, 2);
+        propertyDetails.splice(3, 0, {
+          title: "Available For",
+          value: data.availavleFor,
+          Icon: Status,
+        });
+
+        if (availablityStatus === "R") {
+          // For Rent, Ready to Move
+          // propertyDetails.push();
+        } else if (availablityStatus === "U") {
+          // For Rent, Under Construction
+          // propertyDetails
+          //   .push
+          //   // Add Rent, Under Construction specific details
+          //   ();
+        }
+      } else if (cg === "S") {
+        // For Sale
+        // Add Sale specific details
+      }
+      break;
     default:
       break;
   }
