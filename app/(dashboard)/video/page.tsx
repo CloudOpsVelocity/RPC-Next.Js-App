@@ -1,7 +1,6 @@
 "use client";
-import { Image } from "@mantine/core";
 import React from "react";
-import NextImage from "next/image";
+import ReactPlayer from "react-player";
 type Props = { searchParams: { path: string } };
 export default function Page({ searchParams: { path } }: Props) {
   // const handleDownload = () => {
@@ -34,7 +33,7 @@ export default function Page({ searchParams: { path } }: Props) {
       const url = URL.createObjectURL(blob);
       const downloadLink = document.createElement("a");
       downloadLink.href = url;
-      downloadLink.download = "floor_plan.jpg"; // Set the filename with extension
+      downloadLink.download = "floor_plan.mp4"; // Set the filename with extension
       document.body.appendChild(downloadLink);
       downloadLink.click();
       document.body.removeChild(downloadLink);
@@ -74,9 +73,18 @@ export default function Page({ searchParams: { path } }: Props) {
   //   });
   // };
   return (
-    <div className="flex justify-center items-center h-[100vh] ">
+    <div className="flex justify-center items-center h-[100vh] flex-col">
+      {/* <div className="max-w-[200px]">
+        <ButtonProgress
+          text={{
+            init: "Download Video",
+            loading: "Downloading Video...",
+            done: "Downloaded Video",
+          }}
+        />
+      </div> */}
       <button
-        className="inline-flex flex-col items-center justify-center gap-2.5 p-3 rounded-[10px] bg-[#0073C6] text-white text-lg not-italic font-bold leading-[normal] tracking-[0.96px] absolute top-[10%] right-[27%]"
+        className="inline-flex flex-col items-center justify-center gap-2.5 p-3 rounded-[10px] bg-[#0073C6] text-white text-lg not-italic font-bold leading-[normal] tracking-[0.96px] absolute top-[10%] right-[25%]"
         onClick={(e) => {
           e.preventDefault();
           handleDownload();
@@ -84,16 +92,14 @@ export default function Page({ searchParams: { path } }: Props) {
       >
         DownLoad Video
       </button>
-      <Image
-        radius="md"
-        src={`${process.env.NEXT_PUBLIC_IMG_BASE}${path}`}
-        height={650}
-        width={700}
-        w="auto"
-        fit="contain"
-        alt="post"
-        component={NextImage}
-      />
+      <div className="shadow-2xl">
+        <ReactPlayer
+          url={`${process.env.NEXT_PUBLIC_IMG_BASE}${path}`}
+          width="auto"
+          height="550px"
+          controls
+        />
+      </div>
     </div>
   );
 }

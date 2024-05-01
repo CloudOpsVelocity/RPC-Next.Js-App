@@ -40,11 +40,17 @@ const imageUrlParser = (originalUrl: string) => {
 
   if (imagesIndex !== -1) {
     const imagePath = urlParts.slice(imagesIndex + 1).join("/");
-
-    const modifiedUrl = `${
-      process.env.NEXT_PUBLIC_URL
-    }/image?path=/images/${imagePath}?v=${Math.random()}`;
-
+    const isVideo = /\.mp4$/.test(imagePath);
+    let modifiedUrl;
+    if (isVideo) {
+      modifiedUrl = `${
+        process.env.NEXT_PUBLIC_URL
+      }/video?path=/images/${imagePath}?v=${Math.random()}`;
+    } else {
+      modifiedUrl = `${
+        process.env.NEXT_PUBLIC_URL
+      }/image?path=/images/${imagePath}?v=${Math.random()}`;
+    }
     return modifiedUrl;
   }
 
