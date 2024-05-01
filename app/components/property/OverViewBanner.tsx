@@ -164,7 +164,7 @@ const PriceBreakUp = ({
                       value={
                         key === "security"
                           ? Number(otherPrice[key]) *
-                            Number(otherPrice.securityMonth)
+                            Number(otherPrice.securityMonth ?? 1)
                           : key === "clubHouseCharge" &&
                             otherPrice.clubHouseCharge === "A"
                           ? "Lifetime"
