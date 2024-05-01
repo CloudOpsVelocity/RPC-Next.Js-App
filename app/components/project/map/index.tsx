@@ -183,7 +183,7 @@ const LeafMap: React.FC<{
             {selected.split("_").join(" ")} Nearby
           </h1>
           <div className="flex gap-2 mt-3 flex-wrap gap-x-5 ">
-            {mapData[selected].map((item: any, index: any) => (
+            {mapData[selected].slice(-8).map((item: any, index: any) => (
               <MapCard
                 key={index}
                 {...item}
