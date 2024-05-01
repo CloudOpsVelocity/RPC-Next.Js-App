@@ -119,7 +119,9 @@ const MiddleSection = ({
       {selectedFloor?.floorPlanUrl ? (
         <div className="w-full flex justify-center items-center">
           <TransformWrapper>
-            <ImageContainer url={selectedFloor?.floorPlanUrl} />
+            <ImageContainer
+              url={`${selectedFloor?.floorPlanUrl}?v=${Math.random()}`}
+            />
           </TransformWrapper>
         </div>
       ) : (

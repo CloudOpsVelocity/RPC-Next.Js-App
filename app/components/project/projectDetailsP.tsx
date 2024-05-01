@@ -10,14 +10,13 @@ import {
 } from "@/app/images/commonSvgs";
 import ProjBasicDetails from "@/app/components/project/projBasicDetails";
 import PropertyTypeDetailsCrad from "@/app/components/project/propertyTypeDetailsCrad";
-import React, { useState } from "react";
+import React from "react";
 import { PhaseList } from "@/app/validations/types/project";
-import { useQuery } from "react-query";
-import { getProjectWiseOverView } from "@/app/utils/api/project";
 import usePhaseWiseOverview from "@/app/hooks/usePhaseWiseOverview";
-import { formatDate, formatDateDDMMYYYY } from "@/app/utils/date";
-import useUnitTypes from "@/app/hooks/useUnitTypes";
+import { formatDateDDMMYYYY } from "@/app/utils/date";
 import { isSingleLetterOrNumber } from "@/app/utils/letters";
+import { sqftToAcres } from "@/app/utils/landarea";
+import NoProperties from "./notfound";
 type Props = {
   data: PhaseList[];
   slug: string;
@@ -57,7 +56,6 @@ export default function ProjectDetailsP({ projName }: Props) {
             </p>
             <div className=" flex justify-start items-start flex-wrap gap-[10px] mt-1 sm:mt-0">
               {PhaseOverview?.map((phase: any, index: any) => {
-                console.log(phase);
                 return (
                   <Button
                     key={phase.phaseId}
@@ -79,9 +77,11 @@ export default function ProjectDetailsP({ projName }: Props) {
           </>
         )}
       </div>
-
+      {orderedPropertyTypes?.length === 0 && (
+        <NoProperties phase="1" className={"mb-6"} />
+      )}
       {phaseList?.length > 1 && (
-        <div className="flex justify-start items-start flex-wrap w-[80%] ">
+        <div className="flex justify-start items-start flex-wrap w-[80%]">
           {selectedPhase && (
             <>
               <ProjBasicDetails
@@ -102,14 +102,22 @@ export default function ProjectDetailsP({ projName }: Props) {
                 key="landArea"
                 icon={<TotalLandArea />}
                 title="Land Area"
-                value={`${selectedPhase.landArea} sq.ft.`}
+                value={
+                  selectedPhase.landArea
+                    ? `${sqftToAcres(selectedPhase.landArea).toFixed(2)} Acers`
+                    : null
+                }
                 className={styles.box}
               />
               <ProjBasicDetails
                 key="reraStatus"
                 icon={<SecurityIcon />}
                 title="RERA STATUS"
-                value={selectedPhase.rerastatus}
+                value={
+                  selectedPhase.rerastatus === "Not Applied"
+                    ? "Upcoming"
+                    : selectedPhase.rerastatus
+                }
                 className={styles.box}
               />
               {selectedPhase.reraId && (
@@ -118,7 +126,7 @@ export default function ProjectDetailsP({ projName }: Props) {
                   icon={<IdIcon />}
                   title={
                     selectedPhase.rerastatus === "Applied"
-                      ? "Acknowledgement No"
+                      ? "Acknowledgement Number"
                       : "RERA ID"
                   }
                   value={selectedPhase.reraId}

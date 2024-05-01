@@ -3,7 +3,7 @@ import React from "react";
 type props = {
   icon: any;
   title: string;
-  value: string | number;
+  value?: string | number | null;
   className?: string;
 };
 

@@ -25,7 +25,7 @@ export const Success = ({ projIdEnc, projName, formSubmit }: any) => {
       <p className="text-[#202020] text-2xl not-italic font-medium leading-[normal] mb-[30px]">
         Your rating has been submitted successfully!
       </p>
-      <div className="inline-flex flex-col justify-center items-start gap-[19px] px-4 py-[15px] rounded bg-[#cae9ff4d] w-full">
+      <div className="inline-flex flex-col justify-center items-start gap-[19px] px-4 py-[15px] rounded bg-[#cae9ff4d] ">
         <div className="flex md:justify-center items-center ">
           <Rating
             value={form.values.rating || isSubmitted?.rating}
@@ -64,10 +64,14 @@ export const Success = ({ projIdEnc, projName, formSubmit }: any) => {
 
 export const RatingForm = ({ projName, formSubmit, isSubmitted }: any) => {
   const form = useFormContext();
+  console.log(isSubmitted);
   return (
     <form
       onSubmit={form.onSubmit(formSubmit)}
-      className="max-w-[100%] mt-[2%] mx-auto my-8   rounded-lg space-y-2 p-5"
+      className={clsx(
+        "max-w-[100%] mt-[2%] mx-auto my-8   rounded-lg space-y-2 p-5",
+        isSubmitted?.rating && "!p-0 !mt-7"
+      )}
     >
       {!isSubmitted && (
         <div className="flex md:justify-center items-center mb-[32px] flex-col">

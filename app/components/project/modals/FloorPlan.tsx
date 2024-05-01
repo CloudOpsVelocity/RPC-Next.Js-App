@@ -931,7 +931,7 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
         data?.floorPlanUrl ? (
           <Image
             // @ts-ignore
-            src={data?.floorPlanUrl}
+            src={`${data?.floorPlanUrl}?v=${Math.random()}`}
             alt="Floor Plan"
             height={350}
             width={800}
@@ -1001,7 +1001,10 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
                   >
                     <Image
                       // @ts-ignore
-                      src={eachObj?.floorPlanUrl ?? ImgNotAvail}
+                      src={
+                        eachObj?.floorPlanUrl + "?v=" + Math.random() ??
+                        ImgNotAvail + "?v=" + Math.random()
+                      }
                       alt="Floor Plan"
                       width={57}
                       height={37}

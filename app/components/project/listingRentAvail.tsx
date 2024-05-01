@@ -31,8 +31,8 @@ export default function ListingRentAvail({
         Properties Today!"
       </p>
       <div className="flex  items-center gap-[28px] sm:gap-[58px] mt-[35px] flex-wrap">
-        <Card type="sell" s={s} r={r} projName={projName} />
-        <Card type="rent" s={s} r={r} projName={projName} />
+        <Card type="sell" s={s} r={r} projName={projName} block={s === "0"} />
+        <Card type="rent" s={s} r={r} projName={projName} block={r === "0"} />
       </div>
     </div>
   );
@@ -43,16 +43,19 @@ const Card = ({
   r,
   s,
   projName,
+  block,
 }: {
   type: "sell" | "rent";
   r: string;
   s: string;
   projName: string;
+  block: boolean;
 }) => {
   return (
     <div
       className={clsx(
-        " sm:h-[85px] shadow-[0px_4px_30px_0px_rgba(0,0,0,0.15)] rounded-[31px] relative cursor-pointer"
+        " sm:h-[85px] shadow-[0px_4px_30px_0px_rgba(0,0,0,0.15)] rounded-[31px] relative cursor-pointer",
+        block && "cursor-not-allowed"
       )}
     >
       <AvailListSideSvg type={type} />
