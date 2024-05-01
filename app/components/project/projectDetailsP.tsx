@@ -78,7 +78,13 @@ export default function ProjectDetailsP({ projName }: Props) {
         )}
       </div>
       {orderedPropertyTypes?.length === 0 && (
-        <NoProperties phase="1" className={"mb-6"} />
+        <NoProperties
+          phase={
+            phaseList?.find((phase: any) => phase.phaseId == currentPhase)
+              ?.phaseName as any
+          }
+          className={"mb-6"}
+        />
       )}
       {phaseList?.length > 1 && (
         <div className="flex justify-start items-start flex-wrap w-[80%]">
