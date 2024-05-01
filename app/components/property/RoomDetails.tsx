@@ -1,6 +1,4 @@
 "use client";
-import { projectprops } from "@/app/data/projectDetails";
-import Button from "@/app/elements/button";
 import {
   AgreementDuration,
   AvailableFor,
@@ -184,6 +182,21 @@ const OtherDetails = ({
   ispetFriendly,
   availavleFor,
 }: Main) => {
+  const data = [
+    ownershipName,
+    possassionDate,
+    ageofBuilding,
+    availableFrom,
+    flooringType,
+    availablityStatus,
+    agrementduration,
+    cg,
+    noticemonth,
+    propTypeName,
+    approvedByName,
+    ispetFriendly,
+    availavleFor,
+  ];
   return (
     <div
       className="w-[90%] mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] px-[53px] py-[39px]"
@@ -294,33 +307,41 @@ const OtherDetails = ({
   );
 };
 const UnitBlock = ({ data }: { data: Main }) => {
+  const dto = generatePropertyDetails(
+    data,
+    data.propTypeName,
+    data.cg,
+    data.availablityStatus
+  );
   return (
-    <div
-      className="w-[90%] mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] px-[53px] py-[39px]"
-      id="propertyDetails "
-    >
-      <h1 className={style.heading.h1}>Unit Details</h1>
+    dto.length > 0 && (
+      <div
+        className="w-[90%] mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] px-[53px] py-[39px]"
+        id="propertyDetails "
+      >
+        <h1 className={style.heading.h1}>Unit Details</h1>
 
-      <p className={style.heading.p}>
-        unit details including BHK, PHASE, TOWER,...etc
-      </p>
+        <p className={style.heading.p}>
+          unit details including BHK, PHASE, TOWER,...etc
+        </p>
 
-      <div className="flex justify-start items-start flex-wrap   ">
-        {generatePropertyDetails(
-          data,
-          data.propTypeName,
-          data.cg,
-          data.availablityStatus
-        ).map(({ value, Icon, title }) => (
-          <RoomBasicDetails
-            icon={<Icon />}
-            title={title}
-            value={value}
-            className="mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]"
-          />
-        ))}
+        <div className="flex justify-start items-start flex-wrap   ">
+          {generatePropertyDetails(
+            data,
+            data.propTypeName,
+            data.cg,
+            data.availablityStatus
+          ).map(({ value, Icon, title }) => (
+            <RoomBasicDetails
+              icon={<Icon />}
+              title={title}
+              value={value}
+              className="mr-[3%] mb-[1%] p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8]"
+            />
+          ))}
+        </div>
       </div>
-    </div>
+    )
   );
 };
 const PlotBlock = ({ data }: { data: Main }) => {
