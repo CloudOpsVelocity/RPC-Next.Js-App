@@ -1,4 +1,5 @@
 "use client";
+import { getQueryParamClient } from "@/app/hooks/custom/useRedirect";
 import { ForgotPass } from "@/app/images/commonSvgs";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
@@ -21,6 +22,7 @@ export default function ForgotSucess() {
 }
 
 const Countdown = ({ initialCount = 5, redirectPath = "/" }) => {
+  const queryParam = getQueryParamClient();
   const router = useRouter();
   const [timeRemaining, setTimeRemaining] = useState({
     minutes: 0,
@@ -42,7 +44,7 @@ const Countdown = ({ initialCount = 5, redirectPath = "/" }) => {
           } else {
             clearInterval(interval);
             setTimerRunning(false);
-            router.push("/login");
+            router.push("/login?" + queryParam.query);
             return prevTime;
           }
         });
