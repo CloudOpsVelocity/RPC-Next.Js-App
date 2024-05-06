@@ -28,7 +28,6 @@ export default function Feature({
                 <Image
                   width={20}
                   height={20}
-                  className=""
                   alt="Checked"
                   className="max-w-[20px] max-h-[20px] mt-4"
                   src={"/abc/Checked.png"}
