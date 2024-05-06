@@ -44,7 +44,7 @@ const Countdown = ({ initialCount = 5, redirectPath = "/" }) => {
           } else {
             clearInterval(interval);
             setTimerRunning(false);
-            router.push("/login?" + queryParam.query);
+            router.push("/login" + queryParam.query);
             return prevTime;
           }
         });
