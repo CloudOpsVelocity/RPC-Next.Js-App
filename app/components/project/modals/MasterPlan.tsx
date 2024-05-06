@@ -66,7 +66,7 @@ export default function MasterPlanPopup({ url }: { url: string }) {
                   // fit="fill"
                   src={url}
                   // component={NextImage}
-                  mah={750}
+                  mah={700}
                   // w="100%"
                   fit="contain"
                   alt="master plan"

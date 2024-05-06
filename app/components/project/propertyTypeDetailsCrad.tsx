@@ -112,7 +112,10 @@ export default function PropertyTypeDetailsCrad({
     }
   };
   return (
-    <div className="flex flex-col justify-start items-start min-h-[235px] w-[100%] max-w-[359px] lg:max-w-[510px] rounded-[24px] shadow-md pr-[2%] pl-[1%] mt-[70px] bg-gradient-to-l from-[#EFF5FF] /50 to-[#F2FAFF]/50 mb-[2%] ">
+    <div
+      className="flex flex-col justify-start items-start min-h-[235px] w-[100%] max-w-[359px] lg:max-w-[510px] rounded-[24px] shadow-md pr-[2%] pl-[1%] mt-[70px] bg-gradient-to-l from-[#EFF5FF] /50 to-[#F2FAFF]/50 mb-[2%] cursor-pointer"
+      onClick={() => updateValues(phase, getPropId(propertyType as string))}
+    >
       <div className="flex justify-between items-start w-full ">
         <div className="max-w-[90px] lg:max-w-[115px] w-full h-[90px] lg:h-[115px] border-solid border-1 border-[#FFF] rounded-full bg-[#c9daee] relative bottom-[50px] lg:bottom-[60px] mb-[-40px]">
           <Image
@@ -168,10 +171,7 @@ export default function PropertyTypeDetailsCrad({
           )}
         </div>
 
-        <button
-          onClick={() => updateValues(phase, getPropId(propertyType as string))}
-          className="text-[16px] lg:text-[18px] text-[#0073C6] font-[600] underline mb-[2%] cursor-pointer mt-[28px]"
-        >
+        <button className="text-[16px] lg:text-[18px] text-[#0073C6] font-[600] underline mb-[2%] cursor-pointer mt-[28px]">
           View Floor Plans
         </button>
       </div>
