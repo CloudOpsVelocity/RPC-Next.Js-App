@@ -57,7 +57,7 @@ export default function BuildersBlock({
               .map((builder, index) => {
                 const logo =
                   builder.logo === "null"
-                    ? "https://d1l03fubsuphsh.cloudfront.net/staticmedia-images-icons/builderpage/builder-noimage.png"
+                    ? `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/builderpage/builder-noimage.png`
                     : builder.logo;
                 return (
                   <Carousel.Slide key={index}>

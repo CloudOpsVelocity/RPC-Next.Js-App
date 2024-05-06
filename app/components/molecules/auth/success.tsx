@@ -28,9 +28,7 @@ export default function Success() {
           Your account has been created successfully
         </p>
         <Image
-          src={
-            "https://d1l03fubsuphsh.cloudfront.net/staticmedia-images-icons/login-signup/congratulationslogin-signup.gif"
-          }
+          src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/login-signup/congratulationslogin-signup.gif`}
           alt="success"
           width={200}
           height={200}

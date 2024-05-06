@@ -47,7 +47,7 @@ export default function ProjectLoans({
                   <Image
                     src={
                       BankDetailsList?.get(bank.bankid)?.url ??
-                      "https://d1l03fubsuphsh.cloudfront.net/staticmedia-images-icons/project-detail/Bank-projectproperty.png"
+                      `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/Bank-projectproperty.png`
                     }
                     alt={bank.bankName}
                     width={100}

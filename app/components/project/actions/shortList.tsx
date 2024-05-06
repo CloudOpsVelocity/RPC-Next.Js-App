@@ -9,6 +9,7 @@ import React from "react";
 import { useShortlistAndCompare } from "@/app/hooks/storage";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import clsx from "clsx";
+import useDynamicProj from "@/app/hooks/project/useDynamic";
 
 export default function ShortList() {
   const { data: session } = useSession();
@@ -18,7 +19,8 @@ export default function ShortList() {
   const isItemInShortlist =
     shortlistedItems.length > 0 &&
     shortlistedItems.some((item) => item.id === slug && item.status === "Y");
-
+  const userProjData = useDynamicProj();
+  console.log({ userProjData });
   const onAddingShortList = () => {
     if (session) {
       toggleShortlist({

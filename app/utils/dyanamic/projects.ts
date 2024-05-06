@@ -25,7 +25,6 @@ export function setPropertyValues(data: any, propCgId: number): any {
       return {
         unitNumber: data?.unitNumber,
         bhkName: data?.bhkName,
-        towerName: data?.towerName,
         floor: data?.floor?.toString(),
         facingName: data?.facingName,
         superBuildUparea: data?.superBuildUparea,
@@ -44,7 +43,6 @@ export function setPropertyValues(data: any, propCgId: number): any {
       return {
         facingName: data?.facingName,
         bhkName: data?.bhkName,
-        towerName: data?.towerName,
         unitNumber: data?.unitNumber,
         superBuildUparea: data?.superBuildUparea,
         caretarea: data?.caretarea,
@@ -61,7 +59,6 @@ export function setPropertyValues(data: any, propCgId: number): any {
       return {
         facingName: data?.facingName,
         bhkName: data?.bhkName,
-        towerName: data?.towerName,
         unitNumber: data?.unitNumber,
         superBuildUparea: data?.superBuildUparea,
         caretarea: data?.caretarea,
@@ -72,6 +69,7 @@ export function setPropertyValues(data: any, propCgId: number): any {
         gardenArea: data?.gardenArea,
         parkingArea: data?.parkingArea,
         terraceArea: data?.terraceArea,
+        plotArea: data?.plotArea.toString(),
       };
       break;
     case projectprops.plot:

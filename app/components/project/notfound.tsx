@@ -10,7 +10,7 @@ const NoProperties = ({
   return (
     <div
       className={clsx(
-        "flex items-center gap-4 p-2.5 bg-[#E9FFE9] max-w-[47.5%]",
+        "inline-flex items-center gap-4 p-2.5 bg-[#E9FFE9] ",
         className
       )}
     >
@@ -26,7 +26,7 @@ const NoProperties = ({
           fill="#148B16"
         />
       </svg>
-      <p className="text-[#242424] text-[26px] not-italic font-medium leading-[normal] ">
+      <p className="text-[#242424] text-[24px] not-italic font-medium leading-[normal] ">
         Currently, no units are available in {phase}. Stay tuned!
         <br /> Thank you for your patience.
       </p>

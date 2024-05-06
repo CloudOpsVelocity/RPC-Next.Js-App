@@ -1,5 +1,3 @@
-import { Labrada } from "next/font/google";
-
 export const topics = [
   { label: "Overview", id: "overview" },
   { label: "Listings Available", id: "listings" },

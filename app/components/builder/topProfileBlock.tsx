@@ -29,7 +29,7 @@ export default function TopProfileBlock({
               alt="builder"
               src={
                 `${logoUrl}?v=${Math.random()}` ??
-                "https://d1l03fubsuphsh.cloudfront.net/staticmedia-images-icons/builderpage/builder-noimage.png"
+                `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/builderpage/builder-noimage.png`
               }
               className="object-contain w-[150px] h-[150px]"
               width={158}

@@ -4,7 +4,7 @@ export default function NotFound() {
   return (
     <div className=" h-screen flex justify-center items-center flex-col pb-10 ">
       <Image
-        src="https://d1l03fubsuphsh.cloudfront.net/staticmedia-images-icons/page-not-found/pagenotfound.png"
+        src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/page-not-found/pagenotfound.png`}
         width={800}
         height={800}
         alt="not found"

@@ -92,7 +92,6 @@ function FloorPlanModal({ propCgId, data, projName }: Props) {
     handleSearch(key);
   };
   const [o, {}] = useSubFloorPlanPopup();
-
   return (
     <>
       <Modal
@@ -286,11 +285,12 @@ const LeftSection = ({ propCgId, data }: Props) => {
             maxDropdownHeight={200}
             {...getInputProps("bhkName")}
             onChange={(value) => handleOnChange(value as string, "bhkName")}
-            classNames={{ input: S.input, label: S.label }}
+            classNames={{ input: S.input, label: S.label, option: S.option }}
             rightSection={<DropDownIcon />}
           />
         )}
-        {propCgId != projectprops.plot && (
+        {(propCgId === projectprops.apartment ||
+          propCgId === projectprops.villament) && (
           <Select
             key={useId()}
             w={"full"}
@@ -303,7 +303,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             maxDropdownHeight={200}
             {...getInputProps("towerName")}
             onChange={(value) => handleOnChange(value as string, "towerName")}
-            classNames={{ input: S.input, label: S.label }}
+            classNames={{ input: S.input, label: S.label, option: S.option }}
             rightSection={<DropDownIcon />}
           />
         )}
@@ -314,7 +314,12 @@ const LeftSection = ({ propCgId, data }: Props) => {
             <Select
               key={useId()}
               w={"full"}
-              mt="md"
+              mt={
+                propCgId == projectprops.apartment &&
+                propCgId != projectprops.plot
+                  ? "md"
+                  : "0px"
+              }
               label="Select Block"
               className="!w-[46%]"
               placeholder="-- select --"
@@ -326,7 +331,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
               maxDropdownHeight={200}
               {...getInputProps("block")}
               onChange={(value) => handleOnChange(value as string, "block")}
-              classNames={{ input: S.input, label: S.label }}
+              classNames={{ input: S.input, label: S.label, option: S.option }}
               rightSection={<DropDownIcon />}
             />
           )}
@@ -335,7 +340,12 @@ const LeftSection = ({ propCgId, data }: Props) => {
           <Select
             key={useId()}
             w={"full"}
-            mt="md"
+            mt={
+              propCgId == projectprops.rowHouse ||
+              propCgId == projectprops.villa
+                ? "0px"
+                : "md"
+            }
             label={`${
               propCgId == projectprops.rowHouse ||
               propCgId == projectprops.villa
@@ -353,7 +363,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             maxDropdownHeight={200}
             {...getInputProps("floor")}
             onChange={(value) => handleOnChange(value as string, "floor")}
-            classNames={{ input: S.input, label: S.label }}
+            classNames={{ input: S.input, label: S.label, option: S.option }}
             rightSection={<DropDownIcon />}
           />
         )}
@@ -370,7 +380,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
           maxDropdownHeight={200}
           {...getInputProps("unitNumber")}
           onChange={(value) => handleOnChange(value as string, "unitNumber")}
-          classNames={{ input: S.input, label: S.label }}
+          classNames={{ input: S.input, label: S.label, option: S.option }}
           rightSection={<DropDownIcon />}
         />
 
@@ -390,7 +400,12 @@ const LeftSection = ({ propCgId, data }: Props) => {
           maxDropdownHeight={200}
           {...getInputProps("facingName")}
           onChange={(value) => handleOnChange(value as string, "facingName")}
-          classNames={{ input: S.input, label: S.label, root: S.root }}
+          classNames={{
+            input: S.input,
+            label: S.label,
+            option: S.option,
+            root: S.root,
+          }}
           rightSection={<DropDownIcon />}
         />
 
@@ -409,7 +424,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             onChange={(value) =>
               handleOnChange(value as string, "superBuildUparea")
             }
-            classNames={{ input: S.input, label: S.label }}
+            classNames={{ input: S.input, label: S.label, option: S.option }}
             rightSection={<DropDownIcon />}
           />
         )}
@@ -419,7 +434,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             key={useId()}
             w={"full"}
             mt="md"
-            label="Carpet Area"
+            label="Select Carpet Area"
             className="!w-[46%]"
             placeholder="-- select --"
             data={getOptions("caretarea")}
@@ -427,13 +442,14 @@ const LeftSection = ({ propCgId, data }: Props) => {
             maxDropdownHeight={200}
             {...getInputProps("caretarea")}
             onChange={(value) => handleOnChange(value as string, "caretarea")}
-            classNames={{ input: S.input, label: S.label }}
+            classNames={{ input: S.input, label: S.label, option: S.option }}
             rightSection={<DropDownIcon />}
           />
         )}
 
         {propCgId != projectprops.apartment &&
-          propCgId != projectprops.plot && (
+          propCgId != projectprops.plot &&
+          getOptions("gardenArea").length > 0 && (
             <Select
               key={useId()}
               w={"full"}
@@ -441,20 +457,21 @@ const LeftSection = ({ propCgId, data }: Props) => {
               label="Select Garden Area"
               className="!w-[46%]"
               placeholder="-- select --"
-              data={getOptions("gardenArea")}
+              data={getOptions("gardenArea").filter((item) => item !== null)}
               searchable
               maxDropdownHeight={200}
               {...getInputProps("gardenArea")}
               onChange={(value) =>
                 handleOnChange(value as string, "gardenArea")
               }
-              classNames={{ input: S.input, label: S.label }}
+              classNames={{ input: S.input, label: S.label, option: S.option }}
               rightSection={<DropDownIcon />}
             />
           )}
 
         {propCgId != projectprops.apartment &&
-          propCgId != projectprops.plot && (
+          propCgId != projectprops.plot &&
+          getOptions("terraceArea").length > 0 && (
             <Select
               key={useId()}
               w={"full"}
@@ -469,13 +486,14 @@ const LeftSection = ({ propCgId, data }: Props) => {
               onChange={(value) =>
                 handleOnChange(value as string, "terraceArea")
               }
-              classNames={{ input: S.input, label: S.label }}
+              classNames={{ input: S.input, label: S.label, option: S.option }}
               rightSection={<DropDownIcon />}
             />
           )}
 
         {propCgId != projectprops.apartment &&
-          propCgId != projectprops.plot && (
+          propCgId != projectprops.plot &&
+          getOptions("parkingArea").length > 0 && (
             <Select
               key={useId()}
               w={"full"}
@@ -490,7 +508,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
               onChange={(value) =>
                 handleOnChange(value as string, "parkingArea")
               }
-              classNames={{ input: S.input, label: S.label }}
+              classNames={{ input: S.input, label: S.label, option: S.option }}
               rightSection={<DropDownIcon />}
             />
           )}
@@ -512,7 +530,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
               onChange={(value) =>
                 handleOnChange(value as string, "noOfCarParking")
               }
-              classNames={{ input: S.input, label: S.label }}
+              classNames={{ input: S.input, label: S.label, option: S.option }}
               rightSection={<DropDownIcon />}
             />
           )}
@@ -530,7 +548,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             maxDropdownHeight={200}
             {...getInputProps("parkingType")}
             onChange={(value) => handleOnChange(value as string, "parkingType")}
-            classNames={{ input: S.input, label: S.label }}
+            classNames={{ input: S.input, label: S.label, option: S.option }}
             rightSection={<DropDownIcon />}
           />
         )}
@@ -542,7 +560,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
               key={"Iweruhjksdfjk"}
               w={"full"}
               mt="md"
-              label="No: of Balcony"
+              label="Select Balcony"
               className="!w-[46%]"
               placeholder="-- select --"
               data={getOptions("totalNumberOfBalcony").filter(
@@ -554,7 +572,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
               onChange={(value) =>
                 handleOnChange(value as string, "totalNumberOfBalcony")
               }
-              classNames={{ input: S.input, label: S.label }}
+              classNames={{ input: S.input, label: S.label, option: S.option }}
               rightSection={<DropDownIcon />}
             />
           )}
@@ -564,7 +582,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             key={"324sdgsfgf"}
             w={"full"}
             mt="md"
-            label="No: of Bathroom"
+            label="Select Bathroom"
             className="!w-[46%]"
             placeholder="-- select --"
             data={getOptions("totalNumberofBathroom")}
@@ -574,7 +592,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             onChange={(value) =>
               handleOnChange(value as string, "totalNumberofBathroom")
             }
-            classNames={{ input: S.input, label: S.label }}
+            classNames={{ input: S.input, label: S.label, option: S.option }}
             rightSection={<DropDownIcon />}
           />
         )}
@@ -595,28 +613,29 @@ const LeftSection = ({ propCgId, data }: Props) => {
               onChange={(value) =>
                 handleOnChange(value as string, "totalBalconySize")
               }
-              classNames={{ input: S.input, label: S.label }}
+              classNames={{ input: S.input, label: S.label, option: S.option }}
               rightSection={<DropDownIcon />}
             />
           )}
 
-        {propCgId == projectprops.plot && (
-          <Select
-            key={useId()}
-            w={"full"}
-            mt="md"
-            label="Select Plot Area"
-            className="!w-[46%]"
-            placeholder="-- select --"
-            data={getOptions("plotArea")}
-            searchable
-            maxDropdownHeight={200}
-            {...getInputProps("plotArea")}
-            onChange={(value) => handleOnChange(value as string, "plotArea")}
-            classNames={{ input: S.input, label: S.label }}
-            rightSection={<DropDownIcon />}
-          />
-        )}
+        {propCgId == projectprops.plot ||
+          (propCgId == projectprops.villa && (
+            <Select
+              key={useId()}
+              w={"full"}
+              mt="md"
+              label="Select Plot Area"
+              className="!w-[46%]"
+              placeholder="-- select --"
+              data={getOptions("plotArea")}
+              searchable
+              maxDropdownHeight={200}
+              {...getInputProps("plotArea")}
+              onChange={(value) => handleOnChange(value as string, "plotArea")}
+              classNames={{ input: S.input, label: S.label, option: S.option }}
+              rightSection={<DropDownIcon />}
+            />
+          ))}
 
         {propCgId == projectprops.plot && (
           <Select
@@ -631,7 +650,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             maxDropdownHeight={200}
             {...getInputProps("length")}
             onChange={(value) => handleOnChange(value as string, "length")}
-            classNames={{ input: S.input, label: S.label }}
+            classNames={{ input: S.input, label: S.label, option: S.option }}
             rightSection={<DropDownIcon />}
           />
         )}
@@ -649,7 +668,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
             maxDropdownHeight={200}
             {...getInputProps("width")}
             onChange={(value) => handleOnChange(value as string, "width")}
-            classNames={{ input: S.input, label: S.label }}
+            classNames={{ input: S.input, label: S.label, option: S.option }}
             rightSection={<DropDownIcon />}
           />
         )}
@@ -788,7 +807,7 @@ const RightSection = ({ propCgId }: Props) => {
           </div>
         )}
 
-        {propCgId != projectprops.plot && (
+        {propCgId != projectprops.plot && data.parkingType && (
           <div className="flex items-center space-x-3">
             {propertyDetailsSvgs.parkingType}
             <p className="text-[#4D6677] text-[14px] font-[500]">
@@ -826,18 +845,19 @@ const RightSection = ({ propCgId }: Props) => {
           </div>
         )}
 
-        {propCgId == projectprops.plot && (
-          <div className="flex items-center space-x-3">
-            {propertyDetailsSvgs.plotArea}
-            <p className="text-[#4D6677] text-[14px] font-[500]">
-              Plot Area{" "}
-              <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
-                {" "}
-                {data.plotArea} sq.ft
-              </span>
-            </p>
-          </div>
-        )}
+        {propCgId == projectprops.plot ||
+          (propCgId == projectprops.villa && (
+            <div className="flex items-center space-x-3">
+              {propertyDetailsSvgs.plotArea}
+              <p className="text-[#4D6677] text-[14px] font-[500]">
+                Plot Area{" "}
+                <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
+                  {" "}
+                  {data.plotArea} sq.ft
+                </span>
+              </p>
+            </div>
+          ))}
 
         {propCgId == projectprops.plot && (
           <div className="flex items-center space-x-3">
