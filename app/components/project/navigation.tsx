@@ -86,7 +86,6 @@ export default function Navigation({
     }
     setTimeout(() => setIsScrolling(false), 3000);
   }
-
   const conditionsArray = [
     {
       key: "ratings",
