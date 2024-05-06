@@ -37,16 +37,13 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
   const { toggleShortlist, shortlistedItems } = useShortlistAndCompare();
   const [, { open: openS }] = usePopShortList();
   const reqId = type === "proj" ? cardData.projIdEnc : cardData.propIdEnc;
-  const isItemInShortlist =
-    shortlistedItems.length > 0 &&
-    shortlistedItems.some((item) => item.id === reqId && item.status === "Y");
 
   const onAddingShortList = (projId: string) => {
     if (session) {
       mutate && mutate({ id: projId, type: ct as Pick<CardProps, "ct">["ct"] });
       toggleShortlist({
         id: reqId,
-        status: isItemInShortlist ? "N" : "Y",
+        status: cardData.shortListed ? "N" : "Y",
         source: type as GlobalPageType["types"],
       });
     } else {
