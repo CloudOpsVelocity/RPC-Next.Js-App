@@ -16,16 +16,14 @@ export default function ShortList() {
   const { slug } = useParams<{ slug: string }>();
   const { toggleShortlist, shortlistedItems } = useShortlistAndCompare();
   const [, { open }] = usePopShortList();
-  const isItemInShortlist =
-    shortlistedItems.length > 0 &&
-    shortlistedItems.some((item) => item.id === slug && item.status === "Y");
+
   const userProjData = useDynamicProj();
-  console.log({ userProjData });
+
   const onAddingShortList = () => {
     if (session) {
       toggleShortlist({
         id: slug,
-        status: isItemInShortlist ? "N" : "Y",
+        status: userProjData?.data?.shortListed ? "N" : "Y",
       });
     } else {
       open();
@@ -37,12 +35,14 @@ export default function ShortList() {
       onClick={() => onAddingShortList()}
       className={clsx(
         "flex justify-center items-center gap-1 p-2 rounded-lg border-[0.8px] border-solid border-[#0073C6] bg-[#fafafa] text-[#0073C6] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px]",
-        isItemInShortlist &&
+        userProjData?.data?.shortListed &&
           "bg-[#E4F4FF] text-[#148B16] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px]"
       )}
     >
-      <ShortListIcon color={isItemInShortlist ? "#148B16" : "#0073C6"} />
-      {isItemInShortlist ? "Added to" : "Add to"} Shortlist
+      <ShortListIcon
+        color={userProjData?.data?.shortListed ? "#148B16" : "#0073C6"}
+      />
+      {userProjData?.data?.shortListed ? "Added to" : "Add to"} Shortlist
     </button>
   );
 }

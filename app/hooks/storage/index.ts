@@ -38,20 +38,20 @@ export const useShortlistAndCompare = (): HookReturnValue => {
     callback: (updatedItems: Item[]) => void
   ): void => {
     const updatedItems = [...globalData[itemName]];
-    const itemIndex = updatedItems.findIndex(
-      (existingItem) => existingItem.id === item.id
-    );
+    // const itemIndex = updatedItems.findIndex(
+    //   (existingItem) => existingItem.id === item.id
+    // );
 
-    if (itemIndex === -1) {
-      // Item doesn't exist, add it
-      updatedItems.push({ ...item, status: "Y" });
-    } else {
-      // Item exists, update its status
-      updatedItems[itemIndex].status =
-        updatedItems[itemIndex].status === "Y" ? "N" : "Y";
-    }
+    // if (itemIndex === -1) {
+    //   // Item doesn't exist, add it
+    //   updatedItems.push({ ...item, status: "Y" });
+    // } else {
+    //   // Item exists, update its status
+    //   updatedItems[itemIndex].status =
+    //     updatedItems[itemIndex].status === "Y" ? "N" : "Y";
+    // }
 
-    setGlobalData({ ...globalData, [itemName]: updatedItems });
+    // setGlobalData({ ...globalData, [itemName]: updatedItems });
     callback(updatedItems);
   };
 
