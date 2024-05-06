@@ -185,6 +185,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           projName={data.projectName}
           lat={data.lat}
           lng={data.lang}
+          builderId={data.builderId}
         />
         <ProjectDrawer projName={data.projectName} />
         <LoginPopup />

@@ -19,15 +19,19 @@ type Props = {
   projName?: string;
   content: string;
   data?: any;
+  mutate?: ({ id }: { id: string; type: "builder" | "proj" }) => void;
+  ct?: "builder" | "proj";
 };
 
 type CardProps = {
   type: string;
   projName?: string;
   cardData?: any;
+  mutate?: ({ id }: { id: string; type: "builder" | "proj" }) => void;
+  ct: "builder" | "proj";
 };
 
-export function ProjectCard({ type, cardData }: CardProps) {
+export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
   const [, { open }] = useReqCallPopup();
   const { data: session } = useSession();
   const { toggleShortlist, shortlistedItems } = useShortlistAndCompare();
@@ -37,8 +41,9 @@ export function ProjectCard({ type, cardData }: CardProps) {
     shortlistedItems.length > 0 &&
     shortlistedItems.some((item) => item.id === reqId && item.status === "Y");
 
-  const onAddingShortList = () => {
+  const onAddingShortList = (projId: string) => {
     if (session) {
+      mutate && mutate({ id: projId, type: ct as Pick<CardProps, "ct">["ct"] });
       toggleShortlist({
         id: reqId,
         status: isItemInShortlist ? "N" : "Y",
@@ -107,12 +112,12 @@ export function ProjectCard({ type, cardData }: CardProps) {
             <div className=" right-2 absolute ">
               <button
                 className="mt-[-30px] rounded-[10px] relative bottom-[35px] z-10 p-[8px] text-[#0073C6] text-[18px] font-[700] flex pl-[4px] justify-center items-center bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100"
-                onClick={() => onAddingShortList()}
+                onClick={() => onAddingShortList(cardData.projIdEnc)}
               >
                 <span className=" w-[24px] h-[24px] ">
-                  {isItemInShortlist ? Shorlisted : shortlistIconSvg}
+                  {cardData.shortListed === "Y" ? Shorlisted : shortlistIconSvg}
                 </span>
-                {isItemInShortlist ? "Shortlisted" : "Shortlist"}
+                {cardData.shortListed === "Y" ? "Shortlisted" : "Shortlist"}
               </button>
             </div>
           </div>
@@ -182,7 +187,15 @@ export function ProjectCard({ type, cardData }: CardProps) {
   );
 }
 
-const ProjectCarousel = ({ type, content, title, projName, data }: Props) => {
+const ProjectCarousel = ({
+  type,
+  content,
+  title,
+  projName,
+  data,
+  mutate,
+  ct,
+}: Props) => {
   return (
     data?.length > 0 && (
       <div className="w-[100%] mb-[5%]">
@@ -202,7 +215,13 @@ const ProjectCarousel = ({ type, content, title, projName, data }: Props) => {
             data?.map((project: any, index: number) => {
               return (
                 <CarouselSlide>
-                  <ProjectCard key={index} type={type} cardData={project} />
+                  <ProjectCard
+                    key={index}
+                    type={type}
+                    cardData={project}
+                    mutate={mutate}
+                    ct={ct ?? "builder"}
+                  />
                 </CarouselSlide>
               );
             })}

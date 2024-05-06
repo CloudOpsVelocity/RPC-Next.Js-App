@@ -128,6 +128,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             lat={projData?.lat}
             lng={projData?.lang}
             projId={data.propIdEnc}
+            builderId={projData?.builderId}
           />
         )}
 

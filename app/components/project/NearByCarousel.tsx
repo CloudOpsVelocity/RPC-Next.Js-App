@@ -8,13 +8,15 @@ export default function NearByCarousel({
   lat,
   lng,
   projId,
+  builderId,
 }: {
   projName: string;
   lat: string;
   lng: string;
   projId?: string;
+  builderId: number;
 }) {
-  const { data } = useNearby({ lat, lng, projId });
+  const { data, mutate } = useNearby({ lat, lng, projId, builderId });
   return (
     <div
       className="flex flex-col justify-start items-start w-[90%] mt-[5%] scroll-mt-[180px]"
@@ -30,6 +32,8 @@ export default function NearByCarousel({
             ? data.nearbyProj
             : []
         }
+        mutate={mutate}
+        ct="proj"
       />
 
       <ProjectCarousel
@@ -41,6 +45,8 @@ export default function NearByCarousel({
             ? data.builderProj
             : []
         }
+        mutate={mutate}
+        ct="builder"
       />
     </div>
   );
