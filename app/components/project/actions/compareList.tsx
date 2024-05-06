@@ -6,20 +6,20 @@ import React from "react";
 import { useShortlistAndCompare } from "@/app/hooks/storage";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import clsx from "clsx";
+import useDynamicProj from "@/app/hooks/project/useDynamic";
 
 export default function CompareList() {
   const { data: session } = useSession();
   const { slug } = useParams<{ slug: string }>();
   const { toggleCompare, compareItems } = useShortlistAndCompare();
   const [, { open }] = usePopShortList();
-  const isItemCompared =
-    compareItems.length > 0 &&
-    compareItems.some((item) => item.id === slug && item.status === "Y");
+  const { data, mutate } = useDynamicProj();
   const onAddingCompare = () => {
     if (session) {
+      mutate(3);
       toggleCompare({
         id: slug,
-        status: isItemCompared ? "N" : "Y",
+        status: data?.compareAdded ? "N" : "Y",
       });
     } else {
       open();
@@ -31,12 +31,12 @@ export default function CompareList() {
       onClick={() => onAddingCompare()}
       className={clsx(
         "flex justify-center items-center gap-1 p-2 rounded-lg border-[0.8px] border-solid border-[#0073C6] bg-[#fafafa] text-[#0073C6] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px] mt-5",
-        isItemCompared &&
+        data?.compareAdded &&
           "bg-[#E4F4FF] text-[#148B16] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px]"
       )}
     >
-      <ComparingListIcon color={isItemCompared ? "#148B16" : "#0073C6"} />
-      {isItemCompared ? "Added to" : "Add to"} Compare
+      <ComparingListIcon color={data?.compareAdded ? "#148B16" : "#0073C6"} />
+      {data?.compareAdded ? "Added to" : "Add to"} Compare
     </button>
   );
 }

@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useSession } from "next-auth/react";
+import { Old_Standard_TT } from "next/font/google";
 import { useParams } from "next/navigation";
-import { useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 
 export default function useDynamicProj() {
   const { data: Session } = useSession();
@@ -22,5 +23,37 @@ export default function useDynamicProj() {
     retry: false,
     enabled: !!Session,
   });
-  return { data, isLoading };
+  const queryClient = useQueryClient();
+  const updateTodo = async () => {};
+
+  const { mutate } = useMutation({
+    mutationFn: updateTodo,
+    // When mutate is called:
+    onMutate: async (data: number) => {
+      // Cancel any outgoing refetches
+      // (so they don't overwrite our optimistic update)
+      await queryClient.cancelQueries({ queryKey: ["dynamic", slug] });
+      // Snapshot the previous value
+      const previousTodos = queryClient.getQueryData(["dynamic", slug]);
+      // Optimistically update to the new value
+      queryClient.setQueryData(["dynamic", slug], (old: any) => {
+        return {
+          ...old,
+          ...(data === 2
+            ? { shortListed: old.shortListed === "Y" ? null : "Y" }
+            : { compareAdded: old.compareAdded === "Y" ? null : "Y" }),
+        };
+      });
+
+      // Return a context object with the snapshotted value
+      return { previousTodos };
+    },
+
+    // Always refetch after error or success:
+    onSettled: () => {
+      // queryClient.invalidateQueries({ queryKey: ["todos"] });
+    },
+  });
+
+  return { data, isLoading, mutate };
 }
