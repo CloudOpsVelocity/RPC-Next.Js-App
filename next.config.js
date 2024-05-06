@@ -10,6 +10,7 @@ const nextConfig = {
   images: {
     remotePatterns: [
       { hostname: "d1l03fubsuphsh.cloudfront.net" },
+      { hostname: "d2l0lb5gc1bw3t.cloudfront.net" },
       { hostname: "s3-media0.fl.yelpcdn.com" },
       { hostname: "assets.thesparksite.com" },
       { hostname: "res.cloudinary.com" },

@@ -24,15 +24,13 @@ export default function Feature({
         <ul className="list-inside mt-4  ml-[2%]">
           {data?.map((each, ind) => {
             return (
-              <li
-                key={ind}
-                className="flex items-center justify-start gap-[1%] mb-[1%] "
-              >
+              <li key={ind} className="  inline-flex gap-[1%] mb-[1%] ">
                 <Image
                   width={20}
                   height={20}
                   className=""
                   alt="Checked"
+                  className="max-w-[20px] max-h-[20px] mt-4"
                   src={"/abc/Checked.png"}
                 />
                 <p className="text-[20px] lg:text-[24px] m-0 text-[#212C33] font-semibold ">

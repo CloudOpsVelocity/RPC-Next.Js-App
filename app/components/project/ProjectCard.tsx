@@ -41,9 +41,10 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
   const onAddingShortList = (projId: string) => {
     if (session) {
       mutate && mutate({ id: projId, type: ct as Pick<CardProps, "ct">["ct"] });
+      console.log(cardData.shortListed);
       toggleShortlist({
         id: reqId,
-        status: cardData.shortListed ? "N" : "Y",
+        status: cardData.shortListed === "Y" ? "N" : "Y",
         source: type as GlobalPageType["types"],
       });
     } else {

@@ -88,7 +88,14 @@ export default function Navigation({
   }
 
   const conditionsArray = [
-    { key: "ratings", condtion: !!data?.status },
+    {
+      key: "ratings",
+      condtion:
+        data?.status &&
+        data?.reviewDataList?.filter((item: any) => item.userReview).length > 0
+          ? true
+          : false,
+    },
     { key: "brochure", condtion: isBrochure },
     { condtion: true, key: "overview" },
     { condtion: true, key: "listings" },

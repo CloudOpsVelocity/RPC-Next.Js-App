@@ -4703,10 +4703,10 @@ type Props = {
   name: string;
 };
 
-export const WhatsAppButton = ({ className, name }: Props) => {
+export const WhatsAppButton = ({ name }: Props) => {
   const encodedMessage = encodeURIComponent(
-    `Hi There, \n\nI am interested in the listing, ${name}, from your website. I would like to get more information, please.\n\nThank you.`
-  );
+    `Hello,\n\nI came across the project, ${name}, and I'm interested! Could you please provide more details about it? I'd love to know about the price, location, and any other relevant information.\n\nThank You!`
+);
 
   const whatsappLink = `https://api.whatsapp.com/send?phone=+918884440963&text=${encodedMessage}`;
 

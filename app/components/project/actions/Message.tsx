@@ -1,3 +1,4 @@
+import useDynamicProj from "@/app/hooks/project/useDynamic";
 import { useShortlistAndCompare } from "@/app/hooks/storage";
 import clsx from "clsx";
 import Link from "next/link";
@@ -7,24 +8,19 @@ import React from "react";
 export default function Message() {
   const { shortlistedItems, compareItems } = useShortlistAndCompare();
   const { slug } = useParams<{ slug: string }>();
-  const isItemShortlist =
-    shortlistedItems.length > 0 &&
-    shortlistedItems.some((item) => item.id === slug && item.status === "Y");
-  const isItemCompared =
-    compareItems.length > 0 &&
-    compareItems.some((item) => item.id === slug && item.status === "Y");
+  const { data } = useDynamicProj();
   const dynamicText = `${
-    (isItemCompared && isItemShortlist && "Shortlisted and Compared") ||
-    (isItemCompared && "Compared") ||
-    (isItemShortlist && "Shortlisted") ||
+    (data?.shortListed && data?.compareAdded && "Shortlisted and Compared") ||
+    (data?.compareAdded && "Compared") ||
+    (data?.shortListed && "Shortlisted") ||
     "Message"
   }`;
   return (
-    (isItemCompared || isItemShortlist) && (
+    (data?.compareAdded || data?.shortListed) && (
       <div
         className={clsx(
           "inline-flex items-center gap-2 p-1.5 rounded-lg bg-[#fff5c3] absolute -bottom-5 right-0 md:min-w-[520px]",
-          isItemCompared && isItemShortlist && "md:min-w-[670px]"
+          data?.compareAdded && data?.shortListed && "md:min-w-[670px]"
         )}
       >
         <svg
