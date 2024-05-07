@@ -269,6 +269,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
     setValues(prevObj);
     handleSearch(key);
   };
+
   return (
     <div className="col-span-1 w-full max-w-[392px] mr-[3%]  ">
       <div className="w-[100%] flex justify-between items-start flex-wrap gap-[5%]">
@@ -493,7 +494,8 @@ const LeftSection = ({ propCgId, data }: Props) => {
 
         {propCgId != projectprops.apartment &&
           propCgId != projectprops.plot &&
-          getOptions("parkingArea").length > 0 && (
+          getOptions("parkingArea").filter((item) => item !== "None").length >
+            0 && (
             <Select
               key={useId()}
               w={"full"}
@@ -798,6 +800,52 @@ const RightSection = ({ propCgId }: Props) => {
           </div>
         )}
 
+        {(propCgId == projectprops.villa ||
+          propCgId == projectprops.rowHouse ||
+          propCgId == projectprops.villament) &&
+          data.gardenArea && (
+            <div className="flex items-center space-x-3">
+              {propertyDetailsSvgs.caretarea}
+              <p className="text-[#4D6677] text-[14px] font-[500]">
+                Garden Area{" "}
+                <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
+                  {" "}
+                  {data.gardenArea} sq.ft
+                </span>
+              </p>
+            </div>
+          )}
+        {(propCgId == projectprops.villa ||
+          propCgId == projectprops.rowHouse ||
+          propCgId == projectprops.villament) &&
+          data.terraceArea && (
+            <div className="flex items-center space-x-3">
+              {propertyDetailsSvgs.caretarea}
+              <p className="text-[#4D6677] text-[14px] font-[500]">
+                Terrace Area{" "}
+                <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
+                  {" "}
+                  {data.terraceArea} sq.ft
+                </span>
+              </p>
+            </div>
+          )}
+        {(propCgId == projectprops.villa ||
+          propCgId == projectprops.rowHouse ||
+          propCgId == projectprops.villament) &&
+          data.parkingArea !== "None" && (
+            <div className="flex items-center space-x-3">
+              {propertyDetailsSvgs.parkingArea}
+              <p className="text-[#4D6677] text-[14px] font-[500]">
+                Parking Area{" "}
+                <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
+                  {" "}
+                  {data.parkingArea} sq.ft
+                </span>
+              </p>
+            </div>
+          )}
+
         {propCgId != projectprops.plot && (
           <div className="flex items-center space-x-3">
             {propertyDetailsSvgs.noOfCarParking}
@@ -805,7 +853,7 @@ const RightSection = ({ propCgId }: Props) => {
               Car Parking{" "}
               <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                 {" "}
-                {data.noOfCarParking}
+                {data.noOfCarParking ? data.noOfCarParking : "N/A"}
               </span>
             </p>
           </div>
@@ -1025,8 +1073,9 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
                     <Image
                       // @ts-ignore
                       src={
-                        eachObj?.floorPlanUrl + "?v=" + Math.random() ??
-                        ImgNotAvail + "?v=" + Math.random()
+                        eachObj?.floorPlanUrl
+                          ? `${eachObj?.floorPlanUrl}?v=${Math.random()}`
+                          : ImgNotAvail
                       }
                       alt="Floor Plan"
                       width={57}

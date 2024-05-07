@@ -101,7 +101,7 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
               width={300}
               height={212}
             />
-            {type == "proj" && (
+            {type == "proj" && cardData.rerastatus !== "Not Applied" && (
               <p className="absolute top-[1px] left-[0.8px]">
                 <Image src={"/r.svg"} alt="rera" width={100} height={100} />
               </p>

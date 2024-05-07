@@ -24,7 +24,10 @@ const nextConfig = {
       {
         hostname: "ak-d.tripcdn.com",
       },
-      { hostname: "getrightproperty-test-bucket.s3.ap-south-1.amazonaws.com" },
+      {
+        hostname:
+          "getrightproperty-test-bucket-new.s3.ap-south-1.amazonaws.com",
+      },
     ],
   },
   env: {

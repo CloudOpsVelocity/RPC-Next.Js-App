@@ -135,6 +135,7 @@ function LoginPopupForm({ closePopup }: { closePopup?: () => void }) {
             pathname: "/forgot",
             search: redirectQueryParam,
           }}
+          onClick={closePopup && closePopup}
           className="text-[14px] font-400 text-[#767270] text-right w-full cursor-pointer "
         >
           Forgot Password ?
@@ -156,6 +157,7 @@ function LoginPopupForm({ closePopup }: { closePopup?: () => void }) {
                 pathname: "/register",
                 search: redirectQueryParam,
               }}
+              onClick={closePopup && closePopup}
               className="text-[#0C7ACA] md:text-xl not-italic font-bold leading-[normal]"
             >
               SIGN UP
