@@ -21,7 +21,7 @@ export default function Feature({
           Key Features: Elegant Design, Spacious Layout, Stunning Views, Modern
           Amenities
         </p>
-        <ul className="list-inside mt-4  ml-[2%]">
+        <ul className="list-inside flex flex-col mt-4  ml-[2%]">
           {data?.map((each, ind) => {
             return (
               <li key={ind} className="  inline-flex gap-[1%] mb-[1%] ">
@@ -29,7 +29,7 @@ export default function Feature({
                   width={20}
                   height={20}
                   alt="Checked"
-                  className="max-w-[20px] max-h-[20px] mt-2.5"
+                  className="max-w-[20px] max-h-[20px] mt-[9px]"
                   src={"/abc/Checked.png"}
                 />
                 <p className="text-[20px] lg:text-[24px] m-0 text-[#212C33] font-semibold ">

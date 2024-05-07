@@ -21,8 +21,9 @@ function LoginPopup() {
         overlay: S.overlay,
       }}
       size={isMobile ? "100%" : "30%"}
+      zIndex={1000}
     >
-      <LoginPop />
+      <LoginPop close={close} />
     </Modal>
   );
 }

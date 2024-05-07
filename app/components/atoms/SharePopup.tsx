@@ -156,6 +156,8 @@ const Share = ({ shareUrl }: { shareUrl: string }) => {
           subject={title}
           body="body"
           className="Demo__some-network__share-button"
+          windowHeight={700}
+          windowWidth={1200}
         >
           {EmailIcon}
         </EmailShareButton>

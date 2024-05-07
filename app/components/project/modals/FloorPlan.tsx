@@ -535,23 +535,27 @@ const LeftSection = ({ propCgId, data }: Props) => {
             />
           )}
 
-        {propCgId == projectprops.apartment && (
-          <Select
-            key={"#sfgf"}
-            w={"full"}
-            mt="md"
-            label="Open/ Covered Parking"
-            className="!w-[46%]"
-            placeholder="-- select --"
-            data={getOptions("parkingType").filter((item) => item !== "None")}
-            searchable
-            maxDropdownHeight={200}
-            {...getInputProps("parkingType")}
-            onChange={(value) => handleOnChange(value as string, "parkingType")}
-            classNames={{ input: S.input, label: S.label, option: S.option }}
-            rightSection={<DropDownIcon />}
-          />
-        )}
+        {propCgId == projectprops.apartment &&
+          getOptions("parkingType").filter((item) => item !== "None").length >
+            0 && (
+            <Select
+              key={"#sfgf"}
+              w={"full"}
+              mt="md"
+              label="Open/ Covered Parking"
+              className="!w-[46%]"
+              placeholder="-- select --"
+              data={getOptions("parkingType").filter((item) => item !== "None")}
+              searchable
+              maxDropdownHeight={200}
+              {...getInputProps("parkingType")}
+              onChange={(value) =>
+                handleOnChange(value as string, "parkingType")
+              }
+              classNames={{ input: S.input, label: S.label, option: S.option }}
+              rightSection={<DropDownIcon />}
+            />
+          )}
 
         {propCgId != projectprops.plot &&
           getOptions("totalNumberOfBalcony").filter((item) => item !== "0")
@@ -618,24 +622,23 @@ const LeftSection = ({ propCgId, data }: Props) => {
             />
           )}
 
-        {propCgId == projectprops.plot ||
-          (propCgId == projectprops.villa && (
-            <Select
-              key={useId()}
-              w={"full"}
-              mt="md"
-              label="Select Plot Area"
-              className="!w-[46%]"
-              placeholder="-- select --"
-              data={getOptions("plotArea")}
-              searchable
-              maxDropdownHeight={200}
-              {...getInputProps("plotArea")}
-              onChange={(value) => handleOnChange(value as string, "plotArea")}
-              classNames={{ input: S.input, label: S.label, option: S.option }}
-              rightSection={<DropDownIcon />}
-            />
-          ))}
+        {(propCgId == projectprops.plot || propCgId == projectprops.villa) && (
+          <Select
+            key={useId()}
+            w={"full"}
+            mt="md"
+            label="Select Plot Area"
+            className="!w-[46%]"
+            placeholder="-- select --"
+            data={getOptions("plotArea")}
+            searchable
+            maxDropdownHeight={200}
+            {...getInputProps("plotArea")}
+            onChange={(value) => handleOnChange(value as string, "plotArea")}
+            classNames={{ input: S.input, label: S.label, option: S.option }}
+            rightSection={<DropDownIcon />}
+          />
+        )}
 
         {propCgId == projectprops.plot && (
           <Select
@@ -700,18 +703,19 @@ const RightSection = ({ propCgId }: Props) => {
           </div>
         )}
 
-        {data.towerNam && propCgId != projectprops.plot && (
-          <div className="flex items-center space-x-3">
-            {propertyDetailsSvgs.towerName}
-            <p className="text-[#4D6677] text-[14px] font-[500]">
-              Tower{" "}
-              <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
-                {" "}
-                {data.towerName}
-              </span>
-            </p>
-          </div>
-        )}
+        {(data.towerName && propCgId === projectprops.apartment) ||
+          (propCgId === projectprops.villament && (
+            <div className="flex items-center space-x-3">
+              {propertyDetailsSvgs.towerName}
+              <p className="text-[#4D6677] text-[14px] font-[500]">
+                Tower{" "}
+                <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
+                  {" "}
+                  {data.towerName}
+                </span>
+              </p>
+            </div>
+          ))}
 
         {data.block &&
           propCgId == projectprops.apartment &&

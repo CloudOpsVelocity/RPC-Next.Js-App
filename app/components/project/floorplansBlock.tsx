@@ -168,7 +168,6 @@ export default function FloorplansBlock({ projName, slug }: Props) {
       // types.length > 0 && setPropCgId(types[0]);
     }
   }, [projectUnitsData]);
-  console.log(projectUnitsData);
   if (isLoading) return <Loading />;
   return (
     <div className="w-[90%] scroll-mt-[180px] mb-[5%]" id="floorPlans">
@@ -299,11 +298,11 @@ export default function FloorplansBlock({ projName, slug }: Props) {
         </div>
 
         <div
-          className="   h-full md:h-[547px] w-full rounded-[14px] mt-[2%] border-solid border-[1px] border-[#92B2C8] bg-[#FFF] shadow-md flex flex-col-reverse md:flex-row justify-center items-center "
+          className="   h-full md:h-[547px] w-full rounded-[14px] mt-[2%] border-solid border-[1px] border-[#92B2C8] bg-[#FFF] shadow-md flex flex-col-reverse md:flex-row justify-center  "
           onClick={handleContainerClick}
         >
           {floorPlanType === "type" && (
-            <div className="w-full md:w-[50%] max-h-[456px] md:h-[547px] border-solid overflow-auto ">
+            <div className="w-full md:w-[50%] max-h-[456px] md:h-[540px]  md:max-h-[540px] border-solid overflow-auto ">
               {projectUnitsData?.length !== 0 ? (
                 projectUnitsData?.map((data: any, ind: number) => (
                   <FloorplanDetailsCard
@@ -327,13 +326,13 @@ export default function FloorplansBlock({ projName, slug }: Props) {
           )}
 
           {floorPlanType == "unit" && (
-            <div className="w-full md:w-[50%]  h-[456px] !md:h-[547px] border-solid overflow-auto ">
+            <div className="w-full md:w-[50%]  h-[456px] !md:h-[547px] border-solid overflow-auto pt-6">
               <Byunitblock propCgId={propCgId} data={projectUnitsData} />
             </div>
           )}
 
           {floorPlanType == "bhk" && propCgId != projectprops.plot && (
-            <div className="w-full md:w-[50%] max-h-[456px] md:h-[547px] border-solid overflow-auto">
+            <div className="w-full md:w-[50%] max-h-[456px] md:h-[540px]  md:max-h-[540px]  border-solid overflow-auto">
               <ByBhkBlock
                 propCgId={propCgId}
                 data={projectUnitsData}
@@ -344,7 +343,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
             </div>
           )}
 
-          <div className="w-full md:w-[50%] flex justify-end items-end flex-col p-[2%] shadow-inner md:shadow-none ">
+          <div className="w-full md:w-[50%] flex justify-center items-end flex-col h-full p-[2%] shadow-inner md:shadow-none ">
             <p
               className="text-[14px] font-[500] text-[#005DA0] "
               onClick={(e) => {
