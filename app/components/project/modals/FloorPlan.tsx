@@ -703,19 +703,19 @@ const RightSection = ({ propCgId }: Props) => {
           </div>
         )}
 
-        {(data.towerName && propCgId === projectprops.apartment) ||
-          (propCgId === projectprops.villament && (
-            <div className="flex items-center space-x-3">
-              {propertyDetailsSvgs.towerName}
-              <p className="text-[#4D6677] text-[14px] font-[500]">
-                Tower{" "}
-                <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
-                  {" "}
-                  {data.towerName}
-                </span>
-              </p>
-            </div>
-          ))}
+        {((data.towerName && propCgId === projectprops.apartment) ||
+          propCgId === projectprops.villament) && (
+          <div className="flex items-center space-x-3">
+            {propertyDetailsSvgs.towerName}
+            <p className="text-[#4D6677] text-[14px] font-[500]">
+              Tower{" "}
+              <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
+                {" "}
+                {data.towerName}
+              </span>
+            </p>
+          </div>
+        )}
 
         {data.block &&
           propCgId == projectprops.apartment &&

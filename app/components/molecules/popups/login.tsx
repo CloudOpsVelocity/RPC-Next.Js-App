@@ -32,7 +32,7 @@ export default function LoginPopup({
                 pathname: "/register",
                 search: redirectQueryParam,
               }}
-              onClick={close}
+              onClick={close && close}
               className="whitespace-nowrap text-xl md:text-[26px] font-[500] text-[#666]"
             >
               Sign Up
@@ -40,7 +40,7 @@ export default function LoginPopup({
           </div>
 
           <div>
-            <LoginPopupForm />
+            <LoginPopupForm closePopup={close && close} />
           </div>
         </div>
         <div className="relative"></div>

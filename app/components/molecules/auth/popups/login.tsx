@@ -47,7 +47,7 @@ interface Login {
   username: string | number;
   password: string;
 }
-function LoginPopupForm() {
+function LoginPopupForm({ closePopup }: { closePopup?: () => void }) {
   const [opened, { close }] = usePopShortList();
 
   const [state, setState] = useState<"idle" | "pending" | "success">("idle");
