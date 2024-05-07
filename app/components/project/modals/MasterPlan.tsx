@@ -6,9 +6,18 @@ import { imageUrlParser } from "@/app/utils/image";
 import Close from "../button/close";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 import S from "@/app/styles/ImgCarousel.module.css";
-export default function MasterPlanPopup({ url }: { url: string }) {
+import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
+import { useSession } from "next-auth/react";
+export default function MasterPlanPopup({
+  url,
+  onDownload,
+}: {
+  url: string;
+  onDownload: () => void;
+}) {
   const [opened, { open, close }] = useDisclosure(false);
   const isMobile = useMediaQuery(`(max-width: 750px`);
+
   return (
     <>
       <Modal
@@ -32,8 +41,7 @@ export default function MasterPlanPopup({ url }: { url: string }) {
             <div className="flex justify-center items-center gap-5">
               <a
                 className="flex justify-center items-center gap-1 p-2 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] rounded-[10px] bg-[#F3F7FF] text-[#0073C6] text-base not-italic font-semibold leading-[normal] tracking-[0.32px]"
-                target="_blank"
-                href={imageUrlParser(url || "")}
+                onClick={onDownload}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

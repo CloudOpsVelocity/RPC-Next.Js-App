@@ -5,6 +5,8 @@ import useBuilder from "@/app/hooks/useBuilder";
 import { Svg } from "../property/heading";
 import About from "./about";
 import Image from "next/image";
+import { TeleGramBlack } from "@/app/images/commonSvgs";
+import { convertDateToMonthYear } from "@/app/utils/date";
 
 type Props = {
   id: number;
@@ -13,24 +15,31 @@ type Props = {
 
 export default function AboutBuilder({ id, type = "proj" }: Props) {
   const { data } = useBuilder({ id, y: "N", type });
+  console.log(data);
   const nzData = normalizeData(data, type);
   return (
-    <div className="w-[90%] scroll-mt-[220px]  mb-[5%]" id="aboutBuilder">
-      <div className="w-full justify-between items-center ">
-        <div className="inline-flex  gap-[26px] justify-between  w-[100%] items-center">
+    <div
+      className="w-[90%] scroll-mt-[220px]  mb-[5%] rounded shadow-[0px_4px_17.6px_0px_rgba(146,178,200,0.40)] border-[0.5px] border-solid border-[#92B2C8] builderBg py-8 pl-5"
+      id="aboutBuilder"
+    >
+      <div className="w-full">
+        <div className=" gap-[26px] justify-start  w-[100%] items-center">
+          <h1 className=" text-[#023993] text-[24px] lg:text-[32px] font-[700] mb-4">
+            About Builder
+          </h1>
+
           {type === "prop" && Svg}
-          <div>
-            <h1 className=" text-[#023993] text-[24px] lg:text-[32px] font-[700]">
-              About Builder
-            </h1>
-            <p className=" text-[#148B16] italic text-[20px] lg:text-[26px] font-[700]">
+          <div className="inline-flex justify-end items-end ">
+            {nzData.logo && (
+              <Image src={nzData.logo} width={130} height={130} alt="logo" />
+            )}
+            <p className=" text-[#148B16] italic text-[20px] lg:text-[26px] font-[700] ml-3">
               {nzData.companyName}
+              <p className=" text-[#303A42] text-[14px] md:text-[16px] lg:text-[20px] font-[500] ">
+                since {convertDateToMonthYear(nzData.companyStartDate)}
+              </p>
             </p>
           </div>
-
-          {nzData.logo && (
-            <Image src={nzData.logo} width={130} height={130} alt="logo" />
-          )}
         </div>
 
         <div className="rounded-[20px] mt-[1%] flex justify-between items-center bg-[#FFF] shadow-md w-[100%] mb-[2%] lg:w-[50%] p-[1%] ">
@@ -67,17 +76,17 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
           projName={""}
           builderName={nzData.companyName}
           content={nzData.vission}
-          className="!mb-[12px] text-[#202020] text-2xl not-italic font-medium leading-[normal] tracking-[0.96px] w-full"
+          className="!mb-[29px] text-[#202020] text-2xl not-italic font-medium leading-[normal] w-full"
         />
 
-        <p className=" text-[#212C33] text-[22px] lg:text-[24px] font-[500]  italic ">
-          Builder Address{" "}
+        <p className="  text-[22px] lg:text-[24px]  text-black text-2xl not-italic font-semibold leading-[normal] inline-flex">
+          {TeleGramBlack} Builder Address{" "}
         </p>
-        <p className=" text-[#2A4C70] text-[18px] lg:text-[20px] font-[700] mt-[1%] italic mb-[14px] md:mb-[1%]">
+        <p className="  text-[18px] lg:text-[20px]  mt-[1%]  mb-[14px] text-[#242424] text-2xl italic font-medium leading-8 md:mb-[2%] ">
           {nzData.builderAddress}
         </p>
         <Link
-          className=" bg-[#0073C6] rounded-[10px] text-[#FFF] text-[18px] lg:text-[20px] font-[700] p-[10px]  "
+          className=" bg-[#0073C6] rounded-[4px] text-[#FFF] text-[18px] lg:text-[20px] font-[700] p-[10px]  "
           href={`/builder/${id}`}
         >
           View Builder Details
@@ -99,6 +108,7 @@ function normalizeData(data: any, type: string) {
       logo: data?.data?.logoUrl,
       vission: data?.data?.vision,
       companyName: data?.data?.companyName,
+      companyStartDate: data?.data?.companyStartDate,
     };
   } else {
     return {
@@ -111,6 +121,7 @@ function normalizeData(data: any, type: string) {
       logo: data?.data?.logoUrl,
       vission: data?.data?.vision,
       companyName: data?.data?.companyName,
+      companyStartDate: data?.data?.companyStartDate,
     };
   }
 }

@@ -1,4 +1,5 @@
 "use client";
+import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import { downLoadIcon, pdfFileIcon } from "@/app/images/commonSvgs";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
@@ -9,7 +10,7 @@ import toast from "react-hot-toast";
 
 const DownloadBroucher = ({ url }: { url: string }) => {
   const { data: session } = useSession();
-
+  const [, { open: LoginOpen }] = usePopShortList();
   const onButtonClick = () => {
     if (session) {
       const pdfUrl = url;
@@ -34,7 +35,11 @@ const DownloadBroucher = ({ url }: { url: string }) => {
     }
   };
   const handleDownload = () => {
-    window.open(`/pdf/${encodeURIComponent(url.split(".net")[1])}`, "_blank");
+    if (session) {
+      window.open(`/pdf/${encodeURIComponent(url.split(".net")[1])}`, "_blank");
+    } else {
+      LoginOpen();
+    }
 
     // fetch(url)
     //   .then((response) => {

@@ -22,6 +22,8 @@ import {
   useControls,
 } from "react-zoom-pan-pinch";
 import clsx from "clsx";
+import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
+import { useSession } from "next-auth/react";
 
 function CarouselModal({
   projName,
@@ -33,6 +35,29 @@ function CarouselModal({
   const [opened, { close }] = useSubFloorPlanPopup();
   const TRANSITION_DURATION = 200;
   const selectedFloor = useAtomValue(selectedFloorAtom);
+  const [, { open: LoginOpen }] = usePopShortList();
+  const { data: session } = useSession();
+  const handleDownload = async () => {
+    if (session) {
+      try {
+        const response = await fetch(selectedFloor?.floorPlanUrl);
+        console.log(response);
+        const blob = await response.blob();
+        const url = URL.createObjectURL(blob);
+        const downloadLink = document.createElement("a");
+        downloadLink.href = url;
+        downloadLink.download = "masterplan.jpg";
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+        URL.revokeObjectURL(url);
+      } catch (error) {
+        console.error("Error downloading image:", error);
+      }
+    } else {
+      LoginOpen();
+    }
+  };
   return (
     <>
       <Modal
@@ -52,13 +77,12 @@ function CarouselModal({
             Floor Plan
           </div>
           <div className="flex justify-center items-center gap-5">
-            <a
-              target="_blank"
-              href={imageUrlParser(selectedFloor?.floorPlanUrl)}
+            <button
+              onClick={handleDownload}
               className="text-white flex justify-center items-center gap-1 p-2 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] rounded-[10px] bg-[#0073c6]"
             >
               Download Floor Plan
-            </a>
+            </button>
             <SharePopup
               title="Share"
               url={imageUrlParser(selectedFloor?.floorPlanUrl)}

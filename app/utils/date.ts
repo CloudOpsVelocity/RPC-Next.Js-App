@@ -44,14 +44,28 @@ function formatDateDDMMYYYY(inputDate: string | undefined): string {
   return formattedDate;
 }
 
-function convertDateToMonthYear(dateString: string): string {
-  // Split the date string into day, month, and year
+function convertDateToMonthYear(dateString: string | undefined): string {
+  if (!dateString) {
+    return "Invalid Date";
+  }
+
   const parts: string[] = dateString.split("/");
+  if (parts.length !== 3) {
+    return "Invalid Date Format";
+  }
+
   const day: number = parseInt(parts[0], 10);
   const month: number = parseInt(parts[1], 10);
   const year: number = parseInt(parts[2], 10);
 
-  // Define month names array
+  if (isNaN(day) || isNaN(month) || isNaN(year)) {
+    return "Invalid Date";
+  }
+
+  if (month < 1 || month > 12 || day < 1 || day > 31) {
+    return "Invalid Date";
+  }
+
   const monthNames: string[] = [
     "January",
     "February",
@@ -67,10 +81,12 @@ function convertDateToMonthYear(dateString: string): string {
     "December",
   ];
 
-  // Convert the month number to month name
-  const monthName: string = monthNames[month - 1];
+  if (month < 1 || month > 12 || year < 0) {
+    return "Invalid Date";
+  }
 
-  // Return the formatted date string
+  const monthName: string = monthNames[month - 1];
   return `${monthName}, ${year}`;
 }
+
 export { formatDate, formatDateDDMMYYYY, convertDateToMonthYear };

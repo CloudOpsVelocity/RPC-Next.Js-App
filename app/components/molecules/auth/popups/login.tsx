@@ -20,6 +20,7 @@ import { signIn } from "next-auth/react";
 import handleTrimAndReplace from "@/app/utils/input/validations";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import CryptoJS from "crypto-js";
+import usePathToOrigin from "@/app/hooks/custom/useRedirect";
 const schema = yup.object().shape({
   username: yup
     .string()
@@ -91,7 +92,7 @@ function LoginPopupForm() {
     setState("success");
   };
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
-
+  const { redirectQueryParam } = usePathToOrigin();
   return (
     <Box maw={420} mx="auto">
       <form
@@ -130,7 +131,10 @@ function LoginPopupForm() {
         />
 
         <Link
-          href={"/forgot"}
+          href={{
+            pathname: "/forgot",
+            search: redirectQueryParam,
+          }}
           className="text-[14px] font-400 text-[#767270] text-right w-full cursor-pointer "
         >
           Forgot Password ?
@@ -148,7 +152,10 @@ function LoginPopupForm() {
           <p className="text-[#282828] md:text-xl not-italic font-normal leading-[normal] mb-3">
             Don&apos;t have an Account?{" "}
             <Link
-              href={"/register"}
+              href={{
+                pathname: "/register",
+                search: redirectQueryParam,
+              }}
               className="text-[#0C7ACA] md:text-xl not-italic font-bold leading-[normal]"
             >
               SIGN UP

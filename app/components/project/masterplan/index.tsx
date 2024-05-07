@@ -1,10 +1,9 @@
 "use client";
-import { PopupOpenSvg } from "@/app/images/commonSvgs";
-import { imageUrlParser } from "@/app/utils/image";
 
 import React from "react";
 import MasterPlanPopup from "../modals/MasterPlan";
-import Gallery from "../modals/Gallery";
+import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
+import { useSession } from "next-auth/react";
 
 export default function MasterPlan({
   projName,
@@ -13,7 +12,29 @@ export default function MasterPlan({
   projName: string;
   media: string;
 }) {
-  const url = imageUrlParser(media);
+  const [, { open: LoginOpen }] = usePopShortList();
+  const { data: session } = useSession();
+  const handleDownload = async () => {
+    if (session) {
+      try {
+        const response = await fetch(media);
+        console.log(response);
+        const blob = await response.blob();
+        const url = URL.createObjectURL(blob);
+        const downloadLink = document.createElement("a");
+        downloadLink.href = url;
+        downloadLink.download = "masterplan.jpg";
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+        URL.revokeObjectURL(url);
+      } catch (error) {
+        console.error("Error downloading image:", error);
+      }
+    } else {
+      LoginOpen();
+    }
+  };
   return (
     <div className="w-[90%] mb-[5%] scroll-mt-[180px] " id="masterPlan">
       <div className="flex justify-between w-full items-cente mb-[32px] flex-wrap">
@@ -31,17 +52,16 @@ export default function MasterPlan({
           </p>
         </div>
         <div className="h-full flex justify-center items-center ">
-          <a
+          <button
             className="inline-flex flex-col items-center justify-center gap-2.5 p-3 md:p-5 rounded-[10px] bg-[#0073C6] text-white md:text-2xl text-[16px] not-italic font-bold leading-[normal] tracking-[0.96px] max-h-[50%] mt-5 md:mt-0 h-[60px] uppercase"
-            href={url}
-            target="_blank"
+            onClick={handleDownload}
           >
             Download Master Plan
-          </a>
+          </button>
         </div>
       </div>
       <div className="relative">
-        <MasterPlanPopup url={media} />
+        <MasterPlanPopup url={media} onDownload={handleDownload} />
       </div>
     </div>
   );

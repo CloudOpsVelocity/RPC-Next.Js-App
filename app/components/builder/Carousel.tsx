@@ -89,11 +89,12 @@ export function ProjectCard({ type, cardData }: CardProps) {
               width={300}
               height={212}
             />
-            {type == "proj" && cardData.reraStatus === "Recieved" && (
-              <p className="absolute top-[1px] left-[0.8px]">
-                <Image src={"/r.svg"} alt="rera" width={100} height={100} />
-              </p>
-            )}
+            {(type == "proj" && cardData.reraStatus === "Recieved") ||
+              (cardData.reraStatus === "Applied" && (
+                <p className="absolute top-[1px] left-[0.8px]">
+                  <Image src={"/r.svg"} alt="rera" width={100} height={100} />
+                </p>
+              ))}
 
             <div className=" right-2 absolute ">
               <button

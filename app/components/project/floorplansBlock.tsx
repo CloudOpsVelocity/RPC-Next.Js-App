@@ -166,9 +166,9 @@ export default function FloorplansBlock({ projName, slug }: Props) {
     ) {
       setSelectedFloor(projectUnitsData[0]);
       // types.length > 0 && setPropCgId(types[0]);
-      console.log(types);
     }
   }, [projectUnitsData]);
+  console.log(projectUnitsData);
   if (isLoading) return <Loading />;
   return (
     <div className="w-[90%] scroll-mt-[180px] mb-[5%]" id="floorPlans">

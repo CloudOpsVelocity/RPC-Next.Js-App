@@ -845,19 +845,18 @@ const RightSection = ({ propCgId }: Props) => {
           </div>
         )}
 
-        {propCgId == projectprops.plot ||
-          (propCgId == projectprops.villa && (
-            <div className="flex items-center space-x-3">
-              {propertyDetailsSvgs.plotArea}
-              <p className="text-[#4D6677] text-[14px] font-[500]">
-                Plot Area{" "}
-                <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
-                  {" "}
-                  {data.plotArea} sq.ft
-                </span>
-              </p>
-            </div>
-          ))}
+        {(propCgId == projectprops.plot || propCgId == projectprops.villa) && (
+          <div className="flex items-center space-x-3">
+            {propertyDetailsSvgs.plotArea}
+            <p className="text-[#4D6677] text-[14px] font-[500]">
+              Plot Area{" "}
+              <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
+                {" "}
+                {data.plotArea} sq.ft
+              </span>
+            </p>
+          </div>
+        )}
 
         {propCgId == projectprops.plot && (
           <div className="flex items-center space-x-3">

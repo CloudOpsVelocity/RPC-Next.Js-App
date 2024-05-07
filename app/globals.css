@@ -103,3 +103,11 @@
 .leaflet-tooltip-top:before {
   border-top-color: #148b16 !important;
 }
+
+.builderBg {
+  background: linear-gradient(
+    282deg,
+    #eef7fe 0%,
+    rgba(245, 245, 245, 0.96) 100%
+  );
+}

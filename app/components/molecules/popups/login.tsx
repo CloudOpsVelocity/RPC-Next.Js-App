@@ -1,3 +1,4 @@
+"use client";
 import data from "@/app/data/auth";
 import { Toaster } from "react-hot-toast";
 import { TbBuilding } from "react-icons/tb";
@@ -5,7 +6,9 @@ import Logo from "../../atoms/Logo";
 import Login from "../auth/login";
 import Link from "next/link";
 import LoginPopupForm from "../auth/popups/login";
+import usePathToOrigin from "@/app/hooks/custom/useRedirect";
 export default function LoginPopup({ type = "C/S" }: { type?: string }) {
+  const { redirectQueryParam } = usePathToOrigin();
   return (
     <div
       className={`flex justify-center items-start w-full pt-[10%] ${
@@ -18,14 +21,20 @@ export default function LoginPopup({ type = "C/S" }: { type?: string }) {
         <div className="w-full  p-[10%] md:p-[2%] mt-6">
           <div className="w-full flex justify-center items-center gap-[5%] mb-[5%] ">
             <Link
-              href="/login"
+              href={{
+                pathname: "/login",
+                search: redirectQueryParam,
+              }}
               className="whitespace-nowrap text-xl md:text-[26px] text-[#148B16] font-bold border-solid border-b-2 border-green-600"
             >
               Log In
             </Link>
 
             <Link
-              href="/register"
+              href={{
+                pathname: "/register",
+                search: redirectQueryParam,
+              }}
               className="whitespace-nowrap text-xl md:text-[26px] font-[500] text-[#666]"
             >
               Sign Up
