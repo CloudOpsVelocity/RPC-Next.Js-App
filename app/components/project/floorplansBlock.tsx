@@ -1,5 +1,9 @@
 "use client";
-import { propertyDetailsTypes, projectprops } from "../../data/projectDetails";
+import {
+  propertyDetailsTypes,
+  projectprops,
+  BACKEND_PROP_TYPES,
+} from "../../data/projectDetails";
 import Button from "../../elements/button";
 import React, { useEffect, useState } from "react";
 import {
@@ -60,13 +64,15 @@ export default function FloorplansBlock({ projName, slug }: Props) {
 
   const types =
     selectedPhase &&
-    Object?.keys(selectedPhase.propTypeOverview).map((v) => {
-      if (selectedPhase?.propTypeOverview[v].unitTypes?.length > 0) {
-        return v;
-      } else {
-        return null;
-      }
-    });
+    Object?.keys(selectedPhase.propTypeOverview)
+      .map((v) => {
+        if (selectedPhase?.propTypeOverview[v].unitTypes?.length > 0) {
+          return v;
+        } else {
+          return null;
+        }
+      })
+      .sort();
   const getPropertyType = (data: any) => {
     if (data.id === 32 && floorPlanType === "bhk") {
       setFloorPlanType("type");
@@ -165,9 +171,15 @@ export default function FloorplansBlock({ projName, slug }: Props) {
       type !== "overview"
     ) {
       setSelectedFloor(projectUnitsData[0]);
+
       // types.length > 0 && setPropCgId(types[0]);
     }
   }, [projectUnitsData]);
+  useEffect(() => {
+    // @ts-ignore
+    types.length > 0 && setPropCgId(BACKEND_PROP_TYPES[`${types[0]}`]);
+  }, [currentPhase]);
+
   if (isLoading) return <Loading />;
   return (
     <div className="w-[90%] scroll-mt-[180px] mb-[5%]" id="floorPlans">
@@ -233,6 +245,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                     ? //@ts-ignore
                       propertyDetailsTypes.get(keyName).name
                     : null;
+
                 if (checkProperty(keyName)) {
                   return (
                     <Button

@@ -53,7 +53,13 @@ export const listingProps = {
   Villament: 34,
   Apartment: 35,
 };
-
+export const BACKEND_PROP_TYPES = {
+  apt: 35,
+  rowHouse: 33,
+  villa: 31,
+  vlmt: 34,
+  plot: 32,
+};
 export const floorplanTypes = [
   {
     title: "By Type",
