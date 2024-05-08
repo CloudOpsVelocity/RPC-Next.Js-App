@@ -95,6 +95,7 @@ function FloorPlanModal({ propCgId, data, projName }: Props) {
     handleSearch(key);
   };
   const [o, {}] = useSubFloorPlanPopup();
+
   return (
     <>
       <Modal
@@ -272,7 +273,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
     setValues(prevObj);
     handleSearch(key);
   };
-
+  console.log(getOptions("totalBalconySize"));
   return (
     <div className="col-span-1 w-full max-w-[392px] mr-[3%]  ">
       <div className="w-[100%] flex justify-between items-start flex-wrap gap-[5%]">
@@ -607,7 +608,8 @@ const LeftSection = ({ propCgId, data }: Props) => {
         )}
 
         {propCgId == projectprops.villament &&
-          propCgId != projectprops.plot && (
+          propCgId != projectprops.plot &&
+          getOptions("totalBalconySize").length > 0 && (
             <Select
               key={useId()}
               w={"full"}
