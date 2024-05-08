@@ -7,17 +7,16 @@ import { currentPhaseAtom } from "../store/vewfloor";
 import { useAtom } from "jotai";
 
 export default function usePhaseWiseOverview() {
-  const [, setFloorPhase] = useAtom(currentPhaseAtom);
-  const [currentPhase, setCurrentPhase] = useState(0);
+  const [currentPhase, setFloorPhase] = useAtom(currentPhaseAtom);
+  // const [currentPhase, setCurrentPhase] = useState(0);
   const handlePhaseChange = (phaseId: number) => {
-    setCurrentPhase(phaseId);
+    setFloorPhase(phaseId);
   };
   const { slug } = useParams<{ slug: string }>();
   const { data: PhaseOverview, isLoading } = useQuery({
     queryKey: [`phaseoverview` + slug],
     queryFn: () => getProjectWiseOverView(slug),
     onSuccess: (data) => {
-      setCurrentPhase(data[0].phaseId);
       setFloorPhase(data[0].phaseId);
     },
     keepPreviousData: true,
@@ -40,7 +39,7 @@ export default function usePhaseWiseOverview() {
     isLoading,
     handlePhaseChange,
     currentPhase,
-    setCurrentPhase,
+    setCurrentPhase: setFloorPhase,
     hasReraStatus,
   };
 }

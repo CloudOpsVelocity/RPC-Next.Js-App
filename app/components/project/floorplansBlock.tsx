@@ -177,7 +177,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
   }, [projectUnitsData]);
   useEffect(() => {
     // @ts-ignore
-    types.length > 0 && setPropCgId(BACKEND_PROP_TYPES[`${types[0]}`]);
+    types?.length > 0 && setPropCgId(BACKEND_PROP_TYPES[`${types[0]}`]);
   }, [currentPhase]);
 
   if (isLoading) return <Loading />;
