@@ -6,6 +6,7 @@ import {
   ImgCarouselIcon,
   LenseIcon,
   PopupOpenSvg,
+  PrevCarouselIcon,
   propertyDetailsSvgs,
 } from "@/app/images/commonSvgs";
 import S from "@/app/styles/Floorplan.module.css";
@@ -22,6 +23,8 @@ import { useSubFloorPlanPopup } from "@/app/hooks/useSubFloorplanPopup";
 import clsx from "clsx";
 import { setPropertyValues } from "@/app/utils/dyanamic/projects";
 import { ImgNotAvail } from "@/app/data/project";
+import { Carousel } from "@mantine/carousel";
+import styles from "@/app/styles/Carousel.module.css";
 
 type Props = {
   propCgId: any;
@@ -1039,74 +1042,48 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
       {floorsArray != undefined &&
         floorsArray != null &&
         floorsArray.length > 0 && (
-          <div className="flex justify-between items-center mt-4 w-full">
-            {floorsArray.length > 5 && (
-              <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width={24}
-                  height={24}
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="text-gray-600"
-                >
-                  <path d="m15 18-6-6 6-6" />
-                </svg>
-              </button>
-            )}
-
-            <div className="flex w-full justify-center gap-[16px] items-center overflow-x-auto scrollbar-hide">
+          <div className="flex justify-center items-center mt-4 w-full">
+            <Carousel
+              classNames={styles}
+              maw={690}
+              slideSize={{ base: "100%", sm: "15%" }}
+              slideGap={{ base: "16px", sm: 2 }}
+              align="start"
+              px={70}
+              nextControlIcon={<ImgCarouselIcon />}
+              previousControlIcon={<PrevCarouselIcon />}
+              withControls={floorsArray.length > 6}
+            >
               {floorsArray?.map((eachObj: any, ind: number) => {
                 return (
-                  <div
-                    key={ind}
-                    className={clsx(
-                      " h-[50px] w-[70px] flex justify-center items-center shadow-md  scrollbar-hide rounded-[5px] border-[0.5px] border-solid border-[#92B2C8]",
-                      selectedFloor?.floorPlanUrl == eachObj?.floorPlanUrl &&
-                        "shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] border-2 border-solid border-[#59A1D6]"
-                    )}
-                  >
-                    <Image
-                      // @ts-ignore
-                      src={
-                        eachObj?.floorPlanUrl
-                          ? `${eachObj?.floorPlanUrl}?v=${Math.random()}`
-                          : ImgNotAvail
-                      }
-                      alt="Floor Plan"
-                      width={57}
-                      height={37}
-                      className="w-[88px] h-[58px]   cursor-pointer "
-                      style={{ aspectRatio: "100 / 50", objectFit: "cover" }}
-                      onClick={() => selectImg(ind)}
-                    />
-                  </div>
+                  <Carousel.Slide w={70}>
+                    <div
+                      key={ind}
+                      className={clsx(
+                        " h-[50px] w-[70px] flex justify-center items-center shadow-md  scrollbar-hide rounded-[5px] border-[0.5px] border-solid border-[#92B2C8]",
+                        selectedFloor?.floorPlanUrl == eachObj?.floorPlanUrl &&
+                          "shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] border-2 border-solid border-[#59A1D6]"
+                      )}
+                    >
+                      <Image
+                        // @ts-ignore
+                        src={
+                          eachObj?.floorPlanUrl
+                            ? `${eachObj?.floorPlanUrl}?v=${Math.random()}`
+                            : ImgNotAvail
+                        }
+                        alt="Floor Plan"
+                        width={57}
+                        height={37}
+                        className="w-[88px] h-[58px]   cursor-pointer "
+                        style={{ aspectRatio: "100 / 50", objectFit: "cover" }}
+                        onClick={() => selectImg(ind)}
+                      />
+                    </div>
+                  </Carousel.Slide>
                 );
               })}
-            </div>
-
-            {floorsArray.length > 5 && (
-              <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width={24}
-                  height={24}
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="text-gray-600"
-                >
-                  <path d="m9 18 6-6-6-6" />
-                </svg>
-              </button>
-            )}
+            </Carousel>
           </div>
         )}
     </div>
