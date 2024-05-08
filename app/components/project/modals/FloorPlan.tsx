@@ -163,8 +163,8 @@ function FloorPlanModal({ propCgId, data, projName }: Props) {
 
                           {key === "floor" && value == 0
                             ? "G"
-                            : propCgId === 31 ||
-                              (propCgId === 33 && key === "floor")
+                            : (propCgId === 31 || propCgId === 33) &&
+                              key === "floor"
                             ? `G+${value}`
                             : value}
                         </span>
@@ -628,7 +628,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
               key={useId()}
               w={"full"}
               mt="md"
-              label="Choose Balcony Size"
+              label="Select Balcony Size"
               className="!w-[46%]"
               placeholder="-- select --"
               data={getOptions("totalBalconySize")}
@@ -871,6 +871,18 @@ const RightSection = ({ propCgId }: Props) => {
               </p>
             </div>
           )}
+        {propCgId == projectprops.villament && data?.totalBalconySize && (
+          <div className="flex items-center space-x-3">
+            {propertyDetailsSvgs.parkingArea}
+            <p className="text-[#4D6677] text-[14px] font-[500]">
+              Balcony Size{" "}
+              <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
+                {" "}
+                {data.totalBalconySize} sq.ft
+              </span>
+            </p>
+          </div>
+        )}
         {(propCgId == projectprops.plot ||
           propCgId == projectprops.villa ||
           propCgId == projectprops.rowHouse) && (

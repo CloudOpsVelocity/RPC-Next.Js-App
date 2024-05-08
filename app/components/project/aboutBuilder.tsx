@@ -52,7 +52,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
               {nzData.newProject}
             </p>
             <p className=" text-[#148B16] text-[16px] lg:text-[20px] font-[700]">
-              New Launch Projects
+              New Launch {`Project${nzData.newProject > 1 ? "s" : ""}`}
             </p>
           </div>
 
@@ -61,7 +61,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
               {nzData.onGoingProject}
             </p>
             <p className=" text-[#0073C6] text-[16px] lg:text-[20px] font-[700]">
-              Ongoing Projects
+              Ongoing {`Project${nzData.onGoingProject > 1 ? "s" : ""}`}
             </p>
           </div>
 
@@ -70,7 +70,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
               {nzData.completedProject}
             </p>
             <p className=" text-[#E3AC00] text-[16px] lg:text-[20px] font-[700]">
-              Completed Projects
+              Completed {`Project${nzData.completedProject > 1 ? "s" : ""}`}
             </p>
           </div>
         </div>
