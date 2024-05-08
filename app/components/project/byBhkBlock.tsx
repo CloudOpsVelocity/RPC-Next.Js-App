@@ -4,6 +4,8 @@ import Button from "../../elements/button";
 import FloorplanDetailsCard from "./floorplanDetailsCard";
 import cookie from "js-cookie";
 import filterDataAtom from "@/app/store/filterdata";
+import { useSetAtom } from "jotai";
+import { selectedFloorAtom } from "@/app/store/floor";
 
 type Props = {
   propCgId: any;
@@ -34,6 +36,7 @@ export default function ByBhkBlock({
     e.stopPropagation();
     setBhk(value);
   };
+  const setCurrentState = useSetAtom(selectedFloorAtom);
   return (
     <React.Fragment>
       <div className="lg:h-[100px] px-[2%] border-[#92B2C8] border-solid border-b-[1px] border-r-[1px] ">
@@ -44,7 +47,9 @@ export default function ByBhkBlock({
           <Button
             key="all"
             title="All"
-            onChange={(e) => handleBhkChange(e, "0")}
+            onChange={(e) => {
+              handleBhkChange(e, "0");
+            }}
             buttonClass={` text-[18px] lg:text-[24px] mr-[10px] lg:mr-[20px] whitespace-nowrap  ${
               bhk === "0"
                 ? " font-[600] text-[#148B16] underline "
@@ -55,7 +60,16 @@ export default function ByBhkBlock({
             <Button
               key={ind}
               title={bhkOption}
-              onChange={(e) => handleBhkChange(e, bhkOption)}
+              onChange={(e) => {
+                handleBhkChange(e, bhkOption);
+                setCurrentState(() => {
+                  const newFilteredData =
+                    bhkOption === "0"
+                      ? data
+                      : data.filter((item: any) => item.bhkName === bhkOption);
+                  return newFilteredData[0];
+                });
+              }}
               buttonClass={` text-[18px] lg:text-[24px] mr-[10px] lg:mr-[25px] whitespace-nowrap  ${
                 bhk === bhkOption
                   ? " font-[600] text-[#148B16] underline "

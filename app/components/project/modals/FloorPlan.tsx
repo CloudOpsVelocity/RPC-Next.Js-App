@@ -47,8 +47,11 @@ function FloorPlanModal({ propCgId, data, projName }: Props) {
 
   const handleClose = () => {
     close();
-    setSelectedFloor(data[0]);
-    setFloorsArray(data);
+    if (!selectedFloor) {
+      setSelectedFloor(data[0]);
+      setFloorsArray(data);
+    }
+
     const keys = Object.keys(form.values);
     keys.forEach((key) => form.setFieldValue(key, null));
   };
@@ -157,12 +160,20 @@ function FloorPlanModal({ propCgId, data, projName }: Props) {
                       >
                         <span className="text-[#57a773] font-semibold">
                           {/* @ts-ignore */}
-                          {value === "0" && key === "floor" ? "G" : value}
+
+                          {key === "floor"
+                            ? value === 0
+                              ? "G"
+                              : `G+${value}`
+                            : value}
                         </span>
                         <span className="mx-1.5 text-[#6e798c]">|</span>
                         <span className="text-[#6e798c] capitalize">
                           {filterKeysDetails?.get(key)?.name != undefined
-                            ? filterKeysDetails?.get(key)?.name
+                            ? filterKeysDetails?.get(key)?.name === "Floor" &&
+                              (propCgId === 31 || propCgId === 33)
+                              ? "Elevation"
+                              : filterKeysDetails?.get(key)?.name
                             : key}
                         </span>
                         <button className="ml-2 !w-[10px] !h-[10px]">
@@ -273,7 +284,6 @@ const LeftSection = ({ propCgId, data }: Props) => {
     setValues(prevObj);
     handleSearch(key);
   };
-  console.log(getOptions("totalBalconySize"));
   return (
     <div className="col-span-1 w-full max-w-[392px] mr-[3%]  ">
       <div className="w-[100%] flex justify-between items-start flex-wrap gap-[5%]">
@@ -629,7 +639,9 @@ const LeftSection = ({ propCgId, data }: Props) => {
             />
           )}
 
-        {(propCgId == projectprops.plot || propCgId == projectprops.villa) && (
+        {(propCgId == projectprops.plot ||
+          propCgId == projectprops.villa ||
+          propCgId == projectprops.rowHouse) && (
           <Select
             key={useId()}
             w={"full"}
@@ -876,7 +888,7 @@ const RightSection = ({ propCgId }: Props) => {
           </div>
         )}
 
-        {propCgId != projectprops.plot && (
+        {propCgId != projectprops.plot && data?.totalNumberOfBalcony > 0 && (
           <div className="flex items-center space-x-3">
             {propertyDetailsSvgs.totalNumberOfBalcony}
             <p className="text-[#4D6677] text-[14px] font-[500]">
@@ -1058,7 +1070,7 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
             >
               {floorsArray?.map((eachObj: any, ind: number) => {
                 return (
-                  <Carousel.Slide w={70}>
+                  <Carousel.Slide w={70} mr={floorsArray.length > 6 ? 0 : 16}>
                     <div
                       key={ind}
                       className={clsx(

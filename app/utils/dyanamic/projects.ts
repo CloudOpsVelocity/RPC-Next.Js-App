@@ -1,18 +1,20 @@
 import { projectprops } from "@/app/data/projectDetails";
 
 export function setPropertyValues(data: any, propCgId: number): any {
+  console.log(data);
   let updatedValues: any = {
     facingName: data?.facingName,
     bhkName: data?.bhkName,
     towerName: data?.towerName,
     unitNumber: data?.unitNumber,
-
     superBuildUparea: data?.superBuildUparea,
     caretarea: data?.caretarea,
     floor: data?.floor?.toString(),
-    parkingType: data?.parkingType,
+    ...(data?.parkingType !== "None" && { parkingType: data?.parkingType }),
     noOfCarParking: data?.noOfCarParking?.toString(),
-    totalNumberOfBalcony: data?.totalNumberOfBalcony?.toString(),
+    ...(data?.totalNumberOfBalcony > 0 && {
+      totalNumberOfBalcony: data?.totalNumberOfBalcony?.toString(),
+    }),
     totalNumberofBathroom: data?.totalNumberofBathroom?.toString(),
     ...(data?.block && { block: data?.block }),
   };
@@ -23,19 +25,26 @@ export function setPropertyValues(data: any, propCgId: number): any {
 
     case projectprops.villament:
       return {
+        towerName: data?.towerName,
         unitNumber: data?.unitNumber,
         bhkName: data?.bhkName,
         floor: data?.floor?.toString(),
         facingName: data?.facingName,
         superBuildUparea: data?.superBuildUparea,
-        caretarea: data?.caretarea,
-        gardenArea: data?.gardenArea,
-        parkingArea: data?.parkingArea,
-        terraceArea: data?.terraceArea,
-        noOfCarParking: data?.noOfCarParking?.toString(),
-        totalNumberOfBalcony: data?.totalNumberOfBalcony?.toString(),
+        ...(data?.caretarea && { caretarea: data?.caretarea }),
+        ...(data.gardenArea && { gardenArea: data?.gardenArea }),
+        ...(data?.parkingArea != "None" && { parkingArea: data?.parkingArea }),
+        ...(data?.terraceArea && { terraceArea: data?.terraceArea }),
+        ...(data?.noOfCarParking > 0 && {
+          noOfCarParking: data?.noOfCarParking?.toString(),
+        }),
+        ...(data?.totalNumberOfBalcony > 0 && {
+          totalNumberOfBalcony: data?.totalNumberOfBalcony?.toString(),
+        }),
         totalNumberofBathroom: data?.totalNumberofBathroom?.toString(),
-        totalBalconySize: data?.totalBalconySize?.toString(),
+        ...(data?.totalBalconySize && {
+          totalBalconySize: data?.totalBalconySize?.toString(),
+        }),
       };
       break;
 
@@ -48,11 +57,14 @@ export function setPropertyValues(data: any, propCgId: number): any {
         caretarea: data?.caretarea,
         floor: data?.floor?.toString(),
         noOfCarParking: data?.noOfCarParking?.toString(),
-        totalNumberOfBalcony: data?.totalNumberOfBalcony?.toString(),
+        ...(data?.totalNumberOfBalcony > 0 && {
+          totalNumberOfBalcony: data?.totalNumberOfBalcony?.toString(),
+        }),
         totalNumberofBathroom: data?.totalNumberofBathroom?.toString(),
         gardenArea: data?.gardenArea,
         parkingArea: data?.parkingArea,
         terraceArea: data?.terraceArea,
+        plotArea: data?.plotArea.toString(),
       };
       break;
     case projectprops.villa:
@@ -64,7 +76,9 @@ export function setPropertyValues(data: any, propCgId: number): any {
         caretarea: data?.caretarea,
         floor: data?.floor?.toString(),
         noOfCarParking: data?.noOfCarParking?.toString(),
-        totalNumberOfBalcony: data?.totalNumberOfBalcony?.toString(),
+        ...(data?.totalNumberOfBalcony > 0 && {
+          totalNumberOfBalcony: data?.totalNumberOfBalcony?.toString(),
+        }),
         totalNumberofBathroom: data?.totalNumberofBathroom?.toString(),
         gardenArea: data?.gardenArea,
         parkingArea: data?.parkingArea,

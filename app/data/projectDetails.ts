@@ -115,7 +115,6 @@ export const filterKeysDetails = new Map([
   ["length", { name: "Length of Plot" }],
   ["width", { name: "Breadth of Plot" }],
   ["noOfCarParking", { name: "Car Parking" }],
-
   ["projIdEnc", { name: "Project ID" }],
   ["phaseId", { name: "Phase ID" }],
   ["propType", { name: "Property Type" }],
