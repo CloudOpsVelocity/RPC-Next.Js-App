@@ -161,10 +161,11 @@ function FloorPlanModal({ propCgId, data, projName }: Props) {
                         <span className="text-[#57a773] font-semibold">
                           {/* @ts-ignore */}
 
-                          {key === "floor"
-                            ? value === 0
-                              ? "G"
-                              : `G+${value}`
+                          {key === "floor" && value == 0
+                            ? "G"
+                            : propCgId === 31 ||
+                              (propCgId === 33 && key === "floor")
+                            ? `G+${value}`
                             : value}
                         </span>
                         <span className="mx-1.5 text-[#6e798c]">|</span>
@@ -372,6 +373,9 @@ const LeftSection = ({ propCgId, data }: Props) => {
             data={getOptions("floor").map((item) =>
               item === "0"
                 ? { value: "0", label: "G" }
+                : propCgId == projectprops.rowHouse ||
+                  propCgId == projectprops.villa
+                ? { value: item, label: `G+${item}` }
                 : { value: item, label: item }
             )}
             searchable
@@ -763,7 +767,12 @@ const RightSection = ({ propCgId }: Props) => {
               }`}{" "}
               <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                 {" "}
-                {data?.floor === 0 ? "G" : data?.floor}
+                {data?.floor === 0
+                  ? "G"
+                  : propCgId === projectprops.rowHouse ||
+                    propCgId === projectprops.villa
+                  ? `G+${data?.floor}`
+                  : data?.floor}
               </span>{" "}
             </p>
           </div>
@@ -862,7 +871,20 @@ const RightSection = ({ propCgId }: Props) => {
               </p>
             </div>
           )}
-
+        {(propCgId == projectprops.plot ||
+          propCgId == projectprops.villa ||
+          propCgId == projectprops.rowHouse) && (
+          <div className="flex items-center space-x-3">
+            {propertyDetailsSvgs.plotArea}
+            <p className="text-[#4D6677] text-[14px] font-[500]">
+              Plot Area{" "}
+              <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
+                {" "}
+                {data.plotArea} sq.ft
+              </span>
+            </p>
+          </div>
+        )}
         {propCgId != projectprops.plot && (
           <div className="flex items-center space-x-3">
             {propertyDetailsSvgs.noOfCarParking}
@@ -909,19 +931,6 @@ const RightSection = ({ propCgId }: Props) => {
               <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
                 {" "}
                 {data.totalNumberofBathroom}
-              </span>
-            </p>
-          </div>
-        )}
-
-        {(propCgId == projectprops.plot || propCgId == projectprops.villa) && (
-          <div className="flex items-center space-x-3">
-            {propertyDetailsSvgs.plotArea}
-            <p className="text-[#4D6677] text-[14px] font-[500]">
-              Plot Area{" "}
-              <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
-                {" "}
-                {data.plotArea} sq.ft
               </span>
             </p>
           </div>
