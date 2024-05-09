@@ -245,9 +245,10 @@ const LeftSection = ({ propCgId, data }: Props) => {
       );
     });
     if (data[0][property] != undefined) {
+      // @ts-ignore
       return Array.from(
         new Set(filteredData.map((item: any) => String(item[property])))
-      );
+      ).sort();
     } else {
       return [];
     }
@@ -326,7 +327,9 @@ const LeftSection = ({ propCgId, data }: Props) => {
 
         {propCgId == projectprops.apartment &&
           propCgId != projectprops.plot &&
-          getOptions("block").length > 0 && (
+          getOptions("block").filter(
+            (option: string) => option !== undefined && option !== "undefined"
+          ).length > 0 && (
             <Select
               key={useId()}
               w={"full"}
@@ -468,7 +471,8 @@ const LeftSection = ({ propCgId, data }: Props) => {
 
         {propCgId != projectprops.apartment &&
           propCgId != projectprops.plot &&
-          getOptions("gardenArea").length > 0 && (
+          getOptions("gardenArea").filter((item) => item !== "undefined")
+            .length > 0 && (
             <Select
               key={useId()}
               w={"full"}
@@ -476,7 +480,9 @@ const LeftSection = ({ propCgId, data }: Props) => {
               label="Select Garden Area"
               className="!w-[46%]"
               placeholder="-- select --"
-              data={getOptions("gardenArea").filter((item) => item !== null)}
+              data={getOptions("gardenArea").filter(
+                (item) => item !== "undefined"
+              )}
               searchable
               maxDropdownHeight={200}
               {...getInputProps("gardenArea")}
@@ -490,7 +496,8 @@ const LeftSection = ({ propCgId, data }: Props) => {
 
         {propCgId != projectprops.apartment &&
           propCgId != projectprops.plot &&
-          getOptions("terraceArea").length > 0 && (
+          getOptions("terraceArea").filter((item) => item !== "undefined")
+            .length > 0 && (
             <Select
               key={useId()}
               w={"full"}
@@ -498,7 +505,9 @@ const LeftSection = ({ propCgId, data }: Props) => {
               label="Select Terrace Area"
               className="!w-[46%]"
               placeholder="-- select --"
-              data={getOptions("terraceArea")}
+              data={getOptions("terraceArea").filter(
+                (item) => item !== "undefined"
+              )}
               searchable
               maxDropdownHeight={200}
               {...getInputProps("terraceArea")}

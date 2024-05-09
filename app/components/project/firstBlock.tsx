@@ -41,7 +41,7 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
         inline: "center",
       });
     }
-    setTimeout(() => setIsScrolling(false), 3000);
+    setTimeout(() => setIsScrolling(false), 910);
   };
   return (
     <div
