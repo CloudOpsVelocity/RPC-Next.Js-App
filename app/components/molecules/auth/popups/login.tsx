@@ -21,23 +21,24 @@ import handleTrimAndReplace from "@/app/utils/input/validations";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import CryptoJS from "crypto-js";
 import usePathToOrigin from "@/app/hooks/custom/useRedirect";
+import StepCss from "@/app/styles/Stepper.module.css";
+
 const schema = yup.object().shape({
   username: yup
-    .string()
-    .required("User name is required")
+    .number()
+    .positive("Mobile number must be positive")
+    .integer("Mobile number must be an integer")
     .test(
-      "is-valid-username",
-      "Invalid username. Must be a valid email or a 10-digit mobile number",
-      (value) => {
-        const isEmail = yup.string().email().isValidSync(value);
-        const isMobileNumber = /^[0-9]{10}$/i.test(value);
-        return isEmail || isMobileNumber;
-      }
-    ),
+      "len",
+      "Mobile number should be 10 digit",
+      (val) => val?.toString().length === 10
+    )
+    .required("Mobile number is required")
+    .typeError("Mobile number is required"),
   password: yup
     .string()
-    .required("Password is required")
-    .min(6, "Password must be at least 6 characters"),
+    .min(6, "Password must be at least 6 characters")
+    .required("Password is required"),
 });
 type Action = {
   username: string;
@@ -54,6 +55,8 @@ function LoginPopupForm({ closePopup }: { closePopup?: () => void }) {
   const form = useForm({
     initialValues: { username: "", password: "" },
     validate: yupResolver(schema),
+    validateInputOnBlur: true,
+    validateInputOnChange: true,
   });
   const loginWithCredentials = async (data: Login): Promise<any> => {
     const encryptedPassword = CryptoJS.AES.encrypt(
@@ -72,7 +75,9 @@ function LoginPopupForm({ closePopup }: { closePopup?: () => void }) {
       close();
     } else {
       const errorsParam =
-        res?.error === "Wrong Credentials" ? "password" : "username";
+        res?.error === "Please enter correct password"
+          ? "password"
+          : "username";
       form.setErrors({
         [errorsParam]: res?.error || "Something went wrong. Please try again.",
       });
@@ -103,19 +108,23 @@ function LoginPopupForm({ closePopup }: { closePopup?: () => void }) {
           mt={"xs"}
           required
           classNames={{
-            input: S.input,
+            root: StepCss.inputRoot,
+            input: StepCss.textInput,
+            error: StepCss.errorMsg,
           }}
           hideControls
           size="lg"
           className="w-[100%] mb-[3%] "
           label="Mobile Number"
-          placeholder="Enter your registered mobile number"
+          placeholder="Enter Your Registered Mobile Number"
           {...form.getInputProps("username")}
           maxLength={10}
         />
         <PasswordInput
           classNames={{
-            visibilityToggle: S.visibilityToggle,
+            root: StepCss.inputRoot,
+            error: StepCss.errorMsg,
+            innerInput: StepCss.textInput,
           }}
           required
           size="lg"
@@ -136,7 +145,7 @@ function LoginPopupForm({ closePopup }: { closePopup?: () => void }) {
             search: redirectQueryParam,
           }}
           onClick={closePopup && closePopup}
-          className="text-[14px] font-400 text-[#767270] text-right w-full cursor-pointer "
+          className="text-[14px] font-medium text-[#767270]  w-full cursor-pointer "
         >
           Forgot Password ?
         </Link>
