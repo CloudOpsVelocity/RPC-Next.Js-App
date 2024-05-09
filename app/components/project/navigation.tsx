@@ -8,6 +8,8 @@ import Image from "next/image";
 import React, { useState, useRef, useEffect } from "react";
 import { TbRuler2Off } from "react-icons/tb";
 export const isScrollingAtom = atom(false);
+export const stickyAtom = atom(false);
+export const currentBlockAtom = atom("overview");
 export default function Navigation({
   isBrochure,
   detailsData,
@@ -16,9 +18,9 @@ export default function Navigation({
   detailsData: Main;
 }) {
   const { data } = useRatings();
-  const [currentBlock, setCurrentBlock] = useState("overview");
+  const [currentBlock, setCurrentBlock] = useAtom(currentBlockAtom);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [isSticky, setIsSticky] = useState(false);
+  const [isSticky, setIsSticky] = useAtom(stickyAtom);
   const [isScrolling, setIsScrolling] = useAtom(isScrollingAtom);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [leftScroll, setLeftScroll] = useState(0);
@@ -110,6 +112,7 @@ export default function Navigation({
       key: "specifications",
     },
     { condtion: detailsData?.highlights?.length > 0, key: "highlights" },
+    { condtion: detailsData?.banks?.length > 0, key: "loans" },
     { condtion: true, key: "aboutBuilder" },
     { condtion: true, key: "whyBuy" },
     { condtion: true, key: "ratings" },

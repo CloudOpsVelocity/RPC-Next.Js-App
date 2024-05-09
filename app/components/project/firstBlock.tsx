@@ -20,7 +20,7 @@ import { formatDate } from "@/app/utils/date";
 import { getImageUrls } from "@/app/utils/image";
 import usePhaseWiseOverview from "@/app/hooks/usePhaseWiseOverview";
 import styles from "@/app/styles/Carousel.module.css";
-import { isScrollingAtom } from "./navigation";
+import { currentBlockAtom, isScrollingAtom, stickyAtom } from "./navigation";
 import { useSetAtom } from "jotai";
 type Props = {
   projectDetails: Main | null;
@@ -31,18 +31,23 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
   const autoplay = useRef(Autoplay({ delay: 10000 }));
   const { hasReraStatus } = usePhaseWiseOverview();
   const setIsScrolling = useSetAtom(isScrollingAtom);
-  const scrollToTopic = (): void => {
+  const setSticky = useSetAtom(stickyAtom);
+  const setC = useSetAtom(currentBlockAtom);
+  function scrollToTopic(id: string): void {
     setIsScrolling(true);
-    const element = document.getElementById("floorPlans");
+    const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({
         behavior: "smooth",
-        block: "start",
+        block: "start", // Adjust this value to add more space from the top
         inline: "center",
       });
+
+      setSticky(true);
     }
-    setTimeout(() => setIsScrolling(false), 910);
-  };
+    setC("floorPlans");
+    setTimeout(() => setIsScrolling(false), 3000);
+  }
   return (
     <div
       className={`relative rounded-[10px] w-full m-auto bg-gray-50  lg:h-[680px] bg-cover flex justify-between items-start flex-col`}
@@ -132,7 +137,7 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
 
               <p
                 className="text-[16px] lg:text-[20px] font-[600] mr-auto md:mr-0 text-[#2A4C70] bg-[#FFF] rounded-[10px] shadow-md p-[8px] flex items-center gap-2 cursor-pointer"
-                onClick={scrollToTopic}
+                onClick={() => scrollToTopic("floorPlansdiv")}
               >
                 <Image
                   width={100}

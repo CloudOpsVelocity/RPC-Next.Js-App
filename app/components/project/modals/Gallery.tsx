@@ -48,7 +48,7 @@ const Gallery: React.FC<GalleryProps> = ({
           setPreviewImage(null);
           close();
         }}
-        size={"100%"}
+        size={"85%"}
         classNames={{
           close: S.close,
           content: S.content,
@@ -59,7 +59,7 @@ const Gallery: React.FC<GalleryProps> = ({
         className="!styleScroll"
       >
         <div className="h-auto scrollbar-hide flex justify-end flex-col items-center">
-          <div className="w-full bg-transparent    h-[57px] flex items-center justify-between  z-[1000] px-10 max-w-[91rem] m-auto">
+          <div className="w-full bg-transparent    h-[57px] flex items-center justify-between  z-[1000] px-10  m-auto">
             <div className="text-white text-2xl not-italic font-bold leading-[normal]">
               {isImage ? "Gallery" : "Videos"}
             </div>
@@ -91,7 +91,7 @@ const Gallery: React.FC<GalleryProps> = ({
               url={previewImage as string}
               width="auto"
               controls
-              height="80vh"
+              height="68vh"
             />
           )}
           <div className="mt-4 flex items-center justify-center  w-full">

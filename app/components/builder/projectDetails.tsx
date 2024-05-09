@@ -36,7 +36,7 @@ export default function ProjectDetails({
           </div>
 
           <p className=" text-[#148B16] text-[16px] lg:text-[20px] font-[700]">
-            New Launch Projects
+            New Launch {`Project${newProject > 1 ? "s" : ""}`}
           </p>
         </div>
 
@@ -48,7 +48,7 @@ export default function ProjectDetails({
             {onGoingProjIconSvg}
           </div>
           <p className=" text-[#0073C6] text-[16px] lg:text-[20px] font-[700]">
-            Ongoing Projects
+            Ongoing {`Project${onGoingProject > 1 ? "s" : ""}`}
           </p>
         </div>
 
@@ -60,7 +60,7 @@ export default function ProjectDetails({
             {completedProjIconSvg}
           </div>
           <p className=" text-[#E3AC00] text-[16px] lg:text-[20px] font-[700]">
-            Completed Projects
+            Completed {`Project${completedProject > 1 ? "s" : ""}`}
           </p>
         </div>
       </div>

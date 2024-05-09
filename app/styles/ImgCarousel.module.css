@@ -9,6 +9,7 @@
   border-radius: 20px;
   background: transparent;
   margin-top: 45px;
+  overflow-y: hidden;
   /* scrollbar-color: gray;
   scrollbar-width: thin;
   scrollbar-track-color: gray; */

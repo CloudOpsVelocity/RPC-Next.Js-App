@@ -13,10 +13,12 @@ import { useParams } from "next/navigation";
 import { useMediaQuery } from "@mantine/hooks";
 import { usePopUpRatings } from "@/app/hooks/popups/usePopUpRatings";
 import S from "@/app/styles/Rating.module.css";
+import useDynamicProj from "@/app/hooks/project/useDynamic";
 export default function Reviews({ projName }: { projName: string }) {
-  const [opened, { open, close }] = usePopUpRatings();
+  const [, { open }] = usePopUpRatings();
   const { data } = useRatings();
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
+  const { data: rData } = useDynamicProj();
   return (
     data?.status &&
     data?.reviewDataList?.filter((item: any) => item.userReview) !== 0 && (
@@ -32,14 +34,16 @@ export default function Reviews({ projName }: { projName: string }) {
             <p className="text-[#4D6677] text-[16px] md:text-2xl italic font-medium leading-[normal] tracking-[0.96px] mt-2 mb-5">
               Find helpful customer reviews and review ratings for {projName}
             </p>
-            <div className="w-full flex justify-end mb-[20px]">
-              <button
-                className="text-[#0073C6] text-xl not-italic font-bold leading-[normal] tracking-[0.8px] underline "
-                onClick={open}
-              >
-                Add Review
-              </button>
-            </div>
+            {rData?.userReview && (
+              <div className="w-full flex justify-end mb-[20px]">
+                <button
+                  className="text-[#0073C6] text-xl not-italic font-bold leading-[normal] tracking-[0.8px] underline "
+                  onClick={open}
+                >
+                  Add Review
+                </button>
+              </div>
+            )}
           </div>
           <div className="relative w-[96%] mx-auto px-6">
             <Carousel

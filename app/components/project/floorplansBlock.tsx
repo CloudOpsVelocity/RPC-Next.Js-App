@@ -183,7 +183,10 @@ export default function FloorplansBlock({ projName, slug }: Props) {
   if (isLoading) return <Loading />;
   return (
     <div className="w-[90%] scroll-mt-[180px] mb-[5%]" id="floorPlans">
-      <h1 className="text-[20px] lg:text-[32px] font-[600] text-[#001F35] mb-[12px]">
+      <h1
+        className="text-[20px] lg:text-[32px] font-[600] text-[#001F35] mb-[12px] scroll-mt-[280px]"
+        id="floorPlansdiv"
+      >
         FLOOR PLANS for{" "}
         <span className="text-[#148B16] font-[700] uppercase">{projName}</span>{" "}
       </h1>

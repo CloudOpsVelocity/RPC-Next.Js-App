@@ -21,7 +21,7 @@ export default function BuildersBlock({
   return (
     <div className=" py-12 w-full flex  items-center ">
       <div className="max-w-[1920px]  ">
-        <h2 className="text-[#f8c6c6] text-[32px] not-italic font-bold leading-[normal] uppercase">
+        <h2 className="text-black text-[32px] not-italic font-bold leading-[normal] uppercase">
           Builder’s in{" "}
           <span className="text-[#148B16] text-[32px] not-italic font-bold leading-[normal] uppercase">
             Bangalore

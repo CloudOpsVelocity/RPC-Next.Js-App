@@ -14,7 +14,7 @@ export default function ProjectLoans({
   name: string;
 }) {
   return (
-    <div className="bg-white scroll-mt-[90px] py-8 w-[90%] mb-[4%] mx-auto  overflow-hidden">
+    <div className="bg-white  py-8 w-[90%] mb-[4%] mx-auto  overflow-hidden ">
       {type === "prop" ? (
         <PropertyHeading
           title="BANK APPROVALS OF"
@@ -23,7 +23,7 @@ export default function ProjectLoans({
         />
       ) : (
         <>
-          <h2 className="text-[20px] lg:text-[32px] font-bold">
+          <h2 className="text-[20px] lg:text-[32px] font-bold" id="loans">
             BANK APPROVALS OF{" "}
             <span className="text-[#148B16] text-[20px] lg:text-[32px] not-italic font-bold leading-[normal] uppercase">
               {name}

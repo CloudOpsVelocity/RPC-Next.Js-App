@@ -10,6 +10,7 @@ export const topics = [
   { label: "Near By", id: "nearBy" },
   { label: "Specifications", id: "specifications" },
   { label: "Highlights", id: "highlights" },
+  { label: "Bank Approvals", id: "loans" },
   { label: "About Builder", id: "aboutBuilder" },
   { label: "Why Buy This Project?", id: "whyBuy" },
   { label: "Customer Reviews", id: "ratings" },
@@ -17,6 +18,7 @@ export const topics = [
   { label: "FAQ?", id: "faq" },
   { label: "Similar Projects", id: "similar" },
 ];
+
 export const Propertytopics = [
   { label: "Overview", id: "overview" },
   { label: "About", id: "about" },
