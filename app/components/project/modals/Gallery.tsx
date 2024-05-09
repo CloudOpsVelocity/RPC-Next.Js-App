@@ -48,7 +48,7 @@ const Gallery: React.FC<GalleryProps> = ({
           setPreviewImage(null);
           close();
         }}
-        size={"85%"}
+        size="auto"
         classNames={{
           close: S.close,
           content: S.content,
@@ -77,12 +77,12 @@ const Gallery: React.FC<GalleryProps> = ({
               <TransformComponent>
                 <Image
                   radius="md"
-                  h={isMobile ? "auto" : 650}
+                  h={isMobile ? "auto" : 600}
                   m={"auto"}
                   w={1400}
                   fit="contain"
                   src={previewImage ?? content?.url}
-                  className="cursor-pointer border-[5px] bg-white border-white md:min-w-[1400px] md:min-h-[650px]"
+                  className="cursor-pointer border-[5px] bg-white border-white md:min-w-[1400px] md:min-h-[600px]"
                 />
               </TransformComponent>
             </TransformWrapper>

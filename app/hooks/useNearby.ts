@@ -26,6 +26,11 @@ export default function useNearby({
   const { isLoading, data } = useQuery({
     queryKey: [`nearby` + projId || slug],
     queryFn: getData,
+    staleTime: 30000,
+    refetchOnWindowFocus: false,
+    cacheTime: 30000,
+    refetchIntervalInBackground: false,
+    retry: false,
   });
 
   const queryClient = useQueryClient();

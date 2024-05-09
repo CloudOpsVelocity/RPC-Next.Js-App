@@ -38,6 +38,7 @@ export default function Overview({
   pinCode,
   builderId,
   state,
+  basePrice,
 }: Main) {
   const { PhaseOverview, phaseList } = usePhaseWiseOverview();
   return (
@@ -50,7 +51,7 @@ export default function Overview({
           <h2 className="text-[24px] lg:text-[32px] text-[#148B16] font-[700] capitalize">
             {projectName}
           </h2>
-          <p className="text-[16px] lg:text-[24px] text-[#505050] font-[500] capitalize sm:max-w-[85%]">
+          <p className="text-[16px] lg:text-[24px] text-black font-[600] capitalize sm:max-w-[85%]">
             {`${address}, ${localityName}, ${cityName}, ${state}, ${pinCode}`}
           </p>
         </div>
@@ -85,7 +86,7 @@ export default function Overview({
           <ProjBasicDetails
             key="totalLandArea"
             icon={<TotalLandArea />}
-            title="Total Land Area"
+            title="Project Land Area"
             value={`${totalLandArea} Acers`}
             className="mr-[5%] pt-[2%] mb-[3%] "
           />
@@ -99,7 +100,7 @@ export default function Overview({
           <ProjBasicDetails
             key="totalUnits"
             icon={<TotalLandArea />} // Adjust icon
-            title="Total No: of Units"
+            title="Units in Projects"
             value={`${totalUnit} Units`}
             className="mr-[5%] pt-[2%] mb-[3%] "
           />
@@ -160,6 +161,7 @@ export default function Overview({
         minPrice={minPrice}
         name={projectName}
         builderId={builderId}
+        basePrice={basePrice}
       />
     </div>
   );

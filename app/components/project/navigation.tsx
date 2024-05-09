@@ -153,7 +153,7 @@ export default function Navigation({
               <div
                 key={topic.id}
                 className={clsx(
-                  `cursor-pointer text-[20px] mr-[36px]  whitespace-nowrap`,
+                  `cursor-pointer text-[22px] mr-[36px]  whitespace-nowrap`,
                   currentBlock === topic.id
                     ? "text-[#0073C6] font-[700] decoration-solid underline"
                     : "text-[#4D6677] font-[500]",

@@ -46,8 +46,7 @@ export default function Specifications({
           <p className="text-[16px] text-[#212C33] md:text-[22px] italic font-semibold leading-[normal] tracking-[0.88px]  mb-4 flex justify-start items-start ">
             <span>
               {" "}
-              Vital Details: Size, Amenities, Features- Unveiling your dream
-              project{" "}
+              Vital Details: Size, Features- Unveiling your dream project{" "}
             </span>
           </p>
           <div className="flex flex-wrap gap-4">

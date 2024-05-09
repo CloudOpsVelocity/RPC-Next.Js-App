@@ -1,39 +1,31 @@
 "use client";
 import PriceBag, { Phone, WhatsAppButton } from "@/app/images/commonSvgs";
-import N from "@/app/styles/Numinput.module.css";
 import React from "react";
+
 import Button from "../../elements/button";
-import { NumberInput, TextInput } from "@mantine/core";
-import { useSession } from "next-auth/react";
-import { useForm, yupResolver } from "@mantine/form";
-import { reqSchema } from "@/app/validations/project";
-import { Button as B } from "@mantine/core";
-import ReqOtpForm from "./forms/otpform";
-import { addContact, sendContact } from "@/app/utils/api/actions/contact";
 import { useParams } from "next/navigation";
-import CountryInput from "../atoms/CountryInput";
 import { formatCurrency } from "@/app/utils/numbers";
-import { popupStateAtom, useReqCallPopup } from "@/app/hooks/useReqCallPop";
-import { useShortlistAndCompare } from "@/app/hooks/storage";
-import { useAtomValue } from "jotai";
+import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import RequestCallBackModal from "../molecules/popups/req";
 export default function OverviewBanner({
   minPrice,
   maxPrice,
   name,
   builderId,
+  basePrice,
 }: {
   minPrice: number;
   maxPrice: number;
   name: string;
   builderId: number;
+  basePrice: number;
 }) {
   const [opened, { open, close }] = useReqCallPopup();
   const { slug } = useParams<{ slug: string }>();
 
   return (
     <>
-      <div className="flex justify-start items-center w-full flex-col md:flex-row bg-gradient-to-r from-[#EFF5FF] /50 to-[#F2FAFF ]/50 ">
+      <div className="flex justify-start items-center w-full flex-col md:flex-row bg-[#f0f9ff] ">
         <PriceBag className="w-[150px] h-[170px] md:w-[237px] md:h-[263px] " />
 
         <div className="flex justify-center sm:justify-between items-center w-[100%] flex-row ml-[3%] p-[2%] flex-wrap">
@@ -42,6 +34,10 @@ export default function OverviewBanner({
               <span className="mr-4">PRICE RANGE</span>{" "}
               <span className="text-[#00487C] text-[24px] md:text-[32px] lg:text-[40px] whitespace-nowrap font-[700] mt-1">
                 {formatCurrency(minPrice)} - {formatCurrency(maxPrice)}
+                {", "}
+                <span className="text-[#545353] text-lg md:text-[32px] not-italic font-medium leading-[normal]">
+                  ₹ {basePrice} / price sq.ft
+                </span>
               </span>
             </p>
             <Button

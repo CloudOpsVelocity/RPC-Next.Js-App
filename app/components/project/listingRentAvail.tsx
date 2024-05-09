@@ -53,10 +53,9 @@ const Card = ({
 }) => {
   return (
     <div
-      className={clsx(
-        " sm:h-[85px] shadow-[0px_4px_30px_0px_rgba(0,0,0,0.15)] rounded-[31px] relative cursor-pointer",
-        block && "cursor-not-allowed"
-      )}
+      className={
+        " sm:h-[85px] shadow-[0px_4px_30px_0px_rgba(0,0,0,0.15)] rounded-[31px] relative cursor-pointer"
+      }
     >
       <AvailListSideSvg type={type} />
       <div className="block sm:inline-flex justify-center items-center gap-[22px] h-full ">
@@ -65,7 +64,11 @@ const Card = ({
           <h2 className="text-black text-xl  font-medium leading-6 ">
             <span className="capitalize">{type}</span> Listings in{" "}
           </h2>
-          <h2 className="text-[#148B16] text-xl  font-medium leading-6 mt-1">
+          <h2
+            className={clsx(
+              "text-[#242424] text-2xl not-italic font-bold leading-[31px] mt-1"
+            )}
+          >
             {projName}
           </h2>
         </div>

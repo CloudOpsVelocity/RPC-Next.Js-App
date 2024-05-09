@@ -12,9 +12,11 @@ export default function useBuilder({ id, y, type = "proj" }: Props) {
   const { data, isLoading } = useQuery({
     queryKey: [`builder/${id}&isBuilderPage=${y}` + type],
     queryFn: () => getBuilderDetails(id, y, type),
-    keepPreviousData: true,
     staleTime: 30000,
-    cacheTime: 300000,
+    refetchOnWindowFocus: false,
+    cacheTime: 30000,
+    refetchIntervalInBackground: false,
+    retry: false,
     enabled: path !== "/search",
   });
   return { data, isLoading };
