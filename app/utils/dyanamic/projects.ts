@@ -61,9 +61,10 @@ export function setPropertyValues(data: any, propCgId: number): any {
           totalNumberOfBalcony: data?.totalNumberOfBalcony?.toString(),
         }),
         totalNumberofBathroom: data?.totalNumberofBathroom?.toString(),
-        gardenArea: data?.gardenArea,
+        ...(data?.gardenArea && { gardenArea: data?.gardenArea }),
         parkingArea: data?.parkingArea,
-        terraceArea: data?.terraceArea,
+        ...(data?.terraceArea &&
+          data?.terraceArea !== "null" && { terraceArea: data?.terraceArea }),
         plotArea: data?.plotArea.toString(),
       };
       break;

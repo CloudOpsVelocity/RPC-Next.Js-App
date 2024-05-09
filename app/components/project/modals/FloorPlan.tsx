@@ -474,7 +474,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
           getOptions("gardenArea").filter((item) => item !== "undefined")
             .length > 0 && (
             <Select
-              key={useId()}
+              key={"gardenArea"}
               w={"full"}
               mt="md"
               label="Select Garden Area"
@@ -496,17 +496,18 @@ const LeftSection = ({ propCgId, data }: Props) => {
 
         {propCgId != projectprops.apartment &&
           propCgId != projectprops.plot &&
-          getOptions("terraceArea").filter((item) => item !== "undefined")
-            .length > 0 && (
+          getOptions("terraceArea").filter(
+            (item) => item !== "undefined" && item != "null"
+          ).length > 0 && (
             <Select
-              key={useId()}
+              key={"terrace Area"}
               w={"full"}
               mt="md"
               label="Select Terrace Area"
               className="!w-[46%]"
               placeholder="-- select --"
               data={getOptions("terraceArea").filter(
-                (item) => item !== "undefined"
+                (item) => item !== "undefined" && item != "null"
               )}
               searchable
               maxDropdownHeight={200}
@@ -524,7 +525,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
           getOptions("parkingArea").filter((item) => item !== "None").length >
             0 && (
             <Select
-              key={useId()}
+              key={"parkingarea"}
               w={"full"}
               mt="md"
               label="Select Parking Area"
@@ -656,7 +657,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
           propCgId == projectprops.villa ||
           propCgId == projectprops.rowHouse) && (
           <Select
-            key={useId()}
+            key={"plotArea123"}
             w={"full"}
             mt="md"
             label="Select Plot Area"
@@ -853,7 +854,8 @@ const RightSection = ({ propCgId }: Props) => {
         {(propCgId == projectprops.villa ||
           propCgId == projectprops.rowHouse ||
           propCgId == projectprops.villament) &&
-          data.terraceArea && (
+          data?.terraceArea &&
+          data.terraceArea !== "null" && (
             <div className="flex items-center space-x-3">
               {propertyDetailsSvgs.caretarea}
               <p className="text-[#4D6677] text-[14px] font-[500]">
