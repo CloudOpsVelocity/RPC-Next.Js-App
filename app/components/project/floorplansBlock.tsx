@@ -171,8 +171,6 @@ export default function FloorplansBlock({ projName, slug }: Props) {
       type !== "overview"
     ) {
       setSelectedFloor(projectUnitsData[0]);
-
-      // types.length > 0 && setPropCgId(types[0]);
     }
   }, [projectUnitsData]);
   useEffect(() => {

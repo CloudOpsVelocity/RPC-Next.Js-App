@@ -11,7 +11,6 @@ import Link from "next/link";
 import { getProjectDetails } from "@/app/utils/api/project";
 import ProjectDetailsP from "@/app/components/project/projectDetailsP";
 import ProjectDrawer from "@/app/components/project/Drawer";
-import DownloadBroucher from "@/app/components/project/downloadBroucher";
 import LeafMap from "@/app/components/project/map";
 import ListingRentAvail from "@/app/components/project/listingRentAvail";
 import dynamic from "next/dynamic";
@@ -19,6 +18,7 @@ import SectionSkeleton from "@/app/components/atoms/skeleton/section";
 import ErrorContainer from "@/app/components/project/error/container";
 import MobileHidden from "@/app/components/molecules/MobileHidden";
 import { notFound } from "next/navigation";
+import FloorplanDrawer from "@/app/components/project/drawers/floorplan";
 const FloorplansBlock = dynamic(
   () => import("@/app/components/project/floorplansBlock"),
   {
@@ -190,6 +190,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           builderId={data.builderId}
         />
         <ProjectDrawer projName={data.projectName} />
+        <FloorplanDrawer />
         <LoginPopup />
       </div>
     </div>

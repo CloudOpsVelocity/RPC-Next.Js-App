@@ -115,3 +115,7 @@
 .cardBg {
   background: var(--ll1, linear-gradient(272deg, #eff5ff 0%, #f2faff 100%));
 }
+
+.sideBarBg {
+  background: rgba(197, 215, 228, 0.3);
+}

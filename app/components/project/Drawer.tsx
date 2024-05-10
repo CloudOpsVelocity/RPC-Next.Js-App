@@ -96,7 +96,6 @@ function ProjectDrawer({ projName }: { projName: string }) {
             </div>
           )}
         </div>
-        {/* Drawer content */}
       </Drawer>
     </>
   );

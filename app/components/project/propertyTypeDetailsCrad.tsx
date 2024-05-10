@@ -20,6 +20,7 @@ import { queryClient } from "@/app/utils/query";
 import { getProjectUnits } from "@/app/utils/api/project";
 import { useParams } from "next/navigation";
 import clsx from "clsx";
+import ShowUnitsButton from "./button/showUnits";
 
 type Props = {
   cg: any;
@@ -112,6 +113,7 @@ export default function PropertyTypeDetailsCrad({
         break;
     }
   };
+
   return (
     <div
       className="flex  justify-between items-start min-h-[225px] w-[100%] max-w-[359px] lg:max-w-[510px] rounded-[24px] shadow-md pr-[1%] pl-[1%] mt-[70px] bg-gradient-to-l from-[#EFF5FF] /50 to-[#F2FAFF]/50 mb-[2%] cursor-pointer"
@@ -182,12 +184,7 @@ export default function PropertyTypeDetailsCrad({
           </span>
         </p>
         {cg?.unitTypes.length > 4 && (
-          <button
-            className="text-[#0073C6] text-right text-base italic font-semibold leading-[normal] underline "
-            onClick={(e) => e.stopPropagation()}
-          >
-            Show all units
-          </button>
+          <ShowUnitsButton cg={{ ...cg, propertyType }} />
         )}
       </div>
     </div>
