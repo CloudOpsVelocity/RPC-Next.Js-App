@@ -179,9 +179,9 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           />
         )}
         <Reviews projName={data.projectName} />
-        <DownloadBroucher
+        {/* <DownloadBroucher
           url={`${data?.media?.projBroucherUrl}?${Math.random()}`}
-        />
+        /> */}
         <FaqWithBg data={data.faqs} projName={data.projectName} />
         <NearByCarousel
           projName={data.projectName}

@@ -1,5 +1,9 @@
 "use client";
-import PriceBag, { Phone, WhatsAppButton } from "@/app/images/commonSvgs";
+import PriceBag, {
+  DocIcon,
+  Phone,
+  WhatsAppButton,
+} from "@/app/images/commonSvgs";
 import React from "react";
 
 import Button from "../../elements/button";
@@ -7,18 +11,21 @@ import { useParams } from "next/navigation";
 import { formatCurrency } from "@/app/utils/numbers";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import RequestCallBackModal from "../molecules/popups/req";
+import DownloadBroucher from "@/app/components/project/downloadBroucher";
 export default function OverviewBanner({
   minPrice,
   maxPrice,
   name,
   builderId,
   basePrice,
+  brocherUrl,
 }: {
   minPrice: number;
   maxPrice: number;
   name: string;
   builderId: number;
   basePrice: number;
+  brocherUrl?: string;
 }) {
   const [opened, { open, close }] = useReqCallPopup();
   const { slug } = useParams<{ slug: string }>();
@@ -47,8 +54,10 @@ export default function OverviewBanner({
               onChange={() => open("banner", slug)}
             />
           </div>
-
-          <WhatsAppButton className="cursor-pointer" name={name} />
+          <div className="">
+            <DownloadBroucher url={brocherUrl} />
+            <WhatsAppButton className="cursor-pointer mt-4" name={name} />
+          </div>
         </div>
 
         <RequestCallBackModal

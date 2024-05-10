@@ -53,7 +53,7 @@ export default function Reviews({ projName }: { projName: string }) {
               align="start"
               slideSize={{ base: "100%", sm: "50%", md: "33.333333%" }}
               withIndicators
-              height={250}
+              height={407}
               slidesToScroll={1}
               px={isMobile ? 0 : 70}
               classNames={{
@@ -93,7 +93,9 @@ const Review = ({ userRating, userName, userReview, postedDays }: any) => {
               <p className="text-black text-lg not-italic font-medium leading-[normal]">
                 {userName ?? "GRP USER"}
               </p>
-              <p className="text-[14px] text-[#212C33] font-[500]">Grp User</p>
+              <p className="text-[#0073C6] text-base not-italic font-medium leading-[normal]">
+                Grp User
+              </p>
             </div>
             <div className="text-right">
               <Rating size={"sm"} value={userRating} readOnly />

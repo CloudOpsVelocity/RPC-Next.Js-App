@@ -168,7 +168,16 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
                 ${cardData.stateName ?? ""} 
                 ${cardData.pinCode}`}
             </p>
-
+            {type === "proj" && (
+              <div className="inline-flex items-start gap-2 p-2 shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] cardBg mt-[16px]">
+                <span className="text-black text-right text-base not-italic font-medium leading-[normal]">
+                  Project Status:{" "}
+                </span>
+                <span className="text-[#148B16] text-base not-italic font-bold leading-[normal]">
+                  {cardData.projstatus}
+                </span>
+              </div>
+            )}
             {type != "proj" && (
               <p className="text-[16px] font-[500] text-[#4D6677]">
                 Posted by {cardData.postedByType === "B" ? "Builder" : "Agent"}

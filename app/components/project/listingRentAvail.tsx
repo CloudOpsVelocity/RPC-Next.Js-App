@@ -61,7 +61,7 @@ const Card = ({
       <div className="block sm:inline-flex justify-center items-center gap-[22px] h-full ">
         {type === "rent" ? <RentSvg /> : <SellSvg />}
         <div className="pl-5 md:pl-0">
-          <h2 className="text-black text-xl  font-medium leading-6 ">
+          <h2 className="text-[#242424] text-2xl not-italic font-medium leading-[31px]">
             <span className="capitalize">{type}</span> Listings in{" "}
           </h2>
           <h2

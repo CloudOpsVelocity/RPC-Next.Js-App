@@ -111,3 +111,7 @@
     rgba(245, 245, 245, 0.96) 100%
   );
 }
+
+.cardBg {
+  background: var(--ll1, linear-gradient(272deg, #eff5ff 0%, #f2faff 100%));
+}
