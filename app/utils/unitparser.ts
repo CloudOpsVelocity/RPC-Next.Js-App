@@ -12,7 +12,7 @@ const parseUnitStrings = (unitStrings: string[]): string => {
       parsedUnits.push(unit);
     }
   });
-  return parsedUnits.join(", ");
+  return parsedUnits.sort().slice(0, 4).join(", ");
 };
 
 export { parseUnitStrings as parseUnits };

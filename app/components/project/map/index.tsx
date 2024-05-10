@@ -26,8 +26,9 @@ import useMapData from "@/app/hooks/project/useMapData";
 import PropertyHeading from "../../property/heading";
 import { useSetAtom } from "jotai";
 import { isScrollingAtom } from "../navigation";
+import CustomScrollArea from "./ScrollPanel";
 
-interface Area {
+export interface Area {
   name: string;
   Icon?: any;
   lat?: number;
@@ -96,23 +97,28 @@ const LeafMap: React.FC<{
         )}
       </div>
       <div className="flex gap-6 mb-5 mt-1 w-full flex-wrap ">
-        {areas.map(({ Icon, name, key }) => {
+        {/* {areas.map(({ Icon, name, key }) => {
           return (
             <button
               onClick={() => {
                 setSelected(key as string);
               }}
               className={clsx(
-                "text-[#4D6677] text-xl not-italic font-medium flex items-center gap-[5px] leading-[normal] capitalize",
-                selected === key && "!text-green-600 font-semibold"
+                "inline-flex justify-center items-center gap-1.5 px-2.5 py-1.5   text-[#0073C6] text-[26px] not-italic font-medium leading-[normal] capitalize rounded border border-solid border-[#0073C6]",
+                selected === key && "!text-white font-semibold bg-[#0073C6]"
               )}
               key={name}
             >
-              <Icon stroke={clsx(selected === key ? "#148B16" : "#4D6677")} />
+              <Icon stroke={clsx(selected === key ? "#FFF" : "#0073C6")} />
               {name}
             </button>
           );
-        })}
+        })} */}
+        <CustomScrollArea
+          areas={areas}
+          selected={selected}
+          setSelected={setSelected}
+        />
       </div>
 
       <div className="border border-[#92B2C8] flex flex-col-reverse md:grid grid-cols-1 md:grid-cols-[2fr_3fr] rounded-xl overflow-hidden  shadow-lg md:h-[620px]">
@@ -367,7 +373,7 @@ export const areas: Area[] = [
   {
     name: "Clinic",
     Icon: ClinikIcon,
-    key: "hospital",
+    key: "clinic",
   },
 
   {
@@ -379,6 +385,7 @@ export const areas: Area[] = [
   {
     name: "Post Office",
     Icon: PostOfficeIcon,
+    key: "post_office",
   },
 
   {

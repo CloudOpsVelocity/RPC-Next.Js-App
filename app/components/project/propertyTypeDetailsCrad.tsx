@@ -19,6 +19,7 @@ import { QueryCache, useQuery } from "react-query";
 import { queryClient } from "@/app/utils/query";
 import { getProjectUnits } from "@/app/utils/api/project";
 import { useParams } from "next/navigation";
+import clsx from "clsx";
 
 type Props = {
   cg: any;
@@ -113,10 +114,10 @@ export default function PropertyTypeDetailsCrad({
   };
   return (
     <div
-      className="flex flex-col justify-start items-start min-h-[235px] w-[100%] max-w-[359px] lg:max-w-[510px] rounded-[24px] shadow-md pr-[2%] pl-[1%] mt-[70px] bg-gradient-to-l from-[#EFF5FF] /50 to-[#F2FAFF]/50 mb-[2%] cursor-pointer"
+      className="flex  justify-between items-start min-h-[225px] w-[100%] max-w-[359px] lg:max-w-[510px] rounded-[24px] shadow-md pr-[1%] pl-[1%] mt-[70px] bg-gradient-to-l from-[#EFF5FF] /50 to-[#F2FAFF]/50 mb-[2%] cursor-pointer"
       onClick={() => updateValues(phase, getPropId(propertyType as string))}
     >
-      <div className="flex justify-between items-start w-full ">
+      <div className="leftSection max-w-[55%] flex flex-col justify-between min-h-[225px]">
         <div className="max-w-[90px] lg:max-w-[115px] w-full h-[90px] lg:h-[115px] border-solid border-1 border-[#FFF] rounded-full bg-[#c9daee] relative bottom-[50px] lg:bottom-[60px] mb-[-40px]">
           <Image
             width={90}
@@ -126,55 +127,202 @@ export default function PropertyTypeDetailsCrad({
             className="w-full h-full object-cover rounded-[14px]"
           />
         </div>
-        <div className="flex justify-between items-start mb-[3%] w-[90%] mt-[3%]">
-          <p className="text-[16px] lg:text-[18px] text-[#00487C] font-[600] ml-[10px]">
-            {propName(propertyType, "name")}
-          </p>
-
-          <div className="flex justify-end items-end flex-col">
-            <p className="text-[16px] text-right lg:text-[18.5px] text-[#148B16] font-[700]">
-              {formatCurrency(cg?.minPrice)} - {formatCurrency(cg?.maxPrice)}
+        <div className="down mb-3">
+          <div className="flex   mt-[36px] gap-x-[16px] flex-wrap  ">
+            {propertyType == "apt" || propertyType == "vlmt" ? (
+              <p className="text-[14px] lg:text-[20px] text-[#2A4C70] font-[500] flex justify-start items-start  ">
+                <TowerIcon className="w-[16px] h-[16px] lg:w-[24px] lg:h-[24px]" />
+                <span className="mr-[6px] ml-[6px]"> {cg?.elevation} </span>{" "}
+                Towers
+              </p>
+            ) : (
+              ""
+            )}
+            <p className="text-[14px] lg:text-[20px] text-[#2A4C70] font-[500] flex justify-start items-start  ">
+              <FlooringIcon className="w-[16px] h-[16px] lg:w-[24px] lg:h-[24px]" />
+              <span className="mr-[6px] ml-[6px]">{cg?.unitCount} </span> Units
             </p>
-            <p className="text-[14px] lg:text-[16px] italic text-[#00487C] font-[500]">
-              ₹ {cg?.basePrice} Base Price/ sq.ft
-            </p>
+            {propertyType === "rowHouse" || propertyType === "villa" ? (
+              <p className="text-[14px] lg:text-[20px] text-[#2A4C70] font-[500] flex justify-start items-start  ">
+                <FloorsIcon className="w-[16px] h-[16px] lg:w-[24px] lg:h-[24px]" />
+                <span className="mr-[6px] ml-[6px]">
+                  {"G+" + cg?.elevation}
+                </span>{" "}
+                Elevation
+              </p>
+            ) : (
+              ""
+            )}
           </div>
+
+          <button className="text-[16px] lg:text-[18px] inline-flex max-w-fit justify-center items-center gap-2.5 px-2 py-1 mb-[2%] cursor-pointer  rounded border-[0.8px] border-solid border-[#0073C6] bg-[#fff] text-[#0073C6] text-lg not-italic font-semibold leading-[normal]">
+            View Floor Plans
+          </button>
         </div>
       </div>
-
-      <div className="flex justify-end items-end flex-col w-full ">
-        <p className="text-[14px] lg:text-[18px] text-[#233] font-[500] mb-[3%] text-right">
-          UNITS: {parseUnits(cg?.unitTypes)}
+      <div className="rightSection pt-3 flex flex-col">
+        <p className="text-[#00487C]   md:text-xl not-italic font-semibold leading-[normal] ml-[10px] text-right">
+          {propName(propertyType, "name")}
         </p>
-        <div className="flex justify-end items-end mb-[3%] gap-[16px]">
-          {propertyType == "apt" || propertyType == "vlmt" ? (
-            <p className="text-[14px] lg:text-[20px] text-[#2A4C70] font-[500] flex justify-start items-start  ">
-              <TowerIcon className="w-[16px] h-[16px] lg:w-[24px] lg:h-[24px]" />
-              <span className="mr-[6px] ml-[6px]"> {cg?.elevation} </span>{" "}
-              Towers
-            </p>
-          ) : (
-            ""
-          )}
-          <p className="text-[14px] lg:text-[20px] text-[#2A4C70] font-[500] flex justify-start items-start  ">
-            <FlooringIcon className="w-[16px] h-[16px] lg:w-[24px] lg:h-[24px]" />
-            <span className="mr-[6px] ml-[6px]">{cg?.unitCount} </span> Units
-          </p>
-          {propertyType === "rowHouse" || propertyType === "villa" ? (
-            <p className="text-[14px] lg:text-[20px] text-[#2A4C70] font-[500] flex justify-start items-start  ">
-              <FloorsIcon className="w-[16px] h-[16px] lg:w-[24px] lg:h-[24px]" />
-              <span className="mr-[6px] ml-[6px]">{"G+" + cg?.elevation}</span>{" "}
-              Elevation
-            </p>
-          ) : (
-            ""
-          )}
-        </div>
-
-        <button className="text-[16px] lg:text-[18px] text-[#0073C6] font-[600] underline mb-[2%] cursor-pointer mt-[28px]">
-          View Floor Plans
-        </button>
+        <p className="text-[16px] text-right lg:text-[22px] text-[#148B16]  not-italic font-bold leading-[normal] mt-2">
+          {formatCurrency(cg?.minPrice)} - {formatCurrency(cg?.maxPrice)}
+        </p>
+        <p className="text-[14px] lg:text-lg text-[#242424]  italic font-medium leading-[normal]">
+          ₹ {cg?.basePrice} Base Price/ sq.ft
+        </p>
+        <p className="text-[14px] lg:text-[18px]  mb-[3%] text-right text-[#4D6677] text-lg not-italic font-semibold leading-[normal] capitalize mt-3 ">
+          Units available : <br />{" "}
+          <span
+            className={clsx(
+              "text-[#242424] text-right text-lg not-italic font-semibold leading-[22px] max-w-[135px] inline-block min-h-[44px]",
+              propertyType === "plot" && "!max-w-full"
+            )}
+          >
+            {parseUnits(cg?.unitTypes)}
+          </span>
+        </p>
+        {cg?.unitTypes.length > 4 && (
+          <button
+            className="text-[#0073C6] text-right text-base italic font-semibold leading-[normal] underline "
+            onClick={(e) => e.stopPropagation()}
+          >
+            Show all units
+          </button>
+        )}
       </div>
     </div>
   );
 }
+
+// export function PropertyTypeDetailsCradTest({
+//   cg,
+//   propertyType,
+//   phase,
+// }: Props) {
+//   const { slug } = useParams<{ slug: string }>();
+//   const [, { open }] = useFloorPlanPopup();
+//   const setcurrentPhase = useSetAtom(currentPhaseAtom);
+//   const setPrpCgId = useSetAtom(propCgIdAtom);
+//   const setSelectedFloor = useSetAtom(selectedFloorAtom);
+//   const [, setFloorsArray] = useAtom(floorPlansArray);
+//   const { data: projectUnitsData } = useQuery({
+//     queryKey: [`/${getPropId(propertyType)}/${phase}/${slug}`],
+//     queryFn: () => getProjectUnits(slug, phase, getPropId(propertyType)),
+//   });
+//   const handleOpen = () => {
+//     open("overview");
+//   };
+//   const updateValues = (newCurrentPhase: number, newPropCgId: number) => {
+//     setcurrentPhase(newCurrentPhase);
+//     setPrpCgId(newPropCgId);
+//     setFloorsArray(projectUnitsData);
+//     setSelectedFloor(null);
+//     handleOpen();
+//   };
+
+//   const propName = (key: string, type?: string) => {
+//     switch (key) {
+//       case "apt":
+//         if (type == "name") {
+//           return "Apartment";
+//         } else {
+//           return apartmentCardImg;
+//         }
+//         break;
+//       case "plot":
+//         if (type == "name") {
+//           return "Plot";
+//         } else {
+//           return plotCardImg;
+//         }
+//         break;
+//       case "rowHouse":
+//         if (type == "name") {
+//           return "Rowhouse";
+//         } else {
+//           return rowhouseCardImg;
+//         }
+//         break;
+//       case "villa":
+//         if (type == "name") {
+//           return "Villa";
+//         } else {
+//           return villaCardImg;
+//         }
+//         break;
+//       case "vlmt":
+//         if (type == "name") {
+//           return "Villament";
+//         } else {
+//           return villamentCardImg;
+//         }
+//         break;
+//     }
+//   };
+//   return (
+//     <div
+//       className="flex flex-col justify-start items-start min-h-[235px] w-[100%] max-w-[359px] lg:max-w-[510px] rounded-[24px] shadow-md pr-[2%] pl-[1%] mt-[70px] bg-gradient-to-l from-[#EFF5FF] /50 to-[#F2FAFF]/50 mb-[2%] cursor-pointer"
+//       onClick={() => updateValues(phase, getPropId(propertyType as string))}
+//     >
+//       <div className="flex justify-between items-start w-full ">
+//         <div className="max-w-[90px] lg:max-w-[115px] w-full h-[90px] lg:h-[115px] border-solid border-1 border-[#FFF] rounded-full bg-[#c9daee] relative bottom-[50px] lg:bottom-[60px] mb-[-40px]">
+//           <Image
+//             width={90}
+//             height={90}
+//             src={propName(propertyType, "img") as string}
+//             alt="Preview"
+//             className="w-full h-full object-cover rounded-[14px]"
+//           />
+//         </div>
+//         <div className="flex justify-between items-start mb-[3%] w-[90%] mt-[3%]">
+//           <p className="text-[16px] lg:text-[18px] text-[#00487C] font-[600] ml-[10px]">
+//             {propName(propertyType, "name")}
+//           </p>
+
+//           <div className="flex justify-end items-end flex-col">
+//             <p className="text-[16px] text-right lg:text-[18.5px] text-[#148B16] font-[700]">
+//               {formatCurrency(cg?.minPrice)} - {formatCurrency(cg?.maxPrice)}
+//             </p>
+//             <p className="text-[14px] lg:text-[16px] italic text-[#00487C] font-[500]">
+//               ₹ {cg?.basePrice} Base Price/ sq.ft
+//             </p>
+//           </div>
+//         </div>
+//       </div>
+
+//       <div className="flex justify-end items-end flex-col w-full ">
+//         <p className="text-[14px] lg:text-[18px] text-[#233] font-[500] mb-[3%] text-right">
+//           UNITS: {parseUnits(cg?.unitTypes)}
+//         </p>
+//         <div className="flex justify-end items-end mb-[3%] gap-[16px]">
+//           {propertyType == "apt" || propertyType == "vlmt" ? (
+//             <p className="text-[14px] lg:text-[20px] text-[#2A4C70] font-[500] flex justify-start items-start  ">
+//               <TowerIcon className="w-[16px] h-[16px] lg:w-[24px] lg:h-[24px]" />
+//               <span className="mr-[6px] ml-[6px]"> {cg?.elevation} </span>{" "}
+//               Towers
+//             </p>
+//           ) : (
+//             ""
+//           )}
+//           <p className="text-[14px] lg:text-[20px] text-[#2A4C70] font-[500] flex justify-start items-start  ">
+//             <FlooringIcon className="w-[16px] h-[16px] lg:w-[24px] lg:h-[24px]" />
+//             <span className="mr-[6px] ml-[6px]">{cg?.unitCount} </span> Units
+//           </p>
+//           {propertyType === "rowHouse" || propertyType === "villa" ? (
+//             <p className="text-[14px] lg:text-[20px] text-[#2A4C70] font-[500] flex justify-start items-start  ">
+//               <FloorsIcon className="w-[16px] h-[16px] lg:w-[24px] lg:h-[24px]" />
+//               <span className="mr-[6px] ml-[6px]">{"G+" + cg?.elevation}</span>{" "}
+//               Elevation
+//             </p>
+//           ) : (
+//             ""
+//           )}
+//         </div>
+
+//         <button className="text-[16px] lg:text-[18px] text-[#0073C6] font-[600] underline mb-[2%] cursor-pointer mt-[28px]">
+//           View Floor Plans
+//         </button>
+//       </div>
+//     </div>
+//   );
+// }
