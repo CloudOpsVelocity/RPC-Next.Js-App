@@ -56,10 +56,6 @@ export const useShortlistAndCompare = (): HookReturnValue => {
   };
 
   const pushToRequestCallbacks = (id: string, callback: () => void): void => {
-    setGlobalData((prevGlobalData) => ({
-      ...prevGlobalData,
-      requestCallbacks: [...prevGlobalData.requestCallbacks, id],
-    }));
     callback();
   };
   const isCallbackSubmitted = (id: string): boolean => {

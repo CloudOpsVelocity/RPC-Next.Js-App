@@ -62,6 +62,11 @@ export default function PropertyTypeDetailsCrad({
   const { data: projectUnitsData } = useQuery({
     queryKey: [`/${getPropId(propertyType)}/${phase}/${slug}`],
     queryFn: () => getProjectUnits(slug, phase, getPropId(propertyType)),
+    staleTime: 30000,
+    refetchOnWindowFocus: false,
+    cacheTime: 30000,
+    refetchIntervalInBackground: false,
+    retry: false,
   });
   const handleOpen = () => {
     open("overview");

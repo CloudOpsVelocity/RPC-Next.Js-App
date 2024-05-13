@@ -10,7 +10,7 @@ import {
 export default async function page() {
   return (
     <>
-      <QnaSuccesssMessage />
+      <RatingMessage />
     </>
   );
 }

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Textarea, Button, Modal } from "@mantine/core";
 import classes from "@/app/styles/FaqWithBg.module.css";
 import { FAQ } from "@/app/validations/types/project";
@@ -16,7 +16,8 @@ import StepCscs from "@/app/styles/Stepper.module.css";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import S from "@/app/styles/Qna.module.css";
 import Close from "./button/close";
-import { QnaSuccesssMessage } from "./success";
+import { ListingNotFoundMessage, QnaSuccesssMessage } from "./success";
+import { useMessagePopup } from "@/app/hooks/project/useMessagePopup";
 type FaqWithBgProps = {
   data: FAQ[];
   projName: string;
@@ -84,7 +85,7 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
     },
     validate: yupResolver(qnaSchema),
   });
-  const [opened, { close, open: openSuccesPopup }] = useDisclosure(false);
+  const [opened, { close, open: openSuccesPopup }] = useMessagePopup("qna");
   const formSubmit = async (values: any) => {
     if (session) {
       setStatus("pending");
@@ -102,7 +103,7 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
   };
   const onClose = () => {
     close();
-    reset();
+    opened.type === "qna" && reset();
   };
   return (
     <form
@@ -164,7 +165,7 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
       </div>
       <Success
         text={values.question}
-        opened={opened}
+        opened={opened.status}
         onClose={onClose}
         projName={projName}
       />
@@ -194,6 +195,13 @@ const FaqCard = ({
 
 const Success = ({ text, opened, onClose, projName }: any) => {
   const isMobile = useMediaQuery(`(max-width: 750px)`);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      onClose();
+    }, 2500);
+
+    return () => clearTimeout(timer);
+  }, [onClose]);
   return (
     <Modal
       classNames={{
@@ -212,7 +220,11 @@ const Success = ({ text, opened, onClose, projName }: any) => {
       size={isMobile ? "100%" : "auto"}
     >
       <Close close={onClose} className="absolute top-2 right-2 z-50" />
-      <QnaSuccesssMessage />
+      {opened.type === "qna" ? (
+        <QnaSuccesssMessage />
+      ) : (
+        <ListingNotFoundMessage />
+      )}
     </Modal>
   );
 };

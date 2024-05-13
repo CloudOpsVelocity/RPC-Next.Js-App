@@ -64,6 +64,7 @@ export default function OverviewBanner({
           close={close}
           opened={opened}
           builderId={builderId}
+          name={name}
         />
       </div>
     </>
