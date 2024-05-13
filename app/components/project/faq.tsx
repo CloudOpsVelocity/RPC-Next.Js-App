@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Accordion, Textarea, Button, Modal, ScrollArea } from "@mantine/core";
+import { Textarea, Button, Modal } from "@mantine/core";
 import classes from "@/app/styles/FaqWithBg.module.css";
 import { FAQ } from "@/app/validations/types/project";
 import { addQna } from "@/app/utils/api/actions/Qna";
@@ -8,17 +8,15 @@ import { useParams } from "next/navigation";
 import { useForm, yupResolver } from "@mantine/form";
 import { qnaSchema } from "@/app/validations/project";
 import { useSession } from "next-auth/react";
-import { MinusIcon, PlusIcon } from "@/app/images/commonSvgs";
-import toast from "react-hot-toast";
 import handleTrimAndReplace from "@/app/utils/input/validations";
 import clsx from "clsx";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import FaqReadMore from "../atoms/faq/FaqReadmore";
 import StepCscs from "@/app/styles/Stepper.module.css";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
-import S from "@/app/styles/Rating.module.css";
-import { getRandomValues } from "crypto";
+import S from "@/app/styles/Qna.module.css";
 import Close from "./button/close";
+import { QnaSuccesssMessage } from "./success";
 type FaqWithBgProps = {
   data: FAQ[];
   projName: string;
@@ -196,7 +194,6 @@ const FaqCard = ({
 
 const Success = ({ text, opened, onClose, projName }: any) => {
   const isMobile = useMediaQuery(`(max-width: 750px)`);
-  console.log(text);
   return (
     <Modal
       classNames={{
@@ -206,36 +203,16 @@ const Success = ({ text, opened, onClose, projName }: any) => {
         content: S.content,
         overlay: S.overlay,
         header: S.disabled,
+        body: S.body,
       }}
       opened={opened}
       onClose={onClose}
       centered
       title="Add Rating"
-      size={isMobile ? "100%" : "45%"}
+      size={isMobile ? "100%" : "auto"}
     >
-      <Close close={onClose} className="absolute top-8 right-6" />
-      <div className="px-5 py-8">
-        <h1 className="text-[#001F35] text-4xl not-italic font-semibold leading-[normal] mb-[20px]">
-          Congratulations 🎉
-        </h1>
-        <p className="text-[#202020] text-2xl not-italic font-medium leading-[normal] mb-5">
-          Your Question has been submitted successfully!
-        </p>
-        <p className="text-[#202020] text-2xl not-italic font-medium leading-[normal] mb-[30px]">
-          Project:{" "}
-          <span className="text-[#148B16] text-2xl not-italic font-bold leading-[normal] capitalize">
-            {projName}
-          </span>
-        </p>
-        <div className="inline-flex flex-col justify-center items-start gap-[19px] px-4 py-[15px] rounded bg-[#cae9ff4d] w-full">
-          <ScrollArea
-            mah={200}
-            className="text-black text-xl not-italic font-medium leading-8 tracking-[0.8px] ml-2 "
-          >
-            {text}
-          </ScrollArea>
-        </div>
-      </div>
+      <Close close={onClose} className="absolute top-2 right-2 z-50" />
+      <QnaSuccesssMessage />
     </Modal>
   );
 };

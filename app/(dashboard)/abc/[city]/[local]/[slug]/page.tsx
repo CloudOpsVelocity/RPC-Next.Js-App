@@ -192,6 +192,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         <ProjectDrawer projName={data.projectName} />
         <FloorplanDrawer />
         <LoginPopup />
+        {/* <BaseSucess /> */}
       </div>
     </div>
   );
