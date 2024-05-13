@@ -74,8 +74,8 @@ const LeafMap: React.FC<{
   const { data: mapData, isLoading } = useMapData({ projSlug: projId });
   const isMobile = useMediaQuery(`(max-width: 750px)`);
   return (
-    <div className="w-[90%] scroll-mt-[180px] mx-auto  mb-[5%] " id="nearBy">
-      <div className="flex justify-between ">
+    <div className="w-full scroll-mt-[180px] mx-auto  mb-[5%] " id="nearBy">
+      <div className="flex justify-between w-[90%] mx-auto">
         {type === "prop" ? (
           <PropertyHeading
             title="Near BY LOCATIONS"
@@ -96,24 +96,7 @@ const LeafMap: React.FC<{
           </div>
         )}
       </div>
-      <div className="flex gap-6 mb-5 mt-1 w-full flex-wrap ">
-        {/* {areas.map(({ Icon, name, key }) => {
-          return (
-            <button
-              onClick={() => {
-                setSelected(key as string);
-              }}
-              className={clsx(
-                "inline-flex justify-center items-center gap-1.5 px-2.5 py-1.5   text-[#0073C6] text-[26px] not-italic font-medium leading-[normal] capitalize rounded border border-solid border-[#0073C6]",
-                selected === key && "!text-white font-semibold bg-[#0073C6]"
-              )}
-              key={name}
-            >
-              <Icon stroke={clsx(selected === key ? "#FFF" : "#0073C6")} />
-              {name}
-            </button>
-          );
-        })} */}
+      <div className="flex gap-6 mb-5 mt-1  flex-wrap w-[95%] ml-4">
         <CustomScrollArea
           areas={areas}
           selected={selected}
@@ -121,7 +104,7 @@ const LeafMap: React.FC<{
         />
       </div>
 
-      <div className="border border-[#92B2C8] flex flex-col-reverse md:grid grid-cols-1 md:grid-cols-[2fr_3fr] rounded-xl overflow-hidden  shadow-lg md:h-[620px]">
+      <div className="border border-[#92B2C8] flex flex-col-reverse md:grid grid-cols-1 md:grid-cols-[2fr_3fr] rounded-xl overflow-hidden  shadow-lg md:h-[620px] w-[90%] mx-auto">
         <section className="bg-white">
           <div id="tabs">
             <Tabs defaultValue="public">
@@ -184,7 +167,7 @@ const LeafMap: React.FC<{
         </section>
       </div>
       {mapData && mapData[selected] && mapData[selected].length > 0 && (
-        <div className="mt-8 ">
+        <div className="mt-8 w-[90%] mx-auto">
           <h1 className="text-[#303030] text-xl not-italic font-medium leading-[normal] tracking-[0.8px] capitalize">
             {selected.split("_").join(" ")} Nearby
           </h1>

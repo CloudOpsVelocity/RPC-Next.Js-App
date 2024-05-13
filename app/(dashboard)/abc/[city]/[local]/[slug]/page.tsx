@@ -169,7 +169,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         </ErrorContainer>
 
         <AboutBuilder id={data.builderId} />
-        {/* Why Buy This */}
+        {/* Why Buy This  */}
         {data.wbtp && (
           <About
             id="whyBuy"

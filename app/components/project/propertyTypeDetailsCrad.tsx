@@ -180,7 +180,7 @@ export default function PropertyTypeDetailsCrad({
               propertyType === "plot" && "!max-w-full"
             )}
           >
-            {parseUnits(cg?.unitTypes)}
+            {parseUnits(cg?.unitTypes, propertyType)}
           </span>
         </p>
         {cg?.unitTypes.length > 4 && (

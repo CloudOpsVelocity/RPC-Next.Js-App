@@ -1,6 +1,9 @@
 const SQUARE_FOOT_SUFFIX = " sq.ft";
 
-const parseUnitStrings = (unitStrings: string[]): string => {
+const parseUnitStrings = (
+  unitStrings: string[],
+  propertyType?: string
+): string => {
   const parsedUnits: string[] = [];
 
   unitStrings?.forEach((unit) => {
@@ -12,7 +15,9 @@ const parseUnitStrings = (unitStrings: string[]): string => {
       parsedUnits.push(unit);
     }
   });
-  return parsedUnits.sort().slice(0, 4).join(", ");
+  return propertyType && propertyType === "plot"
+    ? parsedUnits.sort().slice(0, 2).join(", ")
+    : parsedUnits.sort().slice(0, 4).join(", ");
 };
 
 export { parseUnitStrings as parseUnits };
