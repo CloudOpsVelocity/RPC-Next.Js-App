@@ -165,7 +165,7 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
       </div>
       <Success
         text={values.question}
-        opened={opened.status}
+        opened={opened}
         onClose={onClose}
         projName={projName}
       />
@@ -213,7 +213,7 @@ const Success = ({ text, opened, onClose, projName }: any) => {
         header: S.disabled,
         body: S.body,
       }}
-      opened={opened}
+      opened={opened.status}
       onClose={onClose}
       centered
       title="Add Rating"

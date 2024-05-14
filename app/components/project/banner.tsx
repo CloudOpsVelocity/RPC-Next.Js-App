@@ -1,5 +1,5 @@
 "use client";
-import { Button, Modal, Rating, Textarea } from "@mantine/core";
+import { Modal } from "@mantine/core";
 import { useLocalStorage, useMediaQuery } from "@mantine/hooks";
 import Image from "next/image";
 import React, { useState } from "react";
@@ -9,17 +9,15 @@ import { ratingSchema, ratingSchema2 } from "@/app/validations/project";
 import { addRating } from "@/app/utils/api/actions/ratings";
 import { useParams } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { IconSun, RatingStar } from "@/app/images/commonSvgs";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import LoginPopup from "../molecules/popups/login";
 import Close from "./button/close";
 import { usePopUpRatings } from "@/app/hooks/popups/usePopUpRatings";
-import handleTrimAndReplace from "@/app/utils/input/validations";
-import clsx from "clsx";
 import { RatingForm, Success } from "./success/rating";
 import { FormProvider, useForm } from "@/app/context/rating";
-import ForgotForm from "../molecules/auth/forgot";
-
+import { RatingMessage } from "./success";
+import Styles from "@/app/styles/Qna.module.css";
+import useDynamicProj from "@/app/hooks/project/useDynamic";
 export default function Banner({
   projName,
   projIdEnc,
@@ -113,11 +111,8 @@ const AddRating = ({
 }) => {
   const params = useParams<{ slug: string }>();
   const { data: session } = useSession();
-  const [value, setValue] = useLocalStorage<Props[]>({
-    key: "ur",
-    defaultValue: [],
-  });
-  const isSubmitted = value?.find((val) => val.proj === projIdEnc);
+  const { data, mutate } = useDynamicProj();
+  const isSubmitted = data?.userRating === "Y" && data.userReview === "Y";
   const [status, setStatus] = useState<
     "pending" | "idle" | "success" | "error"
   >("idle");
@@ -129,7 +124,8 @@ const AddRating = ({
     validate: yupResolver(isSubmitted ? ratingSchema2 : ratingSchema),
   });
   const onClose = () => {
-    status !== "success" && form.reset();
+    form.reset();
+    setStatus("idle");
     close();
   };
 
@@ -142,55 +138,59 @@ const AddRating = ({
       }
       await addRating({
         projIdEnc: params?.slug,
-        rating: isSubmitted?.rating,
+        rating: form.values.rating,
         review: form.values?.review,
       });
-      const udpatedData = value?.map((val) => {
-        if (val.proj === projIdEnc) {
-          return { ...val, review: form.values?.review };
-        }
-        return val;
-      });
-      setValue(udpatedData);
     } else {
       await addRating({ ...values, projIdEnc: params?.slug });
-      setValue((prev: any) => [...prev, { ...values, proj: projIdEnc }]);
     }
     setStatus("success");
   };
   const isMobile = useMediaQuery(`(max-width: 750px)`);
   return (
     <Modal
-      classNames={{
-        title: S.title,
-        root: S.root,
-        close: S.close,
-        content: S.content,
-        overlay: S.overlay,
-        header:
-          !session || status === "success" || isSubmitted
-            ? S.disabled
-            : S.header,
-      }}
+      classNames={
+        isSubmitted
+          ? {
+              title: Styles.title,
+              root: Styles.root,
+              close: Styles.close,
+              content: Styles.content,
+              overlay: Styles.overlay,
+              header: Styles.disabled,
+              body: Styles.body,
+            }
+          : {
+              title: S.title,
+              root: S.root,
+              close: S.close,
+              content: S.content,
+              overlay: S.overlay,
+              header: !session ? S.disabled : S.header,
+            }
+      }
       opened={opened}
       onClose={onClose}
       centered
       title="Add Ratings"
-      size={isMobile ? "100%" : session ? "55%" : "35%"}
+      size={
+        status === "success"
+          ? "auto"
+          : isMobile
+          ? "100%"
+          : session
+          ? "55%"
+          : "35%"
+      }
     >
       <FormProvider form={form}>
         <div className="relative">
           {(!session || status === "success" || isSubmitted) && (
-            <Close close={onClose} className="absolute top-3 right-1" />
+            <Close close={onClose} className="absolute top-3 right-1 z-50" />
           )}
           {session ? (
             status === "success" || isSubmitted ? (
-              <Success
-                close={onClose}
-                projIdEnc={projIdEnc}
-                projName={projName}
-                formSubmit={formSubmit}
-              />
+              <RatingMessage close={onClose} />
             ) : (
               <RatingForm projName={projName} formSubmit={formSubmit} />
             )

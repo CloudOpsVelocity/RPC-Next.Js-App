@@ -8,10 +8,16 @@ export default function useDynamicProj() {
   const { data: Session } = useSession();
   const { slug } = useParams<{ slug: string }>();
   const getData = async () => {
-    const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/dynamic-data?projIdEnc=${slug}`
-    );
-    return res.data;
+    // const res = await axios.get(
+    //   `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/dynamic-data?projIdEnc=${slug}`
+    // );
+    // return res.data;
+    return {
+      compareCount: 0,
+      userReview: "Y",
+      userRating: "Y",
+      status: true,
+    };
   };
   const { data, isLoading } = useQuery({
     queryFn: getData,

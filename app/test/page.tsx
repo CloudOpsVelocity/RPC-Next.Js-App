@@ -8,9 +8,5 @@ import {
 } from "../components/project/success";
 
 export default async function page() {
-  return (
-    <>
-      <RatingMessage />
-    </>
-  );
+  return <>{/* <RatingMessage /> */}</>;
 }
