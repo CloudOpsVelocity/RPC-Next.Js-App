@@ -69,13 +69,12 @@ export const RatingForm = ({
   mutate,
 }: any) => {
   const form = useFormContext();
-  console.log(isSubmitted);
   return (
     <form
       onSubmit={form.onSubmit(formSubmit)}
       className={clsx(
         "max-w-[100%] mt-[2%] mx-auto my-8   rounded-lg space-y-2 p-5",
-        isSubmitted?.rating && "!p-0 !mt-7"
+        isSubmitted && "!px-5 pb-5 !mt-0 "
       )}
     >
       {!isSubmitted && (
@@ -102,7 +101,17 @@ export const RatingForm = ({
           </p>
         </div>
       )}
-
+      {isSubmitted && (
+        <div className="flex justify-center items-center mb-6">
+          <p className="text-[#242424] text-2xl not-italic font-bold leading-[normal] inline-flex items-center m-auto">
+            <RatingStar
+              fill="#FFD600"
+              className="w-[45px] h-[45px]  md:w-[70px] md:h-[70px]"
+            />{" "}
+            4 / 5 Ratings Already Given
+          </p>
+        </div>
+      )}
       <h2 className="text-[#4D6677] text-2xl not-italic font-bold leading-[23.784px]  !mb-[24px]">
         {isSubmitted
           ? `Forgot to add your feedback for ${projName} Project !`

@@ -111,22 +111,23 @@ const AddRating = ({
 }) => {
   const params = useParams<{ slug: string }>();
   const { data: session } = useSession();
-  const { data, mutate } = useDynamicProj();
-  const isDataSubmitted = isSubmitted({
-    isReviewSubmitted: data?.userReview as string,
-    isSubmitted: data?.userRating as string,
-  });
-  console.log(isDataSubmitted);
+  const { data, updateRatings } = useDynamicProj();
+
   const [status, setStatus] = useState<
     "pending" | "idle" | "success" | "error"
   >("idle");
+  const isDataSubmitted = isSubmitted({
+    isReviewSubmitted: data?.userReview as string,
+    isSubmitted: data?.userRating as string,
+    status: status,
+  });
   const form = useForm({
     initialValues: {
       review: "",
       rating: 0,
     },
     validate: yupResolver(
-      !isDataSubmitted.isReviewSubmitted ? ratingSchema2 : ratingSchema
+      isDataSubmitted.isRatingSubmitted ? ratingSchema2 : ratingSchema
     ),
   });
   const onClose = () => {
@@ -142,6 +143,7 @@ const AddRating = ({
         onClose();
         return;
       }
+
       await addRating({
         projIdEnc: params?.slug,
         rating: form.values.rating,
@@ -149,6 +151,12 @@ const AddRating = ({
       });
     } else {
       await addRating({ ...values, projIdEnc: params?.slug });
+
+      const optimisticData = {
+        ...(values.rating && { rating: "Y" }),
+        ...(values.review && { review: "Y" }),
+      };
+      updateRatings(optimisticData);
     }
     setStatus("success");
   };
@@ -178,7 +186,11 @@ const AddRating = ({
       opened={opened}
       onClose={onClose}
       centered
-      title="Add Ratings"
+      title={
+        isDataSubmitted.isRatingSubmitted
+          ? "Rate it Right: Your Review, Your Rating!"
+          : "Rate it Right: Your Review, Your Rating!"
+      }
       size={
         isMobile
           ? "100%"
@@ -204,7 +216,6 @@ const AddRating = ({
                 projName={projName}
                 formSubmit={formSubmit}
                 isSubmitted={isDataSubmitted.isRatingSubmitted}
-                mutate={mutate}
               />
             )
           ) : (
@@ -219,9 +230,11 @@ const AddRating = ({
 const isSubmitted = (data: {
   isReviewSubmitted: string;
   isSubmitted: string;
+  status: string;
 }) => {
   const isSubmitted =
-    data?.isSubmitted === "Y" && data.isReviewSubmitted === "Y";
+    data.status === "success" ||
+    (data?.isSubmitted === "Y" && data.isReviewSubmitted === "Y");
   const isRatingSubmitted = data?.isSubmitted === "Y";
   const isReviewSubmitted = data?.isReviewSubmitted === "Y";
   return {

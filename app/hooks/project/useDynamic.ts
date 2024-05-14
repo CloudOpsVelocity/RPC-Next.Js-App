@@ -8,16 +8,10 @@ export default function useDynamicProj() {
   const { data: Session } = useSession();
   const { slug } = useParams<{ slug: string }>();
   const getData = async () => {
-    // const res = await axios.get(
-    //   `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/dynamic-data?projIdEnc=${slug}`
-    // );
-    // return res.data;
-    return {
-      compareCount: 0,
-      userRating: "N",
-      userReview: "N",
-      status: true,
-    };
+    const res = await axios.get(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/dynamic-data?projIdEnc=${slug}`
+    );
+    return res.data;
   };
   const { data, isLoading } = useQuery({
     queryFn: getData,
@@ -35,10 +29,7 @@ export default function useDynamicProj() {
   const { mutate } = useMutation({
     mutationFn: updateTodo,
     // When mutate is called:
-    onMutate: async (
-      data?: number,
-      reivewData?: { review: string; rating: string }
-    ) => {
+    onMutate: async (data?: number) => {
       // Cancel any outgoing refetches
       // (so they don't overwrite our optimistic update)
       await queryClient.cancelQueries({ queryKey: ["dynamic", slug] });
@@ -51,12 +42,33 @@ export default function useDynamicProj() {
           ...(data === 2
             ? { shortListed: old.shortListed === "Y" ? null : "Y" }
             : { compareAdded: old.compareAdded === "Y" ? null : "Y" }),
-          ...(reivewData?.rating ? { userRating: reivewData?.rating } : null),
-          ...(reivewData?.review ? { userReview: reivewData?.review } : null),
         };
       });
+      return { previousTodos };
+    },
 
-      // Return a context object with the snapshotted value
+    // Always refetch after error or success:
+    onSettled: () => {
+      // queryClient.invalidateQueries({ queryKey: ["todos"] });
+    },
+  });
+  const { mutate: updateRatings } = useMutation({
+    mutationFn: updateTodo,
+    // When mutate is called:
+    onMutate: async (data?: { rating?: string; review?: string }) => {
+      // Cancel any outgoing refetches
+      // (so they don't overwrite our optimistic update)
+      await queryClient.cancelQueries({ queryKey: ["dynamic", slug] });
+      // Snapshot the previous value
+      const previousTodos = queryClient.getQueryData(["dynamic", slug]);
+      // Optimistically update to the new value
+      queryClient.setQueryData(["dynamic", slug], (old: any) => {
+        return {
+          ...old,
+          ...(data?.rating === "Y" ? { userRating: "Y" } : null),
+          ...(data?.review === "Y" ? { userReview: "Y" } : null),
+        };
+      });
       return { previousTodos };
     },
 
@@ -66,5 +78,5 @@ export default function useDynamicProj() {
     },
   });
 
-  return { data, isLoading, mutate };
+  return { data, isLoading, mutate, updateRatings };
 }

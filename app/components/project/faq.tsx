@@ -198,7 +198,7 @@ const Success = ({ text, opened, onClose, projName }: any) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       onClose();
-    }, 2500);
+    }, 5000);
 
     return () => clearTimeout(timer);
   }, [onClose]);

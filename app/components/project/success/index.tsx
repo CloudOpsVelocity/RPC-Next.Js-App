@@ -6,7 +6,7 @@ export const RatingMessage = ({ close }: { close: () => void }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       close();
-    }, 2500);
+    }, 5000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -64,7 +64,7 @@ export const ReqcallbackMessage = ({ close }: { close: () => void }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       close();
-    }, 2500);
+    }, 5000);
 
     return () => clearTimeout(timer);
   }, []);
