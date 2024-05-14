@@ -9,7 +9,6 @@ import {
 } from "@/app/images/commonSvgs";
 import { Rating, em } from "@mantine/core";
 import useRatings from "@/app/hooks/useRatings";
-import { useParams } from "next/navigation";
 import { useMediaQuery } from "@mantine/hooks";
 import { usePopUpRatings } from "@/app/hooks/popups/usePopUpRatings";
 import S from "@/app/styles/Rating.module.css";
@@ -21,7 +20,8 @@ export default function Reviews({ projName }: { projName: string }) {
   const { data: rData } = useDynamicProj();
   return (
     data?.status &&
-    data?.reviewDataList?.filter((item: any) => item.userReview) !== 0 && (
+    data?.reviewDataList?.filter((item: any) => item.userReview).length !==
+      0 && (
       <div id="ratings" className="bg-[#FFF] scroll-mt-[180px] py-12 w-full ">
         <div className="">
           <div className="w-[90%] mx-auto px-6">

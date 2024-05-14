@@ -179,14 +179,25 @@ export default function PropertyTypeDetailsCrad({
         </p>
         <p className="text-[14px] lg:text-[18px]  mb-[3%] text-right text-[#4D6677] text-lg not-italic font-semibold leading-[normal] capitalize mt-3 ">
           Units available : <br />{" "}
-          <span
-            className={clsx(
-              "text-[#242424] text-right text-lg not-italic font-semibold leading-[22px] max-w-[135px] inline-block min-h-[44px]",
-              propertyType === "plot" && "!max-w-full"
-            )}
-          >
-            {parseUnits(cg?.unitTypes, propertyType)}
-          </span>
+          {propertyType !== "plot" ? (
+            <span
+              className={clsx(
+                "text-[#242424] text-right text-lg not-italic font-semibold leading-[22px] max-w-[135px] inline-block min-h-[44px]",
+                propertyType === "plot" && "!max-w-full"
+              )}
+            >
+              {parseUnits(cg?.unitTypes, propertyType)}
+            </span>
+          ) : (
+            <>
+              <p className="text-[#242424] text-right text-base not-italic font-semibold leading-[normal]">
+                Standard Plot : {cg?.unitTypes.length} Units
+              </p>
+              <p className="text-[#242424] text-right text-base not-italic font-semibold leading-[normal]">
+                Odd Plot : 0 Units
+              </p>
+            </>
+          )}
         </p>
         {cg?.unitTypes.length > 4 && (
           <ShowUnitsButton cg={{ ...cg, propertyType }} />

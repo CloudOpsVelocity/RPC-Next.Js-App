@@ -62,7 +62,12 @@ export const Success = ({ projIdEnc, projName, formSubmit }: any) => {
   );
 };
 
-export const RatingForm = ({ projName, formSubmit, isSubmitted }: any) => {
+export const RatingForm = ({
+  projName,
+  formSubmit,
+  isSubmitted,
+  mutate,
+}: any) => {
   const form = useFormContext();
   console.log(isSubmitted);
   return (

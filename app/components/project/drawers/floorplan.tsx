@@ -67,7 +67,6 @@ export default function FloorplanDrawer() {
     close();
     setData({});
   };
-  console.log(cg);
 
   return (
     <>
@@ -136,26 +135,56 @@ export default function FloorplanDrawer() {
             )}
           </div>
         </div>
-        <Table data={cg?.unitTypes} />
+        <Table data={cg?.unitTypes} propertyType={cg?.propertyType} />
         {/* Drawer content */}
       </Drawer>
     </>
   );
 }
 
-const Table = ({ data }: any) => {
+const Table = ({ data, propertyType }: any) => {
   return (
     <div className="flex flex-col justify-center items-start gap-3.5 px-[9px] py-2.5 border rounded-[10px] border-solid border-[#9AB1BC] mt-5 max-w-[90%]">
       <h1 className="flex items-center gap-2.5 pl-2.5 w-full py-2.5 rounded-lg bg-[#ebeaff] text-[#001F35] text-[21px] not-italic font-semibold leading-[normal] capitalize">
         <Marble /> Units Available
       </h1>
-      <ul className="list-disc pl-8">
-        {data?.sort()?.map((item: any) => (
-          <li className="text-[#242424] text-[21px] not-italic font-semibold leading-[normal] capitalize">
-            {item}
-          </li>
-        ))}
-      </ul>
+      <div
+        className={`${
+          propertyType === "plot" ? "border-r-[0.5px] border-[#92B2C8]" : ""
+        } pr-3`}
+      >
+        {propertyType === "plot" && (
+          <div className="flex items-center gap-1.5 p-2 rounded-md bg-[#EEF7FE] text-[#00487C] text-lg not-italic font-medium leading-[normal] capitalize mb-3">
+            Standard Unit (24 Units)
+          </div>
+        )}
+        <ul className="list-disc pl-8">
+          {data
+            ?.sort((a: any, b: any) => {
+              if (propertyType === "plot") {
+                const aParts = a.split("_");
+                const bParts = b.split("_");
+
+                // Compare the first parts (numeric values)
+                const aNum = parseInt(aParts[0], 10);
+                const bNum = parseInt(bParts[0], 10);
+                if (aNum !== bNum) {
+                  return aNum - bNum;
+                }
+
+                // If the first parts are equal, compare the second parts (strings)
+                return aParts[1].localeCompare(bParts[1]);
+              } else {
+                return a.localeCompare(b);
+              }
+            })
+            ?.map((item: any) => (
+              <li className="text-[#242424] text-[21px] not-italic font-semibold leading-[normal] capitalize">
+                {propertyType === "plot" ? item.split("_").join(" x ") : item}
+              </li>
+            ))}
+        </ul>
+      </div>
     </div>
   );
 };

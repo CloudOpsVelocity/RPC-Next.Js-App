@@ -112,7 +112,11 @@ const AddRating = ({
   const params = useParams<{ slug: string }>();
   const { data: session } = useSession();
   const { data, mutate } = useDynamicProj();
-  const isSubmitted = data?.userRating === "Y" && data.userReview === "Y";
+  const isDataSubmitted = isSubmitted({
+    isReviewSubmitted: data?.userReview as string,
+    isSubmitted: data?.userRating as string,
+  });
+  console.log(isDataSubmitted);
   const [status, setStatus] = useState<
     "pending" | "idle" | "success" | "error"
   >("idle");
@@ -121,7 +125,9 @@ const AddRating = ({
       review: "",
       rating: 0,
     },
-    validate: yupResolver(isSubmitted ? ratingSchema2 : ratingSchema),
+    validate: yupResolver(
+      !isDataSubmitted.isReviewSubmitted ? ratingSchema2 : ratingSchema
+    ),
   });
   const onClose = () => {
     form.reset();
@@ -131,7 +137,7 @@ const AddRating = ({
 
   const formSubmit = async (values: any) => {
     setStatus("pending");
-    if (isSubmitted) {
+    if (isDataSubmitted.isRatingSubmitted) {
       if (!form.values.review) {
         onClose();
         return;
@@ -150,7 +156,7 @@ const AddRating = ({
   return (
     <Modal
       classNames={
-        isSubmitted
+        isDataSubmitted.isSubmitted
           ? {
               title: Styles.title,
               root: Styles.root,
@@ -174,25 +180,32 @@ const AddRating = ({
       centered
       title="Add Ratings"
       size={
-        status === "success"
-          ? "auto"
-          : isMobile
+        isMobile
           ? "100%"
           : session
-          ? "55%"
+          ? isDataSubmitted.isSubmitted
+            ? "auto"
+            : "55%"
           : "35%"
       }
     >
       <FormProvider form={form}>
         <div className="relative">
-          {(!session || status === "success" || isSubmitted) && (
+          {(!session ||
+            status === "success" ||
+            isDataSubmitted.isSubmitted) && (
             <Close close={onClose} className="absolute top-3 right-1 z-50" />
           )}
           {session ? (
-            status === "success" || isSubmitted ? (
+            status === "success" || isDataSubmitted.isSubmitted ? (
               <RatingMessage close={onClose} />
             ) : (
-              <RatingForm projName={projName} formSubmit={formSubmit} />
+              <RatingForm
+                projName={projName}
+                formSubmit={formSubmit}
+                isSubmitted={isDataSubmitted.isRatingSubmitted}
+                mutate={mutate}
+              />
             )
           ) : (
             <LoginPopup type="RATING" />
@@ -201,4 +214,19 @@ const AddRating = ({
       </FormProvider>
     </Modal>
   );
+};
+
+const isSubmitted = (data: {
+  isReviewSubmitted: string;
+  isSubmitted: string;
+}) => {
+  const isSubmitted =
+    data?.isSubmitted === "Y" && data.isReviewSubmitted === "Y";
+  const isRatingSubmitted = data?.isSubmitted === "Y";
+  const isReviewSubmitted = data?.isReviewSubmitted === "Y";
+  return {
+    isSubmitted,
+    isRatingSubmitted,
+    isReviewSubmitted,
+  };
 };

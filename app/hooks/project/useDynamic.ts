@@ -14,19 +14,19 @@ export default function useDynamicProj() {
     // return res.data;
     return {
       compareCount: 0,
-      userReview: "Y",
-      userRating: "Y",
+      userRating: "N",
+      userReview: "N",
       status: true,
     };
   };
   const { data, isLoading } = useQuery({
     queryFn: getData,
     queryKey: ["dynamic", slug],
-    staleTime: 30000,
-    refetchOnWindowFocus: false,
-    cacheTime: 30000,
-    refetchIntervalInBackground: false,
-    retry: false,
+    // staleTime: 30000,
+    // refetchOnWindowFocus: false,
+    // cacheTime: 30000,
+    // refetchIntervalInBackground: false,
+    // retry: false,
     enabled: !!Session,
   });
   const queryClient = useQueryClient();
@@ -35,7 +35,10 @@ export default function useDynamicProj() {
   const { mutate } = useMutation({
     mutationFn: updateTodo,
     // When mutate is called:
-    onMutate: async (data: number) => {
+    onMutate: async (
+      data?: number,
+      reivewData?: { review: string; rating: string }
+    ) => {
       // Cancel any outgoing refetches
       // (so they don't overwrite our optimistic update)
       await queryClient.cancelQueries({ queryKey: ["dynamic", slug] });
@@ -48,6 +51,8 @@ export default function useDynamicProj() {
           ...(data === 2
             ? { shortListed: old.shortListed === "Y" ? null : "Y" }
             : { compareAdded: old.compareAdded === "Y" ? null : "Y" }),
+          ...(reivewData?.rating ? { userRating: reivewData?.rating } : null),
+          ...(reivewData?.review ? { userReview: reivewData?.review } : null),
         };
       });
 
