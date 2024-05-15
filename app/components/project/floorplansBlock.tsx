@@ -34,6 +34,11 @@ import { setPropertyValues } from "@/app/utils/dyanamic/projects";
 import { isSingleLetterOrNumber } from "@/app/utils/letters";
 import { ImgNotAvail } from "@/app/data/project";
 import NoProperties from "./notfound";
+import { useStateHistory } from "@/app/hooks/custom/useStateHistory";
+import { useCounter } from "@mantine/hooks";
+import Nofloor from "./error/nofloor";
+import clsx from "clsx";
+import CarouselSuggestion from "./unitblock/carousel";
 
 type Props = {
   data: PhaseList[];
@@ -48,9 +53,13 @@ export default function FloorplansBlock({ projName, slug }: Props) {
   const [currentPhase, setCurrentPhase] = useAtom(currentPhaseAtom);
   const [floorPlanType, setFloorPlanType] = useState("type");
   const setFloorsArray = useSetAtom(floorPlansArray);
+
   const [selectedFloor, setSelectedFloor] = useAtom(selectedFloorAtom);
+  const [value, handlers, history] = useStateHistory();
   const [, { open, type }] = useFloorPlanPopup();
   const form = useForm();
+  const byUnitForm = useForm();
+  // form.setValues so setting new values in filters
   const selectedPhase = PhaseOverview?.find(
     (phase: any) => phase.phaseId === currentPhase
   );
@@ -146,7 +155,6 @@ export default function FloorplansBlock({ projName, slug }: Props) {
       floorPlanUrl: projectUnitsData[0].floorPlanUrl ?? ImgNotAvail,
     });
     form.setValues(setPropertyValues(projectUnitsData[0], propCgId));
-
     handleSearch();
     open("floor");
   };
@@ -168,7 +176,8 @@ export default function FloorplansBlock({ projName, slug }: Props) {
     if (
       projectUnitsData &&
       projectUnitsData.length > 0 &&
-      type !== "overview"
+      type !== "overview" &&
+      floorPlanType !== "unit"
     ) {
       setSelectedFloor(projectUnitsData[0]);
     }
@@ -257,9 +266,11 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                           : "text-[#303A42] font-[400] bg-[#EEF7FE]"
                       } `}
                       onChange={() => {
-                        console.log(propertyDetailsTypes.get(keyName));
                         getPropertyType(propertyDetailsTypes.get(keyName));
                         setBhk("0");
+                        if (floorPlanType == "unit") {
+                          setSelectedFloor({});
+                        }
                       }}
                       title={name}
                       icon={getIcon(keyName)}
@@ -275,7 +286,12 @@ export default function FloorplansBlock({ projName, slug }: Props) {
               icon={
                 <ByTypeSvg className=" w-[24px] h-[24px] lg:w-[30px] lg:h-[30px] " />
               }
-              onChange={() => setFloorPlanType("type")}
+              onChange={() => {
+                setFloorPlanType("type");
+                if (!selectedFloor?.unitNumber) {
+                  setSelectedFloor(projectUnitsData[0]);
+                }
+              }}
               buttonClass={`text-[20px] lg:text-[24px] mr-[40px] whitespace-nowrap flex justify-center items-center gap-[6px] ${
                 floorPlanType == "type"
                   ? "font-[600] text-[#001F35]"
@@ -288,7 +304,14 @@ export default function FloorplansBlock({ projName, slug }: Props) {
               icon={
                 <ByUnitSvg className=" w-[24px] h-[24px] lg:w-[30px] lg:h-[30px] " />
               }
-              onChange={() => setFloorPlanType("unit")}
+              onChange={() => {
+                setFloorPlanType("unit");
+
+                if (floorPlanType !== "unit") {
+                  console.log(floorPlanType);
+                  setSelectedFloor({});
+                }
+              }}
               buttonClass={`text-[20px] lg:text-[24px] mr-[40px] whitespace-nowrap flex justify-center items-center gap-[6px] ${
                 floorPlanType == "unit"
                   ? "font-[600] text-[#001F35]"
@@ -301,7 +324,12 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                 icon={
                   <ByBhkSvg className=" w-[24px] h-[24px] lg:w-[30px] lg:h-[30px] " />
                 }
-                onChange={() => setFloorPlanType("bhk")}
+                onChange={() => {
+                  setFloorPlanType("bhk");
+                  if (!selectedFloor?.unitNumber) {
+                    setSelectedFloor(projectUnitsData[0]);
+                  }
+                }}
                 buttonClass={`text-[20px] lg:text-[24px] mr-[40px] whitespace-nowrap flex justify-center items-center gap-[6px] ${
                   floorPlanType == "bhk"
                     ? "font-[600] text-[#001F35]"
@@ -341,7 +369,12 @@ export default function FloorplansBlock({ projName, slug }: Props) {
 
             {floorPlanType == "unit" && (
               <div className="w-full md:w-[50%]  h-[456px] !md:h-[547px] border-solid overflow-auto pt-6">
-                <Byunitblock propCgId={propCgId} data={projectUnitsData} />
+                <Byunitblock
+                  propCgId={propCgId}
+                  data={projectUnitsData}
+                  key={currentPhase + propCgId}
+                  form={byUnitForm}
+                />
               </div>
             )}
 
@@ -357,82 +390,185 @@ export default function FloorplansBlock({ projName, slug }: Props) {
               </div>
             )}
 
-            <div className="w-full md:w-[50%] flex justify-center items-end flex-col h-full p-[2%] shadow-inner md:shadow-none ">
-              <p
-                className="text-[14px] font-[500] text-[#005DA0] "
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleOpen();
-                }}
-              >
-                {projName}
-                {propCgId != projectprops.plot &&
-                  selectedFloor?.bhkName &&
-                  " | " + selectedFloor?.bhkName}
-                {propCgId == projectprops.apartment &&
-                  selectedFloor?.towerName &&
-                  selectedFloor?.towerName != "NA" &&
-                  " | Tower " + selectedFloor?.towerName}
-                {propCgId != projectprops.plot &&
-                  " | Floor " +
-                    `${
-                      selectedFloor?.floor?.toString() === "0"
-                        ? "G"
-                        : selectedFloor?.floor
-                    }`}
-                {selectedFloor?.unitNumber &&
-                  " | Unit No. " + selectedFloor?.unitNumber}
-                {" | Facing " + selectedFloor?.facingName}
-                {propCgId != projectprops.plot &&
-                  selectedFloor?.superBuildUparea &&
-                  " | Area. " + selectedFloor?.superBuildUparea + " sq.ft"}
-                {propCgId == projectprops.plot &&
-                  selectedFloor?.plotArea &&
-                  " | Area. " + selectedFloor?.plotArea + " sq.ft"}
-              </p>
-              <div className="flex justify-center items-center h-[240px] lg:h-[450px] w-full">
-                {selectedFloor?.floorPlanUrl ? (
-                  <img
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleOpen();
-                    }}
-                    src={
-                      (selectedFloor?.floorPlanUrl +
-                        "?v" +
-                        Math.random()) as string
-                    }
-                    className="w-full h-full cursor-pointer  object-contain"
-                    alt="image"
-                  />
-                ) : (
-                  <div className="flex justify-center items-center flex-col ">
-                    <img
+            <div
+              className={clsx(
+                "w-full md:w-[50%] flex justify-center items-end flex-col h-full p-[2%] shadow-inner md:shadow-none relative",
+                !selectedFloor?.unitNumber && "items-center"
+              )}
+            >
+              {selectedFloor?.unitNumber ? (
+                floorPlanType !== "unit" ? (
+                  <>
+                    <p
+                      className="text-[14px] font-[500] text-[#005DA0] "
                       onClick={(e) => {
                         e.stopPropagation();
                         handleOpen();
                       }}
-                      src="/abc/noimage.svg"
-                      className="w-[80%] h-full cursor-pointer"
-                      alt="image"
-                    />
-                    <p className=" text-[#000] text-center text-[18px] md:text-[28px] lg:text-[32px] font-[600] ">
-                      Image is not available
+                    >
+                      {projName}
+                      {propCgId != projectprops.plot &&
+                        selectedFloor?.bhkName &&
+                        " | " + selectedFloor?.bhkName}
+                      {propCgId == projectprops.apartment &&
+                        selectedFloor?.towerName &&
+                        selectedFloor?.towerName != "NA" &&
+                        " | Tower " + selectedFloor?.towerName}
+                      {propCgId != projectprops.plot &&
+                        " | Floor " +
+                          `${
+                            selectedFloor?.floor?.toString() === "0"
+                              ? "G"
+                              : selectedFloor?.floor
+                          }`}
+                      {selectedFloor?.unitNumber &&
+                        " | Unit No. " + selectedFloor?.unitNumber}
+                      {" | Facing " + selectedFloor?.facingName}
+                      {propCgId != projectprops.plot &&
+                        selectedFloor?.superBuildUparea &&
+                        " | Area. " +
+                          selectedFloor?.superBuildUparea +
+                          " sq.ft"}
+                      {propCgId == projectprops.plot &&
+                        selectedFloor?.plotArea &&
+                        " | Area. " + selectedFloor?.plotArea + " sq.ft"}
                     </p>
-                  </div>
-                )}
-              </div>
-              <div
-                className="bg-[#F4FBFF] p-[10px] rounded-[29px] gap-[12px] flex justify-end items-center  cursor-pointer"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleOpen();
-                }}
-              >
-                <p className="text-[12px] lg:text-[14px] font-[600] text-[#0073C6] underline ">
-                  Click on image to open floor plan details
-                </p>
-              </div>
+                    <div className="flex justify-center items-end h-[240px] lg:h-[450px] w-full">
+                      {selectedFloor?.floorPlanUrl ? (
+                        <img
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleOpen();
+                          }}
+                          src={
+                            (selectedFloor?.floorPlanUrl +
+                              "?v" +
+                              Math.random()) as string
+                          }
+                          className="w-full h-full cursor-pointer  object-contain"
+                          alt="image"
+                        />
+                      ) : (
+                        <div className="flex justify-center items-center flex-col min-w-fit">
+                          <img
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleOpen();
+                            }}
+                            src="/abc/noimage.svg"
+                            className="w-[80%] h-full cursor-pointer"
+                            alt="image"
+                          />
+                          <p className=" text-[#000] text-center text-[18px] md:text-[28px] lg:text-[32px] font-[600] ">
+                            Image is not available
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                    <div className="flex ">
+                      <div
+                        className="bg-[#F4FBFF] p-[10px] rounded-[29px] gap-[12px] flex justify-end items-center  cursor-pointer"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleOpen();
+                        }}
+                      >
+                        <p className="text-[12px] lg:text-[14px] font-[600] text-[#0073C6] underline ">
+                          Click on image to open floor plan details
+                        </p>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <p
+                      className="text-[14px] font-[500] text-[#005DA0] text-center m-auto"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleOpen();
+                      }}
+                    >
+                      {projName}
+                      {propCgId != projectprops.plot &&
+                        selectedFloor?.bhkName &&
+                        " | " + selectedFloor?.bhkName}
+                      {propCgId == projectprops.apartment &&
+                        selectedFloor?.towerName &&
+                        selectedFloor?.towerName != "NA" &&
+                        " | Tower " + selectedFloor?.towerName}
+                      {propCgId != projectprops.plot &&
+                        " | Floor " +
+                          `${
+                            selectedFloor?.floor?.toString() === "0"
+                              ? "G"
+                              : selectedFloor?.floor
+                          }`}
+                      {selectedFloor?.unitNumber &&
+                        " | Unit No. " + selectedFloor?.unitNumber}
+                      {" | Facing " + selectedFloor?.facingName}
+                      {propCgId != projectprops.plot &&
+                        selectedFloor?.superBuildUparea &&
+                        " | Area. " +
+                          selectedFloor?.superBuildUparea +
+                          " sq.ft"}
+                      {propCgId == projectprops.plot &&
+                        selectedFloor?.plotArea &&
+                        " | Area. " + selectedFloor?.plotArea + " sq.ft"}
+                    </p>
+                    <div className="flex justify-center items-end h-[240px] lg:h-[450px] w-full relative max-w-fit m-auto">
+                      <div
+                        className="bg-[#F4FBFF] p-x-[3px] p-1 rounded-[29px] gap-[6px] flex justify-end items-center  cursor-pointer absolute bottom-1 right-1"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleOpen();
+                        }}
+                      >
+                        <p className="text-[12px] lg:text-[14px] font-[600] text-[#0073C6] underline ">
+                          Click on image to open floor plan details
+                        </p>
+                      </div>
+                      {selectedFloor?.floorPlanUrl ? (
+                        <img
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleOpen();
+                          }}
+                          src={
+                            (selectedFloor?.floorPlanUrl +
+                              "?v" +
+                              Math.random()) as string
+                          }
+                          className="w-full h-full cursor-pointer  object-contain"
+                          alt="image"
+                        />
+                      ) : (
+                        <div className="flex justify-center items-center flex-col min-w-fit">
+                          <img
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleOpen();
+                            }}
+                            src="/abc/noimage.svg"
+                            className="w-[80%] h-full cursor-pointer"
+                            alt="image"
+                          />
+                          <p className=" text-[#000] text-center text-[18px] md:text-[28px] lg:text-[32px] font-[600] ">
+                            Image is not available
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                    {floorPlanType == "unit" && (
+                      <CarouselSuggestion
+                        form={byUnitForm}
+                        propCgId={propCgId}
+                      />
+                    )}
+                  </>
+                )
+              ) : (
+                <Nofloor />
+              )}
             </div>
           </div>
           <FormProvider form={form}>
@@ -440,6 +576,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
               projName={projName}
               propCgId={propCgId}
               data={projectUnitsData}
+              handlers={handlers}
             />
           </FormProvider>
         </>

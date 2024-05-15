@@ -1,3 +1,4 @@
+"use client";
 import { Modal, Select } from "@mantine/core";
 import { useId, useRef } from "react";
 import {
@@ -25,19 +26,25 @@ import { setPropertyValues } from "@/app/utils/dyanamic/projects";
 import { ImgNotAvail } from "@/app/data/project";
 import { Carousel } from "@mantine/carousel";
 import styles from "@/app/styles/Carousel.module.css";
+import {
+  UseStateHistoryHandlers,
+  useStateHistory,
+} from "@/app/hooks/custom/useStateHistory";
 
 type Props = {
   propCgId: any;
   data?: any;
   projName?: string;
+  handlers?: UseStateHistoryHandlers<unknown>;
 };
 
-function FloorPlanModal({ propCgId, data, projName }: Props) {
+function FloorPlanModal({ propCgId, data, projName, handlers }: Props) {
   const [selectedFloor, setSelectedFloor] = useAtom(selectedFloorAtom);
   const setFloorsArray = useSetAtom(floorPlansArray);
   const [opened, { close }] = useFloorPlanPopup();
   const scrollFiltersRef = useRef<HTMLDivElement>(null);
   const form = useFormContext();
+
   const handleArrowClick = (side: "R" | "L"): void => {
     const scrollAmount = side === "R" ? 100 : -100;
     if (scrollFiltersRef.current) {
@@ -82,7 +89,13 @@ function FloorPlanModal({ propCgId, data, projName }: Props) {
     setSelectedFloor(null);
     setFloorsArray(data);
     const keys = Object.keys(form.values);
-    keys.forEach((key) => form.setFieldValue(key, null));
+    // dont' do one by one
+    // keys.forEach((key) => form.setFieldValue(key, null));
+    const resetValues = keys.reduce((acc: any, key) => {
+      acc[key] = null;
+      return acc;
+    }, {});
+    form.setValues(resetValues);
   };
   const handleRemoveFilter = (key: string) => {
     const keysWithNonNullValues = Object.keys(form.values).filter(
@@ -116,6 +129,8 @@ function FloorPlanModal({ propCgId, data, projName }: Props) {
         size={"100%"}
       >
         <>
+          {/* <button onClick={handleBack}>Back Button </button>
+          <button onClick={handleNext}>Next Button </button> */}
           <div className="bg-white w-full h-auto pl-5">
             <p className="text-[#001F35] text-lg not-italic font-medium leading-[normal] mt-2 mb-7">
               See floor plan according to your selections
@@ -216,7 +231,11 @@ function FloorPlanModal({ propCgId, data, projName }: Props) {
             </div>
 
             <div className="flex justify-start items-start gap-[45px] flex-col mt-[1.5%] md:flex-row w-full pb-[3%] ">
-              <LeftSection propCgId={propCgId} data={data} />
+              <LeftSection
+                propCgId={propCgId}
+                data={data}
+                handlers={handlers}
+              />
               <MiddleSection projName={projName} propCgId={propCgId} />
               {selectedFloor && (
                 <RightSection propCgId={propCgId} data={data} />
@@ -231,7 +250,7 @@ function FloorPlanModal({ propCgId, data, projName }: Props) {
 
 export default FloorPlanModal;
 
-const LeftSection = ({ propCgId, data }: Props) => {
+const LeftSection = ({ propCgId, data, handlers }: any) => {
   const [, setFloorsArray] = useAtom(floorPlansArray);
   const [, setFloor] = useAtom(selectedFloorAtom);
   const { getInputProps, values, setFieldValue, setValues } = useFormContext();
@@ -267,7 +286,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
           String(item[key]).toLowerCase() === values[key].toLowerCase()
       );
     });
-
+    handlers.set(values);
     setFloor(filteredData[0]);
     setFloorsArray(filteredData);
     if (key === "unitNumber" && filteredData.length > 0) {
@@ -286,6 +305,7 @@ const LeftSection = ({ propCgId, data }: Props) => {
     setValues(prevObj);
     handleSearch(key);
   };
+
   return (
     <div className="col-span-1 w-full max-w-[392px] mr-[3%]  ">
       <div className="w-[100%] flex justify-between items-start flex-wrap gap-[5%]">
@@ -994,14 +1014,12 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
   const { setValues } = useFormContext();
   const [floorsArray, setFloorsArray] = useAtom<any>(floorPlansArray);
   const [, { open }] = useSubFloorPlanPopup();
-  const [currentImg, setCurrentImg] = useState(0);
   const [selectedFloor, setFloor] = useAtom(selectedFloorAtom);
   const selectImg = (index: number) => {
     setFloor({
       ...floorsArray[index],
       floorPlanUrl: floorsArray[index].floorPlanUrl ?? ImgNotAvail,
     });
-    setCurrentImg(index);
     setValues(setPropertyValues(floorsArray[index], propCgId));
     handleSearch(index);
   };

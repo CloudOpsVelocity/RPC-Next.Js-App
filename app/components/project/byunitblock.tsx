@@ -1,90 +1,226 @@
-import React, { useId, useState } from "react";
+import React, { useEffect, useId, useRef, useState } from "react";
 import { Button, Select } from "@mantine/core";
-import { DropDownIcon, LenseIcon } from "../../images/commonSvgs";
-import { projectprops } from "../../data/projectDetails";
-import { useAtom } from "jotai";
+import {
+  DropDownIcon,
+  ImgCarouselIcon,
+  LenseIcon,
+} from "../../images/commonSvgs";
+import { filterKeysDetails, projectprops } from "../../data/projectDetails";
+import { atom, useAtom } from "jotai";
 import { selectedFloorAtom } from "@/app/store/floor";
 import S from "@/app/styles/Floorplan.module.css";
 import { setPropertyValues } from "@/app/utils/dyanamic/projects";
+import { useForm } from "@mantine/form";
+import Image from "next/image";
 
 type Props = {
   propCgId: any;
   data: any;
+  form: any;
 };
-
-type SelectedValues = {
-  towerName: string;
-  unitNumber: string;
-  unitType: string;
-  block: string;
-  floor: string;
-  superBuildUparea: string;
-  facingName: string;
-  width: string;
-  length: string;
-  bhkName: string;
-  plotArea: string;
-};
-
-const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
+export const unitFloorsAtom = atom([]);
+const Byunitblock: React.FC<Props> = ({
+  propCgId,
+  data,
+  form: { values, setValues, setFieldValue, getInputProps },
+}: Props) => {
+  const [floorsArray, setFloorsArray] = useAtom(unitFloorsAtom);
   const [, setFloor] = useAtom(selectedFloorAtom);
   const getOptions = (property: string): string[] => {
-    const filteredData = data.filter((item: any) => {
-      return Object.keys(selectedValues).every(
+    const filteredData = data?.filter((item: any) => {
+      return Object.keys(values).every(
         (key) =>
-          !selectedValues[key as keyof SelectedValues] ||
-          String(item[key]) === selectedValues[key as keyof SelectedValues]
+          !values[key] ||
+          // @ts-ignore
+          String(item[key]).toLowerCase() === values[key].toLowerCase()
       );
     });
-    const op = Array.from(
-      new Set(filteredData.map((item: any) => String(item[property])))
-    );
-    return op as string[];
+    if (data[0][property] != undefined) {
+      // @ts-ignore
+      return Array.from(
+        new Set(filteredData.map((item: any) => String(item[property])))
+      ).sort();
+    } else {
+      return [];
+    }
   };
 
-  const [selectedValues, setSelectedValues] = useState<SelectedValues>({
-    towerName: "",
-    unitNumber: "",
-    unitType: "",
-    block: "",
-    floor: "",
-    superBuildUparea: "",
-    facingName: "",
-    width: "",
-    length: "",
-    bhkName: "",
-    plotArea: "",
-  });
-  const handleInputChange = (property: keyof SelectedValues, value: string) => {
-    setSelectedValues((prevValues) => ({
-      ...prevValues,
-      [property]: prevValues[property] === value ? "" : value,
-    }));
-    handleSearch(property);
-  };
-  const handleSearch = (type?: string) => {
+  const handleSearch = (key: string) => {
+    const keysWithNonNullValues = Object.keys(values).filter(
+      (key) => values[key] !== null
+    );
+    if (keysWithNonNullValues.length === 0) {
+      return;
+    }
     const filteredData = data.filter((item: any) => {
-      return Object.keys(selectedValues).every(
+      return Object.keys(values).every(
         (key) =>
-          !selectedValues[key as keyof SelectedValues] ||
-          String(item[key]) === selectedValues[key as keyof SelectedValues]
+          !values[key] ||
+          // @ts-ignore
+          String(item[key]).toLowerCase() === values[key].toLowerCase()
       );
     });
     setFloor(filteredData[0]);
-    if (type === "unitNumber") {
-      setSelectedValues(setPropertyValues(filteredData[0], propCgId));
+    setFloorsArray(filteredData);
+    if (
+      key === "unitNumber" &&
+      filteredData.length > 0 &&
+      values["unitNumber"]
+    ) {
+      const filteredItem = filteredData[0];
+      const filteredValues: { [key: string]: string } = {};
+      Object.keys(filteredItem).forEach((prop) => {
+        filteredValues[prop] = String(filteredItem[prop]);
+      });
+      setValues(setPropertyValues(filteredValues, propCgId));
     }
   };
+
+  const handleReset = () => {
+    setFloor(null);
+    // setFloorsArray(data);
+    const keys = Object.keys(values);
+    keys.forEach((key) => setFieldValue(key, null));
+  };
+  const handleOnChange = (key: string, value: string) => {
+    setFieldValue(key, value);
+    let prevObj = values;
+    prevObj[key] = value;
+    setValues(prevObj);
+    handleSearch(key);
+  };
+  const scrollFiltersRef = useRef<HTMLDivElement>(null);
+  const handleArrowClick = (side: "R" | "L"): void => {
+    const scrollAmount = side === "R" ? 100 : -100;
+    if (scrollFiltersRef.current) {
+      scrollFiltersRef.current.scrollLeft += scrollAmount;
+    }
+  };
+  const handleRemoveFilter = (key: string) => {
+    const keysWithNonNullValues = Object.keys(values).filter(
+      (key) => values[key] !== null
+    );
+    if (keysWithNonNullValues.length === 1) {
+      setFieldValue(key, null);
+      null;
+      setFloor(data);
+      return;
+    }
+    setFieldValue(key, null);
+    handleSearch(key);
+  };
+  const isAppliedFilters =
+    Object.values(values).filter((each) => each != null).length > 0;
+
   return (
-    <div className="px-[3%] w-full flex justify-start flex-col items-start">
+    <div className="px-[3%] w-full flex justify-start flex-col items-start border-r-[15px] border-[#F3F3F3] h-full">
       <h3 className="text-[#001F35] text-[20px] lg:text-[24px] font-[500]">
         See floor plan according to your selections
       </h3>
+      {isAppliedFilters && (
+        <>
+          <p className="text-[#001F35] text-lg not-italic font-medium leading-[normal] mt-4 mb-2">
+            Applied Filters
+          </p>
+          <div className="flex justify-start items-center w-full h-[35px]   ">
+            {/* scroll buttons */}
+            {Object.values(values).filter((each) => each != null).length >
+              4 && (
+              <button
+                onClick={() => handleArrowClick("L")}
+                className="flex mr-4 h-[32px] w-[32px] rounded-[50%] items-center justify-center bg-[#FCFCFC] "
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width={24}
+                  height={24}
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#D2D5D7"
+                  strokeWidth={2}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="m15 18-6-6 6-6" />
+                </svg>
+              </button>
+            )}
+
+            <div
+              ref={scrollFiltersRef}
+              className="flex max-w-[60%] scroll-smooth overflow-x-auto overflow-y-hidden scrollbar-hide gap-4"
+            >
+              {Object.entries(values).map(
+                ([key, value]) =>
+                  value !== null &&
+                  value !== 0 &&
+                  value !== "" && (
+                    <div
+                      className="flex h-[33px] items-center px-3 whitespace-nowrap py-1.5 bg-white border border-[#c4f1f9] rounded-full"
+                      key={key}
+                    >
+                      <span className="text-[#57a773] font-semibold">
+                        {/* @ts-ignore */}
+
+                        {key === "floor" && value == 0
+                          ? "G"
+                          : (propCgId === 31 || propCgId === 33) &&
+                            key === "floor"
+                          ? `G+${value}`
+                          : value}
+                      </span>
+                      <span className="mx-1.5 text-[#6e798c]">|</span>
+                      <span className="text-[#6e798c] capitalize">
+                        {filterKeysDetails?.get(key)?.name != undefined
+                          ? filterKeysDetails?.get(key)?.name === "Floor" &&
+                            (propCgId === 31 || propCgId === 33)
+                            ? "Elevation"
+                            : filterKeysDetails?.get(key)?.name
+                          : key}
+                      </span>
+                      <button className="ml-2 !w-[10px] !h-[10px]">
+                        <Image
+                          onClick={() => handleRemoveFilter(key)}
+                          src={"/cross.svg"}
+                          alt="close"
+                          width={10}
+                          height={10}
+                          className="!w-[10px] !h-[10px]"
+                        />
+                      </button>
+                    </div>
+                  )
+              )}
+            </div>
+
+            {/* scroll buttons */}
+            {Object.values(values).filter((each) => each != null).length >
+              4 && (
+              <button
+                onClick={() => handleArrowClick("R")}
+                className="flex h-[32px] ml-8 w-[32px] rounded-[50%] items-center justify-center bg-[#FCFCFC]"
+              >
+                <ImgCarouselIcon />
+              </button>
+            )}
+
+            {Object.values(values).some(
+              (value) => value !== null && value !== "" && value !== 0
+            ) && (
+              <button
+                className="flex whitespace-nowrap items-center px-2.5 border-none py-0.5 w-fit font-[500] text-[18px] lg:text-[20px] transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-[#FFF] text-secondary-foreground hover:bg-gray-100/80 fnt-[600] text-[#0073C6] underline"
+                onClick={handleReset}
+              >
+                Clear All Filter
+              </button>
+            )}
+          </div>
+        </>
+      )}
       <div className="w-[90%] flex justify-between items-start flex-wrap gap-[5%]">
         {propCgId == projectprops.apartment ||
         propCgId == projectprops.villament ? (
           <Select
-            key={selectedValues.towerName}
             size="md"
             mt="md"
             label="Tower"
@@ -94,10 +230,8 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
             searchable
             rightSection={<DropDownIcon />}
             maxDropdownHeight={200}
-            value={selectedValues.towerName}
-            onChange={(value) =>
-              handleInputChange("towerName", value as string)
-            }
+            {...getInputProps("towerName")}
+            onChange={(value) => handleOnChange("towerName", value as string)}
             classNames={{ input: S.input, label: S.label }}
           />
         ) : null}
@@ -111,10 +245,11 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
           placeholder="-- select Unit Number--"
           data={(getOptions("unitNumber") as string[]) || []}
           searchable
-          maxDropdownHeight={200}
-          onChange={(value) => handleInputChange("unitNumber", value as string)}
-          classNames={{ input: S.input, label: S.label }}
           clearable
+          maxDropdownHeight={200}
+          {...getInputProps("unitNumber")}
+          onChange={(value) => handleOnChange("unitNumber", value as string)}
+          classNames={{ input: S.input, label: S.label }}
         />
         {propCgId !== projectprops.plot && (
           <Select
@@ -127,7 +262,8 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
             data={getOptions("bhkName")}
             searchable
             maxDropdownHeight={200}
-            onChange={(value) => handleInputChange("bhkName", value as string)}
+            {...getInputProps("bhkName")}
+            onChange={(value) => handleOnChange("bhkName", value as string)}
             classNames={{ input: S.input, label: S.label }}
           />
         )}
@@ -145,7 +281,8 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
               data={(getOptions("block") as string[]) || []}
               searchable
               maxDropdownHeight={200}
-              onChange={(value) => handleInputChange("block", value as string)}
+              {...getInputProps("block")}
+              onChange={(value) => handleOnChange("block", value as string)}
               classNames={{ input: S.input, label: S.label }}
             />
           )}
@@ -163,10 +300,17 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
                 : "Floor"
             }
             placeholder="-- select Floor --"
-            data={(getOptions("floor") as string[]) || []}
+            data={
+              getOptions("floor").map((item) =>
+                item === "0"
+                  ? { value: "0", label: "G" }
+                  : { value: item, label: item }
+              ) || []
+            }
             searchable
             maxDropdownHeight={200}
-            onChange={(value) => handleInputChange("floor", value as string)}
+            {...getInputProps("floor")}
+            onChange={(value) => handleOnChange("floor", value as string)}
             classNames={{ input: S.input, label: S.label }}
           />
         )}
@@ -182,7 +326,8 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
             data={(getOptions("plotArea") as string[]) || []}
             searchable
             maxDropdownHeight={200}
-            onChange={(value) => handleInputChange("plotArea", value as string)}
+            {...getInputProps("plotArea")}
+            onChange={(value) => handleOnChange("plotArea", value as string)}
             classNames={{ input: S.input, label: S.label }}
           />
         )}
@@ -196,7 +341,8 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
           data={(getOptions("facingName") as string[]) || []}
           searchable
           maxDropdownHeight={200}
-          onChange={(value) => handleInputChange("facingName", value as string)}
+          {...getInputProps("facingName")}
+          onChange={(value) => handleOnChange("facingName", value as string)}
           classNames={{ input: S.input, label: S.label }}
         />
         {propCgId == projectprops.plot && (
@@ -211,7 +357,8 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
             data={getOptions("width")}
             searchable
             maxDropdownHeight={200}
-            onChange={(value) => handleInputChange("width", value as string)}
+            {...getInputProps("width")}
+            onChange={(value) => handleOnChange("width", value as string)}
             classNames={{ input: S.input, label: S.label }}
           />
         )}
@@ -227,21 +374,11 @@ const Byunitblock: React.FC<Props> = ({ propCgId, data }: Props) => {
             data={getOptions("length")}
             searchable
             maxDropdownHeight={200}
-            onChange={(value) => handleInputChange("length", value as string)}
+            {...getInputProps("length")}
+            onChange={(value) => handleOnChange("length", value as string)}
             classNames={{ input: S.input, label: S.label }}
           />
         )}
-      </div>
-
-      <div className="w-[90%] flex items-end justify-end mt-[3%]">
-        <Button
-          leftSection={<LenseIcon />}
-          title="Search"
-          onClick={() => handleSearch()}
-          className="flex items-center justify-center gap-[10px] border-none text-[#FFF] text-[20px] font-[600] bg-[#0073C6] rounded-[10px] p-[6px]"
-        >
-          Search
-        </Button>
       </div>
     </div>
   );
