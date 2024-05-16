@@ -12,6 +12,8 @@ import { useShortlistAndCompare } from "@/app/hooks/storage";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import clsx from "clsx";
 import { GlobalPageType } from "@/app/validations/global";
+import { useSetAtom } from "jotai";
+import { NearByDataAtom } from "@/app/store/nearby";
 
 type Props = {
   type: string;
@@ -34,10 +36,10 @@ type CardProps = {
 export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
   const [, { open }] = useReqCallPopup();
   const { data: session } = useSession();
-  const { toggleShortlist, shortlistedItems } = useShortlistAndCompare();
+  const { toggleShortlist } = useShortlistAndCompare();
   const [, { open: openS }] = usePopShortList();
   const reqId = type === "proj" ? cardData.projIdEnc : cardData.propIdEnc;
-
+  const setPopReqData = useSetAtom(NearByDataAtom);
   const onAddingShortList = (projId: string) => {
     if (session) {
       mutate && mutate({ id: projId, type: ct as Pick<CardProps, "ct">["ct"] });
@@ -50,6 +52,13 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
     } else {
       openS();
     }
+  };
+  const handleReqCall = () => {
+    open(type, reqId, "projCard");
+    setPopReqData({
+      builderName: cardData.builderName,
+      projName: cardData.projName,
+    });
   };
   return (
     <>
@@ -187,7 +196,7 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
               icon={<Phone />}
               title="Request a Callback"
               buttonClass=" text-[#FFF] mt-[12px] text-[16px] font-[600] bg-[#0073C6] rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[6px]  "
-              onChange={() => open(type, reqId)}
+              onChange={handleReqCall}
             />
           </div>
         </div>

@@ -18,22 +18,24 @@ import Image from "next/image";
 import ReqOtpForm from "../../project/forms/otpform";
 import CountryInput from "../../atoms/CountryInput";
 import handleTrimAndReplace from "@/app/utils/input/validations";
-import { QnaSuccesssMessage, ReqcallbackMessage } from "../../project/success";
+import { ReqcallbackMessage } from "../../project/success";
 import Styles from "@/app/styles/Qna.module.css";
 import clsx from "clsx";
+import { NearByDataAtom } from "@/app/store/nearby";
 const RequestCallBackModal = ({
   opened,
   close,
   builderId,
   name,
+  source,
 }: {
   opened: any;
   close: any;
   builderId: number;
   name?: string;
+  source: string;
 }) => {
   const isMobile = useMediaQuery("(max-width: 750px)");
-  const isTab = useMediaQuery("(max-width: 1280px)");
   const { data } = useBuilder({ id: builderId, y: "N" });
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error" | "otp"
@@ -111,6 +113,8 @@ const RequestCallBackModal = ({
                     setStatus={setStatus}
                     name={data?.data?.ceoName ?? ""}
                     projName={name}
+                    builderName={data?.data.companyName ?? ""}
+                    source={source}
                   />
                 </div>
                 {(status === "idle" || status === "otp") && (
@@ -133,23 +137,35 @@ const RequestCallBackModal = ({
   );
 };
 export default RequestCallBackModal;
-const Content = ({ close, status, setStatus, name, projName }: any) => {
+const Content = ({
+  close,
+  status,
+  setStatus,
+  name,
+  projName,
+  source,
+  builderName,
+}: any) => {
   const { data: session } = useSession();
   return session ? (
     <LoggedInUserForm
       close={close}
       status={status}
       setStatus={setStatus}
-      name={name}
       projName={projName}
+      source={source}
+      name={name}
+      builderName={builderName}
     />
   ) : (
     <ReqForm
       close={close}
       status={status}
       setStatus={setStatus}
-      name={name}
       projName={projName}
+      source={source}
+      builderName={builderName}
+      name={name}
     />
   );
 };
@@ -159,6 +175,8 @@ const LoggedInUserForm = ({
   setStatus,
   name,
   projName,
+  source,
+  builderName,
 }: any) => {
   const { slug } = useParams<{ slug: string }>();
   const { pushToRequestCallbacks, isCallbackSubmitted } =
@@ -200,6 +218,7 @@ const LoggedInUserForm = ({
     setStatus("idle");
     close();
   };
+  const reqData = useAtomValue(NearByDataAtom);
   return status === "otp" ? (
     <ReqOtpForm
       callback={onSuccess}
@@ -219,13 +238,13 @@ const LoggedInUserForm = ({
           {" "}
           Call For:
         </span>{" "}
-        {projName}
+        {source === "projCard" ? reqData?.projName : projName}
       </p>
       <p className="text-[#148B16] mb-[6%] text-[14px] lg:text-[16px] italic font-bold leading-[normal] tracking-[0.64px]">
         <span className="text-[#4D6677] text-xl italic font-medium leading-[normal] tracking-[0.8px]">
           Builder:
         </span>{" "}
-        {name}
+        {source === "projCard" ? reqData?.builderName : builderName}
       </p>
       {/* Notifcation */}
       <div className=" flex justify-center items-center gap-2.5 border p-2.5 rounded-xl border-solid border-[#FFD600] bg-[#fff4bb] text-[#242424] text-[17px] not-italic font-semibold leading-[normal] mb-6">
@@ -263,15 +282,19 @@ const ReqForm = ({
   status,
   setStatus,
   name,
+  source,
+  builderName,
 }: {
   close: any;
   status: string;
   setStatus: any;
   name: string;
   projName: string;
+  source: string;
+  builderName: string;
 }) => {
   const { slug } = useParams<{ slug: string }>();
-
+  const reqData = useAtomValue(NearByDataAtom);
   const form = useForm({
     initialValues: {
       name: "",
@@ -320,7 +343,7 @@ const ReqForm = ({
         No worries add your details to get callback from builder
       </p>
       <p className="text-[#148B16] text-base italic font-bold leading-[normal] tracking-[0.64px] mb-[2%]">
-        Builder: {name}
+        Builder: {source === "projCard" ? reqData.builderName : name}
       </p>
       <h2 className="text-[#00487C] text-lg not-italic font-semibold leading-[normal] tracking-[0.72px] mb-[2%]">
         Your Details

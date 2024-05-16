@@ -241,7 +241,9 @@ const ProjectDetailsCard = ({
           />
 
           <Button
-            onChange={() => open(type === "proj" ? type : "prop", reqId)}
+            onChange={() =>
+              open(type === "proj" ? type : "prop", reqId, "projCard")
+            }
             title="Request Callback"
             icon={<Phone className="h-[16px] w-[16px] " />}
             buttonClass="flex justify-center items-center text-[#FFF] p-[2px] md:p-[5px] bg-[#0073C6] rounded-[5px] shadow-md text-[10px] md:text-[12px] font-[700]"
