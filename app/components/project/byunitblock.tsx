@@ -23,6 +23,7 @@ const Byunitblock: React.FC<Props> = ({
   data,
   form: { values, setValues, setFieldValue, getInputProps },
 }: Props) => {
+  console.log(values);
   const [floorsArray, setFloorsArray] = useAtom(unitFloorsAtom);
   const [, setFloor] = useAtom(selectedFloorAtom);
   const getOptions = (property: string): string[] => {

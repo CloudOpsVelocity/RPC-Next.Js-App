@@ -3,6 +3,7 @@ import {
   propertyDetailsTypes,
   projectprops,
   BACKEND_PROP_TYPES,
+  floorplanTypes,
 } from "../../data/projectDetails";
 import Button from "../../elements/button";
 import React, { useEffect, useState } from "react";
@@ -39,7 +40,6 @@ import { isSingleLetterOrNumber } from "@/app/utils/letters";
 import { ImgNotAvail } from "@/app/data/project";
 import NoProperties from "./notfound";
 import { useStateHistory } from "@/app/hooks/custom/useStateHistory";
-import { useCounter } from "@mantine/hooks";
 import Nofloor from "./error/nofloor";
 import clsx from "clsx";
 import CarouselSuggestion from "./unitblock/carousel";
@@ -64,6 +64,14 @@ export default function FloorplansBlock({ projName, slug }: Props) {
   const [, { open, type }] = useFloorPlanPopup();
   const form = useForm();
   const byUnitForm = useForm();
+  const handleUnitFormClear = () => {
+    const keys = Object.keys(byUnitForm.values);
+    const resetValues = keys.reduce((acc: any, key) => {
+      acc[key] = null;
+      return acc;
+    }, {});
+    byUnitForm.setValues(resetValues);
+  };
   // form.setValues so setting new values in filters
   const selectedPhase = PhaseOverview?.find(
     (phase: any) => phase.phaseId === currentPhase
@@ -236,8 +244,14 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                         : each.phaseName
                     }
                     onChange={() => {
+                      if (currentPhase == each.phaseId) return;
+
                       setCurrentPhase(each.phaseId);
                       setBhk("0");
+                      if (floorPlanType === "unit") {
+                        setSelectedFloor({});
+                        handleUnitFormClear();
+                      }
                     }}
                     buttonClass={` mb-[5px] text-[14px] sm:text-[18px] lg:text-[20px] bg-[#ECF7FF] p-[8px] xl:px-[8px]  whitespace-nowrap text-[#000] rounded-[8px]${
                       currentPhase == each.phaseId
@@ -281,10 +295,14 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                           : "text-[#303A42] font-[400] bg-[#EEF7FE]"
                       } `}
                       onChange={() => {
-                        getPropertyType(propertyDetailsTypes.get(keyName));
-                        setBhk("0");
-                        if (floorPlanType == "unit") {
-                          setSelectedFloor({});
+                        if (propCgId !== keyName) {
+                          getPropertyType(propertyDetailsTypes.get(keyName));
+                          setBhk("0");
+                          if (floorPlanType == "unit") {
+                            setSelectedFloor({});
+                            handleUnitFormClear();
+                            return;
+                          }
                         }
                       }}
                       title={name}
@@ -302,9 +320,12 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                 <ByTypeSvg className=" w-[24px] h-[24px] lg:w-[30px] lg:h-[30px] " />
               }
               onChange={() => {
-                setFloorPlanType("type");
-                if (!selectedFloor?.unitNumber) {
-                  setSelectedFloor(projectUnitsData[0]);
+                if (floorPlanType !== "type") {
+                  setFloorPlanType("type");
+                  handleUnitFormClear();
+                  if (!selectedFloor?.unitNumber) {
+                    setSelectedFloor(projectUnitsData[0]);
+                  }
                 }
               }}
               buttonClass={`text-[20px] lg:text-[24px] mr-[40px] whitespace-nowrap flex justify-center items-center gap-[6px] ${
@@ -320,9 +341,12 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                 <ByUnitSvg className=" w-[24px] h-[24px] lg:w-[30px] lg:h-[30px] " />
               }
               onChange={() => {
-                setFloorPlanType("unit");
                 if (floorPlanType !== "unit") {
-                  setSelectedFloor({});
+                  setFloorPlanType("unit");
+                  handleUnitFormClear();
+                  if (floorPlanType !== "unit") {
+                    setSelectedFloor({});
+                  }
                 }
               }}
               buttonClass={`text-[20px] lg:text-[24px] mr-[40px] whitespace-nowrap flex justify-center items-center gap-[6px] ${
@@ -338,9 +362,12 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                   <ByBhkSvg className=" w-[24px] h-[24px] lg:w-[30px] lg:h-[30px] " />
                 }
                 onChange={() => {
-                  setFloorPlanType("bhk");
-                  if (!selectedFloor?.unitNumber) {
-                    setSelectedFloor(projectUnitsData[0]);
+                  if (floorPlanType !== "bhk") {
+                    setFloorPlanType("bhk");
+                    handleUnitFormClear();
+                    if (!selectedFloor?.unitNumber) {
+                      setSelectedFloor(projectUnitsData[0]);
+                    }
                   }
                 }}
                 buttonClass={`text-[20px] lg:text-[24px] mr-[40px] whitespace-nowrap flex justify-center items-center gap-[6px] ${
@@ -381,12 +408,8 @@ export default function FloorplansBlock({ projName, slug }: Props) {
             )}
 
             {floorPlanType == "unit" && (
-              <div
-                className="w-full md:w-[50%]  h-[456px] !md:h-[547px] border-solid overflow-auto pt-6"
-                key={currentPhase + propCgId + floorPlanType}
-              >
+              <div className="w-full md:w-[50%]  h-[456px] !md:h-[547px] border-solid overflow-auto pt-6">
                 <Byunitblock
-                  key={currentPhase + propCgId + floorPlanType}
                   propCgId={propCgId}
                   data={projectUnitsData}
                   form={byUnitForm}
