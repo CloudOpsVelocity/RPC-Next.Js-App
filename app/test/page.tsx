@@ -1,15 +1,17 @@
 import React from "react";
-import { promiseHooks } from "v8";
-import VersaMessage from "../components/project/success/VersaMessage";
-import {
-  ListingNotFoundMessage,
-  QnaSuccesssMessage,
-  RatingMessage,
-} from "../components/project/success";
-
 export default async function page() {
-  // insert element at the position index
-  // of the list
+  // function cube(n: number) {
+  //   for (let i = 0; i < n; i++) {
+  //     console.log(i);
+  //     for (let j = 0; j < n; j++) {
+  //       console.log(j);
+  //       for (let k = 0; k < n; k++) {
+  //         console.log(k);
+  //       }
+  //     }
+  //   }
+  // }
+  // cube(3);
 
   return <>{/* <RatingMessage /> */}</>;
 }

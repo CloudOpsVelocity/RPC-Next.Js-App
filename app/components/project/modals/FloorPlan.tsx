@@ -27,24 +27,38 @@ import { ImgNotAvail } from "@/app/data/project";
 import { Carousel } from "@mantine/carousel";
 import styles from "@/app/styles/Carousel.module.css";
 import {
+  StateHistory,
   UseStateHistoryHandlers,
   useStateHistory,
 } from "@/app/hooks/custom/useStateHistory";
+import UndoRedo from "../button/undo";
+import { unitFloorsAtom } from "../byunitblock";
 
 type Props = {
   propCgId: any;
   data?: any;
   projName?: string;
   handlers?: UseStateHistoryHandlers<unknown>;
+  history: StateHistory<unknown>;
+  form: any;
+  floorPlanType: string;
 };
 
-function FloorPlanModal({ propCgId, data, projName, handlers }: Props) {
+function FloorPlanModal({
+  propCgId,
+  data,
+  projName,
+  handlers,
+  history,
+  form: unitTypeForm,
+  floorPlanType,
+}: Props) {
   const [selectedFloor, setSelectedFloor] = useAtom(selectedFloorAtom);
-  const setFloorsArray = useSetAtom(floorPlansArray);
+  const [floorsArray, setFloorsArray] = useAtom(floorPlansArray);
+  const setUnitsFloor = useSetAtom(unitFloorsAtom);
   const [opened, { close }] = useFloorPlanPopup();
   const scrollFiltersRef = useRef<HTMLDivElement>(null);
   const form = useFormContext();
-
   const handleArrowClick = (side: "R" | "L"): void => {
     const scrollAmount = side === "R" ? 100 : -100;
     if (scrollFiltersRef.current) {
@@ -58,7 +72,11 @@ function FloorPlanModal({ propCgId, data, projName, handlers }: Props) {
       setSelectedFloor(data[0]);
       setFloorsArray(data);
     }
-
+    if (floorPlanType === "unit") {
+      unitTypeForm.setValues(setPropertyValues(selectedFloor, propCgId));
+      setUnitsFloor(floorsArray);
+    }
+    handlers?.clear();
     const keys = Object.keys(form.values);
     keys.forEach((key) => form.setFieldValue(key, null));
   };
@@ -85,6 +103,40 @@ function FloorPlanModal({ propCgId, data, projName, handlers }: Props) {
     });
     setFloorsArray(filteredData);
   };
+  // SHOULD NOT DEPEND ANY OTHER FN IMPORTANT OTHERWISE IT WILL CREATE BUGS
+  const handleSearchUndo = (undoValues: any): void => {
+    if (undoValues?.clearAll == "true") {
+      setSelectedFloor(null);
+      setFloorsArray(data);
+      const keys = Object.keys(form.values);
+      // dont' do one by one
+      // keys.forEach((key) => form.setFieldValue(key, null));
+      const resetValues = keys.reduce((acc: any, key) => {
+        acc[key] = null;
+        return acc;
+      }, {});
+      form.setValues(resetValues);
+    } else {
+      const filteredData = data.filter((item: any) => {
+        const matches = Object.entries(undoValues).every(([formKey, value]) => {
+          if (value !== null) {
+            // @ts-ignore
+            const itemValue = String(item[formKey]).toLowerCase();
+            // @ts-ignore
+            const formValue = String(value).toLowerCase();
+            return itemValue === formValue;
+          }
+          return true;
+        });
+        return matches;
+      });
+      setSelectedFloor({
+        ...filteredData[0],
+        floorPlanUrl: filteredData[0].floorPlanUrl || ImgNotAvail,
+      });
+      setFloorsArray(filteredData);
+    }
+  };
   const handleReset = () => {
     setSelectedFloor(null);
     setFloorsArray(data);
@@ -96,6 +148,7 @@ function FloorPlanModal({ propCgId, data, projName, handlers }: Props) {
       return acc;
     }, {});
     form.setValues(resetValues);
+    handlers?.set({ clearAll: "true" });
   };
   const handleRemoveFilter = (key: string) => {
     const keysWithNonNullValues = Object.keys(form.values).filter(
@@ -107,6 +160,7 @@ function FloorPlanModal({ propCgId, data, projName, handlers }: Props) {
       setFloorsArray(data);
       return;
     }
+    handlers?.set({ ...form.values, [key]: null });
     form.setFieldValue(key, null);
     handleSearch(key);
   };
@@ -129,8 +183,6 @@ function FloorPlanModal({ propCgId, data, projName, handlers }: Props) {
         size={"100%"}
       >
         <>
-          {/* <button onClick={handleBack}>Back Button </button>
-          <button onClick={handleNext}>Next Button </button> */}
           <div className="bg-white w-full h-auto pl-5">
             <p className="text-[#001F35] text-lg not-italic font-medium leading-[normal] mt-2 mb-7">
               See floor plan according to your selections
@@ -168,7 +220,8 @@ function FloorPlanModal({ propCgId, data, projName, handlers }: Props) {
                   ([key, value]) =>
                     value !== null &&
                     value !== 0 &&
-                    value !== "" && (
+                    value !== "" &&
+                    value !== "true" && (
                       <div
                         className="flex h-[33px] items-center px-3 whitespace-nowrap py-1.5 bg-white border border-[#c4f1f9] rounded-full"
                         key={key}
@@ -206,6 +259,12 @@ function FloorPlanModal({ propCgId, data, projName, handlers }: Props) {
                     )
                 )}
               </div>
+              <UndoRedo
+                history={history}
+                form={form}
+                handlers={handlers}
+                handleSearch={handleSearchUndo}
+              />
 
               {/* scroll buttons */}
               {Object.values(form.values).filter((each) => each != null)
@@ -254,7 +313,6 @@ const LeftSection = ({ propCgId, data, handlers }: any) => {
   const [, setFloorsArray] = useAtom(floorPlansArray);
   const [, setFloor] = useAtom(selectedFloorAtom);
   const { getInputProps, values, setFieldValue, setValues } = useFormContext();
-
   const getOptions = (property: string): string[] => {
     const filteredData = data?.filter((item: any) => {
       return Object.keys(values).every(
@@ -305,7 +363,10 @@ const LeftSection = ({ propCgId, data, handlers }: any) => {
     setValues(prevObj);
     handleSearch(key);
   };
-
+  // const handleBack = () => {
+  //   handlers.back();
+  // };
+  // console.log(history.history[history.current - 1]);
   return (
     <div className="col-span-1 w-full max-w-[392px] mr-[3%]  ">
       <div className="w-[100%] flex justify-between items-start flex-wrap gap-[5%]">
@@ -738,7 +799,7 @@ const LeftSection = ({ propCgId, data, handlers }: any) => {
     </div>
   );
 };
-const RightSection = ({ propCgId }: Props) => {
+const RightSection = ({ propCgId }: any) => {
   const data = useAtomValue(selectedFloorAtom);
   return (
     <div className="bg-[#F4FBFF] p-6 rounded-lg w-full max-w-[342px] shadow">

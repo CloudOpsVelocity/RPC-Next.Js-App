@@ -4,6 +4,7 @@ export interface UseStateHistoryHandlers<T> {
   set: (value: T) => void;
   back: (steps?: number) => void;
   forward: (steps?: number) => void;
+  clear: () => void;
 }
 
 export interface StateHistory<T> {
@@ -24,14 +25,15 @@ export function useStateHistory<T>(): [
   const set = useCallback(
     (val: T) =>
       setState((currentState) => {
-        const nextState = [
+        const nextHistory = [
           ...currentState.history.slice(0, currentState.current + 1),
           val,
         ];
-        return {
-          history: nextState,
-          current: nextState.length - 1,
+        const nextState = {
+          history: nextHistory.length > 5 ? nextHistory.slice(-5) : nextHistory,
+          current: nextHistory.length - 1,
         };
+        return nextState;
       }),
     []
   );
@@ -56,8 +58,9 @@ export function useStateHistory<T>(): [
       })),
     []
   );
+  const clear = useCallback(() => setState({ history: [], current: 0 }), []); // Added clear function
 
-  const handlers = useMemo(() => ({ set, forward, back }), []);
+  const handlers = useMemo(() => ({ set, forward, back, clear }), []);
 
   return [state.history[state.current], handlers, state];
 }

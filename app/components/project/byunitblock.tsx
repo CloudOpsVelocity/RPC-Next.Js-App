@@ -10,7 +10,6 @@ import { atom, useAtom } from "jotai";
 import { selectedFloorAtom } from "@/app/store/floor";
 import S from "@/app/styles/Floorplan.module.css";
 import { setPropertyValues } from "@/app/utils/dyanamic/projects";
-import { useForm } from "@mantine/form";
 import Image from "next/image";
 
 type Props = {
@@ -232,7 +231,7 @@ const Byunitblock: React.FC<Props> = ({
             maxDropdownHeight={200}
             {...getInputProps("towerName")}
             onChange={(value) => handleOnChange("towerName", value as string)}
-            classNames={{ input: S.input, label: S.label }}
+            classNames={{ input: S.input, label: S.label, option: S.option }}
           />
         ) : null}
 
@@ -249,7 +248,7 @@ const Byunitblock: React.FC<Props> = ({
           maxDropdownHeight={200}
           {...getInputProps("unitNumber")}
           onChange={(value) => handleOnChange("unitNumber", value as string)}
-          classNames={{ input: S.input, label: S.label }}
+          classNames={{ input: S.input, label: S.label, option: S.option }}
         />
         {propCgId !== projectprops.plot && (
           <Select
@@ -264,7 +263,7 @@ const Byunitblock: React.FC<Props> = ({
             maxDropdownHeight={200}
             {...getInputProps("bhkName")}
             onChange={(value) => handleOnChange("bhkName", value as string)}
-            classNames={{ input: S.input, label: S.label }}
+            classNames={{ input: S.input, label: S.label, option: S.option }}
           />
         )}
 
@@ -283,7 +282,7 @@ const Byunitblock: React.FC<Props> = ({
               maxDropdownHeight={200}
               {...getInputProps("block")}
               onChange={(value) => handleOnChange("block", value as string)}
-              classNames={{ input: S.input, label: S.label }}
+              classNames={{ input: S.input, label: S.label, option: S.option }}
             />
           )}
 
@@ -311,7 +310,7 @@ const Byunitblock: React.FC<Props> = ({
             maxDropdownHeight={200}
             {...getInputProps("floor")}
             onChange={(value) => handleOnChange("floor", value as string)}
-            classNames={{ input: S.input, label: S.label }}
+            classNames={{ input: S.input, label: S.label, option: S.option }}
           />
         )}
 
@@ -328,7 +327,7 @@ const Byunitblock: React.FC<Props> = ({
             maxDropdownHeight={200}
             {...getInputProps("plotArea")}
             onChange={(value) => handleOnChange("plotArea", value as string)}
-            classNames={{ input: S.input, label: S.label }}
+            classNames={{ input: S.input, label: S.label, option: S.option }}
           />
         )}
         <Select
@@ -343,7 +342,7 @@ const Byunitblock: React.FC<Props> = ({
           maxDropdownHeight={200}
           {...getInputProps("facingName")}
           onChange={(value) => handleOnChange("facingName", value as string)}
-          classNames={{ input: S.input, label: S.label }}
+          classNames={{ input: S.input, label: S.label, option: S.option }}
         />
         {propCgId == projectprops.plot && (
           <Select
@@ -359,7 +358,7 @@ const Byunitblock: React.FC<Props> = ({
             maxDropdownHeight={200}
             {...getInputProps("width")}
             onChange={(value) => handleOnChange("width", value as string)}
-            classNames={{ input: S.input, label: S.label }}
+            classNames={{ input: S.input, label: S.label, option: S.option }}
           />
         )}
         {propCgId == projectprops.plot && (
@@ -376,7 +375,7 @@ const Byunitblock: React.FC<Props> = ({
             maxDropdownHeight={200}
             {...getInputProps("length")}
             onChange={(value) => handleOnChange("length", value as string)}
-            classNames={{ input: S.input, label: S.label }}
+            classNames={{ input: S.input, label: S.label, option: S.option }}
           />
         )}
       </div>

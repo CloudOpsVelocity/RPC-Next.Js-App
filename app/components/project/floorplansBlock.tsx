@@ -20,7 +20,11 @@ import FloorplanDetailsCard from "./floorplanDetailsCard";
 import Byunitblock from "./byunitblock";
 import ByBhkBlock from "./byBhkBlock";
 import { PhaseList } from "@/app/validations/types/project";
-import FloorPlanModal from "./modals/FloorPlan";
+const FloorPlanModal = dynamic(() => import("./modals/FloorPlan"), {
+  loading: () => <div>Loading...</div>,
+  ssr: true,
+});
+// import FloorPlanModal from "./modals/FloorPlan";
 import { useQuery } from "react-query";
 import { getProjectUnits } from "@/app/utils/api/project";
 import usePhaseWiseOverview from "@/app/hooks/usePhaseWiseOverview";
@@ -39,6 +43,7 @@ import { useCounter } from "@mantine/hooks";
 import Nofloor from "./error/nofloor";
 import clsx from "clsx";
 import CarouselSuggestion from "./unitblock/carousel";
+import dynamic from "next/dynamic";
 
 type Props = {
   data: PhaseList[];
@@ -55,7 +60,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
   const setFloorsArray = useSetAtom(floorPlansArray);
 
   const [selectedFloor, setSelectedFloor] = useAtom(selectedFloorAtom);
-  const [value, handlers, history] = useStateHistory();
+  const [, handlers, history] = useStateHistory();
   const [, { open, type }] = useFloorPlanPopup();
   const form = useForm();
   const byUnitForm = useForm();
@@ -155,7 +160,17 @@ export default function FloorplansBlock({ projName, slug }: Props) {
       floorPlanUrl: projectUnitsData[0].floorPlanUrl ?? ImgNotAvail,
     });
     form.setValues(setPropertyValues(projectUnitsData[0], propCgId));
+    handlers.set(setPropertyValues(projectUnitsData[0], propCgId));
     handleSearch();
+    open("floor");
+  };
+  const handleUnitClick = () => {
+    form.setValues(setPropertyValues(selectedFloor, propCgId));
+    handlers.set(setPropertyValues(selectedFloor, propCgId));
+    const filteredFloors = projectUnitsData.filter(
+      (floor: any) => floor.unitNumber === selectedFloor.unitNumber
+    );
+    setFloorsArray(filteredFloors);
     open("floor");
   };
   const handleContainerClick = () => {
@@ -306,9 +321,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
               }
               onChange={() => {
                 setFloorPlanType("unit");
-
                 if (floorPlanType !== "unit") {
-                  console.log(floorPlanType);
                   setSelectedFloor({});
                 }
               }}
@@ -368,11 +381,14 @@ export default function FloorplansBlock({ projName, slug }: Props) {
             )}
 
             {floorPlanType == "unit" && (
-              <div className="w-full md:w-[50%]  h-[456px] !md:h-[547px] border-solid overflow-auto pt-6">
+              <div
+                className="w-full md:w-[50%]  h-[456px] !md:h-[547px] border-solid overflow-auto pt-6"
+                key={currentPhase + propCgId + floorPlanType}
+              >
                 <Byunitblock
+                  key={currentPhase + propCgId + floorPlanType}
                   propCgId={propCgId}
                   data={projectUnitsData}
-                  key={currentPhase + propCgId}
                   form={byUnitForm}
                 />
               </div>
@@ -531,7 +547,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                         <img
                           onClick={(e) => {
                             e.stopPropagation();
-                            handleOpen();
+                            handleUnitClick();
                           }}
                           src={
                             (selectedFloor?.floorPlanUrl +
@@ -546,7 +562,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                           <img
                             onClick={(e) => {
                               e.stopPropagation();
-                              handleOpen();
+                              handleUnitClick();
                             }}
                             src="/abc/noimage.svg"
                             className="w-[80%] h-full cursor-pointer"
@@ -577,6 +593,9 @@ export default function FloorplansBlock({ projName, slug }: Props) {
               propCgId={propCgId}
               data={projectUnitsData}
               handlers={handlers}
+              history={history}
+              form={byUnitForm}
+              floorPlanType={floorPlanType}
             />
           </FormProvider>
         </>
