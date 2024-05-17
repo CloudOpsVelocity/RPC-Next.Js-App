@@ -39,7 +39,7 @@ export default function NearByCarousel({
             : []
         }
         mutate={mutate}
-        ct="proj"
+        ct="builder"
       />
       <ProjectCarousel
         type="proj"

@@ -132,7 +132,9 @@ const AddRating = ({
   });
   const onClose = () => {
     form.reset();
+    // if (!isDataSubmitted.isReviewSubmitted) {
     setStatus("idle");
+    // }
     close();
   };
 
@@ -151,13 +153,12 @@ const AddRating = ({
       });
     } else {
       await addRating({ ...values, projIdEnc: params?.slug });
-
-      const optimisticData = {
-        ...(values.rating && { rating: "Y" }),
-        ...(values.review && { review: "Y" }),
-      };
-      updateRatings(optimisticData);
     }
+    const optimisticData = {
+      ...(values.rating && { rating: "Y" }),
+      ...(values.review && { review: "Y" }),
+    };
+    updateRatings(optimisticData);
     setStatus("success");
   };
   const isMobile = useMediaQuery(`(max-width: 750px)`);
