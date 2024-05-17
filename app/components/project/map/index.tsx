@@ -163,6 +163,7 @@ const LeafMap: React.FC<{
             lat={lat}
             lang={lang}
             setSelectedLocation={setSelectedLocation}
+            type={type}
           />
         </section>
       </div>

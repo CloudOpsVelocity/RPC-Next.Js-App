@@ -39,7 +39,7 @@ export default function Overview({
   builderId,
   state,
   basePrice,
-  media
+  media,
 }: Main) {
   const { PhaseOverview, phaseList } = usePhaseWiseOverview();
   return (

@@ -24,6 +24,7 @@ const Map = ({
   lat,
   lang,
   setSelectedLocation,
+  type,
 }: any) => {
   const position: LatLngTuple = [lat, lang];
   return (
@@ -52,6 +53,7 @@ const Map = ({
         projName={projName}
         lat={lat}
         lang={lang}
+        type={type}
       />
     </MapContainer>
   );
@@ -65,6 +67,7 @@ const Content: React.FC<any> = ({
   projName,
   lat,
   lang,
+  type,
 }) => {
   const position: LatLngTuple = [lat, lang];
   const map = useMap();
@@ -136,7 +139,7 @@ const Content: React.FC<any> = ({
         >
           <div className="p-2">
             <p className="text-white text-base italic font-medium leading-[normal]">
-              Project you are exploring
+              {type === "proj" ? "Project" : " Property"} you are exploring
             </p>
             <p className="text-white text-lg not-italic font-semibold leading-[normal] mt-2">
               {projName}

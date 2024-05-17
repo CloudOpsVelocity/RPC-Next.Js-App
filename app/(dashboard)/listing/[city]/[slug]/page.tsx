@@ -92,7 +92,6 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
               projId={data.projIdEnc}
               type="prop"
             />
-            <Banner slug={data.projIdEnc} projName={data.propName} />
             <ErrorContainer data={projData.banks}>
               <Loans type="prop" banks={projData.banks} name={data.propName} />
             </ErrorContainer>
@@ -100,15 +99,13 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             <AboutBuilder type="prop" id={projData.builderId} />
             <PropertyBanner {...projData} />
 
-            <Reviews slug={data.projIdEnc} projName={data.propName} />
-
             <FaqWithBg data={projData.faqs} projName={data.propName} />
           </>
         )}
         {!data.projIdEnc && (
           <PropertyMap
-            lat={projData?.lat ?? 0}
-            lang={projData?.lang ?? 0}
+            lat={data?.lat ?? 0}
+            lang={data?.lang ?? 0}
             projName={data.propName}
             projId={data.propIdEnc}
             type="prop"

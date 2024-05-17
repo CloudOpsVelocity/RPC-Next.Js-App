@@ -250,7 +250,7 @@ const OtherDetails = ({
           className={style.card}
         />
 
-        {availablityStatus === "R" ? (
+        {availablityStatus === "R" && propTypeName !== "Plot" ? (
           <RoomBasicDetails
             icon={<FlatIcon />}
             title="Age of Property"
@@ -360,7 +360,7 @@ const PlotBlock = ({ data }: { data: Main }) => {
         <RoomBasicDetails
           icon={<CornorIcon />}
           title="Property on"
-          value={data.isCornerPlot && "Corner Plot"}
+          value={data.isCornerPlot ? "Corner Plot" : "N/A"}
           className={style.card}
         />
         <RoomBasicDetails
@@ -375,7 +375,7 @@ const PlotBlock = ({ data }: { data: Main }) => {
         <RoomBasicDetails
           icon={<WallIcons />}
           title="Plot Enclosed with wall"
-          value={data.boundryWallEnclose && "Yes"}
+          value={data.boundryWallEnclose ? "Yes" : "No"}
           className={style.card}
         />
       </div>

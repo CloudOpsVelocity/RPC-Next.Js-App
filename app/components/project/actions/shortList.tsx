@@ -14,9 +14,8 @@ import useDynamicProj from "@/app/hooks/project/useDynamic";
 export default function ShortList() {
   const { data: session } = useSession();
   const { slug } = useParams<{ slug: string }>();
-  const { toggleShortlist, shortlistedItems } = useShortlistAndCompare();
+  const { toggleShortlist } = useShortlistAndCompare();
   const [, { open }] = usePopShortList();
-
   const { data, mutate } = useDynamicProj();
 
   const onAddingShortList = () => {

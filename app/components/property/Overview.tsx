@@ -7,6 +7,7 @@ import Ratings from "./Ratings";
 import CompareList from "./actions/compareList";
 import ShortList from "./actions/shortList";
 import PropertyOverviewBanner from "./OverViewBanner";
+import { footerPhoneIcon } from "@/app/images/commonSvgs";
 
 export default function PropertyOverView({ data }: { data: Main }) {
   return (
@@ -28,11 +29,11 @@ export default function PropertyOverView({ data }: { data: Main }) {
           </p>
         </div>
         <div className="flex justify-center md:items-end flex-col">
-          <Ratings slug={data.projIdEnc} />
           <a
             href={`tel:${8766203976}`}
-            className="text-[20px] lg:text-[24px] text-[#0073C6] font-[600] decoration-dashed underline whitespace-nowrap "
+            className="text-[20px]  mt-3  text-[#0073C6] lg:text-2xl not-italic font-semibold leading-[normal] inline-flex justify-center items-center gap-1.5 p-2 rounded-lg border-[0.8px] border-solid border-[#0073C6] bg-[#fafafa]"
           >
+            {footerPhoneIcon}
             Call now
           </a>
         </div>

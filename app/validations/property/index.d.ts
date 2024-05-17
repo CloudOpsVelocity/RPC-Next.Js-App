@@ -57,6 +57,8 @@ export interface Main {
   usp: string;
   ispetFriendly: number;
   availavleFor: string;
+  lat: string;
+  lang: string;
 }
 
 export interface OtherPrice {
