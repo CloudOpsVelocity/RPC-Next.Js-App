@@ -65,6 +65,7 @@ export default function PriceBreakup({
   const otherChangeTotal = parseOtherCharge(otherPrice?.otherCharge);
   const chargesArray = otherPrice?.otherCharge?.split(",");
   const [opened, { open, close }] = usePricingPop();
+
   return (
     <Drawer
       opened={opened}
@@ -77,6 +78,7 @@ export default function PriceBreakup({
         title: styles.title,
       }}
       size={"35%"}
+      className="!relative"
     >
       <div className="space-y-8">
         <Card

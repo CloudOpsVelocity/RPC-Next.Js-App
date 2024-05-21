@@ -1,4 +1,4 @@
-import { List } from "@mantine/core";
+import { List, NumberFormatter } from "@mantine/core";
 import React from "react";
 import { TbH4 } from "react-icons/tb";
 import ListItem from "./ListItem";
@@ -17,7 +17,7 @@ export default function Card({ Icon, title, type, data, otherPrice }: Props) {
       case "price":
         return (
           <h4 className="text-[#242424] text-2xl not-italic font-bold leading-[normal]">
-            {data.toLocaleString()}
+            <NumberFormatter thousandSeparator value={data} />
           </h4>
         );
       case "applicableprice":
