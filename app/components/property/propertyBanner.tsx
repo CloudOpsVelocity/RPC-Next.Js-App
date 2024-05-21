@@ -5,6 +5,9 @@ import { Main } from "@/app/validations/types/project";
 import { useMediaQuery } from "@mantine/hooks";
 import Image from "next/image";
 import React from "react";
+import { Svg } from "./heading";
+import ReadMore from "../atoms/readmore";
+import Button from "../atoms/buttons/variansts";
 
 export default function PropertyBanner({
   projectName,
@@ -13,6 +16,9 @@ export default function PropertyBanner({
   endDate,
   minPrice,
   maxPrice,
+  media,
+  about,
+  projIdEnc,
 }: Main) {
   const isMobile = useMediaQuery(`(max-width: 750px)`);
   return isMobile ? (
@@ -25,58 +31,60 @@ export default function PropertyBanner({
       maxPrice={maxPrice}
     />
   ) : (
-    <div className="w-full mt-[2%] h-[339px] shrink-0 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] bg-[#fcfcfc] mb-20 relative">
+    <div className="w-[90%] m-auto mt-[2%] shrink-0  bg-[#fcfcfc] mb-20 relative  border shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] border-solid border-[#CAE9FF]  px-[52px] py-[35px]">
       <Image
         src="/property/propertybanner.png"
         alt="Sobha Dream Acres"
-        className="w-[312px] h-auto absolute right-0 -top-[180px] hidden md:block"
+        className="w-[312px] h-auto absolute right-8 top-[0px] hidden md:block"
         width={312}
         height={312}
       />
-      <div className="max-w-[90%] mx-auto p-5">
-        <h2 className="text-[#212C33] text-[32px] not-italic font-semibold leading-[normal] tracking-[1.28px] ml-8">
-          About{" "}
-          <span className="text-[#148B16] text-[32px] not-italic font-semibold leading-[normal] tracking-[1.28px]">
+      <div className=" inline-flex justify-center items-center ">
+        {Svg}
+        <h1 className="capitalize ml-6 text-[#001F35] text-[32px] not-italic font-semibold leading-[normal]  mb-[14px]">
+          about{" "}
+          <span className="text-[#148B16] text-[32px] not-italic font-bold leading-[normal] capitalize">
             {projectName}
           </span>
-        </h2>
-        <div className="flex justify-between items-center p-5 ">
-          <div className=" flex space-x-4">
-            {" "}
-            <Image
-              src="/property.png"
-              alt="Sobha Dream Acres"
-              className="w-full h-auto mb-4"
-              width={350}
-              height={185}
-            />
-            <div className="mt-4">
-              <h2 className="text-[#001F35] text-2xl not-italic font-semibold leading-[normal] min-w-[350px]">
-                About {projectName}
-              </h2>
-
-              <p className="text-[#768AA9] text-xl not-italic font-semibold leading-[normal]">
-                {availableProperties.join(" ,")}
-              </p>
-              <p className="text-[#202020] text-2xl not-italic font-normal leading-[normal]">
-                Posted By: <span className="font-semibold">Builder</span>{" "}
-              </p>
-            </div>
-          </div>
-          <div className="flex justify-start items-start h-[200px]">
-            <div className="text-right mr-4">
-              <p className="text-[#148B16] text-[28px] not-italic font-bold leading-[normal]">
-                {formatCurrency(minPrice)} - {formatCurrency(maxPrice)}
-              </p>
-              <p className="text-[#333] text-xl not-italic font-medium leading-[normal]">
-                Start- End Date:{" "}
-                <span className="font-semibold">
-                  {formatDate(startDate)} - {formatDate(endDate)}
-                </span>
-              </p>
-            </div>
+          <p className="text-[#4D6677] text-2xl italic font-medium leading-[normal] capitalize mt-2">
+            About project get summarized perspective for the incredible listing
+          </p>
+        </h1>
+      </div>
+      <div>
+        <div className="inline-flex mt-5">
+          <Image
+            src={media.coverImageUrl}
+            alt="Sobha Dream Acres"
+            className="flex w-[350px] h-[185px] items-center shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[10px]"
+            width={350}
+            height={185}
+          />
+          <div className="ml-5">
+            <h3 className="text-[#001F35] text-[32px] not-italic font-semibold leading-[normal]">
+              {projectName}
+            </h3>
+            <h4 className="text-[#148B16] text-[32px] not-italic font-bold">
+              {formatCurrency(minPrice)} - {formatCurrency(maxPrice)}
+            </h4>
+            <p className="text-[#242424] text-2xl not-italic font-medium leading-[normal]">
+              {formatDateDDMMYYYY(startDate)} - {formatDateDDMMYYYY(endDate)}
+            </p>
+            <p className="text-[#00487C] text-[26px] not-italic font-medium">
+              {" "}
+              {availableProperties.join(", ")}
+            </p>
           </div>
         </div>
+        <div className="mt-5">
+          <ReadMore
+            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis auteeeee irure dolor in repllllllllll rehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupida tatttt non proident, sunt in culp a qui officia deserunt mollit anim id est laborum...Read More"
+            title={"About"}
+          />
+        </div>
+        <Button variant="blue" className="mt-5">
+          Explore Project
+        </Button>
       </div>
     </div>
   );

@@ -119,3 +119,16 @@
 .sideBarBg {
   background: rgba(197, 215, 228, 0.3);
 }
+
+/* listing custom styles */
+.listingProjectCard {
+  border-radius: 385px;
+  background: linear-gradient(
+    180deg,
+    rgba(20, 139, 22, 0.3) 0%,
+    rgba(255, 255, 255, 0.3) 100%
+  );
+  width: 385px;
+  height: 385px;
+  flex-shrink: 0;
+}

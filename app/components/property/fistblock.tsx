@@ -20,7 +20,7 @@ import { formatDate } from "@/app/utils/date";
 import { getImageUrls } from "@/app/utils/image";
 import { calculatePerSqPrice } from "@/app/utils/price";
 import styles from "@/app/styles/Carousel.module.css";
-
+const realData = [{ test: "hello" }, 2, 3, 4, 5, 6, 77];
 type Props = {
   projectDetails: Main | null;
   projName: string;
@@ -47,9 +47,9 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
       {projectDetails && (
         <>
           <div className="absolute m-[2%] z-10 right-2">
-            <p className="shadow-md rounded-[10px] bg-gradient-to-r p-[8px] from-[#EFF5FF] /0  to-[#F2FAFF]/100 text-[#000] text-[16px] font-[500]">
+            <p className="shadow-md rounded-[10px] bg-gradient-to-r p-[8px] from-[#EFF5FF] /0  to-[#F2FAFF]/100 text-[#000] text-[14px] sm:text-[16px] md:text-xl not-italic font-medium leading-[normal]">
               Availability Status:{" "}
-              <span className="text-[#148B16] text-[16px] font-[700]">
+              <span className="text-[#148B16] text-[14px] sm:text-[16px]   md:text-xl not-italic font-bold">
                 {" "}
                 {projectDetails.availablityStatus === "U"
                   ? "Under Construction"
@@ -120,7 +120,7 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
               <h2 className="text-[20px] md:text-[28px] lg:text-[32px] font-[700] text-[#001F35]">
                 {formatCurrency(projectDetails.price)}
               </h2>
-              {/* <p className="text-[16px] md:text-right lg:text-[24px] font-[600] mb-[10px] md:mb-[10px] text-[#00487C] ">
+              <p className="text-[16px] md:text-right lg:text-[24px] font-[600] mb-[10px] md:mb-[10px] text-[#00487C] ">
                 ₹{" "}
                 {calculatePerSqPrice(
                   projectDetails.price,
@@ -129,7 +129,7 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
                     : projectDetails.sba
                 )}
                 /- Price per sqft onwards
-              </p> */}
+              </p>
               <p className="text-[#001F35] text-xl not-italic font-semibold leading-[normal] mb-[13px]">
                 Posted By:{" "}
                 {projectDetails.postedByType === "B" ? "Builder" : "Agent"}
@@ -145,7 +145,7 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
                   alt="no of floors"
                   className="h-[24px] w-[24px] "
                 />
-                Floors Plans
+                Floors Plan
               </p>
             </div>
           </div>

@@ -15,6 +15,7 @@ import { useParams } from "next/navigation";
 import { Main } from "@/app/validations/property";
 import { calculatePerSqPrice } from "@/app/utils/price";
 import ListItem from "./pricingbreakup";
+import { usePricingPop } from "@/app/hooks/property/usePricingPop";
 export default function PropertyOverviewBanner({
   price,
   otherPrice,
@@ -26,7 +27,7 @@ export default function PropertyOverviewBanner({
   cg,
 }: Main) {
   const [opened, { open, close, source }] = useReqCallPopup();
-  const [collapsed, { toggle }] = useDisclosure(false);
+  const [collapsed, { open: toggle }] = usePricingPop();
   const { slug } = useParams<{ slug: string }>();
   const pricePerSq = calculatePerSqPrice(
     price,
@@ -78,9 +79,9 @@ export default function PropertyOverviewBanner({
           source={source}
         />
       </div>
-      <Collapse in={collapsed}>
+      {/* <Collapse in={collapsed}>
         <PriceBreakUp otherPrice={otherPrice} price={pricePerSq} />
-      </Collapse>
+      </Collapse> */}
     </>
   );
 }

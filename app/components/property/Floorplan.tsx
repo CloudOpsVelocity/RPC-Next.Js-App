@@ -53,11 +53,11 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
           />
         </div>
 
-        <div className=" h-[456px] lg:h-[570px] w-full rounded-[14px]  border-solid border-[1px] border-[#92B2C8] bg-[#FFF] shadow-md flex justify-center items-center ">
+        <div className=" h-[456px] lg:h-[570px] w-full rounded-[14px]  border-solid border-[1px] border-[#92B2C8] bg-[#FFF] shadow-md flex justify-center items-center flex-col ">
+          <p className=" text-[#005DA0] text-right text-xl not-italic font-medium w-full mr-14">
+            Sarang by sumadhura/2bhk/tower 1/ 04/north/1124 sq.ft - 2
+          </p>
           <div className="w-[70%] flex justify-center items-center flex-col p-[2%] ">
-            <p className=" text-[14px] lg:text-[16px] font-[500] text-[#005DA0] ">
-              Sarang by sumadhura/2bhk/tower 1/ 04/north/1124 sq.ft - 2
-            </p>
             <div
               className="flex justify-center items-center h-[300px] lg:h-[450px] cursor-pointer"
               onClick={handleOpen}
@@ -68,8 +68,13 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
                 className="h-full w-full"
               />
             </div>
-            <button className="absolute bottom-2 right-2 cursor-pointer">
-              <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] " />
+            <button onClick={() => setOpened(true)}>
+              <div className="bg-[#F4FBFF] p-[10px] rounded-[29px] gap-[12px] flex justify-end items-center  cursor-pointer absolute bottom-5 right-4 z-50 shadow-[0px_4px_12px_0px_rgba(0,0,0,0.40)]">
+                <p className="text-[#0073C6] text-xl not-italic font-semibold leading-[normal] underline capitalize">
+                  Click on image to open master plan
+                </p>
+                <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[28px] lg:h-[28px]  " />
+              </div>{" "}
             </button>
           </div>
         </div>

@@ -5,12 +5,7 @@ import Autoplay from "embla-carousel-autoplay";
 import {
   DarkCarouseIcon,
   DarkNextCarouselButton,
-  FlooringIcon,
-  FloorsIcon,
-  NextCarouselButton,
-  PrevCarouselButton,
   ReraIcon,
-  ShearIcon,
 } from "@/app/images/commonSvgs";
 import { Main } from "@/app/validations/types/project";
 import Image from "next/image";

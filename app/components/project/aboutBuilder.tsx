@@ -15,6 +15,7 @@ type Props = {
 
 export default function AboutBuilder({ id, type = "proj" }: Props) {
   const { data } = useBuilder({ id, y: "N", type });
+  console.log(data);
   const nzData = normalizeData(data, type);
   return (
     <div
@@ -23,11 +24,10 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
     >
       <div className="w-full">
         <div className=" gap-[26px] justify-start  w-[100%] items-center">
-          <h1 className=" text-[#023993] text-[24px] lg:text-[32px] font-[700] mb-4">
+          <h1 className=" text-[#023993] text-[24px] lg:text-[32px] font-[700] mb-4 ">
             About Builder
           </h1>
 
-          {type === "prop" && Svg}
           <div className="inline-flex justify-end items-end ">
             {nzData.logo && (
               <Image
@@ -122,10 +122,10 @@ function normalizeData(data: any, type: string) {
       completedProject: data?.completedProject,
       builderAddress: data?.builderAddress,
       ceoName: data?.ceoName,
-      logo: data?.data?.logoUrl,
-      vission: data?.data?.vision,
-      companyName: data?.data?.companyName,
-      companyStartDate: data?.data?.companyStartDate,
+      logo: data?.logoUrl,
+      vission: data?.vision,
+      companyName: data?.Sivaprasad,
+      companyStartDate: data?.companyStartDate,
     };
   }
 }

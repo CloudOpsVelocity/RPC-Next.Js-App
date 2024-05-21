@@ -24,6 +24,7 @@ import Reviews from "@/app/components/property/reviews";
 import Banner from "@/app/components/property/banner";
 import MobileHidden from "@/app/components/molecules/MobileHidden";
 import ErrorContainer from "@/app/components/project/error/container";
+import PriceBreakup from "@/app/components/property/pricingbreakup/PriceBreakup";
 
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
@@ -128,6 +129,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             builderId={projData?.builderId}
           />
         )}
+        <PriceBreakup otherPrice={data.otherPrice} price={data.price} />
 
         <LoginPopup />
         <ProjectDrawer projName="Sarang By Sumadhura" />
