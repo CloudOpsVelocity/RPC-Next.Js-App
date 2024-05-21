@@ -9,8 +9,7 @@ export default function useDynamicProp() {
   const { slug } = useParams<{ slug: string }>();
   const getData = async () => {
     const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/fetch/dynamic-data
-      ?propIdEnc=${slug}`
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/fetch/dynamic-data?propIdEnc=${slug}`
     );
     return res.data;
   };
