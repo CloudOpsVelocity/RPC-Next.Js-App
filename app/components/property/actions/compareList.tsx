@@ -1,24 +1,26 @@
 "use client";
-import { comparingIcon, infoIcon } from "@/app/images/commonSvgs";
+import { ComparingListIcon, comparingIcon } from "@/app/images/commonSvgs";
 import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
 import React from "react";
 import { useShortlistAndCompare } from "@/app/hooks/storage";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
+import clsx from "clsx";
+import useDynamicProj from "@/app/hooks/project/useDynamic";
+import useDynamicProp from "@/app/hooks/property/useDyanamic";
 
 export default function CompareList() {
   const { data: session } = useSession();
   const { slug } = useParams<{ slug: string }>();
   const { toggleCompare, compareItems } = useShortlistAndCompare();
   const [, { open }] = usePopShortList();
-  const isItemCompared =
-    compareItems.length > 0 &&
-    compareItems.some((item) => item.id === slug && item.status === "Y");
+  const { data, mutate } = useDynamicProp();
   const onAddingCompare = () => {
     if (session) {
+      mutate(3);
       toggleCompare({
         id: slug,
-        status: isItemCompared ? "N" : "Y",
+        status: data?.compareAdded ? "N" : "Y",
         source: "prop",
       });
     } else {
@@ -29,10 +31,14 @@ export default function CompareList() {
   return (
     <button
       onClick={() => onAddingCompare()}
-      className="text-[20px] flex justify-center items-center gap-[8px] cursor-pointer lg:text-[24px] text-[#0073C6] font-[600] underline whitespace-nowrap decoration-dashed "
+      className={clsx(
+        "flex justify-center items-center gap-1 p-2 rounded-lg border-[0.8px] border-solid border-[#0073C6] bg-[#fafafa] text-[#0073C6] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px] mt-5",
+        data?.compareAdded &&
+          "bg-[#E4F4FF] text-[#148B16] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px]"
+      )}
     >
-      {comparingIcon}
-      {isItemCompared ? "Remove from" : "Add to"} Compare
+      <ComparingListIcon color={data?.compareAdded ? "#148B16" : "#0073C6"} />
+      {data?.compareAdded ? "Added to" : "Add to"} Compare
     </button>
   );
 }

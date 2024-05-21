@@ -4,10 +4,10 @@ import ProjBasicDetails from "@/app/components/project/projBasicDetails";
 import { Main } from "@/app/validations/property/index";
 import { generatePropertyOverViewData } from "@/app/data/property/overview";
 import Ratings from "./Ratings";
-import CompareList from "./actions/compareList";
-import ShortList from "./actions/shortList";
 import PropertyOverviewBanner from "./OverViewBanner";
 import { footerPhoneIcon } from "@/app/images/commonSvgs";
+import CompareList from "./actions/compareList";
+import ShortList from "./actions/shortList";
 
 export default function PropertyOverView({ data }: { data: Main }) {
   return (
@@ -55,9 +55,9 @@ export default function PropertyOverView({ data }: { data: Main }) {
             />
           ))}
         </div>
-        <div className=" flex justify-start md:justify-end items-start md:items-end flex-col mt-[3%] md:mt-0 ">
-          <CompareList />
+        <div className=" flex justify-start md:justify-end items-start md:items-end flex-col mt-[3%] md:mt-0 relative pb-10">
           <ShortList />
+          <CompareList />
         </div>
       </div>
       <PropertyOverviewBanner {...data} />
