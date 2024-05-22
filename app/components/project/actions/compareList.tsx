@@ -18,7 +18,7 @@ export default function CompareList() {
   const [opened, { close, open: openSuccesPopup }] = useMessagePopup("compare");
 
   const onAddingCompare = () => {
-    if (data?.compareCount >= 5) {
+    if (data?.compareCount >= 5 && !data?.compareAdded) {
       openSuccesPopup();
       return;
     }

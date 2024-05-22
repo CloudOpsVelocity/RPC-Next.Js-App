@@ -33,20 +33,28 @@ export default function useDynamicProj() {
       // Cancel any outgoing refetches
       // (so they don't overwrite our optimistic update)
       await queryClient.cancelQueries({ queryKey: ["dynamic", slug] });
+
       // Snapshot the previous value
       const previousTodos = queryClient.getQueryData(["dynamic", slug]);
+
       // Optimistically update to the new value
       queryClient.setQueryData(["dynamic", slug], (old: any) => {
+        const compareAdded = old.compareAdded === "Y" ? null : "Y";
+        const compareCount =
+          old.compareAdded === "Y"
+            ? old.compareCount - 1
+            : old.compareCount + 1;
+
         return {
           ...old,
           ...(data === 2
             ? { shortListed: old.shortListed === "Y" ? null : "Y" }
-            : { compareAdded: old.compareAdded === "Y" ? null : "Y" }),
+            : { compareAdded, compareCount }),
         };
       });
+
       return { previousTodos };
     },
-
     // Always refetch after error or success:
     onSettled: () => {
       // queryClient.invalidateQueries({ queryKey: ["todos"] });
