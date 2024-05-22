@@ -15,17 +15,20 @@ export default function CompareList() {
   const [, { open }] = usePopShortList();
   const { data, mutate } = useDynamicProj();
   const onAddingCompare = () => {
+    if (data?.compareCount >= 5) {
+      alert(
+        "You have already added the maximum of 5 items to compare. Please remove an item before adding a new one."
+      );
+      return;
+    }
+
     if (session) {
       mutate(3);
-      toggleCompare({
-        id: slug,
-        status: data?.compareAdded ? "N" : "Y",
-      });
+      toggleCompare({ id: slug, status: data?.compareAdded ? "N" : "Y" });
     } else {
       open();
     }
   };
-
   return (
     <button
       onClick={() => onAddingCompare()}
