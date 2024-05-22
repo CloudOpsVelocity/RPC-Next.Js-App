@@ -7,6 +7,7 @@ import { useShortlistAndCompare } from "@/app/hooks/storage";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import clsx from "clsx";
 import useDynamicProj from "@/app/hooks/project/useDynamic";
+import { useMessagePopup } from "@/app/hooks/project/useMessagePopup";
 
 export default function CompareList() {
   const { data: session } = useSession();
@@ -14,11 +15,11 @@ export default function CompareList() {
   const { toggleCompare, compareItems } = useShortlistAndCompare();
   const [, { open }] = usePopShortList();
   const { data, mutate } = useDynamicProj();
+  const [opened, { close, open: openSuccesPopup }] = useMessagePopup("compare");
+
   const onAddingCompare = () => {
     if (data?.compareCount >= 5) {
-      alert(
-        "You have already added the maximum of 5 items to compare. Please remove an item before adding a new one."
-      );
+      openSuccesPopup();
       return;
     }
 

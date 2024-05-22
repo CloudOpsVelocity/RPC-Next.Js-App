@@ -6,6 +6,7 @@ interface VersaMessageProps {
   title: string;
   content: string;
   icon: JSX.Element;
+  greenText?: string;
 }
 
 export default function VersaMessage({
@@ -14,6 +15,7 @@ export default function VersaMessage({
   content,
   icon,
   border,
+  greenText,
 }: VersaMessageProps): JSX.Element {
   return (
     <div className="flex w-[576px] h-[467px] flex-col items-center gap-28 shrink-0 pb-[33px] rounded-[20px] bg-[#fff] border  overflow-hidden">
@@ -26,6 +28,9 @@ export default function VersaMessage({
         </p>
         <p className="text-[#242424] text-center text-xl not-italic font-medium leading-8 mt-[19px]">
           {content}
+        </p>
+        <p className="text-[#148B16] text-xl italic font-semibold leading-8 text-center min-w-[500px]">
+          {greenText}
         </p>
       </div>
     </div>

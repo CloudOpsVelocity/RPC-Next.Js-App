@@ -16,7 +16,11 @@ import StepCscs from "@/app/styles/Stepper.module.css";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import S from "@/app/styles/Qna.module.css";
 import Close from "./button/close";
-import { ListingNotFoundMessage, QnaSuccesssMessage } from "./success";
+import {
+  CompareMessage,
+  ListingNotFoundMessage,
+  QnaSuccesssMessage,
+} from "./success";
 import { useMessagePopup } from "@/app/hooks/project/useMessagePopup";
 type FaqWithBgProps = {
   data: FAQ[];
@@ -223,6 +227,7 @@ const Success = ({ text, opened, onClose, projName }: any) => {
       {opened.type === "qna" && <QnaSuccesssMessage />}
 
       {opened.type === "listing" && <ListingNotFoundMessage />}
+      {opened.type === "compare" && <CompareMessage />}
     </Modal>
   );
 };
