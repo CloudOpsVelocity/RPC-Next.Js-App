@@ -12,7 +12,7 @@ export default function SellingPrice({ price }: { price: number }) {
           ₹ <NumberFormatter thousandSeparator value={price} />
         </h2>
       </div>
-      <p className="text-[#001F35] text-[10px] not-italic font-normal">
+      <p className="text-[#001F35] text-[10px] not-italic font-normal mt-4">
         Disclaimer: Information provided is for reference only. Get Right
         Property does not guarantee accuracy. Always refer to relevant laws for
         authoritative information.

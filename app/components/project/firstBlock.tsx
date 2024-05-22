@@ -17,6 +17,7 @@ import usePhaseWiseOverview from "@/app/hooks/usePhaseWiseOverview";
 import styles from "@/app/styles/Carousel.module.css";
 import { currentBlockAtom, isScrollingAtom, stickyAtom } from "./navigation";
 import { useSetAtom } from "jotai";
+import useBuilder from "@/app/hooks/useBuilder";
 type Props = {
   projectDetails: Main | null;
 };
@@ -28,6 +29,11 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
   const setIsScrolling = useSetAtom(isScrollingAtom);
   const setSticky = useSetAtom(stickyAtom);
   const setC = useSetAtom(currentBlockAtom);
+  const { data } = useBuilder({
+    id: projectDetails?.builderId ?? 0,
+    type: "proj",
+    y: "N",
+  });
   function scrollToTopic(id: string): void {
     setIsScrolling(true);
     const element = document.getElementById(id);
@@ -43,6 +49,7 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
     setC("floorPlans");
     setTimeout(() => setIsScrolling(false), 3000);
   }
+
   return (
     <div
       className={`relative rounded-[10px] w-full m-auto bg-gray-50  lg:h-[680px] bg-cover flex justify-between items-start flex-col`}
@@ -119,7 +126,7 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
                 <p className="text-[#00487C] text-2xl not-italic font-semibold leading-[normal] mt-3">
                   Posted By:{" "}
                   <span className="text-[#00487C] text-2xl italic font-bold leading-[normal]">
-                    Builder
+                    {data?.data.companyName ?? "Builder"}
                   </span>
                 </p>
               </div>

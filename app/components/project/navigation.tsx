@@ -6,7 +6,6 @@ import clsx from "clsx";
 import { atom, useAtom } from "jotai";
 import Image from "next/image";
 import React, { useState, useRef, useEffect } from "react";
-import { TbRuler2Off } from "react-icons/tb";
 export const isScrollingAtom = atom(false);
 export const stickyAtom = atom(false);
 export const currentBlockAtom = atom("overview");

@@ -124,7 +124,7 @@ function normalizeData(data: any, type: string) {
       ceoName: data?.ceoName,
       logo: data?.logoUrl,
       vission: data?.vision,
-      companyName: data?.Sivaprasad,
+      companyName: data?.companyName,
       companyStartDate: data?.companyStartDate,
     };
   }

@@ -14,6 +14,7 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
   const setValue = useSetAtom(selectedFloorAtom);
   const type = listingProps[data.propTypeName as keyof typeof listingProps];
   const handleOpen = () => {
+    console.log();
     setValue({
       projIdEnc: "4f313de2f95cd9d761098b8f6c09417c",
       phaseId: 670,
@@ -30,11 +31,15 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
       caretarea: data.ca,
       superBuildUparea: data.sba,
       terraceArea: data.ta,
-      parkingType: "Opened",
       totalNumberofBathroom: data.nobt,
       totalNumberOfBalcony: data.nobl,
       noOfCarParking: data.noocp,
       floorPlanUrl: data.projMedia.floorPlanUrl,
+      plotArea: data.plotArea,
+      noocp: data.noocp,
+      noobp: data.noobp,
+      noccp: data.noccp,
+      nocbp: data.nocbp,
     });
     setOpened(true);
   };

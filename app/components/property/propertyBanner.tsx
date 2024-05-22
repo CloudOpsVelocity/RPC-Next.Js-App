@@ -31,7 +31,10 @@ export default function PropertyBanner({
       maxPrice={maxPrice}
     />
   ) : (
-    <div className="w-[90%] m-auto mt-[2%] shrink-0  bg-[#fcfcfc] mb-20 relative  border shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] border-solid border-[#CAE9FF]  px-[52px] py-[35px]">
+    <div
+      className="w-[90%] m-auto mt-[2%] shrink-0  bg-[#fcfcfc] mb-20 relative  border shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] border-solid border-[#CAE9FF]  px-[52px] py-[35px]"
+      id="projectDetails"
+    >
       <Image
         src="/property/propertybanner.png"
         alt="Sobha Dream Acres"

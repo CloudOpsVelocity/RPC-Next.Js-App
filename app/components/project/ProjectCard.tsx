@@ -34,11 +34,16 @@ type CardProps = {
 };
 
 export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
+  console.log(cardData);
   const [, { open }] = useReqCallPopup();
   const { data: session } = useSession();
   const { toggleShortlist } = useShortlistAndCompare();
   const [, { open: openS }] = usePopShortList();
   const reqId = type === "proj" ? cardData.projIdEnc : cardData.propIdEnc;
+  const url =
+    type === "proj"
+      ? `/abc/karnataka/banglore/${reqId}`
+      : `/listing/banglore/${reqId}`;
   const setPopReqData = useSetAtom(NearByDataAtom);
   const onAddingShortList = (projId: string) => {
     if (session) {
@@ -55,8 +60,9 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
   const handleReqCall = () => {
     open(type, reqId, "projCard");
     setPopReqData({
-      builderName: cardData.builderName,
-      projName: cardData.projName,
+      builderName: cardData.postedByName,
+      projName: `${cardData.bhkName} ${cardData.propTypeName} for
+      ${cardData.cg === "R" ? "Rent" : "Sale"} in ${cardData.ltName}`,
     });
   };
   return (
@@ -97,7 +103,7 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
                 : "Under Construction"}
             </p>
           )}
-          <div className="relative  max-h-[212px]">
+          <a href={url} target="_blank" className="relative  max-h-[212px]">
             <Image
               src={
                 type === "proj"
@@ -120,7 +126,10 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
             <div className=" right-2 absolute ">
               <button
                 className="mt-[-30px] rounded-[10px] relative bottom-[35px] z-10 p-[8px] text-[#0073C6] text-[18px] font-[700] flex pl-[4px] justify-center items-center bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100"
-                onClick={() => onAddingShortList(cardData.projIdEnc)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  onAddingShortList(cardData.projIdEnc);
+                }}
               >
                 <span className=" w-[24px] h-[24px] ">
                   {cardData.shortListed === "Y" ? Shorlisted : shortlistIconSvg}
@@ -128,7 +137,7 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
                 {cardData.shortListed === "Y" ? "Shortlisted" : "Shortlist"}
               </button>
             </div>
-          </div>
+          </a>
 
           <div className="text-sm">
             {type != "proj" && (

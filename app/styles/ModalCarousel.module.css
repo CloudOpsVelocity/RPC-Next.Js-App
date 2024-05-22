@@ -4,20 +4,33 @@
   border-radius: 100%;
   margin-right: 10px;
 }
-
 .body {
   border-radius: 20px;
   margin-top: 90px;
 }
-
 .overlay {
   margin-top: 90px;
 }
-
 .header {
   display: none;
 }
-
 .inner {
   position: relative;
+}
+
+.listingTitle {
+  color: #333;
+  font-family: Montserrat;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin-left: 40px;
+}
+.closeListing {
+  background: red;
+  color: white;
+  border-radius: 100%;
+  margin-right: 10px;
+  margin-right: 30px;
 }

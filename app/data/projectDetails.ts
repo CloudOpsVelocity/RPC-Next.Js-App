@@ -27,10 +27,13 @@ export const Propertytopics = [
   { label: "Galleria", id: "galleria" },
   { label: "Amenities", id: "amenities" },
   { label: "Near By", id: "nearBy" },
+  { label: "Bank Approvals", id: "loans" },
   { label: "Builder Details", id: "aboutBuilder" },
+  { label: "Project Details", id: "projectDetails" },
   { label: "Customer Reviews", id: "ratings" },
   { label: "FAQ?", id: "faq" },
-  { label: "Similar", id: "similar" },
+  { label: "Similar Listings", id: "similarListing" },
+  { label: "Similar Projects", id: "similar" },
 ];
 
 export const propertyDetailsTypes = new Map([

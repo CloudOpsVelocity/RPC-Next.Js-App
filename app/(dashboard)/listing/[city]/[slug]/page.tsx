@@ -25,11 +25,16 @@ import Banner from "@/app/components/property/banner";
 import MobileHidden from "@/app/components/molecules/MobileHidden";
 import ErrorContainer from "@/app/components/project/error/container";
 import PriceBreakup from "@/app/components/property/pricingbreakup/PriceBreakup";
+import { notFound } from "next/navigation";
+import { Console } from "console";
 
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
   const data = await getListingDetails(slug);
   const projData = await getProjectDetails(data.projIdEnc);
+  if (!data.propIdEnc) {
+    notFound();
+  }
   return (
     <div className="w-full">
       <div className="mt-[90px] w-full pb-[2%] flex items-center justify-center flex-col">
@@ -49,7 +54,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         </div>
         {/* Navigations Container */}
         <MobileHidden>
-          <Navigation isProj={!!data.projIdEnc} />
+          <Navigation detailsData={data} projData={!!data.projIdEnc} />
         </MobileHidden>
         {/* Overview */}
         <PropertyOverView data={data} />
@@ -78,12 +83,15 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           walkThrowVideoUrl={""}
           projBroucherUrl={""}
         />
-        <Amenties
-          type="prop"
-          data={data?.amenities?.map((item) => {
-            return { id: item, name: String(item) };
-          })}
-        />
+        {data?.amenities?.length > 0 && (
+          <Amenties
+            type="prop"
+            data={data?.amenities?.map((item) => {
+              return { id: item, name: String(item) };
+            })}
+          />
+        )}
+
         {data.projIdEnc && (
           <>
             <LeafMap
@@ -115,10 +123,11 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
 
         <NearByCarouselProperty
           projName={data.propName}
-          lat={projData?.lat}
-          lng={projData?.lang}
+          lat={projData?.lat ?? data.lat}
+          lng={projData?.lang ?? data.lang}
           projId={data.projIdEnc}
           cg={data.cg}
+          propTypeName={data.propTypeName}
         />
         {data.projIdEnc && (
           <NearByCarousel

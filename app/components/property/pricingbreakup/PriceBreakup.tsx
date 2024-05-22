@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
-import { useDisclosure } from "@mantine/hooks";
-import { Drawer, Button } from "@mantine/core";
+import { Drawer } from "@mantine/core";
 import styles from "./PriceBreakup.module.css";
 import Card from "./Card";
 import {
@@ -97,7 +96,7 @@ export default function PriceBreakup({
           />
         )}
 
-        {otherPrice.otherCharge && (
+        {otherPrice?.otherCharge && (
           <Card
             title="Other charges"
             Icon={MoneyIcon}

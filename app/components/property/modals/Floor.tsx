@@ -1,19 +1,14 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { Modal } from "@mantine/core";
-import {
-  DropDownIcon,
-  FloorPlanModalIcon,
-  ImgCarouselIcon,
-  LenseIcon,
-  PopupOpenSvg,
-  PrevCarouselIcon,
-  propertyDetailsSvgs,
-} from "@/app/images/commonSvgs";
+import { propertyDetailsSvgs } from "@/app/images/commonSvgs";
 import S from "@/app/styles/ModalCarousel.module.css";
 import { Main } from "@/app/validations/property";
 import { selectedFloorAtom } from "@/app/store/floor";
 import { useAtomValue, useSetAtom } from "jotai";
 import { listingProps, projectprops } from "@/app/data/projectDetails";
+import SharePopup from "../../atoms/SharePopup";
+import { imageUrlParser } from "@/app/utils/image";
+import useDownload from "@/app/hooks/property/useDownload";
 
 function PFloorPlanModal({
   data,
@@ -52,6 +47,7 @@ function PFloorPlanModal({
     });
     setOpened(true);
   };
+  const { handleDownload } = useDownload();
   return (
     <>
       <Modal
@@ -62,10 +58,24 @@ function PFloorPlanModal({
         onClose={() => setOpened(false)}
         classNames={{
           content: S.body,
-          close: S.close,
+          close: S.closeListing,
+          title: S.listingTitle,
         }}
+        title="Floor Plan"
       >
-        <div className="flex  mb-10 justify-center items-start gap-[45px] shrink-0 flex-wrap">
+        <div className="flex  mb-10 justify-center items-start gap-[45px] shrink-0 flex-wrap relative">
+          <div className="flex justify-center items-center gap-5 absolute right-20 -top-[50px] z-[1000]">
+            <button
+              onClick={() => handleDownload(data.projMedia.floorPlanUrl)}
+              className="text-white flex justify-center items-center gap-1 p-2 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] rounded-[10px] bg-[#0073c6]"
+            >
+              Download Floor Plan
+            </button>
+            <SharePopup
+              title="Share"
+              url={imageUrlParser(data.projMedia.floorPlanUrl)}
+            />
+          </div>
           <MiddleSection />
           <RightSection propCgId={type} />
         </div>
@@ -284,20 +294,56 @@ const RightSection = ({ propCgId }: any) => {
             </p>
           </div>
         )}
-        {propCgId != projectprops.plot && (
+        {propCgId != projectprops.plot && data.noocp ? (
           <div className="flex items-center space-x-3">
             {propertyDetailsSvgs.noOfCarParking}
             <p className="text-[#4D6677] text-[14px] font-[500]">
-              Car Parking{" "}
+              Open Car Parking
               <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                 {" "}
-                {data.noOfCarParking ? data.noOfCarParking : "N/A"}
+                {data.noocp ? data.noocp : "N/A"}
               </span>
             </p>
           </div>
-        )}
+        ) : null}
+        {propCgId != projectprops.plot && data.noccp ? (
+          <div className="flex items-center space-x-3">
+            {propertyDetailsSvgs.noOfCarParking}
+            <p className="text-[#4D6677] text-[14px] font-[500]">
+              Closed Car Parking
+              <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
+                {" "}
+                {data.noccp ? data.noccp : "N/A"}
+              </span>
+            </p>
+          </div>
+        ) : null}
+        {propCgId != projectprops.plot && data.nocbp ? (
+          <div className="flex items-center space-x-3">
+            {propertyDetailsSvgs.closeBikeParking}
+            <p className="text-[#4D6677] text-[14px] font-[500]">
+              Closed Bike Parking
+              <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
+                {" "}
+                {data.nocbp ? data.nocbp : "N/A"}
+              </span>
+            </p>
+          </div>
+        ) : null}
+        {propCgId != projectprops.plot && data.noobp ? (
+          <div className="flex items-center space-x-3">
+            {propertyDetailsSvgs.openBikeParking}
+            <p className="text-[#4D6677] text-[14px] font-[500]">
+              Open Bike Parking
+              <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
+                {" "}
+                {data.noobp ? data.noobp : "N/A"}
+              </span>
+            </p>
+          </div>
+        ) : null}
 
-        {propCgId != projectprops.plot && data.parkingType && (
+        {/* {propCgId != projectprops.plot && data.parkingType && (
           <div className="flex items-center space-x-3">
             {propertyDetailsSvgs.parkingType}
             <p className="text-[#4D6677] text-[14px] font-[500]">
@@ -307,7 +353,7 @@ const RightSection = ({ propCgId }: any) => {
               </span>
             </p>
           </div>
-        )}
+        )} */}
 
         {propCgId != projectprops.plot && data?.totalNumberOfBalcony > 0 && (
           <div className="flex items-center space-x-3">
