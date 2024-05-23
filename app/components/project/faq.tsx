@@ -18,8 +18,9 @@ import S from "@/app/styles/Qna.module.css";
 import Close from "./button/close";
 import {
   CompareMessage,
-  ListingNotFoundMessage,
   QnaSuccesssMessage,
+  RentListingNotFoundMessage,
+  SellListingNotFoundMessage,
 } from "./success";
 import { useMessagePopup } from "@/app/hooks/project/useMessagePopup";
 type FaqWithBgProps = {
@@ -198,6 +199,16 @@ const FaqCard = ({
 };
 
 const Success = ({ text, opened, onClose, projName }: any) => {
+  const renderComponent = {
+    qna: <QnaSuccesssMessage />,
+    Rlisting: <RentListingNotFoundMessage />,
+    Slisting: <SellListingNotFoundMessage />,
+    compare: <CompareMessage />,
+  };
+  type RenderComponentKeys = keyof typeof renderComponent;
+
+  const ComponentTorender =
+    renderComponent[opened.type as RenderComponentKeys] || null;
   const isMobile = useMediaQuery(`(max-width: 750px)`);
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -224,10 +235,11 @@ const Success = ({ text, opened, onClose, projName }: any) => {
       size={isMobile ? "100%" : "auto"}
     >
       <Close close={onClose} className="absolute top-2 right-2 z-50" />
-      {opened.type === "qna" && <QnaSuccesssMessage />}
+      {/* {opened.type === "qna" && <QnaSuccesssMessage />}
 
       {opened.type === "listing" && <ListingNotFoundMessage />}
-      {opened.type === "compare" && <CompareMessage />}
+      {opened.type === "compare" && <CompareMessage />} */}
+      {ComponentTorender}
     </Modal>
   );
 };

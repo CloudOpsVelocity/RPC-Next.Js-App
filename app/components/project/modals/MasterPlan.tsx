@@ -58,8 +58,9 @@ export default function MasterPlanPopup({
                 Download
               </a>
               <SharePopup
+                titleText="Share Master Plan"
                 title="Share"
-                url={imageUrlParser(url || "")}
+                url={imageUrlParser(url || "", "M")}
                 className="text-[#0073C6] text-base not-italic font-semibold leading-[normal] tracking-[0.32px]"
               />
               <Close close={close} />

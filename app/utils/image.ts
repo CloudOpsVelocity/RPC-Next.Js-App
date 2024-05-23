@@ -32,16 +32,17 @@ function getImageUrls(
   return imageUrls;
 }
 
-const imageUrlParser = (originalUrl: string) => {
+const imageUrlParser = (originalUrl: string, type?: string) => {
   if (!originalUrl) return "";
-  const urlParts = originalUrl.split("/");
 
+  const urlParts = originalUrl.split("/");
   const imagesIndex = urlParts.indexOf("images");
 
   if (imagesIndex !== -1) {
     const imagePath = urlParts.slice(imagesIndex + 1).join("/");
-    const isVideo = /\.mp4$/.test(imagePath);
+    const isVideo = /\\.mp4$/.test(imagePath);
     let modifiedUrl;
+
     if (isVideo) {
       modifiedUrl = `${
         process.env.NEXT_PUBLIC_URL
@@ -49,8 +50,11 @@ const imageUrlParser = (originalUrl: string) => {
     } else {
       modifiedUrl = `${
         process.env.NEXT_PUBLIC_URL
-      }/image?path=/images/${imagePath}?v=${Math.random()}`;
+      }/image?path=/images/${imagePath}?v=${Math.random()}${
+        type ? `&type=${type}` : ""
+      }`;
     }
+
     return modifiedUrl;
   }
 

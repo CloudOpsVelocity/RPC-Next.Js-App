@@ -75,3 +75,13 @@
   background: #0073c6;
   color: white;
 }
+
+.labelByBhk {
+  color: #001f35;
+  font-family: Montserrat;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: capitalize;
+}

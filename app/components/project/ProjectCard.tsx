@@ -44,6 +44,11 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
     type === "proj"
       ? `/abc/karnataka/banglore/${reqId}`
       : `/listing/banglore/${reqId}`;
+  const name =
+    type === "proj"
+      ? cardData.projName
+      : `${cardData.bhkName} ${cardData.propTypeName} for
+      ${cardData.cg === "R" ? "Rent" : "Sale"} in ${cardData.ltName}`;
   const setPopReqData = useSetAtom(NearByDataAtom);
   const onAddingShortList = (projId: string) => {
     if (session) {
@@ -57,12 +62,12 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
       openS();
     }
   };
+
   const handleReqCall = () => {
     open(type, reqId, "projCard");
     setPopReqData({
       builderName: cardData.postedByName,
-      projName: `${cardData.bhkName} ${cardData.propTypeName} for
-      ${cardData.cg === "R" ? "Rent" : "Sale"} in ${cardData.ltName}`,
+      projName: name,
     });
   };
   return (

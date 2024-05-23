@@ -40,13 +40,13 @@ const RequestCallBackModal = ({
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error" | "otp"
   >("idle");
+
   const handleClose = () => {
     close();
     setTimeout(() => {
       setStatus("idle");
     }, 500);
   };
-  console.log(status);
   return (
     <>
       <Modal
@@ -222,6 +222,7 @@ const LoggedInUserForm = ({
     close();
   };
   const reqData = useAtomValue(NearByDataAtom);
+  console.log(projName, reqData, source);
   return status === "otp" ? (
     <ReqOtpForm
       callback={onSuccess}

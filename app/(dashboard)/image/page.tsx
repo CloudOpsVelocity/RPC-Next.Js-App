@@ -2,19 +2,18 @@
 import { Image } from "@mantine/core";
 import React from "react";
 import NextImage from "next/image";
-type Props = { searchParams: { path: string } };
-export default function Page({ searchParams: { path } }: Props) {
-  // const handleDownload = () => {
-  //   const url = `${process.env.NEXT_PUBLIC_PROJECT_URL}/image?path=${path}`;
-  //   const link = document.createElement("a");
-  //   const file = new Blob([url], { type: "text/plain" });
-  //   link.href = URL.createObjectURL(file);
-  //   link.download = "grp.txt";
-  //   link.click();
-  //   URL.revokeObjectURL(link.href);
-  // };
+import { useSearchParams } from "next/navigation";
+type Props = { searchParams: { path: string; type: "M" | "F" } };
+export default function Page({ searchParams: { path, type } }: Props) {
+  const types = {
+    M: "Master Plan",
+    F: "Floor Plan",
+    _image: {
+      M: "master_plan",
+      F: "floor_plan",
+    },
+  };
   let isDownloading = false; // Flag to track whether a download is in progress
-
   const handleDownload = async () => {
     // If already downloading, return immediately
     if (isDownloading) {
@@ -34,7 +33,7 @@ export default function Page({ searchParams: { path } }: Props) {
       const url = URL.createObjectURL(blob);
       const downloadLink = document.createElement("a");
       downloadLink.href = url;
-      downloadLink.download = "floor_plan.jpg"; // Set the filename with extension
+      downloadLink.download = `${types._image[type] || "image"}.jpg`; // Set the filename with extension
       document.body.appendChild(downloadLink);
       downloadLink.click();
       document.body.removeChild(downloadLink);
@@ -47,32 +46,7 @@ export default function Page({ searchParams: { path } }: Props) {
       isDownloading = false;
     }
   };
-  // const onButtonClick = () => {
-  //   const pdfUrl = `${process.env.NEXT_PUBLIC_IMG_BASE}${path}`;
-  //   const link = document.createElement("a");
-  //   link.target = "_self";
-  //   link.href = pdfUrl;
-  //   link.download = "masterplan.jpg"; // specify the filename
-  //   document.body.appendChild(link);
-  //   link.click();
-  //   document.body.removeChild(link);
-  // };
-  // const downloadFile = () => {
-  //   const url = `${process.env.NEXT_PUBLIC_IMG_BASE}${path}`;
-  //   console.log(url);
-  //   return new Promise((resolve) => {
-  //     const a = document.createElement("a");
-  //     // const url = URL.createObjectURL(file);
-  //     a.href = url;
-  //     a.target = "_self";
-  //     a.download = "masterplan.jpg";
-  //     document.body.appendChild(a);
-  //     a.click();
-  //     document.body.removeChild(a);
-  //     URL.revokeObjectURL(url);
-  //     resolve("done");
-  //   });
-  // };
+
   return (
     <div className="flex justify-center items-center h-[100vh] ">
       <button
@@ -82,7 +56,7 @@ export default function Page({ searchParams: { path } }: Props) {
           handleDownload();
         }}
       >
-        DownLoad Image
+        Download {(types[type] as string) || "Image"}
       </button>
       <Image
         radius="md"

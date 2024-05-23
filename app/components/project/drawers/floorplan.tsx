@@ -15,13 +15,89 @@ import { formatCurrency } from "@/app/utils/numbers";
 import { useAtom, useAtomValue } from "jotai";
 import { overviewAtom } from "@/app/store/overview";
 import {
+  ApartmentIcon,
   FlooringIcon,
   FloorsIcon,
   Marble,
+  PlotIcon,
+  RowHouseIcon,
   TowerIcon,
+  VillaIcon,
+  VillamentIcon,
 } from "@/app/images/commonSvgs";
+import { BACKEND_PROP_TYPES, projectprops } from "@/app/data/projectDetails";
+const iconStyles: string =
+  " flex items-center justify-center w-[40px] h-[40px]  text-[#001F35]";
 export default function FloorplanDrawer() {
   const [cg, setData] = useAtom(overviewAtom);
+  const getIcon = (id: number) => {
+    let iconComponent;
+    switch (id) {
+      case projectprops.apartment:
+        iconComponent = (
+          <ApartmentIcon
+            className={iconStyles}
+            sc={{
+              h: 38,
+              w: 38,
+              color: "#001F35",
+            }}
+          />
+        );
+        break;
+      case projectprops.rowHouse:
+        iconComponent = (
+          <RowHouseIcon
+            className={iconStyles}
+            sc={{
+              h: 38,
+              w: 38,
+              color: "#001F35",
+            }}
+          />
+        );
+        break;
+      case projectprops.villa:
+        iconComponent = (
+          <VillaIcon
+            className={iconStyles}
+            sc={{
+              h: 38,
+              w: 38,
+              color: "#001F35",
+            }}
+          />
+        );
+        break;
+      case projectprops.villament:
+        iconComponent = (
+          <VillamentIcon
+            className={iconStyles}
+            sc={{
+              h: 38,
+              w: 38,
+              color: "#001F35",
+            }}
+          />
+        );
+        break;
+      case projectprops.plot:
+        iconComponent = (
+          <PlotIcon
+            className={iconStyles}
+            sc={{
+              h: 38,
+              w: 38,
+              color: "#001F35",
+            }}
+          />
+        );
+        break;
+      default:
+        break;
+    }
+    return iconComponent;
+  };
 
   const [, { close }] = useDisclosure(false);
   const propName = (key: string, type?: string) => {
@@ -79,7 +155,12 @@ export default function FloorplanDrawer() {
         classNames={S}
         size={"30%"}
       >
-        <h3 className=" gap-2.5 pl-2.5  py-2.5 bg-[#EEF7FE] text-[#001F35] text-[28px] not-italic font-semibold leading-[normal] capitalize w-full mt-4 max-w-[90%]">
+        <h3 className=" gap-2.5 pl-2.5  py-2.5 bg-[#EEF7FE] text-[#001F35] text-[28px] not-italic font-semibold leading-[normal] capitalize w-full mt-4 max-w-[90%] inline-flex">
+          {getIcon(
+            BACKEND_PROP_TYPES[
+              cg?.propertyType as keyof typeof BACKEND_PROP_TYPES
+            ]
+          )}{" "}
           {propName(cg.propertyType, "name")} details
         </h3>
         <div>

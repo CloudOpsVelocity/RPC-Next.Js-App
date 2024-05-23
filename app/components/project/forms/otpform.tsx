@@ -10,6 +10,7 @@ import React, { useEffect, useRef, useState } from "react";
 import S from "@/app/styles/Otp.module.css";
 import axios from "axios";
 import { sendContact } from "@/app/utils/api/actions/contact";
+import clsx from "clsx";
 
 type Props = {
   callback: () => void;
@@ -56,6 +57,10 @@ export default function ReqOtpForm({ callback, values }: Props) {
         onSubmit={form.onSubmit(onSubmit)}
         className="w-[100%]  flex justify-start items-start flex-col "
       >
+        {" "}
+        <h2 className="text-[#202020] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px] mb-3">
+          Request A Callback
+        </h2>
         <p className="text-[#EA7A00] text-base not-italic font-semibold leading-[normal] tracking-[0.64px] py-1">
           You are one step away to get callback.
         </p>
@@ -78,7 +83,6 @@ export default function ReqOtpForm({ callback, values }: Props) {
           A One Time- Password has been sent to{" "}
           {hideMobileNumber((values.mobile && values.mobile) || 0)}
         </p> */}
-
         {error && (
           <p className="text-[#F00] font-[500] text-[14px] w-[100%] !max-w-[423px] !mb-[6%]  ">
             You&apos;ve entered wrong OTP, Please enter your OTP again!
@@ -89,7 +93,6 @@ export default function ReqOtpForm({ callback, values }: Props) {
             {form.errors.otp}
           </p>
         )}
-
         <PinInput
           classNames={{
             pinInput: S.pinInput,
@@ -106,9 +109,7 @@ export default function ReqOtpForm({ callback, values }: Props) {
           type={"number"}
           placeholder=""
         />
-
         <Resend userName={values.mobile} />
-
         <Button type="submit" className="!bg-[#0073C6]">
           Submit
         </Button>
@@ -163,21 +164,31 @@ const Resend = ({ userName }: any): JSX.Element => {
     <div className="w-full flex justify-center my-3 flex-col items-end max-w-[280px]">
       <button disabled={timerRunning} onClick={resendOTP}>
         <span
-          className=" text-sm not-italic font-semibold leading-[normal] tracking-[0.56px] underline"
-          style={{
-            color: timerRunning ? "#DFE3E8" : "#0073C6",
-          }}
+          className={clsx(
+            " text-sm not-italic font-semibold leading-[normal] tracking-[0.56px] ",
+            timerRunning
+              ? "text-[#303A42] text-sm not-italic font-medium leading-[normal] tracking-[0.56px]"
+              : "text-[#0073C6] underline"
+          )}
         >
           {" "}
           Resend OTP
         </span>
 
-        <span className="">
+        <span className="text-[#0073C6] text-sm not-italic font-medium leading-[normal] tracking-[0.56px]">
           {seconds > 0 || minutes > 0 ? (
             <>
               {" "}
-              in {minutes < 10 ? `0${minutes}` : minutes}:
-              {seconds < 10 ? `0${seconds}` : seconds}
+              <span className="text-[#303A42] text-sm not-italic font-medium leading-[normal] tracking-[0.56px]">
+                in
+              </span>{" "}
+              {minutes > 0 && (
+                <>
+                  {minutes < 10 ? `0${minutes}` : minutes}:
+                  {seconds < 10 ? `0${seconds}` : seconds}
+                </>
+              )}
+              {minutes === 0 && seconds < 60 && <>{seconds} sec</>}
             </>
           ) : null}
         </span>

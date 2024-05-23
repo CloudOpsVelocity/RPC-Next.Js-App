@@ -108,7 +108,7 @@ export const RatingForm = ({
               fill="#FFD600"
               className="w-[45px] h-[45px]  md:w-[70px] md:h-[70px]"
             />{" "}
-            4 / 5 Ratings Already Given
+            4 / 5 Ratings Already Given ( Optional )
           </p>
         </div>
       )}

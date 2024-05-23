@@ -4,7 +4,9 @@ const openedAtom = atom<{ status: boolean; type: null | string }>({
   status: false,
   type: null,
 });
-export const useMessagePopup = (type: "qna" | "listing" | "compare") => {
+export const useMessagePopup = (
+  type: "qna" | "Rlisting" | "Slisting" | "compare"
+) => {
   const [opened, setOpened] = useAtom(openedAtom);
 
   const open = () => setOpened({ status: true, type: type });

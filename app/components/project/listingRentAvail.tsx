@@ -19,10 +19,6 @@ export default function ListingRentAvail({
   r: string;
   s: string;
 }) {
-  const [opened, { close, open: openSuccesPopup }] = useMessagePopup("listing");
-  const handleBoxClick = (value: string) => {
-    value === "0" && openSuccesPopup();
-  };
   return (
     <div className="w-[90%] mb-[5%] scroll-mt-[350px]" id="listings">
       <h1 className="text-[20px] lg:text-[32px] font-[600] text-[#001F35] mb-[12px]">
@@ -37,22 +33,8 @@ export default function ListingRentAvail({
         Properties Today!"
       </p>
       <div className="flex  items-center gap-[28px] sm:gap-[58px] mt-[35px] flex-wrap">
-        <Card
-          type="sell"
-          s={s}
-          r={r}
-          projName={projName}
-          block={s === "0"}
-          onClick={() => handleBoxClick(s)}
-        />
-        <Card
-          type="rent"
-          s={s}
-          r={r}
-          projName={projName}
-          block={r === "0"}
-          onClick={() => handleBoxClick(r)}
-        />
+        <Card type="sell" s={s} r={r} projName={projName} block={s === "0"} />
+        <Card type="rent" s={s} r={r} projName={projName} block={r === "0"} />
       </div>
     </div>
   );
@@ -64,21 +46,25 @@ const Card = ({
   s,
   projName,
   block,
-  onClick,
 }: {
   type: "sell" | "rent";
   r: string;
   s: string;
   projName: string;
   block: boolean;
-  onClick: () => void;
 }) => {
+  const [opened, { close, open: openSuccesPopup }] = useMessagePopup(
+    type === "rent" ? "Rlisting" : "Slisting"
+  );
+  const handleBoxClick = (value: string) => {
+    value === "0" && openSuccesPopup();
+  };
   return (
     <div
       className={
         " sm:h-[85px] shadow-[0px_4px_30px_0px_rgba(0,0,0,0.15)] rounded-[31px] relative cursor-pointer"
       }
-      onClick={onClick}
+      onClick={() => handleBoxClick(block ? r : s)}
     >
       <AvailListSideSvg type={type} />
       <div className="block sm:inline-flex justify-center items-center gap-[22px] h-full ">

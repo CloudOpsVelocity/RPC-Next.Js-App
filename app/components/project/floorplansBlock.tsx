@@ -44,6 +44,7 @@ import Nofloor from "./error/nofloor";
 import clsx from "clsx";
 import CarouselSuggestion from "./unitblock/carousel";
 import dynamic from "next/dynamic";
+import { Divider } from "@mantine/core";
 
 type Props = {
   data: PhaseList[];
@@ -293,8 +294,8 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                       key={keyName}
                       buttonClass={`flex justify-start mb-[3%] w-full rounded-[20px] gap-[8px]  items-center mr-[24px] md:ml-[0px] text-[14px] sm:text-[18px] ${
                         propCgId == keyName
-                          ? "text-[#001F35] font-[500] shadow-md bg-[#D5EDFF]"
-                          : "text-[#303A42] font-[400] bg-[#EEF7FE]"
+                          ? "text-[#001F35] font-[600] shadow-md bg-[#D5EDFF]"
+                          : "text-[#303A42] font-[500] bg-[#EEF7FE]"
                       } `}
                       onChange={() => {
                         if (propCgId !== keyName) {
@@ -410,13 +411,16 @@ export default function FloorplansBlock({ projName, slug }: Props) {
             )}
 
             {floorPlanType == "unit" && (
-              <div className="w-full md:w-[50%]  h-[456px] !md:h-[547px] border-solid overflow-auto pt-6">
-                <Byunitblock
-                  propCgId={propCgId}
-                  data={projectUnitsData}
-                  form={byUnitForm}
-                />
-              </div>
+              <>
+                <div className="w-full md:w-[50%]  h-[456px] !md:h-[547px] border-solid overflow-auto pt-6">
+                  <Byunitblock
+                    propCgId={propCgId}
+                    data={projectUnitsData}
+                    form={byUnitForm}
+                  />
+                </div>
+                <Divider size={15} orientation="vertical" color="#F3F3F3" />
+              </>
             )}
 
             {floorPlanType == "bhk" && propCgId != projectprops.plot && (

@@ -832,7 +832,7 @@ const RightSection = ({ propCgId }: any) => {
               {propertyDetailsSvgs.block}
               <p className="text-[#4D6677] text-[14px] font-[500]">
                 Block{" "}
-                <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
+                <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] capitalize">
                   {" "}
                   {data.block}
                 </span>
@@ -867,7 +867,7 @@ const RightSection = ({ propCgId }: any) => {
           {propertyDetailsSvgs.unitNumber}
           <p className="text-[#4D6677] text-[14px] font-[500]">
             Unit Number{" "}
-            <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
+            <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] capitalize">
               {" "}
               {data.unitNumber}
             </span>

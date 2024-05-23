@@ -3,6 +3,7 @@ import S from "@/app/styles/Share.module.css";
 import {
   EmailIcon,
   FacbookIcon,
+  PinIcon,
   ShearIcon,
   Telegram,
   WhatsAppIcon,
@@ -19,17 +20,20 @@ import {
 } from "react-share";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
+import Close from "../project/button/close";
 
 export default function SharePopup({
   title = "Share Project",
   url,
   className,
+  titleText,
 }: {
   title?: string;
   url?: string;
   className?: string;
+  titleText?: string;
 }) {
-  const clipboard = useClipboard({ timeout: 500 });
+  const clipboard = useClipboard({ timeout: 700 });
   const pathname = usePathname();
   const CopiedUrl = url
     ? url
@@ -43,17 +47,23 @@ export default function SharePopup({
         opened={opened}
         onClose={close}
         centered
-        size={isMobile ? "70%" : "30%"}
+        size={isMobile ? "70%" : "40%"}
         classNames={{
           close: S.close,
           content: S.body,
           overlay: S.overlay,
+          header: S.header,
+          body: S.remove_padding,
         }}
       >
         <div className="p-5">
-          <h3 className="text-[#202020] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px] ">
-            {title}
-          </h3>
+          <div className="flex justify-between">
+            <h3 className="text-[#202020] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px] ">
+              {titleText ?? title}
+            </h3>
+            <Close close={close} />
+          </div>
+
           <p className="text-[#565D70] text-xl not-italic font-semibold leading-[normal] tracking-[0.8px] my-5">
             Share this link via
           </p>
@@ -63,23 +73,22 @@ export default function SharePopup({
           <p className="text-sm font-medium mb-2">or Copy Link</p>
           <div className="flex items-center justify-between border rounded-md p-2">
             <span
-              className="text-xs truncate cursor-pointer"
+              className="text-black text-base not-italic font-medium leading-[normal] truncate cursor-pointer"
               onClick={() => clipboard.copy(CopiedUrl)}
             >
               {CopiedUrl}
             </span>
             <CopyButton value={CopiedUrl}>
               {() => (
-                <Button
+                <button
                   className={`${
                     clipboard.copied ? "!bg-[#148B16]" : "!bg-[#0073C6]"
-                  }`}
-                  color={clipboard.copied ? "teal" : "#0073C6"}
-                  miw={100}
+                  } flex justify-center items-center gap-1 shadow-[0px_4px_20px_0px_rgba(112,144,176,0.08)] p-2 rounded-[5px] text-white text-xl not-italic font-semibold leading-[normal] min-w-fit`}
+                  // color={clipboard.copied ? "teal" : "#0073C6"}
                   onClick={() => clipboard.copy(CopiedUrl)}
                 >
-                  {clipboard.copied ? "Copied" : "Copy url"}
-                </Button>
+                  <PinIcon /> {clipboard.copied ? "Copied" : "Copy"}
+                </button>
               )}
             </CopyButton>
           </div>
@@ -104,7 +113,32 @@ export default function SharePopup({
 const Share = ({ shareUrl }: { shareUrl: string }) => {
   const title = "Share with friends";
   return (
-    <>
+    <div className="space-x-10 inline-flex mb-4 mt-1">
+      <div className="Demo__some-network">
+        <WhatsappShareButton
+          url={shareUrl}
+          title={title}
+          separator=":: "
+          className="Demo__some-network__share-button"
+          windowWidth={1200}
+          windowHeight={700}
+        >
+          {WhatsAppIcon}
+          <p className="mt-1">Whatsapp</p>
+        </WhatsappShareButton>
+      </div>
+      <div className="Demo__some-network">
+        <TelegramShareButton
+          url={shareUrl}
+          title={title}
+          className="Demo__some-network__share-button"
+          windowWidth={1200}
+          windowHeight={700}
+        >
+          {Telegram}
+          <p className="mt-1">Telegram</p>
+        </TelegramShareButton>
+      </div>
       <div className="Demo__some-network">
         <FacebookShareButton
           url={shareUrl}
@@ -113,6 +147,7 @@ const Share = ({ shareUrl }: { shareUrl: string }) => {
           windowHeight={700}
         >
           {FacbookIcon}
+          <p className="mt-1">Facebook</p>
         </FacebookShareButton>
 
         <div>
@@ -124,32 +159,6 @@ const Share = ({ shareUrl }: { shareUrl: string }) => {
           </FacebookShareCount>
         </div>
       </div>
-
-      <div className="Demo__some-network">
-        <TelegramShareButton
-          url={shareUrl}
-          title={title}
-          className="Demo__some-network__share-button"
-          windowWidth={1200}
-          windowHeight={700}
-        >
-          {Telegram}
-        </TelegramShareButton>
-      </div>
-
-      <div className="Demo__some-network">
-        <WhatsappShareButton
-          url={shareUrl}
-          title={title}
-          separator=":: "
-          className="Demo__some-network__share-button"
-          windowWidth={1200}
-          windowHeight={700}
-        >
-          {WhatsAppIcon}
-        </WhatsappShareButton>
-      </div>
-
       <div className="Demo__some-network">
         <EmailShareButton
           url={shareUrl}
@@ -160,8 +169,9 @@ const Share = ({ shareUrl }: { shareUrl: string }) => {
           windowWidth={1200}
         >
           {EmailIcon}
+          <p className="mt-1">Mail</p>
         </EmailShareButton>
       </div>
-    </>
+    </div>
   );
 };
