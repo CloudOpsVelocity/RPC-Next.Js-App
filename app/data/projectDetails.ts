@@ -1,5 +1,6 @@
 export const topics = [
   { label: "Overview", id: "overview" },
+  { label: "Brochure", id: "brochure" },
   { label: "Listings Available", id: "listings" },
   { label: "About", id: "about" },
   { label: "Property Details", id: "propertyDetails" },
@@ -14,7 +15,7 @@ export const topics = [
   { label: "About Builder", id: "aboutBuilder" },
   { label: "Why Buy This Project?", id: "whyBuy" },
   { label: "Customer Reviews", id: "ratings" },
-  { label: "Brochure", id: "brochure" },
+
   { label: "FAQ?", id: "faq" },
   { label: "Similar Projects", id: "similar" },
 ];

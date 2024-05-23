@@ -32,7 +32,10 @@ export default function OverviewBanner({
 
   return (
     <>
-      <div className="flex justify-start items-center w-full flex-col md:flex-row bg-[#f0f9ff] ">
+      <div
+        className="flex justify-start items-center w-full flex-col md:flex-row bg-[#f0f9ff] scroll-mt-40"
+        id="brochure"
+      >
         <PriceBag className="w-[150px] h-[170px] md:w-[237px] md:h-[263px] " />
 
         <div className="flex justify-center sm:justify-between items-center w-[100%] flex-row ml-[3%] p-[2%] flex-wrap">

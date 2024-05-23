@@ -82,8 +82,10 @@ export default function FloorplansBlock({ projName, slug }: Props) {
     keepPreviousData: true,
     staleTime: 30000,
     cacheTime: 300000,
+    retry: false,
+    enabled: !!propCgId,
   });
-
+  console.log(projectUnitsData);
   const types =
     selectedPhase &&
     Object?.keys(selectedPhase.propTypeOverview)
@@ -554,7 +556,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                         selectedFloor?.plotArea &&
                         " | Area. " + selectedFloor?.plotArea + " sq.ft"}
                     </p>
-                    <div className="flex justify-center items-end h-[240px] lg:h-[450px] w-full relative max-w-fit m-auto">
+                    <div className="flex justify-center items-center  h-[240px] lg:h-[450px] w-full relative max-w-fit m-auto">
                       <div
                         className="bg-[#F4FBFF] p-x-[3px] p-1 rounded-[29px] gap-[6px] flex justify-end items-center  cursor-pointer absolute bottom-1 right-1"
                         onClick={(e) => {
@@ -581,14 +583,14 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                           alt="image"
                         />
                       ) : (
-                        <div className="flex justify-center items-center flex-col min-w-fit">
+                        <div className="flex items-center flex-col min-w-fit">
                           <img
                             onClick={(e) => {
                               e.stopPropagation();
                               handleUnitClick();
                             }}
                             src="/abc/noimage.svg"
-                            className="w-[80%] h-full cursor-pointer"
+                            className="w-[60%]  cursor-pointer"
                             alt="image"
                           />
                           <p className=" text-[#000] text-center text-[18px] md:text-[28px] lg:text-[32px] font-[600] ">

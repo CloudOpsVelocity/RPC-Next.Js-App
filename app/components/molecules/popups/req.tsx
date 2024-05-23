@@ -42,8 +42,11 @@ const RequestCallBackModal = ({
   >("idle");
   const handleClose = () => {
     close();
-    setTimeout(() => setStatus("idle"), 1000);
+    setTimeout(() => {
+      setStatus("idle");
+    }, 500);
   };
+  console.log(status);
   return (
     <>
       <Modal
@@ -81,7 +84,7 @@ const RequestCallBackModal = ({
           >
             <svg
               className="absolute right-0 z-10 m-[2%] cursor-pointer "
-              onClick={() => close()}
+              onClick={handleClose}
               xmlns="http://www.w3.org/2000/svg"
               width="36"
               height="36"

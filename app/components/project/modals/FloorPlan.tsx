@@ -790,12 +790,6 @@ const LeftSection = ({ propCgId, data, handlers }: any) => {
           />
         )}
       </div>
-      <Button
-        icon={<LenseIcon />}
-        title="Search"
-        onChange={handleSearch}
-        buttonClass=" flex items-center justify-center gap-[10px] border-none text-[#FFF] text-[20px] font-[600] bg-[#0073C6] rounded-[10px] p-[6px]  mt-10"
-      />
     </div>
   );
 };
