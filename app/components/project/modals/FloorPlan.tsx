@@ -487,30 +487,36 @@ const LeftSection = ({ propCgId, data, handlers }: any) => {
           rightSection={<DropDownIcon />}
         />
 
-        <Select
-          key={useId()}
-          w={"full"}
-          mt="md"
-          label={`${
-            propCgId == projectprops.plot
-              ? "Select Plot Facing"
-              : "Select Facing"
-          } `}
-          className="!w-[46%]"
-          placeholder="-- select --"
-          data={getOptions("facingName")}
-          searchable
-          maxDropdownHeight={200}
-          {...getInputProps("facingName")}
-          onChange={(value) => handleOnChange(value as string, "facingName")}
-          classNames={{
-            input: S.input,
-            label: S.label,
-            option: S.option,
-            root: S.root,
-          }}
-          rightSection={<DropDownIcon />}
-        />
+        {getOptions("facingName").filter(
+          (option: string) => option !== "Don't Know"
+        ).length > 0 && (
+          <Select
+            key={useId()}
+            w={"full"}
+            mt="md"
+            label={`${
+              propCgId == projectprops.plot
+                ? "Select Plot Facing"
+                : "Select Facing"
+            } `}
+            className="!w-[46%]"
+            placeholder="-- select --"
+            data={getOptions("facingName").filter(
+              (option: string) => option !== "Don't Know"
+            )}
+            searchable
+            maxDropdownHeight={200}
+            {...getInputProps("facingName")}
+            onChange={(value) => handleOnChange(value as string, "facingName")}
+            classNames={{
+              input: S.input,
+              label: S.label,
+              option: S.option,
+              root: S.root,
+            }}
+            rightSection={<DropDownIcon />}
+          />
+        )}
 
         {propCgId != projectprops.plot && (
           <Select

@@ -10,7 +10,7 @@ export function calculatePerSqPrice(
     return "N/A";
   }
 
-  const result: string = (priceValue / sbaValue).toFixed(0);
+  const result: string = (priceValue / sbaValue).toFixed(2);
 
   return result;
 }

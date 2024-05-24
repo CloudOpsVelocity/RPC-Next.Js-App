@@ -33,7 +33,7 @@ const FloorplanDetailsCard: React.FC<Props> = ({
     bedCount: data.bhkName ? data.bhkName.split(" ")[0][0] : "", // Example value, adjust as needed
     bathCount: data.totalNumberofBathroom,
     superBuildupArea: data.superBuildUparea, // Example value, adjust as needed
-    propertyFacing: data.facingName, // Example value, adjust as needed
+    propertyFacing: data.facingName === "Don't Know" ? "N/A" : data.facingName, // Example value, adjust as needed
     towerType: data.towerName, // If tower is provided, use it; otherwise, use "Tower 1"
     unitNumber: data.unitNumber, // Example value, adjust as needed
     unitType: `${data.length} ft x ${data.width} ft`, // Example value, adjust as needed

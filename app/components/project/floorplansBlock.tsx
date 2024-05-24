@@ -166,12 +166,20 @@ export default function FloorplansBlock({ projName, slug }: Props) {
   };
 
   const handleOpen = () => {
+    // setSelectedFloor({
+    //   ...projectUnitsData[0],
+    //   floorPlanUrl: projectUnitsData[0].floorPlanUrl ?? ImgNotAvail,
+    // });
+    // form.setValues(setPropertyValues(projectUnitsData[0], propCgId));
+    // handlers.set(setPropertyValues(projectUnitsData[0], propCgId));
+    // handleSearch();
+    // open("floor");
     setSelectedFloor({
-      ...projectUnitsData[0],
-      floorPlanUrl: projectUnitsData[0].floorPlanUrl ?? ImgNotAvail,
+      ...selectedFloor,
+      floorPlanUrl: selectedFloor.floorPlanUrl ?? ImgNotAvail,
     });
-    form.setValues(setPropertyValues(projectUnitsData[0], propCgId));
-    handlers.set(setPropertyValues(projectUnitsData[0], propCgId));
+    form.setValues(setPropertyValues(selectedFloor, propCgId));
+    handlers.set(setPropertyValues(selectedFloor, propCgId));
     handleSearch();
     open("floor");
   };
@@ -187,6 +195,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
   const handleContainerClick = () => {
     if (floorPlanType === "type" || floorPlanType === "bhk") {
       setSelectedFloor(null);
+      handlers.set({});
       setFloorsArray(projectUnitsData);
       open("container");
     }
