@@ -86,7 +86,6 @@ export default function FloorplansBlock({ projName, slug }: Props) {
     retry: false,
     enabled: !!propCgId,
   });
-  console.log(projectUnitsData);
   const types =
     selectedPhase &&
     Object?.keys(selectedPhase.propTypeOverview)

@@ -105,12 +105,10 @@ function FloorPlanModal({
   };
   // SHOULD NOT DEPEND ANY OTHER FN IMPORTANT OTHERWISE IT WILL CREATE BUGS
   const handleSearchUndo = (undoValues: any): void => {
-    if (undoValues?.clearAll == "true") {
+    if (Object.keys(undoValues).length === 0) {
       setSelectedFloor(null);
       setFloorsArray(data);
       const keys = Object.keys(form.values);
-      // dont' do one by one
-      // keys.forEach((key) => form.setFieldValue(key, null));
       const resetValues = keys.reduce((acc: any, key) => {
         acc[key] = null;
         return acc;
@@ -148,7 +146,7 @@ function FloorPlanModal({
       return acc;
     }, {});
     form.setValues(resetValues);
-    handlers?.set({ clearAll: "true" });
+    handlers?.set({});
   };
   const handleRemoveFilter = (key: string) => {
     const keysWithNonNullValues = Object.keys(form.values).filter(
@@ -295,7 +293,11 @@ function FloorPlanModal({
                 data={data}
                 handlers={handlers}
               />
-              <MiddleSection projName={projName} propCgId={propCgId} />
+              <MiddleSection
+                projName={projName}
+                propCgId={propCgId}
+                handlers={handlers}
+              />
               {selectedFloor && (
                 <RightSection propCgId={propCgId} data={data} />
               )}
@@ -1070,19 +1072,22 @@ const RightSection = ({ propCgId }: any) => {
   );
 };
 
-const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
+const MiddleSection = ({ hide = false, projName, propCgId, handlers }: any) => {
   const data = useAtomValue(selectedFloorAtom);
   const { setValues } = useFormContext();
   const [floorsArray, setFloorsArray] = useAtom<any>(floorPlansArray);
   const [, { open }] = useSubFloorPlanPopup();
   const [selectedFloor, setFloor] = useAtom(selectedFloorAtom);
   const selectImg = (index: number) => {
-    setFloor({
-      ...floorsArray[index],
-      floorPlanUrl: floorsArray[index].floorPlanUrl ?? ImgNotAvail,
-    });
-    setValues(setPropertyValues(floorsArray[index], propCgId));
-    handleSearch(index);
+    if (selectedFloor?.unitNumber !== floorsArray[index].unitNumber) {
+      setFloor({
+        ...floorsArray[index],
+        floorPlanUrl: floorsArray[index].floorPlanUrl ?? ImgNotAvail,
+      });
+      setValues(setPropertyValues(floorsArray[index], propCgId));
+      handlers.set(setPropertyValues(floorsArray[index], propCgId));
+      handleSearch(index);
+    }
   };
   const handleSearch = (index: number): void => {
     const filteredFloors = floorsArray?.filter(

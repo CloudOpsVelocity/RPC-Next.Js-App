@@ -29,7 +29,6 @@ export default function ShortList() {
       open();
     }
   };
-  console.log(data);
   return (
     <button
       onClick={() => onAddingShortList()}

@@ -34,7 +34,6 @@ type CardProps = {
 };
 
 export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
-  console.log(cardData);
   const [, { open }] = useReqCallPopup();
   const { data: session } = useSession();
   const { toggleShortlist } = useShortlistAndCompare();

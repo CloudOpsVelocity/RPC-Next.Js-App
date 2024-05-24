@@ -38,9 +38,9 @@ export default function ByBhkBlock({
   };
   const setCurrentState = useSetAtom(selectedFloorAtom);
   return (
-    <React.Fragment>
-      <div className="lg:h-[100px] px-[2%] border-[#92B2C8] border-solid border-b-[1px] border-r-[1px] ">
-        <h3 className=" text-[#001F35]  text-[20px] lg:text-[24px] font-[500] mt-5 mb-2">
+    <>
+      <div className="lg:h-[100px] px-[2%] border-[#92B2C8] border-solid border-b-[1px] pt-2.5 bg-[#F2FAFF]/50">
+        <h3 className=" text-[#001F35]  text-[20px] lg:text-[24px] font-[500]  mb-2">
           Select BHK to see floor plans
         </h3>
         <div className="flex justify-start items-start flex-wrap ">
@@ -91,6 +91,6 @@ export default function ByBhkBlock({
           />
         ))}
       </div>
-    </React.Fragment>
+    </>
   );
 }
