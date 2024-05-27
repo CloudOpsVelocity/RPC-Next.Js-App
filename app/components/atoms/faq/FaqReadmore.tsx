@@ -32,7 +32,7 @@ const FaqReadMore: React.FC<ReadMoreProps> = ({
   return (
     <div className="w-[90%]">
       <p className="text-[#303A42] text-[28px] not-italic font-normal leading-9">
-        {getClampedText}
+        {`${getClampedText}${!isReadMore && "..."}`}
 
         {showReadMoreButton && shouldShowReadMore && (
           <span
@@ -43,7 +43,6 @@ const FaqReadMore: React.FC<ReadMoreProps> = ({
             aria-label={isReadMore ? "Read Less" : "Read More"} // Add ARIA label
           >
             {isReadMore ? " Read Less" : " Read More"}
-            {!isReadMore && "... "}
           </span>
         )}
       </p>
