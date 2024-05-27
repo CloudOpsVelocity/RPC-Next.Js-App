@@ -1,7 +1,6 @@
 import useBuilder from "@/app/hooks/useBuilder";
 import { Phone } from "@/app/images/commonSvgs";
-// import N from "@/app/styles/Numinput.module.css";
-import N from "@/app/styles/Req.module.css";
+import N from "@/app/styles/Numinput.module.css";
 import React, { useState } from "react";
 import { useMediaQuery } from "@mantine/hooks";
 import { Modal, NumberInput, TextInput, em } from "@mantine/core";
@@ -107,7 +106,7 @@ const RequestCallBackModal = ({
                 <div className={`w-[100%] md:w-[50%] p-[5%] pr-[1%] `}>
                   {status === "idle" && (
                     <h2 className="text-[20px] lg:text-[24px] font-[600] text-[#202020] ">
-                      Request A Callback
+                      Request Callback
                     </h2>
                   )}
 
@@ -358,9 +357,9 @@ const ReqForm = ({
           {...form.getInputProps("name")}
           placeholder="Enter your name here"
           classNames={{
-            input: N.TextInput,
-            // description: N.description,
-            // wrapper: N.wrapper,
+            input: N.input,
+            description: N.description,
+            wrapper: N.wrapper,
             label: N.label,
           }}
           onBlur={(e) => handleTrimAndReplace(e, "name", form)}

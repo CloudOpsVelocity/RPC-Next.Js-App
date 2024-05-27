@@ -155,7 +155,7 @@ export default function FloorplanDrawer() {
         position="right"
         zIndex={1000}
         classNames={S}
-        size={"30%"}
+        size={"32%"}
       >
         <h3 className=" gap-2.5 pl-2.5  py-2.5 bg-[#EEF7FE] text-[#001F35] text-[28px] not-italic font-semibold leading-[normal] capitalize w-full mt-4 max-w-[90%] inline-flex">
           {getIcon(
@@ -248,7 +248,9 @@ const Table = ({ data, propertyType, cg }: any) => {
           cg={cg}
           type="standard"
         />
-        <Divider orientation="vertical" color="blue" />
+        {propertyType === "plot" && cg?.plotData?.standardPlotCount > 0 && (
+          <Divider orientation="vertical" color="#92B2C8" mx={10} />
+        )}
         <PlotTable data={data} propertyType={propertyType} cg={cg} type="odd" />
       </div>
     </div>
@@ -258,10 +260,10 @@ const Table = ({ data, propertyType, cg }: any) => {
 const PlotTable = ({ data, propertyType, cg, type }: any) => {
   const key = type === "standard" ? "standardPlots" : "oddPlots";
   const keyCount = type === "standard" ? "standardPlotCount" : "oddPlotCount";
-  const title = propertyType === "plot" ? "Standard Unit" : "Odd Unit";
+  const title = type === "standard" ? "Standard Unit" : "Odd Unit";
   return (
     propertyType === "plot" && (
-      <div className="border-r-[0.5px] border-[#92B2C8]">
+      <div>
         <div className="flex items-center gap-1.5 p-2 rounded-md bg-[#EEF7FE] text-[#00487C] text-lg not-italic font-medium leading-[normal] capitalize mb-3">
           {title} ({cg.plotData[keyCount]} Units)
         </div>
