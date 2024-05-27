@@ -42,7 +42,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           <p className="text-[16px] text-[#565D70] font-[500] mb-[1%]">
             <span>home</span> {" > "}
             <Link href={"/project/banglore"}>
-              <span>{data.ctName}</span>
+              <span>Property In {data.ctName}</span>
             </Link>{" "}
             {" > "}
             <span>

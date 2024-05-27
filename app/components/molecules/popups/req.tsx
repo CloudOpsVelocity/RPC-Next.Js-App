@@ -1,6 +1,7 @@
 import useBuilder from "@/app/hooks/useBuilder";
 import { Phone } from "@/app/images/commonSvgs";
-import N from "@/app/styles/Numinput.module.css";
+// import N from "@/app/styles/Numinput.module.css";
+import N from "@/app/styles/Req.module.css";
 import React, { useState } from "react";
 import { useMediaQuery } from "@mantine/hooks";
 import { Modal, NumberInput, TextInput, em } from "@mantine/core";
@@ -306,8 +307,6 @@ const ReqForm = ({
       mobile: null,
     },
     validate: yupResolver(reqSchema),
-    validateInputOnBlur: true,
-    validateInputOnChange: true,
   });
   const displayCountryCode = (value: any) => {
     console.log(value);
@@ -359,9 +358,9 @@ const ReqForm = ({
           {...form.getInputProps("name")}
           placeholder="Enter your name here"
           classNames={{
-            input: N.input,
-            description: N.description,
-            wrapper: N.wrapper,
+            input: N.TextInput,
+            // description: N.description,
+            // wrapper: N.wrapper,
             label: N.label,
           }}
           onBlur={(e) => handleTrimAndReplace(e, "name", form)}

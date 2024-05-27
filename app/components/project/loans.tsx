@@ -30,7 +30,8 @@ export default function ProjectLoans({
             </span>
           </h2>
           <p className="mt-4 text-[#4D6677] text-[16px] md:text-2xl italic font-medium leading-[normal] tracking-[0.96px]">
-            Unlock Your Dream Home with Hassle-Free Bank Approval Loans
+            Explore bank loan approvals options for your project with multiple
+            banks
           </p>
         </>
       )}

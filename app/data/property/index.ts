@@ -5,6 +5,7 @@ import {
   TowerIcon,
 } from "@/app/images/commonSvgs";
 import { Main } from "@/app/validations/property";
+import { Console } from "console";
 
 import React from "react";
 type PropertyDetail = {
@@ -26,7 +27,11 @@ export function generatePropertyDetails(
         { title: "Property Type", value: data.propTypeName, Icon: Marble },
         { title: "Phase", value: data.phaseName, Icon: Marble },
         { title: "Tower", value: data.tower, Icon: TowerIcon },
-        { title: "Floor", value: data.atFloor, Icon: Marble },
+        {
+          title: "Floor",
+          value: data.atFloor === 0 ? "G" : data.atFloor,
+          Icon: Marble,
+        },
         { title: "Block", value: data.block, Icon: Block },
         { title: "Unit Number", value: data.unitNumber, Icon: Marble },
         { title: "Facing", value: data.facingName, Icon: Marble },

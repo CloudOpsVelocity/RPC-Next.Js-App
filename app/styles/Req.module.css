@@ -17,3 +17,33 @@
 .overlay {
   margin-top: 90px;
 }
+
+.textInput {
+  color: var(--Black-2, #333);
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 500;
+  opacity: 1;
+}
+.textInput:focus::placeholder {
+  color: transparent !important;
+}
+.textInput::placeholder {
+  color: #212c33;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.64px;
+}
+
+.textInput::-ms-input-placeholder {
+  /* Edge 12-18 */
+  color: #556477 !important;
+  font-family: Montserrat;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}

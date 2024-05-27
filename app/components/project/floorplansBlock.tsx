@@ -334,9 +334,9 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                 if (floorPlanType !== "type") {
                   setFloorPlanType("type");
                   handleUnitFormClear();
-                  if (!selectedFloor?.unitNumber) {
-                    setSelectedFloor(projectUnitsData[0]);
-                  }
+                  // if (!selectedFloor?.unitNumber) {
+                  setSelectedFloor(projectUnitsData[0]);
+                  // }
                 }
               }}
               buttonClass={`text-[20px] lg:text-[24px] mr-[40px] whitespace-nowrap flex justify-center items-center gap-[6px] ${
@@ -376,9 +376,10 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                   if (floorPlanType !== "bhk") {
                     setFloorPlanType("bhk");
                     handleUnitFormClear();
-                    if (!selectedFloor?.unitNumber) {
-                      setSelectedFloor(projectUnitsData[0]);
-                    }
+                    // if (!selectedFloor?.unitNumber) {
+                    setSelectedFloor(projectUnitsData[0]);
+                    setBhk("0");
+                    // }
                   }
                 }}
                 buttonClass={`text-[20px] lg:text-[24px] mr-[40px] whitespace-nowrap flex justify-center items-center gap-[6px] ${

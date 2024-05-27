@@ -55,9 +55,9 @@ export default function PropertyBanner({
         </h1>
       </div>
       <div>
-        <div className="inline-flex mt-5">
+        <div className="inline-flex mt-6">
           <Image
-            src={media.coverImageUrl}
+            src={media?.coverImageUrl}
             alt="Sobha Dream Acres"
             className="flex w-[350px] h-[185px] items-center shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[10px]"
             width={350}
@@ -75,11 +75,11 @@ export default function PropertyBanner({
             </p>
             <p className="text-[#00487C] text-[26px] not-italic font-medium">
               {" "}
-              {availableProperties.join(", ")}
+              {availableProperties?.join(", ")}
             </p>
           </div>
         </div>
-        <div className="mt-5">
+        <div className="mt-6">
           <ReadMore
             text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis auteeeee irure dolor in repllllllllll rehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupida tatttt non proident, sunt in culp a qui officia deserunt mollit anim id est laborum...Read More"
             title={"About"}

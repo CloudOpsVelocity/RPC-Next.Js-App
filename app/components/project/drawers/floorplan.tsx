@@ -1,5 +1,5 @@
 "use client";
-import { Button, Drawer } from "@mantine/core";
+import { Button, Divider, Drawer } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import Image from "next/image";
 import React from "react";
@@ -26,10 +26,12 @@ import {
   VillamentIcon,
 } from "@/app/images/commonSvgs";
 import { BACKEND_PROP_TYPES, projectprops } from "@/app/data/projectDetails";
+import { sortUnits } from "@/app/utils/unitparser";
 const iconStyles: string =
   " flex items-center justify-center w-[40px] h-[40px]  text-[#001F35]";
 export default function FloorplanDrawer() {
   const [cg, setData] = useAtom(overviewAtom);
+  console.log(cg.plotData);
   const getIcon = (id: number) => {
     let iconComponent;
     switch (id) {
@@ -194,7 +196,7 @@ export default function FloorplanDrawer() {
               <p className="text-[14px] lg:text-[20px] text-[#2A4C70] font-[500] flex justify-start items-start  ">
                 <TowerIcon className="w-[16px] h-[16px] lg:w-[24px] lg:h-[24px]" />
                 <span className="mr-[6px] ml-[6px]"> {cg?.elevation} </span>{" "}
-                Towers
+                Tower{cg?.elevation > 1 ? "s" : ""}
               </p>
             ) : (
               ""
@@ -216,56 +218,62 @@ export default function FloorplanDrawer() {
             )}
           </div>
         </div>
-        <Table data={cg?.unitTypes} propertyType={cg?.propertyType} />
+        <Table data={cg?.unitTypes} cg={cg} propertyType={cg?.propertyType} />
         {/* Drawer content */}
       </Drawer>
     </>
   );
 }
 
-const Table = ({ data, propertyType }: any) => {
+const Table = ({ data, propertyType, cg }: any) => {
   return (
     <div className="flex flex-col justify-center items-start gap-3.5 px-[9px] py-2.5 border rounded-[10px] border-solid border-[#9AB1BC] mt-5 max-w-[90%]">
       <h1 className="flex items-center gap-2.5 pl-2.5 w-full py-2.5 rounded-lg bg-[#ebeaff] text-[#001F35] text-[21px] not-italic font-semibold leading-[normal] capitalize">
         <Marble /> Units Available
       </h1>
-      <div
-        className={`${
-          propertyType === "plot" ? "border-r-[0.5px] border-[#92B2C8]" : ""
-        } pr-3`}
-      >
-        {propertyType === "plot" && (
-          <div className="flex items-center gap-1.5 p-2 rounded-md bg-[#EEF7FE] text-[#00487C] text-lg not-italic font-medium leading-[normal] capitalize mb-3">
-            Standard Unit (24 Units)
-          </div>
+      <div className={`flex  pr-3`}>
+        {propertyType !== "plot" && (
+          <ul className="list-disc pl-8">
+            {data &&
+              sortUnits(data)?.map((item: any) => (
+                <li className="text-[#242424] text-[21px] not-italic font-semibold leading-[normal] capitalize">
+                  {propertyType === "plot" ? item.split("_").join(" x ") : item}
+                </li>
+              ))}
+          </ul>
         )}
+        <PlotTable
+          data={data}
+          propertyType={propertyType}
+          cg={cg}
+          type="standard"
+        />
+        <Divider orientation="vertical" color="blue" />
+        <PlotTable data={data} propertyType={propertyType} cg={cg} type="odd" />
+      </div>
+    </div>
+  );
+};
+
+const PlotTable = ({ data, propertyType, cg, type }: any) => {
+  const key = type === "standard" ? "standardPlots" : "oddPlots";
+  const keyCount = type === "standard" ? "standardPlotCount" : "oddPlotCount";
+  const title = propertyType === "plot" ? "Standard Unit" : "Odd Unit";
+  return (
+    propertyType === "plot" && (
+      <div className="border-r-[0.5px] border-[#92B2C8]">
+        <div className="flex items-center gap-1.5 p-2 rounded-md bg-[#EEF7FE] text-[#00487C] text-lg not-italic font-medium leading-[normal] capitalize mb-3">
+          {title} ({cg.plotData[keyCount]} Units)
+        </div>
         <ul className="list-disc pl-8">
-          {data
-            ?.sort((a: any, b: any) => {
-              if (propertyType === "plot") {
-                const aParts = a.split("_");
-                const bParts = b.split("_");
-
-                // Compare the first parts (numeric values)
-                const aNum = parseInt(aParts[0], 10);
-                const bNum = parseInt(bParts[0], 10);
-                if (aNum !== bNum) {
-                  return aNum - bNum;
-                }
-
-                // If the first parts are equal, compare the second parts (strings)
-                return aParts[1].localeCompare(bParts[1]);
-              } else {
-                return a.localeCompare(b);
-              }
-            })
-            ?.map((item: any) => (
+          {cg.plotData.standardPlots &&
+            sortUnits(cg.plotData[key])?.map((item: any) => (
               <li className="text-[#242424] text-[21px] not-italic font-semibold leading-[normal] capitalize">
                 {propertyType === "plot" ? item.split("_").join(" x ") : item}
               </li>
             ))}
         </ul>
       </div>
-    </div>
+    )
   );
 };

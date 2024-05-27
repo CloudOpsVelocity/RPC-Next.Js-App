@@ -21,6 +21,7 @@ import { getProjectUnits } from "@/app/utils/api/project";
 import { useParams } from "next/navigation";
 import clsx from "clsx";
 import ShowUnitsButton from "./button/showUnits";
+import { countPlots } from "@/app/utils/count/plot";
 
 type Props = {
   cg: any;
@@ -118,7 +119,9 @@ export default function PropertyTypeDetailsCrad({
         break;
     }
   };
-
+  const plotCounts =
+    propertyType === "plot" && projectUnitsData && countPlots(projectUnitsData);
+  console.log(plotCounts);
   return (
     <div
       className="flex  justify-between items-start min-h-[225px] w-[100%] max-w-[359px] lg:max-w-[510px] rounded-[24px] shadow-md pr-[1%] pl-[1%] mt-[70px] bg-gradient-to-l from-[#EFF5FF] /50 to-[#F2FAFF]/50 mb-[2%] cursor-pointer"
@@ -136,12 +139,11 @@ export default function PropertyTypeDetailsCrad({
         </div>
         <div className="down mb-3">
           <div className="flex   mt-[36px] gap-x-[16px] flex-wrap  ">
-            {(propertyType == "apt" || propertyType == "vlmt") &&
-            cg?.elevation > 1 ? (
+            {propertyType == "apt" || propertyType == "vlmt" ? (
               <p className="text-[14px] lg:text-[20px] text-[#2A4C70] font-[500] flex justify-start items-start  ">
                 <TowerIcon className="w-[16px] h-[16px] lg:w-[24px] lg:h-[24px]" />
                 <span className="mr-[6px] ml-[6px]"> {cg?.elevation} </span>{" "}
-                Towers
+                Tower{cg?.elevation > 1 ? "s" : ""}
               </p>
             ) : (
               ""
@@ -183,7 +185,7 @@ export default function PropertyTypeDetailsCrad({
           {propertyType !== "plot" ? (
             <span
               className={clsx(
-                "text-[#242424] text-right text-lg not-italic font-semibold leading-[22px] max-w-[135px] inline-block min-h-[44px]",
+                "text-[#242424] text-right text-lg not-italic font-semibold leading-[22px] max-w-[135px] inline-block min-h-[44px] w-[80%] ",
                 propertyType === "plot" && "!max-w-full"
               )}
             >
@@ -192,16 +194,16 @@ export default function PropertyTypeDetailsCrad({
           ) : (
             <>
               <p className="text-[#242424] text-right text-base not-italic font-semibold leading-[normal]">
-                Standard Plot : {cg?.unitTypes.length} Units
+                Standard Plot : {plotCounts?.standardPlotCount} Units
               </p>
               <p className="text-[#242424] text-right text-base not-italic font-semibold leading-[normal]">
-                Odd Plot : 0 Units
+                Odd Plot : {plotCounts?.oddPlotCount} Units
               </p>
             </>
           )}
         </p>
-        {cg?.unitTypes.length > 4 && (
-          <ShowUnitsButton cg={{ ...cg, propertyType }} />
+        {(cg?.unitTypes.length > 4 || propertyType === "plot") && (
+          <ShowUnitsButton cg={{ ...cg, propertyType, plotData: plotCounts }} />
         )}
       </div>
     </div>

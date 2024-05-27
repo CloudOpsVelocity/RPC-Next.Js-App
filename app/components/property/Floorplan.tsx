@@ -34,7 +34,7 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
       totalNumberofBathroom: data.nobt,
       totalNumberOfBalcony: data.nobl,
       noOfCarParking: data.noocp,
-      floorPlanUrl: data.projMedia.floorPlanUrl,
+      floorPlanUrl: data.projMedia.floorPlanUrl + "?v=" + Math.random() * 20,
       plotArea: data.plotArea,
       noocp: data.noocp,
       noobp: data.noobp,
@@ -68,7 +68,7 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
               onClick={handleOpen}
             >
               <img
-                src={data?.projMedia?.floorPlanUrl}
+                src={data?.projMedia?.floorPlanUrl + "?v=" + Math.random() * 20}
                 alt=""
                 className="h-full w-full"
               />

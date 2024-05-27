@@ -36,7 +36,7 @@ const FaqReadMore: React.FC<ReadMoreProps> = ({
 
         {showReadMoreButton && shouldShowReadMore && (
           <span
-            className="text-[28px] not-italic font-medium leading-9 text-btnPrimary cursor-pointer"
+            className="text-[#0073C6] text-[28px] not-italic font-semibold cursor-pointer"
             onClick={handleReadMoreClick}
             role="button" // Add role for accessibility
             tabIndex={0} // Add tabIndex for accessibility

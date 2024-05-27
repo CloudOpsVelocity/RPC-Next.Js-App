@@ -8,6 +8,7 @@ import {
   postDetailsIcon,
 } from "@/app/images/commonSvgs";
 import clsx from "clsx";
+import Image from "next/image";
 import React from "react";
 
 export default function ListingRentAvail({
@@ -61,9 +62,12 @@ const Card = ({
   };
   return (
     <div
-      className={
-        " sm:h-[85px] shadow-[0px_4px_30px_0px_rgba(0,0,0,0.15)] rounded-[31px] relative cursor-pointer"
-      }
+      className={clsx(
+        " sm:h-[85px] shadow-[0px_4px_30px_0px_rgba(0,0,0,0.15)] rounded-[31px] relative cursor-pointer",
+        type === "sell"
+          ? "border border-solid border-[#FBE885]"
+          : "border border-solid border-[#B1DEFF] "
+      )}
       onClick={() => handleBoxClick(block ? r : s)}
     >
       <AvailListSideSvg type={type} />
@@ -83,15 +87,29 @@ const Card = ({
         </div>
         <div
           className={clsx(
-            "flex justify-center items-center p-2 gap-[12px] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-lg border-[3px] border-solid max-w-[80px] mt-[14px] ml-5 mb-5 mr-5",
+            "flex justify-center items-center p-2 gap-[12px] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-lg border-[3px] border-solid max-w-[80px] mt-[14px] ml-5 mb-5 mr-5 text-[#303030] text-2xl not-italic font-semibold",
             type === "sell"
               ? "border-[#FFD600] bg-[#ffef9b]"
               : "border-[#0073C6] bg-[#DBF0FF]"
           )}
         >
-          {type === "rent" ? r : s} <StockIcon />
+          {type === "rent" ? r : s}{" "}
+          <Image
+            src={type === "rent" ? config.rentIcon : config.sellIcon}
+            className="w-[24px] h-[23px]"
+            alt=""
+            width={24}
+            height={23}
+          />
         </div>
       </div>
     </div>
   );
+};
+
+let config = {
+  sellIcon:
+    "https://d2l0lb5gc1bw3t.cloudfront.net/staticmedia-images-icons/project-detail/yellowarrow.png",
+  rentIcon:
+    "https://d2l0lb5gc1bw3t.cloudfront.net/staticmedia-images-icons/project-detail/bluearrow.png",
 };

@@ -108,14 +108,15 @@ export const RatingForm = ({
               fill="#FFD600"
               className="w-[45px] h-[45px]  md:w-[70px] md:h-[70px]"
             />{" "}
-            4 / 5 Ratings Already Given ( Optional )
+            4 / 5 Ratings Already Given
           </p>
         </div>
       )}
       <h2 className="text-[#4D6677] text-2xl not-italic font-bold leading-[23.784px]  !mb-[24px]">
         {isSubmitted
           ? `Forgot to add your feedback for ${projName} Project !`
-          : `Add your feedback for ${projName} Project !`}
+          : `Add your feedback for ${projName} Project !`}{" "}
+        ( Optional )
       </h2>
 
       <div className=" gap-4 ">

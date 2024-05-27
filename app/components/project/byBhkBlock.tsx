@@ -80,7 +80,7 @@ export default function ByBhkBlock({
         </div>
       </div>
 
-      <div className="h-full lg:max-h-[406px] max-h-[487px] border-solid overflow-auto  ">
+      <div className="h-full lg:max-h-[440px] max-h-[487px] border-solid overflow-auto  ">
         {filteredData.map((eachItem: any, ind: number) => (
           <FloorplanDetailsCard
             key={ind}

@@ -9,7 +9,7 @@ import { useForm, yupResolver } from "@mantine/form";
 import React, { useEffect, useRef, useState } from "react";
 import S from "@/app/styles/Otp.module.css";
 import axios from "axios";
-import { sendContact } from "@/app/utils/api/actions/contact";
+import { addContact, sendContact } from "@/app/utils/api/actions/contact";
 import clsx from "clsx";
 
 type Props = {
@@ -109,7 +109,7 @@ export default function ReqOtpForm({ callback, values }: Props) {
           type={"number"}
           placeholder=""
         />
-        <Resend userName={values.mobile} />
+        <Resend userName={values.mobile} values={values} />
         <Button type="submit" className="!bg-[#0073C6]">
           Submit
         </Button>
@@ -118,7 +118,7 @@ export default function ReqOtpForm({ callback, values }: Props) {
   );
 }
 
-const Resend = ({ userName }: any): JSX.Element => {
+const Resend = ({ userName, values }: any): JSX.Element => {
   const [timeRemaining, setTimeRemaining] = useState({
     minutes: 0,
     seconds: 30,
@@ -155,7 +155,7 @@ const Resend = ({ userName }: any): JSX.Element => {
       setTimeRemaining({ minutes: 0, seconds: 30 });
       setTimerRunning(true);
     }
-    await resendOtp(userName);
+    await addContact(values);
   };
 
   const { minutes, seconds } = timeRemaining;

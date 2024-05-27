@@ -129,7 +129,7 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
           />
         </svg>{" "}
         <span className="text-[#242424] text-[32px] not-italic font-bold leading-[normal]">
-          Have any Question? Ask Here👇🏼
+          Have any Question? Ask Here 👇
         </span>
       </h2>
       <h2 className="font-[700] text-[#233333] text-[20px] md:text-[28px]  ">
@@ -189,7 +189,7 @@ const FaqCard = ({
 }) => {
   return (
     <div>
-      <h4 className=" text-[#046DBA] text-[28px] not-italic font-bold leading-[normal] mb-4">
+      <h4 className=" text-[#242424] text-[28px] not-italic font-bold leading-[normal] mb-4">
         {faqQuestion}
       </h4>
       <FaqReadMore text={faqAnswer} title={faqQuestion} />
