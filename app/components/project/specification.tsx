@@ -70,7 +70,7 @@ export default function Specifications({
           <Stack align="center">
             <ScrollArea
               w={"100%"}
-              h={458 > data?.length * 270 ? data.length * 270 : 458}
+              h={458 > data?.length * 270 ? data.length * 270 : 358}
               viewportRef={viewport}
               classNames={styles}
               pb={20}
