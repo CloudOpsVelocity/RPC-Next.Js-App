@@ -121,7 +121,6 @@ export default function PropertyTypeDetailsCrad({
   };
   const plotCounts =
     propertyType === "plot" && projectUnitsData && countPlots(projectUnitsData);
-  console.log(plotCounts);
   return (
     <div
       className="flex  justify-between items-start min-h-[225px] w-[100%] max-w-[359px] lg:max-w-[510px] rounded-[24px] shadow-md pr-[1%] pl-[1%] mt-[70px] bg-gradient-to-l from-[#EFF5FF] /50 to-[#F2FAFF]/50 mb-[2%] cursor-pointer"
@@ -185,11 +184,19 @@ export default function PropertyTypeDetailsCrad({
           {propertyType !== "plot" ? (
             <span
               className={clsx(
-                "text-[#242424] text-right text-lg not-italic font-semibold leading-[22px] max-w-[135px] inline-block min-h-[44px] w-[80%] ",
+                "text-[#242424] text-right text-lg not-italic font-semibold leading-[22px] max-w-[135px] inline-block min-h-[44px] w-[80%]",
                 propertyType === "plot" && "!max-w-full"
               )}
             >
-              {parseUnits(cg?.unitTypes, propertyType)}
+              {parseUnits(cg?.unitTypes, propertyType).map(
+                (unitType, index, array) => (
+                  <React.Fragment key={index}>
+                    {unitType}
+                    {index < array.length - 1 && ", "}
+                    {index === 1 && <br />}
+                  </React.Fragment>
+                )
+              )}
             </span>
           ) : (
             <>

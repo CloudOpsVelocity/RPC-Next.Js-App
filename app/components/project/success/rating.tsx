@@ -73,7 +73,7 @@ export const RatingForm = ({
     <form
       onSubmit={form.onSubmit(formSubmit)}
       className={clsx(
-        "max-w-[100%] mt-[2%] mx-auto my-8   rounded-lg space-y-2 p-5",
+        "max-w-[100%] mt-[2%] mx-9 my-8   rounded-lg space-y-2 p-5 ratingCardBg",
         isSubmitted && "!px-5 pb-5 !mt-0 "
       )}
     >

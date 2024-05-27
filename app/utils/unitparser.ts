@@ -35,7 +35,7 @@ const sortUnits = (units: string[]): string[] => {
 const parseUnitStrings = (
   unitStrings: string[],
   propertyType?: string
-): string => {
+): string[] => {
   const parsedUnits: string[] = [];
 
   unitStrings?.forEach((unit) => {
@@ -50,8 +50,8 @@ const parseUnitStrings = (
   const sortedUnits = sortUnits(parsedUnits);
 
   return propertyType && propertyType === "plot"
-    ? sortedUnits.slice(0, 2).join(", ")
-    : sortedUnits.slice(0, 4).join(", ");
+    ? sortedUnits.slice(0, 2)
+    : sortedUnits.slice(0, 4);
 };
 
 export { parseUnitStrings as parseUnits, sortUnits };

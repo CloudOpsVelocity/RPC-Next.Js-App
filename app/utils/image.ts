@@ -40,9 +40,8 @@ const imageUrlParser = (originalUrl: string, type?: string) => {
 
   if (imagesIndex !== -1) {
     const imagePath = urlParts.slice(imagesIndex + 1).join("/");
-    const isVideo = /\\.mp4$/.test(imagePath);
+    const isVideo = /\.mp4$/.test(imagePath);
     let modifiedUrl;
-
     if (isVideo) {
       modifiedUrl = `${
         process.env.NEXT_PUBLIC_URL

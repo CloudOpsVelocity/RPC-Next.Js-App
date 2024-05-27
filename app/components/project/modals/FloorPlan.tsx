@@ -492,7 +492,7 @@ const LeftSection = ({ propCgId, data }: any) => {
 
         {propCgId != projectprops.plot && (
           <Select
-            key={useId()}
+            key={"sba"}
             w={"full"}
             mt="md"
             label="Super Built-up Area "
@@ -512,7 +512,7 @@ const LeftSection = ({ propCgId, data }: any) => {
 
         {propCgId != projectprops.plot && (
           <Select
-            key={useId()}
+            key={"carpet_area"}
             w={"full"}
             mt="md"
             label="Select Carpet Area"

@@ -29,25 +29,6 @@ export default function Banner({
 
   const onAddingRatings = () => {
     open();
-    // session
-    //   ? open()
-    //   : toast.custom((t) => (
-    //       <div
-    //         className={`${
-    //           t.visible ? "animate-enter" : "animate-leave"
-    //         } ml-auto w-full pointer-events-auto flex justify-end items-end ring-1 ring-transparent ring-opacity-5`}
-    //       >
-    //         <p className=" text-[#565D70] p-[8px] pr-[16px] pl-[16px] bg-white shadow-lg flex items-center rounded-lg gap-[10px] text-[20px] whitespace-nowrap font-[600] ">
-    //           {infoIcon} Please
-    //           <Link rel="shortcut icon" href="/login">
-    //             <span className=" cursor-pointer text-[#0073C6] ">
-    //               login/ Signup
-    //             </span>
-    //           </Link>
-    //           to add Ratings
-    //         </p>
-    //       </div>
-    //     ));
   };
 
   return (
@@ -198,7 +179,7 @@ const AddRating = ({
           : session
           ? isDataSubmitted.isSubmitted
             ? "auto"
-            : "55%"
+            : "58%"
           : "35%"
       }
     >
