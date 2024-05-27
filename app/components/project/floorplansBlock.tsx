@@ -25,6 +25,7 @@ const FloorPlanModal = dynamic(() => import("./modals/FloorPlan"), {
   loading: () => <div>Loading...</div>,
   ssr: true,
 });
+
 // import FloorPlanModal from "./modals/FloorPlan";
 import { useQuery } from "react-query";
 import { getProjectUnits } from "@/app/utils/api/project";
@@ -61,7 +62,6 @@ export default function FloorplansBlock({ projName, slug }: Props) {
   const setFloorsArray = useSetAtom(floorPlansArray);
 
   const [selectedFloor, setSelectedFloor] = useAtom(selectedFloorAtom);
-  const [, handlers, history] = useStateHistory();
   const [, { open, type }] = useFloorPlanPopup();
   const form = useForm();
   const byUnitForm = useForm();
@@ -178,13 +178,11 @@ export default function FloorplansBlock({ projName, slug }: Props) {
       floorPlanUrl: selectedFloor.floorPlanUrl ?? ImgNotAvail,
     });
     form.setValues(setPropertyValues(selectedFloor, propCgId));
-    handlers.set(setPropertyValues(selectedFloor, propCgId));
     handleSearch();
     open("floor");
   };
   const handleUnitClick = () => {
     form.setValues(setPropertyValues(selectedFloor, propCgId));
-    handlers.set(setPropertyValues(selectedFloor, propCgId));
     const filteredFloors = projectUnitsData.filter(
       (floor: any) => floor.unitNumber === selectedFloor.unitNumber
     );
@@ -194,7 +192,6 @@ export default function FloorplansBlock({ projName, slug }: Props) {
   const handleContainerClick = () => {
     if (floorPlanType === "type" || floorPlanType === "bhk") {
       setSelectedFloor(null);
-      handlers.set({});
       setFloorsArray(projectUnitsData);
       open("container");
     }
@@ -630,8 +627,6 @@ export default function FloorplansBlock({ projName, slug }: Props) {
               projName={projName}
               propCgId={propCgId}
               data={projectUnitsData}
-              handlers={handlers}
-              history={history}
               form={byUnitForm}
               floorPlanType={floorPlanType}
             />

@@ -11,10 +11,8 @@ import {
   propertyDetailsSvgs,
 } from "@/app/images/commonSvgs";
 import S from "@/app/styles/Floorplan.module.css";
-import Button from "@/app/elements/button";
 import Image from "next/image";
 import CarouselModal from "./Carousel";
-import { useState } from "react";
 import { filterKeysDetails, projectprops } from "@/app/data/projectDetails";
 import { useFormContext } from "@/app/context/floorplanContext";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
@@ -26,20 +24,12 @@ import { setPropertyValues } from "@/app/utils/dyanamic/projects";
 import { ImgNotAvail } from "@/app/data/project";
 import { Carousel } from "@mantine/carousel";
 import styles from "@/app/styles/Carousel.module.css";
-import {
-  StateHistory,
-  UseStateHistoryHandlers,
-  useStateHistory,
-} from "@/app/hooks/custom/useStateHistory";
-import UndoRedo from "../button/undo";
 import { unitFloorsAtom } from "../byunitblock";
 
 type Props = {
   propCgId: any;
   data?: any;
   projName?: string;
-  handlers?: UseStateHistoryHandlers<unknown>;
-  history: StateHistory<unknown>;
   form: any;
   floorPlanType: string;
 };
@@ -48,8 +38,6 @@ function FloorPlanModal({
   propCgId,
   data,
   projName,
-  handlers,
-  history,
   form: unitTypeForm,
   floorPlanType,
 }: Props) {
@@ -76,7 +64,6 @@ function FloorPlanModal({
       unitTypeForm.setValues(setPropertyValues(selectedFloor, propCgId));
       setUnitsFloor(floorsArray);
     }
-    handlers?.clear();
     const keys = Object.keys(form.values);
     keys.forEach((key) => form.setFieldValue(key, null));
   };
@@ -146,7 +133,6 @@ function FloorPlanModal({
       return acc;
     }, {});
     form.setValues(resetValues);
-    handlers?.set({});
   };
   const handleRemoveFilter = (key: string) => {
     const keysWithNonNullValues = Object.keys(form.values).filter(
@@ -158,7 +144,6 @@ function FloorPlanModal({
       setFloorsArray(data);
       return;
     }
-    handlers?.set({ ...form.values, [key]: null });
     form.setFieldValue(key, null);
     handleSearch(key);
   };
@@ -257,12 +242,6 @@ function FloorPlanModal({
                     )
                 )}
               </div>
-              <UndoRedo
-                history={history}
-                form={form}
-                handlers={handlers}
-                handleSearch={handleSearchUndo}
-              />
 
               {/* scroll buttons */}
               {Object.values(form.values).filter((each) => each != null)
@@ -288,16 +267,8 @@ function FloorPlanModal({
             </div>
 
             <div className="flex justify-start items-start gap-[45px] flex-col mt-[1.5%] md:flex-row w-full pb-[3%] ">
-              <LeftSection
-                propCgId={propCgId}
-                data={data}
-                handlers={handlers}
-              />
-              <MiddleSection
-                projName={projName}
-                propCgId={propCgId}
-                handlers={handlers}
-              />
+              <LeftSection propCgId={propCgId} data={data} />
+              <MiddleSection projName={projName} propCgId={propCgId} />
               {selectedFloor && (
                 <RightSection propCgId={propCgId} data={data} />
               )}
@@ -311,7 +282,7 @@ function FloorPlanModal({
 
 export default FloorPlanModal;
 
-const LeftSection = ({ propCgId, data, handlers }: any) => {
+const LeftSection = ({ propCgId, data }: any) => {
   const [, setFloorsArray] = useAtom(floorPlansArray);
   const [, setFloor] = useAtom(selectedFloorAtom);
   const { getInputProps, values, setFieldValue, setValues } = useFormContext();
@@ -346,7 +317,6 @@ const LeftSection = ({ propCgId, data, handlers }: any) => {
           String(item[key]).toLowerCase() === values[key].toLowerCase()
       );
     });
-    handlers.set(values);
     setFloor(filteredData[0]);
     setFloorsArray(filteredData);
     if (key === "unitNumber" && filteredData.length > 0) {
@@ -1072,7 +1042,7 @@ const RightSection = ({ propCgId }: any) => {
   );
 };
 
-const MiddleSection = ({ hide = false, projName, propCgId, handlers }: any) => {
+const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
   const data = useAtomValue(selectedFloorAtom);
   const { setValues } = useFormContext();
   const [floorsArray, setFloorsArray] = useAtom<any>(floorPlansArray);
@@ -1085,7 +1055,6 @@ const MiddleSection = ({ hide = false, projName, propCgId, handlers }: any) => {
         floorPlanUrl: floorsArray[index].floorPlanUrl ?? ImgNotAvail,
       });
       setValues(setPropertyValues(floorsArray[index], propCgId));
-      handlers.set(setPropertyValues(floorsArray[index], propCgId));
       handleSearch(index);
     }
   };
