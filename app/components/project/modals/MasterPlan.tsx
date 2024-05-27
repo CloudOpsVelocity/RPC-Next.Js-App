@@ -30,7 +30,7 @@ export default function MasterPlanPopup({
           overlay: S.mOverlay,
           inner: S.inner,
         }}
-        size={isMobile ? "100%" : "90%"}
+        size={isMobile ? "100%" : "auto"}
         centered={isMobile}
       >
         <div className="h-auto scrollbar-hide flex justify-end flex-col items-center">

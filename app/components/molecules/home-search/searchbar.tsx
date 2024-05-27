@@ -78,7 +78,6 @@ const Searchbar = () => {
     thumb: "!bg-green-600 !border-none",
   };
 
-  // handlers
 
   const keys = [35, 33, 31, 34, 32];
   const handleSearch = () => {
