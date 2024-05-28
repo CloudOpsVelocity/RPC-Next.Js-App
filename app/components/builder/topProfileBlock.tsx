@@ -28,8 +28,9 @@ export default function TopProfileBlock({
             <Image
               alt="builder"
               src={
-                `${logoUrl}?v=${Math.random()}` ??
-                `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/builderpage/builder-noimage.png`
+                logoUrl
+                  ? `${logoUrl}?v=${Math.random()}`
+                  : `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/builderpage/builder-noimage.png`
               }
               className="object-contain w-[150px] h-[150px]"
               width={158}

@@ -17,6 +17,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
   const { data } = useBuilder({ id, y: "N", type });
   console.log(data);
   const nzData = normalizeData(data, type);
+  console.log(nzData);
   return (
     <div
       className="w-[90%] scroll-mt-[220px]  mb-[5%] rounded shadow-[0px_4px_17.6px_0px_rgba(146,178,200,0.40)] border-[0.5px] border-solid border-[#92B2C8] builderBg py-8 pl-5"
@@ -29,14 +30,17 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
           </h1>
 
           <div className="inline-flex justify-end items-end ">
-            {nzData.logo && (
-              <Image
-                src={`${nzData.logo}?v=${Math.random()}`}
-                width={130}
-                height={130}
-                alt="logo"
-              />
-            )}
+            <Image
+              src={
+                nzData.logo
+                  ? `${nzData.logo}?v=${Math.random()}`
+                  : `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/builderpage/builder-noimage.png`
+              }
+              width={130}
+              height={130}
+              alt="logo"
+              className="shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] border-2 border-solid border-[#96C5E4]"
+            />
             <p className=" text-[#148B16] italic text-[20px] lg:text-[26px] font-[700] ml-3">
               {nzData.companyName}
               <p className=" text-[#303A42] text-[14px] md:text-[16px] lg:text-[20px] font-[500] ">
@@ -87,7 +91,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
           {TeleGramBlack} Builder Address{" "}
         </p>
         <p className="  text-[18px] lg:text-[20px]  mt-[1%]  mb-[14px] text-[#242424] text-2xl italic font-medium leading-8 md:mb-[2%] ">
-          {nzData.builderAddress}
+          {nzData.builderAddress} {nzData.city}, {nzData.state} {nzData.pincode}
         </p>
         <Link
           className=" bg-[#0073C6] rounded-[4px] text-[#FFF] text-[18px] lg:text-[20px] font-[700] p-[10px]  "
@@ -113,6 +117,9 @@ function normalizeData(data: any, type: string) {
       vission: data?.data?.vision,
       companyName: data?.data?.companyName,
       companyStartDate: data?.data?.companyStartDate,
+      city: data?.data?.cityName,
+      state: data?.data?.stateName,
+      pincode: data?.data?.pinCode,
     };
   } else {
     return {
@@ -126,6 +133,9 @@ function normalizeData(data: any, type: string) {
       vission: data?.vision,
       companyName: data?.companyName,
       companyStartDate: data?.companyStartDate,
+      city: data?.cityName,
+      state: data?.stateName,
+      pincode: data?.pinCode,
     };
   }
 }

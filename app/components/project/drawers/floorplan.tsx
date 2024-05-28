@@ -155,7 +155,7 @@ export default function FloorplanDrawer() {
         position="right"
         zIndex={1000}
         classNames={S}
-        size={"32%"}
+        size={"35%"}
       >
         <h3 className=" gap-2.5 pl-2.5  py-2.5 bg-[#EEF7FE] text-[#001F35] text-[28px] not-italic font-semibold leading-[normal] capitalize w-full mt-4 max-w-[90%] inline-flex">
           {getIcon(
@@ -257,25 +257,67 @@ const Table = ({ data, propertyType, cg }: any) => {
   );
 };
 
-const PlotTable = ({ data, propertyType, cg, type }: any) => {
+interface PlotTableProps {
+  data: any;
+  propertyType: string;
+  cg: {
+    plotData: {
+      [key: string]: any;
+      standardPlots?: string[];
+      oddPlots?: string[];
+      standardPlotCount?: number;
+      oddPlotCount?: number;
+    };
+  };
+  type: "standard" | "odd";
+}
+
+const PlotTable: React.FC<PlotTableProps> = ({
+  data,
+  propertyType,
+  cg,
+  type,
+}) => {
   const key = type === "standard" ? "standardPlots" : "oddPlots";
   const keyCount = type === "standard" ? "standardPlotCount" : "oddPlotCount";
   const title = type === "standard" ? "Standard Unit" : "Odd Unit";
+
+  if (propertyType !== "plot") return null;
+
+  const plotUnits: string[] = cg.plotData[key] || [];
+
+  const unitCountMap = plotUnits.reduce(
+    (acc: Record<string, number>, unit: string) => {
+      acc[unit] = (acc[unit] || 0) + 1;
+      return acc;
+    },
+    {}
+  );
+
+  const sortedUnits = Object.entries(unitCountMap).sort(([unitA], [unitB]) =>
+    unitA.localeCompare(unitB)
+  );
+
   return (
-    propertyType === "plot" && (
-      <div>
-        <div className="flex items-center gap-1.5 p-2 rounded-md bg-[#EEF7FE] text-[#00487C] text-lg not-italic font-medium leading-[normal] capitalize mb-3">
-          {title} ({cg.plotData[keyCount]} Units)
-        </div>
-        <ul className="list-disc pl-8">
-          {cg.plotData.standardPlots &&
-            sortUnits(cg.plotData[key])?.map((item: any) => (
-              <li className="text-[#242424] text-[21px] not-italic font-semibold leading-[normal] capitalize">
-                {propertyType === "plot" ? item.split("_").join(" x ") : item}
-              </li>
-            ))}
-        </ul>
+    <div>
+      <div className="flex items-center gap-1.5 p-2 rounded-md bg-[#EEF7FE] text-[#00487C] text-lg not-italic font-medium leading-[normal] capitalize mb-3">
+        {title} ({cg.plotData[keyCount]} Units)
       </div>
-    )
+      <ul className="list-disc pl-8">
+        {sortedUnits.map(([unit, count]) => (
+          <li
+            key={unit}
+            className="text-[#242424] text-[21px] not-italic font-semibold leading-[normal]"
+          >
+            {unit.split("_").join(" x ")}ft{" "}
+            {type === "standard" && count > 1 && (
+              <span className="text-[#046DBA] text-xl not-italic font-medium leading-[normal] capitalize">
+                ({count} Units)
+              </span>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
