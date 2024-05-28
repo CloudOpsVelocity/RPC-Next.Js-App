@@ -19,17 +19,24 @@
 }
 
 .textInput {
-  color: var(--Black-2, #333);
+  height: 40px !important;
+  color: #212c33;
   font-family: Montserrat;
   font-size: 16px;
-  font-weight: 500;
-  opacity: 1;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.64px;
+  border-radius: 5px;
+  outline: 1px solid #92b2c8;
+  outline-offset: -2px;
+  background: #fff;
 }
 .textInput:focus::placeholder {
   color: transparent !important;
 }
 .textInput::placeholder {
-  color: #212c33;
+  color: #212c33 !important;
   font-family: Montserrat;
   font-size: 16px;
   font-style: normal;
@@ -40,10 +47,54 @@
 
 .textInput::-ms-input-placeholder {
   /* Edge 12-18 */
-  color: #556477 !important;
+  color: #212c33;
   font-family: Montserrat;
-  font-size: 18px;
+  font-size: 16px;
   font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.64px;
+}
+
+.error {
+  color: #f00;
+  font-family: Montserrat;
+  font-size: 12px;
+  font-style: italic;
   font-weight: 500;
   line-height: normal;
+  letter-spacing: 0.48px;
+  text-align: right;
+}
+
+.input {
+}
+.input:focus::placeholder {
+  color: transparent !important;
+}
+
+.input::placeholder {
+  color: #212c33 !important;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.64px;
+}
+.numInput {
+  padding-left: 73px;
+}
+.numInput:focus::placeholder {
+  color: transparent !important;
+}
+
+.numInput::placeholder {
+  color: #212c33 !important;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.64px;
 }

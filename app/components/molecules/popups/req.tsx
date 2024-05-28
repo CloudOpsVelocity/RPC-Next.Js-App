@@ -22,6 +22,7 @@ import { ReqcallbackMessage } from "../../project/success";
 import Styles from "@/app/styles/Qna.module.css";
 import clsx from "clsx";
 import { NearByDataAtom } from "@/app/store/nearby";
+import reqStyles from "@/app/styles/Req.module.css";
 const RequestCallBackModal = ({
   opened,
   close,
@@ -53,7 +54,7 @@ const RequestCallBackModal = ({
         opened={opened}
         onClose={handleClose}
         centered
-        size={isMobile ? "100%" : status !== "success" ? "55%" : "auto"}
+        size={isMobile ? "100%" : status !== "success" ? "65%" : "auto"}
         className="!rounded-full w-[90%]  md:w-[70%] lg:w-[65%] !p-0 "
         classNames={
           status === "success"
@@ -337,7 +338,7 @@ const ReqForm = ({
       }}
     />
   ) : (
-    <form className="w-full max-w-sm" onSubmit={form.onSubmit(formSubmit)}>
+    <form className="w-full max-w-md" onSubmit={form.onSubmit(formSubmit)}>
       <p className="text-[#EA7A00] text-base not-italic font-semibold leading-[normal] tracking-[0.64px] mb-[1%] ">
         Looks like you are not registered with us.
       </p>
@@ -350,27 +351,27 @@ const ReqForm = ({
       <h2 className="text-[#00487C] text-lg not-italic font-semibold leading-[normal] tracking-[0.72px] mb-[2%]">
         Your Details
       </h2>
-      <div className="flex flex-col ">
+      <div className="flex flex-col max-w-sm">
         <TextInput
           size="lg"
           label="Enter your name here"
           {...form.getInputProps("name")}
           placeholder="Enter your name here"
           classNames={{
-            input: N.input,
-            description: N.description,
-            wrapper: N.wrapper,
+            input: reqStyles.input,
             label: N.label,
+            error: reqStyles.error,
+            wrapper: reqStyles.wrapper,
           }}
           onBlur={(e) => handleTrimAndReplace(e, "name", form)}
         />
         <NumberInput
           mt={"lg"}
           classNames={{
-            input: N.contectInput,
-            description: N.description,
-            wrapper: N.wrapper,
+            input: reqStyles.numInput,
             label: N.label,
+            error: reqStyles.error,
+            wrapper: reqStyles.wrapper,
           }}
           hideControls
           size="lg"
@@ -404,10 +405,10 @@ const ReqForm = ({
           type="email"
           style={{ marginTop: "-10px" }}
           classNames={{
-            input: N.input,
-            description: N.description,
-            wrapper: N.wrapper,
+            input: reqStyles.input,
             label: N.label,
+            error: reqStyles.error,
+            wrapper: reqStyles.wrapper,
           }}
           onBlur={(e) => handleTrimAndReplace(e, "email", form)}
         />
