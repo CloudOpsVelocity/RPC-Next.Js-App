@@ -181,10 +181,10 @@ export default function FloorplanDrawer() {
             {/* Left */}
             <div>
               {" "}
-              <p className="text-[16px] text-right lg:text-[22px] text-[#148B16]  not-italic font-bold leading-[normal] mt-2">
+              <p className="text-[16px]  lg:text-[22px] text-[#148B16]  not-italic font-bold leading-[normal] mt-2">
                 {formatCurrency(cg?.minPrice)} - {formatCurrency(cg?.maxPrice)}
               </p>
-              <p className="text-[14px] lg:text-lg text-[#242424]  italic font-medium leading-[normal]">
+              <p className="text-[14px] lg:text-lg text-[#242424]   italic font-medium leading-[normal]">
                 ₹ {cg?.basePrice} Base Price/ sq.ft
               </p>
             </div>

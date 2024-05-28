@@ -574,7 +574,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                           handleOpen();
                         }}
                       >
-                        <p className="text-[12px] lg:text-[14px] font-[600] text-[#0073C6] underline ">
+                        <p className="text-[12px] lg:text-[14px] font-[600] text-[#0073C6] underline text-nowrap">
                           Click on image to open floor plan details
                         </p>
                       </div>
