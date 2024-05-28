@@ -566,9 +566,9 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                         selectedFloor?.plotArea &&
                         " | Area. " + selectedFloor?.plotArea + " sq.ft"}
                     </p>
-                    <div className="flex justify-center items-center  h-[240px] lg:h-[450px] w-full relative max-w-fit m-auto">
+                    <div className="flex justify-center items-center  h-[240px] lg:h-[450px] w-full relative max-w-fit m-auto min-w-[541px] max-h-[415px]">
                       <div
-                        className="bg-[#F4FBFF] p-x-[3px] p-1 rounded-[29px] gap-[6px] flex justify-end items-center  cursor-pointer absolute bottom-1 right-1"
+                        className="bg-[#F4FBFF] p-x-[3px] p-1 rounded-[29px] gap-[6px] flex justify-end items-center  cursor-pointer absolute bottom-1 right-1 "
                         onClick={(e) => {
                           e.stopPropagation();
                           handleOpen();
@@ -589,7 +589,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                               "?v" +
                               Math.random()) as string
                           }
-                          className="w-full h-full cursor-pointer  object-contain"
+                          className="w-full h-[100%] cursor-pointer  object-contain"
                           alt="image"
                         />
                       ) : (
