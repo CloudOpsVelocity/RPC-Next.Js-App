@@ -15,9 +15,10 @@ import clsx from "clsx";
 type Props = {
   callback: () => void;
   values: any;
+  builderName?: string;
 };
 
-export default function ReqOtpForm({ callback, values }: Props) {
+export default function ReqOtpForm({ callback, values, builderName }: Props) {
   const [error, setError] = useState(false);
 
   const form = useForm({
@@ -68,7 +69,7 @@ export default function ReqOtpForm({ callback, values }: Props) {
           Please verify your contact !
         </p>
         <p className="mt-2 text-[#148B16] text-base italic font-bold leading-[normal] tracking-[0.64px]">
-          Builder: Sarang By Sumadhura
+          Builder: {builderName}
         </p>
         <p className="text-[#4D6677] text-base not-italic font-semibold leading-[normal] tracking-[0.64px] mt-2">
           An OTP has been sent to your mobile number

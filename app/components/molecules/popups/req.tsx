@@ -150,6 +150,7 @@ const Content = ({
   source,
   builderName,
 }: any) => {
+  console.log(builderName);
   const { data: session } = useSession();
   return session ? (
     <LoggedInUserForm
@@ -169,7 +170,7 @@ const Content = ({
       projName={projName}
       source={source}
       builderName={builderName}
-      name={name}
+      name={builderName}
     />
   );
 };
@@ -308,6 +309,7 @@ const ReqForm = ({
     },
     validate: yupResolver(reqSchema),
   });
+
   const displayCountryCode = (value: any) => {
     console.log(value);
   };
@@ -325,6 +327,7 @@ const ReqForm = ({
   const onSuccess = async () => {
     setStatus("success");
   };
+  const bn = source === "projCard" ? reqData.builderName : name;
   return status === "success" ? (
     <Success close={close} />
   ) : status === "otp" ? (
@@ -336,6 +339,7 @@ const ReqForm = ({
         isProjContact: "Y",
         src: "searchCard",
       }}
+      builderName={bn}
     />
   ) : (
     <form className="w-full max-w-md" onSubmit={form.onSubmit(formSubmit)}>
@@ -346,7 +350,7 @@ const ReqForm = ({
         No worries add your details to get callback from builder
       </p>
       <p className="text-[#148B16] text-base italic font-bold leading-[normal] tracking-[0.64px] mb-[2%]">
-        Builder: {source === "projCard" ? reqData.builderName : name}
+        Builder: {bn}
       </p>
       <h2 className="text-[#00487C] text-lg not-italic font-semibold leading-[normal] tracking-[0.72px] mb-[2%]">
         Your Details
@@ -354,9 +358,9 @@ const ReqForm = ({
       <div className="flex flex-col max-w-sm">
         <TextInput
           size="lg"
-          label="Enter your name here"
+          label="Enter Your Name Here"
           {...form.getInputProps("name")}
-          placeholder="Enter your name here"
+          placeholder="Enter Your Name Here"
           classNames={{
             input: reqStyles.input,
             label: N.label,
@@ -377,7 +381,7 @@ const ReqForm = ({
           size="lg"
           className="w-[100%]  "
           label="Contact Number"
-          placeholder="Enter your contact number"
+          placeholder="Enter Your Contact Number"
           {...form.getInputProps("mobile")}
           maxLength={10}
           onPaste={(event) => {
@@ -401,7 +405,7 @@ const ReqForm = ({
           size="lg"
           label="Enter Your Email Here"
           {...form.getInputProps("email")}
-          placeholder="Enter your email here"
+          placeholder="Enter Your Email Here"
           type="email"
           style={{ marginTop: "-10px" }}
           classNames={{
