@@ -23,7 +23,6 @@ const Byunitblock: React.FC<Props> = ({
   data,
   form: { values, setValues, setFieldValue, getInputProps },
 }: Props) => {
-  console.log(values);
   const [floorsArray, setFloorsArray] = useAtom(unitFloorsAtom);
   const [, setFloor] = useAtom(selectedFloorAtom);
   const getOptions = (property: string): string[] => {
@@ -38,7 +37,20 @@ const Byunitblock: React.FC<Props> = ({
     if (data[0][property] != undefined) {
       // @ts-ignore
       return Array.from(
-        new Set(filteredData.map((item: any) => String(item[property])))
+        new Set(
+          filteredData.map((item: any) => {
+            if (
+              item.isBasement &&
+              (propCgId === 31 || propCgId === 33) &&
+              property === "floor"
+            ) {
+              return `B+G+${item[property]}`;
+            } else {
+              // Otherwise, return the value as is
+              return String(item[property]);
+            }
+          })
+        )
       ).sort();
     } else {
       return [];
@@ -317,7 +329,10 @@ const Byunitblock: React.FC<Props> = ({
                 ? { value: "0", label: "G" }
                 : propCgId == projectprops.rowHouse ||
                   propCgId == projectprops.villa
-                ? { value: item, label: `G+${item}` }
+                ? {
+                    value: item,
+                    label: `G+${item}`,
+                  }
                 : { value: item, label: item }
             )}
             searchable
