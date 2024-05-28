@@ -89,12 +89,18 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
               previousControlIcon={<DarkCarouseIcon />}
             >
               {images.map((imageUrl, index) => (
-                <Carousel.Slide key={index} className="relative">
+                <Carousel.Slide
+                  key={index}
+                  className="relative"
+                  h={680}
+                  w={"auto"}
+                >
                   <Image
-                    width={1000}
-                    height={200}
+                    // width={1000}
+                    // height={200}
                     alt="project image"
                     src={imageUrl}
+                    fill
                     className={`!w-full rounded-[10px]  h-[330px] lg:h-[680px] bg-gray-${
                       index + 1
                     }`}
