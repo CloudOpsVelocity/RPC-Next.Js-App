@@ -27,6 +27,7 @@ import {
 } from "@/app/images/commonSvgs";
 import { BACKEND_PROP_TYPES, projectprops } from "@/app/data/projectDetails";
 import { sortUnits } from "@/app/utils/unitparser";
+import { pluralizeOrSingularize } from "@/app/utils/plural";
 const iconStyles: string =
   " flex items-center justify-center w-[40px] h-[40px]  text-[#001F35]";
 export default function FloorplanDrawer() {
@@ -308,7 +309,8 @@ const PlotTable: React.FC<PlotTableProps> = ({
   return (
     <div>
       <div className="flex items-center gap-1.5 p-2 rounded-md bg-[#EEF7FE] text-[#00487C] text-lg not-italic font-medium leading-[normal] capitalize mb-3">
-        {config.headerIcon} {title} ({cg.plotData[keyCount]} Units)
+        {config.headerIcon} {title} ({cg.plotData[keyCount]}{" "}
+        {pluralizeOrSingularize(cg.plotData[keyCount] as number, "Units")})
       </div>
       <ul className="list-disc pl-8">
         {sortedUnits.map(([unit, count]) => {

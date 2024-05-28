@@ -22,6 +22,7 @@ import { useParams } from "next/navigation";
 import clsx from "clsx";
 import ShowUnitsButton from "./button/showUnits";
 import { countPlots } from "@/app/utils/count/plot";
+import { pluralizeOrSingularize } from "@/app/utils/plural";
 
 type Props = {
   cg: any;
@@ -126,7 +127,7 @@ export default function PropertyTypeDetailsCrad({
       className="flex  justify-between items-start min-h-[225px] w-[100%] max-w-[359px] lg:max-w-[510px] rounded-[24px] shadow-md pr-[1%] pl-[1%] mt-[70px] bg-gradient-to-l from-[#EFF5FF] /50 to-[#F2FAFF]/50 mb-[2%] cursor-pointer"
       onClick={() => updateValues(phase, getPropId(propertyType as string))}
     >
-      <div className="leftSection max-w-[53%] flex flex-col justify-between min-h-[225px]">
+      <div className="leftSection max-w-[52%] flex flex-col justify-between min-h-[225px]">
         <div className="max-w-[90px] lg:max-w-[115px] w-full h-[90px] lg:h-[115px] border-solid border-1 border-[#FFF] rounded-full bg-[#c9daee] relative bottom-[50px] lg:bottom-[60px] mb-[-40px]">
           <Image
             width={90}
@@ -202,11 +203,21 @@ export default function PropertyTypeDetailsCrad({
             <>
               <p className="text-[#242424] text-right text-base not-italic font-semibold leading-[normal]">
                 {plotCounts?.standardPlotCount > 0 &&
-                  `Standard Plot : ${plotCounts?.standardPlotCount} Units`}
+                  `Standard Plot : ${
+                    plotCounts?.standardPlotCount
+                  } ${pluralizeOrSingularize(
+                    plotCounts?.standardPlotCount,
+                    "Units"
+                  )} `}
               </p>
               <p className="text-[#242424] text-right text-base not-italic font-semibold leading-[normal] min-h-[19px]">
                 {plotCounts?.oddPlotCount > 0 &&
-                  `Odd Plot : ${plotCounts?.oddPlotCount} Units`}
+                  `Odd Plot : ${
+                    plotCounts?.oddPlotCount
+                  } ${pluralizeOrSingularize(
+                    plotCounts?.oddPlotCount,
+                    "Units"
+                  )}`}
               </p>
             </>
           )}
