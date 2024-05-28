@@ -201,10 +201,12 @@ export default function PropertyTypeDetailsCrad({
           ) : (
             <>
               <p className="text-[#242424] text-right text-base not-italic font-semibold leading-[normal]">
-                Standard Plot : {plotCounts?.standardPlotCount} Units
+                {plotCounts?.standardPlotCount > 0 &&
+                  `Standard Plot : ${plotCounts?.standardPlotCount} Units`}
               </p>
-              <p className="text-[#242424] text-right text-base not-italic font-semibold leading-[normal]">
-                Odd Plot : {plotCounts?.oddPlotCount} Units
+              <p className="text-[#242424] text-right text-base not-italic font-semibold leading-[normal] min-h-[19px]">
+                {plotCounts?.oddPlotCount > 0 &&
+                  `Odd Plot : ${plotCounts?.oddPlotCount} Units`}
               </p>
             </>
           )}

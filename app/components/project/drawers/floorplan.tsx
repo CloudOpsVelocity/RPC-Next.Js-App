@@ -31,7 +31,6 @@ const iconStyles: string =
   " flex items-center justify-center w-[40px] h-[40px]  text-[#001F35]";
 export default function FloorplanDrawer() {
   const [cg, setData] = useAtom(overviewAtom);
-  console.log(cg.plotData);
   const getIcon = (id: number) => {
     let iconComponent;
     switch (id) {
@@ -242,16 +241,25 @@ const Table = ({ data, propertyType, cg }: any) => {
               ))}
           </ul>
         )}
-        <PlotTable
-          data={data}
-          propertyType={propertyType}
-          cg={cg}
-          type="standard"
-        />
         {propertyType === "plot" && cg?.plotData?.standardPlotCount > 0 && (
-          <Divider orientation="vertical" color="#92B2C8" mx={10} />
+          <PlotTable
+            data={data}
+            propertyType={propertyType}
+            cg={cg}
+            type="standard"
+          />
         )}
-        <PlotTable data={data} propertyType={propertyType} cg={cg} type="odd" />
+        {propertyType === "plot" &&
+          (cg?.plotData?.standardPlotCount && cg?.plotData?.oddPlotCount) >
+            0 && <Divider orientation="vertical" color="#92B2C8" mx={10} />}
+        {propertyType === "plot" && cg?.plotData?.oddPlotCount > 0 && (
+          <PlotTable
+            data={data}
+            propertyType={propertyType}
+            cg={cg}
+            type="odd"
+          />
+        )}
       </div>
     </div>
   );
@@ -297,27 +305,77 @@ const PlotTable: React.FC<PlotTableProps> = ({
   const sortedUnits = Object.entries(unitCountMap).sort(([unitA], [unitB]) =>
     unitA.localeCompare(unitB)
   );
-
   return (
     <div>
       <div className="flex items-center gap-1.5 p-2 rounded-md bg-[#EEF7FE] text-[#00487C] text-lg not-italic font-medium leading-[normal] capitalize mb-3">
-        {title} ({cg.plotData[keyCount]} Units)
+        {config.headerIcon} {title} ({cg.plotData[keyCount]} Units)
       </div>
       <ul className="list-disc pl-8">
-        {sortedUnits.map(([unit, count]) => (
-          <li
-            key={unit}
-            className="text-[#242424] text-[21px] not-italic font-semibold leading-[normal]"
-          >
-            {unit.split("_").join(" x ")}ft{" "}
-            {type === "standard" && count > 1 && (
-              <span className="text-[#046DBA] text-xl not-italic font-medium leading-[normal] capitalize">
-                ({count} Units)
-              </span>
-            )}
-          </li>
-        ))}
+        {sortedUnits.map(([unit, count]) => {
+          const [length, width] = unit.split("_");
+          return (
+            <li
+              key={unit}
+              className="text-[#242424] text-[21px] not-italic font-semibold leading-[normal]"
+            >
+              {length}ft x {width}ft{" "}
+              {type === "standard" && count > 1 && (
+                <span className="text-[#046DBA] text-xl not-italic font-medium leading-[normal] capitalize">
+                  ({count} Units)
+                </span>
+              )}
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
+};
+
+const config = {
+  headerIcon: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
+      fill="none"
+    >
+      <path
+        d="M16.25 2.5H3.75C3.05964 2.5 2.5 3.05964 2.5 3.75V16.25C2.5 16.9404 3.05964 17.5 3.75 17.5H16.25C16.9404 17.5 17.5 16.9404 17.5 16.25V3.75C17.5 3.05964 16.9404 2.5 16.25 2.5Z"
+        stroke="#2A4C70"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M11.6667 2.5L2.5 11.6667"
+        stroke="#2A4C70"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M17.4997 8.33356L8.33301 17.5002"
+        stroke="#2A4C70"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M16.6663 3.33356L3.33301 16.6669"
+        stroke="#2A4C70"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M5 9.16644L7.91667 12.0831"
+        stroke="#2A4C70"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M12.083 7.91644L14.9997 10.8331"
+        stroke="#2A4C70"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  ),
 };
