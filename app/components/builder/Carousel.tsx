@@ -11,6 +11,8 @@ import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import { useShortlistAndCompare } from "@/app/hooks/storage";
 import LoginPopup from "../project/modals/LoginPop";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
+import { useSetAtom } from "jotai";
+import { NearByDataAtom } from "@/app/store/nearby";
 
 type Props = {
   type: string;
@@ -32,6 +34,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
   const [isShorlited, setShorlited] = React.useState(cardData.shortListed);
   const { toggleShortlist } = useShortlistAndCompare();
   const [, { open: openShort }] = usePopShortList();
+  const setPopReqData = useSetAtom(NearByDataAtom);
 
   const isItemInShortlist = isShorlited === "Y";
 
@@ -48,6 +51,13 @@ export function ProjectCard({ type, cardData }: CardProps) {
     } else {
       openShort();
     }
+  };
+  const handleReqCallbackOpen = () => {
+    open("card", cardData.projIdEnc, "projCard");
+    setPopReqData({
+      builderName: cardData.companyName,
+      projName: cardData.projectName,
+    });
   };
   return (
     <>
@@ -162,7 +172,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
               icon={<Phone />}
               title="Request a Callback"
               buttonClass=" text-[#FFF] mt-[12px] text-[16px] font-[600] bg-[#0073C6] rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[6px]  "
-              onChange={() => open("card", cardData.projIdEnc, "projCard")}
+              onChange={handleReqCallbackOpen}
             />
           </div>
         </div>

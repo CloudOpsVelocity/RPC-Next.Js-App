@@ -16,14 +16,14 @@ export default function OverviewBanner({
   minPrice,
   maxPrice,
   name,
-  builderId,
+  buiderName,
   basePrice,
   brocherUrl,
 }: {
   minPrice: number;
   maxPrice: number;
   name: string;
-  builderId: number;
+  buiderName: string;
   basePrice: number;
   brocherUrl?: string;
 }) {
@@ -66,7 +66,7 @@ export default function OverviewBanner({
         <RequestCallBackModal
           close={close}
           opened={opened}
-          builderId={builderId}
+          builderName={buiderName}
           name={name}
           source={source}
         />

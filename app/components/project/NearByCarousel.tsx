@@ -39,6 +39,7 @@ export default function NearByCarousel({
             : []
         }
         mutate={mutate}
+        builderName={builderData?.data.companyName}
         ct="builder"
       />
       <ProjectCarousel
@@ -52,6 +53,7 @@ export default function NearByCarousel({
             : []
         }
         mutate={mutate}
+        builderName={builderData?.data.companyName}
         ct="proj"
       />
     </div>

@@ -32,6 +32,7 @@ export interface Main {
   saleListing: string;
   rentListing: string;
   state: string;
+  companyName: string;
 }
 
 export interface AmenityList {

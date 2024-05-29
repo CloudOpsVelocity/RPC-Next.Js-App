@@ -26,22 +26,20 @@ import reqStyles from "@/app/styles/Req.module.css";
 const RequestCallBackModal = ({
   opened,
   close,
-  builderId,
+  builderName,
   name,
   source,
 }: {
   opened: any;
   close: any;
-  builderId: number;
+  builderName: string;
   name?: string;
   source: string;
 }) => {
   const isMobile = useMediaQuery("(max-width: 750px)");
-  const { data } = useBuilder({ id: builderId, y: "N" });
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error" | "otp"
   >("idle");
-
   const handleClose = () => {
     close();
     setTimeout(() => {
@@ -115,9 +113,9 @@ const RequestCallBackModal = ({
                     close={close}
                     status={status}
                     setStatus={setStatus}
-                    name={data?.data?.ceoName ?? ""}
+                    name={builderName}
                     projName={name}
-                    builderName={data?.data.companyName ?? ""}
+                    builderName={builderName}
                     source={source}
                   />
                 </div>

@@ -75,7 +75,7 @@ export default function PropertyOverviewBanner({
         <RequestCallBackModal
           close={close}
           opened={opened}
-          builderId={1112}
+          builderName="Next Js"
           source={source}
         />
       </div>

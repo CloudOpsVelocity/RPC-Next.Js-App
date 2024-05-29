@@ -48,7 +48,7 @@ export default async function Page({ params: { slug } }: Props) {
               name={data?.data?.companyName}
             />
           </div>
-          <Reqcallback builderId={Number(slug) as number} />
+          <Reqcallback builderName={data.data.companyName} />
 
           <Footer />
           <ProjectDrawer projName={data?.data?.companyName} />

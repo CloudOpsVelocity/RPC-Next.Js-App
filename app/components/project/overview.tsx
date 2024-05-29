@@ -40,6 +40,7 @@ export default function Overview({
   state,
   basePrice,
   media,
+  companyName,
 }: Main) {
   const { PhaseOverview, phaseList } = usePhaseWiseOverview();
   return (
@@ -161,7 +162,7 @@ export default function Overview({
         maxPrice={maxPrice}
         minPrice={minPrice}
         name={projectName}
-        builderId={builderId}
+        buiderName={companyName}
         basePrice={basePrice}
         brocherUrl={media.projBroucherUrl}
       />

@@ -23,6 +23,7 @@ type Props = {
   data?: any;
   mutate?: ({ id }: { id: string; type: "builder" | "proj" }) => void;
   ct?: "builder" | "proj";
+  builderName?: string;
 };
 
 type CardProps = {
@@ -69,6 +70,7 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
       projName: name,
     });
   };
+  console.log(name);
   return (
     <>
       <div
@@ -225,6 +227,7 @@ const ProjectCarousel = ({
   data,
   mutate,
   ct,
+  builderName,
 }: Props) => {
   return (
     data?.length > 0 && (
