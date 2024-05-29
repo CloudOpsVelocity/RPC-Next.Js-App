@@ -104,6 +104,7 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
                     className={`!w-full rounded-[10px]  h-[330px] lg:h-[680px] bg-gray-${
                       index + 1
                     }`}
+                    quality={100}
                   />
                 </Carousel.Slide>
               ))}

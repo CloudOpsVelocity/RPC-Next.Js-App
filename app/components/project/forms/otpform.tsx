@@ -38,6 +38,7 @@ export default function ReqOtpForm({ callback, values, builderName }: Props) {
 
   const onSubmit = async (value: any) => {
     if (form.values.otp.toString().length == 4) {
+      console.log(values);
       const data = await sendContact({ ...values, otp: value.otp });
       console.log(data);
       if (data?.status) {

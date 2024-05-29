@@ -150,7 +150,6 @@ const Content = ({
   source,
   builderName,
 }: any) => {
-  console.log(builderName);
   const { data: session } = useSession();
   return session ? (
     <LoggedInUserForm
@@ -197,8 +196,8 @@ const LoggedInUserForm = ({
     },
     validate: yupResolver(reqSchema),
   });
+  const propName = popupState.type === "prop" ? "propIdEnc" : "projIdEnc";
   const onSubmit = async () => {
-    const propName = popupState.type === "prop" ? "propIdEnc" : "projIdEnc";
     setStatus("pending");
     const data = {
       name: session?.user?.name,
@@ -224,7 +223,6 @@ const LoggedInUserForm = ({
     close();
   };
   const reqData = useAtomValue(NearByDataAtom);
-  console.log(projName, reqData, source);
   return status === "otp" ? (
     <ReqOtpForm
       callback={onSuccess}
@@ -232,7 +230,7 @@ const LoggedInUserForm = ({
         name: session?.user?.name,
         email: session?.user?.email,
         mobile: session?.user?.userName,
-        projIdEnc: slug,
+        [propName]: popupState.projectID ?? "",
         isProjContact: "Y",
         src: "searchCard",
       }}
@@ -300,6 +298,7 @@ const ReqForm = ({
   builderName: string;
 }) => {
   const { slug } = useParams<{ slug: string }>();
+  const popupState = useAtomValue(popupStateAtom);
   const reqData = useAtomValue(NearByDataAtom);
   const form = useForm({
     initialValues: {
@@ -313,12 +312,13 @@ const ReqForm = ({
   const displayCountryCode = (value: any) => {
     console.log(value);
   };
+  const propName = popupState.type === "prop" ? "propIdEnc" : "projIdEnc";
   const formSubmit = async (values: any) => {
     setStatus("pending");
     const data = await addContact({
       ...values,
       isProjContact: "Y",
-      projIdEnc: slug,
+      [propName]: popupState.projectID,
       src: "searchcard",
     });
     console.log(data);
@@ -328,6 +328,7 @@ const ReqForm = ({
     setStatus("success");
   };
   const bn = source === "projCard" ? reqData.builderName : name;
+
   return status === "success" ? (
     <Success close={close} />
   ) : status === "otp" ? (
@@ -335,7 +336,7 @@ const ReqForm = ({
       callback={onSuccess}
       values={{
         ...form.values,
-        projIdEnc: slug,
+        [propName]: popupState.projectID,
         isProjContact: "Y",
         src: "searchCard",
       }}

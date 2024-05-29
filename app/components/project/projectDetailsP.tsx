@@ -87,7 +87,7 @@ export default function ProjectDetailsP({ projName }: Props) {
         />
       )}
       {phaseList?.length > 1 && (
-        <div className="flex justify-start items-start flex-wrap w-[80%]">
+        <div className="flex justify-start items-start flex-wrap w-full">
           {selectedPhase && (
             <>
               <ProjBasicDetails
