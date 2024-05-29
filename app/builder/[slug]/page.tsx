@@ -43,7 +43,6 @@ export default async function Page({ params: { slug } }: Props) {
                 data={data?.data?.builderProjects}
               />
             )}
-            {JSON.stringify(data?.data?.builderProjects)}
             <BuildersBlock
               data={data?.data?.otherBuilder}
               name={data?.data?.companyName}
