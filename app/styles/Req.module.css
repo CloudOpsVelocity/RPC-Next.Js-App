@@ -83,7 +83,7 @@
   letter-spacing: 0.64px;
 }
 .numInput {
-  padding-left: 73px;
+  padding-left: 63px;
 }
 .numInput:focus::placeholder {
   color: transparent !important;

@@ -91,7 +91,8 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
           {TeleGramBlack} Builder Address{" "}
         </p>
         <p className="  text-[18px] lg:text-[20px]  mt-[1%]  mb-[14px] text-[#242424] text-2xl italic font-medium leading-8 md:mb-[2%] ">
-          {nzData.builderAddress} {nzData.city}, {nzData.state} {nzData.pincode}
+          {nzData.builderAddress}, {nzData.city}, {nzData.state},{" "}
+          {nzData.pincode}
         </p>
         <Link
           className=" bg-[#0073C6] rounded-[4px] text-[#FFF] text-[18px] lg:text-[20px] font-[700] p-[10px]  "

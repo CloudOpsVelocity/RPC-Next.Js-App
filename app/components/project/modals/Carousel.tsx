@@ -125,10 +125,17 @@ const MiddleSection = ({
           selectedFloor?.towerName != "NA" &&
           " | Tower " + selectedFloor?.towerName}
         {propCgId != projectprops.plot &&
-          " | Floor " +
+          ` | ${
+            propCgId == projectprops.rowHouse || propCgId == projectprops.villa
+              ? "Elevation"
+              : "Floor"
+          } ` +
             `${
               selectedFloor?.floor?.toString() === "0"
                 ? "G"
+                : propCgId == projectprops.rowHouse ||
+                  propCgId == projectprops.villa
+                ? "G+" + selectedFloor?.floor
                 : selectedFloor?.floor
             }`}
         {selectedFloor?.unitNumber &&

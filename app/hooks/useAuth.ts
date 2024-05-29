@@ -71,7 +71,7 @@ export default function useAuth({
   const router = useRouter();
 
   const redirectPath = getCallPath();
-
+  console.log(router, redirectPath);
   const loginWithCredentials = async (data: Login): Promise<any> => {
     const encryptedPassword = CryptoJS.AES.encrypt(
       data.password,

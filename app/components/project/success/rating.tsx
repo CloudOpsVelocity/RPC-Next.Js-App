@@ -143,6 +143,11 @@ export const RatingForm = ({
             rows={4}
             // maxLength={200}
             {...form.getInputProps("review")}
+            styles={{
+              input: {
+                color: "black",
+              },
+            }}
             onBlur={(e) => handleTrimAndReplace(e, "review", form)}
           />
         </div>

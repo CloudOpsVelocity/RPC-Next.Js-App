@@ -12,9 +12,11 @@ import { useMediaQuery } from "@mantine/hooks";
 export default function Amenties({
   data,
   type,
+  projName,
 }: {
   data: AmenityList[];
   type?: string;
+  projName: string;
 }) {
   const { data: amenitiesFromDB, error, isLoading } = useAmenities();
 
@@ -25,7 +27,7 @@ export default function Amenties({
       expanded: !prev.expanded,
       content: { data: data, amenitiesFromDB: amenitiesFromDB },
       type: "array",
-      title: "Amenities",
+      title: "Amenities Of",
     }));
   };
   const isMobile = useMediaQuery(`(max-width: 750px)`);
@@ -45,7 +47,12 @@ export default function Amenties({
         ) : (
           <>
             {" "}
-            <h2 className="text-[20px] md:text-2xl font-semibold">AMENITIES</h2>
+            <h2 className="text-[20px] md:text-2xl font-semibold">
+              AMENITIES Of{" "}
+              <span className="text-[#148B16] text-[20px] md:text-2xl not-italic font-bold leading-[normal] uppercase">
+                {projName}
+              </span>
+            </h2>
             <p className="text-[#4D6677] text-[16px] md:text-2xl italic font-medium leading-[normal] tracking-[0.96px] mt-2 mb-[40px]">
               Experience the ultimate in comfort with our amenities
             </p>

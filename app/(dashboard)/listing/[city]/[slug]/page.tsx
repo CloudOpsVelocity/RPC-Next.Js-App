@@ -85,6 +85,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         />
         {data?.amenities?.length > 0 && (
           <Amenties
+            projName="Listing"
             type="prop"
             data={data?.amenities?.map((item) => {
               return { id: item, name: String(item) };

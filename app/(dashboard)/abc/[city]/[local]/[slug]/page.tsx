@@ -143,7 +143,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           media={data.media}
         />
         <ErrorContainer data={data.amenityList}>
-          <Amenties data={data.amenityList} />
+          <Amenties data={data.amenityList} projName={data.projectName} />
         </ErrorContainer>
 
         {data.lat && data.lang && (

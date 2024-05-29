@@ -17,7 +17,7 @@ const reqSchema = yup.object().shape({
     .string()
     .matches(/^[a-zA-Z\s]*$/, "Only letters and spaces are allowed")
     .max(20, "Name should not exceed 20 characters")
-    .required("Enter Your name"),
+    .required("Enter Your Name"),
   email: yup
     .string()
     .matches(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, "Invalid email")

@@ -20,6 +20,7 @@ export const getBuilderDetails = async (
       : {};
     const response = await fetch(url, {
       cache: "no-store",
+      next: { tags: [`${slug}`] },
       ...options,
     });
     const data: Main = await response.json();

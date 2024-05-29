@@ -390,8 +390,17 @@ const ReqForm = ({
             form.setFieldValue("mobile", first10Digits as any);
           }}
         />
-
-        <CountryInput
+        <p
+          className={`focus:outline-none min-w-[30px] max-w-[70px] border-t-0 border-l-0 h-[27px] border-b-0 border-r-[#4D6677] border-[2px] border-solid self-start relative mt-[2%] pl-2 pr-3 ${
+            (form.errors.mobile != undefined && form.errors.mobile != null) ||
+            status === "error"
+              ? "bottom-[65px]"
+              : "bottom-[45px]"
+          }  ml-[2px]`}
+        >
+          + 91
+        </p>
+        {/* <CountryInput
           onSelect={displayCountryCode}
           className={`focus:outline-none min-w-[30px] max-w-[70px] border-t-0 border-l-0 h-[27px] border-b-0 border-r-[#4D6677] border-[2px] border-solid self-start relative mt-[2%] ${
             (form.errors.mobile != undefined && form.errors.mobile != null) ||
@@ -399,7 +408,7 @@ const ReqForm = ({
               ? "bottom-[65px]"
               : "bottom-[45px]"
           }  ml-[2px]`}
-        />
+        /> */}
         <TextInput
           size="lg"
           label="Enter Your Email Here"

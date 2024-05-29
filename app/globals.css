@@ -138,3 +138,7 @@
   border: 0.5px solid #bfe4fd;
   background: linear-gradient(100deg, #fbfdff 0%, #def2ff 99.34%);
 }
+
+.loginBg {
+  background: linear-gradient(287deg, #c5e7ff 0%, #f1f9ff 100%);
+}

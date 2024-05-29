@@ -22,6 +22,9 @@ import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import CryptoJS from "crypto-js";
 import usePathToOrigin from "@/app/hooks/custom/useRedirect";
 import StepCss from "@/app/styles/Stepper.module.css";
+import { usePathname } from "next/navigation";
+import { revalidatePath } from "next/cache";
+import axios from "axios";
 
 const schema = yup.object().shape({
   username: yup
@@ -50,7 +53,7 @@ interface Login {
 }
 function LoginPopupForm({ closePopup }: { closePopup?: () => void }) {
   const [opened, { close }] = usePopShortList();
-
+  const path = usePathname();
   const [state, setState] = useState<"idle" | "pending" | "success">("idle");
   const form = useForm({
     initialValues: { username: "", password: "" },
@@ -72,6 +75,9 @@ function LoginPopupForm({ closePopup }: { closePopup?: () => void }) {
       redirect: false,
     });
     if (res?.ok) {
+      if (path.includes("builder")) {
+        axios.post("/api/revalidate", { id: path.split("/").pop() });
+      }
       close();
     } else {
       const errorsParam =

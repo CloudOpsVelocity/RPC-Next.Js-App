@@ -70,7 +70,6 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
       projName: name,
     });
   };
-  console.log(name);
   return (
     <>
       <div
@@ -168,13 +167,13 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
               </p>
             )}
 
-            {cardData.propTypes ? (
+            {/* {cardData.propTypes ? (
               <p className="mb-[6px] text-[#00487C] text-sm not-italic font-semibold leading-[normal] tracking-[0.56px]">
-                {cardData.propTypes.map((item: any) => item.trim()).join(", ")}
+                {cardData.propTypes.map((item: any) => item.trim()).join(",")}
               </p>
             ) : (
               "N/A"
-            )}
+            )} */}
 
             {type != "proj" && (
               <p className="text-[16px] mb-[6px] font-[600] text-[#4D6677]">
@@ -183,8 +182,9 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
             )}
 
             <p className="text-[#565D70]  not-italic font-semibold leading-[normal] tracking-[0.56px]">
-              {type === "proj" && cardData?.city}, {cardData.locality}{" "}
-              {cardData.address}
+              {type === "proj" &&
+                `${cardData?.city}, ${cardData.locality}, ${cardData.address}`}
+
               {type === "prop " &&
                 `${cardData.ltName}   
                 ${cardData.ctName} 
