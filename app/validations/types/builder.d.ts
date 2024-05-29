@@ -24,6 +24,9 @@ export interface Data {
   mobile: number;
   logoUrl: string | null;
   shortListed: "Y" | "N";
+  stateName: string;
+  cityName: string;
+  pinCode: string;
 }
 
 export interface BuilderProject {

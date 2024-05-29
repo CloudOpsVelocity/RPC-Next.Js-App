@@ -23,6 +23,9 @@ export default function ProjectDetails({
   completedProject,
   email,
   mobile,
+  stateName,
+  cityName,
+  pinCode,
 }: Data) {
   return (
     <React.Fragment>
@@ -103,7 +106,7 @@ export default function ProjectDetails({
           </a>
         </div>
 
-        <div className="flex justify-start items-start flex-col mb-[2%] w-[100%] md:w-[40%] ">
+        <div className="flex justify-start items-start flex-col mb-[2%] w-[100%] md:w-[45%] ">
           <p className="inline-flex justify-center items-center gap-1 rounded-[20px] p-2 bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 space-x-2 mb-2">
             {lacationIconSvg}{" "}
             <span className="text-[#303030] text-2xl not-italic font-medium leading-[normal] tracking-[0.96px]">
@@ -111,7 +114,7 @@ export default function ProjectDetails({
             </span>
           </p>
           <p className="text-[#00487C] text-xl not-italic font-semibold leading-8 pl-2">
-            {builderAddress}
+            {`${builderAddress}, ${cityName}, ${stateName}, ${pinCode}`}
           </p>
         </div>
       </div>
