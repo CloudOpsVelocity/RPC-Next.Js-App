@@ -65,7 +65,7 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
   const handleReqCall = () => {
     open(type, reqId, "projCard");
     setPopReqData({
-      builderName: cardData.postedByName,
+      builderName: cardData.companyName,
       projName: name,
     });
   };
@@ -181,10 +181,10 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
             )}
 
             <p className="text-[#565D70]  not-italic font-semibold leading-[normal] tracking-[0.56px]">
-              {type === "proj" && cardData?.city}
-              {cardData.locality} {cardData.address}
+              {type === "proj" && cardData?.city}, {cardData.locality}{" "}
+              {cardData.address}
               {type === "prop " &&
-                `${cardData.ltName} 
+                `${cardData.ltName}   
                 ${cardData.ctName} 
                 ${cardData.stateName ?? ""} 
                 ${cardData.pinCode}`}
