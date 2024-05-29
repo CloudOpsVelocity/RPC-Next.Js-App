@@ -11,6 +11,9 @@ import Reqcallback from "@/app/components/builder/Reqcallback";
 import ProjectDrawer from "@/app/components/project/Drawer";
 import dynamic from "next/dynamic";
 import SectionSkeleton from "@/app/components/atoms/skeleton/section";
+import { getCookie } from "cookies-next";
+import { cookies } from "next/headers";
+
 const LoginPopup = dynamic(
   () => import("@/app/components/project/modals/LoginPop"),
   {
@@ -21,7 +24,8 @@ const LoginPopup = dynamic(
 type Props = { params: { slug: string } };
 
 export default async function Page({ params: { slug } }: Props) {
-  const data = await getBuilderDetails(slug, "Y", "proj");
+  const token = cookies().get("token")?.value;
+  const data = await getBuilderDetails(slug, "Y", "proj", token);
 
   return (
     <div className="flex flex-col justify-start items-center w-full mt-[90px]  ">

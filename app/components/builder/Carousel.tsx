@@ -45,7 +45,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
         id: cardData.projIdEnc,
         status,
       });
-      if (data.status) {
+      if (data?.status) {
         setShorlited(status);
       }
     } else {
