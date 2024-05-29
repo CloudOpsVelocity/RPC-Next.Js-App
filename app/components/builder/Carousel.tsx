@@ -29,21 +29,22 @@ type CardProps = {
 export function ProjectCard({ type, cardData }: CardProps) {
   const [, { open }] = useReqCallPopup();
   const { data: session } = useSession();
-  const { toggleShortlist, shortlistedItems } = useShortlistAndCompare();
+  const [isShorlited, setShorlited] = React.useState(cardData.shortListed);
+  const { toggleShortlist } = useShortlistAndCompare();
   const [, { open: openShort }] = usePopShortList();
 
-  const isItemInShortlist =
-    shortlistedItems.length > 0 &&
-    shortlistedItems.some(
-      (item) => item.id === cardData.projIdEnc && item.status === "Y"
-    );
+  const isItemInShortlist = isShorlited === "Y";
 
-  const onAddingShortList = () => {
+  const onAddingShortList = async () => {
     if (session) {
-      toggleShortlist({
+      const status = isItemInShortlist ? "N" : "Y";
+      const data = await toggleShortlist({
         id: cardData.projIdEnc,
-        status: isItemInShortlist ? "N" : "Y",
+        status,
       });
+      if (data.status) {
+        setShorlited(status);
+      }
     } else {
       openShort();
     }

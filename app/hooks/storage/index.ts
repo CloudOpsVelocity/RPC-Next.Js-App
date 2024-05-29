@@ -16,7 +16,7 @@ interface GlobalData {
 interface HookReturnValue {
   shortlistedItems: Item[];
   compareItems: Item[];
-  toggleShortlist: (item: Item) => void;
+  toggleShortlist: (item: Item) => any;
   toggleCompare: (item: Item) => void;
   pushToRequestCallbacks: (id: string, callback: () => void) => void;
   isCallbackSubmitted: (id: string) => boolean;
@@ -32,27 +32,14 @@ export const useShortlistAndCompare = (): HookReturnValue => {
     },
   });
 
-  const addOrUpdateItem = (
+  const addOrUpdateItem = async (
     itemName: keyof GlobalData,
     item: Item,
     callback: (updatedItems: Item[]) => void
-  ): void => {
+  ): Promise<any> => {
     const updatedItems = [...globalData[itemName]];
-    // const itemIndex = updatedItems.findIndex(
-    //   (existingItem) => existingItem.id === item.id
-    // );
-
-    // if (itemIndex === -1) {
-    //   // Item doesn't exist, add it
-    //   updatedItems.push({ ...item, status: "Y" });
-    // } else {
-    //   // Item exists, update its status
-    //   updatedItems[itemIndex].status =
-    //     updatedItems[itemIndex].status === "Y" ? "N" : "Y";
-    // }
-
-    // setGlobalData({ ...globalData, [itemName]: updatedItems });
-    callback(updatedItems);
+    const data = await callback(updatedItems);
+    return data;
   };
 
   const pushToRequestCallbacks = (id: string, callback: () => void): void => {

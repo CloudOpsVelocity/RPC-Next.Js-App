@@ -23,6 +23,7 @@ export interface Data {
   email: string;
   mobile: number;
   logoUrl: string | null;
+  shortListed: "Y" | "N";
 }
 
 export interface BuilderProject {
