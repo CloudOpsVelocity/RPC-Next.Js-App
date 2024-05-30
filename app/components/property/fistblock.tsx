@@ -57,7 +57,7 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
               </span>{" "}
             </p>
             <div className="mt-4">
-              <SharePopup title="Share Listing" />
+              <SharePopup title="Share Listing" className="text-xl" />
             </div>
           </div>
           <div className="relative w-full rounded-[10px]">

@@ -137,6 +137,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             lng={projData?.lang}
             projId={data.propIdEnc}
             builderId={projData?.builderId}
+            company={projData?.companyName}
           />
         )}
         <PriceBreakup otherPrice={data.otherPrice} price={data.price} />

@@ -8,18 +8,20 @@ export default function useNearby({
   lng,
   projId,
   builderId,
+  company,
 }: {
   lat: string;
   lng: string;
   projId?: string;
   builderId?: number;
+  company?: string;
 }) {
   const { slug } = useParams<{ slug: string }>();
   const getData = async () => {
     const res = await axios.get(
       `${BACKEND_BASE_URL}/api/project/nearbyProjects?lat=${lat}&lng=${lng}&projIdEnc=${
         projId || slug
-      }&builderId=${builderId || ""}`
+      }&builderId=${builderId || ""}&companyName=${company || ""}`
     );
     return res.data;
   };

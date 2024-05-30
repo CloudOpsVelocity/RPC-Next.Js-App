@@ -188,6 +188,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           lat={data.lat}
           lng={data.lang}
           builderId={data.builderId}
+          company={data.companyName}
         />
         <ProjectDrawer projName={data.projectName} />
         <FloorplanDrawer />
@@ -198,4 +199,4 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
   );
 }
 
-export const fetchCache = "force-no-store";
+// export const fetchCache = "force-no-store";
