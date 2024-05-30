@@ -18,7 +18,6 @@ import ListItem from "./pricingbreakup";
 import { usePricingPop } from "@/app/hooks/property/usePricingPop";
 export default function PropertyOverviewBanner({
   price,
-  otherPrice,
   propTypeName,
   plotArea,
   sba,
@@ -41,8 +40,10 @@ export default function PropertyOverviewBanner({
         <div className="flex justify-center sm:justify-between items-center w-[100%] flex-row ml-[3%] p-[2%] flex-wrap">
           <div className="">
             <p className="text-[#212C33] text-[24px] lg:text-[40px] font-[600]">
-              Sell Price{"  "}
-              <br />
+              {" "}
+              Sell Price
+            </p>
+            <p className="text-[#212C33] text-[24px] lg:text-[40px] font-[600]">
               <span className="text-[#00487C] text-[24px] md:text-[32px] lg:text-[40px] whitespace-nowrap font-[700]">
                 {formatCurrency(price)},{" "}
                 <span className="text-[#545353] text-lg md:text-[32px] not-italic font-medium leading-[normal]">
@@ -51,9 +52,9 @@ export default function PropertyOverviewBanner({
               </span>
             </p>
             <Button
-              icon={<Phone />}
+              icon={<Phone className="mr-1" />}
               title="Request a Callback"
-              buttonClass=" text-[#FFF] text-[16px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[6px]  "
+              buttonClass=" text-[#FFF] text-[26px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[16px]  mt-3"
               onChange={() => open("prop", slug, "projBanner")}
             />
           </div>
