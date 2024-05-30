@@ -1,10 +1,6 @@
-import React, { useEffect, useId, useRef, useState } from "react";
-import { Button, Select } from "@mantine/core";
-import {
-  DropDownIcon,
-  ImgCarouselIcon,
-  LenseIcon,
-} from "../../images/commonSvgs";
+import React, { useRef } from "react";
+import { Select, Tooltip } from "@mantine/core";
+import { DropDownIcon, ImgCarouselIcon } from "../../images/commonSvgs";
 import { filterKeysDetails, projectprops } from "../../data/projectDetails";
 import { atom, useAtom } from "jotai";
 import { selectedFloorAtom } from "@/app/store/floor";
@@ -165,12 +161,7 @@ const Byunitblock: React.FC<Props> = ({
                       <span className="text-[#57a773] font-semibold">
                         {/* @ts-ignore */}
 
-                        {key === "floor" && value == 0
-                          ? "G"
-                          : (propCgId === 31 || propCgId === 33) &&
-                            key === "floor"
-                          ? `G+${value}`
-                          : value}
+                        {key === "floor" && value == 0 ? "G" : value}
                       </span>
                       <span className="mx-1.5 text-[#6e798c]">|</span>
                       <span className="text-[#6e798c] capitalize">
@@ -318,12 +309,6 @@ const Byunitblock: React.FC<Props> = ({
             data={getOptions("floor").map((item) =>
               item === "0"
                 ? { value: "0", label: "G" }
-                : propCgId == projectprops.rowHouse ||
-                  propCgId == projectprops.villa
-                ? {
-                    value: item,
-                    label: `G+${item}`,
-                  }
                 : { value: item, label: item }
             )}
             searchable

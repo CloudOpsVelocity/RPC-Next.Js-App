@@ -33,12 +33,25 @@ const getProjectUnits = async (
 ): Promise<any> => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/projectUnit?projIdEnc=${slug}&phaseId=${phaseId}&propType=${propType}`
-    // {
-    //   next: { revalidate: 60 },
-    // }
   );
-
   const data = await response.json();
+
+  if (propType === 31 || propType === 33) {
+    const modifiedData = data.map((item: any) => {
+      if (item.isBasement === "Y") {
+        return {
+          ...item,
+          floor: `B+G+${item.floor}`,
+        };
+      }
+      return {
+        ...item,
+        floor: `G+${item.floor}`,
+      };
+    });
+    return modifiedData;
+  }
+
   return data;
 };
 

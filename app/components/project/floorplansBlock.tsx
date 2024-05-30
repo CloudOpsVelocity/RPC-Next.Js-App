@@ -77,6 +77,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
   const { data: projectUnitsData, isLoading } = useQuery({
     queryKey: [`/${propCgId}/${currentPhase}/${slug}`],
     queryFn: () => getProjectUnits(slug, currentPhase, propCgId),
+
     enabled: !!propCgId,
     ...RTK_CONFIG,
   });
@@ -469,9 +470,6 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                           `${
                             selectedFloor?.floor?.toString() === "0"
                               ? "G"
-                              : propCgId == projectprops.rowHouse ||
-                                propCgId == projectprops.villa
-                              ? "G+" + selectedFloor?.floor
                               : selectedFloor?.floor
                           }`}
                       {selectedFloor?.unitNumber &&
@@ -550,7 +548,12 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                         selectedFloor?.towerName != "NA" &&
                         " | Tower " + selectedFloor?.towerName}
                       {propCgId != projectprops.plot &&
-                        " | Floor " +
+                        ` | ${
+                          propCgId == projectprops.rowHouse ||
+                          propCgId == projectprops.villa
+                            ? "Elevation"
+                            : "Floor"
+                        } ` +
                           `${
                             selectedFloor?.floor?.toString() === "0"
                               ? "G"

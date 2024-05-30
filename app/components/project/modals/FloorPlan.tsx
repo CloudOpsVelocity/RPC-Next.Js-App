@@ -212,12 +212,7 @@ function FloorPlanModal({
                         <span className="text-[#57a773] font-semibold">
                           {/* @ts-ignore */}
 
-                          {key === "floor" && value == 0
-                            ? "G"
-                            : (propCgId === 31 || propCgId === 33) &&
-                              key === "floor"
-                            ? `G+${value}`
-                            : value}
+                          {key === "floor" && value == 0 ? "G" : value}
                         </span>
                         <span className="mx-1.5 text-[#6e798c]">|</span>
                         <span className="text-[#6e798c] capitalize">
@@ -429,9 +424,6 @@ const LeftSection = ({ propCgId, data }: any) => {
             data={getOptions("floor").map((item) =>
               item === "0"
                 ? { value: "0", label: "G" }
-                : propCgId == projectprops.rowHouse ||
-                  propCgId == projectprops.villa
-                ? { value: item, label: `G+${item}` }
                 : { value: item, label: item }
             )}
             searchable
@@ -1088,9 +1080,6 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
                 `${
                   selectedFloor?.floor?.toString() === "0"
                     ? "G"
-                    : propCgId == projectprops.rowHouse ||
-                      propCgId == projectprops.villa
-                    ? "G+" + selectedFloor?.floor
                     : selectedFloor?.floor
                 }`}
             {selectedFloor?.unitNumber &&
