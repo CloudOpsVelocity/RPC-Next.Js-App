@@ -39,16 +39,16 @@ const Byunitblock: React.FC<Props> = ({
       return Array.from(
         new Set(
           filteredData.map((item: any) => {
-            if (
-              item.isBasement &&
-              (propCgId === 31 || propCgId === 33) &&
-              property === "floor"
-            ) {
-              return `B+G+${item[property]}`;
-            } else {
-              // Otherwise, return the value as is
-              return String(item[property]);
-            }
+            // if (
+            //   item.isBasement &&
+            //   (propCgId === 31 || propCgId === 33) &&
+            //   property === "floor"
+            // ) {
+            //   return `B+G+${item[property]}`;
+            // } else {
+            // Otherwise, return the value as is
+            return String(item[property]);
+            // }
           })
         )
       ).sort();

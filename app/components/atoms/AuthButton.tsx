@@ -87,7 +87,7 @@ function Dropdown() {
                 e.stopPropagation();
               }}
             >
-              Login/Signup
+              <span> Login/Sign up</span>
             </Link>
           </div>
         )}

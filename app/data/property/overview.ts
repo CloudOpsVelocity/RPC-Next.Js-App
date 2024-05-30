@@ -54,11 +54,7 @@ export function generatePropertyOverViewData(
           value: `${data.ca} sq.ft`,
           Icon: TotalLandArea,
         },
-        {
-          title: "Flooring Type",
-          value: `${data.flooringType}`,
-          Icon: Marble,
-        },
+
         {
           title: "Furnishing",
           value: `${data.furnshName}`,
@@ -118,11 +114,7 @@ export function generatePropertyOverViewData(
           value: `${data.ca} sq.ft`,
           Icon: TotalLandArea,
         },
-        {
-          title: "Flooring Type",
-          value: `${data.flooringType}`,
-          Icon: Marble,
-        },
+
         {
           title: "Furnishing",
           value: `${data.furnshName}`,
@@ -185,11 +177,7 @@ export function generatePropertyOverViewData(
           value: `${data.ca} sq.ft`,
           Icon: TotalLandArea,
         },
-        {
-          title: "Flooring Type",
-          value: `${data.flooringType}`,
-          Icon: Marble,
-        },
+
         {
           title: "Furnishing",
           value: `${data.furnshName}`,
@@ -301,11 +289,6 @@ export function generatePropertyOverViewData(
           value: `${data.ca} sq.ft`,
           Icon: TotalLandArea,
         },
-        {
-          title: "Flooring Type",
-          value: `${data.flooringType}`,
-          Icon: Marble,
-        },
 
         {
           title: "Furnishing",
@@ -368,11 +351,7 @@ export function generatePropertyOverViewData(
           value: `${data.ca} sq.ft`,
           Icon: TotalLandArea,
         },
-        {
-          title: "Flooring Type",
-          value: `${data.flooringType}`,
-          Icon: Marble,
-        },
+
         {
           title: "Furnishing",
           value: `${data.furnshName}`,

@@ -48,7 +48,7 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
         <>
           <div className="absolute m-[2%] z-10 right-2">
             <p className="shadow-md rounded-[10px] bg-gradient-to-r p-[8px] from-[#EFF5FF] /0  to-[#F2FAFF]/100 text-[#000] text-[14px] sm:text-[16px] md:text-xl not-italic font-medium leading-[normal]">
-              Availability Status:{" "}
+              Listing Status:{" "}
               <span className="text-[#148B16] text-[14px] sm:text-[16px]   md:text-xl not-italic font-bold">
                 {" "}
                 {projectDetails.availablityStatus === "U"

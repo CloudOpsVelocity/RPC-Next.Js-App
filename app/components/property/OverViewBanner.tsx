@@ -35,13 +35,14 @@ export default function PropertyOverviewBanner({
   );
   return (
     <>
-      <div className="flex justify-start items-center w-full flex-col md:flex-row bg-gradient-to-r from-[#EFF5FF] /50 to-[#F2FAFF ]/50 ">
+      <div className="flex justify-start items-center w-full flex-col md:flex-row listingBannerBg">
         <PriceBag className="w-[150px] h-[170px] md:w-[237px] md:h-[263px] " />
 
         <div className="flex justify-center sm:justify-between items-center w-[100%] flex-row ml-[3%] p-[2%] flex-wrap">
           <div className="">
             <p className="text-[#212C33] text-[24px] lg:text-[40px] font-[600]">
-              PRICE{"  "}
+              Sell Price{"  "}
+              <br />
               <span className="text-[#00487C] text-[24px] md:text-[32px] lg:text-[40px] whitespace-nowrap font-[700]">
                 {formatCurrency(price)},{" "}
                 <span className="text-[#545353] text-lg md:text-[32px] not-italic font-medium leading-[normal]">

@@ -142,3 +142,10 @@
 .loginBg {
   background: linear-gradient(287deg, #c5e7ff 0%, #f1f9ff 100%);
 }
+
+.listingBannerBg {
+  background: var(
+    --blue-gradient,
+    linear-gradient(118deg, #eff5ff 0.38%, #eff5ff 50.69%, #d3edff 100%)
+  );
+}

@@ -141,7 +141,7 @@ export const RatingForm = ({
             placeholder="Start typing here"
             radius={"10px"}
             rows={4}
-            // maxLength={200}
+            maxLength={401}
             {...form.getInputProps("review")}
             styles={{
               input: {
