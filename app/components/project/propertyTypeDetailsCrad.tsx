@@ -23,6 +23,7 @@ import clsx from "clsx";
 import ShowUnitsButton from "./button/showUnits";
 import { countPlots } from "@/app/utils/count/plot";
 import { pluralizeOrSingularize } from "@/app/utils/plural";
+import RTK_CONFIG from "@/app/config/rtk";
 
 type Props = {
   cg: any;
@@ -64,11 +65,7 @@ export default function PropertyTypeDetailsCrad({
   const { data: projectUnitsData } = useQuery({
     queryKey: [`/${getPropId(propertyType)}/${phase}/${slug}`],
     queryFn: () => getProjectUnits(slug, phase, getPropId(propertyType)),
-    staleTime: 30000,
-    refetchOnWindowFocus: false,
-    cacheTime: 30000,
-    refetchIntervalInBackground: false,
-    retry: false,
+    ...RTK_CONFIG,
   });
   const handleOpen = () => {
     open("overview");

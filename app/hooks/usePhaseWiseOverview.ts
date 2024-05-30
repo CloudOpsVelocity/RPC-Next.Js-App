@@ -5,10 +5,10 @@ import { getProjectWiseOverView } from "../utils/api/project";
 import { useParams } from "next/navigation";
 import { currentPhaseAtom } from "../store/vewfloor";
 import { useAtom } from "jotai";
+import RTK_CONFIG from "../config/rtk";
 
 export default function usePhaseWiseOverview() {
   const [currentPhase, setFloorPhase] = useAtom(currentPhaseAtom);
-  // const [currentPhase, setCurrentPhase] = useState(0);
   const handlePhaseChange = (phaseId: number) => {
     setFloorPhase(phaseId);
   };
@@ -19,10 +19,9 @@ export default function usePhaseWiseOverview() {
     onSuccess: (data) => {
       setFloorPhase(data[0].phaseId);
     },
-    keepPreviousData: true,
-    staleTime: 30000,
-    cacheTime: 300000,
+    ...RTK_CONFIG,
   });
+
   const phaseList = PhaseOverview?.map((phase: any) => {
     return {
       phaseId: phase.phaseId,

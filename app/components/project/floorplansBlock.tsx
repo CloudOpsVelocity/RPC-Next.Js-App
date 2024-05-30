@@ -26,7 +26,6 @@ const FloorPlanModal = dynamic(() => import("./modals/FloorPlan"), {
   ssr: true,
 });
 
-// import FloorPlanModal from "./modals/FloorPlan";
 import { useQuery } from "react-query";
 import { getProjectUnits } from "@/app/utils/api/project";
 import usePhaseWiseOverview from "@/app/hooks/usePhaseWiseOverview";
@@ -40,12 +39,12 @@ import { setPropertyValues } from "@/app/utils/dyanamic/projects";
 import { isSingleLetterOrNumber } from "@/app/utils/letters";
 import { ImgNotAvail } from "@/app/data/project";
 import NoProperties from "./notfound";
-import { useStateHistory } from "@/app/hooks/custom/useStateHistory";
 import Nofloor from "./error/nofloor";
 import clsx from "clsx";
 import CarouselSuggestion from "./unitblock/carousel";
 import dynamic from "next/dynamic";
 import { Divider } from "@mantine/core";
+import RTK_CONFIG from "@/app/config/rtk";
 
 type Props = {
   data: PhaseList[];
@@ -60,7 +59,6 @@ export default function FloorplansBlock({ projName, slug }: Props) {
   const [currentPhase, setCurrentPhase] = useAtom(currentPhaseAtom);
   const [floorPlanType, setFloorPlanType] = useState("type");
   const setFloorsArray = useSetAtom(floorPlansArray);
-
   const [selectedFloor, setSelectedFloor] = useAtom(selectedFloorAtom);
   const [, { open, type }] = useFloorPlanPopup();
   const form = useForm();
@@ -73,18 +71,14 @@ export default function FloorplansBlock({ projName, slug }: Props) {
     }, {});
     byUnitForm.setValues(resetValues);
   };
-  // form.setValues so setting new values in filters
   const selectedPhase = PhaseOverview?.find(
     (phase: any) => phase.phaseId === currentPhase
   );
   const { data: projectUnitsData, isLoading } = useQuery({
     queryKey: [`/${propCgId}/${currentPhase}/${slug}`],
     queryFn: () => getProjectUnits(slug, currentPhase, propCgId),
-    keepPreviousData: true,
-    staleTime: 30000,
-    cacheTime: 300000,
-    retry: false,
     enabled: !!propCgId,
+    ...RTK_CONFIG,
   });
   const types =
     selectedPhase &&

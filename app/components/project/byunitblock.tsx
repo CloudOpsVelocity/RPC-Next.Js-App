@@ -39,16 +39,7 @@ const Byunitblock: React.FC<Props> = ({
       return Array.from(
         new Set(
           filteredData.map((item: any) => {
-            // if (
-            //   item.isBasement &&
-            //   (propCgId === 31 || propCgId === 33) &&
-            //   property === "floor"
-            // ) {
-            //   return `B+G+${item[property]}`;
-            // } else {
-            // Otherwise, return the value as is
             return String(item[property]);
-            // }
           })
         )
       ).sort();
@@ -374,7 +365,11 @@ const Byunitblock: React.FC<Props> = ({
           label="Facing"
           className="!w-[46%]"
           placeholder="-- select facing --"
-          data={(getOptions("facingName") as string[]) || []}
+          data={
+            (getOptions("facingName").filter(
+              (item) => item !== "Don't Know"
+            ) as string[]) || []
+          }
           searchable
           maxDropdownHeight={200}
           {...getInputProps("facingName")}

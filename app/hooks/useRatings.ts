@@ -1,5 +1,6 @@
 import { useParams } from "next/navigation";
 import { useQuery } from "react-query";
+import RTK_CONFIG from "../config/rtk";
 
 export default function useRatings() {
   const { slug } = useParams<{ slug: string }>();
@@ -16,9 +17,7 @@ export default function useRatings() {
   const { data, isLoading } = useQuery({
     queryKey: [`rating/${slug}`],
     queryFn: getProjRatings,
-    keepPreviousData: true,
-    staleTime: 30000,
-    cacheTime: 300000,
+    ...RTK_CONFIG,
   });
   return { data, isLoading };
 }

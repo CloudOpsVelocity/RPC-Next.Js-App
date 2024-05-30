@@ -20,20 +20,17 @@ import { useSetAtom } from "jotai";
 import useBuilder from "@/app/hooks/useBuilder";
 type Props = {
   projectDetails: Main | null;
+  companyName: string;
 };
 
-const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
+const FirstBlock: React.FC<Props> = ({ projectDetails, companyName }) => {
   const images = getImageUrls(projectDetails?.media as any);
   const autoplay = useRef(Autoplay({ delay: 10000 }));
   const { hasReraStatus } = usePhaseWiseOverview();
   const setIsScrolling = useSetAtom(isScrollingAtom);
   const setSticky = useSetAtom(stickyAtom);
   const setC = useSetAtom(currentBlockAtom);
-  const { data } = useBuilder({
-    id: projectDetails?.builderId ?? 0,
-    type: "proj",
-    y: "N",
-  });
+
   function scrollToTopic(id: string): void {
     setIsScrolling(true);
     const element = document.getElementById(id);
@@ -133,7 +130,7 @@ const FirstBlock: React.FC<Props> = ({ projectDetails }) => {
                 <p className="text-[#00487C] text-2xl not-italic font-semibold leading-[normal] mt-3">
                   Posted By:{" "}
                   <span className="text-[#00487C] text-2xl italic font-bold leading-[normal]">
-                    {data?.data.companyName ?? "Builder"}
+                    {companyName ?? "Builder"}
                   </span>
                 </p>
               </div>

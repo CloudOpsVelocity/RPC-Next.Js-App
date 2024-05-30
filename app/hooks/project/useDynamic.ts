@@ -1,3 +1,4 @@
+import RTK_CONFIG from "@/app/config/rtk";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import { Old_Standard_TT } from "next/font/google";
@@ -16,12 +17,8 @@ export default function useDynamicProj() {
   const { data, isLoading } = useQuery({
     queryFn: getData,
     queryKey: ["dynamic", slug],
-    // staleTime: 30000,
-    // refetchOnWindowFocus: false,
-    // cacheTime: 30000,
-    // refetchIntervalInBackground: false,
-    // retry: false,
     enabled: !!Session,
+    ...RTK_CONFIG,
   });
   const queryClient = useQueryClient();
   const updateTodo = async () => {};
