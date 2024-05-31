@@ -28,6 +28,10 @@ export interface Data {
   cityName: string;
   pinCode: string;
   userName: string;
+  localityName: string;
+  projectAvailableCities: {
+    [key: string]: string;
+  };
 }
 
 export interface BuilderProject {

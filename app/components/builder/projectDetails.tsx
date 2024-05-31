@@ -1,6 +1,7 @@
 import React from "react";
 import About from "../project/about";
 import {
+  TotalLandArea,
   callIconSvg,
   completedProjIconSvg,
   emailIconSvg,
@@ -9,7 +10,7 @@ import {
   onGoingProjIconSvg,
 } from "@/app/images/commonSvgs";
 import { Data } from "@/app/validations/types/builder";
-import ProjectDrawer from "../project/Drawer";
+import Card from "./BuilderDetails/Card";
 
 type Props = {};
 
@@ -27,6 +28,8 @@ export default function ProjectDetails({
   cityName,
   pinCode,
   userName,
+  localityName,
+  citiesName,
 }: Data) {
   return (
     <React.Fragment>
@@ -71,53 +74,62 @@ export default function ProjectDetails({
 
       <About
         id="whyBuy"
-        heading="About"
-        projName={userName}
+        heading="About Builder"
         content={mission}
+        className="!mb-[40px]"
       />
 
-      <div className="w-full flex justify-start items-start mb-[4%] mt-[-2%] flex-wrap gap-[5%]  ">
-        <div className="flex justify-start items-start flex-col mb-[2%] ">
-          <p className="inline-flex justify-center items-center gap-1 rounded-[20px] p-2 bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 space-x-2 mb-2">
-            {emailIconSvg}{" "}
-            <span className="text-[#303030] text-2xl not-italic font-medium leading-[normal] tracking-[0.96px]">
-              Email
-            </span>
-          </p>
-          <a
-            href={`mailto:${email}`}
-            className="text-[#00487C] text-[16px] lg:text-[20px] font-[600] underline "
-          >
-            {email}
-          </a>
+      <div
+        className="flex w-full flex-col justify-center items-start gap-8 border border-[color:var(--blue-stroke,#4D6677)] shadow-[0px_4px_31.5px_0px_rgba(91,143,182,0.19)] p-8 rounded-[7px] border-solid bg-[#FCFCFC] mb-[80px]
+  "
+      >
+        <div className="flex justify-center items-center space-x-16">
+          <Card
+            Icon={emailIconSvg}
+            title="Email"
+            content={email}
+            type="email"
+          />
+          <Card
+            Icon={callIconSvg}
+            title="Contact"
+            content={`+91- ${mobile}`}
+            type="mobile"
+          />
+          <Card
+            Icon={<TotalLandArea />}
+            title="State"
+            content={stateName}
+            type="text"
+          />
+          <Card
+            Icon={<TotalLandArea />}
+            title="City"
+            content={cityName}
+            type="text"
+          />
+
+          <Card
+            Icon={<TotalLandArea />}
+            title="Pincode"
+            content={pinCode}
+            type="text"
+          />
         </div>
 
-        <div className="flex justify-start items-start flex-col mb-[2%] ">
-          <p className="inline-flex justify-center items-center gap-1 rounded-[20px] p-2 bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 space-x-2 mb-2">
-            {callIconSvg}{" "}
-            <span className="text-[#303030] text-2xl not-italic font-medium leading-[normal] tracking-[0.96px]">
-              Contact
-            </span>
-          </p>
-          <a
-            href={`tel:${mobile}`}
-            className="text-[#00487C] text-[16px] lg:text-[20px] font-[600] underline "
-          >
-            +91- {mobile}
-          </a>
-        </div>
-
-        <div className="flex justify-start items-start flex-col mb-[2%] w-[100%] md:w-[45%] ">
-          <p className="inline-flex justify-center items-center gap-1 rounded-[20px] p-2 bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 space-x-2 mb-2">
-            {lacationIconSvg}{" "}
-            <span className="text-[#303030] text-2xl not-italic font-medium leading-[normal] tracking-[0.96px]">
-              Address
-            </span>
-          </p>
-          <p className="text-[#00487C] text-xl not-italic font-semibold leading-8 pl-2">
-            {`${builderAddress}, ${cityName}, ${stateName}, ${pinCode}`}
-          </p>
-        </div>
+        <Card
+          Icon={lacationIconSvg}
+          title="Address"
+          content={`${builderAddress}, ${cityName}, ${stateName}, ${pinCode}`}
+          type="text"
+        />
+        <Card
+          Icon={lacationIconSvg}
+          title="Operating Cities"
+          content={citiesName.join(", ")}
+          type="text"
+          textClassName="capitalize"
+        />
       </div>
       {/* <ProjectDrawer /> */}
     </React.Fragment>

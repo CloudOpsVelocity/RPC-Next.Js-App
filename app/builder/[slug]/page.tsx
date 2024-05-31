@@ -11,7 +11,6 @@ import Reqcallback from "@/app/components/builder/Reqcallback";
 import ProjectDrawer from "@/app/components/project/Drawer";
 import dynamic from "next/dynamic";
 import SectionSkeleton from "@/app/components/atoms/skeleton/section";
-import { getCookie } from "cookies-next";
 import { cookies } from "next/headers";
 
 const LoginPopup = dynamic(
@@ -39,8 +38,11 @@ export default async function Page({ params: { slug } }: Props) {
             {data?.data?.builderProjects && (
               <BuilderCarousel
                 type="proj"
-                title={`Newly launched PROJECT by`}
-                projName={data?.data?.userName}
+                title={`Newly launched PROJECT by ${data?.data?.userName} ${
+                  Object.keys(data?.data?.projectAvailableCities).length <= 1
+                    ? "in " + data.data.cityName
+                    : ""
+                }`}
                 content={`See other newly launched projects by ${data?.data?.userName}`}
                 data={data?.data?.builderProjects}
               />

@@ -24,6 +24,7 @@ export default function PropertyOverviewBanner({
   propName,
   bhkName,
   cg,
+  otherPrice,
 }: Main) {
   const [opened, { open, close, source }] = useReqCallPopup();
   const [collapsed, { open: toggle }] = usePricingPop();
@@ -41,13 +42,16 @@ export default function PropertyOverviewBanner({
           <div className="">
             <p className="text-[#212C33] text-[24px] lg:text-[40px] font-[600]">
               {" "}
-              Sell Price
+              {cg === "S" ? "Sell" : "Rent"} Price
             </p>
             <p className="text-[#212C33] text-[24px] lg:text-[40px] font-[600]">
               <span className="text-[#00487C] text-[24px] md:text-[32px] lg:text-[40px] whitespace-nowrap font-[700]">
-                {formatCurrency(price)},{" "}
-                <span className="text-[#545353] text-lg md:text-[32px] not-italic font-medium leading-[normal]">
-                  ₹ {pricePerSq} / price sq.ft
+                {formatCurrency(price)}
+                {cg === "S" ? "," : ""}{" "}
+                <span className="text-[#242424] text-2xl not-italic font-bold">
+                  {cg === "S"
+                    ? `₹ ${pricePerSq} / sq.ft`
+                    : `+ ( ₹ ${otherPrice.security} Security Deposit )`}
                 </span>
               </span>
             </p>

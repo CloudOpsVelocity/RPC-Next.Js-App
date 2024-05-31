@@ -5,10 +5,12 @@ export default function PropertyHeading({
   className,
   title,
   desc,
+  projName,
 }: {
   className?: string;
   title: string;
   desc: string;
+  projName?: string;
 }) {
   return (
     <div
@@ -21,7 +23,7 @@ export default function PropertyHeading({
       <div>
         {" "}
         <p className="text-[#001F35] text-[32px] not-italic font-semibold leading-[normal] uppercase mb-[14px]">
-          {title}
+          <span className="text-[#148B16]">{projName} </span> {title}
         </p>{" "}
         <p className="text-[#4D6677] text-2xl italic font-medium leading-[normal] capitalize">
           {desc}

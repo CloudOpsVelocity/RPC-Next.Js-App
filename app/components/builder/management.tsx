@@ -1,7 +1,8 @@
 import React from "react";
-import About from "../project/about";
 import { callIconSvg } from "@/app/images/commonSvgs";
 import { Data } from "@/app/validations/types/builder";
+import About from "./about";
+import { HEADING_ICON } from "@/app/config/builder";
 
 export default function ManagementBlock({
   companyName,
@@ -10,16 +11,20 @@ export default function ManagementBlock({
   vision,
   citiesName,
   officecontact,
+  projectAvailableCities,
 }: Data) {
+  const keys = Object.keys(projectAvailableCities);
   return (
-    <div className="shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] w-full p-[1%] mb-[6%] pt-[2%]  bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100  shadow-[#5b8fb630] ">
+    <div
+      className=" w-full  mb-[6%]   flex  flex-col justify-center items-start  border border-[color:var(--blue-stroke,#4D6677)] shadow-[0px_4px_31.5px_0px_rgba(91,143,182,0.19)] p-8 rounded-[7px] border-solid bg-[#FCFCFC]
+    "
+    >
       <h1 className=" text-[24px] lg:text-[32px] font-[600] text-[#001F35]">
-        <span className="text-[#148B16] font-[700] ">{companyName} </span>
-        Management{" "}
+        Company Detail
       </h1>
 
-      <div className="flex justify-start items-start w-full flex-wrap gap-[3%] mb-[2%] mt-[2%]  ">
-        <div className="bg-[#FFF] rounded-[10px] shadow-lg border-[#92B2C8] border-[1px] border-solid p-[16px] mb-[3%] ">
+      <div className="flex justify-start items-start w-full flex-wrap gap-[3%]  mt-[2%]  ">
+        <div className="bg-[#FFF] rounded-[10px] shadow-lg border-[#92B2C8] border-[1px] border-solid p-[16px]  ">
           <p className="text-[20px] md:text-[24px] font-[600] text-[#202020] ">
             {ceoName}
           </p>
@@ -28,7 +33,7 @@ export default function ManagementBlock({
           </p>
         </div>
 
-        <div className="bg-[#FFF] rounded-[10px] shadow-lg border-[#92B2C8] border-[1px] border-solid p-[16px] mb-[3%] ">
+        <div className="bg-[#FFF] rounded-[10px] shadow-lg border-[#92B2C8] border-[1px] border-solid p-[16px] mb-[2%] ">
           <p className="text-[20px] md:text-[24px] font-[600] text-[#202020] ">
             {founderName}
           </p>
@@ -38,42 +43,49 @@ export default function ManagementBlock({
         </div>
       </div>
 
-      <h1 className=" text-[24px] lg:text-[32px] font-[600] text-[#001F35]">
-        <span className="text-[#148B16] font-[700]">{companyName}'s</span>{" "}
-        Vision
+      <h1 className=" text-[#242424] text-[28px] not-italic font-semibold  inline-flex items-center space-x-2">
+        <p>{HEADING_ICON}</p> <p> Company Vision</p>
       </h1>
       <About id="builder_vision" heading="" projName={""} content={vision} />
 
       <div className=" flex justify-start items-center w-full gap-[8px] mt-[-3%] mb-[2%] ">
-        {callIconSvg}
-        <p className="text-[16px] md:text-[24px] font-[500] text-[#00487C]">
-          Office Contact
-        </p>
+        <div className="inline-flex justify-center items-center gap-0.5 p-1 rounded-md bg-gradient-to-tr from-[#EFF5FF] to-[#F2FAFF] ">
+          {callIconSvg}
+          <p className="text-[#00487C] text-[28px] not-italic font-semibold ">
+            Office Contact
+          </p>
+        </div>
+
         <a
           href={`tel:${officecontact}`}
-          className="text-[16px] md:text-[24px] font-[600] text-[#00487C] underline"
+          className="text-[#242424] text-2xl not-italic font-semibold mt-2 underline"
         >
           {officecontact}
         </a>
       </div>
 
-      <h1 className=" text-[24px] lg:text-[32px] font-[600] text-[#001F35] ">
-        <span className="text-[#148B16] font-[700] ">
-          {companyName} Projects{" "}
-        </span>
-        in Different Branches{" "}
-      </h1>
-
-      <div className="flex justify-start items-start w-full flex-wrap gap-[3%] mb-[2%] mt-[1%] space-y-3 md:space-y-0 md:gap-y-4">
-        {citiesName?.map((item, index) => (
-          <p
-            className="text-[16px] md:text-[24px]  text-[#00487C] bg-[#FFF]  border border-[color:var(--ll1,#EFF5FF)] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[10px] border-solid p-[1%] px-[16px] hover:bg-[#00487C] hover:text-[#FFF] cursor-pointer  text-2xl not-italic  font-semibold leading-[normal] tracking-[0.96px] "
-            key={index}
-          >
-            Project in <span className="capitalize">{item}</span>
-          </p>
-        ))}
-      </div>
+      {keys.length > 1 && (
+        <>
+          <h1 className="text-[#242424] text-[28px] not-italic font-semibold inline-flex items-center space-x-2">
+            <p>{HEADING_ICON}</p> <p>Projects in different branches</p>
+          </h1>
+          <div className="flex justify-start items-start w-full flex-wrap gap-[3%] mb-[2%] mt-[1%] space-y-3 md:space-y-0 md:gap-y-4">
+            {keys?.map((item, index) => (
+              <a
+                className="text-[#00487C] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px] underline "
+                key={index}
+                href={`/search?city=${projectAvailableCities[item]}%2B${item}`}
+                target="_blank"
+              >
+                Project in{" "}
+                <span className="capitalize">
+                  {projectAvailableCities[item]}
+                </span>
+              </a>
+            ))}
+          </div>{" "}
+        </>
+      )}
     </div>
   );
 }

@@ -27,11 +27,16 @@ import ErrorContainer from "@/app/components/project/error/container";
 import PriceBreakup from "@/app/components/property/pricingbreakup/PriceBreakup";
 import { notFound } from "next/navigation";
 import { Console } from "console";
+import { ARROW_ICON, config } from "@/app/config/llisting";
 
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
   const data = await getListingDetails(slug);
   const projData = await getProjectDetails(data.projIdEnc);
+  const TITLE_OF_PROP = data.projIdEnc
+    ? data.propName
+    : `${data.bhkName} ${data.propTypeName} For
+  ${data.cg === "S" ? " Sell" : " Rent"} In ${data.ltName}`;
   if (!data.propIdEnc) {
     notFound();
   }
@@ -39,12 +44,12 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
     <div className="w-full">
       <div className="mt-[90px] w-full pb-[2%] flex items-center justify-center flex-col">
         <div className="p-[2%] w-full">
-          <p className="text-[16px] text-[#565D70] font-[500] mb-[1%]">
-            <span>Home</span> {" > "}
+          <p className="text-[16px] text-[#565D70] font-[500] mb-[1%] inline-flex items-center">
+            <span>Home</span> {ARROW_ICON}
             <Link href={"/project/banglore"}>
               <span>Property In {data.ctName}</span>
             </Link>{" "}
-            {" > "}
+            {ARROW_ICON}
             <span>
               {data.bhkName} {data.propTypeName} In {data.ltName}
             </span>
@@ -116,7 +121,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           <PropertyMap
             lat={data?.lat ?? 0}
             lang={data?.lang ?? 0}
-            projName={data.propName}
+            projName={TITLE_OF_PROP}
             projId={data.propIdEnc}
             type="prop"
           />
@@ -143,7 +148,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         <PriceBreakup otherPrice={data.otherPrice} price={data.price} />
 
         <LoginPopup />
-        <ProjectDrawer projName="Sarang By Sumadhura" />
+        <ProjectDrawer projName={TITLE_OF_PROP} />
       </div>
     </div>
   );

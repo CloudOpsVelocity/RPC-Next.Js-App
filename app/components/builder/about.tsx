@@ -1,7 +1,7 @@
 import React from "react";
-import ReadMore from "../atoms/readmore";
 import clsx from "clsx";
 import PropertyHeading from "../property/heading";
+import ReadMore from "./readmore";
 
 type Props = {
   heading: string;
@@ -12,6 +12,7 @@ type Props = {
   className?: string;
   showProjName?: boolean;
   builderName?: string;
+  icon?: any;
 };
 
 export default function About({
@@ -29,22 +30,9 @@ export default function About({
       className={clsx("w-[90%] mb-[5%] scroll-mt-[180px]", className)}
       id={id ?? ""}
     >
-      {type === "prop" ? (
-        <PropertyHeading
-          title={heading}
-          desc={
-            "About listing get summarized perspective for the incredible listing"
-          }
-          className="mb-[30px]"
-        />
-      ) : (
-        <h1 className="uppercase text-[20px] lg:text-[32px] font-[600] text-[#001F35] mb-[24px]">
-          {heading}{" "}
-          <span className={clsx(" font-[700] uppercase text-[#148B16]")}>
-            {projName}
-          </span>{" "}
-        </h1>
-      )}
+      <h1 className="text-[#242424] text-[28px] not-italic font-semibold mb-[24px] flex">
+        {heading}
+      </h1>
 
       <ReadMore
         text={content}

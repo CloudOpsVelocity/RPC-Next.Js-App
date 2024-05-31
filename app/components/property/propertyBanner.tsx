@@ -71,7 +71,8 @@ export default function PropertyBanner({
               {formatCurrency(minPrice)} - {formatCurrency(maxPrice)}
             </h4>
             <p className="text-[#242424] text-2xl not-italic font-medium leading-[normal]">
-              {formatDateDDMMYYYY(startDate)} - {formatDateDDMMYYYY(endDate)}
+              Start- End Date: {formatDateDDMMYYYY(startDate)} -{" "}
+              {formatDateDDMMYYYY(endDate)}
             </p>
             <p className="text-[#00487C] text-[26px] not-italic font-medium">
               {" "}

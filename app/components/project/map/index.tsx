@@ -82,6 +82,7 @@ const LeafMap: React.FC<{
             desc=" Explore near by convenient amenities, entertainment, and essential
         services"
             className="mb-[40px]"
+            projName={projName}
           />
         ) : (
           <div>
