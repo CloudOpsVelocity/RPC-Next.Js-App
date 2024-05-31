@@ -26,14 +26,12 @@ type Props = { params: { slug: string } };
 export default async function Page({ params: { slug } }: Props) {
   const token = cookies().get("token")?.value;
   const data = await getBuilderDetails(slug, "Y", "proj", token);
-
   return (
     <div className="flex flex-col justify-start items-center w-full mt-[90px]  ">
       {data && (
         <>
           <Header />
           <TopProfileBlock {...data.data} />
-
           <div className="flex flex-col justify-start items-start w-[95%] ">
             <ProjectDetails {...data.data} />
             <ManagementBlock {...data.data} />
@@ -42,20 +40,19 @@ export default async function Page({ params: { slug } }: Props) {
               <BuilderCarousel
                 type="proj"
                 title={`Newly launched PROJECT by`}
-                projName={data?.data?.companyName}
-                content={`See other newly launched projects by ${data?.data?.companyName}`}
+                projName={data?.data?.userName}
+                content={`See other newly launched projects by ${data?.data?.userName}`}
                 data={data?.data?.builderProjects}
               />
             )}
-            <BuildersBlock
+            {/* <BuildersBlock
               data={data?.data?.otherBuilder}
               name={data?.data?.companyName}
-            />
+            /> */}
           </div>
-          <Reqcallback builderName={data.data.companyName} />
-
+          <Reqcallback builderName={data.data.userName} />
           <Footer />
-          <ProjectDrawer projName={data?.data?.companyName} />
+          <ProjectDrawer projName={data?.data?.userName} />
           <LoginPopup />
         </>
       )}

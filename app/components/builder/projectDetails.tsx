@@ -26,6 +26,7 @@ export default function ProjectDetails({
   stateName,
   cityName,
   pinCode,
+  userName,
 }: Data) {
   return (
     <React.Fragment>
@@ -71,7 +72,7 @@ export default function ProjectDetails({
       <About
         id="whyBuy"
         heading="About"
-        projName={companyName}
+        projName={userName}
         content={mission}
       />
 

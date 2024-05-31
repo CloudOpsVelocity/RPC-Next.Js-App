@@ -64,7 +64,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           id="about"
           heading="about"
           projName={"Listing"}
-          content={data.usp || "About Listing Not Avail"}
+          content={data.usp}
         />
 
         {/* Property Details */}

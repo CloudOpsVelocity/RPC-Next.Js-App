@@ -27,6 +27,7 @@ export interface Data {
   stateName: string;
   cityName: string;
   pinCode: string;
+  userName: string;
 }
 
 export interface BuilderProject {

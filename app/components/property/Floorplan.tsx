@@ -53,8 +53,8 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
       >
         <div className="w-[90%] mb-[40px] space-y-4" id="propertyDetails ">
           <PropertyHeading
-            title="Floor Plans"
-            desc="see floor plan OF your selected property"
+            title="Floor Plan"
+            desc="see floor plan Of your selected property"
           />
         </div>
 
