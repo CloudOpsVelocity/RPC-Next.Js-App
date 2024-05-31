@@ -55,7 +55,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
   const handleReqCallbackOpen = () => {
     open("card", cardData.projIdEnc, "projCard");
     setPopReqData({
-      builderName: cardData.companyName,
+      builderName: cardData.postedByName,
       projName: cardData.projectName,
     });
   };

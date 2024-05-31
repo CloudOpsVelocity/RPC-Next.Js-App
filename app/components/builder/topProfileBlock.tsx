@@ -11,6 +11,7 @@ export default function TopProfileBlock({
   companyName,
   companyStartDate,
   logoUrl,
+  userName,
 }: Data) {
   return (
     <div className="w-full flex justify-between items-center bg-gradient-to-r  from-[#E0EBFF] /0 via-[#F0F6FF]/46  to-[#C9E8FF]/100 ">
@@ -20,7 +21,7 @@ export default function TopProfileBlock({
           {" > "}
           <span>Builder</span>
           {" > "}
-          <span>{companyName}</span>
+          <span>{userName}</span>
         </p>
 
         <div className="flex justify-start items-end ">
@@ -39,7 +40,7 @@ export default function TopProfileBlock({
           </div>
           <div>
             <p className=" text-[#148B16] text-[24px] md:text-[32px] lg:text-[40px] font-[700] ">
-              {companyName}
+              {userName}
             </p>
             <p className=" text-[#303A42] text-[14px] md:text-[16px] lg:text-[20px] font-[500] ">
               since {convertDateToMonthYear(companyStartDate)}

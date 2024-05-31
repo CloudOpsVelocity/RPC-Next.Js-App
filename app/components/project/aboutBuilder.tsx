@@ -40,7 +40,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
               className="shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] border-2 border-solid border-[#96C5E4]"
             />
             <p className=" text-[#148B16] italic text-[20px] lg:text-[26px] font-[700] ml-3">
-              {nzData.companyName}
+              {nzData.userName}
               <p className=" text-[#303A42] text-[14px] md:text-[16px] lg:text-[20px] font-[500] ">
                 since {convertDateToMonthYear(nzData.companyStartDate)}
               </p>
@@ -119,6 +119,8 @@ function normalizeData(data: any, type: string) {
       city: data?.data?.cityName,
       state: data?.data?.stateName,
       pincode: data?.data?.pinCode,
+
+      userName: data?.data.userName,
     };
   } else {
     return {
@@ -135,6 +137,7 @@ function normalizeData(data: any, type: string) {
       city: data?.cityName,
       state: data?.stateName,
       pincode: data?.pinCode,
+      userName: data?.userName,
     };
   }
 }
