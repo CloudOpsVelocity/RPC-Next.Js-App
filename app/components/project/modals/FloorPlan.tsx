@@ -339,7 +339,7 @@ const LeftSection = ({ propCgId, data }: any) => {
       <div className="w-[100%] flex justify-between items-start flex-wrap gap-[5%]">
         {propCgId != projectprops.plot && (
           <Select
-            key={useId()}
+            key={"bhkName"}
             w={"full"}
             // mt="md"
             label="Select Unit Type"
@@ -357,7 +357,7 @@ const LeftSection = ({ propCgId, data }: any) => {
         {(propCgId === projectprops.apartment ||
           propCgId === projectprops.villament) && (
           <Select
-            key={useId()}
+            key={"towerName"}
             w={"full"}
             // mt="md"
             label="Select Tower"
@@ -379,7 +379,7 @@ const LeftSection = ({ propCgId, data }: any) => {
             (option: string) => option !== undefined && option !== "undefined"
           ).length > 0 && (
             <Select
-              key={useId()}
+              key={"block"}
               w={"full"}
               mt={
                 propCgId == projectprops.apartment &&
@@ -405,7 +405,12 @@ const LeftSection = ({ propCgId, data }: any) => {
 
         {propCgId != projectprops.plot && (
           <Select
-            key={useId()}
+            key={
+              propCgId == projectprops.rowHouse ||
+              propCgId == projectprops.villa
+                ? "Elevation"
+                : "Floor"
+            }
             w={"full"}
             mt={
               propCgId == projectprops.rowHouse ||
@@ -436,7 +441,7 @@ const LeftSection = ({ propCgId, data }: any) => {
         )}
 
         <Select
-          key={useId()}
+          key={"unitNumber"}
           w={"full"}
           mt="md"
           label="Select Unit Number"
@@ -455,7 +460,7 @@ const LeftSection = ({ propCgId, data }: any) => {
           (option: string) => option !== "Don't Know"
         ).length > 0 && (
           <Select
-            key={useId()}
+            key={"facingName"}
             w={"full"}
             mt="md"
             label={`${
@@ -686,7 +691,7 @@ const LeftSection = ({ propCgId, data }: any) => {
           propCgId != projectprops.plot &&
           getOptions("totalBalconySize").length > 0 && (
             <Select
-              key={useId()}
+              key={"totalBalconySize"}
               w={"full"}
               mt="md"
               label="Select Balcony Size"
@@ -726,7 +731,7 @@ const LeftSection = ({ propCgId, data }: any) => {
 
         {propCgId == projectprops.plot && (
           <Select
-            key={useId()}
+            key={"lengthOfPlot"}
             w={"full"}
             mt="md"
             label="length Of Plot"
@@ -744,7 +749,7 @@ const LeftSection = ({ propCgId, data }: any) => {
 
         {propCgId == projectprops.plot && (
           <Select
-            key={useId()}
+            key={"widthOfPlot"}
             w={"full"}
             mt="md"
             label="Breadth of Plot"

@@ -48,6 +48,7 @@ export default function PropertyOverView({ data }: { data: Main }) {
             data.availablityStatus
           ).map(({ title, Icon, value }) => (
             <ProjBasicDetails
+              key={title}
               icon={<Icon />}
               title={title}
               value={value}

@@ -22,7 +22,7 @@ export default function TabPanelSection({}: Props) {
     if (entry?.isIntersecting && hasNextPage) {
       fetchMoreData();
     }
-  }, [entry?.isIntersecting, hasNextPage]);
+  }, [entry?.isIntersecting, hasNextPage, fetchMoreData]);
   return TabSectionData.map((item) => (
     <Tabs.Panel value={item} key={item}>
       <div

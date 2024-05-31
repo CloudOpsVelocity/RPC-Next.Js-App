@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -69,8 +69,9 @@ const MapContent = ({ data }: any) => {
     <>
       {data &&
         data.length > 0 &&
-        data?.map((item: any) => (
+        data?.map((item: any, index: number) => (
           <Marker
+            key={index}
             position={[parseFloat(item?.lat || 0), parseFloat(item?.lang || 0)]}
             icon={isMobile ? MobileIcon : MapIcon}
           >
