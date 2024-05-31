@@ -70,6 +70,42 @@ const agentSchema = yup.object().shape({
     )
     .required("Contact number is required"),
 });
+export const builderFirstStepSchema = yup.object().shape({
+  userName: yup
+    .string()
+    .matches(nameRegex, "Numbers and special characters are not allowed")
+
+    .max(40, "Name should not exceed 40 characters")
+    .required("Builder name is required"),
+  email: yup
+    .string()
+    .trim()
+    .matches(
+      /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+      "Please enter a valid Email address"
+    )
+    .required("Email is required")
+    .email("Please enter a valid Email address"),
+  password: yup
+    .string()
+    .min(6, "Password must be at-least 6 digits")
+    .required("Password is required"),
+  mobile: yup
+    .number()
+    .positive("Contact number must be positive")
+    .integer("Contact number must be an integer")
+    .typeError("Contact number is required")
+    .test("mvalid", "Enter Valid Contact Number", (val) => {
+      const strVal = val?.toString();
+      return /^[6-9]\d{9}$/.test(strVal ?? "");
+    })
+    .test(
+      "len",
+      "Contact number must be exactly 10 digits",
+      (val) => val?.toString().length === 10
+    )
+    .required("Contact number is required"),
+});
 export const agentSchema1 = yup.object().shape({
   address: yup
     .string()

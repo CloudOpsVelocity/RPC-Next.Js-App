@@ -44,6 +44,7 @@ import {
 } from "@/app/utils/parse";
 import {
   agentSchema,
+  builderFirstStepSchema,
   builderSchema,
   builderSchemaIndex1,
   textAreaScema,
@@ -107,7 +108,7 @@ function Builder() {
     name: "builder" + active,
     validate: (values) => {
       if (active === 0) {
-        const data = yupResolver(agentSchema)(values);
+        const data = yupResolver(builderFirstStepSchema)(values);
         return data;
       }
 
@@ -376,8 +377,8 @@ function Builder() {
             <TextInput
               required
               size="lg"
-              label="Your Name"
-              placeholder="Enter your name here"
+              label="Builder Name"
+              placeholder="Enter builder name here"
               {...form.getInputProps("userName")}
               onBlur={(e) => handleTrimAndReplace(e, "userName", form)}
               classNames={{

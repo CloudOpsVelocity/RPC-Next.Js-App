@@ -15,9 +15,7 @@ type Props = {
 
 export default function AboutBuilder({ id, type = "proj" }: Props) {
   const { data } = useBuilder({ id, y: "N", type });
-  console.log(data);
   const nzData = normalizeData(data, type);
-  console.log(nzData);
   return (
     <div
       className="w-[90%] scroll-mt-[220px]  mb-[5%] rounded shadow-[0px_4px_17.6px_0px_rgba(146,178,200,0.40)] border-[0.5px] border-solid border-[#92B2C8] builderBg py-8 pl-5"

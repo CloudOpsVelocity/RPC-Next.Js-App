@@ -33,6 +33,7 @@ export interface Main {
   rentListing: string;
   state: string;
   companyName: string;
+  postedByName: string;
 }
 
 export interface AmenityList {
