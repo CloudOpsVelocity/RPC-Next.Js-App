@@ -70,7 +70,8 @@ export default function useDynamicProj() {
       queryClient.setQueryData(["dynamic", slug], (old: any) => {
         return {
           ...old,
-          ...(data?.rating === "Y" ? { userRating: "Y" } : null),
+
+          ...(data?.rating ? { userRating: "Y", rating: data.rating } : null),
           ...(data?.review === "Y" ? { userReview: "Y" } : null),
         };
       });

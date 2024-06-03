@@ -136,7 +136,8 @@ const AddRating = ({
       await addRating({ ...values, projIdEnc: params?.slug });
     }
     const optimisticData = {
-      ...(values.rating && { rating: "Y" }),
+      rating: values.rating,
+      ...(values.rating && { userRating: "Y" }),
       ...(values.review && { review: "Y" }),
     };
     updateRatings(optimisticData);

@@ -70,7 +70,7 @@ function Builder() {
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error" | "otp"
   >("idle");
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(1);
   const router = useRouter();
 
   const [opened, { open, close }] = useDisclosure(false);
@@ -528,7 +528,9 @@ function Builder() {
                 root: StepCss.inputRoot,
                 input: StepCss.textInput,
                 error: StepCss.errorMsg,
+                dropdown: StepCss.dropdown,
               }}
+              withScrollArea={false}
             />
             <SimpleGrid cols={2}>
               <Select
@@ -546,7 +548,9 @@ function Builder() {
                   root: StepCss.inputRoot,
                   input: StepCss.textInput,
                   error: StepCss.errorMsg,
+                  dropdown: StepCss.dropdown,
                 }}
+                withScrollArea={false}
               />
               <NumberInput
                 required
@@ -632,6 +636,7 @@ function Builder() {
                   pill: StepCss.pill,
                   inputField: StepCss.textInput,
                   error: StepCss.errorMsg,
+                  dropdown: StepCss.dropdown,
                 }}
                 data={isLoadingBrach ? [] : cityParser(brachData) || []}
                 {...form.getInputProps("branch")}
@@ -641,6 +646,7 @@ function Builder() {
                   }
                 }}
                 hidePickedOptions
+                withScrollArea={false}
               />
               <DateInput
                 id="companyStartDate"
