@@ -269,12 +269,11 @@ const LoggedInUserForm = ({
       <B
         onClick={onSubmit}
         type="submit"
-        leftSection={<Phone />}
         mt={"md"}
-        className="!bg-[#0073C6]"
+        className="!bg-[#0073C6] text-xl p-2"
         size="md"
       >
-        Request a Callback
+        Request Callback
       </B>
     </div>
   );

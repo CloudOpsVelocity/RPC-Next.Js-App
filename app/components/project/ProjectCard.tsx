@@ -181,9 +181,9 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
               </p>
             )}
 
-            <p className="text-[#565D70]  not-italic font-semibold leading-[normal] tracking-[0.56px]">
+            <p className="text-[#565D70]  not-italic font-semibold leading-[normal] tracking-[0.56px] capitalize">
               {type === "proj" &&
-                `${cardData?.city}, ${cardData.locality}, ${cardData.address}`}
+                `${cardData.locality}, ${cardData?.city}, ${cardData.state},  ${cardData.pincode} `}
 
               {type === "prop " &&
                 `${cardData.ltName}   

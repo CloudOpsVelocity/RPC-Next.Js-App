@@ -40,6 +40,7 @@ const Gallery: React.FC<GalleryProps> = ({
     open(isImage ? "image" : "video", image);
   };
   const isMobile = useMediaQuery(`(max-width: 750px`);
+  // console.log(image === (previewImage || content?.url));
   return (
     <>
       <Modal
@@ -116,25 +117,28 @@ const Gallery: React.FC<GalleryProps> = ({
               previousControlIcon={<PrevCarouselIcon />}
             >
               {isImage ? (
-                images.map((image, index) => (
-                  <Carousel.Slide
-                    key={index}
-                    onClick={() => handleImageClick(image)}
-                  >
-                    <Image
-                      radius="md"
-                      h={100}
-                      w="auto"
-                      fit="cover"
-                      src={image}
-                      className={clsx(
-                        `cursor-pointer w-full min-w-[150px] max-w-[150px] !h-auto max-h-[100px] min-h-[100px] object-cover`,
-                        image === (previewImage || content?.url) &&
-                          "border-[5px] border-white"
-                      )}
-                    />
-                  </Carousel.Slide>
-                ))
+                images.map((image, index) => {
+                  return (
+                    <Carousel.Slide
+                      key={index}
+                      onClick={() => handleImageClick(image)}
+                    >
+                      <Image
+                        radius="md"
+                        h={100}
+                        w="auto"
+                        fit="cover"
+                        src={image}
+                        className={clsx(
+                          `cursor-pointer w-full min-w-[150px] max-w-[150px] !h-auto max-h-[100px] min-h-[100px] object-cover bg-white`,
+                          image.split("?")[0] ===
+                            (previewImage?.split("?")[0] || content?.url) &&
+                            "!border-[5px] !border-white"
+                        )}
+                      />
+                    </Carousel.Slide>
+                  );
+                })
               ) : (
                 <div className="flex items-center w-full justify-center">
                   {videos.map((video, index) => (

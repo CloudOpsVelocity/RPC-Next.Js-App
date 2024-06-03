@@ -51,9 +51,8 @@ export default function OverviewBanner({
               </span>
             </p>
             <Button
-              icon={<Phone />}
               title="Request  Callback"
-              buttonClass=" text-[#FFF] text-[16px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[6px]  "
+              buttonClass=" text-[#FFF] text-[28px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px]  "
               onChange={() => open("banner", slug, "projBanner")}
             />
           </div>

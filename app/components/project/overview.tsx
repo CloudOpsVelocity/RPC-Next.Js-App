@@ -44,6 +44,7 @@ export default function Overview({
   postedByName,
 }: Main) {
   const { PhaseOverview, phaseList } = usePhaseWiseOverview();
+
   return (
     <div
       className="pt-[2%] scroll-mt-[150px] w-[90%] rounded-[24px] shadow-md mb-[5%] mt-[2%] bg-gradient-to-r from-[#F6F6F6] /0 via-[#FFF] /45 to-[#FEFFFF]/100 "

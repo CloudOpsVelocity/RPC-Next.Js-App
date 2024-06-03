@@ -142,11 +142,15 @@ export function ProjectCard({ type, cardData }: CardProps) {
               </p>
             )}
 
-            {cardData.availableProperties && (
+            {cardData.availableProperties ? (
               <p className="mb-[6px] text-[#00487C] text-sm not-italic font-semibold leading-[normal] tracking-[0.56px]">
                 {cardData.availableProperties
                   .map((eachCity: string) => eachCity.trim())
                   .join(", ")}
+              </p>
+            ) : (
+              <p className="mb-[6px] text-[#00487C] text-sm not-italic font-semibold leading-[normal] tracking-[0.56px]">
+                N/A
               </p>
             )}
 
@@ -156,14 +160,21 @@ export function ProjectCard({ type, cardData }: CardProps) {
               </p>
             )}
 
-            <p className="text-[#565D70]  not-italic font-semibold leading-[normal] tracking-[0.56px] min-h-[54px]">
-              {cardData.address} {`${cardData.localityName} `}
-              {`${cardData.cityName} `}
-              {`${cardData.stateName ?? ""} `}
-              {cardData.pinCode}
-              {/* {cardData?.cityv ?? "N/A"} {cardData.pinCode} */}
+            <p className="text-[#565D70]  not-italic font-semibold leading-[normal] tracking-[0.56px] mb-2">
+              {`${cardData.localityName}, 
+              ${cardData.cityName} ,
+              ${cardData.state ?? ""} ,
+              ${cardData.pinCode}`}
             </p>
 
+            <div className="inline-flex items-start gap-2 p-2 shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] cardBg mb-[6px]">
+              <span className="text-black text-right text-base not-italic font-medium leading-[normal]">
+                Project Status:{" "}
+              </span>
+              <span className="text-[#148B16] text-base not-italic font-bold leading-[normal]">
+                {cardData.projectStatus}
+              </span>
+            </div>
             {type != "proj" && (
               <p className="text-[16px] font-[500] text-[#4D6677]">
                 Posted by Agent
