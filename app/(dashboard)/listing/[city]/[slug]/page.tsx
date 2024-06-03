@@ -20,14 +20,11 @@ import { getListingDetails } from "@/app/utils/api/property";
 import NearByCarousel from "@/app/components/project/NearByCarousel";
 import NearByCarouselProperty from "@/app/components/property/carousel";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
-import Reviews from "@/app/components/property/reviews";
-import Banner from "@/app/components/property/banner";
 import MobileHidden from "@/app/components/molecules/MobileHidden";
 import ErrorContainer from "@/app/components/project/error/container";
 import PriceBreakup from "@/app/components/property/pricingbreakup/PriceBreakup";
 import { notFound } from "next/navigation";
-import { Console } from "console";
-import { ARROW_ICON, config } from "@/app/config/llisting";
+import { ARROW_ICON } from "@/app/config/llisting";
 
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
@@ -106,14 +103,13 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
               projName={data.propName}
               projId={data.projIdEnc}
               type="prop"
-            />
-            <ErrorContainer data={projData.banks}>
+            />{" "}
+            <PropertyBanner {...projData} />
+            <ErrorContainer data={projData.banks && data.cg === "S"}>
               <Loans type="prop" banks={projData.banks} name={data.propName} />
             </ErrorContainer>
             {/* About Builder */}
             <AboutBuilder type="prop" id={projData.builderId} />
-            <PropertyBanner {...projData} />
-
             <FaqWithBg data={projData.faqs} projName={data.propName} />
           </>
         )}
@@ -145,7 +141,11 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             company={projData?.companyName}
           />
         )}
-        <PriceBreakup otherPrice={data.otherPrice} price={data.price} />
+        <PriceBreakup
+          otherPrice={data.otherPrice}
+          price={data.price}
+          type={data.cg === "S" ? "Selling" : "Rent"}
+        />
 
         <LoginPopup />
         <ProjectDrawer projName={TITLE_OF_PROP} />

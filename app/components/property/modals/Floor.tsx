@@ -92,7 +92,7 @@ const MiddleSection = () => {
     <div className="col-span-1">
       <div className="relative">
         <img
-          src={data.floorPlanUrl}
+          src={`${data.floorPlanUrl}?v=${Math.random()}`}
           alt="Floor Plan"
           className="border"
           width={800}

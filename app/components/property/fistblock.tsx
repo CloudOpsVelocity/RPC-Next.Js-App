@@ -97,17 +97,17 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
                   {projectDetails.cg === "S" ? " Sell" : " Rent"} In{" "}
                   {projectDetails.ltName}
                 </h3>
-                <p className="text-[#001F35] text-2xl not-italic font-semibold leading-[normal] mt-1 capitalize">
+                <p className="text-[#001F35] text-2xl not-italic font-semibold mt-1 capitalize">
                   {projName}
                 </p>
-                <p className="text-[#202020]  text-sm sm:text-[22px] not-italic font-[600] leading-[normal] w-[100%] tracking-[0.32px] capitalize mt-2 ">
+                <p className="text-[#202020] text-[22px] not-italic font-medium capitalize mt-2 ">
                   {projectDetails.address} {`${projectDetails.ltName} `}
                   {`${projectDetails.ctName} `}
                   {`${projectDetails?.stateName ?? ""} `}
                   {projectDetails.pinCode}
                 </p>
 
-                <p className="text-[16px] mt-[7px] mb-[7px] lg:text-[20px] font-[600] text-[#001F35]">
+                <p className=" mt-[7px] mb-[7px] text-[#001F35] text-2xl not-italic font-semibold">
                   Available From:
                   <span className="font-[600] text-[#202020]">
                     {" "}

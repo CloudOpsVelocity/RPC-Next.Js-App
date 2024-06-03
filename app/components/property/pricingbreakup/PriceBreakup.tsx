@@ -14,9 +14,11 @@ import { usePricingPop } from "@/app/hooks/property/usePricingPop";
 export default function PriceBreakup({
   otherPrice,
   price,
+  type,
 }: {
   otherPrice: Main["otherPrice"];
   price: number;
+  type: string;
 }) {
   const filterOtherDetails =
     otherPrice &&
@@ -81,7 +83,7 @@ export default function PriceBreakup({
     >
       <div className="space-y-8">
         <Card
-          title="Price"
+          title={type + " Price"}
           Icon={SellingIcon}
           type="price"
           data={"₹ " + price}

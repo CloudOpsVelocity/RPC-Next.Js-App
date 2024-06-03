@@ -52,7 +52,8 @@ export default function RoomDetails({ data }: { data: Main }) {
     >
       <PropertyHeading
         title="Listing details"
-        desc="Check the details for 2BHK apartment for sell"
+        desc={`Check the details ${data.bhkName ?? ""} ${data.propTypeName} For
+        ${data.cg === "S" ? " Sell" : " Rent"}`}
         className="mb-[40px]"
       />
       <UnitBlock data={data} />

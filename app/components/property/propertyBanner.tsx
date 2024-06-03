@@ -35,6 +35,11 @@ export default function PropertyBanner({
       className="w-[90%] m-auto mt-[2%] shrink-0  bg-[#fcfcfc] mb-20 relative  border shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] border-solid border-[#CAE9FF]  px-[52px] py-[35px]"
       id="projectDetails"
     >
+      {/* <div
+        className="rounded-full bg-gradient-to-b from-green-600/30 to-white/30 w-[385px] h-[385px] shrink-0 absolute
+      right-0 -top-5 -z-1
+      "
+      ></div> */}
       <Image
         src="/property/propertybanner.png"
         alt="Sobha Dream Acres"

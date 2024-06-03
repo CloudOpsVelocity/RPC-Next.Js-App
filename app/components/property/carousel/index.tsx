@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import ProjectCarousel from "../../project/ProjectCard";
+import ProjectCarousel from "../../property/carousel/PropertyCard";
 import useNearby from "@/app/hooks/property/useNearBy";
 
 export default function NearByCarouselProperty({

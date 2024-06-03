@@ -16,6 +16,7 @@ export default function Navigation({
   detailsData: any;
   projData: boolean;
 }) {
+  console.log(detailsData);
   const { data } = useRatings();
   const [currentBlock, setCurrentBlock] = useAtom(currentBlockAtom);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -91,7 +92,7 @@ export default function Navigation({
     { condtion: true, key: "floorPlans" },
     { condtion: true, key: "galleria" },
     {
-      condtion: detailsData?.amenityList?.length > 0,
+      condtion: detailsData?.amenities?.length > 0,
       key: "amenities",
     },
     { condtion: true, key: "nearBy" },

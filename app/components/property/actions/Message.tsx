@@ -7,8 +7,6 @@ import { useParams } from "next/navigation";
 import React from "react";
 
 export default function Message() {
-  const { shortlistedItems, compareItems } = useShortlistAndCompare();
-  const { slug } = useParams<{ slug: string }>();
   const { data } = useDynamicProp();
   const dynamicText = `${
     (data?.shortListed && data?.compareAdded && "Shortlisted and Compared") ||
