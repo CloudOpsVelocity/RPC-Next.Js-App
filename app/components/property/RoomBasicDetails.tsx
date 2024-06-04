@@ -13,7 +13,6 @@ export default function RoomBasicDetails({
   value,
   className,
 }: props) {
-  console.log(value);
   const formattedValue =
     typeof value === "number" ? (value < 10 ? `0${value}` : value) : value;
   return value ? (

@@ -8,6 +8,7 @@ import { useSetAtom } from "jotai";
 import { listingProps } from "@/app/data/projectDetails";
 import { selectedFloorAtom } from "@/app/store/floor";
 import { PopupOpenSvg } from "@/app/images/commonSvgs";
+import { createPropertyString } from "@/app/utils/dyanamic/property";
 
 export default function RoomFloorplansBlock({ data }: { data: Main }) {
   const [opened, setOpened] = useState(false);
@@ -60,7 +61,7 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
 
         <div className=" h-[456px] lg:h-[570px] w-full rounded-[14px]  border-solid border-[1px] border-[#92B2C8] bg-[#FFF] shadow-md flex justify-center items-center flex-col ">
           <p className=" text-[#005DA0] text-right text-xl not-italic font-medium w-full mr-14">
-            Sarang by sumadhura/2bhk/tower 1/ 04/north/1124 sq.ft - 2
+            {createPropertyString(data)}
           </p>
           <div className="w-[70%] flex justify-center items-center flex-col p-[2%] ">
             <div

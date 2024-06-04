@@ -19,6 +19,8 @@ export default function NearByCarouselProperty({
   propTypeName?: string;
 }) {
   const { data } = useNearby({ lat, lng, projId, cg });
+  const listingType = cg === "R" ? "RENT" : "SELL";
+
   return (
     <div
       className="flex flex-col justify-start items-start w-[100%] mt-[5%] scroll-mt-[220px]"
@@ -28,29 +30,28 @@ export default function NearByCarouselProperty({
         type="prop"
         title={
           propTypeName === "Independent House/Building"
-            ? "NEARBY SIMILAR SELL LISTINGS"
-            : "Other SELL listings in this Project"
+            ? `NEARBY SIMILAR ${listingType} LISTINGS`
+            : `Other ${listingType} listings in this Project`
         }
         projName={propTypeName === "Independent House/Building" ? "" : projName}
         content={
           propTypeName === "Independent House/Building"
-            ? "Check some similar nearby listings available"
-            : "See some more listings available in this project"
+            ? `Check some similar nearby ${listingType.toLowerCase()} listings available`
+            : `See some more ${listingType.toLowerCase()} listings available in this project`
         }
-        data={
-          data != undefined && data.otherListing != undefined
-            ? data.otherListing
-            : []
-        }
-      />
-
-      <ProjectCarousel
-        type="prop"
-        title="NEARBY SIMILAR SELL LISTINGS"
-        content="Check some similar nearby listings available"
         data={
           data != undefined && data.projListing != undefined
             ? data.projListing
+            : []
+        }
+      />
+      <ProjectCarousel
+        type="prop"
+        title={`NEARBY SIMILAR ${listingType} LISTINGS`}
+        content={`Check some similar nearby ${listingType.toLowerCase()} listings available`}
+        data={
+          data != undefined && data.otherListing != undefined
+            ? data.otherListing
             : []
         }
       />

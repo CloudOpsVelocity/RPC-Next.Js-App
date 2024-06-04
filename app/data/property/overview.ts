@@ -63,7 +63,6 @@ export function generatePropertyOverViewData(
       ];
 
       if (cg === "R") {
-        propertyDetails.splice(2, 2);
         propertyDetails.splice(3, 0, {
           title: "Available For",
           value: data.availavleFor,
@@ -123,7 +122,6 @@ export function generatePropertyOverViewData(
       ];
 
       if (cg === "R") {
-        propertyDetails.splice(2, 2);
         propertyDetails.splice(3, 0, {
           title: "Available For",
           value: data.availavleFor,
@@ -186,7 +184,6 @@ export function generatePropertyOverViewData(
       ];
 
       if (cg === "R") {
-        propertyDetails.splice(2, 2);
         propertyDetails.splice(3, 0, {
           title: "Available For",
           value: data.availavleFor,
@@ -297,7 +294,6 @@ export function generatePropertyOverViewData(
         },
       ];
       if (cg === "R") {
-        propertyDetails.splice(2, 2);
         propertyDetails.splice(3, 0, {
           title: "Available For",
           value: data.availavleFor,
@@ -360,7 +356,6 @@ export function generatePropertyOverViewData(
       ];
 
       if (cg === "R") {
-        propertyDetails.splice(2, 2);
         propertyDetails.splice(3, 0, {
           title: "Available For",
           value: data.availavleFor,

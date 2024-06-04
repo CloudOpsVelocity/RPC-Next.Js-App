@@ -1,6 +1,10 @@
 "use client";
 import { useEffect } from "react";
 import VersaMessage from "./VersaMessage";
+import { usePathname } from "next/navigation";
+import { useAtomValue } from "jotai";
+import { popupStateAtom } from "@/app/hooks/useReqCallPop";
+import { get_posted_by } from "@/app/utils/dyanamic/projects";
 
 export const RatingMessage = ({ close }: { close: () => void }) => {
   useEffect(() => {
@@ -61,6 +65,7 @@ export const QnaSuccesssMessage = () => (
   />
 );
 export const ReqcallbackMessage = ({ close }: { close: () => void }) => {
+  const data = useAtomValue(popupStateAtom);
   useEffect(() => {
     const timer = setTimeout(() => {
       close();
@@ -73,7 +78,11 @@ export const ReqcallbackMessage = ({ close }: { close: () => void }) => {
       bgColor="bg-gradient-to-r from-[#72B800] via-[#AAE051] via-[#E1FFAF] via-[#AAE051] to-[#72B800]"
       border="border-[#72B800]"
       title="Success!"
-      content="Your callback request for the Project has been sent. Builder will be in touch soon. Thank you for reaching out!"
+      content={`Your callback request for the ${
+        data.type === "prop" ? "Property" : "Project"
+      } has been sent. ${get_posted_by(
+        data.cg
+      )} will be in touch soon. Thank you for reaching out!`}
       icon={
         <svg
           xmlns="http://www.w3.org/2000/svg"

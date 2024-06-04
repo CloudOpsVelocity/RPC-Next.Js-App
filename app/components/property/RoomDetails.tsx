@@ -182,6 +182,7 @@ const OtherDetails = ({
   approvedByName,
   ispetFriendly,
   availavleFor,
+  agreementType,
 }: Main) => {
   const data = [
     ownershipName,
@@ -197,6 +198,7 @@ const OtherDetails = ({
     approvedByName,
     ispetFriendly,
     availavleFor,
+    agreementType,
   ];
   return (
     <div
@@ -277,6 +279,12 @@ const OtherDetails = ({
               icon={<AgreementDuration />}
               title="Agreement Duration"
               value={agrementduration}
+              className={style.card}
+            />
+            <RoomBasicDetails
+              icon={<AgreementDuration />}
+              title="Agreement Type"
+              value={agreementType}
               className={style.card}
             />
             <RoomBasicDetails

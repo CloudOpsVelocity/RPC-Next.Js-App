@@ -60,6 +60,7 @@ export interface Main {
   lat: string;
   lang: string;
   postedByName: string;
+  agreementType: string;
 }
 
 export interface OtherPrice {

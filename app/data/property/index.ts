@@ -48,13 +48,12 @@ export function generatePropertyDetails(
       ];
 
       if (cg === "R") {
-        propertyDetails.splice(2, 1);
         if (availablityStatus === "R") {
           // For Rent, Ready to Move
-          propertyDetails
-            .push
-            // Add Rent, Ready to Move specific details
-            ();
+          // propertyDetails
+          //   .push
+          //   // Add Rent, Ready to Move specific details
+          //   ();
         } else if (availablityStatus === "U") {
           // For Rent, Under Construction
           propertyDetails
@@ -113,10 +112,10 @@ export function generatePropertyDetails(
         propertyDetails.splice(2, 1);
         if (availablityStatus === "R") {
           // For Rent, Ready to Move
-          propertyDetails
-            .push
-            // Add Rent, Ready to Move specific details
-            ();
+          // propertyDetails
+          //   .push
+          //   // Add Rent, Ready to Move specific details
+          //   ();
         } else if (availablityStatus === "U") {
           // For Rent, Under Construction
           propertyDetails
@@ -214,10 +213,10 @@ export function generatePropertyDetails(
       if (cg === "R") {
         if (availablityStatus === "R") {
           // For Rent, Ready to Move
-          propertyDetails
-            .push
-            // Add Rent, Ready to Move specific details
-            ();
+          // propertyDetails
+          //   .push
+          //   // Add Rent, Ready to Move specific details
+          //   ();
         } else if (availablityStatus === "U") {
           // For Rent, Under Construction
           propertyDetails
@@ -276,10 +275,10 @@ export function generatePropertyDetails(
 
         if (availablityStatus === "R") {
           // For Rent, Ready to Move
-          propertyDetails
-            .push
-            // Add Rent, Ready to Move specific details
-            ();
+          // propertyDetails
+          //   .push
+          //   // Add Rent, Ready to Move specific details
+          //   ();
         } else if (availablityStatus === "U") {
           // For Rent, Under Construction
           propertyDetails
@@ -319,10 +318,10 @@ export function generatePropertyDetails(
         propertyDetails.splice(2, 1);
         if (availablityStatus === "R") {
           // For Rent, Ready to Move
-          propertyDetails
-            .push
-            // Add Rent, Ready to Move specific details
-            ();
+          // propertyDetails
+          //   .push
+          //   // Add Rent, Ready to Move specific details
+          //   ();
         } else if (availablityStatus === "U") {
           // For Rent, Under Construction
           propertyDetails

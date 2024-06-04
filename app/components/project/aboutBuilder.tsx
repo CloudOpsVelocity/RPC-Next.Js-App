@@ -14,8 +14,12 @@ type Props = {
 };
 
 export default function AboutBuilder({ id, type = "proj" }: Props) {
+  console.log("🚀 ~ AboutBuilder ~ type:", type);
   const { data } = useBuilder({ id, y: "N", type });
+  console.log("🚀 ~ AboutBuilder ~ data:", data);
   const nzData = normalizeData(data, type);
+  console.log("🚀 ~ AboutBuilder ~ nzData:", nzData);
+
   return (
     <div
       className="w-[90%] scroll-mt-[220px]  mb-[5%] rounded shadow-[0px_4px_17.6px_0px_rgba(146,178,200,0.40)] border-[0.5px] border-solid border-[#92B2C8] builderBg py-8 pl-5"
@@ -119,7 +123,6 @@ function normalizeData(data: any, type: string) {
       city: data?.data?.cityName,
       state: data?.data?.stateName,
       pincode: data?.data?.pinCode,
-
       userName: data?.data.userName,
     };
   } else {
