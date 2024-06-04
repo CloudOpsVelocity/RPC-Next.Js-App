@@ -25,30 +25,30 @@ export default function Section() {
   //     }
   //   }
   //   console.log(obj);
-  function findSecondRepeated(arr) {
-    const countObj = {};
-    let firstRepeated = null;
-    let secondRepeated = null;
+  // function findSecondRepeated(arr) {
+  //   const countObj = {};
+  //   let firstRepeated = null;
+  //   let secondRepeated = null;
 
-    for (let i = 0; i < arr.length; i++) {
-      const elem = arr[i];
-      countObj[elem] = (countObj[elem] || 0) + 1;
+  //   for (let i = 0; i < arr.length; i++) {
+  //     const elem = arr[i];
+  //     countObj[elem] = (countObj[elem] || 0) + 1;
 
-      if (countObj[elem] === 2) {
-        if (firstRepeated === null) {
-          firstRepeated = elem;
-        } else {
-          secondRepeated = elem;
-          break;
-        }
-      }
-    }
+  //     if (countObj[elem] === 2) {
+  //       if (firstRepeated === null) {
+  //         firstRepeated = elem;
+  //       } else {
+  //         secondRepeated = elem;
+  //         break;
+  //       }
+  //     }
+  //   }
 
-    return secondRepeated;
-  }
+  //   return secondRepeated;
+  // }
 
-  const arr = [1, 3, 3, 4, 3, 5, 4, 4];
-  const result = findSecondRepeated(arr);
-  console.log(result); // Output: 4
+  // const arr = [1, 3, 3, 4, 3, 5, 4, 4];
+  // const result = findSecondRepeated(arr);
+  // console.log(result); // Output: 4
   return <div>Section</div>;
 }
