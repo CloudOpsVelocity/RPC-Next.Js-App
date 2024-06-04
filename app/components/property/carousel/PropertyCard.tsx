@@ -64,9 +64,9 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
   };
 
   const handleReqCall = () => {
-    open(type, reqId, "projCard");
+    open(type, reqId, "projCard", cardData.postedByType);
     setPopReqData({
-      builderName: cardData.builderName,
+      builderName: cardData.postedByName,
       projName: name,
     });
   };
