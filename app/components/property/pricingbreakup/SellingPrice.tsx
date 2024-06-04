@@ -1,12 +1,18 @@
 import { NumberFormatter } from "@mantine/core";
 import React from "react";
 
-export default function SellingPrice({ price }: { price: number }) {
+export default function SellingPrice({
+  price,
+  type,
+}: {
+  price: number;
+  type: string;
+}) {
   return (
     <div className="absolute bottom-16 left-1/2 -translate-x-1/2 w-[95%]">
       <div className="flex flex-col justify-center items-start gap-2.5 border shadow-[0px_4px_22px_0px_rgba(204,233,204,0.38)] pl-6 pr-[37px] py-3 rounded-[10px] border-solid border-[#148B16] bg-[#eaffea]">
         <div className="text-[#38333A] text-2xl not-italic font-medium leading-[normal] capitalize inline-flex">
-          {DefaultIcon} Total Selling Price Including all the charges
+          {DefaultIcon} Total {type} Price Including all the charges
         </div>
         <h2 className="text-[#005202] text-[34px] not-italic font-bold leading-[normal]">
           ₹ <NumberFormatter thousandSeparator value={price} />

@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Footer from "../components/layouts/primary/footer";
 import Header from "../components/layouts/primary/header";
@@ -6,24 +7,12 @@ import DynamiCarousel from "../components/molecules/carousel";
 import HomeSearch from "../components/molecules/home-search";
 import WhyCHoose from "../components/molecules/whychoose";
 import YourList from "../components/molecules/your-llist";
+import { object } from "yup";
+import Section from "./components/Section/Section";
 export default async function page() {
-  // const orders = new Map([
-  //   ["1RK", 0],
-  //   ["2BHK", 1],
-  //   ["3BHK", 2],
-  //   ["4BHK", 3],
-  //   ["4+BHK", 4],
-  // ]);
-  // let arr = ["2BHK", "1RK", "3BHK", "1BHK", "4+BHK"];
-  // arr.sort((a, b) => {
-  //   console.log(a);
-  //   let value = (orders.get(a) ?? 0) - (orders.get(b) ?? 0);
-  //   return value;
-  // });
-  // console.log(arr);
-
   return (
     <div className="h-[100%] w-[100%] flex justify-center items-center flex-col overflow-hidden ">
+      <Section />
       <Header />
       <HomeSearch />
       <WhyCHoose />

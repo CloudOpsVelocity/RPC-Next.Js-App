@@ -28,8 +28,6 @@ type FaqWithBgProps = {
   projName: string;
 };
 
-let ind = 0;
-
 export default function FaqWithBg({ data, projName }: FaqWithBgProps) {
   return (
     <div
@@ -235,10 +233,7 @@ const Success = ({ text, opened, onClose, projName }: any) => {
       size={isMobile ? "100%" : "auto"}
     >
       <Close close={onClose} className="absolute top-2 right-2 z-50" />
-      {/* {opened.type === "qna" && <QnaSuccesssMessage />}
 
-      {opened.type === "listing" && <ListingNotFoundMessage />}
-      {opened.type === "compare" && <CompareMessage />} */}
       {ComponentTorender}
     </Modal>
   );

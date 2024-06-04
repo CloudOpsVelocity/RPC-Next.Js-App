@@ -107,7 +107,7 @@ export default function PriceBreakup({
             otherPrice={otherPrice}
           />
         )}
-        <SellingPrice price={sum + price + otherChangeTotal} />
+        <SellingPrice price={sum + price + otherChangeTotal} type={type} />
       </div>
 
       {/* Drawer content */}

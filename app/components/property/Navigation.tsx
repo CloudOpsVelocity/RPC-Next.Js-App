@@ -24,6 +24,13 @@ export default function Navigation({
   const [isScrolling, setIsScrolling] = useAtom(isScrollingAtom);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [leftScroll, setLeftScroll] = useState(0);
+  function handleArrowClick(side: "R" | "L"): void {
+    const scrollAmount = side === "R" ? 100 : -100;
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollLeft += scrollAmount;
+      setLeftScroll((scrollContainerRef.current.scrollLeft += scrollAmount));
+    }
+  }
   useEffect(() => {
     function handleScroll() {
       const currentScrollY = window.scrollY;
@@ -53,6 +60,11 @@ export default function Navigation({
           setIsSticky(true);
         } else {
           setIsSticky(false);
+        }
+        if (scrollDirection === "down" && window.scrollY > 900) {
+          handleArrowClick("R");
+        } else {
+          handleArrowClick("L");
         }
       }
     }
@@ -111,6 +123,16 @@ export default function Navigation({
         isSticky && "fixed top-[90px] bg-white shadow-md z-[100]"
       )}
     >
+      {leftScroll > 0 && (
+        <Image
+          src="/auth/arrow.svg"
+          alt=""
+          className="rotate-180 cursor-pointer"
+          width={41}
+          height={64}
+          onClick={() => handleArrowClick("L")}
+        />
+      )}
       <div
         className="h-[64px] scroll-smooth w-[100%] bg-[#FCFCFC] shadow-sm flex justify-start items-center scrollbar-hide overflow-x-auto lg:px-14"
         ref={scrollContainerRef}
@@ -147,6 +169,14 @@ export default function Navigation({
           );
         })}
       </div>
+      <Image
+        src="/auth/arrow.svg"
+        alt=""
+        className="cursor-pointer"
+        width={41}
+        height={64}
+        onClick={() => handleArrowClick("R")}
+      />
     </div>
   );
 }

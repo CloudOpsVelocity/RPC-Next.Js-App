@@ -106,3 +106,18 @@ export function setPropertyValues(data: any, propCgId: number): any {
 
   return updatedValues;
 }
+
+export const get_posted_by = (str?: string) => {
+  switch (str) {
+    case "I":
+      return "Individual";
+      break;
+    case "A":
+      return "Agent";
+      break;
+
+    default:
+      return "Builder";
+      break;
+  }
+};

@@ -23,6 +23,7 @@ import Styles from "@/app/styles/Qna.module.css";
 import clsx from "clsx";
 import { NearByDataAtom } from "@/app/store/nearby";
 import reqStyles from "@/app/styles/Req.module.css";
+import { get_posted_by } from "@/app/utils/dyanamic/projects";
 const RequestCallBackModal = ({
   opened,
   close,
@@ -35,6 +36,7 @@ const RequestCallBackModal = ({
   builderName: string;
   name?: string;
   source: string;
+  cg?: string;
 }) => {
   const isMobile = useMediaQuery("(max-width: 750px)");
   const [status, setStatus] = useState<
@@ -180,11 +182,8 @@ const LoggedInUserForm = ({
   source,
   builderName,
 }: any) => {
-  const { slug } = useParams<{ slug: string }>();
-  const { pushToRequestCallbacks, isCallbackSubmitted } =
-    useShortlistAndCompare();
+  const { pushToRequestCallbacks } = useShortlistAndCompare();
   const popupState = useAtomValue(popupStateAtom);
-
   const { data: session } = useSession();
   const {} = useForm({
     initialValues: {
@@ -195,6 +194,7 @@ const LoggedInUserForm = ({
     validate: yupResolver(reqSchema),
   });
   const propName = popupState.type === "prop" ? "propIdEnc" : "projIdEnc";
+  let Posted_BY = get_posted_by(popupState.cg);
   const onSubmit = async () => {
     setStatus("pending");
     const data = {
@@ -210,16 +210,11 @@ const LoggedInUserForm = ({
       const res = await sendContact(data);
     });
     setStatus("success");
-    // res.status ? setStatus("success") : setStatus("error");
-    // console.log(res);
   };
   const onSuccess = async () => {
     setStatus("success");
   };
-  const handleClose = () => {
-    setStatus("idle");
-    close();
-  };
+
   const reqData = useAtomValue(NearByDataAtom);
   return status === "otp" ? (
     <ReqOtpForm
@@ -244,7 +239,7 @@ const LoggedInUserForm = ({
       </p>
       <p className="text-[#148B16] mb-[6%] text-[14px] lg:text-[16px] italic font-bold leading-[normal] tracking-[0.64px]">
         <span className="text-[#4D6677] text-xl italic font-medium leading-[normal] tracking-[0.8px]">
-          Builder:
+          {Posted_BY}:
         </span>{" "}
         {source === "projCard" ? reqData?.builderName : builderName}
       </p>
@@ -284,7 +279,6 @@ const ReqForm = ({
   setStatus,
   name,
   source,
-  builderName,
 }: {
   close: any;
   status: string;
@@ -399,15 +393,7 @@ const ReqForm = ({
         >
           + 91
         </p>
-        {/* <CountryInput
-          onSelect={displayCountryCode}
-          className={`focus:outline-none min-w-[30px] max-w-[70px] border-t-0 border-l-0 h-[27px] border-b-0 border-r-[#4D6677] border-[2px] border-solid self-start relative mt-[2%] ${
-            (form.errors.mobile != undefined && form.errors.mobile != null) ||
-            status === "error"
-              ? "bottom-[65px]"
-              : "bottom-[45px]"
-          }  ml-[2px]`}
-        /> */}
+
         <TextInput
           size="lg"
           label="Enter Your Email Here"

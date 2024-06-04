@@ -7,6 +7,7 @@ interface PopupState {
   type: string | null; // Type can be 'card' or 'banner'
   projectID: string | null; // ID of the project
   source: "projBanner" | "projCard" | "propCard" | "propBanner";
+  cg?: string;
 }
 
 export const popupStateAtom = atom<PopupState>({
@@ -14,6 +15,7 @@ export const popupStateAtom = atom<PopupState>({
   type: null,
   projectID: null,
   source: "projBanner",
+  cg: "",
 });
 
 export const useReqCallPopup = () => {
@@ -22,9 +24,10 @@ export const useReqCallPopup = () => {
   const open = (
     type: string,
     projectID: string,
-    source: "projBanner" | "projCard" | "propCard" | "propBanner"
+    source: "projBanner" | "projCard" | "propCard" | "propBanner",
+    cg?: string
   ) => {
-    setPopupState({ opened: true, type, projectID, source });
+    setPopupState({ opened: true, type, projectID, source, cg });
   };
 
   const close = () => {
@@ -39,6 +42,7 @@ export const useReqCallPopup = () => {
       type: popupState.type,
       projectID: popupState.projectID,
       source: popupState.source,
+      cg: popupState.cg,
     },
   ] as const;
 };

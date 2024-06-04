@@ -59,6 +59,7 @@ export interface Main {
   availavleFor: string;
   lat: string;
   lang: string;
+  postedByName: string;
 }
 
 export interface OtherPrice {

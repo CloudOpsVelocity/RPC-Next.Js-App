@@ -6,8 +6,6 @@ import PriceBag, {
 } from "@/app/images/commonSvgs";
 import React from "react";
 import Button from "../../elements/button";
-import { useDisclosure } from "@mantine/hooks";
-import { Collapse, Modal } from "@mantine/core";
 import RequestCallBackModal from "../molecules/popups/req";
 import { formatCurrency } from "@/app/utils/numbers";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
@@ -25,6 +23,9 @@ export default function PropertyOverviewBanner({
   bhkName,
   cg,
   otherPrice,
+  ltName,
+  postedByName,
+  postedByType,
 }: Main) {
   const [opened, { open, close, source }] = useReqCallPopup();
   const [collapsed, { open: toggle }] = usePricingPop();
@@ -59,7 +60,7 @@ export default function PropertyOverviewBanner({
               icon={<Phone className="mr-1" />}
               title="Request a Callback"
               buttonClass=" text-[#FFF] text-[26px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[16px]  mt-3"
-              onChange={() => open("prop", slug, "projBanner")}
+              onChange={() => open("prop", slug, "projBanner", postedByType)}
             />
           </div>
           <div className="flex justify-center items-center flex-col">
@@ -84,13 +85,12 @@ export default function PropertyOverviewBanner({
         <RequestCallBackModal
           close={close}
           opened={opened}
-          builderName="Next Js"
+          builderName={postedByName}
           source={source}
+          name={`${bhkName ?? ""} ${propTypeName} For
+          ${cg === "S" ? " Sell" : " Rent"} In ${ltName}`}
         />
       </div>
-      {/* <Collapse in={collapsed}>
-        <PriceBreakUp otherPrice={otherPrice} price={pricePerSq} />
-      </Collapse> */}
     </>
   );
 }
