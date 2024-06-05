@@ -27,7 +27,7 @@ export default function NearByCarouselProperty({
     projId,
     cg,
     bhkId,
-    propType: listingProps[propTypeName as keyof typeof listingProps],
+    propType: listingProps[propTypeName.trim() as keyof typeof listingProps],
   });
   const listingType = cg === "R" ? "RENT" : "SELL";
 

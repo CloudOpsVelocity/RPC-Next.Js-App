@@ -20,6 +20,7 @@ import { formatDate } from "@/app/utils/date";
 import { getImageUrls } from "@/app/utils/image";
 import { calculatePerSqPrice } from "@/app/utils/price";
 import styles from "@/app/styles/Carousel.module.css";
+import { NumberFormatter } from "@mantine/core";
 const realData = [{ test: "hello" }, 2, 3, 4, 5, 6, 77];
 type Props = {
   projectDetails: Main | null;
@@ -115,7 +116,9 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
             </div>
             <div className="w-full md:w-[40%] flex justify-between md:items-end flex-col p-[2%]">
               <h2 className="text-[20px] md:text-[28px] lg:text-[32px] font-[700] text-[#001F35]">
-                {formatCurrency(projectDetails.price)}
+                {`${formatCurrency(projectDetails.price)}${
+                  projectDetails.cg === "R" ? " / Month" : ""
+                }`}{" "}
               </h2>
               {projectDetails.cg === "S" && (
                 <p className="text-[16px] md:text-right lg:text-[24px] font-[600] mb-[10px] md:mb-[10px] text-[#00487C] ">

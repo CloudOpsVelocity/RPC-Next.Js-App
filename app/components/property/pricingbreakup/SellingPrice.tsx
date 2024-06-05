@@ -1,13 +1,17 @@
 import { NumberFormatter } from "@mantine/core";
 import React from "react";
 import SecurityDeposit from "./SecurityDeposit";
+import { Main } from "@/app/validations/property";
 
 export default function SellingPrice({
   price,
   type,
+  otherPrice,
 }: {
   price: number;
   type: string;
+  isSecurity?: boolean;
+  otherPrice: Main["otherPrice"];
 }) {
   return (
     <div className=" w-[100%]">
@@ -19,7 +23,10 @@ export default function SellingPrice({
           ₹ <NumberFormatter thousandSeparator value={price} />
         </h2>
       </div>
-      <SecurityDeposit security="33" type="333" />
+      <SecurityDeposit
+        security={otherPrice.security}
+        type={otherPrice.securetyType}
+      />
       <p className="text-[#001F35] text-[10px] not-italic font-normal mt-4">
         Disclaimer: Information provided is for reference only. Get Right
         Property does not guarantee accuracy. Always refer to relevant laws for

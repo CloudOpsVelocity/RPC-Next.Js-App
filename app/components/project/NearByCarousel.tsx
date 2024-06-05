@@ -32,7 +32,7 @@ export default function NearByCarousel({
     >
       <ProjectCarousel
         type="proj"
-        title="Projects By"
+        title="Other Projects By"
         content="See what builder has posted"
         projName={builderData?.data?.companyName}
         data={

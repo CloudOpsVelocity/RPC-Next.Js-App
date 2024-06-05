@@ -31,13 +31,15 @@ export default function PriceBreakup({
           "clubHouseTill",
           "securityMonth",
           "security",
-        ].includes(item) && otherPrice[item] !== "NA"
+        ].includes(item)
     );
 
   const sum = filterOtherDetails?.reduce(
     (a, b) =>
       b !== "price" &&
-      !(b === "clubHouseCharge" && otherPrice.clubHouseCharge === "A")
+      !(b === "clubHouseCharge" && otherPrice.clubHouseCharge === "A") &&
+      otherPrice[b] !== "NA" &&
+      otherPrice[b] !== "A"
         ? Number(a) +
           (b === "otherCharge"
             ? parseOtherCharge(otherPrice[b])
@@ -66,7 +68,6 @@ export default function PriceBreakup({
   }
   const otherChangeTotal = parseOtherCharge(otherPrice?.otherCharge);
   const chargesArray = otherPrice?.otherCharge?.split(",");
-
   const [opened, { open, close }] = usePricingPop();
 
   return (
@@ -90,15 +91,13 @@ export default function PriceBreakup({
           type="price"
           data={"₹ " + price}
         />
-        {sum > 0 && (
-          <Card
-            title="applicable charges"
-            Icon={ApplicablePricing}
-            type="applicableprice"
-            data={filterOtherDetails}
-            otherPrice={otherPrice}
-          />
-        )}
+        <Card
+          title="applicable charges"
+          Icon={ApplicablePricing}
+          type="applicableprice"
+          data={filterOtherDetails}
+          otherPrice={otherPrice}
+        />
 
         {otherPrice?.otherCharge && (
           <Card
@@ -109,7 +108,11 @@ export default function PriceBreakup({
             otherPrice={otherPrice}
           />
         )}
-        <SellingPrice price={sum + price + otherChangeTotal} type={type} />
+        <SellingPrice
+          price={sum + price + otherChangeTotal}
+          otherPrice={otherPrice}
+          type={type}
+        />
       </div>
 
       {/* Drawer content */}

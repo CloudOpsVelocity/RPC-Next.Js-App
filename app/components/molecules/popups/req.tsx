@@ -194,6 +194,7 @@ const LoggedInUserForm = ({
     validate: yupResolver(reqSchema),
   });
   const propName = popupState.type === "prop" ? "propIdEnc" : "projIdEnc";
+  const isProjContact = popupState.type === "prop" ? "N" : "Y";
   let Posted_BY = get_posted_by(popupState.cg);
   const onSubmit = async () => {
     setStatus("pending");
@@ -202,7 +203,7 @@ const LoggedInUserForm = ({
       email: session?.user?.email,
       mobile: session?.user?.userName,
       [propName]: popupState.projectID ?? "",
-      isProjContact: "Y",
+      isProjContact: isProjContact,
       src: "searchCard",
     };
 
@@ -224,7 +225,7 @@ const LoggedInUserForm = ({
         email: session?.user?.email,
         mobile: session?.user?.userName,
         [propName]: popupState.projectID ?? "",
-        isProjContact: "Y",
+        isProjContact: isProjContact,
         src: "searchCard",
       }}
     />
@@ -300,15 +301,13 @@ const ReqForm = ({
     validate: yupResolver(reqSchema),
   });
 
-  const displayCountryCode = (value: any) => {
-    console.log(value);
-  };
   const propName = popupState.type === "prop" ? "propIdEnc" : "projIdEnc";
+  const isProjContact = popupState.type === "prop" ? "N" : "Y";
   const formSubmit = async (values: any) => {
     setStatus("pending");
     const data = await addContact({
       ...values,
-      isProjContact: "Y",
+      isProjContact: isProjContact,
       [propName]: popupState.projectID,
       src: "searchcard",
     });
@@ -328,7 +327,7 @@ const ReqForm = ({
       values={{
         ...form.values,
         [propName]: popupState.projectID,
-        isProjContact: "Y",
+        isProjContact: isProjContact,
         src: "searchCard",
       }}
       builderName={bn}

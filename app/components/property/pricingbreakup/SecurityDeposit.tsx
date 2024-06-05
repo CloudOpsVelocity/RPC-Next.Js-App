@@ -10,8 +10,8 @@ export default function SecurityDeposit({
   return (
     <div className={styles.container}>
       {styles.icon}
-      <h4 className={styles.textLite}>Security Deposit</h4>
-      <h4 className={styles.textBold}>₹ 50,000</h4>
+      <h4 className={styles.textLite}>Security Deposit {}</h4>
+      <h4 className={styles.textBold}>₹ {security}</h4>
     </div>
   );
 }

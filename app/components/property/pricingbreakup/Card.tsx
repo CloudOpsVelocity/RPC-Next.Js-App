@@ -2,6 +2,7 @@ import { List, NumberFormatter } from "@mantine/core";
 import React from "react";
 import { TbH4 } from "react-icons/tb";
 import ListItem from "./ListItem";
+import { pluralizeOrSingularize } from "@/app/utils/plural";
 
 type Props = {
   title: string;
@@ -27,25 +28,23 @@ export default function Card({ Icon, title, type, data, otherPrice }: Props) {
               <ListItem
                 key={i}
                 value={
-                  key === "security"
-                    ? Number(otherPrice[key]) *
-                      Number(otherPrice.securityMonth ?? 1)
-                    : key === "clubHouseCharge" &&
-                      otherPrice.clubHouseCharge === "A"
+                  key === "clubHouseCharge" &&
+                  otherPrice.clubHouseCharge === "A"
                     ? "Lifetime"
+                    : otherPrice.clubHouseTill && key === "clubHouseCharge"
+                    ? `${otherPrice.clubHouseCharge}/ ${
+                        otherPrice.clubHouseTill
+                      } ${pluralizeOrSingularize(
+                        parseInt(otherPrice.clubHouseTill),
+                        "Years"
+                      )}`
+                    : otherPrice[key] === "A"
+                    ? "As Per Actuals"
+                    : otherPrice[key] === "NA"
+                    ? "Already Included"
                     : (otherPrice[key] as string)
                 }
-                label={
-                  key === "security"
-                    ? `Security Deposit ${
-                        otherPrice?.securetyType === "F"
-                          ? "Fixed"
-                          : otherPrice?.securetyType === "M"
-                          ? "Multiple Of Rent"
-                          : "NA"
-                      }`
-                    : displayNameMap[key]
-                }
+                label={displayNameMap[key]}
               />
             ))}
           </ul>

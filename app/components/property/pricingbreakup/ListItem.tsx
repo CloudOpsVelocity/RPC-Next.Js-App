@@ -23,8 +23,14 @@ export default function ListItem({ label, value, className }: Props) {
         {label}
       </div>{" "}
       <span className="text-[#242424] text-right text-xl not-italic font-semibold">
-        {value === "Lifetime" ? value : `₹ ${value}`}
+        {typeof value === "string" && config.hidePriceItems.includes(value)
+          ? value
+          : `₹ ${value}`}
       </span>
     </li>
   );
 }
+
+const config = {
+  hidePriceItems: ["Lifetime", "As Per Actuals", "Already Included"],
+};
