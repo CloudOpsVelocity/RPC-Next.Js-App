@@ -14,11 +14,8 @@ type Props = {
 };
 
 export default function AboutBuilder({ id, type = "proj" }: Props) {
-  console.log("🚀 ~ AboutBuilder ~ type:", type);
   const { data } = useBuilder({ id, y: "N", type });
-  console.log("🚀 ~ AboutBuilder ~ data:", data);
   const nzData = normalizeData(data, type);
-  console.log("🚀 ~ AboutBuilder ~ nzData:", nzData);
 
   return (
     <div

@@ -17,6 +17,7 @@ export default function PropertyBanner({
   minPrice,
   maxPrice,
   media,
+  about,
 }: Main) {
   const isMobile = useMediaQuery(`(max-width: 750px)`);
   return isMobile ? (
@@ -79,10 +80,7 @@ export default function PropertyBanner({
           </div>
         </div>
         <div className="mt-6">
-          <ReadMore
-            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis auteeeee irure dolor in repllllllllll rehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupida tatttt non proident, sunt in culp a qui officia deserunt mollit anim id est laborum...Read More"
-            title={"About"}
-          />
+          <ReadMore text={about} title={"About"} />
         </div>
         <Button variant="blue" className="mt-5">
           Explore Project

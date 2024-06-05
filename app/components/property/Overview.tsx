@@ -55,9 +55,9 @@ export default function PropertyOverView({ data }: { data: Main }) {
           ))}
         </div>
         <div className=" flex justify-start md:justify-end items-start md:items-end flex-col mt-[3%] md:mt-0 relative pb-10">
-          <ShortList />
-          <CompareList />
-          <Message />
+          <ShortList {...data} />
+          <CompareList {...data} />
+          <Message {...data} />
         </div>
       </div>
       <PropertyOverviewBanner {...data} />

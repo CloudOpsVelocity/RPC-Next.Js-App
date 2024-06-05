@@ -302,6 +302,7 @@ const ReqForm = ({
   });
 
   const propName = popupState.type === "prop" ? "propIdEnc" : "projIdEnc";
+  let Posted_BY = get_posted_by(popupState.cg);
   const isProjContact = popupState.type === "prop" ? "N" : "Y";
   const formSubmit = async (values: any) => {
     setStatus("pending");
@@ -341,7 +342,7 @@ const ReqForm = ({
         No worries add your details to get callback from builder
       </p>
       <p className="text-[#148B16] text-base italic font-bold leading-[normal] tracking-[0.64px] mb-[2%]">
-        Builder: {bn}
+        {Posted_BY}: {bn}
       </p>
       <h2 className="text-[#00487C] text-lg not-italic font-semibold leading-[normal] tracking-[0.72px] mb-[2%]">
         Your Details

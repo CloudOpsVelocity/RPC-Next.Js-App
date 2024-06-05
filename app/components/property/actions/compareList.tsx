@@ -8,13 +8,17 @@ import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import clsx from "clsx";
 import useDynamicProj from "@/app/hooks/project/useDynamic";
 import useDynamicProp from "@/app/hooks/property/useDyanamic";
+import { listingProps } from "@/app/data/projectDetails";
 
-export default function CompareList() {
+export default function CompareList({ cg, propTypeName }: any) {
   const { data: session } = useSession();
   const { slug } = useParams<{ slug: string }>();
   const { toggleCompare, compareItems } = useShortlistAndCompare();
   const [, { open }] = usePopShortList();
-  const { data, mutate } = useDynamicProp();
+  const { data, mutate } = useDynamicProp({
+    cg,
+    propId: listingProps[propTypeName as keyof typeof listingProps],
+  });
   const onAddingCompare = () => {
     if (session) {
       mutate(3);

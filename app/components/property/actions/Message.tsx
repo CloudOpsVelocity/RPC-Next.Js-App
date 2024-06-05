@@ -1,3 +1,4 @@
+import { listingProps } from "@/app/data/projectDetails";
 import useDynamicProj from "@/app/hooks/project/useDynamic";
 import useDynamicProp from "@/app/hooks/property/useDyanamic";
 import { useShortlistAndCompare } from "@/app/hooks/storage";
@@ -6,8 +7,11 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import React from "react";
 
-export default function Message() {
-  const { data } = useDynamicProp();
+export default function Message({ cg, propTypeName }: any) {
+  const { data, mutate } = useDynamicProp({
+    cg,
+    propId: listingProps[propTypeName as keyof typeof listingProps],
+  });
   const dynamicText = `${
     (data?.shortListed && data?.compareAdded && "Shortlisted and Compared") ||
     (data?.compareAdded && "Compared") ||
