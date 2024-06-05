@@ -30,6 +30,7 @@ export default function PriceBreakup({
           "securetyType",
           "clubHouseTill",
           "securityMonth",
+          "security",
         ].includes(item) && otherPrice[item] !== "NA"
     );
 
@@ -65,6 +66,7 @@ export default function PriceBreakup({
   }
   const otherChangeTotal = parseOtherCharge(otherPrice?.otherCharge);
   const chargesArray = otherPrice?.otherCharge?.split(",");
+
   const [opened, { open, close }] = usePricingPop();
 
   return (

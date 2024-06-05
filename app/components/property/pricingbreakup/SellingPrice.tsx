@@ -1,5 +1,6 @@
 import { NumberFormatter } from "@mantine/core";
 import React from "react";
+import SecurityDeposit from "./SecurityDeposit";
 
 export default function SellingPrice({
   price,
@@ -9,8 +10,8 @@ export default function SellingPrice({
   type: string;
 }) {
   return (
-    <div className="absolute bottom-16 left-1/2 -translate-x-1/2 w-[95%]">
-      <div className="flex flex-col justify-center items-start gap-2.5 border shadow-[0px_4px_22px_0px_rgba(204,233,204,0.38)] pl-6 pr-[37px] py-3 rounded-[10px] border-solid border-[#148B16] bg-[#eaffea]">
+    <div className=" w-[100%]">
+      <div className="flex flex-col justify-center items-start gap-2.5 border shadow-[0px_4px_22px_0px_rgba(204,233,204,0.38)] pl-6 pr-[30px] py-3 rounded-[10px] border-solid border-[#148B16] bg-[#eaffea]">
         <div className="text-[#38333A] text-2xl not-italic font-medium leading-[normal] capitalize inline-flex">
           {DefaultIcon} Total {type} Price Including all the charges
         </div>
@@ -18,6 +19,7 @@ export default function SellingPrice({
           ₹ <NumberFormatter thousandSeparator value={price} />
         </h2>
       </div>
+      <SecurityDeposit security="33" type="333" />
       <p className="text-[#001F35] text-[10px] not-italic font-normal mt-4">
         Disclaimer: Information provided is for reference only. Get Right
         Property does not guarantee accuracy. Always refer to relevant laws for

@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Footer from "../components/layouts/primary/footer";
 import Header from "../components/layouts/primary/header";
 import Blogs from "../components/molecules/blogs";
@@ -18,8 +18,8 @@ export default function page() {
       <DynamiCarousel />
       <YourList />
       <Blogs />
-
       <Footer />
+      {/* Grids */}
     </div>
   );
 }
