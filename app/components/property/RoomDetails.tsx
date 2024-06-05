@@ -40,7 +40,7 @@ import { generatePropertyDetails } from "@/app/data/property";
 const style = {
   card: "mr-[3%] mb-[1%]  p-[2%] md:p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8] ",
   heading: {
-    h1: "text-[24px] lg:text-[24px] font-[600] text-[#001F35] mb-1",
+    h1: "text-[#001F35] text-[28px] not-italic font-semibold uppercase mb-1",
     p: "text-[16px] lg:text-[24px] font-[500] text-[#4D6677] italic mb-8 capitalize",
   },
 };

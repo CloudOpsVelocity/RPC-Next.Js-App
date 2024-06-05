@@ -20,33 +20,8 @@ function PFloorPlanModal({
   setOpened: Dispatch<SetStateAction<boolean>>;
 }) {
   const TRANSITION_DURATION = 200;
-  const setValue = useSetAtom(selectedFloorAtom);
   const type = listingProps[data.propTypeName as keyof typeof listingProps];
-  const handleOpen = () => {
-    setValue({
-      projIdEnc: "4f313de2f95cd9d761098b8f6c09417c",
-      phaseId: 670,
-      propType: type,
-      bhk: 42,
-      bhkName: data.bhkName,
-      towerName: data.tower,
-      towerId: data.tower,
-      block: data.block,
-      floor: data.atFloor,
-      unitNumber: data.unitNumber,
-      facingId: data.facingName,
-      facingName: data.facingName,
-      caretarea: data.ca,
-      superBuildUparea: data.sba,
-      terraceArea: data.ta,
-      parkingType: "Opened",
-      totalNumberofBathroom: data.nobt,
-      totalNumberOfBalcony: data.nobl,
-      noOfCarParking: data.noocp,
-      floorPlanUrl: data.projMedia.floorPlanUrl,
-    });
-    setOpened(true);
-  };
+
   const { handleDownload } = useDownload();
   return (
     <>
@@ -168,7 +143,7 @@ const RightSection = ({ propCgId }: any) => {
                   : propCgId === projectprops.rowHouse ||
                     propCgId === projectprops.villa
                   ? `G+${data?.floor}`
-                  : data?.floor}
+                  : data?.floor ?? data.totalFloor}
               </span>{" "}
             </p>
           </div>
@@ -388,7 +363,7 @@ const RightSection = ({ propCgId }: any) => {
               Length of Plot{" "}
               <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
                 {" "}
-                {data.length} sq.ft
+                {data.length}
               </span>
             </p>
           </div>
@@ -401,7 +376,7 @@ const RightSection = ({ propCgId }: any) => {
               Breadth of Plot{" "}
               <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
                 {" "}
-                {data.width} sq.ft
+                {data.width}
               </span>
             </p>
           </div>

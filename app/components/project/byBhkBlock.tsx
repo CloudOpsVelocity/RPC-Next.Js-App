@@ -24,6 +24,7 @@ export default function ByBhkBlock({
 }: Props) {
   const filteredData =
     bhk === "0" ? data : data.filter((item: any) => item.bhkName === bhk);
+
   const getOptions = (property: string): string[] => {
     return Array.from(new Set(data.map((item: any) => String(item[property]))));
   };

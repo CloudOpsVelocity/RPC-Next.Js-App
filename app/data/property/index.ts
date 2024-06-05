@@ -71,7 +71,7 @@ export function generatePropertyDetails(
         { title: "Unit Type", value: data.bhkName, Icon: Marble },
         { title: "Property Type", value: data.propTypeName, Icon: Marble },
         { title: "Phase", value: data.phaseName, Icon: Marble },
-        { title: "Elevation", value: data.atFloor, Icon: TowerIcon },
+        { title: "Elevation", value: `G+${data.atFloor}`, Icon: TowerIcon },
         { title: "Unit Number", value: data.unitNumber, Icon: Marble },
         { title: "Facing", value: data.facingName, Icon: Marble },
 
@@ -235,7 +235,7 @@ export function generatePropertyDetails(
         { title: "Unit Type", value: data.bhkName, Icon: Marble },
         { title: "Property Type", value: data.propTypeName, Icon: Marble },
         { title: "Phase", value: data.phaseName, Icon: Marble },
-        { title: "Elevation", value: data.atFloor, Icon: TowerIcon },
+        { title: "Elevation", value: `G+${data.atFloor}`, Icon: TowerIcon },
         { title: "Unit Number", value: data.unitNumber, Icon: Marble },
         { title: "Facing", value: data.facingName, Icon: Marble },
         {
@@ -271,7 +271,7 @@ export function generatePropertyDetails(
       ];
 
       if (cg === "R") {
-        propertyDetails.splice(2, 2);
+        propertyDetails.splice(2, 1);
 
         if (availablityStatus === "R") {
           // For Rent, Ready to Move

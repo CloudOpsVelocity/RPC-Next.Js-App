@@ -25,6 +25,7 @@ import ErrorContainer from "@/app/components/project/error/container";
 import PriceBreakup from "@/app/components/property/pricingbreakup/PriceBreakup";
 import { notFound } from "next/navigation";
 import { ARROW_ICON } from "@/app/config/llisting";
+import { bhkDetailsMap } from "@/app/data/projectDetails";
 
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
@@ -130,6 +131,8 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           projId={data.projIdEnc}
           cg={data.cg}
           propTypeName={data.propTypeName}
+          bhkId={bhkDetailsMap.get(data.bhkName) ?? 41}
+          // query={""}
         />
         {data.projIdEnc && (
           <NearByCarousel

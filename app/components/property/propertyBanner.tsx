@@ -17,8 +17,6 @@ export default function PropertyBanner({
   minPrice,
   maxPrice,
   media,
-  about,
-  projIdEnc,
 }: Main) {
   const isMobile = useMediaQuery(`(max-width: 750px)`);
   return isMobile ? (
@@ -35,15 +33,10 @@ export default function PropertyBanner({
       className="w-[90%] m-auto mt-[2%] shrink-0  bg-[#fcfcfc] mb-20 relative  border shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] border-solid border-[#CAE9FF]  px-[52px] py-[35px]"
       id="projectDetails"
     >
-      {/* <div
-        className="rounded-full bg-gradient-to-b from-green-600/30 to-white/30 w-[385px] h-[385px] shrink-0 absolute
-      right-0 -top-5 -z-1
-      "
-      ></div> */}
       <Image
-        src="/property/propertybanner.png"
+        src="https://d2l0lb5gc1bw3t.cloudfront.net/staticmedia-images-icons/project-detail/approvedgreen.png"
         alt="Sobha Dream Acres"
-        className="w-[312px] h-auto absolute right-8 top-[0px] hidden md:block"
+        className="w-[312px] h-auto absolute right-0 top-[0px] hidden md:block"
         width={312}
         height={312}
       />

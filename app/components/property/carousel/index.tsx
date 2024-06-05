@@ -2,6 +2,7 @@
 import React from "react";
 import ProjectCarousel from "../../property/carousel/PropertyCard";
 import useNearby from "@/app/hooks/property/useNearBy";
+import { listingProps } from "@/app/data/projectDetails";
 
 export default function NearByCarouselProperty({
   projName,
@@ -10,15 +11,24 @@ export default function NearByCarouselProperty({
   projId,
   cg,
   propTypeName,
+  bhkId,
 }: {
   projName: string;
   lat: string;
   lng: string;
   projId?: string;
   cg: string;
-  propTypeName?: string;
+  propTypeName: string;
+  bhkId: number;
 }) {
-  const { data } = useNearby({ lat, lng, projId, cg });
+  const { data } = useNearby({
+    lat,
+    lng,
+    projId,
+    cg,
+    bhkId,
+    propType: listingProps[propTypeName as keyof typeof listingProps],
+  });
   const listingType = cg === "R" ? "RENT" : "SELL";
 
   return (

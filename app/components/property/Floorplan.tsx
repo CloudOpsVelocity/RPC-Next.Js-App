@@ -15,7 +15,6 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
   const setValue = useSetAtom(selectedFloorAtom);
   const type = listingProps[data.propTypeName as keyof typeof listingProps];
   const handleOpen = () => {
-    console.log();
     setValue({
       projIdEnc: "4f313de2f95cd9d761098b8f6c09417c",
       phaseId: 670,
@@ -41,6 +40,9 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
       noobp: data.noobp,
       noccp: data.noccp,
       nocbp: data.nocbp,
+      ...(data.length && { length: data.length }),
+      ...(data.width && { width: data.width }),
+      ...(data.totalFloor && { totalFloor: data.totalFloor }),
     });
     setOpened(true);
   };

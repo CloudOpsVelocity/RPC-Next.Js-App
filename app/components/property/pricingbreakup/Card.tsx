@@ -36,13 +36,7 @@ export default function Card({ Icon, title, type, data, otherPrice }: Props) {
                     : (otherPrice[key] as string)
                 }
                 label={
-                  key === "clubHouseCharge"
-                    ? `${displayNameMap[key]} ${
-                        otherPrice?.clubHouseCharge !== "A"
-                          ? `(${otherPrice?.clubHouseTill} year)`
-                          : ""
-                      } `
-                    : key === "security"
+                  key === "security"
                     ? `Security Deposit ${
                         otherPrice?.securetyType === "F"
                           ? "Fixed"
@@ -94,7 +88,7 @@ const displayNameMap: DisplayNameMap = {
   elctCharge: "Electricity Charges",
   waterCharge: "Water Charges",
   maintananceChargess: "Maintenance Charges",
-  securetyType: "securetyType",
-  security: "Security Deposit",
-  securityMonth: "securityMonth",
+  // securetyType: "securetyType",
+  // security: "Security Deposit",
+  // securityMonth: "securityMonth",
 };

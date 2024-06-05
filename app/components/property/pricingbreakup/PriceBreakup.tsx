@@ -102,7 +102,7 @@ export default function PriceBreakup({
           <Card
             title="Other charges"
             Icon={MoneyIcon}
-            type="applicableprice"
+            type="otherprice"
             data={chargesArray}
             otherPrice={otherPrice}
           />

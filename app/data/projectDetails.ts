@@ -107,6 +107,9 @@ export const bhkDetails = [
     value: 45,
   },
 ];
+export const bhkDetailsMap = new Map(
+  bhkDetails.map((detail) => [detail.title, detail.value])
+);
 
 export const filterKeysDetails = new Map([
   ["bhkName", { name: "Unit type" }],

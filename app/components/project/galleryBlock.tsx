@@ -104,7 +104,7 @@ export default function GalleryBlock({
                 alt={`Image ${ind + 1}`}
                 className={clsx(
                   `w-[110px] lg:w-[152px] h-[68px] lg:h-[94px]   !rounded-[5px] shadow-md mb-[4%] cursor-pointer  md:min-w-[152px] object-cover `,
-                  selectedMedia === img &&
+                  selectedMedia?.split("?")[0] === img.split("?")[0] &&
                     "!border-2 !border-[#4d6677] !shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)]"
                 )}
                 onClick={() => handleMediaClick(img as string)}

@@ -40,7 +40,7 @@ const Gallery: React.FC<GalleryProps> = ({
     open(isImage ? "image" : "video", image);
   };
   const isMobile = useMediaQuery(`(max-width: 750px`);
-  // console.log(image === (previewImage || content?.url));
+
   return (
     <>
       <Modal
@@ -132,7 +132,8 @@ const Gallery: React.FC<GalleryProps> = ({
                         className={clsx(
                           `cursor-pointer w-full min-w-[150px] max-w-[150px] !h-auto max-h-[100px] min-h-[100px] object-cover bg-white`,
                           image.split("?")[0] ===
-                            (previewImage?.split("?")[0] || content?.url) &&
+                            (previewImage?.split("?")[0] ||
+                              content?.url?.split("?")[0]) &&
                             "!border-[5px] !border-white"
                         )}
                       />

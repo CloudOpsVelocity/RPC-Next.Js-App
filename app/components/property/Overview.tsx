@@ -23,10 +23,7 @@ export default function PropertyOverView({ data }: { data: Main }) {
             {data.cg === "S" ? " Sell" : " Rent"} In {data.ltName}
           </h2>
           <p className="text-[16px] lg:text-[24px] text-[#505050] font-[500]">
-            {data.address} {`${data.ltName} `}
-            {`${data.ctName} `}
-            {`${data.stateName ?? ""} `}
-            {data.pinCode}
+            {`${data.address}, ${data.ltName}, ${data.ctName}, ${data?.stateName}, ${data.pinCode}`}
           </p>
         </div>
         <div className="flex justify-center md:items-end flex-col">

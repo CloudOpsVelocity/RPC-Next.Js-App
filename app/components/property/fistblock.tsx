@@ -101,10 +101,7 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
                   {projName}
                 </p>
                 <p className="text-[#202020] text-[22px] not-italic font-medium capitalize mt-2 ">
-                  {projectDetails.address} {`${projectDetails.ltName} `}
-                  {`${projectDetails.ctName} `}
-                  {`${projectDetails?.stateName ?? ""} `}
-                  {projectDetails.pinCode}
+                  {`${projectDetails.address}, ${projectDetails.ltName}, ${projectDetails.ctName}, ${projectDetails?.stateName}, ${projectDetails.pinCode}`}
                 </p>
 
                 <p className=" mt-[7px] mb-[7px] text-[#001F35] text-2xl not-italic font-semibold">
@@ -120,19 +117,20 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
               <h2 className="text-[20px] md:text-[28px] lg:text-[32px] font-[700] text-[#001F35]">
                 {formatCurrency(projectDetails.price)}
               </h2>
-              <p className="text-[16px] md:text-right lg:text-[24px] font-[600] mb-[10px] md:mb-[10px] text-[#00487C] ">
-                ₹{" "}
-                {calculatePerSqPrice(
-                  projectDetails.price,
-                  projectDetails.propTypeName === "Plot"
-                    ? projectDetails.plotArea
-                    : projectDetails.sba
-                )}
-                /- Price per sqft onwards
-              </p>
+              {projectDetails.cg === "S" && (
+                <p className="text-[16px] md:text-right lg:text-[24px] font-[600] mb-[10px] md:mb-[10px] text-[#00487C] ">
+                  ₹{" "}
+                  {calculatePerSqPrice(
+                    projectDetails.price,
+                    projectDetails.propTypeName === "Plot"
+                      ? projectDetails.plotArea
+                      : projectDetails.sba
+                  )}
+                  /- Price per sqft onwards
+                </p>
+              )}
               <p className="text-[#001F35] text-xl not-italic font-semibold leading-[normal] mb-[13px]">
-                Posted By:{" "}
-                {projectDetails.postedByType === "B" ? "Builder" : "Agent"}
+                Posted By: {projectDetails.postedByName}
               </p>
               <p
                 className="text-[16px] lg:text-[20px] font-[600] mr-auto md:mr-0 text-[#2A4C70] bg-[#FFF] rounded-[10px] shadow-md p-[8px] flex items-center gap-2 cursor-pointer"
