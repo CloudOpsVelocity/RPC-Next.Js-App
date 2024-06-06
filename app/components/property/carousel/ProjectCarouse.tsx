@@ -1,10 +1,10 @@
 "use client";
 import useNearby from "@/app/hooks/useNearby";
 import React from "react";
-import ProjectCarousel from "./ProjectCard";
 import useBuilder from "@/app/hooks/useBuilder";
+import ProjectCarousel from "../../project/ProjectCard";
 
-export default function NearByCarousel({
+export default function NearByCarouselProjProperty({
   projName,
   lat,
   lng,
@@ -36,31 +36,17 @@ export default function NearByCarousel({
     >
       <ProjectCarousel
         type="proj"
-        title="Other Projects By"
+        title={`Other Projects By ${builderData?.data.userName}`}
         content="See what builder has posted"
-        projName={builderData?.data?.userName}
+        projName={""}
         data={
           data != undefined && data.builderProj != undefined
             ? data.builderProj
             : []
         }
         mutate={mutate}
-        builderName={builderData?.data?.userName}
+        // builderName={builderData?.data?.userName}
         ct="builder"
-      />
-      <ProjectCarousel
-        type="proj"
-        title={nearBy?.title ?? "nEAR BY pROJECTS OF"}
-        projName={projName}
-        content="See what other customers also viewed"
-        data={
-          data != undefined && data.nearbyProj != undefined
-            ? data.nearbyProj
-            : []
-        }
-        mutate={mutate}
-        builderName={builderData?.data?.companyName}
-        ct="proj"
       />
     </div>
   );

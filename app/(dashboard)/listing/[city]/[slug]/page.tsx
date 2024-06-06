@@ -17,7 +17,6 @@ import PropertyFirstBlock from "@/app/components/property/fistblock";
 import LeafMap from "@/app/components/project/map";
 import PropertyMap from "@/app/components/property/map";
 import { getListingDetails } from "@/app/utils/api/property";
-import NearByCarousel from "@/app/components/project/NearByCarousel";
 import NearByCarouselProperty from "@/app/components/property/carousel";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
 import MobileHidden from "@/app/components/molecules/MobileHidden";
@@ -27,6 +26,7 @@ import { notFound } from "next/navigation";
 import { ARROW_ICON } from "@/app/config/llisting";
 import { bhkDetailsMap } from "@/app/data/projectDetails";
 import CompareError from "@/app/components/property/actions/Error";
+import NearByCarouselProjProperty from "@/app/components/property/carousel/ProjectCarouse";
 
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
@@ -136,15 +136,15 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           // query={""}
         />
         {data.projIdEnc && (
-          <NearByCarousel
+          <NearByCarouselProjProperty
             projName={""}
             lat={projData?.lat}
             lng={projData?.lang}
             projId={data.propIdEnc}
-            // builderId={projData?.builderId}
+            builderId={projData?.builderId}
             company={projData?.companyName}
             nearBy={{
-              title: `Other Projects by ${TITLE_OF_PROP}`,
+              title: `Other Projects by ${data.postedByName}`,
             }}
           />
         )}

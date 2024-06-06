@@ -57,7 +57,7 @@ export default function PropertyOverviewBanner({
               </span>
             </p>
             <Button
-              title="Request a Callback"
+              title="Request  Callback"
               buttonClass=" text-[#FFF] text-[26px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[16px]  mt-3"
               onChange={() => open("prop", slug, "projBanner", postedByType)}
             />
