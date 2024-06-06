@@ -20,7 +20,8 @@ function PFloorPlanModal({
   setOpened: Dispatch<SetStateAction<boolean>>;
 }) {
   const TRANSITION_DURATION = 200;
-  const type = listingProps[data.propTypeName as keyof typeof listingProps];
+  const type =
+    listingProps[data.propTypeName.trim() as keyof typeof listingProps];
 
   const { handleDownload } = useDownload();
   return (
@@ -63,6 +64,7 @@ export default PFloorPlanModal;
 
 const MiddleSection = () => {
   const data = useAtomValue(selectedFloorAtom);
+
   return (
     <div className="col-span-1">
       <div className="relative">
@@ -377,7 +379,7 @@ const RightSection = ({ propCgId }: any) => {
               Length of Plot{" "}
               <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
                 {" "}
-                {data.length}
+                {data.length} sq.ft
               </span>
             </p>
           </div>
@@ -390,7 +392,7 @@ const RightSection = ({ propCgId }: any) => {
               Breadth of Plot{" "}
               <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
                 {" "}
-                {data.width}
+                {data.width} sq.ft
               </span>
             </p>
           </div>

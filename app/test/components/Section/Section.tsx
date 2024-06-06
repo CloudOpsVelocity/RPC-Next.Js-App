@@ -2,53 +2,44 @@
 import React from "react";
 
 export default function Section() {
-  let obj = {
-    x: { y: { z: 4 } },
-    state: {
-      value: 10,
-      city: {
-        value: 2,
-        locality: "",
-      },
-    },
-  };
-  // 'x.y.z':4
-  //   let arr = [1, 3, 3, 4, 3, 5, 4, 4];
-  //   let obj = {};
-  //   for (let i = 0; i < arr.length; i++) {
-  //     const element = arr[i];
-  //     if (obj[element]) {
-  //       obj[element] = obj[element] + 1;
-  //       console.log(arr.length, i + 1);
-  //     } else {
-  //       obj[element] = 1;
-  //     }
-  //   }
-  //   console.log(obj);
-  // function findSecondRepeated(arr) {
-  //   const countObj = {};
-  //   let firstRepeated = null;
-  //   let secondRepeated = null;
+  // let arr = [3, 3, 3, 3, 3, 3, 33];
+  // const callback = (item: number[]) => {
+  //   return item > 2;
+  // };
 
-  //   for (let i = 0; i < arr.length; i++) {
-  //     const elem = arr[i];
-  //     countObj[elem] = (countObj[elem] || 0) + 1;
+  // const isProject = myEvery(arr, callback);
 
-  //     if (countObj[elem] === 2) {
-  //       if (firstRepeated === null) {
-  //         firstRepeated = elem;
-  //       } else {
-  //         secondRepeated = elem;
-  //         break;
-  //       }
-  //     }
-  //   }
-
-  //   return secondRepeated;
-  // }
-
-  // const arr = [1, 3, 3, 4, 3, 5, 4, 4];
-  // const result = findSecondRepeated(arr);
-  // console.log(result); // Output: 4
+  // console.log("🚀 ~ page ~ isProject:", isProject);
   return <div>Section</div>;
+}
+function myEvery<T>(
+  arr: T[],
+  callbackFn: (value: T, index: number, array: T[]) => boolean
+): boolean {
+  // Handle cases where arr is null or undefined
+  if (arr === null || arr === undefined) {
+    throw new TypeError("Array cannot be null or undefined");
+  }
+
+  // Handle cases where callbackFn is not a function
+  if (typeof callbackFn !== "function") {
+    throw new TypeError(`${callbackFn} is not a function`);
+  }
+
+  // Special case for empty arrays
+  if (arr.length === 0) {
+    return true;
+  }
+
+  // Iterate over the array elements
+  for (let i = 0; i < arr.length; i++) {
+    // Call the provided callback function with the current element, index, and the array itself
+    if (!callbackFn(arr[i], i, arr)) {
+      // If the callback function returns false for any element, return false
+      return false;
+    }
+  }
+
+  // If the loop completes without returning false, return true
+  return true;
 }

@@ -151,7 +151,7 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
                   alt="no of floors"
                   className="h-[24px] w-[24px] "
                 />
-                Floors Plan
+                Floor Plan
               </p>
             </div>
           </div>

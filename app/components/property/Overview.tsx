@@ -19,6 +19,9 @@ export default function PropertyOverView({ data }: { data: Main }) {
       <div className="pl-[2%] pr-[2%] flex justify-between items-center flex-wrap">
         <div>
           <h2 className="text-[24px] lg:text-[32px] text-[#00487C] not-italic font-bold leading-[normal] capitalize">
+            <span className="lowercase">
+              {data.propTypeName === "Plot" ? data.plotArea + " sq.ft" : ""}
+            </span>{" "}
             {data.bhkName} {data.propTypeName} For{" "}
             {data.cg === "S" ? " Sell" : " Rent"} In {data.ltName}
           </h2>
