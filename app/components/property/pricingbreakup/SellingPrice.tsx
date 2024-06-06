@@ -23,12 +23,7 @@ export default function SellingPrice({
           ₹ <NumberFormatter thousandSeparator value={price} />
         </h2>
       </div>
-      {otherPrice.security && (
-        <SecurityDeposit
-          security={otherPrice.security}
-          type={otherPrice.securetyType}
-        />
-      )}
+      {otherPrice.security && <SecurityDeposit otherPrice={otherPrice} />}
 
       <p className="text-[#001F35] text-[10px] not-italic font-normal mt-4">
         Disclaimer: Information provided is for reference only. Get Right

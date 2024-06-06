@@ -21,8 +21,8 @@ type Props = {
   projName?: string;
   content: string;
   data?: any;
-  mutate?: ({ id }: { id: string; type: "builder" | "proj" }) => void;
-  ct?: "builder" | "proj";
+  mutate?: ({ id }: { id: string; type: "other" | "proj" }) => void;
+  ct?: "other" | "proj";
   builderName?: string;
 };
 
@@ -30,8 +30,8 @@ type CardProps = {
   type: string;
   projName?: string;
   cardData?: any;
-  mutate?: ({ id }: { id: string; type: "builder" | "proj" }) => void;
-  ct: "builder" | "proj";
+  mutate?: ({ id }: { id: string; type: "other" | "proj" }) => void;
+  ct: "other" | "proj";
 };
 
 export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
@@ -50,19 +50,18 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
       : `${cardData.bhkName} ${cardData.propTypeName} for
       ${cardData.cg === "R" ? "Rent" : "Sale"} in ${cardData.ltName}`;
   const setPopReqData = useSetAtom(NearByDataAtom);
-  const onAddingShortList = (projId: string) => {
+  const onAddingShortList = (propId: string) => {
     if (session) {
-      mutate && mutate({ id: projId, type: ct as Pick<CardProps, "ct">["ct"] });
+      mutate && mutate({ id: propId, type: ct as Pick<CardProps, "ct">["ct"] });
       toggleShortlist({
         id: reqId,
         status: cardData.shortListed === "Y" ? "N" : "Y",
-        source: type as GlobalPageType["types"],
+        source: "prop",
       });
     } else {
       openS();
     }
   };
-
   const handleReqCall = () => {
     open(type, reqId, "projCard", cardData.postedByType);
     setPopReqData({
@@ -100,9 +99,9 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
           </div>
         )}
 
-        <div className="px-3 pb-3">
+        <div className="px-3 pb-3 relative">
           {type != "proj" && (
-            <p className="mb-[-30px] relative z-10 p-[2px] text-[#148B16] text-[14px] font-[700] w-[40%] flex pl-[4px] justify-center items-center bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 shadow-md rounded-[18px] border-[#92B2C8] border-[0.5px] border-solid ">
+            <p className="absolute flex  h-[33px] justify-center items-center gap-2 shrink-0 shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] p-2 rounded-[18px] border-[0.5px] border-solid border-[#92B2C8] bg-gradient-to-br from-[#EFF5FF] to-[#F2FAFF] top-2 left-5 z-50 text-[#148B16] text-sm not-italic font-bold">
               {cardData.availablityStatus == "R"
                 ? "Ready to move"
                 : "Under Construction"}
@@ -133,7 +132,7 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
                 className="mt-[-30px] rounded-[10px] relative bottom-[35px] z-10 p-[8px] text-[#0073C6] text-[18px] font-[700] flex pl-[4px] justify-center items-center bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100"
                 onClick={(e) => {
                   e.preventDefault();
-                  onAddingShortList(cardData.projIdEnc);
+                  onAddingShortList(cardData.propIdEnc);
                 }}
               >
                 <span className=" w-[24px] h-[24px] ">
@@ -247,7 +246,7 @@ const ProjectCarousel = ({
                     type={type}
                     cardData={project}
                     mutate={mutate}
-                    ct={ct ?? "builder"}
+                    ct={ct ?? "other"}
                   />
                 </CarouselSlide>
               );

@@ -21,7 +21,7 @@ export default function NearByCarouselProperty({
   propTypeName: string;
   bhkId: number;
 }) {
-  const { data } = useNearby({
+  const { data, mutate } = useNearby({
     lat,
     lng,
     projId,
@@ -38,12 +38,8 @@ export default function NearByCarouselProperty({
     >
       <ProjectCarousel
         type="prop"
-        title={
-          propTypeName === "Independent House/Building"
-            ? `NEARBY SIMILAR ${listingType} LISTINGS`
-            : `Other ${listingType} listings in this Project`
-        }
-        projName={propTypeName === "Independent House/Building" ? "" : projName}
+        title={"Other SELL listings in this Project"}
+        projName={""}
         content={
           propTypeName === "Independent House/Building"
             ? `Check some similar nearby ${listingType.toLowerCase()} listings available`
@@ -54,6 +50,8 @@ export default function NearByCarouselProperty({
             ? data.projListing
             : []
         }
+        mutate={mutate}
+        ct="proj"
       />
       <ProjectCarousel
         type="prop"
@@ -64,6 +62,8 @@ export default function NearByCarouselProperty({
             ? data.otherListing
             : []
         }
+        mutate={mutate}
+        ct="other"
       />
     </div>
   );

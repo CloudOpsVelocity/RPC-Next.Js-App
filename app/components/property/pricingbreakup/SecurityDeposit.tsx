@@ -1,16 +1,11 @@
 import React from "react";
 
-export default function SecurityDeposit({
-  type,
-  security,
-}: {
-  type: string;
-  security: string;
-}) {
+export default function SecurityDeposit({ otherPrice }: { otherPrice: any }) {
+  const { security, type } = config.calcSecurityDeposit(otherPrice);
   return (
     <div className={styles.container}>
       {styles.icon}
-      <h4 className={styles.textLite}>Security Deposit {}</h4>
+      <h4 className={styles.textLite}>{type}</h4>
       <h4 className={styles.textBold}>₹ {security}</h4>
     </div>
   );
@@ -36,4 +31,14 @@ let styles = {
       />
     </svg>
   ),
+};
+
+let config = {
+  SampleText: "Security Deposit",
+  calcSecurityDeposit(otherPrice: any): { security: number; type: string } {
+    const { securetyType, security, securityMonth = 1 } = otherPrice;
+    let total = security * securityMonth;
+    let text = this.SampleText;
+    return { security: total, type: text };
+  },
 };

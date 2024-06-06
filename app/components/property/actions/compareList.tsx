@@ -6,20 +6,26 @@ import React from "react";
 import { useShortlistAndCompare } from "@/app/hooks/storage";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import clsx from "clsx";
-import useDynamicProj from "@/app/hooks/project/useDynamic";
 import useDynamicProp from "@/app/hooks/property/useDyanamic";
 import { listingProps } from "@/app/data/projectDetails";
+import { useMessagePopup } from "@/app/hooks/project/useMessagePopup";
+import { useErrorListing } from "@/app/hooks/property/useError";
 
 export default function CompareList({ cg, propTypeName }: any) {
   const { data: session } = useSession();
   const { slug } = useParams<{ slug: string }>();
   const { toggleCompare, compareItems } = useShortlistAndCompare();
   const [, { open }] = usePopShortList();
+  const [opened, { close, open: openSuccesPopup }] = useErrorListing();
   const { data, mutate } = useDynamicProp({
     cg,
-    propId: listingProps[propTypeName as keyof typeof listingProps],
+    propId: listingProps[propTypeName.trim() as keyof typeof listingProps],
   });
   const onAddingCompare = () => {
+    if (data?.compareCount >= 5 && !data?.compareAdded) {
+      openSuccesPopup();
+      return;
+    }
     if (session) {
       mutate(3);
       toggleCompare({

@@ -68,7 +68,7 @@ export default function PriceBreakup({
   }
   const otherChangeTotal = parseOtherCharge(otherPrice?.otherCharge);
   const chargesArray = otherPrice?.otherCharge?.split(",");
-  const [opened, { open, close }] = usePricingPop();
+  const [opened, { close }] = usePricingPop();
 
   return (
     <Drawer

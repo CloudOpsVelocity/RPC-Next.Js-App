@@ -46,7 +46,7 @@ export default function page() {
       reviewerEmail: "scarlett.wright@x.dummyjson.com",
     },
   ];
-
+  console.log(arr.every((item) => item.rating === 2));
   return (
     <div className="h-[100%] w-[100%] flex justify-center items-center flex-col overflow-hidden ">
       <Section />

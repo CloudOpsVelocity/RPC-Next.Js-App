@@ -21,7 +21,9 @@ export default function useNearby({
     const res = await axios.get(
       `${BACKEND_BASE_URL}/api/project/nearbyProjects?lat=${lat}&lng=${lng}&projIdEnc=${
         projId || slug
-      }&builderId=${builderId || ""}&companyName=${company || ""}`
+      }${builderId ? `&builderId=${builderId}` : ""}&companyName=${
+        company || ""
+      }`
     );
     return res.data;
   };

@@ -18,6 +18,14 @@ export default function useDynamicProp({
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/fetch/dynamic-data?propIdEnc=${slug}&category=${cg}&propType=${propId}`
     );
     return res.data;
+    // return {
+    //   compareCount: 10,
+    //   isRequestedCall: "Y",
+    //   rating: 3,
+    //   shortListed: "Y",
+    //   userRating: "Y",
+    //   status: true,
+    // };
   };
   const { data, isLoading } = useQuery({
     queryFn: getData,

@@ -20,7 +20,7 @@ export default function ShortList({ cg, propTypeName }: any) {
   const [, { open }] = usePopShortList();
   const { data, mutate } = useDynamicProp({
     cg,
-    propId: listingProps[propTypeName as keyof typeof listingProps],
+    propId: listingProps[propTypeName.trim() as keyof typeof listingProps],
   });
 
   const onAddingShortList = () => {

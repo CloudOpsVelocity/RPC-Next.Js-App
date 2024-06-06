@@ -26,6 +26,7 @@ import PriceBreakup from "@/app/components/property/pricingbreakup/PriceBreakup"
 import { notFound } from "next/navigation";
 import { ARROW_ICON } from "@/app/config/llisting";
 import { bhkDetailsMap } from "@/app/data/projectDetails";
+import CompareError from "@/app/components/property/actions/Error";
 
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
@@ -33,7 +34,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
   const projData = await getProjectDetails(data.projIdEnc);
   const TITLE_OF_PROP = data.projIdEnc
     ? data.propName
-    : `${data.bhkName} ${data.propTypeName} For
+    : `${data.bhkName ?? ""} ${data.propTypeName} For
   ${data.cg === "S" ? " Sell" : " Rent"} In ${data.ltName}`;
   if (!data.propIdEnc) {
     notFound();
@@ -136,12 +137,15 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         />
         {data.projIdEnc && (
           <NearByCarousel
-            projName={data.propName}
+            projName={""}
             lat={projData?.lat}
             lng={projData?.lang}
             projId={data.propIdEnc}
-            builderId={projData?.builderId}
+            // builderId={projData?.builderId}
             company={projData?.companyName}
+            nearBy={{
+              title: `Other Projects by ${TITLE_OF_PROP}`,
+            }}
           />
         )}
         <PriceBreakup
@@ -152,6 +156,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
 
         <LoginPopup />
         <ProjectDrawer projName={TITLE_OF_PROP} />
+        <CompareError />
       </div>
     </div>
   );

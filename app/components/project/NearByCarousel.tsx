@@ -11,17 +11,21 @@ export default function NearByCarousel({
   projId,
   builderId,
   company,
+  nearBy,
 }: {
   projName: string;
   lat: string;
   lng: string;
   projId?: string;
-  builderId: number;
+  builderId?: number;
   company: string;
+  nearBy?: {
+    title: string;
+  };
 }) {
   const { data, mutate } = useNearby({ lat, lng, projId, builderId, company });
   const { data: builderData } = useBuilder({
-    id: builderId,
+    id: builderId ?? 1109,
     y: "N",
     type: "proj",
   });
@@ -46,7 +50,7 @@ export default function NearByCarousel({
       />
       <ProjectCarousel
         type="proj"
-        title="nEAR BY pROJECTS OF"
+        title={nearBy?.title ?? "nEAR BY pROJECTS OF"}
         projName={projName}
         content="See what other customers also viewed"
         data={
