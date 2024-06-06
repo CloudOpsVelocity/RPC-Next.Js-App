@@ -16,9 +16,17 @@ type Props = {
   callback: () => void;
   values: any;
   builderName?: string;
+  title: string;
+  Posted_BY: string;
 };
 
-export default function ReqOtpForm({ callback, values, builderName }: Props) {
+export default function ReqOtpForm({
+  callback,
+  values,
+  builderName,
+  title,
+  Posted_BY,
+}: Props) {
   const [error, setError] = useState(false);
 
   const form = useForm({
@@ -56,14 +64,23 @@ export default function ReqOtpForm({ callback, values, builderName }: Props) {
         <h2 className="text-[#202020] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px] mb-3">
           Request A Callback
         </h2>
+        <p className="text-[#00487C] text-lg italic font-bold leading-[normal] tracking-[0.36px] capitalize mb-[2%] mt-1">
+          <span className="text-[#4D6677] text-lg italic font-medium leading-[normal] tracking-[0.36px] ">
+            Call For
+          </span>{" "}
+          : {title}
+        </p>
+        <p className="text-[#148B16] text-base italic font-bold leading-[normal] tracking-[0.64px] mb-[2%] ">
+          <span className="text-[#4D6677] text-lg italic font-medium leading-[normal] tracking-[0.36px]">
+            {Posted_BY}
+          </span>{" "}
+          : {builderName}
+        </p>
         <p className="text-[#EA7A00] text-base not-italic font-semibold leading-[normal] tracking-[0.64px] py-1">
           You are one step away to get callback.
         </p>
         <p className="text-[#4D6677] text-base not-italic font-semibold leading-[normal] tracking-[0.64px] mb-[2%] ">
           Please verify your contact !
-        </p>
-        <p className="mt-2 text-[#148B16] text-base italic font-bold leading-[normal] tracking-[0.64px]">
-          Builder: {builderName}
         </p>
         <p className="text-[#4D6677] text-base not-italic font-semibold leading-[normal] tracking-[0.64px] mt-2">
           An OTP has been sent to your mobile number

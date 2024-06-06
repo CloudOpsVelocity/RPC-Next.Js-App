@@ -34,6 +34,7 @@ export interface Main {
   state: string;
   companyName: string;
   postedByName: string;
+  reraStatus: string;
 }
 
 export interface AmenityList {

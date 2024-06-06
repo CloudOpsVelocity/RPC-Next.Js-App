@@ -104,7 +104,9 @@ const RequestCallBackModal = ({
               <ReqcallbackMessage close={handleClose} />
             ) : (
               <>
-                <div className={`w-[100%] md:w-[50%] p-[5%] pr-[1%] `}>
+                <div
+                  className={`w-[100%] md:w-[50%] px-[5%] pb-[5%] pt-[3%] pr-[1%] `}
+                >
                   {status === "idle" && (
                     <h2 className="text-[20px] lg:text-[24px] font-[600] text-[#202020] ">
                       Request Callback
@@ -195,6 +197,7 @@ const LoggedInUserForm = ({
   });
   const propName = popupState.type === "prop" ? "propIdEnc" : "projIdEnc";
   const isProjContact = popupState.type === "prop" ? "N" : "Y";
+
   let Posted_BY = get_posted_by(popupState.cg);
   const onSubmit = async () => {
     setStatus("pending");
@@ -217,6 +220,8 @@ const LoggedInUserForm = ({
   };
 
   const reqData = useAtomValue(NearByDataAtom);
+  let builder = source === "projCard" ? reqData?.builderName : builderName;
+  let title = source === "projCard" ? reqData?.projName : projName;
   return status === "otp" ? (
     <ReqOtpForm
       callback={onSuccess}
@@ -228,6 +233,9 @@ const LoggedInUserForm = ({
         isProjContact: isProjContact,
         src: "searchCard",
       }}
+      builderName={builder}
+      title={title}
+      Posted_BY={Posted_BY}
     />
   ) : (
     <div className="mt-6 w-full">
@@ -236,13 +244,13 @@ const LoggedInUserForm = ({
           {" "}
           Call For:
         </span>{" "}
-        {source === "projCard" ? reqData?.projName : projName}
+        {title}
       </p>
       <p className="text-[#148B16] mb-[6%] text-[14px] lg:text-[16px] italic font-bold leading-[normal] tracking-[0.64px]">
         <span className="text-[#4D6677] text-xl italic font-medium leading-[normal] tracking-[0.8px]">
           {Posted_BY}:
         </span>{" "}
-        {source === "projCard" ? reqData?.builderName : builderName}
+        {builder}
       </p>
       {/* Notifcation */}
       <div className=" flex justify-center items-center gap-2.5 border p-2.5 rounded-xl border-solid border-[#FFD600] bg-[#fff4bb] text-[#242424] text-[17px] not-italic font-semibold leading-[normal] mb-6">
@@ -280,6 +288,7 @@ const ReqForm = ({
   setStatus,
   name,
   source,
+  projName,
 }: {
   close: any;
   status: string;
@@ -289,7 +298,6 @@ const ReqForm = ({
   source: string;
   builderName: string;
 }) => {
-  const { slug } = useParams<{ slug: string }>();
   const popupState = useAtomValue(popupStateAtom);
   const reqData = useAtomValue(NearByDataAtom);
   const form = useForm({
@@ -300,7 +308,6 @@ const ReqForm = ({
     },
     validate: yupResolver(reqSchema),
   });
-
   const propName = popupState.type === "prop" ? "propIdEnc" : "projIdEnc";
   let Posted_BY = get_posted_by(popupState.cg);
   const isProjContact = popupState.type === "prop" ? "N" : "Y";
@@ -312,14 +319,13 @@ const ReqForm = ({
       [propName]: popupState.projectID,
       src: "searchcard",
     });
-    console.log(data);
     setStatus("otp");
   };
   const onSuccess = async () => {
     setStatus("success");
   };
   const bn = source === "projCard" ? reqData.builderName : name;
-
+  const title = source === "projCard" ? reqData?.projName : projName;
   return status === "success" ? (
     <Success close={close} />
   ) : status === "otp" ? (
@@ -332,18 +338,30 @@ const ReqForm = ({
         src: "searchCard",
       }}
       builderName={bn}
+      title={title}
+      Posted_BY={Posted_BY}
     />
   ) : (
-    <form className="w-full max-w-md" onSubmit={form.onSubmit(formSubmit)}>
+    <form className="w-full max-w-[500px]" onSubmit={form.onSubmit(formSubmit)}>
+      <p className="text-[#00487C] text-lg italic font-bold leading-[normal] tracking-[0.36px] capitalize mb-[2%] mt-1">
+        <span className="text-[#4D6677] text-lg italic font-medium leading-[normal] tracking-[0.36px] ">
+          Call For
+        </span>{" "}
+        : {title}
+      </p>
+      <p className="text-[#148B16] text-base italic font-bold leading-[normal] tracking-[0.64px] mb-[2%] ">
+        <span className="text-[#4D6677] text-lg italic font-medium leading-[normal] tracking-[0.36px]">
+          {Posted_BY}
+        </span>{" "}
+        : {bn}
+      </p>
       <p className="text-[#EA7A00] text-base not-italic font-semibold leading-[normal] tracking-[0.64px] mb-[1%] ">
         Looks like you are not registered with us.
       </p>
       <p className="text-[#4D6677] text-sm not-italic font-semibold leading-[normal] tracking-[0.56px] mb-[2%] ">
         No worries add your details to get callback from builder
       </p>
-      <p className="text-[#148B16] text-base italic font-bold leading-[normal] tracking-[0.64px] mb-[2%]">
-        {Posted_BY}: {bn}
-      </p>
+
       <h2 className="text-[#00487C] text-lg not-italic font-semibold leading-[normal] tracking-[0.72px] mb-[2%]">
         Your Details
       </h2>

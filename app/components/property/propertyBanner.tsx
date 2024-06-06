@@ -18,6 +18,7 @@ export default function PropertyBanner({
   maxPrice,
   media,
   about,
+  reraStatus,
 }: Main) {
   const isMobile = useMediaQuery(`(max-width: 750px)`);
   return isMobile ? (
@@ -55,13 +56,21 @@ export default function PropertyBanner({
       </div>
       <div>
         <div className="inline-flex mt-6">
-          <Image
-            src={media?.coverImageUrl}
-            alt="Sobha Dream Acres"
-            className="flex w-[350px] h-[185px] items-center shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[10px]"
-            width={350}
-            height={185}
-          />
+          <div className="relative">
+            {(reraStatus === "Recieved" || reraStatus === "Applied") && (
+              <p className="absolute top-[1px] left-[0.8px] z-50">
+                <Image src={"/r.svg"} alt="rera" width={100} height={100} />
+              </p>
+            )}
+            <Image
+              src={media?.coverImageUrl}
+              alt="Sobha Dream Acres"
+              className="flex w-[350px] h-[185px] items-center shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[10px]"
+              width={350}
+              height={185}
+            />
+          </div>
+
           <div className="ml-5">
             <h3 className="text-[#001F35] text-[32px] not-italic font-semibold leading-[normal]">
               {projectName}
