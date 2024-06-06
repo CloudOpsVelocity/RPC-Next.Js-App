@@ -124,8 +124,8 @@ const otpSchema = yup.object().shape({
     .typeError("OTP is required")
     .positive("OTP must be a positive number")
     .integer("OTP must be an integer")
-    .min(1000, "Plese enter a valid OTP")
-    .max(9999, "OTP must be exactly 4 digits")
+    .min(1000, "OTP is required")
+    .max(9999, "OTP is required")
     .required("OTP is required"),
 });
 const builderSchema = yup.object().shape({

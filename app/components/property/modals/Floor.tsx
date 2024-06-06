@@ -97,19 +97,20 @@ const RightSection = ({ propCgId }: any) => {
           </div>
         )}
 
-        {((data.towerName && propCgId === projectprops.apartment) ||
-          propCgId === projectprops.villament) && (
-          <div className="flex items-center space-x-3">
-            {propertyDetailsSvgs.towerName}
-            <p className="text-[#4D6677] text-[14px] font-[500]">
-              Tower{" "}
-              <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
-                {" "}
-                {data.towerName}
-              </span>
-            </p>
-          </div>
-        )}
+        {data.towerName &&
+          (propCgId === projectprops.apartment ||
+            propCgId === projectprops.villament) && (
+            <div className="flex items-center space-x-3">
+              {propertyDetailsSvgs.towerName}
+              <p className="text-[#4D6677] text-[14px] font-[500]">
+                Tower{" "}
+                <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
+                  {" "}
+                  {data.towerName}
+                </span>
+              </p>
+            </div>
+          )}
 
         {data.block &&
           propCgId == projectprops.apartment &&
@@ -126,14 +127,26 @@ const RightSection = ({ propCgId }: any) => {
             </div>
           )}
 
+        <div className="flex items-center space-x-3">
+          {propertyDetailsSvgs.unitNumber}
+          <p className="text-[#4D6677] text-[14px] font-[500]">
+            Unit Number{" "}
+            <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
+              {" "}
+              {data.unitNumber}
+            </span>
+          </p>
+        </div>
         {propCgId != projectprops.plot && (
           <div className="flex items-center space-x-3">
-            {propertyDetailsSvgs.floor}
+            {propCgId == projectprops.rowHouse || propCgId == projectprops.villa
+              ? propertyDetailsSvgs.towerName
+              : propertyDetailsSvgs.floor}
             <p className="text-[#4D6677] text-[14px] font-[500]">
               {`${
                 propCgId == projectprops.rowHouse ||
                 propCgId == projectprops.villa
-                  ? "Elevation"
+                  ? "At Elevation"
                   : "Floor"
               }`}{" "}
               <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
@@ -148,17 +161,6 @@ const RightSection = ({ propCgId }: any) => {
             </p>
           </div>
         )}
-
-        <div className="flex items-center space-x-3">
-          {propertyDetailsSvgs.unitNumber}
-          <p className="text-[#4D6677] text-[14px] font-[500]">
-            Unit Number{" "}
-            <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
-              {" "}
-              {data.unitNumber}
-            </span>
-          </p>
-        </div>
 
         <div className="flex items-center space-x-3">
           {propertyDetailsSvgs.facingName}
@@ -192,6 +194,18 @@ const RightSection = ({ propCgId }: any) => {
               <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                 {" "}
                 {data.caretarea} sq.ft
+              </span>
+            </p>
+          </div>
+        )}
+        {propCgId != projectprops.plot && (
+          <div className="flex items-center space-x-3">
+            {propertyDetailsSvgs.gardenArea}
+            <p className="text-[#4D6677] text-[14px] font-[500]">
+              Garden Space{" "}
+              <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
+                {" "}
+                {data.ga} sq.ft
               </span>
             </p>
           </div>

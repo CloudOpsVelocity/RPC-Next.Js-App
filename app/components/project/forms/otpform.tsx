@@ -26,11 +26,6 @@ export default function ReqOtpForm({ callback, values, builderName }: Props) {
     validate: yupResolver(otpSchema),
     validateInputOnChange: true,
     onValuesChange(values) {
-      // if (values.otp.toString().length === 4) {
-      //   onSubmit(values);
-      // } else {
-      //   setError(false);
-      // }
       setError(false);
       form.setErrors({});
     },
@@ -51,8 +46,6 @@ export default function ReqOtpForm({ callback, values, builderName }: Props) {
     }
   };
 
-  //console.log(error, form.values)
-  console.log(form.errors);
   return (
     <div>
       <form
@@ -87,7 +80,7 @@ export default function ReqOtpForm({ callback, values, builderName }: Props) {
         </p> */}
         {error && (
           <p className="text-[#F00] font-[500] text-[14px] w-[100%] !max-w-[423px] !mb-[6%]  ">
-            You&apos;ve entered wrong OTP, Please enter your OTP again!
+            Invalid OTP entered. Enter valid OTP
           </p>
         )}
         {form.errors.otp && (

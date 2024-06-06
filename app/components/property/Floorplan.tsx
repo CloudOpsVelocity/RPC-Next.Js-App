@@ -40,6 +40,9 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
       noobp: data.noobp,
       noccp: data.noccp,
       nocbp: data.nocbp,
+      ...(data.ga && {
+        ga: data.ga,
+      }),
       ...(data.length && { length: data.length }),
       ...(data.width && { width: data.width }),
       ...(data.totalFloor && { totalFloor: data.totalFloor }),
