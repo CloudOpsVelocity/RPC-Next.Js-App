@@ -110,7 +110,7 @@ export function setPropertyValues(data: any, propCgId: number): any {
 export const get_posted_by = (str?: string) => {
   switch (str) {
     case "I":
-      return "Individual";
+      return "Owner";
       break;
     case "A":
       return "Agent";
