@@ -222,12 +222,12 @@ export function generatePropertyOverViewData(
         },
         {
           title: "Length of Plot",
-          value: `${data.length} sq.ft`,
+          value: `${data.length} ft.`,
           Icon: TotalLandArea,
         },
         {
           title: "Breadth of Plot",
-          value: `${data.width} sq.ft`,
+          value: `${data.width} ft.`,
           Icon: TotalLandArea,
         },
       ];

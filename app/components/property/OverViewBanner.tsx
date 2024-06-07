@@ -43,7 +43,7 @@ export default function PropertyOverviewBanner({
           <div className="">
             <p className="text-[#212C33] text-[24px] lg:text-[40px] font-[600]">
               {" "}
-              {cg === "S" ? "Sell" : "Rent"} Price
+              {cg === "S" ? "Selling" : "Rent"} Price
             </p>
             <p className="text-[#212C33] text-[24px] lg:text-[40px] font-[600]">
               <span className="text-[#00487C] text-[24px] md:text-[32px] lg:text-[40px] whitespace-nowrap font-[700]">

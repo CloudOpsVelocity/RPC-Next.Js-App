@@ -22,7 +22,7 @@ export default function Message({ cg, propTypeName }: any) {
     (data?.compareAdded || data?.shortListed) && (
       <div
         className={clsx(
-          "inline-flex items-center gap-2 p-1.5 rounded-lg bg-[#fff5c3] absolute -bottom-5 right-0 md:min-w-[520px]",
+          "inline-flex items-center gap-2 p-1.5 rounded-lg bg-[#fff5c3] absolute -bottom-5 right-0 text-nowrap",
           data?.compareAdded && data?.shortListed && "md:min-w-[670px]"
         )}
       >
@@ -56,7 +56,7 @@ export default function Message({ cg, propTypeName }: any) {
             Dashboard
           </a>
           {"   "}
-          for {dynamicText} Project
+          for {dynamicText} Property
         </span>
       </div>
     )

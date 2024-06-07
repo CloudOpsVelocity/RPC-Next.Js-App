@@ -66,7 +66,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         <About
           type="prop"
           id="about"
-          heading="about"
+          heading="about Listing"
           projName={"Listing"}
           content={data.usp}
         />
