@@ -96,12 +96,12 @@ export function generatePropertyDetails(
         },
         {
           title: "Garden Area",
-          value: `${data.ga} sq.ft`,
+          value: data.ga && `${data.ga} sq.ft`,
           Icon: TotalLandArea,
         },
         {
           title: "Terrace Area",
-          value: `${data.ta} sq.ft`,
+          value: data.ta && `${data.ta} sq.ft`,
           Icon: TotalLandArea,
         },
 
@@ -155,17 +155,17 @@ export function generatePropertyDetails(
         },
         {
           title: "Garden Area",
-          value: `${data.ga} sq.ft`,
+          value: data.ga && `${data.ga} sq.ft`,
           Icon: TotalLandArea,
         },
         {
           title: "Terrace Area",
-          value: `${data.ta} sq.ft`,
+          value: data.ta && `${data.ta} sq.ft`,
           Icon: TotalLandArea,
         },
         {
           title: "Balcony Size",
-          value: `${data.ba} sq.ft`,
+          value: data.ba && `${data.ba} sq.ft`,
           Icon: TotalLandArea,
         },
       ];

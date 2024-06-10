@@ -23,7 +23,7 @@ function PFloorPlanModal({
   const type =
     listingProps[data.propTypeName.trim() as keyof typeof listingProps];
 
-  const { handleDownload } = useDownload();
+  const { handleDownload } = useDownload("floorPlan");
   return (
     <>
       <Modal
@@ -49,7 +49,7 @@ function PFloorPlanModal({
             </button>
             <SharePopup
               title="Share"
-              url={imageUrlParser(data.projMedia.floorPlanUrl)}
+              url={imageUrlParser(data.projMedia.floorPlanUrl, "F")}
             />
           </div>
           <MiddleSection />
@@ -202,7 +202,7 @@ const RightSection = ({ propCgId }: any) => {
             </p>
           </div>
         )}
-        {propCgId != projectprops.plot && (
+        {propCgId != projectprops.plot && data.ga && (
           <div className="flex items-center space-x-3">
             {propertyDetailsSvgs.gardenArea}
             <p className="text-[#4D6677] text-[14px] font-[500]">
@@ -261,7 +261,8 @@ const RightSection = ({ propCgId }: any) => {
         )}
         {(propCgId == projectprops.plot ||
           propCgId == projectprops.villa ||
-          propCgId == projectprops.rowHouse) && (
+          propCgId == projectprops.rowHouse ||
+          propCgId == projectprops.independent) && (
           <div className="flex items-center space-x-3">
             {propertyDetailsSvgs.plotArea}
             <p className="text-[#4D6677] text-[14px] font-[500]">
@@ -367,7 +368,7 @@ const RightSection = ({ propCgId }: any) => {
               Length of Plot{" "}
               <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
                 {" "}
-                {data.length} sq.ft
+                {data.length} ft.
               </span>
             </p>
           </div>
@@ -380,7 +381,7 @@ const RightSection = ({ propCgId }: any) => {
               Breadth of Plot{" "}
               <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
                 {" "}
-                {data.width} sq.ft
+                {data.width} ft.
               </span>
             </p>
           </div>

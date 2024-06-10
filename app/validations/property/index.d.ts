@@ -62,6 +62,7 @@ export interface Main {
   postedByName: string;
   agreementType: string;
   isBasement: "Y" | "N";
+  noOfOpenSide: number;
 }
 
 export interface OtherPrice {

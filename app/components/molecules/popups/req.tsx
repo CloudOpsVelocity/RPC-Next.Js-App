@@ -324,6 +324,7 @@ const ReqForm = ({
   const onSuccess = async () => {
     setStatus("success");
   };
+  console.log(reqData);
   const bn = source === "projCard" ? reqData.builderName : name;
   const title = source === "projCard" ? reqData?.projName : projName;
   return status === "success" ? (

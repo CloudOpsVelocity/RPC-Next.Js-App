@@ -21,6 +21,8 @@ import { getImageUrls } from "@/app/utils/image";
 import { calculatePerSqPrice } from "@/app/utils/price";
 import styles from "@/app/styles/Carousel.module.css";
 import { NumberFormatter } from "@mantine/core";
+import { useSetAtom } from "jotai";
+import { currentBlockAtom, isScrollingAtom, stickyAtom } from "./Navigation";
 const realData = [{ test: "hello" }, 2, 3, 4, 5, 6, 77];
 type Props = {
   projectDetails: Main | null;
@@ -30,16 +32,24 @@ type Props = {
 const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
   const images = getImageUrls(projectDetails?.projMedia as any);
   const autoplay = useRef(Autoplay({ delay: 10000 }));
-  const scrollToTopic = (): void => {
-    const element = document.getElementById("floorPlans");
+  const setIsScrolling = useSetAtom(isScrollingAtom);
+  const setSticky = useSetAtom(stickyAtom);
+  const setC = useSetAtom(currentBlockAtom);
+  function scrollToTopic(id: string): void {
+    setIsScrolling(true);
+    const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({
         behavior: "smooth",
-        block: "start",
+        block: "start", // Adjust this value to add more space from the top
         inline: "center",
       });
+
+      setSticky(true);
     }
-  };
+    setC("floorPlans");
+    setTimeout(() => setIsScrolling(false), 3000);
+  }
 
   return (
     <div
@@ -142,7 +152,7 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
               </p>
               <p
                 className="text-[16px] lg:text-[20px] font-[600] mr-auto md:mr-0 text-[#2A4C70] bg-[#FFF] rounded-[10px] shadow-md p-[8px] flex items-center gap-2 cursor-pointer"
-                onClick={scrollToTopic}
+                onClick={() => scrollToTopic("floorPlans")}
               >
                 <Image
                   width={100}

@@ -4701,12 +4701,14 @@ type Props = {
   className: string;
   onClick?: any;
   name: string;
+  type?: "prop" | "proj";
 };
 
-export const WhatsAppButton = ({ name }: Props) => {
-  const encodedMessage = encodeURIComponent(
-    `Hello,\n\nI came across the project, ${name}, and I'm interested! Could you please provide more details about it? I'd love to know about the price, location, and any other relevant information.\n\nThank You!`
-  );
+export const WhatsAppButton = ({ name, type }: Props) => {
+  const text = `Hello,\n\nI came across the ${
+    type === "prop" ? "property" : "project"
+  }, ${name}, and I'm interested! Could you please provide more details about it? I'd love to know about the price, location, and any other relevant information.\n\nThank You!`;
+  const encodedMessage = encodeURIComponent(text);
 
   const whatsappLink = `https://api.whatsapp.com/send?phone=+918884440963&text=${encodedMessage}`;
 

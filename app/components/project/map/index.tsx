@@ -27,6 +27,7 @@ import PropertyHeading from "../../property/heading";
 import { useSetAtom } from "jotai";
 import { isScrollingAtom } from "../navigation";
 import CustomScrollArea from "./ScrollPanel";
+import { isScrollingAtom as propScrollingAtom } from "../../property/Navigation";
 
 export interface Area {
   name: string;
@@ -164,7 +165,7 @@ const LeafMap: React.FC<{
             lat={lat}
             lang={lang}
             setSelectedLocation={setSelectedLocation}
-            type={type}
+            type={"proj"}
           />
         </section>
       </div>
@@ -182,6 +183,7 @@ const LeafMap: React.FC<{
                   lat: Number(lat),
                   lng: Number(lang),
                 }}
+                type={type}
                 showLocationOnMap={showLocationOnMap}
               />
             ))}
@@ -202,8 +204,11 @@ const MapCard = ({
   origin,
   distance,
   time,
+  type,
 }: any) => {
-  const setIsScrolling = useSetAtom(isScrollingAtom);
+  const setIsScrolling = useSetAtom(
+    type === "prop" ? propScrollingAtom : isScrollingAtom
+  );
   const handleClick = () => {
     showLocationOnMap({
       position: {

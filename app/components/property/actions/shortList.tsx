@@ -41,7 +41,7 @@ export default function ShortList({ cg, propTypeName }: any) {
       className={clsx(
         "flex justify-center items-center gap-1 p-2 rounded-lg border-[0.8px] border-solid border-[#0073C6] bg-[#fafafa] text-[#0073C6] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px]",
         data?.shortListed &&
-          "bg-[#E4F4FF] text-[#148B16] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px]"
+          "bg-[rgb(231,245,255)] text-[#148B16] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px]"
       )}
     >
       <ShortListIcon color={data?.shortListed ? "#148B16" : "#0073C6"} />

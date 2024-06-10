@@ -2,7 +2,7 @@ import { useSession } from "next-auth/react";
 import React from "react";
 import { usePopShortList } from "../popups/useShortListCompare";
 
-export default function useDownload() {
+export default function useDownload(name: string) {
   const { data: session } = useSession();
   const [, { open: LoginOpen }] = usePopShortList();
   const handleDownload = async (imgUrl: string) => {
@@ -15,7 +15,7 @@ export default function useDownload() {
         const url = URL.createObjectURL(blob);
         const downloadLink = document.createElement("a");
         downloadLink.href = url;
-        downloadLink.download = "masterplan.jpg";
+        downloadLink.download = `${name}.jpg`;
         document.body.appendChild(downloadLink);
         downloadLink.click();
         document.body.removeChild(downloadLink);

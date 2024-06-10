@@ -73,10 +73,10 @@ export default function PropertyOverviewBanner({
             <WhatsAppButton
               className="cursor-pointer"
               onClick={""}
-              name={`${bhkName ?? ""} ${propTypeName} For
-              ${cg === "S" ? " Sell" : " Rent"}  ${
-                propName ? `In ${propName}` : ""
-              }`}
+              name={`${bhkName ?? ""} ${propTypeName} For${
+                cg === "S" ? " Sell" : " Rent"
+              } ${propName ? `In ${propName}` : ""}`}
+              type="prop"
             />
           </div>
         </div>

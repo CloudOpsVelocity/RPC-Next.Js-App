@@ -15,11 +15,13 @@ export default function GalleryBlock({
   projName,
   media,
   projectVideoIUrl,
+  videoUrl,
   type = "proj",
 }: Media) {
+  console.log(videoUrl);
   const images = getImageUrls(media);
   const [selectedMedia, setSelectedMedia] = useState<string | null>(images[0]);
-  const videos = [walkThrowVideoUrl, projectVideoIUrl].filter(
+  const videos = [walkThrowVideoUrl, projectVideoIUrl, media.videoUrl].filter(
     (video) => video !== "" && video !== undefined
   );
   const handleMediaClick = (media: string) => {
@@ -31,7 +33,7 @@ export default function GalleryBlock({
       {type === "prop" ? (
         <PropertyHeading
           title="GALLERIA"
-          desc="Gallery Highlights : A Glimpse into good project"
+          desc="Gallery Highlights : A Glimpse into good property"
         />
       ) : (
         <>

@@ -52,7 +52,7 @@ export default function RoomDetails({ data }: { data: Main }) {
     >
       <PropertyHeading
         title="Listing details"
-        desc={`Check the details ${
+        desc={`Check the details For ${
           data.propTypeName === "Plot" ? data.plotArea + " sq.ft" : ""
         } ${data.bhkName ?? ""} ${data.propTypeName} For
         ${data.cg === "S" ? " Sell" : " Rent"}`}
@@ -185,6 +185,7 @@ const OtherDetails = ({
   ispetFriendly,
   availavleFor,
   agreementType,
+  noOfOpenSide,
 }: Main) => {
   const data = [
     ownershipName,
@@ -201,6 +202,7 @@ const OtherDetails = ({
     ispetFriendly,
     availavleFor,
     agreementType,
+    ,
   ];
   return (
     <div
@@ -231,7 +233,7 @@ const OtherDetails = ({
           <RoomBasicDetails
             icon={<OpenSides />}
             title="Open Sides"
-            value={2}
+            value={noOfOpenSide}
             className={style.card}
           />
         )}
@@ -331,7 +333,8 @@ const UnitBlock = ({ data }: { data: Main }) => {
         <h1 className={style.heading.h1}>Unit Details</h1>
 
         <p className={style.heading.p}>
-          unit details including BHK, PHASE, TOWER,...etc
+          unit details including {data.propTypeName !== "Plot" ? "BHK," : ""}{" "}
+          PHASE, TOWER,...etc
         </p>
 
         <div className="flex justify-start items-start flex-wrap   ">
@@ -364,7 +367,7 @@ const PlotBlock = ({ data }: { data: Main }) => {
         <RoomBasicDetails
           icon={<CornorIcon />}
           title="Property on"
-          value={data.isCornerPlot ? "Corner Plot" : "N/A"}
+          value={data.isCornerPlot && "Corner Plot"}
           className={style.card}
         />
         <RoomBasicDetails

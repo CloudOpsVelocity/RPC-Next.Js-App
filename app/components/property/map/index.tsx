@@ -39,6 +39,8 @@ import {
   nearbyLocationIcon,
 } from "@/app/images/commonSvgs";
 import CustomScrollArea from "../../project/map/ScrollPanel";
+import { isScrollingAtom } from "../Navigation";
+import { useAtom } from "jotai";
 interface Area {
   name: string;
   Icon?: any;
@@ -174,6 +176,7 @@ const LeafMap: React.FC<{
             lat={lat}
             lang={lang}
             setSelectedLocation={setSelectedLocation}
+            type={"prop"}
           />
         </section>
       </div>
@@ -212,6 +215,7 @@ const MapCard = ({
   distance,
   time,
 }: any) => {
+  const [isScrolling, setIsScrolling] = useAtom(isScrollingAtom);
   const handleClick = () => {
     showLocationOnMap({
       position: {
@@ -220,6 +224,20 @@ const MapCard = ({
       },
       name,
     });
+    scrollToTopic("nearBy");
+  };
+  const scrollToTopic = (id: string): void => {
+    setIsScrolling(true);
+
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "center",
+      });
+    }
+    setTimeout(() => setIsScrolling(false), 3000);
   };
   return (
     <div

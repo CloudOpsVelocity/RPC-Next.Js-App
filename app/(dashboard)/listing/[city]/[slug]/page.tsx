@@ -58,7 +58,11 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         </div>
         {/* Navigations Container */}
         <MobileHidden>
-          <Navigation detailsData={data} projData={!!data.projIdEnc} />
+          <Navigation
+            detailsData={data}
+            projData={!!data.projIdEnc}
+            relateProjData={projData}
+          />
         </MobileHidden>
         {/* Overview */}
         <PropertyOverView data={data} />
@@ -107,14 +111,26 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
               projName={data.propName}
               projId={data.projIdEnc}
               type="prop"
-            />{" "}
-            <PropertyBanner {...projData} />
-            <ErrorContainer data={projData.banks && data.cg === "S"}>
-              <Loans type="prop" banks={projData.banks} name={data.propName} />
-            </ErrorContainer>
-            {/* About Builder */}
-            <AboutBuilder type="prop" id={projData.builderId} />
-            <FaqWithBg data={projData.faqs} projName={data.propName} />
+            />
+            {/* {data.postedById === projData.builderId && ( */}
+            <>
+              {" "}
+              <PropertyBanner {...projData} projIdEnc={data.projIdEnc} />
+              {/* <ErrorContainer data={projData.banks}> */}
+              {data.cg === "S" && data.postedById === projData.builderId && (
+                <Loans
+                  type="prop"
+                  banks={projData.banks}
+                  name={data.propName}
+                />
+              )}
+              {/* About Builder */}
+              <AboutBuilder type="prop" id={projData.builderId} />
+              {data.postedById === projData.builderId && (
+                <FaqWithBg data={projData.faqs} projName={data.propName} />
+              )}{" "}
+            </>
+            {/* )} */}
           </>
         )}
         {!data.projIdEnc && (
@@ -137,19 +153,19 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           bhkId={bhkDetailsMap.get(data.bhkName) ?? 41}
           // query={""}
         />
-        {data.projIdEnc && (
-          <NearByCarouselProjProperty
-            projName={""}
-            lat={projData?.lat}
-            lng={projData?.lang}
-            projId={data.propIdEnc}
-            builderId={projData?.builderId}
-            company={projData?.companyName}
-            nearBy={{
-              title: `Other Projects by ${data.postedByName}`,
-            }}
-          />
-        )}
+        {/* {data.projIdEnc && data.postedById === projData.builderId && ( */}
+        <NearByCarouselProjProperty
+          projName={""}
+          lat={projData?.lat}
+          lng={projData?.lang}
+          projId={data.propIdEnc}
+          builderId={projData?.builderId}
+          company={projData?.companyName}
+          nearBy={{
+            title: `Other Projects by ${data.postedByName}`,
+          }}
+        />
+        {/* )} */}
         <PriceBreakup
           otherPrice={data.otherPrice}
           price={data.price}

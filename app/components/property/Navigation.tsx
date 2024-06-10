@@ -12,11 +12,12 @@ export const currentBlockAtom = atom("overview");
 export default function Navigation({
   detailsData,
   projData,
+  relateProjData,
 }: {
   detailsData: any;
   projData: boolean;
+  relateProjData: any;
 }) {
-  console.log(detailsData);
   const { data } = useRatings();
   const [currentBlock, setCurrentBlock] = useAtom(currentBlockAtom);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -108,14 +109,13 @@ export default function Navigation({
       key: "amenities",
     },
     { condtion: true, key: "nearBy" },
-    { condtion: detailsData?.banks?.length > 0, key: "loans" },
-    { condtion: projData, key: "aboutBuilder" },
+    { condtion: relateProjData?.banks?.length > 0, key: "loans" },
     { condtion: projData, key: "projectDetails" },
+    { condtion: projData, key: "aboutBuilder" },
     { condtion: projData, key: "faq" },
     { condtion: true, key: "similarListing" },
     { condtion: projData, key: "similar" },
   ];
-
   return (
     <div
       className={clsx(

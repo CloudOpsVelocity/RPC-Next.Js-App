@@ -64,6 +64,7 @@ export interface Media {
   walkThrowVideoUrl: string;
   projBroucherUrl: string;
   projName?: string;
+  videoUrl?: string;
   media: any;
   type?: "proj" | "prop";
 }

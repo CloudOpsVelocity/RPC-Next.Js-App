@@ -24,13 +24,13 @@ export const Propertytopics = [
   { label: "Overview", id: "overview" },
   { label: "About", id: "about" },
   { label: "Listing Details", id: "propertyDetails" },
-  { label: "Floor Plans", id: "floorPlans" },
+  { label: "Floor Plan", id: "floorPlans" },
   { label: "Galleria", id: "galleria" },
   { label: "Amenities", id: "amenities" },
   { label: "Near By", id: "nearBy" },
+  { label: "Project Details", id: "projectDetails" },
   { label: "Bank Approvals", id: "loans" },
   { label: "Builder Details", id: "aboutBuilder" },
-  { label: "Project Details", id: "projectDetails" },
   { label: "Customer Reviews", id: "ratings" },
   { label: "FAQ?", id: "faq" },
   { label: "Similar Listings", id: "similarListing" },
@@ -51,6 +51,7 @@ export const projectprops = {
   rowHouse: 33,
   villament: 34,
   apartment: 35,
+  independent: 633,
 };
 export const listingProps = {
   Villa: 31,
@@ -58,6 +59,7 @@ export const listingProps = {
   "Row House": 33,
   Villament: 34,
   Apartment: 35,
+  "Independent House/Building": 633,
 };
 export const BACKEND_PROP_TYPES = {
   apt: 35,

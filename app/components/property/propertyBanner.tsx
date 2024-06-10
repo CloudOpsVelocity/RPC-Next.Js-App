@@ -8,6 +8,7 @@ import React from "react";
 import { Svg } from "./heading";
 import ReadMore from "../atoms/readmore";
 import Button from "../atoms/buttons/variansts";
+import Link from "../atoms/buttons/Link";
 
 export default function PropertyBanner({
   projectName,
@@ -19,6 +20,7 @@ export default function PropertyBanner({
   media,
   about,
   reraStatus,
+  projIdEnc,
 }: Main) {
   const isMobile = useMediaQuery(`(max-width: 750px)`);
   return isMobile ? (
@@ -32,7 +34,7 @@ export default function PropertyBanner({
     />
   ) : (
     <div
-      className="w-[90%] m-auto mt-[2%] shrink-0  bg-[#fcfcfc] mb-20 relative  border shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] border-solid border-[#CAE9FF]  px-[52px] py-[35px]"
+      className="w-[90%] m-auto mt-[2%] shrink-0  bg-[#fcfcfc] mb-20 relative  border shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] border-solid border-[#CAE9FF]  px-[52px] py-[35px] scroll-mt-[250px]"
       id="projectDetails"
     >
       <Image
@@ -91,9 +93,13 @@ export default function PropertyBanner({
         <div className="mt-6">
           <ReadMore text={about} title={"About"} />
         </div>
-        <Button variant="blue" className="mt-5">
+        <Link
+          href={`/abc/banlore/whitefield/${projIdEnc}`}
+          variant="blue"
+          className="mt-5"
+        >
           Explore Project
-        </Button>
+        </Link>
       </div>
     </div>
   );

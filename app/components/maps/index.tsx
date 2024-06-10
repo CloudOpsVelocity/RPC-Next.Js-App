@@ -139,7 +139,7 @@ const Content: React.FC<any> = ({
         >
           <div className="p-2">
             <p className="text-white text-base italic font-medium leading-[normal]">
-              {type === "proj" ? "Project" : " Property"} you are exploring
+              {type === "prop" ? "Property" : "Project"} you are exploring
             </p>
             <p className="text-white text-lg not-italic font-semibold leading-[normal] mt-2">
               {projName}

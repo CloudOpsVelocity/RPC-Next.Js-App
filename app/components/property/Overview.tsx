@@ -25,7 +25,7 @@ export default function PropertyOverView({ data }: { data: Main }) {
             {data.bhkName} {data.propTypeName} For{" "}
             {data.cg === "S" ? " Sell" : " Rent"} In {data.ltName}
           </h2>
-          <p className="text-[16px] lg:text-[24px] text-[#505050] font-[500]">
+          <p className="text-[16px] lg:text-[24px] text-[#505050] font-[500] max-w-[1400px]">
             {`${data.address}, ${data.ltName}, ${data.ctName}, ${data?.stateName}, ${data.pinCode}`}
           </p>
         </div>
