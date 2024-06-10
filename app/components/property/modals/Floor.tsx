@@ -153,12 +153,14 @@ const RightSection = ({ propCgId }: any) => {
               }`}{" "}
               <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                 {" "}
-                {data?.floor === 0
-                  ? "G"
-                  : propCgId === projectprops.rowHouse ||
-                    propCgId === projectprops.villa
-                  ? `G+${data?.floor}`
-                  : data?.floor ?? data.totalFloor}
+                {`${data.isBasement ? "B+" : ""}${
+                  data?.floor === 0
+                    ? "G"
+                    : propCgId === projectprops.rowHouse ||
+                      propCgId === projectprops.villa
+                    ? `G+${data?.floor}`
+                    : data?.floor ?? data.totalFloor
+                }`}
               </span>{" "}
             </p>
           </div>
@@ -244,21 +246,7 @@ const RightSection = ({ propCgId }: any) => {
               </p>
             </div>
           )}
-        {(propCgId == projectprops.villa ||
-          propCgId == projectprops.rowHouse ||
-          propCgId == projectprops.villament) &&
-          data.parkingArea !== "None" && (
-            <div className="flex items-center space-x-3">
-              {propertyDetailsSvgs.parkingArea}
-              <p className="text-[#4D6677] text-[14px] font-[500]">
-                Parking Area{" "}
-                <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
-                  {" "}
-                  {data.parkingArea} sq.ft
-                </span>
-              </p>
-            </div>
-          )}
+
         {propCgId == projectprops.villament && data?.totalBalconySize && (
           <div className="flex items-center space-x-3">
             {propertyDetailsSvgs.parkingArea}

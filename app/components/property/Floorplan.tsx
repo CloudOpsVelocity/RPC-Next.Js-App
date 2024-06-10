@@ -46,6 +46,7 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
       ...(data.length && { length: data.length }),
       ...(data.width && { width: data.width }),
       ...(data.totalFloor && { totalFloor: data.totalFloor }),
+      ...(data.isBasement && { isBasement: data.isBasement }),
     });
     setOpened(true);
   };

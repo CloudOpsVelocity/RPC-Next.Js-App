@@ -63,13 +63,15 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         {/* Overview */}
         <PropertyOverView data={data} />
         {/* About */}
-        <About
-          type="prop"
-          id="about"
-          heading="about Listing"
-          projName={"Listing"}
-          content={data.usp}
-        />
+        {data.usp && (
+          <About
+            type="prop"
+            id="about"
+            heading="about Listing"
+            projName={"Listing"}
+            content={data.usp}
+          />
+        )}
 
         {/* Property Details */}
         <RoomDetails data={data} />

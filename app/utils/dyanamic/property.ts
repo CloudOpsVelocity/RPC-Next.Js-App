@@ -5,7 +5,11 @@ function createPropertyString(data: Main): string {
     data.propTypeName === config.propTypeNames[1] ||
     data.propTypeName === config.propTypeNames[2]
   ) {
-    return `${data.propName} | ${data.bhkName} | Elevation G+${data.atFloor} | Unit No. ${data.unitNumber} | ${data.facingName} | Area: ${data.sba} sq.ft`;
+    return `${data.propName} | ${data.bhkName} | Elevation ${
+      data.isBasement ? "B+" : ""
+    }G+${data.atFloor} | Unit No. ${data.unitNumber} | ${
+      data.facingName
+    } | Area: ${data.sba} sq.ft`;
   } else if (data.propTypeName === config.propTypeNames[3]) {
     return `${data.propName} | Unit No. ${data.unitNumber} | ${data.facingName} | Area. ${data.plotArea} sq.ft`;
   } else if (data.propTypeName === config.propTypeNames[5]) {

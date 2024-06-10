@@ -91,13 +91,15 @@ export default function PriceBreakup({
           type="price"
           data={"₹ " + price}
         />
-        <Card
-          title="applicable charges"
-          Icon={ApplicablePricing}
-          type="applicableprice"
-          data={filterOtherDetails}
-          otherPrice={otherPrice}
-        />
+        {filterOtherDetails.length > 0 && (
+          <Card
+            title="applicable charges"
+            Icon={ApplicablePricing}
+            type="applicableprice"
+            data={filterOtherDetails}
+            otherPrice={otherPrice}
+          />
+        )}
 
         {otherPrice?.otherCharge && (
           <Card
