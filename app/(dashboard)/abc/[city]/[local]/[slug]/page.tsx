@@ -19,6 +19,7 @@ import ErrorContainer from "@/app/components/project/error/container";
 import MobileHidden from "@/app/components/molecules/MobileHidden";
 import { notFound } from "next/navigation";
 import FloorplanDrawer from "@/app/components/project/drawers/floorplan";
+import axios from "axios";
 const FloorplansBlock = dynamic(
   () => import("@/app/components/project/floorplansBlock"),
   {
@@ -200,3 +201,21 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
 }
 
 // export const fetchCache = "force-no-store";
+export async function generateStaticParams() {
+  const { projResult } = await getParams();
+  const slugs = projResult.map((slug: string) => ({
+    slug: slug,
+  }));
+  console.log(slugs);
+  return slugs;
+}
+
+async function getParams() {
+  let data = await axios.get(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/common/all/active/ids?identifier=project`
+  );
+
+  return data.data;
+}
+
+export const revalidate = 60;
