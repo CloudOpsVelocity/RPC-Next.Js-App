@@ -201,21 +201,21 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
 }
 
 // export const fetchCache = "force-no-store";
-// export async function generateStaticParams() {
-//   const { projResult } = await getParams();
-//   const slugs = projResult.map((slug: string) => ({
-//     slug: slug,
-//   }));
-//   console.log(slugs);
-//   return slugs;
-// }
+export async function generateStaticParams() {
+  const { projResult } = await getParams();
+  const slugs = projResult.map((slug: string) => ({
+    slug: slug,
+  }));
+  console.log(slugs);
+  return slugs;
+}
 
-// async function getParams() {
-//   let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/common/all/active/ids?identifier=project`;
-//   console.log(url);
-//   let data = await axios.get(url);
+async function getParams() {
+  let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/common/all/active/ids?identifier=project`;
+  console.log(url);
+  let data = await axios.get(url);
 
-//   return data.data;
-// }
+  return data.data;
+}
 
 export const revalidate = 60;
