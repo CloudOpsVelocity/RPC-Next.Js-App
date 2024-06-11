@@ -120,7 +120,7 @@ function normalizeData(data: any, type: string) {
       city: data?.data?.cityName,
       state: data?.data?.stateName,
       pincode: data?.data?.pinCode,
-      userName: data?.data.userName,
+      userName: data?.data?.userName,
     };
   } else {
     return {
