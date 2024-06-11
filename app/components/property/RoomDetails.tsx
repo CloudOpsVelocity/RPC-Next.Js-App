@@ -41,7 +41,7 @@ const style = {
   card: "mr-[3%] mb-[1%]  p-[2%] md:p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8] ",
   heading: {
     h1: "text-[#001F35] text-[28px] not-italic font-semibold uppercase mb-1",
-    p: "text-[16px] lg:text-[24px] font-[500] text-[#4D6677] italic mb-8 capitalize",
+    p: "text-[16px] lg:text-[24px] font-[500] text-[#4D6677] italic mb-8 ",
   },
 };
 export default function RoomDetails({ data }: { data: Main }) {
@@ -76,7 +76,7 @@ const RoomSection = ({ data }: { data: Main }) => {
       <h1 className={style.heading.h1}>Room Details</h1>
 
       <p className={style.heading.p}>
-        See the rooms that are available in This property
+        See the rooms that are available in this property
       </p>
 
       <div
@@ -134,7 +134,7 @@ const Parking = ({ noocp, noobp, noccp, nocbp }: any) => {
         <h1 className={style.heading.h1}>Parking</h1>
 
         <p className={style.heading.p}>
-          Parkings details include area and other
+          Check out the parking details for the listings
         </p>
 
         <div className="flex justify-start items-start flex-wrap   ">
@@ -211,7 +211,11 @@ const OtherDetails = ({
     >
       <h1 className={style.heading.h1}>Other Details</h1>
 
-      <p className={style.heading.p}>Parkings details include area and other</p>
+      <p className={style.heading.p}>
+        {propTypeName !== "Plot"
+          ? "Check the other details like availability of listing ,...etc"
+          : "See the other details for plot"}
+      </p>
 
       <div className="flex justify-start items-start flex-wrap   w-full">
         {cg === "R" && (
@@ -333,8 +337,9 @@ const UnitBlock = ({ data }: { data: Main }) => {
         <h1 className={style.heading.h1}>Unit Details</h1>
 
         <p className={style.heading.p}>
-          unit details including {data.propTypeName !== "Plot" ? "BHK," : ""}{" "}
-          PHASE, TOWER,...etc
+          {data.propTypeName !== "Plot"
+            ? "Unit details including bhk, phase, tower,...etc"
+            : "Unit details including Unit Number, Phase, ...etc"}
         </p>
 
         <div className="flex justify-start items-start flex-wrap   ">

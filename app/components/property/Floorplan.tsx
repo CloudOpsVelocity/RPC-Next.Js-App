@@ -21,7 +21,7 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
       propType: type,
       bhk: 42,
       bhkName: data.bhkName,
-      towerName: data.tower,
+      ...(data.tower && { towerName: data.tower }),
       towerId: data.tower,
       block: data.block,
       floor: data.atFloor,
