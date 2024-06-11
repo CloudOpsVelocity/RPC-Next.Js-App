@@ -15,7 +15,7 @@ function createPropertyString(data: Main): string {
   } else if (data.propTypeName === config.propTypeNames[5]) {
     return `${data.propName} | ${data.bhkName} | Floor ${data.totalFloor} | Unit No. ${data.unitNumber} | ${data.facingName} | Area: ${data.sba} sq.ft`;
   } else {
-    return `${data.propName} | ${data.bhkName} ${
+    return `${data.propName} | ${data.bhkName} | ${
       data.tower ? "Tower " + data.tower : ""
     } | Floor ${data.atFloor === 0 ? "G" : data.atFloor} | Unit No. ${
       data.unitNumber
