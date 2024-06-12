@@ -48,7 +48,7 @@ export default function About({
 
       <ReadMore
         text={content}
-        maxLines={4}
+        maxLines={6}
         title={heading}
         showProjName={showProjName}
         builderName={builderName}
