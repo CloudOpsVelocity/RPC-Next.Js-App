@@ -1,6 +1,7 @@
 import type { NextAuthOptions } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
+import axios from "axios";
 import { cookies } from "next/headers";
 import CryptoJS from "crypto-js";
 
@@ -21,45 +22,30 @@ export const options: NextAuthOptions = {
       },
       // @ts-ignore
       async authorize(credentials) {
-        console.log({ ...credentials, password: "*********" });
+        console.log(credentials);
         const decryptedPassword = CryptoJS.AES.decrypt(
           credentials?.password!!,
           process.env.NEXT_PUBLIC_SECRET!!
         ).toString(CryptoJS.enc.Utf8);
+
         try {
-          let apiUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/doLoginWithMobile`;
-          console.log(`${apiUrl} -> HIT_ON_THIS_URL`);
-          const requestOptions = {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
+          const res = await axios.post(
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/doLoginWithMobile`,
+            {
               username: credentials?.username,
               password: decryptedPassword,
-            }),
-          };
-
-          const res = await fetch(apiUrl, requestOptions);
-          if (!res.ok) {
-            // Network error occurred
-            const errorText = await res.text();
-            console.error(`Network error: ${res.status} - ${res.statusText}`);
-            console.error(errorText); // Log the HTML content returned by the server
-            throw new Error(`Network error: ${res.status} - ${res.statusText}`);
-          }
-
-          const data = await res.json();
-
-          console.log({ token: data.token });
-          if (data.status) {
-            cookies().set("token", data.token);
+            }
+          );
+          console.log(res.data);
+          if (res.data.status) {
+            cookies().set("token", res.data.token);
+            console.log(res.data);
             return {
-              ...data,
+              ...res.data,
             };
           } else {
-            console.log(data.identifer);
-            switch (data.identifer) {
+            console.log(res.data.identifer);
+            switch (res.data.identifer) {
               case "NF":
                 throw new Error("We can’t find user. Please Sign Up!");
                 break;
@@ -75,10 +61,7 @@ export const options: NextAuthOptions = {
             }
           }
         } catch (error: any) {
-          console.log(error, { status: false, message: error.message });
-          throw new Error(
-            "OUR ENGINEER IS WORKING ON IT. PLEASE TRY AGAIN LATER."
-          );
+          throw new Error(error.message);
         }
       },
     }),
