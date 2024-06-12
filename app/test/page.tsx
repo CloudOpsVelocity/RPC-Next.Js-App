@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import Footer from "../components/layouts/primary/footer";
 import Header from "../components/layouts/primary/header";
 import Blogs from "../components/molecules/blogs";
@@ -19,7 +19,6 @@ export default function page() {
       <YourList />
       <Blogs />
       <Footer />
-      {/* Grids */}
     </div>
   );
 }

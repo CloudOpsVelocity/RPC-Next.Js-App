@@ -113,6 +113,7 @@ export default function PriceBreakup({
         <SellingPrice
           price={sum + price + otherChangeTotal}
           otherPrice={otherPrice}
+          propertyPrice={price}
           type={type}
         />
       </div>
