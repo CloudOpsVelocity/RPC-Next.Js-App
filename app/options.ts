@@ -1,7 +1,6 @@
 import type { NextAuthOptions } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
-import axios from "axios";
 import { cookies } from "next/headers";
 import CryptoJS from "crypto-js";
 
@@ -27,7 +26,6 @@ export const options: NextAuthOptions = {
           credentials?.password!!,
           process.env.NEXT_PUBLIC_SECRET!!
         ).toString(CryptoJS.enc.Utf8);
-        console.log(decryptedPassword, "USER_PASSWORD");
         try {
           let apiUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/doLoginWithMobile`;
           console.log(`${apiUrl} -> HIT_ON_THIS_URL`);
