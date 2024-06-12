@@ -22,20 +22,19 @@ export const options: NextAuthOptions = {
       },
       // @ts-ignore
       async authorize(credentials) {
-        console.log(credentials);
+        console.log(credentials, "API_HIT_SUCCESSFULLY USER -> GETTED IN API");
         const decryptedPassword = CryptoJS.AES.decrypt(
           credentials?.password!!,
           process.env.NEXT_PUBLIC_SECRET!!
         ).toString(CryptoJS.enc.Utf8);
-
+        console.log(decryptedPassword, "USER_PASSWORD");
         try {
-          const res = await axios.post(
-            `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/doLoginWithMobile`,
-            {
-              username: credentials?.username,
-              password: decryptedPassword,
-            }
-          );
+          let apiUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/doLoginWithMobile`;
+          console.log(`${apiUrl} -> HIT_ON_THIS_URL`);
+          const res = await axios.post(apiUrl, {
+            username: credentials?.username,
+            password: decryptedPassword,
+          });
           console.log(res.data);
           if (res.data.status) {
             cookies().set("token", res.data.token);
@@ -61,6 +60,7 @@ export const options: NextAuthOptions = {
             }
           }
         } catch (error: any) {
+          console.log(error, { status: false, message: error.message });
           throw new Error(error.message);
         }
       },
