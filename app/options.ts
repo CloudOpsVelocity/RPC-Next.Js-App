@@ -31,20 +31,39 @@ export const options: NextAuthOptions = {
         try {
           let apiUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/doLoginWithMobile`;
           console.log(`${apiUrl} -> HIT_ON_THIS_URL`);
-          const res = await axios.post(apiUrl, {
-            username: credentials?.username,
-            password: decryptedPassword,
-          });
-          console.log(res.data);
-          if (res.data.status) {
-            cookies().set("token", res.data.token);
-            console.log(res.data);
+          const requestOptions = {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              username: credentials?.username,
+              password: decryptedPassword,
+            }),
+          };
+
+          const res = await fetch(apiUrl, requestOptions);
+          if (!res.ok) {
+            // Network error occurred
+            const errorText = await res.text();
+            console.error(`Network error: ${res.status} - ${res.statusText}`);
+            console.error(errorText); // Log the HTML content returned by the server
+            throw new Error(`Network error: ${res.status} - ${res.statusText}`);
+          }
+
+          const data = await res.json();
+          console.log(data);
+
+          console.log(data);
+          if (data.status) {
+            cookies().set("token", data.token);
+            console.log(data);
             return {
-              ...res.data,
+              ...data,
             };
           } else {
-            console.log(res.data.identifer);
-            switch (res.data.identifer) {
+            console.log(data.identifer);
+            switch (data.identifer) {
               case "NF":
                 throw new Error("We can’t find user. Please Sign Up!");
                 break;
