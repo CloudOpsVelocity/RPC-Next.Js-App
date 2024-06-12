@@ -21,7 +21,7 @@ export const options: NextAuthOptions = {
       },
       // @ts-ignore
       async authorize(credentials) {
-        console.log(credentials, "API_HIT_SUCCESSFULLY USER -> GETTED IN API");
+        console.log({ ...credentials, password: "*********" });
         const decryptedPassword = CryptoJS.AES.decrypt(
           credentials?.password!!,
           process.env.NEXT_PUBLIC_SECRET!!
@@ -50,12 +50,10 @@ export const options: NextAuthOptions = {
           }
 
           const data = await res.json();
-          console.log(data);
 
-          console.log(data);
+          console.log({ token: data.token });
           if (data.status) {
             cookies().set("token", data.token);
-            console.log(data);
             return {
               ...data,
             };
@@ -78,7 +76,9 @@ export const options: NextAuthOptions = {
           }
         } catch (error: any) {
           console.log(error, { status: false, message: error.message });
-          throw new Error(error.message);
+          throw new Error(
+            "OUR ENGINEER IS WORKING ON IT. PLEASE TRY AGAIN LATER."
+          );
         }
       },
     }),
