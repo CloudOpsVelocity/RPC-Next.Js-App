@@ -602,7 +602,7 @@ function Builder() {
                 size="lg"
                 mt="md"
                 label="Builder Owned By"
-                placeholder="Enter your builder name"
+                placeholder="Enter Builder Owned By"
                 {...form.getInputProps("companyName")}
                 classNames={{
                   root: StepCss.inputRoot,
