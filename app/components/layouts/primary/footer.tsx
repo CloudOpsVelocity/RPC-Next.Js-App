@@ -131,7 +131,7 @@ const Footer = () => {
             <img
               className="relative w-[24px] h-[24px]"
               alt="Contact"
-              src="/contact.svg"
+              src="/footer/contact.svg"
             />
             <a
               href={`tel:${8884440963}`}

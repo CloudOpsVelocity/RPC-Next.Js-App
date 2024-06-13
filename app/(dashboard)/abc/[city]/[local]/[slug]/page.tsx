@@ -206,7 +206,6 @@ export async function generateStaticParams() {
   const slugs = projResult.map((slug: string) => ({
     slug: slug,
   }));
-  console.log(slugs);
   return slugs;
 }
 

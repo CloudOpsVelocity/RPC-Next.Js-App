@@ -4,9 +4,9 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   // typescript: { ignoreBuildErrors: true },
-  experimental: {
-    optimizePackageImports: ["@mantine/core", "@mantine/hooks"],
-  },
+  // experimental: {
+  //   optimizePackageImports: ["@mantine/core", "@mantine/hooks"],
+  // },
   images: {
     remotePatterns: [
       { hostname: "d1l03fubsuphsh.cloudfront.net" },
