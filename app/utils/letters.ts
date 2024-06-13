@@ -1,6 +1,9 @@
 export const isSingleLetterOrNumber = (str: string) =>
   /^[A-Za-z0-9]$/.test(str);
 function capitalizeWords(str: string): string {
+  if (!str) {
+    return "Not Found";
+  }
   let result: string = "";
   let capitalizeNext: boolean = true;
 

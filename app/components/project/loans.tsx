@@ -3,6 +3,7 @@ import { Bank } from "@/app/validations/types/project";
 import Image from "next/image";
 import React from "react";
 import PropertyHeading from "../property/heading";
+import SubHeading from "./headings/SubHeading";
 
 export default function ProjectLoans({
   banks,
@@ -27,15 +28,16 @@ export default function ProjectLoans({
       ) : (
         <>
           <h2 className="text-[20px] lg:text-[32px] font-bold">
-            BANK APPROVALS FOR{" "}
-            <span className="text-[#148B16] text-[20px] lg:text-[32px] not-italic font-bold leading-[normal] uppercase">
+            Bank Approvals For{" "}
+            <span className="text-[#148B16] text-[20px] lg:text-[32px] not-italic font-bold leading-[normal] ">
               {name}
             </span>
           </h2>
-          <p className="mt-4 text-[#4D6677] text-[16px] md:text-2xl italic font-medium leading-[normal] tracking-[0.96px]">
-            Explore bank loan approvals options for your project with multiple
-            banks
-          </p>
+          <SubHeading
+            text=" Explore bank loan approvals options for your project with multiple
+            banks"
+            className="mt-4"
+          />
         </>
       )}
 

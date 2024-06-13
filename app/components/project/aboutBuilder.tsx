@@ -7,6 +7,7 @@ import About from "./about";
 import Image from "next/image";
 import { TeleGramBlack } from "@/app/images/commonSvgs";
 import { convertDateToMonthYear } from "@/app/utils/date";
+import { capitalizeWords } from "@/app/utils/letters";
 
 type Props = {
   id: number;
@@ -120,7 +121,7 @@ function normalizeData(data: any, type: string) {
       city: data?.data?.cityName,
       state: data?.data?.stateName,
       pincode: data?.data?.pinCode,
-      userName: data?.data?.userName,
+      userName: capitalizeWords(data?.data?.userName),
     };
   } else {
     return {
@@ -137,7 +138,7 @@ function normalizeData(data: any, type: string) {
       city: data?.cityName,
       state: data?.stateName,
       pincode: data?.pinCode,
-      userName: data?.userName,
+      userName: capitalizeWords(data?.userName),
     };
   }
 }
