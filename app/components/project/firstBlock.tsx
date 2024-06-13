@@ -110,7 +110,7 @@ const FirstBlock: React.FC<Props> = ({ projectDetails, companyName }) => {
           <div className="sm:absolute bottom-0 m-[2%] z-10 w-[95%] self-center justify-between items-start flex-col md:flex-row border-solid border-white-500 rounded-[10px] bg-gradient-to-r from-[#EFEFEF] /20 to-[#c3c3c3bd]/80 shadow-md  sm:flex ">
             <div className=" w-full md:w-[60%]">
               <div className={`ml-[2%] mt-10 mb-[7px]`}>
-                <h3 className="text-xl sm:text-[24px] lg:text-[28px] font-[700] text-[#00487C] !capitalize">
+                <h3 className="text-xl sm:text-[24px] lg:text-[28px] font-[700] text-[#00487C] ">
                   {projectDetails.projectName}
                 </h3>
 

@@ -8,6 +8,7 @@ import { useAtom } from "jotai";
 import React from "react";
 import PropertyHeading from "../property/heading";
 import { useMediaQuery } from "@mantine/hooks";
+import SubHeading from "./headings/SubHeading";
 
 export default function Amenties({
   data,
@@ -47,15 +48,16 @@ export default function Amenties({
         ) : (
           <>
             {" "}
-            <h2 className="text-[20px] lg:text-[32px] font-bold font-semibold">
-              AMENITIES Of{" "}
-              <span className="text-[#148B16] text-[20px] lg:text-[32px] font-bold not-italic font-bold leading-[normal] uppercase">
+            <h2 className="text-[20px] lg:text-[32px]  font-semibold">
+              Amenities Of{" "}
+              <span className="text-[#148B16] text-[20px] lg:text-[32px] font-bold not-italic  leading-[normal] ">
                 {projName}
               </span>
             </h2>
-            <p className="text-[#4D6677] text-[16px] md:text-2xl italic font-medium leading-[normal] tracking-[0.96px] mt-2 mb-[40px]">
-              Experience the ultimate in comfort with our amenities
-            </p>
+            <SubHeading
+              text="Experience the ultimate in comfort with our amenities"
+              className="mt-2 mb-[40px]"
+            />
           </>
         )}
 

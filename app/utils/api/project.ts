@@ -1,6 +1,7 @@
 import { unstable_cache } from "next/cache";
 import { Main } from "../../validations/types/project";
 import { GlobalPageType } from "@/app/validations/global";
+import { capitalizeWords } from "../letters";
 
 const getProjectDetails = async (slug: string): Promise<Main> => {
   const response = await fetch(
@@ -8,7 +9,7 @@ const getProjectDetails = async (slug: string): Promise<Main> => {
   );
   const data = await response.json();
 
-  return data as Main; // Assuming the response can be cast to Main
+  return { ...data, projectName: capitalizeWords(data.projectName) } as Main; // Assuming the response can be cast to Main
 };
 const getProjectWiseOverView = async (slug: string): Promise<any> => {
   const response = await fetch(

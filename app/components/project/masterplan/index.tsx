@@ -5,6 +5,7 @@ import MasterPlanPopup from "../modals/MasterPlan";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import { useSession } from "next-auth/react";
 import { downLoadIcon } from "@/app/images/commonSvgs";
+import SubHeading from "../headings/SubHeading";
 
 export default function MasterPlan({
   projName,
@@ -40,17 +41,12 @@ export default function MasterPlan({
     <div className="w-[90%] mb-[5%] scroll-mt-[180px] " id="masterPlan">
       <div className="flex justify-between w-full items-cente mb-[32px] flex-wrap">
         <div>
-          <h1 className="text-[20px] lg:text-[32px] font-[600] text-[#001F35] mb-[12px] uppercase">
+          <h1 className="text-[20px] lg:text-[32px] font-[600] text-[#001F35] mb-[12px] capitalize">
             Master Plan Of{" "}
-            <span className="text-[#148B16] font-[700] uppercase">
-              {projName}
-            </span>
+            <span className="text-[#148B16] font-[700] ">{projName}</span>
           </h1>
 
-          <p className="text-[#4D6677] text-[16px] sm:text-2xl italic font-medium leading-[normal] capitalize">
-            Crafting Tomorrow's Landscapes, Today's Masterpiece: Your Vision,
-            Our Expertise.
-          </p>
+          <SubHeading text="Crafting tomorrow's landscapes, today's masterpiece: your vision, our expertise." />
         </div>
         <div className="h-full flex justify-center items-center ">
           <button

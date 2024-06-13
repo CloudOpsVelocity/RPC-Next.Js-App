@@ -12444,15 +12444,16 @@ export const AvailListSideSvg = ({ type }: { type: "rent" | "sell" }) => {
       width="57"
       height="57"
       viewBox="0 0 57 57"
+      fill="none"
       className={clsx(" absolute top-0 right-0")}
     >
       <path
-        d="M0 0C0 7.48535 1.47435 14.8974 4.33886 21.813C7.20338 28.7285 11.402 35.0122 16.6949 40.3051C21.9878 45.598 28.2715 49.7966 35.187 52.6611C42.1026 55.5257 49.5147 57 57 57V31C57 13.8792 43.1208 0 26 0H0Z"
-        fill="url(#paint0_linear_325_33704)"
+        d="M0 0C0 7.48535 1.47435 14.8974 4.33886 21.813C7.20338 28.7285 11.402 35.0122 16.6949 40.3051C21.9878 45.598 28.2715 49.7966 35.187 52.6611C42.1026 55.5257 49.5147 57 57 57V9C57 4.02944 52.9706 0 48 0H0Z"
+        fill="url(#paint0_linear_2674_19082)"
       />
       <defs>
         <linearGradient
-          id="paint0_linear_325_33704"
+          id="paint0_linear_2674_19082"
           x1="65"
           y1="5.5"
           x2="15.5"
@@ -12468,22 +12469,22 @@ export const AvailListSideSvg = ({ type }: { type: "rent" | "sell" }) => {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="57"
-      height="58"
-      viewBox="0 0 57 58"
+      height="57"
+      viewBox="0 0 57 57"
       fill="none"
       className={clsx(" absolute top-0 right-0")}
     >
       <path
-        d="M0 0.5C0 7.98535 1.47435 15.3974 4.33886 22.313C7.20338 29.2285 11.402 35.5122 16.6949 40.8051C21.9878 46.098 28.2715 50.2966 35.187 53.1611C42.1026 56.0257 49.5147 57.5 57 57.5V31.5C57 14.3792 43.1208 0.5 26 0.5H0Z"
-        fill="url(#paint0_linear_325_33689)"
+        d="M0 -0.5C0 6.98535 1.47435 14.3974 4.33886 21.313C7.20338 28.2285 11.402 34.5122 16.6949 39.8051C21.9878 45.098 28.2715 49.2966 35.187 52.1611C42.1026 55.0257 49.5147 56.5 57 56.5V5.5C57 2.18629 54.3137 -0.5 51 -0.5H0Z"
+        fill="url(#paint0_linear_2674_19068)"
       />
       <defs>
         <linearGradient
-          id="paint0_linear_325_33689"
+          id="paint0_linear_2674_19068"
           x1="65"
-          y1="6"
+          y1="5"
           x2="15.5"
-          y2="43.5"
+          y2="42.5"
           gradientUnits="userSpaceOnUse"
         >
           <stop stop-color="#FFF8D5" />

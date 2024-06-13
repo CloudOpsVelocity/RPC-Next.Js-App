@@ -32,6 +32,7 @@ export default function Specifications({
       });
     }
   };
+
   return (
     <div
       className="w-[90%] scroll-mt-[220px] mx-auto mb-[5%]"
@@ -40,8 +41,8 @@ export default function Specifications({
       <div className="bg-white rounded-lg shadow-md overflow-hidden ">
         <div className="flex-1 bg-gradient-to-tr from-blue-100 p-8">
           <h2 className="text-[20px] lg:text-[32px] font-semibold mb-[12px]">
-            SPECIFICATIONS OF
-            <span className="!text-green-600 capitalize"> {projName}</span>
+            Specifications of
+            <span className="!text-[#148B16] font-bold "> {projName}</span>
           </h2>
           <p className="text-[16px] text-[#212C33] md:text-[22px] italic font-semibold leading-[normal] tracking-[0.88px]  mb-4 flex justify-start items-start ">
             <span>

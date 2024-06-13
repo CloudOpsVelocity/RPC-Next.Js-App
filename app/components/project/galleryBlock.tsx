@@ -9,6 +9,7 @@ import { AspectRatio, Image, Overlay } from "@mantine/core";
 import { useGallery } from "@/app/hooks/useGallery";
 import PropertyHeading from "../property/heading";
 import clsx from "clsx";
+import SubHeading from "./headings/SubHeading";
 
 export default function GalleryBlock({
   walkThrowVideoUrl,
@@ -37,16 +38,12 @@ export default function GalleryBlock({
         />
       ) : (
         <>
-          <h1 className="text-[20px] lg:text-[32px] font-[600] text-[#001F35] uppercase mb-[12px]">
-            gALLERIA of{" "}
-            <span className="text-[#148B16] font-[700] uppercase">
-              {projName}
-            </span>{" "}
+          <h1 className="text-[20px] lg:text-[32px] font-[600] text-[#001F35] capitalize mb-[12px]">
+            Galleria of{" "}
+            <span className="text-[#148B16] font-[700] ">{projName}</span>{" "}
           </h1>
 
-          <p className="text-[16px] text-[#4D6677] lg:text-2xl italic font-medium leading-[normal] capitalize">
-            Gallery Highlights : A Glimpse into good project
-          </p>
+          <SubHeading text="Gallery highlights : A glimpse into good project" />
         </>
       )}
 
