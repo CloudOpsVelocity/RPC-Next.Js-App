@@ -3,10 +3,11 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  // typescript: { ignoreBuildErrors: true },
-  // experimental: {
-  //   optimizePackageImports: ["@mantine/core", "@mantine/hooks"],
-  // },
+  typescript: { ignoreBuildErrors: true },
+  experimental: {
+    optimizePackageImports: ["@mantine/core", "@mantine/hooks"],
+  },
+
   images: {
     remotePatterns: [
       { hostname: "d1l03fubsuphsh.cloudfront.net" },
@@ -28,6 +29,9 @@ const nextConfig = {
       {
         hostname:
           "getrightproperty-test-bucket-new.s3.ap-south-1.amazonaws.com",
+      },
+      {
+        hostname: "getrightproperty-prod-bucket.s3.ap-south-1.amazonaws.com",
       },
     ],
   },

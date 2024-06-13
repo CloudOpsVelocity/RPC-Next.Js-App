@@ -1,5 +1,4 @@
 "use client";
-import ButtonLink from "@/app/elements/link";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -51,7 +50,6 @@ import { Menu } from "@mantine/core";
 import data, { unAuthorizedData } from "@/app/data/dropdown";
 import { postDetailsIcon } from "@/app/images/commonSvgs";
 import axios from "axios";
-import { usePathname, useSearchParams } from "next/navigation";
 import usePathToOrigin from "@/app/hooks/custom/useRedirect";
 
 function Dropdown() {

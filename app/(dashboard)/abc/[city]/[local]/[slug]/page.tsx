@@ -201,6 +201,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
 }
 
 // export const fetchCache = "force-no-store";
+
 export async function generateStaticParams() {
   const { projResult } = await getParams();
   const slugs = projResult.map((slug: string) => ({
@@ -209,12 +210,13 @@ export async function generateStaticParams() {
   return slugs;
 }
 
-async function getParams() {
-  let data = await axios.get(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/common/all/active/ids?identifier=project`
-  );
 
-  return data.data;
-}
+// async function getParams() {
+//   let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/common/all/active/ids?identifier=project`;
+//   console.log(url);
+//   let data = await axios.get(url);
+
+//   return data.data;
+// }
 
 export const revalidate = 60;
