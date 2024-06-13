@@ -40,19 +40,19 @@ export default function OverviewBanner({
 
         <div className="flex justify-center sm:justify-between items-center w-[100%] flex-row ml-[3%] p-[2%] flex-wrap">
           <div className=" grid place-items-center md:block">
-            <p className="text-[#212C33] text-[24px] lg:text-[34px] font-[600] mb-4 md:text-start text-center">
-              <span className="mr-4">PRICE RANGE</span>{" "}
-              <span className="text-[#00487C] text-[24px] md:text-[32px] lg:text-[40px] whitespace-nowrap font-[700] mt-1">
-                {formatCurrency(minPrice)} - {formatCurrency(maxPrice)}
-                {", "}
-                <span className="text-[#545353] text-lg md:text-[32px] not-italic font-medium leading-[normal]">
-                  ₹ {basePrice} / price sq.ft
-                </span>
+            <p className="text-[#212C33] text-[24px] lg:text-[34px] font-[600]  md:text-start text-center">
+              PRICE RANGE
+            </p>
+            <p className="text-[#00487C] text-[24px] md:text-[32px] lg:text-[40px] whitespace-nowrap font-[700] mt-1">
+              {formatCurrency(minPrice)} - {formatCurrency(maxPrice)}
+              {", "}
+              <span className="text-[#545353] text-lg md:text-[32px] not-italic font-medium leading-[normal]">
+                ₹ {basePrice} / price sq.ft
               </span>
             </p>
             <Button
               title="Request  Callback"
-              buttonClass=" text-[#FFF] text-[28px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px]  "
+              buttonClass=" text-[#FFF] text-[28px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px]  mt-3"
               onChange={() => open("banner", slug, "projBanner")}
             />
           </div>
