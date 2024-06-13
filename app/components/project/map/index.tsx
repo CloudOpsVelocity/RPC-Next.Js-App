@@ -28,6 +28,7 @@ import { useSetAtom } from "jotai";
 import { isScrollingAtom } from "../navigation";
 import CustomScrollArea from "./ScrollPanel";
 import { isScrollingAtom as propScrollingAtom } from "../../property/Navigation";
+import SubHeading from "../headings/SubHeading";
 
 export interface Area {
   name: string;
@@ -88,13 +89,13 @@ const LeafMap: React.FC<{
         ) : (
           <div>
             <h2 className="text-[20px] lg:text-[32px] font-semibold mb-[12px] capitalize">
-              <span className="!text-green-600">{projName} </span>
-              <span>Near BY LOCATIONS</span>
+              <span className="text-[#148B16] font-bold">{projName} </span>
+              <span>Near By Locations</span>
             </h2>
-            <p className="text-[#4D6677] text-[16px] md:text-2xl italic font-medium leading-[normal] tracking-[0.96px] mt-2 mb-8">
-              Explore near by convenient amenities, entertainment, and essential
-              services
-            </p>
+            <SubHeading
+              text="Explore near by convenient amenities, entertainment, and essential services"
+              className="mt-2 mb-8"
+            />
           </div>
         )}
       </div>

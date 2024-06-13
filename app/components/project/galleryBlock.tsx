@@ -9,6 +9,7 @@ import { AspectRatio, Image, Overlay } from "@mantine/core";
 import { useGallery } from "@/app/hooks/useGallery";
 import PropertyHeading from "../property/heading";
 import clsx from "clsx";
+import SubHeading from "./headings/SubHeading";
 
 export default function GalleryBlock({
   walkThrowVideoUrl,
@@ -37,26 +38,22 @@ export default function GalleryBlock({
         />
       ) : (
         <>
-          <h1 className="text-[20px] lg:text-[32px] font-[600] text-[#001F35] uppercase mb-[12px]">
-            gALLERIA of{" "}
-            <span className="text-[#148B16] font-[700] uppercase">
-              {projName}
-            </span>{" "}
+          <h1 className="text-[20px] lg:text-[32px] font-[600] text-[#001F35] capitalize mb-[12px]">
+            Galleria of{" "}
+            <span className="text-[#148B16] font-[700] ">{projName}</span>{" "}
           </h1>
 
-          <p className="text-[16px] text-[#4D6677] lg:text-2xl italic font-medium leading-[normal] capitalize">
-            Gallery Highlights : A Glimpse into good project
-          </p>
+          <SubHeading text="Gallery highlights : A glimpse into good project" />
         </>
       )}
 
       <div className=" flex justify-center flex-col md:flex-row items-center-full mt-[1%] ">
         {/* IMage display con */}
-        <div className="w-[100%] md:w-[50%] bg-white  h-[250px] overflow-hidden sm:h-[394px] lg:h-auto mb-[3%] md:mb-[0%] mr-[3%] rounded-[14px]   flex justify-center items-center">
+        <div className="w-[100%] md:w-[50%] bg-white  h-[250px] overflow-hidden sm:h-[394px] lg:h-auto mb-[3%] md:mb-[0%] mr-[3%] rounded-[14px]   flex justify-center items-center ">
           {selectedMedia && (
             <div
               className={clsx(
-                "w-[100%]  bg-white  mb-[3%] md:mb-[0%] mr-[3%]   relative  rounded-[14px] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] h-fit",
+                "w-[100%]  prjImgBg max-h-[462px]  mb-[3%] md:mb-[0%] mr-[3%]   relative  rounded-[14px] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] ",
                 selectedMedia.includes(".mp4") &&
                   "flex justify-center items-center"
               )}
@@ -65,7 +62,7 @@ export default function GalleryBlock({
                 <ReactPlayer
                   url={selectedMedia}
                   width="auto"
-                  height="550px"
+                  height="462px"
                   controls
                 />
               ) : (

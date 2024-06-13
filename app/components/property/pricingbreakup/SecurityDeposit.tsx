@@ -10,7 +10,6 @@ export default function SecurityDeposit({ otherPrice }: { otherPrice: any }) {
     </div>
   );
 }
-
 let styles = {
   container:
     "flex items-center gap-5 border shadow-[0px_4px_22px_0px_rgba(126,106,0,0.35)] pl-[27px] pr-24 py-3 rounded-[10px] border-solid border-[#FFD600] bg-[#FFF5C3] mt-8",
@@ -36,8 +35,15 @@ let styles = {
 let config = {
   SampleText: "Security Deposit",
   calcSecurityDeposit(otherPrice: any): { security: number; type: string } {
-    const { securetyType, security, securityMonth = 1 } = otherPrice;
-    let total = security * securityMonth;
+    const {
+      securetyType,
+      security,
+      securityMonth = 1,
+      price,
+      type,
+    } = otherPrice;
+    let total =
+      securetyType === "M" ? securityMonth * parseInt(price) : security;
     let text = this.SampleText;
     return { security: total, type: text };
   },

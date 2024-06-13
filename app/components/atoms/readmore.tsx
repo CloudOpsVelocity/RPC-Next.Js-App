@@ -1,7 +1,7 @@
 "use client";
 import { readMoreAtom } from "@/app/store/drawer";
 import { useAtom } from "jotai";
-import React, { useState } from "react";
+import React from "react";
 
 interface ReadMoreProps {
   text: string;
@@ -33,15 +33,15 @@ const ReadMore: React.FC<ReadMoreProps> = ({
   };
 
   const getClampedText = () => {
-    const words = text?.split(" ");
-    return words?.slice(0, maxLines * 10).join(" ");
+    const charLimit = maxLines * 100; // Estimate character limit based on lines
+    return text?.length > charLimit ? text.slice(0, charLimit) : text;
   };
 
-  const shouldShowReadMore = text?.split(" ").length > 50;
+  const shouldShowReadMore = text?.length > maxLines * 100;
 
   return (
     <div className="w-[90%]">
-      <p className="text-[16px] md:text-[20px] lg:text-[24px] font-[500] text-[#233333]">
+      <p className="text-[16px] md:text-[20px] lg:text-[24px] font-[500] text-[#233333] break-words">
         {getClampedText()}
         {!expanded && shouldShowReadMore && "... "}
         {shouldShowReadMore && (

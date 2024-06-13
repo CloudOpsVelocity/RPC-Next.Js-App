@@ -17,6 +17,7 @@ import { formatDateDDMMYYYY } from "@/app/utils/date";
 import { isSingleLetterOrNumber } from "@/app/utils/letters";
 import { sqftToAcres } from "@/app/utils/landarea";
 import NoProperties from "./notfound";
+import SubHeading from "./headings/SubHeading";
 type Props = {
   data: PhaseList[];
   slug: string;
@@ -41,13 +42,13 @@ export default function ProjectDetailsP({ projName }: Props) {
     <div className="w-[90%] mb-[5%] scroll-mt-[180px]" id="propertyDetails">
       <h1 className="text-[20px] lg:text-[32px] font-[600] text-[#001F35] mb-[12px]">
         Property Details Of{" "}
-        <span className="text-[#148B16] font-[700] uppercase">{projName}</span>{" "}
+        <span className="text-[#148B16] font-[700] ">{projName}</span>{" "}
       </h1>
+      <SubHeading
+        text="Know about your dream project and its details; where comfort meets
+        luxury, where every details matters"
+      />
 
-      <p className="text-[#4D6677] text-[16px] md:text-2xl italic font-medium leading-[normal] capitalize">
-        Know about your dream project and its details; Where comfort meets
-        Luxury, Where every details matters
-      </p>
       <div className=" sm:flex justify-start items-center mt-[2%] mb-[1%]">
         {PhaseOverview && PhaseOverview?.length > 1 && (
           <>

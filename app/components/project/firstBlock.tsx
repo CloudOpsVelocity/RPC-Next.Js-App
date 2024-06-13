@@ -110,15 +110,15 @@ const FirstBlock: React.FC<Props> = ({ projectDetails, companyName }) => {
           <div className="sm:absolute bottom-0 m-[2%] z-10 w-[95%] self-center justify-between items-start flex-col md:flex-row border-solid border-white-500 rounded-[10px] bg-gradient-to-r from-[#EFEFEF] /20 to-[#c3c3c3bd]/80 shadow-md  sm:flex ">
             <div className=" w-full md:w-[60%]">
               <div className={`ml-[2%] mt-10 mb-[7px]`}>
-                <h3 className="text-xl sm:text-[24px] lg:text-[28px] font-[700] text-[#00487C] uppercase">
+                <h3 className="text-xl sm:text-[24px] lg:text-[28px] font-[700] text-[#00487C] ">
                   {projectDetails.projectName}
                 </h3>
 
-                <p className="text-[#202020]  text-sm sm:text-[22px] not-italic font-[600] leading-[normal] w-[100%] tracking-[0.32px] capitalize mt-3 ">
+                <p className="text-[#202020]  text-sm sm:text-[22px] not-italic font-[600] leading-[normal] w-[100%] tracking-[0.32px] capitalize mt-[14px] ">
                   {`${projectDetails.address}, ${projectDetails.localityName}, ${projectDetails.cityName}, ${projectDetails.state}, ${projectDetails.pinCode}`}
                 </p>
 
-                <p className="text-sm sm:text-[16px] mt-3 lg:text-[22px] font-[600] text-[#001F35]">
+                <p className="text-sm sm:text-[16px] mt-[14px] lg:text-[22px] font-[600] text-[#001F35]">
                   Start - End Date:
                   <span className="font-[600] text-[#202020]">
                     {" "}
@@ -127,9 +127,9 @@ const FirstBlock: React.FC<Props> = ({ projectDetails, companyName }) => {
                   </span>
                 </p>
 
-                <p className="text-[#00487C] text-2xl not-italic font-semibold leading-[normal] mt-3">
+                <p className="text-[#242424] text-2xl not-italic font-semibold leading-[normal] mt-[14px]">
                   Posted By:{" "}
-                  <span className="text-[#00487C] text-2xl italic font-bold leading-[normal]">
+                  <span className="text-[#242424] text-2xl  font-bold leading-[normal]">
                     {companyName ?? "Builder"}
                   </span>
                 </p>

@@ -100,7 +100,7 @@ export default function Navigation({
           : false,
     },
     { condtion: true, key: "overview" },
-    { condtion: true, key: "about" },
+    { condtion: data?.usp, key: "about" },
     { condtion: true, key: "propertyDetails" },
     { condtion: true, key: "floorPlans" },
     { condtion: true, key: "galleria" },

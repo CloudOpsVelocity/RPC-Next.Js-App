@@ -7,11 +7,13 @@ export default function SellingPrice({
   price,
   type,
   otherPrice,
+  propertyPrice,
 }: {
   price: number;
   type: string;
   isSecurity?: boolean;
   otherPrice: Main["otherPrice"];
+  propertyPrice: number;
 }) {
   return (
     <div className=" w-[100%]">
@@ -23,7 +25,9 @@ export default function SellingPrice({
           ₹ <NumberFormatter thousandSeparator value={price} />
         </h2>
       </div>
-      {otherPrice.security && <SecurityDeposit otherPrice={otherPrice} />}
+      {otherPrice.securetyType && (
+        <SecurityDeposit otherPrice={{ ...otherPrice, price: propertyPrice }} />
+      )}
 
       <p className="text-[#001F35] text-[10px] not-italic font-normal mt-4">
         Disclaimer: Information provided is for reference only. Get Right

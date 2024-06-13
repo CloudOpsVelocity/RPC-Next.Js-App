@@ -54,9 +54,9 @@ export default function Navigation({
           setIsSticky(false);
         }
         if (scrollDirection === "down" && window.scrollY > 900) {
-          handleArrowClick("R");
+          handleArrowClick("R", 100);
         } else {
-          handleArrowClick("L");
+          handleArrowClick("L", -100);
         }
       }
     }
@@ -67,8 +67,9 @@ export default function Navigation({
       window.removeEventListener("scroll", handleScroll);
     };
   }, [topics, isScrolling, lastScrollY]);
-  function handleArrowClick(side: "R" | "L"): void {
-    const scrollAmount = side === "R" ? 100 : -100;
+  function handleArrowClick(side: "R" | "L", value?: number): void {
+    const scrollAmount = side === "R" ? value ?? 400 : value ?? -400;
+    console.log(scrollAmount);
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollLeft += scrollAmount;
       setLeftScroll((scrollContainerRef.current.scrollLeft += scrollAmount));

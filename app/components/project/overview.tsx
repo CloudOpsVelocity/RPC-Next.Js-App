@@ -55,7 +55,7 @@ export default function Overview({
           <h2 className="text-[24px] lg:text-[32px] text-[#148B16] font-[700] capitalize">
             {projectName}
           </h2>
-          <p className="text-[16px] lg:text-[24px] text-black font-[600] capitalize sm:max-w-[85%]">
+          <p className="text-[16px] lg:text-[24px] text-black font-[600] capitalize  sm:max-w-[1400px]">
             {`${address}, ${localityName}, ${cityName}, ${state}, ${pinCode}`}
           </p>
         </div>

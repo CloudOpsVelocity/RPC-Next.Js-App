@@ -1,5 +1,6 @@
 import Image from "next/image";
 import React from "react";
+import SubHeading from "./headings/SubHeading";
 
 export default function Feature({
   data,
@@ -12,15 +13,16 @@ export default function Feature({
     <>
       <div className="w-[90%] scroll-mt-[180px] mb-[5%]" id="highlights">
         <h2 className="text-[20px] lg:text-[32px] font-semibold mb-[10px]">
-          HIGHLIGHTS OF{" "}
-          <span className="text-[#148B16] text-[0px] lg:text-[32px] not-italic font-bold leading-[normal] uppercase">
+          Highlights Of{" "}
+          <span className="text-[#148B16] text-[0px] lg:text-[32px] not-italic font-bold leading-[normal]">
             {projName}
           </span>
         </h2>
-        <p className="text-[16px] lg:text-[24px] text-gray-500  italic mb-[36px]">
-          Key Features: Elegant Design, Spacious Layout, Stunning Views, Modern
-          Amenities
-        </p>
+        <SubHeading
+          text="Key features: Elegant design, spacious layout, stunning views, modern amenities"
+          className="mb-[36px]"
+        />
+
         <ul className="list-inside flex flex-col mt-4  ml-[2%]">
           {data?.map((each, ind) => {
             return (

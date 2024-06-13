@@ -132,8 +132,8 @@ const builderSchema = yup.object().shape({
   companyName: yup
     .string()
     .trim()
-    .min(2, "Builder name must be at least 2 characters")
-    .required("Builder name is required"),
+    .min(2, "Builder owned by must be at least 2 characters")
+    .required("Builder owned by is required"),
 
   branch: yup
     .array()

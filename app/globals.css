@@ -149,3 +149,6 @@
     linear-gradient(118deg, #eff5ff 0.38%, #eff5ff 50.69%, #d3edff 100%)
   );
 }
+.prjImgBg {
+  background: linear-gradient(180deg, #efefef 0.07%, #9f9f9f 142.86%);
+}

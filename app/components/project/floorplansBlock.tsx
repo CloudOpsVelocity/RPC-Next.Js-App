@@ -45,6 +45,7 @@ import CarouselSuggestion from "./unitblock/carousel";
 import dynamic from "next/dynamic";
 import { Divider } from "@mantine/core";
 import RTK_CONFIG from "@/app/config/rtk";
+import SubHeading from "./headings/SubHeading";
 
 type Props = {
   data: PhaseList[];
@@ -220,12 +221,11 @@ export default function FloorplansBlock({ projName, slug }: Props) {
         className="text-[20px] lg:text-[32px] font-[600] text-[#001F35] mb-[12px] scroll-mt-[280px]"
         id="floorPlansdiv"
       >
-        FLOOR PLANS for{" "}
-        <span className="text-[#148B16] font-[700] uppercase">{projName}</span>{" "}
+        Floor Plans For{" "}
+        <span className="text-[#148B16] font-[700] ">{projName}</span>{" "}
       </h1>
-      <p className="text-[16px] text-[#4D6677] md:text-2xl italic font-medium leading-[normal] capitalize">
-        see floor plans as per your selected property type
-      </p>
+      <SubHeading text="See floor plans as per your selected property type" />
+
       <div
         className={`flex justify-start items-start md:items-center  mb-[2%] flex-col md:flex-row  ${
           phaseList?.length > 1 ? "mt-4" : "mt-[0%]"

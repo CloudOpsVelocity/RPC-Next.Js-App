@@ -40,7 +40,7 @@ export default function FaqWithBg({ data, projName }: FaqWithBgProps) {
             <div className="relative mr-[-70px] bottom-[20px] w-[168px] h-[74px] rounded-[50%] blur-[29.5px] bg-[#0093ff4d] "></div>
             <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35] mb-16">
               Frequently Asked Questions of
-              <span className="text-[#148B16] font-[700] uppercase ml-4">
+              <span className="text-[#148B16] font-[700]  ml-4">
                 {projName}
               </span>{" "}
             </h1>

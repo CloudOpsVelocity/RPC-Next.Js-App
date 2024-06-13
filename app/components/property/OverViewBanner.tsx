@@ -52,7 +52,12 @@ export default function PropertyOverviewBanner({
                 <span className="text-[#242424] text-2xl not-italic font-bold">
                   {cg === "S"
                     ? `₹ ${pricePerSq} / sq.ft`
-                    : `+ ( ₹ ${otherPrice.security} Security Deposit )`}
+                    : `+ ( ₹ ${
+                        otherPrice.securetyType == "M"
+                          ? (otherPrice.securityMonth as unknown as number) *
+                            price
+                          : otherPrice.security
+                      } Security Deposit )`}
                 </span>
               </span>
             </p>

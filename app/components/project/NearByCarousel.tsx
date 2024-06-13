@@ -3,6 +3,7 @@ import useNearby from "@/app/hooks/useNearby";
 import React from "react";
 import ProjectCarousel from "./ProjectCard";
 import useBuilder from "@/app/hooks/useBuilder";
+import { capitalizeWords } from "@/app/utils/letters";
 
 export default function NearByCarousel({
   projName,
@@ -38,19 +39,19 @@ export default function NearByCarousel({
         type="proj"
         title="Other Projects By"
         content="See what builder has posted"
-        projName={builderData?.data?.userName}
+        projName={capitalizeWords(builderData?.data?.userName ?? "")}
         data={
           data != undefined && data.builderProj != undefined
             ? data.builderProj
             : []
         }
         mutate={mutate}
-        builderName={builderData?.data?.userName}
+        builderName={builderData?.data?.userName ?? ""}
         ct="builder"
       />
       <ProjectCarousel
         type="proj"
-        title={nearBy?.title ?? "nEAR BY pROJECTS OF"}
+        title={nearBy?.title ?? "Near By Projects Of"}
         projName={projName}
         content="See what other customers also viewed"
         data={

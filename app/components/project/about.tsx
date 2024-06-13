@@ -38,9 +38,9 @@ export default function About({
           className="mb-[30px]"
         />
       ) : (
-        <h1 className="uppercase text-[20px] lg:text-[32px] font-[600] text-[#001F35] mb-[24px]">
+        <h1 className="text-[20px] lg:text-[32px] font-[600] text-[#001F35] mb-[24px] capitalize">
           {heading}{" "}
-          <span className={clsx(" font-[700] uppercase text-[#148B16]")}>
+          <span className={clsx(" font-[700]  text-[#148B16]")}>
             {projName}
           </span>{" "}
         </h1>
@@ -48,7 +48,7 @@ export default function About({
 
       <ReadMore
         text={content}
-        maxLines={4}
+        maxLines={6}
         title={heading}
         showProjName={showProjName}
         builderName={builderName}
