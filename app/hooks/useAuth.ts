@@ -94,7 +94,7 @@ export default function useAuth({
         : router.push(redirectPath);
     } else {
       toast.error(res?.error || "Something went wrong. Please try again.", {
-        duration: 1000,
+        duration: 4000,
       });
     }
   };
@@ -133,7 +133,7 @@ export default function useAuth({
       }
       if (!registrationResponse.data.status) {
         toast.error(registrationResponse.data.message, {
-          duration: 1000,
+          duration: 4000,
         });
         return registrationResponse.data;
       }

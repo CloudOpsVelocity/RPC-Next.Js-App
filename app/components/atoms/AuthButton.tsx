@@ -77,7 +77,7 @@ function Dropdown() {
             <Image width={30} height={30} alt="logout" src="/burger.svg" />{" "}
             <Link
               href={{
-                pathname: `/login`,
+                pathname: `/register`,
                 search: redirectQueryParam,
               }}
               className="text-[16px] md:text-[20px] mr-1"
