@@ -210,13 +210,10 @@ export async function generateStaticParams() {
   return slugs;
 }
 
-
-// async function getParams() {
-//   let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/common/all/active/ids?identifier=project`;
-//   console.log(url);
-//   let data = await axios.get(url);
-
-//   return data.data;
-// }
+async function getParams() {
+  let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/common/all/active/ids?identifier=project`;
+  let data = await axios.get(url);
+  return data.data;
+}
 
 export const revalidate = 60;

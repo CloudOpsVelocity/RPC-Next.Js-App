@@ -6,6 +6,8 @@ import cookie from "js-cookie";
 import filterDataAtom from "@/app/store/filterdata";
 import { useSetAtom } from "jotai";
 import { selectedFloorAtom } from "@/app/store/floor";
+import { useVirtualizer } from "@tanstack/react-virtual";
+import useBhkType from "@/app/hooks/project/mutations/floorplan";
 
 type Props = {
   propCgId: any;
@@ -24,11 +26,18 @@ export default function ByBhkBlock({
 }: Props) {
   const filteredData =
     bhk === "0" ? data : data.filter((item: any) => item.bhkName === bhk);
+  const parentRef = React.useRef(null);
 
+  const rowVirtualizer = useVirtualizer({
+    count: filteredData?.length,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 180,
+    overscan: 5,
+  });
   const getOptions = (property: string): string[] => {
     return Array.from(new Set(data.map((item: any) => String(item[property]))));
   };
-
+  // const { data: dto, mutate } = useBhkType({ initialData: data, bhkType: bhk });
   const availBhks = getOptions("bhkName").sort((a, b) => a.localeCompare(b));
   const handleBhkChange = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -36,8 +45,10 @@ export default function ByBhkBlock({
   ): void => {
     e.stopPropagation();
     setBhk(value);
+    // mutate({ input: data, bhkType: value });
   };
   const setCurrentState = useSetAtom(selectedFloorAtom);
+
   return (
     <>
       <div className="lg:h-[100px] px-[2%] border-[#92B2C8] border-solid border-b-[1px] pt-2.5 bg-[#F2FAFF]/50">
@@ -80,17 +91,32 @@ export default function ByBhkBlock({
           ))}
         </div>
       </div>
-
-      <div className="h-full lg:max-h-[440px] max-h-[487px] border-solid overflow-auto  ">
-        {filteredData.map((eachItem: any, ind: number) => (
-          <FloorplanDetailsCard
-            key={ind}
-            data={eachItem}
-            propCgId={propCgId}
-            projData={data}
-            setValues={setValues}
-          />
-        ))}
+      <div
+        style={{
+          height: `440px`,
+          width: `100%`,
+          overflow: "auto",
+        }}
+        ref={parentRef}
+      >
+        <div
+          // className="h-full lg:max-h-[440px] max-h-[487px] border-solid overflow-auto  "
+          style={{
+            height: `${rowVirtualizer.getTotalSize()}px`,
+            width: "100%",
+            position: "relative",
+          }}
+        >
+          {rowVirtualizer.getVirtualItems().map((virtualRow: any) => (
+            <FloorplanDetailsCard
+              key={virtualRow.index}
+              data={virtualRow}
+              propCgId={propCgId}
+              projData={data}
+              setValues={setValues}
+            />
+          ))}
+        </div>
       </div>
     </>
   );

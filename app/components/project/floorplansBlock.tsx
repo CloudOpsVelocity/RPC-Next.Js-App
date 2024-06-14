@@ -25,9 +25,12 @@ const FloorPlanModal = dynamic(() => import("./modals/FloorPlan"), {
   loading: () => <div>Loading...</div>,
   ssr: true,
 });
-
+import { useVirtualizer } from "@tanstack/react-virtual";
 import { useQuery } from "react-query";
-import { getProjectUnits } from "@/app/utils/api/project";
+import {
+  getCachedProjectUnits,
+  getProjectUnits,
+} from "@/app/utils/api/project";
 import usePhaseWiseOverview from "@/app/hooks/usePhaseWiseOverview";
 import { useAtom, useSetAtom } from "jotai";
 import { floorPlansArray, selectedFloorAtom } from "@/app/store/floor";
@@ -78,7 +81,6 @@ export default function FloorplansBlock({ projName, slug }: Props) {
   const { data: projectUnitsData, isLoading } = useQuery({
     queryKey: [`/${propCgId}/${currentPhase}/${slug}`],
     queryFn: () => getProjectUnits(slug, currentPhase, propCgId),
-
     enabled: !!propCgId,
     ...RTK_CONFIG,
   });
@@ -199,6 +201,14 @@ export default function FloorplansBlock({ projName, slug }: Props) {
     setFloorsArray(filteredFloors);
   };
   const [bhk, setBhk] = useState("0");
+  const parentRef = React.useRef(null);
+
+  const rowVirtualizer = useVirtualizer({
+    count: projectUnitsData?.length,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 180,
+    overscan: 5,
+  });
   useEffect(() => {
     if (
       projectUnitsData &&
@@ -388,26 +398,44 @@ export default function FloorplansBlock({ projName, slug }: Props) {
             onClick={handleContainerClick}
           >
             {floorPlanType === "type" && (
-              <div className="w-full md:w-[50%] max-h-[456px] md:h-[540px]  md:max-h-[540px] border-solid overflow-auto ">
-                {projectUnitsData?.length !== 0 ? (
-                  projectUnitsData?.map((data: any, ind: number) => (
-                    <FloorplanDetailsCard
-                      key={ind}
-                      propCgId={propCgId}
-                      data={data}
-                      projData={projectUnitsData}
-                      setValues={form.setValues}
+              <div
+                style={{
+                  height: `547px`,
+                  width: `50%`,
+                  overflow: "auto",
+                }}
+                ref={parentRef}
+              >
+                <div
+                  // className="w-full md:w-[50%] max-h-[456px] md:h-[540px]  md:max-h-[540px] border-solid overflow-auto "
+                  style={{
+                    height: `${rowVirtualizer.getTotalSize()}px`,
+                    width: "100%",
+                    position: "relative",
+                  }}
+                >
+                  {projectUnitsData?.length !== 0 ? (
+                    rowVirtualizer
+                      .getVirtualItems()
+                      .map((virtualRow) => (
+                        <FloorplanDetailsCard
+                          key={virtualRow.index}
+                          propCgId={propCgId}
+                          data={virtualRow}
+                          projData={projectUnitsData}
+                          setValues={form.setValues}
+                        />
+                      ))
+                  ) : (
+                    <NoProperties
+                      phase={
+                        phaseList?.find(
+                          (phase: any) => phase.phaseId == currentPhase
+                        )?.phaseName as any
+                      }
                     />
-                  ))
-                ) : (
-                  <NoProperties
-                    phase={
-                      phaseList?.find(
-                        (phase: any) => phase.phaseId == currentPhase
-                      )?.phaseName as any
-                    }
-                  />
-                )}
+                  )}
+                </div>
               </div>
             )}
 

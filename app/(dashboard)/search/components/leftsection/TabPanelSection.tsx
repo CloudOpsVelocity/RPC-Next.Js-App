@@ -1,6 +1,6 @@
 import SearchSkeleton from "@/app/components/atoms/skeleton/search";
 import { emptyFilesIcon, strikeIconIcon } from "@/app/images/commonSvgs";
-import { Tabs } from "@mantine/core";
+import { Loader, Tabs } from "@mantine/core";
 import { useIntersection } from "@mantine/hooks";
 import React, { useEffect, useRef } from "react";
 import ProjectDetailsCard from "../projectCard";
@@ -30,7 +30,7 @@ export default function TabPanelSection({}: Props) {
         ref={containerRef}
       >
         {isLoading ? (
-          <SearchSkeleton />
+          <Loader />
         ) : data != undefined && data.length != undefined && data.length > 0 ? (
           data?.map((eachOne, index: number) => {
             return (

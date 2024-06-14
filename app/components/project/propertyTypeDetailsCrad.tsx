@@ -17,7 +17,10 @@ import { floorPlansArray, selectedFloorAtom } from "@/app/store/floor";
 import { parseUnits } from "@/app/utils/unitparser";
 import { QueryCache, useQuery } from "react-query";
 import { queryClient } from "@/app/utils/query";
-import { getProjectUnits } from "@/app/utils/api/project";
+import {
+  getCachedProjectUnits,
+  getProjectUnits,
+} from "@/app/utils/api/project";
 import { useParams } from "next/navigation";
 import clsx from "clsx";
 import ShowUnitsButton from "./button/showUnits";

@@ -22,24 +22,27 @@ type Props = {
 
 const FloorplanDetailsCard: React.FC<Props> = ({
   propCgId,
-  data,
+  data: { size, start, index },
   projData,
   setValues,
 }) => {
+  const data = projData[index];
+  console.log(data);
   const [, setImage] = useAtom(selectedFloorAtom);
   const setFloorsArray = useSetAtom(floorPlansArray);
   const mergedData = {
-    bhk: data.bhkName,
-    bedCount: data.bhkName ? data.bhkName.split(" ")[0][0] : "", // Example value, adjust as needed
-    bathCount: data.totalNumberofBathroom,
-    superBuildupArea: data.superBuildUparea, // Example value, adjust as needed
-    propertyFacing: data.facingName === "Don't Know" ? "N/A" : data.facingName, // Example value, adjust as needed
-    towerType: data.towerName, // If tower is provided, use it; otherwise, use "Tower 1"
-    unitNumber: data.unitNumber, // Example value, adjust as needed
-    unitType: `${data.length} ft x ${data.width} ft`, // Example value, adjust as needed
-    totalSqft: `${data.length * data.width} sq.ft`,
-    carParking: data.noOfCarParking,
-    plotArea: data.plotArea,
+    bhk: data?.bhkName,
+    bedCount: data?.bhkName ? data?.bhkName.split(" ")[0][0] : "", // Example value, adjust as needed
+    bathCount: data?.totalNumberofBathroom,
+    superBuildupArea: data?.superBuildUparea, // Example value, adjust as needed
+    propertyFacing:
+      data?.facingName === "Don't Know" ? "N/A" : data?.facingName, // Example value, adjust as needed
+    towerType: data?.towerName, // If tower is provided, use it; otherwise, use "Tower 1"
+    unitNumber: data?.unitNumber, // Example value, adjust as needed
+    unitType: `${data?.length} ft x ${data?.width} ft`, // Example value, adjust as needed
+    totalSqft: `${data?.length * data?.width} sq.ft`,
+    carParking: data?.noOfCarParking,
+    plotArea: data?.plotArea,
   };
   const [opened, { open, close }] = useFloorPlanPopup();
   ////  Villament =garden area , parking area , Terrace Area Balcony Size
@@ -61,6 +64,14 @@ const FloorplanDetailsCard: React.FC<Props> = ({
     <div
       className="flex justify-between p-[2%] w-full border-[#92B2C8] border-solid border-b-[1px] border-r-[1px] cursor-pointer"
       onClick={handleCardClick}
+      style={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: `180px`,
+        transform: `translateY(${start}px)`,
+      }}
     >
       {propCgId != projectprops.plot && (
         <div className="">

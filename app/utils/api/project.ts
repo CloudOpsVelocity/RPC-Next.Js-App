@@ -25,6 +25,23 @@ const getProjectWiseOverView = async (slug: string): Promise<any> => {
   const data = await response.json();
   return data; // Assuming the response can be cast to Main
 };
+export const getCachedProjectUnits = async (
+  slug: string,
+  phaseId: any,
+  propType: any
+) => {
+  const fn = unstable_cache(
+    async (): Promise<any> => getProjectUnits(slug, phaseId, propType),
+    ["datatest"],
+    { revalidate: 10 }
+    // {
+    //   revalidate: 60,
+    // }
+  );
+  const data = await fn();
+  console.log(data);
+  return data;
+};
 const getProjectUnits = async (
   slug: string,
   phaseId: any,
@@ -50,7 +67,7 @@ const getProjectUnits = async (
     });
     return modifiedData;
   }
-
+  console.log(data);
   return data;
 };
 
