@@ -24,6 +24,7 @@ import {
 import clsx from "clsx";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import { useSession } from "next-auth/react";
+import ZoomInOut from "../actions/ZoomInOut";
 
 function CarouselModal({
   projName,
@@ -181,7 +182,7 @@ const ImageContainer = ({ url }: any) => {
       >
         <Image src={url} radius="md" h={600} w={1500} fit="contain" />
       </TransformComponent>
-      {/* <Controls /> */}
+      <ZoomInOut />
     </div>
   );
 };

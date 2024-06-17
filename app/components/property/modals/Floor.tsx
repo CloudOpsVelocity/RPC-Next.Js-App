@@ -288,7 +288,7 @@ const RightSection = ({ propCgId }: any) => {
         ) : null}
         {propCgId != projectprops.plot && data.noccp ? (
           <div className="flex items-center space-x-3">
-            {propertyDetailsSvgs.noOfCarParking}
+            {propertyDetailsSvgs.closedCarParking}
             <p className="text-[#4D6677] text-[14px] font-[500]">
               Closed Car Parking
               <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">

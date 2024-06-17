@@ -2,6 +2,9 @@
   opacity: 0;
   cursor: default;
 }
+.controls {
+  bottom: 12px !important;
+}
 .indicator {
   width: 109px !important;
   height: 8px !important;

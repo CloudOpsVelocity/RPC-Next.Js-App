@@ -16,13 +16,7 @@ const CustomScrollArea: React.FC<{
       px={40}
       nextControlIcon={<ImgCarouselIcon />}
       previousControlIcon={<PrevCarouselIcon />}
-      // nextControlProps={{
-      //   style: {
-      //     marginBottom: "20px",
-      //   },
-      // }}
       classNames={styles}
-      height={50}
     >
       {areas.map(({ Icon, name, key }, index) => (
         <Carousel.Slide key={key} className="max-w-fit">
@@ -30,7 +24,7 @@ const CustomScrollArea: React.FC<{
             key={key}
             onClick={() => setSelected(key ?? "")}
             className={clsx(
-              "inline-flex justify-center items-center gap-1.5 px-2.5 py-1.5 text-[#0073C6] text-[26px] not-italic font-medium leading-[normal] capitalize rounded border border-solid border-[#0073C6]  ml-10 min-w-fit",
+              "inline-flex justify-center items-center gap-1.5 px-2.5 py-1.5 text-[#0073C6] text-[26px] not-italic font-medium leading-[normal] capitalize rounded border border-solid border-[#0073C6]  ml-10 min-w-fit ",
               selected === key && "!text-white font-semibold bg-[#0073C6] "
             )}
           >

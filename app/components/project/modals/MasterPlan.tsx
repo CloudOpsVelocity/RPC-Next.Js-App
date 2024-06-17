@@ -4,10 +4,13 @@ import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import SharePopup from "../../atoms/SharePopup";
 import { imageUrlParser } from "@/app/utils/image";
 import Close from "../button/close";
-import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
+import {
+  TransformComponent,
+  TransformWrapper,
+  useControls,
+} from "react-zoom-pan-pinch";
 import S from "@/app/styles/ImgCarousel.module.css";
-import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
-import { useSession } from "next-auth/react";
+import ZoomInOut from "../actions/ZoomInOut";
 export default function MasterPlanPopup({
   url,
   onDownload,
@@ -33,7 +36,7 @@ export default function MasterPlanPopup({
         size={isMobile ? "100%" : "auto"}
         centered={isMobile}
       >
-        <div className="h-auto scrollbar-hide flex justify-end flex-col items-center">
+        <div className="h-auto scrollbar-hide flex justify-end flex-col items-center ">
           <div className="w-full bg-transparent    h-[57px] flex items-center justify-between  z-[1000] md:px-10 max-w-[91rem] m-auto">
             <div className="text-white sm:text-2xl not-italic font-bold leading-[normal]">
               Master Plan
@@ -66,22 +69,9 @@ export default function MasterPlanPopup({
               <Close close={close} />
             </div>
           </div>
-          <div className="relative">
+          <div>
             <TransformWrapper>
-              <TransformComponent>
-                <Image
-                  radius="md"
-                  m={"auto"}
-                  // fit="fill"
-                  src={`${url}?v=${Math.random()}`}
-                  // component={NextImage}
-                  mah={700}
-                  // w="100%"
-                  fit="contain"
-                  alt="master plan"
-                  className="cursor-pointer border-[5px] bg-white border-white md:min-w-[1400px] max-h-[770px] object-contain"
-                />
-              </TransformComponent>
+              <Content url={url} />
             </TransformWrapper>
           </div>
         </div>
@@ -106,3 +96,26 @@ export default function MasterPlanPopup({
     </>
   );
 }
+
+const Content = ({ url }: { url: string }) => {
+  return (
+    <>
+      <TransformComponent>
+        {" "}
+        <Image
+          radius="md"
+          m={"auto"}
+          // fit="fill"
+          src={`${url}?v=${Math.random()}`}
+          // component={NextImage}
+          mah={700}
+          // w="100%"
+          fit="contain"
+          alt="master plan"
+          className="cursor-pointer border-[5px] bg-white border-white md:min-w-[1400px] max-h-[770px] object-contain"
+        />
+      </TransformComponent>
+      <ZoomInOut />
+    </>
+  );
+};
