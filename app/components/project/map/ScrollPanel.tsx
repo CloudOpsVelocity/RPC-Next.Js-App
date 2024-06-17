@@ -2,7 +2,7 @@ import React from "react";
 import clsx from "clsx";
 import { Area } from ".";
 import { Carousel } from "@mantine/carousel";
-import styles from "@/app/styles/Carousel.module.css";
+import styles from "@/app/styles/Map.module.css";
 import { ImgCarouselIcon, PrevCarouselIcon } from "@/app/images/commonSvgs";
 const CustomScrollArea: React.FC<{
   areas: Area[];
