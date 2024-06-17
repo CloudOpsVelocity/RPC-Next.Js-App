@@ -49,18 +49,20 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
       ? cardData.projName
       : `${cardData?.bhkName ?? ""} ${cardData.propTypeName} for
       ${cardData.cg === "R" ? "Rent" : "Sale"} in ${cardData.ltName}`;
-  console.log(name);
   const setPopReqData = useSetAtom(NearByDataAtom);
+  const handleShortlist = (projId: string) => {
+    mutate && mutate({ id: projId, type: ct as Pick<CardProps, "ct">["ct"] });
+    toggleShortlist({
+      id: reqId,
+      status: cardData.shortListed === "Y" ? "N" : "Y",
+      source: type as GlobalPageType["types"],
+    });
+  };
   const onAddingShortList = (projId: string) => {
     if (session) {
-      mutate && mutate({ id: projId, type: ct as Pick<CardProps, "ct">["ct"] });
-      toggleShortlist({
-        id: reqId,
-        status: cardData.shortListed === "Y" ? "N" : "Y",
-        source: type as GlobalPageType["types"],
-      });
+      handleShortlist(projId);
     } else {
-      openS();
+      openS(() => handleShortlist(projId));
     }
   };
 

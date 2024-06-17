@@ -11,29 +11,7 @@ import { DocIcon } from "@/app/images/commonSvgs";
 const DownloadBroucher = ({ url }: { url?: string }) => {
   const { data: session } = useSession();
   const [, { open: LoginOpen }] = usePopShortList();
-  // const onButtonClick = () => {
-  //   if (session) {
-  //     const pdfUrl = url;
-  //     const link = document.createElement("a");
-  //     link.href = pdfUrl;
-  //     link.download = "downloaded-file"; // specify the filename
-  //     document.body.appendChild(link);
-  //     //link.click();
-  //     document.body.removeChild(link);
-  //   } else {
-  //     toast.custom((t) => (
-  //       <div
-  //         className={`${
-  //           t.visible ? "animate-enter" : "animate-leave"
-  //         } ml-auto w-full pointer-events-auto flex justify-end items-end ring-1 ring-transparent ring-opacity-5`}
-  //       >
-  //         <p className=" text-[#148B16] border-[#148B16] border-[1px] border-solid p-[8px] pr-[16px] pl-[16px] bg-white shadow-lg flex items-center rounded-lg gap-[10px] text-[20px] whitespace-nowrap font-[600] ">
-  //           {pdfFileIcon} Brochure Downloaded Successfully!
-  //         </p>
-  //       </div>
-  //     ));
-  //   }
-  // };
+
   const handleDownload = () => {
     if (session) {
       url &&
@@ -42,7 +20,13 @@ const DownloadBroucher = ({ url }: { url?: string }) => {
           "_blank"
         );
     } else {
-      LoginOpen();
+      LoginOpen(() => {
+        url &&
+          window.open(
+            `/pdf/${encodeURIComponent(url.split(".net")[1])}`,
+            "_blank"
+          );
+      });
     }
 
     // fetch(url)
