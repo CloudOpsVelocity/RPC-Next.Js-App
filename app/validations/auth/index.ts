@@ -75,7 +75,7 @@ export const builderFirstStepSchema = yup.object().shape({
     .string()
     .matches(nameRegex, "Numbers and special characters are not allowed")
 
-    .max(40, "Name should not exceed 40 characters")
+    .max(50, "Name should not exceed 50 characters")
     .required("Builder name is required"),
   email: yup
     .string()
@@ -132,8 +132,8 @@ const builderSchema = yup.object().shape({
   companyName: yup
     .string()
     .trim()
-    .min(2, "Builder owned by must be at least 2 characters")
-    .required("Builder owned by is required"),
+    .min(2, "Builder comapany came by must be at least 2 characters")
+    .required("Builder comapany name by is required"),
 
   branch: yup
     .array()

@@ -601,8 +601,8 @@ function Builder() {
                 required
                 size="lg"
                 mt="md"
-                label="Builder Owned By"
-                placeholder="Enter Builder Owned By"
+                label="Builder Comapany Name"
+                placeholder="Enter Builder Comapany Name"
                 {...form.getInputProps("companyName")}
                 classNames={{
                   root: StepCss.inputRoot,
