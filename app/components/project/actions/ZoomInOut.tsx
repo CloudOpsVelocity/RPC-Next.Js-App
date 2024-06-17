@@ -33,7 +33,6 @@ export default function ZoomInOut({}: Props) {
           onClick={() => handleButtonClick(item.onClick)}
         >
           {item.icon}
-          <span className="hidden sm:block">{item.title}</span>
         </button>
       ))}
     </div>

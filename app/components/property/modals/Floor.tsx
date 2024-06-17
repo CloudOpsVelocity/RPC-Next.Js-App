@@ -9,6 +9,8 @@ import { listingProps, projectprops } from "@/app/data/projectDetails";
 import SharePopup from "../../atoms/SharePopup";
 import { imageUrlParser } from "@/app/utils/image";
 import useDownload from "@/app/hooks/property/useDownload";
+import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
+import ZoomInOut from "../../project/actions/ZoomInOut";
 
 function PFloorPlanModal({
   data,
@@ -52,7 +54,9 @@ function PFloorPlanModal({
               url={imageUrlParser(data.projMedia.floorPlanUrl, "F")}
             />
           </div>
-          <MiddleSection />
+          <TransformWrapper>
+            <MiddleSection />
+          </TransformWrapper>
           <RightSection propCgId={type} />
         </div>
       </Modal>
@@ -68,14 +72,17 @@ const MiddleSection = () => {
   return (
     <div className="col-span-1">
       <div className="relative">
-        <img
-          src={`${data.floorPlanUrl}?v=${Math.random()}`}
-          alt="Floor Plan"
-          className="border"
-          width={800}
-          height={400}
-          style={{ aspectRatio: "800 / 540", objectFit: "cover" }}
-        />
+        <TransformComponent>
+          <img
+            src={`${data.floorPlanUrl}?v=${Math.random()}`}
+            alt="Floor Plan"
+            className="border"
+            width={800}
+            height={400}
+            style={{ aspectRatio: "800 / 540", objectFit: "contain" }}
+          />
+        </TransformComponent>
+        <ZoomInOut />
       </div>
     </div>
   );
