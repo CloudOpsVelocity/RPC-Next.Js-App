@@ -49,7 +49,7 @@ const FirstBlock: React.FC<Props> = ({ projectDetails, companyName }) => {
 
   return (
     <div
-      className={`relative rounded-[10px] w-full m-auto bg-gray-50  lg:h-[680px] bg-cover flex justify-between items-start flex-col`}
+      className={`relative rounded-[10px] w-full m-auto bg-gray-50  lg:h-[750px] bg-cover flex justify-between items-start flex-col shadow-md`}
     >
       {projectDetails && (
         <>
@@ -71,7 +71,7 @@ const FirstBlock: React.FC<Props> = ({ projectDetails, companyName }) => {
             </p>
             <SharePopup className="text-xl" />
           </div>
-          <div className="relative w-full rounded-[10px]">
+          <div className="relative w-full !rounded-[10px]">
             <Carousel
               classNames={styles}
               slideGap={{ base: 0, sm: "md" }}
@@ -89,7 +89,7 @@ const FirstBlock: React.FC<Props> = ({ projectDetails, companyName }) => {
                 <Carousel.Slide
                   key={index}
                   className="relative"
-                  h={680}
+                  h={750}
                   w={"auto"}
                 >
                   <Image
@@ -98,7 +98,7 @@ const FirstBlock: React.FC<Props> = ({ projectDetails, companyName }) => {
                     alt="project image"
                     src={imageUrl}
                     fill
-                    className={`!w-full rounded-[10px]  h-[330px] lg:h-[680px] bg-gray-${
+                    className={`!w-full !rounded-[10px]  h-[330px] lg:h-[750px] bg-gray-${
                       index + 1
                     }`}
                     quality={100}

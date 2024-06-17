@@ -4,7 +4,7 @@ import useAuth from "@/app/hooks/useAuth";
 import { resendOtp } from "@/app/utils/auth";
 import { hideMobileNumber } from "@/app/utils/parse";
 import { otpSchema } from "@/app/validations/auth";
-import { Box, Button, Modal, PinInput, em } from "@mantine/core";
+import { Box, Button, FocusTrap, Modal, PinInput, em } from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
 import React, { useEffect, useRef, useState } from "react";
 import S from "@/app/styles/Otp.module.css";
@@ -28,22 +28,10 @@ export default function ReqOtpForm({
   Posted_BY,
 }: Props) {
   const [error, setError] = useState(false);
-
-  const form = useForm({
-    initialValues: { otp: 0 },
-    validate: yupResolver(otpSchema),
-    validateInputOnChange: true,
-    onValuesChange(values) {
-      setError(false);
-      form.setErrors({});
-    },
-  });
-
+  const ref = useRef(null);
   const onSubmit = async (value: any) => {
-    if (form.values.otp.toString().length == 4) {
-      console.log(values);
-      const data = await sendContact({ ...values, otp: value.otp });
-      console.log(data);
+    if (value.toString().length == 4) {
+      const data = await sendContact({ ...values, otp: value });
       if (data?.status) {
         callback();
       } else {
@@ -53,11 +41,24 @@ export default function ReqOtpForm({
       setError(false);
     }
   };
+  const form = useForm({
+    initialValues: { otp: 0 },
+    validate: yupResolver(otpSchema),
+    validateInputOnChange: true,
+    onValuesChange(values) {
+      if (values.otp.toString().length === 4) {
+        onSubmit(values.otp);
+      } else {
+        setError(false);
+      }
+    },
+  });
 
   return (
     <div>
       <form
-        onSubmit={form.onSubmit(onSubmit)}
+        onSubmit={form.onSubmit((values) => onSubmit(values.otp))}
+        ref={ref}
         className="w-[100%]  flex justify-start items-start flex-col "
       >
         {" "}
@@ -105,22 +106,24 @@ export default function ReqOtpForm({
             {form.errors.otp}
           </p>
         )}
-        <PinInput
-          classNames={{
-            pinInput: S.pinInput,
-            input:
-              (error || form.errors.otp) &&
-              form.values.otp.toString().length == 4
-                ? S.errorInput
-                : S.input,
-          }}
-          name="otp"
-          size="xl"
-          {...form.getInputProps("otp")}
-          inputMode="numeric"
-          type={"number"}
-          placeholder=""
-        />
+        <FocusTrap active>
+          <PinInput
+            classNames={{
+              pinInput: S.pinInput,
+              input:
+                (error || form.errors.otp) &&
+                form.values.otp.toString().length == 4
+                  ? S.errorInput
+                  : S.input,
+            }}
+            name="otp"
+            size="xl"
+            {...form.getInputProps("otp")}
+            inputMode="numeric"
+            type={"number"}
+            placeholder=""
+          />
+        </FocusTrap>
         <Resend userName={values.mobile} values={values} />
         <Button type="submit" className="!bg-[#0073C6]">
           Submit

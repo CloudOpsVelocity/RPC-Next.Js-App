@@ -3,13 +3,27 @@ import clsx from "clsx";
 import { Area } from ".";
 import { Carousel } from "@mantine/carousel";
 import styles from "@/app/styles/Carousel.module.css";
+import { ImgCarouselIcon, PrevCarouselIcon } from "@/app/images/commonSvgs";
 const CustomScrollArea: React.FC<{
   areas: Area[];
   selected: string;
   setSelected: (key: string) => void;
 }> = ({ areas, selected, setSelected }) => {
   return (
-    <Carousel align="start" w={"100%"} px={40} classNames={styles}>
+    <Carousel
+      align="start"
+      w={"100%"}
+      px={40}
+      nextControlIcon={<ImgCarouselIcon />}
+      previousControlIcon={<PrevCarouselIcon />}
+      // nextControlProps={{
+      //   style: {
+      //     marginBottom: "20px",
+      //   },
+      // }}
+      classNames={styles}
+      height={50}
+    >
       {areas.map(({ Icon, name, key }, index) => (
         <Carousel.Slide key={key} className="max-w-fit">
           <button

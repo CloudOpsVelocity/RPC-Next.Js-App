@@ -229,7 +229,7 @@ const Table = ({ data, propertyType, cg }: any) => {
   return (
     <div className="flex flex-col justify-center items-start gap-3.5 px-[9px] py-2.5 border rounded-[10px] border-solid border-[#9AB1BC] mt-5 max-w-[90%]">
       <h1 className="flex items-center gap-2.5 pl-2.5 w-full py-2.5 rounded-lg bg-[#ebeaff] text-[#001F35] text-[21px] not-italic font-semibold leading-[normal] capitalize">
-        <Marble /> Units Available
+        <Marble /> Unit Types
       </h1>
       <div className={`flex  pr-3`}>
         {propertyType !== "plot" && (

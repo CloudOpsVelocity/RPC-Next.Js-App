@@ -181,7 +181,7 @@ export default function PropertyTypeDetailsCrad({
           ₹ {cg?.basePrice} Base Price/ sq.ft
         </p>
         <p className="text-[14px] lg:text-[18px]  mb-[3%] text-right text-[#4D6677] text-lg not-italic font-semibold leading-[normal] capitalize mt-3 ">
-          Units available : <br />{" "}
+          Unit types : <br />{" "}
           {propertyType !== "plot" ? (
             <span
               className={clsx(

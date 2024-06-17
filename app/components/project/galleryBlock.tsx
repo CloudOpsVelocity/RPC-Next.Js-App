@@ -49,11 +49,11 @@ export default function GalleryBlock({
 
       <div className=" flex justify-center flex-col md:flex-row items-center-full mt-[1%] ">
         {/* IMage display con */}
-        <div className="w-[100%] md:w-[50%] bg-white  h-[250px] overflow-hidden sm:h-[394px] lg:h-auto mb-[3%] md:mb-[0%] mr-[3%] rounded-[14px]   flex justify-center items-center ">
+        <div className="w-[100%] md:w-[50%] bg-white  h-[250px] overflow-hidden sm:h-[394px] lg:h-auto mb-[3%] md:mb-[0%] mr-[3%] rounded-[14px]   flex justify-center items-center p-1">
           {selectedMedia && (
             <div
               className={clsx(
-                "w-[100%]  prjImgBg max-h-[462px]  mb-[3%] md:mb-[0%] mr-[3%]   relative  rounded-[14px] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] ",
+                "w-[100%]   max-h-[462px]  mb-[3%] md:mb-[0%] mr-[3%]   relative  rounded-[14px] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] ",
                 selectedMedia.includes(".mp4") &&
                   "flex justify-center items-center"
               )}
