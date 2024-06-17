@@ -213,7 +213,6 @@ export async function generateStaticParams() {
 async function getParams() {
   let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/common/all/active/ids?identifier=project`;
   let data = await axios.get(url);
-
   return data.data;
 }
 

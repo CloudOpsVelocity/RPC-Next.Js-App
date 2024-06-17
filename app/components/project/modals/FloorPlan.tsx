@@ -1140,7 +1140,7 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
 
       <CarouselModal projName={projName} propCgId={propCgId} />
 
-      {floorsArray != undefined &&
+      {/* {floorsArray != undefined &&
         floorsArray != null &&
         floorsArray.length > 0 && (
           <div className="flex justify-center items-center mt-4 w-full">
@@ -1186,7 +1186,7 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
               })}
             </Carousel>
           </div>
-        )}
+        )} */}
     </div>
   );
 };

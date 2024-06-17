@@ -17,10 +17,10 @@ export default function ProjBasicDetails({
     value && (
       <div className={className}>
         {icon}
-        <p className=" text-[#001F35] text-[16px] md:text-[20px] font-[500] mt-[8px] mb-[8px]  whitespace-nowrap  ">
+        <p className=" text-[#001F35] text-[22px] not-italic font-medium  whitespace-nowrap">
           {title}
         </p>
-        <p className="text-[#242424] text-[16px] sm:text-[20px] font-[600]  break-words ">
+        <p className="text-[#242424] text-2xl not-italic font-semibold ">
           {value}
         </p>
       </div>
