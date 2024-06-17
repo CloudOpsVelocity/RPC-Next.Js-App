@@ -52,7 +52,7 @@ interface Login {
   password: string;
 }
 function LoginPopupForm({ closePopup }: { closePopup?: () => void }) {
-  const [opened, { close }] = usePopShortList();
+  const [opened, { close, callback }] = usePopShortList();
   const path = usePathname();
   const [state, setState] = useState<"idle" | "pending" | "success">("idle");
   const form = useForm({
@@ -78,6 +78,7 @@ function LoginPopupForm({ closePopup }: { closePopup?: () => void }) {
       if (path.includes("builder")) {
         axios.post("/api/revalidate", { id: path.split("/").pop() });
       }
+      callback && callback();
       close();
     } else {
       const errorsParam =

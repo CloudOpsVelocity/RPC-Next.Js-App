@@ -5,12 +5,14 @@ interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   variant?: "blue" | "green";
   className?: string;
+  showButton?: boolean;
 }
 
 const Button: FC<ButtonProps> = ({
   children,
   variant = "blue",
   className,
+  showButton = true,
   ...rest
 }) => {
   const baseClasses =
@@ -23,9 +25,11 @@ const Button: FC<ButtonProps> = ({
   const classes = clsx(baseClasses, variantClasses, className);
 
   return (
-    <button className={classes} {...rest}>
-      {children}
-    </button>
+    showButton && (
+      <button className={classes} {...rest}>
+        {children}
+      </button>
+    )
   );
 };
 

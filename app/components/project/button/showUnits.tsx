@@ -12,10 +12,10 @@ export default function ShowUnitsButton({ cg }: any) {
   };
   return (
     <button
-      className="text-[#0073C6] text-right text-base italic font-semibold leading-[normal] underline "
+      className="text-[#0073C6] text-right text-base font-semibold leading-[normal] underline "
       onClick={handleShowUnits}
     >
-      Show all units
+      Show all
     </button>
   );
 }

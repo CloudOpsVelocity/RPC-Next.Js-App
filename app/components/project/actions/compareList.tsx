@@ -16,18 +16,19 @@ export default function CompareList() {
   const [, { open }] = usePopShortList();
   const { data, mutate } = useDynamicProj();
   const [opened, { close, open: openSuccesPopup }] = useMessagePopup("compare");
-
+  const handleCompare = () => {
+    mutate(3);
+    toggleCompare({ id: slug, status: data?.compareAdded ? "N" : "Y" });
+  };
   const onAddingCompare = () => {
     if (data?.compareCount >= 5 && !data?.compareAdded) {
       openSuccesPopup();
       return;
     }
-
+    handleCompare();
     if (session) {
-      mutate(3);
-      toggleCompare({ id: slug, status: data?.compareAdded ? "N" : "Y" });
     } else {
-      open();
+      open(handleCompare);
     }
   };
   return (

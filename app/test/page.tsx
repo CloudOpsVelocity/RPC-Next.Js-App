@@ -8,6 +8,16 @@ import WhyCHoose from "../components/molecules/whychoose";
 import YourList from "../components/molecules/your-llist";
 import Section from "./components/Section/Section";
 export default async function page() {
+  // let arr = [
+  //   [1, 2],
+  //   [3, 4],
+  //   [5, 6],
+  //   [7, 8],
+  //   [9, 10],
+  // ];
+
+  // console.log(flat(arr, 1));
+  // console.log(arr);
   return (
     <div className="h-[100%] w-[100%] flex justify-center items-center flex-col overflow-hidden ">
       <Section />
@@ -21,3 +31,13 @@ export default async function page() {
     </div>
   );
 }
+
+// const flat = (arr, depth) => {
+//   let result = [...arr];
+//   for (let i = 0; i < arr.length; i++) {
+//     if (Array.isArray(arr[i])) {
+//       result = [...result, ...flat(arr[i], depth - 1)];
+//     }
+//   }
+//   return arr;
+// };

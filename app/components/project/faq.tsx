@@ -89,19 +89,22 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
     validate: yupResolver(qnaSchema),
   });
   const [opened, { close, open: openSuccesPopup }] = useMessagePopup("qna");
+  const handleQna = async () => {
+    try {
+      await addQna({ question: values.question, projIdEnc: slug });
+      openSuccesPopup();
+      setStatus("success");
+    } catch (error: any) {
+      setErrors({ question: error.message });
+      setStatus("error");
+    }
+  };
   const formSubmit = async (values: any) => {
     if (session) {
       setStatus("pending");
-      try {
-        await addQna({ question: values.question, projIdEnc: slug });
-        openSuccesPopup();
-        setStatus("success");
-      } catch (error: any) {
-        setErrors({ question: error.message });
-        setStatus("error");
-      }
+      handleQna();
     } else {
-      open();
+      open(handleQna);
     }
   };
   const onClose = () => {

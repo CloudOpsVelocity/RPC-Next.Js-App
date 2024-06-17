@@ -17,16 +17,18 @@ export default function ShortList() {
   const { toggleShortlist } = useShortlistAndCompare();
   const [, { open }] = usePopShortList();
   const { data, mutate } = useDynamicProj();
-
+  const handleShortlist = () => {
+    mutate(2);
+    toggleShortlist({
+      id: slug,
+      status: data?.shortListed ? "N" : "Y",
+    });
+  };
   const onAddingShortList = () => {
     if (session) {
-      mutate(2);
-      toggleShortlist({
-        id: slug,
-        status: data?.shortListed ? "N" : "Y",
-      });
+      handleShortlist();
     } else {
-      open();
+      open(handleShortlist);
     }
   };
   return (

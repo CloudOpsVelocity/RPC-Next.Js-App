@@ -24,6 +24,7 @@ import {
 import clsx from "clsx";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import { useSession } from "next-auth/react";
+import ZoomInOut from "../actions/ZoomInOut";
 
 function CarouselModal({
   projName,
@@ -37,25 +38,28 @@ function CarouselModal({
   const selectedFloor = useAtomValue(selectedFloorAtom);
   const [, { open: LoginOpen }] = usePopShortList();
   const { data: session } = useSession();
+  let DownloadFile = async () => {
+    try {
+      const response = await fetch(selectedFloor?.floorPlanUrl);
+      console.log(response);
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+      const downloadLink = document.createElement("a");
+      downloadLink.href = url;
+      downloadLink.download = "floorplan.jpg";
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+      URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Error downloading image:", error);
+    }
+  };
   const handleDownload = async () => {
     if (session) {
-      try {
-        const response = await fetch(selectedFloor?.floorPlanUrl);
-        console.log(response);
-        const blob = await response.blob();
-        const url = URL.createObjectURL(blob);
-        const downloadLink = document.createElement("a");
-        downloadLink.href = url;
-        downloadLink.download = "masterplan.jpg";
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-        document.body.removeChild(downloadLink);
-        URL.revokeObjectURL(url);
-      } catch (error) {
-        console.error("Error downloading image:", error);
-      }
+      DownloadFile();
     } else {
-      LoginOpen();
+      LoginOpen(DownloadFile);
     }
   };
   return (
@@ -178,7 +182,7 @@ const ImageContainer = ({ url }: any) => {
       >
         <Image src={url} radius="md" h={600} w={1500} fit="contain" />
       </TransformComponent>
-      {/* <Controls /> */}
+      <ZoomInOut />
     </div>
   );
 };

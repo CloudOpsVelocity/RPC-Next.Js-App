@@ -18,7 +18,13 @@ export default function Card({ Icon, title, type, data, otherPrice }: Props) {
       case "price":
         return (
           <h4 className="text-[#242424] text-2xl not-italic font-bold leading-[normal]">
-            ₹ <NumberFormatter thousandSeparator value={data} />
+            ₹{" "}
+            <NumberFormatter
+              thousandSeparator
+              thousandsGroupStyle="lakh"
+              value={data}
+              lang="in"
+            />
           </h4>
         );
       case "applicableprice":

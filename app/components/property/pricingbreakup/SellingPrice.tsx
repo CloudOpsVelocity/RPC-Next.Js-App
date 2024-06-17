@@ -22,7 +22,12 @@ export default function SellingPrice({
           {DefaultIcon} Total {type} Price Including all the charges
         </div>
         <h2 className="text-[#005202] text-[34px] not-italic font-bold leading-[normal]">
-          ₹ <NumberFormatter thousandSeparator value={price} />
+          ₹{" "}
+          <NumberFormatter
+            thousandSeparator
+            value={price}
+            thousandsGroupStyle="lakh"
+          />
         </h2>
       </div>
       {otherPrice.securetyType && (

@@ -23,6 +23,7 @@ import styles from "@/app/styles/Carousel.module.css";
 import { NumberFormatter } from "@mantine/core";
 import { useSetAtom } from "jotai";
 import { currentBlockAtom, isScrollingAtom, stickyAtom } from "./Navigation";
+import { get_posted_by } from "@/app/utils/dyanamic/projects";
 const realData = [{ test: "hello" }, 2, 3, 4, 5, 6, 77];
 type Props = {
   projectDetails: Main | null;
@@ -147,8 +148,11 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
                   /- Price per sqft onwards
                 </p>
               )}
-              <p className="text-[#001F35] text-xl not-italic font-semibold leading-[normal] mb-[13px]">
+              <p className="text-[#001F35] text-xl not-italic font-semibold leading-[normal] ">
                 Posted By: {projectDetails.postedByName}
+              </p>
+              <p className="mb-[13px] font-bold">
+                {get_posted_by(projectDetails.postedByType)}
               </p>
               <p
                 className="text-[16px] lg:text-[20px] font-[600] mr-auto md:mr-0 text-[#2A4C70] bg-[#FFF] rounded-[10px] shadow-md p-[8px] flex items-center gap-2 cursor-pointer"

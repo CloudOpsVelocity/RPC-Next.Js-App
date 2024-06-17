@@ -25,6 +25,7 @@ import { ImgNotAvail } from "@/app/data/project";
 import { Carousel } from "@mantine/carousel";
 import styles from "@/app/styles/Carousel.module.css";
 import { unitFloorsAtom } from "../byunitblock";
+import Button from "../../atoms/buttons/variansts";
 
 type Props = {
   propCgId: any;
@@ -148,7 +149,9 @@ function FloorPlanModal({
     handleSearch(key);
   };
   const [o, {}] = useSubFloorPlanPopup();
-
+  const showClearAll = Object.values(form.values).some(
+    (value) => value !== null && value !== "" && value !== 0
+  );
   return (
     <>
       <Modal
@@ -249,9 +252,7 @@ function FloorPlanModal({
                 </button>
               )}
 
-              {Object.values(form.values).some(
-                (value) => value !== null && value !== "" && value !== 0
-              ) && (
+              {showClearAll && (
                 <button
                   className="flex whitespace-nowrap items-center px-2.5 border-none py-0.5 w-fit font-[500] text-[18px] lg:text-[20px] transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-[#FFF] text-secondary-foreground hover:bg-gray-100/80 fnt-[600] text-[#0073C6] underline"
                   onClick={handleReset}
@@ -262,7 +263,12 @@ function FloorPlanModal({
             </div>
 
             <div className="flex justify-start items-start gap-[45px] flex-col mt-[1.5%] md:flex-row w-full pb-[3%] ">
-              <LeftSection propCgId={propCgId} data={data} />
+              <LeftSection
+                propCgId={propCgId}
+                data={data}
+                handleReset={handleReset}
+                showClearAll={showClearAll}
+              />
               <MiddleSection projName={projName} propCgId={propCgId} />
               {selectedFloor && (
                 <RightSection propCgId={propCgId} data={data} />
@@ -277,7 +283,7 @@ function FloorPlanModal({
 
 export default FloorPlanModal;
 
-const LeftSection = ({ propCgId, data }: any) => {
+const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
   const [, setFloorsArray] = useAtom(floorPlansArray);
   const [, setFloor] = useAtom(selectedFloorAtom);
   const { getInputProps, values, setFieldValue, setValues } = useFormContext();
@@ -462,7 +468,7 @@ const LeftSection = ({ propCgId, data }: any) => {
           <Select
             key={"facingName"}
             w={"full"}
-            mt="md"
+            mt="22px"
             label={`${
               propCgId == projectprops.plot
                 ? "Select Plot Facing"
@@ -765,6 +771,14 @@ const LeftSection = ({ propCgId, data }: any) => {
           />
         )}
       </div>
+      <Button
+        variant="blue"
+        className="text-xl mt-4"
+        onClick={handleReset}
+        showButton={showClearAll}
+      >
+        Clear All Filters
+      </Button>
     </div>
   );
 };
@@ -1140,7 +1154,7 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
 
       <CarouselModal projName={projName} propCgId={propCgId} />
 
-      {/* {floorsArray != undefined &&
+      {floorsArray != undefined &&
         floorsArray != null &&
         floorsArray.length > 0 && (
           <div className="flex justify-center items-center mt-4 w-full">
@@ -1186,7 +1200,7 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
               })}
             </Carousel>
           </div>
-        )} */}
+        )}
     </div>
   );
 };

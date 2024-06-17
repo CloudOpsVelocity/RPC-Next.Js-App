@@ -84,13 +84,7 @@ const RoomSection = ({ data }: { data: Main }) => {
           "flex justify-start items-start flex-wrap w-[90%] md:w-full m-auto  "
         }
       >
-        <RoomBasicDetails
-          key="launchDate"
-          icon={<Bathrooms />}
-          title="Bathroom"
-          value={data.nobt}
-          className={style.card}
-        />
+        {" "}
         <RoomBasicDetails
           key="launchDate"
           icon={<BedRooms />}
@@ -98,7 +92,6 @@ const RoomSection = ({ data }: { data: Main }) => {
           value={parseInt(data?.bhkName?.split(" ")[0])}
           className={style.card}
         />
-
         <RoomBasicDetails
           key="landArea"
           icon={<Balcony />}
@@ -107,15 +100,16 @@ const RoomSection = ({ data }: { data: Main }) => {
           className={style.card}
         />
         <RoomBasicDetails
-          icon={<Others />}
-          title="Other rooms"
-          value={data.otherRooms}
+          key="launchDate"
+          icon={<Bathrooms />}
+          title="Bathroom"
+          value={data.nobt}
           className={style.card}
         />
         <RoomBasicDetails
-          icon={<Furnishing />}
-          title="Furnishing"
-          value={data.furnshName}
+          icon={<Others />}
+          title="Other rooms"
+          value={data.otherRooms}
           className={style.card}
         />
       </div>
@@ -186,6 +180,7 @@ const OtherDetails = ({
   availavleFor,
   agreementType,
   noOfOpenSide,
+  furnshName,
 }: Main) => {
   const data = [
     ownershipName,
@@ -317,6 +312,12 @@ const OtherDetails = ({
             className={style.card}
           />
         )}
+        <RoomBasicDetails
+          icon={<Furnishing />}
+          title="Furnishing"
+          value={furnshName}
+          className={style.card}
+        />
       </div>
     </div>
   );
