@@ -8,6 +8,7 @@ import { deleteCookie } from "cookies-next";
 
 export default function AuthButton() {
   const { data: session } = useSession();
+  console.log(session);
 
   const postProjectLink = session
     ? `${process.env.NEXT_PUBLIC_PROJECT_URL}/project/postProject`
@@ -98,29 +99,26 @@ function Dropdown() {
               dropdown: S.dropdown,
             }}
           >
-            {session.user.isActive === "Y" && (
-              <>
-                {" "}
-                {data.map((item, index) =>
-                  session.user.userType !== "B" &&
-                  item.label === "Post Project" ? null : (
-                    <Menu.Item
-                      key={index}
-                      classNames={{
-                        itemLabel: S.itemLabel,
-                      }}
-                      component="a"
-                      className="block text-gray-700 hover:text-green-500 transition-colors"
-                      href={item.url}
-                      target="_blank"
-                    >
-                      {item.label}
-                    </Menu.Item>
-                  )
-                )}
-                <hr className=" bg-[#768AA9] h-0.5 max-w-[90%] m-auto" />
-              </>
-            )}
+            <>
+              {data.map((item, index) =>
+                session.user.userType !== "B" &&
+                item.label === "Post Project" ? null : (
+                  <Menu.Item
+                    key={index}
+                    classNames={{
+                      itemLabel: S.itemLabel,
+                    }}
+                    component="a"
+                    className="block text-gray-700 hover:text-green-500 transition-colors"
+                    href={item.url}
+                    target="_blank"
+                  >
+                    {item.label}
+                  </Menu.Item>
+                )
+              )}
+              <hr className=" bg-[#768AA9] h-0.5 max-w-[90%] m-auto" />
+            </>
 
             <Menu.Item
               classNames={{

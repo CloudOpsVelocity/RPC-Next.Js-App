@@ -93,8 +93,6 @@ const FirstBlock: React.FC<Props> = ({ projectDetails, companyName }) => {
                   w={"auto"}
                 >
                   <Image
-                    // width={1000}
-                    // height={200}
                     alt="project image"
                     src={imageUrl}
                     fill

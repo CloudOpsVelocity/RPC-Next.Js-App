@@ -54,7 +54,7 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
 
   return (
     <div
-      className={`relative rounded-[10px] w-full bg-gray-50 h-[545px] lg:h-[680px] bg-cover flex justify-between items-start flex-col`}
+      className={`relative rounded-[10px] w-full m-auto bg-gray-50  lg:h-[750px] bg-cover flex justify-between items-start flex-col shadow-md`}
     >
       {projectDetails && (
         <>
@@ -72,7 +72,7 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
               <SharePopup title="Share Listing" className="text-xl" />
             </div>
           </div>
-          <div className="relative w-full rounded-[10px]">
+          <div className="relative w-full !rounded-[10px]">
             <Carousel
               classNames={styles}
               slideGap={{ base: 0, sm: "md" }}
@@ -87,15 +87,20 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
               previousControlIcon={<DarkCarouseIcon />}
             >
               {images.map((imageUrl, index) => (
-                <Carousel.Slide key={index} className="relative">
+                <Carousel.Slide
+                  key={index}
+                  className="relative"
+                  h={750}
+                  w={"auto"}
+                >
                   <Image
-                    width={1000}
-                    height={200}
                     alt="project image"
                     src={imageUrl}
-                    className={`!w-full rounded-[10px] bg-cover h-[545px] lg:h-[680px] bg-gray-${
+                    fill
+                    className={`!w-full !rounded-[10px]  h-[330px] lg:h-[750px] bg-gray-${
                       index + 1
-                    }00`}
+                    }`}
+                    quality={100}
                   />
                 </Carousel.Slide>
               ))}
