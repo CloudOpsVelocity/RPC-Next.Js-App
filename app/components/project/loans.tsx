@@ -48,7 +48,7 @@ export default function ProjectLoans({
               {bank.bankid && (
                 <div
                   key={index}
-                  className="flex flex-col justify-center items-center gap-1.5 p-1.5 mt-4 sm:max-w-[150px] md:max-w-[170px] text-center border rounded-[7px] border-solid border-[#CCCED1]"
+                  className="flex flex-col justify-center items-center gap-1.5 p-1.5 mt-4 sm:max-w-[150px] md:max-w-[170px] text-center border rounded-[7px] border-solid border-[#CCCED1] min-h-[160px]"
                 >
                   <Image
                     src={
