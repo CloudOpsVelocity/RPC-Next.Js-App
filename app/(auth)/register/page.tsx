@@ -4,12 +4,14 @@ import Button from "@/app/elements/button";
 import Link from "next/link";
 import Image from "next/image";
 import { getQueryParam } from "@/app/hooks/custom/useRedirect";
+import LoginSignupTabs from "../Components/LoginSignup";
 
 export default function Page({ searchParams }: any) {
   return (
     <div className="w-full p-[10%] md:p-[2%] flex justify-center items-center flex-col">
       <div className="w-full max-w-[459px] md:max-w-[597px] flex justify-center items-center gap-[5%] mb-[5%] ">
-        <Link
+        <LoginSignupTabs searchParams={searchParams} state="signup" />
+        {/* <Link
           href={{
             pathname: "/login",
             search: getQueryParam(searchParams),
@@ -27,7 +29,7 @@ export default function Page({ searchParams }: any) {
           className="whitespace-nowrap text-xl md:text-[26px] text-[#148B16] font-bold border-solid border-b-2 border-green-600"
         >
           Sign Up
-        </Link>
+        </Link> */}
       </div>
 
       <div>

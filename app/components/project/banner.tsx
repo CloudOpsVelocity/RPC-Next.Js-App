@@ -50,9 +50,9 @@ export default function Banner({
           </p>
           <button
             onClick={() => onAddingRatings()}
-            className="flex flex-col justify-center items-center gap-2.5 rounded text-white text-[32px] not-italic font-bold leading-[normal] capitalize p-2.5 bg-btnPrimary"
+            className="flex flex-col justify-center items-center gap-2.5 rounded text-white text-[24px] not-italic font-bold leading-[normal] capitalize p-2.5 bg-btnPrimary"
           >
-            ADD RATINGS
+            Add Ratings
           </button>
         </div>
         <div className="hidden md:block flex-shrink-0 relative h-[200px] w-full md:w-[600px]">

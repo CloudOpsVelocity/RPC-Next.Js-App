@@ -174,15 +174,17 @@ const MiddleSection = ({
 
 const ImageContainer = ({ url }: any) => {
   return (
-    <div className="relative">
+    <div className="relative max-w-fit">
       <TransformComponent
         contentStyle={{
-          width: "100%",
-          display: "block",
-          position: "relative",
+          width: "auto",
+          display: "inline-flex",
+          // position: "relative",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
-        <Image src={url} radius="md" h={600} w={1500} fit="contain" />
+        <Image src={url} radius="md" h={600} fit="contain" />
       </TransformComponent>
       <ZoomInOut />
     </div>

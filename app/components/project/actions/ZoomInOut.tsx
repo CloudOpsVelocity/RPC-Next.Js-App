@@ -4,12 +4,13 @@ import {
   ZoomOutIcon,
   newIcons,
 } from "@/app/images/commonSvgs";
+import clsx from "clsx";
 import React from "react";
 import { useControls } from "react-zoom-pan-pinch";
 
-type Props = {};
+type Props = { className?: string };
 
-export default function ZoomInOut({}: Props) {
+export default function ZoomInOut({ className }: Props) {
   const { zoomIn, zoomOut, resetTransform } = useControls();
   const handleButtonClick = (type: string) => {
     switch (type) {
@@ -25,7 +26,12 @@ export default function ZoomInOut({}: Props) {
     }
   };
   return (
-    <div className="flex justify-center items-center gap-4 absolute bottom-5 right-14">
+    <div
+      className={clsx(
+        "flex justify-center items-center gap-4 absolute bottom-5 right-14",
+        className
+      )}
+    >
       {config.buttons.map((item, index) => (
         <button
           key={index}

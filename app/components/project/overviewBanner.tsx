@@ -41,7 +41,7 @@ export default function OverviewBanner({
         <div className="flex justify-center sm:justify-between items-center w-[100%] flex-row ml-[3%] p-[2%] flex-wrap">
           <div className=" grid place-items-center md:block">
             <p className="text-[#212C33] text-[24px] lg:text-[34px] font-[600]  md:text-start text-center">
-              PRICE RANGE
+              Price Range
             </p>
             <p className="text-[#001F35] text-[24px] md:text-[32px] lg:text-[40px] whitespace-nowrap font-[700] mt-1">
               {formatCurrency(minPrice)} - {formatCurrency(maxPrice)}

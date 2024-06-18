@@ -2,16 +2,21 @@ import { Toaster } from "react-hot-toast";
 import Logo from "../components/atoms/Logo";
 import data from "../data/auth";
 import { TbBuilding } from "react-icons/tb";
-
-import {
-  homeSearchProjectHomeIcon,
-  homeSearchPropertyHomeIcon,
-} from "../images/commonSvgs";
+import Link from "next/link";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <main className="w-full flex h-screen">
-      <div className="relative hidden md:flex items-center justify-center bg-gradient-to-b from-[#E4F4FF] /0 via-[#FFF] /0 to-[#EFFFF3]/100 w-full ">
+      <div className="relative hidden md:flex items-center  justify-center bg-gradient-to-b from-[#E4F4FF] /0 via-[#FFF] /0 to-[#EFFFF3]/100 w-full ">
+        <Link
+          href={"/"}
+          className="absolute top-[7%] left-[25%] p-2 bg-[#ffffff7a]"
+        >
+          <div className="flex  justify-center items-center gap-1 rounded   text-[#0C7ACA] text-2xl not-italic font-bold flex-nowrap ">
+            {config.homeIcon} <p>Go to Home</p>
+          </div>
+          {config.line}
+        </Link>
         <div className="  w-[50%] flex flex-col justify-start items-start ">
           <ul className=" text-neutral-600 w-full text-base font-semibold">
             {data.map((item, index) => (
@@ -47,3 +52,46 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     </main>
   );
 }
+
+const config = {
+  homeIcon: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="29"
+      height="29"
+      viewBox="0 0 29 29"
+      fill="none"
+    >
+      <path
+        d="M4 10.9987L14.5 2.83203L25 10.9987V23.832C25 24.4509 24.7542 25.0444 24.3166 25.4819C23.879 25.9195 23.2855 26.1654 22.6667 26.1654H6.33333C5.71449 26.1654 5.121 25.9195 4.68342 25.4819C4.24583 25.0444 4 24.4509 4 23.832V10.9987Z"
+        stroke="#0C7ACA"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M11 26.1667V14.5H18V26.1667"
+        stroke="#0C7ACA"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  ),
+  line: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="185"
+      height="2"
+      viewBox="0 0 185 2"
+      fill="none"
+    >
+      <path
+        d="M1 1H184"
+        stroke="#0C7ACA"
+        stroke-width="2"
+        stroke-linecap="round"
+      />
+    </svg>
+  ),
+};

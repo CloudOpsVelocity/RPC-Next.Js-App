@@ -26,6 +26,7 @@ import {
   getQueryParam,
   getQueryParamClient,
 } from "@/app/hooks/custom/useRedirect";
+import LoginSignupTabs from "@/app/(auth)/Components/LoginSignup";
 
 function Individual() {
   const [status, setStatus] = useState<
@@ -84,7 +85,13 @@ function Individual() {
         <>
           <Box className="w-full max-w-[423px] mt-[3%] " mx="auto">
             <div className=" sm:max-w-[459px] md:max-w-[597px] flex justify-center items-center gap-[15%] mb-[5%] ">
-              <Link
+              <LoginSignupTabs
+                searchParams={queryParam.query}
+                state="signup"
+                singupText="Individual Sign Up"
+                className="!px-[14px]"
+              />
+              {/* <Link
                 href={{
                   pathname: "/login",
                   search: queryParam.query,
@@ -102,7 +109,7 @@ function Individual() {
                 className="whitespace-nowrap text-xl md:text-[26px] text-[#148B16] font-bold border-solid border-b-2 border-green-600"
               >
                 Individual Sign Up
-              </Link>
+              </Link> */}
             </div>
             <form
               onSubmit={form.onSubmit(onSubmit)}
@@ -244,15 +251,15 @@ function Individual() {
                 </Button>
               </div>
 
-              <p className="md:text-xl font-[400] text-[#202020] mt-[5%] text-center">
+              <Link
+                href={{ pathname: "/login", search: queryParam.query }}
+                className="text-[#282828] md:text-xl flex justify-center items-center gap-2.5 rounded border p-2 border-solid border-[#B2B2B2] mb-3 mt-[5%]"
+              >
                 Already have an Account ?{" "}
-                <Link
-                  href={{ pathname: "/login", search: queryParam.query }}
-                  className="md:text-xl font-[600] text-[#0073C6]"
-                >
+                <span className="md:text-xl  text-[#002749] text-xl not-italic font-semibold">
                   Log In
-                </Link>
-              </p>
+                </span>
+              </Link>
               {status === "error" && (
                 <p className="text-center text-[#556477] text-xl not-italic font-medium leading-[normal] mt-3 mb-[21px]">
                   Forget Password?{" "}
@@ -267,9 +274,9 @@ function Individual() {
 
               <Link
                 href={{ pathname: queryParam.rediectPath }}
-                className="md:text-xl font-[700] text-[#148B16] underline  text-center"
+                className="text-center md:text-xl not-italic text-[#0C7ACA] text-xl   font-semibold leading-[normal] underline "
               >
-                Continue Without Register
+                Continue without Register
               </Link>
             </form>
           </Box>

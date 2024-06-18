@@ -1,0 +1,48 @@
+"use client";
+import Link from "next/link";
+import React, { useState } from "react";
+import { getQueryParam } from "@/app/hooks/custom/useRedirect";
+import clsx from "clsx";
+type Props = {
+  searchParams: any;
+  state: string;
+  singupText?: string;
+  className?: string;
+};
+
+export default function LoginSignupTabs({
+  searchParams,
+  state,
+  singupText,
+  className,
+}: Props) {
+  const activeClassName = clsx(
+    "flex flex-col justify-center items-center gap-1 rounded border shadow-[0px_4px_11.1px_0px_rgba(25,80,71,0.46)_inset,0px_4px_12.9px_0px_rgba(140,177,141,0.38)] px-[35px] md:px-[52px] py-1.5 border-solid border-[#148B16] bg-[#148b16] text-white text-2xl not-italic font-bold leading-[normal] text-nowrap",
+    className
+  );
+  const inactiveClassName =
+    "flex flex-col justify-center items-center gap-1 rounded   px-[52px] py-1.5  bg-transparent text-[#242424]  sm:text-[24px] not-italic font-[500] leading-[normal]";
+
+  return (
+    <div className="inline-flex items-center border pl-[3px] py-0.5 rounded-md border-solid border-[#CDD7DE] bg-[#fafafa] ">
+      <Link
+        className={state === "login" ? activeClassName : inactiveClassName}
+        href={{
+          pathname: "/login",
+          search: getQueryParam(searchParams),
+        }}
+      >
+        Login
+      </Link>
+      <Link
+        href={{
+          pathname: "/register",
+          search: getQueryParam(searchParams),
+        }}
+        className={state === "signup" ? activeClassName : inactiveClassName}
+      >
+        {singupText ?? "Sign Up"}
+      </Link>
+    </div>
+  );
+}

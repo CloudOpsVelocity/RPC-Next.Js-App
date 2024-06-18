@@ -1,12 +1,14 @@
 import Login from "@/app/components/molecules/auth/login";
 import { getQueryParam } from "@/app/hooks/custom/useRedirect";
 import Link from "next/link";
+import LoginSignupTabs from "../Components/LoginSignup";
 
 export default function Page({ searchParams }: any) {
   return (
     <div className="w-full  p-[10%] md:p-[2%]">
       <div className="w-full flex justify-center items-center gap-[5%] mb-[5%] ">
-        <Link
+        <LoginSignupTabs searchParams={searchParams} state="login" />
+        {/* <Link
           href={{
             pathname: "/login",
             search: getQueryParam(searchParams),
@@ -24,7 +26,7 @@ export default function Page({ searchParams }: any) {
           className="whitespace-nowrap text-xl md:text-[26px] font-[500] text-[#666]"
         >
           Sign Up
-        </Link>
+        </Link> */}
       </div>
 
       <div>

@@ -52,7 +52,7 @@ export default function MasterPlan({
         </div>
         <div className="h-full flex justify-center items-center ">
           <button
-            className="  items-center justify-center gap-2.5 p-3 md:p-5 rounded-[10px] bg-[#0073C6] text-white md:text-2xl text-[16px] not-italic font-bold leading-[normal] tracking-[0.96px] max-h-[50%] mt-5 md:mt-0 h-[60px] uppercase inline-flex"
+            className="  items-center justify-center gap-2.5 p-3 md:p-5 rounded-[10px] bg-[#0073C6] text-white md:text-2xl text-[16px] not-italic font-bold leading-[normal] tracking-[0.96px] max-h-[50%] mt-5 md:mt-0 h-[60px]  inline-flex"
             onClick={handleDownload}
           >
             <svg

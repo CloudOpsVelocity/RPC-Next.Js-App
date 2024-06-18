@@ -69,7 +69,6 @@ export default function Navigation({
   }, [topics, isScrolling, lastScrollY]);
   function handleArrowClick(side: "R" | "L", value?: number): void {
     const scrollAmount = side === "R" ? value ?? 400 : value ?? -400;
-    console.log(scrollAmount);
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollLeft += scrollAmount;
       setLeftScroll((scrollContainerRef.current.scrollLeft += scrollAmount));
@@ -134,7 +133,7 @@ export default function Navigation({
           alt=""
           className="rotate-180 cursor-pointer"
           width={41}
-          height={64}
+          height={84}
           onClick={() => handleArrowClick("L")}
         />
       )}
@@ -153,7 +152,7 @@ export default function Navigation({
               <div
                 key={topic.id}
                 className={clsx(
-                  `cursor-pointer text-[22px] mr-[36px]  whitespace-nowrap`,
+                  `cursor-pointer text-[24px] mr-[36px]  whitespace-nowrap`,
                   currentBlock === topic.id
                     ? "text-[#0073C6] font-[700] decoration-solid underline"
                     : "text-[#4D6677] font-[500]",
@@ -186,7 +185,7 @@ export default function Navigation({
         alt=""
         className="cursor-pointer"
         width={41}
-        height={64}
+        height={110}
         onClick={() => handleArrowClick("R")}
       />
     </div>

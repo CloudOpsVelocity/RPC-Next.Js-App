@@ -100,7 +100,7 @@ function Login({ params }: any) {
 
         <Link
           href={{ pathname: "/forgot", search: getQueryParam(params) }}
-          className="text-[14px] font-medium text-[#767270]  w-full cursor-pointer "
+          className="text-[#0C7ACA] text-sm not-italic font-semibold  w-full cursor-pointer "
         >
           Forgot Password ?
         </Link>
@@ -114,18 +114,18 @@ function Login({ params }: any) {
           LOGIN
         </Button>
         <div className="text-center mt-4 ">
-          <p className="text-[#282828] md:text-xl not-italic font-normal leading-[normal] mb-3">
-            Don&apos;t have an Account?{" "}
-            <Link
-              href={{ pathname: "/register", search: getQueryParam(params) }}
-              className="text-[#0C7ACA] md:text-xl not-italic font-bold leading-[normal]"
-            >
-              SIGN UP
-            </Link>
-          </p>
+          <Link
+            href={{ pathname: "/register", search: getQueryParam(params) }}
+            className="text-[#282828] md:text-xl flex justify-center items-center gap-2.5 rounded border p-2 border-solid border-[#B2B2B2] mb-3"
+          >
+            New User?{" "}
+            <span className="md:text-xl  text-[#002749] text-xl not-italic font-semibold">
+              Create an account
+            </span>
+          </Link>
           <Link
             href={{ pathname: getCallPathServer(params) }}
-            className="text-[#148B16] md:text-xl not-italic font-medium leading-[normal] underline "
+            className=" md:text-xl not-italic text-[#0C7ACA] text-xl   font-semibold leading-[normal] underline "
           >
             Continue without login
           </Link>

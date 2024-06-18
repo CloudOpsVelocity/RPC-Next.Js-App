@@ -13774,4 +13774,11 @@ export const newIcons = new Map([
       />
     </svg>,
   ],
+  [
+    "homeIcon",
+    <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29" fill="none">
+  <path d="M4 10.9987L14.5 2.83203L25 10.9987V23.832C25 24.4509 24.7542 25.0444 24.3166 25.4819C23.879 25.9195 23.2855 26.1654 22.6667 26.1654H6.33333C5.71449 26.1654 5.121 25.9195 4.68342 25.4819C4.24583 25.0444 4 24.4509 4 23.832V10.9987Z" stroke="#0C7ACA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M11 26.1667V14.5H18V26.1667" stroke="#0C7ACA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>,
+  ],
 ]);

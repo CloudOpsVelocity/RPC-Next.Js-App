@@ -177,30 +177,34 @@ function FloorPlanModal({
             <div className="flex justify-start items-center w-full h-[35px] relative bottom-[20px] mb-[-35px] ">
               {/* scroll buttons */}
               {Object.values(form.values).filter((each) => each != null)
-                .length > 4 && (
-                <button
-                  onClick={() => handleArrowClick("L")}
-                  className="flex mr-8 h-[32px] w-[32px] rounded-[50%] items-center justify-center bg-[#FCFCFC] "
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width={24}
-                    height={24}
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#D2D5D7"
-                    strokeWidth={2}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
+                .length > 4 &&
+                propCgId !== projectprops.plot && (
+                  <button
+                    onClick={() => handleArrowClick("L")}
+                    className="flex mr-8 h-[32px] w-[32px] rounded-[50%] items-center justify-center bg-[#FCFCFC] "
                   >
-                    <path d="m15 18-6-6 6-6" />
-                  </svg>
-                </button>
-              )}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width={24}
+                      height={24}
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#D2D5D7"
+                      strokeWidth={2}
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="m15 18-6-6 6-6" />
+                    </svg>
+                  </button>
+                )}
 
               <div
                 ref={scrollFiltersRef}
-                className="flex max-w-[60%] scroll-smooth overflow-x-auto overflow-y-hidden scrollbar-hide gap-4"
+                className={clsx(
+                  "flex max-w-[60%] scroll-smooth overflow-x-auto overflow-y-hidden scrollbar-hide gap-4",
+                  propCgId === projectprops.plot && "max-w-[65%] "
+                )}
               >
                 {Object.entries(form.values).map(
                   ([key, value]) =>
@@ -243,14 +247,15 @@ function FloorPlanModal({
 
               {/* scroll buttons */}
               {Object.values(form.values).filter((each) => each != null)
-                .length > 4 && (
-                <button
-                  onClick={() => handleArrowClick("R")}
-                  className="flex h-[32px] ml-8 w-[32px] rounded-[50%] items-center justify-center bg-[#FCFCFC]"
-                >
-                  <ImgCarouselIcon />
-                </button>
-              )}
+                .length > 4 &&
+                propCgId !== projectprops.plot && (
+                  <button
+                    onClick={() => handleArrowClick("R")}
+                    className="flex h-[32px] ml-8 w-[32px] rounded-[50%] items-center justify-center bg-[#FCFCFC]"
+                  >
+                    <ImgCarouselIcon />
+                  </button>
+                )}
 
               {showClearAll && (
                 <button
