@@ -22,22 +22,22 @@
 }
 
 .input {
-  color: #4d6677;
+  color: #242424;
   font-family: Montserrat;
-  font-size: 14px;
+  font-size: 15px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 500;
   line-height: normal;
   text-transform: capitalize;
   height: 33px;
   border-radius: 5px;
-  border: 0.3px solid #4d6677;
+  border: 0.3px solid #242424;
   background: #fff;
   box-sizing: border-box;
   align-self: flex-end;
 }
 .input::placeholder {
-  color: #4d6677;
+  color: #242424;
   font-family: Montserrat;
   font-size: 14px;
   font-style: normal;
@@ -49,11 +49,11 @@
   color: transparent !important;
 }
 .label {
-  color: #4d6677;
+  color: #242424;
   font-family: Montserrat;
   font-size: 15px;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 600;
   line-height: normal;
   text-transform: capitalize;
 }
@@ -70,7 +70,12 @@
 .hidden {
   display: none;
 }
-
+.option {
+  color: #242424;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+}
 .option:hover {
   background: #0073c6;
   color: white;

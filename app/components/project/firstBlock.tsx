@@ -108,17 +108,17 @@ const FirstBlock: React.FC<Props> = ({ projectDetails, companyName }) => {
           <div className="sm:absolute bottom-0 m-[2%] z-10 w-[95%] self-center justify-between items-start flex-col md:flex-row border-solid border-white-500 rounded-[10px] bg-gradient-to-r from-[#EFEFEF] /20 to-[#c3c3c3bd]/80 shadow-md  sm:flex ">
             <div className=" w-full md:w-[60%]">
               <div className={`ml-[2%] mt-10 mb-[7px]`}>
-                <h3 className="text-xl sm:text-[24px] lg:text-[28px] font-[700] text-[#00487C] ">
+                <h3 className="text-xl sm:text-[24px] lg:text-[28px] font-[700] text-[#001F35] ">
                   {projectDetails.projectName}
                 </h3>
 
-                <p className="text-[#202020]  text-sm sm:text-[22px] not-italic font-[600] leading-[normal] w-[100%] tracking-[0.32px] capitalize mt-[14px] ">
+                <p className="text-[#242424]  text-sm sm:text-[22px] not-italic font-[600] leading-[normal] w-[100%] tracking-[0.32px] capitalize mt-[14px] ">
                   {`${projectDetails.address}, ${projectDetails.localityName}, ${projectDetails.cityName}, ${projectDetails.state}, ${projectDetails.pinCode}`}
                 </p>
 
-                <p className="text-sm sm:text-[16px] mt-[14px] lg:text-[22px] font-[600] text-[#001F35]">
+                <p className="text-sm sm:text-[16px] mt-[14px] lg:text-[22px] font-[600] text-[#242424]">
                   Start - End Date:
-                  <span className="font-[600] text-[#202020]">
+                  <span className="font-[600] text-[#242424]">
                     {" "}
                     {formatDate(projectDetails.startDate)} -{" "}
                     {formatDate(projectDetails.endDate)}
@@ -138,7 +138,7 @@ const FirstBlock: React.FC<Props> = ({ projectDetails, companyName }) => {
                 {formatCurrency(projectDetails.minPrice)} -{" "}
                 {formatCurrency(projectDetails.maxPrice)}
               </h2>
-              <p className="text-[16px] md:text-right lg:text-[24px] font-[600] mb-[10px] md:mb-[20px] text-[#00487C] ">
+              <p className="text-[16px] md:text-right lg:text-[24px] font-[600] mb-[10px] md:mb-[20px] text-[#242424] ">
                 ₹ {projectDetails.basePrice}/- Price per sqft onwards
               </p>
 

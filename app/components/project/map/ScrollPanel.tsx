@@ -3,7 +3,12 @@ import clsx from "clsx";
 import { Area } from ".";
 import { Carousel } from "@mantine/carousel";
 import styles from "@/app/styles/Map.module.css";
-import { ImgCarouselIcon, PrevCarouselIcon } from "@/app/images/commonSvgs";
+import {
+  ImgCarouselIcon,
+  NextDarkButton,
+  PrevCarouselIcon,
+  PrevDarkButton,
+} from "@/app/images/commonSvgs";
 const CustomScrollArea: React.FC<{
   areas: Area[];
   selected: string;
@@ -14,8 +19,8 @@ const CustomScrollArea: React.FC<{
       align="start"
       w={"100%"}
       px={40}
-      nextControlIcon={<ImgCarouselIcon />}
-      previousControlIcon={<PrevCarouselIcon />}
+      nextControlIcon={<NextDarkButton />}
+      previousControlIcon={<PrevDarkButton />}
       classNames={styles}
     >
       {areas.map(({ Icon, name, key }, index) => (

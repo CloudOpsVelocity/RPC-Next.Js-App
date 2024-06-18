@@ -239,14 +239,14 @@ const LoggedInUserForm = ({
     />
   ) : (
     <div className="mt-6 w-full">
-      <p className=" mb-[8px] text-[14px] lg:text-[16px] text-[#00487C] text-xl italic font-bold leading-[normal] tracking-[0.8px]">
+      <p className=" mb-[8px] text-[14px] lg:text-[20px] text-[#242424] text-xl italic font-bold leading-[normal] tracking-[0.8px]">
         <span className="text-[#4D6677] text-xl italic font-medium leading-[normal] tracking-[0.8px]">
           {" "}
           Call For:
         </span>{" "}
         {title}
       </p>
-      <p className="text-[#148B16] mb-[6%] text-[14px] lg:text-[16px] italic font-bold leading-[normal] tracking-[0.64px]">
+      <p className="text-[#148B16] mb-[6%] text-[14px] lg:text-[20px] italic font-bold leading-[normal] tracking-[0.64px]">
         <span className="text-[#4D6677] text-xl italic font-medium leading-[normal] tracking-[0.8px]">
           {Posted_BY}:
         </span>{" "}
@@ -257,7 +257,7 @@ const LoggedInUserForm = ({
         You will receive about your inquiries on below contact number
       </div>
       {/* NOTIFICATION END */}
-      <h3 className="text-[#00487C] mb-[2%] text-xl not-italic font-semibold leading-[normal] tracking-[0.8px]">
+      <h3 className="mb-[2%]  text-[#001F35] text-xl not-italic font-bold">
         Your Details
       </h3>
 
@@ -344,7 +344,7 @@ const ReqForm = ({
     />
   ) : (
     <form className="w-full max-w-[500px]" onSubmit={form.onSubmit(formSubmit)}>
-      <p className="text-[#00487C] text-lg italic font-bold leading-[normal] tracking-[0.36px] capitalize mb-[2%] mt-1">
+      <p className="text-[#242424] text-lg italic font-bold leading-[normal] tracking-[0.36px] capitalize mb-[2%] mt-1">
         <span className="text-[#4D6677] text-lg italic font-medium leading-[normal] tracking-[0.36px] ">
           Call For
         </span>{" "}
@@ -363,7 +363,7 @@ const ReqForm = ({
         No worries add your details to get callback from builder
       </p>
 
-      <h2 className="text-[#00487C] text-lg not-italic font-semibold leading-[normal] tracking-[0.72px] mb-[2%]">
+      <h2 className="text-[#001F35] text-xl not-italic font-bold mb-[1.5%]">
         Your Details
       </h2>
       <div className="flex flex-col max-w-sm">

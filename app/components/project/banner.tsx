@@ -36,8 +36,8 @@ export default function Banner({
       <Toaster position="top-right" reverseOrder={false} />
       <div className="w-[90%] m-auto flex flex-col md:flex-row justify-between items-center ">
         <div>
-          <h2 className="text-[#023993] text-[20px] sm:text-[32px] not-italic font-bold leading-[normal] tracking-[1.28px] mb-4">
-            Project Rating For
+          <h2 className="text-[#242424] text-[20px] sm:text-[32px] not-italic font-bold leading-[normal] tracking-[1.28px] mb-4">
+            Project Rating For{" "}
             <span className="text-[#148B16]  sm:text-[32px] not-italic font-bold leading-[normal] tracking-[1.28px] capitalize">
               {projName}
             </span>
@@ -50,7 +50,7 @@ export default function Banner({
           </p>
           <button
             onClick={() => onAddingRatings()}
-            className="inline-flex items-center justify-center rounded-md text-sm  ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 bg-[#007ace] text-white font-semibold"
+            className="flex flex-col justify-center items-center gap-2.5 rounded text-white text-[32px] not-italic font-bold leading-[normal] capitalize p-2.5 bg-btnPrimary"
           >
             ADD RATINGS
           </button>

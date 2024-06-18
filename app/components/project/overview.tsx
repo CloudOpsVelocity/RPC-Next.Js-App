@@ -52,7 +52,7 @@ export default function Overview({
     >
       <div className="pl-[2%] pr-[2%] flex justify-between items-center flex-wrap sm:flex-nowrap">
         <div>
-          <h2 className="text-[24px] lg:text-[32px] text-[#148B16] font-[700] capitalize">
+          <h2 className="text-[24px] lg:text-[32px] text-[#001F35] font-[700] capitalize ">
             {projectName}
           </h2>
           <p className="text-[16px] lg:text-[24px] text-black font-[600] capitalize  sm:max-w-[1400px]">

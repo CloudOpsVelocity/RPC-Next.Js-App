@@ -171,7 +171,7 @@ export default function PropertyTypeDetailsCrad({
         </div>
       </div>
       <div className="rightSection pt-3 flex flex-col">
-        <p className="text-[#00487C]   md:text-xl not-italic font-semibold leading-[normal] ml-[10px] text-right">
+        <p className="text-[#242424]   md:text-xl not-italic font-semibold leading-[normal] ml-[10px] text-right">
           {propName(propertyType, "name")}
         </p>
         <p className="text-[16px] text-right lg:text-[22px] text-[#148B16]  not-italic font-bold leading-[normal] mt-2">

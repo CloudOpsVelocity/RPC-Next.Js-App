@@ -118,7 +118,7 @@ const MiddleSection = ({
 
   return (
     <div className="max-w-[1400px]">
-      <p className="text-[#005DA0] w-full  mb-[1%] text-[16px] font-[500]  text-left">
+      <p className="text-[#242424] w-full  mb-[1%] text-[16px] font-[500]  text-left">
         {/* Sarang by sumadhura/2bhk/tower 1/ 04/north/1124 sq.ft - 3 */}
         {projName}
         {propCgId != projectprops.plot &&

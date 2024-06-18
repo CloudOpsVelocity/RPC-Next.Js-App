@@ -48,7 +48,7 @@ export default function ProjectLoans({
               {bank.bankid && (
                 <div
                   key={index}
-                  className="flex  flex-col justify-center items-center mt-4 sm:max-w-[150px] md:max-w-max text-center"
+                  className="flex flex-col justify-center items-center gap-1.5 p-1.5 mt-4 sm:max-w-[150px] md:max-w-[170px] text-center border rounded-[7px] border-solid border-[#CCCED1]"
                 >
                   <Image
                     src={
@@ -56,11 +56,11 @@ export default function ProjectLoans({
                       `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/Bank-projectproperty.png`
                     }
                     alt={bank.bankName}
-                    width={100}
-                    height={50}
-                    className="min-h-[55px] aspect-video"
+                    width={140}
+                    height={70}
+                    className="min-h-[70px] w-[140px] aspect-video "
                   />
-                  <p className="mt-3 text-[#001F35] text-xl not-italic font-semibold leading-[normal] tracking-[0.8px]">
+                  <p className="mt-3  text-[#242424] text-center text-xl not-italic font-semibold leading-[normal] capitalize">
                     {bank.bankName}
                   </p>
                 </div>

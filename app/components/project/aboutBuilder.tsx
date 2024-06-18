@@ -25,7 +25,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
     >
       <div className="w-full">
         <div className=" gap-[26px] justify-start  w-[100%] items-center">
-          <h1 className=" text-[#023993] text-[24px] lg:text-[32px] font-[700] mb-4 ">
+          <h1 className=" text-[#242424] text-[24px] lg:text-[32px] font-[700] mb-4 ">
             About Builder
           </h1>
 
@@ -64,7 +64,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
             <p className=" text-[#202020] text-[20px] lg:text-[24px] font-[600]">
               {nzData.onGoingProject}
             </p>
-            <p className=" text-[#0073C6] text-[16px] lg:text-[20px] font-[700]">
+            <p className=" text-[#001F35] text-[16px] lg:text-[20px] font-[700]">
               Ongoing {`Project${nzData.onGoingProject > 1 ? "s" : ""}`}
             </p>
           </div>

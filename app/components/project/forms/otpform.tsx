@@ -65,14 +65,14 @@ export default function ReqOtpForm({
         <h2 className="text-[#202020] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px] mb-3">
           Request A Callback
         </h2>
-        <p className="text-[#00487C] text-lg italic font-bold leading-[normal] tracking-[0.36px] capitalize mb-[2%] mt-1">
-          <span className="text-[#4D6677] text-lg italic font-medium leading-[normal] tracking-[0.36px] ">
+        <p className="text-[#242424] text-[20px] italic font-bold leading-[normal] tracking-[0.36px] capitalize mb-[2%] mt-1">
+          <span className="text-[#4D6677]  italic font-medium leading-[normal] tracking-[0.36px] ">
             Call For
           </span>{" "}
           : {title}
         </p>
-        <p className="text-[#148B16] text-base italic font-bold leading-[normal] tracking-[0.64px] mb-[2%] ">
-          <span className="text-[#4D6677] text-lg italic font-medium leading-[normal] tracking-[0.36px]">
+        <p className="text-[#148B16] text-[20px] italic font-bold leading-[normal] tracking-[0.64px] mb-[2%] ">
+          <span className="text-[#4D6677] text-[20px] italic font-medium leading-[normal] tracking-[0.36px]">
             {Posted_BY}
           </span>{" "}
           : {builderName}
@@ -97,12 +97,12 @@ export default function ReqOtpForm({
           {hideMobileNumber((values.mobile && values.mobile) || 0)}
         </p> */}
         {error && (
-          <p className="text-[#F00] font-[500] text-[14px] w-[100%] !max-w-[423px] !mb-[6%]  ">
+          <p className="text-[#F00] font-[500] text-[14px] w-[100%] !max-w-[423px] mt-2  ">
             Invalid OTP entered. Enter valid OTP
           </p>
         )}
         {form.errors.otp && (
-          <p className="text-[#F00] font-[500] text-[14px] w-[100%] !max-w-[423px] !mb-[6%]  ">
+          <p className="text-[#F00] font-[500] text-[14px] w-[100%] !max-w-[423px] mt-2 ">
             {form.errors.otp}
           </p>
         )}

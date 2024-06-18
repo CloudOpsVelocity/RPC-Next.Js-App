@@ -181,10 +181,10 @@ export default function FloorplanDrawer() {
             {/* Left */}
             <div>
               {" "}
-              <p className="text-[16px]  lg:text-[22px] text-[#148B16]  not-italic font-bold leading-[normal] mt-2">
+              <p className="text-[16px]  lg:text-2xl text-[#148B16]  not-italic font-bold leading-[normal] mt-2">
                 {formatCurrency(cg?.minPrice)} - {formatCurrency(cg?.maxPrice)}
               </p>
-              <p className="text-[14px] lg:text-lg text-[#242424]   italic font-medium leading-[normal]">
+              <p className="text-[14px] lg:text-2xl text-[#242424]   italic font-medium leading-[normal]">
                 ₹ {cg?.basePrice} Base Price/ sq.ft
               </p>
             </div>
@@ -193,7 +193,7 @@ export default function FloorplanDrawer() {
         <div className="inline-flex items-center gap-4 p-2 sideBarBg mt-5">
           <div className="flex gap-x-[16px] flex-wrap  ">
             {cg?.propertyType == "apt" || cg?.propertyType == "vlmt" ? (
-              <p className="text-[14px] lg:text-[20px] text-[#2A4C70] font-[500] flex justify-start items-start  ">
+              <p className="text-[14px] lg:text-[20px] text-[#2A4C70] font-[500] flex justify-start items-center  ">
                 <TowerIcon className="w-[16px] h-[16px] lg:w-[24px] lg:h-[24px]" />
                 <span className="mr-[6px] ml-[6px]"> {cg?.elevation} </span>{" "}
                 Tower{cg?.elevation > 1 ? "s" : ""}
@@ -201,12 +201,12 @@ export default function FloorplanDrawer() {
             ) : (
               ""
             )}
-            <p className="text-[14px] lg:text-[20px] text-[#2A4C70] font-[500] flex justify-start items-start  ">
+            <p className="text-[14px] lg:text-[20px] bg-[#EEE] text-[#001F35] font-[500] flex justify-start items-center  ">
               <FlooringIcon className="w-[16px] h-[16px] lg:w-[24px] lg:h-[24px]" />
               <span className="mr-[6px] ml-[6px]">{cg?.unitCount} </span> Units
             </p>
             {cg?.propertyType === "rowHouse" || cg.propertyType === "villa" ? (
-              <p className="text-[14px] lg:text-[20px] text-[#2A4C70] font-[500] flex justify-start items-start  ">
+              <p className="text-[14px] lg:text-[20px] bg-[#EEE] text-[#001F35] font-[500] flex justify-start items-center  ">
                 <FloorsIcon className="w-[16px] h-[16px] lg:w-[24px] lg:h-[24px]" />
                 <span className="mr-[6px] ml-[6px]">
                   {"G+" + cg?.elevation}
@@ -290,11 +290,8 @@ const PlotTable: React.FC<PlotTableProps> = ({
   const key = type === "standard" ? "standardPlots" : "oddPlots";
   const keyCount = type === "standard" ? "standardPlotCount" : "oddPlotCount";
   const title = type === "standard" ? "Standard Unit" : "Odd Unit";
-
   if (propertyType !== "plot") return null;
-
   const plotUnits: string[] = cg.plotData[key] || [];
-
   const unitCountMap = plotUnits.reduce(
     (acc: Record<string, number>, unit: string) => {
       acc[unit] = (acc[unit] || 0) + 1;
@@ -302,13 +299,12 @@ const PlotTable: React.FC<PlotTableProps> = ({
     },
     {}
   );
-
   const sortedUnits = Object.entries(unitCountMap).sort(([unitA], [unitB]) =>
     unitA.localeCompare(unitB)
   );
   return (
     <div>
-      <div className="flex items-center gap-1.5 p-2 rounded-md bg-[#EEF7FE] text-[#00487C] text-lg not-italic font-medium leading-[normal] capitalize mb-3">
+      <div className="flex items-center gap-1.5 p-2 rounded-md bg-[#EEE] text-[#001F35] text-lg not-italic font-semibold capitalize mb-3">
         {config.headerIcon} {title} ({cg.plotData[keyCount]}{" "}
         {pluralizeOrSingularize(cg.plotData[keyCount] as number, "Units")})
       </div>
@@ -322,7 +318,7 @@ const PlotTable: React.FC<PlotTableProps> = ({
             >
               {length}ft x {width}ft{" "}
               {type === "standard" && count > 1 && (
-                <span className="text-[#046DBA] text-xl not-italic font-medium leading-[normal] capitalize">
+                <span className="text-[#001F35] text-xl not-italic font-medium leading-[normal]">
                   ({count} Units)
                 </span>
               )}

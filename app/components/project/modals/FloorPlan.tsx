@@ -170,7 +170,7 @@ function FloorPlanModal({
       >
         <>
           <div className="bg-white w-full h-auto pl-5">
-            <p className="text-[#001F35] text-lg not-italic font-medium leading-[normal] mt-2 mb-7">
+            <p className="text-[#001F35] text-xl not-italic font-semibold mt-2 mb-7">
               See floor plan according to your selections
             </p>
 
@@ -212,13 +212,13 @@ function FloorPlanModal({
                         className="flex h-[33px] items-center px-3 whitespace-nowrap py-1.5 bg-white border border-[#c4f1f9] rounded-full"
                         key={key}
                       >
-                        <span className="text-[#57a773] font-semibold">
+                        <span className="text-[#148B16] font-semibold">
                           {/* @ts-ignore */}
 
                           {key === "floor" && value == 0 ? "G" : value}
                         </span>
-                        <span className="mx-1.5 text-[#6e798c]">|</span>
-                        <span className="text-[#6e798c] capitalize">
+                        <span className="mx-1.5 text-[#242424]">|</span>
+                        <span className="text-[#242424] font-medium capitalize">
                           {filterKeysDetails?.get(key)?.name != undefined
                             ? filterKeysDetails?.get(key)?.name === "Floor" &&
                               (propCgId === 31 || propCgId === 33)
@@ -336,10 +336,6 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
     setValues(prevObj);
     handleSearch(key);
   };
-  // const handleBack = () => {
-  //   handlers.back();
-  // };
-  // console.log(history.history[history.current - 1]);
   return (
     <div className="col-span-1 w-full max-w-[392px] mr-[3%]  ">
       <div className="w-[100%] flex justify-between items-start flex-wrap gap-[5%]">
@@ -634,7 +630,7 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
               key={"#sfgf"}
               w={"full"}
               mt="md"
-              label="Open/ Covered Parking"
+              label="Open/Covered Parking"
               className="!w-[46%]"
               placeholder="-- select --"
               data={getOptions("parkingType").filter((item) => item !== "None")}
@@ -1078,7 +1074,7 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
   };
   return (
     <div className="flex flex-col justify-center items-start shrink-0 w-full sm:max-w-[300px] md:max-w-[500px] xl:max-w-[686px]">
-      <p className="text-[#005DA0] w-full text-right mb-[1%] text-[14px] font-[500] ">
+      <p className=" w-full  mb-[1%] text-[#001F35] text-right text-sm not-italic font-medium leading-[normal] tracking-[0.56px] ">
         {selectedFloor && (
           <>
             {projName}
