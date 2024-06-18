@@ -120,37 +120,39 @@ const MiddleSection = ({
     <div className="max-w-[1400px]">
       <p className="text-[#242424] w-full  mb-[1%] text-[16px] font-[500]  text-left">
         {/* Sarang by sumadhura/2bhk/tower 1/ 04/north/1124 sq.ft - 3 */}
-        {projName}
-        {propCgId != projectprops.plot &&
-          selectedFloor?.bhkName &&
-          " | " + selectedFloor?.bhkName}
-        {propCgId == projectprops.apartment &&
-          selectedFloor?.towerName &&
-          selectedFloor?.towerName != "NA" &&
-          " | Tower " + selectedFloor?.towerName}
-        {propCgId != projectprops.plot &&
-          ` | ${
-            propCgId == projectprops.rowHouse || propCgId == projectprops.villa
-              ? "Elevation"
-              : "Floor"
-          } ` +
-            `${
-              selectedFloor?.floor?.toString() === "0"
-                ? "G"
-                : propCgId == projectprops.rowHouse ||
-                  propCgId == projectprops.villa
-                ? "G+" + selectedFloor?.floor
-                : selectedFloor?.floor
-            }`}
-        {selectedFloor?.unitNumber &&
-          " | Unit No. " + selectedFloor?.unitNumber}
-        {" | Facing " + selectedFloor?.facingName}
-        {propCgId != projectprops.plot &&
-          selectedFloor?.superBuildUparea &&
-          " | Area. " + selectedFloor?.superBuildUparea + " sq.ft"}
-        {propCgId == projectprops.plot &&
-          selectedFloor?.plotArea &&
-          " | Area. " + selectedFloor?.plotArea + " sq.ft"}
+        <>
+          {projName}
+          {propCgId != projectprops.plot &&
+            selectedFloor?.bhkName &&
+            " | " + selectedFloor?.bhkName}
+          {propCgId == projectprops.apartment &&
+            selectedFloor?.towerName &&
+            selectedFloor?.towerName != "NA" &&
+            " | Tower " + selectedFloor?.towerName}
+          {propCgId != projectprops.plot &&
+            ` | ${
+              propCgId == projectprops.rowHouse ||
+              propCgId == projectprops.villa
+                ? "Elevation"
+                : "Floor"
+            } ` +
+              `${
+                selectedFloor?.floor?.toString() === "0" &&
+                propCgId == projectprops.apartment &&
+                propCgId != projectprops.villament
+                  ? "G"
+                  : selectedFloor?.floor
+              }`}
+          {selectedFloor?.unitNumber &&
+            " | Unit No. " + selectedFloor?.unitNumber}
+          {" | Facing " + selectedFloor?.facingName}
+          {propCgId != projectprops.plot &&
+            selectedFloor?.superBuildUparea &&
+            " | Area. " + selectedFloor?.superBuildUparea + " sq.ft"}
+          {propCgId == projectprops.plot &&
+            selectedFloor?.plotArea &&
+            " | Area. " + selectedFloor?.plotArea + " sq.ft"}
+        </>
       </p>
       {selectedFloor?.floorPlanUrl ? (
         <div className="w-full flex justify-center items-center">

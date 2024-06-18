@@ -841,7 +841,7 @@ const RightSection = ({ propCgId }: any) => {
                   ? "G"
                   : propCgId === projectprops.rowHouse ||
                     propCgId === projectprops.villa
-                  ? `G+${data?.floor}`
+                  ? `${data?.floor}`
                   : data?.floor}
               </span>{" "}
             </p>
@@ -1093,7 +1093,9 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
                   : "Floor"
               } ` +
                 `${
-                  selectedFloor?.floor?.toString() === "0"
+                  selectedFloor?.floor?.toString() === "0" &&
+                  propCgId == projectprops.apartment &&
+                  propCgId != projectprops.villament
                     ? "G"
                     : selectedFloor?.floor
                 }`}
