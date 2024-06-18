@@ -5,6 +5,7 @@ import { SpecificationList } from "@/app/validations/types/project";
 import { Box, Group, Paper, ScrollArea, Stack } from "@mantine/core";
 import { specificationsList } from "@/app/images/commonSvgs";
 import styles from "@/app/styles/Scrollbar.module.css";
+import clsx from "clsx";
 export default function Specifications({
   data,
   projName,
@@ -51,19 +52,28 @@ export default function Specifications({
             </span>
           </p>
           <div className="flex flex-wrap gap-4">
-            {data?.map((spec, index) => (
-              <a
-                key={index}
-                className={` px-5 py-2 text-[20px] flex gap-2 bg-[#fafafafa] items-center cursor-pointer rounded-[10px] border-[0.5px] border-solid border-[#76AEFF] ${
-                  selectedSpecIndex == index
-                    ? "shadow-md text-[#00487C] font-[700]"
-                    : "shadow-none text-[#233] font-[500]"
-                }`}
-                onClick={() => handleSpecClick(index)}
-              >
-                {specificationsList?.get(spec?.specId)?.url} {spec.specName}
-              </a>
-            ))}
+            {data?.map((spec, index) => {
+              const isSelected = selectedSpecIndex === index;
+              const specSvg = specificationsList?.get(spec?.specId)?.url;
+
+              return (
+                <a
+                  key={index}
+                  className={clsx(
+                    `px-5 py-2 text-[20px] flex gap-2 bg-[#fafafa] items-center cursor-pointer rounded-[10px] border-[0.5px] border-solid border-[#76AEFF] shadow-none text-[#233] font-[500]`,
+                    isSelected &&
+                      "shadow-md !bg-[#007CC2] !text-white font-[700]"
+                  )}
+                  onClick={() => handleSpecClick(index)}
+                >
+                  {specSvg &&
+                    React.cloneElement(specSvg, {
+                      className: isSelected ? "svg-selected" : "svg-default",
+                    })}
+                  {spec.specName}
+                </a>
+              );
+            })}
           </div>
         </div>
 
