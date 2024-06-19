@@ -16,10 +16,10 @@ export default function ShortList() {
   const { slug } = useParams<{ slug: string }>();
   const { toggleShortlist } = useShortlistAndCompare();
   const [, { open }] = usePopShortList();
-  const { data, mutate, isLoading, status } = useDynamicProj();
+  const { data, mutate } = useDynamicProj();
   const handleShortlist = () => {
     mutate(2);
-    console.log(data.shortListed);
+    console.log({ isData: data });
     toggleShortlist({
       id: slug,
       status: data?.shortListed ? "N" : "Y",
