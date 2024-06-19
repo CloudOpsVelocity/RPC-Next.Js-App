@@ -14,7 +14,7 @@ export default function useDynamicProj() {
     );
     return res.data;
   };
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, status } = useQuery({
     queryFn: getData,
     queryKey: ["dynamic", slug],
     enabled: !!Session,
@@ -85,5 +85,5 @@ export default function useDynamicProj() {
     },
   });
 
-  return { data, isLoading, mutate, updateRatings };
+  return { data, isLoading, mutate, updateRatings, status };
 }
