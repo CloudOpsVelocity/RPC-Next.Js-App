@@ -14,8 +14,9 @@
   border-radius: 5rem;
 }
 .close {
-  background: red;
-  color: white;
+  background: white;
+  color: #495b68;
+  border: 1px solid #495b68;
   border-radius: 100%;
 }
 
