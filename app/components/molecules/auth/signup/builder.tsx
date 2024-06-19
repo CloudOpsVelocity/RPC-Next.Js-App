@@ -609,7 +609,7 @@ function Builder() {
                 size="lg"
                 mt="md"
                 label="Builder Comapany Name"
-                placeholder="Enter Builder Comapany Name"
+                placeholder="Enter Legal Name"
                 {...form.getInputProps("companyName")}
                 classNames={{
                   root: StepCss.inputRoot,

@@ -56,9 +56,15 @@ import usePathToOrigin from "@/app/hooks/custom/useRedirect";
 function Dropdown() {
   const handleLogout = async () => {
     try {
-      await signOut();
-      await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/logOut`);
-      deleteCookie("token");
+      await axios
+        .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/logOut`)
+        .then(() => {
+          signOut();
+          deleteCookie("token");
+        })
+        .catch((error) => {
+          console.log("Something Went Wrong");
+        });
     } catch (error) {
       console.log(error);
     }

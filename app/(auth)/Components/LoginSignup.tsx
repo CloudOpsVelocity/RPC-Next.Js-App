@@ -24,7 +24,7 @@ export default function LoginSignupTabs({
     "flex flex-col justify-center items-center gap-1 rounded   px-[52px] py-1.5  bg-transparent text-[#242424]  sm:text-[24px] not-italic font-[500] leading-[normal]";
 
   return (
-    <div className="inline-flex items-center border pl-[3px] py-0.5 rounded-md border-solid border-[#CDD7DE] bg-[#fafafa] ">
+    <div className="inline-flex items-center border   rounded-md border-solid border-[#CDD7DE] bg-[#fafafa] ">
       <Link
         className={state === "login" ? activeClassName : inactiveClassName}
         href={{
