@@ -84,6 +84,13 @@ function ForgotForm() {
           onSubmit={form.onSubmit(onSubmit)}
           className="w-[100%] flex justify-center items-center flex-col "
         >
+          {/* <div className="inline-flex items-center border pl-[3px] py-0.5 rounded-md border-solid border-[#CDD7DE] bg-[#fafafa] mt-3">
+            <h2
+              className={`flex flex-col justify-center items-center gap-1 rounded border shadow-[0px_4px_11.1px_0px_rgba(25,80,71,0.46)_inset,0px_4px_12.9px_0px_rgba(140,177,141,0.38)] px-[35px] md:px-[52px] py-1.5 border-solid border-[#148B16] bg-[#148b16] text-white text-2xl not-italic font-bold leading-[normal] text-nowrap `}
+            >
+              Forgot Password ?
+            </h2>
+          </div> */}
           <h2
             className={`whitespace-nowrap text-2xl font-bold text-[#148B16] text-center mt-3`}
           >

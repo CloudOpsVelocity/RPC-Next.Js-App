@@ -21,6 +21,7 @@ export default function useDynamicProj() {
     ...RTK_CONFIG,
   });
   const queryClient = useQueryClient();
+
   const updateTodo = async () => {};
 
   const { mutate } = useMutation({

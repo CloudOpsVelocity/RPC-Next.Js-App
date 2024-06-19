@@ -21,8 +21,34 @@ export default function LoginPopup({
       <div className="w-full bg-white text-gray-600 justify-center items-center ">
         <Logo styles="w-full flex justify-center items-center " />
 
-        <div className="w-full  p-[10%] md:p-[2%] mt-6">
-          <div className="w-full flex justify-center items-center gap-[5%] mb-[5%] ">
+        <div className="w-full  p-[10%] md:p-[2%] mt-3 mb-3 ">
+          <div className="inline-flex items-center justify-center w-full">
+            <div className="inline-flex items-center justify-center mx-auto border pl-[3px] py-0.5 rounded-md border-solid border-[#CDD7DE] bg-[#fafafa] ">
+              <Link
+                className={
+                  "flex flex-col justify-center items-center gap-1 rounded border shadow-[0px_4px_11.1px_0px_rgba(25,80,71,0.46)_inset,0px_4px_12.9px_0px_rgba(140,177,141,0.38)] px-[35px] md:px-[52px] py-1.5 border-solid border-[#148B16] bg-[#148b16] text-white text-2xl not-italic font-bold leading-[normal] text-nowrap"
+                }
+                href={{
+                  pathname: "/login",
+                  search: redirectQueryParam,
+                }}
+              >
+                Login
+              </Link>
+              <Link
+                href={{
+                  pathname: "/register",
+                  search: redirectQueryParam,
+                }}
+                className={
+                  "flex flex-col justify-center items-center gap-1 rounded   px-[52px] py-1.5  bg-transparent text-[#242424]  sm:text-[24px] not-italic font-[500] leading-[normal]"
+                }
+              >
+                {"Sign Up"}
+              </Link>
+            </div>
+          </div>
+          {/* <div className="w-full flex justify-center items-center gap-[5%] mb-[5%] ">
             <button className="whitespace-nowrap text-xl md:text-[26px] text-[#148B16] font-bold border-solid border-b-2 border-green-600">
               Log In
             </button>
@@ -37,9 +63,9 @@ export default function LoginPopup({
             >
               Sign Up
             </Link>
-          </div>
+          </div> */}
 
-          <div>
+          <div className="mt-3">
             <LoginPopupForm closePopup={close && close} />
           </div>
         </div>

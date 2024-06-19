@@ -132,8 +132,8 @@ export default function Navigation({
           src="/auth/arrow.svg"
           alt=""
           className="rotate-180 cursor-pointer"
-          width={41}
-          height={84}
+          width={64}
+          height={64}
           onClick={() => handleArrowClick("L")}
         />
       )}
@@ -184,8 +184,8 @@ export default function Navigation({
         src="/auth/arrow.svg"
         alt=""
         className="cursor-pointer"
-        width={41}
-        height={110}
+        width={64}
+        height={64}
         onClick={() => handleArrowClick("R")}
       />
     </div>

@@ -213,7 +213,7 @@ function FloorPlanModal({
                     value !== "" &&
                     value !== "true" && (
                       <div
-                        className="flex h-[33px] items-center px-3 whitespace-nowrap py-1.5 bg-white border border-[#c4f1f9] rounded-full"
+                        className="flex h-[33px] items-center px-3 whitespace-nowrap py-1.5 bg-white border border-[#9DB6DC] rounded-[10px]"
                         key={key}
                       >
                         <span className="text-[#148B16] font-semibold">
@@ -230,14 +230,14 @@ function FloorPlanModal({
                               : filterKeysDetails?.get(key)?.name
                             : key}
                         </span>
-                        <button className="ml-2 !w-[10px] !h-[10px]">
+                        <button className="ml-2 !w-[14px] !h-[14px]">
                           <Image
                             onClick={() => handleRemoveFilter(key)}
                             src={"/cross.svg"}
                             alt="close"
-                            width={10}
-                            height={10}
-                            className="!w-[10px] !h-[10px]"
+                            width={14}
+                            height={14}
+                            className="!w-[14px] !h-[14px]"
                           />
                         </button>
                       </div>
@@ -257,14 +257,14 @@ function FloorPlanModal({
                   </button>
                 )}
 
-              {showClearAll && (
+              {/* {showClearAll && (
                 <button
                   className="flex whitespace-nowrap items-center px-2.5 border-none py-0.5 w-fit font-[500] text-[18px] lg:text-[20px] transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-[#FFF] text-secondary-foreground hover:bg-gray-100/80 fnt-[600] text-[#0073C6] underline"
                   onClick={handleReset}
                 >
                   Clear All Filter
                 </button>
-              )}
+              )} */}
             </div>
 
             <div className="flex justify-start items-start gap-[45px] flex-col mt-[1.5%] md:flex-row w-full pb-[3%] ">
