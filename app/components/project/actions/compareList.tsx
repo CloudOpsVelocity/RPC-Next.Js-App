@@ -30,10 +30,8 @@ export default function CompareList() {
       openSuccesPopup();
       return;
     }
-    if (!data?.compareAdded) {
-      mutate(2);
-      await toggleCompare({ id: slug, status: data?.compareAdded ? "N" : "Y" });
-    }
+    mutate(3);
+    await toggleCompare({ id: slug, status: data?.compareAdded ? "N" : "Y" });
   };
   const onAddingCompare = () => {
     if (data?.compareCount >= 5 && !data?.compareAdded) {
