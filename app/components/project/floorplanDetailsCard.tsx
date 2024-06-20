@@ -27,7 +27,6 @@ const FloorplanDetailsCard: React.FC<Props> = ({
   setValues,
 }) => {
   const data = projData[index];
-  console.log(data);
   const [, setImage] = useAtom(selectedFloorAtom);
   const setFloorsArray = useSetAtom(floorPlansArray);
   const mergedData = {
@@ -62,7 +61,7 @@ const FloorplanDetailsCard: React.FC<Props> = ({
   };
   return (
     <div
-      className="flex justify-between p-[2%] w-full border-[#92B2C8] border-solid border-b-[1px] border-r-[1px] cursor-pointer"
+      className="flex justify-between py-[18px] px-[25px] pt-[24px] w-full border-[#92B2C8] border-solid border-b-[1px] border-r-[1px] cursor-pointer"
       onClick={handleCardClick}
       style={{
         position: "absolute",
@@ -118,7 +117,7 @@ const FloorplanDetailsCard: React.FC<Props> = ({
           </p>
         )}
 
-        <p className="gap-[4px] flex justify-end items-end text-[#303A4] font-[500] text-right text-[14px] lg:text-[16px] mb-[20px] ">
+        <p className="gap-[4px] flex justify-end items-end text-[#303A4] font-[500] text-right text-[14px] lg:text-[16px] mb-[14px] ">
           <FlooringIcon className="w-[20px] h-[20px] lg:w-[24px] lg:h-[24px]" />
           Unit Number: {mergedData.unitNumber}
         </p>
@@ -131,7 +130,7 @@ const FloorplanDetailsCard: React.FC<Props> = ({
           </p>
         )} */}
         {(propCgId != projectprops.plot || !propCgId) && (
-          <p className="gap-[4px] flex justify-end items-end text-[#303A4] font-[500] text-[14px] lg:text-[16px] mb-[20px] ">
+          <p className="gap-[4px] flex justify-end items-end text-[#303A4] font-[500] text-[14px] lg:text-[16px] mb-[14px] ">
             <CarParkingIcon className="w-[20px] h-[20px] lg:w-[24px] lg:h-[24px]" />
             Car Parking:{" "}
             {mergedData.carParking === 0 ? "N/A" : mergedData.carParking}
