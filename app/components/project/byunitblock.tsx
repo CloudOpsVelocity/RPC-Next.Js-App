@@ -7,6 +7,7 @@ import { selectedFloorAtom } from "@/app/store/floor";
 import S from "@/app/styles/Floorplan.module.css";
 import { setPropertyValues } from "@/app/utils/dyanamic/projects";
 import Image from "next/image";
+import Button from "../atoms/buttons/variansts";
 
 type Props = {
   propCgId: any;
@@ -110,15 +111,17 @@ const Byunitblock: React.FC<Props> = ({
   };
   const isAppliedFilters =
     Object.values(values).filter((each) => each != null).length > 0;
-
+  const showClearAll = Object.values(values).some(
+    (value) => value !== null && value !== "" && value !== 0
+  );
   return (
-    <div className="px-[3%] w-full flex justify-start flex-col items-start   h-full">
-      <h3 className="text-[#001F35] text-2xl not-italic font-medium">
+    <div className="px-[5%] py-[2%] w-full flex justify-start flex-col items-start   h-full">
+      <h3 className="text-[#001F35] text-2xl not-italic font-medium mb-4">
         See floor plan according to your selections
       </h3>
       {isAppliedFilters && (
         <>
-          <p className="text-[#001F35] text-lg not-italic font-medium leading-[normal] mt-4 mb-2">
+          <p className="text-[#001F35] text-lg not-italic font-medium leading-[normal]  mb-2">
             Applied Filters
           </p>
           <div className="flex justify-start items-center w-full h-[35px]   ">
@@ -147,7 +150,7 @@ const Byunitblock: React.FC<Props> = ({
 
             <div
               ref={scrollFiltersRef}
-              className="flex max-w-[60%] scroll-smooth overflow-x-auto overflow-y-hidden scrollbar-hide gap-4"
+              className="flex max-w-[90%] scroll-smooth overflow-x-auto overflow-y-hidden scrollbar-hide gap-4"
             >
               {Object.entries(values).map(
                 ([key, value]) =>
@@ -155,16 +158,16 @@ const Byunitblock: React.FC<Props> = ({
                   value !== 0 &&
                   value !== "" && (
                     <div
-                      className="flex h-[33px] items-center px-3 whitespace-nowrap py-1.5 bg-white border border-[#c4f1f9] rounded-full"
+                      className="flex h-[33px] items-center px-3 whitespace-nowrap py-1.5 bg-white border border-[#9DB6DC] rounded-[10px]"
                       key={key}
                     >
-                      <span className="text-[#57a773] font-semibold">
+                      <span className="text-[#148B16] font-semibold">
                         {/* @ts-ignore */}
 
                         {key === "floor" && value == 0 ? "G" : value}
                       </span>
-                      <span className="mx-1.5 text-[#6e798c]">|</span>
-                      <span className="text-[#6e798c] capitalize">
+                      <span className="mx-1.5 text-[#242424]">|</span>
+                      <span className="text-[#242424] font-medium capitalize">
                         {filterKeysDetails?.get(key)?.name != undefined
                           ? filterKeysDetails?.get(key)?.name === "Floor" &&
                             (propCgId === 31 || propCgId === 33)
@@ -172,14 +175,14 @@ const Byunitblock: React.FC<Props> = ({
                             : filterKeysDetails?.get(key)?.name
                           : key}
                       </span>
-                      <button className="ml-2 !w-[10px] !h-[10px]">
+                      <button className="ml-2 !w-[14px] !h-[14px]">
                         <Image
                           onClick={() => handleRemoveFilter(key)}
                           src={"/cross.svg"}
                           alt="close"
-                          width={10}
-                          height={10}
-                          className="!w-[10px] !h-[10px]"
+                          width={14}
+                          height={14}
+                          className="!w-[14px] !h-[14px]"
                         />
                       </button>
                     </div>
@@ -195,17 +198,6 @@ const Byunitblock: React.FC<Props> = ({
                 className="flex h-[32px] ml-8 w-[32px] rounded-[50%] items-center justify-center bg-[#FCFCFC]"
               >
                 <ImgCarouselIcon />
-              </button>
-            )}
-
-            {Object.values(values).some(
-              (value) => value !== null && value !== "" && value !== 0
-            ) && (
-              <button
-                className="flex whitespace-nowrap items-center px-2.5 border-none py-0.5 w-fit font-[500] text-[18px] lg:text-[20px] transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-[#FFF] text-secondary-foreground hover:bg-gray-100/80 fnt-[600] text-[#0073C6] underline"
-                onClick={handleReset}
-              >
-                Clear All Filter
               </button>
             )}
           </div>
@@ -404,6 +396,14 @@ const Byunitblock: React.FC<Props> = ({
           />
         )}
       </div>
+      <Button
+        variant="blue"
+        className="text-xl mt-4"
+        onClick={handleReset}
+        showButton={showClearAll}
+      >
+        Clear All Filters
+      </Button>
     </div>
   );
 };

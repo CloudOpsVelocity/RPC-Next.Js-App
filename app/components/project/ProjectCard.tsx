@@ -119,7 +119,7 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
                   : cardData.projMedia.coverImageUrl
               }
               alt="Sobha Dream Acres"
-              className="w-full  mb-4 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] max-h-[212px]"
+              className="w-full  mb-4 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] object-cover min-h-[212px] max-h-[212px]  "
               width={300}
               height={212}
             />
@@ -133,7 +133,7 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
 
             <div className=" right-2 absolute ">
               <button
-                className="mt-[-30px] rounded-[10px] relative bottom-[35px] z-10 p-[8px] text-[#0073C6] text-[18px] font-[700] flex pl-[4px] justify-center items-center bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100"
+                className="mt-[-30px] rounded-[10px] relative bottom-[35px] z-10 p-[8px] text-[#0073C6] text-[18px] font-[700] flex pl-[4px] justify-center items-center bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 "
                 onClick={(e) => {
                   e.preventDefault();
                   onAddingShortList(cardData.projIdEnc);
@@ -161,9 +161,9 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
             )}
 
             {type == "proj" && (
-              <p className="mb-[6px] text-[#565D70] text-sm not-italic font-semibold leading-[normal]">
+              <p className="mb-[6px] text-[#565D70] text-base not-italic font-semibold leading-[normal]">
                 Start - End Date:
-                <span className="ml-[4px] text-[#001F35] text-sm not-italic font-semibold leading-[normal]">
+                <span className="ml-[4px] text-[#001F35] text-base not-italic font-semibold leading-[normal]">
                   {formatDate(cardData.launchDate)} -{" "}
                   {formatDate(cardData.possassionDate)}
                 </span>
@@ -171,7 +171,7 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
             )}
 
             {cardData.propTypes ? (
-              <p className="mb-[6px] text-[#242424] text-sm not-italic font-semibold leading-[normal] tracking-[0.56px]">
+              <p className="mb-[6px] text-[#242424] text-base not-italic font-semibold leading-[normal] tracking-[0.56px]">
                 {cardData.propTypes.map((item: any) => item.trim()).join(", ")}
               </p>
             ) : (
@@ -184,7 +184,7 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
               </p>
             )}
 
-            <p className="text-[#565D70]  not-italic font-semibold leading-[normal] tracking-[0.56px] capitalize">
+            <p className="text-[#565D70]  not-italic font-semibold leading-[normal] tracking-[0.56px] capitalize text-[15px]">
               {type === "proj" &&
                 `${cardData.locality}, ${cardData?.city}, ${cardData.state},  ${cardData.pincode} `}
 
@@ -210,9 +210,8 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
               </p>
             )}
             <Button
-              icon={<Phone />}
               title="Request  Callback"
-              buttonClass=" text-[#FFF] mt-[12px] text-[16px] font-[600] bg-[#0073C6] rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[6px]  "
+              buttonClass=" text-[#FFF] mt-[12px] text-[18px] font-[600] bg-[#0073C6] rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[10px]  "
               onChange={handleReqCall}
             />
           </div>

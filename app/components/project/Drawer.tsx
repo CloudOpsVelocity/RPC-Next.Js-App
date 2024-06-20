@@ -25,19 +25,19 @@ function ProjectDrawer({ projName }: { projName: string }) {
     <>
       <Drawer
         classNames={{
-          title: S.title,
           header: S.header,
-          close: S.close,
-          overlay: S.overlay,
+          // title: S.title,
+          // close: S.close,
+          // overlay: S.overlay,
           content: S.content,
         }}
-        offset={8}
-        radius="md"
+        // offset={8}
+        // radius="md"
         opened={expanded}
         onClose={handleReadMoreClick}
         position="right"
-        size={isMobile ? "100%" : "60%"}
-        zIndex={100}
+        size={isMobile ? "100%" : "45%"}
+        zIndex={10000}
       >
         <div className="mt-4 flex justify-between mb-8">
           <h1 className="uppercase text-[24px] lg:text-[32px] font-[600] text-[#001F35] pl-[57px] max-w-[950px]">
@@ -51,7 +51,7 @@ function ProjectDrawer({ projName }: { projName: string }) {
           <Close close={handleReadMoreClick} />
         </div>
 
-        <div className="w-[90%] text-[#233333] text-xl mt-5 pl-[57px] pb-20">
+        <div className="w-[95%] text-[#233333] text-xl mt-5 pl-[57px] pb-20">
           {type === "content" ? (
             <p className="break-words">{content}</p>
           ) : (

@@ -441,7 +441,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
 
             {floorPlanType == "unit" && (
               <>
-                <div className="w-full md:w-[50%]  h-[456px] !md:h-[547px] border-solid overflow-auto pt-6">
+                <div className="w-full md:w-[50%]   border-solid overflow-auto pt-6">
                   <Byunitblock
                     propCgId={propCgId}
                     data={projectUnitsData}

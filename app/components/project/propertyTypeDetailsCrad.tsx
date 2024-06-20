@@ -128,13 +128,13 @@ export default function PropertyTypeDetailsCrad({
       onClick={() => updateValues(phase, getPropId(propertyType as string))}
     >
       <div className="leftSection max-w-[46%] flex flex-col justify-between min-h-[225px]">
-        <div className="max-w-[90px] lg:max-w-[115px] w-full h-[90px] lg:h-[115px] border-solid border-1 border-[#FFF] rounded-full bg-[#c9daee] relative bottom-[50px] lg:bottom-[60px] mb-[-40px]">
+        <div className="max-w-[90px] lg:max-w-[115px] w-full justify-center flex items-center h-[90px] lg:h-[115px] border-solid border-1 border-[#FFF] rounded-full bg-[#c9daee] relative bottom-[50px] lg:bottom-[60px] mb-[-40px]">
           <Image
-            width={90}
-            height={90}
+            width={150}
+            height={150}
             src={propName(propertyType, "img") as string}
             alt="Preview"
-            className="w-full h-full object-cover rounded-[14px]"
+            className="w-[88%] h-[88%] object-cover rounded-[14px]"
           />
         </div>
         <div className="down mb-3">
@@ -301,7 +301,7 @@ export default function PropertyTypeDetailsCrad({
 //       onClick={() => updateValues(phase, getPropId(propertyType as string))}
 //     >
 //       <div className="flex justify-between items-start w-full ">
-//         <div className="max-w-[90px] lg:max-w-[115px] w-full h-[90px] lg:h-[115px] border-solid border-1 border-[#FFF] rounded-full bg-[#c9daee] relative bottom-[50px] lg:bottom-[60px] mb-[-40px]">
+//         <div className="max-w-[150px] lg:max-w-[115px] w-full h-[90px] lg:h-[115px] border-solid border-1 border-[#FFF] rounded-full bg-[#c9daee] relative bottom-[50px] lg:bottom-[60px] mb-[-40px]">
 //           <Image
 //             width={90}
 //             height={90}

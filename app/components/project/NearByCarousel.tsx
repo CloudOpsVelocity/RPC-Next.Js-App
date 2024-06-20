@@ -30,6 +30,7 @@ export default function NearByCarousel({
     y: "N",
     type: "proj",
   });
+
   return (
     <div
       className="flex flex-col justify-start items-start w-full mt-[5%] scroll-mt-[180px]"
