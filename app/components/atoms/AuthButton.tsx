@@ -8,7 +8,6 @@ import { deleteCookie } from "cookies-next";
 
 export default function AuthButton() {
   const { data: session } = useSession();
-  console.log(session);
 
   const postProjectLink = session
     ? `${process.env.NEXT_PUBLIC_PROJECT_URL}/project/postProject`
@@ -56,19 +55,23 @@ import usePathToOrigin from "@/app/hooks/custom/useRedirect";
 function Dropdown() {
   const handleLogout = async () => {
     try {
-      await axios
-        .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/logOut`)
-        .then(() => {
-          signOut();
-          deleteCookie("token");
-        })
-        .catch((error) => {
-          console.log("Something Went Wrong");
-        });
+      if (process.env.NODE_ENV === "development") {
+        await signOut();
+        await axios.get(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/logOut`
+        );
+      } else {
+        await axios
+          .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/logOut`)
+          .then(() => {
+            signOut();
+          });
+      }
     } catch (error) {
-      console.log(error);
+      console.log("Something Went Wrong", error);
     }
   };
+
   const { redirectQueryParam } = usePathToOrigin();
   const { data: session } = useSession();
   return (

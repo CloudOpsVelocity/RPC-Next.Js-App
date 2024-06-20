@@ -1,43 +1,51 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
-import Footer from "../components/layouts/primary/footer";
-import Header from "../components/layouts/primary/header";
-import Blogs from "../components/molecules/blogs";
-import DynamiCarousel from "../components/molecules/carousel";
-import HomeSearch from "../components/molecules/home-search";
-import WhyCHoose from "../components/molecules/whychoose";
-import YourList from "../components/molecules/your-llist";
-import Section from "./components/Section/Section";
-export default async function page() {
-  // let arr = [
-  //   [1, 2],
-  //   [3, 4],
-  //   [5, 6],
-  //   [7, 8],
-  //   [9, 10],
-  // ];
+"use client";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
-  // console.log(flat(arr, 1));
-  // console.log(arr);
+export default function LoginPage() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const router = useRouter();
+
+  const handleSubmit = async (event:any) => {
+    event.preventDefault();
+
+    // Perform login request
+    const response = { ok: true, redirectUrl: "/my-profile" };
+
+    if (response.ok) {
+      // Redirect to the target URL based on the response
+      const data = response;
+      router.push(data.redirectUrl);
+    } else {
+      // Handle login failure
+      alert("Login failed");
+    }
+  };
+
   return (
-    <div className="h-[100%] w-[100%] flex justify-center items-center flex-col overflow-hidden ">
-      <Section />
-      <Header />
-      <HomeSearch />
-      <WhyCHoose />
-      <DynamiCarousel />
-      <YourList />
-      <Blogs />
-      <Footer />
-    </div>
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label>
+          Username:
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </label>
+      </div>
+      <div>
+        <label>
+          Password:
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </label>
+      </div>
+      <button type="submit">Login</button>
+    </form>
   );
 }
-
-// const flat = (arr, depth) => {
-//   let result = [...arr];
-//   for (let i = 0; i < arr.length; i++) {
-//     if (Array.isArray(arr[i])) {
-//       result = [...result, ...flat(arr[i], depth - 1)];
-//     }
-//   }
-//   return arr;
-// };
