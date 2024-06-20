@@ -8,17 +8,32 @@ import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import clsx from "clsx";
 import useDynamicProj from "@/app/hooks/project/useDynamic";
 import { useMessagePopup } from "@/app/hooks/project/useMessagePopup";
+import { queryClient } from "@/app/utils/query";
 
 export default function CompareList() {
   const { data: session } = useSession();
   const { slug } = useParams<{ slug: string }>();
   const { toggleCompare, compareItems } = useShortlistAndCompare();
   const [, { open }] = usePopShortList();
-  const { data, mutate } = useDynamicProj();
+  const { data, mutate, getData } = useDynamicProj();
   const [opened, { close, open: openSuccesPopup }] = useMessagePopup("compare");
   const handleCompare = () => {
     mutate(3);
     toggleCompare({ id: slug, status: data?.compareAdded ? "N" : "Y" });
+  };
+  const loginHandleComapare = async () => {
+    const data = await queryClient.fetchQuery({
+      queryKey: ["dynamic", slug],
+      queryFn: getData,
+    });
+    if (data?.compareCount >= 5 && !data?.compareAdded) {
+      openSuccesPopup();
+      return;
+    }
+    if (!data?.compareAdded) {
+      mutate(2);
+      await toggleCompare({ id: slug, status: data?.compareAdded ? "N" : "Y" });
+    }
   };
   const onAddingCompare = () => {
     if (data?.compareCount >= 5 && !data?.compareAdded) {
@@ -28,7 +43,7 @@ export default function CompareList() {
     handleCompare();
     if (session) {
     } else {
-      open(handleCompare);
+      open(loginHandleComapare);
     }
   };
   return (
