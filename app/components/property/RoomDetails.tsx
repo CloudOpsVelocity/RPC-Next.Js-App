@@ -308,7 +308,7 @@ const OtherDetails = ({
           <RoomBasicDetails
             icon={<Marble />}
             title="Approved Authority"
-            value={approvedByName.join(" ,")}
+            value={approvedByName?.join(" ,")}
             className={style.card}
           />
         )}
