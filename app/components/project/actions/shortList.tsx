@@ -10,26 +10,40 @@ import { useShortlistAndCompare } from "@/app/hooks/storage";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import clsx from "clsx";
 import useDynamicProj from "@/app/hooks/project/useDynamic";
+import { queryClient } from "@/app/utils/query";
 
 export default function ShortList() {
   const { data: session } = useSession();
   const { slug } = useParams<{ slug: string }>();
   const { toggleShortlist } = useShortlistAndCompare();
   const [, { open }] = usePopShortList();
-  const { data, mutate } = useDynamicProj();
+  const { data, mutate, getData } = useDynamicProj();
   const handleShortlist = () => {
     mutate(2);
-    console.log({ isData: data });
     toggleShortlist({
       id: slug,
       status: data?.shortListed ? "N" : "Y",
     });
   };
+  const loginHandleShortList = async () => {
+    const data = await queryClient.fetchQuery({
+      queryKey: ["dynamic", slug],
+      queryFn: getData,
+    });
+
+    if (!data?.shortListed) {
+      await mutate(2);
+      await toggleShortlist({
+        id: slug,
+        status: data?.shortListed ? "N" : "Y",
+      });
+    }
+  };
   const onAddingShortList = () => {
     if (session) {
       handleShortlist();
     } else {
-      open(handleShortlist);
+      open(loginHandleShortList);
     }
   };
   return (

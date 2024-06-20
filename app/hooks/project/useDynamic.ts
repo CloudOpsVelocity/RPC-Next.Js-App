@@ -85,5 +85,5 @@ export default function useDynamicProj() {
     },
   });
 
-  return { data, isLoading, mutate, updateRatings, status };
+  return { data, isLoading, mutate, updateRatings, status, getData };
 }
