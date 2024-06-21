@@ -88,13 +88,15 @@ export default function FloorplansBlock({ projName, slug }: Props) {
     selectedPhase &&
     Object?.keys(selectedPhase.propTypeOverview)
       .map((v) => {
-        if (selectedPhase?.propTypeOverview[v].unitTypes?.length > 0) {
+        if (selectedPhase?.propTypeOverview[v].unitTypes) {
           return v;
         } else {
           return null;
         }
       })
-      .sort();
+      .sort()
+      .filter((v) => v !== null);
+  console.log(types);
   const getPropertyType = (data: any) => {
     if (data.id === 32 && floorPlanType === "bhk") {
       setFloorPlanType("type");
@@ -223,7 +225,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
     // @ts-ignore
     types?.length > 0 && setPropCgId(BACKEND_PROP_TYPES[`${types[0]}`]);
   }, [currentPhase]);
-
+  console.log(projectUnitsData);
   if (isLoading) return <Loading />;
   return (
     <div className="w-[90%] scroll-mt-[180px] mb-[5%]" id="floorPlans">
@@ -243,7 +245,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
       >
         {phaseList?.length > 1 && (
           <>
-            <p className="text-[20px] lg:text-[24px] font-[500] mb-[3%] md:mb-0 text-[#333] mr-[20px] ">
+            <p className="text-[20px] lg:text-[24px] font-[500] mb-[44px] md:mb-0 text-[#333] mr-[20px] ">
               Select one of the phase to see project details
             </p>
             <div className=" flex justify-start items-start gap-[10px] flex-wrap ">

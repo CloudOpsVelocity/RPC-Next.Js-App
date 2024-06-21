@@ -65,9 +65,10 @@ export default function PropertyTypeDetailsCrad({
   const setPrpCgId = useSetAtom(propCgIdAtom);
   const setSelectedFloor = useSetAtom(selectedFloorAtom);
   const [, setFloorsArray] = useAtom(floorPlansArray);
-  const { data: projectUnitsData } = useQuery({
+  const { data: projectUnitsData, isLoading } = useQuery({
     queryKey: [`/${getPropId(propertyType)}/${phase}/${slug}`],
     queryFn: () => getProjectUnits(slug, phase, getPropId(propertyType)),
+    enabled: cg?.unitTypes?.length > 0,
     ...RTK_CONFIG,
   });
   const handleOpen = () => {
@@ -175,7 +176,11 @@ export default function PropertyTypeDetailsCrad({
           {propName(propertyType, "name")}
         </p>
         <p className="text-[16px] text-right lg:text-[22px] text-[#148B16]  not-italic font-bold leading-[normal] mt-2">
-          {formatCurrency(cg?.minPrice)} - {formatCurrency(cg?.maxPrice)}
+          {cg.minPrice && cg.maxPrice
+            ? `${formatCurrency(cg?.minPrice)} - ${formatCurrency(
+                cg?.maxPrice
+              )}`
+            : "Coming Soon"}
         </p>
         <p className="text-[14px] lg:text-lg text-[#242424]  italic font-medium leading-[normal]">
           ₹ {cg?.basePrice} Base Price/ sq.ft
@@ -222,7 +227,7 @@ export default function PropertyTypeDetailsCrad({
             </>
           )}
         </p>
-        {(cg?.unitTypes.length > 4 || propertyType === "plot") && (
+        {(cg?.unitTypes?.length > 4 || propertyType === "plot") && (
           <ShowUnitsButton cg={{ ...cg, propertyType, plotData: plotCounts }} />
         )}
       </div>
