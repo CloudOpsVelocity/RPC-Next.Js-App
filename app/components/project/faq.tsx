@@ -193,7 +193,7 @@ const FaqCard = ({
 }) => {
   return (
     <div>
-      <h4 className=" text-[#242424] text-[28px] not-italic font-bold leading-[normal] mb-4">
+      <h4 className=" text-[#242424] text-[28px] not-italic font-bold leading-[normal] mb-4 capitalize">
         {faqQuestion}
       </h4>
       <FaqReadMore text={faqAnswer} title={faqQuestion} />

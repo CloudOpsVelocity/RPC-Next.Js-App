@@ -1,36 +1,28 @@
 const SQUARE_FOOT_SUFFIX = " sq.ft";
+const bhkMap = new Map([
+  ["1 RK", 0],
+  ["1 BHK", 1],
+  ["2 BHK", 2],
+  ["3 BHK", 3],
+  ["4 BHK", 4],
+  ["4+ BHK", 5],
+]);
 const sortUnits = (units: string[]): string[] => {
-  return units.sort((a, b) => {
-    const aArea = parseInt(getAreaFromUnit(a));
-    const bArea = parseInt(getAreaFromUnit(b));
-
-    const aType = getUnitType(a);
-    const bType = getUnitType(b);
-
-    if (aArea === 1 && bArea === 1) {
-      return compareTypes(aType, bType);
-    }
-
-    if (aArea === bArea) {
-      return a.localeCompare(b);
-    }
-
-    return aArea - bArea;
-  });
-
-  function getAreaFromUnit(unit: string): string {
-    const areaStr = unit.match(/\d+/)?.[0] || "0";
-    return areaStr;
-  }
-
-  function getUnitType(unit: string): "RK" | "BHK" {
-    return unit.includes("RK") ? "RK" : "BHK";
-  }
-
-  function compareTypes(a: "RK" | "BHK", b: "RK" | "BHK"): number {
-    return a === "RK" && b === "BHK" ? -1 : a === "BHK" && b === "RK" ? 1 : 0;
-  }
+  return units.sort((a, b) => (bhkMap.get(a) ?? 0) - (bhkMap.get(b) ?? 0));
 };
+
+function getAreaFromUnit(unit: string): string {
+  const areaStr = unit.match(/\d+/)?.[0] || "0";
+  return areaStr;
+}
+
+function getUnitType(unit: string): "RK" | "BHK" {
+  return unit.includes("RK") ? "RK" : "BHK";
+}
+
+function compareTypes(a: "RK" | "BHK", b: "RK" | "BHK"): number {
+  return a === "RK" && b === "BHK" ? -1 : a === "BHK" && b === "RK" ? 1 : 0;
+}
 
 const parseUnitStrings = (
   unitStrings: string[],

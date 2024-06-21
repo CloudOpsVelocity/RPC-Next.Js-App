@@ -59,11 +59,8 @@ export default function RoomDetails({ data }: { data: Main }) {
         className="mb-[40px]"
       />
       <UnitBlock data={data} />
-      {data.propTypeName === "Plot" ? (
-        <PlotBlock data={data} />
-      ) : (
-        <RoomSection data={data} />
-      )}
+
+      {data.propTypeName !== "Plot" && <RoomSection data={data} />}
 
       <Parking {...data} />
       <OtherDetails {...data} />
@@ -72,7 +69,7 @@ export default function RoomDetails({ data }: { data: Main }) {
 }
 const RoomSection = ({ data }: { data: Main }) => {
   return (
-    <div className="w-[90%] mb-[3%]  shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] px-[53px] py-[39px]">
+    <div className=" mb-[3%]  shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] pl-[53px] py-[39px]">
       <h1 className={style.heading.h1}>Room Details</h1>
 
       <p className={style.heading.p}>
@@ -122,7 +119,7 @@ const Parking = ({ noocp, noobp, noccp, nocbp }: any) => {
   return (
     isAvail && (
       <div
-        className="w-[90%] mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] px-[53px] py-[39px]"
+        className=" mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] px-[53px] py-[39px]"
         id="propertyDetails "
       >
         <h1 className={style.heading.h1}>Parking</h1>
@@ -181,6 +178,10 @@ const OtherDetails = ({
   agreementType,
   noOfOpenSide,
   furnshName,
+  isCornerPlot,
+  cunstructionStatus,
+  cunstructionType,
+  boundryWallEnclose,
 }: Main) => {
   const data = [
     ownershipName,
@@ -201,7 +202,7 @@ const OtherDetails = ({
   ];
   return (
     <div
-      className="w-[90%] mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] px-[53px] py-[39px]"
+      className=" mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] pl-[53px] py-[39px]"
       id="propertyDetails "
     >
       <h1 className={style.heading.h1}>Other Details</h1>
@@ -318,6 +319,31 @@ const OtherDetails = ({
           value={furnshName}
           className={style.card}
         />
+        {propTypeName === "Plot" && (
+          <>
+            <RoomBasicDetails
+              icon={<CornorIcon />}
+              title="Property on"
+              value={isCornerPlot && "Corner Plot"}
+              className={style.card}
+            />
+            <RoomBasicDetails
+              icon={<PlotConstruction />}
+              title="Plot Undergone any Construction"
+              value={`${cunstructionStatus ? "Yes" : "No"} ${
+                cunstructionType ? `, ${cunstructionType}` : ""
+              }`}
+              className={style.card}
+            />
+
+            <RoomBasicDetails
+              icon={<WallIcons />}
+              title="Plot Enclosed with wall"
+              value={boundryWallEnclose ? "Yes" : "No"}
+              className={style.card}
+            />
+          </>
+        )}
       </div>
     </div>
   );
@@ -332,7 +358,7 @@ const UnitBlock = ({ data }: { data: Main }) => {
   return (
     dto.length > 0 && (
       <div
-        className="w-[90%] mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] px-[53px] py-[39px]"
+        className=" mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] pl-[53px] py-[39px]"
         id="propertyDetails "
       >
         <h1 className={style.heading.h1}>Unit Details</h1>
@@ -357,41 +383,41 @@ const UnitBlock = ({ data }: { data: Main }) => {
     )
   );
 };
-const PlotBlock = ({ data }: { data: Main }) => {
-  return (
-    <div
-      className="w-[90%] mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] px-[53px] py-[39px]"
-      id="propertyDetails "
-    >
-      <h1 className={style.heading.h1}>Plot Details</h1>
+// const PlotBlock = ({ data }: { data: Main }) => {
+//   return (
+//     <div
+//       className="w-[90%] mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] px-[53px] py-[39px]"
+//       id="propertyDetails "
+//     >
+//       <h1 className={style.heading.h1}>Plot Details</h1>
 
-      <p className={style.heading.p}>
-        See the Plot details that are available in This property
-      </p>
+//       <p className={style.heading.p}>
+//         See the Plot details that are available in This property
+//       </p>
 
-      <div className={"flex justify-start items-start flex-wrap w-[100%]  "}>
-        <RoomBasicDetails
-          icon={<CornorIcon />}
-          title="Property on"
-          value={data.isCornerPlot && "Corner Plot"}
-          className={style.card}
-        />
-        <RoomBasicDetails
-          icon={<PlotConstruction />}
-          title="Plot Undergone any Construction"
-          value={`${data.cunstructionStatus ? "Yes" : "No"} ${
-            data.cunstructionType ? `, ${data.cunstructionType}` : ""
-          }`}
-          className={style.card}
-        />
+//       <div className={"flex justify-start items-start flex-wrap w-[100%]  "}>
+//         <RoomBasicDetails
+//           icon={<CornorIcon />}
+//           title="Property on"
+//           value={data.isCornerPlot && "Corner Plot"}
+//           className={style.card}
+//         />
+//         <RoomBasicDetails
+//           icon={<PlotConstruction />}
+//           title="Plot Undergone any Construction"
+//           value={`${data.cunstructionStatus ? "Yes" : "No"} ${
+//             data.cunstructionType ? `, ${data.cunstructionType}` : ""
+//           }`}
+//           className={style.card}
+//         />
 
-        <RoomBasicDetails
-          icon={<WallIcons />}
-          title="Plot Enclosed with wall"
-          value={data.boundryWallEnclose ? "Yes" : "No"}
-          className={style.card}
-        />
-      </div>
-    </div>
-  );
-};
+//         <RoomBasicDetails
+//           icon={<WallIcons />}
+//           title="Plot Enclosed with wall"
+//           value={data.boundryWallEnclose ? "Yes" : "No"}
+//           className={style.card}
+//         />
+//       </div>
+//     </div>
+//   );
+// };
