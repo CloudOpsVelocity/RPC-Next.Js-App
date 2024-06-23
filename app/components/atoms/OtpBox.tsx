@@ -43,15 +43,15 @@ export default function OtpBox({ userName, close, callback, mobile }: Props) {
   });
 
   return (
-    <Box className="w-full">
+    <Box className="w-full ">
       <form
         onSubmit={form.onSubmit(onSubmit)}
-        className="w-[100%] h-[70vh] flex justify-center items-center flex-col text-center "
+        className="w-[100%] h-[100%] flex justify-start mt-[4%] items-start sm:items-center md:items-center lg:items-center xl:items-center  flex-col text-center "
       >
-        <h1 className="text-[#545353] text-2xl not-italic font-semibold leading-[normal] text-center  ">
+        <h1 className="text-[#545353] text-xl sm:text-2x xl:text-2x lg:text-2x xl:text-2x mb-6 not-italic font-semibold leading-[normal] text-center  ">
           Please enter your OTP to verify your account
         </h1>
-        <p className="text-[#7D7D7D] text-xl not-italic font-medium leading-[normal] mb-[3%] text-center   ">
+        <p className="text-[#7D7D7D] text-[16px] sm:text-xl not-italic font-medium leading-[normal] mb-[3%] text-center   ">
           A One Time- Password has been sent to{" "}
           {hideMobileNumber((mobile && mobile) || 0)}
         </p>

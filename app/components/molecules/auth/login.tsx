@@ -109,23 +109,23 @@ function Login({ params }: any) {
           loading={state === "pending"}
           type="submit"
           size={isMobile ? "compact-xs" : "md"}
-          className="!w-[100%] !h-[57px] mt-[4%] !bg-[#0c7aca] rounded-[6px] text-[20px]"
+          className="!w-[100%] !h-[50px]  mt-[4%] !bg-[#0c7aca] rounded-[6px] !text-[20px] sm:h-[57px] !font-extrabold:"
         >
           LOGIN
         </Button>
-        <div className="text-center mt-4 ">
+        <div className="text-center mt-6 ">
           <Link
             href={{ pathname: "/register", search: getQueryParam(params) }}
-            className="text-[#282828] md:text-xl flex justify-center items-center gap-2.5 rounded border p-2 border-solid border-[#B2B2B2] mb-3"
+            className="text-[#282828] md:text-xl flex justify-center font-semibold items-center gap-2.5 rounded border p-2 border-solid border-[#B2B2B2] mb-8 text-nowrap sm:!text-[20px] "
           >
             New User?{" "}
-            <span className="md:text-xl  text-[#002749] text-xl not-italic font-semibold">
+            <span className="md:text-xl  text-[#0C7ACA]  font-semibold text-xl not-italic text-nowrap sm:!text-[20px]  ">
               Create an account
             </span>
           </Link>
           <Link
             href={{ pathname: getCallPathServer(params) }}
-            className=" md:text-xl not-italic text-[#0C7ACA] text-xl   font-semibold leading-[normal] underline "
+            className=" md:text-xl not-italic text-[#148B16] !text-18px   leading-[normal] b sm:!text-[16px] sm:font-[400] border rounded-sm p-2 border-solid border-[#148B16]"
           >
             Continue without login
           </Link>

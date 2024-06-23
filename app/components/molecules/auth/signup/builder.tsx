@@ -392,6 +392,7 @@ function Builder() {
                 root: StepCss.inputRoot,
                 input: StepCss.textInput,
                 error: StepCss.errorMsg,
+                label:StepCss.mlabelCss
               }}
             />
             <TextInput
@@ -406,6 +407,7 @@ function Builder() {
                 root: StepCss.inputRoot,
                 input: StepCss.textInput,
                 error: StepCss.errorMsg,
+                label:StepCss.mlabelCss
               }}
             />
             <PasswordInput
@@ -416,6 +418,7 @@ function Builder() {
                 innerInput: StepCss.textInput,
                 input: StepCss.textInput,
                 error: StepCss.errorMsg,
+                label:StepCss.mlabelCss
               }}
               label="Password"
               placeholder="Enter your password here"
@@ -433,6 +436,7 @@ function Builder() {
               classNames={{
                 input: N.classForContact,
                 error: StepCss.errorMsg,
+                label:StepCss.mlabelCss
               }}
               hideControls
               size="lg"
@@ -515,6 +519,7 @@ function Builder() {
                 root: StepCss.inputRoot,
                 input: StepCss.textInput,
                 error: StepCss.errorMsg,
+                label:StepCss.mlabelCss
               }}
               onBlurCapture={(e) => handleTrimAndReplace(e, "address", form)}
             />
@@ -536,6 +541,7 @@ function Builder() {
                 input: StepCss.textInput,
                 error: StepCss.errorMsg,
                 dropdown: StepCss.dropdown,
+                label:StepCss.mlabelCss
               }}
               withScrollArea={false}
             />
@@ -553,9 +559,10 @@ function Builder() {
                 maxDropdownHeight={200}
                 classNames={{
                   root: StepCss.inputRoot,
-                  input: StepCss.textInput,
+                  input: StepCss.cityPincodeCust,
                   error: StepCss.errorMsg,
                   dropdown: StepCss.dropdown,
+                  label:StepCss.mlabelCss
                 }}
                 withScrollArea={false}
               />
@@ -569,8 +576,10 @@ function Builder() {
                 {...form.getInputProps("pincode")}
                 classNames={{
                   root: StepCss.inputRoot,
-                  input: StepCss.textInput,
+                  input: StepCss.cityPincodeCust,
                   error: StepCss.errorMsg,
+                  label:StepCss.mlabelCss
+                  
                 }}
                 maxLength={6}
                 onPaste={(event) => {
@@ -615,6 +624,7 @@ function Builder() {
                   root: StepCss.inputRoot,
                   input: StepCss.textInput,
                   error: StepCss.errorMsg,
+                  label:StepCss.mlabelCss
                 }}
                 onBlurCapture={(e) =>
                   handleTrimAndReplace(e, "companyName", form)
@@ -644,6 +654,7 @@ function Builder() {
                   inputField: StepCss.textInput,
                   error: StepCss.errorMsg,
                   dropdown: StepCss.dropdown,
+                  label:StepCss.mlabelCss
                 }}
                 data={isLoadingBrach ? [] : cityParser(brachData) || []}
                 {...form.getInputProps("branch")}
@@ -670,6 +681,7 @@ function Builder() {
                   root: StepCss.inputRoot,
                   input: StepCss.textInput,
                   error: StepCss.errorMsg,
+                  label:StepCss.mlabelCss
                 }}
               />
               <TextInput
@@ -684,6 +696,7 @@ function Builder() {
                   root: StepCss.inputRoot,
                   input: StepCss.textInput,
                   error: StepCss.errorMsg,
+                  label:StepCss.mlabelCss
                 }}
                 onBlurCapture={(e) => {
                   handleTrimAndReplace(e, "foundedBy", form);
@@ -702,6 +715,7 @@ function Builder() {
                   root: StepCss.inputRoot,
                   input: StepCss.textInput,
                   error: StepCss.errorMsg,
+                  label:StepCss.mlabelCss
                 }}
                 onBlurCapture={(e) => {
                   handleTrimAndReplace(e, "ceoName", form);
@@ -717,8 +731,9 @@ function Builder() {
                 {...form.getInputProps("managingDirectorName")}
                 classNames={{
                   root: StepCss.inputRoot,
-                  input: StepCss.textInput,
+                  input: StepCss.mangingDrCust,
                   error: StepCss.errorMsg,
+                  label:StepCss.mlabelCss
                 }}
                 onBlurCapture={(e) => {
                   handleTrimAndReplace(e, "managingDirectorName", form);
@@ -736,6 +751,7 @@ function Builder() {
                   root: StepCss.inputRoot,
                   input: StepCss.textInput,
                   error: StepCss.errorMsg,
+                  label:StepCss.mlabelCss
                 }}
                 onBlurCapture={(e) => {
                   handleAllTrimAndReplace(e, "officeContact", form);
@@ -770,6 +786,7 @@ function Builder() {
                 root: StepCss.inputRoot,
                 input: StepCss.textInput,
                 error: StepCss.errorMsg,
+                label:StepCss.mlabelCss
               }}
               onBlurCapture={(e) => {
                 handleTrimAndReplace(e, "vission", form);
@@ -792,6 +809,7 @@ function Builder() {
                 root: StepCss.inputRoot,
                 input: StepCss.textInput,
                 error: StepCss.errorMsg,
+                label:StepCss.mlabelCss
               }}
               onBlurCapture={(e) => {
                 handleTrimAndReplace(e, "mission", form);
@@ -811,7 +829,7 @@ function Builder() {
             {/* {(window.location.href = "http://localhost:3000/success")} */}
           </Stepper.Completed>
         </Stepper>
-        <Group justify="flex-end" className="w-full">
+        <Group justify="flex-end" className="w-full mt">
           {active !== 4 && (
             <div className="w-full lg:w-full flex justify-between items-center flex-wrap md:flex-nowrap">
               <Button
@@ -819,7 +837,7 @@ function Builder() {
                 onClick={() => {
                   active !== 0 ? prevStep() : router.back();
                 }}
-                className="!rounded-[6px] !border-solid  !w-[49%] !border-1 !border-blue-600 !bg-[#FFF] !text-[#0073C6] md:!w-[100%] md:!max-w-[178px]"
+                className="!rounded-[6px] !border-solid  !w-[46%] !border-1 !border-blue-600 !bg-[#FFF] !text-[#0073C6] md:!w-[100%] md:!max-w-[178px]"
               >
                 <BackSvg /> Back
               </Button>
@@ -827,15 +845,15 @@ function Builder() {
               <Button
                 loading={status === "pending"}
                 mt="sm"
-                className="!rounded-[6px] !w-[49%] md:!w-[100%]  md:!max-w-[225px] !bg-[#0c7aca]"
+                className="!rounded-[6px] !w-[52%] md:!w-[100%]  md:!max-w-[225px] !bg-[#0c7aca]"
                 // onClick={nextStep}
                 type="submit"
               >
                 {form.values.otp &&
                 form.values.mobile === form.values.prevMobile &&
                 form.values.email === form.values.prevEmail
-                  ? "Save & CONTINUE"
-                  : "SAVE & VERIFY"}
+                ? "Save & Continue"
+                : "Save & Verify"}
                 {/* {active === 0 ? "SAVE & VERIFY" : "SAVE & CONTINUE"} */}
               </Button>
             </div>
@@ -847,11 +865,11 @@ function Builder() {
         <>
           <Link
             href={{ pathname: "/login", search: queryParam.query }}
-            className="text-[#282828] md:text-xl flex justify-center items-center gap-2.5 rounded border p-2 border-solid border-[#B2B2B2] mb-3 mt-[5%]"
-          >
+            className="text-[#002749] font-semibold *: md:text-xl flex justify-center items-center gap-2.5 rounded border p-2 border-solid border-[#B2B2B2] mb-3 mt-[5%] text-nowrap "
+            >
             Already have an Account ?{" "}
-            <span className="md:text-xl  text-[#002749] text-xl not-italic font-semibold">
-              Log In
+            <span className="md:text-xl  text-[#0C7ACA]  not-italic font-semibold text-nowrap">
+            Log In
             </span>
           </Link>
           {status === "error" && (
@@ -867,7 +885,7 @@ function Builder() {
           )}
           <Link
             href={{ pathname: queryParam.rediectPath }}
-            className="text-center md:text-xl not-italic text-[#0C7ACA] text-xl   font-semibold leading-[normal] underline "
+           className=" md:text-xl not-italic text-[#148B16] !text-18px   leading-[normal] b sm:!text-[16px] sm:font-[400] border rounded-sm p-2 border-solid border-[#148B16]"
           >
             Continue without Register
           </Link>

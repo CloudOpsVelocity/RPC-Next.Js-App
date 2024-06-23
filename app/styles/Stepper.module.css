@@ -106,24 +106,24 @@
   line-height: normal;
 }
 
-.textInput {
+.textInput, .mangingDrCust {
   color: var(--Black-2, #333);
   font-family: Montserrat;
   font-size: 16px;
   font-weight: 500;
   opacity: 1;
 }
-.textInput:focus::placeholder {
+.textInput:focus::placeholder, .mangingDrCust:focus::placeholder {
   color: transparent !important;
 }
-.textInput::placeholder {
+.textInput::placeholder, .cityPincodeCust::placeholder, .mangingDrCust::placeholder {
   color: #556477 !important;
   font-family: Montserrat;
   font-size: 18px;
   font-weight: 500;
 }
 
-.textInput::-ms-input-placeholder {
+.textInput::-ms-input-placeholder, .mangingDrCust::-ms-input-placeholder {
   /* Edge 12-18 */
   color: #556477 !important;
   font-family: Montserrat;
@@ -175,10 +175,36 @@
 }
 
 @media (max-width: 640px) {
+
+
+  .input::placeholder{
+    font-size: 8px;
+  }
+ .cityPincodeCust::placeholder{
+  font-size: 14.5px;
+ }
+ .cityPincodeCust{
+  font-size: 14.5px;
+
+ }
+
+  .mlabelCss{
+    font-size: 16px;
+  }
+  .textInput::placeholder {
+    font-size: 15px;
+  }
+  .NumberInput::placeholder{
+    font-size: 15px !important;
+  }
+  .mangingDrCust::placeholder{
+    font-size: 15px;
+  }
   .stepLabel {
     max-width: 60px;
     font-size: 12px;
     text-align: center;
+    text-wrap: nowrap;
   }
   .stepLabelActive {
     max-width: 60px;

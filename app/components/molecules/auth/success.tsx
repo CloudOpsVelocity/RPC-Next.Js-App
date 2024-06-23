@@ -24,7 +24,7 @@ export default function Success() {
         <h1 className="text-[color:var(--Brand-green-primary,#148B16)] text-[28px] not-italic font-bold leading-[normal]">
           Congratulations!
         </h1>
-        <p className="text-[color:var(--Grey-1,#666)] text-center text-[26px] not-italic font-medium leading-[normal] mt-10">
+        <p className="text-[color:var(--Grey-1,#666)] text-center text-[18px] mt-6 xl:text-[26px] not-italic font-medium leading-[normal] xl:mt-10">
           Your account has been created successfully
         </p>
         <Image
@@ -71,7 +71,7 @@ const Countdown = ({ initialCount = 5, redirectPath = "/" }) => {
   }, [timerRunning]);
   const page = getPathTypeFromQueryParams();
   return (
-    <p className="text-[color:var(--Grey-2,#767270)] text-center text-[24px] not-italic font-medium leading-[normal]">
+    <p className="text-[color:var(--Grey-2,#767270)] text-center text-[16px] xl:text-[24px] not-italic font-medium leading-[normal]">
       You will be redirected to {page} in {timeRemaining.seconds} sec
     </p>
   );

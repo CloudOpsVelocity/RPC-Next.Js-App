@@ -49,8 +49,11 @@ export function DropZone(props: Partial<DropZoneProps>) {
           <div className="flex justify-center items-center h-full space-x-2">
             {mediaCloudIcon}
             <div>
-              <p className="text-black text-sm not-italic font-medium leading-[normal]">
+              <p className="text-black text-sm not-italic font-medium leading-[normal] hidden md:block lg:block xl:block  sm:hidden">
                 Select a file or drag and drop here
+              </p>
+              <p className="text-black text-sm not-italic font-medium leading-[normal] block md:hidden lg:hidden xl:hidden">
+                Select a file 
               </p>
               <p className="text-[#545353] text-[10px] not-italic font-normal leading-[normal]">
                 JPG, PNG or JPEG, file size no more than 10MB
