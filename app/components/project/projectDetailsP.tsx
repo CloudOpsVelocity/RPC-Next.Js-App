@@ -24,7 +24,7 @@ type Props = {
   projName: string;
 };
 const styles = {
-  box: "flex flex-col items-start gap-[10px] p-4 border shadow-[0px_4px_10px_0px_rgba(202,233,255,0.30)] rounded-[10px] border-solid border-[#92B2C8] bg-[#fff] mr-[46px]",
+  box: "flex flex-col items-start gap-[10px] p-4 sm:border sm:shadow-[0px_4px_10px_0px_rgba(202,233,255,0.30)] rounded-[10px] border-solid border-[#92B2C8] bg-[#fff] sm:mr-[46px]",
 };
 export default function ProjectDetailsP({ projName }: Props) {
   const { PhaseOverview, currentPhase, handlePhaseChange, phaseList } =
@@ -52,7 +52,7 @@ export default function ProjectDetailsP({ projName }: Props) {
       <div className=" sm:flex justify-start items-center mt-[2%] mb-[1%]">
         {PhaseOverview && PhaseOverview?.length > 1 && (
           <>
-            <p className="text-[16px] lg:text-[24px] font-[500] text-[#333] mr-[20px] ">
+            <p className="text-[14px] lg:text-[24px] font-[500] text-[#333] mr-[20px] ">
               Select one of the phase to see project details
             </p>
             <div className=" flex justify-start items-start flex-wrap gap-[10px] mt-1 sm:mt-0">
@@ -66,7 +66,7 @@ export default function ProjectDetailsP({ projName }: Props) {
                         : phase.phaseName
                     }
                     onChange={() => handlePhaseChange(phase.phaseId)}
-                    buttonClass={` mb-[5px] text-[18px] lg:text-[20px] bg-[#ECF7FF] p-[8px] xl:px-[8px]  whitespace-nowrap text-[#000] rounded-[8px] ${
+                    buttonClass={` mb-[5px] text-[14px] sm:text-[18px] lg:text-[20px] bg-[#ECF7FF] p-[8px] xl:px-[8px]  whitespace-nowrap text-[#000] rounded-[8px] ${
                       currentPhase === phase.phaseId
                         ? " font-[600] border-solid border-[1px] border-[#0073C6] "
                         : " font-[400]"

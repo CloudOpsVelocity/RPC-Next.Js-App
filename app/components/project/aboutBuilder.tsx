@@ -25,7 +25,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
     >
       <div className="w-full">
         <div className=" gap-[26px] justify-start  w-[100%] items-center">
-          <h1 className=" text-[#242424] text-[24px] lg:text-[32px] font-[700] mb-4 ">
+          <h1 className=" text-[#242424] text-h2 sm:text-[24px] lg:text-[32px] font-[700] mb-4 ">
             About Builder
           </h1>
 
@@ -87,7 +87,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
           className="!mb-[29px] text-[#202020] text-2xl not-italic font-medium leading-[normal] w-full"
         />
 
-        <p className="  text-[22px] lg:text-[24px]  text-black text-2xl not-italic font-semibold leading-[normal] inline-flex">
+        <p className="  text-h2 lg:text-[24px]  text-black text-2xl not-italic font-semibold leading-[normal] inline-flex">
           {TeleGramBlack} Builder Address{" "}
         </p>
         <p className="  text-[18px] lg:text-[20px]  mt-[1%]  mb-[14px] text-[#242424] text-2xl italic font-medium leading-8 md:mb-[2%] ">

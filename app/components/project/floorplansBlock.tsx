@@ -27,10 +27,7 @@ const FloorPlanModal = dynamic(() => import("./modals/FloorPlan"), {
 });
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { useQuery } from "react-query";
-import {
-  getCachedProjectUnits,
-  getProjectUnits,
-} from "@/app/utils/api/project";
+import { getProjectUnits } from "@/app/utils/api/project";
 import usePhaseWiseOverview from "@/app/hooks/usePhaseWiseOverview";
 import { useAtom, useSetAtom } from "jotai";
 import { floorPlansArray, selectedFloorAtom } from "@/app/store/floor";
@@ -96,7 +93,6 @@ export default function FloorplansBlock({ projName, slug }: Props) {
       })
       .sort()
       .filter((v) => v !== null);
-  console.log(types);
   const getPropertyType = (data: any) => {
     if (data.id === 32 && floorPlanType === "bhk") {
       setFloorPlanType("type");
@@ -104,7 +100,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
     setPropCgId(data.id);
   };
   const iconStyles: string =
-    " flex items-center justify-center w-[40px] h-[40px] bg-[#FAFDFF] rounded-[50%] ";
+    " flex items-center justify-center w-[34px] sm:w-[40px] h-[34px] sm:h-[40px] bg-[#FAFDFF] rounded-[50%] ";
 
   const getIcon = (id: number) => {
     let iconComponent;
@@ -225,7 +221,6 @@ export default function FloorplansBlock({ projName, slug }: Props) {
     // @ts-ignore
     types?.length > 0 && setPropCgId(BACKEND_PROP_TYPES[`${types[0]}`]);
   }, [currentPhase]);
-  console.log(projectUnitsData);
   if (isLoading) return <Loading />;
   return (
     <div className="w-[90%] scroll-mt-[180px] mb-[5%]" id="floorPlans">
@@ -237,7 +232,6 @@ export default function FloorplansBlock({ projName, slug }: Props) {
         <span className="text-[#148B16] font-[700] ">{projName}</span>{" "}
       </h1>
       <SubHeading text="See floor plans as per your selected property type" />
-
       <div
         className={`flex justify-start items-start md:items-center  mb-[2%] flex-col md:flex-row  ${
           phaseList?.length > 1 ? "mt-4" : "mt-[0%]"
@@ -245,7 +239,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
       >
         {phaseList?.length > 1 && (
           <>
-            <p className="text-[20px] lg:text-[24px] font-[500] mb-[44px] md:mb-0 text-[#333] mr-[20px] ">
+            <p className="text-[14px] sm:text-[20px] lg:text-[24px] font-[500] mb-[44px] md:mb-0 text-[#333] sm:mr-[20px] ">
               Select one of the phase to see project details
             </p>
             <div className=" flex justify-start items-start gap-[10px] flex-wrap ">
@@ -304,7 +298,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                   return (
                     <Button
                       key={keyName}
-                      buttonClass={`flex justify-start mb-[3%] w-full rounded-[20px] gap-[8px]  items-center mr-[24px] md:ml-[0px] text-[14px] sm:text-[18px] ${
+                      buttonClass={`flex justify-start mb-[3%] w-full rounded-[20px] gap-[8px]  items-center mr-[24px] md:ml-[0px] text-[12px] sm:text-[18px] ${
                         propCgId == keyName
                           ? "text-[#001F35] font-[600] shadow-md bg-[#D5EDFF]"
                           : "text-[#303A42] font-[500] bg-[#EEF7FE]"
@@ -343,7 +337,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                   // }
                 }
               }}
-              buttonClass={`text-[20px] lg:text-[24px] mr-[40px] whitespace-nowrap flex justify-center items-center gap-[6px] ${
+              buttonClass={`text-[14px] lg:text-[24px] mr-[20px] sm:mr-[40px] whitespace-nowrap flex justify-center items-center gap-[6px] ${
                 floorPlanType == "type"
                   ? "font-[600] text-[#001F35]"
                   : "font-[400] text-[#4D6677]"
@@ -364,7 +358,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                   }
                 }
               }}
-              buttonClass={`text-[20px] lg:text-[24px] mr-[40px] whitespace-nowrap flex justify-center items-center gap-[6px] ${
+              buttonClass={`text-[14px] lg:text-[24px] mr-[20px] sm:mr-[40px] whitespace-nowrap flex justify-center items-center gap-[6px] ${
                 floorPlanType == "unit"
                   ? "font-[600] text-[#001F35]"
                   : "font-[400] text-[#4D6677]"
@@ -386,7 +380,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                     // }
                   }
                 }}
-                buttonClass={`text-[20px] lg:text-[24px] mr-[40px] whitespace-nowrap flex justify-center items-center gap-[6px] ${
+                buttonClass={`text-[14px] lg:text-[24px] mr-[20px] sm:mr-[40px] whitespace-nowrap flex justify-center items-center gap-[6px] ${
                   floorPlanType == "bhk"
                     ? "font-[600] text-[#001F35]"
                     : "font-[400] text-[#4D6677]"

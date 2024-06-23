@@ -12264,7 +12264,7 @@ export const SellSvg = () => {
       height="95"
       viewBox="0 0 112 95"
       fill="none"
-      className="drop-shadow(0px 4px 20px rgba(0, 0, 0, 0.15))"
+      // className="drop-shadow(0px 4px 20px rgba(0, 0, 0, 0.15))"
     >
       <g filter="url(#filter0_d_325_33691)">
         <path

@@ -125,10 +125,10 @@ export default function PropertyTypeDetailsCrad({
     propertyType === "plot" && projectUnitsData && countPlots(projectUnitsData);
   return (
     <div
-      className="flex  justify-between items-start min-h-[225px] w-[100%] max-w-[359px] lg:max-w-[510px] rounded-[24px] shadow-md pr-[1%] pl-[1%] mt-[70px] bg-gradient-to-l from-[#EFF5FF] /50 to-[#F2FAFF]/50 mb-[2%] cursor-pointer"
+      className="flex  justify-between items-start h-[174px]  sm:h-[225px] w-[100%] max-w-[359px] lg:max-w-[510px] rounded-[24px] shadow-md pr-[1%] pl-[1%] mt-[70px] bg-gradient-to-l from-[#EFF5FF] /50 to-[#F2FAFF]/50 mb-[2%] cursor-pointer"
       onClick={() => updateValues(phase, getPropId(propertyType as string))}
     >
-      <div className="leftSection max-w-[46%] flex flex-col justify-between min-h-[225px]">
+      <div className="leftSection  w-[63%] sm:max-w-[46%] flex flex-col   justify-between h-full sm:h-[225px] pl-2 sm:pl-0">
         <div className="max-w-[90px] lg:max-w-[115px] w-full justify-center flex items-center h-[90px] lg:h-[115px] border-solid border-1 border-[#FFF] rounded-full bg-[#c9daee] relative bottom-[50px] lg:bottom-[60px] mb-[-40px]">
           <Image
             width={150}
@@ -141,7 +141,7 @@ export default function PropertyTypeDetailsCrad({
         <div className="down mb-3">
           <div className="flex   mt-[36px] gap-x-[16px] flex-wrap  ">
             {propertyType == "apt" || propertyType == "vlmt" ? (
-              <p className="text-[14px] lg:text-[20px] text-[#2A4C70] font-[500] flex justify-start items-start  ">
+              <p className="text-[12px] lg:text-[20px] text-[#2A4C70] font-[500] flex justify-start items-start  ">
                 <TowerIcon className="w-[16px] h-[16px] lg:w-[24px] lg:h-[24px]" />
                 <span className="mr-[6px] ml-[6px]"> {cg?.elevation} </span>{" "}
                 Tower{cg?.elevation > 1 ? "s" : ""}
@@ -149,12 +149,12 @@ export default function PropertyTypeDetailsCrad({
             ) : (
               ""
             )}
-            <p className="text-[14px] lg:text-[20px] text-[#2A4C70] font-[500] flex justify-start items-start  ">
+            <p className="text-[12px] lg:text-[20px] text-[#2A4C70] font-[500] flex justify-start items-start  ">
               <FlooringIcon className="w-[16px] h-[16px] lg:w-[24px] lg:h-[24px]" />
               <span className="mr-[6px] ml-[6px]">{cg?.unitCount} </span> Units
             </p>
             {propertyType === "rowHouse" || propertyType === "villa" ? (
-              <p className="text-[14px] lg:text-[20px] text-[#2A4C70] font-[500] flex justify-start items-start  ">
+              <p className="text-[12px] lg:text-[20px] text-[#2A4C70] font-[500] flex justify-start items-start  ">
                 <FloorsIcon className="w-[16px] h-[16px] lg:w-[24px] lg:h-[24px]" />
                 <span className="mr-[6px] ml-[6px]">
                   {"G+" + cg?.elevation}
@@ -166,31 +166,31 @@ export default function PropertyTypeDetailsCrad({
             )}
           </div>
 
-          <button className="text-[16px] lg:text-[18px] inline-flex max-w-fit justify-center items-center gap-2.5 px-2 py-1 mb-[2%] cursor-pointer  rounded border-[0.8px] border-solid border-[#0073C6] bg-[#fff] text-[#0073C6] text-lg not-italic font-semibold leading-[normal]">
+          <button className="text-[10px] lg:text-[18px] inline-flex max-w-fit justify-center items-center gap-2.5 px-2 py-1 mb-[2%] cursor-pointer  rounded border-[0.8px] border-solid border-[#0073C6] bg-[#fff] text-[#0073C6]  not-italic font-semibold leading-[normal]">
             View Floor Plans
           </button>
         </div>
       </div>
-      <div className="rightSection pt-3 flex flex-col">
-        <p className="text-[#242424]   md:text-xl not-italic font-semibold leading-[normal] ml-[10px] text-right">
+      <div className="rightSection pt-3 flex flex-col w-full pr-2 sm:pr-0">
+        <p className="text-[#242424] text-[14px]   md:text-xl not-italic font-semibold leading-[normal] ml-[10px] text-right">
           {propName(propertyType, "name")}
         </p>
-        <p className="text-[16px] text-right lg:text-[22px] text-[#148B16]  not-italic font-bold leading-[normal] mt-2">
+        <p className="text-[14px] text-right lg:text-[22px] text-[#148B16]  not-italic font-bold leading-[normal] mt-2">
           {cg.minPrice && cg.maxPrice
             ? `${formatCurrency(cg?.minPrice)} - ${formatCurrency(
                 cg?.maxPrice
               )}`
             : "Coming Soon"}
         </p>
-        <p className="text-[14px] lg:text-lg text-[#242424]  italic font-medium leading-[normal]">
+        <p className="text-[12px] lg:text-lg text-[#242424] text-right  italic font-medium leading-[normal]">
           ₹ {cg?.basePrice} Base Price/ sq.ft
         </p>
-        <p className="text-[14px] lg:text-[18px]  mb-[3%] text-right text-[#4D6677] text-lg not-italic font-semibold leading-[normal] capitalize mt-3 ">
+        <p className="text-[14px] sm:text-[18px]  mb-[3%] text-right text-[#4D6677]  not-italic font-semibold leading-[normal] capitalize mt-3 ">
           Unit types : <br />{" "}
           {propertyType !== "plot" ? (
             <span
               className={clsx(
-                "text-[#242424] text-right text-lg not-italic font-semibold leading-[22px] max-w-[135px] inline-block min-h-[44px] w-[80%]",
+                "text-[#242424] text-right text-[12px] sm:text-lg not-italic font-semibold leading-[22px] max-w-[135px] inline-block min-h-[44px] w-[80%]",
                 propertyType === "plot" && "!max-w-full"
               )}
             >
@@ -206,7 +206,7 @@ export default function PropertyTypeDetailsCrad({
             </span>
           ) : (
             <>
-              <p className="text-[#242424] text-right text-base not-italic font-semibold leading-[normal]">
+              <p className="text-[#242424] text-right text-[12px] sm:text-base not-italic font-semibold leading-[normal]">
                 {plotCounts?.standardPlotCount > 0 &&
                   `Standard Plot : ${
                     plotCounts?.standardPlotCount
@@ -215,7 +215,7 @@ export default function PropertyTypeDetailsCrad({
                     "Units"
                   )} `}
               </p>
-              <p className="text-[#242424] text-right text-base not-italic font-semibold leading-[normal] min-h-[19px]">
+              <p className="text-[#242424] text-right text-[12px] sm:text-base not-italic font-semibold leading-[normal] min-h-[19px]">
                 {plotCounts?.oddPlotCount > 0 &&
                   `Odd Plot : ${
                     plotCounts?.oddPlotCount

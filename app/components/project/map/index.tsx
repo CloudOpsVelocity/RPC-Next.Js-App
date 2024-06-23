@@ -112,7 +112,7 @@ const LeafMap: React.FC<{
           <div id="tabs">
             <Tabs defaultValue="public">
               <div className="bg-blue-50 px-5 py-4">
-                <p className="text-[#001F35] text-[22px]  font-medium leading-[normal]">
+                <p className="text-[#001F35] text-[20px] sm:text-[22px]  font-medium leading-[normal]">
                   Explore Your Surroundings, Everywhere Nearby!
                 </p>
               </div>

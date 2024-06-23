@@ -13,6 +13,9 @@ const config: Config = {
         btnPrimary: "#0073C6",
         greenPrimary: "#148B16",
       },
+      fontSize: {
+        h2: "20px",
+      },
     },
   },
 

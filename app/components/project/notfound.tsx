@@ -26,7 +26,7 @@ const NoProperties = ({
           fill="#148B16"
         />
       </svg>
-      <p className="text-[#242424] text-[24px] not-italic font-medium leading-[normal] ">
+      <p className="text-[#242424] text-[14px] sm:text-[24px] not-italic font-medium leading-[normal] ">
         Currently, no units are available in {phase}. Stay tuned!
         <br /> Thank you for your patience.
       </p>

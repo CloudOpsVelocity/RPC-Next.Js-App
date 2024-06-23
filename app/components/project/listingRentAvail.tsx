@@ -31,7 +31,7 @@ export default function ListingRentAvail({
       </h1>
 
       <SubHeading text="Unlock the door to your dream home: explore our array of available properties today!" />
-      <div className="flex  items-center gap-[28px] sm:gap-[58px] mt-[35px] flex-wrap">
+      <div className="sm:flex  space-y-4 items-center gap-[28px] sm:gap-[58px] mt-[35px] flex-wrap sm:space-y-0">
         <Card type="sell" s={s} r={r} projName={projName} block={s === "0"} />
         <Card type="rent" s={s} r={r} projName={projName} block={r === "0"} />
       </div>
@@ -52,7 +52,7 @@ const Card = ({
   projName: string;
   block: boolean;
 }) => {
-  const [opened, { close, open: openSuccesPopup }] = useMessagePopup(
+  const [, { open: openSuccesPopup }] = useMessagePopup(
     type === "rent" ? "Rlisting" : "Slisting"
   );
   const handleBoxClick = (value: string) => {
@@ -61,7 +61,7 @@ const Card = ({
   return (
     <div
       className={clsx(
-        " sm:h-[85px] shadow-[0px_4px_30px_0px_rgba(0,0,0,0.15)] rounded-[10px] relative cursor-pointer",
+        " sm:h-[85px] shadow-[0px_4px_30px_0px_rgba(0,0,0,0.15)] rounded-[10px] relative cursor-pointer ",
         type === "sell"
           ? "border border-solid border-[#FBE885]"
           : "border border-solid border-[#B1DEFF] "
@@ -69,23 +69,23 @@ const Card = ({
       onClick={() => handleBoxClick(block ? r : s)}
     >
       <AvailListSideSvg type={type} />
-      <div className="block sm:inline-flex justify-center items-center gap-[22px] h-full ">
+      <div className="inline-flex justify-center items-center gap-[22px] h-full ">
         {type === "rent" ? <RentSvg /> : <SellSvg />}
         <div className="pl-5 md:pl-0">
-          <h2 className="text-[#242424] text-2xl not-italic font-medium leading-[31px]">
-            <span className="capitalize">{type}</span> Listings in{" "}
+          <h2 className="text-[#242424] text-[20px] sm:text-2xl not-italic font-medium leading-[31px]">
+            <span className="capitalize">{type}</span> Listings{" "}
           </h2>
-          <h2
+          {/* <h2
             className={clsx(
-              "text-[#242424] text-2xl not-italic font-bold leading-[31px] mt-1"
+              "text-[#242424] text-[20px] sm:text-2xl not-italic font-bold leading-[31px] mt-1"
             )}
           >
             {projName}
-          </h2>
+          </h2> */}
         </div>
         <div
           className={clsx(
-            "flex justify-center items-center p-2 gap-[12px] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[10px] border-[3px] border-solid max-w-[80px] mt-[14px] ml-5 mb-5 mr-5 text-[#303030] text-2xl not-italic font-semibold",
+            "flex justify-center items-center p-2 gap-[4px] sm:gap-[12px] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[10px] border-[3px] border-solid max-w-[60px] sm:max-w-[80px] mt-[14px] ml-5 mb-5 mr-5 text-[#303030] text-[14px] sm:text-2xl not-italic font-semibold",
             type === "sell"
               ? "border-[#FFD600] bg-[#ffef9b]"
               : "border-[#0073C6] bg-[#DBF0FF]"

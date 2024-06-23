@@ -52,23 +52,23 @@ const FirstBlock: React.FC<Props> = ({ projectDetails, companyName }) => {
     >
       {projectDetails && (
         <>
-          {hasReraStatus && (
-            <p className=" flex items-center pl-[8px] rounded-tl-lg text-center text-[24px] font-[600] text-[#FFF] bg-gradient-to-r w-[122px] from-[#148B16] /0 to-[#EFEFEF]/50  z-10 left-0 absolute">
+          {/* {hasReraStatus && (
+            <p className=" flex items-center pl-[8px] rounded-tl-lg text-center text-[12px] sm:text-[24px] font-[600] text-[#FFF] bg-gradient-to-r w-[122px] from-[#148B16] /0 to-[#EFEFEF]/50  z-10 left-0 absolute">
               <ReraIcon />
               RERA
             </p>
-          )}
-          <div className="absolute m-[2%] z-10 right-2">
-            <p className="shadow-md rounded-[10px] bg-gradient-to-r p-[8px] from-[#EFF5FF] /0  to-[#F2FAFF]/100 text-[#000] text-[14px] sm:text-[16px] md:text-xl not-italic font-medium leading-[normal]">
+          )} */}
+          <div className="absolute m-[2%] z-10 right-[1px] sm:right-2">
+            <p className="shadow-md rounded-[10px] bg-gradient-to-r p-[8px] from-[#EFF5FF] /0  to-[#F2FAFF]/100 text-[#000] text-[12px] sm:text-[16px] md:text-xl not-italic font-medium leading-[normal]">
               Project Status:{" "}
-              <span className="text-[#148B16] text-[14px] sm:text-[16px]   md:text-xl not-italic font-bold leading-[normal]">
+              <span className="text-[#148B16] text-[12px] sm:text-[16px]   md:text-xl not-italic font-bold leading-[normal]">
                 {" "}
                 {projectDetails.projectStatus === "Completed"
                   ? "Completed"
                   : "On-Going"}
               </span>{" "}
             </p>
-            <SharePopup className="text-sm p-[4px]  sm:text-xl hidden sm:block" />
+            <SharePopup className="text-sm p-[4px]  sm:text-xl hidden sm:flex" />
           </div>
           <div className="relative w-full sm:!rounded-[10px]">
             <Carousel
