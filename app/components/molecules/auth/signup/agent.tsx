@@ -252,7 +252,7 @@ function Agent() {
                 root: StepCss.inputRoot,
                 input: StepCss.textInput,
                 error: StepCss.errorMsg,
-                label:StepCss.mlabelCss
+                label: StepCss.mlabelCss,
               }}
             />
             <TextInput
@@ -267,7 +267,7 @@ function Agent() {
                 root: StepCss.inputRoot,
                 input: StepCss.textInput,
                 error: StepCss.errorMsg,
-                label:StepCss.mlabelCss
+                label: StepCss.mlabelCss,
               }}
             />
             <PasswordInput
@@ -278,7 +278,7 @@ function Agent() {
                 innerInput: StepCss.textInput,
                 input: StepCss.textInput,
                 error: StepCss.errorMsg,
-                label:StepCss.mlabelCss
+                label: StepCss.mlabelCss,
               }}
               size="lg"
               mt={"xs"}
@@ -303,7 +303,7 @@ function Agent() {
                 status === "error" && "!mb-[2px]"
               )}
               label="Contact Number"
-              placeholder="Enter your contact number"
+              placeholder="Enter your contact no:"
               {...form.getInputProps("mobile")}
               error={form.errors.mobile || status === "error"}
               onChange={(e) => {
@@ -316,7 +316,7 @@ function Agent() {
                 root: StepCss.inputRoot,
                 input: N.classForContact,
                 error: StepCss.errorMsg,
-                label:StepCss.mlabelCss
+                label: StepCss.mlabelCss,
               }}
               maxLength={10}
               allowDecimal={false}
@@ -377,7 +377,7 @@ function Agent() {
                 root: StepCss.inputRoot,
                 input: StepCss.textInput,
                 error: StepCss.errorMsg,
-                label:StepCss.mlabelCss
+                label: StepCss.mlabelCss,
               }}
               onBlurCapture={(e) => handleTrimAndReplace(e, "address", form)}
               data-autofocus
@@ -393,7 +393,7 @@ function Agent() {
                 root: StepCss.inputRoot,
                 input: StepCss.textInput,
                 error: StepCss.errorMsg,
-                label:StepCss.mlabelCss
+                label: StepCss.mlabelCss,
               }}
               onBlurCapture={(e) =>
                 handleTrimAndReplace(e, "companyName", form)
@@ -453,10 +453,10 @@ function Agent() {
           <Link
             href={{ pathname: "/login", search: queryParam.query }}
             className="text-[#002749] font-semibold *: md:text-xl flex justify-center items-center gap-2.5 rounded border p-2 border-solid border-[#B2B2B2] mb-3 mt-[5%] text-nowrap "
-            >
+          >
             Already have an Account ?{" "}
             <span className="md:text-xl  text-[#0C7ACA]  not-italic font-semibold text-nowrap">
-            Log In
+              Log In
             </span>
           </Link>
           {status === "error" && (
@@ -472,7 +472,8 @@ function Agent() {
           )}
           <Link
             href={{ pathname: queryParam.rediectPath }}
-            className=" md:text-xl not-italic text-[#148B16] !text-18px   leading-[normal] b sm:!text-[16px] sm:font-[400] border rounded-sm p-2 border-solid border-[#148B16]"          >
+            className=" md:text-xl not-italic text-[#148B16] !text-18px   leading-[normal] b sm:!text-[16px] sm:font-[400] border rounded-sm p-2 border-solid border-[#148B16]"
+          >
             Continue without Register
           </Link>
         </>
