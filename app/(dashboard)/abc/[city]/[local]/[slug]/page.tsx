@@ -19,7 +19,6 @@ import ErrorContainer from "@/app/components/project/error/container";
 import MobileHidden from "@/app/components/molecules/MobileHidden";
 import { notFound } from "next/navigation";
 import FloorplanDrawer from "@/app/components/project/drawers/floorplan";
-import axios from "axios";
 const FloorplansBlock = dynamic(
   () => import("@/app/components/project/floorplansBlock"),
   {

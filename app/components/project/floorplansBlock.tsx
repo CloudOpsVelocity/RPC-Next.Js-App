@@ -337,7 +337,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                   // }
                 }
               }}
-              buttonClass={`text-[14px] lg:text-[24px] mr-[20px] sm:mr-[40px] whitespace-nowrap flex justify-center items-center gap-[6px] ${
+              buttonClass={`text-[14px] lg:text-[24px] mr-[24px] sm:mr-[40px] whitespace-nowrap flex justify-center items-center gap-[6px] ${
                 floorPlanType == "type"
                   ? "font-[600] text-[#001F35]"
                   : "font-[400] text-[#4D6677]"
@@ -358,7 +358,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                   }
                 }
               }}
-              buttonClass={`text-[14px] lg:text-[24px] mr-[20px] sm:mr-[40px] whitespace-nowrap flex justify-center items-center gap-[6px] ${
+              buttonClass={`text-[14px] lg:text-[24px] mr-[24px] sm:mr-[40px] whitespace-nowrap flex justify-center items-center gap-[6px] ${
                 floorPlanType == "unit"
                   ? "font-[600] text-[#001F35]"
                   : "font-[400] text-[#4D6677]"
@@ -380,7 +380,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                     // }
                   }
                 }}
-                buttonClass={`text-[14px] lg:text-[24px] mr-[20px] sm:mr-[40px] whitespace-nowrap flex justify-center items-center gap-[6px] ${
+                buttonClass={`text-[14px] lg:text-[24px] mr-[24px] sm:mr-[40px] whitespace-nowrap flex justify-center items-center gap-[6px] ${
                   floorPlanType == "bhk"
                     ? "font-[600] text-[#001F35]"
                     : "font-[400] text-[#4D6677]"
@@ -390,16 +390,12 @@ export default function FloorplansBlock({ projName, slug }: Props) {
           </div>
 
           <div
-            className="   h-full md:h-[547px] w-full rounded-[14px] mt-[2%] border-solid border-[1px] border-[#92B2C8] bg-[#FFF] shadow-md flex flex-col-reverse md:flex-row justify-center  "
+            className="h-[600px] md:h-[547px] w-full rounded-[14px] mt-[2%] border-solid border-[1px] border-[#92B2C8] bg-[#FFF] shadow-md flex flex-col-reverse md:flex-row justify-center  "
             onClick={handleContainerClick}
           >
             {floorPlanType === "type" && (
               <div
-                style={{
-                  height: `547px`,
-                  width: `50%`,
-                  overflow: "auto",
-                }}
+                className="w-[100%] md:w-[50%] border-solid overflow-auto"
                 ref={parentRef}
               >
                 <div
@@ -437,7 +433,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
 
             {floorPlanType == "unit" && (
               <>
-                <div className="w-full md:w-[50%]   border-solid overflow-auto pt-6">
+                <div className="w-[100%] md:w-[50%] border-solid overflow-auto pt-6">
                   <Byunitblock
                     propCgId={propCgId}
                     data={projectUnitsData}
@@ -470,7 +466,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                 floorPlanType !== "unit" ? (
                   <>
                     <p
-                      className="text-[14px] font-[500] text-[#005DA0] "
+                      className="text-[10px] sm:text-[14px] font-[500] text-[#005DA0] "
                       onClick={(e) => {
                         e.stopPropagation();
                         handleOpen();
