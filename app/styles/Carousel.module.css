@@ -19,3 +19,20 @@
 .indicators {
   padding: 0 4%;
 }
+.slide {
+  height: 750px;
+}
+
+@media screen and (max-width: 601px) {
+  .slide {
+    height: 283px;
+  }
+
+  .indicator {
+    display: none;
+  }
+  .control {
+    height: 10px;
+    width: 10px;
+  }
+}

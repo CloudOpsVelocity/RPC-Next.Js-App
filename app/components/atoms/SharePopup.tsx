@@ -98,7 +98,7 @@ export default function SharePopup({
       <button
         onClick={open}
         className={clsx(
-          "flex justify-center items-center gap-1 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] p-2 rounded-[10px] bg-[#F3F7FF] ml-auto text-[#0073C6]  not-italic font-semibold leading-[normal] tracking-[0.4px]",
+          "flex justify-center items-center gap-1 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] sm:p-2 rounded-[10px] bg-[#F3F7FF] ml-auto text-[#0073C6]  not-italic font-semibold leading-[normal] tracking-[0.4px]",
           title === "Share Project" && "mt-[13px]",
           className
         )}

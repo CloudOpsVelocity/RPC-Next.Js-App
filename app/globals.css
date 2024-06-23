@@ -162,3 +162,12 @@
   fill: white;
   stroke: white;
 }
+
+.newGra {
+  background: linear-gradient(
+    272deg,
+    rgba(224, 224, 224, 0.64) 0%,
+    rgba(255, 255, 255, 0.64) 55.5%,
+    rgba(255, 255, 255, 0.64) 100%
+  );
+}

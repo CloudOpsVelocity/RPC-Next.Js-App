@@ -36,14 +36,14 @@ export default function OverviewBanner({
         className="flex justify-start items-center w-full flex-col md:flex-row bg-[#f0f9ff] scroll-mt-40"
         id="brochure"
       >
-        <PriceBag className="w-[150px] h-[170px] md:w-[237px] md:h-[263px] " />
+        <PriceBag className="w-[100px] h-[120px] md:w-[237px] md:h-[263px] " />
 
         <div className="flex justify-center sm:justify-between items-center w-[100%] flex-row ml-[3%] p-[2%] flex-wrap">
           <div className=" grid place-items-center md:block">
-            <p className="text-[#212C33] text-[24px] lg:text-[34px] font-[600]  md:text-start text-center">
+            <p className="text-[#212C33] sm:text-[24px] lg:text-[34px] font-[600]  md:text-start text-center">
               Price Range
             </p>
-            <p className="text-[#001F35] text-[24px] md:text-[32px] lg:text-[40px] whitespace-nowrap font-[700] mt-1">
+            <p className="text-[#001F35] sm:text-[24px] md:text-[32px] lg:text-[40px] whitespace-nowrap font-[700] mt-1">
               {formatCurrency(minPrice)} - {formatCurrency(maxPrice)}
               {", "}
               <span className="text-[#545353] text-lg md:text-[32px] not-italic font-medium leading-[normal]">
@@ -52,13 +52,16 @@ export default function OverviewBanner({
             </p>
             <Button
               title="Request  Callback"
-              buttonClass=" text-[#FFF] text-[28px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px]  mt-3"
+              buttonClass=" text-[#FFF] text-[12px] sm:text-[28px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px]  mt-3"
               onChange={() => open("banner", slug, "projBanner")}
             />
           </div>
-          <div className="">
+          <div className="flex justify-center items-center flex-col">
             <DownloadBroucher url={brocherUrl} />
-            <WhatsAppButton className="cursor-pointer mt-4" name={name} />
+            <WhatsAppButton
+              className="cursor-pointer mt-2 sm:mt-4 "
+              name={name}
+            />
           </div>
         </div>
 

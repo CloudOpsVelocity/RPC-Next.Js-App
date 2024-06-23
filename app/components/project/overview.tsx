@@ -52,18 +52,18 @@ export default function Overview({
     >
       <div className="pl-[2%] pr-[2%] flex justify-between items-center flex-wrap sm:flex-nowrap">
         <div>
-          <h2 className="text-[24px] lg:text-[32px] text-[#001F35] font-[700] capitalize ">
+          <h2 className="text-[22px] sm:text-[24px] lg:text-[32px] text-[#001F35] font-[700] capitalize ">
             {projectName}
           </h2>
-          <p className="text-[16px] lg:text-[24px] text-black font-[500] capitalize  sm:max-w-[1400px]">
+          <p className="text-[#242424]  text-sm sm:text-[22px] not-italic font-[600] leading-[normal] w-[100%] tracking-[0.32px]  mt-[14px] capitalize  sm:max-w-[1400px]">
             {`${address}, ${localityName}, ${cityName}, ${state}, ${pinCode}`}
           </p>
         </div>
-        <div className="flex justify-center sm:items-end sm:flex-col">
+        <div className="flex justify-center items-center sm:items-end sm:flex-col space-x-6">
           <Ratings />
           <a
             href={`tel:${8766203976}`}
-            className="text-[20px]  mt-3  text-[#0073C6] lg:text-2xl not-italic font-semibold leading-[normal] inline-flex justify-center items-center gap-1.5 p-2 rounded-lg border-[0.8px] border-solid border-[#0073C6] bg-[#fafafa]"
+            className="sm:text-[20px]  mt-3  text-[#0073C6] lg:text-2xl not-italic font-semibold leading-[normal] inline-flex justify-center items-center gap-1.5 p-2 rounded-lg border-[0.8px] border-solid border-[#0073C6] bg-[#fafafa]"
           >
             {footerPhoneIcon}
             Call now

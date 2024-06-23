@@ -48,7 +48,7 @@ export default function CompareList() {
     <button
       onClick={() => onAddingCompare()}
       className={clsx(
-        "flex justify-center items-center gap-1 p-2 rounded-lg border-[0.8px] border-solid border-[#0073C6] bg-[#fafafa] text-[#0073C6] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px] mt-5",
+        "flex justify-center items-center gap-1 p-2 rounded-lg border-[0.8px] border-solid border-[#0073C6] bg-[#fafafa] text-[#0073C6] sm:text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px] mt-5 text-[12px]",
         data?.compareAdded &&
           "bg-[rgb(231,245,255)] text-[#148B16] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px]"
       )}

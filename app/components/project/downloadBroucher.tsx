@@ -59,7 +59,7 @@ const DownloadBroucher = ({ url }: { url?: string }) => {
     url && (
       <button
         onClick={handleDownload}
-        className="inline-flex justify-center items-center gap-[5px] p-2  rounded-md bg-btnPrimary text-white text-[22px] not-italic font-bold leading-[normal] mt-10"
+        className="inline-flex justify-center items-center gap-[5px] p-2 text-[12px]  rounded-md bg-btnPrimary text-white sm:text-[22px] not-italic font-bold leading-[normal] mt-3 sm:mt-10"
       >
         {DocIcon} Download Brochure
       </button>

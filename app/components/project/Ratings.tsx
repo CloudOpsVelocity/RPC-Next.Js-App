@@ -6,7 +6,7 @@ import React from "react";
 export default function Ratings() {
   const { data, isLoading } = useRatings();
   return (
-    <p className="text-[20px] flex justify-start items-start lg:text-[24px] text-[#242424] font-[700] whitespace-nowrap">
+    <p className=" sm:text-[20px] flex justify-start items-start lg:text-[24px] text-[#242424] font-[700] whitespace-nowrap mt-3">
       {isLoading
         ? "..."
         : `${
@@ -15,7 +15,10 @@ export default function Ratings() {
               : "No"
           }` ?? "No"}{" "}
       Ratings
-      <RatingStar fill="#FFD600" className="h-[32px] w-[32px]" />
+      <RatingStar
+        fill="#FFD600"
+        className="h-[24px] w-[24px] sm:h-[32px] sm:w-[32px]"
+      />
     </p>
   );
 }

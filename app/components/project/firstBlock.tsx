@@ -17,7 +17,6 @@ import usePhaseWiseOverview from "@/app/hooks/usePhaseWiseOverview";
 import styles from "@/app/styles/Carousel.module.css";
 import { currentBlockAtom, isScrollingAtom, stickyAtom } from "./navigation";
 import { useSetAtom } from "jotai";
-import useBuilder from "@/app/hooks/useBuilder";
 type Props = {
   projectDetails: Main | null;
   companyName: string;
@@ -69,9 +68,9 @@ const FirstBlock: React.FC<Props> = ({ projectDetails, companyName }) => {
                   : "On-Going"}
               </span>{" "}
             </p>
-            <SharePopup className="text-xl" />
+            <SharePopup className="text-sm p-[4px]  sm:text-xl hidden sm:block" />
           </div>
-          <div className="relative w-full !rounded-[10px]">
+          <div className="relative w-full sm:!rounded-[10px]">
             <Carousel
               classNames={styles}
               slideGap={{ base: 0, sm: "md" }}
@@ -86,17 +85,12 @@ const FirstBlock: React.FC<Props> = ({ projectDetails, companyName }) => {
               previousControlIcon={<DarkCarouseIcon />}
             >
               {images.map((imageUrl, index) => (
-                <Carousel.Slide
-                  key={index}
-                  className="relative"
-                  h={750}
-                  w={"auto"}
-                >
+                <Carousel.Slide key={index} className="relative" w={"auto"}>
                   <Image
                     alt="project image"
                     src={imageUrl}
                     fill
-                    className={`!w-full !rounded-[10px]  h-[330px] lg:h-[750px] bg-gray-${
+                    className={`!w-full sm:!rounded-[10px]  h-[330px] lg:h-[750px] bg-gray-${
                       index + 1
                     }`}
                     quality={100}
@@ -105,10 +99,10 @@ const FirstBlock: React.FC<Props> = ({ projectDetails, companyName }) => {
               ))}
             </Carousel>
           </div>
-          <div className="sm:absolute bottom-0 m-[2%] z-10 w-[95%] self-center justify-between items-start flex-col md:flex-row border-solid border-white-500 rounded-[10px] bg-gradient-to-r from-[#EFEFEF] /20 to-[#c3c3c3bd]/80 shadow-md  sm:flex ">
+          <div className="sm:absolute bottom-0  sm:m-[2%] z-10 sm:w-[95%] self-center justify-between items-start flex-col md:flex-row border-solid border-white-500 sm:rounded-[10px] bg-gradient-to-r from-[#EFEFEF] /20 to-[#c3c3c3bd]/80 shadow-md  sm:flex ">
             <div className=" w-full md:w-[60%]">
-              <div className={`ml-[2%] mt-10 mb-[7px]`}>
-                <h3 className="text-xl sm:text-[24px] lg:text-[28px] font-[700] text-[#001F35] ">
+              <div className={`ml-[2%] mt-3 sm:mt-10 mb-[7px]`}>
+                <h3 className="text-[22px] sm:text-[24px] lg:text-[28px] font-[700] text-[#001F35] ">
                   {projectDetails.projectName}
                 </h3>
 
@@ -125,25 +119,25 @@ const FirstBlock: React.FC<Props> = ({ projectDetails, companyName }) => {
                   </span>
                 </p>
 
-                <p className="text-[#242424] text-2xl not-italic font-semibold leading-[normal] mt-[14px]">
+                <p className="text-[#242424] sm:text-2xl not-italic font-semibold leading-[normal] mt-[14px]">
                   Posted By:{" "}
-                  <span className="text-[#242424] text-2xl  font-bold leading-[normal]">
+                  <span className="text-btnPrimary sm:text-2xl  font-bold leading-[normal] underline">
                     {companyName ?? "Builder"}
                   </span>
                 </p>
               </div>
             </div>
             <div className="w-full md:w-[40%] flex justify-between md:items-end flex-col p-[2%]">
-              <h2 className="text-[20px] md:text-[28px] lg:text-[32px] font-[700] text-[#001F35]">
+              <h2 className=" md:text-[28px] lg:text-[32px] font-semibold sm:font-[700] text-[#001F35]">
                 {formatCurrency(projectDetails.minPrice)} -{" "}
                 {formatCurrency(projectDetails.maxPrice)}
               </h2>
-              <p className="text-[16px] md:text-right lg:text-[24px] font-[600] mb-[10px] md:mb-[20px] text-[#242424] ">
+              <p className=" md:text-right lg:text-[24px] sm:font-[600] mb-[10px] md:mb-[20px] text-[#242424] ">
                 ₹ {projectDetails.basePrice}/- Price per sqft onwards
               </p>
 
               <p
-                className="text-[16px] lg:text-[20px] font-[600] mr-auto md:mr-0 text-[#0073C6] bg-[#FFF] rounded-[10px] shadow-md p-[8px] flex items-center gap-2 cursor-pointer"
+                className=" lg:text-[20px] font-[600] mr-auto md:mr-0 text-[#0073C6] bg-[#FFF] rounded-[10px] shadow-md p-[8px] flex items-center gap-2 cursor-pointer"
                 onClick={() => scrollToTopic("floorPlansdiv")}
               >
                 <Image
@@ -153,7 +147,7 @@ const FirstBlock: React.FC<Props> = ({ projectDetails, companyName }) => {
                   alt="no of floors"
                   className="h-[24px] w-[24px] "
                 />
-                {projectDetails?.floorPlanCount || 0} Floors Plans
+                {projectDetails?.floorPlanCount || 0} Floor Plan
               </p>
             </div>
           </div>
