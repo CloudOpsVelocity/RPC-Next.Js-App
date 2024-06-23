@@ -89,7 +89,7 @@ export default function useAuth({
       type === "register"
         ? setTimeout(() => {
             router.push(redirectPath);
-          }, 5000)
+          }, 100000)
         : router.push(redirectPath);
     } else {
       toast.error(res?.error || "Something went wrong. Please try again.", {

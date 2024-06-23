@@ -51,3 +51,5 @@ git merge development
 # Push changes to the remote stable branch
 
 git push origin stable
+
+<!-- manish branch manishdev -->

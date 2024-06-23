@@ -33,10 +33,10 @@ export default function Page({ searchParams }: any) {
       </div>
 
       <div>
-        <h1 className="md:text-[32px] text-[24px] font-[600] font-Playball text-[#333]">
+        <h1 className="md:text-[32px] mt-6 text-[20px] font-[600] font-Playball text-[#333]">
           Welcome !
         </h1>
-        <p className="text-[20px] font-[400] font-Playball text-[#282828]">
+        <p className="!text-[18px] font-[400] font-Playball text-[#282828] sm:!text-[18px]">
           New user, Select how you want to sign up as
         </p>
         <div className="w-full flex justify-between items-center mt-[4%]">
@@ -48,10 +48,10 @@ export default function Page({ searchParams }: any) {
                   search: getQueryParam(searchParams),
                 }}
                 key={ind}
-                className={`group cursor-pointer flex justify-center items-center flex-col rounded-[8px] bg-[#FAFAFA] w-[30%] h-[130px] md:h-[174px] shadow-lg hover:shadow-green-300/30`}
+                className={`group cursor-pointer mb-6 flex justify-center items-center flex-col rounded-[8px] border-[0.4px] !border-[#009c59] bg-[#FAFAFA] w-[30%] h-[100px] md:h-[174px]  shadow-lg  hover:shadow-green-300/30 sm:h-[60px] sm:!shadow-sm`}
               >
                 <Image
-                  className="w-[60px]  md:w-[83px]  "
+                  className="w-[60px]  md:w-[83px]  sm:w-[75px] "
                   alt="User"
                   src={each.src}
                   width={83}
@@ -59,7 +59,7 @@ export default function Page({ searchParams }: any) {
                 />
 
                 <p
-                  className={`text-xs md:text-[20px] font-[500] font-Playball text-[#7D7D7D] mt-[8%] group-hover:text-[#65BB67] `}
+                  className={`text-xs md:text-[20px] font-[600] font-Playball text-[#242424] mt-[8%] group-hover:text-[#65BB67] `}
                 >
                   {each.name}
                 </p>

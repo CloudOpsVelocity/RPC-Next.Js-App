@@ -208,7 +208,7 @@ function Agent() {
         close={close}
         userName={form.values.email}
       />
-      <form onSubmit={form.onSubmit(nextStep)} className="w-full">
+      <form onSubmit={form.onSubmit(nextStep)} className="w-full ">
         <Stepper
           color="green"
           iconSize={24}
@@ -252,6 +252,7 @@ function Agent() {
                 root: StepCss.inputRoot,
                 input: StepCss.textInput,
                 error: StepCss.errorMsg,
+                label: StepCss.mlabelCss,
               }}
             />
             <TextInput
@@ -266,6 +267,7 @@ function Agent() {
                 root: StepCss.inputRoot,
                 input: StepCss.textInput,
                 error: StepCss.errorMsg,
+                label: StepCss.mlabelCss,
               }}
             />
             <PasswordInput
@@ -276,6 +278,7 @@ function Agent() {
                 innerInput: StepCss.textInput,
                 input: StepCss.textInput,
                 error: StepCss.errorMsg,
+                label: StepCss.mlabelCss,
               }}
               size="lg"
               mt={"xs"}
@@ -300,7 +303,7 @@ function Agent() {
                 status === "error" && "!mb-[2px]"
               )}
               label="Contact Number"
-              placeholder="Enter your contact number"
+              placeholder="Enter your contact no:"
               {...form.getInputProps("mobile")}
               error={form.errors.mobile || status === "error"}
               onChange={(e) => {
@@ -313,6 +316,7 @@ function Agent() {
                 root: StepCss.inputRoot,
                 input: N.classForContact,
                 error: StepCss.errorMsg,
+                label: StepCss.mlabelCss,
               }}
               maxLength={10}
               allowDecimal={false}
@@ -373,6 +377,7 @@ function Agent() {
                 root: StepCss.inputRoot,
                 input: StepCss.textInput,
                 error: StepCss.errorMsg,
+                label: StepCss.mlabelCss,
               }}
               onBlurCapture={(e) => handleTrimAndReplace(e, "address", form)}
               data-autofocus
@@ -388,6 +393,7 @@ function Agent() {
                 root: StepCss.inputRoot,
                 input: StepCss.textInput,
                 error: StepCss.errorMsg,
+                label: StepCss.mlabelCss,
               }}
               onBlurCapture={(e) =>
                 handleTrimAndReplace(e, "companyName", form)
@@ -417,7 +423,7 @@ function Agent() {
                 onClick={() => {
                   active !== 0 ? prevStep() : router.back();
                 }}
-                className="!rounded-[6px] !border-solid  !w-[49%] !border-1 !border-blue-600 !bg-[#FFF] !text-[#0073C6] md:!w-[100%] md:!max-w-[178px] "
+                className="!rounded-[6px] !border-solid  !w-[46%] !border-1 !border-blue-600 !bg-[#FFF] !text-[#0073C6] md:!w-[100%] md:!max-w-[178px] "
               >
                 <BackSvg />
                 Back
@@ -426,17 +432,17 @@ function Agent() {
               <Button
                 loading={status === "pending"}
                 mt="sm"
-                className="!rounded-[6px] !w-[49%] md:!w-[100%]  md:!max-w-[225px] !bg-[#0c7aca]"
+                className="!rounded-[6px] !w-[52%] md:!w-[100%]  md:!max-w-[225px] !bg-[#0c7aca]"
                 // onClick={nextStep}
                 type="submit"
               >
                 {form.values.otp &&
                 form.values.mobile === form.values.prevMobile &&
                 form.values.email === form.values.prevEmail
-                  ? "Save & CONTINUE"
-                  : "SAVE & VERIFY"}
+                  ? "Save & Continue"
+                  : "Save & Verify"}
 
-                {/* {active === 0 ? "SAVE & VERIFY" : "SAVE & CONTINUE"} */}
+                {/* {active === 0 ? "Save & Verify" : "Save & Continue"} */}
               </Button>
             </div>
           )}
@@ -446,10 +452,10 @@ function Agent() {
         <>
           <Link
             href={{ pathname: "/login", search: queryParam.query }}
-            className="text-[#282828] md:text-xl flex justify-center items-center gap-2.5 rounded border p-2 border-solid border-[#B2B2B2] mb-3 mt-[5%]"
+            className="text-[#002749] font-semibold *: md:text-xl flex justify-center items-center gap-2.5 rounded border p-2 border-solid border-[#B2B2B2] mb-3 mt-[5%] text-nowrap "
           >
             Already have an Account ?{" "}
-            <span className="md:text-xl  text-[#002749] text-xl not-italic font-semibold">
+            <span className="md:text-xl  text-[#0C7ACA]  not-italic font-semibold text-nowrap">
               Log In
             </span>
           </Link>
@@ -466,7 +472,7 @@ function Agent() {
           )}
           <Link
             href={{ pathname: queryParam.rediectPath }}
-            className="text-center md:text-xl not-italic text-[#0C7ACA] text-xl   font-semibold leading-[normal] underline "
+            className=" md:text-xl not-italic text-[#148B16] !text-18px   leading-[normal] b sm:!text-[16px] sm:font-[400] border rounded-sm p-2 border-solid border-[#148B16]"
           >
             Continue without Register
           </Link>

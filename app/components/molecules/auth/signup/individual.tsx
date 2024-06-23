@@ -83,7 +83,7 @@ function Individual() {
         <Success />
       ) : (
         <>
-          <Box className="w-full max-w-[423px] mt-[3%] " mx="auto">
+          <Box className="w-full max-w-[423px] m-1 mt-[3%] " mx="auto">
             <div className=" sm:max-w-[459px] md:max-w-[597px] flex justify-center items-center gap-[15%] mb-[5%] ">
               <LoginSignupTabs
                 searchParams={queryParam.query}
@@ -128,6 +128,7 @@ function Individual() {
                   root: StepCss.inputRoot,
                   input: StepCss.textInput,
                   error: StepCss.errorMsg,
+                  label:StepCss.mlabelCss
                 }}
               />
               <TextInput
@@ -143,6 +144,7 @@ function Individual() {
                   root: StepCss.inputRoot,
                   input: StepCss.textInput,
                   error: StepCss.errorMsg,
+                  label:StepCss.mlabelCss
                 }}
                 mb={"3%"}
               />
@@ -154,6 +156,7 @@ function Individual() {
                   input: StepCss.textInput,
                   innerInput: StepCss.textInput,
                   error: StepCss.errorMsg,
+                  label:StepCss.mlabelCss
                 }}
                 required
                 size="lg"
@@ -168,7 +171,7 @@ function Individual() {
               />
               <NumberInput
                 leftSection={
-                  <span className="text-[#212c33] font-medium">+91</span>
+                  <span className="text-[#212c33] font-medium text-[16px]">+91</span>
                 }
                 mt={"xs"}
                 required
@@ -176,6 +179,7 @@ function Individual() {
                   root: StepCss.inputRoot,
                   input: S.classForContact,
                   error: StepCss.errorMsg,
+                  label:StepCss.mlabelCss
                 }}
                 hideControls
                 size="lg"
@@ -184,7 +188,7 @@ function Individual() {
                   status === "error" && "!mb-[2px]"
                 )}
                 label="Contact Number"
-                placeholder="Enter your contact number"
+                placeholder="Enter your contact no:"
                 {...form.getInputProps("mobile")}
                 error={form.errors.mobile || status === "error"}
                 onChange={(e) => {
@@ -253,10 +257,10 @@ function Individual() {
 
               <Link
                 href={{ pathname: "/login", search: queryParam.query }}
-                className="text-[#282828] md:text-xl flex justify-center items-center gap-2.5 rounded border p-2 border-solid border-[#B2B2B2] mb-3 mt-[5%]"
+                className="text-[#002749] font-semibold *: md:text-xl flex justify-center items-center gap-2.5 rounded border p-2 border-solid border-[#B2B2B2] mb-3 mt-[5%] text-nowrap "
               >
                 Already have an Account ?{" "}
-                <span className="md:text-xl  text-[#002749] text-xl not-italic font-semibold">
+                <span className="md:text-xl  text-[#0C7ACA]  not-italic font-semibold text-nowrap">
                   Log In
                 </span>
               </Link>
@@ -274,7 +278,7 @@ function Individual() {
 
               <Link
                 href={{ pathname: queryParam.rediectPath }}
-                className="text-center md:text-xl not-italic text-[#0C7ACA] text-xl   font-semibold leading-[normal] underline "
+                className=" md:text-xl not-italic text-[#148B16] !text-18px   leading-[normal] b sm:!text-[16px] sm:font-[400] border rounded-sm p-2 border-solid border-[#148B16] text-center"
               >
                 Continue without Register
               </Link>

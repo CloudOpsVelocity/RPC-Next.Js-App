@@ -6,7 +6,7 @@ import LoginSignupTabs from "../Components/LoginSignup";
 export default function Page({ searchParams }: any) {
   return (
     <div className="w-full  p-[10%] md:p-[2%]">
-      <div className="w-full flex justify-center items-center gap-[5%] mb-[5%] ">
+      <div className="w-full flex justify-center items-center gap-[5%] mb-[5%]">
         <LoginSignupTabs searchParams={searchParams} state="login" />
         {/* <Link
           href={{

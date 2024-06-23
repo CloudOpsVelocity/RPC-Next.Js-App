@@ -22,8 +22,9 @@ function AuthPopup({ opened, open, close, userName, callback, mobile }: props) {
         transitionProps={{ transition: "fade", duration: 200 }}
         zIndex={1000}
         maw={"max-content"}
-        size={isMobile ? "90%" : "60%"}
-        className=" w-[90%] md:w-[70%] lg:w-[60%]  "
+        centered
+        size={isMobile ? "90%" : "40%"}
+        className=" w-[90%] md:w-[70%] lg:w-[40%] h-auto "
       >
         <OtpBox
           callback={callback}

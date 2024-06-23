@@ -40,7 +40,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       </div>
       <div className="flex justify-center items-start w-full pt-[10%] md:pt-[5.5%]">
         <div className="w-full bg-white text-gray-600 justify-center items-center ">
-          <Logo styles="w-full flex justify-center items-center " />
+          <Logo styles="w-full flex justify-center items-center" />
 
           {children}
           <div className="relative">
