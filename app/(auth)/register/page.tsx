@@ -36,7 +36,7 @@ export default function Page({ searchParams }: any) {
         <h1 className="md:text-[32px] mt-6 text-[20px] font-[600] font-Playball text-[#333]">
           Welcome !
         </h1>
-        <p className="!text-[18px] font-[400] font-Playball text-[#282828] sm:!text-[18px]">
+        <p className="!text-[13px] font-[600] font-Playball text-[#767270] sm:!text-[18px]">
           New user, Select how you want to sign up as
         </p>
         <div className="w-full flex justify-between items-center mt-[4%]">

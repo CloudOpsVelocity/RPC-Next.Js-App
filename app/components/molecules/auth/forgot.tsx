@@ -92,7 +92,7 @@ function ForgotForm() {
             </h2>
           </div> */}
           <h2
-            className={`whitespace-nowrap text-2xl font-bold text-[#148B16] text-center mt-3`}
+            className={`whitespace-nowrap text-2xl font-bold text-[#148B16] text-center mt-1`}
           >
             Forgot Password ?
           </h2>
@@ -102,7 +102,7 @@ function ForgotForm() {
             width={200}
             height={200}
           />
-          <h3 className="font-normal text-lg max-w-xl text-center">
+          <h3 className="font-normal text-[16px] xl:text-lg max-w-xl text-center">
             Don’t worry ! It happens. Please enter the phone number we will send
             the OTP in this phone number.
           </h3>
@@ -119,7 +119,7 @@ function ForgotForm() {
             mt="sm"
             className="w-[100%] mb-[3%] rounded-[8px] bg-transparent "
             label=""
-            placeholder="Enter Registerd Mobile Number..."
+            placeholder="Enter Mobile Number"
             {...form.getInputProps("mobile")}
             maxLength={10}
             allowDecimal={false}
@@ -188,7 +188,7 @@ const validationSchema = yup.object().shape({
   confirmPassword: yup
     .string()
     .oneOf([yup.ref("password")], "Password not matched")
-    .required("Re- enter password is required"),
+    .required("Re- enter New password is required"),
 });
 const Form = ({ status, setStatus }: any) => {
   const router = useRouter();
@@ -233,7 +233,7 @@ const Form = ({ status, setStatus }: any) => {
         className="w-[100%] flex justify-center items-center flex-col "
       >
         <h2
-          className={`whitespace-nowrap text-2xl font-bold text-[#148B16] text-center mt-3 mb-10`}
+          className={`whitespace-nowrap text-2xl font-bold text-[#148B16] text-center mt-1 mb-10`}
         >
           Reset Password
         </h2>
@@ -285,7 +285,7 @@ const Form = ({ status, setStatus }: any) => {
         <Button
           type="submit"
           size={isMobile ? "compact-xs" : "md"}
-          className="!w-[100%] !h-[57px] mt-[4%] !bg-[#0c7aca] rounded-[6px] text-[20px]"
+          className="!w-[100%] !text-[18px]  !h-[57px] mt-[4%] !bg-[#0c7aca] rounded-[6px] xl:text-[20px]"
         >
           Update Password
         </Button>

@@ -1,7 +1,7 @@
 export const data = [
   {
     src: "/indi.png",
-    name: "As Individual",
+    name: "Individual",
     href: "/register/individual",
   },
   {

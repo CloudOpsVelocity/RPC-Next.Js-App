@@ -141,3 +141,10 @@
     margin-top: 28px !important;
   } */
 }
+
+
+@media (max-width: 640px) {
+  .classForContact::placeholder {
+     font-size: 15px;
+   }
+ }

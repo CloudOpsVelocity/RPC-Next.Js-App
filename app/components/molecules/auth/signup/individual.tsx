@@ -188,7 +188,7 @@ function Individual() {
                   status === "error" && "!mb-[2px]"
                 )}
                 label="Contact Number"
-                placeholder="Enter your contact no:"
+                placeholder="Enter Your Contact Number"
                 {...form.getInputProps("mobile")}
                 error={form.errors.mobile || status === "error"}
                 onChange={(e) => {
@@ -212,8 +212,8 @@ function Individual() {
                 }}
               />
               {status === "error" && (
-                <p className=" text-right text-[color:var(--Mandatory,#F00)] text-[15px] italic font-medium leading-[normal]">
-                  Account already exists. Kindly use{" "}
+                <p className=" text-right text-[color:var(--Mandatory,#F00)] text-[12px] xl:text-[15px] italic font-medium leading-[normal]">
+                  dy exists. Kindly use{" "}
                   <Link
                     href={{ pathname: "/login", search: queryParam.query }}
                     className="text-[#0073C6] text-[15px] italic font-bold leading-[normal] underline"
@@ -261,7 +261,7 @@ function Individual() {
               >
                 Already have an Account ?{" "}
                 <span className="md:text-xl  text-[#0C7ACA]  not-italic font-semibold text-nowrap">
-                  Log In
+                  LogIn
                 </span>
               </Link>
               {status === "error" && (
@@ -278,7 +278,7 @@ function Individual() {
 
               <Link
                 href={{ pathname: queryParam.rediectPath }}
-                className=" md:text-xl not-italic text-[#148B16] !text-18px   leading-[normal] b sm:!text-[16px] sm:font-[400] border rounded-sm p-2 border-solid border-[#148B16] text-center"
+                className=" md:text-xl not-italic text-[#148B16] !text-18px font-semibold   leading-[normal] b sm:!text-[16px] sm:font-[400] border rounded-sm p-2 border-solid border-[#148B16] text-center"
               >
                 Continue without Register
               </Link>

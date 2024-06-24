@@ -59,34 +59,34 @@ export default function ReqOtpForm({
       <form
         onSubmit={form.onSubmit((values) => onSubmit(values.otp))}
         ref={ref}
-        className="w-[100%]  flex justify-start items-start flex-col "
+        className="w-[100%] h-full  flex justify-start items-start flex-col "
       >
         {" "}
-        <h2 className="text-[#202020] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px] mb-3">
+        <h2 className="text-[#202020] text-[20px] xl:text-[24px] xl:text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px] mb-3">
           Request A Callback
         </h2>
-        <p className="text-[#242424] text-[20px] italic font-bold leading-[normal] tracking-[0.36px] capitalize mb-[2%] mt-1">
+        <p className="text-[#00487C] text-[16px] xl:text-[20px] italic font-bold leading-[normal] tracking-[0.36px] capitalize mb-[2%] mt-1">
           <span className="text-[#4D6677]  italic font-medium leading-[normal] tracking-[0.36px] ">
             Call For
           </span>{" "}
           : {title}
         </p>
-        <p className="text-[#148B16] text-[20px] italic font-bold leading-[normal] tracking-[0.64px] mb-[2%] ">
-          <span className="text-[#4D6677] text-[20px] italic font-medium leading-[normal] tracking-[0.36px]">
+        <p className="text-[#148B16]  text-[16px] xl:text-[20px] italic font-bold leading-[normal] tracking-[0.64px] mb-[2%] ">
+          <span className="text-[#4D6677]  italic font-medium leading-[normal] tracking-[0.36px]">
             {Posted_BY}
           </span>{" "}
           : {builderName}
         </p>
-        <p className="text-[#EA7A00] text-base not-italic font-semibold leading-[normal] tracking-[0.64px] py-1">
+        <p className="text-[#EA7A00] text-[16px] xl:text-base not-italic font-semibold leading-[normal] tracking-[0.64px] py-1">
           You are one step away to get callback.
         </p>
-        <p className="text-[#4D6677] text-base not-italic font-semibold leading-[normal] tracking-[0.64px] mb-[2%] ">
+        <p className="text-[#4D6677] text-[14px] xl:text-base not-italic font-semibold leading-[normal] tracking-[0.64px] mb-[2%] ">
           Please verify your contact !
         </p>
-        <p className="text-[#4D6677] text-base not-italic font-semibold leading-[normal] tracking-[0.64px] mt-2">
+        <p className="text-[#242424] text-[16px] xl:text-base not-italic font-semibold leading-[normal] tracking-[0.64px] mt-2">
           An OTP has been sent to your mobile number
         </p>
-        <p className="text-[#333] text-xl not-italic font-semibold leading-[normal] tracking-[0.8px] mt-4">
+        <p className="text-[#333] text-[20px] xl:text-xl not-italic font-semibold leading-[normal] tracking-[0.8px] mt-3">
           Enter OTP
         </p>
         {/* <h1 className="text-[#333] font-[600] text-lg md:text-[24px] text-center ">
@@ -102,7 +102,7 @@ export default function ReqOtpForm({
           </p>
         )}
         {form.errors.otp && (
-          <p className="text-[#F00] font-[500] text-[14px] w-[100%] !max-w-[423px] mt-2 ">
+          <p className="text-[#F00] font-[500]  xl:text-[14px] w-[100%] !max-w-[423px] mt-2 ">
             {form.errors.otp}
           </p>
         )}

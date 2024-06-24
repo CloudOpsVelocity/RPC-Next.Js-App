@@ -447,7 +447,7 @@ function Builder() {
                 status === "error" && "!mb-[2px]"
               )}
               label="Contact Number"
-              placeholder="Enter your contact no:"
+              placeholder="Enter Your Contact Number"
               {...form.getInputProps("mobile")}
               error={form.errors.mobile || status === "error"}
               onChange={(e) => {
@@ -472,7 +472,7 @@ function Builder() {
               }}
             />
             {status === "error" && (
-              <p className=" text-right text-[color:var(--Mandatory,#F00)] text-[15px] italic font-medium leading-[normal]">
+              <p className=" text-right text-[color:var(--Mandatory,#F00)] text-[12px] xl:text-[15px] italic font-medium leading-[normal]">
                 Account already exists. Kindly use{" "}
                 <Link
                   href={{ pathname: "/login", search: queryParam.query }}
@@ -542,7 +542,8 @@ function Builder() {
                 input: StepCss.textInput,
                 error: StepCss.errorMsg,
                 dropdown: StepCss.dropdown,
-                label: StepCss.mlabelCss,
+                label:StepCss.mlabelCss,
+                option:StepCss.optionCss
               }}
               withScrollArea={false}
             />
@@ -563,7 +564,8 @@ function Builder() {
                   input: StepCss.cityPincodeCust,
                   error: StepCss.errorMsg,
                   dropdown: StepCss.dropdown,
-                  label: StepCss.mlabelCss,
+                  label:StepCss.mlabelCss,
+                  option:StepCss.optionCss
                 }}
                 withScrollArea={false}
               />
@@ -577,7 +579,7 @@ function Builder() {
                 {...form.getInputProps("pincode")}
                 classNames={{
                   root: StepCss.inputRoot,
-                  input: StepCss.cityPincodeCust,
+                  input: StepCss.textInput,
                   error: StepCss.errorMsg,
                   label: StepCss.mlabelCss,
                 }}
@@ -611,7 +613,7 @@ function Builder() {
               stepIcon: active > 2 ? StepCss.stepIconActive : StepCss.stepIcon,
             }}
           >
-            <ScrollArea h={420} pr={10} viewportRef={viewport} offsetScrollbars>
+            <ScrollArea h={420}  viewportRef={viewport} offsetScrollbars>
               <TextInput
                 id="companyName"
                 required
@@ -654,7 +656,8 @@ function Builder() {
                   inputField: StepCss.textInput,
                   error: StepCss.errorMsg,
                   dropdown: StepCss.dropdown,
-                  label: StepCss.mlabelCss,
+                  label:StepCss.mlabelCss,
+                  option:StepCss.optionCss
                 }}
                 data={isLoadingBrach ? [] : cityParser(brachData) || []}
                 {...form.getInputProps("branch")}
@@ -681,7 +684,8 @@ function Builder() {
                   root: StepCss.inputRoot,
                   input: StepCss.textInput,
                   error: StepCss.errorMsg,
-                  label: StepCss.mlabelCss,
+                  label:StepCss.mlabelCss,
+                  calendarHeader:StepCss.calendComStDt
                 }}
               />
               <TextInput
@@ -779,6 +783,7 @@ function Builder() {
               placeholder="Enter your company vision that you are going to provide buyers."
               label="Company Vision"
               autosize
+              mt="md"
               minRows={5}
               maxRows={5}
               maxLength={5001}
@@ -793,8 +798,8 @@ function Builder() {
                 handleTrimAndReplace(e, "vission", form);
               }}
             />
-            <Text size="sm" ta={"right"}>
-              maximum 5000 characters
+            <Text size="sm" mt="xs" ta={"right"}>
+              Maximum 5000 Characters
             </Text>
             <Textarea
               size="lg"
@@ -817,8 +822,8 @@ function Builder() {
                 handleTrimAndReplace(e, "mission", form);
               }}
             />{" "}
-            <Text size="sm" ta={"right"} mb={"lg"}>
-              maximum 5000 characters
+            <Text size="sm" mt="xs" ta={"right"} mb={"lg"}>
+              Maximum 5000 Characters
             </Text>
           </Stepper.Step>
 
@@ -871,7 +876,7 @@ function Builder() {
           >
             Already have an Account ?{" "}
             <span className="md:text-xl  text-[#0C7ACA]  not-italic font-semibold text-nowrap">
-              Log In
+            LogIn
             </span>
           </Link>
           {status === "error" && (
@@ -887,7 +892,7 @@ function Builder() {
           )}
           <Link
             href={{ pathname: queryParam.rediectPath }}
-            className=" md:text-xl not-italic text-[#148B16] !text-18px   leading-[normal] b sm:!text-[16px] sm:font-[400] border rounded-sm p-2 border-solid border-[#148B16]"
+           className=" md:text-xl not-italic text-[#148B16] !text-18px font-semibold   leading-[normal] b sm:!text-[16px] sm:font-[400] border rounded-sm p-2 border-solid border-[#148B16]"
           >
             Continue without Register
           </Link>

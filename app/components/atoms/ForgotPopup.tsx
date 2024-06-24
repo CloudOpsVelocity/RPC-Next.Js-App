@@ -33,6 +33,7 @@ function ForgotAuthPopup({
         zIndex={1000}
         maw={"max-content"}
         size={isMobile ? "90%" : "40%"}
+        centered
       >
         {/* {JSON.stringify(session)} */}
         {/* <Form /> */}

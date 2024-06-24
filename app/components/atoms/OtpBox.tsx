@@ -48,7 +48,7 @@ export default function OtpBox({ userName, close, callback, mobile }: Props) {
         onSubmit={form.onSubmit(onSubmit)}
         className="w-[100%] h-[100%] flex justify-start mt-[4%] items-start sm:items-center md:items-center lg:items-center xl:items-center  flex-col text-center "
       >
-        <h1 className="text-[#545353] text-xl sm:text-2x xl:text-2x lg:text-2x xl:text-2x mb-6 not-italic font-semibold leading-[normal] text-center  ">
+        <h1 className="text-[#545353] text-[18px] sm:text-2x xl:text-2x lg:text-2x xl:text-2x mb-6 not-italic font-semibold leading-[normal] text-center  ">
           Please enter your OTP to verify your account
         </h1>
         <p className="text-[#7D7D7D] text-[16px] sm:text-xl not-italic font-medium leading-[normal] mb-[3%] text-center   ">
@@ -77,12 +77,12 @@ export default function OtpBox({ userName, close, callback, mobile }: Props) {
         </div>
 
         {error && (
-          <p className="text-[#F00] font-[500] text-[16px] w-[100%] !max-w-[423px] !mb-[6%] text-center ">
+          <p className="text-[#F00] font-[500] text-[13px] xl:text-[16px] w-[100%] !max-w-[423px] !mb-[6%] text-center ">
             You&apos;ve entered wrong OTP, Please enter your OTP again!
           </p>
         )}
         {form.errors.otp && (
-          <p className="text-[#F00] font-[500] text-[16px] w-[100%] !max-w-[423px] !mb-[6%] text-center ">
+          <p className="text-[#F00] font-[500] text-[13px] xl:text-[16px] w-[100%] !max-w-[423px] !mb-[6%] text-center ">
             {form.errors.otp}
           </p>
         )}

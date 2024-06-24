@@ -62,12 +62,13 @@ function Login({ params }: any) {
             root: StepCss.inputRoot,
             input: StepCss.textInput,
             error: StepCss.errorMsg,
+            label:StepCss.custlabelOfNum,
           }}
           hideControls
           size="lg"
-          className="w-[100%] mb-[3%] "
+          className="w-[100%]  mb-[3%] "
           label="Mobile Number"
-          placeholder="Enter Your Registered Mobile Number"
+          placeholder="Enter Your Mobile Number"
           {...form.getInputProps("username")}
           maxLength={10}
           allowDecimal={false}
@@ -84,6 +85,7 @@ function Login({ params }: any) {
             root: StepCss.inputRoot,
             error: StepCss.errorMsg,
             innerInput: StepCss.textInput,
+            label:StepCss.custlabelOfNum,
           }}
           required
           size="lg"
@@ -100,7 +102,7 @@ function Login({ params }: any) {
 
         <Link
           href={{ pathname: "/forgot", search: getQueryParam(params) }}
-          className="text-[#0C7ACA] text-sm not-italic font-semibold  w-full cursor-pointer "
+          className="text-[#0C7ACA] text-sm not-italic font-semibold mb-[2%]  w-full cursor-pointer "
         >
           Forgot Password ?
         </Link>
@@ -125,7 +127,7 @@ function Login({ params }: any) {
           </Link>
           <Link
             href={{ pathname: getCallPathServer(params) }}
-            className=" md:text-xl not-italic text-[#148B16] !text-18px   leading-[normal] b sm:!text-[16px] sm:font-[400] border rounded-sm p-2 border-solid border-[#148B16]"
+            className=" md:text-xl not-italic text-[#148B16] font-semibold !text-18px   leading-[normal] b sm:!text-[16px] sm:font-[400] border rounded-sm p-2 border-solid border-[#148B16]"
           >
             Continue without login
           </Link>

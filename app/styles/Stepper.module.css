@@ -177,6 +177,23 @@
 @media (max-width: 640px) {
 
 
+  .pill{
+    font-size: 13px;
+  }
+  .optionCss{
+    font-size: 16px;
+  }
+  .calendComStDt{
+    margin:18%;
+    max-width: 80%;
+  }
+  .custlabelOfNum{
+    font-weight: 600;
+  }
+  .errorMsg{
+    font-size: 12px
+  }
+  
   .input::placeholder{
     font-size: 8px;
   }
@@ -191,12 +208,10 @@
   .mlabelCss{
     font-size: 16px;
   }
-  .textInput::placeholder {
+  .textInput::placeholder, .NumberInput::placeholder {
     font-size: 15px;
   }
-  .NumberInput::placeholder{
-    font-size: 15px !important;
-  }
+ 
   .mangingDrCust::placeholder{
     font-size: 15px;
   }
@@ -217,6 +232,10 @@
     right: -15px !important;
   }
 
+  .textInput{
+    font-size: 14px;
+  
+  }
   /* .content{
     margin-top: 28px !important;
   } */
