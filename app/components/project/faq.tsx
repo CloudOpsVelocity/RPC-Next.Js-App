@@ -34,11 +34,11 @@ export default function FaqWithBg({ data, projName }: FaqWithBgProps) {
       className={data?.length > 0 ? classes.wrapper : "w-[90%] m-auto"}
       id="faq"
     >
-      <div className="flex justify-center items-center w-full ">
+      <div className="flex sm:justify-center items-center w-full ">
         {data?.length > 0 && (
           <>
             <div className="relative mr-[-70px] bottom-[20px] w-[168px] h-[74px] rounded-[50%] blur-[29.5px] bg-[#0093ff4d] "></div>
-            <h1 className="text-[24px] lg:text-[32px] font-[600] text-[#001F35] mb-16">
+            <h1 className="text-h2 lg:text-[32px] font-[600] text-[#001F35] mb-8 sm:mb-16">
               Frequently Asked Questions of
               <span className="text-[#148B16] font-[700]  ml-4">
                 {projName}
@@ -194,11 +194,11 @@ const FaqCard = ({
 }) => {
   return (
     <div>
-      <h4 className=" text-[#242424] text-[28px] not-italic font-bold leading-[normal] mb-4 capitalize">
+      <h4 className=" text-[#242424] sm:text-[28px] not-italic font-medium sm:font-bold leading-[normal] mb-4 capitalize">
         {faqQuestion}
       </h4>
       <FaqReadMore text={faqAnswer} title={faqQuestion} />
-      {!last && <hr className="bg-[#00000080] my-[59px] h-[2px]" />}
+      {!last && <hr className="bg-[#00000080] my-4 sm:my-[59px] h-[2px]" />}
     </div>
   );
 };

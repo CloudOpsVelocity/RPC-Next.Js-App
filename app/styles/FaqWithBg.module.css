@@ -113,4 +113,7 @@
   .content {
     font-size: 18px;
   }
+  .wrapper {
+    padding-top: 6px;
+  }
 }

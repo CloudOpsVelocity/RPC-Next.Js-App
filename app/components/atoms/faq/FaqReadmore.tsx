@@ -31,12 +31,12 @@ const FaqReadMore: React.FC<ReadMoreProps> = ({
 
   return (
     <div className="w-[90%]">
-      <p className="text-[#303A42] text-[28px] not-italic font-normal leading-9">
+      <p className="text-[#303A42] text-[14px] sm:text-[28px] not-italic font-normal sm:leading-9">
         {`${getClampedText}${!isReadMore && "..."}`}
 
         {showReadMoreButton && shouldShowReadMore && (
           <span
-            className="text-[#0073C6] text-[28px] not-italic font-semibold cursor-pointer"
+            className="text-[#0073C6] text-[14px] sm:text-[28px] not-italic font-semibold cursor-pointer"
             onClick={handleReadMoreClick}
             role="button" // Add role for accessibility
             tabIndex={0} // Add tabIndex for accessibility
