@@ -13728,7 +13728,7 @@ export const PinIcon = () => {
   );
 };
 
-export const NextDarkButton = () => {
+export const NextDarkButton = ({ className }: { className?: string }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -13736,6 +13736,7 @@ export const NextDarkButton = () => {
       height="36"
       viewBox="0 0 35 36"
       fill="none"
+      className={className}
     >
       <circle cx="17.5" cy="18" r="17.5" fill="#A5A5A5" />
       <path
@@ -13746,7 +13747,7 @@ export const NextDarkButton = () => {
     </svg>
   );
 };
-export const PrevDarkButton = () => {
+export const PrevDarkButton = ({ className }: { className?: string }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -13754,6 +13755,7 @@ export const PrevDarkButton = () => {
       height="36"
       viewBox="0 0 35 36"
       fill="none"
+      className={className}
     >
       <circle
         cx="17.5"

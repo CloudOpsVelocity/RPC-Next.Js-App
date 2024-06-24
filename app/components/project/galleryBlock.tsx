@@ -19,7 +19,6 @@ export default function GalleryBlock({
   videoUrl,
   type = "proj",
 }: Media) {
-  console.log(videoUrl);
   const images = getImageUrls(media);
   const [selectedMedia, setSelectedMedia] = useState<string | null>(images[0]);
   const videos = [walkThrowVideoUrl, projectVideoIUrl, media.videoUrl].filter(
@@ -112,7 +111,7 @@ export default function GalleryBlock({
           </div>
           {videos && videos.length > 0 && (
             <>
-              <h3 className="text-[#737579] font-[600] text-[20px] lg:text-[24px] mb-[2%] ">
+              <h3 className="text-[#737579] font-[600] text-[20px] lg:text-[24px] mb-4 sm:mb-[2%] ">
                 Videos
               </h3>
               <div className="flex justify-start items-start w-full gap-[4%] flex-wrap ">
