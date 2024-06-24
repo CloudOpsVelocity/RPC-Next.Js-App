@@ -252,7 +252,7 @@ function Agent() {
                 root: StepCss.inputRoot,
                 input: StepCss.textInput,
                 error: StepCss.errorMsg,
-                label:StepCss.mlabelCss
+                label: StepCss.mlabelCss,
               }}
             />
             <TextInput
@@ -267,7 +267,7 @@ function Agent() {
                 root: StepCss.inputRoot,
                 input: StepCss.textInput,
                 error: StepCss.errorMsg,
-                label:StepCss.mlabelCss
+                label: StepCss.mlabelCss,
               }}
             />
             <PasswordInput
@@ -278,7 +278,7 @@ function Agent() {
                 innerInput: StepCss.textInput,
                 input: StepCss.textInput,
                 error: StepCss.errorMsg,
-                label:StepCss.mlabelCss
+                label: StepCss.mlabelCss,
               }}
               size="lg"
               mt={"xs"}
@@ -303,7 +303,7 @@ function Agent() {
                 status === "error" && "!mb-[2px]"
               )}
               label="Contact Number"
-              placeholder="Enter your contact number"
+              placeholder="Enter your contact no:"
               {...form.getInputProps("mobile")}
               error={form.errors.mobile || status === "error"}
               onChange={(e) => {
@@ -316,7 +316,7 @@ function Agent() {
                 root: StepCss.inputRoot,
                 input: N.classForContact,
                 error: StepCss.errorMsg,
-                label:StepCss.mlabelCss
+                label: StepCss.mlabelCss,
               }}
               maxLength={10}
               allowDecimal={false}
@@ -377,7 +377,7 @@ function Agent() {
                 root: StepCss.inputRoot,
                 input: StepCss.textInput,
                 error: StepCss.errorMsg,
-                label:StepCss.mlabelCss
+                label: StepCss.mlabelCss,
               }}
               onBlurCapture={(e) => handleTrimAndReplace(e, "address", form)}
               data-autofocus
@@ -393,7 +393,7 @@ function Agent() {
                 root: StepCss.inputRoot,
                 input: StepCss.textInput,
                 error: StepCss.errorMsg,
-                label:StepCss.mlabelCss
+                label: StepCss.mlabelCss,
               }}
               onBlurCapture={(e) =>
                 handleTrimAndReplace(e, "companyName", form)
