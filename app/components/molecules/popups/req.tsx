@@ -56,7 +56,7 @@ const RequestCallBackModal = ({
         onClose={handleClose}
         centered
         size={isMobile ? "100%" : status !== "success" ? "65%" : "auto"}
-        className="!rounded-full w-[90%]  md:w-[70%] lg:w-[65%] !p-0 "
+        className="rounded-lg w-[90%]  md:w-[70%] lg:w-[65%] !p-0 "
         classNames={
           status === "success"
             ? {
@@ -81,12 +81,12 @@ const RequestCallBackModal = ({
           <div
             className={clsx(
               "bg-white relative rounded-lg  w-full overflow-hidden flex ",
-              status !== "success" && "min-h-[534px]"
+              status !== "success" && "min-h-[]"
             )}
           >
             <Close
               close={handleClose}
-              className="absolute right-0 z-10 m-[2%] cursor-pointer "
+              className="absolute h-[28px] w-[28px] right-0 z-10 m-[2%] cursor-pointer "
             />
 
             {status === "success" ? (
@@ -94,10 +94,10 @@ const RequestCallBackModal = ({
             ) : (
               <>
                 <div
-                  className={`w-[100%] md:w-[50%] px-[5%] pb-[5%] pt-[3%] pr-[1%] `}
+                  className={`w-[100%] md:w-[50%] px-[3%] py-[3%]`}
                 >
                   {status === "idle" && (
-                    <h2 className="text-[20px] lg:text-[24px] font-[600] text-[#202020] ">
+                    <h2 className="text-[20px]  lg:text-[24px] font-[600] text-[#202020]  ">
                       Request Callback
                     </h2>
                   )}
@@ -228,8 +228,8 @@ const LoggedInUserForm = ({
     />
   ) : (
     <div className="mt-6 w-full">
-      <p className=" mb-[8px] text-[14px] lg:text-[20px] text-[#242424] text-xl italic font-bold leading-[normal] tracking-[0.8px]">
-        <span className="text-[#4D6677] text-xl italic font-medium leading-[normal] tracking-[0.8px]">
+      <p className=" mb-[8px] text-[14px] lg:text-[20px] text-[#00487c] text-xl italic font-bold leading-[normal] tracking-[0.8px]">
+        <span className="text-[#4D6677] text-[18px] xl:text-xl italic font-medium leading-[normal] tracking-[0.8px]">
           {" "}
           Call For:
         </span>{" "}
@@ -263,7 +263,7 @@ const LoggedInUserForm = ({
         onClick={onSubmit}
         type="submit"
         mt={"md"}
-        className="!bg-[#0073C6] text-xl p-2"
+        className="!bg-[#0073C6]  text-xl p-2"
         size="md"
       >
         Request Callback
@@ -332,8 +332,8 @@ const ReqForm = ({
       Posted_BY={Posted_BY}
     />
   ) : (
-    <form className="w-full max-w-[500px]" onSubmit={form.onSubmit(formSubmit)}>
-      <p className="text-[#242424] text-lg italic font-bold leading-[normal] tracking-[0.36px] capitalize mb-[2%] mt-1">
+    <form className="w-full max-w-[500px] " onSubmit={form.onSubmit(formSubmit)}>
+      <p className=" text-[#00487c]  xl:text-lg italic font-bold leading-[normal] tracking-[0.36px] capitalize mb-[2%] mt-1">
         <span className="text-[#4D6677] text-lg italic font-medium leading-[normal] tracking-[0.36px] ">
           Call For
         </span>{" "}
@@ -345,14 +345,14 @@ const ReqForm = ({
         </span>{" "}
         : {bn}
       </p>
-      <p className="text-[#EA7A00] text-base not-italic font-semibold leading-[normal] tracking-[0.64px] mb-[1%] ">
+      <p className="text-[#EA7A00] text-[16px] xl:text-base not-italic font-semibold leading-[normal] tracking-[0.64px] mb-[1%] ">
         Looks like you are not registered with us.
       </p>
-      <p className="text-[#4D6677] text-sm not-italic font-semibold leading-[normal] tracking-[0.56px] mb-[2%] ">
+      <p className="text-[#4D6677] text-[14px] xl:text-sm not-italic font-semibold leading-[normal] tracking-[0.56px] mb-[2%] ">
         No worries add your details to get callback from builder
       </p>
 
-      <h2 className="text-[#001F35] text-xl not-italic font-bold mb-[1.5%]">
+      <h2 className="text-[#00487C] text-[18px] font-semibold xl:text-xl not-italic xl:font-bold mb-[1.5%]">
         Your Details
       </h2>
       <div className="flex flex-col max-w-sm">
@@ -422,7 +422,7 @@ const ReqForm = ({
         className="!bg-[#0073C6]"
         type="submit"
         color="#0073C6"
-        leftSection={<Phone />}
+        /* leftSection={<Phone />} */
         mt={"md"}
         loading={status === "pending"}
       >

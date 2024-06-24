@@ -98,3 +98,10 @@
   line-height: normal;
   letter-spacing: 0.56px;
 }
+
+
+@media (max-width: 640px) {
+  .classForContact::placeholder {
+     font-size: 15px;
+   }
+ }

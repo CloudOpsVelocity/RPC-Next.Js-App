@@ -51,7 +51,7 @@ export default function ForgotOtpBox({
     <Box maw={551} mx="auto">
       <form
         onSubmit={form.onSubmit(onSubmit)}
-        className="w-[100%] h-[70vh] flex justify-center items-center flex-col "
+        className="w-[100%] h-full flex justify-center items-center flex-col "
       >
         <h1 className="text-[#333] font-[600] text-lg md:text-[24px] text-center ">
           OTP VERIFICATION
@@ -80,12 +80,12 @@ export default function ForgotOtpBox({
         <Resend userName={mobile} />
 
         {error && (
-          <p className="text-[#F00] font-[500] text-[16px] w-[100%] !max-w-[423px] !mb-[6%] text-center ">
+          <p className="text-[#F00] font-[500] text-[13px] xl:text-[16px] w-[100%] !max-w-[423px] !mb-[6%] text-center ">
             You&apos;ve entered wrong OTP, Please enter your OTP again!
           </p>
         )}
         {form.errors.otp && (
-          <p className="text-[#F00] font-[500] text-[16px] w-[100%] !max-w-[423px] !mb-[6%] text-center ">
+          <p className="text-[#F00] font-[500] text-[13px] xl:text-[16px] w-[100%] !max-w-[423px] !mb-[6%] text-center ">
             {form.errors.otp}
           </p>
         )}

@@ -12,7 +12,7 @@ export default function ForgotSucess() {
         Reset Password
       </h1>
       <ForgotPass className="mt-[7%]" />
-      <p className="text-[color:var(--Grey-1,#666)] text-center text-[26px] not-italic font-medium leading-[normal] mt-10">
+      <p className="text-[color:var(--Grey-1,#666)] font-semibold text-center text-[16px] xl:text-[26px] not-italic xl:font-medium leading-[normal] mt-10 mb-10">
         Password successfully reset! Your account security is our priority.
         Remember to keep your new password safe.
       </p>
@@ -48,7 +48,7 @@ const Countdown = ({ initialCount = 5, redirectPath = "/" }) => {
             return prevTime;
           }
         });
-      }, 1000);
+      }, 100000);
     }
 
     return () => {
@@ -57,7 +57,7 @@ const Countdown = ({ initialCount = 5, redirectPath = "/" }) => {
   }, [timerRunning]);
 
   return (
-    <p className="text-[color:var(--Grey-2,#767270)] text-center text-[26px] not-italic font-medium leading-[normal] mt-4">
+    <p className="text-[color:var(--Grey-2,#767270)] text-nowrap text-[16px] xl:text-[26px] not-italic font-medium leading-[normal] mt-4">
       You will be redirected to login page in {timeRemaining.seconds} sec
     </p>
   );

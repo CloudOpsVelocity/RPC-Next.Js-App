@@ -48,7 +48,7 @@ export function DropZone(props: Partial<DropZoneProps>) {
 
           <div className="flex justify-center items-center h-full space-x-2">
             {mediaCloudIcon}
-            <div>
+            <div className=" w-[50%] Xl:w-full">
               <p className="text-black text-sm not-italic font-medium leading-[normal] hidden md:block lg:block xl:block  sm:hidden">
                 Select a file or drag and drop here
               </p>
@@ -59,8 +59,8 @@ export function DropZone(props: Partial<DropZoneProps>) {
                 JPG, PNG or JPEG, file size no more than 10MB
               </p>{" "}
             </div>
-            <Button size="xs" variant="outline">
-              Select File
+            <Button className="selectFile" size="xs" variant="outline">
+              Select
             </Button>
           </div>
           <p className="text-[color:var(--Mandatory,#F00)]  text-sm italic font-medium leading-[normal]">

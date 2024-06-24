@@ -333,7 +333,7 @@ function Agent() {
               }}
             />
             {status === "error" && (
-              <p className=" text-right text-[color:var(--Mandatory,#F00)] text-[15px] italic font-medium leading-[normal]">
+              <p className=" text-right text-[color:var(--Mandatory,#F00)] text-[12px] xl:text-[15px] italic font-medium leading-[normal]">
                 Account already exists. Kindly use{" "}
                 <Link
                   href={{ pathname: "/login", search: queryParam.query }}
@@ -452,19 +452,19 @@ function Agent() {
         <>
           <Link
             href={{ pathname: "/login", search: queryParam.query }}
-            className="text-[#002749] font-semibold *: md:text-xl flex justify-center items-center gap-2.5 rounded border p-2 border-solid border-[#B2B2B2] mb-3 mt-[5%] text-nowrap "
+            className="text-[#002749] font-semibold *: md:text-xl flex justify-center items-center gap-2.5 rounded border p-2 border-solid border-[#B2B2B2] mb-1 mt-[5%] text-nowrap "
             >
             Already have an Account ?{" "}
             <span className="md:text-xl  text-[#0C7ACA]  not-italic font-semibold text-nowrap">
-            Log In
+            LogIn
             </span>
           </Link>
-          {status === "error" && (
-            <p className="text-center text-[#556477] text-xl not-italic font-medium leading-[normal] mt-3 mb-[21px]">
-              Forget Password?{" "}
+          {true && (
+            <p className="text-center text-[#556477] font-semibold md:text-xl not-italic xl:font-medium leading-[normal] mt-3 mb-[16px]">
+              Forgot Password?{" "}
               <Link
                 href={{ pathname: "/forgot", search: queryParam.query }}
-                className="text-[color:var(--Brand-green-primary,#148B16)] text-xl not-italic font-medium leading-[normal] underline"
+                className="text-[color:var(--Brand-green-primary,#148B16)] md:text-xl not-italic font-medium leading-[normal] underline"
               >
                 Reset
               </Link>
@@ -472,7 +472,7 @@ function Agent() {
           )}
           <Link
             href={{ pathname: queryParam.rediectPath }}
-            className=" md:text-xl not-italic text-[#148B16] !text-18px   leading-[normal] b sm:!text-[16px] sm:font-[400] border rounded-sm p-2 border-solid border-[#148B16]"          >
+            className=" md:text-xl not-italic text-[#148B16] !text-18px font-semibold   leading-[normal] b sm:!text-[16px] sm:font-[400] border rounded-sm p-2 border-solid border-[#148B16]"          >
             Continue without Register
           </Link>
         </>
