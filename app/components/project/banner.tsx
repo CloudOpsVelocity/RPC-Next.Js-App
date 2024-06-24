@@ -32,7 +32,7 @@ export default function Banner({
   };
 
   return (
-    <div className="bg-[#f0f9ff] scroll-mt-[90px]  px-8 py-12 mx-auto mb-[5%] ">
+    <div className="bg-[#f0f9ff] scroll-mt-[90px]  px-8 py-4 sm:py-12 mx-auto mb-[5%] ">
       <Toaster position="top-right" reverseOrder={false} />
       <div className="w-[90%] m-auto flex flex-col md:flex-row justify-between items-center ">
         <div>
@@ -42,7 +42,7 @@ export default function Banner({
               {projName}
             </span>
           </h2>
-          <p className="text-black text-[16px] sm:text-2xl not-italic font-medium leading-[normal] tracking-[0.96px] mb-8">
+          <p className="text-black text-[14px] sm:text-2xl not-italic font-medium leading-[normal] tracking-[0.96px] mb-4 sm:mb-8">
             Your headline should show readers how your review can help them
             solve a problem or make a decision, offer something different or
             unexpected, and be clear and specific about what your review is
@@ -50,7 +50,7 @@ export default function Banner({
           </p>
           <button
             onClick={() => onAddingRatings()}
-            className="flex flex-col justify-center items-center gap-2.5 rounded text-white text-[24px] not-italic font-bold leading-[normal] capitalize p-2.5 bg-btnPrimary"
+            className="flex flex-col justify-center items-center gap-2.5 rounded text-white  text-[12px] sm:text-[24px] not-italic font-bold leading-[normal] capitalize p-2.5 bg-btnPrimary"
           >
             Add Ratings
           </button>

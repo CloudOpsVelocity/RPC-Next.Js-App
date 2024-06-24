@@ -40,7 +40,7 @@ export default function Specifications({
       id="specifications"
     >
       <div className="bg-white rounded-lg shadow-md overflow-hidden ">
-        <div className="flex-1 bg-gradient-to-tr from-blue-100 p-8">
+        <div className="flex-1 bg-gradient-to-tr from-blue-100 p-6 sm:p-8">
           <h2 className="text-[20px] lg:text-[32px] font-semibold mb-[12px]">
             Specifications of
             <span className="!text-[#148B16] font-bold "> {projName}</span>
@@ -51,7 +51,7 @@ export default function Specifications({
               Vital Details: Size, Features- Unveiling your dream project{" "}
             </span>
           </p>
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-2 sm:gap-4">
             {data?.map((spec, index) => {
               const isSelected = selectedSpecIndex === index;
               const specSvg = specificationsList?.get(spec?.specId)?.url;
@@ -60,7 +60,7 @@ export default function Specifications({
                 <a
                   key={index}
                   className={clsx(
-                    `px-5 py-2 text-[20px] flex gap-2 bg-[#fafafa] items-center cursor-pointer rounded-[10px] border-[0.5px] border-solid border-[#76AEFF] shadow-none text-[#233] font-[500]`,
+                    `px-2 py-1 sm:px-5 sm:py-2 text-[12px] sm:text-[20px] flex gap-2 bg-[#fafafa] items-center cursor-pointer rounded-[10px] border-[0.5px] border-solid border-[#76AEFF] shadow-none text-[#233] font-[500]`,
                     isSelected &&
                       "shadow-md !bg-[#007CC2] !text-white font-[700]"
                   )}
@@ -91,10 +91,10 @@ export default function Specifications({
                   key={index}
                   // @ts-ignore
                   id={spec.specName.toLowerCase()}
-                  className="px-[2%] mt-10 w-full items-start justify-start flex-col"
+                  className="px-[2%] mt-5 sm:mt-10 w-full items-start justify-start flex-col"
                 >
                   <span
-                    className={` flex items-center gap-2 text-[#00487C] min-w-[10%] max-w-[20%] text-[24px] italic font-[600] py-2 px-2 rounded-xl  ${
+                    className={` flex items-center gap-2 text-[#00487C] min-w-[10%] max-w-[20%] sm:text-[24px] italic font-[600] py-2 px-2 rounded-xl  ${
                       selectedSpecIndex == index
                         ? "specification"
                         : "specificationRemove"
@@ -104,7 +104,7 @@ export default function Specifications({
                     <span className="">{spec.specName}</span>
                   </span>
                   <div>
-                    <ul className="list-disc ml-8 grid gap-2 my-2 text-[#233333] text-[20px] font-[500]">
+                    <ul className="list-disc ml-8 grid gap-2 my-2 text-[#233333] text-[12px] sm:text-[20px] font-[500]">
                       {spec.values.map(
                         (value, valueIndex) =>
                           value && <li key={valueIndex}>{value}</li>

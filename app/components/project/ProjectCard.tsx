@@ -86,7 +86,7 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
           <div className=" space-y-1.5 p-6  px-4 pt-2 pb-3 justify-between items-center">
             <a
               target="_blank"
-              className="tracking-tight text-[18px] font-[600] text-[#565D70] cursor-pointer"
+              className="tracking-tight text-[18px] font-[600] text-[#242424] cursor-pointer"
               href={`/abc/karnataka/banglore/${reqId}`}
             >
               {cardData.projName}
@@ -133,7 +133,7 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
 
             <div className=" right-2 absolute ">
               <button
-                className="mt-[-30px] rounded-[10px] relative bottom-[35px] z-10 p-[8px] text-[#0073C6] text-[18px] font-[700] flex pl-[4px] justify-center items-center bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 "
+                className="mt-[-30px] rounded-[10px] relative bottom-[35px] z-10 p-[8px] text-[#0073C6] text-[12px] sm:text-[18px] font-[700] flex pl-[4px] justify-center items-center bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 "
                 onClick={(e) => {
                   e.preventDefault();
                   onAddingShortList(cardData.projIdEnc);
@@ -161,9 +161,9 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
             )}
 
             {type == "proj" && (
-              <p className="mb-[6px] text-[#565D70] text-base not-italic font-semibold leading-[normal]">
+              <p className="mb-[6px] text-[#565D70] text-[12px] sm:text-base not-italic font-semibold leading-[normal]">
                 Start - End Date:
-                <span className="ml-[4px] text-[#001F35] text-base not-italic font-semibold leading-[normal]">
+                <span className="ml-[4px] text-[#001F35] text-[12px] sm:text-basee not-italic font-semibold leading-[normal]">
                   {formatDate(cardData.launchDate)} -{" "}
                   {formatDate(cardData.possassionDate)}
                 </span>
@@ -171,7 +171,7 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
             )}
 
             {cardData.propTypes ? (
-              <p className="mb-[6px] text-[#242424] text-base not-italic font-semibold leading-[normal] tracking-[0.56px]">
+              <p className="mb-[6px] text-[#242424] text-[12px] sm:text-base not-italic font-semibold leading-[normal] tracking-[0.56px]">
                 {cardData.propTypes.map((item: any) => item.trim()).join(", ")}
               </p>
             ) : (
@@ -184,7 +184,7 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
               </p>
             )}
 
-            <p className="text-[#565D70]  not-italic font-semibold leading-[normal] tracking-[0.56px] capitalize text-[15px]">
+            <p className="text-[#565D70]  not-italic font-semibold leading-[normal] tracking-[0.56px] capitalize text-[12px] sm:text-[15px]">
               {type === "proj" &&
                 `${cardData.locality}, ${cardData?.city}, ${cardData.state},  ${cardData.pincode} `}
 
@@ -195,11 +195,11 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
                 ${cardData.pinCode}`}
             </p>
             {type === "proj" && (
-              <div className="inline-flex items-start gap-2 p-2 shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] cardBg mt-[16px]">
-                <span className="text-black text-right text-base not-italic font-medium leading-[normal]">
+              <div className="inline-flex items-start gap-2 p-2 shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] cardBg mt-[8px] sm:mt-[16px]">
+                <span className="text-black text-right text-[14px] sm:text-base not-italic font-medium leading-[normal]">
                   Project Status:{" "}
                 </span>
-                <span className="text-[#148B16] text-base not-italic font-bold leading-[normal]">
+                <span className="text-[#148B16] text-[14px] sm:text-base not-italic font-bold leading-[normal]">
                   {cardData.projstatus}
                 </span>
               </div>
@@ -211,7 +211,7 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
             )}
             <Button
               title="Request  Callback"
-              buttonClass=" text-[#FFF] mt-[12px] text-[18px] font-[600] bg-[#0073C6] rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[10px]  "
+              buttonClass=" text-[#FFF] mt-[12px] text-[12px] sm:text-[18px] font-[600] bg-[#0073C6] rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[10px]  "
               onChange={handleReqCall}
             />
           </div>
@@ -249,7 +249,7 @@ const ProjectCarousel = ({
           {data &&
             data?.map((project: any, index: number) => {
               return (
-                <CarouselSlide>
+                <CarouselSlide h={560}>
                   <ProjectCard
                     key={index}
                     type={type}

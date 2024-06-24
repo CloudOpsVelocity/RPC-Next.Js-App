@@ -20,7 +20,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
 
   return (
     <div
-      className="w-[90%] scroll-mt-[220px]  mb-[5%] rounded shadow-[0px_4px_17.6px_0px_rgba(146,178,200,0.40)] border-[0.5px] border-solid border-[#92B2C8] builderBg py-8 pl-5"
+      className="w-[90%] scroll-mt-[220px]  mb-[5%] rounded shadow-[0px_4px_17.6px_0px_rgba(146,178,200,0.40)] border-[0.5px] border-solid border-[#92B2C8] builderBg pt-4 pb-6 sm:py-8 sm:pl-5 px-2 sm:px-0"
       id="aboutBuilder"
     >
       <div className="w-full">
@@ -50,30 +50,30 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
           </div>
         </div>
 
-        <div className="rounded-[20px] mt-[1%] flex justify-between items-center bg-[#FFF] shadow-md w-[100%] mb-[2%] lg:w-[50%] p-[1%] ">
+        <div className="sm:rounded-[20px] mt-[1%] flex justify-between items-center bg-[#FFF] shadow-md w-[100%] mb-[2%] lg:w-[50%] p-[1%] ">
           <div className="w-[30%] border-solid border-[#92B2C8] border-r-[1px]">
-            <p className=" text-[#202020] text-[20px] lg:text-[24px] font-[600]">
+            <p className=" text-[#202020] sm:text-[20px] lg:text-[24px] font-[600]">
               {nzData.newProject}
             </p>
-            <p className=" text-[#148B16] text-[16px] lg:text-[20px] font-[700]">
+            <p className=" text-[#148B16] text-[12px] sm:text-[16px] lg:text-[20px] font-[700]">
               New Launch {`Project${nzData.newProject > 1 ? "s" : ""}`}
             </p>
           </div>
 
           <div className="w-[30%] border-solid border-[#92B2C8] border-r-[1px]">
-            <p className=" text-[#202020] text-[20px] lg:text-[24px] font-[600]">
+            <p className=" text-[#202020] sm:text-[20px] lg:text-[24px] font-[600]">
               {nzData.onGoingProject}
             </p>
-            <p className=" text-[#001F35] text-[16px] lg:text-[20px] font-[700]">
+            <p className=" text-[#001F35] text-[12px] sm:text-[16px] lg:text-[20px] font-[700]">
               Ongoing {`Project${nzData.onGoingProject > 1 ? "s" : ""}`}
             </p>
           </div>
 
           <div className="w-[30%] ">
-            <p className=" text-[#202020] text-[20px] lg:text-[24px] font-[600]">
+            <p className=" text-[#202020] sm:text-[20px] lg:text-[24px] font-[600]">
               {nzData.completedProject}
             </p>
-            <p className=" text-[#E3AC00] text-[16px] lg:text-[20px] font-[700]">
+            <p className=" text-[#E3AC00] text-[12px] sm:text-[16px] lg:text-[20px] font-[700]">
               Completed {`Project${nzData.completedProject > 1 ? "s" : ""}`}
             </p>
           </div>
@@ -84,18 +84,18 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
           projName={""}
           builderName={nzData.companyName}
           content={nzData.vission}
-          className="!mb-[29px] text-[#202020] text-2xl not-italic font-medium leading-[normal] w-full"
+          className="mb-[14px] sm:!mb-[29px] text-[#202020] text-2xl not-italic font-medium leading-[normal] w-full mt-4 sm:mt-0"
         />
 
-        <p className="  text-h2 lg:text-[24px]  text-black text-2xl not-italic font-semibold leading-[normal] inline-flex">
+        <p className="  text-[18px] lg:text-[24px]  text-black sm:text-2xl not-italic font-semibold leading-[normal] inline-flex">
           {TeleGramBlack} Builder Address{" "}
         </p>
-        <p className="  text-[18px] lg:text-[20px]  mt-[1%]  mb-[14px] text-[#242424] text-2xl italic font-medium leading-8 md:mb-[2%] ">
+        <p className=" text-[14px]  sm:text-[18px] lg:text-[20px]  sm:mt-[1%]  mb-[14px] text-[#242424] text-2xl italic font-medium  md:mb-[2%] ">
           {nzData.builderAddress}, {nzData.city}, {nzData.state},{" "}
           {nzData.pincode}
         </p>
         <Link
-          className=" bg-[#0073C6] rounded-[4px] text-[#FFF] text-[18px] lg:text-[20px] font-[700] p-[10px]  "
+          className=" bg-[#0073C6] rounded-[4px] text-[#FFF] text-[12px] sm:text-[18px] lg:text-[20px] font-[700] p-[10px]  "
           href={`/builder/${id}`}
         >
           View Builder Details

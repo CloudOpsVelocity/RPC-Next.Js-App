@@ -69,7 +69,6 @@ const FloorplanDetailsCard: React.FC<Props> = ({
           top: 0,
           left: 0,
           width: "100%",
-
           transform: `translateY(${start}px)`,
         }}
       >
@@ -178,17 +177,16 @@ const FloorplanDetailsCard: React.FC<Props> = ({
 
         {(propCgId == projectprops.apartment ||
           propCgId == projectprops.villament) && (
-          <p className="gap-[4px] flex sm:justify-end sm:items-end text-[#303A4] font-[500] text-[12px] sm:text-[14px] lg:text-[16px] mb-[14px] ">
+          <p className="gap-[4px] flex sm:justify-end sm:items-end text-[#303A4] font-[500] text-[12px] sm:text-[14px] lg:text-[16px] mb-[8px] ">
             <TowerTypeIcon className="w-[20px] h-[20px] lg:w-[24px] lg:h-[24px]" />
             Tower: {mergedData.towerType}
           </p>
         )}
 
-        <p className="gap-[4px] flex sm:justify-end sm:items-end text-[#303A4] font-[500] text-right text-[12px] sm:text-[14px] lg:text-[16px] mb-[14px] ">
+        <p className="gap-[4px] flex sm:justify-end sm:items-end text-[#303A4] font-[500] text-right text-[12px] sm:text-[14px] lg:text-[16px] mb-[8px] ">
           <FlooringIcon className="w-[20px] h-[20px] lg:w-[24px] lg:h-[24px]" />
           Unit Number: {mergedData.unitNumber}
         </p>
-        {propCgId === projectprops.plot && <p className="mb-[45px]"></p>}
 
         {/* {(propCgId == projectprops.plot || !propCgId) && (
           <p className="gap-[4px] flex justify-end items-end text-[#303A4] font-[500] text-[14px] lg:text-[16px] mb-[20px] ">

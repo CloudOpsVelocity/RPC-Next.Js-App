@@ -81,7 +81,7 @@ export default function Amenties({
                               return (
                                 <div
                                   key={index}
-                                  className="flex items-center  gap-[8px]   mr-[24px] mb-[24px]  px-2.5 py-0.5 w-fit text-[#001F35] font-[500] text-[12px] lg:text-[20px] focus:ring-offset-2 border rounded-[10px] border-solid border-[#b2e0ff] bg-[#FFF] "
+                                  className="flex items-center  gap-[8px]  mb-[8px] mr-[8px]  sm:mr-[24px] sm:mb-[24px]  px-2.5 py-0.5 w-fit text-[#001F35] font-[500] text-[12px] lg:text-[20px] focus:ring-offset-2 border rounded-[10px] border-solid border-[#b2e0ff] bg-[#FFF] "
                                 >
                                   {amenitiesGroupList.get(eachItem.id)}
                                   {eachOne.constDesc}

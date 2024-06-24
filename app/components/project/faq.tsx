@@ -116,7 +116,7 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
       className="max-w-[100%] mx-auto my-8 mt-[5%] rounded-lg space-y-2"
       onSubmit={onSubmit(formSubmit)}
     >
-      <h2 className="inline-flex items-center gap-3 p-2 rounded-2xl bg-[#ecf7ff] mb-7">
+      <h2 className="inline-flex items-center gap-3 p-2 rounded-2xl bg-[#ecf7ff] sm:mb-7">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="52"
@@ -164,7 +164,8 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
         <Button
           type="submit"
           loading={status === "pending"}
-          size="lg"
+          size={"md"}
+          className="!text-xs !px-3 !py-1"
           color="themeBlue.0"
 
           // className="inline-flex items-center justify-center rounded-md text-[30px] font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 bg-[#0073C6] text-white"

@@ -10,6 +10,7 @@ import { useGallery } from "@/app/hooks/useGallery";
 import PropertyHeading from "../property/heading";
 import clsx from "clsx";
 import SubHeading from "./headings/SubHeading";
+import { useMediaQuery } from "@mantine/hooks";
 
 export default function GalleryBlock({
   walkThrowVideoUrl,
@@ -24,10 +25,16 @@ export default function GalleryBlock({
   const videos = [walkThrowVideoUrl, projectVideoIUrl, media.videoUrl].filter(
     (video) => video !== "" && video !== undefined
   );
+  const isMobile = useMediaQuery(`(max-width: 750px)`);
+  const [, { open }] = useGallery();
   const handleMediaClick = (media: string) => {
+    if (isMobile) {
+      const isVideo = videos.includes(media);
+      open(isVideo ? "video" : "image", media);
+    }
     setSelectedMedia(media);
   };
-  const [, { open }] = useGallery();
+
   return (
     <div className="w-[90%] scroll-mt-[200px] mb-[5%]" id="galleria">
       {type === "prop" ? (
@@ -101,7 +108,7 @@ export default function GalleryBlock({
                 src={img as string}
                 alt={`Image ${ind + 1}`}
                 className={clsx(
-                  `w-[110px] lg:w-[152px] h-[68px] lg:h-[94px]   !rounded-[5px] shadow-md mb-[4%] cursor-pointer  md:min-w-[152px] object-cover `,
+                  `w-[110px] min-w-[90px] lg:w-[152px] h-[68px] lg:h-[94px]   !rounded-[5px] shadow-md mb-[4%] cursor-pointer  md:min-w-[152px] object-cover `,
                   selectedMedia?.split("?")[0] === img.split("?")[0] &&
                     "!border-2 !border-[#4d6677] !shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)]"
                 )}
@@ -120,7 +127,7 @@ export default function GalleryBlock({
                     <video
                       key={img}
                       src={img as string}
-                      className={`!w-full rounded-[5px] cursor-pointer h-[94px] object-cover ${
+                      className={`!w-full rounded-[5px] cursor-pointer  h-[68px] sm:h-[94px] object-cover ${
                         selectedMedia === img
                           ? "border-2 border-[#4d6677] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)]"
                           : ""

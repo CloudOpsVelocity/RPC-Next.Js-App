@@ -171,3 +171,15 @@
     rgba(255, 255, 255, 0.64) 100%
   );
 }
+
+@media screen and (max-width: 601px) {
+  .svg-default {
+    height: 15px;
+    width: 15px;
+  }
+
+  .svg-selected {
+    height: 15px;
+    width: 15px;
+  }
+}

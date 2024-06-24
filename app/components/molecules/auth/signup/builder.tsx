@@ -781,6 +781,7 @@ function Builder() {
               autosize
               minRows={5}
               maxRows={5}
+              maxLength={5001}
               {...form.getInputProps("vission")}
               classNames={{
                 root: StepCss.inputRoot,
@@ -804,6 +805,7 @@ function Builder() {
               autosize
               minRows={5}
               maxRows={5}
+              maxLength={5001}
               {...form.getInputProps("mission")}
               classNames={{
                 root: StepCss.inputRoot,
