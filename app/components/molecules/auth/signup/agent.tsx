@@ -459,7 +459,7 @@ function Agent() {
             LogIn
             </span>
           </Link>
-          {true && (
+          {status === "error" && (
             <p className="text-center text-[#556477] font-semibold md:text-xl not-italic xl:font-medium leading-[normal] mt-3 mb-[16px]">
               Forgot Password?{" "}
               <Link
