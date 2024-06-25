@@ -32,7 +32,7 @@ export default function Banner({
   };
 
   return (
-    <div className="bg-[#f0f9ff] scroll-mt-[90px]  px-8 py-4 sm:py-12 mx-auto mb-[5%] ">
+    <div className="bg-[#f0f9ff] scroll-mt-[90px] px-4 sm:px-8 py-4 sm:py-12 mx-auto mb-[5%] ">
       <Toaster position="top-right" reverseOrder={false} />
       <div className="w-[90%] m-auto flex flex-col md:flex-row justify-between items-center ">
         <div>

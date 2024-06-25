@@ -41,7 +41,10 @@ export default function MasterPlan({
     }
   };
   return (
-    <div className="w-[90%] mb-[5%] scroll-mt-[180px] " id="masterPlan">
+    <div
+      className="w-[90%] mb-[2%] sm:mb-[5%] scroll-mt-[180px] "
+      id="masterPlan"
+    >
       <div className="flex justify-between w-full items-cente mb-[32px] flex-wrap">
         <div>
           <h1 className="text-[20px] lg:text-[32px] font-[600] text-[#001F35] mb-[12px] capitalize">

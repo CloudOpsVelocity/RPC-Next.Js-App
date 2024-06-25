@@ -20,7 +20,7 @@ export default function ProjectLoans({
   const isMobile = useMediaQuery(`(max-width: 601px)`);
   return (
     <div
-      className="bg-white pt-2 pb-6 sm:py-8 w-[90%] sm:mb-[4%] mx-auto  overflow-hidden scroll-mt-[750px]"
+      className="bg-white pt-2 pb-4 sm:py-8 w-[90%] sm:mb-[4%] mx-auto  overflow-hidden scroll-mt-[750px]"
       id="loans"
     >
       {type === "prop" ? (

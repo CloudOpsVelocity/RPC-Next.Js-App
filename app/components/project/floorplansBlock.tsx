@@ -224,7 +224,10 @@ export default function FloorplansBlock({ projName, slug }: Props) {
   }, [currentPhase]);
   if (isLoading) return <Loading />;
   return (
-    <div className="w-[90%] scroll-mt-[180px] mb-[5%]" id="floorPlans">
+    <div
+      className="w-[90%] scroll-mt-[180px] mb-[2%] sm:mb-[5%]"
+      id="floorPlans"
+    >
       <h1
         className="text-[20px] lg:text-[32px] font-[600] text-[#001F35] mb-[12px] scroll-mt-[280px]"
         id="floorPlansdiv"
@@ -240,7 +243,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
       >
         {phaseList?.length > 1 && (
           <>
-            <p className="text-[14px] sm:text-[20px] lg:text-[24px] font-[500] mb-[44px] md:mb-0 text-[#333] sm:mr-[20px] ">
+            <p className="text-[14px] sm:text-[20px] lg:text-[24px] font-[500] mb-2 sm:mb-[44px] md:mb-0 text-[#333] sm:mr-[20px] ">
               Select one of the phase to see project details
             </p>
             <div className=" flex justify-start items-start gap-[10px] flex-wrap ">
@@ -391,7 +394,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
           </div>
 
           <div
-            className="h-[500px] sm:h-[600px] md:h-[547px] w-full rounded-[14px] mt-[2%] border-solid sm:border-[1px] border-[#92B2C8] bg-[#FFF] shadow-md flex flex-col-reverse md:flex-row justify-center  "
+            className="h-[500px] sm:h-[600px] md:h-[547px] w-full rounded-[14px] mt-[2%] border-solid sm:border-[1px] border-[#92B2C8] bg-[#FFF]  flex flex-col-reverse md:flex-row justify-center  "
             onClick={handleContainerClick}
           >
             {floorPlanType === "type" && (
@@ -426,6 +429,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                         data={virtualRow}
                         projData={projectUnitsData}
                         setValues={form.setValues}
+                        lastIndex={projectUnitsData.length - 1 === index}
                       />
                     ))
                   ) : (

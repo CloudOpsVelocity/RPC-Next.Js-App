@@ -12,12 +12,14 @@ import { floorPlansArray, selectedFloorAtom } from "@/app/store/floor";
 import { useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
 import { setPropertyValues } from "@/app/utils/dyanamic/projects";
 import { ImgNotAvail } from "@/app/data/project";
+import clsx from "clsx";
 
 type Props = {
   propCgId?: any;
   data: any;
   projData: any;
   setValues: any;
+  lastIndex?: boolean;
 };
 
 const FloorplanDetailsCard: React.FC<Props> = ({
@@ -26,7 +28,9 @@ const FloorplanDetailsCard: React.FC<Props> = ({
   projData,
   setValues,
   data,
+  lastIndex,
 }) => {
+  console.log(lastIndex);
   // const data = projData[index];
   const [, setImage] = useAtom(selectedFloorAtom);
   const setFloorsArray = useSetAtom(floorPlansArray);
@@ -63,7 +67,10 @@ const FloorplanDetailsCard: React.FC<Props> = ({
   return (
     <>
       <div
-        className="sm:flex    sm:h-[180px] justify-between py-[18px] px-[25px] pt-[24px] w-full border-[#92B2C8] border-solid border-b-[1px] border-r-[1px] cursor-pointer hidden "
+        className={clsx(
+          "sm:flex    sm:h-[180px] justify-between py-[18px] px-[25px] pt-[24px] w-full border-[#92B2C8] border-solid border-b-[1px] border-r-[1px] cursor-pointer hidden ",
+          lastIndex && "!border-b-0 "
+        )}
         onClick={handleCardClick}
         // style={{
         //   position: "absolute",

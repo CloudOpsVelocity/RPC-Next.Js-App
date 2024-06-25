@@ -1,6 +1,6 @@
 "use client";
 import React, { useRef, useState } from "react";
-import { useScrollIntoView } from "@mantine/hooks";
+import { useMediaQuery, useScrollIntoView } from "@mantine/hooks";
 import { SpecificationList } from "@/app/validations/types/project";
 import { Box, Group, Paper, ScrollArea, Stack } from "@mantine/core";
 import { specificationsList } from "@/app/images/commonSvgs";
@@ -33,6 +33,7 @@ export default function Specifications({
       });
     }
   };
+  const isMobile = useMediaQuery(`(max-width: 601px)`);
 
   return (
     <div
@@ -81,7 +82,11 @@ export default function Specifications({
           <Stack align="center">
             <ScrollArea
               w={"100%"}
-              h={458 > data?.length * 270 ? data.length * 270 : 358}
+              h={
+                458 > data?.length * (isMobile ? 190 : 270)
+                  ? data.length * (isMobile ? 190 : 270)
+                  : 358
+              }
               viewportRef={viewport}
               classNames={styles}
               pb={20}

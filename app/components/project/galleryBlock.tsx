@@ -49,7 +49,10 @@ export default function GalleryBlock({
             <span className="text-[#148B16] font-[700] ">{projName}</span>{" "}
           </h1>
 
-          <SubHeading text="Gallery highlights : A glimpse into good project" />
+          <SubHeading
+            text="Gallery highlights : A glimpse into good project"
+            className="mb-2"
+          />
         </>
       )}
 
