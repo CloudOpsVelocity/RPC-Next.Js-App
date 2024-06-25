@@ -113,7 +113,7 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
   };
   return (
     <form
-      className="max-w-[100%] mx-auto my-8 mt-[5%] rounded-lg space-y-2"
+      className="max-w-[100%] mx-auto sm:my-8 sm:mt-[5%] rounded-lg space-y-2"
       onSubmit={onSubmit(formSubmit)}
     >
       <h2 className="inline-flex items-center gap-3 p-2 rounded-2xl bg-[#ecf7ff] sm:mb-7">

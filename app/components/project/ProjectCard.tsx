@@ -240,7 +240,7 @@ const ProjectCarousel = ({
             {title}
             <span className="text-[#148B16] font-[700]  ml-4 ">{projName}</span>
           </h2>
-          <p className="mt-3 mb-[44px]  text-[#4D6677] text-2xl italic font-medium leading-[normal] tracking-[0.96px]">
+          <p className="mt-1 sm:mt-3 mb-[24px] sm:mb-[44px]  text-[#4D6677] sm:text-2xl italic font-medium leading-[normal] tracking-[0.96px]">
             {content}
           </p>
         </div>
@@ -249,7 +249,7 @@ const ProjectCarousel = ({
           {data &&
             data?.map((project: any, index: number) => {
               return (
-                <CarouselSlide h={560}>
+                <CarouselSlide h={480}>
                   <ProjectCard
                     key={index}
                     type={type}
