@@ -29,6 +29,7 @@ type FaqWithBgProps = {
 };
 
 export default function FaqWithBg({ data, projName }: FaqWithBgProps) {
+  const isMobile = useMediaQuery(`(max-width: 601px)`);
   return (
     <div
       className={data?.length > 0 ? classes.wrapper : "w-[90%] m-auto"}
@@ -37,8 +38,8 @@ export default function FaqWithBg({ data, projName }: FaqWithBgProps) {
       <div className="flex sm:justify-center items-center w-full ">
         {data?.length > 0 && (
           <>
-            <div className="relative mr-[-70px] bottom-[20px] w-[168px] h-[74px] rounded-[50%] blur-[29.5px] bg-[#0093ff4d] "></div>
-            <h1 className="text-h2 lg:text-[32px] font-[600] text-[#001F35] mb-8 sm:mb-16">
+            <div className="relative mr-[-90px]  sm:mr-[-70px] bottom-[20px] w-[168px] h-[74px] rounded-[50%] blur-[29.5px] bg-[#0093ff4d] "></div>
+            <h1 className="text-[21px] lg:text-[32px] font-[600] text-[#001F35] mb-1 sm:mb-16">
               Frequently Asked Questions of
               <span className="text-[#148B16] font-[700]  ml-4">
                 {projName}
@@ -47,18 +48,25 @@ export default function FaqWithBg({ data, projName }: FaqWithBgProps) {
           </>
         )}
       </div>
-      <div>
+      <div className="mb-4">
         {data?.map((faq, index) => {
           return (
             faq.faqAnswer &&
-            faq.faqQuestion && (
+            faq.faqQuestion &&
+            (isMobile ? (
+              <MobileFaqCard
+                faqQuestion={faq.faqQuestion}
+                faqAnswer={faq.faqAnswer}
+                last={index === data.length - 1}
+              />
+            ) : (
               <FaqCard
                 faqQuestion={faq.faqQuestion}
                 faqAnswer={faq.faqAnswer}
                 key={index}
                 last={index === data.length - 1}
               />
-            )
+            ))
           );
         })}
       </div>
@@ -111,6 +119,7 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
     close();
     opened.type === "qna" && reset();
   };
+  const isMobile = useMediaQuery(`(max-width: 601px)`);
   return (
     <form
       className="max-w-[100%] mx-auto sm:my-8 sm:mt-[5%] rounded-lg space-y-2"
@@ -143,8 +152,8 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
           <Textarea
             id="question"
             name="question"
-            placeholder="Type your question here"
-            rows={4}
+            placeholder="Type your question here . . . ."
+            rows={isMobile ? 2 : 4}
             mb={"sm"}
             {...getInputProps("question")}
             className={clsx(
@@ -164,8 +173,7 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
         <Button
           type="submit"
           loading={status === "pending"}
-          size={"md"}
-          className="!text-xs !px-3 !py-1"
+          size={isMobile ? "xs" : "md"}
           color="themeBlue.0"
 
           // className="inline-flex items-center justify-center rounded-md text-[30px] font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 bg-[#0073C6] text-white"
@@ -199,6 +207,35 @@ const FaqCard = ({
       </h4>
       <FaqReadMore text={faqAnswer} title={faqQuestion} />
       {!last && <hr className="bg-[#00000080] my-4 sm:my-[59px] h-[2px]" />}
+    </div>
+  );
+};
+const MobileFaqCard = ({
+  faqQuestion,
+  faqAnswer,
+  last,
+}: {
+  faqQuestion: string;
+  faqAnswer: string;
+  last: boolean;
+}) => {
+  return (
+    <div className="transition-all duration-200 bg-white border border-gray-200 shadow-lg cursor-pointer hover:bg-gray-50 mt-2 rounded-md">
+      <button
+        type="button"
+        className="flex items-center justify-between w-full px-4 pt-1 pb-1 sm:p-6"
+      >
+        <span className="flex  font-semibold text-black text-left">
+          {" "}
+          {faqQuestion}{" "}
+        </span>
+      </button>
+      <div className="px-4 pb-2 sm:px-6 sm:pb-6">
+        <p>
+          {/* {faqAnswer} */}
+          <FaqReadMore text={faqAnswer} title={faqQuestion} maxLines={1} />
+        </p>
+      </div>
     </div>
   );
 };
