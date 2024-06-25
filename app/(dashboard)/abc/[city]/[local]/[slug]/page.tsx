@@ -100,7 +100,11 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             <span>{data.projectName}</span>
           </p>
           {/* Top Cover Image Card */}
-          <FirstBlock projectDetails={data} companyName={data.postedByName} />
+          <FirstBlock
+            projectDetails={data}
+            companyName={data.postedByName}
+            builderId={data.builderId}
+          />
         </div>
         {/* Navigations Container */}
         <MobileHidden>

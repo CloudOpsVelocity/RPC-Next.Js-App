@@ -77,9 +77,30 @@ export const MapIcon = L.icon({
   iconAnchor: [19, 38],
   popupAnchor: [0, -38],
 });
+
+export const MobileMapIcon = L.icon({
+  iconUrl: "/mapIcon.svg",
+  iconSize: [70, 70],
+  iconAnchor: [19, 38],
+  popupAnchor: [0, -38],
+});
+
+export const BlueIcon = L.icon({
+  iconUrl: "/mapblueicon.png",
+  iconSize: [100, 100],
+  iconAnchor: [19, 38],
+  popupAnchor: [0, -38],
+});
+
+export const BlueMobileMapIcon = L.icon({
+  iconUrl: "/mapblueicon.png",
+  iconSize: [23, 31],
+  iconAnchor: [19, 38],
+  popupAnchor: [0, -38],
+});
 export const NearLocation = L.icon({
   iconUrl: "/proj/nearlocaltion.svg",
-  iconSize: [50, 50],
+  iconSize: [25, 41],
   iconAnchor: [19, 38],
   popupAnchor: [0, -38],
 });

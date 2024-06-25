@@ -19,3 +19,9 @@
 .indicators {
   padding: 0 4%;
 }
+
+@media screen and (max-width: 601px) {
+  .controls {
+    bottom: 3px !important;
+  }
+}

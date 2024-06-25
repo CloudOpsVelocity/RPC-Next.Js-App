@@ -75,6 +75,10 @@ const LeafMap: React.FC<{
 
   const { data: mapData, isLoading } = useMapData({ projSlug: projId });
   const isMobile = useMediaQuery(`(max-width: 750px)`);
+  const downData =
+    mapData && mapData[selected] && mapData[selected].length > 0
+      ? mapData[selected].slice(isMobile ? -5 : -8)
+      : [];
   return (
     <div className="w-full scroll-mt-[180px] mx-auto  mb-[5%] " id="nearBy">
       <div className="flex justify-between w-[90%] mx-auto">
@@ -112,16 +116,20 @@ const LeafMap: React.FC<{
           <div id="tabs">
             <Tabs defaultValue="public">
               <div className="bg-blue-50 px-5 py-4">
-                <p className="text-[#001F35] text-[20px] sm:text-[22px]  font-medium leading-[normal]">
+                <p className="text-[#001F35]  sm:text-[22px]  font-medium leading-[normal]">
                   Explore Your Surroundings, Everywhere Nearby!
                 </p>
               </div>
             </Tabs>
-            <div id="location-listing" className="grid gap-2 px-2 sm:pl-5 ">
+            <div id="location-listing" className="grid gap-2  ">
               {isLoading ? (
                 <Loading />
               ) : (
-                <ScrollArea h={isMobile ? 300 : 600} pb={isMobile ? 10 : 50}>
+                <ScrollArea
+                  h={isMobile ? 300 : 600}
+                  pb={isMobile ? 10 : 50}
+                  px={10}
+                >
                   {mapData &&
                   mapData[selected] &&
                   mapData[selected].length > 0 ? (
@@ -172,11 +180,11 @@ const LeafMap: React.FC<{
       </div>
       {mapData && mapData[selected] && mapData[selected].length > 0 && (
         <div className="mt-8 w-[90%] mx-auto">
-          <h1 className="text-[#303030] text-xl not-italic font-medium leading-[normal] tracking-[0.8px] capitalize">
+          <h1 className="text-[#303030] text-[16px] md:text-xl not-italic font-medium leading-[normal] tracking-[0.8px] capitalize">
             {selected.split("_").join(" ")} Nearby
           </h1>
           <div className="flex gap-2 mt-3 flex-wrap gap-x-5 ">
-            {mapData[selected].slice(-8).map((item: any, index: any) => (
+            {downData.map((item: any, index: any) => (
               <MapCard
                 key={index}
                 {...item}
@@ -235,23 +243,23 @@ const MapCard = ({
   };
   return (
     <div
-      className="flex flex-col items-start gap-3 px-2 py-3.5 cursor-pointer shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] border-[0.5px] border-solid border-[#D9D9D9] bg-[#fcfcfc] w-full md:min-w-[385px] max-w-[385px] mb-1 md:mb-5"
+      className="flex sm:flex-col items-start gap-3 px-2 py-2 sm:py-3.5 cursor-pointer shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] border-[0.5px] border-solid border-[#D9D9D9] bg-[#fcfcfc] w-full md:min-w-[385px] max-w-[385px] mb-1 md:mb-5"
       onClick={handleClick}
     >
-      <div className="">
-        <p className="text-black text-base not-italic font-medium leading-[normal] capitalize">
+      <div className="flex items-center justify-between sm:flex-wrap w-full">
+        <h6 className="text-black text-[12px]  md:text-lg not-italic font-medium leading-[normal] max-w-[60%] capitalize w-[70%]">
           {name}
-        </p>
-        <div className="flex gap-1 text-sm mt-[14px]">
-          <span className="flex items-center min-w-[70px]">
+        </h6>
+        <div className="flex gap-1 text-sm">
+          <span className="flex items-center">
             {nearbyLocationIcon}
-            <span className="ml-[4px] text-[#005DA0] text-base not-italic font-medium leading-[normal] ]">
+            <span className="ml-[4px] text-[#005DA0] text-[12px] md:text-lg not-italic font-medium leading-[normal] text-nowrap">
               {distance ?? "N/A"}
-            </span>{" "}
-          </span>
-          <span className="mx-1">|</span>
-          <span className="text-[#001F35] text-lg not-italic font-medium leading-[normal]">
-            {time ?? "N/A"}
+            </span>
+            <span className="mx-2">|</span>
+            <span className="text-[#001F35] text-[12px] md:text-lg not-italic font-medium leading-[normal] text-nowrap">
+              {time ?? "N/A"}
+            </span>
           </span>
         </div>
       </div>
@@ -290,21 +298,21 @@ const LocationList: React.FC<{
 
   return (
     <div
-      className=" bg-gray-50 border rounded-lg cursor-pointer mt-[12px] md:max-w-[640px] py-3 px-2"
+      className=" bg-gray-50 border rounded-lg cursor-pointer mt-[12px] md:max-w-[640px] py-2 md:py-3 px-2"
       onClick={handleClick}
     >
-      <div className="flex items-center justify-between flex-wrap">
-        <h6 className="text-black md:text-lg not-italic font-medium leading-[normal] capitalize w-[70%]">
+      <div className="flex items-center justify-between sm:flex-wrap">
+        <h6 className="text-black text-[12px]  md:text-lg not-italic font-medium leading-[normal] max-w-[60%] capitalize w-[70%]">
           {name}
         </h6>
         <div className="flex gap-1 text-sm">
           <span className="flex items-center">
             {nearbyLocationIcon}
-            <span className="ml-[4px] text-[#005DA0] text-lg not-italic font-medium leading-[normal] ">
+            <span className="ml-[4px] text-[#005DA0] text-[12px] md:text-lg not-italic font-medium leading-[normal] text-nowrap">
               {distance ?? "N/A"}
             </span>
             <span className="mx-2">|</span>
-            <span className="text-[#001F35] text-lg not-italic font-medium leading-[normal]">
+            <span className="text-[#001F35] text-[12px] md:text-lg not-italic font-medium leading-[normal] text-nowrap">
               {time ?? "N/A"}
             </span>
           </span>

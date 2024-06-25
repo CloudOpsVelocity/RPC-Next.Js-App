@@ -22,7 +22,6 @@ export default function LoginPage() {
       alert("Login failed");
     }
   };
-
   return (
     <form onSubmit={handleSubmit}>
       <div>

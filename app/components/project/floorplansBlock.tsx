@@ -202,12 +202,12 @@ export default function FloorplansBlock({ projName, slug }: Props) {
   const [bhk, setBhk] = useState("0");
   const parentRef = React.useRef(null);
 
-  const rowVirtualizer = useVirtualizer({
-    count: projectUnitsData?.length,
-    getScrollElement: () => parentRef.current,
-    estimateSize: () => 180,
-    overscan: 5,
-  });
+  // const rowVirtualizer = useVirtualizer({
+  //   count: projectUnitsData?.length,
+  //   getScrollElement: () => parentRef.current,
+  //   estimateSize: () => 180,
+  //   overscan: 5,
+  // });
   useEffect(() => {
     if (
       projectUnitsData &&
@@ -391,34 +391,43 @@ export default function FloorplansBlock({ projName, slug }: Props) {
           </div>
 
           <div
-            className="h-[500px] sm:h-[600px] md:h-[547px] w-full rounded-[14px] mt-[2%] border-solid border-[1px] border-[#92B2C8] bg-[#FFF] shadow-md flex flex-col-reverse md:flex-row justify-center  "
+            className="h-[500px] sm:h-[600px] md:h-[547px] w-full rounded-[14px] mt-[2%] border-solid sm:border-[1px] border-[#92B2C8] bg-[#FFF] shadow-md flex flex-col-reverse md:flex-row justify-center  "
             onClick={handleContainerClick}
           >
             {floorPlanType === "type" && (
               <div
-                className="w-[100%] md:w-[50%] border-solid overflow-auto"
+                className="w-[100%] md:w-[50%] sm:border-solid overflow-auto"
                 ref={parentRef}
               >
                 <div
-                  // className="w-full md:w-[50%] max-h-[456px] md:h-[540px]  md:max-h-[540px] border-solid overflow-auto "
-                  style={{
-                    height: `${rowVirtualizer.getTotalSize()}px`,
-                    width: "100%",
-                    position: "relative",
-                  }}
+                // className="w-full md:w-[50%] max-h-[456px] md:h-[540px]  md:max-h-[540px] border-solid overflow-auto "
+                // style={{
+                //   height: `${rowVirtualizer.getTotalSize()}px`,
+                //   width: "100%",
+                //   position: "relative",
+                // }}
                 >
                   {projectUnitsData?.length !== 0 ? (
-                    rowVirtualizer
-                      .getVirtualItems()
-                      .map((virtualRow) => (
-                        <FloorplanDetailsCard
-                          key={virtualRow.index}
-                          propCgId={propCgId}
-                          data={virtualRow}
-                          projData={projectUnitsData}
-                          setValues={form.setValues}
-                        />
-                      ))
+                    // rowVirtualizer
+                    //   .getVirtualItems()
+                    //   .map((virtualRow) => (
+                    //     <FloorplanDetailsCard
+                    //       key={virtualRow.index}
+                    //       propCgId={propCgId}
+                    //       data={virtualRow}
+                    //       projData={projectUnitsData}
+                    //       setValues={form.setValues}
+                    //     />
+                    //   ))
+                    projectUnitsData.map((virtualRow: any, index: number) => (
+                      <FloorplanDetailsCard
+                        key={index}
+                        propCgId={propCgId}
+                        data={virtualRow}
+                        projData={projectUnitsData}
+                        setValues={form.setValues}
+                      />
+                    ))
                   ) : (
                     <NoProperties
                       phase={

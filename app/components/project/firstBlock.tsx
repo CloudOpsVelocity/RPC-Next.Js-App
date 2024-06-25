@@ -17,12 +17,18 @@ import usePhaseWiseOverview from "@/app/hooks/usePhaseWiseOverview";
 import styles from "@/app/styles/Carousel.module.css";
 import { currentBlockAtom, isScrollingAtom, stickyAtom } from "./navigation";
 import { useSetAtom } from "jotai";
+import Link from "next/link";
 type Props = {
   projectDetails: Main | null;
   companyName: string;
+  builderId: number;
 };
 
-const FirstBlock: React.FC<Props> = ({ projectDetails, companyName }) => {
+const FirstBlock: React.FC<Props> = ({
+  projectDetails,
+  companyName,
+  builderId,
+}) => {
   const images = getImageUrls(projectDetails?.media as any);
   const autoplay = useRef(Autoplay({ delay: 10000 }));
   const { hasReraStatus } = usePhaseWiseOverview();
@@ -121,9 +127,12 @@ const FirstBlock: React.FC<Props> = ({ projectDetails, companyName }) => {
 
                 <p className="text-[#242424] sm:text-2xl not-italic font-semibold leading-[normal] mt-[14px]">
                   Posted By:{" "}
-                  <span className="text-btnPrimary sm:text-2xl  font-bold leading-[normal] underline">
+                  <Link
+                    href={`/builder/${builderId}`}
+                    className="text-btnPrimary sm:text-2xl  font-bold leading-[normal] underline"
+                  >
                     {companyName ?? "Builder"}
-                  </span>
+                  </Link>
                 </p>
               </div>
             </div>

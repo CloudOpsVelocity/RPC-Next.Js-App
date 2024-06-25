@@ -22,11 +22,12 @@ type Props = {
 
 const FloorplanDetailsCard: React.FC<Props> = ({
   propCgId,
-  data: { size, start, index },
+  // data: { size, start, index },
   projData,
   setValues,
+  data,
 }) => {
-  const data = projData[index];
+  // const data = projData[index];
   const [, setImage] = useAtom(selectedFloorAtom);
   const setFloorsArray = useSetAtom(floorPlansArray);
   const mergedData = {
@@ -64,13 +65,13 @@ const FloorplanDetailsCard: React.FC<Props> = ({
       <div
         className="sm:flex    sm:h-[180px] justify-between py-[18px] px-[25px] pt-[24px] w-full border-[#92B2C8] border-solid border-b-[1px] border-r-[1px] cursor-pointer hidden "
         onClick={handleCardClick}
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          transform: `translateY(${start}px)`,
-        }}
+        // style={{
+        //   position: "absolute",
+        //   top: 0,
+        //   left: 0,
+        //   width: "100%",
+        //   transform: `translateY(${start}px)`,
+        // }}
       >
         {propCgId != projectprops.plot && (
           <div className="">

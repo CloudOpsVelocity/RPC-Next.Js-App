@@ -107,10 +107,19 @@ export default function ByBhkBlock({
             position: "relative",
           }}
         >
-          {rowVirtualizer.getVirtualItems().map((virtualRow: any) => (
+          {/* {rowVirtualizer.getVirtualItems().map((virtualRow: any) => (
             <FloorplanDetailsCard
               key={virtualRow.index}
               data={virtualRow}
+              propCgId={propCgId}
+              projData={data}
+              setValues={setValues}
+            />
+          ))} */}
+          {filteredData.map((item: any, index: number) => (
+            <FloorplanDetailsCard
+              key={index}
+              data={item}
               propCgId={propCgId}
               projData={data}
               setValues={setValues}
