@@ -9,7 +9,7 @@ const Close = ({ close, className }: { close: any; className?: string }) => {
       height="36"
       viewBox="0 0 36 36"
       fill="none"
-      className={clsx(className)}
+      className={clsx('w-[24px]   h-[24px] ',className)}
       onClick={close}
     >
       <rect x="0.5" y="0.5" width="35" height="35" rx="17.5" fill="white" />

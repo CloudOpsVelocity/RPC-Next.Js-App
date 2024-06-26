@@ -1,14 +1,10 @@
 "use client";
 
-import useAuth from "@/app/hooks/useAuth";
-import { resendOtp } from "@/app/utils/auth";
-import { hideMobileNumber } from "@/app/utils/parse";
 import { otpSchema } from "@/app/validations/auth";
 import { Box, Button, FocusTrap, Modal, PinInput, em } from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
 import React, { useEffect, useRef, useState } from "react";
 import S from "@/app/styles/Otp.module.css";
-import axios from "axios";
 import { addContact, sendContact } from "@/app/utils/api/actions/contact";
 import clsx from "clsx";
 
@@ -83,10 +79,10 @@ export default function ReqOtpForm({
         <p className="text-[#4D6677] text-[14px] xl:text-base not-italic font-semibold leading-[normal] tracking-[0.64px] mb-[2%] ">
           Please verify your contact !
         </p>
-        <p className="text-[#242424] text-[16px] xl:text-base not-italic font-semibold leading-[normal] tracking-[0.64px] mt-2">
+        <p className="text-[#242424] text-[13.5px] xl:text-base not-italic font-semibold leading-[normal] tracking-[0.64px] mt-2">
           An OTP has been sent to your mobile number
         </p>
-        <p className="text-[#333] text-[20px] xl:text-xl not-italic font-semibold leading-[normal] tracking-[0.8px] mt-3">
+        <p className="text-[#333] text-[16px] xl:text-xl not-italic font-semibold leading-[normal] tracking-[0.8px] mt-3">
           Enter OTP
         </p>
         {/* <h1 className="text-[#333] font-[600] text-lg md:text-[24px] text-center ">

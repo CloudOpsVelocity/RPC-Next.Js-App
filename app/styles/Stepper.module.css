@@ -190,6 +190,9 @@
   .custlabelOfNum{
     font-weight: 600;
   }
+  .custlabelOfNumpop{
+    font-size: 16px;
+  }
   .errorMsg{
     font-size: 12px
   }

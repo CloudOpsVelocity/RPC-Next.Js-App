@@ -97,7 +97,7 @@ const RequestCallBackModal = ({
                   className={`w-[100%] md:w-[50%] px-[3%] py-[3%]`}
                 >
                   {status === "idle" && (
-                    <h2 className="text-[20px]  lg:text-[24px] font-[600] text-[#202020]  ">
+                    <h2 className="text-[18px]  lg:text-[24px] font-[600] text-[#202020]  ">
                       Request Callback
                     </h2>
                   )}
@@ -333,19 +333,19 @@ const ReqForm = ({
     />
   ) : (
     <form className="w-full max-w-[500px] " onSubmit={form.onSubmit(formSubmit)}>
-      <p className=" text-[#00487c]  xl:text-lg italic font-bold leading-[normal] tracking-[0.36px] capitalize mb-[2%] mt-1">
-        <span className="text-[#4D6677] text-lg italic font-medium leading-[normal] tracking-[0.36px] ">
+      <p className=" text-[#00487c] text-[13px]  xl:text-lg italic font-bold leading-[normal] tracking-[0.36px] capitalize mb-[2%] mt-1">
+        <span className="text-[#4D6677] text-sm xl:text-lg italic font-medium leading-[normal] tracking-[0.36px] ">
           Call For
         </span>{" "}
         : {title}
       </p>
-      <p className="text-[#148B16] text-base italic font-bold leading-[normal] tracking-[0.64px] mb-[2%] ">
-        <span className="text-[#4D6677] text-lg italic font-medium leading-[normal] tracking-[0.36px]">
+      <p className="text-[#148B16] text-[13px] italic font-bold leading-[normal] tracking-[0.64px] mb-[2%] ">
+        <span className="text-[#4D6677] text-sm  xl:text-lg italic font-medium leading-[normal] tracking-[0.36px]">
           {Posted_BY}
         </span>{" "}
         : {bn}
       </p>
-      <p className="text-[#EA7A00] text-[16px] xl:text-base not-italic font-semibold leading-[normal] tracking-[0.64px] mb-[1%] ">
+      <p className="text-[#EA7A00] text-[14px] xl:text-base not-italic font-semibold leading-[normal] tracking-[0.64px] mb-[1%] ">
         Looks like you are not registered with us.
       </p>
       <p className="text-[#4D6677] text-[14px] xl:text-sm not-italic font-semibold leading-[normal] tracking-[0.56px] mb-[2%] ">
@@ -435,10 +435,10 @@ const ReqForm = ({
 const Success = ({ close }: { close: any }) => {
   return (
     <div className="flex flex-col gap-4 justify-center items-start h-full ">
-      <p className="text-[#00487C] text-2xl not-italic font-semibold leading-8 tracking-[0.96px] mt-2">
+      <p className="text-[#00487C] text-[18px] xl:text-2xl not-italic font-semibold leading-8 tracking-[0.96px] mt-2">
         Your call request has been sent to builder😇
       </p>
-      <p className="text-[#202020] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px]">
+      <p className="text-[#202020]  xl:text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px]">
         Please wait for callback !
       </p>
       <B maw={150} onClick={close} className="!bg-[#0073C6] mt-[5%] ">

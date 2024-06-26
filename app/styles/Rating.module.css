@@ -45,4 +45,12 @@
   .star {
     margin-right: 16px;
   }
+
+}
+@media (max-width : 640px) {
+
+  .header{
+    display: none;
+  }
+  
 }

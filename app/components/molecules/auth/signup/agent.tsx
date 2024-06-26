@@ -303,7 +303,7 @@ function Agent() {
                 status === "error" && "!mb-[2px]"
               )}
               label="Contact Number"
-              placeholder="Enter your contact no:"
+              placeholder="Enter your contact number:"
               {...form.getInputProps("mobile")}
               error={form.errors.mobile || status === "error"}
               onChange={(e) => {
@@ -460,7 +460,7 @@ function Agent() {
             </span>
           </Link>
           {status === "error" && (
-            <p className="text-center text-[#556477] font-semibold md:text-xl not-italic xl:font-medium leading-[normal] mt-3 mb-[16px]">
+            <p className="text-center text-[#556477] font-semibold md:text-xl not-italic xl:font-medium leading-[normal] mt-2 xl:mt-3 mb-[16px]">
               Forgot Password?{" "}
               <Link
                 href={{ pathname: "/forgot", search: queryParam.query }}

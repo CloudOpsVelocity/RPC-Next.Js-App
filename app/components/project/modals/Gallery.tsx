@@ -40,11 +40,12 @@ const Gallery: React.FC<GalleryProps> = ({
     setPreviewImage(image);
     open(isImage ? "image" : "video", image);
   };
-  const isMobile = useMediaQuery(`(max-width: 750px`);
+  const isMobile = useMediaQuery(`(max-width: 601px`);
 
   return (
     <>
       <Modal
+        centered={(isMobile ? (isImage ? true : false) : false)}
         opened={content ? true : false}
         onClose={() => {
           setPreviewImage(null);
@@ -60,9 +61,9 @@ const Gallery: React.FC<GalleryProps> = ({
         }}
         className="!styleScroll"
       >
-        <div className="h-auto scrollbar-hide flex justify-end flex-col items-center">
-          <div className="w-full bg-transparent    h-[57px] flex items-center justify-between  z-[1000] px-10  m-auto">
-            <div className="text-white text-2xl not-italic font-bold leading-[normal]">
+        <div className="h-auto  scrollbar-hide flex justify-end flex-col items-center">
+          <div className={`w-full bg-transparent    h-[57px] flex items-center justify-between mt-[26px]  z-[1000] px-0.5  m-auto ${(!isImage) && isMobile ? "mt-50%": "mt-[10%]"}`}>
+            <div className="text-white text-2xl not-italic  font-bold leading-[normal]">
               {isImage ? "Gallery" : "Videos"}
             </div>
             <div className="flex justify-center items-center gap-5">
@@ -71,7 +72,7 @@ const Gallery: React.FC<GalleryProps> = ({
                 url={imageUrlParser(content?.url || "")}
               />
 
-              <Close close={close} />
+              <Close  className="h-[29px] w-[29px] xl:w-[34px] xl:h-full" close={close} />
             </div>
           </div>
           {isImage ? (
@@ -84,7 +85,7 @@ const Gallery: React.FC<GalleryProps> = ({
                   w={1400}
                   fit="contain"
                   src={previewImage ?? content?.url}
-                  className="cursor-pointer border-[5px] bg-white border-white md:min-w-[1400px] md:min-h-[600px]"
+                  className="cursor-pointer border-[5px] bg-white border-white w-[100%] !h-[350px]  md:min-w-[1400px] md:min-h-[600px]"
                 />
               </TransformComponent>
             </TransformWrapper>
@@ -93,7 +94,8 @@ const Gallery: React.FC<GalleryProps> = ({
               url={previewImage as string}
               width="auto"
               controls
-              height="68vh"
+              height={isMobile ? "50vh":"68vh"}
+         
             />
           )}
           <div className="mt-4 flex items-center justify-center  w-full">
@@ -110,7 +112,7 @@ const Gallery: React.FC<GalleryProps> = ({
               slidesToScroll={5}
               className="w-full min-w-[80px] !h-auto max-h-[100px] min-h-[50px]"
               withControls={
-                (content?.type == "image" ? images.length : videos.length) > 5
+                (content?.type == "image" ? images.length : videos.length) > (isMobile ? 0 : 5)
                   ? true
                   : false
               }

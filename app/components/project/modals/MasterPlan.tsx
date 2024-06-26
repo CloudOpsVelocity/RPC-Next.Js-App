@@ -38,15 +38,15 @@ export default function MasterPlanPopup({
       >
         <div className="h-auto scrollbar-hide flex justify-end flex-col items-center ">
           <div className="w-full bg-transparent    h-[57px] flex items-center justify-between  z-[1000] md:px-10 max-w-[91rem] m-auto">
-            <div className="text-white sm:text-2xl not-italic font-bold leading-[normal]">
+            <div className="text-white text-[18px] sm:text-2xl not-italic font-bold leading-[normal]">
               Master Plan
             </div>
-            <div className="flex justify-center items-center gap-5">
+            <div className="flex justify-center items-center  gap-5">
               <a
-                className="flex justify-center items-center gap-1 p-2 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] rounded-[10px] bg-[#F3F7FF] text-[#0073C6] text-base not-italic font-semibold leading-[normal] tracking-[0.32px]"
+                className="flex justify-center items-center gap-1 p-1 xl:p-2 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] rounded-[10px] bg-[#F3F7FF] text-[#0073C6] text-base not-italic font-semibold leading-[normal] tracking-[0.32px]"
                 onClick={onDownload}
               >
-                <svg
+                <svg  
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"
@@ -58,7 +58,7 @@ export default function MasterPlanPopup({
                     fill="#0073C6"
                   />
                 </svg>{" "}
-                Download
+                <span  className="hidden h-4 w-4 xl:w-full xl:h-auto  items-center  xl:block">Download</span>
               </a>
               <SharePopup
                 titleText="Share Master Plan"
@@ -66,7 +66,7 @@ export default function MasterPlanPopup({
                 url={imageUrlParser(url || "", "M")}
                 className="text-[#0073C6] text-base not-italic font-semibold leading-[normal] tracking-[0.32px]"
               />
-              <Close close={close} />
+              <Close className="h-[28px] w-[28px] xl:h-[36px] xl:w-[36px]" close={close} />
             </div>
           </div>
           <div>
@@ -112,10 +112,10 @@ const Content = ({ url }: { url: string }) => {
           // w="100%"
           fit="contain"
           alt="master plan"
-          className="cursor-pointer border-[5px] bg-white border-white md:min-w-[1400px] max-h-[770px] object-contain"
+          className="cursor-pointer h-[420px] xl:h-[770px] border-[5px] bg-white border-white md:min-w-[1400px] xl:max-h-[770px] object-contain"
         />
       </TransformComponent>
-      <ZoomInOut />
+      <ZoomInOut className="right-5 xl:right-28 pb-2" />
     </>
   );
 };
