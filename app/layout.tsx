@@ -34,7 +34,7 @@ export default function RootLayout({
       </head>
       <body>
         <main>
-          <MantineProvider theme={MantineTheme}>
+          <MantineProvider theme={MantineTheme} withCssVariables>
             <SessionProvider>
               <ReactQueryProvider>
                 <Provider>

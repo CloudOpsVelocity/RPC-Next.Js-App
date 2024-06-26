@@ -50,14 +50,20 @@ export default function OverviewBanner({
                 ₹ {basePrice} / price sq.ft
               </span>
             </p>
-            <Button
-              title="Request  Callback"
-              buttonClass=" text-[#FFF] text-[12px] sm:text-[28px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px]  mt-3"
-              onChange={() => open("banner", slug, "projBanner")}
-            />
+            <div className="flex justify-center sm:justify-start items-center w-full space-x-2">
+              <Button
+                title="Request  Callback"
+                buttonClass=" text-[#FFF] text-[12px] sm:text-[28px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px]  mt-3"
+                onChange={() => open("banner", slug, "projBanner")}
+              />
+              <DownloadBroucher
+                className="block py-2.5 sm:hidden"
+                url={brocherUrl}
+              />
+            </div>
           </div>
           <div className="flex justify-center items-center flex-col">
-            <DownloadBroucher url={brocherUrl} />
+            <DownloadBroucher className="hidden sm:flex" url={brocherUrl} />
             <WhatsAppButton
               className="cursor-pointer mt-2 sm:mt-4 "
               name={name}

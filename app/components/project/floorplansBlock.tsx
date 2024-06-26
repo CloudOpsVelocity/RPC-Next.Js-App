@@ -302,10 +302,10 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                   return (
                     <Button
                       key={keyName}
-                      buttonClass={`flex justify-start mb-[3%] w-full rounded-[20px] gap-[8px]  items-center mr-[24px] md:ml-[0px] text-[12px] sm:text-[18px] ${
+                      buttonClass={`flex justify-start mb-2 sm:mb-[3%] w-full rounded-[20px] gap-[8px]  items-center mr-[24px] md:ml-[0px] text-[12px] sm:text-[18px] border ${
                         propCgId == keyName
-                          ? "text-[#001F35] font-[600] shadow-md bg-[#D5EDFF]"
-                          : "text-[#303A42] font-[500] bg-[#EEF7FE]"
+                          ? "text-[#001F35] font-[600] shadow-md bg-[#c8f5ca] sm:bg-[#D5EDFF]"
+                          : "text-[#303A42] font-[500] bg-[#E1FFE2] sm:bg-[#EEF7FE]"
                       } `}
                       onChange={() => {
                         if (propCgId !== keyName) {

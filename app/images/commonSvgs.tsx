@@ -4716,10 +4716,11 @@ export const WhatsAppButton = ({ name, type }: Props) => {
     <a href={whatsappLink} target="_blank">
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        width="150"
-        height="70"
+        width="255"
+        height="72"
         viewBox="0 0 276 112"
         fill="none"
+        className="w-[150px] h-[70px]  sm:w-[255px] sm:h-[72px]"
       >
         <g filter="url(#filter0_i_138_18368)">
           <path
@@ -5906,8 +5907,8 @@ export const WhatsAppIcon = (
     height="75"
     viewBox="0 0 72 75"
     fill="none"
-    className="h-[44px] w-[42px]  xl:h-[75px] xl:w-[72px]">
-  
+    className="h-[44px] w-[42px]  xl:h-[75px] xl:w-[72px]"
+  >
     <circle
       cx="36"
       cy="36"
@@ -6010,7 +6011,6 @@ export const FacbookIcon = (
     viewBox="0 0 73 75"
     fill="none"
     className="h-[44px] w-[42px]  xl:h-[75px] xl:w-[72px]"
-
   >
     <circle
       cx="36.5"
@@ -6088,8 +6088,6 @@ export const Telegram = (
     viewBox="0 0 72 75"
     fill="none"
     className="h-[44px] w-[42px]  xl:h-[75px] xl:w-[72px]"
-
-
   >
     <circle
       cx="36"
@@ -6178,7 +6176,6 @@ export const EmailIcon = (
     viewBox="0 0 72 72"
     fill="none"
     className="h-[44px] w-[42px]  xl:h-[75px] xl:w-[72px]"
-
   >
     <circle
       cx="36"
@@ -13526,7 +13523,8 @@ export const ImgCarouselIcon = () => {
       height="32"
       viewBox="0 0 33 32"
       fill="none"
-      className="h-[24px] w-[24px]  xl:h-[34px] xl:w-[34px]">
+      className="h-[24px] w-[24px]  xl:h-[34px] xl:w-[34px]"
+    >
       <circle
         cx="16.5"
         cy="16"
@@ -13550,7 +13548,8 @@ export const PrevCarouselIcon = () => {
       height="32"
       viewBox="0 0 33 32"
       fill="none"
-      className="h-[24px] w-[24px]  xl:h-[34px] xl:w-[34px]">
+      className="h-[24px] w-[24px]  xl:h-[34px] xl:w-[34px]"
+    >
       <circle
         cx="16"
         cy="16"

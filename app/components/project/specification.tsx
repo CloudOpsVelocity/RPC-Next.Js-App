@@ -85,6 +85,8 @@ export default function Specifications({
               h={
                 458 > data?.length * (isMobile ? 190 : 270)
                   ? data.length * (isMobile ? 190 : 270)
+                  : isMobile
+                  ? 280
                   : 358
               }
               viewportRef={viewport}

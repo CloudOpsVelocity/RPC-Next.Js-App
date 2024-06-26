@@ -23,7 +23,7 @@ export default function ListingRentAvail({
 }) {
   return (
     <div className="w-[90%] mb-[5%] scroll-mt-[350px]" id="listings">
-      <h1 className="text-h2 lg:text-[32px] font-[600] text-[#001F35] mb-[12px]">
+      <h1 className="text-[20px] lg:text-[32px] font-[600] text-[#001F35] mb-[12px]">
         Listings Available in{" "}
         <span className="text-[#148B16] font-[700]  text-[20px] lg:text-[32px]">
           {projName}
@@ -61,7 +61,7 @@ const Card = ({
   return (
     <div
       className={clsx(
-        " sm:h-[85px] shadow-[0px_4px_30px_0px_rgba(0,0,0,0.15)] rounded-[10px] relative cursor-pointer ",
+        " sm:h-[85px] shadow-[0px_4px_30px_0px_rgba(0,0,0,0.15)] rounded-[10px] relative cursor-pointer p-2 sm:p-0",
         type === "sell"
           ? "border border-solid border-[#FBE885]"
           : "border border-solid border-[#B1DEFF] "
@@ -69,23 +69,25 @@ const Card = ({
       onClick={() => handleBoxClick(block ? r : s)}
     >
       <AvailListSideSvg type={type} />
-      <div className="inline-flex justify-center items-center gap-[22px] h-full ">
-        {type === "rent" ? <RentSvg /> : <SellSvg />}
-        <div className="pl-5 md:pl-0">
-          <h2 className="text-[#242424] text-[20px] sm:text-2xl not-italic font-medium leading-[31px]">
+      <div className="flex justify-evenly sm:justify-center items-center gap-2 sm:gap-[22px] h-full ">
+        <Image
+          alt="listing"
+          src={type === "rent" ? config.rentLogo : config.sellLogo}
+          width={100}
+          height={100}
+          className="w-[50px] h-[40px] sm:w-[60px] sm:h-[60px] block sm:hidden"
+        />
+        <span className="hidden sm:block">
+          {type === "rent" ? <RentSvg /> : <SellSvg />}
+        </span>
+        <div className="pl-0">
+          <h2 className="text-[#242424] text-[18px] mt-4 sm:mt-0 sm:text-2xl not-italic font-medium leading-[31px]">
             <span className="capitalize">{type}</span> Listings{" "}
           </h2>
-          {/* <h2
-            className={clsx(
-              "text-[#242424] text-[20px] sm:text-2xl not-italic font-bold leading-[31px] mt-1"
-            )}
-          >
-            {projName}
-          </h2> */}
         </div>
         <div
           className={clsx(
-            "flex justify-center items-center p-2 gap-[4px] sm:gap-[12px] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[10px] border-[3px] border-solid max-w-[60px] sm:max-w-[80px] mt-[14px] ml-5 mb-5 mr-5 text-[#303030] text-[14px] sm:text-2xl not-italic font-semibold",
+            "flex justify-center items-center p-1.5 gap-[4px] sm:gap-[12px] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[10px] border-[3px] border-solid max-w-[60px] sm:max-w-[80px] sm:mt-[14px] sm:ml-5 sm:mb-5 sm:mr-5 text-[#303030] text-[14px] sm:text-2xl not-italic font-semibold",
             type === "sell"
               ? "border-[#FFD600] bg-[#ffef9b]"
               : "border-[#0073C6] bg-[#DBF0FF]"
@@ -110,4 +112,6 @@ let config = {
     "https://d2l0lb5gc1bw3t.cloudfront.net/staticmedia-images-icons/project-detail/yellowarrow.png",
   rentIcon:
     "https://d2l0lb5gc1bw3t.cloudfront.net/staticmedia-images-icons/project-detail/bluearrow.png",
+  rentLogo: "/abc/rent.png",
+  sellLogo: "/abc/sell.png",
 };

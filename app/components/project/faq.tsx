@@ -38,8 +38,8 @@ export default function FaqWithBg({ data, projName }: FaqWithBgProps) {
       <div className="flex sm:justify-center items-center w-full ">
         {data?.length > 0 && (
           <>
-            <div className="relative mr-[-90px]  sm:mr-[-70px] bottom-[20px] w-[168px] h-[74px] rounded-[50%] blur-[29.5px] bg-[#0093ff4d] "></div>
-            <h1 className="text-[21px] lg:text-[32px] font-[600] text-[#001F35] mb-1 sm:mb-16 text-center sm:text-start">
+            <div className="relative mr-[-140px]  sm:mr-[-70px] bottom-[20px] w-[168px] h-[74px] rounded-[50%] blur-[29.5px] bg-[#0093ff4d] "></div>
+            <h1 className="text-h2 lg:text-[32px] font-[600] text-[#001F35] mb-1 sm:mb-16 text-center sm:text-start">
               Frequently Asked Questions of
               <span className="text-[#148B16] font-[700]  ml-4">
                 {projName}
@@ -142,7 +142,7 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
           Have any Question? Ask Here 👇
         </span>
       </h2>
-      <h2 className="font-[700] text-[#233333] text-[20px] md:text-[28px]  ">
+      <h2 className="font-[700] text-[#233333] text-h2 md:text-[28px]  ">
         Ask your question related to
         <span className="!text-green-600"> {projName} Project!</span>
       </h2>
@@ -174,9 +174,7 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
           type="submit"
           loading={status === "pending"}
           size={isMobile ? "xs" : "md"}
-          color="themeBlue.0"
-
-          // className="inline-flex items-center justify-center rounded-md text-[30px] font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 bg-[#0073C6] text-white"
+          className="bg-btnPrimary"
         >
           Submit
         </Button>

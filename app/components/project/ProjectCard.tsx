@@ -78,7 +78,7 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
       <div
         key={reqId}
         className={clsx(
-          "border text-card-foreground min-w-[350px]   min-h-[400px] overflow-hidden  shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[14px]",
+          "border text-card-foreground min-w-[310px]   min-h-[400px] overflow-hidden  shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[14px]",
           type == "proj" ? "bg-[#FAFAFA] " : "bg-[#FFFEFE] pt-4"
         )}
       >
@@ -249,7 +249,7 @@ const ProjectCarousel = ({
           {data &&
             data?.map((project: any, index: number) => {
               return (
-                <CarouselSlide h={480}>
+                <CarouselSlide className="!h-[480px] sm:!h-[500px]">
                   <ProjectCard
                     key={index}
                     type={type}
