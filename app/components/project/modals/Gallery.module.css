@@ -1,0 +1,6 @@
+@media (min-width: 1024px) {
+  .control[data-inactive] {
+    opacity: 0;
+    cursor: default;
+  }
+}
