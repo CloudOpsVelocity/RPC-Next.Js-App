@@ -15,7 +15,7 @@ import SharePopup from "../../atoms/SharePopup";
 import { imageUrlParser } from "@/app/utils/image";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import clsx from "clsx";
-import styles from "@/app/styles/Carousel.module.css";
+import styles from "./Gallery.module.css";
 import { useMediaQuery } from "@mantine/hooks";
 import Close from "../button/close";
 type GalleryProps = {
@@ -45,7 +45,7 @@ const Gallery: React.FC<GalleryProps> = ({
   return (
     <>
       <Modal
-        centered={(isMobile ? (isImage ? true : false) : false)}
+        centered={isMobile ? (isImage ? true : false) : false}
         opened={content ? true : false}
         onClose={() => {
           setPreviewImage(null);
@@ -62,7 +62,11 @@ const Gallery: React.FC<GalleryProps> = ({
         className="!styleScroll"
       >
         <div className="h-auto  scrollbar-hide flex justify-end flex-col items-center">
-          <div className={`w-full bg-transparent    h-[57px] flex items-center justify-between mt-[26px]  z-[1000] px-0.5  m-auto ${(!isImage) && isMobile ? "mt-50%": "mt-[10%]"}`}>
+          <div
+            className={`w-full bg-transparent    h-[57px] flex items-center justify-between mt-[26px]  z-[1000] px-0.5  m-auto ${
+              !isImage && isMobile ? "mt-50%" : "mt-[10%]"
+            }`}
+          >
             <div className="text-white text-2xl not-italic  font-bold leading-[normal]">
               {isImage ? "Gallery" : "Videos"}
             </div>
@@ -72,7 +76,10 @@ const Gallery: React.FC<GalleryProps> = ({
                 url={imageUrlParser(content?.url || "")}
               />
 
-              <Close  className="h-[29px] w-[29px] xl:w-[34px] xl:h-full" close={close} />
+              <Close
+                className="h-[29px] w-[29px] xl:w-[34px] xl:h-full"
+                close={close}
+              />
             </div>
           </div>
           {isImage ? (
@@ -94,8 +101,7 @@ const Gallery: React.FC<GalleryProps> = ({
               url={previewImage as string}
               width="auto"
               controls
-              height={isMobile ? "50vh":"68vh"}
-         
+              height={isMobile ? "50vh" : "68vh"}
             />
           )}
           <div className="mt-4 flex items-center justify-center  w-full">
@@ -106,13 +112,14 @@ const Gallery: React.FC<GalleryProps> = ({
               slideGap="xs"
               loop
               mt={"lg"}
-              maw={1200}
+              maw={isMobile ? 200 : 1200}
               pl={isMobile ? "30px" : "90px"}
               align={images.length > 5 ? "start" : "center"}
               slidesToScroll={5}
               className="w-full min-w-[80px] !h-auto max-h-[100px] min-h-[50px]"
               withControls={
-                (content?.type == "image" ? images.length : videos.length) > (isMobile ? 0 : 5)
+                (content?.type == "image" ? images.length : videos.length) >
+                (isMobile ? 0 : 5)
                   ? true
                   : false
               }
