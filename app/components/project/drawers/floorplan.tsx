@@ -155,9 +155,8 @@ export default function FloorplanDrawer() {
         position="right"
         zIndex={1000}
         classNames={S}
-        size={"35%"}
       >
-        <h3 className=" gap-2.5 pl-2.5  py-2.5 bg-[#EEF7FE] text-[#001F35] text-[28px] not-italic font-semibold leading-[normal] capitalize w-full mt-4 max-w-[90%] inline-flex">
+        <h3 className=" gap-1 pl-1 py-1 xl:gap-2.5 xl:pl-2.5  xl:py-2.5 bg-[#EEF7FE] text-[#001F35] text-[28px] not-italic font-semibold leading-[normal] capitalize w-full mt-2 xl:mt-4 max-w-[90%] inline-flex">
           {getIcon(
             BACKEND_PROP_TYPES[
               cg?.propertyType as keyof typeof BACKEND_PROP_TYPES

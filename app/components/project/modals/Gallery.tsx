@@ -113,7 +113,7 @@ const Gallery: React.FC<GalleryProps> = ({
               loop
               mt={"lg"}
               maw={isMobile ? 200 : 1200}
-              pl={isMobile ? "30px" : "90px"}
+              px={isMobile ? "50px" : "90px"}
               align={images.length > 5 ? "start" : "center"}
               slidesToScroll={5}
               className="w-full min-w-[80px] !h-auto max-h-[100px] min-h-[50px]"
@@ -185,7 +185,7 @@ const Gallery: React.FC<GalleryProps> = ({
 
       <button
         onClick={() => handleImageClick(selectedMedia)}
-        className="absolute bottom-3 right-3 z-50 "
+        className="absolute bottom-3 right-1 xl:right-3 z-50 "
       >
         <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] " />
       </button>
