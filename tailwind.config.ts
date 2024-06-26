@@ -14,7 +14,7 @@ const config: Config = {
         greenPrimary: "#148B16",
       },
       fontSize: {
-        h2: "20px",
+        h2: "18px",
       },
     },
   },

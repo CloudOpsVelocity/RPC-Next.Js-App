@@ -4,13 +4,10 @@ import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import SharePopup from "../../atoms/SharePopup";
 import { imageUrlParser } from "@/app/utils/image";
 import Close from "../button/close";
-import {
-  TransformComponent,
-  TransformWrapper,
-  useControls,
-} from "react-zoom-pan-pinch";
+import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 import S from "@/app/styles/ImgCarousel.module.css";
 import ZoomInOut from "../actions/ZoomInOut";
+import NextImage from "next/image";
 export default function MasterPlanPopup({
   url,
   onDownload,
@@ -46,7 +43,7 @@ export default function MasterPlanPopup({
                 className="flex justify-center items-center gap-1 p-1 xl:p-2 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] rounded-[10px] bg-[#F3F7FF] text-[#0073C6] text-base not-italic font-semibold leading-[normal] tracking-[0.32px]"
                 onClick={onDownload}
               >
-                <svg  
+                <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"
@@ -58,7 +55,9 @@ export default function MasterPlanPopup({
                     fill="#0073C6"
                   />
                 </svg>{" "}
-                <span  className="hidden h-4 w-4 xl:w-full xl:h-auto  items-center  xl:block">Download</span>
+                <span className="hidden h-4 w-4 xl:w-full xl:h-auto  items-center  xl:block">
+                  Download
+                </span>
               </a>
               <SharePopup
                 titleText="Share Master Plan"
@@ -66,7 +65,10 @@ export default function MasterPlanPopup({
                 url={imageUrlParser(url || "", "M")}
                 className="text-[#0073C6] text-base not-italic font-semibold leading-[normal] tracking-[0.32px]"
               />
-              <Close className="h-[28px] w-[28px] xl:h-[36px] xl:w-[36px]" close={close} />
+              <Close
+                className="h-[28px] w-[28px] xl:h-[36px] xl:w-[36px]"
+                close={close}
+              />
             </div>
           </div>
           <div>
@@ -83,7 +85,11 @@ export default function MasterPlanPopup({
         w="100%"
         fit="contain"
         onClick={open}
+        width={600}
+        height={600}
         className="cursor-pointer shadow-[0px_4px_30px_0px_rgba(0,0,0,0.25)] rounded-[14px] border-[0.5px] border-solid border-[#D2CDCD] py-4"
+        alt="master plan"
+        component={NextImage}
       />
       <button onClick={open}>
         <div className="bg-[#F4FBFF] p-[10px] rounded-[29px] gap-[12px] flex justify-end items-center  cursor-pointer absolute bottom-10 right-1 sm:right-4 z-50 shadow-[0px_4px_12px_0px_rgba(0,0,0,0.40)]">
@@ -113,6 +119,9 @@ const Content = ({ url }: { url: string }) => {
           fit="contain"
           alt="master plan"
           className="cursor-pointer h-[420px] xl:h-[770px] border-[5px] bg-white border-white md:min-w-[1400px] xl:max-h-[770px] object-contain"
+          component={NextImage}
+          width={600}
+          height={600}
         />
       </TransformComponent>
       <ZoomInOut className="right-5 xl:right-28 pb-2" />

@@ -89,4 +89,27 @@
   font-weight: 500;
   line-height: normal;
   text-transform: capitalize;
+  margin-top: 16px;
+}
+
+@media screen and (max-width: 601px) {
+  .labelByBhk {
+    color: #001f35;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: capitalize;
+    margin-top: 6px;
+  }
+  .input {
+    font-size: 12px;
+  }
+  .input::placeholder {
+    font-size: 12px;
+  }
+  .option {
+    font-size: 12px;
+  }
 }

@@ -115,13 +115,13 @@ const Byunitblock: React.FC<Props> = ({
     (value) => value !== null && value !== "" && value !== 0
   );
   return (
-    <div className="px-[5%] py-[2%] w-full flex justify-start flex-col items-start   h-full">
-      <h3 className="text-[#001F35] text-2xl not-italic font-medium mb-4">
+    <div className="px-[1%] sm:px-[5%] py-[2%] w-full flex justify-start flex-col items-start   ">
+      <h3 className="text-[#001F35] sm:text-2xl not-italic font-medium sm:mb-4">
         See floor plan according to your selections
       </h3>
       {isAppliedFilters && (
         <>
-          <p className="text-[#001F35] text-lg not-italic font-medium leading-[normal]  mb-2">
+          <p className="text-[#001F35] sm:text-lg not-italic font-medium leading-[normal]  mb-2">
             Applied Filters
           </p>
           <div className="flex justify-start items-center w-full h-[35px]   ">
@@ -158,7 +158,7 @@ const Byunitblock: React.FC<Props> = ({
                   value !== 0 &&
                   value !== "" && (
                     <div
-                      className="flex h-[33px] items-center px-3 whitespace-nowrap py-1.5 bg-white border border-[#9DB6DC] rounded-[10px]"
+                      className="flex sm:h-[33px]  text-[12px] sm:text-base items-center px-1 sm:px-3 whitespace-nowrap sm:py-1.5 bg-white border border-[#9DB6DC] rounded-[10px]"
                       key={key}
                     >
                       <span className="text-[#148B16] font-semibold">
@@ -203,14 +203,13 @@ const Byunitblock: React.FC<Props> = ({
           </div>
         </>
       )}
-      <div className="w-[90%] flex justify-between items-start flex-wrap gap-[5%]">
+      <div className="w-[90%] flex justify-between items-start flex-wrap gap-[5%] pb-2 sm:pb-0">
         {propCgId == projectprops.apartment ||
         propCgId == projectprops.villament ? (
           <Select
             size="md"
-            mt="md"
             label="Tower"
-            className="!w-[46%]"
+            className="w-[100%] sm:!w-[46%]"
             placeholder="-- select Tower --"
             data={(getOptions("towerName") as string[]) || []}
             searchable
@@ -229,9 +228,8 @@ const Byunitblock: React.FC<Props> = ({
         <Select
           rightSection={<DropDownIcon />}
           size="md"
-          mt="md"
           label="Unit Number"
-          className="!w-[46%]"
+          className="w-[100%] sm:!w-[46%]"
           placeholder="-- select Unit Number--"
           data={(getOptions("unitNumber") as string[]) || []}
           searchable
@@ -245,9 +243,8 @@ const Byunitblock: React.FC<Props> = ({
           <Select
             rightSection={<DropDownIcon />}
             size="md"
-            mt="md"
             label="Unit Type"
-            className="!w-[46%]"
+            className="w-[100%] sm:!w-[46%]"
             placeholder="-- select Unit Type --"
             data={getOptions("bhkName")}
             searchable
@@ -268,9 +265,8 @@ const Byunitblock: React.FC<Props> = ({
             <Select
               rightSection={<DropDownIcon />}
               size="md"
-              mt="md"
               label="Block"
-              className="!w-[46%]"
+              className="w-[100%] sm:!w-[46%]"
               placeholder="-- select Block --"
               data={(getOptions("block") as string[]) || []}
               searchable
@@ -289,8 +285,7 @@ const Byunitblock: React.FC<Props> = ({
           <Select
             rightSection={<DropDownIcon />}
             size="md"
-            mt="md"
-            className="!w-[46%]"
+            className="w-[100%] sm:!w-[46%]"
             label={
               propCgId == projectprops.rowHouse ||
               propCgId == projectprops.villa
@@ -319,9 +314,8 @@ const Byunitblock: React.FC<Props> = ({
           <Select
             rightSection={<DropDownIcon />}
             size="md"
-            mt="md"
             label="Area"
-            className="!w-[46%]"
+            className="w-[100%] sm:!w-[46%]"
             placeholder="-- select Area --"
             data={(getOptions("plotArea") as string[]) || []}
             searchable
@@ -338,9 +332,8 @@ const Byunitblock: React.FC<Props> = ({
         <Select
           rightSection={<DropDownIcon />}
           size="md"
-          mt="md"
           label="Facing"
-          className="!w-[46%]"
+          className="w-[100%] sm:!w-[46%]"
           placeholder="-- select facing --"
           data={
             (getOptions("facingName").filter(
@@ -358,9 +351,8 @@ const Byunitblock: React.FC<Props> = ({
             rightSection={<DropDownIcon />}
             w={"full"}
             size="md"
-            mt="md"
             label="Breadth of Plot"
-            className="!w-[46%]"
+            className="w-[100%] sm:!w-[46%]"
             placeholder="-- select --"
             data={getOptions("width")}
             searchable
@@ -379,9 +371,8 @@ const Byunitblock: React.FC<Props> = ({
             rightSection={<DropDownIcon />}
             w={"full"}
             size="md"
-            mt="md"
             label="length Of Plot"
-            className="!w-[46%]"
+            className="w-[100%] sm:!w-[46%]"
             placeholder="-- select --"
             data={getOptions("length")}
             searchable
@@ -398,7 +389,7 @@ const Byunitblock: React.FC<Props> = ({
       </div>
       <Button
         variant="blue"
-        className="text-xl mt-4"
+        className="sm:text-xl sm:mt-4"
         onClick={handleReset}
         showButton={showClearAll}
       >
