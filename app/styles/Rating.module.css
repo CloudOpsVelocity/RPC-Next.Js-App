@@ -40,6 +40,9 @@
 .star {
   margin-right: 31px;
 }
+.headerCustomLoginPopup{
+  display: none;
+ }
 
 @media screen and (max-width: 767px) {
   .star {
@@ -53,6 +56,10 @@
     display: none;
   }
    */
+   .headerCustomLoginPopup{
+    display: none;
+   }
+  
    .ratingInput {
     font-size: 16px;
    }

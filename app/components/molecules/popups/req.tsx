@@ -228,35 +228,35 @@ const LoggedInUserForm = ({
     />
   ) : (
     <div className="mt-6 w-full">
-      <p className=" mb-[8px] text-[14px] lg:text-[20px] text-[#00487c] text-xl italic font-bold leading-[normal] tracking-[0.8px]">
+      <p className=" mb-[8px]  lg:text-[20px] text-[#00487c] text-[14px] xl:text-xl italic font-bold leading-[normal] tracking-[0.8px]">
         <span className="text-[#4D6677] text-[18px] xl:text-xl italic font-medium leading-[normal] tracking-[0.8px]">
           {" "}
           Call For:
         </span>{" "}
-        {title}
+       <span className="text-[14px] xl:text-[24px]" >{title}</span> 
       </p>
-      <p className="text-[#148B16] mb-[6%] text-[14px] lg:text-[20px] italic font-bold leading-[normal] tracking-[0.64px]">
-        <span className="text-[#4D6677] text-xl italic font-medium leading-[normal] tracking-[0.8px]">
+      <p className="text-[#148B16] mb-[6%] text-[14px] xl:text-xl lg:text-[20px] italic font-bold leading-[normal] tracking-[0.64px]">
+        <span className="text-[#4D6677] text-[18px] xl:text-xl italic font-medium leading-[normal] tracking-[0.8px]">
           {Posted_BY}:
         </span>{" "}
-        {builder}
+        <span className="text-[14px] xl:text-[24px]" >{builder}</span> 
       </p>
       {/* Notifcation */}
-      <div className=" flex justify-center items-center gap-2.5 border p-2.5 rounded-xl border-solid border-[#FFD600] bg-[#fff4bb] text-[#242424] text-[17px] not-italic font-semibold leading-[normal] mb-6">
+      <div className=" flex justify-center items-center gap-2.5 border p-2.5 rounded-xl border-solid border-[#FFD600] bg-[#fff4bb] text-[#242424] text-[15px] xl:text-[17px] not-italic font-semibold leading-[normal] mb-6">
         You will receive about your inquiries on below contact number
       </div>
       {/* NOTIFICATION END */}
-      <h3 className="mb-[2%]  text-[#001F35] text-xl not-italic font-bold">
+      <h3 className="mb-[2%]  text-[#001F35] text-[18px] xl:text-xl not-italic font-bold">
         Your Details
       </h3>
 
-      <p className="text-[#202020] text-base not-italic font-semibold leading-[normal] tracking-[0.64px] mb-2">
+      <p className="text-[#202020] text-[14px] xl:text-base not-italic font-semibold leading-[normal] tracking-[0.64px] mb-2">
         Name: {session?.user.name}
       </p>
-      <p className="text-[#202020] text-base not-italic font-semibold leading-[normal] tracking-[0.64px] mb-2">
+      <p className="text-[#202020] text-[14px] xl:text-base not-italic font-semibold leading-[normal] tracking-[0.64px] mb-2">
         Contact: {session?.user.userName}
       </p>
-      <p className="text-[#202020] text-base not-italic font-semibold leading-[normal] tracking-[0.64px] mb-2">
+      <p className="text-[#202020] text-[14px] xl:text-base not-italic font-semibold leading-[normal] tracking-[0.64px] mb-2">
         Email: {session?.user.email}
       </p>
       <B

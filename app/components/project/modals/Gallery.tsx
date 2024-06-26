@@ -112,7 +112,7 @@ const Gallery: React.FC<GalleryProps> = ({
               slideGap="xs"
               loop
               mt={"lg"}
-              maw={isMobile ? 200 : 1200}
+              maw={isMobile ? 300 : 1200}
               px={isMobile ? "50px" : "90px"}
               align={images.length > 5 ? "start" : "center"}
               slidesToScroll={5}
