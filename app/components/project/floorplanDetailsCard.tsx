@@ -30,7 +30,6 @@ const FloorplanDetailsCard: React.FC<Props> = ({
   data,
   lastIndex,
 }) => {
-  console.log(lastIndex);
   // const data = projData[index];
   const [, setImage] = useAtom(selectedFloorAtom);
   const setFloorsArray = useSetAtom(floorPlansArray);
@@ -68,8 +67,7 @@ const FloorplanDetailsCard: React.FC<Props> = ({
     <>
       <div
         className={clsx(
-          "sm:flex    sm:h-[180px] justify-between py-[18px] px-[25px] pt-[24px] w-full border-[#92B2C8] border-solid border-b-[1px] border-r-[1px] cursor-pointer hidden ",
-          lastIndex && "!border-b-0 "
+          "sm:flex    sm:h-[180px] justify-between py-[18px] px-[25px] pt-[24px] w-full border-[#92B2C8] border-solid border-b-[1px] border-r-[1px] cursor-pointer hidden "
         )}
         onClick={handleCardClick}
         // style={{

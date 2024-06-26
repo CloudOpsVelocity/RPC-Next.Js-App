@@ -394,7 +394,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
           </div>
 
           <div
-            className="h-[500px] sm:h-[600px] md:h-[547px] w-full rounded-[14px] mt-[2%] border-solid sm:border-[1px] border-[#92B2C8] bg-[#FFF]  flex flex-col-reverse md:flex-row justify-center  "
+            className="h-[500px] sm:h-[600px] md:h-[547px] w-full rounded-[14px] mt-[2%] sm:border-solid sm:border-[1px] sm:border-[#92B2C8] bg-[#FFF]  flex flex-col-reverse md:flex-row justify-center  "
             onClick={handleContainerClick}
           >
             {floorPlanType === "type" && (
