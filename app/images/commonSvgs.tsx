@@ -5906,7 +5906,8 @@ export const WhatsAppIcon = (
     height="75"
     viewBox="0 0 72 75"
     fill="none"
-  >
+    className="h-[44px] w-[42px]  xl:h-[75px] xl:w-[72px]">
+  
     <circle
       cx="36"
       cy="36"
@@ -6008,6 +6009,8 @@ export const FacbookIcon = (
     height="75"
     viewBox="0 0 73 75"
     fill="none"
+    className="h-[44px] w-[42px]  xl:h-[75px] xl:w-[72px]"
+
   >
     <circle
       cx="36.5"
@@ -6084,6 +6087,9 @@ export const Telegram = (
     height="75"
     viewBox="0 0 72 75"
     fill="none"
+    className="h-[44px] w-[42px]  xl:h-[75px] xl:w-[72px]"
+
+
   >
     <circle
       cx="36"
@@ -6171,6 +6177,8 @@ export const EmailIcon = (
     height="72"
     viewBox="0 0 72 72"
     fill="none"
+    className="h-[44px] w-[42px]  xl:h-[75px] xl:w-[72px]"
+
   >
     <circle
       cx="36"
@@ -13518,7 +13526,7 @@ export const ImgCarouselIcon = () => {
       height="32"
       viewBox="0 0 33 32"
       fill="none"
-    >
+      className="h-[24px] w-[24px]  xl:h-[34px] xl:w-[34px]">
       <circle
         cx="16.5"
         cy="16"
@@ -13542,7 +13550,7 @@ export const PrevCarouselIcon = () => {
       height="32"
       viewBox="0 0 33 32"
       fill="none"
-    >
+      className="h-[24px] w-[24px]  xl:h-[34px] xl:w-[34px]">
       <circle
         cx="16"
         cy="16"

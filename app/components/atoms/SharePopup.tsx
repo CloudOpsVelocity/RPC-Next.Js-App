@@ -68,13 +68,13 @@ export default function SharePopup({
           <p className="text-[#565D70]  text-[14px] xl:text-xl not-italic font-semibold leading-[normal] tracking-[0.8px] my-2 xl:my-5">
             Share this link via
           </p>
-          <div className="flex space-x-4 mb-4">
+          <div className="flex space-x-4  xl:mb-4">
             <Share shareUrl={CopiedUrl} />
           </div>
-          <p className="text-sm font-medium mb-2">or Copy Link</p>
-          <div className="flex items-center justify-between border rounded-md p-2">
+          <p className="text-[13px]  xl:text-sm font-medium mb-2">or Copy Link</p>
+          <div className="flex items-center justify-between border rounded-md p-1 xl:p-2">
             <span
-              className="text-black text-base not-italic font-medium leading-[normal] truncate cursor-pointer"
+              className="text-black text-[14px]  xl:text-base not-italic font-medium leading-[normal] truncate cursor-pointer"
               onClick={() => clipboard.copy(CopiedUrl)}
             >
               {CopiedUrl}
@@ -84,7 +84,7 @@ export default function SharePopup({
                 <button
                   className={`${
                     clipboard.copied ? "!bg-[#148B16]" : "!bg-[#0073C6]"
-                  } flex justify-center items-center gap-1 shadow-[0px_4px_20px_0px_rgba(112,144,176,0.08)] p-2 rounded-[5px] text-white text-xl not-italic font-semibold leading-[normal] min-w-fit`}
+                  } flex justify-center items-center gap-1 shadow-[0px_4px_20px_0px_rgba(112,144,176,0.08)] p-1   xl:p-2 rounded-[5px] text-white text-sm xl:text-xl not-italic font-semibold leading-[normal] min-w-fit`}
                   // color={clipboard.copied ? "teal" : "#0073C6"}
                   onClick={() => clipboard.copy(CopiedUrl)}
                 >
@@ -114,7 +114,7 @@ export default function SharePopup({
 const Share = ({ shareUrl }: { shareUrl: string }) => {
   const title = "Share with friends";
   return (
-    <div className="space-x-10 inline-flex mb-4 mt-1">
+    <div className=" space-x-5 xl:space-x-10 inline-flex mb-4 mt-1">
       <div className="Demo__some-network">
         <WhatsappShareButton
           url={shareUrl}
@@ -125,7 +125,7 @@ const Share = ({ shareUrl }: { shareUrl: string }) => {
           windowHeight={700}
         >
           {WhatsAppIcon}
-          <p className="mt-1">Whatsapp</p>
+          <p className="  text-[12px]  xl:text-[16px] xl:mt-1   ">Whatsapp</p>
         </WhatsappShareButton>
       </div>
       <div className="Demo__some-network">
@@ -137,7 +137,7 @@ const Share = ({ shareUrl }: { shareUrl: string }) => {
           windowHeight={700}
         >
           {Telegram}
-          <p className="mt-1">Telegram</p>
+          <p className="  text-[12px]  xl:text-[16px] xl:mt-1   ">Telegram</p>
         </TelegramShareButton>
       </div>
       <div className="Demo__some-network">
@@ -148,7 +148,7 @@ const Share = ({ shareUrl }: { shareUrl: string }) => {
           windowHeight={700}
         >
           {FacbookIcon}
-          <p className="mt-1">Facebook</p>
+          <p className="  text-[12px]  xl:text-[16px] xl:mt-1   ">Facebook</p>
         </FacebookShareButton>
 
         <div>
@@ -170,7 +170,7 @@ const Share = ({ shareUrl }: { shareUrl: string }) => {
           windowWidth={1200}
         >
           {EmailIcon}
-          <p className="mt-1">Mail</p>
+          <p className="  text-[12px]  xl:text-[16px] xl:mt-1   ">Mail</p>
         </EmailShareButton>
       </div>
     </div>
