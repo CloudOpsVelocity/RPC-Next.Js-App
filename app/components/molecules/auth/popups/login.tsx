@@ -109,7 +109,7 @@ function LoginPopupForm({ closePopup }: { closePopup?: () => void }) {
     <Box maw={420} mx="auto">
       <form
         onSubmit={form.onSubmit(onSubmit)}
-        className="w-[100%] flex justify-center items-center flex-col "
+        className="w-[100%] flex justify-center mt-2 items-center flex-col "
       >
         <NumberInput
           mt={"xs"}
@@ -118,12 +118,14 @@ function LoginPopupForm({ closePopup }: { closePopup?: () => void }) {
             root: StepCss.inputRoot,
             input: StepCss.textInput,
             error: StepCss.errorMsg,
+            label:StepCss.custlabelOfNumpop,
+            
           }}
           hideControls
           size="lg"
           className="w-[100%] mb-[3%] "
           label="Mobile Number"
-          placeholder="Enter Your Registered Mobile Number"
+          placeholder="Enter Your Mobile Number"
           {...form.getInputProps("username")}
           maxLength={10}
         />
@@ -132,6 +134,8 @@ function LoginPopupForm({ closePopup }: { closePopup?: () => void }) {
             root: StepCss.inputRoot,
             error: StepCss.errorMsg,
             innerInput: StepCss.textInput,
+            label:StepCss.custlabelOfNumpop
+            
           }}
           required
           size="lg"
@@ -161,17 +165,17 @@ function LoginPopupForm({ closePopup }: { closePopup?: () => void }) {
           loading={state === "pending"}
           type="submit"
           size={isMobile ? "compact-xs" : "md"}
-          className="!w-[100%] !h-[57px] mt-[4%] !bg-[#0c7aca] rounded-[6px] text-[20px]"
+          className=" !w-[95%] !h-[35px]  xl:!h-[57px] mt-[4%] !bg-[#0c7aca] rounded-[6px] !text-[20px] xl:text-[20px]"
         >
           LOGIN
         </Button>
         <div className="text-center mt-4 ">
           <Link
             href={{ pathname: "/register", search: redirectQueryParam }}
-            className="text-[#282828] md:text-xl flex justify-center items-center gap-2.5 rounded border p-2 border-solid border-[#B2B2B2] mb-3"
+            className="text-[#282828] text-[14px] md:text-xl flex justify-center font-semibold items-center gap-2.5 rounded border p-2 border-solid border-[#B2B2B2] mb-8 text-nowrap sm:text-[20px] "
           >
             New User?{" "}
-            <span className="md:text-xl  text-[#002749] text-xl not-italic font-semibold">
+            <span className=" text-[14px]  text-[#0C7ACA]  font-semibold  not-italic text-nowrap sm:text-[20px] md:text-xl  ">
               Create an account
             </span>
           </Link>

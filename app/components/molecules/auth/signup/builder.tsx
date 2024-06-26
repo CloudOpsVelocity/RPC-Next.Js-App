@@ -872,7 +872,7 @@ function Builder() {
         <>
           <Link
             href={{ pathname: "/login", search: queryParam.query }}
-            className="text-[#002749] font-semibold *: md:text-xl flex justify-center items-center gap-2.5 rounded border p-2 border-solid border-[#B2B2B2] mb-3 mt-[5%] text-nowrap "
+            className="text-[#002749] font-semibold *: md:text-xl flex justify-center items-center gap-2.5 rounded border p-2 border-solid border-[#B2B2B2]  xl:mb-3 mt-[5%] text-nowrap "
           >
             Already have an Account ?{" "}
             <span className="md:text-xl  text-[#0C7ACA]  not-italic font-semibold text-nowrap">
@@ -880,11 +880,11 @@ function Builder() {
             </span>
           </Link>
           {status === "error" && (
-            <p className="text-center text-[#556477] text-xl not-italic font-medium leading-[normal] mt-3 mb-[21px]">
-              Forget Password?{" "}
+            <p className="text-center text-[#556477] text-[16px] font-[600]  xl:text-xl not-italic xl:font-medium leading-[normal] mt-2 xl:mt-3 mb-[15px]">
+              Forgot Password?{" "}
               <Link
                 href={{ pathname: "/forgot", search: queryParam.query }}
-                className="text-[color:var(--Brand-green-primary,#148B16)] text-xl not-italic font-medium leading-[normal] underline"
+                className="text-[color:var(--Brand-green-primary,#148B16)] text-[16px] font-[600]  xl:text-xl not-italic xl:font-medium leading-[normal] underline"
               >
                 Reset
               </Link>

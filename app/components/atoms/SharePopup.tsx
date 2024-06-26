@@ -47,7 +47,8 @@ export default function SharePopup({
         opened={opened}
         onClose={close}
         centered
-        size={isMobile ? "70%" : "40%"}
+
+        size={isMobile ? "90%" : "40%"}
         classNames={{
           close: S.close,
           content: S.body,
@@ -56,15 +57,15 @@ export default function SharePopup({
           body: S.remove_padding,
         }}
       >
-        <div className="p-5">
+        <div className="p-5 ">
           <div className="flex justify-between">
-            <h3 className="text-[#202020] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px] ">
+            <h3 className="text-[#202020] text-xl xl:text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px] ">
               {titleText ?? title}
             </h3>
-            <Close close={close} />
+            <Close className=""  close={close} />
           </div>
 
-          <p className="text-[#565D70] text-xl not-italic font-semibold leading-[normal] tracking-[0.8px] my-5">
+          <p className="text-[#565D70]  text-[14px] xl:text-xl not-italic font-semibold leading-[normal] tracking-[0.8px] my-2 xl:my-5">
             Share this link via
           </p>
           <div className="flex space-x-4 mb-4">
@@ -98,13 +99,13 @@ export default function SharePopup({
       <button
         onClick={open}
         className={clsx(
-          "flex justify-center items-center gap-1 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] sm:p-2 rounded-[10px] bg-[#F3F7FF] ml-auto text-[#0073C6]  not-italic font-semibold leading-[normal] tracking-[0.4px]",
+          "flex justify-center items-center p-0.5 gap-1 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] sm:p-2 rounded-[10px] bg-[#F3F7FF] ml-auto text-[#0073C6]  not-italic font-semibold leading-[normal] tracking-[0.4px]",
           title === "Share Project" && "mt-[13px]",
           className
         )}
       >
         <ShearIcon className="w-[26px] h-[26px]" />
-        {title}
+        <span className="hidden  h-4 w-4 xl:h-auto xl:w-full xl:block">{title}</span>
       </button>
     </>
   );

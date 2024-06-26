@@ -47,7 +47,7 @@ export default function ZoomInOut({ className }: Props) {
 
 const config = {
   styles:
-    "flex justify-center items-center gap-2.5 px-[7px] py-1.5 rounded-2xl border-[0.8px] border-solid border-[#616D75] bg-[#EAEAEA] text-[#333] text-base not-italic font-semibold",
+    "flex justify-center  items-center gap-4.5 px-[7px] py-1.5 rounded-2xl border-[0.8px] border-solid border-[#616D75] bg-[#EAEAEA] text-[#333] text-base not-italic font-semibold ",
   buttons: [
     {
       icon: <ZoomInIcon />,

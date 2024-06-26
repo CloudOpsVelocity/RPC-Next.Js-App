@@ -14,21 +14,21 @@ export default function LoginPopup({
   const { redirectQueryParam } = usePathToOrigin();
   return (
     <div
-      className={`flex justify-center items-start w-full pt-[10%] ${
+      className={`flex justify-center m-1 items-start w-full pt-1 xl:pt-[10%] ${
         type == "RATING" ? "md:pt-[8]%" : "md:pt-[0%]"
       }`}
     >
-      <div className="w-full bg-white text-gray-600 justify-center items-center ">
+      <div className="w-full pt-4 h-[420px] xl:h-full bg-white text-gray-600 justify-center items-center ">
         <Logo styles="w-full flex justify-center items-center " />
 
-        <div className="w-full  p-[10%] md:p-[2%] mt-3 mb-3 ">
+        <div className="w-full p-4 xl:p-[10%] md:p-[2%]   xl:mt-3 xl:mb-3 ">
           <div className="inline-flex items-center justify-center w-full">
-            <div className="inline-flex items-center justify-center mx-auto border pl-[3px] py-0.5 rounded-md border-solid border-[#CDD7DE] bg-[#fafafa] ">
+            <div className="inline-flex items-center justify-center mx-auto border xl:pl-[3px] xl:py-0.5 rounded-md border-solid border-[#CDD7DE] bg-[#fafafa] ">
               <Link
                 className={
-                  "flex flex-col justify-center items-center gap-1 rounded border shadow-[0px_4px_11.1px_0px_rgba(25,80,71,0.46)_inset,0px_4px_12.9px_0px_rgba(140,177,141,0.38)] px-[35px] md:px-[52px] py-1.5 border-solid border-[#148B16] bg-[#148b16] text-white text-2xl not-italic font-bold leading-[normal] text-nowrap"
+                  "flex flex-col justify-center items-center gap-1 rounded border shadow-[0px_4px_11.1px_0px_rgba(25,80,71,0.46)_inset,0px_4px_12.9px_0px_rgba(140,177,141,0.38)] px-[28px] md:px-[52px] py-1.5 border-solid border-[#148B16] bg-[#148b16] text-white sm:text-2xl not-italic font-bold leading-[normal] text-nowrap text-[16px] " 
                 }
-                href={{
+                href={{ 
                   pathname: "/login",
                   search: redirectQueryParam,
                 }}
@@ -41,7 +41,7 @@ export default function LoginPopup({
                   search: redirectQueryParam,
                 }}
                 className={
-                  "flex flex-col justify-center items-center gap-1 rounded   px-[52px] py-1.5  bg-transparent text-[#242424]  sm:text-[24px] not-italic font-[500] leading-[normal]"
+                  "flex flex-col justify-center items-center gap-1 rounded py-1 px-6   xl:px-[52px] xl:py-1.5  bg-transparent text-[#242424]  sm:text-[24px] not-italic font-[500] leading-[normal]"
                 }
               >
                 {"Sign Up"}
@@ -65,7 +65,7 @@ export default function LoginPopup({
             </Link>
           </div> */}
 
-          <div className="mt-3">
+          <div className=" mt-0  xl:mt-3">
             <LoginPopupForm closePopup={close && close} />
           </div>
         </div>

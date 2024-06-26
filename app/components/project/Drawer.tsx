@@ -40,7 +40,7 @@ function ProjectDrawer({ projName }: { projName: string }) {
         zIndex={10000}
       >
         <div className="mt-4 flex justify-between mb-8">
-          <h1 className="uppercase text-[24px] lg:text-[32px] font-[600] text-[#001F35] pl-[57px] max-w-[950px]">
+          <h1 className="uppercase text-[20px] xl:text-[24px] lg:text-[32px] font-[600] text-[#001F35]  pl-[10px] xl:pl-[57px] max-w-[950px]">
             {builderName ? "About Builder" : title}{" "}
             {showProjName && (
               <span className="text-[#148B16] font-[700] uppercase">
@@ -48,10 +48,10 @@ function ProjectDrawer({ projName }: { projName: string }) {
               </span>
             )}
           </h1>
-          <Close close={handleReadMoreClick} />
+          <Close   close={handleReadMoreClick} />
         </div>
 
-        <div className="w-[95%] text-[#233333] text-xl mt-5 pl-[57px] pb-20">
+        <div className="w-[95%] text-[#233333] text-[16px] xl:text-xl mt-5 pl-[10px] xl:pl-[57px] xl:pb-20 capitalize">
           {type === "content" ? (
             <p className="break-words">{content}</p>
           ) : (
@@ -77,7 +77,7 @@ function ProjectDrawer({ projName }: { projName: string }) {
                                       return (
                                         <div
                                           key={ind}
-                                          className="flex items-center  gap-[8px]   mr-[24px] mb-[24px]  px-2.5 py-0.5 w-fit text-[#001F35] font-[500] text-[12px] lg:text-[20px] focus:ring-offset-2 border rounded-[10px] border-solid border-[#b2e0ff] bg-[#FFF] "
+                                          className="flex items-center gap-[4px] mr-[12px] mb-[12px]  xl:gap-[8px]    sm:mr-[24px] sm:mb-[24px]  px-2.5 py-0.5 w-fit text-[#001F35] font-[500] text-[12px] lg:text-[20px] focus:ring-offset-2 border rounded-[10px] border-solid border-[#b2e0ff] bg-[#FFF] "
                                         >
                                           {amenitiesGroupList.get(eachItem.id)}
                                           {eachOne.constDesc}
