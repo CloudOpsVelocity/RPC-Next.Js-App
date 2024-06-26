@@ -1,6 +1,6 @@
 "use client";
 import { Button, Divider, Drawer } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
+import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import Image from "next/image";
 import React from "react";
 import S from "./Style.module.css";
@@ -156,7 +156,7 @@ export default function FloorplanDrawer() {
         zIndex={1000}
         classNames={S}
       >
-        <h3 className=" gap-1 pl-1 py-1 xl:gap-2.5 xl:pl-2.5  xl:py-2.5 bg-[#EEF7FE] text-[#001F35] text-[28px] not-italic font-semibold leading-[normal] capitalize w-full mt-2 xl:mt-4 max-w-[90%] inline-flex">
+        <h3 className=" gap-1 pl-1 pr-2 py-1 xl:gap-2.5 w-auto  items-center xl:pl-2.5  xl:py-2.5 bg-[#EEF7FE] text-[#001F35] text-[18px] xl:text-[28px] not-italic font-semibold leading-[normal] capitalize xl:w-full mt-2 xl:mt-4 max-w-[90%] inline-flex">
           {getIcon(
             BACKEND_PROP_TYPES[
               cg?.propertyType as keyof typeof BACKEND_PROP_TYPES
@@ -227,7 +227,7 @@ export default function FloorplanDrawer() {
 const Table = ({ data, propertyType, cg }: any) => {
   return (
     <div className="flex flex-col justify-center items-start gap-3.5 px-[9px] py-2.5 border rounded-[10px] border-solid border-[#9AB1BC] mt-5 max-w-[90%]">
-      <h1 className="flex items-center gap-2.5 pl-2.5 w-full py-2.5 rounded-lg bg-[#ebeaff] text-[#001F35] text-[21px] not-italic font-semibold leading-[normal] capitalize">
+      <h1 className="flex items-center gap-2.5 pl-2.5 w-full py-2.5 rounded-lg bg-[#ebeaff] text-[#001F35] text-[16px] xl:text-[21px] not-italic font-semibold leading-[normal] capitalize">
         <Marble /> Unit Types
       </h1>
       <div className={`flex  pr-3`}>
@@ -235,7 +235,7 @@ const Table = ({ data, propertyType, cg }: any) => {
           <ul className="list-disc pl-8">
             {data &&
               sortUnits(data)?.map((item: any) => (
-                <li className="text-[#242424] text-[21px] not-italic font-semibold leading-[normal] capitalize">
+                <li className="text-[#242424] text-[16px] xl:text-[21px] not-italic font-semibold leading-[normal] capitalize">
                   {propertyType === "plot" ? item.split("_").join(" x ") : item}
                 </li>
               ))}
@@ -301,10 +301,11 @@ const PlotTable: React.FC<PlotTableProps> = ({
   const sortedUnits = Object.entries(unitCountMap).sort(([unitA], [unitB]) =>
     unitA.localeCompare(unitB)
   );
+  const isMobile = useMediaQuery('max:width:601px')
   return (
     <div>
-      <div className="flex items-center gap-1.5 p-2 rounded-md bg-[#EEE] text-[#001F35] text-lg not-italic font-semibold capitalize mb-3">
-        {config.headerIcon} {title} ({cg.plotData[keyCount]}{" "}
+      <div className="flex items-center gap-1.5 p-1 xl:p-2 rounded-md bg-[#EEE] text-[#001F35] text-[14px] xl:text-lg not-italic font-semibold capitalize mb-3">
+        {isMobile &&config.headerIcon} {title} ({cg.plotData[keyCount]}{" "}
         {pluralizeOrSingularize(cg.plotData[keyCount] as number, "Units")})
       </div>
       <ul className="list-disc pl-8">
@@ -313,11 +314,11 @@ const PlotTable: React.FC<PlotTableProps> = ({
           return (
             <li
               key={unit}
-              className="text-[#242424] text-[21px] not-italic font-semibold leading-[normal]"
+              className="text-[#242424] text-[15px] xl:text-[21px] not-italic font-semibold leading-[normal]"
             >
               {length}ft x {width}ft{" "}
               {type === "standard" && count > 1 && (
-                <span className="text-[#001F35] text-xl not-italic font-medium leading-[normal]">
+                <span className="text-[#001F35] text-[14px] text-left xl:text-xl not-italic font-medium leading-[normal]">
                   ({count} Units)
                 </span>
               )}
