@@ -40,7 +40,7 @@ export default function ProjectDetailsP({ projName }: Props) {
     );
   return (
     <div className="w-[90%] mb-[5%] scroll-mt-[180px]" id="propertyDetails">
-      <h1 className="text-[20px] lg:text-[32px] font-[600] text-[#001F35] mb-[12px] ">
+      <h1 className="text-h2 lg:text-[32px] font-[600] text-[#001F35] mb-[12px] ">
         Property Details Of{" "}
         <span className="text-[#148B16] font-[700] ">{projName}</span>{" "}
       </h1>

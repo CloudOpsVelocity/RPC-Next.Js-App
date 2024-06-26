@@ -48,9 +48,9 @@ export default function Amenties({
         ) : (
           <>
             {" "}
-            <h2 className="text-[20px] lg:text-[32px]  font-semibold">
+            <h2 className="text-h2 lg:text-[32px]  font-semibold">
               Amenities Of{" "}
-              <span className="text-[#148B16] text-[20px] lg:text-[32px] font-bold not-italic  leading-[normal] ">
+              <span className="text-[#148B16] text-h2 lg:text-[32px] font-bold not-italic  leading-[normal] ">
                 {projName}
               </span>
             </h2>

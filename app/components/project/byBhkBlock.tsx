@@ -28,12 +28,12 @@ export default function ByBhkBlock({
     bhk === "0" ? data : data.filter((item: any) => item.bhkName === bhk);
   const parentRef = React.useRef(null);
 
-  const rowVirtualizer = useVirtualizer({
-    count: filteredData?.length,
-    getScrollElement: () => parentRef.current,
-    estimateSize: () => 180,
-    overscan: 5,
-  });
+  // const rowVirtualizer = useVirtualizer({
+  //   count: filteredData?.length,
+  //   getScrollElement: () => parentRef.current,
+  //   estimateSize: () => 180,
+  //   overscan: 5,
+  // });
   const getOptions = (property: string): string[] => {
     return Array.from(new Set(data.map((item: any) => String(item[property]))));
   };
@@ -50,7 +50,7 @@ export default function ByBhkBlock({
   const setCurrentState = useSetAtom(selectedFloorAtom);
 
   return (
-    <>
+    <div className="shadow-md sm:shadow-none">
       <div className="lg:h-[100px] px-[2%] border-[#92B2C8] border-solid border-b-[1px] pt-2.5 bg-[#F2FAFF]/50">
         <h3 className=" text-[#001F35]  text-[20px] lg:text-[24px] font-[500]  mb-2">
           Select BHK to see floor plans
@@ -92,22 +92,10 @@ export default function ByBhkBlock({
         </div>
       </div>
       <div
-        style={{
-          height: `440px`,
-          width: `100%`,
-          overflow: "auto",
-        }}
-        ref={parentRef}
+        className="w-full h-[195px] sm:h-[440px] overflow-auto "
+        // ref={parentRef}
       >
-        <div
-          // className="h-full lg:max-h-[440px] max-h-[487px] border-solid overflow-auto  "
-          style={{
-            height: `${rowVirtualizer.getTotalSize()}px`,
-            width: "100%",
-            position: "relative",
-          }}
-        >
-          {/* {rowVirtualizer.getVirtualItems().map((virtualRow: any) => (
+        {/* {rowVirtualizer.getVirtualItems().map((virtualRow: any) => (
             <FloorplanDetailsCard
               key={virtualRow.index}
               data={virtualRow}
@@ -116,17 +104,16 @@ export default function ByBhkBlock({
               setValues={setValues}
             />
           ))} */}
-          {filteredData.map((item: any, index: number) => (
-            <FloorplanDetailsCard
-              key={index}
-              data={item}
-              propCgId={propCgId}
-              projData={data}
-              setValues={setValues}
-            />
-          ))}
-        </div>
+        {filteredData.map((item: any, index: number) => (
+          <FloorplanDetailsCard
+            key={index}
+            data={item}
+            propCgId={propCgId}
+            projData={data}
+            setValues={setValues}
+          />
+        ))}
       </div>
-    </>
+    </div>
   );
 }

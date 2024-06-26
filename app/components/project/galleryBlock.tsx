@@ -36,7 +36,10 @@ export default function GalleryBlock({
   };
 
   return (
-    <div className="w-[90%] scroll-mt-[200px] mb-[5%]" id="galleria">
+    <div
+      className="w-[90%] scroll-mt-[200px] mt-4 sm:mt-0 mb-[5%]"
+      id="galleria"
+    >
       {type === "prop" ? (
         <PropertyHeading
           title="GALLERIA"
@@ -44,21 +47,21 @@ export default function GalleryBlock({
         />
       ) : (
         <>
-          <h1 className="text-[20px] lg:text-[32px] font-[600] text-[#001F35] capitalize mb-[12px]">
+          <h1 className="text-h2 lg:text-[32px] font-[600] text-[#001F35] capitalize mb-[12px]">
             Galleria of{" "}
             <span className="text-[#148B16] font-[700] ">{projName}</span>{" "}
           </h1>
 
           <SubHeading
             text="Gallery highlights : A glimpse into good project"
-            className="mb-2"
+            className="sm:mb-2"
           />
         </>
       )}
 
-      <div className=" flex justify-center flex-col md:flex-row items-center-full mt-[1%] ">
+      <div className=" flex justify-center flex-col md:flex-row items-center-full sm:mt-[1%] ">
         {/* IMage display con */}
-        <div className="w-[100%] md:w-[50%] bg-white  h-[250px] overflow-hidden sm:h-[394px] lg:h-auto mb-[3%] md:mb-[0%] mr-[3%] rounded-[14px]   flex justify-center items-center p-1">
+        <div className="w-[100%] md:w-[50%] bg-white  h-[250px] overflow-hidden sm:h-[394px] lg:h-auto  md:mb-[0%] mr-[3%] rounded-[14px]   flex justify-center items-center p-1">
           {selectedMedia && (
             <div
               className={clsx(

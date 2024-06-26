@@ -39,7 +39,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
               width={130}
               height={130}
               alt="logo"
-              className="shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] border-2 border-solid border-[#96C5E4]"
+              className="shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] border-2 border-solid border-[#96C5E4] w-[90px] h-[90px] sm:h-auto sm:w-auto"
             />
             <p className=" text-[#148B16] italic text-[20px] lg:text-[26px] font-[700] ml-3">
               {nzData.userName}

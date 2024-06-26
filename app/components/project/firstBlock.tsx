@@ -107,7 +107,7 @@ const FirstBlock: React.FC<Props> = ({
           </div>
           <div className="sm:absolute bottom-0  sm:m-[2%] z-10 sm:w-[95%] self-center justify-between items-start flex-col md:flex-row border-solid border-white-500 sm:rounded-[10px] bg-gradient-to-r from-[#EFEFEF] /20 to-[#c3c3c3bd]/80 shadow-md  sm:flex ">
             <div className=" w-full md:w-[60%]">
-              <div className={`ml-[2%] mt-3 sm:mt-10 mb-[7px]`}>
+              <div className={`ml-[2%] mt-1 sm:mt-10 mb-[7px]`}>
                 <h3 className="text-[22px] sm:text-[24px] lg:text-[28px] font-[700] text-[#001F35] ">
                   {projectDetails.projectName}
                 </h3>

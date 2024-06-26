@@ -229,7 +229,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
       id="floorPlans"
     >
       <h1
-        className="text-[20px] lg:text-[32px] font-[600] text-[#001F35] mb-[12px] scroll-mt-[280px]"
+        className="text-h2 lg:text-[32px] font-[600] text-[#001F35] mb-[12px] scroll-mt-[280px]"
         id="floorPlansdiv"
       >
         Floor Plans For{" "}
@@ -362,7 +362,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                   }
                 }
               }}
-              buttonClass={`text-[14px] lg:text-[24px] mr-[20px] sm:mr-[40px] whitespace-nowrap flex justify-center items-center gap-[6px] ${
+              buttonClass={`hidden sm:flex text-[14px] lg:text-[24px] mr-[20px] sm:mr-[40px] whitespace-nowrap flex justify-center items-center gap-[6px] ${
                 floorPlanType == "unit"
                   ? "font-[600] text-[#001F35]"
                   : "font-[400] text-[#4D6677]"
@@ -394,12 +394,15 @@ export default function FloorplansBlock({ projName, slug }: Props) {
           </div>
 
           <div
-            className="h-[500px] sm:h-[600px] md:h-[547px] w-full rounded-[14px] mt-[2%] sm:border-solid sm:border-[1px] sm:border-[#92B2C8] bg-[#FFF]  flex flex-col-reverse md:flex-row justify-center  "
+            className={clsx(
+              "h-[500px] sm:h-[600px] md:h-[547px] w-full rounded-[14px] mt-[2%] sm:border-solid sm:border-[1px] sm:border-[#92B2C8] bg-[#FFF]  flex flex-col-reverse md:flex-row justify-center  ",
+              floorPlanType === "bhk" && "h-[550px]"
+            )}
             onClick={handleContainerClick}
           >
             {floorPlanType === "type" && (
               <div
-                className="w-[100%] md:w-[50%] sm:border-solid overflow-auto"
+                className="w-[100%] md:w-[50%] sm:border-solid overflow-auto shadow-md sm:shadow-none"
                 ref={parentRef}
               >
                 <div
@@ -472,7 +475,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
 
             <div
               className={clsx(
-                " h-[250px]  w-full md:w-[50%] flex justify-center items-end flex-col sm:h-full p-[2%] shadow-inner md:shadow-none relative",
+                " h-[250px]  w-full md:w-[50%] flex justify-center items-end flex-col sm:h-full p-[2%] shadow-md md:shadow-none relative",
                 !selectedFloor?.unitNumber && "items-center"
               )}
             >
@@ -541,7 +544,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                               handleOpen();
                             }}
                             src="/abc/noimage.svg"
-                            className="w-[80%] h-full cursor-pointer "
+                            className="w-[60%] sm:w-[80%] h-full cursor-pointer "
                             alt="image"
                           />
                           <p className=" text-[#000] text-center text-[18px] md:text-[28px] lg:text-[32px] font-[600] ">
@@ -568,7 +571,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                 ) : (
                   <>
                     <p
-                      className="text-[14px] font-[500] text-[#005DA0] text-center m-auto"
+                      className="hidden sm:block text-[14px] font-[500] text-[#005DA0] text-center m-auto"
                       onClick={(e) => {
                         e.stopPropagation();
                         handleOpen();
@@ -606,41 +609,30 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                         selectedFloor?.plotArea &&
                         " | Area. " + selectedFloor?.plotArea + " sq.ft"}
                     </p>
-                    <div className="flex justify-center items-center  h-[240px] lg:h-[450px] w-full relative max-w-fit m-auto min-w-[541px] max-h-[415px]">
-                      <div
-                        className="bg-[#F4FBFF] p-x-[3px] p-1 rounded-[29px] gap-[6px] flex justify-end items-center  cursor-pointer absolute bottom-1 right-1 "
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleOpen();
-                        }}
-                      >
-                        <p className="text-[12px] lg:text-[14px] font-[600] text-[#0073C6] underline text-nowrap">
-                          Click on image to open floor plan details
-                        </p>
-                      </div>
+                    <div className="flex justify-center items-end max-h-[240px] sm:max-h-[450px] lg:h-[450px] w-full relative ">
                       {selectedFloor?.floorPlanUrl ? (
                         <img
                           onClick={(e) => {
                             e.stopPropagation();
-                            handleUnitClick();
+                            handleOpen();
                           }}
                           src={
                             (selectedFloor?.floorPlanUrl +
                               "?v" +
                               Math.random()) as string
                           }
-                          className="w-full h-[100%] cursor-pointer  object-contain"
+                          className="w-full h-full cursor-pointer  object-contain"
                           alt="image"
                         />
                       ) : (
-                        <div className="flex items-center flex-col min-w-fit">
+                        <div className="flex justify-center items-center flex-col min-w-fit ">
                           <img
                             onClick={(e) => {
                               e.stopPropagation();
-                              handleUnitClick();
+                              handleOpen();
                             }}
                             src="/abc/noimage.svg"
-                            className="w-[60%]  cursor-pointer"
+                            className="w-[60%] sm:w-[80%] h-full cursor-pointer "
                             alt="image"
                           />
                           <p className=" text-[#000] text-center text-[18px] md:text-[28px] lg:text-[32px] font-[600] ">
@@ -648,13 +640,14 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                           </p>
                         </div>
                       )}
+                      <PopupOpenSvg className=" sm:hidden absolute bottom-0 right-1 w-[24px] h-[24px] lg:w-[28px] lg:h-[28px]  " />
                     </div>
-                    {floorPlanType == "unit" && (
+                    {/* {floorPlanType == "unit" && (
                       <CarouselSuggestion
                         form={byUnitForm}
                         propCgId={propCgId}
                       />
-                    )}
+                    )} */}
                   </>
                 )
               ) : (
