@@ -15,17 +15,17 @@ export default function PropertyHeading({
   return (
     <div
       className={clsx(
-        "inline-flex  gap-[26px]  w-[90%] items-center",
+        "inline-flex  gap-2 sm:gap-[26px]  w-[90%] items-center",
         className
       )}
     >
       {Svg}{" "}
       <div>
         {" "}
-        <p className="text-[#001F35] text-[32px] not-italic font-semibold leading-[normal] uppercase mb-[14px]">
+        <p className="text-[#001F35] text-[18px] sm:text-[32px] not-italic font-semibold leading-[normal] uppercase mb-1 sm:mb-[14px]">
           <span className="text-[#148B16]">{projName} </span> {title}
         </p>{" "}
-        <p className="text-[#4D6677] text-2xl italic font-medium leading-[normal] capitalize">
+        <p className="text-[#4D6677] text-[12px] sm:text-2xl italic font-medium leading-[normal] capitalize">
           {desc}
         </p>
       </div>

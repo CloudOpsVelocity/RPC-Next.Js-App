@@ -58,12 +58,12 @@ const FirstBlock: React.FC<Props> = ({
     >
       {projectDetails && (
         <>
-          {/* {hasReraStatus && (
-            <p className=" flex items-center pl-[8px] rounded-tl-lg text-center text-[12px] sm:text-[24px] font-[600] text-[#FFF] bg-gradient-to-r w-[122px] from-[#148B16] /0 to-[#EFEFEF]/50  z-10 left-0 absolute">
+          {hasReraStatus && (
+            <p className="hidden sm:flex items-center pl-[8px] rounded-tl-lg text-center text-[12px] sm:text-[24px] font-[600] text-[#FFF] bg-gradient-to-r w-[122px] from-[#148B16] /0 to-[#EFEFEF]/50  z-10 left-0 absolute">
               <ReraIcon />
               RERA
             </p>
-          )} */}
+          )}
           <div className="absolute m-[2%] z-10 right-[1px] sm:right-2">
             <p className="shadow-md rounded-[10px] bg-gradient-to-r p-[8px] from-[#EFF5FF] /0  to-[#F2FAFF]/100 text-[#000] text-[12px] sm:text-[16px] md:text-xl not-italic font-medium leading-[normal]">
               Project Status:{" "}

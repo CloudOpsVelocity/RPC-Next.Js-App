@@ -157,27 +157,33 @@ function FloorPlanModal({
       <Modal
         opened={opened}
         classNames={{
-          root:S.mainComntainerFloorPlan,
+          root: S.mainComntainerFloorPlan,
           title: S.title,
           close: S.close,
           content: S.content,
           overlay: S.overlay,
           inner: o ? S.hidden : undefined,
-
         }}
         centered
         onClose={handleClose}
         title="Floor Plan"
         size={"100%"}
-        
       >
         <>
           <div className="bg-white w-full h-auto px-1 xl:pl-5">
-            <p className={`text-[#001F35] text-[13px] xl:text-xl not-italic font-semibold mt-2   ${Object.entries(form.values).length > 0 ? "mb-7": "mb-0"}`}>
+            <p
+              className={`text-[#001F35] text-[13px] xl:text-xl not-italic font-semibold mt-2   ${
+                showClearAll ? "mb-2 sm:mb-7" : "mb-0"
+              }`}
+            >
               See floor plan according to your selections
             </p>
 
-            <div className={`flex justify-start items-center w-full xl:h-[35px] relative bottom-[20px] mb-1 mt-10  xl:mb-[-35px] ${Object.entries(form.values).length > 0 ? "h-[35px] mt-10" :"h-[0px] mt-1" }`}>
+            <div
+              className={`flex justify-start items-center w-full xl:h-[35px] relative bottom-[20px] mb-1  sm:mt-10  xl:mb-[-35px] ${
+                showClearAll ? "h-[35px] mt-10" : "h-[0px] mt-2"
+              }`}
+            >
               {/* scroll buttons */}
               {Object.values(form.values).filter((each) => each != null)
                 .length > 4 &&
@@ -186,7 +192,7 @@ function FloorPlanModal({
                     onClick={() => handleArrowClick("L")}
                     className="flex mr-4 xl:mr-8 h-[32px]  xl:w-[32px] rounded-[50%] items-center justify-center bg-[#FCFCFC] "
                   >
-                   <PrevCarouselIcon/>
+                    <PrevCarouselIcon />
                   </button>
                 )}
 
@@ -340,7 +346,7 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
             key={"bhkName"}
             w={"full"}
             // mt="md"
-             
+
             label="Select Unit Type"
             className="!w-[46%]"
             placeholder="-- select --"
@@ -1156,7 +1162,7 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
             <Carousel
               classNames={styles}
               slideSize={{ base: "100%", sm: "15%" }}
-              slideGap={{ base: "16px", sm: 2 }} 
+              slideGap={{ base: "16px", sm: 2 }}
               align="end"
               px={70}
               nextControlIcon={<ImgCarouselIcon />}
@@ -1166,7 +1172,11 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
             >
               {floorsArray?.map((eachObj: any, ind: number) => {
                 return (
-                  <Carousel.Slide w={100} className="!h-[65px]" mr={floorsArray.length > 6 ? 0 : 16}>
+                  <Carousel.Slide
+                    w={100}
+                    className="!h-[65px]"
+                    mr={floorsArray.length > 6 ? 0 : 16}
+                  >
                     <div
                       key={ind}
                       className={clsx(

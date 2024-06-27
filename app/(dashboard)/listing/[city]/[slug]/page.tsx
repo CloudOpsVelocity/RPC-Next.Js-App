@@ -44,13 +44,13 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
     <div className="w-full">
       <div className="mt-[90px] w-full pb-[2%] flex items-center justify-center flex-col">
         <div className="pb-[2%] px-[2%] w-[94.3%]">
-          <p className="text-[16px] text-[#565D70] font-[500] mb-[1%] inline-flex items-center">
+          <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%] inline-flex items-center">
             <span>Home</span> {ARROW_ICON}
-            <Link href={"/project/banglore"}>
+            <Link href={"/project/banglore"} className="text-nowrap">
               <span>Property In {data.ctName}</span>
             </Link>{" "}
             {ARROW_ICON}
-            <span>
+            <span className="text-nowrap">
               {data.bhkName} {data.propTypeName} In {data.ltName}
             </span>
           </p>

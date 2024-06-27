@@ -83,6 +83,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
   if (!data.projIdEnc) {
     notFound();
   }
+
   return (
     <div className="w-full relative">
       <div className="mt-[100px] sm:mt-[70px] w-full pb-[2%] flex items-center justify-center flex-col">
