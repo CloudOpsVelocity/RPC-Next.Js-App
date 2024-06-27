@@ -20,6 +20,7 @@ type Props = {
   projName?: string;
   content: string;
   data?: any;
+  location?: string;
 };
 
 type CardProps = {
@@ -63,7 +64,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
     <>
       <div
         key={cardData.projIdEnc}
-        className="border text-card-foreground min-w-[350px] bg-[#FAFAFA]  min-h-[400px] overflow-hidden  shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[14px]"
+        className="border text-card-foreground min-w-[300px] sm:min-w-[350px] bg-[#FAFAFA]  min-h-[400px] overflow-hidden  shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[14px]"
       >
         {type == "proj" && (
           <div className="flex space-y-1.5 p-6  px-4 pt-2 pb-3 justify-between items-center">
@@ -96,7 +97,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
             <Image
               src={cardData?.media?.coverImageUrl}
               alt="Sobha Dream Acres"
-              className="w-full  mb-4 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] max-h-[212px]"
+              className="w-full  mb-4 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] object-cover min-h-[212px] rounded-[5px] max-h-[212px]"
               width={300}
               height={212}
             />
@@ -193,17 +194,33 @@ export function ProjectCard({ type, cardData }: CardProps) {
   );
 }
 
-const BuilderCarousel = ({ type, content, title, projName, data }: Props) => {
+const BuilderCarousel = ({
+  type,
+  content,
+  title,
+  projName,
+  data,
+  location,
+}: Props) => {
   return (
     <div className="w-[100%] mb-[5%]">
-      <h2 className="text-[24px] lg:text-[32px] font-semibold uppercase cursor-pointer">
+      <h2 className="text-h2 sm:text-[24px] lg:text-[32px] font-semibold uppercase cursor-pointer px-4 sm:px-0">
         {/* <span className="!text-green-600">SARANG BY SUMADHARA </span> */}
         {title}
-        <span className="text-[#148B16] font-[700] uppercase ml-4 ">
+        {location && (
+          <>
+            In{" "}
+            <span className="text-[#148B16] font-[700] uppercase sm:ml-4 ">
+              {location}
+            </span>{" "}
+          </>
+        )}
+        By
+        <span className="text-[#148B16] font-[700] uppercase sm:ml-4 ">
           {projName}
         </span>
       </h2>
-      <p className="mt-3 mb-[44px]  text-[#4D6677] text-2xl italic font-medium leading-[normal] tracking-[0.96px]">
+      <p className="mt-3 mb-5 sm:mb-[44px]  text-[#4D6677] text-[14px] sm:text-2xl italic font-medium leading-[normal] tracking-[0.96px] px-4 sm:px-0">
         {content}
       </p>
 
@@ -211,7 +228,7 @@ const BuilderCarousel = ({ type, content, title, projName, data }: Props) => {
         {data &&
           data?.map((project: any, index: number) => {
             return (
-              <CarouselSlide key={index}>
+              <CarouselSlide key={index} className="!h-[480px] sm:!h-[500px]">
                 <ProjectCard type={type} cardData={project} />
               </CarouselSlide>
             );

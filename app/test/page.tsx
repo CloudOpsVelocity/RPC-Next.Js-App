@@ -22,10 +22,12 @@ export default function LoginPage() {
       alert("Login failed");
     }
   };
-  let arr = [1, 2, 3, 4, 5];
+  let arr = [1, 2, 3, 4, 5, 6];
   // console.log(arr.splice(0, 1));
   // console.log(arr);
   // console.log(reversedFn(arr));
+  // customSlice(arr, 0, 1);
+  console.log(arr);
   return (
     <section className="py-10 bg-gray-50 sm:py-16 lg:py-24">
       <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
@@ -209,11 +211,14 @@ export default function LoginPage() {
 }
 
 // const reversedFn = (arr) => {
-// let result = [];
-// for (let i = 0; i < arr.length; i++) {
-//   [arr[i], arr[arr.length - 1 - i]] = [arr[arr.length - 1 - i], arr[i]];
-//   result.push([arr[i], arr[arr.length - 1 - i]]);
-// }
-// console.log(result);
-// return arr;
+//   for (let i = 0; i < arr.length / 2; i++) {
+//     [arr[i], arr[arr.length - 1 - i]] = [arr[arr.length - 1 - i], arr[i]];
+//   }
+//   console.log(arr);
+//   return arr;
+// };
+
+// const customSlice = (arr, start, howMany, ...newEle) => {
+//   if (start > arr.length) return "ARRAY TOO LONG";
+//   for (let i = start; i < arr.length; i++) {}
 // };

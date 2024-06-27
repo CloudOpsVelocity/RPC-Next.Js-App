@@ -21,12 +21,16 @@ function LoginPopup() {
         close: S.close,
         content: S.content,
         overlay: S.overlay,
-        header:S.headerCustomLoginPopup,
+        header: S.headerCustomLoginPopup,
+        body: S.bodyPadding,
       }}
       size={isMobile ? "100%" : "30%"}
       zIndex={1000}
     >
-      <Close  className="absolute  right-3 size-6 cursor-pointer " close={close} />
+      <Close
+        className="absolute  right-3 top-3 size-6 cursor-pointer "
+        close={close}
+      />
       <LoginPop close={close} />
     </Modal>
   );

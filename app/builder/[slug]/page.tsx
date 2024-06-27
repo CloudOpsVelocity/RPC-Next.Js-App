@@ -37,13 +37,15 @@ export default async function Page({ params: { slug } }: Props) {
             {data?.data?.builderProjects && (
               <BuilderCarousel
                 type="proj"
-                title={`Newly launched PROJECT by ${data?.data?.userName} ${
-                  Object.keys(data?.data?.projectAvailableCities).length <= 1
-                    ? "in " + data.data.cityName
-                    : ""
-                }`}
+                title={`Newly launched PROJECT `}
+                projName={`  ${data?.data?.userName}`}
                 content={`See other newly launched projects by ${data?.data?.userName}`}
                 data={data?.data?.builderProjects}
+                location={
+                  Object.keys(data?.data?.projectAvailableCities).length <= 1
+                    ? data.data.cityName
+                    : ""
+                }
               />
             )}
             {/* <BuildersBlock

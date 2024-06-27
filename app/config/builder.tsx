@@ -7,6 +7,7 @@ export const config = new Map([
       height="30"
       viewBox="0 0 29 30"
       fill="none"
+      className="w-5 h-5 md:w-[29px] md:h-[30px]"
     >
       <rect y="0.496216" width="17.4045" height="19.3384" fill="#95C5FF" />
       <rect
