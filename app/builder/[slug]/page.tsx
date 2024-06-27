@@ -34,6 +34,12 @@ export default async function Page({ params: { slug } }: Props) {
             <ProjectDetails {...data.data} />
             <ManagementBlock {...data.data} />
 
+            {/* <BuildersBlock
+              data={data?.data?.otherBuilder}
+              name={data?.data?.companyName}
+            /> */}
+          </div>
+          <div className="w-full m-auto sm:w-[95%]">
             {data?.data?.builderProjects && (
               <BuilderCarousel
                 type="proj"
@@ -48,10 +54,6 @@ export default async function Page({ params: { slug } }: Props) {
                 }
               />
             )}
-            {/* <BuildersBlock
-              data={data?.data?.otherBuilder}
-              name={data?.data?.companyName}
-            /> */}
           </div>
           <Reqcallback builderName={data.data.userName} />
           <Footer />

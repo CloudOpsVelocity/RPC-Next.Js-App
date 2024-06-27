@@ -22,7 +22,7 @@ export default function ManagementBlock({
         Company Details
       </h1>
 
-      <div className="flex justify-start items-start w-full flex-wrap gap-[3%]  mt-[2%]  ">
+      <div className="flex justify-start items-start w-full flex-wrap gap-2 sm:gap-4  mt-[2%]  ">
         <div className="bg-[#FFF] rounded-[10px] shadow-lg border-[#92B2C8] border-[1px] border-solid p-2 sm:p-[16px]  ">
           <p className="text-[16px] md:text-[24px] font-[600] text-[#202020] ">
             {ceoName}

@@ -111,7 +111,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
 
             <div className=" right-2 absolute ">
               <button
-                className="mt-[-30px] rounded-[10px] relative bottom-[35px] z-10 p-[8px] text-[#0073C6] text-[18px] font-[700] flex pl-[4px] justify-center items-center bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100"
+                className="mt-[-30px] rounded-[10px] relative bottom-[35px] z-10 p-[8px] text-[#0073C6] sm:text-[18px] font-[700] flex pl-[4px] justify-center items-center bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100"
                 onClick={() => onAddingShortList()}
               >
                 <span className=" w-[24px] h-[24px] ">
@@ -134,9 +134,9 @@ export function ProjectCard({ type, cardData }: CardProps) {
             )}
 
             {type == "proj" && (
-              <p className="mb-[6px] text-[#565D70] text-sm not-italic font-semibold leading-[normal]">
+              <p className="mb-[6px] text-[#565D70] text-[12px] sm:text-base not-italic font-semibold leading-[normal]">
                 Start - End Date:
-                <span className="ml-[4px] text-[#001F35] text-sm not-italic font-semibold leading-[normal]">
+                <span className="ml-[4px] text-[#001F35] text-[12px] sm:text-base not-italic font-semibold leading-[normal]">
                   {formatDate(cardData.startDate)} -{" "}
                   {formatDate(cardData.endDate)}
                 </span>
@@ -161,30 +161,31 @@ export function ProjectCard({ type, cardData }: CardProps) {
               </p>
             )}
 
-            <p className="text-[#565D70]  not-italic font-semibold leading-[normal] tracking-[0.56px] mb-2">
+            <p className="text-[#565D70] text-[12px] sm:text-[15px] not-italic font-semibold leading-[normal] tracking-[0.56px] sm:mb-2">
               {`${cardData.localityName}, 
               ${cardData.cityName} ,
               ${cardData.state ?? ""} ,
               ${cardData.pinCode}`}
             </p>
 
-            <div className="inline-flex items-start gap-2 p-2 shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] cardBg mb-[6px]">
-              <span className="text-black text-right text-base not-italic font-medium leading-[normal]">
-                Project Status:{" "}
-              </span>
-              <span className="text-[#148B16] text-base not-italic font-bold leading-[normal]">
-                {cardData.projectStatus}
-              </span>
-            </div>
+            {type === "proj" && (
+              <div className="inline-flex items-start gap-2 p-1 sm:p-2 shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] cardBg mt-[8px] sm:mt-[16px]">
+                <span className="text-black text-right text-[14px] sm:text-base not-italic font-medium leading-[normal]">
+                  Project Status:{" "}
+                </span>
+                <span className="text-[#148B16] text-[14px] sm:text-base not-italic font-bold leading-[normal]">
+                  {cardData.projectStatus}
+                </span>
+              </div>
+            )}
             {type != "proj" && (
               <p className="text-[16px] font-[500] text-[#4D6677]">
                 Posted by Agent
               </p>
             )}
             <Button
-              icon={<Phone />}
-              title="Request a Callback"
-              buttonClass=" text-[#FFF] mt-[12px] text-[16px] font-[600] bg-[#0073C6] rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[6px]  "
+              title="Request  Callback"
+              buttonClass=" text-[#FFF] mt-[12px] text-[12px] sm:text-[18px] font-[600] bg-[#0073C6] rounded-[5px] shadow-md whitespace-nowrap flex items-center p-1 sm:p-[10px]  "
               onChange={handleReqCallbackOpen}
             />
           </div>
@@ -203,7 +204,7 @@ const BuilderCarousel = ({
   location,
 }: Props) => {
   return (
-    <div className="w-[100%] mb-[5%]">
+    <div className="w-full mb-[5%]">
       <h2 className="text-h2 sm:text-[24px] lg:text-[32px] font-semibold uppercase cursor-pointer px-4 sm:px-0">
         {/* <span className="!text-green-600">SARANG BY SUMADHARA </span> */}
         {title}
@@ -228,7 +229,7 @@ const BuilderCarousel = ({
         {data &&
           data?.map((project: any, index: number) => {
             return (
-              <CarouselSlide key={index} className="!h-[480px] sm:!h-[500px]">
+              <CarouselSlide key={index} className="!h-[520px] sm:!h-[500px]">
                 <ProjectCard type={type} cardData={project} />
               </CarouselSlide>
             );
