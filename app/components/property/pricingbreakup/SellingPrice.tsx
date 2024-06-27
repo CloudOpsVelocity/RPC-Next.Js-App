@@ -17,11 +17,11 @@ export default function SellingPrice({
 }) {
   return (
     <div className=" w-[100%]">
-      <div className="flex flex-col justify-center items-start gap-2.5 border shadow-[0px_4px_22px_0px_rgba(204,233,204,0.38)] pl-6 pr-[30px] py-3 rounded-[10px] border-solid border-[#148B16] bg-[#eaffea]">
-        <div className="text-[#38333A] text-2xl not-italic font-medium leading-[normal] capitalize inline-flex">
+      <div className="flex flex-col  justify-center items-start gap-2.5 border shadow-[0px_4px_22px_0px_rgba(204,233,204,0.38)] pl-1 xl:pl-6 pr-[30px] py-3 rounded-[10px] border-solid border-[#148B16] bg-[#eaffea]">
+        <div className="text-[#38333A] ml-3  text-[14px] xl:text-2xl not-italic font-medium leading-[normal] capitalize inline-flex">
           {DefaultIcon} Total {type} Price Including all the charges
         </div>
-        <h2 className="text-[#005202] text-[34px] not-italic font-bold leading-[normal]">
+        <h2 className="text-[#005202] text-[26px] ml-9 xl:m-0  xl:text-[34px] not-italic font-bold leading-[normal]">
           ₹{" "}
           <NumberFormatter
             thousandSeparator
@@ -50,6 +50,8 @@ const DefaultIcon = (
     height="29"
     viewBox="0 0 28 29"
     fill="none"
+    
+
   >
     <path
       fill-rule="evenodd"
