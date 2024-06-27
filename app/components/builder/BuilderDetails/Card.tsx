@@ -22,7 +22,7 @@ export default function Card({
     return (
       <a
         href={`${scheme}${content}`}
-        className="text-[#242424] text-2xl not-italic font-semibold mt-2 underline"
+        className="text-[#242424] sm:text-2xl not-italic font-semibold mt-2 underline"
       >
         {content}
       </a>
@@ -49,6 +49,6 @@ export default function Card({
 const styles = {
   container:
     "inline-flex justify-center items-center gap-0.5 p-1 rounded-md bg-gradient-to-tr from-[#EFF5FF] to-[#F2FAFF] ",
-  text: "text-[#00487C] text-[28px] not-italic font-semibold ",
-  content: "text-[#242424] text-2xl not-italic font-semibold",
+  text: "text-[#00487C] sm:text-[28px] not-italic font-semibold ",
+  content: "text-[#242424] sm:text-2xl not-italic font-semibold",
 };

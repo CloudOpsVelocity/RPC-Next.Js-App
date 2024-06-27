@@ -4,7 +4,6 @@ import Footer from "../../components/layouts/primary/footer";
 import TopProfileBlock from "../../components/builder/topProfileBlock";
 import ProjectDetails from "../../components/builder/projectDetails";
 import ManagementBlock from "../../components/builder/management";
-import BuildersBlock from "../../components/builder/buildersBlock";
 import { getBuilderDetails } from "@/app/utils/api/builder";
 import BuilderCarousel from "@/app/components/builder/Carousel";
 import Reqcallback from "@/app/components/builder/Reqcallback";
@@ -25,7 +24,6 @@ type Props = { params: { slug: string } };
 export default async function Page({ params: { slug } }: Props) {
   const token = cookies().get("token")?.value;
   const data = await getBuilderDetails(slug, "Y", "proj", token);
-  console.log(data);
   return (
     <div className="flex flex-col justify-start items-center w-full mt-[90px]  ">
       {data && (

@@ -83,7 +83,7 @@ export default function ProjectDetails({
         className="flex w-full flex-col justify-center items-start gap-8 border border-[color:var(--blue-stroke,#4D6677)] shadow-[0px_4px_31.5px_0px_rgba(91,143,182,0.19)] p-8 rounded-[7px] border-solid bg-[#FCFCFC] mb-[80px]
   "
       >
-        <div className="flex justify-center items-center space-x-16">
+        <div className="flex flex-col sm:flex-row justify-center sm:items-center space-x-16">
           <Card
             Icon={emailIconSvg}
             title="Email"
