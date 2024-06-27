@@ -11,6 +11,7 @@ import {
 import { Main } from "@/app/validations/property";
 import SellingPrice from "./SellingPrice";
 import { usePricingPop } from "@/app/hooks/property/usePricingPop";
+import { useMediaQuery } from "@mantine/hooks";
 export default function PriceBreakup({
   otherPrice,
   price,
@@ -69,6 +70,7 @@ export default function PriceBreakup({
   const otherChangeTotal = parseOtherCharge(otherPrice?.otherCharge);
   const chargesArray = otherPrice?.otherCharge?.split(",");
   const [opened, { close }] = usePricingPop();
+  const isMobile = useMediaQuery("(max-width: 601px)");
 
   return (
     <Drawer
@@ -81,7 +83,7 @@ export default function PriceBreakup({
         close: styles.close,
         title: styles.title,
       }}
-      size={"35%"}
+      size={isMobile ? "100%": "35%"}
       className="!relative"
     >
       <div className="space-y-8">

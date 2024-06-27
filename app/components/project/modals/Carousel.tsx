@@ -26,6 +26,9 @@ import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import { useSession } from "next-auth/react";
 import ZoomInOut from "../actions/ZoomInOut";
 import Close from "../button/close";
+import { useMediaQuery } from "@mantine/hooks";
+import { downLoadIcon } from "@/app/images/commonSvgs";
+
 
 function CarouselModal({
   projName,
@@ -63,11 +66,15 @@ function CarouselModal({
       LoginOpen(DownloadFile);
     }
   };
+
+  const isMobile = useMediaQuery("(max-width: 601px)");
+
   return (
     <>
       <Modal
+        // centered={isMobile ? false : true}
         opened={opened}
-        size={"90%"}
+        size={isMobile ? "98%": "90%"}
         padding={0}
         transitionProps={{ duration: TRANSITION_DURATION }}
         onClose={close}
@@ -77,17 +84,17 @@ function CarouselModal({
           header: S.header,
         }}
       >
-        <div className="w-full    h-[57px] flex items-center justify-between  z-[1000] px-8 absolute top-0 right-0 pt-2">
-          <div className="text-[#333] text-2xl not-italic font-semibold leading-[normal]">
+        <div className="w-full  h-[57px] flex items-center justify-between  z-[1000] px-3 xl:px-8 absolute top-0 right-0 pt-2">
+          <div className="text-[#333] text-left  text-[20px] xl:text-2xl not-italic font-semibold leading-[normal]">
             Floor Plan
           </div>
           <div className="flex justify-center items-center gap-5">
             <button
               onClick={handleDownload}
-              className="text-white flex justify-center items-center gap-1 p-2 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] rounded-[10px] bg-[#0073c6]"
+              className={`text-white flex justify-center items-center gap-1 p-2 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] rounded-[10px] bg-[#0073c6] ${isMobile&& "text-[12px] p-1"}`}
             >
-              Download Floor Plan
-            </button>
+             { !isMobile ? "Download Floor Plan" : "Download"}
+            </button> 
             <SharePopup
               title="Share"
               titleText="Share Floor Plan"
@@ -118,9 +125,9 @@ const MiddleSection = ({
   const selectedFloor = useAtomValue(selectedFloorAtom);
 
   return (
-    <div className="max-w-[1400px]">
-      <p className="text-[#242424] w-full  mb-[1%] text-[16px] font-[500]  text-left">
-        {/* Sarang by sumadhura/2bhk/tower 1/ 04/north/1124 sq.ft - 3 */}
+    <div className="w-[100%]  xl:max-w-[1400px]">
+      <p className="text-[#242424] w-full mt-[18%] xl:mt-[1%] mb-[1%]  text-[14px] text-center cl:text-left xl:text-[16px] font-[500] ">
+        {/* Sarang by sumadhura/2bhk/tower 1/ 05%4/north/1124 sq.ft - 3 */}
         <>
           {projName}
           {propCgId != projectprops.plot &&
@@ -174,31 +181,32 @@ const MiddleSection = ({
 };
 
 const ImageContainer = ({ url }: any) => {
+  const isMobile = useMediaQuery("(max-width: 601px)");
   return (
-    <div className="relative max-w-fit">
+    <div className="relative ml-3 max-w-fit">
       <TransformComponent
         contentStyle={{
-          width: "auto",
+          width: "95%",
           display: "inline-flex",
           // position: "relative",
           justifyContent: "center",
           alignItems: "center",
         }}
       >
-        <Image src={url} radius="md" h={600} fit="contain" />
+        <Image src={url} radius="md"   h={ isMobile ?300:600} fit="contain" />
       </TransformComponent>
-      <ZoomInOut />
+      <ZoomInOut className="!right-[20px] !bottom-12 xl:!right-[0px] xl:!bottom-[0px] "  />
     </div>
   );
 };
 export const Controls = ({ className }: { className?: string }) => {
   const { zoomIn, zoomOut, resetTransform } = useControls();
   const styles =
-    "text-2xl flex justify-center items-center gap-2.5 px-[7px] py-1.5 rounded-2xl border-[0.8px] border-solid border-[#616D75] bg-[#eaeaea]";
+    "text-2xl flex justify-center items-center gap-2.5  px-[7px] py-1.5 rounded-2xl border-[0.8px] border-solid border-[#616D75] bg-[#eaeaea]";
   return (
     <div
       className={clsx(
-        "flex justify-center items-center  absolute bottom-2 right-2 space-x-4",
+        "flex justify-center items-center  absolute bottom-2   xl:right-2 space-x-4",
         className
       )}
     >

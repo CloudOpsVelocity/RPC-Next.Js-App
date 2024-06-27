@@ -157,52 +157,43 @@ function FloorPlanModal({
       <Modal
         opened={opened}
         classNames={{
+          root:S.mainComntainerFloorPlan,
           title: S.title,
           close: S.close,
           content: S.content,
           overlay: S.overlay,
           inner: o ? S.hidden : undefined,
+
         }}
         centered
         onClose={handleClose}
         title="Floor Plan"
         size={"100%"}
+        
       >
         <>
-          <div className="bg-white w-full h-auto pl-5">
-            <p className="text-[#001F35] text-xl not-italic font-semibold mt-2 mb-7">
+          <div className="bg-white w-full h-auto px-1 xl:pl-5">
+            <p className={`text-[#001F35] text-[13px] xl:text-xl not-italic font-semibold mt-2   ${Object.entries(form.values).length > 0 ? "mb-7": "mb-0"}`}>
               See floor plan according to your selections
             </p>
 
-            <div className="flex justify-start items-center w-full h-[35px] relative bottom-[20px] mb-[-35px] ">
+            <div className={`flex justify-start items-center w-full xl:h-[35px] relative bottom-[20px] mb-1 mt-10  xl:mb-[-35px] ${Object.entries(form.values).length > 0 ? "h-[35px] mt-10" :"h-[0px] mt-1" }`}>
               {/* scroll buttons */}
               {Object.values(form.values).filter((each) => each != null)
                 .length > 4 &&
                 propCgId !== projectprops.plot && (
                   <button
                     onClick={() => handleArrowClick("L")}
-                    className="flex mr-8 h-[32px] w-[32px] rounded-[50%] items-center justify-center bg-[#FCFCFC] "
+                    className="flex mr-4 xl:mr-8 h-[32px]  xl:w-[32px] rounded-[50%] items-center justify-center bg-[#FCFCFC] "
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width={24}
-                      height={24}
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="#D2D5D7"
-                      strokeWidth={2}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="m15 18-6-6 6-6" />
-                    </svg>
+                   <PrevCarouselIcon/>
                   </button>
                 )}
 
               <div
                 ref={scrollFiltersRef}
                 className={clsx(
-                  "flex max-w-[60%] scroll-smooth overflow-x-auto overflow-y-hidden scrollbar-hide gap-4",
+                  "flex w-full xl:max-w-[60%] scroll-smooth overflow-x-auto overflow-y-hidden  scrollbar-hide gap-4",
                   propCgId === projectprops.plot && "max-w-[65%] "
                 )}
               >
@@ -213,16 +204,16 @@ function FloorPlanModal({
                     value !== "" &&
                     value !== "true" && (
                       <div
-                        className="flex h-[33px] items-center px-3 whitespace-nowrap py-1.5 bg-white border border-[#9DB6DC] rounded-[10px]"
+                        className="flex h-[33px] items-center px-1 xl:px-3 whitespace-nowrap py-1.5 bg-white border border-[#9DB6DC] rounded-[10px]"
                         key={key}
                       >
-                        <span className="text-[#148B16] font-semibold">
+                        <span className="text-[#148B16] text-[14px] xl:text-[18px] font-semibold">
                           {/* @ts-ignore */}
 
                           {key === "floor" && value == 0 ? "G" : value}
                         </span>
                         <span className="mx-1.5 text-[#242424]">|</span>
-                        <span className="text-[#242424] font-medium capitalize">
+                        <span className="text-[#242424] text-[14px] xl:text-[18px] font-medium capitalize">
                           {filterKeysDetails?.get(key)?.name != undefined
                             ? filterKeysDetails?.get(key)?.name === "Floor" &&
                               (propCgId === 31 || propCgId === 33)
@@ -267,7 +258,7 @@ function FloorPlanModal({
               )} */}
             </div>
 
-            <div className="flex justify-start items-start gap-[45px] flex-col mt-[1.5%] md:flex-row w-full pb-[3%] ">
+            <div className="flex justify-start items-start gap-5 xl:gap-[45px] flex-col mt-[1.5%] md:flex-row w-full xl:pb-[3%] ">
               <LeftSection
                 propCgId={propCgId}
                 data={data}
@@ -343,12 +334,13 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
   };
   return (
     <div className="col-span-1 w-full max-w-[392px] mr-[3%]  ">
-      <div className="w-[100%] flex justify-between items-start flex-wrap gap-[5%]">
+      <div className="w-[100%] flex justify-between items-start flex-wrap gap-[5%] z-[100000]">
         {propCgId != projectprops.plot && (
           <Select
             key={"bhkName"}
             w={"full"}
             // mt="md"
+             
             label="Select Unit Type"
             className="!w-[46%]"
             placeholder="-- select --"
@@ -774,7 +766,7 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
       </div>
       <Button
         variant="blue"
-        className="text-xl mt-4"
+        className="text-[14px] xl:text-xl mt-4"
         onClick={handleReset}
         showButton={showClearAll}
       >
@@ -786,7 +778,7 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
 const RightSection = ({ propCgId }: any) => {
   const data = useAtomValue(selectedFloorAtom);
   return (
-    <div className="bg-[#F4FBFF] p-6 rounded-lg w-full max-w-[342px] shadow">
+    <div className="bg-[#F4FBFF] xl:mt-10 p-6 rounded-lg w-[100%] xl:mb-[10%] xl:w-full max-w-[342px] shadow">
       <div className="space-y-4">
         {propCgId != projectprops.plot && (
           <div className="flex items-center space-x-3">
@@ -795,7 +787,7 @@ const RightSection = ({ propCgId }: any) => {
               Unit Type{" "}
               <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
                 {" "}
-                {data.bhkName}
+                {data?.bhkName}
               </span>
             </p>
           </div>
@@ -1079,7 +1071,7 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
   };
   return (
     <div className="flex flex-col justify-center items-start shrink-0 w-full sm:max-w-[300px] md:max-w-[500px] xl:max-w-[686px]">
-      <p className=" w-full  mb-[1%] text-[#001F35] text-right text-sm not-italic font-medium leading-[normal] tracking-[0.56px] ">
+      <p className=" w-full  mb-[1%] text-[#001F35] text-[12px] text-center p-2 xl:text-right xl:text-sm not-italic font-medium leading-[normal] tracking-[0.56px] ">
         {selectedFloor && (
           <>
             {projName}
@@ -1116,7 +1108,7 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
           </>
         )}
       </p>
-      <div className="relative  w-full flex justify-center items-center border shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[14px] border-solid border-[#7591A6]">
+      <div className="relative h-[250px]  xl:h-full px-1 w-full flex justify-center items-center border shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[14px] border-solid border-[#7591A6]">
         {floorsArray != undefined &&
         floorsArray != null &&
         floorsArray.length > 0 &&
@@ -1134,10 +1126,10 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
         ) : (
           <div className="flex justify-center items-center flex-col h-[391px] ">
             <FloorPlanModalIcon />
-            <p className="text-[#303030] text-2xl not-italic font-medium leading-[normal] tracking-[0.96px] mt-4">
+            <p className="text-[#303030] font-bold text-[14px] xl:text-2xl not-italic xl:font-medium leading-[normal] tracking-[0.96px] mt-4">
               No Floor Plan Selected
             </p>
-            <p className="text-[#303030] text-[15px] not-italic font-medium leading-[normal] tracking-[0.6px]">
+            <p className="text-[#303030] text-[12px] xl:text-[15px]  text-center not-italic font-medium leading-[normal] tracking-[0.6px]">
               Please select any floor plan to view details or filter to see
               floor plans
             </p>
@@ -1160,25 +1152,25 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
       {floorsArray != undefined &&
         floorsArray != null &&
         floorsArray.length > 0 && (
-          <div className="flex justify-center items-center mt-4 w-full">
+          <div className="flex justify-center items-center mb-6 sm:mb-0  mt-4 w-full">
             <Carousel
               classNames={styles}
-              maw={690}
               slideSize={{ base: "100%", sm: "15%" }}
-              slideGap={{ base: "16px", sm: 2 }}
-              align="start"
+              slideGap={{ base: "16px", sm: 2 }} 
+              align="end"
               px={70}
               nextControlIcon={<ImgCarouselIcon />}
               previousControlIcon={<PrevCarouselIcon />}
-              withControls={floorsArray.length > 6}
+              className="!max-w-[250px] sm:!max-w-[300px]"
+              // withControls={floorsArray.length > 6}
             >
               {floorsArray?.map((eachObj: any, ind: number) => {
                 return (
-                  <Carousel.Slide w={70} mr={floorsArray.length > 6 ? 0 : 16}>
+                  <Carousel.Slide w={100} className="!h-[65px]" mr={floorsArray.length > 6 ? 0 : 16}>
                     <div
                       key={ind}
                       className={clsx(
-                        " h-[50px] w-[70px] flex justify-center items-center shadow-md  scrollbar-hide rounded-[5px] border-[0.5px] border-solid border-[#92B2C8]",
+                        " sm:h-[50px] ml-1.5 sm:ml-10 w-[100px] sm:max-w-[250px] flex justify-center items-center shadow-md  scrollbar-hide rounded-[5px] border-[0.5px] border-solid border-[#92B2C8]",
                         selectedFloor?.floorPlanUrl == eachObj?.floorPlanUrl &&
                           "shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] border-2 border-solid border-[#59A1D6]"
                       )}

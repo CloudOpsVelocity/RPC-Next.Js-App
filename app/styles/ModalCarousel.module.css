@@ -35,3 +35,11 @@
   margin-right: 10px;
   margin-right: 30px;
 }
+@media (max-width: 640px){
+  .overlay{
+    margin-top: 0px;
+  }
+  .body{
+    margin-top:0px;
+  }
+}
