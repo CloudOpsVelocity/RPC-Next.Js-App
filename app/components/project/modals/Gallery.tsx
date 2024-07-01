@@ -222,7 +222,7 @@ const Content = ({ url }: { url: string }) => {
           className="cursor-pointer sm:border-[5px] sm:bg-white sm:border-white w-[100%] sm:!h-[350px]  md:min-w-[1400px] md:min-h-[600px]"
         />
       </TransformComponent>
-      <ZoomInOut className="right-5 xl:right-28 pb-2" />
+      <ZoomInOut className="right-2 bottom-4 xl:right-28 " />
     </div>
   );
 };
