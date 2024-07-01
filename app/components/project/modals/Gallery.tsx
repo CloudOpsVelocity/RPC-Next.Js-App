@@ -18,6 +18,7 @@ import clsx from "clsx";
 import styles from "./Gallery.module.css";
 import { useMediaQuery } from "@mantine/hooks";
 import Close from "../button/close";
+import ZoomInOut from "../actions/ZoomInOut";
 type GalleryProps = {
   selectedMedia: any;
   images: any[];
@@ -83,19 +84,26 @@ const Gallery: React.FC<GalleryProps> = ({
             </div>
           </div>
           {isImage ? (
-            <TransformWrapper>
-              <TransformComponent>
-                <Image
-                  radius="md"
-                  h={isMobile ? "auto" : 600}
-                  m={"auto"}
-                  w={1400}
-                  fit="contain"
-                  src={previewImage ?? content?.url}
-                  className="cursor-pointer border-[5px] bg-white border-white w-[100%] !h-[350px]  md:min-w-[1400px] md:min-h-[600px]"
-                />
-              </TransformComponent>
-            </TransformWrapper>
+            <Carousel align={"start"} dragFree>
+              {images.map((image, index) => (
+                <Carousel.Slide maw={350} className="!relative">
+                  <TransformWrapper wheel={{ disabled: false }} disabled>
+                    <TransformComponent>
+                      <Image
+                        radius="md"
+                        h={isMobile ? "auto" : 600}
+                        m={"auto"}
+                        w={1400}
+                        fit="contain"
+                        // src={previewImage ?? content?.url}
+                        src={image}
+                        className="cursor-pointer border-[5px] bg-white border-white w-[100%] !h-[350px]  md:min-w-[1400px] md:min-h-[600px]"
+                      />
+                    </TransformComponent>
+                  </TransformWrapper>
+                </Carousel.Slide>
+              ))}
+            </Carousel>
           ) : (
             <ReactPlayer
               url={previewImage as string}

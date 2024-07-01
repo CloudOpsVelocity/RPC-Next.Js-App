@@ -1,5 +1,6 @@
 import { BuilderPageHomeSvg } from "@/app/images/commonSvgs";
 import { convertDateToMonthYear } from "@/app/utils/date";
+import { capitalizeWords } from "@/app/utils/letters";
 import { Data } from "@/app/validations/types/builder";
 import Image from "next/image";
 import React from "react";
@@ -21,7 +22,7 @@ export default function TopProfileBlock({
           {" > "}
           <span>Builder</span>
           {" > "}
-          <span>{userName}</span>
+          <span>{capitalizeWords(userName)}</span>
         </p>
 
         <div className="flex justify-start items-end w-[300px] py-5 sm:w-auto">

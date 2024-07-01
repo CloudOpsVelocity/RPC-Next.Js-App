@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { callIconSvg } from "@/app/images/commonSvgs";
 import { Data } from "@/app/validations/types/builder";
@@ -24,7 +25,7 @@ export default function ManagementBlock({
 
       <div className="flex justify-start items-start w-full flex-wrap gap-2 sm:gap-4  mt-[2%]  ">
         <div className="bg-[#FFF] rounded-[10px] shadow-lg border-[#92B2C8] border-[1px] border-solid p-2 sm:p-[16px]  ">
-          <p className="text-[16px] md:text-[24px] font-[600] text-[#202020] ">
+          <p className="text-[14px] md:text-[24px] font-[600] text-[#202020] ">
             {ceoName}
           </p>
           <p className="text-[12px] md:text-[20px] font-[700] text-[#00487C] italic">
@@ -33,7 +34,7 @@ export default function ManagementBlock({
         </div>
 
         <div className="bg-[#FFF] rounded-[10px] shadow-lg border-[#92B2C8] border-[1px] border-solid p-2 sm:p-[16px] mb-[2%] ">
-          <p className=" text-[16px] md:text-[24px] font-[600] text-[#202020] ">
+          <p className=" text-[14px] md:text-[24px] font-[600] text-[#202020] ">
             {founderName}
           </p>
           <p className="text-[12px] md:text-[20px] font-[700] text-[#00487C] italic">
@@ -53,8 +54,11 @@ export default function ManagementBlock({
         className="!w-full !text-[14px]"
       />
 
-      <div className=" flex justify-start items-center w-full gap-[8px] mt-[-3%] mb-[2%] ">
-        <div className="inline-flex justify-center items-center gap-0.5 p-1 rounded-md bg-gradient-to-tr from-[#EFF5FF] to-[#F2FAFF] ">
+      <div className=" sm:flex  justify-start items-center w-full gap-[8px] mt-[0%] mb-[2%] ">
+        <div
+          onClick={() => window.open(`tel:${officecontact}`)}
+          className="max-w-fit flex justify-center items-center gap-0.5 p-1 rounded-md bg-gradient-to-tr from-[#EFF5FF] to-[#F2FAFF] border border-blue-200"
+        >
           {callIconSvg}
           <p className="text-[#00487C] text-[12px] sm:text-[28px] not-italic font-semibold ">
             Office Contact
@@ -63,7 +67,7 @@ export default function ManagementBlock({
 
         <a
           href={`tel:${officecontact}`}
-          className="text-[#242424] text-[14px] sm:text-2xl not-italic font-semibold mt-2 underline"
+          className="text-[#242424] text-[14px] sm:text-2xl not-italic font-semibold mt-2 underline ml-1.5"
         >
           {officecontact}
         </a>

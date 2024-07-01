@@ -121,12 +121,12 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           s={data.saleListing}
         />
         {/* About */}
-        <About
+        {/* <About
           id="about"
           heading="about"
           projName={data.projectName}
           content={data.about}
-        />
+        /> */}
         {/* Property Details */}
         <ProjectDetailsP
           projName={data.projectName}
@@ -175,14 +175,14 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
 
         <AboutBuilder id={data.builderId} />
         {/* Why Buy This  */}
-        {data.wbtp && (
+        {/* {data.wbtp && (
           <About
             id="whyBuy"
             heading="Why Buy"
             projName={`${data.projectName} ?`}
             content={data.wbtp}
           />
-        )}
+        )} */}
         <Reviews projName={data.projectName} />
         {/* <DownloadBroucher
           url={`${data?.media?.projBroucherUrl}?${Math.random()}`}

@@ -13,6 +13,7 @@ import LoginPopup from "../project/modals/LoginPop";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import { useSetAtom } from "jotai";
 import { NearByDataAtom } from "@/app/store/nearby";
+import clsx from "clsx";
 
 type Props = {
   type: string;
@@ -67,15 +68,15 @@ export function ProjectCard({ type, cardData }: CardProps) {
         className="border text-card-foreground min-w-[300px] sm:min-w-[350px] bg-[#FAFAFA]  min-h-[400px] overflow-hidden  shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[14px]"
       >
         {type == "proj" && (
-          <div className="flex space-y-1.5 p-6  px-4 pt-2 pb-3 justify-between items-center">
+          <div className="sm:flex sm:space-y-1.5 p-6  px-4 pt-2 pb-3 justify-between items-center">
             <a
               target="_blank"
-              className="tracking-tight text-[18px] font-[600] text-[#565D70] cursor-pointer"
+              className="tracking-tight sm:text-[18px] font-[600] text-[#565D70] cursor-pointer"
               href={`/abc/karnataka/banglore/${cardData.projIdEnc}`}
             >
               {cardData.projectName}
             </a>
-            <div className="text-xs font-semibold text-right ">
+            <div className="text-xs font-semibold sm:text-right ">
               <span className="text-[16px] font-[700] text-[#148B16]">
                 {formatCurrency(cardData.minPrice)}
               </span>{" "}
@@ -111,13 +112,19 @@ export function ProjectCard({ type, cardData }: CardProps) {
 
             <div className=" right-2 absolute ">
               <button
-                className="mt-[-30px] rounded-[10px] relative bottom-[35px] z-10 p-[8px] text-[#0073C6] sm:text-[18px] font-[700] flex pl-[4px] justify-center items-center bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100"
-                onClick={() => onAddingShortList()}
+                className={clsx(
+                  "mt-[-30px] rounded-[10px] relative bottom-[35px] z-10 p-[8px]  text-[12px] sm:text-[18px] font-[700] flex pl-[4px] justify-center items-center ",
+                  cardData.shortListed === "Y"
+                    ? "bg-[rgb(231,245,255)] text-[#148B16] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px]"
+                    : "bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 text-[#0073C6]"
+                )}
+                onClick={(e) => {
+                  e.preventDefault();
+                  onAddingShortList();
+                }}
               >
-                <span className=" w-[24px] h-[24px] ">
-                  {isItemInShortlist ? Shorlisted : shortlistIconSvg}
-                </span>
-                {isItemInShortlist ? "Shortlisted" : "Shortlist"}
+                {cardData.shortListed === "Y" ? Shorlisted : shortlistIconSvg}
+                {cardData.shortListed === "Y" ? "Shortlisted" : "Shortlist"}
               </button>
             </div>
           </div>
@@ -134,9 +141,9 @@ export function ProjectCard({ type, cardData }: CardProps) {
             )}
 
             {type == "proj" && (
-              <p className="mb-[6px] text-[#565D70] text-[12px] sm:text-base not-italic font-semibold leading-[normal]">
+              <p className="mb-[6px] text-[#565D70] text-[13px] sm:text-base not-italic font-semibold leading-[normal]">
                 Start - End Date:
-                <span className="ml-[4px] text-[#001F35] text-[12px] sm:text-base not-italic font-semibold leading-[normal]">
+                <span className="ml-[4px] text-[#001F35] text-[13px] sm:text-base not-italic font-semibold leading-[normal]">
                   {formatDate(cardData.startDate)} -{" "}
                   {formatDate(cardData.endDate)}
                 </span>
@@ -169,11 +176,11 @@ export function ProjectCard({ type, cardData }: CardProps) {
             </p>
 
             {type === "proj" && (
-              <div className="inline-flex items-start gap-2 p-1 sm:p-2 shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] cardBg mt-[8px] sm:mt-[16px]">
-                <span className="text-black text-right text-[14px] sm:text-base not-italic font-medium leading-[normal]">
+              <div className="inline-flex items-start gap-2 p-1 sm:p-2 shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] cardBg mt-[8px] sm:mt-[16px] border border-sky-200">
+                <span className="text-black text-right text-[12px] sm:text-base not-italic font-medium leading-[normal]">
                   Project Status:{" "}
                 </span>
-                <span className="text-[#148B16] text-[14px] sm:text-base not-italic font-bold leading-[normal]">
+                <span className="text-[#148B16] text-[12px] sm:text-base not-italic font-bold leading-[normal]">
                   {cardData.projectStatus}
                 </span>
               </div>
@@ -205,7 +212,7 @@ const BuilderCarousel = ({
 }: Props) => {
   return (
     <div className="w-full mb-[5%]">
-      <h2 className="text-h2 sm:text-[24px] lg:text-[32px] font-semibold uppercase cursor-pointer px-4 sm:px-0">
+      <h2 className="ml-2 text-[16px] sm:text-[24px] lg:text-[32px] font-semibold uppercase cursor-pointer px-4 sm:px-0">
         {/* <span className="!text-green-600">SARANG BY SUMADHARA </span> */}
         {title}
         {location && (
@@ -221,7 +228,7 @@ const BuilderCarousel = ({
           {projName}
         </span>
       </h2>
-      <p className="mt-3 mb-5 sm:mb-[44px]  text-[#4D6677] text-[14px] sm:text-2xl italic font-medium leading-[normal] tracking-[0.96px] px-4 sm:px-0">
+      <p className="ml-2 mt-3 mb-0 sm:mb-[44px]  text-[#4D6677] text-[13px] sm:text-2xl italic font-medium leading-[normal] tracking-[0.96px] px-4 sm:px-0">
         {content}
       </p>
 
