@@ -304,7 +304,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                       key={keyName}
                       buttonClass={`flex justify-start mb-2 sm:mb-[3%] w-full rounded-[20px] gap-[8px]  items-center mr-[24px] md:ml-[0px] text-[12px] sm:text-[18px] border ${
                         propCgId == keyName
-                          ? "text-[#001F35] font-[600] shadow-md bg-[#c8f5ca] sm:bg-[#D5EDFF]"
+                          ? "text-[#001F35] text-[14px] sm:text-base font-[600] shadow-md bg-[#c8f5ca] sm:bg-[#D5EDFF]"
                           : "text-[#303A42] font-[500] bg-[#E1FFE2] sm:bg-[#EEF7FE]"
                       } `}
                       onChange={() => {
@@ -475,7 +475,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
 
             <div
               className={clsx(
-                " h-[250px]  w-full md:w-[50%] flex justify-center items-end flex-col sm:h-full p-[2%] shadow-md md:shadow-none relative",
+                " h-[250px]  w-full md:w-[50%] flex justify-center items-end flex-col sm:h-full p-[2%] shadow-md border border-gray-400 md:shadow-none relative",
                 !selectedFloor?.unitNumber && "items-center"
               )}
             >

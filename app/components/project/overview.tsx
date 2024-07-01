@@ -63,7 +63,7 @@ export default function Overview({
           <Ratings />
           <a
             href={`tel:${8766203976}`}
-            className="sm:text-[20px]  mt-3  text-[#0073C6] lg:text-2xl not-italic font-semibold leading-[normal] inline-flex justify-center items-center gap-1.5 p-2 rounded-lg border-[0.8px] border-solid border-[#0073C6] bg-[#fafafa]"
+            className="text-[13px] sm:text-[20px]  mt-3  text-[#0073C6] lg:text-2xl not-italic font-semibold leading-[normal] inline-flex justify-center items-center gap-1.5 p-1.5 md:p-2 rounded-lg border-[0.8px] border-solid border-[#0073C6] bg-[#fafafa]"
           >
             {footerPhoneIcon}
             Call now

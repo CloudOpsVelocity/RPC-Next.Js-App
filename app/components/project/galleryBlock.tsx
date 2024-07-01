@@ -101,7 +101,7 @@ export default function GalleryBlock({
         </div>
         {/* all media display con */}
         <div className="w-[100%] md:w-[47%] mt-3 sm:mt-0">
-          <h3 className="text-[#737579] font-[600] text-[20px] lg:text-[24px] mb-1 sm:mb-[2%] ">
+          <h3 className="text-[#737579] font-[600]  sm:text-[20px] lg:text-[24px] mb-1 sm:mb-[2%] ">
             Photos
           </h3>
           <div className="flex justify-start items-start w-full gap-[4%] flex-wrap ">
@@ -124,7 +124,7 @@ export default function GalleryBlock({
           </div>
           {videos && videos.length > 0 && (
             <>
-              <h3 className="text-[#737579] font-[600] text-[20px] lg:text-[24px] mb-1 sm:mb-[2%] ">
+              <h3 className="text-[#737579] font-[600] sm:text-[20px] lg:text-[24px] mb-1 sm:mb-[2%] ">
                 Videos
               </h3>
               <div className="flex justify-start items-start w-full gap-[4%] flex-wrap ">

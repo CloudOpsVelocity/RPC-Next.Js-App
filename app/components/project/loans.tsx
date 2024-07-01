@@ -47,7 +47,7 @@ export default function ProjectLoans({
       {isMobile ? (
         <Carousel
           slideSize="70%"
-          height={200}
+          className="!h-[160px] sm:!h-[200px]"
           slideGap="md"
           align={"center"}
           slidesToScroll={1}
@@ -59,7 +59,7 @@ export default function ProjectLoans({
               <>
                 {bank.bankid && (
                   <Carousel.Slide key={index}>
-                    <div className="flex flex-col justify-center items-center gap-1.5 p-1.5 mt-4 sm:max-w-[150px] md:max-w-[170px] text-center border rounded-[7px] border-solid border-[#CCCED1] min-h-[160px]">
+                    <div className="flex flex-col justify-center items-center gap-1.5 p-1.5 mt-4 sm:max-w-[150px] md:max-w-[170px] text-center border rounded-[7px] border-solid border-[#CCCED1] min-h-[120px] sm:min-h-[160px]">
                       <Image
                         src={
                           BankDetailsList?.get(bank.bankid)?.url ??
@@ -68,9 +68,9 @@ export default function ProjectLoans({
                         alt={bank.bankName}
                         width={140}
                         height={70}
-                        className="min-h-[70px] w-[140px] aspect-video "
+                        className="max-w-[60px] sm:min-h-[70px] sm:w-[140px] aspect-video "
                       />
-                      <p className="mt-3  text-[#242424] text-center text-xl not-italic font-semibold leading-[normal] capitalize">
+                      <p className="mt-3  text-[#242424] text-center text-[14px] sm:text-xl not-italic font-semibold leading-[normal] capitalize">
                         {bank.bankName}
                       </p>
                     </div>

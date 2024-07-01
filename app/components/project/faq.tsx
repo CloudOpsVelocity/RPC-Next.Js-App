@@ -40,10 +40,8 @@ export default function FaqWithBg({ data, projName }: FaqWithBgProps) {
           <>
             <div className="relative mr-[-140px]  sm:mr-[-70px] bottom-[20px] w-[168px] h-[74px] rounded-[50%] blur-[29.5px] bg-[#0093ff4d] "></div>
             <h1 className="text-h2 lg:text-[32px] font-[600] text-[#001F35] mb-1 sm:mb-16 text-center sm:text-start">
-              Frequently Asked Questions of
-              <span className="text-[#148B16] font-[700]  ml-4">
-                {projName}
-              </span>{" "}
+              Frequently Asked Questions of{" "}
+              <span className="text-[#148B16] font-[700]  ">{projName}</span>{" "}
             </h1>
           </>
         )}
@@ -132,6 +130,7 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
           height="52"
           viewBox="0 0 52 52"
           fill="none"
+          className="sm:h-[52px] sm:w-[52px] h-[30px] w-[30px]"
         >
           <path
             d="M13.9865 41.1667L4.33398 48.75V8.66667C4.33398 8.09203 4.56226 7.54093 4.96859 7.1346C5.37492 6.72827 5.92602 6.5 6.50065 6.5H45.5006C46.0753 6.5 46.6264 6.72827 47.0327 7.1346C47.439 7.54093 47.6673 8.09203 47.6673 8.66667V39C47.6673 39.5746 47.439 40.1257 47.0327 40.5321C46.6264 40.9384 46.0753 41.1667 45.5006 41.1667H13.9865ZM23.834 30.3333V34.6667H28.1673V30.3333H23.834ZM18.5625 19.0948L22.8135 19.9463C22.9341 19.3428 23.2237 18.7859 23.6484 18.3404C24.0732 17.895 24.6157 17.5793 25.2129 17.4302C25.8101 17.281 26.4373 17.3045 27.0216 17.4979C27.606 17.6913 28.1234 18.0467 28.5136 18.5226C28.9039 18.9986 29.151 19.5756 29.2261 20.1865C29.3013 20.7974 29.2014 21.4171 28.9382 21.9734C28.6749 22.5298 28.2591 23 27.739 23.3292C27.219 23.6585 26.6162 23.8333 26.0006 23.8333H23.834V28.1667H26.0006C27.4366 28.1662 28.843 27.7581 30.0561 26.9897C31.2692 26.2213 32.2393 25.1242 32.8533 23.8261C33.4674 22.528 33.7002 21.0823 33.5248 19.657C33.3494 18.2318 32.773 16.8856 31.8625 15.7752C30.952 14.6647 29.7449 13.8356 28.3817 13.3843C27.0185 12.933 25.5551 12.878 24.1618 13.2257C22.7686 13.5735 21.5027 14.3097 20.5115 15.3487C19.5202 16.3877 18.8444 17.6868 18.5625 19.0948Z"
@@ -142,7 +141,7 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
           Have any Question? Ask Here 👇
         </span>
       </h2>
-      <h2 className="font-[700] text-[#233333] text-h2 md:text-[28px]  ">
+      <h2 className="font-[700] text-[#233333] text-[14px] md:text-[28px]  ">
         Ask your question related to
         <span className="!text-green-600"> {projName} Project!</span>
       </h2>
@@ -157,7 +156,7 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
             mb={"sm"}
             {...getInputProps("question")}
             className={clsx(
-              "placeholder:!text-[#4D6677] placeholder:!text-[28px] italic font-medium leading-[23.784px]  rounded-[10px] ",
+              "placeholder:!text-[#4D6677] placeholder:!text-[18px]  font-medium leading-[23.784px]  rounded-[10px] ",
               !errors.question && "!border !border-solid !border-[#737579]"
             )}
             size="lg"
@@ -166,7 +165,7 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
               handleTrimAndReplace(e, "question", setFieldValue, "dis")
             }
             classNames={{
-              input: StepCscs.textInput,
+              input: StepCscs.textAreaInput,
             }}
           />
         </div>

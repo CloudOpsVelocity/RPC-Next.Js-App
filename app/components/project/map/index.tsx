@@ -179,7 +179,7 @@ const LeafMap: React.FC<{
         </section>
       </div>
       {mapData && mapData[selected] && mapData[selected].length > 0 && (
-        <div className="mt-8 w-[90%] mx-auto">
+        <div className="mt-8 w-[90%] mx-auto hidden sm:block">
           <h1 className="text-[#303030] text-[16px] md:text-xl not-italic font-medium leading-[normal] tracking-[0.8px] capitalize">
             {selected.split("_").join(" ")} Nearby
           </h1>

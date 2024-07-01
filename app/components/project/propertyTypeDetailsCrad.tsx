@@ -166,7 +166,7 @@ export default function PropertyTypeDetailsCrad({
             )}
           </div>
 
-          <button className="text-[10px] lg:text-[18px] inline-flex max-w-fit justify-center items-center gap-2.5 px-2 py-1 mb-[2%] cursor-pointer  rounded border-[0.8px] border-solid border-[#0073C6] bg-[#fff] text-[#0073C6]  not-italic font-semibold leading-[normal]">
+          <button className="text-[11px] lg:text-[18px] inline-flex max-w-fit justify-center items-center gap-2.5 px-2 py-1 mb-[2%] cursor-pointer  rounded border-[0.8px] border-solid border-[#0073C6] bg-[#fff] text-[#0073C6]  not-italic font-semibold leading-[normal]">
             View Floor Plans
           </button>
         </div>

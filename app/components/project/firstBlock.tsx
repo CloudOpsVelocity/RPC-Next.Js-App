@@ -137,7 +137,9 @@ const FirstBlock: React.FC<Props> = ({
               </div>
             </div>
             <div className="w-full md:w-[40%] flex justify-between md:items-end flex-col p-[2%]">
-              <h2 className=" md:text-[28px] lg:text-[32px] font-semibold sm:font-[700] text-[#001F35]">
+              <h2 className="inline-flex md:text-[28px] lg:text-[32px] font-semibold sm:font-[700] text-[#001F35]">
+                <span className=" mr-1 sm:hidden">Price range: </span>
+                {"  "}
                 {formatCurrency(projectDetails.minPrice)} -{" "}
                 {formatCurrency(projectDetails.maxPrice)}
               </h2>

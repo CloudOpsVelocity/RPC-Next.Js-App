@@ -24,7 +24,7 @@ type Props = {
   projName: string;
 };
 const styles = {
-  box: "flex flex-col items-start gap-[10px] p-4 sm:border sm:shadow-[0px_4px_10px_0px_rgba(202,233,255,0.30)] rounded-[10px] border-solid border-[#92B2C8] bg-[#fff] sm:mr-[46px]",
+  box: "flex flex-col items-start sm:gap-[10px] p-4 sm:border sm:shadow-[0px_4px_10px_0px_rgba(202,233,255,0.30)] rounded-[10px] border-solid border-[#92B2C8] bg-[#fff] sm:mr-[46px]",
 };
 export default function ProjectDetailsP({ projName }: Props) {
   const { PhaseOverview, currentPhase, handlePhaseChange, phaseList } =

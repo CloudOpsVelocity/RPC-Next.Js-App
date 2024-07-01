@@ -86,17 +86,20 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
           <div className=" space-y-1.5 p-6  px-4 pt-2 pb-3 justify-between items-center">
             <a
               target="_blank"
-              className="tracking-tight text-[18px] font-[600] text-[#242424] cursor-pointer"
+              className="tracking-tight sm:text-[18px] font-[600] text-[#242424] cursor-pointer"
               href={`/abc/karnataka/banglore/${reqId}`}
             >
               {cardData.projName}
             </a>
             <div className="text-xs font-semibold  ">
-              <span className="text-[16px] font-[700] text-[#148B16]">
+              <span className="text-[#242424] text-[15px] font-[600]">
+                Price Range:
+              </span>{" "}
+              <span className="text-[16px] sm:font-[700] text-[#148B16]">
                 {formatCurrency(cardData.minPrice)}
               </span>{" "}
               -{" "}
-              <span className="text-[16px] font-[700] text-[#148B16]">
+              <span className="text-[16px] sm:font-[700] text-[#148B16]">
                 {formatCurrency(cardData.maxPrice)}
               </span>
             </div>
@@ -133,15 +136,18 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
 
             <div className=" right-2 absolute ">
               <button
-                className="mt-[-30px] rounded-[10px] relative bottom-[35px] z-10 p-[8px] text-[#0073C6] text-[12px] sm:text-[18px] font-[700] flex pl-[4px] justify-center items-center bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 "
+                className={clsx(
+                  "mt-[-30px] rounded-[10px] relative bottom-[35px] z-10 p-[8px]  text-[12px] sm:text-[18px] font-[700] flex pl-[4px] justify-center items-center ",
+                  cardData.shortListed === "Y"
+                    ? "bg-[rgb(231,245,255)] text-[#148B16] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px]"
+                    : "bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 text-[#0073C6]"
+                )}
                 onClick={(e) => {
                   e.preventDefault();
                   onAddingShortList(cardData.projIdEnc);
                 }}
               >
-                <span className=" w-[24px] h-[24px] ">
-                  {cardData.shortListed === "Y" ? Shorlisted : shortlistIconSvg}
-                </span>
+                {cardData.shortListed === "Y" ? Shorlisted : shortlistIconSvg}
                 {cardData.shortListed === "Y" ? "Shortlisted" : "Shortlist"}
               </button>
             </div>
@@ -161,9 +167,9 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
             )}
 
             {type == "proj" && (
-              <p className="mb-[6px] text-[#565D70] text-[12px] sm:text-base not-italic font-semibold leading-[normal]">
+              <p className="mb-[6px] text-[#565D70] text-[14px] sm:text-base not-italic font-semibold leading-[normal]">
                 Start - End Date:
-                <span className="ml-[4px] text-[#001F35] text-[12px] sm:text-basee not-italic font-semibold leading-[normal]">
+                <span className="ml-[4px] text-[#001F35] text-[14px] sm:text-basee not-italic font-semibold leading-[normal]">
                   {formatDate(cardData.launchDate)} -{" "}
                   {formatDate(cardData.possassionDate)}
                 </span>
@@ -171,7 +177,7 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
             )}
 
             {cardData.propTypes ? (
-              <p className="mb-[6px] text-[#242424] text-[12px] sm:text-base not-italic font-semibold leading-[normal] tracking-[0.56px]">
+              <p className="mb-[6px] text-[#242424] text-[14px] sm:text-base not-italic font-semibold leading-[normal] tracking-[0.56px]">
                 {cardData.propTypes.map((item: any) => item.trim()).join(", ")}
               </p>
             ) : (
@@ -184,7 +190,7 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
               </p>
             )}
 
-            <p className="text-[#565D70]  not-italic font-semibold leading-[normal] tracking-[0.56px] capitalize text-[12px] sm:text-[15px]">
+            <p className="text-[#565D70]  not-italic font-semibold leading-[normal] tracking-[0.56px] capitalize text-[14px] sm:text-[15px]">
               {type === "proj" &&
                 `${cardData.locality}, ${cardData?.city}, ${cardData.state},  ${cardData.pincode} `}
 
@@ -237,10 +243,10 @@ const ProjectCarousel = ({
         <div className="w-[90%] mx-auto ">
           <h2 className="text-h2 sm:text-[24px] lg:text-[32px] font-semibold  cursor-pointer">
             {/* <span className="!text-green-600">SARANG BY SUMADHARA </span> */}
-            {title}
-            <span className="text-[#148B16] font-[700]  ml-4 ">{projName}</span>
+            {title}{" "}
+            <span className="text-[#148B16] font-[700]   ">{projName}</span>
           </h2>
-          <p className="mt-1 sm:mt-3 mb-[24px] sm:mb-[44px]  text-[#4D6677] sm:text-2xl italic font-medium leading-[normal] tracking-[0.96px]">
+          <p className="mt-1 sm:mt-3 text-[14px]  sm:mb-[44px]  text-[#4D6677] sm:text-2xl italic font-medium leading-[normal] tracking-[0.96px]">
             {content}
           </p>
         </div>

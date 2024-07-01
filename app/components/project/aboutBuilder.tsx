@@ -87,10 +87,10 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
           className="mb-[14px] sm:!mb-[29px] text-[#202020] text-2xl not-italic font-medium leading-[normal] w-full mt-4 sm:mt-0"
         />
 
-        <p className="  text-[18px] lg:text-[24px]  text-black sm:text-2xl not-italic font-semibold leading-[normal] inline-flex justify-center items-center">
+        <p className="  text-[16px] lg:text-[24px]  text-black sm:text-2xl not-italic font-semibold leading-[normal] inline-flex justify-center items-center">
           {TeleGramBlack} Builder Address{" "}
         </p>
-        <p className=" text-[14px]  sm:text-[18px] lg:text-[20px]  sm:mt-[1%]  mb-[14px] text-[#242424] text-2xl italic font-medium  md:mb-[2%] ">
+        <p className=" text-[12px]  sm:text-[18px] lg:text-[20px]  sm:mt-[1%]  mb-[14px] font-medium  sm:italic text-[#202020]  md:mb-[2%] ">
           {nzData.builderAddress}, {nzData.city}, {nzData.state},{" "}
           {nzData.pincode}
         </p>

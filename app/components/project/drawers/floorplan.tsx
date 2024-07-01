@@ -28,6 +28,7 @@ import {
 import { BACKEND_PROP_TYPES, projectprops } from "@/app/data/projectDetails";
 import { sortUnits } from "@/app/utils/unitparser";
 import { pluralizeOrSingularize } from "@/app/utils/plural";
+import { useDrag } from "@use-gesture/react";
 const iconStyles: string =
   " flex items-center justify-center w-[40px] h-[40px]  text-[#001F35]";
 export default function FloorplanDrawer() {
@@ -145,7 +146,17 @@ export default function FloorplanDrawer() {
     close();
     setData({});
   };
-
+  const bind = useDrag(
+    ({ movement: [mx], direction: [dx], memo = mx, cancel }) => {
+      // If the user is swiping left (negative direction)
+      if (dx === 1 && mx > 50) {
+        handleClose();
+        cancel();
+      }
+      return memo;
+    },
+    { axis: "x", pointer: { touch: true } }
+  );
   return (
     <>
       <Drawer
@@ -155,6 +166,7 @@ export default function FloorplanDrawer() {
         position="right"
         zIndex={1000}
         classNames={S}
+        {...bind()}
       >
         <h3 className=" gap-1 pl-1 pr-2 py-1 xl:gap-2.5 w-auto  items-center xl:pl-2.5  xl:py-2.5 bg-[#EEF7FE] text-[#001F35] text-[18px] xl:text-[28px] not-italic font-semibold leading-[normal] capitalize xl:w-full mt-2 xl:mt-4 max-w-[90%] inline-flex">
           {getIcon(
@@ -301,11 +313,11 @@ const PlotTable: React.FC<PlotTableProps> = ({
   const sortedUnits = Object.entries(unitCountMap).sort(([unitA], [unitB]) =>
     unitA.localeCompare(unitB)
   );
-  const isMobile = useMediaQuery('max:width:601px')
+  const isMobile = useMediaQuery("max:width:601px");
   return (
     <div>
       <div className="flex items-center gap-1.5 p-1 xl:p-2 rounded-md bg-[#EEE] text-[#001F35] text-[14px] xl:text-lg not-italic font-semibold capitalize mb-3">
-        {isMobile &&config.headerIcon} {title} ({cg.plotData[keyCount]}{" "}
+        {isMobile && config.headerIcon} {title} ({cg.plotData[keyCount]}{" "}
         {pluralizeOrSingularize(cg.plotData[keyCount] as number, "Units")})
       </div>
       <ul className="list-disc pl-8">

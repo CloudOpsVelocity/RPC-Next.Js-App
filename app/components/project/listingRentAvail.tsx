@@ -11,6 +11,7 @@ import clsx from "clsx";
 import Image from "next/image";
 import React from "react";
 import SubHeading from "./headings/SubHeading";
+import { useMediaQuery } from "@mantine/hooks";
 
 export default function ListingRentAvail({
   projName,
@@ -31,7 +32,7 @@ export default function ListingRentAvail({
       </h1>
 
       <SubHeading text="Unlock the door to your dream home: explore our array of available properties today!" />
-      <div className="sm:flex  space-y-4 items-center gap-[28px] sm:gap-[58px] mt-[35px] flex-wrap sm:space-y-0">
+      <div className="sm:flex  space-y-4 items-center gap-[28px] sm:gap-[58px] mt-[18px] sm:mt-[35px] flex-wrap sm:space-y-0">
         <Card type="sell" s={s} r={r} projName={projName} block={s === "0"} />
         <Card type="rent" s={s} r={r} projName={projName} block={r === "0"} />
       </div>
@@ -58,6 +59,7 @@ const Card = ({
   const handleBoxClick = (value: string) => {
     value === "0" && openSuccesPopup();
   };
+  const isMobile = useMediaQuery("(max-width: 601px)");
   return (
     <div
       className={clsx(
@@ -72,7 +74,15 @@ const Card = ({
       <div className="flex justify-evenly sm:justify-center items-center gap-2 sm:gap-[22px] h-full ">
         <Image
           alt="listing"
-          src={type === "rent" ? config.rentLogo : config.sellLogo}
+          src={
+            type === "rent"
+              ? isMobile
+                ? config.rentMobileLogo
+                : config.rentLogo
+              : isMobile
+              ? config.sellMobileLogo
+              : config.sellLogo
+          }
           width={100}
           height={100}
           className="w-[50px] h-[40px] sm:w-[60px] sm:h-[60px] block sm:hidden"
@@ -81,7 +91,7 @@ const Card = ({
           {type === "rent" ? <RentSvg /> : <SellSvg />}
         </span>
         <div className="pl-0">
-          <h2 className="text-[#242424] text-[18px] mt-4 sm:mt-0 sm:text-2xl not-italic font-medium leading-[31px]">
+          <h2 className="text-[#242424] text-[18px]  sm:mt-0 sm:text-2xl not-italic font-medium leading-[31px]">
             <span className="capitalize">{type}</span> Listings{" "}
           </h2>
         </div>
@@ -114,4 +124,6 @@ let config = {
     "https://d2l0lb5gc1bw3t.cloudfront.net/staticmedia-images-icons/project-detail/bluearrow.png",
   rentLogo: "/abc/rent.png",
   sellLogo: "/abc/sell.png",
+  rentMobileLogo: "/abc/rent.svg",
+  sellMobileLogo: "/abc/sell.svg",
 };

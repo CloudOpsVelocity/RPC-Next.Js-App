@@ -38,7 +38,7 @@ export default function OverviewBanner({
       >
         <PriceBag className="w-[100px] h-[120px] md:w-[237px] md:h-[263px] mt-2 sm:mt-0" />
 
-        <div className="flex justify-center sm:justify-between items-center w-[100%] flex-row ml-[3%] p-[2%] flex-wrap">
+        <div className="flex justify-center sm:justify-between items-center w-[100%] flex-row sm:ml-[3%] p-[2%] flex-wrap">
           <div className=" grid place-items-center md:block">
             <p className="text-[#212C33] sm:text-[24px] lg:text-[34px] font-[600]  md:text-start text-center">
               Price Range
@@ -57,7 +57,7 @@ export default function OverviewBanner({
                 onChange={() => open("banner", slug, "projBanner")}
               />
               <DownloadBroucher
-                className="block py-2.5 sm:hidden"
+                className="block py-2.5 !font-[600] sm:hidden"
                 url={brocherUrl}
               />
             </div>
