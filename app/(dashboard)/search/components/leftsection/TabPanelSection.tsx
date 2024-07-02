@@ -36,8 +36,7 @@ export default function TabPanelSection({}: Props) {
             return (
               <ProjectDetailsCard
                 key={index}
-                type={filters.listedBy ?? "proj"}
-                {...eachOne}
+                data={{ ...eachOne, type: filters.listedBy ?? "proj" }}
               />
             );
           })

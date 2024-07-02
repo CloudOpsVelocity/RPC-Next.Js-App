@@ -20,6 +20,7 @@ import { em } from "@mantine/core";
 import { useAtomValue } from "jotai";
 import selectedSearchAtom from "@/app/store/search/map";
 import MarkerClusterGroup from "react-leaflet-cluster";
+import TooltipProj from "./Tooltip";
 interface Cluster {
   getChildCount: () => number;
 }
@@ -79,8 +80,6 @@ const MapContent = ({ data }: any) => {
       map.setView([parseFloat(selected.lat), parseFloat(selected.lang)], 15);
     }
   }, [selected, map]);
-  // const s = Array.from(new Set(data.map((item: any) => item.lat)));
-  // console.log(s);
 
   return (
     <>
@@ -92,39 +91,19 @@ const MapContent = ({ data }: any) => {
             position={[parseFloat(item?.lat || 0), parseFloat(item?.lang || 0)]}
             icon={isMobile ? MobileIcon : MapIcon}
           >
-            {selected?.projName === item.projName && (
-              <Tooltip opacity={1} permanent direction="top" offset={[10, -35]}>
-                <div className="p-3 rounded-2xl">
-                  <p className="text-[#202020] text-2xl not-italic font-medium leading-[normal] p-0 !m-0">
-                    {item.projName}
-                  </p>
-
-                  <p className="text-[#0073C6] text-xs not-italic font-medium leading-[normal] underline mb-1">
-                    Agent Listing Available : {item.agentListing}{" "}
-                  </p>
-                  <p className="text-[#4D6677] text-xs not-italic font-medium leading-[normal] underline">
-                    Owner Listing Available : {item.ownerListing}{" "}
-                  </p>
-                </div>
+            {selected?.projName === item?.projName && (
+              <Tooltip
+                opacity={1}
+                permanent={selected?.projName === item.projName}
+                direction="top"
+                offset={[10, -35]}
+              >
+                <TooltipProj data={item} />
               </Tooltip>
             )}
-
-            <Popup>
-              <>
-                <div>
-                  <p className="text-[#202020] text-2xl not-italic font-medium leading-[normal] p-0 !m-0">
-                    {item.projName}
-                  </p>
-
-                  <p className="text-[#0073C6] text-xs not-italic font-medium leading-[normal] underline">
-                    Agent Listing Available : {item.agentListing}{" "}
-                  </p>
-                  <p className="text-[#4D6677] text-xs not-italic font-medium leading-[normal] underline">
-                    Owner Listing Available : {item.ownerListing}{" "}
-                  </p>
-                </div>
-              </>
-            </Popup>
+            <Tooltip opacity={1} direction="top" offset={[10, -35]}>
+              <TooltipProj data={item} /> <TooltipProj data={item} />
+            </Tooltip>
           </Marker>
         ))}
     </>
