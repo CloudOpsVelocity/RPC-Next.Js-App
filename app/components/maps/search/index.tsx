@@ -102,7 +102,7 @@ const MapContent = ({ data }: any) => {
               </Tooltip>
             )}
             <Tooltip opacity={1} direction="top" offset={[10, -35]}>
-              <TooltipProj data={item} /> <TooltipProj data={item} />
+              <TooltipProj data={item} />
             </Tooltip>
           </Marker>
         ))}
