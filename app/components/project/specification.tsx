@@ -101,7 +101,7 @@ export default function Specifications({
                   className="px-[2%] mt-5 sm:mt-10 w-full items-start justify-start flex-col"
                 >
                   <span
-                    className={` flex items-center gap-2 text-[#00487C] min-w-[10%] max-w-[20%] sm:text-[24px] italic font-[600] py-2 px-2 rounded-xl  ${
+                    className={` flex items-center gap-2 text-[#00487C]  w-full sm:min-w-[10%] sm:max-w-[20%]  sm:text-[24px] italic font-[600] py-2 px-2 rounded-xl  ${
                       selectedSpecIndex == index
                         ? "specification"
                         : "specificationRemove"

@@ -7,7 +7,7 @@ import PropertyHeading from "../property/heading";
 import SubHeading from "./headings/SubHeading";
 import { Carousel } from "@mantine/carousel";
 import { useMediaQuery } from "@mantine/hooks";
-
+import Css from "@/app/styles/Loan.module.css";
 export default function ProjectLoans({
   banks,
   name,
@@ -53,6 +53,7 @@ export default function ProjectLoans({
           slidesToScroll={1}
           dragFree
           mt={"md"}
+          classNames={Css}
         >
           {banks?.map((bank, index) => {
             return (

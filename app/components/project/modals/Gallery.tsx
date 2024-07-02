@@ -84,26 +84,19 @@ const Gallery: React.FC<GalleryProps> = ({
             </div>
           </div>
           {isImage ? (
-            <Carousel withIndicators withControls={false} slideSize="100%">
+            <Carousel
+              align={"start"}
+              withIndicators
+              withControls={false}
+              slideSize="100%"
+              mr={26}
+              className="!w-full"
+            >
               {images.map((image, index) => (
-                <Carousel.Slide className="!relative !flex !justify-center !items-center">
+                <Carousel.Slide className="!relative !flex !justify-center !w-full !items-center">
                   <TransformWrapper wheel={{ disabled: false }} disabled>
                     <Content url={image} />
                   </TransformWrapper>
-                  {/* <TransformWrapper wheel={{ disabled: false }} disabled>
-                    <TransformComponent>
-                      <Image
-                        radius="md"
-                        h={isMobile ? "auto" : 600}
-                        m={"auto"}
-                        w={1400}
-                        fit="contain"
-                        // src={previewImage ?? content?.url}
-                        src={image}
-                        className="cursor-pointer sm:border-[5px] sm:bg-white sm:border-white w-[100%] sm:!h-[350px]  md:min-w-[1400px] md:min-h-[600px]"
-                      />
-                    </TransformComponent>
-                  </TransformWrapper> */}
                 </Carousel.Slide>
               ))}
             </Carousel>

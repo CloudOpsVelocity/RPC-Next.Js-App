@@ -21,6 +21,7 @@ import { useAtomValue } from "jotai";
 import selectedSearchAtom from "@/app/store/search/map";
 import MarkerClusterGroup from "react-leaflet-cluster";
 import TooltipProj from "./Tooltip";
+import { useSearchParams, useParams } from "next/navigation";
 interface Cluster {
   getChildCount: () => number;
 }
@@ -33,6 +34,7 @@ const Map = ({ data, lat, lang }: any) => {
       iconSize: point(33, 33, true),
     });
   };
+
   return (
     <>
       <MapContainer
@@ -80,7 +82,6 @@ const MapContent = ({ data }: any) => {
       map.setView([parseFloat(selected.lat), parseFloat(selected.lang)], 15);
     }
   }, [selected, map]);
-
   return (
     <>
       {data &&
