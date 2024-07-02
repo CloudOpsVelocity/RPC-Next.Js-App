@@ -1,14 +1,15 @@
 import useSearchFilters from "@/app/hooks/search";
 import { DropDownIcon } from "@/app/images/commonSvgs";
 import { Menu } from "@mantine/core";
+import clsx from "clsx";
 import React, { useState } from "react";
 
 type Props = {};
 
 export default function SortBy({}: Props) {
-  const { filters, setFilters, handleAppliedFilters } = useSearchFilters();
+  const { filters, setFilters, handleAppliedFilters, params } =
+    useSearchFilters();
 
-  const [selected, setSort] = useState("");
   const handleSetFilter = (sortByfield: string, sortType: number) => {
     if (filters.sortByfield === sortByfield && filters.sortType === sortType) {
       setFilters((prev) => ({
@@ -27,8 +28,7 @@ export default function SortBy({}: Props) {
   };
   const seletedValue = config.find(
     (eachItem) =>
-      eachItem.value === filters.sortType &&
-      eachItem.type === filters.sortByfield
+      eachItem.value === params.sortType && eachItem.type === params.sortByfield
   )?.label;
   return (
     <Menu shadow="md" width={200}>
@@ -48,7 +48,11 @@ export default function SortBy({}: Props) {
               key={index}
               value={seletedValue}
               onClick={() => handleSetFilter(eachItem.type, eachItem.value)}
-              className="hover:text-btnPrimary"
+              style={{
+                backgroundColor:
+                  eachItem.label === seletedValue ? "#1C7ED6" : "white",
+                color: eachItem.label === seletedValue ? "white" : "black",
+              }}
             >
               {eachItem.label}
             </Menu.Item>

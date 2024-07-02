@@ -35,6 +35,8 @@ const paramsInit = {
   cg: parseAsString,
   projIdEnc: parseAsString,
 };
+// export type of params
+export type SearchParams = typeof paramsInit;
 interface ExtentSearchFilters extends SearchFilter {
   listedBy: string;
   furnish: number;
@@ -343,12 +345,12 @@ const getFilteredData = async (
   type: "project" | "owner" | "agent"
 ): Promise<Search[]> => {
   const hasCityParam = /(?:^|&)city=/.test(query);
-
+  const hasCg = /(?:^|&)cg=/.test(query);
   const url =
     type === "project"
       ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=${page}${
           query && `&${query}`
-        }`
+        } ${!hasCg ? "&cg=S" : ""}`
       : `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/prop-search?page=${page}${
           query && `&${query}`
         }${hasCityParam ? "" : "&city=9"}`;
