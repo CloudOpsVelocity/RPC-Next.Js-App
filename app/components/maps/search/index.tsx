@@ -10,7 +10,7 @@ import {
   useMap,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css"; // Import Leaflet CSS
-import { LatLngTuple } from "leaflet";
+import { LatLngTuple, divIcon, point } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css"; // Re-uses images from ~leaflet package
 import "leaflet-defaulticon-compatibility";
@@ -19,9 +19,19 @@ import { useMediaQuery } from "@mantine/hooks";
 import { em } from "@mantine/core";
 import { useAtomValue } from "jotai";
 import selectedSearchAtom from "@/app/store/search/map";
-
+import MarkerClusterGroup from "react-leaflet-cluster";
+interface Cluster {
+  getChildCount: () => number;
+}
 const Map = ({ data, lat, lang }: any) => {
   const position: LatLngTuple = [lat, lang];
+  const createClusterCustomIcon = function (cluster: Cluster) {
+    return L.divIcon({
+      html: `<span class="cluster-icon">${cluster.getChildCount()}</span>`,
+      className: "custom-marker-cluster",
+      iconSize: point(33, 33, true),
+    });
+  };
   return (
     <>
       <MapContainer
@@ -34,8 +44,12 @@ const Map = ({ data, lat, lang }: any) => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-
-        <MapContent data={data} />
+        <MarkerClusterGroup
+          chunkedLoading
+          iconCreateFunction={createClusterCustomIcon}
+        >
+          <MapContent data={data} />
+        </MarkerClusterGroup>
       </MapContainer>
       <polyline />
     </>
@@ -62,9 +76,12 @@ const MapContent = ({ data }: any) => {
   const map = useMap();
   useEffect(() => {
     if (selected && selected.projName) {
-      map.panTo([parseFloat(selected.lat), parseFloat(selected.lang)]);
+      map.setView([parseFloat(selected.lat), parseFloat(selected.lang)], 15);
     }
   }, [selected, map]);
+  // const s = Array.from(new Set(data.map((item: any) => item.lat)));
+  // console.log(s);
+
   return (
     <>
       {data &&
