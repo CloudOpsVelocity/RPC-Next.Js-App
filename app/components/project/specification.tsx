@@ -6,6 +6,7 @@ import { Box, Group, Paper, ScrollArea, Stack } from "@mantine/core";
 import { specificationsList } from "@/app/images/commonSvgs";
 import styles from "@/app/styles/Scrollbar.module.css";
 import clsx from "clsx";
+import { redirect } from "next/dist/server/api-utils";
 export default function Specifications({
   data,
   projName,
@@ -34,7 +35,7 @@ export default function Specifications({
     }
   };
   const isMobile = useMediaQuery(`(max-width: 601px)`);
-  const height = 0;
+
   return (
     <div
       className="w-[90%] scroll-mt-[220px] mx-auto mb-[5%]"
@@ -82,7 +83,7 @@ export default function Specifications({
           <Stack align="center">
             <ScrollArea
               w={"100%"}
-              h={
+              mah={
                 458 > data?.length * (isMobile ? 190 : 270)
                   ? data.length * (isMobile ? 190 : 270)
                   : isMobile
