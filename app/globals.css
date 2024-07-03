@@ -197,3 +197,7 @@
   font-size: 1.2rem;
   box-shadow: 0 0 0px 5px #fff;
 }
+
+.gradient {
+  background: linear-gradient(to right, #0073c6, #148b16, #ffd600, #ff0000);
+}

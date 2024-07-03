@@ -13,6 +13,9 @@ import { useSetAtom } from "jotai";
 import selectedSearchAtom from "@/app/store/search/map";
 import { calculatePerSqPrice } from "@/app/utils/price";
 import LeftSection from "./Top/LeftSection";
+import CenterTop from "./Top/Center";
+import CardDownSection from "./Down";
+import TopRightSection from "./Top/Right";
 
 type Props = {
   type: any;
@@ -53,7 +56,6 @@ const MainBox = ({ data }: Props) => {
   } = data;
   const { data: session } = useSession();
 
-  const [, { open }] = useReqCallPopup();
   const [, { open: openLogin }] = usePopShortList();
   const { toggleShortlist, shortlistedItems, compareItems, toggleCompare } =
     useShortlistAndCompare();
@@ -87,13 +89,20 @@ const MainBox = ({ data }: Props) => {
       openLogin();
     }
   };
-  const setSelected = useSetAtom(selectedSearchAtom);
 
   return (
     <div className="h-[259px] self-stretch rounded border shadow-[0px_4px_30px_0px_rgba(74,82,113,0.20)] border-solid border-[#A4B8D4]">
-      <div className="flex">
+      <div className="flex justify-between">
         <LeftSection src={coverUrl ?? coverImage} rera={rerastatus} />
+        <CenterTop data={data} />
+        <TopRightSection {...data} />
       </div>
+      <CardDownSection
+        a={data.agentListing}
+        o={data.ownerListing}
+        type={type}
+        reqId={reqId}
+      />
     </div>
     // <div className=" flex w-full mb-[5%] flex-col shadow-md " id={reqId}>
     //   <div className=" flex justify-center items-center w-full  ">
