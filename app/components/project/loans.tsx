@@ -51,7 +51,6 @@ export default function ProjectLoans({
           slideGap="md"
           align={"center"}
           slidesToScroll={1}
-          dragFree
           mt={"md"}
           classNames={Css}
         >

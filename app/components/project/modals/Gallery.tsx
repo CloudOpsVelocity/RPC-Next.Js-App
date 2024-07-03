@@ -42,7 +42,9 @@ const Gallery: React.FC<GalleryProps> = ({
     open(isImage ? "image" : "video", image);
   };
   const isMobile = useMediaQuery(`(max-width: 601px`);
-
+  if (!content) {
+    return null;
+  }
   return (
     <>
       <Modal
@@ -92,21 +94,21 @@ const Gallery: React.FC<GalleryProps> = ({
               align="start"
               withControls={false}
             >
-              <TransformWrapper disabled>
-                {images.map((image, index) => (
-                  <Carousel.Slide
-                    key={index}
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                    // className="!relative !flex !justify-center !w-full !items-center !max-w-fit"
-                  >
+              {images.map((image, index) => (
+                <Carousel.Slide
+                  key={index}
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                  // className="!relative !flex !justify-center !w-full !items-center !max-w-fit"
+                >
+                  <TransformWrapper disabled>
                     <Content url={image} />
-                  </Carousel.Slide>
-                ))}
-              </TransformWrapper>
+                  </TransformWrapper>
+                </Carousel.Slide>
+              ))}
             </Carousel>
           ) : (
             <ReactPlayer

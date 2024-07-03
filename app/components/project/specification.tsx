@@ -34,7 +34,7 @@ export default function Specifications({
     }
   };
   const isMobile = useMediaQuery(`(max-width: 601px)`);
-
+  const height = 0;
   return (
     <div
       className="w-[90%] scroll-mt-[220px] mx-auto mb-[5%]"

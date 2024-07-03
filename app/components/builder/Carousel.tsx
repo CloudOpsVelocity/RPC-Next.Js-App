@@ -141,9 +141,9 @@ export function ProjectCard({ type, cardData }: CardProps) {
             )}
 
             {type == "proj" && (
-              <p className="mb-[6px] text-[#565D70] text-[14px] sm:text-base not-italic font-semibold leading-[normal]">
+              <p className="mb-[6px] text-[#565D70] text-[13px] sm:text-base not-italic font-semibold leading-[normal]">
                 Start - End Date:
-                <span className="ml-[4px] text-[#001F35] text-[14px] sm:text-base not-italic font-semibold leading-[normal]">
+                <span className="ml-[4px] text-[#001F35] text-[13px] sm:text-base not-italic font-semibold leading-[normal]">
                   {formatDate(cardData.startDate)} -{" "}
                   {formatDate(cardData.endDate)}
                 </span>
