@@ -121,3 +121,7 @@ export const get_posted_by = (str?: string) => {
       break;
   }
 };
+
+export const isReraverified = (str: string) => {
+  return str === "Applied" || str === "Recieved";
+};

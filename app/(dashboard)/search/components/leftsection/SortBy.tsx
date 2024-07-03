@@ -1,5 +1,5 @@
 import useSearchFilters from "@/app/hooks/search";
-import { DropDownIcon } from "@/app/images/commonSvgs";
+import { DarkDropDownIcon, DropDownIcon } from "@/app/images/commonSvgs";
 import { Menu } from "@mantine/core";
 import clsx from "clsx";
 import React, { useState } from "react";
@@ -34,10 +34,10 @@ export default function SortBy({}: Props) {
     <Menu shadow="md" width={200}>
       <Menu.Target>
         <button className="flex h-7 justify-center items-center gap-2.5 p-3.5 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.05)] border-[0.5px] border-solid border-[#CBD4E1] bg-white mr-auto md:mr-2 mt-1 mb-2 ml-4 md:ml-auto ">
-          <span className="text-[#0073C6] text-xs md:text-base not-italic   md:font-medium leading-[normal] ">
+          <span className="text-[#0073C6] text-xs md:text-base not-italic   font-semibold leading-[normal] ">
             {seletedValue || "Sort By"}
           </span>
-          <DropDownIcon />
+          <DarkDropDownIcon />
         </button>
       </Menu.Target>
 
@@ -45,14 +45,15 @@ export default function SortBy({}: Props) {
         {config.map((eachItem, index) => {
           return (
             <Menu.Item
+              classNames={{
+                item: clsx(
+                  " text-xs text-[#242424] md:text-base font-[500] leading-[normal]",
+                  eachItem.label === seletedValue && "!bg-[#1C7ED6] !text-white"
+                ),
+              }}
               key={index}
               value={seletedValue}
               onClick={() => handleSetFilter(eachItem.type, eachItem.value)}
-              style={{
-                backgroundColor:
-                  eachItem.label === seletedValue ? "#1C7ED6" : "white",
-                color: eachItem.label === seletedValue ? "white" : "black",
-              }}
             >
               {eachItem.label}
             </Menu.Item>

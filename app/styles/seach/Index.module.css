@@ -1,16 +1,12 @@
 .tab {
-  color: #4d6677;
-  font-size: 12px;
+  color: #242424;
+  font-size: 18px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
   border: none;
 }
-@media screen and (min-width: 768px) {
-  .tab {
-    font-size: 16px;
-  }
-}
+
 .tab:hover {
   background-color: transparent;
 }
@@ -33,11 +29,16 @@
 }
 
 .bg {
-  background: var(--CTA, linear-gradient(90deg, #f5fbff 0%, #e5f4ff 100%));
+  background: #ddf0fd;
   box-shadow: 0px 4px 10px 0px rgba(171, 171, 171, 0.1);
 }
 
 .searchCardbg {
   border-radius: 30px;
   background: linear-gradient(91deg, #000 0.74%, rgba(0, 0, 0, 0.4) 103.26%);
+}
+@media screen and (min-width: 768px) {
+  .tab {
+    font-size: 16px;
+  }
 }

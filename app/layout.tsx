@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
+import "@mantine/core/styles.css";
 import "./globals.css";
 import MantineTheme from "@/mantine.config";
 import { MantineProvider, ColorSchemeScript } from "@mantine/core";
-import "@mantine/core/styles.css";
+
 import SessionProvider from "./context/session";
 import ReactQueryProvider from "./context/rquery";
 import Layout from "@/app/components/layouts/primary";

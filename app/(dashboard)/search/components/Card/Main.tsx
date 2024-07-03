@@ -12,13 +12,14 @@ import { formatCurrency } from "@/app/utils/numbers";
 import { useSetAtom } from "jotai";
 import selectedSearchAtom from "@/app/store/search/map";
 import { calculatePerSqPrice } from "@/app/utils/price";
+import LeftSection from "./Top/LeftSection";
 
 type Props = {
   type: any;
 } & Search &
   any;
 
-const ProjectDetailsCard = ({ data }: Props) => {
+const MainBox = ({ data }: Props) => {
   const {
     type,
     projName,
@@ -89,7 +90,11 @@ const ProjectDetailsCard = ({ data }: Props) => {
   const setSelected = useSetAtom(selectedSearchAtom);
 
   return (
-    <div></div>
+    <div className="h-[259px] self-stretch rounded border shadow-[0px_4px_30px_0px_rgba(74,82,113,0.20)] border-solid border-[#A4B8D4]">
+      <div className="flex">
+        <LeftSection src={coverUrl ?? coverImage} rera={rerastatus} />
+      </div>
+    </div>
     // <div className=" flex w-full mb-[5%] flex-col shadow-md " id={reqId}>
     //   <div className=" flex justify-center items-center w-full  ">
     //     <div className="w-full h-[120px]  md:h-[140px] md:max-w-[210px] max-w-[120px] bg-gray-300 relative">
@@ -256,7 +261,7 @@ const ProjectDetailsCard = ({ data }: Props) => {
   );
 };
 
-export default ProjectDetailsCard;
+export default MainBox;
 function getTypeText(type: string) {
   let text;
 
