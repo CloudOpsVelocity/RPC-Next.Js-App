@@ -85,20 +85,28 @@ const Gallery: React.FC<GalleryProps> = ({
           </div>
           {isImage ? (
             <Carousel
-              align={"start"}
+              classNames={styles}
+              slideGap={{ base: 0, sm: "md" }}
               withIndicators
+              slidesToScroll={1}
+              align="start"
               withControls={false}
-              slideSize="100%"
-              mr={26}
-              className="!w-full"
             >
-              {images.map((image, index) => (
-                <Carousel.Slide className="!relative !flex !justify-center !w-full !items-center">
-                  <TransformWrapper wheel={{ disabled: false }} disabled>
+              <TransformWrapper disabled>
+                {images.map((image, index) => (
+                  <Carousel.Slide
+                    key={index}
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                    // className="!relative !flex !justify-center !w-full !items-center !max-w-fit"
+                  >
                     <Content url={image} />
-                  </TransformWrapper>
-                </Carousel.Slide>
-              ))}
+                  </Carousel.Slide>
+                ))}
+              </TransformWrapper>
             </Carousel>
           ) : (
             <ReactPlayer

@@ -42,7 +42,7 @@ export default function ProjectDetails({
             {newLaunchProjIconSvg}
           </div>
 
-          <p className=" text-[#148B16] text-[13px] lg:text-[20px] font-[700]">
+          <p className=" text-[#148B16] text-[13px] lg:text-[20px] font-[700] ">
             New Launch {`Project${newProject > 1 ? "s" : ""}`}
           </p>
         </div>
@@ -55,7 +55,8 @@ export default function ProjectDetails({
             {onGoingProjIconSvg}
           </div>
           <p className=" text-[#0073C6] text-[13px] lg:text-[20px] font-[700]">
-            Ongoing {`Project${onGoingProject > 1 ? "s" : ""}`}
+            Ongoing <br className="block sm:hidden" />{" "}
+            {`Project${onGoingProject > 1 ? "s" : ""}`}
           </p>
         </div>
 
@@ -80,10 +81,10 @@ export default function ProjectDetails({
       />
 
       <div
-        className="flex w-full flex-col justify-center items-start gap-3 sm:gap-8 border border-[color:var(--blue-stroke,#4D6677)] shadow-[0px_4px_31.5px_0px_rgba(91,143,182,0.19)] p-4 sm:p-8 rounded-[7px] border-solid bg-[#FCFCFC] mb-5 sm:mb-[80px]
+        className="flex w-full flex-col justify-center items-start gap-3.5 sm:gap-8 border border-[color:var(--blue-stroke,#4D6677)] shadow-[0px_4px_31.5px_0px_rgba(91,143,182,0.19)] p-4 sm:p-8 rounded-[7px] border-solid bg-[#FCFCFC] mb-5 sm:mb-[80px]
   "
       >
-        <div className="flex flex-row sm:flex-row gap-2 sm:justify-center sm:items-center sm:space-x-16 flex-wrap ">
+        <div className="flex flex-row sm:flex-row gap-3.5 sm:justify-center sm:items-center sm:space-x-16 flex-wrap ">
           <Card
             Icon={emailIconSvg}
             title="Email"

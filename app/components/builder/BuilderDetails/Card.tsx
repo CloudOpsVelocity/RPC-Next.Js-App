@@ -19,7 +19,7 @@ export default function Card({
 }: Props) {
   const renderContent = () => {
     return (
-      <p className="text-[#242424] text-[12px] sm:text-2xl not-italic font-semibold underline">
+      <p className="text-[#242424] mt-0.5 text-[14px] sm:text-2xl not-italic font-semibold underline">
         {content}
       </p>
     );
@@ -33,7 +33,7 @@ export default function Card({
       <div className={clsx(styles.container, styles.text)}>
         {Icon} {title}
       </div>
-      <div className="sm:mt-2">
+      <div className=" sm:mt-2">
         {" "}
         {type !== "text" ? (
           renderContent()
@@ -47,7 +47,8 @@ export default function Card({
 
 const styles = {
   container:
-    "inline-flex justify-center items-center gap-0.5 p-1 rounded-md bg-gradient-to-tr from-[#EFF5FF] to-[#F2FAFF] border border-blue-100",
-  text: "text-[#00487C] text-[12px] sm:text-[28px] not-italic font-semibold ",
-  content: "text-[#242424] text-[12px] sm:text-2xl not-italic font-semibold",
+    "inline-flex justify-center items-center gap-0.5 p-1 rounded-md bg-gradient-to-tr from-[#EFF5FF] to-[#F2FAFF] ",
+  text: "text-[#00487C] text-[14px] sm:text-[28px] not-italic font-semibold ",
+  content:
+    "text-[#242424]  mt-1 text-[14px] sm:text-2xl not-italic font-semibold",
 };
