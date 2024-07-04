@@ -21,6 +21,7 @@ import { formatDateDDMMYYYY } from "@/app/utils/date";
 import usePhaseWiseOverview from "@/app/hooks/usePhaseWiseOverview";
 import LoginPopup from "./modals/LoginPop";
 import Message from "./actions/Message";
+import SharePopup from "../atoms/SharePopup";
 
 export default function Overview({
   maxPrice,
@@ -52,9 +53,12 @@ export default function Overview({
     >
       <div className="pl-[2%] pr-[2%] flex justify-between items-center flex-wrap sm:flex-nowrap">
         <div>
-          <h2 className="text-[22px] sm:text-[24px] lg:text-[32px] text-[#001F35] font-[700] capitalize ">
-            {projectName}
-          </h2>
+          <div>
+            <h2 className="text-[22px] sm:text-[24px] lg:text-[32px] text-[#001F35] font-[700] capitalize ">
+              {projectName}
+            </h2>{" "}
+          </div>
+
           <p className="text-[#242424]  text-sm sm:text-[22px] not-italic font-[600] leading-[normal] w-[100%] tracking-[0.32px]  mt-[14px] capitalize  sm:max-w-[1400px]">
             {`${address}, ${localityName}, ${cityName}, ${state}, ${pinCode}`}
           </p>

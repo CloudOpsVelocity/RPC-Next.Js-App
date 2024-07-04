@@ -20,10 +20,10 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
 
   return (
     <div
-      className="w-[90%] scroll-mt-[220px]  mb-[5%] rounded shadow-[0px_4px_17.6px_0px_rgba(146,178,200,0.40)] border-[0.5px] border-solid border-[#92B2C8] builderBg pt-4 pb-6 sm:py-8 sm:pl-5 px-2 sm:px-0"
+      className="w-[90%] scroll-mt-[220px]  mb-[5%] rounded shadow-[0px_4px_17.6px_0px_rgba(146,178,200,0.40)] border-[0.5px] border-solid border-[#92B2C8] builderBg pt-4 pb-6 sm:py-8 sm:pl-5 px-2 sm:px-0 "
       id="aboutBuilder"
     >
-      <div className="w-full">
+      <div>
         <div className=" gap-[26px] justify-start  w-[100%] items-center">
           <h1 className=" text-[#242424] text-h2 sm:text-[24px] lg:text-[32px] font-[700] mb-4 ">
             About Builder
@@ -94,12 +94,13 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
           {nzData.builderAddress}, {nzData.city}, {nzData.state},{" "}
           {nzData.pincode}
         </p>
-        <Link
+        <a
           className=" bg-[#0073C6] rounded-[4px] text-[#FFF] text-[12px] sm:text-[18px] lg:text-[20px] font-[700] p-[10px]  "
           href={`/builder/${id}`}
+          target="_blank"
         >
           View Builder Details
-        </Link>
+        </a>
       </div>
     </div>
   );

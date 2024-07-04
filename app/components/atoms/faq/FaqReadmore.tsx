@@ -15,32 +15,30 @@ const FaqReadMore: React.FC<ReadMoreProps> = ({
 }) => {
   const [isReadMore, setIsReadMore] = useState(false);
 
+  const shouldShowReadMore = useMemo(
+    () => text?.split(" ").length > 50,
+    [text]
+  );
   const handleReadMoreClick = () => {
-    setIsReadMore(!isReadMore);
+    shouldShowReadMore && !isReadMore && setIsReadMore(!isReadMore);
   };
-
   const getClampedText = useMemo(() => {
     const words = text?.split(" ");
     return !isReadMore ? words?.slice(0, maxLines * 10).join(" ") : text;
   }, [text, maxLines, isReadMore]);
 
-  const shouldShowReadMore = useMemo(
-    () => text?.split(" ").length > 50,
-    [text]
-  );
-
   return (
-    <div className="w-[90%]">
+    <div className="w-[90%]" onClick={handleReadMoreClick}>
       <p className="text-[#303A42] text-[14px] sm:text-[28px] not-italic font-normal sm:leading-9">
         {`${getClampedText}${!isReadMore && "..."}`}
 
         {showReadMoreButton && shouldShowReadMore && (
           <span
             className="text-[#0073C6] text-[14px] sm:text-[28px] not-italic font-semibold cursor-pointer"
-            onClick={handleReadMoreClick}
             role="button" // Add role for accessibility
             tabIndex={0} // Add tabIndex for accessibility
             aria-label={isReadMore ? "Read Less" : "Read More"} // Add ARIA label
+            onClick={() => isReadMore && setIsReadMore(!isReadMore)}
           >
             {isReadMore ? " Read Less" : " Read More"}
           </span>

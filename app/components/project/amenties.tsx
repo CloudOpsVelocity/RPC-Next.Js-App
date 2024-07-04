@@ -22,17 +22,20 @@ export default function Amenties({
   const { data: amenitiesFromDB, error, isLoading } = useAmenities();
 
   const [{ expanded }, setReadMore] = useAtom(readMoreAtom);
-  const handleReadMoreClick = () => {
-    setReadMore((prev) => ({
-      ...prev,
-      expanded: !prev.expanded,
-      content: { data: data, amenitiesFromDB: amenitiesFromDB },
-      type: "array",
-      title: "Amenities Of",
-    }));
-  };
   const isMobile = useMediaQuery(`(max-width: 750px)`);
   const maxShow = isMobile ? 6 : 20;
+  const shouldShowMore = data && data?.length > maxShow;
+  const handleReadMoreClick = () => {
+    shouldShowMore &&
+      setReadMore((prev) => ({
+        ...prev,
+        expanded: !prev.expanded,
+        content: { data: data, amenitiesFromDB: amenitiesFromDB },
+        type: "array",
+        title: "Amenities Of",
+      }));
+  };
+
   return (
     <div
       className="w-[90%] scroll-mt-[250px] bg-white sm:pt-10 mb-5 md:pb-20 "
@@ -61,7 +64,7 @@ export default function Amenties({
           </>
         )}
 
-        <div className="flex flex-wrap ">
+        <div className="flex flex-wrap " onClick={handleReadMoreClick}>
           {data?.slice(0, maxShow).map((eachItem, ind) => {
             if (amenitiesGroupList.get(eachItem.id) != null) {
               return (
@@ -96,11 +99,8 @@ export default function Amenties({
               );
             }
           })}
-          {data && data?.length > maxShow && (
-            <button
-              className="inline-flex items-center justify-center text-[14px] lg:text-[20px] text-[#0073C6] font-[700] ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 sm:px-4 sm:py-2 "
-              onClick={handleReadMoreClick}
-            >
+          {shouldShowMore && (
+            <button className="inline-flex items-center justify-center text-[14px] lg:text-[20px] text-[#0073C6] font-[700] ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 sm:px-4 sm:py-2 ">
               {expanded ? "" : `+ ${data?.length - maxShow} More`}
             </button>
           )}
