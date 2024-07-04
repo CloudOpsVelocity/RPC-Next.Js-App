@@ -18,7 +18,6 @@ import Ratings from "./Ratings";
 import ShortList from "./actions/shortList";
 import CompareList from "./actions/compareList";
 import { formatDateDDMMYYYY } from "@/app/utils/date";
-import usePhaseWiseOverview from "@/app/hooks/usePhaseWiseOverview";
 import LoginPopup from "./modals/LoginPop";
 import Message from "./actions/Message";
 import SharePopup from "../atoms/SharePopup";
@@ -43,9 +42,9 @@ export default function Overview({
   media,
   companyName,
   postedByName,
-}: Main) {
-  const { PhaseOverview, phaseList } = usePhaseWiseOverview();
-
+  phaseList,
+  PhaseOverview,
+}: any) {
   return (
     <div
       className="pt-[2%] scroll-mt-[150px] w-[90%] rounded-[24px] shadow-md mb-[5%] mt-[2%] bg-gradient-to-r from-[#F6F6F6] /0 via-[#FFF] /45 to-[#FEFFFF]/100 "

@@ -29,7 +29,6 @@ const FloorPlanModal = dynamic(() => import("./modals/FloorPlan"), {
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { useQuery } from "react-query";
 import { getProjectUnits } from "@/app/utils/api/project";
-import usePhaseWiseOverview from "@/app/hooks/usePhaseWiseOverview";
 import { useAtom, useSetAtom } from "jotai";
 import { floorPlansArray, selectedFloorAtom } from "@/app/store/floor";
 import Loading from "../atoms/Loader";
@@ -52,10 +51,17 @@ type Props = {
   data: PhaseList[];
   slug: string;
   projName: string;
+  PhaseOverview: any;
+  phaseList: any;
 };
 
-export default function FloorplansBlock({ projName, slug }: Props) {
-  const { phaseList, PhaseOverview } = usePhaseWiseOverview();
+export default function FloorplansBlock({
+  projName,
+  slug,
+  PhaseOverview,
+  phaseList,
+}: Props) {
+  console.log(phaseList);
   const allKeys = [35, 33, 31, 34, 32];
   const [propCgId, setPropCgId] = useAtom(propCgIdAtom);
   const [currentPhase, setCurrentPhase] = useAtom(currentPhaseAtom);

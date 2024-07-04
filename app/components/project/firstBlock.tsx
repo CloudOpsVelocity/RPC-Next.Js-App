@@ -22,16 +22,17 @@ type Props = {
   projectDetails: Main | null;
   companyName: string;
   builderId: number;
+  hasReraStatus: boolean;
 };
 
 const FirstBlock: React.FC<Props> = ({
   projectDetails,
   companyName,
   builderId,
+  hasReraStatus,
 }) => {
   const images = getImageUrls(projectDetails?.media as any);
   const autoplay = useRef(Autoplay({ delay: 10000 }));
-  const { hasReraStatus } = usePhaseWiseOverview();
   const setIsScrolling = useSetAtom(isScrollingAtom);
   const setSticky = useSetAtom(stickyAtom);
   const setC = useSetAtom(currentBlockAtom);

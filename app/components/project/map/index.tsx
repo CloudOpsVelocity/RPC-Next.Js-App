@@ -46,7 +46,8 @@ const LeafMap: React.FC<{
   projName: string;
   type?: "proj" | "prop";
   projId?: string;
-}> = ({ lat, lang, projName, type, projId }) => {
+  mapData: any;
+}> = ({ lat, lang, projName, type, projId, mapData }) => {
   const Map = useMemo(
     () =>
       dynamic(() => import("@/app/components/maps"), {
@@ -73,7 +74,6 @@ const LeafMap: React.FC<{
     [selectedLocation, selected]
   );
 
-  const { data: mapData, isLoading } = useMapData({ projSlug: projId });
   const isMobile = useMediaQuery(`(max-width: 750px)`);
   const downData =
     mapData && mapData[selected] && mapData[selected].length > 0
@@ -122,47 +122,43 @@ const LeafMap: React.FC<{
               </div>
             </Tabs>
             <div id="location-listing" className="grid gap-2  ">
-              {isLoading ? (
-                <Loading />
-              ) : (
-                <ScrollArea
-                  h={isMobile ? 300 : 600}
-                  pb={isMobile ? 10 : 50}
-                  px={10}
-                >
-                  {mapData &&
-                  mapData[selected] &&
-                  mapData[selected].length > 0 ? (
-                    // Calculate distance and sort locations
-                    mapData[selected]
-                      .map((location: any) => ({
-                        ...location,
-                        distance: location.distance,
-                      }))
-                      .sort(
-                        (a: any, b: any) =>
-                          Number(a.time?.split(" ")[0]) -
-                          Number(b.time?.split(" ")[0])
-                      )
-                      .map((location: any, index: number) => (
-                        <LocationList
-                          type="public"
-                          {...location}
-                          key={index}
-                          origin={{
-                            lat: Number(lat),
-                            lng: Number(lang),
-                          }}
-                          onClick={setSelectedLocation}
-                          setDirection={showLocationOnMap}
-                          showLocationOnMap={showLocationOnMap}
-                        />
-                      ))
-                  ) : (
-                    <p>No locations found.</p>
-                  )}
-                </ScrollArea>
-              )}
+              <ScrollArea
+                h={isMobile ? 300 : 600}
+                pb={isMobile ? 10 : 50}
+                px={10}
+              >
+                {mapData &&
+                mapData[selected] &&
+                mapData[selected].length > 0 ? (
+                  // Calculate distance and sort locations
+                  mapData[selected]
+                    .map((location: any) => ({
+                      ...location,
+                      distance: location.distance,
+                    }))
+                    .sort(
+                      (a: any, b: any) =>
+                        Number(a.time?.split(" ")[0]) -
+                        Number(b.time?.split(" ")[0])
+                    )
+                    .map((location: any, index: number) => (
+                      <LocationList
+                        type="public"
+                        {...location}
+                        key={index}
+                        origin={{
+                          lat: Number(lat),
+                          lng: Number(lang),
+                        }}
+                        onClick={setSelectedLocation}
+                        setDirection={showLocationOnMap}
+                        showLocationOnMap={showLocationOnMap}
+                      />
+                    ))
+                ) : (
+                  <p>No locations found.</p>
+                )}
+              </ScrollArea>
             </div>
           </div>
         </section>

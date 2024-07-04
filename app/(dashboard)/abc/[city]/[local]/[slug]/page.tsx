@@ -8,7 +8,7 @@ import Overview from "@/app/components/project/overview";
 import About from "@/app/components/project/about";
 import Navigation from "@/app/components/project/navigation";
 import Link from "next/link";
-import { getProjectDetails } from "@/app/utils/api/project";
+import { getAmenties, getProjectDetails } from "@/app/utils/api/project";
 import ProjectDetailsP from "@/app/components/project/projectDetailsP";
 import ProjectDrawer from "@/app/components/project/Drawer";
 import LeafMap from "@/app/components/project/map";
@@ -89,7 +89,12 @@ import axios from "axios";
 
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
-  const data = await getProjectDetails(slug);
+  const {
+    basicData: data,
+    nearByLocations,
+    phaseOverview,
+  } = await getProjectDetails(slug);
+  const amenitiesFromDB = await getAmenties();
   if (!data.projIdEnc) {
     notFound();
   }
@@ -115,6 +120,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             projectDetails={data}
             companyName={data.postedByName}
             builderId={data.builderId}
+            hasReraStatus={data.reraStatus}
           />
         </div>
         {/* Navigations Container */}
@@ -124,7 +130,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             detailsData={data}
           />
         </MobileHidden>
-        <Overview {...data} />
+        <Overview {...data} PhaseOverview={phaseOverview} />
         <ListingRentAvail
           projName={data.projectName}
           r={data.rentListing}
@@ -140,8 +146,9 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         {/* Property Details */}
         <ProjectDetailsP
           projName={data.projectName}
-          data={data.phaseList}
+          data={data.phases}
           slug={slug}
+          PhaseOverview={phaseOverview}
         />
         <MasterPlan
           projName={data.projectName}
@@ -149,8 +156,10 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         />
         <FloorplansBlock
           projName={data.projectName}
-          data={data.phaseList}
+          data={data.phases}
           slug={slug}
+          PhaseOverview={phaseOverview}
+          phaseList={data.phases}
         />
         <GalleryBlock
           {...data.media}
@@ -158,7 +167,11 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           media={data.media}
         />
         <ErrorContainer data={data.amenityList}>
-          <Amenties data={data.amenityList} projName={data.projectName} />
+          <Amenties
+            data={data.amenityList}
+            projName={data.projectName}
+            amenitiesFromDB={amenitiesFromDB}
+          />
         </ErrorContainer>
 
         {data.lat && data.lang && (
@@ -167,6 +180,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             lang={data.lang}
             projName={data.projectName}
             type="proj"
+            mapData={nearByLocations}
           />
         )}
         <ErrorContainer data={data.specificationList}>
@@ -215,12 +229,14 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
 }
 
 export const fetchCache = "force-cache";
+export const revalidate = 120;
 
 export async function generateStaticParams() {
   const { projResult } = await getParams();
   const slugs = projResult.map((slug: string) => ({
     slug: slug,
   }));
+  console.log(slugs);
   return slugs;
 }
 
@@ -229,5 +245,3 @@ async function getParams() {
   let data = await axios.get(url);
   return data.data;
 }
-
-export const revalidate = 60;

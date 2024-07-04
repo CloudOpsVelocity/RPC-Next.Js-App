@@ -1,20 +1,36 @@
 import { unstable_cache } from "next/cache";
-import { Main } from "../../validations/types/project";
+import { Main, MERGERPROJECT } from "../../validations/types/project";
 import { GlobalPageType } from "@/app/validations/global";
 import { capitalizeWords } from "../letters";
+import axios from "axios";
 
-const getProjectDetails = async (slug: string): Promise<Main> => {
+const getProjectDetails = async (slug: string): Promise<MERGERPROJECT> => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/basicDetails?projIdEnc=${slug}`
   );
   const data = await response.json();
 
+  let isRera = false;
+  const phases = data.phaseOverview.map((el: any) => {
+    if (el.rerastatus === "Recieved" || el.rerastatus === "Applied") {
+      isRera = true;
+    }
+    return { phaseId: el.phaseId, phaseName: el.phaseName };
+  });
+
+  const metaData = { phases, isRera };
+
   return {
     ...data,
-    projectName: capitalizeWords(data.projectName),
-    postedByName: capitalizeWords(data.postedByName),
-  } as Main; // Assuming the response can be cast to Main
+    basicData: {
+      ...data.basicData,
+      projectName: capitalizeWords(data.basicData.projectName),
+      postedByName: capitalizeWords(data.basicData.postedByName),
+      ...metaData,
+    },
+  } as MERGERPROJECT;
 };
+
 const getProjectWiseOverView = async (slug: string): Promise<any> => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/overviewData?projIdEnc=${slug}`
@@ -89,10 +105,17 @@ const getNearByLocations = async (
   const data = await response.json();
   return data;
 };
+const getAmenties = async () => {
+  const data = await axios.post(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/common/projAmenities`
+  );
+  return data.data;
+};
 export {
   getProjectDetails,
   getCachedUser,
   getProjectWiseOverView,
   getProjectUnits,
   getNearByLocations,
+  getAmenties,
 };

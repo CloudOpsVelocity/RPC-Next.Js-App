@@ -14,12 +14,14 @@ export default function Amenties({
   data,
   type,
   projName,
+  amenitiesFromDB,
 }: {
   data: AmenityList[];
   type?: string;
   projName: string;
+  amenitiesFromDB: any;
 }) {
-  const { data: amenitiesFromDB, error, isLoading } = useAmenities();
+  // const { data: amenitiesFromDB, error, isLoading } = useAmenities();
 
   const [{ expanded }, setReadMore] = useAtom(readMoreAtom);
   const isMobile = useMediaQuery(`(max-width: 750px)`);

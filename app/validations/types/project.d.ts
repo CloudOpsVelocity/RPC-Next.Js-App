@@ -1,3 +1,8 @@
+export interface MERGERPROJECT {
+  basicData: Main;
+  nearByLocations: any;
+  phaseOverview: any;
+}
 export interface Main {
   projectName: string;
   projIdEnc: string;
@@ -34,7 +39,8 @@ export interface Main {
   state: string;
   companyName: string;
   postedByName: string;
-  reraStatus: string;
+  reraStatus: boolean;
+  phases: any;
 }
 
 export interface AmenityList {
