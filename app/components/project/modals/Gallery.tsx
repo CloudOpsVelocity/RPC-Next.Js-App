@@ -1,4 +1,3 @@
-// Gallery.tsx
 import React, { useState } from "react";
 import { Modal, Image } from "@mantine/core";
 import {
@@ -19,6 +18,7 @@ import styles from "./Gallery.module.css";
 import { useMediaQuery } from "@mantine/hooks";
 import Close from "../button/close";
 import ZoomInOut from "../actions/ZoomInOut";
+import { useDrag } from "@use-gesture/react";
 type GalleryProps = {
   selectedMedia: any;
   images: any[];
@@ -41,6 +41,15 @@ const Gallery: React.FC<GalleryProps> = ({
     setPreviewImage(image);
     open(isImage ? "image" : "video", image);
   };
+  const bind = useDrag(
+    ({ swipe: [swipeX], movement: [mx] }) => {
+      console.log(swipeX, mx);
+      if (swipeX > 0) {
+      } else if (swipeX < 0) {
+      }
+    },
+    { axis: "x" } // Enable only vertical swipe detection
+  );
   const isMobile = useMediaQuery(`(max-width: 601px`);
   if (!content) {
     return null;
@@ -86,30 +95,33 @@ const Gallery: React.FC<GalleryProps> = ({
             </div>
           </div>
           {isImage ? (
-            <Carousel
-              classNames={styles}
-              slideGap={{ base: 0, sm: "md" }}
-              withIndicators
-              slidesToScroll={1}
-              align="start"
-              withControls={false}
-            >
-              {images.map((image, index) => (
-                <Carousel.Slide
-                  key={index}
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                  // className="!relative !flex !justify-center !w-full !items-center !max-w-fit"
-                >
-                  <TransformWrapper>
-                    <Content url={image} />
-                  </TransformWrapper>
-                </Carousel.Slide>
-              ))}
-            </Carousel>
+            <div {...bind()}>
+              <Carousel
+                classNames={styles}
+                slideGap={{ base: 0, sm: "md" }}
+                withIndicators
+                slidesToScroll={1}
+                align="start"
+                withControls={false}
+                onNextSlide={() => {}}
+              >
+                {images.map((image, index) => (
+                  <Carousel.Slide
+                    key={index}
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                    // className="!relative !flex !justify-center !w-full !items-center !max-w-fit"
+                  >
+                    <TransformWrapper>
+                      <Content url={image} />
+                    </TransformWrapper>
+                  </Carousel.Slide>
+                ))}
+              </Carousel>
+            </div>
           ) : (
             <ReactPlayer
               url={previewImage as string}
