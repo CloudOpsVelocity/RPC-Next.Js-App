@@ -29,7 +29,6 @@ const FloorPlanModal = dynamic(() => import("./modals/FloorPlan"), {
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { useQuery } from "react-query";
 import { getProjectUnits } from "@/app/utils/api/project";
-import usePhaseWiseOverview from "@/app/hooks/usePhaseWiseOverview";
 import { useAtom, useSetAtom } from "jotai";
 import { floorPlansArray, selectedFloorAtom } from "@/app/store/floor";
 import Loading from "../atoms/Loader";
@@ -52,10 +51,17 @@ type Props = {
   data: PhaseList[];
   slug: string;
   projName: string;
+  PhaseOverview: any;
+  phaseList: any;
 };
 
-export default function FloorplansBlock({ projName, slug }: Props) {
-  const { phaseList, PhaseOverview } = usePhaseWiseOverview();
+export default function FloorplansBlock({
+  projName,
+  slug,
+  PhaseOverview,
+  phaseList,
+}: Props) {
+  console.log(phaseList);
   const allKeys = [35, 33, 31, 34, 32];
   const [propCgId, setPropCgId] = useAtom(propCgIdAtom);
   const [currentPhase, setCurrentPhase] = useAtom(currentPhaseAtom);
@@ -302,10 +308,10 @@ export default function FloorplansBlock({ projName, slug }: Props) {
                   return (
                     <Button
                       key={keyName}
-                      buttonClass={`flex justify-start mb-[3%] w-full rounded-[20px] gap-[8px]  items-center mr-[24px] md:ml-[0px] text-[12px] sm:text-[18px] ${
+                      buttonClass={`flex justify-start mb-2 sm:mb-[3%] w-full rounded-[20px] gap-[8px]  items-center mr-[24px] md:ml-[0px] text-[12px] sm:text-[18px] border ${
                         propCgId == keyName
-                          ? "text-[#001F35] font-[600] shadow-md bg-[#D5EDFF]"
-                          : "text-[#303A42] font-[500] bg-[#EEF7FE]"
+                          ? "text-[#001F35] text-[14px] sm:text-base font-[600] shadow-md bg-[#c8f5ca] sm:bg-[#D5EDFF]"
+                          : "text-[#303A42] font-[500] bg-[#E1FFE2] sm:bg-[#EEF7FE]"
                       } `}
                       onChange={() => {
                         if (propCgId !== keyName) {
@@ -475,7 +481,7 @@ export default function FloorplansBlock({ projName, slug }: Props) {
 
             <div
               className={clsx(
-                " h-[250px]  w-full md:w-[50%] flex justify-center items-end flex-col sm:h-full p-[2%] shadow-md md:shadow-none relative",
+                " h-[250px]  w-full md:w-[50%] flex justify-center items-end flex-col sm:h-full p-[2%] shadow-md border border-gray-400 md:shadow-none relative",
                 !selectedFloor?.unitNumber && "items-center"
               )}
             >

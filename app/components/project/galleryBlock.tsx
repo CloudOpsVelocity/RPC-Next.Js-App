@@ -54,18 +54,18 @@ export default function GalleryBlock({
 
           <SubHeading
             text="Gallery highlights : A glimpse into good project"
-            className="sm:mb-2"
+            className="mb-4 sm:mb-2"
           />
         </>
       )}
 
       <div className=" flex justify-center flex-col md:flex-row items-center-full sm:mt-[1%] ">
         {/* IMage display con */}
-        <div className="w-[100%] md:w-[50%] bg-white  h-[250px] overflow-hidden sm:h-[394px] lg:h-auto  md:mb-[0%] mr-[3%] rounded-[14px]   flex justify-center items-center p-1">
+        <div className="w-[100%] md:w-[50%] bg-white  h-[220px] overflow-hidden sm:h-[394px] lg:h-auto  md:mb-[0%] mr-[3%] rounded-[14px]   flex justify-center items-center p-1">
           {selectedMedia && (
             <div
               className={clsx(
-                "w-[100%]   max-h-[462px]  mb-[3%] md:mb-[0%] mr-[3%]   relative  rounded-[14px] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] ",
+                "w-[100%] max-h-[210px]   sm:max-h-[462px]  mb-[3%] md:mb-[0%] mr-[3%]   relative  rounded-[14px] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] ",
                 selectedMedia.includes(".mp4") &&
                   "flex justify-center items-center"
               )}
@@ -100,8 +100,8 @@ export default function GalleryBlock({
           )}
         </div>
         {/* all media display con */}
-        <div className="w-[100%] md:w-[47%]">
-          <h3 className="text-[#737579] font-[600] text-[20px] lg:text-[24px] mb-[2%] ">
+        <div className="w-[100%] md:w-[47%] mt-3 sm:mt-0">
+          <h3 className="text-[#737579] font-[600] text-[20px] lg:text-[24px] mb-1 sm:mb-[2%] ">
             Photos
           </h3>
           <div className="flex justify-start items-start w-full gap-[4%] flex-wrap ">
@@ -124,7 +124,7 @@ export default function GalleryBlock({
           </div>
           {videos && videos.length > 0 && (
             <>
-              <h3 className="text-[#737579] font-[600] text-[20px] lg:text-[24px] mb-4 sm:mb-[2%] ">
+              <h3 className="text-[#737579] font-[600] text-[20px] lg:text-[24px] mb-1 sm:mb-[2%] ">
                 Videos
               </h3>
               <div className="flex justify-start items-start w-full gap-[4%] flex-wrap ">

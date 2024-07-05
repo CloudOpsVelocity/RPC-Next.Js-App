@@ -8,7 +8,7 @@ import Overview from "@/app/components/project/overview";
 import About from "@/app/components/project/about";
 import Navigation from "@/app/components/project/navigation";
 import Link from "next/link";
-import { getProjectDetails } from "@/app/utils/api/project";
+import { getAmenties, getProjectDetails } from "@/app/utils/api/project";
 import ProjectDetailsP from "@/app/components/project/projectDetailsP";
 import ProjectDrawer from "@/app/components/project/Drawer";
 import LeafMap from "@/app/components/project/map";
@@ -19,70 +19,86 @@ import ErrorContainer from "@/app/components/project/error/container";
 import MobileHidden from "@/app/components/molecules/MobileHidden";
 import { notFound } from "next/navigation";
 import FloorplanDrawer from "@/app/components/project/drawers/floorplan";
-const FloorplansBlock = dynamic(
-  () => import("@/app/components/project/floorplansBlock"),
-  {
-    loading: () => <SectionSkeleton />,
-    ssr: false,
-  }
-);
-const GalleryBlock = dynamic(
-  () => import("@/app/components/project/galleryBlock"),
-  {
-    loading: () => <SectionSkeleton />,
-    ssr: false,
-  }
-);
-const MasterPlan = dynamic(
-  () => import("@/app/components/project/masterplan"),
-  {
-    loading: () => <SectionSkeleton />,
-    ssr: true,
-  }
-);
-const NearByCarousel = dynamic(
-  () => import("@/app/components/project/NearByCarousel"),
-  {
-    loading: () => <SectionSkeleton />,
-    ssr: false,
-  }
-);
-const Specifications = dynamic(
-  () => import("@/app/components/project/specification"),
-  {
-    loading: () => <SectionSkeleton />,
-    ssr: false,
-  }
-);
-const LoginPopup = dynamic(
-  () => import("@/app/components/project/modals/LoginPop"),
-  {
-    loading: () => <SectionSkeleton />,
-    ssr: false,
-  }
-);
-const Banner = dynamic(() => import("@/app/components/project/banner"), {
-  loading: () => <SectionSkeleton />,
-  ssr: false,
-});
-const AboutBuilder = dynamic(
-  () => import("@/app/components/project/aboutBuilder"),
-  {
-    loading: () => <SectionSkeleton />,
-    ssr: false,
-  }
-);
-const FaqWithBg = dynamic(() => import("@/app/components/project/faq"), {
-  loading: () => <SectionSkeleton />,
-  ssr: false,
-});
+import MasterPlan from "@/app/components/project/masterplan";
+import FloorplansBlock from "@/app/components/project/floorplansBlock";
+import GalleryBlock from "@/app/components/project/galleryBlock";
+import Specifications from "@/app/components/project/specification";
+import Banner from "@/app/components/project/banner";
+import AboutBuilder from "@/app/components/project/aboutBuilder";
+import FaqWithBg from "@/app/components/project/faq";
+import NearByCarousel from "@/app/components/project/NearByCarousel";
+import LoginPopup from "@/app/components/project/modals/LoginPop";
+import axios from "axios";
+// const FloorplansBlock = dynamic(
+//   () => import("@/app/components/project/floorplansBlock"),
+//   {
+//     loading: () => <SectionSkeleton />,
+//     ssr: false,
+//   }
+// );
+// const GalleryBlock = dynamic(
+//   () => import("@/app/components/project/galleryBlock"),
+//   {
+//     loading: () => <SectionSkeleton />,
+//     ssr: false,
+//   }
+// );
+// const MasterPlan = dynamic(
+//   () => import("@/app/components/project/masterplan"),
+//   {
+//     loading: () => <SectionSkeleton />,
+//     ssr: true,
+//   }
+// );
+// const NearByCarousel = dynamic(
+//   () => import("@/app/components/project/NearByCarousel"),
+//   {
+//     loading: () => <SectionSkeleton />,
+//     ssr: false,
+//   }
+// );
+// const Specifications = dynamic(
+//   () => import("@/app/components/project/specification"),
+//   {
+//     loading: () => <SectionSkeleton />,
+//     ssr: false,
+//   }
+// );
+// const LoginPopup = dynamic(
+//   () => import("@/app/components/project/modals/LoginPop"),
+//   {
+//     loading: () => <SectionSkeleton />,
+//     ssr: false,
+//   }
+// );
+// const Banner = dynamic(() => import("@/app/components/project/banner"), {
+//   loading: () => <SectionSkeleton />,
+//   ssr: false,
+// });
+// const AboutBuilder = dynamic(
+//   () => import("@/app/components/project/aboutBuilder"),
+//   {
+//     loading: () => <SectionSkeleton />,
+//     ssr: false,
+//   }
+// );
+// const FaqWithBg = dynamic(() => import("@/app/components/project/faq"), {
+//   loading: () => <SectionSkeleton />,
+//   ssr: false,
+// });
 
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
-  const data = await getProjectDetails(slug);
+  const {
+    basicData: data,
+    nearByLocations,
+    phaseOverview,
+  } = await getProjectDetails(slug);
+  const amenitiesFromDB = await getAmenties();
   if (!data.projIdEnc) {
     notFound();
   }
+
   return (
     <div className="w-full relative">
       <div className="mt-[100px] sm:mt-[70px] w-full pb-[2%] flex items-center justify-center flex-col">
@@ -104,6 +120,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             projectDetails={data}
             companyName={data.postedByName}
             builderId={data.builderId}
+            hasReraStatus={data.reraStatus}
           />
         </div>
         {/* Navigations Container */}
@@ -113,7 +130,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             detailsData={data}
           />
         </MobileHidden>
-        <Overview {...data} />
+        <Overview {...data} PhaseOverview={phaseOverview} />
         <ListingRentAvail
           projName={data.projectName}
           r={data.rentListing}
@@ -124,13 +141,14 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           id="about"
           heading="about"
           projName={data.projectName}
-          content={data.about}
+          content={"Code has to be bundled using a bundler"}
         />
         {/* Property Details */}
         <ProjectDetailsP
           projName={data.projectName}
-          data={data.phaseList}
+          data={data.phases}
           slug={slug}
+          PhaseOverview={phaseOverview}
         />
         <MasterPlan
           projName={data.projectName}
@@ -138,8 +156,10 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         />
         <FloorplansBlock
           projName={data.projectName}
-          data={data.phaseList}
+          data={data.phases}
           slug={slug}
+          PhaseOverview={phaseOverview}
+          phaseList={data.phases}
         />
         <GalleryBlock
           {...data.media}
@@ -147,7 +167,11 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           media={data.media}
         />
         <ErrorContainer data={data.amenityList}>
-          <Amenties data={data.amenityList} projName={data.projectName} />
+          <Amenties
+            data={data.amenityList}
+            projName={data.projectName}
+            amenitiesFromDB={amenitiesFromDB}
+          />
         </ErrorContainer>
 
         {data.lat && data.lang && (
@@ -156,6 +180,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             lang={data.lang}
             projName={data.projectName}
             type="proj"
+            mapData={nearByLocations}
           />
         )}
         <ErrorContainer data={data.specificationList}>
@@ -203,20 +228,20 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
   );
 }
 
-// export const fetchCache = "force-no-store";
+export const fetchCache = "force-cache";
+export const revalidate = 120;
 
-// export async function generateStaticParams() {
-//   const { projResult } = await getParams();
-//   const slugs = projResult.map((slug: string) => ({
-//     slug: slug,
-//   }));
-//   return slugs;
-// }
+export async function generateStaticParams() {
+  const { projResult } = await getParams();
+  const slugs = projResult.map((slug: string) => ({
+    slug: slug,
+  }));
+  console.log(slugs);
+  return slugs;
+}
 
-// async function getParams() {
-//   let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/common/all/active/ids?identifier=project`;
-//   let data = await axios.get(url);
-//   return data.data;
-// }
-
-export const revalidate = 60;
+async function getParams() {
+  let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/common/all/active/ids?identifier=project`;
+  let data = await axios.get(url);
+  return data.data;
+}

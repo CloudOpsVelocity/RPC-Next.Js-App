@@ -23,6 +23,7 @@ import S from "@/app/styles/seach/Drawer.module.css";
 import SearchDrawerHeader from "./filter";
 import SearchDrawer from "./drawer";
 import BuyRent from "./filter/BuyRent";
+import { DynamicText } from "../utils/text";
 
 const SearchAndFilterCon = () => {
   const [opened, { open, close }] = useDisclosure(false);
@@ -79,7 +80,10 @@ const SearchHeader = ({ open, close }: any) => {
         <span>Home</span> {" > "}
         <Link href={"/project/banglore"}>
           <span className="text-[14px] md:text-[16px] text-[#4D6677] font-[600]">
-            Properties for Sell in Bengaluru
+            {DynamicText({
+              cg: params.cg as string,
+              listedBy: params.listedBy,
+            })}
           </span>
         </Link>{" "}
       </p>

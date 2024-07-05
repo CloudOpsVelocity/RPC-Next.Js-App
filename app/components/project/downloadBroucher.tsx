@@ -6,9 +6,16 @@ import Link from "next/link";
 import React from "react";
 import toast from "react-hot-toast";
 import { DocIcon } from "@/app/images/commonSvgs";
+import clsx from "clsx";
 // import { downloadIcon } from '@/app/images/commonSvgs';
 
-const DownloadBroucher = ({ url }: { url?: string }) => {
+const DownloadBroucher = ({
+  url,
+  className,
+}: {
+  url?: string;
+  className?: string;
+}) => {
   const { data: session } = useSession();
   const [, { open: LoginOpen }] = usePopShortList();
 
@@ -59,7 +66,10 @@ const DownloadBroucher = ({ url }: { url?: string }) => {
     url && (
       <button
         onClick={handleDownload}
-        className="inline-flex justify-center items-center gap-[5px] p-2 text-[12px]  rounded-md bg-btnPrimary text-white sm:text-[22px] not-italic font-bold leading-[normal] mt-3 sm:mt-10"
+        className={clsx(
+          "inline-flex justify-center items-center gap-[5px] p-2 text-[12px]  rounded-md bg-btnPrimary text-white sm:text-[22px] not-italic font-bold leading-[normal] mt-3 sm:mt-10",
+          className
+        )}
       >
         {DocIcon} Download Brochure
       </button>

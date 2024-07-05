@@ -18,17 +18,17 @@ export default function LoginPopup({
         type == "RATING" ? "md:pt-[8]%" : "md:pt-[0%]"
       }`}
     >
-      <div className="w-full pt-4 h-[420px] xl:h-full bg-white text-gray-600 justify-center items-center ">
+      <div className="w-full pt-4 sm:h-[420px] xl:h-full bg-white text-gray-600 justify-center items-center ">
         <Logo styles="w-full flex justify-center items-center " />
 
-        <div className="w-full p-4 xl:p-[10%] md:p-[2%]   xl:mt-3 xl:mb-3 ">
+        <div className="w-full px-4 pt-4 xl:p-[10%] md:p-[2%]   xl:mt-3 xl:mb-3 ">
           <div className="inline-flex items-center justify-center w-full">
             <div className="inline-flex items-center justify-center mx-auto border xl:pl-[3px] xl:py-0.5 rounded-md border-solid border-[#CDD7DE] bg-[#fafafa] ">
               <Link
                 className={
-                  "flex flex-col justify-center items-center gap-1 rounded border shadow-[0px_4px_11.1px_0px_rgba(25,80,71,0.46)_inset,0px_4px_12.9px_0px_rgba(140,177,141,0.38)] px-[28px] md:px-[52px] py-1.5 border-solid border-[#148B16] bg-[#148b16] text-white sm:text-2xl not-italic font-bold leading-[normal] text-nowrap text-[16px] " 
+                  "flex flex-col justify-center items-center gap-1 rounded border shadow-[0px_4px_11.1px_0px_rgba(25,80,71,0.46)_inset,0px_4px_12.9px_0px_rgba(140,177,141,0.38)] px-[28px] md:px-[52px] py-1.5 border-solid border-[#148B16] bg-[#148b16] text-white sm:text-2xl not-italic font-bold leading-[normal] text-nowrap text-[16px] "
                 }
-                href={{ 
+                href={{
                   pathname: "/login",
                   search: redirectQueryParam,
                 }}

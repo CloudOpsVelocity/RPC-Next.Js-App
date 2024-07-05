@@ -1,5 +1,4 @@
 "use client";
-import { projectprops } from "@/app/data/projectDetails";
 import Button from "@/app/elements/button";
 import {
   EndDate,
@@ -12,23 +11,34 @@ import ProjBasicDetails from "@/app/components/project/projBasicDetails";
 import PropertyTypeDetailsCrad from "@/app/components/project/propertyTypeDetailsCrad";
 import React from "react";
 import { PhaseList } from "@/app/validations/types/project";
-import usePhaseWiseOverview from "@/app/hooks/usePhaseWiseOverview";
 import { formatDateDDMMYYYY } from "@/app/utils/date";
 import { isSingleLetterOrNumber } from "@/app/utils/letters";
 import { sqftToAcres } from "@/app/utils/landarea";
 import NoProperties from "./notfound";
 import SubHeading from "./headings/SubHeading";
+import { currentPhaseAtom } from "@/app/store/vewfloor";
+import { useHydrateAtoms } from "jotai/utils";
+import { useAtom } from "jotai";
 type Props = {
   data: PhaseList[];
   slug: string;
   projName: string;
+  PhaseOverview: any;
 };
 const styles = {
-  box: "flex flex-col items-start gap-[10px] p-4 sm:border sm:shadow-[0px_4px_10px_0px_rgba(202,233,255,0.30)] rounded-[10px] border-solid border-[#92B2C8] bg-[#fff] sm:mr-[46px]",
+  box: "flex flex-col items-start sm:gap-[10px] p-4 sm:border sm:shadow-[0px_4px_10px_0px_rgba(202,233,255,0.30)] rounded-[10px] border-solid border-[#92B2C8] bg-[#fff] sm:mr-[46px]",
 };
-export default function ProjectDetailsP({ projName }: Props) {
-  const { PhaseOverview, currentPhase, handlePhaseChange, phaseList } =
-    usePhaseWiseOverview();
+
+export default function ProjectDetailsP({
+  projName,
+  PhaseOverview,
+  data: phaseList,
+}: Props) {
+  useHydrateAtoms([[currentPhaseAtom, PhaseOverview[0].phaseId]]);
+  const [currentPhase, setFloorPhase] = useAtom(currentPhaseAtom);
+  const handlePhaseChange = (phaseId: number) => {
+    setFloorPhase(phaseId);
+  };
   const selectedPhase = PhaseOverview?.find(
     (phase: any) => phase.phaseId === currentPhase
   );

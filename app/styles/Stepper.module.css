@@ -106,24 +106,29 @@
   line-height: normal;
 }
 
-.textInput, .mangingDrCust {
+.textInput,
+.mangingDrCust {
   color: var(--Black-2, #333);
   font-family: Montserrat;
   font-size: 16px;
   font-weight: 500;
   opacity: 1;
 }
-.textInput:focus::placeholder, .mangingDrCust:focus::placeholder {
+.textInput:focus::placeholder,
+.mangingDrCust:focus::placeholder {
   color: transparent !important;
 }
-.textInput::placeholder, .cityPincodeCust::placeholder, .mangingDrCust::placeholder {
+.textInput::placeholder,
+.cityPincodeCust::placeholder,
+.mangingDrCust::placeholder {
   color: #556477 !important;
   font-family: Montserrat;
   font-size: 18px;
   font-weight: 500;
 }
 
-.textInput::-ms-input-placeholder, .mangingDrCust::-ms-input-placeholder {
+.textInput::-ms-input-placeholder,
+.mangingDrCust::-ms-input-placeholder {
   /* Edge 12-18 */
   color: #556477 !important;
   font-family: Montserrat;
@@ -146,7 +151,33 @@
   width: 100% !important;
   max-width: 423px !important;
 }
+.textAreaInput,
+.mangingDrCust {
+  color: var(--Black-2, #333);
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 500;
+  opacity: 1;
+}
+.textAreaInput:focus::placeholder {
+  color: transparent !important;
+}
+.textAreaInput::placeholder {
+  color: #556477 !important;
+  font-family: Montserrat;
+  font-size: 18px;
+  font-weight: 500;
+}
 
+.textAreaInput::-ms-input-placeholder {
+  /* Edge 12-18 */
+  color: #556477 !important;
+  font-family: Montserrat;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
 @media only screen and (min-width: 641px) and (max-width: 1280px) {
   .stepLabel {
     max-width: 70px;
@@ -175,47 +206,51 @@
 }
 
 @media (max-width: 640px) {
-
-
-  .pill{
+  .textAreaInput::placeholder {
+    color: #556477 !important;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .pill {
     font-size: 13px;
   }
-  .optionCss{
+  .optionCss {
     font-size: 16px;
   }
-  .calendComStDt{
-    margin:18%;
+  .calendComStDt {
+    margin: 18%;
     max-width: 80%;
   }
-  .custlabelOfNum{
+  .custlabelOfNum {
     font-weight: 600;
   }
-  .custlabelOfNumpop{
+  .custlabelOfNumpop {
     font-size: 16px;
   }
-  .errorMsg{
-    font-size: 12px
+  .errorMsg {
+    font-size: 12px;
   }
-  
-  .input::placeholder{
+
+  .input::placeholder {
     font-size: 8px;
   }
- .cityPincodeCust::placeholder{
-  font-size: 14.5px;
- }
- .cityPincodeCust{
-  font-size: 14.5px;
+  .cityPincodeCust::placeholder {
+    font-size: 14.5px;
+  }
+  .cityPincodeCust {
+    font-size: 14.5px;
+  }
 
- }
-
-  .mlabelCss{
+  .mlabelCss {
     font-size: 16px;
   }
-  .textInput::placeholder, .NumberInput::placeholder {
+  .textInput::placeholder,
+  .NumberInput::placeholder {
     font-size: 15px;
   }
- 
-  .mangingDrCust::placeholder{
+
+  .mangingDrCust::placeholder {
     font-size: 15px;
   }
   .stepLabel {
@@ -235,9 +270,8 @@
     right: -15px !important;
   }
 
-  .textInput{
+  .textInput {
     font-size: 14px;
-  
   }
   /* .content{
     margin-top: 28px !important;

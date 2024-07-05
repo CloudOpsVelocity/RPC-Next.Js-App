@@ -47,8 +47,7 @@ export default function SharePopup({
         opened={opened}
         onClose={close}
         centered
-
-        size={isMobile ? "90%" : "40%"}
+        size={isMobile ? "100%" : "40%"}
         classNames={{
           close: S.close,
           content: S.body,
@@ -62,7 +61,7 @@ export default function SharePopup({
             <h3 className="text-[#202020] text-xl xl:text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px] ">
               {titleText ?? title}
             </h3>
-            <Close className=""  close={close} />
+            <Close className="" close={close} />
           </div>
 
           <p className="text-[#565D70]  text-[14px] xl:text-xl not-italic font-semibold leading-[normal] tracking-[0.8px] my-2 xl:my-5">
@@ -71,7 +70,9 @@ export default function SharePopup({
           <div className="flex space-x-4  xl:mb-4">
             <Share shareUrl={CopiedUrl} />
           </div>
-          <p className="text-[13px]  xl:text-sm font-medium mb-2">or Copy Link</p>
+          <p className="text-[13px]  xl:text-sm font-medium mb-2">
+            or Copy Link
+          </p>
           <div className="flex items-center justify-between border rounded-md p-1 xl:p-2">
             <span
               className="text-black text-[14px]  xl:text-base not-italic font-medium leading-[normal] truncate cursor-pointer"
@@ -105,7 +106,9 @@ export default function SharePopup({
         )}
       >
         <ShearIcon className="w-[26px] h-[26px]" />
-        <span className="hidden  h-4 w-4 xl:h-auto xl:w-full xl:block">{title}</span>
+        <span className="hidden  h-4 w-4 xl:h-auto xl:w-full xl:block">
+          {title}
+        </span>
       </button>
     </>
   );

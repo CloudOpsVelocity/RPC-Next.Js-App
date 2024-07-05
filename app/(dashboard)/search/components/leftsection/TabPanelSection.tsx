@@ -3,9 +3,8 @@ import { emptyFilesIcon, strikeIconIcon } from "@/app/images/commonSvgs";
 import { Loader, Tabs } from "@mantine/core";
 import { useIntersection } from "@mantine/hooks";
 import React, { useEffect, useRef } from "react";
-import ProjectDetailsCard from "../projectCard";
 import useSearchFilters from "@/app/hooks/search";
-
+import ProjectCard from "../Card";
 type Props = {};
 
 export default function TabPanelSection({}: Props) {
@@ -34,10 +33,9 @@ export default function TabPanelSection({}: Props) {
         ) : data != undefined && data.length != undefined && data.length > 0 ? (
           data?.map((eachOne, index: number) => {
             return (
-              <ProjectDetailsCard
+              <ProjectCard
                 key={index}
-                type={filters.listedBy ?? "proj"}
-                {...eachOne}
+                data={{ ...eachOne, type: filters.listedBy ?? "proj" }}
               />
             );
           })

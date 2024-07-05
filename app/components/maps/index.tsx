@@ -31,6 +31,7 @@ const Map = ({
   lang,
   setSelectedLocation,
   type,
+  selected,
 }: any) => {
   const position: LatLngTuple = [lat, lang];
   return (
@@ -60,6 +61,7 @@ const Map = ({
         lat={lat}
         lang={lang}
         type={type}
+        selected={selected}
       />
     </MapContainer>
   );
@@ -74,6 +76,7 @@ const Content: React.FC<any> = ({
   lat,
   lang,
   type,
+  selected,
 }) => {
   const position: LatLngTuple = [lat, lang];
   const map = useMap();
@@ -84,7 +87,12 @@ const Content: React.FC<any> = ({
         parseFloat(selectedLocation.lng),
       ]);
     }
-  }, [selectedLocation]);
+  }, [selectedLocation, selected]);
+
+  useEffect(() => {
+    map.setView(position, 11);
+  }, [selected]);
+
   const isMobile = useMediaQuery("(max-width: 601px)");
   return (
     <>
@@ -123,6 +131,7 @@ const Content: React.FC<any> = ({
                 direction="top"
                 permanent={selectedLocation?.lat === item?.lat}
                 key={item.lang}
+                {...(isMobile && { offset: [-7, -40] })}
               >
                 <div className=" ">
                   <p className="text-[#00487C] text-lg not-italic font-semibold leading-[normal]">
@@ -133,7 +142,7 @@ const Content: React.FC<any> = ({
             )}
 
             <Popup>
-              <p className="text-[#00487C] text-[17px] italic font-medium leading-[normal]">
+              <p className="text-[#00487C] text-xs sm:text-[17px] italic font-medium leading-[normal]">
                 {item.name}
               </p>
             </Popup>

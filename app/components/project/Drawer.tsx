@@ -6,8 +6,9 @@ import { readMoreAtom } from "@/app/store/drawer";
 import S from "@/app/styles/Drawer.module.css";
 import { AmenityList } from "@/app/validations/types/project";
 import { amenitiesGroupList } from "@/app/images/commonSvgs";
-import React from "react";
+import React, { useState } from "react";
 import Close from "./button/close";
+import { useDrag } from "@use-gesture/react";
 function ProjectDrawer({ projName }: { projName: string }) {
   const [
     { expanded, content, type, title, showProjName, builderName },
@@ -21,6 +22,18 @@ function ProjectDrawer({ projName }: { projName: string }) {
     }));
   };
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
+  const bind = useDrag(
+    ({ movement: [mx], direction: [dx], memo = mx, cancel }) => {
+      // If the user is swiping left (negative direction)
+      if (dx === 1 && mx > 50) {
+        handleReadMoreClick();
+        cancel();
+      }
+      return memo;
+    },
+    { axis: "x", pointer: { touch: true } }
+  );
+
   return (
     <>
       <Drawer
@@ -31,13 +44,12 @@ function ProjectDrawer({ projName }: { projName: string }) {
           // overlay: S.overlay,
           content: S.content,
         }}
-        // offset={8}
-        // radius="md"
         opened={expanded}
         onClose={handleReadMoreClick}
         position="right"
         size={isMobile ? "100%" : "45%"}
         zIndex={10000}
+        {...bind()}
       >
         <div className="mt-4 flex justify-between mb-8">
           <h1 className="uppercase text-[20px] xl:text-[24px] lg:text-[32px] font-[600] text-[#001F35]  pl-[10px] xl:pl-[57px] max-w-[950px]">
@@ -48,7 +60,7 @@ function ProjectDrawer({ projName }: { projName: string }) {
               </span>
             )}
           </h1>
-          <Close   close={handleReadMoreClick} />
+          <Close close={handleReadMoreClick} />
         </div>
 
         <div className="w-[95%] text-[#233333] text-[16px] xl:text-xl mt-5 pl-[10px] xl:pl-[57px] xl:pb-20 capitalize">

@@ -1,4 +1,4 @@
-function formatDate(inputDate: string | undefined): string {
+function formatDate(inputDate: string | undefined, short?: boolean): string {
   if (inputDate == null) {
     return ""; // You can return an empty string or any default value
   }
@@ -10,10 +10,11 @@ function formatDate(inputDate: string | undefined): string {
   if (isNaN(date.getTime())) {
     return "Invalid Date";
   }
+  const monthFormat = short ? "short" : "long";
 
   // Format the date string with the desired format
   const day = date.getDate();
-  const month = new Intl.DateTimeFormat("en-US", { month: "long" }).format(
+  const month = new Intl.DateTimeFormat("en-US", { month: monthFormat }).format(
     date
   );
   const year = date.getFullYear();

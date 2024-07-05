@@ -18,13 +18,12 @@ const MainCarousel = ({ children }: { children: React.ReactNode }) => {
       classNames={styles}
       nextControlIcon={<DarkNextCarouselButton />}
       previousControlIcon={<DarkCarouseIcon />}
-      mt={30}
-      // withIndicators
+      mt={isMobile ? 16 : 30}
       height={"auto"}
-      slideSize={{ base: "90%", sm: "50%", md: "31%" }}
+      slideSize={{ base: "100%", sm: "50%", md: "31%" }}
       slideGap={{ base: "lg", sm: "md", md: "72px" }}
-      align={isMobile ? "center" : "start"}
-      px={isMobile ? 5 : 100}
+      align={isMobile ? "end" : "start"}
+      px={isMobile ? 20 : 100}
     >
       {children}
     </Carousel>

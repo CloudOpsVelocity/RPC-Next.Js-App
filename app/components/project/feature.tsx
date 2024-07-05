@@ -31,7 +31,7 @@ export default function Feature({
                   width={20}
                   height={20}
                   alt="Checked"
-                  className="max-w-[20px] max-h-[14px] sm:max-h-[20px] mt-1 sm:mt-[9px]"
+                  className="w-[12px] h-[12px] sm:max-w-[20px] max-h-[14px] sm:max-h-[20px] mt-[3.5px] sm:mt-[9px]"
                   src={"/abc/Checked.png"}
                 />
                 <p className="text-[12px] sm:text-[20px] lg:text-[24px] m-0 text-[#212C33] font-medium md:font-semibold ">

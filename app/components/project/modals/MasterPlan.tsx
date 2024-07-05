@@ -8,6 +8,7 @@ import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 import S from "@/app/styles/ImgCarousel.module.css";
 import ZoomInOut from "../actions/ZoomInOut";
 import NextImage from "next/image";
+import { useDrag } from "@use-gesture/react";
 export default function MasterPlanPopup({
   url,
   onDownload,
@@ -17,7 +18,16 @@ export default function MasterPlanPopup({
 }) {
   const [opened, { open, close }] = useDisclosure(false);
   const isMobile = useMediaQuery(`(max-width: 750px`);
-
+  const bind = useDrag(
+    ({ swipe: [swipeX, swipeY] }) => {
+      if (swipeY > 0) {
+        close();
+      } else if (swipeY < 0) {
+        close();
+      }
+    },
+    { axis: "y" } // Enable only vertical swipe detection
+  );
   return (
     <>
       <Modal
@@ -32,6 +42,7 @@ export default function MasterPlanPopup({
         }}
         size={isMobile ? "100%" : "auto"}
         centered={isMobile}
+        {...bind()}
       >
         <div className="h-auto scrollbar-hide flex justify-end flex-col items-center ">
           <div className="w-full bg-transparent    h-[57px] flex items-center justify-between  z-[1000] md:px-10 max-w-[91rem] m-auto">
@@ -92,7 +103,7 @@ export default function MasterPlanPopup({
         component={NextImage}
       />
       <button onClick={open}>
-        <div className="bg-[#F4FBFF] p-[10px] rounded-[29px] gap-[12px] flex justify-end items-center  cursor-pointer absolute bottom-10 right-1 sm:right-4 z-50 shadow-[0px_4px_12px_0px_rgba(0,0,0,0.40)]">
+        <div className="sm:bg-[#F4FBFF] p-[10px] rounded-[29px] gap-[12px] flex justify-end items-center  cursor-pointer absolute bottom-7 right-1 sm:right-4 z-50 sm:shadow-[0px_4px_12px_0px_rgba(0,0,0,0.40)]">
           <p className="text-[#0073C6] hidden sm:block sm:text-xl not-italic font-semibold leading-[normal] underline capitalize">
             Click on image to open master plan
           </p>

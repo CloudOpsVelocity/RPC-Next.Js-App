@@ -36,13 +36,13 @@ export default function Banner({
       <Toaster position="top-right" reverseOrder={false} />
       <div className="w-[90%] m-auto flex flex-col md:flex-row justify-between items-center ">
         <div>
-          <h2 className="text-[#242424] text-[20px] sm:text-[32px] not-italic font-bold leading-[normal] tracking-[1.28px] mb-4">
+          <h2 className="text-[#242424] text-h2 sm:text-[32px] not-italic font-bold leading-[normal] tracking-[1.28px] mb-4">
             Project Rating For{" "}
             <span className="text-[#148B16]  sm:text-[32px] not-italic font-bold leading-[normal] tracking-[1.28px] capitalize">
               {projName}
             </span>
           </h2>
-          <p className="text-black text-[14px] sm:text-2xl not-italic font-medium leading-[normal] tracking-[0.96px] mb-4 sm:mb-8">
+          <p className="text-black text-[13px] sm:text-2xl not-italic font-medium leading-[normal] tracking-[0.96px] mb-4 sm:mb-8">
             Your headline should show readers how your review can help them
             solve a problem or make a decision, offer something different or
             unexpected, and be clear and specific about what your review is

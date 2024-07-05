@@ -18,9 +18,9 @@ import Ratings from "./Ratings";
 import ShortList from "./actions/shortList";
 import CompareList from "./actions/compareList";
 import { formatDateDDMMYYYY } from "@/app/utils/date";
-import usePhaseWiseOverview from "@/app/hooks/usePhaseWiseOverview";
 import LoginPopup from "./modals/LoginPop";
 import Message from "./actions/Message";
+import SharePopup from "../atoms/SharePopup";
 
 export default function Overview({
   maxPrice,
@@ -42,9 +42,9 @@ export default function Overview({
   media,
   companyName,
   postedByName,
-}: Main) {
-  const { PhaseOverview, phaseList } = usePhaseWiseOverview();
-
+  phaseList,
+  PhaseOverview,
+}: any) {
   return (
     <div
       className="pt-[2%] scroll-mt-[150px] w-[90%] rounded-[24px] shadow-md mb-[5%] mt-[2%] bg-gradient-to-r from-[#F6F6F6] /0 via-[#FFF] /45 to-[#FEFFFF]/100 "
@@ -52,9 +52,12 @@ export default function Overview({
     >
       <div className="pl-[2%] pr-[2%] flex justify-between items-center flex-wrap sm:flex-nowrap">
         <div>
-          <h2 className="text-[22px] sm:text-[24px] lg:text-[32px] text-[#001F35] font-[700] capitalize ">
-            {projectName}
-          </h2>
+          <div>
+            <h2 className="text-[22px] sm:text-[24px] lg:text-[32px] text-[#001F35] font-[700] capitalize ">
+              {projectName}
+            </h2>{" "}
+          </div>
+
           <p className="text-[#242424]  text-sm sm:text-[22px] not-italic font-[600] leading-[normal] w-[100%] tracking-[0.32px]  mt-[14px] capitalize  sm:max-w-[1400px]">
             {`${address}, ${localityName}, ${cityName}, ${state}, ${pinCode}`}
           </p>
@@ -63,7 +66,7 @@ export default function Overview({
           <Ratings />
           <a
             href={`tel:${8766203976}`}
-            className="sm:text-[20px]  mt-3  text-[#0073C6] lg:text-2xl not-italic font-semibold leading-[normal] inline-flex justify-center items-center gap-1.5 p-2 rounded-lg border-[0.8px] border-solid border-[#0073C6] bg-[#fafafa]"
+            className="text-[13px] sm:text-[20px]  mt-3  text-[#0073C6] lg:text-2xl not-italic font-semibold leading-[normal] inline-flex justify-center items-center gap-1.5 p-1.5 md:p-2 rounded-lg border-[0.8px] border-solid border-[#0073C6] bg-[#fafafa]"
           >
             {footerPhoneIcon}
             Call now

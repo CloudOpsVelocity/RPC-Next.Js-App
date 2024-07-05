@@ -33,40 +33,41 @@ export default function ProjectDetails({
 }: Data) {
   return (
     <React.Fragment>
-      <div className="rounded-[20px] mt-[3%] flex justify-between items-center bg-[#FFF] shadow-md w-[100%] mb-[3%] lg:w-[50%] p-[1%] ">
+      <div className="sm:rounded-[20px] mt-[3%] flex justify-between items-center bg-[#FFF] shadow-md w-[100%] mb-[3%] lg:w-[50%] p-[1%] border border-gray-300">
         <div className="w-[30%] border-solid border-[#92B2C8] border-r-[1px]">
           <div className="flex justify-between items-center w-[90%] ">
-            <span className=" text-[#202020] text-[20px] lg:text-[24px] font-[600]">
+            <span className=" text-[#202020]text-[16px]  sm:text-[20px] lg:text-[24px] font-[600]">
               {newProject}
             </span>
             {newLaunchProjIconSvg}
           </div>
 
-          <p className=" text-[#148B16] text-[16px] lg:text-[20px] font-[700]">
+          <p className=" text-[#148B16] text-[13px] lg:text-[20px] font-[700] ">
             New Launch {`Project${newProject > 1 ? "s" : ""}`}
           </p>
         </div>
 
         <div className="w-[30%] border-solid border-[#92B2C8] border-r-[1px]">
           <div className="flex justify-between items-center w-[90%] ">
-            <span className=" text-[#202020] text-[20px] lg:text-[24px] font-[600]">
+            <span className=" text-[#202020]text-[16px]  sm:text-[20px] lg:text-[24px] font-[600]">
               {onGoingProject}
             </span>
             {onGoingProjIconSvg}
           </div>
-          <p className=" text-[#0073C6] text-[16px] lg:text-[20px] font-[700]">
-            Ongoing {`Project${onGoingProject > 1 ? "s" : ""}`}
+          <p className=" text-[#0073C6] text-[13px] lg:text-[20px] font-[700]">
+            Ongoing <br className="block sm:hidden" />{" "}
+            {`Project${onGoingProject > 1 ? "s" : ""}`}
           </p>
         </div>
 
         <div className="w-[30%] ">
           <div className="flex justify-between items-center w-[90%] ">
-            <span className=" text-[#202020] text-[20px] lg:text-[24px] font-[600]">
+            <span className=" text-[#202020]text-[16px]  sm:text-[20px] lg:text-[24px] font-[600]">
               {completedProject}
             </span>
             {completedProjIconSvg}
           </div>
-          <p className=" text-[#E3AC00] text-[16px] lg:text-[20px] font-[700]">
+          <p className=" text-[#E3AC00] text-[13px] lg:text-[20px] font-[700]">
             Completed {`Project${completedProject > 1 ? "s" : ""}`}
           </p>
         </div>
@@ -76,14 +77,14 @@ export default function ProjectDetails({
         id="whyBuy"
         heading="About Builder"
         content={mission}
-        className="!mb-[40px]"
+        className="mb-8 mt-2 sm:!mb-[40px]"
       />
 
       <div
-        className="flex w-full flex-col justify-center items-start gap-8 border border-[color:var(--blue-stroke,#4D6677)] shadow-[0px_4px_31.5px_0px_rgba(91,143,182,0.19)] p-8 rounded-[7px] border-solid bg-[#FCFCFC] mb-[80px]
+        className="flex w-full flex-col justify-center items-start gap-3.5 sm:gap-8 border border-[color:var(--blue-stroke,#4D6677)] shadow-[0px_4px_31.5px_0px_rgba(91,143,182,0.19)] p-4 sm:p-8 rounded-[7px] border-solid bg-[#FCFCFC] mb-5 sm:mb-[80px]
   "
       >
-        <div className="flex justify-center items-center space-x-16">
+        <div className="flex flex-row sm:flex-row gap-3.5 sm:justify-center sm:items-center sm:space-x-16 flex-wrap ">
           <Card
             Icon={emailIconSvg}
             title="Email"
@@ -96,21 +97,22 @@ export default function ProjectDetails({
             content={`+91- ${mobile}`}
             type="mobile"
           />
+
           <Card
-            Icon={<TotalLandArea />}
+            Icon={<TotalLandArea className="!w-[18px] !h-[18px]" />}
             title="State"
             content={stateName}
             type="text"
           />
           <Card
-            Icon={<TotalLandArea />}
+            Icon={<TotalLandArea className="!w-[18px] !h-[18px]" />}
             title="City"
             content={cityName}
             type="text"
           />
 
           <Card
-            Icon={<TotalLandArea />}
+            Icon={<TotalLandArea className="!w-[18px] !h-[18px]" />}
             title="Pincode"
             content={pinCode}
             type="text"

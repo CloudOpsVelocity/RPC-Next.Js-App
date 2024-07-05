@@ -48,7 +48,7 @@ const Countdown = ({ initialCount = 5, redirectPath = "/" }) => {
             return prevTime;
           }
         });
-      }, 100000);
+      }, 1000);
     }
 
     return () => {

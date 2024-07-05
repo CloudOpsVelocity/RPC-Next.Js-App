@@ -118,8 +118,7 @@ function LoginPopupForm({ closePopup }: { closePopup?: () => void }) {
             root: StepCss.inputRoot,
             input: StepCss.textInput,
             error: StepCss.errorMsg,
-            label:StepCss.custlabelOfNumpop,
-            
+            label: StepCss.custlabelOfNumpop,
           }}
           hideControls
           size="lg"
@@ -134,8 +133,7 @@ function LoginPopupForm({ closePopup }: { closePopup?: () => void }) {
             root: StepCss.inputRoot,
             error: StepCss.errorMsg,
             innerInput: StepCss.textInput,
-            label:StepCss.custlabelOfNumpop
-            
+            label: StepCss.custlabelOfNumpop,
           }}
           required
           size="lg"
@@ -172,7 +170,7 @@ function LoginPopupForm({ closePopup }: { closePopup?: () => void }) {
         <div className="text-center mt-4 ">
           <Link
             href={{ pathname: "/register", search: redirectQueryParam }}
-            className="text-[#282828] text-[14px] md:text-xl flex justify-center font-semibold items-center gap-2.5 rounded border p-2 border-solid border-[#B2B2B2] mb-8 text-nowrap sm:text-[20px] "
+            className="text-[#282828] text-[14px] md:text-xl flex justify-center font-semibold items-center gap-2.5 rounded border p-2 border-solid border-[#B2B2B2] mb-4 sm:mb-8 text-nowrap sm:text-[20px] "
           >
             New User?{" "}
             <span className=" text-[14px]  text-[#0C7ACA]  font-semibold  not-italic text-nowrap sm:text-[20px] md:text-xl  ">

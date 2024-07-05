@@ -46,7 +46,8 @@ const LeafMap: React.FC<{
   projName: string;
   type?: "proj" | "prop";
   projId?: string;
-}> = ({ lat, lang, projName, type, projId }) => {
+  mapData: any;
+}> = ({ lat, lang, projName, type, projId, mapData }) => {
   const Map = useMemo(
     () =>
       dynamic(() => import("@/app/components/maps"), {
@@ -73,7 +74,6 @@ const LeafMap: React.FC<{
     [selectedLocation, selected]
   );
 
-  const { data: mapData, isLoading } = useMapData({ projSlug: projId });
   const isMobile = useMediaQuery(`(max-width: 750px)`);
   const downData =
     mapData && mapData[selected] && mapData[selected].length > 0
@@ -122,47 +122,44 @@ const LeafMap: React.FC<{
               </div>
             </Tabs>
             <div id="location-listing" className="grid gap-2  ">
-              {isLoading ? (
-                <Loading />
-              ) : (
-                <ScrollArea
-                  h={isMobile ? 300 : 600}
-                  pb={isMobile ? 10 : 50}
-                  px={10}
-                >
-                  {mapData &&
-                  mapData[selected] &&
-                  mapData[selected].length > 0 ? (
-                    // Calculate distance and sort locations
-                    mapData[selected]
-                      .map((location: any) => ({
-                        ...location,
-                        distance: location.distance,
-                      }))
-                      .sort(
-                        (a: any, b: any) =>
-                          Number(a.time?.split(" ")[0]) -
-                          Number(b.time?.split(" ")[0])
-                      )
-                      .map((location: any, index: number) => (
-                        <LocationList
-                          type="public"
-                          {...location}
-                          key={index}
-                          origin={{
-                            lat: Number(lat),
-                            lng: Number(lang),
-                          }}
-                          onClick={setSelectedLocation}
-                          setDirection={showLocationOnMap}
-                          showLocationOnMap={showLocationOnMap}
-                        />
-                      ))
-                  ) : (
-                    <p>No locations found.</p>
-                  )}
-                </ScrollArea>
-              )}
+              <ScrollArea
+                h={isMobile ? 300 : 600}
+                pb={isMobile ? 10 : 50}
+                px={10}
+              >
+                {mapData &&
+                mapData[selected] &&
+                mapData[selected].length > 0 ? (
+                  mapData[selected]
+                    .map((location: any) => ({
+                      ...location,
+                      distance: location.distance,
+                    }))
+                    .sort(
+                      (a: any, b: any) =>
+                        Number(a.time?.split(" ")[0]) -
+                        Number(b.time?.split(" ")[0])
+                    )
+                    .map((location: any, index: number) => (
+                      <LocationList
+                        type="public"
+                        {...location}
+                        key={index}
+                        origin={{
+                          lat: Number(lat),
+                          lng: Number(lang),
+                        }}
+                        isMobile={isMobile}
+                        isProj={type}
+                        onClick={setSelectedLocation}
+                        setDirection={showLocationOnMap}
+                        showLocationOnMap={showLocationOnMap}
+                      />
+                    ))
+                ) : (
+                  <p>No locations found.</p>
+                )}
+              </ScrollArea>
             </div>
           </div>
         </section>
@@ -173,13 +170,14 @@ const LeafMap: React.FC<{
             projName={projName}
             lat={lat}
             lang={lang}
+            selected={selected}
             setSelectedLocation={setSelectedLocation}
             type={"proj"}
           />
         </section>
       </div>
       {mapData && mapData[selected] && mapData[selected].length > 0 && (
-        <div className="mt-8 w-[90%] mx-auto">
+        <div className="mt-8 w-[90%] mx-auto hidden sm:block">
           <h1 className="text-[#303030] text-[16px] md:text-xl not-italic font-medium leading-[normal] tracking-[0.8px] capitalize">
             {selected.split("_").join(" ")} Nearby
           </h1>
@@ -275,7 +273,7 @@ const LocationList: React.FC<{
   lang: number;
   type: "public" | "drive" | "walk";
   onClick: (location: any) => void;
-  onChangeTravelMode: (mode: string) => void; // New prop for changing travel mode
+  onChangeTravelMode: (mode: string) => void;
   showLocationOnMap: (location: any) => void;
   distance: any;
   duration: any;
@@ -285,7 +283,34 @@ const LocationList: React.FC<{
     lng: number;
   };
   time: string;
-}> = ({ name, showLocationOnMap, lat, lang, distance, time }) => {
+  isProj: "proj" | "prop";
+  isMobile: boolean;
+}> = ({
+  name,
+  showLocationOnMap,
+  lat,
+  lang,
+  distance,
+  time,
+  isProj,
+  isMobile,
+}) => {
+  const setIsScrolling = useSetAtom(
+    isProj === "prop" ? propScrollingAtom : isScrollingAtom
+  );
+  const scrollToTopic = (id: string): void => {
+    setIsScrolling(true);
+
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "center",
+      });
+    }
+    setTimeout(() => setIsScrolling(false), 3000);
+  };
   const handleClick = () => {
     showLocationOnMap({
       position: {
@@ -294,6 +319,9 @@ const LocationList: React.FC<{
       },
       name,
     });
+    if (isMobile) {
+      scrollToTopic("nearBy");
+    }
   };
 
   return (

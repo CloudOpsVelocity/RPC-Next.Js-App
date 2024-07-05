@@ -22,16 +22,17 @@ type Props = {
   projectDetails: Main | null;
   companyName: string;
   builderId: number;
+  hasReraStatus: boolean;
 };
 
 const FirstBlock: React.FC<Props> = ({
   projectDetails,
   companyName,
   builderId,
+  hasReraStatus,
 }) => {
   const images = getImageUrls(projectDetails?.media as any);
   const autoplay = useRef(Autoplay({ delay: 10000 }));
-  const { hasReraStatus } = usePhaseWiseOverview();
   const setIsScrolling = useSetAtom(isScrollingAtom);
   const setSticky = useSetAtom(stickyAtom);
   const setC = useSetAtom(currentBlockAtom);
@@ -58,12 +59,12 @@ const FirstBlock: React.FC<Props> = ({
     >
       {projectDetails && (
         <>
-          {/* {hasReraStatus && (
-            <p className=" flex items-center pl-[8px] rounded-tl-lg text-center text-[12px] sm:text-[24px] font-[600] text-[#FFF] bg-gradient-to-r w-[122px] from-[#148B16] /0 to-[#EFEFEF]/50  z-10 left-0 absolute">
+          {hasReraStatus && (
+            <p className="hidden sm:flex items-center pl-[8px] rounded-tl-lg text-center text-[12px] sm:text-[24px] font-[600] text-[#FFF] bg-gradient-to-r w-[122px] from-[#148B16] /0 to-[#EFEFEF]/50  z-10 left-0 absolute">
               <ReraIcon />
               RERA
             </p>
-          )} */}
+          )}
           <div className="absolute m-[2%] z-10 right-[1px] sm:right-2">
             <p className="shadow-md rounded-[10px] bg-gradient-to-r p-[8px] from-[#EFF5FF] /0  to-[#F2FAFF]/100 text-[#000] text-[12px] sm:text-[16px] md:text-xl not-italic font-medium leading-[normal]">
               Project Status:{" "}
@@ -108,9 +109,12 @@ const FirstBlock: React.FC<Props> = ({
           <div className="sm:absolute bottom-0  sm:m-[2%] z-10 sm:w-[95%] self-center justify-between items-start flex-col md:flex-row border-solid border-white-500 sm:rounded-[10px] bg-gradient-to-r from-[#EFEFEF] /20 to-[#c3c3c3bd]/80 shadow-md  sm:flex ">
             <div className=" w-full md:w-[60%]">
               <div className={`ml-[2%] mt-1 sm:mt-10 mb-[7px]`}>
-                <h3 className="text-[22px] sm:text-[24px] lg:text-[28px] font-[700] text-[#001F35] ">
-                  {projectDetails.projectName}
-                </h3>
+                <div className="flex justify-between items-start">
+                  <h3 className="text-[22px] sm:text-[24px] lg:text-[28px] font-[700] text-[#001F35] ">
+                    {projectDetails.projectName}
+                  </h3>
+                  <SharePopup className="text-sm p-[2px] mr-2 mt-[2px] sm:hidden " />
+                </div>
 
                 <p className="text-[#242424]  text-sm sm:text-[22px] not-italic font-[600] leading-[normal] w-[100%] tracking-[0.32px] capitalize mt-[14px] ">
                   {`${projectDetails.address}, ${projectDetails.localityName}, ${projectDetails.cityName}, ${projectDetails.state}, ${projectDetails.pinCode}`}
@@ -127,17 +131,20 @@ const FirstBlock: React.FC<Props> = ({
 
                 <p className="text-[#242424] sm:text-2xl not-italic font-semibold leading-[normal] mt-[14px]">
                   Posted By:{" "}
-                  <Link
+                  <a
                     href={`/builder/${builderId}`}
+                    target="_blank"
                     className="text-btnPrimary sm:text-2xl  font-bold leading-[normal] underline"
                   >
                     {companyName ?? "Builder"}
-                  </Link>
+                  </a>
                 </p>
               </div>
             </div>
             <div className="w-full md:w-[40%] flex justify-between md:items-end flex-col p-[2%]">
-              <h2 className=" md:text-[28px] lg:text-[32px] font-semibold sm:font-[700] text-[#001F35]">
+              <h2 className="inline-flex md:text-[28px] lg:text-[32px] font-semibold sm:font-[700] text-[#001F35]">
+                <span className=" mr-1 sm:hidden">Price range: </span>
+                {"  "}
                 {formatCurrency(projectDetails.minPrice)} -{" "}
                 {formatCurrency(projectDetails.maxPrice)}
               </h2>

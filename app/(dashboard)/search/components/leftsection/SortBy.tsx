@@ -1,14 +1,15 @@
 import useSearchFilters from "@/app/hooks/search";
-import { DropDownIcon } from "@/app/images/commonSvgs";
+import { DarkDropDownIcon, DropDownIcon } from "@/app/images/commonSvgs";
 import { Menu } from "@mantine/core";
+import clsx from "clsx";
 import React, { useState } from "react";
 
 type Props = {};
 
 export default function SortBy({}: Props) {
-  const { filters, setFilters, handleAppliedFilters } = useSearchFilters();
+  const { filters, setFilters, handleAppliedFilters, params } =
+    useSearchFilters();
 
-  const [selected, setSort] = useState("");
   const handleSetFilter = (sortByfield: string, sortType: number) => {
     if (filters.sortByfield === sortByfield && filters.sortType === sortType) {
       setFilters((prev) => ({
@@ -27,17 +28,16 @@ export default function SortBy({}: Props) {
   };
   const seletedValue = config.find(
     (eachItem) =>
-      eachItem.value === filters.sortType &&
-      eachItem.type === filters.sortByfield
+      eachItem.value === params.sortType && eachItem.type === params.sortByfield
   )?.label;
   return (
     <Menu shadow="md" width={200}>
       <Menu.Target>
         <button className="flex h-7 justify-center items-center gap-2.5 p-3.5 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.05)] border-[0.5px] border-solid border-[#CBD4E1] bg-white mr-auto md:mr-2 mt-1 mb-2 ml-4 md:ml-auto ">
-          <span className="text-[#0073C6] text-xs md:text-base not-italic   md:font-medium leading-[normal] ">
+          <span className="text-[#0073C6] text-xs md:text-base not-italic   font-semibold leading-[normal] ">
             {seletedValue || "Sort By"}
           </span>
-          <DropDownIcon />
+          <DarkDropDownIcon />
         </button>
       </Menu.Target>
 
@@ -45,10 +45,15 @@ export default function SortBy({}: Props) {
         {config.map((eachItem, index) => {
           return (
             <Menu.Item
+              classNames={{
+                item: clsx(
+                  " text-xs text-[#242424] md:text-base font-[500] leading-[normal]",
+                  eachItem.label === seletedValue && "!bg-[#1C7ED6] !text-white"
+                ),
+              }}
               key={index}
               value={seletedValue}
               onClick={() => handleSetFilter(eachItem.type, eachItem.value)}
-              className="hover:text-btnPrimary"
             >
               {eachItem.label}
             </Menu.Item>

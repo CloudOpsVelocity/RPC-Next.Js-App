@@ -1,4 +1,5 @@
 import { Main } from "@/app/validations/types/builder";
+import { capitalizeWords } from "../letters";
 
 export const getBuilderDetails = async (
   slug: string | number,
@@ -19,12 +20,14 @@ export const getBuilderDetails = async (
         }
       : {};
     const response = await fetch(url, {
-      cache: "no-store",
-      next: { tags: [`${slug}`] },
+      next: { tags: [`${slug}`], revalidate: 60 * 5 },
       ...options,
     });
     const data: Main = await response.json();
-    return data as Main;
+    return {
+      ...data,
+      data: { ...data.data, userName: capitalizeWords(data.data.userName) },
+    } as Main;
   } catch (error) {
     return error as Main;
   }

@@ -1,17 +1,16 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Montserrat } from "next/font/google";
+import "@mantine/core/styles.css";
 import "./globals.css";
-import Header from "./components/layouts/primary/header";
-import Footer from "./components/layouts/primary/footer";
 import MantineTheme from "@/mantine.config";
 import { MantineProvider, ColorSchemeScript } from "@mantine/core";
-import "@mantine/core/styles.css";
+
 import SessionProvider from "./context/session";
 import ReactQueryProvider from "./context/rquery";
 import Layout from "@/app/components/layouts/primary";
 import { Provider } from "jotai";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Montserrat({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -23,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html data-mantine-color-scheme="light" lang="en">
       <head>
         <ColorSchemeScript />
         <link rel="shortcut icon" href="/favicon.svg" />
@@ -32,9 +31,9 @@ export default function RootLayout({
           content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
         />
       </head>
-      <body>
-        <main>
-          <MantineProvider theme={MantineTheme}>
+      <body className={inter.className}>
+        <MantineProvider theme={MantineTheme}>
+          <main>
             <SessionProvider>
               <ReactQueryProvider>
                 <Provider>
@@ -42,9 +41,9 @@ export default function RootLayout({
                 </Provider>
               </ReactQueryProvider>
             </SessionProvider>
-          </MantineProvider>
-        </main>
-        {/* <Footer /> */}
+          </main>
+          {/* <Footer /> */}
+        </MantineProvider>
       </body>
     </html>
   );

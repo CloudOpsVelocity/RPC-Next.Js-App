@@ -32,7 +32,7 @@ export const resetPasswordApi = async (password: string) => {
     return response.data;
   } catch (error) {
     console.error(error);
-    // Handle errors, maybe show an error message or take appropriate action
+    throw new Error("Failed to reset password");
   }
 };
 export { resendOtp };

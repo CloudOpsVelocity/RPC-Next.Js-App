@@ -10,7 +10,7 @@ import {
   useMap,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css"; // Import Leaflet CSS
-import { LatLngTuple } from "leaflet";
+import { LatLngTuple, divIcon, point } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css"; // Re-uses images from ~leaflet package
 import "leaflet-defaulticon-compatibility";
@@ -19,9 +19,22 @@ import { useMediaQuery } from "@mantine/hooks";
 import { em } from "@mantine/core";
 import { useAtomValue } from "jotai";
 import selectedSearchAtom from "@/app/store/search/map";
-
+import MarkerClusterGroup from "react-leaflet-cluster";
+import TooltipProj from "./Tooltip";
+import { useSearchParams, useParams } from "next/navigation";
+interface Cluster {
+  getChildCount: () => number;
+}
 const Map = ({ data, lat, lang }: any) => {
   const position: LatLngTuple = [lat, lang];
+  const createClusterCustomIcon = function (cluster: Cluster) {
+    return L.divIcon({
+      html: `<span class="cluster-icon">${cluster.getChildCount()}</span>`,
+      className: "custom-marker-cluster",
+      iconSize: point(33, 33, true),
+    });
+  };
+
   return (
     <>
       <MapContainer
@@ -34,8 +47,12 @@ const Map = ({ data, lat, lang }: any) => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-
-        <MapContent data={data} />
+        <MarkerClusterGroup
+          chunkedLoading
+          iconCreateFunction={createClusterCustomIcon}
+        >
+          <MapContent data={data} />
+        </MarkerClusterGroup>
       </MapContainer>
       <polyline />
     </>
@@ -62,7 +79,7 @@ const MapContent = ({ data }: any) => {
   const map = useMap();
   useEffect(() => {
     if (selected && selected.projName) {
-      map.panTo([parseFloat(selected.lat), parseFloat(selected.lang)]);
+      map.setView([parseFloat(selected.lat), parseFloat(selected.lang)], 15);
     }
   }, [selected, map]);
   return (
@@ -75,39 +92,19 @@ const MapContent = ({ data }: any) => {
             position={[parseFloat(item?.lat || 0), parseFloat(item?.lang || 0)]}
             icon={isMobile ? MobileIcon : MapIcon}
           >
-            {selected?.projName === item.projName && (
-              <Tooltip opacity={1} permanent direction="top" offset={[10, -35]}>
-                <div className="p-3 rounded-2xl">
-                  <p className="text-[#202020] text-2xl not-italic font-medium leading-[normal] p-0 !m-0">
-                    {item.projName}
-                  </p>
-
-                  <p className="text-[#0073C6] text-xs not-italic font-medium leading-[normal] underline mb-1">
-                    Agent Listing Available : {item.agentListing}{" "}
-                  </p>
-                  <p className="text-[#4D6677] text-xs not-italic font-medium leading-[normal] underline">
-                    Owner Listing Available : {item.ownerListing}{" "}
-                  </p>
-                </div>
+            {selected?.projName === item?.projName && (
+              <Tooltip
+                opacity={1}
+                permanent={selected?.projName === item.projName}
+                direction="top"
+                offset={[10, -35]}
+              >
+                <TooltipProj data={item} />
               </Tooltip>
             )}
-
-            <Popup>
-              <>
-                <div>
-                  <p className="text-[#202020] text-2xl not-italic font-medium leading-[normal] p-0 !m-0">
-                    {item.projName}
-                  </p>
-
-                  <p className="text-[#0073C6] text-xs not-italic font-medium leading-[normal] underline">
-                    Agent Listing Available : {item.agentListing}{" "}
-                  </p>
-                  <p className="text-[#4D6677] text-xs not-italic font-medium leading-[normal] underline">
-                    Owner Listing Available : {item.ownerListing}{" "}
-                  </p>
-                </div>
-              </>
-            </Popup>
+            <Tooltip opacity={1} direction="top" offset={[10, -35]}>
+              <TooltipProj data={item} />
+            </Tooltip>
           </Marker>
         ))}
     </>

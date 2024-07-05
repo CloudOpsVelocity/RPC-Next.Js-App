@@ -6,6 +6,7 @@ import { Box, Group, Paper, ScrollArea, Stack } from "@mantine/core";
 import { specificationsList } from "@/app/images/commonSvgs";
 import styles from "@/app/styles/Scrollbar.module.css";
 import clsx from "clsx";
+import { redirect } from "next/dist/server/api-utils";
 export default function Specifications({
   data,
   projName,
@@ -83,8 +84,10 @@ export default function Specifications({
             <ScrollArea
               w={"100%"}
               h={
-                458 > data?.length * (isMobile ? 190 : 270)
-                  ? data.length * (isMobile ? 190 : 270)
+                458 > data?.length * (isMobile ? 120 : 270)
+                  ? data.length * (isMobile ? 120 : 270)
+                  : isMobile
+                  ? 280
                   : 358
               }
               viewportRef={viewport}
@@ -99,7 +102,7 @@ export default function Specifications({
                   className="px-[2%] mt-5 sm:mt-10 w-full items-start justify-start flex-col"
                 >
                   <span
-                    className={` flex items-center gap-2 text-[#00487C] min-w-[10%] max-w-[20%] sm:text-[24px] italic font-[600] py-2 px-2 rounded-xl  ${
+                    className={` flex items-center gap-2 text-[#00487C]  w-full sm:min-w-[10%] sm:max-w-[20%]  sm:text-[24px] italic font-[600] py-2 px-2 rounded-xl  ${
                       selectedSpecIndex == index
                         ? "specification"
                         : "specificationRemove"

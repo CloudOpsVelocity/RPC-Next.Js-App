@@ -84,7 +84,7 @@ const FloorplanDetailsCard: React.FC<Props> = ({
               {mergedData.bhk} |
               <span className="font-[500] ml-[4px] text-[12px] sm:text-[14px] lg:text-[20px] text-[#000]">
                 {" "}
-                {mergedData.bedCount} bed - {mergedData.bathCount} bath
+                {mergedData.bedCount} Bed - {mergedData.bathCount} Bath
               </span>
             </p>
             <p className="gap-[4px] font-[500] text-[12px] sm:text-[14px] lg:text-[16px] text-[#303A42] mb-[20px] flex justify-start items-start">
@@ -144,14 +144,14 @@ const FloorplanDetailsCard: React.FC<Props> = ({
           )}
         </div>
       </div>
-      <div className="sm:hidden border-[#92B2C8] border-solid border-b-[1px] border-r-[1px] p-4">
+      <div className="sm:hidden border-[#92B2C8] border-solid border-t-0 border-[1px] p-4">
         {propCgId != projectprops.plot && (
           <div className="">
-            <p className="font-[500] text-[14px] sm:text-[16px] lg:text-[24px] mb-[8px] text-[#001F35] flex justify-start items-center">
+            <p className="font-[600] text-[14px] sm:text-[16px] lg:text-[24px] mb-[8px] text-[#001F35] flex justify-start items-center">
               {mergedData.bhk} |
-              <span className="font-[500] ml-[4px] text-[14px] sm:text-[14px] lg:text-[20px] text-[#000]">
+              <span className="font-[600] ml-[4px] text-[14px] sm:text-[14px] lg:text-[20px] text-[#000]">
                 {" "}
-                {mergedData.bedCount} bed - {mergedData.bathCount} bath
+                {mergedData.bedCount} Bed - {mergedData.bathCount} Bath
               </span>
             </p>
             <p className="gap-[4px] font-[500] text-[12px] sm:text-[14px] lg:text-[16px] text-[#303A42] mb-[8px] flex justify-start items-start">

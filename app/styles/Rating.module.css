@@ -40,31 +40,32 @@
 .star {
   margin-right: 31px;
 }
-.headerCustomLoginPopup{
+.headerCustomLoginPopup {
   display: none;
- }
+}
 
 @media screen and (max-width: 767px) {
   .star {
     margin-right: 16px;
   }
-
 }
-@media (max-width : 640px) {
-
-/*   .header{
+@media (max-width: 640px) {
+  /*   .header{
     display: none;
   }
    */
-   .headerCustomLoginPopup{
+  .headerCustomLoginPopup {
     display: none;
-   }
-  
-   .ratingInput {
+  }
+
+  .ratingInput {
     font-size: 16px;
-   }
-   .title{
+  }
+  .title {
     font-size: 15px;
     font-weight: 700;
-   }
+  }
+  .bodyPadding {
+    padding-bottom: 0px;
+  }
 }

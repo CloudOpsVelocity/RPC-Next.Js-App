@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { callIconSvg } from "@/app/images/commonSvgs";
 import { Data } from "@/app/validations/types/builder";
@@ -9,56 +10,64 @@ export default function ManagementBlock({
   ceoName,
   founderName,
   vision,
-  citiesName,
   officecontact,
   projectAvailableCities,
 }: Data) {
   const keys = Object.keys(projectAvailableCities);
   return (
     <div
-      className=" w-full  mb-[6%]   flex  flex-col justify-center items-start  border border-[color:var(--blue-stroke,#4D6677)] shadow-[0px_4px_31.5px_0px_rgba(91,143,182,0.19)] p-8 rounded-[7px] border-solid bg-[#FCFCFC]
+      className=" w-full  mb-[6%]   flex  flex-col justify-center items-start  border border-[color:var(--blue-stroke,#4D6677)] shadow-[0px_4px_31.5px_0px_rgba(91,143,182,0.19)] p-4 sm:p-8 rounded-[7px] border-solid bg-[#FCFCFC] 
     "
     >
-      <h1 className=" text-[24px] lg:text-[32px] font-[600] text-[#001F35]">
-        Company Detail
+      <h1 className=" text-[18px] sm:text-[24px] lg:text-[32px] font-[600] text-[#001F35]">
+        Company Details
       </h1>
 
-      <div className="flex justify-start items-start w-full flex-wrap gap-[3%]  mt-[2%]  ">
-        <div className="bg-[#FFF] rounded-[10px] shadow-lg border-[#92B2C8] border-[1px] border-solid p-[16px]  ">
-          <p className="text-[20px] md:text-[24px] font-[600] text-[#202020] ">
+      <div className="flex justify-start items-start w-full flex-wrap gap-2 sm:gap-4  mt-[2%]  ">
+        <div className="bg-[#FFF] rounded-[10px] shadow-lg border-[#92B2C8] border-[1px] border-solid p-2 sm:p-[16px]  ">
+          <p className="text-[16px] md:text-[24px] font-[600] text-[#202020] ">
             {ceoName}
           </p>
-          <p className="text-[16px] md:text-[20px] font-[700] text-[#00487C] italic">
+          <p className="text-[12px] md:text-[20px] font-[700] text-[#00487C] italic">
             CEO, {companyName}
           </p>
         </div>
 
-        <div className="bg-[#FFF] rounded-[10px] shadow-lg border-[#92B2C8] border-[1px] border-solid p-[16px] mb-[2%] ">
-          <p className="text-[20px] md:text-[24px] font-[600] text-[#202020] ">
+        <div className="bg-[#FFF] rounded-[10px] shadow-lg border-[#92B2C8] border-[1px] border-solid p-2 sm:p-[16px] mb-[2%] ">
+          <p className=" text-[16px] md:text-[24px] font-[600] text-[#202020] ">
             {founderName}
           </p>
-          <p className="text-[16px] md:text-[20px] font-[700] text-[#00487C] italic">
+          <p className="text-[12px] md:text-[20px] font-[700] text-[#00487C] italic">
             Founder, {companyName}
           </p>
         </div>
       </div>
 
-      <h1 className=" text-[#242424] text-[28px] not-italic font-semibold  inline-flex items-center space-x-2">
+      <h1 className=" text-[#242424] mt-3 sm:mt-0 text-[16px] sm:text-[28px] not-italic font-semibold  inline-flex items-center space-x-2">
         <p>{HEADING_ICON}</p> <p> Company Vision</p>
       </h1>
-      <About id="builder_vision" heading="" projName={""} content={vision} />
+      <About
+        id="builder_vision"
+        heading=""
+        projName={""}
+        content={vision}
+        className="!w-full !text-[14px]"
+      />
 
-      <div className=" flex justify-start items-center w-full gap-[8px] mt-[-3%] mb-[2%] ">
-        <div className="inline-flex justify-center items-center gap-0.5 p-1 rounded-md bg-gradient-to-tr from-[#EFF5FF] to-[#F2FAFF] ">
+      <div className=" sm:flex  justify-start items-center w-full gap-[8px] mt-[0%] mb-[2%] ">
+        <div
+          onClick={() => window.open(`tel:${officecontact}`)}
+          className="max-w-fit flex justify-center items-center gap-0.5 p-1 rounded-md bg-gradient-to-tr from-[#EFF5FF] to-[#F2FAFF] mb-1"
+        >
           {callIconSvg}
-          <p className="text-[#00487C] text-[28px] not-italic font-semibold ">
+          <p className="text-[#00487C]  text-[14px] sm:text-[28px] not-italic font-semibold ">
             Office Contact
           </p>
         </div>
 
         <a
           href={`tel:${officecontact}`}
-          className="text-[#242424] text-2xl not-italic font-semibold mt-2 underline"
+          className="text-[#242424]  text-[14px] sm:text-2xl not-italic font-semibold sm:mt-2 underline ml-1.5"
         >
           {officecontact}
         </a>
@@ -66,18 +75,18 @@ export default function ManagementBlock({
 
       {keys.length > 1 && (
         <>
-          <h1 className="text-[#242424] text-[28px] not-italic font-semibold inline-flex items-center space-x-2">
+          <h1 className="text-[#242424] mt-3 sm:mt-0 text-[16px] sm:text-[28px] not-italic font-semibold  inline-flex items-center space-x-2">
             <p>{HEADING_ICON}</p> <p>Projects in different branches</p>
           </h1>
-          <div className="flex justify-start items-start w-full flex-wrap gap-[3%] mb-[2%] mt-[1%] space-y-3 md:space-y-0 md:gap-y-4">
+          <div className="flex justify-start items-start w-full flex-wrap gap-2 sm:gap-[3%] mb-[2%] mt-[1%]  md:space-y-0 md:gap-y-4">
             {keys?.map((item, index) => (
               <a
-                className="text-[#00487C] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px] underline "
+                className="text-[#00487C] text-[13px] sm:text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px] underline "
                 key={index}
                 href={`/search?city=${projectAvailableCities[item]}%2B${item}`}
                 target="_blank"
               >
-                Project in{" "}
+                Projects in{" "}
                 <span className="capitalize">
                   {projectAvailableCities[item]}
                 </span>

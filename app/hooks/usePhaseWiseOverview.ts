@@ -1,27 +1,12 @@
 "use client";
-import React, { useState } from "react";
-import { useQuery } from "react-query";
-import { getProjectWiseOverView } from "../utils/api/project";
-import { useParams } from "next/navigation";
 import { currentPhaseAtom } from "../store/vewfloor";
 import { useAtom } from "jotai";
-import RTK_CONFIG from "../config/rtk";
 
-export default function usePhaseWiseOverview() {
+export default function usePhaseWiseOverview(PhaseOverview: any) {
   const [currentPhase, setFloorPhase] = useAtom(currentPhaseAtom);
   const handlePhaseChange = (phaseId: number) => {
     setFloorPhase(phaseId);
   };
-  const { slug } = useParams<{ slug: string }>();
-  const { data: PhaseOverview, isLoading } = useQuery({
-    queryKey: [`phaseoverview` + slug],
-    queryFn: () => getProjectWiseOverView(slug),
-    onSuccess: (data) => {
-      setFloorPhase(data[0].phaseId);
-    },
-    ...RTK_CONFIG,
-  });
-
   const phaseList = PhaseOverview?.map((phase: any) => {
     return {
       phaseId: phase.phaseId,
@@ -30,12 +15,13 @@ export default function usePhaseWiseOverview() {
   });
   const hasReraStatus =
     PhaseOverview &&
-    PhaseOverview.some((phase: any) => phase.rerastatus === "Recieved");
-
+    PhaseOverview.some(
+      (phase: any) =>
+        phase.rerastatus === "Recieved" || phase.rerastatus === "Applied"
+    );
   return {
     phaseList,
     PhaseOverview,
-    isLoading,
     handlePhaseChange,
     currentPhase,
     setCurrentPhase: setFloorPhase,
