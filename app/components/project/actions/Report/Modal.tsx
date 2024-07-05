@@ -7,7 +7,9 @@ import Close from "../../button/close";
 import { useState } from "react";
 import { QnaSuccesssMessage } from "../../success";
 import Styles from "@/app/styles/Qna.module.css";
+import { useParams } from "next/navigation";
 export default function ReportModal() {
+  const { slug } = useParams<{ slug: string }>();
   const [opened, { open, close }] = useDisclosure(false);
   const [status, setStatus] = useState<
     "idle" | "error" | "loading" | "success"
@@ -22,7 +24,7 @@ export default function ReportModal() {
     setStatus("loading");
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/report?id=1a5a9f6d5f22dc77e5249ce3f312c64c&iden=P`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/report?id=${slug}&iden=P`,
         {
           method: "POST",
           headers: {
