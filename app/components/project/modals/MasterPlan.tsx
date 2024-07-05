@@ -8,6 +8,7 @@ import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 import S from "@/app/styles/ImgCarousel.module.css";
 import ZoomInOut from "../actions/ZoomInOut";
 import NextImage from "next/image";
+import { useDrag } from "@use-gesture/react";
 export default function MasterPlanPopup({
   url,
   onDownload,
@@ -17,7 +18,16 @@ export default function MasterPlanPopup({
 }) {
   const [opened, { open, close }] = useDisclosure(false);
   const isMobile = useMediaQuery(`(max-width: 750px`);
-
+  const bind = useDrag(
+    ({ swipe: [swipeX, swipeY] }) => {
+      if (swipeY > 0) {
+        close();
+      } else if (swipeY < 0) {
+        close();
+      }
+    },
+    { axis: "y" } // Enable only vertical swipe detection
+  );
   return (
     <>
       <Modal
@@ -32,6 +42,7 @@ export default function MasterPlanPopup({
         }}
         size={isMobile ? "100%" : "auto"}
         centered={isMobile}
+        {...bind()}
       >
         <div className="h-auto scrollbar-hide flex justify-end flex-col items-center ">
           <div className="w-full bg-transparent    h-[57px] flex items-center justify-between  z-[1000] md:px-10 max-w-[91rem] m-auto">

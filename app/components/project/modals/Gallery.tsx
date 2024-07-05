@@ -104,7 +104,7 @@ const Gallery: React.FC<GalleryProps> = ({
                   }}
                   // className="!relative !flex !justify-center !w-full !items-center !max-w-fit"
                 >
-                  <TransformWrapper disabled>
+                  <TransformWrapper>
                     <Content url={image} />
                   </TransformWrapper>
                 </Carousel.Slide>

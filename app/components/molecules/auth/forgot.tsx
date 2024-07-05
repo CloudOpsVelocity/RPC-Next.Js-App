@@ -179,6 +179,7 @@ export default ForgotForm;
 import StepCss from "@/app/styles/Stepper.module.css";
 import ForgotSucess from "./complete/page";
 import clsx from "clsx";
+import toast from "react-hot-toast";
 const validationSchema = yup.object().shape({
   password: yup
     .string()
@@ -191,7 +192,6 @@ const validationSchema = yup.object().shape({
     .required("Re- enter New password is required"),
 });
 const Form = ({ status, setStatus }: any) => {
-  const router = useRouter();
   const form = useForm({
     initialValues: {
       password: "",
@@ -208,9 +208,12 @@ const Form = ({ status, setStatus }: any) => {
     },
   });
   const onSubmit = async (values: any) => {
-    const data = await resetPasswordApi(values.password);
-    // router.push("/login");
-    setStatus("success");
+    try {
+      const data = await resetPasswordApi(values.password);
+      setStatus("success");
+    } catch (error) {
+      toast.error("Something went wrong.");
+    }
   };
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
   const isPasswordMatched = () => {

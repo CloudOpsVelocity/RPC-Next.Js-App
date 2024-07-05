@@ -130,7 +130,6 @@ const LeafMap: React.FC<{
                 {mapData &&
                 mapData[selected] &&
                 mapData[selected].length > 0 ? (
-                  // Calculate distance and sort locations
                   mapData[selected]
                     .map((location: any) => ({
                       ...location,
@@ -150,6 +149,8 @@ const LeafMap: React.FC<{
                           lat: Number(lat),
                           lng: Number(lang),
                         }}
+                        isMobile={isMobile}
+                        isProj={type}
                         onClick={setSelectedLocation}
                         setDirection={showLocationOnMap}
                         showLocationOnMap={showLocationOnMap}
@@ -169,6 +170,7 @@ const LeafMap: React.FC<{
             projName={projName}
             lat={lat}
             lang={lang}
+            selected={selected}
             setSelectedLocation={setSelectedLocation}
             type={"proj"}
           />
@@ -271,7 +273,7 @@ const LocationList: React.FC<{
   lang: number;
   type: "public" | "drive" | "walk";
   onClick: (location: any) => void;
-  onChangeTravelMode: (mode: string) => void; // New prop for changing travel mode
+  onChangeTravelMode: (mode: string) => void;
   showLocationOnMap: (location: any) => void;
   distance: any;
   duration: any;
@@ -281,7 +283,34 @@ const LocationList: React.FC<{
     lng: number;
   };
   time: string;
-}> = ({ name, showLocationOnMap, lat, lang, distance, time }) => {
+  isProj: "proj" | "prop";
+  isMobile: boolean;
+}> = ({
+  name,
+  showLocationOnMap,
+  lat,
+  lang,
+  distance,
+  time,
+  isProj,
+  isMobile,
+}) => {
+  const setIsScrolling = useSetAtom(
+    isProj === "prop" ? propScrollingAtom : isScrollingAtom
+  );
+  const scrollToTopic = (id: string): void => {
+    setIsScrolling(true);
+
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "center",
+      });
+    }
+    setTimeout(() => setIsScrolling(false), 3000);
+  };
   const handleClick = () => {
     showLocationOnMap({
       position: {
@@ -290,6 +319,9 @@ const LocationList: React.FC<{
       },
       name,
     });
+    if (isMobile) {
+      scrollToTopic("nearBy");
+    }
   };
 
   return (

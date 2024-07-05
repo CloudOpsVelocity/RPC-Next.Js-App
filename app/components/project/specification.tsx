@@ -83,9 +83,9 @@ export default function Specifications({
           <Stack align="center">
             <ScrollArea
               w={"100%"}
-              mah={
-                458 > data?.length * (isMobile ? 190 : 270)
-                  ? data.length * (isMobile ? 190 : 270)
+              h={
+                458 > data?.length * (isMobile ? 120 : 270)
+                  ? data.length * (isMobile ? 120 : 270)
                   : isMobile
                   ? 280
                   : 358

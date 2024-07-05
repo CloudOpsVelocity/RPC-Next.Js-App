@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Console } from "console";
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
@@ -22,13 +23,20 @@ export default function LoginPage() {
       alert("Login failed");
     }
   };
-  const str = "1BHK";
+  const str = " m     ";
+  console.log(str.length);
+  console.log(str.endsWith(""));
+  // console.log(str);
+  // console.log(str.length);
+  // console.log(str.at(0));
+  // console.log(str.charAt(0));
   // console.log(str.at(0));
   return (
     <section className="py-10 bg-gray-50 sm:py-16 lg:py-24">
       <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl">
+            {str}
             Frequently Asked Questions
           </h2>
           <p className="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-600">
