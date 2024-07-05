@@ -13,7 +13,7 @@ export default function ReportModal() {
   const [opened, { open, close }] = useDisclosure(false);
   const [status, setStatus] = useState<
     "idle" | "error" | "loading" | "success"
-  >("success");
+  >("idle");
   const [text, setText] = useState("");
   const formSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
