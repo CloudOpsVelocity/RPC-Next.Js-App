@@ -5,7 +5,7 @@ import clsx from "clsx";
 import S from "@/app/styles/Rating.module.css";
 import Close from "../../button/close";
 import { useState } from "react";
-import { QnaSuccesssMessage } from "../../success";
+import { QnaSuccesssMessage, ReportSuccesssMessage } from "../../success";
 import Styles from "@/app/styles/Qna.module.css";
 import { useParams } from "next/navigation";
 export default function ReportModal() {
@@ -13,7 +13,7 @@ export default function ReportModal() {
   const [opened, { open, close }] = useDisclosure(false);
   const [status, setStatus] = useState<
     "idle" | "error" | "loading" | "success"
-  >("idle");
+  >("success");
   const [text, setText] = useState("");
   const formSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -35,7 +35,6 @@ export default function ReportModal() {
       );
       if (response.ok) {
         setStatus("success");
-        close();
       } else {
         setStatus("error");
       }
@@ -60,6 +59,7 @@ export default function ReportModal() {
             body: Styles.body,
           },
         })}
+        size={"100%"}
         styles={{
           header: {
             display: "none",
@@ -71,7 +71,7 @@ export default function ReportModal() {
           <Close close={close} className="absolute top-3 -right-2 z-10" />
 
           {status === "success" ? (
-            <QnaSuccesssMessage />
+            <ReportSuccesssMessage close={close} />
           ) : (
             <>
               {" "}
