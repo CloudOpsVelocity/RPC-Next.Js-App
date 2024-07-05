@@ -79,6 +79,7 @@ export default function PriceBreakup({
       title="Price breakup"
       position="right"
       zIndex={1000}
+     
       classNames={{
         close: styles.close,
         title: styles.title,
@@ -86,7 +87,7 @@ export default function PriceBreakup({
       size={isMobile ? "100%": "35%"}
       className="!relative"
     >
-      <div className="space-y-8">
+      <div className="space-y-4  xl:space-y-8   mt-3">
         <Card
           title={type + " Price"}
           Icon={SellingIcon}

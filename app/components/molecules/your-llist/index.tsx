@@ -22,7 +22,7 @@ const YourList = () => {
               Listing Today!
             </span>
           </p>
-          <div className="flex flex-col items-start space-y-4   ">
+          <div className="flex flex-col items-start space-y-4  ">
             <p className=" text-[color:var(--Grey-3,#B5ABAC)] text-xl md:text-4xl not-italic font-medium  tracking-[1.44px] whitespace-normal">
               Your listings deserves the spotlight. <br />
               Add it to our platform today!

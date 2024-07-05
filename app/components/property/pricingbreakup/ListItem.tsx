@@ -11,7 +11,7 @@ export default function ListItem({ label, value, className }: Props) {
   return (
     <li
       className={clsx(
-        "flex w-full   justify-between  list-disc  items-start  gap-[26px]   text-[14px] xl:text-2xl  font-bold leading-[23.784px]  pb-2 xl:pb-5",
+        "flex w-full   justify-between items-center  list-disc   gap-[14px]  xl:gap-[26px]   text-[14px] xl:text-2xl  font-bold leading-[23.784px]  pb-2 xl:pb-5",
         className
       )}
     >

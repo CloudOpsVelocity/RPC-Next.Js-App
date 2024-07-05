@@ -11,6 +11,8 @@ import { imageUrlParser } from "@/app/utils/image";
 import useDownload from "@/app/hooks/property/useDownload";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 import ZoomInOut from "../../project/actions/ZoomInOut";
+import { useMediaQuery } from "@mantine/hooks";
+import Close from "../../project/button/close";
 
 function PFloorPlanModal({
   data,
@@ -26,11 +28,13 @@ function PFloorPlanModal({
     listingProps[data.propTypeName.trim() as keyof typeof listingProps];
 
   const { handleDownload } = useDownload("floorPlan");
+  const isMobile = useMediaQuery("(max-width: 601)");
   return (
     <>
       <Modal
+      centered={isMobile ? true  : false}
         opened={opened}
-        size={"90%"}
+        size={isMobile ? "100%":"90%"}
         padding={0}
         transitionProps={{ duration: TRANSITION_DURATION }}
         onClose={() => setOpened(false)}
@@ -38,14 +42,35 @@ function PFloorPlanModal({
           content: S.body,
           close: S.closeListing,
           title: S.listingTitle,
+          header:S.header
         }}
         title="Floor Plan"
       >
-        <div className="flex  mb-10 justify-center items-start gap-[45px] shrink-0 flex-wrap relative">
-          <div className="flex justify-center items-center gap-5 absolute right-20 -top-[50px] z-[1000]">
+        <div className="flex mb-[8%]   xl:mb-10 justify-center items-start gap-[15px] xl:gap-[45px] shrink-0 flex-wrap relative">
+        <div className="w-full h-[66px]  xl:h-[57px] flex items-center justify-between  z-[1000] px-3 xl:px-8 absolute top-0 right-0 pb-4 xl:pt-2">
+          <div className="text-[#333] text-left text-[18px]  xl:text-[20px] xl:text-2xl not-italic font-semibold leading-[normal]">
+            Floor Plan
+          </div>
+          <div className="flex justify-center items-center gap-5">
+            <button
+                 onClick={() => handleDownload(data.projMedia.floorPlanUrl)}
+              className={`text-white flex justify-center text-[12px] xl:text-base items-center xl:gap-1 p-1 xl:p-2 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] rounded-[6px] xl:rounded-[10px] bg-[#0073c6] `}
+            >
+             { isMobile ? "Download Floor Plan" : "Download"}
+            </button> 
+            <SharePopup
+              title="Share"
+              titleText="Share Floor Plan"
+              url={imageUrlParser(data.projMedia.floorPlanUrl, "F")}
+            />
+
+            <Close close={close} />
+          </div>
+        </div>
+          {/* <div className="flex justify-center items-center gap-5 absolute right-20 -top-[50px] z-[1000]">
             <button
               onClick={() => handleDownload(data.projMedia.floorPlanUrl)}
-              className="text-white flex justify-center items-center gap-1 p-2 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] rounded-[10px] bg-[#0073c6]"
+              className="text-white flex  justify-center items-center gap-1 p-2 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] rounded-[10px] bg-[#0073c6]"
             >
               Download Floor Plan
             </button>
@@ -53,7 +78,7 @@ function PFloorPlanModal({
               title="Share"
               url={imageUrlParser(data.projMedia.floorPlanUrl, "F")}
             />
-          </div>
+          </div> */}
           <TransformWrapper>
             <MiddleSection />
           </TransformWrapper>
@@ -68,9 +93,10 @@ export default PFloorPlanModal;
 
 const MiddleSection = () => {
   const data = useAtomValue(selectedFloorAtom);
+  const isMobile = useMediaQuery("(max-width: 601)");
 
   return (
-    <div className="col-span-1">
+    <div className={`col-span-1 p-4 mt-[15%] ${isMobile ? "h-[700px]" :"h-[400px]"}`}>
       <div className="relative">
         <TransformComponent>
           <img
@@ -78,11 +104,11 @@ const MiddleSection = () => {
             alt="Floor Plan"
             className="border"
             width={800}
-            height={400}
+            height={isMobile ? 700 :400 }
             style={{ aspectRatio: "800 / 540", objectFit: "contain" }}
           />
         </TransformComponent>
-        <ZoomInOut />
+        <ZoomInOut className="!right-1 !bottom-1" />
       </div>
     </div>
   );
@@ -91,8 +117,8 @@ const MiddleSection = () => {
 const RightSection = ({ propCgId }: any) => {
   const data = useAtomValue(selectedFloorAtom);
   return (
-    <div className="bg-[#F4FBFF] p-6 rounded-lg w-full max-w-[342px] shadow">
-      <div className="space-y-4">
+    <div className="bg-[#F4FBFF] xl:m-0 m-4 p-6 rounded-lg w-full max-w-[342px] shadow">
+      <div className=" space-y-1 xl:space-y-4">
         {propCgId != projectprops.plot && (
           <div className="flex items-center space-x-3">
             {propertyDetailsSvgs.unitType}
