@@ -1,31 +1,78 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import SubHeading from "../headings/SubHeading";
 import Button from "@/app/elements/button";
 import { isSingleLetterOrNumber } from "@/app/utils/letters";
-import { useAtom } from "jotai";
-import { currentPhaseAtom } from "@/app/store/vewfloor";
+import { useAtom, useSetAtom } from "jotai";
+import { currentPhaseAtom, propCgIdAtom } from "@/app/store/vewfloor";
 import NoProperties from "../notfound";
+import {
+  PlotIcon,
+  VillamentIcon,
+  VillaIcon,
+  RowHouseIcon,
+  ApartmentIcon,
+  ByTypeSvg,
+  ByUnitSvg,
+  ByBhkSvg,
+  PopupOpenSvg,
+} from "@/app/images/commonSvgs";
 import {
   BACKEND_PROP_TYPES,
   parseDataProjectProps,
   projectprops,
   propertyDetailsTypes,
 } from "@/app/data/projectDetails";
+import { parital_unit_atom } from "@/app/store/partialsUnits";
 
 type Props = {
   partialUnitData: any;
   projName: string;
   phaseList: any;
 };
-
+const iconStyles: string =
+  " flex items-center justify-center w-[34px] sm:w-[40px] h-[34px] sm:h-[40px] bg-[#FAFDFF] rounded-[50%] ";
 export default function HeaderActions({
   partialUnitData,
   projName,
   phaseList,
 }: Props) {
+  const getIcon = (id: number) => {
+    let iconComponent;
+    switch (id) {
+      case projectprops.apartment:
+        iconComponent = <ApartmentIcon className={iconStyles} />;
+        break;
+      case projectprops.rowHouse:
+        iconComponent = <RowHouseIcon className={iconStyles} />;
+        break;
+      case projectprops.villa:
+        iconComponent = <VillaIcon className={iconStyles} />;
+        break;
+      case projectprops.villament:
+        iconComponent = <VillamentIcon className={iconStyles} />;
+        break;
+      case projectprops.plot:
+        iconComponent = <PlotIcon className={iconStyles} />;
+        break;
+      default:
+        break;
+    }
+    return iconComponent;
+  };
   const [currentPhase, setCurrentPhase] = useAtom(currentPhaseAtom);
+  const setSelected = useSetAtom(parital_unit_atom);
   const propTypes = Object.keys(partialUnitData[currentPhase]);
+  const [propCgId, setPropCgId] = useAtom(propCgIdAtom);
+  useEffect(() => {
+    // @ts-ignore
+    propTypes?.length > 0 &&
+      setPropCgId(
+        parseDataProjectProps[
+          propTypes[0] as keyof typeof parseDataProjectProps
+        ]
+      );
+  }, [currentPhase]);
 
   return (
     <div>
@@ -39,13 +86,13 @@ export default function HeaderActions({
       </h1>
       <SubHeading text="See floor plans as per your selected property type" />
       <div
-        className={`flex justify-start items-start md:items-center  mb-[2%] flex-col md:flex-row  ${
+        className={`flex justify-start items-start md:items-center  mb-[8px] flex-col md:flex-row  ${
           phaseList?.length > 1 ? "mt-4" : "mt-[0%]"
         }`}
       >
         {phaseList?.length > 1 && (
           <>
-            <p className="text-[14px] sm:text-[20px] lg:text-[24px] font-[500] mb-2 sm:mb-[44px] md:mb-0 text-[#333] sm:mr-[20px] ">
+            <p className="text-[14px] sm:text-[20px] lg:text-[24px] font-[500] mb-2 sm:mb-[32px] md:mb-0 text-[#333] sm:mr-[20px] ">
               Select one of the phase to see project details
             </p>
             <div className=" flex justify-start items-start gap-[10px] flex-wrap ">
@@ -61,6 +108,7 @@ export default function HeaderActions({
                     onChange={() => {
                       if (currentPhase == each.phaseId) return;
                       setCurrentPhase(each.phaseId);
+                      setSelected(0);
                     }}
                     buttonClass={` mb-[5px] text-[14px] sm:text-[18px] lg:text-[20px] bg-[#ECF7FF] p-[8px] xl:px-[8px]  whitespace-nowrap text-[#000] rounded-[8px]
                         ${
@@ -74,46 +122,37 @@ export default function HeaderActions({
                 );
               })}
             </div>
-            {propTypes?.length == 0 ? (
-              <NoProperties
-                phase={
-                  phaseList?.find((phase: any) => phase.phaseId == currentPhase)
-                    ?.phaseName as any
-                }
-              />
-            ) : (
-              <div className=" flex justify-start items-start flex-wrap mt-[3%] gap-[2%] ">
-                {propTypes?.map((each: string, index: any) => {
-                  let name =
-                    //@ts-ignore
-                    propertyDetailsTypes.get(parseDataProjectProps[each])
-                      .name != undefined
-                      ? //@ts-ignore
-                        propertyDetailsTypes.get(parseDataProjectProps[each])
-                          .name
-                      : null;
-                  return (
-                    <Button
-                      key={index}
-                      //   buttonClass={`flex justify-start mb-2 sm:mb-[3%] w-full rounded-[20px] gap-[8px]  items-center mr-[24px] md:ml-[0px] text-[12px] sm:text-[18px] border ${
-                      //     33 == (parseDataProjectProps[each] as number)
-                      //       ? "text-[#001F35] text-[14px] sm:text-base font-[600] shadow-md bg-[#c8f5ca] sm:bg-[#D5EDFF]"
-                      //       : "text-[#303A42] font-[500] bg-[#E1FFE2] sm:bg-[#EEF7FE]"
-                      //   } `}
-                      //   onChange={() => {
-                      //     if (propCgId !== keyName) {
-                      //       getPropertyType(propertyDetailsTypes.get(keyName));
-                      //     }
-                      //   }}
-                      title={name}
-                      //   icon={getIcon(keyName)}
-                    />
-                  );
-                })}
-              </div>
-            )}
           </>
         )}
+      </div>
+      <div className=" flex justify-start items-start flex-wrap gap-[2%] ">
+        {propTypes?.map((each: string, index: any) => {
+          const keyName =
+            parseDataProjectProps[each as keyof typeof parseDataProjectProps];
+          let name =
+            //@ts-ignore
+            propertyDetailsTypes.get(keyName).name != undefined
+              ? //@ts-ignore
+                propertyDetailsTypes.get(keyName).name
+              : null;
+          return (
+            <Button
+              key={index}
+              buttonClass={`flex justify-start mb-2 sm:mb-[3%] w-full rounded-[20px] gap-[8px]  items-center mr-[24px] md:ml-[0px] text-[12px] sm:text-[18px] border ${
+                propCgId == keyName
+                  ? "text-[#001F35] text-[14px] sm:text-base font-[600] shadow-md bg-[#c8f5ca] sm:bg-[#D5EDFF]"
+                  : "text-[#303A42] font-[500] bg-[#E1FFE2] sm:bg-[#EEF7FE]"
+              } `}
+              onChange={() => {
+                if (propCgId !== keyName) {
+                  setPropCgId(keyName);
+                }
+              }}
+              title={name}
+              icon={getIcon(keyName)}
+            />
+          );
+        })}
       </div>
     </div>
   );

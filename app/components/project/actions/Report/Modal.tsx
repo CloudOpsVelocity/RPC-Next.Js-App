@@ -59,7 +59,6 @@ export default function ReportModal() {
             body: Styles.body,
           },
         })}
-        size={"100%"}
         styles={{
           header: {
             display: "none",

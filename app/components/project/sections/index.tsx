@@ -1,5 +1,6 @@
 import React from "react";
 import HeaderActions from "./HeaderActions";
+import MainSection from "./Main";
 
 type Props = {
   partialUnitData: any;
@@ -14,7 +15,7 @@ export default function PartialUnitData({
 }: Props) {
   return (
     <div
-      className="w-[90%] scroll-mt-[180px] mb-[2%] sm:mb-[5%]"
+      className="w-[90%] scroll-mt-[180px] mb-[2%] sm:mb-[5%] min-h-[300px]"
       id="floorPlans"
     >
       <HeaderActions
@@ -22,6 +23,7 @@ export default function PartialUnitData({
         projName={projName}
         phaseList={phaseList}
       />
+      <MainSection partialUnitData={partialUnitData} />
     </div>
   );
 }

@@ -542,8 +542,8 @@ function Builder() {
                 input: StepCss.textInput,
                 error: StepCss.errorMsg,
                 dropdown: StepCss.dropdown,
-                label:StepCss.mlabelCss,
-                option:StepCss.optionCss
+                label: StepCss.mlabelCss,
+                option: StepCss.optionCss,
               }}
               withScrollArea={false}
             />
@@ -564,8 +564,8 @@ function Builder() {
                   input: StepCss.cityPincodeCust,
                   error: StepCss.errorMsg,
                   dropdown: StepCss.dropdown,
-                  label:StepCss.mlabelCss,
-                  option:StepCss.optionCss
+                  label: StepCss.mlabelCss,
+                  option: StepCss.optionCss,
                 }}
                 withScrollArea={false}
               />
@@ -613,7 +613,7 @@ function Builder() {
               stepIcon: active > 2 ? StepCss.stepIconActive : StepCss.stepIcon,
             }}
           >
-            <ScrollArea h={420}  viewportRef={viewport} offsetScrollbars>
+            <ScrollArea h={420} viewportRef={viewport} offsetScrollbars>
               <TextInput
                 id="companyName"
                 required
@@ -656,8 +656,8 @@ function Builder() {
                   inputField: StepCss.textInput,
                   error: StepCss.errorMsg,
                   dropdown: StepCss.dropdown,
-                  label:StepCss.mlabelCss,
-                  option:StepCss.optionCss
+                  label: StepCss.mlabelCss,
+                  option: StepCss.optionCss,
                 }}
                 data={isLoadingBrach ? [] : cityParser(brachData) || []}
                 {...form.getInputProps("branch")}
@@ -684,8 +684,8 @@ function Builder() {
                   root: StepCss.inputRoot,
                   input: StepCss.textInput,
                   error: StepCss.errorMsg,
-                  label:StepCss.mlabelCss,
-                  calendarHeader:StepCss.calendComStDt
+                  label: StepCss.mlabelCss,
+                  calendarHeader: StepCss.calendComStDt,
                 }}
               />
               <TextInput
@@ -811,7 +811,6 @@ function Builder() {
               minRows={5}
               maxRows={5}
               maxLength={5001}
-              {...form.getInputProps("mission")}
               classNames={{
                 root: StepCss.inputRoot,
                 input: StepCss.textInput,
@@ -821,6 +820,7 @@ function Builder() {
               onBlurCapture={(e) => {
                 handleTrimAndReplace(e, "mission", form);
               }}
+              {...form.getInputProps("mission")}
             />{" "}
             <Text size="sm" mt="xs" ta={"right"} mb={"lg"}>
               Maximum 5000 Characters
@@ -876,7 +876,7 @@ function Builder() {
           >
             Already have an Account ?{" "}
             <span className="md:text-xl  text-[#0C7ACA]  not-italic font-semibold text-nowrap">
-            LogIn
+              LogIn
             </span>
           </Link>
           {status === "error" && (
@@ -892,7 +892,7 @@ function Builder() {
           )}
           <Link
             href={{ pathname: queryParam.rediectPath }}
-           className=" md:text-xl not-italic text-[#148B16] !text-18px font-semibold   leading-[normal] b sm:!text-[16px] sm:font-[400] border rounded-sm p-2 border-solid border-[#148B16]"
+            className=" md:text-xl not-italic text-[#148B16] !text-18px font-semibold   leading-[normal] b sm:!text-[16px] sm:font-[400] border rounded-sm p-2 border-solid border-[#148B16]"
           >
             Continue without Register
           </Link>
