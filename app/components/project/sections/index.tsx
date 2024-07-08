@@ -1,0 +1,27 @@
+import React from "react";
+import HeaderActions from "./HeaderActions";
+
+type Props = {
+  partialUnitData: any;
+  projName: string;
+  phaseList: any;
+};
+
+export default function PartialUnitData({
+  partialUnitData,
+  projName,
+  phaseList,
+}: Props) {
+  return (
+    <div
+      className="w-[90%] scroll-mt-[180px] mb-[2%] sm:mb-[5%]"
+      id="floorPlans"
+    >
+      <HeaderActions
+        partialUnitData={partialUnitData}
+        projName={projName}
+        phaseList={phaseList}
+      />
+    </div>
+  );
+}

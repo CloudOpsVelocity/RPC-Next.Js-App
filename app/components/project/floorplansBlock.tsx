@@ -61,7 +61,6 @@ export default function FloorplansBlock({
   PhaseOverview,
   phaseList,
 }: Props) {
-  console.log(phaseList);
   const allKeys = [35, 33, 31, 34, 32];
   const [propCgId, setPropCgId] = useAtom(propCgIdAtom);
   const [currentPhase, setCurrentPhase] = useAtom(currentPhaseAtom);

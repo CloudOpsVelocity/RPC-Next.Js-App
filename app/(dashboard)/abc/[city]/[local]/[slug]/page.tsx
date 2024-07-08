@@ -13,8 +13,6 @@ import ProjectDetailsP from "@/app/components/project/projectDetailsP";
 import ProjectDrawer from "@/app/components/project/Drawer";
 import LeafMap from "@/app/components/project/map";
 import ListingRentAvail from "@/app/components/project/listingRentAvail";
-import dynamic from "next/dynamic";
-import SectionSkeleton from "@/app/components/atoms/skeleton/section";
 import ErrorContainer from "@/app/components/project/error/container";
 import MobileHidden from "@/app/components/molecules/MobileHidden";
 import { notFound } from "next/navigation";
@@ -29,6 +27,7 @@ import FaqWithBg from "@/app/components/project/faq";
 import NearByCarousel from "@/app/components/project/NearByCarousel";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
 import axios from "axios";
+import PartialUnitData from "@/app/components/project/sections";
 // const FloorplansBlock = dynamic(
 //   () => import("@/app/components/project/floorplansBlock"),
 //   {
@@ -149,18 +148,28 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           data={data.phases}
           slug={slug}
           PhaseOverview={phaseOverview}
+          isPartialData={data.partialUnitData!!}
         />
         <MasterPlan
           projName={data.projectName}
           media={data?.media?.projectPlanUrl}
         />
-        <FloorplansBlock
-          projName={data.projectName}
-          data={data.phases}
-          slug={slug}
-          PhaseOverview={phaseOverview}
-          phaseList={data.phases}
-        />
+        {!data.partialUnitData ? (
+          <FloorplansBlock
+            projName={data.projectName}
+            data={data.phases}
+            slug={slug}
+            PhaseOverview={phaseOverview}
+            phaseList={data.phases}
+          />
+        ) : (
+          <PartialUnitData
+            partialUnitData={data.partialUnitData}
+            projName={data.projectName}
+            phaseList={data.phases}
+          />
+        )}
+
         <GalleryBlock
           {...data.media}
           projName={data.projectName}
@@ -236,7 +245,7 @@ export async function generateStaticParams() {
   const slugs = projResult.map((slug: string) => ({
     slug: slug,
   }));
-  console.log(slugs);
+  // console.log(slugs);
   return slugs;
 }
 

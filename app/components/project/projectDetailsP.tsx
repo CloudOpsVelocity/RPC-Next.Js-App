@@ -24,6 +24,7 @@ type Props = {
   slug: string;
   projName: string;
   PhaseOverview: any;
+  isPartialData: boolean;
 };
 const styles = {
   box: "flex flex-col items-start sm:gap-[10px] p-4 sm:border sm:shadow-[0px_4px_10px_0px_rgba(202,233,255,0.30)] rounded-[10px] border-solid border-[#92B2C8] bg-[#fff] sm:mr-[46px]",
@@ -33,6 +34,7 @@ export default function ProjectDetailsP({
   projName,
   PhaseOverview,
   data: phaseList,
+  isPartialData,
 }: Props) {
   useHydrateAtoms([[currentPhaseAtom, PhaseOverview[0].phaseId]]);
   const [currentPhase, setFloorPhase] = useAtom(currentPhaseAtom);
@@ -170,6 +172,7 @@ export default function ProjectDetailsP({
                     key={propertyTypeKey}
                     cg={selectedPhase.propTypeOverview[propertyTypeKey]}
                     propertyType={propertyTypeKey}
+                    isPartialData={isPartialData}
                   />
                 )
               );

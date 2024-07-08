@@ -41,6 +41,7 @@ export interface Main {
   postedByName: string;
   reraStatus: boolean;
   phases: any;
+  partialUnitData: any;
 }
 
 export interface AmenityList {

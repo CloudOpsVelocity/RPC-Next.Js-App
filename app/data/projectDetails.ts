@@ -53,6 +53,14 @@ export const projectprops = {
   apartment: 35,
   independent: 633,
 };
+export const parseDataProjectProps = {
+  villa: 31,
+  plot: 32,
+  rowhouse: 33,
+  villament: 34,
+  apartment: 35,
+  independent: 633,
+};
 export const listingProps = {
   Villa: 31,
   Plot: 32,

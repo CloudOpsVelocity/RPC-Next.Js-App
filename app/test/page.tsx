@@ -23,9 +23,9 @@ export default function LoginPage() {
       alert("Login failed");
     }
   };
-  const str = " m     ";
-  console.log(str.length);
-  console.log(str.endsWith(""));
+  const str = "hello world";
+  console.log(customEndsWith(str, "world"));
+  // console.log(customAddInStr(str, " vicky", " manish"));
   // console.log(str);
   // console.log(str.length);
   // console.log(str.at(0));
@@ -226,3 +226,20 @@ export default function LoginPage() {
 //   if (start > arr.length) return "ARRAY TOO LONG";
 //   for (let i = start; i < arr.length; i++) {}
 // };
+
+// const customAddInStr = (str, ...elements) => {
+//   for (let i = 0; i < elements.length; i++) {
+//     str += elements[i];
+//   }
+//   return str;
+// };
+
+const customEndsWith = (str: string, endWith: string) => {
+  let diff = str.length - endWith.length;
+  for (let i = 0; i < endWith.length; i++) {
+    if (str[diff + i] !== endWith[i]) {
+      return false;
+    }
+  }
+  return true;
+};
