@@ -10,7 +10,7 @@ type Props = {};
 export default function TabPanelSection({}: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const {
-    searchProps: { isLoading, data, hasNextPage, fetchMoreData },
+    searchProps: { isLoading, data, hasNextPage, fetchMoreData, refetch },
     filters,
   } = useSearchFilters("project");
   const { ref, entry } = useIntersection({
@@ -35,6 +35,7 @@ export default function TabPanelSection({}: Props) {
             return (
               <ProjectCard
                 key={index}
+                refetch={refetch}
                 data={{ ...eachOne, type: filters.listedBy ?? "proj" }}
               />
             );

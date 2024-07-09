@@ -22,7 +22,7 @@ type Props = {
 } & Search &
   any;
 
-const MainBox = ({ data }: Props) => {
+const MainBox = ({ data, refetch }: Props) => {
   const {
     type,
     projName,
@@ -55,7 +55,6 @@ const MainBox = ({ data }: Props) => {
     rerastatus,
   } = data;
   const { data: session } = useSession();
-
   const [, { open: openLogin }] = usePopShortList();
   const { toggleShortlist, shortlistedItems, compareItems, toggleCompare } =
     useShortlistAndCompare();
@@ -72,7 +71,7 @@ const MainBox = ({ data }: Props) => {
         source: type,
       });
     } else {
-      openLogin();
+      openLogin(() => refetch());
     }
   };
   const isItemCompared =
@@ -86,7 +85,7 @@ const MainBox = ({ data }: Props) => {
         source: type,
       });
     } else {
-      openLogin();
+      openLogin(() => refetch());
     }
   };
 

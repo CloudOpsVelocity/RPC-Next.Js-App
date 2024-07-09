@@ -277,6 +277,7 @@ export default function useSearchFilters(
     error,
     isLoading,
     hasPreviousPage,
+    refetch,
   } = useInfiniteQuery({
     queryKey: ["srptest" + convertToQueryParams(params as any) + value],
     queryFn: ({ pageParam = 0 }) =>
@@ -330,6 +331,7 @@ export default function useSearchFilters(
       hasPreviousPage,
       fetchMoreData,
       hasNextPage,
+      refetch,
     },
     setFilters,
     remnoveSearchOptions,
