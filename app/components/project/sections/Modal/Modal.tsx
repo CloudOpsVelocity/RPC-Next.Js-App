@@ -14,6 +14,7 @@ import CarouselModal from "./Carousel";
 export default function PartialUnitModal() {
   const isData = useAtomValue(selectedPartialUnitAtom);
   const reset = useResetAtom(selectedPartialUnitAtom);
+  const selectedOne = isData.others[isData.main];
   return (
     <Modal
       opened={isData.main === 0 ? true : isData.main}
@@ -74,7 +75,7 @@ export default function PartialUnitModal() {
             Unit Type{" "}
             <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
               {" "}
-              2 Bhk
+              {selectedOne?.unitType}
             </span>
           </p>
         </div>
@@ -84,7 +85,7 @@ export default function PartialUnitModal() {
             Super Builtup Area{" "}
             <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
               {" "}
-              1920 sq.ft
+              {selectedOne?.sba} sq.ft
             </span>
           </p>
         </div>
@@ -94,7 +95,7 @@ export default function PartialUnitModal() {
             Price Range
             <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
               {" "}
-              1.2 Lkh - 21.5 Lkh
+              {isData.priceRange}
             </span>
           </p>
         </div>

@@ -14,6 +14,7 @@ import {
   selectedPartialUnitAtom,
 } from "@/app/store/partialsUnits";
 import Loading from "../../atoms/Loader";
+import { formatCurrency } from "@/app/utils/numbers";
 
 type Props = {
   partialUnitData: any;
@@ -64,6 +65,9 @@ export default function CardCarousel({ partialUnitData }: Props) {
                   setData({
                     main: index,
                     others: data,
+                    priceRange: `${formatCurrency(
+                      unitData[key].minPrice
+                    )} - ${formatCurrency(unitData[key].maxPrice)}`,
                   })
                 }
                 {...item}

@@ -62,7 +62,8 @@ export default function HeaderActions({
   };
   const [currentPhase, setCurrentPhase] = useAtom(currentPhaseAtom);
   const setSelected = useSetAtom(parital_unit_atom);
-  const propTypes = Object.keys(partialUnitData[currentPhase]);
+  const propTypes = Object.keys(partialUnitData[currentPhase]).sort();
+  console.log(propTypes);
   const [propCgId, setPropCgId] = useAtom(propCgIdAtom);
   useEffect(() => {
     // @ts-ignore
@@ -157,3 +158,11 @@ export default function HeaderActions({
     </div>
   );
 }
+
+const propTypesIndexMap = new Map([
+  ["apartment", 0],
+  ["villa", 1],
+  ["rowHouse", 2],
+  ["villament", 3],
+  ["plot", 4],
+]);

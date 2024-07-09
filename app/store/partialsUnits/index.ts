@@ -4,4 +4,5 @@ export const parital_unit_atom = atom(0);
 export const selectedPartialUnitAtom = atomWithReset<any>({
   main: null,
   others: [],
+  priceRange: "",
 });

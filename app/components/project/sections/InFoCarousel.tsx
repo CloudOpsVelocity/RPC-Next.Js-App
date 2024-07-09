@@ -14,6 +14,7 @@ import { useAtom, useAtomValue } from "jotai";
 import { parital_unit_atom } from "@/app/store/partialsUnits";
 import { currentPhaseAtom, propCgIdAtom } from "@/app/store/vewfloor";
 import { propertyDetailsTypes } from "@/app/data/projectDetails";
+import { sortUnits } from "@/app/utils/unitparser";
 export default function InFoCarousel({ partialUnitData }: Props) {
   const [selected, setSelected] = useAtom(parital_unit_atom);
   const currentPhase = useAtomValue(currentPhaseAtom);
@@ -38,7 +39,7 @@ export default function InFoCarousel({ partialUnitData }: Props) {
       mih={120}
     >
       {data &&
-        Object.keys(data).map((item: any, index: number) => (
+        sortUnits(Object.keys(data)).map((item: any, index: number) => (
           <InfoCard
             {...{
               active: selected === index,

@@ -292,7 +292,6 @@ export default function useSearchFilters(
     },
     enabled:
       ["/search", "/search/listing"].includes(path) && input !== undefined,
-
     cacheTime: 300000,
     staleTime: 30000,
   });

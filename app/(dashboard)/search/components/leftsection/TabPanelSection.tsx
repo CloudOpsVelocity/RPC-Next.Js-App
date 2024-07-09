@@ -13,6 +13,7 @@ export default function TabPanelSection({}: Props) {
     searchProps: { isLoading, data, hasNextPage, fetchMoreData, refetch },
     filters,
   } = useSearchFilters("project");
+  console.log(data);
   const { ref, entry } = useIntersection({
     root: containerRef.current,
     threshold: 0.1,
