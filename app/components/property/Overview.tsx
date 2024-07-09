@@ -9,6 +9,7 @@ import { footerPhoneIcon } from "@/app/images/commonSvgs";
 import CompareList from "./actions/compareList";
 import ShortList from "./actions/shortList";
 import Message from "./actions/Message";
+import ReportSectionProperty from "./actions/Report";
 
 export default function PropertyOverView({ data }: { data: Main }) {
   return (
@@ -58,6 +59,7 @@ export default function PropertyOverView({ data }: { data: Main }) {
           ))}
         </div>
         <div className=" flex justify-start md:justify-end items-start md:items-end flex-col mt-[3%] md:mt-0 relative pb-10">
+          <ReportSectionProperty />
           <ShortList {...data} />
           <CompareList {...data} />
           <Message {...data} />

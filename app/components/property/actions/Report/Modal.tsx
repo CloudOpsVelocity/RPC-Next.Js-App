@@ -3,11 +3,11 @@ import { Modal, Button, Textarea } from "@mantine/core";
 import ReportButton from "./button";
 import clsx from "clsx";
 import S from "@/app/styles/Rating.module.css";
-import Close from "../../button/close";
 import { useState } from "react";
-import { QnaSuccesssMessage, ReportSuccesssMessage } from "../../success";
 import Styles from "@/app/styles/Qna.module.css";
 import { useParams } from "next/navigation";
+import Close from "@/app/components/project/button/close";
+import { ReportSuccesssMessage } from "@/app/components/project/success";
 export default function ReportModal() {
   const { slug } = useParams<{ slug: string }>();
   const [opened, { open, close }] = useDisclosure(false);
@@ -24,7 +24,7 @@ export default function ReportModal() {
     setStatus("loading");
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/report?id=${slug}&iden=P`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/report?id=${slug}&iden=L`,
         {
           method: "POST",
           headers: {
@@ -68,7 +68,6 @@ export default function ReportModal() {
       >
         <div className="relative">
           <Close close={close} className="absolute top-3 -right-2 z-10" />
-
           {status === "success" ? (
             <ReportSuccesssMessage close={close} />
           ) : (
