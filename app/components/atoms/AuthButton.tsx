@@ -19,7 +19,7 @@ export default function AuthButton() {
 
   return (
     <>
-      {session?.user.isActive === "Y" && session?.user.userType === "B" && (
+      {session?.user?.isActive === "Y" && session?.user?.userType === "B" && (
         <a
           target="_blank"
           href={postProjectLink}
@@ -29,7 +29,7 @@ export default function AuthButton() {
           Post Your Project
         </a>
       )}
-      {(session?.user.isActive === "Y" || !session) && (
+      {(session?.user?.isActive === "Y" || !session) && (
         <a
           target="_blank"
           href={postListingLink}
@@ -80,7 +80,7 @@ function Dropdown() {
         {session ? (
           <button className="login-btn text-[20px] font-semibold px-5 py-2 rounded-full flex flex-row-reverse justify-center gap- items-center text-[#0073C6] border-none underline loginBg shadow-md">
             <Image width={30} height={30} alt="logout" src="/burger.svg" />{" "}
-            {session?.user.name}
+            {session?.user?.name}
           </button>
         ) : (
           <div className="login-btn text-[12px] sm:text-[20px] font-semibold px-5 py-2 rounded-full flex flex-row-reverse justify-center gap- items-center text-[#0073C6] border-none underline loginBg shadow-md">
@@ -110,7 +110,7 @@ function Dropdown() {
           >
             <>
               {data.map((item, index) =>
-                session.user.userType !== "B" &&
+                session.user?.userType !== "B" &&
                 item.label === "Post Project" ? null : (
                   <Menu.Item
                     key={index}
