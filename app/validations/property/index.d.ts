@@ -64,6 +64,10 @@ export interface Main {
   isBasement: "Y" | "N";
   noOfOpenSide: number;
 }
+export interface LIstingResponse {
+  listing:ListingDetails;
+  nearByLocations:any
+}
 
 export interface OtherPrice {
   [key: string]: string;

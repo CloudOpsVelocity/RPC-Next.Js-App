@@ -40,6 +40,8 @@ const Svg = (
     height="72"
     viewBox="0 0 6 72"
     fill="none"
+    className="h-[36px] xl:h-[54px] xl:w-[14px]"
+
   >
     <path
       d="M3 2.5L3 69.5"

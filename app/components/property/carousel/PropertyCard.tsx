@@ -14,7 +14,7 @@ import { useSetAtom } from "jotai";
 import { NearByDataAtom } from "@/app/store/nearby";
 import Button from "@/app/elements/button";
 import MainCarousel from "../../molecules/carousel/main";
-
+import { useMediaQuery } from "@mantine/hooks";
 type Props = {
   type: string;
   title: string;
@@ -69,6 +69,8 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
       projName: name,
     });
   };
+  const isMobile = useMediaQuery("(max-width: 601px)");
+
   return (
     <>
       <div
@@ -129,7 +131,7 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
 
             <div className=" right-2 absolute ">
               <button
-                className="mt-[-30px] rounded-[10px] relative bottom-[35px] z-10 p-[8px] text-[#0073C6] text-[18px] font-[700] flex pl-[4px] justify-center items-center bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100"
+                className="mt-[-30px] rounded-[10px] relative bottom-[35px] z-10 p-[4px] xl:p-[8px] text-[#0073C6] text-[14px] xl:text-[18px] font-[700] flex pl-[4px] justify-center items-center bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100"
                 onClick={(e) => {
                   e.preventDefault();
                   onAddingShortList(cardData.propIdEnc);
@@ -145,7 +147,7 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
 
           <div className="text-sm">
             {type != "proj" && (
-              <p className="text-[18px] font-[600] text-[#303030] mb-[8px] ">
+              <p className="mb-[6px] text-[#242424] text-[14px] sm:text-base not-italic font-semibold leading-[normal] tracking-[0.56px] ">
                 {cardData.bhkName} {cardData.propTypeName} for{" "}
                 {cardData.cg === "R" ? "Rent" : "Sale"} in {cardData.ltName},{" "}
                 <br />
@@ -198,9 +200,9 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
               </p>
             )}
             <Button
-              icon={<Phone />}
+              icon={isMobile ? null :<Phone />}
               title="Request  Callback"
-              buttonClass=" text-[#FFF] mt-[12px] text-[16px] font-[600] bg-[#0073C6] rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[6px]  "
+              buttonClass=" text-[#FFF] mt-[12px] text-[12px] xl:text-[16px] font-[600] bg-[#0073C6] rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[6px]  "
               onChange={handleReqCall}
             />
           </div>
@@ -224,14 +226,14 @@ const ProjectCarousel = ({
     data?.length > 0 && (
       <div className="w-[100%] mb-[5%]">
         <div className="w-[90%] mx-auto ">
-          <h2 className="text-[24px] lg:text-[32px] font-semibold uppercase cursor-pointer">
+          <h2 className="text-[#001F35] text-[18px] sm:text-[32px] not-italic font-semibold leading-[normal] uppercase mb-1 sm:mb-[14px]">
             {/* <span className="!text-green-600">SARANG BY SUMADHARA </span> */}
             {title}
             <span className="text-[#148B16] font-[700] uppercase ml-4 ">
               {projName}
             </span>
           </h2>
-          <p className="mt-3 mb-[44px]  text-[#4D6677] text-2xl italic font-medium leading-[normal] tracking-[0.96px]">
+          <p className="text-[#4D6677] text-[12px] sm:text-2xl italic font-medium leading-[normal] capitalize">
             {content}
           </p>
         </div>
@@ -240,7 +242,7 @@ const ProjectCarousel = ({
           {data &&
             data?.map((project: any, index: number) => {
               return (
-                <CarouselSlide>
+                <CarouselSlide className="!h-[480px] sm:!h-[500px]">
                   <PropertyCard
                     key={index}
                     type={type}

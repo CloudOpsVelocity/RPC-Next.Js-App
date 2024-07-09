@@ -38,10 +38,10 @@ import { Main } from "@/app/validations/property";
 import { formatDateDDMMYYYY } from "@/app/utils/date";
 import { generatePropertyDetails } from "@/app/data/property";
 const style = {
-  card: "mr-[3%] mb-[1%]  p-[2%] md:p-[1%] bg-white mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8] ",
+  card: "mr-[4%] mb-[1%]  p-[2%] md:p-[1%] bg-white mt-2 xl:mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8] ",
   heading: {
-    h1: "text-[#001F35] text-[28px] not-italic font-semibold uppercase mb-1",
-    p: "text-[16px] lg:text-[24px] font-[500] text-[#4D6677] italic mb-8 ",
+    h1: "text-[#001F35] text-[18px] sm:text-[32px] not-italic font-semibold leading-[normal] uppercase mb-1 sm:mb-[14px]",
+    p: "inline-flex  gap-2 sm:gap-[26px]  w-[90%] items-center mb-[20px] xl:mb-[40px] ",
   },
 };
 export default function RoomDetails({ data }: { data: Main }) {
@@ -56,7 +56,7 @@ export default function RoomDetails({ data }: { data: Main }) {
           data.propTypeName === "Plot" ? data.plotArea + " sq.ft" : ""
         } ${data.bhkName ?? ""} ${data.propTypeName} For
         ${data.cg === "S" ? " Sell" : " Rent"}`}
-        className="mb-[40px]"
+        className="mb-[10px] xl:mb-[40px]"
       />
       <UnitBlock data={data} />
 
@@ -69,7 +69,7 @@ export default function RoomDetails({ data }: { data: Main }) {
 }
 const RoomSection = ({ data }: { data: Main }) => {
   return (
-    <div className=" mb-[3%]  shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] pl-[53px] py-[39px]">
+    <div className=" mb-[3%]  shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] p-4 xl:pl-[53px] xl:py-[39px]">
       <h1 className={style.heading.h1}>Room Details</h1>
 
       <p className={style.heading.p}>
@@ -119,7 +119,7 @@ const Parking = ({ noocp, noobp, noccp, nocbp }: any) => {
   return (
     isAvail && (
       <div
-        className=" mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] px-[53px] py-[39px]"
+        className=" mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] p-4 xl:px-[53px] xl:py-[39px]"
         id="propertyDetails "
       >
         <h1 className={style.heading.h1}>Parking</h1>
@@ -202,7 +202,7 @@ const OtherDetails = ({
   ];
   return (
     <div
-      className=" mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] pl-[53px] py-[39px]"
+      className=" mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] p-4 xl:pl-[53px] xl:py-[39px]"
       id="propertyDetails "
     >
       <h1 className={style.heading.h1}>Other Details</h1>
@@ -239,7 +239,7 @@ const OtherDetails = ({
         )}
         {propTypeName !== "Plot" && (
           <RoomBasicDetails
-            icon={<Status />}
+            icon={<Status className="h-5 w-5" />}
             title="Availability Status"
             value={
               availablityStatus == "R" ? "Ready to Move" : "Under Construction"
@@ -358,7 +358,7 @@ const UnitBlock = ({ data }: { data: Main }) => {
   return (
     dto.length > 0 && (
       <div
-        className=" mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] pl-[53px] py-[39px]"
+        className=" mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] p-4 xl:pl-[53px] xl:py-[39px]"
         id="propertyDetails "
       >
         <h1 className={style.heading.h1}>Unit Details</h1>

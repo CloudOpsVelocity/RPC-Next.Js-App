@@ -64,7 +64,7 @@ function PFloorPlanModal({
               url={imageUrlParser(data.projMedia.floorPlanUrl, "F")}
             />
 
-            <Close close={close} />
+            <Close close={() => setOpened(false)} />
           </div>
         </div>
           {/* <div className="flex justify-center items-center gap-5 absolute right-20 -top-[50px] z-[1000]">

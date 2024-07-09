@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="w-full flex justify-between items-start flex-wrap flex-row ">
         <div className=" w-[100%]  lg:w-[30%] top-[64px] left-[104px] min-w-[202px] md:min-w-[402px] md:w-[60%] mb-[4%]">
           <Logo />
-          <p className=" top-[68px] left-0 [font-family:'Montserrat-Medium',Helvetica] font-medium text-[#666666] text-[24px] tracking-[0] leading-[36px]">
+          <p className=" top-[68px] left-0 [font-family:'Montserrat-Medium',Helvetica] font-medium text-[#666666] text-[18px] leading-[26px]  xl:text-[24px] tracking-[0] xl:leading-[36px]">
             We pride ourselves on delivering exceptional customer services &amp;
             building lasting relationships with our clients
           </p>
