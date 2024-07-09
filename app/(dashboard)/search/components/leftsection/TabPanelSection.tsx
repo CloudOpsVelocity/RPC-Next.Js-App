@@ -5,6 +5,7 @@ import { useIntersection } from "@mantine/hooks";
 import React, { useEffect, useRef } from "react";
 import useSearchFilters from "@/app/hooks/search";
 import ProjectCard from "../Card";
+
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
 };
@@ -15,19 +16,23 @@ export default function TabPanelSection({ mutate }: Props) {
     searchProps: { isLoading, data, hasNextPage, fetchMoreData, refetch },
     filters,
   } = useSearchFilters("project");
+
   const { ref, entry } = useIntersection({
     root: containerRef.current,
     threshold: 0.1,
   });
+
   useEffect(() => {
+    console.log("Intersection entry:", entry);
     if (entry?.isIntersecting && hasNextPage) {
       fetchMoreData();
     }
   }, [entry?.isIntersecting, hasNextPage, fetchMoreData]);
+
   return TabSectionData.map((item) => (
     <Tabs.Panel value={item} key={item}>
       <div
-        className=" p-[2%] max-h-[700px] overflow-y-auto h-screen "
+        className="p-[2%] max-h-[700px] overflow-y-auto h-screen"
         ref={containerRef}
       >
         {isLoading ? (
@@ -45,10 +50,10 @@ export default function TabPanelSection({ mutate }: Props) {
             );
           })
         ) : (
-          <div className="flex w-full h-full justify-center items-center flex-col ">
+          <div className="flex w-full h-full justify-center items-center flex-col">
             {emptyFilesIcon}
-            No Matching Results Found !
-            <span className="relative left-[10%] ">{strikeIconIcon}</span>
+            No Matching Results Found!
+            <span className="relative left-[10%]">{strikeIconIcon}</span>
           </div>
         )}
         {hasNextPage && (
