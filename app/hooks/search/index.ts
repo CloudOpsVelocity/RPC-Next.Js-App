@@ -296,6 +296,7 @@ export default function useSearchFilters(
     cacheTime: 300000,
     staleTime: 30000,
   });
+  console.log(data);
   const fetchMoreData = () => {
     if (!hasNextPage || isFetchingNextPage) return;
     fetchNextPage();

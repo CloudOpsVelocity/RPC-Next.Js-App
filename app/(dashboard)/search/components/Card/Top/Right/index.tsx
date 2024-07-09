@@ -16,7 +16,6 @@ export default function TopRightSection({
   onAddingShortList,
   compareAdded,
 }: Props) {
-  console.log(compareAdded);
   const setSelected = useSetAtom(selectedSearchAtom);
   return (
     <div className="mr-3 my-2 flex justify-between flex-col items-end">

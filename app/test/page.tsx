@@ -32,6 +32,39 @@ export default function LoginPage() {
   // console.log(str.at(0));
   // console.log(str.charAt(0));
   // console.log(str.at(0));
+
+  let arr = [
+    {
+      mID: 1,
+      name: "Metadata ",
+      dataType: "Text",
+      required: true,
+      choices: ["Choice ", "Choice "],
+    },
+
+    {
+      mID: 3,
+      name: "Metadata ",
+      dataType: "Text",
+      required: true,
+      choices: ["Choice ", "Choice "],
+    },
+    {
+      mID: 3,
+      name: "Metadata ",
+      dataType: "Text",
+      required: true,
+      choices: ["Choice ", "Choice "],
+    },
+    {
+      mID: 3,
+      name: "Metadata ",
+      dataType: "Text",
+      required: true,
+      choices: ["Choice ", "Choice "],
+    },
+  ];
+
   return (
     <section className="py-10 bg-gray-50 sm:py-16 lg:py-24">
       <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
@@ -245,8 +278,6 @@ const customEndsWith = (str: string, endWith: string) => {
   return true;
 };
 
-const customIncludes = (str:string,word:string) => {
-  for(let i = 0;i < str.length;i++){
-     
-  }
-}
+const customIncludes = (str: string, word: string) => {
+  for (let i = 0; i < str.length; i++) {}
+};
