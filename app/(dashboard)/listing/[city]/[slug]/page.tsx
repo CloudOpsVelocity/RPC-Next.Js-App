@@ -7,7 +7,7 @@ import FaqWithBg from "@/app/components/project/faq";
 import About from "@/app/components/project/about";
 import Navigation from "@/app/components/property/Navigation";
 import Link from "next/link";
-import { getProjectDetails } from "@/app/utils/api/property";
+import { getProjectDetails, getReportConstData } from "@/app/utils/api/property";
 import ProjectDrawer from "@/app/components/project/Drawer";
 import RoomDetails from "@/app/components/property/RoomDetails";
 import PropertyOverView from "@/app/components/property/Overview";
@@ -29,11 +29,15 @@ import CompareError from "@/app/components/property/actions/Error";
 import NearByCarouselProjProperty from "@/app/components/property/carousel/ProjectCarouse";
 import axios from "axios";
 import { getAmenties } from "@/app/utils/api/project";
+import { Query, useQuery } from "react-query";
+import { queryClient } from "@/app/utils/query";
 
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
   const { listing: data, nearByLocations } = await getListingDetails(slug);
   const projData = await getProjectDetails(data.projIdEnc);
+const issueData = await getReportConstData()
+console.log(issueData)
   const TITLE_OF_PROP = data.projIdEnc
     ? data.propName
     : `${data.bhkName ?? ""} ${data.propTypeName} For
@@ -68,7 +72,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           />
         </MobileHidden>
         {/* Overview */}
-        <PropertyOverView data={data} />
+        <PropertyOverView data={data} issueData={issueData.propReport} />
         {/* About */}
         {data.usp && (
           <About

@@ -1,8 +1,10 @@
 import React from "react";
 import ReportModal from "./Modal";
 
-type Props = {};
+type Props = {
+  issueData:any
+};
 
-export default function ReportSectionProperty({}: Props) {
-  return <ReportModal />;
+export default function ReportSectionProperty({issueData}: Props) {
+  return <ReportModal issueData={issueData} />;
 }

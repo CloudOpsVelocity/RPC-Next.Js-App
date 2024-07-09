@@ -11,8 +11,8 @@ import ShortList from "./actions/shortList";
 import Message from "./actions/Message";
 import ReportSectionProperty from "./actions/Report";
 
-export default function PropertyOverView({ data }: { data: Main }) {
-  return (
+export default function PropertyOverView({ data, issueData }: { data: Main, issueData:any }) {
+  return(
     <div
       className="pt-[2%] scroll-mt-[220px] w-[90%] rounded-[24px] shadow-md mb-[5%] mt-[2%] bg-gradient-to-r from-[#F6F6F6] /0 via-[#FFF] /45 to-[#FEFFFF]/100 "
       id="overview"
@@ -59,7 +59,8 @@ export default function PropertyOverView({ data }: { data: Main }) {
           ))}
         </div>
         <div className=" flex justify-start md:justify-end items-start md:items-end flex-col mt-[3%] md:mt-0 relative pb-10">
-          <ReportSectionProperty />
+          <ReportSectionProperty
+           issueData={issueData} />
           <ShortList {...data} />
           <CompareList {...data} />
           <Message {...data} />

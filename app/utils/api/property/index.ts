@@ -1,5 +1,6 @@
 import { LIstingResponse, Main } from "@/app/validations/property";
 import { Main as M } from "@/app/validations/types/project";
+import axios from "axios";
 
 const getProjectDetails = async (slug: string): Promise<M | any> => {
   if (slug) {
@@ -36,4 +37,8 @@ const getNearByLocations = async (slug: string): Promise<any> => {
   console.log(data);
   return data;
 };
-export { getProjectDetails, getListingDetails, getNearByLocations };
+const getReportConstData= async ()=>{
+  const res= await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/common/getConstantList`,["propReport"])
+  return res.data
+}
+export { getProjectDetails, getListingDetails, getNearByLocations,getReportConstData };
