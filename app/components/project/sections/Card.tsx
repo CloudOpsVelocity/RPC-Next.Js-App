@@ -20,7 +20,7 @@ export default function Card(data: any) {
           {config.icons.superBuildup} Super Builtup Area: {data.sba} sq.ft
         </p>
         <p className="text-[#242424] text-xs not-italic font-semibold">
-          {data.unitType} | Apartment
+          {data.unitType} | {data.type}
         </p>
       </div>
     </div>

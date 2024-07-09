@@ -5,6 +5,7 @@ import React from "react";
 type Props = {};
 
 export default function InfoCard(data: any) {
+  console.log(data);
   return (
     <div
       className={clsx(
@@ -23,11 +24,19 @@ export default function InfoCard(data: any) {
         </div>
       </div>
       <p className="text-[#242424] text-base not-italic font-medium inline-flex gap-2">
-        {config.icons.superBuildup} Super Builtup Area:
+        {config.icons.superBuildup}{" "}
+        {data.propCgId === 32 ? "Plot" : "Super Builtup"} Area:{" "}
+        {data.propCgId === 32 && (
+          <span className="text-[#001F35] text-base not-italic font-semibold">
+            {`${data.plotArea} sq.ft`}
+          </span>
+        )}
       </p>
-      <p className="text-[#001F35] text-base not-italic font-semibold">
-        {data.minSba} sq.ft - {data.maxSba} sq.ft
-      </p>
+      {data.propCgId !== 32 && (
+        <p className="text-[#001F35] text-base not-italic font-semibold">
+          {`${data.minSba} sq.ft - ${data.maxSba} sq.ft`}
+        </p>
+      )}
     </div>
   );
 }

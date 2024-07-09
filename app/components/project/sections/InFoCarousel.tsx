@@ -45,6 +45,7 @@ export default function InFoCarousel({ partialUnitData }: Props) {
               active: selected === index,
               ...data[item],
               label: item,
+              propCgId: propCgId,
             }}
             cardClick={() => handleCardClick(index)}
           />

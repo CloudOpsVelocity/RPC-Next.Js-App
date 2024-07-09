@@ -71,6 +71,7 @@ export default function CardCarousel({ partialUnitData }: Props) {
                   })
                 }
                 {...item}
+                type={propDetails?.name}
               />
             </Carousel.Slide>
           ))}

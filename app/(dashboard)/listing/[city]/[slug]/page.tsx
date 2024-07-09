@@ -27,7 +27,6 @@ import { ARROW_ICON } from "@/app/config/llisting";
 import { bhkDetailsMap } from "@/app/data/projectDetails";
 import CompareError from "@/app/components/property/actions/Error";
 import NearByCarouselProjProperty from "@/app/components/property/carousel/ProjectCarouse";
-import axios from "axios";
 
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
