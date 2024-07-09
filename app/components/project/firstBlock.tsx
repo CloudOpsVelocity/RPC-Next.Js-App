@@ -43,7 +43,7 @@ const FirstBlock: React.FC<Props> = ({
     if (element) {
       element.scrollIntoView({
         behavior: "smooth",
-        block: "start", // Adjust this value to add more space from the top
+        block: "start",
         inline: "center",
       });
 

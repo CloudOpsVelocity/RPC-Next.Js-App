@@ -6,10 +6,9 @@ type Props = {
 };
 
 export default function HeartButton({ shortListed, onAddingShortList }: Props) {
-  const isShorlisted = shortListed === "Y";
   return (
     <button className="absolute right-2" onClick={onAddingShortList}>
-      {isShorlisted ? config.isTrueIcon : config.heartIcon}
+      {shortListed ? config.isTrueIcon : config.heartIcon}
     </button>
   );
 }

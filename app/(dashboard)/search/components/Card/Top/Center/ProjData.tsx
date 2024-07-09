@@ -14,16 +14,14 @@ export default function ProjData({
   builderName,
   shortListed,
   onAddingShortList,
+  Sh,
 }: Props) {
   return (
     <div>
       {" "}
       <p className="text-[#148B16] text-xl not-italic font-bold relative">
         {formatCurrency(Number(minPrice))} - {formatCurrency(Number(maxPrice))}{" "}
-        <HeartButton
-          shortListed={shortListed}
-          onAddingShortList={onAddingShortList}
-        />
+        <HeartButton shortListed={Sh} onAddingShortList={onAddingShortList} />
       </p>
       <p className="text-[#001F35] text-[18px] not-italic font-semibold">
         {projName}{" "}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "@/app/elements/button";
 import { GradientLocation, Phone, ReraIcon } from "@/app/images/commonSvgs";
 import { Search } from "@/app/validations/types/search";
@@ -22,7 +22,7 @@ type Props = {
 } & Search &
   any;
 
-const MainBox = ({ data, refetch }: Props) => {
+const MainBox = ({ data, refetch, index, mutate }: Props) => {
   const {
     type,
     projName,
@@ -56,6 +56,10 @@ const MainBox = ({ data, refetch }: Props) => {
     compareAdded,
     shortListed,
   } = data;
+  const [state, setState] = useState({
+    compareAdded: compareAdded === "Y" ? true : false,
+    shortListed: shortListed === "Y" ? true : false,
+  });
   const { data: session } = useSession();
   const [, { open: openLogin }] = usePopShortList();
   const { toggleShortlist, shortlistedItems, compareItems, toggleCompare } =
@@ -64,9 +68,10 @@ const MainBox = ({ data, refetch }: Props) => {
 
   const onAddingShortList = () => {
     if (session) {
+      setState({ ...state, shortListed: !state.shortListed });
       toggleShortlist({
         id: reqId,
-        status: compareAdded == "Y" ? "N" : "Y",
+        status: state.shortListed ? "N" : "Y",
         source: type,
       });
     } else {
@@ -76,22 +81,28 @@ const MainBox = ({ data, refetch }: Props) => {
 
   const onAddingCompare = () => {
     if (session) {
+      setState({ ...state, compareAdded: !state.compareAdded });
       toggleCompare({
         id: reqId,
-        status: shortListed == "Y" ? "N" : "Y",
+        status: state.compareAdded ? "N" : "Y",
         source: type,
       });
     } else {
       openLogin(() => refetch());
     }
   };
+  const newData = {
+    ...data,
+    Com: state.compareAdded,
+    Sh: state.shortListed,
+  };
 
   return (
     <div className="h-[259px] self-stretch rounded border shadow-[0px_4px_30px_0px_rgba(74,82,113,0.20)] border-solid border-[#A4B8D4]">
       <div className="flex justify-between">
         <LeftSection src={coverUrl ?? coverImage} rera={rerastatus} />
-        <CenterTop data={data} onAddingShortList={onAddingShortList} />
-        <TopRightSection {...data} onAddingCompare={onAddingCompare} />
+        <CenterTop data={newData} onAddingShortList={onAddingShortList} />
+        <TopRightSection {...newData} onAddingCompare={onAddingCompare} />
       </div>
       <CardDownSection
         a={data.agentListing}

@@ -9,7 +9,7 @@ import { Search } from "@/app/validations/types/search";
 import { useAtom, useSetAtom } from "jotai";
 import { usePathname } from "next/navigation";
 import { useQueryStates, parseAsString, parseAsInteger } from "nuqs";
-import { useInfiniteQuery } from "react-query";
+import { useInfiniteQuery, useMutation, useQueryClient } from "react-query";
 const paramsInit = {
   projStatus: parseAsString,
   localities: parseAsString,
@@ -295,7 +295,40 @@ export default function useSearchFilters(
     cacheTime: 300000,
     staleTime: 30000,
   });
-  console.log(data);
+  const updateItem = async () => {
+    console.log("api done");
+  };
+  const queryClient = useQueryClient();
+  // useMutation hook with optimistic updates
+  const { mutate } = useMutation(updateItem, {
+    onMutate: async ({ type, index }: { type: string; index: number }) => {
+      await queryClient.cancelQueries([
+        "srptest" + convertToQueryParams(params as any) + value,
+      ]);
+
+      const previousData = queryClient.getQueryData([
+        "srptest" + convertToQueryParams(params as any) + value,
+      ]);
+
+      const pageIndex = Math.floor(index / 20);
+      // @ts-ignore
+      const updatedData = { ...previousData };
+      const item = updatedData.pages[pageIndex][index];
+      const currentStatus =
+        item[type === "shortlist" ? "shortListed" : "compareAdded"];
+      const newStatus = currentStatus === "Y" ? "N" : "Y";
+
+      item[type === "shortlist" ? "shortListed" : "compareAdded"] = newStatus;
+      queryClient.setQueryData(
+        ["srptest" + convertToQueryParams(params as any) + value],
+        updatedData
+      );
+
+      return { previousData };
+    },
+    onError: () => {},
+    onSettled: () => {},
+  });
   const fetchMoreData = () => {
     if (!hasNextPage || isFetchingNextPage) return;
     fetchNextPage();
@@ -332,6 +365,7 @@ export default function useSearchFilters(
       fetchMoreData,
       hasNextPage,
       refetch,
+      mutate,
     },
     setFilters,
     remnoveSearchOptions,

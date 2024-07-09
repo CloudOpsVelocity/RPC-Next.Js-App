@@ -10,7 +10,7 @@ import LoginPopup from "@/app/components/project/modals/LoginPop";
 const LeftSideBlock = () => {
   const [opned, { close, source }] = useReqCallPopup();
   const {
-    searchProps: { isLoading, data, hasNextPage, fetchMoreData },
+    searchProps: { isLoading, data, hasNextPage, fetchMoreData, mutate },
     handleAppliedFilters,
     filters,
     params,
@@ -48,7 +48,7 @@ const LeftSideBlock = () => {
         defaultValue="proj"
       >
         <TabList />
-        <TabPanelSection />
+        <TabPanelSection mutate={mutate} />
       </Tabs>
       <RequestCallBackModal
         close={close}

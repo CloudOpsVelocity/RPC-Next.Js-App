@@ -5,15 +5,16 @@ import { useIntersection } from "@mantine/hooks";
 import React, { useEffect, useRef } from "react";
 import useSearchFilters from "@/app/hooks/search";
 import ProjectCard from "../Card";
-type Props = {};
+type Props = {
+  mutate?: ({ index, type }: { type: string; index: number }) => void;
+};
 
-export default function TabPanelSection({}: Props) {
+export default function TabPanelSection({ mutate }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const {
     searchProps: { isLoading, data, hasNextPage, fetchMoreData, refetch },
     filters,
   } = useSearchFilters("project");
-  console.log(data);
   const { ref, entry } = useIntersection({
     root: containerRef.current,
     threshold: 0.1,
@@ -38,6 +39,8 @@ export default function TabPanelSection({}: Props) {
                 key={index}
                 refetch={refetch}
                 data={{ ...eachOne, type: filters.listedBy ?? "proj" }}
+                index={index}
+                mutate={mutate}
               />
             );
           })
