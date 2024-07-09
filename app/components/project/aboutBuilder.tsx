@@ -25,7 +25,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
     >
       <div>
         <div className=" gap-[26px] justify-start  w-[100%] items-center">
-          <h1 className=" text-[#242424] text-h2 sm:text-[24px] lg:text-[32px] font-[700] mb-4 ">
+          <h1 className=" text-[#242424] text-h2 sm:text-[24px] lg:text-[32px] font-[700] mb-2 xl:mb-4 ">
             About Builder
           </h1>
 
@@ -52,19 +52,19 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
 
         <div className="sm:rounded-[20px] mt-[1%] flex justify-between items-center bg-[#FFF] shadow-md w-[100%] mb-[2%] lg:w-[50%] p-[1%] ">
           <div className="w-[30%] border-solid border-[#92B2C8] border-r-[1px]">
-            <p className=" text-[#202020] sm:text-[20px] lg:text-[24px] font-[600]">
+            <p className=" text-[#202020]  text-[10px] sm:text-[20px] lg:text-[24px] font-[600]">
               {nzData.newProject}
             </p>
-            <p className=" text-[#148B16] text-[12px] sm:text-[16px] lg:text-[20px] font-[700]">
+            <p className=" text-[#148B16]  text-[10px]  xl:text-[12px] sm:text-[16px] lg:text-[20px] font-[700]">
               New Launch {`Project${nzData.newProject > 1 ? "s" : ""}`}
             </p>
           </div>
 
           <div className="w-[30%] border-solid border-[#92B2C8] border-r-[1px]">
-            <p className=" text-[#202020] sm:text-[20px] lg:text-[24px] font-[600]">
+            <p className=" text-[#202020]  text-[10px] sm:text-[20px] lg:text-[24px] font-[600]">
               {nzData.onGoingProject}
             </p>
-            <p className=" text-[#001F35] text-[12px] sm:text-[16px] lg:text-[20px] font-[700]">
+            <p className=" text-[#001F35] text-[10px] sm:text-[16px] lg:text-[20px] font-[700]">
               Ongoing {`Project${nzData.onGoingProject > 1 ? "s" : ""}`}
             </p>
           </div>
@@ -73,7 +73,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
             <p className=" text-[#202020] sm:text-[20px] lg:text-[24px] font-[600]">
               {nzData.completedProject}
             </p>
-            <p className=" text-[#E3AC00] text-[12px] sm:text-[16px] lg:text-[20px] font-[700]">
+            <p className=" text-[#E3AC00] text-[10px] sm:text-[16px] lg:text-[20px] font-[700]">
               Completed {`Project${nzData.completedProject > 1 ? "s" : ""}`}
             </p>
           </div>

@@ -27,15 +27,18 @@ import { ARROW_ICON } from "@/app/config/llisting";
 import { bhkDetailsMap } from "@/app/data/projectDetails";
 import CompareError from "@/app/components/property/actions/Error";
 import NearByCarouselProjProperty from "@/app/components/property/carousel/ProjectCarouse";
+import axios from "axios";
+import { getAmenties } from "@/app/utils/api/project";
 
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
-  const data = await getListingDetails(slug);
+  const { listing: data, nearByLocations } = await getListingDetails(slug);
   const projData = await getProjectDetails(data.projIdEnc);
   const TITLE_OF_PROP = data.projIdEnc
     ? data.propName
     : `${data.bhkName ?? ""} ${data.propTypeName} For
   ${data.cg === "S" ? " Sell" : " Rent"} In ${data.ltName}`;
+  const amenitiesFromDB = await getAmenties();
   if (!data.propIdEnc) {
     notFound();
   }
@@ -43,12 +46,12 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
     <div className="w-full">
       <div className="mt-[90px] w-full pb-[2%] flex items-center justify-center flex-col">
         <div className="pb-[2%] px-[2%] w-[94.3%]">
-          <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%] inline-flex items-center">
-            <span>Home</span> {ARROW_ICON}
+          <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%]">
+            <span>Home</span> {" > "}
             <Link href={"/project/banglore"} className="text-nowrap">
               <span>Property In {data.ctName}</span>
             </Link>{" "}
-            {ARROW_ICON}
+            {" > "}
             <span className="text-nowrap">
               {data.bhkName} {data.propTypeName} In {data.ltName}
             </span>
@@ -97,9 +100,10 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           <Amenties
             projName="Listing"
             type="prop"
-            data={data?.amenities?.map((item) => {
+            data={data?.amenities?.map((item: any) => {
               return { id: item, name: String(item) };
             })}
+            amenitiesFromDB={amenitiesFromDB}
           />
         )}
 
@@ -111,6 +115,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
               projName={data.propName}
               projId={data.projIdEnc}
               type="prop"
+              mapData={nearByLocations}
             />
             {/* {data.postedById === projData.builderId && ( */}
             <>

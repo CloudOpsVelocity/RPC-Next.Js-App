@@ -11968,7 +11968,7 @@ export const OwnerShip = () => {
   );
 };
 
-export const Status = () => {
+export const Status = ({className}:{className?:string}) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -11976,6 +11976,7 @@ export const Status = () => {
       height="32"
       viewBox="0 0 32 32"
       fill="none"
+      className={className}
     >
       <g clip-path="url(#clip0_2012_61131)">
         <path

@@ -27,7 +27,7 @@ export default function ProjectLoans({
         <PropertyHeading
           title="BANK APPROVALS OF"
           desc="Unlock Your Dream Home with Hassle-Free Bank Approval Loans"
-          className="mb-[40px]"
+          className="mb-[10px] xl:mb-[40px]"
         />
       ) : (
         <>

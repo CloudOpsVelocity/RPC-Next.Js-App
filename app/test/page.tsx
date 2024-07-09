@@ -23,10 +23,9 @@ export default function LoginPage() {
       alert("Login failed");
     }
   };
-  const str = "hello world";
-  console.log(str.includes("world"));
-  // console.log(customEndsWith(str, "rld"));
-  // console.log(customAddInStr(str, " vicky", " manish"));
+  const str = " m     ";
+  console.log(str.length);
+  console.log(str.endsWith(""));
   // console.log(str);
   // console.log(str.length);
   // console.log(str.at(0));

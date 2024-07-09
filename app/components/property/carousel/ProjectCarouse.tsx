@@ -36,7 +36,7 @@ export default function NearByCarouselProjProperty({
     >
       <ProjectCarousel
         type="proj"
-        title={`Other Projects By ${builderData?.data.userName}`}
+        title={`Other Projects By ${builderData?.data?.userName}`}
         content="See what builder has posted"
         projName={""}
         data={

@@ -16,7 +16,7 @@ const Link: FC<ButtonProps> = ({
   ...rest
 }) => {
   const baseClasses =
-    "inline-flex justify-center items-center gap-2.5 rounded p-2.5  text-white text-2xl font-bold";
+    "inline-flex justify-center items-center gap-2.5 rounded p-2 xl:p-2.5  text-white text-[12px] xl:text-2xl font-bold";
   const variantClasses = clsx({
     "bg-[#0073c6]": variant === "blue",
     "bg-green-500": variant === "green",

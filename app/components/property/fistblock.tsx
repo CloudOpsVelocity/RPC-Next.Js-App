@@ -59,9 +59,9 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
       {projectDetails && (
         <>
           <div className="absolute m-[2%] z-10 right-2">
-            <p className="shadow-md rounded-[10px] bg-gradient-to-r p-[8px] from-[#EFF5FF] /0  to-[#F2FAFF]/100 text-[#000] text-[14px] sm:text-[16px] md:text-xl not-italic font-medium leading-[normal]">
+            <p className="shadow-md rounded-[10px] bg-gradient-to-r p-[8px] from-[#EFF5FF] /0  to-[#F2FAFF]/100 text-[#000] text-[12px] sm:text-[16px] md:text-xl not-italic font-medium leading-[normal]">
               Listing Status:{" "}
-              <span className="text-[#148B16] text-[14px] sm:text-[16px]   md:text-xl not-italic font-bold">
+              <span className="text-[#148B16] text-[12px] sm:text-[16px]   md:text-xl not-italic font-bold leading-[normal]">
                 {" "}
                 {projectDetails.availablityStatus === "U"
                   ? "Under Construction"
@@ -69,7 +69,7 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
               </span>{" "}
             </p>
             <div className="mt-4">
-              <SharePopup title="Share Listing" className="text-xl" />
+            <SharePopup title="Share Listing" className="text-sm p-[4px]  sm:text-xl hidden sm:flex" />
             </div>
           </div>
           <div className="relative w-full !rounded-[10px]">
@@ -90,14 +90,14 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
                 <Carousel.Slide
                   key={index}
                   className="relative"
-                  h={750}
+                 /*  h={750} */
                   w={"auto"}
                 >
                   <Image
                     alt="project image"
                     src={imageUrl}
                     fill
-                    className={`!w-full !rounded-[10px]  h-[330px] lg:h-[750px] bg-gray-${
+                    className={`!w-full sm:!rounded-[10px]  h-[330px] lg:h-[750px] bg-gray-${
                       index + 1
                     }`}
                     quality={100}
@@ -106,10 +106,22 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
               ))}
             </Carousel>
           </div>
-          <div className="absolute bottom-0 m-[2%] z-10 w-[95%] self-center justify-between items-start flex-col md:flex-row border-solid border-white-500 rounded-[10px] bg-gradient-to-r from-[#EFEFEF] /20 to-[#c3c3c3bd]/80 shadow-md flex">
+          <div className="sm:absolute bottom-0  sm:m-[2%] z-10 sm:w-[95%] self-center justify-between items-start flex-col md:flex-row border-solid border-white-500 sm:rounded-[10px] bg-gradient-to-r from-[#EFEFEF] /20 to-[#c3c3c3bd]/80 shadow-md  sm:flex ">
             <div className=" w-full md:w-[60%]">
-              <div className={`ml-[2%] mt-8`}>
-                <h3 className="text-[24px] lg:text-[32px] font-[700] text-[#00487C] capitalize ">
+              <div className={`ml-[2%] mt-1 sm:mt-10 mb-[7px]`}>
+              <div className="flex justify-between items-start">
+                  <h3 className="text-[22px] sm:text-[24px] lg:text-[28px] font-[700] text-[#001F35] ">
+                  <span className="lowercase">
+                    {projectDetails.propTypeName === "Plot"
+                      ? projectDetails.plotArea + " sq.ft"
+                      : ""}
+                  </span>{" "}
+                  {projectDetails.bhkName} {projectDetails.propTypeName} For{" "}
+                  {projectDetails.cg === "S" ? " Sell" : " Rent"} In{" "}
+                  {projectDetails.ltName}                  </h3>
+                  <SharePopup className="text-sm p-[2px] mr-2 mt-[2px] sm:hidden " />
+                </div>
+               {/*  <h3 className="text-[24px] lg:text-[32px] font-[700] text-[#00487C] capitalize ">
                   <span className="lowercase">
                     {projectDetails.propTypeName === "Plot"
                       ? projectDetails.plotArea + " sq.ft"
@@ -118,15 +130,15 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
                   {projectDetails.bhkName} {projectDetails.propTypeName} For{" "}
                   {projectDetails.cg === "S" ? " Sell" : " Rent"} In{" "}
                   {projectDetails.ltName}
-                </h3>
+                </h3> */}
                 <p className="text-[#001F35] text-2xl not-italic font-semibold mt-1 capitalize">
                   {projName}
                 </p>
-                <p className="text-[#202020] text-[22px] not-italic font-medium capitalize mt-2 ">
+                <p className="text-[#242424]  text-sm sm:text-[22px] not-italic font-[600] leading-[normal] w-[100%] tracking-[0.32px] capitalize mt-[14px] ">
                   {`${projectDetails.address}, ${projectDetails.ltName}, ${projectDetails.ctName}, ${projectDetails?.stateName}, ${projectDetails.pinCode}`}
                 </p>
 
-                <p className=" mt-[7px] mb-[7px] text-[#001F35] text-2xl not-italic font-semibold">
+                <p className=" text-sm sm:text-[16px] mt-[8px] lg:text-[22px] font-[600] text-[#242424]">
                   Available From:
                   <span className="font-[600] text-[#202020]">
                     {" "}
@@ -136,7 +148,7 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
               </div>
             </div>
             <div className="w-full md:w-[40%] flex justify-between md:items-end flex-col p-[2%]">
-              <h2 className="text-[20px] md:text-[28px] lg:text-[32px] font-[700] text-[#001F35]">
+              <h2 className="inline-flex md:text-[28px] lg:text-[32px] font-semibold sm:font-[700] text-[#001F35]">
                 {`${formatCurrency(projectDetails.price)}${
                   projectDetails.cg === "R" ? " / Month" : ""
                 }`}{" "}
@@ -153,10 +165,10 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
                   /- Price per sqft onwards
                 </p>
               )}
-              <p className="text-[#001F35] text-xl not-italic font-semibold leading-[normal] ">
+              <p className="text-[#242424] sm:text-2xl not-italic font-semibold leading-[normal] mt-[8px]">
                 Posted By: {projectDetails.postedByName}
               </p>
-              <p className="mb-[13px] font-bold">
+              <p className="mb-[13px] font-bold ">
                 {get_posted_by(projectDetails.postedByType)}
               </p>
               <p

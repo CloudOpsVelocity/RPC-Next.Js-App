@@ -22,7 +22,7 @@ export default function Message({ cg, propTypeName }: any) {
     (data?.compareAdded || data?.shortListed) && (
       <div
         className={clsx(
-          "inline-flex items-center gap-2 p-1.5 rounded-lg bg-[#fff5c3] absolute -bottom-5 right-0 text-nowrap",
+          "inline-flex  mt-3 items-center gap-2 p-1.5 rounded-lg bg-[#fff5c3] lg:absolute -bottom-5 right-0 xl:text-nowrap",
           data?.compareAdded && data?.shortListed && "md:min-w-[670px]"
         )}
       >
@@ -46,12 +46,12 @@ export default function Message({ cg, propTypeName }: any) {
             stroke-linecap="round"
           />
         </svg>{" "}
-        <span className="text-[#242424] text-lg not-italic font-medium leading-[normal]">
+        <span className="text-[#242424] text-[14px] xl:text-[20px] ml-3 xl:ml-0 xl:text-lg not-italic font-medium leading-[normal]">
           Please check your{" "}
           <a
             href={"/my-profile"}
             target="_blank"
-            className="!text-[#0073C6] text-lg italic font-semibold leading-[normal] !underline"
+            className="!text-[#0073C6]  text-[14px] xl:text-lg italic font-semibold leading-[normal] !underline"
           >
             Dashboard
           </a>
