@@ -90,12 +90,8 @@ const MainBox = ({ data, refetch }: Props) => {
     <div className="h-[259px] self-stretch rounded border shadow-[0px_4px_30px_0px_rgba(74,82,113,0.20)] border-solid border-[#A4B8D4]">
       <div className="flex justify-between">
         <LeftSection src={coverUrl ?? coverImage} rera={rerastatus} />
-        <CenterTop data={data} />
-        <TopRightSection
-          {...data}
-          onAddingCompare={onAddingCompare}
-          onAddingShortList={onAddingShortList}
-        />
+        <CenterTop data={data} onAddingShortList={onAddingShortList} />
+        <TopRightSection {...data} onAddingCompare={onAddingCompare} />
       </div>
       <CardDownSection
         a={data.agentListing}

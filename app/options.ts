@@ -38,7 +38,12 @@ export const options: NextAuthOptions = {
           );
           console.log(res.data);
           if (res.data.status) {
-            // cookies().set("token", res.data.token);
+            cookies().set("token", res.data.token, {
+              maxAge: 365 * 24 * 60 * 60,
+              secure: true,
+              httpOnly: true,
+              path: "/",
+            });
             console.log(res.data);
             return {
               ...res.data,
@@ -71,11 +76,11 @@ export const options: NextAuthOptions = {
   },
   session: {
     strategy: "jwt",
-    maxAge: 1000 * 24 * 60 * 60,
+    maxAge: 365 * 24 * 60 * 60,
   },
   jwt: {
     secret: process.env.NEXTAUTH_SECRET,
-    maxAge: 1000 * 24 * 60 * 60,
+    maxAge: 365 * 24 * 60 * 60,
   },
 
   callbacks: {

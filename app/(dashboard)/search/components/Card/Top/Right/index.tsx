@@ -13,7 +13,6 @@ export default function TopRightSection({
   lat,
   lang,
   onAddingCompare,
-  onAddingShortList,
   compareAdded,
 }: Props) {
   const setSelected = useSetAtom(selectedSearchAtom);

@@ -1,11 +1,14 @@
 import React from "react";
 
-type Props = { shortListed: string };
+type Props = {
+  shortListed: string;
+  onAddingShortList: () => void;
+};
 
-export default function HeartButton({ shortListed }: Props) {
+export default function HeartButton({ shortListed, onAddingShortList }: Props) {
   const isShorlisted = shortListed === "Y";
   return (
-    <button className="absolute right-2">
+    <button className="absolute right-2" onClick={onAddingShortList}>
       {isShorlisted ? config.isTrueIcon : config.heartIcon}
     </button>
   );

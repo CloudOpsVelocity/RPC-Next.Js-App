@@ -13,13 +13,17 @@ export default function ProjData({
   locality,
   builderName,
   shortListed,
+  onAddingShortList,
 }: Props) {
   return (
     <div>
       {" "}
       <p className="text-[#148B16] text-xl not-italic font-bold relative">
         {formatCurrency(Number(minPrice))} - {formatCurrency(Number(maxPrice))}{" "}
-        <HeartButton shortListed={shortListed} />
+        <HeartButton
+          shortListed={shortListed}
+          onAddingShortList={onAddingShortList}
+        />
       </p>
       <p className="text-[#001F35] text-[18px] not-italic font-semibold">
         {projName}{" "}
