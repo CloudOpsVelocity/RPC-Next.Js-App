@@ -21,6 +21,8 @@ import { formatDateDDMMYYYY } from "@/app/utils/date";
 import LoginPopup from "./modals/LoginPop";
 import Message from "./actions/Message";
 import SharePopup from "../atoms/SharePopup";
+import ReportButton from "./actions/Report/button";
+import ReportSection from "./actions/Report";
 
 export default function Overview({
   maxPrice,
@@ -158,6 +160,7 @@ export default function Overview({
             )}
         </div>
         <div className=" flex justify-start md:justify-end items-start md:items-end flex-col mt-[3%] md:mt-0 relative pb-2 sm:pb-10">
+          <ReportSection />
           <ShortList />
           <CompareList />
           <Message />
