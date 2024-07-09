@@ -8,7 +8,9 @@ import Styles from "@/app/styles/Qna.module.css";
 import { useParams } from "next/navigation";
 import Close from "@/app/components/project/button/close";
 import { ReportSuccesssMessage } from "@/app/components/project/success";
-export default function ReportModal() {
+import ReportOptions from "./reportOptions";
+
+export default function ReportModal({issueData}:any) {
   const { slug } = useParams<{ slug: string }>();
   const [opened, { open, close }] = useDisclosure(false);
   const [status, setStatus] = useState<
@@ -47,6 +49,7 @@ export default function ReportModal() {
       <Modal
         opened={opened}
         onClose={close}
+        size={"60%"}
         centered
         {...(status === "success" && {
           classNames: {
@@ -59,12 +62,13 @@ export default function ReportModal() {
             body: Styles.body,
           },
         })}
+        className="w-full md:w-[70%] lg:w-[40%] h-auto "
         styles={{
           header: {
             display: "none",
           },
         }}
-        w={"fit"}
+        w={"full"}
       >
         <div className="relative">
           <Close close={close} className="absolute top-3 -right-2 z-10" />
@@ -82,6 +86,9 @@ export default function ReportModal() {
                   better!
                 </p>
               </header>
+              <ReportOptions
+              issueData={issueData}
+              />
               <form onSubmit={formSubmit} className=" gap-1 sm:gap-4 ">
                 <div className="flex-1">
                   <Textarea
