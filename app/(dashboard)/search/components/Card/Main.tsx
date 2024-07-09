@@ -95,7 +95,11 @@ const MainBox = ({ data }: Props) => {
       <div className="flex justify-between">
         <LeftSection src={coverUrl ?? coverImage} rera={rerastatus} />
         <CenterTop data={data} />
-        <TopRightSection {...data} />
+        <TopRightSection
+          {...data}
+          onAddingCompare={onAddingCompare}
+          onAddingShortList={onAddingShortList}
+        />
       </div>
       <CardDownSection
         a={data.agentListing}

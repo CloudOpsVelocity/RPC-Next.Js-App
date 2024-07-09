@@ -1,5 +1,6 @@
 import { formatCurrency } from "@/app/utils/numbers";
 import React from "react";
+import HeartButton from "./HeartButton";
 
 type Props = any;
 
@@ -15,8 +16,9 @@ export default function ProjData({
   return (
     <div>
       {" "}
-      <p className="text-[#148B16] text-xl not-italic font-bold">
+      <p className="text-[#148B16] text-xl not-italic font-bold relative">
         {formatCurrency(Number(minPrice))} - {formatCurrency(Number(maxPrice))}{" "}
+        <HeartButton />
       </p>
       <p className="text-[#001F35] text-[18px] not-italic font-semibold">
         {projName}{" "}

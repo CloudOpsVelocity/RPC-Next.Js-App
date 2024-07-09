@@ -24,7 +24,8 @@ export default function LoginPage() {
     }
   };
   const str = "hello world";
-  console.log(customEndsWith(str, "world"));
+  console.log(str.includes("world"));
+  // console.log(customEndsWith(str, "rld"));
   // console.log(customAddInStr(str, " vicky", " manish"));
   // console.log(str);
   // console.log(str.length);
@@ -243,3 +244,9 @@ const customEndsWith = (str: string, endWith: string) => {
   }
   return true;
 };
+
+const customIncludes = (str:string,word:string) => {
+  for(let i = 0;i < str.length;i++){
+     
+  }
+}
