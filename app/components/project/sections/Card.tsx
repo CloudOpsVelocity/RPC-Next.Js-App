@@ -1,21 +1,26 @@
 import { ImgNotAvail } from "@/app/data/project";
+import { PopupOpenSvg } from "@/app/images/commonSvgs";
 import Image from "next/image";
 import React from "react";
 
 type Props = {};
 
-export default function Card({}: Props) {
+export default function Card(data: any) {
   return (
-    <div className="flex flex-col justify-center items-center gap-2.5 rounded p-1 border-[0.5px] border-solid border-[#D2D5D7]">
-      <div className="w-[286px] h-[167px] shrink-0 rounded-sm bg-white">
+    <div
+      className="flex flex-col justify-center items-center gap-2.5 rounded p-1 border-[0.5px] border-solid border-[#D2D5D7]"
+      onClick={() => data.cardClick()}
+    >
+      <div className="w-[286px]  shrink-0 rounded-sm bg-white cursor-pointer relative">
         <Image src={ImgNotAvail} alt="image" width={286} height={167} />
+        <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[28px] lg:h-[28px]  absolute right-1 bottom-0" />
       </div>
       <div className="flex flex-col justify-center items-start gap-1.5 pl-1 pr-[44px] py-1 rounded-md bg-[#edf2f5]">
-        <p className="text-[#242424] text-sm not-italic font-medium inline-flex gap-2">
-          {config.icons.superBuildup} Super Builtup Area: 2200 sq.ft
+        <p className="text-[#242424] text-sm not-italic font-semibold inline-flex gap-2 items-center">
+          {config.icons.superBuildup} Super Builtup Area: {data.sba} sq.ft
         </p>
-        <p className="text-[#242424] text-xs not-italic font-medium">
-          2 BHK | Apartment
+        <p className="text-[#242424] text-xs not-italic font-semibold">
+          {data.unitType} | Apartment
         </p>
       </div>
     </div>
