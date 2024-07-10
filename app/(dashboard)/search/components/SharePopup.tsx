@@ -66,7 +66,12 @@ export default function SharePopup({
             <h3 className="text-[#202020] text-xl xl:text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px] ">
               {titleText ?? title}
             </h3>
-            <Close className="" close={close} />
+            <Close
+              className=""
+              close={() =>
+                setShareAtomData({ ...shareAtomData, opened: false, url: "" })
+              }
+            />
           </div>
 
           <p className="text-[#565D70]  text-[14px] xl:text-xl not-italic font-semibold leading-[normal] tracking-[0.8px] my-2 xl:my-5">

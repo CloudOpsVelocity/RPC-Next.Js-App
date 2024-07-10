@@ -12,6 +12,7 @@ const config: Config = {
       colors: {
         btnPrimary: "#0073C6",
         greenPrimary: "#148B16",
+        bgPrimary: "#f1f1f1",
       },
       fontSize: {
         h2: "18px",
