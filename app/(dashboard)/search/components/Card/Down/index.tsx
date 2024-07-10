@@ -48,7 +48,7 @@ export default function CardDownSection({
     );
   };
   return (
-    <div className="bg-[#DDF0FD] flex items-center gap-[372px] px-[17px] py-[9px] w-full">
+    <div  className="bg-[#DDF0FD] flex items-center gap-[372px] px-[17px] py-[9px] w-full">
       {/* left section */}
       <div className="flex gap-[9px]">
         {type === "proj" && (
@@ -78,11 +78,11 @@ const CountListing = ({ type, value }: CountListProps) => {
   return (
     <button
       className={clsx(
-        "flex flex-col text-[#148B16] justify-center items-center gap-2 p-1 rounded border-[0.4px] border-solid border-[#148B16] bg-[#f0fff0] cursor-pointer",
-        type === "Owner" && "bg-[#FFF6ED] text-[#D66700] border-[#FF7A00]"
+        "flex flex-col  justify-center items-center gap-2 p-1 rounded border-[0.4px] border-solid border-[#148B16] bg-[#f0fff0] cursor-pointer",
+        type === "Owner" && "bg-[#FFF6ED] text-[#D66700] border-[#FF7A00]",   value > 0 ? 'text-[#148B16] border-[#148B16]' : 'text-gray-400 border-[#5e5f5e]  opacity-50'
       )}
     >
-      <p className=" text-xs not-italic font-bold leading-[normal] underline">
+      <p className={`text-xs not-italic font-bold leading-[normal]  ${value > 0 ? "underline": ""}`}>
         {type} Listing Available : {value}
       </p>
     </button>
