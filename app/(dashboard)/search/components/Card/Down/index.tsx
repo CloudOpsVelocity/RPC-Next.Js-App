@@ -1,6 +1,9 @@
 import Button from "@/app/elements/button";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
+import { NearByDataAtom } from "@/app/store/nearby";
 import clsx from "clsx";
+import { useSetAtom } from "jotai";
+import { useSearchParams } from "next/navigation";
 import React from "react";
 
 type Props = {
@@ -10,21 +13,56 @@ type Props = {
   reqId: string;
 };
 
-export default function CardDownSection({ a, o, type, reqId }: Props) {
+export default function CardDownSection({
+  a,
+  o,
+  type,
+  reqId,
+  projName,
+  builderName,
+  bhkName,
+  propTypeName,
+  ltName,
+  cg,
+  postedByName,
+  postedBy,
+}: any) {
+  const name =
+    type === "proj"
+      ? projName
+      : `${bhkName ?? ""} ${propTypeName} for
+    ${cg === "R" ? "Rent" : "Sale"} in ${ltName}`;
   const [, { open }] = useReqCallPopup();
+  const setPopReqData = useSetAtom(NearByDataAtom);
+  const handleOpen = () => {
+    setPopReqData({
+      builderName: type === "proj" ? builderName : postedByName,
+      projName: name,
+      type: type === "proj" ? type : "prop",
+    });
+    open(
+      type === "proj" ? type : "prop",
+      reqId,
+      "projCard",
+      postedBy === "Agent" ? "A" : "I"
+    );
+  };
   return (
     <div className="bg-[#DDF0FD] flex items-center gap-[372px] px-[17px] py-[9px] w-full">
       {/* left section */}
       <div className="flex gap-[9px]">
-        <CountListing type="Agent" value={a} />
-        <CountListing type="Owner" value={o} />
+        {type === "proj" && (
+          <>
+            <CountListing type="Agent" value={a} />
+            <CountListing type="Owner" value={o} />
+          </>
+        )}
       </div>
+
       {/* right section */}
       <div>
         <Button
-          onChange={() =>
-            open(type === "proj" ? type : "prop", reqId, "projCard")
-          }
+          onChange={handleOpen}
           title="Request Callback"
           buttonClass="flex justify-center items-center text-[#FFF] p-[2px] md:p-[5px] bg-[#0073C6] rounded-[5px] shadow-md text-[10px] md:text-[12px] font-[700]"
         />

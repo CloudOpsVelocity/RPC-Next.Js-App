@@ -101,7 +101,7 @@ const MainBox = ({ data, refetch, index, mutate }: Props) => {
     <div className="h-[259px] self-stretch rounded border shadow-[0px_4px_30px_0px_rgba(74,82,113,0.20)] border-solid border-[#A4B8D4]">
       <div className="flex justify-between">
         <LeftSection src={coverUrl ?? coverImage} rera={rerastatus} />
-        <CenterTop data={newData} />
+        <CenterTop data={newData} type={type} />
         <TopRightSection
           {...newData}
           onAddingCompare={onAddingCompare}
@@ -113,24 +113,10 @@ const MainBox = ({ data, refetch, index, mutate }: Props) => {
         o={data.ownerListing}
         type={type}
         reqId={reqId}
+        {...data}
       />
     </div>
   );
 };
 
 export default MainBox;
-function getTypeText(type: string) {
-  let text;
-
-  if (type === "proj") {
-    text = "Builder";
-  } else if (type === "I") {
-    text = "Owner";
-  } else if (type === "A") {
-    text = "Agent";
-  } else {
-    text = "Unknown";
-  }
-
-  return text;
-}

@@ -20,10 +20,17 @@ export default function TopRightSection({
   Sh,
   onAddingShortList,
   projIdEnc,
+  type,
+  propIdEnc,
+  postedDate,
 }: Props) {
   const setSelected = useSetAtom(selectedSearchAtom);
   const [sharePopupData, setSharePopup] = useAtom(searchShareAtom);
-  const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/abc/banglore/whitefield/${projIdEnc}`;
+  const url =
+    type === "proj"
+      ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/abc/banglore/whitefield/${projIdEnc}`
+      : `${process.env.NEXT_PUBLIC_BACKEND_URL}/listing/whitefield/${propIdEnc}`;
+
   return (
     <div className="mr-3 my-2 flex justify-between flex-col items-end">
       <div className="flex flex-col items-end">
@@ -63,7 +70,7 @@ export default function TopRightSection({
           buttonClass="inline-flex justify-center items-center gap-2.5 rounded p-0.5 border-[0.5px] border-solid border-[#00A8CD] text-[#00A8CD] text-xs not-italic font-semibold ml-auto"
         />{" "}
         <p className="text-[#242424] text-sm  not-italic font-normal">
-          Posted: <span className="font-bold">10 days ago</span>
+          Posted: <span className="font-bold">{timeAgo(postedDate)}</span>
         </p>
       </div>
     </div>
@@ -90,3 +97,70 @@ const config = {
     </svg>
   ),
 };
+function parseDateString(dateString: string): Date {
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  const [_, monthStr, day, time, , year] = dateString.split(" ");
+  const [hours, minutes, seconds] = time.split(":").map(Number);
+  const month = months.indexOf(monthStr);
+  return new Date(Number(year), month, Number(day), hours, minutes, seconds);
+}
+
+function timeAgo(dateString: string): string {
+  const date = parseDateString(dateString);
+  const seconds = Math.floor((new Date().getTime() - date.getTime()) / 1000);
+
+  const interval = Math.floor(seconds / 31536000);
+  if (interval > 1) {
+    return interval + " years ago";
+  }
+  if (interval === 1) {
+    return interval + " year ago";
+  }
+
+  const months = Math.floor(seconds / 2628000);
+  if (months > 1) {
+    return months + " months ago";
+  }
+  if (months === 1) {
+    return months + " month ago";
+  }
+
+  const days = Math.floor(seconds / 86400);
+  if (days > 1) {
+    return days + " days ago";
+  }
+  if (days === 1) {
+    return days + " day ago";
+  }
+
+  const hours = Math.floor(seconds / 3600);
+  if (hours > 1) {
+    return hours + " hours ago";
+  }
+  if (hours === 1) {
+    return hours + " hour ago";
+  }
+
+  const minutes = Math.floor(seconds / 60);
+  if (minutes > 1) {
+    return minutes + " minutes ago";
+  }
+  if (minutes === 1) {
+    return minutes + " minute ago";
+  }
+
+  return "just now";
+}

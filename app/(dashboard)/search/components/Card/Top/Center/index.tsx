@@ -4,13 +4,14 @@ import ListingData from "./ListingData";
 
 type Props = {
   data: any;
+  type: any;
 };
 
-export default function CenterTop({ data }: Props) {
+export default function CenterTop({ data, type }: Props) {
   return (
     <div className="flex  flex-col px-4 mt-[2px]">
-      <ProjData {...data} />
-      <ListingData {...data} />
+      <ProjData type={type} {...data} />
+      <ListingData {...data} type={type} />
     </div>
   );
 }
