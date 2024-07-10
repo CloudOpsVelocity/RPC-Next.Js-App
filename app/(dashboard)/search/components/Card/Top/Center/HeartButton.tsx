@@ -7,7 +7,7 @@ type Props = {
 
 export default function HeartButton({ shortListed, onAddingShortList }: Props) {
   return (
-    <button className="absolute right-2" onClick={onAddingShortList}>
+    <button onClick={onAddingShortList}>
       {shortListed ? config.isTrueIcon : config.heartIcon}
     </button>
   );

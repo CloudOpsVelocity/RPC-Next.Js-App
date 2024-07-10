@@ -16,14 +16,12 @@ export default function TabPanelSection({ mutate }: Props) {
     searchProps: { isLoading, data, hasNextPage, fetchMoreData, refetch },
     filters,
   } = useSearchFilters("project");
-
   const { ref, entry } = useIntersection({
     root: containerRef.current,
     threshold: 0.1,
   });
 
   useEffect(() => {
-    console.log("Intersection entry:", entry);
     if (entry?.isIntersecting && hasNextPage) {
       fetchMoreData();
     }

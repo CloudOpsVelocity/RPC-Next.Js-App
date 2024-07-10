@@ -56,6 +56,7 @@ const LeftSideBlock = () => {
         builderName=""
         source={source}
       />
+      <SharePopup />
       <LoginPopup />
     </div>
   );
@@ -65,3 +66,4 @@ export { LeftSideBlock };
 import { diffToProjFromListing, initialState } from "@/app/store/search";
 import TabList from "./TabList";
 import TabPanelSection from "./TabPanelSection";
+import SharePopup from "../SharePopup";

@@ -4,13 +4,12 @@ import ListingData from "./ListingData";
 
 type Props = {
   data: any;
-  onAddingShortList: () => void;
 };
 
-export default function CenterTop({ data, onAddingShortList }: Props) {
+export default function CenterTop({ data }: Props) {
   return (
     <div className="flex  flex-col px-4 mt-[2px]">
-      <ProjData {...data} onAddingShortList={onAddingShortList} />
+      <ProjData {...data} />
       <ListingData {...data} />
     </div>
   );
