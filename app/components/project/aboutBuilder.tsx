@@ -20,7 +20,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
 
   return (
     <div
-      className="w-[90%] scroll-mt-[220px]  mb-[5%] rounded shadow-[0px_4px_17.6px_0px_rgba(146,178,200,0.40)] border-[0.5px] border-solid border-[#92B2C8] builderBg pt-4 pb-6 sm:py-8 sm:pl-5 px-2 sm:px-0 "
+      className="w-[90%] scroll-mt-[220px]  mb-[5%] rounded shadow-[0px_4px_17.6px_0px_rgba(146,178,200,0.40)] border-[0.5px] border-solid border-[#92B2C8] builderBg pt-4 pb-2 xl:pb-6 sm:py-8 sm:pl-5 px-2 sm:px-0 "
       id="aboutBuilder"
     >
       <div>
@@ -55,7 +55,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
             <p className=" text-[#202020]  text-[10px] sm:text-[20px] lg:text-[24px] font-[600]">
               {nzData.newProject}
             </p>
-            <p className=" text-[#148B16]  text-[10px]  xl:text-[12px] sm:text-[16px] lg:text-[20px] font-[700]">
+            <p className=" text-[#148B16]  text-[10px]   sm:text-[20px] lg:text-[20px] font-[700]">
               New Launch {`Project${nzData.newProject > 1 ? "s" : ""}`}
             </p>
           </div>

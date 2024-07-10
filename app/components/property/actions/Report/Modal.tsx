@@ -1,4 +1,4 @@
-import { useDisclosure } from "@mantine/hooks";
+import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import { Modal, Button, Textarea } from "@mantine/core";
 import ReportButton from "./button";
 import clsx from "clsx";
@@ -9,6 +9,7 @@ import { useParams } from "next/navigation";
 import Close from "@/app/components/project/button/close";
 import { ReportSuccesssMessage } from "@/app/components/project/success";
 import ReportOptions from "./reportOptions";
+import { number } from "yup";
 
 export default function ReportModal({issueData}:any) {
   const { slug } = useParams<{ slug: string }>();
@@ -16,15 +17,20 @@ export default function ReportModal({issueData}:any) {
   const [status, setStatus] = useState<
     "idle" | "error" | "loading" | "success"
   >("idle");
+  const[reportStatus, setreportStatus]=useState([]);
   const [text, setText] = useState("");
   const formSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!text) {
-      setStatus("error");
-      return;
+    if(reportStatus.includes(607)){
+      if (!text ) {
+        setStatus("error");
+        return;
+      }
     }
+    
     setStatus("loading");
     try {
+      const singleString = reportStatus.join(', ');
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/report?id=${slug}&iden=L`,
         {
@@ -32,7 +38,7 @@ export default function ReportModal({issueData}:any) {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ comment: text }),
+          body: JSON.stringify({ comment: text, status:singleString }),
         }
       );
       if (response.ok) {
@@ -44,12 +50,26 @@ export default function ReportModal({issueData}:any) {
       setStatus("error");
     }
   };
+
+const reportIssuseFun=(cid:number)=>{
+  const index = reportStatus.indexOf(cid);
+ 
+  if (index !== -1) {
+      reportStatus.splice(index, 1);
+  } else {
+      reportStatus.push(cid);
+  }
+  console.log(reportStatus)
+  
+}
+const isMobile = useMediaQuery("(max-width: 601px)");
+
   return (
     <>
       <Modal
         opened={opened}
         onClose={close}
-        size={"60%"}
+        size={isMobile?"90%":"55%"}
         centered
         {...(status === "success" && {
           classNames: {
@@ -87,6 +107,7 @@ export default function ReportModal({issueData}:any) {
                 </p>
               </header>
               <ReportOptions
+              reportIssuseFun={reportIssuseFun}
               issueData={issueData}
               />
               <form onSubmit={formSubmit} className=" gap-1 sm:gap-4 ">
@@ -112,13 +133,17 @@ export default function ReportModal({issueData}:any) {
                     value={text}
                   />
                 </div>
-                <Button
-                  //   loading={status === "pending"}
-                  type="submit"
-                  className="inline-flex items-center justify-center rounded-md text-[14px]  xl:text-[20px] font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 !bg-[#0073C6] text-white mt-3 sm:mt-6"
-                >
-                  Submit
-                </Button>
+                <div className="flex justify-center items-center ">
+                  <Button
+                    //   loading={status === "pending"}
+                    type="submit"
+                    className="inline-flex items-center justify-center rounded-md text-[14px]  xl:text-[20px] font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 !bg-[#0073C6] text-white mt-3 sm:mt-6"
+                  >
+                    Submit
+                  </Button>
+
+                </div>
+          
               </form>
             </>
           )}
