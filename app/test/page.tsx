@@ -23,10 +23,7 @@ export default function LoginPage() {
       alert("Login failed");
     }
   };
-  const str = "m";
-  console.log(str.localeCompare("z", "In", { usage: "search" }));
-  const versionNumbers = [1.1, 1.2, 1.21, 1.3];
-  console.log(versionNumbers.sort);
+  const str = "sdf sdfljdsfjkl jjfjldsfj j";
   // console.log(str);
   // console.log(str.length);
   // console.log(str.at(0));

@@ -7,7 +7,7 @@ type Props = {};
 
 export default function MainCard({}: Props) {
   return (
-    <div className="w-[490px]">
+    <div className="w-[490px] bg-gray-200">
       <div className="h-[276px] shrink-0 shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] relative">
         <button className="inline-flex justify-center items-center gap-2.5 rounded border p-2 border-solid border-[#0073C6] bg-[#0073c6] text-white text-sm not-italic font-bold leading-[normal] capitalize absolute bottom-3 right-3">
           View Detail
