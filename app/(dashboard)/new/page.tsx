@@ -8,16 +8,18 @@ import DynamicListing from "./components/Listing";
 import TopLocalities from "./components/top-localities";
 import PostYourListing from "./components/post-your-listing";
 import ListbySection from "./components/ListedBy";
+import HandPickedProjects from "./components/hand-picked-projects";
+import BlogsSection from "./components/blogs";
+import Footer from "./components/Footer";
 
 export default function Page() {
   return (
-    <div className="h-[100%] w-[100%] flex  flex-col overflow-hidden bg-[#F5F7F8] pb-24">
+    <div className="h-[100%] w-[100%] flex  flex-col overflow-hidden bg-[#F5F7F8]">
       <Header />
       <HomeSearch />
-      <div className="h-[153px] shrink-0 bg-[#e2e2e266] w-full"></div>
       <HomeFeatures />
       <NewAddedProjects />
-      <FeaturedProjects />
+      {/* <FeaturedProjects /> */}
       <DynamicListing
         title="Ready to Move Sell Listings"
         content="Loreum Ipsum"
@@ -31,20 +33,24 @@ export default function Page() {
         title="Under Construction Sell Listings"
         content="Loreum Ipsum"
       />
+      <HandPickedProjects />
       <DynamicListing
         title="Ready to Move Independent Sell Listing"
         content="Loreum Ipsum"
       />
-      <PostYourListing />
+
       <DynamicListing
         title="Under Construction Independent Sell Listing"
         content="Loreum Ipsum"
       />
+      <ListbySection />
       <DynamicListing
         title="Under Construction Independent Rent Listing"
         content="Loreum Ipsum"
       />
-      <ListbySection />
+      <PostYourListing />
+      <BlogsSection />
+      <Footer />
     </div>
   );
 }

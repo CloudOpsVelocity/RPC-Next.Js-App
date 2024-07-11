@@ -5,11 +5,13 @@ import Searchbar from "./searchbar";
 import Button from "@/app/components/atoms/buttons/variansts";
 import Tabs from "./tabs";
 import Box from "./recentSearch/Box";
+import Alert from "./Alert";
 const propertyTypes = ["Buy", "Rent"];
 const HomeSearch = () => {
   const [selectedType, setSelectedType] = useState(propertyTypes[0]);
   return (
-    <div className="w-full pl-5 md:pl-0 border-2 grid grid-cols-[1.1fr_2fr] gap-2 sm:px-20 bg-white py-28">
+    <div className="w-full pl-5 md:pl-0 border-2 grid grid-cols-[1.1fr_2fr] gap-2 sm:px-20 bg-white py-28 relative">
+      <Alert />
       <div className=" items-center justify-center hidden md:flex">
         <Image
           src={"/home/home-search.svg"}

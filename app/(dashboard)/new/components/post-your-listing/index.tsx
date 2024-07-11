@@ -5,7 +5,7 @@ type Props = {};
 
 export default function PostYourListing({}: Props) {
   return (
-    <div className="w-[1188px] h-[341px] shrink-0 rounded shadow-[0px_4px_20px_0px_rgba(194,194,194,0.76)] border-[0.8px] border-solid border-[#D9E4EE] m-auto my-[40px] bg-[#dae6f1] flex justify-center items-center px-10">
+    <div className="w-[1188px] h-[341px] shrink-0 rounded shadow-[0px_4px_20px_0px_rgba(194,194,194,0.76)] border-[0.8px] border-solid border-[#D9E4EE] m-auto mt-[40px] mb-[80px] bg-[#dae6f1] flex justify-center items-center px-10 ">
       <div className="space-y-[40px]">
         <h3 className="text-[#202020] text-[32px] not-italic font-semibold leading-[normal] tracking-[1.28px]">
           Post Your Listing Today!

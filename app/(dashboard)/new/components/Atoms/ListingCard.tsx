@@ -19,13 +19,7 @@ export default function ListingCard({}: Props) {
           height={276}
           className="object-cover w-full h-full"
         />
-        <p className="absolute top-[1px] left-[0.8px]">
-          <Image src={"/r.svg"} alt="rera" width={100} height={100} />
-        </p>
         <div className="absolute bottom-2 left-2 space-y-2">
-          <p className="flex justify-center items-center gap-1 rounded p-1 bg-[#000000b0] text-white text-base not-italic font-semibold leading-[normal] capitalize">
-            201 units
-          </p>
           <p className="flex justify-center items-center gap-1 rounded p-1 bg-[#000000b0] text-white text-base not-italic font-semibold leading-[normal] capitalize">
             Ready to move
           </p>
@@ -35,10 +29,13 @@ export default function ListingCard({}: Props) {
         <div className="p-3 flex justify-between">
           <div className="space-y-1">
             <p className="text-[#148B16] text-[22px] not-italic font-bold leading-[normal] capitalize">
-              ₹ 50 lkh - ₹ 23 Cr
+              ₹ 2.36 Cr,{" "}
+              <span className="text-[#616D75] text-base not-italic font-bold leading-[normal] capitalize">
+                ₹ 2100/- sq.ft
+              </span>
             </p>
             <p className="text-[#242424] text-lg not-italic font-semibold leading-[normal] capitalize">
-              Prestige Green City
+              3 BHK Apartment for Sell in Kadugodi
             </p>
             <p className="text-[#242424] text-sm not-italic font-semibold leading-[normal] capitalize">
               Whitefield, Bangalore
@@ -51,16 +48,16 @@ export default function ListingCard({}: Props) {
         </div>
         <div className="pl-3">
           <div className="inline-flex items-center gap-1 self-stretch rounded border-[0.5px] border-solid border-[#616D75] bg-[#F5F5F5] p-1">
-            <DownSectionCard label="Units Available" value="Apartment, Villa" />
+            <DownSectionCard label="Super Builtup Area" value="2,617 sq.ft" />
             <Divider orientation="vertical" color="#7BA0BB" />
-            <DownSectionCard label="Start Date" value="23 June, 2023" />
+            <DownSectionCard label="Carpet Area" value="2,617 sq.ft" />
             <Divider orientation="vertical" color="#7BA0BB" />
-            <DownSectionCard label="End Date" value="12 Aug, 2024" />
+            <DownSectionCard label="Property Age" value="0-2 Years" />
             <Divider orientation="vertical" color="#7BA0BB" />
-            <DownSectionCard label="Project Land Area" value="81 Acres" />
+            <DownSectionCard label="Available For" value="Bachelor’s" />
           </div>
           <p className="text-[#242424] text-sm not-italic font-semibold leading-[normal] capitalize mt-2">
-            Builder: Prestige
+            Posted by: Owner
           </p>
         </div>
       </div>

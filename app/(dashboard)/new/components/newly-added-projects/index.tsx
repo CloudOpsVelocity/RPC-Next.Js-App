@@ -6,7 +6,7 @@ type Props = {};
 export default function NewAddedProjects({}: Props) {
   return (
     <div className="mt-[80px] w-[90%] m-auto">
-      <MainHeading title="Newly Added Projects" content="Loreum Ipsum" />
+      <MainHeading title="Featured Projects" content="Loreum Ipsum" />
       <CardCarousel />
     </div>
   );
