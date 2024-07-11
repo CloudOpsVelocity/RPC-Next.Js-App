@@ -16,9 +16,9 @@ export default function ListingData({
 }: Props) {
   console.log(type);
   return (
-    <div className="flex w-[400px] gap-1 flex-col items-start  pl-[11px]  py-[2px] rounded border-[0.5px] border-solid border-[#616D75] bg-[#F5F5F5]">
+    <div className="flex mb-2 max-w-[380px] xl:w-[400px] gap-1 flex-col items-start  pl-[11px]  py-[2px] rounded border-[0.5px] border-solid border-[#616D75] bg-[#F5F5F5]">
       {type === "proj" && (
-        <div className="mt-[2px]">
+        <div className="mt-[2px] hidden md:block">
           <h5 className="text-[#001F35] text-sm font-medium">
             Listing Available
           </h5>
@@ -30,7 +30,18 @@ export default function ListingData({
 
       {/* down section start here */}
       {type === "proj" ? (
-        <div className="flex items-center gap-4 self-stretch">
+        <div className="flex items-center gap-2 xl:gap-4 self-stretch">
+           {type === "proj" && (
+        <div className="mt-[2px] block md:hidden">
+          <h5 className="text-[#001F35] text-wrap text-[9px] xl:text-sm font-medium">
+            Listing Available
+          </h5>
+          <p className="text-[#242424]  text-wrap text-[9px] xl:text-base not-italic font-semibold">
+            {propTypes && propTypes?.length > 0 ? propTypes?.join(", ") : ""}
+          </p>
+        </div>
+      )}
+        <Divider orientation="vertical" color="#7BA0BB" className="flex md:hidden" />
           <DownSectionCard
             label="Start Date"
             value={formatDate(launchDate, true)}
@@ -47,7 +58,7 @@ export default function ListingData({
           />
         </div>
       ) : (
-        <div className="flex items-center gap-4 self-stretch">
+        <div className="flex items-center gap-2 xl:gap-4 self-stretch">
           <DownSectionCard label="Super Builtup Area" value={sba} />
           <Divider orientation="vertical" color="#7BA0BB" />
           <DownSectionCard label="Carpet Area" value={ca} />
@@ -76,8 +87,8 @@ const DownSectionCard = ({
 }) => {
   return (
     <div className="flex flex-col justify-center items-start ">
-      <p className="text-[#001F35] text-sm not-italic font-medium">{label}:</p>
-      <p className="text-[#242424] text-base not-italic font-semibold">
+      <p className="text-[#001F35] text-[9px] xl:text-sm not-italic font-medium">{label}:</p>
+      <p className="text-[#242424] text-[9px] xl:text-sm not-italic font-semibold">
         {value}
       </p>
     </div>

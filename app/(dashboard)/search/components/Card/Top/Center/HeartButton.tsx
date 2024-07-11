@@ -21,6 +21,7 @@ let config = {
       height="24"
       viewBox="0 0 24 24"
       fill="none"
+      className="max-w-fit px-[1px] py-[1px]  rounded  text-[#242424] text-sm not-italic font-semibold  md:mb-1  "
     >
       <circle
         cx="12"

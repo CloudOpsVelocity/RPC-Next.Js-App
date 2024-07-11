@@ -75,7 +75,7 @@ const SearchHeader = ({ open, close }: any) => {
     params,
   } = useSearchFilters();
   return (
-    <div className="m-[2%] w-full flex mt-[100px] pl-[2%] gap-2 md:gap-[20px] flex-wrap md:flex-nowrap justify-between md:justify-start items-start md:items-center ">
+    <div className="m-[2%] w-full flex mt-[100px] pl-[1%] xl:pl-[2%] gap-1 xl:gap-2 md:gap-[20px] flex-wrap md:flex-nowrap justify-between md:justify-start items-start md:items-center ">
       <p className="text-[14px] md:text-[16px] text-[#737579] font-[500] w-full md:w-auto">
         <span>Home</span> {" > "}
         <Link href={"/project/banglore"}>
@@ -88,7 +88,7 @@ const SearchHeader = ({ open, close }: any) => {
         </Link>{" "}
       </p>
 
-      <div className=" border-[#A0D7FF] rounded-[40px] gap-[8px] pl-[8px] border-[1px] border-solid flex items-center justify-center ">
+      <div className=" border-[#A0D7FF] rounded-[40px] gap-2 xl:gap-[8px] pl-2 xl:pl-[8px] border-[1px] border-solid flex items-center justify-center ">
         <BuyRent />
         <PillsInput
           classNames={{ input: classes.wrapperMultiSelection }}

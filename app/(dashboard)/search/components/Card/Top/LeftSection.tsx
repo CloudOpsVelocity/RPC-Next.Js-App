@@ -13,7 +13,7 @@ export default function LeftSection({ src, rera }: Props) {
         width={304}
         height={214}
         alt="projectCard"
-        className="h-[214px] w-[304px] object-cover"
+        className="h-[162px] w-full  xl:h-[230px] xl:w-[304px] object-cover"
         quality={100}
       />
       {verified && <Rera />}

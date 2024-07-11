@@ -1,6 +1,7 @@
 import React from "react";
 import ProjData from "./ProjData";
 import ListingData from "./ListingData";
+import { useMediaQuery } from "@mantine/hooks";
 
 type Props = {
   data: any;
@@ -8,9 +9,11 @@ type Props = {
 };
 
 export default function CenterTop({ data, type }: Props) {
+  const isMobile = useMediaQuery("(max-width: 601px)");
+
   return (
-    <div className="flex  flex-col px-4 mt-[2px]">
-      <ProjData type={type} {...data} />
+    <div className="flex  flex-col px-1 xl:px-4 xl:mt-[2px]">
+      {!isMobile &&<ProjData type={type} {...data} />}
       <ListingData {...data} type={type} />
     </div>
   );
