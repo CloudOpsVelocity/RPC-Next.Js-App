@@ -9,7 +9,7 @@ type Props = {
 
 export default function DynamicListing({ content, title }: Props) {
   return (
-    <div className="mt-[80px] w-[90%] m-auto">
+    <div className="my-[40px] w-[90%] m-auto">
       <MainHeading title={title} content={content} />
       <ListingCarousel />
     </div>

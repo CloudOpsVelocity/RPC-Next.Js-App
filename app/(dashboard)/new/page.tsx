@@ -5,6 +5,9 @@ import HomeFeatures from "./components/features";
 import NewAddedProjects from "./components/newly-added-projects";
 import FeaturedProjects from "./components/Featured-Projects";
 import DynamicListing from "./components/Listing";
+import TopLocalities from "./components/top-localities";
+import PostYourListing from "./components/post-your-listing";
+import ListbySection from "./components/ListedBy";
 
 export default function Page() {
   return (
@@ -19,6 +22,7 @@ export default function Page() {
         title="Ready to Move Sell Listings"
         content="Loreum Ipsum"
       />
+      <TopLocalities />
       <DynamicListing
         title="Ready to Move Rent Listings"
         content="Loreum Ipsum"
@@ -31,6 +35,7 @@ export default function Page() {
         title="Ready to Move Independent Sell Listing"
         content="Loreum Ipsum"
       />
+      <PostYourListing />
       <DynamicListing
         title="Under Construction Independent Sell Listing"
         content="Loreum Ipsum"
@@ -39,6 +44,7 @@ export default function Page() {
         title="Under Construction Independent Rent Listing"
         content="Loreum Ipsum"
       />
+      <ListbySection />
     </div>
   );
 }
