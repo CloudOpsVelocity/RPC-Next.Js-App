@@ -48,7 +48,7 @@ export default function CardDownSection({
     );
   };
   return (
-    <div  className="bg-[#DDF0FD] flex items-center gap-[372px] px-[17px] py-[9px] w-full">
+    <div  className="bg-[#DDF0FD] flex items-center gap-1 xl:gap-[372px] xl:px-[17px] xl:py-[9px] w-full p-2 justify-end ">
       {/* left section */}
       <div className="flex gap-[9px]">
         {type === "proj" && (
@@ -57,14 +57,15 @@ export default function CardDownSection({
             <CountListing type="Owner" value={o} />
           </>
         )}
+        
       </div>
 
       {/* right section */}
-      <div>
+      <div className=" right-1">
         <Button
           onChange={handleOpen}
           title="Request Callback"
-          buttonClass="flex justify-center items-center text-[#FFF] p-[2px] md:p-[5px] bg-[#0073C6] rounded-[5px] shadow-md text-[10px] md:text-[12px] font-[700]"
+          buttonClass="flex justify-end right-1  self-end text-[#FFF] ml-1 p-[3px] md:p-[5px] bg-[#0073C6] rounded-[5px] shadow-md text-[5px] xl:text-[10px] md:text-[12px] font-[700]"
         />
       </div>
     </div>
@@ -78,11 +79,11 @@ const CountListing = ({ type, value }: CountListProps) => {
   return (
     <button
       className={clsx(
-        "flex flex-col  justify-center items-center gap-2 p-1 rounded border-[0.4px] border-solid border-[#148B16] bg-[#f0fff0] cursor-pointer",
-        type === "Owner" && "bg-[#FFF6ED] text-[#D66700] border-[#FF7A00]",   value > 0 ? 'text-[#148B16] border-[#148B16]' : 'text-gray-400 border-[#5e5f5e]  opacity-50'
+        "flex flex-col  justify-center items-center gap-2 p-1 rounded border-[0.4px] border-solid border-[#148B16] bg-[#f0fff0] ",
+        type === "Owner" && "bg-[#FFF6ED] text-[#D66700] border-[#FF7A00]",   value > 0 ? 'text-[#148B16] border-[#148B16] cursor-pointer' : 'text-gray-400 border-[#5e5f5e]  opacity-50 cursor-none'
       )}
     >
-      <p className={`text-xs not-italic font-bold leading-[normal]  ${value > 0 ? "underline": ""}`}>
+      <p className={`text-[9px] text-nowrap xl:text-wrap  xl:text-xs not-italic font-bold leading-[normal]  ${value > 0 ? "underline": ""}`}>
         {type} Listing Available : {value}
       </p>
     </button>

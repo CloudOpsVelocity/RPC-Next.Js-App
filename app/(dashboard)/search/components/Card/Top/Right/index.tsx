@@ -5,6 +5,8 @@ import { useAtom, useSetAtom } from "jotai";
 import React from "react";
 import HeartButton from "../Center/HeartButton";
 import { searchShareAtom } from "../../../SharePopup";
+import { useMediaQuery } from "@mantine/hooks";
+import ProjData from "../Center/ProjData";
 
 type Props = any;
 
@@ -21,6 +23,7 @@ export default function TopRightSection({
   onAddingShortList,
   projIdEnc,
   type,
+  data,
   propIdEnc,
   postedDate,
 }: Props) {
@@ -31,12 +34,16 @@ export default function TopRightSection({
       ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/abc/banglore/whitefield/${projIdEnc}`
       : `${process.env.NEXT_PUBLIC_BACKEND_URL}/listing/whitefield/${propIdEnc}`;
 
+      const isMobile = useMediaQuery("(max-width: 601px)");
   return (
     <div onClick={(e)=>e.stopPropagation()
-    } className="mr-3 my-2 flex justify-between flex-col items-end">
-      <div className="flex flex-col items-end">
+    } className="m-[2px]  md:mr-3 md:my-2 flex md:gap-[0.5px] mx-2 max-h-full justify-between items-start flex-row md:flex-col md:items-end">
+     {isMobile && <>
+      <ProjData type={type} {...data} />
+      <div className="flex flex-col justify-between">
+     <div className="flex flex-row md:flex-col gap-3 align-baseline items-start">
         <button
-          className="max-w-fit px-[1px] py-[1px]  rounded  text-[#242424] text-sm not-italic font-semibold my-2 md:mb-1  gradient"
+          className="max-w-fit px-[1px] py-[1px]  rounded  text-[#242424] text-sm not-italic font-semibold my-1  md:mb-1  gradient"
           onClick={() =>
             setSelected({
               agentListing,
@@ -49,12 +56,13 @@ export default function TopRightSection({
         >
           <div className="px-[1px] py-[1px] inline-flex justify-center items-center bg-[#F0F9FF] gap-0.5 rounded">
             {" "}
-            View on Map <SearchMapIcon className="w-4 h-4" />
+            <span className="hidden md:flex">View on Map</span> <SearchMapIcon className="w-4 h-4" />
           </div>
         </button>
-        <div className="space-x-2 align-middle">
+        <div className="gap-2 xl:gap-1 flex flex-row items-center align-middle ">
           <HeartButton shortListed={Sh} onAddingShortList={onAddingShortList} />
           <button
+          className="max-w-fit px-[1px] py-[1px]  rounded  text-[#242424] text-sm not-italic font-semibold  md:mb-1  "
             onClick={() =>
               setSharePopup({ ...sharePopupData, opened: true, url })
             }
@@ -63,17 +71,67 @@ export default function TopRightSection({
           </button>
         </div>
       </div>
+   
 
-      <div className="flex items-end flex-col gap-2">
+      <div className="flex items-end flex-col justify-between md:gap-2">
         <Button
           onChange={() => onAddingCompare()}
           title={Com ? "Remove Compare" : " Add to Compare"}
-          buttonClass="inline-flex justify-center items-center gap-2.5 rounded p-0.5 border-[0.5px] border-solid border-[#00A8CD] text-[#00A8CD] text-xs not-italic font-semibold ml-auto"
+          buttonClass="inline-flex justify-center items-center gap-1 xl:gap-2.5 rounded p-0.5 border-[0.5px] border-solid border-[#00A8CD] text-[#00A8CD] text-[8px] md:text-xs not-italic font-semibold ml-auto"
         />{" "}
-        <p className="text-[#242424] text-sm  not-italic font-normal">
+        <p className="text-[#242424] text-[8px] xl:text-sm  not-italic font-normal">
           Posted: <span className="font-bold">{timeAgo(postedDate)}</span>
         </p>
       </div>
+
+      </div>
+      </>
+} 
+{!isMobile && (
+  <>
+    <div className="flex  flex-col justify-between h-auto items-end">
+      <button
+        className="max-w-fit px-[1px] py-[1px] rounded text-[#242424] text-sm not-italic font-semibold my-2 md:mb-1 gradient"
+        onClick={() =>
+          setSelected({
+            agentListing,
+            ownerListing,
+            projName,
+            lat,
+            lang,
+          })
+        }
+      >
+        <div className="px-[1px] py-[1px] inline-flex justify-center items-center bg-[#F0F9FF] gap-0.5 rounded">
+          {" "}
+          View on Map <SearchMapIcon className="w-4 h-4" />
+        </div>
+      </button>
+      <div className="space-x-2 align-middle">
+        <HeartButton shortListed={Sh} onAddingShortList={onAddingShortList} />
+        <button
+          onClick={() =>
+            setSharePopup({ ...sharePopupData, opened: true, url })
+          }
+        >
+          {config.shareIcon}
+        </button>
+      </div>
+    </div>
+
+    <div className="flex  items-end flex-col gap-2">
+      <Button
+        onChange={() => onAddingCompare()}
+        title={Com ? "Remove Compare" : "Add to Compare"}
+        buttonClass="inline-flex justify-center items-center gap-2.5 rounded p-0.5 border-[0.5px] border-solid border-[#00A8CD] text-[#00A8CD] text-xs not-italic font-semibold ml-auto"
+      />{" "}
+      <p className="text-[#242424] xl:text-nowrap text-wrap text-sm not-italic font-normal">
+        Posted: <span className="font-bold">{timeAgo(postedDate)}</span>
+      </p>
+    </div>
+  </>
+)}
+
     </div>
   );
 }

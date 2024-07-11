@@ -37,8 +37,15 @@
   border-radius: 30px;
   background: linear-gradient(91deg, #000 0.74%, rgba(0, 0, 0, 0.4) 103.26%);
 }
-@media screen and (min-width: 768px) {
+/* @media screen and (min-width: 768px) {
   .tab {
     font-size: 16px;
   }
+} */
+@media screen and (max-width: 601px) {
+  .tab, .tabLabel {
+    font-size: 14px !important;
+    padding: 1%;
+  }
+  
 }

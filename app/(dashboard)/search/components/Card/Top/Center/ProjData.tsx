@@ -21,34 +21,34 @@ export default function ProjData({
   return type === "proj" ? (
     <div>
       {" "}
-      <p className="text-[#148B16] text-xl not-italic font-bold relative">
+      <p className="text-[#148B16] text-[14px] xl:text-xl not-italic font-bold relative">
         {formatCurrency(Number(minPrice))} - {formatCurrency(Number(maxPrice))}
       </p>
-      <p className="text-[#001F35] text-[18px] not-italic font-semibold">
+      <p className="text-[#001F35] text-[12px]  xl:text-[18px] not-italic font-semibold">
         {projName}{" "}
       </p>
-      <p className="text-[#242424] capitalize  not-italic font-medium">
+      <p className="text-[#242424] text-[12px] xl:text-[18px] capitalize  not-italic font-medium">
         {`${locality}, ${city}`}
       </p>
-      <p className="text-[#242424]  not-italic font-normal">
+      <p className="text-[#242424]  text-[10px]  xl:text-[14px] not-italic font-normal">
         Posted By: <span className="font-bold">{builderName}</span>
       </p>
     </div>
   ) : (
     <div>
-      <p className="text-[#148B16] text-xl not-italic font-bold relative">
+      <p className="text-[#148B16] text-[14px] xl:text-xl not-italic font-bold relative">
         {formatCurrency(Number(price))}
       </p>
-      <p className="text-[#242424] text-base not-italic font-bold">
+      <p className="text-[#242424] text-[12px] xl:text-[18px] capitalize  not-italic font-medium">
         3BHK Apartment for Sell in Kadugodi
       </p>
-      <p className="text-[#001F35] text-[16px] not-italic font-semibold">
+      <p className="text-[#001F35] text-[12px]  xl:text-[18px] not-italic font-semibold">
         {propName}{" "}
       </p>
-      <p className="text-[#242424] capitalize  not-italic font-medium">
+      <p className="text-[#242424] text-[12px] xl:text-[18px] capitalize  not-italic font-medium">
         {`${localityName}, ${city}`}
       </p>
-      <p className="text-[#242424]  not-italic font-normal">
+      <p className="text-[#242424]  text-[10px]  xl:text-[14px] not-italic font-normal">
         Posted By: <span className="font-bold">{getTypeText(type)}</span>
       </p>
     </div>

@@ -16,6 +16,7 @@ import LeftSection from "./Top/LeftSection";
 import CenterTop from "./Top/Center";
 import CardDownSection from "./Down";
 import TopRightSection from "./Top/Right";
+import { useMediaQuery } from "@mantine/hooks";
 
 type Props = {
   type: any;
@@ -99,20 +100,39 @@ const MainBox = ({ data, refetch, index, mutate }: Props) => {
   const onClickRedirect = (projEncId: string) => {
     window.open(`/abc/karnataka/banglore/${projEncId}`, "_blank");
   };
+  const isMobile = useMediaQuery("(max-width: 601px)");
 
   return (
-    <div className="h-[259px] self-stretch rounded border shadow-[0px_4px_30px_0px_rgba(74,82,113,0.20)] border-solid border-[#A4B8D4]">
+    <div className="h-auto m-2 self-stretch rounded border shadow-[0px_4px_30px_0px_rgba(74,82,113,0.20)] border-solid border-[#A4B8D4]">
       <div
         onClick={() => onClickRedirect(projIdEnc)}
-        className="flex justify-between"
+        className="flex flex-col xl:flex-row justify-between"
       >
         <LeftSection src={coverUrl ?? coverImage} rera={rerastatus} />
-        <CenterTop data={newData} type={type} />
-        <TopRightSection
-          {...newData}
-          onAddingCompare={onAddingCompare}
-          onAddingShortList={onAddingShortList}
-        />
+        {isMobile && (
+          <div className="flex   flex-col justify-between">
+            <TopRightSection
+              data={newData}
+              type={type}
+              {...newData}
+              onAddingCompare={onAddingCompare}
+              onAddingShortList={onAddingShortList}
+            />
+            <CenterTop data={newData} type={type} />
+          </div>
+        )}
+        {!isMobile && (
+          <>
+            <CenterTop data={newData} type={type} />
+            <TopRightSection
+              data={newData}
+              type={type}
+              {...newData}
+              onAddingCompare={onAddingCompare}
+              onAddingShortList={onAddingShortList}
+            />
+          </>
+        )}
       </div>
       <CardDownSection
         a={data.agentListing}
