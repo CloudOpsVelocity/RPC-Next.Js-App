@@ -1,12 +1,12 @@
 "use client";
+import { CarouseSelArrowIcon } from "@/app/images/HomePageIcons";
 import { Carousel } from "@mantine/carousel";
 import React from "react";
-import Card from "./Card";
-import "@mantine/carousel/styles.css";
-import { CarouseSelArrowIcon } from "@/app/images/HomePageIcons";
+import MainCard from "../Atoms/Card";
+
 type Props = {};
 
-export default function CardCarousel({}: Props) {
+export default function FeatureCarousel({}: Props) {
   return (
     <Carousel
       slideSize="33.333333%"
@@ -20,18 +20,17 @@ export default function CardCarousel({}: Props) {
       controlsOffset={"-10px"}
     >
       <Carousel.Slide>
-        <Card />
+        <MainCard />
       </Carousel.Slide>
       <Carousel.Slide>
-        <Card />
+        <MainCard />
       </Carousel.Slide>
       <Carousel.Slide>
-        <Card />
+        <MainCard />
       </Carousel.Slide>
       <Carousel.Slide>
-        <Card />
+        <MainCard />
       </Carousel.Slide>
-      {/* ...other slides */}
     </Carousel>
   );
 }

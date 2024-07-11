@@ -96,16 +96,16 @@ const MainBox = ({ data, refetch, index, mutate }: Props) => {
     Com: state.compareAdded,
     Sh: state.shortListed,
   };
-  const onClickRedirect=(projEncId:string)=>{
-    
-    window.open(`/abc/karnataka/banglore/${projEncId}`, '_blank');
-
-
-  }
+  const onClickRedirect = (projEncId: string) => {
+    window.open(`/abc/karnataka/banglore/${projEncId}`, "_blank");
+  };
 
   return (
-    <div  className="h-[259px] self-stretch rounded border shadow-[0px_4px_30px_0px_rgba(74,82,113,0.20)] border-solid border-[#A4B8D4]">
-      <div onClick={()=>onClickRedirect(projIdEnc)} className="flex justify-between">
+    <div className="h-[259px] self-stretch rounded border shadow-[0px_4px_30px_0px_rgba(74,82,113,0.20)] border-solid border-[#A4B8D4]">
+      <div
+        onClick={() => onClickRedirect(projIdEnc)}
+        className="flex justify-between"
+      >
         <LeftSection src={coverUrl ?? coverImage} rera={rerastatus} />
         <CenterTop data={newData} type={type} />
         <TopRightSection
