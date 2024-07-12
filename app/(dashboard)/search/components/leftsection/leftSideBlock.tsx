@@ -6,6 +6,7 @@ import useSearchFilters from "@/app/hooks/search";
 import RequestCallBackModal from "@/app/components/molecules/popups/req";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
+import NewTabCon from "./newtabCon";
 
 const LeftSideBlock = () => {
   const [opned, { close, source }] = useReqCallPopup();
@@ -47,9 +48,11 @@ const LeftSideBlock = () => {
         onChange={(value) => onTabChange((value as "proj") || "proj")}
         defaultValue="proj"
       >
+        
         <TabList />
         <TabPanelSection mutate={mutate} />
       </Tabs>
+     {/*  <NewTabCon /> */}
       <RequestCallBackModal
         close={close}
         opened={opned}
