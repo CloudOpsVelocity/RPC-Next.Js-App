@@ -78,6 +78,8 @@ export const filterParser = (data: SearchFilter) => {
     sortType: "sortType",
     cg: "cg",
     projIdEnc: "projIdEnc",
+    lat:'lat',
+    lng:'lng'
   };
 
   // Iterate through each property

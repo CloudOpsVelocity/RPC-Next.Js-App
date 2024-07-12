@@ -8,7 +8,7 @@ import { convertToQueryParams } from "@/app/utils/search/query";
 import { Search } from "@/app/validations/types/search";
 import { useAtom, useSetAtom } from "jotai";
 import { usePathname } from "next/navigation";
-import { useQueryStates, parseAsString, parseAsInteger } from "nuqs";
+import { useQueryStates, parseAsString, parseAsInteger, parseAsFloat } from "nuqs";
 import { useInfiniteQuery, useMutation, useQueryClient } from "react-query";
 const paramsInit = {
   projStatus: parseAsString,
@@ -34,6 +34,8 @@ const paramsInit = {
   sortType: parseAsInteger,
   cg: parseAsString,
   projIdEnc: parseAsString,
+  lat:parseAsInteger,
+  lng:parseAsInteger
 };
 // export type of params
 export type SearchParams = typeof paramsInit;
