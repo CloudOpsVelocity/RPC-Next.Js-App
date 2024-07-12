@@ -4,9 +4,11 @@ import { Carousel } from "@mantine/carousel";
 import React from "react";
 import ListingCard from "../Atoms/ListingCard";
 
-type Props = {};
+type Props = {
+  data: any;
+};
 
-export default function ListingCarousel({}: Props) {
+export default function ListingCarousel({ data }: Props) {
   return (
     <Carousel
       slideSize="33.333333%"
@@ -19,18 +21,11 @@ export default function ListingCarousel({}: Props) {
       previousControlIcon={<CarouseSelArrowIcon className="rotate-180" />}
       controlsOffset={"-10px"}
     >
-      <Carousel.Slide>
-        <ListingCard />
-      </Carousel.Slide>
-      <Carousel.Slide>
-        <ListingCard />
-      </Carousel.Slide>
-      <Carousel.Slide>
-        <ListingCard />
-      </Carousel.Slide>
-      <Carousel.Slide>
-        <ListingCard />
-      </Carousel.Slide>
+      {data.map((item: any, index: number) => (
+        <Carousel.Slide key={index}>
+          <ListingCard item={item} />
+        </Carousel.Slide>
+      ))}
     </Carousel>
   );
 }

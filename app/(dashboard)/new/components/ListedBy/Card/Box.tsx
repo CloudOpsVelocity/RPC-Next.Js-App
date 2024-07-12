@@ -21,12 +21,12 @@ export default function Box({ content, image, link, title }: Props) {
       <p className="text-[#148B16] text-xl not-italic font-bold">{title}</p>
       <p className="text-black text-[17px] not-italic font-medium">{content}</p>
       <div className="flex items-center gap-1.5 text-[#0073C6] text-base not-italic font-medium leading-[normal] cursor-pointer justify-center">
-        <div>
+        <a href={link} target="_blank">
           <div className="flex justify-center items-center gap-2">
             View Listing {config.icon}
           </div>
           <hr className="bg-[#0073C6] h-[2px]" />
-        </div>
+        </a>
       </div>
     </div>
   );

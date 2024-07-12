@@ -11,46 +11,55 @@ import ListbySection from "./components/ListedBy";
 import HandPickedProjects from "./components/hand-picked-projects";
 import BlogsSection from "./components/blogs";
 import Footer from "./components/Footer";
-import { getData } from "./api";
+import { getData, getHomeListingData } from "./api";
 import SharePopup from "../search/components/SharePopup";
 import Req from "./components/Req";
 
 export default async function Page() {
-  const data = await getData();
+  const [data, listingData] = await Promise.all([
+    getData(),
+    getHomeListingData(),
+  ]);
   return (
     <div className="h-[100%] w-[100%] flex  flex-col overflow-hidden bg-[#F5F7F8]">
       <Header />
       <HomeSearch />
       <HomeFeatures />
       <NewAddedProjects data={data.featured} />
-      <FeaturedProjects />
+      {/* <FeaturedProjects /> */}
       <DynamicListing
         title="Ready to Move Sell Listings"
         content="Loreum Ipsum"
+        data={listingData["r_Sale"]}
       />
       <TopLocalities />
       <DynamicListing
         title="Ready to Move Rent Listings"
         content="Loreum Ipsum"
+        data={listingData["r_Rent"]}
       />
       <DynamicListing
         title="Under Construction Sell Listings"
         content="Loreum Ipsum"
+        data={listingData["u_Sale"]}
       />
-      <HandPickedProjects />
+      <HandPickedProjects data={data} />
       <DynamicListing
         title="Ready to Move Independent Sell Listing"
         content="Loreum Ipsum"
+        data={listingData["i_Sale"]}
       />
 
       <DynamicListing
         title="Under Construction Independent Sell Listing"
         content="Loreum Ipsum"
+        data={listingData["i_Rent"]}
       />
       <ListbySection />
       <DynamicListing
         title="Under Construction Independent Rent Listing"
         content="Loreum Ipsum"
+        data={listingData["i_Rent"]}
       />
       <PostYourListing />
       <BlogsSection />

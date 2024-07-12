@@ -1,22 +1,33 @@
 import React from "react";
 import CardSection from "./CardSection";
+import Line from "./Line";
 
 type Props = {};
 
 export default function HomeFeatures({}: Props) {
   return (
-    <div className=" shrink-0 m-auto flex justify-center items-end max-w-[1200px] gap-10 py-16">
-      <div className="w-[500px]  ">{config.svg}</div>
-      <div>
-        <div className="text-[#242424] text-2xl not-italic font-medium">
-          Choose us for real estate because we offer expert guidance, a vast
-          property selection and commitment to your dreams.
-          <br />
-          <span className=" text-[#148B16] text-xl not-italic font-semibold">
-            Trust in our experience to find your perfect home!
-          </span>
+    <div className="pb-16 pt-8">
+      <h1 className="text-[#202020] text-center text-[40px] not-italic font-bold">
+        Why Choose{" "}
+        <span className="text-[color:var(--Brand-green-primary,#148B16)] text-[40px] not-italic font-bold">
+          {" "}
+          Get Right Property?
+        </span>
+      </h1>
+      <p className="text-[#242424] text-center text-[29px] not-italic font-semibold leading-[30px] max-w-[60%] m-auto mt-[24px]">
+        Choose us for real estate because we offer expert guidance, a vast
+        property selection and commitment to your dreams.
+      </p>
+      <p className="text-[#33535F] text-2xl not-italic font-semibold text-center mt-4">
+        Trust in our experience to find your perfect home!
+      </p>
+      <div className=" shrink-0 m-auto flex justify-center items-end max-w-[1200px] gap-4 ">
+        <div className="w-[500px]  ml-[15%]">{config.svg}</div>
+        <div>
+          {config.data.map((item, index) => (
+            <Line text={item} key={index} />
+          ))}
         </div>
-        <CardSection />
       </div>
     </div>
   );
@@ -362,4 +373,14 @@ const config = {
       />
     </svg>
   ),
+  data: [
+    "Post your Listing for Free",
+    "Post your Project for Free",
+    "Set property alerts for your requirement",
+    "Showcase your property as Rental, or for Sell",
+    "Get instant queries over Phone, Email and SMS",
+    "Performance in search & Track responses & views online",
+    "Add detailed listing information within 60 seconds....We made it easy",
+    "Add multiple images per listings and projects",
+  ],
 };

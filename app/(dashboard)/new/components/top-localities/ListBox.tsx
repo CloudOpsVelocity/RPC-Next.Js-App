@@ -6,11 +6,39 @@ type Props = {};
 export default function ListBox({}: Props) {
   return (
     <div className="flex flex-wrap gap-[4%] mt-14">
-      <Box />
-      <Box />
-      <Box />
-      <Box />
-      <Box />
+      {config.data.map((item, index) => (
+        <Box key={index} {...item} />
+      ))}
     </div>
   );
 }
+
+const config = {
+  data: [
+    {
+      name: "nagawara",
+      id: 12,
+      type: "L",
+    },
+    {
+      name: "marathalli",
+      id: 11,
+      type: "L",
+    },
+    {
+      name: "hsr Layout",
+      id: 13,
+      type: "L",
+    },
+    {
+      name: "H locality 1",
+      id: 22,
+      type: "L",
+    },
+    {
+      name: "whitefield",
+      id: 10,
+      type: "L",
+    },
+  ],
+};

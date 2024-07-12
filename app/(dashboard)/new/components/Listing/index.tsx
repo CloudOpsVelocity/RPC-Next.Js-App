@@ -5,13 +5,14 @@ import ListingCarousel from "./Carousel";
 type Props = {
   title: string;
   content: string;
+  data: any;
 };
 
-export default function DynamicListing({ content, title }: Props) {
+export default function DynamicListing({ content, title, data }: Props) {
   return (
     <div className="my-[40px] w-[90%] m-auto">
       <MainHeading title={title} content={content} />
-      <ListingCarousel />
+      <ListingCarousel data={data} />
     </div>
   );
 }

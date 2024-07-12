@@ -6,6 +6,8 @@ import Button from "@/app/components/atoms/buttons/variansts";
 import Tabs from "./tabs";
 import Box from "./recentSearch/Box";
 import Alert from "./Alert";
+import QuickFilters from "./QuickFilters";
+import Nearme from "./Nearme";
 const propertyTypes = ["Buy", "Rent"];
 const HomeSearch = () => {
   const [selectedType, setSelectedType] = useState(propertyTypes[0]);
@@ -37,15 +39,14 @@ const HomeSearch = () => {
                 />
               </div>
               <div className="flex gap-2">
-                <button className="flex items-center gap-1 rounded p-1 bg-[#f0ffdc] text-[#148B16]  not-italic font-medium cursor-pointer">
-                  {config.nearMe} Near Me
-                </button>
+                <Nearme />
                 <Button variant="blue" className="!p-2 !text-base !px-4">
                   Search
                 </Button>
               </div>
             </div>
           </div>
+          <QuickFilters />
         </div>
         <div className="mt-4">
           <p className="text-[#242424] text-xl not-italic font-medium leading-[normal]">

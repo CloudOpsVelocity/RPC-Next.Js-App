@@ -1,27 +1,35 @@
 import { HeartIcon, ShareIcon } from "@/app/images/HomePageIcons";
+import { formatCurrency } from "@/app/utils/numbers";
+import { calculatePerSqPrice } from "@/app/utils/price";
 import { Divider } from "@mantine/core";
 import Image from "next/image";
 import React from "react";
 
-type Props = {};
+type Props = {
+  item: any;
+};
 
-export default function ListingCard({}: Props) {
+export default function ListingCard({ item }: Props) {
   return (
     <div className="w-[490px]">
       <div className="h-[276px] shrink-0 shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] relative">
-        <button className="inline-flex justify-center items-center gap-2.5 rounded border p-2 border-solid border-[#0073C6] bg-[#0073c6] text-white text-sm not-italic font-bold leading-[normal] capitalize absolute bottom-3 right-3">
+        <a
+          className="inline-flex justify-center items-center gap-2.5 rounded border p-2 border-solid border-[#0073C6] bg-[#0073c6] text-white text-sm not-italic font-bold leading-[normal] capitalize absolute bottom-3 right-3"
+          href={`${process.env.NEXT_PUBLIC_BACKEND_URL}/listing/banglore/${item.propIdEnc}`}
+          target="_blank"
+        >
           View Detail
-        </button>
+        </a>
         <Image
           alt="test"
-          src="/test.jpg"
+          src={item.media.coverImageUrl}
           width={490}
           height={276}
           className="object-cover w-full h-full"
         />
         <div className="absolute bottom-2 left-2 space-y-2">
           <p className="flex justify-center items-center gap-1 rounded p-1 bg-[#000000b0] text-white text-base not-italic font-semibold leading-[normal] capitalize">
-            Ready to move
+            {item.propStatus}
           </p>
         </div>
       </div>
@@ -29,20 +37,23 @@ export default function ListingCard({}: Props) {
         <div className="p-3 flex justify-between">
           <div className="space-y-1">
             <p className="text-[#148B16] text-[22px] not-italic font-bold leading-[normal] capitalize">
-              ₹ 2.36 Cr,{" "}
-              <span className="text-[#616D75] text-base not-italic font-bold leading-[normal] capitalize">
-                ₹ 2100/- sq.ft
-              </span>
+              {formatCurrency(item.price)},{" "}
+              {item.category !== "Rent" && (
+                <span className="text-[#616D75] text-base not-italic font-bold leading-[normal] capitalize">
+                  ₹ {calculatePerSqPrice(item.price, item.sba)}/- sq.ft
+                </span>
+              )}
             </p>
+
             <p className="text-[#242424] text-lg not-italic font-semibold leading-[normal] capitalize">
-              3 BHK Apartment for Sell in Kadugodi
+              {item.bhkName} {item.propTypeName} for {item.category} in{" "}
+              {item.localityName}
             </p>
             <p className="text-[#242424] text-sm not-italic font-semibold leading-[normal] capitalize">
-              Whitefield, Bangalore
+              {item.cityName ?? "Banglore"}, {item.localityName}
             </p>
           </div>
           <div className="flex gap-2">
-            <HeartIcon className="cursor-pointer" />
             <ShareIcon className="cursor-pointer" />
           </div>
         </div>
@@ -57,7 +68,7 @@ export default function ListingCard({}: Props) {
             <DownSectionCard label="Available For" value="Bachelor’s" />
           </div>
           <p className="text-[#242424] text-sm not-italic font-semibold leading-[normal] capitalize mt-2">
-            Posted by: Owner
+            Posted by: {item.postedBy}
           </p>
         </div>
       </div>

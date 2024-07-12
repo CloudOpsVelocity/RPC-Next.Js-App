@@ -1,3 +1,5 @@
+"use client";
+import { Menu } from "@mantine/core";
 import Image from "next/image";
 import React from "react";
 
@@ -11,9 +13,7 @@ export default function Header({}: Props) {
       </div>
       <div className="flex items-center justify-center gap-[30px] mr-[40px]">
         <p className="text-[#242424] text-xl not-italic font-medium">Blogs</p>
-        <p className="text-[#242424] text-xl not-italic font-medium inline-flex gap-2 justify-center items-center">
-          For Builders {config.chevron}
-        </p>
+        <ForBuilders />
         <button className="inline-flex justify-center items-center gap-1.5 rounded shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] text-white text-xl not-italic font-bold leading-[normal] px-2.5 py-1.5 bg-[#0073c6]">
           Post Property{" "}
           <span className="flex justify-center items-center gap-2.5 rounded px-[5px] py-0.5 bg-[#F0C811]">
@@ -25,6 +25,43 @@ export default function Header({}: Props) {
     </div>
   );
 }
+const ForBuilders = () => {
+  return (
+    <Menu>
+      <Menu.Target>
+        <button className="text-[#242424] text-xl not-italic font-medium inline-flex gap-2 justify-center items-center">
+          For Builders {config.chevron}
+        </button>
+      </Menu.Target>
+      <Menu.Dropdown className="!p-0">
+        <div className="w-[387px] h-[178px] shrink-0 rounded border shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] border-solid border-[#C5C2DD] bg-gradient-to-r from-[#f5f5f5] to-[#ffeacc] p-6">
+          <div>
+            <p className="text-[#F5AC44] text-lg not-italic font-bold">
+              Calling Builders!!!
+            </p>
+          </div>
+          <div className="text-[#242424] text-xs not-italic font-semibold">
+            To Post Project Free!
+          </div>
+          <ul className="ml-5 mt-3">
+            <li className="list-disc text-[#242424] text-[11px] not-italic font-medium leading-4">
+              Free Posting
+            </li>
+            <li className="list-disc text-[#242424] text-[11px] not-italic font-medium leading-4">
+              Multiple Images
+            </li>
+            <li className="list-disc text-[#242424] text-[11px] not-italic font-medium leading-4">
+              Easy to post
+            </li>
+          </ul>
+          <button className="inline-flex justify-center items-center gap-2.5 rounded px-2.5 py-1 bg-[#0073C6] text-white text-xs not-italic font-bold mt-2">
+            Post Project
+          </button>
+        </div>
+      </Menu.Dropdown>
+    </Menu>
+  );
+};
 const AuthButton = () => {
   return (
     <div className="flex justify-center items-center gap-1.5 rounded border shadow-[0px_4px_30px_0px_rgba(194,194,194,0.40)] text-[#0073C6] text-lg not-italic font-semibold leading-[normal] px-2.5 py-1.5 border-solid border-[#0073C6] bg-white">
