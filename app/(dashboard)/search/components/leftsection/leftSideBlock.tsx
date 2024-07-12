@@ -10,7 +10,7 @@ import LoginPopup from "@/app/components/project/modals/LoginPop";
 const LeftSideBlock = () => {
   const [opned, { close, source }] = useReqCallPopup();
   const {
-    searchProps: { isLoading, data, hasNextPage, fetchMoreData, mutate },
+    searchProps: { mutate },
     handleAppliedFilters,
     filters,
     params,

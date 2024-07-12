@@ -1,21 +1,11 @@
 import fs from "fs";
+import { NextResponse } from "next/server";
 export async function GET(req: Request) {
   try {
-    const file = await new Promise((resolve, reject) => {
-      fs.readFile(
-        "c:/Users/Cyntexia/Documents/GitHub/rpc-2.0/README.md",
-        "utf8",
-        (err, data) => {
-          if (err) {
-            reject(err);
-            return;
-          }
-          resolve(data);
-        }
-      );
+    const data = fs.appendFileSync("test.txt", `${new Date()}\n`, {
+      encoding: "utf-8",
     });
-
-    return Response.json({ ok: true, data: file });
+    return NextResponse.json({ data });
   } catch (error) {
     console.error(error);
     return Response.json({ ok: false, error: "Error reading file" });

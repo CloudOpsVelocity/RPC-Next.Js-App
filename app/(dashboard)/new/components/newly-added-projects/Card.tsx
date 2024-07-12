@@ -1,13 +1,22 @@
 import React from "react";
 import { BackgroundImage, Center, Box, Text } from "@mantine/core";
 import Button from "@/app/components/atoms/buttons/variansts";
+import { formatCurrency } from "@/app/utils/numbers";
+import { formatDate } from "@/app/utils/date";
+import Image from "next/image";
+import { ShareIcon } from "@/app/images/HomePageIcons";
+import ViewAllButton from "./ViewButton";
+import ShareBtn from "./ShareBtn";
+import ReqBtn from "./ReqBtn";
+import Shortlist from "./Shortlist";
 
-type Props = {};
+type Props = { item: any };
 
-export default function Card({}: Props) {
+export default function Card({ item }: Props) {
+  let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/abc/banglore/whitefield/${item.projIdEnc}`;
   return (
     <div className="w-[881.143px] h-[514px] shrink-0 relative">
-      <BackgroundImage src="/test.jpg" radius="sm" h={"100%"}>
+      <BackgroundImage src={item.coverUrl} radius="sm" h={"100%"}>
         <div className="p-6">
           <img
             src="https://im.proptiger.com/3/100683/13/sumadhura-infracon-23973255.jpeg?width=800&height=620"
@@ -15,46 +24,60 @@ export default function Card({}: Props) {
             className="w-[100px] h-[100px] object-cover"
           />
         </div>
-        <div className="absolute right-0 top-0 w-[475px] h-[514px] shrink-0 bg-gradient-to-l from-[#00121F] via-[rgba(59,70,98,0.86)] to-[rgba(86,93,112,0.04)] text-right p-7 flex flex-col justify-between">
+        <div className="absolute right-0 top-0 w-[560px] h-[514px] shrink-0 bg-gradient-to-l from-[#00121F] via-[rgba(59,70,98,0.86)] to-[rgba(86,93,112,0.04)] text-right p-7 flex flex-col justify-between">
           <div>
-            <p className="text-white text-[32px] not-italic font-extrabold leading-[normal] tracking-[0.64px]">
-              ₹ 99 Lkh - ₹ 12 Cr
+            <p className="text-white text-[32px] not-italic font-extrabold leading-[normal] tracking-[0.64px] flex justify-end items-center">
+              <div className="inline-flex gap-3 mr-6">
+                <Shortlist
+                  reqId={item.projIdEnc}
+                  shortListed={item.shortListed}
+                />
+                <ShareBtn url={url} />
+              </div>{" "}
+              {formatCurrency(item.minPrice)} - {formatCurrency(item.maxPrice)}
             </p>
-            <p className="text-white text-[26px] not-italic font-bold leading-[normal] tracking-[0.52px] mt-3">
-              Sarang By Sumadhura
+            <p className="text-white text-[26px] not-italic font-bold leading-[normal] tracking-[0.52px] mt-3 text-nowrap">
+              {item.projName}
             </p>
             <p className="text-white  text-xl not-italic font-bold leading-[normal] tracking-[0.4px] mt-6">
-              Apartment, Villa
+              {item.propTypes?.join(", ")}
             </p>
           </div>
           <div className="flex flex-col items-end gap-[19px]">
-            <div className="inline-flex gap-3">
-              {config.heart} {config.share}
+            <div className="space-y-2">
+              <p className="flex justify-center items-center gap-2 rounded py-1 px-2 bg-[#000000b0] text-white text-base not-italic font-semibold leading-[normal] capitalize max-w-fit self-end ml-auto">
+                <Image
+                  src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/homepage/unit.png`}
+                  alt=""
+                  width={16}
+                  height={16}
+                />{" "}
+                201 units
+              </p>
+              <p className="flex justify-center items-center gap-1 rounded py-1 px-2 bg-[#000000b0] text-white text-base not-italic font-semibold leading-[normal] capitalize">
+                Project Land Area: {item.landArea} Acres
+              </p>
             </div>
             <div>
               <p className="text-white text-[22px] not-italic font-bold leading-[normal] tracking-[0.44px]">
-                Start Date: 11 Jan, 2020
+                Start Date: {formatDate(item.launchDate)}
               </p>
               <p className="text-white text-[22px] not-italic font-bold leading-[normal] tracking-[0.44px] mt-1">
-                End Date: 15 Jan, 2024
+                End Date: {formatDate(item.possassionDate)}
               </p>
             </div>
-            <ViewAllButton />
-            <Button>Request Callback</Button>
+            <ViewAllButton url={url} />
+            <ReqBtn
+              builderName={item.builderName}
+              projName={item.projName}
+              reqId={item.projIdEnc}
+            />
           </div>
         </div>
       </BackgroundImage>
     </div>
   );
 }
-
-const ViewAllButton: React.FC = () => {
-  return (
-    <button className="inline-flex max-w-fit justify-center items-center gap-2.5 rounded p-2.5 bg-[#41d1d44d] text-white text-xl not-italic font-bold leading-[normal] tracking-[0.4px]">
-      View Detail
-    </button>
-  );
-};
 
 const config = {
   heart: (

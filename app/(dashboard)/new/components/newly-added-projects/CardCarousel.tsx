@@ -4,9 +4,11 @@ import React from "react";
 import Card from "./Card";
 import "@mantine/carousel/styles.css";
 import { CarouseSelArrowIcon } from "@/app/images/HomePageIcons";
-type Props = {};
+type Props = {
+  data: any;
+};
 
-export default function CardCarousel({}: Props) {
+export default function CardCarousel({ data }: Props) {
   return (
     <Carousel
       slideSize="33.333333%"
@@ -19,19 +21,11 @@ export default function CardCarousel({}: Props) {
       previousControlIcon={<CarouseSelArrowIcon className="rotate-180" />}
       controlsOffset={"-10px"}
     >
-      <Carousel.Slide>
-        <Card />
-      </Carousel.Slide>
-      <Carousel.Slide>
-        <Card />
-      </Carousel.Slide>
-      <Carousel.Slide>
-        <Card />
-      </Carousel.Slide>
-      <Carousel.Slide>
-        <Card />
-      </Carousel.Slide>
-      {/* ...other slides */}
+      {data.map((item: any, index: number) => (
+        <Carousel.Slide key={index}>
+          <Card item={item} />
+        </Carousel.Slide>
+      ))}
     </Carousel>
   );
 }

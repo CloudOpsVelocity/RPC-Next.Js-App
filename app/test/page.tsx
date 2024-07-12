@@ -24,6 +24,8 @@ export default function LoginPage() {
     }
   };
   const str = "sdf sdfljdsfjkl jjfjldsfj j";
+  console.log("*");
+  console.log("");
   // console.log(str);
   // console.log(str.length);
   // console.log(str.at(0));

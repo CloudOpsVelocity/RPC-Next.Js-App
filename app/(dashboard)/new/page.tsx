@@ -11,15 +11,19 @@ import ListbySection from "./components/ListedBy";
 import HandPickedProjects from "./components/hand-picked-projects";
 import BlogsSection from "./components/blogs";
 import Footer from "./components/Footer";
+import { getData } from "./api";
+import SharePopup from "../search/components/SharePopup";
+import Req from "./components/Req";
 
-export default function Page() {
+export default async function Page() {
+  const data = await getData();
   return (
     <div className="h-[100%] w-[100%] flex  flex-col overflow-hidden bg-[#F5F7F8]">
       <Header />
       <HomeSearch />
       <HomeFeatures />
-      <NewAddedProjects />
-      {/* <FeaturedProjects /> */}
+      <NewAddedProjects data={data.featured} />
+      <FeaturedProjects />
       <DynamicListing
         title="Ready to Move Sell Listings"
         content="Loreum Ipsum"
@@ -51,6 +55,8 @@ export default function Page() {
       <PostYourListing />
       <BlogsSection />
       <Footer />
+      <SharePopup />
+      <Req />
     </div>
   );
 }
