@@ -78,8 +78,6 @@ export const filterParser = (data: SearchFilter) => {
     sortType: "sortType",
     cg: "cg",
     projIdEnc: "projIdEnc",
-    lat:'lat',
-    lng:'lng'
   };
 
   // Iterate through each property
@@ -126,7 +124,12 @@ export const filterParser = (data: SearchFilter) => {
           parsedData[parsedKey] = value.join(",");
           // }
         }
-      } else if (value !== null && value !== "" && !Array.isArray(value)) {
+      } else if (
+        value !== null &&
+        value !== undefined &&
+        value !== "" &&
+        !Array.isArray(value)
+      ) {
         // if (parsedKey === "city") {
         //   console.log(parsedKey);
         //   parsedData[parsedKey] = value.split("+")[1];

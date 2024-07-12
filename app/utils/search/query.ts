@@ -29,6 +29,8 @@ const convertToQueryParams = (params: Params): string => {
     sortType: "sortType",
     cg: "cg",
     projIdEnc: "projIdEnc",
+    lat: "lat",
+    lng: "lng",
   };
 
   for (const key in params) {
