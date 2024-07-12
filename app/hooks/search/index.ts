@@ -41,6 +41,9 @@ const paramsInit = {
   projIdEnc: parseAsString,
   lat: parseAsInteger,
   lng: parseAsInteger,
+  
+
+
 };
 // export type of params
 export type SearchParams = typeof paramsInit;
