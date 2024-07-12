@@ -85,7 +85,7 @@ const ListingMobileFilter = ({ close }: any) => {
   return (
     <div className=" flex justify-start items-start w-[70vw] top-[160px] left-[70%]">
       <div className="w-[50%] flex shadow-md justify-start items-center flex-col ">
-        <p className=" text-[#000] text-[14px] bg-[#F4F4F4] flex justify-start px-6  items-center font-[500] py-[3.5%] w-full ">
+        <p className=" text-[#000] text-nowrap xl:text-[14px] bg-[#F4F4F4] flex justify-start px-6  items-center font-[500] py-[3.5%] w-full ">
           Quick Filters
         </p>
         <div className="w-full ">
