@@ -35,7 +35,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-left: 1rem;
+  padding-left: 0rem;
 }
 
 .body {
@@ -57,17 +57,15 @@
 }
 
 .homePageSearch {
-  min-height: 46px;
+  max-height: 46px;
   max-width: 746px;
-  overflow-x: scroll;
   border-radius: 57px;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-left: 1rem;
+  padding-left: 6px;
   outline: none;
   border: none;
-  background-color: red;
 }
 .homePageSearch::placeholder {
   color: black;
@@ -82,17 +80,14 @@
   }
   .wrapperMultiSelection {
     min-height: 40px;
-    max-width: 400px !important;
-    overflow-x: scroll !important;
     border-radius: 57px;
     border-left: 0.3px solid #98a5b8;
     border-right: none;
     display: flex;
-flex-wrap: nowrap !important;
+    flex-wrap: nowrap !important;
     justify-content: center;
     align-items: center;
-    padding-left: 1rem;
-   
+    padding-left: 0rem;
   }
 }
 

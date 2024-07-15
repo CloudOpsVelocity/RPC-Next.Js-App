@@ -14,6 +14,7 @@ import Footer from "./components/Footer";
 import { getData, getHomeListingData } from "./api";
 import SharePopup from "../search/components/SharePopup";
 import Req from "./components/Req";
+import LoginPopup from "@/app/components/project/modals/LoginPop";
 
 export default async function Page() {
   const [data, listingData] = await Promise.all([
@@ -67,6 +68,7 @@ export default async function Page() {
       <PostYourListing />
       <BlogsSection />
       <Footer />
+      <LoginPopup />
       <SharePopup />
       <Req />
     </div>

@@ -8,6 +8,7 @@ import Box from "./recentSearch/Box";
 import Alert from "./Alert";
 import QuickFilters from "./filters/QuickFilters";
 import Nearme from "./Nearme";
+import SearchSec from "./SearchSec";
 const propertyTypes = ["Buy", "Rent"];
 const HomeSearch = () => {
   const [selectedType, setSelectedType] = useState(propertyTypes[0]);
@@ -30,13 +31,13 @@ const HomeSearch = () => {
               {config.homeIcon} All Residential
             </div>
             <div className="flex justify-center items-center gap-[191px]">
-              <div className="flex gap-2">
-                {config.searchIcon}{" "}
-                <input
+              <div className="flex items-center">
+                {config.searchIcon} <SearchSec />
+                {/* <input
                   type="text"
                   className="text focus:outline-none min-w-[280px]"
                   placeholder="Search “ Whitefield, Bangalore”"
-                />
+                /> */}
               </div>
               <div className="flex gap-2">
                 <Nearme />
