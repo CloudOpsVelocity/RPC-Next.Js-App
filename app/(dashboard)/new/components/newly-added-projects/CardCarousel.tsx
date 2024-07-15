@@ -4,11 +4,13 @@ import React from "react";
 import Card from "./Card";
 import "@mantine/carousel/styles.css";
 import { CarouseSelArrowIcon } from "@/app/images/HomePageIcons";
+import useIds from "../useIds";
 type Props = {
   data: any;
 };
 
 export default function CardCarousel({ data }: Props) {
+  const { data: ids } = useIds();
   return (
     <Carousel
       slideSize="33.333333%"
@@ -23,7 +25,12 @@ export default function CardCarousel({ data }: Props) {
     >
       {data.map((item: any, index: number) => (
         <Carousel.Slide key={index}>
-          <Card item={item} />
+          <Card
+            item={{
+              ...item,
+              shortListed: ids?.includes(item.projIdEnc) ? "Y" : "N",
+            }}
+          />
         </Carousel.Slide>
       ))}
     </Carousel>

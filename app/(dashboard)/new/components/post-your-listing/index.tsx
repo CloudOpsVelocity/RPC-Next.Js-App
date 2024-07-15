@@ -1,5 +1,6 @@
 import Image from "next/image";
 import React from "react";
+import Btn from "./Btn";
 
 type Props = {};
 
@@ -13,12 +14,7 @@ export default function PostYourListing({}: Props) {
         <p className="text-[#242424] text-2xl not-italic font-medium leading-[30px] tracking-[0.96px]">
           Your listings deserves the spotlight. Add it to our platform today!
         </p>
-        <button className="inline-flex justify-center items-center gap-1.5 rounded shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] text-white text-xl not-italic font-bold leading-[normal] px-2.5 py-1.5 bg-[#0073c6]">
-          Post Property{" "}
-          <span className="flex justify-center items-center gap-2.5 rounded px-[5px] py-0.5 bg-[#F0C811]">
-            Free
-          </span>
-        </button>
+        <Btn />
       </div>
       <div>
         <Image src={"/home/postlisting.svg"} alt="" width={500} height={500} />
