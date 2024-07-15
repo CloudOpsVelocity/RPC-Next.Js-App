@@ -41,7 +41,6 @@ export default function AuthButton() {
       )}
 
       <Dropdown />
-      {/* {logoutButton} */}
     </>
   );
 }

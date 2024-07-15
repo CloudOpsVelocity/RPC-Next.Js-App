@@ -20,6 +20,7 @@ export default async function Page() {
     getData(),
     getHomeListingData(),
   ]);
+  console.log(Object.keys(listingData));
   return (
     <div className="h-[100%] w-[100%] flex  flex-col overflow-hidden bg-[#F5F7F8]">
       <Header />
@@ -39,25 +40,29 @@ export default async function Page() {
         data={listingData["r_Rent"]}
       />
       <DynamicListing
+        title="Featured Plot Listings"
+        content="Loreum Ipsum"
+        data={listingData["p"]}
+      />
+      <DynamicListing
         title="Under Construction Sell Listings"
         content="Loreum Ipsum"
         data={listingData["u_Sale"]}
       />
       <HandPickedProjects data={data} />
       <DynamicListing
-        title="Ready to Move Independent Sell Listing"
+        title="Under Construction Rent Listings"
+        content="Loreum Ipsum"
+        data={listingData["u_Rent"]}
+      />
+      <DynamicListing
+        title="Independent Sell Listing"
         content="Loreum Ipsum"
         data={listingData["i_Sale"]}
-      />
-
-      <DynamicListing
-        title="Under Construction Independent Sell Listing"
-        content="Loreum Ipsum"
-        data={listingData["i_Rent"]}
-      />
+      />{" "}
       <ListbySection />
       <DynamicListing
-        title="Under Construction Independent Rent Listing"
+        title="Independent Rent Listing"
         content="Loreum Ipsum"
         data={listingData["i_Rent"]}
       />
