@@ -6,7 +6,7 @@ import Button from "@/app/components/atoms/buttons/variansts";
 import Tabs from "./tabs";
 import Box from "./recentSearch/Box";
 import Alert from "./Alert";
-import QuickFilters from "./QuickFilters";
+import QuickFilters from "./filters/QuickFilters";
 import Nearme from "./Nearme";
 const propertyTypes = ["Buy", "Rent"];
 const HomeSearch = () => {

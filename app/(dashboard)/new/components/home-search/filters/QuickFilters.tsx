@@ -6,9 +6,13 @@ import {
   Select,
   Text,
   Checkbox,
+  Radio,
 } from "@mantine/core";
 import React from "react";
 
+import { BasicSelect } from "./Select";
+import { BasicBudgetSelect } from "./BugdetSelect";
+import { BasicMultiSelect } from "./BhkTypeSelect";
 type Props = {};
 
 export default function QuickFilters({}: Props) {
@@ -54,27 +58,9 @@ export default function QuickFilters({}: Props) {
   return (
     <div className="flex  flex-col items-start gap-2.5 rounded p-1.5 border-[0.5px] border-solid border-[#819CA9] bg-white">
       <div className="text-[#242424] text-[15px] not-italic font-normal flex justify-center items-center gap-2">
-        <div>Quick Filter: {"  "}</div>{" "}
-        <Select
-          placeholder="Property Type"
-          rightSection={<DropDownIcon />}
-          data={["Apartment", "Villa", "RowHouse", "Plot"]}
-        />
-        <MultiSelect
-          data={["1BHK", "2BHK", "3BHK", "4BHK", "4+BHK"]}
-          placeholder="Bhk Type"
-          renderRoot={renderMultiSelectOption}
-        />
-        {/* <Select
-          placeholder="Bhk Type"
-          rightSection={<DropDownIcon />}
-          data={["1BHK", "2BHK", "3BHK", "4BHK", "4+BHK"]}
-        /> */}
-        <Select
-          placeholder="Budget"
-          rightSection={<DropDownIcon />}
-          data={["10000", "20000", "30000", "40000", "50000"]}
-        />
+        <div>Quick Filter: {"  "}</div> <BasicSelect />
+        <BasicMultiSelect />
+        <BasicBudgetSelect />
       </div>
     </div>
   );

@@ -25,19 +25,19 @@ export default function ListingCard({ item }: Props) {
         >
           View Detail
         </a>
-        <Carousel mah={276} classNames={styles}>
+        {/* <Carousel mah={276} classNames={styles}>
           {images.map((image, index) => (
-            <Carousel.Slide mah={276} key={index}>
-              <Image
-                alt="test"
-                src={image}
-                width={490}
-                height={276}
-                className="object-cover w-full h-full"
-              />
-            </Carousel.Slide>
-          ))}
-        </Carousel>
+            <Carousel.Slide mah={276} key={index}> */}
+        <Image
+          alt="test"
+          src={images[0]}
+          width={490}
+          height={276}
+          className="object-cover w-full h-full"
+        />
+        {/* </Carousel.Slide>
+          ))} */}
+        {/* </Carousel> */}
         <div className="absolute bottom-2 left-2 space-y-2">
           <p className="flex justify-center items-center gap-1 rounded p-1 bg-[#000000b0] text-white text-base not-italic font-semibold leading-[normal] capitalize">
             {item.propStatus}
