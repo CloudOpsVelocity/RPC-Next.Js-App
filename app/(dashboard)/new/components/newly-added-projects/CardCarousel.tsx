@@ -4,11 +4,14 @@ import React from "react";
 import Card from "./Card";
 import "@mantine/carousel/styles.css";
 import { CarouseSelArrowIcon } from "@/app/images/HomePageIcons";
+import useIds from "../useIds";
 type Props = {
   data: any;
 };
 
 export default function CardCarousel({ data }: Props) {
+  const { data: ids } = useIds();
+  console.log(ids);
   return (
     <Carousel
       slideSize="33.333333%"

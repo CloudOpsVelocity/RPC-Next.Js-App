@@ -20,7 +20,6 @@ export default async function Page() {
     getData(),
     getHomeListingData(),
   ]);
-  console.log(Object.keys(listingData));
   return (
     <div className="h-[100%] w-[100%] flex  flex-col overflow-hidden bg-[#F5F7F8]">
       <Header />
