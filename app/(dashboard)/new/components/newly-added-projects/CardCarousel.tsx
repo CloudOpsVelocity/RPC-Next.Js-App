@@ -11,7 +11,6 @@ type Props = {
 
 export default function CardCarousel({ data }: Props) {
   const { data: ids } = useIds();
-  console.log(ids);
   return (
     <Carousel
       slideSize="33.333333%"

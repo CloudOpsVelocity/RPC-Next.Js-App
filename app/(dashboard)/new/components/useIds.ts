@@ -8,7 +8,8 @@ export default function useIds() {
   const getData = async () => {
     let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/shortlist/ids?iden=p`;
     const res = await fetch(url);
-    return await res.json();
+    const data = await res.json();
+    return data.ids;
   };
   const { data, isLoading } = useQuery({
     queryKey: ["project_home"],
