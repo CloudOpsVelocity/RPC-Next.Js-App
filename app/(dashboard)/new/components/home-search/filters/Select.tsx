@@ -71,7 +71,7 @@ export function BasicSelect() {
             input: styles.input,
           }}
         >
-          {(propertyDetailsTypes?.get(value ?? 33)?.name ?? "") || (
+          {(propertyDetailsTypes?.get(value ?? 0)?.name ?? "") || (
             <Input.Placeholder className="!text-black">
               Property Type
             </Input.Placeholder>

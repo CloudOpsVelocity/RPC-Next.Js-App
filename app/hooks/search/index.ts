@@ -28,8 +28,8 @@ const paramsInit = {
   reraVerified: parseAsString,
   minArea: parseAsInteger,
   maxArea: parseAsInteger,
-  minPrice: parseAsInteger,
-  maxPrice: parseAsInteger,
+  minPrice: parseAsFloat,
+  maxPrice: parseAsFloat,
   city: parseAsString,
   facings: parseAsString,
   furnish: parseAsInteger,
@@ -41,9 +41,6 @@ const paramsInit = {
   projIdEnc: parseAsString,
   lat: parseAsInteger,
   lng: parseAsInteger,
-  
-
-
 };
 // export type of params
 export type SearchParams = typeof paramsInit;
@@ -234,7 +231,7 @@ export default function useSearchFilters(
       case "price":
         setFilters((prev) => ({
           ...prev,
-          bugdetValue: [0, 5],
+          bugdetValue: [0, 60],
         }));
         setParams({ minPrice: null, maxPrice: null });
         break;

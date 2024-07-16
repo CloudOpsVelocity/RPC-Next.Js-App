@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Combobox, Input, InputBase, Radio, useCombobox } from "@mantine/core";
 import styles from "./Style.module.css";
 import { DropDownIcon } from "@/app/images/commonSvgs";
+import useSearchFilters from "@/app/hooks/search";
 
 const groceries = [
   "5L - 25L",
@@ -11,10 +12,21 @@ const groceries = [
   "85L - 10.5CR",
   "10.5CR - 30.5CR",
   "30.5CR - 50.5CR",
-  "50.5CR - 70.5CR+more",
+  "50.5CR - 60.5CR+more",
 ];
+const map = new Map([
+  ["5L - 25L", { min: 5, max: 2500000 }],
+  ["25L - 45L", { min: 25, max: 4500000 }],
+  ["45L - 65L", { min: 45, max: 6500000 }],
+  ["65L - 85L", { min: 65, max: 8500000 }],
+  ["85L - 10.5CR", { min: 85, max: 105000000 }],
+  ["10.5CR - 30.5CR", { min: 105000000, max: 305000000 }],
+  ["30.5CR - 50.5CR", { min: 305000000, max: 505000000 }],
+  ["50.5CR - 60.5CR+more", { min: 505000000, max: 100000000000 }],
+]);
 
 export function BasicBudgetSelect() {
+  const { filters: f, handleSliderChange } = useSearchFilters();
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
   });
@@ -37,7 +49,10 @@ export function BasicBudgetSelect() {
       store={combobox}
       withinPortal={false}
       onOptionSubmit={(val) => {
-        setValue(val);
+        handleSliderChange("bugdetValue", [
+          map.get(val)!.min,
+          map.get(val)!.max,
+        ] as any);
         combobox.closeDropdown();
       }}
       classNames={{
@@ -59,7 +74,7 @@ export function BasicBudgetSelect() {
         >
           {value || (
             <Input.Placeholder className="!text-black">
-              Property Type
+              Budget
             </Input.Placeholder>
           )}
         </InputBase>

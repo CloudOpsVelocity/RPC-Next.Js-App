@@ -1,5 +1,6 @@
 "use client";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 import React from "react";
 
 type Props = {};
@@ -13,13 +14,17 @@ export default function Btn({}: Props) {
   return (
     <a
       target="_blank"
-      className="inline-flex justify-center items-center gap-1.5 rounded shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] text-white text-xl not-italic font-bold leading-[normal] px-2.5 py-1.5 bg-[#0073c6]"
+      className="inline-flex justify-center items-center gap-1.5 rounded shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] text-white text-xl not-italic font-bold leading-[normal] px-2.5 py-1.5 bg-[#0073c6] relative pr-8"
       href={url}
     >
       Post Property{" "}
-      <span className="flex justify-center items-center gap-2.5 rounded px-[5px] py-0.5 bg-[#F0C811]">
-        Free
-      </span>
+      <Image
+        src="/home/free.svg"
+        width={36}
+        height={36}
+        alt="post"
+        className="absolute right-0"
+      />
     </a>
   );
 }

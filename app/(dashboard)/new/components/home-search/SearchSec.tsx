@@ -64,8 +64,8 @@ export default function SearchSec({}: Props) {
         <Combobox.Dropdown
           styles={{
             dropdown: {
-              minWidth: "700px",
-              left: "34.9%",
+              minWidth: "410px",
+              left: "44.5%",
             },
           }}
         >

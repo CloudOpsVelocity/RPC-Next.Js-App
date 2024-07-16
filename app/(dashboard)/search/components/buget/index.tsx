@@ -1,10 +1,16 @@
-import { SEARCH_FILTER_DATA } from "@/app/data/search";
-import { Checkbox, RangeSlider } from "@mantine/core";
-import React, { useState } from "react";
+import { RangeSlider } from "@mantine/core";
+import React from "react";
 import ClearAll from "../ClearAll";
-import { propertyDetailsTypes } from "@/app/data/projectDetails";
 import useSearchFilters from "@/app/hooks/search";
-
+export function formatBudgetValue(value: number) {
+  if (value < 1) {
+    const lakhValue = value * 100;
+    return `${lakhValue.toFixed(2)} L`;
+  } else {
+    const croreValue = value;
+    return `${croreValue.toFixed(2)} Cr`;
+  }
+}
 export default function BugdetFilter() {
   const { filters, handleSliderChange } = useSearchFilters();
 
@@ -18,34 +24,23 @@ export default function BugdetFilter() {
             Budget
           </h3>
           <p className="text-[#4D6677] text-[16px] font-[600] mb-[2%] ">
-            ₹ {filters.bugdetValue[0]} - ₹ {filters.bugdetValue[1]} Cr
+            ₹ {formatBudgetValue(filters.bugdetValue[0])} - ₹{" "}
+            {formatBudgetValue(filters.bugdetValue[1])}
           </p>
           <RangeSlider
             color="green"
             key="budgetSlider"
-            marks={[
-              { value: 0, label: "₹ 0" },
-              { value: 0.5, label: "₹ 0.5 Cr" },
-              { value: 1, label: "₹ 1 Cr" },
-              { value: 1.5, label: "₹ 1.5 Cr" },
-              { value: 2, label: "₹ 2 Cr" },
-              { value: 2.5, label: "₹ 2.5 Cr" },
-              { value: 3, label: "₹ 3 Cr" },
-              { value: 3.5, label: "₹ 3.5 Cr" },
-              { value: 4, label: "₹ 4 Cr" },
-              { value: 4.5, label: "₹ 4.5 Cr" },
-              { value: 5, label: "₹ 5 Cr" },
-            ]}
-            minRange={0.2}
+            minRange={0}
             min={0}
-            max={5}
+            max={60}
             step={0.05}
             onChange={(value) => handleSliderChange("bugdetValue", value)}
             style={{ width: "100%" }}
             defaultValue={[
-              filters?.bugdetValue[0] ?? 0,
-              filters?.bugdetValue[1] ?? 5,
+              filters?.bugdetValue?.[0] ?? 0.05,
+              filters?.bugdetValue?.[1] ?? 60,
             ]}
+            label={formatBudgetValue}
           />
         </div>
       </div>

@@ -9,10 +9,31 @@ import Alert from "./Alert";
 import QuickFilters from "./filters/QuickFilters";
 import Nearme from "./Nearme";
 import SearchSec from "./SearchSec";
+import useSearchFilters from "@/app/hooks/search";
+import { filterParser } from "@/app/utils/search";
+import { createQueryString } from "@/app/utils/search/query";
 const propertyTypes = ["Buy", "Rent"];
 const HomeSearch = () => {
+  const {
+    filters: f,
+    setPropTypes,
+    handleCheckboxClick,
+    handleSliderChange,
+    remnoveSearchOptions,
+    setFilters,
+  } = useSearchFilters();
+  const handleSearch = () => {
+    const parsedData = filterParser(f);
+    const query = createQueryString(parsedData);
+    return query.replace("+", "%2B");
+  };
   return (
-    <div className="w-full pl-5 md:pl-0 border-2 grid grid-cols-[1.1fr_2fr] gap-2 sm:px-20 bg-white py-28 relative">
+    <div
+      className="w-full pl-5 md:pl-0 border-2 grid grid-cols-[1.1fr_2fr] gap-2 sm:px-20 bg-white py-28 relative"
+      style={{
+        backgroundImage: "url(/home/clouds.svg)",
+      }}
+    >
       <Alert />
       <div className=" items-center justify-center hidden md:flex">
         <Image
@@ -35,9 +56,13 @@ const HomeSearch = () => {
               </div>
               <div className="flex gap-2">
                 <Nearme />
-                <Button variant="blue" className="!p-2 !text-base !px-4">
+                <a
+                  href={`/search?${handleSearch()}`}
+                  target="_blank"
+                  className={`inline-flex justify-center items-center gap-2.5 rounded p-1.5 md:p-2.5  text-white  text-[12px]  2xl:text-xl font-bold bg-[#0073c6]`}
+                >
                   Search
-                </Button>
+                </a>
               </div>
             </div>
           </div>

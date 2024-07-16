@@ -85,7 +85,7 @@ export default function useSearchFilters() {
             JSON.stringify(filters[key]) !== JSON.stringify([0, 5000]) ? 1 : 0;
         } else if (key === "bugdetValue") {
           count +=
-            JSON.stringify(filters[key]) !== JSON.stringify([0, 5]) ? 1 : 0;
+            JSON.stringify(filters[key]) !== JSON.stringify([0, 60]) ? 1 : 0;
         } else {
           count += Array.isArray(filters[key as keyof SearchFilter])
             ? filters[key as keyof SearchFilter].length
@@ -120,7 +120,7 @@ export default function useSearchFilters() {
       case "price":
         setFilters((prev) => ({
           ...prev,
-          bugdetValue: [0, 5],
+          bugdetValue: [0, 60],
         }));
         setParams({ minPrice: null, maxPrice: null });
         break;

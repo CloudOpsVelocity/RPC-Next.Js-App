@@ -1,7 +1,6 @@
 import { filterParser } from "@/app/utils/search";
 import { convertToOriginalState } from "@/app/utils/search/transform";
 import { atom } from "jotai";
-import { atomWithLocation } from "jotai-location";
 
 export interface SearchFilter {
   current: number | null;
@@ -40,7 +39,7 @@ export const initialState: SearchFilter = {
   listedBy: null,
   reraVerified: null,
   areaValue: [0, 5000],
-  bugdetValue: [0, 5],
+  bugdetValue: [0, 60],
   builderIds: [],
   city: null,
   facings: [],

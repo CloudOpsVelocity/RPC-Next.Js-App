@@ -12,7 +12,7 @@ const convertToOriginalState = (data: any): SearchFilter => {
     listedBy: null,
     reraVerified: null,
     areaValue: [0, 5000],
-    bugdetValue: [0, 5],
+    bugdetValue: [0, 60],
     builderIds: [],
     city: null,
     facings: [],
@@ -23,6 +23,8 @@ const convertToOriginalState = (data: any): SearchFilter => {
     sortByfield: null,
     sortType: null,
     projIdEnc: null,
+    lat: null,
+    lng: null,
   };
 
   if (data.unitTypes !== undefined) {

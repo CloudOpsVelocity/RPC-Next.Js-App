@@ -12,7 +12,6 @@ import {
 import styles from "./Style.module.css";
 import useSearchFilters from "@/app/hooks/search";
 import { SEARCH_FILTER_DATA } from "@/app/data/search";
-const groceries = ["1BHK", "2BHK", "3BHK", "4BHK", "4+BHK"];
 
 export function BasicMultiSelect() {
   const { filters: f, setFilters, handleCheckboxClick } = useSearchFilters();
@@ -21,18 +20,26 @@ export function BasicMultiSelect() {
     onDropdownOpen: () => combobox.updateSelectedOptionIndex("active"),
   });
 
-  const values = f.unitTypes.map((item) => (
-    <Pill
-      key={item}
-      withRemoveButton
-      onRemove={() => handleCheckboxClick("unitTypes", item)}
-      classNames={{
-        root: styles.pill,
-      }}
-    >
-      {item}
-    </Pill>
-  ));
+  const values = f.unitTypes.map((itemId) => {
+    const selectedItem = SEARCH_FILTER_DATA.bhkDetails.find(
+      (item) => item.value === itemId
+    );
+    if (selectedItem) {
+      return (
+        <Pill
+          key={itemId}
+          withRemoveButton
+          onRemove={() => handleCheckboxClick("unitTypes", itemId)}
+          classNames={{
+            root: styles.pill,
+          }}
+        >
+          {selectedItem.title}
+        </Pill>
+      );
+    }
+    return null; // Handle case where item is not found (optional)
+  });
 
   const options = SEARCH_FILTER_DATA.bhkDetails.map((item: any) => (
     <Combobox.Option
@@ -68,6 +75,7 @@ export function BasicMultiSelect() {
           onClick={() => combobox.toggleDropdown()}
         >
           <Pill.Group>
+            {/* THER IS SHOWING ID IN VALUE SO I WANT TTILE OF THIS OBJECT */}
             {values.length > 0 ? (
               values
             ) : (

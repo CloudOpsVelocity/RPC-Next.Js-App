@@ -40,7 +40,7 @@ const ForBuilders = () => {
             For Builders {config.chevron}
           </button>
         </Menu.Target>
-        <Menu.Dropdown className="!p-0">
+        <Menu.Dropdown className="!p-0 ">
           <div className="w-[387px] h-[178px] shrink-0 rounded border shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] border-solid border-[#C5C2DD] bg-gradient-to-r from-[#f5f5f5] to-[#ffeacc] p-6">
             <div>
               <p className="text-[#F5AC44] text-lg not-italic font-bold">
@@ -65,6 +65,13 @@ const ForBuilders = () => {
               Post Project
             </button>
           </div>
+          <Image
+            src={"/home/for_builder.svg"}
+            alt=""
+            width={220}
+            height={220}
+            className="absolute right-0 bottom-0"
+          />
         </Menu.Dropdown>
       </Menu>
     )
