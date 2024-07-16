@@ -1,37 +1,45 @@
+import useSearchFilters from "@/app/hooks/search";
 import { HomeIcon, RentIcon } from "@/app/images/HomePageIcons";
+import { searchFiltersAtom } from "@/app/store/home";
 import clsx from "clsx";
+import { useAtom } from "jotai";
 import React, { useState } from "react";
 
 type Props = {};
 
 export default function Tabs({}: Props) {
-  const [activeTab, setActiveTab] = useState("buy");
+  // const [{ cg: activeTab }, dispatch] = useAtom(searchFiltersAtom);
+  const { setFilters, filters } = useSearchFilters();
+  const activeTab = filters.cg ?? "S";
+  const setActiveTab = (tab: string) => {
+    setFilters({ ...filters, cg: tab });
+  };
   return (
     <div className="p-4">
       <div className="flex space-x-4">
         <button
-          onClick={() => setActiveTab("buy")}
+          onClick={() => setActiveTab("S")}
           className={`text-black text-center text-lg not-italic font-semibold min-w-14 relative ${
-            activeTab === "buy"
+            activeTab === "S"
               ? "!text-[#148B16] font-semibold text-lg f5fff6]"
               : ""
           }`}
         >
-          <Box active={activeTab === "buy"} Icon={HomeIcon} />
+          <Box active={activeTab === "S"} Icon={HomeIcon} />
           Buy
-          <div className="h-1">{activeTab === "buy" && config.underLine}</div>
+          <div className="h-1">{activeTab === "S" && config.underLine}</div>
         </button>
         <button
-          onClick={() => setActiveTab("rent")}
+          onClick={() => setActiveTab("R")}
           className={`text-black text-center text-lg not-italic font-semibold min-w-14 relative ${
-            activeTab === "rent"
+            activeTab === "R"
               ? "!text-[#148B16] font-semibold text-lg f5fff6]"
               : ""
           }`}
         >
-          <Box active={activeTab === "rent"} Icon={RentIcon} />
+          <Box active={activeTab === "R"} Icon={RentIcon} />
           Rent
-          <div className="h-1">{activeTab === "rent" && config.underLine}</div>
+          <div className="h-1">{activeTab === "R" && config.underLine}</div>
         </button>
       </div>
     </div>

@@ -13,10 +13,11 @@ function Demo() {
     root: containerRef.current,
     threshold: 1,
   });
+  let obj = {
+    name: "John",
+    age: 30,
+  };
 
-  useEffect(() => {
-    console.log("manish ");
-  }, [entry?.isIntersecting]);
   return (
     <Paper>
       <Button onClick={() => cacheHeavyFn(20)}>CACHE RUN</Button>

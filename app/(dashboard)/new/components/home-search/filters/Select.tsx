@@ -2,24 +2,41 @@ import { useState } from "react";
 import { Combobox, Input, InputBase, Radio, useCombobox } from "@mantine/core";
 import styles from "./Style.module.css";
 import { DropDownIcon } from "@/app/images/commonSvgs";
+import useSearchFilters from "@/app/hooks/search";
+import {
+  parseDataProjectProps,
+  propertyDetailsTypes,
+} from "@/app/data/projectDetails";
 
-const groceries = ["Apartment", "Villa", "RowHouse", "Plot"];
+const keys = ["Apartment", "Villa", "RowHouse", "Plot"];
 
 export function BasicSelect() {
+  const { filters: f, setFilters } = useSearchFilters();
+
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
   });
 
-  const [value, setValue] = useState<string | null>(null);
+  const value = f.propTypes;
 
-  const options = groceries.map((item) => (
+  const options = keys.map((item) => (
     <Combobox.Option
       value={item}
       classNames={{
         option: styles.option,
       }}
     >
-      <Radio checked={value === item} color="green" mr={6} /> {item}
+      <Radio
+        checked={
+          value ===
+          parseDataProjectProps[
+            item.toLocaleLowerCase() as keyof typeof parseDataProjectProps
+          ]
+        }
+        color="green"
+        mr={6}
+      />{" "}
+      {item}
     </Combobox.Option>
   ));
 
@@ -28,7 +45,13 @@ export function BasicSelect() {
       store={combobox}
       withinPortal={false}
       onOptionSubmit={(val) => {
-        setValue(val);
+        setFilters({
+          ...f,
+          propTypes:
+            parseDataProjectProps[
+              val.toLocaleLowerCase() as keyof typeof parseDataProjectProps
+            ],
+        });
         combobox.closeDropdown();
       }}
       classNames={{
@@ -48,7 +71,7 @@ export function BasicSelect() {
             input: styles.input,
           }}
         >
-          {value || (
+          {(propertyDetailsTypes?.get(value ?? 33)?.name ?? "") || (
             <Input.Placeholder className="!text-black">
               Property Type
             </Input.Placeholder>

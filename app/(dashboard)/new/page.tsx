@@ -25,7 +25,7 @@ export default async function Page() {
     <div className="h-[100%] w-[100%] flex  flex-col overflow-hidden bg-[#F5F7F8]">
       <Header />
       <HomeSearch />
-      <HomeFeatures />
+      {/* <HomeFeatures />
       <NewAddedProjects data={data.featured} />
       <DynamicListing
         title="Ready to Move Sell Listings"
@@ -70,7 +70,7 @@ export default async function Page() {
       <Footer />
       <LoginPopup />
       <SharePopup />
-      <Req />
+      <Req /> */}
     </div>
   );
 }

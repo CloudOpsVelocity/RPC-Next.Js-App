@@ -10,31 +10,22 @@ import {
   useCombobox,
 } from "@mantine/core";
 import styles from "./Style.module.css";
+import useSearchFilters from "@/app/hooks/search";
+import { SEARCH_FILTER_DATA } from "@/app/data/search";
 const groceries = ["1BHK", "2BHK", "3BHK", "4BHK", "4+BHK"];
 
 export function BasicMultiSelect() {
+  const { filters: f, setFilters, handleCheckboxClick } = useSearchFilters();
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
     onDropdownOpen: () => combobox.updateSelectedOptionIndex("active"),
   });
 
-  const [value, setValue] = useState<string[]>([]);
-
-  const handleValueSelect = (val: string) =>
-    setValue((current) =>
-      current.includes(val)
-        ? current.filter((v) => v !== val)
-        : [...current, val]
-    );
-
-  const handleValueRemove = (val: string) =>
-    setValue((current) => current.filter((v) => v !== val));
-
-  const values = value.map((item) => (
+  const values = f.unitTypes.map((item) => (
     <Pill
       key={item}
       withRemoveButton
-      onRemove={() => handleValueRemove(item)}
+      onRemove={() => handleCheckboxClick("unitTypes", item)}
       classNames={{
         root: styles.pill,
       }}
@@ -43,11 +34,15 @@ export function BasicMultiSelect() {
     </Pill>
   ));
 
-  const options = groceries.map((item) => (
-    <Combobox.Option value={item} key={item} active={value.includes(item)}>
+  const options = SEARCH_FILTER_DATA.bhkDetails.map((item: any) => (
+    <Combobox.Option
+      value={item.value}
+      key={item.value}
+      active={f.unitTypes.includes(item.value)}
+    >
       <Group gap="sm">
-        <Checkbox checked={value.includes(item)} color="green" />
-        <span>{item}</span>
+        <Checkbox checked={f.unitTypes.includes(item.value)} color="green" />
+        <span>{item.title}</span>
       </Group>
     </Combobox.Option>
   ));
@@ -55,7 +50,9 @@ export function BasicMultiSelect() {
   return (
     <Combobox
       store={combobox}
-      onOptionSubmit={handleValueSelect}
+      onOptionSubmit={(val) => {
+        handleCheckboxClick("unitTypes", parseInt(val));
+      }}
       withinPortal={false}
       classNames={{
         dropdown: styles.dropdown,
@@ -86,7 +83,7 @@ export function BasicMultiSelect() {
                 onKeyDown={(event) => {
                   if (event.key === "Backspace") {
                     event.preventDefault();
-                    handleValueRemove(value[value.length - 1]);
+                    // handleValueRemove(value[value.length - 1]);
                   }
                 }}
               />

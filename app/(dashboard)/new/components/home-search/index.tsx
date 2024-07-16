@@ -11,7 +11,6 @@ import Nearme from "./Nearme";
 import SearchSec from "./SearchSec";
 const propertyTypes = ["Buy", "Rent"];
 const HomeSearch = () => {
-  const [selectedType, setSelectedType] = useState(propertyTypes[0]);
   return (
     <div className="w-full pl-5 md:pl-0 border-2 grid grid-cols-[1.1fr_2fr] gap-2 sm:px-20 bg-white py-28 relative">
       <Alert />
@@ -33,11 +32,6 @@ const HomeSearch = () => {
             <div className="flex justify-center items-center gap-[191px]">
               <div className="flex items-center">
                 {config.searchIcon} <SearchSec />
-                {/* <input
-                  type="text"
-                  className="text focus:outline-none min-w-[280px]"
-                  placeholder="Search “ Whitefield, Bangalore”"
-                /> */}
               </div>
               <div className="flex gap-2">
                 <Nearme />
