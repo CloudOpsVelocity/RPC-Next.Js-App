@@ -5,10 +5,11 @@ import useSearchFilters from "@/app/hooks/search";
 export function formatBudgetValue(value: number) {
   if (value < 1) {
     const lakhValue = value * 100;
-    return `${lakhValue.toFixed(2)} L`;
+    const formattedValue = lakhValue.toFixed(2).replace(/\.?0+$/, ""); // Removes extra zeros
+    return `${formattedValue}L`;
   } else {
-    const croreValue = value;
-    return `${croreValue.toFixed(2)} Cr`;
+    const croreValue = value.toFixed(2).replace(/\.?0+$/, ""); // Removes extra zeros
+    return `${croreValue}Cr`;
   }
 }
 export default function BugdetFilter() {

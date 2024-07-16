@@ -26,7 +26,7 @@ export default async function Page() {
       <Header />
       <HomeSearch />
       <HomeFeatures />
-      <NewAddedProjects data={data.featured} />
+      {/* <NewAddedProjects data={data.featured} />
       <DynamicListing
         title="Ready to Move Sell Listings"
         content="Loreum Ipsum"
@@ -70,7 +70,7 @@ export default async function Page() {
       <Footer />
       <LoginPopup />
       <SharePopup />
-      <Req />
+      <Req /> */}
     </div>
   );
 }

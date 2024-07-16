@@ -3,6 +3,7 @@ import { Combobox, Input, InputBase, Radio, useCombobox } from "@mantine/core";
 import styles from "./Style.module.css";
 import { DropDownIcon } from "@/app/images/commonSvgs";
 import useSearchFilters from "@/app/hooks/search";
+import { formatBudgetValue } from "@/app/(dashboard)/search/components/buget";
 
 const groceries = [
   "5L - 25L",
@@ -12,17 +13,17 @@ const groceries = [
   "85L - 10.5CR",
   "10.5CR - 30.5CR",
   "30.5CR - 50.5CR",
-  "50.5CR - 60.5CR+more",
+  "50.5CR - 60CR+more",
 ];
 const map = new Map([
-  ["5L - 25L", { min: 5, max: 2500000 }],
-  ["25L - 45L", { min: 25, max: 4500000 }],
-  ["45L - 65L", { min: 45, max: 6500000 }],
-  ["65L - 85L", { min: 65, max: 8500000 }],
-  ["85L - 10.5CR", { min: 85, max: 105000000 }],
-  ["10.5CR - 30.5CR", { min: 105000000, max: 305000000 }],
-  ["30.5CR - 50.5CR", { min: 305000000, max: 505000000 }],
-  ["50.5CR - 60.5CR+more", { min: 505000000, max: 100000000000 }],
+  ["5L - 25L", { min: 0.05, max: 0.25 }],
+  ["25L - 45L", { min: 0.25, max: 0.45 }],
+  ["45L - 65L", { min: 0.45, max: 0.65 }],
+  ["65L - 85L", { min: 0.65, max: 0.85 }],
+  ["85L - 10.5CR", { min: 0.85, max: 10.5 }],
+  ["10.5CR - 30.5CR", { min: 10.5, max: 30.5 }],
+  ["30.5CR - 50.5CR", { min: 30.5, max: 50.5 }],
+  ["50.5CR - 60CR+more", { min: 50.5, max: 60 }],
 ]);
 
 export function BasicBudgetSelect() {
@@ -31,18 +32,24 @@ export function BasicBudgetSelect() {
     onDropdownClose: () => combobox.resetSelectedOption(),
   });
 
-  const [value, setValue] = useState<string | null>(null);
-
-  const options = groceries.map((item) => (
-    <Combobox.Option
-      value={item}
-      classNames={{
-        option: styles.option,
-      }}
-    >
-      <Radio checked={value === item} color="green" mr={6} /> {item}
-    </Combobox.Option>
-  ));
+  const options = groceries.map((item) => {
+    const minValue = map.get(item)?.min ?? 0;
+    const maxValue = map.get(item)?.max ?? 60;
+    const allInRange = f.bugdetValue.every(
+      (value) => value >= minValue && value <= maxValue
+    );
+    return (
+      <Combobox.Option
+        value={item}
+        classNames={{
+          option: styles.option,
+        }}
+      >
+        <Radio checked={allInRange} color="green" mr={6} /> {item}
+      </Combobox.Option>
+    );
+  });
+  const shouldShowBudget = !(f.bugdetValue[0] === 0 && f.bugdetValue[1] === 60);
 
   return (
     <Combobox
@@ -72,7 +79,10 @@ export function BasicBudgetSelect() {
             input: styles.input,
           }}
         >
-          {value || (
+          {(shouldShowBudget &&
+            `₹${formatBudgetValue(f.bugdetValue[0])}  - ₹${formatBudgetValue(
+              f.bugdetValue[1]
+            )}`) || (
             <Input.Placeholder className="!text-black">
               Budget
             </Input.Placeholder>
