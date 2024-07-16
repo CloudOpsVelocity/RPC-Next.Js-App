@@ -1,0 +1,9 @@
+.control[data-inactive] {
+  opacity: 0;
+  cursor: default;
+}
+@media screen and (max-width: 601px) {
+  .control {
+    display: none;
+  }
+}

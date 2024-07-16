@@ -1,6 +1,7 @@
 import React from "react";
 import CardCarousel from "./CardCarousel";
 import MainHeading from "../heading";
+
 type Props = {
   data: any;
 };

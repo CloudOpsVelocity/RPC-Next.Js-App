@@ -3,7 +3,7 @@ import { CarouseSelArrowIcon } from "@/app/images/HomePageIcons";
 import { Carousel } from "@mantine/carousel";
 import React from "react";
 import ListingCard from "../Atoms/ListingCard";
-
+import Css from "../../Style.module.css";
 type Props = {
   data: any;
 };
@@ -11,7 +11,8 @@ type Props = {
 export default function ListingCarousel({ data }: Props) {
   return (
     <Carousel
-      slideSize="33.333333%"
+      // slideSize="33.333333%"
+      slideSize={{ base: "90%", sm: "50%", md: "33.333333%" }}
       slideGap="md"
       loop
       align="start"
@@ -20,6 +21,7 @@ export default function ListingCarousel({ data }: Props) {
       nextControlIcon={<CarouseSelArrowIcon />}
       previousControlIcon={<CarouseSelArrowIcon className="rotate-180" />}
       controlsOffset={"-10px"}
+      classNames={Css}
     >
       {data.map((item: any, index: number) => (
         <Carousel.Slide key={index}>

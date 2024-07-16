@@ -16,7 +16,7 @@ type Props = {
 export default function ListingCard({ item }: Props) {
   const images = getImageUrls(item.media);
   return (
-    <div className="w-[490px]">
+    <div className="w-full sm:w-[490px]">
       <div className="h-[276px] shrink-0 shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] relative">
         <a
           className="inline-flex justify-center items-center gap-2.5 rounded border p-2 border-solid border-[#0073C6] bg-[#0073c6] text-white text-sm not-italic font-bold leading-[normal] capitalize absolute bottom-3 right-3 z-[1000]"
@@ -44,7 +44,7 @@ export default function ListingCard({ item }: Props) {
           </p>
         </div>
       </div>
-      <div className="h-[183px] self-stretch rounded shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] border-[0.8px] border-solid border-[#A4B8B5]bg-white">
+      <div className="sm:h-[183px] self-stretch rounded shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] border-[0.8px] border-solid border-[#A4B8B5]bg-white">
         <div className="p-3 flex justify-between">
           <div className="space-y-1">
             <p className="text-[#148B16] text-[22px] not-italic font-bold leading-[normal] capitalize">

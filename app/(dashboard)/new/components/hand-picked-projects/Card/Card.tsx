@@ -15,7 +15,7 @@ type Props = { item: any };
 export default function Card({ item }: Props) {
   let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/abc/banglore/whitefield/${item.projIdEnc}`;
   return (
-    <div className="w-[881.143px] h-[514px] shrink-0 relative">
+    <div className="w-[380px] sm:w-[881.143px] h-[514px] shrink-0 relative">
       <BackgroundImage src={item.coverUrl} radius="sm" h={"100%"}>
         <div className="p-6">
           <img
@@ -24,7 +24,7 @@ export default function Card({ item }: Props) {
             className="w-[100px] h-[100px] object-cover"
           />
         </div>
-        <div className="absolute right-0 top-0 w-[560px] h-[514px] shrink-0 bg-gradient-to-l from-[#00121F] via-[rgba(59,70,98,0.86)] to-[rgba(86,93,112,0.04)] text-right p-7 flex flex-col justify-between">
+        <div className="absolute right-0 top-0 sm:w-[560px] h-[514px] shrink-0 bg-gradient-to-l from-[#00121F] via-[rgba(59,70,98,0.86)] to-[rgba(86,93,112,0.04)] text-right p-7 flex flex-col justify-between">
           <div>
             <p className="text-white text-[32px] not-italic font-extrabold leading-[normal] tracking-[0.64px] flex justify-end items-center">
               <div className="inline-flex gap-3 mr-6">

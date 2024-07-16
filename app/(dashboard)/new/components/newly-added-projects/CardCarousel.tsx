@@ -5,6 +5,7 @@ import Card from "./Card";
 import "@mantine/carousel/styles.css";
 import { CarouseSelArrowIcon } from "@/app/images/HomePageIcons";
 import useIds from "../useIds";
+import Css from "../../Style.module.css";
 type Props = {
   data: any;
 };
@@ -22,6 +23,7 @@ export default function CardCarousel({ data }: Props) {
       nextControlIcon={<CarouseSelArrowIcon />}
       previousControlIcon={<CarouseSelArrowIcon className="rotate-180" />}
       controlsOffset={"-10px"}
+      classNames={Css}
     >
       {data.map((item: any, index: number) => (
         <Carousel.Slide key={index}>
