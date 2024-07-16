@@ -1,8 +1,8 @@
 import React from 'react'
 import SortBy from './SortBy';
-import { SEARCH_FILTER_DATA } from '@/app/data/search';
 
-const NewTabCon = ({onTabChange, selectedProtype }:any) => {
+
+const NewTabCon = ({onTabChange, selectedProtype, categoryType }:any) => {
 
 
 
@@ -10,7 +10,7 @@ const NewTabCon = ({onTabChange, selectedProtype }:any) => {
 
     <div className='flex flex-row justify-between items-center  align-middle gap-[3px] md:gap-3  bg-blue-200 shadow-md px-[1px] md:px-4 md:py-2.5;'>
       <div className='flex flex-row justify-between items-center  align-middle gap-1 md:gap-3 '>
-        {SEARCH_FILTER_DATA.categoryData.map((item) => (
+        {categoryType.map((item) => (
           <button 
           onClick={()=>onTabChange(item.value)}
           className={` text-[12px]  md:text-base leading-0  font-montserrat cursor-pointer   ${item.value == selectedProtype ? 'text-blue-500 underline font-semibold md:font-bold' : 'text-gray-500'}`}

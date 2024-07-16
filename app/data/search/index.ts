@@ -111,10 +111,24 @@ export const SEARCH_FILTER_DATA = {
       label: "Lift",
     },
   ],
-  categoryData: [
+  categoryDataProject: [
     {
       label: "Projects",
       value: "proj",
+    },
+    {
+      label: "Owner Listing",
+      value: "I",
+    },
+    {
+      label: "Agent Listing",
+      value: "A",
+    },
+  ],
+  categoryDataListing: [
+    {
+      label: "Builder Listings",
+      value: "B",
     },
     {
       label: "Owner Listing",

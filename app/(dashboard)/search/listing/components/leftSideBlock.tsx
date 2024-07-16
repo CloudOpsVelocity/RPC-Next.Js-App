@@ -4,6 +4,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { ScrollArea, Tabs } from "@mantine/core";
 import ProjectDetailsCard from "./projectCard";
 import S from "@/app/styles/seach/Listing.module.css";
+import ProjectCard from "../../components/Card";
+import { RightSideBlock } from "../../components/rightSideBlock";
 import {
   DropDownIcon,
   emptyFilesIcon,
@@ -13,13 +15,17 @@ import useSearchFilters from "@/app/hooks/search";
 import RequestCallBackModal from "@/app/components/molecules/popups/req";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
-
-const LeftSideBlock = () => {
+import NewTabCon from "../../components/leftsection/newtabCon";
+import { SEARCH_FILTER_DATA } from '@/app/data/search';
+type Props = {
+  mutate?: ({ index, type }: { type: string; index: number }) => void;
+};
+const LeftSideBlock = ({ mutate }: Props) => {
   const [opned, { close, source }] = useReqCallPopup();
   const { filters, setSingleType, handleReset, handleAppliedFilters, params } =
     useSearchFilters();
   const {
-    searchProps: { isLoading, data, hasNextPage, fetchMoreData },
+    searchProps: { isLoading, data, hasNextPage, fetchMoreData, refetch },
   } = useSearchFilters("owner");
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -41,15 +47,18 @@ const LeftSideBlock = () => {
       handleAppliedFilters();
     }
   };
+ 
   return (
-    <div className="md:w-[70%] sm:w-[100%]  md:bg-white  min-w-[400px] md:min-w-[500px] mt-9">
+    <div className="md:w-[100%] sm:w-[100%]  md:bg-white  min-w-[400px] md:min-w-[500px] mt-9">
+      <div className="flex flex-row">
       <Tabs
         value={params.listedBy ?? "All"}
         onChange={(value) => onTabChange(value ?? "All")}
         defaultValue="All"
         classNames={S}
       >
-        <Tabs.List>
+
+       {/*  <Tabs.List>
           <h3 className="mt-1.5 text-black text-base md:text-xl   font-medium ml-3 w-full md:w-auto mb-2 md:mb-0">
             Select the listings Posted by:
           </h3>
@@ -68,7 +77,12 @@ const LeftSideBlock = () => {
             );
           })}
           <SortBy />
-        </Tabs.List>
+        </Tabs.List> */}
+           <NewTabCon 
+          onTabChange={onTabChange}
+          selectedProtype={params.listedBy ?? "All"}
+          categoryType={SEARCH_FILTER_DATA.categoryDataListing}
+      />
 
         <Tabs.Panel value="All">
           <ScrollArea
@@ -83,11 +97,18 @@ const LeftSideBlock = () => {
               data.length > 0 ? (
               data.map((eachOne, index) => {
                 return (
-                  <ProjectDetailsCard
+               /*    <ProjectDetailsCard
                     key={index}
                     type={filters.listedBy}
                     {...eachOne}
-                  />
+                  /> */
+                  <ProjectCard
+                  key={index}
+                  refetch={refetch}
+                  data={{ ...eachOne, type: filters.listedBy ?? "All" }}
+                  index={index}
+                  mutate={mutate}
+                />
                 );
               })
             ) : (
@@ -116,11 +137,13 @@ const LeftSideBlock = () => {
               data.length > 0 ? (
               data.map((eachOne, index) => {
                 return (
-                  <ProjectDetailsCard
-                    key={index}
-                    type={filters.listedBy}
-                    {...eachOne}
-                  />
+                  <ProjectCard
+                  key={index}
+                  refetch={refetch}
+                  data={{ ...eachOne, type: filters.listedBy ?? "I" }}
+                  index={index}
+                  mutate={mutate}
+                />
                 );
               })
             ) : (
@@ -144,11 +167,13 @@ const LeftSideBlock = () => {
               data.length > 0 ? (
               data.map((eachOne, index) => {
                 return (
-                  <ProjectDetailsCard
-                    key={index}
-                    type={filters.listedBy}
-                    {...eachOne}
-                  />
+                <ProjectCard
+                  key={index}
+                  refetch={refetch}
+                  data={{ ...eachOne, type: filters.listedBy ?? "A" }}
+                  index={index}
+                  mutate={mutate}
+                />
                 );
               })
             ) : (
@@ -172,11 +197,13 @@ const LeftSideBlock = () => {
               data.length > 0 ? (
               data.map((eachOne, index) => {
                 return (
-                  <ProjectDetailsCard
-                    key={index}
-                    type={filters.listedBy}
-                    {...eachOne}
-                  />
+                  <ProjectCard
+                  key={index}
+                  refetch={refetch}
+                  data={{ ...eachOne, type: filters.listedBy ?? "B" }}
+                  index={index}
+                  mutate={mutate}
+                />
                 );
               })
             ) : (
@@ -189,6 +216,12 @@ const LeftSideBlock = () => {
           </ScrollArea>
         </Tabs.Panel>
       </Tabs>
+        <RightSideBlock 
+          categoryType={"listing"}
+          />
+
+      </div>
+    
       <RequestCallBackModal
         close={close}
         opened={opned}

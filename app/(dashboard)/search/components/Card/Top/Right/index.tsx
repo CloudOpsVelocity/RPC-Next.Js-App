@@ -98,7 +98,7 @@ export default function TopRightSection({
       )}
       {!isMobile && (
         <>
-          <div className="flex  flex-col justify-between h-auto items-end">
+          <div className="flex  flex-col justify-center  h-auto items-end">
             <button
               className="max-w-fit px-[1px] py-[1px] rounded text-[#242424] text-sm not-italic font-semibold my-2 md:mb-1 gradient"
               onClick={() =>
@@ -118,7 +118,7 @@ export default function TopRightSection({
                 View on Map <SearchMapIcon className="w-4 h-4" />
               </div>
             </button>
-            <div className="space-x-2 align-middle">
+            <div className="space-x-2 flex flex-row justify-center">
               <HeartButton
                 shortListed={Sh}
                 onAddingShortList={onAddingShortList}

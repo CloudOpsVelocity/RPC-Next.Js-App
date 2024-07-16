@@ -4,7 +4,8 @@ import React, { useMemo } from "react";
 import MapSkeleton from "@/app/components/maps/Skeleton";
 import useSearchFilters from "@/app/hooks/search";
 
-const RightSideBlock = () => {
+      
+const RightSideBlock = ({categoryType}:any) => {
   const Map = useMemo(
     () =>
       dynamic(() => import("@/app/components/maps/search"), {
@@ -15,7 +16,7 @@ const RightSideBlock = () => {
   );
   const {
     searchProps: { data, isLoading },
-  } = useSearchFilters("project");
+  } = useSearchFilters(categoryType);
   return (
     <div className="w-[98%] sm:w-full  flex justify-start items-start z-[1] md:w-[50%] ">
       <Map
