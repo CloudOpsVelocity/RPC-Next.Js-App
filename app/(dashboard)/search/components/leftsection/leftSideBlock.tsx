@@ -43,16 +43,22 @@ const LeftSideBlock = () => {
 
   return (
     <div className="md:w-[50%] sm:w-[100%]  md:bg-white w-[100%]  xl:min-w-[400px] md:min-w-[500px]">
-      <Tabs
+      {/* <Tabs
         value={params.listedBy ?? "proj"}
         onChange={(value) => onTabChange((value as "proj") || "proj")}
         defaultValue="proj"
       >
         
         <TabList />
-        <TabPanelSection mutate={mutate} />
-      </Tabs>
-     {/*  <NewTabCon /> */}
+     
+       
+      </Tabs> */}
+      <NewTabCon 
+      onTabChange={onTabChange}
+      selectedProtype={params.listedBy ??  "proj"}
+      />
+      <TabPanelSection mutate={mutate} />
+      
       <RequestCallBackModal
         close={close}
         opened={opned}

@@ -1,26 +1,30 @@
 import React from 'react'
+import SortBy from './SortBy';
+import { SEARCH_FILTER_DATA } from '@/app/data/search';
 
-const NewTabCon = () => {
+const NewTabCon = ({onTabChange, selectedProtype }:any) => {
 
-const demo=["project", "owner listing", "Agent Listing"];
 
 
   return (
 
-    <div className='flex flex-row justify-center align-middle gap-3'>
-    {demo.map((item) => (
-        <button 
-      /*   onClick={} */
-        className='text-base text-blue-500'>
-            {item}
-        </button>
-    ))}
-      <button className="flex h-7 justify-center items-center gap-2.5 p-3.5 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.05)] border-[0.5px] border-solid border-[#CBD4E1] bg-white  xl:mr-4 xl:mt-1 xl:mb-2 ml-4 md:ml-auto xl:ml-auto ">
-          <span className="text-[#0073C6] text-xs md:text-base not-italic   font-semibold leading-[normal] ">
-            { "Sort By"}
-          </span>
+    <div className='flex flex-row justify-between items-center  align-middle gap-[3px] md:gap-3  bg-blue-200 shadow-md px-[1px] md:px-4 md:py-2.5;'>
+      <div className='flex flex-row justify-between items-center  align-middle gap-1 md:gap-3 '>
+        {SEARCH_FILTER_DATA.categoryData.map((item) => (
+          <button 
+          onClick={()=>onTabChange(item.value)}
+          className={` text-[12px]  md:text-base leading-0  font-montserrat cursor-pointer   ${item.value == selectedProtype ? 'text-blue-500 underline font-semibold md:font-bold' : 'text-gray-500'}`}
+  >            {item.label}
           </button>
+      ))}
+      </div>
+   
+        <div className='flex flex-row items-center gap-1 md:gap-2 self-end justify-center'>
+          <h1 className='text-[12px] md:text-base text-gray-400 font-semibold'>Sort By:</h1>
+          <SortBy />
+        </div>
   </div>
+ 
   
   )
 }

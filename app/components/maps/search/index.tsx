@@ -8,6 +8,7 @@ import {
   Popup,
   Tooltip,
   useMap,
+  
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css"; // Import Leaflet CSS
 import { LatLngTuple, divIcon, point } from "leaflet";
@@ -22,6 +23,8 @@ import selectedSearchAtom from "@/app/store/search/map";
 import MarkerClusterGroup from "react-leaflet-cluster";
 import TooltipProj from "./Tooltip";
 import { useSearchParams, useParams } from "next/navigation";
+import TooltipProp from "./ToolltipProp";
+
 interface Cluster {
   getChildCount: () => number;
 }
@@ -78,35 +81,50 @@ const MapContent = ({ data }: any) => {
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
   const map = useMap();
   useEffect(() => {
-    if (selected && selected.projName) {
+    if (selected && selected.projOrPropName) {
       map.setView([parseFloat(selected.lat), parseFloat(selected.lang)], 15);
     }
   }, [selected, map]);
+  useEffect(() => {
+    if (data&&data[0]) {
+      map.setView([parseFloat(data[0]?.lat), parseFloat(data[0]?.lang)], 14);
+    }
+  }, [data]);
+
+  // 1. FIND IS IT PROPERTY OR PRJECT 
+  // 2. CREATE TOOLTIPS FOR EACH SECTION 
+
   return (
     <>
       {data &&
         data.length > 0 &&
-        data?.map((item: any, index: number) => (
+        data?.map((item: any, index: number) => {
+          console.log({item})
+          const isProp = !!item.propIdEnc
+          const title = selected?.type
+          return (
           <Marker
             key={index}
             position={[parseFloat(item?.lat || 0), parseFloat(item?.lang || 0)]}
             icon={isMobile ? MobileIcon : MapIcon}
           >
-            {selected?.projName === item?.projName && (
-              <Tooltip
-                opacity={1}
-                permanent={selected?.projName === item.projName}
-                direction="top"
-                offset={[10, -35]}
-              >
-                <TooltipProj data={item} />
-              </Tooltip>
-            )}
-            <Tooltip opacity={1} direction="top" offset={[10, -35]}>
-              <TooltipProj data={item} />
+           {selected?.projOrPropName === ((title === "proj" ? item.projName : item.propName)) && (
+            <Tooltip
+              opacity={1}
+              permanent={true}
+              direction="top"
+              offset={[10, -35]}
+            >
+              {!isProp ? <TooltipProj data={item}/> : <TooltipProp data={item} />}
+            </Tooltip>
+          )}
+
+            <Tooltip
+             opacity={1} direction="top" offset={[10, -35]}>
+            {!isProp ? <TooltipProj data={item}/> : <TooltipProp data={item} />}
             </Tooltip>
           </Marker>
-        ))}
+        )})}
     </>
   );
 };

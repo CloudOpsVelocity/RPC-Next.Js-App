@@ -47,7 +47,7 @@ export default function SortBy({}: Props) {
   return (
     <Menu shadow="md" width={200}>
       <Menu.Target>
-        <button className="flex h-7 justify-center items-center gap-2.5 p-3.5 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.05)] border-[0.5px] border-solid border-[#CBD4E1] bg-white  xl:mr-4 xl:mt-1 xl:mb-2 ml-4 md:ml-auto xl:ml-auto ">
+        <button className="flex h-7 justify-center items-center gap-2.5 p-3.5 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.05)] border-[0.5px] border-solid border-[#CBD4E1] bg-white  xl:mr-4 xl:mt-1 xl:mb-2 ml-2 md:ml-auto xl:ml-auto ">
           <span className="text-[#0073C6] text-xs md:text-base not-italic   font-semibold leading-[normal] ">
             {seletedValue || "Sort By"}
           </span>

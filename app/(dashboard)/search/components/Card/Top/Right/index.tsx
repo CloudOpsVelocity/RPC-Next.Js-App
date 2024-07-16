@@ -7,6 +7,7 @@ import HeartButton from "../Center/HeartButton";
 import { searchShareAtom } from "../../../SharePopup";
 import { useMediaQuery } from "@mantine/hooks";
 import ProjData from "../Center/ProjData";
+import { ShareIcon } from "@/app/images/HomePageIcons";
 
 type Props = any;
 
@@ -25,6 +26,7 @@ export default function TopRightSection({
   data,
   propIdEnc,
   postedDate,
+  propName
 }: Props) {
   const setSelected = useSetAtom(selectedSearchAtom);
   const [sharePopupData, setSharePopup] = useAtom(searchShareAtom);
@@ -33,6 +35,7 @@ export default function TopRightSection({
       ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/abc/banglore/whitefield/${projIdEnc}`
       : `${process.env.NEXT_PUBLIC_BACKEND_URL}/listing/whitefield/${propIdEnc}`;
   const isMobile = useMediaQuery("(max-width: 601px)");
+  const projOrPropName= type === "proj" ?  projName : propName;
   return (
     <div
       onClick={(e) => e.stopPropagation()}
@@ -46,12 +49,15 @@ export default function TopRightSection({
               <button
                 className="max-w-fit px-[1px] py-[1px]  rounded  text-[#242424] text-sm not-italic font-semibold my-1  md:mb-1  gradient"
                 onClick={() =>
+                  
                   setSelected({
                     agentListing,
                     ownerListing,
-                    projName,
+                    projOrPropName,
                     lat,
                     lang,
+                    type
+                    
                   })
                 }
               >
@@ -67,12 +73,12 @@ export default function TopRightSection({
                   onAddingShortList={onAddingShortList}
                 />
                 <button
-                  className="max-w-fit px-[1px] py-[1px]  rounded  text-[#242424] text-sm not-italic font-semibold  md:mb-1  "
+                  className="gap-2 xl:gap-1 flex flex-row items-center align-middle  "
                   onClick={() =>
                     setSharePopup({ ...sharePopupData, opened: true, url })
                   }
                 >
-                  {config.shareIcon}
+                  <ShareIcon/>
                 </button>
               </div>
             </div>
@@ -96,12 +102,14 @@ export default function TopRightSection({
             <button
               className="max-w-fit px-[1px] py-[1px] rounded text-[#242424] text-sm not-italic font-semibold my-2 md:mb-1 gradient"
               onClick={() =>
+                
                 setSelected({
                   agentListing,
                   ownerListing,
-                  projName,
+                  projOrPropName,
                   lat,
                   lang,
+                  type
                 })
               }
             >
