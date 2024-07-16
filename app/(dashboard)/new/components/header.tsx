@@ -1,5 +1,16 @@
+"use client";
+import { Menu } from "@mantine/core";
 import Image from "next/image";
 import React from "react";
+import Btn from "./post-your-listing/Btn";
+import data, { unAuthorizedData } from "@/app/data/dropdown";
+import S from "@/app/styles/DropDown.module.css";
+import axios from "axios";
+import { signOut, useSession } from "next-auth/react";
+import usePathToOrigin from "@/app/hooks/custom/useRedirect";
+import Link from "next/link";
+import PostProjectBtn from "./PostProjectBtn";
+import clsx from "clsx";
 
 type Props = {};
 
@@ -11,27 +22,174 @@ export default function Header({}: Props) {
       </div>
       <div className="flex items-center justify-center gap-[30px] mr-[40px]">
         <p className="text-[#242424] text-xl not-italic font-medium">Blogs</p>
-        <p className="text-[#242424] text-xl not-italic font-medium inline-flex gap-2 justify-center items-center">
-          For Builders {config.chevron}
-        </p>
-        <button className="inline-flex justify-center items-center gap-1.5 rounded shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] text-white text-xl not-italic font-bold leading-[normal] px-2.5 py-1.5 bg-[#0073c6]">
-          Post Property{" "}
-          <span className="flex justify-center items-center gap-2.5 rounded px-[5px] py-0.5 bg-[#F0C811]">
-            Free
-          </span>
-        </button>
-        <AuthButton />
+        <ForBuilders />
+        <PostProjectBtn />
+        <Btn />
+        <Dropdown />
       </div>
     </div>
   );
 }
-const AuthButton = () => {
+const ForBuilders = () => {
+  const { data: session } = useSession();
   return (
-    <div className="flex justify-center items-center gap-1.5 rounded border shadow-[0px_4px_30px_0px_rgba(194,194,194,0.40)] text-[#0073C6] text-lg not-italic font-semibold leading-[normal] px-2.5 py-1.5 border-solid border-[#0073C6] bg-white">
-      Login/ Sign up {config.blueChevron}
-    </div>
+    !session && (
+      <Menu>
+        <Menu.Target>
+          <button className="text-[#242424] text-xl not-italic font-medium inline-flex gap-2 justify-center items-center">
+            For Builders {config.chevron}
+          </button>
+        </Menu.Target>
+        <Menu.Dropdown className="!p-0">
+          <div className="w-[387px] h-[178px] shrink-0 rounded border shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] border-solid border-[#C5C2DD] bg-gradient-to-r from-[#f5f5f5] to-[#ffeacc] p-6">
+            <div>
+              <p className="text-[#F5AC44] text-lg not-italic font-bold">
+                Calling Builders!!!
+              </p>
+            </div>
+            <div className="text-[#242424] text-xs not-italic font-semibold">
+              To Post Project Free!
+            </div>
+            <ul className="ml-5 mt-3">
+              <li className="list-disc text-[#242424] text-[11px] not-italic font-medium leading-4">
+                Free Posting
+              </li>
+              <li className="list-disc text-[#242424] text-[11px] not-italic font-medium leading-4">
+                Multiple Images
+              </li>
+              <li className="list-disc text-[#242424] text-[11px] not-italic font-medium leading-4">
+                Easy to post
+              </li>
+            </ul>
+            <button className="inline-flex justify-center items-center gap-2.5 rounded px-2.5 py-1 bg-[#0073C6] text-white text-xs not-italic font-bold mt-2">
+              Post Project
+            </button>
+          </div>
+        </Menu.Dropdown>
+      </Menu>
+    )
   );
 };
+
+function Dropdown() {
+  const handleLogout = async () => {
+    try {
+      if (process.env.NODE_ENV === "development") {
+        await signOut();
+        await axios.get(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/logOut`
+        );
+      } else {
+        await axios
+          .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/logOut`)
+          .then(() => {
+            signOut();
+          });
+      }
+    } catch (error) {
+      console.log("Something Went Wrong", error);
+    }
+  };
+
+  const { redirectQueryParam } = usePathToOrigin();
+  const { data: session } = useSession();
+  return (
+    <Menu width={200} shadow="md">
+      <Menu.Target>
+        {session ? (
+          <div className=" text-[12px] flex justify-center items-center gap-1.5 rounded border shadow-[0px_4px_30px_0px_rgba(194,194,194,0.40)] text-[#0073C6] text-lg not-italic font-semibold leading-[normal] px-2.5 py-1.5 border-solid border-[#0073C6] bg-white">
+            <button className="inline-flex justify-center items-center gap-1">
+              {config.getIcon(session.user.userType)} {session.user.name}
+            </button>
+            {config.blueChevron}
+          </div>
+        ) : (
+          <div className=" text-[12px] flex justify-center items-center gap-1.5 rounded border shadow-[0px_4px_30px_0px_rgba(194,194,194,0.40)] text-[#0073C6] text-lg not-italic font-semibold leading-[normal] px-2.5 py-1.5 border-solid border-[#0073C6] bg-white">
+            <Link
+              className=""
+              href={{
+                pathname: `/register`,
+                search: redirectQueryParam,
+              }}
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+            >
+              Login/ Sign up
+            </Link>
+            {config.blueChevron}
+          </div>
+        )}
+      </Menu.Target>
+      {session ? (
+        <>
+          <Menu.Dropdown
+            className="!z-[1000]"
+            classNames={{
+              dropdown: S.dropdown,
+            }}
+          >
+            <>
+              {data.map((item, index) =>
+                session.user?.userType !== "B" &&
+                item.label === "Post Project" ? null : (
+                  <Menu.Item
+                    key={index}
+                    classNames={{
+                      itemLabel: S.itemLabel,
+                    }}
+                    component="a"
+                    className="block text-gray-700 hover:text-green-500 transition-colors"
+                    href={item.url}
+                    target="_blank"
+                  >
+                    {item.label}
+                  </Menu.Item>
+                )
+              )}
+              <hr className=" bg-[#768AA9] h-0.5 max-w-[90%] m-auto" />
+            </>
+
+            <Menu.Item
+              classNames={{
+                itemLabel: S.itemLabel,
+              }}
+              component="button"
+              className="block text-gray-700 hover:text-green-500 transition-colors"
+              onClick={handleLogout}
+            >
+              Log Out
+            </Menu.Item>
+          </Menu.Dropdown>
+        </>
+      ) : (
+        <Menu.Dropdown
+          className="!z-[1000]"
+          classNames={{
+            dropdown: S.dropdown,
+          }}
+        >
+          {unAuthorizedData.map((item, index) => (
+            <Menu.Item
+              key={index}
+              classNames={{
+                itemLabel: S.itemLabel,
+              }}
+              component={Link}
+              className="block text-gray-700 hover:text-green-500 transition-colors"
+              href={{
+                pathname: item.url,
+                search: redirectQueryParam,
+              }}
+            >
+              {item.label}
+            </Menu.Item>
+          ))}
+        </Menu.Dropdown>
+      )}
+    </Menu>
+  );
+}
 const config = {
   chevron: (
     <svg
@@ -59,4 +217,30 @@ const config = {
     </svg>
   ),
   logo: `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/grp-logo/logo.jpg`,
+  getIcon: (type: string) => {
+    const data = {
+      B: {
+        color: "bg-[#00C5CC]",
+        text: "B",
+      },
+      I: {
+        color: "bg-[#9ADB7C]",
+        text: "In",
+      },
+      A: {
+        color: "bg-[#FFE53B]",
+        text: "A",
+      },
+    };
+    return (
+      <span
+        className={clsx(
+          "flex flex-col justify-center items-center gap-2.5 rounded px-1 text-white",
+          `${data[type as keyof typeof data].color}`
+        )}
+      >
+        {data[type as keyof typeof data].text}
+      </span>
+    );
+  },
 };

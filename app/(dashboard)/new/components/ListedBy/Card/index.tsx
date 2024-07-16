@@ -17,19 +17,19 @@ const config = {
     {
       title: "BUILDER",
       content: "Check all the listings posted by builder",
-      link: "",
+      link: `${process.env.NEXT_PUBLIC_PROJECT_URL}/search/listing?listedBy=B`,
       image: "/staticmedia-images-icons/homepage/Builder.png",
     },
     {
       title: "AGENT",
       content: "Check all the listings posted by agent",
-      link: "",
+      link: `${process.env.NEXT_PUBLIC_PROJECT_URL}/search/listing?listedBy=A`,
       image: "/staticmedia-images-icons/homepage/Agent.png",
     },
     {
       title: "INDIVIDUAL",
       content: "Check all the listings posted by individual",
-      link: "",
+      link: `${process.env.NEXT_PUBLIC_PROJECT_URL}/search/listing?listedBy=I`,
       image: "/staticmedia-images-icons/homepage/Individual.png",
     },
   ],

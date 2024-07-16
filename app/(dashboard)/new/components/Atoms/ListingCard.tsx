@@ -1,27 +1,46 @@
 import { HeartIcon, ShareIcon } from "@/app/images/HomePageIcons";
+import { formatCurrency } from "@/app/utils/numbers";
+import { calculatePerSqPrice } from "@/app/utils/price";
 import { Divider } from "@mantine/core";
 import Image from "next/image";
 import React from "react";
+import ShareBtn from "../newly-added-projects/ShareBtn";
+import { formatDate } from "@/app/utils/date";
+import { Carousel } from "@mantine/carousel";
+import { getImageUrls } from "@/app/utils/image";
+import styles from "./Carouse.module.css";
+type Props = {
+  item: any;
+};
 
-type Props = {};
-
-export default function ListingCard({}: Props) {
+export default function ListingCard({ item }: Props) {
+  const images = getImageUrls(item.media);
   return (
     <div className="w-[490px]">
       <div className="h-[276px] shrink-0 shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] relative">
-        <button className="inline-flex justify-center items-center gap-2.5 rounded border p-2 border-solid border-[#0073C6] bg-[#0073c6] text-white text-sm not-italic font-bold leading-[normal] capitalize absolute bottom-3 right-3">
+        <a
+          className="inline-flex justify-center items-center gap-2.5 rounded border p-2 border-solid border-[#0073C6] bg-[#0073c6] text-white text-sm not-italic font-bold leading-[normal] capitalize absolute bottom-3 right-3 z-[1000]"
+          href={`${process.env.NEXT_PUBLIC_BACKEND_URL}/listing/banglore/${item.propIdEnc}`}
+          target="_blank"
+        >
           View Detail
-        </button>
+        </a>
+        {/* <Carousel mah={276} classNames={styles}>
+          {images.map((image, index) => (
+            <Carousel.Slide mah={276} key={index}> */}
         <Image
           alt="test"
-          src="/test.jpg"
+          src={images[0]}
           width={490}
           height={276}
           className="object-cover w-full h-full"
         />
+        {/* </Carousel.Slide>
+          ))} */}
+        {/* </Carousel> */}
         <div className="absolute bottom-2 left-2 space-y-2">
           <p className="flex justify-center items-center gap-1 rounded p-1 bg-[#000000b0] text-white text-base not-italic font-semibold leading-[normal] capitalize">
-            Ready to move
+            {item.propStatus}
           </p>
         </div>
       </div>
@@ -29,35 +48,100 @@ export default function ListingCard({}: Props) {
         <div className="p-3 flex justify-between">
           <div className="space-y-1">
             <p className="text-[#148B16] text-[22px] not-italic font-bold leading-[normal] capitalize">
-              ₹ 2.36 Cr,{" "}
-              <span className="text-[#616D75] text-base not-italic font-bold leading-[normal] capitalize">
-                ₹ 2100/- sq.ft
-              </span>
+              {formatCurrency(item.price)},{" "}
+              {item.category !== "Rent" && (
+                <span className="text-[#616D75] text-base not-italic font-bold leading-[normal] capitalize">
+                  ₹{" "}
+                  {calculatePerSqPrice(
+                    item.price,
+                    item.propTypeName === "Plot" ? item.pa : item.sba
+                  )}
+                  /- sq.ft
+                </span>
+              )}
             </p>
+
             <p className="text-[#242424] text-lg not-italic font-semibold leading-[normal] capitalize">
-              3 BHK Apartment for Sell in Kadugodi
+              {item.propTypeName === "Plot" && `${item.pa} sq.ft`}{" "}
+              {item.bhkName} {item.propTypeName} for {item.category} in{" "}
+              {item.localityName}
             </p>
             <p className="text-[#242424] text-sm not-italic font-semibold leading-[normal] capitalize">
-              Whitefield, Bangalore
+              {item.cityName ?? "Banglore"}, {item.localityName}
             </p>
           </div>
-          <div className="flex gap-2">
-            <HeartIcon className="cursor-pointer" />
-            <ShareIcon className="cursor-pointer" />
+          <div className="">
+            <ShareBtn
+              url={`${process.env.NEXT_PUBLIC_BACKEND_URL}/listing/banglore/${item.propIdEnc}`}
+            />
           </div>
         </div>
+        {/* by default new sortBy */}
         <div className="pl-3">
           <div className="inline-flex items-center gap-1 self-stretch rounded border-[0.5px] border-solid border-[#616D75] bg-[#F5F5F5] p-1">
-            <DownSectionCard label="Super Builtup Area" value="2,617 sq.ft" />
-            <Divider orientation="vertical" color="#7BA0BB" />
-            <DownSectionCard label="Carpet Area" value="2,617 sq.ft" />
-            <Divider orientation="vertical" color="#7BA0BB" />
-            <DownSectionCard label="Property Age" value="0-2 Years" />
-            <Divider orientation="vertical" color="#7BA0BB" />
-            <DownSectionCard label="Available For" value="Bachelor’s" />
+            {item.propTypeName === "Plot" ? (
+              <>
+                <DownSectionCard label="Plot Area" value={`${item.pa} sq.ft`} />
+                <Divider orientation="vertical" color="#7BA0BB" />
+                <DownSectionCard
+                  label={"Possesion Date"}
+                  value={formatDate(item.possassionDate, true)}
+                />
+                <Divider orientation="vertical" color="#7BA0BB" />
+                <DownSectionCard
+                  label={"Available From"}
+                  value={formatDate(item.availableFrom, true)}
+                />
+              </>
+            ) : item.propStatus === "Under Cunstruction" ? (
+              <>
+                <DownSectionCard
+                  label="Super Builtup Area"
+                  value={`${item.sba} sq.ft`}
+                />
+                <Divider orientation="vertical" color="#7BA0BB" />
+                <DownSectionCard
+                  label="Carpet Area"
+                  value={`${item.ca} sq.ft`}
+                />
+                <Divider orientation="vertical" color="#7BA0BB" />
+                <DownSectionCard
+                  label={"Possesion Date"}
+                  value={formatDate(item.possassionDate, true)}
+                />
+                <Divider orientation="vertical" color="#7BA0BB" />
+                <DownSectionCard
+                  label={"Available From"}
+                  value={formatDate(item.availableFrom, true)}
+                />
+              </>
+            ) : (
+              <>
+                <DownSectionCard
+                  label="Super Builtup Area"
+                  value={`${item.sba} sq.ft`}
+                />
+                <Divider orientation="vertical" color="#7BA0BB" />
+                <DownSectionCard
+                  label="Carpet Area"
+                  value={`${item.ca} sq.ft`}
+                />
+                <Divider orientation="vertical" color="#7BA0BB" />
+                <DownSectionCard label="Property Age" value="0-2 Years" />
+                <Divider orientation="vertical" color="#7BA0BB" />
+                <DownSectionCard
+                  label={
+                    item.category === "Rent"
+                      ? "Available For"
+                      : "Available From"
+                  }
+                  value={formatDate(item.availableFrom, true)}
+                />
+              </>
+            )}
           </div>
           <p className="text-[#242424] text-sm not-italic font-semibold leading-[normal] capitalize mt-2">
-            Posted by: Owner
+            Posted by: {item.postedBy}
           </p>
         </div>
       </div>

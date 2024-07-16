@@ -2,10 +2,12 @@
 import React from "react";
 import Card from "./Card";
 
-type Props = {};
+type Props = {
+  active: number;
+  setActive: React.Dispatch<React.SetStateAction<number>>;
+};
 
-export default function SideTabs({}: Props) {
-  const [active, setActive] = React.useState(0);
+export default function SideTabs({ active, setActive }: Props) {
   return (
     <div>
       {config.data.map((item, index) => (

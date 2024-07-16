@@ -23,7 +23,7 @@ export default function Shortlist({ reqId, shortListed }: Props) {
         source: "proj",
       });
     } else {
-      openLogin();
+      openLogin(() => window.location.reload());
     }
   };
   return (

@@ -1,3 +1,4 @@
+import { HomeIcon, RentIcon } from "@/app/images/HomePageIcons";
 import clsx from "clsx";
 import React, { useState } from "react";
 
@@ -16,7 +17,7 @@ export default function Tabs({}: Props) {
               : ""
           }`}
         >
-          <Box active={activeTab === "buy"} />
+          <Box active={activeTab === "buy"} Icon={HomeIcon} />
           Buy
           <div className="h-1">{activeTab === "buy" && config.underLine}</div>
         </button>
@@ -28,7 +29,7 @@ export default function Tabs({}: Props) {
               : ""
           }`}
         >
-          <Box active={activeTab === "rent"} />
+          <Box active={activeTab === "rent"} Icon={RentIcon} />
           Rent
           <div className="h-1">{activeTab === "rent" && config.underLine}</div>
         </button>
@@ -38,8 +39,9 @@ export default function Tabs({}: Props) {
 }
 type BoxProps = {
   active: boolean;
+  Icon: any;
 };
-const Box = ({ active }: BoxProps) => {
+const Box = ({ active, Icon }: BoxProps) => {
   return (
     <div
       className={clsx(
@@ -47,7 +49,9 @@ const Box = ({ active }: BoxProps) => {
         active &&
           "shadow-[0px_4px_7px_0px_rgba(140,197,63,0.34)_inset,0px_4px_36.5px_0px_rgba(194,194,194,0.60)] border-[0.5px] border-solid border-[#148B16] bg-[#F5FFF6]"
       )}
-    ></div>
+    >
+      <Icon fill={active ? "#148B16" : "#2B333F"} />
+    </div>
   );
 };
 const config = {

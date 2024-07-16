@@ -1,11 +1,15 @@
 import Image from "next/image";
 import React from "react";
 
-type Props = {};
+type Props = { name: string; id: number; type: string };
 
-export default function Box({}: Props) {
+export default function Box({ id, name }: Props) {
   return (
-    <div className="flex w-[276px] flex-col items-center justify-center gap-[18px] text-[#242424] text-[22px] not-italic font-semibold leading-[normal]">
+    <a
+      className="flex w-[276px] flex-col items-center justify-center gap-[18px] text-[#242424] text-[22px] not-italic font-semibold leading-[normal]"
+      target="_blank"
+      href={`${process.env.NEXT_PUBLIC_BACKEND_URL}/search?localities=${name}%2B${id}`}
+    >
       <Image
         src={"/test.jpg"}
         alt="box"
@@ -13,8 +17,11 @@ export default function Box({}: Props) {
         height={276}
         className="h-[276px] self-stretch border-[color:var(--stroke-blue-gradient,#41D1D4)] shadow-[0px_4px_25px_0px_rgba(194,194,194,0.76)] rounded-[276px] border-4 border-solid"
       />
-      <p className="inline-flex gap-2">{config.locationIcon}Koramangala</p>
-    </div>
+      <p className="inline-flex gap-2 capitalize">
+        {config.locationIcon}
+        {name}
+      </p>
+    </a>
   );
 }
 
