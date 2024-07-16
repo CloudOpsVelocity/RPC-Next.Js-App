@@ -27,8 +27,8 @@ export default function TabPanelSection({ mutate }: Props) {
     }
   }, [entry?.isIntersecting, hasNextPage, fetchMoreData]);
 
-  return TabSectionData.map((item) => (
-    <Tabs.Panel value={item} key={item}>
+  return  (
+  
       <div
         className="p-[2%] max-h-[700px] overflow-y-auto h-screen"
         ref={containerRef}
@@ -60,8 +60,8 @@ export default function TabPanelSection({ mutate }: Props) {
           </div>
         )}
       </div>
-    </Tabs.Panel>
-  ));
+    
+  );
 }
 
 const TabSectionData = ["proj", "I", "A"];

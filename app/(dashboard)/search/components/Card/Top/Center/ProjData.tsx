@@ -17,7 +17,26 @@ export default function ProjData({
   price,
   propName,
   localityName,
+  propTypeName,
+  bhkName,
+  category,
+  cityName,
+  postedBy
 }: Props) {
+  console.log( minPrice,
+    maxPrice,
+    projName,
+    city,
+    state,
+    locality,
+    builderName,
+    shortListed,
+    type,
+    price,
+    propName,
+    localityName,
+    propTypeName,
+  )
   return type === "proj" ? (
     <div>
       {" "}
@@ -40,16 +59,16 @@ export default function ProjData({
         {formatCurrency(Number(price))}
       </p>
       <p className="text-[#242424] text-[12px] xl:text-[18px] capitalize  not-italic font-medium">
-        3BHK Apartment for Sell in Kadugodi
+        {bhkName} {propTypeName} for {category} in {localityName}
       </p>
       <p className="text-[#001F35] text-[12px]  xl:text-[18px] not-italic font-semibold">
         {propName}{" "}
       </p>
       <p className="text-[#242424] text-[12px] xl:text-[18px] capitalize  not-italic font-medium">
-        {`${localityName}, ${city}`}
+        {`${localityName}, ${cityName}`}
       </p>
       <p className="text-[#242424]  text-[10px]  xl:text-[14px] not-italic font-normal">
-        Posted By: <span className="font-bold">{getTypeText(type)}</span>
+        Posted By: <span className="font-bold">{/* {getTypeText(type)} */}{postedBy}</span>
       </p>
     </div>
   );
