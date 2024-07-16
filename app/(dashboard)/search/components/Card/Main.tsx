@@ -105,7 +105,7 @@ const MainBox = ({ data, refetch, index, mutate }: Props) => {
   return (
     <div className="h-auto m-2 self-stretch rounded border shadow-[0px_4px_30px_0px_rgba(74,82,113,0.20)] border-solid border-[#A4B8D4]">
       <div
-        onClick={() => onClickRedirect(projIdEnc)}
+        onClick={() => onClickRedirect(reqId)}
         className="flex flex-col xl:flex-row justify-between"
       >
         <LeftSection src={coverUrl ?? coverImage} rera={rerastatus} />
