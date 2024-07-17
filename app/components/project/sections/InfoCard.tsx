@@ -16,10 +16,10 @@ export default function InfoCard(data: any) {
       onClick={data.cardClick}
     >
       <div className="flex items-center gap-3 rounded pr-1 bg-[#F0F3F4]">
-        <div className="flex flex-col justify-center items-start gap-1.5 rounded p-1 bg-[#C0DDC0] text-[#242424] text-lg not-italic font-medium leading-[normal]">
+        <div className="flex flex-col justify-center items-start gap-1.5 rounded p-1 text-nowrap   bg-[#C0DDC0] text-[#242424] text-lg not-italic font-medium leading-[normal]">
           {data.label}
         </div>
-        <div className="text-[#001F35] text-base not-italic font-semibold">
+        <div className="text-[#001F35] !text-nowrap text-base not-italic font-semibold">
           {formatCurrency(data.minPrice)} - {formatCurrency(data.maxPrice)}
         </div>
       </div>

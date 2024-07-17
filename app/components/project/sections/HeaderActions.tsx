@@ -62,7 +62,7 @@ export default function HeaderActions({
   };
   const [currentPhase, setCurrentPhase] = useAtom(currentPhaseAtom);
   const setSelected = useSetAtom(parital_unit_atom);
-  const propTypes = Object.keys(partialUnitData[currentPhase]).sort();
+  const propTypes = Object?.keys(partialUnitData[currentPhase]).sort();
   console.log(propTypes);
   const [propCgId, setPropCgId] = useAtom(propCgIdAtom);
   useEffect(() => {

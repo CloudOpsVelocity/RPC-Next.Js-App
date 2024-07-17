@@ -15,6 +15,7 @@ import {
 } from "@/app/store/partialsUnits";
 import Loading from "../../atoms/Loader";
 import { formatCurrency } from "@/app/utils/numbers";
+import { useMediaQuery } from "@mantine/hooks";
 
 type Props = {
   partialUnitData: any;
@@ -42,20 +43,26 @@ export default function CardCarousel({ partialUnitData }: Props) {
     console.warn("No keys found in unit data.");
   }
   const setData = useSetAtom(selectedPartialUnitAtom);
+  const isMobile = useMediaQuery("(max-width: 601px)");
+
   return (
-    <div className="flex flex-col justify-center items-start gap-[18px] rounded shadow-[0px_4px_10px_0px_rgba(183,208,224,0.32)] p-[18px] border-l-[#B1BEC7] border-y-[#B1BEC7] border-t border-solid border-b border-l bg-[#fafafafa] mt-10">
+    <div className="flex flex-col justify-center items-start gap-[18px] rounded shadow-[0px_4px_10px_0px_rgba(183,208,224,0.32)] p-[18px] border-l-[#B1BEC7] border-y-[#B1BEC7] border-t border-solid border-b border-l bg-[#fafafafa] mt-10 max-w-[400px] md:max-w-full flex-wrap md:w-full">
       <p className="text-[color:var(--Black-2,#333)] text-base not-italic font-semibold">
         {data.length} floor plans available
       </p>
       {data.length > 0 ? (
         <Carousel
           classNames={Style}
-          slideSize="20.333333%"
+          slideSize={"20.333333%"}
           slideGap="md"
+          maw={isMobile ? 350: "full"}
           align="start"
-          slidesToScroll={3}
+          slidesToScroll={1}
+          controlsOffset={"xs"}
+          withControls={false}
           nextControlIcon={<DarkNextCarouselButton />}
           previousControlIcon={<DarkCarouseIcon />}
+          dragFree
           mih={120}
         >
           {data.map((item: any, index: number) => (
