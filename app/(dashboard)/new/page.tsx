@@ -15,7 +15,6 @@ import { getData, getHomeListingData } from "./api";
 import SharePopup from "../search/components/SharePopup";
 import Req from "./components/Req";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
-
 export default async function Page() {
   const [data, listingData] = await Promise.all([
     getData(),

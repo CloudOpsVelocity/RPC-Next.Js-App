@@ -80,7 +80,7 @@ const HomeSearch = () => {
           <p className="text-[#242424] sm:text-xl not-italic font-medium leading-[normal] ">
             Browse:
           </p>
-          <div className="space-x-2 mt-1 flex sm:block overflow-x-scroll max-w-[100%]">
+          <div className="space-x-2 mt-1 flex sm:block overflow-x-scroll max-w-[100%] scrollbar-hide">
             <Box />
             <Box />
             <Box />
