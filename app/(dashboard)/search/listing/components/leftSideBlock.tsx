@@ -50,7 +50,7 @@ const LeftSideBlock = ({ mutate }: Props) => {
  
   return (
     <div className="md:w-[100%] sm:w-[100%]  md:bg-white  min-w-[400px] md:min-w-[500px] mt-9">
-      <div className="flex flex-row">
+      <div className="flex md:flex-row flex-col-reverse">
       <Tabs
         value={params.listedBy ?? "All"}
         onChange={(value) => onTabChange(value ?? "All")}

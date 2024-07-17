@@ -21,7 +21,8 @@ export default function CarouselModal() {
       classNames={Style}
       slideSize="20.333333%"
       slideGap="md"
-      align="start"
+      withControls={true}
+      align="center"
       slidesToScroll={3}
       nextControlIcon={<DarkNextCarouselButton />}
       previousControlIcon={<DarkCarouseIcon />}
@@ -30,6 +31,8 @@ export default function CarouselModal() {
       {isData.others.map((item: any, index: number) => (
         <Carousel.Slide
           key={index}
+          mih={70}
+          mt={20}
           onClick={() => handleImageClick(index)}
           className="cursor-pointer"
         >

@@ -13590,7 +13590,7 @@ export const PrevCarouselIcon = () => {
       height="32"
       viewBox="0 0 33 32"
       fill="none"
-      className="h-[24px] w-[24px]  xl:h-[34px] xl:w-[34px]"
+      className="h-[24px] w-[24px]  md:h-[34px] md:w-[34px]"
     >
       <circle
         cx="16"
@@ -13615,6 +13615,7 @@ export const DarkCarouseIcon = () => {
       height="41"
       viewBox="0 0 41 41"
       fill="none"
+      className="h-[14px] w-[14px] md:h-[41] md:w-[41] " 
     >
       <rect
         width="41"
@@ -13639,6 +13640,7 @@ export const DarkNextCarouselButton = () => {
       height="41"
       viewBox="0 0 41 41"
       fill="none"
+      className="md:h-[41] md:w-[41] h-[14px] w-[14px]"
     >
       <rect
         x="41"

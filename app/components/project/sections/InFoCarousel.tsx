@@ -32,7 +32,7 @@ export default function InFoCarousel({ partialUnitData }: Props) {
       slideSize="20.333333%"
       slideGap="md"
       align="start"
-      slidesToScroll={3}
+      slidesToScroll={1}
       mt={20}
       nextControlIcon={<DarkNextCarouselButton />}
       previousControlIcon={<DarkCarouseIcon />}
