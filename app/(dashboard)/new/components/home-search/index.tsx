@@ -14,14 +14,7 @@ import { filterParser } from "@/app/utils/search";
 import { createQueryString } from "@/app/utils/search/query";
 const propertyTypes = ["Buy", "Rent"];
 const HomeSearch = () => {
-  const {
-    filters: f,
-    setPropTypes,
-    handleCheckboxClick,
-    handleSliderChange,
-    remnoveSearchOptions,
-    setFilters,
-  } = useSearchFilters();
+  const { filters: f } = useSearchFilters();
   const handleSearch = () => {
     const parsedData = filterParser(f);
     const query = createQueryString(parsedData);
@@ -29,7 +22,7 @@ const HomeSearch = () => {
   };
   return (
     <div
-      className="w-full pl-5 md:pl-0 border-2 grid grid-cols-[1.1fr_2fr] gap-2 sm:px-20 bg-white py-28 relative"
+      className="px-5 w-full  md:pl-0 border-2 sm:grid sm:grid-cols-[1.1fr_2fr] gap-2 sm:px-20 bg-white pt-28 pb-4 sm:py-28 relative mt-[70px] "
       style={{
         backgroundImage: "url(/home/clouds.svg)",
       }}
@@ -43,18 +36,33 @@ const HomeSearch = () => {
           width={500}
         />
       </div>
-      <div className="">
-        <div className="flex flex-col items-start gap-3 self-stretch pl-[11px] pr-2.5 pt-0 pb-[13px] rounded-lg border-[0.5px] border-solid border-[#A6BDDF] bg-[#f2f7ff] h-[200px]">
+      <div className="w-full">
+        <div className="flex flex-col items-start sm:gap-3 self-stretch pl-[11px] pr-2.5 pt-0 pb-[13px] rounded-lg border-[0.5px] border-solid border-[#A6BDDF] bg-[#f2f7ff] sm:h-[200px] w-full">
           <Tabs />
-          <div className="flex items-center gap-2.5 rounded shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] px-1.5 py-1 border-[0.5px] border-solid border-[#819CA9] bg-white">
-            <div className="flex items-center gap-[5px] rounded p-2 border-r-[0.5px] border-r-gray-400 border-solid text-[#242424] text-lg not-italic font-medium">
-              {config.homeIcon} All Residential
+          <p className="inline-flex sm:hidden justify-center items-center text-[#242424] text-[12px] not-italic font-medium gap-1">
+            {config.homeIcon} All Residential
+          </p>
+          <div className="flex items-center gap-2.5 rounded shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] px-1.5 py-1 border-[0.5px] border-solid border-[#819CA9] bg-white w-full sm:w-auto">
+            <div className="hidden sm:flex items-center gap-[5px] rounded p-2 border-r-[0.5px] border-r-gray-400 border-solid text-[#242424] sm:text-lg not-italic font-medium text-[12px]">
+              {config.homeIcon}{" "}
+              <div className="text-nowrap">All Residential</div>
             </div>
-            <div className="flex justify-center items-center gap-[191px]">
-              <div className="flex items-center">
+            <div className="flex justify-center items-center sm:gap-[191px] w-full">
+              <div className="flex sm:hidden items-center min-w-full">
+                {config.searchIcon}{" "}
+                <button className="ml-2">
+                  <span className="text-[#242424] text-xs not-italic font-normal">
+                    Search
+                  </span>
+                  <span className="text-[#242424] text-xs italic font-medium">
+                    “ Whitefield, Bangalore”
+                  </span>
+                </button>
+              </div>
+              <div className="hidden sm:flex items-center w-full">
                 {config.searchIcon} <SearchSec />
               </div>
-              <div className="flex gap-2">
+              <div className="hidden sm:flex gap-2">
                 <Nearme />
                 <a
                   href={`/search?${handleSearch()}`}
@@ -69,10 +77,10 @@ const HomeSearch = () => {
           <QuickFilters />
         </div>
         <div className="mt-4">
-          <p className="text-[#242424] text-xl not-italic font-medium leading-[normal]">
+          <p className="text-[#242424] text-xl not-italic font-medium leading-[normal] ">
             Recent Search:
           </p>
-          <div className="space-x-2 mt-1">
+          <div className="space-x-2 mt-1 flex sm:block overflow-x-scroll max-w-[100%]">
             <Box />
             <Box />
             <Box />
@@ -94,6 +102,7 @@ const config = {
       height="24"
       viewBox="0 0 24 24"
       fill="none"
+      className="h-[12px] w-[12px] xl:h-[24px] xl:w-[24px]"
     >
       <path
         d="M12.459 1.66059C12.3259 1.55684 12.162 1.50049 11.9932 1.50049C11.8245 1.50049 11.6606 1.55684 11.5275 1.66059L0.75 10.0643L1.68225 11.2433L3 10.2158V19.5001C3.00079 19.8977 3.15908 20.2787 3.44022 20.5599C3.72135 20.841 4.10242 20.9993 4.5 21.0001H19.5C19.8976 20.9993 20.2787 20.841 20.5598 20.5599C20.8409 20.2787 20.9992 19.8977 21 19.5001V10.2226L22.3177 11.2501L23.25 10.0711L12.459 1.66059ZM13.5 19.5001H10.5V13.5001H13.5V19.5001ZM15 19.5001V13.5001C15 13.1023 14.842 12.7207 14.5607 12.4394C14.2794 12.1581 13.8978 12.0001 13.5 12.0001H10.5C10.1022 12.0001 9.72064 12.1581 9.43934 12.4394C9.15804 12.7207 9 13.1023 9 13.5001V19.5001H4.5V9.04659L12 3.20409L19.5 9.05409V19.5001H15Z"

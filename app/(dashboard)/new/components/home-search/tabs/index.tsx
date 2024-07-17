@@ -15,7 +15,7 @@ export default function Tabs({}: Props) {
     setFilters({ ...filters, cg: tab });
   };
   return (
-    <div className="p-4">
+    <div className="py-4 pr-4 sm:p-4">
       <div className="flex space-x-4">
         <button
           onClick={() => setActiveTab("S")}

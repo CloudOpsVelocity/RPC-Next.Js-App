@@ -12,19 +12,18 @@ export default function SearchSec({}: Props) {
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
   });
-  const [value, setValue] = useState<string | null>(null);
 
   return (
     <Combobox
       store={combobox}
       withinPortal={false}
       onOptionSubmit={(val) => {
-        setValue(val);
+        onSearchChange(val);
         combobox.closeDropdown();
       }}
     >
       <Combobox.Target>
-        <PillsInput classNames={{ input: classes.homePageSearch }}>
+        <PillsInput classNames={{ input: classes.homePageSearch }} w={"100%"}>
           <Pill.Group>
             {f.city && (
               <Pill

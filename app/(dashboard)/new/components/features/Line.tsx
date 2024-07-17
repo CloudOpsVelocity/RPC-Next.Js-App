@@ -6,7 +6,7 @@ type Props = {
 
 export default function Line({ text }: Props) {
   return (
-    <div className="text-[#242424] text-2xl not-italic font-semibold leading-[normal] flex items-center gap-3.5 text-nowrap">
+    <div className="text-[#242424] text-[12px] sm:text-2xl not-italic font-semibold leading-[normal] flex items-center gap-3.5 sm:text-nowrap">
       {config.icon}
       {text}
     </div>

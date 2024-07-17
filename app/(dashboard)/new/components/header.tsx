@@ -11,21 +11,26 @@ import usePathToOrigin from "@/app/hooks/custom/useRedirect";
 import Link from "next/link";
 import PostProjectBtn from "./PostProjectBtn";
 import clsx from "clsx";
+import MenuBtn from "./home-search/header/Menu";
 
 type Props = {};
 
 export default function Header({}: Props) {
   return (
-    <div className="flex h-[70px] items-center justify-between shrink-0 pl-5 w-full py-3  shadow-[0px_4px_20px_0px_rgba(194,194,194,0.20)] bg-gradient-to-r from-[#f1f1f1] via-[#f1f1f1]  to-[#bde3ff]">
+    <div className="flex h-[70px] items-center justify-between shrink-0 pl-5 w-full py-3  shadow-[0px_4px_20px_0px_rgba(194,194,194,0.20)] bg-gradient-to-r from-[#f1f1f1] via-[#f1f1f1]  to-[#bde3ff] fixed top-0 z-[1000]">
       <div>
         <Image src={config.logo} width={180} height={180} alt="logo" />
       </div>
-      <div className="flex items-center justify-center gap-[30px] mr-[40px]">
+      <div className="sm:flex items-center justify-center gap-[30px] mr-[40px] hidden">
         <p className="text-[#242424] text-xl not-italic font-medium">Blogs</p>
         <ForBuilders />
         <PostProjectBtn />
         <Btn />
         <Dropdown />
+      </div>
+      <div className="flex  sm:hidden mr-4 gap-4">
+        <Btn />
+        <MenuBtn />
       </div>
     </div>
   );

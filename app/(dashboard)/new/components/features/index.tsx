@@ -6,22 +6,22 @@ type Props = {};
 
 export default function HomeFeatures({}: Props) {
   return (
-    <div className="pb-16 pt-8">
-      <h1 className="text-[#202020] text-center text-[40px] not-italic font-bold">
+    <div className="w-[90%] m-auto pb-16 pt-8">
+      <h1 className="hidden sm:block text-[#202020] text-center text-[40px] not-italic font-bold">
         Why Choose{" "}
-        <span className="text-[color:var(--Brand-green-primary,#148B16)] text-[40px] not-italic font-bold">
+        <span className=" text-[color:var(--Brand-green-primary,#148B16)] text-[40px] not-italic font-bold">
           {" "}
           Get Right Property?
         </span>
       </h1>
-      <p className="text-[#242424] text-center text-[29px] not-italic font-semibold leading-[30px] max-w-[60%] m-auto mt-[24px]">
+      <p className="hidden sm:block text-[#242424] text-center text-[29px] not-italic font-semibold leading-[30px] max-w-[60%] m-auto mt-[24px]">
         Choose us for real estate because we offer expert guidance, a vast
         property selection and commitment to your dreams.
       </p>
-      <p className="text-[#33535F] text-2xl not-italic font-semibold text-center mt-4">
+      <p className="hidden sm:block text-[#33535F] text-2xl not-italic font-semibold text-center mt-4">
         Trust in our experience to find your perfect home!
       </p>
-      <div className=" shrink-0 m-auto flex justify-center items-end max-w-[1200px] gap-4 ">
+      <div className=" shrink-0 m-auto flex justify-center items-end max-w-[1200px] gap-4 flex-wrap">
         <div className="w-[500px]  ml-[15%]">{config.svg}</div>
         <div>
           {config.data.map((item, index) => (

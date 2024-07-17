@@ -73,6 +73,7 @@ export function BasicMultiSelect() {
           }}
           pointer
           onClick={() => combobox.toggleDropdown()}
+          rightSection={<DropIcon />}
         >
           <Pill.Group>
             {/* THER IS SHOWING ID IN VALUE SO I WANT TTILE OF THIS OBJECT */}
@@ -106,3 +107,19 @@ export function BasicMultiSelect() {
     </Combobox>
   );
 }
+const DropIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="26"
+      height="26"
+      viewBox="0 0 18 18"
+      fill="none"
+    >
+      <path
+        d="M12.4134 6C13.3274 6 13.7624 7.1251 13.0861 7.73994L10.1727 10.3885C9.79125 10.7352 9.20875 10.7352 8.82733 10.3885L5.91394 7.73994C5.23761 7.1251 5.67257 6 6.58661 6H12.4134Z"
+        fill="#8EA8CF"
+      />
+    </svg>
+  );
+};
