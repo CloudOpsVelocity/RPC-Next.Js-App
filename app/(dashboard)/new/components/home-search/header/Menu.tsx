@@ -4,11 +4,9 @@ type Props = {};
 
 export default function MenuBtn({}: Props) {
   return (
-    <>
-      <button className="flex justify-center items-center gap-1.5 self-stretch rounded border shadow-[0px_4px_30px_0px_rgba(194,194,194,0.40)] p-0.5 border-solid border-[#0073C6] bg-white">
-        {config.icon}
-      </button>
-    </>
+    <button className="flex justify-center items-center gap-1.5 self-stretch rounded border shadow-[0px_4px_30px_0px_rgba(194,194,194,0.40)] p-0.5 border-solid border-[#0073C6] bg-white">
+      {config.icon}
+    </button>
   );
 }
 
