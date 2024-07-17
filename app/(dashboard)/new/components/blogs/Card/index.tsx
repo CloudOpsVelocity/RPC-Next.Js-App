@@ -5,7 +5,7 @@ type Props = {};
 
 export default function CardSection({}: Props) {
   return (
-    <div className="flex justify-center items-center gap-[3%] mt-[4%] overflow-x-scroll">
+    <div className="w-full  flex justify-center items-center gap-4 mt-4 overflow-x-scroll scrollbar-hide">
       <Card />
       <Card />
       <Card />
