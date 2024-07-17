@@ -36,7 +36,6 @@ const Gallery: React.FC<GalleryProps> = ({
   const [previewImage, setPreviewImage] = useState<string | null>(
     selectedMedia
   );
-
   const handleImageClick = (image: string) => {
     setPreviewImage(image);
     open(isImage ? "image" : "video", image);

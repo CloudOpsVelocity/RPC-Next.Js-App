@@ -6,17 +6,18 @@ import "@mantine/carousel/styles.css";
 import { CarouseSelArrowIcon } from "@/app/images/HomePageIcons";
 import useIds from "../useIds";
 import Css from "../../Style.module.css";
+import { useMediaQuery } from "@mantine/hooks";
 type Props = {
   data: any;
 };
 
 export default function CardCarousel({ data }: Props) {
   const { data: ids } = useIds();
+
   return (
     <Carousel
-      slideSize="33.333333%"
+      slideSize={{ base: "100%", sm: "50%", md: "33.333333%" }}
       slideGap="md"
-      loop
       align="start"
       slidesToScroll={1}
       mt={20}

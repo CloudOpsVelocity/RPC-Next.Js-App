@@ -22,7 +22,7 @@ const HomeSearch = () => {
   };
   return (
     <div
-      className="px-5 w-full  md:pl-0 border-2 sm:grid sm:grid-cols-[1.1fr_2fr] gap-2 sm:px-20 bg-white pt-28 pb-4 sm:py-28 relative mt-[70px] "
+      className="px-5 w-full  md:pl-0 border-2 sm:grid sm:grid-cols-[1.1fr_2fr] gap-2 sm:px-20 bg-white pt-28 pb-4 sm:py-28 relative mt-[90px] "
       style={{
         backgroundImage: "url(/home/clouds.svg)",
       }}
@@ -77,8 +77,8 @@ const HomeSearch = () => {
           <QuickFilters />
         </div>
         <div className="mt-4">
-          <p className="text-[#242424] text-xl not-italic font-medium leading-[normal] ">
-            Recent Search:
+          <p className="text-[#242424] sm:text-xl not-italic font-medium leading-[normal] ">
+            Browse:
           </p>
           <div className="space-x-2 mt-1 flex sm:block overflow-x-scroll max-w-[100%]">
             <Box />

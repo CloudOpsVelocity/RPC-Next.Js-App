@@ -9,13 +9,14 @@ import ViewAllButton from "./ViewButton";
 import ShareBtn from "./ShareBtn";
 import ReqBtn from "./ReqBtn";
 import Shortlist from "./Shortlist";
+import { useMediaQuery } from "@mantine/hooks";
 
 type Props = { item: any };
 
 export default function Card({ item }: Props) {
   let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/abc/banglore/whitefield/${item.projIdEnc}`;
   return (
-    <div className="w-[380px] sm:w-[881.143px] h-[514px] shrink-0 relative">
+    <div className="w-[310px] sm:w-[881.143px] h-[450px] sm:h-[514px] shrink-0 relative">
       <BackgroundImage src={item.coverUrl} radius="sm" h={"100%"}>
         <div className="p-6">
           <img
@@ -24,10 +25,10 @@ export default function Card({ item }: Props) {
             className="w-[100px] h-[100px] object-cover"
           />
         </div>
-        <div className="absolute right-0 top-0 sm:w-[560px] h-[514px] shrink-0 bg-gradient-to-l from-[#00121F] via-[rgba(59,70,98,0.86)] to-[rgba(86,93,112,0.04)] text-right p-7 flex flex-col justify-between">
+        <div className="absolute right-0 top-0 sm:w-[560px] h-[450px] sm:h-[514px] shrink-0  bg-gradient-to-l from-[#00121F] via-[rgba(59,70,98,0.86)] to-[rgba(86,93,112,0.04)] text-right p-7 flex flex-col justify-end sm:justify-between">
           <div>
-            <p className="text-white text-[32px] not-italic font-extrabold leading-[normal] tracking-[0.64px] flex justify-end items-center">
-              <div className="inline-flex gap-3 mr-6">
+            <p className="text-white text-[22px] sm:text-[32px] not-italic font-extrabold leading-[normal] tracking-[0.64px] flex justify-end items-center">
+              <div className="absolute sm:static top-5 right-1  inline-flex  gap-3 mr-6">
                 <Shortlist
                   reqId={item.projIdEnc}
                   shortListed={item.shortListed}
@@ -36,16 +37,16 @@ export default function Card({ item }: Props) {
               </div>{" "}
               {formatCurrency(item.minPrice)} - {formatCurrency(item.maxPrice)}
             </p>
-            <p className="text-white text-[26px] not-italic font-bold leading-[normal] tracking-[0.52px] mt-3 text-nowrap">
+            <p className="text-white text-[18px] sm:text-[26px] not-italic font-bold leading-[normal] tracking-[0.52px] mt-3 text-nowrap">
               {item.projName}
             </p>
-            <p className="text-white  text-xl not-italic font-bold leading-[normal] tracking-[0.4px] mt-6">
+            <p className="text-white  text-[14px] sm:text-xl not-italic font-bold leading-[normal] tracking-[0.4px] mt-1 sm:mt-6">
               {item.propTypes?.join(", ")}
             </p>
           </div>
-          <div className="flex flex-col items-end gap-[19px]">
+          <div className="flex flex-col items-end gap-[9px] sm:gap-[19px]">
             <div className="space-y-2">
-              <p className="flex justify-center items-center gap-2 rounded py-1 px-2 bg-[#000000b0] text-white text-base not-italic font-semibold leading-[normal] capitalize max-w-fit self-end ml-auto">
+              <p className="flex justify-center items-center gap-2 rounded py-1 px-2 bg-[#000000b0] text-white text-base not-italic font-semibold leading-[normal] capitalize max-w-fit self-end ml-auto mt-1 sm:mt-0">
                 <Image
                   src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/homepage/unit.png`}
                   alt=""
@@ -59,19 +60,21 @@ export default function Card({ item }: Props) {
               </p>
             </div>
             <div>
-              <p className="text-white text-[22px] not-italic font-bold leading-[normal] tracking-[0.44px]">
+              <p className="text-white sm:text-[22px] not-italic font-bold leading-[normal] tracking-[0.44px]">
                 Start Date: {formatDate(item.launchDate)}
               </p>
-              <p className="text-white text-[22px] not-italic font-bold leading-[normal] tracking-[0.44px] mt-1">
+              <p className="text-white sm:text-[22px] not-italic font-bold leading-[normal] tracking-[0.44px] mt-1">
                 End Date: {formatDate(item.possassionDate)}
               </p>
             </div>
-            <ViewAllButton url={url} />
-            <ReqBtn
-              builderName={item.builderName}
-              projName={item.projName}
-              reqId={item.projIdEnc}
-            />
+            <div className="sm:flex flex-col items-end space-x-2 sm:space-x-0 gap-3">
+              <ViewAllButton url={url} />
+              <ReqBtn
+                builderName={item.builderName}
+                projName={item.projName}
+                reqId={item.projIdEnc}
+              />
+            </div>
           </div>
         </div>
       </BackgroundImage>

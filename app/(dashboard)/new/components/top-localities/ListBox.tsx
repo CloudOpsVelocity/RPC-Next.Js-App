@@ -5,7 +5,7 @@ type Props = {};
 
 export default function ListBox({}: Props) {
   return (
-    <div className="flex flex-wrap gap-[4%] mt-14">
+    <div className="flex overflow-x-scroll sm:flex-wrap gap-[4%] mt-14">
       {config.data.map((item, index) => (
         <Box key={index} {...item} />
       ))}

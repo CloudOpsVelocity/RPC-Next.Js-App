@@ -5,7 +5,7 @@ type Props = {};
 
 export default function Card({}: Props) {
   return (
-    <div className="flex w-[494px] flex-col items-start border shadow-[0px_4px_20px_0px_rgba(0,127,145,0.10)] rounded-[10px] border-solid border-[#B9CFEB]">
+    <div className="flex w-full sm:w-[494px] flex-col items-start border shadow-[0px_4px_20px_0px_rgba(0,127,145,0.10)] rounded-[10px] border-solid border-[#B9CFEB]">
       <Image height={300} width={494} src={"/test.jpg"} alt="" />
       <div className="flex flex-col items-start gap-6 self-stretch p-6">
         <p className="text-[color:var(--Black,#000)] text-xl not-italic font-normal leading-[150%]">

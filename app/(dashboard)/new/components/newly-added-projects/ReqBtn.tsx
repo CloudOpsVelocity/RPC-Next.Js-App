@@ -23,7 +23,7 @@ export default function ReqBtn({ builderName, projName, reqId }: Props) {
     open("proj", reqId, "projCard");
   };
   return (
-    <Button className="!text-xl" onClick={handleOpen}>
+    <Button className="!text-[12px] sm:!text-xl" onClick={handleOpen}>
       Request Callback
     </Button>
   );

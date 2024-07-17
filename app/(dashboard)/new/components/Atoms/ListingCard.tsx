@@ -9,17 +9,19 @@ import { formatDate } from "@/app/utils/date";
 import { Carousel } from "@mantine/carousel";
 import { getImageUrls } from "@/app/utils/image";
 import styles from "./Carouse.module.css";
+import { useMediaQuery } from "@mantine/hooks";
 type Props = {
   item: any;
 };
 
 export default function ListingCard({ item }: Props) {
   const images = getImageUrls(item.media);
+  const isMobile = useMediaQuery("(max-width: 601px)");
   return (
     <div className="w-full sm:w-[490px]">
       <div className="h-[276px] shrink-0 shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] relative">
         <a
-          className="inline-flex justify-center items-center gap-2.5 rounded border p-2 border-solid border-[#0073C6] bg-[#0073c6] text-white text-sm not-italic font-bold leading-[normal] capitalize absolute bottom-3 right-3 z-[1000]"
+          className="inline-flex justify-center items-center gap-2.5 rounded border p-1 sm:p-2 border-solid border-[#0073C6] bg-[#0073c6] text-white  text-[12px] sm:text-sm not-italic font-bold leading-[normal] capitalize absolute bottom-2 right-2 sm:bottom-3 sm:right-3 z-[1000]"
           href={`${process.env.NEXT_PUBLIC_BACKEND_URL}/listing/banglore/${item.propIdEnc}`}
           target="_blank"
         >
@@ -39,7 +41,7 @@ export default function ListingCard({ item }: Props) {
           ))} */}
         {/* </Carousel> */}
         <div className="absolute bottom-2 left-2 space-y-2">
-          <p className="flex justify-center items-center gap-1 rounded p-1 bg-[#000000b0] text-white text-base not-italic font-semibold leading-[normal] capitalize">
+          <p className="flex justify-center items-center gap-1 rounded p-1 bg-[#000000b0] text-white text-xs sm:text-base not-italic font-semibold leading-[normal] capitalize">
             {item.propStatus}
           </p>
         </div>
@@ -47,10 +49,10 @@ export default function ListingCard({ item }: Props) {
       <div className="sm:h-[183px] self-stretch rounded shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] border-[0.8px] border-solid border-[#A4B8B5]bg-white">
         <div className="p-3 flex justify-between">
           <div className="space-y-1">
-            <p className="text-[#148B16] text-[22px] not-italic font-bold leading-[normal] capitalize">
+            <p className="text-[#148B16] text-[18px] sm:text-[22px] not-italic font-bold leading-[normal] capitalize">
               {formatCurrency(item.price)},{" "}
               {item.category !== "Rent" && (
-                <span className="text-[#616D75] text-base not-italic font-bold leading-[normal] capitalize">
+                <span className="text-[#616D75] text-[14px] sm:text-base not-italic font-bold leading-[normal] capitalize">
                   ₹{" "}
                   {calculatePerSqPrice(
                     item.price,
@@ -61,7 +63,7 @@ export default function ListingCard({ item }: Props) {
               )}
             </p>
 
-            <p className="text-[#242424] text-lg not-italic font-semibold leading-[normal] capitalize">
+            <p className="text-[#242424] text-[14px] sm:text-lg not-italic font-semibold leading-[normal] capitalize">
               {item.propTypeName === "Plot" && `${item.pa} sq.ft`}{" "}
               {item.bhkName} {item.propTypeName} for {item.category} in{" "}
               {item.localityName}
@@ -77,8 +79,8 @@ export default function ListingCard({ item }: Props) {
           </div>
         </div>
         {/* by default new sortBy */}
-        <div className="pl-3">
-          <div className="inline-flex items-center gap-1 self-stretch rounded border-[0.5px] border-solid border-[#616D75] bg-[#F5F5F5] p-1">
+        <div className="pl-3 mr-[14px] sm:mr-0">
+          <div className="inline-flex flex-wrap items-center gap-1 self-stretch rounded border-[0.5px] border-solid border-[#616D75] bg-[#F5F5F5] p-1">
             {item.propTypeName === "Plot" ? (
               <>
                 <DownSectionCard label="Plot Area" value={`${item.pa} sq.ft`} />
@@ -87,7 +89,11 @@ export default function ListingCard({ item }: Props) {
                   label={"Possesion Date"}
                   value={formatDate(item.possassionDate, true)}
                 />
-                <Divider orientation="vertical" color="#7BA0BB" />
+                <Divider
+                  orientation="vertical"
+                  color="#7BA0BB"
+                  className="!hidden sm:!block"
+                />
                 <DownSectionCard
                   label={"Available From"}
                   value={formatDate(item.availableFrom, true)}
@@ -104,7 +110,11 @@ export default function ListingCard({ item }: Props) {
                   label="Carpet Area"
                   value={`${item.ca} sq.ft`}
                 />
-                <Divider orientation="vertical" color="#7BA0BB" />
+                <Divider
+                  orientation="vertical"
+                  color="#7BA0BB"
+                  className="!hidden sm:!block"
+                />
                 <DownSectionCard
                   label={"Possesion Date"}
                   value={formatDate(item.possassionDate, true)}
@@ -126,7 +136,11 @@ export default function ListingCard({ item }: Props) {
                   label="Carpet Area"
                   value={`${item.ca} sq.ft`}
                 />
-                <Divider orientation="vertical" color="#7BA0BB" />
+                <Divider
+                  orientation="vertical"
+                  color="#7BA0BB"
+                  className="!hidden sm:!block"
+                />
                 <DownSectionCard label="Property Age" value="0-2 Years" />
                 <Divider orientation="vertical" color="#7BA0BB" />
                 <DownSectionCard
