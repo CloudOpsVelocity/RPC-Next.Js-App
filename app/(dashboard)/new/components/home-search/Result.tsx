@@ -62,7 +62,7 @@ export default function Results() {
   return (
     <ScrollArea className="px-5 py-2  h-[200px] sm:h-[330px]">
       <div>
-        <h2 className="text-[#5F81B2] text-xl flex space-x-2 items-center">
+        <h2 className="text-[#5F81B2] text-[14px] sm:text-xl flex space-x-2 items-center">
           <SearchLocationIcon /> <span> Location</span>
         </h2>
         {cities?.length > 0 && <SubHeading text="City" />}
@@ -71,7 +71,7 @@ export default function Results() {
           {cities?.map((locality: any) => (
             <li
               onClick={() => handleAddcity(`${locality.name}+${locality.id}`)}
-              className="text-[#737579] text-xl not-italic font-medium leading-[normal] cursor-pointer"
+              className="text-[#737579] text-[12px] sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
               key={locality.id}
             >
               {locality.name}
@@ -84,7 +84,7 @@ export default function Results() {
           {localities?.map((locality: any) => (
             <li
               onClick={() => handleAddSearch(`${locality.name}+${locality.id}`)}
-              className="text-[#737579] text-xl not-italic font-medium leading-[normal] cursor-pointer"
+              className="text-[#737579] text-[12px] sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
               key={locality.id}
             >
               {locality.name}
@@ -94,7 +94,7 @@ export default function Results() {
       </div>
       <div>
         {projects.length > 0 && (
-          <h2 className="text-[#5F81B2] text-xl flex space-x-2 items-center mt-[14px] mb-1">
+          <h2 className="text-[#5F81B2]  sm:text-xl flex space-x-2 items-center mt-[14px] mb-1">
             {property} <span> Projects</span>
           </h2>
         )}
@@ -103,7 +103,7 @@ export default function Results() {
           {projects?.map((project: any) => (
             <li
               onClick={() => handlePush(project.id)}
-              className="text-[#737579] text-xl not-italic font-medium leading-[normal] cursor-pointer"
+              className="text-[#737579] text-[14px] sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
               key={project.id}
             >
               {project.name}
@@ -117,7 +117,9 @@ export default function Results() {
 const SubHeading = ({ text }: { text: string }) => {
   return (
     <div className="flex  items-center gap-1.5 mt-[14px] mb-1">
-      <div className="text-[#4D6677] text-base  font-medium ">{text}</div>{" "}
+      <div className="text-[#4D6677] text-[14px] sm:text-base  font-medium ">
+        {text}
+      </div>{" "}
       <hr className="w-full h-px  border-0 bg-[#98A5B8]" />
     </div>
   );
