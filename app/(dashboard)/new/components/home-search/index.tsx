@@ -12,6 +12,8 @@ import SearchSec from "./SearchSec";
 import useSearchFilters from "@/app/hooks/search";
 import { filterParser } from "@/app/utils/search";
 import { createQueryString } from "@/app/utils/search/query";
+import { useMediaQuery } from "@mantine/hooks";
+import Target from "./filters/mobile/Target";
 const propertyTypes = ["Buy", "Rent"];
 const HomeSearch = () => {
   const { filters: f } = useSearchFilters();
@@ -20,6 +22,7 @@ const HomeSearch = () => {
     const query = createQueryString(parsedData);
     return query.replace("+", "%2B");
   };
+  const isMobile = useMediaQuery("(max-width: 601px)");
   return (
     <div
       className="px-5 w-full  md:pl-0 border-2 sm:grid sm:grid-cols-[1.1fr_2fr] gap-2 sm:px-20 bg-white pt-28 pb-4 sm:py-28 relative mt-[90px] "
@@ -48,33 +51,28 @@ const HomeSearch = () => {
               <div className="text-nowrap">All Residential</div>
             </div>
             <div className="flex justify-center items-center sm:gap-[191px] w-full">
-              <div className="flex sm:hidden items-center min-w-full">
-                {config.searchIcon}{" "}
-                <button className="ml-2">
-                  <span className="text-[#242424] text-xs not-italic font-normal">
+              {isMobile ? (
+                <Target />
+              ) : (
+                <div className="hidden sm:flex items-center w-full">
+                  {config.searchIcon} <SearchSec />
+                </div>
+              )}
+              {!isMobile && (
+                <div className="hidden sm:flex gap-2">
+                  <Nearme />
+                  <a
+                    href={`/search?${handleSearch()}`}
+                    target="_blank"
+                    className={`inline-flex justify-center items-center gap-2.5 rounded p-1.5 md:p-2.5  text-white  text-[12px]  2xl:text-xl font-bold bg-[#0073c6]`}
+                  >
                     Search
-                  </span>
-                  <span className="text-[#242424] text-xs italic font-medium">
-                    “ Whitefield, Bangalore”
-                  </span>
-                </button>
-              </div>
-              <div className="hidden sm:flex items-center w-full">
-                {config.searchIcon} <SearchSec />
-              </div>
-              <div className="hidden sm:flex gap-2">
-                <Nearme />
-                <a
-                  href={`/search?${handleSearch()}`}
-                  target="_blank"
-                  className={`inline-flex justify-center items-center gap-2.5 rounded p-1.5 md:p-2.5  text-white  text-[12px]  2xl:text-xl font-bold bg-[#0073c6]`}
-                >
-                  Search
-                </a>
-              </div>
+                  </a>
+                </div>
+              )}
             </div>
           </div>
-          <QuickFilters />
+          {!isMobile && <QuickFilters />}
         </div>
         <div className="mt-4">
           <p className="text-[#242424] sm:text-xl not-italic font-medium leading-[normal] ">

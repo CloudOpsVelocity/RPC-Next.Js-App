@@ -3,7 +3,6 @@ import Header from "./components/header";
 import HomeSearch from "./components/home-search";
 import HomeFeatures from "./components/features";
 import NewAddedProjects from "./components/newly-added-projects";
-import FeaturedProjects from "./components/Featured-Projects";
 import DynamicListing from "./components/Listing";
 import TopLocalities from "./components/top-localities";
 import PostYourListing from "./components/post-your-listing";

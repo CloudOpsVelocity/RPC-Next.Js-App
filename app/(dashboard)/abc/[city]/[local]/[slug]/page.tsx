@@ -237,17 +237,17 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
   );
 }
 
-export const fetchCache = "force-cache";
-export const revalidate = 120;
+// export const fetchCache = "force-cache";
+// export const revalidate = 120;
 
-export async function generateStaticParams() {
-  const { projResult } = await getParams();
-  const slugs = projResult.map((slug: string) => ({
-    slug: slug,
-  }));
-  // console.log(slugs);
-  return slugs;
-}
+// export async function generateStaticParams() {
+//   const { projResult } = await getParams();
+//   const slugs = projResult.map((slug: string) => ({
+//     slug: slug,
+//   }));
+//   // console.log(slugs);
+//   return slugs;
+// }
 
 async function getParams() {
   let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/common/all/active/ids?identifier=project`;
