@@ -25,23 +25,22 @@ export default function Card({
     );
   };
   const scheme = type === "email" ? "mailto:" : type === "mobile" ? "tel:" : "";
-  const handleOpen = () => {
-    type !== "text" && window.open(`${scheme}${content}`, "_blank");
-  };
-  return (
-    <div onClick={handleOpen} className={clsx("cursor-pointer")}>
+  return type === "text" ? (
+    <div>
       <div className={clsx(styles.container, styles.text)}>
         {Icon} {title}
       </div>
       <div className=" sm:mt-2">
-        {" "}
-        {type !== "text" ? (
-          renderContent()
-        ) : (
-          <p className={clsx(styles.content, textClassName)}>{content}</p>
-        )}
+        <p className={clsx(styles.content, textClassName)}>{content}</p>
       </div>
     </div>
+  ) : (
+    <a href={`${scheme}${content}`} className={clsx("cursor-pointer")}>
+      <div className={clsx(styles.container, styles.text)}>
+        {Icon} {title}
+      </div>
+      <div className=" sm:mt-2">{renderContent()}</div>
+    </a>
   );
 }
 

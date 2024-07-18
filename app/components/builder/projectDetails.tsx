@@ -94,7 +94,7 @@ export default function ProjectDetails({
           <Card
             Icon={callIconSvg}
             title="Contact"
-            content={`+91- ${mobile}`}
+            content={`${mobile}`}
             type="mobile"
           />
 

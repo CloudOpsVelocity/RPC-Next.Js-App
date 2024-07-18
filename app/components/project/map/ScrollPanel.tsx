@@ -1,6 +1,6 @@
 import React from "react";
 import clsx from "clsx";
-import { Area } from ".";
+import { Area, areasMap } from ".";
 import { Carousel } from "@mantine/carousel";
 import styles from "@/app/styles/Map.module.css";
 import {
@@ -10,11 +10,13 @@ import {
   PrevDarkButton,
 } from "@/app/images/commonSvgs";
 import { useMediaQuery } from "@mantine/hooks";
+
 const CustomScrollArea: React.FC<{
   areas: Area[];
   selected: string;
   setSelected: (key: string) => void;
-}> = ({ areas, selected, setSelected }) => {
+  data: any;
+}> = ({ areas, selected, setSelected, data }) => {
   const isMobile = useMediaQuery("(max-width: 601px)");
   return (
     <Carousel
@@ -26,24 +28,30 @@ const CustomScrollArea: React.FC<{
       classNames={styles}
       dragFree
     >
-      {areas.map(({ Icon, name, key }, index) => (
-        <Carousel.Slide key={key} className="max-w-fit">
-          <button
-            key={key}
-            onClick={() => setSelected(key ?? "")}
-            className={clsx(
-              "inline-flex justify-center items-center gap-1.5 px-2.5 py-1.5 text-[12px] text-[#0073C6] sm:text-[26px] not-italic font-medium leading-[normal] capitalize rounded border border-solid border-[#0073C6]  ml-3 sm:ml-8 min-w-fit ",
-              selected === key && "!text-white font-semibold bg-[#0073C6] "
-            )}
-          >
-            <Icon
-              stroke={clsx(selected === key ? "#FFF" : "#0073C6")}
-              className="w-[18px] h-[18px]"
-            />
-            {name}
-          </button>
-        </Carousel.Slide>
-      ))}
+      {Object.keys(data).map((key, index) => {
+        const isAvail = !!data[key as string];
+        if (!isAvail) return null;
+        const Icon = areasMap.get(key).Icon;
+        const name = areasMap.get(key).name;
+        return (
+          <Carousel.Slide key={key} className="max-w-fit">
+            <button
+              key={key}
+              onClick={() => setSelected(key ?? "")}
+              className={clsx(
+                "inline-flex justify-center items-center gap-1.5 px-2.5 py-1.5 text-[12px] text-[#0073C6] sm:text-[26px] not-italic font-medium leading-[normal] capitalize rounded border border-solid border-[#0073C6]  ml-3 sm:ml-8 min-w-fit ",
+                selected === key && "!text-white font-semibold bg-[#0073C6] "
+              )}
+            >
+              <Icon
+                stroke={clsx(selected === key ? "#FFF" : "#0073C6")}
+                className="w-[18px] h-[18px]"
+              />
+              {name}
+            </button>
+          </Carousel.Slide>
+        );
+      })}
     </Carousel>
   );
 };

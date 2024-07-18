@@ -56,7 +56,7 @@ const LeafMap: React.FC<{
       }),
     []
   );
-  const [selected, setSelected] = useState<string>("transit_station");
+  const [selected, setSelected] = useState<string>(Object.keys(mapData)[0]);
   const [selectedLocation, setSelectedLocation] = useState<{
     lat: number;
     lng: number;
@@ -108,6 +108,7 @@ const LeafMap: React.FC<{
           areas={areas}
           selected={selected}
           setSelected={setSelected}
+          data={mapData}
         />
       </div>
 
@@ -421,3 +422,7 @@ export const areas: Area[] = [
     key: "shopping_mall",
   },
 ];
+export const areasMap = areas.reduce((map, area) => {
+  map.set(area.key, { name: area.name, Icon: area.Icon });
+  return map;
+}, new Map());
