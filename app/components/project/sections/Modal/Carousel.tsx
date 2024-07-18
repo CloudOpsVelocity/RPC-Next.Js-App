@@ -20,6 +20,7 @@ export default function CarouselModal() {
     <Carousel
       classNames={Style}
       slideSize="20.333333%"
+      w={"full"}
       slideGap="md"
       withControls={true}
       align="center"

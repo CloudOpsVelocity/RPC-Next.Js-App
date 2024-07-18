@@ -13615,7 +13615,7 @@ export const DarkCarouseIcon = () => {
       height="41"
       viewBox="0 0 41 41"
       fill="none"
-      className="h-[14px] w-[14px] md:h-[41] md:w-[41] " 
+      className="h-[14px] w-[14px] md:h-[41px] md:w-[41px] " 
     >
       <rect
         width="41"
@@ -13640,7 +13640,7 @@ export const DarkNextCarouselButton = () => {
       height="41"
       viewBox="0 0 41 41"
       fill="none"
-      className="md:h-[41] md:w-[41] h-[14px] w-[14px]"
+      className="md:h-[41px] md:w-[41px] h-[14px] w-[14px]"
     >
       <rect
         x="41"

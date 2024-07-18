@@ -141,7 +141,7 @@ const ProjectDetailsCard = ({
                 {propTypeName !== "Plot" ? (
                   <>
                     {" "}
-                    <p className="text-[#333] text-[12px] md:text-[16px] font-[500]">
+                    <p className="text-[#333] text-nowrap text-[12px] md:text-[16px] font-[500]">
                       Super Builtup Area:{" "}
                       <span className=" font-[600]">{sba} sq.ft</span>
                     </p>

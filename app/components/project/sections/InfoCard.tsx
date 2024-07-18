@@ -23,7 +23,7 @@ export default function InfoCard(data: any) {
           {formatCurrency(data.minPrice)} - {formatCurrency(data.maxPrice)}
         </div>
       </div>
-      <p className="text-[#242424] text-base not-italic font-medium inline-flex gap-2">
+      <p className="text-[#242424] text-nowrap text-base not-italic font-medium inline-flex gap-2">
         {config.icons.superBuildup}{" "}
         {data.propCgId === 32 ? "Plot" : "Super Builtup"} Area:{" "}
         {data.propCgId === 32 && (
