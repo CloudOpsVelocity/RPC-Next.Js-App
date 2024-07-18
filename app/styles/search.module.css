@@ -70,6 +70,7 @@
 .homePageSearch::placeholder {
   color: black;
 }
+
 @media screen and (max-width: 767px) {
   .markLabel {
     display: none;
@@ -88,6 +89,15 @@
     justify-content: center;
     align-items: center;
     padding-left: 0rem;
+  }
+  .MultiSelectionPillLabel {
+    font-size: 10px;
+  }
+  .MultiSelectionPillRemove {
+    width: 4px;
+  }
+  .MultiSelectionPill {
+    line-height: normal;
   }
 }
 

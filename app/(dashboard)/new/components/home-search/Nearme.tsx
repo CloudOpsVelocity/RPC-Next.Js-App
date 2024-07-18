@@ -28,10 +28,10 @@ export default function Nearme({}: Props) {
   };
   return (
     <button
-      className="flex items-center gap-1 rounded p-1 bg-[#f0ffdc] text-[#148B16]  not-italic font-medium cursor-pointer text-nowrap"
+      className="flex items-center gap-1 rounded p-1 bg-[#f0ffdc] text-[#148B16]  not-italic font-medium cursor-pointer text-nowrap "
       onClick={getLocation}
     >
-      {config.nearMe} Near Me
+      {config.nearMe} <span className="hidden sm:flex">Near Me</span>
     </button>
   );
 }

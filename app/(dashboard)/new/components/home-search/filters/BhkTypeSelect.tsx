@@ -74,9 +74,9 @@ export function BasicMultiSelect() {
           pointer
           onClick={() => combobox.toggleDropdown()}
           rightSection={<DropIcon />}
+          rightSectionPointerEvents="none"
         >
           <Pill.Group>
-            {/* THER IS SHOWING ID IN VALUE SO I WANT TTILE OF THIS OBJECT */}
             {values.length > 0 ? (
               values
             ) : (
@@ -84,19 +84,6 @@ export function BasicMultiSelect() {
                 BHK Type
               </Input.Placeholder>
             )}
-
-            <Combobox.EventsTarget>
-              <PillsInput.Field
-                type="hidden"
-                onBlur={() => combobox.closeDropdown()}
-                onKeyDown={(event) => {
-                  if (event.key === "Backspace") {
-                    event.preventDefault();
-                    // handleValueRemove(value[value.length - 1]);
-                  }
-                }}
-              />
-            </Combobox.EventsTarget>
           </Pill.Group>
         </PillsInput>
       </Combobox.DropdownTarget>
