@@ -43,7 +43,7 @@ export const propertyDetailsTypes = new Map([
   [31, { id: 31, name: "Villa", url: "", apiProp: "villa" }],
   [34, { id: 34, name: "Villament", url: "", apiProp: "villament" }],
   [32, { id: 32, name: "Plot", url: "", apiProp: "plot" }],
-  [32, { id: 633, name: "independent", url: "", apiProp: "independent" }],
+  [633, { id: 633, name: "independent", url: "", apiProp: "independent" }],
 ]);
 
 export const projectprops = {

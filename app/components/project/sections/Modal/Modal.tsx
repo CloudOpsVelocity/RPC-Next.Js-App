@@ -26,10 +26,11 @@ export default function PartialUnitModal() {
       onClose={reset}
       classNames={S}
       size={isMobile ?"100%":"60%"}
+      
     >
-      <div className="w-full bg-transparent    h-[57px] flex items-center justify-between  z-[1000] md:px-10 max-w-[91rem] m-auto">
+      <div className="w-full bg-transparent     h-[57px] flex items-center justify-between  z-[1000] md:px-10 max-w-[91rem] m-auto">
         <div className="text-[18px] sm:text-2xl not-italic font-bold leading-[normal]">
-          Master Plan
+          Floor Plan
         </div>
         <div className="flex justify-center items-center  gap-5">
           <a
@@ -53,7 +54,7 @@ export default function PartialUnitModal() {
             </span>
           </a>
           <SharePopup
-            titleText="Share Master Plan"
+            titleText="Share Floor Plan"
             title="Share"
             // url={imageUrlParser(url || "", "M")}
             className="text-[#0073C6] text-base not-italic font-semibold leading-[normal] tracking-[0.32px]"
