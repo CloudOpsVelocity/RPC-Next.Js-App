@@ -12,26 +12,31 @@ import Link from "next/link";
 import PostProjectBtn from "./PostProjectBtn";
 import clsx from "clsx";
 import MenuBtn from "./home-search/header/Menu";
+import { useMediaQuery } from "@mantine/hooks";
 
 type Props = {};
 
 export default function Header({}: Props) {
+  const isMobile = useMediaQuery("(max-width: 601px)");
   return (
     <div className="flex h-[90px] items-center justify-between shrink-0 pl-5 w-full py-3  shadow-[0px_4px_20px_0px_rgba(194,194,194,0.20)] bg-gradient-to-r from-[#f1f1f1] via-[#f1f1f1]  to-[#bde3ff] fixed top-0 z-[1000]">
       <div>
         <Image src={config.logo} width={180} height={180} alt="logo" />
       </div>
-      <div className="sm:flex items-center justify-center gap-[30px] mr-[40px] hidden">
-        <p className="text-[#242424] text-xl not-italic font-medium">Blogs</p>
-        <ForBuilders />
-        <PostProjectBtn />
-        <Btn />
-        <Dropdown />
-      </div>
-      <div className="flex  sm:hidden mr-4 gap-4">
-        <Btn />
-        <MenuBtn />
-      </div>
+      {isMobile ? (
+        <div className="flex  sm:hidden mr-4 gap-4">
+          <Btn />
+          <MobileDropDown />
+        </div>
+      ) : (
+        <div className="sm:flex items-center justify-center gap-[30px] mr-[40px] hidden">
+          <p className="text-[#242424] text-xl not-italic font-medium">Blogs</p>
+          <ForBuilders />
+          <PostProjectBtn />
+          <Btn />
+          <Dropdown />
+        </div>
+      )}
     </div>
   );
 }
@@ -256,3 +261,111 @@ const config = {
     );
   },
 };
+
+function MobileDropDown() {
+  const handleLogout = async () => {
+    try {
+      if (process.env.NODE_ENV === "development") {
+        await signOut();
+        await axios.get(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/logOut`
+        );
+      } else {
+        await axios
+          .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/logOut`)
+          .then(() => {
+            signOut();
+          });
+      }
+    } catch (error) {
+      console.log("Something Went Wrong", error);
+    }
+  };
+
+  const { redirectQueryParam } = usePathToOrigin();
+  const { data: session } = useSession();
+  return (
+    <Menu width={200} shadow="md">
+      <Menu.Target>
+        {session ? (
+          <div className=" text-[12px] flex justify-center items-center gap-1.5 rounded border shadow-[0px_4px_30px_0px_rgba(194,194,194,0.40)] text-[#0073C6] text-lg not-italic font-semibold leading-[normal] px-2.5 py-1.5 border-solid border-[#0073C6] bg-white">
+            <button className="inline-flex justify-center items-center gap-1">
+              {config.getIcon(session.user.userType)}
+            </button>
+            {config.blueChevron}
+          </div>
+        ) : (
+          <div className="w-full min-h-full flex justify-center items-center">
+            <MenuBtn />
+          </div>
+        )}
+      </Menu.Target>
+      {session ? (
+        <>
+          <Menu.Dropdown
+            className="!z-[1000]"
+            classNames={{
+              dropdown: S.dropdown,
+            }}
+          >
+            <>
+              {data.map((item, index) =>
+                session.user?.userType !== "B" &&
+                item.label === "Post Project" ? null : (
+                  <Menu.Item
+                    key={index}
+                    classNames={{
+                      itemLabel: S.itemLabel,
+                    }}
+                    component="a"
+                    className="block text-gray-700 hover:text-green-500 transition-colors"
+                    href={item.url}
+                    target="_blank"
+                  >
+                    {item.label}
+                  </Menu.Item>
+                )
+              )}
+              <hr className=" bg-[#768AA9] h-0.5 max-w-[90%] m-auto" />
+            </>
+
+            <Menu.Item
+              classNames={{
+                itemLabel: S.itemLabel,
+              }}
+              component="button"
+              className="block text-gray-700 hover:text-green-500 transition-colors"
+              onClick={handleLogout}
+            >
+              Log Out
+            </Menu.Item>
+          </Menu.Dropdown>
+        </>
+      ) : (
+        <Menu.Dropdown
+          className="!z-[1000]"
+          classNames={{
+            dropdown: S.dropdown,
+          }}
+        >
+          {unAuthorizedData.map((item, index) => (
+            <Menu.Item
+              key={index}
+              classNames={{
+                itemLabel: S.itemLabel,
+              }}
+              component={Link}
+              className="block text-gray-700 hover:text-green-500 transition-colors"
+              href={{
+                pathname: item.url,
+                search: redirectQueryParam,
+              }}
+            >
+              {item.label}
+            </Menu.Item>
+          ))}
+        </Menu.Dropdown>
+      )}
+    </Menu>
+  );
+}
