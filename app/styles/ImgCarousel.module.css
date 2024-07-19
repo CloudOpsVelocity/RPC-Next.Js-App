@@ -8,7 +8,6 @@
 .content {
   border-radius: 20px;
   background: transparent;
-  margin-top: 45px;
   overflow-y: hidden;
   /* scrollbar-color: gray;
   scrollbar-width: thin;
@@ -35,10 +34,6 @@
 .header {
   display: none;
   background-color: transparent;
-}
-
-.overlay {
-  margin-top: 45px;
 }
 
 .inner {

@@ -187,7 +187,7 @@ export default function PropertyTypeDetailsCrad({
         <p className="text-[12px] lg:text-lg text-[#242424] text-right  italic font-medium leading-[normal]">
           ₹ {cg?.basePrice} Base Price/ sq.ft
         </p>
-        <p className="text-[14px] sm:text-[18px]  mb-[3%] text-right text-[#4D6677]  not-italic font-semibold leading-[normal] capitalize mt-3 ">
+        <p className="text-[14px] sm:text-[18px]  text-right text-[#4D6677]  not-italic font-semibold leading-[normal] capitalize mt-3 ">
           Unit types : <br />{" "}
           {propertyType !== "plot" ? (
             <span
@@ -229,7 +229,7 @@ export default function PropertyTypeDetailsCrad({
             </>
           )}
         </p>
-        {(cg?.unitTypes?.length > 4 || propertyType === "plot") && (
+        {(cg?.unitTypes?.length > 2 || propertyType === "plot") && (
           <ShowUnitsButton cg={{ ...cg, propertyType, plotData: plotCounts }} />
         )}
       </div>

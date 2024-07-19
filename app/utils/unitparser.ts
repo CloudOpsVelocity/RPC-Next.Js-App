@@ -1,11 +1,24 @@
 const SQUARE_FOOT_SUFFIX = " sq.ft";
+
 const bhkMap = new Map([
   ["1 RK", 0],
   ["1 BHK", 1],
-  ["2 BHK", 2],
-  ["3 BHK", 3],
-  ["4 BHK", 4],
-  ["4+ BHK", 5],
+  ["1.5 BHK", 2],
+  ["2 BHK", 3],
+  ["2.5 BHK", 4],
+  ["3 BHK", 5],
+  ["3 BHK + Servant", 6],
+  ["3.5 BHK", 7],
+  ["3.5 BHK + Servant", 8],
+  ["4 BHK", 9],
+  ["4 BHK + Servant", 10],
+  ["4.5 BHK", 11],
+  ["4.5 BHK + Servant", 12],
+  ["5 BHK", 13],
+  ["5 BHK + Servant", 14],
+  ["5.5 BHK", 15],
+  ["5.5 BHK + Servant", 16],
+  ["5+ BHK", 17],
 ]);
 const sortUnits = (units: string[]): string[] => {
   return units.sort((a, b) => (bhkMap.get(a) ?? 0) - (bhkMap.get(b) ?? 0));
@@ -43,7 +56,7 @@ const parseUnitStrings = (
 
   return propertyType && propertyType === "plot"
     ? sortedUnits.slice(0, 2)
-    : sortedUnits.slice(0, 4);
+    : sortedUnits.slice(0, 3);
 };
 
 export { parseUnitStrings as parseUnits, sortUnits };

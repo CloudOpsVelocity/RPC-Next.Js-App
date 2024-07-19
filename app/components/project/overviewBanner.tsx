@@ -47,7 +47,7 @@ export default function OverviewBanner({
               {formatCurrency(minPrice)} - {formatCurrency(maxPrice)}
               {", "}
               <span className="text-[#545353] text-lg md:text-[32px] not-italic font-medium leading-[normal]">
-                ₹ {basePrice} / price sq.ft
+                ₹ {basePrice} / Base Price/sq.ft
               </span>
             </p>
             <div className="flex justify-center sm:justify-start items-center w-full space-x-2">

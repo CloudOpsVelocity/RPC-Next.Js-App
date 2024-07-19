@@ -99,13 +99,6 @@ export default function Overview({
             value={`${totalLandArea} Acers`}
             className="mr-[5%] pt-[2%] mb-[3%] "
           />
-          {/* <ProjBasicDetails
-            key="elevation"
-            icon={<TotalLandArea />} // Adjust icon
-            title="Elevation"
-            value={"G + 3"}
-            className="mr-[5%] pt-[2%] mb-[3%] "
-          /> */}
           <ProjBasicDetails
             key="totalUnits"
             icon={<TotalLandArea />} // Adjust icon
