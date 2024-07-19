@@ -28,6 +28,63 @@ import NearByCarousel from "@/app/components/project/NearByCarousel";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
 import axios from "axios";
 import PartialUnitData from "@/app/components/project/sections";
+// const FloorplansBlock = dynamic(
+//   () => import("@/app/components/project/floorplansBlock"),
+//   {
+//     loading: () => <SectionSkeleton />,
+//     ssr: false,
+//   }
+// );
+// const GalleryBlock = dynamic(
+//   () => import("@/app/components/project/galleryBlock"),
+//   {
+//     loading: () => <SectionSkeleton />,
+//     ssr: false,
+//   }
+// );
+// const MasterPlan = dynamic(
+//   () => import("@/app/components/project/masterplan"),
+//   {
+//     loading: () => <SectionSkeleton />,
+//     ssr: true,
+//   }
+// );
+// const NearByCarousel = dynamic(
+//   () => import("@/app/components/project/NearByCarousel"),
+//   {
+//     loading: () => <SectionSkeleton />,
+//     ssr: false,
+//   }
+// );
+// const Specifications = dynamic(
+//   () => import("@/app/components/project/specification"),
+//   {
+//     loading: () => <SectionSkeleton />,
+//     ssr: false,
+//   }
+// );
+// const LoginPopup = dynamic(
+//   () => import("@/app/components/project/modals/LoginPop"),
+//   {
+//     loading: () => <SectionSkeleton />,
+//     ssr: false,
+//   }
+// );
+// const Banner = dynamic(() => import("@/app/components/project/banner"), {
+//   loading: () => <SectionSkeleton />,
+//   ssr: false,
+// });
+// const AboutBuilder = dynamic(
+//   () => import("@/app/components/project/aboutBuilder"),
+//   {
+//     loading: () => <SectionSkeleton />,
+//     ssr: false,
+//   }
+// );
+// const FaqWithBg = dynamic(() => import("@/app/components/project/faq"), {
+//   loading: () => <SectionSkeleton />,
+//   ssr: false,
+// });
 
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
@@ -42,7 +99,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
   }
 
   return (
-    <div className="w-full relative break-words max-w-full">
+    <div className="w-full relative break-words">
       <div className="mt-[100px] sm:mt-[70px] w-full pb-[2%] flex items-center justify-center flex-col">
         <div className="p-[2%] w-[94.3%]">
           <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%]">
@@ -83,7 +140,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           id="about"
           heading="about"
           projName={data.projectName}
-          content={"Code has to be bundled using a bundler"}
+          content={data.about}
         />
         {/* Property Details */}
         <ProjectDetailsP

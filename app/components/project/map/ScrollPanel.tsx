@@ -17,6 +17,7 @@ const CustomScrollArea: React.FC<{
   setSelected: (key: string) => void;
   data: any;
 }> = ({ areas, selected, setSelected, data }) => {
+  console.log(data);
   const isMobile = useMediaQuery("(max-width: 601px)");
   return (
     <Carousel
@@ -28,7 +29,7 @@ const CustomScrollArea: React.FC<{
       classNames={styles}
       dragFree
     >
-      {Object.keys(data).map((key, index) => {
+      {/* {Object.keys(data).map((key, index) => {
         const isAvail = !!data[key as string];
         if (!isAvail) return null;
         const Icon = areasMap.get(key).Icon;
@@ -51,7 +52,7 @@ const CustomScrollArea: React.FC<{
             </button>
           </Carousel.Slide>
         );
-      })}
+      })} */}
     </Carousel>
   );
 };
