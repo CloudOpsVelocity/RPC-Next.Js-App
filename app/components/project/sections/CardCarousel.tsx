@@ -48,7 +48,7 @@ export default function CardCarousel({ partialUnitData }: Props) {
   return (
     <div className="inline-flex flex-col justify-center items-start gap-[18px] rounded shadow-[0px_4px_10px_0px_rgba(183,208,224,0.32)] p-[18px] border-l-[#B1BEC7] border-y-[#B1BEC7] border-t border-solid border  bg-[#fafafafa] mt-10 max-w-[400px] md:max-w-full  flex-wrap md:w-auto">
       <p className="text-[color:var(--Black-2,#333)] text-base not-italic font-semibold">
-        {data.length} floor plans available
+      Floor Plans
       </p>
       {data.length > 0 ? (
         <Carousel

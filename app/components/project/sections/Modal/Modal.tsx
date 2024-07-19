@@ -67,7 +67,7 @@ export default function PartialUnitModal() {
       </div>
       <div className="flex w-[90%] h-[438px] justify-end items-center rounded border   pb-[21px] border-solid border-[#4D6677] m-auto">
         <Image
-          src={ImgNotAvail}
+          src={selectedOne?.floorPlan??ImgNotAvail}
           width={500}
           height={500}
           alt="image"

@@ -12,12 +12,14 @@ export default function Card(data: any) {
       onClick={() => data.cardClick()}
     >
       <div className="w-[286px]  shrink-0 rounded-sm bg-white cursor-pointer relative">
-        <Image src={ImgNotAvail} alt="image" width={286} height={167} />
+        <Image src={data.floorPlan??ImgNotAvail} alt="image" width={286} height={167} className="max-h-[180px]" />
         <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[28px] lg:h-[28px]  absolute right-1 bottom-0" />
       </div>
       <div className="flex flex-col justify-center items-start gap-1.5 pl-1 pr-[44px] py-1 rounded-md bg-[#edf2f5]">
         <p className="text-[#242424] text-sm not-italic font-semibold inline-flex gap-2 items-center">
-          {config.icons.superBuildup} Super Builtup Area: {data.sba} sq.ft
+          {config.icons.superBuildup} {data.propType == 32 ?
+        ` Plot Area: ${data.plotArea} sq.ft` :
+        ` Super Builtup Area: ${data.sba} sq.ft`}
         </p>
         <p className="text-[#242424] text-xs not-italic font-semibold">
           {data.unitType} | {data.type}
