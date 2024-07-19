@@ -200,7 +200,7 @@ function FloorPlanModal({
                 ref={scrollFiltersRef}
                 className={clsx(
                   "flex w-full xl:max-w-[60%] scroll-smooth overflow-x-auto overflow-y-hidden  scrollbar-hide gap-4",
-                  propCgId === projectprops.plot && "max-w-[65%] "
+                  propCgId === projectprops.plot && "md:max-w-[65%] "
                 )}
               >
                 {Object.entries(form.values).map(

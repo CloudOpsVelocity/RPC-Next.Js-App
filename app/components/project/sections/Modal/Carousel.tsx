@@ -38,7 +38,7 @@ export default function CarouselModal() {
           className="cursor-pointer"
         >
           <Image
-            src={ImgNotAvail}
+            src={item.floorPlan??ImgNotAvail}
             alt={item.image}
             width={300}
             height={300}
