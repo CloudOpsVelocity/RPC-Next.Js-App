@@ -9,7 +9,7 @@ import {
   Tooltip,
   useMap,
 } from "react-leaflet";
-import "leaflet/dist/leaflet.css"; // Import Leaflet CSS
+import "leaflet/dist/leaflet.css";
 import { LatLngTuple } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css";
@@ -165,7 +165,7 @@ const Content: React.FC<any> = ({
             <p className="text-white text-[12px] sm:text-base italic font-medium leading-[normal]">
               {type === "prop" ? "Property" : "Project"} you are exploring
             </p>
-            <p className="text-white sm:text-lg not-italic font-semibold leading-[normal] mt-2">
+            <p className="text-white sm:text-lg not-italic font-semibold leading-[normal] mt-2 break-words text-wrap min-w-[200px]">
               {projName}
             </p>
           </div>

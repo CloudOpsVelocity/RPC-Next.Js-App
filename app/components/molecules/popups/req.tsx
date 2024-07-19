@@ -93,9 +93,7 @@ const RequestCallBackModal = ({
               <ReqcallbackMessage close={handleClose} />
             ) : (
               <>
-                <div
-                  className={`w-[100%] md:w-[50%] px-[3%] py-[3%]`}
-                >
+                <div className={`w-[100%] md:w-[50%] px-[3%] py-[3%]`}>
                   {status === "idle" && (
                     <h2 className="text-[18px]  lg:text-[24px] font-[600] text-[#202020]  ">
                       Request Callback
@@ -112,7 +110,7 @@ const RequestCallBackModal = ({
                     source={source}
                   />
                 </div>
-                {(status === "idle" || status === "otp") && (
+                {
                   <div className="hidden md:block w-[50%] relative">
                     <Image
                       className="absolute inset-0 !h-full !w-[100%] object-cover"
@@ -122,7 +120,7 @@ const RequestCallBackModal = ({
                       height={534}
                     />
                   </div>
-                )}
+                }
               </>
             )}
           </div>
@@ -233,13 +231,13 @@ const LoggedInUserForm = ({
           {" "}
           Call For:
         </span>{" "}
-       <span className="text-[14px] xl:text-[24px]" >{title}</span> 
+        <span className="text-[14px] xl:text-[24px]">{title}</span>
       </p>
       <p className="text-[#148B16] mb-[6%] text-[14px] xl:text-xl lg:text-[20px] italic font-bold leading-[normal] tracking-[0.64px]">
         <span className="text-[#4D6677] text-[18px] xl:text-xl italic font-medium leading-[normal] tracking-[0.8px]">
           {Posted_BY}:
         </span>{" "}
-        <span className="text-[14px] xl:text-[24px]" >{builder}</span> 
+        <span className="text-[14px] xl:text-[24px]">{builder}</span>
       </p>
       {/* Notifcation */}
       <div className=" flex justify-center items-center gap-2.5 border p-2.5 rounded-xl border-solid border-[#FFD600] bg-[#fff4bb] text-[#242424] text-[15px] xl:text-[17px] not-italic font-semibold leading-[normal] mb-6">
@@ -332,7 +330,10 @@ const ReqForm = ({
       Posted_BY={Posted_BY}
     />
   ) : (
-    <form className="w-full max-w-[500px] " onSubmit={form.onSubmit(formSubmit)}>
+    <form
+      className="w-full max-w-[500px] "
+      onSubmit={form.onSubmit(formSubmit)}
+    >
       <p className=" text-[#00487c] text-[13px]  xl:text-lg italic font-bold leading-[normal] tracking-[0.36px] capitalize mb-[2%] mt-1">
         <span className="text-[#4D6677] text-sm xl:text-lg italic font-medium leading-[normal] tracking-[0.36px] ">
           Call For
