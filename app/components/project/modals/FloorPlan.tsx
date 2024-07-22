@@ -85,7 +85,6 @@ function FloorPlanModal({
       });
       return matches;
     });
-    console.log("alert working");
     setSelectedFloor({
       ...filteredData[0],
       floorPlanUrl: filteredData[0]?.floorPlanUrl ?? ImgNotAvail,
@@ -252,7 +251,6 @@ function FloorPlanModal({
 }
 
 export default FloorPlanModal;
-
 const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
   const [, setFloorsArray] = useAtom(floorPlansArray);
   const [, setFloor] = useAtom(selectedFloorAtom);
@@ -265,11 +263,13 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
           String(item[key]).toLowerCase() === values[key].toLowerCase()
       );
     });
+    console.log({ [property]: filteredData });
     if (data[0][property] != undefined) {
-      // @ts-ignore
-      return Array.from(
+      let options = Array.from(
         new Set(filteredData.map((item: any) => String(item[property])))
-      ).sort();
+      );
+      // @ts-ignore
+      return options;
     } else {
       return [];
     }
@@ -500,9 +500,8 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
             rightSection={<DropDownIcon />}
           />
         )}
-
-        {(propCgId != projectprops.apartment ||
-          propCgId != projectprops.plot) &&
+        {propCgId != projectprops.apartment &&
+          propCgId != projectprops.plot &&
           getOptions("gardenArea").filter((item) => item !== "undefined")
             .length > 0 && (
             <Select
@@ -525,8 +524,8 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
               rightSection={<DropDownIcon />}
             />
           )}
-        {(propCgId != projectprops.apartment ||
-          propCgId != projectprops.plot) &&
+        {propCgId != projectprops.apartment &&
+          propCgId != projectprops.plot &&
           getOptions("terraceArea").filter(
             (item) => item !== "undefined" && item != "null"
           ).length > 0 && (
@@ -550,8 +549,9 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
               rightSection={<DropDownIcon />}
             />
           )}
-        {(propCgId != projectprops.apartment ||
-          propCgId != projectprops.plot) &&
+
+        {propCgId != projectprops.apartment &&
+          propCgId != projectprops.plot &&
           getOptions("parkingArea").filter((item) => item !== "None").length >
             0 && (
             <Select
