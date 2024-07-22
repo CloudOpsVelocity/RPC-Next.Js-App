@@ -1,6 +1,7 @@
 import { projectprops } from "@/app/data/projectDetails";
 
 export function setPropertyValues(data: any, propCgId: number): any {
+  console.log(data);
   let updatedValues: any = {
     ...(data.facingName !== "Don't Know" && { facingName: data?.facingName }),
     bhkName: data?.bhkName,
@@ -32,7 +33,8 @@ export function setPropertyValues(data: any, propCgId: number): any {
         superBuildUparea: data?.superBuildUparea,
         ...(data?.caretarea && { caretarea: data?.caretarea }),
         ...(data.gardenArea && { gardenArea: data?.gardenArea }),
-        ...(data?.parkingArea != "None" && { parkingArea: data?.parkingArea }),
+        ...(data?.parkingArea != "None" &&
+          data?.parkingArea && { parkingArea: data?.parkingArea }),
         ...(data?.terraceArea && { terraceArea: data?.terraceArea }),
         ...(data?.noOfCarParking > 0 && {
           noOfCarParking: data?.noOfCarParking?.toString(),
@@ -67,6 +69,8 @@ export function setPropertyValues(data: any, propCgId: number): any {
         ...(data?.terraceArea &&
           data?.terraceArea !== "null" && { terraceArea: data?.terraceArea }),
         plotArea: data?.plotArea.toString(),
+        ...(data?.parkingArea != "None" &&
+          data?.parkingArea && { parkingArea: data?.parkingArea }),
       };
       break;
     case projectprops.villa:
@@ -84,9 +88,12 @@ export function setPropertyValues(data: any, propCgId: number): any {
           totalNumberOfBalcony: data?.totalNumberOfBalcony?.toString(),
         }),
         totalNumberofBathroom: data?.totalNumberofBathroom?.toString(),
-        gardenArea: data?.gardenArea,
-        parkingArea: data?.parkingArea,
-        terraceArea: data?.terraceArea,
+        ...(data?.gardenArea && { gardenArea: data?.gardenArea }),
+        ...(data?.parkingArea != "None" &&
+          data?.parkingArea && {
+            parkingArea: data?.parkingArea,
+          }),
+        ...(data?.terraceArea && { terraceArea: data?.terraceArea }),
         plotArea: data?.plotArea.toString(),
       };
       break;
