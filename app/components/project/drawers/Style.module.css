@@ -17,14 +17,12 @@
 .header {
   margin-top: 15px;
 }
-.root{
-  width: 35%;
- 
+.content {
+  min-width: 30%;
 }
 
-
-@media (max-width: 640px){
-  .title{
-    font-size:20px;  
+@media (max-width: 640px) {
+  .title {
+    font-size: 20px;
   }
 }

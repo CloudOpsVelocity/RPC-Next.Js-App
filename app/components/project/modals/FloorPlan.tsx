@@ -152,6 +152,9 @@ function FloorPlanModal({
   const showClearAll = Object.values(form.values).some(
     (value) => value !== null && value !== "" && value !== 0
   );
+  if (!opened) {
+    return null;
+  }
   return (
     <>
       <Modal
@@ -1161,22 +1164,15 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
           <div className="flex justify-center items-center mb-6 sm:mb-0  mt-4 w-full">
             <Carousel
               classNames={styles}
-              slideSize={{ base: "100%", sm: "15%" }}
-              slideGap={{ base: "16px", sm: 2 }}
-              align="end"
-              px={70}
+              slideSize={{ base: "50%", sm: "auto" }}
+              slideGap={{ base: "16px", sm: "0px" }}
               nextControlIcon={<ImgCarouselIcon />}
               previousControlIcon={<PrevCarouselIcon />}
-              className="!max-w-[250px] sm:!max-w-[300px]"
-              // withControls={floorsArray.length > 6}
+              className="!max-w-[250px] sm:!max-w"
             >
               {floorsArray?.map((eachObj: any, ind: number) => {
                 return (
-                  <Carousel.Slide
-                    w={100}
-                    className="!h-[65px]"
-                    mr={floorsArray.length > 6 ? 0 : 16}
-                  >
+                  <Carousel.Slide h={58}>
                     <div
                       key={ind}
                       className={clsx(
