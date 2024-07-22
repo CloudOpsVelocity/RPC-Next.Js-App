@@ -18,7 +18,7 @@ export default function VersaMessage({
   greenText,
 }: VersaMessageProps): JSX.Element {
   return (
-    <div className="flex w-full  xl:w-[576px]  xl:h-[467px] flex-col items-center gap-16 xl:gap-28 shrink-0 pb-[12px] xl:pb-[33px] rounded-[20px] bg-[#fff] border  overflow-hidden">
+    <div className="flex w-full    xl:h-[467px] flex-col items-center gap-16 xl:gap-28 shrink-0 pb-[12px] xl:pb-[33px] rounded-[20px] bg-[#fff] border  overflow-hidden">
       <div className={`top h-[100px] w-[400px] sm:w-[576px] xl:h-[178px] shrink-0   relative ${bgColor}`}>
         <CenterFace border={border} icon={icon} />
       </div>

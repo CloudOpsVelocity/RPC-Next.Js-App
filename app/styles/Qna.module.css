@@ -42,7 +42,8 @@
   margin-right: 31px;
 }
 .body {
-  padding: 0;
+  padding: 0px;
+  width: 100%;
   border: none;
   outline: none;
 }
