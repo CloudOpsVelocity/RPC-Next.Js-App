@@ -427,7 +427,7 @@ const ReqForm = ({
         mt={"md"}
         loading={status === "pending"}
       >
-        Request a Callback
+        Request Callback
       </B>
     </form>
   );
