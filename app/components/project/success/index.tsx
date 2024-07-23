@@ -100,13 +100,13 @@ export const ReportSuccesssMessage = ({ close }: { close: () => void }) => {
 };
 export const ReqcallbackMessage = ({ close }: { close: () => void }) => {
   const data = useAtomValue(popupStateAtom);
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     close();
-  //   }, 5000);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      close();
+    }, 5000);
 
-  //   return () => clearTimeout(timer);
-  // }, []);
+    return () => clearTimeout(timer);
+  }, []);
   return (
     <VersaMessage
       bgColor="bg-gradient-to-r from-[#72B800] via-[#AAE051] via-[#E1FFAF] via-[#AAE051] to-[#72B800]"

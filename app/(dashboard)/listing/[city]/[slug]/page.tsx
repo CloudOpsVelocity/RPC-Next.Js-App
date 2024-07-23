@@ -7,7 +7,10 @@ import FaqWithBg from "@/app/components/project/faq";
 import About from "@/app/components/project/about";
 import Navigation from "@/app/components/property/Navigation";
 import Link from "next/link";
-import { getProjectDetails, getReportConstData } from "@/app/utils/api/property";
+import {
+  getProjectDetails,
+  getReportConstData,
+} from "@/app/utils/api/property";
 import ProjectDrawer from "@/app/components/project/Drawer";
 import RoomDetails from "@/app/components/property/RoomDetails";
 import PropertyOverView from "@/app/components/property/Overview";
@@ -36,8 +39,8 @@ type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
   const { listing: data, nearByLocations } = await getListingDetails(slug);
   const projData = await getProjectDetails(data.projIdEnc);
-const issueData = await getReportConstData()
-console.log(issueData)
+  const issueData = await getReportConstData();
+  console.log(nearByLocations);
   const TITLE_OF_PROP = data.projIdEnc
     ? data.propName
     : `${data.bhkName ?? ""} ${data.propTypeName} For
@@ -149,6 +152,7 @@ console.log(issueData)
             projName={TITLE_OF_PROP}
             projId={data.propIdEnc}
             type="prop"
+            mapData={nearByLocations}
           />
         )}
 

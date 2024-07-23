@@ -14,11 +14,6 @@
 
 .content {
   border-radius: 20px;
-  margin-top: 90px;
-}
-
-.overlay {
-  margin-top: 90px;
 }
 
 .input {
@@ -115,19 +110,19 @@
   .content {
     margin-top: 0px;
   }
-  
+
   .overlay {
     margin-top: 0px;
   }
-  .title{
+  .title {
     padding-bottom: 4px;
     margin-bottom: 1px;
     padding-left: 1px;
   }
-  .label{
+  .label {
     font-size: 12px;
   }
-  .mainComntainerFloorPlan{
+  .mainComntainerFloorPlan {
     height: auto;
   }
 }

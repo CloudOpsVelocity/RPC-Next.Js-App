@@ -42,11 +42,18 @@ export default function ReportModal() {
       setStatus("error");
     }
   };
+  const handleClose = () => {
+    close();
+    if (status !== "success") {
+      setStatus("idle");
+      setText("");
+    }
+  };
   return (
     <>
       <Modal
         opened={opened}
-        onClose={close}
+        onClose={handleClose}
         centered
         styles={{
           header: {
@@ -69,7 +76,7 @@ export default function ReportModal() {
           <Close close={close} className="absolute top-3 right-5 md:right-1 z-10" />
 
           {status === "success" ? (
-            <ReportSuccesssMessage close={close} />
+            <ReportSuccesssMessage close={handleClose} />
           ) : (
             <>
               {" "}

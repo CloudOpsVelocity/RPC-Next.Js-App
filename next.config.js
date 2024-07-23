@@ -7,8 +7,8 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: ["@mantine/core", "@mantine/hooks"],
   },
-
   images: {
+    minimumCacheTTL: 60 * 100,
     remotePatterns: [
       { hostname: "d1l03fubsuphsh.cloudfront.net" },
       { hostname: "d2l0lb5gc1bw3t.cloudfront.net" },

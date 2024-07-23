@@ -11,6 +11,7 @@ export const topics = [
   { label: "Near By", id: "nearBy" },
   { label: "Specifications", id: "specifications" },
   { label: "Highlights", id: "highlights" },
+  { label: "Project Ratings", id: "proj_rating" },
   { label: "Bank Approvals", id: "loans" },
   { label: "About Builder", id: "aboutBuilder" },
   { label: "Why Buy This Project?", id: "whyBuy" },

@@ -4727,7 +4727,7 @@ export const WhatsAppButton = ({ name, type }: Props) => {
         height="72"
         viewBox="0 0 276 112"
         fill="none"
-        className="w-[150px] h-[70px]  sm:w-[255px] sm:h-[72px]"
+        className="w-[150px] h-[70px]  sm:w-[255px] sm:h-[100px]"
       >
         <g filter="url(#filter0_i_138_18368)">
           <path
@@ -11968,7 +11968,7 @@ export const OwnerShip = () => {
   );
 };
 
-export const Status = ({className}:{className?:string}) => {
+export const Status = ({ className }: { className?: string }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -13615,7 +13615,7 @@ export const DarkCarouseIcon = () => {
       height="41"
       viewBox="0 0 41 41"
       fill="none"
-      className="h-[14px] w-[14px] md:h-[41px] md:w-[41px] " 
+      className="h-[14px] w-[14px] md:h-[41px] md:w-[41px] "
     >
       <rect
         width="41"

@@ -140,7 +140,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           id="about"
           heading="about"
           projName={data.projectName}
-          content={"Code has to be bundled using a bundler"}
+          content={data.about}
         />
         {/* Property Details */}
         <ProjectDetailsP

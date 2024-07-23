@@ -55,7 +55,7 @@ export default function Overview({
       <div className="pl-[2%] pr-[2%] flex justify-between items-center flex-wrap sm:flex-nowrap">
         <div>
           <div>
-            <h2 className="text-[22px] sm:text-[24px] lg:text-[32px] text-[#001F35] font-[700] capitalize ">
+            <h2 className="text-[22px] sm:text-[24px] lg:text-[32px] text-[#001F35] font-[700] capitalize break-words text-wrap w-[65%]">
               {projectName}
             </h2>{" "}
           </div>
@@ -99,13 +99,6 @@ export default function Overview({
             value={`${totalLandArea} Acers`}
             className="mr-[5%] pt-[2%] mb-[3%] "
           />
-          {/* <ProjBasicDetails
-            key="elevation"
-            icon={<TotalLandArea />} // Adjust icon
-            title="Elevation"
-            value={"G + 3"}
-            className="mr-[5%] pt-[2%] mb-[3%] "
-          /> */}
           <ProjBasicDetails
             key="totalUnits"
             icon={<TotalLandArea />} // Adjust icon

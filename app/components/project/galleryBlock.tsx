@@ -90,6 +90,12 @@ export default function GalleryBlock({
                   fit="contain"
                 />
               )}
+              <button
+                onClick={() => open("image", selectedMedia)}
+                className="absolute bottom-0.5 sm:bottom-3 right-1 xl:right-3 z-50 "
+              >
+                <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] " />
+              </button>
               <Gallery
                 selectedMedia={selectedMedia}
                 images={images}
@@ -114,9 +120,9 @@ export default function GalleryBlock({
                 src={img as string}
                 alt={`Image ${ind + 1}`}
                 className={clsx(
-                  `w-[110px] min-w-[90px] lg:w-[152px] h-[68px] lg:h-[94px]   !rounded-[5px] shadow-md mb-[4%] cursor-pointer  md:min-w-[152px] object-cover `,
+                  `w-[110px] min-w-[90px] lg:w-[152px] h-[68px] lg:h-[94px]   !rounded-[5px] shadow-md mb-[4%] cursor-pointer  md:min-w-[152px] object-cover border border-gray-300 `,
                   selectedMedia?.split("?")[0] === img.split("?")[0] &&
-                    "!border-2 !border-[#4d6677] !shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)]"
+                    "!border-2 !border-btnPrimary !shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)]"
                 )}
                 onClick={() => handleMediaClick(img as string)}
               />
@@ -133,9 +139,9 @@ export default function GalleryBlock({
                     <video
                       key={img}
                       src={img as string}
-                      className={`!w-full rounded-[5px] cursor-pointer  h-[68px] sm:h-[94px] object-cover ${
+                      className={`!w-full rounded-[5px] cursor-pointer  h-[68px] sm:h-[94px] object-cover border !border-gray-300 !shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] ${
                         selectedMedia === img
-                          ? "border-2 border-[#4d6677] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)]"
+                          ? "border-2 !border-btnPrimary shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)]"
                           : ""
                       }`}
                       onClick={() => handleMediaClick(img as string)}

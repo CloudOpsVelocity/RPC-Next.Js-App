@@ -42,7 +42,6 @@ const Gallery: React.FC<GalleryProps> = ({
   };
   const bind = useDrag(
     ({ swipe: [swipeX], movement: [mx] }) => {
-      console.log(swipeX, mx);
       if (swipeX > 0) {
       } else if (swipeX < 0) {
       }
@@ -72,7 +71,7 @@ const Gallery: React.FC<GalleryProps> = ({
         }}
         className="!styleScroll"
       >
-        <div className="h-auto  scrollbar-hide flex justify-end flex-col items-center">
+        <div className="h-auto  scrollbar-hide flex justify-end flex-col items-center ">
           <div
             className={`w-full bg-transparent    h-[57px] flex items-center justify-between mt-[26px]  z-[1000] px-0.5  m-auto ${
               !isImage && isMobile ? "mt-50%" : "mt-[10%]"
@@ -102,7 +101,6 @@ const Gallery: React.FC<GalleryProps> = ({
                 slidesToScroll={1}
                 align="start"
                 withControls={false}
-                onNextSlide={() => {}}
               >
                 {images.map((image, index) => (
                   <Carousel.Slide
@@ -207,13 +205,6 @@ const Gallery: React.FC<GalleryProps> = ({
           </div>
         </div>
       </Modal>
-
-      <button
-        onClick={() => handleImageClick(selectedMedia)}
-        className="absolute bottom-0.5 sm:bottom-3 right-1 xl:right-3 z-50 "
-      >
-        <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] " />
-      </button>
     </>
   );
 };

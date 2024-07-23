@@ -112,10 +112,17 @@ export default function Specifications({
                     <span className="">{spec.specName}</span>
                   </span>
                   <div>
-                    <ul className="list-disc ml-8 grid gap-2 my-2 text-[#233333] text-[12px] sm:text-[20px] font-[500]">
+                    <ul className="list-disc ml-8 grid gap-2 my-2 text-[#233333] text-[12px] sm:text-[20px] font-[500] ">
                       {spec.values.map(
                         (value, valueIndex) =>
-                          value && <li key={valueIndex}>{value}</li>
+                          value && (
+                            <li
+                              className="break-words max-w-min"
+                              key={valueIndex}
+                            >
+                              {value}
+                            </li>
+                          )
                       )}
                     </ul>
                   </div>

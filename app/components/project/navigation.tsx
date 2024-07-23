@@ -111,6 +111,7 @@ export default function Navigation({
       key: "specifications",
     },
     { condtion: detailsData?.highlights?.length > 0, key: "highlights" },
+    { condtion: true, key: "proj_rating" },
     { condtion: detailsData?.banks?.length > 0, key: "loans" },
     { condtion: true, key: "aboutBuilder" },
     { condtion: true, key: "whyBuy" },
