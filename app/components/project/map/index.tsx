@@ -79,147 +79,90 @@ const LeafMap: React.FC<{
     mapData && mapData[selected] && mapData[selected].length > 0
       ? mapData[selected].slice(isMobile ? -5 : -8)
       : [];
-      return (
-        Object.keys(mapData).length > 0 ? (
-          <div className="w-full scroll-mt-[180px] mx-auto mb-[5%]" id="nearBy">
-            <div className="flex justify-between w-[90%] mx-auto">
-              {type === "prop" ? (
-                <PropertyHeading
-                  title="Near BY LOCATIONS"
-                  desc="Explore nearby convenient amenities, entertainment, and essential services"
-                  className="mb-[40px]"
-                  projName={projName}
-                />
-              ) : (
-                <div>
-                  <h2 className="text-h2 lg:text-[32px] font-semibold mb-[12px] capitalize break-words max-w-[78%]">
-                    <span className="text-[#148B16] font-bold">{projName} </span>
-                    <span>Near By Locations</span>
-                  </h2>
-                  <SubHeading
-                    text="Explore nearby convenient amenities, entertainment, and essential services"
-                    className="mt-2 mb-4 sm:mb-8"
-                  />
-                </div>
-              )}
-            </div>
-            <div className="flex gap-6 mb-5 mt-1 flex-wrap w-[95%] ml-4">
-              <CustomScrollArea
-                areas={areas}
-                selected={selected}
-                setSelected={setSelected}
-                data={mapData}
-              />
-            </div>
-      
-            <div className="border border-[#92B2C8] flex flex-col-reverse md:grid grid-cols-1 md:grid-cols-[2fr_3fr] rounded-xl overflow-hidden shadow-lg md:h-[620px] w-[90%] mx-auto">
-              <section className="bg-white">
-                <div id="tabs">
-                  <Tabs defaultValue="public">
-                    <div className="bg-blue-50 px-5 py-4">
-                      <p className="text-[#001F35] sm:text-[22px] font-medium leading-[normal]">
-                        Explore Your Surroundings, Everywhere Nearby!
-                      </p>
-                    </div>
-                  </Tabs>
-                  <div id="location-listing" className="grid gap-2">
-                    <ScrollArea h={isMobile ? 300 : 600} pb={isMobile ? 10 : 50} px={10}>
-                      {mapData[selected] && mapData[selected].length > 0 ? (
-                        mapData[selected]
-                          .map((location, index) => ({
-                            ...location,
-                            distance: location.distance,
-                          }))
-                          .sort(
-                            (a, b) =>
-                              Number(a.time?.split(" ")[0]) -
-                              Number(b.time?.split(" ")[0])
-                          )
-                          .map((location, index) => (
-                            <LocationList
-                              type="public"
-                              {...location}
-                              key={index}
-                              origin={{
-                                lat: Number(lat),
-                                lng: Number(lang),
-                              }}
-                              isMobile={isMobile}
-                              isProj={type}
-                              onClick={setSelectedLocation}
-                              setDirection={showLocationOnMap}
-                              showLocationOnMap={showLocationOnMap}
-                            />
-                          ))
-                      ) : (
-                        <p>No locations found.</p>
-                      )}
-                    </ScrollArea>
-                  </div>
-                </div>
-              </section>
-              <section>
-                <Map
-                  data={mapData && mapData[selected] ? mapData[selected] : []}
-                  selectedLocation={selectedLocation}
-                  projName={projName}
-                  lat={lat}
-                  lang={lang}
-                  selected={selected}
-                  setSelectedLocation={setSelectedLocation}
-                  type="proj"
-                />
-              </section>
-            </div>
-      
-            {mapData[selected] && mapData[selected].length > 0 && (
-              <div className="mt-8 w-[90%] mx-auto hidden sm:block">
-                <h1 className="text-[#303030] text-[16px] md:text-xl not-italic font-medium leading-[normal] tracking-[0.8px] capitalize">
-                  {selected.split("_").join(" ")} Nearby
-                </h1>
-                <div className="flex gap-2 mt-3 flex-wrap gap-x-5">
-                  {downData.map((item, index) => (
-                    <MapCard
-                      key={index}
-                      {...item}
-                      origin={{
-                        lat: Number(lat),
-                        lng: Number(lang),
-                      }}
-                      type={type}
-                      showLocationOnMap={showLocationOnMap}
-                    />
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
+  return Object.keys(mapData).length > 0 ? (
+    <div className="w-full scroll-mt-[180px] mx-auto mb-[5%]" id="nearBy">
+      <div className="flex justify-between w-[90%] mx-auto">
+        {type === "prop" ? (
+          <PropertyHeading
+            title="Near BY LOCATIONS"
+            desc="Explore nearby convenient amenities, entertainment, and essential services"
+            className="mb-[40px]"
+            projName={projName}
+          />
         ) : (
+          <div>
+            <h2 className="text-h2 lg:text-[32px] font-semibold mb-[12px] capitalize break-words max-w-[78%]">
+              <span className="text-[#148B16] font-bold">{projName} </span>
+              <span>Near By Locations</span>
+            </h2>
+            <SubHeading
+              text="Explore nearby convenient amenities, entertainment, and essential services"
+              className="mt-2 mb-4 sm:mb-8"
+            />
+          </div>
+        )}
+      </div>
+      <div className="flex gap-6 mb-5 mt-1 flex-wrap w-[95%] ml-4">
+        <CustomScrollArea
+          areas={areas}
+          selected={selected}
+          setSelected={setSelected}
+          data={mapData}
+        />
+      </div>
 
-
-          <div className="w-[90%]  mb-[5%] justify-center">
-            <div className="flex justify-between w-[90%] ">
-              {type === "prop" ? (
-                <PropertyHeading
-                  title=""
-                  desc=""
-                  className="mb-[40px]"
-                  projName={projName}
-                />
-              ) : (
-                <div>
-                  <h2 className="text-h2 lg:text-[32px] font-semibold mb-[12px] capitalize break-words max-w-[78%]">
-                    <span className="text-[#148B16] font-bold">{projName} </span>
-                    <span>Near By Locations</span>
-                  </h2>
-                 {/*  <SubHeading
-                    text="Explore nearby convenient amenities, entertainment, and essential services"
-                    className="mt-2 mb-4 sm:mb-8"
-                  /> */}
-                </div>
-              )}
+      <div className="border border-[#92B2C8] flex flex-col-reverse md:grid grid-cols-1 md:grid-cols-[2fr_3fr] rounded-xl overflow-hidden shadow-lg md:h-[620px] w-[90%] mx-auto">
+        <section className="bg-white">
+          <div id="tabs">
+            <Tabs defaultValue="public">
+              <div className="bg-blue-50 px-5 py-4">
+                <p className="text-[#001F35] sm:text-[22px] font-medium leading-[normal]">
+                  Explore Your Surroundings, Everywhere Nearby!
+                </p>
+              </div>
+            </Tabs>
+            <div id="location-listing" className="grid gap-2">
+              <ScrollArea
+                h={isMobile ? 300 : 600}
+                pb={isMobile ? 10 : 50}
+                px={10}
+              >
+                {mapData[selected] && mapData[selected].length > 0 ? (
+                  mapData[selected]
+                    .map((location: any, index: any) => ({
+                      ...location,
+                      distance: location.distance,
+                    }))
+                    .sort(
+                      (a: any, b: any) =>
+                        Number(a.time?.split(" ")[0]) -
+                        Number(b.time?.split(" ")[0])
+                    )
+                    .map((location: any, index: any) => (
+                      <LocationList
+                        type="public"
+                        {...location}
+                        key={index}
+                        origin={{
+                          lat: Number(lat),
+                          lng: Number(lang),
+                        }}
+                        isMobile={isMobile}
+                        isProj={type}
+                        onClick={setSelectedLocation}
+                        setDirection={showLocationOnMap}
+                        showLocationOnMap={showLocationOnMap}
+                      />
+                    ))
+                ) : (
+                  <p>No locations found.</p>
+                )}
+              </ScrollArea>
             </div>
-            <Map
+          </div>
+        </section>
+        <section>
+          <Map
             data={mapData && mapData[selected] ? mapData[selected] : []}
             selectedLocation={selectedLocation}
             projName={projName}
@@ -229,11 +172,66 @@ const LeafMap: React.FC<{
             setSelectedLocation={setSelectedLocation}
             type="proj"
           />
+        </section>
+      </div>
+
+      {mapData[selected] && mapData[selected].length > 0 && (
+        <div className="mt-8 w-[90%] mx-auto hidden sm:block">
+          <h1 className="text-[#303030] text-[16px] md:text-xl not-italic font-medium leading-[normal] tracking-[0.8px] capitalize">
+            {selected.split("_").join(" ")} Nearby
+          </h1>
+          <div className="flex gap-2 mt-3 flex-wrap gap-x-5">
+            {downData.map((item: any, index: number) => (
+              <MapCard
+                key={index}
+                {...item}
+                origin={{
+                  lat: Number(lat),
+                  lng: Number(lang),
+                }}
+                type={type}
+                showLocationOnMap={showLocationOnMap}
+              />
+            ))}
           </div>
-         
-        )
-      );
-      
+        </div>
+      )}
+    </div>
+  ) : (
+    <div className="w-[90%]  mb-[5%] justify-center">
+      <div className="flex justify-between w-[90%] ">
+        {type === "prop" ? (
+          <PropertyHeading
+            title=""
+            desc=""
+            className="mb-[40px]"
+            projName={projName}
+          />
+        ) : (
+          <div>
+            <h2 className="text-h2 lg:text-[32px] font-semibold mb-[12px] capitalize break-words max-w-[78%]">
+              <span className="text-[#148B16] font-bold">{projName} </span>
+              <span>Near By Locations</span>
+            </h2>
+            {/*  <SubHeading
+                    text="Explore nearby convenient amenities, entertainment, and essential services"
+                    className="mt-2 mb-4 sm:mb-8"
+                  /> */}
+          </div>
+        )}
+      </div>
+      <Map
+        data={mapData && mapData[selected] ? mapData[selected] : []}
+        selectedLocation={selectedLocation}
+        projName={projName}
+        lat={lat}
+        lang={lang}
+        selected={selected}
+        setSelectedLocation={setSelectedLocation}
+        type="proj"
+      />
+    </div>
+  );
 };
 
 export default LeafMap;

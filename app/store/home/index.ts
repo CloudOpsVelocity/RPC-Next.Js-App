@@ -46,6 +46,7 @@ const searchReducer = (state: SearchState, action: Action): SearchState => {
     case "RESET_FILTERS":
       return initialState;
     default:
+      // @ts-ignore
       throw new Error(`Unknown action type: ${action.type}`);
   }
 };

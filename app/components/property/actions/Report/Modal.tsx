@@ -11,26 +11,26 @@ import { ReportSuccesssMessage } from "@/app/components/project/success";
 import ReportOptions from "./reportOptions";
 import { number } from "yup";
 
-export default function ReportModal({issueData}:any) {
+export default function ReportModal({ issueData }: any) {
   const { slug } = useParams<{ slug: string }>();
   const [opened, { open, close }] = useDisclosure(false);
   const [status, setStatus] = useState<
     "idle" | "error" | "loading" | "success"
   >("idle");
-  const[reportStatus, setreportStatus]=useState([]);
+  const [reportStatus, setreportStatus] = useState<number[]>([]);
   const [text, setText] = useState("");
   const formSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if(reportStatus.includes(607)){
-      if (!text ) {
+    if (reportStatus.includes(607)) {
+      if (!text) {
         setStatus("error");
         return;
       }
     }
-    
+
     setStatus("loading");
     try {
-      const singleString = reportStatus.join(', ');
+      const singleString = reportStatus.join(", ");
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/report?id=${slug}&iden=L`,
         {
@@ -38,7 +38,7 @@ export default function ReportModal({issueData}:any) {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ comment: text, status:singleString }),
+          body: JSON.stringify({ comment: text, status: singleString }),
         }
       );
       if (response.ok) {
@@ -51,25 +51,24 @@ export default function ReportModal({issueData}:any) {
     }
   };
 
-const reportIssuseFun=(cid:number)=>{
-  const index = reportStatus.indexOf(cid);
- 
-  if (index !== -1) {
+  const reportIssuseFun = (cid: number) => {
+    const index = reportStatus.indexOf(cid);
+
+    if (index !== -1) {
       reportStatus.splice(index, 1);
-  } else {
+    } else {
       reportStatus.push(cid);
-  }
-  console.log(reportStatus)
-  
-}
-const isMobile = useMediaQuery("(max-width: 601px)");
+    }
+    console.log(reportStatus);
+  };
+  const isMobile = useMediaQuery("(max-width: 601px)");
 
   return (
     <>
       <Modal
         opened={opened}
         onClose={close}
-        size={isMobile?"90%":"55%"}
+        size={isMobile ? "90%" : "55%"}
         centered
         {...(status === "success" && {
           classNames: {
@@ -107,8 +106,8 @@ const isMobile = useMediaQuery("(max-width: 601px)");
                 </p>
               </header>
               <ReportOptions
-              reportIssuseFun={reportIssuseFun}
-              issueData={issueData}
+                reportIssuseFun={reportIssuseFun}
+                issueData={issueData}
               />
               <form onSubmit={formSubmit} className=" gap-1 sm:gap-4 ">
                 <div className="flex-1">
@@ -141,9 +140,7 @@ const isMobile = useMediaQuery("(max-width: 601px)");
                   >
                     Submit
                   </Button>
-
                 </div>
-          
               </form>
             </>
           )}

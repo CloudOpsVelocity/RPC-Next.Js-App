@@ -69,7 +69,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                 onClick={() => onThumbClick(index)}
                 selected={index === selectedIndex}
                 index={index}
-                // img={dumArray[index]}
+                img={dumArray[index]}
               />
             ))}
           </div>

@@ -7,8 +7,8 @@ export const usePopShortList = () => {
   const [callback, setCallback] = useAtom(callbackAtom);
   const open = () => setOpened(true);
   const close = () => setOpened(false);
-  const handleOpen = (callbackfn: () => void) => {
-    setCallback(() => callbackfn);
+  const handleOpen = (callbackfn?: () => void) => {
+    callbackfn && setCallback(() => callbackfn);
     open();
   };
 
