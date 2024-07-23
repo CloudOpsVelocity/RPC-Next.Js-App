@@ -231,7 +231,7 @@ const Content = ({ url }: { url: string }) => {
           fit="contain"
           // src={previewImage ?? content?.url}
           src={url}
-          className="cursor-pointer sm:border-[5px] sm:bg-white sm:border-white w-[100%] sm:!h-[350px]  md:min-w-[1400px] md:min-h-[600px]"
+          className="cursor-pointer max-h-[200px]  sm:border-[5px] sm:bg-white sm:border-white w-[100%] sm:!h-[350px]  md:min-w-[1400px] md:min-h-[600px]"
         />
       </TransformComponent>
       <ZoomInOut className="right-2 bottom-4 xl:right-28 " />
