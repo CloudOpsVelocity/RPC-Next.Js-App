@@ -786,7 +786,6 @@ function Builder() {
               mt="md"
               minRows={5}
               maxRows={5}
-              maxLength={5001}
               {...form.getInputProps("vission")}
               classNames={{
                 root: StepCss.inputRoot,
@@ -797,6 +796,7 @@ function Builder() {
               onBlurCapture={(e) => {
                 handleTrimAndReplace(e, "vission", form);
               }}
+              maxLength={5001}
             />
             <Text size="sm" mt="xs" ta={"right"}>
               Maximum 5000 Characters
@@ -810,7 +810,6 @@ function Builder() {
               autosize
               minRows={5}
               maxRows={5}
-              maxLength={5001}
               classNames={{
                 root: StepCss.inputRoot,
                 input: StepCss.textInput,
@@ -821,6 +820,7 @@ function Builder() {
                 handleTrimAndReplace(e, "mission", form);
               }}
               {...form.getInputProps("mission")}
+              maxLength={5001}
             />{" "}
             <Text size="sm" mt="xs" ta={"right"} mb={"lg"}>
               Maximum 5000 Characters
