@@ -133,7 +133,7 @@ export const filterKeysDetails = new Map([
   ["parkingType", { name: "Open/ Covered Parking" }],
   ["totalNumberOfBalcony", { name: "Balconies" }],
   ["totalNumberofBathroom", { name: "Bathroom" }],
-  ["floor", { name: "Floor" }],
+  ["floor", { name: "At Floor" }],
   ["block", { name: "Block" }],
   ["gardenArea", { name: "Garden  Area" }],
   ["terraceArea", { name: "Terrace  Area" }],

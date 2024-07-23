@@ -87,42 +87,11 @@ function FloorPlanModal({
     });
     setSelectedFloor({
       ...filteredData[0],
-      floorPlanUrl: filteredData[0].floorPlanUrl || ImgNotAvail,
+      floorPlanUrl: filteredData[0]?.floorPlanUrl ?? ImgNotAvail,
     });
     setFloorsArray(filteredData);
   };
-  // SHOULD NOT DEPEND ANY OTHER FN IMPORTANT OTHERWISE IT WILL CREATE BUGS
-  const handleSearchUndo = (undoValues: any): void => {
-    if (Object.keys(undoValues).length === 0) {
-      setSelectedFloor(null);
-      setFloorsArray(data);
-      const keys = Object.keys(form.values);
-      const resetValues = keys.reduce((acc: any, key) => {
-        acc[key] = null;
-        return acc;
-      }, {});
-      form.setValues(resetValues);
-    } else {
-      const filteredData = data.filter((item: any) => {
-        const matches = Object.entries(undoValues).every(([formKey, value]) => {
-          if (value !== null) {
-            // @ts-ignore
-            const itemValue = String(item[formKey]).toLowerCase();
-            // @ts-ignore
-            const formValue = String(value).toLowerCase();
-            return itemValue === formValue;
-          }
-          return true;
-        });
-        return matches;
-      });
-      setSelectedFloor({
-        ...filteredData[0],
-        floorPlanUrl: filteredData[0].floorPlanUrl || ImgNotAvail,
-      });
-      setFloorsArray(filteredData);
-    }
-  };
+
   const handleReset = () => {
     setSelectedFloor(null);
     setFloorsArray(data);
@@ -189,6 +158,7 @@ function FloorPlanModal({
             >
               {/* scroll buttons */}
               {Object.values(form.values).filter((each) => each != null)
+<<<<<<< HEAD
                 .length > 4  &&
                 propCgId !== projectprops.plot && (
                   <button
@@ -199,6 +169,16 @@ function FloorPlanModal({
                   </button>
                 )}
 
+=======
+                .length > 4 && (
+                <button
+                  onClick={() => handleArrowClick("L")}
+                  className="flex mr-4 xl:mr-8 h-[32px]  xl:w-[32px] rounded-[50%] items-center justify-center bg-[#FCFCFC] "
+                >
+                  <PrevCarouselIcon />
+                </button>
+              )}
+>>>>>>> 3ea79f44d4d0e23747c260db17b401dc83401606
               <div
                 ref={scrollFiltersRef}
                 className={clsx(
@@ -244,19 +224,16 @@ function FloorPlanModal({
                     )
                 )}
               </div>
-
               {/* scroll buttons */}
               {Object.values(form.values).filter((each) => each != null)
-                .length > 4 &&
-                propCgId !== projectprops.plot && (
-                  <button
-                    onClick={() => handleArrowClick("R")}
-                    className="flex h-[32px] ml-8 w-[32px] rounded-[50%] items-center justify-center bg-[#FCFCFC]"
-                  >
-                    <ImgCarouselIcon />
-                  </button>
-                )}
-
+                .length > 4 && (
+                <button
+                  onClick={() => handleArrowClick("R")}
+                  className="flex h-[32px] ml-8 w-[32px] rounded-[50%] items-center justify-center bg-[#FCFCFC]"
+                >
+                  <ImgCarouselIcon />
+                </button>
+              )}
               {/* {showClearAll && (
                 <button
                   className="flex whitespace-nowrap items-center px-2.5 border-none py-0.5 w-fit font-[500] text-[18px] lg:text-[20px] transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-[#FFF] text-secondary-foreground hover:bg-gray-100/80 fnt-[600] text-[#0073C6] underline"
@@ -287,7 +264,6 @@ function FloorPlanModal({
 }
 
 export default FloorPlanModal;
-
 const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
   const [, setFloorsArray] = useAtom(floorPlansArray);
   const [, setFloor] = useAtom(selectedFloorAtom);
@@ -300,11 +276,13 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
           String(item[key]).toLowerCase() === values[key].toLowerCase()
       );
     });
+    console.log({ [property]: filteredData });
     if (data[0][property] != undefined) {
-      // @ts-ignore
-      return Array.from(
+      let options = Array.from(
         new Set(filteredData.map((item: any) => String(item[property])))
-      ).sort();
+      );
+      // @ts-ignore
+      return options;
     } else {
       return [];
     }
@@ -323,7 +301,10 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
           String(item[key]).toLowerCase() === values[key].toLowerCase()
       );
     });
-    setFloor(filteredData[0]);
+    setFloor({
+      ...filteredData[0],
+      floorPlanUrl: filteredData[0]?.floorPlanUrl ?? ImgNotAvail,
+    });
     setFloorsArray(filteredData);
     if (key === "unitNumber" && filteredData.length > 0) {
       const filteredItem = filteredData[0];
@@ -344,24 +325,22 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
   return (
     <div className="col-span-1 w-full max-w-[392px] mr-[3%]  ">
       <div className="w-[100%] flex justify-between items-start flex-wrap gap-[5%] z-[100000]">
-        {propCgId != projectprops.plot && (
-          <Select
-            key={"bhkName"}
-            w={"full"}
-            // mt="md"
+        <Select
+          key={"unitNumber"}
+          {...(propCgId === 32 && { mt: "md" })}
+          w={"full"}
+          label="Select Unit Number"
+          className="!w-[46%]"
+          placeholder="-- select --"
+          data={getOptions("unitNumber")}
+          searchable
+          maxDropdownHeight={200}
+          {...getInputProps("unitNumber")}
+          onChange={(value) => handleOnChange(value as string, "unitNumber")}
+          classNames={{ input: S.input, label: S.label, option: S.option }}
+          rightSection={<DropDownIcon />}
+        />
 
-            label="Select Unit Type"
-            className="!w-[46%]"
-            placeholder="-- select --"
-            data={getOptions("bhkName")}
-            searchable
-            maxDropdownHeight={200}
-            {...getInputProps("bhkName")}
-            onChange={(value) => handleOnChange(value as string, "bhkName")}
-            classNames={{ input: S.input, label: S.label, option: S.option }}
-            rightSection={<DropDownIcon />}
-          />
-        )}
         {(propCgId === projectprops.apartment ||
           propCgId === projectprops.villament) && (
           <Select
@@ -430,7 +409,7 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
               propCgId == projectprops.rowHouse ||
               propCgId == projectprops.villa
                 ? "Select Elevation"
-                : "Select Floor"
+                : "Select At Floor"
             }`}
             className="!w-[46%]"
             placeholder="-- select --"
@@ -448,21 +427,23 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
           />
         )}
 
-        <Select
-          key={"unitNumber"}
-          w={"full"}
-          mt="md"
-          label="Select Unit Number"
-          className="!w-[46%]"
-          placeholder="-- select --"
-          data={getOptions("unitNumber")}
-          searchable
-          maxDropdownHeight={200}
-          {...getInputProps("unitNumber")}
-          onChange={(value) => handleOnChange(value as string, "unitNumber")}
-          classNames={{ input: S.input, label: S.label, option: S.option }}
-          rightSection={<DropDownIcon />}
-        />
+        {propCgId != projectprops.plot && (
+          <Select
+            key={"bhkName"}
+            w={"full"}
+            mt="md"
+            label="Select Unit Type"
+            className="!w-[46%]"
+            placeholder="-- select --"
+            data={getOptions("bhkName")}
+            searchable
+            maxDropdownHeight={200}
+            {...getInputProps("bhkName")}
+            onChange={(value) => handleOnChange(value as string, "bhkName")}
+            classNames={{ input: S.input, label: S.label, option: S.option }}
+            rightSection={<DropDownIcon />}
+          />
+        )}
 
         {getOptions("facingName").filter(
           (option: string) => option !== "Don't Know"
@@ -532,7 +513,6 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
             rightSection={<DropDownIcon />}
           />
         )}
-
         {propCgId != projectprops.apartment &&
           propCgId != projectprops.plot &&
           getOptions("gardenArea").filter((item) => item !== "undefined")
@@ -557,7 +537,6 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
               rightSection={<DropDownIcon />}
             />
           )}
-
         {propCgId != projectprops.apartment &&
           propCgId != projectprops.plot &&
           getOptions("terraceArea").filter(
@@ -775,7 +754,7 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
       </div>
       <Button
         variant="blue"
-        className="text-[14px] xl:text-xl mt-4"
+        className="text-[14px] xl:!text-lg mt-4"
         onClick={handleReset}
         showButton={showClearAll}
       >
@@ -839,7 +818,7 @@ const RightSection = ({ propCgId }: any) => {
                 propCgId == projectprops.rowHouse ||
                 propCgId == projectprops.villa
                   ? "Elevation"
-                  : "Floor"
+                  : "At Floor"
               }`}{" "}
               <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                 {" "}
@@ -936,7 +915,8 @@ const RightSection = ({ propCgId }: any) => {
         {(propCgId == projectprops.villa ||
           propCgId == projectprops.rowHouse ||
           propCgId == projectprops.villament) &&
-          data.parkingArea !== "None" && (
+          data.parkingArea !== "None" &&
+          data.parkingArea && (
             <div className="flex items-center space-x-3">
               {propertyDetailsSvgs.parkingArea}
               <p className="text-[#4D6677] text-[14px] font-[500]">
@@ -987,17 +967,19 @@ const RightSection = ({ propCgId }: any) => {
           </div>
         )}
 
-        {propCgId != projectprops.plot && data.parkingType && (
-          <div className="flex items-center space-x-3">
-            {propertyDetailsSvgs.parkingType}
-            <p className="text-[#4D6677] text-[14px] font-[500]">
-              Open/Covered Parking{" "}
-              <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
-                {data.parkingType} Parking
-              </span>
-            </p>
-          </div>
-        )}
+        {propCgId != projectprops.plot &&
+          data.parkingType &&
+          data.parkingType !== "None" && (
+            <div className="flex items-center space-x-3">
+              {propertyDetailsSvgs.parkingType}
+              <p className="text-[#4D6677] text-[14px] font-[500]">
+                Open/Covered Parking{" "}
+                <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
+                  {data.parkingType} Parking
+                </span>
+              </p>
+            </div>
+          )}
 
         {propCgId != projectprops.plot && data?.totalNumberOfBalcony > 0 && (
           <div className="flex items-center space-x-3">
@@ -1032,7 +1014,7 @@ const RightSection = ({ propCgId }: any) => {
               Length of Plot{" "}
               <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
                 {" "}
-                {data.length} sq.ft
+                {data.length} .ft
               </span>
             </p>
           </div>
@@ -1045,7 +1027,7 @@ const RightSection = ({ propCgId }: any) => {
               Breadth of Plot{" "}
               <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
                 {" "}
-                {data.width} sq.ft
+                {data.width} .ft
               </span>
             </p>
           </div>
@@ -1155,9 +1137,7 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
             </button>
           )}
       </div>
-
       <CarouselModal projName={projName} propCgId={propCgId} />
-
       {floorsArray != undefined &&
         floorsArray != null &&
         floorsArray.length > 0 && (
