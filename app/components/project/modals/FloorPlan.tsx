@@ -1,6 +1,6 @@
 "use client";
 import { Modal, Select } from "@mantine/core";
-import { useId, useRef } from "react";
+import { useRef } from "react";
 import {
   DropDownIcon,
   FloorPlanModalIcon,
@@ -26,6 +26,7 @@ import { Carousel } from "@mantine/carousel";
 import styles from "@/app/styles/Carousel.module.css";
 import { unitFloorsAtom } from "../byunitblock";
 import Button from "../../atoms/buttons/variansts";
+import SelectedFilters from "./filters/SelectedFilters";
 
 type Props = {
   propCgId: any;
@@ -46,8 +47,8 @@ function FloorPlanModal({
   const [floorsArray, setFloorsArray] = useAtom(floorPlansArray);
   const setUnitsFloor = useSetAtom(unitFloorsAtom);
   const [opened, { close }] = useFloorPlanPopup();
-  const scrollFiltersRef = useRef<HTMLDivElement>(null);
   const form = useFormContext();
+  const scrollFiltersRef = useRef<HTMLDivElement>(null);
   const handleArrowClick = (side: "R" | "L"): void => {
     const scrollAmount = side === "R" ? 100 : -100;
     if (scrollFiltersRef.current) {
@@ -151,87 +152,14 @@ function FloorPlanModal({
               See floor plan according to your selections
             </p>
 
-            <div
-              className={`flex justify-start items-center w-full xl:h-[35px] relative bottom-[20px] mb-1  sm:mt-10  xl:mb-[-35px] ${
-                showClearAll ? "h-[35px] mt-10" : "h-[0px] mt-2"
-              }`}
-            >
-              {/* scroll buttons */}
-              {Object.values(form.values).filter((each) => each != null)
-                .length > 4 &&
-                propCgId !== projectprops.plot && (
-                  <button
-                    onClick={() => handleArrowClick("L")}
-                    className="flex mr-4 xl:mr-8 h-[32px]  xl:w-[32px] rounded-[50%] items-center justify-center bg-[#FCFCFC] "
-                  >
-                    <PrevCarouselIcon />
-                  </button>
-                )}
-
-              <div
-                ref={scrollFiltersRef}
-                className={clsx(
-                  "flex w-full xl:max-w-[60%] scroll-smooth overflow-x-auto overflow-y-hidden  scrollbar-hide gap-4",
-                  propCgId === projectprops.plot && "md:max-w-[65%] "
-                )}
-              >
-                {Object.entries(form.values).map(
-                  ([key, value]) =>
-                    value !== null &&
-                    value !== 0 &&
-                    value !== "" &&
-                    value !== "true" && (
-                      <div
-                        className="flex h-[33px] items-center px-1 xl:px-3 whitespace-nowrap py-1.5 bg-white border border-[#9DB6DC] rounded-[10px]"
-                        key={key}
-                      >
-                        <span className="text-[#148B16] text-[14px] xl:text-[18px] font-semibold">
-                          {/* @ts-ignore */}
-
-                          {key === "floor" && value == 0 ? "G" : value}
-                        </span>
-                        <span className="mx-1.5 text-[#242424]">|</span>
-                        <span className="text-[#242424] text-[14px] xl:text-[18px] font-medium capitalize">
-                          {filterKeysDetails?.get(key)?.name != undefined
-                            ? filterKeysDetails?.get(key)?.name === "Floor" &&
-                              (propCgId === 31 || propCgId === 33)
-                              ? "Elevation"
-                              : filterKeysDetails?.get(key)?.name
-                            : key}
-                        </span>
-                        <button className="ml-2 !w-[14px] !h-[14px]">
-                          <Image
-                            onClick={() => handleRemoveFilter(key)}
-                            src={"/cross.svg"}
-                            alt="close"
-                            width={14}
-                            height={14}
-                            className="!w-[14px] !h-[14px]"
-                          />
-                        </button>
-                      </div>
-                    )
-                )}
-              </div>
-              {/* scroll buttons */}
-              {Object.values(form.values).filter((each) => each != null)
-                .length > 4 && (
-                <button
-                  onClick={() => handleArrowClick("R")}
-                  className="flex h-[32px] ml-8 w-[32px] rounded-[50%] items-center justify-center bg-[#FCFCFC]"
-                >
-                  <ImgCarouselIcon />
-                </button>
-              )}
-              {/* {showClearAll && (
-                <button
-                  className="flex whitespace-nowrap items-center px-2.5 border-none py-0.5 w-fit font-[500] text-[18px] lg:text-[20px] transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-[#FFF] text-secondary-foreground hover:bg-gray-100/80 fnt-[600] text-[#0073C6] underline"
-                  onClick={handleReset}
-                >
-                  Clear All Filter
-                </button>
-              )} */}
-            </div>
+            <SelectedFilters
+              form={form}
+              propCgId={propCgId}
+              projectprops={projectprops}
+              showClearAll={showClearAll}
+              handleRemoveFilter={handleRemoveFilter}
+              filterKeysDetails={filterKeysDetails}
+            />
 
             <div className="flex justify-start items-start gap-5 xl:gap-[45px] flex-col mt-[1.5%] md:flex-row w-full xl:pb-[3%] ">
               <LeftSection
