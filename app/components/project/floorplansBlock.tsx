@@ -249,7 +249,7 @@ export default function FloorplansBlock({
         {phaseList?.length > 1 && (
           <>
             <p className="text-[14px] sm:text-[20px] lg:text-[24px] font-[500] mb-2 sm:mb-[44px] md:mb-0 text-[#333] sm:mr-[20px] ">
-              Select one of the phase to see project details
+              Select one of the phase to see Floor Plans
             </p>
             <div className=" flex justify-start items-start gap-[10px] flex-wrap ">
               {phaseList?.map((each: any, index: any) => {

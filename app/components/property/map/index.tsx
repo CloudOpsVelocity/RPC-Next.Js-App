@@ -128,7 +128,7 @@ const LeafMap: React.FC<{
                 </p>
               </div>
             </Tabs>
-            <div id="location-listing" className="grid gap-2 px-2 sm:pl-5 ">
+            <div id="location-listing" className="grid gap-2 px-2 sm:pl-5">
               <ScrollArea h={isMobile ? 300 : 600} pb={isMobile ? 10 : 50}>
                 {mapData &&
                 mapData[selected] &&

@@ -38,10 +38,10 @@ import { Main } from "@/app/validations/property";
 import { formatDateDDMMYYYY } from "@/app/utils/date";
 import { generatePropertyDetails } from "@/app/data/property";
 const style = {
-  card: "mr-[4%] mb-[1%]  p-[2%] md:p-[1%] bg-white mt-2 xl:mt-4 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8] ",
+  card: "mr-[4%] mb-[1%]  p-[2%] md:p-[1%] bg-white mt-2 md:mt-1 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8] ",
   heading: {
     h1: "text-[#001F35] text-[18px] sm:text-[32px] not-italic font-semibold leading-[normal] uppercase mb-1 sm:mb-[14px]",
-    p: "inline-flex  gap-2 sm:gap-[26px]  w-[90%] items-center mb-[20px] xl:mb-[40px] ",
+    p: "inline-flex  gap-2 sm:gap-[26px] text-[18px]  w-[90%] items-center mb-[20px] xl:mb-[15px] ",
   },
 };
 export default function RoomDetails({ data }: { data: Main }) {
@@ -78,7 +78,7 @@ const RoomSection = ({ data }: { data: Main }) => {
 
       <div
         className={
-          "flex justify-start items-start flex-wrap w-[90%] md:w-full m-auto  "
+          "flex justify-start items-start flex-wrap w-[90%] md:w-full md:m-auto  "
         }
       >
         {" "}
@@ -202,7 +202,7 @@ const OtherDetails = ({
   ];
   return (
     <div
-      className=" mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] p-4 xl:pl-[53px] xl:py-[39px]"
+      className=" mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] p-4 xl:pl-[53px] md:py-[24px]"
       id="propertyDetails "
     >
       <h1 className={style.heading.h1}>Other Details</h1>

@@ -3,14 +3,18 @@ export function calculatePerSqPrice(
   sba: string
 ): string {
   const priceValue: number =
-    typeof price === "string" ? (price = parseFloat(price)) : price;
+    typeof price === "string" ? parseFloat(price) : price;
   const sbaValue: number = parseFloat(sba);
 
   if (isNaN(priceValue) || isNaN(sbaValue) || sbaValue === 0) {
     return "N/A";
   }
 
-  const result: string = (priceValue / sbaValue).toFixed(2);
+  const result: number = priceValue / sbaValue;
+  const formattedResult: string = result.toLocaleString("en-US", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
 
-  return result;
+  return formattedResult;
 }

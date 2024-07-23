@@ -11,7 +11,7 @@ export default function Ratings() {
         ? "..."
         : `${
             data?.reviewOverviewData?.averageRating
-              ? `${data?.reviewOverviewData?.averageRating}.0`
+              ? `${data?.reviewOverviewData?.averageRating}`
               : "No"
           }` ?? "No"}{" "}
       Ratings

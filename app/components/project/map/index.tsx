@@ -123,7 +123,7 @@ const LeafMap: React.FC<{
                     </div>
                   </Tabs>
                   <div id="location-listing" className="grid gap-2">
-                    <ScrollArea h={isMobile ? 300 : 600} pb={isMobile ? 10 : 50} px={10}>
+                    <ScrollArea max-h={isMobile && "400"} h={isMobile ? "auto" : 600} pb={isMobile ? 10 : 50} px={10}>
                       {mapData[selected] && mapData[selected].length > 0 ? (
                         mapData[selected]
                           .map((location, index) => ({

@@ -213,7 +213,9 @@ export default function FloorplanDrawer() {
               ""
             )}
             <p className="text-[14px] lg:text-[20px] bg-[#EEE] text-[#001F35] font-[500] flex justify-start items-center  ">
-              <FlooringIcon className="w-[16px] h-[16px] lg:w-[24px] lg:h-[24px]" />
+              <FlooringIcon className="md:h-[32px] md:w-[32px] h-[24px] w-[24px]" />
+            
+
               <span className="mr-[6px] ml-[6px]">{cg?.unitCount} </span> Units
             </p>
             {cg?.propertyType === "rowHouse" || cg.propertyType === "villa" ? (

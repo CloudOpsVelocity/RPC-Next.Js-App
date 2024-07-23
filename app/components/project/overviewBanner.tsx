@@ -12,6 +12,7 @@ import { formatCurrency } from "@/app/utils/numbers";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import RequestCallBackModal from "../molecules/popups/req";
 import DownloadBroucher from "@/app/components/project/downloadBroucher";
+import { NumberFormatter } from "@mantine/core";
 export default function OverviewBanner({
   minPrice,
   maxPrice,
@@ -46,8 +47,13 @@ export default function OverviewBanner({
             <p className="text-[#001F35] sm:text-[24px] md:text-[32px] lg:text-[40px] whitespace-nowrap font-[700] mt-1">
               {formatCurrency(minPrice)} - {formatCurrency(maxPrice)}
               {", "}
-              <span className="text-[#545353] text-lg md:text-[32px] not-italic font-medium leading-[normal]">
-                ₹ {basePrice} / Base Price/sq.ft
+              <span className="text-[#545353] text-lg md:text-[32px] text-wrap not-italic font-medium leading-[normal]">
+                ₹ {  <NumberFormatter
+                  thousandSeparator
+                  value={basePrice}
+                  thousandsGroupStyle="lakh"
+                    />
+          } Base Price/sq.ft
               </span>
             </p>
             <div className="flex justify-center sm:justify-start items-center w-full space-x-2">

@@ -217,11 +217,11 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
                 <SearchSection setSelectedLocation={showLocationOnMap} />
 
                 <Tabs.Panel value="public">
-                  <div id="location-listing" className="grid gap-2">
+                  <div id="location-listing" className="grid gap-2 h-auto ">
                     {isLoading ? (
                       <Loading />
                     ) : (
-                      <ScrollArea h={420}>
+                      <ScrollArea h={"auto"} mah={400}>
                         {data && Object.values(data).length > 0 ? (
                           Object.values(data).map(
                             (location: any, index: number) => (
@@ -246,11 +246,11 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
                   </div>
                 </Tabs.Panel>
                 <Tabs.Panel value="drive">
-                  <div id="location-listing" className="grid gap-2">
+                  <div id="location-listing" className="grid gap-2 ">
                     {isLoading ? (
                       <Loading />
                     ) : (
-                      <ScrollArea h={420}>
+                      <ScrollArea h={"auto"} mah={400}>
                         {data && Object.values(data).length > 0 ? (
                           Object.values(data).map(
                             (location: any, index: number) => (
@@ -279,7 +279,7 @@ const Nearby: React.FC<{ lat: string; lang: string; projName: string }> = ({
                     {isLoading ? (
                       <Loading />
                     ) : (
-                      <ScrollArea h={420}>
+                      <ScrollArea h={"auto"} mah={400}>
                         {data && Object.values(data).length > 0 ? (
                           Object.values(data).map(
                             (location: any, index: number) => (

@@ -184,7 +184,7 @@ export default function PropertyTypeDetailsCrad({
               )}`
             : "Coming Soon"}
         </p>
-        <p className="text-[12px] lg:text-lg text-[#242424] text-right  italic font-medium leading-[normal]">
+        <p className="text-[12px] lg:text-lg text-wrap text-[#242424] text-right  italic font-medium leading-[normal]">
           ₹ {cg?.basePrice} Base Price/ sq.ft
         </p>
         <p className="text-[14px] sm:text-[18px]  text-right text-[#4D6677]  not-italic font-semibold leading-[normal] capitalize mt-3 ">

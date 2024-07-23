@@ -55,7 +55,7 @@ export default function Overview({
       <div className="pl-[2%] pr-[2%] flex justify-between items-center flex-wrap sm:flex-nowrap">
         <div>
           <div>
-            <h2 className="text-[22px] sm:text-[24px] lg:text-[32px] text-[#001F35] font-[700] capitalize break-words text-wrap w-[65%]">
+            <h2 className="text-[22px] sm:text-[24px] lg:text-[32px] text-[#001F35] font-[700] capitalize break-words text-wrap w-full md:w-[65%]">
               {projectName}
             </h2>{" "}
           </div>

@@ -154,7 +154,7 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
                 }`}{" "}
               </h2>
               {projectDetails.cg === "S" && (
-                <p className="text-[16px] md:text-right lg:text-[24px] font-[600] mb-[10px] md:mb-[10px] text-[#00487C] ">
+                <p className="text-[16px] md:text-right lg:text-[24px] font-[600]   text-[#00487C] ">
                   ₹{" "}
                   {calculatePerSqPrice(
                     projectDetails.price,
@@ -165,6 +165,9 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
                   /- Price per sqft onwards
                 </p>
               )}
+                 <p className="mb-[13px] font-bold ">
+              Others Charges Applicable
+              </p>
               <p className="text-[#242424] sm:text-2xl not-italic font-semibold leading-[normal] mt-[8px]">
                 Posted By: {projectDetails.postedByName}
               </p>

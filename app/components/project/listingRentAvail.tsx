@@ -76,20 +76,16 @@ const Card = ({
           alt="listing"
           src={
             type === "rent"
-              ? isMobile
-                ? config.rentMobileLogo
-                : config.rentLogo
-              : isMobile
-              ? config.sellMobileLogo
-              : config.sellLogo
+              ? 
+              config.rentMobileLogo
+              :
+              config.sellMobileLogo
           }
           width={100}
           height={100}
-          className="w-[50px] h-[40px] sm:w-[60px] sm:h-[60px] block sm:hidden"
+          className="w-[50px] h-[40px] sm:w-[60px] sm:h-[60px] block md:ml-[20px] "
         />
-        <span className="hidden sm:block">
-          {type === "rent" ? <RentSvg /> : <SellSvg />}
-        </span>
+      
         <div className="pl-0">
           <h2 className="text-[#242424] text-[18px]  sm:mt-0 sm:text-2xl not-italic font-medium leading-[31px]">
             <span className="capitalize">{type}</span> Listings{" "}

@@ -42,14 +42,14 @@ export default function PropertyOverviewBanner({
         <div className="flex justify-center sm:justify-between items-center w-[100%] flex-row sm:ml-[3%] p-[2%] flex-wrap">
           <div className="grid place-items-center md:block">
             <p className="text-[#212C33] sm:text-[24px] lg:text-[34px] font-[600]  md:text-start text-center">
-              {" "}
+              {" Total "} 
               {cg === "S" ? "Selling" : "Rent"} Price
             </p>
             <p className="text-[#001F35] sm:text-[24px] md:text-[32px] lg:text-[40px] whitespace-nowrap font-[700] mt-1">
               <span className="text-[#001F35] sm:text-[24px] md:text-[32px] lg:text-[40px] whitespace-nowrap font-[700] mt-1">
                 {formatCurrency(price)}
-                {cg === "S" ? "," : ""}{" "}
-                <span className="text-[#545353] text-lg md:text-[32px] not-italic font-medium leading-[normal]">
+                {/* {cg === "S" ? "," : ""} */}{" "}
+               {/*  <span className="text-[#545353] text-lg md:text-[32px] not-italic font-medium leading-[normal]">
                   {cg === "S"
                     ? `₹ ${pricePerSq} / sq.ft`
                     : `+ ( ₹ ${
@@ -58,7 +58,7 @@ export default function PropertyOverviewBanner({
                             price
                           : otherPrice.security
                       } Security Deposit )`}
-                </span>
+                </span> */}
               </span>
             </p>
            
