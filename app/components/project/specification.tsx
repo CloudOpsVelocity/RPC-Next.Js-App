@@ -117,7 +117,7 @@ export default function Specifications({
                         (value, valueIndex) =>
                           value && (
                             <li
-                              className="break-words max-w-min"
+                              className="break-words max-w-full"
                               key={valueIndex}
                             >
                               {value}

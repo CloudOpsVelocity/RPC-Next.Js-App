@@ -158,6 +158,18 @@ function FloorPlanModal({
             >
               {/* scroll buttons */}
               {Object.values(form.values).filter((each) => each != null)
+<<<<<<< HEAD
+                .length > 4  &&
+                propCgId !== projectprops.plot && (
+                  <button
+                    onClick={() => handleArrowClick("L")}
+                    className="flex mr-4 xl:mr-8 h-[32px]  xl:w-[32px] rounded-[50%] items-center justify-center bg-[#FCFCFC] "
+                  >
+                    <PrevCarouselIcon />
+                  </button>
+                )}
+
+=======
                 .length > 4 && (
                 <button
                   onClick={() => handleArrowClick("L")}
@@ -166,6 +178,7 @@ function FloorPlanModal({
                   <PrevCarouselIcon />
                 </button>
               )}
+>>>>>>> 3ea79f44d4d0e23747c260db17b401dc83401606
               <div
                 ref={scrollFiltersRef}
                 className={clsx(

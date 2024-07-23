@@ -168,7 +168,7 @@ export default function FloorplanDrawer() {
         classNames={S}
         {...bind()}
       >
-        <h3 className=" gap-1 pl-1 pr-2 py-1 xl:gap-2.5 w-auto  items-center xl:pl-2.5  xl:py-2.5 bg-[#EEF7FE] text-[#001F35] text-[18px] xl:text-[28px] not-italic font-semibold leading-[normal] capitalize xl:w-full mt-2 xl:mt-4 max-w-[90%] inline-flex">
+        <h3 className=" gap-1 pl-1 pr-2 py-1 xl:gap-2.5 w-auto  items-center xl:pl-2.5  xl:py-2.5 bg-[#EEF7FE] text-[#001F35] text-[18px] md:text-[24px] not-italic font-semibold leading-[normal] capitalize xl:w-full mt-2 xl:mt-4 max-w-[90%] inline-flex">
           {getIcon(
             BACKEND_PROP_TYPES[
               cg?.propertyType as keyof typeof BACKEND_PROP_TYPES

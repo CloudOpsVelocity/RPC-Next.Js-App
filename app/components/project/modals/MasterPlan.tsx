@@ -51,7 +51,7 @@ export default function MasterPlanPopup({
             </div>
             <div className="flex justify-center items-center  gap-5">
               <a
-                className="flex justify-center items-center gap-1 p-1 xl:p-2 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] rounded-[10px] bg-[#F3F7FF] text-[#0073C6] text-base not-italic font-semibold leading-[normal] tracking-[0.32px]"
+                className="flex justify-center items-center gap-1 p-1 xl:p-2 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] rounded-[10px] bg-[#F3F7FF] text-[#0073C6] text-base not-italic font-semibold leading-[normal] tracking-[0.32px] !cursor-pointer"
                 onClick={onDownload}
               >
                 <svg
@@ -135,7 +135,7 @@ const Content = ({ url }: { url: string }) => {
           height={600}
         />
       </TransformComponent>
-      <ZoomInOut className="right-5 xl:right-28 pb-2" />
+      <ZoomInOut className="right-5 xl:right-48 pb-2" />
     </>
   );
 };

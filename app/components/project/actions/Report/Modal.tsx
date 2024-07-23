@@ -55,26 +55,25 @@ export default function ReportModal() {
         opened={opened}
         onClose={handleClose}
         centered
-        {...(status === "success" && {
-          classNames: {
-            title: Styles.title,
-            root: Styles.root,
-            close: Styles.close,
-            content: Styles.content,
-            overlay: Styles.overlay,
-            header: Styles.disabled,
-            body: Styles.body,
-          },
-        })}
         styles={{
           header: {
             display: "none",
+            
           },
+          body:{
+            padding: `${status == "success" ? "0px": "10px"}`,
+            borderRadius:'100px'
+          },
+         
+           content:{
+             borderRadius:"20px"
+           }
+          
         }}
-        w={"fit"}
+        size={"32%"}
       >
         <div className="relative">
-          <Close close={handleClose} className="absolute top-3 -right-2 z-10" />
+          <Close close={close} className="absolute top-3 right-5 md:right-1 z-10" />
 
           {status === "success" ? (
             <ReportSuccesssMessage close={handleClose} />

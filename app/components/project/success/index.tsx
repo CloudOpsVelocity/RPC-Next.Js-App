@@ -69,7 +69,7 @@ export const ReportSuccesssMessage = ({ close }: { close: () => void }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       close();
-    }, 5000);
+    }, 500);
 
     return () => clearTimeout(timer);
   }, []);
