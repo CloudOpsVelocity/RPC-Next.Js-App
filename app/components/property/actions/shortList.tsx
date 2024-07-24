@@ -45,7 +45,7 @@ export default function ShortList({ cg, propTypeName }: any) {
       )}
     >
       <ShortListIcon color={data?.shortListed ? "#148B16" : "#0073C6"} />
-      {data?.shortListed ? "Added to" : "Add to"} Shortlist
+      {data?.shortListed ? "Remove from" : "Add to"} Shortlist
     </button>
   );
 }

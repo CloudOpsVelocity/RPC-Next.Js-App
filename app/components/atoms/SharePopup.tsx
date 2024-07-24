@@ -125,7 +125,8 @@ const Share = ({ shareUrl }: { shareUrl: string }) => {
           separator=":: "
           className="Demo__some-network__share-button"
           windowWidth={1200}
-          windowHeight={700}
+          windowHeight={600}
+          windowPosition="windowCenter"
         >
           {WhatsAppIcon}
           <p className="  text-[12px]  xl:text-[16px] xl:mt-1   ">Whatsapp</p>
@@ -137,7 +138,7 @@ const Share = ({ shareUrl }: { shareUrl: string }) => {
           title={title}
           className="Demo__some-network__share-button"
           windowWidth={1200}
-          windowHeight={700}
+          windowHeight={600}
         >
           {Telegram}
           <p className="  text-[12px]  xl:text-[16px] xl:mt-1   ">Telegram</p>
@@ -148,7 +149,7 @@ const Share = ({ shareUrl }: { shareUrl: string }) => {
           url={shareUrl}
           className="Demo__some-network__share-button"
           windowWidth={1200}
-          windowHeight={700}
+          windowHeight={600}
         >
           {FacbookIcon}
           <p className="  text-[12px]  xl:text-[16px] xl:mt-1   ">Facebook</p>
@@ -169,7 +170,7 @@ const Share = ({ shareUrl }: { shareUrl: string }) => {
           subject={title}
           body="body"
           className="Demo__some-network__share-button"
-          windowHeight={700}
+          windowHeight={600}
           windowWidth={1200}
         >
           {EmailIcon}

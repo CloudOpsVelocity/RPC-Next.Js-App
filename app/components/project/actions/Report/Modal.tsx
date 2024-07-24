@@ -91,6 +91,9 @@ export default function ReportModal() {
               </header>
               <form onSubmit={formSubmit} className=" gap-1 sm:gap-4 ">
                 <div className="flex-1">
+                <p className="text-base  text-black ">Share Your Comment Below</p>
+
+                  <p className="text-base  text-black ">Share Your Comment Below</p>
                   <Textarea
                     size="lg"
                     name="review"

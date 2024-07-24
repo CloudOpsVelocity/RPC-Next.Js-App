@@ -33,6 +33,7 @@ const Gallery: React.FC<GalleryProps> = ({
   isImage,
 }) => {
   const [content, { open, close }] = useGallery();
+  const [currentSlide, setCurrentSlide] = useState(0);
   const [previewImage, setPreviewImage] = useState<string | null>(
     selectedMedia
   );
@@ -42,11 +43,13 @@ const Gallery: React.FC<GalleryProps> = ({
   };
   const bind = useDrag(
     ({ swipe: [swipeX], movement: [mx] }) => {
-      if (swipeX > 0) {
-      } else if (swipeX < 0) {
+      if (swipeX > 0 && currentSlide > 0) {
+        setCurrentSlide(currentSlide - 1);
+      } else if (swipeX < 0 && currentSlide < images.length - 1) {
+        setCurrentSlide(currentSlide + 1);
       }
     },
-    { axis: "x" } // Enable only vertical swipe detection
+    { axis: "x" }
   );
   const isMobile = useMediaQuery(`(max-width: 601px`);
   if (!content) {
@@ -101,6 +104,8 @@ const Gallery: React.FC<GalleryProps> = ({
                 slidesToScroll={1}
                 align="start"
                 withControls={false}
+                initialSlide={currentSlide}
+                key={currentSlide}
               >
                 {images.map((image, index) => (
                   <Carousel.Slide
@@ -110,7 +115,6 @@ const Gallery: React.FC<GalleryProps> = ({
                       justifyContent: "center",
                       alignItems: "center",
                     }}
-                    // className="!relative !flex !justify-center !w-full !items-center !max-w-fit"
                   >
                     <TransformWrapper>
                       <Content url={image} />
@@ -154,7 +158,10 @@ const Gallery: React.FC<GalleryProps> = ({
                   return (
                     <Carousel.Slide
                       key={index}
-                      onClick={() => handleImageClick(image)}
+                      onClick={() => {
+                        handleImageClick(image);
+                        setCurrentSlide(index);
+                      }}
                     >
                       <Image
                         radius="md"
@@ -224,7 +231,7 @@ const Content = ({ url }: { url: string }) => {
           fit="contain"
           // src={previewImage ?? content?.url}
           src={url}
-          className="cursor-pointer sm:border-[5px] sm:bg-white sm:border-white w-[100%] sm:!h-[350px]  md:min-w-[1400px] md:min-h-[600px]"
+          className="cursor-pointer max-h-[200px]  sm:border-[5px] sm:bg-white sm:border-white w-[100%] sm:!h-[350px]  md:min-w-[1400px] md:min-h-[600px]"
         />
       </TransformComponent>
       <ZoomInOut className="right-2 bottom-4 xl:right-28 " />

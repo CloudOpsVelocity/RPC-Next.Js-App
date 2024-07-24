@@ -69,7 +69,7 @@ const ProjectDetailsCard = ({ data }: Props) => {
         source: type,
       });
     } else {
-      openLogin();
+      openLogin(() => console.log("grp"));
     }
   };
   const isItemCompared =
@@ -83,7 +83,7 @@ const ProjectDetailsCard = ({ data }: Props) => {
         source: type,
       });
     } else {
-      openLogin();
+      openLogin(() => console.log("grp"));
     }
   };
   const setSelected = useSetAtom(selectedSearchAtom);

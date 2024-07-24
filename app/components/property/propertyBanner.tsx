@@ -33,7 +33,6 @@ export default function PropertyBanner({
       maxPrice={maxPrice}
       about={about}
       projIdEnc={projIdEnc}
-
     />
   ) : (
     <div
@@ -62,7 +61,8 @@ export default function PropertyBanner({
       <div>
         <div className="inline-flex mt-6">
           <div className="relative">
-            {(reraStatus === "Recieved" || reraStatus === "Applied") && (
+            {((reraStatus as unknown) === "Recieved" ||
+              (reraStatus as unknown) === "Applied") && (
               <p className="absolute top-[1px] left-[0.8px] z-50">
                 <Image src={"/r.svg"} alt="rera" width={100} height={100} />
               </p>
@@ -116,7 +116,7 @@ function PropertyBannerForMobile({
   minPrice,
   maxPrice,
   about,
-  projIdEnc
+  projIdEnc,
 }: any) {
   return (
     <div className="w-[90%] md:w-[90%] mx-auto mt-5 md:mt-[2%] mb-10 md:mb-20 relative bg-[#fcfcfc] border border-solid border-blue-200  shadow-md !m-[2%]">

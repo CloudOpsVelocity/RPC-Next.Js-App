@@ -8,7 +8,7 @@ type Props = {};
 export default function TabList({}: Props) {
   return (
     <Tabs.List className={S.bg}>
-      {SEARCH_FILTER_DATA.categoryData.map((eachItem, index) => {
+      {SEARCH_FILTER_DATA.categoryDataProject.map((eachItem, index) => {
         return (
           <Tabs.Tab
             key={index}
