@@ -69,7 +69,7 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
               </span>{" "}
             </p>
             <div className="mt-4">
-            <SharePopup title="Share Listing" className="text-sm p-[4px]  sm:text-xl hidden sm:flex" />
+            <SharePopup title="Share Listing" className="text-sm   p-[4px]  sm:text-xl hidden sm:flex" />
             </div>
           </div>
           <div className="relative w-full !rounded-[10px]">
@@ -168,10 +168,10 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
                  <p className="md:mb-[13px] text-[12px]  text-[#001F35] font-semibold md:font-bold ">
               Others Charges Applicable
               </p>
-              <p className="text-[#242424] sm:text-2xl not-italic font-semibold leading-[normal] mt-[8px]">
+              <p className="text-[#242424] md:text-2xl not-italic font-semibold leading-[normal] mt-[8px]">
                 Posted By: {projectDetails.postedByName}
               </p>
-              <p className="mb-[8px] md:mb-[13px] text-[12px]  text-[#001F35] font-semibold md:font-bold ">
+              <p className="mb-[8px] md:mb-[13px] text-[12px] md:text-base  text-[#001F35] font-semibold md:font-bold ">
                 {get_posted_by(projectDetails.postedByType)}
               </p>
               <p
