@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import Footer from "./components/layouts/primary/footer";
 import Header from "./components/layouts/primary/header";
 import Blogs from "./components/molecules/blogs";
@@ -18,3 +19,7 @@ export default async function Home() {
     </div>
   );
 }
+export const metadata: Metadata = {
+  title: "HOME PAGE",
+  description: "GET RIGHT PROPERTY",
+};

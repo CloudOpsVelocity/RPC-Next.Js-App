@@ -30,6 +30,7 @@ import axios from "axios";
 import PartialUnitData from "@/app/components/project/sections";
 import { Metadata } from "next";
 import type { ResolvingMetadata } from "next";
+import { capitalizeWords } from "@/app/utils/letters";
 // const FloorplansBlock = dynamic(
 //   () => import("@/app/components/project/floorplansBlock"),
 //   {
@@ -109,6 +110,42 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
 
   return (
     <section className="w-full relative break-words">
+      {/* <!-- Facebook Meta Tags --> */}
+      <meta
+        property="og:url"
+        content={`${process.env.NEXT_PUBLIC_URL}/abc/${data.cityName}/${data.localityName}/${slug}`}
+      />
+      <meta property="og:type" content="website" />
+      <meta
+        property="og:title"
+        content={`${data.projectName} ${data.availableProperties.join(
+          " "
+        )} for sale in ${data.localityName} ${data.cityName}`}
+      />
+      <meta
+        property="og:description"
+        content={`${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`}
+      />
+      <meta property="og:image" content={data.media.coverImageUrl} />
+
+      {/* <!-- Twitter Meta Tags --> */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta property="twitter:domain" content="getrightproperty.com" />
+      <meta
+        property="twitter:url"
+        content="https://www.getrightproperty.com/"
+      />
+      <meta
+        name="twitter:title"
+        content={`${data.projectName} ${data.availableProperties.join(
+          " "
+        )} for sale in ${data.localityName} ${data.cityName}`}
+      />
+      <meta
+        name="twitter:description"
+        content={`${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`}
+      />
+      <meta name="twitter:image" content={data.media.coverImageUrl}></meta>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -273,18 +310,30 @@ type SeoProps = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
-// export async function generateMetadata(
-//   { params }: SeoProps,
-//   parent: ResolvingMetadata
-// ): Promise<Metadata> {
-//   // read route params
-//   const slug = params.slug;
+export async function generateMetadata(
+  { params }: SeoProps,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  // read route params
+  const slug = params.slug;
 
-//   // fetch data
-//   // const { basicData: data } = await getProjectDetails(slug);
+  // fetch data
+  const { basicData: data } = await getProjectDetails(slug);
+  // Name of the Project
+  // Property Type
+  // Text " For Sale In"
+  // Locality
+  // City
 
-//   return {
-//     title: "SumaDhura",
-//     description: "this is our project",
-//   };
-// }
+  return {
+    title: `${data.projectName} ${data.availableProperties.join(
+      " "
+    )} for sale in ${data.localityName} ${data.cityName}`,
+    // Jackson Botanico for sale in whitefield, Banglore. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details
+
+    description: `${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`,
+    twitter: {},
+
+    // openGraph: [{ }],
+  };
+}
