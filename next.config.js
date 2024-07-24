@@ -3,7 +3,7 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  typescript: { ignoreBuildErrors: process.env.NODE_ENV === "production" },
+  typescript: { ignoreBuildErrors: !!process.env.NODE_ENV === "production" },
   experimental: {
     optimizePackageImports: ["@mantine/core", "@mantine/hooks"],
   },

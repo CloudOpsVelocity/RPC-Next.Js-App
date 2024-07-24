@@ -88,7 +88,7 @@ const FloorplanDetailsCard: React.FC<Props> = ({
               </span>
             </p>
             <p className="gap-[4px] font-[500] text-[12px] sm:text-[14px] lg:text-[16px] text-[#303A42] mb-[20px] flex justify-start items-start">
-              <SuperBuildupAreaIcon className="w-[20px] h-[20px] lg:w-[24px] lg:h-[24px]" />
+              <SuperBuildupAreaIcon className="md:h-[32px] md:w-[32px] h-[24px] w-[24px]" />
               Super Builtup Area: {mergedData.superBuildupArea} sq.ft
             </p>
             <p className="gap-[4px] font-[500] text-[12px] sm:text-[14px] lg:text-[16px] text-[#001F35] mb-[20px] flex justify-start items-start">
