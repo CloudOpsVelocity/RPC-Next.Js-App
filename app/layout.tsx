@@ -24,6 +24,7 @@ export default function RootLayout({
     <html data-mantine-color-scheme="light" lang="en">
       <head>
         <ColorSchemeScript />
+
         <meta
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
@@ -101,6 +102,19 @@ export default function RootLayout({
         <meta name="msapplication-TileColor" content="#ffffff" />
         <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
         <meta name="theme-color" content="#ffffff"></meta>
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-17JGNNST9D"
+        />
+        <script
+          type="text/javascript"
+          dangerouslySetInnerHTML={{
+            __html: ` window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-17JGNNST9D');`,
+          }}
+        />
       </head>
       <body className={inter.className}>
         <MantineProvider theme={MantineTheme}>

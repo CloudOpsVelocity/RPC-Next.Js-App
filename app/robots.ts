@@ -6,13 +6,13 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "Googlebot",
         allow: ["/"],
-        disallow: "/private/",
+        disallow: "/test/",
       },
       {
         userAgent: ["Applebot", "Bingbot"],
-        disallow: ["/"],
+        disallow: ["/test/"],
       },
     ],
-    sitemap: "https://acme.com/sitemap.xml",
+    sitemap: `${process.env.NEXT_PUBLIC_PROJECT_URL}/sitemap.xml`,
   };
 }

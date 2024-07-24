@@ -29,6 +29,7 @@ import LoginPopup from "@/app/components/project/modals/LoginPop";
 import axios from "axios";
 import PartialUnitData from "@/app/components/project/sections";
 import { Metadata } from "next";
+import type { ResolvingMetadata } from "next";
 // const FloorplansBlock = dynamic(
 //   () => import("@/app/components/project/floorplansBlock"),
 //   {
@@ -95,12 +96,23 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
     phaseOverview,
   } = await getProjectDetails(slug);
   const amenitiesFromDB = await getAmenties();
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: data.projectName,
+    image: data.media.coverImageUrl,
+    description: data.about,
+  };
   if (!data.projIdEnc) {
     notFound();
   }
 
   return (
-    <div className="w-full relative break-words">
+    <section className="w-full relative break-words">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="mt-[100px] sm:mt-[70px] w-full pb-[2%] flex items-center justify-center flex-col">
         <div className="p-[2%] w-[94.3%]">
           <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%]">
@@ -234,10 +246,10 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         <LoginPopup />
         {/* <BaseSucess /> */}
       </div>
-    </div>
+    </section>
   );
 }
-
+// VALIDATIONS OF PAGE & SEO
 // export const fetchCache = "force-cache";
 // export const revalidate = 120;
 
@@ -255,7 +267,24 @@ async function getParams() {
   let data = await axios.get(url);
   return data.data;
 }
-export const metadata: Metadata = {
-  title: "...",
-  description: "...",
+
+type SeoProps = {
+  params: { slug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
 };
+
+// export async function generateMetadata(
+//   { params }: SeoProps,
+//   parent: ResolvingMetadata
+// ): Promise<Metadata> {
+//   // read route params
+//   const slug = params.slug;
+
+//   // fetch data
+//   // const { basicData: data } = await getProjectDetails(slug);
+
+//   return {
+//     title: "SumaDhura",
+//     description: "this is our project",
+//   };
+// }
