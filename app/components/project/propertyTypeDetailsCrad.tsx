@@ -27,6 +27,7 @@ import ShowUnitsButton from "./button/showUnits";
 import { countPlots } from "@/app/utils/count/plot";
 import { pluralizeOrSingularize } from "@/app/utils/plural";
 import RTK_CONFIG from "@/app/config/rtk";
+import { NumberFormatter } from "@mantine/core";
 
 type Props = {
   cg: any;

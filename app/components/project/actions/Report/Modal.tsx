@@ -88,13 +88,10 @@ export default function ReportModal() {
                   better!
                 </p>
               </header>
+              <div className="h-[1px] w-full mb-3 bg-[#92B2C8;]"></div>
               <form onSubmit={formSubmit} className=" gap-1 sm:gap-4 ">
                 <div className="flex-1">
-                  <p className="text-base  text-black ">
-                    Share Your Comment Below
-                  </p>
-
-                  <p className="text-base  text-black ">
+                  <p className="text-[#001F35] font-semibold font-montserrat text-base ">
                     Share Your Comment Below
                   </p>
                   <Textarea

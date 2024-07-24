@@ -87,6 +87,7 @@ export default function PropertyOverviewBanner({
               type="prop"
             />
         </div>
+        
 
         <RequestCallBackModal
           close={close}
