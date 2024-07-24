@@ -30,7 +30,10 @@ import axios from "axios";
 import PartialUnitData from "@/app/components/project/sections";
 import { Metadata } from "next";
 import type { ResolvingMetadata } from "next";
-import { capitalizeWords } from "@/app/utils/letters";
+import FAQJsonLdScript from "@/app/seo/Faqjson";
+import QAJsonLdScript from "@/app/seo/Qnajson";
+import PropertyJsonLdScript from "@/app/seo/Productjson";
+import ArticleJsonLdScript from "@/app/seo/ArticleJson";
 // const FloorplansBlock = dynamic(
 //   () => import("@/app/components/project/floorplansBlock"),
 //   {
@@ -97,16 +100,6 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
     phaseOverview,
   } = await getProjectDetails(slug);
   const amenitiesFromDB = await getAmenties();
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    name: data.projectName,
-    image: data.media.coverImageUrl,
-    description: data.about,
-  };
-  if (!data.projIdEnc) {
-    notFound();
-  }
 
   return (
     <section className="w-full relative break-words">
@@ -133,7 +126,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
       <meta property="twitter:domain" content="getrightproperty.com" />
       <meta
         property="twitter:url"
-        content="https://www.getrightproperty.com/"
+        content={`${process.env.NEXT_PUBLIC_URL}/abc/${data.cityName}/${data.localityName}/${slug}`}
       />
       <meta
         name="twitter:title"
@@ -146,10 +139,10 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         content={`${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`}
       />
       <meta name="twitter:image" content={data.media.coverImageUrl}></meta>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <FAQJsonLdScript data={data} />
+      <QAJsonLdScript data={data} />
+      <PropertyJsonLdScript data={data} />
+      <ArticleJsonLdScript data={data} />
       <div className="mt-[100px] sm:mt-[70px] w-full pb-[2%] flex items-center justify-center flex-col">
         <div className="p-[2%] w-[94.3%]">
           <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%]">
@@ -329,11 +322,6 @@ export async function generateMetadata(
     title: `${data.projectName} ${data.availableProperties.join(
       " "
     )} for sale in ${data.localityName} ${data.cityName}`,
-    // Jackson Botanico for sale in whitefield, Banglore. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details
-
     description: `${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`,
-    twitter: {},
-
-    // openGraph: [{ }],
   };
 }

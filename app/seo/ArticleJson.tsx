@@ -1,0 +1,39 @@
+import { Article, WithContext } from "schema-dts";
+import Head from "next/head";
+
+const generateArticleJsonLd = (data: any) => {
+  const jsonLd: WithContext<Article> = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: "",
+    description: "",
+    author: {
+      "@type": "Person",
+      name: "",
+      url: "",
+    },
+    // image: data.image,
+    // datePublished: data.datePublished,
+    // dateModified: data.dateModified,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": ``,
+    },
+    // articleBody: data.articleBody,
+  };
+
+  return jsonLd;
+};
+
+const ArticleJsonLdScript = ({ data }: any) => {
+  const jsonLd = generateArticleJsonLd(data);
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
+  );
+};
+
+export default ArticleJsonLdScript;

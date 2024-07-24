@@ -2,13 +2,8 @@ import axios from "axios";
 import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  // const slugs = getParams();
-  // return slugs?.map((slug: string) => ({
-  //   url: `${process.env.NEXT_PUBLIC_PROJECT_URL}/abc/banglore/whitefield/${slug}`,
-  //   lastModified: new Date(),
-  //   changeFrequency: "daily",
-  //   priority: 1,
-  // }));
+  const slugs = getParams();
+
   return [
     {
       url: "https://acme.com",
@@ -30,7 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 }
-async function getParams(): Promise<string[]> {
+async function getParams() {
   let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/common/all/active/ids?identifier=project`;
   let data = await axios.get(url);
   return data.data;
