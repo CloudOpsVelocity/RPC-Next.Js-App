@@ -14,6 +14,7 @@ import { Main } from "@/app/validations/property";
 import { calculatePerSqPrice } from "@/app/utils/price";
 import ListItem from "./pricingbreakup";
 import { usePricingPop } from "@/app/hooks/property/usePricingPop";
+import { useMediaQuery } from "@mantine/hooks";
 export default function PropertyOverviewBanner({
   price,
   propTypeName,
@@ -34,6 +35,7 @@ export default function PropertyOverviewBanner({
     price,
     propTypeName === "Plot" ? plotArea : sba
   );
+  const isMobile = useMediaQuery("(max-width: 601px)");
   return (
     <>
       <div className="flex justify-start items-center w-full flex-col md:flex-row bg-[#f0f9ff] scroll-mt-40">
@@ -61,8 +63,31 @@ export default function PropertyOverviewBanner({
                 </span> */}
               </span>
             </p>
+            <Button
+              title="Request  Callback"
+              buttonClass="  text-[#FFF] text-[12px] sm:text-[28px] font-[600] bg-[#0073C6] hidden md:block  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px]  mt-3"
+              onChange={() => open("prop", slug, "projBanner", postedByType)}
+            />
            
           </div>
+          {!isMobile ?   <div className="flex justify-end items-center flex-col mt-3">
+            {otherPrice&& <button
+              onClick={toggle}
+              className="  text-[#FFF] text-[12px] sm:text-[28px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px] "
+            >
+              {collapsed ? "Hide Price Break Up" : "Show Price Break Up"}{" "}
+              {config.priceIcon}
+            </button>}            
+            <WhatsAppButton
+              className="cursor-pointer"
+              onClick={""}
+              name={`${bhkName ?? ""} ${propTypeName} For${
+                cg === "S" ? " Sell" : " Rent"
+              } ${propName ? `In ${propName}` : ""}`}
+              type="prop"
+            />
+          </div>:
+          <>
           <div className="flex justify-center sm:justify-start items-center w-full space-x-2">
           <Button
               title="Request  Callback"
@@ -85,7 +110,8 @@ export default function PropertyOverviewBanner({
                 cg === "S" ? " Sell" : " Rent"
               } ${propName ? `In ${propName}` : ""}`}
               type="prop"
-            />
+            /></>}
+         
         </div>
         
 

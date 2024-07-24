@@ -131,7 +131,12 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
 
             <div className=" right-2 absolute ">
               <button
-                className="mt-[-30px] rounded-[10px] relative bottom-[35px] z-10 p-[4px] xl:p-[8px] text-[#0073C6] text-[14px] xl:text-[18px] font-[700] flex pl-[4px] justify-center items-center bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100"
+                className={clsx(
+                  "mt-[-30px] rounded-[10px] relative bottom-[35px] z-10 p-[8px]  text-[12px] sm:text-[18px] font-[700] flex pl-[4px] justify-center items-center ",
+                  cardData.shortListed === "Y"
+                    ? "bg-[rgb(231,245,255)] text-[#148B16] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px]"
+                    : "bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 text-[#0073C6]"
+                )}
                 onClick={(e) => {
                   e.preventDefault();
                   onAddingShortList(cardData.propIdEnc);
@@ -149,7 +154,7 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
             {type != "proj" && (
               <p className="mb-[6px] text-[#242424] text-[14px] sm:text-base not-italic font-semibold leading-[normal] tracking-[0.56px] ">
                 {cardData.bhkName} {cardData.propTypeName} for{" "}
-                {cardData.cg === "R" ? "Rent" : "Sale"} in {cardData.ltName},{" "}
+                {cardData.cg === "R" ? "Rent" : "Sale"} in {cardData.ltName}{" "}
                 <br />
                 <span className="text-[18px] font-[700] text-[#148B16] ">
                   {" "}

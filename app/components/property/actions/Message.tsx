@@ -22,7 +22,7 @@ export default function Message({ cg, propTypeName }: any) {
     (data?.compareAdded || data?.shortListed) && (
       <div
         className={clsx(
-          "inline-flex  mt-3 items-center gap-2 p-1.5 rounded-lg bg-[#fff5c3] lg:absolute -bottom-5 right-0 xl:text-nowrap",
+          "inline-flex  mt-3 items-center gap-2 p-1.5 rounded-lg bg-[#fff5c3] lg:absolute -bottom-5 right-0 xl:text-nowrap  md:min-w-[520px]",
           data?.compareAdded && data?.shortListed && "md:min-w-[670px]"
         )}
       >

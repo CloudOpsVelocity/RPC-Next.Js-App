@@ -320,6 +320,22 @@ export function generatePropertyDetails(
           value: `${data.ca} sq.ft`,
           Icon: TotalLandArea,
         },
+        {
+          title: "Garden Area",
+          value: data.ga && `${data.ga} sq.ft`,
+          Icon: TotalLandArea,
+        },
+        {
+          title: "Terrace Area",
+          value: data.ta && `${data.ta} sq.ft`,
+          Icon: TotalLandArea,
+        },
+        {
+          title: "Plot Area",
+          Icon: TotalLandArea,
+          value: `${data.plotArea} sq.ft`,
+        }
+
       ];
 
       if (cg === "R") {

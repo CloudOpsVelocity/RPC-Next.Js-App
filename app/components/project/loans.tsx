@@ -27,7 +27,7 @@ export default function ProjectLoans({
         <PropertyHeading
           title="BANK APPROVALS OF"
           desc="Unlock Your Dream Home with Hassle-Free Bank Approval Loans"
-          className="mb-[10px] xl:mb-[40px]"
+          className="mb-[10px] xl:mb-[10px]"
         />
       ) : (
         <>
@@ -81,7 +81,7 @@ export default function ProjectLoans({
           })}
         </Carousel>
       ) : (
-        <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 md:flex justify-start items-center flex-wrap w-full gap-x-[3%] gap-y-[50px]  ">
+        <div className="mt-16 md:mt-6 grid grid-cols-1 sm:grid-cols-2 md:flex justify-start items-center flex-wrap w-full gap-x-[3%] gap-y-[50px] md:gap-y-[20px]  ">
           {banks?.map((bank, index) => {
             return (
               <>
