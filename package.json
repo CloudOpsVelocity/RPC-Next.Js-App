@@ -22,6 +22,7 @@
     "@mantine/form": "^7.3.2",
     "@mantine/hooks": "^7.3.2",
     "@mantine/modals": "^7.3.2",
+    "@next/third-parties": "^14.2.5",
     "@react-google-maps/api": "^2.19.2",
     "@tanstack/react-query-devtools": "^5.18.1",
     "@tanstack/react-virtual": "^3.5.1",

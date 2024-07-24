@@ -3,6 +3,7 @@ import { Montserrat } from "next/font/google";
 import "./globals.css";
 import MantineTheme from "@/mantine.config";
 import { MantineProvider, ColorSchemeScript } from "@mantine/core";
+import { GoogleTagManager } from "@next/third-parties/google";
 
 import SessionProvider from "./context/session";
 import ReactQueryProvider from "./context/rquery";
@@ -102,7 +103,7 @@ export default function RootLayout({
         <meta name="msapplication-TileColor" content="#ffffff" />
         <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
         <meta name="theme-color" content="#ffffff"></meta>
-        <script
+        {/* <script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-17JGNNST9D"
         />
@@ -114,8 +115,10 @@ export default function RootLayout({
   gtag('js', new Date());
   gtag('config', 'G-17JGNNST9D');`,
           }}
-        />
+        /> */}
       </head>
+      <GoogleTagManager gtmId="G-17JGNNST9D" />
+
       <body className={inter.className}>
         <MantineProvider theme={MantineTheme}>
           <main>
