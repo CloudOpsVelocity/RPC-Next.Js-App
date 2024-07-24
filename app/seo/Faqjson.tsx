@@ -4,7 +4,7 @@ const generateFAQJsonLd = (data: any) => {
   const jsonLd: WithContext<FAQPage> = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: data.faqs.map((question: any) => ({
+    mainEntity: data.faqs?.map((question: any) => ({
       "@type": "Question",
       name: question.faqQuestion,
       acceptedAnswer: {

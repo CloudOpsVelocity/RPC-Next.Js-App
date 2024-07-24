@@ -115,6 +115,7 @@ const Content: React.FC<any> = ({
                 opacity={1}
                 direction="top"
                 permanent={selectedLocation?.lat === item?.lat}
+                className="min-w-fit"
               >
                 <div className=" ">
                   <p className="text-[#00487C] text-lg not-italic font-semibold leading-[normal]">
@@ -132,6 +133,7 @@ const Content: React.FC<any> = ({
                 permanent={selectedLocation?.lat === item?.lat}
                 key={item.lang}
                 {...(isMobile && { offset: [-7, -40] })}
+                className="min-w-fit"
               >
                 <div className=" ">
                   <p className="text-[#00487C] text-lg not-italic font-semibold leading-[normal]">

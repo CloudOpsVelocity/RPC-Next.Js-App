@@ -19,6 +19,7 @@ const generateArticleJsonLd = (data: any) => {
       "@type": "WebPage",
       "@id": ``,
     },
+
     // articleBody: data.articleBody,
   };
 

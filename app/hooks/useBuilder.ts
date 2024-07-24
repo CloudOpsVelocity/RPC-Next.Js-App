@@ -1,4 +1,3 @@
-import React from "react";
 import { useQuery } from "react-query";
 import { getBuilderDetails } from "../utils/api/builder";
 import { useParams, usePathname } from "next/navigation";

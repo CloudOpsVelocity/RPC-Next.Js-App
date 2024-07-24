@@ -17,7 +17,6 @@ type Props = {
 export default function AboutBuilder({ id, type = "proj" }: Props) {
   const { data } = useBuilder({ id, y: "N", type });
   const nzData = normalizeData(data, type);
-
   return (
     <div
       className="w-[90%] scroll-mt-[220px]  mb-[5%] rounded shadow-[0px_4px_17.6px_0px_rgba(146,178,200,0.40)] border-[0.5px] border-solid border-[#92B2C8] builderBg pt-4 pb-4 xl:pb-6 sm:py-8 sm:pl-5 px-2 sm:px-0 "
@@ -107,39 +106,40 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
 }
 
 function normalizeData(data: any, type: string) {
-  if (type === "proj") {
-    return {
-      propertyName: data?.data?.propertyName,
-      newProject: data?.data?.newProject,
-      onGoingProject: data?.data?.onGoingProject,
-      completedProject: data?.data?.completedProject,
-      builderAddress: data?.data?.builderAddress,
-      ceoName: data?.data?.ceoName,
-      logo: data?.data?.logoUrl,
-      vission: data?.data?.vision,
-      companyName: data?.data?.companyName,
-      companyStartDate: data?.data?.companyStartDate,
-      city: data?.data?.cityName,
-      state: data?.data?.stateName,
-      pincode: data?.data?.pinCode,
-      userName: capitalizeWords(data?.data?.userName),
-    };
-  } else {
-    return {
-      propertyName: data?.propertyName,
-      newProject: data?.newProject,
-      onGoingProject: data?.onGoingProject,
-      completedProject: data?.completedProject,
-      builderAddress: data?.builderAddress,
-      ceoName: data?.ceoName,
-      logo: data?.logoUrl,
-      vission: data?.vision,
-      companyName: data?.companyName,
-      companyStartDate: data?.companyStartDate,
-      city: data?.cityName,
-      state: data?.stateName,
-      pincode: data?.pinCode,
-      userName: capitalizeWords(data?.userName),
-    };
-  }
+  console.log(data);
+  return {
+    propertyName: data?.data?.propertyName,
+    newProject: data?.data?.newProject,
+    onGoingProject: data?.data?.onGoingProject,
+    completedProject: data?.data?.completedProject,
+    builderAddress: data?.data?.builderAddress,
+    ceoName: data?.data?.ceoName,
+    logo: data?.data?.logoUrl,
+    vission: data?.data?.vision,
+    companyName: data?.data?.companyName,
+    companyStartDate: data?.data?.companyStartDate,
+    city: data?.data?.cityName,
+    state: data?.data?.stateName,
+    pincode: data?.data?.pinCode,
+    userName: capitalizeWords(data?.data?.userName),
+  };
+
+  // else {
+  //   return {
+  //     propertyName: data?.propertyName,
+  //     newProject: data?.newProject,
+  //     onGoingProject: data?.onGoingProject,
+  //     completedProject: data?.completedProject,
+  //     builderAddress: data?.builderAddress,
+  //     ceoName: data?.ceoName,
+  //     logo: data?.logoUrl,
+  //     vission: data?.vision,
+  //     companyName: data?.companyName,
+  //     companyStartDate: data?.companyStartDate,
+  //     city: data?.cityName,
+  //     state: data?.stateName,
+  //     pincode: data?.pinCode,
+  //     userName: capitalizeWords(data?.userName),
+  //   };
+  // }
 }

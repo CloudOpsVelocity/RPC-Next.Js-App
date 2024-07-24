@@ -4,12 +4,14 @@ import React from "react";
 type Props = {};
 
 export default function Footer({}: Props) {
+  let logo = `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/grp-logo/Logo-without-background.png`;
+  console.log(logo);
   return (
     <div className=" w-full bg-[#E3E3E3] flex justify-between items-start flex-col p-[4%] flex-wrap ">
       <div className="w-full flex justify-between items-start flex-wrap flex-row ">
         <div className=" w-[100%]  lg:w-[30%] top-[64px] left-[104px] min-w-[202px] md:min-w-[402px] md:w-[60%] mb-[4%]">
           <Image
-            src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/grp-logo/logo.jpg`}
+            src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/grp-logo/Logo-without-background.png`}
             width={180}
             height={180}
             alt="logo"

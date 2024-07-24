@@ -129,15 +129,17 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
               {" "}
               <PropertyBanner {...projData} projIdEnc={data.projIdEnc} />
               {/* <ErrorContainer data={projData.banks}> */}
-              {data.cg === "S" && data.postedById === projData.builderId && (
-                <Loans
-                  type="prop"
-                  banks={projData.banks}
-                  name={data.propName}
-                />
-              )}
+              {data.cg === "S" &&
+                data.postedById === projData.builderId &&
+                projData.banks.length > 0 && (
+                  <Loans
+                    type="prop"
+                    banks={projData.banks}
+                    name={data.propName}
+                  />
+                )}
               {/* About Builder */}
-              <AboutBuilder type="prop" id={projData.builderId} />
+              <AboutBuilder type="proj" id={projData.builderId} />
               {data.postedById === projData.builderId && (
                 <FaqWithBg data={projData.faqs} projName={data.propName} />
               )}{" "}
