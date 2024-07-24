@@ -480,7 +480,7 @@ export default function FloorplansBlock({
 
             <div
               className={clsx(
-                " h-[250px]  w-full md:w-[50%] flex justify-center items-end flex-col sm:h-full p-[2%] shadow-md border border-gray-400 md:shadow-none relative",
+                " h-[250px]  w-full md:w-[50%] flex justify-center items-end flex-col sm:h-full p-[2%] shadow-md md:shadow-none relative",
                 !selectedFloor?.unitNumber && "items-center"
               )}
             >

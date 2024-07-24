@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { Select, Tooltip } from "@mantine/core";
-import { DropDownIcon, ImgCarouselIcon } from "../../images/commonSvgs";
+import { DropDownIcon, ImgCarouselIcon, PrevCarouselIcon } from "../../images/commonSvgs";
 import { filterKeysDetails, projectprops } from "../../data/projectDetails";
 import { atom, useAtom } from "jotai";
 import { selectedFloorAtom } from "@/app/store/floor";
@@ -130,21 +130,9 @@ const Byunitblock: React.FC<Props> = ({
               4 && (
               <button
                 onClick={() => handleArrowClick("L")}
-                className="flex mr-4 h-[32px] w-[32px] rounded-[50%] items-center justify-center bg-[#FCFCFC] "
+                className="flex mr-4 h-[32px] w-[32px] rounded-[50%] items-center justify-center bg-[#FCFCFC] !cursor-pointer"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width={24}
-                  height={24}
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="#D2D5D7"
-                  strokeWidth={2}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="m15 18-6-6 6-6" />
-                </svg>
+                <PrevCarouselIcon />
               </button>
             )}
 
@@ -195,7 +183,7 @@ const Byunitblock: React.FC<Props> = ({
               4 && (
               <button
                 onClick={() => handleArrowClick("R")}
-                className="flex h-[32px] ml-8 w-[32px] rounded-[50%] items-center justify-center bg-[#FCFCFC]"
+                className="flex h-[32px] ml-8 w-[32px] rounded-[50%] items-center justify-center bg-[#FCFCFC] !cursor-pointer"
               >
                 <ImgCarouselIcon />
               </button>

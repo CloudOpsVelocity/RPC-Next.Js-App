@@ -53,8 +53,7 @@ const SelectedFilters = ({
     >
       {/* scroll buttons */}
       {showLeftButton &&
-        Object.values(form.values).filter((each) => each != null).length > 4 &&
-        propCgId !== projectprops.plot && (
+        Object.values(form.values).filter((each) => each != null).length > 4 && (
           <button
             onClick={() => handleArrowClick("L")}
             className="flex mr-4 xl:mr-8 h-[32px] xl:w-[32px] rounded-[50%] items-center justify-center bg-[#FCFCFC]"
@@ -72,6 +71,7 @@ const SelectedFilters = ({
       >
         {Object.entries(form.values).map(
           ([key, value]) =>
+            value !== undefined &&
             value !== null &&
             value !== 0 &&
             value !== "" &&

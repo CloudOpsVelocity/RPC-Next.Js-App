@@ -13590,7 +13590,7 @@ export const ImgCarouselIcon = () => {
       height="32"
       viewBox="0 0 33 32"
       fill="none"
-      className="h-[24px] w-[24px]  xl:h-[34px] xl:w-[34px]"
+      className="h-[24px] w-[24px]  xl:h-[34px] xl:w-[34px] cursor-pointer"
     >
       <circle
         cx="16.5"
@@ -13615,7 +13615,7 @@ export const PrevCarouselIcon = () => {
       height="32"
       viewBox="0 0 33 32"
       fill="none"
-      className="h-[24px] w-[24px]  md:h-[34px] md:w-[34px]"
+      className="h-[24px] w-[24px]  md:h-[34px] md:w-[34px] !cursor-pointer"
     >
       <circle
         cx="16"

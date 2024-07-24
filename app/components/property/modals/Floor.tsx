@@ -95,13 +95,13 @@ const MiddleSection = () => {
   const data = useAtomValue(selectedFloorAtom);
 
   return (
-    <div className={`col-span-1 p-4 mt-[15%]  md:h-[700px]`}>
+    <div className={`col-span-1 p-4 mt-[15%]  md:h-[700px] w-full h-full bg-gray-600`}>
       <div className="relative">
         <TransformComponent>
           <img
             src={`${data.floorPlanUrl}?v=${Math.random()}`}
             alt="Floor Plan"
-            className="border"
+            className=""
             // width={800}
             // height={}
             style={{ aspectRatio: "800 / 540", objectFit: "contain" }}
