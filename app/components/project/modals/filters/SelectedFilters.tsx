@@ -13,31 +13,31 @@ const SelectedFilters = ({
   filterKeysDetails,
 }: any) => {
   const scrollFiltersRef = useRef<HTMLDivElement>(null);
-  const [showLeftButton, setShowLeftButton] = useState(false);
-  const [showRightButton, setShowRightButton] = useState(false);
+  const [showLeftButton, setShowLeftButton] = useState(true);
+  const [showRightButton, setShowRightButton] = useState(true);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (scrollFiltersRef.current) {
-        const { scrollLeft, scrollWidth, clientWidth } =
-          scrollFiltersRef.current;
-        setShowLeftButton(scrollLeft > 0);
-        setShowRightButton(scrollLeft + clientWidth < scrollWidth);
-      }
-    };
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     if (scrollFiltersRef.current) {
+  //       const { scrollLeft, scrollWidth, clientWidth } =
+  //         scrollFiltersRef.current;
+  //       setShowLeftButton(scrollLeft > 0);
+  //       setShowRightButton(scrollLeft + clientWidth < scrollWidth);
+  //     }
+  //   };
 
-    const currentRef = scrollFiltersRef.current;
-    if (currentRef) {
-      currentRef.addEventListener("scroll", handleScroll);
-      handleScroll(); // Initial check
-    }
+  //   const currentRef = scrollFiltersRef.current;
+  //   if (currentRef) {
+  //     currentRef.addEventListener("scroll", handleScroll);
+  //     handleScroll(); // Initial check
+  //   }
 
-    return () => {
-      if (currentRef) {
-        currentRef.removeEventListener("scroll", handleScroll);
-      }
-    };
-  }, []);
+  //   return () => {
+  //     if (currentRef) {
+  //       currentRef.removeEventListener("scroll", handleScroll);
+  //     }
+  //   };
+  // }, []);
 
   const handleArrowClick = (side: "R" | "L"): void => {
     const scrollAmount = side === "R" ? 100 : -100;

@@ -193,7 +193,6 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
           String(item[key]).toLowerCase() === values[key].toLowerCase()
       );
     });
-    console.log({ [property]: filteredData });
     if (data[0][property] != undefined) {
       let options = Array.from(
         new Set(filteredData.map((item: any) => String(item[property])))
@@ -961,14 +960,14 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
   const [, { open }] = useSubFloorPlanPopup();
   const [selectedFloor, setFloor] = useAtom(selectedFloorAtom);
   const selectImg = (index: number) => {
-    if (selectedFloor?.unitNumber !== floorsArray[index].unitNumber) {
-      setFloor({
-        ...floorsArray[index],
-        floorPlanUrl: floorsArray[index].floorPlanUrl ?? ImgNotAvail,
-      });
-      setValues(setPropertyValues(floorsArray[index], propCgId));
-      handleSearch(index);
-    }
+    // if (selectedFloor?.unitNumber !== floorsArray[index].unitNumber) {
+    setFloor({
+      ...floorsArray[index],
+      floorPlanUrl: floorsArray[index].floorPlanUrl ?? ImgNotAvail,
+    });
+    setValues(setPropertyValues(floorsArray[index], propCgId));
+    handleSearch(index);
+    // }
   };
   const handleSearch = (index: number): void => {
     const filteredFloors = floorsArray?.filter(
