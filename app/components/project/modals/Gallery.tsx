@@ -74,15 +74,15 @@ const Gallery: React.FC<GalleryProps> = ({
         }}
         className="!styleScroll"
       >
-        <div className="h-auto  scrollbar-hide flex justify-end flex-col items-center ">
+        <div className="h-auto w-full scrollbar-hide flex justify-end flex-col items-center min-w-[321px] max-w-[1388px]  ">
           <div
-            className={`w-full bg-transparent    h-[57px] flex items-center justify-between mt-[26px]  z-[1000] px-0.5  m-auto ${
+            className={`w-full bg-transparent h-[57px] flex items-center justify-between min-w-[321px] mt-[26px] z-[1000] px-0.5 m-auto ${
               !isImage && isMobile ? "mt-50%" : "mt-[10%]"
             }`}
           >
-            <div className="text-white text-2xl not-italic  font-bold leading-[normal]">
+            <p className="text-white text-2xl not-italic  font-bold leading-[normal]">
               {isImage ? "Gallery" : "Videos"}
-            </div>
+            </p>
             <div className="flex justify-center items-center gap-5">
               <SharePopup
                 title="Share"
@@ -96,7 +96,7 @@ const Gallery: React.FC<GalleryProps> = ({
             </div>
           </div>
           {isImage ? (
-            <div {...bind()}>
+            <div {...bind()} className="w-full" >
               <Carousel
                 classNames={styles}
                 slideGap={{ base: 0, sm: "md" }}
@@ -128,7 +128,7 @@ const Gallery: React.FC<GalleryProps> = ({
               url={previewImage as string}
               width="auto"
               controls
-              height={isMobile ? "50vh" : "68vh"}
+              height={isMobile ? "50vh" : "60vh"}
             />
           )}
           <div className="mt-4 flex items-center justify-center  w-full">
@@ -194,7 +194,7 @@ const Gallery: React.FC<GalleryProps> = ({
                           height={100}
                           src={video as string}
                           //alt={`Image ${index + 1}`}
-                          className={`cursor-pointer w-full min-w-[80px] !h-auto max-h-[100px] min-h-[50px] object-cover  ${
+                          className={`cursor-pointer sm:h-full w-full min-w-[150px] rounded-[5px] !h-auto max-h-[100px] min-h-[100px] object-cover  ${
                             video === previewImage
                               ? "border-[5px] border-white"
                               : ""

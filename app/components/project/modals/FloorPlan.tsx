@@ -480,9 +480,8 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
           )}
 
         {propCgId != projectprops.apartment &&
-          propCgId != projectprops.plot &&
-          getOptions("parkingArea").filter((item) => item !== "None").length >
-            0 && (
+          propCgId != projectprops.plot && getOptions("parkingArea") != undefined && 
+          getOptions("parkingArea").filter((item) => item !== "None").length > 0 && getOptions("parkingArea")[0] != 'undefined' && (
             <Select
               key={"parkingarea"}
               w={"full"}
@@ -1088,7 +1087,7 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
                         alt="Floor Plan"
                         width={57}
                         height={37}
-                        className="w-[88px] h-[58px]   cursor-pointer "
+                        className="w-full h-full cursor-pointer rounded-[5px]"
                         style={{ aspectRatio: "100 / 50", objectFit: "cover" }}
                         onClick={() => selectImg(ind)}
                       />
