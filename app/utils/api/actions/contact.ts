@@ -7,15 +7,6 @@ type Props = {
   projIdEnc: string;
   src: string;
 };
-type User = {
-  name: string;
-  email: string;
-  mobile: string;
-  isProjContact: "Y" | "N"; // Assuming it's a binary choice
-  projIdEnc: string;
-  src: string;
-  otp?: number;
-};
 
 export const addContact = async (data: Props) => {
   console.log(data);
@@ -29,7 +20,6 @@ export const addContact = async (data: Props) => {
 };
 
 export const sendContact = async (data: any) => {
-  console.log(data);
   let reqData = {
     name: data.name,
     email: data.email,
@@ -38,6 +28,7 @@ export const sendContact = async (data: any) => {
     conFor: data.isProjContact ? "project" : "property", // this you need to add
     conType: "callback", // this you need to add
     src: data.src,
+    ...(data.otp && { otp: data.otp }),
   };
   const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/contact/v1/generate-contact`;
   try {

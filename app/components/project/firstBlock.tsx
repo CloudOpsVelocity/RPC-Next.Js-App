@@ -52,7 +52,7 @@ const FirstBlock: React.FC<Props> = ({
     setC("floorPlans");
     setTimeout(() => setIsScrolling(false), 3000);
   }
-
+  console.log(projectDetails?.projectStatus);
   return (
     <div
       className={`relative rounded-[10px] w-full m-auto bg-gray-50  lg:h-[750px] bg-cover flex justify-between items-start flex-col shadow-md break-words`}
@@ -70,9 +70,7 @@ const FirstBlock: React.FC<Props> = ({
               Project Status:{" "}
               <span className="text-[#148B16] text-[12px] sm:text-[16px]   md:text-xl not-italic font-bold leading-[normal]">
                 {" "}
-                {projectDetails.projectStatus === "Completed"
-                  ? "Completed"
-                  : "On-Going"}
+                {projectDetails.projectStatus}
               </span>{" "}
             </p>
             <SharePopup className="text-sm p-[4px]  sm:text-xl hidden sm:flex" />

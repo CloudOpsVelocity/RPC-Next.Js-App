@@ -28,6 +28,7 @@ import NearByCarousel from "@/app/components/project/NearByCarousel";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
 import axios from "axios";
 import PartialUnitData from "@/app/components/project/sections";
+import { Metadata } from "next";
 // const FloorplansBlock = dynamic(
 //   () => import("@/app/components/project/floorplansBlock"),
 //   {
@@ -254,3 +255,7 @@ async function getParams() {
   let data = await axios.get(url);
   return data.data;
 }
+export const metadata: Metadata = {
+  title: "...",
+  description: "...",
+};

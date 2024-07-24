@@ -44,10 +44,8 @@ export default function ReportModal() {
   };
   const handleClose = () => {
     close();
-    if (status !== "success") {
-      setStatus("idle");
-      setText("");
-    }
+    setStatus("idle");
+    setText("");
   };
   return (
     <>
@@ -58,22 +56,23 @@ export default function ReportModal() {
         styles={{
           header: {
             display: "none",
-            
           },
-          body:{
-            padding: `${status == "success" ? "0px": "10px"}`,
-            borderRadius:'100px'
+          body: {
+            padding: `${status == "success" ? "0px" : "10px"}`,
+            borderRadius: "100px",
           },
-         
-           content:{
-             borderRadius:"20px"
-           }
-          
+
+          content: {
+            borderRadius: "20px",
+          },
         }}
         size={"32%"}
       >
         <div className="relative">
-          <Close close={close} className="absolute top-3 right-5 md:right-1 z-10" />
+          <Close
+            close={close}
+            className="absolute top-3 right-5 md:right-1 z-10"
+          />
 
           {status === "success" ? (
             <ReportSuccesssMessage close={handleClose} />
@@ -91,9 +90,13 @@ export default function ReportModal() {
               </header>
               <form onSubmit={formSubmit} className=" gap-1 sm:gap-4 ">
                 <div className="flex-1">
-                <p className="text-base  text-black ">Share Your Comment Below</p>
+                  <p className="text-base  text-black ">
+                    Share Your Comment Below
+                  </p>
 
-                  <p className="text-base  text-black ">Share Your Comment Below</p>
+                  <p className="text-base  text-black ">
+                    Share Your Comment Below
+                  </p>
                   <Textarea
                     size="lg"
                     name="review"
