@@ -12,16 +12,12 @@ import {
   footerPhoneIcon,
 } from "@/app/images/commonSvgs";
 import ProjBasicDetails from "@/app/components/project/projBasicDetails";
-import { Main } from "@/app/validations/types/project";
 import OverviewBanner from "./overviewBanner";
 import Ratings from "./Ratings";
 import ShortList from "./actions/shortList";
 import CompareList from "./actions/compareList";
 import { formatDateDDMMYYYY } from "@/app/utils/date";
-import LoginPopup from "./modals/LoginPop";
 import Message from "./actions/Message";
-import SharePopup from "../atoms/SharePopup";
-import ReportButton from "./actions/Report/button";
 import ReportSection from "./actions/Report";
 
 export default function Overview({
@@ -53,9 +49,9 @@ export default function Overview({
       id="overview"
     >
       <div className="pl-[2%] pr-[2%] flex justify-between items-center flex-wrap sm:flex-nowrap">
-        <div>
-          <div>
-            <h2 className="text-[22px] sm:text-[24px] lg:text-[32px] text-[#001F35] font-[700] capitalize break-words text-wrap w-full md:w-[65%]">
+        <div className="md:w-[80l%]">
+          <div className="">
+            <h2 className="text-[22px] sm:text-[24px] lg:text-[32px] text-[#001F35] font-[700] capitalize break-words text-wrap w-full">
               {projectName}
             </h2>{" "}
           </div>

@@ -181,7 +181,7 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
                 {cardData.propTypes.map((item: any) => item.trim()).join(", ")}
               </p>
             ) : (
-              "N/A"
+              "No Property added yet"
             )}
 
             {type != "proj" && (
