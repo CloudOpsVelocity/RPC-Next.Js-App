@@ -165,13 +165,13 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
                   /- Price per sqft onwards
                 </p>
               )}
-                 <p className="mb-[13px] font-bold ">
+                 <p className="md:mb-[13px] text-[12px]  text-[#001F35] font-semibold md:font-bold ">
               Others Charges Applicable
               </p>
               <p className="text-[#242424] sm:text-2xl not-italic font-semibold leading-[normal] mt-[8px]">
                 Posted By: {projectDetails.postedByName}
               </p>
-              <p className="mb-[13px] font-bold ">
+              <p className="mb-[8px] md:mb-[13px] text-[12px]  text-[#001F35] font-semibold md:font-bold ">
                 {get_posted_by(projectDetails.postedByType)}
               </p>
               <p
