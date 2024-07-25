@@ -53,7 +53,6 @@ export default function ReportModal({ issueData }: any) {
 
   const reportIssuseFun = (cid: number) => {
     const index = reportStatus.indexOf(cid);
-
     if (index !== -1) {
       reportStatus.splice(index, 1);
     } else {
@@ -62,7 +61,7 @@ export default function ReportModal({ issueData }: any) {
     console.log(reportStatus);
   };
   const isMobile = useMediaQuery("(max-width: 601px)");
-
+  console.log(reportStatus);
   return (
     <>
       <Modal
@@ -108,8 +107,12 @@ export default function ReportModal({ issueData }: any) {
               <ReportOptions
                 reportIssuseFun={reportIssuseFun}
                 issueData={issueData}
+                reportStatus={reportStatus}
               />
               <form onSubmit={formSubmit} className=" gap-1 sm:gap-4 ">
+                <p className="text-[#001F35] text-sm not-italic font-semibold leading-[normal] mb-1">
+                  Share your comment below
+                </p>
                 <div className="flex-1">
                   <Textarea
                     size="lg"

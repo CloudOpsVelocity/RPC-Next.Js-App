@@ -30,6 +30,10 @@ export default function Results() {
     name: item.name,
     id: item.id,
   }));
+  const listings = data?.listing?.map((item: any) => ({
+    name: item.name,
+    id: item.id,
+  }));
   const handleAddSearch = (newItem: string) => {
     if (!filters.locality.includes(newItem)) {
       setFilters((prevFilters) => ({
@@ -99,6 +103,25 @@ export default function Results() {
 
         <ul>
           {projects?.map((project: any) => (
+            <li
+              onClick={() => handlePush(project.id)}
+              className="text-[#737579] text-xl not-italic font-medium leading-[normal] cursor-pointer"
+              key={project.id}
+            >
+              {project.name}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        {listings?.length > 0 && (
+          <h2 className="text-[#5F81B2] text-xl flex space-x-2 items-center mt-[14px] mb-1">
+            Listings
+          </h2>
+        )}
+
+        <ul>
+          {listings?.map((project: any) => (
             <li
               onClick={() => handlePush(project.id)}
               className="text-[#737579] text-xl not-italic font-medium leading-[normal] cursor-pointer"

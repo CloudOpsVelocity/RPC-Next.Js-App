@@ -5,7 +5,6 @@ type Props = {};
 
 export default function Footer({}: Props) {
   let logo = `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/grp-logo/Logo-without-background.png`;
-  console.log(logo);
   return (
     <div className=" w-full bg-[#E3E3E3] flex justify-between items-start flex-col p-[4%] flex-wrap ">
       <div className="w-full flex justify-between items-start flex-wrap flex-row ">
