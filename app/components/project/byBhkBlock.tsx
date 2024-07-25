@@ -72,7 +72,7 @@ export default function ByBhkBlock({
             {availBhks && availBhks.length > 4 &&
             <button
                   onClick={(e) => handleArrowClick(e,"L")}
-                  className="flex mr-4 min-h-[32px] min-w-[32px] rounded-[50%] items-center justify-center bg-[#FCFCFC] !cursor-pointer"
+                  className="flex border border-solid border-gray-400 mr-4 min-h-[32px] min-w-[32px] rounded-[50%] items-center justify-center bg-[#FCFCFC] !cursor-pointer"
                 >
                   <PrevCarouselIcon />
             </button>
@@ -93,6 +93,7 @@ export default function ByBhkBlock({
                   `}
               </style>
 
+              {availBhks && availBhks.length > 1 &&    
               <Button
                 key="all"
                 title="All"
@@ -105,6 +106,7 @@ export default function ByBhkBlock({
                     : " font-[500] text-[#737579]"
                 } `}
               />
+              }
               {availBhks.map((bhkOption, ind) => (
                 <Button
                   key={ind}
@@ -130,7 +132,7 @@ export default function ByBhkBlock({
             {availBhks && availBhks.length > 4 &&
             <button
                 onClick={(e) => handleArrowClick(e,"R")}
-                className="flex min-h-[32px] ml-8 min-w-[32px] rounded-[50%] items-center justify-center bg-[#FCFCFC] !cursor-pointer"
+                className="flex  border border-solid border-gray-400 min-h-[32px] ml-8 min-w-[32px] rounded-[50%] items-center justify-center bg-[#FCFCFC] !cursor-pointer"
               >
                 <ImgCarouselIcon />
             </button>

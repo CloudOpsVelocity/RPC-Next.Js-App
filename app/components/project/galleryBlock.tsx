@@ -65,7 +65,7 @@ export default function GalleryBlock({
           {selectedMedia && (
             <div
               className={clsx(
-                "w-[100%] max-h-[210px]   sm:h-[300px]  mb-[3%] md:mb-[0%] mr-[3%]   relative  rounded-[14px] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] ",
+                "w-[100%]  sm:h-[100%] md:h-[100%] lg:h-[100%] flex justify-center items-center mb-[3%] md:mb-[0%] mr-[3%]   relative  rounded-[14px] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] ",
                 selectedMedia.includes(".mp4") &&
                   "flex justify-center items-center"
               )}
@@ -83,7 +83,7 @@ export default function GalleryBlock({
                   mah={550}
                   src={selectedMedia}
                   alt="Preview"
-                  className="cursor-pointer object-contain"
+                  className="cursor-pointer object-contain sm:min-h-[220px] md:h-full lg:h-full "
                   onClick={() => {
                     open("image", selectedMedia);
                   }}

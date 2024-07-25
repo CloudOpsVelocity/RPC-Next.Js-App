@@ -95,13 +95,21 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
               <span className="text-[#242424] text-[15px] font-[600]">
                 Price Range:
               </span>{" "}
+              {cardData?.minPrice != 0 && cardData?.minPrice != "" && cardData?.maxPrice != 0 && cardData?.maxPrice != "" ? 
+              <>
+                <span className="text-[16px] sm:font-[700] text-[#148B16]">
+                  {formatCurrency(cardData.minPrice)}
+                </span>{" "}
+                -{" "}
+                <span className="text-[16px] sm:font-[700] text-[#148B16]">
+                  {formatCurrency(cardData.maxPrice)}
+                </span>
+              </>
+              :
               <span className="text-[16px] sm:font-[700] text-[#148B16]">
-                {formatCurrency(cardData.minPrice)}
-              </span>{" "}
-              -{" "}
-              <span className="text-[16px] sm:font-[700] text-[#148B16]">
-                {formatCurrency(cardData.maxPrice)}
+                Price Not Available
               </span>
+              }
             </div>
           </div>
         )}

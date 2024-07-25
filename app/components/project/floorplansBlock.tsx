@@ -647,6 +647,12 @@ export default function FloorplansBlock({
                       )}
                       <PopupOpenSvg className=" sm:hidden absolute bottom-0 right-1 w-[24px] h-[24px] lg:w-[28px] lg:h-[28px]  " />
                     </div>
+
+                    {/* add trext here */}
+                    <p className="hidden sm:block text-[12px] lg:text-[14px] font-[600] text-[#0073C6] underline ">
+                      Click on image to open floor plan details
+                    </p>
+
                     {/* {floorPlanType == "unit" && (
                       <CarouselSuggestion
                         form={byUnitForm}
