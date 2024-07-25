@@ -18,7 +18,6 @@ export default async function sitemap() {
     changeFrequency: "weekly",
     priority: 1,
   }));
-
   /*
   ####### NEED TO ADD A STATIC PAGE WHERE WE WILL MENTION THE PROJECTS
   + builder details need to create url
