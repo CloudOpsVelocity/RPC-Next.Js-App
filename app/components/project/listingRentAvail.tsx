@@ -24,12 +24,12 @@ export default function ListingRentAvail({
 }) {
   return (
     <div className="w-[90%] mb-[5%] scroll-mt-[350px]" id="listings">
-      <h1 className="text-[20px] lg:text-[32px] font-[600] text-[#001F35] mb-[12px]">
+      <h2 className="text-[20px] lg:text-[32px] font-[600] text-[#001F35] mb-[12px]">
         Listings Available in{" "}
         <span className="text-[#148B16] font-[700]  text-[20px] lg:text-[32px]">
           {projName}
         </span>{" "}
-      </h1>
+      </h2>
 
       <SubHeading text="Unlock the door to your dream home: explore our array of available properties today!" />
       <div className="sm:flex  space-y-4 items-center gap-[28px] sm:gap-[58px] mt-[18px] sm:mt-[35px] flex-wrap sm:space-y-0">
@@ -74,18 +74,12 @@ const Card = ({
       <div className="flex justify-evenly sm:justify-center items-center gap-2 sm:gap-[22px] h-full ">
         <Image
           alt="listing"
-          src={
-            type === "rent"
-              ? 
-              config.rentMobileLogo
-              :
-              config.sellMobileLogo
-          }
+          src={type === "rent" ? config.rentMobileLogo : config.sellMobileLogo}
           width={100}
           height={100}
           className="w-[50px] h-[40px] sm:w-[60px] sm:h-[60px] block md:ml-[20px] "
         />
-      
+
         <div className="pl-0">
           <h2 className="text-[#242424] text-[18px]  sm:mt-0 sm:text-2xl not-italic font-medium leading-[31px]">
             <span className="capitalize">{type}</span> Listings{" "}

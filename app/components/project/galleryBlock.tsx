@@ -47,10 +47,10 @@ export default function GalleryBlock({
         />
       ) : (
         <>
-          <h1 className="text-h2 lg:text-[32px] font-[600] text-[#001F35] capitalize mb-[12px]">
+          <h2 className="text-h2 lg:text-[32px] font-[600] text-[#001F35] capitalize mb-[12px]">
             Galleria of{" "}
             <span className="text-[#148B16] font-[700] ">{projName}</span>{" "}
-          </h1>
+          </h2>
 
           <SubHeading
             text="Gallery highlights : A glimpse into good project"

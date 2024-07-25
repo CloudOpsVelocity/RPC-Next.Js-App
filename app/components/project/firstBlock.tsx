@@ -108,9 +108,9 @@ const FirstBlock: React.FC<Props> = ({
             <div className="w-full md:w-[60%]">
               <div className={`ml-[2%] mt-1 sm:mt-10 mb-[7px]`}>
                 <div className="flex justify-between items-start">
-                  <h3 className="text-[22px] sm:text-[24px] lg:text-[28px] font-[700] text-[#001F35] break-words text-wrap w-full">
+                  <h1 className="text-[22px] sm:text-[24px] lg:text-[28px] font-[700] text-[#001F35] break-words text-wrap w-full">
                     {projectDetails.projectName}
-                  </h3>
+                  </h1>
                   <SharePopup className="text-sm p-[2px] mr-2 mt-[2px] sm:hidden " />
                 </div>
 

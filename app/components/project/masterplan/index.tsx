@@ -47,10 +47,10 @@ export default function MasterPlan({
     >
       <div className="flex justify-between w-full items-cente mb-[32px] flex-wrap">
         <div>
-          <h1 className="text-h2 lg:text-[32px] font-[600] text-[#001F35] mb-[12px] capitalize break-words text-wrap w-[78%]">
+          <h2 className="text-h2 lg:text-[32px] font-[600] text-[#001F35] mb-[12px] capitalize break-words text-wrap w-[78%]">
             Master Plan Of{" "}
             <span className="text-[#148B16] font-[700] ">{projName}</span>
-          </h1>
+          </h2>
 
           <SubHeading text="Crafting tomorrow's landscapes, today's masterpiece: your vision, our expertise." />
         </div>
