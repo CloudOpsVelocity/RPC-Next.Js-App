@@ -96,7 +96,11 @@ export default function MasterPlan({
         </div>
       </div>
       <div className="relative">
-        <MasterPlanPopup url={media} onDownload={handleDownload} />
+        <MasterPlanPopup
+          url={media}
+          onDownload={handleDownload}
+          projName={projName}
+        />
       </div>
     </div>
   );

@@ -6,7 +6,6 @@ const realEstateListingSchema: WithContext<RealEstateListing> = {
   name: "Beautiful Family Home in Suburb",
   description:
     "A charming 4-bedroom, 3-bathroom family home located in a quiet suburban neighborhood with excellent schools and amenities.",
-
   offers: {
     "@type": "Offer",
     price: "350000",

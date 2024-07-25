@@ -1,6 +1,4 @@
 import { LocalBusiness, WithContext } from "schema-dts";
-import Head from "next/head";
-
 const generateLocalBusinessJsonLd = (data: any) => {
   const jsonLd: WithContext<LocalBusiness> = {
     "@context": "https://schema.org",
@@ -34,12 +32,10 @@ const LocalBusinessJsonLdScript = ({ data }: any) => {
   const jsonLd = generateLocalBusinessJsonLd(data);
 
   return (
-    <Head>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-    </Head>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
   );
 };
 
