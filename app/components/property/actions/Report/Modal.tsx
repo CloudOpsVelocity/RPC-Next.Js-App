@@ -21,7 +21,10 @@ export default function ReportModal({ issueData }: any) {
   const [text, setText] = useState("");
   const formSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (reportStatus.includes(607)) {
+    if(reportStatus.length==0){
+      setStatus("error")
+    }
+    else if (reportStatus.includes(607)) {
       if (!text) {
         setStatus("error");
         return;

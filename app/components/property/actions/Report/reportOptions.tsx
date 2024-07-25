@@ -28,7 +28,15 @@ export default function ReportOptions({
               <Checkbox
                 key={x.cid}
                 label={x.constDesc}
-                color="#0073C6"
+                color={`${reportStatus.includes == x.cid?"#0073C6" : "green"}`}
+                classNames={{
+                  label: `text-[13px] leading-normal capitalize font-feature-settings-[clig off] font-[Montserrat] ${
+                    reportStatus.includes(x.cid)
+                      ? '!ext-[#0073C6] !font-bold'
+                      : '!text-[#242424]'
+                  }`,
+                }}
+                
                 onClick={() => reportIssuseFun(x.cid)}
               />
             </div>
