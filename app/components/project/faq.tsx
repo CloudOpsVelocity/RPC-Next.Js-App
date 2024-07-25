@@ -32,10 +32,10 @@ export default function FaqWithBg({ data, projName }: FaqWithBgProps) {
   const isMobile = useMediaQuery(`(max-width: 601px)`);
   return (
     <div
-      className={data?.length > 0 ? classes.wrapper : "w-[90%] m-auto"}
+      className={data?.length > 0 ? classes.wrapper : "!w-[95%] !md:w-[90%] m-auto"}
       id="faq"
     >
-      <div className="flex sm:justify-center items-center w-full ">
+      <div className="flex sm:justify-center items-center !w-[100%] !md:w-[90%] ">
         {data?.length > 0 && (
           <>
             <div className="relative mr-[-140px]  sm:mr-[-70px] bottom-[20px] w-[168px] h-[74px] rounded-[50%] blur-[29.5px] bg-[#0093ff4d] "></div>
@@ -220,9 +220,9 @@ const MobileFaqCard = ({
     <div className="transition-all duration-200 bg-white border border-gray-200 shadow-lg cursor-pointer hover:bg-gray-50 mt-2 rounded-md">
       <button
         type="button"
-        className="flex items-center justify-between w-full px-4 pt-1 pb-1 sm:p-6"
+        className="flex items-center justify-between w-full  px-4 pt-1 pb-1 sm:p-6"
       >
-        <span className="flex  font-semibold text-black text-left">
+        <span className="flex  font-semibold text-black text-left !text-wrap">
           {" "}
           {faqQuestion}{" "}
         </span>

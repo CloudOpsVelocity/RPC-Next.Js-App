@@ -88,7 +88,7 @@ const LeafMap: React.FC<{
   const isMobile = useMediaQuery(`(max-width: 750px)`);
   return (
     <div className="w-full scroll-mt-[180px] mx-auto  mb-[5%] " id="nearBy">
-      <div className="flex justify-between w-[90%] mx-auto">
+      <div className="flex justify-between w-[95%] md:w-[90%] mx-auto">
         {type === "prop" ? (
           <PropertyHeading
             title="Near BY LOCATIONS"
@@ -118,7 +118,7 @@ const LeafMap: React.FC<{
         />
       </div>
 
-      <div className="border border-[#92B2C8] flex flex-col-reverse md:grid grid-cols-1 md:grid-cols-[2fr_3fr] rounded-xl overflow-hidden  shadow-lg md:h-[620px] w-[90%] mx-auto">
+      <div className="border border-[#92B2C8] flex flex-col-reverse md:grid grid-cols-1 md:grid-cols-[2fr_3fr] rounded-xl overflow-hidden  shadow-lg md:h-[620px] w-[95%] md:w-[90%] mx-auto">
         <section className="bg-white">
           <div id="tabs">
             <Tabs defaultValue="public">

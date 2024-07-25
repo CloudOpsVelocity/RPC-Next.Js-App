@@ -24,8 +24,8 @@ export const sendContact = async (data: any) => {
     name: data.name,
     email: data.email,
     mobile: data.mobile,
-    projIdEnc: data.projIdEnc,
     conFor: data.isProjContact ? "project" : "property", // this you need to add
+    projIdEnc: data.projIdEnc,
     conType: "callback", // this you need to add
     src: data.src,
     ...(data.otp && { otp: data.otp }),

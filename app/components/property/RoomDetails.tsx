@@ -41,14 +41,14 @@ const style = {
   card: "mr-[4%] mb-[1%]  p-[2%] md:p-[1%] bg-white mt-2 md:mt-1 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8] ",
   heading: {
     h1: "text-[#001F35] text-[18px] sm:text-[32px] not-italic font-semibold leading-[normal] uppercase mb-1 sm:mb-[14px]",
-    p: "inline-flex  gap-2 sm:gap-[26px] text-[18px]  w-[90%] items-center mb-[20px] xl:mb-[15px] ",
+    p: "inline-flex  gap-2 sm:gap-[26px]  w-[90%] items-center mb-[20px] xl:mb-[15px] text-[14px] md:text-[20px] lg:text-[24px] font-[500] text-[#233333] break-words ",
   },
 };
 export default function RoomDetails({ data }: { data: Main }) {
   return (
     <div
       id="propertyDetails"
-      className="scroll-mt-[220px] m-auto w-[90%]  mb-5 sm:block"
+      className="scroll-mt-[220px] m-auto w-[95%] md:w-[90%]  mb-5 sm:block"
     >
       <PropertyHeading
         title="Listing details"
@@ -239,7 +239,7 @@ const OtherDetails = ({
         )}
         {propTypeName !== "Plot" && (
           <RoomBasicDetails
-            icon={<Status className="h-5 w-5" />}
+            icon={<Status className="md:h-5 md:w-5  !h-[28px] !w-[28px]" />}
             title="Availability Status"
             value={
               availablityStatus == "R" ? "Ready to Move" : "Under Construction"

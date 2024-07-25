@@ -119,7 +119,7 @@ function PropertyBannerForMobile({
   projIdEnc,
 }: any) {
   return (
-    <div className="w-[90%] md:w-[90%] mx-auto mt-5 md:mt-[2%] mb-10 md:mb-20 relative bg-[#fcfcfc] border border-solid border-blue-200  shadow-md !m-[2%]">
+    <div className="w-[95%] md:w-[90%] mx-auto mt-5 md:mt-[2%] mb-10 md:mb-20 relative bg-[#fcfcfc] border border-solid border-blue-200  shadow-md !m-[2%]">
       <div className="max-w-[100%] xl:mx-auto p-1  xl:p-5 ">
         <h2 className="text-[#212C33] text-lg xl:text-2xl md:text-[32px] not-italic font-semibold leading-[normal] tracking-[1.28px] ml-0 md:ml-8 mb-4 md:mb-0">
           About{" "}

@@ -82,7 +82,7 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
               dragFree
               plugins={[autoplay.current]}
               onMouseEnter={autoplay.current.stop}
-              onMouseLeave={autoplay.current.reset}
+              onMouseLeave={autoplay.current.reset} 
               nextControlIcon={<DarkNextCarouselButton />}
               previousControlIcon={<DarkCarouseIcon />}
             >
@@ -91,7 +91,7 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
                   key={index}
                   className="relative"
                  /*  h={750} */
-                  w={"auto"}
+                  w={"full"}
                 >
                   <Image
                     alt="project image"
