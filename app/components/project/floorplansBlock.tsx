@@ -233,13 +233,13 @@ export default function FloorplansBlock({
       className="w-[90%] scroll-mt-[180px] mb-[2%] sm:mb-[5%]"
       id="floorPlans"
     >
-      <h1
+      <h2
         className="text-h2 lg:text-[32px] font-[600] text-[#001F35] mb-[12px] scroll-mt-[280px]"
         id="floorPlansdiv"
       >
         Floor Plans For{" "}
         <span className="text-[#148B16] font-[700] ">{projName}</span>{" "}
-      </h1>
+      </h2>
       <SubHeading text="See floor plans as per your selected property type" />
       <div
         className={`flex justify-start items-start md:items-center  mb-[2%] flex-col md:flex-row  ${

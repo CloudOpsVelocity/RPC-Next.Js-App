@@ -187,13 +187,19 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
   const { getInputProps, values, setFieldValue, setValues } = useFormContext();
   const getOptions = (property: string): string[] => {
     const filteredData = data?.filter((item: any) => {
-      return Object.keys(values).every(
-        (key) =>
-          !values[key] ||
-          String(item[key]).toLowerCase() === values[key].toLowerCase()
-      );
+      if (
+        item.hasOwnProperty(property) &&
+        item[property] !== "null" &&
+        item[property] !== "undefined" &&
+        item[property] !== "None"
+      ) {
+        return true;
+      } else {
+        return false;
+      }
     });
-    if (data[0][property] != undefined) {
+
+    if (filteredData[0][property] != undefined) {
       let options = Array.from(
         new Set(filteredData.map((item: any) => String(item[property])))
       );
@@ -478,10 +484,11 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
               rightSection={<DropDownIcon />}
             />
           )}
-
         {propCgId != projectprops.apartment &&
-          propCgId != projectprops.plot && getOptions("parkingArea") != undefined && 
-          getOptions("parkingArea").filter((item) => item !== "None").length > 0 && getOptions("parkingArea")[0] != 'undefined' && (
+          propCgId != projectprops.plot &&
+          getOptions("parkingArea") != undefined &&
+          getOptions("parkingArea").filter((item) => item !== "None").length >
+            0 && (
             <Select
               key={"parkingarea"}
               w={"full"}
@@ -489,7 +496,9 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
               label="Select Parking Area"
               className="!w-[46%]"
               placeholder="-- select --"
-              data={getOptions("parkingArea")}
+              data={getOptions("parkingArea").filter(
+                (item) => item !== "undefined"
+              )}
               searchable
               maxDropdownHeight={200}
               {...getInputProps("parkingArea")}

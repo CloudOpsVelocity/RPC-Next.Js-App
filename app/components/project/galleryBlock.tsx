@@ -11,6 +11,7 @@ import PropertyHeading from "../property/heading";
 import clsx from "clsx";
 import SubHeading from "./headings/SubHeading";
 import { useMediaQuery } from "@mantine/hooks";
+import VideoJsonLdScript from "@/app/seo/VideoJson";
 
 export default function GalleryBlock({
   walkThrowVideoUrl,
@@ -47,10 +48,10 @@ export default function GalleryBlock({
         />
       ) : (
         <>
-          <h1 className="text-h2 lg:text-[32px] font-[600] text-[#001F35] capitalize mb-[12px]">
+          <h2 className="text-h2 lg:text-[32px] font-[600] text-[#001F35] capitalize mb-[12px]">
             Galleria of{" "}
             <span className="text-[#148B16] font-[700] ">{projName}</span>{" "}
-          </h1>
+          </h2>
 
           <SubHeading
             text="Gallery highlights : A glimpse into good project"
@@ -118,7 +119,7 @@ export default function GalleryBlock({
                 fit="fill"
                 height={100}
                 src={img as string}
-                alt={`Image ${ind + 1}`}
+                alt={`${projName} ${AltText(img)}`}
                 className={clsx(
                   `w-[110px] min-w-[90px] lg:w-[152px] h-[68px] lg:h-[94px]   !rounded-[5px] shadow-md mb-[4%] cursor-pointer  md:min-w-[152px] object-cover border border-gray-300 `,
                   selectedMedia?.split("?")[0] === img.split("?")[0] &&
@@ -136,6 +137,13 @@ export default function GalleryBlock({
               <div className="flex justify-start items-start w-full gap-[4%] flex-wrap ">
                 {videos?.map((img, ind) => (
                   <div className="relative w-[110px] lg:w-[152px] flex justify-center items-center h-[68px] lg:max-h-[94px]  bg-white rounded-[5px]  mb-[4%] cursor-pointer">
+                    <VideoJsonLdScript
+                      contentUrl={img as string}
+                      name={`${projName} ${VideoALText(img)}`}
+                      description={`This video is about ${projName} ${VideoALText(
+                        img
+                      )}`}
+                    />
                     <video
                       key={img}
                       src={img as string}
@@ -144,6 +152,7 @@ export default function GalleryBlock({
                           ? "border-2 !border-btnPrimary shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)]"
                           : ""
                       }`}
+                      content=""
                       onClick={() => handleMediaClick(img as string)}
                     />
                     <span className="absolute top-[40%] left-[40%] pointer-events-none ">
@@ -159,3 +168,21 @@ export default function GalleryBlock({
     </div>
   );
 }
+
+const AltText = (url: string) => {
+  if (url.includes("cover")) {
+    return "Cover Image";
+  } else if (url.includes("projectPlanUrl")) {
+    return "Master Plan";
+  } else {
+    return `Image ${url.split("?")[0].split("/").pop()?.split(".")[0]}`;
+  }
+};
+
+const VideoALText = (url: string) => {
+  if (url.includes("walk-Through-video")) {
+    return "Walk Through Video";
+  } else {
+    return `Project Video`;
+  }
+};

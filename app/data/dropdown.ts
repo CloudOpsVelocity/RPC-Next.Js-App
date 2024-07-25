@@ -7,6 +7,10 @@ const data = [
     url: `${baseUrl}/my-profile`,
   },
   {
+    label: "Dashboard",
+    url: `${baseUrl}/my-profile`,
+  },
+  {
     label: "Post Project",
     url: `${baseUrl}/project/postProject`,
   },

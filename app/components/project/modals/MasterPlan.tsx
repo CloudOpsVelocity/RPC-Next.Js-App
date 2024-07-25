@@ -12,9 +12,11 @@ import { useDrag } from "@use-gesture/react";
 export default function MasterPlanPopup({
   url,
   onDownload,
+  projName,
 }: {
   url: string;
   onDownload: () => void;
+  projName: string;
 }) {
   const [opened, { open, close }] = useDisclosure(false);
   const isMobile = useMediaQuery(`(max-width: 750px`);
@@ -99,7 +101,7 @@ export default function MasterPlanPopup({
         width={600}
         height={600}
         className="cursor-pointer shadow-[0px_4px_30px_0px_rgba(0,0,0,0.25)] rounded-[14px] border-[0.5px] border-solid border-[#D2CDCD] py-4"
-        alt="master plan"
+        alt={`${projName} Master Plan`}
         component={NextImage}
       />
       <button onClick={open}>

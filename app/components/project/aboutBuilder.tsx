@@ -24,9 +24,9 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
     >
       <div>
         <div className=" gap-[26px] justify-start  w-[100%] items-center">
-          <h1 className=" text-[#242424] text-h2 sm:text-[24px] lg:text-[32px] font-[700] mb-2 xl:mb-4 ">
+          <h2 className=" text-[#242424] text-h2 sm:text-[24px] lg:text-[32px] font-[700] mb-2 xl:mb-4 ">
             About Builder
-          </h1>
+          </h2>
 
           <div className="inline-flex justify-end items-end ">
             <Image

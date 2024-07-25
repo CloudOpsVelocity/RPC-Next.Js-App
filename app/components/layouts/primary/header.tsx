@@ -40,6 +40,7 @@ export default function Header({}: Props) {
     </div>
   );
 }
+
 const ForBuilders = () => {
   const { data: session } = useSession();
   return (
@@ -110,6 +111,7 @@ function Dropdown() {
 
   const { redirectQueryParam } = usePathToOrigin();
   const { data: session } = useSession();
+  console.log(session)
   return (
     <Menu width={200} shadow="md">
       <Menu.Target>
@@ -284,6 +286,8 @@ function MobileDropDown() {
 
   const { redirectQueryParam } = usePathToOrigin();
   const { data: session } = useSession();
+  const isMobile = useMediaQuery("(max-width: 601px)");
+
   return (
     <Menu width={200} shadow="md">
       <Menu.Target>
@@ -308,11 +312,22 @@ function MobileDropDown() {
               dropdown: S.dropdown,
             }}
           >
+            
+            
             <>
               {data.map((item, index) =>
                 session.user?.userType !== "B" &&
-                item.label === "Post Project" ? null : (
-                  <Menu.Item
+                item.label === "Post Project" ? null : (index == 0 && isMobile ?
+                  
+                  <button
+                    onClick={() => window.open(`${process.env.NEXT_PUBLIC_PROJECT_URL}/my-profile`, '_blank' )}
+                    className={`rounded w-full text-wrap flex items-center gap-4 text-[20px] text-gray-700 hover:text-green-500 transition-colors p-1 ${session.user.userType == "A"? "bg-[#FFFCE7]": session.user.userType == "B"?  "bg-[#dff8f8]": "bg-[#D9F1CD]"}` }
+                  >
+                    {config.getIcon(session.user.userType)} {session.user.name}
+                    
+              </button>
+                  
+                 :( <Menu.Item
                     key={index}
                     classNames={{
                       itemLabel: S.itemLabel,
@@ -323,7 +338,7 @@ function MobileDropDown() {
                     target="_blank"
                   >
                     {item.label}
-                  </Menu.Item>
+                  </Menu.Item>)
                 )
               )}
               <hr className=" bg-[#768AA9] h-0.5 max-w-[90%] m-auto" />

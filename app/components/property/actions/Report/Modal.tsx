@@ -21,7 +21,10 @@ export default function ReportModal({ issueData }: any) {
   const [text, setText] = useState("");
   const formSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (reportStatus.includes(607)) {
+    if(reportStatus.length==0){
+      setStatus("error")
+    }
+    else if (reportStatus.includes(607)) {
       if (!text) {
         setStatus("error");
         return;
@@ -52,12 +55,14 @@ export default function ReportModal({ issueData }: any) {
   };
 
   const reportIssuseFun = (cid: number) => {
-    const index = reportStatus.indexOf(cid);
+    const updatedReportStatus = [...reportStatus];
+    const index = updatedReportStatus.indexOf(cid);
     if (index !== -1) {
-      reportStatus.splice(index, 1);
+      updatedReportStatus.splice(index, 1);
     } else {
-      reportStatus.push(cid);
+      updatedReportStatus.push(cid);
     }
+    setreportStatus(updatedReportStatus);
     console.log(reportStatus);
   };
   const isMobile = useMediaQuery("(max-width: 601px)");
