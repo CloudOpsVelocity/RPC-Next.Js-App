@@ -31,11 +31,13 @@ export default function ReportOptions({
                 color={`${reportStatus.includes == x.cid?"#0073C6" : "green"}`}
                 classNames={{
                   label: `text-[13px] leading-normal capitalize font-feature-settings-[clig off] font-[Montserrat] ${
-                    reportStatus.includes(x.cid)
-                      ? '!ext-[#0073C6] !font-bold'
+                    reportStatus.find(item => item === x.cid)
+                   /*  reportStatus.includes(x.cid) */
+                    ? '!text-[#0073C6] !font-bold'
                       : '!text-[#242424]'
                   }`,
                 }}
+                checked={reportStatus.includes(x.cid)}
                 
                 onClick={() => reportIssuseFun(x.cid)}
               />
