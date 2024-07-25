@@ -9,7 +9,7 @@ const Logo = ({ styles }: props) => {
   return (
     <Link href={"/"} className={styles}>
       <Image
-        src={"/logo.png"}
+        src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/grp-logo/Logo-without-background.png`}
         alt="logo"
         className="w-[150px] md:w-[220px]"
         width={220}
