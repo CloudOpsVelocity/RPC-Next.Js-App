@@ -28,3 +28,4 @@ export default function ListItem({ label, value, className }: Props) {
     </li>
   );
 }
+ 

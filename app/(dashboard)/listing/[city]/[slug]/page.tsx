@@ -44,6 +44,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
   if (!data.propIdEnc) {
     notFound();
   }
+  console.log(data)
   return (
     <div className="w-full">
       <div className="mt-[90px] w-full pb-[2%] flex items-center justify-center flex-col">
@@ -160,7 +161,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           projId={data.projIdEnc}
           cg={data.cg}
           propTypeName={data.propTypeName}
-          bhkId={bhkDetailsMap.get(data.bhkName) ?? 41}
+          bhkId={data.bhkId ?? 41}
           // query={""}
         />
         {/* {data.projIdEnc && data.postedById === projData.builderId && ( */}
