@@ -56,7 +56,7 @@ export default function InFoCarousel({ partialUnitData }: Props) {
           <td  className="w-[250px]  justify-center text-center items-start gap-2.5 px-2.5 py-5 border-r-[0.5px] border-r-[#D9DFE3] border-b-[0.5px] border-b-[#D9DFE3] border-solid;
           bg-[#D9DFE3]">
             <button className="text-[#0073C6] text-[16px] text-nowrap not-italic font-semibold leading-[normal];
-  font-family: Montserrat" onClick={()=>{alert()}}>
+          font-family: Montserrat" onClick={()=>{alert()}}>
               <div className="flex flex-row gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="23" height="22" viewBox="0 0 23 22" fill="none">
         <path d="M19.75 1.375H3.25C2.49375 1.375 1.875 1.99375 1.875 2.75V19.25C1.875 20.0063 2.49375 20.625 3.25 20.625H13.5625V19.25C13.5625 17.325 15.075 15.8125 17 15.8125V14.4375C14.3188 14.4375 12.1875 16.5688 12.1875 19.25H10.125V16.5H8.75V19.25H3.25V2.75H8.75V12.375H10.125V8.9375H12.875V7.5625H10.125V2.75H19.75V7.5625H17V8.9375H19.75V19.25H17V20.625H19.75C20.5063 20.625 21.125 20.0063 21.125 19.25V2.75C21.125 1.99375 20.5063 1.375 19.75 1.375Z" fill="#0073C6"/>

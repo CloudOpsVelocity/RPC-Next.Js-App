@@ -15,6 +15,7 @@ import { calculatePerSqPrice } from "@/app/utils/price";
 import ListItem from "./pricingbreakup";
 import { usePricingPop } from "@/app/hooks/property/usePricingPop";
 import { useMediaQuery } from "@mantine/hooks";
+import { formatNumberIndian } from "./pricingbreakup/ListItem";
 export default function PropertyOverviewBanner({
   price,
   propTypeName,
@@ -49,7 +50,7 @@ export default function PropertyOverviewBanner({
             </p>
             <p className="text-[#001F35] sm:text-[24px] md:text-[32px] lg:text-[40px] whitespace-nowrap font-[700] mt-1">
               <span className="text-[#001F35] sm:text-[24px] md:text-[32px] lg:text-[40px] whitespace-nowrap font-[700] mt-1">
-                {formatCurrency(price)}
+                {formatNumberIndian(price)}
                 {/* {cg === "S" ? "," : ""} */}{" "}
                 {/*  <span className="text-[#545353] text-lg md:text-[32px] not-italic font-medium leading-[normal]">
                   {cg === "S"

@@ -24,8 +24,8 @@ export default function ListItem({ label, value, className }: Props) {
       </div>{" "}
       <span className="text-[#242424] text-right text-[14px] xl:text-xl not-italic font-semibold">
         {typeof value === "string" && config.hidePriceItems.includes(value)
-          ? value
-          : `₹ ${value}`}
+          ? formatNumberIndian(value)
+          : `₹ ${formatNumberIndian(value)}`}
       </span>
     </li>
   );
@@ -34,3 +34,34 @@ export default function ListItem({ label, value, className }: Props) {
 const config = {
   hidePriceItems: ["Lifetime", "As Per Actuals", "Already Included"],
 };
+
+export function formatNumberIndian(value: number | string): string {
+  if (typeof value === 'string') {
+    const numberValue = parseFloat(value);
+
+    if (isNaN(numberValue)) {
+      return value;
+    }
+
+    value = numberValue;
+  }
+
+  const numberValue: number = value as number;
+
+  if (isNaN(numberValue)) {
+    return 'Invalid Number';
+  }
+
+  const numberString = numberValue.toString();
+  const [integerPart, decimalPart] = numberString.split('.');
+  
+  const lastThree = integerPart.slice(-3);
+  const otherParts = integerPart.slice(0, -3);
+  
+  const formattedInteger = otherParts
+    .replace(/\B(?=(\d{2})+(?!\d))/g, ',') + (lastThree ? `,${lastThree}` : '');
+  
+  return decimalPart ? `${formattedInteger}.${decimalPart}` : formattedInteger;
+}
+
+

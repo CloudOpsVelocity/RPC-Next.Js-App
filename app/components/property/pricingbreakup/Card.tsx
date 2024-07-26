@@ -1,7 +1,7 @@
 import { List, NumberFormatter } from "@mantine/core";
 import React from "react";
 import { TbH4 } from "react-icons/tb";
-import ListItem from "./ListItem";
+import ListItem, { formatNumberIndian } from "./ListItem";
 import { pluralizeOrSingularize } from "@/app/utils/plural";
 
 type Props = {
