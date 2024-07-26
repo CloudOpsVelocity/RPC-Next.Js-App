@@ -95,42 +95,26 @@ const Gallery: React.FC<GalleryProps> = ({
               />
             </div>
           </div>
+
+          {/* Displaying amain Image Or Video */}
           {isImage ? (
-            <div {...bind()} className="w-full" >
-              <Carousel
-                classNames={styles}
-                slideGap={{ base: 0, sm: "md" }}
-                withIndicators
-                slidesToScroll={1}
-                align="start"
-                withControls={false}
-                initialSlide={currentSlide}
-                key={currentSlide}
-              >
-                {images.map((image, index) => (
-                  <Carousel.Slide
-                    key={index}
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <TransformWrapper>
-                      <Content url={image} />
-                    </TransformWrapper>
-                  </Carousel.Slide>
-                ))}
-              </Carousel>
+            <div {...bind()} className="w-full flex justify-center items-center" >
+                <TransformWrapper>
+                  <Content url={images[currentSlide]} />
+                </TransformWrapper>
             </div>
           ) : (
-            <ReactPlayer
-              url={previewImage as string}
-              width="auto"
-              controls
-              height={isMobile ? "50vh" : "60vh"}
-            />
+            <div className="flex justify-center items-center md:min-w-[1000px] min-w-[300px] bg-black rounded-[10px] md:rounded-[20px] ">
+                <ReactPlayer
+                  url={previewImage as string}
+                  width="auto"
+                  controls
+                  height={isMobile ? "50vh" : "60vh"}
+                />
+            </div>
           )}
+
+          {/* Bottom Image Sliders */}
           <div className="mt-4 flex items-center justify-center  w-full">
             <Carousel
               classNames={styles}
@@ -221,7 +205,7 @@ export default Gallery;
 const Content = ({ url }: { url: string }) => {
   const isMobile = useMediaQuery("(max-width: 601px)");
   return (
-    <div className="relative">
+    <div className="relative w-full flex justify-center items-center ">
       <TransformComponent>
         <Image
           radius="md"

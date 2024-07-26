@@ -93,7 +93,7 @@ export default function Results() {
         </ul>
       </div>
       <div>
-        {projects.length > 0 && (
+        {projects && projects.length > 0 && (
           <h2 className="text-[#5F81B2]  sm:text-xl flex space-x-2 items-center mt-[14px] mb-1">
             {property} <span> Projects</span>
           </h2>

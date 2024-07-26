@@ -2,5 +2,8 @@
   .control[data-inactive] {
     opacity: 0;
     cursor: default;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }

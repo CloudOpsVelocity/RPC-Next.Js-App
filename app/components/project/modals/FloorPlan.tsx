@@ -1069,7 +1069,7 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
             <Carousel
               align={"start"}
               classNames={styles}
-              slideSize={{ base: "50%", sm: "auto" }}
+              slideSize={{ base: "50%", sm: "50px", lg: "100px" }}
               slideGap={{ base: "16px", sm: "0px" }}
               nextControlIcon={<ImgCarouselIcon />}
               previousControlIcon={<PrevCarouselIcon />}

@@ -130,7 +130,7 @@ const Byunitblock: React.FC<Props> = ({
               4 && (
               <button
                 onClick={() => handleArrowClick("L")}
-                className="flex mr-4 h-[32px] w-[32px] rounded-[50%] items-center justify-center bg-[#FCFCFC] !cursor-pointer"
+                className="flex mr-4 min-h-[32px] min-w-[32px] rounded-[50%] items-center justify-center bg-[#FCFCFC] !cursor-pointer"
               >
                 <PrevCarouselIcon />
               </button>
@@ -183,7 +183,7 @@ const Byunitblock: React.FC<Props> = ({
               4 && (
               <button
                 onClick={() => handleArrowClick("R")}
-                className="flex h-[32px] ml-8 w-[32px] rounded-[50%] items-center justify-center bg-[#FCFCFC] !cursor-pointer"
+                className="flex min-h-[32px] ml-8 min-w-[32px] rounded-[50%] items-center justify-center bg-[#FCFCFC] !cursor-pointer"
               >
                 <ImgCarouselIcon />
               </button>
