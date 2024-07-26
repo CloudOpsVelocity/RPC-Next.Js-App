@@ -33,7 +33,7 @@ export default function Banner({
 
   return (
     <div
-      className="bg-[#f0f9ff] scroll-mt-[220px] px-4 sm:px-8 py-4 sm:py-12 mx-auto mb-[5%] "
+      className="bg-[#f0f9ff] scroll-mt-[220px] px-4 sm:px-8 py-4 sm:py-12 mx-auto mb-[3%] "
       id="proj_rating"
     >
       <Toaster position="top-right" reverseOrder={false} />
