@@ -22,8 +22,9 @@ export default function ReportModal({ issueData }: any) {
   const [text, setText] = useState("");
   const formSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if(reportStatus.length==0){
-      seterrorMsg(false);
+    if(!(reportStatus.length>0)){
+      alert("ksdjhfkjlshdgkfhasdjklghlkasdfh")
+      seterrorMsg(true);
       setStatus("error")
     }
     else if (reportStatus.includes(607)) {
@@ -62,44 +63,52 @@ export default function ReportModal({ issueData }: any) {
     if (index !== -1) {
       updatedReportStatus.splice(index, 1);
     } else {
-      seterrorMsg(true);
+      seterrorMsg(false);
       updatedReportStatus.push(cid);
     }
     setreportStatus(updatedReportStatus);
     console.log(reportStatus);
   };
   const isMobile = useMediaQuery("(max-width: 601px)");
+  const onClose = () =>{
+    close()
+    setTimeout(() => {
+       setText('')
+       setStatus('idle')
+    }, 1000);
+  }
   console.log(reportStatus);
   return (
     <>
       <Modal
         opened={opened}
-        onClose={close}
-        size={isMobile ? "90%" : "55%"}
+        onClose={onClose}
         centered
-        {...(status === "success" && {
-          classNames: {
-            title: Styles.title,
-            root: Styles.root,
-            close: Styles.close,
-            content: Styles.content,
-            overlay: Styles.overlay,
-            header: Styles.disabled,
-            body: Styles.body,
-          },
-        })}
-        className="w-full md:w-[70%] lg:w-[40%] h-auto "
+        size={isMobile ? "100%" : status === "success" ?  "32%": "50%"}
+        className="overflow-hidden flex flex-wrap w-auto !scrollbar-hide !m-4"
         styles={{
           header: {
             display: "none",
           },
+          body: {
+            padding: `${status == "success" ? "0px" : "10px"}`,
+            borderRadius: "100px",
+          },
+
+          content: {
+            borderRadius: "20px",
+          },
         }}
-        w={"full"}
+     
       >
         <div className="relative">
-          <Close close={close} className="absolute top-3 -right-2 z-10" />
+          <Close
+            close={onClose}
+            className="absolute top-3 right-1 z-10"
+          />
+
           {status === "success" ? (
-            <ReportSuccesssMessage close={close} />
+            <ReportSuccesssMessage close={onClose} />
           ) : (
             <>
               {" "}
@@ -107,7 +116,7 @@ export default function ReportModal({ issueData }: any) {
                 <p className="text-[#242424] text-center font-[Montserrat] text-[18px] sm:text-[22px] not-italic font-medium leading-[normal]">
                   Report Issue for Property
                 </p>
-                <p className="text-[#148B16] font-[Montserrat] text-xs sm:text-[18px] not-italic font-medium leading-[normal]">
+                <p className="text-[#148B16]  font-[Montserrat] !text-wrap text-xs sm:text-[18px] not-italic font-medium leading-[normal]">
                   Let us know your feedback this will allow us to serve you
                   better!
                 </p>
