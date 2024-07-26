@@ -24,7 +24,6 @@ export default function ReportModal({ issueData }: any) {
     e.preventDefault();
     if (!(reportStatus.length > 0)) {
       seterrorMsg(true);
-      setStatus("error");
       return;
     } else if (reportStatus.includes(607)) {
       if (!text) {
@@ -75,9 +74,9 @@ export default function ReportModal({ issueData }: any) {
       setText("");
       setStatus("idle");
       setreportStatus([]);
-    }, 1000);
+      seterrorMsg(false);
+    }, 500);
   };
-  console.log(reportStatus);
   return (
     <>
       <Modal
