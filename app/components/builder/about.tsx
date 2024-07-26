@@ -26,7 +26,7 @@ export default function About({
   builderName,
 }: Props) {
   return (
-    <div className={clsx("w-full sm:w-[90%] mb-[5%]", className)} id={id ?? ""}>
+    <div className={clsx("w-full sm:w-[90%] mb-[2%]", className)} id={id ?? ""}>
       <h1 className="text-[#242424] text-[28px] not-italic font-semibold mb-2 sm:mb-[24px] flex">
         {heading}
       </h1>

@@ -119,7 +119,7 @@ export const RatingForm = ({
           </p>
         </div>
       )}
-      <h2 className="text-[#242424] text-[16px] xl:text-2xl not-italic font-bold leading-[23.784px]  !mb-[24px]">
+      <h2 className="text-[#242424] text-[16px] md:text-[20px] not-italic font-bold leading-[23.784px]  !mb-[24px]">
         {isSubmitted
           ? `Add your feedback for ${projName} Project `
           : `Add your feedback for ${projName} Project `}{" "}
