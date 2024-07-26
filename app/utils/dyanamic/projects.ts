@@ -35,7 +35,8 @@ export function setPropertyValues(data: any, propCgId: number): any {
         ...(data.gardenArea && { gardenArea: data?.gardenArea }),
         ...(data?.parkingArea != "None" &&
           data?.parkingArea && { parkingArea: data?.parkingArea }),
-        ...(data?.terraceArea && { terraceArea: data?.terraceArea }),
+        ...(data?.terraceArea &&
+          data?.terraceArea !== "null" && { terraceArea: data?.terraceArea }),
         ...(data?.noOfCarParking > 0 && {
           noOfCarParking: data?.noOfCarParking?.toString(),
         }),
@@ -93,7 +94,8 @@ export function setPropertyValues(data: any, propCgId: number): any {
           data?.parkingArea && {
             parkingArea: data?.parkingArea,
           }),
-        ...(data?.terraceArea && { terraceArea: data?.terraceArea }),
+        ...(data?.terraceArea &&
+          data?.terraceArea !== "null" && { terraceArea: data?.terraceArea }),
         plotArea: data?.plotArea.toString(),
       };
       break;

@@ -282,7 +282,7 @@ const MapCard = ({
       onClick={handleClick}
     >
       <div className="flex items-center justify-between sm:flex-wrap w-full">
-        <h6 className="text-black text-[12px]  md:text-lg not-italic font-medium leading-[normal] max-w-[60%] capitalize w-[70%]">
+        <h6 className="text-black text-[12px]  md:text-lg not-italic font-medium leading-[normal] max-w-[60%] capitalize w-[70%] sm:max-w-[100%]w-full">
           {name}
         </h6>
         <div className="flex gap-1 text-sm">

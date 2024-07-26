@@ -224,7 +224,7 @@ const MobileFaqCard = ({
         type="button"
         className="flex items-center justify-between w-full  px-4 pt-1 pb-1 sm:p-6"
       >
-        <span className="flex  font-semibold text-black text-left !text-wrap">
+        <span className="flex  font-semibold text-black text-left !text-wrap  break-words max-w-[100%]">
           {" "}
           {faqQuestion}{" "}
         </span>
