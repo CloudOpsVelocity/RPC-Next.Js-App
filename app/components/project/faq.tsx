@@ -222,7 +222,7 @@ const MobileFaqCard = ({
     <div className="transition-all duration-200 bg-white border border-gray-200 shadow-lg cursor-pointer hover:bg-gray-50 mt-2 rounded-md">
       <button
         type="button"
-        className="flex items-center justify-between w-full  px-4 pt-1 pb-1 sm:p-6"
+        className="flex items-center justify-between w-full  px-4 pt-1 pb-1 sm:p-6 !text-wrap !break-words "
       >
         <span className="flex  font-semibold text-black text-left !text-wrap  break-words max-w-[100%]">
           {" "}
