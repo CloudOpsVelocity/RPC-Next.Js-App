@@ -2,22 +2,22 @@ import { getUrlSlugs } from "./seo/sitemap/const";
 
 export default async function sitemap() {
   const BASE_PATH = process.env.NEXT_PUBLIC_URL;
-  const [projects, property] = await Promise.all([
-    getUrlSlugs("project"),
-    getUrlSlugs("listing"),
-  ]);
-  const projectsLinks = projects.projResult.map((id: string) => ({
-    url: `${BASE_PATH}/abc/banglore/whitefield/${id}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly",
-    priority: 0.5,
-  }));
-  const propertyLinks = property.propResult.map((id: string) => ({
-    url: `${BASE_PATH}/listing/banglore/${id}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly",
-    priority: 1,
-  }));
+  // const [projects, property] = await Promise.all([
+  //   getUrlSlugs("project"),
+  //   getUrlSlugs("listing"),
+  // ]);
+  // const projectsLinks = projects.projResult.map((id: string) => ({
+  //   url: `${BASE_PATH}/abc/banglore/whitefield/${id}`,
+  //   lastModified: new Date(),
+  //   changeFrequency: "weekly",
+  //   priority: 0.5,
+  // }));
+  // const propertyLinks = property.propResult.map((id: string) => ({
+  //   url: `${BASE_PATH}/listing/banglore/${id}`,
+  //   lastModified: new Date(),
+  //   changeFrequency: "weekly",
+  //   priority: 1,
+  // }));
   /*
   ####### NEED TO ADD A STATIC PAGE WHERE WE WILL MENTION THE PROJECTS
   + builder details need to create url
@@ -64,7 +64,5 @@ export default async function sitemap() {
       changeFrequency: "weekly",
       priority: 0.5,
     },
-    ...projectsLinks,
-    ...propertyLinks,
   ];
 }
