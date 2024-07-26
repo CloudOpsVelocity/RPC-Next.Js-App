@@ -81,7 +81,7 @@ const LeafMap: React.FC<{
       : [];
   return Object.keys(mapData).length > 0 ? (
     <div className="w-full scroll-mt-[180px] mx-auto mb-[3%]" id="nearBy">
-      <div className="flex justify-between w-[90%] mx-auto">
+      <div className="flex justify-between w-[95%] sm:w-[90%] mx-auto">
         {type === "prop" ? (
           <PropertyHeading
             title="Near BY LOCATIONS"
@@ -111,7 +111,7 @@ const LeafMap: React.FC<{
         />
       </div>
 
-      <div className="border border-[#92B2C8] flex flex-col-reverse md:grid grid-cols-1 md:grid-cols-[2fr_3fr] rounded-xl overflow-hidden shadow-lg md:h-[620px] w-[90%] mx-auto">
+      <div className="border border-[#92B2C8] flex flex-col-reverse md:grid grid-cols-1 md:grid-cols-[2fr_3fr] rounded-xl overflow-hidden shadow-lg md:h-[620px] w-[95%] sm:w-[90%] mx-auto">
         <section className="bg-white">
           <div id="tabs">
             <Tabs defaultValue="public">
@@ -123,7 +123,8 @@ const LeafMap: React.FC<{
             </Tabs>
             <div id="location-listing" className="grid gap-2">
               <ScrollArea
-                max-h={isMobile && "400"} h={isMobile ? "auto" : 600}
+                max-h={isMobile && "400"}
+                h={isMobile ? "auto" : 600}
                 pb={isMobile ? 10 : 50}
                 px={10}
               >
@@ -198,7 +199,10 @@ const LeafMap: React.FC<{
       )}
     </div>
   ) : (
-    <div id="nearBy" className="w-[95%] md:w-[90%] scroll-mt-[180px]  mb-[5%] justify-center">
+    <div
+      id="nearBy"
+      className="w-[95%] md:w-[90%] scroll-mt-[180px]  mb-[5%] justify-center"
+    >
       <div className="flex justify-between w-[90%] ">
         {type === "prop" ? (
           <PropertyHeading

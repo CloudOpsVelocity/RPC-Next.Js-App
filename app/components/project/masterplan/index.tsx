@@ -42,7 +42,7 @@ export default function MasterPlan({
   };
   return (
     <div
-      className="w-[90%] md:mb-[3%] sm:mb-[5%] scroll-mt-[180px] "
+      className="w-[95%] sm:w-[90%] md:mb-[3%] sm:mb-[5%] scroll-mt-[180px] "
       id="masterPlan"
     >
       <div className="flex justify-between w-full items-cente mb-[32px] flex-wrap">

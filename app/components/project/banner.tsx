@@ -33,11 +33,11 @@ export default function Banner({
 
   return (
     <div
-      className="bg-[#f0f9ff] scroll-mt-[220px] px-4 sm:px-8 py-4 sm:py-12 mx-auto mb-[3%] "
+      className="bg-[#f0f9ff] scroll-mt-[220px] px-2 sm:px-8 py-4 sm:py-12 mx-auto mb-[3%] "
       id="proj_rating"
     >
       <Toaster position="top-right" reverseOrder={false} />
-      <div className="w-[90%] m-auto flex flex-col md:flex-row justify-between items-center ">
+      <div className="w-[95%] sm:w-[90%] m-auto flex flex-col md:flex-row justify-between items-center ">
         <div>
           <h2 className="text-[#242424] text-h2 sm:text-[32px] not-italic font-bold leading-[normal] tracking-[1.28px] mb-4">
             Project Rating For{" "}

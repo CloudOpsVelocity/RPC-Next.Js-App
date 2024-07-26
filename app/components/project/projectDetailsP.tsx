@@ -51,7 +51,10 @@ export default function ProjectDetailsP({
       Object.keys(selectedPhase.propTypeOverview).includes(propertyType)
     );
   return (
-    <div className="w-[90%] mb-[3%] scroll-mt-[180px]" id="propertyDetails">
+    <div
+      className="w-[95%] sm:w-[90%] mb-[3%] scroll-mt-[180px]"
+      id="propertyDetails"
+    >
       <h2 className="text-h2 lg:text-[32px] font-[600] text-[#001F35] mb-[12px] break-words">
         Property Details Of{" "}
         <span className="text-[#148B16] font-[700] ">{projName}</span>{" "}

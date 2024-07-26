@@ -13,7 +13,7 @@ import clsx from "clsx";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import FaqReadMore from "../atoms/faq/FaqReadmore";
 import StepCscs from "@/app/styles/Stepper.module.css";
-import { useDisclosure, useMediaQuery } from "@mantine/hooks";
+import { useMediaQuery } from "@mantine/hooks";
 import S from "@/app/styles/Qna.module.css";
 import Close from "./button/close";
 import {
@@ -32,7 +32,9 @@ export default function FaqWithBg({ data, projName }: FaqWithBgProps) {
   const isMobile = useMediaQuery(`(max-width: 601px)`);
   return (
     <div
-      className={data?.length > 0 ? classes.wrapper : "!w-[95%] !md:w-[90%] m-auto"}
+      className={
+        data?.length > 0 ? classes.wrapper : "!w-[95%] !md:w-[90%] m-auto"
+      }
       id="faq"
     >
       <div className="flex sm:justify-center items-center !w-[100%] !md:w-[90%] ">

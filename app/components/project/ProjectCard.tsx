@@ -95,21 +95,24 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
               <span className="text-[#242424] text-[15px] font-[600]">
                 Price Range:
               </span>{" "}
-              {cardData?.minPrice != 0 && cardData?.minPrice != "" && cardData?.maxPrice != 0 && cardData?.maxPrice != "" ? 
-              <>
+              {cardData?.minPrice != 0 &&
+              cardData?.minPrice != "" &&
+              cardData?.maxPrice != 0 &&
+              cardData?.maxPrice != "" ? (
+                <>
+                  <span className="text-[16px] sm:font-[700] text-[#148B16]">
+                    {formatCurrency(cardData.minPrice)}
+                  </span>{" "}
+                  -{" "}
+                  <span className="text-[16px] sm:font-[700] text-[#148B16]">
+                    {formatCurrency(cardData.maxPrice)}
+                  </span>
+                </>
+              ) : (
                 <span className="text-[16px] sm:font-[700] text-[#148B16]">
-                  {formatCurrency(cardData.minPrice)}
-                </span>{" "}
-                -{" "}
-                <span className="text-[16px] sm:font-[700] text-[#148B16]">
-                  {formatCurrency(cardData.maxPrice)}
+                  Price Not Available
                 </span>
-              </>
-              :
-              <span className="text-[16px] sm:font-[700] text-[#148B16]">
-                Price Not Available
-              </span>
-              }
+              )}
             </div>
           </div>
         )}
@@ -248,7 +251,7 @@ const ProjectCarousel = ({
   return (
     data?.length > 0 && (
       <div className="w-[100%] mb-[5%]">
-        <div className="w-[90%] mx-auto ">
+        <div className="w-[95%] sm:w-[90%] mx-auto ">
           <h2 className="text-h2 sm:text-[24px] lg:text-[32px] font-semibold  cursor-pointer">
             {/* <span className="!text-green-600">SARANG BY SUMADHARA </span> */}
             {title}{" "}
