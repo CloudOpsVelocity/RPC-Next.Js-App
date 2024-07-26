@@ -25,7 +25,7 @@ export default function PartialUnitData({
         projName={projName}
         phaseList={phaseList}
       />
-      {/* <MainSection partialUnitData={partialUnitData} /> */}
+      <MainSection partialUnitData={partialUnitData} />
     </div>
   );
 }
