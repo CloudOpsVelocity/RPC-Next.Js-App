@@ -14,7 +14,7 @@ import { number } from "yup";
 export default function ReportModal({ issueData }: any) {
   const { slug } = useParams<{ slug: string }>();
   const [opened, { open, close }] = useDisclosure(false);
-  const[errorMsg, seterrorMsg]=useState(false)
+  const [errorMsg, seterrorMsg] = useState(false);
   const [status, setStatus] = useState<
     "idle" | "error" | "loading" | "success"
   >("idle");
@@ -22,12 +22,11 @@ export default function ReportModal({ issueData }: any) {
   const [text, setText] = useState("");
   const formSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if(!(reportStatus.length>0)){
+    if (!(reportStatus.length > 0)) {
       seterrorMsg(true);
-      setStatus("error")
+      setStatus("error");
       return;
-    }
-    else if (reportStatus.includes(607)) {
+    } else if (reportStatus.includes(607)) {
       if (!text) {
         setStatus("error");
         return;
@@ -70,13 +69,14 @@ export default function ReportModal({ issueData }: any) {
     console.log(reportStatus);
   };
   const isMobile = useMediaQuery("(max-width: 601px)");
-  const onClose = () =>{
-    close()
+  const onClose = () => {
+    close();
     setTimeout(() => {
-       setText('')
-       setStatus('idle')
+      setText("");
+      setStatus("idle");
+      setreportStatus([]);
     }, 1000);
-  }
+  };
   console.log(reportStatus);
   return (
     <>
@@ -84,7 +84,7 @@ export default function ReportModal({ issueData }: any) {
         opened={opened}
         onClose={onClose}
         centered
-        size={isMobile ? "100%" : status === "success" ?  "32%": "50%"}
+        size={isMobile ? "100%" : status === "success" ? "32%" : "50%"}
         className="overflow-hidden flex flex-wrap w-auto !scrollbar-hide !m-4"
         styles={{
           header: {
@@ -99,13 +99,9 @@ export default function ReportModal({ issueData }: any) {
             borderRadius: "20px",
           },
         }}
-     
       >
         <div className="relative">
-          <Close
-            close={onClose}
-            className="absolute top-3 right-1 z-10"
-          />
+          <Close close={onClose} className="absolute top-3 right-1 z-10" />
 
           {status === "success" ? (
             <ReportSuccesssMessage close={onClose} />
@@ -155,8 +151,7 @@ export default function ReportModal({ issueData }: any) {
                 </div>
                 <div className="flex justify-center items-center ">
                   <Button
-                        onClick={(e) => e.stopPropagation()}
-
+                    onClick={(e) => e.stopPropagation()}
                     //   loading={status === "pending"}
                     type="submit"
                     className="inline-flex items-center justify-center rounded-md text-[14px]  xl:text-[20px] font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 !bg-[#0073C6] text-white mt-3 sm:mt-6"
