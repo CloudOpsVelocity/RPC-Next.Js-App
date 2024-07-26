@@ -124,9 +124,12 @@ function Dropdown() {
         {session ? (
           <div className=" text-[12px] flex justify-center items-center gap-1.5 rounded border shadow-[0px_4px_30px_0px_rgba(194,194,194,0.40)] text-[#0073C6] text-lg not-italic font-semibold leading-[normal] px-2.5 py-1.5 border-solid border-[#0073C6] bg-white">
             <button className="inline-flex justify-center items-center gap-1">
-              {config.getIcon(session.user.userType)} {session.user.name.split(" ")[0].length >= 3 ? 
-                                                        session.user.name.split(" ")[0] : session.user.name.split(" ")[1] != undefined ? 
-                                                        session.user.name.split(" ")[1] : session.user.name.split(" ")[0]}
+              {config.getIcon(session.user.userType)}{" "}
+              {session.user.name.split(" ")[0].length >= 3
+                ? session.user.name.split(" ")[0]
+                : session.user.name.split(" ")[1] != undefined
+                ? session.user.name.split(" ")[1]
+                : session.user.name.split(" ")[0]}
             </button>
             {config.blueChevron}
           </div>
@@ -314,66 +317,47 @@ function MobileDropDown() {
       </Menu.Target>
       {session ? (
         <>
-          <Menu.Dropdown
-            className="!z-[1000]"
-            classNames={{
-              dropdown: S.dropdown,
-            }}
-          >
-            <>
-              {data.map((item, index) =>
-                session.user?.userType !== "B" &&
-                item.label === "Post Project" ? null : index == 0 &&
-                  isMobile ? (
-                  <button
-                    onClick={() =>
-                      window.open(
-                        `${process.env.NEXT_PUBLIC_PROJECT_URL}/my-profile`,
-                        "_blank"
-                      )
-                    }
-                    className={`rounded w-full text-wrap flex items-center gap-4 text-[20px] text-gray-700 hover:text-green-500 transition-colors p-1 ${
-                      session.user.userType == "A"
-                        ? "bg-[#FFFCE7]"
-                        : session.user.userType == "B"
-                        ? "bg-[#dff8f8]"
-                        : "bg-[#D9F1CD]"
-                    }`}
-                  >
-                    {config.getIcon(session.user.userType)} {session.user.name.split(" ")[0].length >= 3 ? 
-                                                        session.user.name.split(" ")[0] : session.user.name.split(" ")[1] != undefined ? 
-                                                        session.user.name.split(" ")[1] : session.user.name.split(" ")[0]}
-                    
+          {data.map((item, index) =>
+            session.user?.userType !== "B" &&
+            item.label === "Post Project" ? null : index == 0 && isMobile ? (
+              <button
+                onClick={() =>
+                  window.open(
+                    `${process.env.NEXT_PUBLIC_PROJECT_URL}/my-profile`,
+                    "_blank"
+                  )
+                }
+                className={`rounded w-full text-wrap flex items-center gap-4 text-[20px] text-gray-700 hover:text-green-500 transition-colors p-1 ${
+                  session.user.userType == "A"
+                    ? "bg-[#FFFCE7]"
+                    : session.user.userType == "B"
+                    ? "bg-[#dff8f8]"
+                    : "bg-[#D9F1CD]"
+                }`}
+              >
+                {config.getIcon(session.user.userType)}{" "}
+                {session.user.name.split(" ")[0].length >= 3
+                  ? session.user.name.split(" ")[0]
+                  : session.user.name.split(" ")[1] != undefined
+                  ? session.user.name.split(" ")[1]
+                  : session.user.name.split(" ")[0]}
               </button>
-                  
-                 :( <Menu.Item
-                    key={index}
-                    classNames={{
-                      itemLabel: S.itemLabel,
-                    }}
-                    component="a"
-                    className="block text-gray-700 hover:text-green-500 transition-colors"
-                    href={item.url}
-                    target="_blank"
-                  >
-                    {item.label}
-                  </Menu.Item>
-                )
-              )}
-              <hr className=" bg-[#768AA9] h-0.5 max-w-[90%] m-auto" />
-            </>
-
-            <Menu.Item
-              classNames={{
-                itemLabel: S.itemLabel,
-              }}
-              component="button"
-              className="block text-gray-700 hover:text-green-500 transition-colors"
-              onClick={handleLogout}
-            >
-              Log Out
-            </Menu.Item>
-          </Menu.Dropdown>
+            ) : (
+              <Menu.Item
+                key={index}
+                classNames={{
+                  itemLabel: S.itemLabel,
+                }}
+                component="a"
+                className="block text-gray-700 hover:text-green-500 transition-colors"
+                href={item.url}
+                target="_blank"
+              >
+                {item.label}
+              </Menu.Item>
+            )
+          )}
+          <hr className=" bg-[#768AA9] h-0.5 max-w-[90%] m-auto" />
         </>
       ) : (
         <Menu.Dropdown
