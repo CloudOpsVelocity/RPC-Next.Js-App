@@ -35,7 +35,7 @@ export default function InFoCarousel({ partialUnitData }: Props) {
           <th className=" w-[232px]  justify-center text-center items-start gap-2.5 px-2.5 py-2 text-white text-[16px] not-italic font-bold leading-[normal] ">Super Built- Up Area</th>
           <th className="w-[149px]  justify-center text-center items-start gap-2.5 px-2.5 py-2 text-white text-[16px] not-italic font-bold leading-[normal] ">Carpet Area</th>
           <th className=" w-[149px] justify-center text-center items-start gap-2.5 px-2.5 py-2 text-white text-[16px] not-italic font-bold leading-[normal] ">Unit Price</th>
-          <th className=" w-[149px]  justify-center text-center items-start gap-2.5 px-2.5 py-2 text-white text-[16px] not-italic font-bold leading-[normal] ">Floor Plan</th>
+          <th className=" w-[250px]  justify-center text-center items-start gap-2.5 px-2.5 py-2 text-white text-[16px] not-italic font-bold leading-[normal] ">Floor Plan</th>
         </tr>
       </thead>
       <tbody className="bg-white divide-y divide-gray-200">
@@ -53,9 +53,9 @@ export default function InFoCarousel({ partialUnitData }: Props) {
           bg-[#D9DFE3]">{values.maxPrice}</td>
           <td  className="w-[149px] justify-center text-center items-start gap-2.5 px-2.5 py-5 border-r-[0.5px] border-r-[#D9DFE3] border-b-[0.5px] border-b-[#D9DFE3] border-solid;
           bg-[#FFF]">{values.maxCa}</td>
-          <td  className="w-[149px]  justify-center text-center items-start gap-2.5 px-2.5 py-5 border-r-[0.5px] border-r-[#D9DFE3] border-b-[0.5px] border-b-[#D9DFE3] border-solid;
+          <td  className="w-[250px]  justify-center text-center items-start gap-2.5 px-2.5 py-5 border-r-[0.5px] border-r-[#D9DFE3] border-b-[0.5px] border-b-[#D9DFE3] border-solid;
           bg-[#D9DFE3]">
-            <button className="text-[#0073C6] text-lg not-italic font-semibold leading-[normal];
+            <button className="text-[#0073C6] text-[16px] text-nowrap not-italic font-semibold leading-[normal];
   font-family: Montserrat" onClick={()=>{alert()}}>
               <div className="flex flex-row gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="23" height="22" viewBox="0 0 23 22" fill="none">
