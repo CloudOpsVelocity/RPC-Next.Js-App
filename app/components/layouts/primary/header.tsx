@@ -19,9 +19,15 @@ type Props = {};
 export default function Header({}: Props) {
   const isMobile = useMediaQuery("(max-width: 601px)");
   return (
-    <div className="flex h-[70px] items-center justify-between shrink-0 pl-5 w-full py-3  shadow-[0px_4px_20px_0px_rgba(194,194,194,0.20)] bg-gradient-to-r from-[#f1f1f1] via-[#f1f1f1]  to-[#bde3ff] fixed top-0 z-[100]">
+    <div className="flex h-[70px] items-center justify-between shrink-0 p-1 sm:pl-5 w-full py-3  shadow-[0px_4px_20px_0px_rgba(194,194,194,0.20)] bg-gradient-to-r from-[#f1f1f1] via-[#f1f1f1]  to-[#bde3ff] fixed top-0 z-[100]">
       <Link href={"/"}>
-        <Image src={config.logo} width={200} height={60} alt="logo" className="h-[60px]" />
+        <Image
+          src={config.logo}
+          width={200}
+          height={60}
+          alt="logo"
+          className="h-[40px]  sm:h-[60px]"
+        />
       </Link>
       {isMobile ? (
         <div className="flex  sm:hidden mr-4 gap-4">
@@ -111,14 +117,16 @@ function Dropdown() {
 
   const { redirectQueryParam } = usePathToOrigin();
   const { data: session } = useSession();
-  console.log(session)
+  console.log(session);
   return (
     <Menu width={200} shadow="md">
       <Menu.Target>
         {session ? (
           <div className=" text-[12px] flex justify-center items-center gap-1.5 rounded border shadow-[0px_4px_30px_0px_rgba(194,194,194,0.40)] text-[#0073C6] text-lg not-italic font-semibold leading-[normal] px-2.5 py-1.5 border-solid border-[#0073C6] bg-white">
             <button className="inline-flex justify-center items-center gap-1">
-              {config.getIcon(session.user.userType)} {session.user.name}
+              {config.getIcon(session.user.userType)} {session.user.name.split(" ")[0].length >= 3 ? 
+                                                        session.user.name.split(" ")[0] : session.user.name.split(" ")[1] != undefined ? 
+                                                        session.user.name.split(" ")[1] : session.user.name.split(" ")[0]}
             </button>
             {config.blueChevron}
           </div>
@@ -312,18 +320,29 @@ function MobileDropDown() {
               dropdown: S.dropdown,
             }}
           >
-            
-            
             <>
               {data.map((item, index) =>
                 session.user?.userType !== "B" &&
-                item.label === "Post Project" ? null : (index == 0 && isMobile ?
-                  
+                item.label === "Post Project" ? null : index == 0 &&
+                  isMobile ? (
                   <button
-                    onClick={() => window.open(`${process.env.NEXT_PUBLIC_PROJECT_URL}/my-profile`, '_blank' )}
-                    className={`rounded w-full text-wrap flex items-center gap-4 text-[20px] text-gray-700 hover:text-green-500 transition-colors p-1 ${session.user.userType == "A"? "bg-[#FFFCE7]": session.user.userType == "B"?  "bg-[#dff8f8]": "bg-[#D9F1CD]"}` }
+                    onClick={() =>
+                      window.open(
+                        `${process.env.NEXT_PUBLIC_PROJECT_URL}/my-profile`,
+                        "_blank"
+                      )
+                    }
+                    className={`rounded w-full text-wrap flex items-center gap-4 text-[20px] text-gray-700 hover:text-green-500 transition-colors p-1 ${
+                      session.user.userType == "A"
+                        ? "bg-[#FFFCE7]"
+                        : session.user.userType == "B"
+                        ? "bg-[#dff8f8]"
+                        : "bg-[#D9F1CD]"
+                    }`}
                   >
-                    {config.getIcon(session.user.userType)} {session.user.name}
+                    {config.getIcon(session.user.userType)} {session.user.name.split(" ")[0].length >= 3 ? 
+                                                        session.user.name.split(" ")[0] : session.user.name.split(" ")[1] != undefined ? 
+                                                        session.user.name.split(" ")[1] : session.user.name.split(" ")[0]}
                     
               </button>
                   
@@ -338,7 +357,7 @@ function MobileDropDown() {
                     target="_blank"
                   >
                     {item.label}
-                  </Menu.Item>)
+                  </Menu.Item>
                 )
               )}
               <hr className=" bg-[#768AA9] h-0.5 max-w-[90%] m-auto" />

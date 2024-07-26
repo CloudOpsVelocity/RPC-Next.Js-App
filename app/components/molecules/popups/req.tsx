@@ -184,7 +184,7 @@ const LoggedInUserForm = ({
   });
   const propName = popupState.type === "prop" ? "propIdEnc" : "projIdEnc";
   const isProjContact = popupState.type === "prop" ? "N" : "Y";
-
+  console.log(popupState);
   let Posted_BY = get_posted_by(popupState.cg);
   const onSubmit = async () => {
     setStatus("pending");
@@ -194,7 +194,7 @@ const LoggedInUserForm = ({
       mobile: session?.user?.userName,
       [propName]: popupState.projectID ?? "",
       isProjContact: isProjContact,
-      src: "searchCard",
+      src: popupState.source,
     };
 
     await pushToRequestCallbacks(popupState.projectID ?? "", async () => {
@@ -311,7 +311,6 @@ const ReqForm = ({
   const onSuccess = async () => {
     setStatus("success");
   };
-  console.log(reqData);
   const bn = source === "projCard" ? reqData.builderName : name;
   const title = source === "projCard" ? reqData?.projName : projName;
   return status === "success" ? (

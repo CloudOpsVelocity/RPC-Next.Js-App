@@ -80,7 +80,7 @@ const LeafMap: React.FC<{
       ? mapData[selected].slice(isMobile ? -5 : -8)
       : [];
   return Object.keys(mapData).length > 0 ? (
-    <div className="w-full scroll-mt-[180px] mx-auto mb-[5%]" id="nearBy">
+    <div className="w-full scroll-mt-[180px] mx-auto mb-[3%]" id="nearBy">
       <div className="flex justify-between w-[90%] mx-auto">
         {type === "prop" ? (
           <PropertyHeading
@@ -102,7 +102,7 @@ const LeafMap: React.FC<{
           </div>
         )}
       </div>
-      <div className="flex gap-6 mb-5 mt-1 flex-wrap w-[95%] ml-4">
+      <div className="flex gap-6 mb-5 mt-1 flex-wrap w-[95%] ml-0 md:ml-4">
         <CustomScrollArea
           areas={areas}
           selected={selected}

@@ -15,7 +15,9 @@ export default function PartialUnitData({
 }: Props) {
   return (
     <div
-      className={`w-[95%] md:w-[90%] scroll-mt-[180px] mb-[2%] sm:mb-[5%]  ${partialUnitData.length >0 && "min-h-[300px]"}`}
+      className={`w-[95%] md:w-[90%] scroll-mt-[180px] md:mb-[2%] sm:mb-[5%]  ${
+        partialUnitData.length > 0 && "min-h-[300px]"
+      }`}
       id="floorPlans"
     >
       <HeaderActions
@@ -23,8 +25,7 @@ export default function PartialUnitData({
         projName={projName}
         phaseList={phaseList}
       />
-      <MainSection partialUnitData={partialUnitData} />
-      
+      {/* <MainSection partialUnitData={partialUnitData} /> */}
     </div>
   );
 }

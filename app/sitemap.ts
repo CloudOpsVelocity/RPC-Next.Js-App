@@ -1,23 +1,24 @@
 import { getUrlSlugs } from "./seo/sitemap/const";
+const fs = require("fs");
 
 export default async function sitemap() {
   const BASE_PATH = process.env.NEXT_PUBLIC_URL;
-  const [projects, property] = await Promise.all([
-    getUrlSlugs("project"),
-    getUrlSlugs("listing"),
-  ]);
-  const projectsLinks = projects.projResult.map((id: string) => ({
-    url: `${BASE_PATH}/abc/banglore/whitefield/${id}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly",
-    priority: 0.5,
-  }));
-  const propertyLinks = property.propResult.map((id: string) => ({
-    url: `${BASE_PATH}/listing/banglore/${id}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly",
-    priority: 1,
-  }));
+  // const [projects, property] = await Promise.all([
+  //   getUrlSlugs("project"),
+  //   getUrlSlugs("listing"),
+  // ]);
+  // const projectsLinks = projects.projResult.map((id: string) => ({
+  //   url: `${BASE_PATH}/abc/banglore/whitefield/${id}`,
+  //   lastModified: new Date(),
+  //   changeFrequency: "weekly",
+  //   priority: 0.5,
+  // }));
+  // const propertyLinks = property.propResult.map((id: string) => ({
+  //   url: `${BASE_PATH}/listing/banglore/${id}`,
+  //   lastModified: new Date(),
+  //   changeFrequency: "weekly",
+  //   priority: 1,
+  // }));
   /*
   ####### NEED TO ADD A STATIC PAGE WHERE WE WILL MENTION THE PROJECTS
   + builder details need to create url
@@ -27,6 +28,13 @@ export default async function sitemap() {
   + listing => city locality
   + dashboard => /my-profile
   */
+  const projResult = readJsonFile("./permutations.json");
+  const projectsLinks = projResult.map(({ slug }: any) => ({
+    url: `${BASE_PATH}/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly",
+    priority: 0.5,
+  }));
   return [
     {
       url: `${BASE_PATH}/`,
@@ -65,6 +73,14 @@ export default async function sitemap() {
       priority: 0.5,
     },
     ...projectsLinks,
-    ...propertyLinks,
   ];
+}
+function readJsonFile(fileName: string) {
+  try {
+    const data = fs.readFileSync(fileName, "utf8");
+    return JSON.parse(data);
+  } catch (err) {
+    console.error(`Error reading or parsing file: ${err}`);
+    return null;
+  }
 }

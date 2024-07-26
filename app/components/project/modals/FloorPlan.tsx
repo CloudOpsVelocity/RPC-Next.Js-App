@@ -193,13 +193,24 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
         item[property] !== "undefined" &&
         item[property] !== "None"
       ) {
-        return true;
+        return Object.keys(values).every(
+          (key) =>
+            !values[key] ||
+            String(item[key]).toLowerCase() === values[key].toLowerCase()
+        );
       } else {
         return false;
       }
     });
 
-    if (filteredData[0][property] != undefined) {
+    // const filteredData = data?.filter((item: any) => {
+    //   return Object.keys(values).every(
+    //     (key) =>
+    //       !values[key] ||
+    //       String(item[key]).toLowerCase() === values[key].toLowerCase()
+    //   );
+    // });
+    if (data[0][property] != undefined) {
       let options = Array.from(
         new Set(filteredData.map((item: any) => String(item[property])))
       );

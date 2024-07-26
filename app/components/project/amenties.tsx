@@ -40,7 +40,7 @@ export default function Amenties({
 
   return (
     <div
-      className="w-[95%] md:w-[90%] scroll-mt-[250px] bg-white sm:pt-10 mb-5 md:pb-4 "
+      className="w-[95%] md:w-[90%] relative scroll-mt-[250px] bg-white sm:pt-10 mb-[3%] md:pb-4 "
       id="amenities"
     >
       <div className=" mx-auto ">
@@ -53,7 +53,7 @@ export default function Amenties({
         ) : (
           <>
             {" "}
-            <h2 className="text-h2 lg:text-[32px]  font-semibold">
+            <h2 className="text-h2  lg:text-[32px]  font-semibold">
               Amenities Of{" "}
               <span className="text-[#148B16] text-h2 lg:text-[32px] font-bold not-italic  leading-[normal] ">
                 {projName}

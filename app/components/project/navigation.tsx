@@ -125,7 +125,7 @@ export default function Navigation({
     <div
       className={clsx(
         "flex justify-center items-center shadow-lg w-full",
-        isSticky && "fixed top-[90px] bg-white shadow-md z-[100]"
+        isSticky && "fixed top-[70px] bg-white shadow-md z-[100]"
       )}
     >
       {leftScroll > 0 && (
@@ -133,14 +133,14 @@ export default function Navigation({
           src="/auth/arrow.svg"
           alt=""
           className="rotate-180 cursor-pointer"
-          width={64}
-          height={64}
+          width={40}
+          height={40}
           onClick={() => handleArrowClick("L")}
         />
       )}
 
       <div
-        className="h-[64px] scroll-smooth w-[100%] bg-[#FCFCFC] shadow-sm flex justify-start items-center scrollbar-hide overflow-x-auto lg:px-14"
+        className="h-[40px] scroll-smooth w-[100%] bg-[#FCFCFC] shadow-sm flex justify-start items-center scrollbar-hide overflow-x-auto lg:px-14"
         ref={scrollContainerRef}
       >
         {topics.map((topic) => {
@@ -153,10 +153,10 @@ export default function Navigation({
               <div
                 key={topic.id}
                 className={clsx(
-                  `cursor-pointer text-[24px] mr-[36px]  whitespace-nowrap`,
+                  `cursor-pointer text-[20px] mr-[36px]  whitespace-nowrap`,
                   currentBlock === topic.id
                     ? "text-[#0073C6] font-[700] decoration-solid underline"
-                    : "text-[#4D6677] font-[500]",
+                    : "text-[#242424] font-[500]",
                   (topic.id === "ratings" && data?.status === false) ||
                     (isBrochure === false && topic.id === "brochure")
                     ? "hidden"
@@ -185,8 +185,8 @@ export default function Navigation({
         src="/auth/arrow.svg"
         alt=""
         className="cursor-pointer"
-        width={64}
-        height={64}
+        width={40}
+        height={40}
         onClick={() => handleArrowClick("R")}
       />
     </div>

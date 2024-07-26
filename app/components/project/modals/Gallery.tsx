@@ -24,6 +24,8 @@ type GalleryProps = {
   images: any[];
   videos: any[];
   isImage: boolean;
+  currentSlide: number;
+  setCurrentSlide:any;
 };
 
 const Gallery: React.FC<GalleryProps> = ({
@@ -31,11 +33,12 @@ const Gallery: React.FC<GalleryProps> = ({
   images,
   videos,
   isImage,
+  currentSlide, 
+  setCurrentSlide
 }) => {
   const [content, { open, close }] = useGallery();
-  const [currentSlide, setCurrentSlide] = useState(0);
   const [previewImage, setPreviewImage] = useState<string | null>(
-    selectedMedia
+    videos[currentSlide]
   );
   const handleImageClick = (image: string) => {
     setPreviewImage(image);
@@ -106,10 +109,11 @@ const Gallery: React.FC<GalleryProps> = ({
           ) : (
             <div className="flex justify-center items-center md:min-w-[1000px] min-w-[300px] bg-black rounded-[10px] md:rounded-[20px] ">
                 <ReactPlayer
-                  url={previewImage as string}
+                  url={videos[currentSlide] as string}
                   width="auto"
                   controls
                   height={isMobile ? "50vh" : "60vh"}
+                  playing={true}
                 />
             </div>
           )}
@@ -155,10 +159,9 @@ const Gallery: React.FC<GalleryProps> = ({
                         src={image}
                         className={clsx(
                           `cursor-pointer w-full min-w-[150px] max-w-[150px] !h-auto max-h-[100px] min-h-[100px] object-cover bg-white`,
-                          image.split("?")[0] ===
-                            (previewImage?.split("?")[0] ||
-                              content?.url?.split("?")[0]) &&
-                            "!border-[5px] !border-white"
+                          // (image.split("?")[0] === (previewImage?.split("?")[0] || content?.url?.split("?")[0]) || currentSlide === index) &&
+                          currentSlide === index &&
+                          "!border-[4px] !border-white"
                         )}
                       />
                     </Carousel.Slide>
@@ -169,9 +172,12 @@ const Gallery: React.FC<GalleryProps> = ({
                   {videos.map((video, index) => (
                     <Carousel.Slide
                       key={index}
-                      onClick={() => handleImageClick(video)}
+                      onClick={() => {
+                        handleImageClick(video);
+                        setCurrentSlide(index);
+                      }}
                     >
-                      <div className="relative">
+                      <div className={`relative `}>
                         <video
                           key={index}
                           width={150}
@@ -179,8 +185,8 @@ const Gallery: React.FC<GalleryProps> = ({
                           src={video as string}
                           //alt={`Image ${index + 1}`}
                           className={`cursor-pointer sm:h-full w-full min-w-[150px] rounded-[5px] !h-auto max-h-[100px] min-h-[100px] object-cover  ${
-                            video === previewImage
-                              ? "border-[5px] border-white"
+                            currentSlide === index
+                              ? "border-[4px] border-white"
                               : ""
                           }`}
                         />
