@@ -11,10 +11,15 @@ export function calculatePerSqPrice(
   }
 
   const result: number = priceValue / sbaValue;
-  const formattedResult: string = result.toLocaleString("en-US", {
-    minimumFractionDigits: 2,
+
+  // Format the result with thousands separators and up to 2 decimal places
+  let formattedResult: string = result.toLocaleString("en-US", {
+    minimumFractionDigits: 0,
     maximumFractionDigits: 2,
   });
+
+  // Remove trailing decimals if they are zero
+  formattedResult = formattedResult.replace(/(\.\d*?[1-9])0+$/, '$1').replace(/\.$/, '');
 
   return formattedResult;
 }

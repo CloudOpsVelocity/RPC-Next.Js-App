@@ -166,7 +166,7 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
                 </p>
               )}
                  <p className="md:mb-[13px] text-[12px]  text-[#001F35] font-semibold md:font-bold ">
-              Others Charges Applicable
+              Other Charges Applicable
               </p>
               <p className="text-[#242424] md:text-2xl not-italic font-semibold leading-[normal] mt-[8px]">
                 Posted By: {projectDetails.postedByName}

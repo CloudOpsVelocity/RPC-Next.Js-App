@@ -120,7 +120,7 @@ export default function Navigation({
     <div
       className={clsx(
         "flex justify-center items-center shadow-lg w-full",
-        isSticky && "fixed top-[90px] bg-white shadow-md z-[100]"
+        isSticky && "fixed top-[70px] bg-white shadow-md z-[100]"
       )}
     >
       {leftScroll > 0 && (
