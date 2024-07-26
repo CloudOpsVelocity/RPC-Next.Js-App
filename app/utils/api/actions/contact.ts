@@ -20,7 +20,6 @@ export const addContact = async (data: Props) => {
 };
 
 export const sendContact = async (data: any) => {
-  console.log(data);
   let reqData = {
     name: data.name,
     email: data.email,
