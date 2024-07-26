@@ -38,7 +38,7 @@ export default function GalleryBlock({
 
   return (
     <div
-      className="w-[90%] scroll-mt-[200px] mt-4 sm:mt-0 mb-[5%]"
+      className="w-[95%] md:w-[90%] scroll-mt-[200px] mt-4 sm:mt-0 mb-[5%]"
       id="galleria"
     >
       {type === "prop" ? (

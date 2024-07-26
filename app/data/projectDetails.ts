@@ -44,7 +44,7 @@ export const propertyDetailsTypes = new Map([
   [31, { id: 31, name: "Villa", url: "", apiProp: "villa" }],
   [34, { id: 34, name: "Villament", url: "", apiProp: "villament" }],
   [32, { id: 32, name: "Plot", url: "", apiProp: "plot" }],
-  [633, { id: 633, name: "independent", url: "", apiProp: "independent" }],
+  [36, { id: 36, name: "Independent", url: "", apiProp: "independent" }],
 ]);
 
 export const projectprops = {
@@ -53,7 +53,7 @@ export const projectprops = {
   rowHouse: 33,
   villament: 34,
   apartment: 35,
-  independent: 633,
+  independent: 36,
 };
 export const parseDataProjectProps = {
   villa: 31,
@@ -61,7 +61,7 @@ export const parseDataProjectProps = {
   rowhouse: 33,
   villament: 34,
   apartment: 35,
-  independent: 633,
+  independent: 36,
 };
 export const listingProps = {
   Villa: 31,
@@ -69,7 +69,7 @@ export const listingProps = {
   "Row House": 33,
   Villament: 34,
   Apartment: 35,
-  "Independent House/Building": 633,
+  "Independent House/Building": 36,
 };
 export const BACKEND_PROP_TYPES = {
   apt: 35,
@@ -77,6 +77,7 @@ export const BACKEND_PROP_TYPES = {
   villa: 31,
   vlmt: 34,
   plot: 32,
+  "Independent House/Building": 36,
 };
 export const floorplanTypes = [
   {
@@ -97,6 +98,10 @@ export const bhkDetails = [
   {
     title: "All",
     value: 0,
+  },
+  {
+    title: "1 RK",
+    value: 40,
   },
   {
     title: "1 BHK",

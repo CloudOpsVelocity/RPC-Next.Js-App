@@ -4,18 +4,20 @@ type Props = {
   issueData: any;
   reportIssuseFun: any;
   reportStatus: number[];
+  errorMsg:boolean
 };
 
 export default function ReportOptions({
   issueData,
   reportIssuseFun,
   reportStatus,
+  errorMsg
 }: Props) {
   return (
     <div>
       <hr className="bg-blue-300 w-[98%] mb-2 h-[2px]" />
       <p className="text-black-900 font-montserrat text-base  font-semibold leading-norma">
-        Select issue from below:
+     { errorMsg?  "Select atLeast one CheckBox" :"Select issue from below:"}
       </p>
 
       <div className="flex flex-row flex-wrap m-[1%] justify-start items-start gap-[1%] w-full ">

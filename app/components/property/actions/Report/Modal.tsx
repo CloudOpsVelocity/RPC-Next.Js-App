@@ -14,6 +14,7 @@ import { number } from "yup";
 export default function ReportModal({ issueData }: any) {
   const { slug } = useParams<{ slug: string }>();
   const [opened, { open, close }] = useDisclosure(false);
+  const[errorMsg, seterrorMsg]=useState(false)
   const [status, setStatus] = useState<
     "idle" | "error" | "loading" | "success"
   >("idle");
@@ -22,6 +23,7 @@ export default function ReportModal({ issueData }: any) {
   const formSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if(reportStatus.length==0){
+      seterrorMsg(false);
       setStatus("error")
     }
     else if (reportStatus.includes(607)) {
@@ -60,6 +62,7 @@ export default function ReportModal({ issueData }: any) {
     if (index !== -1) {
       updatedReportStatus.splice(index, 1);
     } else {
+      seterrorMsg(true);
       updatedReportStatus.push(cid);
     }
     setreportStatus(updatedReportStatus);
@@ -113,6 +116,7 @@ export default function ReportModal({ issueData }: any) {
                 reportIssuseFun={reportIssuseFun}
                 issueData={issueData}
                 reportStatus={reportStatus}
+                errorMsg={errorMsg}
               />
               <form onSubmit={formSubmit} className=" gap-1 sm:gap-4 ">
                 <p className="text-[#001F35] text-sm not-italic font-semibold leading-[normal] mb-1">
@@ -142,6 +146,8 @@ export default function ReportModal({ issueData }: any) {
                 </div>
                 <div className="flex justify-center items-center ">
                   <Button
+                        onClick={(e) => e.stopPropagation()}
+
                     //   loading={status === "pending"}
                     type="submit"
                     className="inline-flex items-center justify-center rounded-md text-[14px]  xl:text-[20px] font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 !bg-[#0073C6] text-white mt-3 sm:mt-6"

@@ -54,7 +54,7 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
     <>
       <PFloorPlanModal data={data} opened={opened} setOpened={setOpened} />
       <div
-        className="w-[90%] mb-[5%] mt-[2.5%] relative scroll-mt-[220px]"
+        className="w-[95%] md:w-[90%] mb-[5%] mt-[2.5%] relative scroll-mt-[220px]"
         id="floorPlans"
         onClick={handleOpen}
       >

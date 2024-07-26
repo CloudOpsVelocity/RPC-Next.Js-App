@@ -40,7 +40,7 @@ export default function Amenties({
 
   return (
     <div
-      className="w-[90%] scroll-mt-[250px] bg-white sm:pt-10 mb-5 md:pb-4 "
+      className="w-[95%] md:w-[90%] scroll-mt-[250px] bg-white sm:pt-10 mb-5 md:pb-4 "
       id="amenities"
     >
       <div className=" mx-auto ">
