@@ -23,22 +23,25 @@ export default function GalleryBlock({
 }: Media) {
   const images = getImageUrls(media);
   const [selectedMedia, setSelectedMedia] = useState<string | null>(images[0]);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
   const videos = [walkThrowVideoUrl, projectVideoIUrl, media.videoUrl].filter(
     (video) => video !== "" && video !== undefined
   );
   const isMobile = useMediaQuery(`(max-width: 750px)`);
   const [, { open }] = useGallery();
-  const handleMediaClick = (media: string) => {
+  const handleMediaClick = (media: string, index:number) => {
     if (isMobile) {
       const isVideo = videos.includes(media);
       open(isVideo ? "video" : "image", media);
     }
     setSelectedMedia(media);
+    setCurrentSlide(index)
   };
 
   return (
     <div
-      className="w-[95%] md:w-[90%] scroll-mt-[200px] mt-4 sm:mt-0 mb-[5%]"
+      className="w-[95%] md:w-[90%] scroll-mt-[200px] mt-4 sm:mt-0 mb-[3%]" 
       id="galleria"
     >
       {type === "prop" ? (
@@ -77,6 +80,7 @@ export default function GalleryBlock({
                   width="auto"
                   height="462px"
                   controls
+                  playing={true}
                 />
               ) : (
                 <Image
@@ -102,6 +106,8 @@ export default function GalleryBlock({
                 images={images}
                 videos={videos}
                 isImage={selectedMedia.includes(".mp4") ? false : true}
+                currentSlide={currentSlide} 
+                setCurrentSlide={setCurrentSlide}
               />
             </div>
           )}
@@ -125,7 +131,7 @@ export default function GalleryBlock({
                   selectedMedia?.split("?")[0] === img.split("?")[0] &&
                     "!border-2 !border-btnPrimary !shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)]"
                 )}
-                onClick={() => handleMediaClick(img as string)}
+                onClick={() => handleMediaClick(img as string, ind)}
               />
             ))}
           </div>
@@ -136,26 +142,24 @@ export default function GalleryBlock({
               </h3>
               <div className="flex justify-start items-start w-full gap-[4%] flex-wrap ">
                 {videos?.map((img, ind) => (
-                  <div className="relative w-[110px] lg:w-[152px] flex justify-center items-center h-[68px] lg:max-h-[94px]  bg-white rounded-[5px]  mb-[4%] cursor-pointer">
+                  <div className={`relative w-[110px] lg:w-[152px] flex justify-center items-center h-[68px] md:h-[94px]  bg-white rounded-[5px]  mb-[4%] cursor-pointer
+                      ${selectedMedia === img
+                          ? "border-2 !border-btnPrimary shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)]"
+                          : ""
+                      }`}>
                     <VideoJsonLdScript
                       contentUrl={img as string}
                       name={`${projName} ${VideoALText(img)}`}
-                      description={`This video is about ${projName} ${VideoALText(
-                        img
-                      )}`}
+                      description={`This video is about ${projName} ${VideoALText( img )}`}
                     />
                     <video
                       key={img}
                       src={img as string}
-                      className={`!w-full rounded-[5px] cursor-pointer  h-[68px] sm:h-[94px] object-cover border !border-gray-300 !shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] ${
-                        selectedMedia === img
-                          ? "border-2 !border-btnPrimary shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)]"
-                          : ""
-                      }`}
+                      className={`!w-full rounded-[5px] cursor-pointer  h-[64px] md:h-[90px] object-cover }`}
                       content=""
-                      onClick={() => handleMediaClick(img as string)}
+                      onClick={() => handleMediaClick(img as string, ind)}
                     />
-                    <span className="absolute top-[40%] left-[40%] pointer-events-none ">
+                    <span className="absolute pointer-events-none ">
                       {videoPlayIcon}
                     </span>
                   </div>

@@ -23,7 +23,7 @@ export default function ListingRentAvail({
   s: string;
 }) {
   return (
-    <div className="w-[90%] mb-[5%] scroll-mt-[350px]" id="listings">
+    <div className="w-[90%] mb-[3%] scroll-mt-[350px]" id="listings">
       <h2 className="text-[20px] lg:text-[32px] font-[600] text-[#001F35] mb-[12px]">
         Listings Available in{" "}
         <span className="text-[#148B16] font-[700]  text-[20px] lg:text-[32px]">

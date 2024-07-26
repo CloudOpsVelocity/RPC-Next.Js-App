@@ -230,7 +230,7 @@ export default function FloorplansBlock({
   if (isLoading) return <Loading />;
   return (
     <div
-      className="w-[95%] md:w-[90%] scroll-mt-[180px] mb-[2%] sm:mb-[5%]"
+      className="w-[95%] md:w-[90%] scroll-mt-[180px] md:mb-[2%] sm:mb-[5%]"
       id="floorPlans"
     >
       <h2

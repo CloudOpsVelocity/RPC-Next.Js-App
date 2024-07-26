@@ -1,4 +1,4 @@
-import { useDisclosure } from "@mantine/hooks";
+import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import { Modal, Button, Textarea } from "@mantine/core";
 import ReportButton from "./button";
 import clsx from "clsx";
@@ -47,12 +47,15 @@ export default function ReportModal() {
     setStatus("idle");
     setText("");
   };
+  const isMobile = useMediaQuery("(max-width: 601px)");
+
   return (
     <>
       <Modal
         opened={opened}
         onClose={handleClose}
         centered
+        className="w-full md:w-[70%] lg:w-[40%] h-auto "
         styles={{
           header: {
             display: "none",
@@ -66,12 +69,12 @@ export default function ReportModal() {
             borderRadius: "20px",
           },
         }}
-        size={"32%"}
+        size={isMobile ? "90%" : "30%"}
       >
         <div className="relative">
           <Close
             close={close}
-            className="absolute top-3 right-5 md:right-1 z-10"
+            className="absolute md:top-3 top-1 md:right-5 right-1 z-10 w-[20px] h-[20px] md:w-[30px] md:h-[30px] "
           />
 
           {status === "success" ? (
