@@ -23,17 +23,12 @@ import { getListingDetails } from "@/app/utils/api/property";
 import NearByCarouselProperty from "@/app/components/property/carousel";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
 import MobileHidden from "@/app/components/molecules/MobileHidden";
-import ErrorContainer from "@/app/components/project/error/container";
 import PriceBreakup from "@/app/components/property/pricingbreakup/PriceBreakup";
 import { notFound } from "next/navigation";
-import { ARROW_ICON } from "@/app/config/llisting";
 import { bhkDetailsMap } from "@/app/data/projectDetails";
 import CompareError from "@/app/components/property/actions/Error";
 import NearByCarouselProjProperty from "@/app/components/property/carousel/ProjectCarouse";
-import axios from "axios";
 import { getAmenties } from "@/app/utils/api/project";
-import { Query, useQuery } from "react-query";
-import { queryClient } from "@/app/utils/query";
 
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {

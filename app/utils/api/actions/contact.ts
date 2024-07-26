@@ -20,14 +20,16 @@ export const addContact = async (data: Props) => {
 };
 
 export const sendContact = async (data: any) => {
+  console.log(data);
+  const reqKey = data.isProjContact == "Y" ? "projIdEnc" : "propIdEnc";
   let reqData = {
     name: data.name,
     email: data.email,
     mobile: data.mobile,
-    conFor: data.isProjContact ? "project" : "property", // this you need to add
-    projIdEnc: data.projIdEnc,
+    conFor: data.isProjContact == "Y" ? "project" : "property", // this you need to add
+    [reqKey]: data[reqKey],
     conType: "callback", // this you need to add
-    src: data.src,
+    src: sourceMap.get(data.get),
     ...(data.otp && { otp: data.otp }),
   };
   const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/contact/v1/generate-contact`;
@@ -38,3 +40,13 @@ export const sendContact = async (data: any) => {
     console.error(error);
   }
 };
+
+const sourceMap = new Map([
+  ["projBanner", "projDetails"],
+
+  ["propBanner", "propDetails"],
+
+  ["propCard", "propDetails"],
+
+  ["projCard", "projDetails"],
+]);

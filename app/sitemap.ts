@@ -1,4 +1,5 @@
 import { getUrlSlugs } from "./seo/sitemap/const";
+const fs = require("fs");
 
 export default async function sitemap() {
   const BASE_PATH = process.env.NEXT_PUBLIC_URL;
@@ -27,6 +28,13 @@ export default async function sitemap() {
   + listing => city locality
   + dashboard => /my-profile
   */
+  const projResult = readJsonFile("./permutations.json");
+  const projectsLinks = projResult.map(({ slug }: any) => ({
+    url: `${BASE_PATH}/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly",
+    priority: 0.5,
+  }));
   return [
     {
       url: `${BASE_PATH}/`,
@@ -64,5 +72,15 @@ export default async function sitemap() {
       changeFrequency: "weekly",
       priority: 0.5,
     },
+    ...projectsLinks,
   ];
+}
+function readJsonFile(fileName: string) {
+  try {
+    const data = fs.readFileSync(fileName, "utf8");
+    return JSON.parse(data);
+  } catch (err) {
+    console.error(`Error reading or parsing file: ${err}`);
+    return null;
+  }
 }

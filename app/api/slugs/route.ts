@@ -1,4 +1,4 @@
-import data from "@/permutations.json";
+// import data from "@/permutations.json";
 import generatePermutations from "./create";
 export async function POST(req: Request) {
   const data = await generatePermutations();
@@ -6,5 +6,5 @@ export async function POST(req: Request) {
 }
 
 export async function GET(req: Request) {
-  return Response.json({ data: data.length });
+  return Response.json({ data: 1 });
 }

@@ -44,14 +44,14 @@ export default function PropertyOverviewBanner({
         <div className="flex justify-center sm:justify-between items-center w-[100%] flex-row sm:ml-[3%] p-[2%] flex-wrap">
           <div className="grid place-items-center md:block">
             <p className="text-[#212C33] sm:text-[24px] lg:text-[34px] font-[600]  md:text-start text-center">
-              {" Total "} 
+              {" Total "}
               {cg === "S" ? "Selling" : "Rent"} Price
             </p>
             <p className="text-[#001F35] sm:text-[24px] md:text-[32px] lg:text-[40px] whitespace-nowrap font-[700] mt-1">
               <span className="text-[#001F35] sm:text-[24px] md:text-[32px] lg:text-[40px] whitespace-nowrap font-[700] mt-1">
                 {formatCurrency(price)}
                 {/* {cg === "S" ? "," : ""} */}{" "}
-               {/*  <span className="text-[#545353] text-lg md:text-[32px] not-italic font-medium leading-[normal]">
+                {/*  <span className="text-[#545353] text-lg md:text-[32px] not-italic font-medium leading-[normal]">
                   {cg === "S"
                     ? `₹ ${pricePerSq} / sq.ft`
                     : `+ ( ₹ ${
@@ -66,60 +66,64 @@ export default function PropertyOverviewBanner({
             <Button
               title="Request  Callback"
               buttonClass="  text-[#FFF] text-[12px] sm:text-[28px] font-[600] bg-[#0073C6] hidden md:block  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px]  mt-3"
-              onChange={() => open("prop", slug, "projBanner", postedByType)}
+              onChange={() => open("prop", slug, "propBanner", postedByType)}
             />
-           
           </div>
-          {!isMobile ?   <div className="flex justify-end items-center flex-col mt-3">
-            {otherPrice&& <button
-              onClick={toggle}
-              className="  text-[#FFF] text-[12px] sm:text-[28px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px] "
-            >
-              {collapsed ? "Hide Price Break Up" : "Show Price Break Up"}{" "}
-              {config.priceIcon}
-            </button>}            
-            <WhatsAppButton
-              className="cursor-pointer"
-              onClick={""}
-              name={`${bhkName ?? ""} ${propTypeName} For${
-                cg === "S" ? " Sell" : " Rent"
-              } ${propName ? `In ${propName}` : ""}`}
-              type="prop"
-            />
-          </div>:
-          <>
-          <div className="flex justify-center sm:justify-start items-center w-full space-x-2">
-          <Button
-              title="Request  Callback"
-              buttonClass="  text-[#FFF] text-[12px] sm:text-[28px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px]  mt-3"
-              onChange={() => open("prop", slug, "projBanner", postedByType)}
-            />
-            <button
-              onClick={toggle}
-              className="  text-[#FFF] text-[12px] sm:text-[28px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px]  mt-3"
-            >
-              {collapsed ? "Hide Price Break Up" : "Show Price Break Up"}{" "}
-              {config.priceIcon}
-            </button>
-           
-          </div>
-          <WhatsAppButton
-              className="cursor-pointer"
-              onClick={""}
-              name={`${bhkName ?? ""} ${propTypeName} For${
-                cg === "S" ? " Sell" : " Rent"
-              } ${propName ? `In ${propName}` : ""}`}
-              type="prop"
-            /></>}
-         
+          {!isMobile ? (
+            <div className="flex justify-end items-center flex-col mt-3">
+              {otherPrice && (
+                <button
+                  onClick={toggle}
+                  className="  text-[#FFF] text-[12px] sm:text-[28px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px] "
+                >
+                  {collapsed ? "Hide Price Break Up" : "Show Price Break Up"}{" "}
+                  {config.priceIcon}
+                </button>
+              )}
+              <WhatsAppButton
+                className="cursor-pointer"
+                onClick={""}
+                name={`${bhkName ?? ""} ${propTypeName} For${
+                  cg === "S" ? " Sell" : " Rent"
+                } ${propName ? `In ${propName}` : ""}`}
+                type="prop"
+              />
+            </div>
+          ) : (
+            <>
+              <div className="flex justify-center sm:justify-start items-center w-full space-x-2">
+                <Button
+                  title="Request  Callback"
+                  buttonClass="  text-[#FFF] text-[12px] sm:text-[28px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px]  mt-3"
+                  onChange={() =>
+                    open("prop", slug, "projBanner", postedByType)
+                  }
+                />
+                <button
+                  onClick={toggle}
+                  className="  text-[#FFF] text-[12px] sm:text-[28px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px]  mt-3"
+                >
+                  {collapsed ? "Hide Price Break Up" : "Show Price Break Up"}{" "}
+                  {config.priceIcon}
+                </button>
+              </div>
+              <WhatsAppButton
+                className="cursor-pointer"
+                onClick={""}
+                name={`${bhkName ?? ""} ${propTypeName} For${
+                  cg === "S" ? " Sell" : " Rent"
+                } ${propName ? `In ${propName}` : ""}`}
+                type="prop"
+              />
+            </>
+          )}
         </div>
-        
 
         <RequestCallBackModal
           close={close}
           opened={opened}
           builderName={postedByName}
-          source={source}
+          source={"propBanner"}
           name={`${bhkName ?? ""} ${propTypeName} For
           ${cg === "S" ? " Sell" : " Rent"} In ${ltName}`}
         />
@@ -337,8 +341,6 @@ const config = {
       viewBox="0 0 28 29"
       fill="none"
       className="hidden sm:flex h-[24px] w-[24px] xl:h-[34px] xl:w-[34px]"
-
-      
     >
       <path
         d="M11.3296 4.74772C12.0074 4.17022 12.3469 3.88089 12.7016 3.71172C13.1063 3.51834 13.5492 3.41797 13.9977 3.41797C14.4463 3.41797 14.8892 3.51834 15.2939 3.71172C15.6486 3.88089 15.9881 4.17022 16.6659 4.74772C17.3647 5.34272 18.0741 5.64372 19.0074 5.71722C19.8952 5.78839 20.3397 5.82456 20.7107 5.95522C21.5671 6.25856 22.2414 6.93172 22.5436 7.78922C22.6742 8.15906 22.7104 8.60355 22.7816 9.49255C22.8551 10.4259 23.1549 11.1341 23.7499 11.8329C24.3286 12.5107 24.6179 12.8502 24.7871 13.2049C25.1791 14.0251 25.1791 14.9782 24.7871 15.7972C24.6179 16.1519 24.3286 16.4914 23.7511 17.1692C23.1734 17.8182 22.8318 18.6433 22.7816 19.5107C22.7104 20.3986 22.6742 20.8431 22.5436 21.2141C22.394 21.637 22.1516 22.0212 21.8343 22.3383C21.517 22.6555 21.1326 22.8976 20.7096 23.0469C20.3397 23.1776 19.8952 23.2137 19.0062 23.2849C18.0729 23.3584 17.3647 23.6582 16.6659 24.2532C15.9881 24.8319 15.6486 25.1212 15.2939 25.2904C14.8892 25.4838 14.4463 25.5841 13.9977 25.5841C13.5492 25.5841 13.1063 25.4838 12.7016 25.2904C12.3469 25.1212 12.0074 24.8319 11.3296 24.2544C10.6805 23.6767 9.85549 23.3351 8.98807 23.2849C8.10023 23.2137 7.65573 23.1776 7.28473 23.0469C6.86174 22.8973 6.47759 22.655 6.16045 22.3376C5.8433 22.0203 5.6012 21.636 5.4519 21.2129C5.32123 20.8431 5.28507 20.3986 5.2139 19.5096C5.16385 18.6427 4.82266 17.818 4.24557 17.1692C3.6669 16.4914 3.37757 16.1519 3.20723 15.7972C3.01403 15.3924 2.91386 14.9495 2.91406 14.5009C2.91426 14.0524 3.01483 13.6095 3.2084 13.2049C3.37757 12.8502 3.6669 12.5107 4.2444 11.8329C4.85107 11.1201 5.14157 10.4061 5.2139 9.49139C5.28507 8.60356 5.32123 8.15905 5.4519 7.78805C5.60147 7.36507 5.84382 6.98092 6.16116 6.66377C6.47851 6.34663 6.86282 6.10453 7.2859 5.95522C7.65573 5.82456 8.10023 5.78839 8.98923 5.71722C9.85612 5.66717 10.6807 5.32481 11.3296 4.74772Z"

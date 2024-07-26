@@ -7,15 +7,16 @@ type Props = {
 
 export default function Page({ params: { slug } }: Props) {
   const projResult = readJsonFile("./permutations.json");
-  return <div>{JSON.stringify(projResult)}</div>;
+  return <div>{JSON.stringify({ projResult })}</div>;
 }
-// export const fetchCache = "force-cache";
+export const dynamic = "auto";
+
+// export const fetchCache = "force-dynamic";
 // export async function generateStaticParams() {
 //   const projResult = readJsonFile("./permutations.json");
 //   const slugs = projResult.map((data: any) => ({
 //     slug: data.slug,
 //   }));
-//   // console.log(slugs);
 //   return slugs;
 // }
 function readJsonFile(fileName: string) {
