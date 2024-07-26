@@ -21,7 +21,7 @@ const MainCarousel = ({ children }: { children: React.ReactNode }) => {
       mt={isMobile ? 16 : 30}
       height={"auto"}
       slideSize={{ base: "100%", sm: "50%", md: "31%" }}
-      slideGap={{ base: "xs", sm: "md", md: "72px" }}
+      slideGap={{ base: "lg", sm: "md", md: "40px" }}
       align={"start"}
       px={isMobile ? 10 : 100}
     >

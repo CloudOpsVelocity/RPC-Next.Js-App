@@ -210,7 +210,7 @@ const BuilderCarousel = ({
   location,
 }: Props) => {
   return (
-    <div className="w-full mb-[5%]">
+    <div className="w-full mb-[4%]">
       <h2 className="ml-2 text-[16px] sm:text-[24px] lg:text-[32px] font-semibold uppercase cursor-pointer px-4 sm:px-0">
         {/* <span className="!text-green-600">SARANG BY SUMADHARA </span> */}
         {title}

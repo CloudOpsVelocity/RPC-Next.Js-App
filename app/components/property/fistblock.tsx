@@ -150,7 +150,7 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
             </div>
             <div className="w-full md:w-[40%] flex justify-between md:items-end flex-col p-[2%]">
               <h2 className="inline-flex md:text-[28px] lg:text-[32px] font-semibold sm:font-[700] text-[#001F35]">
-                {`${formatNumberIndian(projectDetails.price)}${
+                {`${projectDetails.cg === "R"?  formatNumberIndian(projectDetails.price): formatCurrency(projectDetails.price) }${
                   projectDetails.cg === "R" ? " / Month" : ""
                 }`}{" "}
               </h2>

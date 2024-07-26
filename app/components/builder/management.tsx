@@ -16,7 +16,7 @@ export default function ManagementBlock({
   const keys = Object.keys(projectAvailableCities);
   return (
     <div
-      className=" w-full  mb-[6%]   flex  flex-col justify-center items-start  border border-[color:var(--blue-stroke,#4D6677)] shadow-[0px_4px_31.5px_0px_rgba(91,143,182,0.19)] p-4 sm:p-8 rounded-[7px] border-solid bg-[#FCFCFC] 
+      className=" w-full  mb-[3%]   flex  flex-col justify-center items-start  border border-[color:var(--blue-stroke,#4D6677)] shadow-[0px_4px_31.5px_0px_rgba(91,143,182,0.19)] p-4 sm:p-8 rounded-[7px] border-solid bg-[#FCFCFC] 
     "
     >
       <h1 className=" text-[18px] sm:text-[24px] lg:text-[32px] font-[600] text-[#001F35]">
@@ -54,7 +54,7 @@ export default function ManagementBlock({
         className="!w-full !text-[14px]"
       />
 
-      <div className=" sm:flex  justify-start items-center w-full gap-[8px] mt-[0%] mb-[2%] ">
+      <div className=" sm:flex  justify-start items-center w-full gap-[8px] mt-[0%]  ">
         <div
           onClick={() => window.open(`tel:${officecontact}`)}
           className="max-w-fit flex justify-center items-center gap-0.5 p-1 rounded-md bg-gradient-to-tr from-[#EFF5FF] to-[#F2FAFF] mb-1"
