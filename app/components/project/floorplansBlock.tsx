@@ -216,13 +216,14 @@ export default function FloorplansBlock({
   useEffect(() => {
     if (
       projectUnitsData &&
-      projectUnitsData.length > 0 &&
-      type !== "overview" &&
-      floorPlanType !== "unit"
+      projectUnitsData.length > 0
+      // &&
+      // type !== "overview" &&
+      // floorPlanType !== "unit"
     ) {
       setSelectedFloor(projectUnitsData[0]);
     }
-  }, [projectUnitsData]);
+  }, [projectUnitsData, propCgId]);
   useEffect(() => {
     // @ts-ignore
     types?.length > 0 && setPropCgId(BACKEND_PROP_TYPES[`${types[0]}`]);

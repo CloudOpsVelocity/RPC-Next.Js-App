@@ -217,7 +217,7 @@ export function generatePropertyOverViewData(
         { title: "Property Facing", value: data.facingName, Icon: Compass },
         {
           title: "Plot Area",
-          value: `${data.plotArea} sq.ft`,
+          value: data.plotArea && `${data.plotArea} sq.ft`,
           Icon: TotalLandArea,
         },
         {
@@ -273,7 +273,7 @@ export function generatePropertyOverViewData(
         { title: "Property Facing", value: data.facingName, Icon: Compass },
         {
           title: "Plot Area",
-          value: `${data.plotArea} sq.ft`,
+          value: data.plotArea && `${data.plotArea} sq.ft`,
           Icon: TotalLandArea,
         },
         {
@@ -328,6 +328,11 @@ export function generatePropertyOverViewData(
         },
         { title: "Phase", value: data.phaseName, Icon: PhaseIcon },
         { title: "Ownership", value: data.ownershipName, Icon: OwnerShip },
+        {
+          title: "Plot Area",
+          value: data.plotArea && `${data.plotArea} sq.ft`,
+          Icon: TotalLandArea,
+        },
         {
           title: "Availability Status",
           value:

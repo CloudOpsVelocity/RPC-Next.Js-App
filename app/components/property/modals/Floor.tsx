@@ -175,7 +175,7 @@ const RightSection = ({ propCgId }: any) => {
               }`}{" "}
               <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                 {" "}
-                {`${data.isBasement ? "B+" : ""}${
+                {`${data.isBasement == "Y" ? "B+" : ""}${
                   data?.floor === 0
                     ? "G"
                     : propCgId === projectprops.rowHouse ||

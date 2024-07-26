@@ -29,7 +29,7 @@ export const sendContact = async (data: any) => {
     conFor: data.isProjContact == "Y" ? "project" : "property", // this you need to add
     [reqKey]: data[reqKey],
     conType: "callback", // this you need to add
-    src: sourceMap.get(data.get),
+    src: sourceMap.get(data.src),
     ...(data.otp && { otp: data.otp }),
   };
   const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/contact/v1/generate-contact`;
@@ -46,7 +46,7 @@ const sourceMap = new Map([
 
   ["propBanner", "propDetails"],
 
-  ["propCard", "propDetails"],
+  ["propCard", "propCard"],
 
-  ["projCard", "projDetails"],
+  ["projCard", "projCard"],
 ]);
