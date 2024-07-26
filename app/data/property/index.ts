@@ -73,7 +73,7 @@ export function generatePropertyDetails(
         { title: "Phase", value: data.phaseName, Icon: Marble },
         {
           title: "Elevation",
-          value: `${data.isBasement ? "B+" : ""}G+${data.atFloor}`,
+          value: `${data.isBasement === "Y" ? "B+" : ""}G+${data.atFloor}`,
           Icon: TowerIcon,
         },
         { title: "Unit Number", value: data.unitNumber, Icon: Marble },
@@ -81,7 +81,7 @@ export function generatePropertyDetails(
 
         {
           title: "Plot Area",
-          value: `${data.sba} sq.ft`,
+          value: data.plotArea && `${data.plotArea} sq.ft`,
           Icon: TotalLandArea,
         },
         {
@@ -139,7 +139,11 @@ export function generatePropertyDetails(
         { title: "Property Type", value: data.propTypeName, Icon: Marble },
         { title: "Phase", value: data.phaseName, Icon: Marble },
         { title: "Tower", value: data.tower, Icon: TowerIcon },
-
+        {
+          title: "Plot Area",
+          value: data.plotArea && `${data.plotArea} sq.ft`,
+          Icon: TotalLandArea,
+        },
         { title: "Unit Number", value: data.unitNumber, Icon: Marble },
         { title: "Facing", value: data.facingName, Icon: Marble },
 
@@ -241,7 +245,7 @@ export function generatePropertyDetails(
         { title: "Phase", value: data.phaseName, Icon: Marble },
         {
           title: "Elevation",
-          value: `${data.isBasement ? "B+" : ""}G+${data.atFloor}`,
+          value: `${data.isBasement === "Y" ? "B+" : ""}G+${data.atFloor}`,
           Icon: TowerIcon,
         },
         { title: "Unit Number", value: data.unitNumber, Icon: Marble },
@@ -249,7 +253,7 @@ export function generatePropertyDetails(
         {
           title: "Plot Area",
           Icon: TotalLandArea,
-          value: `${data.plotArea} sq.ft`,
+          value: data.plotArea && `${data.plotArea} sq.ft`,
         },
         {
           title: "Super built-up Area",
@@ -334,8 +338,7 @@ export function generatePropertyDetails(
           title: "Plot Area",
           Icon: TotalLandArea,
           value: `${data.plotArea} sq.ft`,
-        }
-
+        },
       ];
 
       if (cg === "R") {

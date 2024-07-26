@@ -46,7 +46,7 @@ function PFloorPlanModal({
         }}
         title="Floor Plan"
       >
-        <div className="flex mb-[8%]   xl:mb-10 justify-center items-start  xl:gap-[45px] shrink-0 flex-wrap relative">
+        <div className="flex mb-[8%]   xl:mb-0 justify-center items-start  xl:gap-[45px] shrink-0 flex-wrap md:flex-nowrap relative pt-0 md:pt-[60px] pb-0 md:pb-4">
           <div className="w-full h-[66px]  xl:h-[57px] flex items-center justify-between  z-[1000] px-3 xl:px-8 absolute top-0 right-0 pb-4 xl:pt-2">
             <div className="text-[#333] text-left text-[18px]  xl:text-[20px] xl:text-2xl not-italic font-semibold leading-[normal]">
               Floor Plan
@@ -67,18 +67,7 @@ function PFloorPlanModal({
               <Close close={() => setOpened(false)} />
             </div>
           </div>
-          {/* <div className="flex justify-center items-center gap-5 absolute right-20 -top-[50px] z-[1000]">
-            <button
-              onClick={() => handleDownload(data.projMedia.floorPlanUrl)}
-              className="text-white flex  justify-center items-center gap-1 p-2 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] rounded-[10px] bg-[#0073c6]"
-            >
-              Download Floor Plan
-            </button>
-            <SharePopup
-              title="Share"
-              url={imageUrlParser(data.projMedia.floorPlanUrl, "F")}
-            />
-          </div> */}
+
           <TransformWrapper>
             <MiddleSection />
           </TransformWrapper>
@@ -95,16 +84,17 @@ const MiddleSection = () => {
   const data = useAtomValue(selectedFloorAtom);
 
   return (
-    <div className={`col-span-1 p-4 mt-[15%]  md:h-[700px] w-full h-full bg-gray-600`}>
+    <div
+      className={`col-span-1 p-4 mt-[15%] sm:mt-2  md:h-[500px] w-full h-full   bg-gray-600 sm:bg-white`}
+    >
       <div className="relative">
         <TransformComponent>
           <img
             src={`${data.floorPlanUrl}?v=${Math.random()}`}
             alt="Floor Plan"
-            className=""
-            // width={800}
-            // height={}
-            style={{ aspectRatio: "800 / 540", objectFit: "contain" }}
+            className="max-h-[500px] object-contain"
+            width={1200}
+            height={500}
           />
         </TransformComponent>
         <ZoomInOut className="!right-1 !bottom-1" />

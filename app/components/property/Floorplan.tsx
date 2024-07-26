@@ -58,7 +58,10 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
         id="floorPlans"
         onClick={handleOpen}
       >
-        <div className="w-[90%] mb-[10px] xl:mb-[40px] space-y-4" id="propertyDetails ">
+        <div
+          className="w-[90%] mb-[10px] xl:mb-[40px] space-y-4"
+          id="propertyDetails "
+        >
           <PropertyHeading
             title="Floor Plan"
             desc="see floor plan Of your selected property"
@@ -73,7 +76,7 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
             <div
               className="flex justify-center items-center h-[300px] lg:h-[450px] cursor-pointer self-center m-auto"
               onClick={handleOpen}
-            > 
+            >
               <img
                 src={data?.projMedia?.floorPlanUrl + "?v=" + Math.random() * 20}
                 alt=""

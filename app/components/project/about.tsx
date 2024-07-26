@@ -29,7 +29,10 @@ export default function About({
   const isMobile = useMediaQuery(`(max-width: 750px)`);
   return (
     <div
-      className={clsx("w-[95%] mb-[5%] scroll-mt-[180px]", className)}
+      className={clsx(
+        "w-[95%] md:w-[90%] mb-[5%] scroll-mt-[180px]",
+        className
+      )}
       id={id ?? ""}
     >
       {type === "prop" ? (

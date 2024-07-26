@@ -1,8 +1,16 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-import { deleteCookie } from "cookies-next";
 export function middleware() {
-  // const token = cookies().get("token")?.value;
+  const token = cookies().get("token")?.value;
+  if (!token) {
+    // Clear all authentication related cookies
+    const response = NextResponse.next();
+    response.cookies.delete("next-auth.session-token");
+    response.cookies.delete("next-auth.csrf-token");
+    response.cookies.delete("next-auth.callback-url");
+    return response;
+  }
+
   // if (!token) {
   //   const response = NextResponse.next();
   //   deleteCookie("next-auth.session-token");

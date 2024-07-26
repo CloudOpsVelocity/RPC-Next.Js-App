@@ -25,7 +25,7 @@ export default async function Page({ params: { slug } }: Props) {
   const token = cookies().get("token")?.value;
   const data = await getBuilderDetails(slug, "Y", "proj", token);
   return (
-    <div className="flex flex-col justify-start items-center w-full mt-[90px]  ">
+    <div className="flex flex-col justify-start items-center w-full mt-[70px]  ">
       {data && (
         <>
           <Header />

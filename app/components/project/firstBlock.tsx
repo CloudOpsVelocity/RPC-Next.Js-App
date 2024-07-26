@@ -52,7 +52,6 @@ const FirstBlock: React.FC<Props> = ({
     setC("floorPlans");
     setTimeout(() => setIsScrolling(false), 3000);
   }
-  console.log(projectDetails?.projectStatus);
   return (
     <div
       className={`relative rounded-[10px] w-full m-auto bg-gray-50  lg:h-[750px] bg-cover flex justify-between items-start flex-col shadow-md break-words`}
