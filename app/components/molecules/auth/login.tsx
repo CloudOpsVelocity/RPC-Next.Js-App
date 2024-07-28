@@ -97,7 +97,7 @@ function Login({ params }: any) {
             reveal ? <EyeOpen /> : <EyeClosed />
           }
           {...form.getInputProps("password")}
-          onBlur={(e) => handleTrimAndReplace(e, "password", form)}
+          onBlurCapture={(e) => handleTrimAndReplace(e, "password", form)}
         />
 
         <Link
