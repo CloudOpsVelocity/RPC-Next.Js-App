@@ -220,22 +220,21 @@ const MobileFaqCard = ({
 }) => {
   return (
     <div className="transition-all duration-200 bg-white border border-gray-200 shadow-lg cursor-pointer hover:bg-gray-50 mt-2 rounded-md">
-      <button
-        type="button"
-        className="flex items-center justify-between w-full  px-4 pt-1 pb-1 sm:p-6 !text-wrap !break-words "
-      >
-        <span className="flex  font-semibold text-black text-left !text-wrap  break-words max-w-[100%]">
-          {" "}
-          {faqQuestion}{" "}
-        </span>
-      </button>
-      <div className="px-4 pb-2 sm:px-6 sm:pb-6">
-        <p>
-          {/* {faqAnswer} */}
-          <FaqReadMore text={faqAnswer} title={faqQuestion} maxLines={1} />
-        </p>
-      </div>
+    <button
+      type="button"
+      className="flex items-center justify-between w-full px-4 pt-1 pb-1 sm:p-6"
+    >
+      <span className="flex-1 min-w-0 font-semibold text-black text-left break-words">
+        {faqQuestion}
+      </span>
+    </button>
+    <div className="px-4 pb-2 sm:px-6 sm:pb-6">
+      <p>
+        <FaqReadMore text={faqAnswer} title={faqQuestion} maxLines={1} />
+      </p>
     </div>
+  </div>
+
   );
 };
 

@@ -198,7 +198,7 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
         const allValuesMatch = Object.keys(values).every(
           (key) =>
             !values[key] ||
-            String(item[key]).toLowerCase() === values[key].toLowerCase()
+            String(item[key]).toLowerCase() == values[key].toLowerCase()
         );
 
         if (allValuesMatch) {
