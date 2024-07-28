@@ -43,7 +43,7 @@ export default function ProjData({
       <p className="text-[#148B16] text-[14px] xl:text-xl not-italic font-bold relative">
         {formatCurrency(Number(minPrice))} - {formatCurrency(Number(maxPrice))}
       </p>
-      <p className="text-[#001F35] text-[12px]  xl:text-[18px] not-italic font-semibold">
+      <p className="text-[#001F35] text-[12px] text-wrap break-words  xl:text-[18px] not-italic font-semibold">
         {projName}{" "}
       </p>
       <p className="text-[#242424] text-[12px] xl:text-[18px] capitalize  not-italic font-medium">
