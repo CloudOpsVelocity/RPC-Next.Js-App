@@ -186,40 +186,31 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
   const [, setFloor] = useAtom(selectedFloorAtom);
   const { getInputProps, values, setFieldValue, setValues } = useFormContext();
   const getOptions = (property: string): string[] => {
-    const filteredData = data?.filter((item: any) => {
+    const optionsSet = new Set<string>();
+
+    data?.forEach((item: any) => {
       if (
         item.hasOwnProperty(property) &&
         item[property] !== "null" &&
         item[property] !== "undefined" &&
         item[property] !== "None"
       ) {
-        return Object.keys(values).every(
+        const allValuesMatch = Object.keys(values).every(
           (key) =>
             !values[key] ||
             String(item[key]).toLowerCase() == values[key].toLowerCase()
         );
-      } else {
-        return false;
+
+        if (allValuesMatch) {
+          optionsSet.add(item[property].toString());
+        }
       }
     });
 
-    // const filteredData = data?.filter((item: any) => {
-    //   return Object.keys(values).every(
-    //     (key) =>
-    //       !values[key] ||
-    //       String(item[key]).toLowerCase() === values[key].toLowerCase()
-    //   );
-    // });
-    if (data[0][property] != undefined) {
-      let options = Array.from(
-        new Set(filteredData.map((item: any) => String(item[property])))
-      );
-      // @ts-ignore
-      return options;
-    } else {
-      return [];
-    }
+    const options = Array.from(optionsSet);
+    return options;
   };
+
   const handleSearch = (key: string) => {
     const keysWithNonNullValues = Object.keys(values).filter(
       (key) => values[key] !== null
@@ -255,7 +246,7 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
     setValues(prevObj);
     handleSearch(key);
   };
-  console.log(getOptions("parkingArea"));
+  console.log(getOptions("block"));
   return (
     <div className="col-span-1 w-full max-w-[392px] mr-[3%]  ">
       <div className="w-[100%] flex justify-between items-start flex-wrap gap-[5%] z-[100000]">

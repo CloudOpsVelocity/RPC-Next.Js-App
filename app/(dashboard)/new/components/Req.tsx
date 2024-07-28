@@ -6,13 +6,5 @@ import React from "react";
 type Props = {};
 
 export default function Req({}: Props) {
-  const [opned, { close, source }] = useReqCallPopup();
-  return (
-    <RequestCallBackModal
-      close={close}
-      opened={opned}
-      builderName=""
-      source={source}
-    />
-  );
+  return <RequestCallBackModal />;
 }

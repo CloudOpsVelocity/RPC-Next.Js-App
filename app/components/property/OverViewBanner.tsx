@@ -29,13 +29,37 @@ export default function PropertyOverviewBanner({
   ltName,
   postedByName,
   postedByType,
+  propIdEnc,
+  postedById,
 }: Main) {
   const [opened, { open, close, source }] = useReqCallPopup();
   const [collapsed, { open: toggle }] = usePricingPop();
   const { slug } = useParams<{ slug: string }>();
-  const pricePerSq = calculatePerSqPrice(
-    price,
-    propTypeName === "Plot" ? plotArea : sba
+  const filterOtherDetails =
+    otherPrice &&
+    Object?.keys(otherPrice).filter(
+      (item) =>
+        ![
+          "otherCharge",
+          "price",
+          "securetyType",
+          "clubHouseTill",
+          "securityMonth",
+          "security",
+        ].includes(item)
+    );
+  const sum = filterOtherDetails?.reduce(
+    (a, b) =>
+      b !== "price" &&
+      !(b === "clubHouseCharge" && otherPrice.clubHouseCharge === "A") &&
+      otherPrice[b] !== "NA" &&
+      otherPrice[b] !== "A"
+        ? Number(a) +
+          (b === "otherCharge"
+            ? parseOtherCharge(otherPrice[b])
+            : Number(otherPrice[b] || "0"))
+        : Number(a),
+    0
   );
   const isMobile = useMediaQuery("(max-width: 601px)");
   return (
@@ -51,14 +75,29 @@ export default function PropertyOverviewBanner({
             </p>
             <p className="text-[#001F35] sm:text-[24px] md:text-[32px] lg:text-[40px] whitespace-nowrap font-[700] mt-1">
               <span className="text-[#001F35] sm:text-[24px] md:text-[32px] lg:text-[40px] whitespace-nowrap font-[700] mt-1">
-                {cg === "S" ?formatCurrency(price+parseOtherCharge(otherPrice?.otherCharge)) :formatNumberIndian(price+parseOtherCharge(otherPrice?.otherCharge)) }
-             
+                {cg === "S"
+                  ? formatCurrency(
+                      price + parseOtherCharge(otherPrice?.otherCharge) + sum
+                    )
+                  : formatNumberIndian(
+                      price + parseOtherCharge(otherPrice?.otherCharge) + sum
+                    )}
               </span>
             </p>
             <Button
               title="Request  Callback"
               buttonClass="  text-[#FFF] text-[12px] sm:text-[28px] font-[600] bg-[#0073C6] hidden md:block  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px]  mt-3"
-              onChange={() => open("prop", slug, "propBanner", postedByType)}
+              onChange={() =>
+                open({
+                  title: `${bhkName ?? ""} ${propTypeName} For
+          ${cg === "S" ? " Sell" : " Rent"} In ${ltName}`,
+                  modal_type: "PROPERTY_REQ_CALLBACK",
+                  postedByName,
+                  postedId: postedById,
+                  reqId: propIdEnc,
+                  source: "propBanner",
+                })
+              }
             />
           </div>
           {!isMobile ? (
@@ -69,7 +108,7 @@ export default function PropertyOverviewBanner({
                   className="  text-[#FFF] text-[12px] sm:text-[28px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px] "
                 >
                   {collapsed ? "Hide Price Break Up" : "Show Price Break Up"}{" "}
-                {/*   {config.priceIcon} */}
+                  {/*   {config.priceIcon} */}
                 </button>
               )}
               <WhatsAppButton
@@ -88,7 +127,15 @@ export default function PropertyOverviewBanner({
                   title="Request  Callback"
                   buttonClass="  text-[#FFF] text-[12px] sm:text-[28px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px]  mt-3"
                   onChange={() =>
-                    open("prop", slug, "projBanner", postedByType)
+                    open({
+                      title: `${bhkName ?? ""} ${propTypeName} For
+                ${cg === "S" ? " Sell" : " Rent"} In ${ltName}`,
+                      modal_type: "PROPERTY_REQ_CALLBACK",
+                      postedByName,
+                      postedId: postedById,
+                      reqId: propIdEnc,
+                      source: "propBanner",
+                    })
                   }
                 />
                 <button
@@ -111,14 +158,7 @@ export default function PropertyOverviewBanner({
           )}
         </div>
 
-        <RequestCallBackModal
-          close={close}
-          opened={opened}
-          builderName={postedByName}
-          source={"propBanner"}
-          name={`${bhkName ?? ""} ${propTypeName} For
-          ${cg === "S" ? " Sell" : " Rent"} In ${ltName}`}
-        />
+        <RequestCallBackModal />
       </div>
     </>
   );

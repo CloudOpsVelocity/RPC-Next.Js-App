@@ -54,10 +54,13 @@ export function ProjectCard({ type, cardData }: CardProps) {
     }
   };
   const handleReqCallbackOpen = () => {
-    open("card", cardData.projIdEnc, "projCard");
-    setPopReqData({
-      builderName: cardData.postedByName,
-      projName: cardData.projectName,
+    open({
+      modal_type: "PROJECT_REQ_CALLBACK",
+      postedByName: cardData.postedByName,
+      postedId: cardData.builderId,
+      reqId: cardData.reqId,
+      source: "projCard",
+      title: cardData.projectName,
     });
   };
   return (

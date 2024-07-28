@@ -63,10 +63,13 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
     }
   };
   const handleReqCall = () => {
-    open(type, reqId, "propCard", cardData.postedByType);
-    setPopReqData({
-      builderName: cardData.postedByName,
-      projName: name,
+    open({
+      modal_type: "PROPERTY_REQ_CALLBACK",
+      postedByName: cardData.postedByName,
+      postedId: cardData.postedById,
+      reqId: cardData.propIdEnc,
+      source: "propCard",
+      title: name,
     });
   };
   const isMobile = useMediaQuery("(max-width: 601px)");

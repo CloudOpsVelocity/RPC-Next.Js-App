@@ -20,6 +20,7 @@ export default function OverviewBanner({
   buiderName,
   basePrice,
   brocherUrl,
+  builderId,
 }: {
   minPrice: number;
   maxPrice: number;
@@ -27,8 +28,9 @@ export default function OverviewBanner({
   buiderName: string;
   basePrice: number;
   brocherUrl?: string;
+  builderId: number;
 }) {
-  const [opened, { open, close, source }] = useReqCallPopup();
+  const [opened, { open }] = useReqCallPopup();
   const { slug } = useParams<{ slug: string }>();
 
   return (
@@ -48,19 +50,31 @@ export default function OverviewBanner({
               {formatCurrency(minPrice)} - {formatCurrency(maxPrice)}
               {", "}
               <span className="text-[#545353] text-lg md:text-[32px] text-wrap not-italic font-medium leading-[normal]">
-                ₹ {  <NumberFormatter
-                  thousandSeparator
-                  value={basePrice}
-                  thousandsGroupStyle="lakh"
-                    />
-          } Base Price/sq.ft
+                ₹{" "}
+                {
+                  <NumberFormatter
+                    thousandSeparator
+                    value={basePrice}
+                    thousandsGroupStyle="lakh"
+                  />
+                }{" "}
+                Base Price/sq.ft
               </span>
             </p>
             <div className="flex justify-center sm:justify-start items-center w-full space-x-2">
               <Button
                 title="Request  Callback"
                 buttonClass=" text-[#FFF] text-[12px] sm:text-[28px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px]  mt-3"
-                onChange={() => open("banner", slug, "projBanner")}
+                onChange={() =>
+                  open({
+                    modal_type: "PROJECT_REQ_CALLBACK",
+                    postedByName: buiderName,
+                    reqId: slug,
+                    source: "projBanner",
+                    title: name,
+                    postedId: builderId,
+                  })
+                }
               />
               <DownloadBroucher
                 className="block py-2.5 !font-[600] sm:hidden"
@@ -77,13 +91,7 @@ export default function OverviewBanner({
           </div>
         </div>
 
-        <RequestCallBackModal
-          close={close}
-          opened={opened}
-          builderName={buiderName}
-          name={name}
-          source={source}
-        />
+        <RequestCallBackModal />
       </div>
     </>
   );

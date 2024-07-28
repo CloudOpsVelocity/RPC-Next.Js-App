@@ -113,7 +113,7 @@ export const ReqcallbackMessage = ({ close }: { close: () => void }) => {
       border="border-[#72B800]"
       title="Success!"
       content={`Your callback request for the ${
-        data.type === "prop" ? "Property" : "Project"
+        data.MODAL_TYPE === "PROPERTY_REQ_CALLBACK" ? "Property" : "Project"
       } has been sent. ${get_posted_by(
         data.cg
       )} will be in touch soon. Thank you for reaching out!`}

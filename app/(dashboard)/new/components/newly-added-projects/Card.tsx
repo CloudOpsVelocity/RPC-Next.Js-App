@@ -73,6 +73,7 @@ export default function Card({ item }: Props) {
                 builderName={item.builderName}
                 projName={item.projName}
                 reqId={item.projIdEnc}
+                builderId={item.builderId as number}
               />
             </div>
           </div>

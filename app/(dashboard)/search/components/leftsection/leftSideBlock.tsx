@@ -7,7 +7,7 @@ import RequestCallBackModal from "@/app/components/molecules/popups/req";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
 import NewTabCon from "./newtabCon";
-import { SEARCH_FILTER_DATA } from '@/app/data/search';
+import { SEARCH_FILTER_DATA } from "@/app/data/search";
 
 const LeftSideBlock = () => {
   const [opned, { close, source }] = useReqCallPopup();
@@ -54,19 +54,14 @@ const LeftSideBlock = () => {
      
        
       </Tabs> */}
-      <NewTabCon 
-      onTabChange={onTabChange}
-      selectedProtype={params.listedBy ??  "proj"}
-      categoryType={SEARCH_FILTER_DATA.categoryDataProject}
+      <NewTabCon
+        onTabChange={onTabChange}
+        selectedProtype={params.listedBy ?? "proj"}
+        categoryType={SEARCH_FILTER_DATA.categoryDataProject}
       />
       <TabPanelSection mutate={mutate} />
-      
-      <RequestCallBackModal
-        close={close}
-        opened={opned}
-        builderName=""
-        source={source}
-      />
+
+      <RequestCallBackModal />
       <SharePopup />
       <LoginPopup />
     </div>

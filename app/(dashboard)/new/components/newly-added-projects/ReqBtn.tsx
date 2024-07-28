@@ -9,18 +9,25 @@ type Props = {
   builderName: string;
   projName: string;
   reqId: string;
+  builderId: number;
 };
 
-export default function ReqBtn({ builderName, projName, reqId }: Props) {
-  const setPopReqData = useSetAtom(NearByDataAtom);
+export default function ReqBtn({
+  builderName,
+  projName,
+  reqId,
+  builderId,
+}: Props) {
   const [, { open }] = useReqCallPopup();
   const handleOpen = () => {
-    setPopReqData({
-      builderName: builderName,
-      projName: projName,
-      type: "proj",
+    open({
+      modal_type: "PROJECT_REQ_CALLBACK",
+      postedByName: builderName,
+      postedId: builderId,
+      reqId: reqId,
+      source: "projCard",
+      title: projName,
     });
-    open("proj", reqId, "projCard");
   };
   return (
     <Button className="!text-[12px] sm:!text-xl" onClick={handleOpen}>
