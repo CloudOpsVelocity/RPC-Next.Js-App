@@ -21,15 +21,17 @@ export const addContact = async (data: Props) => {
 
 export const sendContact = async (data: any) => {
   console.log(data);
-  const reqKey = data.isProjContact == "Y" ? "projIdEnc" : "propIdEnc";
+  const reqKey =
+    data.MODAL_TYPE == "PROJECT_REQ_CALLBACK" ? "projIdEnc" : "propIdEnc";
   let reqData = {
     name: data.name,
     email: data.email,
     mobile: data.mobile,
-    conFor: data.isProjContact == "Y" ? "project" : "property", // this you need to add
-    [reqKey]: data[reqKey],
-    conType: "callback", // this you need to add
-    src: sourceMap.get(data.src),
+    conFor: sourceMap.get(data.MODAL_TYPE),
+    [reqKey]: data.reqId,
+    conType: data.MODAL_TYPE == "REQ_QUOTE" ? "priceQuote" : "callback",
+    src: sourceMap.get(data.source),
+    postedBy: data.postedId,
     ...(data.otp && { otp: data.otp }),
   };
   const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/contact/v1/generate-contact`;
@@ -40,7 +42,19 @@ export const sendContact = async (data: any) => {
     console.error(error);
   }
 };
+function processConType(conType: string): string {
+  const conTypeMapping: { [key in string]: string } = {
+    PROJECT_REQ_CALLBACK: "callback",
+    PROPERTY_REQ_CALLBACK: "callback",
+    REQ_QUOTE: "priceQuote",
+  };
 
+  if (!conTypeMapping[conType]) {
+    throw new Error(`Invalid conType provided: ${conType}`);
+  }
+
+  return `${conType},${conTypeMapping[conType]}`;
+}
 const sourceMap = new Map([
   ["projBanner", "projDetails"],
 
@@ -49,4 +63,7 @@ const sourceMap = new Map([
   ["propCard", "propCard"],
 
   ["projCard", "projCard"],
+  ["PROJECT_REQ_CALLBACK", "project"],
+  ["PROPERTY_REQ_CALLBACK", "listing"],
+  ["REQ_QUOTE", "projUnit"],
 ]);

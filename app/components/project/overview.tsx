@@ -160,6 +160,7 @@ export default function Overview({
         minPrice={minPrice}
         name={projectName}
         buiderName={postedByName}
+        builderId={builderId}
         basePrice={basePrice}
         brocherUrl={media.projBroucherUrl}
       />

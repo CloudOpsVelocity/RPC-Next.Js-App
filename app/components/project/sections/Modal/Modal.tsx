@@ -11,11 +11,13 @@ import Image from "next/image";
 import { ImgNotAvail } from "@/app/data/project";
 import { propertyDetailsSvgs } from "@/app/images/commonSvgs";
 import CarouselModal from "./Carousel";
+import useDownload from "@/app/hooks/property/useDownload";
 export default function PartialUnitModal() {
   const isData = useAtomValue(selectedPartialUnitAtom);
   const reset = useResetAtom(selectedPartialUnitAtom);
   const selectedOne = isData.others[isData.main];
   const isMobile = useMediaQuery("(max-width: 601px)");
+  const { handleDownload } = useDownload("floorPlan");
   if (!(isData.main === 0 ? true : isData.main)) {
     return null;
   }
@@ -32,32 +34,37 @@ export default function PartialUnitModal() {
           Floor Plan
         </div>
         <div className="flex justify-center items-center  gap-5">
-          <a
-            className="flex justify-center items-center gap-1 p-1 xl:p-2 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] rounded-[10px] bg-[#F3F7FF] text-[#0073C6] text-base not-italic font-semibold leading-[normal] tracking-[0.32px]"
-            // onClick={onDownload}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-            >
-              <path
-                d="M12 16L7 11L8.4 9.55L11 12.15V4H13V12.15L15.6 9.55L17 11L12 16ZM4 20V15H6V18H18V15H20V20H4Z"
-                fill="#0073C6"
+          {selectedOne.floorPlan && (
+            <>
+              <button
+                className="flex justify-center items-center gap-1 p-1 xl:p-2 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] rounded-[10px] bg-[#F3F7FF] text-[#0073C6] text-base not-italic font-semibold leading-[normal] tracking-[0.32px]"
+                onClick={() => handleDownload(selectedOne?.floorPlan)}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                >
+                  <path
+                    d="M12 16L7 11L8.4 9.55L11 12.15V4H13V12.15L15.6 9.55L17 11L12 16ZM4 20V15H6V18H18V15H20V20H4Z"
+                    fill="#0073C6"
+                  />
+                </svg>{" "}
+                <span className="hidden h-4 w-4 xl:w-full xl:h-auto  items-center  xl:block">
+                  Download
+                </span>
+              </button>
+              <SharePopup
+                titleText="Share Floor Plan"
+                title="Share"
+                url={imageUrlParser(selectedOne?.floorPlan || "", "F")}
+                className="text-[#0073C6] text-base not-italic font-semibold leading-[normal] tracking-[0.32px]"
               />
-            </svg>{" "}
-            <span className="hidden h-4 w-4 xl:w-full xl:h-auto  items-center  xl:block">
-              Download
-            </span>
-          </a>
-          <SharePopup
-            titleText="Share Floor Plan"
-            title="Share"
-            // url={imageUrlParser(url || "", "M")}
-            className="text-[#0073C6] text-base not-italic font-semibold leading-[normal] tracking-[0.32px]"
-          />
+            </>
+          )}
+
           <Close
             className="h-[28px] w-[28px] xl:h-[36px] xl:w-[36px]"
             close={reset}

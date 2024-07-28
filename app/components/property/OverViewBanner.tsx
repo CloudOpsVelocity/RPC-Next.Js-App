@@ -28,6 +28,8 @@ export default function PropertyOverviewBanner({
   ltName,
   postedByName,
   postedByType,
+  propIdEnc,
+  postedById,
 }: Main) {
   const [opened, { open, close, source }] = useReqCallPopup();
   const [collapsed, { open: toggle }] = usePricingPop();
@@ -50,7 +52,7 @@ export default function PropertyOverviewBanner({
             </p>
             <p className="text-[#001F35] sm:text-[24px] md:text-[32px] lg:text-[40px] whitespace-nowrap font-[700] mt-1">
               <span className="text-[#001F35] sm:text-[24px] md:text-[32px] lg:text-[40px] whitespace-nowrap font-[700] mt-1">
-                {cg === "S" ?formatCurrency(price) :formatNumberIndian(price)}
+                {cg === "S" ? formatCurrency(price) : formatNumberIndian(price)}
                 {/* {cg === "S" ? "," : ""} */}{" "}
                 {/*  <span className="text-[#545353] text-lg md:text-[32px] not-italic font-medium leading-[normal]">
                   {cg === "S"
@@ -67,7 +69,17 @@ export default function PropertyOverviewBanner({
             <Button
               title="Request  Callback"
               buttonClass="  text-[#FFF] text-[12px] sm:text-[28px] font-[600] bg-[#0073C6] hidden md:block  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px]  mt-3"
-              onChange={() => open("prop", slug, "propBanner", postedByType)}
+              onChange={() =>
+                open({
+                  title: `${bhkName ?? ""} ${propTypeName} For
+          ${cg === "S" ? " Sell" : " Rent"} In ${ltName}`,
+                  modal_type: "PROPERTY_REQ_CALLBACK",
+                  postedByName,
+                  postedId: postedById,
+                  reqId: propIdEnc,
+                  source: "propBanner",
+                })
+              }
             />
           </div>
           {!isMobile ? (
@@ -97,7 +109,15 @@ export default function PropertyOverviewBanner({
                   title="Request  Callback"
                   buttonClass="  text-[#FFF] text-[12px] sm:text-[28px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px]  mt-3"
                   onChange={() =>
-                    open("prop", slug, "projBanner", postedByType)
+                    open({
+                      title: `${bhkName ?? ""} ${propTypeName} For
+                ${cg === "S" ? " Sell" : " Rent"} In ${ltName}`,
+                      modal_type: "PROPERTY_REQ_CALLBACK",
+                      postedByName,
+                      postedId: postedById,
+                      reqId: propIdEnc,
+                      source: "propBanner",
+                    })
                   }
                 />
                 <button
@@ -120,14 +140,7 @@ export default function PropertyOverviewBanner({
           )}
         </div>
 
-        <RequestCallBackModal
-          close={close}
-          opened={opened}
-          builderName={postedByName}
-          source={"propBanner"}
-          name={`${bhkName ?? ""} ${propTypeName} For
-          ${cg === "S" ? " Sell" : " Rent"} In ${ltName}`}
-        />
+        <RequestCallBackModal />
       </div>
     </>
   );

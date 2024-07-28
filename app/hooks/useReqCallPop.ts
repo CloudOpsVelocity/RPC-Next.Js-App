@@ -1,33 +1,52 @@
 import { useAtom, atom } from "jotai";
-import { useParams } from "next/navigation";
-
-// Define the atom to store the state
 interface PopupState {
   opened: boolean;
-  type: string | null; // Type can be 'card' or 'banner'
-  projectID: string | null; // ID of the project
+  reqId: string | null; // ID of the project
   source: "projBanner" | "projCard" | "propCard" | "propBanner";
   cg?: string;
+  MODAL_TYPE: "PROJECT_REQ_CALLBACK" | "PROPERTY_REQ_CALLBACK" | "REQ_QUOTE";
+  postedByName: string;
+  title: string;
+  postedId: number | null;
 }
 
 export const popupStateAtom = atom<PopupState>({
   opened: false,
-  type: null,
-  projectID: null,
+  reqId: null,
   source: "projBanner",
   cg: "",
+  MODAL_TYPE: "PROPERTY_REQ_CALLBACK",
+  postedByName: "",
+  title: "",
+  postedId: null,
 });
 
 export const useReqCallPopup = () => {
   const [popupState, setPopupState] = useAtom(popupStateAtom);
-
-  const open = (
-    type: string,
-    projectID: string,
-    source: "projBanner" | "projCard" | "propCard" | "propBanner",
-    cg?: string
-  ) => {
-    setPopupState({ opened: true, type, projectID, source, cg });
+  const open = ({
+    modal_type,
+    postedByName,
+    reqId,
+    source,
+    title,
+    postedId,
+  }: {
+    reqId: string;
+    source: "projBanner" | "projCard" | "propCard" | "propBanner";
+    modal_type: "PROJECT_REQ_CALLBACK" | "PROPERTY_REQ_CALLBACK" | "REQ_QUOTE";
+    postedByName: string;
+    title: string;
+    postedId: number;
+  }) => {
+    setPopupState({
+      opened: true,
+      reqId,
+      source,
+      MODAL_TYPE: modal_type,
+      postedByName,
+      title,
+      postedId,
+    });
   };
 
   const close = () => {
@@ -39,10 +58,13 @@ export const useReqCallPopup = () => {
     {
       open,
       close,
-      type: popupState.type,
-      projectID: popupState.projectID,
+      reqId: popupState.reqId,
       source: popupState.source,
       cg: popupState.cg,
+      MODAL_TYPE: popupState.MODAL_TYPE,
+      postedByName: popupState.postedByName,
+      title: popupState.title,
+      postedId: popupState.postedId,
     },
   ] as const;
 };

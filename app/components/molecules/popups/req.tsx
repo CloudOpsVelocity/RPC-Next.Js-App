@@ -11,7 +11,7 @@ import { reqSchema } from "@/app/validations/project";
 import { Button as B } from "@mantine/core";
 import { addContact, sendContact } from "@/app/utils/api/actions/contact";
 import { useParams } from "next/navigation";
-import { popupStateAtom } from "@/app/hooks/useReqCallPop";
+import { popupStateAtom, useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import { useShortlistAndCompare } from "@/app/hooks/storage";
 import { useAtomValue } from "jotai";
 import Image from "next/image";
@@ -25,21 +25,9 @@ import { NearByDataAtom } from "@/app/store/nearby";
 import reqStyles from "@/app/styles/Req.module.css";
 import { get_posted_by } from "@/app/utils/dyanamic/projects";
 import Close from "../../project/button/close";
-const RequestCallBackModal = ({
-  opened,
-  close,
-  builderName,
-  name,
-  source,
-}: {
-  opened: any;
-  close: any;
-  builderName: string;
-  name?: string;
-  source: string;
-  cg?: string;
-}) => {
+const RequestCallBackModal = () => {
   const isMobile = useMediaQuery("(max-width: 750px)");
+  const [opened, { close, source, open }] = useReqCallPopup();
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error" | "otp"
   >("idle");
@@ -104,9 +92,6 @@ const RequestCallBackModal = ({
                     close={close}
                     status={status}
                     setStatus={setStatus}
-                    name={builderName}
-                    projName={name}
-                    builderName={builderName}
                     source={source}
                   />
                 </div>
@@ -162,15 +147,7 @@ const Content = ({
     />
   );
 };
-const LoggedInUserForm = ({
-  close,
-  status,
-  setStatus,
-  name,
-  projName,
-  source,
-  builderName,
-}: any) => {
+const LoggedInUserForm = ({ status, setStatus }: any) => {
   const { pushToRequestCallbacks } = useShortlistAndCompare();
   const popupState = useAtomValue(popupStateAtom);
   const { data: session } = useSession();
@@ -182,8 +159,7 @@ const LoggedInUserForm = ({
     },
     validate: yupResolver(reqSchema),
   });
-  const propName = popupState.type === "prop" ? "propIdEnc" : "projIdEnc";
-  const isProjContact = popupState.type === "prop" ? "N" : "Y";
+
   console.log(popupState);
   let Posted_BY = get_posted_by(popupState.cg);
   const onSubmit = async () => {
@@ -192,12 +168,10 @@ const LoggedInUserForm = ({
       name: session?.user?.name,
       email: session?.user?.email,
       mobile: session?.user?.userName,
-      [propName]: popupState.projectID ?? "",
-      isProjContact: isProjContact,
-      src: popupState.source,
+      ...popupState,
     };
 
-    await pushToRequestCallbacks(popupState.projectID ?? "", async () => {
+    await pushToRequestCallbacks(popupState.reqId ?? "", async () => {
       const res = await sendContact(data);
     });
     setStatus("success");
@@ -206,9 +180,6 @@ const LoggedInUserForm = ({
     setStatus("success");
   };
 
-  const reqData = useAtomValue(NearByDataAtom);
-  let builder = source === "projCard" ? reqData?.builderName : builderName;
-  let title = source === "projCard" ? reqData?.projName : projName;
   return status === "otp" ? (
     <ReqOtpForm
       callback={onSuccess}
@@ -216,12 +187,10 @@ const LoggedInUserForm = ({
         name: session?.user?.name,
         email: session?.user?.email,
         mobile: session?.user?.userName,
-        [propName]: popupState.projectID ?? "",
-        isProjContact: isProjContact,
-        src: "searchCard",
+        ...popupState,
       }}
-      builderName={builder}
-      title={title}
+      builderName={popupState.postedByName}
+      title={popupState.title}
       Posted_BY={Posted_BY}
     />
   ) : (
@@ -231,13 +200,15 @@ const LoggedInUserForm = ({
           {" "}
           Call For:
         </span>{" "}
-        <span className="text-[14px] xl:text-[24px]">{title}</span>
+        <span className="text-[14px] xl:text-[24px]">{popupState.title}</span>
       </p>
       <p className="text-[#148B16] mb-[6%] text-[14px] xl:text-xl lg:text-[20px] italic font-bold leading-[normal] tracking-[0.64px]">
         <span className="text-[#4D6677] text-[18px] xl:text-xl italic font-medium leading-[normal] tracking-[0.8px]">
           {Posted_BY}:
         </span>{" "}
-        <span className="text-[14px] xl:text-[24px]">{builder}</span>
+        <span className="text-[14px] xl:text-[24px]">
+          {popupState.postedByName}
+        </span>
       </p>
       {/* Notifcation */}
       <div className=" flex justify-center items-center gap-2.5 border p-2.5 rounded-xl border-solid border-[#FFD600] bg-[#fff4bb] text-[#242424] text-[15px] xl:text-[17px] not-italic font-semibold leading-[normal] mb-6">
@@ -286,7 +257,6 @@ const ReqForm = ({
   builderName: string;
 }) => {
   const popupState = useAtomValue(popupStateAtom);
-  const reqData = useAtomValue(NearByDataAtom);
   const form = useForm({
     initialValues: {
       name: "",
@@ -295,24 +265,26 @@ const ReqForm = ({
     },
     validate: yupResolver(reqSchema),
   });
-  const propName = popupState.type === "prop" ? "propIdEnc" : "projIdEnc";
+  const propName =
+    popupState.MODAL_TYPE === "PROJECT_REQ_CALLBACK"
+      ? "propIdEnc"
+      : "projIdEnc";
   let Posted_BY = get_posted_by(popupState.cg);
-  const isProjContact = popupState.type === "prop" ? "N" : "Y";
+  const isProjContact =
+    popupState.MODAL_TYPE === "PROJECT_REQ_CALLBACK" ? "N" : "Y";
   const formSubmit = async (values: any) => {
     setStatus("pending");
     const data = await addContact({
       ...values,
-      isProjContact: isProjContact,
-      [propName]: popupState.projectID,
-      src: "searchcard",
+      ...popupState,
     });
     setStatus("otp");
   };
   const onSuccess = async () => {
     setStatus("success");
   };
-  const bn = source === "projCard" ? reqData.builderName : name;
-  const title = source === "projCard" ? reqData?.projName : projName;
+  const bn = popupState.postedByName;
+  const title = popupState.title;
   return status === "success" ? (
     <Success close={close} />
   ) : status === "otp" ? (
@@ -320,9 +292,7 @@ const ReqForm = ({
       callback={onSuccess}
       values={{
         ...form.values,
-        [propName]: popupState.projectID,
-        isProjContact: isProjContact,
-        src: "searchCard",
+        ...popupState,
       }}
       builderName={bn}
       title={title}
