@@ -38,21 +38,22 @@ export default function ProjData({
     propTypeName,
   )
   return type === "proj" ? (
-    <div>
-      {" "}
+    <div className="flex flex-col">
       <p className="text-[#148B16] text-[14px] xl:text-xl not-italic font-bold relative">
         {formatCurrency(Number(minPrice))} - {formatCurrency(Number(maxPrice))}
       </p>
-      <p className="text-[#001F35] text-[12px] text-wrap break-words  xl:text-[18px] not-italic font-semibold">
-        {projName}{" "}
+      <p className="text-[#001F35] text-[12px] xl:text-[18px] font-semibold break-words whitespace-normal min-w-0 ">
+        {projName}
       </p>
-      <p className="text-[#242424] text-[12px] xl:text-[18px] capitalize  not-italic font-medium">
+      <p className="text-[#242424] text-[12px] xl:text-[18px] capitalize font-medium">
         {`${locality}, ${city}`}
       </p>
-      <p className="text-[#242424]  text-[10px]  xl:text-[14px] not-italic font-normal">
+      <p className="text-[#242424] text-[10px] xl:text-[14px] font-normal">
         Posted By: <span className="font-bold">{builderName}</span>
       </p>
     </div>
+
+
   ) : (
     <div>
       <p className="text-[#148B16] text-[14px] xl:text-xl not-italic font-bold relative">

@@ -84,7 +84,7 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
           <div className=" space-y-1.5 p-6  px-4 pt-2 pb-3 justify-between items-center">
             <a
               target="_blank"
-              className="tracking-tight text-[18px] font-[600] text-[#565D70] cursor-pointer"
+              className="tracking-tight text-[18px] font-[600] text-wrap text-[#565D70] cursor-pointer"
               href={`/abc/karnataka/banglore/${reqId}`}
             >
               {cardData.propName}

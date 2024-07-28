@@ -16,6 +16,7 @@ import ListItem from "./pricingbreakup";
 import { usePricingPop } from "@/app/hooks/property/usePricingPop";
 import { useMediaQuery } from "@mantine/hooks";
 import { formatNumberIndian } from "./pricingbreakup/ListItem";
+import { parseOtherCharge } from "./pricingbreakup/PriceBreakup";
 export default function PropertyOverviewBanner({
   price,
   propTypeName,
@@ -50,18 +51,8 @@ export default function PropertyOverviewBanner({
             </p>
             <p className="text-[#001F35] sm:text-[24px] md:text-[32px] lg:text-[40px] whitespace-nowrap font-[700] mt-1">
               <span className="text-[#001F35] sm:text-[24px] md:text-[32px] lg:text-[40px] whitespace-nowrap font-[700] mt-1">
-                {cg === "S" ?formatCurrency(price) :formatNumberIndian(price)}
-                {/* {cg === "S" ? "," : ""} */}{" "}
-                {/*  <span className="text-[#545353] text-lg md:text-[32px] not-italic font-medium leading-[normal]">
-                  {cg === "S"
-                    ? `₹ ${pricePerSq} / sq.ft`
-                    : `+ ( ₹ ${
-                        otherPrice.securetyType == "M"
-                          ? (otherPrice.securityMonth as unknown as number) *
-                            price
-                          : otherPrice.security
-                      } Security Deposit )`}
-                </span> */}
+                {cg === "S" ?formatCurrency(price+parseOtherCharge(otherPrice?.otherCharge)) :formatNumberIndian(price+parseOtherCharge(otherPrice?.otherCharge)) }
+             
               </span>
             </p>
             <Button
@@ -78,7 +69,7 @@ export default function PropertyOverviewBanner({
                   className="  text-[#FFF] text-[12px] sm:text-[28px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px] "
                 >
                   {collapsed ? "Hide Price Break Up" : "Show Price Break Up"}{" "}
-                  {config.priceIcon}
+                {/*   {config.priceIcon} */}
                 </button>
               )}
               <WhatsAppButton
@@ -133,171 +124,171 @@ export default function PropertyOverviewBanner({
   );
 }
 
-const PriceBreakUp = ({
-  otherPrice,
-  price,
-}: {
-  otherPrice: Main["otherPrice"];
-  price: string;
-}) => {
-  const filterOtherDetails =
-    otherPrice &&
-    Object?.keys(otherPrice).filter(
-      (item) =>
-        ![
-          "otherCharge",
-          "price",
-          "securetyType",
-          "clubHouseTill",
-          "securityMonth",
-        ].includes(item) && otherPrice[item] !== "NA"
-    );
+// const PriceBreakUp = ({
+//   otherPrice,
+//   price,
+// }: {
+//   otherPrice: Main["otherPrice"];
+//   price: string;
+// }) => {
+//   const filterOtherDetails =
+//     otherPrice &&
+//     Object?.keys(otherPrice).filter(
+//       (item) =>
+//         ![
+//           "otherCharge",
+//           "price",
+//           "securetyType",
+//           "clubHouseTill",
+//           "securityMonth",
+//         ].includes(item) && otherPrice[item] !== "NA"
+//     );
 
-  const sum = filterOtherDetails?.reduce(
-    (a, b) =>
-      b !== "price" &&
-      !(b === "clubHouseCharge" && otherPrice.clubHouseCharge === "A")
-        ? Number(a) +
-          (b === "otherCharge"
-            ? parseOtherCharge(otherPrice[b])
-            : Number(otherPrice[b] || "0"))
-        : Number(a),
-    0
-  );
+//   const sum = filterOtherDetails?.reduce(
+//     (a, b) =>
+//       b !== "price" &&
+//       !(b === "clubHouseCharge" && otherPrice.clubHouseCharge === "A")
+//         ? Number(a) +
+//           (b === "otherCharge"
+//             ? parseOtherCharge(otherPrice[b])
+//             : Number(otherPrice[b] || "0"))
+//         : Number(a),
+//     0
+//   );
 
-  function parseOtherCharge(otherChargeString: string): number {
-    let sum = 0;
+//   function parseOtherCharge(otherChargeString: string): number {
+//     let sum = 0;
 
-    if (otherChargeString) {
-      const charges: string[] = otherChargeString.split(",");
-      charges.forEach((charge: string) => {
-        const parts: string[] = charge.split("|");
-        if (parts.length === 2) {
-          const value: number = parseFloat(parts[1].trim());
-          if (!isNaN(value)) {
-            sum += value;
-          }
-        }
-      });
-    }
+//     if (otherChargeString) {
+//       const charges: string[] = otherChargeString.split(",");
+//       charges.forEach((charge: string) => {
+//         const parts: string[] = charge.split("|");
+//         if (parts.length === 2) {
+//           const value: number = parseFloat(parts[1].trim());
+//           if (!isNaN(value)) {
+//             sum += value;
+//           }
+//         }
+//       });
+//     }
 
-    return sum;
-  }
-  const otherChangeTotal = parseOtherCharge(otherPrice?.otherCharge);
-  const chargesArray = otherPrice?.otherCharge?.split(",");
-  return (
-    <>
-      <div className="max-w-[90%] mx-auto p-6 bg-white rounded-lg shadow my-10">
-        <h2 className="text-[#202020] text-[32px] not-italic font-semibold leading-[normal] uppercase;">
-          PRICE BREAKUP
-        </h2>
-        <div className=" border-t border-gray-400 mt-4 space-y-4 py-5 ">
-          <h3 className="text-[#034AB6] text-[28px] not-italic font-bold leading-[normal] underline uppercase mb-[30px]">
-            PRICE / SQ.FT
-          </h3>
-          <ListItem
-            label="Price/SQ.FT"
-            value={price}
-            className="max-w-[747px] border-none"
-          />
-        </div>
+//     return sum;
+//   }
+//   const otherChangeTotal = parseOtherCharge(otherPrice?.otherCharge);
+//   const chargesArray = otherPrice?.otherCharge?.split(",");
+//   return (
+//     <>
+//       <div className="max-w-[90%] mx-auto p-6 bg-white rounded-lg shadow my-10">
+//         <h2 className="text-[#202020] text-[32px] not-italic font-semibold leading-[normal] uppercase;">
+//           PRICE BREAKUP
+//         </h2>
+//         <div className=" border-t border-gray-400 mt-4 space-y-4 py-5 ">
+//           <h3 className="text-[#034AB6] text-[28px] not-italic font-bold leading-[normal] underline uppercase mb-[30px]">
+//             PRICE / SQ.FT
+//           </h3>
+//           <ListItem
+//             label="Price/SQ.FT"
+//             value={price}
+//             className="max-w-[747px] border-none"
+//           />
+//         </div>
 
-        {sum > 0 && (
-          <>
-            <SVGBackground width={"100%"} className="my-8" />
-            <div className="w-full grid md:grid-cols-2 justify-between items-center">
-              <div className=" space-y-4 py-8 ">
-                <h3 className="text-[#034AB6] text-[28px] not-italic font-bold leading-[normal] underline uppercase mb-[30px]">
-                  applicable charges
-                </h3>
-                {filterOtherDetails?.map((key, i) => {
-                  return (
-                    <ListItem
-                      key={i}
-                      value={
-                        key === "security"
-                          ? Number(otherPrice[key]) *
-                            Number(otherPrice.securityMonth ?? 1)
-                          : key === "clubHouseCharge" &&
-                            otherPrice.clubHouseCharge === "A"
-                          ? "Lifetime"
-                          : (otherPrice[key] as string)
-                      }
-                      label={
-                        key === "clubHouseCharge"
-                          ? `${displayNameMap[key]} ${
-                              otherPrice.clubHouseCharge !== "A"
-                                ? `(${otherPrice?.clubHouseTill} year)`
-                                : ""
-                            } `
-                          : key === "security"
-                          ? `Security Deposit ${
-                              otherPrice.securetyType === "F"
-                                ? "Fixed"
-                                : otherPrice.securetyType === "M"
-                                ? "Multiple Of Rent"
-                                : "NA"
-                            }`
-                          : displayNameMap[key]
-                      }
-                      className={
-                        filterOtherDetails?.length - 1 === i
-                          ? "border-none"
-                          : ""
-                      }
-                    />
-                  );
-                })}
-              </div>
-              <SideCard price={sum + otherChangeTotal} />
-            </div>
-          </>
-        )}
+//         {sum > 0 && (
+//           <>
+//             <SVGBackground width={"100%"} className="my-8" />
+//             <div className="w-full grid md:grid-cols-2 justify-between items-center">
+//               <div className=" space-y-4 py-8 ">
+//                 <h3 className="text-[#034AB6] text-[28px] not-italic font-bold leading-[normal] underline uppercase mb-[30px]">
+//                   applicable charges
+//                 </h3>
+//                 {filterOtherDetails?.map((key, i) => {
+//                   return (
+//                     <ListItem
+//                       key={i}
+//                       value={
+//                         key === "security"
+//                           ? Number(otherPrice[key]) *
+//                             Number(otherPrice.securityMonth ?? 1)
+//                           : key === "clubHouseCharge" &&
+//                             otherPrice.clubHouseCharge === "A"
+//                           ? "Lifetime"
+//                           : (otherPrice[key] as string)
+//                       }
+//                       label={
+//                         key === "clubHouseCharge"
+//                           ? `${displayNameMap[key]} ${
+//                               otherPrice.clubHouseCharge !== "A"
+//                                 ? `(${otherPrice?.clubHouseTill} year)`
+//                                 : ""
+//                             } `
+//                           : key === "security"
+//                           ? `Security Deposit ${
+//                               otherPrice.securetyType === "F"
+//                                 ? "Fixed"
+//                                 : otherPrice.securetyType === "M"
+//                                 ? "Multiple Of Rent"
+//                                 : "NA"
+//                             }`
+//                           : displayNameMap[key]
+//                       }
+//                       className={
+//                         filterOtherDetails?.length - 1 === i
+//                           ? "border-none"
+//                           : ""
+//                       }
+//                     />
+//                   );
+//                 })}
+//               </div>
+//               <SideCard price={sum + otherChangeTotal} />
+//             </div>
+//           </>
+//         )}
 
-        {otherPrice?.otherCharge && (
-          <>
-            <SVGBackground width={"100%"} className="my-8" />
-            <div className="w-full grid md:grid-cols-2 justify-between ">
-              <div className="   space-y-4 py-8 ">
-                <h3 className="text-[#034AB6] text-[28px] not-italic font-bold leading-[normal] underline uppercase mb-[30px]">
-                  Other charges
-                </h3>
-                {chargesArray.map((charge, index) => {
-                  const [chargeName, chargeValue] = charge.split("|");
-                  return (
-                    <ListItem
-                      key={index}
-                      label={chargeName.trim()}
-                      value={chargeValue.trim()}
-                    />
-                  );
-                })}
-              </div>
-              <OtherSideCard price={sum + otherChangeTotal + Number(price)} />
-            </div>
-          </>
-        )}
-      </div>
-    </>
-  );
-};
+//         {otherPrice?.otherCharge && (
+//           <>
+//             <SVGBackground width={"100%"} className="my-8" />
+//             <div className="w-full grid md:grid-cols-2 justify-between ">
+//               <div className="   space-y-4 py-8 ">
+//                 <h3 className="text-[#034AB6] text-[28px] not-italic font-bold leading-[normal] underline uppercase mb-[30px]">
+//                   Other charges
+//                 </h3>
+//                 {chargesArray.map((charge, index) => {
+//                   const [chargeName, chargeValue] = charge.split("|");
+//                   return (
+//                     <ListItem
+//                       key={index}
+//                       label={chargeName.trim()}
+//                       value={chargeValue.trim()}
+//                     />
+//                   );
+//                 })}
+//               </div>
+//               <OtherSideCard price={sum + otherChangeTotal + Number(price)} />
+//             </div>
+//           </>
+//         )}
+//       </div>
+//     </>
+//   );
+// };
 
-const SideCard = ({ price }: { price: number }) => {
-  return (
-    <div
-      className=" text-[#4D6677] flex w-96 h-[197px] justify-center items-center shrink-0 pt-7 pb-[27px] px-[27px] border-[color:var(--White-1,#F1F1F1)] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[20px] border-[0.6px] border-solid;
-  background: var(--White-2, #fafafa) flex-col text-center ml-auto"
-    >
-      <p className="text-[color:var(--Pending,#F3A700)] text-center text-[22px] not-italic font-medium leading-[normal]">
-        The sum of total of your other charges you included in the &rdquo;Other
-        Charges Applicable&rdquo; is
-      </p>
-      <div className="mt-2 flex justify-center items-baseline text-[color:var(--newly-Added,#00ADE3)] text-[26px] not-italic font-bold leading-[normal] underline">
-        <span className="text-3xl font-bold">₹ {price}</span>
-      </div>
-    </div>
-  );
-};
+// const SideCard = ({ price }: { price: number }) => {
+//   return (
+//     <div
+//       className=" text-[#4D6677] flex w-96 h-[197px] justify-center items-center shrink-0 pt-7 pb-[27px] px-[27px] border-[color:var(--White-1,#F1F1F1)] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[20px] border-[0.6px] border-solid;
+//   background: var(--White-2, #fafafa) flex-col text-center ml-auto"
+//     >
+//       <p className="text-[color:var(--Pending,#F3A700)] text-center text-[22px] not-italic font-medium leading-[normal]">
+//         The sum of total of your other charges you included in the &rdquo;Other
+//         Charges Applicable&rdquo; is
+//       </p>
+//       <div className="mt-2 flex justify-center items-baseline text-[color:var(--newly-Added,#00ADE3)] text-[26px] not-italic font-bold leading-[normal] underline">
+//         <span className="text-3xl font-bold">₹ {price}</span>
+//       </div>
+//     </div>
+//   );
+// };
 
 const OtherSideCard = ({ price }: { price: number }) => {
   return (
@@ -315,23 +306,23 @@ const OtherSideCard = ({ price }: { price: number }) => {
     </div>
   );
 };
-type DisplayNameMap = {
-  [key: string]: string;
-};
-const displayNameMap: DisplayNameMap = {
-  clubHouseCharge: "Club House Subscription",
-  mncCharge: "Maintenance & Corpus Fund",
-  taxGovtCharge: "Tax & Government Charges",
-  ownershipCharge: "Ownership Transfer Fees",
-  legalCharge: "Legal Charges",
-  otherCharge: "otherCharge",
-  elctCharge: "Electricity Charges",
-  waterCharge: "Water Charges",
-  maintananceChargess: "Maintenance Charges",
-  securetyType: "securetyType",
-  security: "Security Deposit",
-  securityMonth: "securityMonth",
-};
+// type DisplayNameMap = {
+//   [key: string]: string;
+// };
+// const displayNameMap: DisplayNameMap = {
+//   clubHouseCharge: "Club House Subscription",
+//   mncCharge: "Maintenance & Corpus Fund",
+//   taxGovtCharge: "Tax & Government Charges",
+//   ownershipCharge: "Ownership Transfer Fees",
+//   legalCharge: "Legal Charges",
+//   otherCharge: "otherCharge",
+//   elctCharge: "Electricity Charges",
+//   waterCharge: "Water Charges",
+//   maintananceChargess: "Maintenance Charges",
+//   securetyType: "securetyType",
+//   security: "Security Deposit",
+//   securityMonth: "securityMonth",
+// };
 
 const config = {
   priceIcon: (

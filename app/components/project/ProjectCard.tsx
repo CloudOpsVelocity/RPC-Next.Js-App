@@ -78,7 +78,7 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
       <div
         key={reqId}
         className={clsx(
-          "border text-card-foreground min-w-[310px]   min-h-[400px]  mb-[1%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[14px]",
+          "border text-card-foreground min-w-[310px] max-w-full   min-h-[400px] md:max-w-[494px]   mb-[1%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[14px]",
           type == "proj" ? "bg-[#FAFAFA] " : "bg-[#FFFEFE] pt-4"
         )}
       >
@@ -86,7 +86,7 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
           <div className=" space-y-1.5 p-6  px-4 pt-2 pb-3 justify-between items-center">
             <a
               target="_blank"
-              className="tracking-tight sm:text-[18px] font-[600] text-[#242424] cursor-pointer"
+              className="tracking-tight sm:text-[18px] font-[600] line-clamp-2 text-wrap min-w-0 text-[#242424] cursor-pointer"
               href={`/abc/karnataka/banglore/${reqId}`}
             >
               {cardData.projName}
@@ -266,7 +266,7 @@ const ProjectCarousel = ({
           {data &&
             data?.map((project: any, index: number) => {
               return (
-                <CarouselSlide className="!h-auto md:!h-[600px]">
+                <CarouselSlide className="!h-auto md:!h-[600px] ">
                   <ProjectCard
                     key={index}
                     type={type}

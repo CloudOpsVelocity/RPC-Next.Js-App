@@ -37,6 +37,9 @@
   line-height: normal;
 }
 /* width */
+.text-wrap {
+  text-wrap: wrap !important;/* or break-word for older browsers */
+}
 
 @media screen and (max-width: 768px) {
   .cursive {

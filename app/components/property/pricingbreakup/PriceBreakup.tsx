@@ -49,24 +49,7 @@ export default function PriceBreakup({
     0
   );
 
-  function parseOtherCharge(otherChargeString: string): number {
-    let sum = 0;
 
-    if (otherChargeString) {
-      const charges: string[] = otherChargeString.split(",");
-      charges.forEach((charge: string) => {
-        const parts: string[] = charge.split("|");
-        if (parts.length === 2) {
-          const value: number = parseFloat(parts[1].trim());
-          if (!isNaN(value)) {
-            sum += value;
-          }
-        }
-      });
-    }
-
-    return sum;
-  }
   const otherChangeTotal = parseOtherCharge(otherPrice?.otherCharge);
   const chargesArray = otherPrice?.otherCharge?.split(",");
   const [opened, { close }] = usePricingPop();
@@ -124,4 +107,22 @@ export default function PriceBreakup({
       {/* Drawer content */}
     </Drawer>
   );
+}
+export function parseOtherCharge(otherChargeString: string): number {
+  let sum = 0;
+
+  if (otherChargeString) {
+    const charges: string[] = otherChargeString.split(",");
+    charges.forEach((charge: string) => {
+      const parts: string[] = charge.split("|");
+      if (parts.length === 2) {
+        const value: number = parseFloat(parts[1].trim());
+        if (!isNaN(value)) {
+          sum += value;
+        }
+      }
+    });
+  }
+
+  return sum;
 }
