@@ -16,7 +16,7 @@ export default function PartialUnitModal() {
   const reset = useResetAtom(selectedPartialUnitAtom);
   const selectedOne = isData.others[isData.main];
   const isMobile = useMediaQuery("(max-width: 601px)");
-  if(!(isData.main === 0 ? true : isData.main)){
+  if (!(isData.main === 0 ? true : isData.main)) {
     return null;
   }
 
@@ -25,8 +25,7 @@ export default function PartialUnitModal() {
       opened={isData.main === 0 ? true : isData.main}
       onClose={reset}
       classNames={S}
-      size={isMobile ?"100%":"60%"}
-      
+      size={isMobile ? "100%" : "60%"}
     >
       <div className="w-full bg-transparent     h-[57px] flex items-center justify-between  z-[1000] md:px-10 max-w-[91rem] m-auto">
         <div className="text-[18px] sm:text-2xl not-italic font-bold leading-[normal]">
@@ -65,13 +64,13 @@ export default function PartialUnitModal() {
           />
         </div>
       </div>
-      <div className="flex w-[90%] h-[438px] justify-end items-center rounded border   pb-[21px] border-solid border-[#4D6677] m-auto">
+      <div className="flex  items-center w-[90%] h-[438px]  justify-center rounded border   pb-[21px] border-solid border-[#4D6677] m-auto">
         <Image
-          src={selectedOne?.floorPlan??ImgNotAvail}
+          src={selectedOne?.floorPlan ?? ImgNotAvail}
           width={500}
           height={500}
           alt="image"
-          className="w-full h-full object-cover"
+          className=" object-contain"
         />
       </div>
       <div className="flex flex-wrap  w-[90%] m-auto items-center gap:2  md:gap-5 shadow-[0px_4px_20px_0px_#F0F6FF] px-4 md:py-2.5 rounded-[10px] bg-[#F4FBFF] mt-3 mb-3">
