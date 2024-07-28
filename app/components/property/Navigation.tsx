@@ -1,5 +1,6 @@
 "use client";
-import { Propertytopics as topics } from "@/app/data/projectDetails";
+import { listingProps, Propertytopics as topics } from "@/app/data/projectDetails";
+import useNearby from "@/app/hooks/property/useNearBy";
 import useRatings from "@/app/hooks/useRatings";
 import { Main } from "@/app/validations/types/project";
 import clsx from "clsx";
@@ -13,10 +14,23 @@ export default function Navigation({
   detailsData,
   projData,
   relateProjData,
+  lat,
+  lng,
+  projId,
+  cg,
+  propTypeName,
+  bhkId,
 }: {
   detailsData: any;
   projData: boolean;
   relateProjData: any;
+  projName: string;
+  lat: string;
+  lng: string;
+  projId?: string;
+  cg: string;
+  propTypeName: string;
+  bhkId: number
 }) {
   const { data } = useRatings();
   const [currentBlock, setCurrentBlock] = useAtom(currentBlockAtom);
@@ -32,6 +46,16 @@ export default function Navigation({
       setLeftScroll((scrollContainerRef.current.scrollLeft += scrollAmount));
     }
   }
+
+  const { data:similarData, mutate } = useNearby({
+    lat,
+    lng,
+    projId,
+    cg,
+    bhkId,
+    propType: listingProps[propTypeName.trim() as keyof typeof listingProps],
+  });
+  let SimilatListingAvl=(similarData?.otherListing.length > 1 || similarData?.projListing.length > 1);
   useEffect(() => {
     function handleScroll() {
       const currentScrollY = window.scrollY;
@@ -113,9 +137,12 @@ export default function Navigation({
     { condtion: projData, key: "projectDetails" },
     { condtion: projData, key: "aboutBuilder" },
     { condtion: projData, key: "faq" },
-    { condtion: true, key: "similarListing" },
+    { condtion: SimilatListingAvl, key: "similarListing" },
     { condtion: projData, key: "similar" },
   ];
+
+
+  
   return (
     <div
       className={clsx(

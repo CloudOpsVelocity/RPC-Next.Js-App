@@ -44,6 +44,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
   if (!data.propIdEnc) {
     notFound();
   }
+ 
   return (
     <div className="w-full">
       <div className="mt-[90px] w-full pb-[2%] flex items-center justify-center flex-col">
@@ -67,6 +68,13 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             detailsData={data}
             projData={!!data.projIdEnc}
             relateProjData={projData}
+            projName={data.propName}
+            lat={projData?.lat ?? data.lat}
+            lng={projData?.lang ?? data.lang}
+            projId={data.projIdEnc}
+            cg={data.cg}
+            propTypeName={data.propTypeName}
+            bhkId={data.bhkId ?? 41}
           />
         </MobileHidden>
         {/* Overview */}

@@ -247,7 +247,7 @@ function Agent() {
               label="Your Name"
               placeholder="Enter your name here"
               {...form.getInputProps("userName")}
-              onBlur={(e) => handleTrimAndReplace(e, "userName", form)}
+              onBlurCapture={(e) => handleTrimAndReplace(e, "userName", form)}
               classNames={{
                 root: StepCss.inputRoot,
                 input: StepCss.textInput,
@@ -262,7 +262,7 @@ function Agent() {
               label="Email"
               placeholder="Enter your email here"
               {...form.getInputProps("email")}
-              onBlur={(e) => handleTrimAndReplace(e, "email", form)}
+              onBlurCapture={(e) => handleTrimAndReplace(e, "email", form)}
               classNames={{
                 root: StepCss.inputRoot,
                 input: StepCss.textInput,
@@ -288,7 +288,7 @@ function Agent() {
               visibilityToggleIcon={({ reveal }) =>
                 reveal ? <EyeOpen /> : <EyeClosed />
               }
-              onBlur={(e) => handleTrimAndReplace(e, "password", form)}
+              onBlurCapture={(e) => handleTrimAndReplace(e, "password", form)}
             />
             <NumberInput
               leftSection={

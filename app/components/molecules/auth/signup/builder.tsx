@@ -387,7 +387,7 @@ function Builder() {
               label="Builder Name"
               placeholder="Enter builder name here"
               {...form.getInputProps("userName")}
-              onBlur={(e) => handleTrimAndReplace(e, "userName", form)}
+              onBlurCapture={(e) => handleTrimAndReplace(e, "userName", form)}
               classNames={{
                 root: StepCss.inputRoot,
                 input: StepCss.textInput,
@@ -403,7 +403,7 @@ function Builder() {
               label="Email"
               placeholder="Enter your email here"
               {...form.getInputProps("email")}
-              onBlur={(e) => handleTrimAndReplace(e, "email", form)}
+              onBlurCapture={(e) => handleTrimAndReplace(e, "email", form)}
               classNames={{
                 root: StepCss.inputRoot,
                 input: StepCss.textInput,
@@ -427,7 +427,7 @@ function Builder() {
               visibilityToggleIcon={({ reveal }) =>
                 reveal ? <EyeOpen /> : <EyeClosed />
               }
-              onBlur={(e) => handleTrimAndReplace(e, "password", form)}
+              onBlurCapture={(e) => handleTrimAndReplace(e, "password", form)}
             />
             <NumberInput
               leftSection={

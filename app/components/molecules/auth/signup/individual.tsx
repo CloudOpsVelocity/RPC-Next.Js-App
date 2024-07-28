@@ -123,7 +123,7 @@ function Individual() {
                 label="Your Name"
                 placeholder="Enter your name here"
                 {...form.getInputProps("name")}
-                onBlur={(e) => handleTrimAndReplace(e, "name", form)}
+      onBlurCapture={(e) => handleTrimAndReplace(e, "name", form)}
                 classNames={{
                   root: StepCss.inputRoot,
                   input: StepCss.textInput,
@@ -139,7 +139,7 @@ function Individual() {
                 label="Email"
                 placeholder="Enter your email here"
                 {...form.getInputProps("email")}
-                onBlur={(e) => handleTrimAndReplace(e, "email", form)}
+                onBlurCapture={(e) => handleTrimAndReplace(e, "email", form)}
                 classNames={{
                   root: StepCss.inputRoot,
                   input: StepCss.textInput,
@@ -167,7 +167,7 @@ function Individual() {
                   reveal ? <EyeOpen /> : <EyeClosed />
                 }
                 {...form.getInputProps("password")}
-                onBlur={(e) => handleTrimAndReplace(e, "password", form)}
+                onBlurCapture={(e) => handleTrimAndReplace(e, "password", form)}
               />
               <NumberInput
                 leftSection={
