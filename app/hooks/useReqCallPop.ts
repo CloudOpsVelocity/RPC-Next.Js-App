@@ -31,6 +31,7 @@ export const useReqCallPopup = () => {
     source,
     title,
     postedId,
+    projUnitIdEnc,
   }: {
     reqId: string;
     source: "projBanner" | "projCard" | "propCard" | "propBanner";
@@ -48,7 +49,7 @@ export const useReqCallPopup = () => {
       postedByName,
       title,
       postedId,
-      projUnitIdEnc: modal_type === "REQ_QUOTE" ? reqId : undefined,
+      projUnitIdEnc: modal_type === "REQ_QUOTE" ? projUnitIdEnc : undefined,
     });
   };
 

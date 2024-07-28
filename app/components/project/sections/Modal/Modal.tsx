@@ -20,6 +20,7 @@ export default function PartialUnitModal({ data }: any) {
   const isMobile = useMediaQuery("(max-width: 601px)");
   const { handleDownload } = useDownload("floorPlan");
   const [, { open }] = useReqCallPopup();
+  console.log(selectedOne);
   if (!(isData.main === 0 ? true : isData.main)) {
     return null;
   }
@@ -88,11 +89,11 @@ export default function PartialUnitModal({ data }: any) {
             open({
               modal_type: "REQ_QUOTE",
               postedByName: data.postedByName,
-              postedId: selectedOne?.builderId,
+              projUnitIdEnc: selectedOne?.projUnitIdEnc,
+              postedId: data.builderId,
               reqId: data.projIdEnc,
               source: "projBanner",
               title: data.projectName,
-              projUnitIdEnc: selectedOne?.projUnitIdEnc,
             })
           }
         >

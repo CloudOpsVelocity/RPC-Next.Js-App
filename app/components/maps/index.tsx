@@ -22,6 +22,7 @@ import {
 } from "@/app/data/map";
 import { RecenterIcon } from "@/app/images/commonSvgs";
 import { useMediaQuery } from "@mantine/hooks";
+import clsx from "clsx";
 
 const Map = ({
   data,
@@ -32,13 +33,17 @@ const Map = ({
   setSelectedLocation,
   type,
   selected,
+  className,
 }: any) => {
   const position: LatLngTuple = [lat, lang];
   return (
     <MapContainer
       center={position}
       zoom={13}
-      className=" h-[291px] sm:h-[700px] w-full z-[1] relative"
+      className={clsx(
+        " h-[291px] sm:h-[700px] w-full z-[1] relative",
+        className
+      )}
       scrollWheelZoom={true}
     >
       <button

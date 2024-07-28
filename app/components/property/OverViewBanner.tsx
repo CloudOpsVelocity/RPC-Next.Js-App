@@ -35,9 +35,31 @@ export default function PropertyOverviewBanner({
   const [opened, { open, close, source }] = useReqCallPopup();
   const [collapsed, { open: toggle }] = usePricingPop();
   const { slug } = useParams<{ slug: string }>();
-  const pricePerSq = calculatePerSqPrice(
-    price,
-    propTypeName === "Plot" ? plotArea : sba
+  const filterOtherDetails =
+    otherPrice &&
+    Object?.keys(otherPrice).filter(
+      (item) =>
+        ![
+          "otherCharge",
+          "price",
+          "securetyType",
+          "clubHouseTill",
+          "securityMonth",
+          "security",
+        ].includes(item)
+    );
+  const sum = filterOtherDetails?.reduce(
+    (a, b) =>
+      b !== "price" &&
+      !(b === "clubHouseCharge" && otherPrice.clubHouseCharge === "A") &&
+      otherPrice[b] !== "NA" &&
+      otherPrice[b] !== "A"
+        ? Number(a) +
+          (b === "otherCharge"
+            ? parseOtherCharge(otherPrice[b])
+            : Number(otherPrice[b] || "0"))
+        : Number(a),
+    0
   );
   const isMobile = useMediaQuery("(max-width: 601px)");
   return (
@@ -55,10 +77,10 @@ export default function PropertyOverviewBanner({
               <span className="text-[#001F35] sm:text-[24px] md:text-[32px] lg:text-[40px] whitespace-nowrap font-[700] mt-1">
                 {cg === "S"
                   ? formatCurrency(
-                      price + parseOtherCharge(otherPrice?.otherCharge)
+                      price + parseOtherCharge(otherPrice?.otherCharge) + sum
                     )
                   : formatNumberIndian(
-                      price + parseOtherCharge(otherPrice?.otherCharge)
+                      price + parseOtherCharge(otherPrice?.otherCharge) + sum
                     )}
               </span>
             </p>
