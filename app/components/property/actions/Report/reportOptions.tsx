@@ -1,26 +1,32 @@
 import React from "react";
 import { Checkbox } from "@mantine/core";
+import clsx from "clsx";
 type Props = {
   issueData: any;
   reportIssuseFun: any;
   reportStatus: number[];
-  errorMsg:boolean
+  errorMsg: boolean;
 };
 
 export default function ReportOptions({
   issueData,
   reportIssuseFun,
   reportStatus,
-  errorMsg
+  errorMsg,
 }: Props) {
   return (
     <div>
       <hr className="bg-blue-300 w-[98%] mb-2 h-[2px]" />
-      <p className="text-black-900 font-montserrat text-base  font-semibold leading-norma">
-     { errorMsg?  "Select atLeast one CheckBox" :"Select issue from below:"}
+      <p
+        className={clsx(
+          "text-black-900 font-montserrat text-base  font-semibold leading-normal",
+          errorMsg && "text-red-500"
+        )}
+      >
+        {errorMsg ? "Select at Least one CheckBox" : "Select issue from below:"}
       </p>
 
-      <div className="flex flex-row flex-wrap m-[1%] justify-start items-start gap-[1%] w-full ">
+      <div className="flex flex-row flex-wrap my-[1%] justify-start items-start gap-[1%] w-full ">
         {issueData?.map((x: any, i: number) => {
           return (
             <div
@@ -30,17 +36,18 @@ export default function ReportOptions({
               <Checkbox
                 key={x.cid}
                 label={x.constDesc}
-                color={`${reportStatus.includes == x.cid?"#0073C6" : "green"}`}
+                color={`${
+                  reportStatus.includes == x.cid ? "#0073C6" : "green"
+                }`}
                 classNames={{
                   label: `text-[13px] leading-normal capitalize font-feature-settings-[clig off] font-[Montserrat] ${
-                    reportStatus.find(item => item === x.cid)
-                   /*  reportStatus.includes(x.cid) */
-                    ? '!text-[#0073C6] !font-bold'
-                      : '!text-[#242424]'
+                    reportStatus.find((item) => item === x.cid)
+                      ? /*  reportStatus.includes(x.cid) */
+                        "!text-[#0073C6] !font-bold"
+                      : "!text-[#242424]"
                   }`,
                 }}
                 checked={reportStatus.includes(x.cid)}
-                
                 onClick={() => reportIssuseFun(x.cid)}
               />
             </div>

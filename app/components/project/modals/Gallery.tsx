@@ -77,7 +77,7 @@ const Gallery: React.FC<GalleryProps> = ({
         }}
         className="!styleScroll"
       >
-        <div className="h-auto w-full scrollbar-hide flex justify-end flex-col items-center min-w-[321px] max-w-[1388px]  ">
+        <div className="h-auto w-full scrollbar-hide flex justify-center flex-col items-center  ">
           <div
             className={`w-full bg-transparent h-[57px] flex items-center justify-between min-w-[321px] mt-[26px] z-[1000] px-0.5 m-auto ${
               !isImage && isMobile ? "mt-50%" : "mt-[10%]"
@@ -119,7 +119,7 @@ const Gallery: React.FC<GalleryProps> = ({
           )}
 
           {/* Bottom Image Sliders */}
-          <div className="mt-4 flex items-center justify-center  w-full">
+          <div className="mt-4 flex items-center justify-center w-full">
             <Carousel
               classNames={styles}
               height={100}
@@ -177,20 +177,20 @@ const Gallery: React.FC<GalleryProps> = ({
                         setCurrentSlide(index);
                       }}
                     >
-                      <div className={`relative `}>
+                      <div className={`relative flex items-center w-full justify-center border-1 border-solid border-white `}>
                         <video
                           key={index}
                           width={150}
                           height={100}
                           src={video as string}
                           //alt={`Image ${index + 1}`}
-                          className={`cursor-pointer sm:h-full w-full min-w-[150px] rounded-[5px] !h-auto max-h-[100px] min-h-[100px] object-cover  ${
+                          className={`cursor-pointer border-1 border-solid border-white sm:h-full w-full min-w-[150px] rounded-[5px] !h-auto max-h-[100px] min-h-[100px] object-cover  ${
                             currentSlide === index
                               ? "border-[4px] border-white"
                               : ""
                           }`}
                         />
-                        <span className="absolute top-[25%] md:top-[40%] left-[30%] md:left-[40%] h-[18px] w-[18px] md:h-[26px] md:w-[26px] pointer-events-none ">
+                        <span className="absolute h-[18px] w-[18px] md:h-[26px] md:w-[26px] z-[1000] pointer-events-none ">
                           {videoPlayIcon}
                         </span>
                       </div>

@@ -8,15 +8,12 @@ type Props = {
   partialUnitData: any;
 };
 
-
 export default function MainSection({ partialUnitData }: Props) {
   return (
-    <div>
+    <div className="mt-6">
       <InFoCarousel partialUnitData={partialUnitData} />
-      {/* <CardCarousel partialUnitData={partialUnitData} />
-      <PartialUnitModal /> */}
-
-    
+      {/* <CardCarousel partialUnitData={partialUnitData} />*/}
+      <PartialUnitModal />
     </div>
   );
 }

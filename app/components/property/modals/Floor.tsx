@@ -32,7 +32,7 @@ function PFloorPlanModal({
   return (
     <>
       <Modal
-        centered={isMobile ? true : false}
+        centered
         opened={opened}
         size={isMobile ? "100%" : "90%"}
         padding={0}
@@ -46,15 +46,15 @@ function PFloorPlanModal({
         }}
         title="Floor Plan"
       >
-        <div className="flex mb-[8%]   xl:mb-0 justify-center items-start  xl:gap-[45px] shrink-0 flex-wrap md:flex-nowrap relative pt-0 md:pt-[60px] pb-0 md:pb-4">
-          <div className="w-full h-[66px]  xl:h-[57px] flex items-center justify-between  z-[1000] px-3 xl:px-8 absolute top-0 right-0 pb-4 xl:pt-2">
-            <div className="text-[#333] text-left text-[18px]  xl:text-[20px] xl:text-2xl not-italic font-semibold leading-[normal]">
+        <div className="flex mb-[8%]   xl:mb-6 justify-center items-start  xl:gap-[45px] shrink-0 flex-wrap md:flex-nowrap relative pt-0 md:pt-[80px] pb-0 md:pb-[30px]">
+          <div className="w-full h-[66px]  xl:h-[57px] flex items-center justify-between  z-[1000] px-3 xl:px-8 absolute top-2 right-0 pb-4 xl:pt-2">
+            <div className="text-[#333] text-left text-[14px] sm:text-[20px]  xl:text-[22px] xl:text-2xl not-italic font-semibold leading-[normal]">
               Floor Plan
             </div>
             <div className="flex justify-center items-center gap-5">
               <button
                 onClick={() => handleDownload(data.projMedia.floorPlanUrl)}
-                className={`text-white flex justify-center text-[12px] xl:text-base items-center xl:gap-1 p-1 xl:p-2 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] rounded-[6px] xl:rounded-[10px] bg-[#0073c6] `}
+                className={`text-white flex justify-center text-[12px] xl:text-base items-center xl:gap-1 p-1 xl:p-2 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] rounded-[6px] font-semibold xl:rounded-[10px] bg-[#0073c6] `}
               >
                 {isMobile ? "Download Floor Plan" : "Download"}
               </button>
@@ -175,7 +175,7 @@ const RightSection = ({ propCgId }: any) => {
               }`}{" "}
               <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                 {" "}
-                {`${data.isBasement ? "B+" : ""}${
+                {`${data.isBasement == "Y" ? "B+" : ""}${
                   data?.floor === 0
                     ? "G"
                     : propCgId === projectprops.rowHouse ||

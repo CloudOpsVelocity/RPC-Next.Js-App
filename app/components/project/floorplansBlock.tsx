@@ -216,13 +216,14 @@ export default function FloorplansBlock({
   useEffect(() => {
     if (
       projectUnitsData &&
-      projectUnitsData.length > 0 &&
-      type !== "overview" &&
-      floorPlanType !== "unit"
+      projectUnitsData.length > 0
+      // &&
+      // type !== "overview" &&
+      // floorPlanType !== "unit"
     ) {
       setSelectedFloor(projectUnitsData[0]);
     }
-  }, [projectUnitsData]);
+  }, [projectUnitsData, propCgId]);
   useEffect(() => {
     // @ts-ignore
     types?.length > 0 && setPropCgId(BACKEND_PROP_TYPES[`${types[0]}`]);
@@ -649,7 +650,13 @@ export default function FloorplansBlock({
                     </div>
 
                     {/* add trext here */}
-                    <p className="hidden sm:block text-[12px] lg:text-[14px] font-[600] text-[#0073C6] underline ">
+                    <p
+                      className="hidden sm:block text-[12px] lg:text-[14px] font-[600] text-[#0073C6] underline cursor-pointer"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleOpen();
+                      }}
+                    >
                       Click on image to open floor plan details
                     </p>
 

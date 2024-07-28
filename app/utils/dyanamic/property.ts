@@ -6,7 +6,7 @@ function createPropertyString(data: Main): string {
     data.propTypeName === config.propTypeNames[2]
   ) {
     return `${data.propName} | ${data.bhkName} | Elevation ${
-      data.isBasement ? "B+" : ""
+      data.isBasement == "Y" ? "B+" : ""
     }G+${data.atFloor} | Unit No. ${data.unitNumber} | ${
       data.facingName
     } | Area: ${data.sba} sq.ft`;
