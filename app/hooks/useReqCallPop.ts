@@ -8,6 +8,7 @@ interface PopupState {
   postedByName: string;
   title: string;
   postedId: number | null;
+  projUnitIdEnc?: string;
 }
 
 export const popupStateAtom = atom<PopupState>({
@@ -37,6 +38,7 @@ export const useReqCallPopup = () => {
     postedByName: string;
     title: string;
     postedId: number;
+    projUnitIdEnc?: string;
   }) => {
     setPopupState({
       opened: true,
@@ -46,6 +48,7 @@ export const useReqCallPopup = () => {
       postedByName,
       title,
       postedId,
+      projUnitIdEnc: modal_type === "REQ_QUOTE" ? reqId : undefined,
     });
   };
 
@@ -65,6 +68,7 @@ export const useReqCallPopup = () => {
       postedByName: popupState.postedByName,
       title: popupState.title,
       postedId: popupState.postedId,
+      projUnitIdEnc: popupState.projUnitIdEnc,
     },
   ] as const;
 };

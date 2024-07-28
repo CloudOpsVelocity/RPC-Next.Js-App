@@ -210,6 +210,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             partialUnitData={data.partialUnitData}
             projName={data.projectName}
             phaseList={data.phases}
+            data={data}
           />
         )}
 

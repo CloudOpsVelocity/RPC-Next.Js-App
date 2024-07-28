@@ -8,11 +8,27 @@ type Props = {
   src: string;
 };
 
-export const addContact = async (data: Props) => {
+export const addContact = async (data: any) => {
   console.log(data);
+  const reqKey =
+    data.MODAL_TYPE == "PROJECT_REQ_CALLBACK" || data.MODAL_TYPE === "REQ_QUOTE"
+      ? "projIdEnc"
+      : "propIdEnc";
+  const reqData = {
+    name: data.name,
+    email: data.email,
+    mobile: data.mobile,
+    isProjContact:
+      data.MODAL_TYPE == "PROJECT_REQ_CALLBACK" ||
+      data.MODAL_TYPE === "REQ_QUOTE"
+        ? "Y"
+        : "N",
+    [reqKey]: data.reqId,
+    src: sourceMap.get(data.source),
+  };
   const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/contact/v1/sendContactOtp`;
   try {
-    const response = await axios.post(url, data);
+    const response = await axios.post(url, reqData);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -22,7 +38,9 @@ export const addContact = async (data: Props) => {
 export const sendContact = async (data: any) => {
   console.log(data);
   const reqKey =
-    data.MODAL_TYPE == "PROJECT_REQ_CALLBACK" ? "projIdEnc" : "propIdEnc";
+    data.MODAL_TYPE == "PROJECT_REQ_CALLBACK" || data.MODAL_TYPE === "REQ_QUOTE"
+      ? "projIdEnc"
+      : "propIdEnc";
   let reqData = {
     name: data.name,
     email: data.email,
@@ -32,6 +50,7 @@ export const sendContact = async (data: any) => {
     conType: data.MODAL_TYPE == "REQ_QUOTE" ? "priceQuote" : "callback",
     src: sourceMap.get(data.source),
     postedBy: data.postedId,
+    ...(data.projUnitIdEnc && { projUnitIdEnc: data.projUnitIdEnc }),
     ...(data.otp && { otp: data.otp }),
   };
   const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/contact/v1/generate-contact`;

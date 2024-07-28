@@ -12,12 +12,14 @@ import { ImgNotAvail } from "@/app/data/project";
 import { propertyDetailsSvgs } from "@/app/images/commonSvgs";
 import CarouselModal from "./Carousel";
 import useDownload from "@/app/hooks/property/useDownload";
-export default function PartialUnitModal() {
+import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
+export default function PartialUnitModal({ data }: any) {
   const isData = useAtomValue(selectedPartialUnitAtom);
   const reset = useResetAtom(selectedPartialUnitAtom);
   const selectedOne = isData.others[isData.main];
   const isMobile = useMediaQuery("(max-width: 601px)");
   const { handleDownload } = useDownload("floorPlan");
+  const [, { open }] = useReqCallPopup();
   if (!(isData.main === 0 ? true : isData.main)) {
     return null;
   }
@@ -28,13 +30,14 @@ export default function PartialUnitModal() {
       onClose={reset}
       classNames={S}
       size={isMobile ? "100%" : "60%"}
+      zIndex={1}
     >
       <div className="w-full bg-transparent     h-[57px] flex items-center justify-between  z-[1000] md:px-10 max-w-[91rem] m-auto">
         <div className="text-[18px] sm:text-2xl not-italic font-bold leading-[normal]">
           Floor Plan
         </div>
         <div className="flex justify-center items-center  gap-5">
-          {selectedOne.floorPlan && (
+          {selectedOne?.floorPlan && (
             <>
               <button
                 className="flex justify-center items-center gap-1 p-1 xl:p-2 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] rounded-[10px] bg-[#F3F7FF] text-[#0073C6] text-base not-italic font-semibold leading-[normal] tracking-[0.32px]"
@@ -71,7 +74,7 @@ export default function PartialUnitModal() {
           />
         </div>
       </div>
-      <div className="flex  items-center w-[90%] h-[438px]  justify-center rounded border   pb-[21px] border-solid border-[#4D6677] m-auto">
+      <div className="flex  items-center w-[90%] h-[438px]  justify-center rounded border   pb-[21px] border-solid border-[#4D6677] m-auto relative">
         <Image
           src={selectedOne?.floorPlan ?? ImgNotAvail}
           width={500}
@@ -79,6 +82,22 @@ export default function PartialUnitModal() {
           alt="image"
           className=" object-contain"
         />
+        <button
+          className="flex justify-center items-center gap-1 rounded shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] p-2 bg-[#0073C6] text-white text-base not-italic font-semibold absolute top-2 right-2"
+          onClick={() =>
+            open({
+              modal_type: "REQ_QUOTE",
+              postedByName: data.postedByName,
+              postedId: selectedOne?.builderId,
+              reqId: data.projIdEnc,
+              source: "projBanner",
+              title: data.projectName,
+              projUnitIdEnc: selectedOne?.projUnitIdEnc,
+            })
+          }
+        >
+          Request Quotation
+        </button>
       </div>
       <div className="flex flex-wrap  w-[90%] m-auto items-center gap:2  md:gap-5 shadow-[0px_4px_20px_0px_#F0F6FF] px-4 md:py-2.5 rounded-[10px] bg-[#F4FBFF] mt-3 mb-3">
         <div className="flex items-center space-x-3">

@@ -6,12 +6,14 @@ type Props = {
   partialUnitData: any;
   projName: string;
   phaseList: any;
+  data: any;
 };
 
 export default function PartialUnitData({
   partialUnitData,
   projName,
   phaseList,
+  data,
 }: Props) {
   return (
     <div
@@ -25,7 +27,7 @@ export default function PartialUnitData({
         projName={projName}
         phaseList={phaseList}
       />
-      <MainSection partialUnitData={partialUnitData} />
+      <MainSection partialUnitData={partialUnitData} data={data} />
     </div>
   );
 }

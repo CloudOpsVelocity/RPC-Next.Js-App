@@ -27,7 +27,7 @@ import { get_posted_by } from "@/app/utils/dyanamic/projects";
 import Close from "../../project/button/close";
 const RequestCallBackModal = () => {
   const isMobile = useMediaQuery("(max-width: 750px)");
-  const [opened, { close, source, open }] = useReqCallPopup();
+  const [opened, { close, source, open, MODAL_TYPE }] = useReqCallPopup();
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error" | "otp"
   >("idle");
@@ -84,7 +84,9 @@ const RequestCallBackModal = () => {
                 <div className={`w-[100%] md:w-[50%] px-[3%] py-[3%]`}>
                   {status === "idle" && (
                     <h2 className="text-[18px]  lg:text-[24px] font-[600] text-[#202020]  ">
-                      Request Callback
+                      {MODAL_TYPE === "REQ_QUOTE"
+                        ? "Request Quote"
+                        : "Request Callback"}
                     </h2>
                   )}
 
@@ -98,8 +100,15 @@ const RequestCallBackModal = () => {
                 {
                   <div className="hidden md:block w-[50%] relative">
                     <Image
-                      className="absolute inset-0 !h-full !w-[100%] object-cover"
-                      src="/requestcallback.png"
+                      className={clsx(
+                        "absolute inset-0 h-full w-[100%] object-cover",
+                        MODAL_TYPE == "REQ_QUOTE" && "object-contain"
+                      )}
+                      src={
+                        MODAL_TYPE === "REQ_QUOTE"
+                          ? "/quate.svg"
+                          : "/requestcallback.png"
+                      }
                       alt="Customer Support"
                       width={600}
                       height={534}
@@ -160,7 +169,6 @@ const LoggedInUserForm = ({ status, setStatus }: any) => {
     validate: yupResolver(reqSchema),
   });
 
-  console.log(popupState);
   let Posted_BY = get_posted_by(popupState.cg);
   const onSubmit = async () => {
     setStatus("pending");
@@ -198,7 +206,8 @@ const LoggedInUserForm = ({ status, setStatus }: any) => {
       <p className=" mb-[8px]  lg:text-[20px] text-[#00487c] text-[14px] xl:text-xl italic font-bold leading-[normal] tracking-[0.8px]">
         <span className="text-[#4D6677] text-[18px] xl:text-xl italic font-medium leading-[normal] tracking-[0.8px]">
           {" "}
-          Call For:
+          {popupState.MODAL_TYPE === "REQ_QUOTE" ? "Quotation for" : "Call For"}
+          :
         </span>{" "}
         <span className="text-[14px] xl:text-[24px]">{popupState.title}</span>
       </p>
@@ -212,7 +221,9 @@ const LoggedInUserForm = ({ status, setStatus }: any) => {
       </p>
       {/* Notifcation */}
       <div className=" flex justify-center items-center gap-2.5 border p-2.5 rounded-xl border-solid border-[#FFD600] bg-[#fff4bb] text-[#242424] text-[15px] xl:text-[17px] not-italic font-semibold leading-[normal] mb-6">
-        You will receive about your inquiries on below contact number
+        {popupState.MODAL_TYPE === "REQ_QUOTE"
+          ? `Your quotation for ${popupState.title} will be sent to your provided contact details.`
+          : "You will receive about your inquiries on below contact number"}
       </div>
       {/* NOTIFICATION END */}
       <h3 className="mb-[2%]  text-[#001F35] text-[18px] xl:text-xl not-italic font-bold">
@@ -235,7 +246,9 @@ const LoggedInUserForm = ({ status, setStatus }: any) => {
         className="!bg-[#0073C6]  text-xl p-2"
         size="md"
       >
-        Request Callback
+        {popupState.MODAL_TYPE === "REQ_QUOTE"
+          ? "Request Quote"
+          : "Request Callback"}
       </B>
     </div>
   );
@@ -396,7 +409,9 @@ const ReqForm = ({
         mt={"md"}
         loading={status === "pending"}
       >
-        Request Callback
+        {popupState.MODAL_TYPE === "REQ_QUOTE"
+          ? "Request Quote"
+          : "Request Callback"}
       </B>
     </form>
   );

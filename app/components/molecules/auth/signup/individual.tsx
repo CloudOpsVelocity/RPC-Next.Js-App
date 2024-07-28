@@ -60,9 +60,6 @@ function Individual() {
     }
   };
 
-  const displayCountryCode = (value: any) => {
-    console.log(value);
-  };
   const onClose = () => {
     setStatus("idle");
     close();
@@ -128,7 +125,7 @@ function Individual() {
                   root: StepCss.inputRoot,
                   input: StepCss.textInput,
                   error: StepCss.errorMsg,
-                  label:StepCss.mlabelCss
+                  label: StepCss.mlabelCss,
                 }}
               />
               <TextInput
@@ -144,7 +141,7 @@ function Individual() {
                   root: StepCss.inputRoot,
                   input: StepCss.textInput,
                   error: StepCss.errorMsg,
-                  label:StepCss.mlabelCss
+                  label: StepCss.mlabelCss,
                 }}
                 mb={"3%"}
               />
@@ -156,7 +153,7 @@ function Individual() {
                   input: StepCss.textInput,
                   innerInput: StepCss.textInput,
                   error: StepCss.errorMsg,
-                  label:StepCss.mlabelCss
+                  label: StepCss.mlabelCss,
                 }}
                 required
                 size="lg"
@@ -171,7 +168,9 @@ function Individual() {
               />
               <NumberInput
                 leftSection={
-                  <span className="text-[#212c33] font-medium text-[16px]">+91</span>
+                  <span className="text-[#212c33] font-medium text-[16px]">
+                    +91
+                  </span>
                 }
                 mt={"xs"}
                 required
@@ -179,7 +178,7 @@ function Individual() {
                   root: StepCss.inputRoot,
                   input: S.classForContact,
                   error: StepCss.errorMsg,
-                  label:StepCss.mlabelCss
+                  label: StepCss.mlabelCss,
                 }}
                 hideControls
                 size="lg"
@@ -213,7 +212,7 @@ function Individual() {
               />
               {status === "error" && (
                 <p className=" text-right text-[color:var(--Mandatory,#F00)] text-[12px] xl:text-[15px] italic font-medium leading-[normal]">
-                   Account already exists. Kindly use{" "}
+                  Account already exists. Kindly use{" "}
                   <Link
                     href={{ pathname: "/login", search: queryParam.query }}
                     className="text-[#0073C6] text-[15px] italic font-bold leading-[normal] underline"
