@@ -215,7 +215,7 @@ const ProjectpropDetailsCard = ({
           />
 
           <Button
-            onChange={() => open("prop", reqId, "propCard")}
+            // onChange={() => open("prop", reqId, "propCard")}
             title="Request Callback"
             icon={<Phone className="h-[16px] w-[16px] " />}
             buttonClass="flex justify-center items-center text-[#FFF] p-[5px] bg-[#0073C6] rounded-[5px] shadow-md text-[12px] font-[700]"
@@ -311,7 +311,7 @@ const MobileDetails = ({
           />
         </div>
         <Button
-          onChange={() => open("card", projIdEnc, "projCard")}
+          // onChange={() => open("card", projIdEnc, "projCard")}
           title="Request Callback"
           icon={<Phone className="h-[16px] w-[16px] " />}
           buttonClass="flex justify-center items-center text-[#FFF] p-[5px] bg-[#0073C6] rounded-[5px] shadow-md text-[12px] font-[700]"
