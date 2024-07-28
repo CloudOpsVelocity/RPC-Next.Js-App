@@ -11,7 +11,7 @@ const Logo = ({ styles }: props) => {
       <Image
         src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/grp-logo/Logo-without-background.png`}
         alt="logo"
-        className="w-[150px] md:w-[220px]"
+        className=" md:w-[150px] lg:w-[220px]"
         width={220}
         height={80}
       />

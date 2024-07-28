@@ -9,6 +9,9 @@ const config: Config = {
   ],
 
   theme: {
+    screens:{
+      tab: '1280px'
+    },
     extend: {
       colors: {
         btnPrimary: "#0073C6",

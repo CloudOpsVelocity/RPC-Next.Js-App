@@ -17,14 +17,14 @@ export default function LoginSignupTabs({
   className,
 }: Props) {
   const activeClassName = clsx(
-    "flex flex-col justify-center items-center gap-1 rounded border shadow-[0px_4px_11.1px_0px_rgba(25,80,71,0.46)_inset,0px_4px_12.9px_0px_rgba(140,177,141,0.38)] px-[28px] md:px-[52px] py-1.5 border-solid border-[#148B16] bg-[#148b16] text-white sm:text-2xl not-italic font-bold leading-[normal] text-nowrap text-[16px] ",
+    "flex flex-col justify-center items-center gap-1 rounded border shadow-[0px_4px_11.1px_0px_rgba(25,80,71,0.46)_inset,0px_4px_12.9px_0px_rgba(140,177,141,0.38)] px-[28px] md:px-[52px] py-1.5 border-solid border-[#148B16] bg-[#148b16] text-white sm:text-2xl not-italic font-bold leading-[normal] text-nowrap text-[16px] md:text-[18px] ",
     className
   );
   const inactiveClassName =
-    "flex flex-col justify-center items-center gap-1 rounded   px-[28px] py-1.5  bg-transparent text-[#242424] text-nowrap  sm:text-[20px] not-italic font-[500] leading-[normal] ";
+    "flex flex-col justify-center items-center gap-1 rounded px-[28px] py-1.5  bg-transparent text-[#242424] text-nowrap  sm:text-[20px] not-italic font-[500] leading-[normal] ";
 
   return (
-    <div className="inline-flex items-center border   rounded-md border-solid border-[#CDD7DE] bg-[#fafafa] ">
+    <div className="inline-flex items-center border rounded-md border-solid border-[#CDD7DE] bg-[#fafafa] ">
       <Link
         className={state === "login" ? activeClassName : inactiveClassName}
         href={{
