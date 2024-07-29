@@ -11,15 +11,21 @@ import ShortList from "./actions/shortList";
 import Message from "./actions/Message";
 import ReportSectionProperty from "./actions/Report";
 
-export default function PropertyOverView({ data, issueData }: { data: Main, issueData:any }) {
-  return(
+export default function PropertyOverView({
+  data,
+  issueData,
+}: {
+  data: Main;
+  issueData: any;
+}) {
+  return (
     <div
       className="pt-[2%] scroll-mt-[220px] w-[95%] md:w-[95%] rounded-[24px] shadow-md mb-[5%] mt-[2%] bg-gradient-to-r from-[#F6F6F6] /0 via-[#FFF] /45 to-[#FEFFFF]/100 "
       id="overview"
     >
       <div className="pl-[2%] pr-[2%] flex justify-between items-center flex-wrap">
-      <div className="md:w-[80%]">
-        <h2 className="text-[22px] sm:text-[24px] lg:text-[32px] text-[#001F35] font-[700] capitalize">
+        <div className="md:w-[80%]">
+          <h2 className="text-[22px] sm:text-[24px] lg:text-[32px] text-[#001F35] font-[700] capitalize">
             <span className="lowercase">
               {data.propTypeName === "Plot" ? data.plotArea + " sq.ft" : ""}
             </span>{" "}
@@ -32,7 +38,7 @@ export default function PropertyOverView({ data, issueData }: { data: Main, issu
         </div>
         <div className="flex justify-center md:items-end flex-col">
           <a
-            href={`tel:${8766203976}`}
+            href={`tel:${8884440963}`}
             className="text-[13px] sm:text-[20px]  mt-3  text-[#0073C6] lg:text-2xl not-italic font-semibold leading-[normal] inline-flex justify-center items-center gap-1.5 p-1.5 md:p-2 rounded-lg border-[0.8px] border-solid border-[#0073C6] bg-[#fafafa]"
           >
             {footerPhoneIcon}
@@ -59,8 +65,7 @@ export default function PropertyOverView({ data, issueData }: { data: Main, issu
           ))}
         </div>
         <div className=" flex justify-start md:justify-end items-start md:items-end flex-col mt-[3%] md:mt-0 relative pb-10">
-          <ReportSectionProperty
-           issueData={issueData} />
+          <ReportSectionProperty issueData={issueData} />
           <ShortList {...data} />
           <CompareList {...data} />
           <Message {...data} />
