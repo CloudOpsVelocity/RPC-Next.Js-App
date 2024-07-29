@@ -8,7 +8,7 @@ import Style from "./Carouse.module.css";
 import { useAtom } from "jotai";
 import { selectedPartialUnitAtom } from "@/app/store/partialsUnits";
 import Image from "next/image";
-import { ImgNotAvail } from "@/app/data/project";
+import { FloorPlanNotAvail, ImgNotAvail } from "@/app/data/project";
 import clsx from "clsx";
 export default function CarouselModal() {
   const [isData, setIsData] = useAtom(selectedPartialUnitAtom);
@@ -38,7 +38,7 @@ export default function CarouselModal() {
           className="cursor-pointer"
         >
           <Image
-            src={item.floorPlan ?? ImgNotAvail}
+            src={item.floorPlan ?? FloorPlanNotAvail}
             alt={item.image}
             width={300}
             height={300}

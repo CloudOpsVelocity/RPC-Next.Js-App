@@ -47,19 +47,19 @@ export default function InFoCarousel({ partialUnitData }: Props) {
             <th className="  w-[111px] md:w-[220px] sticky left-0 top-0 flex bg-[#00487C] justify-center text-center items-start px-2.5 py-2 text-white text-[14px] md:text-[16px] not-italic font-bold leading-[normal] border-r ">
               Unit Type
             </th>
-            <th className=" w-[180px] md:w-[220px] flex bg-[#00487C] justify-center text-center items-start px-2.5 py-2 text-white text-[14px] md:text-[16px] not-italic font-bold leading-[normal] ">
+            <th className=" w-[180px] md:w-[220px] flex bg-[#00487C] justify-center text-center items-start px-2.5 py-2 text-white text-[14px] md:text-[16px] not-italic font-bold leading-[normal] border-r">
               {propCgId === 32 ? "Plot Area" : "Super Built- Up Area"}
             </th>
             {propCgId !== 32 && (
-              <th className="w-[180px] md:w-[220px] flex bg-[#00487C] justify-center text-center items-start px-2.5 py-2 text-white text-[14px] md:text-[16px] not-italic font-bold leading-[normal] ">
+              <th className="w-[180px] md:w-[220px] flex bg-[#00487C] justify-center text-center items-start px-2.5 py-2 text-white text-[14px] md:text-[16px] not-italic font-bold leading-[normal] border-r">
                 Carpet Area
               </th>
             )}
 
-            <th className=" w-[180px] md:w-[220px] flex bg-[#00487C] justify-center text-center items-start px-2.5 py-2 text-white text-[14px] md:text-[16px] not-italic font-bold leading-[normal] ">
+            <th className=" w-[180px] md:w-[220px] flex bg-[#00487C] justify-center text-center items-start px-2.5 py-2 text-white text-[14px] md:text-[16px] not-italic font-bold leading-[normal] border-r">
               Unit Price
             </th>
-            <th className=" w-[180px] md:w-[220px] flex bg-[#00487C] justify-center text-center items-start px-2.5 py-2 text-white text-[14px] md:text-[16px] not-italic font-bold leading-[normal] ">
+            <th className=" w-[180px] md:w-[220px] flex bg-[#00487C] justify-center text-center items-start px-2.5 py-2 text-white text-[14px] md:text-[16px] not-italic font-bold leading-[normal] border-r">
               Floor Plan
             </th>
           </tr>
@@ -68,7 +68,6 @@ export default function InFoCarousel({ partialUnitData }: Props) {
           {data &&
             sortUnits(Object.keys(data)).map((item: any, index: number) => {
               const units = data[item].unitDataDtoList;
-              console.log(units);
               return (
                 <tr
                   key={index}

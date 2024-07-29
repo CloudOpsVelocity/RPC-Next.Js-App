@@ -85,7 +85,7 @@ const RequestCallBackModal = () => {
                   {status === "idle" && (
                     <h2 className="text-[18px]  lg:text-[24px] font-[600] text-[#202020]  ">
                       {MODAL_TYPE === "REQ_QUOTE"
-                        ? "Request Quote"
+                        ? "Request Quotation"
                         : "Request Callback"}
                     </h2>
                   )}
@@ -102,7 +102,7 @@ const RequestCallBackModal = () => {
                     <Image
                       className={clsx(
                         "absolute inset-0 h-full w-[100%] object-cover",
-                        MODAL_TYPE == "REQ_QUOTE" && "object-contain"
+                        MODAL_TYPE == "REQ_QUOTE" && "!object-contain"
                       )}
                       src={
                         MODAL_TYPE === "REQ_QUOTE"
@@ -410,7 +410,7 @@ const ReqForm = ({
         loading={status === "pending"}
       >
         {popupState.MODAL_TYPE === "REQ_QUOTE"
-          ? "Request Quote"
+          ? "Request Quotation"
           : "Request Callback"}
       </B>
     </form>

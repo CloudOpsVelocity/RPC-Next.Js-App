@@ -107,12 +107,15 @@ export const ReqcallbackMessage = ({ close }: { close: () => void }) => {
 
     return () => clearTimeout(timer);
   }, []);
+
   return (
     <VersaMessage
       bgColor="bg-gradient-to-r from-[#72B800] via-[#AAE051] via-[#E1FFAF] via-[#AAE051] to-[#72B800]"
       border="border-[#72B800]"
       title="Success!"
-      content={`Your callback request for the ${
+      content={`Your ${
+        data.MODAL_TYPE === "REQ_QUOTE" ? "quotation" : "callback"
+      }  request for the ${
         data.MODAL_TYPE === "PROPERTY_REQ_CALLBACK" ? "Property" : "Project"
       } has been sent. ${get_posted_by(
         data.cg
