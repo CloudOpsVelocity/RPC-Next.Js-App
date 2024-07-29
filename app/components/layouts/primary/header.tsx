@@ -246,7 +246,7 @@ const config = {
       />
     </svg>
   ),
-  logo: `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/grp-logo/logo.jpg`,
+  logo: `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/grp-logo/getrightpropertylogo.png`,
   getIcon: (type: string) => {
     const data = {
       B: {

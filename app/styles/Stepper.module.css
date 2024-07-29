@@ -177,6 +177,14 @@
   font-weight: 500;
   line-height: normal;
 }
+.custlabelOfNum {
+  color: #242424;
+  font-family: Montserrat;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
 @media only screen and (min-width: 641px) and (max-width: 1280px) {
   .stepLabel {
     max-width: 70px;
@@ -197,7 +205,17 @@
   .root {
     width: 90%;
   }
-
+  .textInput {
+    height: 49px;
+  }
+  .textInput::placeholder,
+  .cityPincodeCust::placeholder,
+  .mangingDrCust::placeholder {
+    font-size: 16px;
+  }
+  .custlabelOfNum {
+    font-size: 16px;
+  }
   /* .content{
     width: 100% !important;
     max-width: 423px !important;
@@ -221,9 +239,7 @@
     margin: 18%;
     max-width: 80%;
   }
-  .custlabelOfNum {
-    font-weight: 600;
-  }
+
   .custlabelOfNumpop {
     font-size: 16px;
   }

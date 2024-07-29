@@ -50,7 +50,7 @@ function Login({ params }: any) {
   };
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
   return (
-    <Box maw={420} mx="auto">
+    <div className="max-w-[423px] m-auto">
       <form
         onSubmit={form.onSubmit(onSubmit)}
         className="w-[100%] flex justify-center items-center flex-col "
@@ -62,7 +62,7 @@ function Login({ params }: any) {
             root: StepCss.inputRoot,
             input: StepCss.textInput,
             error: StepCss.errorMsg,
-            label:StepCss.custlabelOfNum,
+            label: StepCss.custlabelOfNum,
           }}
           hideControls
           size="lg"
@@ -85,11 +85,11 @@ function Login({ params }: any) {
             root: StepCss.inputRoot,
             error: StepCss.errorMsg,
             innerInput: StepCss.textInput,
-            label:StepCss.custlabelOfNum,
+            label: StepCss.custlabelOfNum,
           }}
           required
           size="lg"
-          className="w-[100%] mb-[3%]"
+          className="w-[100%] mb-[1%]"
           mt="sm"
           label="Password"
           placeholder="Enter Your Password"
@@ -102,7 +102,7 @@ function Login({ params }: any) {
 
         <Link
           href={{ pathname: "/forgot", search: getQueryParam(params) }}
-          className="text-[#0C7ACA] text-sm not-italic font-semibold mb-[2%]  w-full cursor-pointer "
+          className="text-[#0C7ACA] text-sm not-italic font-semibold mb-[1%] xl:mb-[2%]  w-full cursor-pointer "
         >
           Forgot Password ?
         </Link>
@@ -118,7 +118,7 @@ function Login({ params }: any) {
         <div className="text-center mt-6 ">
           <Link
             href={{ pathname: "/register", search: getQueryParam(params) }}
-            className="text-[#282828] md:text-xl flex justify-center font-semibold items-center gap-2.5 rounded border p-2 border-solid border-[#B2B2B2] mb-8 text-nowrap sm:!text-[20px] "
+            className="text-[#282828] md:text-xl flex justify-center items-center gap-2.5 rounded border p-2 border-solid border-[#B2B2B2] mb-[14px] text-nowrap sm:!text-[20px] font-[400]"
           >
             New User?{" "}
             <span className="md:text-xl  text-[#0C7ACA]  font-semibold text-xl not-italic text-nowrap sm:!text-[20px]  ">
@@ -127,13 +127,13 @@ function Login({ params }: any) {
           </Link>
           <Link
             href={{ pathname: getCallPathServer(params) }}
-            className=" md:text-xl not-italic text-[#148B16] font-semibold !text-18px   leading-[normal] b sm:!text-[16px] sm:font-[400] border rounded-sm p-2 border-solid border-[#148B16]"
+            className=" md:text-xl  !text-18px   leading-[normal]  sm:!text-[16px]  border rounded-sm p-2 border-solid border-[#148B16] text-[#148B16] text-base not-italic xl:font-medium"
           >
             Continue without login
           </Link>
         </div>
       </form>
-    </Box>
+    </div>
   );
 }
 

@@ -5,28 +5,9 @@ import LoginSignupTabs from "../Components/LoginSignup";
 
 export default function Page({ searchParams }: any) {
   return (
-    <div className="w-full  p-[10%] md:p-[2%]">
-      <div className="w-full flex justify-center items-center gap-[5%] mb-[5%]">
+    <div className="w-full  p-[10%] sm:mt-2 xl:mt-0 md:p-[2%]">
+      <div className="w-full flex justify-center items-center gap-[5%] sm:mb-[16px] xl:mb-[5%]">
         <LoginSignupTabs searchParams={searchParams} state="login" />
-        {/* <Link
-          href={{
-            pathname: "/login",
-            search: getQueryParam(searchParams),
-          }}
-          className="whitespace-nowrap text-xl md:text-[26px] text-[#148B16] font-bold border-solid border-b-2 border-green-600"
-        >
-          Log In
-        </Link>
-
-        <Link
-          href={{
-            pathname: "/register",
-            search: getQueryParam(searchParams),
-          }}
-          className="whitespace-nowrap text-xl md:text-[26px] font-[500] text-[#666]"
-        >
-          Sign Up
-        </Link> */}
       </div>
 
       <div>

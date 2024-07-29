@@ -7,12 +7,12 @@ import Link from "next/link";
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <main className="w-full flex h-screen ">
-      <div className="relative flex-col hidden md:flex items-start sm:pl-[5%] lg:pl-[7%]  justify-start pt-[4%] bg-gradient-to-b from-[#E4F4FF] /0 via-[#FFF] /0 to-[#EFFFF3]/100 w-full ">
+      <div className="relative flex-col hidden md:flex items-start sm:pl-[5%] lg:pl-[7%]  justify-start sm:pt-[3%] xl:pt-[4%] bg-gradient-to-b from-[#E4F4FF] /0 via-[#FFF] /0 to-[#EFFFF3]/100 w-full ">
         <Link
           href={"/"}
-          className=" top-[7%] left-[25%] p-2 bg-[#ffffff7a] mb-[72px]"
+          className=" top-[7%] left-[25%] p-2 bg-[#ffffff7a] sm:mb-[50px] xl:mb-[72px]"
         >
-          <div className="flex  justify-center items-center gap-1 rounded   text-[#0C7ACA] text-2xl not-italic font-bold flex-nowrap ">
+          <div className="flex  justify-center items-center gap-1 rounded   text-[#0C7ACA] text-xl xl:text-2xl not-italic font-bold flex-nowrap ">
             {config.homeIcon} <p>Go to Home</p>
           </div>
           {config.line}
@@ -25,7 +25,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 className="w-full mb-[3%] flex items-center justify-start"
               >
                 <TbBuilding />{" "}
-                <p className="font-Playfair text-[color: #545353] text-[24px] font-[600] ml-[10px] ">
+                <p className="font-Playfair text-[color: #545353] sm:text-[20px]  xl:text-[24px] font-[600] ml-[10px] ">
                   {item.text}
                 </p>
               </li>
@@ -35,10 +35,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <img
           src="/auth/login.svg"
           alt=""
-          className="!mt-20  md:max-w-[490px] xl:w-auto md:mt-auto"
+          className="sm:mt-10  sm:w-[70%] xl:max-w-[490px]  xl:w-auto xl:mt-20"
         />
       </div>
-      <div className="flex justify-center items-start w-full pt-[10%] md:pt-[5.5%]">
+      <div className="flex justify-center items-start w-full pt-[10%] sm:pt-[3%] xl:pt-[5.5%]">
         <div className="w-full bg-white text-gray-600 justify-center items-center ">
           <Logo styles="w-full flex justify-center items-center" />
 
@@ -89,6 +89,7 @@ const config = {
       height="2"
       viewBox="0 0 185 2"
       fill="none"
+      className="w-[160px] xl:w-[185px]"
     >
       <path
         d="M1 1H184"
