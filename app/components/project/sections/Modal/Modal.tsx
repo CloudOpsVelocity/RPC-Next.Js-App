@@ -20,11 +20,10 @@ export default function PartialUnitModal({ data }: any) {
   const isMobile = useMediaQuery("(max-width: 601px)");
   const { handleDownload } = useDownload("floorPlan");
   const [, { open }] = useReqCallPopup();
-  console.log(selectedOne);
   if (!(isData.main === 0 ? true : isData.main)) {
     return null;
   }
-
+  console.log(selectedOne);
   return (
     <Modal
       opened={isData.main === 0 ? true : isData.main}
@@ -32,6 +31,7 @@ export default function PartialUnitModal({ data }: any) {
       classNames={S}
       size={isMobile ? "100%" : "60%"}
       zIndex={1}
+      centered
     >
       <div className="w-full bg-transparent     h-[57px] flex items-center justify-between  z-[1000] md:px-10 max-w-[91rem] m-auto">
         <div className="text-[18px] sm:text-2xl not-italic font-bold leading-[normal]">
@@ -75,30 +75,32 @@ export default function PartialUnitModal({ data }: any) {
           />
         </div>
       </div>
-      <div className="flex  items-center w-[90%] h-[438px]  justify-center rounded border   pb-[21px] border-solid border-[#4D6677] m-auto relative">
+      <div className="flex  items-center w-[90%] h-[438px]  justify-center rounded border    border-solid border-[#4D6677] m-auto relative">
         <Image
           src={selectedOne?.floorPlan ?? ImgNotAvail}
           width={500}
           height={500}
           alt="image"
-          className=" object-contain"
+          className="max-h-[434px] object-contain "
         />
-        <button
-          className="flex justify-center items-center gap-1 rounded shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] p-2 bg-[#0073C6] text-white text-base not-italic font-semibold absolute top-2 right-2"
-          onClick={() =>
-            open({
-              modal_type: "REQ_QUOTE",
-              postedByName: data.postedByName,
-              projUnitIdEnc: selectedOne?.projUnitIdEnc,
-              postedId: data.builderId,
-              reqId: data.projIdEnc,
-              source: "projBanner",
-              title: data.projectName,
-            })
-          }
-        >
-          Request Quotation
-        </button>
+        {selectedOne?.floorPlan && (
+          <button
+            className="flex justify-center items-center gap-1 rounded shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] p-2 bg-[#0073C6] text-white text-base not-italic font-semibold absolute top-2 right-2"
+            onClick={() =>
+              open({
+                modal_type: "REQ_QUOTE",
+                postedByName: data.postedByName,
+                projUnitIdEnc: selectedOne?.projUnitIdEnc,
+                postedId: data.builderId,
+                reqId: data.projIdEnc,
+                source: "projBanner",
+                title: data.projectName,
+              })
+            }
+          >
+            Request Quotation
+          </button>
+        )}
       </div>
       <div className="flex flex-wrap  w-[90%] m-auto items-center gap:2  md:gap-5 shadow-[0px_4px_20px_0px_#F0F6FF] px-4 md:py-2.5 rounded-[10px] bg-[#F4FBFF] mt-3 mb-3">
         <div className="flex items-center space-x-3">
@@ -107,17 +109,19 @@ export default function PartialUnitModal({ data }: any) {
             Unit Type{" "}
             <span className="text-[#303A42] text-nowrap ml-[10px] text-[10px] xl:text-[14px] font-[600] ">
               {" "}
-              {selectedOne?.unitType}
+              {selectedOne?.propType == "32"
+                ? `${selectedOne.width} x ${selectedOne.length} sq.ft`
+                : selectedOne?.unitType}
             </span>
           </p>
         </div>
         <div className="flex items-center space-x-3">
           {propertyDetailsSvgs.superBuildUparea}
           <p className="text-[#4D6677] text-nowrap text-[12px] xl:text-[14px] font-[500]">
-            Super Builtup Area{" "}
+            {selectedOne?.propType == "32" ? "Plot Area" : "Super Builtup Area"}{" "}
             <span className="text-[#303A42] text-nowrap ml-[10px] text-[10px] xl:text-[14px] font-[600] ">
               {" "}
-              {selectedOne?.sba} sq.ft
+              {selectedOne?.plotArea || selectedOne?.sba} sq.ft
             </span>
           </p>
         </div>
@@ -132,7 +136,7 @@ export default function PartialUnitModal({ data }: any) {
           </p>
         </div>
       </div>
-      <CarouselModal />
+      {isData.others.length > 1 && <CarouselModal />}
     </Modal>
   );
 }

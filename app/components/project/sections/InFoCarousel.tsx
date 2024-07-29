@@ -44,15 +44,18 @@ export default function InFoCarousel({ partialUnitData }: Props) {
       <table className="min-w-full border-collapse  mr-auto ">
         <thead className=" sticky top-0 z-[1]">
           <tr className="flex flex-row justify-start items-center">
-            <th className="  w-[111px] md:w-[220px] sticky left-0 top-0 flex bg-[#00487C] justify-center text-center items-start px-2.5 py-2 text-white text-[14px] md:text-[16px] not-italic font-bold leading-[normal] ">
+            <th className="  w-[111px] md:w-[220px] sticky left-0 top-0 flex bg-[#00487C] justify-center text-center items-start px-2.5 py-2 text-white text-[14px] md:text-[16px] not-italic font-bold leading-[normal] border-r ">
               Unit Type
             </th>
             <th className=" w-[180px] md:w-[220px] flex bg-[#00487C] justify-center text-center items-start px-2.5 py-2 text-white text-[14px] md:text-[16px] not-italic font-bold leading-[normal] ">
-              Super Built- Up Area
+              {propCgId === 32 ? "Plot Area" : "Super Built- Up Area"}
             </th>
-            <th className="w-[180px] md:w-[220px] flex bg-[#00487C] justify-center text-center items-start px-2.5 py-2 text-white text-[14px] md:text-[16px] not-italic font-bold leading-[normal] ">
-              Carpet Area
-            </th>
+            {propCgId !== 32 && (
+              <th className="w-[180px] md:w-[220px] flex bg-[#00487C] justify-center text-center items-start px-2.5 py-2 text-white text-[14px] md:text-[16px] not-italic font-bold leading-[normal] ">
+                Carpet Area
+              </th>
+            )}
+
             <th className=" w-[180px] md:w-[220px] flex bg-[#00487C] justify-center text-center items-start px-2.5 py-2 text-white text-[14px] md:text-[16px] not-italic font-bold leading-[normal] ">
               Unit Price
             </th>
@@ -65,6 +68,7 @@ export default function InFoCarousel({ partialUnitData }: Props) {
           {data &&
             sortUnits(Object.keys(data)).map((item: any, index: number) => {
               const units = data[item].unitDataDtoList;
+              console.log(units);
               return (
                 <tr
                   key={index}
@@ -76,11 +80,20 @@ export default function InFoCarousel({ partialUnitData }: Props) {
                     {item}
                   </td>
                   <td className=" w-[180px] md:w-[220px] bg-[#FFF] text-gray-900 text-[16px] md:text-[18px] not-italic font-semibold h-[60px] flex  justify-center text-center items-center border-t-0 border-r-[0.5px] border-r-[#D9DFE3] border-b-[0.5px] border-b-[#D9DFE3] border-solid  ">
-                    {data[item].minSba}sq.ft - {data[item].maxSba}sq.ft
+                    {propCgId === 32
+                      ? `${data[item].plotArea} sq.ft`
+                      : data[item].minSba !== data[item].maxSba
+                      ? `${data[item].minSba} - ${data[item].maxSba} sq.ft`
+                      : `${data[item].minSba} sq.ft`}
                   </td>
-                  <td className=" w-[180px] md:w-[220px] bg-[#EEF7FF] text-gray-900 text-[16px] md:text-[18px] not-italic font-semibold h-[60px] flex justify-center text-center items-center border-t-0 border-r-[0.5px] border-r-[#D9DFE3] border-b-[0.5px] border-b-[#D9DFE3] border-solid">
-                    {data[item].minCa}sq.ft - {data[item].maxCa}sq.ft
-                  </td>
+                  {propCgId !== 32 && (
+                    <td className=" w-[180px] md:w-[220px] bg-[#EEF7FF] text-gray-900 text-[16px] md:text-[18px] not-italic font-semibold h-[60px] flex justify-center text-center items-center border-t-0 border-r-[0.5px] border-r-[#D9DFE3] border-b-[0.5px] border-b-[#D9DFE3] border-solid">
+                      {data[item].minCa !== data[item].maxCa
+                        ? `${data[item].minCa} - ${data[item].maxCa} sq.ft`
+                        : `${data[item].minCa} sq.ft`}
+                    </td>
+                  )}
+
                   <td className="w-[180px] md:w-[220px] bg-[#FFF] text-gray-900 text-[16px] md:text-[18px] not-italic font-semibold h-[60px] flex justify-center text-center items-center border-t-0 border-r-[0.5px] border-r-[#D9DFE3] border-b-[0.5px] border-b-[#D9DFE3] border-solid">
                     {formatCurrency(data[item].minPrice)} -{" "}
                     {formatCurrency(data[item].maxPrice)}

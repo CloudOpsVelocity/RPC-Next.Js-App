@@ -23,7 +23,7 @@ export default function CarouselModal() {
       w={"full"}
       slideGap="md"
       withControls={true}
-      align="center"
+      align={isData.others.length > 5 ? "start" : "center"}
       slidesToScroll={3}
       nextControlIcon={<DarkNextCarouselButton />}
       previousControlIcon={<DarkCarouseIcon />}
@@ -38,12 +38,13 @@ export default function CarouselModal() {
           className="cursor-pointer"
         >
           <Image
-            src={item.floorPlan??ImgNotAvail}
+            src={item.floorPlan ?? ImgNotAvail}
             alt={item.image}
             width={300}
             height={300}
             className={clsx(
-              isData.main === index && "border border-btnPrimary border-solid"
+              "max-h-[100px] object-cover",
+              isData.main === index && "border-2 border-btnPrimary border-solid"
             )}
           />
         </Carousel.Slide>

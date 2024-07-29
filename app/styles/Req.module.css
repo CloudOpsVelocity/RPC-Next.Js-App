@@ -16,7 +16,7 @@
   padding: 0;
 }
 .overlay {
-  margin-top: 90px;
+  margin-top: 70px;
 }
 
 .textInput {
@@ -100,16 +100,16 @@
   letter-spacing: 0.64px;
 }
 
-
 @media (max-width: 640px) {
-  .input::placeholder,  .numInput::placeholder, .textInput::placeholder{
+  .input::placeholder,
+  .numInput::placeholder,
+  .textInput::placeholder {
     font-size: 14px;
-  } 
+  }
 
   .body {
     border-radius: 4px;
     /* margin-top: 90px; */
     padding: 0;
   }
- 
 }
