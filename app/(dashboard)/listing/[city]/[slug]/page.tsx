@@ -44,12 +44,12 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
   if (!data.propIdEnc) {
     notFound();
   }
- 
+
   return (
     <div className="w-full">
-      <div className="mt-[90px] w-full pb-[2%] flex items-center justify-center flex-col">
+      <div className="mt-[90px] w-full pb-[2%] flex xl:text-ellipsis items-center justify-center flex-col">
         <div className="pb-[2%] px-[2%] w-[100%] md:w-[94.3%]">
-          <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%]">
+          <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%] sm:text-center">
             <span>Home</span> {" > "}
             <Link href={"/project/banglore"} className="text-nowrap">
               <span>Property In {data.ctName}</span>

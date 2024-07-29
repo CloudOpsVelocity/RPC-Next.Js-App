@@ -1,3 +1,4 @@
+import { parseOtherCharge } from "@/app/components/property/pricingbreakup/PriceBreakup";
 import { LIstingResponse, Main } from "@/app/validations/property";
 import { Main as M } from "@/app/validations/types/project";
 import axios from "axios";
@@ -21,11 +22,9 @@ const getProjectDetails = async (slug: string): Promise<M | any> => {
 
 const getListingDetails = async (slug: string): Promise<LIstingResponse> => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/fetch/listing/data?propIdEnc=${slug}`,
-
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/fetch/listing/data?propIdEnc=${slug}`
   );
   const data = await response.json();
-  console.log(data)
   return data;
 };
 
@@ -37,8 +36,16 @@ const getNearByLocations = async (slug: string): Promise<any> => {
   console.log(data);
   return data;
 };
-const getReportConstData= async ()=>{
-  const res= await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/common/getConstantList`,["propReport"])
-  return res.data
-}
-export { getProjectDetails, getListingDetails, getNearByLocations,getReportConstData };
+const getReportConstData = async () => {
+  const res = await axios.post(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/common/getConstantList`,
+    ["propReport"]
+  );
+  return res.data;
+};
+export {
+  getProjectDetails,
+  getListingDetails,
+  getNearByLocations,
+  getReportConstData,
+};

@@ -561,7 +561,7 @@ function Builder() {
                 maxDropdownHeight={200}
                 classNames={{
                   root: StepCss.inputRoot,
-                  input: StepCss.cityPincodeCust,
+                  input: StepCss.textInput,
                   error: StepCss.errorMsg,
                   dropdown: StepCss.dropdown,
                   label: StepCss.mlabelCss,

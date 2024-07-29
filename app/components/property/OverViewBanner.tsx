@@ -34,7 +34,6 @@ export default function PropertyOverviewBanner({
 }: Main) {
   const [opened, { open, close, source }] = useReqCallPopup();
   const [collapsed, { open: toggle }] = usePricingPop();
-  const { slug } = useParams<{ slug: string }>();
   const filterOtherDetails =
     otherPrice &&
     Object?.keys(otherPrice).filter(
