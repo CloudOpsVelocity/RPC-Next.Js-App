@@ -45,7 +45,7 @@ function Agent() {
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error" | "otp"
   >("idle");
-  const [active, setActive] = useState(1);
+  const [active, setActive] = useState(0);
   const router = useRouter();
   const { registerOtherDetails, register, login } = useAuth({
     type: "register",
@@ -227,8 +227,6 @@ function Agent() {
                   ? StepCss.stepLabelDone
                   : StepCss.stepLabel,
               stepIcon: active === 0 ? StepCss.stepIcon : StepCss.compltedIcon,
-              // stepCompletedIcon: StepCss.compltedIcon,
-              // stepCompletedIcon: StepCss.compltedIcon,
             }}
           >
             <TextInput

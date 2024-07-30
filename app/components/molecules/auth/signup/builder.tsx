@@ -379,7 +379,7 @@ function Builder() {
             label="Personal Details"
             icon={<StepperDotGreen />}
             classNames={{
-              stepIcon: active === 0 ? StepCss.stepIcon : "",
+              stepIcon: active === 0 ? StepCss.stepIcon : StepCss.compltedIcon,
               stepLabel:
                 active === 0
                   ? StepCss.stepLabelActive
@@ -515,7 +515,7 @@ function Builder() {
                   : active > 1
                   ? StepCss.stepLabelDone
                   : StepCss.stepLabel,
-              stepIcon: active > 1 ? StepCss.stepIconActive : StepCss.stepIcon,
+              stepIcon: active > 1 ? StepCss.compltedIcon : StepCss.stepIcon,
             }}
           >
             <TextInput
@@ -618,7 +618,7 @@ function Builder() {
                   : active > 2
                   ? StepCss.stepLabelDone
                   : StepCss.stepLabel,
-              stepIcon: active > 2 ? StepCss.stepIconActive : StepCss.stepIcon,
+              stepIcon: active > 2 ? StepCss.compltedIcon : StepCss.stepIcon,
             }}
           >
             <ScrollArea h={420} viewportRef={viewport} offsetScrollbars>
@@ -782,7 +782,7 @@ function Builder() {
                   : active > 3
                   ? StepCss.stepLabelDone
                   : StepCss.stepLabel,
-              stepIcon: active > 3 ? StepCss.stepIconActive : StepCss.stepIcon,
+              stepIcon: active > 3 ? StepCss.compltedIcon : StepCss.stepIcon,
             }}
           >
             <Textarea
