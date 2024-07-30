@@ -32,7 +32,7 @@ export default function Page({ searchParams }: any) {
         </Link> */}
       </div>
 
-      <div className="px-20">
+      <div className="sm:px-20 xl:px-0">
         <h1 className="md:text-[32px] mt-6 text-[20px] font-[600] font-Playball text-[#333]">
           Welcome !
         </h1>
