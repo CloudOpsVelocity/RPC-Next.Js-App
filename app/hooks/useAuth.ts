@@ -93,7 +93,7 @@ export default function useAuth({
         : router.push(redirectPath);
     } else {
       toast.error(res?.error || "Something went wrong. Please try again.", {
-        duration: 4000,
+        duration: 1000,
       });
     }
   };

@@ -38,7 +38,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           className="sm:mt-10  h-[100vh] sm:max-h-[340px] sm:w-[70%] xl:max-w-[490px]  xl:w-auto xl:mt-20"
         />
       </div>
-      <div className="flex justify-center items-start w-full pt-[10%] sm:pt-[3%] xl:pt-[5.5%]">
+      <div className="flex justify-center items-start w-full pt-[10%] sm:pt-[3%] xl:pt-[5.5%] relative">
+        <Link href={"/"} className=" top-0 left-0 p-2 bg-[#ffffff7a]  absolute">
+          <div className="flex  justify-center items-center gap-1 rounded   text-[#0C7ACA] text-xl xl:text-2xl not-italic font-bold flex-nowrap ">
+            {config.homeIcon} <p>Home</p>
+          </div>
+          {/* {config.line} */}
+        </Link>
         <div className="w-full bg-white text-gray-600 justify-center items-center ">
           <Logo styles="w-full flex justify-center items-center" />
 
