@@ -41,7 +41,7 @@ export default function GalleryBlock({
 
   return (
     <div
-      className="w-[95%] md:w-[90%]  scroll-mt-[200px] mt-4 sm:mt-0 mb-[3%]" 
+      className="w-[95%] md:w-[90%] xl:mt-[100px]   scroll-mt-[200px] mt-4 sm:mt-0 mb-[3%] xl:mb-[100px]" 
       id="galleria"
     >
       {type === "prop" ? (
@@ -69,7 +69,7 @@ export default function GalleryBlock({
           {selectedMedia && (
             <div
               className={clsx(
-                "w-[100%]  sm:h-[100%] md:h-[100%] lg:h-[100%] flex justify-center items-center mb-[3%] md:mb-[0%] mr-[3%]   relative  rounded-[14px] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] ",
+                "w-[100%]  sm:h-[100%] md:h-[100%] sm:max-h-[100%] flex justify-center items-center mb-[3%] md:mb-[0%] mr-[3%]   relative  rounded-[14px] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] ",
                 selectedMedia.includes(".mp4") &&
                   "flex justify-center items-center"
               )}

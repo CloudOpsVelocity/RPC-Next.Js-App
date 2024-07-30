@@ -123,13 +123,13 @@ function Dropdown() {
       <Menu.Target>
         {session ? (
           <div className=" text-[12px] flex justify-center items-center gap-1.5 rounded border shadow-[0px_4px_30px_0px_rgba(194,194,194,0.40)] text-[#0073C6] text-lg not-italic font-semibold leading-[normal] px-2.5 py-1.5 border-solid border-[#0073C6] bg-white">
-            <button className="inline-flex justify-center items-center gap-1">
+            <button className="inline-flex justify-center items-center gap-1 ">
               {config.getIcon(session.user.userType)}{" "}
-              {session.user.name.split(" ")[0].length >= 3
+              {/* {session.user.name.split(" ")[0].length >= 3
                 ? session.user.name.split(" ")[0]
                 : session.user.name.split(" ")[1] != undefined
                 ? session.user.name.split(" ")[1]
-                : session.user.name.split(" ")[0]}
+                : session.user.name.split(" ")[0]} */}
             </button>
             {config.blueChevron}
           </div>
@@ -335,7 +335,7 @@ function MobileDropDown() {
                         "_blank"
                       )
                     }
-                    className={`rounded w-full text-wrap flex items-center gap-4 text-[20px] text-gray-700 hover:text-green-500 transition-colors p-1 ${
+                    className={`rounded w-full text-wrap flex items-center gap-4 text-[20px] text-gray-700 hover:text-green-500 transition-colors p-1 capitalize ${
                       session.user.userType == "A"
                         ? "bg-[#FFFCE7]"
                         : session.user.userType == "B"

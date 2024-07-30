@@ -46,7 +46,7 @@ export default function OverviewBanner({
             <p className="text-[#212C33] sm:text-[24px] xl:text-[34px] font-[600]  md:text-start text-center">
               Price Range
             </p>
-            <p className="text-[#001F35]  sm:text-[32px]  whitespace-nowrap font-[700] mt-1">
+            <p className="text-[#001F35]  sm:text-[32px]  whitespace-nowrap font-[700] mt-1 mb-[16px]">
               {formatCurrency(minPrice)} - {formatCurrency(maxPrice)}
               {", "}
               <span className="text-[#545353] text-lg sm:text-[20px] xl:text-[32px] text-wrap not-italic font-medium leading-[normal]">
@@ -82,7 +82,7 @@ export default function OverviewBanner({
               />
             </div>
           </div>
-          <div className="flex justify-center items-center flex-col">
+          <div className="flex justify-center items-end flex-col">
             <DownloadBroucher className="hidden sm:flex" url={brocherUrl} />
             <WhatsAppButton
               className="cursor-pointer mt-2 sm:mt-4 "

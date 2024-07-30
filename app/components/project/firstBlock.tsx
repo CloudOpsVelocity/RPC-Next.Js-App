@@ -105,7 +105,7 @@ const FirstBlock: React.FC<Props> = ({
           </div>
           <div className="sm:absolute bottom-0 sm:m-[1%] sm:mb-[4%]   xl:mb-[2%] xl:m-[2%] z-10 sm:w-[95%] self-center justify-between items-start flex-col md:flex-row border-solid border-white-500 sm:rounded-[10px] bg-gradient-to-r from-[#EFEFEF] /20 to-[#c3c3c3bd]/80 shadow-md  sm:flex break-words sm:px-6 sm:py-2">
             <div className="w-full md:w-[60%]">
-              <div className={`ml-[2%] mt-1 sm:mt-[6px] xl:mt-10 mb-[7px]`}>
+              <div className={`ml-[2%] mt-1 sm:mt-[6px] xl:mt-[1%] mb-[7px]`}>
                 <div className="flex justify-between items-start">
                   <h1 className="text-[22px] sm:text-[22px] xl:text-[28px] font-[700] text-[#001F35] break-words text-wrap w-full">
                     {projectDetails.projectName}
@@ -138,7 +138,7 @@ const FirstBlock: React.FC<Props> = ({
                 </p>
               </div>
             </div>
-            <div className="w-full md:w-[40%] flex justify-between md:items-end flex-col p-[2%]">
+            <div className="w-full md:w-[40%] flex justify-between md:items-end flex-col p-[2%] pt-[1%]">
               <h2 className="inline-flex sm:text-[22px] xl:text-[32px] font-semibold sm:font-[700] text-[#001F35]">
                 <span className=" mr-1 sm:hidden">Price range: </span>
                 {"  "}
