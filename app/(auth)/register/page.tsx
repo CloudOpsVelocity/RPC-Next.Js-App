@@ -8,7 +8,7 @@ import LoginSignupTabs from "../Components/LoginSignup";
 
 export default function Page({ searchParams }: any) {
   return (
-    <div className="w-full p-[10%] md:p-[2%] flex justify-center items-center flex-col">
+    <div className="w-full p-[5%] sm:p-[10%] md:p-[2%] flex justify-center items-center flex-col">
       <div className="w-full max-w-[459px] md:max-w-[597px] flex justify-center items-center gap-[5%] mb-[5%] ">
         <LoginSignupTabs searchParams={searchParams} state="signup" />
         {/* <Link
@@ -32,7 +32,7 @@ export default function Page({ searchParams }: any) {
         </Link> */}
       </div>
 
-      <div className="sm:px-20 xl:px-0">
+      <div className=" sm:px-20 xl:px-0">
         <h1 className="md:text-[32px] mt-6 text-[20px] font-[600] font-Playball text-[#333]">
           Welcome !
         </h1>
