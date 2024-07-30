@@ -118,16 +118,16 @@ function Login({ params }: any) {
         <div className="text-center mt-6 ">
           <Link
             href={{ pathname: "/register", search: getQueryParam(params) }}
-            className="text-[#282828] md:text-xl flex justify-center items-center gap-2.5 rounded border p-2 border-solid border-[#B2B2B2] mb-[14px] text-nowrap sm:!text-[20px] font-[400]"
+            className="text-[#282828]  flex justify-center items-center gap-2.5 rounded border p-2 border-solid border-[#B2B2B2] mb-[14px] text-nowrap text-[14px] font-[400]"
           >
             New User?{" "}
-            <span className="md:text-xl  text-[#0C7ACA]  font-semibold text-xl not-italic text-nowrap sm:!text-[20px]  ">
+            <span className="text-[14px]  text-[#0C7ACA]  font-semibold  not-italic text-nowrap   ">
               Create an account
             </span>
           </Link>
           <Link
             href={{ pathname: getCallPathServer(params) }}
-            className=" md:text-xl  !text-18px   leading-[normal]  sm:!text-[16px]  border rounded-sm p-2 border-solid border-[#148B16] text-[#148B16] text-base not-italic xl:font-medium"
+            className="text-[14px] leading-[normal]    border rounded-sm p-2 border-solid border-[#148B16] text-[#148B16] not-italic "
           >
             Continue without login
           </Link>

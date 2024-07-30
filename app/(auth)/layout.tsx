@@ -3,7 +3,6 @@ import Logo from "../components/atoms/Logo";
 import data from "../data/auth";
 import { TbBuilding } from "react-icons/tb";
 import Link from "next/link";
-
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <main className="w-full flex  xl:h-screen">
