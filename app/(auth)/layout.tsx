@@ -39,12 +39,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         />
       </div>
       <div className="flex justify-center items-start w-full pt-[10%] sm:pt-[3%] xl:pt-[5.5%] relative">
-        <Link href={"/"} className=" top-0 left-0 p-2 bg-[#ffffff7a]  absolute">
+        {/* <Link href={"/"} className=" top-0 left-0 p-2 bg-[#ffffff7a]  absolute">
           <div className="flex  justify-center items-center gap-1 rounded   text-[#0C7ACA] text-xl xl:text-2xl not-italic font-bold flex-nowrap ">
             {config.homeIcon} <p>Home</p>
           </div>
-          {/* {config.line} */}
-        </Link>
+        </Link> */}
         <div className="w-full bg-white text-gray-600 justify-center items-center ">
           <Logo styles="w-full flex justify-center items-center" />
 
