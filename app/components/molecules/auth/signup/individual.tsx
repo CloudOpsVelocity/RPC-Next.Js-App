@@ -15,7 +15,6 @@ import Link from "next/link";
 import AuthPopup from "../authPopup";
 import { useDisclosure } from "@mantine/hooks";
 import { individualSchema } from "@/app/validations/auth";
-import CountryInput from "@/app/components/atoms/CountryInput";
 import { useState } from "react";
 import Success from "../success";
 import { BackSvg, EyeClosed, EyeOpen } from "@/app/images/commonSvgs";

@@ -178,25 +178,6 @@ function Agent() {
             singupText="Agent Sign Up"
             className="!px-[14px]"
           />
-          {/* <Link
-            href={{
-              pathname: "/login",
-              search: queryParam.query,
-            }}
-            className="whitespace-nowrap  text-xl md:text-[26px] font-[500] text-[#666]"
-          >
-            Log In
-          </Link>
-
-          <Link
-            href={{
-              pathname: "/register",
-              search: queryParam.query,
-            }}
-            className="whitespace-nowrap text-xl md:text-[26px] text-[#148B16] font-bold border-solid border-b-2 border-green-600"
-          >
-            Agent Sign Up
-          </Link> */}
         </div>
       )}
 
@@ -215,7 +196,7 @@ function Agent() {
           active={active}
           mt={"xs"}
           size="xs"
-          className="w-full"
+          className="!w-full"
           // @ts-ignore
           styles={styles}
           classNames={{
@@ -452,7 +433,7 @@ function Agent() {
         <>
           <Link
             href={{ pathname: "/login", search: queryParam.query }}
-            className="text-[#002749] font-semibold *: md:text-xl flex justify-center items-center gap-2.5 rounded border p-2 border-solid border-[#B2B2B2] mb-1 mt-[5%] text-nowrap "
+            className="text-[#002749] font-semibold *: md:text-xl flex justify-center items-center gap-2.5 rounded border p-2 border-solid border-[#B2B2B2] mb-3 mt-[5%] text-nowrap w-full"
           >
             Already have an Account ?{" "}
             <span className="md:text-xl  text-[#0C7ACA]  not-italic font-semibold text-nowrap">
@@ -472,7 +453,7 @@ function Agent() {
           )}
           <Link
             href={{ pathname: queryParam.rediectPath }}
-            className=" md:text-xl not-italic text-[#148B16] !text-18px font-semibold   leading-[normal] b sm:!text-[16px] sm:font-[400] border rounded-sm p-2 border-solid border-[#148B16]"
+            className=" md:text-xl not-italic text-[#148B16] !text-18px  font-semibold   leading-[normal] b sm:!text-[16px] sm:font-[400] border rounded-sm p-2 border-solid border-[#148B16] text-center w-full"
           >
             Continue without Register
           </Link>
