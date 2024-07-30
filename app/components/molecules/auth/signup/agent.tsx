@@ -226,7 +226,7 @@ function Agent() {
                   : active > 0
                   ? StepCss.stepLabelDone
                   : StepCss.stepLabel,
-              stepIcon: active === 0 ? StepCss.stepIcon : "",
+              stepIcon: active === 0 ? StepCss.stepIcon : StepCss.compltedIcon,
               // stepCompletedIcon: StepCss.compltedIcon,
               // stepCompletedIcon: StepCss.compltedIcon,
             }}
