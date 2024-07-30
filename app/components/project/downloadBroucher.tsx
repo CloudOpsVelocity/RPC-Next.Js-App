@@ -67,7 +67,7 @@ const DownloadBroucher = ({
       <button
         onClick={handleDownload}
         className={clsx(
-          "inline-flex justify-center items-center gap-[5px] p-2 text-[12px]  rounded-md bg-btnPrimary text-white sm:text-[22px] not-italic font-bold leading-[normal] mt-3 sm:mt-10",
+          "inline-flex justify-center items-center gap-[5px] p-2 text-[12px]  rounded-md bg-btnPrimary text-white sm:text-[20px] xl:text-[22px] not-italic font-bold leading-[normal] mt-3 ",
           className
         )}
       >

@@ -23,16 +23,16 @@ export default function ListingRentAvail({
   s: string;
 }) {
   return (
-    <div className="w-[90%] mb-[3%] scroll-mt-[350px]" id="listings">
-      <h2 className="text-[20px] lg:text-[32px] font-[600] text-[#001F35] mb-[12px]">
+    <div className="w-[90%] mb-[3%] xl:mb-[3%]  sm:mb-[1.5%] scroll-mt-[350px]" id="listings">
+      <h2 className="text-[20px] sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[12px] sm:mb-[6px] xl:mb-[12px]">
         Listings Available in{" "}
-        <span className="text-[#148B16] font-[700]  text-[20px] lg:text-[32px]">
+        <span className="text-[#148B16] font-[700]  text-[20px] sm:text-[22px] xl:text-[32px]">
           {projName}
         </span>{" "}
       </h2>
 
       <SubHeading text="Unlock the door to your dream home: explore our array of available properties today!" />
-      <div className="sm:flex  space-y-4 items-center gap-[28px] sm:gap-[58px] mt-[18px] sm:mt-[35px] flex-wrap sm:space-y-0">
+      <div className="sm:flex  space-y-4 items-center gap-[28px] sm:gap-[25px] xl:gap-[58px] mt-[18px] sm:mt-[25px] xl:mt-[35px] flex-wrap sm:space-y-0">
         <Card type="sell" s={s} r={r} projName={projName} block={s === "0"} />
         <Card type="rent" s={s} r={r} projName={projName} block={r === "0"} />
       </div>
@@ -77,17 +77,17 @@ const Card = ({
           src={type === "rent" ? config.rentMobileLogo : config.sellMobileLogo}
           width={100}
           height={100}
-          className="w-[50px] h-[40px] sm:w-[60px] sm:h-[60px] block md:ml-[20px] "
+          className="w-[50px] h-[40px] sm:w-[40.08px] sm:h-[48px] xl:w-[60px] xl:h-[60px] block md:ml-[20px] "
         />
 
         <div className="pl-0">
-          <h2 className="text-[#242424] text-[18px]  sm:mt-0 sm:text-2xl not-italic font-medium leading-[31px]">
+          <h2 className="text-[#242424] text-[18px]  sm:mt-0 sm:text-[18px] xl:text-2xl not-italic font-medium leading-[31px]">
             <span className="capitalize">{type}</span> Listings{" "}
           </h2>
         </div>
         <div
           className={clsx(
-            "flex justify-center items-center p-1.5 gap-[4px] sm:gap-[12px] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[10px] border-[3px] border-solid max-w-[60px] sm:max-w-[80px] sm:mt-[14px] sm:ml-5 sm:mb-5 sm:mr-5 text-[#303030] text-[14px] sm:text-2xl not-italic font-semibold",
+            "flex justify-center items-center p-1.5 gap-[4px] sm:gap-[12px] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[10px] border-[3px] border-solid max-w-[60px] xl:max-w-[80px] sm:mt-[14px] sm:ml-5 sm:mb-5 sm:mr-5 text-[#303030] text-[14px] sm:text-2xl not-italic font-semibold",
             type === "sell"
               ? "border-[#FFD600] bg-[#ffef9b]"
               : "border-[#0073C6] bg-[#DBF0FF]"

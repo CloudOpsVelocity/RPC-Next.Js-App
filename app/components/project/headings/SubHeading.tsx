@@ -10,7 +10,7 @@ export default function SubHeading({ className, text }: Props) {
   return (
     <h4
       className={clsx(
-        "text-[13px] md:text-2xl  text-[#344273]  italic font-semibold leading-[normal]",
+        "text-[13px] sm:text-[14px] xl:text-2xl  text-[#344273]  italic font-semibold leading-[normal]",
         className
       )}
     >

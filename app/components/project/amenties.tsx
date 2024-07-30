@@ -40,7 +40,7 @@ export default function Amenties({
 
   return (
     <div
-      className="w-[95%] md:w-[90%] relative scroll-mt-[250px] bg-white sm:pt-10 mb-[3%] md:pb-4 "
+      className="w-[95%] sm:w-[90%] xl:w-[90%] relative scroll-mt-[250px] bg-white sm:pt-10 mb-[3%] md:pb-4 "
       id="amenities"
     >
       <div className=" mx-auto ">
@@ -61,7 +61,7 @@ export default function Amenties({
             </h2>
             <SubHeading
               text="Experience the ultimate in comfort with our amenities"
-              className="mt-2 sm:mb-[40px] mb-4"
+              className="mt-2  xl::mb-[40px] mb-4"
             />
           </>
         )}

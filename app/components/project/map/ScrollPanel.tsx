@@ -41,7 +41,7 @@ const CustomScrollArea: React.FC<{
               key={key}
               onClick={() => setSelected(key ?? "")}
               className={clsx(
-                "inline-flex justify-center items-center gap-1.5 px-2.5 py-1.5 text-[12px] text-[#0073C6] sm:text-[26px] not-italic font-medium leading-[normal] capitalize rounded border border-solid border-[#0073C6]  ml-3 sm:ml-8 min-w-fit ",
+                "inline-flex justify-center items-center gap-1.5 px-2.5 py-1.5 text-[12px] text-[#0073C6] md:text-[20px] xl:text-[26px] not-italic font-medium leading-[normal] capitalize rounded border border-solid border-[#0073C6]  ml-3 sm:ml-8 min-w-fit ",
                 selected === key && "!text-white font-semibold bg-[#0073C6] "
               )}
             >

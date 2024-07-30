@@ -21,6 +21,14 @@
 .slide {
   height: 750px;
 }
+@media only screen and (min-width: 602px) and (max-width: 1280px) {
+.slide{
+  height: 545px;
+}
+.controls{
+  margin-top: -2% !important;
+}
+}
 
 @media screen and (max-width: 601px) {
   .slide {

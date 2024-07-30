@@ -42,7 +42,7 @@ export default function MasterPlan({
   };
   return (
     <div
-      className="w-[95%] sm:w-[90%] md:mb-[3%] sm:mb-[5%] scroll-mt-[180px] "
+      className="w-[95%] sm:h-[541px] sm:w-[90%] md:mb-[3%] sm:mb-[5%] scroll-mt-[180px] "
       id="masterPlan"
     >
       <div className="flex justify-between w-full items-cente mb-[32px] flex-wrap">
@@ -72,7 +72,7 @@ export default function MasterPlan({
               </svg>
             }
             title=" Download Master Plan"
-            buttonClass=" text-[#FFF] text-[12px] sm:text-[28px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px]  mt-3"
+            buttonClass=" text-[#FFF] text-[12px] sm:text-[18px] xl:text-[28px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px]  mt-3"
             onChange={handleDownload}
           />
           {/* <button
