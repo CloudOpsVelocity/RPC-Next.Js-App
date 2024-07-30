@@ -441,10 +441,10 @@ function Agent() {
         <>
           <Link
             href={{ pathname: "/login", search: queryParam.query }}
-            className="text-[#002749] font-semibold *: md:text-xl flex justify-center items-center gap-2.5 rounded border p-2 border-solid border-[#B2B2B2] mb-3 mt-[5%] text-nowrap w-full"
+            className="text-[#002749] font-semibold  sm:text-[14px] flex justify-center items-center gap-2.5 rounded border p-2 border-solid border-[#B2B2B2] mb-3 mt-[5%] text-nowrap max-w-fit m-auto"
           >
-            Already have an Account?{" "}
-            <span className="md:text-xl  text-[#0C7ACA]  not-italic font-semibold text-nowrap">
+            Already have an Account?
+            <span className="sm:text-[14px]  text-[#0C7ACA]  not-italic font-semibold text-nowrap">
               LogIn
             </span>
           </Link>
@@ -461,7 +461,7 @@ function Agent() {
           )}
           <Link
             href={{ pathname: queryParam.rediectPath }}
-            className=" md:text-xl not-italic text-[#148B16] !text-18px  font-semibold   leading-[normal] b sm:!text-[16px] sm:font-[400] border rounded-sm p-2 border-solid border-[#148B16] text-center w-full"
+            className=" not-italic text-[#148B16] text-[14px]  font-semibold   leading-[normal]  sm:font-[400] border rounded-sm p-2 border-solid border-[#148B16] text-center max-w-fit m-auto"
           >
             Continue without Register
           </Link>
