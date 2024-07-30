@@ -111,12 +111,12 @@ const LeafMap: React.FC<{
         />
       </div>
 
-      <div className="border border-[#92B2C8] flex flex-col-reverse md:grid grid-cols-1 md:grid-cols-[2fr_3fr] rounded-xl overflow-hidden shadow-lg md:h-[620px] w-[95%] sm:w-[90%] mx-auto">
-        <section className="bg-white">
+      <div className="border border-[#92B2C8]  flex flex-col-reverse md:grid grid-cols-1 md:grid-cols-[2fr_3fr] rounded-xl overflow-hidden  shadow-lg md:h-[456px] xl:h-[620px] w-[95%] sm:w-[90%] mx-auto">
+        <section className="bg-white ">
           <div id="tabs">
             <Tabs defaultValue="public">
-              <div className="bg-blue-50 px-5 py-4">
-                <p className="text-[#001F35] sm:text-[22px] font-medium leading-[normal]">
+              <div className="bg-blue-50 sm:px-3 sm:py-2 xl:px-5 xl:py-4">
+                <p className="text-[#001F35] text-[16px] xl:text-[22px] font-medium leading-[normal]">
                   Explore Your Surroundings, Everywhere Nearby!
                 </p>
               </div>
@@ -181,7 +181,7 @@ const LeafMap: React.FC<{
           <h1 className="text-[#303030] text-[16px] md:text-xl not-italic font-medium leading-[normal] tracking-[0.8px] capitalize">
             {selected.split("_").join(" ")} Nearby
           </h1>
-          <div className="flex gap-2 mt-3 flex-wrap gap-x-5">
+          <div className="flex gap-2 mt-3 flex-wrap sm:gap-x-[2.5] xl:gap-x-5">
             {downData.map((item: any, index: number) => (
               <MapCard
                 key={index}
@@ -278,11 +278,11 @@ const MapCard = ({
   };
   return (
     <div
-      className="flex sm:flex-col items-start gap-3 px-2 py-2 sm:py-3.5 cursor-pointer shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] border-[0.5px] border-solid border-[#D9D9D9] bg-[#fcfcfc] w-full md:min-w-[385px] max-w-[385px] mb-1 md:mb-5"
+      className="flex sm:flex-col items-start gap-3 px-2 py-2 sm:py-3.5 cursor-pointer shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] border-[0.5px] border-solid border-[#D9D9D9] bg-[#fcfcfc] w-full md:min-w-[385px] max-w-[385px] mb-1 xl:mb-5"
       onClick={handleClick}
     >
       <div className="flex items-center justify-between sm:flex-wrap w-full">
-        <h6 className="text-black text-[12px]  md:text-lg not-italic font-medium leading-[normal] max-w-[60%] capitalize  sm:min-w-[100%] w-full">
+        <h6 className="text-black text-[12px] sm:text-[16px] xl:text-lg not-italic font-medium leading-[normal] max-w-[60%] capitalize  sm:min-w-[100%] w-full">
           {name}
         </h6>
         <div className="flex gap-1 text-sm">
@@ -292,7 +292,7 @@ const MapCard = ({
               {distance ?? "N/A"}
             </span>
             <span className="mx-2">|</span>
-            <span className="text-[#001F35] text-[12px] md:text-lg not-italic font-medium leading-[normal] text-nowrap">
+            <span className="text-[#001F35] text-[12px] sm:text-[16px] xl:text-lg not-italic font-medium leading-[normal] text-nowrap">
               {time ?? "N/A"}
             </span>
           </span>
@@ -363,21 +363,21 @@ const LocationList: React.FC<{
 
   return (
     <div
-      className=" bg-gray-50 border rounded-lg cursor-pointer mt-[12px] md:max-w-[640px] py-2 md:py-3 px-2"
+      className=" bg-gray-50 border rounded-lg cursor-pointer mt-[12px] md:max-w-[640px] py-2 xl:py-3 px-2"
       onClick={handleClick}
     >
       <div className="flex items-center justify-between sm:flex-wrap">
-        <h6 className="text-black text-[12px]  md:text-lg not-italic font-medium leading-[normal] max-w-[60%] capitalize w-[70%]">
+        <h6 className="text-black text-[12px] sm:text-[16px]  xl:text-lg not-italic font-medium leading-[normal] max-w-[60%] capitalize w-[70%]">
           {name}
         </h6>
         <div className="flex gap-1 text-sm">
           <span className="flex items-center">
             {nearbyLocationIcon}
-            <span className="ml-[4px] text-[#005DA0] text-[12px] md:text-lg not-italic font-medium leading-[normal] text-nowrap">
+            <span className="ml-[4px] text-[#005DA0] text-[12px] sm:text-[16px]  xl:text-lg not-italic font-medium leading-[normal] text-nowrap">
               {distance ?? "N/A"}
             </span>
             <span className="mx-2">|</span>
-            <span className="text-[#001F35] text-[12px] md:text-lg not-italic font-medium leading-[normal] text-nowrap">
+            <span className="text-[#001F35] text-[12px] sm:text-[16px]  xl:text-lg not-italic font-medium leading-[normal] text-nowrap">
               {time ?? "N/A"}
             </span>
           </span>

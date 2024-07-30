@@ -44,7 +44,7 @@ export default function About({
           className="mb-[14px] sm:mb-[30px]"
         />
       ) : (
-        <h2 className="text-h2 lg:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[24px] capitalize">
+        <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[10px] xl:mb-[24px] capitalize">
           {heading}{" "}
           <span className={clsx(" font-[700]  text-[#148B16]")}>
             {projName}

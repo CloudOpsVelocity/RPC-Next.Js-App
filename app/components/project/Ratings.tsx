@@ -6,7 +6,7 @@ import React from "react";
 export default function Ratings() {
   const { data, isLoading } = useRatings();
   return (
-    <p className=" sm:text-[20px] flex justify-start items-start lg:text-[24px] text-[#242424] font-[700] whitespace-nowrap mt-3">
+    <p className=" sm:text-[20px] Montserrat flex justify-start items-start xl:text-[24px] text-[#242424] font-[700] whitespace-nowrap mt-3">
       {isLoading
         ? "..."
         : `${

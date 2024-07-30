@@ -54,20 +54,20 @@ const FirstBlock: React.FC<Props> = ({
   }
   return (
     <div
-      className={`relative rounded-[10px] w-full m-auto bg-gray-50  lg:h-[750px] bg-cover flex justify-between items-start flex-col shadow-md break-words`}
+      className={`relative rounded-[10px] w-full m-auto bg-gray-50 sm:h-[545px]  xl:h-[750px] bg-cover flex justify-between items-start flex-col shadow-md break-words`}
     >
       {projectDetails && (
         <>
           {hasReraStatus && (
-            <p className="hidden sm:flex items-center pl-[8px] rounded-tl-lg text-center text-[12px] sm:text-[24px] font-[600] text-[#FFF] bg-gradient-to-r w-[122px] from-[#148B16] /0 to-[#EFEFEF]/50  z-10 left-0 absolute">
-              <ReraIcon />
+            <p className="hidden sm:flex items-center pl-[8px] rounded-tl-lg text-center text-[12px] sm:text-[16px]  xl:text-[24px] font-[600] text-[#FFF] bg-gradient-to-r w-[122px] from-[#148B16] /0 to-[#EFEFEF]/50  z-10 left-0 absolute">
+              <ReraIcon className="h-[14px] w-[14px] sm:h-[16px] sm:w-[16px] xl:h-[24px] xl:w-[24px]" />
               RERA
             </p>
           )}
           <div className="absolute m-[2%] z-10 right-[1px] sm:right-2">
-            <p className="shadow-md rounded-[10px] bg-gradient-to-r p-[8px] from-[#EFF5FF] /0  to-[#F2FAFF]/100 text-[#000] text-[12px] sm:text-[16px] md:text-xl not-italic font-medium leading-[normal]">
+            <p className="shadow-md rounded-[10px] bg-gradient-to-r p-[8px] from-[#EFF5FF] /0  to-[#F2FAFF]/100 text-[#000] text-[12px] sm:text-[16px] xl:text-xl not-italic font-medium leading-[normal]">
               Project Status:{" "}
-              <span className="text-[#148B16] text-[12px] sm:text-[16px]   md:text-xl not-italic font-bold leading-[normal]">
+              <span className="text-[#148B16] text-[12px] sm:text-[16px]   xl:text-xl not-italic font-bold leading-[normal]">
                 {" "}
                 {projectDetails.projectStatus}
               </span>{" "}
@@ -94,7 +94,7 @@ const FirstBlock: React.FC<Props> = ({
                     alt="project image"
                     src={imageUrl}
                     fill
-                    className={`!w-full sm:!rounded-[10px]  h-[330px] lg:h-[750px] bg-gray-${
+                    className={`!w-full sm:!rounded-[10px]  h-[330px] sm:max-h-[545px] !xl:h-[750px] xl:max-h-[750px] bg-gray-${
                       index + 1
                     }`}
                     quality={100}
@@ -103,21 +103,21 @@ const FirstBlock: React.FC<Props> = ({
               ))}
             </Carousel>
           </div>
-          <div className="sm:absolute bottom-0  sm:m-[2%] z-10 sm:w-[95%] self-center justify-between items-start flex-col md:flex-row border-solid border-white-500 sm:rounded-[10px] bg-gradient-to-r from-[#EFEFEF] /20 to-[#c3c3c3bd]/80 shadow-md  sm:flex break-words">
+          <div className="sm:absolute bottom-0 sm:m-[1%] sm:mb-[4%]   xl:mb-[2%] xl:m-[2%] z-10 sm:w-[95%] self-center justify-between items-start flex-col md:flex-row border-solid border-white-500 sm:rounded-[10px] bg-gradient-to-r from-[#EFEFEF] /20 to-[#c3c3c3bd]/80 shadow-md  sm:flex break-words sm:px-6 sm:py-2">
             <div className="w-full md:w-[60%]">
-              <div className={`ml-[2%] mt-1 sm:mt-10 mb-[7px]`}>
+              <div className={`ml-[2%] mt-1 sm:mt-[6px] xl:mt-10 mb-[7px]`}>
                 <div className="flex justify-between items-start">
-                  <h1 className="text-[22px] sm:text-[24px] lg:text-[28px] font-[700] text-[#001F35] break-words text-wrap w-full">
+                  <h1 className="text-[22px] sm:text-[22px] xl:text-[28px] font-[700] text-[#001F35] break-words text-wrap w-full">
                     {projectDetails.projectName}
                   </h1>
                   <SharePopup className="text-sm p-[2px] mr-2 mt-[2px] sm:hidden " />
                 </div>
 
-                <p className="text-[#242424]  text-sm sm:text-[22px] not-italic font-[600] leading-[normal] w-[100%] tracking-[0.32px] capitalize mt-[14px] ">
+                <p className="text-[#242424]  text-sm sm:text-[18px]  xl:text-[22px] not-italic font-[600] leading-[normal] w-[100%] tracking-[0.32px] capitalize sm:mt-[8px] xl:mt-[14px] ">
                   {`${projectDetails.address}, ${projectDetails.localityName}, ${projectDetails.cityName}, ${projectDetails.state}, ${projectDetails.pinCode}`}
                 </p>
 
-                <p className="text-sm sm:text-[16px] mt-[14px] lg:text-[22px] font-[600] text-[#242424]">
+                <p className="text-sm sm:text-[16px] mt-[10px] xl:mt-[14px] xl:text-[22px] font-[600] text-[#242424]">
                   Start - End Date:
                   <span className="font-[600] text-[#242424]">
                     {" "}
@@ -126,12 +126,12 @@ const FirstBlock: React.FC<Props> = ({
                   </span>
                 </p>
 
-                <p className="text-[#242424] sm:text-2xl not-italic font-semibold leading-[normal] mt-[14px]">
+                <p className="text-[#242424] sm:text-[16px] xl:text-2xl not-italic font-semibold leading-[normal] mt-[14px]">
                   Posted By:{" "}
                   <a
                     href={`/builder/${builderId}`}
                     target="_blank"
-                    className="text-btnPrimary sm:text-2xl  font-bold leading-[normal] underline"
+                    className="text-btnPrimary sm:text-[16px] xl:text-2xl  font-bold leading-[normal] underline"
                   >
                     {companyName ?? "Builder"}
                   </a>
@@ -139,18 +139,18 @@ const FirstBlock: React.FC<Props> = ({
               </div>
             </div>
             <div className="w-full md:w-[40%] flex justify-between md:items-end flex-col p-[2%]">
-              <h2 className="inline-flex md:text-[28px] lg:text-[32px] font-semibold sm:font-[700] text-[#001F35]">
+              <h2 className="inline-flex sm:text-[22px] xl:text-[32px] font-semibold sm:font-[700] text-[#001F35]">
                 <span className=" mr-1 sm:hidden">Price range: </span>
                 {"  "}
                 {formatCurrency(projectDetails.minPrice)} -{" "}
                 {formatCurrency(projectDetails.maxPrice)}
               </h2>
-              <p className=" md:text-right lg:text-[24px] sm:font-[600] mb-[10px] md:mb-[20px] text-[#242424] ">
+              <p className=" md:text-right sm:text-[14px] xl:text-[24px] sm:font-[600] mb-[10px] md:mb-[20px] text-[#001F35] ">
                 ₹ {projectDetails.basePrice}/- Price per sqft onwards
               </p>
 
               <p
-                className=" lg:text-[20px] font-[600] mr-auto md:mr-0 text-[#0073C6] bg-[#FFF] rounded-[10px] shadow-md p-[8px] flex items-center gap-2 cursor-pointer"
+                className=" sm:text-[16px] xl:text-[20px] font-[600] mr-auto md:mr-0 text-[#0073C6] bg-[#FFF] rounded-[10px] shadow-md p-[8px] flex items-center gap-2 cursor-pointer"
                 onClick={() => scrollToTopic("floorPlansdiv")}
               >
                 <Image
@@ -158,7 +158,7 @@ const FirstBlock: React.FC<Props> = ({
                   height={100}
                   src={"/abc/floorplan.png"}
                   alt="no of floors"
-                  className="h-[24px] w-[24px] "
+                  className=" xl:h-[24px] xl:w-[24px] w-[16px] h-[16px]  sm:h-[16px] sm:w-[16px] "
                 />
                 {projectDetails?.floorPlanCount || 0} Floor Plan
               </p>

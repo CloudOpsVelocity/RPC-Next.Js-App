@@ -39,17 +39,17 @@ export default function OverviewBanner({
         className="flex justify-start items-center w-full flex-col md:flex-row bg-[#f0f9ff] scroll-mt-40"
         id="brochure"
       >
-        <PriceBag className="w-[100px] h-[120px] md:w-[237px] md:h-[263px] mt-2 sm:mt-0" />
+        <PriceBag className="w-[100px] h-[120px]  sm:w-[151px] xl:w-[237px]  sm:h-[169px] xl:h-[263px] mt-2 sm:mt-0" />
 
-        <div className="flex justify-center sm:justify-between items-center w-[100%] flex-row sm:ml-[3%] p-[2%] flex-wrap">
+        <div className="flex justify-center sm:justify-between items-center w-[100%] flex-row sm:ml-[3%] p-[2%]  flex-wrap">
           <div className=" grid place-items-center md:block">
-            <p className="text-[#212C33] sm:text-[24px] lg:text-[34px] font-[600]  md:text-start text-center">
+            <p className="text-[#212C33] sm:text-[24px] xl:text-[34px] font-[600]  md:text-start text-center">
               Price Range
             </p>
-            <p className="text-[#001F35] sm:text-[24px] md:text-[32px] lg:text-[40px] whitespace-nowrap font-[700] mt-1">
+            <p className="text-[#001F35]  sm:text-[32px]  whitespace-nowrap font-[700] mt-1">
               {formatCurrency(minPrice)} - {formatCurrency(maxPrice)}
               {", "}
-              <span className="text-[#545353] text-lg md:text-[32px] text-wrap not-italic font-medium leading-[normal]">
+              <span className="text-[#545353] text-lg sm:text-[20px] xl:text-[32px] text-wrap not-italic font-medium leading-[normal]">
                 ₹{" "}
                 {
                   <NumberFormatter
@@ -64,7 +64,7 @@ export default function OverviewBanner({
             <div className="flex justify-center sm:justify-start items-center w-full space-x-2">
               <Button
                 title="Request  Callback"
-                buttonClass=" text-[#FFF] text-[12px] sm:text-[28px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px]  mt-3"
+                buttonClass=" text-[#FFF] text-[12px] sm:text-[20px] xl:text-[28px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px]  mt-3 sm:mt-0"
                 onChange={() =>
                   open({
                     modal_type: "PROJECT_REQ_CALLBACK",

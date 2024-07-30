@@ -27,7 +27,7 @@ type Props = {
   isPartialData: boolean;
 };
 const styles = {
-  box: "flex flex-col items-start sm:gap-[10px] p-4 sm:border sm:shadow-[0px_4px_10px_0px_rgba(202,233,255,0.30)] rounded-[10px] border-solid border-[#92B2C8] bg-[#fff] sm:mr-[46px]",
+  box: "flex flex-col items-start sm:gap-[8px] xl:gap-[10px] p-4 sm:border sm:shadow-[0px_4px_10px_0px_rgba(202,233,255,0.30)] mb-3 rounded-[10px] border-solid border-[#92B2C8] bg-[#fff] xl:mr-[46px] sm:mr-[20px] ",
 };
 
 export default function ProjectDetailsP({
@@ -55,7 +55,7 @@ export default function ProjectDetailsP({
       className="w-[95%] sm:w-[90%] mb-[3%] scroll-mt-[180px]"
       id="propertyDetails"
     >
-      <h2 className="text-h2 lg:text-[32px] font-[600] text-[#001F35] mb-[12px] break-words">
+      <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[12px] break-words">
         Property Details Of{" "}
         <span className="text-[#148B16] font-[700] ">{projName}</span>{" "}
       </h2>
@@ -81,7 +81,7 @@ export default function ProjectDetailsP({
                         : phase.phaseName
                     }
                     onChange={() => handlePhaseChange(phase.phaseId)}
-                    buttonClass={` mb-[5px] text-[14px] sm:text-[18px] lg:text-[20px] bg-[#ECF7FF] p-[8px] xl:px-[8px]  whitespace-nowrap text-[#000] rounded-[8px] ${
+                    buttonClass={` mb-[5px] text-[14px] sm:text-[18px]  xl:text-[20px] bg-[#ECF7FF] p-[8px] xl:px-[8px]  whitespace-nowrap text-[#000] rounded-[8px] ${
                       currentPhase === phase.phaseId
                         ? " font-[600] border-solid border-[1px] border-[#0073C6] "
                         : " font-[400]"
