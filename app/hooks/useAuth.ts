@@ -131,9 +131,11 @@ export default function useAuth({
         return registrationResponse.data;
       }
       if (!registrationResponse.data.status) {
-        toast.error(registrationResponse.data.message, {
-          duration: 4000,
-        });
+        if (registrationResponse.data.flag !== "m") {
+          toast.error(registrationResponse.data.message, {
+            duration: 4000,
+          });
+        }
         return registrationResponse.data;
       }
     } catch (error: any) {
