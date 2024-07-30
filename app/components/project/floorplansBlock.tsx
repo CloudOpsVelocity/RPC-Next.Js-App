@@ -272,7 +272,7 @@ export default function FloorplansBlock({
                         handleUnitFormClear();
                       }
                     }}
-                    buttonClass={` mb-[5px] text-[14px] sm:text-[18px] lg:text-[20px] bg-[#ECF7FF] p-[8px] xl:px-[8px]  whitespace-nowrap text-[#000] rounded-[8px]${
+                    buttonClass={` mb-[5px] text-[14px] sm:text-[18px] lg:text-[20px] bg-[#ECF7FF] p-[8px] xl:px-[8px] capitalize  whitespace-nowrap text-[#000] rounded-[8px]  ${
                       currentPhase == each.phaseId
                         ? " font-[600] border-solid border-[1px] border-[#0073C6] "
                         : " font-[400]"
