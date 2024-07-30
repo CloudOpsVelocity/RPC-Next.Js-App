@@ -48,12 +48,12 @@ export function DropZone(props: Partial<DropZoneProps>) {
 
           <div className="flex justify-center items-center h-full space-x-2">
             {mediaCloudIcon}
-            <div className=" w-[50%] Xl:w-full">
-              <p className="text-black text-sm not-italic font-medium leading-[normal] hidden md:block lg:block xl:block  sm:hidden">
+            <div className=" w-[50%] Xl:w-full sm:min-w-[260px]">
+              <p className="text-black text-sm not-italic font-medium leading-[normal] hidden md:block lg:block xl:block  sm:hidden ">
                 Select a file or drag and drop here
               </p>
               <p className="text-black text-sm not-italic font-medium leading-[normal] block md:hidden lg:hidden xl:hidden">
-                Select a file 
+                Select a file
               </p>
               <p className="text-[#545353] text-[10px] not-italic font-normal leading-[normal]">
                 JPG, PNG or JPEG, file size no more than 10MB
@@ -103,6 +103,7 @@ const Preview = ({ main, logo, setError }: any) => {
       }
     }
   };
+  const [opened, { open, close }] = useDisclosure(false);
   return (
     <>
       <div className="flex items-center p-4 bg-white border border-gray-300 rounded-lg">
@@ -110,10 +111,11 @@ const Preview = ({ main, logo, setError }: any) => {
           <img
             src={imageUrl} // You may want to use the actual image source from `logo`
             alt="bon ton logo"
-            className="w-12 h-12"
+            className="w-12 h-12 cursor-pointer"
             width={64}
             height={64}
             style={{ aspectRatio: "64 / 64", objectFit: "cover" }}
+            onClick={open}
           />
         </div>
         <div className="flex flex-col flex-grow ml-4">
@@ -131,7 +133,12 @@ const Preview = ({ main, logo, setError }: any) => {
           </span>
         </div>
         <div className="flex space-x-2">
-          <ImagePreivewModal logo={logo} />
+          <ImagePreivewModal
+            logo={logo}
+            opened={opened}
+            open={open}
+            close={close}
+          />
           {/* THis Under Edit Icon */}
           <svg
             onClick={() => handleEditClick()}
@@ -179,8 +186,7 @@ const Preview = ({ main, logo, setError }: any) => {
     </>
   );
 };
-const ImagePreivewModal = ({ logo }: any) => {
-  const [opened, { open, close }] = useDisclosure(false);
+const ImagePreivewModal = ({ logo, opened, open, close }: any) => {
   const imageUrl = URL.createObjectURL(logo);
   const preview = (
     <Image

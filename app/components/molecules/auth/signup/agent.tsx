@@ -39,12 +39,13 @@ import handleTrimAndReplace from "@/app/utils/input/validations";
 import clsx from "clsx";
 import { getQueryParamClient } from "@/app/hooks/custom/useRedirect";
 import LoginSignupTabs from "@/app/(auth)/Components/LoginSignup";
+import { CompletedIcon } from "@/app/images/HomePageIcons";
 
 function Agent() {
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error" | "otp"
   >("idle");
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(1);
   const router = useRouter();
   const { registerOtherDetails, register, login } = useAuth({
     type: "register",
@@ -169,7 +170,12 @@ function Agent() {
   };
   const queryParam = getQueryParamClient();
   return (
-    <div className="w-full max-w-[423px] flex justify-center items-center flex-col m-[2%] ">
+    <div
+      className={clsx(
+        "w-full max-w-[423px] flex justify-center items-center flex-col m-[2%] ",
+        active == 2 && "max-w-full"
+      )}
+    >
       {active !== 2 && (
         <div className=" sm:max-w-[459px] md:max-w-[597px] flex justify-center items-center gap-[15%] mb-[5%] ">
           <LoginSignupTabs
@@ -200,12 +206,13 @@ function Agent() {
           // @ts-ignore
           styles={styles}
           classNames={{
-            root: StepCss.root,
-            steps: active === 2 ? StepCss.rootSuccess : StepCss.steps,
+            root: StepCss.aRoot,
+            steps: active === 2 ? StepCss.rootSuccess : StepCss.aSteps,
             step: StepCss.step,
             separator: StepCss.separatorForAgent,
             stepLabel: StepCss.steplabelCommonForAll,
             content: StepCss.content,
+            stepCompletedIcon: StepCss.compltedIcon,
           }}
         >
           <Stepper.Step
@@ -220,6 +227,8 @@ function Agent() {
                   ? StepCss.stepLabelDone
                   : StepCss.stepLabel,
               stepIcon: active === 0 ? StepCss.stepIcon : "",
+              // stepCompletedIcon: StepCss.compltedIcon,
+              // stepCompletedIcon: StepCss.compltedIcon,
             }}
           >
             <TextInput
@@ -293,6 +302,7 @@ function Agent() {
                   setStatus("idle");
                 }
               }}
+              allowNegative={false}
               classNames={{
                 root: StepCss.inputRoot,
                 input: N.classForContact,
@@ -435,7 +445,7 @@ function Agent() {
             href={{ pathname: "/login", search: queryParam.query }}
             className="text-[#002749] font-semibold *: md:text-xl flex justify-center items-center gap-2.5 rounded border p-2 border-solid border-[#B2B2B2] mb-3 mt-[5%] text-nowrap w-full"
           >
-            Already have an Account ?{" "}
+            Already have an Account?{" "}
             <span className="md:text-xl  text-[#0C7ACA]  not-italic font-semibold text-nowrap">
               LogIn
             </span>

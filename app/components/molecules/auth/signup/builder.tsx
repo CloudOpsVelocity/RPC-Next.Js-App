@@ -310,7 +310,12 @@ function Builder() {
   const queryParam = getQueryParamClient();
   const ref = useRef<HTMLInputElement>(null);
   return (
-    <div className="w-full max-w-[423px] flex justify-center items-center flex-col mt-[2%]">
+    <div
+      className={clsx(
+        "w-full max-w-[423px] flex justify-center items-center flex-col mt-[2%]",
+        active === 4 && "max-w-full"
+      )}
+    >
       {active !== 4 && (
         <div className=" sm:max-w-[459px] md:max-w-[597px] flex justify-center items-center gap-[15%] mb-[5%] ">
           <LoginSignupTabs
@@ -366,7 +371,9 @@ function Builder() {
             separator: StepCss.separator,
             stepLabel: StepCss.steplabelCommonForAll,
             content: StepCss.content,
+            stepCompletedIcon: StepCss.icon,
           }}
+          // completedIcon
         >
           <Stepper.Step
             label="Personal Details"
@@ -456,6 +463,7 @@ function Builder() {
                   setStatus("idle");
                 }
               }}
+              allowNegative={false}
               maxLength={10}
               withErrorStyles={true}
               allowDecimal={false}
@@ -649,7 +657,7 @@ function Builder() {
                 label="Branch"
                 searchable
                 placeholder={`${
-                  form.values.branch.length === 0 ? "-- Select Brach--" : ""
+                  form.values.branch.length === 0 ? "-- Select Branch--" : ""
                 }`}
                 classNames={{
                   pill: StepCss.pill,
@@ -867,14 +875,13 @@ function Builder() {
           )}
         </Group>
       </form>
-
       {active === 0 && (
         <>
           <Link
             href={{ pathname: "/login", search: queryParam.query }}
             className="text-[#002749] font-semibold *: md:text-xl flex justify-center items-center gap-2.5 rounded border p-2 border-solid border-[#B2B2B2] mb-3  xl:mb-3 mt-[5%] text-nowrap w-full"
           >
-            Already have an Account ?{" "}
+            Already have an Account?{" "}
             <span className="md:text-xl  text-[#0C7ACA]  not-italic font-semibold text-nowrap">
               LogIn
             </span>

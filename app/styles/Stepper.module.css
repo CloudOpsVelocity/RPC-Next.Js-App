@@ -1,3 +1,21 @@
+/* AGENT SPECIFIC CLASSNAME */
+.aRoot {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.aSteps {
+  margin-bottom: 5%;
+  width: 80%;
+  margin-right: 20px;
+}
+.compltedIcon {
+  width: 10px;
+  height: 10px;
+}
+/* NORMAL CSS */
 .root {
   width: 100%;
 }
@@ -10,7 +28,6 @@
 .steps {
   margin-bottom: 5%;
 }
-
 .step {
   padding: 0;
   justify-content: center;

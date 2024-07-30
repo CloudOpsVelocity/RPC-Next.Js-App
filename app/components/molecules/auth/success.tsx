@@ -11,7 +11,7 @@ export default function Success() {
   return (
     <div
       className={clsx(
-        "flex  max-w-3xl flex-col items-center justify-center   ",
+        "flex  max-w-3xl flex-col items-center justify-center  m-auto ",
         path === "/register/individual" && "p-4"
       )}
     >
