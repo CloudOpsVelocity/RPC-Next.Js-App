@@ -303,7 +303,7 @@ function Agent() {
                 status === "error" && "!mb-[2px]"
               )}
               label="Contact Number"
-              placeholder="Enter your contact number:"
+              placeholder="Enter your contact number"
               {...form.getInputProps("mobile")}
               error={form.errors.mobile || status === "error"}
               onChange={(e) => {

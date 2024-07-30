@@ -103,8 +103,8 @@ function ForgotForm() {
             height={200}
           />
           <h3 className="font-normal text-[16px] xl:text-lg max-w-xl text-center">
-            Don’t worry ! It happens. Please enter the phone number we will send
-            the OTP in this phone number.
+            Don’t worry! Please enter the phone number we will send the OTP in
+            this phone number.
           </h3>
           <NumberInput
             leftSection={

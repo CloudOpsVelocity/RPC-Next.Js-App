@@ -50,7 +50,7 @@ function Login({ params }: any) {
   };
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
   return (
-    <div className="sm:max-w-[100px] xl:max-w-[423px] m-auto">
+    <div className="sm:max-w-[420px] xl:max-w-[423px] m-auto">
       <form
         onSubmit={form.onSubmit(onSubmit)}
         className="w-[100%] flex justify-center items-center flex-col "

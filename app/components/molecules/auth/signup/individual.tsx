@@ -120,7 +120,7 @@ function Individual() {
                 label="Your Name"
                 placeholder="Enter your name here"
                 {...form.getInputProps("name")}
-      onBlurCapture={(e) => handleTrimAndReplace(e, "name", form)}
+                onBlurCapture={(e) => handleTrimAndReplace(e, "name", form)}
                 classNames={{
                   root: StepCss.inputRoot,
                   input: StepCss.textInput,
@@ -209,6 +209,7 @@ function Individual() {
                     .slice(0, 10);
                   form.setFieldValue("mobile", first10Digits as any);
                 }}
+                allowNegative={false}
               />
               {status === "error" && (
                 <p className=" text-right text-[color:var(--Mandatory,#F00)] text-[12px] xl:text-[15px] italic font-medium leading-[normal]">

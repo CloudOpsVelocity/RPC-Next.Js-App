@@ -60,32 +60,34 @@ export default function ForgotOtpBox({
           A One Time- Password has been sent to{" "}
           {hideMobileNumber((mobile && mobile) || 0)}
         </p>
-        <FocusTrap active>
-          <PinInput
-            classNames={{
-              pinInput: S.pinInput,
-              input: S.input,
-            }}
-            name="otp"
-            size="xl"
-            {...form.getInputProps("otp")}
-            className=""
-            inputMode="numeric"
-            type={"number"}
-            placeholder=""
-            data-autofocus
-          />
-        </FocusTrap>
-
-        <Resend userName={mobile} />
+        <div className=" mr-auto ml-auto ">
+          {" "}
+          <FocusTrap active>
+            <PinInput
+              classNames={{
+                pinInput: S.pinInput,
+                input: S.input,
+              }}
+              name="otp"
+              size="xl"
+              {...form.getInputProps("otp")}
+              className=""
+              inputMode="numeric"
+              type={"number"}
+              placeholder=""
+              data-autofocus
+            />
+          </FocusTrap>
+          <Resend userName={mobile} />
+        </div>
 
         {error && (
-          <p className="text-[#F00] font-[500] text-[13px] xl:text-[16px] w-[100%] !max-w-[423px] !mb-[6%] text-center ">
+          <p className="text-[#F00] font-[500] text-[13px] xl:text-[16px] w-[100%] !max-w-[500px] !mb-[6%] text-center ">
             You&apos;ve entered wrong OTP, Please enter your OTP again!
           </p>
         )}
         {form.errors.otp && (
-          <p className="text-[#F00] font-[500] text-[13px] xl:text-[16px] w-[100%] !max-w-[423px] !mb-[6%] text-center ">
+          <p className="text-[#F00] font-[500] text-[13px] xl:text-[16px] w-[100%] !max-w-[500px] !mb-[6%] text-center ">
             {form.errors.otp}
           </p>
         )}

@@ -12,7 +12,7 @@ export default function ForgotSucess() {
         Reset Password
       </h1>
       <ForgotPass className="mt-[7%]" />
-      <p className="text-[color:var(--Grey-1,#666)] font-semibold text-center text-[16px] xl:text-[26px] not-italic xl:font-medium leading-[normal] mt-10 mb-10">
+      <p className="text-[#24242424] font-semibold text-center text-[16px] xl:text-[26px] not-italic xl:font-medium leading-[normal] mt-10 mb-10">
         Password successfully reset! Your account security is our priority.
         Remember to keep your new password safe.
       </p>
