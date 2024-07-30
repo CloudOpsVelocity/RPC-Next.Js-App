@@ -11,7 +11,7 @@ export default function Feature({
 }) {
   return (
     <>
-      <div className="w-[90%] scroll-mt-[180px] mb-[3%]" id="highlights">
+      <div className="w-[90%] mt-[100px] scroll-mt-[180px] mb-[3%]" id="highlights">
         <h2 className="text-h2 lg:text-[32px] font-semibold mb-[10px]">
           Highlights Of{" "}
           <span className="text-[#148B16]  lg:text-[32px] not-italic font-bold leading-[normal]">

@@ -79,7 +79,7 @@ export default function HeaderActions({
     <div>
       {" "}
       <h1
-        className="text-h2 lg:text-[32px] font-[600] text-[#001F35] mb-[12px] scroll-mt-[280px]"
+        className="text-h2 lg:text-[32px] mt-[3%] xl:mt-[100px] font-[600] text-[#001F35] mb-[12px] scroll-mt-[280px]"
         id="floorPlansdiv"
       >
         Floor Plans For{" "}

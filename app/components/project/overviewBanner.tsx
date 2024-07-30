@@ -82,7 +82,7 @@ export default function OverviewBanner({
               />
             </div>
           </div>
-          <div className="flex justify-center items-center flex-col">
+          <div className="flex justify-center items-end flex-col">
             <DownloadBroucher className="hidden sm:flex" url={brocherUrl} />
             <WhatsAppButton
               className="cursor-pointer mt-2 sm:mt-4 "
