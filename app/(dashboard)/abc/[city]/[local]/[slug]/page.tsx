@@ -246,12 +246,11 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           <Feature data={data.highlights} projName={data.projectName} />
         </ErrorContainer>
         <Banner projName={data.projectName} projIdEnc={data.projIdEnc} />
-       
+
         <ErrorContainer data={data.banks}>
-        <div id="loans" className="w-full h-auto scroll-mt-[150px]">
-          <Loans type="proj" banks={data.banks} name={data.projectName} />
+          <div id="loans" className="w-full h-auto scroll-mt-[150px]">
+            <Loans type="proj" banks={data.banks} name={data.projectName} />
           </div>
-          
         </ErrorContainer>
 
         <AboutBuilder id={data.builderId} />
@@ -264,12 +263,16 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             content={data.wbtp}
           />
         )}
-        <Reviews projName={data.projectName} />
+        {/* <Reviews projName={data.projectName} /> */}
         {/* <DownloadBroucher
           url={`${data?.media?.projBroucherUrl}?${Math.random()}`}
         /> */}
-        <div id="faq" className="scroll-mt-[70px] m-auto w-[90%] flex justify-start items-start">
-        <FaqWithBg data={data.faqs} projName={data.projectName} /></div>
+        <div
+          id="faq"
+          className="scroll-mt-[70px] m-auto w-[90%] flex justify-start items-start"
+        >
+          <FaqWithBg data={data.faqs} projName={data.projectName} />
+        </div>
         <NearByCarousel
           projName={data.projectName}
           lat={data.lat}
