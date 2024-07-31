@@ -188,12 +188,12 @@ export default function PropertyTypeDetailsCrad({
         <p className="text-[12px] lg:text-lg text-wrap text-[#242424] text-right  italic font-medium leading-[normal]">
           ₹ {cg?.basePrice} Base Price/ sq.ft
         </p>
-        <p className="text-[14px] sm:text-[18px]  text-right text-[#4D6677]  not-italic font-semibold leading-[normal] capitalize mt-3 ">
+        <p className="text-[14px] sm:text-[18px] xl:text-[22px]  text-right text-[#4D6677]  not-italic font-semibold leading-[normal] capitalize mt-3 ">
           Unit types : <br />{" "}
           {propertyType !== "plot" ? (
             <span
               className={clsx(
-                "text-[#242424] text-right text-[12px] sm:text-lg not-italic font-semibold leading-[22px] max-w-[135px] inline-block min-h-[44px] w-[80%]",
+                "text-[#242424] text-right text-[12px] sm:text-[16px] xl:text-lg not-italic font-semibold leading-[22px] max-w-[135px] inline-block min-h-[44px] w-[80%]",
                 propertyType === "plot" && "!max-w-full"
               )}
             >

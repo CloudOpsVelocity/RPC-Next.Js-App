@@ -20,8 +20,7 @@ export default function ProjectLoans({
   const isMobile = useMediaQuery(`(max-width: 601px)`);
   return (
     <div
-      className="bg-white pt-2 pb-4 sm:py-8 w-[95%] md:w-[90%] md:mb-[3%] sm:mb-[4%] mx-auto  overflow-hidden scroll-mt-[750px]"
-      id="loans"
+      className="bg-white pt-2 pb-4 sm:py-8 w-[95%] md:w-[90%] md:mb-[3%] sm:mb-[4%] mx-auto  h-auto  "
     >
       {type === "prop" ? (
         <PropertyHeading
@@ -31,7 +30,7 @@ export default function ProjectLoans({
         />
       ) : (
         <>
-          <h2 className="text-h2 lg:text-[32px] font-bold">
+          <h2 className="text-h2 sm:text-[20px] xl:text-[32px] font-bold">
             Bank Approvals For{" "}
             <span className="text-[#148B16] text-[20px] lg:text-[32px] not-italic font-bold leading-[normal] ">
               {name}
@@ -88,7 +87,7 @@ export default function ProjectLoans({
                 {bank.bankid && (
                   <div
                     key={index}
-                    className="flex flex-col justify-center items-center gap-1.5 p-1.5 mt-4 sm:max-w-[150px] md:max-w-[170px] text-center border rounded-[7px] border-solid border-[#CCCED1] min-h-[160px]"
+                    className="flex flex-col justify-center items-center gap-1.5 p-[6px] mt-4 sm:max-w-[142px] md:max-w-[170px] text-center border rounded-[7px] border-solid border-[#CCCED1] min-h-[160px]"
                   >
                     <Image
                       src={
@@ -100,7 +99,7 @@ export default function ProjectLoans({
                       height={70}
                       className="min-h-[70px] w-[140px] aspect-video "
                     />
-                    <p className="mt-3  text-[#242424] text-center text-xl not-italic font-semibold leading-[normal] capitalize">
+                    <p className="mt-3  text-[#242424] text-[18px] text-center  not-italic font-semibold leading-[normal] capitalize">
                       {bank.bankName}
                     </p>
                   </div>

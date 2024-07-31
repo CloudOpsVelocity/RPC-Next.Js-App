@@ -144,7 +144,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
       <PropertyJsonLdScript data={data} />
       <ArticleJsonLdScript data={data} />
       <div className="mt-[100px] sm:mt-[70px] w-full pb-[2%] flex items-center justify-center flex-col ">
-        <div className="p-[2%] w-full sm:w-[94%]">
+        <div className="sm:p-[1%] xl:p-[2%] w-full sm:w-[94%]">
           <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%]">
             <span>Home</span> {" > "}
             <Link href={"/project/banglore"}>
@@ -246,8 +246,12 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           <Feature data={data.highlights} projName={data.projectName} />
         </ErrorContainer>
         <Banner projName={data.projectName} projIdEnc={data.projIdEnc} />
+       
         <ErrorContainer data={data.banks}>
+        <div id="loans" className="w-full h-auto scroll-mt-[160px]">
           <Loans type="proj" banks={data.banks} name={data.projectName} />
+          </div>
+          
         </ErrorContainer>
 
         <AboutBuilder id={data.builderId} />
