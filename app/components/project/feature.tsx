@@ -11,10 +11,10 @@ export default function Feature({
 }) {
   return (
     <>
-      <div className="w-[90%] mt-[35px] scroll-mt-[180px] mb-[3%]" id="highlights">
-        <h2 className="text-h2 lg:text-[32px] font-semibold mb-[10px]">
+      <div className="w-[90%] mt-[35px] scroll-mt-[180px] mb-[5%]" id="highlights">
+        <h2 className="text-h2 sm:text-[22px] xl:text-[32px]  font-[600] text-[#001F35] mb-[12px] capitalize break-words text-nowrap w-[78%]">
           Highlights Of{" "}
-          <span className="text-[#148B16]  lg:text-[32px] not-italic font-bold leading-[normal]">
+          <span className="text-[#148B16]  font-[700]">
             {projName}
           </span>
         </h2>
@@ -34,7 +34,7 @@ export default function Feature({
                   className="w-[12px] h-[12px] sm:max-w-[20px] max-h-[14px] sm:max-h-[20px] sm:h-[20px] sm:w-[20px] mt-[3.5px] sm:mt-[10px]"
                   src={"/abc/Checked.png"}
                 />
-                <p className="text-[12px] sm:text-[20px] lg:text-[24px] m-0 text-[#212C33] font-medium md:font-semibold ">
+                <p className="text-[12px] sm:text-[20px] lg:text-[24px] m-0 text-[#212C33] font-medium sm:text-500 ">
                   {each}
                 </p>
               </li>
