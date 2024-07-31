@@ -10,6 +10,9 @@ const config: Config = {
 
   theme: {
     extend: {
+      screens: {
+        xl: "1600px",
+      },
       colors: {
         btnPrimary: "#0073C6",
         greenPrimary: "#148B16",
