@@ -32,10 +32,7 @@ export default function FaqWithBg({ data, projName }: FaqWithBgProps) {
   const isMobile = useMediaQuery(`(max-width: 601px)`);
   return (
     <div
-      className={
-        data?.length > 0 ? classes.wrapper : "!w-[95%] !md:w-[90%]  m-auto  "
-      }
-  
+      className={data?.length > 0 ? classes.wrapper : "!w-[95%] !md:w-[90%]   "}
     >
       <div className="flex sm:justify-center items-center !w-[100%] !md:w-[90%] ">
         {data?.length > 0 && (
@@ -220,21 +217,20 @@ const MobileFaqCard = ({
 }) => {
   return (
     <div className="transition-all duration-200 bg-white border border-gray-200 shadow-lg cursor-pointer hover:bg-gray-50 mt-2 rounded-md">
-    <button
-      type="button"
-      className="flex items-center justify-between w-full px-4 pt-1 pb-1 sm:p-6"
-    >
-      <span className="flex-1 min-w-0 font-semibold text-black text-left break-words">
-        {faqQuestion}
-      </span>
-    </button>
-    <div className="px-4 pb-2 sm:px-6 sm:pb-6">
-      <p>
-        <FaqReadMore text={faqAnswer} title={faqQuestion} maxLines={1} />
-      </p>
+      <button
+        type="button"
+        className="flex items-center justify-between w-full px-4 pt-1 pb-1 sm:p-6"
+      >
+        <span className="flex-1 min-w-0 font-semibold text-black text-left break-words">
+          {faqQuestion}
+        </span>
+      </button>
+      <div className="px-4 pb-2 sm:px-6 sm:pb-6">
+        <p>
+          <FaqReadMore text={faqAnswer} title={faqQuestion} maxLines={1} />
+        </p>
+      </div>
     </div>
-  </div>
-
   );
 };
 

@@ -77,15 +77,14 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
       title: cardData.projName,
     });
   };
-  const redirect=()=>{
- window.open(`/abc/karnataka/banglore/${reqId}`, "_blank")
-  }
+  const redirect = () => {
+    window.open(`/abc/karnataka/banglore/${reqId}`, "_blank");
+  };
 
   return (
     <>
       <div
-        onClick={()=>redirect()}
-
+        onClick={() => redirect()}
         key={reqId}
         className={clsx(
           "border border-width: 2px; text-card-foreground min-w-[310px] max-w-full   min-h-[400px] md:max-w-[494px]   mb-[1%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[14px]",
@@ -261,7 +260,7 @@ const ProjectCarousel = ({
   return (
     data?.length > 0 && (
       <div className="w-[100%] mb-[5%]">
-        <div className="w-[95%] sm:w-[90%] sm:px-6 xl:mx-auto ">
+        <div className="w-[95%] sm:w-[90%] sm:px-6 xl:mx-auto xl:px-0">
           <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[10px] xl:mb-[24px] capitalize">
             {/* <span className="!text-green-600">SARANG BY SUMADHARA </span> */}
             {title}{" "}
