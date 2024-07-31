@@ -41,7 +41,7 @@ const Map = ({
       center={position}
       zoom={13}
       className={clsx(
-        " h-[291px] sm:h-[700px] w-full z-[1] relative",
+        " h-[291px] sm:h-[456px] xl:h-[700px] w-full z-[1] relative",
         className
       )}
       scrollWheelZoom={true}
