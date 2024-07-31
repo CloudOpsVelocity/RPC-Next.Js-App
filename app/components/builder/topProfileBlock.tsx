@@ -26,7 +26,7 @@ export default function TopProfileBlock({
         </p>
 
         <div className="flex justify-start items-end w-[300px] py-5 sm:w-auto">
-          <div className="flex justify-center mr-[16px] items-center h-[93px] w-[93px] md:h-[133px] md:w-[133px] lg:h-[158px] lg:w-[158px] bg-[#FFF] shadow-md border-solid border-[2px] border-[#96C5E4] rounded-[10px]  ">
+          <div className="flex justify-center mr-[16px] items-center h-[93px] w-[93px] sm:h-[133px] sm:w-[133px] xl:h-[158px] xl:w-[158px] bg-[#FFF] shadow-md border-solid border-[2px] border-[#96C5E4] rounded-[10px]  ">
             <Image
               alt="builder"
               src={
@@ -40,20 +40,20 @@ export default function TopProfileBlock({
             />
           </div>
           <div>
-            <p className=" text-[#148B16] text-[16px] font-bold sm:text-[32px] not-italic sm:font-semibold ">
+            <p className=" text-[#148B16] text-[16px] font-bold sm:text-[24px] xl:text-[32px] not-italic sm:font-semibold ">
               {userName}
             </p>
-            <div className="text-[#202020] text-[12px] sm:text-xl font-bold not-italic z-40">
-              (By: {companyName} )
+            <div className="text-[#202020] text-[12px] sm:text-lg xl:text-xl font-bold not-italic z-40">
+              (By: {companyName})
             </div>
-            <p className=" text-[#303A42] text-[12px] sm:text-lg not-italic font-medium mt-2">
+            <p className=" text-[#303A42] text-[12px] sm:text-base xl:text-lg not-italic font-medium  mt-1 sm:mt-1 xl:mt-2">
               since {convertDateToMonthYear(companyStartDate)}
             </p>
           </div>
         </div>
       </div>
 
-      <BuilderPageHomeSvg className="absolute top-[23%] right-0  sm:static max-w-[180px] sm:max-w-full h-[167px] md:h-[231px] lg:h-[296px] z-1" />
+      <BuilderPageHomeSvg className="absolute top-[23%] right-0  sm:static max-w-[180px] sm:max-w-[50%] xl:max-w-full h-[167px] sm:h-[231px] lg:h-[296px] z-1" />
     </div>
   );
 }

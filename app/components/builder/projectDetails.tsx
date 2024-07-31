@@ -33,7 +33,7 @@ export default function ProjectDetails({
 }: Data) {
   return (
     <React.Fragment>
-      <div className="sm:rounded-[20px] mt-[3%] flex justify-between items-center bg-[#FFF] shadow-md w-[100%] mb-[3%] lg:w-[50%] p-[1%] border border-gray-300">
+      <div className="sm:rounded-[20px] mt-[3%] flex justify-between items-center bg-[#FFF] shadow-md w-[100%] mb-[3%] sm:w-[65%] xl:w-[50%] p-[1%] border border-gray-300">
         <div className="w-[30%] border-solid border-[#92B2C8] border-r-[1px]">
           <div className="flex justify-between items-center w-[90%] ">
             <span className=" text-[#202020]text-[16px]  sm:text-[20px] lg:text-[24px] font-[600]">
@@ -77,14 +77,14 @@ export default function ProjectDetails({
         id="whyBuy"
         heading="About Builder"
         content={mission}
-        className="mb-8 mt-2 sm:!mb-[40px]"
+        className="!mb-[14px] sm:!mb-[40px] !mt-[0px]"
       />
 
       <div
         className="flex w-full flex-col justify-center items-start gap-3.5 sm:gap-8 border border-[color:var(--blue-stroke,#4D6677)] shadow-[0px_4px_31.5px_0px_rgba(91,143,182,0.19)] p-4 sm:p-8 rounded-[7px] border-solid bg-[#FCFCFC] mb-5 sm:mb-[80px]
   "
       >
-        <div className="flex flex-row sm:flex-row gap-3.5 sm:justify-center sm:items-center sm:space-x-16 flex-wrap ">
+        <div className="flex flex-row sm:flex-row gap-3.5 xl:justify-center xl:items-center sm:gap-10 xl:gap-16 flex-wrap ">
           <Card
             Icon={emailIconSvg}
             title="Email"

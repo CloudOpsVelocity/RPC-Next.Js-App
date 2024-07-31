@@ -19,7 +19,7 @@ type Props = {};
 export default function Header({}: Props) {
   const isMobile = useMediaQuery("(max-width: 601px)");
   return (
-    <div className="flex h-[70px] items-center justify-between shrink-0 p-1 sm:pl-5 w-full py-3  shadow-[0px_4px_20px_0px_rgba(194,194,194,0.20)] bg-gradient-to-r from-[#f1f1f1] via-[#f1f1f1]  to-[#bde3ff] fixed top-0 z-[100]">
+    <div className="flex h-[70px] items-center justify-between shrink-0 p-1 pl-2 sm:pl-5 w-full py-3  shadow-[0px_4px_20px_0px_rgba(194,194,194,0.20)] bg-gradient-to-r from-[#f1f1f1] via-[#f1f1f1]  to-[#bde3ff] fixed top-0 z-[100]">
       <Link href={"/"}>
         <Image
           src={config.logo}
