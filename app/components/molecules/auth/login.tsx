@@ -39,7 +39,6 @@ function Login({ params }: any) {
     initialValues: { username: "", password: "" },
     validate: yupResolver(schema),
     validateInputOnBlur: true,
-    validateInputOnChange: true,
   });
 
   const { login } = useAuth({ type: "login" });

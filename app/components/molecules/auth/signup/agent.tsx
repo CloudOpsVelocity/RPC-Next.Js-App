@@ -90,7 +90,6 @@ function Agent() {
       return {};
     },
     validateInputOnBlur: true,
-    validateInputOnChange: true,
   });
   const OtpCallback = () => {
     close();

@@ -5,7 +5,7 @@ import { TbBuilding } from "react-icons/tb";
 import Link from "next/link";
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <main className="w-full flex  xl:h-screen">
+    <main className="w-full flex  sm:h-screen">
       <div className="relative flex-col hidden md:flex items-start sm:pl-[5%] lg:pl-[7%]  justify-start sm:pt-[3%] xl:pt-[4%] bg-gradient-to-b from-[#E4F4FF] /0 via-[#FFF] /0 to-[#EFFFF3]/100 w-full ">
         <Link
           href={"/"}

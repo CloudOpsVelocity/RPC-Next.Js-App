@@ -105,7 +105,6 @@ function Builder() {
       prevEmail: "",
     },
     validateInputOnBlur: true,
-    validateInputOnChange: true,
     name: "builder" + active,
     validate: (values) => {
       if (active === 0) {
