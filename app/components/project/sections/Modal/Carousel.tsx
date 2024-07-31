@@ -10,11 +10,17 @@ import { selectedPartialUnitAtom } from "@/app/store/partialsUnits";
 import Image from "next/image";
 import { FloorPlanNotAvail, ImgNotAvail } from "@/app/data/project";
 import clsx from "clsx";
-export default function CarouselModal() {
+export default function CarouselModal({
+  active,
+  setActive,
+}: {
+  active: number;
+  setActive: (number: number) => void;
+}) {
   const [isData, setIsData] = useAtom(selectedPartialUnitAtom);
   const handleImageClick = (index: number) => {
-    if (isData.main === index) return;
-    setIsData({ ...isData, main: index });
+    if (active === index) return;
+    setActive(index);
   };
   return (
     <Carousel
@@ -44,8 +50,7 @@ export default function CarouselModal() {
             height={300}
             className={clsx(
               "max-h-[100px] object-cover shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]  ",
-              isData.main === index &&
-                "border-[3px] border-btnPrimary border-solid "
+              active === index && "border-[3px] border-btnPrimary border-solid "
             )}
           />
         </Carousel.Slide>

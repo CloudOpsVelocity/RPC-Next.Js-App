@@ -13,21 +13,28 @@ import { propertyDetailsSvgs } from "@/app/images/commonSvgs";
 import CarouselModal from "./Carousel";
 import useDownload from "@/app/hooks/property/useDownload";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
+import { useState } from "react";
+import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
+import ZoomInOut from "../../actions/ZoomInOut";
 export default function PartialUnitModal({ data }: any) {
   const isData = useAtomValue(selectedPartialUnitAtom);
+  const [active, setActive] = useState(0);
   const reset = useResetAtom(selectedPartialUnitAtom);
-  const selectedOne = isData.others[isData.main];
+  const handleReset = () => {
+    setActive(0);
+    reset();
+  };
+  const selectedOne = isData.others[active];
   const isMobile = useMediaQuery("(max-width: 601px)");
   const { handleDownload } = useDownload("floorPlan");
   const [, { open }] = useReqCallPopup();
   if (!(isData.main === 0 ? true : isData.main)) {
     return null;
   }
-  console.log(selectedOne);
   return (
     <Modal
       opened={isData.main === 0 ? true : isData.main}
-      onClose={reset}
+      onClose={handleReset}
       classNames={S}
       size={isMobile ? "100%" : "60%"}
       centered
@@ -71,18 +78,23 @@ export default function PartialUnitModal({ data }: any) {
 
           <Close
             className="h-[28px] w-[28px] xl:h-[36px] xl:w-[36px]"
-            close={reset}
+            close={handleReset}
           />
         </div>
       </div>
       <div className="flex  items-center w-[90%] h-[438px]  justify-center rounded border    border-solid border-[#4D6677] m-auto relative">
-        <Image
-          src={selectedOne?.floorPlan ?? FloorPlanNotAvail}
-          width={500}
-          height={500}
-          alt="image"
-          className="max-h-[434px] object-contain "
-        />
+        <TransformWrapper>
+          <TransformComponent>
+            <Image
+              src={selectedOne?.floorPlan ?? FloorPlanNotAvail}
+              width={500}
+              height={500}
+              alt="image"
+              className="max-h-[434px] object-contain "
+            />
+          </TransformComponent>
+          <ZoomInOut className="bottom-0 right-0 pb-2" />
+        </TransformWrapper>
         <button
           className="flex justify-center items-center gap-1 rounded shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] p-2 bg-[#0073C6] text-white text-base not-italic font-semibold absolute top-2 right-2"
           onClick={() =>
@@ -132,7 +144,9 @@ export default function PartialUnitModal({ data }: any) {
           </p>
         </div>
       </div>
-      {isData.others.length > 1 && <CarouselModal />}
+      {isData.others.length > 1 && (
+        <CarouselModal active={active} setActive={setActive} />
+      )}
     </Modal>
   );
 }
