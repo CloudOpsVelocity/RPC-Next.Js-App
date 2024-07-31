@@ -14,6 +14,7 @@ import clsx from "clsx";
 import { GlobalPageType } from "@/app/validations/global";
 import { useSetAtom } from "jotai";
 import { NearByDataAtom } from "@/app/store/nearby";
+import { redirect } from "next/dist/server/api-utils";
 
 type Props = {
   type: string;
@@ -76,15 +77,18 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
       title: cardData.projName,
     });
   };
+  const redirect=()=>{
+ window.open(`/abc/karnataka/banglore/${reqId}`, "_blank")
+  }
+
   return (
     <>
-      <a
-       target="_blank"
-       href={`/abc/karnataka/banglore/${reqId}`}
+      <div
+        onClick={()=>redirect()}
 
         key={reqId}
         className={clsx(
-          "border text-card-foreground min-w-[310px] max-w-full   min-h-[400px] md:max-w-[494px]   mb-[1%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[14px]",
+          "border border-width: 2px; text-card-foreground min-w-[310px] max-w-full   min-h-[400px] md:max-w-[494px]   mb-[1%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[14px]",
           type == "proj" ? "bg-[#FAFAFA] " : "bg-[#FFFEFE] pt-4"
         )}
       >
@@ -239,7 +243,7 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
             />
           </div>
         </div>
-      </a>
+      </div>
     </>
   );
 }
