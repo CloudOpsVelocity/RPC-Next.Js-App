@@ -143,8 +143,8 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
       <QAJsonLdScript data={data} />
       <PropertyJsonLdScript data={data} />
       <ArticleJsonLdScript data={data} />
-      <div className="mt-[70px] sm:mt-[70px] w-full sm:pb-[2%] flex items-center justify-center flex-col ">
-        <div className="p-[1%] sm:p-[1%] sm:py-0 xl:p-[1%] w-full sm:w-[94%]">
+      <div className="mt-[100px] sm:mt-[70px] w-full pb-[2%] flex items-center justify-center flex-col ">
+        <div className="sm:p-[1%] sm:py-0 xl:p-[2%] w-full sm:w-[94%]">
           <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%]">
             <span>Home</span> {" > "}
             <Link href={"/project/banglore"}>

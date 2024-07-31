@@ -53,15 +53,15 @@ export default function Amenties({
         ) : (
           <>
             {" "}
-            <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[12px] capitalize break-words text-wrap w-[78%]">
+            <h2 className="text-h2  lg:text-[32px]  font-semibold">
               Amenities Of{" "}
-              <span className="text-[#148B16] font-[700] ">
+              <span className="text-[#148B16] text-h2 lg:text-[32px] font-bold not-italic  leading-[normal] ">
                 {projName}
               </span>
             </h2>
             <SubHeading
               text="Experience the ultimate in comfort with our amenities"
-              className="mt-2  xl:mb-[32px] mb-4 text-h2 sm:text-[22px] xl:text-[32px]"
+              className="mt-2  xl:mb-[32px] mb-4"
             />
           </>
         )}

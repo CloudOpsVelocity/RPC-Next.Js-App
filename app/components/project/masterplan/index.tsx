@@ -42,12 +42,12 @@ export default function MasterPlan({
   };
   return (
     <div
-      className="w-[95%] sm:max-h-[auto]] xl:max-h-[689px] sm:w-[90%] md:mb-[3%] sm:mb-[5%] scroll-mt-[150px] "
+      className="w-[95%] sm:max-h-[541px] xl:max-h-[689px] sm:w-[90%] md:mb-[3%] sm:mb-[5%] scroll-mt-[150px] "
       id="masterPlan"
     >
       <div className="flex justify-between w-full items-cente mb-[32px] flex-wrap">
         <div>
-          <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[12px] capitalize break-words text-wrap w-[78%]">
+          <h2 className="text-h2 lg:text-[32px] font-[600] text-[#001F35] mb-[12px] capitalize break-words text-wrap w-[78%]">
             Master Plan Of{" "}
             <span className="text-[#148B16] font-[700] ">{projName}</span>
           </h2>

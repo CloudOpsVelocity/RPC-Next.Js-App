@@ -45,7 +45,7 @@ export default function Overview({
 }: any) {
   return (
     <div
-      className=" sm:pt-[2%] xl:pt-[2%] sm:scroll-mt-[138px] xl:scroll-mt-[150px] w-[95%] sm:[95%] xl:w-[90%] rounded-[24px] shadow-md mb-[5%] sm:mb-[3%]  mt-[2%] bg-gradient-to-r from-[#F6F6F6] /0 via-[#FFF] /45 to-[#FEFFFF]/100 "
+      className="pt-[2%] scroll-mt-[150px] w-[95%] sm:[95%] xl:w-[90%] rounded-[24px] shadow-md mb-[5%] sm:mb-[3%]  mt-[2%] bg-gradient-to-r from-[#F6F6F6] /0 via-[#FFF] /45 to-[#FEFFFF]/100 "
       id="overview"
     >
       <div className="pl-[2%] pr-[2%] flex justify-between items-center flex-wrap sm:flex-nowrap">
