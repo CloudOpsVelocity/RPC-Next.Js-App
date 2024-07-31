@@ -248,7 +248,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         <Banner projName={data.projectName} projIdEnc={data.projIdEnc} />
        
         <ErrorContainer data={data.banks}>
-        <div id="loans" className="w-full h-auto scroll-mt-[160px]">
+        <div id="loans" className="w-full h-auto scroll-mt-[150px]">
           <Loans type="proj" banks={data.banks} name={data.projectName} />
           </div>
           
@@ -268,7 +268,8 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         {/* <DownloadBroucher
           url={`${data?.media?.projBroucherUrl}?${Math.random()}`}
         /> */}
-        <FaqWithBg data={data.faqs} projName={data.projectName} />
+        <div id="faq" className="scroll-mt-[70px] m-auto flex justify-center items-center">
+        <FaqWithBg data={data.faqs} projName={data.projectName} /></div>
         <NearByCarousel
           projName={data.projectName}
           lat={data.lat}

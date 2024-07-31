@@ -144,7 +144,10 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
               {/* About Builder */}
               <AboutBuilder type="proj" id={projData.builderId} />
               {data.postedById === projData.builderId && (
-                <FaqWithBg data={projData.faqs} projName={data.propName} />
+                <div     id="faq" >
+                                  <FaqWithBg data={projData.faqs} projName={data.propName} />
+
+                </div>
               )}{" "}
             </>
             {/* )} */}

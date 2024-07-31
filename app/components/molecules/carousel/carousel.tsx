@@ -81,7 +81,9 @@ export function ProjectCard({ type, cardData }: CardProps) {
   };
   return (
     <>
-      <div
+      <a
+       href={`/abc/karnataka/banglore/${reqId}`}
+        target="_blank"
         key={reqId}
         className={clsx(
           "border text-card-foreground min-w-[350px]   min-h-[400px] overflow-hidden  shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[14px]",
@@ -179,7 +181,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
             />
           </div>
         </div>
-      </div>
+      </a>
     </>
   );
 }
