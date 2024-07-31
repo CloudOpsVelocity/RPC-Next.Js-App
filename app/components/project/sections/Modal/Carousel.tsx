@@ -43,8 +43,9 @@ export default function CarouselModal() {
             width={300}
             height={300}
             className={clsx(
-              "max-h-[100px] object-cover",
-              isData.main === index && "border-2 border-btnPrimary border-solid"
+              "max-h-[100px] object-cover shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]  ",
+              isData.main === index &&
+                "border-[3px] border-btnPrimary border-solid "
             )}
           />
         </Carousel.Slide>

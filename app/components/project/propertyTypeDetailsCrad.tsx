@@ -28,6 +28,7 @@ import { countPlots } from "@/app/utils/count/plot";
 import { pluralizeOrSingularize } from "@/app/utils/plural";
 import RTK_CONFIG from "@/app/config/rtk";
 import { NumberFormatter } from "@mantine/core";
+import { currentBlockAtom, isScrollingAtom, stickyAtom } from "./navigation";
 
 type Props = {
   cg: any;
@@ -68,6 +69,9 @@ export default function PropertyTypeDetailsCrad({
   const setPrpCgId = useSetAtom(propCgIdAtom);
   const setSelectedFloor = useSetAtom(selectedFloorAtom);
   const [, setFloorsArray] = useAtom(floorPlansArray);
+  const setIsScrolling = useSetAtom(isScrollingAtom);
+  const setSticky = useSetAtom(stickyAtom);
+  const setC = useSetAtom(currentBlockAtom);
   const { data: projectUnitsData, isLoading } = useQuery({
     queryKey: [`/${getPropId(propertyType)}/${phase}/${slug}`],
     queryFn: () => getProjectUnits(slug, phase, getPropId(propertyType)),
@@ -85,6 +89,21 @@ export default function PropertyTypeDetailsCrad({
     handleOpen();
   };
 
+  function scrollToTopic(id: string): void {
+    setIsScrolling(true);
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "center",
+      });
+
+      setSticky(true);
+    }
+    setC("floorPlans");
+    setTimeout(() => setIsScrolling(false), 3000);
+  }
   const propName = (key: string, type?: string) => {
     switch (key) {
       case "apt":
@@ -129,7 +148,11 @@ export default function PropertyTypeDetailsCrad({
   return (
     <div
       className="flex  justify-between items-start h-[174px]  sm:h-[227px] w-[100%] max-w-[359px] lg:max-w-[510px] rounded-[24px] shadow-md pr-[1%] pl-[1%] mt-[70px] bg-gradient-to-l from-[#EFF5FF] /50 to-[#F2FAFF]/50 mb-[2%] cursor-pointer"
-      onClick={() => updateValues(phase, getPropId(propertyType as string))}
+      onClick={() =>
+        isPartialData
+          ? scrollToTopic("floorPlans")
+          : updateValues(phase, getPropId(propertyType as string))
+      }
     >
       <div className="leftSection  w-[63%] sm:max-w-[46%] flex flex-col   justify-between h-full sm:h-[225px] pl-2 sm:pl-0">
         <div className="max-w-[90px] lg:max-w-[115px] w-full justify-center flex items-center h-[90px] lg:h-[115px] border-solid border-1 border-[#FFF] rounded-full bg-[#c9daee] relative bottom-[50px] lg:bottom-[60px] mb-[-40px]">

@@ -30,8 +30,8 @@ export default function PartialUnitModal({ data }: any) {
       onClose={reset}
       classNames={S}
       size={isMobile ? "100%" : "60%"}
-      zIndex={1}
       centered
+      zIndex={1}
     >
       <div className="w-full bg-transparent     h-[57px] flex items-center justify-between  z-[1000] md:px-10 max-w-[91rem] m-auto">
         <div className="text-[18px] sm:text-2xl not-italic font-bold leading-[normal]">
@@ -103,9 +103,9 @@ export default function PartialUnitModal({ data }: any) {
       <div className="flex flex-wrap  w-[90%] m-auto items-center gap:2  md:gap-5 shadow-[0px_4px_20px_0px_#F0F6FF] px-4 md:py-2.5 rounded-[10px] bg-[#e0f4ff] mt-3 mb-3">
         <div className="flex items-center space-x-3">
           {propertyDetailsSvgs.unitType}
-          <p className="text-[#4D6677] text-nowrap  text-[12px] xl:text-[14px] font-[500]">
+          <p className="text-[#242424] text-nowrap  text-[12px] xl:text-[16px] font-[500]">
             Unit Type:{" "}
-            <span className="text-[#303A42] text-nowrap  text-[10px] xl:text-[14px] font-[600] ">
+            <span className="text-[#303A42] text-nowrap  text-[10px] xl:text-[16px] font-[600] ">
               {selectedOne?.propType == "32"
                 ? `(${selectedOne.width} x ${selectedOne.length}) sq.ft`
                 : selectedOne?.unitType}
@@ -114,19 +114,19 @@ export default function PartialUnitModal({ data }: any) {
         </div>
         <div className="flex items-center space-x-3">
           {propertyDetailsSvgs.superBuildUparea}
-          <p className="text-[#4D6677] text-nowrap text-[12px] xl:text-[14px] font-[500]">
+          <p className="text-[#242424] text-nowrap text-[12px] xl:text-[16px] font-[500]">
             {selectedOne?.propType == "32" ? "Plot Area" : "Super Builtup Area"}
             :{" "}
-            <span className="text-[#303A42] text-nowrap  text-[10px] xl:text-[14px] font-[600] ">
+            <span className="text-[#303A42] text-nowrap  text-[10px] xl:text-[16px] font-[600] ">
               {selectedOne?.plotArea || selectedOne?.sba} sq.ft
             </span>
           </p>
         </div>
         <div className="flex items-center space-x-3">
           {propertyDetailsSvgs.superBuildUparea}
-          <p className="text-[#4D6677] text-nowrap text-[12px] xl:text-[14px] font-[500]">
+          <p className="text-[#242424] text-nowrap text-[12px] xl:text-[16px] font-[500]">
             Price Range:{" "}
-            <span className="text-[#303A42]  text-nowrap text-[10px] xl:text-[14px] font-[600] ">
+            <span className="text-[#303A42]  text-nowrap text-[10px] xl:text-[16px] font-[600] ">
               {isData.priceRange}
             </span>
           </p>
