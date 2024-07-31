@@ -23,8 +23,8 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
       id="aboutBuilder"
     >
       <div>
-        <div className=" gap-[26px] justify-start  w-[100%] items-center">
-          <h2 className=" text-[#242424] text-h2 sm:text-[22px] lg:text-[32px] font-[700] mb-2 xl:mb-4 ">
+        <div className=" gap-[16px] sm:gap-[26px] justify-start  w-[100%] items-center">
+          <h2 className="text-[#242424] text-h2 sm:text-[24px] xl:text-[32px] not-italic font-bold leading-[normal] tracking-[1.28px] mb-4 ">
             About Builder
           </h2>
 
@@ -40,7 +40,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
               alt="logo"
               className="shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] border-2 border-solid border-[#96C5E4] w-[90px] h-[90px] sm:h-[130px] sm:w-[130px]"
             />
-            <p className=" text-[#148B16]  text-h2 sm:text-[20px] lg:text-[26px] font-[700] ml-3">
+            <p className=" text-[#148B16]  text-h2 sm:text-[20px] xl:text-[26px] font-[700] ml-3">
               {nzData.userName}
               <p className=" text-[#303A42] text-[14px] italic sm:text-[16px] xl:text-[20px] font-[500] ">
                 since {convertDateToMonthYear(nzData.companyStartDate)}
@@ -49,7 +49,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
           </div>
         </div>
 
-        <div className="sm:rounded-[20px] mt-[1%] flex justify-between items-center bg-[#FFF] shadow-md w-[100%] mb-[2%] lg:w-[50%] p-[1%] ">
+        <div className="sm:rounded-[20px] mt-[1%] flex justify-between items-center bg-[#FFF] shadow-md w-[100%] mb-[2%] sm:w-[75%] xl:w-[50%] p-[1%] ">
           <div className="w-[30%] border-solid border-[#92B2C8] border-r-[1px]">
             <p className=" text-[#202020]  text-[10px] sm:text-[20px] xl:text-[24px] font-[700]">
               {nzData.newProject}
@@ -60,16 +60,16 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
           </div>
 
           <div className="w-[30%] border-solid border-[#92B2C8] border-r-[1px]">
-            <p className=" text-[#202020]  text-[10px] sm:text-[18px] lg:text-[24px] font-[700]">
+            <p className=" text-[#202020]  text-[10px] sm:text-[18px] xl:text-[24px] font-[700]">
               {nzData.onGoingProject}
             </p>
-            <p className=" text-[#001F35] text-[10px] sm:text-[18px] lg:text-[20px] font-[700]">
+            <p className=" text-[#001F35] text-[10px] sm:text-[18px] xl:text-[20px] font-[700]">
               Ongoing {`Project${nzData.onGoingProject > 1 ? "s" : ""}`}
             </p>
           </div>
 
           <div className="w-[30%] ">
-            <p className=" text-[#202020] sm:text-[18px] xl:text-[24px] font-[700]">
+            <p className=" text-[#202020] text-[10px] sm:text-[18px] xl:text-[24px] font-[700]">
               {nzData.completedProject}
             </p>
             <p className=" text-[#E3AC00] text-[10px] sm:text-[18px] xl:text-[20px] font-[700]">
@@ -83,7 +83,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
           projName={""}
           builderName={nzData.companyName}
           content={nzData.vission}
-          className="mb-[14px] sm:!mb-[29px] text-[#202020] sm:text-[18px] xl:text-2xl not-italic font-medium leading-[normal] w-full mt-4 sm:mt-0"
+          className="!mb-[8px] sm:!mb-[29px] text-[#202020] sm:text-[18px] xl:text-2xl not-italic font-medium leading-[normal] w-full mt-4 sm:mt-0"
         />
 
         <p className="  text-[16px] sm:text-[20px] xl:text-[24px]  text-black sm:text-2xl not-italic font-semibold leading-[normal] inline-flex justify-center items-center">

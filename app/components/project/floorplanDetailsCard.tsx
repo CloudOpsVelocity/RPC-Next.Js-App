@@ -80,18 +80,18 @@ const FloorplanDetailsCard: React.FC<Props> = ({
       >
         {propCgId != projectprops.plot && (
           <div className="">
-            <p className="font-[500] text-[12px] sm:text-[16px] lg:text-[24px] mb-[20px] text-[#001F35] flex justify-start items-center">
+            <p className="font-[500] text-[12px] sm:text-[16px] xl:text-[24px] mb-[20px] text-[#001F35] flex justify-start items-center">
               {mergedData.bhk} |
-              <span className="font-[500] ml-[4px] text-[12px] sm:text-[14px] lg:text-[20px] text-[#000]">
+              <span className="font-[500] ml-[4px] text-[12px] sm:text-[14px] xl:text-[20px] text-[#000]">
                 {" "}
                 {mergedData.bedCount} Bed - {mergedData.bathCount} Bath
               </span>
             </p>
-            <p className="gap-[4px] font-[500] text-[12px] sm:text-[14px] lg:text-[16px] text-[#303A42] mb-[20px] flex justify-start items-start">
+            <p className="gap-[4px] font-[500] text-[12px] sm:text-[14px] xl:text-[16px] text-[#303A42] mb-[20px] flex justify-start items-start">
               <SuperBuildupAreaIcon className="md:h-[32px] md:w-[32px] h-[24px] w-[24px]" />
               Super Builtup Area: {mergedData.superBuildupArea} sq.ft
             </p>
-            <p className="gap-[4px] font-[500] text-[12px] sm:text-[14px] lg:text-[16px] text-[#001F35] mb-[20px] flex justify-start items-start">
+            <p className="gap-[4px] font-[500] text-[12px] sm:text-[14px] xl:text-[16px] text-[#001F35] mb-[20px] flex justify-start items-start">
               <FacingIcon className="w-[20px] h-[20px] lg:w-[24px] lg:h-[24px]" />
               Property Facing: {mergedData.propertyFacing}
             </p>
