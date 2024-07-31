@@ -98,7 +98,7 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
                     alt="project image"
                     src={imageUrl}
                     fill
-                    className={`!w-full sm:!rounded-[10px]  h-[330px] lg:h-[750px] bg-gray-${
+                    className={`!w-full sm:!rounded-[10px]  h-[330px] sm:max-h-[545px] !xl:h-[750px] xl:max-h-[750px] bg-gray-${
                       index + 1
                     }`}
                     quality={100}
