@@ -144,7 +144,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
       <PropertyJsonLdScript data={data} />
       <ArticleJsonLdScript data={data} />
       <div className="mt-[100px] sm:mt-[70px] w-full pb-[2%] flex items-center justify-center flex-col ">
-        <div className="sm:p-[1%] xl:p-[2%] w-full sm:w-[94%]">
+        <div className="sm:p-[1%] sm:py-0 xl:p-[2%] w-full sm:w-[94%]">
           <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%]">
             <span>Home</span> {" > "}
             <Link href={"/project/banglore"}>
@@ -268,7 +268,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         {/* <DownloadBroucher
           url={`${data?.media?.projBroucherUrl}?${Math.random()}`}
         /> */}
-        <div id="faq" className="scroll-mt-[70px] m-auto flex justify-center items-center">
+        <div id="faq" className="scroll-mt-[70px] m-auto w-[90%] flex justify-start items-start">
         <FaqWithBg data={data.faqs} projName={data.projectName} /></div>
         <NearByCarousel
           projName={data.projectName}

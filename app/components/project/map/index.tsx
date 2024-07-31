@@ -213,8 +213,8 @@ const LeafMap: React.FC<{
           />
         ) : (
           <div>
-            <h2 className="text-h2 lg:text-[32px] font-semibold mb-[12px] capitalize break-words max-w-[78%]">
-              <span className="text-[#148B16] font-bold">{projName} </span>
+            <h2 className="text-h2 lg:text-[32px] font-semibold mb-[12px] capitalize  text-nowrap max-w-[78%]">
+              <span className="text-[#148B16] text font-bold">{projName} </span>
               <span>Near By Locations</span>
             </h2>
             {/*  <SubHeading
