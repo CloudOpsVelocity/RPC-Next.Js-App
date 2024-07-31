@@ -36,6 +36,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
   const [isShorlited, setShorlited] = React.useState(cardData.shortListed);
   const { toggleShortlist } = useShortlistAndCompare();
   const [, { open: openShort }] = usePopShortList();
+  console.log(cardData);
   const setPopReqData = useSetAtom(NearByDataAtom);
   const isItemInShortlist = isShorlited === "Y";
 
@@ -58,7 +59,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
       modal_type: "PROJECT_REQ_CALLBACK",
       postedByName: cardData.postedByName,
       postedId: cardData.builderId,
-      reqId: cardData.reqId,
+      reqId: cardData.projIdEnc,
       source: "projCard",
       title: cardData.projectName,
     });

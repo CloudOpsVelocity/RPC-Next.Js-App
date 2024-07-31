@@ -48,7 +48,7 @@ export default function PartialUnitModal({ data }: any) {
           {selectedOne?.floorPlan && (
             <>
               <button
-                className="flex justify-center items-center gap-1 p-1 xl:p-2 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] rounded-[10px] bg-[#F3F7FF] text-[#0073C6] text-base not-italic font-semibold leading-[normal] tracking-[0.32px]"
+                className="flex justify-center items-center gap-1 p-1 xl:p-2 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] rounded-[10px] bg-[#F3F7FF] text-[#0073C6] text-base not-italic font-semibold leading-[normal] tracking-[0.32px] border-1 border-black border-solid"
                 onClick={() => handleDownload(selectedOne?.floorPlan)}
               >
                 <svg
