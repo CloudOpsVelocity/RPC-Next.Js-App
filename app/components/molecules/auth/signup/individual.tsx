@@ -255,7 +255,7 @@ function Individual() {
 
               <Link
                 href={{ pathname: "/login", search: queryParam.query }}
-                className="text-[#002749] font-semibold  sm:text-[14px] flex justify-center items-center gap-2.5 rounded border p-2 border-solid border-[#B2B2B2] mb-3 mt-[5%] text-nowrap max-w-fit m-auto"
+                className="text-[#002749] font-semibold  sm:text-[14px] flex gap-1 justify-center items-center  rounded border p-2 border-solid border-[#B2B2B2] mb-3 mt-[5%] text-nowrap max-w-fit m-auto"
               >
                 Already have an Account?
                 <span className="sm:text-[14px]  text-[#0C7ACA]  not-italic font-semibold text-nowrap">
