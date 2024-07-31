@@ -38,16 +38,16 @@ export default function Specifications({
 
   return (
     <div
-      className="w-[95%] sm:w-[90%] scroll-mt-[220px] mx-auto mb-[3%]"
+      className="w-[95%] sm:w-[90%] scroll-mt-[180px] mx-auto mb-[3%]"
       id="specifications"
     >
       <div className="bg-white rounded-lg shadow-md overflow-hidden ">
         <div className="flex-1 bg-gradient-to-tr from-blue-100 p-4 sm:p-8">
-          <h2 className="text-h2 lg:text-[32px] font-semibold mb-[12px]">
+          <h2 className="text-h2 sm:text-[28px] xl:text-[32px] font-semibold mb-[12px]">
             Specifications of
             <span className="!text-[#148B16] font-bold "> {projName}</span>
           </h2>
-          <p className="text-[14px] text-[#212C33] md:text-[22px] italic font-semibold leading-[normal] tracking-[0.88px]  mb-4 flex justify-start items-start ">
+          <p className="text-[14px] text-[#212C33] sm:text-[18px] xl:text-[24px] font-semibold leading-[normal] tracking-[0.88px]  mb-4 flex justify-start items-start ">
             <span>
               {" "}
               Vital Details: Size, Features- Unveiling your dream project{" "}
@@ -102,7 +102,7 @@ export default function Specifications({
                   className="px-[2%] mt-5 sm:mt-10 w-full items-start justify-start flex-col"
                 >
                   <span
-                    className={` flex items-center gap-2 text-[#00487C]  w-full sm:min-w-[10%] sm:max-w-[20%]  sm:text-[24px] italic font-[600] py-2 px-2 rounded-xl  ${
+                    className={` flex items-center gap-2 text-[#242424]  w-full sm:min-w-[10%] sm:max-w-[20%]  sm:text-[24px]  font-[600] py-2 px-2 rounded-xl  ${
                       selectedSpecIndex == index
                         ? "specification"
                         : "specificationRemove"

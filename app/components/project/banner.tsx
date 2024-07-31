@@ -33,19 +33,19 @@ export default function Banner({
 
   return (
     <div
-      className="bg-[#f0f9ff] scroll-mt-[220px] px-2 sm:px-8 py-4 sm:py-12 mx-auto mb-[3%] "
+      className="bg-[#f0f9ff] scroll-mt-[180px] px-2 sm:px-8 py-4 sm:py-4 xl:py-12 mx-auto mb-[3%] "
       id="proj_rating"
     >
       <Toaster position="top-right" reverseOrder={false} />
-      <div className="w-[95%] sm:w-[90%] m-auto flex flex-col md:flex-row justify-between items-center ">
+      <div className="w-[95%] sm:w-[95%] xl:w-[90%] m-auto flex flex-col md:flex-row justify-between items-center ">
         <div>
-          <h2 className="text-[#242424] text-h2 sm:text-[32px] not-italic font-bold leading-[normal] tracking-[1.28px] mb-4">
+          <h2 className="text-[#242424] text-h2 sm:text-[24px] xl:text-[32px] not-italic font-bold leading-[normal] tracking-[1.28px] mb-4">
             Project Rating For{" "}
-            <span className="text-[#148B16]  sm:text-[32px] not-italic font-bold leading-[normal] tracking-[1.28px] capitalize">
+            <span className="text-[#148B16] sm:text-[24px] xl:text-[32px] not-italic font-bold leading-[normal] tracking-[1.28px] capitalize">
               {projName}
             </span>
           </h2>
-          <p className="text-black text-[13px] sm:text-2xl not-italic font-medium leading-[normal] tracking-[0.96px] mb-4 sm:mb-8">
+          <p className="text-black text-[13px] sm:text-[20px] xl:text-xl sm:px-1 not-italic font-medium leading-[normal] tracking-[0.96px] mb-4 sm:mb-4 xl:mb-8">
             Your headline should show readers how your review can help them
             solve a problem or make a decision, offer something different or
             unexpected, and be clear and specific about what your review is
@@ -53,12 +53,12 @@ export default function Banner({
           </p>
           <button
             onClick={() => onAddingRatings()}
-            className="flex flex-col justify-center items-center gap-2.5 rounded text-white  text-[12px] sm:text-[24px] not-italic font-bold leading-[normal] capitalize p-2.5 bg-btnPrimary"
+            className="flex flex-col justify-center items-center gap-2.5 rounded text-white  text-[12px] sm:text-[20px] xl:text-[24px] not-italic font-bold leading-[normal] capitalize p-2.5 bg-btnPrimary"
           >
             Add Ratings
           </button>
         </div>
-        <div className="hidden md:block flex-shrink-0 relative h-[200px] w-full md:w-[600px]">
+        <div className="hidden md:block flex-shrink-0 relative h-[200px] w-full sm:w-[30%] xl:w-[600px]">
           <Image
             src="/abc/rating.svg"
             alt="Project Rating Illustration"
