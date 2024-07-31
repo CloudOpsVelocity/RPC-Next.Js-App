@@ -85,7 +85,7 @@ export default function Navigation({
       });
       setCurrentBlock(id);
     }
-    setTimeout(() => setIsScrolling(false), 3000);
+    setTimeout(() => setIsScrolling(false), 4000);
   }
   const conditionsArray = [
     {

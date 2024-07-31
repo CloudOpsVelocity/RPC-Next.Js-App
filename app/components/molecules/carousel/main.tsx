@@ -25,7 +25,7 @@ const MainCarousel = ({ children }: { children: React.ReactNode }) => {
       slideGap={{ base: "lg", sm: "md", md: "40px" }}
       align={"start"}
       pb={isTab ? 20 : 0}
-      px={isMobile ? 10 : isTab ? 10 : 18}
+      px={isMobile ? 10 : isTab ? 10 : 100}
     >
       {children}
     </Carousel>
