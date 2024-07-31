@@ -22,7 +22,6 @@ export const options: NextAuthOptions = {
       },
       // @ts-ignore
       async authorize(credentials) {
-        console.log(credentials);
         const decryptedPassword = CryptoJS.AES.decrypt(
           credentials?.password!!,
           process.env.NEXT_PUBLIC_SECRET!!

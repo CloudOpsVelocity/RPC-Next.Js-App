@@ -32,11 +32,11 @@ const schema = yup.object().shape({
     .min(6, "Password must be at least 6 characters")
     .required("Password is required"),
 });
-
+// TODHA REST KR KOI DIKAT HAIKUCH OR DEKH LE
 function Login({ params }: any) {
   const [state, setState] = useState<"idle" | "pending" | "success">("idle");
   const form = useForm({
-    initialValues: { username: "", password: "" },
+    initialValues: { username: null, password: "" },
     validate: yupResolver(schema),
     validateInputOnBlur: true,
   });
@@ -75,7 +75,7 @@ function Login({ params }: any) {
             const pastedText = event.clipboardData.getData("text/plain");
             const trimmedText = pastedText.replace(/\s/g, "");
             const first10Digits = trimmedText.replace(/\D/g, "").slice(0, 10);
-            form.setFieldValue("username", first10Digits);
+            form.setFieldValue("username", first10Digits as any);
           }}
         />
 
