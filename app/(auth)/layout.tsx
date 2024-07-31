@@ -38,11 +38,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         />
       </div>
       <div className="flex justify-center items-start w-full pt-[10%] sm:pt-[3%] xl:pt-[5.5%] relative">
-        {/* <Link href={"/"} className=" top-0 left-0 p-2 bg-[#ffffff7a]  absolute">
-          <div className="flex  justify-center items-center gap-1 rounded   text-[#0C7ACA] text-xl xl:text-2xl not-italic font-bold flex-nowrap ">
-            {config.homeIcon} <p>Home</p>
+        <Link href={"/"} className=" top-0 left-0 p-2 bg-[#ffffff7a]  absolute">
+          <div className="flex  justify-center items-center gap-1 rounded   text-[#0C7ACA] text-[14px] not-italic font-bold flex-nowrap">
+            {config.homeIcon} <p className="h-[17px]">Home</p>
           </div>
-        </Link> */}
+          <hr className="bg-[#0C7ACA] h-[2px]" />
+        </Link>
         <div className="w-full bg-white text-gray-600 justify-center items-center ">
           <Logo styles="w-full flex justify-center items-center" />
 
@@ -69,6 +70,7 @@ const config = {
       height="29"
       viewBox="0 0 29 29"
       fill="none"
+      className="w-[15px] h-[15px] sm:w-[29px] sm:h-[29px]"
     >
       <path
         d="M4 10.9987L14.5 2.83203L25 10.9987V23.832C25 24.4509 24.7542 25.0444 24.3166 25.4819C23.879 25.9195 23.2855 26.1654 22.6667 26.1654H6.33333C5.71449 26.1654 5.121 25.9195 4.68342 25.4819C4.24583 25.0444 4 24.4509 4 23.832V10.9987Z"
