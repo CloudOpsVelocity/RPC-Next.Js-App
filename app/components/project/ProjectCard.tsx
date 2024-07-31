@@ -78,7 +78,10 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
   };
   return (
     <>
-      <div
+      <a
+       target="_blank"
+       href={`/abc/karnataka/banglore/${reqId}`}
+
         key={reqId}
         className={clsx(
           "border text-card-foreground min-w-[310px] max-w-full   min-h-[400px] md:max-w-[494px]   mb-[1%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[14px]",
@@ -236,7 +239,7 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
             />
           </div>
         </div>
-      </div>
+      </a>
     </>
   );
 }

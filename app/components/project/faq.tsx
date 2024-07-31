@@ -33,9 +33,9 @@ export default function FaqWithBg({ data, projName }: FaqWithBgProps) {
   return (
     <div
       className={
-        data?.length > 0 ? classes.wrapper : "!w-[95%] !md:w-[90%] m-auto"
+        data?.length > 0 ? classes.wrapper : "!w-[95%] !md:w-[90%]  m-auto  "
       }
-      id="faq"
+  
     >
       <div className="flex sm:justify-center items-center !w-[100%] !md:w-[90%] ">
         {data?.length > 0 && (
@@ -48,7 +48,7 @@ export default function FaqWithBg({ data, projName }: FaqWithBgProps) {
           </>
         )}
       </div>
-      <div className="mb-4">
+      <div className="mb-4 ">
         {data?.map((faq, index) => {
           return (
             faq.faqAnswer &&

@@ -231,7 +231,7 @@ export default function FloorplansBlock({
   if (isLoading) return <Loading />;
   return (
     <div
-      className="w-[95%] md:w-[90%] mt-[100px] scroll-mt-[180px] md:mb-[2%] sm:mb-[5%]"
+      className="w-[95%] md:w-[90%] mt-[100px] scroll-mt-[150px] md:mb-[2%] sm:mb-[5%]"
       id="floorPlans"
     >
       <h2
