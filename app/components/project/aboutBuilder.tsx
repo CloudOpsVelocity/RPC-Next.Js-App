@@ -23,7 +23,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
       id="aboutBuilder"
     >
       <div>
-        <div className=" gap-[26px] justify-start  w-[100%] items-center">
+        <div className=" gap-[16px] sm:gap-[26px] justify-start  w-[100%] items-center">
           <h2 className="text-[#242424] text-h2 sm:text-[24px] xl:text-[32px] not-italic font-bold leading-[normal] tracking-[1.28px] mb-4 ">
             About Builder
           </h2>
@@ -69,7 +69,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
           </div>
 
           <div className="w-[30%] ">
-            <p className=" text-[#202020] sm:text-[18px] xl:text-[24px] font-[700]">
+            <p className=" text-[#202020] text-[10px] sm:text-[18px] xl:text-[24px] font-[700]">
               {nzData.completedProject}
             </p>
             <p className=" text-[#E3AC00] text-[10px] sm:text-[18px] xl:text-[20px] font-[700]">
@@ -83,7 +83,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
           projName={""}
           builderName={nzData.companyName}
           content={nzData.vission}
-          className="mb-[14px] sm:!mb-[29px] text-[#202020] sm:text-[18px] xl:text-2xl not-italic font-medium leading-[normal] w-full mt-4 sm:mt-0"
+          className="!mb-[8px] sm:!mb-[29px] text-[#202020] sm:text-[18px] xl:text-2xl not-italic font-medium leading-[normal] w-full mt-4 sm:mt-0"
         />
 
         <p className="  text-[16px] sm:text-[20px] xl:text-[24px]  text-black sm:text-2xl not-italic font-semibold leading-[normal] inline-flex justify-center items-center">
