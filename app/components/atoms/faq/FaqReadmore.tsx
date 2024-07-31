@@ -29,7 +29,7 @@ const FaqReadMore: React.FC<ReadMoreProps> = ({
 
   return (
     <div className="w-[90%]" onClick={handleReadMoreClick}>
-      <p className="text-[#303A42] text-[14px] sm:text-[28px] not-italic font-normal sm:leading-9 text-wrap  break-words max-w-[100%]">
+      <p className="text-[#303A42] text-[14px] sm:text-[18px] xl:text-[22px] not-italic font-normal sm:leading-9 text-wrap  break-words max-w-[100%]">
         {`${getClampedText}${isReadMore ? "..." : ""}`}
 
         {showReadMoreButton && shouldShowReadMore && (
