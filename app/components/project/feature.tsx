@@ -34,7 +34,7 @@ export default function Feature({
                   className="w-[12px] h-[12px] sm:max-w-[20px] max-h-[14px] sm:max-h-[20px] sm:h-[20px] sm:w-[20px] mt-[3.5px] sm:mt-[10px]"
                   src={"/abc/Checked.png"}
                 />
-                <p className="text-[12px] sm:text-[20px] lg:text-[24px] m-0 text-[#212C33] font-medium sm:text-500 ">
+                <p className="text-[12px] sm:text-[20px] lg:text-[24px] m-0 text-[#212C33] font-medium sm:font-500 ">
                   {each}
                 </p>
               </li>

@@ -61,7 +61,7 @@ export default function Amenties({
             </h2>
             <SubHeading
               text="Experience the ultimate in comfort with our amenities"
-              className="mt-2  xl:mb-[32px] mb-4 text-h2 sm:text-[22px] xl:text-[32px]"
+              className="text-[13px] sm:text-[16px] xl:text-2xl  text-[#344273]  italic font-semibold leading-[normal] mb-4 sm:mb-2"
             />
           </>
         )}

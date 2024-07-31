@@ -123,7 +123,7 @@ const FloorplanDetailsCard: React.FC<Props> = ({
             </p>
           )}
 
-          <p className="gap-[4px] flex sm:justify-end sm:items-end text-[#303A4] font-[500] text-right text-[12px] sm:text-[14px] lg:text-[16px] mb-[14px] ">
+          <p className="gap-[4px] flex sm:justify-end sm:items-center text-[#303A4] font-[500] text-right text-[12px] sm:text-[14px] lg:text-[16px] mb-[14px] ">
             <FlooringIcon className="md:h-[32px] md:w-[32px] h-[24px] w-[24px]" />
             Unit Number: {mergedData.unitNumber}
           </p>
