@@ -43,7 +43,7 @@ export default function Specifications({
     >
       <div className="bg-white rounded-lg shadow-md overflow-hidden ">
         <div className="flex-1 bg-gradient-to-tr from-blue-100 p-4 sm:p-8">
-          <h2 className="text-h2 sm:text-[28px] xl:text-[32px] font-semibold mb-[12px]">
+          <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[10px] xl:mb-[24px] capitalize">
             Specifications of
             <span className="!text-[#148B16] font-bold "> {projName}</span>
           </h2>

@@ -139,11 +139,11 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
             fill="#18B8F2"
           />
         </svg>{" "}
-        <span className="text-[#242424] text-h2 sm:text-[32px] not-italic font-bold leading-[normal]">
+        <span className="text-[#242424] text-h2 sm:text-[22px] xl:text-[32px] not-italic font-bold leading-[normal]">
           Have any Question? Ask Here 👇
         </span>
       </h2>
-      <h2 className="font-[700] text-[#233333] text-[14px] md:text-[28px]  ">
+      <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[10px] xl:mb-[24px] capitalize ">
         Ask your question related to
         <span className="!text-green-600"> {projName} Project!</span>
       </h2>
