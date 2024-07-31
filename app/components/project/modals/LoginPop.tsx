@@ -9,7 +9,8 @@ import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import Close from "../button/close";
 function LoginPopup() {
   const [opened, { close }] = usePopShortList();
-  const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
+  const isMobile = useMediaQuery(`(max-width: 601px)`);
+  const isTab = useMediaQuery(`(max-width: 1600px)`);
   return (
     <Modal
       opened={opened}
@@ -24,7 +25,7 @@ function LoginPopup() {
         header: S.headerCustomLoginPopup,
         body: S.bodyPadding,
       }}
-      size={isMobile ? "100%" : "30%"}
+      size={isMobile ? "100%" : isTab ? "45%" : "30%"}
       zIndex={1000}
     >
       <Close
