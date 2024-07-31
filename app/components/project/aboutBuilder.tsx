@@ -54,7 +54,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
             <p className=" text-[#202020]  text-[10px] sm:text-[20px] xl:text-[24px] font-[700]">
               {nzData.newProject}
             </p>
-            <p className=" text-[#148B16]  text-[10px]   sm:text-[18px] xl:text-[20px] font-[700]">
+            <p className=" text-[#148B16]  text-[10px]    sm:text-[18px] xl:text-[20px] font-[700]">
               New Launch {`Project${nzData.newProject > 1 ? "s" : ""}`}
             </p>
           </div>
