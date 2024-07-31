@@ -118,7 +118,7 @@ function Login({ params }: any) {
         <div className="text-center mt-6 ">
           <Link
             href={{ pathname: "/register", search: getQueryParam(params) }}
-            className="text-[#282828]  flex justify-center items-center gap-2.5 rounded border p-2 border-solid border-[#B2B2B2] mb-[14px] text-nowrap text-[14px] font-[400]"
+            className="text-[#282828]  flex justify-center items-center gap-2.5 rounded border p-2 border-solid border-[#B2B2B2] mb-[20px] text-nowrap text-[14px] font-[400]"
           >
             New User?{" "}
             <span className="text-[14px]  text-[#0C7ACA]  font-semibold  not-italic text-nowrap   ">

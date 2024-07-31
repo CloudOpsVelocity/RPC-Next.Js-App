@@ -239,6 +239,10 @@
 }
 
 @media (max-width: 640px) {
+  .steps {
+    width: 93%;
+    margin: auto;
+  }
   .aSteps {
     /* margin-bottom: 5%; */
     width: 90%;
@@ -304,6 +308,7 @@
   .steplabelCommonForAll {
     white-space: normal;
     right: -15px !important;
+    min-width: 60px;
   }
 
   .textInput {
