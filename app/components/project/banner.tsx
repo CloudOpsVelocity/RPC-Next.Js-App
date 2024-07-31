@@ -39,7 +39,7 @@ export default function Banner({
       <Toaster position="top-right" reverseOrder={false} />
       <div className="w-[95%] sm:w-[95%] xl:w-[90%] m-auto flex flex-col md:flex-row justify-between items-center ">
         <div>
-          <h2 className="text-h2 sm:text-[22px] xl:text-[32px]  font-[600] text-[#001F35] mb-[12px] capitalize break-words text-nowrap w-[78%]">
+          <h2 className="text-h2 sm:text-[22px] xl:text-[32px]  font-[600] text-[#001F35] mb-[12px] capitalize break-words sm:text-nowrap w-[78%]">
             Project Rating For{" "}
             <span className="text-[#148B16] sm:text-[24px] xl:text-[32px] not-italic font-bold leading-[normal] tracking-[1.28px] capitalize">
               {projName}
