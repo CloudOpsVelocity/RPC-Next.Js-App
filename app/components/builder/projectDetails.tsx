@@ -33,7 +33,7 @@ export default function ProjectDetails({
 }: Data) {
   return (
     <React.Fragment>
-      <div className="sm:rounded-[20px] mt-[3%] flex justify-between items-center bg-[#FFF] shadow-md w-[100%] mb-[3%] sm:w-[65%] xl:w-[50%] p-[1%] border border-gray-300">
+      <div className="sm:rounded-[20px] mt-[3%] flex justify-between items-center bg-[#FFF] shadow-md w-[100%] mb-[3%]  sm:w-[65%] xl:w-[50%] p-[1%] border border-gray-300">
         <div className="w-[30%] border-solid border-[#92B2C8] border-r-[1px]">
           <div className="flex justify-between items-center w-[90%] ">
             <span className=" text-[#202020]text-[16px]  sm:text-[20px] lg:text-[24px] font-[600]">

@@ -13,6 +13,7 @@ import { useMediaQuery } from "@mantine/hooks";
 
 const MainCarousel = ({ children }: { children: React.ReactNode }) => {
   const isMobile = useMediaQuery("(max-width: 750px)");
+  const isTab = useMediaQuery("(max-width: 1600px)");
   return (
     <Carousel
       classNames={styles}
@@ -20,10 +21,11 @@ const MainCarousel = ({ children }: { children: React.ReactNode }) => {
       previousControlIcon={<DarkCarouseIcon />}
       mt={isMobile ? 16 : 30}
       height={"auto"}
-      slideSize={{ base: "100%", sm: "50%", md: "31%" }}
+      slideSize={{ base: "100%", sm: "31%", md: "31%" }}
       slideGap={{ base: "lg", sm: "md", md: "40px" }}
       align={"start"}
-      px={isMobile ? 10 : 100}
+      pb={isTab ? 20 : 0}
+      px={isMobile ? 10 : isTab ? 10 : 18}
     >
       {children}
     </Carousel>
