@@ -14,7 +14,7 @@ const getProjectDetails = async (slug: string): Promise<MERGERPROJECT> => {
   const data = await response.json();
 
   let isRera = false;
-  const phases = data.phaseOverview.map((el: any) => {
+  const phases = data?.phaseOverview?.map((el: any) => {
     if (el.rerastatus === "Recieved" || el.rerastatus === "Applied") {
       isRera = true;
     }
