@@ -30,7 +30,7 @@ export default function About({
   return (
     <div
       className={clsx(
-        "w-[90%] mb-[3%] xl:mb-[3%]  xl:mt-[5%] m-auto sm:mb-[1.5%] sm:scroll-mt-[140px] xl:scroll-mt-[150px]",
+        "w-[90%] mb-[3%] xl:mb-[3%]  xl:mt-[2%] m-auto sm:mb-[1.5%] sm:scroll-mt-[140px] xl:scroll-mt-[150px]",
         className
       )}
       id={id ?? ""}
