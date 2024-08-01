@@ -40,8 +40,8 @@ import { generatePropertyDetails } from "@/app/data/property";
 const style = {
   card: "mr-[4%] mb-[1%]  p-[2%] md:p-[1%] bg-white mt-2 md:mt-1 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8] ",
   heading: {
-    h1: "text-[#001F35] text-[18px] sm:text-[32px] not-italic font-semibold leading-[normal] uppercase mb-1 sm:mb-[14px]",
-    p: "inline-flex  gap-2 sm:gap-[26px]  w-[90%] items-center mb-[20px] xl:mb-[15px] text-[14px] md:text-[20px] lg:text-[24px] font-[500] text-[#233333] break-words ",
+    h1: "text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[8px] xl:mb-[10px] capitalize",
+    p: "inline-flex  gap-2 sm:gap-[26px]  w-[90%] items-center sm:mb-[20px] xl:mb-[15px] text-[14px] sm:text-[20px] xl:text-[24px] font-[500] text-[#233333] break-words ",
   },
 };
 export default function RoomDetails({ data }: { data: Main }) {

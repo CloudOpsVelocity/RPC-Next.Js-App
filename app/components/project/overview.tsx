@@ -51,7 +51,7 @@ export default function Overview({
       <div className="pl-[2%] pr-[2%] flex justify-between items-center flex-wrap sm:flex-nowrap">
         <div className="md:w-[80%]">
           <div className="">
-            <h2 className="text-[22px] sm:text-[24px] xl:text-[32px] text-[#001F35] font-[700] capitalize break-words text-wrap w-full">
+            <h2 className="text-[#242424]  text-sm sm:text-[20px] xl:text-[22px] not-italic font-[600] leading-[normal] w-[100%] tracking-[0.32px] sm:mt-[10px]  xl:mt-[14px] capitalize  sm:max-w-[1400px]">
               {projectName}
             </h2>{" "}
           </div>
@@ -72,7 +72,7 @@ export default function Overview({
         </div>
       </div>
 
-      <div className="pl-[2%] pr-[2%] flex justify-start md:justify-between items-start md:items-end w-full mb-[3%] sm:mb-[1%] xl:mb-[3%] mt-[3%] sm:mt-[1%] xl:mt-[3%] flex-col md:flex-row ">
+      <div className="pl-[2%] pr-[2%] flex justify-start md:justify-between items-start md:items-end w-full mb-[3%] sm:mb-[1%] xl:mb-[1.5%] mt-[3%] sm:mt-[1%] xl:mt-[1.5%] flex-col md:flex-row ">
         <div className="flex justify-start items-start flex-wrap w-[100%] md:w-[80%] ">
           <ProjBasicDetails
             key="propertyAvailable"

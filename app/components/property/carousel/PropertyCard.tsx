@@ -234,7 +234,7 @@ const ProjectCarousel = ({
     data?.length > 0 && (
       <div className="w-[100%] mb-[5%]">
         <div className="w-[90%] mx-auto ">
-          <h2 className="text-[#001F35] text-[18px] sm:text-[32px] not-italic font-semibold leading-[normal] uppercase mb-1 sm:mb-[14px]">
+          <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[8px] xl:mb-[10px] capitalize">
             {/* <span className="!text-green-600">SARANG BY SUMADHARA </span> */}
             {title}
             <span className="text-[#148B16] font-[700] uppercase ml-4 ">

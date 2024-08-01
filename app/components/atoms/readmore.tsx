@@ -44,7 +44,7 @@ const ReadMore: React.FC<ReadMoreProps> = ({
         {getClampedText()}
         {!expanded && shouldShowReadMore && "... "}
         {shouldShowReadMore && (
-          <span className="text-[14px] sm:text-[18px]  xl:text-[24px] font-[700]  text-[#0073C6] cursor-pointer">
+          <span className="text-[#0073C6] text-[14px]  sm:text-[18px] xl:text-[22px] not-italic font-semibold cursor-pointer">
             {expanded ? "" : "Read More"}
           </span>
         )}
