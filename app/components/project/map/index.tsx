@@ -84,7 +84,7 @@ const LeafMap: React.FC<{
       <div className="flex justify-between w-[95%] sm:w-[90%] mx-auto">
         {type === "prop" ? (
           <PropertyHeading
-            title="Near BY LOCATIONS"
+            title="Near By Locations"
             desc="Explore nearby convenient amenities, entertainment, and essential services"
             className="mb-[40px]"
             projName={projName}
