@@ -80,7 +80,10 @@ const LeafMap: React.FC<{
       ? mapData[selected].slice(isMobile ? -5 : -8)
       : [];
   return Object.keys(mapData).length > 0 ? (
-    <div className="w-full scroll-mt-[170px] mx-auto mb-[3%]" id="nearBy">
+    <div
+      className="w-full scroll-mt-[170px] mx-auto mb-[3%] sm:mb-0 pt-less-screen-spacing"
+      id="nearBy"
+    >
       <div className="flex justify-between w-[95%] sm:w-[90%] mx-auto">
         {type === "prop" ? (
           <PropertyHeading

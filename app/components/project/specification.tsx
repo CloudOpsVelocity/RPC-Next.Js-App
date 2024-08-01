@@ -38,7 +38,7 @@ export default function Specifications({
 
   return (
     <div
-      className="w-[95%] sm:w-[90%] scroll-mt-[180px] mx-auto mb-[3%]"
+      className="w-[95%] sm:w-[90%] scroll-mt-[180px] mx-auto mb-[3%] sm:mb-0 pt-screen-spacing"
       id="specifications"
     >
       <div className="bg-white rounded-lg shadow-md overflow-hidden ">

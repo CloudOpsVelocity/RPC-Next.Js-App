@@ -81,7 +81,6 @@ const FirstBlock: React.FC<Props> = ({
               withIndicators
               slidesToScroll={1}
               align="start"
-              dragFree
               plugins={[autoplay.current]}
               onMouseEnter={autoplay.current.stop}
               onMouseLeave={autoplay.current.reset}

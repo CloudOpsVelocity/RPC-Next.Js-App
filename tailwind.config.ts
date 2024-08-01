@@ -21,6 +21,10 @@ const config: Config = {
       fontSize: {
         h2: "18px",
       },
+      padding: {
+        "screen-spacing": "50px",
+        "less-screen-spacing": "30px",
+      },
     },
   },
 

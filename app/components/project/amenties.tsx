@@ -40,7 +40,7 @@ export default function Amenties({
 
   return (
     <div
-      className="w-[95%] sm:w-[90%] xl:w-[90%] relative scroll-mt-[130px] bg-white sm:pt-10 mb-[3%]  "
+      className="w-[95%] sm:w-[90%] xl:w-[90%] relative scroll-mt-[130px] bg-white sm:pt-10 mb-[3%] sm:mb-0 "
       id="amenities"
     >
       <div className=" mx-auto ">
@@ -55,9 +55,7 @@ export default function Amenties({
             {" "}
             <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[12px] capitalize break-words text-wrap w-[78%]">
               Amenities Of{" "}
-              <span className="text-[#148B16] font-[700] ">
-                {projName}
-              </span>
+              <span className="text-[#148B16] font-[700] ">{projName}</span>
             </h2>
             <SubHeading
               text="Experience the ultimate in comfort with our amenities"

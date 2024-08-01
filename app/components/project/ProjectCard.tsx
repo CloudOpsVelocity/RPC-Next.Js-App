@@ -260,7 +260,7 @@ const ProjectCarousel = ({
 }: Props) => {
   return (
     data?.length > 0 && (
-      <div className="w-[100%] mb-[5%]">
+      <div className="w-[100%] mb-[5%] sm:mb-0 sm:pb-screen-spacing">
         <div className="w-[95%] sm:w-[90%] px-3 sm:mx-auto sm:px-0">
           <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[10px] xl:mb-[24px] capitalize">
             {/* <span className="!text-green-600">SARANG BY SUMADHARA </span> */}
@@ -276,7 +276,7 @@ const ProjectCarousel = ({
           {data &&
             data?.map((project: any, index: number) => {
               return (
-                <CarouselSlide className="!h-auto md:!h-[600px] ">
+                <CarouselSlide className="!h-auto sm:!h-[500px] ">
                   <ProjectCard
                     key={index}
                     type={type}
