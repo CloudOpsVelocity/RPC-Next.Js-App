@@ -19,12 +19,13 @@ export default function RoomBasicDetails({
     <div className={className}>
       <div className="flex justify-start items-center space-x-1 xl:space-x-3 ">
         {icon}
-        <p className="text-[#00487C] text-[14px] md:text-2xl not-italic font-medium leading-[normal]">
+        <p className="text-[#00487C]   text-[13.5px] sm:text-[16px]  xl:text-2xl not-italic   whitespace-nowrap font-semibold">
           {title}
         </p>
       </div>
 
-      <p className="text-[#202020] text-[14px] sm:text-2xl not-italic font-semibold leading-[normal] mt-1 xl:mt-2">
+      <p className=" mt-1 xl:mt-2 
+      text-[#202020]  text-[13.5px] sm:text-[18px] xl:text-2xl not-italic font-semibold text-center ">
         {formattedValue}
       </p>
     </div>
