@@ -30,18 +30,18 @@ export default function GalleryBlock({
   );
   const isMobile = useMediaQuery(`(max-width: 750px)`);
   const [, { open }] = useGallery();
-  const handleMediaClick = (media: string, index:number) => {
+  const handleMediaClick = (media: string, index: number) => {
     if (isMobile) {
       const isVideo = videos.includes(media);
       open(isVideo ? "video" : "image", media);
     }
     setSelectedMedia(media);
-    setCurrentSlide(index)
+    setCurrentSlide(index);
   };
 
   return (
     <div
-      className="w-[95%] md:w-[90%] xl:mt-[100px]   scroll-mt-[165px] mt-4 sm:mt-0 mb-[3%] xl:mb-[100px]" 
+      className="w-[95%] md:w-[90%] xl:mt-[100px]   scroll-mt-[165px] mt-4 sm:mt-0 mb-[3%] xl:mb-[100px]"
       id="galleria"
     >
       {type === "prop" ? (
@@ -85,10 +85,10 @@ export default function GalleryBlock({
               ) : (
                 <Image
                   radius="md"
-                  mah={550}
+                  // mah={550}
                   src={selectedMedia}
                   alt="Preview"
-                  className="cursor-pointer object-contain sm:min-h-[220px] md:h-full lg:h-full "
+                  className="cursor-pointer object-contain sm:min-h-[220px] sm:max-h-[400px] xl:max-h-[450px]  "
                   onClick={() => {
                     open("image", selectedMedia);
                   }}
@@ -106,7 +106,7 @@ export default function GalleryBlock({
                 images={images}
                 videos={videos}
                 isImage={selectedMedia.includes(".mp4") ? false : true}
-                currentSlide={currentSlide} 
+                currentSlide={currentSlide}
                 setCurrentSlide={setCurrentSlide}
               />
             </div>
@@ -127,7 +127,7 @@ export default function GalleryBlock({
                 src={img as string}
                 alt={`${projName} ${AltText(img)}`}
                 className={clsx(
-                  `w-[110px] min-w-[90px] lg:w-[152px] h-[68px] lg:h-[94px]   !rounded-[5px] shadow-md mb-[4%] cursor-pointer  md:min-w-[152px] object-cover border border-gray-300 `,
+                  `w-[110px] min-w-[90px] sm:min-w-[120px] xl:w-[152px] h-[68px] lg:h-[94px]   !rounded-[5px] shadow-md mb-[4%] cursor-pointer  xl:min-w-[152px] object-cover border border-gray-300 `,
                   selectedMedia?.split("?")[0] === img.split("?")[0] &&
                     "!border-2 !border-btnPrimary !shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)]"
                 )}
@@ -137,20 +137,25 @@ export default function GalleryBlock({
           </div>
           {videos && videos.length > 0 && (
             <>
-              <h3 className="text-[#737579] font-[600] text-[20px] lg:text-[24px] mb-1 sm:mb-[2%] ">
+              <h3 className="text-[#737579] font-[600] text-[20px] pt-4 lg:text-[24px]   mb-1 sm:mb-[2%] ">
                 Videos
               </h3>
               <div className="flex justify-start items-start w-full gap-[4%] flex-wrap ">
                 {videos?.map((img, ind) => (
-                  <div className={`relative w-[110px] lg:w-[152px] flex justify-center items-center h-[68px] md:h-[94px]  bg-white rounded-[5px]  mb-[4%] cursor-pointer
-                      ${selectedMedia === img
+                  <div
+                    className={`relative w-[110px] lg:w-[152px] flex justify-center items-center h-[68px] md:h-[94px]  bg-white rounded-[5px]  mb-[4%] cursor-pointer
+                      ${
+                        selectedMedia === img
                           ? "border-2 !border-btnPrimary shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)]"
                           : ""
-                      }`}>
+                      }`}
+                  >
                     <VideoJsonLdScript
                       contentUrl={img as string}
                       name={`${projName} ${VideoALText(img)}`}
-                      description={`This video is about ${projName} ${VideoALText( img )}`}
+                      description={`This video is about ${projName} ${VideoALText(
+                        img
+                      )}`}
                     />
                     <video
                       key={img}
