@@ -269,7 +269,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         /> */}
         <div
           id="faq"
-          className="scroll-mt-[70px] m-auto w-[90%] flex justify-start items-start"
+          className="scroll-mt-[70px] m-auto w-[95%] sm:w-[90%] flex justify-start items-start"
         >
           <FaqWithBg data={data.faqs} projName={data.projectName} />
         </div>
