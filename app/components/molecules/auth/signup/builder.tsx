@@ -626,7 +626,7 @@ function Builder() {
                 required
                 size="lg"
                 mt="md"
-                label="Builder Comapany Name"
+                label="Builder Company Name"
                 placeholder="Enter Legal Name"
                 {...form.getInputProps("companyName")}
                 classNames={{
