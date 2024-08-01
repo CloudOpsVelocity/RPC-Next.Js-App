@@ -112,6 +112,7 @@ const Content: React.FC<any> = ({
             position={[parseFloat(item?.lat), parseFloat(item?.lang)]}
             title={item.name}
             {...(isMobile && { icon: BlueMobileMapIcon })}
+            zIndexOffset={100}
           >
             {/* {selectedLocation?.lat === item?.lat && ( */}
             {!isMobile && (
@@ -121,6 +122,7 @@ const Content: React.FC<any> = ({
                 direction="top"
                 permanent={selectedLocation?.lat === item?.lat}
                 className="min-w-fit"
+                offset={[-16, -16]}
               >
                 <div className=" ">
                   <p className="text-[#00487C] text-lg not-italic font-semibold leading-[normal]">
@@ -148,19 +150,15 @@ const Content: React.FC<any> = ({
               </Tooltip>
             )}
 
-            <Popup>
+            {/* <Popup>
               <p className="text-[#00487C] text-xs sm:text-[17px] italic font-medium leading-[normal]">
                 {item.name}
               </p>
-            </Popup>
+            </Popup> */}
           </Marker>
         ))}
 
-      <Marker
-        position={position}
-        icon={isMobile ? MobileMapIcon : MapIcon}
-        zIndexOffset={1000}
-      >
+      <Marker position={position} icon={isMobile ? MobileMapIcon : MapIcon}>
         <Tooltip
           opacity={1}
           permanent
