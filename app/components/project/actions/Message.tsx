@@ -19,8 +19,8 @@ export default function Message() {
     (data?.compareAdded || data?.shortListed) && (
       <div
         className={clsx(
-          "inline-flex items-center mt-4 sm:mt-0 gap-2 p-1.5 rounded-lg bg-[#fff5c3] sm:absolute  sm:-bottom-5  sm:right-0 w-full md:min-w-[520px]",
-          data?.compareAdded && data?.shortListed && "md:min-w-[670px]"
+          "inline-flex items-center mt-4 sm:mt-0 gap-2 p-1.5 rounded-lg bg-[#fff5c3]  sm:-bottom-5  sm:right-0 w-full md:min-w-fit",
+          data?.compareAdded && data?.shortListed && "md:min-w-fit"
         )}
       >
         <svg
@@ -43,7 +43,7 @@ export default function Message() {
             stroke-linecap="round"
           />
         </svg>{" "}
-        <span className="text-[#242424] text-[12px] sm:text-lg not-italic font-medium leading-[normal]">
+        <span className="text-[#242424] text-[12px] sm:text-base xl:text-lg not-italic font-medium leading-[normal]">
           Please check your{" "}
           <a
             href={"/my-profile"}

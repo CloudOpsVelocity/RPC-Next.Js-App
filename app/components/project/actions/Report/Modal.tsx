@@ -48,6 +48,7 @@ export default function ReportModal() {
     setText("");
   };
   const isMobile = useMediaQuery("(max-width: 601px)");
+  const isTab = useMediaQuery("(max-width: 1600px)");
 
   return (
     <>
@@ -64,17 +65,16 @@ export default function ReportModal() {
             padding: `${status == "success" ? "0px" : "10px"}`,
             borderRadius: "100px",
           },
-
           content: {
             borderRadius: "20px",
           },
         }}
-        size={isMobile ? "90%" : "30%"}
+        size={isMobile ? "90%" : isTab ? "45%" : "30%"}
       >
         <div className="relative">
           <Close
             close={close}
-            className="absolute md:top-3 top-1 md:right-5 right-1 z-10 w-[20px] h-[20px] md:w-[30px] md:h-[30px] "
+            className="absolute sm:right-1 sm:top-1 xl:top-3 top-1 xl:right-5 right-1 z-10 w-[20px] h-[20px]   xl:w-[30px] xl:h-[30px] "
           />
 
           {status === "success" ? (
@@ -91,7 +91,6 @@ export default function ReportModal() {
                   better!
                 </p>
               </header>
-              <div className="h-[1px] w-full mb-3 bg-[#92B2C8;]"></div>
               <form onSubmit={formSubmit} className=" gap-1 sm:gap-4 ">
                 <div className="flex-1">
                   <p className="text-[#001F35] font-semibold font-montserrat text-base ">

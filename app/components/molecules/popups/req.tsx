@@ -25,6 +25,7 @@ import { NearByDataAtom } from "@/app/store/nearby";
 import reqStyles from "@/app/styles/Req.module.css";
 import { get_posted_by } from "@/app/utils/dyanamic/projects";
 import Close from "../../project/button/close";
+import Button from "../../atoms/buttons/variansts";
 const RequestCallBackModal = () => {
   const isMobile = useMediaQuery("(max-width: 750px)");
   const [opened, { close, source, open, MODAL_TYPE }] = useReqCallPopup();
@@ -239,17 +240,22 @@ const LoggedInUserForm = ({ status, setStatus }: any) => {
       <p className="text-[#202020] text-[14px] xl:text-base not-italic font-semibold leading-[normal] tracking-[0.64px] mb-2">
         Email: {session?.user.email}
       </p>
-      <B
+      <Button variant="blue" onClick={onSubmit}>
+        {popupState.MODAL_TYPE === "REQ_QUOTE"
+          ? "Request Quote"
+          : "Request Callback"}
+      </Button>
+      {/* <B
         onClick={onSubmit}
         type="submit"
         mt={"md"}
-        className="!bg-[#0073C6]  text-xl p-2"
+        className="!bg-[#0073C6]  !text-[12px] !p-1 sm:text-xl sm:p-2"
         size="md"
       >
         {popupState.MODAL_TYPE === "REQ_QUOTE"
           ? "Request Quote"
           : "Request Callback"}
-      </B>
+      </B> */}
     </div>
   );
 };
