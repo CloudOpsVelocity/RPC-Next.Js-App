@@ -52,7 +52,7 @@ function ProjectDrawer({ projName }: { projName: string }) {
         {...bind()}
       >
         <div className="mt-4 flex justify-between mb-8">
-          <h1 className="uppercase text-[20px] xl:text-[24px] lg:text-[32px] font-[600] text-[#001F35]  pl-[10px] xl:pl-[57px] max-w-[950px]">
+          <h1 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[10px] xl:mb-[24px] capitalize">
             {builderName ? "About Builder" : title}{" "}
             {showProjName && (
               <span className="text-[#148B16] font-[700] uppercase">

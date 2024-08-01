@@ -83,7 +83,7 @@ export default function PropertyBanner({
             <h4 className="text-[#148B16] sm:text-[24px]  xl:text-[36px] whitespace-nowrap font-[700] mt-1">
               {formatCurrency(minPrice)} - {formatCurrency(maxPrice)}
             </h4>
-            <p className="text-[#242424] text-sm sm:text-[18px]  xl:text-[24px] not-italic font-medium leading-[normal]">
+            <p className="text-[#242424] text-sm sm:text-[18px]  xl:text-[24px] not-italic font-medium leading-[normal] mb-2">
               Start- End Date: {formatDateDDMMYYYY(startDate)} -{" "}
               {formatDateDDMMYYYY(endDate)}
             </p>
@@ -150,7 +150,7 @@ function PropertyBannerForMobile({
             <div className="text-[#148B16] text-lg md:text-[28px] not-italic font-bold leading-[normal] mr-4">
               {formatCurrency(minPrice)} - {formatCurrency(maxPrice)}
             </div>
-            <div className="text-[#333] text-base md:text-xl not-italic font-medium leading-[normal]">
+            <div className=" text-sm sm:text-[16px] mt-[10px] xl:mt-[14px] xl:text-[22px] font-[600] text-[#242424]">
               Start- End Date:{" "}
               <span className="font-semibold">
                 {formatDate(startDate)} - {formatDate(endDate)}
