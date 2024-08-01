@@ -91,7 +91,7 @@ const LeafMap: React.FC<{
           />
         ) : (
           <div>
-            <h2 className="text-h2 lg:text-[32px] font-semibold mb-[12px] capitalize break-words max-w-[78%]">
+            <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-semibold mb-[12px] capitalize break-words ">
               <span className="text-[#148B16] font-bold">{projName} </span>
               <span>Near By Locations</span>
             </h2>
@@ -115,7 +115,7 @@ const LeafMap: React.FC<{
         <section className="bg-white ">
           <div id="tabs">
             <Tabs defaultValue="public">
-              <div className="bg-blue-50 sm:px-3 sm:py-2 xl:px-5 xl:py-4">
+              <div className="bg-blue-50 p-2 sm:px-3 sm:py-2 xl:px-5 xl:py-4">
                 <p className="text-[#001F35] text-[16px] xl:text-[22px] font-medium leading-[normal]">
                   Explore Your Surroundings, Everywhere Nearby!
                 </p>
@@ -213,7 +213,7 @@ const LeafMap: React.FC<{
           />
         ) : (
           <div>
-            <h2 className="text-h2 sm:text-[22px] xl:text-[32px]  font-[600] text-[#001F35] mb-[12px] capitalize break-words sm:text-nowrap w-[78%]">
+            <h2 className="text-h2 sm:text-[22px] xl:text-[32px]  font-[600] text-[#001F35] mb-[12px] capitalize break-words sm:text-nowrap ">
               <span className="text-[#148B16]  ">{projName} </span>
               <span>Near By Locations</span>
             </h2>

@@ -34,11 +34,11 @@ export default function FaqWithBg({ data, projName }: FaqWithBgProps) {
     <div
       className={data?.length > 0 ? classes.wrapper : "!w-[95%] !md:w-[90%]   "}
     >
-      <div className="flex sm:justify-center items-center !w-[100%] !md:w-[90%] ">
+      <div className="flex justify-center items-center text-center !w-[100%] !md:w-[90%] relative">
         {data?.length > 0 && (
           <>
-            <div className="relative mr-[-140px]  sm:mr-[-70px] bottom-[20px] w-[168px] h-[74px] rounded-[50%] blur-[29.5px] bg-[#0093ff4d] "></div>
-            <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[10px] xl:mb-[24px] capitalize text-left">
+            <div className="hidden sm:block absolute   left-[2%] sm:left-[16%]  sm:mr-[-70px] bottom-[20px] w-[168px] h-[74px] rounded-[50%] blur-[29.5px] bg-[#0093ff4d] "></div>
+            <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[28px] xl:mb-[24px] capitalize ">
               Frequently Asked Questions of{" "}
               <span className="text-[#148B16] font-[700]  ">{projName}</span>{" "}
             </h2>
@@ -202,7 +202,9 @@ const FaqCard = ({
         {faqQuestion}
       </h4>
       <FaqReadMore text={faqAnswer} title={faqQuestion} />
-      {!last && <hr className="bg-[#00000080] my-4 sm:my-[25px] xl:my-[35px] h-[2px]" />}
+      {!last && (
+        <hr className="bg-[#00000080] my-4 sm:my-[25px] xl:my-[35px] h-[2px]" />
+      )}
     </div>
   );
 };

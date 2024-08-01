@@ -59,7 +59,8 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
       source: type as GlobalPageType["types"],
     });
   };
-  const onAddingShortList = (projId: string) => {
+  const onAddingShortList = (e: any, projId: string) => {
+    e.stopPropagation();
     if (session) {
       handleShortlist(projId);
     } else {
@@ -67,7 +68,8 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
     }
   };
 
-  const handleReqCall = () => {
+  const handleReqCall = (e: any) => {
+    e.stopPropagation();
     open({
       modal_type: "PROJECT_REQ_CALLBACK",
       postedByName: cardData.builderName,
@@ -134,7 +136,7 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
                 : "Under Construction"}
             </p>
           )}
-          <a href={url} target="_blank" className="relative  max-h-[212px]">
+          <div className="relative  max-h-[212px]">
             <Image
               src={
                 type === "proj"
@@ -163,15 +165,14 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
                     : "bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 text-[#0073C6]"
                 )}
                 onClick={(e) => {
-                  e.preventDefault();
-                  onAddingShortList(cardData.projIdEnc);
+                  onAddingShortList(e, cardData.projIdEnc);
                 }}
               >
                 {cardData.shortListed === "Y" ? Shorlisted : shortlistIconSvg}
                 {cardData.shortListed === "Y" ? "Shortlisted" : "Shortlist"}
               </button>
             </div>
-          </a>
+          </div>
 
           <div className="text-sm">
             {type != "proj" && (
@@ -260,7 +261,7 @@ const ProjectCarousel = ({
   return (
     data?.length > 0 && (
       <div className="w-[100%] mb-[5%]">
-        <div className="w-[95%] sm:w-[90%] px-6 xl:mx-auto xl:px-0">
+        <div className="w-[95%] sm:w-[90%] px-6 sm:mx-auto sm:px-0">
           <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[10px] xl:mb-[24px] capitalize">
             {/* <span className="!text-green-600">SARANG BY SUMADHARA </span> */}
             {title}{" "}
