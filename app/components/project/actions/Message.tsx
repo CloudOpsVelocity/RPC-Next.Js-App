@@ -29,6 +29,7 @@ export default function Message() {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
+          className="min-w-[24px]"
         >
           <path
             d="M12.0006 17V15M12.0006 15C12.3516 15 12.6965 14.9075 13.0005 14.732C13.3045 14.5565 13.557 14.304 13.7326 14M12.0006 15C11.6495 15 11.3046 14.9075 11.0006 14.732C10.6966 14.5565 10.4441 14.304 10.2686 14"
@@ -43,7 +44,7 @@ export default function Message() {
             stroke-linecap="round"
           />
         </svg>{" "}
-        <span className="text-[#242424] text-[12px] sm:text-base xl:text-lg not-italic font-medium leading-[normal]">
+        <span className="text-[#242424] text-[12px] sm:text-base xl:text-lg not-italic font-medium leading-[normal] text-nowrap">
           Please check your{" "}
           <a
             href={"/my-profile"}
