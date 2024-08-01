@@ -40,11 +40,11 @@ const ReadMore: React.FC<ReadMoreProps> = ({
 
   return (
     <div className="w-full" onClick={handleReadMoreClick}>
-      <p className="text-[14px] sm:text-[18px]  xl:text-[24px] font-[500] leading-7 text-[#233333] break-words">
+      <p className="text-[14px] sm:text-[18px]  xl:text-[24px] font-[500]  text-[#233333] break-words">
         {getClampedText()}
         {!expanded && shouldShowReadMore && "... "}
         {shouldShowReadMore && (
-          <span className="text-[14px] sm:text-[18px]  xl:text-[24px] font-[700] leading-7 text-[#0073C6] cursor-pointer">
+          <span className="text-[14px] sm:text-[18px]  xl:text-[24px] font-[700]  text-[#0073C6] cursor-pointer">
             {expanded ? "" : "Read More"}
           </span>
         )}

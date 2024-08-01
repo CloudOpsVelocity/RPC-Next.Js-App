@@ -48,31 +48,31 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
             </p>
           </div>
         </div>
-
         <div className="sm:rounded-[20px] mt-[1%] flex justify-between items-center bg-[#FFF] shadow-md w-[100%] mb-[2%] sm:w-[75%] xl:w-[50%] p-[1%] ">
           <div className="w-[30%] border-solid border-[#92B2C8] border-r-[1px]">
-            <p className=" text-[#202020]  text-[10px] sm:text-[20px] xl:text-[24px] font-[700]">
+            <p className=" text-[#202020]  text-[14px] sm:text-[20px] xl:text-[24px] font-[700]">
               {nzData.newProject}
             </p>
-            <p className=" text-[#148B16]  text-[10px]    sm:text-[18px] xl:text-[20px] font-[700]">
+            <p className=" text-[#148B16]  text-[12px]    sm:text-[18px] xl:text-[20px] font-[700]">
               New Launch {`Project${nzData.newProject > 1 ? "s" : ""}`}
             </p>
           </div>
 
           <div className="w-[30%] border-solid border-[#92B2C8] border-r-[1px]">
-            <p className=" text-[#202020]  text-[10px] sm:text-[18px] xl:text-[24px] font-[700]">
+            <p className=" text-[#202020]  text-[14px] sm:text-[18px] xl:text-[24px] font-[700]">
               {nzData.onGoingProject}
             </p>
-            <p className=" text-[#001F35] text-[10px] sm:text-[18px] xl:text-[20px] font-[700]">
-              Ongoing {`Project${nzData.onGoingProject > 1 ? "s" : ""}`}
+            <p className=" text-[#001F35] text-[12px] sm:text-[18px] xl:text-[20px] font-[700]">
+              Ongoing <br className=" sm:hidden" />{" "}
+              {`Project${nzData.onGoingProject > 1 ? "s" : ""}`}
             </p>
           </div>
 
           <div className="w-[30%] ">
-            <p className=" text-[#202020] text-[10px] sm:text-[18px] xl:text-[24px] font-[700]">
+            <p className=" text-[#202020] text-[14px] sm:text-[18px] xl:text-[24px] font-[700]">
               {nzData.completedProject}
             </p>
-            <p className=" text-[#E3AC00] text-[10px] sm:text-[18px] xl:text-[20px] font-[700]">
+            <p className=" text-[#E3AC00] text-[12px] sm:text-[18px] xl:text-[20px] font-[700]">
               Completed {`Project${nzData.completedProject > 1 ? "s" : ""}`}
             </p>
           </div>
@@ -83,7 +83,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
           projName={""}
           builderName={nzData.companyName}
           content={nzData.vission}
-          className="!mb-[8px] sm:!mb-[29px] text-[#202020] sm:text-[18px] xl:text-2xl not-italic font-medium leading-[normal] w-full mt-4 sm:mt-0"
+          className="!mb-[8px] sm:!mb-[20px] xl:!mb-[24px] text-[#202020] sm:text-[18px] xl:text-2xl not-italic font-medium leading-[normal] w-full mt-4 sm:!mt-0"
         />
 
         <p className="  text-[16px] sm:text-[20px] xl:text-[24px]  text-black sm:text-2xl not-italic font-semibold leading-[normal] inline-flex justify-center items-center">
