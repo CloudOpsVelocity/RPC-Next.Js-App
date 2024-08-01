@@ -82,9 +82,11 @@ const RequestCallBackModal = () => {
               <ReqcallbackMessage close={handleClose} />
             ) : (
               <>
-                <div className={`w-[100%] md:w-[50%] px-[3%] py-[3%]`}>
+                <div
+                  className={`w-[100%] md:w-[50%] px-[3%] py-[3%] sm:py-[1%] xl:py-[3%]`}
+                >
                   {status === "idle" && (
-                    <h2 className="text-[18px]  lg:text-[24px] font-[600] text-[#202020]  ">
+                    <h2 className="text-[18px]  sm:text-[20px] xl:text-[24px] font-[600] text-[#202020]  ">
                       {MODAL_TYPE === "REQ_QUOTE"
                         ? "Request Quotation"
                         : "Request Callback"}
@@ -304,6 +306,7 @@ const ReqForm = ({
   };
   const bn = popupState.postedByName;
   const title = popupState.title;
+  const isTab = useMediaQuery(`(max-width: 1600px)`);
   return status === "success" ? (
     <Success close={close} />
   ) : status === "otp" ? (
@@ -341,12 +344,12 @@ const ReqForm = ({
         No worries add your details to get callback from builder
       </p>
 
-      <h2 className="text-[#00487C] text-[18px] font-semibold xl:text-xl not-italic xl:font-bold mb-[1.5%]">
+      <h2 className="text-[#00487C] text-[14px] xl:text-[18px] font-semibold xl:text-xl not-italic xl:font-bold mb-[1.5%]">
         Your Details
       </h2>
       <div className="flex flex-col max-w-sm">
         <TextInput
-          size="lg"
+          size={isTab ? "md" : "lg"}
           label="Enter Your Name Here"
           {...form.getInputProps("name")}
           placeholder="Enter Your Name Here"
@@ -359,7 +362,7 @@ const ReqForm = ({
           onBlur={(e) => handleTrimAndReplace(e, "name", form)}
         />
         <NumberInput
-          mt={"lg"}
+          mt={isTab ? "xs" : "lg"}
           classNames={{
             input: reqStyles.numInput,
             label: N.label,
@@ -367,7 +370,7 @@ const ReqForm = ({
             wrapper: reqStyles.wrapper,
           }}
           hideControls
-          size="lg"
+          size={isTab ? "md" : "lg"}
           className="w-[100%]  "
           label="Contact Number"
           placeholder="Enter Your Contact Number"
@@ -385,19 +388,19 @@ const ReqForm = ({
             (form.errors.mobile != undefined && form.errors.mobile != null) ||
             status === "error"
               ? "bottom-[65px]"
-              : "bottom-[45px]"
+              : "bottom-[45px] sm:bottom-[40px] xl:bottom-[45px]"
           }  ml-[2px]`}
         >
           + 91
         </p>
 
         <TextInput
-          size="lg"
+          size={isTab ? "md" : "lg"}
           label="Enter Your Email Here"
           {...form.getInputProps("email")}
           placeholder="Enter Your Email Here"
           type="email"
-          style={{ marginTop: "-10px" }}
+          style={{ marginTop: isTab ? "-22px" : "-10px" }}
           classNames={{
             input: reqStyles.input,
             label: N.label,
