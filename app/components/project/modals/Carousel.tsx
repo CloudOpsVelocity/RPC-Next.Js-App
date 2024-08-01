@@ -181,6 +181,7 @@ const MiddleSection = ({
 
 const ImageContainer = ({ url }: any) => {
   const isMobile = useMediaQuery("(max-width: 601px)");
+  const isTab = useMediaQuery("(max-width: 1600px)");
   return (
     <div className="relative ml-3 max-w-fit">
       <TransformComponent
@@ -192,7 +193,12 @@ const ImageContainer = ({ url }: any) => {
           alignItems: "center",
         }}
       >
-        <Image src={url} radius="md" h={isMobile ? 300 : 600} fit="contain" />
+        <Image
+          src={url}
+          radius="md"
+          h={isMobile ? 300 : isTab ? 400 : 600}
+          fit="contain"
+        />
       </TransformComponent>
       <ZoomInOut className="!right-[20px] !bottom-12 xl:!right-[0px] xl:!bottom-[0px] " />
     </div>
