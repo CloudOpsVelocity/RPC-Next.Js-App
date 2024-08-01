@@ -161,7 +161,7 @@ function FloorPlanModal({
               filterKeysDetails={filterKeysDetails}
             />
 
-            <div className="flex justify-start items-start gap-5 xl:gap-[45px] flex-col mt-[1.5%] md:flex-row w-full xl:pb-[3%] ">
+            <div className="flex justify-start items-start gap-5 xl:gap-[45px] flex-col  md:flex-row w-full xl:pb-[3%] ">
               <LeftSection
                 propCgId={propCgId}
                 data={data}
