@@ -331,7 +331,7 @@ const ReqForm = ({
         </span>{" "}
         : {title}
       </p>
-      <p className="text-[#148B16] text-[13px] italic font-bold leading-[normal] tracking-[0.64px] mb-[2%] ">
+      <p className="text-[#148B16] text-[13px] xl:text-lg italic font-bold leading-[normal] tracking-[0.64px] mb-[2%] ">
         <span className="text-[#4D6677] text-sm  xl:text-lg italic font-medium leading-[normal] tracking-[0.36px]">
           {Posted_BY}
         </span>{" "}

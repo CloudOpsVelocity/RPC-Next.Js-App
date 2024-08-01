@@ -105,7 +105,7 @@ export default function SharePopup({
           className
         )}
       >
-        <ShearIcon className="md:w-[26px] md:h-[26px]  h-[24px] w-[42px] " />
+        <ShearIcon className=" sm:w-[18px] sm:h-[18px] xl:w-[26px] xl:h-[26px]  h-[24px] w-[42px] " />
         <span className="hidden  h-4 w-4 xl:h-auto xl:w-full xl:block">
           {title}
         </span>

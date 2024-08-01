@@ -131,7 +131,7 @@ const Content = ({ url }: { url: string }) => {
           // w="100%"
           fit="contain"
           alt="master plan"
-          className="cursor-pointer h-[420px] xl:h-[770px] border-[5px] bg-white border-white md:min-w-[1400px] xl:max-h-[770px] object-contain"
+          className="cursor-pointer h-[420px] xl:h-[770px] border-[5px] bg-white border-white sm:min-w-[800px] xl:min-w-[1400px] xl:max-h-[770px] object-contain"
           component={NextImage}
           width={600}
           height={600}
