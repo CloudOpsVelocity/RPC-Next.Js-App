@@ -38,7 +38,7 @@ export default function FaqWithBg({ data, projName }: FaqWithBgProps) {
         {data?.length > 0 && (
           <>
             <div className="relative mr-[-140px]  sm:mr-[-70px] bottom-[20px] w-[168px] h-[74px] rounded-[50%] blur-[29.5px] bg-[#0093ff4d] "></div>
-            <h2 className="text-h2 lg:text-[32px] font-[600] text-[#001F35] mb-1 sm:mb-16 text-center sm:text-start">
+            <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[10px] xl:mb-[24px] capitalize text-left">
               Frequently Asked Questions of{" "}
               <span className="text-[#148B16] font-[700]  ">{projName}</span>{" "}
             </h2>

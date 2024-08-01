@@ -34,7 +34,7 @@ const FaqReadMore: React.FC<ReadMoreProps> = ({
 
         {showReadMoreButton && shouldShowReadMore && (
           <span
-            className="text-[#0073C6] text-[14px] sm:text-[28px] not-italic font-semibold cursor-pointer"
+            className="text-[#0073C6] text-[14px]  sm:text-[18px] xl:text-[22px] not-italic font-semibold cursor-pointer"
             role="button" // Add role for accessibility
             tabIndex={0} // Add tabIndex for accessibility
             aria-label={isReadMore ? "Read Less" : "Read More"} // Add ARIA label
