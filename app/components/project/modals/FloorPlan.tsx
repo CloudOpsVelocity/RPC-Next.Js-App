@@ -161,7 +161,7 @@ function FloorPlanModal({
               filterKeysDetails={filterKeysDetails}
             />
 
-            <div className="flex justify-start items-start gap-5 xl:gap-[45px] flex-col mt-[1.5%] md:flex-row w-full xl:pb-[3%] ">
+            <div className="flex justify-start items-start gap-5 xl:gap-[45px] flex-col  md:flex-row w-full xl:pb-[3%] ">
               <LeftSection
                 propCgId={propCgId}
                 data={data}
@@ -693,8 +693,8 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
 const RightSection = ({ propCgId }: any) => {
   const data = useAtomValue(selectedFloorAtom);
   return (
-    <div className="bg-[#F4FBFF] xl:mt-10 p-6 rounded-lg w-[100%] xl:mb-[10%] xl:w-full max-w-[342px] shadow">
-      <div className="space-y-4">
+    <div className="bg-[#F4FBFF] xl:mt-10 p-6 rounded-lg w-[100%] xl:mb-[10%] xl:w-full max-w-[342px] sm:max-w-[300px] xl:max-w-[342px] shadow">
+      <div className="space-y-4 sm:space-y-2 xl:space-y-4">
         {propCgId != projectprops.plot && (
           <div className="flex items-center space-x-3">
             {propertyDetailsSvgs.unitType}

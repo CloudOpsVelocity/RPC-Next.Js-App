@@ -24,7 +24,7 @@ export default function ListingRentAvail({
 }) {
   return (
     <div
-      className="w-[90%] mb-[3%] xl:mb-[3%]  xl:pt-[50px] m-auto sm:mb-[1.5%] sm:scroll-mt-[140px] xl:scroll-mt-[150px]"
+      className="w-[90%] mb-[3%] xl:mb-[0%]  sm:pt-[50px] m-auto sm:mb-[0%] sm:scroll-mt-[140px] xl:scroll-mt-[150px]"
       id="listings"
     >
       <h2 className="text-[20px] sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[12px] sm:mb-[6px] xl:mb-[12px]">
@@ -90,7 +90,7 @@ const Card = ({
         </div>
         <div
           className={clsx(
-            "flex justify-center items-center p-1.5 gap-[4px] sm:gap-[12px] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[10px] border-[3px] border-solid max-w-[60px] xl:max-w-[80px] sm:mt-[14px] sm:ml-5 sm:mb-5 sm:mr-5 text-[#303030] text-[14px] sm:text-2xl not-italic font-semibold",
+            "flex justify-center items-center p-1.5 gap-[4px] sm:gap-2 xl:gap-[12px] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[10px] border-[3px] border-solid max-w-[60px] xl:max-w-[80px] sm:mt-[14px] sm:ml-5 sm:mb-5 sm:mr-5 text-[#303030] text-[14px] sm:text-lg xl:text-2xl not-italic font-semibold",
             type === "sell"
               ? "border-[#FFD600] bg-[#ffef9b]"
               : "border-[#0073C6] bg-[#DBF0FF]"

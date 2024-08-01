@@ -4,7 +4,7 @@ import S from "@/app/styles/Rating.module.css";
 import { useFormContext } from "@/app/context/rating";
 import clsx from "clsx";
 import handleTrimAndReplace from "@/app/utils/input/validations";
-import { useLocalStorage } from "@mantine/hooks";
+import { useLocalStorage, useMediaQuery } from "@mantine/hooks";
 import useDynamicProj from "@/app/hooks/project/useDynamic";
 interface Props {
   review: string;
@@ -71,6 +71,7 @@ export const RatingForm = ({
 }: any) => {
   const form = useFormContext();
   const data = useDynamicProj();
+  const isTab = useMediaQuery(`(max-width: 1600px)`);
 
   return (
     <form
@@ -88,12 +89,12 @@ export const RatingForm = ({
               symbolBody: S.star,
             }}
             emptySymbol={
-              <IconSun className="w-[45px] h-[45px]  md:w-[70px] md:h-[70px]" />
+              <IconSun className="w-[45px] h-[45px]  sm:w-[50px] sm:h-[50px]  xl:w-[70px] xl:h-[70px]" />
             }
             fullSymbol={
               <RatingStar
                 fill="#FFD600"
-                className="w-[45px] h-[45px]  md:w-[70px] md:h-[70px]"
+                className="w-[45px] h-[45px] sm:w-[50px] sm:h-[50px]  xl:w-[70px] xl:h-[70px]"
               />
             }
             {...form.getInputProps("rating")}
@@ -115,11 +116,14 @@ export const RatingForm = ({
               {data.data.rating}
             </span>
             {"  "}
-            <span className=" text-[16px] xl:text-xl"> / 5 Ratings Already Given</span>
+            <span className=" text-[16px] xl:text-xl">
+              {" "}
+              / 5 Ratings Already Given
+            </span>
           </p>
         </div>
       )}
-      <h2 className="text-[#242424] text-[16px] md:text-[20px] not-italic font-bold leading-[23.784px]  !mb-[24px]">
+      <h2 className="text-[#242424] text-[16px] sm:text-[16px] xl:text-[20px] not-italic font-bold leading-[23.784px]  !mb-[24px]">
         {isSubmitted
           ? `Add your feedback for ${projName} Project `
           : `Add your feedback for ${projName} Project `}{" "}
@@ -140,12 +144,12 @@ export const RatingForm = ({
             )}
             placeholder="Start typing here"
             radius={"10px"}
-            rows={4}
+            rows={isTab ? 2 : 4}
             maxLength={401}
             {...form.getInputProps("review")}
-          classNames={{
-            input:S.ratingInput
-          }}
+            classNames={{
+              input: S.ratingInput,
+            }}
             onBlur={(e) => handleTrimAndReplace(e, "review", form)}
           />
         </div>

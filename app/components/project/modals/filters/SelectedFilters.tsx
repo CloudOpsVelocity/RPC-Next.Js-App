@@ -12,6 +12,7 @@ const SelectedFilters = ({
   handleRemoveFilter,
   filterKeysDetails,
 }: any) => {
+  console.log(showClearAll);
   const scrollFiltersRef = useRef<HTMLDivElement>(null);
   const [showLeftButton, setShowLeftButton] = useState(true);
   const [showRightButton, setShowRightButton] = useState(true);
@@ -38,7 +39,7 @@ const SelectedFilters = ({
   //     }
   //   };
   // }, []);
-
+  console.log(showClearAll);
   const handleArrowClick = (side: "R" | "L"): void => {
     const scrollAmount = side === "R" ? 100 : -100;
     if (scrollFiltersRef.current) {
@@ -47,13 +48,14 @@ const SelectedFilters = ({
   };
   return (
     <div
-      className={`flex justify-start items-center w-full xl:h-[35px] relative bottom-[20px] mb-1 sm:mt-10 xl:mb-[-35px] ${
+      className={`flex justify-start items-center w-full  relative bottom-[20px] mb-1   ${
         showClearAll ? "h-[35px] mt-10" : "h-[0px] mt-2"
       }`}
     >
       {/* scroll buttons */}
       {showLeftButton &&
-        Object.values(form.values).filter((each) => each != null).length > 4 && (
+        Object.values(form.values).filter((each) => each != null).length >
+          4 && (
           <button
             onClick={() => handleArrowClick("L")}
             className="flex mr-4 xl:mr-8 h-[32px] xl:w-[32px] rounded-[50%] items-center justify-center bg-[#FCFCFC]"

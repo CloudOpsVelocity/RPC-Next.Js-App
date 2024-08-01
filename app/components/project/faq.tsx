@@ -248,6 +248,7 @@ const Success = ({ text, opened, onClose, projName }: any) => {
   const ComponentTorender =
     renderComponent[opened.type as RenderComponentKeys] || null;
   const isMobile = useMediaQuery(`(max-width: 750px)`);
+  const isTab = useMediaQuery(`(max-width: 1600px)`);
   useEffect(() => {
     const timer = setTimeout(() => {
       onClose();
@@ -270,7 +271,7 @@ const Success = ({ text, opened, onClose, projName }: any) => {
       onClose={onClose}
       centered
       title="Add Rating"
-      size={isMobile ? "100%" : "auto"}
+      size={isMobile ? "100%" : isTab ? "35%" : "auto"}
     >
       <Close close={onClose} className="absolute top-2 right-2 z-50" />
 

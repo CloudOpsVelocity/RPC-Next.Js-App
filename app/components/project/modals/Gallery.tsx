@@ -25,7 +25,7 @@ type GalleryProps = {
   videos: any[];
   isImage: boolean;
   currentSlide: number;
-  setCurrentSlide:any;
+  setCurrentSlide: any;
 };
 
 const Gallery: React.FC<GalleryProps> = ({
@@ -33,8 +33,8 @@ const Gallery: React.FC<GalleryProps> = ({
   images,
   videos,
   isImage,
-  currentSlide, 
-  setCurrentSlide
+  currentSlide,
+  setCurrentSlide,
 }) => {
   const [content, { open, close }] = useGallery();
   const [previewImage, setPreviewImage] = useState<string | null>(
@@ -55,6 +55,7 @@ const Gallery: React.FC<GalleryProps> = ({
     { axis: "x" }
   );
   const isMobile = useMediaQuery(`(max-width: 601px`);
+  const isTab = useMediaQuery(`(max-width: 1600px`);
   if (!content) {
     return null;
   }
@@ -67,7 +68,7 @@ const Gallery: React.FC<GalleryProps> = ({
           setPreviewImage(null);
           close();
         }}
-        size="auto"
+        size={isMobile ? "100%" : isTab ? "65%" : "auto"}
         classNames={{
           close: S.close,
           content: S.content,
@@ -101,20 +102,23 @@ const Gallery: React.FC<GalleryProps> = ({
 
           {/* Displaying amain Image Or Video */}
           {isImage ? (
-            <div {...bind()} className="w-full flex justify-center items-center" >
-                <TransformWrapper>
-                  <Content url={images[currentSlide]} />
-                </TransformWrapper>
+            <div
+              {...bind()}
+              className="w-full flex justify-center items-center"
+            >
+              <TransformWrapper>
+                <Content url={images[currentSlide]} />
+              </TransformWrapper>
             </div>
           ) : (
-            <div className="flex justify-center items-center md:min-w-[1000px] min-w-[300px] bg-black rounded-[10px] md:rounded-[20px] ">
-                <ReactPlayer
-                  url={videos[currentSlide] as string}
-                  width="auto"
-                  controls
-                  height={isMobile ? "50vh" : "60vh"}
-                  playing={true}
-                />
+            <div className="flex justify-center items-center sm:w-[800px] xl:min-w-[1000px] min-w-[300px] bg-black rounded-[10px] md:rounded-[20px] ">
+              <ReactPlayer
+                url={videos[currentSlide] as string}
+                width="auto"
+                controls
+                height={isMobile ? "50vh" : "60vh"}
+                playing={true}
+              />
             </div>
           )}
 
@@ -161,7 +165,7 @@ const Gallery: React.FC<GalleryProps> = ({
                           `cursor-pointer w-full min-w-[150px] max-w-[150px] !h-auto max-h-[100px] min-h-[100px] object-cover bg-white`,
                           // (image.split("?")[0] === (previewImage?.split("?")[0] || content?.url?.split("?")[0]) || currentSlide === index) &&
                           currentSlide === index &&
-                          "!border-[4px] !border-white"
+                            "!border-[4px] !border-white"
                         )}
                       />
                     </Carousel.Slide>
@@ -177,7 +181,9 @@ const Gallery: React.FC<GalleryProps> = ({
                         setCurrentSlide(index);
                       }}
                     >
-                      <div className={`relative flex items-center w-full justify-center border-1 border-solid border-white `}>
+                      <div
+                        className={`relative flex items-center w-full justify-center border-1 border-solid border-white `}
+                      >
                         <video
                           key={index}
                           width={150}
@@ -221,7 +227,7 @@ const Content = ({ url }: { url: string }) => {
           fit="contain"
           // src={previewImage ?? content?.url}
           src={url}
-          className="cursor-pointer max-h-[200px]  sm:border-[5px] sm:bg-white sm:border-white w-[100%] sm:!h-[350px]  md:min-w-[1400px] md:min-h-[600px]"
+          className="cursor-pointer max-h-[200px]  sm:border-[5px] sm:bg-white sm:border-white w-[100%] xl:!h-[350px]  sm:min-w-[800px] sm:min-h-[300px]  xl:min-w-[1400px] xl:min-h-[600px]"
         />
       </TransformComponent>
       <ZoomInOut className="right-2 bottom-4 xl:right-28 " />

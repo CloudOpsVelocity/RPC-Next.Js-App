@@ -29,7 +29,6 @@ import Close from "../button/close";
 import { useMediaQuery } from "@mantine/hooks";
 import { downLoadIcon } from "@/app/images/commonSvgs";
 
-
 function CarouselModal({
   projName,
   propCgId,
@@ -74,7 +73,7 @@ function CarouselModal({
       <Modal
         // centered={isMobile ? false : true}
         opened={opened}
-        size={isMobile ? "98%": "90%"}
+        size={isMobile ? "98%" : "90%"}
         padding={0}
         transitionProps={{ duration: TRANSITION_DURATION }}
         onClose={close}
@@ -91,10 +90,12 @@ function CarouselModal({
           <div className="flex justify-center items-center gap-5">
             <button
               onClick={handleDownload}
-              className={`text-white flex justify-center items-center gap-1 p-2 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] rounded-[10px] bg-[#0073c6] ${isMobile&& "text-[12px] p-1"}`}
+              className={`text-white flex justify-center items-center gap-1 p-2 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] rounded-[10px] bg-[#0073c6] ${
+                isMobile && "text-[12px] p-1"
+              }`}
             >
-             { !isMobile ? "Download Floor Plan" : "Download"}
-            </button> 
+              {!isMobile ? "Download Floor Plan" : "Download"}
+            </button>
             <SharePopup
               title="Share"
               titleText="Share Floor Plan"
@@ -104,7 +105,7 @@ function CarouselModal({
             <Close close={close} />
           </div>
         </div>
-        <div className="flex flex-col md:flex-row p-[2%]  mb-10 justify-center items-center gap-[45px] shrink-0 mt-4">
+        <div className="flex flex-col md:flex-row p-[2%]  mb-10 sm:mb-0 xlmb-10 justify-center items-center gap-[45px] shrink-0 mt-4">
           <MiddleSection projName={projName} propCgId={propCgId} />
           <RightSection propCgId={propCgId} />
         </div>
@@ -125,8 +126,8 @@ const MiddleSection = ({
   const selectedFloor = useAtomValue(selectedFloorAtom);
 
   return (
-    <div className="w-[100%]  xl:max-w-[1400px]">
-      <p className="text-[#242424] w-full mt-[18%] xl:mt-[1%] mb-[1%]  text-[14px] text-center cl:text-left xl:text-[16px] font-[500] ">
+    <div className="w-[100%] sm:max-w-[500px]  xl:max-w-[1400px]">
+      <p className="text-[#242424] w-full mt-[18%] sm:mt-[3%] xl:mt-[1%] mb-[1%]  text-[14px] text-center cl:text-left xl:text-[16px] font-[500] ">
         {/* Sarang by sumadhura/2bhk/tower 1/ 05%4/north/1124 sq.ft - 3 */}
         <>
           {projName}
@@ -165,9 +166,7 @@ const MiddleSection = ({
       {selectedFloor?.floorPlanUrl ? (
         <div className="w-full flex justify-center items-center">
           <TransformWrapper>
-            <ImageContainer
-              url={`${selectedFloor?.floorPlanUrl}?v=${Math.random()}`}
-            />
+            <ImageContainer url={`${selectedFloor?.floorPlanUrl}`} />
           </TransformWrapper>
         </div>
       ) : (
@@ -182,6 +181,7 @@ const MiddleSection = ({
 
 const ImageContainer = ({ url }: any) => {
   const isMobile = useMediaQuery("(max-width: 601px)");
+  const isTab = useMediaQuery("(max-width: 1600px)");
   return (
     <div className="relative ml-3 max-w-fit">
       <TransformComponent
@@ -193,9 +193,14 @@ const ImageContainer = ({ url }: any) => {
           alignItems: "center",
         }}
       >
-        <Image src={url} radius="md"   h={ isMobile ?300:600} fit="contain" />
+        <Image
+          src={url}
+          radius="md"
+          h={isMobile ? 300 : isTab ? 400 : 600}
+          fit="contain"
+        />
       </TransformComponent>
-      <ZoomInOut className="!right-[20px] !bottom-12 xl:!right-[0px] xl:!bottom-[0px] "  />
+      <ZoomInOut className="!right-[20px] !bottom-12 xl:!right-[0px] xl:!bottom-[0px] " />
     </div>
   );
 };

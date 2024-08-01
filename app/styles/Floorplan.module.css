@@ -87,6 +87,17 @@
   margin-top: 16px;
 }
 
+@media screen and (max-width: 1600px) {
+  .label {
+    font-size: 12px;
+  }
+  .input::placeholder {
+    font-size: 12px;
+  }
+  .input {
+    font-size: 12px;
+  }
+}
 @media screen and (max-width: 601px) {
   .labelByBhk {
     color: #001f35;

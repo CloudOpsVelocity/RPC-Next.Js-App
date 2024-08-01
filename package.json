@@ -12,7 +12,7 @@
     "test:unit": "set NODE_OPTIONS=--no-deprecation && jest --detectOpenHandles",
     "test:watch": "set NODE_OPTIONS=--no-deprecation && jest --watch",
     "push": "npm run build && git add . && read -p 'Enter commit message: ' msg && git commit -m \"$msg\" && git push",
-    "pull": "git pull origin manishdev"
+    "pull-manish": "git pull origin manishdev"
   },
   "dependencies": {
     "@mantine/carousel": "^7.3.2",

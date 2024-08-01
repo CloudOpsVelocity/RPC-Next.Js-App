@@ -19,7 +19,7 @@ export default function Message() {
     (data?.compareAdded || data?.shortListed) && (
       <div
         className={clsx(
-          "inline-flex items-center mt-4 sm:mt-0 gap-2 p-1.5 rounded-lg bg-[#fff5c3]  sm:-bottom-5  sm:right-0 w-full md:min-w-fit",
+          "inline-flex items-center mt-4  gap-2 p-1.5 rounded-lg bg-[#fff5c3]  sm:-bottom-5  sm:right-0 w-full md:min-w-fit sm:mt-1",
           data?.compareAdded && data?.shortListed && "md:min-w-fit"
         )}
       >
@@ -44,12 +44,12 @@ export default function Message() {
             stroke-linecap="round"
           />
         </svg>{" "}
-        <span className="text-[#242424] text-[12px] sm:text-base xl:text-lg not-italic font-medium leading-[normal] text-nowrap">
+        <span className="text-[#242424] text-[12px] sm:text-base xl:text-lg not-italic font-medium leading-[normal] sm:text-nowrap">
           Please check your{" "}
           <a
             href={"/my-profile"}
             target="_blank"
-            className="!text-[#0073C6] text-[12px] sm:text-lg  italic font-semibold leading-[normal] !underline"
+            className="!text-[#0073C6] text-[12px] sm:text-base xl:text-lg  italic font-semibold leading-[normal] !underline"
           >
             Dashboard
           </a>
