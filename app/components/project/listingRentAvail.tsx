@@ -12,7 +12,7 @@ import Image from "next/image";
 import React from "react";
 import SubHeading from "./headings/SubHeading";
 import { useMediaQuery } from "@mantine/hooks";
-
+// space fixed
 export default function ListingRentAvail({
   projName,
   r,
@@ -24,7 +24,7 @@ export default function ListingRentAvail({
 }) {
   return (
     <div
-      className="w-[90%] mb-[3%] xl:mb-[3%]  xl:mt-[5%] m-auto sm:mb-[1.5%] sm:scroll-mt-[140px] xl:scroll-mt-[150px]"
+      className="w-[90%] mb-[3%] xl:mb-[3%]  xl:pt-[50px] m-auto sm:mb-[1.5%] sm:scroll-mt-[140px] xl:scroll-mt-[150px]"
       id="listings"
     >
       <h2 className="text-[20px] sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[12px] sm:mb-[6px] xl:mb-[12px]">
