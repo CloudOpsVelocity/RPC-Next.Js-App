@@ -147,6 +147,7 @@ const AddRating = ({
     setStatus("success");
   };
   const isMobile = useMediaQuery(`(max-width: 750px)`);
+  const isTab = useMediaQuery(`(max-width: 1600px)`);
   return (
     <Modal
       classNames={
