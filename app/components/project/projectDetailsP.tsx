@@ -160,7 +160,7 @@ export default function ProjectDetailsP({
         </div>
       )}
 
-      <div className="flex justify-start items-start gap-[4%] flex-wrap mt-[3%]">
+      <div className="flex justify-start items-start gap-[4%] flex-wrap mt-[3%] sm:mt-[1%]">
         {selectedPhase && (
           <>
             {orderedPropertyTypes.map((propertyTypeKey: any) => {

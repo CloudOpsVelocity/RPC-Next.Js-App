@@ -49,7 +49,7 @@ export default function OverviewBanner({
             <p className="text-[#001F35]  sm:text-[32px]  whitespace-nowrap font-[700] mt-1 mb-[16px]">
               {formatCurrency(minPrice)} - {formatCurrency(maxPrice)}
               {", "}
-              <span className="text-[#545353] text-lg sm:text-[20px] xl:text-[32px] text-wrap not-italic font-medium leading-[normal]">
+              <span className="text-[#545353] text-xs sm:text-[20px] xl:text-[24px] text-wrap not-italic font-medium leading-[normal]">
                 ₹{" "}
                 {
                   <NumberFormatter
