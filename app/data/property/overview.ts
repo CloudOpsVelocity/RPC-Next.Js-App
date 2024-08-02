@@ -106,12 +106,12 @@ export function generatePropertyOverViewData(
         { title: "Property Facing", value: data.facingName, Icon: Compass },
         {
           title: "Super built-up Area",
-          value: `${data.sba} sq.ft`,
+          value: `${formatNumberWithSuffix(data.sba)} sq.ft`,
           Icon: TotalLandArea,
         },
         {
           title: "Carpet Area",
-          value: `${data.ca} sq.ft`,
+          value: `${formatNumberWithSuffix(data.ca)} sq.ft`,
           Icon: TotalLandArea,
         },
 
@@ -168,12 +168,12 @@ export function generatePropertyOverViewData(
         { title: "Property Facing", value: data.facingName, Icon: Compass },
         {
           title: "Super built-up Area",
-          value: `${data.sba} sq.ft`,
+          value: `${formatNumberWithSuffix(data.sba)} sq.ft`,
           Icon: TotalLandArea,
         },
         {
           title: "Carpet Area",
-          value: `${data.ca} sq.ft`,
+          value: `${formatNumberWithSuffix(data.ca)} sq.ft`,
           Icon: TotalLandArea,
         },
 
@@ -218,7 +218,7 @@ export function generatePropertyOverViewData(
         { title: "Property Facing", value: data.facingName, Icon: Compass },
         {
           title: "Plot Area",
-          value: data.plotArea && `${data.plotArea} sq.ft`,
+          value: data.plotArea && `${formatNumberWithSuffix(data.plotArea)} sq.ft`,
           Icon: TotalLandArea,
         },
         {
@@ -274,17 +274,17 @@ export function generatePropertyOverViewData(
         { title: "Property Facing", value: data.facingName, Icon: Compass },
         {
           title: "Plot Area",
-          value: data.plotArea && `${data.plotArea} sq.ft`,
+          value: data.plotArea && `${formatNumberWithSuffix(data.plotArea)} sq.ft`,
           Icon: TotalLandArea,
         },
         {
           title: "Super built-up Area",
-          value: `${data.sba} sq.ft`,
+          value: `${formatNumberWithSuffix(data.sba)} sq.ft`,
           Icon: TotalLandArea,
         },
         {
           title: "Carpet Area",
-          value: `${data.ca} sq.ft`,
+          value: `${formatNumberWithSuffix(data.ca)} sq.ft`,
           Icon: TotalLandArea,
         },
 
@@ -331,7 +331,7 @@ export function generatePropertyOverViewData(
         { title: "Ownership", value: data.ownershipName, Icon: OwnerShip },
         {
           title: "Plot Area",
-          value: data.plotArea && `${data.plotArea} sq.ft`,
+          value: data.plotArea && `${formatNumberWithSuffix(data.plotArea)} sq.ft`,
           Icon: TotalLandArea,
         },
         {
@@ -345,12 +345,12 @@ export function generatePropertyOverViewData(
         { title: "Property Facing", value: data.facingName, Icon: Compass },
         {
           title: "Super built-up Area",
-          value: `${data.sba} sq.ft`,
+          value: `${formatNumberWithSuffix(data.sba)} sq.ft`,
           Icon: TotalLandArea,
         },
         {
           title: "Carpet Area",
-          value: `${data.ca} sq.ft`,
+          value: `${formatNumberWithSuffix(data.ca)} sq.ft`,
           Icon: TotalLandArea,
         },
 

@@ -25,7 +25,7 @@ export default function PropertyOverView({
     >
       <div className="pl-[2%] pr-[2%] flex justify-between items-center flex-wrap">
         <div className="md:w-[80%]">
-          <h2 className="text-[22px] sm:text-[24px] xl:text-[32px] text-[#001F35] font-[700] capitalize">
+          <h2 className="text-[18px] sm:text-[24px] xl:text-[32px] text-[#001F35] font-[700] capitalize">
             <span className="lowercase">
               {data.propTypeName === "Plot" ? data.plotArea + " sq.ft" : ""}
             </span>{" "}

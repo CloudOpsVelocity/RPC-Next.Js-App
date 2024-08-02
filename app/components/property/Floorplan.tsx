@@ -69,7 +69,7 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
         </div>
 
         <div className=" h-[405px] lg:h-[570px] w-full rounded-[14px]  border-solid border-[1px] border-[#92B2C8] bg-[#FFF] shadow-md flex justify-center p-2 pt-0 sm:pt-2 xl:items-center flex-col ">
-          <p className=" text-[#005DA0] text-left xl:text-right text-[14px] xl:text-xl not-italic font-medium w-full p-2 xl:mr-14">
+          <p className=" text-[#005DA0] text-left xl:text-right text-[14px] xl:text-xl not-italic font-medium w-full p-2 ">
             {createPropertyString(data)}
           </p>
           <div className="w-[100%] xl:w-[70%] flex justify-center items-center flex-col p-[2%] ">

@@ -29,7 +29,7 @@ export function generatePropertyDetails(
         { title: "Phase", value: data.phaseName, Icon: Marble },
         { title: "Tower", value: data.tower, Icon: TowerIcon },
         {
-          title: "Floor",
+          title: "At Floor",
           value: data.atFloor === 0 ? "G" : data.atFloor,
           Icon: Marble,
         },
