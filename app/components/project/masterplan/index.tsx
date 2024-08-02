@@ -42,7 +42,7 @@ export default function MasterPlan({
   };
   return (
     <div
-      className="w-[95%] sm:max-h-[auto] xl:max-h-[689px] sm:w-[90%] md:mb-[3%] sm:mb-[5%] scroll-mt-[150px] sm:pt-[30px] "
+      className="w-[95%] sm:max-h-[678px] xl:max-h-[689px] sm:w-[90%] md:mb-[3%] sm:mb-[5%] scroll-mt-[150px] sm:pt-[30px] "
       id="masterPlan"
     >
       <div className="flex justify-between w-full items-cente mb-[32px] flex-wrap">
