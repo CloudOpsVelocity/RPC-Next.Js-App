@@ -15,7 +15,6 @@ import { calculatePerSqPrice } from "@/app/utils/price";
 import ListItem from "./pricingbreakup";
 import { usePricingPop } from "@/app/hooks/property/usePricingPop";
 import { useMediaQuery } from "@mantine/hooks";
-import { formatNumberIndian } from "./pricingbreakup/ListItem";
 import { parseOtherCharge } from "./pricingbreakup/PriceBreakup";
 export default function PropertyOverviewBanner({
   price,
@@ -78,7 +77,7 @@ export default function PropertyOverviewBanner({
                   ? formatCurrency(
                       price + parseOtherCharge(otherPrice?.otherCharge) + sum
                     )
-                  : formatNumberIndian(
+                  : formatCurrency(
                       price + parseOtherCharge(otherPrice?.otherCharge) + sum
                     )}
               </span>

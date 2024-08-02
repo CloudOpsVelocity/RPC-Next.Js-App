@@ -15,7 +15,7 @@ import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import { useShortlistAndCompare } from "@/app/hooks/storage";
 import { useSession } from "next-auth/react";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
-import { formatCurrency } from "@/app/utils/numbers";
+import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
 import { useSetAtom } from "jotai";
 import { listingSearchAtom } from "@/app/store/search/map";
 import { Main } from "@/app/validations/property/search";
@@ -143,11 +143,11 @@ const ProjectDetailsCard = ({
                     {" "}
                     <p className="text-[#333] text-nowrap text-[12px] md:text-[16px] font-[500]">
                       Super Builtup Area:{" "}
-                      <span className=" font-[600]">{sba} sq.ft</span>
+                      <span className=" font-[600]">{formatNumberWithSuffix(sba)} sq.ft</span>
                     </p>
                     <p className="text-[#333] text-[12px] md:text-[16px] font-[500]">
                       Carpet Area:{" "}
-                      <span className=" font-[600]"> {ca} sq.ft </span>₹{" "}
+                      <span className=" font-[600]"> {formatNumberWithSuffix(ca)} sq.ft </span>₹{" "}
                       {calculatePerSqPrice(price, sba)}/ sqft
                     </p>
                     <p className="text-[#333] text-[12px] md:text-[16px] font-[500]">

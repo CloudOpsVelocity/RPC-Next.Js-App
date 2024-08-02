@@ -24,7 +24,6 @@ import { NumberFormatter } from "@mantine/core";
 import { useSetAtom } from "jotai";
 import { currentBlockAtom, isScrollingAtom, stickyAtom } from "./Navigation";
 import { get_posted_by } from "@/app/utils/dyanamic/projects";
-import { formatNumberIndian } from "./pricingbreakup/ListItem";
 const realData = [{ test: "hello" }, 2, 3, 4, 5, 6, 77];
 type Props = {
   projectDetails: Main | null;
@@ -150,7 +149,7 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
             </div>
             <div className="w-full md:w-[40%] flex justify-between md:items-end flex-col p-[2%] sm:p-[0%]">
               <h2 className="iinline-flex sm:text-[22px] xl:text-[32px] font-semibold sm:font-[700] text-[#001F35]">
-                {`${projectDetails.cg === "R"?  formatNumberIndian(projectDetails.price): formatCurrency(projectDetails.price) }${
+                {`${projectDetails.cg === "R"?  formatCurrency(projectDetails.price): formatCurrency(projectDetails.price)  }${
                   projectDetails.cg === "R" ? " / Month" : ""
                 }`}{" "}
               </h2>
