@@ -23,12 +23,28 @@ const CustomScrollArea: React.FC<{
     <Carousel
       align="start"
       w={"100%"}
-      withControls={!isMobile ? (Object.keys(data).length>6?true:false):true }
-      draggable={ !isMobile ? ( Object.keys(data).length>6 ?true:false):true }
+      withControls={
+        !isMobile ? (Object.keys(data).length > 6 ? true : false) : true
+      }
+      draggable={
+        !isMobile ? (Object.keys(data).length > 6 ? true : false) : true
+      }
       px={isMobile ? 0 : 40}
-      {...(!isMobile && { nextControlIcon:(  <NextDarkButton /> )})}
-      {...(!isMobile && { previousControlIcon:( <PrevDarkButton />) })}
+      {...(!isMobile && { nextControlIcon: <NextDarkButton /> })}
+      {...(!isMobile && { previousControlIcon: <PrevDarkButton /> })}
       classNames={styles}
+      nextControlProps={{
+        style: {
+          background: "#8c9096",
+          color: "white",
+        },
+      }}
+      previousControlProps={{
+        style: {
+          background: "#8c9096",
+          color: "white",
+        },
+      }}
     >
       {Object.keys(data).map((key, index) => {
         const isAvail = !!data[key as string];
@@ -36,7 +52,7 @@ const CustomScrollArea: React.FC<{
         const Icon = areasMap.get(key).Icon;
         const name = areasMap.get(key).name;
         return (
-          <Carousel.Slide  key={key} className="max-w-fit">
+          <Carousel.Slide key={key} className="max-w-fit">
             <button
               key={key}
               onClick={() => setSelected(key ?? "")}
