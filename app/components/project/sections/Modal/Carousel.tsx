@@ -49,7 +49,7 @@ export default function CarouselModal({
             width={300}
             height={300}
             className={clsx(
-              "max-h-[100px] object-cover shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]  ",
+              "max-h-[40px] min-h-[40px]  sm:max-h-[60px] xl:max-h-[100px]  object-cover shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]  ",
               active === index && "border-[3px] border-btnPrimary border-solid "
             )}
           />
