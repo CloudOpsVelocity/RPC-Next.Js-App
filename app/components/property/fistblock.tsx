@@ -167,12 +167,12 @@ const PropertyFirstBlock: React.FC<Props> = ({
               {projectDetails.cg === "S" && (
                 <p className="text-[16px] md:text-right sm:text-[14px] xl:text-[24px] font-[600]   text-[#00487C] ">
                   ₹{" "}
-                  {calculatePerSqPrice(
+                  {formatCurrency(calculatePerSqPrice(
                     projectDetails.price,
                     projectDetails.propTypeName === "Plot"
                       ? projectDetails.plotArea
                       : projectDetails.sba
-                  )}
+                  ))}
                   /- Price per sqft onwards
                 </p>
               )}
