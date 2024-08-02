@@ -165,7 +165,7 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
                   /- Price per sqft onwards
                 </p>
               )}
-                 <p className="xl:mb-[13px] text-[12px]  text-[#001F35] font-semibold md:font-bold ">
+                 <p className=" mb-1 xl:mb-[13px]  text-[12px]  text-[#001F35] font-semibold md:font-bold ">
               Other Charges Applicable
               </p>
               <p className="text-[#001F35] sm:text-[18px] xl:text-2xl not-italic font-semibold  capitalize sm:mt-1 xl:mt-[8px]">

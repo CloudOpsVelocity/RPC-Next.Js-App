@@ -3,8 +3,7 @@ import React from "react";
 import { TbH4 } from "react-icons/tb";
 import { pluralizeOrSingularize } from "@/app/utils/plural";
 import { formatCurrency } from "@/app/utils/numbers";
-import ListItem from ".";
-
+import ListItem from "./ListItem";
 type Props = {
   title: string;
   Icon: any;
@@ -19,7 +18,7 @@ export default function Card({ Icon, title, type, data, otherPrice }: Props) {
       case "price":
         return (
           <h4 className="text-[#242424] ml-4 xl:ml-0  xl:text-2xl not-italic font-bold leading-[normal]">
-      {/*       ₹{" "} */}
+            ₹{" "}
             <NumberFormatter
               thousandSeparator
               thousandsGroupStyle="lakh"

@@ -36,7 +36,7 @@ export default function PropertyBanner({
     />
   ) : (
     <div
-      className="w-[90%] m-auto mt-[2%] shrink-0  bg-[#fcfcfc] mb-20 relative  border shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] border-solid border-[#CAE9FF] sm:px-[22px] sm:py-[18px]  xl:px-[52px] xl:py-[35px] scroll-mt-[250px]"
+      className="w-[90%] m-auto mt-[50px] shrink-0  bg-[#fcfcfc] mb-20 relative  border shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] border-solid border-[#CAE9FF] sm:px-[22px] sm:py-[18px]  xl:px-[52px] xl:py-[35px] scroll-mt-[250px]"
       id="projectDetails"
     >
       <Image
@@ -50,7 +50,7 @@ export default function PropertyBanner({
         {Svg}
         <h1 className="capitalize ml-6   mb-[14px] text-[#242424] text-h2 sm:text-[24px] xl:text-[32px] not-italic font-bold leading-[normal] tracking-[1.28px] ">
           about{" "}
-          <span className="text-[#148B16] text-[32px] not-italic font-bold leading-[normal] capitalize">
+          <span className="text-[#148B16] text-h2 sm:text-[24px] xl:text-[32px] not-italic font-bold leading-[normal] capitalize">
             {projectName}
           </span>
           <p className=" text-[#4D6677] text-h2  sm:text-[16px] xl:text-[24px] break-words italic font-medium leading-[normal] capitalize mt-2">

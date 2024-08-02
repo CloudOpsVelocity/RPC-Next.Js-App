@@ -7,7 +7,7 @@ type Props = {
   className?: string;
 };
 
-export default function ListItem({ label, value, className }: Props) {
+export default function ListItemOld({ label, value, className }: Props) {
   return (
     <li
       className={clsx(
@@ -23,7 +23,7 @@ export default function ListItem({ label, value, className }: Props) {
         {label}
       </div>{" "}
       <span className="text-[#4D6677] text-2xl not-italic font-medium leading-[normal]">
-        {value === "Lifetime" ? value : `₹ ${value}`}
+        {value === "Lifetime" ? value : ` ${value}`}
       </span>
     </li>
   );

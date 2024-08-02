@@ -27,6 +27,7 @@ import styles from "@/app/styles/Carousel.module.css";
 import { unitFloorsAtom } from "../byunitblock";
 import Button from "../../atoms/buttons/variansts";
 import SelectedFilters from "./filters/SelectedFilters";
+import { formatNumberWithSuffix } from "@/app/utils/numbers";
 
 type Props = {
   propCgId: any;
@@ -794,7 +795,7 @@ const RightSection = ({ propCgId, className }: any) => {
               Super Builtup Area{" "}
               <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
                 {" "}
-                {data.superBuildUparea} sq.ft
+                {formatNumberWithSuffix(data.superBuildUparea)} sq.ft
               </span>
             </p>
           </div>
@@ -807,7 +808,7 @@ const RightSection = ({ propCgId, className }: any) => {
               Carpet Area{" "}
               <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                 {" "}
-                {data.caretarea} sq.ft
+                {formatNumberWithSuffix(data.caretarea)} sq.ft
               </span>
             </p>
           </div>
@@ -839,7 +840,7 @@ const RightSection = ({ propCgId, className }: any) => {
                 Terrace Area{" "}
                 <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                   {" "}
-                  {data.terraceArea} sq.ft
+                  {formatNumberWithSuffix(data.terraceArea)} sq.ft
                 </span>
               </p>
             </div>
@@ -855,7 +856,7 @@ const RightSection = ({ propCgId, className }: any) => {
                 Parking Area{" "}
                 <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                   {" "}
-                  {data.parkingArea} sq.ft
+                  {formatNumberWithSuffix(data.parkingArea)} sq.ft
                 </span>
               </p>
             </div>
@@ -867,7 +868,7 @@ const RightSection = ({ propCgId, className }: any) => {
               Balcony Size{" "}
               <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                 {" "}
-                {data.totalBalconySize} sq.ft
+                {formatNumberWithSuffix(data.totalBalconySize)} sq.ft
               </span>
             </p>
           </div>
@@ -881,7 +882,7 @@ const RightSection = ({ propCgId, className }: any) => {
               Plot Area{" "}
               <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
                 {" "}
-                {data.plotArea} sq.ft
+                {formatNumberWithSuffix(data.plotArea)} sq.ft
               </span>
             </p>
           </div>
@@ -1024,10 +1025,10 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
             {" | Facing " + selectedFloor?.facingName}
             {propCgId != projectprops.plot &&
               selectedFloor?.superBuildUparea &&
-              " | Area. " + selectedFloor?.superBuildUparea + " sq.ft"}
+              " | Area. " +formatNumberWithSuffix(selectedFloor?.superBuildUparea) + " sq.ft"}
             {propCgId == projectprops.plot &&
               selectedFloor?.plotArea &&
-              " | Area. " + selectedFloor?.plotArea + " sq.ft"}
+              " | Area. " + formatNumberWithSuffix(selectedFloor?.plotArea) + " sq.ft"}
           </>
         )}
       </p>

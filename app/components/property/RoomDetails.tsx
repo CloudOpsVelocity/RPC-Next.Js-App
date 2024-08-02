@@ -48,7 +48,7 @@ export default function RoomDetails({ data }: { data: Main }) {
   return (
     <div
       id="propertyDetails"
-      className="scroll-mt-[220px] m-auto w-[95%] md:w-[90%]  mb-5 sm:block"
+      className="scroll-mt-[220px] mt-[50px] m-auto w-[95%] md:w-[90%]  mb-5 sm:block"
     >
       <PropertyHeading
         title="Listing details"
@@ -202,7 +202,7 @@ const OtherDetails = ({
   ];
   return (
     <div
-      className=" mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] p-4 xl:pl-[53px] md:py-[24px]"
+      className=" shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] p-4 xl:pl-[53px] md:pt-[24px] "
       id="propertyDetails "
     >
       <h1 className={style.heading.h1}>Other Details</h1>
