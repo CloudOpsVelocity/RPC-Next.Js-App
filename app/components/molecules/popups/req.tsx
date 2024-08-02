@@ -38,6 +38,7 @@ const RequestCallBackModal = () => {
       setStatus("idle");
     }, 500);
   };
+
   return (
     <>
       <Modal
@@ -45,7 +46,7 @@ const RequestCallBackModal = () => {
         onClose={handleClose}
         centered
         size={isMobile ? "100%" : status !== "success" ? "65%" : "auto"}
-        className="rounded-lg w-[90%]  md:w-[70%] lg:w-[65%] !p-0 "
+        className="rounded-lg w-[90%]  md:w-[70%] lg:w-[65%] !p-0"
         classNames={
           status === "success"
             ? {
@@ -212,13 +213,13 @@ const LoggedInUserForm = ({ status, setStatus }: any) => {
           {popupState.MODAL_TYPE === "REQ_QUOTE" ? "Quotation for" : "Call For"}
           :
         </span>{" "}
-        <span className="text-[14px] xl:text-[24px]">{popupState.title}</span>
+        <span className="text-[14px] xl:text-[21px]">{popupState.title}</span>
       </p>
       <p className="text-[#148B16] mb-[6%] text-[14px] xl:text-xl lg:text-[20px] italic font-bold leading-[normal] tracking-[0.64px]">
         <span className="text-[#4D6677] text-[18px] xl:text-xl italic font-medium leading-[normal] tracking-[0.8px]">
           {Posted_BY}:
         </span>{" "}
-        <span className="text-[14px] xl:text-[24px]">
+        <span className="text-[14px] xl:text-[21px]">
           {popupState.postedByName}
         </span>
       </p>
@@ -244,7 +245,7 @@ const LoggedInUserForm = ({ status, setStatus }: any) => {
       </p>
       <Button variant="blue" className="sm:!py-1.5" onClick={onSubmit}>
         {popupState.MODAL_TYPE === "REQ_QUOTE"
-          ? "Request Quote"
+          ? "Request Quotation"
           : "Request Callback"}
       </Button>
       {/* <B
@@ -254,8 +255,8 @@ const LoggedInUserForm = ({ status, setStatus }: any) => {
         className="!bg-[#0073C6]  !text-[12px] !p-1 sm:text-xl sm:p-2"
         size="md"
       >
-        {popupState.MODAL_TYPE === "REQ_QUOTE"
-          ? "Request Quote"
+        {popupState.MODAL_TYPE === "REQ_Quotation"
+          ? "Request Quotation"
           : "Request Callback"}
       </B> */}
     </div>

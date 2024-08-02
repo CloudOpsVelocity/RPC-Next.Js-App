@@ -66,7 +66,7 @@ const SelectedFilters = ({
       <div
         ref={scrollFiltersRef}
         className={clsx(
-          "flex w-full xl:max-w-[60%] scroll-smooth overflow-x-auto overflow-y-hidden scrollbar-hide gap-4",
+          "flex w-full  scroll-smooth overflow-x-auto overflow-y-hidden scrollbar-hide gap-4",
           propCgId === projectprops.plot && "md:max-w-[65%]"
         )}
       >

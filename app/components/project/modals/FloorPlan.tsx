@@ -691,10 +691,15 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
     </div>
   );
 };
-const RightSection = ({ propCgId }: any) => {
+const RightSection = ({ propCgId, className }: any) => {
   const data = useAtomValue(selectedFloorAtom);
   return (
-    <div className="bg-[#F4FBFF] xl:mt-10 p-6 rounded-lg w-[100%] xl:mb-[10%] xl:w-full max-w-[342px] sm:max-w-[300px] xl:max-w-[342px] shadow">
+    <div
+      className={clsx(
+        "bg-[#F4FBFF]  p-6 rounded-lg w-[100%] xl:mb-[10%] xl:w-full max-w-[342px] sm:max-w-[300px] xl:max-w-[342px] shadow",
+        className
+      )}
+    >
       <div className="space-y-4 sm:space-y-2 xl:space-y-4">
         {propCgId != projectprops.plot && (
           <div className="flex items-center space-x-3">

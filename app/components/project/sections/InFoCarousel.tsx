@@ -18,7 +18,7 @@ import {
 import { currentPhaseAtom, propCgIdAtom } from "@/app/store/vewfloor";
 import { propertyDetailsTypes } from "@/app/data/projectDetails";
 import { sortUnits } from "@/app/utils/unitparser";
-import { formatCurrency } from "@/app/utils/numbers";
+import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
 export default function InFoCarousel({ partialUnitData }: Props) {
   const [selected, setSelected] = useAtom(parital_unit_atom);
   const currentPhase = useAtomValue(currentPhaseAtom);
@@ -82,14 +82,20 @@ export default function InFoCarousel({ partialUnitData }: Props) {
                     {propCgId === 32
                       ? `${data[item].plotArea} sq.ft`
                       : data[item].minSba !== data[item].maxSba
-                      ? `${data[item].minSba} - ${data[item].maxSba} sq.ft`
-                      : `${data[item].minSba} sq.ft`}
+                      ? `${formatNumberWithSuffix(
+                          data[item].minSba
+                        )} - ${formatNumberWithSuffix(data[item].maxSba)} sq.ft`
+                      : `${formatNumberWithSuffix(data[item].minSba)} sq.ft`}
                   </td>
                   {propCgId !== 32 && (
                     <td className=" w-[180px] md:w-[220px] bg-[#EEF7FF] text-gray-900 text-[16px] md:text-[18px] not-italic font-semibold h-[60px] flex justify-center text-center items-center border-t-0 border-r-[0.5px] border-r-[#D9DFE3] border-b-[0.5px] border-b-[#D9DFE3] border-solid">
                       {data[item].minCa !== data[item].maxCa
-                        ? `${data[item].minCa} - ${data[item].maxCa} sq.ft`
-                        : `${data[item].minCa} sq.ft`}
+                        ? `${formatNumberWithSuffix(
+                            data[item].minCa
+                          )} - ${formatNumberWithSuffix(
+                            data[item].maxCa
+                          )} sq.ft`
+                        : `${formatNumberWithSuffix(data[item].minCa)} sq.ft`}
                     </td>
                   )}
 

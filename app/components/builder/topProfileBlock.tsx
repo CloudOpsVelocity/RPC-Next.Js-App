@@ -34,7 +34,7 @@ export default function TopProfileBlock({
                   ? `${logoUrl}?v=${Math.random()}`
                   : `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/builderpage/builder-noimage.png`
               }
-              className="object-contain w-[150px] h-[150px]"
+              className="object-contain h-[93px] w-[93px] sm:h-[100px] sm:w-[133px] xl:h-[150px] xl:w-[158px]"
               width={158}
               height={158}
             />
