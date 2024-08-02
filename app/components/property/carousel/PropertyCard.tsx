@@ -51,7 +51,7 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
       : `${cardData.bhkName ?? ""} ${cardData.propTypeName} for
       ${cardData.cg === "R" ? "Rent" : "Sale"} in ${cardData.ltName}`;
   const setPopReqData = useSetAtom(NearByDataAtom);
-  const onAddingShortList = (e:any, propId: string) => {
+  const onAddingShortList = (e: any, propId: string) => {
     e.stopPropagation();
     if (session) {
       mutate && mutate({ id: propId, type: ct as Pick<CardProps, "ct">["ct"] });
@@ -64,8 +64,8 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
       openS();
     }
   };
-  const handleReqCall = (e:any) => {
-     e.stopPropagation();
+  const handleReqCall = (e: any) => {
+    e.stopPropagation();
     open({
       modal_type: "PROPERTY_REQ_CALLBACK",
       postedByName: cardData.postedByName,
@@ -76,15 +76,15 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
     });
   };
   const isMobile = useMediaQuery("(max-width: 601px)");
-  const redirect =(propId:string)=>{
-    event?.preventDefault()
-    window.open(`/abc/karnataka/banglore/${propId}`, '_blank')
-  }
+  const redirect = (propId: string) => {
+    event?.preventDefault();
+    window.open(`/abc/karnataka/banglore/${propId}`, "_blank");
+  };
 
   return (
     <>
       <div
-      onClick={() => redirect(reqId)}
+        onClick={() => redirect(reqId)}
         key={reqId}
         className={clsx(
           "border text-card-foreground min-w-[350px]   min-h-[400px] overflow-hidden  shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[14px]",
@@ -120,7 +120,7 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
                 : "Under Construction"}
             </p>
           )}
-          <div href={url} target="_blank" className="relative  max-h-[212px]">
+          <div className="relative  max-h-[212px]">
             <Image
               src={
                 type === "proj"
@@ -149,7 +149,6 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
                     : "bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 text-[#0073C6]"
                 )}
                 onClick={(e) => {
-                 
                   onAddingShortList(e, cardData.propIdEnc);
                 }}
               >
@@ -216,7 +215,7 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
               </p>
             )}
             <Button
-              icon={isMobile ? null :null}
+              icon={isMobile ? null : null}
               title="Request  Callback"
               buttonClass=" text-[#FFF] mt-[12px] text-[12px] xl:text-[16px] font-[600] bg-[#0073C6] rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[6px]  "
               onChange={handleReqCall}
