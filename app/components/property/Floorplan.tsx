@@ -9,6 +9,7 @@ import { listingProps } from "@/app/data/projectDetails";
 import { selectedFloorAtom } from "@/app/store/floor";
 import { PopupOpenSvg } from "@/app/images/commonSvgs";
 import { createPropertyString } from "@/app/utils/dyanamic/property";
+import { ImgNotAvail } from "@/app/data/project";
 
 export default function RoomFloorplansBlock({ data }: { data: Main }) {
   const [opened, setOpened] = useState(false);
@@ -34,7 +35,7 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
       totalNumberofBathroom: data.nobt,
       totalNumberOfBalcony: data.nobl,
       noOfCarParking: data.noocp,
-      floorPlanUrl: data.projMedia.floorPlanUrl + "?v=" + Math.random() * 20,
+      floorPlanUrl: data.projMedia.floorPlanUrl,
       plotArea: data.plotArea,
       noocp: data.noocp,
       noobp: data.noobp,
@@ -78,7 +79,7 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
               onClick={handleOpen}
             >
               <img
-                src={data?.projMedia?.floorPlanUrl + "?v=" + Math.random() * 20}
+                src={data?.projMedia?.floorPlanUrl ?? ImgNotAvail}
                 alt=""
                 className="h-full w-full m-auto "
               />

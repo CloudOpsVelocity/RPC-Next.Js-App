@@ -1,6 +1,7 @@
 import { Main } from "@/app/validations/property";
 
 function createPropertyString(data: Main): string {
+  console.log(data);
   if (
     data.propTypeName === config.propTypeNames[1] ||
     data.propTypeName === config.propTypeNames[2]
@@ -13,7 +14,7 @@ function createPropertyString(data: Main): string {
   } else if (data.propTypeName === config.propTypeNames[3]) {
     return `${data.propName} | Unit No. ${data.unitNumber} | ${data.facingName} | Area. ${data.plotArea} sq.ft`;
   } else if (data.propTypeName === config.propTypeNames[5]) {
-    return `${data.propName} | ${data.bhkName} | Floor ${data.totalFloor} | Unit No. ${data.unitNumber} | ${data.facingName} | Area: ${data.sba} sq.ft`;
+    return `${data.propName} | ${data.bhkName} | Floor ${data.totalFloor} | House No. ${data.unitNumber} | ${data.facingName} | Area: ${data.sba} sq.ft`;
   } else {
     return `${data.propName} | ${data.bhkName} | ${
       data.tower ? "Tower " + data.tower : ""

@@ -84,7 +84,7 @@ export default function ReportModal({ issueData }: any) {
         onClose={onClose}
         centered
         size={isMobile ? "100%" : status === "success" ? "32%" : "50%"}
-        className="overflow-hidden flex flex-wrap w-auto !scrollbar-hide !m-4"
+        // className="overflow-hidden flex flex-wrap w-auto !scrollbar-hide !m-4"
         styles={{
           header: {
             display: "none",

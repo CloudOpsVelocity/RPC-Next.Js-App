@@ -82,7 +82,8 @@ export function generatePropertyDetails(
 
         {
           title: "Plot Area",
-          value: data.plotArea && `${formatNumberWithSuffix(data.plotArea)} sq.ft`,
+          value:
+            data.plotArea && `${formatNumberWithSuffix(data.plotArea)} sq.ft`,
           Icon: TotalLandArea,
         },
         {
@@ -142,7 +143,8 @@ export function generatePropertyDetails(
         { title: "Tower", value: data.tower, Icon: TowerIcon },
         {
           title: "Plot Area",
-          value: data.plotArea && `${formatNumberWithSuffix(data.plotArea)} sq.ft`,
+          value:
+            data.plotArea && `${formatNumberWithSuffix(data.plotArea)} sq.ft`,
           Icon: TotalLandArea,
         },
         { title: "Unit Number", value: data.unitNumber, Icon: Marble },
@@ -254,7 +256,8 @@ export function generatePropertyDetails(
         {
           title: "Plot Area",
           Icon: TotalLandArea,
-          value: data.plotArea && `${formatNumberWithSuffix(data.plotArea)} sq.ft`,
+          value:
+            data.plotArea && `${formatNumberWithSuffix(data.plotArea)} sq.ft`,
         },
         {
           title: "Super built-up Area",
@@ -313,7 +316,7 @@ export function generatePropertyDetails(
         { title: "Tower", value: data.tower, Icon: TowerIcon },
         { title: "Floor", value: data.atFloor, Icon: Marble },
         { title: "Block", value: data.block, Icon: Block },
-        { title: "Unit Number", value: data.unitNumber, Icon: Marble },
+        { title: "House Number", value: data.unitNumber, Icon: Marble },
         { title: "Facing", value: data.facingName, Icon: Marble },
         {
           title: "Super built-up Area",
@@ -338,7 +341,8 @@ export function generatePropertyDetails(
         {
           title: "Plot Area",
           Icon: TotalLandArea,
-          value: `${formatNumberWithSuffix(data.plotArea)} sq.ft`,
+          value:
+            data.plotArea && `${formatNumberWithSuffix(data.plotArea)} sq.ft`,
         },
       ];
 

@@ -13,6 +13,7 @@ import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 import ZoomInOut from "../../project/actions/ZoomInOut";
 import { useMediaQuery } from "@mantine/hooks";
 import Close from "../../project/button/close";
+import { ImgNotAvail } from "@/app/data/project";
 
 function PFloorPlanModal({
   data,
@@ -82,7 +83,6 @@ export default PFloorPlanModal;
 
 const MiddleSection = () => {
   const data = useAtomValue(selectedFloorAtom);
-
   return (
     <div
       className={`col-span-1 p-4 mt-[15%] sm:mt-2  md:h-[500px] w-full h-full   bg-gray-600 sm:bg-white`}
@@ -90,7 +90,7 @@ const MiddleSection = () => {
       <div className="relative">
         <TransformComponent>
           <img
-            src={`${data.floorPlanUrl}?v=${Math.random()}`}
+            src={data.floorPlanUrl ?? ImgNotAvail}
             alt="Floor Plan"
             className="max-h-[500px] object-contain"
             width={1200}
@@ -154,7 +154,9 @@ const RightSection = ({ propCgId }: any) => {
         <div className="flex items-center space-x-3">
           {propertyDetailsSvgs.unitNumber}
           <p className="text-[#4D6677] text-[14px] font-[500]">
-            Unit Number{" "}
+            {propCgId == projectprops.independent
+              ? "House Number"
+              : "Unit Number"}{" "}
             <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
               {" "}
               {data.unitNumber}
@@ -284,18 +286,19 @@ const RightSection = ({ propCgId }: any) => {
         {(propCgId == projectprops.plot ||
           propCgId == projectprops.villa ||
           propCgId == projectprops.rowHouse ||
-          propCgId == projectprops.independent) && (
-          <div className="flex items-center space-x-3">
-            {propertyDetailsSvgs.plotArea}
-            <p className="text-[#4D6677] text-[14px] font-[500]">
-              Plot Area{" "}
-              <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
-                {" "}
-                {data.plotArea} sq.ft
-              </span>
-            </p>
-          </div>
-        )}
+          propCgId == projectprops.independent) &&
+          data.plotArea && (
+            <div className="flex items-center space-x-3">
+              {propertyDetailsSvgs.plotArea}
+              <p className="text-[#4D6677] text-[14px] font-[500]">
+                Plot Area{" "}
+                <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
+                  {" "}
+                  {data.plotArea} sq.ft
+                </span>
+              </p>
+            </div>
+          )}
         {propCgId != projectprops.plot && data.noocp ? (
           <div className="flex items-center space-x-3">
             {propertyDetailsSvgs.noOfCarParking}

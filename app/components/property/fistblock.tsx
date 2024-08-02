@@ -28,9 +28,14 @@ const realData = [{ test: "hello" }, 2, 3, 4, 5, 6, 77];
 type Props = {
   projectDetails: Main | null;
   projName: string;
+  totalPrice: number;
 };
 
-const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
+const PropertyFirstBlock: React.FC<Props> = ({
+  projectDetails,
+  projName,
+  totalPrice,
+}) => {
   const images = getImageUrls(projectDetails?.projMedia as any);
   const autoplay = useRef(Autoplay({ delay: 10000 }));
   const setIsScrolling = useSetAtom(isScrollingAtom);
@@ -69,7 +74,10 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
               </span>{" "}
             </p>
             <div className="mt-4">
-            <SharePopup title="Share Listing" className="text-sm   p-[4px]  sm:text-xl hidden sm:flex" />
+              <SharePopup
+                title="Share Listing"
+                className="text-sm   p-[4px]  sm:text-xl hidden sm:flex"
+              />
             </div>
           </div>
           <div className="relative w-full !rounded-[10px]">
@@ -82,7 +90,7 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
               dragFree
               plugins={[autoplay.current]}
               onMouseEnter={autoplay.current.stop}
-              onMouseLeave={autoplay.current.reset} 
+              onMouseLeave={autoplay.current.reset}
               nextControlIcon={<DarkNextCarouselButton />}
               previousControlIcon={<DarkCarouseIcon />}
             >
@@ -90,7 +98,7 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
                 <Carousel.Slide
                   key={index}
                   className="relative"
-                 /*  h={750} */
+                  /*  h={750} */
                   w={"full"}
                 >
                   <Image
@@ -109,19 +117,20 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
           <div className="sm:absolute bottom-0 sm:m-[1%] sm:mb-[4%]   xl:mb-[2%] xl:m-[2%] z-10 sm:w-[95%] self-center justify-between items-start flex-col md:flex-row border-solid border-white-500 sm:rounded-[10px] bg-gradient-to-r from-[#EFEFEF] /20 to-[#c3c3c3bd]/80 shadow-md  sm:flex break-words sm:px-6 sm:py-2">
             <div className=" w-full md:w-[60%]">
               <div className={`ml-[2%] mt-1 sm:mt-[6px] xl:mt-[1%] mb-[7px]`}>
-              <div className="flex justify-between items-start">
+                <div className="flex justify-between items-start">
                   <h3 className="text-[22px] sm:text-[22px] xl:text-[28px] font-[700] text-[#001F35] break-words text-wrap w-full">
-                  <span className="lowercase">
-                    {projectDetails.propTypeName === "Plot"
-                      ? projectDetails.plotArea + " sq.ft"
-                      : ""}
-                  </span>{" "}
-                  {projectDetails.bhkName} {projectDetails.propTypeName} For{" "}
-                  {projectDetails.cg === "S" ? " Sell" : " Rent"} In{" "}
-                  {projectDetails.ltName}                  </h3>
+                    <span className="lowercase">
+                      {projectDetails.propTypeName === "Plot"
+                        ? projectDetails.plotArea + " sq.ft"
+                        : ""}
+                    </span>{" "}
+                    {projectDetails.bhkName} {projectDetails.propTypeName} For{" "}
+                    {projectDetails.cg === "S" ? " Sell" : " Rent"} In{" "}
+                    {projectDetails.ltName}{" "}
+                  </h3>
                   <SharePopup className="text-sm p-[2px] mr-2 mt-[2px] sm:hidden " />
                 </div>
-               {/*  <h3 className="text-[24px] lg:text-[32px] font-[700] text-[#00487C] capitalize ">
+                {/*  <h3 className="text-[24px] lg:text-[32px] font-[700] text-[#00487C] capitalize ">
                   <span className="lowercase">
                     {projectDetails.propTypeName === "Plot"
                       ? projectDetails.plotArea + " sq.ft"
@@ -149,9 +158,11 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
             </div>
             <div className="w-full md:w-[40%] flex justify-between md:items-end flex-col p-[2%] sm:p-[0%]">
               <h2 className="iinline-flex sm:text-[22px] xl:text-[32px] font-semibold sm:font-[700] text-[#001F35]">
-                {`${projectDetails.cg === "R"?  formatCurrency(projectDetails.price): formatCurrency(projectDetails.price)  }${
-                  projectDetails.cg === "R" ? " / Month" : ""
-                }`}{" "}
+                {`${
+                  projectDetails.cg === "R"
+                    ? formatCurrency(projectDetails.price)
+                    : formatCurrency(projectDetails.price)
+                }${projectDetails.cg === "R" ? " / Month" : ""}`}{" "}
               </h2>
               {projectDetails.cg === "S" && (
                 <p className="text-[16px] md:text-right sm:text-[14px] xl:text-[24px] font-[600]   text-[#00487C] ">
@@ -165,9 +176,14 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
                   /- Price per sqft onwards
                 </p>
               )}
-                 <p className=" mb-1 xl:mb-[13px]  text-[12px]  text-[#001F35] font-semibold md:font-bold ">
-              Other Charges Applicable
-              </p>
+              {totalPrice ? (
+                <p className=" mb-1 xl:mb-[13px]  text-[12px]  text-[#001F35] font-semibold md:font-bold ">
+                  Other Charges Applicable
+                </p>
+              ) : (
+                ""
+              )}
+
               <p className="text-[#001F35] sm:text-[18px] xl:text-2xl not-italic font-semibold  capitalize sm:mt-1 xl:mt-[8px]">
                 Posted By: {projectDetails.postedByName}
               </p>

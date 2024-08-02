@@ -51,7 +51,7 @@ function ProjectDrawer({ projName }: { projName: string }) {
         zIndex={10000}
         {...bind()}
       >
-        <div className="mt-4 flex justify-between mb-8">
+        <div className="mt-4 pl-[10px] xl:pl-[57px] flex justify-between ">
           <h1 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[10px] xl:mb-[6px] capitalize">
             {builderName ? "About Builder" : title}{" "}
             {showProjName && (
@@ -63,7 +63,7 @@ function ProjectDrawer({ projName }: { projName: string }) {
           <Close close={handleReadMoreClick} />
         </div>
 
-        <div className="w-[95%] text-[#233333] text-[16px] xl:text-xl mt-5 pl-[10px] xl:pl-[57px] xl:pb-20 capitalize">
+        <div className="w-[95%] text-[#233333] text-[16px] xl:text-xl mt-1 pl-[10px] xl:pl-[57px] xl:pb-20 capitalize">
           {type === "content" ? (
             <p className="break-words">{content}</p>
           ) : (
