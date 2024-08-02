@@ -1,8 +1,12 @@
 "use client";
-import { listingProps, Propertytopics as topics } from "@/app/data/projectDetails";
+import {
+  listingProps,
+  Propertytopics as topics,
+} from "@/app/data/projectDetails";
 import useNearby from "@/app/hooks/property/useNearBy";
 import useRatings from "@/app/hooks/useRatings";
 import { Main } from "@/app/validations/types/project";
+import { useMediaQuery } from "@mantine/hooks";
 import clsx from "clsx";
 import { atom, useAtom } from "jotai";
 import Image from "next/image";
@@ -30,8 +34,9 @@ export default function Navigation({
   projId?: string;
   cg: string;
   propTypeName: string;
-  bhkId: number
+  bhkId: number;
 }) {
+  const isTab = useMediaQuery("(max-width: 1600px)");
   const { data } = useRatings();
   const [currentBlock, setCurrentBlock] = useAtom(currentBlockAtom);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -47,7 +52,7 @@ export default function Navigation({
     }
   }
 
-  const { data:similarData, mutate } = useNearby({
+  const { data: similarData, mutate } = useNearby({
     lat,
     lng,
     projId,
@@ -55,7 +60,8 @@ export default function Navigation({
     bhkId,
     propType: listingProps[propTypeName.trim() as keyof typeof listingProps],
   });
-  let SimilatListingAvl=(similarData?.otherListing.length > 1 || similarData?.projListing.length > 1);
+  let SimilatListingAvl =
+    similarData?.otherListing.length > 1 || similarData?.projListing.length > 1;
   useEffect(() => {
     function handleScroll() {
       const currentScrollY = window.scrollY;
@@ -81,7 +87,7 @@ export default function Navigation({
         if (closestSectionIndex !== -1) {
           setCurrentBlock(sections[closestSectionIndex]?.id ?? "");
         }
-        if (currentScrollY > 800) {
+        if (currentScrollY > (isTab ? 600 : 800)) {
           setIsSticky(true);
         } else {
           setIsSticky(false);
@@ -111,6 +117,9 @@ export default function Navigation({
         inline: "center",
       });
       setCurrentBlock(id);
+      if (id !== "overview") {
+        setIsSticky(true);
+      }
     }
     setTimeout(() => setIsScrolling(false), 2000);
   }
@@ -141,8 +150,6 @@ export default function Navigation({
     { condtion: projData, key: "similar" },
   ];
 
-
-  
   return (
     <div
       className={clsx(

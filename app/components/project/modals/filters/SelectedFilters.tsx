@@ -12,7 +12,6 @@ const SelectedFilters = ({
   handleRemoveFilter,
   filterKeysDetails,
 }: any) => {
-  console.log(showClearAll);
   const scrollFiltersRef = useRef<HTMLDivElement>(null);
   const [showLeftButton, setShowLeftButton] = useState(true);
   const [showRightButton, setShowRightButton] = useState(true);

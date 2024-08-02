@@ -2,6 +2,7 @@
 import { topics } from "@/app/data/projectDetails";
 import useRatings from "@/app/hooks/useRatings";
 import { Main } from "@/app/validations/types/project";
+import { useMediaQuery } from "@mantine/hooks";
 import clsx from "clsx";
 import { atom, useAtom } from "jotai";
 import Image from "next/image";
@@ -16,6 +17,7 @@ export default function Navigation({
   isBrochure: boolean;
   detailsData: Main;
 }) {
+  const isTab = useMediaQuery("(max-width: 1600px)");
   const { data } = useRatings();
   const [currentBlock, setCurrentBlock] = useAtom(currentBlockAtom);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -48,7 +50,7 @@ export default function Navigation({
         if (closestSectionIndex !== -1) {
           setCurrentBlock(sections[closestSectionIndex]?.id ?? "");
         }
-        if (currentScrollY > 800) {
+        if (currentScrollY > (isTab ? 600 : 800)) {
           setIsSticky(true);
         } else {
           setIsSticky(false);
@@ -84,8 +86,13 @@ export default function Navigation({
         inline: "center",
       });
       setCurrentBlock(id);
+
+      // Make the navigation bar sticky if the clicked topic is not "overview"
+      if (id !== "overview") {
+        setIsSticky(true);
+      }
     }
-    setTimeout(() => setIsScrolling(false), 4000);
+    setTimeout(() => setIsScrolling(false), 3000);
   }
   const conditionsArray = [
     {

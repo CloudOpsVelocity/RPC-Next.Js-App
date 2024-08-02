@@ -38,7 +38,7 @@ export default function Specifications({
 
   return (
     <div
-      className="w-[95%] sm:w-[90%] scroll-mt-[180px] mx-auto mb-[3%]"
+      className="w-[95%] sm:w-[90%] scroll-mt-[180px] mx-auto mb-[3%] sm:mb-0 pt-screen-spacing"
       id="specifications"
     >
       <div className="bg-white rounded-lg shadow-md overflow-hidden ">
@@ -62,7 +62,7 @@ export default function Specifications({
                 <a
                   key={index}
                   className={clsx(
-                    `px-2 py-1 sm:px-5 sm:py-2 text-[12px] sm:text-[20px] flex gap-2 bg-[#fafafa] items-center cursor-pointer rounded-[10px] border-[0.5px] border-solid border-[#76AEFF] shadow-none text-[#233] font-[500]`,
+                    `px-2 py-1 sm:px-5 sm:py-2 text-[12px] sm:text-[15px] xl:text-[20px] flex gap-2 bg-[#fafafa] items-center cursor-pointer rounded-[10px] border-[0.5px] border-solid border-[#76AEFF] shadow-none text-[#233] font-[500]`,
                     isSelected &&
                       "shadow-md !bg-[#007CC2] !text-white font-[700]"
                   )}
@@ -102,7 +102,7 @@ export default function Specifications({
                   className="px-[2%] mt-5 sm:mt-10 w-full items-start justify-start flex-col"
                 >
                   <span
-                    className={` flex items-center gap-2 text-[#242424]  w-full sm:min-w-[10%] sm:max-w-[20%]  sm:text-[24px]  font-[600] py-2 px-2 rounded-xl  ${
+                    className={` flex items-center gap-2 text-[#242424]  w-full sm:min-w-[10%] sm:max-w-[20%]  sm:text-[18px] xl:text-[24px]  font-[600] py-2 px-2 rounded-xl  ${
                       selectedSpecIndex == index
                         ? "specification"
                         : "specificationRemove"
@@ -112,7 +112,7 @@ export default function Specifications({
                     <span className="">{spec.specName}</span>
                   </span>
                   <div>
-                    <ul className="list-disc ml-8 grid gap-2 my-2 text-[#233333] text-[12px] sm:text-[20px] font-[500] ">
+                    <ul className="list-disc ml-8 grid gap-2 my-2 text-[#233333] text-[12px] sm:text-[16px] xl:text-[20px] font-[500] ">
                       {spec.values.map(
                         (value, valueIndex) =>
                           value && (

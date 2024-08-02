@@ -336,7 +336,7 @@ export default function FloorplansBlock({
             <Button
               title="By Type"
               icon={
-                <ByTypeSvg className=" w-[24px] h-[24px] lg:w-[30px] lg:h-[30px] " />
+                <ByTypeSvg className=" w-[24px] h-[24px] sm:w-[22px] sm:h-[22px] xl:w-[30px] xl:h-[30px] " />
               }
               onChange={() => {
                 if (floorPlanType !== "type") {
@@ -347,7 +347,7 @@ export default function FloorplansBlock({
                   // }
                 }
               }}
-              buttonClass={`text-[14px] lg:text-[24px] mr-[20px] sm:mr-[40px] whitespace-nowrap flex justify-center items-center gap-[6px] ${
+              buttonClass={`text-[14px] sm:text-[18px] xl:text-[24px] mr-[20px] sm:mr-[40px] whitespace-nowrap flex justify-center items-center gap-[6px] ${
                 floorPlanType == "type"
                   ? "font-[600] text-[#001F35]"
                   : "font-[400] text-[#4D6677]"
@@ -357,7 +357,7 @@ export default function FloorplansBlock({
             <Button
               title="By Unit"
               icon={
-                <ByUnitSvg className=" w-[24px] h-[24px] lg:w-[30px] lg:h-[30px] " />
+                <ByUnitSvg className=" w-[24px] h-[24px] sm:w-[22px] sm:h-[22px] xl:w-[30px] xl:h-[30px] " />
               }
               onChange={() => {
                 if (floorPlanType !== "unit") {
@@ -368,7 +368,7 @@ export default function FloorplansBlock({
                   }
                 }
               }}
-              buttonClass={`hidden sm:flex text-[14px] lg:text-[24px] mr-[20px] sm:mr-[40px] whitespace-nowrap flex justify-center items-center gap-[6px] ${
+              buttonClass={`hidden sm:flex text-[14px] sm:text-[18px] xl:text-[24px] mr-[20px] sm:mr-[40px] whitespace-nowrap flex justify-center items-center gap-[6px] ${
                 floorPlanType == "unit"
                   ? "font-[600] text-[#001F35]"
                   : "font-[400] text-[#4D6677]"
@@ -378,7 +378,7 @@ export default function FloorplansBlock({
               <Button
                 title="By BHK"
                 icon={
-                  <ByBhkSvg className=" w-[24px] h-[24px] lg:w-[30px] lg:h-[30px] " />
+                  <ByBhkSvg className=" w-[24px] h-[24px] sm:w-[22px] sm:h-[22px] xl:w-[30px] xl:h-[30px] " />
                 }
                 onChange={() => {
                   if (floorPlanType !== "bhk") {
@@ -390,7 +390,7 @@ export default function FloorplansBlock({
                     // }
                   }
                 }}
-                buttonClass={`text-[14px] lg:text-[24px] mr-[20px] sm:mr-[40px] whitespace-nowrap flex justify-center items-center gap-[6px] ${
+                buttonClass={`text-[14px] sm:text-[18px] xl:text-[24px] mr-[20px] sm:mr-[40px] whitespace-nowrap flex justify-center items-center gap-[6px] ${
                   floorPlanType == "bhk"
                     ? "font-[600] text-[#001F35]"
                     : "font-[400] text-[#4D6677]"

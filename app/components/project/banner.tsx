@@ -33,7 +33,7 @@ export default function Banner({
 
   return (
     <div
-      className="bg-[#f0f9ff] scroll-mt-[180px] px-2 sm:px-8 py-4 sm:py-4 xl:py-12 mx-auto mb-[3%] "
+      className="bg-[#f0f9ff] scroll-mt-[180px] px-2 sm:px-8 py-4 sm:py-4 xl:py-12 mx-auto mb-[3%] sm:mb-0 sm:mt-[50px]"
       id="proj_rating"
     >
       <Toaster position="top-right" reverseOrder={false} />
@@ -53,7 +53,7 @@ export default function Banner({
           </p>
           <button
             onClick={() => onAddingRatings()}
-            className="flex flex-col justify-center items-center gap-2.5 rounded text-white  text-[12px] sm:text-[20px] xl:text-[24px] not-italic font-bold leading-[normal] capitalize p-2.5 bg-btnPrimary"
+            className="flex flex-col justify-center items-center gap-2.5 rounded text-white  text-[12px] sm:text-[14px]  xl:text-[24px] not-italic font-bold leading-[normal] capitalize p-2.5 bg-btnPrimary"
           >
             Add Ratings
           </button>

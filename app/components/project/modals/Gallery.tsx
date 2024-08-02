@@ -40,6 +40,7 @@ const Gallery: React.FC<GalleryProps> = ({
   const [previewImage, setPreviewImage] = useState<string | null>(
     videos[currentSlide]
   );
+  console.log(isImage);
   const handleImageClick = (image: string) => {
     setPreviewImage(image);
     open(isImage ? "image" : "video", image);
@@ -90,7 +91,9 @@ const Gallery: React.FC<GalleryProps> = ({
             <div className="flex justify-center items-center gap-5">
               <SharePopup
                 title="Share"
-                url={imageUrlParser(content?.url || "")}
+                url={imageUrlParser(
+                  isImage ? images[currentSlide] : videos[currentSlide] || ""
+                )}
               />
 
               <Close

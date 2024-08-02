@@ -11,12 +11,13 @@ export default function Feature({
 }) {
   return (
     <>
-      <div className="w-[90%] mt-[35px] scroll-mt-[180px] mb-[5%]" id="highlights">
+      <div
+        className="w-[90%] mt-[35px] scroll-mt-[180px] mb-[5%] sm:mb-0 sm:mt-0 sm:pt-screen-spacing"
+        id="highlights"
+      >
         <h2 className="text-h2 sm:text-[22px] xl:text-[32px]  font-[600] text-[#001F35] mb-[12px] capitalize break-words sm:text-nowrap w-[78%]">
           Highlights Of{" "}
-          <span className="text-[#148B16]  font-[700]">
-            {projName}
-          </span>
+          <span className="text-[#148B16]  font-[700]">{projName}</span>
         </h2>
         <SubHeading
           text="Key features: Elegant design, spacious layout, stunning views, modern amenities"
@@ -26,7 +27,10 @@ export default function Feature({
         <ul className="list-inside flex flex-col mt-4  ml-[2%]">
           {data?.map((each, ind) => {
             return (
-              <li key={ind} className="  inline-flex gap-[1%] xl:gap-[0.5%] mb-[1%] ">
+              <li
+                key={ind}
+                className="  inline-flex gap-[1%] xl:gap-[0.5%] mb-[1%] "
+              >
                 <Image
                   width={20}
                   height={20}

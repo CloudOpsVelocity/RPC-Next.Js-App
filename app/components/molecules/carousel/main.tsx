@@ -21,7 +21,7 @@ const MainCarousel = ({ children }: { children: React.ReactNode }) => {
       previousControlIcon={<DarkCarouseIcon />}
       mt={isMobile ? 16 : 30}
       height={"auto"}
-      slideSize={{ base: "100%", sm: "31%", md: "31%" }}
+      slideSize={{ base: "100%", sm: "400px", md: "31%" }}
       slideGap={{ base: "lg", sm: "md", md: "40px" }}
       align={"start"}
       pb={isTab ? 20 : 0}

@@ -147,7 +147,7 @@ export default function PropertyTypeDetailsCrad({
     propertyType === "plot" && projectUnitsData && countPlots(projectUnitsData);
   return (
     <div
-      className="flex  justify-between items-start h-[174px]  sm:h-[227px] w-[100%] max-w-[359px] lg:max-w-[510px] rounded-[24px] shadow-md pr-[1%] pl-[1%] mt-[70px] bg-gradient-to-l from-[#EFF5FF] /50 to-[#F2FAFF]/50 mb-[2%] cursor-pointer"
+      className="flex  justify-between items-start h-[174px]  sm:h-[227px] w-[100%] sm:max-w-[359px] lg:max-w-[510px] rounded-[24px] shadow-md pr-[1%] pl-[1%] mt-[70px] bg-gradient-to-l from-[#EFF5FF] /50 to-[#F2FAFF]/50 mb-[2%] cursor-pointer"
       onClick={() =>
         isPartialData
           ? scrollToTopic("floorPlans")
@@ -208,7 +208,7 @@ export default function PropertyTypeDetailsCrad({
               )}`
             : "Coming Soon"}
         </p>
-        <p className="text-[12px] lg:text-lg text-wrap text-[#242424] text-right  italic font-medium leading-[normal]">
+        <p className="text-[12px] sm:text-[16px] xl:text-lg text-wrap text-[#242424] text-right  italic font-medium leading-[normal]">
           ₹ {cg?.basePrice} Base Price/ sq.ft
         </p>
         <p className="text-[14px] sm:text-[18px] xl:text-[22px]  text-right text-[#4D6677]  not-italic font-semibold leading-[normal] capitalize mt-3 ">

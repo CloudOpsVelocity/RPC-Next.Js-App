@@ -19,7 +19,7 @@ export default function ProjectLoans({
 }) {
   const isMobile = useMediaQuery(`(max-width: 601px)`);
   return (
-    <div className="bg-white pt-2 pb-4 sm:py-8 w-[95%] md:w-[90%] md:mb-[3%] sm:mb-[4%] mx-auto  h-auto  ">
+    <div className="bg-white pt-2 pb-4 sm:pt-screen-spacing w-[95%] md:w-[90%] md:mb-[3%] sm:mb-[4%] mx-auto  h-auto  ">
       {type === "prop" ? (
         <PropertyHeading
           title="BANK APPROVALS OF"
