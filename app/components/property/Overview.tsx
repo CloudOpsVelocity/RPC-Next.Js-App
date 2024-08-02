@@ -3,7 +3,6 @@ import React from "react";
 import ProjBasicDetails from "@/app/components/project/projBasicDetails";
 import { Main } from "@/app/validations/property/index";
 import { generatePropertyOverViewData } from "@/app/data/property/overview";
-import Ratings from "./Ratings";
 import PropertyOverviewBanner from "./OverViewBanner";
 import { footerPhoneIcon } from "@/app/images/commonSvgs";
 import CompareList from "./actions/compareList";
