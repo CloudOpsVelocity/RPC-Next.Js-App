@@ -15,6 +15,7 @@ import { NearByDataAtom } from "@/app/store/nearby";
 import Button from "@/app/elements/button";
 import MainCarousel from "../../molecules/carousel/main";
 import { useMediaQuery } from "@mantine/hooks";
+import { redirect } from "next/dist/server/api-utils";
 type Props = {
   type: string;
   title: string;
@@ -50,7 +51,8 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
       : `${cardData.bhkName ?? ""} ${cardData.propTypeName} for
       ${cardData.cg === "R" ? "Rent" : "Sale"} in ${cardData.ltName}`;
   const setPopReqData = useSetAtom(NearByDataAtom);
-  const onAddingShortList = (propId: string) => {
+  const onAddingShortList = (e:any, propId: string) => {
+    e.stopPropagation();
     if (session) {
       mutate && mutate({ id: propId, type: ct as Pick<CardProps, "ct">["ct"] });
       toggleShortlist({
@@ -62,7 +64,8 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
       openS();
     }
   };
-  const handleReqCall = () => {
+  const handleReqCall = (e:any) => {
+     e.stopPropagation();
     open({
       modal_type: "PROPERTY_REQ_CALLBACK",
       postedByName: cardData.postedByName,
@@ -73,10 +76,15 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
     });
   };
   const isMobile = useMediaQuery("(max-width: 601px)");
+  const redirect =(propId:string)=>{
+    event?.preventDefault()
+    window.open(`/abc/karnataka/banglore/${propId}`, '_blank')
+  }
 
   return (
     <>
       <div
+      onClick={() => redirect(reqId)}
         key={reqId}
         className={clsx(
           "border text-card-foreground min-w-[350px]   min-h-[400px] overflow-hidden  shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[14px]",
@@ -112,7 +120,7 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
                 : "Under Construction"}
             </p>
           )}
-          <a href={url} target="_blank" className="relative  max-h-[212px]">
+          <div href={url} target="_blank" className="relative  max-h-[212px]">
             <Image
               src={
                 type === "proj"
@@ -141,8 +149,8 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
                     : "bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 text-[#0073C6]"
                 )}
                 onClick={(e) => {
-                  e.preventDefault();
-                  onAddingShortList(cardData.propIdEnc);
+                 
+                  onAddingShortList(e, cardData.propIdEnc);
                 }}
               >
                 <span className=" w-[24px] h-[24px] ">
@@ -151,7 +159,7 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
                 {cardData.shortListed === "Y" ? "Shortlisted" : "Shortlist"}
               </button>
             </div>
-          </a>
+          </div>
 
           <div className="text-sm">
             {type != "proj" && (
