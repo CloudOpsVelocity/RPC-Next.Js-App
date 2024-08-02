@@ -147,7 +147,7 @@ export default function PropertyTypeDetailsCrad({
     propertyType === "plot" && projectUnitsData && countPlots(projectUnitsData);
   return (
     <div
-      className="flex  justify-between items-start h-[174px]  sm:h-[227px] w-[100%] max-w-[359px] lg:max-w-[510px] rounded-[24px] shadow-md pr-[1%] pl-[1%] mt-[70px] bg-gradient-to-l from-[#EFF5FF] /50 to-[#F2FAFF]/50 mb-[2%] cursor-pointer"
+      className="flex  justify-between items-start h-[174px]  sm:h-[227px] w-[100%] sm:max-w-[359px] lg:max-w-[510px] rounded-[24px] shadow-md pr-[1%] pl-[1%] mt-[70px] bg-gradient-to-l from-[#EFF5FF] /50 to-[#F2FAFF]/50 mb-[2%] cursor-pointer"
       onClick={() =>
         isPartialData
           ? scrollToTopic("floorPlans")
