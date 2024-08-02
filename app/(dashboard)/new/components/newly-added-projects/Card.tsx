@@ -16,18 +16,18 @@ type Props = { item: any };
 export default function Card({ item }: Props) {
   let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/abc/banglore/whitefield/${item.projIdEnc}`;
   return (
-    <div className="w-[310px] sm:w-[881.143px] h-[450px] sm:h-[514px] shrink-0 relative">
+    <div className="w-[310px] sm:w-[631px] h-[450px] sm:h-[368px] shrink-0 relative">
       <BackgroundImage src={item.coverUrl} radius="sm" h={"100%"}>
         <div className="p-6">
           <img
             src="https://im.proptiger.com/3/100683/13/sumadhura-infracon-23973255.jpeg?width=800&height=620"
             alt=""
-            className="w-[100px] h-[100px] object-cover"
+            className="w-[67px] h-[67px] object-cover"
           />
         </div>
-        <div className="absolute right-0 top-0 sm:w-[560px] h-[450px] sm:h-[514px] shrink-0  bg-gradient-to-l from-[#00121F] via-[rgba(59,70,98,0.86)] to-[rgba(86,93,112,0.04)] text-right p-7 flex flex-col justify-end sm:justify-between">
+        <div className="absolute right-0 top-0 sm:w-[560px] h-full  shrink-0  bg-gradient-to-l from-[#00121F] via-[rgba(59,70,98,0.86)] to-[#565d700a] text-right p-[17px] flex flex-col justify-end sm:justify-between">
           <div>
-            <p className="text-white text-[22px] sm:text-[32px] not-italic font-extrabold leading-[normal] tracking-[0.64px] flex justify-end items-center">
+            <p className="text-white text-[14px] sm:text-[18px] not-italic font-extrabold leading-[normal] tracking-[0.64px] flex justify-end items-center">
               <div className="absolute sm:static top-5 right-1  inline-flex  gap-3 mr-6">
                 <Shortlist
                   reqId={item.projIdEnc}
@@ -37,10 +37,10 @@ export default function Card({ item }: Props) {
               </div>{" "}
               {formatCurrency(item.minPrice)} - {formatCurrency(item.maxPrice)}
             </p>
-            <p className="text-white text-[18px] sm:text-[26px] not-italic font-bold leading-[normal] tracking-[0.52px] mt-3 text-nowrap">
+            <p className="text-white text-[14px] sm:text-[18px] not-italic font-bold leading-[normal] tracking-[0.52px] mt-[8px] text-nowrap">
               {item.projName}
             </p>
-            <p className="text-white  text-[14px] sm:text-xl not-italic font-bold leading-[normal] tracking-[0.4px] mt-1 sm:mt-6">
+            <p className="text-white text-[14px] sm:text-[18px] not-italic font-bold leading-[normal] tracking-[0.4px] mt-[8px] sm:mt-[8px]">
               {item.propTypes?.join(", ")}
             </p>
           </div>
@@ -60,10 +60,10 @@ export default function Card({ item }: Props) {
               </p>
             </div>
             <div>
-              <p className="text-white sm:text-[22px] not-italic font-bold leading-[normal] tracking-[0.44px]">
+              <p className="text-white sm:text-[14px] not-italic font-bold leading-[normal] tracking-[0.44px]">
                 Start Date: {formatDate(item.launchDate)}
               </p>
-              <p className="text-white sm:text-[22px] not-italic font-bold leading-[normal] tracking-[0.44px] mt-1">
+              <p className="text-white sm:text-[px] not-italic font-bold leading-[normal] tracking-[0.44px] mt-1">
                 End Date: {formatDate(item.possassionDate)}
               </p>
             </div>

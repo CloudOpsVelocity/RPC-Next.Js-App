@@ -26,7 +26,7 @@ export default async function Page() {
       <HomeFeatures />
       <NewAddedProjects data={data.featured} />
       <DynamicListing
-        title="Ready to Move Sell Listings"
+        title="Ready to Move Sell Listings" 
         content="Loreum Ipsum"
         data={listingData["r_Sale"]}
       />

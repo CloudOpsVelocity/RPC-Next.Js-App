@@ -9,17 +9,20 @@ type Props = { data: any };
 export default function HandPickedProjects({ data }: Props) {
   const [active, setActive] = React.useState(0);
   return (
-    <div className="w-[90%] m-auto mt-[3%] h-[730px] sm:h-[782px] shrink-0 bg-gradient-to-r from-[#DAE6F1] via-[#DAE6F1] to-[#A7D0F5] pt-[3%] pl-[1.5%]">
-      <MainHeading title="Handpicked Projects" content="Loreum Ipsum" />
-      <div className="flex mt-2 sm:mt-10  sm:gap-6 flex-wrap">
-        <div>
-          <SideTabs active={active} setActive={setActive} />
-        </div>
-        <div className="max-w-[1400px]">
-          <CardCarousel
-            data={data[config[active as keyof typeof config]]}
-            active={active}
-          />
+    <div className="w-full mt-[40px] sm:mt-[80px] min-h-[530px] sm:min-h-[582px] flex justify-center items-center shrink-0 bg-gradient-to-r from-[#DAE6F1] via-[#DAE6F1] to-[#A7D0F5]">
+      <div className=" w-[90%]">
+        <MainHeading title="Handpicked Projects" content="Loreum Ipsum" />
+
+        <div className=" w-full flex justify-center items-start mt-2 sm:mt-10 flex-nowrap sm:gap-6 ">
+        
+            <SideTabs active={active} setActive={setActive} />
+          
+            <div className="max-w-[1466px] ">
+              <CardCarousel
+                data={data[config[active as keyof typeof config]]}
+                active={active}
+              />
+            </div>
         </div>
       </div>
     </div>

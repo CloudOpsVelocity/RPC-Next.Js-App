@@ -30,7 +30,7 @@ export default function ReqBtn({
     });
   };
   return (
-    <Button className="!text-[12px] sm:!text-xl" onClick={handleOpen}>
+    <Button className="!text-[12px] sm:!text-[14px] !p-[4px] !sm:p-[6px] " onClick={handleOpen}>
       Request Callback
     </Button>
   );

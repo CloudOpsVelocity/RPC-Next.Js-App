@@ -5,16 +5,16 @@ type Props = {};
 
 export default function Card({}: Props) {
   return (
-    <div className="flex min-w-[300px] sm:w-[494px] flex-col items-start border shadow-[0px_4px_20px_0px_rgba(0,127,145,0.10)] rounded-[10px] border-solid border-[#B9CFEB]">
-      <Image height={300} width={494} src={"/test.jpg"} alt="" />
-      <div className="flex flex-col items-start gap-2 sm:gap-6 self-stretch p-6">
-        <p className="text-[color:var(--Black,#000)] text-xl not-italic font-normal leading-[150%]">
+    <div className="flex min-w-[300px] sm:w-[427px]  flex-col items-start border shadow-[0px_4px_20px_0px_rgba(0,127,145,0.10)] rounded-[10px] border-solid border-[#B9CFEB]">
+      <Image height={196} width={494} className="h-[196px]" src={"/test.jpg"} alt="" />
+      <div className="flex flex-col h-[146px] items-start p-[12px]">
+        <p className="text-[color:var(--Black,#000)] text-x[20px] not-italic font-normal leading-[150%]">
           5 min read
         </p>
-        <p className="text-[color:var(--Black,#000)] text-xl not-italic font-normal leading-[150%]">
+        <p className="text-[color:var(--Black,#000)] text-[18px] not-italic font-normal leading-[150%]">
           How to Maximise your Property’s Resale Value?
         </p>
-        <button className="inline-flex gap-1 justify-center items-center text-[color:var(--Secondary-Blue-1,#006EBE)] text-xl not-italic font-bold leading-[150%]">
+        <button className="inline-flex mt-auto gap-1 justify-center items-center text-[color:var(--Secondary-Blue-1,#006EBE)] text-[20px] not-italic font-bold leading-[150%]">
           Read {config.readMoreIcon}
         </button>
       </div>

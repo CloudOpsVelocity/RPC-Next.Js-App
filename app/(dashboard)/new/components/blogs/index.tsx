@@ -6,7 +6,7 @@ type Props = {};
 
 export default function BlogsSection({}: Props) {
   return (
-    <div className="w-[90%] m-auto pb-10">
+    <div className="w-[90%] m-auto pb-10 mb-[0px] sm:mb-[40px]  ">
       <MainHeading
         title="Latest Blogs"
         content="Lorem ipsum dolor sit amet, consectetur adipiscing elit."

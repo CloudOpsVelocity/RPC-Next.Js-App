@@ -6,7 +6,7 @@ type Props = {};
 
 export default function ListbySection({}: Props) {
   return (
-    <div className="my-[80px] w-[90%] m-auto">
+    <div className="mt-[40px] sm:mt-[80px] w-[90%] m-auto">
       <MainHeading title="Listing Posted By" content="Loreum Ipsum" />
       <CardSection />
     </div>

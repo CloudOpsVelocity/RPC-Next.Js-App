@@ -6,26 +6,26 @@ type Props = {};
 
 export default function HomeFeatures({}: Props) {
   return (
-    <div className="w-[90%] sm:w-full m-auto pt-4 sm:pb-16 sm:pt-8">
-      <h1 className="hidden sm:block text-[#202020] text-center text-[40px] not-italic font-bold">
+    <div className="w-[90%] sm:w-full m-auto pt-4 sm:pb-16 sm:pt-8 bg-[#EEF4F9] ">
+      <h1 className="hidden sm:block text-[#202020] text-center text-[24px] not-italic font-bold m-0 ">
         Why Choose{" "}
-        <span className=" text-[color:var(--Brand-green-primary,#148B16)] text-[40px] not-italic font-bold">
+        <span className=" text-[color:var(--Brand-green-primary,#148B16)] text-[24px] not-italic font-bold">
           {" "}
           Get Right Property?
         </span>
       </h1>
-      <p className="hidden sm:block text-[#242424] text-center text-[29px] not-italic font-semibold leading-[30px] max-w-[60%] m-auto mt-[24px]">
+      <p className="hidden sm:block text-[#242424] text-center text-[16px] not-italic font-semibold leading-[30px] mt-[16px]">
         Choose us for real estate because we offer expert guidance, a vast
         property selection and commitment to your dreams.
       </p>
-      <p className="hidden sm:block text-[#33535F] text-2xl not-italic font-semibold text-center mt-4">
+      <p className="hidden sm:block text-[#33535F] text-[16px] not-italic font-semibold text-center mt-[10px]">
         Trust in our experience to find your perfect home!
       </p>
       <div className=" shrink-0 m-auto flex sm:justify-center sm:items-end max-w-[1200px] gap-4 flex-wrap sm:flex-nowrap">
-        <div className="hidden sm:block sm:min-w-[380px]  sm:ml-[15%]">
+        <div className="hidden sm:block sm:min-w-[232px] sm:ml-[15%]">
           {config.svg}
         </div>
-        <div className=" sm:hidden sm:min-w-[380px]  sm:ml-[15%]">
+        <div className=" sm:hidden sm:min-w-[232px]  sm:ml-[15%]">
           {config.mobileSvg}
         </div>
         <div className="space-y-2 sm:space-y-0 ">
@@ -41,8 +41,8 @@ export default function HomeFeatures({}: Props) {
 const config = {
   svg: (
     <svg
-      width="353"
-      height="382"
+      width="232"
+      height="232"
       viewBox="0 0 353 382"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

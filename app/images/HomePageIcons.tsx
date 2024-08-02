@@ -1,18 +1,8 @@
 export const CarouseSelArrowIcon = ({ className }: { className?: string }) => {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="57"
-      height="57"
-      viewBox="0 0 57 57"
-      fill="none"
-      className={className}
-    >
-      <circle cx="28.5" cy="28.5" r="28" fill="#E2F6FF" stroke="#565D70" />
-      <path
-        d="M26.6402 36.6332C25.9889 37.176 25 36.7128 25 35.865V20.135C25 19.2872 25.9889 18.824 26.6402 19.3668L36.0781 27.2318C36.5579 27.6316 36.5579 28.3684 36.0781 28.7682L26.6402 36.6332Z"
-        fill="#33535F"
-      />
+    <svg xmlns="http://www.w3.org/2000/svg" width="57" height="57" viewBox="0 0 57 57" fill="none" className={className}>
+      <circle cx="28.5" cy="28.5" r="28.5" fill="#E2F6FF" stroke="#565D70"/>
+      <path d="M26.6402 36.6332C25.9889 37.176 25 36.7128 25 35.865V20.135C25 19.2872 25.9889 18.824 26.6402 19.3668L36.0781 27.2318C36.5579 27.6316 36.5579 28.3684 36.0781 28.7682L26.6402 36.6332Z" fill="#33535F"/>
     </svg>
   );
 };
@@ -21,8 +11,8 @@ export const HeartIcon = ({ className }: { className?: string }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="33"
-      height="32"
+      width="24"
+      height="24"
       viewBox="0 0 33 32"
       fill="none"
       className={className}
@@ -46,8 +36,8 @@ export const HeartIcon = ({ className }: { className?: string }) => {
 export const ShareIcon = ({ className }: { className?: string }) => {
   return (
     <svg
-      width="33"
-      height="32"
+      width="24"
+      height="24"
       viewBox="0 0 33 32"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

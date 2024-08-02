@@ -26,7 +26,7 @@ export default function Btn({ text }: Props) {
         width={36}
         height={36}
         alt="post"
-        className="absolute right-0"
+        className="absolute right-0 text-[16px]  "
       />
     </a>
   );

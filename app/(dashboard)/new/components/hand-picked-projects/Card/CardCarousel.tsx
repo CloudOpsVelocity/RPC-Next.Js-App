@@ -15,7 +15,7 @@ export default function CardCarousel({ data, active }: Props) {
       slideGap="md"
       align="start"
       slidesToScroll={1}
-      mt={20}
+      mt={0}
       nextControlIcon={<CarouseSelArrowIcon />}
       previousControlIcon={<CarouseSelArrowIcon className="rotate-180" />}
       controlsOffset={"-10px"}
