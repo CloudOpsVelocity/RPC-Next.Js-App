@@ -14,6 +14,7 @@ import ZoomInOut from "../../project/actions/ZoomInOut";
 import { useMediaQuery } from "@mantine/hooks";
 import Close from "../../project/button/close";
 import { ImgNotAvail } from "@/app/data/project";
+import { formatNumberWithSuffix } from "@/app/utils/numbers";
 
 function PFloorPlanModal({
   data,
@@ -209,7 +210,7 @@ const RightSection = ({ propCgId }: any) => {
               Super Builtup Area:
               <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
                 {" "}
-                {data.superBuildUparea} sq.ft
+                {formatNumberWithSuffix(data.superBuildUparea)} sq.ft
               </span>
             </p>
           </div>
@@ -222,7 +223,7 @@ const RightSection = ({ propCgId }: any) => {
               Carpet Area:
               <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                 {" "}
-                {data.caretarea} sq.ft
+                {formatNumberWithSuffix(data.caretarea)} sq.ft
               </span>
             </p>
           </div>
@@ -250,7 +251,7 @@ const RightSection = ({ propCgId }: any) => {
                 Garden Area:
                 <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                   {" "}
-                  {data.gardenArea} sq.ft
+                  {formatNumberWithSuffix(data.gardenArea)} sq.ft
                 </span>
               </p>
             </div>
@@ -266,7 +267,7 @@ const RightSection = ({ propCgId }: any) => {
                 Terrace Area:
                 <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                   {" "}
-                  {data.terraceArea} sq.ft
+                  {formatNumberWithSuffix(data.terraceArea)} sq.ft
                 </span>
               </p>
             </div>
@@ -279,7 +280,7 @@ const RightSection = ({ propCgId }: any) => {
               Balcony Size:
               <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                 {" "}
-                {data.totalBalconySize} sq.ft
+                {formatNumberWithSuffix(data.totalBalconySize)} sq.ft
               </span>
             </p>
           </div>

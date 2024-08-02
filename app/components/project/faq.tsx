@@ -202,9 +202,9 @@ const FaqCard = ({
         {faqQuestion}
       </h4>
       <FaqReadMore text={faqAnswer} title={faqQuestion} />
-      {!last && (
+     {/*  {!last && ( */}
         <hr className="bg-[#00000080] my-4 sm:my-[25px] xl:my-[35px] h-[2px]" />
-      )}
+    {/*   )} */}
     </div>
   );
 };

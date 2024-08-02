@@ -1,4 +1,5 @@
 import { Main } from "@/app/validations/property";
+import { formatNumberWithSuffix } from "../numbers";
 
 function createPropertyString(data: Main): string {
   console.log(data);
@@ -12,15 +13,21 @@ function createPropertyString(data: Main): string {
       data.facingName
     } | Area: ${data.sba} sq.ft`;
   } else if (data.propTypeName === config.propTypeNames[3]) {
-    return `${data.propName} | Unit No. ${data.unitNumber} | ${data.facingName} | Area. ${data.plotArea} sq.ft`;
+    return `${data.propName} | Unit No. ${data.unitNumber} | ${
+      data.facingName
+    } | Area. ${formatNumberWithSuffix(data.plotArea)} sq.ft`;
   } else if (data.propTypeName === config.propTypeNames[5]) {
-    return `${data.propName} | ${data.bhkName} | Floor ${data.totalFloor} | House No. ${data.unitNumber} | ${data.facingName} | Area: ${data.sba} sq.ft`;
+    return `${data.propName} | ${data.bhkName} | Floor ${
+      data.totalFloor
+    } | House No. ${data.unitNumber} | ${
+      data.facingName
+    } | Area: ${formatNumberWithSuffix(data.sba)} sq.ft`;
   } else {
     return `${data.propName} | ${data.bhkName} | ${
       data.tower ? "Tower " + data.tower : ""
     } | Floor ${data.atFloor === 0 ? "G" : data.atFloor} | Unit No. ${
       data.unitNumber
-    } | ${data.facingName} | Area: ${data.sba} sq.ft`;
+    } | ${data.facingName} | Area: ${formatNumberWithSuffix(data.sba)} sq.ft`;
   }
 }
 

@@ -87,7 +87,7 @@ function CarouselModal({
           <div className="text-[#333] text-left  text-[20px] xl:text-2xl not-italic font-semibold leading-[normal]">
             Floor Plan
           </div>
-          <div className="flex justify-center items-center gap-5">
+          <div className="flex justify-center items-center gap-5 mb-2">
             <button
               onClick={handleDownload}
               className={`text-white flex justify-center items-center gap-1 p-2 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] rounded-[10px] bg-[#0073c6] ${

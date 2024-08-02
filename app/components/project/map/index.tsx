@@ -89,7 +89,7 @@ const LeafMap: React.FC<{
           <PropertyHeading
             title="Near By Locations"
             desc="Explore nearby convenient amenities, entertainment, and essential services"
-            className="sm:mb-[40px]"
+            className="sm:mb-[18px]"
             projName={projName}
           />
         ) : (
