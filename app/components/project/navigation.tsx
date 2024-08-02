@@ -84,6 +84,11 @@ export default function Navigation({
         inline: "center",
       });
       setCurrentBlock(id);
+
+      // Make the navigation bar sticky if the clicked topic is not "overview"
+      if (id !== "overview") {
+        setIsSticky(true);
+      }
     }
     setTimeout(() => setIsScrolling(false), 4000);
   }
