@@ -17,9 +17,9 @@ export default function SellingPrice({
 }) {
   return (
     <div className=" w-[100%]">
-      <div className="flex flex-col  justify-center items-start gap-2.5 border shadow-[0px_4px_22px_0px_rgba(204,233,204,0.38)] pl-1 xl:pl-6 pr-[30px] py-3 rounded-[10px] border-solid border-[#148B16] bg-[#eaffea]">
-        <div className="text-[#38333A] ml-3  text-[14px] xl:text-2xl not-italic font-medium leading-[normal] capitalize inline-flex">
-          {DefaultIcon} Total {type} Price Including all the charges
+      <div className="flex flex-col  justify-center items-start gap-2.5 border shadow-[0px_4px_22px_0px_rgba(204,233,204,0.38)] pl-1 xl:pl-4 pr-[30px] py-3 rounded-[10px] border-solid border-[#148B16] bg-[#eaffea]">
+        <div className="text-[#38333A] ml-3 xl:ml-2  flex-row  gap-2 items-start  text-[14px] xl:text-2xl not-italic font-medium leading-[normal] capitalize inline-flex">
+          <span>{DefaultIcon}</span> Total {type} Price Including all the charges
         </div>
         <h2 className="text-[#005202] text-[26px] ml-9 xl:m-0  xl:text-[34px] not-italic font-bold leading-[normal]">
           ₹{" "}
@@ -41,6 +41,7 @@ export default function SellingPrice({
       </p>
     </div>
   );
+  
 }
 
 const DefaultIcon = (
@@ -50,6 +51,8 @@ const DefaultIcon = (
     height="29"
     viewBox="0 0 28 29"
     fill="none"
+    className={` w-[24px] h-[24px] md:h-[34px] md:w-[34px]`}
+
     
 
   >

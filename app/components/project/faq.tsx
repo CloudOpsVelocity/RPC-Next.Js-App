@@ -119,7 +119,7 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
   const isMobile = useMediaQuery(`(max-width: 601px)`);
   return (
     <form
-      className="max-w-[100%] mx-auto sm:my-8 sm:pt-[12px] rounded-lg space-y-2"
+      className="max-w-[100%] mx-auto mt-[50px] sm:pt-[12px] rounded-lg space-y-2"
       onSubmit={onSubmit(formSubmit)}
     >
       <h2 className="inline-flex items-center gap-3 p-2 rounded-2xl bg-[#ecf7ff] sm:mb-7">
