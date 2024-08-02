@@ -45,6 +45,7 @@ const SelectedFilters = ({
       scrollFiltersRef.current.scrollLeft += scrollAmount;
     }
   };
+
   return (
     <div
       className={`flex justify-start items-center w-full  relative bottom-[20px] mb-1   ${

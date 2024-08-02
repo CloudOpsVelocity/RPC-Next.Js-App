@@ -13,6 +13,7 @@ import { useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
 import { setPropertyValues } from "@/app/utils/dyanamic/projects";
 import { ImgNotAvail } from "@/app/data/project";
 import clsx from "clsx";
+import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
 
 type Props = {
   propCgId?: any;
@@ -89,7 +90,8 @@ const FloorplanDetailsCard: React.FC<Props> = ({
             </p>
             <p className="gap-[4px] font-[500] text-[12px] sm:text-[14px] xl:text-[16px] text-[#303A42] mb-[20px] flex justify-start items-start">
               <SuperBuildupAreaIcon className="md:h-[32px] md:w-[32px] h-[24px] w-[24px]" />
-              Super Builtup Area: {mergedData.superBuildupArea} sq.ft
+              Super Builtup Area:{" "}
+              {formatNumberWithSuffix(mergedData.superBuildupArea)} sq.ft
             </p>
             <p className="gap-[4px] font-[500] text-[12px] sm:text-[14px] xl:text-[16px] text-[#001F35] mb-[20px] flex justify-start items-start">
               <FacingIcon className="w-[20px] h-[20px] lg:w-[24px] lg:h-[24px]" />

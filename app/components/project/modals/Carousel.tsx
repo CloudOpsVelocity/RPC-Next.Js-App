@@ -28,6 +28,7 @@ import ZoomInOut from "../actions/ZoomInOut";
 import Close from "../button/close";
 import { useMediaQuery } from "@mantine/hooks";
 import { downLoadIcon } from "@/app/images/commonSvgs";
+import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
 
 function CarouselModal({
   projName,
@@ -157,7 +158,9 @@ const MiddleSection = ({
           {" | Facing " + selectedFloor?.facingName}
           {propCgId != projectprops.plot &&
             selectedFloor?.superBuildUparea &&
-            " | Area. " + selectedFloor?.superBuildUparea + " sq.ft"}
+            " | Area. " +
+              formatNumberWithSuffix(selectedFloor?.superBuildUparea) +
+              " sq.ft"}
           {propCgId == projectprops.plot &&
             selectedFloor?.plotArea &&
             " | Area. " + selectedFloor?.plotArea + " sq.ft"}
