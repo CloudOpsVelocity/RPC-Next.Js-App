@@ -46,7 +46,7 @@ export default function GalleryBlock({
     >
       {type === "prop" ? (
         <PropertyHeading
-          title="GALLERIA"
+          title="Galleria"
           desc="Gallery Highlights : A Glimpse into good property"
         />
       ) : (

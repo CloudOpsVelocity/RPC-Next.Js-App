@@ -220,7 +220,7 @@ const LeafMap: React.FC<{
           <PropertyHeading
             title={projName}
             desc=""
-            className="mb-[40px]"
+            className="sm:mb-[8px] mt-[50px]"
             projName={""}
           />
         ) : (
