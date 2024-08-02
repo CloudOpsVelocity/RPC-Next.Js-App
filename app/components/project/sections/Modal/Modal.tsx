@@ -40,7 +40,7 @@ export default function PartialUnitModal({ data }: any) {
       classNames={S}
       size={isMobile ? "100%" : "60%"}
       centered
-      zIndex={1}
+      zIndex={11}
     >
       <div className="w-full bg-transparent     h-[57px] flex items-center justify-between  z-[1000] md:px-10 max-w-[91rem] m-auto">
         <div className="text-[18px] sm:text-2xl not-italic font-bold leading-[normal]">
@@ -84,7 +84,7 @@ export default function PartialUnitModal({ data }: any) {
           />
         </div>
       </div>
-      <div className="flex  items-center w-[90%] h-[300px] sm:max-h-[320px] xl:max-h-[434px]  justify-center rounded border    border-solid border-[#4D6677] m-auto relative">
+      <div className="flex  items-center w-[90%] h-[300px] sm:max-h-[320px] xl:min-h-[434px]  justify-center rounded border    border-solid border-[#4D6677] m-auto relative">
         <TransformWrapper>
           <TransformComponent>
             <Image
@@ -92,7 +92,7 @@ export default function PartialUnitModal({ data }: any) {
               width={500}
               height={500}
               alt="image"
-              className="max-h-[294px] sm:max-h-[290px] xl:max-h-[434px] object-contain "
+              className="max-h-[294px] sm:max-h-[290px] xl:max-h-[430px] object-contain "
             />
           </TransformComponent>
           <ZoomInOut className=" -bottom-1 -right-[0.5px] sm:bottom-0 sm:right-0 pb-2" />
