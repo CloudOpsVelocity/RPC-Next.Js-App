@@ -16,6 +16,7 @@ import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import { useState } from "react";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 import ZoomInOut from "../../actions/ZoomInOut";
+import { formatNumberWithSuffix } from "@/app/utils/numbers";
 export default function PartialUnitModal({ data }: any) {
   const isData = useAtomValue(selectedPartialUnitAtom);
   const [active, setActive] = useState(0);
@@ -130,7 +131,10 @@ export default function PartialUnitModal({ data }: any) {
             {selectedOne?.propType == "32" ? "Plot Area" : "Super Builtup Area"}
             :{" "}
             <span className="text-[#303A42] text-nowrap  text-[10px] xl:text-[16px] font-[600] ">
-              {selectedOne?.plotArea || selectedOne?.sba} sq.ft
+              {formatNumberWithSuffix(
+                selectedOne?.plotArea || selectedOne?.sba
+              )}{" "}
+              sq.ft
             </span>
           </p>
         </div>
