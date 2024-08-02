@@ -242,7 +242,7 @@ const LoggedInUserForm = ({ status, setStatus }: any) => {
       <p className="text-[#202020] text-[14px] xl:text-base not-italic font-semibold leading-[normal] tracking-[0.64px] mb-2">
         Email: {session?.user.email}
       </p>
-      <Button variant="blue" onClick={onSubmit}>
+      <Button variant="blue" className="sm:!py-1.5" onClick={onSubmit}>
         {popupState.MODAL_TYPE === "REQ_QUOTE"
           ? "Request Quote"
           : "Request Callback"}

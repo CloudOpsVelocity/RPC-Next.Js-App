@@ -83,7 +83,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
           projName={""}
           builderName={nzData.companyName}
           content={nzData.vission}
-          className="!mb-[8px] sm:!mb-[20px] xl:!mb-[24px] text-[#202020] sm:text-[18px] xl:text-2xl not-italic font-medium leading-[normal] w-full mt-4 sm:!mt-0"
+          className="!mb-[8px] sm:!mb-[20px] xl:!mb-[24px] text-[#202020] sm:text-[18px] xl:text-2xl not-italic font-medium leading-[normal] w-full mt-4 sm:!mt-0 !ml-0"
         />
 
         <p className="  text-[16px] sm:text-[20px] xl:text-[24px]  text-black sm:text-2xl not-italic font-semibold leading-[normal] inline-flex justify-center items-center">

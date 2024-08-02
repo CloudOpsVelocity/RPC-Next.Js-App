@@ -50,7 +50,6 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
       ? cardData.projName
       : `${cardData?.bhkName ?? ""} ${cardData.propTypeName} for
       ${cardData.cg === "R" ? "Rent" : "Sale"} in ${cardData.ltName}`;
-  const setPopReqData = useSetAtom(NearByDataAtom);
   const handleShortlist = (projId: string) => {
     mutate && mutate({ id: projId, type: ct as Pick<CardProps, "ct">["ct"] });
     toggleShortlist({
@@ -89,7 +88,7 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
         onClick={() => redirect()}
         key={reqId}
         className={clsx(
-          "border border-width: 2px; text-card-foreground min-w-[310px] max-w-full   min-h-[400px] md:max-w-[494px]   mb-[1%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[14px]",
+          "border border-width: 2px; text-card-foreground min-w-[310px] max-w-full  sm:min-w-[400px] xl:min-w-[310px]  min-h-[400px] xl:max-w-[494px]   mb-[1%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[14px]",
           type == "proj" ? "bg-[#FAFAFA] " : "bg-[#FFFEFE] pt-4"
         )}
       >
@@ -188,9 +187,9 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
             )}
 
             {type == "proj" && (
-              <p className="mb-[6px] text-[#565D70] text-[14px] sm:text-base not-italic font-semibold leading-[normal]">
+              <p className="mb-[6px] text-[#565D70] text-[14px] sm:text-sm xl:text-base not-italic font-semibold leading-[normal]">
                 Start - End Date:
-                <span className="ml-[4px] text-[#001F35] text-[14px] sm:text-basee not-italic font-semibold leading-[normal]">
+                <span className="ml-[4px] text-[#001F35] text-[14px] sm:text-sm xl:text-base not-italic font-semibold leading-[normal]">
                   {formatDate(cardData.launchDate)} -{" "}
                   {formatDate(cardData.possassionDate)}
                 </span>
@@ -198,7 +197,7 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
             )}
 
             {cardData.propTypes ? (
-              <p className="mb-[6px] text-[#242424] text-[14px] sm:text-base not-italic font-semibold leading-[normal] tracking-[0.56px]">
+              <p className="mb-[6px] text-[#242424] text-[14px] sm:text-sm xl:text-base not-italic font-semibold leading-[normal] tracking-[0.56px]">
                 {cardData.propTypes.map((item: any) => item.trim()).join(", ")}
               </p>
             ) : (
@@ -211,7 +210,7 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
               </p>
             )}
 
-            <p className="text-[#565D70]  not-italic font-semibold leading-[normal] tracking-[0.56px] capitalize text-[14px] sm:text-[15px]">
+            <p className="text-[#565D70]  not-italic font-semibold leading-[normal] tracking-[0.56px] capitalize text-[14px] xl:text-[15px]">
               {type === "proj" &&
                 `${cardData.locality}, ${cardData?.city}, ${cardData.state},  ${cardData.pincode} `}
 
@@ -222,11 +221,11 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
                 ${cardData.pinCode}`}
             </p>
             {type === "proj" && (
-              <div className="inline-flex items-start gap-2 p-2 shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] cardBg mt-[8px] sm:mt-[16px]">
-                <span className="text-black text-right text-[14px] sm:text-base not-italic font-medium leading-[normal]">
+              <div className="inline-flex items-start gap-2 p-2 shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] cardBg mt-[8px] xl:mt-[16px]">
+                <span className="text-black text-right text-[14px] xl:text-base not-italic font-medium leading-[normal]">
                   Project Status:{" "}
                 </span>
-                <span className="text-[#148B16] text-[14px] sm:text-base not-italic font-bold leading-[normal]">
+                <span className="text-[#148B16] text-[14px] xl:text-base not-italic font-bold leading-[normal]">
                   {cardData.projstatus}
                 </span>
               </div>
@@ -238,7 +237,7 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
             )}
             <Button
               title="Request  Callback"
-              buttonClass=" text-[#FFF] mt-[12px] text-[12px] sm:text-[18px] font-[600] bg-[#0073C6] rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[10px]  "
+              buttonClass=" text-[#FFF] mt-[12px] text-[12px]  sm:text-[14px] xl:text-[18px] font-[600] bg-[#0073C6] rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[10px]  "
               onChange={handleReqCall}
             />
           </div>

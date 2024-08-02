@@ -64,7 +64,7 @@ export default function Amenties({
           </>
         )}
 
-        <div className="flex flex-wrap " onClick={handleReadMoreClick}>
+        <div className="flex flex-wrap sm:mt-4" onClick={handleReadMoreClick}>
           {data?.slice(0, maxShow).map((eachItem, ind) => {
             if (amenitiesGroupList.get(eachItem.id) != null) {
               return (
@@ -84,7 +84,7 @@ export default function Amenties({
                               return (
                                 <div
                                   key={index}
-                                  className="flex items-center  gap-[8px]  mb-[8px] mr-[8px]  sm:mr-[24px] sm:mb-[24px]  px-2.5 py-0.5 w-fit text-[#001F35] font-[500] text-[13px] lg:text-[20px] focus:ring-offset-2 border rounded-[10px] border-solid border-[#b2e0ff] bg-[#FFF] "
+                                  className="flex items-center  gap-[8px]  mb-[8px] mr-[8px]  xl:mr-[24px] xl:mb-[24px]  px-2.5 py-0.5 w-fit text-[#001F35] font-[500] text-[13px] xl:text-[20px] focus:ring-offset-2 border rounded-[10px] border-solid border-[#b2e0ff] bg-[#FFF] "
                                 >
                                   {amenitiesGroupList.get(eachItem.id)}
                                   {eachOne.constDesc}
