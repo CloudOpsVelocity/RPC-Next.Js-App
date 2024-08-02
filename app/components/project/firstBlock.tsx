@@ -149,7 +149,7 @@ const FirstBlock: React.FC<Props> = ({
               </p>
 
               <p
-                className=" sm:text-[16px] xl:text-[20px] font-[600] mr-auto md:mr-0 text-[#0073C6] bg-[#FFF] rounded-[10px] shadow-md p-[8px] flex items-center gap-2 cursor-pointer"
+                className=" sm:text-[16px] xl:text-[20px] font-[600] mr-auto md:mr-0 text-[#0073C6] bg-[#FFF] rounded-[10px] shadow-md p-[8px] flex items-center gap-2 cursor-pointer mt-0 sm:mt-[5%] xl:mt-[3%]"
                 onClick={() => scrollToTopic("floorPlansdiv")}
               >
                 <Image
@@ -159,7 +159,7 @@ const FirstBlock: React.FC<Props> = ({
                   alt="no of floors"
                   className=" xl:h-[24px] xl:w-[24px] w-[16px] h-[16px]  sm:h-[16px] sm:w-[16px] "
                 />
-                {projectDetails?.floorPlanCount || 0} Floor Plan
+                {projectDetails?.floorPlanCount || 0} Floor Plans
               </p>
             </div>
           </div>
