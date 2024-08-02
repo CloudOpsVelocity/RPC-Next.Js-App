@@ -66,7 +66,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
     <>
       <div
         key={cardData.projIdEnc}
-        className="border text-card-foreground min-w-[300px] sm:min-w-[350px] bg-[#FAFAFA]  min-h-[500px] overflow-hidden  shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[14px] "
+        className="border text-card-foreground min-w-[300px] xl:max-w-[494px] bg-[#FAFAFA]  min-h-[500px] overflow-hidden  shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[14px] "
       >
         {type == "proj" && (
           <div className="sm:flex sm:space-y-1.5 p-6  px-4 pt-2 pb-3 justify-between items-center">
@@ -231,7 +231,13 @@ const BuilderCarousel = ({
         {content}
       </p>
 
-      <MainCarousel>
+      <MainCarousel
+        paddings={{
+          desktop: 10,
+          mobile: 10,
+          tab: 10,
+        }}
+      >
         {data &&
           data?.map((project: any, index: number) => {
             return (

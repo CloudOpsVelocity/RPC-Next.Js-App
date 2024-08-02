@@ -11,7 +11,17 @@ import {
 } from "@/app/images/commonSvgs";
 import { useMediaQuery } from "@mantine/hooks";
 
-const MainCarousel = ({ children }: { children: React.ReactNode }) => {
+const MainCarousel = ({
+  children,
+  paddings = { mobile: 10, tab: 65, desktop: 100 },
+}: {
+  children: React.ReactNode;
+  paddings?: {
+    tab: number;
+    mobile: number;
+    desktop: number;
+  };
+}) => {
   const isMobile = useMediaQuery("(max-width: 750px)");
   const isTab = useMediaQuery("(max-width: 1600px)");
   return (
@@ -25,7 +35,7 @@ const MainCarousel = ({ children }: { children: React.ReactNode }) => {
       slideGap={{ base: "lg", sm: "md", md: "40px" }}
       align={"start"}
       pb={isTab ? 20 : 0}
-      px={isMobile ? 10 : isTab ? 65 : 100}
+      px={isMobile ? paddings.mobile : isTab ? paddings.tab : paddings.desktop}
     >
       {children}
     </Carousel>
