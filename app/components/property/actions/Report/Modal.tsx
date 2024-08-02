@@ -25,7 +25,7 @@ export default function ReportModal({ issueData }: any) {
     if (!(reportStatus.length > 0)) {
       seterrorMsg(true);
       return;
-    } else if (reportStatus.includes(607)) {
+    } else if (reportStatus.includes(670)) {
       if (!text) {
         setStatus("error");
         return;

@@ -9,6 +9,7 @@ import {
   Status,
   TotalLandArea,
 } from "@/app/images/commonSvgs";
+import { formatNumberWithSuffix } from "@/app/utils/numbers";
 import { Main } from "@/app/validations/property";
 
 import React from "react";
@@ -46,12 +47,12 @@ export function generatePropertyOverViewData(
         { title: "Property Facing", value: data.facingName, Icon: Compass },
         {
           title: "Super built-up Area",
-          value: `${data.sba} sq.ft`,
+          value: `${formatNumberWithSuffix(data.sba)} sq.ft`,
           Icon: TotalLandArea,
         },
         {
           title: "Carpet Area",
-          value: `${data.ca} sq.ft`,
+          value: `${formatNumberWithSuffix(data.ca)} sq.ft`,
           Icon: TotalLandArea,
         },
 

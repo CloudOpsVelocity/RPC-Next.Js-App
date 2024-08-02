@@ -232,7 +232,7 @@ export const SEARCH_FILTER_DATA = {
     },
     {
       cid: 53,
-      constDesc: "UnFurnished",
+      constDesc: "Un Furnished",
       constGroup: "furnish",
       constType: "CON",
       parentGroupId: 40,

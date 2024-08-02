@@ -23,7 +23,7 @@ export default function ListItem({ label, value, className }: Props) {
         {label}
       </div>{" "}
       <span className="text-[#242424] text-right text-[14px] xl:text-xl not-italic font-semibold">
-        {typeof value === "string" ? value : `₹ ${formatNumberIndian(value)}`}
+        {typeof value === "string" ? value : `₹ ${formatCurrency(value)}`}
       </span>
     </li>
   );
@@ -33,7 +33,7 @@ const config = {
   hidePriceItems: ["Lifetime", "As Per Actuals", "Already Included"],
 };
 
-export function formatNumberIndian(value: number | string): string {
+export function formatCurrency(value: number | string): string {
   if (typeof value === "string") {
     const numberValue = parseFloat(value);
 

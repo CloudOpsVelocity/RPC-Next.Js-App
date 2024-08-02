@@ -216,7 +216,7 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
               </p>
             )}
             <Button
-              icon={isMobile ? null : <Phone />}
+              icon={isMobile ? null :null}
               title="Request  Callback"
               buttonClass=" text-[#FFF] mt-[12px] text-[12px] xl:text-[16px] font-[600] bg-[#0073C6] rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[6px]  "
               onChange={handleReqCall}

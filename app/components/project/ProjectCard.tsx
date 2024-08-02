@@ -238,7 +238,7 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
             )}
             <Button
               title="Request  Callback"
-              buttonClass=" text-[#FFF] mt-[12px] text-[12px] sm:text-[18px] font-[600] bg-[#0073C6] rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[10px]  "
+              buttonClass="  text-[#FFF] mt-[12px] text-[12px] xl:text-[16px] font-[600] bg-[#0073C6] rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[6px]    "
               onChange={handleReqCall}
             />
           </div>
