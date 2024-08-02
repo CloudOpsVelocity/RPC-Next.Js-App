@@ -81,7 +81,7 @@ const LeafMap: React.FC<{
       : [];
   return Object.keys(mapData).length > 0 ? (
     <div
-      className="w-full scroll-mt-[170px] mx-auto mb-[3%] sm:mb-0 pt-less-screen-spacing"
+      className="w-full scroll-mt-[170px] mx-auto mb-[3%] sm:mb-0 sm:pt-less-screen-spacing"
       id="nearBy"
     >
       <div className="flex justify-between w-[95%] sm:w-[90%] mx-auto">
@@ -89,7 +89,7 @@ const LeafMap: React.FC<{
           <PropertyHeading
             title="Near By Locations"
             desc="Explore nearby convenient amenities, entertainment, and essential services"
-            className="mb-[40px]"
+            className="sm:mb-[40px]"
             projName={projName}
           />
         ) : (
@@ -218,7 +218,7 @@ const LeafMap: React.FC<{
           <div>
             <h2 className="text-h2 sm:text-[22px] xl:text-[32px]  font-[600] text-[#001F35] mb-[12px] capitalize break-words sm:text-nowrap ">
               <span className="text-[#148B16]  ">{projName} </span>
-              <span>Near By Locations</span>
+              <span>Map Preview</span>
             </h2>
             {/*  <SubHeading
                     text="Explore nearby convenient amenities, entertainment, and essential services"

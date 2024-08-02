@@ -48,7 +48,7 @@ export default function RoomDetails({ data }: { data: Main }) {
   return (
     <div
       id="propertyDetails"
-      className="scroll-mt-[220px] mt-[50px] m-auto w-[95%] md:w-[90%]  mb-5 sm:block"
+      className="scroll-mt-[220px] sm:mt-[50px] m-auto w-[95%] md:w-[90%]  sm:mb-5 sm:block"
     >
       <PropertyHeading
         title="Listing details"
@@ -56,7 +56,7 @@ export default function RoomDetails({ data }: { data: Main }) {
           data.propTypeName === "Plot" ? data.plotArea + " sq.ft" : ""
         } ${data.bhkName ?? ""} ${data.propTypeName} For
         ${data.cg === "S" ? " Sell" : " Rent"}`}
-        className="mb-[10px] xl:mb-[40px]"
+        className="mb-[10px] xl:mb-[8px]"
       />
       <UnitBlock data={data} />
 
@@ -122,7 +122,7 @@ const Parking = ({ noocp, noobp, noccp, nocbp }: any) => {
         className=" mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] p-4 xl:px-[53px] xl:py-[39px]"
         id="propertyDetails "
       >
-        <h1 className={style.heading.h1}>Parking</h1>
+        <h1 className={style.heading.h1}>Parking Details</h1>
 
         <p className={style.heading.p}>
           Check out the parking details for the listings

@@ -137,7 +137,7 @@ export default function GalleryBlock({
           </div>
           {videos && videos.length > 0 && (
             <>
-              <h3 className="text-[#737579] font-[600] text-[20px] pt-4 lg:text-[24px]   mb-1 sm:mb-[2%] ">
+              <h3 className="text-[#737579] font-[600] text-[20px] sm:pt-4 lg:text-[24px]   mb-1 sm:mb-[2%] ">
                 Videos
               </h3>
               <div className="flex justify-start items-start w-full gap-[4%] flex-wrap ">
