@@ -235,7 +235,7 @@ export default function FloorplansBlock({
       id="floorPlans"
     >
       <h2
-        className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[10px] xl:mb-[24px] capitalize"
+        className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[10px] xl:mb-[6px] capitalize"
         id="floorPlansdiv"
       >
         Floor Plans For{" "}

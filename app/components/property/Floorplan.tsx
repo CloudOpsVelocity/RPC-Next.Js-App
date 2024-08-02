@@ -59,7 +59,7 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
         onClick={handleOpen}
       >
         <div
-          className="w-[90%] mb-[10px] xl:mb-[40px] space-y-4"
+          className="w-[90%] mb-[10px] xl:mb-[8px] space-y-4"
           id="propertyDetails "
         >
           <PropertyHeading
@@ -68,7 +68,7 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
           />
         </div>
 
-        <div className=" h-[405px] lg:h-[570px] w-full rounded-[14px]  border-solid border-[1px] border-[#92B2C8] bg-[#FFF] shadow-md flex justify-center p-2 xl:items-center flex-col ">
+        <div className=" h-[405px] lg:h-[570px] w-full rounded-[14px]  border-solid border-[1px] border-[#92B2C8] bg-[#FFF] shadow-md flex justify-center p-2 pt-0 sm:pt-2 xl:items-center flex-col ">
           <p className=" text-[#005DA0] text-left xl:text-right text-[14px] xl:text-xl not-italic font-medium w-full p-2 xl:mr-14">
             {createPropertyString(data)}
           </p>
@@ -84,7 +84,7 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
               />
             </div>
             <button onClick={() => setOpened(true)}>
-              <div className="bg-[#F4FBFF] p-[10px] rounded-[29px] gap-[12px] flex justify-end items-center  cursor-pointer absolute bottom-5 right-4 z-50 shadow-[0px_4px_12px_0px_rgba(0,0,0,0.40)]">
+              <div className="bg-[#F4FBFF] p-[10px] rounded-[29px] mt-2  sm:mt-0 gap-[12px] flex justify-end items-center  cursor-pointer absolute bottom-5 right-4 z-50 shadow-[0px_4px_12px_0px_rgba(0,0,0,0.40)]">
                 <p className="text-[#0073C6] text-[12px] xl:text-xl not-italic font-semibold leading-[normal] underline capitalize">
                   Click on image to open floor plan
                 </p>

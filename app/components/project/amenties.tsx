@@ -48,7 +48,7 @@ export default function Amenties({
           <PropertyHeading
             title="AMENITIES"
             desc="Experience the ultimate in comfort with our amenities"
-            className="mb-[10px] sm:mb-[40px]"
+            className="mb-[10px] sm:mb-[8px]"
           />
         ) : (
           <>
