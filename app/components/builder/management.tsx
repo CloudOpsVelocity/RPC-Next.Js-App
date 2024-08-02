@@ -51,7 +51,7 @@ export default function ManagementBlock({
         heading=""
         projName={""}
         content={vision}
-        className="!w-full !text-[14px] "
+        className="!text-[14px] "
       />
 
       <div className="flex  justify-start items-center w-full gap-[8px] mt-[0%]  ">

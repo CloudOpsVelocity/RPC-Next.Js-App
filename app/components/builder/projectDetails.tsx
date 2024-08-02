@@ -77,7 +77,7 @@ export default function ProjectDetails({
         id="whyBuy"
         heading="About Builder"
         content={mission}
-        className="!mb-[14px] sm:!mb-[40px] !mt-[0px]"
+        className="!mb-[14px] sm:!mb-[40px] !mt-[0px] !ml-0"
       />
 
       <div
