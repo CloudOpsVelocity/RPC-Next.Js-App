@@ -64,10 +64,7 @@ export function BasicBudgetSelect() {
   const [f, dispatch] = useAtom(homeSearchFiltersAtom);
   const [minValue, setMinValue] = useState<number>(f.bugdetValue[0]);
   const [maxValue, setMaxValue] = useState<number>(f.bugdetValue[1]);
-  console.log({
-    minValue,
-    maxValue,
-  });
+
   const [focusedInput, setFocusedInput] = useState<"min" | "max" | null>(null);
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
@@ -75,12 +72,15 @@ export function BasicBudgetSelect() {
 
   const filteredOptions = groceries.filter((item) => {
     const value = map.get(item)?.value ?? 0;
-    if (focusedInput === "max" || maxValue === 0) {
-      return value > minValue; // Show options greater than or equal to minValue
+
+    if (focusedInput === "max" || !maxValue) {
+      // Show all options if maxValue is null, undefined, or empty string while focusing on min
+      return value > minValue; // Show options greater than minValue
     } else if (focusedInput === "min") {
-      return value < maxValue; // Show options less than or equal to maxValue
+      // Show options less than or equal to maxValue while focusing on min
+      return value < maxValue;
     } else {
-      // Show all options if no input is focused
+      // Show options between minValue and maxValue if no input is focused
       return value >= minValue && value <= maxValue;
     }
   });
@@ -119,6 +119,18 @@ export function BasicBudgetSelect() {
     dispatch({ type: "SET_BUGDET_VALUE", payload: [minValue, val] });
   };
 
+  const handleMaxBlur = () => {
+    if (maxValue < minValue) {
+      setMaxValue("" as any);
+      dispatch({ type: "SET_BUGDET_VALUE", payload: [minValue, "" as any] });
+    }
+  };
+  const handleMinBlur = () => {
+    if (maxValue > minValue) {
+      setMinValue("" as any);
+      dispatch({ type: "SET_BUGDET_VALUE", payload: ["" as any, maxValue] });
+    }
+  };
   const shouldShowBudget = !(
     f.bugdetValue[0] === 0 && f.bugdetValue[1] === 60 * MULTIPLIER
   );
@@ -182,11 +194,12 @@ export function BasicBudgetSelect() {
             value={maxValue}
             onChange={(val) => handleMaxChange(val as number)}
             onFocus={() => setFocusedInput("max")}
-            min={f.bugdetValue[0] || 0} // Set min based on current filter values
+            onBlur={handleMaxBlur}
             clampBehavior="strict"
             thousandSeparator=","
             allowDecimal={false}
             allowNegative={false}
+            max={6000 * MULTIPLIER}
           />
         </Group>
         {options}
