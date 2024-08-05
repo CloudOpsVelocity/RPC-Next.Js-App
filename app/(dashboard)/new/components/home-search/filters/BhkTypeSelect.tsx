@@ -12,15 +12,18 @@ import {
 import styles from "./Style.module.css";
 import useSearchFilters from "@/app/hooks/search";
 import { SEARCH_FILTER_DATA } from "@/app/data/search";
+import { homeSearchFiltersAtom } from "@/app/store/home";
+import { useAtom } from "jotai";
 
 export function BasicMultiSelect() {
-  const { filters: f, setFilters, handleCheckboxClick } = useSearchFilters();
+  // const { filters: f, setFilters, handleCheckboxClick } = useSearchFilters();
+  const [f, dispatch] = useAtom(homeSearchFiltersAtom);
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
     onDropdownOpen: () => combobox.updateSelectedOptionIndex("active"),
   });
 
-  const values = f.unitTypes.map((itemId) => {
+  const values = f.bhk.map((itemId) => {
     const selectedItem = SEARCH_FILTER_DATA.bhkDetails.find(
       (item) => item.value === itemId
     );
@@ -29,7 +32,7 @@ export function BasicMultiSelect() {
         <Pill
           key={itemId}
           withRemoveButton
-          onRemove={() => handleCheckboxClick("unitTypes", itemId)}
+          onRemove={() => dispatch({ type: "ADD_BHK", payload: itemId })}
           classNames={{
             root: styles.pill,
           }}
@@ -45,10 +48,10 @@ export function BasicMultiSelect() {
     <Combobox.Option
       value={item.value}
       key={item.value}
-      active={f.unitTypes.includes(item.value)}
+      active={f.bhk.includes(item.value)}
     >
       <Group gap="sm">
-        <Checkbox checked={f.unitTypes.includes(item.value)} color="green" />
+        <Checkbox checked={f.bhk.includes(item.value)} color="green" />
         <span>{item.title}</span>
       </Group>
     </Combobox.Option>
@@ -58,7 +61,7 @@ export function BasicMultiSelect() {
     <Combobox
       store={combobox}
       onOptionSubmit={(val) => {
-        handleCheckboxClick("unitTypes", parseInt(val));
+        dispatch({ type: "ADD_BHK", payload: parseInt(val) });
       }}
       withinPortal={false}
       classNames={{

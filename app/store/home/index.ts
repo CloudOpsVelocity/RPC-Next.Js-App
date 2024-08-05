@@ -1,7 +1,7 @@
 import { atomWithReducer } from "jotai/utils";
 interface SearchState {
-  bhk: number | null;
-  unitTypes: number[];
+  bhk: number[];
+  propType: number | null;
   locality: string[];
   city: string | null;
   cg: string;
@@ -9,8 +9,8 @@ interface SearchState {
 }
 
 const initialState: SearchState = {
-  bhk: null,
-  unitTypes: [],
+  bhk: [],
+  propType: null,
   locality: [],
   city: null,
   cg: "buy",
@@ -20,7 +20,7 @@ const initialState: SearchState = {
 // Define the action types
 type Action =
   | { type: "ADD_BHK"; payload: number }
-  | { type: "ADD_UNIT_TYPE"; payload: number }
+  | { type: "ADD_PROP_TYPE"; payload: number }
   | { type: "ADD_LOCALITY"; payload: string }
   | { type: "SET_CITY"; payload: string }
   | { type: "REMOVE_LOCALITY"; payload: string }
@@ -31,10 +31,27 @@ type Action =
 // Define the reducer function
 const searchReducer = (state: SearchState, action: Action): SearchState => {
   switch (action.type) {
-    case "ADD_BHK":
-      return { ...state, bhk: action.payload };
-    case "ADD_UNIT_TYPE":
-      return { ...state, unitTypes: [...state.unitTypes, action.payload] };
+    case "ADD_BHK": {
+      const newBhk = action.payload;
+      // Check if the bhk value already exists
+      const bhkExists = state.bhk.includes(newBhk);
+      if (bhkExists) {
+        // If it exists, remove it
+        return {
+          ...state,
+          bhk: state.bhk.filter((bhk) => bhk !== newBhk),
+        };
+      } else {
+        // If it does not exist, add it
+        return {
+          ...state,
+          bhk: [...state.bhk, newBhk],
+        };
+      }
+    }
+    case "ADD_PROP_TYPE":
+      console.log(action.payload);
+      return { ...state, propType: action.payload };
     case "ADD_LOCALITY":
       return { ...state, locality: [...state.locality, action.payload] };
     case "SET_CITY":

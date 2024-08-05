@@ -7,17 +7,28 @@ import {
   parseDataProjectProps,
   propertyDetailsTypes,
 } from "@/app/data/projectDetails";
+import { useAtom } from "jotai";
+import { homeSearchFiltersAtom } from "@/app/store/home";
+import { Console } from "console";
 
-const keys = ["Apartment", "Villa", "Villament", "RowHouse", "Plot", "independent"];
+const keys = [
+  "Apartment",
+  "Villa",
+  "Villament",
+  "RowHouse",
+  "Plot",
+  "independent",
+];
 
 export function BasicSelect() {
-  const { filters: f, setFilters } = useSearchFilters();
+  // const { filters: f, setFilters } = useSearchFilters();
+  const [f, dispatch] = useAtom(homeSearchFiltersAtom);
 
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
   });
 
-  const value = f.propTypes;
+  const value = f.propType;
 
   const options = keys.map((item) => (
     <Combobox.Option
@@ -45,12 +56,12 @@ export function BasicSelect() {
       store={combobox}
       withinPortal={false}
       onOptionSubmit={(val) => {
-        setFilters({
-          ...f,
-          propTypes:
-            parseDataProjectProps[
-              val.toLocaleLowerCase() as keyof typeof parseDataProjectProps
-            ],
+        console.log(val);
+        dispatch({
+          type: "ADD_PROP_TYPE",
+          payload: parseDataProjectProps[
+            val.toLocaleLowerCase() as keyof typeof parseDataProjectProps
+          ] as number,
         });
         combobox.closeDropdown();
       }}
