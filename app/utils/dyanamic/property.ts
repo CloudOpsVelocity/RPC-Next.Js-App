@@ -25,7 +25,7 @@ function createPropertyString(data: Main): string {
   } else {
     return `${data.propName} | ${data.bhkName} | ${
       data.tower ? "Tower " + data.tower : ""
-    } | Floor ${data.atFloor === 0 ? "G" : data.atFloor} | Unit No. ${
+    } |At Floor ${data.atFloor === 0 ? "G" : data.atFloor} | Unit No. ${
       data.unitNumber
     } | ${data.facingName} | Area: ${formatNumberWithSuffix(data.sba)} sq.ft`;
   }

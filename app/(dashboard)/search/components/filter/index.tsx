@@ -33,7 +33,7 @@ const SearchDrawerHeader = ({ open, close }: any) => {
       </p>
       <div className="w-[100%] md:w-[789px] h-[50%] md:h-[379px] shrink-0 border rounded-[10px] ">
         <div className="  gap-[8px] px-[8px] border-[1px] border-solid flex items-center justify-between ">
-          <div className="gap-[8px]  flex items-center">
+          <div className="gap-[8px]  flex items-center w-[100%]">
             {" "}
             <Select
               label=""
@@ -80,6 +80,7 @@ const SearchDrawerHeader = ({ open, close }: any) => {
                 ))}
 
                 <PillsInput.Field
+                miw={406}
                   placeholder={
                     filters.locality.length > 0
                       ? "Add More"

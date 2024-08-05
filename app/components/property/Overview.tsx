@@ -9,6 +9,7 @@ import CompareList from "./actions/compareList";
 import ShortList from "./actions/shortList";
 import Message from "./actions/Message";
 import ReportSectionProperty from "./actions/Report";
+import { formatNumberWithSuffix } from "@/app/utils/numbers";
 
 export default function PropertyOverView({
   data,
@@ -26,7 +27,7 @@ export default function PropertyOverView({
         <div className="md:w-[80%]">
           <h2 className="text-[18px] sm:text-[24px] xl:text-[32px] text-[#001F35] font-[700] capitalize">
             <span className="lowercase">
-              {data.propTypeName === "Plot" ? data.plotArea + " sq.ft" : ""}
+              {data.propTypeName === "Plot" ? formatNumberWithSuffix(data.plotArea) + " sq.ft" : ""}
             </span>{" "}
             {data.bhkName} {data.propTypeName} For{" "}
             {data.cg === "S" ? " Sell" : " Rent"} In {data.ltName}

@@ -37,6 +37,7 @@ import PropertyHeading from "./heading";
 import { Main } from "@/app/validations/property";
 import { formatDateDDMMYYYY } from "@/app/utils/date";
 import { generatePropertyDetails } from "@/app/data/property";
+import { formatNumberWithSuffix } from "@/app/utils/numbers";
 const style = {
   card: "mr-[4%] mb-[1%]  p-[2%] md:p-[1%] bg-white mt-2 md:mt-1 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8] ",
   heading: {
@@ -53,7 +54,7 @@ export default function RoomDetails({ data }: { data: Main }) {
       <PropertyHeading
         title="Listing details"
         desc={`Check the details For ${
-          data.propTypeName === "Plot" ? data.plotArea + " sq.ft" : ""
+          data.propTypeName === "Plot" ? formatNumberWithSuffix(data.plotArea) + " sq.ft" : ""
         } ${data.bhkName ?? ""} ${data.propTypeName} For
         ${data.cg === "S" ? " Sell" : " Rent"}`}
         className="mb-[10px] xl:mb-[8px]"
@@ -365,8 +366,8 @@ const UnitBlock = ({ data }: { data: Main }) => {
 
         <p className={style.heading.p}>
           {data.propTypeName !== "Plot"
-            ? "Unit details including bhk, phase, tower,...etc"
-            : "Unit details including Unit Number, Phase, ...etc"}
+            ? "Unit Details Including BHK, Phase, Tower,...etc"
+            : "Unit Details Including Unit Number, Phase, ...etc"}
         </p>
 
         <div className="flex justify-start items-start flex-wrap   ">

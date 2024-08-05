@@ -11,7 +11,7 @@ import {
 import Image from "next/image";
 import { useAtom, useSetAtom } from "jotai";
 import { currentPhaseAtom, propCgIdAtom } from "@/app/store/vewfloor";
-import { formatCurrency } from "@/app/utils/numbers";
+import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
 import { useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
 import { floorPlansArray, selectedFloorAtom } from "@/app/store/floor";
 import { parseUnits } from "@/app/utils/unitparser";
@@ -177,7 +177,7 @@ export default function PropertyTypeDetailsCrad({
             )}
             <p className="text-[12px] lg:text-[20px] text-[#2A4C70] font-[500] flex justify-start items-start  ">
               <FlooringIcon className="w-[16px] h-[16px] lg:w-[24px] lg:h-[24px]" />
-              <span className="mr-[6px] ml-[6px]">{cg?.unitCount} </span> Units
+              <span className="mr-[6px] ml-[6px]">{cg? formatNumberWithSuffix(cg.unitCount):""} </span> Units
             </p>
             {propertyType === "rowHouse" || propertyType === "villa" ? (
               <p className="text-[12px] lg:text-[20px] text-[#2A4C70] font-[500] flex justify-start items-start  ">

@@ -10,7 +10,7 @@ import {
 import { Main } from "@/app/validations/types/project";
 import Image from "next/image";
 import SharePopup from "../atoms/SharePopup";
-import { formatCurrency } from "@/app/utils/numbers";
+import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
 import { formatDate } from "@/app/utils/date";
 import { getImageUrls } from "@/app/utils/image";
 import usePhaseWiseOverview from "@/app/hooks/usePhaseWiseOverview";
@@ -18,6 +18,7 @@ import styles from "@/app/styles/Carousel.module.css";
 import { currentBlockAtom, isScrollingAtom, stickyAtom } from "./navigation";
 import { useSetAtom } from "jotai";
 import Link from "next/link";
+import { NumberFormatter } from "@mantine/core";
 type Props = {
   projectDetails: Main | null;
   companyName: string;
@@ -145,7 +146,18 @@ const FirstBlock: React.FC<Props> = ({
                 {formatCurrency(projectDetails.maxPrice)}
               </h2>
               <p className=" md:text-right sm:text-[14px] xl:text-[24px] sm:font-[600] mb-[10px] md:mb-[20px] text-[#001F35] ">
-                {formatCurrency(projectDetails.basePrice)}/- Price per sqft onwards
+              <span className="text-[#001F35]  sm:text-[14px] xl:text-[24px] sm:font-[600] text-wrap not-italic font-medium leading-[normal]">
+
+              ₹{" "}
+                {
+                  <NumberFormatter
+                    thousandSeparator
+                    value={projectDetails.basePrice}
+                    thousandsGroupStyle="lakh"
+                  />
+                }{" "}
+                Base Price/sq.ft onwards
+              </span>
               </p>
 
               <p
@@ -159,7 +171,7 @@ const FirstBlock: React.FC<Props> = ({
                   alt="no of floors"
                   className=" xl:h-[24px] xl:w-[24px] w-[16px] h-[16px]  sm:h-[16px] sm:w-[16px] "
                 />
-                {projectDetails?.floorPlanCount || 0} Floor Plans
+                {formatNumberWithSuffix(projectDetails?.floorPlanCount) || 0} Floor Plans
               </p>
             </div>
           </div>

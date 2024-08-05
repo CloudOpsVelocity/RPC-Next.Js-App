@@ -43,7 +43,7 @@ export default async function Page({ params: { slug } }: Props) {
             {data?.data?.builderProjects && (
               <BuilderCarousel
                 type="proj"
-                title={`Newly launched PROJECTS `}
+                title={`Newly launched Projects `}
                 projName={`  ${data?.data?.userName}`}
                 content={`See other newly launched projects by ${data?.data?.userName}`}
                 data={data?.data?.builderProjects}

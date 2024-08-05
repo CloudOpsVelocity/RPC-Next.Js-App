@@ -7,6 +7,7 @@ import {
   RangeSlider,
   Select,
   em,
+  
 } from "@mantine/core";
 import classes from "@/app/styles/search.module.css";
 import useSearchFilters from "@/app/hooks/search";
@@ -80,7 +81,7 @@ const SearchDrawerHeader = ({ open, close }: any) => {
                 ))}
 
                 <PillsInput.Field
-                  placeholder={
+                    placeholder={
                     filters.locality.length > 0
                       ? "Add More"
                       : "Enter City,Locality & Project"

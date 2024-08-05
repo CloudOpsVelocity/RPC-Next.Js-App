@@ -19,6 +19,7 @@ import CompareList from "./actions/compareList";
 import { formatDateDDMMYYYY } from "@/app/utils/date";
 import Message from "./actions/Message";
 import ReportSection from "./actions/Report";
+import { formatNumberWithSuffix } from "@/app/utils/numbers";
 
 export default function Overview({
   maxPrice,
@@ -99,7 +100,7 @@ export default function Overview({
             key="totalUnits"
             icon={<TotalLandArea />} // Adjust icon
             title="Units in Projects"
-            value={`${totalUnit} Units`}
+            value={`${formatNumberWithSuffix(totalUnit)} Units`}
             className="mr-[5%] sm:mr-[3%] xl:mr-[5%] pt-[2%] mb-[3%] sm:mb-[1.5%] xl:mb-[3%]  "
           />
           <ProjBasicDetails

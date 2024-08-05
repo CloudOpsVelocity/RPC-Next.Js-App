@@ -15,7 +15,7 @@ import {
 import { Main } from "@/app/validations/property/index";
 import Image from "next/image";
 import SharePopup from "../atoms/SharePopup";
-import { formatCurrency } from "@/app/utils/numbers";
+import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
 import { formatDate } from "@/app/utils/date";
 import { getImageUrls } from "@/app/utils/image";
 import { calculatePerSqPrice } from "@/app/utils/price";
@@ -121,7 +121,7 @@ const PropertyFirstBlock: React.FC<Props> = ({
                   <h3 className="text-[18px] sm:text-[22px] xl:text-[28px] font-[700] text-[#001F35] break-words text-wrap w-full">
                     <span className="lowercase">
                       {projectDetails.propTypeName === "Plot"
-                        ? projectDetails.plotArea + " sq.ft"
+                        ? formatNumberWithSuffix(projectDetails.plotArea) + " sq.ft"
                         : ""}
                     </span>{" "}
                     {projectDetails.bhkName} {projectDetails.propTypeName} For{" "}
@@ -166,14 +166,20 @@ const PropertyFirstBlock: React.FC<Props> = ({
               </h2>
               {projectDetails.cg === "S" && (
                 <p className="text-[16px] md:text-right sm:text-[14px] xl:text-[24px] font-[600]   text-[#00487C] ">
+                  <span className="text-[#001F35] sm:text-[14px] xl:text-[24px] sm:font-[600] text-wrap not-italic font-medium leading-[normal]">
                   ₹{" "}
-                  {formatCurrency(calculatePerSqPrice(
-                    projectDetails.price,
-                    projectDetails.propTypeName === "Plot"
-                      ? projectDetails.plotArea
-                      : projectDetails.sba
-                  ))}
-                  /- Price per sqft onwards
+                  <NumberFormatter
+                    thousandSeparator
+                    value={
+                      projectDetails.propTypeName === "Plot"
+                        ? projectDetails.plotArea
+                        : projectDetails.sba
+                    }
+                    thousandsGroupStyle="lakh"
+                  />{" "}
+                  Base Price/sq.ft onwards
+                </span>
+
                 </p>
               )}
               {totalPrice ? (
