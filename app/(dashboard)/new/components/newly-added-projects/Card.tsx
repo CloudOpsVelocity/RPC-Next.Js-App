@@ -16,16 +16,15 @@ type Props = { item: any };
 export default function Card({ item }: Props) {
   let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/abc/banglore/whitefield/${item.projIdEnc}`;
   return (
-    <div className="w-[310px] sm:w-[631px] h-[326px] sm:h-[368px] shrink-0 relative">
+    <div className="w-[310px] sm:w-[631px] h-[326px] sm:h-[368px] shrink-0 relative"> 
       <BackgroundImage src={item.coverUrl} radius="sm" h={"100%"}>
-        <div className="p-6">
-          <img
-            src="https://im.proptiger.com/3/100683/13/sumadhura-infracon-23973255.jpeg?width=800&height=620"
-            alt=""
-            className="w-[45px] h-[45px] sm:w-[67px] sm:h-[67px] object-cover"
-          />
-        </div>
-        <div className="absolute right-0 top-0 sm:w-[560px] h-full  shrink-0  bg-gradient-to-l from-[#00121F] via-[rgba(59,70,98,0.86)] to-[#565d700a] text-right p-[12px] sm:p-[17px] flex flex-col justify-end sm:justify-between">
+        <img
+          src="https://im.proptiger.com/3/100683/13/sumadhura-infracon-23973255.jpeg?width=800&height=620"
+          alt=""
+          className="w-[45px] h-[45px] sm:w-[67px] sm:h-[67px] object-cover top-[12px] left-[12px] relative"
+        />
+        
+        <div className="absolute right-0 top-0 w-full sm:w-[560px] h-full p-[12px] shrink-0 bg-gradient-to-t sm:bg-gradient-to-l from-[#00121F] via-[rgba(59,70,98,0.86)] to-[#565d700a] text-right flex flex-col justify-end sm:justify-between">
           <div>
             <p className="text-white text-[16px] sm:text-[18px] not-italic font-extrabold leading-[normal] tracking-[0.64px] flex justify-end items-center">
               <div className="absolute  sm:static top-[80px] sm:top-5 right-1  inline-flex  gap-3 mr-2 sm:mr-6">
@@ -35,10 +34,11 @@ export default function Card({ item }: Props) {
                 />
                 <ShareBtn url={url} />
               </div>{" "}
-              {formatCurrency(item.minPrice)} - {formatCurrency(item.maxPrice)}
+              
+              {item.projName && item.projName.length > 20 ? `${item.projName.slice(0, 20)}...` : item.projName}
             </p>
             <p className="text-white text-[16px] sm:text-[18px] not-italic font-bold leading-[normal] tracking-[0.52px] mt-[8px] text-nowrap">
-              {item.projName && item.projName.length > 20 ? `${item.projName.slice(0, 20)}...` : item.projName}
+              {formatCurrency(item.minPrice)} - {formatCurrency(item.maxPrice)}
             </p>
             <p className="text-white text-[12px] sm:text-[18px] not-italic font-bold leading-[normal] tracking-[0.4px] mt-[8px] sm:mt-[8px]">
               {item.propTypes?.join(", ")}

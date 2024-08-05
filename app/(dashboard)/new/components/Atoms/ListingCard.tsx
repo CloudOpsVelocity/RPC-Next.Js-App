@@ -77,8 +77,12 @@ export default function ListingCard({ item }: Props) {
               )}
             </p>
 
+            <p className="text-[#001F35] text-[12px] sm:text-[14px] not-italic font-semibold leading-[normal] capitalize">
+              {item.propName}
+            </p>
+
            
-            <p className="text-[#242424] text-[9px] sm:text-sm not-italic font-semibold leading-[normal] capitalize">
+            <p className="text-[#242424] text-[9px] sm:text-[12px] not-italic font-semibold leading-[normal] capitalize">
               {item.cityName ?? "Banglore"}, {item.localityName}
             </p>
           </div>

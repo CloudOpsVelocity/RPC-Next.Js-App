@@ -14,7 +14,7 @@ export default function ListingCarousel({ data }: Props) {
       // slideSize="33.333333%"
       slideSize={{ base: "90%", sm: "50%", md: "33.333333%" }}
       slideGap="md"
-      loop
+      // loop
       align="start"
       slidesToScroll={1}
       mt={20}

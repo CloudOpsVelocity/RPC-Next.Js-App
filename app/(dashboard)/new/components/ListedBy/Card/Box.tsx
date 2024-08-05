@@ -10,7 +10,7 @@ type Props = {
 
 export default function Box({ content, image, link, title }: Props) {
   return (
-    <div className="flex flex-col p-[6px] sm:h-[126px] sm:m-[20px] justify-center items-start gap-2 sm:gap-4 rounded border border-[color:var(--stroke-blue-gradient,#41D1D4)] shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] sm:pl-[88px] sm:pr-5 sm:pt-[19px] sm:pb-[18px] border-solid bg-[#f2f7ff] relative max-w-[103px] sm:max-w-full sm:p-2 sm:mt-0">
+    <div className="flex flex-col p-[6px] sm:h-[126px] sm:m-[20px] justify-center items-start gap-[4px] rounded border border-[color:var(--stroke-blue-gradient,#41D1D4)] shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] sm:pl-[88px] sm:pr-5 sm:pt-[19px] sm:pb-[18px] border-solid bg-[#f2f7ff] relative max-w-[103px] sm:max-w-[296px] sm:p-2 sm:mt-0 ">
       <Image
         src={`${process.env.NEXT_PUBLIC_IMG_BASE}${image}`}
         alt="box"

@@ -132,7 +132,7 @@ const Gallery: React.FC<GalleryProps> = ({
               height={100}
               slideSize="15.333333%"
               slideGap="xs"
-              loop
+              // loop
               mt={"lg"}
               maw={isMobile ? 300 : 1200}
               px={isMobile ? "50px" : "90px"}

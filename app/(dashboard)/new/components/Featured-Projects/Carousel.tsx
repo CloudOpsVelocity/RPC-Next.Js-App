@@ -9,9 +9,9 @@ type Props = {};
 export default function FeatureCarousel({}: Props) {
   return (
     <Carousel
-      slideSize="33.333333%"
-      slideGap="md"
-      loop
+      slideSize={{ base: "90%", sm: "50%", md: "33.333333%" }}
+      slideGap={{ base: 0, sm: "md" }}
+      // loop
       align="start"
       slidesToScroll={1}
       mt={20}
