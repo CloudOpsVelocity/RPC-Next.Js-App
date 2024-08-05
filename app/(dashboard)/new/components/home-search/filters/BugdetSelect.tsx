@@ -10,6 +10,7 @@ import {
 import styles from "./Style.module.css";
 import { useAtom } from "jotai";
 import { homeSearchFiltersAtom } from "@/app/store/home";
+
 const MULTIPLIER = 10000000;
 const groceries = [
   "5L",
@@ -70,10 +71,10 @@ export function BasicBudgetSelect() {
 
   const filteredOptions = groceries.filter((item) => {
     const value = map.get(item)?.value ?? 0;
-    if (focusedInput === "max") {
-      return value > minValue; // Show options greater than or equal to minValue
+    if (focusedInput === "max" || maxValue === 0) {
+      return value >= minValue; // Show options greater than or equal to minValue
     } else if (focusedInput === "min") {
-      return value < maxValue; // Show options less than or equal to maxValue
+      return value <= maxValue; // Show options less than or equal to maxValue
     } else {
       // Show all options if no input is focused
       return value >= minValue && value <= maxValue;
@@ -165,23 +166,23 @@ export function BasicBudgetSelect() {
             value={minValue}
             onChange={(val) => handleMinChange(val as number)}
             onFocus={() => setFocusedInput("min")}
-            max={f.bugdetValue[1]}
+            max={f.bugdetValue[1] || 60 * MULTIPLIER} // Set max based on current filter values
             clampBehavior="strict"
             thousandSeparator=","
             allowDecimal={false}
             allowNegative={false}
           />
           <NumberInput
-            clampBehavior="strict"
             placeholder="Max Price"
             hideControls
             value={maxValue}
             onChange={(val) => handleMaxChange(val as number)}
             onFocus={() => setFocusedInput("max")}
+            min={f.bugdetValue[0] || 0} // Set min based on current filter values
+            clampBehavior="strict"
             thousandSeparator=","
             allowDecimal={false}
             allowNegative={false}
-            min={f.bugdetValue[0]}
           />
         </Group>
         {options}
