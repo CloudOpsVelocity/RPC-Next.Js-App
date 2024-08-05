@@ -42,11 +42,11 @@ const HomeSearch = () => {
       <div className="w-full">
         <div className="flex flex-col items-start sm:gap-3 self-stretch pl-[11px] pr-2.5 pt-0 pb-[13px] rounded-lg border-[0.5px] border-solid border-[#A6BDDF] bg-[#f2f7ff] sm:h-[200px] w-full">
           <Tabs />
-          <p className="inline-flex sm:hidden justify-center items-center text-[#242424] text-[12px] not-italic font-medium gap-1">
+          <p className="inline-flex sm:hidden justify-center items-center text-[#242424] text-[14px] not-italic font-medium gap-1">
             {config.homeIcon} All Residential
           </p>
           <div className="flex items-center gap-2.5 rounded shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] px-1.5 py-1 border-[0.5px] border-solid border-[#819CA9] bg-white w-full sm:w-auto">
-            <div className="hidden sm:flex items-center gap-[5px] rounded p-2 border-r-[0.5px] border-r-gray-400 border-solid text-[#242424] sm:text-lg not-italic font-medium text-[12px]">
+            <div className="hidden sm:flex items-center gap-[5px] rounded p-2 border-r-[0.5px] border-r-gray-400 border-solid text-[#242424] sm:text-[14px] not-italic font-medium text-[12px]">
               {config.homeIcon}{" "}
               <div className="text-nowrap">All Residential</div>
             </div>
@@ -64,7 +64,7 @@ const HomeSearch = () => {
                   <a
                     href={`/search?${handleSearch()}`}
                     target="_blank"
-                    className={`inline-flex justify-center items-center gap-2.5 rounded p-1.5 md:p-2.5  text-white  text-[12px]  2xl:text-xl font-bold bg-[#0073c6]`}
+                    className={`inline-flex justify-center items-center rounded sm:p-[6px] sm:pl-[16px] sm:pr-[16px] text-white text-[16px]  2xl:text-xl font-bold bg-[#0073c6]`}
                   >
                     Search
                   </a>
@@ -94,18 +94,10 @@ export default HomeSearch;
 
 const config = {
   homeIcon: (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      className="h-[12px] w-[12px] xl:h-[24px] xl:w-[24px]"
+    <svg className="min-h-[16px] min-w-[16px]"
+      xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none"
     >
-      <path
-        d="M12.459 1.66059C12.3259 1.55684 12.162 1.50049 11.9932 1.50049C11.8245 1.50049 11.6606 1.55684 11.5275 1.66059L0.75 10.0643L1.68225 11.2433L3 10.2158V19.5001C3.00079 19.8977 3.15908 20.2787 3.44022 20.5599C3.72135 20.841 4.10242 20.9993 4.5 21.0001H19.5C19.8976 20.9993 20.2787 20.841 20.5598 20.5599C20.8409 20.2787 20.9992 19.8977 21 19.5001V10.2226L22.3177 11.2501L23.25 10.0711L12.459 1.66059ZM13.5 19.5001H10.5V13.5001H13.5V19.5001ZM15 19.5001V13.5001C15 13.1023 14.842 12.7207 14.5607 12.4394C14.2794 12.1581 13.8978 12.0001 13.5 12.0001H10.5C10.1022 12.0001 9.72064 12.1581 9.43934 12.4394C9.15804 12.7207 9 13.1023 9 13.5001V19.5001H4.5V9.04659L12 3.20409L19.5 9.05409V19.5001H15Z"
-        fill="#242424"
-      />
+      <path d="M8.306 1.10722C8.21728 1.03805 8.108 1.00049 7.9955 1.00049C7.883 1.00049 7.77372 1.03805 7.685 1.10722L0.5 6.70972L1.1215 7.49572L2 6.81072V13.0002C2.00053 13.2653 2.10606 13.5193 2.29348 13.7067C2.4809 13.8942 2.73495 13.9997 3 14.0002H13C13.2651 13.9997 13.5191 13.8942 13.7065 13.7067C13.8939 13.5193 13.9995 13.2653 14 13.0002V6.81522L14.8785 7.50022L15.5 6.71422L8.306 1.10722ZM9 13.0002H7V9.00022H9V13.0002ZM10 13.0002V9.00022C10 8.73501 9.89464 8.48065 9.70711 8.29312C9.51957 8.10558 9.26522 8.00022 9 8.00022H7C6.73478 8.00022 6.48043 8.10558 6.29289 8.29312C6.10536 8.48065 6 8.73501 6 9.00022V13.0002H3V6.03122L8 2.13622L13 6.03622V13.0002H10Z" fill="#242424"/>
     </svg>
   ),
   searchIcon: (

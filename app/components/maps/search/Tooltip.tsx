@@ -6,8 +6,16 @@ type Props = {
 };
 
 export default function TooltipProj({ data }: Props) {
-  const { projName, minPrice, maxPrice, city, state, locality, builderName, propTypes } =
-    data;
+  const {
+    projName,
+    minPrice,
+    maxPrice,
+    city,
+    state,
+    locality,
+    builderName,
+    propTypes,
+  } = data;
   return (
     <div className="p-[2px] xl:p-1 !rounded-2xl">
       <p className="text-[#001F35] text-[12px] xl:text-base not-italic font-semibold capitalize">
@@ -19,10 +27,11 @@ export default function TooltipProj({ data }: Props) {
       <p className="text-[#242424]  text-[12px] xl:text-base font-medium italic">
         {city}, {state} ,{locality}
       </p>
-     {propTypes?.length> 0 && 
-     <p className="text-[#001F35]  text-[12px] xl:text-base not-italic font-medium">
-        Available Property: {propTypes?.join(",")}
-      </p>}
+      {propTypes?.length > 0 && (
+        <p className="text-[#001F35]  text-[12px] xl:text-base not-italic font-medium text-wrap max-w-[280px]">
+          Available Property: {propTypes?.join(",")}
+        </p>
+      )}
       <p className="text-[#202020]  text-[12px] xl:text-sm not-italic font-normal">
         Posted By:
         <span className="text-[#202020]  text-[12px] xl:text-sm not-italic font-semibold">
@@ -32,6 +41,4 @@ export default function TooltipProj({ data }: Props) {
       </p>
     </div>
   );
-};
-
-
+}

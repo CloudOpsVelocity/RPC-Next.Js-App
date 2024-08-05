@@ -32,6 +32,47 @@
   font-weight: 500;
   line-height: normal;
 }
+
+.dropdown {
+  background-color: #f3f3f3;
+  min-width: fit-content;
+}
+.option {
+  color: #242424;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  display: flex;
+  text-wrap: nowrap;
+  align-items: center;
+}
+
+.minMaxInput {
+  background-color: #f3f3f3;
+  color: #242424;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  width: 67px;
+}
+
+.minMaxInput::placeholder {
+  color: #242424 !important;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.pill {
+  background: white;
+}
+
 .pill {
   background: white;
 }

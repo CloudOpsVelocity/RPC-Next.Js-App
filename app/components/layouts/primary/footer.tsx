@@ -8,20 +8,20 @@ export default function Footer({}: Props) {
   return (
     <div className=" w-full bg-[#E3E3E3] flex justify-between items-start flex-col p-[4%] flex-wrap ">
       <div className="w-full flex justify-between items-start flex-wrap flex-row ">
-        <div className=" w-[100%]  lg:w-[30%] top-[64px] left-[104px] min-w-[202px] md:min-w-[402px] md:w-[60%] mb-[4%]">
+        <div className=" w-[100%]  lg:w-[30%] top-[64px] left-[104px] min-w-[202px] md:max-w-[350px] md:w-[60%] mb-[4%]">
           <Image
             src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/grp-logo/Logo-without-background.png`}
             width={180}
             height={180}
             alt="logo"
           />
-          <p className=" top-[68px] left-0 [font-family:'Montserrat-Medium',Helvetica] font-medium text-[#666666] text-[18px] leading-[26px]  xl:text-[24px] tracking-[0] xl:leading-[36px] mt-5">
+          <p className=" top-[68px] left-0 [font-family:'Montserrat-Medium',Helvetica]  font-medium text-[#666666] text-[18px] leading-[26px]  xl:text-[20px] tracking-[0] xl:leading-[36px] mt-5">
             We pride ourselves on delivering exceptional customer services &amp;
             building lasting relationships with our clients
           </p>
         </div>
 
-        <div className=" w-[10%] left-[653px]  top-[64px] min-w-[200px] mb-[4%]">
+        <div className=" w-[10%] left-[653px] top-[64px] min-w-[180px] mb-[4%]">
           <h2 className=" mb-[6%] top-0 left-0 [font-family:'Montserrat-Bold',Helvetica] font-bold text-[#001153] text-[26px] tracking-[0] leading-[22px] whitespace-nowrap">
             Quick Link
           </h2>
@@ -59,7 +59,7 @@ export default function Footer({}: Props) {
           </div>
         </div>
 
-        <div className=" w-[10%] left-[1013px]  top-[64px] min-w-[200px] mb-[4%]">
+        <div className=" w-[10%] left-[1013px]  top-[64px] min-w-[180px] mb-[4%]">
           <h1 className=" mb-[6%] top-0 left-0 [font-family:'Montserrat-Bold',Helvetica] font-bold text-[#001153] text-[26px] tracking-[0] leading-[22px] whitespace-nowrap">
             Support
           </h1>
@@ -90,7 +90,7 @@ export default function Footer({}: Props) {
           </div>
         </div>
 
-        <div className=" w-[10%] left-[1013px]  top-[64px] min-w-[200px] mb-[4%]">
+        <div className=" w-[10%] left-[1013px]  top-[64px] min-w-[180px] mb-[4%]">
           <h1 className=" mb-[6%] top-0 left-0 [font-family:'Montserrat-Bold',Helvetica] font-bold text-[#001153] text-[26px] tracking-[0] leading-[22px] whitespace-nowrap">
             Legal
           </h1>

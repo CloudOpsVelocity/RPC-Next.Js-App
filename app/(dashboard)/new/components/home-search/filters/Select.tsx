@@ -8,7 +8,7 @@ import {
   propertyDetailsTypes,
 } from "@/app/data/projectDetails";
 
-const keys = ["Apartment", "Villa", "RowHouse", "Plot"];
+const keys = ["Apartment", "Villa", "Villament", "RowHouse", "Plot", "independent"];
 
 export function BasicSelect() {
   const { filters: f, setFilters } = useSearchFilters();

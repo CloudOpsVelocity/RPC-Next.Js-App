@@ -17,11 +17,10 @@ import "leaflet-defaulticon-compatibility";
 import L from "leaflet";
 import { useMediaQuery } from "@mantine/hooks";
 import { em } from "@mantine/core";
-import { useAtomValue } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import selectedSearchAtom from "@/app/store/search/map";
 import MarkerClusterGroup from "react-leaflet-cluster";
 import TooltipProj from "./Tooltip";
-import { useSearchParams, useParams } from "next/navigation";
 import TooltipProp from "./ToolltipProp";
 
 interface Cluster {
@@ -76,7 +75,7 @@ const MapContent = ({ data }: any) => {
     iconAnchor: [19, 38],
     popupAnchor: [0, -38],
   });
-  const selected = useAtomValue(selectedSearchAtom);
+  const [selected, setSelectedValue] = useAtom(selectedSearchAtom);
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
   const map = useMap();
   useEffect(() => {
@@ -89,18 +88,18 @@ const MapContent = ({ data }: any) => {
       map.setView([parseFloat(data[0]?.lat), parseFloat(data[0]?.lang)], 14);
     }
   }, [data]);
-
+  console.log(selected);
   // 1. FIND IS IT PROPERTY OR PRJECT
   // 2. CREATE TOOLTIPS FOR EACH SECTION
-
   return (
     <>
       {data &&
         data.length > 0 &&
         data?.map((item: any, index: number) => {
-          console.log({ item });
           const isProp = !!item.propIdEnc;
           const title = selected?.type;
+          const itemId = item[title === "proj" ? "projIdEnc" : "propIdEnc"];
+          const selectedId = selected?.reqId;
           return (
             <Marker
               key={index}
@@ -108,16 +107,26 @@ const MapContent = ({ data }: any) => {
                 parseFloat(item?.lat || 0),
                 parseFloat(item?.lang || 0),
               ]}
+              eventHandlers={{
+                click: () => {
+                  setSelectedValue({
+                    projOrPropName: item.projName,
+                    lat: item.lat,
+                    lang: item.lang,
+                    type: isProp ? "prop" : "proj",
+                    reqId: itemId,
+                  });
+                },
+              }}
               icon={isMobile ? MobileIcon : MapIcon}
             >
-              {/* {selected?.projOrPropName ===
-                (title === "proj" ? item.projName : item.propName) && (
+              {selectedId && itemId && selectedId === itemId && (
                 <Tooltip
                   opacity={1}
                   permanent={true}
                   direction="top"
                   offset={[10, -35]}
-                  className="min-w-[200px]"
+                  className="min-w-fit"
                 >
                   {!isProp ? (
                     <TooltipProj data={item} />
@@ -125,7 +134,7 @@ const MapContent = ({ data }: any) => {
                     <TooltipProp data={item} />
                   )}
                 </Tooltip>
-              )} */}
+              )}
 
               <Tooltip
                 opacity={1}

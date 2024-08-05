@@ -47,7 +47,6 @@ const LeftSideBlock = ({ mutate }: Props) => {
       handleAppliedFilters();
     }
   };
-
   return (
     <div className="md:w-[100%] sm:w-[100%]  md:bg-white  min-w-[400px] md:min-w-[500px] mt-9">
       <div className="flex md:flex-row flex-col-reverse">
@@ -57,26 +56,6 @@ const LeftSideBlock = ({ mutate }: Props) => {
           defaultValue="All"
           classNames={S}
         >
-          {/*  <Tabs.List>
-          <h3 className="mt-1.5 text-black text-base md:text-xl   font-medium ml-3 w-full md:w-auto mb-2 md:mb-0">
-            Select the listings Posted by:
-          </h3>
-          {TabData.map((eachItem, index) => {
-            return (
-              <Tabs.Tab
-                key={index}
-                value={eachItem.value}
-                classNames={{
-                  tab: eachItem.value === "All" ? S.hidden : S.tab,
-                  tabLabel: S.tabLabel,
-                }}
-              >
-                {eachItem.label}
-              </Tabs.Tab>
-            );
-          })}
-          <SortBy />
-        </Tabs.List> */}
           <NewTabCon
             onTabChange={onTabChange}
             selectedProtype={params.listedBy ?? "All"}
@@ -232,7 +211,6 @@ import Loading from "@/app/components/atoms/Loader";
 import { Vast_Shadow } from "next/font/google";
 import { useIntersection } from "@mantine/hooks";
 import SearchSkeleton from "@/app/components/atoms/skeleton/search";
-import SortBy from "../../components/leftsection/SortBy";
 
 const TabData = [
   {

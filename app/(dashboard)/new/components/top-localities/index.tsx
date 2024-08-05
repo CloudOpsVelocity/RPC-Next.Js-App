@@ -9,7 +9,7 @@ export default function TopLocalities({}: Props) {
     <div className="mt-[80px] w-[90%] m-auto">
       <MainHeading
         title={"Top Localities"}
-        content={"Lorem ipsum dolor, sit amet consectetur adipisicing elit. "}
+        content={"Top Localities for Your Perfect Home"}
       />
       <ListBox />
     </div>

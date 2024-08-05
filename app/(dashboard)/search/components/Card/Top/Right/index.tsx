@@ -26,7 +26,7 @@ export default function TopRightSection({
   data,
   propIdEnc,
   postedDate,
-  propName
+  propName,
 }: Props) {
   const setSelected = useSetAtom(selectedSearchAtom);
   const [sharePopupData, setSharePopup] = useAtom(searchShareAtom);
@@ -35,7 +35,7 @@ export default function TopRightSection({
       ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/abc/banglore/whitefield/${projIdEnc}`
       : `${process.env.NEXT_PUBLIC_BACKEND_URL}/listing/whitefield/${propIdEnc}`;
   const isMobile = useMediaQuery("(max-width: 601px)");
-  const projOrPropName= type === "proj" ?  projName : propName;
+  const projOrPropName = type === "proj" ? projName : propName;
   return (
     <div
       onClick={(e) => e.stopPropagation()}
@@ -48,18 +48,17 @@ export default function TopRightSection({
             <div className="flex flex-row md:flex-col gap-3 align-baseline items-start">
               <button
                 className="max-w-fit px-[1px] py-[1px]  rounded  text-[#242424] text-sm not-italic font-semibold my-1  md:mb-1  gradient"
-                onClick={() =>
-                  
+                onClick={() => {
                   setSelected({
                     agentListing,
                     ownerListing,
                     projOrPropName,
                     lat,
                     lang,
-                    type
-                    
-                  })
-                }
+                    type,
+                    reqId: type === "proj" ? projIdEnc : propIdEnc,
+                  });
+                }}
               >
                 <div className="px-[1px] py-[1px] inline-flex justify-center items-center bg-[#F0F9FF] gap-0.5 rounded">
                   {" "}
@@ -78,7 +77,7 @@ export default function TopRightSection({
                     setSharePopup({ ...sharePopupData, opened: true, url })
                   }
                 >
-                  <ShareIcon/>
+                  <ShareIcon />
                 </button>
               </div>
             </div>
@@ -102,14 +101,14 @@ export default function TopRightSection({
             <button
               className="max-w-fit px-[1px] py-[1px] rounded text-[#242424] text-sm not-italic font-semibold my-2 md:mb-1 gradient"
               onClick={() =>
-                
                 setSelected({
                   agentListing,
                   ownerListing,
                   projOrPropName,
                   lat,
                   lang,
-                  type
+                  type,
+                  reqId: type === "proj" ? projIdEnc : propIdEnc,
                 })
               }
             >

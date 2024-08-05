@@ -6,18 +6,18 @@ type Props = { name: string; id: number; type: string };
 export default function Box({ id, name }: Props) {
   return (
     <a
-      className="flex min-w-[240px] sm:min-w-[276px] flex-col items-center justify-center gap-[18px] text-[#242424]  text-base sm:text-[22px] not-italic font-semibold leading-[normal]"
+      className="flex flex-col items-center justify-center gap-[18px] text-[#242424]  text-base sm:text-[20px] not-italic font-semibold leading-[normal]"
       target="_blank"
       href={`${process.env.NEXT_PUBLIC_BACKEND_URL}/search?localities=${name}%2B${id}`}
     >
       <Image
         src={"/test.jpg"}
         alt="box"
-        width={276}
-        height={276}
-        className="h-[240px] sm:h-[276px] self-stretch border-[color:var(--stroke-blue-gradient,#41D1D4)] shadow-[0px_4px_25px_0px_rgba(194,194,194,0.76)] rounded-full border-4 border-solid"
+        width={180}
+        height={180}
+        className="h-[80px] sm:h-[180px] min-w-[80px] sm:min-w-[180px] self-stretch border-[color:var(--stroke-blue-gradient,#41D1D4)] shadow-[0px_4px_25px_0px_rgba(194,194,194,0.76)] rounded-full border-4 border-solid"
       />
-      <p className="inline-flex gap-2 capitalize">
+      <p className="flex justify-center items-center gap-2 text-nowrap capitalize text-[10px] sm:text-[20px] ">
         {config.locationIcon}
         {name}
       </p>
@@ -29,11 +29,11 @@ const config = {
   locationIcon: (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="32"
-      height="32"
+      width="24"
+      height="24"
       viewBox="0 0 32 32"
       fill="none"
-      className="h-[20px] w-[20px] sm:h-[32px] sm:w-[32px]"
+      className="h-[20px] w-[20px] sm:h-[24px] sm:w-[24px]"
     >
       <path
         d="M16 18C15.0111 18 14.0444 17.7068 13.2222 17.1574C12.3999 16.6079 11.759 15.8271 11.3806 14.9134C11.0022 13.9998 10.9031 12.9945 11.0961 12.0246C11.289 11.0546 11.7652 10.1637 12.4645 9.46447C13.1637 8.76521 14.0546 8.289 15.0246 8.09608C15.9945 7.90315 16.9998 8.00217 17.9134 8.3806C18.8271 8.75904 19.6079 9.39991 20.1574 10.2222C20.7068 11.0444 21 12.0111 21 13C20.9984 14.3256 20.4711 15.5964 19.5338 16.5338C18.5964 17.4711 17.3256 17.9984 16 18ZM16 10C15.4067 10 14.8266 10.1759 14.3333 10.5056C13.8399 10.8352 13.4554 11.3038 13.2284 11.852C13.0013 12.4001 12.9419 13.0033 13.0576 13.5853C13.1734 14.1672 13.4591 14.7018 13.8787 15.1213C14.2982 15.5409 14.8328 15.8266 15.4147 15.9424C15.9967 16.0581 16.5999 15.9987 17.1481 15.7716C17.6962 15.5446 18.1648 15.1601 18.4944 14.6667C18.8241 14.1734 19 13.5933 19 13C18.9992 12.2046 18.6829 11.442 18.1204 10.8796C17.558 10.3171 16.7954 10.0008 16 10Z"
