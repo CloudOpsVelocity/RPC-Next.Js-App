@@ -1,6 +1,10 @@
 import React, { useRef } from "react";
 import { Select, Tooltip } from "@mantine/core";
-import { DropDownIcon, ImgCarouselIcon, PrevCarouselIcon } from "../../images/commonSvgs";
+import {
+  DropDownIcon,
+  ImgCarouselIcon,
+  PrevCarouselIcon,
+} from "../../images/commonSvgs";
 import { filterKeysDetails, projectprops } from "../../data/projectDetails";
 import { atom, useAtom } from "jotai";
 import { selectedFloorAtom } from "@/app/store/floor";

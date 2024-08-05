@@ -197,7 +197,6 @@ export default function FloorplansBlock({
     const filteredFloors = projectUnitsData.filter(
       (floor: any) => floor.unitNumber === selectedFloor.unitNumber
     );
-    console.log(filteredFloors);
     setFloorsArray(filteredFloors);
   };
   const [bhk, setBhk] = useState("0");
