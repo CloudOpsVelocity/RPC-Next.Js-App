@@ -8,7 +8,6 @@ import {
   Popup,
   Tooltip,
   useMap,
-  
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css"; // Import Leaflet CSS
 import { LatLngTuple, divIcon, point } from "leaflet";
@@ -86,45 +85,63 @@ const MapContent = ({ data }: any) => {
     }
   }, [selected, map]);
   useEffect(() => {
-    if (data&&data[0]) {
+    if (data && data[0]) {
       map.setView([parseFloat(data[0]?.lat), parseFloat(data[0]?.lang)], 14);
     }
   }, [data]);
 
-  // 1. FIND IS IT PROPERTY OR PRJECT 
-  // 2. CREATE TOOLTIPS FOR EACH SECTION 
+  // 1. FIND IS IT PROPERTY OR PRJECT
+  // 2. CREATE TOOLTIPS FOR EACH SECTION
 
   return (
     <>
       {data &&
         data.length > 0 &&
         data?.map((item: any, index: number) => {
-          console.log({item})
-          const isProp = !!item.propIdEnc
-          const title = selected?.type
+          console.log({ item });
+          const isProp = !!item.propIdEnc;
+          const title = selected?.type;
           return (
-          <Marker
-            key={index}
-            position={[parseFloat(item?.lat || 0), parseFloat(item?.lang || 0)]}
-            icon={isMobile ? MobileIcon : MapIcon}
-          >
-           {selected?.projOrPropName === ((title === "proj" ? item.projName : item.propName)) && (
-            <Tooltip
-              opacity={1}
-              permanent={true}
-              direction="top"
-              offset={[10, -35]}
+            <Marker
+              key={index}
+              position={[
+                parseFloat(item?.lat || 0),
+                parseFloat(item?.lang || 0),
+              ]}
+              icon={isMobile ? MobileIcon : MapIcon}
             >
-              {!isProp ? <TooltipProj data={item}/> : <TooltipProp data={item} />}
-            </Tooltip>
-          )}
+              {/* {selected?.projOrPropName ===
+                (title === "proj" ? item.projName : item.propName) && (
+                <Tooltip
+                  opacity={1}
+                  permanent={true}
+                  direction="top"
+                  offset={[10, -35]}
+                  className="min-w-[200px]"
+                >
+                  {!isProp ? (
+                    <TooltipProj data={item} />
+                  ) : (
+                    <TooltipProp data={item} />
+                  )}
+                </Tooltip>
+              )} */}
 
-            <Tooltip
-             opacity={1} direction="top" offset={[10, -35]}>
-            {!isProp ? <TooltipProj data={item}/> : <TooltipProp data={item} />}
-            </Tooltip>
-          </Marker>
-        )})}
+              <Tooltip
+                opacity={1}
+                direction="top"
+                offset={[10, -35]}
+                className="min-w-fit"
+              >
+                {!isProp ? (
+                  <TooltipProj data={item} />
+                ) : (
+                  <TooltipProp data={item} />
+                )}
+              </Tooltip>
+            </Marker>
+          );
+        })}
     </>
   );
 };

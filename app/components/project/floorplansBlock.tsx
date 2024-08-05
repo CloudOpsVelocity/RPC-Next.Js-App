@@ -88,8 +88,10 @@ export default function FloorplansBlock({
     ...RTK_CONFIG,
   });
   const types =
-    selectedPhase &&
-    Object?.keys(selectedPhase.propTypeOverview)
+    selectedPhase?.propTypeOverview &&
+    Object?.keys(
+      selectedPhase?.propTypeOverview && selectedPhase.propTypeOverview
+    )
       .map((v) => {
         if (selectedPhase?.propTypeOverview[v].unitTypes) {
           return v;
