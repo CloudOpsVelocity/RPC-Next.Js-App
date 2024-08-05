@@ -328,9 +328,9 @@ export async function generateMetadata(
   // City
 
   return {
-    title: `${data.projectName} ${data.availableProperties.join(
-      " "
-    )} for sale in ${data.localityName} ${data.cityName}`,
+    title: `${data?.projectName} ${
+      data.availableProperties && data?.availableProperties?.join(" ")
+    } for sale in ${data.localityName} ${data.cityName}`,
     description: `${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`,
   };
 }

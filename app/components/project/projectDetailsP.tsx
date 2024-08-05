@@ -47,8 +47,10 @@ export default function ProjectDetailsP({
   const propertyTypeOrder = ["apt", "rowHouse", "villa", "vlmt", "plot"];
   const orderedPropertyTypes =
     selectedPhase &&
-    propertyTypeOrder.filter((propertyType) =>
-      Object.keys(selectedPhase.propTypeOverview).includes(propertyType)
+    propertyTypeOrder.filter(
+      (propertyType) =>
+        selectedPhase.propTypeOverview &&
+        Object.keys(selectedPhase.propTypeOverview).includes(propertyType)
     );
   return (
     <div
