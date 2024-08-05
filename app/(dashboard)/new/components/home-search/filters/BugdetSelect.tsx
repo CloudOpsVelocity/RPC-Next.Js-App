@@ -11,7 +11,7 @@ import styles from "./Style.module.css";
 import { useAtom } from "jotai";
 import { homeSearchFiltersAtom } from "@/app/store/home";
 
-const MULTIPLIER = 10000000;
+const MULTIPLIER = 100000;
 const groceries = [
   "5L",
   "10L",
@@ -64,6 +64,7 @@ export function BasicBudgetSelect() {
   const [f, dispatch] = useAtom(homeSearchFiltersAtom);
   const [minValue, setMinValue] = useState<number>(f.bugdetValue[0]);
   const [maxValue, setMaxValue] = useState<number>(f.bugdetValue[1]);
+  console.log(minValue);
   const [focusedInput, setFocusedInput] = useState<"min" | "max" | null>(null);
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
@@ -72,9 +73,9 @@ export function BasicBudgetSelect() {
   const filteredOptions = groceries.filter((item) => {
     const value = map.get(item)?.value ?? 0;
     if (focusedInput === "max" || maxValue === 0) {
-      return value >= minValue; // Show options greater than or equal to minValue
+      return value > minValue; // Show options greater than or equal to minValue
     } else if (focusedInput === "min") {
-      return value <= maxValue; // Show options less than or equal to maxValue
+      return value < maxValue; // Show options less than or equal to maxValue
     } else {
       // Show all options if no input is focused
       return value >= minValue && value <= maxValue;
@@ -166,7 +167,7 @@ export function BasicBudgetSelect() {
             value={minValue}
             onChange={(val) => handleMinChange(val as number)}
             onFocus={() => setFocusedInput("min")}
-            max={f.bugdetValue[1] || 60 * MULTIPLIER} // Set max based on current filter values
+            max={f.bugdetValue[1] - 1 || 60 * MULTIPLIER} // Set max based on current filter values
             clampBehavior="strict"
             thousandSeparator=","
             allowDecimal={false}
@@ -178,8 +179,8 @@ export function BasicBudgetSelect() {
             value={maxValue}
             onChange={(val) => handleMaxChange(val as number)}
             onFocus={() => setFocusedInput("max")}
-            min={f.bugdetValue[0] || 0} // Set min based on current filter values
             clampBehavior="strict"
+            max={6000 * MULTIPLIER}
             thousandSeparator=","
             allowDecimal={false}
             allowNegative={false}

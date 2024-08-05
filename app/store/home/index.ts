@@ -14,7 +14,7 @@ const initialState: SearchState = {
   locality: [],
   city: null,
   cg: "buy",
-  bugdetValue: [500000, 60000000000],
+  bugdetValue: [500000, 600000000],
 };
 
 // Define the action types
