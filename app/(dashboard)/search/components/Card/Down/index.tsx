@@ -24,6 +24,7 @@ export default function CardDownSection({
   propTypeName,
   ltName,
   cg,
+  builderId,
   postedByName,
   postedBy,
 }: any) {
@@ -35,15 +36,20 @@ export default function CardDownSection({
   const [, { open }] = useReqCallPopup();
   const setPopReqData = useSetAtom(NearByDataAtom);
   const handleOpen = () => {
-    // open(
-    //   type === "proj" ? type : "prop",
-    //   reqId,
-    //   "projCard",
-    //   postedBy === "Agent" ? "A" : "I"
-    // );
+   
+/* 
+         open({
+      modal_type: type === "proj" ? "PROJECT_REQ_CALLBACK" : "PROPERTY_REQ_CALLBACK" ,
+      postedByName: builderName,
+      postedId: builderId,
+      reqId: reqId,
+      source:type === "proj" ? "propCard" : "propCard",
+      title:type === "proj" ? projName  : propTypeName,
+    });
+    */
   };
   return (
-    <div className="bg-[#DDF0FD] flex items-center gap-1 xl:gap-[372px] xl:px-[17px] xl:py-[9px] w-full p-2 justify-end ">
+    <div className="bg-[#DDF0FD] flex items-start gap-1 xl:gap-[372px] xl:px-[17px] xl:py-[9px] w-full p-2 justify-between ">
       {/* left section */}
       <div className="flex gap-[9px]">
         {type === "proj" && (
@@ -71,22 +77,24 @@ type CountListProps = {
 };
 const CountListing = ({ type, value }: CountListProps) => {
   return (
-    <button
-      className={clsx(
-        "flex flex-col  justify-center items-center gap-2 p-1 rounded border-[0.4px] border-solid border-[#148B16] bg-[#f0fff0] ",
-        type === "Owner" && "bg-[#FFF6ED] text-[#D66700] border-[#FF7A00]",
-        value > 0
-          ? "text-[#148B16] border-[#148B16] cursor-pointer"
-          : "text-gray-400 border-[#5e5f5e]  opacity-50 cursor-none"
-      )}
-    >
-      <p
-        className={`text-[9px] text-nowrap xl:text-wrap  xl:text-xs not-italic font-bold leading-[normal]  ${
-          value > 0 ? "underline" : ""
-        }`}
+    value > 0 && (
+      <button
+        className={clsx(
+          "flex flex-col justify-start  items-start gap-2 p-1 rounded border-[0.4px] border-solid",
+          type === "Owner" ? "bg-[#FFF6ED] text-[#D66700] border-[#FF7A00]" : "bg-[#f0fff0]",
+          value > 0
+            ? "text-[#148B16] border-[#148B16] cursor-pointer"
+            : "text-gray-400 border-[#5e5f5e] opacity-50 cursor-none"
+        )}
       >
-        {type} Listing Available : {value}
-      </p>
-    </button>
+        <p
+          className={`text-[9px] text-nowrap xl:text-wrap xl:text-xs not-italic font-bold leading-[normal] ${
+            value > 0 ? "underline" : ""
+          }`}
+        >
+          {type} Listing Available : {value}
+        </p>
+      </button>
+    )
   );
 };

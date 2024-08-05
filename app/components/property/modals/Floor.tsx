@@ -175,7 +175,7 @@ const RightSection = ({ propCgId }: any) => {
                 propCgId == projectprops.rowHouse ||
                 propCgId == projectprops.villa
                   ? "At Elevation"
-                  : "Floor"
+                  : "At Floor"
               }:`}
               <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                 {" "}
@@ -296,7 +296,7 @@ const RightSection = ({ propCgId }: any) => {
                 Plot Area:
                 <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
                   {" "}
-                  {data.plotArea} sq.ft
+                  {formatNumberWithSuffix(data.plotArea)} sq.ft
                 </span>
               </p>
             </div>

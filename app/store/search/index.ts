@@ -54,9 +54,9 @@ export const initialState: SearchFilter = {
   lng: null,
 };
 export const diffToProjFromListing = {
-  proj: ["facings", "furnish", "propStatus", "listedBy"],
-  A: ["current", "reraVerified", "builderIds"],
-  I: ["current", "reraVerified", "builderIds"],
+  proj: ["facings", "furnish", "propStatus", "listedBy", "sortByfield", "sortType"],
+  A: ["current", "reraVerified", "builderIds", "sortByfield", "sortType"],
+  I: ["current", "reraVerified", "builderIds", "sortByfield", "sortType"],
 };
 
 export const searachFilterAtom = atom<SearchFilter>(initialState);

@@ -4,7 +4,7 @@ import React from "react";
 import classes from "@/app/styles/search.module.css";
 import useSearchFilters from "@/app/hooks/search";
 export default function BuyRent() {
-  const { filters, setSingleType, handleAppliedFilters } = useSearchFilters();
+  const { filters, setSingleType, handleAppliedFilters, params } = useSearchFilters();
   const handleChnage = (value: string) => {
     setSingleType("cg", value);
     handleAppliedFilters();
@@ -21,6 +21,7 @@ export default function BuyRent() {
       defaultValue={"S"}
       rightSection={<DropDownIcon />}
       size="xs"
+      value={params.cg == "R" ? "R" : "S"}
       onChange={(e) => handleChnage(e ?? "S")}
     />
   );

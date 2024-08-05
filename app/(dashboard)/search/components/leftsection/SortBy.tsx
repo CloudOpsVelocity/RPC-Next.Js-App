@@ -4,9 +4,72 @@ import { Menu } from "@mantine/core";
 import clsx from "clsx";
 import React, { useState } from "react";
 
-type Props = {};
+type Props = {
+  typeProp:'proj' | 'listing'
+  ActivitiesType: null | string
+};
 
-export default function SortBy({}: Props) {
+export default function SortBy({typeProp,  ActivitiesType}: Props) {
+  const buyOrSell =ActivitiesType == "R"? "Rent" : "sell";
+
+  const commonConfig = [
+    {
+      label: "Price Low to High",
+      value: 2,
+      type: "minPrice",
+    },
+    {
+      label: "Price High to Low",
+      value: 1,
+      type: "maxPrice",
+    }
+  ];
+  const additionalConfig = buyOrSell != "Rent" ? [
+    {
+      label: "Price / sq.ft. : Low to High",
+      value: 2,
+      type: "basePrice",
+    },
+    {
+      label: "Price / sq.ft. : High to Low",
+      value: 1,
+      type: "basePrice",
+    }
+  ] : [];
+  
+  const commonConfigList = [
+    {
+      label: "Price Low to High",
+      value: 2,
+      type: "price",
+    },
+    {
+      label: "Price High to Low",
+      value: 1,
+      type: "price",
+    }
+  ];
+  const additionalConfigList = buyOrSell != "Rent" ? [
+    {
+      label: "Price / sq.ft. : Low to High",
+      value: 2,
+      type: "sqftPrice",
+    },
+    {
+      label: "Price / sq.ft. : High to Low",
+      value: 1,
+      type: "sqftPrice",
+    }
+  ] : [];
+    
+  
+  
+  const projConfig = [...commonConfig, ...additionalConfig];
+  const listConfig=[...commonConfigList, ...additionalConfigList]
+
+  const config=typeProp == "proj" ? projConfig :listConfig;
+
+
   const { filters, setFilters, handleAppliedFilters, params } =
     useSearchFilters();
 
@@ -43,7 +106,6 @@ export default function SortBy({}: Props) {
     (eachItem) =>
       eachItem.value === params.sortType && eachItem.type === params.sortByfield
   )?.label ?? "Newest First"
-  console.log(seletedValue)
   return (
     <Menu shadow="md" width={200}>
       <Menu.Target>
@@ -89,13 +151,17 @@ export default function SortBy({}: Props) {
   );
 }
 
-const config = [
-/*   {
-    label:"Newest First",
-    value:null,
-    type:"price"
-  },
- */
+
+
+
+
+
+/* console.log(projConfig);
+
+
+
+const projConfig = [
+
   {
     label: "Price Low to High",
     value: 2,
@@ -109,11 +175,34 @@ const config = [
   {
     label: "Price / sq.ft. : Low to High",
     value: 2,
-    type: "projectBasePrice",
+    type: "basePrice",
   },
   {
     label: "Price / sq.ft. : High to Low",
     value: 1,
-    type: "projectBasePrice",
+    type: "basePrice",
   },
 ];
+const listConfig = [
+  
+    {
+      label: "Price Low to High",
+      value: 2,
+      type: "price",
+    },
+    {
+      label: "Price High to Low",
+      value: 1,
+      type: "price",
+    },
+    {
+      label: "Price / sq.ft. : Low to High",
+      value: 2,
+      type: "sqftPrice",
+    },
+    {
+      label: "Price / sq.ft. : High to Low",
+      value: 1,
+      type: "sqftPrice",
+    },
+  ]; */

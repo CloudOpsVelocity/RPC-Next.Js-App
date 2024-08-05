@@ -198,12 +198,12 @@ const FaqCard = ({
 }) => {
   return (
     <div>
-      <h4 className=" text-[#242424] sm:text-[20px] xl:text-[24px] not-italic font-medium sm:font-bold leading-[normal] sm:mb-2 xl:mb-4 capitalize">
+      <h4 className=" text-[#242424] sm:text-[20px] xl:text-[24px] not-italic font-medium sm:font-bold leading-[normal] sm:mb-2 xl:mb-2 capitalize">
         {faqQuestion}
       </h4>
       <FaqReadMore text={faqAnswer} title={faqQuestion} />
      {/*  {!last && ( */}
-        <hr className="bg-[#00000080] my-4 sm:my-[25px] xl:my-[35px] h-[2px]" />
+        <hr className="bg-[#00000080] my-4 sm:my-[25px] xl:my-[28px] h-[2px]" />
     {/*   )} */}
     </div>
   );

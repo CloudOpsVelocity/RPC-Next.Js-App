@@ -13,7 +13,7 @@ export default function ReportButton({ open }: Props) {
         className="inline-flex gap-1 p-1 justify-center items-center bg-gray-200 text-gray-900 text-xs sm:text-base xl:text-xl not-italic font-semibold rounded mb-3 shadow"
         onClick={open}
       >
-        {config.icon} Report Issue
+        {config.icon} Report Issues
       </button>
     )
   );

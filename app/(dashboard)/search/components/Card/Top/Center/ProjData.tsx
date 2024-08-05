@@ -39,11 +39,11 @@ export default function ProjData({
   )
   return type === "proj" ? (
     <div className="flex flex-col">
-      <p className="text-[#148B16] text-[14px] xl:text-xl not-italic font-bold relative">
-        {formatCurrency(Number(minPrice))} - {formatCurrency(Number(maxPrice))}
-      </p>
       <p className="text-[#001F35] text-[12px] xl:text-[18px] font-semibold break-words whitespace-normal min-w-0 ">
         {projName}
+      </p>
+      <p className="text-[#148B16] text-[14px] xl:text-xl not-italic font-bold relative">
+        {formatCurrency(Number(minPrice))} - {formatCurrency(Number(maxPrice))}
       </p>
       <p className="text-[#242424] text-[12px] xl:text-[18px] capitalize font-medium">
         {`${locality}, ${city}`}
@@ -56,12 +56,13 @@ export default function ProjData({
 
   ) : (
     <div>
-      <p className="text-[#148B16] text-[14px] xl:text-xl not-italic font-bold relative">
-        {formatCurrency(Number(price))}
-      </p>
       <p className="text-[#242424] text-[12px] xl:text-[18px] capitalize  not-italic font-medium">
         {bhkName} {propTypeName} for {category} in {localityName}
       </p>
+      <p className="text-[#148B16] text-[14px] xl:text-xl not-italic font-bold relative">
+        {formatCurrency(Number(price))}
+      </p>
+
       <p className="text-[#001F35] text-[12px]  xl:text-[18px] not-italic font-semibold">
         {propName}{" "}
       </p>

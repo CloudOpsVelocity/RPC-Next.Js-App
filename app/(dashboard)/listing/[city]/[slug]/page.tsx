@@ -51,7 +51,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
   return (
     <div className="w-full">
       <div className="mt-[70px] sm:mt-[90px] w-full sm:pb-[2%] flex xl:text-ellipsis items-center justify-center flex-col">
-        <div className="pb-[2%] px-[2%] w-[100%] md:w-[94.3%]">
+        <div className="p-[1%] sm:p-[1%] sm:py-0 xl:p-[1%] w-full sm:w-[94%]">
           <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%] mt-1 ">
             <span>Home</span> {" > "}
             <Link href={"/project/banglore"} className="text-nowrap">
