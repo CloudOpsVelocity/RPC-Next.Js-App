@@ -13,11 +13,11 @@ export default function HandPickedProjects({ data }: Props) {
       <div className=" w-[90%]">
         <MainHeading title="Handpicked Projects" content="Discover Your Dream Home with Handpicked Projects – Where Quality Meets Elegance" />
 
-        <div className=" w-full flex justify-center items-start mt-2 sm:mt-10 flex-nowrap sm:gap-6 ">
+        <div className=" w-full flex flex-col sm:flex-row justify-center items-start mt-2 sm:mt-10 flex-nowrap sm:gap-6 ">
         
             <SideTabs active={active} setActive={setActive} />
           
-            <div className="max-w-[1466px] ">
+            <div className="max-w-[1466px] mt-[16px] sm:mt-0 ">
               <CardCarousel
                 data={data[config[active as keyof typeof config]]}
                 active={active}
