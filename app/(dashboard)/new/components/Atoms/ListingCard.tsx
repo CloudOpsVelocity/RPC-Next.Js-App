@@ -21,14 +21,14 @@ export default function ListingCard({ item }: Props) {
     <div className="w-full sm:w-[490px]">
       <div className="h-[137px] sm:h-[228px] mb-[6px] shrink-0 shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] relative">
         <div className="flex sm:hidden justify-start items-start gap-[8px] absolute top:0 right-0 p-[8px] ">
-            <HeartIcon className="cursor-pointer w-[26px] h-[26px] " />
+            <HeartIcon className="cursor-pointer w-[22px] h-[22px] sm:w-[26px] sm:h-[26px] " />
             <ShareBtn
               url={`${process.env.NEXT_PUBLIC_BACKEND_URL}/listing/banglore/${item.propIdEnc}`}
             />
         </div>
 
         <a
-          className="inline-flex justify-center items-center gap-2.5 rounded border p-1 sm:p-2 border-solid border-[#0073C6] bg-[#0073c6] text-white  text-[12px] sm:text-sm not-italic font-bold leading-[normal] capitalize absolute bottom-2 right-2 sm:bottom-3 sm:right-3 z-[1000]"
+          className="inline-flex justify-center items-center gap-2.5 rounded border p-1 sm:p-2 border-solid border-[#0073C6] bg-[#0073c6] text-white text-[10px] sm:text-sm not-italic font-bold leading-[normal] capitalize absolute bottom-2 right-2 sm:bottom-3 sm:right-3 z-[1000]"
           href={`${process.env.NEXT_PUBLIC_BACKEND_URL}/listing/banglore/${item.propIdEnc}`}
           target="_blank"
         >
@@ -48,7 +48,7 @@ export default function ListingCard({ item }: Props) {
           ))} */}
         {/* </Carousel> */}
         <div className="absolute bottom-2 left-2 space-y-2">
-          <p className="flex justify-center items-center gap-1 rounded p-1 bg-[#000000b0] text-white text-xs sm:text-base not-italic font-semibold leading-[normal] capitalize">
+          <p className="flex justify-center items-center gap-1 rounded p-1 bg-[#000000b0] text-white text-[10px] sm:text-base not-italic font-semibold leading-[normal] capitalize">
             {item.propStatus}
           </p>
         </div>
@@ -66,7 +66,7 @@ export default function ListingCard({ item }: Props) {
             <p className="text-[#148B16] text-[11px] sm:text-[20px] not-italic font-bold leading-[normal] capitalize">
               {formatCurrency(item.price)},{" "}
               {item.category !== "Rent" && (
-                <span className="text-[#616D75] text-[14px] sm:text-base not-italic font-bold leading-[normal] capitalize">
+                <span className="text-[#616D75] text-[11px] sm:text-[14px] sm:text-base not-italic font-bold leading-[normal] capitalize">
                   ₹{" "}
                   {calculatePerSqPrice(
                     item.price,
@@ -83,7 +83,7 @@ export default function ListingCard({ item }: Props) {
             </p>
           </div>
           <div className="hidden sm:flex justify-start items-start gap-[8px] ">
-            <HeartIcon className="cursor-pointer w-[26px] h-[26px] " />
+            <HeartIcon className="cursor-pointer w-[22px] h-[22px] sm:w-[26px] sm:h-[26px]" />
             <ShareBtn
               url={`${process.env.NEXT_PUBLIC_BACKEND_URL}/listing/banglore/${item.propIdEnc}`}
             />

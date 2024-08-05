@@ -21,7 +21,7 @@ export default function ShareBtn({ url }: Props) {
       }
       className="cursor-pointer"
     >
-      <ShareIcon className={"w-[24px] h-[24px] "} />
+      <ShareIcon className={"cursor-pointer w-[22px] h-[22px] sm:w-[26px] sm:h-[26px] "} />
     </button>
   );
 }

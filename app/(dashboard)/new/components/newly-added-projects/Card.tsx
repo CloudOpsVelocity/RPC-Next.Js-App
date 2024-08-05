@@ -38,7 +38,7 @@ export default function Card({ item }: Props) {
               {formatCurrency(item.minPrice)} - {formatCurrency(item.maxPrice)}
             </p>
             <p className="text-white text-[16px] sm:text-[18px] not-italic font-bold leading-[normal] tracking-[0.52px] mt-[8px] text-nowrap">
-              {item.projName}
+              {item.projName && item.projName.length > 20 ? `${item.projName.slice(0, 20)}...` : item.projName}
             </p>
             <p className="text-white text-[12px] sm:text-[18px] not-italic font-bold leading-[normal] tracking-[0.4px] mt-[8px] sm:mt-[8px]">
               {item.propTypes?.join(", ")}

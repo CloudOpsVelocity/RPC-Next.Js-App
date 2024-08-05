@@ -10,19 +10,19 @@ type Props = {
 
 export default function Box({ content, image, link, title }: Props) {
   return (
-    <div className="inline-flex flex-col h-[126px] m-[20px] justify-center items-start gap-2 sm:gap-4 rounded border border-[color:var(--stroke-blue-gradient,#41D1D4)] shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] sm:pl-[88px] sm:pr-5 sm:pt-[19px] pb-[18px] border-solid bg-[#f2f7ff] relative  max-w-[160px] sm:max-w-full p-2 mt-[160px] sm:mt-0">
+    <div className="flex flex-col p-[6px] sm:h-[126px] sm:m-[20px] justify-center items-start gap-2 sm:gap-4 rounded border border-[color:var(--stroke-blue-gradient,#41D1D4)] shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] sm:pl-[88px] sm:pr-5 sm:pt-[19px] sm:pb-[18px] border-solid bg-[#f2f7ff] relative max-w-[103px] sm:max-w-full sm:p-2 sm:mt-0">
       <Image
         src={`${process.env.NEXT_PUBLIC_IMG_BASE}${image}`}
         alt="box"
         width={126}
         height={126}
-        className="absolute sm:-left-[16%] sm:top-0 top-[-120%]"
+        className="absolute h-[64px] w-[64px] sm:h-[126px] sm:w-[126px] left-0 sm:left-[-60px] bottom-[85px] sm:bottom-0"
       />
-      <p className="text-[#148B16] sm:text-[16px] not-italic font-bold">{title}</p>
-      <p className="text-black text-[13px] sm:text-[14px] not-italic font-medium">
+      <p className="text-[#148B16] text-[10px] sm:text-[16px] not-italic font-bold">{title}</p>
+      <p className="text-black text-[8px] sm:text-[14px] not-italic font-medium">
         {content}
       </p>
-      <div className="flex items-center gap-1.5 text-[#0073C6] text-[12px] sm:text-[16px] not-italic font-medium leading-[normal] cursor-pointer justify-center">
+      <div className="flex items-center gap-1.5 text-[#0073C6] text-[10px] sm:text-[16px] not-italic font-medium leading-[normal] cursor-pointer justify-center">
         <a href={link} target="_blank">
           <div className="flex justify-center items-center gap-2">
             View Listing {config.icon}

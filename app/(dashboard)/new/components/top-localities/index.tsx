@@ -6,7 +6,7 @@ type Props = {};
 
 export default function TopLocalities({}: Props) {
   return (
-    <div className="mt-[80px] w-[90%] m-auto">
+    <div className="mt-[40px] sm:mt-[80px] w-[90%] m-auto">
       <MainHeading
         title={"Top Localities"}
         content={"Top Localities for Your Perfect Home"}
