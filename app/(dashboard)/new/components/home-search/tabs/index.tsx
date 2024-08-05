@@ -1,6 +1,5 @@
 import useSearchFilters from "@/app/hooks/search";
 import { HomeIcon, RentIcon } from "@/app/images/HomePageIcons";
-import { searchFiltersAtom } from "@/app/store/home";
 import clsx from "clsx";
 import { useAtom } from "jotai";
 import React, { useState } from "react";
@@ -27,7 +26,9 @@ export default function Tabs({}: Props) {
         >
           <Box active={activeTab === "S"} Icon={HomeIcon} />
           Buy
-          <div className="h-[2px] sm:h-[4px] " >{activeTab === "S" && config.underLine}</div>
+          <div className="h-[2px] sm:h-[4px] ">
+            {activeTab === "S" && config.underLine}
+          </div>
         </button>
         <button
           onClick={() => setActiveTab("R")}
@@ -39,7 +40,9 @@ export default function Tabs({}: Props) {
         >
           <Box active={activeTab === "R"} Icon={RentIcon} />
           Rent
-          <div className="h-[2px] sm:h-[4px] ">{activeTab === "R" && config.underLine}</div>
+          <div className="h-[2px] sm:h-[4px] ">
+            {activeTab === "R" && config.underLine}
+          </div>
         </button>
       </div>
     </div>

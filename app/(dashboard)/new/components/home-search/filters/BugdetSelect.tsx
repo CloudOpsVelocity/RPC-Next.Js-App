@@ -64,7 +64,10 @@ export function BasicBudgetSelect() {
   const [f, dispatch] = useAtom(homeSearchFiltersAtom);
   const [minValue, setMinValue] = useState<number>(f.bugdetValue[0]);
   const [maxValue, setMaxValue] = useState<number>(f.bugdetValue[1]);
-  console.log(minValue);
+  console.log({
+    minValue,
+    maxValue,
+  });
   const [focusedInput, setFocusedInput] = useState<"min" | "max" | null>(null);
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
@@ -179,8 +182,8 @@ export function BasicBudgetSelect() {
             value={maxValue}
             onChange={(val) => handleMaxChange(val as number)}
             onFocus={() => setFocusedInput("max")}
+            min={f.bugdetValue[0] || 0} // Set min based on current filter values
             clampBehavior="strict"
-            max={6000 * MULTIPLIER}
             thousandSeparator=","
             allowDecimal={false}
             allowNegative={false}
