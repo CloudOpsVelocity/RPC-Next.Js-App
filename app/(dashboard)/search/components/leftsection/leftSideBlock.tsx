@@ -57,6 +57,7 @@ const LeftSideBlock = () => {
       <NewTabCon
         onTabChange={onTabChange}
         selectedProtype={params.listedBy ?? "proj"}
+        Activities={params.cg}
         categoryType={SEARCH_FILTER_DATA.categoryDataProject}
       />
       <TabPanelSection mutate={mutate} />

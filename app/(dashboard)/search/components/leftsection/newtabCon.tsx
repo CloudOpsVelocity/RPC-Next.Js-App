@@ -1,7 +1,7 @@
 import React from "react";
 import SortBy from "./SortBy";
 
-const NewTabCon = ({ onTabChange, selectedProtype, categoryType }: any) => {
+const NewTabCon = ({ onTabChange, selectedProtype, categoryType, Activities }: any) => {
   return (
     <div className="flex flex-row justify-between items-center  align-middle gap-[3px] md:gap-3  bg-blue-200 shadow-md px-[1px] md:px-4 md:py-2.5;">
       <div className="flex flex-row justify-between items-center  align-middle gap-1 md:gap-3 ">
@@ -24,7 +24,7 @@ const NewTabCon = ({ onTabChange, selectedProtype, categoryType }: any) => {
         <h1 className="text-[12px] md:text-base text-gray-400 font-semibold">
           Sort By:
         </h1>
-        <SortBy />
+        <SortBy typeProp={selectedProtype}  ActivitiesType={Activities}/>
       </div>
     </div>
   );
