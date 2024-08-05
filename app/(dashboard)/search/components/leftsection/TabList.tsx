@@ -22,7 +22,7 @@ export default function TabList({}: Props) {
           </Tabs.Tab>
         );
       })}
-      <SortBy />
+      <SortBy ActivitiesType={null} typeProp="proj" />
     </Tabs.List>
   );
 }
