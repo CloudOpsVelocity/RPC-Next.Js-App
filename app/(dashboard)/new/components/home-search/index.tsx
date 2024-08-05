@@ -9,18 +9,14 @@ import Alert from "./Alert";
 import QuickFilters from "./filters/QuickFilters";
 import Nearme from "./Nearme";
 import SearchSec from "./SearchSec";
-import useSearchFilters from "@/app/hooks/search";
-import { filterParser } from "@/app/utils/search";
-import { createQueryString } from "@/app/utils/search/query";
 import { useMediaQuery } from "@mantine/hooks";
 import Target from "./filters/mobile/Target";
-const propertyTypes = ["Buy", "Rent"];
+import { useAtomValue } from "jotai";
+import { homeSearchFiltersAtom } from "@/app/store/home";
 const HomeSearch = () => {
-  const { filters: f } = useSearchFilters();
+  const f = useAtomValue(homeSearchFiltersAtom);
   const handleSearch = () => {
-    const parsedData = filterParser(f);
-    const query = createQueryString(parsedData);
-    return query.replace("+", "%2B");
+    alert(JSON.stringify(f));
   };
   const isMobile = useMediaQuery("(max-width: 601px)");
   return (
@@ -61,13 +57,14 @@ const HomeSearch = () => {
               {!isMobile && (
                 <div className="hidden sm:flex gap-2">
                   <Nearme />
-                  <a
-                    href={`/search?${handleSearch()}`}
-                    target="_blank"
+                  <div
+                    onClick={handleSearch}
+                    // href={`/search?${handleSearch()}`}
+                    // target="_blank"
                     className={`inline-flex justify-center items-center rounded sm:p-[6px] sm:pl-[16px] sm:pr-[16px] text-white text-[16px]  2xl:text-xl font-bold bg-[#0073c6]`}
                   >
                     Search
-                  </a>
+                  </div>
                 </div>
               )}
             </div>
@@ -94,10 +91,18 @@ export default HomeSearch;
 
 const config = {
   homeIcon: (
-    <svg className="min-h-[16px] min-w-[16px]"
-      xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none"
+    <svg
+      className="min-h-[16px] min-w-[16px]"
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
     >
-      <path d="M8.306 1.10722C8.21728 1.03805 8.108 1.00049 7.9955 1.00049C7.883 1.00049 7.77372 1.03805 7.685 1.10722L0.5 6.70972L1.1215 7.49572L2 6.81072V13.0002C2.00053 13.2653 2.10606 13.5193 2.29348 13.7067C2.4809 13.8942 2.73495 13.9997 3 14.0002H13C13.2651 13.9997 13.5191 13.8942 13.7065 13.7067C13.8939 13.5193 13.9995 13.2653 14 13.0002V6.81522L14.8785 7.50022L15.5 6.71422L8.306 1.10722ZM9 13.0002H7V9.00022H9V13.0002ZM10 13.0002V9.00022C10 8.73501 9.89464 8.48065 9.70711 8.29312C9.51957 8.10558 9.26522 8.00022 9 8.00022H7C6.73478 8.00022 6.48043 8.10558 6.29289 8.29312C6.10536 8.48065 6 8.73501 6 9.00022V13.0002H3V6.03122L8 2.13622L13 6.03622V13.0002H10Z" fill="#242424"/>
+      <path
+        d="M8.306 1.10722C8.21728 1.03805 8.108 1.00049 7.9955 1.00049C7.883 1.00049 7.77372 1.03805 7.685 1.10722L0.5 6.70972L1.1215 7.49572L2 6.81072V13.0002C2.00053 13.2653 2.10606 13.5193 2.29348 13.7067C2.4809 13.8942 2.73495 13.9997 3 14.0002H13C13.2651 13.9997 13.5191 13.8942 13.7065 13.7067C13.8939 13.5193 13.9995 13.2653 14 13.0002V6.81522L14.8785 7.50022L15.5 6.71422L8.306 1.10722ZM9 13.0002H7V9.00022H9V13.0002ZM10 13.0002V9.00022C10 8.73501 9.89464 8.48065 9.70711 8.29312C9.51957 8.10558 9.26522 8.00022 9 8.00022H7C6.73478 8.00022 6.48043 8.10558 6.29289 8.29312C6.10536 8.48065 6 8.73501 6 9.00022V13.0002H3V6.03122L8 2.13622L13 6.03622V13.0002H10Z"
+        fill="#242424"
+      />
     </svg>
   ),
   searchIcon: (

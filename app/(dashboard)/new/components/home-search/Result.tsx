@@ -1,11 +1,11 @@
 "use client";
 import Loading from "@/app/components/atoms/Loader";
-import useSearchFilters from "@/app/hooks/search";
 import useQsearch from "@/app/hooks/search/useQsearch";
 import { SearchLocationIcon } from "@/app/images/commonSvgs";
+import { homeSearchFiltersAtom } from "@/app/store/home";
 import { encodeProID } from "@/app/utils/api/encode";
 import { ScrollArea } from "@mantine/core";
-import { useMediaQuery } from "@mantine/hooks";
+import { useAtom } from "jotai";
 import { useRouter } from "next/navigation";
 import React from "react";
 import toast from "react-hot-toast";
@@ -13,8 +13,7 @@ import toast from "react-hot-toast";
 export default function Results() {
   const { push } = useRouter();
   const { data, isLoading, handleResetQuery } = useQsearch();
-  const { filters, setFilters, setSingleType } = useSearchFilters();
-
+  const [filters, dispatch] = useAtom(homeSearchFiltersAtom);
   if (isLoading) {
     return <Loading />;
   }
@@ -34,10 +33,7 @@ export default function Results() {
   }));
   const handleAddSearch = (newItem: string) => {
     if (!filters.locality.includes(newItem)) {
-      setFilters((prevFilters) => ({
-        ...prevFilters,
-        locality: [...prevFilters.locality, newItem],
-      }));
+      dispatch({ type: "ADD_LOCALITY", payload: newItem });
       handleResetQuery();
     } else {
       toast.error("The locality already exists.");
@@ -46,10 +42,7 @@ export default function Results() {
 
   const handleAddcity = (newItem: string) => {
     if (filters.city !== newItem) {
-      setFilters({
-        ...filters,
-        city: newItem,
-      });
+      dispatch({ type: "SET_CITY", payload: newItem });
       handleResetQuery();
     } else {
       toast.error("The city already exists.");

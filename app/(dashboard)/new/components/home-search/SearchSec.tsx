@@ -4,9 +4,11 @@ import { Combobox, PillsInput, useCombobox } from "@mantine/core";
 import React from "react";
 import classes from "@/app/styles/search.module.css";
 import Results from "./Result";
+import { useAtomValue } from "jotai";
+import { homeSearchFiltersAtom } from "@/app/store/home";
 type Props = {};
 export default function SearchSec({}: Props) {
-  const { filters: f, remnoveSearchOptions, setFilters } = useSearchFilters();
+  const f = useAtomValue(homeSearchFiltersAtom);
   const { onSearchChange, debounced, name } = useQsearch();
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
