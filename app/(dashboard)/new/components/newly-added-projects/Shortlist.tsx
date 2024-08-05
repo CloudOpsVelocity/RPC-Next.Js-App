@@ -28,7 +28,7 @@ export default function Shortlist({ reqId, shortListed }: Props) {
   };
   return (
     <button onClick={onAddingShortList}>
-      {state ? config.trueIcon : <HeartIcon />}
+      {state ? config.trueIcon : <HeartIcon className=" w-[24px] h-[24px] " />}
     </button>
   );
 }
@@ -37,7 +37,7 @@ const config = {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="24"
-      height="28"
+      height="24"
       viewBox="0 0 24 28"
       fill="none"
     >

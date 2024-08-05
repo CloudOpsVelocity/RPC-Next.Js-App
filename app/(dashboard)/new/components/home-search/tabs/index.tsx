@@ -15,31 +15,31 @@ export default function Tabs({}: Props) {
     setFilters({ ...filters, cg: tab });
   };
   return (
-    <div className="py-4 pr-4 sm:p-4">
-      <div className="flex space-x-4">
+    <div className="py-2 pr-2 sm:py-4 sm:pr-4 sm:p-4">
+      <div className="flex space-x-1 sm:space-x-4">
         <button
           onClick={() => setActiveTab("S")}
-          className={`text-black text-center text-lg not-italic font-semibold min-w-14 relative ${
+          className={`text-black text-center text-[12px] sm:text-[18px] not-italic font-semibold min-w-14 relative ${
             activeTab === "S"
-              ? "!text-[#148B16] font-semibold text-lg f5fff6]"
+              ? "!text-[#148B16] font-semibold text-[12px] sm:text-[18px] f5fff6]"
               : ""
           }`}
         >
           <Box active={activeTab === "S"} Icon={HomeIcon} />
           Buy
-          <div className="h-1">{activeTab === "S" && config.underLine}</div>
+          <div className="h-[2px] sm:h-[4px] " >{activeTab === "S" && config.underLine}</div>
         </button>
         <button
           onClick={() => setActiveTab("R")}
-          className={`text-black text-center text-lg not-italic font-semibold min-w-14 relative ${
+          className={`text-black text-center text-[12px] sm:text-[18px] not-italic font-semibold min-w-14 relative ${
             activeTab === "R"
-              ? "!text-[#148B16] font-semibold text-lg f5fff6]"
+              ? "!text-[#148B16] font-semibold text-[12px] sm:text-[18px] f5fff6]"
               : ""
           }`}
         >
           <Box active={activeTab === "R"} Icon={RentIcon} />
           Rent
-          <div className="h-1">{activeTab === "R" && config.underLine}</div>
+          <div className="h-[2px] sm:h-[4px] ">{activeTab === "R" && config.underLine}</div>
         </button>
       </div>
     </div>
@@ -53,7 +53,7 @@ const Box = ({ active, Icon }: BoxProps) => {
   return (
     <div
       className={clsx(
-        "flex h-[54px] justify-center items-center self-stretch rounded shadow-[0px_4px_36.5px_0px_rgba(194,194,194,0.60)] p-[11px] border-[0.5px] border-solid border-[#8EA8CF] bg-[#fcfcfc] absolute top-[-56px] min-w-[54px]",
+        "flex h-[32px] sm:h-[54px] justify-center items-center self-stretch rounded shadow-[0px_4px_36.5px_0px_rgba(194,194,194,0.60)] p-[6px] sm:p-[11px] border-[0.5px] border-solid border-[#8EA8CF] bg-[#fcfcfc] absolute top-[-35px] left-[10px] sm:left-0 sm:top-[-56px] w-[32px] sm:w-[54px]",
         active &&
           "shadow-[0px_4px_7px_0px_rgba(140,197,63,0.34)_inset,0px_4px_36.5px_0px_rgba(194,194,194,0.60)] border-[0.5px] border-solid border-[#148B16] bg-[#F5FFF6]"
       )}

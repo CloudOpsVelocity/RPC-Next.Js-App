@@ -19,7 +19,14 @@ export default function ListingCard({ item }: Props) {
   const isMobile = useMediaQuery("(max-width: 601px)");
   return (
     <div className="w-full sm:w-[490px]">
-      <div className="h-[276px] shrink-0 shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] relative">
+      <div className="h-[137px] sm:h-[228px] mb-[6px] shrink-0 shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] relative">
+        <div className="flex sm:hidden justify-start items-start gap-[8px] absolute top:0 right-0 p-[8px] ">
+            <HeartIcon className="cursor-pointer w-[26px] h-[26px] " />
+            <ShareBtn
+              url={`${process.env.NEXT_PUBLIC_BACKEND_URL}/listing/banglore/${item.propIdEnc}`}
+            />
+        </div>
+
         <a
           className="inline-flex justify-center items-center gap-2.5 rounded border p-1 sm:p-2 border-solid border-[#0073C6] bg-[#0073c6] text-white  text-[12px] sm:text-sm not-italic font-bold leading-[normal] capitalize absolute bottom-2 right-2 sm:bottom-3 sm:right-3 z-[1000]"
           href={`${process.env.NEXT_PUBLIC_BACKEND_URL}/listing/banglore/${item.propIdEnc}`}
@@ -46,10 +53,17 @@ export default function ListingCard({ item }: Props) {
           </p>
         </div>
       </div>
-      <div className="sm:h-[183px] self-stretch rounded shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] border-[0.8px] border-solid border-[#A4B8B5]bg-white">
-        <div className="p-3 flex justify-between">
+
+      <div className="sm:min-h-[204px] self-stretch rounded shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] border-[0.8px] border-solid border-[#A4B8B5] bg-[#FFF]">
+        <div className="p-[10px] flex justify-between">
           <div className="space-y-1">
-            <p className="text-[#148B16] text-[18px] sm:text-[22px] not-italic font-bold leading-[normal] capitalize">
+            <p className="text-[#242424] text-[12px] sm:text-lg not-italic font-semibold leading-[normal] capitalize">
+              {item.propTypeName === "Plot" && `${item.pa} sq.ft`}{" "}
+              {item.bhkName} {item.propTypeName} for {item.category} in{" "}
+              {item.localityName}
+            </p>
+
+            <p className="text-[#148B16] text-[11px] sm:text-[20px] not-italic font-bold leading-[normal] capitalize">
               {formatCurrency(item.price)},{" "}
               {item.category !== "Rent" && (
                 <span className="text-[#616D75] text-[14px] sm:text-base not-italic font-bold leading-[normal] capitalize">
@@ -63,16 +77,13 @@ export default function ListingCard({ item }: Props) {
               )}
             </p>
 
-            <p className="text-[#242424] text-[14px] sm:text-lg not-italic font-semibold leading-[normal] capitalize">
-              {item.propTypeName === "Plot" && `${item.pa} sq.ft`}{" "}
-              {item.bhkName} {item.propTypeName} for {item.category} in{" "}
-              {item.localityName}
-            </p>
-            <p className="text-[#242424] text-sm not-italic font-semibold leading-[normal] capitalize">
+           
+            <p className="text-[#242424] text-[9px] sm:text-sm not-italic font-semibold leading-[normal] capitalize">
               {item.cityName ?? "Banglore"}, {item.localityName}
             </p>
           </div>
-          <div className="">
+          <div className="hidden sm:flex justify-start items-start gap-[8px] ">
+            <HeartIcon className="cursor-pointer w-[26px] h-[26px] " />
             <ShareBtn
               url={`${process.env.NEXT_PUBLIC_BACKEND_URL}/listing/banglore/${item.propIdEnc}`}
             />
@@ -154,7 +165,7 @@ export default function ListingCard({ item }: Props) {
               </>
             )}
           </div>
-          <p className="text-[#242424] text-sm not-italic font-semibold leading-[normal] capitalize mt-2">
+          <p className="text-[#242424] text-[10px] sm:text-sm not-italic font-semibold leading-[normal] capitalize mt-[6px] mb-[6px]">
             Posted by: {item.postedBy}
           </p>
         </div>
@@ -171,10 +182,10 @@ const DownSectionCard = ({
 }) => {
   return (
     <div className="flex flex-col justify-center items-start ">
-      <p className="text-[#001F35] text-[13px] not-italic font-medium">
+      <p className="text-[#001F35] text-[10px] not-italic font-medium">
         {label}:
       </p>
-      <p className="text-[#242424] text-sm not-italic font-semibold">{value}</p>
+      <p className="text-[#242424] text-[10px]  sm:text-[12px] not-italic font-semibold">{value}</p>
     </div>
   );
 };
