@@ -12,6 +12,8 @@
   display: flex;
   text-wrap: nowrap;
   align-items: center;
+  padding: 5px;
+  cursor: pointer;
 }
 
 .input {
