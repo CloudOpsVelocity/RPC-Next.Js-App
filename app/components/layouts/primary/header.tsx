@@ -117,7 +117,6 @@ function Dropdown() {
 
   const { redirectQueryParam } = usePathToOrigin();
   const { data: session } = useSession();
-  console.log(session);
   return (
     <Menu width={200} shadow="md">
       <Menu.Target>
