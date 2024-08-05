@@ -1,5 +1,6 @@
 import useSearchFilters from "@/app/hooks/search";
 import { HomeIcon, RentIcon } from "@/app/images/HomePageIcons";
+import { homeSearchFiltersAtom } from "@/app/store/home";
 import clsx from "clsx";
 import { useAtom } from "jotai";
 import React, { useState } from "react";
@@ -8,10 +9,10 @@ type Props = {};
 
 export default function Tabs({}: Props) {
   // const [{ cg: activeTab }, dispatch] = useAtom(searchFiltersAtom);
-  const { setFilters, filters } = useSearchFilters();
+  const [filters, dispatch] = useAtom(homeSearchFiltersAtom);
   const activeTab = filters.cg ?? "S";
   const setActiveTab = (tab: string) => {
-    setFilters({ ...filters, cg: tab });
+    dispatch({ type: "SET_CG", payload: tab });
   };
   return (
     <div className="py-2 pr-2 sm:py-4 sm:pr-4 sm:p-4">

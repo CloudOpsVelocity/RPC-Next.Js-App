@@ -13,7 +13,7 @@ const initialState: SearchState = {
   propType: null,
   locality: [],
   city: null,
-  cg: "buy",
+  cg: "S",
   bugdetValue: [500000, 600000000],
 };
 
