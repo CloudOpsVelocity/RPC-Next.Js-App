@@ -169,14 +169,7 @@ export default function FloorplansBlock({
   };
 
   const handleOpen = () => {
-    // setSelectedFloor({
-    //   ...projectUnitsData[0],
-    //   floorPlanUrl: projectUnitsData[0].floorPlanUrl ?? ImgNotAvail,
-    // });
-    // form.setValues(setPropertyValues(projectUnitsData[0], propCgId));
-    // handlers.set(setPropertyValues(projectUnitsData[0], propCgId));
-    // handleSearch();
-    // open("floor");
+    console.log(selectedFloor);
     setSelectedFloor({
       ...selectedFloor,
       floorPlanUrl: selectedFloor.floorPlanUrl ?? ImgNotAvail,
@@ -202,8 +195,9 @@ export default function FloorplansBlock({
   };
   const handleSearch = (): void => {
     const filteredFloors = projectUnitsData.filter(
-      (floor: any) => floor.unitNumber === projectUnitsData[0].unitNumber
+      (floor: any) => floor.unitNumber === selectedFloor.unitNumber
     );
+    console.log(filteredFloors);
     setFloorsArray(filteredFloors);
   };
   const [bhk, setBhk] = useState("0");
@@ -536,11 +530,7 @@ export default function FloorplansBlock({
                             e.stopPropagation();
                             handleOpen();
                           }}
-                          src={
-                            (selectedFloor?.floorPlanUrl +
-                              "?v" +
-                              Math.random()) as string
-                          }
+                          src={selectedFloor?.floorPlanUrl}
                           className="w-full h-full cursor-pointer  object-contain"
                           alt="image"
                         />

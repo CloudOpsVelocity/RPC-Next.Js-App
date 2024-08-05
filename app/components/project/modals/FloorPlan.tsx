@@ -1025,10 +1025,14 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
             {" | Facing " + selectedFloor?.facingName}
             {propCgId != projectprops.plot &&
               selectedFloor?.superBuildUparea &&
-              " | Area. " +formatNumberWithSuffix(selectedFloor?.superBuildUparea) + " sq.ft"}
+              " | Area. " +
+                formatNumberWithSuffix(selectedFloor?.superBuildUparea) +
+                " sq.ft"}
             {propCgId == projectprops.plot &&
               selectedFloor?.plotArea &&
-              " | Area. " + formatNumberWithSuffix(selectedFloor?.plotArea) + " sq.ft"}
+              " | Area. " +
+                formatNumberWithSuffix(selectedFloor?.plotArea) +
+                " sq.ft"}
           </>
         )}
       </p>
