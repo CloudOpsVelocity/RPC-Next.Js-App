@@ -6,7 +6,7 @@ type Props = { name: string; id: number; type: string };
 export default function Box({ id, name }: Props) {
   return (
     <a
-      className="flex min-w-[240px] sm:min-w-[180px] flex-col items-center justify-center gap-[18px] text-[#242424]  text-base sm:text-[20px] not-italic font-semibold leading-[normal]"
+      className="flex flex-col items-center justify-center gap-[18px] text-[#242424]  text-base sm:text-[20px] not-italic font-semibold leading-[normal]"
       target="_blank"
       href={`${process.env.NEXT_PUBLIC_BACKEND_URL}/search?localities=${name}%2B${id}`}
     >
@@ -15,9 +15,9 @@ export default function Box({ id, name }: Props) {
         alt="box"
         width={180}
         height={180}
-        className="h-[180px] sm:h-[180px] self-stretch border-[color:var(--stroke-blue-gradient,#41D1D4)] shadow-[0px_4px_25px_0px_rgba(194,194,194,0.76)] rounded-full border-4 border-solid"
+        className="h-[80px] sm:h-[180px] min-w-[80px] sm:min-w-[180px] self-stretch border-[color:var(--stroke-blue-gradient,#41D1D4)] shadow-[0px_4px_25px_0px_rgba(194,194,194,0.76)] rounded-full border-4 border-solid"
       />
-      <p className="inline-flex gap-2 capitalize">
+      <p className="flex justify-center items-center gap-2 text-nowrap capitalize text-[10px] sm:text-[20px] ">
         {config.locationIcon}
         {name}
       </p>

@@ -9,7 +9,7 @@ export default function BlogsSection({}: Props) {
     <div className="w-[90%] m-auto pb-10 mb-[0px] sm:mb-[40px]  ">
       <MainHeading
         title="Latest Blogs"
-        content="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        content="From Market Updates to Home Tips: Your Source for Real Estate Knowledge"
         className={{ title: "text-center", content: "text-center" }}
       />
       <div>

@@ -6,7 +6,7 @@ type Props = {};
 
 export default function HomeFeatures({}: Props) {
   return (
-    <div className="w-[90%] sm:w-full m-auto pt-4 sm:pb-16 sm:pt-8 bg-[#EEF4F9] ">
+    <div className="sm:w-[90%] pb-[10px] pl-[4%] w-full m-auto pt-0 mt-[12px] sm:mt-0 sm:pb-16 sm:pt-8 bg-[#EEF4F9] ">
       <h1 className="hidden sm:block text-[#202020] text-center text-[24px] not-italic font-bold m-0 ">
         Why Choose{" "}
         <span className=" text-[color:var(--Brand-green-primary,#148B16)] text-[24px] not-italic font-bold">
@@ -46,7 +46,7 @@ const config = {
       viewBox="0 0 353 382"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="w-[200px] h-[200px] sm:w-[100%] sm:h-[100%]"
+      className="min-w-[120px] min-h-[120px] sm:min-w-[100%] sm:min-h-[100%]"
     >
       <mask
         id="mask0_4037_1244"

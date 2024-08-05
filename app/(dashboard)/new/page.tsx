@@ -27,40 +27,40 @@ export default async function Page() {
       <NewAddedProjects data={data.featured} />
       <DynamicListing
         title="Ready to Move Sell Listings" 
-        content="Loreum Ipsum"
+        content="Move In Today: Your Dream Home Awaits – Explore Our Ready-to-Move Listings Now!"
         data={listingData["r_Sale"]}
       />
       <TopLocalities />
       <DynamicListing
         title="Ready to Move Rent Listings"
-        content="Loreum Ipsum"
+        content="Move In Today: Your Dream Home Awaits – Explore Our Ready-to-Move Listings Now!"
         data={listingData["r_Rent"]}
       />
       <DynamicListing
         title="Featured Plot Listings"
-        content="Loreum Ipsum"
+        content="Browse Top Listings and Find Your Perfect Plot Today!"
         data={listingData["p"]}
       />
       <DynamicListing
         title="Under Construction Sell Listings"
-        content="Loreum Ipsum"
+        content="Explore Our Under Construction Listings Today!"
         data={listingData["u_Sale"]}
       />
       <HandPickedProjects data={data} />
       <DynamicListing
         title="Under Construction Rent Listings"
-        content="Loreum Ipsum"
+        content="Discover New Developments and Under Construction Rent Listings!"
         data={listingData["u_Rent"]}
       />
       <DynamicListing
         title="Independent Sell Listing"
-        content="Loreum Ipsum"
+        content="Your Gateway to Independent Living - Browse and Buy with Confidence"
         data={listingData["i_Sale"]}
       />{" "}
       <ListbySection />
       <DynamicListing
         title="Independent Rent Listing"
-        content="Loreum Ipsum"
+        content="Discover Your Ideal Rental: Independent Listings, Endless Options."
         data={listingData["i_Rent"]}
       />
       <PostYourListing />
