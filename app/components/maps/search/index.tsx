@@ -80,7 +80,7 @@ const MapContent = ({ data }: any) => {
   const map = useMap();
   useEffect(() => {
     if (selected && selected.projOrPropName) {
-      map.setView([parseFloat(selected.lat), parseFloat(selected.lang)], 15);
+      map.setView([parseFloat(selected.lat), parseFloat(selected.lang)], 19);
     }
   }, [selected, map]);
   useEffect(() => {
@@ -88,7 +88,6 @@ const MapContent = ({ data }: any) => {
       map.setView([parseFloat(data[0]?.lat), parseFloat(data[0]?.lang)], 14);
     }
   }, [data]);
-  console.log(selected);
   // 1. FIND IS IT PROPERTY OR PRJECT
   // 2. CREATE TOOLTIPS FOR EACH SECTION
   return (

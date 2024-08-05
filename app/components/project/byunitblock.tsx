@@ -49,7 +49,8 @@ const Byunitblock: React.FC<Props> = ({
     }
   };
 
-  const handleSearch = (key: string) => {
+  const handleSearch = (key: string, type: "add" | "delete") => {
+    console.log(key);
     const keysWithNonNullValues = Object.keys(values).filter(
       (key) => values[key] !== null
     );
@@ -69,7 +70,8 @@ const Byunitblock: React.FC<Props> = ({
     if (
       key === "unitNumber" &&
       filteredData.length > 0 &&
-      values["unitNumber"]
+      values["unitNumber"] &&
+      type === "add"
     ) {
       const filteredItem = filteredData[0];
       const filteredValues: { [key: string]: string } = {};
@@ -91,7 +93,7 @@ const Byunitblock: React.FC<Props> = ({
     let prevObj = values;
     prevObj[key] = value;
     setValues(prevObj);
-    handleSearch(key);
+    handleSearch(key, "add");
   };
   const scrollFiltersRef = useRef<HTMLDivElement>(null);
   const handleArrowClick = (side: "R" | "L"): void => {
@@ -111,7 +113,7 @@ const Byunitblock: React.FC<Props> = ({
       return;
     }
     setFieldValue(key, null);
-    handleSearch(key);
+    handleSearch(key, "delete");
   };
   const isAppliedFilters =
     Object.values(values).filter((each) => each != null).length > 0;
@@ -285,11 +287,13 @@ const Byunitblock: React.FC<Props> = ({
                 : "At Floor"
             }
             placeholder="-- select At Floor --"
-            data={getOptions("floor").map((item) =>
-              item === "0"
-                ? { value: "0", label: "G" }
-                : { value: item, label: item }
-            )}
+            data={getOptions("floor")
+              .map((item) =>
+                item === "0"
+                  ? { value: "0", label: "G" }
+                  : { value: item, label: item }
+              )
+              .sort((a, b) => Number(a.value) - Number(b.value))}
             searchable
             maxDropdownHeight={200}
             {...getInputProps("floor")}
