@@ -10,6 +10,8 @@ import {
 import styles from "./Style.module.css";
 import { useAtom } from "jotai";
 import { homeSearchFiltersAtom } from "@/app/store/home";
+const MULTIPLIER_LAKH = 100000; // 1 Lakh = 100000
+const MULTIPLIER_THOUSAND = 1000;
 
 const MULTIPLIER = 100000;
 const groceries = [
@@ -52,11 +54,15 @@ const map = new Map<string, { value: number }>([
   ["60CR", { value: 6000 * MULTIPLIER }],
 ]);
 
-const toFormattedString = (value: number) => {
-  if (value >= 100 * MULTIPLIER) {
-    return `${value / (100 * MULTIPLIER)}CR`;
+const toFormattedString = (value: number): string => {
+  if (value >= 100 * MULTIPLIER_LAKH) {
+    return `${(value / (100 * MULTIPLIER_LAKH)).toFixed(2)}CR`;
+  } else if (value >= MULTIPLIER_LAKH) {
+    return `${(value / MULTIPLIER_LAKH).toFixed(2)}L`;
+  } else if (value >= MULTIPLIER_THOUSAND) {
+    return `${(value / MULTIPLIER_THOUSAND).toFixed(2)}K`;
   } else {
-    return `${value / MULTIPLIER}L`;
+    return value.toString(); // Directly return the value as a string if less than 1000
   }
 };
 
@@ -165,7 +171,9 @@ export function BasicBudgetSelect() {
           }}
         >
           {shouldShowBudget ? (
-            `${toFormattedString(minValue)} - ${toFormattedString(maxValue)}`
+            `${toFormattedString(minValue)}  ${
+              "- " + toFormattedString(maxValue)
+            }`
           ) : (
             <Input.Placeholder className="!text-black">
               Budget
