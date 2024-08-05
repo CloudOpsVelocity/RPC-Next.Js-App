@@ -4,6 +4,7 @@ import {
   TotalLandArea,
   TowerIcon,
 } from "@/app/images/commonSvgs";
+import { formatNumberWithSuffix } from "@/app/utils/numbers";
 import { Main } from "@/app/validations/property";
 import { Console } from "console";
 
@@ -28,7 +29,7 @@ export function generatePropertyDetails(
         { title: "Phase", value: data.phaseName, Icon: Marble },
         { title: "Tower", value: data.tower, Icon: TowerIcon },
         {
-          title: "Floor",
+          title: "At Floor",
           value: data.atFloor === 0 ? "G" : data.atFloor,
           Icon: Marble,
         },
@@ -37,12 +38,12 @@ export function generatePropertyDetails(
         { title: "Facing", value: data.facingName, Icon: Marble },
         {
           title: "Super built-up Area",
-          value: `${data.sba} sq.ft`,
+          value: `${formatNumberWithSuffix(data.sba)} sq.ft`,
           Icon: TotalLandArea,
         },
         {
           title: "Carpet Area",
-          value: `${data.ca} sq.ft`,
+          value: `${formatNumberWithSuffix(data.ca)} sq.ft`,
           Icon: TotalLandArea,
         },
       ];
@@ -81,33 +82,34 @@ export function generatePropertyDetails(
 
         {
           title: "Plot Area",
-          value: data.plotArea && `${data.plotArea} sq.ft`,
+          value:
+            data.plotArea && `${formatNumberWithSuffix(data.plotArea)} sq.ft`,
           Icon: TotalLandArea,
         },
         {
           title: "Super built-up Area",
-          value: `${data.sba} sq.ft`,
+          value: `${formatNumberWithSuffix(data.sba)} sq.ft`,
           Icon: TotalLandArea,
         },
         {
           title: "Carpet Area",
-          value: `${data.ca} sq.ft`,
+          value: `${formatNumberWithSuffix(data.ca)} sq.ft`,
           Icon: TotalLandArea,
         },
         {
           title: "Garden Area",
-          value: data.ga && `${data.ga} sq.ft`,
+          value: data.ga && `${formatNumberWithSuffix(data.ga)} sq.ft`,
           Icon: TotalLandArea,
         },
         {
           title: "Terrace Area",
-          value: data.ta && `${data.ta} sq.ft`,
+          value: data.ta && `${formatNumberWithSuffix(data.ta)} sq.ft`,
           Icon: TotalLandArea,
         },
 
         {
           title: "Balcony Size",
-          value: data.ba && `${data.ba} sq.ft`,
+          value: data.ba && `${formatNumberWithSuffix(data.ba)} sq.ft`,
           Icon: TotalLandArea,
         },
       ];
@@ -141,7 +143,8 @@ export function generatePropertyDetails(
         { title: "Tower", value: data.tower, Icon: TowerIcon },
         {
           title: "Plot Area",
-          value: data.plotArea && `${data.plotArea} sq.ft`,
+          value:
+            data.plotArea && `${formatNumberWithSuffix(data.plotArea)} sq.ft`,
           Icon: TotalLandArea,
         },
         { title: "Unit Number", value: data.unitNumber, Icon: Marble },
@@ -149,27 +152,27 @@ export function generatePropertyDetails(
 
         {
           title: "Super built-up Area",
-          value: `${data.sba} sq.ft`,
+          value: `${formatNumberWithSuffix(data.sba)} sq.ft`,
           Icon: TotalLandArea,
         },
         {
           title: "Carpet Area",
-          value: `${data.ca} sq.ft`,
+          value: `${formatNumberWithSuffix(data.ca)} sq.ft`,
           Icon: TotalLandArea,
         },
         {
           title: "Garden Area",
-          value: data.ga && `${data.ga} sq.ft`,
+          value: data.ga && `${formatNumberWithSuffix(data.ga)} sq.ft`,
           Icon: TotalLandArea,
         },
         {
           title: "Terrace Area",
-          value: data.ta && `${data.ta} sq.ft`,
+          value: data.ta && `${formatNumberWithSuffix(data.ta)} sq.ft`,
           Icon: TotalLandArea,
         },
         {
           title: "Balcony Size",
-          value: data.ba && `${data.ba} sq.ft`,
+          value: data.ba && `${formatNumberWithSuffix(data.ba)} sq.ft`,
           Icon: TotalLandArea,
         },
       ];
@@ -204,16 +207,16 @@ export function generatePropertyDetails(
         {
           title: "Plot Area",
           Icon: TotalLandArea,
-          value: `${data.plotArea} sq.ft`,
+          value: `${formatNumberWithSuffix(data.plotArea)} sq.ft`,
         },
         {
           title: "Length of Plot ",
-          value: `${data.length} ft.`,
+          value: `${formatNumberWithSuffix(data.length)} ft.`,
           Icon: TotalLandArea,
         },
         {
           title: "Breadth of Plot",
-          value: `${data.width} ft.`,
+          value: `${formatNumberWithSuffix(data.width)} ft.`,
           Icon: TotalLandArea,
         },
       ];
@@ -253,31 +256,32 @@ export function generatePropertyDetails(
         {
           title: "Plot Area",
           Icon: TotalLandArea,
-          value: data.plotArea && `${data.plotArea} sq.ft`,
+          value:
+            data.plotArea && `${formatNumberWithSuffix(data.plotArea)} sq.ft`,
         },
         {
           title: "Super built-up Area",
-          value: `${data.sba} sq.ft`,
+          value: `${formatNumberWithSuffix(data.sba)} sq.ft`,
           Icon: TotalLandArea,
         },
         {
           title: "Carpet Area",
-          value: `${data.ca} sq.ft`,
+          value: `${formatNumberWithSuffix(data.ca)} sq.ft`,
           Icon: TotalLandArea,
         },
         {
           title: "Garden Area",
-          value: data.ga && `${data.ga} sq.ft`,
+          value: data.ga && `${formatNumberWithSuffix(data.ga)} sq.ft`,
           Icon: TotalLandArea,
         },
         {
           title: "Terrace Area",
-          value: data.ta && `${data.ta} sq.ft`,
+          value: data.ta && `${formatNumberWithSuffix(data.ta)} sq.ft`,
           Icon: TotalLandArea,
         },
         {
           title: "Balcony Size",
-          value: data.ba && `${data.ba} sq.ft`,
+          value: data.ba && `${formatNumberWithSuffix(data.ba)} sq.ft`,
           Icon: TotalLandArea,
         },
       ];
@@ -312,32 +316,33 @@ export function generatePropertyDetails(
         { title: "Tower", value: data.tower, Icon: TowerIcon },
         { title: "Floor", value: data.atFloor, Icon: Marble },
         { title: "Block", value: data.block, Icon: Block },
-        { title: "Unit Number", value: data.unitNumber, Icon: Marble },
+        { title: "House Number", value: data.unitNumber, Icon: Marble },
         { title: "Facing", value: data.facingName, Icon: Marble },
         {
           title: "Super built-up Area",
-          value: `${data.sba} sq.ft`,
+          value: `${formatNumberWithSuffix(data.sba)} sq.ft`,
           Icon: TotalLandArea,
         },
         {
           title: "Carpet Area",
-          value: `${data.ca} sq.ft`,
+          value: `${formatNumberWithSuffix(data.ca)} sq.ft`,
           Icon: TotalLandArea,
         },
         {
           title: "Garden Area",
-          value: data.ga && `${data.ga} sq.ft`,
+          value: data.ga && `${formatNumberWithSuffix(data.ga)} sq.ft`,
           Icon: TotalLandArea,
         },
         {
           title: "Terrace Area",
-          value: data.ta && `${data.ta} sq.ft`,
+          value: data.ta && `${formatNumberWithSuffix(data.ta)} sq.ft`,
           Icon: TotalLandArea,
         },
         {
           title: "Plot Area",
           Icon: TotalLandArea,
-          value: `${data.plotArea} sq.ft`,
+          value:
+            data.plotArea && `${formatNumberWithSuffix(data.plotArea)} sq.ft`,
         },
       ];
 

@@ -145,7 +145,7 @@ const FirstBlock: React.FC<Props> = ({
                 {formatCurrency(projectDetails.maxPrice)}
               </h2>
               <p className=" md:text-right sm:text-[14px] xl:text-[24px] sm:font-[600] mb-[10px] md:mb-[20px] text-[#001F35] ">
-                ₹ {projectDetails.basePrice}/- Price per sqft onwards
+                {formatCurrency(projectDetails.basePrice)}/- Price per sqft onwards
               </p>
 
               <p

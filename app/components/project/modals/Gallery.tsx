@@ -81,7 +81,7 @@ const Gallery: React.FC<GalleryProps> = ({
       >
         <div className="h-auto w-full scrollbar-hide flex justify-center flex-col items-center  ">
           <div
-            className={`w-full bg-transparent h-[57px] flex items-center justify-between min-w-[321px] mt-[26px] z-[1000] px-0.5 m-auto ${
+            className={`w-full bg-transparent h-[57px] flex items-center justify-between min-w-[321px] mt-[26px] sm:mt-0 xl:mt-[26px] z-[1000] px-0.5 m-auto ${
               !isImage && isMobile ? "mt-50%" : "mt-[10%]"
             }`}
           >
@@ -141,7 +141,7 @@ const Gallery: React.FC<GalleryProps> = ({
               className="w-full min-w-[80px] !h-auto max-h-[100px] min-h-[50px]"
               withControls={
                 (content?.type == "image" ? images.length : videos.length) >
-                (isMobile ? 0 : 5)
+                (isMobile ? (isImage ? 0 : 2) : 5)
                   ? true
                   : false
               }

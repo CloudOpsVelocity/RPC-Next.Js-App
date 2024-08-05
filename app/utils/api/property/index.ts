@@ -1,4 +1,3 @@
-import { parseOtherCharge } from "@/app/components/property/pricingbreakup/PriceBreakup";
 import { LIstingResponse, Main } from "@/app/validations/property";
 import { Main as M } from "@/app/validations/types/project";
 import axios from "axios";
@@ -25,7 +24,40 @@ const getListingDetails = async (slug: string): Promise<LIstingResponse> => {
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/fetch/listing/data?propIdEnc=${slug}`
   );
   const data = await response.json();
-  return data;
+  const filterOtherDetails =
+    data.listing.otherPrice &&
+    Object?.keys(data.listing.otherPrice).filter(
+      (item) =>
+        ![
+          "otherCharge",
+          "price",
+          "securetyType",
+          "clubHouseTill",
+          "securityMonth",
+          "security",
+        ].includes(item)
+    );
+  const ac = filterOtherDetails?.reduce(
+    (a: any, b: any) =>
+      b !== "price" &&
+      !(
+        b === "clubHouseCharge" &&
+        data.listing.otherPrice.clubHouseCharge === "A"
+      ) &&
+      data.listing.otherPrice[b] !== "NA" &&
+      data.listing.otherPrice[b] !== "A"
+        ? Number(a) +
+          (b === "otherCharge"
+            ? parseOtherCharge(data.listing.otherPrice[b])
+            : Number(data.listing.otherPrice[b] || "0"))
+        : Number(a),
+    0
+  );
+
+  const otherCharges =
+    data.listing.otherPrice &&
+    parseOtherCharge(data.listing.otherPrice.otherCharge);
+  return { ...data, totalPrice: ac + otherCharges };
 };
 
 const getNearByLocations = async (slug: string): Promise<any> => {
@@ -49,3 +81,21 @@ export {
   getNearByLocations,
   getReportConstData,
 };
+function parseOtherCharge(otherChargeString: string): number {
+  let sum = 0;
+
+  if (otherChargeString) {
+    const charges: string[] = otherChargeString.split(",");
+    charges.forEach((charge: string) => {
+      const parts: string[] = charge.split("|");
+      if (parts.length === 2) {
+        const value: number = parseFloat(parts[1].trim());
+        if (!isNaN(value)) {
+          sum += value;
+        }
+      }
+    });
+  }
+
+  return sum;
+}

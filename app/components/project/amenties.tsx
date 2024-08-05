@@ -46,9 +46,9 @@ export default function Amenties({
       <div className=" mx-auto ">
         {type === "prop" ? (
           <PropertyHeading
-            title="AMENITIES"
+            title="Amenities"
             desc="Experience the ultimate in comfort with our amenities"
-            className="mb-[10px] sm:mb-[40px]"
+            className="mb-[10px] sm:mb-[8px]"
           />
         ) : (
           <>

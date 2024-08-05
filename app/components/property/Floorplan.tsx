@@ -9,6 +9,7 @@ import { listingProps } from "@/app/data/projectDetails";
 import { selectedFloorAtom } from "@/app/store/floor";
 import { PopupOpenSvg } from "@/app/images/commonSvgs";
 import { createPropertyString } from "@/app/utils/dyanamic/property";
+import { ImgNotAvail } from "@/app/data/project";
 
 export default function RoomFloorplansBlock({ data }: { data: Main }) {
   const [opened, setOpened] = useState(false);
@@ -34,7 +35,7 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
       totalNumberofBathroom: data.nobt,
       totalNumberOfBalcony: data.nobl,
       noOfCarParking: data.noocp,
-      floorPlanUrl: data.projMedia.floorPlanUrl + "?v=" + Math.random() * 20,
+      floorPlanUrl: data.projMedia.floorPlanUrl,
       plotArea: data.plotArea,
       noocp: data.noocp,
       noobp: data.noobp,
@@ -54,12 +55,12 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
     <>
       <PFloorPlanModal data={data} opened={opened} setOpened={setOpened} />
       <div
-        className="w-[95%] md:w-[90%] mb-[5%] mt-[2.5%] relative scroll-mt-[220px]"
+        className="w-[95%] md:w-[90%]  mt-[50px] relative scroll-mt-[220px]"
         id="floorPlans"
         onClick={handleOpen}
       >
         <div
-          className="w-[90%] mb-[10px] xl:mb-[40px] space-y-4"
+          className="w-[90%] mb-[10px] xl:mb-[8px] space-y-4"
           id="propertyDetails "
         >
           <PropertyHeading
@@ -68,8 +69,8 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
           />
         </div>
 
-        <div className=" h-[405px] lg:h-[570px] w-full rounded-[14px]  border-solid border-[1px] border-[#92B2C8] bg-[#FFF] shadow-md flex justify-center p-2 xl:items-center flex-col ">
-          <p className=" text-[#005DA0] text-left xl:text-right text-[14px] xl:text-xl not-italic font-medium w-full p-2 xl:mr-14">
+        <div className=" h-[405px] lg:h-[570px] w-full rounded-[14px]  border-solid border-[1px] border-[#92B2C8] bg-[#FFF] shadow-md flex justify-center p-2 pt-0 sm:pt-2 xl:items-center flex-col ">
+          <p className=" text-[#005DA0] text-left xl:text-right text-[14px] xl:text-xl not-italic font-medium w-full p-2 ">
             {createPropertyString(data)}
           </p>
           <div className="w-[100%] xl:w-[70%] flex justify-center items-center flex-col p-[2%] ">
@@ -78,13 +79,13 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
               onClick={handleOpen}
             >
               <img
-                src={data?.projMedia?.floorPlanUrl + "?v=" + Math.random() * 20}
+                src={data?.projMedia?.floorPlanUrl ?? ImgNotAvail}
                 alt=""
                 className="h-full w-full m-auto "
               />
             </div>
             <button onClick={() => setOpened(true)}>
-              <div className="bg-[#F4FBFF] p-[10px] rounded-[29px] gap-[12px] flex justify-end items-center  cursor-pointer absolute bottom-5 right-4 z-50 shadow-[0px_4px_12px_0px_rgba(0,0,0,0.40)]">
+              <div className="bg-[#F4FBFF] p-[10px] rounded-[29px] mt-2  sm:mt-0 gap-[12px] flex justify-end items-center  cursor-pointer absolute bottom-5 right-4 z-50 shadow-[0px_4px_12px_0px_rgba(0,0,0,0.40)]">
                 <p className="text-[#0073C6] text-[12px] xl:text-xl not-italic font-semibold leading-[normal] underline capitalize">
                   Click on image to open floor plan
                 </p>

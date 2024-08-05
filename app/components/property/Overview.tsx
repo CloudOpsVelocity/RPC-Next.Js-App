@@ -3,7 +3,6 @@ import React from "react";
 import ProjBasicDetails from "@/app/components/project/projBasicDetails";
 import { Main } from "@/app/validations/property/index";
 import { generatePropertyOverViewData } from "@/app/data/property/overview";
-import Ratings from "./Ratings";
 import PropertyOverviewBanner from "./OverViewBanner";
 import { footerPhoneIcon } from "@/app/images/commonSvgs";
 import CompareList from "./actions/compareList";
@@ -20,12 +19,12 @@ export default function PropertyOverView({
 }) {
   return (
     <div
-      className="pt-[2%] sm:scroll-mt-[150px] w-[95%] md:w-[95%] rounded-[24px] shadow-md mb-[5%] xl:mb-[2.5%] mt-[2%] bg-gradient-to-r from-[#F6F6F6] /0 via-[#FFF] /45 to-[#FEFFFF]/100 "
+      className="pt-[2%] sm:scroll-mt-[150px] w-[95%] md:w-[95%] rounded-[24px] shadow-md   mt-[2%] bg-gradient-to-r from-[#F6F6F6] /0 via-[#FFF] /45 to-[#FEFFFF]/100 "
       id="overview"
     >
       <div className="pl-[2%] pr-[2%] flex justify-between items-center flex-wrap">
         <div className="md:w-[80%]">
-          <h2 className="text-[22px] sm:text-[24px] xl:text-[32px] text-[#001F35] font-[700] capitalize">
+          <h2 className="text-[18px] sm:text-[24px] xl:text-[32px] text-[#001F35] font-[700] capitalize">
             <span className="lowercase">
               {data.propTypeName === "Plot" ? data.plotArea + " sq.ft" : ""}
             </span>{" "}

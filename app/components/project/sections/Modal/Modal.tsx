@@ -16,6 +16,7 @@ import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import { useState } from "react";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 import ZoomInOut from "../../actions/ZoomInOut";
+import { formatNumberWithSuffix } from "@/app/utils/numbers";
 export default function PartialUnitModal({ data }: any) {
   const isData = useAtomValue(selectedPartialUnitAtom);
   const [active, setActive] = useState(0);
@@ -27,7 +28,8 @@ export default function PartialUnitModal({ data }: any) {
   const selectedOne = isData.others[active];
   const isMobile = useMediaQuery("(max-width: 601px)");
   const { handleDownload } = useDownload("floorPlan");
-  const [, { open }] = useReqCallPopup();
+  const [, { open, MODAL_TYPE }] = useReqCallPopup();
+
   if (!(isData.main === 0 ? true : isData.main)) {
     return null;
   }
@@ -38,7 +40,7 @@ export default function PartialUnitModal({ data }: any) {
       classNames={S}
       size={isMobile ? "100%" : "60%"}
       centered
-      zIndex={1}
+      zIndex={11}
     >
       <div className="w-full bg-transparent     h-[57px] flex items-center justify-between  z-[1000] md:px-10 max-w-[91rem] m-auto">
         <div className="text-[18px] sm:text-2xl not-italic font-bold leading-[normal]">
@@ -82,7 +84,7 @@ export default function PartialUnitModal({ data }: any) {
           />
         </div>
       </div>
-      <div className="flex  items-center w-[90%] h-[438px]  justify-center rounded border    border-solid border-[#4D6677] m-auto relative">
+      <div className="flex  items-center w-[90%] h-[300px] sm:max-h-[320px] xl:min-h-[434px]  justify-center rounded border    border-solid border-[#4D6677] m-auto relative">
         <TransformWrapper>
           <TransformComponent>
             <Image
@@ -90,13 +92,13 @@ export default function PartialUnitModal({ data }: any) {
               width={500}
               height={500}
               alt="image"
-              className="max-h-[434px] object-contain "
+              className="max-h-[294px] sm:max-h-[290px] xl:max-h-[430px] object-contain "
             />
           </TransformComponent>
-          <ZoomInOut className="bottom-0 right-0 pb-2" />
+          <ZoomInOut className=" -bottom-1 -right-[0.5px] sm:bottom-0 sm:right-0 pb-2" />
         </TransformWrapper>
         <button
-          className="flex justify-center items-center gap-1 rounded shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] p-2 bg-[#0073C6] text-white text-base not-italic font-semibold absolute top-2 right-2"
+          className="flex justify-center items-center gap-1 rounded shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] p-1 sm:p-2 bg-[#0073C6] text-white text-xs sm:text-base not-italic font-semibold absolute top-2 right-2"
           onClick={() =>
             open({
               modal_type: "REQ_QUOTE",
@@ -112,12 +114,12 @@ export default function PartialUnitModal({ data }: any) {
           Request Quotation
         </button>
       </div>
-      <div className="flex flex-wrap  w-[90%] m-auto items-center gap:2  md:gap-5 shadow-[0px_4px_20px_0px_#F0F6FF] px-4 md:py-2.5 rounded-[10px] bg-[#e0f4ff] mt-3 mb-3">
+      <div className="flex flex-wrap  w-[90%] m-auto items-center gap:2  md:gap-5 shadow-[0px_4px_20px_0px_#F0F6FF] px-4 py-1 md:py-2.5 rounded-[10px] bg-[#e0f4ff] mt-3 mb-3">
         <div className="flex items-center space-x-3">
           {propertyDetailsSvgs.unitType}
-          <p className="text-[#242424] text-nowrap  text-[12px] xl:text-[16px] font-[500]">
+          <p className="text-[#242424] text-nowrap  text-[11px] xl:text-[16px] font-[500]">
             Unit Type:{" "}
-            <span className="text-[#303A42] text-nowrap  text-[10px] xl:text-[16px] font-[600] ">
+            <span className="text-[#303A42] text-nowrap  text-[12px] xl:text-[16px] font-[600] ">
               {selectedOne?.propType == "32"
                 ? `(${selectedOne.width} x ${selectedOne.length}) sq.ft`
                 : selectedOne?.unitType}
@@ -126,19 +128,22 @@ export default function PartialUnitModal({ data }: any) {
         </div>
         <div className="flex items-center space-x-3">
           {propertyDetailsSvgs.superBuildUparea}
-          <p className="text-[#242424] text-nowrap text-[12px] xl:text-[16px] font-[500]">
+          <p className="text-[#242424] text-nowrap text-[11px] xl:text-[16px] font-[500]">
             {selectedOne?.propType == "32" ? "Plot Area" : "Super Builtup Area"}
             :{" "}
-            <span className="text-[#303A42] text-nowrap  text-[10px] xl:text-[16px] font-[600] ">
-              {selectedOne?.plotArea || selectedOne?.sba} sq.ft
+            <span className="text-[#303A42] text-nowrap  text-[12px] xl:text-[16px] font-[600] ">
+              {formatNumberWithSuffix(
+                selectedOne?.plotArea || selectedOne?.sba
+              )}{" "}
+              sq.ft
             </span>
           </p>
         </div>
         <div className="flex items-center space-x-3">
           {propertyDetailsSvgs.superBuildUparea}
-          <p className="text-[#242424] text-nowrap text-[12px] xl:text-[16px] font-[500]">
+          <p className="text-[#242424] text-nowrap text-[11px] xl:text-[16px] font-[500]">
             Price Range:{" "}
-            <span className="text-[#303A42]  text-nowrap text-[10px] xl:text-[16px] font-[600] ">
+            <span className="text-[#303A42]  text-nowrap text-[12px] xl:text-[16px] font-[600] ">
               {isData.priceRange}
             </span>
           </p>

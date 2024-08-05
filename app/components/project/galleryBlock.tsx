@@ -41,12 +41,12 @@ export default function GalleryBlock({
 
   return (
     <div
-      className="w-[95%] md:w-[90%] sm:pt-[50px]   scroll-mt-[165px] mt-4 sm:mt-0 mb-[3%] sm:mb-0"
+      className="w-[95%] md:w-[90%] sm:pt-[50px]   scroll-mt-[165px] mt-[50px] sm:mt-0 mb-[3%] sm:mb-0"
       id="galleria"
     >
       {type === "prop" ? (
         <PropertyHeading
-          title="GALLERIA"
+          title="Galleria"
           desc="Gallery Highlights : A Glimpse into good property"
         />
       ) : (
@@ -137,7 +137,7 @@ export default function GalleryBlock({
           </div>
           {videos && videos.length > 0 && (
             <>
-              <h3 className="text-[#737579] font-[600] text-[20px] pt-4 lg:text-[24px]   mb-1 sm:mb-[2%] ">
+              <h3 className="text-[#737579] font-[600] text-[20px] sm:pt-4 lg:text-[24px]   mb-1 sm:mb-[2%] ">
                 Videos
               </h3>
               <div className="flex justify-start items-start w-full gap-[4%] flex-wrap ">

@@ -27,8 +27,8 @@ const getProjectDetails = async (slug: string): Promise<MERGERPROJECT> => {
     ...data,
     basicData: {
       ...data.basicData,
-      projectName: capitalizeWords(data.basicData.projectName),
-      postedByName: capitalizeWords(data.basicData.postedByName),
+      projectName: capitalizeWords(data.basicData?.projectName),
+      postedByName: capitalizeWords(data.basicData?.postedByName),
       ...metaData,
     },
   } as MERGERPROJECT;

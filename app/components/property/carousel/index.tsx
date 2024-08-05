@@ -29,11 +29,11 @@ export default function NearByCarouselProperty({
     bhkId,
     propType: listingProps[propTypeName.trim() as keyof typeof listingProps],
   });
-  const listingType = cg === "R" ? "RENT" : "SELL";
+  const listingType = cg === "R" ? "Rent" : "Sell";
 
   return (
     <div
-      className="flex flex-col justify-start items-start w-[100%] mt-[2.5%] scroll-mt-[220px]"
+      className="flex flex-col justify-start items-start w-[100%] mt-[20px] sm:mt-[50px] scroll-mt-[220px]"
       id="similarListing"
     >
       <ProjectCarousel
@@ -55,7 +55,7 @@ export default function NearByCarouselProperty({
       />
       <ProjectCarousel
         type="prop"
-        title={`NEARBY SIMILAR ${listingType} LISTINGS`}
+        title={`Nearby Similar ${listingType} Listings`}
         content={`Check some similar nearby ${listingType.toLowerCase()} listings available`}
         data={
           data != undefined && data.otherListing != undefined

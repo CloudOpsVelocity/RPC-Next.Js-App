@@ -32,10 +32,13 @@ import { getAmenties } from "@/app/utils/api/project";
 
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
-  const { listing: data, nearByLocations } = await getListingDetails(slug);
+  const {
+    listing: data,
+    nearByLocations,
+    totalPrice,
+  } = await getListingDetails(slug);
   const projData = await getProjectDetails(data.projIdEnc);
   const issueData = await getReportConstData();
-  console.log(nearByLocations);
   const TITLE_OF_PROP = data.projIdEnc
     ? data.propName
     : `${data.bhkName ?? ""} ${data.propTypeName} For
@@ -49,7 +52,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
     <div className="w-full">
       <div className="mt-[70px] sm:mt-[90px] w-full sm:pb-[2%] flex xl:text-ellipsis items-center justify-center flex-col">
         <div className="pb-[2%] px-[2%] w-[100%] md:w-[94.3%]">
-          <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%] ">
+          <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%] mt-1 ">
             <span>Home</span> {" > "}
             <Link href={"/project/banglore"} className="text-nowrap">
               <span>Property In {data.ctName}</span>
@@ -60,7 +63,11 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             </span>
           </p>
           {/* Top Cover Image Card */}
-          <PropertyFirstBlock projectDetails={data} projName={data.propName} />
+          <PropertyFirstBlock
+            projectDetails={data}
+            projName={data.propName}
+            totalPrice={totalPrice}
+          />
         </div>
         {/* Navigations Container */}
         <MobileHidden>
@@ -144,10 +151,11 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
               {/* About Builder */}
               <AboutBuilder type="proj" id={projData.builderId} />
               {data.postedById === projData.builderId && (
-                <div     id="faq"
-                className="scroll-mt-[70px] m-auto w-[95%] sm:w-[90%] flex justify-start items-start" >
-                                  <FaqWithBg data={projData.faqs} projName={data.propName} />
-
+                <div
+                  id="faq"
+                  className="scroll-mt-[70px] m-auto w-[95%] sm:w-[90%] flex justify-start items-start"
+                >
+                  <FaqWithBg data={projData.faqs} projName={data.propName} />
                 </div>
               )}{" "}
             </>
@@ -180,7 +188,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           projName={""}
           lat={projData?.lat}
           lng={projData?.lang}
-          projId={data.propIdEnc}
+          projId={data.projIdEnc}
           builderId={projData?.builderId}
           company={projData?.companyName}
           nearBy={{

@@ -28,6 +28,7 @@ import ZoomInOut from "../actions/ZoomInOut";
 import Close from "../button/close";
 import { useMediaQuery } from "@mantine/hooks";
 import { downLoadIcon } from "@/app/images/commonSvgs";
+import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
 
 function CarouselModal({
   projName,
@@ -87,7 +88,7 @@ function CarouselModal({
           <div className="text-[#333] text-left  text-[20px] xl:text-2xl not-italic font-semibold leading-[normal]">
             Floor Plan
           </div>
-          <div className="flex justify-center items-center gap-5">
+          <div className="flex justify-center items-center gap-5 mb-2">
             <button
               onClick={handleDownload}
               className={`text-white flex justify-center items-center gap-1 p-2 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] rounded-[10px] bg-[#0073c6] ${
@@ -105,7 +106,7 @@ function CarouselModal({
             <Close close={close} />
           </div>
         </div>
-        <div className="flex flex-col md:flex-row p-[2%]  mb-10 sm:mb-0 xlmb-10 justify-center items-center gap-[45px] shrink-0 mt-4">
+        <div className="flex flex-col md:flex-row pt-[2%] px-[2%]  mb-10 sm:mb-0 sm:mt-10 justify-center items-center sm:items-start gap-[45px] shrink-0 mt-4">
           <MiddleSection projName={projName} propCgId={propCgId} />
           <RightSection propCgId={propCgId} />
         </div>
@@ -127,7 +128,7 @@ const MiddleSection = ({
 
   return (
     <div className="w-[100%] sm:max-w-[500px]  xl:max-w-[1400px]">
-      <p className="text-[#242424] w-full mt-[18%] sm:mt-[3%] xl:mt-[1%] mb-[1%]  text-[14px] text-center cl:text-left xl:text-[16px] font-[500] ">
+      <p className="text-[#242424] w-full mt-[18%] sm:mt-[0%] mb-[1%] sm:mb-0  text-[14px] text-center cl:text-left xl:text-[16px] font-[500] ">
         {/* Sarang by sumadhura/2bhk/tower 1/ 05%4/north/1124 sq.ft - 3 */}
         <>
           {projName}
@@ -157,14 +158,16 @@ const MiddleSection = ({
           {" | Facing " + selectedFloor?.facingName}
           {propCgId != projectprops.plot &&
             selectedFloor?.superBuildUparea &&
-            " | Area. " + selectedFloor?.superBuildUparea + " sq.ft"}
+            " | Area. " +
+              formatNumberWithSuffix(selectedFloor?.superBuildUparea) +
+              " sq.ft"}
           {propCgId == projectprops.plot &&
             selectedFloor?.plotArea &&
             " | Area. " + selectedFloor?.plotArea + " sq.ft"}
         </>
       </p>
       {selectedFloor?.floorPlanUrl ? (
-        <div className="w-full flex justify-center items-center">
+        <div className="w-full flex justify-center  items-center sm:items-start">
           <TransformWrapper>
             <ImageContainer url={`${selectedFloor?.floorPlanUrl}`} />
           </TransformWrapper>

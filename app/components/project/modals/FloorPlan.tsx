@@ -27,6 +27,7 @@ import styles from "@/app/styles/Carousel.module.css";
 import { unitFloorsAtom } from "../byunitblock";
 import Button from "../../atoms/buttons/variansts";
 import SelectedFilters from "./filters/SelectedFilters";
+import { formatNumberWithSuffix } from "@/app/utils/numbers";
 
 type Props = {
   propCgId: any;
@@ -690,10 +691,15 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
     </div>
   );
 };
-const RightSection = ({ propCgId }: any) => {
+const RightSection = ({ propCgId, className }: any) => {
   const data = useAtomValue(selectedFloorAtom);
   return (
-    <div className="bg-[#F4FBFF] xl:mt-10 p-6 rounded-lg w-[100%] xl:mb-[10%] xl:w-full max-w-[342px] sm:max-w-[300px] xl:max-w-[342px] shadow">
+    <div
+      className={clsx(
+        "bg-[#F4FBFF]  p-6 rounded-lg w-[100%] xl:mb-[10%] xl:w-full max-w-[342px] sm:max-w-[300px] xl:max-w-[342px] shadow",
+        className
+      )}
+    >
       <div className="space-y-4 sm:space-y-2 xl:space-y-4">
         {propCgId != projectprops.plot && (
           <div className="flex items-center space-x-3">
@@ -789,7 +795,7 @@ const RightSection = ({ propCgId }: any) => {
               Super Builtup Area{" "}
               <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
                 {" "}
-                {data.superBuildUparea} sq.ft
+                {formatNumberWithSuffix(data.superBuildUparea)} sq.ft
               </span>
             </p>
           </div>
@@ -802,7 +808,7 @@ const RightSection = ({ propCgId }: any) => {
               Carpet Area{" "}
               <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                 {" "}
-                {data.caretarea} sq.ft
+                {formatNumberWithSuffix(data.caretarea)} sq.ft
               </span>
             </p>
           </div>
@@ -834,7 +840,7 @@ const RightSection = ({ propCgId }: any) => {
                 Terrace Area{" "}
                 <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                   {" "}
-                  {data.terraceArea} sq.ft
+                  {formatNumberWithSuffix(data.terraceArea)} sq.ft
                 </span>
               </p>
             </div>
@@ -850,7 +856,7 @@ const RightSection = ({ propCgId }: any) => {
                 Parking Area{" "}
                 <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                   {" "}
-                  {data.parkingArea} sq.ft
+                  {formatNumberWithSuffix(data.parkingArea)} sq.ft
                 </span>
               </p>
             </div>
@@ -862,7 +868,7 @@ const RightSection = ({ propCgId }: any) => {
               Balcony Size{" "}
               <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                 {" "}
-                {data.totalBalconySize} sq.ft
+                {formatNumberWithSuffix(data.totalBalconySize)} sq.ft
               </span>
             </p>
           </div>
@@ -876,7 +882,7 @@ const RightSection = ({ propCgId }: any) => {
               Plot Area{" "}
               <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
                 {" "}
-                {data.plotArea} sq.ft
+                {formatNumberWithSuffix(data.plotArea)} sq.ft
               </span>
             </p>
           </div>
@@ -1019,10 +1025,10 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
             {" | Facing " + selectedFloor?.facingName}
             {propCgId != projectprops.plot &&
               selectedFloor?.superBuildUparea &&
-              " | Area. " + selectedFloor?.superBuildUparea + " sq.ft"}
+              " | Area. " +formatNumberWithSuffix(selectedFloor?.superBuildUparea) + " sq.ft"}
             {propCgId == projectprops.plot &&
               selectedFloor?.plotArea &&
-              " | Area. " + selectedFloor?.plotArea + " sq.ft"}
+              " | Area. " + formatNumberWithSuffix(selectedFloor?.plotArea) + " sq.ft"}
           </>
         )}
       </p>

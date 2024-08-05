@@ -36,7 +36,7 @@ export default function PropertyBanner({
     />
   ) : (
     <div
-      className="w-[90%] m-auto mt-[2%] shrink-0  bg-[#fcfcfc] mb-20 relative  border shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] border-solid border-[#CAE9FF] sm:px-[22px] sm:py-[18px]  xl:px-[52px] xl:py-[35px] scroll-mt-[250px]"
+      className="w-[90%] m-auto mt-[50px] shrink-0  bg-[#fcfcfc] mb-20 relative  border shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] border-solid border-[#CAE9FF] sm:px-[22px] sm:py-[18px]  xl:px-[52px] xl:py-[35px] scroll-mt-[250px]"
       id="projectDetails"
     >
       <Image
@@ -50,7 +50,7 @@ export default function PropertyBanner({
         {Svg}
         <h1 className="capitalize ml-6   mb-[14px] text-[#242424] text-h2 sm:text-[24px] xl:text-[32px] not-italic font-bold leading-[normal] tracking-[1.28px] ">
           about{" "}
-          <span className="text-[#148B16] text-[32px] not-italic font-bold leading-[normal] capitalize">
+          <span className="text-[#148B16] text-h2 sm:text-[24px] xl:text-[32px] not-italic font-bold leading-[normal] capitalize">
             {projectName}
           </span>
           <p className=" text-[#4D6677] text-h2  sm:text-[16px] xl:text-[24px] break-words italic font-medium leading-[normal] capitalize mt-2">
@@ -120,8 +120,8 @@ function PropertyBannerForMobile({
 }: any) {
   return (
     <div className="w-[95%] md:w-[90%] mx-auto mt-5 md:mt-[2%] mb-10 md:mb-20 relative bg-[#fcfcfc] border border-solid border-blue-200  shadow-md !m-[2%]">
-      <div className="max-w-[100%] xl:mx-auto p-1  xl:p-5 ">
-        <h2 className="text-[#212C33] text-lg xl:text-2xl md:text-[32px] not-italic font-semibold leading-[normal] tracking-[1.28px] ml-0 md:ml-8 mb-4 md:mb-0">
+      <div className="max-w-[100%] xl:mx-auto p-1  xl:p-5  ">
+        <h2 className="text-[#212C33] text-lg xl:text-2xl md:text-[32px] not-italic font-semibold leading-[normal] tracking-[1.28px] pt-2 ml-0 md:ml-8 mb-4 md:mb-0">
           About{" "}
           <span className="text-[#148B16] font-semibold">{projectName}</span>
         </h2>

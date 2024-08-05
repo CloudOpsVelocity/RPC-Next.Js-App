@@ -119,7 +119,7 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
   const isMobile = useMediaQuery(`(max-width: 601px)`);
   return (
     <form
-      className="max-w-[100%] mx-auto sm:my-8 sm:pt-[12px] rounded-lg space-y-2"
+      className="max-w-[100%] mx-auto mt-6 sm:mt-[50px] sm:pt-[12px] rounded-lg space-y-2"
       onSubmit={onSubmit(formSubmit)}
     >
       <h2 className="inline-flex items-center gap-3 p-2 rounded-2xl bg-[#ecf7ff] sm:mb-7">
@@ -140,7 +140,7 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
           Have any Question? Ask Here 👇
         </span>
       </h2>
-      <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[10px] xl:mb-[24px] capitalize ">
+      <h2 className="text-[16px] sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[10px] xl:mb-[24px] capitalize ">
         Ask your question related to
         <span className="!text-green-600"> {projName} Project!</span>
       </h2>
@@ -164,7 +164,7 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
               handleTrimAndReplace(e, "question", setFieldValue, "dis")
             }
             classNames={{
-              input: StepCscs.textAreaInput,
+              input: StepCscs.textAreaInput, error:"!text-[12px] !sm:text-[18px]"
             }}
           />
         </div>
@@ -202,9 +202,9 @@ const FaqCard = ({
         {faqQuestion}
       </h4>
       <FaqReadMore text={faqAnswer} title={faqQuestion} />
-      {!last && (
+     {/*  {!last && ( */}
         <hr className="bg-[#00000080] my-4 sm:my-[25px] xl:my-[35px] h-[2px]" />
-      )}
+    {/*   )} */}
     </div>
   );
 };

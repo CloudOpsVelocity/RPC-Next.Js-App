@@ -13,6 +13,8 @@ import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 import ZoomInOut from "../../project/actions/ZoomInOut";
 import { useMediaQuery } from "@mantine/hooks";
 import Close from "../../project/button/close";
+import { ImgNotAvail } from "@/app/data/project";
+import { formatNumberWithSuffix } from "@/app/utils/numbers";
 
 function PFloorPlanModal({
   data,
@@ -82,7 +84,6 @@ export default PFloorPlanModal;
 
 const MiddleSection = () => {
   const data = useAtomValue(selectedFloorAtom);
-
   return (
     <div
       className={`col-span-1 p-4 mt-[15%] sm:mt-2  md:h-[500px] w-full h-full   bg-gray-600 sm:bg-white`}
@@ -90,7 +91,7 @@ const MiddleSection = () => {
       <div className="relative">
         <TransformComponent>
           <img
-            src={`${data.floorPlanUrl}?v=${Math.random()}`}
+            src={data.floorPlanUrl ?? ImgNotAvail}
             alt="Floor Plan"
             className="max-h-[500px] object-contain"
             width={1200}
@@ -112,7 +113,7 @@ const RightSection = ({ propCgId }: any) => {
           <div className="flex items-center space-x-3">
             {propertyDetailsSvgs.unitType}
             <p className="text-[#4D6677] text-[14px] font-[500]">
-              Unit Type{" "}
+              Unit Type:
               <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
                 {" "}
                 {data.bhkName}
@@ -127,7 +128,7 @@ const RightSection = ({ propCgId }: any) => {
             <div className="flex items-center space-x-3">
               {propertyDetailsSvgs.towerName}
               <p className="text-[#4D6677] text-[14px] font-[500]">
-                Tower{" "}
+                Tower:
                 <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
                   {" "}
                   {data.towerName}
@@ -142,7 +143,7 @@ const RightSection = ({ propCgId }: any) => {
             <div className="flex items-center space-x-3">
               {propertyDetailsSvgs.block}
               <p className="text-[#4D6677] text-[14px] font-[500]">
-                Block{" "}
+                Block:
                 <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
                   {" "}
                   {data.block}
@@ -154,7 +155,10 @@ const RightSection = ({ propCgId }: any) => {
         <div className="flex items-center space-x-3">
           {propertyDetailsSvgs.unitNumber}
           <p className="text-[#4D6677] text-[14px] font-[500]">
-            Unit Number{" "}
+            {propCgId == projectprops.independent
+              ? "House Number"
+              : "Unit Number"}
+            :
             <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
               {" "}
               {data.unitNumber}
@@ -172,7 +176,7 @@ const RightSection = ({ propCgId }: any) => {
                 propCgId == projectprops.villa
                   ? "At Elevation"
                   : "Floor"
-              }`}{" "}
+              }:`}
               <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                 {" "}
                 {`${data.isBasement == "Y" ? "B+" : ""}${
@@ -191,7 +195,7 @@ const RightSection = ({ propCgId }: any) => {
         <div className="flex items-center space-x-3">
           {propertyDetailsSvgs.facingName}
           <p className="text-[#4D6677] text-[14px] font-[500]">
-            {`${propCgId == projectprops.plot ? "Plot Facing" : "Facing"} `}{" "}
+            {`${propCgId == projectprops.plot ? "Plot Facing" : "Facing"}: `}
             <span className="text-[#303A42] text-[14px] font-[600] ml-[10px] ">
               {" "}
               {data.facingName}
@@ -203,10 +207,10 @@ const RightSection = ({ propCgId }: any) => {
           <div className="flex items-center space-x-3">
             {propertyDetailsSvgs.superBuildUparea}
             <p className="text-[#4D6677] text-[14px] font-[500]">
-              Super Builtup Area{" "}
+              Super Builtup Area:
               <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
                 {" "}
-                {data.superBuildUparea} sq.ft
+                {formatNumberWithSuffix(data.superBuildUparea)} sq.ft
               </span>
             </p>
           </div>
@@ -216,10 +220,10 @@ const RightSection = ({ propCgId }: any) => {
           <div className="flex items-center space-x-3">
             {propertyDetailsSvgs.caretarea}
             <p className="text-[#4D6677] text-[14px] font-[500]">
-              Carpet Area{" "}
+              Carpet Area:
               <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                 {" "}
-                {data.caretarea} sq.ft
+                {formatNumberWithSuffix(data.caretarea)} sq.ft
               </span>
             </p>
           </div>
@@ -228,7 +232,7 @@ const RightSection = ({ propCgId }: any) => {
           <div className="flex items-center space-x-3">
             {propertyDetailsSvgs.gardenArea}
             <p className="text-[#4D6677] text-[14px] font-[500]">
-              Garden Space{" "}
+              Garden Space:
               <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                 {" "}
                 {data.ga} sq.ft
@@ -244,10 +248,10 @@ const RightSection = ({ propCgId }: any) => {
             <div className="flex items-center space-x-3">
               {propertyDetailsSvgs.caretarea}
               <p className="text-[#4D6677] text-[14px] font-[500]">
-                Garden Area{" "}
+                Garden Area:
                 <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                   {" "}
-                  {data.gardenArea} sq.ft
+                  {formatNumberWithSuffix(data.gardenArea)} sq.ft
                 </span>
               </p>
             </div>
@@ -260,10 +264,10 @@ const RightSection = ({ propCgId }: any) => {
             <div className="flex items-center space-x-3">
               {propertyDetailsSvgs.caretarea}
               <p className="text-[#4D6677] text-[14px] font-[500]">
-                Terrace Area{" "}
+                Terrace Area:
                 <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                   {" "}
-                  {data.terraceArea} sq.ft
+                  {formatNumberWithSuffix(data.terraceArea)} sq.ft
                 </span>
               </p>
             </div>
@@ -273,10 +277,10 @@ const RightSection = ({ propCgId }: any) => {
           <div className="flex items-center space-x-3">
             {propertyDetailsSvgs.parkingArea}
             <p className="text-[#4D6677] text-[14px] font-[500]">
-              Balcony Size{" "}
+              Balcony Size:
               <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                 {" "}
-                {data.totalBalconySize} sq.ft
+                {formatNumberWithSuffix(data.totalBalconySize)} sq.ft
               </span>
             </p>
           </div>
@@ -284,23 +288,24 @@ const RightSection = ({ propCgId }: any) => {
         {(propCgId == projectprops.plot ||
           propCgId == projectprops.villa ||
           propCgId == projectprops.rowHouse ||
-          propCgId == projectprops.independent) && (
-          <div className="flex items-center space-x-3">
-            {propertyDetailsSvgs.plotArea}
-            <p className="text-[#4D6677] text-[14px] font-[500]">
-              Plot Area{" "}
-              <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
-                {" "}
-                {data.plotArea} sq.ft
-              </span>
-            </p>
-          </div>
-        )}
+          propCgId == projectprops.independent) &&
+          data.plotArea && (
+            <div className="flex items-center space-x-3">
+              {propertyDetailsSvgs.plotArea}
+              <p className="text-[#4D6677] text-[14px] font-[500]">
+                Plot Area:
+                <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
+                  {" "}
+                  {data.plotArea} sq.ft
+                </span>
+              </p>
+            </div>
+          )}
         {propCgId != projectprops.plot && data.noocp ? (
           <div className="flex items-center space-x-3">
             {propertyDetailsSvgs.noOfCarParking}
             <p className="text-[#4D6677] text-[14px] font-[500]">
-              Open Car Parking
+              Open Car Parking:
               <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                 {" "}
                 {data.noocp ? data.noocp : "N/A"}
@@ -312,7 +317,7 @@ const RightSection = ({ propCgId }: any) => {
           <div className="flex items-center space-x-3">
             {propertyDetailsSvgs.closedCarParking}
             <p className="text-[#4D6677] text-[14px] font-[500]">
-              Closed Car Parking
+              Closed Car Parking:
               <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                 {" "}
                 {data.noccp ? data.noccp : "N/A"}
@@ -324,7 +329,7 @@ const RightSection = ({ propCgId }: any) => {
           <div className="flex items-center space-x-3">
             {propertyDetailsSvgs.closeBikeParking}
             <p className="text-[#4D6677] text-[14px] font-[500]">
-              Closed Bike Parking
+              Closed Bike Parking:
               <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                 {" "}
                 {data.nocbp ? data.nocbp : "N/A"}
@@ -336,7 +341,7 @@ const RightSection = ({ propCgId }: any) => {
           <div className="flex items-center space-x-3">
             {propertyDetailsSvgs.openBikeParking}
             <p className="text-[#4D6677] text-[14px] font-[500]">
-              Open Bike Parking
+              Open Bike Parking:
               <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                 {" "}
                 {data.noobp ? data.noobp : "N/A"}
@@ -361,7 +366,7 @@ const RightSection = ({ propCgId }: any) => {
           <div className="flex items-center space-x-3">
             {propertyDetailsSvgs.totalNumberOfBalcony}
             <p className="text-[#4D6677] text-[14px] font-[500]">
-              Balconies{" "}
+              Balconies:
               <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
                 {" "}
                 {data.totalNumberOfBalcony}
@@ -374,7 +379,7 @@ const RightSection = ({ propCgId }: any) => {
           <div className="flex items-center space-x-3">
             {propertyDetailsSvgs.totalNumberofBathroom}
             <p className="text-[#4D6677] text-[14px] font-[500]">
-              Bathroom{" "}
+              Bathroom:
               <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
                 {" "}
                 {data.totalNumberofBathroom}
@@ -387,7 +392,7 @@ const RightSection = ({ propCgId }: any) => {
           <div className="flex items-center space-x-3">
             {propertyDetailsSvgs.length}
             <p className="text-[#4D6677] text-[14px] font-[500]">
-              Length of Plot{" "}
+              Length of Plot:
               <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
                 {" "}
                 {data.length} ft.
@@ -400,7 +405,7 @@ const RightSection = ({ propCgId }: any) => {
           <div className="flex items-center space-x-3">
             {propertyDetailsSvgs.width}
             <p className="text-[#4D6677] text-[14px] font-[500]">
-              Breadth of Plot{" "}
+              Breadth of Plot:
               <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
                 {" "}
                 {data.width} ft.

@@ -30,7 +30,7 @@ export default function About({
   return (
     <div
       className={clsx(
-        "w-[95%] sm:w-[90%] mb-[3%] xl:mb-[0%]  sm:mt-[50px] m-auto sm:mb-[0%] sm:scroll-mt-[140px] xl:scroll-mt-[150px]",
+        "w-[95%] sm:w-[90%] sm:mb-[0px] xl:mb-[0%] mt-4  sm:mt-[50px] m-auto mb-[20px] sm:scroll-mt-[140px] xl:scroll-mt-[150px]",
         className
       )}
       id={id ?? ""}
@@ -41,7 +41,7 @@ export default function About({
           desc={
             "About listing get summarized perspective for the incredible listing"
           }
-          className="mb-[14px] sm:mb-[30px]"
+          className="mb-[14px] sm:mb-[8px]"
         />
       ) : (
         <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[10px] xl:mb-[10px] capitalize">

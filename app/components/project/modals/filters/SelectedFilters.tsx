@@ -45,6 +45,7 @@ const SelectedFilters = ({
       scrollFiltersRef.current.scrollLeft += scrollAmount;
     }
   };
+
   return (
     <div
       className={`flex justify-start items-center w-full  relative bottom-[20px] mb-1   ${
@@ -66,7 +67,7 @@ const SelectedFilters = ({
       <div
         ref={scrollFiltersRef}
         className={clsx(
-          "flex w-full xl:max-w-[60%] scroll-smooth overflow-x-auto overflow-y-hidden scrollbar-hide gap-4",
+          "flex w-full  scroll-smooth overflow-x-auto overflow-y-hidden scrollbar-hide gap-4",
           propCgId === projectprops.plot && "md:max-w-[65%]"
         )}
       >

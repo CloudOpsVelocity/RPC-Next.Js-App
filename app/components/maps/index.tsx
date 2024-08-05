@@ -179,7 +179,7 @@ const Content: React.FC<any> = ({
           <p className="font-bold text-black text-lg sm:text-lg">{projName}</p>
         </Tooltip> */}
         <Popup className="min-w-fit" offset={[30, -4]}>
-          <p className="font-bold text-black text-lg sm:text-lg">{projName}</p>
+          <p className="font-bold text-black text-[14px] sm:text-lg">{projName}</p>
         </Popup>
       </Marker>
       <polyline />

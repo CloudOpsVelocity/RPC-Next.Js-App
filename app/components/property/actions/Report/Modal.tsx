@@ -25,7 +25,7 @@ export default function ReportModal({ issueData }: any) {
     if (!(reportStatus.length > 0)) {
       seterrorMsg(true);
       return;
-    } else if (reportStatus.includes(607)) {
+    } else if (reportStatus.includes(670)) {
       if (!text) {
         setStatus("error");
         return;
@@ -84,7 +84,7 @@ export default function ReportModal({ issueData }: any) {
         onClose={onClose}
         centered
         size={isMobile ? "100%" : status === "success" ? "32%" : "50%"}
-        className="overflow-hidden flex flex-wrap w-auto !scrollbar-hide !m-4"
+        // className="overflow-hidden flex flex-wrap w-auto !scrollbar-hide !m-4"
         styles={{
           header: {
             display: "none",
