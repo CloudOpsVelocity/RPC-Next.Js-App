@@ -13,8 +13,9 @@ export default function Tabs({}: Props) {
   const setActiveTab = (tab: string) => {
     console.log(tab);
     if (tab == "R") {
-      alert("working ");
       dispatch({ type: "SET_BUGDET_VALUE", payload: [10000, 100000] });
+    } else {
+      dispatch({ type: "SET_BUGDET_VALUE", payload: [500000, 600000000] });
     }
     dispatch({ type: "SET_CG", payload: tab });
   };

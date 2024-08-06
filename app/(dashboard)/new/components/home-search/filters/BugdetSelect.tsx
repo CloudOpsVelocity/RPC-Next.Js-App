@@ -68,8 +68,9 @@ const toFormattedString = (value: number): string => {
 
 export function BasicBudgetSelect() {
   const [f, dispatch] = useAtom(homeSearchFiltersAtom);
-  const [minValue, setMinValue] = useState<number>(f.bugdetValue[0]);
-  const [maxValue, setMaxValue] = useState<number>(f.bugdetValue[1]);
+  // const [minValue, setMinValue] = useState<number>(f.bugdetValue[0]);
+  // const [maxValue, setMaxValue] = useState<number>(f.bugdetValue[1]);
+  const [minValue, maxValue] = f.bugdetValue;
 
   const [focusedInput, setFocusedInput] = useState<"min" | "max" | null>(null);
   const combobox = useCombobox({
@@ -95,13 +96,13 @@ export function BasicBudgetSelect() {
     const value = map.get(item)?.value ?? 0;
     const handleOptionSelect = () => {
       if (focusedInput === "max") {
-        setMaxValue(value);
+        // setMaxValue(value);
         dispatch({
           type: "SET_BUGDET_VALUE",
           payload: [minValue, value],
         });
       } else {
-        setMinValue(value);
+        // setMinValue(value);
         dispatch({
           type: "SET_BUGDET_VALUE",
           payload: [value, maxValue],
@@ -116,24 +117,24 @@ export function BasicBudgetSelect() {
   });
 
   const handleMinChange = (val: number) => {
-    setMinValue(val);
+    // setMinValue(val);
     dispatch({ type: "SET_BUGDET_VALUE", payload: [val, maxValue] });
   };
 
   const handleMaxChange = (val: number) => {
-    setMaxValue(val);
+    // setMaxValue(val);
     dispatch({ type: "SET_BUGDET_VALUE", payload: [minValue, val] });
   };
 
   const handleMaxBlur = () => {
     if (maxValue < minValue) {
-      setMaxValue("" as any);
+      // setMaxValue("" as any);
       dispatch({ type: "SET_BUGDET_VALUE", payload: [minValue, "" as any] });
     }
   };
   const handleMinBlur = () => {
     if (maxValue > minValue) {
-      setMinValue("" as any);
+      // setMinValue("" as any);
       dispatch({ type: "SET_BUGDET_VALUE", payload: ["" as any, maxValue] });
     }
   };
