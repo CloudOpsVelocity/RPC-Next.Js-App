@@ -58,6 +58,7 @@ const LeftSideBlock = ({ mutate }: Props) => {
         >
           <NewTabCon
             onTabChange={onTabChange}
+            Activities={params.cg}
             selectedProtype={params.listedBy ?? "All"}
             categoryType={SEARCH_FILTER_DATA.categoryDataListing}
           />

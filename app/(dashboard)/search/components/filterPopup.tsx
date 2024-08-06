@@ -322,8 +322,20 @@ const FilterPopup = () => {
           >
             Amenities
           </h3>
-          <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
+          <div className="flex  mb-[3%] justify-start items-center gap-[4%] flex-wrap ">
             <Checkbox label="Lift" color="green" />
+            {SEARCH_FILTER_DATA.amenities.map((i, ind)=>{
+              return(
+                <Checkbox
+                className="my-2"
+                      key={i.cid}
+                      label={i.constDesc}
+                      color="green"
+                      onClick={() => handleCheckboxClick("amenities", i.cid)}
+                      checked={filters.amenities.includes(i.cid)}
+                    />
+              )
+            })}
           </div>
 
           {filters?.propTypes != projectprops.plot && (
@@ -334,7 +346,7 @@ const FilterPopup = () => {
               >
                 Parking
               </h3>
-              <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
+              <div className="flex  mb-[3%] justify-start items-start gap-[4%]  ">
                 {[...Array(7)].map((x, i) => {
                   return (
                     <Checkbox

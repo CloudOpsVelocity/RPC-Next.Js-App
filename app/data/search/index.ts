@@ -107,9 +107,25 @@ export const SEARCH_FILTER_DATA = {
     },
   ],
   amenities: [
-    {
-      label: "Lift",
-    },
+      { "cid": 324, "constDesc": "Borewell", "constGroup": "Overlooking", "constType": "CON", "constParentGroup": "projamenity", "parentGroupId": 200, "seq": 54 },
+      { "cid": 327, "constDesc": "Park", "constGroup": "Overlooking", "constType": "CON", "constParentGroup": "projamenity", "parentGroupId": 200, "seq": 57 },
+      { "cid": 307, "constDesc": "Wifi", "constGroup": "Property Features", "constType": "CON", "constParentGroup": "projamenity", "parentGroupId": 200, "seq": 37 },
+      { "cid": 310, "constDesc": "Piped Gas", "constGroup": "Property Features", "constType": "CON", "constParentGroup": "projamenity", "parentGroupId": 200, "seq": 40 },
+      { "cid": 292, "constDesc": "Visitors Parking Area", "constGroup": "Parking", "constType": "CON", "constParentGroup": "projamenity", "parentGroupId": 200, "seq": 22 },
+      { "cid": 238, "constDesc": "Swimming Pool", "constGroup": "Infrastructure & Recreational Facilities", "constType": "CON", "constParentGroup": "projamenity", "parentGroupId": 200, "seq": 6 },
+      { "cid": 227, "constDesc": "Kids Play Area", "constGroup": "Infrastructure & Recreational Facilities", "constType": "CON", "constParentGroup": "projamenity", "parentGroupId": 200, "seq": 6 },
+      { "cid": 340, "constDesc": "Close To School", "constGroup": "Location Advantages", "constType": "CON", "constParentGroup": "projamenity", "parentGroupId": 200, "seq": 70 },
+      { "cid": 289, "constDesc": "CCTV Cameras", "constGroup": "Security", "constType": "CON", "constParentGroup": "projamenity", "parentGroupId": 200, "seq": 19 },
+      { "cid": 290, "constDesc": "power backup", "constGroup": "Security", "constType": "CON", "constParentGroup": "projamenity", "parentGroupId": 200, "seq": 20 },
+      { "cid": 322, "constDesc": "Security Guard", "constGroup": "Apartment Apartment", "constType": "CON", "constParentGroup": "projamenity", "parentGroupId": 200, "seq": 52 },
+      { "cid": 319, "constDesc": "Gym", "constGroup": "Apartment Features", "constType": "CON", "constParentGroup": "projamenity", "parentGroupId": 200, "seq": 49 },
+      { "cid": 321, "constDesc": "Club House", "constGroup": "Apartment Features", "constType": "CON", "constParentGroup": "projamenity", "parentGroupId": 200, "seq": 51 },
+      { "cid": 295, "constDesc": "Elevators/Lifts", "constGroup": "Amenities", "constType": "CON", "constParentGroup": "projamenity", "parentGroupId": 200, "seq": 25 },
+      { "cid": 302, "constDesc": "Intercom Facility", "constGroup": "Amenities", "constType": "CON", "constParentGroup": "projamenity", "parentGroupId": 200, "seq": 32 }
+  
+
+  
+  
   ],
   categoryDataProject: [
     {
