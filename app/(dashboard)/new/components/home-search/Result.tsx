@@ -13,37 +13,19 @@ import toast from "react-hot-toast";
 export default function Results() {
   const { push } = useRouter();
   const { data, isLoading, handleResetQuery } = useQsearch();
+
   const [filters, dispatch] = useAtom(homeSearchFiltersAtom);
   if (isLoading) {
     return <Loading />;
   }
-
-  // Filter data into Locality, Cities, Builders, Projects, Listings, and ProjectListings
-  const localities = data?.loc?.map((item: any) => ({
-    name: item.name,
-    id: item.id,
-  }));
-  const cities = data?.cities?.map((item: any) => ({
-    name: item.name,
-    id: item.id,
-  }));
-  const builders = data?.builders?.map((item: any) => ({
-    name: item.name,
-    id: item.id,
-  }));
-  const projects = data?.projects?.map((item: any) => ({
-    name: item.name,
-    id: item.id,
-  }));
-  const listings = data?.listing?.map((item: any) => ({
-    name: item.name,
-    id: item.id,
-  }));
-  const projectListings = data?.projectListing?.map((item: any) => ({
-    name: item.name,
-    id: item.id,
-  }));
-
+  const {
+    loc: localities,
+    builders,
+    cities,
+    projects,
+    listing: listings,
+    projectListing,
+  } = data;
   const handleAddSearch = (newItem: string) => {
     if (!filters.locality.includes(newItem)) {
       dispatch({ type: "ADD_LOCALITY", payload: newItem });
@@ -88,102 +70,124 @@ export default function Results() {
         break;
     }
   };
-
+  const noResults =
+    localities.length === 0 &&
+    cities.length === 0 &&
+    builders.length === 0 &&
+    projects.length === 0 &&
+    listings.length === 0 &&
+    projectListing.length === 0;
   return (
     <ScrollArea className="px-5 py-2 h-[200px] sm:h-[330px]">
-      <div>
-        {localities?.length > 0 && cities?.length > 0 && (
-          <h2 className="text-[#5F81B2] text-[14px] sm:text-xl flex space-x-2 items-center">
-            <SearchLocationIcon /> <span>Location</span>
-          </h2>
-        )}
+      {noResults ? (
+        <p>No results found</p>
+      ) : (
+        <>
+          {" "}
+          <div>
+            {localities?.length > 0 && cities?.length > 0 && (
+              <h2 className="text-[#5F81B2] text-[14px] sm:text-xl flex space-x-2 items-center">
+                <SearchLocationIcon /> <span>Location</span>
+              </h2>
+            )}
 
-        {cities?.length > 0 && <SubHeading text="City" />}
-        <ul>
-          {cities?.map((city: any) => (
-            <li
-              onClick={() => handleAddCity(`${city.name}+${city.id}`)}
-              className="text-[#737579] text-[12px] sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
-              key={city.id}
-            >
-              {city.name}
-            </li>
-          ))}
-        </ul>
-        {localities?.length > 0 && <SubHeading text="Locality" />}
-        <ul>
-          {localities?.map((locality: any) => (
-            <li
-              onClick={() => handleAddSearch(`${locality.name}+${locality.id}`)}
-              className="text-[#737579] text-[12px] sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
-              key={locality.id}
-            >
-              {locality.name}
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div>
-        {projects && projects.length > 0 && (
-          <h2 className="text-[#5F81B2] sm:text-xl flex space-x-2 items-center mt-[14px] mb-1">
-            {property} <span>Projects</span>
-          </h2>
-        )}
-        <ul>
-          {projects?.map((project: any) => (
-            <li
-              onClick={() => handlePush("project", project.id)}
-              className="text-[#737579] text-[14px] sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
-              key={project.id}
-            >
-              {project.name}
-            </li>
-          ))}
-        </ul>
-        {listings?.length > 0 && <SubHeading text="Listings" />}
-        <ul>
-          {listings?.map((listing: any) => (
-            <li
-              onClick={() =>
-                handlePush("listing", {
-                  id: listing.id,
-                  name: listing.name.split("in")[1],
-                })
-              }
-              className="text-[#737579] text-[14px] sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
-              key={listing.id}
-            >
-              {listing.name}
-            </li>
-          ))}
-        </ul>
-        {projectListings?.length > 0 && <SubHeading text="Project Listings" />}
-        <ul>
-          {projectListings?.map((projectListing: any) => (
-            <li
-              onClick={() => handlePush("projectListing", projectListing.id)}
-              className="text-[#737579] text-[14px] sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
-              key={projectListing.id}
-            >
-              {projectListing.name}
-            </li>
-          ))}
-        </ul>
-        {builders?.length > 0 && <SubHeading text="Builders" />}
-        <ul>
-          {builders?.map((builder: any) => (
-            <li
-              onClick={() =>
-                handlePush("builder", { name: builder.name, id: builder.id })
-              }
-              className="text-[#737579] text-[12px] sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
-              key={builder.id}
-            >
-              {builder.name}
-            </li>
-          ))}
-        </ul>
-      </div>
+            {cities?.length > 0 && <SubHeading text="City" />}
+            <ul>
+              {cities?.map((city: any) => (
+                <li
+                  onClick={() => handleAddCity(`${city.name}+${city.id}`)}
+                  className="text-[#737579] text-[12px] sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
+                  key={city.id}
+                >
+                  {city.name}
+                </li>
+              ))}
+            </ul>
+            {localities?.length > 0 && <SubHeading text="Locality" />}
+            <ul>
+              {localities?.map((locality: any) => (
+                <li
+                  onClick={() =>
+                    handleAddSearch(`${locality.name}+${locality.id}`)
+                  }
+                  className="text-[#737579] text-[12px] sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
+                  key={locality.id}
+                >
+                  {locality.name}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            {projects && projects.length > 0 && (
+              <h2 className="text-[#5F81B2] sm:text-xl flex space-x-2 items-center mt-[14px] mb-1">
+                {property} <span>Projects</span>
+              </h2>
+            )}
+            <ul>
+              {projects?.map((project: any) => (
+                <li
+                  onClick={() => handlePush("project", project.id)}
+                  className="text-[#737579] text-[14px] sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
+                  key={project.id}
+                >
+                  {project.name}
+                </li>
+              ))}
+            </ul>
+            {listings?.length > 0 && <SubHeading text="Listings" />}
+            <ul>
+              {listings?.map((listing: any) => (
+                <li
+                  onClick={() =>
+                    handlePush("listing", {
+                      id: listing.id,
+                      name: listing.name.split("in")[1],
+                    })
+                  }
+                  className="text-[#737579] text-[14px] sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
+                  key={listing.id}
+                >
+                  {listing.name}
+                </li>
+              ))}
+            </ul>
+            {projectListing?.length > 0 && (
+              <SubHeading text="Project Listings" />
+            )}
+            <ul>
+              {projectListing?.map((projectListing: any) => (
+                <li
+                  onClick={() =>
+                    handlePush("projectListing", projectListing.id)
+                  }
+                  className="text-[#737579] text-[14px] sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
+                  key={projectListing.id}
+                >
+                  {projectListing.name}
+                </li>
+              ))}
+            </ul>
+            {builders?.length > 0 && <SubHeading text="Builders" />}
+            <ul>
+              {builders?.map((builder: any) => (
+                <li
+                  onClick={() =>
+                    handlePush("builder", {
+                      name: builder.name,
+                      id: builder.id,
+                    })
+                  }
+                  className="text-[#737579] text-[12px] sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
+                  key={builder.id}
+                >
+                  {builder.name}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </>
+      )}
     </ScrollArea>
   );
 }
