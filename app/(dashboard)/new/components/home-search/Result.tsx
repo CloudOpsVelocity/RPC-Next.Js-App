@@ -70,13 +70,15 @@ export default function Results() {
       case "listing":
         {
           const [ut, pt, cg, lt] = data.id.split("_");
-          alert(`${ut} ${pt} ${cg} ${lt}, ${data.name}`);
-          const url = encodeURI(`${data.name}+${data.id}`);
-          window.open(`/search`);
+          const url = `propTypes=${pt}&unitTypes=${ut}&cgs=${cg}&localities=${data.name}%2B${lt}`;
+          window.open("/search/listing?" + url);
         }
         break;
       case "projectListing":
-        push(`/abc/delhi/palika/${data}`);
+        {
+          const url = `projIdEnc=${data}`;
+          window.open("/search/listing?" + url);
+        }
         break;
       case "builder":
         const url = encodeURI(`${data.name}+${data.id}`);
