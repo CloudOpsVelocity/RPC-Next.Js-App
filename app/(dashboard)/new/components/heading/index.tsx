@@ -23,7 +23,7 @@ export default function MainHeading({ title, content, className }: Props) {
       </h1>
       <h4
         className={clsx(
-          "text-black text-[10px] sm:text-xl not-italic font-medium sm:mt-1",
+          "text-black text-[10px] sm:text-[14px] xl:text-xl not-italic font-medium sm:mt-1",
           className?.content
         )}
       >

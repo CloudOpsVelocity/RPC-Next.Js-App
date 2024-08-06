@@ -6,29 +6,29 @@ type Props = {};
 
 export default function HomeFeatures({}: Props) {
   return (
-    <div className="sm:w-[90%] pb-[10px] pl-[4%] w-full m-auto pt-0 sm:mt-0 sm:pb-16 sm:pt-8 bg-[#EEF4F9] ">
-      <h1 className="hidden sm:block text-[#202020] text-center text-[24px] not-italic font-bold m-0 ">
+    <div className="w-full pb-[10px] pl-[4%] m-auto pt-0 sm:mt-0 sm:pb-16 sm:pt-8 bg-[#EEF4F9] ">
+      <h1 className="hidden sm:block text-[#202020] text-center text-[20px] xl:text-[24px] not-italic font-bold m-0 ">
         Why Choose{" "}
-        <span className=" text-[color:var(--Brand-green-primary,#148B16)] text-[24px] not-italic font-bold">
+        <span className=" text-[color:var(--Brand-green-primary,#148B16)] text-[20px] xl:text-[24px] not-italic font-bold">
           {" "}
           Get Right Property?
         </span>
       </h1>
-      <p className="hidden sm:block text-[#242424] text-center text-[16px] not-italic font-semibold leading-[30px] mt-[16px]">
+      <p className="hidden sm:block text-[#242424] text-center text-[14px] xl:text-[16px] not-italic font-semibold leading-[20px] xl: mt-[11px] xl:mt-[16px]">
         Choose us for real estate because we offer expert guidance, a vast
         property selection and commitment to your dreams.
       </p>
-      <p className="hidden sm:block text-[#33535F] text-[16px] not-italic font-semibold text-center mt-[10px]">
+      <p className="hidden sm:block text-[#33535F] text-[14px] xl:text-[16px] not-italic font-semibold text-center mt-[6px] xl:mt-[10px]">
         Trust in our experience to find your perfect home!
       </p>
-      <div className=" shrink-0 m-auto flex sm:justify-center sm:items-end max-w-[1200px] gap-4 flex-wrap sm:flex-nowrap">
+      <div className=" shrink-0 m-auto flex sm:justify-center items-center mt-[30px] xl-[mt-0] xl:items-end max-w-[1200px] gap-4 flex-wrap sm:flex-nowrap">
         <div className="hidden sm:block sm:min-w-[232px] sm:ml-[15%]">
           {config.svg}
         </div>
         <div className=" sm:hidden sm:min-w-[232px]  sm:ml-[15%]">
           {config.mobileSvg}
         </div>
-        <div className="space-y-2 sm:space-y-0 ">
+        <div className="space-y-2 gap-[10px] sm:space-y-0 ">
           {config.data.map((item, index) => (
             <Line text={item} key={index} />
           ))}

@@ -119,7 +119,7 @@ export default function Footer({}: Props) {
               Your Email
             </p>
 
-            <div className="flex justify-start items-start w-full gap-[16px] ">
+            <div className="flex justify-between items-center w-full gap-[16px] ">
               <input
                 type="text"
                 placeholder="Enter Your Email"

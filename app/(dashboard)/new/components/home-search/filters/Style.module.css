@@ -2,6 +2,7 @@
   background-color: #f3f3f3;
   min-width: fit-content;
 }
+
 .option {
   color: #242424;
   font-family: Montserrat;
@@ -35,22 +36,6 @@
   line-height: normal;
 }
 
-.dropdown {
-  background-color: #f3f3f3;
-  min-width: fit-content;
-}
-.option {
-  color: #242424;
-  font-family: Montserrat;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  display: flex;
-  text-wrap: nowrap;
-  align-items: center;
-}
-
 .minMaxInput {
   background-color: #f3f3f3;
   color: #242424;
@@ -77,4 +62,40 @@
 
 .pill {
   background: white;
+}
+
+/* TAB */
+@media only screen and (min-width: 600px) and (max-width: 1280px) {
+  .input::placeholder,
+  .minMaxInput::placeholder,
+  .minMaxInput,
+  .input,
+  .option {
+    font-size: 12px;
+    padding: 3px;
+  }
+  
+  .minMaxInput {
+    width: 67px;
+  }
+
+  .dropdown {
+    padding-right: 30px;
+  }
+
+}
+
+/* MOBILE */
+@media only screen and (max-width: 600px) {
+  .input::placeholder,
+  .minMaxInput::placeholder,
+  .minMaxInput,
+  .input,
+  .option {
+    font-size: 12px;
+  }
+  
+  .minMaxInput {
+    width: 67px;
+  }
 }
