@@ -1,6 +1,6 @@
 import useSearchFilters from "@/app/hooks/search";
 import useQsearch from "@/app/hooks/search/useQsearch";
-import { Combobox, PillsInput, useCombobox } from "@mantine/core";
+import { Combobox, Pill, PillsInput, useCombobox } from "@mantine/core";
 import React from "react";
 import classes from "@/app/styles/search.module.css";
 import Results from "./Result";
@@ -28,7 +28,31 @@ export default function SearchSec({}: Props) {
     >
       <Combobox.Target>
         <PillsInput classNames={{ input: classes.homePageSearch }} w={"100%"}>
-          {" "}
+          <Pill.Group>
+            {f.city && (
+              <Pill
+                className="capitalize"
+                withRemoveButton
+                classNames={{ root: classes.MultiSelectionPill }}
+                onRemove={() => dispatch({ type: "REMOVE_CITY" })}
+              >
+                {f.city.split("+")[0]}
+              </Pill>
+            )}
+            {f.locality?.map((each, index) => (
+              <Pill
+                className="capitalize"
+                onRemove={() =>
+                  dispatch({ type: "REMOVE_LOCALITY", payload: each })
+                }
+                key={index}
+                withRemoveButton
+                classNames={{ root: classes.MultiSelectionPill }}
+              >
+                {each.split("+")[0]}
+              </Pill>
+            ))}
+          </Pill.Group>{" "}
           <PillsInput.Field
             placeholder={
               f.locality.length > 0

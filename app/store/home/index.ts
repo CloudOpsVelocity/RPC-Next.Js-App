@@ -29,7 +29,10 @@ type Action =
   | { type: "RESET_FILTERS" }
   | { type: "SET_CG"; payload: string }
   | { type: "SET_BUGDET_VALUE"; payload: [number, number] }
-  | { type: "SHOW_FILTER"; payload: boolean };
+  | { type: "SHOW_FILTER"; payload: boolean }
+  | {
+      type: "REMOVE_CITY";
+    };
 
 // Define the reducer function
 const searchReducer = (state: SearchState, action: Action): SearchState => {
@@ -59,6 +62,9 @@ const searchReducer = (state: SearchState, action: Action): SearchState => {
       return { ...state, locality: [...state.locality, action.payload] };
     case "SET_CITY":
       return { ...state, city: action.payload };
+    case "REMOVE_CITY": {
+      return { ...state, city: null };
+    }
     case "REMOVE_LOCALITY":
       return {
         ...state,

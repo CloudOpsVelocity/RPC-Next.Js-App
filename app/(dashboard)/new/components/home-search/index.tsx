@@ -20,7 +20,7 @@ const propertyTypes = ["Buy", "Rent"];
 const HomeSearch = () => {
   const f = useAtomValue(homeSearchFiltersAtom);
   const handleSearch = () => {
-    alert(JSON.stringify(f));
+    window.open(`/search?${toQueryParams(f)}`, "_blank");
   };
   const isMobile = useMediaQuery("(max-width: 601px)");
   return (
@@ -178,3 +178,23 @@ const config = {
     </svg>
   ),
 };
+type QueryParams = { [key: string]: any };
+
+function toQueryParams(params: QueryParams): string {
+  const queryEntries = Object.entries(params).map(([key, value]) => {
+    if (key === "showFilter") return null; // Exclude 'showFilter'
+
+    let paramValue: string;
+
+    if (Array.isArray(value)) {
+      paramValue = value.join(","); // Join array values with a comma
+    } else {
+      paramValue = String(value); // Convert single value to string
+    }
+
+    return `${encodeURIComponent(key)}=${encodeURIComponent(paramValue)}`;
+  });
+
+  // Filter out null values and join with '&'
+  return queryEntries.filter((entry) => entry !== null).join("&");
+}
