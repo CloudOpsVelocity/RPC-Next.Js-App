@@ -29,7 +29,11 @@ export default function Shortlist({ reqId, shortListed }: Props) {
   };
   return (
     <button onClick={onAddingShortList}>
-      {state ? config.trueIcon : <HeartIcon className=" w-[24px] h-[24px] " />}
+      {state ? (
+        config.trueIcon
+      ) : (
+        <HeartIcon className="cursor-pointer w-[22px] h-[22px] sm:w-[20px] sm:h-[20px] xl:w-[26px] xl:h-[26px] " />
+      )}
     </button>
   );
 }
@@ -41,6 +45,7 @@ const config = {
       height="24"
       viewBox="0 0 24 28"
       fill="none"
+      className="cursor-pointer w-[22px] h-[22px] sm:w-[20px] sm:h-[20px] xl:w-[30px] xl:h-[30px] "
     >
       <circle
         cx="12"
