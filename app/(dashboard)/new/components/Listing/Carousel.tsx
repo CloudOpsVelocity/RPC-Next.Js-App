@@ -4,11 +4,14 @@ import { Carousel } from "@mantine/carousel";
 import React from "react";
 import ListingCard from "../Atoms/ListingCard";
 import Css from "../../Style.module.css";
+import useIds from "../useIds";
 type Props = {
   data: any;
 };
 
 export default function ListingCarousel({ data }: Props) {
+  const { ids, isLoading } = useIds();
+  if (isLoading) return <div>Loading...</div>;
   return (
     <Carousel
       // slideSize="33.333333%"
@@ -25,7 +28,10 @@ export default function ListingCarousel({ data }: Props) {
     >
       {data.map((item: any, index: number) => (
         <Carousel.Slide key={index}>
-          <ListingCard item={item} />
+          <ListingCard
+            item={item}
+            sl={ids?.propIds.includes(item.propIdEnc) ? "Y" : "N"}
+          />
         </Carousel.Slide>
       ))}
     </Carousel>

@@ -84,13 +84,13 @@ export default function Results() {
         <>
           {" "}
           <div>
-            {localities?.length > 0 && cities?.length > 0 && (
+            {localities?.length > 0 && (
               <h2 className="text-[#5F81B2] text-[14px] sm:text-xl flex space-x-2 items-center">
                 <SearchLocationIcon /> <span>Location</span>
               </h2>
             )}
 
-            {cities?.length > 0 && <SubHeading text="City" />}
+            {/* {cities?.length > 0 && <SubHeading text="City" />}
             <ul>
               {cities?.map((city: any) => (
                 <li
@@ -101,7 +101,7 @@ export default function Results() {
                   {city.name}
                 </li>
               ))}
-            </ul>
+            </ul> */}
             {localities?.length > 0 && <SubHeading text="Locality" />}
             <ul>
               {localities?.map((locality: any) => (

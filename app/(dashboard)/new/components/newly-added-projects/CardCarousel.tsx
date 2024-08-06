@@ -6,7 +6,6 @@ import "@mantine/carousel/styles.css";
 import { CarouseSelArrowIcon } from "@/app/images/HomePageIcons";
 import useIds from "../useIds";
 import Css from "../../Style.module.css";
-import { useMediaQuery } from "@mantine/hooks";
 type Props = {
   data: any;
 };
