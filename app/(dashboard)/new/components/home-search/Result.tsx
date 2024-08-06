@@ -11,7 +11,6 @@ import React from "react";
 import toast from "react-hot-toast";
 
 export default function Results() {
-  const { push } = useRouter();
   const { data, isLoading, handleResetQuery } = useQsearch();
 
   const [filters, dispatch] = useAtom(homeSearchFiltersAtom);
@@ -19,7 +18,7 @@ export default function Results() {
     return <Loading />;
   }
   const {
-    loc: localities,
+    localities,
     builders,
     cities,
     projects,
@@ -71,12 +70,12 @@ export default function Results() {
     }
   };
   const noResults =
-    localities.length === 0 &&
-    cities.length === 0 &&
-    builders.length === 0 &&
-    projects.length === 0 &&
-    listings.length === 0 &&
-    projectListing.length === 0;
+    localities?.length === 0 &&
+    cities?.length === 0 &&
+    builders?.length === 0 &&
+    projects?.length === 0 &&
+    listings?.length === 0 &&
+    projectListing?.length === 0;
   return (
     <ScrollArea className="px-5 py-2 h-[200px] sm:h-[330px]">
       {noResults ? (

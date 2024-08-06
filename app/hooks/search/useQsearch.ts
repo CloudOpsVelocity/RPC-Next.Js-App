@@ -17,6 +17,10 @@ export default function useQsearch() {
     queryFn: () => getData(),
     enabled: !!debounced,
   });
+  const nData = {
+    ...data,
+    localities: data?.loc ?? [],
+  };
   const onSearchChange = (value: string) => {
     !value ? setName(null) : setName(value);
   };
@@ -24,5 +28,12 @@ export default function useQsearch() {
     setName(null);
     onSearchChange("");
   };
-  return { data, isLoading, onSearchChange, debounced, name, handleResetQuery };
+  return {
+    data: nData,
+    isLoading,
+    onSearchChange,
+    debounced,
+    name,
+    handleResetQuery,
+  };
 }
