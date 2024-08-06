@@ -8,10 +8,14 @@ import React, { useState } from "react";
 type Props = {};
 
 export default function Tabs({}: Props) {
-  // const [{ cg: activeTab }, dispatch] = useAtom(searchFiltersAtom);
   const [filters, dispatch] = useAtom(homeSearchFiltersAtom);
   const activeTab = filters.cg ?? "S";
   const setActiveTab = (tab: string) => {
+    console.log(tab);
+    if (tab == "R") {
+      alert('working ')
+      dispatch({ type: "SET_BUGDET_VALUE", payload: [10000, 100000] });
+    }
     dispatch({ type: "SET_CG", payload: tab });
   };
   return (

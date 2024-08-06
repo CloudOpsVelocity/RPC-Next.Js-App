@@ -64,6 +64,7 @@ const searchReducer = (state: SearchState, action: Action): SearchState => {
     case "SET_CG":
       return { ...state, cg: action.payload };
     case "SET_BUGDET_VALUE":
+      console.log(action.payload);
       return { ...state, bugdetValue: action.payload };
     case "RESET_FILTERS":
       return initialState;
