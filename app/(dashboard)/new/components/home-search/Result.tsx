@@ -58,7 +58,7 @@ export default function Results() {
         break;
       case "projectListing":
         {
-          const url = `projIdEnc=${data}`;
+          const url = `projIdEnc=${data.id}&listedBy=${data.type.split("")[0]}`;
           window.open("/search/listing?" + url);
         }
         break;
@@ -159,7 +159,10 @@ export default function Results() {
               {projectListing?.map((projectListing: any) => (
                 <li
                   onClick={() =>
-                    handlePush("projectListing", projectListing.id)
+                    handlePush("projectListing", {
+                      id: projectListing.id,
+                      type: projectListing.type,
+                    })
                   }
                   className="text-[#737579] text-[14px] sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
                   key={projectListing.id}
