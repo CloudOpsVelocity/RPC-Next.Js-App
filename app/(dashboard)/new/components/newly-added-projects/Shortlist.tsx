@@ -5,12 +5,13 @@ import { Shorlisted } from "@/app/images/commonSvgs";
 import { HeartIcon } from "@/app/images/HomePageIcons";
 import { useSession } from "next-auth/react";
 import React, { useState } from "react";
+import useIds from "../useIds";
 type Props = {
   reqId: string;
   shortListed: string;
 };
 export default function Shortlist({ reqId, shortListed }: Props) {
-  const [state, setState] = useState(shortListed == "Y" ? true : false);
+  const [state, setState] = useState(shortListed === "Y" ? true : false);
   const { toggleShortlist } = useShortlistAndCompare();
   const { data: session } = useSession();
   const [, { open: openLogin }] = usePopShortList();

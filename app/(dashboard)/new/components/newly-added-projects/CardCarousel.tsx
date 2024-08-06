@@ -12,7 +12,7 @@ type Props = {
 };
 
 export default function CardCarousel({ data }: Props) {
-  const { data: ids } = useIds();
+  const { ids, isLoading } = useIds();
 
   return (
     <Carousel
@@ -31,7 +31,7 @@ export default function CardCarousel({ data }: Props) {
           <Card
             item={{
               ...item,
-              shortListed: ids?.includes(item.projIdEnc) ? "Y" : "N",
+              shortListed: ids?.projIds?.includes(item.projIdEnc) ? "Y" : "N",
             }}
           />
         </Carousel.Slide>
