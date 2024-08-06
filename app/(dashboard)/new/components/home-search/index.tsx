@@ -26,18 +26,19 @@ const HomeSearch = () => {
   const isMobile = useMediaQuery("(max-width: 601px)");
   return (
     <div
-      className="px-5 w-full  md:pl-0 border-2 sm:grid sm:grid-cols-[1.1fr_2fr] gap-2 sm:px-20 bg-white pt-28 pb-4 sm:py-28 relative mt-[90px] "
+      className="px-5 w-full sm:pl-0 border-2 sm:grid sm:grid-cols-[1.1fr_2fr] gap-2 sm:pb-20 bg-white sm:pt-[200px] xl:pb-4 xl:py-28 relative xl:mt-[90px] "
       style={{
         backgroundImage: "url(/home/clouds.svg)",
       }}
     >
       <Alert />
-      <div className=" items-center justify-center hidden md:flex">
+      <div className=" items-center justify-center hidden sm:flex min-w-[200px] sm:max-w-[299px] xl:max-w-[499px] h-full">
         <Image
           src={"/home/home-search.svg"}
           alt="home-search"
           height={300}
           width={500}
+          className="w-full h-full"
         />
       </div>
       <div className="w-full">
@@ -51,8 +52,8 @@ const HomeSearch = () => {
             Bangalore {config.drpdownIcon}
           </p>
 
-          <div className="flex items-center gap-2.5 rounded shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] px-1.5 py-1 border-[0.5px] border-solid border-[#819CA9] bg-white w-full sm:w-auto">
-            <div className="hidden sm:flex items-center gap-[5px] rounded p-2 border-r-[0.5px] border-r-gray-400 border-solid text-[#242424] sm:text-[14px] not-italic font-medium text-[12px]">
+          <div className="flex items-center gap-2.5 rounded shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] px-1.5 py-1 border-[0.5px] border-solid border-[#819CA9] bg-white w-full">
+            <div className="hidden sm:flex items-center gap-[5px] rounded p-2 border-r-[0.5px] border-r-gray-400 border-solid text-[#242424] xl:text-[14px] not-italic font-medium text-[12px]">
               {config.homeIcon}{" "}
               <div className="text-nowrap">All Residential</div>
             </div>
@@ -62,11 +63,11 @@ const HomeSearch = () => {
               <CityDropdown />
             </span>
 
-            <div className="flex justify-center items-center sm:gap-[191px] w-full">
+            <div className="flex justify-between items-center gap-[10px] w-full">
               {isMobile ? (
                 <Target />
               ) : (
-                <div className="hidden sm:flex items-center w-full">
+                <div className="hidden sm:flex items-center w-full ">
                   {config.searchIcon} <SearchSec />
                 </div>
               )}
@@ -88,10 +89,10 @@ const HomeSearch = () => {
           {!isMobile && f.showFilter && <QuickFilters />}
         </div>
         <div className="mt-4">
-          <p className="text-[#242424] sm:text-xl not-italic font-medium leading-[normal] ">
+          <p className="text-[#242424] text-[12px] sm:text-xl not-italic font-medium leading-[normal] ">
             Browse:
           </p>
-          <div className="space-x-2 mt-1 flex sm:block overflow-x-scroll max-w-[100%] scrollbar-hide">
+          <div className="space-x-2 mt-1  flex gap-[10px] xl:block sm:flex flex-nowrap overflow-x-scroll max-w-[100%] scrollbar-hide">
             <Box />
             <Box />
             <Box />
