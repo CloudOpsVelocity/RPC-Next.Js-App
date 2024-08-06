@@ -8,7 +8,7 @@ type Props = { data: any; active: number };
 import Css from "../../../Style.module.css";
 import Card from "../../newly-added-projects/Card";
 export default function CardCarousel({ data, active }: Props) {
-  const { data: ids } = useIds();
+  const { ids, isLoading } = useIds();
   return (
     <Carousel
       slideSize={{ base: "90%", sm: "50%", md: "33.333333%" }}
@@ -21,16 +21,20 @@ export default function CardCarousel({ data, active }: Props) {
       controlsOffset={"-10px"}
       classNames={Css}
     >
-      {data.map((item: any, index: number) => (
-        <Carousel.Slide key={index}>
-          <Card
-            item={{
-              ...item,
-              shortListed: ids?.includes(item.projIdEnc) ? "Y" : "N",
-            }}
-          />
-        </Carousel.Slide>
-      ))}
+      {isLoading ? (
+        <>Loading..</>
+      ) : (
+        data.map((item: any, index: number) => (
+          <Carousel.Slide key={index}>
+            <Card
+              item={{
+                ...item,
+                shortListed: ids?.projIds.includes(item.projIdEnc) ? "Y" : "N",
+              }}
+            />
+          </Carousel.Slide>
+        ))
+      )}
     </Carousel>
   );
 }
