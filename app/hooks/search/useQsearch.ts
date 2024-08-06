@@ -4,7 +4,7 @@ import { useQuery } from "react-query";
 
 export default function useQsearch() {
   const [name, setName] = useQueryState("q");
-  const [debounced] = useDebouncedValue(name, 200);
+  const [debounced] = useDebouncedValue(name, 100);
   const getData = async () => {
     let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/matcher?word=${debounced}`;
     const res = await fetch(url);
