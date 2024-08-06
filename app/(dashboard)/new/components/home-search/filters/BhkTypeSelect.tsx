@@ -16,6 +16,7 @@ import { homeSearchFiltersAtom } from "@/app/store/home";
 import { useAtom } from "jotai";
 
 export function BasicMultiSelect() {
+
   // const { filters: f, setFilters, handleCheckboxClick } = useSearchFilters();
   const [f, dispatch] = useAtom(homeSearchFiltersAtom);
   const combobox = useCombobox({
@@ -69,10 +70,11 @@ export function BasicMultiSelect() {
         option: styles.option,
       }}
     >
-      <Combobox.DropdownTarget>
+      <Combobox.DropdownTarget >
         <PillsInput
           classNames={{
             input: styles.input,
+
           }}
           pointer
           onClick={() => combobox.toggleDropdown()}
@@ -83,7 +85,7 @@ export function BasicMultiSelect() {
             {values.length > 0 ? (
               values
             ) : (
-              <Input.Placeholder className="!text-black">
+              <Input.Placeholder className="!text-black leading-0 ">
                 BHK Type
               </Input.Placeholder>
             )}
