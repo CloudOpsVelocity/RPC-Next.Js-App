@@ -28,6 +28,7 @@ import Close from "../../project/button/close";
 import Button from "../../atoms/buttons/variansts";
 const RequestCallBackModal = () => {
   const isMobile = useMediaQuery("(max-width: 750px)");
+  const isTab = useMediaQuery("(max-width: 1600px)");
   const [opened, { close, source, open, MODAL_TYPE }] = useReqCallPopup();
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error" | "otp"
@@ -45,7 +46,15 @@ const RequestCallBackModal = () => {
         opened={opened}
         onClose={handleClose}
         centered
-        size={isMobile ? "100%" : status !== "success" ? "65%" : "auto"}
+        size={
+          isMobile
+            ? "100%"
+            : status !== "success"
+            ? "65%"
+            : isTab
+            ? "40%"
+            : "auto"
+        }
         className="rounded-lg w-[90%]  md:w-[70%] lg:w-[65%] !p-0"
         classNames={
           status === "success"

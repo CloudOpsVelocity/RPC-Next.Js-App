@@ -204,7 +204,7 @@ const LeafMap: React.FC<{
   ) : (
     <div
       id="nearBy"
-      className="w-[95%] md:w-[90%] scroll-mt-[180px]  mb-[5%] justify-center"
+      className="w-[95%] md:w-[90%] scroll-mt-[180px]  sm:mt-6 xl:mt-2 justify-center"
     >
       <div className="flex justify-between w-[90%] ">
         {type === "prop" ? (

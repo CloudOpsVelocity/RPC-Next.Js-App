@@ -52,7 +52,8 @@ export function ProjectCard({ type, cardData }: CardProps) {
       openShort();
     }
   };
-  const handleReqCallbackOpen = () => {
+  const handleReqCallbackOpen = (e: any) => {
+    e.stopPropagation();
     open({
       modal_type: "PROJECT_REQ_CALLBACK",
       postedByName: cardData.postedByName,
@@ -62,21 +63,21 @@ export function ProjectCard({ type, cardData }: CardProps) {
       title: cardData.projectName,
     });
   };
+  const handleCardClick = () => {
+    window.open(`/abc/karnataka/banglore/${cardData.projIdEnc}`, "_blank");
+  };
   return (
     <>
       <div
         key={cardData.projIdEnc}
+        onClick={handleCardClick}
         className="border text-card-foreground min-w-[300px] xl:max-w-[494px] bg-[#FAFAFA]  min-h-[500px] overflow-hidden  shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[14px] "
       >
         {type == "proj" && (
           <div className="sm:flex sm:space-y-1.5 p-6  px-4 pt-2 pb-3 justify-between items-center">
-            <a
-              target="_blank"
-              className="tracking-tight sm:text-[18px] font-[600] text-[#565D70] cursor-pointer"
-              href={`/abc/karnataka/banglore/${cardData.projIdEnc}`}
-            >
+            <div className="tracking-tight sm:text-[18px] font-[600] text-[#565D70] cursor-pointer">
               {cardData.projectName}
-            </a>
+            </div>
             <div className="text-xs font-semibold sm:text-right ">
               <span className="text-[16px] font-[700] text-[#148B16]">
                 {formatCurrency(cardData.minPrice)}
@@ -120,7 +121,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
                     : "bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 text-[#0073C6]"
                 )}
                 onClick={(e) => {
-                  e.preventDefault();
+                  e.stopPropagation();
                   onAddingShortList();
                 }}
               >
@@ -218,14 +219,10 @@ const BuilderCarousel = ({
         {title}
         {location && (
           <>
-            In{" "}
-            <span className="text-[#148B16] font-[700]   ">
-              {location}
-            </span>{" "}
+            In <span className="text-[#148B16] font-[700]   ">{location}</span>{" "}
           </>
         )}
-        By{" "}
-        <span className="text-[#148B16] font-[700]  ">{projName}</span>
+        By <span className="text-[#148B16] font-[700]  ">{projName}</span>
       </h2>
       <p className="ml-2 mt-3 mb-0 sm:mb-[24px]  text-[#4D6677] text-[13px] sm:text-lg xl:text-2xl italic font-medium leading-[normal] tracking-[0.96px] px-4 sm:px-0">
         {content}

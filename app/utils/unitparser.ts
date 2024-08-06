@@ -56,7 +56,7 @@ const parseUnitStrings = (
 
   return propertyType && propertyType === "plot"
     ? sortedUnits.slice(0, 2)
-    : sortedUnits.slice(0, 3);
+    : sortedUnits.slice(0, 2);
 };
 
 export { parseUnitStrings as parseUnits, sortUnits };
