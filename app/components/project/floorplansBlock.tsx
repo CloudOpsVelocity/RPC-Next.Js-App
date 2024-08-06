@@ -517,11 +517,15 @@ export default function FloorplansBlock({
                       {propCgId != projectprops.plot &&
                         selectedFloor?.superBuildUparea &&
                         " | Area. " +
-                        formatNumberWithSuffix(selectedFloor?.superBuildUparea) +
+                          formatNumberWithSuffix(
+                            selectedFloor?.superBuildUparea
+                          ) +
                           " sq.ft"}
                       {propCgId == projectprops.plot &&
                         selectedFloor?.plotArea &&
-                        " | Area. " + formatNumberWithSuffix(selectedFloor?.plotArea) + " sq.ft"}
+                        " | Area. " +
+                          formatNumberWithSuffix(selectedFloor?.plotArea) +
+                          " sq.ft"}
                     </p>
                     <div className="flex justify-center items-end max-h-[240px] sm:max-h-[450px] lg:h-[450px] w-full relative ">
                       {selectedFloor?.floorPlanUrl ? (
@@ -542,12 +546,9 @@ export default function FloorplansBlock({
                               handleOpen();
                             }}
                             src={ImgNotAvail}
-                            className="w-[60%] sm:w-[80%] h-full cursor-pointer "
+                            className="w-[60%] sm:w-[60%] h-full cursor-pointer "
                             alt="image"
                           />
-                          <p className=" text-[#000] text-center text-[18px] md:text-[28px] lg:text-[32px] font-[600] ">
-                            Image is not available
-                          </p>
                         </div>
                       )}
                       <PopupOpenSvg className=" sm:hidden absolute bottom-0 right-1 w-[24px] h-[24px] lg:w-[28px] lg:h-[28px]  " />
@@ -601,11 +602,15 @@ export default function FloorplansBlock({
                       {propCgId != projectprops.plot &&
                         selectedFloor?.superBuildUparea &&
                         " | Area. " +
-                        formatNumberWithSuffix(selectedFloor?.superBuildUparea) +
+                          formatNumberWithSuffix(
+                            selectedFloor?.superBuildUparea
+                          ) +
                           " sq.ft"}
                       {propCgId == projectprops.plot &&
                         selectedFloor?.plotArea &&
-                        " | Area. " + formatNumberWithSuffix(selectedFloor?.plotArea) + " sq.ft"}
+                        " | Area. " +
+                          formatNumberWithSuffix(selectedFloor?.plotArea) +
+                          " sq.ft"}
                     </p>
                     <div className="flex justify-center items-end max-h-[240px] sm:max-h-[450px] lg:h-[450px] w-full relative ">
                       {selectedFloor?.floorPlanUrl ? (
@@ -633,7 +638,6 @@ export default function FloorplansBlock({
                             className="w-[100%] sm:w-[80%]  max-h-[240px] sm:max-h-[450px] lg:h-[450px]  cursor-pointer "
                             alt="image"
                           />
-                       
                         </div>
                       )}
                       <PopupOpenSvg className=" sm:hidden absolute bottom-0 right-1 w-[24px] h-[24px] lg:w-[28px] lg:h-[28px]  " />
