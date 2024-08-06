@@ -1,10 +1,10 @@
 import useSearchFilters from "@/app/hooks/search";
 import { HomeIcon, RentIcon } from "@/app/images/HomePageIcons";
-import { homeSearchFiltersAtom } from "@/app/store/home";
+// import { homeSearchFiltersAtom } from "@/app/store/home";
 import clsx from "clsx";
 import { useAtom } from "jotai";
 import React, { useState } from "react";
-
+import { homeSearchFiltersAtom } from "@/app/store/home";
 type Props = {};
 
 export default function Tabs({}: Props) {
@@ -13,13 +13,13 @@ export default function Tabs({}: Props) {
   const setActiveTab = (tab: string) => {
     console.log(tab);
     if (tab == "R") {
-      alert('working ')
+      alert("working ");
       dispatch({ type: "SET_BUGDET_VALUE", payload: [10000, 100000] });
     }
     dispatch({ type: "SET_CG", payload: tab });
   };
   return (
-    <div className="py-2 pr-2 sm:py-4 sm:pr-4 sm:p-4">
+    <div className="py-3 pr-3 sm:py-4 sm:pr-4 sm:p-4">
       <div className="flex space-x-1 sm:space-x-4">
         <button
           onClick={() => setActiveTab("S")}
@@ -61,7 +61,7 @@ const Box = ({ active, Icon }: BoxProps) => {
   return (
     <div
       className={clsx(
-        "flex h-[32px] sm:h-[54px] justify-center items-center self-stretch rounded shadow-[0px_4px_36.5px_0px_rgba(194,194,194,0.60)] p-[6px] sm:p-[11px] border-[0.5px] border-solid border-[#8EA8CF] bg-[#fcfcfc] absolute top-[-35px] left-[10px] sm:left-0 sm:top-[-56px] w-[32px] sm:w-[54px]",
+        "flex h-[40px] sm:h-[54px] justify-center items-center self-stretch rounded shadow-[0px_4px_36.5px_0px_rgba(194,194,194,0.60)] p-[6px] sm:p-[11px] border-[0.5px] border-solid border-[#8EA8CF] bg-[#fcfcfc] absolute top-[-40px] left-[8px] sm:left-0 sm:top-[-56px] w-[40px] sm:w-[54px]",
         active &&
           "shadow-[0px_4px_7px_0px_rgba(140,197,63,0.34)_inset,0px_4px_36.5px_0px_rgba(194,194,194,0.60)] border-[0.5px] border-solid border-[#148B16] bg-[#F5FFF6]"
       )}

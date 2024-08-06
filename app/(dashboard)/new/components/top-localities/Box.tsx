@@ -15,7 +15,7 @@ export default function Box({ id, name }: Props) {
         alt="box"
         width={180}
         height={180}
-        className="h-[80px] sm:h-[180px] min-w-[80px] sm:min-w-[180px] self-stretch border-[color:var(--stroke-blue-gradient,#41D1D4)] shadow-[0px_4px_25px_0px_rgba(194,194,194,0.76)] rounded-full border-4 border-solid"
+        className="h-[80px] sm:h-[180px] min-w-[80px] sm:min-w-[180px] self-stretch border-[color:var(--stroke-blue-gradient,#41D1D4)] shadow-[0px_4px_25px_0px_rgba(194,194,194,0.76)] rounded-full border-[2px] sm:border-[4px] border-solid"
       />
       <p className="flex justify-center items-center gap-[2px] sm:gap-2 text-nowrap capitalize text-[10px] sm:text-[20px] ">
         {config.locationIcon}

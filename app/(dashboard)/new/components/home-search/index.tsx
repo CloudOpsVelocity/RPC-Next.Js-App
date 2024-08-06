@@ -13,6 +13,10 @@ import { useMediaQuery } from "@mantine/hooks";
 import Target from "./filters/mobile/Target";
 import { useAtomValue } from "jotai";
 import { homeSearchFiltersAtom } from "@/app/store/home";
+import { BasicSelect } from "./filters/Select";
+import { CityDropdown } from "./filters/CityDropdown";
+const propertyTypes = ["Buy", "Rent"];
+
 const HomeSearch = () => {
   const f = useAtomValue(homeSearchFiltersAtom);
   const handleSearch = () => {
@@ -41,11 +45,22 @@ const HomeSearch = () => {
           <p className="inline-flex sm:hidden justify-center items-center text-[#242424] text-[14px] not-italic font-medium gap-1">
             {config.homeIcon} All Residential
           </p>
+
+          <p className=" flex justify-center items-center gap-[4px] sm:hidden text-[#0073C6] text-[10px] not-italic font-[700] mb-[5px] leading-[normal]">
+            Bangalore {config.drpdownIcon}
+          </p>
+
           <div className="flex items-center gap-2.5 rounded shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] px-1.5 py-1 border-[0.5px] border-solid border-[#819CA9] bg-white w-full sm:w-auto">
             <div className="hidden sm:flex items-center gap-[5px] rounded p-2 border-r-[0.5px] border-r-gray-400 border-solid text-[#242424] sm:text-[14px] not-italic font-medium text-[12px]">
               {config.homeIcon}{" "}
               <div className="text-nowrap">All Residential</div>
             </div>
+
+            {/* bengalure drop down */}
+            <span className="hidden sm:block ">
+              <CityDropdown />
+            </span>
+
             <div className="flex justify-center items-center sm:gap-[191px] w-full">
               {isMobile ? (
                 <Target />
@@ -144,6 +159,21 @@ const config = {
         stroke="#148B16"
         stroke-width="1.5"
         stroke-linecap="round"
+      />
+    </svg>
+  ),
+  drpdownIcon: (
+    <svg
+      className=" min-h-[14px] min-w-[5px] "
+      xmlns="http://www.w3.org/2000/svg"
+      width="3"
+      height="5"
+      viewBox="0 0 3 5"
+      fill="none"
+    >
+      <path
+        d="M0 4.29289C0 4.73835 0.538571 4.96143 0.853553 4.64645L2.64645 2.85355C2.84171 2.65829 2.84171 2.34171 2.64645 2.14645L0.853554 0.353554C0.538571 0.0385714 0 0.261654 0 0.707107L0 4.29289Z"
+        fill="#0073C6"
       />
     </svg>
   ),

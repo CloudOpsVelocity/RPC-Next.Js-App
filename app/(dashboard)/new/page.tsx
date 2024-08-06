@@ -43,7 +43,7 @@ export default async function Page() {
       />
       <DynamicListing
         title="Under Construction Sell Listings"
-        content="Explore Our Under Construction Listings Today!"
+        content="Explore Our Under Construction Listings Today!" 
         data={listingData["u_Sale"]}
       />
       <HandPickedProjects data={data} />
