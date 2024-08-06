@@ -68,7 +68,12 @@ export default function Results() {
         window.open(`/abc/delhi/palika/${data}`);
         break;
       case "listing":
-        push(`/abc/delhi/palika/${data}`);
+        {
+          const [ut, pt, cg, lt] = data.id.split("_");
+          alert(`${ut} ${pt} ${cg} ${lt}, ${data.name}`);
+          const url = encodeURI(`${data.name}+${data.id}`);
+          window.open(`/search`);
+        }
         break;
       case "projectListing":
         push(`/abc/delhi/palika/${data}`);
@@ -137,7 +142,12 @@ export default function Results() {
         <ul>
           {listings?.map((listing: any) => (
             <li
-              onClick={() => handlePush("listing", listing.id)}
+              onClick={() =>
+                handlePush("listing", {
+                  id: listing.id,
+                  name: listing.name.split("in")[1],
+                })
+              }
               className="text-[#737579] text-[14px] sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
               key={listing.id}
             >
