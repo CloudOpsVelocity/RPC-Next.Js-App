@@ -34,18 +34,18 @@ export default function TopRightSection({
     type === "proj"
       ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/abc/banglore/whitefield/${projIdEnc}`
       : `${process.env.NEXT_PUBLIC_BACKEND_URL}/listing/whitefield/${propIdEnc}`;
-  const isMobile = useMediaQuery("(max-width: 601px)");
+  const isMobile = useMediaQuery("(max-width: 1600px)");
   const projOrPropName = type === "proj" ? projName : propName;
   return (
     <div
       onClick={(e) => e.stopPropagation()}
-      className="m-[2px]  md:mr-3 md:my-2 flex md:gap-[0.5px] mx-2 max-h-full justify-between items-start flex-row md:flex-col md:items-end"
+      className="m-[2px]  md:mr-3 md:my-2 flex md:gap-[0.5px] mx-2 max-h-full justify-between items-start flex-row xl:flex-col xl:items-end"
     >
       {isMobile && (
         <>
           <ProjData type={type} {...data} />
           <div className="flex flex-col justify-between">
-            <div className="flex flex-row md:flex-col gap-3 align-baseline items-start">
+            <div className="flex flex-row md:flex-col gap-3 sm:gap-1 xl:gap-3 align-baseline items-start">
               <button
                 className="max-w-fit px-[1px] py-[1px]  rounded  text-[#242424] text-sm not-italic font-semibold my-1  md:mb-1  gradient"
                 onClick={() => {
@@ -86,9 +86,9 @@ export default function TopRightSection({
               <Button
                 onChange={() => onAddingCompare()}
                 title={Com ? "Remove Compare" : " Add to Compare"}
-                buttonClass="inline-flex justify-center items-center gap-1 xl:gap-2.5 rounded p-0.5 border-[0.5px] border-solid border-[#00A8CD] text-[#00A8CD] text-[8px] md:text-xs not-italic font-semibold ml-auto"
+                buttonClass="inline-flex justify-center items-center gap-1 xl:gap-2.5 rounded p-0.5 border-[0.5px] border-solid border-[#00A8CD] text-[#00A8CD] text-[8px]       sm:text-[12px] xl:text-xs not-italic font-semibold ml-auto"
               />{" "}
-              <p className="text-[#242424] text-[8px] xl:text-sm  not-italic font-normal">
+              <p className="text-[#242424] text-[8px] sm:text-[12px] xl:text-sm  not-italic font-normal">
                 Posted: <span className="font-bold">{timeAgo(postedDate)}</span>
               </p>
             </div>

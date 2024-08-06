@@ -30,7 +30,7 @@ export default function TabPanelSection({ mutate }: Props) {
   return  (
   
       <div
-        className="p-[2%] max-h-[700px] overflow-y-auto h-screen"
+        className="p-[2%] max-h-[700px] max-w-full overflow-y-auto h-screen"
         ref={containerRef}
       >
         {isLoading ? (

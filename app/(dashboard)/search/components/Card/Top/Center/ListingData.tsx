@@ -9,14 +9,15 @@ export default function ListingData({
   possassionDate,
   launchDate,
   landArea,
-  type,
+  type, 
   availableFrom,
   ca,
   sba,
+  propertyAge
 }: Props) {
   console.log(type);
   return (
-    <div className="flex mb-2 max-w-[380px] xl:w-[400px] gap-1 flex-col items-start  pl-[11px]  py-[2px] rounded border-[0.5px] border-solid border-[#616D75] bg-[#F5F5F5]">
+    <div className="flex mb-2 max-w-[380px] sm:max-w-full xl:w-[400px] gap-1 flex-col items-start  pl-[11px]  py-[2px] rounded border-[0.5px] border-solid border-[#616D75] bg-[#F5F5F5]">
       {type === "proj" && (
         <div className="mt-[2px] hidden md:block">
           <h5 className="text-[#001F35] text-sm font-medium">
@@ -53,8 +54,8 @@ export default function ListingData({
           />
           <Divider orientation="vertical" color="#7BA0BB" />
           <DownSectionCard
-            label="Project Land Area"
-            value={`${landArea ?? 0} Acres`}
+            label={ type == "proj"?"Project Land Area" : "Property Age"}
+            value={type == "proj"?`${landArea ?? 0} Acres`: `${propertyAge ?? 0} Years`}
           />
         </div>
       ) : (
@@ -87,8 +88,8 @@ const DownSectionCard = ({
 }) => {
   return (
     <div className="flex flex-col justify-center items-start ">
-      <p className="text-[#001F35] text-[9px] xl:text-sm not-italic font-medium">{label}:</p>
-      <p className="text-[#242424] text-[9px] xl:text-sm not-italic font-semibold">
+      <p className="text-[#001F35] text-[9px] sm:text-[14px] xl:text-sm not-italic font-medium text-wrap">{label}:</p>
+      <p className="text-[#242424] text-[9px] sm:text-[14px] xl:text-sm not-italic font-semibold">
         {value}
       </p>
     </div>

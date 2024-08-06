@@ -9,7 +9,7 @@ type Props = {
 };
 
 export default function CenterTop({ data, type }: Props) {
-  const isMobile = useMediaQuery("(max-width: 601px)");
+  const isMobile = useMediaQuery("(max-width: 1600px)");
 
   return (
     <div className="flex  flex-col px-1 xl:px-4 xl:mt-[2px]">
