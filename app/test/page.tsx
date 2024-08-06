@@ -1,7 +1,7 @@
 "use client";
 import { useCallback, useEffect, useRef } from "react";
 import { useIntersection } from "@mantine/hooks";
-import { Text, Paper, Box, Button } from "@mantine/core";
+import { Text, Paper, Box, Button, Select } from "@mantine/core";
 
 function Demo() {
   const heavyCalcFn = (num: number) => {
@@ -58,23 +58,7 @@ const marks = [
 function Demo1() {
   return (
     <>
-      <Slider
-        step={0.05}
-        min={0.05}
-        max={60}
-        marks={marks}
-        labelAlwaysOn
-        defaultValue={0.85}
-      />
-      <RangeSlider
-        mt={50}
-        step={0.05}
-        min={0.05}
-        max={60}
-        marks={marks}
-        labelAlwaysOn
-        defaultValue={[0.85, 10.5]}
-      />
+      <Button className="bg-red-500 text-2xl h-2">sdfdfsdf</Button>;
     </>
   );
 }

@@ -2,6 +2,9 @@ import type { Config } from "tailwindcss";
 
 const config: Config = {
   darkMode: ["class", '[data-mantine-color-scheme="dark"]'],
+  corePlugins: {
+    preflight: false, //disabling preflight
+  },
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
