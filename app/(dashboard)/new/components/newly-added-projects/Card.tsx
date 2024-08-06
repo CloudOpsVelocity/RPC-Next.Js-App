@@ -16,14 +16,14 @@ type Props = { item: any };
 export default function Card({ item }: Props) {
   let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/abc/banglore/whitefield/${item.projIdEnc}`;
   return (
-    <div className="w-[310px] sm:w-[508px] xl:w-[631px] h-[326px] sm:h-[294px] xl:h-[368px] shrink-0 relative"> 
+    <div className="w-[310px] sm:w-[508px] xl:w-[631px] h-[326px] sm:h-[294px] xl:h-[368px] shrink-0 relative">
       <BackgroundImage src={item.coverUrl} radius="sm" h={"100%"}>
         <img
           src="https://im.proptiger.com/3/100683/13/sumadhura-infracon-23973255.jpeg?width=800&height=620"
           alt=""
           className="w-[45px] h-[45px] sm:w-[54px] sm:h-[54px] xl:w-[67px] xl:h-[67px] object-cover top-[12px] left-[12px] relative"
         />
-        
+
         <div className="absolute right-0 top-0 w-full sm:w-[560px] h-full p-[12px] shrink-0 bg-gradient-to-t sm:bg-gradient-to-l from-[#00121F] via-[rgba(59,70,98,0.86)] to-[#565d700a] text-right flex flex-col justify-end sm:justify-between">
           <div>
             <p className="text-white text-[16px] xl:text-[18px] not-italic font-extrabold leading-[normal] tracking-[0.64px] flex justify-end items-center">
@@ -34,8 +34,9 @@ export default function Card({ item }: Props) {
                 />
                 <ShareBtn url={url} />
               </div>{" "}
-              
-              {item.projName && item.projName.length > 20 ? `${item.projName.slice(0, 20)}...` : item.projName}
+              {item.projName && item.projName.length > 20
+                ? `${item.projName.slice(0, 20)}...`
+                : item.projName}
             </p>
             <p className="text-white text-[16px] xl:text-[18px] not-italic font-bold leading-[normal] tracking-[0.52px] mt-[8px] text-nowrap">
               {formatCurrency(item.minPrice)} - {formatCurrency(item.maxPrice)}
