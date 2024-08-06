@@ -31,7 +31,9 @@ export default function SearchSec({}: Props) {
                 ? "Add More"
                 : "Search “ Whitefield, Bangalore”"
             }
-            onClick={() => combobox.toggleDropdown()}
+            onClick={() =>
+              !combobox.dropdownOpened && combobox.toggleDropdown()
+            }
             value={name ?? ""}
             onChange={(e) => onSearchChange(e.target.value)}
           />
