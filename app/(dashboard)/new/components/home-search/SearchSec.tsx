@@ -4,15 +4,19 @@ import { Combobox, PillsInput, useCombobox } from "@mantine/core";
 import React from "react";
 import classes from "@/app/styles/search.module.css";
 import Results from "./Result";
-import { useAtomValue } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { homeSearchFiltersAtom } from "@/app/store/home";
 type Props = {};
 export default function SearchSec({}: Props) {
-  const f = useAtomValue(homeSearchFiltersAtom);
+  const [f, dispatch] = useAtom(homeSearchFiltersAtom);
   const { onSearchChange, debounced, name } = useQsearch();
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
   });
+  const handleFieldClick = () => {
+    !combobox.dropdownOpened && combobox.toggleDropdown();
+    dispatch({ type: "SHOW_FILTER", payload: true });
+  };
   return (
     <Combobox
       store={combobox}
@@ -31,9 +35,7 @@ export default function SearchSec({}: Props) {
                 ? "Add More"
                 : "Search “ Whitefield, Bangalore”"
             }
-            onClick={() =>
-              !combobox.dropdownOpened && combobox.toggleDropdown()
-            }
+            onClick={handleFieldClick}
             value={name ?? ""}
             onChange={(e) => onSearchChange(e.target.value)}
           />

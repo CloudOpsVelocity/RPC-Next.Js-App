@@ -84,7 +84,7 @@ const HomeSearch = () => {
               )}
             </div>
           </div>
-          {!isMobile && <QuickFilters />}
+          {!isMobile && f.showFilter && <QuickFilters />}
         </div>
         <div className="mt-4">
           <p className="text-[#242424] sm:text-xl not-italic font-medium leading-[normal] ">

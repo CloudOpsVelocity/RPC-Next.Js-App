@@ -6,6 +6,7 @@ interface SearchState {
   city: string | null;
   cg: string;
   bugdetValue: [number, number];
+  showFilter: boolean;
 }
 
 const initialState: SearchState = {
@@ -15,6 +16,7 @@ const initialState: SearchState = {
   city: null,
   cg: "S",
   bugdetValue: [500000, 600000000],
+  showFilter: false,
 };
 
 // Define the action types
@@ -26,7 +28,8 @@ type Action =
   | { type: "REMOVE_LOCALITY"; payload: string }
   | { type: "RESET_FILTERS" }
   | { type: "SET_CG"; payload: string }
-  | { type: "SET_BUGDET_VALUE"; payload: [number, number] };
+  | { type: "SET_BUGDET_VALUE"; payload: [number, number] }
+  | { type: "SHOW_FILTER"; payload: boolean };
 
 // Define the reducer function
 const searchReducer = (state: SearchState, action: Action): SearchState => {
@@ -66,6 +69,8 @@ const searchReducer = (state: SearchState, action: Action): SearchState => {
     case "SET_BUGDET_VALUE":
       console.log(action.payload);
       return { ...state, bugdetValue: action.payload };
+    case "SHOW_FILTER":
+      return { ...state, showFilter: action.payload };
     case "RESET_FILTERS":
       return initialState;
     default:

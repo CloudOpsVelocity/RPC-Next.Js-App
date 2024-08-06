@@ -13,7 +13,6 @@ import toast from "react-hot-toast";
 export default function Results() {
   const { push } = useRouter();
   const { data, isLoading, handleResetQuery } = useQsearch();
-  console.log(data);
   const [filters, dispatch] = useAtom(homeSearchFiltersAtom);
   if (isLoading) {
     return <Loading />;
@@ -63,17 +62,35 @@ export default function Results() {
     }
   };
 
-  const handlePush = async (id: number) => {
-    const enc = await encodeProID(id);
-    push(`/abc/delhi/palika/${enc}`);
+  const handlePush = async (type: string, data: any) => {
+    switch (type) {
+      case "project":
+        window.open(`/abc/delhi/palika/${data}`);
+        break;
+      case "listing":
+        push(`/abc/delhi/palika/${data}`);
+        break;
+      case "projectListing":
+        push(`/abc/delhi/palika/${data}`);
+        break;
+      case "builder":
+        const url = encodeURI(`${data.name}+${data.id}`);
+        window.open(`/search?builderIds=${url}`);
+        break;
+      default:
+        break;
+    }
   };
 
   return (
     <ScrollArea className="px-5 py-2 h-[200px] sm:h-[330px]">
       <div>
-        <h2 className="text-[#5F81B2] text-[14px] sm:text-xl flex space-x-2 items-center">
-          <SearchLocationIcon /> <span>Location</span>
-        </h2>
+        {localities?.length > 0 && cities?.length > 0 && (
+          <h2 className="text-[#5F81B2] text-[14px] sm:text-xl flex space-x-2 items-center">
+            <SearchLocationIcon /> <span>Location</span>
+          </h2>
+        )}
+
         {cities?.length > 0 && <SubHeading text="City" />}
         <ul>
           {cities?.map((city: any) => (
@@ -98,30 +115,6 @@ export default function Results() {
             </li>
           ))}
         </ul>
-        {builders?.length > 0 && <SubHeading text="Builders" />}
-        <ul>
-          {builders?.map((builder: any) => (
-            <li
-              onClick={() => toast.success(`${builder.name}`)}
-              className="text-[#737579] text-[12px] sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
-              key={builder.id}
-            >
-              {builder.name}
-            </li>
-          ))}
-        </ul>
-        {listings?.length > 0 && <SubHeading text="Listings" />}
-        <ul>
-          {listings?.map((listing: any) => (
-            <li
-              onClick={() => handlePush(listing.id)}
-              className="text-[#737579] text-[14px] sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
-              key={listing.id}
-            >
-              {listing.name}
-            </li>
-          ))}
-        </ul>
       </div>
       <div>
         {projects && projects.length > 0 && (
@@ -132,7 +125,7 @@ export default function Results() {
         <ul>
           {projects?.map((project: any) => (
             <li
-              onClick={() => handlePush(project.id)}
+              onClick={() => handlePush("project", project.id)}
               className="text-[#737579] text-[14px] sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
               key={project.id}
             >
@@ -140,15 +133,41 @@ export default function Results() {
             </li>
           ))}
         </ul>
+        {listings?.length > 0 && <SubHeading text="Listings" />}
+        <ul>
+          {listings?.map((listing: any) => (
+            <li
+              onClick={() => handlePush("listing", listing.id)}
+              className="text-[#737579] text-[14px] sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
+              key={listing.id}
+            >
+              {listing.name}
+            </li>
+          ))}
+        </ul>
         {projectListings?.length > 0 && <SubHeading text="Project Listings" />}
         <ul>
           {projectListings?.map((projectListing: any) => (
             <li
-              onClick={() => handlePush(projectListing.id)}
+              onClick={() => handlePush("projectListing", projectListing.id)}
               className="text-[#737579] text-[14px] sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
               key={projectListing.id}
             >
               {projectListing.name}
+            </li>
+          ))}
+        </ul>
+        {builders?.length > 0 && <SubHeading text="Builders" />}
+        <ul>
+          {builders?.map((builder: any) => (
+            <li
+              onClick={() =>
+                handlePush("builder", { name: builder.name, id: builder.id })
+              }
+              className="text-[#737579] text-[12px] sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
+              key={builder.id}
+            >
+              {builder.name}
             </li>
           ))}
         </ul>
