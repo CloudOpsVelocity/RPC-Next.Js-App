@@ -22,7 +22,7 @@ export default function ListingCard({ item, sl }: Props) {
     <div className="w-full sm:w-[316px] xl:w-[490px]">
       <div className="h-[137px] sm:h-[145px] xl:h-[228px]   mb-[6px] shrink-0 shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] relative">
         <div className="flex sm:hidden justify-start items-start gap-[8px] absolute top:0 right-0 p-[8px] ">
-          <HeartIcon className="cursor-pointer w-[22px] h-[22px] sm:w-[20px] sm:h-[20px] xl:w-[26px] xl:h-[26px] " />
+          <Shortlist reqId={item.propIdEnc} shortListed={sl} />
           <ShareBtn
             url={`${process.env.NEXT_PUBLIC_BACKEND_URL}/listing/banglore/${item.propIdEnc}`}
           />
@@ -35,9 +35,7 @@ export default function ListingCard({ item, sl }: Props) {
         >
           View Detail
         </a>
-        {/* <Carousel mah={276} classNames={styles}>
-          {images.map((image, index) => (
-            <Carousel.Slide mah={276} key={index}> */}
+
         <Image
           alt="test"
           src={images[0]}
