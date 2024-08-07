@@ -26,6 +26,7 @@ import { useQuery } from "react-query";
 import { getData } from "@/app/utils/api/search";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
+import { toFormattedString } from "../../components/buget/budget";
 
 const FilterPopup = () => {
   const path = usePathname();
@@ -308,32 +309,22 @@ const FilterPopup = () => {
             Budget
           </h3>
           <p className="text-[#4D6677] text-[16px] font-[600] mb-[2%] ">
-            ₹ {filters.bugdetValue[0]} - ₹ {filters.bugdetValue[1]} Cr
+            ₹ {toFormattedString(filters.bugdetValue[0])} - ₹{" "}
+            {toFormattedString(filters.bugdetValue[1])} Cr
           </p>
           <RangeSlider
             color="green"
             key="budgetSlider"
-            marks={[
-              { value: 0, label: "₹ 0" },
-              { value: 0.5, label: "₹ 0.5 Cr" },
-              { value: 1, label: "₹ 1 Cr" },
-              { value: 1.5, label: "₹ 1.5 Cr" },
-              { value: 2, label: "₹ 2 Cr" },
-              { value: 2.5, label: "₹ 2.5 Cr" },
-              { value: 3, label: "₹ 3 Cr" },
-              { value: 3.5, label: "₹ 3.5 Cr" },
-              { value: 4, label: "₹ 4 Cr" },
-              { value: 4.5, label: "₹ 4.5 Cr" },
-              { value: 5, label: "₹ 5 Cr" },
-            ]}
-            minRange={0.2}
-            min={0}
-            max={5}
-            step={0.05}
             onChange={(value) => handleSliderChange("bugdetValue", value)}
             style={{ width: "80%" }}
-            defaultValue={[filters.bugdetValue[0], filters.bugdetValue[1]]}
-            mb={"5%"}
+            defaultValue={[
+              filters?.bugdetValue[0] ?? 500000,
+              filters?.bugdetValue[1] ?? 600000000,
+            ]}
+            min={0}
+            max={600000000}
+            step={100000}
+            label={(value) => toFormattedString(value)}
           />
           <h3
             className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] "

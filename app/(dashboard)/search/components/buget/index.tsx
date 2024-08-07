@@ -24,25 +24,6 @@ export default function BugdetFilter() {
             Budget
           </h3>
           <BasicBudgetSelect />
-          {/* <p className="text-[#4D6677] text-[16px] font-[600] mb-[2%] ">
-            ₹ {formatBudgetValue(filters.bugdetValue[0])} - ₹{" "}
-            {formatBudgetValue(filters.bugdetValue[1])}
-          </p>
-          <RangeSlider
-            color="green"
-            key="budgetSlider"
-            minRange={0}
-            min={0}
-            max={60}
-            step={0.05}
-            onChange={(value) => handleSliderChange("bugdetValue", value)}
-            style={{ width: "100%" }}
-            defaultValue={[
-              filters?.bugdetValue?.[0] ?? 0.05,
-              filters?.bugdetValue?.[1] ?? 60,
-            ]}
-            label={formatBudgetValue}
-          /> */}
         </div>
       </div>
     </div>

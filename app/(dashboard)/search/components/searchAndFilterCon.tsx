@@ -41,7 +41,9 @@ const SearchAndFilterCon = () => {
           header: S.header,
           body: classes.body,
         }}
-        size={isMobile ? "100%" : "45%"}
+        // size={isMobile ? "100%" : "16%"}
+        w={"fit"}
+        maw={"fit"}
       >
         <SearchDrawerHeader open={open} close={close} />
       </Drawer>
@@ -50,20 +52,6 @@ const SearchAndFilterCon = () => {
 };
 
 export { SearchAndFilterCon };
-
-const DropDownIcon = () => {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="14"
-      height="8"
-      viewBox="0 0 14 8"
-      fill="none"
-    >
-      <path d="M0 0.5L7 7.5L14 0.5L0 0.5Z" fill="white" />
-    </svg>
-  );
-};
 
 const SearchHeader = ({ open, close }: any) => {
   const {
