@@ -14,6 +14,9 @@ const MULTIPLIER_LAKH = 100000; // 1 Lakh = 100000
 const MULTIPLIER_THOUSAND = 1000;
 
 const MULTIPLIER = 100000;
+const THOUSANDMULTIPLIER = 1000;
+
+
 const groceries = [
   "5L",
   "10L",
@@ -34,8 +37,28 @@ const groceries = [
   "60CR",
 ];
 
+const pricesForRent = [
+  "0",
+  "5,000",
+  "10,000",
+  "15,000",
+  "20,000",
+  "25,000",
+  "30,000",
+  "35,000",
+  "40,000",
+  "45,000",
+  "50,000",
+  "55,000",
+  "60,000",
+  "70,000",
+  "80,000",
+  "90,000",
+  "1L",
+];
+
 const map = new Map<string, { value: number }>([
-  ["5L", { value: 5 * MULTIPLIER }],
+  ["0", { value: 5 * MULTIPLIER }],
   ["10L", { value: 10 * MULTIPLIER }],
   ["20L", { value: 20 * MULTIPLIER }],
   ["30L", { value: 30 * MULTIPLIER }],
@@ -52,6 +75,24 @@ const map = new Map<string, { value: number }>([
   ["40CR", { value: 4000 * MULTIPLIER }],
   ["50CR", { value: 5000 * MULTIPLIER }],
   ["60CR", { value: 6000 * MULTIPLIER }],
+  
+  ["0", { value: 0 }],
+  ["5,000", { value: 5 * THOUSANDMULTIPLIER }],
+  ["10,000", { value: 10 * THOUSANDMULTIPLIER }],
+  ["15,000", { value: 15 * THOUSANDMULTIPLIER }],
+  ["20,000", { value: 20 * THOUSANDMULTIPLIER }],
+  ["25,000", { value: 25 * THOUSANDMULTIPLIER }],
+  ["30,000", { value: 30 * THOUSANDMULTIPLIER }],
+  ["35,000", { value: 35 * THOUSANDMULTIPLIER }],
+  ["40,000", { value: 40 * THOUSANDMULTIPLIER }],
+  ["45,000", { value: 45 * THOUSANDMULTIPLIER }],
+  ["50,000", { value: 50 * THOUSANDMULTIPLIER }],
+  ["55,000", { value: 55 * THOUSANDMULTIPLIER }],
+  ["60,000", { value: 60 * THOUSANDMULTIPLIER }],
+  ["70,000", { value: 70 * THOUSANDMULTIPLIER }],
+  ["80,000", { value: 80 * THOUSANDMULTIPLIER }],
+  ["90,000", { value: 90 * THOUSANDMULTIPLIER }],
+  ["1L", { value: 100 * THOUSANDMULTIPLIER }],
 ]);
 
 const toFormattedString = (value: number): string => {
@@ -68,6 +109,7 @@ const toFormattedString = (value: number): string => {
 
 export function BasicBudgetSelect() {
   const [f, dispatch] = useAtom(homeSearchFiltersAtom);
+  const activeTab = f.cg ?? "S";
   // const [minValue, setMinValue] = useState<number>(f.bugdetValue[0]);
   // const [maxValue, setMaxValue] = useState<number>(f.bugdetValue[1]);
   const [minValue, maxValue] = f.bugdetValue;
@@ -77,7 +119,9 @@ export function BasicBudgetSelect() {
     onDropdownClose: () => combobox.resetSelectedOption(),
   });
 
-  const filteredOptions = groceries.filter((item) => {
+  let defaultArray = activeTab == "S" ? groceries : pricesForRent;
+
+  const filteredOptions = defaultArray.filter((item) => {
     const value = map.get(item)?.value ?? 0;
 
     if (focusedInput === "max" || !maxValue) {
@@ -110,7 +154,7 @@ export function BasicBudgetSelect() {
       }
     };
     return (
-      <div key={item} className={styles.option} onClick={handleOptionSelect}>
+      <div key={item} className={`${styles.option} ${focusedInput == "max" ? styles.MaxOption : "" }`} onClick={handleOptionSelect}>
         {item}
       </div>
     );
@@ -196,6 +240,7 @@ export function BasicBudgetSelect() {
             thousandSeparator=","
             allowDecimal={false}
             allowNegative={false}
+            classNames={{input: styles.minMaxInput,}}
           />
           <NumberInput
             placeholder="Max Price"
@@ -209,6 +254,7 @@ export function BasicBudgetSelect() {
             allowDecimal={false}
             allowNegative={false}
             max={6000 * MULTIPLIER}
+            classNames={{input: styles.minMaxInput,}}
           />
         </Group>
         {options}

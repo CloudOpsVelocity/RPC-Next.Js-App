@@ -12,7 +12,7 @@ import SearchSec from "./SearchSec";
 import { useMediaQuery } from "@mantine/hooks";
 import Target from "./filters/mobile/Target";
 import { useAtomValue } from "jotai";
-import { homeSearchFiltersAtom } from "@/app/store/home";
+import { homeSearchFiltersAtom } from "@/app/store/home"; 
 import { BasicSelect } from "./filters/Select";
 import { CityDropdown } from "./filters/CityDropdown";
 import { toQueryParams } from "../../utils/param";
@@ -26,13 +26,13 @@ const HomeSearch = () => {
   const isMobile = useMediaQuery("(max-width: 601px)");
   return (
     <div
-      className="px-5 w-full sm:pl-0 border-2 sm:grid sm:grid-cols-[1.1fr_2fr] gap-2 sm:pb-20 bg-white sm:pt-[200px] xl:pb-4 xl:py-28 relative xl:mt-[90px] "
+      className="px-5 w-full sm:pl-0 border-2 flex justify-center items-center xl:grid xl:grid-cols-[1.1fr_2fr] gap-2 sm:pb-20 bg-white pt-[150px] sm:pt-[200px] xl:pb-4 xl:py-28  relative xl:mt-[90px] "
       style={{
         backgroundImage: "url(/home/clouds.svg)",
       }}
     >
       <Alert />
-      <div className=" items-center justify-center hidden sm:flex min-w-[200px] sm:max-w-[299px] xl:max-w-[499px] h-full">
+      <div className=" items-center justify-center hidden xl:flex min-w-[200px] sm:max-w-[299px] xl:max-w-[499px] h-full">
         <Image
           src={"/home/home-search.svg"}
           alt="home-search"
@@ -41,7 +41,7 @@ const HomeSearch = () => {
           className="w-full h-full"
         />
       </div>
-      <div className="w-full">
+      <div className="w-full sm:max-w-[1066px] sm:ml-[20px] ">
         <div className="flex flex-col items-start sm:gap-3 self-stretch pl-[11px] pr-2.5 pt-0 pb-[13px] rounded-lg border-[0.5px] border-solid border-[#A6BDDF] bg-[#f2f7ff] sm:h-[200px] w-full">
           <Tabs />
           <p className="inline-flex sm:hidden justify-center items-center text-[#242424] text-[14px] not-italic font-medium gap-1">
@@ -59,9 +59,10 @@ const HomeSearch = () => {
             </div>
 
             {/* bengalure drop down */}
-            <span className="hidden sm:block ">
+            {/* <span className="hidden sm:block ">
               <CityDropdown />
-            </span>
+            </span> */}
+            <p className="text-[#242424] text-[10px] sm:text-[12px] not-italic font-[600] hidden sm:flex items-center gap-0.5 p-1 bg-[#ECF0F3] ">Bangalore</p>
 
             <div className="flex justify-between items-center gap-[10px] w-full">
               {isMobile ? (
@@ -78,7 +79,7 @@ const HomeSearch = () => {
                     onClick={handleSearch}
                     // href={`/search?${handleSearch()}`}
                     // target="_blank"
-                    className={`inline-flex justify-center items-center rounded sm:p-[6px] sm:pl-[16px] sm:pr-[16px] text-white text-[16px]  2xl:text-xl font-bold bg-[#0073c6]`}
+                    className={`inline-flex justify-center items-center rounded-[4px] py-[4px] px-[14px] xl:py-[6px] xl:px-[16px] text-[12px] sm:text-[14px] text-white xl:text-[16px] font-bold bg-[#0073c6]`}
                   >
                     Search
                   </div>
@@ -89,7 +90,7 @@ const HomeSearch = () => {
           {!isMobile && f.showFilter && <QuickFilters />}
         </div>
         <div className="mt-4">
-          <p className="text-[#242424] text-[12px] sm:text-xl not-italic font-medium leading-[normal] ">
+          <p className="text-[#242424] text-[12px] sm:text-[16px] xl:text-xl not-italic font-medium leading-[normal] ">
             Browse:
           </p>
           <div className="space-x-2 mt-1  flex gap-[10px] xl:block sm:flex flex-nowrap overflow-x-scroll max-w-[100%] scrollbar-hide">

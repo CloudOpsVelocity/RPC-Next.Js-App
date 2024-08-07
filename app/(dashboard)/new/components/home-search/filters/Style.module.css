@@ -17,6 +17,10 @@
   cursor: pointer;
 }
 
+.MaxOption{
+  padding-left: 120px;
+}
+
 .input {
   background-color: #f3f3f3;
   color: #242424;
@@ -44,7 +48,7 @@
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  width: 67px;
+  width: 100px;
 }
 
 .minMaxInput::placeholder {
@@ -72,16 +76,16 @@
   .input,
   .option {
     font-size: 12px;
-    padding: 3px;
-  }
-  
-  .minMaxInput {
-    width: 67px;
   }
 
-  .dropdown {
-    padding-right: 30px;
+  .input{
+    height: 20px !important;
   }
+  
+
+  /* .dropdown {
+    padding-right: 30px;
+  } */
 
 }
 
@@ -95,7 +99,5 @@
     font-size: 12px;
   }
   
-  .minMaxInput {
-    width: 67px;
-  }
+
 }
