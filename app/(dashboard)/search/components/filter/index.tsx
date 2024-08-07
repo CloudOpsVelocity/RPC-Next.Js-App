@@ -53,7 +53,7 @@ const SearchDrawerHeader = ({ open, close }: any) => {
               size="xs"
             />
             <PillsInput classNames={{ input: classes.homePageSearch }}>
-              <PillGroup py={20}>
+              <PillGroup>
                 {filters.city && (
                   <Pill
                     withRemoveButton

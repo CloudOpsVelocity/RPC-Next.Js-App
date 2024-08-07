@@ -62,6 +62,7 @@ const SearchHeader = ({ open }: any) => {
     handleAppliedFilters,
     params,
   } = useSearchFilters();
+  const isTab = useMediaQuery("(max-width: 1600px)");
   return (
     <div className="m-[2%] w-full flex mt-[100px] pl-[1%] xl:pl-[2%] gap-1 xl:gap-2 sm:gap-[10px] flex-wrap sm:flex-wrap xl:flex-nowrap justify-start xl:justify-start items-start xl:items-center ">
       <p className="text-[14px] xl:text-[16px] text-[#737579] font-[500] w-full md:w-auto">
@@ -101,27 +102,38 @@ const SearchHeader = ({ open }: any) => {
                 {filters.city.split("+")[0]}
               </Pill>
             )}
-            {filters.locality?.map((each, index) => (
+            {filters.locality?.map(
+              (each, index) =>
+                index < (isTab ? 1 : 2) && (
+                  <Pill
+                    onRemove={() => {
+                      remnoveSearchOptions(each, "locality");
+                      handleAppliedFilters();
+                    }}
+                    key={index}
+                    withRemoveButton
+                    classNames={{
+                      root: classes.MultiSelectionPill,
+                      remove: classes.removeButton,
+                    }}
+                    removeButtonProps={{
+                      style: {
+                        color: "red",
+                      },
+                    }}
+                  >
+                    {each.split("+")[0]}
+                  </Pill>
+                )
+            )}
+            {filters.locality?.length > (isTab ? 1 : 2) && (
               <Pill
-                onRemove={() => {
-                  remnoveSearchOptions(each, "locality");
-                  handleAppliedFilters();
-                }}
-                key={index}
-                withRemoveButton
-                classNames={{
-                  root: classes.MultiSelectionPill,
-                  remove: classes.removeButton,
-                }}
-                removeButtonProps={{
-                  style: {
-                    color: "red",
-                  },
-                }}
+                className="capitalize"
+                classNames={{ root: classes.MultiSelectionPill }}
               >
-                {each.split("+")[0]}
+                {`+${filters.locality?.length - (isTab ? 1 : 2)} More`}
               </Pill>
-            ))}
+            )}
 
             <PillsInput.Field
               styles={{
