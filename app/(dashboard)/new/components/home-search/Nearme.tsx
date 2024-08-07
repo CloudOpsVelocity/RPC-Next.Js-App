@@ -1,10 +1,13 @@
 "use client";
+import { useMediaQuery } from "@mantine/hooks";
 import React, { useState } from "react";
 
 type Props = {};
 
 export default function Nearme({}: Props) {
   const [error, setError] = useState<string | null>(null);
+  const isMobileStarting = useMediaQuery('(max-width: 760px)');
+
 
   const getLocation = () => {
     if (navigator.geolocation) {
@@ -31,7 +34,7 @@ export default function Nearme({}: Props) {
       className="flex items-center gap-1 rounded p-1 bg-[#f0ffdc] text-[#148B16] text-[12px] not-italic font-medium cursor-pointer text-nowrap "
       onClick={getLocation}
     >
-      {config.nearMe} <span className="hidden sm:flex">Near Me</span>
+      {config.nearMe} {isMobileStarting ? "" : <span className="hidden sm:flex">Near Me</span>} 
     </button>
   );
 }

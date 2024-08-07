@@ -23,7 +23,9 @@ const HomeSearch = () => {
   const handleSearch = () => {
     window.open(`/search?${toQueryParams(f)}`, "_blank");
   };
-  const isMobile = useMediaQuery("(max-width: 601px)");
+  const isMobile = useMediaQuery("(max-width: 641px)");
+  const isMobileStarting = useMediaQuery('(max-width: 760px)');
+
   return (
     <div
       className="px-5 w-full sm:pl-0 border-2 flex justify-center items-center xl:grid xl:grid-cols-[1.1fr_2fr] gap-2 sm:pb-20 bg-white pt-[150px] sm:pt-[200px] xl:pb-4 xl:py-28  relative xl:mt-[90px] "
@@ -41,7 +43,7 @@ const HomeSearch = () => {
           className="w-full h-full"
         />
       </div>
-      <div className="w-full sm:max-w-[1066px] sm:ml-[20px] ">
+      <div className="w-full sm:max-w-[1066px] sm:ml-[20px] xl:ml-0 xl:mr-[20px] ">
         <div className="flex flex-col items-start sm:gap-3 self-stretch pl-[11px] pr-2.5 pt-0 pb-[13px] rounded-lg border-[0.5px] border-solid border-[#A6BDDF] bg-[#f2f7ff] sm:h-[200px] w-full">
           <Tabs />
           <p className="inline-flex sm:hidden justify-center items-center text-[#242424] text-[14px] not-italic font-medium gap-1">
@@ -75,14 +77,19 @@ const HomeSearch = () => {
               {!isMobile && (
                 <div className="hidden sm:flex gap-2">
                   <Nearme />
+
+                  
                   <div
                     onClick={handleSearch}
                     // href={`/search?${handleSearch()}`}
                     // target="_blank"
-                    className={`inline-flex justify-center items-center rounded-[4px] py-[4px] px-[14px] xl:py-[6px] xl:px-[16px] text-[12px] sm:text-[14px] text-white xl:text-[16px] font-bold bg-[#0073c6]`}
+                    className={`hidden sm:flex justify-center items-center rounded-[4px] py-[4px] px-[14px] sm:px-[6px] xl:py-[6px] xl:px-[16px] text-[12px] sm:text-[14px] text-white xl:text-[16px] font-bold bg-[#0073c6]`}
                   >
-                    Search
+                    {isMobileStarting ? config.searchBtnIcon : "Search"}
                   </div>
+
+
+
                 </div>
               )}
             </div>
@@ -180,4 +187,9 @@ const config = {
       />
     </svg>
   ),
+  searchBtnIcon: (
+    <svg className="min-w-[18px] min-h-[18px] " xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none">
+      <path stroke-width="2" d="M11.6849 12.6267C11.9533 12.895 12.3674 12.4808 12.0991 12.2183L9.91161 10.025C10.6791 9.1761 11.1033 8.07196 11.1016 6.92751C11.1016 4.36668 9.01911 2.28418 6.45827 2.28418C3.89744 2.28418 1.81494 4.36668 1.81494 6.92751C1.81494 9.48835 3.89744 11.5708 6.45827 11.5708C7.61328 11.5708 8.68078 11.145 9.49744 10.4392L11.6849 12.6267ZM2.39769 6.92751C2.39769 4.68751 4.22352 2.86751 6.45769 2.86751C8.69769 2.86751 10.5177 4.68751 10.5177 6.92751C10.5177 9.16751 8.69769 10.9875 6.45769 10.9875C4.22352 10.9875 2.39769 9.16751 2.39769 6.92751Z" fill="#FFFFFF"/>
+    </svg>
+)
 };

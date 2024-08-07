@@ -10,6 +10,7 @@ import {
 import styles from "./Style.module.css";
 import { useAtom } from "jotai";
 import { homeSearchFiltersAtom } from "@/app/store/home";
+import { useMediaQuery } from "@mantine/hooks";
 const MULTIPLIER_LAKH = 100000; // 1 Lakh = 100000
 const MULTIPLIER_THOUSAND = 1000;
 
@@ -113,6 +114,7 @@ export function BasicBudgetSelect() {
   // const [minValue, setMinValue] = useState<number>(f.bugdetValue[0]);
   // const [maxValue, setMaxValue] = useState<number>(f.bugdetValue[1]);
   const [minValue, maxValue] = f.bugdetValue;
+  const isTab = useMediaQuery('(max-width: 1600px)');
 
   const [focusedInput, setFocusedInput] = useState<"min" | "max" | null>(null);
   const combobox = useCombobox({
@@ -214,6 +216,7 @@ export function BasicBudgetSelect() {
           classNames={{
             input: styles.input,
           }}
+          size={isTab ? "xs" : "sm"}
         >
           {shouldShowBudget ? (
             `${toFormattedString(minValue)}  ${

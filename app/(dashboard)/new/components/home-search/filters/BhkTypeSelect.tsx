@@ -14,11 +14,13 @@ import useSearchFilters from "@/app/hooks/search";
 import { SEARCH_FILTER_DATA } from "@/app/data/search";
 import { homeSearchFiltersAtom } from "@/app/store/home";
 import { useAtom } from "jotai";
+import { useMediaQuery } from "@mantine/hooks";
 
 export function BasicMultiSelect() {
 
   // const { filters: f, setFilters, handleCheckboxClick } = useSearchFilters();
   const [f, dispatch] = useAtom(homeSearchFiltersAtom);
+  const isTab = useMediaQuery('(max-width: 1600px)');
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
     onDropdownOpen: () => combobox.updateSelectedOptionIndex("active"),
@@ -80,6 +82,7 @@ export function BasicMultiSelect() {
           onClick={() => combobox.toggleDropdown()}
           rightSection={<DropIcon />}
           rightSectionPointerEvents="none"
+          size={isTab ? "xs" : "sm"}
         >
           <Pill.Group>
             {values.length > 0 ? (
