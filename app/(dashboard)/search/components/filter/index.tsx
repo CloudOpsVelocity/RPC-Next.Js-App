@@ -20,13 +20,8 @@ import { DynamicText } from "../../utils/text";
 const SearchDrawerHeader = ({ open, close }: any) => {
   const { onSearchChange, debounced, name } = useQsearch();
   const isTab = useMediaQuery("(max-width: 1600px)");
-  const {
-    filters,
-    handleAppliedFilters,
-    remnoveSearchOptions,
-    setFilters,
-    params,
-  } = useSearchFilters();
+  const { filters, handleAppliedFilters, remnoveSearchOptions, setFilters } =
+    useSearchFilters();
   const isMobile = useMediaQuery(em("max-width: 768px"));
   return (
     <div className="sm:m-[2%] w-full flex  sm:pl-[2%] gap-[20px] justify-start   relative flex-wrap">

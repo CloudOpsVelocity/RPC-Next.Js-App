@@ -171,10 +171,7 @@ const SearchHeader = ({ open }: any) => {
         offset={{ mainAxis: 10, crossAxis: 0 }}
       >
         <Popover.Target>
-          <button
-            // onClick={() => setOpened((o) => !o)}
-            className=" text-[#0073C6] hidden text-[14px] xl:text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] lg:flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md "
-          >
+          <button className=" text-[#0073C6] hidden text-[14px] xl:text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] lg:flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md ">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="10"
@@ -201,10 +198,7 @@ const SearchHeader = ({ open }: any) => {
         offset={{ mainAxis: 10, crossAxis: 0 }}
       >
         <Popover.Target>
-          <button
-            // onClick={() => setOpened((o) => !o)}
-            className=" text-[#0073C6] text-[14px] xl:text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] hidden lg:flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md "
-          >
+          <button className=" text-[#0073C6] text-[14px] xl:text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] hidden lg:flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md ">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="10"
