@@ -9,7 +9,6 @@ import ViewAllButton from "./ViewButton";
 import ShareBtn from "./ShareBtn";
 import ReqBtn from "./ReqBtn";
 import Shortlist from "./Shortlist";
-import { useMediaQuery } from "@mantine/hooks";
 
 type Props = { item: any };
 

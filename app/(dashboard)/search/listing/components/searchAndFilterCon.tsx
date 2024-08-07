@@ -74,20 +74,20 @@ const SearchHeader = ({ open }: any) => {
     setFilters,
     handleAppliedFilters,
     params,
-    searchProps
+    searchProps,
   } = useSearchFilters();
-
+  const isTab = useMediaQuery("(max-width: 1600px)");
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
     open();
   };
-  console.log(filters)
-  console.log(searchProps)
+  console.log(filters);
+  console.log(searchProps);
   return (
     <div className="mx-[2%] w-full flex mt-[80px] pl-[2%] gap-2 md:gap-[20px] flex-wrap md:flex-nowrap justify-between md:justify-start items-start md:items-center bg-[#FCFCFC] py-4">
       <p className="text-[14px] md:text-[16px] text-[#737579] font-[500] w-full md:w-auto">
         <span>hOME'</span> {" > "}
         <Link href={"/project/banglore"}>
-        <span className="text-[14px] md:text-[16px] text-[#4D6677] font-[600]">
+          <span className="text-[14px] md:text-[16px] text-[#4D6677] font-[600]">
             {DynamicText({
               cg: params.cg as string,
               listedBy: params.listedBy,
@@ -121,29 +121,30 @@ const SearchHeader = ({ open }: any) => {
                 {filters.city.split("+")[0]}
               </Pill>
             )}
-            {filters.locality?.map((each, index) => (
-              index < (isTab ? 1 : 2) &&
-
-              <Pill
-                onRemove={() => {
-                  remnoveSearchOptions(each, "locality");
-                  handleAppliedFilters();
-                }}
-                key={index}
-                withRemoveButton
-                classNames={{
-                  root: classes.MultiSelectionPill,
-                  remove: classes.removeButton,
-                }}
-                removeButtonProps={{
-                  style: {
-                    color: "red",
-                  },
-                }}
-              >
-                {each.split("+")[0]}
-              </Pill>
-            ))}
+            {filters.locality?.map(
+              (each, index) =>
+                index < (isTab ? 1 : 2) && (
+                  <Pill
+                    onRemove={() => {
+                      remnoveSearchOptions(each, "locality");
+                      handleAppliedFilters();
+                    }}
+                    key={index}
+                    withRemoveButton
+                    classNames={{
+                      root: classes.MultiSelectionPill,
+                      remove: classes.removeButton,
+                    }}
+                    removeButtonProps={{
+                      style: {
+                        color: "red",
+                      },
+                    }}
+                  >
+                    {each.split("+")[0]}
+                  </Pill>
+                )
+            )}
             <PillsInput.Field
               miw={225}
               placeholder={
