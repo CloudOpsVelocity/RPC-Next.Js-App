@@ -3,6 +3,7 @@ import Link from "next/link";
 import {
   MultiSelect,
   Pill,
+  PillGroup,
   PillsInput,
   RangeSlider,
   Select,
@@ -23,6 +24,8 @@ const SearchDrawerHeader = ({ open, close }: any) => {
   const { filters, handleAppliedFilters, remnoveSearchOptions, setFilters } =
     useSearchFilters();
   const isMobile = useMediaQuery(em("max-width: 768px"));
+  const [showAllLocalities, setShowAllLocalities] = useState(false);
+
   return (
     <div className="sm:m-[2%] w-full flex  sm:pl-[2%] gap-[20px] justify-start   relative flex-wrap">
       <p className="text-[16px] text-[#737579] font-[500] mt-3">
@@ -38,7 +41,7 @@ const SearchDrawerHeader = ({ open, close }: any) => {
       </p>
       <div className="w-[100%] md:w-[789px]  shrink-0 border rounded-[10px] ">
         <div className="  gap-[8px] px-[8px] border-[1px] border-solid flex items-center justify-between ">
-          <div className="gap-[8px]  flex items-center w-[100%]">
+          <div className="gap-[8px]  flex items-center w-[100%] min-h-fit">
             {" "}
             <Select
               label=""
@@ -50,7 +53,7 @@ const SearchDrawerHeader = ({ open, close }: any) => {
               size="xs"
             />
             <PillsInput classNames={{ input: classes.homePageSearch }}>
-              <div className="flex flex-row gap-2 justify-center items-center max-w-[100%]">
+              <PillGroup py={20}>
                 {filters.city && (
                   <Pill
                     withRemoveButton
@@ -70,7 +73,7 @@ const SearchDrawerHeader = ({ open, close }: any) => {
                 )}
                 {filters.locality?.map(
                   (each, index) =>
-                    index < (isTab ? 1 : 2) && (
+                    (showAllLocalities || index < (isTab ? 1 : 2)) && (
                       <Pill
                         onRemove={() => remnoveSearchOptions(each, "locality")}
                         key={index}
@@ -86,17 +89,27 @@ const SearchDrawerHeader = ({ open, close }: any) => {
                       </Pill>
                     )
                 )}
-                {filters.locality?.length > (isTab ? 1 : 2) && (
+                {filters.locality?.length > (isTab ? 1 : 2) &&
+                  !showAllLocalities && (
+                    <Pill
+                      className="capitalize"
+                      classNames={{ root: classes.MultiSelectionPill }}
+                      onClick={() => setShowAllLocalities(true)}
+                    >
+                      {`+${filters.locality?.length - (isTab ? 1 : 2)} More`}
+                    </Pill>
+                  )}
+                {showAllLocalities && (
                   <Pill
                     className="capitalize"
                     classNames={{ root: classes.MultiSelectionPill }}
+                    onClick={() => setShowAllLocalities(false)}
                   >
-                    {`+${filters.locality?.length - (isTab ? 1 : 2)} More`}
+                    Show Less
                   </Pill>
                 )}
 
                 <PillsInput.Field
-                  maw={206}
                   placeholder={
                     filters.locality.length > 0
                       ? "Add More"
@@ -105,7 +118,7 @@ const SearchDrawerHeader = ({ open, close }: any) => {
                   value={name ?? ""}
                   onChange={(e) => onSearchChange(e.target.value)}
                 />
-              </div>
+              </PillGroup>
             </PillsInput>
           </div>
 
@@ -123,6 +136,7 @@ const SearchDrawerHeader = ({ open, close }: any) => {
   );
 };
 export default SearchDrawerHeader;
+
 const CloseSvg = ({ onClick }: any) => {
   return (
     <svg

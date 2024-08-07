@@ -81,6 +81,7 @@ const SearchHeader = ({ open }: any) => {
         <PillsInput
           classNames={{ input: classes.wrapperMultiSelection }}
           onClick={open}
+          miw={700}
         >
           <Pill.Group>
             {filters.city && (
@@ -123,7 +124,11 @@ const SearchHeader = ({ open }: any) => {
             ))}
 
             <PillsInput.Field
-              miw={225}
+              styles={{
+                field: {
+                  minWidth: "100%",
+                },
+              }}
               placeholder={
                 filters.locality.length > 0
                   ? "Add More"
