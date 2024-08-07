@@ -12,6 +12,7 @@ export default function SearchSec({}: Props) {
   const [f, dispatch] = useAtom(homeSearchFiltersAtom);
   const { onSearchChange, debounced, name } = useQsearch();
   const isTab = useMediaQuery('(max-width: 1600px)');
+
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
   });
@@ -29,11 +30,11 @@ export default function SearchSec({}: Props) {
       }}
     >
       <Combobox.Target>
-        <PillsInput classNames={{ input: classes.homePageSearch }} w={"100%"}>
+        <PillsInput classNames={{ input: classes.homePageSearch }} size={isTab ? "xs" : "md"} w={"100%"}>
           <Pill.Group>
             {f.city && (
               <Pill
-                className="capitalize"
+                className="capitalize !text-[12px] !sm:text-[14px] "
                 withRemoveButton
                 classNames={{ root: classes.MultiSelectionPill }}
                 onRemove={() => dispatch({ type: "REMOVE_CITY" })}
@@ -45,7 +46,7 @@ export default function SearchSec({}: Props) {
             {f.locality?.map((each, index) => (
               index < (isTab ? 1 : 2) &&
               <Pill
-                className="capitalize"
+                className="capitalize !text-[12px] !sm:text-[14px]"
                 onRemove={() =>
                   dispatch({ type: "REMOVE_LOCALITY", payload: each })
                 }
@@ -60,7 +61,7 @@ export default function SearchSec({}: Props) {
 
             {f.locality?.length > (isTab ? 1 : 2) &&
             <Pill
-                className="capitalize"
+                className="capitalize !text-[12px] !sm:text-[14px]"
                 classNames={{ root: classes.MultiSelectionPill }}
               >
                 {`+${(f.locality?.length - (isTab ? 1 : 2))} More`}
@@ -77,6 +78,7 @@ export default function SearchSec({}: Props) {
             onClick={handleFieldClick}
             value={name ?? ""}
             onChange={(e) => onSearchChange(e.target.value)}
+            className="!min-w-[50px] ml-[4px] "
           />
         </PillsInput>
       </Combobox.Target>

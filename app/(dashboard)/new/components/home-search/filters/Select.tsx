@@ -10,6 +10,7 @@ import {
 import { useAtom } from "jotai";
 import { homeSearchFiltersAtom } from "@/app/store/home";
 import { Console } from "console";
+import { useMediaQuery } from "@mantine/hooks";
 
 const keys = [
   "Apartment",
@@ -23,6 +24,7 @@ const keys = [
 export function BasicSelect() {
   // const { filters: f, setFilters } = useSearchFilters();
   const [f, dispatch] = useAtom(homeSearchFiltersAtom);
+  const isTab = useMediaQuery('(max-width: 1600px)');
 
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
@@ -83,6 +85,7 @@ export function BasicSelect() {
           classNames={{
             input: styles.input,
           }}
+          size={isTab ? "xs" : "sm"}
         >
           {(propertyDetailsTypes?.get(value ?? 0)?.name ?? "") || (
             <Input.Placeholder className="!text-black">
