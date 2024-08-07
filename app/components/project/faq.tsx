@@ -164,7 +164,8 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
               handleTrimAndReplace(e, "question", setFieldValue, "dis")
             }
             classNames={{
-              input: StepCscs.textAreaInput, error:"!text-[12px] !sm:text-[18px]"
+              input: StepCscs.textAreaInput,
+              error: "!text-[12px] !sm:text-[18px]",
             }}
           />
         </div>
@@ -198,13 +199,13 @@ const FaqCard = ({
 }) => {
   return (
     <div>
-      <h4 className=" text-[#242424] sm:text-[20px] xl:text-[24px] not-italic font-medium sm:font-bold leading-[normal] sm:mb-2 xl:mb-2 capitalize">
+      <h4 className=" text-[#242424] sm:text-[20px] xl:text-[24px] not-italic font-medium sm:font-bold leading-[normal] sm:mb-0 capitalize">
         {faqQuestion}
       </h4>
       <FaqReadMore text={faqAnswer} title={faqQuestion} />
-     {/*  {!last && ( */}
-        <hr className="bg-[#00000080] my-4 sm:my-[25px] xl:my-[28px] h-[2px]" />
-    {/*   )} */}
+      {/*  {!last && ( */}
+      <hr className="bg-[#00000080] my-4 sm:my-[18px] h-[2px]" />
+      {/*   )} */}
     </div>
   );
 };

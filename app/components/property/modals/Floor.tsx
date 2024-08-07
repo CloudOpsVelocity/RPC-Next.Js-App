@@ -93,7 +93,7 @@ const MiddleSection = () => {
           <img
             src={data.floorPlanUrl ?? ImgNotAvail}
             alt="Floor Plan"
-            className="max-h-[500px] object-contain"
+            className="max-h-[500px] sm:max-h-[400px] xl:max-h-[500px]   object-contain"
             width={1200}
             height={500}
           />

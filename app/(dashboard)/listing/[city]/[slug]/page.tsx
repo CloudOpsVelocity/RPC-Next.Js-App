@@ -25,7 +25,6 @@ import LoginPopup from "@/app/components/project/modals/LoginPop";
 import MobileHidden from "@/app/components/molecules/MobileHidden";
 import PriceBreakup from "@/app/components/property/pricingbreakup/PriceBreakup";
 import { notFound } from "next/navigation";
-import { bhkDetailsMap } from "@/app/data/projectDetails";
 import CompareError from "@/app/components/property/actions/Error";
 import NearByCarouselProjProperty from "@/app/components/property/carousel/ProjectCarouse";
 import { getAmenties } from "@/app/utils/api/project";
