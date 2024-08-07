@@ -39,7 +39,7 @@ export const initialState: SearchFilter = {
   listedBy: null,
   reraVerified: null,
   areaValue: [0, 5000],
-  bugdetValue: [0, 60],
+  bugdetValue: [500000, 600000000],
   builderIds: [],
   city: null,
   facings: [],
@@ -54,7 +54,14 @@ export const initialState: SearchFilter = {
   lng: null,
 };
 export const diffToProjFromListing = {
-  proj: ["facings", "furnish", "propStatus", "listedBy", "sortByfield", "sortType"],
+  proj: [
+    "facings",
+    "furnish",
+    "propStatus",
+    "listedBy",
+    "sortByfield",
+    "sortType",
+  ],
   A: ["current", "reraVerified", "builderIds", "sortByfield", "sortType"],
   I: ["current", "reraVerified", "builderIds", "sortByfield", "sortType"],
 };

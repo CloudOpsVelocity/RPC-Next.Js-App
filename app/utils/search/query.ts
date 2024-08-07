@@ -48,7 +48,7 @@ const convertToQueryParams = (params: Params): string => {
         // Convert the value to crores or lakhs if necessary
         let value = params[key];
         if (key === "minPrice" || key === "maxPrice") {
-          value *= 10000000;
+          value;
         } else if (key === "city") {
           value = params[key].split("+")[1];
         } else if (key === "localities" || key === "builderIds") {

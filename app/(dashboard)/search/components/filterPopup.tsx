@@ -26,6 +26,7 @@ import { useQuery } from "react-query";
 import { getData } from "@/app/utils/api/search";
 import clsx from "clsx";
 import { formatBudgetValue } from "./buget";
+import { toFormattedString } from "./buget/budget";
 
 const FilterPopup = () => {
   const [current, setCurrent] = useState("Project Status");
@@ -273,25 +274,26 @@ const FilterPopup = () => {
           </h3>
 
           <p className="text-[#4D6677] text-[16px] font-[600] mb-[2%] ">
-            ₹ {formatBudgetValue(filters.bugdetValue[0])} - ₹{" "}
-            {formatBudgetValue(filters.bugdetValue[1])}
+            ₹ {toFormattedString(filters.bugdetValue[0])} - ₹{" "}
+            {toFormattedString(filters.bugdetValue[1])} Cr
           </p>
           <RangeSlider
             color="green"
             key="budgetSlider"
-            minRange={0}
-            min={0}
-            max={60}
-            step={0.05}
+            // classNames={{
+            //   markLabel: S.markLabel,
+            // }}
             onChange={(value) => handleSliderChange("bugdetValue", value)}
-            style={{ width: "100%" }}
+            style={{ width: "80%" }}
             defaultValue={[
-              filters?.bugdetValue?.[0] ?? 0.05,
-              filters?.bugdetValue?.[1] ?? 60,
+              filters?.bugdetValue[0] ?? 500000,
+              filters?.bugdetValue[1] ?? 600000000,
             ]}
-            label={formatBudgetValue}
+            min={0}
+            max={600000000}
+            step={100000}
+            label={(value) => toFormattedString(value)}
           />
-
           {filters?.propTypes != projectprops.plot && (
             <React.Fragment>
               <h3
@@ -324,17 +326,17 @@ const FilterPopup = () => {
           </h3>
           <div className="flex  mb-[3%] justify-start items-center gap-[4%] flex-wrap ">
             <Checkbox label="Lift" color="green" />
-            {SEARCH_FILTER_DATA.amenities.map((i, ind)=>{
-              return(
+            {SEARCH_FILTER_DATA.amenities.map((i, ind) => {
+              return (
                 <Checkbox
-                className="my-2"
-                      key={i.cid}
-                      label={i.constDesc}
-                      color="green"
-                      onClick={() => handleCheckboxClick("amenities", i.cid)}
-                      checked={filters.amenities.includes(i.cid)}
-                    />
-              )
+                  className="my-2"
+                  key={i.cid}
+                  label={i.constDesc}
+                  color="green"
+                  onClick={() => handleCheckboxClick("amenities", i.cid)}
+                  checked={filters.amenities.includes(i.cid)}
+                />
+              );
             })}
           </div>
 

@@ -2,6 +2,7 @@ import { RangeSlider } from "@mantine/core";
 import React from "react";
 import ClearAll from "../ClearAll";
 import useSearchFilters from "@/app/hooks/search";
+import { BasicBudgetSelect } from "./budget";
 export function formatBudgetValue(value: number) {
   if (value < 1) {
     const lakhValue = value * 100;
@@ -13,10 +14,8 @@ export function formatBudgetValue(value: number) {
   }
 }
 export default function BugdetFilter() {
-  const { filters, handleSliderChange } = useSearchFilters();
-
   return (
-    <div className="w-[700px] ">
+    <div className="w-[330px] ">
       <ClearAll type="price" />
       <div className="p-3 w-full">
         {" "}
@@ -24,7 +23,8 @@ export default function BugdetFilter() {
           <h3 className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] ">
             Budget
           </h3>
-          <p className="text-[#4D6677] text-[16px] font-[600] mb-[2%] ">
+          <BasicBudgetSelect />
+          {/* <p className="text-[#4D6677] text-[16px] font-[600] mb-[2%] ">
             ₹ {formatBudgetValue(filters.bugdetValue[0])} - ₹{" "}
             {formatBudgetValue(filters.bugdetValue[1])}
           </p>
@@ -42,7 +42,7 @@ export default function BugdetFilter() {
               filters?.bugdetValue?.[1] ?? 60,
             ]}
             label={formatBudgetValue}
-          />
+          /> */}
         </div>
       </div>
     </div>
