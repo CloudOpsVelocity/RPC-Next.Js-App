@@ -28,7 +28,7 @@ export default function CardDownSection({
   postedByName,
   postedBy,
   localityName,
-  projIdEnc
+  projIdEnc,
 }: any) {
   const name =
     type === "proj"
@@ -38,19 +38,19 @@ export default function CardDownSection({
   const [, { open }] = useReqCallPopup();
   const setPopReqData = useSetAtom(NearByDataAtom);
   const handleOpen = () => {
-   
-
-         open({
-      modal_type: type === "proj" ? "PROJECT_REQ_CALLBACK" : "PROPERTY_REQ_CALLBACK" ,
+    open({
+      modal_type:
+        type === "proj" ? "PROJECT_REQ_CALLBACK" : "PROPERTY_REQ_CALLBACK",
       postedByName: type === "proj" ? builderName : postedByName,
       postedId: builderId,
       reqId: reqId,
-      source:type === "proj" ? "projCard" : "propCard",
-      title:type === "proj" ? projName  : `${bhkName ?? ""} ${propTypeName} for
+      source: type === "proj" ? "projCard" : "propCard",
+      title:
+        type === "proj"
+          ? projName
+          : `${bhkName ?? ""} ${propTypeName} for
       ${cg === "R" ? "Rent" : "Sell"} in ${localityName}`,
-
     });
-   
   };
 
   return (
@@ -59,8 +59,18 @@ export default function CardDownSection({
       <div className="flex gap-[9px]">
         {type === "proj" && (
           <>
-            <CountListing type="Agent" value={a} projIdEnc={projIdEnc} />
-            <CountListing type="Owner" value={o} projIdEnc={projIdEnc} />
+            <CountListing
+              type="Agent"
+              value={a}
+              projIdEnc={projIdEnc}
+              projName={projName}
+            />
+            <CountListing
+              type="Owner"
+              value={o}
+              projIdEnc={projIdEnc}
+              projName={projName}
+            />
           </>
         )}
       </div>
@@ -79,19 +89,25 @@ export default function CardDownSection({
 type CountListProps = {
   value: number;
   type: "Agent" | "Owner";
-  projIdEnc:string
+  projIdEnc: string;
+  projName: string;
 };
-const CountListing = ({ type, value,projIdEnc }: CountListProps) => {
-  const handleAgentOwner = (type:"A" | "I") =>{
-    window.open(`/search/listing?projIdEnc=${projIdEnc}&listedBy=${type}`,"_blank")
-  }
+const CountListing = ({ type, value, projIdEnc, projName }: CountListProps) => {
+  const handleAgentOwner = (type: "A" | "I") => {
+    window.open(
+      `/search/listing?projIdEnc=${projIdEnc}&listedBy=${type}&projName=${projName}`,
+      "_blank"
+    );
+  };
   return (
     value > 0 && (
       <button
-      onClick={()=> handleAgentOwner(type === "Owner" ? "I" : "A")}
+        onClick={() => handleAgentOwner(type === "Owner" ? "I" : "A")}
         className={clsx(
           "flex flex-col justify-start  items-start gap-2 p-1 rounded border-[0.4px] border-solid",
-          type === "Owner" ? "bg-[#FFF6ED] text-[#D66700] border-[#FF7A00]" : "bg-[#f0fff0]",
+          type === "Owner"
+            ? "bg-[#FFF6ED] text-[#D66700] border-[#FF7A00]"
+            : "bg-[#f0fff0]",
           value > 0
             ? "text-[#148B16] border-[#148B16] cursor-pointer"
             : "text-gray-400 border-[#5e5f5e] opacity-50 cursor-none"

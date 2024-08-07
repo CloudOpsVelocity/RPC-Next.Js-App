@@ -43,16 +43,6 @@ const LeftSideBlock = () => {
 
   return (
     <div className="md:w-[50%] sm:w-[100%]  md:bg-white w-[100%]  xl:min-w-[400px] md:min-w-[500px]">
-      {/* <Tabs
-        value={params.listedBy ?? "proj"}
-        onChange={(value) => onTabChange((value as "proj") || "proj")}
-        defaultValue="proj"
-      >
-        
-        <TabList />
-     
-       
-      </Tabs> */}
       <NewTabCon
         onTabChange={onTabChange}
         selectedProtype={params.listedBy ?? "proj"}
@@ -70,6 +60,5 @@ const LeftSideBlock = () => {
 
 export { LeftSideBlock };
 import { diffToProjFromListing, initialState } from "@/app/store/search";
-import TabList from "./TabList";
 import TabPanelSection from "./TabPanelSection";
 import SharePopup from "../SharePopup";
