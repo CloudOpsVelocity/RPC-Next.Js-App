@@ -24,10 +24,12 @@ import SearchDrawerHeader from "./filter";
 import SearchDrawer from "./drawer";
 import BuyRent from "./filter/BuyRent";
 import { DynamicText } from "../utils/text";
+import useQsearch from "@/app/hooks/search/useQsearch";
 
 const SearchAndFilterCon = () => {
   const [opened, { open, close }] = useDisclosure(false);
   const isMobile = useMediaQuery("(max-width: 601px)");
+  const { debounced } = useQsearch();
   return (
     <>
       <SearchHeader open={open} close={close} />
@@ -41,9 +43,7 @@ const SearchAndFilterCon = () => {
           header: S.header,
           body: classes.body,
         }}
-        // size={isMobile ? "100%" : "16%"}
-        w={"fit"}
-        maw={"fit"}
+        size={isMobile ? "100%" : debounced ? "45%" : "15%"}
       >
         <SearchDrawerHeader open={open} close={close} />
       </Drawer>
@@ -53,7 +53,7 @@ const SearchAndFilterCon = () => {
 
 export { SearchAndFilterCon };
 
-const SearchHeader = ({ open, close }: any) => {
+const SearchHeader = ({ open }: any) => {
   const {
     countAppliedFilters,
     filters,

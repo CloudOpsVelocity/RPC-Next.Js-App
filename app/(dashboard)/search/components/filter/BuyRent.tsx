@@ -15,7 +15,7 @@ export default function BuyRent() {
   const handleChnage = (value: string) => {
     setFilters((prev) => ({
       ...prev,
-      bugdetValue: [0, 100000],
+      bugdetValue: filters.cg == "R" ? [0, 100000] : [500000, 600000000],
       cg: value,
     }));
     handleAppliedFilters();
