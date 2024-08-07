@@ -3,7 +3,7 @@ import Button from "./button";
 import { useState } from "react";
 import { Checkbox, Pill, PillsInput, Transition } from "@mantine/core";
 import { RangeSlider } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
+import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import { FaLocationDot } from "react-icons/fa6";
 import { useClickOutside } from "@mantine/hooks";
 import { FaLocationCrosshairs } from "react-icons/fa6";
@@ -72,6 +72,7 @@ const Searchbar = () => {
   // };
   const [opened, { close, toggle, open }] = useDisclosure(false);
   const wrapperRef = useClickOutside(() => close());
+  const isTab = useMediaQuery('(max-width: 1600px)');
 
   // styles
   const rangeSliderClasses = {
@@ -113,7 +114,6 @@ const Searchbar = () => {
                 <FaLocationDot color="red" size={25} />
               </div>
               <PillsInput classNames={{ input: classes.homePageSearch }}>
-                <Pill.Group>
                   {f.city && (
                     <Pill
                       className="capitalize"
@@ -127,6 +127,7 @@ const Searchbar = () => {
                     </Pill>
                   )}
                   {f.locality?.map((each, index) => (
+                      index < (isTab ? 1 : 2) &&
                     <Pill
                       className="capitalize"
                       onRemove={() => remnoveSearchOptions(each, "locality")}
@@ -137,6 +138,14 @@ const Searchbar = () => {
                       {each.split("+")[0]}
                     </Pill>
                   ))}
+                    {f.locality?.length > (isTab ? 1 : 2) &&
+            <Pill
+                className="capitalize"
+                classNames={{ root: classes.MultiSelectionPill }}
+              >
+                {`+${(f.locality?.length - (isTab ? 1 : 2))} More`}
+            </Pill>
+            }
 
                   <PillsInput.Field
                     onFocus={open}
@@ -148,7 +157,6 @@ const Searchbar = () => {
                     value={name ?? ""}
                     onChange={(e) => onSearchChange(e.target.value)}
                   />
-                </Pill.Group>
               </PillsInput>
             </div>
 

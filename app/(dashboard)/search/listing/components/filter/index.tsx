@@ -16,10 +16,11 @@ import FilterSection from "./filter";
 import useQsearch from "@/app/hooks/search/useQsearch";
 import Results from "./results";
 import { useMediaQuery } from "@mantine/hooks";
+import { DynamicText } from "../../../utils/text";
 
 const SearchDrawerHeader = ({ open, close }: any) => {
   const { onSearchChange, debounced, name } = useQsearch();
-  const { filters, handleAppliedFilters, remnoveSearchOptions, setFilters } =
+  const { filters, handleAppliedFilters, remnoveSearchOptions, setFilters,params } =
     useSearchFilters();
   const isMobile = useMediaQuery(em("max-width: 768px"));
   return (
@@ -27,8 +28,11 @@ const SearchDrawerHeader = ({ open, close }: any) => {
       <p className="text-[16px] text-[#737579] font-[500] mt-3">
         <span>Home</span> {" > "}
         <Link href={"/project/banglore"}>
-          <span className="text-[16px] text-[#4D6677] font-[600]">
-            Properties for Sell in Bengaluru
+        <span className="text-[14px] md:text-[16px] text-[#4D6677] font-[600]">
+            {DynamicText({
+              cg: params.cg as string,
+              listedBy: params.listedBy,
+            })}
           </span>
         </Link>{" "}
       </p>

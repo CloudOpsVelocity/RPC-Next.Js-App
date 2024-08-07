@@ -150,11 +150,11 @@ const FilterPopup = () => {
                 return (
                   <div
                     key={index}
-                    className="capitalize flex justify-center items-center p-[1%] r shadow-[0px_4px_10px_0px_rgba(202,233,255,0.30)]   border rounded-[5px] border-solid border-[#92B2C8]"
+                    className="capitalize flex justify-center items-center pl-[2px] shadow-[0px_4px_10px_0px_rgba(202,233,255,0.30)]   border rounded-[5px] border-solid border-[#92B2C8]"
                   >
                     {eachLocality.split("+")[0]}
                     <span
-                      className="cursor-pointer "
+                      className="cursor-pointer  "
                       onClick={() => remnoveSearchOptions(index, "locality")}
                     >
                       {miniItemsCrossIcon}
@@ -188,7 +188,7 @@ const FilterPopup = () => {
             className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] flex items-center gap-[5px] "
             id="Property Type"
           >
-            Property Type {notificationIcon}
+            Property Type{/*  {notificationIcon} */}
           </h3>
           <div className="flex  mb-[3%] justify-start items-start flex-wrap gap-[4%]">
             {propKeys.map((keyName, i) => {

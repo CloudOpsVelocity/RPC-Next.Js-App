@@ -136,7 +136,7 @@ export default function TopRightSection({
           <div className="flex  items-end flex-col gap-2">
             <Button
               onChange={() => onAddingCompare()}
-              title={Com ? "Remove Compare" : "Add to Compare"}
+              title={Com ? "Remove  Compare" : "Add to Compare"}
               buttonClass="inline-flex justify-center items-center gap-2.5 rounded p-0.5 border-[0.5px] border-solid border-[#00A8CD] text-[#00A8CD] text-xs not-italic font-semibold ml-auto"
             />{" "}
             <p className="text-[#242424] xl:text-nowrap text-wrap text-sm not-italic font-normal">

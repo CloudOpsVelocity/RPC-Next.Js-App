@@ -49,7 +49,7 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
     type === "proj"
       ? cardData.projName
       : `${cardData.bhkName ?? ""} ${cardData.propTypeName} for
-      ${cardData.cg === "R" ? "Rent" : "Sale"} in ${cardData.ltName}`;
+      ${cardData.cg === "R" ? "Rent" : "Sell"} in ${cardData.ltName}`;
   const setPopReqData = useSetAtom(NearByDataAtom);
   const onAddingShortList = (e: any, propId: string) => {
     e.stopPropagation();
@@ -164,7 +164,7 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
             {type != "proj" && (
               <p className="mb-[6px] text-[#242424] text-[14px] sm:text-base not-italic font-semibold leading-[normal] tracking-[0.56px] ">
                 {cardData.bhkName} {cardData.propTypeName} for{" "}
-                {cardData.cg === "R" ? "Rent" : "Sale"} in {cardData.ltName}{" "}
+                {cardData.cg === "R" ? "Rent" : "Sell"} in {cardData.ltName}{" "}
                 <br />
                 <span className="text-[18px] font-[700] text-[#148B16] ">
                   {" "}

@@ -3,15 +3,15 @@ import SortBy from "./SortBy";
 
 const NewTabCon = ({ onTabChange, selectedProtype, categoryType, Activities }: any) => {
   return (
-    <div className="flex flex-row justify-between items-center  align-middle gap-[3px] md:gap-3 max-w-full  bg-blue-200 shadow-md px-[1px] md:px-4 md:py-2.5;">
+    <div className="flex flex-row justify-between items-center  align-middle gap-[3px] md:gap-3 max-w-full  bg-[#e7f5ff] shadow-md px-[1px] md:px-4 md:py-2.5;">
       <div className="flex flex-row justify-between items-center  align-middle gap-1 md:gap-3 ">
         {categoryType.map((item: any) => (
           <button
             onClick={() => onTabChange(item.value)}
-            className={` text-[12px] sm:text-[14px]  xl:text-base leading-0  font-montserrat cursor-pointer   ${
+            className={` text-[12px] sm:text-[14px] font-[600] xl:text-base leading-0  font-montserrat cursor-pointer   ${
               item.value == selectedProtype
                 ? "text-blue-500 underline font-semibold md:font-bold"
-                : "text-gray-500"
+                : "text-[#242424]"
             }`}
           >
             {" "}

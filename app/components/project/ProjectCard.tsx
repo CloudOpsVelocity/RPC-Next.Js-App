@@ -49,7 +49,7 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
     type === "proj"
       ? cardData.projName
       : `${cardData?.bhkName ?? ""} ${cardData.propTypeName} for
-      ${cardData.cg === "R" ? "Rent" : "Sale"} in ${cardData.ltName}`;
+      ${cardData.cg === "R" ? "Rent" : "Sell"} in ${cardData.ltName}`;
   const handleShortlist = (projId: string) => {
     mutate && mutate({ id: projId, type: ct as Pick<CardProps, "ct">["ct"] });
     toggleShortlist({
@@ -177,7 +177,7 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
             {type != "proj" && (
               <p className="text-[18px] font-[600] text-[#303030] mb-[8px] ">
                 {cardData.bhkName} {cardData.propTypeName} for{" "}
-                {cardData.cg === "R" ? "Rent" : "Sale"} in {cardData.ltName},{" "}
+                {cardData.cg === "R" ? "Rent" : "Sell"} in {cardData.ltName},{" "}
                 <br />
                 <span className="text-[18px] font-[700] text-[#148B16] ">
                   {" "}

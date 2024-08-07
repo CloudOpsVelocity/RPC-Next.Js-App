@@ -159,7 +159,7 @@ const FilterPopup = () => {
             className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] flex items-center gap-[5px] "
             id="Property Type"
           >
-            Property Type {notificationIcon}
+            Property Type {/* {notificationIcon} */}
           </h3>
           <div className="flex  mb-[3%] justify-start items-start flex-wrap gap-[4%]">
             {propKeys.map((keyName, i) => {
@@ -405,7 +405,21 @@ const FilterPopup = () => {
             className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] "
             id="Amenities"
           >
-            Amenities
+           <div className="flex  mb-[3%] justify-start items-center gap-[4%] flex-wrap ">
+            <Checkbox label="Lift" color="green" />
+            {SEARCH_FILTER_DATA.amenities.map((i, ind)=>{
+              return(
+                <Checkbox
+                className="my-2"
+                      key={i.cid}
+                      label={i.constDesc}
+                      color="green"
+                      onClick={() => handleCheckboxClick("amenities", i.cid)}
+                      checked={filters.amenities.includes(i.cid)}
+                    />
+              )
+            })}
+          </div>
           </h3>
           <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
             <Checkbox label="Lift" color="green" />

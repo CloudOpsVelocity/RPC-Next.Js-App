@@ -133,11 +133,11 @@ export const SEARCH_FILTER_DATA = {
       value: "proj",
     },
     {
-      label: "Owner Listing",
+      label: "Owner Listings",
       value: "I",
     },
     {
-      label: "Agent Listing",
+      label: "Agent Listings",
       value: "A",
     },
   ],

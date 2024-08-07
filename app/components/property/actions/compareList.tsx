@@ -48,7 +48,7 @@ export default function CompareList({ cg, propTypeName }: any) {
       )}
     >
       <ComparingListIcon color={data?.compareAdded ? "#148B16" : "#0073C6"} />
-      {data?.compareAdded ? "Remove from" : "Add to"} Compare
+      {data?.compareAdded ? "Remove From" : "Add to"} Compare
     </button>
   );
 }

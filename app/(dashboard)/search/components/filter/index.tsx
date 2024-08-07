@@ -15,19 +15,29 @@ import FilterSection from "./filter";
 import useQsearch from "@/app/hooks/search/useQsearch";
 import Results from "./results";
 import { useMediaQuery } from "@mantine/hooks";
+import { DynamicText } from "../../utils/text";
 
 const SearchDrawerHeader = ({ open, close }: any) => {
   const { onSearchChange, debounced, name } = useQsearch();
-  const { filters, handleAppliedFilters, remnoveSearchOptions, setFilters } =
-    useSearchFilters();
+  const isTab = useMediaQuery("(max-width: 1600px)");
+  const {
+    filters,
+    handleAppliedFilters,
+    remnoveSearchOptions,
+    setFilters,
+    params,
+  } = useSearchFilters();
   const isMobile = useMediaQuery(em("max-width: 768px"));
   return (
     <div className="sm:m-[2%] w-full flex  sm:pl-[2%] gap-[20px] justify-start   relative flex-wrap">
       <p className="text-[16px] text-[#737579] font-[500] mt-3">
         <span>Home</span> {" > "}
         <Link href={"/project/banglore"}>
-          <span className="text-[16px] text-[#4D6677] font-[600]">
-            Properties for Sell in Bengaluru
+          <span className="text-[14px] md:text-[16px] text-[#4D6677] font-[600]">
+            {DynamicText({
+              cg: filters.cg as string,
+              listedBy: filters.listedBy,
+            })}
           </span>
         </Link>{" "}
       </p>
@@ -44,8 +54,8 @@ const SearchDrawerHeader = ({ open, close }: any) => {
               rightSection={<DropDownIcon />}
               size="xs"
             />
-            <PillsInput classNames={{ input: classes.wrapperMultiSelection }}>
-              <Pill.Group>
+            <PillsInput classNames={{ input: classes.homePageSearch }}>
+              <div className="flex flex-row gap-2 justify-center items-center max-w-[100%]">
                 {filters.city && (
                   <Pill
                     withRemoveButton
@@ -63,24 +73,35 @@ const SearchDrawerHeader = ({ open, close }: any) => {
                     {filters.city.split("+")[0]}
                   </Pill>
                 )}
-                {filters.locality?.map((each, index) => (
+                {filters.locality?.map(
+                  (each, index) =>
+                    index < (isTab ? 1 : 2) && (
+                      <Pill
+                        onRemove={() => remnoveSearchOptions(each, "locality")}
+                        key={index}
+                        withRemoveButton
+                        classNames={{ root: classes.MultiSelectionPill }}
+                        removeButtonProps={{
+                          style: {
+                            color: "red",
+                          },
+                        }}
+                      >
+                        {each.split("+")[0]}
+                      </Pill>
+                    )
+                )}
+                {filters.locality?.length > (isTab ? 1 : 2) && (
                   <Pill
-                    onRemove={() => remnoveSearchOptions(each, "locality")}
-                    key={index}
-                    withRemoveButton
+                    className="capitalize"
                     classNames={{ root: classes.MultiSelectionPill }}
-                    removeButtonProps={{
-                      style: {
-                        color: "red",
-                      },
-                    }}
                   >
-                    {each.split("+")[0]}
+                    {`+${filters.locality?.length - (isTab ? 1 : 2)} More`}
                   </Pill>
-                ))}
+                )}
 
                 <PillsInput.Field
-                  miw={406}
+                  maw={206}
                   placeholder={
                     filters.locality.length > 0
                       ? "Add More"
@@ -89,7 +110,7 @@ const SearchDrawerHeader = ({ open, close }: any) => {
                   value={name ?? ""}
                   onChange={(e) => onSearchChange(e.target.value)}
                 />
-              </Pill.Group>
+              </div>
             </PillsInput>
           </div>
 

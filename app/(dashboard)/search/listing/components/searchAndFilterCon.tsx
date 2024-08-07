@@ -23,10 +23,12 @@ import S from "@/app/styles/seach/Drawer.module.css";
 import SearchDrawerHeader from "./filter";
 import SearchDrawer from "./drawer";
 import BuyRent from "../../components/filter/BuyRent";
+import { DynamicText } from "../../utils/text";
 
 const SearchAndFilterCon = () => {
   const [opened, { open, close }] = useDisclosure(false);
   const isMobile = useMediaQuery("(max-width: 768px)");
+  const isTab = useMediaQuery("(max-width: 1600px)");
   return (
     <>
       <SearchHeader open={open} close={close} />
@@ -71,18 +73,25 @@ const SearchHeader = ({ open }: any) => {
     remnoveSearchOptions,
     setFilters,
     handleAppliedFilters,
+    params,
+    searchProps
   } = useSearchFilters();
 
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
     open();
   };
+  console.log(filters)
+  console.log(searchProps)
   return (
     <div className="mx-[2%] w-full flex mt-[80px] pl-[2%] gap-2 md:gap-[20px] flex-wrap md:flex-nowrap justify-between md:justify-start items-start md:items-center bg-[#FCFCFC] py-4">
       <p className="text-[14px] md:text-[16px] text-[#737579] font-[500] w-full md:w-auto">
-        <span>Home</span> {" > "}
+        <span>hOME'</span> {" > "}
         <Link href={"/project/banglore"}>
-          <span className="text-[14px] md:text-[16px] text-[#4D6677] font-[600]">
-            Properties for Sell in Bengaluru
+        <span className="text-[14px] md:text-[16px] text-[#4D6677] font-[600]">
+            {DynamicText({
+              cg: params.cg as string,
+              listedBy: params.listedBy,
+            })}
           </span>
         </Link>{" "}
       </p>
@@ -113,6 +122,8 @@ const SearchHeader = ({ open }: any) => {
               </Pill>
             )}
             {filters.locality?.map((each, index) => (
+              index < (isTab ? 1 : 2) &&
+
               <Pill
                 onRemove={() => {
                   remnoveSearchOptions(each, "locality");

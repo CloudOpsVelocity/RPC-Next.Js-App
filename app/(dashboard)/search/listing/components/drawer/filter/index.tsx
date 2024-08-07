@@ -431,6 +431,7 @@ const ListingMobileFilter = ({ close }: any) => {
           </h3>
           <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
             <Checkbox label="Lift" color="green" />
+            
           </div>
 
           {filters?.propTypes != projectprops.plot && (
