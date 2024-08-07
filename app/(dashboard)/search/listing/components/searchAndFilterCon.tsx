@@ -24,11 +24,12 @@ import SearchDrawerHeader from "./filter";
 import SearchDrawer from "./drawer";
 import BuyRent from "../../components/filter/BuyRent";
 import { DynamicText } from "../../utils/text";
+import useQsearch from "@/app/hooks/search/useQsearch";
 
 const SearchAndFilterCon = () => {
   const [opened, { open, close }] = useDisclosure(false);
   const isMobile = useMediaQuery("(max-width: 768px)");
-  const isTab = useMediaQuery("(max-width: 1600px)");
+  const { debounced } = useQsearch();
   return (
     <>
       <SearchHeader open={open} close={close} />
@@ -42,7 +43,7 @@ const SearchAndFilterCon = () => {
           header: S.header,
           body: classes.body,
         }}
-        size={isMobile ? "100%" : "45%"}
+        size={isMobile ? "100%" : debounced ? "45%" : "15%"}
       >
         <SearchDrawerHeader open={open} close={close} />
       </Drawer>
@@ -76,12 +77,11 @@ const SearchHeader = ({ open }: any) => {
     params,
     searchProps,
   } = useSearchFilters();
+  const [projName, clearProjName] = useQueryState("projName");
   const isTab = useMediaQuery("(max-width: 1600px)");
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
     open();
   };
-  console.log(filters);
-  console.log(searchProps);
   return (
     <div className="mx-[2%] w-full flex mt-[80px] pl-[2%] gap-2 md:gap-[20px] flex-wrap md:flex-nowrap justify-between md:justify-start items-start md:items-center bg-[#FCFCFC] py-4">
       <p className="text-[14px] md:text-[16px] text-[#737579] font-[500] w-full md:w-auto">
@@ -104,6 +104,25 @@ const SearchHeader = ({ open }: any) => {
           onClick={handleClick}
         >
           <Pill.Group>
+            {filters.projIdEnc && (
+              <Pill
+                withRemoveButton
+                classNames={{ root: classes.MultiSelectionPill }}
+                onRemove={() => {
+                  setFilters((prev) => ({ ...prev, projIdEnc: null }));
+                  clearProjName(null);
+                  handleAppliedFilters();
+                }}
+                removeButtonProps={{
+                  style: {
+                    color: "red",
+                  },
+                }}
+              >
+                {projName}
+              </Pill>
+            )}
+
             {filters.city && (
               <Pill
                 withRemoveButton
@@ -152,9 +171,6 @@ const SearchHeader = ({ open }: any) => {
                   ? "Add More"
                   : "Enter City,Locality & Project"
               }
-              // onClick={() => {
-              //   open();
-              // }}
               readOnly
             />
           </Pill.Group>
