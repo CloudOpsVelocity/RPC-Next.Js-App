@@ -28,6 +28,7 @@ interface Cluster {
 }
 const Map = ({ data, lat, lang }: any) => {
   const position: LatLngTuple = [lat, lang];
+  const [selected, setSelectedValue] = useAtom(selectedSearchAtom);
   const createClusterCustomIcon = function (cluster: Cluster) {
     return L.divIcon({
       html: `<span class="cluster-icon">${cluster.getChildCount()}</span>`,
@@ -48,12 +49,9 @@ const Map = ({ data, lat, lang }: any) => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <MarkerClusterGroup
-          chunkedLoading
-          iconCreateFunction={createClusterCustomIcon}
-        >
-          <MapContent data={data} />
-        </MarkerClusterGroup>
+        {/* <MarkerClusterGroup iconCreateFunction={createClusterCustomIcon}> */}
+        <MapContent data={data} />
+        {/* </MarkerClusterGroup> */}
       </MapContainer>
       <polyline />
     </>
@@ -119,10 +117,10 @@ const MapContent = ({ data }: any) => {
               }}
               icon={isMobile ? MobileIcon : MapIcon}
             >
-              {selectedId && itemId && selectedId === itemId && (
+              {selected && selectedId === itemId && (
                 <Tooltip
                   opacity={1}
-                  permanent={true}
+                  permanent
                   direction="top"
                   offset={[10, -35]}
                   className="min-w-fit"
