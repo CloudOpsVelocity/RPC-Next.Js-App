@@ -97,6 +97,7 @@ const MainBox = ({ data, refetch, index, mutate }: Props) => {
     Com: state.compareAdded,
     Sh: state.shortListed,
   };
+  console.log(data)
   const onClickRedirect = (projEncId: string) => {
     window.open(`/abc/karnataka/banglore/${projEncId}`, "_blank");
   };

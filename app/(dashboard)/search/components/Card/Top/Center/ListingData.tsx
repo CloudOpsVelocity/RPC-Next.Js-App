@@ -1,4 +1,5 @@
 import { formatDate, formatDateDDMMYYYY } from "@/app/utils/date";
+import { formatNumberWithSuffix } from "@/app/utils/numbers";
 import { Divider } from "@mantine/core";
 import React from "react";
 
@@ -13,15 +14,18 @@ export default function ListingData({
   availableFrom,
   ca,
   sba,
-  propertyAge
+  propertyAge,
+  propStatus,
+  propTypeName,
+  pa
 }: Props) {
-  console.log(type);
+  console.log(pa);
   return (
-    <div className="flex mb-2 max-w-[380px] sm:max-w-full xl:w-[400px] gap-1 flex-col items-start  pl-[11px]  py-[2px] rounded border-[0.5px] border-solid border-[#616D75] bg-[#F5F5F5]">
+    <div className="flex mb-2 max-w-[380px] sm:max-w-full xl:w-[450px] gap-1 flex-col items-start  pl-[11px]  py-[2px] rounded border-[0.5px] border-solid border-[#616D75] bg-[#F5F5F5]">
       {type === "proj" && (
         <div className="mt-[2px] hidden md:block">
           <h5 className="text-[#001F35] text-sm font-medium">
-            Listing Available
+            Property Available:
           </h5>
           <p className="text-[#242424]  text-base not-italic font-semibold">
             {propTypes && propTypes?.length > 0 ? propTypes?.join(", ") : ""}
@@ -57,17 +61,28 @@ export default function ListingData({
             label={ type == "proj"?"Project Land Area" : "Property Age"}
             value={type == "proj"?`${landArea ?? 0} Acres`: `${propertyAge ?? 0} Years`}
           />
+          
         </div>
       ) : (
         <div className="flex items-center gap-2 xl:gap-4 self-stretch">
-          <DownSectionCard label="Super Builtup Area" value={sba} />
+         { propTypeName != "Plot" ? <><DownSectionCard label="Super Builtup Area" value={`${formatNumberWithSuffix(sba)} sq.ft`} />
           <Divider orientation="vertical" color="#7BA0BB" />
-          <DownSectionCard label="Carpet Area" value={ca} />
-          <Divider orientation="vertical" color="#7BA0BB" />
-          <DownSectionCard
+          <DownSectionCard label="Carpet Area" value={`${formatNumberWithSuffix(ca)} sq.ft`} /> 
+          <Divider orientation="vertical" color="#7BA0BB" /></> : 
+          <>
+                    <DownSectionCard label="Total Area" value={`${formatNumberWithSuffix(pa)} sq.ft`} />
+                    <Divider orientation="vertical" color="#7BA0BB" /></> 
+ }
+       
+         
+          {propStatus == "Under Construction"? <DownSectionCard
+            label="possassionDate "
+            value={formatDate(possassionDate, true)}
+          />:<DownSectionCard
             label="Property Age"
-            value={`${landArea ?? 0} Acres`}
-          />
+            value={type == "proj"?`${landArea ?? 0} Acres`: `${propertyAge ?? `0 Years` } `}
+          /> 
+          }
           <Divider orientation="vertical" color="#7BA0BB" />
           <DownSectionCard
             label="Avaialble From"
@@ -78,7 +93,6 @@ export default function ListingData({
     </div>
   );
 }
-
 const DownSectionCard = ({
   label,
   value,

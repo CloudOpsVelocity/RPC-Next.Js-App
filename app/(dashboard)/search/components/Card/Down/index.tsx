@@ -34,7 +34,7 @@ export default function CardDownSection({
     type === "proj"
       ? projName
       : `${bhkName ?? ""} ${propTypeName} for
-    ${cg === "R" ? "Rent" : "Sale"} in ${ltName}`;
+    ${cg === "R" ? "Rent" : "Sell"} in ${ltName}`;
   const [, { open }] = useReqCallPopup();
   const setPopReqData = useSetAtom(NearByDataAtom);
   const handleOpen = () => {
@@ -47,7 +47,7 @@ export default function CardDownSection({
       reqId: reqId,
       source:type === "proj" ? "projCard" : "propCard",
       title:type === "proj" ? projName  : `${bhkName ?? ""} ${propTypeName} for
-      ${cg === "R" ? "Rent" : "Sale"} in ${localityName}`,
+      ${cg === "R" ? "Rent" : "Sell"} in ${localityName}`,
 
     });
    
@@ -70,7 +70,7 @@ export default function CardDownSection({
         <Button
           onChange={handleOpen}
           title="Request Callback"
-          buttonClass="flex justify-end right-1  self-end text-[#FFF] ml-1 p-[3px] md:p-[5px] bg-[#0073C6] rounded-[5px] shadow-md text-[8px] xl:text-[12px] md:text-[12px] font-[700]"
+          buttonClass="flex justify-end right-1  self-end text-[#FFF] ml-1 p-[3px] md:p-[5px] bg-[#0073C6] rounded-[5px] shadow-md text-[10px] xl:text-[12px] md:text-[12px] font-[700]"
         />
       </div>
     </div>
