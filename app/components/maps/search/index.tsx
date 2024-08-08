@@ -49,9 +49,7 @@ const Map = ({ data, lat, lang }: any) => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {/* <MarkerClusterGroup iconCreateFunction={createClusterCustomIcon}> */}
         <MapContent data={data} />
-        {/* </MarkerClusterGroup> */}
       </MapContainer>
       <polyline />
     </>

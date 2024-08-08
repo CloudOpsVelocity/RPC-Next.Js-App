@@ -7,7 +7,7 @@ import useSearchFilters from "@/app/hooks/search";
 
 export default function PropTypeFilter() {
   const { filters, setPropTypes } = useSearchFilters();
-  const keys = [35, 33, 31, 34, 32];
+  const keys = [35, 33, 31, 34, 32, 36];
   return (
     <div className="max-w-[300px] ">
       <ClearAll type="propType" />

@@ -48,160 +48,56 @@ const LeftSideBlock = ({ mutate }: Props) => {
     }
   };
   return (
-    <div className="md:w-[100%] sm:w-[100%]  md:bg-white  min-w-[400px] md:min-w-[500px] mt-9">
-      <div className="flex md:flex-row flex-col-reverse">
-        <Tabs
-          value={params.listedBy ?? "All"}
-          onChange={(value) => onTabChange(value ?? "All")}
-          defaultValue="All"
-          classNames={S}
+    <>
+      <div className="md:w-[50%] sm:w-[100%]  md:bg-white  min-w-[400px] md:min-w-[500px] ">
+        <NewTabCon
+          onTabChange={onTabChange}
+          Activities={params.cg}
+          selectedProtype={params.listedBy ?? "All"}
+          categoryType={SEARCH_FILTER_DATA.categoryDataListing}
+        />
+        <div
+          className="p-[2%] max-h-[700px] max-w-full overflow-y-auto h-screen"
+          ref={containerRef}
         >
-          <NewTabCon
-            onTabChange={onTabChange}
-            Activities={params.cg}
-            selectedProtype={params.listedBy ?? "All"}
-            categoryType={SEARCH_FILTER_DATA.categoryDataListing}
-          />
-
-          <Tabs.Panel value="All">
-            <ScrollArea
-              className=" p-[2%]  overflow-y-auto  h-screen mt-2"
-              h={700}
-              ref={containerRef}
-            >
-              {isLoading ? (
-                <Loading />
-              ) : data != undefined &&
-                data.length != undefined &&
-                data.length > 0 ? (
-                data.map((eachOne, index) => {
-                  return (
-                    /*    <ProjectDetailsCard
-                    key={index}
-                    type={filters.listedBy}
-                    {...eachOne}
-                  /> */
-                    <ProjectCard
-                      key={index}
-                      refetch={refetch}
-                      data={{ ...eachOne, type: filters.listedBy ?? "All" }}
-                      index={index}
-                      mutate={mutate}
-                    />
-                  );
-                })
-              ) : (
-                <div className="flex w-full h-full justify-center items-center flex-col ">
-                  {emptyFilesIcon}
-                  No Matching Results Found !
-                  <span className="relative left-[10%] ">{strikeIconIcon}</span>
-                </div>
-              )}
-              {hasNextPage && (
-                <div ref={ref}>
-                  <SearchSkeleton />
-                </div>
-              )}
-            </ScrollArea>
-          </Tabs.Panel>
-          <Tabs.Panel value="I">
-            <ScrollArea
-              className=" p-[2%]  overflow-y-auto  h-screen mt-2"
-              h={700}
-            >
-              {isLoading ? (
-                <Loading />
-              ) : data != undefined &&
-                data.length != undefined &&
-                data.length > 0 ? (
-                data.map((eachOne, index) => {
-                  return (
-                    <ProjectCard
-                      key={index}
-                      refetch={refetch}
-                      data={{ ...eachOne, type: filters.listedBy ?? "I" }}
-                      index={index}
-                      mutate={mutate}
-                    />
-                  );
-                })
-              ) : (
-                <div className="flex w-full h-full justify-center items-center flex-col ">
-                  {emptyFilesIcon}
-                  No Matching Results Found !
-                  <span className="relative left-[10%] ">{strikeIconIcon}</span>
-                </div>
-              )}
-            </ScrollArea>
-          </Tabs.Panel>
-          <Tabs.Panel value="A">
-            <ScrollArea
-              className=" p-[2%]  overflow-y-auto  h-screen mt-2"
-              h={700}
-            >
-              {isLoading ? (
-                <Loading />
-              ) : data != undefined &&
-                data.length != undefined &&
-                data.length > 0 ? (
-                data.map((eachOne, index) => {
-                  return (
-                    <ProjectCard
-                      key={index}
-                      refetch={refetch}
-                      data={{ ...eachOne, type: filters.listedBy ?? "A" }}
-                      index={index}
-                      mutate={mutate}
-                    />
-                  );
-                })
-              ) : (
-                <div className="flex w-full h-full justify-center items-center flex-col ">
-                  {emptyFilesIcon}
-                  No Matching Results Found !
-                  <span className="relative left-[10%] ">{strikeIconIcon}</span>
-                </div>
-              )}
-            </ScrollArea>
-          </Tabs.Panel>
-          <Tabs.Panel value="B">
-            <ScrollArea
-              className=" p-[2%]  overflow-y-auto  h-screen mt-2"
-              h={700}
-            >
-              {isLoading ? (
-                <Loading />
-              ) : data != undefined &&
-                data.length != undefined &&
-                data.length > 0 ? (
-                data.map((eachOne, index) => {
-                  return (
-                    <ProjectCard
-                      key={index}
-                      refetch={refetch}
-                      data={{ ...eachOne, type: filters.listedBy ?? "B" }}
-                      index={index}
-                      mutate={mutate}
-                    />
-                  );
-                })
-              ) : (
-                <div className="flex w-full h-full justify-center items-center flex-col ">
-                  {emptyFilesIcon}
-                  No Matching Results Found !
-                  <span className="relative left-[10%] ">{strikeIconIcon}</span>
-                </div>
-              )}
-            </ScrollArea>
-          </Tabs.Panel>
-        </Tabs>
-        <RightSideBlock categoryType={"listing"} />
+          {isLoading ? (
+            <Loading />
+          ) : data != undefined &&
+            data.length != undefined &&
+            data.length > 0 ? (
+            data.map((eachOne, index) => {
+              return (
+                <ProjectCard
+                  key={index}
+                  refetch={refetch}
+                  data={{ ...eachOne, type: filters.listedBy ?? "All" }}
+                  index={index}
+                  mutate={mutate}
+                />
+              );
+            })
+          ) : (
+            <div className="flex w-full h-full justify-center items-center flex-col ">
+              {emptyFilesIcon}
+              No Matching Results Found !
+              <span className="relative left-[10%] ">{strikeIconIcon}</span>
+            </div>
+          )}
+          {hasNextPage && (
+            <div ref={ref}>
+              <SearchSkeleton />
+            </div>
+          )}
+        </div>
       </div>
 
       <RequestCallBackModal />
       <LoginPopup />
+      <SharePopup />
       <MapModal />
-    </div>
+      {/* </div> */}
+      <RightSideBlock categoryType={"listing"} />
+    </>
   );
 };
 
@@ -212,6 +108,7 @@ import Loading from "@/app/components/atoms/Loader";
 import { Vast_Shadow } from "next/font/google";
 import { useIntersection } from "@mantine/hooks";
 import SearchSkeleton from "@/app/components/atoms/skeleton/search";
+import SharePopup from "../../components/SharePopup";
 
 const TabData = [
   {
