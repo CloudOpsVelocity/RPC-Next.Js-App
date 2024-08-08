@@ -24,7 +24,6 @@ import { NumberFormatter } from "@mantine/core";
 import { useSetAtom } from "jotai";
 import { currentBlockAtom, isScrollingAtom, stickyAtom } from "./Navigation";
 import { get_posted_by } from "@/app/utils/dyanamic/projects";
-const realData = [{ test: "hello" }, 2, 3, 4, 5, 6, 77];
 type Props = {
   projectDetails: Main | null;
   projName: string;
@@ -121,7 +120,8 @@ const PropertyFirstBlock: React.FC<Props> = ({
                   <h3 className="text-[18px] sm:text-[22px] xl:text-[28px] font-[700] text-[#001F35] break-words text-wrap w-full">
                     <span className="lowercase">
                       {projectDetails.propTypeName === "Plot"
-                        ? formatNumberWithSuffix(projectDetails.plotArea) + " sq.ft"
+                        ? formatNumberWithSuffix(projectDetails.plotArea) +
+                          " sq.ft"
                         : ""}
                     </span>{" "}
                     {projectDetails.bhkName} {projectDetails.propTypeName} For{" "}
@@ -167,19 +167,19 @@ const PropertyFirstBlock: React.FC<Props> = ({
               {projectDetails.cg === "S" && (
                 <p className="text-[16px] md:text-right sm:text-[14px] xl:text-[24px] font-[600]   text-[#00487C] ">
                   <span className="text-[#001F35] sm:text-[14px] xl:text-[24px] sm:font-[600] text-wrap not-italic font-medium leading-[normal]">
-                  ₹{" "}
-                  <NumberFormatter
-                    thousandSeparator
-                    value={
-                      projectDetails.propTypeName === "Plot"
-                        ? projectDetails.plotArea
-                        : projectDetails.sba
-                    }
-                    thousandsGroupStyle="lakh"
-                  />{" "}
-                  Base Price/sq.ft onwards
-                </span>
-
+                    ₹{" "}
+                    <NumberFormatter
+                      thousandSeparator
+                      value={calculatePerSqPrice(
+                        projectDetails.price,
+                        projectDetails.propTypeName === "Plot"
+                          ? projectDetails.plotArea
+                          : projectDetails.sba
+                      )}
+                      thousandsGroupStyle="lakh"
+                    />{" "}
+                    Base Price/sq.ft onwards
+                  </span>
                 </p>
               )}
               {totalPrice ? (
