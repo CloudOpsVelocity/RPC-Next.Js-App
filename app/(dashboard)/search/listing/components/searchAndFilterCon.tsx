@@ -30,9 +30,12 @@ const SearchAndFilterCon = () => {
   const [opened, { open, close }] = useDisclosure(false);
   const isMobile = useMediaQuery("(max-width: 768px)");
   const { debounced } = useQsearch();
+  const [showAllLocalities, setShowAllLocalities] = useState(false);
+
   return (
     <>
-      <SearchHeader open={open} close={close} />
+      <SearchHeader showAllLocalities={showAllLocalities} 
+      setShowAllLocalities={setShowAllLocalities} open={open} close={close} />
       <Drawer
         opened={opened}
         onClose={close}
@@ -45,7 +48,8 @@ const SearchAndFilterCon = () => {
         }}
         size={isMobile ? "100%" : debounced ? "45%" : "15%"}
       >
-        <SearchDrawerHeader open={open} close={close} />
+        <SearchDrawerHeader showAllLocalities={showAllLocalities} 
+      setShowAllLocalities={setShowAllLocalities} open={open} close={close} />
       </Drawer>
     </>
   );
@@ -67,7 +71,7 @@ const DropDownIcon = () => {
   );
 };
 
-const SearchHeader = ({ open }: any) => {
+const SearchHeader = ({ open, setShowAllLocalities }: any) => {
   const {
     countAppliedFilters,
     filters,
@@ -77,10 +81,15 @@ const SearchHeader = ({ open }: any) => {
     params,
     searchProps,
   } = useSearchFilters();
+
   const [projName, clearProjName] = useQueryState("projName");
   const isTab = useMediaQuery("(max-width: 1600px)");
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
     open();
+  };
+  const showpopUp = () => {
+    setShowAllLocalities(true);
+  open()
   };
   return (
     <div className="mx-[2%] w-full flex mt-[80px] pl-[2%] gap-2 md:gap-[20px] flex-wrap md:flex-nowrap justify-between md:justify-start items-start md:items-center bg-[#FCFCFC] py-4">
@@ -96,10 +105,58 @@ const SearchHeader = ({ open }: any) => {
         </Link>{" "}
       </p>
 
-      <div className=" border-[#A0D7FF] rounded-[40px] gap-[8px] pl-[8px] border-[1px] border-solid flex items-center justify-center ">
+      <div className=" border-[#A0D7FF] rounded-[40px] gap-[8px] pl-[8px] border-[1px] border-solid flex items-center justify-center p-2 ">
         <BuyRent />
+        {filters.projIdEnc && (
+              <Pill
+                withRemoveButton
+                classNames={{ root: classes.MultiSelectionPill }}
+                onRemove={() => {
+                  setFilters((prev) => ({ ...prev, projIdEnc: null }));
+                  clearProjName(null);
+                  handleAppliedFilters();
+                }}
+                removeButtonProps={{
+                  style: {
+                    color: "#03153",
+                  },
+                }}
+              >
+                {projName}
+              </Pill>
+            )}
 
-        <PillsInput
+            {/* {filters.city && (
+              <Pill
+                withRemoveButton
+                classNames={{ root: classes.MultiSelectionPill }}
+                onRemove={() => {
+                  setFilters((prev) => ({ ...prev, city: null }));
+                  handleAppliedFilters();
+                }}
+                removeButtonProps={{
+                  style: {
+                    color: "#03153",
+                  },
+                }}
+              >
+                {filters.city.split("+")[0]}
+              </Pill>
+            )} */}
+           {filters.locality?.length > (isTab ? 1 : 2) && (
+              <Pill
+                className="capitalize"
+                classNames={{ root: classes.MultiSelectionPill }}
+                onClick={()=>showpopUp()}
+              >
+                {`+${filters.locality?.length - (isTab ? 1 : 2)} More`}
+              </Pill>
+            )}
+            {filters.locality?.length >0? <p onClick={open} >
+             Add more
+             </p>:<p  onClick={open}>Enter Locality & Project</p>}
+           
+      {/*   <PillsInput
           classNames={{ input: classes.wrapperMultiSelection }}
           onClick={handleClick}
         >
@@ -174,7 +231,7 @@ const SearchHeader = ({ open }: any) => {
               readOnly
             />
           </Pill.Group>
-        </PillsInput>
+        </PillsInput> */}
       </div>
       <Popover
         width={"auto"}
