@@ -119,7 +119,7 @@ const ListingMobileFilter = ({ close }: any) => {
           className="w-full pt-[1%] pl-[2%]    "
           viewportRef={viewport}
           miw={"full"}
-          p={20}
+          /* p={20} */
         >
           {filters?.propTypes != projectprops.plot && (
             <React.Fragment>
@@ -233,7 +233,7 @@ const ListingMobileFilter = ({ close }: any) => {
                 return (
                   <div
                     key={index}
-                    className="capitalize flex justify-center items-center p-[1%] r shadow-[0px_4px_10px_0px_rgba(202,233,255,0.30)]   border rounded-[5px] border-solid border-[#92B2C8]"
+                    className="capitalize flex justify-center items-center text-[12px] sm:text-[16px] sm:p-[1%]   shadow-[0px_4px_10px_0px_rgba(202,233,255,0.30)]   border rounded-[5px] border-solid border-[#92B2C8]"
                   >
                     {eachLocality.split("+")[0]}
                     <span
@@ -512,7 +512,7 @@ const ListingMobileFilter = ({ close }: any) => {
           <MultiSelect
             classNames={{ pill: classes.pill }}
             label=""
-            placeholder="Search Locality"
+            placeholder="Search Builder"
             data={builderData || []}
             searchable
             nothingFoundMessage={

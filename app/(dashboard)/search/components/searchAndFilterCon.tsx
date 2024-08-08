@@ -62,9 +62,10 @@ const SearchHeader = ({ open }: any) => {
     handleAppliedFilters,
     params,
   } = useSearchFilters();
+  const isTab = useMediaQuery("(max-width: 1600px)");
   return (
     <div className="m-[2%] w-full flex mt-[100px] pl-[1%] xl:pl-[2%] gap-1 xl:gap-2 sm:gap-[10px] flex-wrap sm:flex-wrap xl:flex-nowrap justify-start xl:justify-start items-start xl:items-center ">
-      <p className="text-[14px] xl:text-[16px] text-[#737579] font-[500] w-full md:w-auto">
+      <p className="text-[14px] xl:text-[16px] text-[#737579] font-[500] mt-2 mb-2 sm:mb-0 sm:mt-0 w-full md:w-auto">
         <span>Home</span> {" > "}
         <Link href={"/project/banglore"}>
           <span className="text-[14px] md:text-[16px] text-[#4D6677] font-[600]">
@@ -101,6 +102,7 @@ const SearchHeader = ({ open }: any) => {
               </Pill>
             )}
             {filters.locality?.map((each, index) => (
+                index < (isTab ? 1 : 2) && (
               <Pill
                 onRemove={() => {
                   remnoveSearchOptions(each, "locality");
@@ -120,7 +122,16 @@ const SearchHeader = ({ open }: any) => {
               >
                 {each.split("+")[0]}
               </Pill>
+                )
             ))}
+             {filters.locality?.length > (isTab ? 1 : 2) && (
+                  <Pill
+                    className="capitalize"
+                    classNames={{ root: classes.MultiSelectionPill }}
+                  >
+                    {`+${filters.locality?.length - (isTab ? 1 : 2)} More`}
+                  </Pill>
+                )}
 
             <PillsInput.Field
               miw={225}

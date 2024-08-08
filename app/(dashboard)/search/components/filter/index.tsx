@@ -41,8 +41,8 @@ const SearchDrawerHeader = ({ open, close }: any) => {
           </span>
         </Link>{" "}
       </p>
-      <div className="w-[100%] md:w-[789px]  shrink-0 border rounded-[10px] ">
-        <div className="  gap-[8px] px-[8px] border-[1px] border-solid flex items-center justify-between ">
+      <div className="w-[100%] md:w-[789px]  shrink-0 border rounded-[10px]  h-auto">
+        <div className="  gap-[8px] px-[8px] border-[1px]  border-solid flex items-center justify-between ">
           <div className="gap-[8px]  flex items-center w-[100%]">
             {" "}
             <Select
@@ -55,7 +55,7 @@ const SearchDrawerHeader = ({ open, close }: any) => {
               size="xs"
             />
             <PillsInput classNames={{ input: classes.homePageSearch }}>
-              <div className="flex flex-row gap-2 justify-center items-center max-w-[100%]">
+              <div className="flex sm:flex-row  flex-wrap gap-2 justify-center items-center max-w-[100%]">
                 {filters.city && (
                   <Pill
                     withRemoveButton
