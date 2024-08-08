@@ -1,19 +1,10 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-import {
-  Drawer,
-  MultiSelect,
-  Pill,
-  PillsInput,
-  Popover,
-  Select,
-  em,
-} from "@mantine/core";
+import { Drawer, Pill, PillsInput, Popover } from "@mantine/core";
 import { FilterPopup } from "./filterPopup";
 import { FilterPopup as ListingPopup } from "../listing/components/filterPopup";
 import classes from "@/app/styles/search.module.css";
-import { useQueryState } from "nuqs";
 import BhkFilter from "./bhk";
 import PropTypeFilter from "./proptype";
 import BugdetFilter from "./buget";
@@ -82,6 +73,7 @@ const SearchHeader = ({ open }: any) => {
         <PillsInput
           classNames={{ input: classes.wrapperMultiSelection }}
           onClick={open}
+          miw={700}
         >
           <Pill.Group>
             {filters.city && (
@@ -101,40 +93,45 @@ const SearchHeader = ({ open }: any) => {
                 {filters.city.split("+")[0]}
               </Pill>
             )}
-            {filters.locality?.map((each, index) => (
+            {filters.locality?.map(
+              (each, index) =>
                 index < (isTab ? 1 : 2) && (
-              <Pill
-                onRemove={() => {
-                  remnoveSearchOptions(each, "locality");
-                  handleAppliedFilters();
-                }}
-                key={index}
-                withRemoveButton
-                classNames={{
-                  root: classes.MultiSelectionPill,
-                  remove: classes.removeButton,
-                }}
-                removeButtonProps={{
-                  style: {
-                    color: "red",
-                  },
-                }}
-              >
-                {each.split("+")[0]}
-              </Pill>
-                )
-            ))}
-             {filters.locality?.length > (isTab ? 1 : 2) && (
                   <Pill
-                    className="capitalize"
-                    classNames={{ root: classes.MultiSelectionPill }}
+                    onRemove={() => {
+                      remnoveSearchOptions(each, "locality");
+                      handleAppliedFilters();
+                    }}
+                    key={index}
+                    withRemoveButton
+                    classNames={{
+                      root: classes.MultiSelectionPill,
+                      remove: classes.removeButton,
+                    }}
+                    removeButtonProps={{
+                      style: {
+                        color: "red",
+                      },
+                    }}
                   >
-                    {`+${filters.locality?.length - (isTab ? 1 : 2)} More`}
+                    {each.split("+")[0]}
                   </Pill>
-                )}
+                )
+            )}
+            {filters.locality?.length > (isTab ? 1 : 2) && (
+              <Pill
+                className="capitalize"
+                classNames={{ root: classes.MultiSelectionPill }}
+              >
+                {`+${filters.locality?.length - (isTab ? 1 : 2)} More`}
+              </Pill>
+            )}
 
             <PillsInput.Field
-              miw={225}
+              styles={{
+                field: {
+                  minWidth: "100%",
+                },
+              }}
               placeholder={
                 filters.locality.length > 0
                   ? "Add More"
@@ -182,10 +179,7 @@ const SearchHeader = ({ open }: any) => {
         offset={{ mainAxis: 10, crossAxis: 0 }}
       >
         <Popover.Target>
-          <button
-            // onClick={() => setOpened((o) => !o)}
-            className=" text-[#0073C6] hidden text-[14px] xl:text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] lg:flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md "
-          >
+          <button className=" text-[#0073C6] hidden text-[14px] xl:text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] lg:flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md ">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="10"
@@ -212,10 +206,7 @@ const SearchHeader = ({ open }: any) => {
         offset={{ mainAxis: 10, crossAxis: 0 }}
       >
         <Popover.Target>
-          <button
-            // onClick={() => setOpened((o) => !o)}
-            className=" text-[#0073C6] text-[14px] xl:text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] hidden lg:flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md "
-          >
+          <button className=" text-[#0073C6] text-[14px] xl:text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] hidden lg:flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md ">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="10"

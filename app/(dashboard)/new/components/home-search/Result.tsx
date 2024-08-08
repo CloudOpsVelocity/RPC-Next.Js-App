@@ -90,18 +90,6 @@ export default function Results() {
               </h2>
             )}
 
-            {/* {cities?.length > 0 && <SubHeading text="City" />}
-            <ul>
-              {cities?.map((city: any) => (
-                <li
-                  onClick={() => handleAddCity(`${city.name}+${city.id}`)}
-                  className="text-[#737579] text-[12px] sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
-                  key={city.id}
-                >
-                  {city.name}
-                </li>
-              ))}
-            </ul> */}
             {localities?.length > 0 && <SubHeading text="Locality" />}
             <ul>
               {localities?.map((locality: any) => (

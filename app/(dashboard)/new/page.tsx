@@ -26,7 +26,7 @@ export default async function Page() {
       <HomeFeatures />
       <NewAddedProjects data={data.featured} />
       <DynamicListing
-        title="Ready to Move Sell Listings" 
+        title="Ready to Move Sell Listings"
         content="Move In Today: Your Dream Home Awaits – Explore Our Ready-to-Move Listings Now!"
         data={listingData["r_Sale"]}
       />
@@ -43,7 +43,7 @@ export default async function Page() {
       />
       <DynamicListing
         title="Under Construction Sell Listings"
-        content="Explore Our Under Construction Listings Today!" 
+        content="Explore Our Under Construction Listings Today!"
         data={listingData["u_Sale"]}
       />
       <HandPickedProjects data={data} />

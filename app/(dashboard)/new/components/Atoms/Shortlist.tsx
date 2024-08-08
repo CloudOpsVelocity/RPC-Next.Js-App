@@ -45,6 +45,7 @@ const config = {
       height="30"
       viewBox="0 0 24 28"
       fill="none"
+      className="cursor-pointer w-[25px] h-[25px] sm:w-[20px] sm:h-[20px] xl:w-[26px] xl:h-[26px] "
     >
       <circle
         cx="12"

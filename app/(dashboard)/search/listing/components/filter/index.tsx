@@ -7,7 +7,6 @@ import {
   RangeSlider,
   Select,
   em,
-  
 } from "@mantine/core";
 import classes from "@/app/styles/search.module.css";
 import useSearchFilters from "@/app/hooks/search";
@@ -17,18 +16,25 @@ import useQsearch from "@/app/hooks/search/useQsearch";
 import Results from "./results";
 import { useMediaQuery } from "@mantine/hooks";
 import { DynamicText } from "../../../utils/text";
+import { useQueryState } from "nuqs";
 
 const SearchDrawerHeader = ({ open, close }: any) => {
   const { onSearchChange, debounced, name } = useQsearch();
-  const { filters, handleAppliedFilters, remnoveSearchOptions, setFilters,params } =
-    useSearchFilters();
+  const {
+    filters,
+    handleAppliedFilters,
+    remnoveSearchOptions,
+    setFilters,
+    params,
+  } = useSearchFilters();
   const isMobile = useMediaQuery(em("max-width: 768px"));
+  const [projName, clearProjName] = useQueryState("projName");
   return (
     <div className="sm:m-[2%] w-full flex  sm:pl-[2%] gap-[20px] justify-start   relative flex-wrap">
       <p className="text-[16px] text-[#737579] font-[500] mt-3">
         <span>Home</span> {" > "}
         <Link href={"/project/banglore"}>
-        <span className="text-[14px] md:text-[16px] text-[#4D6677] font-[600]">
+          <span className="text-[14px] md:text-[16px] text-[#4D6677] font-[600]">
             {DynamicText({
               cg: params.cg as string,
               listedBy: params.listedBy,
@@ -36,7 +42,7 @@ const SearchDrawerHeader = ({ open, close }: any) => {
           </span>
         </Link>{" "}
       </p>
-      <div className="w-[100%] md:w-[789px] h-[50%] md:h-[379px] shrink-0 border rounded-[10px] ">
+      <div className="w-[100%] md:w-[789px]  shrink-0 border rounded-[10px] ">
         <div className="  gap-[8px] px-[8px] border-[1px] border-solid flex items-center justify-between ">
           <div className="gap-[8px]  flex items-center">
             {" "}
@@ -51,6 +57,24 @@ const SearchDrawerHeader = ({ open, close }: any) => {
             />
             <PillsInput classNames={{ input: classes.wrapperMultiSelection }}>
               <Pill.Group>
+                {filters.projIdEnc && (
+                  <Pill
+                    withRemoveButton
+                    classNames={{ root: classes.MultiSelectionPill }}
+                    onRemove={() => {
+                      setFilters((prev) => ({ ...prev, projIdEnc: null }));
+                      clearProjName(null);
+                      handleAppliedFilters();
+                    }}
+                    removeButtonProps={{
+                      style: {
+                        color: "red",
+                      },
+                    }}
+                  >
+                    {projName}
+                  </Pill>
+                )}
                 {filters.city && (
                   <Pill
                     withRemoveButton
@@ -85,7 +109,8 @@ const SearchDrawerHeader = ({ open, close }: any) => {
                 ))}
 
                 <PillsInput.Field
-                    placeholder={
+                  miw={400}
+                  placeholder={
                     filters.locality.length > 0
                       ? "Add More"
                       : "Enter City,Locality & Project"
@@ -104,7 +129,7 @@ const SearchDrawerHeader = ({ open, close }: any) => {
             {isMobile ? <SearchIcon /> : "Search"}
           </button>
         </div>
-        {debounced ? <Results /> : <FilterSection />}
+        {debounced && <Results />}
       </div>
       <CloseSvg onClick={() => close()} />
     </div>
