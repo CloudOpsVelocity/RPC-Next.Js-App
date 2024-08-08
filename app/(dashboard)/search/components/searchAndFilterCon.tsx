@@ -26,7 +26,6 @@ const SearchAndFilterCon = () => {
     <>
       <SearchHeader setShowAllLocalities={setShowAllLocalities}  open={open} close={close} />
       <Drawer
-    
         opened={opened}
         onClose={close}
         position="top"
@@ -118,7 +117,6 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
             {filters.locality?.length >0? <p onClick={open} >
              Add more
              </p>:<p  onClick={open}>Enter Locality & Project</p>}
-             
         </div>
         <div >
        {/*  <PillsInput

@@ -116,7 +116,7 @@ const FilterPopup = () => {
           viewportRef={viewport}
         >
           <h3
-            className=" text-[#202020] mb-[1%] text-[14px] font-[500] "
+            className=" text-[#202020] mb-[1%] text-[14px] font-[600] "
             id="Project Status"
           >
             Project Status
@@ -138,7 +138,7 @@ const FilterPopup = () => {
           </div>
 
           <h3
-            className=" text-[#202020] mb-[1%] text-[14px] font-[500] "
+            className=" text-[#202020] mb-[1%] text-[14px] font-[600] "
             id="Locality"
           >
             Locality
@@ -189,7 +189,7 @@ const FilterPopup = () => {
           />
 
           <h3
-            className=" text-[#202020] mb-[1%] text-[14px] font-[500] mt-[3%] flex items-center gap-[5px] "
+            className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[3%] flex items-center gap-[5px] "
             id="Property Type"
           >
             Property Type{/*  {notificationIcon} */}
@@ -219,7 +219,7 @@ const FilterPopup = () => {
           </div>
 
           <h3
-            className=" text-[#202020] mb-[1%] text-[14px] font-[500] mt-[2%] "
+            className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
             id="Unit Type"
           >
             Unit Type
@@ -241,7 +241,7 @@ const FilterPopup = () => {
                 })}
           </div>
           <h3
-            className=" text-[#202020] mb-[1%] text-[14px] font-[500] mt-[2%] "
+            className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
             id="Area"
           >
             Area
@@ -267,7 +267,7 @@ const FilterPopup = () => {
           />
 
           <h3
-            className=" text-[#202020] mb-[1%] text-[14px] font-[500] mt-[5%] "
+            className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[5%] "
             id="Budget"
           >
             Budget
@@ -294,7 +294,7 @@ const FilterPopup = () => {
           {filters?.propTypes != projectprops.plot && (
             <React.Fragment>
               <h3
-                className=" text-[#202020] mb-[1%] text-[14px] font-[500] mt-[2%] "
+                className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
                 id="Bath"
               >
                 Number of Bathrooms
@@ -316,7 +316,7 @@ const FilterPopup = () => {
           )}
 
           <h3
-            className=" text-[#202020] mb-[1%] text-[14px] font-[500] mt-[2%] "
+            className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
             id="Amenities"
           >
             Amenities
@@ -340,7 +340,7 @@ const FilterPopup = () => {
           {filters?.propTypes != projectprops.plot && (
             <React.Fragment>
               <h3
-                className=" text-[#202020] mb-[1%] text-[14px] font-[500] mt-[3%] "
+                className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[3%] "
                 id="Parking"
               >
                 Number of Parking
@@ -362,7 +362,7 @@ const FilterPopup = () => {
           )}
 
           <h3
-            className=" text-[#202020] mb-[1%] text-[14px] font-[500] mt-[2%] "
+            className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
             id="RERA"
           >
             RERA
@@ -385,7 +385,7 @@ const FilterPopup = () => {
           </div> */}
 
           <h3
-            className=" text-[#202020] mb-[1%] text-[14px] font-[500] "
+            className=" text-[#202020] mb-[1%] text-[14px] font-[600] "
             id="Builder"
           >
             Builder
