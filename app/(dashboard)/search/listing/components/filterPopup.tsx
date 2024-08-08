@@ -102,7 +102,7 @@ const FilterPopup = () => {
         </div>
       </div>
       <div className="w-full">
-        <ClearAll type="all" />
+        <ClearAll type="prjectsearchlisting" />
         {/* Right Side Fields Con */}
         <ScrollArea
           h={400}

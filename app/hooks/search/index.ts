@@ -210,7 +210,14 @@ export default function useSearchFilters(
     }));
   };
   const handleReset = (
-    type: "unitType" | "price" | "all" | "propType" | "listedBy" | "searchProj",
+    type:
+      | "unitType"
+      | "price"
+      | "all"
+      | "propType"
+      | "listedBy"
+      | "searchProj"
+      | "prjectsearchlisting",
     keys?: string[]
   ) => {
     switch (type) {
@@ -258,6 +265,10 @@ export default function useSearchFilters(
           }
         }
         setFilters(updatedFilters);
+        handleAppliedFilters();
+        break;
+      case "prjectsearchlisting":
+        setFilters({ ...initialState, listedBy: filters.listedBy });
         handleAppliedFilters();
         break;
       default:

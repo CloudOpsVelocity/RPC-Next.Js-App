@@ -7,7 +7,7 @@ export default function ClearAll({
   type,
   close,
 }: {
-  type: "unitType" | "price" | "all" | "propType";
+  type: "unitType" | "price" | "all" | "propType" | "prjectsearchlisting";
   close?: () => void;
 }) {
   const { handleReset, handleAppliedFilters } = useSearchFilters();
@@ -22,7 +22,7 @@ export default function ClearAll({
         onClick={() => handleReset(type)}
       >
         Clear All Filters
-        </button>
+      </button>
       <button
         className="flex justify-center text-[12px] items-center gap-1 px-1 md:px-2 py-1 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] rounded-[10px] bg-[#0073C6] text-white md:text-lg not-italic font-semibold leading-[normal]"
         onClick={handleApply}
