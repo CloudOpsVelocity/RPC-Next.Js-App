@@ -273,6 +273,7 @@ const Success = ({ text, opened, onClose, projName }: any) => {
       centered
       title="Add Rating"
       size={isMobile ? "100%" : isTab ? "35%" : "auto"}
+      
     >
       <Close close={onClose} className="absolute top-2 right-2 z-50" />
 
