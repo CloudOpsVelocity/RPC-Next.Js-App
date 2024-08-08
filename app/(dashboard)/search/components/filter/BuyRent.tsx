@@ -13,12 +13,21 @@ export default function BuyRent() {
     setFilters,
   } = useSearchFilters();
   const handleChnage = (value: string) => {
-    setFilters((prev) => ({
-      ...prev,
-      bugdetValue: filters.cg == "R" ? [0, 100000] : [500000, 600000000],
-      cg: value,
-    }));
-    handleAppliedFilters();
+    if (value == "R") {
+      setFilters((prev) => ({
+        ...prev,
+        bugdetValue: [0, 100000],
+        cg: "R",
+      }));
+      handleAppliedFilters();
+    } else {
+      setFilters((prev) => ({
+        ...prev,
+        bugdetValue: [500000, 600000000],
+        cg: "S",
+      }));
+      handleAppliedFilters();
+    }
   };
   return (
     <Select

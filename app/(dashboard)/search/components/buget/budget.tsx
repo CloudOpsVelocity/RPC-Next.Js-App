@@ -250,10 +250,12 @@ export function BasicBudgetSelect() {
             onFocus={() => setFocusedInput("min")}
             max={f.bugdetValue[1] - 1 || 60 * MULTIPLIER} // Set max based on current filter values
             clampBehavior="strict"
-            thousandSeparator=","
             allowDecimal={false}
             allowNegative={false}
+            thousandSeparator
+            thousandsGroupStyle="lakh"
             classNames={{ input: styles.minMaxInput }}
+            labelProps={{ "data-floating": true }}
           />
           <NumberInput
             placeholder="Max Price"
@@ -263,9 +265,10 @@ export function BasicBudgetSelect() {
             onFocus={() => setFocusedInput("max")}
             onBlur={handleMaxBlur}
             clampBehavior="strict"
-            thousandSeparator=","
             allowDecimal={false}
             allowNegative={false}
+            thousandsGroupStyle="lakh"
+            thousandSeparator
             max={6000 * MULTIPLIER}
             classNames={{ input: styles.minMaxInput }}
           />

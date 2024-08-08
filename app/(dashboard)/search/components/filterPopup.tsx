@@ -119,7 +119,7 @@ const FilterPopup = () => {
             className=" text-[#202020] mb-[2%] text-[14px] font-[500] "
             id="Project Status"
           >
-            Property Status
+            Project Status
           </h3>
           <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
             {SEARCH_FILTER_DATA.projectstatus.map((eachStatus, index) => {
@@ -145,7 +145,7 @@ const FilterPopup = () => {
           </h3>
 
           {filters.locality.length > 0 && (
-            <div className="flex mb-[3%] justify-start items-start gap-[4%]">
+            <div className="flex mb-[1%] justify-start items-start gap-[4%]">
               {filters.locality.map((eachLocality, index) => {
                 return (
                   <div
@@ -172,7 +172,11 @@ const FilterPopup = () => {
             data={data}
             searchable
             nothingFoundMessage={
-              localitySearch !== "" ? "Nothing found..." : "Search somehitng..."
+              localitySearch !== ""
+                ? "Nothing found..."
+                : filters.locality.length < 1
+                ? "Search somehitng..."
+                : ""
             }
             value={filters.locality}
             comboboxProps={{ withinPortal: false }}
@@ -280,9 +284,6 @@ const FilterPopup = () => {
           <RangeSlider
             color="green"
             key="budgetSlider"
-            // classNames={{
-            //   markLabel: S.markLabel,
-            // }}
             onChange={(value) => handleSliderChange("bugdetValue", value)}
             style={{ width: "80%" }}
             defaultValue={[
@@ -300,7 +301,7 @@ const FilterPopup = () => {
                 className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[5%] "
                 id="Bath"
               >
-                Bath
+                Number of Bathrooms
               </h3>
               <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
                 {[...Array(6)].map((x, i) => {
@@ -346,7 +347,7 @@ const FilterPopup = () => {
                 className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[5%] "
                 id="Parking"
               >
-                Parking
+                Number of Parking
               </h3>
               <div className="flex  mb-[3%] justify-start items-start gap-[4%]  ">
                 {[...Array(7)].map((x, i) => {

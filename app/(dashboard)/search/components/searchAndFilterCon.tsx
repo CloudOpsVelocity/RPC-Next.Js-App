@@ -207,7 +207,11 @@ const SearchHeader = ({ open }: any) => {
       >
         <Popover.Target>
           <button className=" text-[#0073C6] text-[14px] xl:text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] hidden lg:flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md ">
-            <svg
+            {" "}
+            <span className="bg-[#148B16] rounded-full text-white text-sm block w-5 h-5">
+              ₹
+            </span>
+            {/* <svg
               xmlns="http://www.w3.org/2000/svg"
               width="10"
               height="10"
@@ -215,7 +219,7 @@ const SearchHeader = ({ open }: any) => {
               fill="none"
             >
               <circle cx="5" cy="5" r="5" fill="#148B16" />
-            </svg>
+            </svg> */}
             Budget
           </button>
         </Popover.Target>
