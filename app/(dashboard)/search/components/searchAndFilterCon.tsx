@@ -21,9 +21,14 @@ const SearchAndFilterCon = () => {
   const [opened, { open, close }] = useDisclosure(false);
   const isMobile = useMediaQuery("(max-width: 601px)");
   const { debounced } = useQsearch();
+  const [showAllLocalities, setShowAllLocalities] = useState(false);
   return (
     <>
-      <SearchHeader open={open} close={close} />
+      <SearchHeader
+        setShowAllLocalities={setShowAllLocalities}
+        open={open}
+        close={close}
+      />
       <Drawer
         opened={opened}
         onClose={close}
@@ -36,7 +41,12 @@ const SearchAndFilterCon = () => {
         }}
         size={isMobile ? "100%" : debounced ? "70%" : "25%"}
       >
-        <SearchDrawerHeader open={open} close={close} />
+        <SearchDrawerHeader
+          showAllLocalities={showAllLocalities}
+          setShowAllLocalities={setShowAllLocalities}
+          open={open}
+          close={close}
+        />
       </Drawer>
     </>
   );
@@ -44,7 +54,7 @@ const SearchAndFilterCon = () => {
 
 export { SearchAndFilterCon };
 
-const SearchHeader = ({ open }: any) => {
+const SearchHeader = ({ open, setShowAllLocalities }: any) => {
   const {
     countAppliedFilters,
     filters,
@@ -54,6 +64,11 @@ const SearchHeader = ({ open }: any) => {
     params,
   } = useSearchFilters();
   const isTab = useMediaQuery("(max-width: 1600px)");
+  const showpopUp = () => {
+    setShowAllLocalities(true);
+    open();
+  };
+
   return (
     <div className="m-[2%] w-full flex mt-[100px] pl-[1%] xl:pl-[2%] gap-1 xl:gap-2 sm:gap-[10px] flex-wrap sm:flex-wrap xl:flex-nowrap justify-start xl:justify-start items-start xl:items-center ">
       <p className="text-[14px] xl:text-[16px] text-[#737579] font-[500] mt-2 mb-2 sm:mb-0 sm:mt-0 w-full md:w-auto">
@@ -99,7 +114,7 @@ const SearchHeader = ({ open }: any) => {
           <Pill
             className="capitalize"
             classNames={{ root: classes.MultiSelectionPill }}
-            onClick={open}
+            onClick={() => showpopUp()}
           >
             {`+${filters.locality?.length - (isTab ? 1 : 2)} More`}
           </Pill>
@@ -107,8 +122,81 @@ const SearchHeader = ({ open }: any) => {
         {filters.locality?.length > 0 ? (
           <p onClick={open}>Add more</p>
         ) : (
-          <p onClick={open}>Enter City, Locality & Project</p>
+          <p onClick={open}>Enter Locality & Project</p>
         )}
+      </div>
+      <div>
+        {/*  <PillsInput
+          classNames={{ input: classes.wrapperMultiSelection }}
+          onClick={open}
+          miw={700}
+        >
+          <Pill.Group>
+            {filters.city && (
+              <Pill
+                withRemoveButton
+                classNames={{ root: classes.MultiSelectionPill }}
+                onRemove={() => {
+                  setFilters((prev) => ({ ...prev, city: null }));
+                  handleAppliedFilters();
+                }}
+                removeButtonProps={{
+                  style: {
+                    color: "red",
+                  },
+                }}
+              >
+                {filters.city.split("+")[0]}
+              </Pill>
+            )}
+            {filters.locality?.map(
+              (each, index) =>
+                index < (isTab ? 1 : 2) && (
+                  <Pill
+                    onRemove={() => {
+                      remnoveSearchOptions(each, "locality");
+                      handleAppliedFilters();
+                    }}
+                    key={index}
+                    withRemoveButton
+                    classNames={{
+                      root: classes.MultiSelectionPill,
+                      remove: classes.removeButton,
+                    }}
+                    removeButtonProps={{
+                      style: {
+                        color: "red",
+                      },
+                    }}
+                  >
+                    {each.split("+")[0]}
+                  </Pill>
+                )
+            )}
+            {filters.locality?.length > (isTab ? 1 : 2) && (
+              <Pill
+                className="capitalize"
+                classNames={{ root: classes.MultiSelectionPill }}
+              >
+                {`+${filters.locality?.length - (isTab ? 1 : 2)} More`}
+              </Pill>
+            )}
+
+            <PillsInput.Field
+              styles={{
+                field: {
+                  minWidth: "100%",
+                },
+              }}
+              placeholder={
+                filters.locality.length > 0
+                  ? "Add More"
+                  : "Enter City,Locality & Project"
+              }
+              readOnly
+            />
+          </Pill.Group>
+        </PillsInput> */}
       </div>
       <Popover
         width={"auto"}
