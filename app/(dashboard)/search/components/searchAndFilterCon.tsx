@@ -54,7 +54,6 @@ const SearchHeader = ({ open }: any) => {
     params,
   } = useSearchFilters();
   const isTab = useMediaQuery("(max-width: 1600px)");
-  const isTab = useMediaQuery("(max-width: 1600px)");
   return (
     <div className="m-[2%] w-full flex mt-[100px] pl-[1%] xl:pl-[2%] gap-1 xl:gap-2 sm:gap-[10px] flex-wrap sm:flex-wrap xl:flex-nowrap justify-start xl:justify-start items-start xl:items-center ">
       <p className="text-[14px] xl:text-[16px] text-[#737579] font-[500] mt-2 mb-2 sm:mb-0 sm:mt-0 w-full md:w-auto">
