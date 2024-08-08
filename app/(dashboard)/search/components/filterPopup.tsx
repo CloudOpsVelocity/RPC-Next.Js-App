@@ -418,11 +418,15 @@ const FilterPopup = () => {
           <MultiSelect
             classNames={{ pill: classes.pill }}
             label=""
-            placeholder="Search Locality"
+            placeholder="Search Builder"
             data={builderData || []}
             searchable
             nothingFoundMessage={
-              builderDataLoading ? "Loading..." : "Nothing found..."
+              builderDataLoading
+                ? "Loading..."
+                : filters.builderIds.length > 0
+                ? ""
+                : "Search Something..."
             }
             value={filters.builderIds}
             onChange={(value) =>
