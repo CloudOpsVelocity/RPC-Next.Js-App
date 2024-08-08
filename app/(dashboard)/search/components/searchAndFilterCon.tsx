@@ -1,19 +1,10 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-import {
-  Drawer,
-  MultiSelect,
-  Pill,
-  PillsInput,
-  Popover,
-  Select,
-  em,
-} from "@mantine/core";
+import { Drawer, Pill, PillsInput, Popover } from "@mantine/core";
 import { FilterPopup } from "./filterPopup";
 import { FilterPopup as ListingPopup } from "../listing/components/filterPopup";
 import classes from "@/app/styles/search.module.css";
-import { useQueryState } from "nuqs";
 import BhkFilter from "./bhk";
 import PropTypeFilter from "./proptype";
 import BugdetFilter from "./buget";
