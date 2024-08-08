@@ -36,6 +36,14 @@ export default function TopRightSection({
       : `${process.env.NEXT_PUBLIC_BACKEND_URL}/listing/whitefield/${propIdEnc}`;
   const isMobile = useMediaQuery("(max-width: 1600px)");
   const projOrPropName = type === "proj" ? projName : propName;
+  const handleClick = () => {
+    // Get the div by ID and scroll to it
+    const element = document.getElementById("mobileMap");
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div
       onClick={(e) => e.stopPropagation()}
@@ -49,6 +57,7 @@ export default function TopRightSection({
               <button
                 className="max-w-fit px-[1px] py-[1px]  rounded  text-[#242424] text-sm not-italic font-semibold my-1  md:mb-1  gradient"
                 onClick={() => {
+                  handleClick()
                   setSelected({
                     agentListing,
                     ownerListing,
@@ -60,6 +69,7 @@ export default function TopRightSection({
                   });
                 }}
               >
+                
                 <div className="px-[1px] py-[1px] inline-flex justify-center items-center bg-[#F0F9FF] gap-0.5 rounded">
                   {" "}
                   <span className="hidden md:flex">View on Map</span>{" "}

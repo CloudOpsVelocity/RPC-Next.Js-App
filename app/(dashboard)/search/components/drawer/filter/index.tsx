@@ -111,7 +111,7 @@ const MobileFilter = ({ close }: any) => {
         {/* Right Side Fields Con */}
         <ScrollArea
           h={"80vh"}
-          className="w-full pt-[1%] pl-[2%]    "
+          className="w-full pt-[1%] sm:pl-[2%]"
           viewportRef={viewport}
           miw={"full"}
           p={20}
@@ -153,7 +153,7 @@ const MobileFilter = ({ close }: any) => {
                 return (
                   <div
                     key={index}
-                    className="capitalize flex justify-center items-center p-[1%] r shadow-[0px_4px_10px_0px_rgba(202,233,255,0.30)]   border rounded-[5px] border-solid border-[#92B2C8]"
+                    className="capitalize flex justify-center items-center text-[10px] sm:text-[16px] sm:p-[1%]  shadow-[0px_4px_10px_0px_rgba(202,233,255,0.30)]   border rounded-[5px] border-solid border-[#92B2C8]"
                   >
                     {eachLocality.split("+")[0]}
                     <span
@@ -394,7 +394,7 @@ const MobileFilter = ({ close }: any) => {
                 return (
                   <div
                     key={index}
-                    className="flex justify-center items-center p-[1%] rounded-[10px] border-[#92B2C8] border-solid border-[1px]  "
+                    className="flex justify-center items-center text-[10px] sm:text-[16px]  p-[1%] rounded-[10px] border-[#92B2C8] border-solid border-[1px]  "
                   >
                     {eachLocality.split("+")[0]}
                     <span
@@ -412,7 +412,7 @@ const MobileFilter = ({ close }: any) => {
           <MultiSelect
             classNames={{ pill: classes.pill }}
             label=""
-            placeholder="Search Locality"
+            placeholder="Search Builder"
             data={builderData || []}
             searchable
             nothingFoundMessage={
