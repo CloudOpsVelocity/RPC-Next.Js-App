@@ -34,7 +34,7 @@ const SearchAndFilterCon = () => {
           header: S.header,
           body: classes.body,
         }}
-        size={isMobile ? "100%" : debounced ? "45%" : "15%"}
+        size={isMobile ? "100%" : debounced ? "70%" : "25%"}
       >
         <SearchDrawerHeader open={open} close={close} />
       </Drawer>
@@ -68,9 +68,52 @@ const SearchHeader = ({ open }: any) => {
         </Link>{" "}
       </p>
 
-      <div className=" border-[#A0D7FF] rounded-[40px] gap-2 xl:gap-[8px] pl-2 xl:pl-[8px] border-[1px] border-solid flex items-center justify-center ">
+      <div className=" border-[#A0D7FF] rounded-[40px] p-2 gap-2 xl:gap-[8px] pl-2 xl:pl-[8px] border-[1px] border-solid flex items-center justify-center ">
         <BuyRent />
-        <PillsInput
+
+       
+      
+          
+        {filters.locality?.map(
+              (each, index) =>
+                index < (isTab ? 1 : 2) && (
+                  <Pill
+                    onRemove={() => {
+                      remnoveSearchOptions(each, "locality");
+                      handleAppliedFilters();
+                    }}
+                    key={index}
+                    withRemoveButton
+                    classNames={{
+                      root: classes.MultiSelectionPill,
+                      remove: classes.removeButton,
+                    }}
+                    removeButtonProps={{
+                      style: {
+                        color: "#03153",
+                      },
+                    }}
+                  >
+                    {each.split("+")[0]}
+                  </Pill>
+                )
+            )}
+            {filters.locality?.length > (isTab ? 1 : 2) && (
+              <Pill
+                className="capitalize"
+                classNames={{ root: classes.MultiSelectionPill }}
+                onClick={open}
+              >
+                {`+${filters.locality?.length - (isTab ? 1 : 2)} More`}
+              </Pill>
+            )}
+            {filters.locality?.length >0? <p  onClick={open}>
+             Add more
+             </p>:<p  onClick={open}>Enter City, Locality & Project</p>}
+             
+        </div>
+        <div >
+       {/*  <PillsInput
           classNames={{ input: classes.wrapperMultiSelection }}
           onClick={open}
           miw={700}
@@ -140,7 +183,7 @@ const SearchHeader = ({ open }: any) => {
               readOnly
             />
           </Pill.Group>
-        </PillsInput>
+        </PillsInput> */}
       </div>
       <Popover
         width={"auto"}
