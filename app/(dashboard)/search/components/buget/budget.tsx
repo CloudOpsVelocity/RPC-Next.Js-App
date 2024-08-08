@@ -256,6 +256,7 @@ export function BasicBudgetSelect() {
             thousandsGroupStyle="lakh"
             classNames={{ input: styles.minMaxInput }}
             labelProps={{ "data-floating": true }}
+            label="Min Price"
           />
           <NumberInput
             placeholder="Max Price"
@@ -271,6 +272,7 @@ export function BasicBudgetSelect() {
             thousandSeparator
             max={6000 * MULTIPLIER}
             classNames={{ input: styles.minMaxInput }}
+            label="Max Price"
           />
         </Group>
         {options}
