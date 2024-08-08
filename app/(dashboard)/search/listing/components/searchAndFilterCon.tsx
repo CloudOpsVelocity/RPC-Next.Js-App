@@ -50,7 +50,7 @@ const SearchAndFilterCon = () => {
           header: S.header,
           body: classes.body,
         }}
-        size={isMobile ? "100%" : debounced ? "45%" : "15%"}
+        size={isMobile ? "100%" : debounced ? "70%" : "20%"}
       >
         <SearchDrawerHeader
           showAllLocalities={showAllLocalities}

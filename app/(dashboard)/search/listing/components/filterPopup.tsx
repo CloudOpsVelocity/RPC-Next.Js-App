@@ -110,17 +110,18 @@ const FilterPopup = () => {
           viewportRef={viewport}
         >
           {filters?.propTypes != projectprops.plot && (
-            <React.Fragment>
+            <>
               <h3
-                className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[1%] "
-                id="Unit Type"
+                className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
+                id="BHK"
               >
-                Unit Type
+                BHK
               </h3>
-              <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
+              <div className="flex  mb-[3%] justify-start items-center  gap-[4%] flex-wrap ">
                 {SEARCH_FILTER_DATA.bhkDetails.map((eachStatus, index) => {
                   return (
                     <Checkbox
+                      className="my-2"
                       label={eachStatus.title}
                       color="green"
                       key={index}
@@ -132,7 +133,7 @@ const FilterPopup = () => {
                   );
                 })}
               </div>
-            </React.Fragment>
+            </>
           )}
           <h3
             className=" text-[#202020] mb-[2%] text-[14px] font-[500] "
@@ -376,32 +377,33 @@ const FilterPopup = () => {
               );
             })}
           </div>
+          <React.Fragment>
+            <h3
+              className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[5%] "
+              id="Furnishing"
+            >
+              Furnishing
+            </h3>
+            <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
+              {SEARCH_FILTER_DATA.furnish.map(({ constDesc, cid }, i) => {
+                return (
+                  <Radio
+                    key={i}
+                    iconColor="dark.8"
+                    color="green"
+                    label={constDesc}
+                    value={cid}
+                    name="ListedBy"
+                    style={{ whiteSpace: "nowrap", marginBottom: "10px" }}
+                    onClick={() => setSingleType("furnish", cid)}
+                    checked={filters.furnish === cid}
+                  />
+                );
+              })}
+            </div>
+          </React.Fragment>
           <h3
-            className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] flex items-center gap-[5px] "
-            id="Photos & Videos"
-          >
-            Furnishing
-          </h3>
-          <div className="flex  mb-[3%] justify-start items-start flex-wrap gap-[4%]">
-            {SEARCH_FILTER_DATA.furnish.map(({ cid, constDesc }) => {
-              return (
-                <Radio
-                  key={cid}
-                  iconColor="dark.8"
-                  color="green"
-                  label={constDesc}
-                  value={cid}
-                  name="propertyType"
-                  style={{ whiteSpace: "nowrap", marginBottom: "10px" }}
-                  onClick={() => setSingleType("furnish", cid)}
-                  checked={filters.furnish === cid}
-                />
-              );
-            })}
-          </div>
-
-          <h3
-            className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] "
+            className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
             id="Amenities"
           >
             Amenities
@@ -421,6 +423,10 @@ const FilterPopup = () => {
               );
             })}
           </div>
+          <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
+            <Checkbox label="Lift" color="green" />
+          </div>
+
           {filters?.propTypes != projectprops.plot && (
             <React.Fragment>
               <h3
