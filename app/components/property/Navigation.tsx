@@ -67,7 +67,8 @@ export default function Navigation({
     projId,
     builderId: relateProjData.builderId,
   });
-  console.log(similarProjects);
+
+  let similarAvl = similarData?.otherListing.length > 1;
   let SimilatListingAvl =
     similarData?.otherListing.length > 1 || similarData?.projListing.length > 1;
   useEffect(() => {
@@ -155,7 +156,7 @@ export default function Navigation({
     { condtion: projData, key: "aboutBuilder" },
     { condtion: projData && relateProjData.faqs.length > 0, key: "faq" },
     { condtion: SimilatListingAvl, key: "similarListing" },
-    { condtion: projData, key: "similar" },
+    { condtion: similarAvl, key: "similar" },
   ];
 
   return (
