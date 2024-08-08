@@ -183,7 +183,7 @@ const AddRating = ({
           ? "100%"
           : session
           ? isDataSubmitted.isSubmitted
-            ? "auto"
+            ? (isTab ? "40%" : "auto")
             : "58%"
           : "35%"
       }
