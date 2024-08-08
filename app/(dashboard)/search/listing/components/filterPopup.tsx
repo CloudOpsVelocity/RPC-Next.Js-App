@@ -110,17 +110,18 @@ const FilterPopup = () => {
           viewportRef={viewport}
         >
           {filters?.propTypes != projectprops.plot && (
-            <React.Fragment>
-              <h3
-                className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[1%] "
-                id="Bhk"
-              >
-                BHK
-              </h3>
-              <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
-                {SEARCH_FILTER_DATA.bhkDetails.map((eachStatus, index) => {
+          <>
+          <h3
+            className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
+            id="BHK"
+          >
+            BHK
+          </h3>
+          <div className="flex  mb-[3%] justify-start items-center  gap-[4%] flex-wrap ">
+            {SEARCH_FILTER_DATA.bhkDetails.map((eachStatus, index) => {
                   return (
                     <Checkbox
+                     className="my-2"
                       label={eachStatus.title}
                       color="green"
                       key={index}
@@ -131,9 +132,8 @@ const FilterPopup = () => {
                     />
                   );
                 })}
-              </div>
-            </React.Fragment>
-          )}
+          </div>
+          </>)}
           <h3
             className=" text-[#202020] mb-[2%] text-[14px] font-[500] "
             id="Project Status"
@@ -401,26 +401,28 @@ const FilterPopup = () => {
               })}
             </div>
           </React.Fragment>
+         
           <h3
-            className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] "
+            className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
             id="Amenities"
           >
-           <div className="flex  mb-[3%] justify-start items-center gap-[4%] flex-wrap ">
+            Amenities
+          </h3>
+          <div className="flex  mb-[3%] justify-start items-center gap-[4%] flex-wrap ">
             <Checkbox label="Lift" color="green" />
-            {SEARCH_FILTER_DATA.amenities.map((i, ind)=>{
-              return(
+            {SEARCH_FILTER_DATA.amenities.map((i, ind) => {
+              return (
                 <Checkbox
-                className="my-2"
-                      key={i.cid}
-                      label={i.constDesc}
-                      color="green"
-                      onClick={() => handleCheckboxClick("amenities", i.cid)}
-                      checked={filters.amenities.includes(i.cid)}
-                    />
-              )
+                  className="my-2"
+                  key={i.cid}
+                  label={i.constDesc}
+                  color="green"
+                  onClick={() => handleCheckboxClick("amenities", i.cid)}
+                  checked={filters.amenities.includes(i.cid)}
+                />
+              );
             })}
           </div>
-          </h3>
           <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
             <Checkbox label="Lift" color="green" />
           </div>
