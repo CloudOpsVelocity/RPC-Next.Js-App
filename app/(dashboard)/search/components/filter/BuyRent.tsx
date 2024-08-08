@@ -37,7 +37,10 @@ export default function BuyRent() {
         { label: "Buy", value: "S" },
         { label: "Rent", value: "R" },
       ]}
-      classNames={{ input: classes.wrapperSelect }}
+      classNames={{
+        input: classes.wrapperSelect,
+        option: classes.buyrentoptions,
+      }}
       defaultValue={"S"}
       rightSection={<DropDownIcon />}
       size="xs"

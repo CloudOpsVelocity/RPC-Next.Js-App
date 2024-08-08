@@ -97,11 +97,7 @@ const FilterPopup = () => {
                     ? "text-[#148B16] bg-[#F1F9FF] font-[700]"
                     : "text-[#202020] bg-[#FCFCFC] font-[500]"
                 )}
-                icon={
-                  current == eachItem || isFilterApplied(eachItem)
-                    ? fourStarIcon
-                    : ""
-                }
+                icon={isFilterApplied(eachItem) ? fourStarIcon : ""}
               />
             );
           })}
@@ -290,6 +286,7 @@ const FilterPopup = () => {
               filters?.bugdetValue[0] ?? 500000,
               filters?.bugdetValue[1] ?? 600000000,
             ]}
+            value={filters.bugdetValue}
             min={0}
             max={filters.cg === "R" ? 100000 : 600000000}
             step={filters.cg === "R" ? 1 : 100000}

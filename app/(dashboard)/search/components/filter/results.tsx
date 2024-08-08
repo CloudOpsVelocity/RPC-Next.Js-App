@@ -82,7 +82,7 @@ export default function Results() {
           {" "}
           <div>
             {localities?.length > 0 && (
-              <h2 className="text-[#5F81B2] text-[14px] sm:text-xl flex space-x-2 items-center">
+              <h2 className="text-[#5F81B2] text-[14px] font-bold sm:text-xl flex space-x-2 items-center">
                 <SearchLocationIcon /> <span>Location</span>
               </h2>
             )}
@@ -104,7 +104,7 @@ export default function Results() {
           </div>
           <div>
             {projects && projects.length > 0 && (
-              <h2 className="text-[#5F81B2] sm:text-xl flex space-x-2 items-center mt-[14px] mb-1">
+              <h2 className="text-[#5F81B2] sm:text-xl flex space-x-2 items-center mt-[14px] mb-1 font-bold">
                 {property} <span>Projects</span>
               </h2>
             )}
@@ -181,7 +181,7 @@ export default function Results() {
 const SubHeading = ({ text }: { text: string }) => {
   return (
     <div className="flex  items-center gap-1.5 mt-[14px] mb-1">
-      <div className="text-[#4D6677] text-base  font-medium ">{text}</div>{" "}
+      <div className="text-[#4D6677] text-lg   font-bold">{text}</div>{" "}
       <hr className="w-full h-px  border-0 bg-[#98A5B8]" />
     </div>
   );

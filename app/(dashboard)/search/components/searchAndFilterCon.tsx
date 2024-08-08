@@ -57,133 +57,58 @@ const SearchHeader = ({ open }: any) => {
   return (
     <div className="m-[2%] w-full flex mt-[100px] pl-[1%] xl:pl-[2%] gap-1 xl:gap-2 sm:gap-[10px] flex-wrap sm:flex-wrap xl:flex-nowrap justify-start xl:justify-start items-start xl:items-center ">
       <p className="text-[14px] xl:text-[16px] text-[#737579] font-[500] mt-2 mb-2 sm:mb-0 sm:mt-0 w-full md:w-auto">
-        <span>Home</span> {" > "}
-        <Link href={"/project/banglore"}>
+        <Link href={"/"}>Home</Link> {" > "}
+        <span>
           <span className="text-[14px] md:text-[16px] text-[#4D6677] font-[600]">
             {DynamicText({
               cg: params.cg as string,
               listedBy: params.listedBy,
             })}
           </span>
-        </Link>{" "}
+        </span>{" "}
       </p>
 
       <div className=" border-[#A0D7FF] rounded-[40px] p-2 gap-2 xl:gap-[8px] pl-2 xl:pl-[8px] border-[1px] border-solid flex items-center justify-center ">
         <BuyRent />
 
-       
-      
-          
         {filters.locality?.map(
-              (each, index) =>
-                index < (isTab ? 1 : 2) && (
-                  <Pill
-                    onRemove={() => {
-                      remnoveSearchOptions(each, "locality");
-                      handleAppliedFilters();
-                    }}
-                    key={index}
-                    withRemoveButton
-                    classNames={{
-                      root: classes.MultiSelectionPill,
-                      remove: classes.removeButton,
-                    }}
-                    removeButtonProps={{
-                      style: {
-                        color: "#03153",
-                      },
-                    }}
-                  >
-                    {each.split("+")[0]}
-                  </Pill>
-                )
-            )}
-            {filters.locality?.length > (isTab ? 1 : 2) && (
+          (each, index) =>
+            index < (isTab ? 1 : 2) && (
               <Pill
-                className="capitalize"
-                classNames={{ root: classes.MultiSelectionPill }}
-                onClick={open}
-              >
-                {`+${filters.locality?.length - (isTab ? 1 : 2)} More`}
-              </Pill>
-            )}
-            {filters.locality?.length >0? <p  onClick={open}>
-             Add more
-             </p>:<p  onClick={open}>Enter City, Locality & Project</p>}
-             
-        </div>
-        <div >
-       {/*  <PillsInput
-          classNames={{ input: classes.wrapperMultiSelection }}
-          onClick={open}
-          miw={700}
-        >
-          <Pill.Group>
-            {filters.city && (
-              <Pill
-                withRemoveButton
-                classNames={{ root: classes.MultiSelectionPill }}
                 onRemove={() => {
-                  setFilters((prev) => ({ ...prev, city: null }));
+                  remnoveSearchOptions(each, "locality");
                   handleAppliedFilters();
+                }}
+                key={index}
+                withRemoveButton
+                classNames={{
+                  root: classes.MultiSelectionPill,
+                  remove: classes.removeButton,
                 }}
                 removeButtonProps={{
                   style: {
-                    color: "red",
+                    color: "#03153",
                   },
                 }}
               >
-                {filters.city.split("+")[0]}
+                {each.split("+")[0]}
               </Pill>
-            )}
-            {filters.locality?.map(
-              (each, index) =>
-                index < (isTab ? 1 : 2) && (
-                  <Pill
-                    onRemove={() => {
-                      remnoveSearchOptions(each, "locality");
-                      handleAppliedFilters();
-                    }}
-                    key={index}
-                    withRemoveButton
-                    classNames={{
-                      root: classes.MultiSelectionPill,
-                      remove: classes.removeButton,
-                    }}
-                    removeButtonProps={{
-                      style: {
-                        color: "red",
-                      },
-                    }}
-                  >
-                    {each.split("+")[0]}
-                  </Pill>
-                )
-            )}
-            {filters.locality?.length > (isTab ? 1 : 2) && (
-              <Pill
-                className="capitalize"
-                classNames={{ root: classes.MultiSelectionPill }}
-              >
-                {`+${filters.locality?.length - (isTab ? 1 : 2)} More`}
-              </Pill>
-            )}
-
-            <PillsInput.Field
-              styles={{
-                field: {
-                  minWidth: "100%",
-                },
-              }}
-              placeholder={
-                filters.locality.length > 0
-                  ? "Add More"
-                  : "Enter City,Locality & Project"
-              }
-              readOnly
-            />
-          </Pill.Group>
-        </PillsInput> */}
+            )
+        )}
+        {filters.locality?.length > (isTab ? 1 : 2) && (
+          <Pill
+            className="capitalize"
+            classNames={{ root: classes.MultiSelectionPill }}
+            onClick={open}
+          >
+            {`+${filters.locality?.length - (isTab ? 1 : 2)} More`}
+          </Pill>
+        )}
+        {filters.locality?.length > 0 ? (
+          <p onClick={open}>Add more</p>
+        ) : (
+          <p onClick={open}>Enter City, Locality & Project</p>
+        )}
       </div>
       <Popover
         width={"auto"}
@@ -254,15 +179,6 @@ const SearchHeader = ({ open }: any) => {
             <span className="bg-[#148B16] rounded-full text-white text-sm block w-5 h-5">
               ₹
             </span>
-            {/* <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="10"
-              height="10"
-              viewBox="0 0 10 10"
-              fill="none"
-            >
-              <circle cx="5" cy="5" r="5" fill="#148B16" />
-            </svg> */}
             Budget
           </button>
         </Popover.Target>
