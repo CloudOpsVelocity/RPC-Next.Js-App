@@ -3,6 +3,7 @@ import {
   listingProps,
   Propertytopics as topics,
 } from "@/app/data/projectDetails";
+import useNearbyProjects from "@/app/hooks/useNearby";
 import useNearby from "@/app/hooks/property/useNearBy";
 import useRatings from "@/app/hooks/useRatings";
 import { Main } from "@/app/validations/types/project";
@@ -52,7 +53,7 @@ export default function Navigation({
     }
   }
 
-  const { data: similarData, mutate } = useNearby({
+  const { data: similarData } = useNearby({
     lat,
     lng,
     projId,
@@ -60,6 +61,13 @@ export default function Navigation({
     bhkId,
     propType: listingProps[propTypeName.trim() as keyof typeof listingProps],
   });
+  const { data: similarProjects, mutate } = useNearbyProjects({
+    lat,
+    lng,
+    projId,
+    builderId: relateProjData.builderId,
+  });
+  console.log(similarProjects);
   let SimilatListingAvl =
     similarData?.otherListing.length > 1 || similarData?.projListing.length > 1;
   useEffect(() => {
@@ -145,7 +153,7 @@ export default function Navigation({
     { condtion: relateProjData?.banks?.length > 0, key: "loans" },
     { condtion: projData, key: "projectDetails" },
     { condtion: projData, key: "aboutBuilder" },
-    { condtion: projData, key: "faq" },
+    { condtion: projData && relateProjData.faqs.length > 0, key: "faq" },
     { condtion: SimilatListingAvl, key: "similarListing" },
     { condtion: projData, key: "similar" },
   ];
