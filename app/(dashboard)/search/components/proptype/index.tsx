@@ -8,6 +8,7 @@ import useSearchFilters from "@/app/hooks/search";
 export default function PropTypeFilter() {
   const { filters, setPropTypes } = useSearchFilters();
   const keys = [35, 33, 31, 34, 32];
+  const isShowPlot = filters.unitTypes.length > 0;
   return (
     <div className="max-w-[300px] ">
       <ClearAll type="propType" />
@@ -17,6 +18,9 @@ export default function PropTypeFilter() {
         </h3>
         <div className="flex  mb-[3%] t gap-[4%]  flex-wrap justify-start items-center ">
           {keys.map((keyName, index) => {
+            if (isShowPlot && keyName === 32) {
+              return null;
+            }
             return (
               <Radio
                 key={index}
