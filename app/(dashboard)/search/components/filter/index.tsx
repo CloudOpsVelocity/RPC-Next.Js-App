@@ -129,7 +129,7 @@ const SearchDrawerHeader = ({ open, close, setShowAllLocalities, showAllLocaliti
             {isMobile ? <SearchIcon /> : "Search"}
           </button>
         </div> */}
-        <div className="  p-2 gap-2 xl:gap-[8px] pl-2 xl:pl-[8px]  flex items-center justify-start ">
+        <div className="  p-2 gap-2 xl:gap-[8px] pl-2 xl:pl-[8px]  flex items-center justify-start  flex-wrap">
         {" "}
             <Select
               label=""

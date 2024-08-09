@@ -3,8 +3,8 @@ import SortBy from "./SortBy";
 
 const NewTabCon = ({ onTabChange, selectedProtype, categoryType, Activities }: any) => {
   return (
-    <div className="flex flex-row justify-between items-center  align-middle gap-[3px] md:gap-3 max-w-full  bg-[#e7f5ff] shadow-md px-[1px] md:px-4 md:py-2.5;">
-      <div className="flex flex-row justify-between items-center  align-middle gap-1 md:gap-3 ">
+    <div className="flex flex-row justify-between items-center  align-middle flex-wrap sm:flex-nowrap max-w-ful gap-[3px] md:gap-3 max-w-full  bg-[#e7f5ff] shadow-md px-[1px] md:px-4 md:py-2.5;">
+      <div className="flex flex-row w-[80%] sm:w-auto sm:w justify-between items-center  align-middle gap-1 md:gap-3 ">
         {categoryType.map((item: any) => (
           <button
             onClick={() => onTabChange(item.value)}

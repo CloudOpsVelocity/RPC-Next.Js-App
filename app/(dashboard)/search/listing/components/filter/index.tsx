@@ -38,8 +38,8 @@ const SearchDrawerHeader = ({ open, close, showAllLocalities, setShowAllLocaliti
           </span>
         </Link>{" "}
       </p>
-      <div className="w-[100%] md:w-[789px] h-auto  shrink-0 border-[#A0D7FF] rounded-[20px] border-[1px] border-solid ">
-        <div className="    p-2 gap-2 xl:gap-[8px] pl-2 xl:pl-[8px]  flex items-center justify-start  ">
+      <div className="w-[98%] md:w-[789px] h-auto  shrink-0 border-[#A0D7FF] rounded-[20px] border-[1px] border-solid ">
+        <div className="    p-2 gap-2 xl:gap-[8px] pl-2 xl:pl-[8px] max-w-full flex flex-wrap  flex items-center justify-start  ">
         {" "}
         <Select
               label=""

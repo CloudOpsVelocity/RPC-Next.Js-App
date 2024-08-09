@@ -106,19 +106,22 @@ const FilterPopup = () => {
         {/* Right Side Fields Con */}
         <ScrollArea
           h={400}
+          miw={"full"}
           className="w-full pt-[1%] sm:pl-[2%]    "
           viewportRef={viewport}
         >
           {filters?.propTypes != projectprops.plot && (
+            
             <>
               <h3
                 className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
-                id="BHK"
-              >
+                id="Unit Type"
+                >
                 BHK
               </h3>
               <div className="flex  mb-[3%] justify-start items-center  gap-[4%] flex-wrap ">
                 {SEARCH_FILTER_DATA.bhkDetails.map((eachStatus, index) => {
+                  
                   return (
                     <Checkbox
                       className="my-2"
@@ -136,8 +139,8 @@ const FilterPopup = () => {
             </>
           )}
           <h3
-            className=" text-[#202020] mb-[2%] text-[14px] font-[500] "
-            id="Project Status"
+            className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
+            id="Property Status"
           >
             Property Status
           </h3>
@@ -157,13 +160,16 @@ const FilterPopup = () => {
             })}
           </div>
           <h3
-            className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] flex items-center gap-[5px] "
+            className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
             id="Property Type"
           >
             Property Type {/* {notificationIcon} */}
           </h3>
-          <div className="flex  mb-[3%] justify-start items-start flex-wrap gap-[4%]">
+          <div className="flex  mb-[3%] justify-start items-center  gap-[4%] flex-wrap ">
             {propKeys.map((keyName, i) => {
+               if (keyName === 32 && filters.unitTypes.length > 0) {
+                return null;
+              }
               return (
                 <Radio
                   key={i}
@@ -186,7 +192,7 @@ const FilterPopup = () => {
             })}
           </div>
           <h3
-            className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] flex items-center gap-[5px] "
+              className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
             id="Posted By"
           >
             Posted By
@@ -210,8 +216,8 @@ const FilterPopup = () => {
           </div>
 
           <h3
-            className=" text-[#202020] mb-[2%] text-[14px] font-[500] "
-            id="Locality"
+                className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
+                id="Locality"
           >
             Locality
           </h3>
@@ -259,13 +265,13 @@ const FilterPopup = () => {
           {filters?.propTypes != projectprops.plot && (
             <React.Fragment>
               <h3
-                className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[5%] "
+                className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
                 id="Facing"
               >
                 Facing
               </h3>
-              <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
-                {SEARCH_FILTER_DATA.facing.map((x, i) => {
+              <div className="flex  mb-[3%] justify-start items-center  gap-[4%] flex-wrap ">
+              {SEARCH_FILTER_DATA.facing.map((x, i) => {
                   return (
                     <Checkbox
                       key={i}
@@ -283,7 +289,7 @@ const FilterPopup = () => {
           {filters?.propTypes != projectprops.plot && (
             <React.Fragment>
               <h3
-                className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[5%] "
+                className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
                 id="Bath"
               >
                 Bath
@@ -304,8 +310,8 @@ const FilterPopup = () => {
             </React.Fragment>
           )}
           <h3
-            className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[5%] "
-            id="Budget"
+                className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
+                id="Budget"
           >
             Budget
           </h3>
@@ -355,8 +361,8 @@ const FilterPopup = () => {
           />
 
           <h3
-            className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] flex items-center gap-[5px] "
-            id="Photos & Videos"
+                className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
+                id="Photos & Videos"
           >
             Photos & Videos
           </h3>
@@ -379,8 +385,8 @@ const FilterPopup = () => {
           </div>
           <React.Fragment>
             <h3
-              className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[5%] "
-              id="Furnishing"
+                className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
+                id="Furnishing"
             >
               Furnishing
             </h3>
@@ -403,8 +409,8 @@ const FilterPopup = () => {
             </div>
           </React.Fragment>
           <h3
-            className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
-            id="Amenities"
+                className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
+                id="Amenities"
           >
             Amenities
           </h3>
@@ -430,7 +436,7 @@ const FilterPopup = () => {
           {filters?.propTypes != projectprops.plot && (
             <React.Fragment>
               <h3
-                className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[5%] "
+                className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
                 id="Parking"
               >
                 Parking

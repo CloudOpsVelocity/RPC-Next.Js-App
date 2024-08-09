@@ -20,7 +20,7 @@ import classes from "@/app/styles/search.module.css";
 import { projectprops, propertyDetailsTypes } from "@/app/data/projectDetails";
 import { SEARCH_FILTER_DATA } from "@/app/data/search";
 import useSearchFilters from "@/app/hooks/search";
-import { useDebouncedState } from "@mantine/hooks";
+import { useDebouncedState, useMediaQuery } from "@mantine/hooks";
 import { useQuery } from "react-query";
 import { getData } from "@/app/utils/api/search";
 import ClearAll from "../../ClearAll";
@@ -62,6 +62,8 @@ const ListingMobileFilter = ({ close }: any) => {
   } = useSearchFilters();
   const path = usePathname();
   const viewport = useRef<HTMLDivElement>(null);
+  const isMobile = useMediaQuery("(max-width: 601px)");
+
   const scrollWhereIsSelected = (item: string) => {
     setCurrent(item);
     // @ts-ignore
@@ -84,8 +86,8 @@ const ListingMobileFilter = ({ close }: any) => {
         )
       : ListingSearchDetails;
   return (
-    <div className=" flex justify-start items-start w-[70vw] top-[160px] left-[70%]">
-      <div className="w-[50%] flex shadow-md justify-start items-center flex-col ">
+    <div className=" flex justify-start items-start w-[70vw] top-[160px] w-full sm:left-[70%]">
+      <div className="w-[100%] flex hidden sm:flex shadow-md justify-start items-center flex-col ">
         <p className=" text-[#000] text-nowrap xl:text-[14px] bg-[#F4F4F4] flex justify-start px-6  items-center font-[500] py-[3.5%] w-full ">
           Quick Filters
         </p>
@@ -124,7 +126,7 @@ const ListingMobileFilter = ({ close }: any) => {
           {filters?.propTypes != projectprops.plot && (
             <React.Fragment>
               <h3
-                className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[1%] "
+                className=" text-[#202020] mb-[2%] text-[14px] font-[600] mt-[1%] "
                 id="Bhk"
               >
                 BHK
@@ -148,7 +150,7 @@ const ListingMobileFilter = ({ close }: any) => {
             </React.Fragment>
           )}
           <Heading
-            className=" text-[#202020] mb-[4%] text-[14px] font-[500] "
+            className=" text-[#202020] mb-[4%] text-[14px] font-[600] "
             id="Project Status"
             text="Property Status"
           />
@@ -169,13 +171,16 @@ const ListingMobileFilter = ({ close }: any) => {
             })}
           </div>
           <h3
-            className=" text-[#202020] mb-[4%] text-[14px] font-[500] mt-[6%] flex items-center gap-[5px] "
+            className=" text-[#202020] mb-[4%] text-[14px] font-[600] mt-[6%] flex items-center gap-[5px] "
             id="Property Type"
           >
-            Property Type {notificationIcon}
+            Property Type {/* {notificationIcon} */}
           </h3>
           <div className="flex  mb-[3%] justify-start items-start flex-wrap gap-[4%]">
             {propKeys.map((keyName, i) => {
+               if (keyName === 32 && filters.unitTypes.length > 0) {
+                return null;
+              }
               return (
                 <Radio
                   key={i}
@@ -198,7 +203,7 @@ const ListingMobileFilter = ({ close }: any) => {
             })}
           </div>
           <h3
-            className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] flex items-center gap-[5px] "
+            className=" text-[#202020] mb-[2%] text-[14px] font-[600] mt-[3%] flex items-center gap-[5px] "
             id="Posted By"
           >
             Listed By
@@ -221,7 +226,7 @@ const ListingMobileFilter = ({ close }: any) => {
               ))}
           </div>
           <h3
-            className=" text-[#202020] mb-[4%] text-[14px] font-[500] "
+            className=" text-[#202020] mb-[4%] text-[14px] font-[600] "
             id="Locality"
           >
             Locality
@@ -270,7 +275,7 @@ const ListingMobileFilter = ({ close }: any) => {
           {filters?.propTypes != projectprops.plot && (
             <React.Fragment>
               <h3
-                className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[5%] "
+                className=" text-[#202020] mb-[2%] text-[14px] font-[600] mt-[5%] "
                 id="Facing"
               >
                 Facing
@@ -294,7 +299,7 @@ const ListingMobileFilter = ({ close }: any) => {
           {filters?.propTypes != projectprops.plot && (
             <React.Fragment>
               <h3
-                className=" text-[#202020] mb-[4%] text-[14px] font-[500] mt-[5%] "
+                className=" text-[#202020] mb-[4%] text-[14px] font-[600] mt-[5%] "
                 id="Bath"
               >
                 Bath
@@ -334,7 +339,7 @@ const ListingMobileFilter = ({ close }: any) => {
             max={60}
             step={0.05}
             onChange={(value) => handleSliderChange("bugdetValue", value)}
-            style={{ width: "100%" }}
+            style={{width: "99%"}}
             defaultValue={[
               filters?.bugdetValue?.[0] ?? 0.05,
               filters?.bugdetValue?.[1] ?? 60,
@@ -342,7 +347,7 @@ const ListingMobileFilter = ({ close }: any) => {
             label={formatBudgetValue}
           />
           <h3
-            className=" text-[#202020] mb-[4%] text-[14px] font-[500] mt-[3%] "
+            className=" text-[#202020] mb-[4%] text-[14px] font-[600] mt-[3%] "
             id="Area"
           >
             Area
@@ -364,13 +369,13 @@ const ListingMobileFilter = ({ close }: any) => {
             max={5000}
             value={filters.areaValue}
             onChange={(value) => handleSliderChange("areaValue", value)}
-            style={{ width: "80%" }}
+            style={{ width: "99%" }}
             classNames={{
               markLabel: classes.markLabel,
             }}
           />
           <h3
-            className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] flex items-center gap-[5px] "
+            className=" text-[#202020] mb-[2%] text-[14px] font-[600] mt-[3%] flex items-center gap-[5px] "
             id="Photos & Videos"
           >
             Photos & Videos
@@ -400,7 +405,7 @@ const ListingMobileFilter = ({ close }: any) => {
           </div>
           <React.Fragment>
             <h3
-              className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[5%] "
+              className=" text-[#202020] mb-[2%] text-[14px] font-[600] mt-[5%] "
               id="Furnishing"
             >
               Furnishing
@@ -424,7 +429,7 @@ const ListingMobileFilter = ({ close }: any) => {
             </div>
           </React.Fragment>
           <h3
-            className=" text-[#202020] mb-[4%] text-[14px] font-[500] mt-[3%] "
+            className=" text-[#202020] mb-[4%] text-[14px] font-[600] mt-[3%] "
             id="Amenities"
           >
             Amenities
@@ -437,7 +442,7 @@ const ListingMobileFilter = ({ close }: any) => {
           {filters?.propTypes != projectprops.plot && (
             <React.Fragment>
               <h3
-                className=" text-[#202020] mb-[4%] text-[14px] font-[500] mt-[5%] "
+                className=" text-[#202020] mb-[4%] text-[14px] font-[600] mt-[5%] "
                 id="Parking"
               >
                 Parking
@@ -460,7 +465,7 @@ const ListingMobileFilter = ({ close }: any) => {
           )}
 
           <h3
-            className=" text-[#202020] mb-[4%] text-[14px] font-[500] mt-[3%] "
+            className=" text-[#202020] mb-[4%] text-[14px] font-[600] mt-[3%] "
             id="RERA"
           >
             RERA
@@ -483,7 +488,7 @@ const ListingMobileFilter = ({ close }: any) => {
           </div> */}
 
           <h3
-            className=" text-[#202020] mb-[4%] text-[14px] font-[500] mt-[6%]"
+            className=" text-[#202020] mb-[4%] text-[14px] font-[600] mt-[6%]"
             id="Builder"
           >
             Builder
