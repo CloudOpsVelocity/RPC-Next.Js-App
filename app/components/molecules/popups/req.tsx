@@ -356,7 +356,6 @@ const ReqForm = ({
         No worries add your details to get callback from{" "}
         {popupState.MODAL_TYPE === "PROJECT_REQ_CALLBACK" ? "builder" : bn}
       </p>
-
       <h2 className="text-[#00487C] text-[14px] xl:text-[18px] font-semibold xl:text-xl not-italic xl:font-bold mb-[1.5%]">
         Your Details
       </h2>
