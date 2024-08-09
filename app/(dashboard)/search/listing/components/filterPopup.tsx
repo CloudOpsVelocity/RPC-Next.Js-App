@@ -135,7 +135,7 @@ const FilterPopup = () => {
           </div>
           </>)}
           <h3
-            className=" text-[#202020] mb-[2%] text-[14px] font-[500] "
+            className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
             id="Project Status"
           >
             Property Status
@@ -156,12 +156,12 @@ const FilterPopup = () => {
             })}
           </div>
           <h3
-            className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] flex items-center gap-[5px] "
+            className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
             id="Property Type"
           >
             Property Type {/* {notificationIcon} */}
           </h3>
-          <div className="flex  mb-[3%] justify-start items-start flex-wrap gap-[4%]">
+          <div className="flex  mb-[3%] justify-start items-center  gap-[4%] flex-wrap ">
             {propKeys.map((keyName, i) => {
               return (
                 <Radio
