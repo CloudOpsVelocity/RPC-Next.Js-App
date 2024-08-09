@@ -11,7 +11,7 @@ export default function Btn({ text }: Props) {
   const { data: session } = useSession();
   const url = session
     ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/property/v1/post`
-    : `/login`;
+    : `/login?pp=post`;
 
   return (
     <a
