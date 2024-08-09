@@ -70,7 +70,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
   };
 
   return (
-    <div className="m-[2%] w-full flex mt-[100px] pl-[1%] xl:pl-[2%] gap-1 xl:gap-2 sm:gap-[10px] flex-wrap sm:flex-wrap xl:flex-nowrap justify-start xl:justify-start items-start xl:items-center ">
+    <div className="m-[2%] w-full flex mt-[100px] pl-[1%] xl:pl-[2%] gap-1 xl:gap-2 sm:gap-[10px] flex-wrap sm:flex-wrap xl:flex-nowrap justify-start sm:justify-start items-start sm:items-center ">
       <p className="text-[14px] xl:text-[16px] text-[#737579] font-[500] mt-2 mb-2 sm:mb-0 sm:mt-0 w-full md:w-auto">
         <Link href={"/"}>Home</Link> {" > "}
         <span>
@@ -83,7 +83,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
         </span>{" "}
       </p>
 
-      <div className=" border-[#A0D7FF] max-w-full flex flex-wrap rounded-[20px] sm:rounded-[40px] p-2 gap-2 xl:gap-[8px] pl-2 xl:pl-[8px] border-[1px] border-solid flex items-center justify-center ">
+      <div className=" border-[#A0D7FF] max-w-full flex flex-wrap rounded-[20px] sm:rounded-[40px] p-2 gap-2 xl:gap-[8px] pl-2 xl:pl-[8px] border-[1px] border-solid  items-center justify-center ">
         <BuyRent />
 
         {filters.locality?.map(

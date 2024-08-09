@@ -100,7 +100,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
     open();
   };
   return (
-    <div className="m-[2%] w-full flex mt-[100px] pl-[1%] xl:pl-[2%] gap-1 xl:gap-2 sm:gap-[10px] flex-wrap sm:flex-wrap xl:flex-nowrap justify-start xl:justify-start items-start xl:items-center ">
+    <div className="m-[2%] w-full flex mt-[100px] pl-[1%] xl:pl-[2%] gap-1 xl:gap-2 sm:gap-[10px] flex-wrap sm:flex-wrap xl:flex-nowrap justify-start sm:justify-start items-start sm:items-center ">
       <p className="text-[14px] md:text-[16px] text-[#737579] font-[500] w-full md:w-auto">
         <Link href={"/"}>Home</Link> {" > "}
         <span>
@@ -113,7 +113,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
         </span>{" "}
       </p>
 
-      <div className=" border-[#A0D7FF] rounded-[20px] sm:rounded-[40px] gap-[8px] pl-[8px] border-[1px] gap-2 border-solid block w-full sm:w-auto sm:flex flex-warp sm:flex-nowrap items-center justify-center p-2 ">
+      <div className=" border-[#A0D7FF] rounded-[20px] sm:rounded-[40px]  pl-[8px] border-[1px] gap-2 border-solid block w-full sm:w-auto sm:flex flex-warp sm:flex-nowrap items-center justify-center p-2 ">
         <BuyRent />
         <div className="my-2">
           {filters.projIdEnc && (
