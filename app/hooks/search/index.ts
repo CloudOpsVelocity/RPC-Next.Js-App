@@ -210,7 +210,14 @@ export default function useSearchFilters(
     }));
   };
   const handleReset = (
-    type: "unitType" | "price" | "all" | "propType" | "listedBy" | "searchProj",
+    type:
+      | "unitType"
+      | "price"
+      | "all"
+      | "propType"
+      | "listedBy"
+      | "searchProj"
+      | "prjectsearchlisting",
     keys?: string[]
   ) => {
     switch (type) {
@@ -258,6 +265,10 @@ export default function useSearchFilters(
           }
         }
         setFilters(updatedFilters);
+        handleAppliedFilters();
+        break;
+      case "prjectsearchlisting":
+        setFilters({ ...initialState, listedBy: filters.listedBy });
         handleAppliedFilters();
         break;
       default:
@@ -396,7 +407,7 @@ const getFilteredData = async (
         } ${!hasCg ? "&cg=S" : ""}`
       : `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/prop-search?page=${page}${
           query && `&${query}`
-        }${hasCityParam ? "" : "&city=9"}`;
+        }${hasCityParam ? "" : "&city=9"}&${!hasCg ? "&cg=S" : ""}`;
   try {
     const response = await fetch(url);
     const data = await response.json();

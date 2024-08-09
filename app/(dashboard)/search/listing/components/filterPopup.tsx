@@ -102,7 +102,7 @@ const FilterPopup = () => {
         </div>
       </div>
       <div className="w-full">
-        <ClearAll type="all" />
+        <ClearAll type="prjectsearchlisting" />
         {/* Right Side Fields Con */}
         <ScrollArea
           h={400}
@@ -110,18 +110,18 @@ const FilterPopup = () => {
           viewportRef={viewport}
         >
           {filters?.propTypes != projectprops.plot && (
-          <>
-          <h3
-            className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
-            id="BHK"
-          >
-            BHK
-          </h3>
-          <div className="flex  mb-[3%] justify-start items-center  gap-[4%] flex-wrap ">
-            {SEARCH_FILTER_DATA.bhkDetails.map((eachStatus, index) => {
+            <>
+              <h3
+                className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
+                id="BHK"
+              >
+                BHK
+              </h3>
+              <div className="flex  mb-[3%] justify-start items-center  gap-[4%] flex-wrap ">
+                {SEARCH_FILTER_DATA.bhkDetails.map((eachStatus, index) => {
                   return (
                     <Checkbox
-                     className="my-2"
+                      className="my-2"
                       label={eachStatus.title}
                       color="green"
                       key={index}
@@ -132,8 +132,9 @@ const FilterPopup = () => {
                     />
                   );
                 })}
-          </div>
-          </>)}
+              </div>
+            </>
+          )}
           <h3
             className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
             id="Project Status"
@@ -188,7 +189,7 @@ const FilterPopup = () => {
             className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] flex items-center gap-[5px] "
             id="Posted By"
           >
-            Listed By
+            Posted By
           </h3>
           <div className="flex  mb-[3%] justify-start items-start flex-wrap gap-[4%]">
             {SEARCH_FILTER_DATA.listedBy
@@ -360,15 +361,15 @@ const FilterPopup = () => {
             Photos & Videos
           </h3>
           <div className="flex  mb-[3%] justify-start items-start flex-wrap gap-[4%]">
-            {SEARCH_FILTER_DATA.photoAvail.map(({ id, label }, i) => {
+            {SEARCH_FILTER_DATA.photoAvail.map(({ id, label }) => {
               return (
                 <Radio
-                  key={i}
+                  key={id}
                   iconColor="dark.8"
                   color="green"
                   label={label}
                   value={id}
-                  name="propertyType"
+                  name="photo"
                   style={{ whiteSpace: "nowrap", marginBottom: "10px" }}
                   onClick={() => setSingleType("pnb", id)}
                   checked={filters.pnb === id}
@@ -401,7 +402,6 @@ const FilterPopup = () => {
               })}
             </div>
           </React.Fragment>
-         
           <h3
             className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
             id="Amenities"

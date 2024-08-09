@@ -35,9 +35,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-/*   padding-left: 0rem; */
+  /*   padding-left: 0rem; */
 }
-
+.buyrentoptions {
+  font-size: 14px;
+  font-weight: 600;
+}
+.buyrentoptions:hover {
+  color: green;
+}
 .body {
   overflow: hidden;
 }
@@ -89,7 +95,7 @@
     flex-wrap: nowrap !important;
     justify-content: center;
     align-items: center;
-   /*  padding-left: 0rem; */
+    /*  padding-left: 0rem; */
   }
   .MultiSelectionPillLabel {
     font-size: 10px;

@@ -7,10 +7,10 @@ import Footer from "@/app/components/layouts/primary/footer";
 import { Toaster } from "react-hot-toast";
 const SearchingPage = () => {
   return (
-    <div className="w-full flex justify-center items-center flex-col ">
+    <div className="w-full flex flex-col ">
       <Header />
       <SearchAndFilterCon />
-      <div className=" w-[100%] flex justify-center flex-wrap-reverse ">
+      <div className=" w-[100%] flex  flex-wrap-reverse ">
         <LeftSideBlock />
       </div>
       <Footer />

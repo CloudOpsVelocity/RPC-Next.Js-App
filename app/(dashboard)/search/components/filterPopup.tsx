@@ -97,11 +97,7 @@ const FilterPopup = () => {
                     ? "text-[#148B16] bg-[#F1F9FF] font-[700]"
                     : "text-[#202020] bg-[#FCFCFC] font-[500]"
                 )}
-                icon={
-                  current == eachItem || isFilterApplied(eachItem)
-                    ? fourStarIcon
-                    : ""
-                }
+                icon={isFilterApplied(eachItem) ? fourStarIcon : ""}
               />
             );
           })}
@@ -196,6 +192,9 @@ const FilterPopup = () => {
           </h3>
           <div className="flex  mb-[1%] justify-start items-start flex-wrap gap-[4%]">
             {propKeys.map((keyName, i) => {
+              if (keyName === 32 && filters.unitTypes.length > 0) {
+                return null;
+              }
               return (
                 <Radio
                   key={i}
@@ -217,29 +216,34 @@ const FilterPopup = () => {
               );
             })}
           </div>
-
-          <h3
-            className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
-            id="Unit Type"
-          >
-            Unit Type
-          </h3>
-          <div className="flex  mb-[3%] justify-start items-center  gap-[4%] flex-wrap ">
-            {SEARCH_FILTER_DATA.bhkDetails.map((eachStatus, index) => {
-                  return (
-                    <Checkbox
-                     className="my-2"
-                      label={eachStatus.title}
-                      color="green"
-                      key={index}
-                      onClick={() =>
-                        handleCheckboxClick("unitTypes", eachStatus.value)
-                      }
-                      checked={filters.unitTypes.includes(eachStatus.value)}
-                    />
-                  );
-                })}
-          </div>
+          <>
+            {filters.propTypes !== 32 && (
+              <>
+                <h3
+                  className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
+                  id="Unit Type"
+                >
+                  Unit Type
+                </h3>
+                <div className="flex  mb-[3%] justify-start items-center  gap-[4%] flex-wrap ">
+                  {SEARCH_FILTER_DATA.bhkDetails.map((eachStatus, index) => {
+                    return (
+                      <Checkbox
+                        className="my-2"
+                        label={eachStatus.title}
+                        color="green"
+                        key={index}
+                        onClick={() =>
+                          handleCheckboxClick("unitTypes", eachStatus.value)
+                        }
+                        checked={filters.unitTypes.includes(eachStatus.value)}
+                      />
+                    );
+                  })}
+                </div>
+              </>
+            )}
+          </>
           <h3
             className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
             id="Area"
@@ -286,6 +290,7 @@ const FilterPopup = () => {
               filters?.bugdetValue[0] ?? 500000,
               filters?.bugdetValue[1] ?? 600000000,
             ]}
+            value={filters.bugdetValue}
             min={0}
             max={filters.cg === "R" ? 100000 : 600000000}
             step={filters.cg === "R" ? 1 : 100000}

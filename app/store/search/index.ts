@@ -72,7 +72,6 @@ searachFilterAtom.onMount = (setAtom) => {
 };
 export const appliedFiltersParams = atom(null, (get, set, t: any) => {
   const appliedFilters = get(searachFilterAtom);
-  console.log(appliedFilters);
   const parsedData = filterParser(appliedFilters);
   t.runner(parsedData);
 });

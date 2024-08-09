@@ -24,7 +24,11 @@ const SearchAndFilterCon = () => {
   const [showAllLocalities, setShowAllLocalities] = useState(false);
   return (
     <>
-      <SearchHeader setShowAllLocalities={setShowAllLocalities}  open={open} close={close} />
+      <SearchHeader
+        setShowAllLocalities={setShowAllLocalities}
+        open={open}
+        close={close}
+      />
       <Drawer
         opened={opened}
         onClose={close}
@@ -37,8 +41,12 @@ const SearchAndFilterCon = () => {
         }}
         size={isMobile ? "100%" : debounced ? "70%" : "25%"}
       >
-        <SearchDrawerHeader     showAllLocalities={showAllLocalities} 
-      setShowAllLocalities={setShowAllLocalities} open={open} close={close} />
+        <SearchDrawerHeader
+          showAllLocalities={showAllLocalities}
+          setShowAllLocalities={setShowAllLocalities}
+          open={open}
+          close={close}
+        />
       </Drawer>
     </>
   );
@@ -58,68 +66,67 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
   const isTab = useMediaQuery("(max-width: 1600px)");
   const showpopUp = () => {
     setShowAllLocalities(true);
-  open()
+    open();
   };
 
   return (
     <div className="m-[2%] w-full flex mt-[100px] pl-[1%] xl:pl-[2%] gap-1 xl:gap-2 sm:gap-[10px] flex-wrap sm:flex-wrap xl:flex-nowrap justify-start xl:justify-start items-start xl:items-center ">
       <p className="text-[14px] xl:text-[16px] text-[#737579] font-[500] mt-2 mb-2 sm:mb-0 sm:mt-0 w-full md:w-auto">
-        <span>Home</span> {" > "}
-        <Link href={"/project/banglore"}>
+        <Link href={"/"}>Home</Link> {" > "}
+        <span>
           <span className="text-[14px] md:text-[16px] text-[#4D6677] font-[600]">
             {DynamicText({
               cg: params.cg as string,
               listedBy: params.listedBy,
             })}
           </span>
-        </Link>{" "}
+        </span>{" "}
       </p>
 
       <div className=" border-[#A0D7FF] rounded-[40px] p-2 gap-2 xl:gap-[8px] pl-2 xl:pl-[8px] border-[1px] border-solid flex items-center justify-center ">
         <BuyRent />
 
-       
-      
-          
         {filters.locality?.map(
-              (each, index) =>
-                index < (isTab ? 1 : 2) && (
-                  <Pill
-                    onRemove={() => {
-                      remnoveSearchOptions(each, "locality");
-                      handleAppliedFilters();
-                    }}
-                    key={index}
-                    withRemoveButton
-                    classNames={{
-                      root: classes.MultiSelectionPill,
-                      remove: classes.removeButton,
-                    }}
-                    removeButtonProps={{
-                      style: {
-                        color: "#03153",
-                      },
-                    }}
-                  >
-                    {each.split("+")[0]}
-                  </Pill>
-                )
-            )}
-            {filters.locality?.length > (isTab ? 1 : 2) && (
+          (each, index) =>
+            index < (isTab ? 1 : 2) && (
               <Pill
-                className="capitalize"
-                classNames={{ root: classes.MultiSelectionPill }}
-                onClick={()=>showpopUp()}
+                onRemove={() => {
+                  remnoveSearchOptions(each, "locality");
+                  handleAppliedFilters();
+                }}
+                key={index}
+                withRemoveButton
+                classNames={{
+                  root: classes.MultiSelectionPill,
+                  remove: classes.removeButton,
+                }}
+                removeButtonProps={{
+                  style: {
+                    color: "#03153",
+                  },
+                }}
               >
-                {`+${filters.locality?.length - (isTab ? 1 : 2)} More`}
+                {each.split("+")[0]}
               </Pill>
-            )}
-            {filters.locality?.length >0? <p onClick={open} >
-             Add more
-             </p>:<p  onClick={open}>Enter Locality & Project</p>}
-        </div>
-        <div >
-       {/*  <PillsInput
+            )
+        )}
+        {filters.locality?.length > (isTab ? 1 : 2) && (
+          <Pill
+            className="capitalize"
+            classNames={{ root: classes.MultiSelectionPill }}
+            onClick={() => showpopUp()}
+          >
+            {`+${filters.locality?.length - (isTab ? 1 : 2)} More`}
+          </Pill>
+        )}
+        {filters.locality?.length > 0 ? (
+          <p onClick={open}>Add more</p>
+        ) : (
+          <p onClick={open}>Enter Locality & Project</p>
+        )}
+      </div>
+      <div>
+        {/*  <PillsInput
           classNames={{ input: classes.wrapperMultiSelection }}
           onClick={open}
           miw={700}
@@ -191,33 +198,36 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
           </Pill.Group>
         </PillsInput> */}
       </div>
-      <Popover
-        width={"auto"}
-        trapFocus
-        position="bottom"
-        withArrow
-        shadow="lg"
-        radius={10}
-        offset={{ mainAxis: 10, crossAxis: 0 }}
-      >
-        <Popover.Target>
-          <button className=" text-[#0073C6] sm:text-[14px] xl:text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] hidden justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md md:flex ">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="10"
-              height="10"
-              viewBox="0 0 10 10"
-              fill="none"
-            >
-              <circle cx="5" cy="5" r="5" fill="#148B16" />
-            </svg>
-            BHK
-          </button>
-        </Popover.Target>
-        <Popover.Dropdown className="!z-50" p={0}>
-          <BhkFilter />
-        </Popover.Dropdown>
-      </Popover>
+      {filters.propTypes !== 32 && (
+        <Popover
+          width={"auto"}
+          trapFocus
+          position="bottom"
+          withArrow
+          shadow="lg"
+          radius={10}
+          offset={{ mainAxis: 10, crossAxis: 0 }}
+        >
+          <Popover.Target>
+            <button className=" text-[#0073C6] sm:text-[14px] xl:text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] hidden justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md md:flex ">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="10"
+                height="10"
+                viewBox="0 0 10 10"
+                fill="none"
+              >
+                <circle cx="5" cy="5" r="5" fill="#148B16" />
+              </svg>
+              BHK
+            </button>
+          </Popover.Target>
+          <Popover.Dropdown className="!z-50" p={0}>
+            <BhkFilter />
+          </Popover.Dropdown>
+        </Popover>
+      )}
+
       <Popover
         width={"auto"}
         trapFocus
@@ -260,15 +270,6 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
             <span className="bg-[#148B16] rounded-full text-white text-sm block w-5 h-5">
               ₹
             </span>
-            {/* <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="10"
-              height="10"
-              viewBox="0 0 10 10"
-              fill="none"
-            >
-              <circle cx="5" cy="5" r="5" fill="#148B16" />
-            </svg> */}
             Budget
           </button>
         </Popover.Target>

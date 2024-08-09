@@ -10,14 +10,14 @@ export default function ListingData({
   possassionDate,
   launchDate,
   landArea,
-  type, 
+  type,
   availableFrom,
   ca,
   sba,
   propertyAge,
   propStatus,
   propTypeName,
-  pa
+  pa,
 }: Props) {
   console.log(pa);
   return (
@@ -36,17 +36,23 @@ export default function ListingData({
       {/* down section start here */}
       {type === "proj" ? (
         <div className="flex items-center gap-2 xl:gap-4 self-stretch">
-           {type === "proj" && (
-        <div className="mt-[2px] block md:hidden">
-          <h5 className="text-[#001F35] text-wrap text-[9px] xl:text-sm font-medium">
-            Listing Available
-          </h5>
-          <p className="text-[#242424]  text-wrap text-[9px] xl:text-base not-italic font-semibold">
-            {propTypes && propTypes?.length > 0 ? propTypes?.join(", ") : ""}
-          </p>
-        </div>
-      )}
-        <Divider orientation="vertical" color="#7BA0BB" className="flex md:hidden" />
+          {type === "proj" && (
+            <div className="mt-[2px] block md:hidden">
+              <h5 className="text-[#001F35] text-wrap text-[9px] xl:text-sm font-medium">
+                Listing Available
+              </h5>
+              <p className="text-[#242424]  text-wrap text-[9px] xl:text-base not-italic font-semibold">
+                {propTypes && propTypes?.length > 0
+                  ? propTypes?.join(", ")
+                  : ""}
+              </p>
+            </div>
+          )}
+          <Divider
+            orientation="vertical"
+            color="#7BA0BB"
+            className="flex md:hidden"
+          />
           <DownSectionCard
             label="Start Date"
             value={formatDate(launchDate, true)}
@@ -58,34 +64,57 @@ export default function ListingData({
           />
           <Divider orientation="vertical" color="#7BA0BB" />
           <DownSectionCard
-            label={ type == "proj"?"Project Land Area" : "Property Age"}
-            value={type == "proj"?`${landArea ?? 0} Acres`: `${propertyAge ?? 0} Years`}
+            label={type == "proj" ? "Project Land Area" : "Property Age"}
+            value={
+              type == "proj"
+                ? `${landArea ?? 0} Acres`
+                : `${propertyAge ?? 0} Years`
+            }
           />
-          
         </div>
       ) : (
         <div className="flex items-center gap-2 xl:gap-4 self-stretch">
-         { propTypeName != "Plot" ? <><DownSectionCard label="Super Builtup Area" value={`${formatNumberWithSuffix(sba)} sq.ft`} />
-          <Divider orientation="vertical" color="#7BA0BB" />
-          <DownSectionCard label="Carpet Area" value={`${formatNumberWithSuffix(ca)} sq.ft`} /> 
-          <Divider orientation="vertical" color="#7BA0BB" /></> : 
-          <>
-                    <DownSectionCard label="Total Area" value={`${formatNumberWithSuffix(pa)} sq.ft`} />
-                    <Divider orientation="vertical" color="#7BA0BB" /></> 
- }
-       
-         
-          {propStatus == "Under Construction"? <DownSectionCard
-            label="possassionDate "
-            value={formatDate(possassionDate, true)}
-          />:<DownSectionCard
-            label="Property Age"
-            value={type == "proj"?`${landArea ?? 0} Acres`: `${propertyAge ?? `0 Years` } `}
-          /> 
-          }
+          {propTypeName != "Plot" ? (
+            <>
+              <DownSectionCard
+                label="Super Builtup Area"
+                value={`${formatNumberWithSuffix(sba)} sq.ft`}
+              />
+              <Divider orientation="vertical" color="#7BA0BB" />
+              <DownSectionCard
+                label="Carpet Area"
+                value={`${formatNumberWithSuffix(ca)} sq.ft`}
+              />
+              <Divider orientation="vertical" color="#7BA0BB" />
+            </>
+          ) : (
+            <>
+              <DownSectionCard
+                label="Total Area"
+                value={`${formatNumberWithSuffix(pa)} sq.ft`}
+              />
+              <Divider orientation="vertical" color="#7BA0BB" />
+            </>
+          )}
+
+          {propStatus == "Under Construction" ? (
+            <DownSectionCard
+              label="Possession Date"
+              value={formatDate(possassionDate, true)}
+            />
+          ) : (
+            <DownSectionCard
+              label="Property Age"
+              value={
+                type == "proj"
+                  ? `${landArea ?? 0} Acres`
+                  : `${propertyAge ?? `0 Years`} `
+              }
+            />
+          )}
           <Divider orientation="vertical" color="#7BA0BB" />
           <DownSectionCard
-            label="Avaialble From"
+            label="Available From"
             value={formatDate(availableFrom, true)}
           />
         </div>
@@ -102,7 +131,9 @@ const DownSectionCard = ({
 }) => {
   return (
     <div className="flex flex-col justify-center items-start ">
-      <p className="text-[#001F35] text-[9px] sm:text-[14px] xl:text-sm not-italic font-medium text-wrap">{label}:</p>
+      <p className="text-[#001F35] text-[9px] sm:text-[14px] xl:text-sm not-italic font-medium text-wrap">
+        {label}:
+      </p>
       <p className="text-[#242424] text-[9px] sm:text-[14px] xl:text-sm not-italic font-semibold">
         {value}
       </p>

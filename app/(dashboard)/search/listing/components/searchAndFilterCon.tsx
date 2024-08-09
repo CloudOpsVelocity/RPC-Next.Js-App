@@ -34,8 +34,12 @@ const SearchAndFilterCon = () => {
 
   return (
     <>
-      <SearchHeader showAllLocalities={showAllLocalities} 
-      setShowAllLocalities={setShowAllLocalities} open={open} close={close} />
+      <SearchHeader
+        showAllLocalities={showAllLocalities}
+        setShowAllLocalities={setShowAllLocalities}
+        open={open}
+        close={close}
+      />
       <Drawer
         opened={opened}
         onClose={close}
@@ -48,8 +52,12 @@ const SearchAndFilterCon = () => {
         }}
         size={isMobile ? "100%" : debounced ? "70%" : "20%"}
       >
-        <SearchDrawerHeader showAllLocalities={showAllLocalities} 
-      setShowAllLocalities={setShowAllLocalities} open={open} close={close} />
+        <SearchDrawerHeader
+          showAllLocalities={showAllLocalities}
+          setShowAllLocalities={setShowAllLocalities}
+          open={open}
+          close={close}
+        />
       </Drawer>
     </>
   );
@@ -89,44 +97,44 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
   };
   const showpopUp = () => {
     setShowAllLocalities(true);
-  open()
+    open();
   };
   return (
     <div className="mx-[2%] w-full flex mt-[80px] pl-[2%] gap-2 md:gap-[20px] flex-wrap md:flex-nowrap justify-between md:justify-start items-start md:items-center bg-[#FCFCFC] py-4">
       <p className="text-[14px] md:text-[16px] text-[#737579] font-[500] w-full md:w-auto">
-        <span>hOME'</span> {" > "}
-        <Link href={"/project/banglore"}>
+        <Link href={"/"}>Home</Link> {" > "}
+        <span>
           <span className="text-[14px] md:text-[16px] text-[#4D6677] font-[600]">
             {DynamicText({
               cg: params.cg as string,
               listedBy: params.listedBy,
             })}
           </span>
-        </Link>{" "}
+        </span>{" "}
       </p>
 
       <div className=" border-[#A0D7FF] rounded-[40px] gap-[8px] pl-[8px] border-[1px] border-solid flex items-center justify-center p-2 ">
         <BuyRent />
         {filters.projIdEnc && (
-              <Pill
-                withRemoveButton
-                classNames={{ root: classes.MultiSelectionPill }}
-                onRemove={() => {
-                  setFilters((prev) => ({ ...prev, projIdEnc: null }));
-                  clearProjName(null);
-                  handleAppliedFilters();
-                }}
-                removeButtonProps={{
-                  style: {
-                    color: "#03153",
-                  },
-                }}
-              >
-                {projName}
-              </Pill>
-            )}
+          <Pill
+            withRemoveButton
+            classNames={{ root: classes.MultiSelectionPill }}
+            onRemove={() => {
+              setFilters((prev) => ({ ...prev, projIdEnc: null }));
+              clearProjName(null);
+              handleAppliedFilters();
+            }}
+            removeButtonProps={{
+              style: {
+                color: "#03153",
+              },
+            }}
+          >
+            {projName}
+          </Pill>
+        )}
 
-            {/* {filters.city && (
+        {/* {filters.city && (
               <Pill
                 withRemoveButton
                 classNames={{ root: classes.MultiSelectionPill }}
@@ -143,20 +151,22 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
                 {filters.city.split("+")[0]}
               </Pill>
             )} */}
-           {filters.locality?.length > (isTab ? 1 : 2) && (
-              <Pill
-                className="capitalize"
-                classNames={{ root: classes.MultiSelectionPill }}
-                onClick={()=>showpopUp()}
-              >
-                {`+${filters.locality?.length - (isTab ? 1 : 2)} More`}
-              </Pill>
-            )}
-            {filters.locality?.length >0? <p onClick={open} >
-             Add more
-             </p>:<p  onClick={open}>Enter Locality & Project</p>}
-           
-      {/*   <PillsInput
+        {filters.locality?.length > (isTab ? 1 : 2) && (
+          <Pill
+            className="capitalize"
+            classNames={{ root: classes.MultiSelectionPill }}
+            onClick={() => showpopUp()}
+          >
+            {`+${filters.locality?.length - (isTab ? 1 : 2)} More`}
+          </Pill>
+        )}
+        {filters.locality?.length > 0 ? (
+          <p onClick={open}>Add more</p>
+        ) : (
+          <p onClick={open}>Enter Locality & Project</p>
+        )}
+
+        {/*   <PillsInput
           classNames={{ input: classes.wrapperMultiSelection }}
           onClick={handleClick}
         >

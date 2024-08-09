@@ -65,7 +65,7 @@ export default function Navigation({
     lat,
     lng,
     projId,
-    builderId: relateProjData.builderId,
+    builderId: relateProjData?.builderId,
   });
 
   let similarAvl = similarData?.otherListing.length > 1;
