@@ -8,10 +8,10 @@ import useIds from "../useIds";
 import Css from "../../Style.module.css";
 type Props = {
   data: any;
+  shortIds: any;
 };
 
-export default function CardCarousel({ data }: Props) {
-  const { ids, isLoading } = useIds();
+export default function CardCarousel({ data, shortIds }: Props) {
   return (
     <Carousel
       slideSize={{ base: "90%", sm: "50%", md: "33.333333%" }}
@@ -24,20 +24,18 @@ export default function CardCarousel({ data }: Props) {
       controlsOffset={"-10px"}
       classNames={Css}
     >
-      {isLoading ? (
-        <>Loading..</>
-      ) : (
-        data.map((item: any, index: number) => (
-          <Carousel.Slide key={index}>
-            <Card
-              item={{
-                ...item,
-                shortListed: ids?.projIds?.includes(item.projIdEnc) ? "Y" : "N",
-              }}
-            />
-          </Carousel.Slide>
-        ))
-      )}
+      {data.map((item: any, index: number) => (
+        <Carousel.Slide key={index}>
+          <Card
+            item={{
+              ...item,
+              shortListed: shortIds?.projIds?.includes(item.projIdEnc)
+                ? "Y"
+                : "N",
+            }}
+          />
+        </Carousel.Slide>
+      ))}
     </Carousel>
   );
 }

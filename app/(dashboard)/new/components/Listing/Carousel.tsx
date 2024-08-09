@@ -7,11 +7,10 @@ import Css from "../../Style.module.css";
 import useIds from "../useIds";
 type Props = {
   data: any;
+  shortIds: any;
 };
 
-export default function ListingCarousel({ data }: Props) {
-  const { ids, isLoading } = useIds();
-  if (isLoading) return <div>Loading...</div>;
+export default function ListingCarousel({ data, shortIds }: Props) {
   return (
     <Carousel
       // slideSize="33.333333%"
@@ -30,7 +29,7 @@ export default function ListingCarousel({ data }: Props) {
         <Carousel.Slide key={index}>
           <ListingCard
             item={item}
-            sl={ids?.propIds.includes(item.propIdEnc) ? "Y" : "N"}
+            sl={shortIds?.propIds.includes(item.propIdEnc) ? "Y" : "N"}
           />
         </Carousel.Slide>
       ))}

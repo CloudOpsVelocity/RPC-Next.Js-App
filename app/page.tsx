@@ -1,6 +1,10 @@
 import React from "react";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
-import { getData, getHomeListingData } from "./(dashboard)/new/api";
+import {
+  getData,
+  getHomeListingData,
+  getShortIds,
+} from "./(dashboard)/new/api";
 import Header from "./(dashboard)/new/components/header";
 import HomeSearch from "./(dashboard)/new/components/home-search";
 import HomeFeatures from "./(dashboard)/new/components/features";
@@ -15,53 +19,61 @@ import Footer from "./(dashboard)/new/components/Footer";
 import SharePopup from "./components/atoms/SharePopup";
 import Req from "./(dashboard)/new/components/Req";
 export default async function Page() {
-  const [data, listingData] = await Promise.all([
+  const [data, listingData, shortIds] = await Promise.all([
     getData(),
     getHomeListingData(),
+    getShortIds(),
   ]);
   return (
     <div className="h-[100%] w-[100%] flex  flex-col overflow-hidden bg-[#F5F7F8]">
       <Header />
       <HomeSearch />
       <HomeFeatures />
-      <NewAddedProjects data={data.featured} />
+      <NewAddedProjects data={data.featured} shortIds={shortIds} />
       <DynamicListing
         title="Ready to Move Sell Listings"
         content="Move In Today: Your Dream Home Awaits – Explore Our Ready-to-Move Listings Now!"
         data={listingData["r_Sale"]}
+        shortIds={shortIds}
       />
       <TopLocalities />
       <DynamicListing
         title="Ready to Move Rent Listings"
         content="Move In Today: Your Dream Home Awaits – Explore Our Ready-to-Move Listings Now!"
         data={listingData["r_Rent"]}
+        shortIds={shortIds}
       />
       <DynamicListing
         title="Featured Plot Listings"
         content="Browse Top Listings and Find Your Perfect Plot Today!"
         data={listingData["p"]}
+        shortIds={shortIds}
       />
       <DynamicListing
         title="Under Construction Sell Listings"
         content="Explore Our Under Construction Listings Today!"
         data={listingData["u_Sale"]}
+        shortIds={shortIds}
       />
-      <HandPickedProjects data={data} />
+      <HandPickedProjects data={data} shortIds={shortIds} />
       <DynamicListing
         title="Under Construction Rent Listings"
         content="Discover New Developments and Under Construction Rent Listings!"
         data={listingData["u_Rent"]}
+        shortIds={shortIds}
       />
       <DynamicListing
         title="Independent Sell Listing"
         content="Your Gateway to Independent Living - Browse and Buy with Confidence"
         data={listingData["i_Sale"]}
+        shortIds={shortIds}
       />{" "}
       <ListbySection />
       <DynamicListing
         title="Independent Rent Listing"
         content="Discover Your Ideal Rental: Independent Listings, Endless Options."
         data={listingData["i_Rent"]}
+        shortIds={shortIds}
       />
       <PostYourListing />
       <BlogsSection />
