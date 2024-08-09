@@ -16,6 +16,7 @@ import Button from "@/app/elements/button";
 import MainCarousel from "../../molecules/carousel/main";
 import { useMediaQuery } from "@mantine/hooks";
 import { redirect } from "next/dist/server/api-utils";
+import { get_posted_by } from "@/app/utils/dyanamic/projects";
 type Props = {
   type: string;
   title: string;
@@ -64,11 +65,11 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
       openS();
     }
   };
-  const handleReqCall = (e: any) => {
+  const q = (e: any) => {
     e.stopPropagation();
     open({
       modal_type: "PROPERTY_REQ_CALLBACK",
-      postedByName: cardData.postedByName,
+      postedByName: get_posted_by(cardData.postedByName),
       postedId: cardData.postedById,
       reqId: cardData.propIdEnc,
       source: "propCard",
@@ -218,7 +219,7 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
               icon={isMobile ? null : null}
               title="Request  Callback"
               buttonClass=" text-[#FFF] mt-[12px] text-[12px] xl:text-[16px] font-[600] bg-[#0073C6] rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[6px]  "
-              onChange={handleReqCall}
+              onChange={q}
             />
           </div>
         </div>

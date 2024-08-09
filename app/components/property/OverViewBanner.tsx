@@ -16,6 +16,7 @@ import ListItem from "./pricingbreakup";
 import { usePricingPop } from "@/app/hooks/property/usePricingPop";
 import { useMediaQuery } from "@mantine/hooks";
 import { parseOtherCharge } from "./pricingbreakup/PriceBreakup";
+import { get_posted_by } from "@/app/utils/dyanamic/projects";
 export default function PropertyOverviewBanner({
   price,
   propTypeName,
@@ -90,7 +91,7 @@ export default function PropertyOverviewBanner({
                   title: `${bhkName ?? ""} ${propTypeName} For
           ${cg === "S" ? " Sell" : " Rent"} In ${ltName}`,
                   modal_type: "PROPERTY_REQ_CALLBACK",
-                  postedByName,
+                  postedByName: get_posted_by(postedByType),
                   postedId: postedById,
                   reqId: propIdEnc,
                   source: "propBanner",

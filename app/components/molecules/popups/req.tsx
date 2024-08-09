@@ -182,7 +182,8 @@ const LoggedInUserForm = ({ status, setStatus }: any) => {
     validate: yupResolver(reqSchema),
   });
 
-  let Posted_BY = get_posted_by(popupState.cg);
+  let Posted_BY =
+    popupState.MODAL_TYPE == "PROPERTY_REQ_CALLBACK" ? "Posted By" : "Builder";
   const onSubmit = async () => {
     setStatus("pending");
     const data = {
@@ -300,7 +301,8 @@ const ReqForm = ({
     popupState.MODAL_TYPE === "PROJECT_REQ_CALLBACK"
       ? "propIdEnc"
       : "projIdEnc";
-  let Posted_BY = get_posted_by(popupState.cg);
+  let Posted_BY =
+    popupState.MODAL_TYPE == "PROPERTY_REQ_CALLBACK" ? "Posted By" : "Builder";
   const isProjContact =
     popupState.MODAL_TYPE === "PROJECT_REQ_CALLBACK" ? "N" : "Y";
   const formSubmit = async (values: any) => {
@@ -351,7 +353,8 @@ const ReqForm = ({
         Looks like you are not registered with us.
       </p>
       <p className="text-[#4D6677] text-[14px] xl:text-sm not-italic font-semibold leading-[normal] tracking-[0.56px] mb-[2%] ">
-        No worries add your details to get callback from builder
+        No worries add your details to get callback from{" "}
+        {popupState.MODAL_TYPE === "PROJECT_REQ_CALLBACK" ? "builder" : bn}
       </p>
 
       <h2 className="text-[#00487C] text-[14px] xl:text-[18px] font-semibold xl:text-xl not-italic xl:font-bold mb-[1.5%]">

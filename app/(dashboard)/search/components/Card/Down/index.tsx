@@ -41,7 +41,7 @@ export default function CardDownSection({
     open({
       modal_type:
         type === "proj" ? "PROJECT_REQ_CALLBACK" : "PROPERTY_REQ_CALLBACK",
-      postedByName: type === "proj" ? builderName : postedByName,
+      postedByName: type === "proj" ? builderName : postedBy,
       postedId: builderId,
       reqId: reqId,
       source: type === "proj" ? "projCard" : "propCard",
