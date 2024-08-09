@@ -1,3 +1,5 @@
+import { getServerSession } from "next-auth";
+
 export const getData = async () => {
   let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/home/page/project`;
   const res = await fetch(url, {
@@ -21,12 +23,15 @@ export const getHomeListingData = async () => {
 };
 
 export const getShortIds = async () => {
-  try {
-    let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/shortlist/ids`;
-    const res = await fetch(url);
-    const data = await res.json();
-    return data;
-  } catch (error) {
-    return [];
+  const session = await getServerSession();
+  if (session) {
+    try {
+      let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/shortlist/ids`;
+      const res = await fetch(url);
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      return [];
+    }
   }
 };
