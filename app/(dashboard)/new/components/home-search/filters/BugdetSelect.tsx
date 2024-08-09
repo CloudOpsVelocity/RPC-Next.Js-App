@@ -11,102 +11,88 @@ import styles from "./Style.module.css";
 import { useAtom } from "jotai";
 import { homeSearchFiltersAtom } from "@/app/store/home";
 import { useMediaQuery } from "@mantine/hooks";
-const MULTIPLIER_LAKH = 100000; // 1 Lakh = 100000
-const MULTIPLIER_THOUSAND = 1000;
+import { toFormattedString } from "@/app/(dashboard)/search/components/buget/budget";
 
 const MULTIPLIER = 100000;
 const THOUSANDMULTIPLIER = 1000;
 
-
 const groceries = [
-  "5L",
-  "10L",
-  "20L",
-  "30L",
-  "40L",
-  "50L",
-  "60L",
-  "70L",
-  "80L",
-  "90L",
-  "1CR",
-  "10CR",
-  "20CR",
-  "30CR",
-  "40CR",
-  "50CR",
-  "60CR",
+  "₹5L",
+  "₹10L",
+  "₹20L",
+  "₹30L",
+  "₹40L",
+  "₹50L",
+  "₹60L",
+  "₹70L",
+  "₹80L",
+  "₹90L",
+  "₹1CR",
+  "₹10CR",
+  "₹20CR",
+  "₹30CR",
+  "₹40CR",
+  "₹50CR",
+  "₹60CR",
 ];
 
 const pricesForRent = [
-  "0",
-  "5,000",
-  "10,000",
-  "15,000",
-  "20,000",
-  "25,000",
-  "30,000",
-  "35,000",
-  "40,000",
-  "45,000",
-  "50,000",
-  "55,000",
-  "60,000",
-  "70,000",
-  "80,000",
-  "90,000",
-  "1L",
+  "₹0",
+  "₹5,000",
+  "₹10,000",
+  "₹15,000",
+  "₹20,000",
+  "₹25,000",
+  "₹30,000",
+  "₹35,000",
+  "₹40,000",
+  "₹45,000",
+  "₹50,000",
+  "₹55,000",
+  "₹60,000",
+  "₹70,000",
+  "₹80,000",
+  "₹90,000",
+  "₹1L",
 ];
 
 const map = new Map<string, { value: number }>([
-  ["0", { value: 5 * MULTIPLIER }],
-  ["10L", { value: 10 * MULTIPLIER }],
-  ["20L", { value: 20 * MULTIPLIER }],
-  ["30L", { value: 30 * MULTIPLIER }],
-  ["40L", { value: 40 * MULTIPLIER }],
-  ["50L", { value: 50 * MULTIPLIER }],
-  ["60L", { value: 60 * MULTIPLIER }],
-  ["70L", { value: 70 * MULTIPLIER }],
-  ["80L", { value: 80 * MULTIPLIER }],
-  ["90L", { value: 90 * MULTIPLIER }],
-  ["1CR", { value: 100 * MULTIPLIER }],
-  ["10CR", { value: 1000 * MULTIPLIER }],
-  ["20CR", { value: 2000 * MULTIPLIER }],
-  ["30CR", { value: 3000 * MULTIPLIER }],
-  ["40CR", { value: 4000 * MULTIPLIER }],
-  ["50CR", { value: 5000 * MULTIPLIER }],
-  ["60CR", { value: 6000 * MULTIPLIER }],
-  
-  ["0", { value: 0 }],
-  ["5,000", { value: 5 * THOUSANDMULTIPLIER }],
-  ["10,000", { value: 10 * THOUSANDMULTIPLIER }],
-  ["15,000", { value: 15 * THOUSANDMULTIPLIER }],
-  ["20,000", { value: 20 * THOUSANDMULTIPLIER }],
-  ["25,000", { value: 25 * THOUSANDMULTIPLIER }],
-  ["30,000", { value: 30 * THOUSANDMULTIPLIER }],
-  ["35,000", { value: 35 * THOUSANDMULTIPLIER }],
-  ["40,000", { value: 40 * THOUSANDMULTIPLIER }],
-  ["45,000", { value: 45 * THOUSANDMULTIPLIER }],
-  ["50,000", { value: 50 * THOUSANDMULTIPLIER }],
-  ["55,000", { value: 55 * THOUSANDMULTIPLIER }],
-  ["60,000", { value: 60 * THOUSANDMULTIPLIER }],
-  ["70,000", { value: 70 * THOUSANDMULTIPLIER }],
-  ["80,000", { value: 80 * THOUSANDMULTIPLIER }],
-  ["90,000", { value: 90 * THOUSANDMULTIPLIER }],
-  ["1L", { value: 100 * THOUSANDMULTIPLIER }],
-]);
+  ["₹5", { value: 5 * MULTIPLIER }],
+  ["₹10L", { value: 10 * MULTIPLIER }],
+  ["₹20L", { value: 20 * MULTIPLIER }],
+  ["₹30L", { value: 30 * MULTIPLIER }],
+  ["₹40L", { value: 40 * MULTIPLIER }],
+  ["₹50L", { value: 50 * MULTIPLIER }],
+  ["₹60L", { value: 60 * MULTIPLIER }],
+  ["₹70L", { value: 70 * MULTIPLIER }],
+  ["₹80L", { value: 80 * MULTIPLIER }],
+  ["₹90L", { value: 90 * MULTIPLIER }],
+  ["₹1CR", { value: 100 * MULTIPLIER }],
+  ["₹10CR", { value: 1000 * MULTIPLIER }],
+  ["₹20CR", { value: 2000 * MULTIPLIER }],
+  ["₹30CR", { value: 3000 * MULTIPLIER }],
+  ["₹40CR", { value: 4000 * MULTIPLIER }],
+  ["₹50CR", { value: 5000 * MULTIPLIER }],
+  ["₹60CR", { value: 6000 * MULTIPLIER }],
 
-const toFormattedString = (value: number): string => {
-  if (value >= 100 * MULTIPLIER_LAKH) {
-    return `${(value / (100 * MULTIPLIER_LAKH)).toFixed(2)}CR`;
-  } else if (value >= MULTIPLIER_LAKH) {
-    return `${(value / MULTIPLIER_LAKH).toFixed(2)}L`;
-  } else if (value >= MULTIPLIER_THOUSAND) {
-    return `${(value / MULTIPLIER_THOUSAND).toFixed(2)}K`;
-  } else {
-    return value.toString(); // Directly return the value as a string if less than 1000
-  }
-};
+  ["₹0", { value: 0 }],
+  ["₹5,000", { value: 5 * THOUSANDMULTIPLIER }],
+  ["₹10,000", { value: 10 * THOUSANDMULTIPLIER }],
+  ["₹15,000", { value: 15 * THOUSANDMULTIPLIER }],
+  ["₹20,000", { value: 20 * THOUSANDMULTIPLIER }],
+  ["₹25,000", { value: 25 * THOUSANDMULTIPLIER }],
+  ["₹30,000", { value: 30 * THOUSANDMULTIPLIER }],
+  ["₹35,000", { value: 35 * THOUSANDMULTIPLIER }],
+  ["₹40,000", { value: 40 * THOUSANDMULTIPLIER }],
+  ["₹45,000", { value: 45 * THOUSANDMULTIPLIER }],
+  ["₹50,000", { value: 50 * THOUSANDMULTIPLIER }],
+  ["₹55,000", { value: 55 * THOUSANDMULTIPLIER }],
+  ["₹60,000", { value: 60 * THOUSANDMULTIPLIER }],
+  ["₹70,000", { value: 70 * THOUSANDMULTIPLIER }],
+  ["₹80,000", { value: 80 * THOUSANDMULTIPLIER }],
+  ["₹90,000", { value: 90 * THOUSANDMULTIPLIER }],
+  ["₹1L", { value: 100 * THOUSANDMULTIPLIER }],
+]);
 
 export function BasicBudgetSelect() {
   const [f, dispatch] = useAtom(homeSearchFiltersAtom);
@@ -114,7 +100,7 @@ export function BasicBudgetSelect() {
   // const [minValue, setMinValue] = useState<number>(f.bugdetValue[0]);
   // const [maxValue, setMaxValue] = useState<number>(f.bugdetValue[1]);
   const [minValue, maxValue] = f.bugdetValue;
-  const isTab = useMediaQuery('(max-width: 1600px)');
+  const isTab = useMediaQuery("(max-width: 1600px)");
 
   const [focusedInput, setFocusedInput] = useState<"min" | "max" | null>(null);
   const combobox = useCombobox({
@@ -156,7 +142,13 @@ export function BasicBudgetSelect() {
       }
     };
     return (
-      <div key={item} className={`${styles.option} ${focusedInput == "max" ? styles.MaxOption : "" }`} onClick={handleOptionSelect}>
+      <div
+        key={item}
+        className={`${styles.option} ${
+          focusedInput == "max" ? styles.MaxOption : ""
+        }`}
+        onClick={handleOptionSelect}
+      >
         {item}
       </div>
     );
@@ -185,7 +177,8 @@ export function BasicBudgetSelect() {
     }
   };
   const shouldShowBudget = !(
-    f.bugdetValue[0] === 0 && f.bugdetValue[1] === 60 * MULTIPLIER
+    (f.bugdetValue[0] === 500000 && f.bugdetValue[1] === 600000000) ||
+    (f.bugdetValue[0] === 0 && f.bugdetValue[1] === 100000)
   );
 
   return (
@@ -224,14 +217,14 @@ export function BasicBudgetSelect() {
             }`
           ) : (
             <Input.Placeholder className="!text-black">
-              Budget
+              ₹ Budget
             </Input.Placeholder>
           )}
         </InputBase>
       </Combobox.Target>
 
       <Combobox.Dropdown>
-        <Group>
+        <Group pos={"sticky"} top={0} px={10} py={5} bg={"white"}>
           <NumberInput
             placeholder="Min Price"
             hideControls
@@ -243,9 +236,12 @@ export function BasicBudgetSelect() {
             thousandSeparator=","
             allowDecimal={false}
             allowNegative={false}
-            classNames={{input: styles.minMaxInput,}}
+            classNames={{ input: styles.minMaxInput }}
+            label="Min Price"
+            thousandsGroupStyle="lakh"
           />
           <NumberInput
+            label="Max Price"
             placeholder="Max Price"
             hideControls
             value={maxValue}
@@ -257,7 +253,8 @@ export function BasicBudgetSelect() {
             allowDecimal={false}
             allowNegative={false}
             max={6000 * MULTIPLIER}
-            classNames={{input: styles.minMaxInput,}}
+            classNames={{ input: styles.minMaxInput }}
+            thousandsGroupStyle="lakh"
           />
         </Group>
         {options}

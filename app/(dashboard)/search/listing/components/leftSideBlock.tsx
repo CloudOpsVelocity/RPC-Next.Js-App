@@ -91,10 +91,6 @@ const LeftSideBlock = ({ mutate }: Props) => {
         </div>
       </div>
 
-      <RequestCallBackModal />
-      <LoginPopup />
-      <SharePopup />
-      <MapModal />
       {/* </div> */}
       <RightSideBlock categoryType={"listing"} />
     </>

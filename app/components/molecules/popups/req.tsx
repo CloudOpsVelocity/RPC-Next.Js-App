@@ -1,3 +1,4 @@
+"use client";
 import useBuilder from "@/app/hooks/useBuilder";
 import { Phone } from "@/app/images/commonSvgs";
 import N from "@/app/styles/Numinput.module.css";

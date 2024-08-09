@@ -1,13 +1,3 @@
-import { DropDownIcon } from "@/app/images/commonSvgs";
-import {
-  Group,
-  MultiSelect,
-  MultiSelectProps,
-  Select,
-  Text,
-  Checkbox,
-  Radio,
-} from "@mantine/core";
 import React from "react";
 
 import { BasicSelect } from "./Select";

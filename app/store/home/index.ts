@@ -56,8 +56,9 @@ const searchReducer = (state: SearchState, action: Action): SearchState => {
       }
     }
     case "ADD_PROP_TYPE":
-      console.log(action.payload);
-      return { ...state, propType: action.payload };
+      if (state.propType === action.payload) {
+        return { ...state, propType: null };
+      } else return { ...state, propType: action.payload };
     case "ADD_LOCALITY":
       return { ...state, locality: [...state.locality, action.payload] };
     case "SET_CITY":

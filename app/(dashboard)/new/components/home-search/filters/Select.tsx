@@ -24,7 +24,7 @@ const keys = [
 export function BasicSelect() {
   // const { filters: f, setFilters } = useSearchFilters();
   const [f, dispatch] = useAtom(homeSearchFiltersAtom);
-  const isTab = useMediaQuery('(max-width: 1600px)');
+  const isTab = useMediaQuery("(max-width: 1600px)");
 
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
@@ -51,7 +51,7 @@ export function BasicSelect() {
           color="green"
           mr={6}
         />{" "}
-        {item}
+        <span className="capitalize">{item}</span>
       </Combobox.Option>
     ));
 
@@ -60,7 +60,6 @@ export function BasicSelect() {
       store={combobox}
       withinPortal={false}
       onOptionSubmit={(val) => {
-        console.log(val);
         dispatch({
           type: "ADD_PROP_TYPE",
           payload: parseDataProjectProps[
