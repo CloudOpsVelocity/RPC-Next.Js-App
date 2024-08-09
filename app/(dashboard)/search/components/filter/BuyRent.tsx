@@ -3,6 +3,7 @@ import { Select } from "@mantine/core";
 import React from "react";
 import classes from "@/app/styles/search.module.css";
 import useSearchFilters from "@/app/hooks/search";
+import { useMediaQuery } from "@mantine/hooks";
 export default function BuyRent() {
   const {
     filters,
@@ -29,8 +30,11 @@ export default function BuyRent() {
       handleAppliedFilters();
     }
   };
+
+  const isMobile = useMediaQuery("(max-width: 601px)");
   return (
     <Select
+    maw={isMobile ? 70 : 100}
       label=""
       placeholder="Select"
       data={[

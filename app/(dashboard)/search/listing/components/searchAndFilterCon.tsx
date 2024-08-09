@@ -100,7 +100,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
     open();
   };
   return (
-    <div className="mx-[2%] w-full flex mt-[80px] pl-[2%] gap-2 md:gap-[20px] flex-wrap md:flex-nowrap justify-between md:justify-start items-start md:items-center bg-[#FCFCFC] py-4">
+    <div className="m-[2%] w-full flex mt-[100px] pl-[1%] xl:pl-[2%] gap-1 xl:gap-2 sm:gap-[10px] flex-wrap sm:flex-wrap xl:flex-nowrap justify-start xl:justify-start items-start xl:items-center ">
       <p className="text-[14px] md:text-[16px] text-[#737579] font-[500] w-full md:w-auto">
         <Link href={"/"}>Home</Link> {" > "}
         <span>
@@ -113,9 +113,9 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
         </span>{" "}
       </p>
 
-      <div className=" border-[#A0D7FF] rounded-[40px] gap-[8px] pl-[8px] border-[1px] border-solid flex items-center justify-center p-2 ">
+      <div className=" border-[#A0D7FF] rounded-[20px] sm:rounded-[40px] gap-[8px] pl-[8px] border-[1px] gap-2 border-solid block w-full sm:w-auto sm:flex flex-warp sm:flex-nowrap items-center justify-center p-2 ">
         <BuyRent />
-        {filters.projIdEnc && (
+        <div className="my-2">{filters.projIdEnc && (
           <Pill
             withRemoveButton
             classNames={{ root: classes.MultiSelectionPill }}
@@ -133,6 +133,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
             {projName}
           </Pill>
         )}
+        
 
         {/* {filters.city && (
               <Pill
@@ -151,7 +152,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
                 {filters.city.split("+")[0]}
               </Pill>
             )} */}
-        {filters.locality?.length > (isTab ? 1 : 2) && (
+           {filters.locality?.length > (isTab ? 1 : 2) && (
           <Pill
             className="capitalize"
             classNames={{ root: classes.MultiSelectionPill }}
@@ -159,12 +160,13 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
           >
             {`+${filters.locality?.length - (isTab ? 1 : 2)} More`}
           </Pill>
-        )}
-        {filters.locality?.length > 0 ? (
+        )}</div>
+      <div> {filters.locality?.length > 0 ? (
           <p onClick={open}>Add more</p>
         ) : (
           <p onClick={open}>Enter Locality & Project</p>
-        )}
+        )}</div>
+       
 
         {/*   <PillsInput
           classNames={{ input: classes.wrapperMultiSelection }}

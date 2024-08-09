@@ -83,7 +83,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
         </span>{" "}
       </p>
 
-      <div className=" border-[#A0D7FF] rounded-[40px] p-2 gap-2 xl:gap-[8px] pl-2 xl:pl-[8px] border-[1px] border-solid flex items-center justify-center ">
+      <div className=" border-[#A0D7FF] max-w-full flex flex-wrap rounded-[20px] sm:rounded-[40px] p-2 gap-2 xl:gap-[8px] pl-2 xl:pl-[8px] border-[1px] border-solid flex items-center justify-center ">
         <BuyRent />
 
         {filters.locality?.map(

@@ -80,8 +80,8 @@ const FilterPopup = () => {
       : searchDetails;
   return (
     <div className=" flex justify-start items-start w-[70vw] top-[160px] left-[70%]">
-      <div className="w-[20%] flex shadow-md justify-start items-center flex-col ">
-        <p className=" text-[#000] text-[16px] bg-[#F4F4F4] flex justify-start px-6  items-center font-[500] py-[3.5%] w-full ">
+      <div className="w-[20%] flex hidden sm:flex shadow-md justify-start items-center flex-col ">
+      <p className=" text-[#000] text-[16px] bg-[#F4F4F4] flex justify-start px-6  items-center font-[500] py-[3.5%] w-full ">
           Quick Filters
         </p>
         <div className="w-full ">

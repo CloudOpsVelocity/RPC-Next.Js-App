@@ -10,7 +10,7 @@ const SearchingPage = () => {
     <div className="w-full flex flex-col ">
       <Header />
       <SearchAndFilterCon />
-      <div className=" w-[100%] flex  flex-wrap-reverse ">
+      <div className=" w-[100%] mx-2  xl:m-0 flex justify-center flex-wrap-reverse sm:flex-nowrap">
         <LeftSideBlock />
       </div>
       <Footer />
