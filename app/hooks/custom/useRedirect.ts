@@ -48,11 +48,18 @@ export function getQueryParamClient(): { query: string; redirectPath: string } {
 
 // Server
 export function getQueryParamForPath(path: string): string | null {
+  // Iterate through pathConfig, assuming it's pre-sorted with specific paths first
   for (const key in pathConfig) {
-    if (path.startsWith(pathConfig[key as PathConfigKey].pathPrefix)) {
+    const { pathPrefix, paramName } = pathConfig[key as PathConfigKey];
+    console.log(path, pathPrefix);
+    // Check if the path starts with the current pathPrefix and it's an exact match or more specific
+    if (path === pathPrefix && path.startsWith(pathPrefix)) {
       const segments = path.split("/");
       const id = segments[segments.length - 1];
-      return `?${pathConfig[key as PathConfigKey].paramName}=${id}`;
+      if (id && id !== pathPrefix) {
+        return `?${paramName}=${id}`;
+      }
+      return null;
     }
   }
   return null;

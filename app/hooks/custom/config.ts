@@ -40,12 +40,12 @@ export const pathConfig = {
   searchListing: {
     pathPrefix: "/search/listing",
     redirectingPath: "/search/",
-    paramName: "sp",
+    paramName: "sl",
     pageType: PathType.SearchListing,
     pageTitle: "Property Search Page",
   },
   postProperty: {
-    pathPrefix: "",
+    pathPrefix: "/search/property",
     redirectingPath: "/property/v1/",
     paramName: "pp",
     pageType: PathType.PostProperty,
@@ -53,7 +53,7 @@ export const pathConfig = {
   },
   default: {
     pathPrefix: "/",
-    redirectingPath: "",
+    redirectingPath: "/",
     paramName: "",
     pageType: PathType.Default,
     pageTitle: "Homepage",
