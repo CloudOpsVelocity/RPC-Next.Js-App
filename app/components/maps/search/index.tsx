@@ -105,7 +105,7 @@ const MapContent = ({ data }: any) => {
               eventHandlers={{
                 click: () => {
                   setSelectedValue({
-                    projOrPropName: item.projName,
+                    projOrPropName: isProp ? item.propName : item.projName,
                     lat: item.lat,
                     lang: item.lang,
                     type: isProp ? "prop" : "proj",

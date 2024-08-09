@@ -257,11 +257,11 @@ export const SEARCH_FILTER_DATA = {
       value: "B",
     },
     {
-      label: "Owner Listing",
+      label: "Owner Listings",
       value: "I",
     },
     {
-      label: "Agent Listing",
+      label: "Agent Listings",
       value: "A",
     },
   ],

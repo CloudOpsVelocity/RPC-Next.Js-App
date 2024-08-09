@@ -111,9 +111,9 @@
   border: none !important;
   min-width: 250px;
 }
-.leaflet-tooltip-top:before {
+/* .leaflet-tooltip-top:before {
   border-top-color: #148b16 !important;
-}
+} */
 
 .builderBg {
   background: linear-gradient(

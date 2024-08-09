@@ -134,23 +134,6 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
           </Pill>
         )}
 
-        {/* {filters.city && (
-              <Pill
-                withRemoveButton
-                classNames={{ root: classes.MultiSelectionPill }}
-                onRemove={() => {
-                  setFilters((prev) => ({ ...prev, city: null }));
-                  handleAppliedFilters();
-                }}
-                removeButtonProps={{
-                  style: {
-                    color: "#03153",
-                  },
-                }}
-              >
-                {filters.city.split("+")[0]}
-              </Pill>
-            )} */}
         {filters.locality?.length > (isTab ? 1 : 2) && (
           <Pill
             className="capitalize"
