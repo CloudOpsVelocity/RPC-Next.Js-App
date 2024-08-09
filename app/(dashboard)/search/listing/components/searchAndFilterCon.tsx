@@ -113,7 +113,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
         </span>{" "}
       </p>
 
-      <div className=" border-[#A0D7FF] rounded-[20px] sm:rounded-[40px] gap-[8px] pl-[8px] border-[1px] gap-2 border-solid block w-full sm:w-auto sm:flex flex-warp sm:flex-nowrap items-center justify-center p-2 ">
+      <div className=" border-[#A0D7FF] max-w-full flex flex-wrap rounded-[20px] sm:rounded-[40px] p-2 gap-2 xl:gap-[8px] pl-2 xl:pl-[8px] border-[1px] border-solid flex items-center justify-center  ">
         <BuyRent />
         <div className="my-2">{filters.projIdEnc && (
           <Pill
@@ -316,15 +316,9 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
             // onClick={() => setOpened((o) => !o)}
             className=" text-[#0073C6] text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] hidden lg:flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md "
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="10"
-              height="10"
-              viewBox="0 0 10 10"
-              fill="none"
-            >
-              <circle cx="5" cy="5" r="5" fill="#148B16" />
-            </svg>
+            <span className="bg-[#148B16] rounded-full text-white text-sm block w-5 h-5">
+              ₹
+            </span>
             Budget
           </button>
         </Popover.Target>
