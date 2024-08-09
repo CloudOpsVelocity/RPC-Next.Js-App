@@ -37,7 +37,7 @@ const groceries = [
 ];
 
 const pricesForRent = [
-  "₹0",
+  "₹5L",
   "₹5,000",
   "₹10,000",
   "₹15,000",
@@ -57,7 +57,7 @@ const pricesForRent = [
 ];
 
 const map = new Map<string, { value: number }>([
-  ["₹5", { value: 5 * MULTIPLIER }],
+  ["₹5L", { value: 5 * MULTIPLIER }],
   ["₹10L", { value: 10 * MULTIPLIER }],
   ["₹20L", { value: 20 * MULTIPLIER }],
   ["₹30L", { value: 30 * MULTIPLIER }],

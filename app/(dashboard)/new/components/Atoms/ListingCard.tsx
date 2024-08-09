@@ -43,9 +43,7 @@ export default function ListingCard({ item, sl }: Props) {
           height={276}
           className="object-cover w-full h-full"
         />
-        {/* </Carousel.Slide>
-          ))} */}
-        {/* </Carousel> */}
+
         <div className="absolute bottom-2 left-2 space-y-2">
           <p className="flex justify-center items-center gap-1 rounded p-1 bg-[#000000b0] text-white text-[10px] sm:text-[12px] xl:text-base not-italic font-semibold leading-[normal] capitalize">
             {item.propStatus}

@@ -1,3 +1,4 @@
+import { options } from "@/app/options";
 import { getServerSession } from "next-auth";
 
 export const getData = async () => {
@@ -23,15 +24,25 @@ export const getHomeListingData = async () => {
 };
 
 export const getShortIds = async () => {
-  const session = await getServerSession();
+  const session = await getServerSession(options);
   if (session) {
     try {
-      let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/shortlist/ids`;
-      const res = await fetch(url);
-      const data = await res.json();
-      return data;
+      if (process.env.NODE_ENV === "development") {
+        return {
+          propIds: [],
+          projIds: [],
+        };
+      } else {
+        let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/shortlist/ids`;
+        const res = await fetch(url);
+        const data = await res.json();
+        return data;
+      }
     } catch (error) {
-      return [];
+      return {
+        propIds: [],
+        projIds: [],
+      };
     }
   }
 };
