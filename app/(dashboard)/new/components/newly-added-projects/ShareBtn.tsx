@@ -6,9 +6,10 @@ import React from "react";
 
 type Props = {
   url: string;
+  type: "prop" | "proj";
 };
 
-export default function ShareBtn({ url }: Props) {
+export default function ShareBtn({ url, type }: Props) {
   const [shareAtomData, setShareAtomData] = useAtom(searchShareAtom);
   return (
     <button
@@ -17,11 +18,16 @@ export default function ShareBtn({ url }: Props) {
           ...shareAtomData,
           opened: true,
           url,
+          ...(type !== "proj" && {
+            title: "Share Listing",
+          }),
         })
       }
       className="cursor-pointer"
     >
-      <ShareIcon className={"cursor-pointer w-[22px] h-[22px] xl:w-[26px] xl:h-[26px] "} />
+      <ShareIcon
+        className={"cursor-pointer w-[22px] h-[22px] xl:w-[26px] xl:h-[26px] "}
+      />
     </button>
   );
 }

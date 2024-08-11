@@ -16,8 +16,8 @@ import ListbySection from "./(dashboard)/new/components/ListedBy";
 import PostYourListing from "./(dashboard)/new/components/post-your-listing";
 import BlogsSection from "./(dashboard)/new/components/blogs";
 import Footer from "./(dashboard)/new/components/Footer";
-import SharePopup from "./components/atoms/SharePopup";
 import Req from "./(dashboard)/new/components/Req";
+import SharePopup from "./(dashboard)/search/components/SharePopup";
 export default async function Page() {
   const [data, listingData, shortIds] = await Promise.all([
     getData(),

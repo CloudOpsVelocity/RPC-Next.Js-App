@@ -34,7 +34,7 @@ export default function Card({ item }: Props) {
                   reqId={item.projIdEnc}
                   shortListed={item.shortListed}
                 />
-                <ShareBtn url={url} />
+                <ShareBtn url={url} type="proj" />
               </div>{" "}
               {item.projName && item.projName.length > 20
                 ? `${item.projName.slice(0, 20)}...`

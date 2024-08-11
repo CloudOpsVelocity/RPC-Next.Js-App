@@ -6,11 +6,9 @@ import Image from "next/image";
 import React from "react";
 import ShareBtn from "../newly-added-projects/ShareBtn";
 import { formatDate } from "@/app/utils/date";
-import { Carousel } from "@mantine/carousel";
 import { getImageUrls } from "@/app/utils/image";
-import styles from "./Carouse.module.css";
-import { useMediaQuery } from "@mantine/hooks";
 import Shortlist from "./Shortlist";
+import ListingReqBtn from "./ListingReqCallbackBtn";
 type Props = {
   item: any;
   sl: string;
@@ -18,6 +16,10 @@ type Props = {
 
 export default function ListingCard({ item, sl }: Props) {
   const images = getImageUrls(item.media);
+  const title = `${item.propTypeName === "Plot" ? `${item.pa} sq.ft` : ""} ${
+    item.bhkName
+  } ${item.propTypeName} for ${item.category} in ${item.localityName}`;
+
   return (
     <div className="w-full sm:w-[316px] xl:w-[490px]">
       <div className="h-[137px] sm:h-[145px] xl:h-[228px]   mb-[6px] shrink-0 shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] relative">
@@ -25,6 +27,7 @@ export default function ListingCard({ item, sl }: Props) {
           <Shortlist reqId={item.propIdEnc} shortListed={sl} />
           <ShareBtn
             url={`${process.env.NEXT_PUBLIC_BACKEND_URL}/listing/banglore/${item.propIdEnc}`}
+            type="prop"
           />
         </div>
 
@@ -87,6 +90,7 @@ export default function ListingCard({ item, sl }: Props) {
             {/* <HeartIcon className="cursor-pointer w-[22px] h-[22px] sm:w-[20px] sm:h-[20px] xl:w-[26px] xl:h-[26px]" /> */}
             <ShareBtn
               url={`${process.env.NEXT_PUBLIC_BACKEND_URL}/listing/banglore/${item.propIdEnc}`}
+              type="prop"
             />
           </div>
         </div>
@@ -167,9 +171,17 @@ export default function ListingCard({ item, sl }: Props) {
               </>
             )}
           </div>
-          <p className="text-[#242424] text-[10px] xl:text-sm not-italic font-semibold leading-[normal] capitalize mt-[6px] mb-[6px]">
-            Posted by: {item.postedBy}
-          </p>
+          <div className="flex  justify-between item-center w-[95%]">
+            <p className="text-[#242424] text-[10px] xl:text-sm not-italic font-semibold leading-[normal] capitalize mt-[6px] mb-[6px]">
+              Posted by: {item.postedBy}
+            </p>
+            <ListingReqBtn
+              builderId={item.builderId}
+              builderName={item.postedBy}
+              projName={title}
+              reqId={item.propIdEnc}
+            />
+          </div>
         </div>
       </div>
     </div>

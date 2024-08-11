@@ -10,7 +10,7 @@ type Props = {
   builderId: number;
 };
 
-export default function ReqBtn({
+export default function ListingReqBtn({
   builderName,
   projName,
   reqId,
@@ -19,17 +19,17 @@ export default function ReqBtn({
   const [, { open }] = useReqCallPopup();
   const handleOpen = () => {
     open({
-      modal_type: "PROJECT_REQ_CALLBACK",
+      modal_type: "PROPERTY_REQ_CALLBACK",
       postedByName: builderName,
       postedId: builderId,
       reqId: reqId,
-      source: "projCard",
+      source: "propCard",
       title: projName,
     });
   };
   return (
     <Button
-      className="!text-[12px] h-[24px] sm:h-auto xl:!text-[14px] !p-[4px] !sm:p-[6px] "
+      className="!text-[8px] h-[20px] sm:h-[24px] xl:!text-[12px] !p-[4px] !sm:p-[1px] mt-[2px] sm:mt-[6px]"
       onClick={handleOpen}
     >
       Request Callback
