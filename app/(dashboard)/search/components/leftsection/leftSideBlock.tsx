@@ -9,7 +9,6 @@ import LoginPopup from "@/app/components/project/modals/LoginPop";
 import NewTabCon from "./newtabCon";
 import { SEARCH_FILTER_DATA } from "@/app/data/search";
 const LeftSideBlock = () => {
-  const [opned, { close, source }] = useReqCallPopup();
   const {
     searchProps: { mutate },
     handleAppliedFilters,
