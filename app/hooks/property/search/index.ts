@@ -97,10 +97,10 @@ export default function useSearchFilters() {
   };
 
   const handleBooleanCheck = () => {
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      reraVerified: !prevFilters.reraVerified,
-    }));
+    // setFilters((prevFilters) => ({
+    //   ...prevFilters,
+    //   reraVerified: !prevFilters.reraVerified,
+    // }));
   };
   const handleSliderChange = (key: keyof SearchFilter, newValue: number[]) => {
     setFilters((prevFilters) => ({

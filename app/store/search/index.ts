@@ -11,7 +11,7 @@ export interface SearchFilter {
   parkings: number[];
   amenities: number[];
   listedBy: null | string;
-  reraVerified: boolean | null;
+  reraVerified: number[];
   areaValue: [number, number];
   bugdetValue: [number, number];
   builderIds: string[];
@@ -37,7 +37,7 @@ export const initialState: SearchFilter = {
   parkings: [],
   amenities: [],
   listedBy: null,
-  reraVerified: null,
+  reraVerified: [],
   areaValue: [0, 5000],
   bugdetValue: [500000, 600000000],
   builderIds: [],
@@ -83,5 +83,6 @@ function getAppliedFilters(): SearchFilter {
     queryData[key] = value;
   });
   const data: SearchFilter = convertToOriginalState(queryData);
+  console.log(data);
   return data;
 }

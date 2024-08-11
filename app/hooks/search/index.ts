@@ -25,7 +25,7 @@ const paramsInit = {
   parkings: parseAsString,
   amenities: parseAsString,
   listedBy: parseAsString,
-  reraVerified: parseAsString,
+  reraIds: parseAsString,
   minArea: parseAsInteger,
   maxArea: parseAsInteger,
   minPrice: parseAsFloat,
@@ -82,6 +82,7 @@ export default function useSearchFilters(
     areaValue: [number, number];
     bugdetValue: [number, number];
     facings: number[];
+    reraVerified: number[];
   };
   const handleCheckboxClick = (
     filterType: keyof SearchFilter,
@@ -122,7 +123,7 @@ export default function useSearchFilters(
     } = filters;
     count += current ? 1 : 0;
     count += propTypes ? 1 : 0;
-    count += reraVerified ? 1 : 0;
+    count += reraVerified?.length || 0;
     count += listedBy ? 1 : 0;
     count += furnish ? 1 : 0;
     count += propStatus?.length || 0;
@@ -198,10 +199,10 @@ export default function useSearchFilters(
   };
 
   const handleBooleanCheck = () => {
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      reraVerified: !prevFilters.reraVerified,
-    }));
+    // setFilters((prevFilters) => ({
+    //   ...prevFilters,
+    //   reraVerified: !prevFilters.reraVerified,
+    // }));
   };
   const handleSliderChange = (key: keyof SearchFilter, newValue: number[]) => {
     setFilters((prevFilters) => ({
@@ -398,6 +399,7 @@ const getFilteredData = async (
   page: number,
   type: "project" | "owner" | "agent"
 ): Promise<Search[]> => {
+  console.log(query);
   const hasCityParam = /(?:^|&)city=/.test(query);
   const hasCg = /(?:^|&)cg=/.test(query);
   const url =

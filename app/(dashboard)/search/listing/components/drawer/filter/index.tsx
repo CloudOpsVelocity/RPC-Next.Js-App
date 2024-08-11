@@ -178,7 +178,7 @@ const ListingMobileFilter = ({ close }: any) => {
           </h3>
           <div className="flex  mb-[3%] justify-start items-start flex-wrap gap-[4%]">
             {propKeys.map((keyName, i) => {
-               if (keyName === 32 && filters.unitTypes.length > 0) {
+              if (keyName === 32 && filters.unitTypes.length > 0) {
                 return null;
               }
               return (
@@ -339,7 +339,7 @@ const ListingMobileFilter = ({ close }: any) => {
             max={60}
             step={0.05}
             onChange={(value) => handleSliderChange("bugdetValue", value)}
-            style={{width: "99%"}}
+            style={{ width: "99%" }}
             defaultValue={[
               filters?.bugdetValue?.[0] ?? 0.05,
               filters?.bugdetValue?.[1] ?? 60,
@@ -436,7 +436,6 @@ const ListingMobileFilter = ({ close }: any) => {
           </h3>
           <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
             <Checkbox label="Lift" color="green" />
-            
           </div>
 
           {filters?.propTypes != projectprops.plot && (
@@ -470,23 +469,6 @@ const ListingMobileFilter = ({ close }: any) => {
           >
             RERA
           </h3>
-          <Checkbox
-            label="RERA Verified"
-            color="green"
-            mb={"3%"}
-            onClick={() => handleBooleanCheck()}
-            checked={filters.reraVerified === true}
-          />
-
-          {/* <h3 className=" text-[#202020] mb-[4%] text-[14px] font-[500] mt-[3%] ">
-            Listed By
-          </h3>
-          <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
-            <Checkbox label="Builder" color="green" />
-            <Checkbox label="Agent" color="green" />
-            <Checkbox label="Owner" color="green" />
-          </div> */}
-
           <h3
             className=" text-[#202020] mb-[4%] text-[14px] font-[600] mt-[6%]"
             id="Builder"

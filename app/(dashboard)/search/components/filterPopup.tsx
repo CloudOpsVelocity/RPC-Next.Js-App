@@ -81,7 +81,7 @@ const FilterPopup = () => {
   return (
     <div className=" flex justify-start items-start w-[70vw] top-[160px] left-[70%]">
       <div className="w-[20%] flex hidden sm:flex shadow-md justify-start items-center flex-col ">
-      <p className=" text-[#000] text-[16px] bg-[#F4F4F4] flex justify-start px-6  items-center font-[500] py-[3.5%] w-full ">
+        <p className=" text-[#000] text-[16px] bg-[#F4F4F4] flex justify-start px-6  items-center font-[500] py-[3.5%] w-full ">
           Quick Filters
         </p>
         <div className="w-full ">
@@ -371,14 +371,7 @@ const FilterPopup = () => {
           >
             RERA
           </h3>
-          <Checkbox
-            label="RERA Verified"
-            color="green"
-            mb={"3%"}
-            onClick={() => handleBooleanCheck()}
-            checked={filters.reraVerified === true}
-          />
-         {/*   <div className="flex  mb-[3%] justify-start items-center gap-[4%] flex-wrap ">
+          <div className="flex  mb-[3%] justify-start items-center gap-[4%] flex-wrap ">
             {SEARCH_FILTER_DATA.rerastatus.map((i, ind) => {
               return (
                 <Checkbox
@@ -387,11 +380,11 @@ const FilterPopup = () => {
                   label={i.constDesc}
                   color="green"
                   onClick={() => handleCheckboxClick("reraVerified", i.cid)}
-                  checked={filters.rerastatus.includes(i.cid)}
+                  checked={filters.reraVerified?.includes(i.cid)}
                 />
               );
             })}
-          </div> */}
+          </div>
 
           {/* <h3 className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] ">
             Listed By

@@ -10,7 +10,7 @@ const convertToOriginalState = (data: any): SearchFilter => {
     parkings: [],
     amenities: [],
     listedBy: null,
-    reraVerified: null,
+    reraVerified: [],
     areaValue: [0, 5000],
     bugdetValue: [500000, 600000000],
     builderIds: [],
@@ -67,8 +67,9 @@ const convertToOriginalState = (data: any): SearchFilter => {
   if (data.facings !== undefined) {
     convertedData.facings = data.facings.split(",").map(Number);
   }
-  if (data.reraVerified !== undefined) {
-    convertedData.reraVerified = data.reraVerified === "true";
+  if (data.reraIds !== undefined) {
+    console.log(data);
+    convertedData.reraVerified = data.reraIds.split(",").map(Number);
   }
   if (data.minArea !== undefined && data.maxArea !== undefined) {
     convertedData.areaValue = [parseInt(data.minArea), parseInt(data.maxArea)];

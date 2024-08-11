@@ -81,7 +81,7 @@ const MobileFilter = ({ close }: any) => {
   return (
     <div className=" flex justify-start items-start w-[70vw]  w-full sm:left-[70%]">
       <div className="w-[100%] flex hidden sm:flex shadow-md justify-start items-center flex-col ">
-      <p className=" text-[#000] text-nowrap text-[14px] bg-[#F4F4F4] flex justify-start px-6  items-center font-[500] py-[3.5%] w-full ">
+        <p className=" text-[#000] text-nowrap text-[14px] bg-[#F4F4F4] flex justify-start px-6  items-center font-[500] py-[3.5%] w-full ">
           Quick Filters
         </p>
         <div className="w-full ">
@@ -368,13 +368,20 @@ const MobileFilter = ({ close }: any) => {
           >
             RERA
           </h3>
-          <Checkbox
-            label="RERA Verified"
-            color="green"
-            mb={"3%"}
-            onClick={() => handleBooleanCheck()}
-            checked={filters.reraVerified === true}
-          />
+          <div className="flex  mb-[3%] justify-start items-center gap-[4%] flex-wrap ">
+            {SEARCH_FILTER_DATA.rerastatus.map((i, ind) => {
+              return (
+                <Checkbox
+                  className="my-2"
+                  key={i.cid}
+                  label={i.constDesc}
+                  color="green"
+                  onClick={() => handleCheckboxClick("reraVerified", i.cid)}
+                  checked={filters.reraVerified?.includes(i.cid)}
+                />
+              );
+            })}
+          </div>
 
           {/* <h3 className=" text-[#202020] mb-[4%] text-[14px] font-[500] mt-[3%] ">
             Listed By

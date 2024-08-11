@@ -14,7 +14,7 @@ const convertToQueryParams = (params: Params): string => {
     parkings: "parking",
     amenities: "amenities",
     listedBy: "listedBy",
-    reraVerified: "reraVerified",
+    reraIds: "reraIds",
     minArea: "minArea",
     maxArea: "maxArea",
     minPrice: "minPrice",

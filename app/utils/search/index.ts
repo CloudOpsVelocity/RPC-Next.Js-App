@@ -63,7 +63,7 @@ export const filterParser = (data: SearchFilter) => {
     parkings: "parkings",
     amenities: "amenities",
     listedBy: "listedBy",
-    reraVerified: "reraVerified",
+    reraIds: "reraVerified",
     minArea: "areaValue",
     maxArea: "areaValue",
     minPrice: "bugdetValue",
