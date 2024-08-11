@@ -34,7 +34,7 @@ export default function BuyRent() {
   const isMobile = useMediaQuery("(max-width: 601px)");
   return (
     <Select
-    maw={isMobile ? 70 : 100}
+      maw={isMobile ? 100 : 100}
       label=""
       placeholder="Select"
       data={[
@@ -44,6 +44,7 @@ export default function BuyRent() {
       classNames={{
         input: classes.wrapperSelect,
         option: classes.buyrentoptions,
+        dropdown: classes.dropdown,
       }}
       defaultValue={"S"}
       rightSection={<DropDownIcon />}
