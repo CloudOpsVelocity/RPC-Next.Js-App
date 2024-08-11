@@ -71,6 +71,12 @@ export default function CardDownSection({
               projIdEnc={projIdEnc}
               projName={projName}
             />
+            <CountListing
+              type="Builder"
+              value={55}
+              projIdEnc={projIdEnc}
+              projName={projName}
+            />
           </>
         )}
       </div>
@@ -80,7 +86,7 @@ export default function CardDownSection({
         <Button
           onChange={handleOpen}
           title="Request Callback"
-          buttonClass="flex justify-end right-1  self-end text-[#FFF] ml-1 p-[3px] md:p-[5px] bg-[#0073C6] rounded-[5px] shadow-md text-[10px] xl:text-[12px] md:text-[12px] font-[700]"
+          buttonClass="flex justify-end right-1  self-end text-[#FFF] ml-1 p-[3px] md:p-[5px] bg-[#0073C6] rounded-[5px] shadow-md text-[10px] xl:text-[12px] md:text-[12px] font-[700] text-nowrap"
         />
       </div>
     </div>
@@ -88,7 +94,7 @@ export default function CardDownSection({
 }
 type CountListProps = {
   value: number;
-  type: "Agent" | "Owner";
+  type: "Agent" | "Owner" | "Builder";
   projIdEnc: string;
   projName: string;
 };
@@ -114,11 +120,11 @@ const CountListing = ({ type, value, projIdEnc, projName }: CountListProps) => {
         )}
       >
         <p
-          className={`text-[9px] text-nowrap xl:text-wrap xl:text-xs not-italic font-bold leading-[normal] ${
+          className={`text-[10px] text-nowrap  xl:text-xs not-italic font-bold leading-[normal] ${
             value > 0 ? "underline" : ""
           }`}
         >
-          {type} Listing Available : {value}
+          {type} Listing : {value}
         </p>
       </button>
     )

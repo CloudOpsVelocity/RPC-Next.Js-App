@@ -27,13 +27,29 @@ import { getData } from "@/app/utils/api/search";
 import ClearAll from "../../ClearAll";
 import Close from "@/app/components/project/button/close";
 import { formatBudgetValue } from "../../buget";
+import useQsearch from "@/app/hooks/search/useQsearch";
 
 const MobileFilter = ({ close }: any) => {
   const [current, setCurrent] = useState("Project Status");
   const propKeys = [35, 33, 31, 34, 32];
   const [localitySearch, setSearchLocality] = useDebouncedState("w", 500);
   const [builderSearch, setBuilderSearch] = useDebouncedState("w", 500);
-
+  const {
+    data: searchData,
+    isLoading,
+    handleResetQuery,
+    onSearchChange,
+    debounced,
+    name,
+  } = useQsearch();
+  const {
+    localities,
+    builders,
+    cities,
+    projects,
+    listing: listings,
+    projectListing,
+  } = searchData;
   const { data } = useQuery({
     queryFn: () => getData(localitySearch, "loc"),
     queryKey: ["search" + "loc" + localitySearch],
@@ -116,6 +132,62 @@ const MobileFilter = ({ close }: any) => {
           miw={"full"}
           p={20}
         >
+          <h3
+            className=" text-[#202020] mb-[4%] text-[14px] font-[600] "
+            id="Project Status"
+          >
+            Search By City, Locality, Projects
+          </h3>
+          <MultiSelect
+            searchable
+            placeholder="Search"
+            data={[
+              {
+                group: "Locality",
+                items:
+                  localities?.map((item: any, i: number) => {
+                    return { value: `${item.id}+${i}`, label: item.name };
+                  }) ?? [],
+              },
+              {
+                group: "Projects",
+                items:
+                  projects?.map((item: any, i: number) => {
+                    return { value: `${item.id}+${i}`, label: item.name };
+                  }) ?? [],
+              },
+              {
+                group: "Listings",
+                items:
+                  listings?.map((item: any, i: number) => {
+                    return { value: `${item.id}+${i}`, label: item.name };
+                  }) ?? [],
+              },
+              {
+                group: "Project Listings",
+                items:
+                  projectListing?.map((item: any, i: number) => {
+                    return {
+                      value: `${item.id}+${item.type}`,
+                      label: item.name,
+                    };
+                  }) ?? [],
+              },
+              {
+                group: "Builders",
+                items:
+                  builders?.map((item: any, i: number) => {
+                    return { value: `${item.id}+${i}`, label: item.name };
+                  }) ?? [],
+              },
+            ]}
+            onSearchChange={(e) => onSearchChange(e)}
+            onChange={(e) => alert("workign")}
+            searchValue={name ?? ""}
+            mb={"10px"}
+            withScrollArea={false}
+            styles={{ dropdown: { maxHeight: 200, overflowY: "auto" } }}
+          />
           <h3
             className=" text-[#202020] mb-[4%] text-[14px] font-[600] "
             id="Project Status"
