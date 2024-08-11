@@ -230,7 +230,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
                 >
                   <circle cx="5" cy="5" r="5" fill="#148B16" />
                 </svg>
-                BHK
+                Select BHK Type
               </button>
             </Popover.Target>
             <Popover.Dropdown className="!z-50" p={0}>
@@ -259,7 +259,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
               >
                 <circle cx="5" cy="5" r="5" fill="#148B16" />
               </svg>
-              Property Type
+              Select Property Type
             </button>
           </Popover.Target>
           <Popover.Dropdown className="!z-50" p={0}>
@@ -281,7 +281,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
               <span className="bg-[#148B16] rounded-full text-white text-sm block w-5 h-5">
                 ₹
               </span>
-              Budget
+              Add Budget
             </button>
           </Popover.Target>
           <Popover.Dropdown className="!z-50" p={0}>
@@ -303,7 +303,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
               <div className="text-[#FFF] bg-[#148B16] rounded-[50%] text-[16px] font-[700] w-[24px] h-[24px] flex justify-center items-center">
                 {countAppliedFilters()}
               </div>
-              Filters
+              Add More Filters
             </button>
           </Popover.Target>
           <Popover.Dropdown className="!z-50" p={0}>
