@@ -10,7 +10,7 @@ import Card from "../../newly-added-projects/Card";
 export default function CardCarousel({ data, shortIds }: Props) {
   return (
     <Carousel
-      slideSize={{ base: "60%", sm: "36%", md: "33.333333%" }}
+      slideSize={{ base: "55%", sm: "36%", md: "33.333333%" }}
       slideGap={{ base: "10px", sm: "md" }}
       align="start"
       slidesToScroll={1}
