@@ -7,7 +7,7 @@ type Props = {};
 export default function ListbySection({}: Props) {
   return (
     <div className="mt-[40px] sm:mt-[60px] w-[95%] m-auto">
-      <MainHeading title="Listing Posted By" content="Browse Listings Now" />
+      <MainHeading title="Listings Posted By" content="Browse Listings Now" />
       <CardSection />
     </div>
   );

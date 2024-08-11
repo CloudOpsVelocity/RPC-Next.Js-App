@@ -16,11 +16,19 @@ type Props = {
 
 export default function ListingCard({ item, sl }: Props) {
   const images = getImageUrls(item.media);
+  let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/listing/banglore/${item.propIdEnc}`;
+  const onRedirectOnProp = () => {
+    window.open(url, "_blank");
+  };
+
   const title = `${item.propTypeName === "Plot" ? `${item.pa} sq.ft` : ""} ${
     item.bhkName
   } ${item.propTypeName} for ${item.category} in ${item.localityName}`;
   return (
-    <div className="w-full sm:w-[316px] xl:w-[490px]">
+    <div
+      onClick={() => onRedirectOnProp()}
+      className="w-full sm:w-[316px] xl:w-[490px] cursor-pointer"
+    >
       <div className="h-[137px] sm:h-[145px] xl:h-[228px]   mb-[6px] shrink-0 shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] relative">
         <div className="flex sm:hidden justify-start items-start gap-[8px] absolute top:0 right-0 p-[8px] ">
           <Shortlist reqId={item.propIdEnc} shortListed={sl} />
@@ -32,7 +40,7 @@ export default function ListingCard({ item, sl }: Props) {
 
         <a
           className="inline-flex justify-center items-center gap-2.5 rounded border p-1 xl:p-2 border-solid border-[#0073C6] bg-[#0073c6] text-white text-[10px] sm:text-[12px] xl:text-sm not-italic font-bold leading-[normal] capitalize absolute bottom-2 right-2 sm:bottom-3 sm:right-3 z-[1000]"
-          href={`${process.env.NEXT_PUBLIC_BACKEND_URL}/listing/banglore/${item.propIdEnc}`}
+          href={url}
           target="_blank"
         >
           View Detail
@@ -55,21 +63,25 @@ export default function ListingCard({ item, sl }: Props) {
 
       <div className="sm:min-h-[204px] self-stretch rounded shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] border-[0.8px] border-solid border-[#A4B8B5] bg-[#FFF]">
         <div className="p-[10px] sm:p-[7px] xl:p-[10px] flex justify-between">
-          <div className="space-y-1">
-            <p className="text-[#242424] text-[12px] sm:text-lg not-italic font-semibold leading-[normal] capitalize">
-              {item.propTypeName === "Plot" && `${item.pa} sq.ft`}{" "}
+          <div className="space-y-1 max-w-[80%] ">
+            <p className="text-[#242424] text-[12px] sm:text-[14px] xl:text-lg not-italic font-semibold leading-[normal] capitalize">
+              {item.propTypeName === "Plot" &&
+                `${formatNumberWithSuffix(item.pa)} sq.ft`}{" "}
               {item.bhkName} {item.propTypeName} for {item.category} in{" "}
               {item.localityName}
             </p>
 
             <p className="text-[#148B16] text-[11px] sm:text-[12px] xl:text-base not-italic font-bold leading-[normal] capitalize">
-              {formatCurrency(item.price)},{" "}
+              {formatCurrency(item.price)}
+              {item.category === "Rent" ? "" : ","}{" "}
               {item.category !== "Rent" && (
                 <span className="text-[#616D75] text-[11px] sm:text-[12px] xl:text-base not-italic font-bold leading-[normal] capitalize">
                   ₹{" "}
                   {calculatePerSqPrice(
                     item.price,
-                    item.propTypeName === "Plot" ? item.pa : item.sba
+                    item.propTypeName === "Plot"
+                      ? formatNumberWithSuffix(item.pa)
+                      : formatNumberWithSuffix(item.sba)
                   )}
                   /- sq.ft
                 </span>
@@ -95,20 +107,19 @@ export default function ListingCard({ item, sl }: Props) {
         </div>
         {/* by default new sortBy */}
         <div className="pl-3 mr-[14px] sm:ml-[0px] xl:mr-0">
-          <div className="inline-flex flex-wrap w-[95%] items-center gap-1 self-stretch rounded border-[0.5px] border-solid border-[#616D75] bg-[#F5F5F5] p-1">
+          <div className="inline-flex flex-wrap w-auto items-center gap-1 self-stretch rounded border-[0.5px] border-solid border-[#616D75] bg-[#F5F5F5] p-1">
             {item.propTypeName === "Plot" ? (
               <>
-                <DownSectionCard label="Plot Area" value={`${item.pa} sq.ft`} />
+                <DownSectionCard
+                  label="Plot Area"
+                  value={`${formatNumberWithSuffix(item.pa)} sq.ft`}
+                />
                 <Divider orientation="vertical" color="#7BA0BB" />
                 <DownSectionCard
                   label={"Possesion Date"}
                   value={formatDate(item.possassionDate, true)}
                 />
-                <Divider
-                  orientation="vertical"
-                  color="#7BA0BB"
-                  className="!hidden sm:!block"
-                />
+                <Divider orientation="vertical" color="#7BA0BB" />
                 <DownSectionCard
                   label={"Available From"}
                   value={formatDate(item.availableFrom, true)}
@@ -124,13 +135,9 @@ export default function ListingCard({ item, sl }: Props) {
                 <Divider orientation="vertical" color="#7BA0BB" />
                 <DownSectionCard
                   label="Carpet Area"
-                  value={`${item.ca} sq.ft`}
+                  value={`${formatNumberWithSuffix(item.ca)} sq.ft`}
                 />
-                <Divider
-                  orientation="vertical"
-                  color="#7BA0BB"
-                  className="!hidden sm:!block"
-                />
+                <Divider orientation="vertical" color="#7BA0BB" />
                 <DownSectionCard
                   label={"Possesion Date"}
                   value={formatDate(item.possassionDate, true)}
@@ -145,19 +152,25 @@ export default function ListingCard({ item, sl }: Props) {
               <>
                 <DownSectionCard
                   label="Super Builtup Area"
-                  value={`${item.sba} sq.ft`}
+                  value={`${formatNumberWithSuffix(item.sba)} sq.ft`}
                 />
                 <Divider orientation="vertical" color="#7BA0BB" />
                 <DownSectionCard
                   label="Carpet Area"
-                  value={`${item.ca} sq.ft`}
+                  value={`${formatNumberWithSuffix(item.ca)} sq.ft`}
                 />
-                <Divider
-                  orientation="vertical"
-                  color="#7BA0BB"
-                  className="!hidden sm:!block"
-                />
-                <DownSectionCard label="Property Age" value="0-2 Years" />
+                <Divider orientation="vertical" color="#7BA0BB" />
+                {item.propertyAge != null ? (
+                  <DownSectionCard
+                    label="Property Age"
+                    value={`${item.propertyAge}`}
+                  />
+                ) : (
+                  <DownSectionCard
+                    label={"Possesion Date"}
+                    value={formatDate(item.possassionDate, true)}
+                  />
+                )}
                 <Divider orientation="vertical" color="#7BA0BB" />
                 <DownSectionCard
                   label={
