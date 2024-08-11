@@ -31,7 +31,7 @@ const config = {
       type: "L",
     },
     {
-      name: "H locality 1",
+      name: "Kurnool",
       id: 22,
       type: "L",
     },
