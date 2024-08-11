@@ -13,16 +13,17 @@ export default function useQsearch() {
   };
 
   const { data, isLoading } = useQuery({
-    queryKey: ["search" + name],
+    queryKey: ["search" + debounced],
     queryFn: () => getData(),
     enabled: !!debounced,
   });
+
   const nData = {
     ...data,
     localities: data?.loc ?? [],
   };
+  console.log(nData);
   const onSearchChange = (value: string) => {
-    console.log(value);
     !value ? setName(null) : setName(value);
   };
   const handleResetQuery = () => {

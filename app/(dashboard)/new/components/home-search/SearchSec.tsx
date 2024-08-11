@@ -7,12 +7,10 @@ import Results from "./Result";
 import { useAtom, useAtomValue } from "jotai";
 import { homeSearchFiltersAtom } from "@/app/store/home";
 import { useMediaQuery } from "@mantine/hooks";
-import { Locality } from "@/app/images/commonSvgs";
-import { Combo } from "next/font/google";
 type Props = {};
 export default function SearchSec({}: Props) {
   const [f, dispatch] = useAtom(homeSearchFiltersAtom);
-  const { onSearchChange, debounced, name } = useQsearch();
+  const { onSearchChange, debounced, name, data } = useQsearch();
   const isTab = useMediaQuery("(max-width: 1600px)");
   const [showAllLocalities, setShowAllLocalities] = useState(false);
   const combobox = useCombobox({
@@ -24,7 +22,6 @@ export default function SearchSec({}: Props) {
     !combobox.dropdownOpened && combobox.toggleDropdown();
     dispatch({ type: "SHOW_FILTER", payload: true });
   };
-  console.log(f.locality);
   return (
     <Combobox
       store={combobox}

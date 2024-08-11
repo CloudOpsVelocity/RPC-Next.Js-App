@@ -12,7 +12,6 @@ import toast from "react-hot-toast";
 
 export default function Results() {
   const { data, isLoading, handleResetQuery } = useQsearch();
-
   const [filters, dispatch] = useAtom(homeSearchFiltersAtom);
   if (isLoading) {
     return <Loading />;
@@ -83,18 +82,16 @@ export default function Results() {
         break;
     }
   };
-  const noResults =
-    localities?.length === 0 &&
-    cities?.length === 0 &&
-    builders?.length === 0 &&
-    projects?.length === 0 &&
-    listings?.length === 0 &&
-    projectListing?.length === 0;
+  // const noResults =
+  //   localities?.length === 0 &&
+  //   cities?.length === 0 &&
+  //   builders?.length === 0 &&
+  //   projects?.length === 0 &&
+  //   listings?.length === 0 &&
+  //   projectListing?.length === 0;
   return (
     <ScrollArea className="px-5 py-2 h-[200px] sm:h-[330px]">
-      {noResults ? (
-        <p>No results found</p>
-      ) : (
+      {
         <>
           {" "}
           <div>
@@ -192,7 +189,7 @@ export default function Results() {
             </ul>
           </div>
         </>
-      )}
+      }
     </ScrollArea>
   );
 }
