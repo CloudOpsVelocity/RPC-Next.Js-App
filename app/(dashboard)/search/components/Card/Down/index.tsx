@@ -54,8 +54,7 @@ export default function CardDownSection({
   };
 
   return (
-    <div className="bg-[#DDF0FD] flex items-start gap-1 xl:gap-[372px] xl:px-[17px] xl:py-[9px] w-full p-2 justify-between ">
-      {/* left section */}
+    <div className="bg-[#DDF0FD] flex items-start gap-1 xl:gap-auto xl:px-[17px] xl:py-[9px] w-full p-2 justify-between flex-wrap sm:flex-nowrap">
       <div className="flex gap-[9px]">
         {type === "proj" && (
           <>
@@ -85,7 +84,7 @@ export default function CardDownSection({
       <div className=" right-1">
         <Button
           onChange={handleOpen}
-          title="Request Callback"
+          title={type === "proj" ? "Contact" : "Request Callback"}
           buttonClass="flex justify-end right-1  self-end text-[#FFF] ml-1 p-[3px] md:p-[5px] bg-[#0073C6] rounded-[5px] shadow-md text-[10px] xl:text-[12px] md:text-[12px] font-[700] text-nowrap"
         />
       </div>
