@@ -38,10 +38,10 @@ export default function ListingData({
         <div className="flex items-center gap-2 xl:gap-4 self-stretch">
           {type === "proj" && (
             <div className="mt-[2px] block md:hidden">
-              <h5 className="text-[#001F35] text-wrap text-[9px] xl:text-sm font-medium">
+              <h5 className="text-[#001F35] text-wrap text-[11px] xl:text-sm font-medium">
                 Listing Available
               </h5>
-              <p className="text-[#242424]  text-wrap text-[9px] xl:text-base not-italic font-semibold">
+              <p className="text-[#242424]  text-wrap text-[11px] xl:text-base not-italic font-semibold">
                 {propTypes && propTypes?.length > 0
                   ? propTypes?.join(", ")
                   : ""}
@@ -131,10 +131,10 @@ const DownSectionCard = ({
 }) => {
   return (
     <div className="flex flex-col justify-center items-start ">
-      <p className="text-[#001F35] text-[9px] sm:text-[14px] xl:text-sm not-italic font-medium text-wrap">
+      <p className="text-[#001F35] text-[11px] sm:text-[14px] xl:text-sm not-italic font-medium text-wrap">
         {label}:
       </p>
-      <p className="text-[#242424] text-[9px] sm:text-[14px] xl:text-sm not-italic font-semibold">
+      <p className="text-[#242424] text-[11px] sm:text-[14px] xl:text-sm not-italic font-semibold">
         {value}
       </p>
     </div>

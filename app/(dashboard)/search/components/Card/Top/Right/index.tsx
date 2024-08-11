@@ -53,7 +53,26 @@ export default function TopRightSection({
         <>
           <ProjData type={type} {...data} />
           <div className="flex flex-col justify-between">
-            <div className="flex flex-row md:flex-col gap-3 sm:gap-1 xl:gap-3 align-baseline items-start">
+            <div className="flex flex-row md:flex-col gap-3 sm:gap-1 xl:gap-3  items-end">
+              <div className="gap-2 xl:gap-1 flex flex-row items-center align-middle ">
+                <HeartButton
+                  shortListed={Sh}
+                  onAddingShortList={onAddingShortList}
+                />
+                <button
+                  className="gap-2 xl:gap-1 flex flex-row items-center align-middle  "
+                  onClick={() =>
+                    setSharePopup({
+                      ...sharePopupData,
+                      opened: true,
+                      url,
+                      ...(type !== "proj" && { title: "Share Listing" }),
+                    })
+                  }
+                >
+                  <ShareIcon />
+                </button>
+              </div>
               <button
                 className="max-w-fit px-[1px] py-[1px]  rounded  text-[#242424] text-sm not-italic font-semibold my-1  md:mb-1  gradient"
                 onClick={() => {
@@ -75,34 +94,15 @@ export default function TopRightSection({
                   <SearchMapIcon className="w-4 h-4" />
                 </div>
               </button>
-              <div className="gap-2 xl:gap-1 flex flex-row items-center align-middle ">
-                <HeartButton
-                  shortListed={Sh}
-                  onAddingShortList={onAddingShortList}
-                />
-                <button
-                  className="gap-2 xl:gap-1 flex flex-row items-center align-middle  "
-                  onClick={() =>
-                    setSharePopup({
-                      ...sharePopupData,
-                      opened: true,
-                      url,
-                      ...(type !== "proj" && { title: "Share Listing" }),
-                    })
-                  }
-                >
-                  <ShareIcon />
-                </button>
-              </div>
             </div>
 
             <div className="flex items-end flex-col justify-between md:gap-2">
               <Button
                 onChange={() => onAddingCompare()}
                 title={Com ? "Remove Compare" : " Add to Compare"}
-                buttonClass="inline-flex justify-center items-center gap-1 xl:gap-2.5 rounded p-0.5 border-[0.5px] border-solid border-[#00A8CD] text-[#00A8CD] text-[8px]       sm:text-[12px] xl:text-xs not-italic font-semibold ml-auto"
+                buttonClass="inline-flex justify-center items-center gap-1 xl:gap-2.5 rounded p-0.5 border-[0.5px] border-solid border-[#00A8CD] text-[#00A8CD] text-[11px]       sm:text-[12px] xl:text-xs not-italic font-semibold ml-auto"
               />{" "}
-              <p className="text-[#242424] text-[8px] sm:text-[12px] xl:text-sm  not-italic font-normal">
+              <p className="text-[#242424] text-[10px] sm:text-[12px] xl:text-sm  not-italic font-normal">
                 Posted: <span className="font-bold">{timeAgo(postedDate)}</span>
               </p>
             </div>

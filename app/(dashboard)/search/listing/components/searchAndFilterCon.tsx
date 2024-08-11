@@ -100,14 +100,14 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
     open();
   };
   return (
-    <div className="m-[2%] w-full flex mt-[100px] pl-[1%] xl:pl-[2%] gap-1 xl:gap-2 sm:gap-[10px] flex-wrap sm:flex-wrap xl:flex-nowrap justify-start sm:justify-start items-start sm:items-center ">
-      <p className="text-[14px] md:text-[16px] text-[#737579] font-[500] w-full md:w-auto">
-        <span className="text-[16px] text-[#737579] font-[500] mt-3">
+    <div className="mb-4 w-full  mt-[60px] sm:mt-[80px] pl-[1%]   ">
+      <p className="text-[12px]  text-[#737579] font-[500] mt-2 mb-2 sm:mb-0  w-full md:w-auto">
+        <span className=" text-[#737579] font-[500] mt-3">
           {" "}
           <a href={"/"}>Home</a> {" > "}
         </span>
         <span>
-          <span className="text-[14px] md:text-[16px] text-[#4D6677] font-[600] cursor-pointer">
+          <span className="  text-[#4D6677] font-[600] cursor-pointer">
             {DynamicText({
               cg: params.cg as string,
               listedBy: params.listedBy,
@@ -115,30 +115,30 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
           </span>
         </span>{" "}
       </p>
+      <div className="mt-2 w-full flex  gap-1 xl:gap-2 sm:gap-[10px] flex-wrap sm:flex-wrap xl:flex-nowrap justify-start xl:justify-start items-center xl:items-center ">
+        <div className=" border-[#A0D7FF] max-w-full flex flex-wrap rounded-[20px] sm:rounded-[40px] p-2 gap-2 xl:gap-[8px] pl-2 xl:pl-[8px] border-[1px] border-solid flex items-center justify-center  ">
+          <BuyRent />
+          <div className="my-2">
+            {filters.projIdEnc && (
+              <Pill
+                withRemoveButton
+                classNames={{ root: classes.MultiSelectionPill }}
+                onRemove={() => {
+                  setFilters((prev) => ({ ...prev, projIdEnc: null }));
+                  clearProjName(null);
+                  handleAppliedFilters();
+                }}
+                removeButtonProps={{
+                  style: {
+                    color: "#03153",
+                  },
+                }}
+              >
+                {projName}
+              </Pill>
+            )}
 
-      <div className=" border-[#A0D7FF] max-w-full flex flex-wrap rounded-[20px] sm:rounded-[40px] p-2 gap-2 xl:gap-[8px] pl-2 xl:pl-[8px] border-[1px] border-solid flex items-center justify-center  ">
-        <BuyRent />
-        <div className="my-2">
-          {filters.projIdEnc && (
-            <Pill
-              withRemoveButton
-              classNames={{ root: classes.MultiSelectionPill }}
-              onRemove={() => {
-                setFilters((prev) => ({ ...prev, projIdEnc: null }));
-                clearProjName(null);
-                handleAppliedFilters();
-              }}
-              removeButtonProps={{
-                style: {
-                  color: "#03153",
-                },
-              }}
-            >
-              {projName}
-            </Pill>
-          )}
-
-          {/* {filters.city && (
+            {/* {filters.city && (
               <Pill
                 withRemoveButton
                 classNames={{ root: classes.MultiSelectionPill }}
@@ -155,26 +155,26 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
                 {filters.city.split("+")[0]}
               </Pill>
             )} */}
-          {filters.locality?.length > (isTab ? 1 : 2) && (
-            <Pill
-              className="capitalize"
-              classNames={{ root: classes.MultiSelectionPill }}
-              onClick={() => showpopUp()}
-            >
-              {`+${filters.locality?.length - (isTab ? 1 : 2)} More`}
-            </Pill>
-          )}
-        </div>
-        <div>
-          {" "}
-          {filters.locality?.length > 0 ? (
-            <p onClick={open}>Add more</p>
-          ) : (
-            <p onClick={open}>Enter Locality, Project</p>
-          )}
-        </div>
+            {filters.locality?.length > (isTab ? 1 : 2) && (
+              <Pill
+                className="capitalize"
+                classNames={{ root: classes.MultiSelectionPill }}
+                onClick={() => showpopUp()}
+              >
+                {`+${filters.locality?.length - (isTab ? 1 : 2)} More`}
+              </Pill>
+            )}
+          </div>
+          <div>
+            {" "}
+            {filters.locality?.length > 0 ? (
+              <p onClick={open}>Add more</p>
+            ) : (
+              <p onClick={open}>Enter Locality, Project</p>
+            )}
+          </div>
 
-        {/*   <PillsInput
+          {/*   <PillsInput
           classNames={{ input: classes.wrapperMultiSelection }}
           onClick={handleClick}
         >
@@ -250,111 +250,112 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
             />
           </Pill.Group>
         </PillsInput> */}
-      </div>
-      <Popover
-        width={"auto"}
-        trapFocus
-        position="bottom"
-        withArrow
-        shadow="lg"
-        radius={10}
-        offset={{ mainAxis: 10, crossAxis: 0 }}
-      >
-        <Popover.Target>
-          <button className=" text-[#0073C6] text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] hidden justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md md:flex ">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="10"
-              height="10"
-              viewBox="0 0 10 10"
-              fill="none"
+        </div>
+        <Popover
+          width={"auto"}
+          trapFocus
+          position="bottom"
+          withArrow
+          shadow="lg"
+          radius={10}
+          offset={{ mainAxis: 10, crossAxis: 0 }}
+        >
+          <Popover.Target>
+            <button className=" text-[#0073C6] text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] hidden justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md md:flex ">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="10"
+                height="10"
+                viewBox="0 0 10 10"
+                fill="none"
+              >
+                <circle cx="5" cy="5" r="5" fill="#148B16" />
+              </svg>
+              Select BHK Type
+            </button>
+          </Popover.Target>
+          <Popover.Dropdown className="!z-50" p={0}>
+            <BhkFilter />
+          </Popover.Dropdown>
+        </Popover>
+        <Popover
+          width={"auto"}
+          trapFocus
+          position="bottom"
+          withArrow
+          shadow="lg"
+          radius={10}
+          offset={{ mainAxis: 10, crossAxis: 0 }}
+        >
+          <Popover.Target>
+            <button
+              // onClick={() => setOpened((o) => !o)}
+              className=" text-[#0073C6] hidden text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] lg:flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md "
             >
-              <circle cx="5" cy="5" r="5" fill="#148B16" />
-            </svg>
-            BHK
-          </button>
-        </Popover.Target>
-        <Popover.Dropdown className="!z-50" p={0}>
-          <BhkFilter />
-        </Popover.Dropdown>
-      </Popover>
-      <Popover
-        width={"auto"}
-        trapFocus
-        position="bottom"
-        withArrow
-        shadow="lg"
-        radius={10}
-        offset={{ mainAxis: 10, crossAxis: 0 }}
-      >
-        <Popover.Target>
-          <button
-            // onClick={() => setOpened((o) => !o)}
-            className=" text-[#0073C6] hidden text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] lg:flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md "
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="10"
-              height="10"
-              viewBox="0 0 10 10"
-              fill="none"
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="10"
+                height="10"
+                viewBox="0 0 10 10"
+                fill="none"
+              >
+                <circle cx="5" cy="5" r="5" fill="#148B16" />
+              </svg>
+              Add Property Type
+            </button>
+          </Popover.Target>
+          <Popover.Dropdown className="!z-50" p={0}>
+            <PropTypeFilter />
+          </Popover.Dropdown>
+        </Popover>
+        <Popover
+          width={"auto"}
+          trapFocus
+          position="bottom"
+          withArrow
+          shadow="lg"
+          radius={10}
+          offset={{ mainAxis: 10, crossAxis: 0 }}
+        >
+          <Popover.Target>
+            <button
+              // onClick={() => setOpened((o) => !o)}
+              className=" text-[#0073C6] text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] hidden lg:flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md "
             >
-              <circle cx="5" cy="5" r="5" fill="#148B16" />
-            </svg>
-            Property Type
-          </button>
-        </Popover.Target>
-        <Popover.Dropdown className="!z-50" p={0}>
-          <PropTypeFilter />
-        </Popover.Dropdown>
-      </Popover>
-      <Popover
-        width={"auto"}
-        trapFocus
-        position="bottom"
-        withArrow
-        shadow="lg"
-        radius={10}
-        offset={{ mainAxis: 10, crossAxis: 0 }}
-      >
-        <Popover.Target>
-          <button
-            // onClick={() => setOpened((o) => !o)}
-            className=" text-[#0073C6] text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] hidden lg:flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md "
-          >
-            <span className="bg-[#148B16] rounded-full text-white text-sm block w-5 h-5">
-              ₹
-            </span>
-            Budget
-          </button>
-        </Popover.Target>
-        <Popover.Dropdown className="!z-50" p={0}>
-          <BugdetFilter />
-        </Popover.Dropdown>
-      </Popover>
+              <span className="bg-[#148B16] rounded-full text-white text-sm block w-5 h-5">
+                ₹
+              </span>
+              Add Budget
+            </button>
+          </Popover.Target>
+          <Popover.Dropdown className="!z-50" p={0}>
+            <BugdetFilter />
+          </Popover.Dropdown>
+        </Popover>
 
-      <Popover
-        width={"auto"}
-        trapFocus
-        position="bottom"
-        withArrow
-        shadow="lg"
-        radius={10}
-        offset={{ mainAxis: 10, crossAxis: -200 }}
-      >
-        <Popover.Target>
-          <button className=" text-[#0073C6] mr-[5%] md:m-0 text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] md:flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md hidden">
-            <div className="text-[#FFF] bg-[#148B16] rounded-[50%] text-[16px] font-[700] w-[24px] h-[24px] flex justify-center items-center">
-              {countAppliedFilters()}
-            </div>
-            Filters
-          </button>
-        </Popover.Target>
-        <Popover.Dropdown className="!z-50" p={0}>
-          <FilterPopup />
-        </Popover.Dropdown>
-      </Popover>
-      <SearchDrawer />
+        <Popover
+          width={"auto"}
+          trapFocus
+          position="bottom"
+          withArrow
+          shadow="lg"
+          radius={10}
+          offset={{ mainAxis: 10, crossAxis: -200 }}
+        >
+          <Popover.Target>
+            <button className=" text-[#0073C6] mr-[5%] md:m-0 text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] md:flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md hidden">
+              <div className="text-[#FFF] bg-[#148B16] rounded-[50%] text-[16px] font-[700] w-[24px] h-[24px] flex justify-center items-center">
+                {countAppliedFilters()}
+              </div>
+              Add More Filters
+            </button>
+          </Popover.Target>
+          <Popover.Dropdown className="!z-50" p={0}>
+            <FilterPopup />
+          </Popover.Dropdown>
+        </Popover>
+        <SearchDrawer />
+      </div>
     </div>
   );
 };

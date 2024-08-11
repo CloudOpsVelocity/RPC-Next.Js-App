@@ -27,40 +27,38 @@ export default function TabPanelSection({ mutate }: Props) {
     }
   }, [entry?.isIntersecting, hasNextPage, fetchMoreData]);
 
-  return  (
-  
-      <div
-        className="p-[2%] max-h-[700px] max-w-full overflow-y-auto h-screen"
-        ref={containerRef}
-      >
-        {isLoading ? (
-          <Loader />
-        ) : data != undefined && data.length != undefined && data.length > 0 ? (
-          data?.map((eachOne, index: number) => {
-            return (
-              <ProjectCard
-                key={index}
-                refetch={refetch}
-                data={{ ...eachOne, type: filters.listedBy ?? "proj" }}
-                index={index}
-                mutate={mutate}
-              />
-            );
-          })
-        ) : (
-          <div className="flex w-full h-full justify-center items-center flex-col">
-            {emptyFilesIcon}
-            No Matching Results Found!
-            <span className="relative left-[10%]">{strikeIconIcon}</span>
-          </div>
-        )}
-        {hasNextPage && (
-          <div ref={ref} onClick={() => fetchMoreData()}>
-            Loading More Data
-          </div>
-        )}
-      </div>
-    
+  return (
+    <div
+      className="p-[0%] sm:p-[2%] max-h-[700px] max-w-full overflow-y-auto h-screen"
+      ref={containerRef}
+    >
+      {isLoading ? (
+        <Loader />
+      ) : data != undefined && data.length != undefined && data.length > 0 ? (
+        data?.map((eachOne, index: number) => {
+          return (
+            <ProjectCard
+              key={index}
+              refetch={refetch}
+              data={{ ...eachOne, type: filters.listedBy ?? "proj" }}
+              index={index}
+              mutate={mutate}
+            />
+          );
+        })
+      ) : (
+        <div className="flex w-full h-full justify-center items-center flex-col">
+          {emptyFilesIcon}
+          No Matching Results Found!
+          <span className="relative left-[10%]">{strikeIconIcon}</span>
+        </div>
+      )}
+      {hasNextPage && (
+        <div ref={ref} onClick={() => fetchMoreData()}>
+          Loading More Data
+        </div>
+      )}
+    </div>
   );
 }
 
