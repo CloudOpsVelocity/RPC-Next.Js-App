@@ -39,7 +39,7 @@ export default async function Page() {
       <TopLocalities />
       <DynamicListing
         title="Ready to Move Rent Listings"
-        content="Move In Today: Your Dream Home Awaits – Explore Our Ready-to-Move Listings Now!"
+        content="Find Your Perfect Home, Ready to Move In - Rent Today!"
         data={listingData["r_Rent"]}
         shortIds={shortIds}
       />
@@ -63,14 +63,14 @@ export default async function Page() {
         shortIds={shortIds}
       />
       <DynamicListing
-        title="Independent Sell Listing"
+        title="Independent Sell Listings"
         content="Your Gateway to Independent Living - Browse and Buy with Confidence"
         data={listingData["i_Sale"]}
         shortIds={shortIds}
       />{" "}
       <ListbySection />
       <DynamicListing
-        title="Independent Rent Listing"
+        title="Independent Rent Listings"
         content="Discover Your Ideal Rental: Independent Listings, Endless Options."
         data={listingData["i_Rent"]}
         shortIds={shortIds}

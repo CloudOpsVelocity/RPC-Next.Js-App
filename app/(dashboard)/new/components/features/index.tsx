@@ -21,14 +21,14 @@ export default function HomeFeatures({}: Props) {
       <p className="hidden sm:block text-[#33535F] text-[14px] xl:text-[16px] not-italic font-semibold text-center mt-[6px] xl:mt-[10px]">
         Trust in our experience to find your perfect home!
       </p>
-      <div className=" shrink-0 m-auto flex sm:justify-center items-center mt-[30px] xl-[mt-0] xl:items-end max-w-[1200px] gap-4 flex-wrap sm:flex-nowrap">
+      <div className=" shrink-0 m-auto flex justify-start sm:justify-center items-center mt-[30px] xl-[mt-0] xl:items-end max-w-[1200px] gap-4 flex-wrap sm:flex-nowrap">
         <div className="hidden sm:block sm:min-w-[232px] sm:ml-[15%]">
           {config.svg}
         </div>
-        <div className=" sm:hidden sm:min-w-[232px]  sm:ml-[15%]">
+        <div className=" sm:hidden  sm:min-w-[232px]  sm:ml-[15%]">
           {config.mobileSvg}
         </div>
-        <div className="space-y-2 gap-[10px] sm:space-y-0 ">
+        <div className="space-y-1 gap-[10px] sm:space-y-0 ">
           {config.data.map((item, index) => (
             <Line text={item} key={index} />
           ))}

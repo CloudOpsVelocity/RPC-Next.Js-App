@@ -15,7 +15,8 @@ export default function Shortlist({ reqId, shortListed }: Props) {
   const { toggleShortlist } = useShortlistAndCompare();
   const { data: session } = useSession();
   const [, { open: openLogin }] = usePopShortList();
-  const onAddingShortList = () => {
+  const onAddingShortList = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.stopPropagation();
     if (session) {
       setState(!state);
       toggleShortlist({

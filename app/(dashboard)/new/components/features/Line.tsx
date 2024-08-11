@@ -6,7 +6,7 @@ type Props = {
 
 export default function Line({ text }: Props) {
   return (
-    <div className="text-[#242424] sm:text-wrap text-[4px] !mb-[10px] sm:text-[14px] xl:text-[16px] not-italic font-semibold leading-[normal] flex items-center gap-3.5 xl:text-nowrap">
+    <div className="text-[#242424] sm:text-wrap text-[9px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic font-semibold leading-[normal] flex items-center gap-1 sm:gap-3.5 xl:text-nowrap">
       <div className="w-3 sm:w-auto">{config.icon}</div>
       {text}
     </div>

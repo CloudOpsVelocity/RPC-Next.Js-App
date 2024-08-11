@@ -10,15 +10,18 @@ type Props = {
 
 export default function ShareBtn({ url }: Props) {
   const [shareAtomData, setShareAtomData] = useAtom(searchShareAtom);
+  const handleClick = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.stopPropagation(); 
+
+    setShareAtomData({
+      ...shareAtomData,
+      opened: true,
+      url,
+    });
+  };
   return (
     <button
-      onClick={() =>
-        setShareAtomData({
-          ...shareAtomData,
-          opened: true,
-          url,
-        })
-      }
+      onClick={handleClick}
       className="cursor-pointer"
     >
       <ShareIcon className={"cursor-pointer w-[22px] h-[22px] xl:w-[26px] xl:h-[26px] "} />
