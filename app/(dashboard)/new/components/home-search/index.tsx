@@ -64,7 +64,7 @@ const HomeSearch = () => {
             {/* <span className="hidden sm:block ">
               <CityDropdown />
             </span> */}
-            <p className="text-[#242424] text-[10px] sm:text-[12px] not-italic font-[600] hidden sm:flex items-center gap-0.5 p-1 bg-[#ECF0F3] ">
+            <p className="text-[#242424] text-[10px] sm:text-[14px] not-italic font-[600] hidden sm:flex items-center gap-0.5 p-1 bg-[#ECF0F3] ">
               Bangalore
             </p>
 

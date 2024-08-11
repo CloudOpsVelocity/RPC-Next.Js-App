@@ -16,7 +16,7 @@ export default function DynamicListing({
   shortIds,
 }: Props) {
   return (
-    <div className="mt-[40px] sm:mt-[80px] w-[95%] m-auto">
+    <div className="mt-[40px] sm:mt-[60px] w-[95%] m-auto">
       <MainHeading title={title} content={content} />
       <ListingCarousel data={data} shortIds={shortIds} />
     </div>

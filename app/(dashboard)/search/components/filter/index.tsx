@@ -143,21 +143,24 @@ const SearchDrawerHeader = ({
         </div> */}
         <div className="  p-2 gap-2 xl:gap-[8px] pl-2 xl:pl-[8px]  flex items-center justify-start  flex-wrap">
           {" "}
-          <Select
-            placeholder="Select"
-            data={[
-              { label: "Buy", value: "S" },
-              { label: "Rent", value: "R" },
-            ]}
-            classNames={{
-              input: classes.wrapperSelect,
-              option: classes.buyrentoptions,
-            }}
-            onChange={(value) => setSingleType("cg", value ?? "S")}
-            value={filters.cg ?? "S"}
-            rightSection={<DropDownIcon />}
-            size="xs"
-          />
+          {filters.listedBy !== "proj" && filters.listedBy != null && (
+            <Select
+              placeholder="Select"
+              data={[
+                { label: "Buy", value: "S" },
+                { label: "Rent", value: "R" },
+              ]}
+              classNames={{
+                input: classes.wrapperSelect,
+                option: classes.buyrentoptions,
+              }}
+              onChange={(value) => setSingleType("cg", value ?? "S")}
+              value={filters.cg ?? "S"}
+              rightSection={<DropDownIcon />}
+              size="xs"
+            />
+            )}
+
           <div className="flex flex-wrap gap-2 items-center h-auto">
             {filters.locality?.map(
               (each, index) =>

@@ -1,5 +1,5 @@
 import { HeartIcon, ShareIcon } from "@/app/images/HomePageIcons";
-import { formatCurrency } from "@/app/utils/numbers";
+import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
 import { calculatePerSqPrice } from "@/app/utils/price";
 import { Divider } from "@mantine/core";
 import Image from "next/image";
@@ -54,7 +54,7 @@ export default function ListingCard({ item, sl }: Props) {
       <div className="sm:min-h-[204px] self-stretch rounded shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] border-[0.8px] border-solid border-[#A4B8B5] bg-[#FFF]">
         <div className="p-[10px] sm:p-[7px] xl:p-[10px] flex justify-between">
           <div className="space-y-1">
-            <p className="text-[#242424] text-[12px] x:text-lg not-italic font-semibold leading-[normal] capitalize">
+            <p className="text-[#242424] text-[12px] sm:text-lg not-italic font-semibold leading-[normal] capitalize">
               {item.propTypeName === "Plot" && `${item.pa} sq.ft`}{" "}
               {item.bhkName} {item.propTypeName} for {item.category} in{" "}
               {item.localityName}
@@ -115,8 +115,9 @@ export default function ListingCard({ item, sl }: Props) {
               <>
                 <DownSectionCard
                   label="Super Builtup Area"
-                  value={`${item.sba} sq.ft`}
+                  value={`${formatNumberWithSuffix(item.sba)} sq.ft`}
                 />
+                {}
                 <Divider orientation="vertical" color="#7BA0BB" />
                 <DownSectionCard
                   label="Carpet Area"
@@ -183,7 +184,7 @@ const DownSectionCard = ({
 }) => {
   return (
     <div className="flex flex-col justify-center items-start ">
-      <p className="text-[#001F35] text-[10px] not-italic font-medium">
+      <p className="text-[#001F35] text-[10px] sm:text-[12px] not-italic font-medium">
         {label}:
       </p>
       <p className="text-[#242424] text-[10px] xl:text-[12px] not-italic font-semibold">
