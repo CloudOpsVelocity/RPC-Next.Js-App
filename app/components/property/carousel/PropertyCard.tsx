@@ -79,7 +79,7 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
   const isMobile = useMediaQuery("(max-width: 601px)");
   const redirect = (propId: string) => {
     event?.preventDefault();
-    window.open(`/abc/karnataka/banglore/${propId}`, "_blank");
+    window.open(`/listing/banglore/${propId}`, "_blank");
   };
 
   return (

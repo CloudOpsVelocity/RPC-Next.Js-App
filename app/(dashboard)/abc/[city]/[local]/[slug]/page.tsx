@@ -111,7 +111,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
       <meta property="og:type" content="website" />
       <meta
         property="og:title"
-        content={`${data.projectName} ${data.availableProperties.join(
+        content={`${data.projectName} ${data.availableProperties?.join(
           " "
         )} for sale in ${data.localityName} ${data.cityName}`}
       />
@@ -119,7 +119,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         property="og:description"
         content={`${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`}
       />
-      <meta property="og:image" content={data.media.coverImageUrl} />
+      <meta property="og:image" content={data.media?.coverImageUrl} />
 
       {/* <!-- Twitter Meta Tags --> */}
       <meta name="twitter:card" content="summary_large_image" />
@@ -130,7 +130,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
       />
       <meta
         name="twitter:title"
-        content={`${data.projectName} ${data.availableProperties.join(
+        content={`${data.projectName} ${data.availableProperties?.join(
           " "
         )} for sale in ${data.localityName} ${data.cityName}`}
       />
@@ -138,12 +138,12 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         name="twitter:description"
         content={`${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`}
       />
-      <meta name="twitter:image" content={data.media.coverImageUrl}></meta>
+      <meta name="twitter:image" content={data.media?.coverImageUrl}></meta>
       <FAQJsonLdScript data={data} />
       <QAJsonLdScript data={data} />
       <PropertyJsonLdScript data={data} />
       <ArticleJsonLdScript data={data} />
-      <div className="mt-[70px] sm:mt-[70px] w-full sm:pb-[2%] flex items-center justify-center flex-col ">
+      <div className="mt-[70px] sm:mt-[90px] w-full sm:pb-[2%] flex xl:text-ellipsis items-center justify-center flex-col ">
         <div className="p-[1%] sm:p-[1%] sm:py-0 xl:p-[1%] w-full sm:w-[94%]">
           <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%]">
             <span>Home</span> {" > "}

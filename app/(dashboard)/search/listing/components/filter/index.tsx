@@ -38,9 +38,12 @@ const SearchDrawerHeader = ({
   return (
     <div className="sm:m-[2%] w-full flex  sm:pl-[2%] gap-[20px] justify-start   relative flex-wrap">
       <p className="text-[16px] text-[#737579] font-[500] mt-3">
-        <span>Home</span> {" > "}
+        <span className="text-[14px] md:text-[16px] text-[#4D6677] font-[600] cursor-pointer">
+          Home
+        </span>{" "}
+        {" > "}
         <Link href={"/project/banglore"}>
-          <span className="text-[14px] md:text-[16px] text-[#4D6677] font-[600]">
+          <span className="text-[14px] md:text-[16px] text-[#4D6677] font-[600] cursor-pointer">
             {DynamicText({
               cg: params.cg as string,
               listedBy: params.listedBy,
@@ -110,7 +113,7 @@ const SearchDrawerHeader = ({
             placeholder={
               filters.locality.length > 0
                 ? "Add More"
-                : "Enter Locality & Project"
+                : "Enter Locality, Project"
             }
             value={name ?? ""}
             onChange={(e) => onSearchChange(e.target.value)}

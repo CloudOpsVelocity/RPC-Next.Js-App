@@ -102,9 +102,12 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
   return (
     <div className="m-[2%] w-full flex mt-[100px] pl-[1%] xl:pl-[2%] gap-1 xl:gap-2 sm:gap-[10px] flex-wrap sm:flex-wrap xl:flex-nowrap justify-start sm:justify-start items-start sm:items-center ">
       <p className="text-[14px] md:text-[16px] text-[#737579] font-[500] w-full md:w-auto">
-        <Link href={"/"}>Home</Link> {" > "}
+        <span className="text-[16px] text-[#737579] font-[500] mt-3">
+          {" "}
+          <a href={"/"}>Home</a> {" > "}
+        </span>
         <span>
-          <span className="text-[14px] md:text-[16px] text-[#4D6677] font-[600]">
+          <span className="text-[14px] md:text-[16px] text-[#4D6677] font-[600] cursor-pointer">
             {DynamicText({
               cg: params.cg as string,
               listedBy: params.listedBy,
@@ -167,7 +170,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
           {filters.locality?.length > 0 ? (
             <p onClick={open}>Add more</p>
           ) : (
-            <p onClick={open}>Enter Locality & Project</p>
+            <p onClick={open}>Enter Locality, Project</p>
           )}
         </div>
 

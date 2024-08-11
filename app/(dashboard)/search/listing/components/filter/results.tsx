@@ -93,7 +93,7 @@ export default function Results() {
                   onClick={() =>
                     handleAddSearch(`${locality.name}+${locality.id}`)
                   }
-                  className="text-[#737579] text-[12px] sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
+                  className="text-[14px] md:text-[16px] text-[#4D6677] font-[600] cursor-pointer"
                   key={locality.id}
                 >
                   {locality.name}
@@ -164,7 +164,7 @@ export default function Results() {
                       id: builder.id,
                     })
                   }
-                  className="text-[#737579] text-[12px] sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
+                  className="text-[14px] md:text-[16px] text-[#4D6677] font-[600] cursor-pointer"
                   key={builder.id}
                 >
                   {builder.name}
