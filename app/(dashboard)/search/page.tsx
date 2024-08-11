@@ -10,7 +10,6 @@ const SearchingPage = ({ searchParams }: Props) => {
   return (
     <div className="w-full flex justify-center items-center flex-col ">
       <Header />
-
       <SearchAndFilterCon />
       <div className=" w-[100%] mx-2  xl:m-0 flex justify-center flex-wrap-reverse sm:flex-nowrap">
         <LeftSideBlock />

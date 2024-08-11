@@ -60,38 +60,27 @@ const HomeSearch = () => {
               {config.homeIcon}{" "}
               <div className="text-nowrap">All Residential</div>
             </div>
-
-            {/* bengalure drop down */}
-            {/* <span className="hidden sm:block ">
-              <CityDropdown />
-            </span> */}
             <p className="text-[#242424] text-[10px] sm:text-[14px] not-italic font-[600] hidden sm:flex items-center gap-0.5 p-1 bg-[#ECF0F3] ">
               Bangalore
             </p>
 
             <div className="flex justify-between items-center gap-[10px] w-full">
-              {isMobile ? (
-                <Target />
-              ) : (
-                <div className="hidden sm:flex items-center w-full ">
-                  {config.searchIcon} <SearchSec />
-                </div>
-              )}
-              {!isMobile && (
-                <div className="hidden sm:flex gap-2">
-                  <Nearme />
+              <div className="flex items-center w-full ">
+                {config.searchIcon} <SearchSec />
+              </div>
+              <div className="flex gap-2">
+                <Nearme />
 
-                  <div
-                    onClick={handleSearch}
-                    className={`hidden sm:flex justify-center items-center rounded-[4px] py-[4px] px-[14px] sm:px-[6px] xl:py-[6px] xl:px-[16px] text-[12px] sm:text-[14px] text-white xl:text-[16px] font-bold bg-[#0073c6]`}
-                  >
-                    {isMobileStarting ? config.searchBtnIcon : "Search"}
-                  </div>
+                <div
+                  onClick={handleSearch}
+                  className={`flex justify-center items-center rounded-[4px] py-[4px] px-[14px] sm:px-[6px] xl:py-[6px] xl:px-[16px] text-[12px] sm:text-[14px] text-white xl:text-[16px] font-bold bg-[#0073c6]`}
+                >
+                  {isMobileStarting ? config.searchBtnIcon : "Search"}
                 </div>
-              )}
+              </div>
             </div>
           </div>
-          {!isMobile && f.showFilter && <QuickFilters />}
+          {f.showFilter && <QuickFilters />}
         </div>
         <div className="mt-4">
           <p className="text-[#242424] text-[12px] sm:text-[16px] xl:text-xl not-italic font-medium leading-[normal] ">
@@ -134,6 +123,7 @@ const config = {
       height="24"
       viewBox="0 0 24 24"
       fill="none"
+      className="hidden sm:block"
     >
       <path
         d="M20.0313 20.7901C20.4913 21.2501 21.2013 20.5401 20.7413 20.0901L16.9913 16.3301C18.3071 14.8748 19.0343 12.982 19.0313 11.0201C19.0313 6.63006 15.4613 3.06006 11.0713 3.06006C6.68133 3.06006 3.11133 6.63006 3.11133 11.0201C3.11133 15.4101 6.68133 18.9801 11.0713 18.9801C13.0513 18.9801 14.8813 18.2501 16.2813 17.0401L20.0313 20.7901ZM4.11033 11.0201C4.11033 7.18006 7.24033 4.06006 11.0703 4.06006C14.9103 4.06006 18.0303 7.18006 18.0303 11.0201C18.0303 14.8601 14.9103 17.9801 11.0703 17.9801C7.24033 17.9801 4.11033 14.8601 4.11033 11.0201Z"
