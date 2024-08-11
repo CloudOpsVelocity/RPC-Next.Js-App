@@ -99,7 +99,11 @@ const MainBox = ({ data, refetch, index, mutate }: Props) => {
   };
   console.log(data)
   const onClickRedirect = (projEncId: string) => {
-    window.open(`/abc/karnataka/banglore/${projEncId}`, "_blank");
+    if(data.type == "proj"){
+      window.open(`/abc/karnataka/banglore/${projEncId}`, "_blank");
+    }else{
+      window.open(`/listing/banglore/${projEncId}`, "_blank");
+    }
   };
  
   const isMobile = useMediaQuery("(max-width: 1600px)");

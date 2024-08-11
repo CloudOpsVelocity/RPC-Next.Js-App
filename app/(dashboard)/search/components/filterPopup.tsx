@@ -327,7 +327,6 @@ const FilterPopup = () => {
             Amenities
           </h3>
           <div className="flex  mb-[3%] justify-start items-center gap-[4%] flex-wrap ">
-            <Checkbox label="Lift" color="green" />
             {SEARCH_FILTER_DATA.amenities.map((i, ind) => {
               return (
                 <Checkbox
@@ -379,6 +378,20 @@ const FilterPopup = () => {
             onClick={() => handleBooleanCheck()}
             checked={filters.reraVerified === true}
           />
+         {/*   <div className="flex  mb-[3%] justify-start items-center gap-[4%] flex-wrap ">
+            {SEARCH_FILTER_DATA.rerastatus.map((i, ind) => {
+              return (
+                <Checkbox
+                  className="my-2"
+                  key={i.cid}
+                  label={i.constDesc}
+                  color="green"
+                  onClick={() => handleCheckboxClick("reraVerified", i.cid)}
+                  checked={filters.rerastatus.includes(i.cid)}
+                />
+              );
+            })}
+          </div> */}
 
           {/* <h3 className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] ">
             Listed By

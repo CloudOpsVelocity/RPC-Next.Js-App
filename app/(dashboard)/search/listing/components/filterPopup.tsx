@@ -274,6 +274,7 @@ const FilterPopup = () => {
               {SEARCH_FILTER_DATA.facing.map((x, i) => {
                   return (
                     <Checkbox
+                    className="my-1"
                       key={i}
                       label={x.constDesc}
                       color="green"

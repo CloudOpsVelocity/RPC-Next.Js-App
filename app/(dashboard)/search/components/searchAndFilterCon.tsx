@@ -68,13 +68,13 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
     setShowAllLocalities(true);
     open();
   };
-
+console.log(filters)
   return (
-    <div className="m-[2%] w-full flex mt-[100px] pl-[1%] xl:pl-[2%] gap-1 xl:gap-2 sm:gap-[10px] flex-wrap sm:flex-wrap xl:flex-nowrap justify-start xl:justify-start items-start xl:items-center ">
+    <div className="m-[2%] w-full flex mt-[60px] sm:mt-[100px] pl-[1%] xl:pl-[2%] gap-1 xl:gap-2 sm:gap-[10px] flex-wrap sm:flex-wrap xl:flex-nowrap justify-start xl:justify-start items-start xl:items-center ">
       <p className="text-[14px] xl:text-[16px] text-[#737579] font-[500] mt-2 mb-2 sm:mb-0 sm:mt-0 w-full md:w-auto">
-        <Link href={"/"}>Home</Link> {" > "}
-        <span>
-          <span className="text-[14px] md:text-[16px] text-[#4D6677] font-[600]">
+      <span  className="text-[16px] text-[#737579] font-[500] mt-3"> <a   href={"/"}>Home</a> {" > "}</span>
+      <span>
+          <span className="text-[14px] md:text-[16px] text-[#4D6677] font-[600] cursor-pointer">
             {DynamicText({
               cg: params.cg as string,
               listedBy: params.listedBy,
@@ -84,7 +84,8 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
       </p>
 
       <div className=" border-[#A0D7FF] max-w-full flex flex-wrap rounded-[20px] sm:rounded-[40px] p-2 gap-2 xl:gap-[8px] pl-2 xl:pl-[8px] border-[1px] border-solid flex items-center justify-center ">
-        <BuyRent />
+        {filters.listedBy != "proj" && filters.listedBy != null ?  <BuyRent /> : "" }
+       
 
         {filters.locality?.map(
           (each, index) =>
@@ -122,7 +123,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
         {filters.locality?.length > 0 ? (
           <p onClick={open}>Add more</p>
         ) : (
-          <p onClick={open}>Enter Locality & Project</p>
+          <p onClick={open}>Enter Locality, Project</p>
         )}
       </div>
       <div>

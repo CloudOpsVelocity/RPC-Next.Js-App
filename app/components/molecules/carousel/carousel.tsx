@@ -79,10 +79,17 @@ export function ProjectCard({ type, cardData }: CardProps) {
       openS();
     }
   };
+  const link = type === "proj" || type == null
+  ? `/abc/karnataka/banglore/${reqId}`
+  : `/listing/banglore/${reqId}`;
+
+
+
   return (
     <>
       <a
-       href={`/abc/karnataka/banglore/${reqId}`}
+       href={link}
+
         target="_blank"
         key={reqId}
         className={clsx(
@@ -95,7 +102,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
             <a
               target="_blank"
               className="tracking-tight text-[18px] font-[600] text-wrap text-[#565D70] cursor-pointer"
-              href={`/abc/karnataka/banglore/${reqId}`}
+              href={link}
             >
               {cardData?.projName}
             </a>

@@ -163,7 +163,7 @@ export default function Overview({
         buiderName={postedByName}
         builderId={builderId}
         basePrice={basePrice}
-        brocherUrl={media.projBroucherUrl}
+        brocherUrl={media?.projBroucherUrl}
       />
     </div>
   );
