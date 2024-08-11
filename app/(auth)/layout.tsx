@@ -1,6 +1,7 @@
 import { Toaster } from "react-hot-toast";
 import Logo from "../components/atoms/Logo";
 import data from "../data/auth";
+import "./root.css";
 import { TbBuilding } from "react-icons/tb";
 import Link from "next/link";
 export default function Layout({ children }: { children: React.ReactNode }) {

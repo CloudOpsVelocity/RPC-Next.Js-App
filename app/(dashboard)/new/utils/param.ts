@@ -31,8 +31,8 @@ function toQueryParams(params: QueryParams): string {
           value[1] === DEFAULT_BUGDET_VALUE[1]
         )
       ) {
-        queryEntries.push(`min=${encodeURIComponent(String(value[0]))}`);
-        queryEntries.push(`max=${encodeURIComponent(String(value[1]))}`);
+        queryEntries.push(`minPrice=${encodeURIComponent(String(value[0]))}`);
+        queryEntries.push(`maxPrice=${encodeURIComponent(String(value[1]))}`);
       }
       continue; // Skip the original bugdetValue entry
     }
