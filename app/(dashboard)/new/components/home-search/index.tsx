@@ -21,7 +21,8 @@ const propertyTypes = ["Buy", "Rent"];
 const HomeSearch = () => {
   const f = useAtomValue(homeSearchFiltersAtom);
   const handleSearch = () => {
-    window.open(`/search?${toQueryParams(f)}`, "_blank");
+    const whichPage = f.propType === 36 ? "/search/listing" : "/search";
+    window.open(`${whichPage}?${toQueryParams(f)}`, "_blank");
   };
   const isMobile = useMediaQuery("(max-width: 641px)");
   const isMobileStarting = useMediaQuery("(max-width: 760px)");
@@ -82,8 +83,6 @@ const HomeSearch = () => {
 
                   <div
                     onClick={handleSearch}
-                    // href={`/search?${handleSearch()}`}
-                    // target="_blank"
                     className={`hidden sm:flex justify-center items-center rounded-[4px] py-[4px] px-[14px] sm:px-[6px] xl:py-[6px] xl:px-[16px] text-[12px] sm:text-[14px] text-white xl:text-[16px] font-bold bg-[#0073c6]`}
                   >
                     {isMobileStarting ? config.searchBtnIcon : "Search"}

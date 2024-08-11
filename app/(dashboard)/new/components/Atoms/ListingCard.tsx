@@ -19,7 +19,6 @@ export default function ListingCard({ item, sl }: Props) {
   const title = `${item.propTypeName === "Plot" ? `${item.pa} sq.ft` : ""} ${
     item.bhkName
   } ${item.propTypeName} for ${item.category} in ${item.localityName}`;
-
   return (
     <div className="w-full sm:w-[316px] xl:w-[490px]">
       <div className="h-[137px] sm:h-[145px] xl:h-[228px]   mb-[6px] shrink-0 shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] relative">

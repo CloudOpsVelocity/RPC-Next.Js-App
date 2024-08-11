@@ -11,7 +11,7 @@ type Props = {};
 export default function SearchSec({}: Props) {
   const [f, dispatch] = useAtom(homeSearchFiltersAtom);
   const { onSearchChange, debounced, name } = useQsearch();
-  const isTab = useMediaQuery('(max-width: 1600px)');
+  const isTab = useMediaQuery("(max-width: 1600px)");
 
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
@@ -30,7 +30,11 @@ export default function SearchSec({}: Props) {
       }}
     >
       <Combobox.Target>
-        <PillsInput classNames={{ input: classes.homePageSearch }} size={isTab ? "xs" : "md"} w={"100%"}>
+        <PillsInput
+          classNames={{ input: classes.homePageSearch }}
+          size={isTab ? "xs" : "md"}
+          w={"100%"}
+        >
           <Pill.Group>
             {f.city && (
               <Pill
@@ -38,42 +42,46 @@ export default function SearchSec({}: Props) {
                 withRemoveButton
                 classNames={{ root: classes.MultiSelectionPill }}
                 onRemove={() => dispatch({ type: "REMOVE_CITY" })}
-                style={{ display:"flex", alignItems:"center", flexWrap:"nowrap" }}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  flexWrap: "nowrap",
+                }}
               >
                 {f.city.split("+")[0]}
               </Pill>
             )}
-            {f.locality?.map((each, index) => (
-              index < (isTab ? 1 : 2) &&
+            {f.locality?.map(
+              (each, index) =>
+                index < (isTab ? 1 : 10) && (
+                  <Pill
+                    className="capitalize !text-[12px] !sm:text-[14px]"
+                    onRemove={() =>
+                      dispatch({ type: "REMOVE_LOCALITY", payload: each })
+                    }
+                    key={index}
+                    withRemoveButton
+                    classNames={{ root: classes.MultiSelectionPill }}
+                  >
+                    {each.split("+")[0]}
+                  </Pill>
+                )
+            )}
+
+            {f.locality?.length > (isTab ? 1 : 10) && (
               <Pill
                 className="capitalize !text-[12px] !sm:text-[14px]"
-                onRemove={() =>
-                  dispatch({ type: "REMOVE_LOCALITY", payload: each })
-                }
-                key={index}
-                withRemoveButton
                 classNames={{ root: classes.MultiSelectionPill }}
               >
-                {each.split("+")[0]}
+                {`+${f.locality?.length - (isTab ? 1 : 2)} More`}
               </Pill>
-            ))
-            }
-
-            {f.locality?.length > (isTab ? 1 : 2) &&
-            <Pill
-                className="capitalize !text-[12px] !sm:text-[14px]"
-                classNames={{ root: classes.MultiSelectionPill }}
-              >
-                {`+${(f.locality?.length - (isTab ? 1 : 2))} More`}
-            </Pill>
-            }
-
+            )}
           </Pill.Group>{" "}
           <PillsInput.Field
             placeholder={
               f.locality.length > 0
                 ? "Add More"
-                : "Search “ Locality, Project, Listings.....”"
+                : "Enter Locality, Project, Listing"
             }
             onClick={handleFieldClick}
             value={name ?? ""}

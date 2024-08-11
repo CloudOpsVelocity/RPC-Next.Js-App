@@ -34,26 +34,28 @@ export function BasicSelect() {
 
   const options = keys
     .filter((item) => !(f.cg === "R" && item === "Plot"))
-    .map((item) => (
-      <Combobox.Option
-        value={item}
-        classNames={{
-          option: styles.option,
-        }}
-      >
-        <Radio
-          checked={
-            value ===
-            parseDataProjectProps[
-              item.toLocaleLowerCase() as keyof typeof parseDataProjectProps
-            ]
-          }
-          color="green"
-          mr={6}
-        />{" "}
-        <span className="capitalize">{item}</span>
-      </Combobox.Option>
-    ));
+    .map((item) =>
+      item === "Plot" && f.bhk.length > 0 ? null : (
+        <Combobox.Option
+          value={item}
+          classNames={{
+            option: styles.option,
+          }}
+        >
+          <Radio
+            checked={
+              value ===
+              parseDataProjectProps[
+                item.toLocaleLowerCase() as keyof typeof parseDataProjectProps
+              ]
+            }
+            color="green"
+            mr={6}
+          />{" "}
+          <span className="capitalize">{item}</span>
+        </Combobox.Option>
+      )
+    );
 
   return (
     <Combobox

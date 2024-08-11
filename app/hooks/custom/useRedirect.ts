@@ -51,7 +51,6 @@ export function getQueryParamForPath(path: string): string | null {
   // Iterate through pathConfig, assuming it's pre-sorted with specific paths first
   for (const key in pathConfig) {
     const { pathPrefix, paramName } = pathConfig[key as PathConfigKey];
-    console.log(path, pathPrefix);
     // Check if the path starts with the current pathPrefix and it's an exact match or more specific
     if (path === pathPrefix && path.startsWith(pathPrefix)) {
       const segments = path.split("/");
