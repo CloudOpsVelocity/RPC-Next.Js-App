@@ -27,6 +27,7 @@ import { getData } from "@/app/utils/api/search";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import { toFormattedString } from "../../components/buget/budget";
+import { MainSearchMultiSelect } from "../../components/_ui/Multiselect";
 
 const FilterPopup = () => {
   const path = usePathname();
@@ -110,18 +111,23 @@ const FilterPopup = () => {
           className="w-full pt-[1%] sm:pl-[2%]    "
           viewportRef={viewport}
         >
+          <h3
+            className=" text-[#202020] mb-[1%] text-[14px] font-[600] "
+            id="Search"
+          >
+            Search By City, Locality, Projects
+          </h3>
+          <MainSearchMultiSelect type="listing" />
           {filters?.propTypes != projectprops.plot && (
-            
             <>
               <h3
                 className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
                 id="Unit Type"
-                >
+              >
                 BHK
               </h3>
               <div className="flex  mb-[3%] justify-start items-center  gap-[4%] flex-wrap ">
                 {SEARCH_FILTER_DATA.bhkDetails.map((eachStatus, index) => {
-                  
                   return (
                     <Checkbox
                       className="my-2"
@@ -167,7 +173,7 @@ const FilterPopup = () => {
           </h3>
           <div className="flex  mb-[3%] justify-start items-center  gap-[4%] flex-wrap ">
             {propKeys.map((keyName, i) => {
-               if (keyName === 32 && filters.unitTypes.length > 0) {
+              if (keyName === 32 && filters.unitTypes.length > 0) {
                 return null;
               }
               return (
@@ -192,7 +198,7 @@ const FilterPopup = () => {
             })}
           </div>
           <h3
-              className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
+            className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
             id="Posted By"
           >
             Posted By
@@ -216,8 +222,8 @@ const FilterPopup = () => {
           </div>
 
           <h3
-                className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
-                id="Locality"
+            className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
+            id="Locality"
           >
             Locality
           </h3>
@@ -271,10 +277,10 @@ const FilterPopup = () => {
                 Facing
               </h3>
               <div className="flex  mb-[3%] justify-start items-center  gap-[4%] flex-wrap ">
-              {SEARCH_FILTER_DATA.facing.map((x, i) => {
+                {SEARCH_FILTER_DATA.facing.map((x, i) => {
                   return (
                     <Checkbox
-                    className="my-1"
+                      className="my-1"
                       key={i}
                       label={x.constDesc}
                       color="green"
@@ -311,8 +317,8 @@ const FilterPopup = () => {
             </React.Fragment>
           )}
           <h3
-                className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
-                id="Budget"
+            className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
+            id="Budget"
           >
             Budget
           </h3>
@@ -362,8 +368,8 @@ const FilterPopup = () => {
           />
 
           <h3
-                className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
-                id="Photos & Videos"
+            className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
+            id="Photos & Videos"
           >
             Photos & Videos
           </h3>
@@ -386,8 +392,8 @@ const FilterPopup = () => {
           </div>
           <React.Fragment>
             <h3
-                className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
-                id="Furnishing"
+              className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
+              id="Furnishing"
             >
               Furnishing
             </h3>
@@ -410,8 +416,8 @@ const FilterPopup = () => {
             </div>
           </React.Fragment>
           <h3
-                className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
-                id="Amenities"
+            className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
+            id="Amenities"
           >
             Amenities
           </h3>

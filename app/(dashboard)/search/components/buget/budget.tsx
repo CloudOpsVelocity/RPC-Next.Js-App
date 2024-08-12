@@ -126,7 +126,7 @@ export function BasicBudgetSelect() {
   const [minValue, maxValue] = f.bugdetValue;
   const isTab = useMediaQuery("(max-width: 1600px)");
 
-  const [focusedInput, setFocusedInput] = useState<"min" | "max" | null>(null);
+  const [focusedInput, setFocusedInput] = useState<"min" | "max" | null>("min");
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
   });

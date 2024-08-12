@@ -76,21 +76,33 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
     setShowAllLocalities(true);
     open();
   };
-  const values = filters.unitTypes.map((itemId) => {
+  const maxDisplay = 3;
+
+  const values = filters.unitTypes.map((itemId, i) => {
     const selectedItem = SEARCH_FILTER_DATA.bhkDetails.find(
       (item) => item.value === itemId
     );
     if (selectedItem) {
-      return <span>{selectedItem.title},</span>;
+      // Check if the item is within the first `maxDisplay` items or if it's the last item when more than `maxDisplay` items are present
+      return (
+        <React.Fragment key={itemId}>
+          {i < maxDisplay ? selectedItem.title : ""}
+          {i < maxDisplay - 1 && ", "}
+          {i === maxDisplay - 1 && filters.unitTypes.length > maxDisplay
+            ? " ..."
+            : ""}
+        </React.Fragment>
+      );
     }
     return null;
   });
+
   const shouldShowBudget = !(
     (filters.bugdetValue[0] === 500000 &&
       filters.bugdetValue[1] === 600000000) ||
     (filters.bugdetValue[0] === 0 && filters.bugdetValue[1] === 100000)
   );
-
+  const allFiltersMap = [...filters.locality, ...filters.builderIds];
   return (
     <div className="mb-4 w-full  mt-[60px] sm:mt-[80px] pl-[1%]   ">
       <p className="text-[12px]  text-[#737579] font-[500] mt-2 mb-2 sm:mb-0  w-full md:w-auto">
@@ -120,7 +132,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
               ""
             )}
 
-            {filters.locality?.map(
+            {allFiltersMap?.map(
               (each, index) =>
                 index < (isTab ? 1 : 2) && (
                   <Pill
@@ -144,7 +156,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
                   </Pill>
                 )
             )}
-            {filters.locality?.length > (isTab ? 1 : 2) && (
+            {allFiltersMap?.length > (isTab ? 1 : 2) && (
               <Pill
                 className="capitalize"
                 classNames={{ root: classes.MultiSelectionPill }}
@@ -152,10 +164,10 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
                   isMobile ? openMobileSearchDrawer() : showpopUp()
                 }
               >
-                {`+${filters.locality?.length - (isTab ? 1 : 2)} More`}
+                {`+${allFiltersMap?.length - (isTab ? 1 : 2)} More`}
               </Pill>
             )}
-            {filters.locality?.length > 0 ? (
+            {allFiltersMap?.length > 0 ? (
               <p onClick={isMobile ? openMobileSearchDrawer : open}>Add more</p>
             ) : (
               <p onClick={isMobile ? openMobileSearchDrawer : open}>
@@ -189,12 +201,17 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
                     ""
                   )}
 
-                  {filters.locality?.map(
+                  {allFiltersMap?.map(
                     (each, index) =>
                       index < (isTab ? 1 : 2) && (
                         <Pill
                           onRemove={() => {
-                            remnoveSearchOptions(each, "locality");
+                            remnoveSearchOptions(
+                              each,
+                              filters.builderIds.includes(each)
+                                ? "builderIds"
+                                : "locality"
+                            );
                             handleAppliedFilters();
                           }}
                           key={index}
@@ -213,15 +230,15 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
                         </Pill>
                       )
                   )}
-                  {filters.locality?.length > (isTab ? 1 : 2) && (
+                  {allFiltersMap?.length > (isTab ? 1 : 2) && (
                     <Pill
                       className="capitalize"
                       classNames={{ root: classes.MultiSelectionPill }}
                     >
-                      {`+${filters.locality?.length - (isTab ? 1 : 2)} More`}
+                      {`+${allFiltersMap?.length - (isTab ? 1 : 2)} More`}
                     </Pill>
                   )}
-                  {filters.locality?.length > 0 ? (
+                  {allFiltersMap?.length > 0 ? (
                     <p>Add more</p>
                   ) : (
                     <p>Search By City, Locality, Projects</p>

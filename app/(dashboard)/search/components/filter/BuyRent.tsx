@@ -46,6 +46,7 @@ export default function BuyRent() {
         option: classes.buyrentoptions,
         dropdown: classes.dropdown,
       }}
+      onClick={(e) => e.stopPropagation()}
       defaultValue={"S"}
       rightSection={<DropDownIcon />}
       size="xs"

@@ -33,7 +33,7 @@ function SearchDrawer({ close, open, opened }: Props) {
       </Drawer>
 
       <button
-        className=" text-[#0073C6] mr-[5%] md:m-0 text-[12px] xl:text-[20px] font-[500] gap-[3px] p-[3px] xl:gap-[6px] xl:p-[7px] pl-[12px] pr-[12px] flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md hidden"
+        className=" text-[#0073C6] mr-[5%] md:m-0 text-[12px] xl:text-[20px] font-[500] gap-[3px] p-[3px] xl:gap-[6px] xl:p-[7px] pl-[12px] pr-[12px]  justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md hidden"
         onClick={open}
       >
         <div className="text-[#FFF] bg-[#148B16] rounded-[50%] text-[12px] xl:text-[16px] font-[700] w-[24px] h-[24px] flex justify-center items-center">

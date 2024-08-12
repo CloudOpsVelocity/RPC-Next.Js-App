@@ -1,4 +1,5 @@
 export const searchDetails = [
+  "Search",
   "Project Status",
   "Locality",
   "Property Type",

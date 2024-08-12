@@ -11,7 +11,7 @@ import useQsearch from "@/app/hooks/search/useQsearch";
 import useSearchFilters from "@/app/hooks/search";
 import toast from "react-hot-toast";
 
-export function MainSearchMultiSelect() {
+export function MainSearchMultiSelect({ type }: { type: string }) {
   const {
     data: searchData,
     isLoading,
