@@ -136,11 +136,11 @@ export function MainSearchMultiSelect() {
           <Combobox.Option
             value={`${item.name}+${item.id}`}
             key={item.id}
-            // active={true}
+            active={value.includes(`${item.name}+${item.id}`)}
             onClick={() => handlePush(group.group, item)}
           >
             <Group gap="sm">
-              {value.includes(`${group.group}+${item.type}`) ? (
+              {value.includes(`${item.name}+${item.id}`) ? (
                 <CheckIcon size={12} />
               ) : null}
               <span>
