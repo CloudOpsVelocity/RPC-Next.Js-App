@@ -137,65 +137,6 @@ const FilterPopup = () => {
             Search By City, Locality, Projects
           </h3>
           <MainSearchMultiSelect />
-          {/* <h3
-            className=" text-[#202020] mb-[1%] text-[14px] font-[600] "
-            id="Project Status"
-          >
-            Search By City, Locality, Projects
-          </h3>
-          <MultiSelect
-            searchable
-            placeholder="Search"
-            style={{ width: "60%" }}
-            rightSection={<DropDownIcon />}
-            comboboxProps={{ withinPortal: false }}
-            data={[
-              {
-                group: "Locality",
-                items:
-                  localities?.map((item: any, i: number) => {
-                    return { value: `${item.id}+${i}`, label: item.name };
-                  }) ?? [],
-              },
-              {
-                group: "Projects",
-                items:
-                  projects?.map((item: any, i: number) => {
-                    return { value: `${item.id}+${i}`, label: item.name };
-                  }) ?? [],
-              },
-              {
-                group: "Listings",
-                items:
-                  listings?.map((item: any, i: number) => {
-                    return { value: `${item.id}+${i}`, label: item.name };
-                  }) ?? [],
-              },
-              {
-                group: "Project Listings",
-                items:
-                  projectListing?.map((item: any, i: number) => {
-                    return {
-                      value: `${item.id}+${item.type}`,
-                      label: item.name,
-                    };
-                  }) ?? [],
-              },
-              {
-                group: "Builders",
-                items:
-                  builders?.map((item: any, i: number) => {
-                    return { value: `${item.id}+${i}`, label: item.name };
-                  }) ?? [],
-              },
-            ]}
-            onSearchChange={(e) => onSearchChange(e)}
-            onChange={(e) => console.log(e)}
-            searchValue={name ?? ""}
-            mb={"2%"}
-            withScrollArea={false}
-            styles={{ dropdown: { maxHeight: 200, overflowY: "auto" } }}
-          /> */}
           <h3
             className=" text-[#202020] mb-[1%] text-[14px] font-[600] "
             id="Project Status"

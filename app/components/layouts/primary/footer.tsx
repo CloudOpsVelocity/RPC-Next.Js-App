@@ -140,7 +140,15 @@ export default function Footer({}: Props) {
 
       <div className="w-full flex justify-between items-start flex-wrap">
         <p className=" top-[443px] left-[104px] [font-family:'Montserrat-Medium',Helvetica] font-medium text-[#242424] text-[14px] sm:text-[16px] xl:text-[18px] tracking-[0] leading-[27px] whitespace-nowrap">
-          Copyright @getrightproperty
+          Copyright @getrightproperty <br />
+          <span>
+            All Rights Reserved <br />A PRODUCT BY "
+            <a href="https://rpclan.com/" target="_blank">
+              {" "}
+              RPCLAN SERVICES PVT.LTD
+            </a>
+            "
+          </span>
         </p>
 
         <div className="flex items-start gap-[31px] flex-wrap">

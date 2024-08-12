@@ -8,6 +8,8 @@ import {
   useCombobox,
 } from "@mantine/core";
 import useQsearch from "@/app/hooks/search/useQsearch";
+import useSearchFilters from "@/app/hooks/search";
+import toast from "react-hot-toast";
 
 export function MainSearchMultiSelect() {
   const {
@@ -19,6 +21,8 @@ export function MainSearchMultiSelect() {
     name,
   } = useQsearch();
 
+  const { filters, setFilters, remnoveSearchOptions } = useSearchFilters();
+  const value = [...filters.locality, ...filters.builderIds];
   const {
     localities,
     builders,
@@ -33,23 +37,65 @@ export function MainSearchMultiSelect() {
   });
 
   const [search, setSearch] = useState("");
-  const [value, setValue] = useState<string[]>([]);
+  const handleAddSearch = (newItem: string) => {
+    if (!filters.locality.includes(newItem)) {
+      setFilters((prevFilters) => ({
+        ...prevFilters,
+        locality: [...prevFilters.locality, newItem],
+      }));
+      handleResetQuery();
+    } else {
+      toast.error("The locality already exists.");
+    }
+  };
 
-  const handleValueSelect = (val: string) =>
-    setValue((current) =>
-      current.includes(val)
-        ? current.filter((v) => v !== val)
-        : [...current, val]
+  const handlePush = async (type: string, data: any) => {
+    switch (type) {
+      case "Locality":
+        handleAddSearch(`${data.name}+${data.id}`);
+        break;
+      case "Projects":
+        window.open(`/abc/delhi/palika/${data.id}`);
+        break;
+      case "Listings":
+        {
+          const [ut, pt, cg, lt] = data.id.split("_");
+          const url = `propTypes=${pt}&unitTypes=${ut}&cgs=${cg}&localities=${data.name}%2B${lt}`;
+          window.open("/search/listing?" + url);
+        }
+        break;
+      case "Project Listings":
+        {
+          const url = `projIdEnc=${data.id}&listedBy=${data.type.split("")[0]}`;
+          window.open("/search/listing?" + url);
+        }
+        break;
+      case "Builders":
+        setFilters((prevFilters) => ({
+          ...prevFilters,
+          builderIds: [...prevFilters.builderIds, `${data.name}+${data.id}`],
+        }));
+        handleResetQuery();
+        break;
+      default:
+        break;
+    }
+  };
+  const values = [...filters.locality, ...filters.builderIds].map((item) => {
+    const isBuilder = filters.builderIds.includes(item);
+
+    return (
+      <Pill
+        key={item}
+        withRemoveButton
+        onRemove={() =>
+          remnoveSearchOptions(item, isBuilder ? "builderIds" : "locality")
+        }
+      >
+        {item.split("+")[0]}
+      </Pill>
     );
-
-  const handleValueRemove = (val: string) =>
-    setValue((current) => current.filter((v) => v !== val));
-
-  const values = value.map((item) => (
-    <Pill key={item} withRemoveButton onRemove={() => handleValueRemove(item)}>
-      {item}
-    </Pill>
-  ));
+  });
 
   // Create a flat list of groups and items
   const data = [
@@ -91,9 +137,10 @@ export function MainSearchMultiSelect() {
             value={`${item.id}+${item.type}`}
             key={item.id}
             active={value.includes(`${item.id}+${item.type}`)}
+            onClick={() => handlePush(group.group, item)}
           >
             <Group gap="sm">
-              {value.includes(`${item.id}+${item.type}`) ? (
+              {value.includes(`${group.group}+${item.type}`) ? (
                 <CheckIcon size={12} />
               ) : null}
               <span>
@@ -111,11 +158,7 @@ export function MainSearchMultiSelect() {
   }, [search, onSearchChange]);
 
   return (
-    <Combobox
-      store={combobox}
-      onOptionSubmit={handleValueSelect}
-      withinPortal={false}
-    >
+    <Combobox store={combobox} withinPortal={false}>
       <Combobox.DropdownTarget>
         <PillsInput onClick={() => combobox.openDropdown()} mb="3%" maw="60%">
           <Pill.Group>
@@ -134,7 +177,7 @@ export function MainSearchMultiSelect() {
                 onKeyDown={(event) => {
                   if (event.key === "Backspace" && search.length === 0) {
                     event.preventDefault();
-                    handleValueRemove(value[value.length - 1]);
+                    // handleValueRemove(value[value.length - 1]);
                   }
                 }}
               />
