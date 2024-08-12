@@ -17,7 +17,9 @@ export default function ListingReqBtn({
   builderId,
 }: Props) {
   const [, { open }] = useReqCallPopup();
-  const handleOpen = () => {
+  const handleOpen = (e:any) => {
+    e.stopPropagation();
+
     open({
       modal_type: "PROPERTY_REQ_CALLBACK",
       postedByName: builderName,
