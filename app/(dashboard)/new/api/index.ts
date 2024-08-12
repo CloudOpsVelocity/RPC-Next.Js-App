@@ -37,23 +37,18 @@ export const getShortIds = async () => {
         };
       } else {
         let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/shortlist/ids`;
-        let data = await axios.get(url, {
+        let data = await fetch(url, {
           headers: {
             // @ts-ignore
             Authorization: `${session.user.token as any}`,
           },
         });
-        // console.log(url);
-        // const res = await fetch(url, {
-        //   cache: "no-store",
-        // });
-        // const data = await res.json();
-        return data;
+
+        return await data.json();
       }
     } catch (error: any) {
       console.log(error);
       return {
-        err: error.message,
         propIds: [],
         projIds: [],
       };
