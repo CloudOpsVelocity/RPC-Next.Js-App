@@ -24,12 +24,13 @@ export default async function Page() {
     getHomeListingData(),
     getShortIds(),
   ]);
+  console.log(shortIds);
   return (
     <div className="h-[100%] w-[100%] flex  flex-col overflow-hidden bg-[#F5F7F8]">
       <Header />
       <HomeSearch
         shortIds={shortIds}
-        count={shortIds.projIds ?? 0 + shortIds.propIds ?? 0}
+        count={shortIds.projIds.length ?? 1 + shortIds.propIds.length ?? 0}
       />
       <HomeFeatures />
       <NewAddedProjects data={data.featured} shortIds={shortIds} />

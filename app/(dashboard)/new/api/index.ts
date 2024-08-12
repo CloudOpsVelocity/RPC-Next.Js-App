@@ -32,8 +32,8 @@ export const getShortIds = async () => {
       if (process.env.NODE_ENV === "development") {
         return {
           message: "data from developemnt",
-          propIds: [],
-          projIds: [],
+          propIds: [1],
+          projIds: [1, 2, 3],
         };
       } else {
         let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/shortlist/ids`;

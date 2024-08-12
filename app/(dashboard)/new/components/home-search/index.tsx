@@ -37,14 +37,18 @@ const HomeSearch = ({ shortIds, count }: { shortIds?: any; count: number }) => {
     >
       <Alert />
       {/* shortlisted */}
-      {shortIds && count > 0 && (
-        <button className="inline-flex items-center gap-[5px] rounded shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] p-2 border-[0.5px] border-solid border-[#4D6677] bg-[#e5f4ff] absolute top-20 right-5 ">
-          Shortlisted{" "}
-          <div className="flex justify-center items-center  rounded-sm border-[0.5px] border-solid border-[#7BA0BB] bg-white px-1 gap-1 text-[#33535F] text-xl not-italic font-normal">
-            <p>{shortIds.projIds + shortIds.propIds}</p>
+      {count > 0 && (
+        <a
+          href="/my-profile#step_D"
+          target="_blank"
+          className="inline-flex items-center gap-[5px] rounded shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] sm:p-1 xl:p-2 border-[0.5px] border-solid border-[#4D6677] bg-[#e5f4ff] fixed  bottom-10 right-5  sm:text-sm xl:text-xl z-[1000]"
+        >
+          <span className="hidden sm:block">Shortlisted</span>{" "}
+          <div className="flex justify-center items-center  rounded-sm border-[0.5px] border-solid border-[#7BA0BB] bg-white px-1 gap-1 text-[#33535F]  sm:text-sm xl:text-xl not-italic font-normal">
+            <p>{count}</p>
             <SelectedHeartIcon />
           </div>
-        </button>
+        </a>
       )}
 
       <div className=" items-center justify-center hidden xl:flex min-w-[200px] sm:max-w-[299px] xl:max-w-[499px] h-full">
