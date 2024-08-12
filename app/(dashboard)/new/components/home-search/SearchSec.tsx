@@ -91,7 +91,7 @@ export default function SearchSec({}: Props) {
       <Combobox.Target>
         <div
           onClick={() => setShowAllLocalities(!showAllLocalities)}
-          className="  p-2 gap-2 xl:gap-[8px] pl-2 xl:pl-[8px] max-w-full flex items-center justify-start  flex-wrap"
+          className="w-[100%] sm:min-w-[49.9%]   p-2 gap-2 xl:gap-[8px] pl-2 xl:pl-[8px] max-w-full flex items-center justify-start  flex-wrap"
         >
           {" "}
           {f.city && (
@@ -153,17 +153,17 @@ export default function SearchSec({}: Props) {
             placeholder={
               f.locality.length > 0
                 ? "Add More"
-                : "Search “ Locality, Project, Listings.....”"
+                : "Search By Locality, Project, Listing"
             }
             onClick={handleFieldClick}
             value={name ?? ""}
             onChange={(e) => onSearchChange(e.target.value)}
-            className="!min-w-[50px] ml-[4px] "
+            className="!min-w-[100px] ml-[4px] text-[12px] sm:text-[14px] "
           />
         </div>
       </Combobox.Target>
       {debounced && (
-        <Combobox.Dropdown className="min-w-[92%]  !left-[4%] sm:!min-w-[410px] sm:!left-[44.5%]">
+        <Combobox.Dropdown className="min-w-[92%]  !left-[4%] sm:!min-w-[410px] sm:!left-[32.5%] xl:!left-[44.5%]">
           <Results />
         </Combobox.Dropdown>
       )}

@@ -9,9 +9,11 @@ import { useAtom } from "jotai";
 import { useRouter } from "next/navigation";
 import React from "react";
 import toast from "react-hot-toast";
+import {mainSearchNoResult} from "@/app/images/commonSvgs";
 
 export default function Results() {
   const { data, isLoading, handleResetQuery } = useQsearch();
+
   const [filters, dispatch] = useAtom(homeSearchFiltersAtom);
   if (isLoading) {
     return <Loading />;
@@ -41,6 +43,7 @@ export default function Results() {
       toast.error("The city already exists.");
     }
   };
+
   const handlePush = async (type: string, data: any) => {
     switch (type) {
       case "project":
@@ -48,29 +51,14 @@ export default function Results() {
         break;
       case "listing":
         {
-          const ids = data.id.split("_");
-          const [ut, pt, cg, lt] = ids;
-
-          let url;
-          if (ids.length === 3) {
-            // This is a plot, so we don't include unitTypes
-            const [pt, cg, lt] = ids;
-            url = `propTypes=${pt}&cg=${cg}&localities=${data.name}%2B${lt}`;
-          } else {
-            url = `propTypes=${pt}&unitTypes=${ut}&cg=${cg}&localities=${data.name}%2B${lt}`;
-          }
-
+          const [ut, pt, cg, lt] = data.id.split("_");
+          const url = `propTypes=${pt}&unitTypes=${ut}&cgs=${cg}&localities=${data.name}%2B${lt}`;
           window.open("/search/listing?" + url);
         }
-
         break;
       case "projectListing":
         {
-          alert(data.name);
-          const [listedBy] = data.type.split("");
-          const url = `projIdEnc=${data.id}&listedBy=${
-            listedBy == "O" ? "I" : listedBy
-          }&projName=${extractProjectName(data.name)}`;
+          const url = `projIdEnc=${data.id}&listedBy=${data.type.split("")[0]}`;
           window.open("/search/listing?" + url);
         }
         break;
@@ -82,16 +70,22 @@ export default function Results() {
         break;
     }
   };
-  // const noResults =
-  //   localities?.length === 0 &&
-  //   cities?.length === 0 &&
-  //   builders?.length === 0 &&
-  //   projects?.length === 0 &&
-  //   listings?.length === 0 &&
-  //   projectListing?.length === 0;
+  const isEmptyOrNull = (arr:any[]) => !arr || arr.length === 0;
+
+  const noResults =
+    isEmptyOrNull(localities) &&
+    isEmptyOrNull(cities) &&
+    isEmptyOrNull(builders) &&
+    isEmptyOrNull(projects) &&
+    isEmptyOrNull(listings) &&
+    isEmptyOrNull(projectListing);
   return (
-    <ScrollArea className="px-5 py-2 h-[200px] sm:h-[330px]">
-      {
+    <ScrollArea className={`px-5 py-2 h-[200px] ${(noResults || data == undefined) ? "sm:h-[150px]":" sm:h-[330px]"} `}>
+      {noResults || data == undefined ? (
+         <div className="px-1 py-2 flex flex-row items-center justify-center gap-1"
+         >{mainSearchNoResult}
+         <p className=" font-[600] text-black text-base ">Please Enter a Valid Location Project, or Listing</p></div>
+      ) : (
         <>
           {" "}
           <div>
@@ -108,7 +102,7 @@ export default function Results() {
                   onClick={() =>
                     handleAddSearch(`${locality.name}+${locality.id}`)
                   }
-                  className="text-[#737579] text-[12px] sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
+                  className="text-[#737579] text-[12px]  sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
                   key={locality.id}
                 >
                   {locality.name}
@@ -160,7 +154,6 @@ export default function Results() {
                     handlePush("projectListing", {
                       id: projectListing.id,
                       type: projectListing.type,
-                      name: projectListing.name,
                     })
                   }
                   className="text-[#737579] text-[14px] sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
@@ -180,7 +173,7 @@ export default function Results() {
                       id: builder.id,
                     })
                   }
-                  className="text-[#737579] text-[12px] sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
+                  className="text-[14px] md:text-[16px] text-[#4D6677] font-[600] cursor-pointer"
                   key={builder.id}
                 >
                   {builder.name}
@@ -189,7 +182,7 @@ export default function Results() {
             </ul>
           </div>
         </>
-      }
+      )}
     </ScrollArea>
   );
 }
@@ -228,12 +221,3 @@ const property = (
     </defs>
   </svg>
 );
-function extractProjectName(listing: string): string {
-  console.log(listing);
-  // Regular expression to match the project name
-  const regex = /in (.*?)\s*(\(\d+\))?$/;
-  const match = listing.match(regex);
-
-  // If a match is found, return the project name; otherwise, return an empty string
-  return match ? match[1].trim() : "";
-}

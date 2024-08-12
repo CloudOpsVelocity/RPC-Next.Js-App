@@ -233,7 +233,7 @@ export function BasicBudgetSelect() {
               "- ₹" + toFormattedString(maxValue)
             }`
           ) : (
-            <Input.Placeholder className="!text-black">
+            <Input.Placeholder className="!text-black font-[600]">
               Budget
             </Input.Placeholder>
           )}

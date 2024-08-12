@@ -110,7 +110,7 @@ export function BasicMultiSelect() {
                 )}
               </>
             ) : (
-              <Input.Placeholder className="!text-black leading-0 ">
+              <Input.Placeholder className="!text-black leading-0 font-[600] ">
                 BHK Type
               </Input.Placeholder>
             )}

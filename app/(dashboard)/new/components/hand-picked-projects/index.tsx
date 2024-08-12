@@ -16,7 +16,7 @@ export default function HandPickedProjects({ data, shortIds }: Props) {
           content="Discover Your Dream Home with Handpicked Projects – Where Quality Meets Elegance"
         />
 
-        <div className=" w-full flex flex-col sm:flex-row justify-center items-start mt-2 sm:mt-10 flex-nowrap sm:gap-6 ">
+        <div className=" w-full flex flex-col xl:flex-row justify-center items-start mt-2 xl:mt-10 flex-nowrap sm:gap-6 ">
           <SideTabs active={active} setActive={setActive} />
 
           <div className=" max-w-[600px] sm:max-w-[1466px] mt-[16px] sm:mt-0 ">

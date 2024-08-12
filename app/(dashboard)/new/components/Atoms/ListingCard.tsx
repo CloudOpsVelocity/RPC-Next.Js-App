@@ -27,7 +27,7 @@ export default function ListingCard({ item, sl }: Props) {
   return (
     <div
       onClick={() => onRedirectOnProp()}
-      className="w-full sm:w-[316px] xl:w-[490px] cursor-pointer"
+      className="w-full sm:w-[370px] xl:w-[490px] cursor-pointer"
     >
       <div className="h-[137px] sm:h-[145px] xl:h-[228px]   mb-[6px] shrink-0 shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] relative">
         <div className="flex  justify-start items-start gap-[8px] absolute top:0 right-0 p-[8px] ">
@@ -61,10 +61,10 @@ export default function ListingCard({ item, sl }: Props) {
         </div>
       </div>
 
-      <div className="sm:min-h-[245px] /*  */ rounded shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] border-[0.8px] border-solid border-[#A4B8B5] bg-[#FFF]">
+      <div className="sm:min-h-[244px] xl:min-h-[236px] rounded shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] border-[0.8px] border-solid border-[#A4B8B5] bg-[#FFF]">
         <div className="p-[10px] sm:p-[7px] xl:p-[10px] flex justify-between">
           <div className="space-y-1  ">
-            <p className="text-[#242424] text-[12px] sm:text-[14px] xl:text-lg not-italic font-semibold leading-[normal] capitalize">
+            <p className="text-[#242424] min-h-[56px] text-[12px] sm:text-[14px] xl:text-lg not-italic font-semibold leading-[normal] capitalize">
               {item.propTypeName === "Plot" &&
                 `${formatNumberWithSuffix(item.pa)} sq.ft`}{" "}
               {item.bhkName} {item.propTypeName} for {item.category} in{" "}
@@ -183,7 +183,7 @@ export default function ListingCard({ item, sl }: Props) {
               </>
             )}
           </div>
-          <div className="flex  mt-auto  justify-between   item-center w-[100%]">
+          <div className="flex  mt-auto  justify-between   item-center w-[100%] my-1 sm:y-0">
             <p className="text-[#242424] text-[10px] xl:text-sm not-italic font-semibold leading-[normal] capitalize mt-[6px] mb-[6px]">
               Posted by: {item.postedBy}
             </p>
