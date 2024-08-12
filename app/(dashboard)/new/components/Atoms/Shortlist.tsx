@@ -6,6 +6,8 @@ import { HeartIcon } from "@/app/images/HomePageIcons";
 import { useSession } from "next-auth/react";
 import React, { useState } from "react";
 import useIds from "../useIds";
+import { revalidatePath } from "next/cache";
+import axios from "axios";
 type Props = {
   reqId: string;
   shortListed: string;
@@ -15,7 +17,9 @@ export default function Shortlist({ reqId, shortListed }: Props) {
   const { toggleShortlist } = useShortlistAndCompare();
   const { data: session } = useSession();
   const [, { open: openLogin }] = usePopShortList();
-  const onAddingShortList = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const onAddingShortList = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
     e.stopPropagation();
     if (session) {
       setState(!state);
@@ -25,7 +29,12 @@ export default function Shortlist({ reqId, shortListed }: Props) {
         source: "prop",
       });
     } else {
-      openLogin(() => console.log("grp"));
+      openLogin(
+        async () =>
+          await axios.post("/api/revalidatepath", {
+            path: "/",
+          })
+      );
     }
   };
   return (
