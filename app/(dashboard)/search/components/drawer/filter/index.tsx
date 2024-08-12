@@ -28,6 +28,7 @@ import ClearAll from "../../ClearAll";
 import Close from "@/app/components/project/button/close";
 import { formatBudgetValue } from "../../buget";
 import useQsearch from "@/app/hooks/search/useQsearch";
+import { toFormattedString } from "../../buget/budget";
 
 const MobileFilter = ({ close }: any) => {
   const [current, setCurrent] = useState("Project Status");
@@ -298,7 +299,7 @@ const MobileFilter = ({ close }: any) => {
                 className=" text-[#202020] mb-[4%] text-[14px] font-[600] mt-[3%] "
                 id="Unit Type"
               >
-                Unit Type
+                BHK Type
               </h3>
               <div className="flex  mb-[3%] justify-start items-start gap-[4%] flex-wrap">
                 {SEARCH_FILTER_DATA.bhkDetails.map((eachStatus, index) => {
@@ -355,8 +356,8 @@ const MobileFilter = ({ close }: any) => {
             Budget
           </h3>
           <p className="text-[#4D6677] text-[16px] font-[600] mb-[4%] ">
-            ₹ {formatBudgetValue(filters.bugdetValue[0])} - ₹{" "}
-            {formatBudgetValue(filters.bugdetValue[1])}
+          ₹ {toFormattedString(filters.bugdetValue[0])} - ₹{" "}
+          {toFormattedString(filters.bugdetValue[1])} Cr
           </p>
           <RangeSlider
             color="green"
@@ -400,13 +401,24 @@ const MobileFilter = ({ close }: any) => {
           )}
 
           <h3
-            className=" text-[#202020] mb-[4%] text-[14px] font-[600] mt-[3%] "
+            className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
             id="Amenities"
           >
             Amenities
           </h3>
-          <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
-            <Checkbox label="Lift" color="green" />
+          <div className="flex  mb-[3%] justify-start items-center gap-[4%] flex-wrap ">
+            {SEARCH_FILTER_DATA.amenities.map((i, ind) => {
+              return (
+                <Checkbox
+                  className="my-2"
+                  key={i.cid}
+                  label={i.constDesc}
+                  color="green"
+                  onClick={() => handleCheckboxClick("amenities", i.cid)}
+                  checked={filters.amenities.includes(i.cid)}
+                />
+              );
+            })}
           </div>
 
           {filters?.propTypes != projectprops.plot && (

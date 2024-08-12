@@ -111,7 +111,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
           <a href={"/"}>Home</a> {" > "}
         </span>
         <span>
-          <span className="  text-[#4D6677] font-[600] cursor-pointer">
+          <span className="  text-[#4D6677] font-[600] ">
             {DynamicText({
               cg: params.cg as string,
               listedBy: params.listedBy,

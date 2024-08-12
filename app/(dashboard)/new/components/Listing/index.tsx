@@ -17,7 +17,7 @@ export default function DynamicListing({
 }: Props) {
   return (
     <div className="mt-[40px] sm:mt-[60px] w-[95%] m-auto">
-      <MainHeading title={title} content={content} />
+      <MainHeading title={title}  data={data} content={content} />
       <ListingCarousel data={data} shortIds={shortIds} />
     </div>
   );

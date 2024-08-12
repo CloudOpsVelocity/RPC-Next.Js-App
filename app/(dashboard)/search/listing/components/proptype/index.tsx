@@ -13,7 +13,7 @@ export default function PropTypeFilter() {
       <ClearAll type="propType" />
       <div className="p-3">
         <h3 className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] ">
-          Unit Type
+          BHK Type
         </h3>
         <div className="flex  mb-[3%] t gap-[4%]  flex-wrap justify-start items-center ">
           {keys.map((keyName, index) => {

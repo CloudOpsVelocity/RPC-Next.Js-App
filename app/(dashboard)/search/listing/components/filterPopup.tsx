@@ -28,6 +28,7 @@ import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import { toFormattedString } from "../../components/buget/budget";
 import { MainSearchMultiSelect } from "../../components/_ui/Multiselect";
+import { formatBudgetValue } from "../../components/buget";
 
 const FilterPopup = () => {
   const path = usePathname();
@@ -284,8 +285,8 @@ const FilterPopup = () => {
                       key={i}
                       label={x.constDesc}
                       color="green"
-                      onClick={() => handleCheckboxClick("facings", x.cid + 1)}
-                      checked={filters.facings.includes(x.cid + 1)}
+                      onClick={() => handleCheckboxClick("facings", x.cid )}
+                      checked={filters.facings.includes(x.cid )}
                     />
                   );
                 })}
@@ -322,23 +323,24 @@ const FilterPopup = () => {
           >
             Budget
           </h3>
-          <p className="text-[#4D6677] text-[16px] font-[600] mb-[2%] ">
-            ₹ {toFormattedString(filters.bugdetValue[0])} - ₹{" "}
-            {toFormattedString(filters.bugdetValue[1])} Cr
+          <p className="text-[#4D6677] text-[16px] font-[600] mb-[4%] ">
+          ₹ {toFormattedString(filters.bugdetValue[0])} - ₹{" "}
+          {toFormattedString(filters.bugdetValue[1])} Cr
           </p>
-          <RangeSlider
+         <RangeSlider
             color="green"
             key="budgetSlider"
-            onChange={(value) => handleSliderChange("bugdetValue", value)}
-            style={{ width: "80%" }}
-            defaultValue={[
-              filters?.bugdetValue[0] ?? 500000,
-              filters?.bugdetValue[1] ?? 600000000,
-            ]}
+            minRange={0}
             min={0}
-            max={600000000}
-            step={100000}
-            label={(value) => toFormattedString(value)}
+            max={60}
+            step={0.05}
+            onChange={(value) => handleSliderChange("bugdetValue", value)}
+            style={{ width: "99%" }}
+            defaultValue={[
+              filters?.bugdetValue?.[0] ?? 0.05,
+              filters?.bugdetValue?.[1] ?? 60,
+            ]}
+            label={formatBudgetValue}
           />
           <h3
             className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] "
@@ -422,7 +424,6 @@ const FilterPopup = () => {
             Amenities
           </h3>
           <div className="flex  mb-[3%] justify-start items-center gap-[4%] flex-wrap ">
-            <Checkbox label="Lift" color="green" />
             {SEARCH_FILTER_DATA.amenities.map((i, ind) => {
               return (
                 <Checkbox
@@ -436,9 +437,8 @@ const FilterPopup = () => {
               );
             })}
           </div>
-          <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
-            <Checkbox label="Lift" color="green" />
-          </div>
+     {/*      <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
+          </div> */}
 
           {filters?.propTypes != projectprops.plot && (
             <React.Fragment>
