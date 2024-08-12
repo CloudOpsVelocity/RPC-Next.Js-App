@@ -245,7 +245,7 @@ const FilterPopup = () => {
                   className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
                   id="Unit Type"
                 >
-                  Unit Type
+                  BHK Type
                 </h3>
                 <div className="flex  mb-[3%] justify-start items-center  gap-[4%] flex-wrap ">
                   {SEARCH_FILTER_DATA.bhkDetails.map((eachStatus, index) => {
@@ -297,24 +297,24 @@ const FilterPopup = () => {
           >
             Budget
           </h3>
-          <p className="text-[#4D6677] text-[16px] font-[600] mb-[2%] ">
-            ₹ {toFormattedString(filters.bugdetValue[0])} - ₹{" "}
-            {toFormattedString(filters.bugdetValue[1])}
+          <p className="text-[#4D6677] text-[16px] font-[600] mb-[4%] ">
+          ₹ {toFormattedString(filters.bugdetValue[0])} - ₹{" "}
+          {toFormattedString(filters.bugdetValue[1])} Cr
           </p>
           <RangeSlider
             color="green"
             key="budgetSlider"
-            onChange={(value) => handleSliderChange("bugdetValue", value)}
-            style={{ width: "80%" }}
-            defaultValue={[
-              filters?.bugdetValue[0] ?? 500000,
-              filters?.bugdetValue[1] ?? 600000000,
-            ]}
-            value={filters.bugdetValue}
+            minRange={0}
             min={0}
-            max={filters.cg === "R" ? 100000 : 600000000}
-            step={filters.cg === "R" ? 1 : 100000}
-            label={(value) => toFormattedString(value)}
+            max={60}
+            step={0.05}
+            onChange={(value) => handleSliderChange("bugdetValue", value)}
+            style={{ width: "99%" }}
+            defaultValue={[
+              filters?.bugdetValue?.[0] ?? 0.05,
+              filters?.bugdetValue?.[1] ?? 60,
+            ]}
+            label={formatBudgetValue}
           />
           {filters?.propTypes != projectprops.plot && (
             <React.Fragment>

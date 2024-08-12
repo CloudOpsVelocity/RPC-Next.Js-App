@@ -27,6 +27,7 @@ import ClearAll from "../../ClearAll";
 import Heading from "./Heading";
 import { usePathname } from "next/navigation";
 import { formatBudgetValue } from "@/app/(dashboard)/search/components/buget";
+import { toFormattedString } from "@/app/(dashboard)/search/components/buget/budget";
 
 const styles = {
   heading: "",
@@ -328,8 +329,8 @@ const ListingMobileFilter = ({ close }: any) => {
             Budget
           </h3>
           <p className="text-[#4D6677] text-[16px] font-[600] mb-[4%] ">
-            ₹ {formatBudgetValue(filters.bugdetValue[0])} - ₹{" "}
-            {formatBudgetValue(filters.bugdetValue[1])}
+          ₹ {toFormattedString(filters.bugdetValue[0])} - ₹{" "}
+          {toFormattedString(filters.bugdetValue[1])} Cr
           </p>
           <RangeSlider
             color="green"
@@ -429,13 +430,24 @@ const ListingMobileFilter = ({ close }: any) => {
             </div>
           </React.Fragment>
           <h3
-            className=" text-[#202020] mb-[4%] text-[14px] font-[600] mt-[3%] "
+            className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
             id="Amenities"
           >
             Amenities
           </h3>
-          <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
-            <Checkbox label="Lift" color="green" />
+          <div className="flex  mb-[3%] justify-start items-center gap-[4%] flex-wrap ">
+            {SEARCH_FILTER_DATA.amenities.map((i, ind) => {
+              return (
+                <Checkbox
+                  className="my-2"
+                  key={i.cid}
+                  label={i.constDesc}
+                  color="green"
+                  onClick={() => handleCheckboxClick("amenities", i.cid)}
+                  checked={filters.amenities.includes(i.cid)}
+                />
+              );
+            })}
           </div>
 
           {filters?.propTypes != projectprops.plot && (

@@ -8,6 +8,7 @@ type Props = {
 };
 
 export default function Heading({ className, text, id }: Props) {
+  console.log(text)
   return (
     <h2
       className={clsx(
