@@ -9,7 +9,7 @@ import { useAtom } from "jotai";
 import { useRouter } from "next/navigation";
 import React from "react";
 import toast from "react-hot-toast";
-import {mainSearchNoResult} from "@/app/images/commonSvgs";
+import { mainSearchNoResult } from "@/app/images/commonSvgs";
 
 export default function Results() {
   const { data, isLoading, handleResetQuery } = useQsearch();
@@ -70,7 +70,7 @@ export default function Results() {
         break;
     }
   };
-  const isEmptyOrNull = (arr:any[]) => !arr || arr.length === 0;
+  const isEmptyOrNull = (arr: any[]) => !arr || arr.length === 0;
 
   const noResults =
     isEmptyOrNull(localities) &&
@@ -80,11 +80,18 @@ export default function Results() {
     isEmptyOrNull(listings) &&
     isEmptyOrNull(projectListing);
   return (
-    <ScrollArea className={`px-5 py-2 h-[200px] ${(noResults || data == undefined) ? "sm:h-[150px]":" sm:h-[330px]"} `}>
+    <ScrollArea
+      className={`px-5 py-2 h-[200px] ${
+        noResults || data == undefined ? "sm:h-[150px]" : " sm:h-[330px]"
+      } `}
+    >
       {noResults || data == undefined ? (
-         <div className="px-1 py-2 flex flex-row items-center justify-center gap-1"
-         >{mainSearchNoResult}
-         <p className=" font-[600] text-black text-base ">Please Enter a Valid Location Project, or Listing</p></div>
+        <div className="px-1 py-2 flex flex-row items-center justify-center gap-1">
+          {mainSearchNoResult}
+          <p className=" font-[600] text-black text-base ">
+            Please Enter a Valid Location Project, or Listing
+          </p>
+        </div>
       ) : (
         <>
           {" "}

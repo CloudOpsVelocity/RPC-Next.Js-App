@@ -30,64 +30,8 @@ export default function SearchSec({}: Props) {
         onSearchChange(val);
         combobox.closeDropdown();
       }}
+      keepMounted
     >
-      {/*       <Combobox.Target>
-        <PillsInput classNames={{ input: classes.homePageSearch }} size={isTab ? "xs" : "md"} w={"100%"}>
-          <Pill.Group>
-            {f.city && (
-              <Pill
-                className="capitalize !text-[12px] !sm:text-[14px] "
-                withRemoveButton
-                classNames={{ root: classes.MultiSelectionPill }}
-                onRemove={() => dispatch({ type: "REMOVE_CITY" })}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  flexWrap: "nowrap",
-                }}
-              >
-                {f.city.split("+")[0]}
-              </Pill>
-            )}
-            {f.locality?.map(
-              (each, index) =>
-                index < (isTab ? 1 : 10) && (
-                  <Pill
-                    className="capitalize !text-[12px] !sm:text-[14px]"
-                    onRemove={() =>
-                      dispatch({ type: "REMOVE_LOCALITY", payload: each })
-                    }
-                    key={index}
-                    withRemoveButton
-                    classNames={{ root: classes.MultiSelectionPill }}
-                  >
-                    {each.split("+")[0]}
-                  </Pill>
-                )
-            )}
-
-            {f.locality?.length > (isTab ? 1 : 10) && (
-              <Pill
-                className="capitalize !text-[12px] !sm:text-[14px]"
-                classNames={{ root: classes.MultiSelectionPill }}
-              >
-                {`+${f.locality?.length - (isTab ? 1 : 2)} More`}
-              </Pill>
-            )}
-          </Pill.Group>{" "}
-          <PillsInput.Field
-            placeholder={
-              f.locality.length > 0
-                ? "Add More"
-                : "Enter Locality, Project, Listing"
-            }
-            onClick={handleFieldClick}
-            value={name ?? ""}
-            onChange={(e) => onSearchChange(e.target.value)}
-            className="!min-w-[50px] ml-[4px] "
-          />
-        </PillsInput>
-      </Combobox.Target> */}
       <Combobox.Target>
         <div
           onClick={() => setShowAllLocalities(!showAllLocalities)}
@@ -138,16 +82,6 @@ export default function SearchSec({}: Props) {
                   {`+${f.locality?.length - (isTab ? 1 : 2)} More`}
                 </Pill>
               )}
-
-            {/*  {showAllLocalities && (
-              <Pill
-                className="capitalize"
-                classNames={{ root: classes.MultiSelectionPill }}
-                onClick={() => setShowAllLocalities(false)}
-              >
-                Show Less
-              </Pill>
-            )} */}
           </div>
           <PillsInput.Field
             placeholder={
@@ -162,7 +96,7 @@ export default function SearchSec({}: Props) {
           />
         </div>
       </Combobox.Target>
-      {debounced && (
+      {name && (
         <Combobox.Dropdown className="min-w-[92%]  !left-[4%] sm:!min-w-[410px] sm:!left-[32.5%] xl:!left-[44.5%]">
           <Results />
         </Combobox.Dropdown>

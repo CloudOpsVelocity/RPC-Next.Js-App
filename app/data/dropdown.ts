@@ -4,7 +4,7 @@ const baseUrl = process.env.NEXT_PUBLIC_PROJECT_URL;
 const data = [
   {
     label: "My Profile",
-    url: `${baseUrl}/my-profile`,
+    url: `${baseUrl}/my-profile#step_B`,
   },
   {
     label: "Dashboard",

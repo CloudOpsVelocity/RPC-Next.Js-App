@@ -30,7 +30,7 @@ export default function Shortlist({ reqId, shortListed }: Props) {
         source: "prop",
       });
     } else {
-      openLogin(() => router.refresh());
+      openLogin(() => window.location.reload());
       //  () =>
     }
   };
