@@ -28,7 +28,6 @@ export default async function Page() {
     <div className="h-[100%] w-[100%] flex  flex-col overflow-hidden bg-[#F5F7F8]">
       <Header />
       <HomeSearch />
-      {JSON.stringify(shortIds)}
       <HomeFeatures />
       <NewAddedProjects data={data.featured} shortIds={shortIds} />
       <DynamicListing
