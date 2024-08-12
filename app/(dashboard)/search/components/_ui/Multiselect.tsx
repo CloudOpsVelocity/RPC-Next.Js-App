@@ -134,9 +134,9 @@ export function MainSearchMultiSelect() {
       <Combobox.Group key={group.group} label={group.group}>
         {filteredItems.map((item: any) => (
           <Combobox.Option
-            value={`${item.id}+${item.type}`}
+            value={`${item.name}+${item.id}`}
             key={item.id}
-            active={value.includes(`${item.id}+${item.type}`)}
+            // active={true}
             onClick={() => handlePush(group.group, item)}
           >
             <Group gap="sm">
@@ -195,7 +195,9 @@ export function MainSearchMultiSelect() {
           ) : filteredOptions.length > 0 ? (
             filteredOptions
           ) : (
-            <Combobox.Empty>Nothing found...</Combobox.Empty>
+            <Combobox.Empty>
+              {search.length > 0 ? "Nothing found..." : "Search something..."}{" "}
+            </Combobox.Empty>
           )}
         </Combobox.Options>
       </Combobox.Dropdown>
