@@ -5,9 +5,8 @@ import { Shorlisted } from "@/app/images/commonSvgs";
 import { HeartIcon } from "@/app/images/HomePageIcons";
 import { useSession } from "next-auth/react";
 import React, { useState } from "react";
-import useIds from "../useIds";
-import { revalidatePath } from "next/cache";
-import axios from "axios";
+import { useRouter } from "next/navigation";
+
 type Props = {
   reqId: string;
   shortListed: string;
@@ -17,6 +16,8 @@ export default function Shortlist({ reqId, shortListed }: Props) {
   const { toggleShortlist } = useShortlistAndCompare();
   const { data: session } = useSession();
   const [, { open: openLogin }] = usePopShortList();
+  const router = useRouter();
+
   const onAddingShortList = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
@@ -29,12 +30,8 @@ export default function Shortlist({ reqId, shortListed }: Props) {
         source: "prop",
       });
     } else {
-      openLogin(
-        async () =>
-          await axios.post("/api/revalidatepath", {
-            path: "/",
-          })
-      );
+      openLogin(() => router.refresh());
+      //  () =>
     }
   };
   return (
