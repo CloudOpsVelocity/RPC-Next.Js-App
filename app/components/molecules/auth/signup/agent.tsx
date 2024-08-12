@@ -270,7 +270,7 @@ function Agent() {
               size="lg"
               mt={"xs"}
               label="Password"
-              placeholder="Enter your password here"
+              placeholder="Create Password"
               {...form.getInputProps("password")}
               visibilityToggleIcon={({ reveal }) =>
                 reveal ? <EyeOpen /> : <EyeClosed />

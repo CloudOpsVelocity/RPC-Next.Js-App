@@ -89,7 +89,7 @@ export function BasicSelect() {
           size={isTab ? "xs" : "sm"}
         >
           {(propertyDetailsTypes?.get(value ?? 0)?.name ?? "") || (
-            <Input.Placeholder className="!text-black">
+            <Input.Placeholder className="!text-black font-[600]">
               Property Type
             </Input.Placeholder>
           )}

@@ -157,7 +157,7 @@ function Individual() {
                 size="lg"
                 className="w-[100%] mb-[3%] "
                 label="Password"
-                placeholder="Enter your password"
+                placeholder="Create Your password"
                 visibilityToggleIcon={({ reveal }) =>
                   reveal ? <EyeOpen /> : <EyeClosed />
                 }

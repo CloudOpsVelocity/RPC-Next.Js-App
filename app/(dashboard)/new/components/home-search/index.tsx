@@ -29,7 +29,7 @@ const HomeSearch = () => {
 
   return (
     <div
-      className="px-1 sm:px-5 w-full sm:pl-0 border-2 flex justify-center items-center xl:grid xl:grid-cols-[1.1fr_2fr] gap-2 sm:pb-20 bg-white pt-[150px] sm:pt-[200px] xl:pb-4 xl:py-28  relative mt-[70px] "
+      className="px-1 sm:px-5 w-full sm:pl-0 border-2 flex justify-center items-center xl:grid xl:grid-cols-[1.1fr_2fr] gap-2 sm:pb-10 bg-white pt-[100px] sm:pt-[100px] xl:pb-4 xl:py-28  relative mt-[70px] "
       style={{
         backgroundImage: "url(/home/clouds.svg)",
       }}
@@ -51,8 +51,8 @@ const HomeSearch = () => {
             {config.homeIcon} All Residential
           </p>
 
-          <p className=" flex justify-center items-center gap-[4px] sm:hidden text-[#0073C6] text-[10px] not-italic font-[700] mb-[5px] leading-[normal]">
-            Bangalore {config.drpdownIcon}
+          <p className=" flex justify-center items-center gap-[4px] sm:hidden text-[#0073C6] text-[12px] not-italic font-[700] mb-[5px] leading-[normal]">
+            Bangalore {/* {config.drpdownIcon} */}
           </p>
 
           <div className="flex items-center gap-2.5 rounded shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] px-1.5 py-1 border-[0.5px] border-solid border-[#819CA9] bg-white w-full">
@@ -73,7 +73,7 @@ const HomeSearch = () => {
 
                 <div
                   onClick={handleSearch}
-                  className={`flex justify-center items-center rounded-[4px] py-[4px] px-[14px] sm:px-[6px] xl:py-[6px] xl:px-[16px] text-[12px] sm:text-[14px] text-white xl:text-[16px] font-bold bg-[#0073c6]`}
+                  className={`flex justify-center items-center rounded-[4px] py-[4px] px-[14px] sm:px-[6px] xl:py-[6px] xl:px-[16px] text-[12px] sm:text-[14px] text-white xl:text-[16px] font-bold bg-[#0073c6] cursor-pointer`}
                 >
                   {isMobileStarting ? config.searchBtnIcon : "Search"}
                 </div>

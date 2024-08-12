@@ -428,7 +428,7 @@ function Builder() {
                 label: StepCss.mlabelCss,
               }}
               label="Password"
-              placeholder="Enter your password here"
+              placeholder="Create Your Password"
               {...form.getInputProps("password")}
               visibilityToggleIcon={({ reveal }) =>
                 reveal ? <EyeOpen /> : <EyeClosed />
