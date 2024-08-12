@@ -7,7 +7,7 @@ import useIds from "../../useIds";
 type Props = { data: any; active: number; shortIds: any };
 import Css from "../../../Style.module.css";
 import Card from "../../newly-added-projects/Card";
-export default function CardCarousel({ data, shortIds }: Props) {
+export default function CardCarousel({ data, shortIds, active }: Props) {
   return (
     <Carousel
       slideSize={{ base: "55%", sm: "36%", md: "33.333333%" }}
@@ -19,6 +19,7 @@ export default function CardCarousel({ data, shortIds }: Props) {
       previousControlIcon={<CarouseSelArrowIcon className="rotate-180" />}
       controlsOffset={"-10px"}
       classNames={Css}
+      key={active}
     >
       {data.map((item: any, index: number) => (
         <Carousel.Slide key={index}>

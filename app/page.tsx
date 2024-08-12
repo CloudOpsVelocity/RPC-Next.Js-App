@@ -5,7 +5,6 @@ import {
   getHomeListingData,
   getShortIds,
 } from "./(dashboard)/new/api";
-import Header from "./(dashboard)/new/components/header";
 import HomeSearch from "./(dashboard)/new/components/home-search";
 import HomeFeatures from "./(dashboard)/new/components/features";
 import NewAddedProjects from "./(dashboard)/new/components/newly-added-projects";
@@ -18,6 +17,7 @@ import BlogsSection from "./(dashboard)/new/components/blogs";
 import Footer from "./(dashboard)/new/components/Footer";
 import Req from "./(dashboard)/new/components/Req";
 import SharePopup from "./(dashboard)/search/components/SharePopup";
+import Header from "./components/layouts/primary/header";
 export default async function Page() {
   const [data, listingData, shortIds] = await Promise.all([
     getData(),
@@ -28,6 +28,7 @@ export default async function Page() {
     <div className="h-[100%] w-[100%] flex  flex-col overflow-hidden bg-[#F5F7F8]">
       <Header />
       <HomeSearch />
+      {JSON.stringify(shortIds)}
       <HomeFeatures />
       <NewAddedProjects data={data.featured} shortIds={shortIds} />
       <DynamicListing

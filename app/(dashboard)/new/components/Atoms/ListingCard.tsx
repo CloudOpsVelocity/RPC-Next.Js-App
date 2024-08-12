@@ -21,8 +21,8 @@ export default function ListingCard({ item, sl }: Props) {
     window.open(url, "_blank");
   };
 
-  const title = `${item.propTypeName === "Plot" ? `${item.pa} sq.ft` : ""} ${
-    item.bhkName
+  const title = `${
+    item.propTypeName === "Plot" ? `${item.pa} sq.ft` : item.bhkName
   } ${item.propTypeName} for ${item.category} in ${item.localityName}`;
   return (
     <div
@@ -77,11 +77,11 @@ export default function ListingCard({ item, sl }: Props) {
               {item.category !== "Rent" && (
                 <span className="text-[#616D75] text-[11px] sm:text-[12px] xl:text-base not-italic font-bold leading-[normal] capitalize">
                   ₹{" "}
-                  {calculatePerSqPrice(
-                    item.price,
-                    item.propTypeName === "Plot"
-                      ? formatNumberWithSuffix(item.pa)
-                      : formatNumberWithSuffix(item.sba)
+                  {formatNumberWithSuffix(
+                    calculatePerSqPrice(
+                      item.price,
+                      item.propTypeName === "Plot" ? item.pa : item.sba
+                    )
                   )}
                   /- sq.ft
                 </span>

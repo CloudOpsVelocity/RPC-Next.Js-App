@@ -178,9 +178,9 @@ export function BasicBudgetSelect() {
   };
   const shouldShowBudget = !(
     (f.bugdetValue[0] === 500000 && f.bugdetValue[1] === 600000000) ||
-    (f.bugdetValue[0] === 0 && f.bugdetValue[1] === 100000)
+    (f.bugdetValue[0] === 0 && f.bugdetValue[1] === 100000) ||
+    (!f.bugdetValue[0] && !f.bugdetValue[1])
   );
-
   return (
     <Combobox
       store={combobox}
