@@ -30,11 +30,11 @@ const config = {
       id: 13,
       type: "L",
     },
-    {
+    /* {
       name: "Kurnool",
       id: 22,
       type: "L",
-    },
+    }, */
     {
       name: "whitefield",
       id: 10,

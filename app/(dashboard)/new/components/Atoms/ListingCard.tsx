@@ -30,7 +30,7 @@ export default function ListingCard({ item, sl }: Props) {
       className="w-full sm:w-[316px] xl:w-[490px] cursor-pointer"
     >
       <div className="h-[137px] sm:h-[145px] xl:h-[228px]   mb-[6px] shrink-0 shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] relative">
-        <div className="flex sm:hidden justify-start items-start gap-[8px] absolute top:0 right-0 p-[8px] ">
+        <div className="flex  justify-start items-start gap-[8px] absolute top:0 right-0 p-[8px] ">
           <Shortlist reqId={item.propIdEnc} shortListed={sl} />
           <ShareBtn
             url={`${process.env.NEXT_PUBLIC_BACKEND_URL}/listing/banglore/${item.propIdEnc}`}
@@ -61,9 +61,9 @@ export default function ListingCard({ item, sl }: Props) {
         </div>
       </div>
 
-      <div className="sm:min-h-[204px] self-stretch rounded shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] border-[0.8px] border-solid border-[#A4B8B5] bg-[#FFF]">
+      <div className="sm:min-h-[245px] /*  */ rounded shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] border-[0.8px] border-solid border-[#A4B8B5] bg-[#FFF]">
         <div className="p-[10px] sm:p-[7px] xl:p-[10px] flex justify-between">
-          <div className="space-y-1 max-w-[80%] ">
+          <div className="space-y-1  ">
             <p className="text-[#242424] text-[12px] sm:text-[14px] xl:text-lg not-italic font-semibold leading-[normal] capitalize">
               {item.propTypeName === "Plot" &&
                 `${formatNumberWithSuffix(item.pa)} sq.ft`}{" "}
@@ -96,7 +96,7 @@ export default function ListingCard({ item, sl }: Props) {
               {item.cityName ?? "Banglore"}, {item.localityName}
             </p>
           </div>
-          <div className="hidden sm:flex justify-start items-start gap-[8px] ">
+          <div className="hidden  justify-start items-start gap-[8px] ">
             <Shortlist reqId={item.propIdEnc} shortListed={sl} />
             {/* <HeartIcon className="cursor-pointer w-[22px] h-[22px] sm:w-[20px] sm:h-[20px] xl:w-[26px] xl:h-[26px]" /> */}
             <ShareBtn
@@ -106,7 +106,7 @@ export default function ListingCard({ item, sl }: Props) {
           </div>
         </div>
         {/* by default new sortBy */}
-        <div className="pl-3 mr-[14px] sm:ml-[0px] xl:mr-0">
+        <div className="pl-3 mr-[14px] sm:mr-[4px] sm:ml-[0px] h-full gap-auto">
           <div className="inline-flex flex-wrap w-auto items-center gap-1 self-stretch rounded border-[0.5px] border-solid border-[#616D75] bg-[#F5F5F5] p-1">
             {item.propTypeName === "Plot" ? (
               <>
@@ -183,7 +183,7 @@ export default function ListingCard({ item, sl }: Props) {
               </>
             )}
           </div>
-          <div className="flex  justify-between item-center w-[95%]">
+          <div className="flex  mt-auto  justify-between   item-center w-[100%]">
             <p className="text-[#242424] text-[10px] xl:text-sm not-italic font-semibold leading-[normal] capitalize mt-[6px] mb-[6px]">
               Posted by: {item.postedBy}
             </p>

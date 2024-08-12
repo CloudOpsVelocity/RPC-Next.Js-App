@@ -14,7 +14,7 @@ export default function ListingCarousel({ data, shortIds }: Props) {
   return (
     <Carousel
       // slideSize="33.333333%"
-      slideSize={{ base: "90%", sm: "40%", md: "33.333333%" }}
+      slideSize={{ base: "90%", sm: "40%", md: "29%" }}
       slideGap="md"
       // loop
       align="start"
@@ -26,7 +26,7 @@ export default function ListingCarousel({ data, shortIds }: Props) {
       classNames={Css}
     >
       {data.map((item: any, index: number) => (
-        <Carousel.Slide key={index}>
+        <Carousel.Slide  key={index}>
           <ListingCard
             item={item}
             sl={shortIds?.propIds.includes(item.propIdEnc) ? "Y" : "N"}
