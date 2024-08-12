@@ -16,9 +16,10 @@ import { homeSearchFiltersAtom } from "@/app/store/home";
 import { BasicSelect } from "./filters/Select";
 import { CityDropdown } from "./filters/CityDropdown";
 import { toQueryParams } from "../../utils/param";
+import { HeartIcon, SelectedHeartIcon } from "@/app/images/HomePageIcons";
 const propertyTypes = ["Buy", "Rent"];
 
-const HomeSearch = () => {
+const HomeSearch = ({ shortIds, count }: { shortIds?: any; count: number }) => {
   const f = useAtomValue(homeSearchFiltersAtom);
   const handleSearch = () => {
     const whichPage = f.propType === 36 ? "/search/listing" : "/search";
@@ -35,6 +36,17 @@ const HomeSearch = () => {
       }}
     >
       <Alert />
+      {/* shortlisted */}
+      {shortIds && count > 0 && (
+        <button className="inline-flex items-center gap-[5px] rounded shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] p-2 border-[0.5px] border-solid border-[#4D6677] bg-[#e5f4ff] absolute top-20 right-5 ">
+          Shortlisted{" "}
+          <div className="flex justify-center items-center  rounded-sm border-[0.5px] border-solid border-[#7BA0BB] bg-white px-1 gap-1 text-[#33535F] text-xl not-italic font-normal">
+            <p>{shortIds.projIds + shortIds.propIds}</p>
+            <SelectedHeartIcon />
+          </div>
+        </button>
+      )}
+
       <div className=" items-center justify-center hidden xl:flex min-w-[200px] sm:max-w-[299px] xl:max-w-[499px] h-full">
         <Image
           src={"/home/home-search.svg"}
