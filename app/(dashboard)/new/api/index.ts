@@ -1,4 +1,5 @@
 import { options } from "@/app/options";
+import axios from "axios";
 import { getServerSession } from "next-auth";
 
 export const getData = async () => {
@@ -24,6 +25,8 @@ export const getHomeListingData = async () => {
 };
 export const getShortIds = async () => {
   const session = await getServerSession(options);
+  console.log("🚀 ~ getShortIds ~ session:", session);
+
   if (session) {
     try {
       if (process.env.NODE_ENV === "development") {
@@ -34,15 +37,23 @@ export const getShortIds = async () => {
         };
       } else {
         let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/shortlist/ids`;
-        const res = await fetch(url, {
-          cache: "no-store",
+        let data = await axios.get(url, {
+          headers: {
+            // @ts-ignore
+            Authorization: `${session.user.token as any}`,
+          },
         });
-        const data = await res.json();
+        // console.log(url);
+        // const res = await fetch(url, {
+        //   cache: "no-store",
+        // });
+        // const data = await res.json();
         return data;
       }
-    } catch (error) {
+    } catch (error: any) {
+      console.log(error);
       return {
-        err: "Something went wrong",
+        err: error.message,
         propIds: [],
         projIds: [],
       };

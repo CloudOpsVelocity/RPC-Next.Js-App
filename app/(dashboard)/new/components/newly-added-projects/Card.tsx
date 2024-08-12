@@ -14,16 +14,17 @@ type Props = { item: any };
 
 export default function Card({ item }: Props) {
   let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/abc/banglore/whitefield/${item.projIdEnc}`;
-  console.log(item);
-  const onredirectProj =()=>{
+  const onredirectProj = () => {
     window.open(url, "_blank");
-  }
+  };
   return (
-    <div   onClick={()=>onredirectProj()}  className="w-[310px] sm:w-[508px] xl:w-[631px] h-[326px] sm:h-[294px] xl:h-[368px] shrink-0 relative">
+    <div
+      onClick={() => onredirectProj()}
+      className="w-[310px] sm:w-[508px] xl:w-[631px] h-[326px] sm:h-[294px] xl:h-[368px] shrink-0 relative"
+    >
       <BackgroundImage src={item.coverUrl} radius="sm" h={"100%"}>
         {item.builderLogo && (
           <img
-        
             src={item.builderLogo}
             alt=""
             className="w-[45px] h-[45px] sm:w-[54px] sm:h-[54px] xl:w-[67px] xl:h-[67px] object-cover top-[12px] left-[12px] relative"
@@ -53,7 +54,7 @@ export default function Card({ item }: Props) {
           </div>
           <div className="flex flex-col items-end gap-[9px] xl:gap-[19px]">
             <div className="space-y-2">
-             {/*  <p className="flex justify-center items-center gap-2 rounded py-1 px-2 bg-[#000000b0] text-white text-[8px] sm:text-[12px] xl:text-base not-italic font-semibold leading-[normal] capitalize max-w-fit self-end ml-auto mt-1 sm:mt-[10px]">
+              {/*  <p className="flex justify-center items-center gap-2 rounded py-1 px-2 bg-[#000000b0] text-white text-[8px] sm:text-[12px] xl:text-base not-italic font-semibold leading-[normal] capitalize max-w-fit self-end ml-auto mt-1 sm:mt-[10px]">
                 <Image
                   src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/homepage/unit.png`}
                   alt=""
