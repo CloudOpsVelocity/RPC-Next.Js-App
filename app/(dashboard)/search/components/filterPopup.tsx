@@ -28,6 +28,7 @@ import clsx from "clsx";
 import { formatBudgetValue } from "./buget";
 import { toFormattedString } from "./buget/budget";
 import useQsearch from "@/app/hooks/search/useQsearch";
+import { MainSearchMultiSelect } from "./_ui/Multiselect";
 
 const FilterPopup = () => {
   const [current, setCurrent] = useState("Project Status");
@@ -97,7 +98,7 @@ const FilterPopup = () => {
       : searchDetails;
   return (
     <div className=" flex justify-start items-start w-[70vw] top-[160px] left-[70%]">
-      <div className="w-[20%] flex hidden sm:flex shadow-md justify-start items-center flex-col ">
+      <div className="w-[20%]  hidden sm:flex shadow-md justify-start items-center flex-col ">
         <p className=" text-[#000] text-[16px] bg-[#F4F4F4] flex justify-start px-6  items-center font-[500] py-[3.5%] w-full ">
           Quick Filters
         </p>
@@ -128,7 +129,15 @@ const FilterPopup = () => {
           className="w-full pt-[1%] sm:pl-[2%]    "
           viewportRef={viewport}
         >
+          {" "}
           <h3
+            className=" text-[#202020] mb-[1%] text-[14px] font-[600] "
+            id="Project Status"
+          >
+            Search By City, Locality, Projects
+          </h3>
+          <MainSearchMultiSelect />
+          {/* <h3
             className=" text-[#202020] mb-[1%] text-[14px] font-[600] "
             id="Project Status"
           >
@@ -139,6 +148,7 @@ const FilterPopup = () => {
             placeholder="Search"
             style={{ width: "60%" }}
             rightSection={<DropDownIcon />}
+            comboboxProps={{ withinPortal: false }}
             data={[
               {
                 group: "Locality",
@@ -180,12 +190,12 @@ const FilterPopup = () => {
               },
             ]}
             onSearchChange={(e) => onSearchChange(e)}
-            onChange={(e) => alert("workign")}
+            onChange={(e) => console.log(e)}
             searchValue={name ?? ""}
             mb={"2%"}
             withScrollArea={false}
             styles={{ dropdown: { maxHeight: 200, overflowY: "auto" } }}
-          />
+          /> */}
           <h3
             className=" text-[#202020] mb-[1%] text-[14px] font-[600] "
             id="Project Status"
@@ -207,14 +217,12 @@ const FilterPopup = () => {
               );
             })}
           </div>
-
           <h3
             className=" text-[#202020] mb-[1%] text-[14px] font-[600] "
             id="Locality"
           >
             Locality
           </h3>
-
           {filters.locality.length > 0 && (
             <div className="flex mb-[1%] justify-start items-start gap-[4%]">
               {filters.locality.map((eachLocality, index) => {
@@ -235,7 +243,6 @@ const FilterPopup = () => {
               })}
             </div>
           )}
-
           <MultiSelect
             classNames={{ pill: classes.pill }}
             label=""
@@ -258,7 +265,6 @@ const FilterPopup = () => {
             onSearchChange={(value) => setSearchLocality(value)}
             rightSection={<DropDownIcon />}
           />
-
           <h3
             className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[3%] flex items-center gap-[5px] "
             id="Property Type"
@@ -344,14 +350,12 @@ const FilterPopup = () => {
             onChange={(value) => handleSliderChange("areaValue", value)}
             style={{ width: "80%" }}
           />
-
           <h3
             className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[5%] "
             id="Budget"
           >
             Budget
           </h3>
-
           <p className="text-[#4D6677] text-[16px] font-[600] mb-[2%] ">
             ₹ {toFormattedString(filters.bugdetValue[0])} - ₹{" "}
             {toFormattedString(filters.bugdetValue[1])}
@@ -394,7 +398,6 @@ const FilterPopup = () => {
               </div>
             </React.Fragment>
           )}
-
           <h3
             className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
             id="Amenities"
@@ -415,7 +418,6 @@ const FilterPopup = () => {
               );
             })}
           </div>
-
           {filters?.propTypes != projectprops.plot && (
             <React.Fragment>
               <h3
@@ -439,7 +441,6 @@ const FilterPopup = () => {
               </div>
             </React.Fragment>
           )}
-
           <h3
             className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
             id="RERA"
@@ -460,7 +461,6 @@ const FilterPopup = () => {
               );
             })}
           </div>
-
           {/* <h3 className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] ">
             Listed By
           </h3>
@@ -469,7 +469,6 @@ const FilterPopup = () => {
             <Checkbox label="Agent" color="green" />
             <Checkbox label="Owner" color="green" />
           </div> */}
-
           <h3
             className=" text-[#202020] mb-[1%] text-[14px] font-[600] "
             id="Builder"
@@ -496,7 +495,6 @@ const FilterPopup = () => {
               })}
             </div>
           )}
-
           <MultiSelect
             classNames={{ pill: classes.pill }}
             label=""

@@ -34,7 +34,7 @@ const SearchAndFilterCon = () => {
         close={close}
         showAllLocalities={showAllLocalities}
       />
-      <Drawer
+      {/* <Drawer
         opened={opened}
         onClose={close}
         position="top"
@@ -52,7 +52,7 @@ const SearchAndFilterCon = () => {
           open={open}
           close={close}
         />
-      </Drawer>
+      </Drawer> */}
     </>
   );
 };
@@ -110,7 +110,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
       <div className="mt-2 w-full flex  gap-1 xl:gap-2 sm:gap-[10px] flex-wrap sm:flex-wrap xl:flex-nowrap justify-start xl:justify-start items-center xl:items-center ">
         {isMobile && (
           <div
-            className={`border-[#A0D7FF] max-w-full flex flex-wrap rounded-[20px] sm:rounded-[40px] p-2 gap-2 xl:gap-[8px] pl-2 xl:pl-[8px] border-[1px] border-solid flex items-center justify-center px-6 ${
+            className={`border-[#A0D7FF] max-w-full flex flex-wrap rounded-[20px] sm:rounded-[40px] p-2 gap-2 xl:gap-[8px] pl-2 xl:pl-[8px] border-[1px] border-solid  items-center justify-center px-6 ${
               filters.cg == null ? "sm:min-w-[300px]" : ""
             }`}
           >
@@ -179,7 +179,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
             >
               <Popover.Target>
                 <div
-                  className={`border-[#A0D7FF] max-w-full flex flex-wrap rounded-[20px] sm:rounded-[40px] p-2 gap-2 xl:gap-[8px] pl-2 xl:pl-[8px] border-[1px] border-solid flex items-center justify-center px-6 ${
+                  className={`border-[#A0D7FF] max-w-full flex flex-wrap rounded-[20px] sm:rounded-[40px] p-2 gap-2 xl:gap-[8px] pl-2 xl:pl-[8px] border-[1px] border-solid items-center justify-center px-6 ${
                     filters.cg == null ? "sm:min-w-[300px]" : ""
                   }`}
                 >
