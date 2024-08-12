@@ -28,10 +28,7 @@ export default async function Page() {
   return (
     <div className="h-[100%] w-[100%] flex  flex-col overflow-hidden bg-[#F5F7F8]">
       <Header />
-      <HomeSearch
-        shortIds={shortIds}
-        count={shortIds.projIds.length ?? 1 + shortIds.propIds.length ?? 0}
-      />
+      <HomeSearch count={shortIds.total} />
       <HomeFeatures />
       <NewAddedProjects data={data.featured} shortIds={shortIds} />
       <DynamicListing

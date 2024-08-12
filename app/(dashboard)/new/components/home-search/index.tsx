@@ -19,7 +19,7 @@ import { toQueryParams } from "../../utils/param";
 import { HeartIcon, SelectedHeartIcon } from "@/app/images/HomePageIcons";
 const propertyTypes = ["Buy", "Rent"];
 
-const HomeSearch = ({ shortIds, count }: { shortIds?: any; count: number }) => {
+const HomeSearch = ({ count }: { count: number }) => {
   const f = useAtomValue(homeSearchFiltersAtom);
   const handleSearch = () => {
     const whichPage = f.propType === 36 ? "/search/listing" : "/search";

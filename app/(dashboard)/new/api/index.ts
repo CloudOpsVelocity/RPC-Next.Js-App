@@ -31,9 +31,19 @@ export const getShortIds = async () => {
     try {
       if (process.env.NODE_ENV === "development") {
         return {
-          message: "data from developemnt",
-          propIds: [1],
-          projIds: [1, 2, 3],
+          total: 8,
+          projIds: [
+            "9ea8cf3c5e833a71663f440d450f942f",
+            "9891b38e10299b88cef791a58bc03af8",
+            "4e4920af760dd82499ef7f855cbba69f",
+          ],
+          propIds: [
+            "68da26ae16f44473a3e7710febcf6f03",
+            "493516e7f29fa40dbe483c79fd3591b6",
+            "881a9dfc336469ae1bc8f2f6d5af1266",
+            "f38e3fde9948b9dfa85a578c80dd663b",
+            "2d320b68173ffd4516aad7b2d95001d7",
+          ],
         };
       } else {
         let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/shortlist/ids`;
@@ -47,8 +57,8 @@ export const getShortIds = async () => {
         return await data.json();
       }
     } catch (error: any) {
-      console.log(error);
       return {
+        total: 0,
         propIds: [],
         projIds: [],
       };
