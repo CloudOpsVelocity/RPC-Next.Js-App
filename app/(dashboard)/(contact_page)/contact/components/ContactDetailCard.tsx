@@ -1,0 +1,19 @@
+type Props = {
+  label: string;
+  type: string;
+  link: string;
+  Icon: React.FC<React.SVGProps<SVGSVGElement>>;
+};
+const Card = ({ label, link, type, Icon }: Props) => {
+  return (
+    <a href={link} className="flex items-center gap-3">
+      <div className="bg-[#E8F3FF] h-[30px] xl:w-[46px] w-[30px] xl:h-[46px] justify-center items-center flex rounded-full shadow-[inset_-4px_-8px_8px_#46464620]">
+        <Icon />
+      </div>
+      <p className="text-[#303030] sm:text-[16px] xl:text-xl not-italic font-medium max-w-[330px] xl:max-w-[494px]">
+        {label}
+      </p>
+    </a>
+  );
+};
+export default Card;
