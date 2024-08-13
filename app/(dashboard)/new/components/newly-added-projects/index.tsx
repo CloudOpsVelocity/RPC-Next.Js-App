@@ -14,6 +14,7 @@ export default function NewAddedProjects({ data, shortIds }: Props) {
         title="Featured Projects"
         content="Premier Real Estate Projects Awaiting You"
       />
+      
       <CardCarousel data={data} shortIds={shortIds} />
     </div>
   );

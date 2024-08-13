@@ -1,6 +1,7 @@
 import Button from "@/app/elements/button";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import { NearByDataAtom } from "@/app/store/nearby";
+import { useMediaQuery } from "@mantine/hooks";
 import clsx from "clsx";
 import { useSetAtom } from "jotai";
 import { useSearchParams } from "next/navigation";
@@ -9,6 +10,7 @@ import React from "react";
 type Props = {
   a: number;
   o: number;
+  B:number;
   type: "proj" | "prop";
   reqId: string;
 };
@@ -16,6 +18,7 @@ type Props = {
 export default function CardDownSection({
   a,
   o,
+  B,
   type,
   reqId,
   projName,
@@ -30,6 +33,7 @@ export default function CardDownSection({
   localityName,
   projIdEnc,
 }: any) {
+  const isMobile = useMediaQuery("(max-width: 601px)");
   const name =
     type === "proj"
       ? projName
@@ -72,7 +76,7 @@ export default function CardDownSection({
             />
             <CountListing
               type="Builder"
-              value={55}
+              value={B}
               projIdEnc={projIdEnc}
               projName={projName}
             />
@@ -84,7 +88,7 @@ export default function CardDownSection({
       <div className=" right-1">
         <Button
           onChange={handleOpen}
-          title={type === "proj" ? "Contact" : "Request Callback"}
+          title={`${type === "proj" ? (isMobile ? "Contact" : "Request Callback") : "Request Callback"}`}
           buttonClass="flex justify-end right-1  self-end text-[#FFF] ml-1 p-[3px] md:p-[5px] bg-[#0073C6] rounded-[5px] shadow-md text-[10px] xl:text-[12px] md:text-[12px] font-[700] text-nowrap"
         />
       </div>
