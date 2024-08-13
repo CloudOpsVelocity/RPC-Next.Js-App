@@ -16,10 +16,10 @@ export default function ContactDetails({}: Props) {
         <ContactUsIcon />{" "}
         <div className="flex flex-col items-start gap-1">
           {" "}
-          <p className="text-[color:var(--800,#2D3748)] sm:text-[20px] xl:text-[26px] not-italic font-bold leading-[normal] capitalize">
+          <p className="text-[color:var(--800,#2D3748)] text-[14px] sm:text-[20px] xl:text-[26px] not-italic font-bold leading-[normal] capitalize">
             Contact Us
           </p>
-          <p className="text-black sm:text-[16px] xl:text-xl not-italic font-medium">
+          <p className="text-black text-[12px] sm:text-[16px] xl:text-xl not-italic font-medium">
             We’re here to help you!
           </p>
         </div>
