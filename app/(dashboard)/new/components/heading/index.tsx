@@ -1,6 +1,7 @@
 import data from "@/app/data/auth";
 import clsx from "clsx";
 import React from "react";
+import HandPickedProjects from "../hand-picked-projects";
 
 type Props = {
   title: string;
@@ -21,17 +22,19 @@ export default function MainHeading({ title, content, className }: Props) {
       ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?cgh=R&propStatus=R`
       : title === "Featured Plot Listings"
       ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?propTypes=32`
-      : title === "Under Construction sell Listings"
+      : title === "Under Construction Sell Listings"
       ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?propStatus=U`
       : title === "Under Construction Rent Listings"
       ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?propStatus=U&cg=R`
       : title === "Independent Sell Listings"
       ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?listedBy=I`
-      : `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?listedBy=I&cg=R`;
+      : title === "Independent Rent Listings"
+      ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/search/listing?listedBy=I&cg=R`
+      : `${process.env.NEXT_PUBLIC_BACKEND_URL}`;
 
   return (
     <div className="flex flex-row items-center justify-between">
-      <div>
+      <div className=" flex flex-col items-start justify-start">
         <h1
           className={clsx(
             "text-[#148B16] text-[14px] sm:text-xl xl:text-[24px] not-italic font-bold",
@@ -49,15 +52,18 @@ export default function MainHeading({ title, content, className }: Props) {
           {content}
         </h4>
       </div>
-      {title != "Handpicked Projects" && title != "Top Localities" && (
-        <a
-          className="text-[#0073C6] font-[Montserrat] text-[20px] not-italic font-bold leading-[normal]"
-          href={url}
-          target="_blank"
-        >
-          View all
-        </a>
-      )}
+      {title != "Handpicked Projects" &&
+        title != "Top Localities" &&
+        title != "Listings Posted By" &&
+        title != "Latest Blogs" && (
+          <a
+            className="text-[#0073C6] font-[Montserrat] text-[20px] not-italic font-bold leading-[normal]"
+            href={url}
+            target="_blank"
+          >
+            View all
+          </a>
+        )}
     </div>
   );
 }
