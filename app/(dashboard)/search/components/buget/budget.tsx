@@ -102,11 +102,11 @@ export const toFormattedString = (value: number): string => {
   };
 
   if (value >= 100 * MULTIPLIER_LAKH) {
-    return `${formatValue(value / (100 * MULTIPLIER_LAKH))}CR`;
+    return `${formatValue(value / (100 * MULTIPLIER_LAKH))} Cr`;
   } else if (value >= MULTIPLIER_LAKH) {
-    return `${formatValue(value / MULTIPLIER_LAKH)}L`;
+    return `${formatValue(value / MULTIPLIER_LAKH)} L`;
   } else if (value >= MULTIPLIER_THOUSAND) {
-    return `${formatValue(value / MULTIPLIER_THOUSAND)}K`;
+    return `${formatValue(value / MULTIPLIER_THOUSAND)} K`;
   } else {
     return value.toString();
   }

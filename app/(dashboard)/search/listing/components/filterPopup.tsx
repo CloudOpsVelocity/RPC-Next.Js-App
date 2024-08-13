@@ -257,7 +257,7 @@ const FilterPopup = () => {
             data={data}
             searchable
             nothingFoundMessage={
-              localitySearch !== "" ? "Nothing found..." : "Search somehitng..."
+              localitySearch !== "" ? "Nothing found..." : "Search something..."
             }
             value={filters.locality}
             comboboxProps={{ withinPortal: false }}
@@ -285,8 +285,8 @@ const FilterPopup = () => {
                       key={i}
                       label={x.constDesc}
                       color="green"
-                      onClick={() => handleCheckboxClick("facings", x.cid )}
-                      checked={filters.facings.includes(x.cid )}
+                      onClick={() => handleCheckboxClick("facings", x.cid)}
+                      checked={filters.facings.includes(x.cid)}
                     />
                   );
                 })}
@@ -324,10 +324,10 @@ const FilterPopup = () => {
             Budget
           </h3>
           <p className="text-[#4D6677] text-[16px] font-[600] mb-[4%] ">
-          ₹ {toFormattedString(filters.bugdetValue[0])} - ₹{" "}
-          {toFormattedString(filters.bugdetValue[1])} Cr
+            ₹ {toFormattedString(filters.bugdetValue[0])} - ₹{" "}
+            {toFormattedString(filters.bugdetValue[1])} Cr
           </p>
-         <RangeSlider
+          <RangeSlider
             color="green"
             key="budgetSlider"
             minRange={0}
@@ -437,7 +437,7 @@ const FilterPopup = () => {
               );
             })}
           </div>
-     {/*      <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
+          {/*      <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
           </div> */}
 
           {filters?.propTypes != projectprops.plot && (

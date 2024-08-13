@@ -194,7 +194,7 @@ const FilterPopup = () => {
               localitySearch !== ""
                 ? "Nothing found..."
                 : filters.locality.length < 1
-                ? "Search somehitng..."
+                ? "Search something..."
                 : ""
             }
             value={filters.locality}
@@ -298,8 +298,8 @@ const FilterPopup = () => {
             Budget
           </h3>
           <p className="text-[#4D6677] text-[16px] font-[600] mb-[4%] ">
-          ₹ {toFormattedString(filters.bugdetValue[0])} - ₹{" "}
-          {toFormattedString(filters.bugdetValue[1])} Cr
+            ₹ {toFormattedString(filters.bugdetValue[0])} - ₹{" "}
+            {toFormattedString(filters.bugdetValue[1])} Cr
           </p>
           <RangeSlider
             color="green"

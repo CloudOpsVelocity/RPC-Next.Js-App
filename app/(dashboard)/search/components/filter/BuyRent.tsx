@@ -33,25 +33,27 @@ export default function BuyRent() {
 
   const isMobile = useMediaQuery("(max-width: 601px)");
   return (
-    <Select
-      maw={isMobile ? 100 : 100}
-      label=""
-      placeholder="Select"
-      data={[
-        { label: "Buy", value: "S" },
-        { label: "Rent", value: "R" },
-      ]}
-      classNames={{
-        input: classes.wrapperSelect,
-        option: classes.buyrentoptions,
-        dropdown: classes.dropdown,
-      }}
-      onClick={(e) => e.stopPropagation()}
-      defaultValue={"S"}
-      rightSection={<DropDownIcon />}
-      size="xs"
-      value={params.cg == "R" ? "R" : "S"}
-      onChange={(e) => handleChnage(e ?? "S")}
-    />
+    <div onClick={(e) => e.stopPropagation()}>
+      <Select
+        maw={isMobile ? 100 : 100}
+        label=""
+        placeholder="Select"
+        data={[
+          { label: "Buy", value: "S" },
+          { label: "Rent", value: "R" },
+        ]}
+        classNames={{
+          input: classes.wrapperSelect,
+          option: classes.buyrentoptions,
+          dropdown: classes.dropdown,
+        }}
+        onClick={(e) => e.stopPropagation()}
+        defaultValue={"S"}
+        rightSection={<DropDownIcon />}
+        size="xs"
+        value={params.cg == "R" ? "R" : "S"}
+        onChange={(e) => handleChnage(e ?? "S")}
+      />
+    </div>
   );
 }

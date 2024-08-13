@@ -82,15 +82,19 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
     const selectedItem = SEARCH_FILTER_DATA.bhkDetails.find(
       (item) => item.value === itemId
     );
+
     if (selectedItem) {
       // Check if the item is within the first `maxDisplay` items or if it's the last item when more than `maxDisplay` items are present
+      const isLastItemToDisplay =
+        i === maxDisplay - 1 && filters.unitTypes.length > maxDisplay;
+      const shouldAddComma =
+        i < maxDisplay - 1 && i < filters.unitTypes.length - 1;
+
       return (
         <React.Fragment key={itemId}>
           {i < maxDisplay ? selectedItem.title : ""}
-          {i < maxDisplay - 1 && ", "}
-          {i === maxDisplay - 1 && filters.unitTypes.length > maxDisplay
-            ? " ..."
-            : ""}
+          {shouldAddComma ? ", " : ""}
+          {isLastItemToDisplay ? " ..." : ""}
         </React.Fragment>
       );
     }

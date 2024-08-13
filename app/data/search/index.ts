@@ -50,46 +50,46 @@ export const SEARCH_FILTER_DATA = {
   ],
   rerastatus: [
     {
-      "cid": 101,
-      "constDesc": "Recieved",
-      "constGroup": "rerastatus",
-      "constType": "CON",
-      "constParentGroup": "rerastatus",
-      "parentGroupId": 100,
-      "seq": 1
-  },
-  {
-      "cid": 102,
-      "constDesc": "Applied",
-      "constGroup": "rerastatus",
-      "constType": "CON",
-      "constParentGroup": "rerastatus",
-      "parentGroupId": 100,
-      "seq": 2
-  },
-  {
-      "cid": 103,
-      "constDesc": "Not Applied",
-      "constGroup": "rerastatus",
-      "constType": "CON",
-      "constParentGroup": "rerastatus",
-      "parentGroupId": 100,
-      "seq": 3
-  },
-  {
-      "cid": 104,
-      "constDesc": "Ready To Move /  Not Applicable",
-      "constGroup": "rerastatus",
-      "constType": "CON",
-      "constParentGroup": "rerastatus",
-      "parentGroupId": 100,
-      "seq": 4
-  }
+      cid: 101,
+      constDesc: "Recieved",
+      constGroup: "rerastatus",
+      constType: "CON",
+      constParentGroup: "rerastatus",
+      parentGroupId: 100,
+      seq: 1,
+    },
+    {
+      cid: 102,
+      constDesc: "Applied",
+      constGroup: "rerastatus",
+      constType: "CON",
+      constParentGroup: "rerastatus",
+      parentGroupId: 100,
+      seq: 2,
+    },
+    {
+      cid: 103,
+      constDesc: "Not Applied",
+      constGroup: "rerastatus",
+      constType: "CON",
+      constParentGroup: "rerastatus",
+      parentGroupId: 100,
+      seq: 3,
+    },
+    {
+      cid: 104,
+      constDesc: "Ready To Move /  Not Applicable",
+      constGroup: "rerastatus",
+      constType: "CON",
+      constParentGroup: "rerastatus",
+      parentGroupId: 100,
+      seq: 4,
+    },
   ],
   listedBy: [
     {
       cid: 1,
-      constDesc: "Individual",
+      constDesc: "Owner",
       constGroup: "listedBy",
       constType: "IN",
       constParentGroup: "listedBy",
@@ -283,90 +283,90 @@ export const SEARCH_FILTER_DATA = {
       value: "A",
     },
   ],
-  
-    facing: [
-        {
-            "cid": 61,
-            "constDesc": "East",
-            "constGroup": "facing",
-            "constType": "CON",
-            "constParentGroup": "facing",
-            "parentGroupId": 60,
-            "seq": 1
-        },
-        {
-            "cid": 62,
-            "constDesc": "West",
-            "constGroup": "facing",
-            "constType": "CON",
-            "constParentGroup": "facing",
-            "parentGroupId": 60,
-            "seq": 2
-        },
-        {
-            "cid": 63,
-            "constDesc": "North",
-            "constGroup": "facing",
-            "constType": "CON",
-            "constParentGroup": "facing",
-            "parentGroupId": 60,
-            "seq": 3
-        },
-        {
-            "cid": 64,
-            "constDesc": "South",
-            "constGroup": "facing",
-            "constType": "CON",
-            "constParentGroup": "facing",
-            "parentGroupId": 60,
-            "seq": 4
-        },
-        {
-            "cid": 65,
-            "constDesc": "North East",
-            "constGroup": "facing",
-            "constType": "CON",
-            "constParentGroup": "facing",
-            "parentGroupId": 60,
-            "seq": 5
-        },
-        {
-            "cid": 66,
-            "constDesc": "South East",
-            "constGroup": "facing",
-            "constType": "CON",
-            "constParentGroup": "facing",
-            "parentGroupId": 60,
-            "seq": 6
-        },
-        {
-            "cid": 67,
-            "constDesc": "North West",
-            "constGroup": "facing",
-            "constType": "CON",
-            "constParentGroup": "facing",
-            "parentGroupId": 60,
-            "seq": 7
-        },
-        {
-            "cid": 68,
-            "constDesc": "South West",
-            "constGroup": "facing",
-            "constType": "CON",
-            "constParentGroup": "facing",
-            "parentGroupId": 60,
-            "seq": 8
-        },
-        {
-            "cid": 69,
-            "constDesc": "Don't Know",
-            "constGroup": "facing",
-            "constType": "CON",
-            "constParentGroup": "facing",
-            "parentGroupId": 60,
-            "seq": 9
-        }
-    ],
+
+  facing: [
+    {
+      cid: 61,
+      constDesc: "East",
+      constGroup: "facing",
+      constType: "CON",
+      constParentGroup: "facing",
+      parentGroupId: 60,
+      seq: 1,
+    },
+    {
+      cid: 62,
+      constDesc: "West",
+      constGroup: "facing",
+      constType: "CON",
+      constParentGroup: "facing",
+      parentGroupId: 60,
+      seq: 2,
+    },
+    {
+      cid: 63,
+      constDesc: "North",
+      constGroup: "facing",
+      constType: "CON",
+      constParentGroup: "facing",
+      parentGroupId: 60,
+      seq: 3,
+    },
+    {
+      cid: 64,
+      constDesc: "South",
+      constGroup: "facing",
+      constType: "CON",
+      constParentGroup: "facing",
+      parentGroupId: 60,
+      seq: 4,
+    },
+    {
+      cid: 65,
+      constDesc: "North East",
+      constGroup: "facing",
+      constType: "CON",
+      constParentGroup: "facing",
+      parentGroupId: 60,
+      seq: 5,
+    },
+    {
+      cid: 66,
+      constDesc: "South East",
+      constGroup: "facing",
+      constType: "CON",
+      constParentGroup: "facing",
+      parentGroupId: 60,
+      seq: 6,
+    },
+    {
+      cid: 67,
+      constDesc: "North West",
+      constGroup: "facing",
+      constType: "CON",
+      constParentGroup: "facing",
+      parentGroupId: 60,
+      seq: 7,
+    },
+    {
+      cid: 68,
+      constDesc: "South West",
+      constGroup: "facing",
+      constType: "CON",
+      constParentGroup: "facing",
+      parentGroupId: 60,
+      seq: 8,
+    },
+    {
+      cid: 69,
+      constDesc: "Don't Know",
+      constGroup: "facing",
+      constType: "CON",
+      constParentGroup: "facing",
+      parentGroupId: 60,
+      seq: 9,
+    },
+  ],
   furnish: [
     {
       cid: 51,

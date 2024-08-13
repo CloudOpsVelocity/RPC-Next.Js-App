@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Combobox,
   InputBase,
@@ -6,38 +6,39 @@ import {
   NumberInput,
   Group,
   Input,
+  FocusTrap,
 } from "@mantine/core";
 import styles from "./Style.module.css";
 import { useAtom } from "jotai";
 import { homeSearchFiltersAtom } from "@/app/store/home";
-import { useMediaQuery } from "@mantine/hooks";
+import { useFocusReturn, useMediaQuery } from "@mantine/hooks";
 import { toFormattedString } from "@/app/(dashboard)/search/components/buget/budget";
 
 const MULTIPLIER = 100000;
 const THOUSANDMULTIPLIER = 1000;
 
 const groceries = [
-  "₹5L",
-  "₹10L",
-  "₹20L",
-  "₹30L",
-  "₹40L",
-  "₹50L",
-  "₹60L",
-  "₹70L",
-  "₹80L",
-  "₹90L",
-  "₹1CR",
-  "₹10CR",
-  "₹20CR",
-  "₹30CR",
-  "₹40CR",
-  "₹50CR",
-  "₹60CR",
+  "₹5 L",
+  "₹10 L",
+  "₹20 L",
+  "₹30 L",
+  "₹40 L",
+  "₹50 L",
+  "₹60 L",
+  "₹70 L",
+  "₹80 L",
+  "₹90 L",
+  "₹1 CR",
+  "₹10 CR",
+  "₹20 CR",
+  "₹30 CR",
+  "₹40 CR",
+  "₹50 CR",
+  "₹60 CR",
 ];
 
 const pricesForRent = [
-  "₹5L",
+  "₹5 L",
   "₹5,000",
   "₹10,000",
   "₹15,000",
@@ -53,27 +54,27 @@ const pricesForRent = [
   "₹70,000",
   "₹80,000",
   "₹90,000",
-  "₹1L",
+  "₹1 L",
 ];
 
 const map = new Map<string, { value: number }>([
-  ["₹5L", { value: 5 * MULTIPLIER }],
-  ["₹10L", { value: 10 * MULTIPLIER }],
-  ["₹20L", { value: 20 * MULTIPLIER }],
-  ["₹30L", { value: 30 * MULTIPLIER }],
-  ["₹40L", { value: 40 * MULTIPLIER }],
-  ["₹50L", { value: 50 * MULTIPLIER }],
-  ["₹60L", { value: 60 * MULTIPLIER }],
-  ["₹70L", { value: 70 * MULTIPLIER }],
-  ["₹80L", { value: 80 * MULTIPLIER }],
-  ["₹90L", { value: 90 * MULTIPLIER }],
-  ["₹1CR", { value: 100 * MULTIPLIER }],
-  ["₹10CR", { value: 1000 * MULTIPLIER }],
-  ["₹20CR", { value: 2000 * MULTIPLIER }],
-  ["₹30CR", { value: 3000 * MULTIPLIER }],
-  ["₹40CR", { value: 4000 * MULTIPLIER }],
-  ["₹50CR", { value: 5000 * MULTIPLIER }],
-  ["₹60CR", { value: 6000 * MULTIPLIER }],
+  ["₹5 L", { value: 5 * MULTIPLIER }],
+  ["₹10 L", { value: 10 * MULTIPLIER }],
+  ["₹20 L", { value: 20 * MULTIPLIER }],
+  ["₹30 L", { value: 30 * MULTIPLIER }],
+  ["₹40 L", { value: 40 * MULTIPLIER }],
+  ["₹50 L", { value: 50 * MULTIPLIER }],
+  ["₹60 L", { value: 60 * MULTIPLIER }],
+  ["₹70 L", { value: 70 * MULTIPLIER }],
+  ["₹80 L", { value: 80 * MULTIPLIER }],
+  ["₹90 L", { value: 90 * MULTIPLIER }],
+  ["₹1 CR", { value: 100 * MULTIPLIER }],
+  ["₹10 CR", { value: 1000 * MULTIPLIER }],
+  ["₹20 CR", { value: 2000 * MULTIPLIER }],
+  ["₹30 CR", { value: 3000 * MULTIPLIER }],
+  ["₹40 CR", { value: 4000 * MULTIPLIER }],
+  ["₹50 CR", { value: 5000 * MULTIPLIER }],
+  ["₹60 CR", { value: 6000 * MULTIPLIER }],
 
   ["₹0", { value: 0 }],
   ["₹5,000", { value: 5 * THOUSANDMULTIPLIER }],
@@ -91,7 +92,7 @@ const map = new Map<string, { value: number }>([
   ["₹70,000", { value: 70 * THOUSANDMULTIPLIER }],
   ["₹80,000", { value: 80 * THOUSANDMULTIPLIER }],
   ["₹90,000", { value: 90 * THOUSANDMULTIPLIER }],
-  ["₹1L", { value: 100 * THOUSANDMULTIPLIER }],
+  ["₹1 L", { value: 100 * THOUSANDMULTIPLIER }],
 ]);
 
 export function BasicBudgetSelect() {
@@ -129,16 +130,20 @@ export function BasicBudgetSelect() {
     const handleOptionSelect = () => {
       if (focusedInput === "max") {
         // setMaxValue(value);
+
         dispatch({
           type: "SET_BUGDET_VALUE",
           payload: [minValue, value],
         });
+        combobox.closeDropdown();
       } else {
         // setMinValue(value);
+
         dispatch({
           type: "SET_BUGDET_VALUE",
           payload: [value, maxValue],
         });
+        setFocusedInput("max");
       }
     };
     return (
@@ -181,6 +186,14 @@ export function BasicBudgetSelect() {
     (f.bugdetValue[0] === 0 && f.bugdetValue[1] === 100000) ||
     (!f.bugdetValue[0] && !f.bugdetValue[1])
   );
+
+  const minPriceInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (minPriceInputRef.current) {
+      minPriceInputRef.current.focus();
+    }
+  }, []);
   return (
     <Combobox
       store={combobox}
@@ -201,6 +214,7 @@ export function BasicBudgetSelect() {
     >
       <Combobox.Target>
         <InputBase
+          pointer
           component="button"
           type="button"
           rightSection={<DropIcon />}
@@ -239,7 +253,16 @@ export function BasicBudgetSelect() {
             classNames={{ input: styles.minMaxInput }}
             label="Min Price"
             thousandsGroupStyle="lakh"
+            ref={minPriceInputRef}
+            styles={{
+              input: {
+                ...(focusedInput === "min" && {
+                  border: "1px solid #0073C6",
+                }),
+              },
+            }}
           />
+
           <NumberInput
             label="Max Price"
             placeholder="Max Price"
@@ -255,6 +278,13 @@ export function BasicBudgetSelect() {
             max={6000 * MULTIPLIER}
             classNames={{ input: styles.minMaxInput }}
             thousandsGroupStyle="lakh"
+            styles={{
+              input: {
+                ...(focusedInput === "max" && {
+                  border: "1px solid #0073C6",
+                }),
+              },
+            }}
           />
         </Group>
         {options}
