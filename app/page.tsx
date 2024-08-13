@@ -24,12 +24,14 @@ export default async function Page() {
     getHomeListingData(),
     getShortIds(),
   ]);
+  console.log(shortIds)
   return (
     <div className="h-[100%] w-[100%] flex  flex-col overflow-hidden bg-[#F5F7F8]">
       <Header />
       <HomeSearch />
       <HomeFeatures />
       <NewAddedProjects data={data.featured} shortIds={shortIds} />
+
       <DynamicListing
         title="Ready to Move Sell Listings"
         content="Move In Today: Your Dream Home Awaits – Explore Our Ready-to-Move Listings Now!"

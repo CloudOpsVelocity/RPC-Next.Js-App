@@ -250,6 +250,35 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
                 {params.listedBy ? <ListingPopup /> : <FilterPopup />}
               </Popover.Dropdown>
             </Popover>
+            <Popover
+              width={"auto"}
+              trapFocus
+              position="bottom"
+              withArrow
+              shadow="lg"
+              radius={10}
+              offset={{ mainAxis: 10, crossAxis: 0 }}
+            >
+              <Popover.Target>
+                <button className=" text-[#0073C6] hidden text-[14px] xl:text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] lg:flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md ">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="10"
+                    height="10"
+                    viewBox="0 0 10 10"
+                    fill="none"
+                  >
+                    <circle cx="5" cy="5" r="5" fill="#148B16" />
+                  </svg>
+                  {filters.propTypes
+                    ? propertyDetailsTypes.get(filters.propTypes)?.name
+                    : "Select Property Type"}
+                </button>
+              </Popover.Target>
+              <Popover.Dropdown className="!z-50" p={0}>
+                <PropTypeFilter />
+              </Popover.Dropdown>
+            </Popover>
             {filters.propTypes !== 32 && (
               <Popover
                 width={"auto"}
@@ -280,35 +309,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
               </Popover>
             )}
 
-            <Popover
-              width={"auto"}
-              trapFocus
-              position="bottom"
-              withArrow
-              shadow="lg"
-              radius={10}
-              offset={{ mainAxis: 10, crossAxis: 0 }}
-            >
-              <Popover.Target>
-                <button className=" text-[#0073C6] hidden text-[14px] xl:text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] lg:flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md ">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="10"
-                    height="10"
-                    viewBox="0 0 10 10"
-                    fill="none"
-                  >
-                    <circle cx="5" cy="5" r="5" fill="#148B16" />
-                  </svg>
-                  {filters.propTypes
-                    ? propertyDetailsTypes.get(filters.propTypes)?.name
-                    : "Select Property Type"}
-                </button>
-              </Popover.Target>
-              <Popover.Dropdown className="!z-50" p={0}>
-                <PropTypeFilter />
-              </Popover.Dropdown>
-            </Popover>
+           
             <Popover
               width={"auto"}
               trapFocus

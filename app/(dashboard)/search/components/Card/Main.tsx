@@ -142,6 +142,7 @@ const MainBox = ({ data, refetch, index, mutate }: Props) => {
       <CardDownSection
         a={data.agentListing}
         o={data.ownerListing}
+        B={data.builderListing}
         type={type}
         reqId={reqId}
         {...data}
