@@ -43,7 +43,7 @@ export default function ListingCard({ item, sl }: Props) {
           href={url}
           target="_blank"
         >
-          View Detail
+          View Details
         </a>
 
         <Image
