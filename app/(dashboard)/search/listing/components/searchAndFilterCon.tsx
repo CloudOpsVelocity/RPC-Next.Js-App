@@ -44,25 +44,6 @@ const SearchAndFilterCon = () => {
         open={open}
         close={close}
       />
-      {/* <Drawer
-        opened={opened}
-        onClose={close}
-        position="top"
-        classNames={{
-          overlay: S.overlay,
-          content: S.content,
-          header: S.header,
-          body: classes.body,
-        }}
-        size={isMobile ? "100%" : debounced ? "70%" : "20%"}
-      >
-        <SearchDrawerHeader
-          showAllLocalities={showAllLocalities}
-          setShowAllLocalities={setShowAllLocalities}
-          open={open}
-          close={close}
-        />
-      </Drawer> */}
     </>
   );
 };
@@ -131,6 +112,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
     (filters.bugdetValue[0] === 0 && filters.bugdetValue[1] === 100000)
   );
   const allFiltersMap = [...filters.locality, ...filters.builderIds];
+  console.log(allFiltersMap);
   return (
     <div className="mb-4 w-full  mt-[60px] sm:mt-[80px] pl-[1%]   ">
       <p className="text-[12px]  text-[#737579] font-[500] mt-2 mb-2 sm:mb-0  w-full md:w-auto">
@@ -176,7 +158,12 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
                 index < (isTab ? 1 : 2) && (
                   <Pill
                     onRemove={() => {
-                      remnoveSearchOptions(each, "locality");
+                      remnoveSearchOptions(
+                        each,
+                        filters.builderIds.includes(each)
+                          ? "builderIds"
+                          : "locality"
+                      );
                       handleAppliedFilters();
                     }}
                     key={index}
@@ -250,7 +237,35 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
                       {projName}
                     </Pill>
                   )}
-
+                  {allFiltersMap?.map(
+                    (each, index) =>
+                      index < (isTab ? 1 : 2) && (
+                        <Pill
+                          onRemove={() => {
+                            remnoveSearchOptions(
+                              each,
+                              filters.builderIds.includes(each)
+                                ? "builderIds"
+                                : "locality"
+                            );
+                            handleAppliedFilters();
+                          }}
+                          key={index}
+                          withRemoveButton
+                          classNames={{
+                            root: classes.MultiSelectionPill,
+                            remove: classes.removeButton,
+                          }}
+                          removeButtonProps={{
+                            style: {
+                              color: "#03153",
+                            },
+                          }}
+                        >
+                          {each.split("+")[0]}
+                        </Pill>
+                      )
+                  )}
                   {allFiltersMap?.length > (isTab ? 1 : 2) && (
                     <Pill
                       className="capitalize"

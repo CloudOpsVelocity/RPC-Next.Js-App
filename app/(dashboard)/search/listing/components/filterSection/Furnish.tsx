@@ -7,7 +7,6 @@ type Props = {};
 
 export default function FurnishOptions({}: Props) {
   const { filters, setSingleType } = useSearchFilters();
-
   return (
     <div>
       {" "}
