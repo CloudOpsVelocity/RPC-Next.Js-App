@@ -77,11 +77,9 @@ export default function ListingCard({ item, sl }: Props) {
               {item.category !== "Rent" && (
                 <span className="text-[#616D75] text-[11px] sm:text-[12px] xl:text-base not-italic font-bold leading-[normal] capitalize">
                   ₹{" "}
-                  {formatNumberWithSuffix(
-                    calculatePerSqPrice(
-                      item.price,
-                      item.propTypeName === "Plot" ? item.pa : item.sba
-                    )
+                  {calculatePerSqPrice(
+                    item.price,
+                    item.propTypeName === "Plot" ? item.pa : item.sba
                   )}
                   /- sq.ft
                 </span>

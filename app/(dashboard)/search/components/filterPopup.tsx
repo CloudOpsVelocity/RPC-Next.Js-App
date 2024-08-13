@@ -297,24 +297,24 @@ const FilterPopup = () => {
           >
             Budget
           </h3>
-          <p className="text-[#4D6677] text-[16px] font-[600] mb-[4%] ">
+          <p className="text-[#4D6677] text-[16px] font-[600] mb-[2%] ">
             ₹ {toFormattedString(filters.bugdetValue[0])} - ₹{" "}
-            {toFormattedString(filters.bugdetValue[1])} Cr
+            {toFormattedString(filters.bugdetValue[1])}
           </p>
           <RangeSlider
             color="green"
             key="budgetSlider"
-            minRange={0}
-            min={0}
-            max={60}
-            step={0.05}
             onChange={(value) => handleSliderChange("bugdetValue", value)}
-            style={{ width: "99%" }}
+            style={{ width: "80%" }}
             defaultValue={[
-              filters?.bugdetValue?.[0] ?? 0.05,
-              filters?.bugdetValue?.[1] ?? 60,
+              filters?.bugdetValue[0] ?? 500000,
+              filters?.bugdetValue[1] ?? 600000000,
             ]}
-            label={formatBudgetValue}
+            value={filters.bugdetValue}
+            min={0}
+            max={filters.cg === "R" ? 100000 : 600000000}
+            step={filters.cg === "R" ? 1 : 100000}
+            label={(value) => toFormattedString(value)}
           />
           {filters?.propTypes != projectprops.plot && (
             <React.Fragment>

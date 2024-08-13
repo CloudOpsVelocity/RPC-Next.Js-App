@@ -37,9 +37,9 @@ const HomeSearch = ({ count }: { count: number }) => {
     >
       <Alert />
       {/* shortlisted */}
-      {count > 0 && (
+      {count && (
         <a
-          href="/my-profile#step_D"
+          href="/my-profile#step_E"
           target="_blank"
           className="inline-flex items-center gap-[5px] rounded shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] sm:p-1 xl:p-2 border-[0.5px] border-solid border-[#4D6677] bg-[#e5f4ff] fixed  bottom-10 right-5  sm:text-sm xl:text-xl z-[1000]"
         >

@@ -15,8 +15,10 @@ export default function Shortlist({ reqId, shortListed }: Props) {
   const { toggleShortlist } = useShortlistAndCompare();
   const { data: session } = useSession();
   const [, { open: openLogin }] = usePopShortList();
-  const onAddingShortList = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-  e.stopPropagation();
+  const onAddingShortList = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.stopPropagation();
     if (session) {
       setState(!state);
       toggleShortlist({
@@ -25,11 +27,11 @@ export default function Shortlist({ reqId, shortListed }: Props) {
         source: "proj",
       });
     } else {
-      openLogin(() => console.log("grp"));
+      openLogin(() => window.location.reload());
     }
   };
   return (
-    <button onClick={(e)=>onAddingShortList(e)}>
+    <button onClick={(e) => onAddingShortList(e)}>
       {state ? (
         config.trueIcon
       ) : (

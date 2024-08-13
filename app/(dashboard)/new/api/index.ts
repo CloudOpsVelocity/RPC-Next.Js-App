@@ -25,7 +25,6 @@ export const getHomeListingData = async () => {
 };
 export const getShortIds = async () => {
   const session = await getServerSession(options);
-  console.log("🚀 ~ getShortIds ~ session:", session);
 
   if (session) {
     try {
@@ -50,7 +49,7 @@ export const getShortIds = async () => {
         let data = await fetch(url, {
           headers: {
             // @ts-ignore
-            Authorization: `${session.user.token as any}`,
+            Authorization: `${session?.user?.token as any}`,
           },
         });
 
