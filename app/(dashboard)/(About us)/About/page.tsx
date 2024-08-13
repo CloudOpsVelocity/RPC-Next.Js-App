@@ -134,8 +134,8 @@ export default function page({}: Props) {
 
                      <div className='flex flex-row gap-[2%] mt-8 mx-auto'>
                         <div className='h-[autopx] max-w-[30%] flex flex-col p-12 rounded-[20px] justify-center border-[1px] border-[solid] border-[rgba(194,194,194,0.60)] bg-[#FFF]           [box-shadow:0px_10px_25px_0px_rgba(194,_194,_194,_0.44)]'>
-                              <div className='flex flex-row gap-2'> 
-                                <div>
+                              <div className='flex flex-row gap-2 justify-between   '> 
+                                <div className='flex felx-row items-center gap-2'>
                                 <img 
                                     className='w-[56px] h-[56px] rounded-full '
                                     src={"/youtube.png"}
@@ -146,19 +146,32 @@ export default function page({}: Props) {
                             </div>
                             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ullam animi necessitatibus, provident officiis illo, et exercitationem inventore veritatis culpa non corrupti iste ad ut eos! Aliquam soluta veniam accusantium incidunt, temporibus atque facilis. Libero molestias quaerat eveniet fugit temporibus dolore quam deserunt quibusdam.</p>
                         </div>
-                        <div className='h-[autopx] max-w-[30%] p-12 rounded-[20px] justify-center border-[1px] border-[solid] border-[rgba(194,194,194,0.60)] bg-[#FFF]           [box-shadow:0px_10px_25px_0px_rgba(194,_194,_194,_0.44)]'>
-                           <div className=' w-[65.105px] h-[53px] rounded-[4px] flex justify-center items-center bg-[rgba(2,_152,_55,_0.10)] p-auto'><BuildingIconABout /> </div>
-                                <h1 className='text-[#003] font-[Montserrat] text-[20px] not-italic font-bold leading-[30px] mt-4'>Newly Launched Projects</h1>
-                                <p className='text-[rgba(0,_0,_51,_0.95)] font-[Montserrat] text-[15px] not-italic font-medium leading-[26px] mt-3 mb-8'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin consectetur justo quis euismod vehicula. Quisque diam dui, imperdiet et hendrerit in, accumsan tempus erat. </p>
-                                <a className='rounded-[4px] border-[1.618px] border-[solid] border-[#0073C6] px-[16.594px] py-[11.063px] justify-center items-center '>Explore Now</a>
+                        <div className='h-[autopx] max-w-[30%] flex flex-col p-12 rounded-[20px] justify-center border-[1px] border-[solid] border-[rgba(194,194,194,0.60)] bg-[#FFF]           [box-shadow:0px_10px_25px_0px_rgba(194,_194,_194,_0.44)]'>
+                              <div className='flex flex-row gap-2 justify-between'> 
+                                <div className='flex felx-row items-center gap-2  '>
+                                <img 
+                                    className='w-[56px] h-[56px] rounded-full '
+                                    src={"/youtube.png"}
+                                    />
+                                     <p> manish kumar<br/><span>Kurnool</span></p>
+                                </div>  
+                                <p className='text-[#029837] font-[Mulish] text-[48px] not-italic font-bold leading-[40px]'>“</p>
+                            </div>
+                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ullam animi necessitatibus, provident officiis illo, et exercitationem inventore veritatis culpa non corrupti iste ad ut eos! Aliquam soluta veniam accusantium incidunt, temporibus atque facilis. Libero molestias quaerat eveniet fugit temporibus dolore quam deserunt quibusdam.</p>
                         </div>
-                        <div className='h-[autopx] max-w-[30%] p-12 rounded-[20px] justify-center border-[1px] border-[solid] border-[rgba(194,194,194,0.60)] bg-[#FFF]           [box-shadow:0px_10px_25px_0px_rgba(194,_194,_194,_0.44)]'>
-                           <div className=' w-[65.105px] h-[53px] rounded-[4px] flex justify-center items-center bg-[rgba(2,_152,_55,_0.10)] p-auto'><BuildingIconABout /> </div>
-                                <h1 className='text-[#003] font-[Montserrat] text-[20px] not-italic font-bold leading-[30px] mt-4'>Newly Launched Projects</h1>
-                                <p className='text-[rgba(0,_0,_51,_0.95)] font-[Montserrat] text-[15px] not-italic font-medium leading-[26px] mt-3 mb-8'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin consectetur justo quis euismod vehicula. Quisque diam dui, imperdiet et hendrerit in, accumsan tempus erat. </p>
-                                <a className='rounded-[4px] border-[1.618px] border-[solid] border-[#0073C6] px-[16.594px] py-[11.063px] justify-center items-center '>Explore Now</a>
-                     </div>  
-                    
+                        <div className='h-[autopx] max-w-[30%] flex flex-col p-12 rounded-[20px] justify-center border-[1px] border-[solid] border-[rgba(194,194,194,0.60)] bg-[#FFF]           [box-shadow:0px_10px_25px_0px_rgba(194,_194,_194,_0.44)]'>
+                              <div className='flex flex-row gap-2 justify-between'> 
+                                <div className=' flex felx-row items-center gap-2 '>
+                                <img 
+                                    className='w-[56px] h-[56px] rounded-full '
+                                    src={"/youtube.png"}
+                                    />
+                                     <p> manish kumar<br/><span>Kurnool</span></p>
+                                </div>  
+                                <p className='text-[#029837] font-[Mulish] text-[48px] not-italic font-bold leading-[40px]'>“</p>
+                            </div>
+                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ullam animi necessitatibus, provident officiis illo, et exercitationem inventore veritatis culpa non corrupti iste ad ut eos! Aliquam soluta veniam accusantium incidunt, temporibus atque facilis. Libero molestias quaerat eveniet fugit temporibus dolore quam deserunt quibusdam.</p>
+                        </div>
                     </div>
                 <img 
                     className='w-[8%] h-[38px] absolute mt-12 bottom-0 left-0 '
