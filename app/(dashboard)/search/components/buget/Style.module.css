@@ -1,6 +1,9 @@
 .dropdown {
   background-color: #f3f3f3;
   min-width: fit-content;
+  max-height: 400px;
+  overflow-y: scroll;
+  padding: 0px;
 }
 
 .option {
@@ -17,7 +20,7 @@
   cursor: pointer;
 }
 
-.MaxOption{
+.MaxOption {
   padding-left: 120px;
 }
 
@@ -69,7 +72,7 @@
 }
 
 /* TAB */
-@media only screen and (min-width: 600px) and (max-width: 1280px) {
+@media only screen and (min-width: 600px) and (max-width: 1600px) {
   .input::placeholder,
   .minMaxInput::placeholder,
   .minMaxInput,
@@ -78,15 +81,19 @@
     font-size: 12px;
   }
 
-  .input{
+  .input {
     height: 20px !important;
   }
-  
-
+  .dropdown {
+    background-color: #f3f3f3;
+    min-width: fit-content;
+    max-height: 300px;
+    overflow-y: scroll;
+    padding: 0px;
+  }
   /* .dropdown {
     padding-right: 30px;
   } */
-
 }
 
 /* MOBILE */
@@ -98,6 +105,11 @@
   .option {
     font-size: 12px;
   }
-  
-
+  .dropdown {
+    background-color: #f3f3f3;
+    min-width: fit-content;
+    max-height: 200px;
+    overflow-y: scroll;
+    padding: 0px;
+  }
 }

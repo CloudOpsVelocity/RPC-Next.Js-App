@@ -187,13 +187,6 @@ export function BasicBudgetSelect() {
     (!f.bugdetValue[0] && !f.bugdetValue[1])
   );
 
-  const minPriceInputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    if (minPriceInputRef.current) {
-      minPriceInputRef.current.focus();
-    }
-  }, []);
   return (
     <Combobox
       store={combobox}
@@ -253,7 +246,6 @@ export function BasicBudgetSelect() {
             classNames={{ input: styles.minMaxInput }}
             label="Min Price"
             thousandsGroupStyle="lakh"
-            ref={minPriceInputRef}
             styles={{
               input: {
                 ...(focusedInput === "min" && {
