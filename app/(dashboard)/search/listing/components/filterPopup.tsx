@@ -29,6 +29,7 @@ import clsx from "clsx";
 import { toFormattedString } from "../../components/buget/budget";
 import { MainSearchMultiSelect } from "../../components/_ui/Multiselect";
 import { formatBudgetValue } from "../../components/buget";
+import FurnishOptions from "./filterSection/Furnish";
 
 const FilterPopup = () => {
   const path = usePathname();
@@ -204,12 +205,15 @@ const FilterPopup = () => {
           >
             Posted By
           </h3>
-          <div className="flex  mb-[3%] justify-start items-start flex-wrap gap-[4%]">
+          <div
+            className="flex  mb-[3%] justify-start items-start flex-wrap gap-[4%]"
+            key={"listedBy"}
+          >
             {SEARCH_FILTER_DATA.listedBy
               .filter(({ value }) => !(value === "B" && path === "/search"))
-              .map(({ value, constDesc }, i) => (
+              .map(({ value, constDesc }) => (
                 <Radio
-                  key={i}
+                  key={constDesc}
                   iconColor="dark.8"
                   color="green"
                   label={constDesc}
@@ -392,31 +396,7 @@ const FilterPopup = () => {
               );
             })}
           </div>
-          <React.Fragment>
-            <h3
-              className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
-              id="Furnishing"
-            >
-              Furnishing
-            </h3>
-            <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
-              {SEARCH_FILTER_DATA.furnish.map(({ constDesc, cid }, i) => {
-                return (
-                  <Radio
-                    key={i}
-                    iconColor="dark.8"
-                    color="green"
-                    label={constDesc}
-                    value={cid}
-                    name="ListedBy"
-                    style={{ whiteSpace: "nowrap", marginBottom: "10px" }}
-                    onClick={() => setSingleType("furnish", cid)}
-                    checked={filters.furnish === cid}
-                  />
-                );
-              })}
-            </div>
-          </React.Fragment>
+          <FurnishOptions />
           <h3
             className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
             id="Amenities"

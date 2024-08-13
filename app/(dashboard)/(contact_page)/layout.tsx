@@ -9,7 +9,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <div className="pt-[70px]">
         <Link
           href={"/"}
-          className="text-[#202020] text-xl not-italic font-medium inline-flex mt-[3%] ml-[2%] gap-1"
+          className="text-[#202020] text-[14px] sm:text-xl not-italic font-medium inline-flex mt-[3%] ml-[2%] gap-1"
         >
           <ContactBackButtonIcon />
           Back

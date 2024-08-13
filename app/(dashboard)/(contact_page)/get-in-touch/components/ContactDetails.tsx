@@ -12,7 +12,7 @@ type Props = {};
 export default function ContactDetails({}: Props) {
   return (
     <div>
-      <div className="flex justify-start items-center -ml-[6%] sm:-ml-3 xl:-ml-5 mb-2">
+      <div className="flex justify-start items-center -ml-[3.5%] sm:-ml-3 xl:-ml-5 mb-2">
         <ContactUsIcon />{" "}
         <div className="flex flex-col items-start gap-1">
           {" "}
@@ -44,7 +44,7 @@ const Config = {
     {
       label: "contactus@grp.com",
       type: "email",
-      link: "contactus@grp.com",
+      link: "mailto:contactus@grp.com",
       Icon: ContactEmail,
     },
     {

@@ -240,6 +240,7 @@ export const ContactBackButtonIcon = () => {
       height="32"
       viewBox="0 0 32 32"
       fill="none"
+      className="h-[20px] w-[20px] sm:min-h-[32px] sm:min-w-[32px]"
     >
       <rect width="32" height="32" rx="16" fill="#E8F3FF" />
       <path
@@ -258,7 +259,7 @@ export const ContactUsIcon = () => {
       height="86"
       viewBox="0 0 86 86"
       fill="none"
-      className="sm:w-[66px] xl:w-[86px]"
+      className="w-[50px] sm:w-[66px] xl:w-[86px]"
     >
       <g filter="url(#filter0_d_6399_20281)">
         <g clip-path="url(#clip0_6399_20281)">
