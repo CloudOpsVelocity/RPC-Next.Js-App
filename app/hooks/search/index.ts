@@ -402,14 +402,15 @@ const getFilteredData = async (
   console.log(query);
   const hasCityParam = /(?:^|&)city=/.test(query);
   const hasCg = /(?:^|&)cg=/.test(query);
+  const cgValue = !hasCg ? "&cg=S" : '';
   const url =
     type === "project"
       ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=${page}${
           query && `&${query}`
-        } ${!hasCg && "&cg=S"}`
+        } ${cgValue}`
       : `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/prop-search?page=${page}${
           query && `&${query}`
-        }${!hasCityParam && "&city=9"}${!hasCg && "&cg=S"}`;
+        }${!hasCityParam && "&city=9"}${cgValue}`;
   try {
     const response = await fetch(url);
     const data = await response.json();
