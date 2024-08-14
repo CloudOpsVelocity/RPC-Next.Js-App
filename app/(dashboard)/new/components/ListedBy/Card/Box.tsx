@@ -19,11 +19,11 @@ export default function Box({ content, image, link, title }: Props) {
         height={126}
         className="absolute h-[64px] w-[64px] sm:h-[99px] sm:w-[99px] xl:h-[126px] xl:w-[126px] left-0 sm:left-[-60px] bottom-[109px] sm:bottom-0"
       />
-      <p className="text-[#148B16] text-[10px] sm:text-[14px] xl:text-[16px] not-italic font-bold">{title}</p>
-      <p className="text-black text-[10px] sm:text-[12px] xl:text-[14px] not-italic font-medium">
+      <p className="text-[#148B16] text-[12px] sm:text-[14px] xl:text-[16px] not-italic font-bold">{title}</p>
+      <p className="text-black text-[12px] sm:text-[12px] xl:text-[14px] not-italic font-medium">
         {content}
       </p>
-      <div className="flex items-center gap-1.5 text-[#0073C6] text-[10px] sm:text-[12px] xl:text-[16px] not-italic font-medium leading-[normal] cursor-pointer justify-center">
+      <div className="flex items-center gap-1.5 text-[#0073C6] text-[12px] sm:text-[12px] xl:text-[16px] not-italic font-medium leading-[normal] cursor-pointer justify-center">
         <a href={link} target="_blank">
           <div className="flex justify-center items-center gap-2">
             View Listings {config.icon}

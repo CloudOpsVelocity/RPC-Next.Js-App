@@ -55,7 +55,7 @@ export function DropZone(props: Partial<DropZoneProps>) {
               <p className="text-black text-sm not-italic font-medium leading-[normal] block md:hidden lg:hidden xl:hidden">
                 Select a file
               </p>
-              <p className="text-[#545353] text-[10px] not-italic font-normal leading-[normal]">
+              <p className="text-[#545353] text-[12px] not-italic font-normal leading-[normal]">
                 JPG, PNG or JPEG, file size no more than 10MB
               </p>{" "}
             </div>

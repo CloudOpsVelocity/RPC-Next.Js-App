@@ -51,14 +51,26 @@ export default function Results() {
         break;
       case "listing":
         {
-          const [ut, pt, cg, lt] = data.id.split("_");
-          const url = `propTypes=${pt}&unitTypes=${ut}&cgs=${cg}&localities=${data.name}%2B${lt}`;
+          const ids = data.id.split("_");
+          const [ut, pt, cg, lt] = ids;
+
+          let url;
+          if (ids.length === 3) {
+            // This is a plot, so we don't include unitTypes
+            const [ut,  cg, lt] = ids;
+           /*  url = `propTypes=${ut}&cg=${cg}&localities=${data.name.trim()}%2B${lt}`; */
+           url = `propTypes=${ut}&cg=${cg}&localities=${lt}`;
+          } else {
+            url = `propTypes=${pt}&unitTypes=${ut}&cg=${cg}&localities=${data.name.trim()}%2B${lt}&listedBy=B`;
+          }
+
           window.open("/search/listing?" + url);
         }
         break;
       case "projectListing":
+        let listedByType =  data.type === "OL" ? "I" :data.type.split("")[0];
         {
-          const url = `projIdEnc=${data.id}&listedBy=${data.type.split("")[0]}`;
+          const url = `projIdEnc=${data.id}&listedBy=${listedByType}`;
           window.open("/search/listing?" + url);
         }
         break;
@@ -102,7 +114,7 @@ export default function Results() {
                   onClick={() =>
                     handleAddSearch(`${locality.name}+${locality.id}`)
                   }
-                  className="text-[#242424] sm:text-wrap text-[9px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1 sm:gap-3.5 xl:text-nowrap cursor-pointer"
+                  className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1 sm:gap-3.5 xl:text-nowrap cursor-pointer"
                   key={locality.id}
                 >
                   {locality.name}
@@ -112,15 +124,15 @@ export default function Results() {
           </div>
           <div>
             {projects && projects.length > 0 && (
-              <h2 className="text-[#242424] sm:text-wrap text-[9px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic font-semibold leading-[normal] flex items-center gap-1 sm:gap-1 xl:text-nowrap cursor-pointer sm:text-xl  space-x-2   mb-1">
-                {property} <span className="text-[9px] sm:text-[14px] xl:text-[16px]">Projects</span>
+              <h2 className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic font-semibold leading-[normal] flex items-center gap-1 sm:gap-1 xl:text-nowrap cursor-pointer sm:text-xl  space-x-2   mb-1">
+                {property} <span className="text-[12px] sm:text-[14px] xl:text-[16px]">Projects</span>
               </h2>
             )}
             <ul>
               {projects?.map((project: any) => (
                 <li
                   onClick={() => handlePush("project", project.id)}
-                  className="text-[#242424] sm:text-wrap text-[9px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1 sm:gap-3.5 xl:text-nowrap cursor-pointer"
+                  className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1 sm:gap-3.5 xl:text-nowrap cursor-pointer"
                   key={project.id}
                 >
                   {project.name}
@@ -140,7 +152,7 @@ export default function Results() {
                       type: projectListing.type,
                     })
                   }
-                  className="text-[#242424] sm:text-wrap text-[9px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1 sm:gap-3.5 xl:text-nowrap cursor-pointer"
+                  className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1 sm:gap-3.5 xl:text-nowrap cursor-pointer"
                   key={projectListing.id}
                 >
                   {projectListing.name}
@@ -157,7 +169,7 @@ export default function Results() {
                       name: listing.name.split("in")[1],
                     })
                   }
-                  className="text-[#242424] sm:text-wrap text-[9px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1 sm:gap-3.5 xl:text-nowrap cursor-pointer"
+                  className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1 sm:gap-3.5 xl:text-nowrap cursor-pointer"
                   key={listing.id}
                 >
                   {listing.name}
@@ -174,7 +186,7 @@ export default function Results() {
                       id: builder.id,
                     })
                   }
-                  className="text-[#242424] sm:text-wrap text-[9px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic leading-[normal] flex items-center gap-1 sm:gap-3.5 xl:text-nowrap cursor-pointer"
+                  className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic leading-[normal] flex items-center gap-1 sm:gap-3.5 xl:text-nowrap cursor-pointer"
                   key={builder.id}
                 >
                   {builder.name}
@@ -191,7 +203,7 @@ export default function Results() {
 const SubHeading = ({ text }: { text: string }) => {
   return (
     <div className="flex items-center gap-1.5 mt-[14px] mb-1">
-      <div className="text-[#242424] sm:text-wrap text-[9px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic font-semibold leading-[normal] flex items-center gap-1 sm:gap-3.5 xl:text-nowrap">
+      <div className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic font-semibold leading-[normal] flex items-center gap-1 sm:gap-3.5 xl:text-nowrap">
         {text}
       </div>
       <hr className="w-full h-px border-0 bg-[#98A5B8]" />

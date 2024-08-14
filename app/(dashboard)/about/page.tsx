@@ -70,7 +70,7 @@ export default function page({}: Props) {
                             </div>
                             <div className='flex flex-row items-center justify-start gap-1 '>
                                 {greenTick}
-                                <p className='text-[#242424] font-[Montserrat] text-[18px] not-italic font-medium leading-[normal]'>Add detailed listing information within 60 seconds....We made it easy</p>
+                                <p className='text-[#242424] font-[Montserrat] text-[18px] not-italic font-medium leading-[normal]'>Add detailed listing information within 60 seconds</p>
                             </div>
                             <div className='flex flex-row items-center justify-start gap-1 '>
                                 {greenTick}
@@ -177,9 +177,6 @@ export default function page({}: Props) {
                     className='w-[8%] h-[38px] absolute mt-12 bottom-0 left-0 '
                     src={"/youtube.png"}
                     />
-
-                     
-
             </div>
     </div>{" "}
     <Footer />

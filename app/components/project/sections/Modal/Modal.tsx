@@ -117,7 +117,7 @@ export default function PartialUnitModal({ data }: any) {
       <div className="flex flex-wrap  w-[90%] m-auto items-center gap:2  md:gap-5 shadow-[0px_4px_20px_0px_#F0F6FF] px-4 py-1 md:py-2.5 rounded-[10px] bg-[#e0f4ff] mt-3 mb-3">
         <div className="flex items-center space-x-3">
           {propertyDetailsSvgs.unitType}
-          <p className="text-[#242424] text-nowrap  text-[11px] xl:text-[16px] font-[500]">
+          <p className="text-[#242424] text-nowrap  text-[12px] xl:text-[16px] font-[500]">
             Unit Type:{" "}
             <span className="text-[#303A42] text-nowrap  text-[12px] xl:text-[16px] font-[600] ">
               {selectedOne?.propType == "32"
@@ -128,7 +128,7 @@ export default function PartialUnitModal({ data }: any) {
         </div>
         <div className="flex items-center space-x-3">
           {propertyDetailsSvgs.superBuildUparea}
-          <p className="text-[#242424] text-nowrap text-[11px] xl:text-[16px] font-[500]">
+          <p className="text-[#242424] text-nowrap text-[12px] xl:text-[16px] font-[500]">
             {selectedOne?.propType == "32" ? "Plot Area" : "Super Builtup Area"}
             :{" "}
             <span className="text-[#303A42] text-nowrap  text-[12px] xl:text-[16px] font-[600] ">
@@ -141,7 +141,7 @@ export default function PartialUnitModal({ data }: any) {
         </div>
         <div className="flex items-center space-x-3">
           {propertyDetailsSvgs.superBuildUparea}
-          <p className="text-[#242424] text-nowrap text-[11px] xl:text-[16px] font-[500]">
+          <p className="text-[#242424] text-nowrap text-[12px] xl:text-[16px] font-[500]">
             Price Range:{" "}
             <span className="text-[#303A42]  text-nowrap text-[12px] xl:text-[16px] font-[600] ">
               {isData.priceRange}

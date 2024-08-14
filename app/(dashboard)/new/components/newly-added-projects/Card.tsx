@@ -64,7 +64,7 @@ export default function Card({ item }: Props) {
                 />{" "}
                 201 units
               </p> */}
-              <p className="flex justify-center items-center mt-1 sm:mt-[10px] gap-1 rounded py-1 px-2 bg-[#000000b0] text-white text-[8px] sm:text-[12px] xl:text-base not-italic font-semibold leading-[normal] capitalize">
+              <p className="flex justify-center items-center mt-1 sm:mt-[10px] gap-1 rounded py-1 px-2 bg-[#000000b0] text-white text-[12px] xl:text-base not-italic font-semibold leading-[normal] capitalize">
                 Project Land Area: {item.landArea} Acres
               </p>
             </div>

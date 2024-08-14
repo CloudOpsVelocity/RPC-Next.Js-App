@@ -48,7 +48,7 @@ export default function ProjData({
       <p className="text-[#242424] text-[12px] sm:text-[16px] xl:text-[18px] capitalize font-medium">
         {`${locality}, ${city}`}
       </p>
-      <p className="text-[#242424] text-[10px] sm:text-[14px] xl:text-[14px] font-normal">
+      <p className="text-[#242424] text-[12px] sm:text-[14px] xl:text-[14px] font-normal">
         Posted By: <span className="font-bold">{builderName}</span>
       </p>
     </div>
@@ -69,7 +69,7 @@ export default function ProjData({
       <p className="text-[#242424] text-[12px] sm:text-[16px] xl:text-[18px] capitalize  not-italic font-medium">
         {`${localityName}, ${cityName}`}
       </p>
-      <p className="text-[#242424]  text-[10px] sm:text-[12px]  xl:text-[14px] not-italic font-normal">
+      <p className="text-[#242424]  text-[12px] sm:text-[12px]  xl:text-[14px] not-italic font-normal">
         Posted By: <span className="font-bold">{/* {getTypeText(type)} */}{postedBy}</span>
       </p>
     </div>

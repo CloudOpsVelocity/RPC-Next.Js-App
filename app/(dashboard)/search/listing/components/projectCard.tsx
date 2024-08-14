@@ -107,17 +107,17 @@ const ProjectDetailsCard = ({
                 alt="conver"
                 className="w-full h-[110px] md:h-[174px]  shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] object-cover relative"
               />
-              <p className="absolute text-[#FFF] text-[8px] md:text-[12px] bottom-2 left-5 md:mt-[-60px]  md:left-[10px] gap-[4px] z-10 flex justify-center rounded-[20px] items-center p-[7px] font-[500] rtm ">
+              <p className="absolute text-[#FFF] text-[12px] bottom-2 left-5 md:mt-[-60px]  md:left-[10px] gap-[4px] z-10 flex justify-center rounded-[20px] items-center p-[7px] font-[500] rtm ">
                 {" "}
                 {propStatus}
               </p>
             </div>
 
             <div className="flex-col flex md:hidden min-w-[100px] mt-2">
-              <p className="text-[#202020] text-[10px] md:text-[16px] font-[400]">
+              <p className="text-[#202020] text-[12px] md:text-[16px] font-[400]">
                 Posted By: <span className=" font-[600]">{postedBy}</span>
               </p>
-              <p className="text-[#202020] text-[10px] md:text-[16px] font-[400]">
+              <p className="text-[#202020] text-[12px] md:text-[16px] font-[400]">
                 Date:{" "}
                 <span className=" font-[600]">
                   {formatDateDDMMYYYY("Wed Jan 30 00:00:00 IST 2030")}

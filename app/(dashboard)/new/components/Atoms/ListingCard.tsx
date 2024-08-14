@@ -40,7 +40,7 @@ export default function ListingCard({ item, sl }: Props) {
         </div>
 
         <a
-          className="inline-flex justify-center items-center gap-2.5 rounded border p-1 xl:p-2 border-solid border-[#0073C6] bg-[#0073c6] text-white text-[10px] sm:text-[12px] xl:text-sm not-italic font-bold leading-[normal] capitalize absolute bottom-2 right-2 sm:bottom-3 sm:right-3 z-[1000]"
+          className="inline-flex justify-center items-center gap-2.5 rounded border p-1 xl:p-2 border-solid border-[#0073C6] bg-[#0073c6] text-white text-[12px] xl:text-sm not-italic font-bold leading-[normal] capitalize absolute bottom-2 right-2 sm:bottom-3 sm:right-3 z-[1000]"
           href={url}
           target="_blank"
         >
@@ -56,7 +56,7 @@ export default function ListingCard({ item, sl }: Props) {
         />
 
         <div className="absolute bottom-2 left-2 space-y-2">
-          <p className="flex justify-center items-center gap-1 rounded p-1 bg-[#000000b0] text-white text-[10px] sm:text-[12px] xl:text-base not-italic font-semibold leading-[normal] capitalize">
+          <p className="flex justify-center items-center gap-1 rounded p-1 bg-[#000000b0] text-white text-[12px] xl:text-base not-italic font-semibold leading-[normal] capitalize">
             {item.propStatus}
           </p>
         </div>
@@ -91,7 +91,7 @@ export default function ListingCard({ item, sl }: Props) {
               {item.propName}
             </p>
 
-            <p className="text-[#242424] text-[9px] xl:text-[12px] not-italic font-semibold leading-[normal] capitalize">
+            <p className="text-[#242424] text-[12px] not-italic font-semibold leading-[normal] capitalize">
               {item.cityName ?? "Banglore"}, {item.localityName}
             </p>
           </div>
@@ -188,7 +188,7 @@ export default function ListingCard({ item, sl }: Props) {
             )}
           </div>
           <div className="flex  mt-auto  justify-between   item-center w-[100%] my-1 sm:y-0">
-            <p className="text-[#242424] text-[10px] xl:text-sm not-italic font-semibold leading-[normal] capitalize mt-[6px] mb-[6px]">
+            <p className="text-[#242424] text-[12px] xl:text-sm not-italic font-semibold leading-[normal] capitalize mt-[6px] mb-[6px]">
               Posted by: {item.postedBy}
             </p>
             <ListingReqBtn
@@ -212,10 +212,10 @@ const DownSectionCard = ({
 }) => {
   return (
     <div className="flex flex-col justify-center items-start ">
-      <p className="text-[#001F35] text-[10px] sm:text-[12px] not-italic font-medium">
+      <p className="text-[#001F35] text-[12px] not-italic font-medium">
         {label}:
       </p>
-      <p className="text-[#242424] text-[10px] xl:text-[12px] not-italic font-semibold">
+      <p className="text-[#242424] text-[12px] not-italic font-semibold">
         {value}
       </p>
     </div>

@@ -31,7 +31,7 @@ export default function ListingReqBtn({
   };
   return (
     <Button
-      className="!text-[8px] h-[20px] sm:h-[24px] xl:!text-[12px] !p-[4px] !sm:p-[1px] mt-[3px] sm:mt-[6px]"
+      className="!text-[12px] h-[20px] sm:h-[24px] xl:!text-[12px] !p-[4px] !sm:p-[1px] mt-[3px] sm:mt-[6px]"
       onClick={handleOpen}
     >
       Request Callback
