@@ -102,19 +102,14 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
     const selectedItem = SEARCH_FILTER_DATA.bhkDetails.find(
       (item) => item.value === itemId
     );
-
     if (selectedItem) {
-      // Check if the item is within the first `maxDisplay` items or if it's the last item when more than `maxDisplay` items are present
-      const isLastItemToDisplay =
-        i === maxDisplay - 1 && filters.unitTypes.length > maxDisplay;
-      const shouldAddComma =
-        i < maxDisplay - 1 && i < filters.unitTypes.length - 1;
-
       return (
         <React.Fragment key={itemId}>
           {i < maxDisplay ? selectedItem.title : ""}
-          {shouldAddComma ? ", " : ""}
-          {isLastItemToDisplay ? " ..." : ""}
+          {i < maxDisplay - 1 && ", "}
+          {i === maxDisplay - 1 && filters.unitTypes.length > maxDisplay
+            ? " ..."
+            : ""}
         </React.Fragment>
       );
     }
@@ -139,7 +134,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
           <a href={"/"}>Home</a> {" > "}
         </span>
         <span>
-          <span className="  text-[#4D6677] font-[600] cursor-pointer">
+          <span className="  text-[#4D6677] font-[600]">
             {DynamicText({
               cg: params.cg as string,
               listedBy: params.listedBy,
@@ -288,6 +283,33 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
           offset={{ mainAxis: 10, crossAxis: 0 }}
         >
           <Popover.Target>
+            <button className=" text-[#0073C6] text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] hidden justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md md:flex ">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="10"
+                height="10"
+                viewBox="0 0 10 10"
+                fill="none"
+              >
+                <circle cx="5" cy="5" r="5" fill="#148B16" />
+              </svg>
+              {filters.unitTypes.length > 0 ? values : "Select BHK Type"}
+            </button>
+          </Popover.Target>
+          <Popover.Dropdown className="!z-50" p={0}>
+            <BhkFilter />
+          </Popover.Dropdown>
+        </Popover>
+        <Popover
+          width={"auto"}
+          trapFocus
+          position="bottom"
+          withArrow
+          shadow="lg"
+          radius={10}
+          offset={{ mainAxis: 10, crossAxis: 0 }}
+        >
+          <Popover.Target>
             <button
               // onClick={() => setOpened((o) => !o)}
               className=" text-[#0073C6] hidden text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] lg:flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md "
@@ -308,33 +330,6 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
           </Popover.Target>
           <Popover.Dropdown className="!z-50" p={0}>
             <PropTypeFilter />
-          </Popover.Dropdown>
-        </Popover>
-        <Popover
-          width={"auto"}
-          trapFocus
-          position="bottom"
-          withArrow
-          shadow="lg"
-          radius={10}
-          offset={{ mainAxis: 10, crossAxis: 0 }}
-        >
-          <Popover.Target>
-            <button className=" text-[#0073C6] text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] hidden justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md md:flex ">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="10"
-                height="10"
-                viewBox="0 0 10 10"
-                fill="none"
-              >
-                <circle cx="5" cy="5" r="5" fill="#148B16" />
-              </svg>
-              {filters.unitTypes.length > 0 ? values : "Select BHK Type"}
-            </button>
-          </Popover.Target>
-          <Popover.Dropdown className="!z-50" p={0}>
-            <BhkFilter />
           </Popover.Dropdown>
         </Popover>
         <Popover
