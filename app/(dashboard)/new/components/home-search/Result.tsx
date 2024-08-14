@@ -51,20 +51,33 @@ export default function Results() {
         break;
       case "listing":
         {
-          const [ut, pt, cg, lt] = data.id.split("_");
-          const url = `propTypes=${pt}&unitTypes=${ut}&cgs=${cg}&localities=${data.name}%2B${lt}`;
+          const ids = data.id.split("_");
+          const [ut, pt, cg, lt] = ids;
+
+          let url;
+          if (ids.length === 3) {
+            // This is a plot, so we don't include unitTypes
+            const [pt, cg, lt] = ids;
+            url = `propTypes=${pt}&cg=${cg}&localities=${data.name.trim()}%2B${lt}&listedBy=B`;
+          } else {
+            url = `propTypes=${pt}&unitTypes=${ut}&cg=${cg}&localities=${data.name.trim()}%2B${lt}&listedBy=B`;
+          }
+
           window.open("/search/listing?" + url);
         }
         break;
       case "projectListing":
         {
-          const url = `projIdEnc=${data.id}&listedBy=${data.type.split("")[0]}`;
+          const [listedBy] = data.type.split("");
+          const url = `projIdEnc=${data.id}&listedBy=${
+            listedBy == "O" ? "I" : listedBy
+          }&projName=${extractProjectName(data.name)}`;
           window.open("/search/listing?" + url);
         }
         break;
       case "builder":
-        const url = encodeURI(`${data.name}+${data.id}`);
-        window.open(`/search?builderIds=${url}`);
+        const url = encodeURI(`${data.name}`);
+        window.open(`/search?builderIds=${url}%2B${data.id}`);
         break;
       default:
         break;
@@ -161,6 +174,7 @@ export default function Results() {
                     handlePush("projectListing", {
                       id: projectListing.id,
                       type: projectListing.type,
+                      name: projectListing.name,
                     })
                   }
                   className="text-[#737579] text-[14px] sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
@@ -228,3 +242,12 @@ const property = (
     </defs>
   </svg>
 );
+function extractProjectName(listing: string): string {
+  console.log(listing);
+  // Regular expression to match the project name
+  const regex = /in (.*?)\s*(\(\d+\))?$/;
+  const match = listing.match(regex);
+
+  // If a match is found, return the project name; otherwise, return an empty string
+  return match ? match[1].trim() : "";
+}

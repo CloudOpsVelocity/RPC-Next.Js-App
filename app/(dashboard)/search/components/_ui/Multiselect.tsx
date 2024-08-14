@@ -10,6 +10,7 @@ import {
 import useQsearch from "@/app/hooks/search/useQsearch";
 import useSearchFilters from "@/app/hooks/search";
 import toast from "react-hot-toast";
+import { usePathname } from "next/navigation";
 
 export function MainSearchMultiSelect({ type }: { type: string }) {
   const {
@@ -20,8 +21,10 @@ export function MainSearchMultiSelect({ type }: { type: string }) {
     debounced,
     name,
   } = useQsearch();
-
+  const path = usePathname();
   const { filters, setFilters, remnoveSearchOptions } = useSearchFilters();
+  //
+  // setFIlter({...filters,key:value})
   const value = [...filters.locality, ...filters.builderIds];
   const {
     localities,
