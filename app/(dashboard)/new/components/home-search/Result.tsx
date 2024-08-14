@@ -57,10 +57,10 @@ export default function Results() {
           let url;
           if (ids.length === 3) {
             // This is a plot, so we don't include unitTypes
-            const [pt, cg, lt] = ids;
-            url = `propTypes=${pt}&cg=${cg}&localities=${data.name.trim()}%2B${lt}&listedBy=B`;
+            const [ut, cg, lt] = ids;
+            url = `propTypes=${ut}&cg=${cg}&localities=${data.name.trim()}%2B${lt}`;
           } else {
-            url = `propTypes=${pt}&unitTypes=${ut}&cg=${cg}&localities=${data.name.trim()}%2B${lt}&listedBy=B`;
+            url = `propTypes=${pt}&unitTypes=${ut}&cg=${cg}&localities=${data.name.trim()}%2B${lt}`;
           }
 
           window.open("/search/listing?" + url);
