@@ -14,13 +14,14 @@ type Props = {
   sl: string;
 };
 
+
 export default function ListingCard({ item, sl }: Props) {
   const images = getImageUrls(item.media);
   let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/listing/banglore/${item.propIdEnc}`;
   const onRedirectOnProp = () => {
     window.open(url, "_blank");
   };
-
+  console.log(item)
   const title = `${
     item.propTypeName === "Plot" ? `${item.pa} sq.ft` : item.bhkName
   } ${item.propTypeName} for ${item.category} in ${item.localityName}`;
@@ -121,6 +122,11 @@ export default function ListingCard({ item, sl }: Props) {
                 <DownSectionCard
                   label={"Available From"}
                   value={formatDate(item.availableFrom, true)}
+                />
+                <Divider orientation="vertical" color="#7BA0BB" />
+                <DownSectionCard
+                  label={"Plot Facing"}
+                  value={item.facing}
                 />
               </>
             ) : item.propStatus === "Under Cunstruction" ? (
