@@ -40,7 +40,7 @@ export default function TopProfileBlock({
             />
           </div>
           <div>
-            <p className=" text-[#148B16] text-[16px] font-bold sm:text-[24px] xl:text-[32px] not-italic sm:font-semibold ">
+            <p className=" text-[#E3AC00] text-[16px] font-bold sm:text-[24px] xl:text-[32px] not-italic sm:font-semibold ">
               {userName}
             </p>
             <div className="text-[#202020] text-[12px] sm:text-lg xl:text-xl font-bold not-italic z-40">
