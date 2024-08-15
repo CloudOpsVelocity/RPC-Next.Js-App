@@ -72,11 +72,11 @@ export default function ListingCard({ item, sl }: Props) {
               {item.localityName}
             </p>
 
-            <p className="text-[#148B16] text-[11px] sm:text-[12px] xl:text-base not-italic font-bold leading-[normal] capitalize">
+            <p className="text-[#148B16] text-[12px] sm:text-[12px] xl:text-base not-italic font-bold leading-[normal] capitalize">
               {formatCurrency(item.price)}
               {item.category === "Rent" ? "" : ","}{" "}
               {item.category !== "Rent" && (
-                <span className="text-[#616D75] text-[11px] sm:text-[12px] xl:text-base not-italic font-bold leading-[normal] capitalize">
+                <span className="text-[#616D75] text-[12px] sm:text-[12px] xl:text-base not-italic font-bold leading-[normal] capitalize">
                   ₹{" "}
                   {calculatePerSqPrice(
                     item.price,

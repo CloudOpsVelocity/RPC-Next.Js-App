@@ -10,7 +10,7 @@ export default function BhkFilter() {
     <div className="max-w-[860px] ">
       <ClearAll type="unitType" />
       <div className="p-3">
-        <h3 className="text-[#202020] mb-[2%] text-[14px] font-[500] ">
+        <h3 className="text-[#202020] mb-[2%] text-[14px] font-[600] ">
           BHK Type
         </h3>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-y-2 gap-x-10">

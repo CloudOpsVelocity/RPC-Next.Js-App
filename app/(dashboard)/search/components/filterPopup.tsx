@@ -243,7 +243,7 @@ const FilterPopup = () => {
               <>
                 <h3
                   className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
-                  id="Unit Type"
+                  id="BHK Type"
                 >
                   BHK Type
                 </h3>

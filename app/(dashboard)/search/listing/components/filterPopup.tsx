@@ -124,9 +124,9 @@ const FilterPopup = () => {
             <>
               <h3
                 className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
-                id="Unit Type"
+                id="BHK Type"
               >
-                BHK
+                BHK Type
               </h3>
               <div className="flex  mb-[3%] justify-start items-center  gap-[4%] flex-wrap ">
                 {SEARCH_FILTER_DATA.bhkDetails.map((eachStatus, index) => {
@@ -304,7 +304,7 @@ const FilterPopup = () => {
                 className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
                 id="Bath"
               >
-                Bath
+                No.of.Bathrooms
               </h3>
               <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
                 {[...Array(6)].map((x, i) => {
@@ -325,7 +325,7 @@ const FilterPopup = () => {
             className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
             id="Budget"
           >
-            Budget
+            Budget (In Rupees)
           </h3>
           <p className="text-[#4D6677] text-[16px] font-[600] mb-[2%] ">
             ₹ {toFormattedString(filters.bugdetValue[0])} - ₹{" "}
@@ -347,10 +347,10 @@ const FilterPopup = () => {
             label={(value) => toFormattedString(value)}
           />
           <h3
-            className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] "
+            className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
             id="Area"
           >
-            Area
+            Area (In Sq.ft)
           </h3>
           <p className="text-[#4D6677] text-[16px] font-[600] mb-[2%] ">
             {filters.areaValue[0]} sq.ft - {filters.areaValue[1]} sq.ft
@@ -426,7 +426,7 @@ const FilterPopup = () => {
                 className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
                 id="Parking"
               >
-                Parking
+                No.of.Parkings
               </h3>
               <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
                 {[...Array(7)].map((x, i) => {

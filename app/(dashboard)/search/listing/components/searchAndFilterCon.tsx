@@ -29,6 +29,7 @@ import { SearchIcon } from "@/app/images/HomePageIcons";
 import { toFormattedString } from "../../components/buget/budget";
 import { propertyDetailsTypes } from "@/app/data/projectDetails";
 import { SEARCH_FILTER_DATA } from "@/app/data/search";
+/* import { getCommonData } from "@/app/utils/api/property"; */
 
 const SearchAndFilterCon = () => {
   const [opened, { open, close }] = useDisclosure(false);
@@ -107,8 +108,8 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
     (filters.bugdetValue[0] === 0 && filters.bugdetValue[1] === 100000)
   );
   const allFiltersMap = [...filters.locality, ...filters.builderIds];
-  console.log(allFiltersMap);
-  console.log(projName)
+  console.log(filters);
+/*   console.log(getCommonData(filters.locality)) */
   return (
     <div className="mb-4 w-full  mt-[60px] sm:mt-[80px] pl-[1%]   ">
       <p className="text-[12px]  text-[#737579] font-[500] mt-2 mb-2 sm:mb-0  w-full md:w-auto">
@@ -130,6 +131,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
           className={` border-[#A0D7FF] max-w-full flex-wrap rounded-[20px] sm:rounded-[40px] p-2 gap-2 xl:gap-[8px] pl-2 xl:pl-[8px] border-[1px] border-solid flex items-center justify-center sm:min-w-[300px]  `}
         >
           <BuyRent />
+          
           <div className="my-2">
             {filters.projIdEnc && (
               <Pill
@@ -299,7 +301,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
           offset={{ mainAxis: 10, crossAxis: 0 }}
         >
           <Popover.Target>
-            <button className=" text-[#0073C6] text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] hidden justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md md:flex ">
+            <button className=" text-[#0073C6] text-[18px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] hidden justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md md:flex ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="10"
@@ -328,7 +330,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
           <Popover.Target>
             <button
               // onClick={() => setOpened((o) => !o)}
-              className=" text-[#0073C6] hidden text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] lg:flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md "
+              className=" text-[#0073C6] hidden text-[18px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] lg:flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md "
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -360,7 +362,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
           <Popover.Target>
             <button
               // onClick={() => setOpened((o) => !o)}
-              className=" text-[#0073C6] text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] hidden lg:flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md "
+              className=" text-[#0073C6] text-[18px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] hidden lg:flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md "
             >
               <span className="bg-[#148B16] rounded-full text-white text-sm block w-5 h-5">
                 ₹

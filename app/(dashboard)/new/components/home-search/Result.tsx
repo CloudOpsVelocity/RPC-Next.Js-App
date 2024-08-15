@@ -44,7 +44,8 @@ export default function Results() {
     }
   };
 
-  const handlePush = async (type: string, data: any) => {
+/*   console.log(data)
+ */  const handlePush = async (type: string, data: any) => {
     switch (type) {
       case "project":
         window.open(`/abc/delhi/palika/${data}`);
@@ -52,19 +53,51 @@ export default function Results() {
       case "listing":
         {
           const ids = data.id.split("_");
-          const [ut, pt, cg, lt] = ids;
+          if(ids[0] == "32"){
+            let url;
+            //plot with project condition
+          
+            if(ids.length > 3){
+              const [ut,  cg, id, lt] = ids;
+              /*  url = `propTypes=${ut}&cg=${cg}&localities=${data.name.trim()}%2B${lt}`; */
+              url = `propTypes=${ut}&cg=${cg}&projIdEnc=${id}&localities=${lt}`;
+             
+            }
+            else{
+              const [ut,  cg,  lt] = ids;
+              url = `propTypes=${ut}&cg=${cg}&localities=${lt}`;
+            
 
-          let url;
+            }
+       
+            window.open("/search/listing?" + url);
+
+          }else{
+            let url;
+            
+
+            if(ids.length >4  ){
+              const [ut, pt, cg, id, lt] = ids;
+              url = `propTypes=${pt}&unitTypes=${ut}&cg=${cg}&projIdEnc=${id}&localities=${data.name.trim()}%2B${lt}`;
+            }else{
+              const [ut, pt, cg,  lt] = ids;
+              url = `propTypes=${pt}&unitTypes=${ut}&cg=${cg}&localities=${data.name.trim()}%2B${lt}`;
+            }
+            window.open("/search/listing?" + url);
+          }
+         /*  const [ut, pt, cg, lt] = ids;
+
+         
           if (ids.length === 3) {
-            // This is a plot, so we don't include unitTypes
+          
             const [ut,  cg, lt] = ids;
-           /*  url = `propTypes=${ut}&cg=${cg}&localities=${data.name.trim()}%2B${lt}`; */
+         
            url = `propTypes=${ut}&cg=${cg}&localities=${lt}`;
           } else {
             url = `propTypes=${pt}&unitTypes=${ut}&cg=${cg}&localities=${data.name.trim()}%2B${lt}&listedBy=B`;
           }
+ */
 
-          window.open("/search/listing?" + url);
         }
         break;
       case "projectListing":
@@ -102,8 +135,8 @@ export default function Results() {
           {" "}
           <div>
             {localities?.length > 0 && (
-              <h2 className="text-[#5F81B2] text-[14px] sm:text-xl flex space-x-2 items-center">
-                <SearchLocationIcon /> <span>Location</span>
+              <h2 className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] font-bold xl:text-[16px] not-italic leading-[normal] flex items-center gap-1 sm:gap-1 xl:text-nowrap cursor-pointer">
+                <SearchLocationIcon /> <span >Location</span>
               </h2>
             )}
 
