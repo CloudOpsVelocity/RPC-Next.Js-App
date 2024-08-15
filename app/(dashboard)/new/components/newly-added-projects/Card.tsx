@@ -75,8 +75,9 @@ export default function Card({ item }: Props) {
                 />{" "}
                 201 units
               </p> */}
-              <button onClick={(e)=>builderiRedirect(e)} className="text-[#E3AC00] text-[12px] sm:text-[14px] xl:text-[18px] not-italic font-bold leading-[normal] tracking-[0.44px] underline"><span className=" no-underline text-[#ffff]">Builder Name:</span> {item.builderName}</button>
-              <p className="flex justify-center items-center mt-1 sm:mt-[10px] gap-1 rounded py-1 px-2 bg-[#000000b0] text-white text-[12px] xl:text-base not-italic font-semibold leading-[normal] capitalize">
+              <span className=" no-underline text-[#ffff]">Builder Name: </span>
+              <button onClick={(e)=>builderiRedirect(e)} className="text-[#E3AC00] text-[12px] sm:text-[14px] xl:text-[18px] not-italic font-bold leading-[normal] tracking-[0.44px] underline"> {item.builderName}</button>
+              <p className="text-white text-[12px] sm:text-[14px] not-italic font-bold leading-[normal] tracking-[0.44px]">
                 Project Land Area: {item.landArea} Acres
               </p>
             </div>

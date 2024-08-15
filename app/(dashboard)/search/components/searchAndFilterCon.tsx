@@ -109,7 +109,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
   const allFiltersMap = [...filters.locality, ...filters.builderIds];
   return (
     <div className="mb-4 w-full  mt-[60px] sm:mt-[80px] pl-[1%]   ">
-      <p className="text-[12px]  text-[#737579] font-[500] mt-2 mb-2 sm:mb-0  w-full md:w-auto">
+      <p className="text-[12px]  text-[#737579] font-[500] mt-2 mb-2 sm:mb-0 sm:mt-4  w-full md:w-auto">
         <span className=" text-[#737579] font-[500] mt-3">
           {" "}
           <a href={"/"}>Home</a> {" > "}

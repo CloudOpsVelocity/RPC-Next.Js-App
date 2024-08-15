@@ -62,7 +62,7 @@ export default function ListingCard({ item, sl }: Props) {
         </div>
       </div>
 
-      <div className="sm:min-h-[244px] xl:min-h-[236px] rounded shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] border-[0.8px] border-solid border-[#A4B8B5] bg-[#FFF]">
+      <div className="min-h-[256px] sm:min-h-[244px] xl:min-h-[236px] rounded shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] border-[0.8px] border-solid border-[#A4B8B5] bg-[#FFF]">
         <div className="p-[10px] sm:p-[7px] xl:p-[10px] flex justify-between">
           <div className="space-y-1  ">
             <p className="text-[#242424] min-h-[40px] sm:xl-min-h-[50px] xl:min-h-[56px] text-[12px] sm:text-[14px] xl:text-lg not-italic font-semibold leading-[normal] capitalize">
@@ -188,7 +188,7 @@ export default function ListingCard({ item, sl }: Props) {
             )}
           </div>
           <div className="flex  mt-auto  justify-between   item-center w-[100%] my-1 sm:y-0">
-            <p className="text-[#242424] text-[12px] xl:text-sm not-italic font-semibold leading-[normal] capitalize mt-[6px] mb-[6px]">
+            <p className="text-[#242424] text-[14px] xl:text-sm not-italic font-semibold leading-[normal] capitalize mt-[12px] mb-[6px]">
               Posted by: {item.postedBy}
             </p>
             <ListingReqBtn
