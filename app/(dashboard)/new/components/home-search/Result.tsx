@@ -129,7 +129,7 @@ export default function Results() {
       {noResults || data == undefined ? (
          <div className="px-1 py-2 flex flex-row items-center justify-center gap-1"
          >{mainSearchNoResult}
-         <p  className=" font-[600] text-black text-base ">Please Enter a Valid Location Project, or Listing</p></div>
+         <p  className=" font-[600] text-black text-base ">Please Enter a Valid Location, Project, or Listing</p></div>
       ) : (
         <>
           {" "}
