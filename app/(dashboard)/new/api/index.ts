@@ -25,7 +25,6 @@ export const getHomeListingData = async () => {
 };
 export const getShortIds = async () => {
   const session = await getServerSession(options);
-
   if (session) {
     try {
       if (process.env.NODE_ENV === "development") {

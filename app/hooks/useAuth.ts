@@ -1,10 +1,9 @@
 "use client";
 import axios from "axios";
 import { signIn } from "next-auth/react";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import CryptoJS from "crypto-js";
-import { WarningIcon } from "../images/commonSvgs";
 import { getCallPath } from "./custom/useRedirect";
 
 interface Login {
@@ -72,8 +71,12 @@ export default function useAuth({
 
   const redirectPath = getCallPath();
   const saveStep = async (step: number = 1) => {
-    const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/user-signup-step?page=${step}`;
-    const res = await axios.post(url);
+    try {
+      const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/user-signup-step?page=${step}`;
+      const res = await axios.post(url);
+    } catch (error) {
+      console.log("somethign went wrong");
+    }
   };
   const loginWithCredentials = async (data: Login): Promise<any> => {
     const encryptedPassword = CryptoJS.AES.encrypt(
