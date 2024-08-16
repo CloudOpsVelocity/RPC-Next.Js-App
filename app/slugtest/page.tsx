@@ -11,14 +11,14 @@ export default function Page({ params: { slug } }: Props) {
 }
 export const dynamic = "auto";
 
-// export const fetchCache = "force-dynamic";
-// export async function generateStaticParams() {
-//   const projResult = readJsonFile("./permutations.json");
-//   const slugs = projResult.map((data: any) => ({
-//     slug: data.slug,
-//   }));
-//   return slugs;
-// }
+export const fetchCache = "force-dynamic";
+export async function generateStaticParams() {
+  const projResult = readJsonFile("./permutations.json");
+  const slugs = projResult.map((data: any) => ({
+    slug: data.slug,
+  }));
+  return slugs;
+}
 function readJsonFile(fileName: string) {
   try {
     const data = fs.readFileSync(fileName, "utf8");

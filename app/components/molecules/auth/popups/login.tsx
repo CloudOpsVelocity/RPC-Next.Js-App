@@ -75,9 +75,9 @@ function LoginPopupForm({ closePopup }: { closePopup?: () => void }) {
       redirect: false,
     });
     if (res?.ok) {
-      if (path.includes("builder")) {
-        axios.post("/api/revalidate", { id: path.split("/").pop() });
-      }
+      // if (path.includes("builder")) {
+      //   axios.post("/api/revalidate", { id: path.split("/").pop() });
+      // }
       callback && callback();
       close();
     } else {

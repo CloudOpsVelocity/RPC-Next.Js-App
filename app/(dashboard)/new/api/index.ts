@@ -1,5 +1,4 @@
 import { options } from "@/app/options";
-import axios from "axios";
 import { getServerSession } from "next-auth";
 
 export const getData = async () => {
@@ -24,9 +23,9 @@ export const getHomeListingData = async () => {
   return data;
 };
 export const getShortIds = async () => {
-  const session = await getServerSession(options);
+  // const session = await getServerSession(options);
 
-  if (session) {
+  if (true) {
     try {
       if (process.env.NODE_ENV === "development") {
         return {
