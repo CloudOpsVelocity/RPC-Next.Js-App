@@ -117,9 +117,9 @@ const FilterPopup = () => {
             className=" text-[#202020] mb-[1%] text-[14px] font-[600] "
             id="Search"
           >
-            Search By City, Locality, Projects
+            Search By Locality, Projects or Listings
           </h3>
-          <MainSearchMultiSelect type="listing" />
+          <MainSearchMultiSelect  type="listing" />
           {filters?.propTypes != projectprops.plot && (
             <>
               <h3
@@ -302,7 +302,7 @@ const FilterPopup = () => {
             <React.Fragment>
               <h3
                 className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
-                id="Bath"
+                id="No.of.Bathrooms"
               >
                 No.of.Bathrooms
               </h3>
@@ -323,7 +323,7 @@ const FilterPopup = () => {
           )}
           <h3
             className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
-            id="Budget"
+            id="Budget (In Rupees)"
           >
             Budget (In Rupees)
           </h3>
@@ -348,7 +348,7 @@ const FilterPopup = () => {
           />
           <h3
             className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
-            id="Area"
+            id="Area (in Sq.ft)"
           >
             Area (In Sq.ft)
           </h3>
@@ -424,7 +424,7 @@ const FilterPopup = () => {
             <React.Fragment>
               <h3
                 className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
-                id="Parking"
+                id="No.of.Parkings"
               >
                 No.of.Parkings
               </h3>

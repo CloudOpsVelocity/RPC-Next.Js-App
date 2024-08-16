@@ -137,7 +137,7 @@ const MobileFilter = ({ close }: any) => {
             className=" text-[#202020] mb-[4%] text-[14px] font-[600] "
             id="Project Status"
           >
-            Search By City, Locality, Projects
+            Search By Locality, Projects or Listings
           </h3>
           <MultiSelect
             searchable

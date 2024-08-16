@@ -485,7 +485,7 @@ export default function FloorplansBlock({
                 floorPlanType !== "unit" ? (
                   <>
                     <p
-                      className="hidden sm:block text-[10px] sm:text-[14px] font-[500] text-[#005DA0] "
+                      className="hidden sm:block text-[12px] sm:text-[14px] font-[500] text-[#005DA0] "
                       onClick={(e) => {
                         e.stopPropagation();
                         handleOpen();

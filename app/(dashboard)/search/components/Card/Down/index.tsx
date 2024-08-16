@@ -102,16 +102,18 @@ type CountListProps = {
   projName: string;
 };
 const CountListing = ({ type, value, projIdEnc, projName }: CountListProps) => {
-  const handleAgentOwner = (type: "A" | "I") => {
+  const handleAgentOwner = (type: "A" | "I" | "B") => {
     window.open(
       `/search/listing?projIdEnc=${projIdEnc}&listedBy=${type}&projName=${projName}`,
       "_blank"
     );
   };
+
+
   return (
     value > 0 && (
       <button
-        onClick={() => handleAgentOwner(type === "Owner" ? "I" : "A")}
+        onClick={() => handleAgentOwner(type === "Owner" ? "I" : type === "Builder" ? "B" : "A" )}
         className={clsx(
           "flex flex-col justify-start  items-start gap-2 p-1 rounded border-[0.4px] border-solid",
           type === "Owner"
