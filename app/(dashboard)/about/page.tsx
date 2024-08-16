@@ -163,7 +163,7 @@ export default function page({}: Props) {
                                     className='w-[56px] h-[56px] rounded-full '
                                     src={"/youtube.png"}
                                     />
-                                     <p className='text-[#003] font-[Montserrat] text-[18px] not-italic font-bold leading-[19.5px]'>Virender kumar<br/><span className = "text-[#767676] font-[Montserrat] text-[16px] not-italic font-medium leading-[19.5px]">Bangalore</span></p>
+                                     <p className='text-[#003] font-[Montserrat] text-[18px] not-italic font-bold leading-[19.5px]'>Ramya Krishnan<br/><span className = "text-[#767676] font-[Montserrat] text-[16px] not-italic font-medium leading-[19.5px]">Bangalore</span></p>
                                 </div>  
                                 <p className='text-[#029837] font-[Mulish] text-[48px] not-italic font-bold leading-[40px]'>“</p>
                             </div>
