@@ -175,7 +175,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
               <p onClick={isMobile ? openMobileSearchDrawer : open}>Add more</p>
             ) : (
               <p onClick={isMobile ? openMobileSearchDrawer : open}>
-                Search By City, Locality, Projects
+                Search By Locality, Projects or Listings
               </p>
             )}
             <SearchIcon />
@@ -245,7 +245,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
                   {allFiltersMap?.length > 0 ? (
                     <p>Add more</p>
                   ) : (
-                    <p>Search By City, Locality, Projects</p>
+                    <p>Search By Locality, Projects or Listings</p>
                   )}
                   <SearchIcon />
                 </div>

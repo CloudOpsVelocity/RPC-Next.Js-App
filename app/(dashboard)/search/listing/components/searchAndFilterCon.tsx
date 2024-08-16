@@ -121,7 +121,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
           <span className="  text-[#4D6677] font-[600]">
             {DynamicText({
               cg: params.cg as string,
-              listedBy: params.listedBy,
+              listedBy: "A",
             })}
           </span>
         </span>{" "}
@@ -194,7 +194,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
             {allFiltersMap?.length > 0 ? (
               <p onClick={open}>Add more</p>
             ) : (
-              <p onClick={open}>Search By City, Locality, Projects</p>
+              <p onClick={open}>Search By Locality, Projects or Listings</p>
             )}
             <SearchIcon />
           </div>
@@ -279,7 +279,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
                   {allFiltersMap?.length > 0 ? (
                     <p onClick={open}>Add more</p>
                   ) : (
-                    <p onClick={open}>Search By City, Locality, Projects</p>
+                    <p onClick={open}>Search By Locality, Projects or Listings</p>
                   )}
                   <SearchIcon />
                 </div>

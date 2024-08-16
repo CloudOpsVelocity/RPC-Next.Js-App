@@ -134,7 +134,7 @@ const FilterPopup = () => {
             className=" text-[#202020] mb-[1%] text-[14px] font-[600] "
             id="Search"
           >
-            Search By City, Locality, Projects
+            Search By Locality, Projects or Listings
           </h3>
           <MainSearchMultiSelect type="project" />
           <h3

@@ -14,7 +14,7 @@ export const DynamicText = (params: SearchParams) => {
     listedBy === "I" || listedBy === "A" || listedBy === "B"
       ? rentOrSellText
       : ""
-  } in Bengaluru`;
+  } in Bangalore`;
 
   return dynamicText;
 };
