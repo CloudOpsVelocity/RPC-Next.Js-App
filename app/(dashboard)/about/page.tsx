@@ -106,19 +106,19 @@ export default function page({}: Props) {
                         <div className='h-[autopx] max-w-[30%] sm:p-6 xl:p-12 rounded-[20px] justify-center border-[1px] border-[solid] border-[rgba(194,194,194,0.60)] bg-[#FFF]           [box-shadow:0px_10px_25px_0px_rgba(194,_194,_194,_0.44)]'>
                            <div className=' w-[65.105px] h-[53px] rounded-[4px] flex justify-center items-center bg-[rgba(2,_152,_55,_0.10)] p-auto'><BuildingIconABout /> </div>
                                 <h1 className='text-[#003] font-[Montserrat] sm:text-[15px] xl:text-[20px] not-italic font-bold leading-[30px] mt-4'>Newly Launched Projects</h1>
-                                <p className='text-[rgba(0,_0,_51,_0.95)] font-[Montserrat] text-[15px] not-italic font-medium leading-[26px] mt-3 mb-8'>Discover the latest in real estate with our newly launched projects. Explore innovative projects and find your perfect new home today. </p>
+                                <p className='text-[rgba(0,_0,_51,_0.95)] font-[Montserrat] text-[15px] not-italic font-medium leading-[26px] mt-3 mb-10'>Discover the latest in real estate with our newly launched projects. Explore innovative projects and find your perfect new home today. </p>
                                 <a href='https://www.getrightproperty.com/search?projStatus=108'  target='_blank' className='cursor-pointer rounded-[4px] border-[1.618px] border-[solid] border-[#0073C6] px-[16.594px] py-[11.063px] justify-center items-center '>Explore Now</a>
                         </div>
                         <div className='h-[autopx] max-w-[30%] sm:p-6 xl:p-12 rounded-[20px] justify-center border-[1px] border-[solid] border-[rgba(194,194,194,0.60)] bg-[#FFF]           [box-shadow:0px_10px_25px_0px_rgba(194,_194,_194,_0.44)]'>
                            <div className=' w-[65.105px] h-[53px] rounded-[4px] flex justify-center items-center bg-[rgba(2,_152,_55,_0.10)] p-auto'><BuildingIconABout /> </div>
-                                <h1 className='text-[#003] font-[Montserrat] sm:text-[15px] xl:text-[20px] not-italic font-bold leading-[30px] mt-4'>Newly Launched Projects</h1>
-                                <p className='text-[rgba(0,_0,_51,_0.95)] font-[Montserrat] text-[15px] not-italic font-medium leading-[26px] mt-3 mb-8'>Explore our completed projects and find beautifully finished homes ready for you. Discover quality craftsmanship and move-in-ready projects now. </p>
+                                <h1 className='text-[#003] font-[Montserrat] sm:text-[15px] xl:text-[20px] not-italic font-bold leading-[30px] mt-4'>Completed Projects</h1>
+                                <p className='text-[rgba(0,_0,_51,_0.95)] font-[Montserrat] text-[15px] not-italic font-medium leading-[26px] mt-3 mb-10'>Explore our completed projects and find beautifully finished homes ready for you. Discover quality craftsmanship and move-in-ready projects now. </p>
                                 <a href='https://www.getrightproperty.com/search?projStatus=107' target='_blank' className='cursor-pointer rounded-[4px] border-[1.618px] border-[solid] border-[#0073C6] px-[16.594px] py-[11.063px] justify-center items-center '>Explore Now</a>
                         </div>
                         <div className='h-[autopx] max-w-[30%] sm:p-6 xl:p-12 rounded-[20px] justify-center border-[1px] border-[solid] border-[rgba(194,194,194,0.60)] bg-[#FFF]           [box-shadow:0px_10px_25px_0px_rgba(194,_194,_194,_0.44)]'>
                            <div className=' w-[65.105px] h-[53px] rounded-[4px] flex justify-center items-center bg-[rgba(2,_152,_55,_0.10)] p-auto'><BuildingIconABout /> </div>
-                                <h1 className='text-[#003] font-[Montserrat] sm:text-[15px] xl:text-[20px] not-italic font-bold leading-[30px] mt-4'>Newly Launched Projects</h1>
-                                <p className='text-[rgba(0,_0,_51,_0.95)] font-[Montserrat] text-[15px] not-italic font-medium leading-[26px] mt-3 mb-8'>Check out our ongoing projects for future-ready homes. Stay updated on construction progress and secure your ideal projects early. </p>
+                                <h1 className='text-[#003] font-[Montserrat] sm:text-[15px] xl:text-[20px] not-italic font-bold leading-[30px] mt-4'>Ongoing Projects</h1>
+                                <p className='text-[rgba(0,_0,_51,_0.95)] font-[Montserrat] text-[15px] not-italic font-medium leading-[26px] mt-3 mb-16'>Check out our ongoing projects for future-ready homes. Stay updated on construction progress and secure your ideal projects early. </p>
                                 <a href='https://www.getrightproperty.com/search?projStatus=106'  target='_blank' className='cursor-pointer rounded-[4px] border-[1.618px] border-[solid] border-[#0073C6] sm:px-[10px] sm:py-[8px] xl:px-[16.594px] xl:py-[11.063px] justify-center items-center '>Explore Now</a>
                      </div>  
                 </div>
