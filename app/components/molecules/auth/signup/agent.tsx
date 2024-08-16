@@ -47,7 +47,7 @@ function Agent() {
   >("idle");
   const [active, setActive] = useState(0);
   const router = useRouter();
-  const { registerOtherDetails, register, login } = useAuth({
+  const { registerOtherDetails, register, login, saveStep } = useAuth({
     type: "register",
   });
 
@@ -99,6 +99,7 @@ function Agent() {
       prevEmail: form.values.email as unknown as string,
     });
     setActive(1);
+    saveStep(2);
   };
   const nextStep = async () => {
     // Validate the form
@@ -141,12 +142,13 @@ function Agent() {
       if (!form.validate().hasErrors) {
         const data = await registerOtherDetails(
           registerOtherParser({ ...values })
-        );
+        ).then((res) => {
+          saveStep(3);
+        });
         await login({
           password: form.values.password,
           username: form.values.mobile as unknown as string,
         });
-
         setActive((current) => (current < 3 ? current + 1 : current));
       }
       // API call for the second step

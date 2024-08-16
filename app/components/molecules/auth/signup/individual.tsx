@@ -32,7 +32,7 @@ function Individual() {
     "idle" | "pending" | "success" | "error" | "otp"
   >("idle");
   const router = useRouter();
-  const { register, login } = useAuth({ type: "register" });
+  const { register, login, saveStep } = useAuth({ type: "register" });
   const [opened, { open, close }] = useDisclosure(false);
 
   const form = useForm({
@@ -69,6 +69,7 @@ function Individual() {
     });
     form.reset();
     setStatus("success");
+    saveStep(2);
     close();
   };
   const queryParam = getQueryParamClient();

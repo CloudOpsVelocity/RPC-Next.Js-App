@@ -76,7 +76,7 @@ function Builder() {
 
   const [opened, { open, close }] = useDisclosure(false);
 
-  const { registerOtherDetails, register, login } = useAuth({
+  const { registerOtherDetails, register, login, saveStep } = useAuth({
     type: "register",
   });
 
@@ -169,6 +169,7 @@ function Builder() {
       prevMobile: form.values.mobile as unknown as number,
       prevEmail: form.values.email as unknown as string,
     });
+    saveStep(2);
     setActive(1);
   };
   const nextStep = async () => {
@@ -221,9 +222,11 @@ function Builder() {
           break;
         case 1:
           setActive((current) => (current < 3 ? current + 1 : current));
+          saveStep(3);
           break;
         case 2:
           setActive((current) => (current < 3 ? current + 1 : current));
+          saveStep(4);
           break;
         case 3:
           setStatus("pending");
@@ -244,7 +247,7 @@ function Builder() {
               branch: values.branch.map((item) => parseInt(item)),
               companyStartDate: formattedDate,
             })
-          );
+          ).then(async (res) => await saveStep(5));
 
           await login({
             password: form.values.password,

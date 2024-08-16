@@ -71,6 +71,10 @@ export default function useAuth({
   const router = useRouter();
 
   const redirectPath = getCallPath();
+  const saveStep = async (step: number = 1) => {
+    const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/user-signup-step?page=${step}`;
+    const res = await axios.post(url);
+  };
   const loginWithCredentials = async (data: Login): Promise<any> => {
     const encryptedPassword = CryptoJS.AES.encrypt(
       data.password,
@@ -191,5 +195,5 @@ export default function useAuth({
     }
   };
 
-  return { login, register, verifyOtp, registerOtherDetails };
+  return { login, register, verifyOtp, registerOtherDetails, saveStep };
 }
