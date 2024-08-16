@@ -33,6 +33,7 @@ export function getCallPath(): string {
 export function getQueryParamClient(): { query: string; redirectPath: string } {
   const searchParams = useSearchParams();
   for (const key in pathConfig) {
+    
     const id = searchParams.get(pathConfig[key as PathConfigKey].paramName);
     if (id) {
       return {

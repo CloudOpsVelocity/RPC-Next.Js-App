@@ -399,10 +399,10 @@ const getFilteredData = async (
   page: number,
   type: "project" | "owner" | "agent"
 ): Promise<Search[]> => {
-  console.log(query);
   const hasCityParam = /(?:^|&)city=/.test(query);
   const hasCg = /(?:^|&)cg=/.test(query);
-  const cgValue = !hasCg ? "&cg=S" : '';
+  const cgValue = !hasCg ? "&cg=S" : "";
+
   const url =
     type === "project"
       ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=${page}${

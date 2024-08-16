@@ -14,13 +14,14 @@ type Props = {
   sl: string;
 };
 
+
 export default function ListingCard({ item, sl }: Props) {
   const images = getImageUrls(item.media);
   let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/listing/banglore/${item.propIdEnc}`;
   const onRedirectOnProp = () => {
     window.open(url, "_blank");
   };
-
+  console.log(item)
   const title = `${
     item.propTypeName === "Plot" ? `${item.pa} sq.ft` : item.bhkName
   } ${item.propTypeName} for ${item.category} in ${item.localityName}`;
@@ -39,7 +40,7 @@ export default function ListingCard({ item, sl }: Props) {
         </div>
 
         <a
-          className="inline-flex justify-center items-center gap-2.5 rounded border p-1 xl:p-2 border-solid border-[#0073C6] bg-[#0073c6] text-white text-[10px] sm:text-[12px] xl:text-sm not-italic font-bold leading-[normal] capitalize absolute bottom-2 right-2 sm:bottom-3 sm:right-3 z-[1000]"
+          className="inline-flex justify-center items-center gap-2.5 rounded border p-1 xl:p-2 border-solid border-[#0073C6] bg-[#0073c6] text-white text-[12px] xl:text-sm not-italic font-bold leading-[normal] capitalize absolute bottom-2 right-2 sm:bottom-3 sm:right-3 z-[1000]"
           href={url}
           target="_blank"
         >
@@ -55,27 +56,27 @@ export default function ListingCard({ item, sl }: Props) {
         />
 
         <div className="absolute bottom-2 left-2 space-y-2">
-          <p className="flex justify-center items-center gap-1 rounded p-1 bg-[#000000b0] text-white text-[10px] sm:text-[12px] xl:text-base not-italic font-semibold leading-[normal] capitalize">
+          <p className="flex justify-center items-center gap-1 rounded p-1 bg-[#000000b0] text-white text-[12px] xl:text-base not-italic font-semibold leading-[normal] capitalize">
             {item.propStatus}
           </p>
         </div>
       </div>
 
-      <div className="sm:min-h-[244px] xl:min-h-[236px] rounded shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] border-[0.8px] border-solid border-[#A4B8B5] bg-[#FFF]">
+      <div className="min-h-[256px] sm:min-h-[244px] xl:min-h-[236px] rounded shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] border-[0.8px] border-solid border-[#A4B8B5] bg-[#FFF]">
         <div className="p-[10px] sm:p-[7px] xl:p-[10px] flex justify-between">
           <div className="space-y-1  ">
-            <p className="text-[#242424] min-h-[56px] text-[12px] sm:text-[14px] xl:text-lg not-italic font-semibold leading-[normal] capitalize">
+            <p className="text-[#242424] min-h-[40px] sm:xl-min-h-[50px] xl:min-h-[56px] text-[12px] sm:text-[14px] xl:text-lg not-italic font-semibold leading-[normal] capitalize">
               {item.propTypeName === "Plot" &&
                 `${formatNumberWithSuffix(item.pa)} sq.ft`}{" "}
               {item.bhkName} {item.propTypeName} for {item.category} in{" "}
               {item.localityName}
             </p>
 
-            <p className="text-[#148B16] text-[11px] sm:text-[12px] xl:text-base not-italic font-bold leading-[normal] capitalize">
+            <p className="text-[#148B16] text-[12px] sm:text-[12px] xl:text-base not-italic font-bold leading-[normal] capitalize">
               {formatCurrency(item.price)}
               {item.category === "Rent" ? "" : ","}{" "}
               {item.category !== "Rent" && (
-                <span className="text-[#616D75] text-[11px] sm:text-[12px] xl:text-base not-italic font-bold leading-[normal] capitalize">
+                <span className="text-[#616D75] text-[12px] sm:text-[12px] xl:text-base not-italic font-bold leading-[normal] capitalize">
                   ₹{" "}
                   {calculatePerSqPrice(
                     item.price,
@@ -90,7 +91,7 @@ export default function ListingCard({ item, sl }: Props) {
               {item.propName}
             </p>
 
-            <p className="text-[#242424] text-[9px] xl:text-[12px] not-italic font-semibold leading-[normal] capitalize">
+            <p className="text-[#242424] text-[12px] not-italic font-semibold leading-[normal] capitalize">
               {item.cityName ?? "Banglore"}, {item.localityName}
             </p>
           </div>
@@ -121,6 +122,11 @@ export default function ListingCard({ item, sl }: Props) {
                 <DownSectionCard
                   label={"Available From"}
                   value={formatDate(item.availableFrom, true)}
+                />
+                <Divider orientation="vertical" color="#7BA0BB" />
+                <DownSectionCard
+                  label={"Plot Facing"}
+                  value={item.facing}
                 />
               </>
             ) : item.propStatus === "Under Cunstruction" ? (
@@ -182,7 +188,7 @@ export default function ListingCard({ item, sl }: Props) {
             )}
           </div>
           <div className="flex  mt-auto  justify-between   item-center w-[100%] my-1 sm:y-0">
-            <p className="text-[#242424] text-[10px] xl:text-sm not-italic font-semibold leading-[normal] capitalize mt-[6px] mb-[6px]">
+            <p className="text-[#242424] text-[14px] xl:text-sm not-italic font-semibold leading-[normal] capitalize mt-[12px] mb-[6px]">
               Posted by: {item.postedBy}
             </p>
             <ListingReqBtn
@@ -206,10 +212,10 @@ const DownSectionCard = ({
 }) => {
   return (
     <div className="flex flex-col justify-center items-start ">
-      <p className="text-[#001F35] text-[10px] sm:text-[12px] not-italic font-medium">
+      <p className="text-[#001F35] text-[12px] not-italic font-medium">
         {label}:
       </p>
-      <p className="text-[#242424] text-[10px] xl:text-[12px] not-italic font-semibold">
+      <p className="text-[#242424] text-[12px] not-italic font-semibold">
         {value}
       </p>
     </div>

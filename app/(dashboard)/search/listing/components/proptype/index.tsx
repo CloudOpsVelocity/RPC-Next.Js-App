@@ -12,7 +12,7 @@ export default function PropTypeFilter() {
     <div className="max-w-[300px] ">
       <ClearAll type="propType" />
       <div className="p-3">
-        <h3 className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] ">
+        <h3 className=" text-[#202020] mb-[2%] text-[14px] font-[600] mt-[3%] ">
           Property Type
         </h3>
         <div className="flex  mb-[3%] t gap-[4%]  flex-wrap justify-start items-center ">

@@ -89,7 +89,7 @@ export default function CardDownSection({
         <Button
           onChange={handleOpen}
           title={`${type === "proj" ? (isMobile ? "Contact" : "Request Callback") : "Request Callback"}`}
-          buttonClass="flex justify-end right-1  self-end text-[#FFF] ml-1 p-[3px] md:p-[5px] bg-[#0073C6] rounded-[5px] shadow-md text-[10px] xl:text-[12px] md:text-[12px] font-[700] text-nowrap"
+          buttonClass="flex justify-end right-1  self-end text-[#FFF] ml-1 p-[3px] md:p-[5px] bg-[#0073C6] rounded-[5px] shadow-md text-[12px] xl:text-[12px] md:text-[12px] font-[700] text-nowrap"
         />
       </div>
     </div>
@@ -123,7 +123,7 @@ const CountListing = ({ type, value, projIdEnc, projName }: CountListProps) => {
         )}
       >
         <p
-          className={`text-[10px] text-nowrap  xl:text-xs not-italic font-bold leading-[normal] ${
+          className={`text-[12px] text-nowrap  xl:text-xs not-italic font-bold leading-[normal] ${
             value > 0 ? "underline" : ""
           }`}
         >

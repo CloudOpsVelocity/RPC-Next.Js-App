@@ -243,7 +243,7 @@ const FilterPopup = () => {
               <>
                 <h3
                   className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
-                  id="Unit Type"
+                  id="BHK Type"
                 >
                   BHK Type
                 </h3>
@@ -422,7 +422,7 @@ const FilterPopup = () => {
                 return (
                   <div
                     key={index}
-                    className="flex justify-center items-center text-[10px] sm:text-[16px]  p-[1%] rounded-[10px] border-[#92B2C8] border-solid border-[1px]  "
+                    className="flex justify-center items-center text-[12px] sm:text-[16px]  p-[1%] rounded-[10px] border-[#92B2C8] border-solid border-[1px]  "
                   >
                     {eachLocality.split("+")[0]}
                     <span

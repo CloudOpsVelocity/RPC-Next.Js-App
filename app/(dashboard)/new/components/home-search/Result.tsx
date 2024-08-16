@@ -44,7 +44,8 @@ export default function Results() {
     }
   };
 
-  const handlePush = async (type: string, data: any) => {
+  /*   console.log(data)
+   */ const handlePush = async (type: string, data: any) => {
     switch (type) {
       case "project":
         window.open(`/abc/delhi/palika/${data}`);
@@ -52,32 +53,56 @@ export default function Results() {
       case "listing":
         {
           const ids = data.id.split("_");
-          const [ut, pt, cg, lt] = ids;
+          if (ids[0] == "32") {
+            let url;
+            //plot with project condition
 
-          let url;
+            if (ids.length > 3) {
+              const [ut, cg, id, lt] = ids;
+              /*  url = `propTypes=${ut}&cg=${cg}&localities=${data.name.trim()}%2B${lt}`; */
+              url = `propTypes=${ut}&cg=${cg}&projIdEnc=${id}&localities=${lt}`;
+            } else {
+              const [ut, cg, lt] = ids;
+              url = `propTypes=${ut}&cg=${cg}&localities=${lt}`;
+            }
+
+            window.open("/search/listing?" + url);
+          } else {
+            let url;
+
+            if (ids.length > 4) {
+              const [ut, pt, cg, id, lt] = ids;
+              url = `propTypes=${pt}&unitTypes=${ut}&cg=${cg}&projIdEnc=${id}&localities=${data.name.trim()}%2B${lt}`;
+            } else {
+              const [ut, pt, cg, lt] = ids;
+              url = `propTypes=${pt}&unitTypes=${ut}&cg=${cg}&localities=${data.name.trim()}%2B${lt}`;
+            }
+            window.open("/search/listing?" + url);
+          }
+          /*  const [ut, pt, cg, lt] = ids;
+
+         
           if (ids.length === 3) {
-            // This is a plot, so we don't include unitTypes
-            const [ut, cg, lt] = ids;
-            url = `propTypes=${ut}&cg=${cg}&localities=${data.name.trim()}%2B${lt}`;
+          
+            const [ut,  cg, lt] = ids;
+         
+           url = `propTypes=${ut}&cg=${cg}&localities=${lt}`;
           } else {
             url = `propTypes=${pt}&unitTypes=${ut}&cg=${cg}&localities=${data.name.trim()}%2B${lt}`;
           }
-
-          window.open("/search/listing?" + url);
+ */
         }
         break;
       case "projectListing":
+        let listedByType = data.type === "OL" ? "I" : data.type.split("")[0];
         {
-          const [listedBy] = data.type.split("");
-          const url = `projIdEnc=${data.id}&listedBy=${
-            listedBy == "O" ? "I" : listedBy
-          }&projName=${extractProjectName(data.name)}`;
+          const url = `projIdEnc=${data.id}&listedBy=${listedByType}`;
           window.open("/search/listing?" + url);
         }
         break;
       case "builder":
-        const url = encodeURI(`${data.name}`);
-        window.open(`/search?builderIds=${url}%2B${data.id}`);
+        const url = encodeURI(`${data.name}+${data.id}`);
+        window.open(`/search?builderIds=${url}`);
         break;
       default:
         break;
@@ -110,7 +135,7 @@ export default function Results() {
           {" "}
           <div>
             {localities?.length > 0 && (
-              <h2 className="text-[#5F81B2] text-[14px] sm:text-xl flex space-x-2 items-center">
+              <h2 className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] font-bold xl:text-[16px] not-italic leading-[normal] flex items-center gap-1 sm:gap-1 xl:text-nowrap cursor-pointer">
                 <SearchLocationIcon /> <span>Location</span>
               </h2>
             )}
@@ -122,7 +147,7 @@ export default function Results() {
                   onClick={() =>
                     handleAddSearch(`${locality.name}+${locality.id}`)
                   }
-                  className="text-[#737579] text-[12px]  sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
+                  className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1 sm:gap-3.5 xl:text-nowrap cursor-pointer"
                   key={locality.id}
                 >
                   {locality.name}
@@ -132,18 +157,41 @@ export default function Results() {
           </div>
           <div>
             {projects && projects.length > 0 && (
-              <h2 className="text-[#5F81B2] sm:text-xl flex space-x-2 items-center mt-[14px] mb-1">
-                {property} <span>Projects</span>
+              <h2 className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic font-semibold leading-[normal] flex items-center gap-1 sm:gap-1 xl:text-nowrap cursor-pointer sm:text-xl  space-x-2   mb-1">
+                {property}{" "}
+                <span className="text-[12px] sm:text-[14px] xl:text-[16px]">
+                  Projects
+                </span>
               </h2>
             )}
             <ul>
               {projects?.map((project: any) => (
                 <li
                   onClick={() => handlePush("project", project.id)}
-                  className="text-[#737579] text-[14px] sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
+                  className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1 sm:gap-3.5 xl:text-nowrap cursor-pointer"
                   key={project.id}
                 >
                   {project.name}
+                </li>
+              ))}
+            </ul>
+
+            {projectListing?.length > 0 && (
+              <SubHeading text="Project Listings" />
+            )}
+            <ul>
+              {projectListing?.map((projectListing: any) => (
+                <li
+                  onClick={() =>
+                    handlePush("projectListing", {
+                      id: projectListing.id,
+                      type: projectListing.type,
+                    })
+                  }
+                  className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1 sm:gap-3.5 xl:text-nowrap cursor-pointer"
+                  key={projectListing.id}
+                >
+                  {projectListing.name}
                 </li>
               ))}
             </ul>
@@ -157,30 +205,10 @@ export default function Results() {
                       name: listing.name.split("in")[1],
                     })
                   }
-                  className="text-[#737579] text-[14px] sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
+                  className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1 sm:gap-3.5 xl:text-nowrap cursor-pointer"
                   key={listing.id}
                 >
                   {listing.name}
-                </li>
-              ))}
-            </ul>
-            {projectListing?.length > 0 && (
-              <SubHeading text="Project Listings" />
-            )}
-            <ul>
-              {projectListing?.map((projectListing: any) => (
-                <li
-                  onClick={() =>
-                    handlePush("projectListing", {
-                      id: projectListing.id,
-                      type: projectListing.type,
-                      name: projectListing.name,
-                    })
-                  }
-                  className="text-[#737579] text-[14px] sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
-                  key={projectListing.id}
-                >
-                  {projectListing.name}
                 </li>
               ))}
             </ul>
@@ -194,7 +222,7 @@ export default function Results() {
                       id: builder.id,
                     })
                   }
-                  className="text-[14px] md:text-[16px] text-[#4D6677] font-[600] cursor-pointer"
+                  className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic leading-[normal] flex items-center gap-1 sm:gap-3.5 xl:text-nowrap cursor-pointer"
                   key={builder.id}
                 >
                   {builder.name}
@@ -211,7 +239,7 @@ export default function Results() {
 const SubHeading = ({ text }: { text: string }) => {
   return (
     <div className="flex items-center gap-1.5 mt-[14px] mb-1">
-      <div className="text-[#4D6677] text-[14px] sm:text-base font-medium">
+      <div className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic font-semibold leading-[normal] flex items-center gap-1 sm:gap-3.5 xl:text-nowrap">
         {text}
       </div>
       <hr className="w-full h-px border-0 bg-[#98A5B8]" />
@@ -242,12 +270,3 @@ const property = (
     </defs>
   </svg>
 );
-function extractProjectName(listing: string): string {
-  console.log(listing);
-  // Regular expression to match the project name
-  const regex = /in (.*?)\s*(\(\d+\))?$/;
-  const match = listing.match(regex);
-
-  // If a match is found, return the project name; otherwise, return an empty string
-  return match ? match[1].trim() : "";
-}

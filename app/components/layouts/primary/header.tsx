@@ -13,6 +13,7 @@ import { useMediaQuery } from "@mantine/hooks";
 import Btn from "@/app/(dashboard)/new/components/post-your-listing/Btn";
 import PostProjectBtn from "@/app/(dashboard)/new/components/PostProjectBtn";
 import MenuBtn from "@/app/(dashboard)/new/components/home-search/header/Menu";
+import { GrpLogoSvg } from "@/app/images/getrightLogo";
 
 type Props = {};
 
@@ -21,13 +22,8 @@ export default function Header({}: Props) {
   return (
     <div className="flex h-[70px] items-center justify-between shrink-0 p-1 pl-2 sm:pl-5 w-full py-3  shadow-[0px_4px_20px_0px_rgba(194,194,194,0.20)] bg-gradient-to-r from-[#f1f1f1] via-[#f1f1f1]  to-[#bde3ff] fixed top-0 z-[100]">
       <Link href={"/"}>
-        <Image
-          src={config.logo}
-          width={200}
-          height={60}
-          alt="logo"
-          className="h-[40px] w-[160px]  sm:h-[50px] sm:w-auto"
-        />
+       <GrpLogoSvg className="h-[40px] w-[160px]  sm:h-[50px] sm:w-auto"
+       />
       </Link>
       {isMobile ? (
         <div className="flex  sm:hidden mr-4 gap-4">
@@ -71,13 +67,13 @@ const ForBuilders = () => {
               To Post Project Free!
             </div>
             <ul className="ml-5 mt-3">
-              <li className="list-disc text-[#242424] text-[11px] not-italic font-medium leading-4">
+              <li className="list-disc text-[#242424] text-[12px] not-italic font-medium leading-4">
                 Free Posting
               </li>
-              <li className="list-disc text-[#242424] text-[11px] not-italic font-medium leading-4">
+              <li className="list-disc text-[#242424] text-[12px] not-italic font-medium leading-4">
                 Multiple Images
               </li>
-              <li className="list-disc text-[#242424] text-[11px] not-italic font-medium leading-4">
+              <li className="list-disc text-[#242424] text-[12px] not-italic font-medium leading-4">
                 Easy to post
               </li>
             </ul>

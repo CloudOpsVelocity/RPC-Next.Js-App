@@ -15,12 +15,12 @@ export default function HandPickedProjects({ data, shortIds }: Props) {
   return (
     <div className="w-full mt-[40px] sm:mt-[80px] min-h-[530px] sm:min-h-[582px] flex justify-center items-center shrink-0 bg-gradient-to-r from-[#DAE6F1] via-[#DAE6F1] to-[#A7D0F5]">
       <div className=" w-[95%]">
-        <div className="flex flex-row justify-between items-center ">
+        <div className="flex flex-row justify-between  items-center ">
           <MainHeading
             title="Handpicked Projects"
             content="Discover Your Dream Home with Handpicked Projects – Where Quality Meets Elegance"
           />
-            <a className="text-[#0073C6] font-[Montserrat] text-[20px] not-italic font-bold leading-[normal]" href={url}  target="_blank">View all</a>
+            <a className="text-[#0073C6] text-nowrap font-[Montserrat] text-[14px] sm:text-[18px] xl:text-[20px] not-italic font-bold leading-[normal]" href={url}  target="_blank">View all</a>
         </div>
       
 

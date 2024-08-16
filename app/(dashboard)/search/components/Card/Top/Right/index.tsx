@@ -100,9 +100,9 @@ export default function TopRightSection({
               <Button
                 onChange={() => onAddingCompare()}
                 title={Com ? "Remove Compare" : " Add to Compare"}
-                buttonClass="inline-flex justify-center items-center gap-1 xl:gap-2.5 rounded p-0.5 border-[0.5px] border-solid border-[#00A8CD] text-[#00A8CD] text-[11px]       sm:text-[12px] xl:text-xs not-italic font-semibold ml-auto"
+                buttonClass="inline-flex justify-center items-center gap-1 xl:gap-2.5 rounded p-0.5 border-[0.5px] border-solid border-[#00A8CD] text-[#00A8CD] text-[12px]       sm:text-[12px] xl:text-xs not-italic font-semibold ml-auto"
               />{" "}
-              <p className="text-[#242424] text-[10px] sm:text-[12px] xl:text-sm  not-italic font-normal">
+              <p className="text-[#242424] text-[12px] sm:text-[12px] xl:text-sm  not-italic font-normal">
                 Posted: <span className="font-bold">{timeAgo(postedDate)}</span>
               </p>
             </div>

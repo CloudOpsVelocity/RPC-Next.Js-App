@@ -100,7 +100,7 @@ export const RatingForm = ({
             {...form.getInputProps("rating")}
           />
 
-          <p className="text-[#F00] text-[11px] xl:text-xl italic font-normal leading-[23.784px] mt-5">
+          <p className="text-[#F00] text-[12px] xl:text-xl italic font-normal leading-[23.784px] mt-5">
             {form.errors.rating}
           </p>
         </div>

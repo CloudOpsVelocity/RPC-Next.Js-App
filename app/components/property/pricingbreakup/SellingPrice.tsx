@@ -34,7 +34,7 @@ export default function SellingPrice({
         <SecurityDeposit otherPrice={{ ...otherPrice, price: propertyPrice }} />
       )}
 
-      <p className="text-[#001F35] text-[6px] opacity-[4] xl:text-[10px] not-italic font-normal mt-4">
+      <p className="text-[#001F35] text-[12px] opacity-[4] xl:text-[12px] not-italic font-normal mt-4">
         Disclaimer: Information provided is for reference only. Get Right
         Property does not guarantee accuracy. Always refer to relevant laws for
         authoritative information.

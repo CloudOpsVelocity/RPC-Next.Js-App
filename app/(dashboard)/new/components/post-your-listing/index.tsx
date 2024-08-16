@@ -18,7 +18,7 @@ export default function PostYourListing({}: Props) {
           height={257}
           className="block sm:hidden min-w-[214px] max-w-[214px] sm:min-w-[387px] sm:max-w-[387px] min-h-[143px] max-h-[143px] sm:min-h-[257px] sm:max-h-[257px] "
         />
-        <p className="text-[11px] text-[#242424] sm:text-[16px] xl:text-[24px] not-italic mt-[18px] mb-[18px] font-medium sm:leading-[30px] tracking-[0.96px] sm:mb-[18px]">
+        <p className="text-[12px] text-[#242424] sm:text-[16px] xl:text-[24px] not-italic mt-[18px] mb-[18px] font-medium sm:leading-[30px] tracking-[0.96px] sm:mb-[18px]">
           Your listings deserves the spotlight. Add it to our platform today!
         </p>
         <Btn text="Property" />

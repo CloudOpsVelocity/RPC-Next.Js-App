@@ -61,13 +61,13 @@ const ForBuilders = () => {
               To Post Project Free!
             </div>
             <ul className="ml-5 mt-3">
-              <li className="list-disc text-[#242424] text-[11px] not-italic font-medium leading-4">
+              <li className="list-disc text-[#242424] text-[12px] not-italic font-medium leading-4">
                 Free Posting
               </li>
-              <li className="list-disc text-[#242424] text-[11px] not-italic font-medium leading-4">
+              <li className="list-disc text-[#242424] text-[12px] not-italic font-medium leading-4">
                 Multiple Images
               </li>
-              <li className="list-disc text-[#242424] text-[11px] not-italic font-medium leading-4">
+              <li className="list-disc text-[#242424] text-[12px] not-italic font-medium leading-4">
                 Easy to post
               </li>
             </ul>
