@@ -24,7 +24,7 @@ export default function CardCarousel({ data, shortIds }: Props) {
       controlsOffset={"-10px"}
       classNames={Css}
     >
-      {data.map((item: any, index: number) => (
+      {data?.map((item: any, index: number) => (
         <Carousel.Slide key={index}>
           <Card
             item={{
