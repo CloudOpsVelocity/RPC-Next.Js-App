@@ -14141,7 +14141,7 @@ export const SearchMapIcon = ({ className }: { className: string }) => {
 export const BlogCOnatainerSVg = ({ className }: { className: string }) => {
   return(
     <svg 
-    width="300" height="311" viewBox="0 0 300 311" fill="none" xmlns="http://www.w3.org/2000/svg"   className={className}>
+    width="300" height="311" viewBox="0 0 300 311" fill="none" xmlns="http://www.w3.org/2000/svg"   className={`${className} hidden sm:block`}>
 <path d="M60.3505 52.3771L57.9558 51.1525C58.389 50.0972 58.3808 48.7676 58.3084 47.8874C59.0892 48.2473 59.8766 48.6178 60.6192 48.972C60.5768 49.9564 60.4962 51.1191 60.3505 52.3771Z" stroke="#1A2E35" stroke-width="1.33333" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M63.8381 50.5484C64.6149 50.9457 65.4275 51.212 66.2474 51.3545C66.8141 54.4982 67.06 59.7256 64.2876 65.1468C63.6712 66.3502 57.176 63.0281 57.7924 61.8239C59.2768 58.9211 60.0014 55.3825 60.3507 52.3772C60.4965 51.1192 60.5771 49.9564 60.6194 48.972C61.9719 49.6177 63.1672 50.2056 63.8381 50.5484Z" stroke="#1A2E35" stroke-width="1.33333" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M71.5725 35.4285C73.6553 36.4935 75.1176 38.3125 75.778 40.3766C76.4505 42.4366 76.3284 44.7678 75.2626 46.8498C74.1935 48.9399 72.3794 50.3949 70.3104 51.0634C69.0198 51.4852 67.6226 51.5935 66.2474 51.3549C65.4274 51.2116 64.6148 50.9462 63.8381 50.548C63.1671 50.2052 61.9718 49.6182 60.6194 48.9725C59.8768 48.6175 59.0895 48.2478 58.3086 47.8871C56.4351 47.024 54.6218 46.2301 53.6821 45.9256L61.8815 29.8982C63.6158 31.1676 69.6501 34.4449 71.5725 35.4285Z" stroke="#1A2E35" stroke-width="1.33333" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>

@@ -311,7 +311,7 @@ const FilterPopup = () => {
                   return (
                     <Checkbox
                       key={i}
-                      label={`${i == 5 ? "+5" : i + 1} Bath`}
+                      label={`${i == 5 ? "5+" : i + 1} Bath`}
                       color="green"
                       onClick={() => handleCheckboxClick("bathRooms", i + 1)}
                       checked={filters.bathRooms.includes(i + 1)}
