@@ -28,6 +28,7 @@ export default function CardDownSection({
   ltName,
   cg,
   builderId,
+  postedById,
   postedByName,
   postedBy,
   localityName,

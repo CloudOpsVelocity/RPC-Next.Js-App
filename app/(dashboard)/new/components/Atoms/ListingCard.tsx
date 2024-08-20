@@ -21,7 +21,7 @@ export default function ListingCard({ item, sl }: Props) {
   const onRedirectOnProp = () => {
     window.open(url, "_blank");
   };
-  console.log(item)
+  console.log(item.postedById)
   const title = `${
     item.propTypeName === "Plot" ? `${item.pa} sq.ft` : item.bhkName
   } ${item.propTypeName} for ${item.category} in ${item.localityName}`;
@@ -192,8 +192,8 @@ export default function ListingCard({ item, sl }: Props) {
               Posted by: {item.postedBy}
             </p>
             <ListingReqBtn
-              builderId={item.builderId}
-              builderName={item.postedBy}
+              builderId={item.postedById}
+              builderName={item.builderName}
               projName={title}
               reqId={item.propIdEnc}
             />

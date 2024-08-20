@@ -40,7 +40,8 @@ export default function PropertyBanner({
       id="projectDetails"
     >
       <Image
-        src="https://d2l0lb5gc1bw3t.cloudfront.net/staticmedia-images-icons/project-detail/approvedgreen.png"
+       src={`https://d2l0lb5gc1bw3t.cloudfront.net/staticmedia-images-icons/project-detail/approvedgreen.png`}
+        /* src="https://d2l0lb5gc1bw3t.cloudfront.net/" */
         alt="Sobha Dream Acres"
         className="w-[220px] h-[150px]  xl:w-[312px] xl:h-auto absolute right-0 top-[0px] hidden sm:block"
         width={312}

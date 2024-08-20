@@ -14,12 +14,12 @@ export default function ContactForm({}: Props) {
     },
 
     validate: {
-      name: (value) => (value.trim().length > 0 ? null : "Name is required"),
-      email: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid email"),
+      name: (value) => (value.trim().length > 0 ? null : "Full Name is Required"),
+      email: (value) => (/^\S+@\S+$/.test(value) ? null : "Email is Required"),
       tel: (value) =>
-        /^[0-9]{10}$/.test(value) ? null : "Invalid contact number",
+        /^[0-9]{10}$/.test(value) ? null : "Contact Number is Required",
       questions: (value) =>
-        value.trim().length > 0 ? null : "This field cannot be empty",
+        value.trim().length > 0 ? null : "Please Enter Your Query",
     },
   });
   const onSubmit = async (values: any) => {
@@ -36,7 +36,7 @@ export default function ContactForm({}: Props) {
         </p>
         <input
           id="name"
-          placeholder="Enter your full name here"
+          placeholder="Enter your Full Name Here"
           type="text"
           className="rounded-[5px] border-[0.5px] border-solid border-[#666] bg-white text-[12px] sm:text-[16px] placeholder:text-[#767270] px-2 py-1 w-full"
           {...form.getInputProps("name")}
@@ -52,7 +52,7 @@ export default function ContactForm({}: Props) {
         </p>
         <input
           id="email"
-          placeholder="Enter your Email here"
+          placeholder="Enter your Email Here"
           type="email"
           className="rounded-[5px] border-[0.5px] border-solid border-[#666] bg-white text-[12px] sm:text-[16px] placeholder:text-[#767270] px-2 py-1 w-full"
           {...form.getInputProps("email")}
@@ -64,11 +64,11 @@ export default function ContactForm({}: Props) {
 
       <label htmlFor="tel" className="w-full">
         <p className="text-[#333] text-[12px] sm:text-base not-italic font-semibold text-left">
-          Contact
+          Contact Number
         </p>
         <input
           id="tel"
-          placeholder="Enter your Contact here"
+          placeholder="Enter your Contact Number Here"
           type="tel"
           className="rounded-[5px] border-[0.5px] border-solid border-[#666] bg-white text-[12px] sm:text-[16px] placeholder:text-[#767270] px-2 py-1 w-full"
           {...form.getInputProps("tel")}
@@ -84,7 +84,7 @@ export default function ContactForm({}: Props) {
         </p>
         <textarea
           id="questions"
-          placeholder="Enter your query here"
+          placeholder="Enter your query Here"
           className="rounded-[5px] border-[0.5px] border-solid border-[#666] bg-white text-[12px] sm:text-[16px] placeholder:text-[#767270] px-2 py-1 w-full"
           rows={4}
           {...form.getInputProps("questions")}
