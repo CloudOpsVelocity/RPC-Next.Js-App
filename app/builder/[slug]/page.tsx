@@ -11,6 +11,8 @@ import ProjectDrawer from "@/app/components/project/Drawer";
 import dynamic from "next/dynamic";
 import SectionSkeleton from "@/app/components/atoms/skeleton/section";
 import { cookies } from "next/headers";
+import { extractID, getPagesSlugs } from "@/app/seo/api";
+import { notFound } from "next/navigation";
 
 const LoginPopup = dynamic(
   () => import("@/app/components/project/modals/LoginPop"),
@@ -23,7 +25,11 @@ type Props = { params: { slug: string } };
 
 export default async function Page({ params: { slug } }: Props) {
   const token = cookies().get("token")?.value;
-  const data = await getBuilderDetails(slug, "Y", "proj", token);
+  const id = extractID(slug);
+  if (!id) {
+    notFound();
+  }
+  const data = await getBuilderDetails(id, "Y", "proj", token);
   return (
     <div className="flex flex-col justify-start items-center w-full mt-[70px]  ">
       {data && (
@@ -63,4 +69,14 @@ export default async function Page({ params: { slug } }: Props) {
       )}
     </div>
   );
+}
+
+export const fetchCache = "force-dynamic";
+export async function generateStaticParams() {
+  const res = await getPagesSlugs("builder-list");
+  const builderRess = Object.keys(res);
+  const slugs = builderRess?.map((data: any) => ({
+    slug: data,
+  }));
+  return slugs;
 }
