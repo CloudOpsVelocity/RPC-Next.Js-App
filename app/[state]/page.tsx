@@ -37,214 +37,32 @@ import ArticleJsonLdScript from "@/app/seo/ArticleJson";
 import { extractID, getPagesSlugs } from "../seo/api";
 import fs from "fs";
 import path from "path";
-import { headers } from "next/headers";
+import { cookies, headers } from "next/headers";
 import db from "../config/level";
+import { builderSlugs } from "@/static/builderSlugs";
+import { getBuilderDetails } from "../utils/api/builder";
+import BuilderPage from "../builder/[slug]/Page/BuilderPage";
 type Props = {
   params: { slug: string };
 };
 
 export default async function Page({ params: { slug } }: Props) {
   const nextHeaders = headers();
-  const pathname = nextHeaders.get("x-current-path");
-  // const origin = req.headers.origin
-  // const id = extractID(slug);
-  // if (!id) {
-  //   notFound();
-  // }
-  // const {
-  //   basicData: data,
-  //   nearByLocations,
-  //   phaseOverview,
-  // } = await getProjectDetails(id);
-  // const amenitiesFromDB = await getAmenties();
-  return (
-    <div className="w-full mt-[50%]">{pathname}</div>
-    // <section className="w-full relative break-words">
-    //   {/* <!-- Facebook Meta Tags --> */}
-    //   <meta
-    //     property="og:url"
-    //     content={`${process.env.NEXT_PUBLIC_URL}/abc/${data.cityName}/${data.localityName}/${slug}`}
-    //   />
-    //   <meta property="og:type" content="website" />
-    //   <meta
-    //     property="og:title"
-    //     content={`${data.projectName} ${data.availableProperties?.join(
-    //       " "
-    //     )} for sale in ${data.localityName} ${data.cityName}`}
-    //   />
-    //   <meta
-    //     property="og:description"
-    //     content={`${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`}
-    //   />
-    //   <meta property="og:image" content={data.media?.coverImageUrl} />
+  const pathname = `${process.env.NEXT_PUBLIC_URL}${nextHeaders.get(
+    "x-current-path"
+  )}`;
+  const token = cookies().get("token")?.value;
 
-    //   {/* <!-- Twitter Meta Tags --> */}
-    //   <meta name="twitter:card" content="summary_large_image" />
-    //   <meta property="twitter:domain" content="getrightproperty.com" />
-    //   <meta
-    //     property="twitter:url"
-    //     content={`${process.env.NEXT_PUBLIC_URL}/abc/${data.cityName}/${data.localityName}/${slug}`}
-    //   />
-    //   <meta
-    //     name="twitter:title"
-    //     content={`${data.projectName} ${data.availableProperties?.join(
-    //       " "
-    //     )} for sale in ${data.localityName} ${data.cityName}`}
-    //   />
-    //   <meta
-    //     name="twitter:description"
-    //     content={`${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`}
-    //   />
-    //   <meta name="twitter:image" content={data.media?.coverImageUrl}></meta>
-    //   <FAQJsonLdScript data={data} />
-    //   <QAJsonLdScript data={data} />
-    //   <PropertyJsonLdScript data={data} />
-    //   <ArticleJsonLdScript data={data} />
-    //   <div className="mt-[70px] sm:mt-[90px] w-full sm:pb-[2%] flex xl:text-ellipsis items-center justify-center flex-col ">
-    //     <div className="p-[1%] sm:p-[1%] sm:py-0 xl:p-[1%] w-full sm:w-[94%]">
-    //       <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%]">
-    //         <span>Home</span> {" > "}
-    //         <Link href={"/project/banglore"}>
-    //           <span>Projects In {data.cityName}</span>
-    //         </Link>{" "}
-    //         {" > "}
-    //         <Link href={"/project/banglore/whitefield"}>
-    //           <span>Projects In {`${data.localityName} `}</span>
-    //         </Link>{" "}
-    //         {" > "}
-    //         <span>{data.projectName}</span>
-    //       </p>
-    //       {/* Top Cover Image Card */}
-    //       <FirstBlock
-    //         projectDetails={data}
-    //         companyName={data.postedByName}
-    //         builderId={data.builderId}
-    //         hasReraStatus={data.reraStatus}
-    //       />
-    //     </div>
-    //     {/* Navigations Container */}
-    //     <MobileHidden>
-    //       <Navigation
-    //         isBrochure={!!data?.media?.projBroucherUrl}
-    //         detailsData={data}
-    //       />
-    //     </MobileHidden>
-    //     <Overview {...data} PhaseOverview={phaseOverview} />
-    //     <ListingRentAvail
-    //       projName={data.projectName}
-    //       r={data.rentListing}
-    //       s={data.saleListing}
-    //     />
-    //     {/* About */}
-    //     <About
-    //       id="about"
-    //       heading="about"
-    //       projName={data.projectName}
-    //       content={data.about}
-    //     />
-    //     {/* Property Details */}
-    //     <ProjectDetailsP
-    //       projName={data.projectName}
-    //       data={data.phases}
-    //       slug={slug}
-    //       PhaseOverview={phaseOverview}
-    //       isPartialData={data.partialUnitData!!}
-    //     />
-    //     <MasterPlan
-    //       projName={data.projectName}
-    //       media={data?.media?.projectPlanUrl}
-    //     />
-    //     {!data.partialUnitData ? (
-    //       <FloorplansBlock
-    //         projName={data.projectName}
-    //         data={data.phases}
-    //         slug={slug}
-    //         PhaseOverview={phaseOverview}
-    //         phaseList={data.phases}
-    //       />
-    //     ) : (
-    //       <PartialUnitData
-    //         partialUnitData={data.partialUnitData}
-    //         projName={data.projectName}
-    //         phaseList={data.phases}
-    //         data={data}
-    //       />
-    //     )}
-
-    //     <GalleryBlock
-    //       {...data.media}
-    //       projName={data.projectName}
-    //       media={data.media}
-    //     />
-    //     <ErrorContainer data={data.amenityList}>
-    //       <Amenties
-    //         data={data.amenityList}
-    //         projName={data.projectName}
-    //         amenitiesFromDB={amenitiesFromDB}
-    //       />
-    //     </ErrorContainer>
-
-    //     {data.lat && data.lang && (
-    //       <LeafMap
-    //         lat={data.lat}
-    //         lang={data.lang}
-    //         projName={data.projectName}
-    //         type="proj"
-    //         mapData={nearByLocations}
-    //       />
-    //     )}
-    //     <ErrorContainer data={data.specificationList}>
-    //       <Specifications
-    //         data={data.specificationList}
-    //         projName={data.projectName}
-    //       />
-    //     </ErrorContainer>
-    //     <ErrorContainer data={data.highlights}>
-    //       <Feature data={data.highlights} projName={data.projectName} />
-    //     </ErrorContainer>
-    //     <Banner projName={data.projectName} projIdEnc={data.projIdEnc} />
-
-    //     <ErrorContainer data={data.banks}>
-    //       <div id="loans" className="w-full h-auto scroll-mt-[150px]">
-    //         <Loans type="proj" banks={data.banks} name={data.projectName} />
-    //       </div>
-    //     </ErrorContainer>
-
-    //     <AboutBuilder id={data.builderId} />
-    //     {/* Why Buy This  */}
-    //     {data.wbtp && (
-    //       <About
-    //         id="whyBuy"
-    //         heading="Why Buy"
-    //         projName={`${data.projectName} ?`}
-    //         content={data.wbtp}
-    //       />
-    //     )}
-    //     {/* <Reviews projName={data.projectName} /> */}
-    //     {/* <DownloadBroucher
-    //   url={`${data?.media?.projBroucherUrl}?${Math.random()}`}
-    // /> */}
-    //     <div
-    //       id="faq"
-    //       className="scroll-mt-[70px] m-auto w-[95%] sm:w-[90%] flex justify-start items-start"
-    //     >
-    //       <FaqWithBg data={data.faqs} projName={data.projectName} />
-    //     </div>
-    //     <NearByCarousel
-    //       projName={data.projectName}
-    //       lat={data.lat}
-    //       lng={data.lang}
-    //       builderId={data.builderId}
-    //       company={data.companyName}
-    //     />
-    //     <ProjectDrawer projName={data.projectName} />
-    //     <FloorplanDrawer />
-    //     <LoginPopup />
-    //     <p>{origin}</p>
-    //     {/* <BaseSucess /> */}
-    //   </div>
-    // </section>
+  if (!builderSlugs.hasOwnProperty(pathname)) {
+    notFound();
+  }
+  const data = await getBuilderDetails(
+    builderSlugs[pathname as unknown as keyof typeof builderSlugs],
+    "Y",
+    "proj",
+    token
   );
+  return <BuilderPage data={data} />;
 }
 //  builder0 = state / project0 project in locality
 export const dynamic = "auto";
@@ -253,7 +71,25 @@ export const fetchCache = "force-dynamic";
 export async function generateStaticParams() {
   // Get the data (mocked here, replace with your actual data fetching logic)
   const res = await getPagesSlugs("builder-list");
+  const staticDir = path.join(process.cwd(), "static");
+  const filePath = path.join(staticDir, "builderSlugs.js");
 
+  // Ensure the 'static' directory exists
+  if (!fs.existsSync(staticDir)) {
+    fs.mkdirSync(staticDir);
+  }
+
+  // Write the `res` object to a JavaScript file as an exported module
+  const content = `export const builderSlugs = ${JSON.stringify(
+    res,
+    null,
+    2
+  )};`;
+
+  // Overwrite the file with the new content
+  fs.writeFileSync(filePath, content);
+
+  console.log(`Data has been saved to ${filePath}`);
   // Prepare bulk operations for the LevelDB database
   // const batchOps = Object.entries(res).map(([key, value]) => {
   //   return { type: "put", key, value };
@@ -266,7 +102,7 @@ export async function generateStaticParams() {
   // Generate slugs from the keys
   const builderRess = Object.keys(res);
   const slugs = builderRess.map((data: any) => ({
-    slug: data,
+    state: data,
   }));
 
   return slugs;
