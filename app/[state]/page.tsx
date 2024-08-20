@@ -38,13 +38,14 @@ import { extractID, getPagesSlugs } from "../seo/api";
 import fs from "fs";
 import path from "path";
 import { headers } from "next/headers";
+import db from "../config/level";
 type Props = {
   params: { slug: string };
 };
 
 export default async function Page({ params: { slug } }: Props) {
   const nextHeaders = headers();
-  const origin = nextHeaders.get("origin");
+  const pathname = nextHeaders.get("x-current-path");
   // const origin = req.headers.origin
   // const id = extractID(slug);
   // if (!id) {
@@ -57,7 +58,7 @@ export default async function Page({ params: { slug } }: Props) {
   // } = await getProjectDetails(id);
   // const amenitiesFromDB = await getAmenties();
   return (
-    <div className="w-full mt-[50%]">{origin}</div>
+    <div className="w-full mt-[50%]">{pathname}</div>
     // <section className="w-full relative break-words">
     //   {/* <!-- Facebook Meta Tags --> */}
     //   <meta
@@ -246,25 +247,27 @@ export default async function Page({ params: { slug } }: Props) {
   );
 }
 //  builder0 = state / project0 project in locality
-// export const dynamic = "auto";
+export const dynamic = "auto";
 
-// export const fetchCache = "force-dynamic";
-// export async function generateStaticParams() {
-//   const res = await getPagesSlugs("project-list");
-//   const staticDir = path.join(process.cwd(), "static");
-//   const filePath = path.join(staticDir, "pagesSlugs.js");
+export const fetchCache = "force-dynamic";
+export async function generateStaticParams() {
+  // Get the data (mocked here, replace with your actual data fetching logic)
+  const res = await getPagesSlugs("builder-list");
 
-//   if (!fs.existsSync(staticDir)) {
-//     fs.mkdirSync(staticDir);
-//   }
+  // Prepare bulk operations for the LevelDB database
+  // const batchOps = Object.entries(res).map(([key, value]) => {
+  //   return { type: "put", key, value };
+  // });
 
-//   const content = `export const pagesSlugs = ${JSON.stringify(res, null, 2)};`;
+  // console.log(batchOps);
+  // Perform the batch operation in the database
+  // await db.batch(batchOps);
 
-//   fs.writeFileSync(filePath, content);
+  // Generate slugs from the keys
+  const builderRess = Object.keys(res);
+  const slugs = builderRess.map((data: any) => ({
+    slug: data,
+  }));
 
-//   const builderRess = Object.keys(res);
-//   const slugs = builderRess?.map((data: any) => ({
-//     slug: data,
-//   }));
-//   return slugs;
-// }
+  return slugs;
+}

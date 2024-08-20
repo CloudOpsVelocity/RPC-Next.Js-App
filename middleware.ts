@@ -1,6 +1,8 @@
 import { cookies } from "next/headers";
-import { NextResponse } from "next/server";
-export function middleware() {
+import { NextRequest, NextResponse } from "next/server";
+export function middleware(request: NextRequest) {
+  const headers = new Headers(request.headers);
+  headers.set("x-current-path", request.nextUrl.pathname);
   const token = cookies().get("token")?.value;
   if (!token) {
     // Clear all authentication related cookies
@@ -24,8 +26,11 @@ export function middleware() {
   //   // );
   //   return response;
   // }
-  return NextResponse.next();
+  return NextResponse.next({ headers });
 }
 export const config = {
-  matcher: "/:path*",
+  matcher: [
+    // "/:path*",
+    "/((?!api|_next/static|_next/image|favicon.ico).*)",
+  ],
 };
