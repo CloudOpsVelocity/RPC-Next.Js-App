@@ -241,31 +241,31 @@ export default async function Page({}: Props) {
   );
 }
 
-export async function generateStaticParams() {
-  // Get the data (mocked here, replace with your actual data fetching logic)
-  const res = await getPagesSlugs("project-list");
-  const staticDir = path.join(process.cwd(), "static");
-  const filePath = path.join(staticDir, "projectSlugs.js");
+// export async function generateStaticParams() {
+//   // Get the data (mocked here, replace with your actual data fetching logic)
+//   const res = await getPagesSlugs("project-list");
+//   const staticDir = path.join(process.cwd(), "static");
+//   const filePath = path.join(staticDir, "projectSlugs.js");
 
-  // Ensure the 'static' directory exists
-  if (!fs.existsSync(staticDir)) {
-    fs.mkdirSync(staticDir);
-  }
+//   // Ensure the 'static' directory exists
+//   if (!fs.existsSync(staticDir)) {
+//     fs.mkdirSync(staticDir);
+//   }
 
-  // Write the `res` object to a JavaScript file as an exported module
-  const content = `export const projectSlugs = ${JSON.stringify(
-    res,
-    null,
-    2
-  )};`;
+//   // Write the `res` object to a JavaScript file as an exported module
+//   const content = `export const projectSlugs = ${JSON.stringify(
+//     res,
+//     null,
+//     2
+//   )};`;
 
-  // Overwrite the file with the new content
-  fs.writeFileSync(filePath, content);
+//   // Overwrite the file with the new content
+//   fs.writeFileSync(filePath, content);
 
-  const builderRess = Object.keys(res);
-  const slugs = builderRess.map((data: any) => ({
-    slug: data,
-  }));
+//   const builderRess = Object.keys(res);
+//   const slugs = builderRess.map((data: any) => ({
+//     slug: data,
+//   }));
 
-  return slugs;
-}
+//   return slugs;
+// }
