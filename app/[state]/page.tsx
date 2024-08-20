@@ -239,25 +239,26 @@ export default async function Page({ params: { slug } }: Props) {
     </section>
   );
 }
-export const dynamic = "auto";
+//  builder0 = state / project0 project in locality
+// export const dynamic = "auto";
 
-export const fetchCache = "force-dynamic";
-export async function generateStaticParams() {
-  const res = await getPagesSlugs("project-list");
-  const staticDir = path.join(process.cwd(), "static");
-  const filePath = path.join(staticDir, "pagesSlugs.js");
+// export const fetchCache = "force-dynamic";
+// export async function generateStaticParams() {
+//   const res = await getPagesSlugs("project-list");
+//   const staticDir = path.join(process.cwd(), "static");
+//   const filePath = path.join(staticDir, "pagesSlugs.js");
 
-  if (!fs.existsSync(staticDir)) {
-    fs.mkdirSync(staticDir);
-  }
+//   if (!fs.existsSync(staticDir)) {
+//     fs.mkdirSync(staticDir);
+//   }
 
-  const content = `export const pagesSlugs = ${JSON.stringify(res, null, 2)};`;
+//   const content = `export const pagesSlugs = ${JSON.stringify(res, null, 2)};`;
 
-  fs.writeFileSync(filePath, content);
+//   fs.writeFileSync(filePath, content);
 
-  const builderRess = Object.keys(res);
-  const slugs = builderRess?.map((data: any) => ({
-    slug: data,
-  }));
-  return slugs;
-}
+//   const builderRess = Object.keys(res);
+//   const slugs = builderRess?.map((data: any) => ({
+//     slug: data,
+//   }));
+//   return slugs;
+// }
