@@ -1,10 +1,12 @@
 import { getPagesSlugs } from "@/app/seo/api";
 import path from "path";
 import fs from "fs";
+// import { headers } from "next/headers";
+// import { getAmenties, getProjectDetails } from "@/app/utils/api/project";
+// import { notFound } from "next/navigation";
+import { projectSlugs } from "@/static/projectSlugs";
 import { headers } from "next/headers";
 import { getAmenties, getProjectDetails } from "@/app/utils/api/project";
-import { notFound } from "next/navigation";
-import { projectSlugs } from "@/static/projectSlugs";
 import React from "react";
 import Feature from "@/app/components/project/feature";
 import Reviews from "@/app/components/project/reviews";
@@ -36,23 +38,28 @@ import FAQJsonLdScript from "@/app/seo/Faqjson";
 import QAJsonLdScript from "@/app/seo/Qnajson";
 import PropertyJsonLdScript from "@/app/seo/Productjson";
 import ArticleJsonLdScript from "@/app/seo/ArticleJson";
-type Props = {};
+import { notFound } from "next/navigation";
+type Props = {
+  params: {
+    state: string;
+    city: string;
+    name: string;
+  };
+};
 
-export default async function Page({}: Props) {
-  const nextHeaders = headers();
-  const pathname = `${process.env.NEXT_PUBLIC_URL}${nextHeaders.get(
-    "x-current-path"
-  )}`;
-  if (!projectSlugs.hasOwnProperty(pathname)) {
+export default async function Page({ params }: Props) {
+  const { state, city, name } = params;
+  const pathname = `/${state}/${city}/${name}`;
+  const slug = projectSlugs[pathname as unknown as keyof typeof projectSlugs];
+  if (!slug) {
     notFound();
   }
-  const slug = projectSlugs[pathname as unknown as keyof typeof projectSlugs];
-  const {
-    basicData: data,
-    nearByLocations,
-    phaseOverview,
-  } = await getProjectDetails(slug);
-  const amenitiesFromDB = await getAmenties();
+  const [projResponse, amenitiesFromDB] = await Promise.all([
+    getProjectDetails(slug),
+    getAmenties(),
+  ]);
+  const { basicData: data, nearByLocations, phaseOverview } = projResponse;
+
   return (
     <section className="w-full relative break-words">
       {/* <!-- Facebook Meta Tags --> */}
@@ -217,8 +224,8 @@ export default async function Page({}: Props) {
         )}
         {/* <Reviews projName={data.projectName} /> */}
         {/* <DownloadBroucher
-      url={`${data?.media?.projBroucherUrl}?${Math.random()}`}
-    /> */}
+  url={`${data?.media?.projBroucherUrl}?${Math.random()}`}
+/> */}
         <div
           id="faq"
           className="scroll-mt-[70px] m-auto w-[95%] sm:w-[90%] flex justify-start items-start"
@@ -240,32 +247,33 @@ export default async function Page({}: Props) {
     </section>
   );
 }
+export const dynamic = "force-dynamic";
+export async function generateStaticParams() {
+  // Get the data (mocked here, replace with your actual data fetching logic)
+  const res = await getPagesSlugs("project-list");
+  const staticDir = path.join(process.cwd(), "static");
+  const filePath = path.join(staticDir, "projectSlugs.js");
 
-// export async function generateStaticParams() {
-//   // Get the data (mocked here, replace with your actual data fetching logic)
-//   const res = await getPagesSlugs("project-list");
-//   const staticDir = path.join(process.cwd(), "static");
-//   const filePath = path.join(staticDir, "projectSlugs.js");
+  // Ensure the 'static' directory exists
+  if (!fs.existsSync(staticDir)) {
+    fs.mkdirSync(staticDir);
+  }
 
-//   // Ensure the 'static' directory exists
-//   if (!fs.existsSync(staticDir)) {
-//     fs.mkdirSync(staticDir);
-//   }
+  // Write the `res` object to a JavaScript file as an exported module
+  const content = `export const projectSlugs = ${JSON.stringify(
+    res,
+    null,
+    2
+  )};`;
 
-//   // Write the `res` object to a JavaScript file as an exported module
-//   const content = `export const projectSlugs = ${JSON.stringify(
-//     res,
-//     null,
-//     2
-//   )};`;
+  // Overwrite the file with the new content
+  fs.writeFileSync(filePath, content);
 
-//   // Overwrite the file with the new content
-//   fs.writeFileSync(filePath, content);
+  const builderRess = Object.keys(res);
+  const slugs = builderRess.map((data: any) => ({
+    name: data.substring(data.lastIndexOf("/") + 1),
+  }));
+  console.log(slugs);
 
-//   const builderRess = Object.keys(res);
-//   const slugs = builderRess.map((data: any) => ({
-//     slug: data,
-//   }));
-
-//   return slugs;
-// }
+  return slugs;
+}

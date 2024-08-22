@@ -3,6 +3,7 @@ const getPagesSlugs = async (pageType: "builder-list" | "project-list") => {
     let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/common/${pageType}`;
     const res = await fetch(url, {
       method: "POST",
+      cache: "no-store",
     });
     const data = await res.json();
     return data;

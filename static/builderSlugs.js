@@ -1,3 +1,11 @@
 export const builderSlugs = {
-  "https://www.getrightproperty.com/Ds-Max-Properties-Private-Limited": 1
+  "/Ramya": 5,
+  "/Prestige-Group": 12,
+  "/Manish": 2,
+  "/Next-Builder": 3,
+  "/Sdrgtfh": 9,
+  "/Testerofdata": 14,
+  "/Ds-Max-Properties-Private-Limited": 1,
+  "/Sivaprasad": 4,
+  "/Radiance-Realty-Developers-India-Limited": 8
 };

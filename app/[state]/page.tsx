@@ -48,9 +48,7 @@ type Props = {
 
 export default async function page({ params: { slug } }: Props) {
   const nextHeaders = headers();
-  const pathname = `${process.env.NEXT_PUBLIC_URL}${nextHeaders.get(
-    "x-current-path"
-  )}`;
+  const pathname = `${nextHeaders.get("x-current-path")}`;
   const token = cookies().get("token")?.value;
 
   if (!builderSlugs.hasOwnProperty(pathname)) {
@@ -89,19 +87,22 @@ export async function generateStaticParams() {
 
   console.log(`Data has been saved to ${filePath}`);
   // Prepare bulk operations for the LevelDB database
-  // const batchOps = Object.entries(res).map(([key, value]) => {
-  //   return { type: "put", key, value };
-  // });
+  const batchOps = Object.entries(res).map(([key, value]) => {
+    return { type: "put", key, value };
+  });
 
-  // console.log(batchOps);
+  console.log(batchOps);
   // Perform the batch operation in the database
-  // await db.batch(batchOps);
+  // @ts-ignore
+  await db.batch(batchOps);
 
   // Generate slugs from the keys
+
   const builderRess = Object.keys(res);
   const slugs = builderRess.map((data: any) => ({
-    state: data,
+    state: data.replace(/\//g, ""),
   }));
+  console.log(slugs);
 
   return slugs;
 }
