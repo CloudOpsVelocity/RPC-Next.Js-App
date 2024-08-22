@@ -43,7 +43,7 @@ import { builderSlugs } from "@/static/builderSlugs";
 import { builderSlugsMap } from "@/static/builderSlugsMap";
 import { getBuilderDetails } from "../utils/api/builder";
 import BuilderPage from "../builder/[slug]/Page/BuilderPage";
-import builderJsonData from "@/static/builderSlugsMap.json";
+import builderJsonData from "@/static/builderSlugs.json";
 type Props = {
   params: { slug: string };
 };
@@ -70,7 +70,7 @@ export async function generateStaticParams() {
   const resObject = { ...res };
 
   const staticDir = path.join(process.cwd(), "static");
-  const filePath = path.join(staticDir, "builderSlugsMap.json");
+  const filePath = path.join(staticDir, "builderSlugs.json");
 
   // Ensure the 'static' directory exists
   if (!fs.existsSync(staticDir)) {
