@@ -46,7 +46,7 @@ type Props = {
   params: { slug: string };
 };
 
-export default async function Page({ params: { slug } }: Props) {
+export default async function page({ params: { slug } }: Props) {
   const nextHeaders = headers();
   const pathname = `${process.env.NEXT_PUBLIC_URL}${nextHeaders.get(
     "x-current-path"
@@ -65,9 +65,7 @@ export default async function Page({ params: { slug } }: Props) {
   return <BuilderPage data={data} />;
 }
 //  builder0 = state / project0 project in locality
-export const dynamic = "auto";
 
-export const fetchCache = "force-dynamic";
 export async function generateStaticParams() {
   // Get the data (mocked here, replace with your actual data fetching logic)
   const res = await getPagesSlugs("builder-list");
