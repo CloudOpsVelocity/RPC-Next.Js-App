@@ -40,6 +40,7 @@ import PropertyJsonLdScript from "@/app/seo/Productjson";
 import ArticleJsonLdScript from "@/app/seo/ArticleJson";
 import { notFound } from "next/navigation";
 import { projectSlugsMap } from "@/static/projectSlugsMap";
+import projectJsonSlugs from "@/static/projectSlugs.json";
 type Props = {
   params: {
     state: string;
@@ -51,12 +52,13 @@ type Props = {
 export default async function Page({ params }: Props) {
   const { state, city, name } = params;
   const pathname = `/${state}/${city}/${name}`;
-  const slug = projectSlugsMap.get(pathname);
+  const slug =
+    projectJsonSlugs[pathname as unknown as keyof typeof projectJsonSlugs];
   if (!slug) {
     notFound();
   }
   const [projResponse, amenitiesFromDB] = await Promise.all([
-    getProjectDetails(slug),
+    getProjectDetails(slug as string),
     getAmenties(),
   ]);
   const { basicData: data, nearByLocations, phaseOverview } = projResponse;
@@ -253,30 +255,22 @@ export async function generateStaticParams() {
   // Get the data (mocked here, replace with your actual data fetching logic)
   const res = await getPagesSlugs("project-list");
 
-  // Convert the `res` object into a Map
-  const resMap = new Map(Object.entries(res));
-
   const staticDir = path.join(process.cwd(), "static");
-  const filePath = path.join(staticDir, "projectSlugsMap.js");
+  const filePath = path.join(staticDir, "projectSlugs.json");
 
   // Ensure the 'static' directory exists
   if (!fs.existsSync(staticDir)) {
     fs.mkdirSync(staticDir);
   }
 
-  // Write the `resMap` to a JavaScript file as an exported module
-  // Convert the Map to an array of entries, then to a string
-  const mapContent = `export const projectSlugsMap = new Map(${JSON.stringify(
-    Array.from(resMap.entries()),
-    null,
-    2
-  )});`;
+  // Convert the data object into JSON
+  const jsonContent = JSON.stringify(res, null, 2);
 
-  // Overwrite the file with the new content
-  fs.writeFileSync(filePath, mapContent);
+  // Write the JSON data to the file
+  fs.writeFileSync(filePath, jsonContent);
 
-  // Extract project names from the Map keys
-  const builderRess = Array.from(resMap.keys());
+  // Extract project names from the keys
+  const builderRess = Object.keys(res);
   const slugs = builderRess.map((data) => ({
     name: data.substring(data.lastIndexOf("/") + 1),
   }));

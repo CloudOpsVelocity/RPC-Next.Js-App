@@ -43,6 +43,7 @@ import { builderSlugs } from "@/static/builderSlugs";
 import { builderSlugsMap } from "@/static/builderSlugsMap";
 import { getBuilderDetails } from "../utils/api/builder";
 import BuilderPage from "../builder/[slug]/Page/BuilderPage";
+import builderJsonData from "@/static/builderSlugsMap.json";
 type Props = {
   params: { slug: string };
 };
@@ -51,7 +52,8 @@ export default async function page({ params: { slug } }: Props) {
   const nextHeaders = headers();
   const pathname = `${nextHeaders.get("x-current-path")}`;
   const token = cookies().get("token")?.value;
-  const id = builderSlugsMap.get(pathname);
+  const id =
+    builderJsonData[pathname as unknown as keyof typeof builderJsonData];
   if (!id) {
     notFound();
   }
@@ -64,32 +66,27 @@ export async function generateStaticParams() {
   // Get the data (mocked here, replace with your actual data fetching logic)
   const res = await getPagesSlugs("builder-list");
 
-  // Convert the `res` object into a Map
-  const resMap = new Map(Object.entries(res));
+  // Convert the `res` object into a regular object (not a Map)
+  const resObject = { ...res };
 
   const staticDir = path.join(process.cwd(), "static");
-  const filePath = path.join(staticDir, "builderSlugsMap.js");
+  const filePath = path.join(staticDir, "builderSlugsMap.json");
 
   // Ensure the 'static' directory exists
   if (!fs.existsSync(staticDir)) {
     fs.mkdirSync(staticDir);
   }
 
-  // Write the `resMap` to a JavaScript file as an exported module
-  // Note: JSON.stringify won't work directly with a Map, so we need to convert it back to an object first
-  const mapContent = `export const builderSlugsMap = new Map(${JSON.stringify(
-    Array.from(resMap.entries()),
-    null,
-    2
-  )});`;
+  // Convert the object to a JSON string
+  const jsonContent = JSON.stringify(resObject, null, 2);
 
-  // Overwrite the file with the new content
-  fs.writeFileSync(filePath, mapContent);
+  // Write the JSON content to the file
+  fs.writeFileSync(filePath, jsonContent);
 
-  console.log(`Map data has been saved to ${filePath}`);
+  console.log(`JSON data has been saved to ${filePath}`);
 
-  // Prepare bulk operations for the LevelDB database
-  const builderRess = Array.from(resMap.keys());
+  // Prepare the slugs for static generation
+  const builderRess = Object.keys(resObject);
   const slugs = builderRess.map((data) => ({
     state: data.replace(/\//g, ""),
   }));
