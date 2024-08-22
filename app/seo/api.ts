@@ -1,4 +1,6 @@
-const getPagesSlugs = async (pageType: "builder-list" | "project-list") => {
+const getPagesSlugs = async (
+  pageType: "builder-list" | "project-list" | "case-seo"
+) => {
   try {
     let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/common/${pageType}`;
     const res = await fetch(url, {

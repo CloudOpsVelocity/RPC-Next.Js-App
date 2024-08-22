@@ -39,6 +39,7 @@ import QAJsonLdScript from "@/app/seo/Qnajson";
 import PropertyJsonLdScript from "@/app/seo/Productjson";
 import ArticleJsonLdScript from "@/app/seo/ArticleJson";
 import { notFound } from "next/navigation";
+import { projectSlugsMap } from "@/static/projectSlugsMap";
 type Props = {
   params: {
     state: string;
@@ -50,7 +51,7 @@ type Props = {
 export default async function Page({ params }: Props) {
   const { state, city, name } = params;
   const pathname = `/${state}/${city}/${name}`;
-  const slug = projectSlugs[pathname as unknown as keyof typeof projectSlugs];
+  const slug = projectSlugsMap.get(pathname);
   if (!slug) {
     notFound();
   }
@@ -251,28 +252,35 @@ export const dynamic = "force-dynamic";
 export async function generateStaticParams() {
   // Get the data (mocked here, replace with your actual data fetching logic)
   const res = await getPagesSlugs("project-list");
+
+  // Convert the `res` object into a Map
+  const resMap = new Map(Object.entries(res));
+
   const staticDir = path.join(process.cwd(), "static");
-  const filePath = path.join(staticDir, "projectSlugs.js");
+  const filePath = path.join(staticDir, "projectSlugsMap.js");
 
   // Ensure the 'static' directory exists
   if (!fs.existsSync(staticDir)) {
     fs.mkdirSync(staticDir);
   }
 
-  // Write the `res` object to a JavaScript file as an exported module
-  const content = `export const projectSlugs = ${JSON.stringify(
-    res,
+  // Write the `resMap` to a JavaScript file as an exported module
+  // Convert the Map to an array of entries, then to a string
+  const mapContent = `export const projectSlugsMap = new Map(${JSON.stringify(
+    Array.from(resMap.entries()),
     null,
     2
-  )};`;
+  )});`;
 
   // Overwrite the file with the new content
-  fs.writeFileSync(filePath, content);
+  fs.writeFileSync(filePath, mapContent);
 
-  const builderRess = Object.keys(res);
-  const slugs = builderRess.map((data: any) => ({
+  // Extract project names from the Map keys
+  const builderRess = Array.from(resMap.keys());
+  const slugs = builderRess.map((data) => ({
     name: data.substring(data.lastIndexOf("/") + 1),
   }));
+
   console.log(slugs);
 
   return slugs;

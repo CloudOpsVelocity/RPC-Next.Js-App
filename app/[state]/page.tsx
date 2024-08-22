@@ -40,6 +40,7 @@ import path from "path";
 import { cookies, headers } from "next/headers";
 import db from "../config/level";
 import { builderSlugs } from "@/static/builderSlugs";
+import { builderSlugsMap } from "@/static/builderSlugsMap";
 import { getBuilderDetails } from "../utils/api/builder";
 import BuilderPage from "../builder/[slug]/Page/BuilderPage";
 type Props = {
@@ -50,16 +51,11 @@ export default async function page({ params: { slug } }: Props) {
   const nextHeaders = headers();
   const pathname = `${nextHeaders.get("x-current-path")}`;
   const token = cookies().get("token")?.value;
-
-  if (!builderSlugs.hasOwnProperty(pathname)) {
+  const id = builderSlugsMap.get(pathname);
+  if (!id) {
     notFound();
   }
-  const data = await getBuilderDetails(
-    builderSlugs[pathname as unknown as keyof typeof builderSlugs],
-    "Y",
-    "proj",
-    token
-  );
+  const data = await getBuilderDetails(id, "Y", "proj", token);
   return <BuilderPage data={data} />;
 }
 //  builder0 = state / project0 project in locality
@@ -67,42 +63,36 @@ export default async function page({ params: { slug } }: Props) {
 export async function generateStaticParams() {
   // Get the data (mocked here, replace with your actual data fetching logic)
   const res = await getPagesSlugs("builder-list");
+
+  // Convert the `res` object into a Map
+  const resMap = new Map(Object.entries(res));
+
   const staticDir = path.join(process.cwd(), "static");
-  const filePath = path.join(staticDir, "builderSlugs.js");
+  const filePath = path.join(staticDir, "builderSlugsMap.js");
 
   // Ensure the 'static' directory exists
   if (!fs.existsSync(staticDir)) {
     fs.mkdirSync(staticDir);
   }
 
-  // Write the `res` object to a JavaScript file as an exported module
-  const content = `export const builderSlugs = ${JSON.stringify(
-    res,
+  // Write the `resMap` to a JavaScript file as an exported module
+  // Note: JSON.stringify won't work directly with a Map, so we need to convert it back to an object first
+  const mapContent = `export const builderSlugsMap = new Map(${JSON.stringify(
+    Array.from(resMap.entries()),
     null,
     2
-  )};`;
+  )});`;
 
   // Overwrite the file with the new content
-  fs.writeFileSync(filePath, content);
+  fs.writeFileSync(filePath, mapContent);
 
-  console.log(`Data has been saved to ${filePath}`);
+  console.log(`Map data has been saved to ${filePath}`);
+
   // Prepare bulk operations for the LevelDB database
-  const batchOps = Object.entries(res).map(([key, value]) => {
-    return { type: "put", key, value };
-  });
-
-  console.log(batchOps);
-  // Perform the batch operation in the database
-  // @ts-ignore
-  await db.batch(batchOps);
-
-  // Generate slugs from the keys
-
-  const builderRess = Object.keys(res);
-  const slugs = builderRess.map((data: any) => ({
+  const builderRess = Array.from(resMap.keys());
+  const slugs = builderRess.map((data) => ({
     state: data.replace(/\//g, ""),
   }));
-  console.log(slugs);
 
   return slugs;
 }
