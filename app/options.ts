@@ -6,7 +6,6 @@ import { cookies } from "next/headers";
 import CryptoJS from "crypto-js";
 
 export const options: NextAuthOptions = {
-  //ahsdjkfhkasjhf
   providers: [
     GitHubProvider({
       clientId: process.env.GITHUB_ID!,
