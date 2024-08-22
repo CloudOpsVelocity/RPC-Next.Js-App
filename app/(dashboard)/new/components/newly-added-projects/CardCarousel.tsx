@@ -29,9 +29,10 @@ export default function CardCarousel({ data, shortIds }: Props) {
           <Card
             item={{
               ...item,
-              shortListed: shortIds?.projIds?.includes(item.projIdEnc)
-                ? "Y"
-                : "N",
+              shortListed:
+                shortIds?.projIds && shortIds?.projIds?.includes(item.projIdEnc)
+                  ? "Y"
+                  : "N",
             }}
           />
         </Carousel.Slide>

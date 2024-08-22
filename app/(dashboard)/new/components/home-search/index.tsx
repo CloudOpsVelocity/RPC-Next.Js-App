@@ -37,7 +37,7 @@ const HomeSearch = ({ count }: { count: number }) => {
     >
       <Alert />
       {/* shortlisted */}
-      {count && (
+      {count ? (
         <a
           href="/my-profile#step_E"
           target="_blank"
@@ -49,8 +49,7 @@ const HomeSearch = ({ count }: { count: number }) => {
             <SelectedHeartIcon />
           </div>
         </a>
-      )}
-
+      ) : null}
       <div className=" items-center justify-center hidden xl:flex min-w-[200px] sm:max-w-[299px] xl:max-w-[499px] h-full">
         <Image
           src={"/home/home-search.svg"}
