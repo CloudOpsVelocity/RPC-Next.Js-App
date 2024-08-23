@@ -52,8 +52,9 @@ type Props = {
 export default async function Page({ params }: Props) {
   const { state, city, name } = params;
   const pathname = `/${state}/${city}/${name}`;
-  const slug =
-    projectJsonSlugs[pathname as unknown as keyof typeof projectJsonSlugs];
+  const slug = projectJsonSlugs[
+    pathname as unknown as keyof typeof projectJsonSlugs
+  ] as string;
   if (!slug) {
     notFound();
   }
