@@ -9,6 +9,7 @@ import TopProfileBlock from "@/app/components/builder/topProfileBlock";
 import ProjectDetails from "@/app/components/builder/projectDetails";
 import ManagementBlock from "@/app/components/builder/management";
 import Footer from "@/app/components/layouts/primary/footer";
+import data from "@/app/data/auth";
 const LoginPopup = dynamic(
   () => import("@/app/components/project/modals/LoginPop"),
   {
@@ -18,7 +19,9 @@ const LoginPopup = dynamic(
 );
 type Props = { data: any };
 
+
 export default function BuilderPage({ data }: Props) {
+
   return (
     <div className="flex flex-col justify-start items-center w-full mt-[70px]  ">
       {data && (

@@ -25,9 +25,24 @@ export default function GalleryBlock({
   const [selectedMedia, setSelectedMedia] = useState<string | null>(images[0]);
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  const videos = [walkThrowVideoUrl, projectVideoIUrl, media.videoUrl].filter(
+/*   const videos = [walkThrowVideoUrl, projectVideoIUrl, media.videoUrl].filter(
     (video) => video !== "" && video !== undefined
-  );
+  ); */
+  const videos = [
+    
+    'https://d2l0lb5gc1bw3t.cloudfront.net/images/varify/soc/2/walk-Through-video/video.mp4?v=1724310128539', 
+    'https://d2l0lb5gc1bw3t.cloudfront.net/images/varify/soc/2/video/video.mp4?v=1724310128539',
+    'https://www.youtube.com/watch?v=FWCBi-V77hA'
+]
+
+function getYouTubeThumbnailUrl(watchUrl:any) {
+  const match = watchUrl.match(/youtube\.com\/watch\?v=([^&]+)/);
+  const videoId = match ? match[1] : null;
+
+  return videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : null;
+}
+
+
   const isMobile = useMediaQuery(`(max-width: 750px)`);
   const [, { open }] = useGallery();
   const handleMediaClick = (media: string, index: number) => {
@@ -35,6 +50,7 @@ export default function GalleryBlock({
       const isVideo = videos.includes(media);
       open(isVideo ? "video" : "image", media);
     }
+   
     setSelectedMedia(media);
     setCurrentSlide(index);
   };
@@ -70,14 +86,14 @@ export default function GalleryBlock({
             <div
               className={clsx(
                 "w-[100%]  sm:h-[100%] md:h-[100%] sm:max-h-[100%] flex justify-center items-center mb-[3%] md:mb-[0%] mr-[3%]   relative  rounded-[14px] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] ",
-                selectedMedia.includes(".mp4") &&
+                (selectedMedia.includes(".mp4") || selectedMedia.includes("youtube"))&&
                   "flex justify-center items-center"
               )}
             >
-              {selectedMedia.includes(".mp4") ? (
+              {(selectedMedia.includes(".mp4") || selectedMedia.includes("youtube"))  ? (
                 <ReactPlayer
                   url={selectedMedia}
-                  width="auto"
+                  width="100%"
                   height="462px"
                   controls
                   playing={true}
@@ -156,14 +172,29 @@ export default function GalleryBlock({
                       description={`This video is about ${projName} ${VideoALText(
                         img
                       )}`}
-                    />
-                    <video
+                    />{  img.includes("youtube") ?
+                      <img
+                      src={getYouTubeThumbnailUrl(img)}
+                      className="!w-full rounded-[5px] cursor-pointer h-[64px] md:h-[90px] object-cover "
+                      alt="thumbnail"
+                      onClick={() => handleMediaClick(img as string, ind)}
+                  />
+                      :
+                      <video
                       key={img}
                       src={img as string}
                       className={`!w-full rounded-[5px] cursor-pointer  h-[64px] md:h-[90px] object-cover }`}
                       content=""
                       onClick={() => handleMediaClick(img as string, ind)}
                     />
+                    }
+                  {/*   <video
+                      key={img}
+                      src={img as string}
+                      className={`!w-full rounded-[5px] cursor-pointer  h-[64px] md:h-[90px] object-cover }`}
+                      content=""
+                      onClick={() => handleMediaClick(img as string, ind)}
+                    /> */}
                     <span className="absolute pointer-events-none ">
                       {videoPlayIcon}
                     </span>
