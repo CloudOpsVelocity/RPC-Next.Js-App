@@ -19,7 +19,12 @@ const getFilePath = (type: string) =>
 
 export async function POST(request: Request) {
   let { type, slug, id } = await request.json();
-
+  if (!slug || !id) {
+    return NextResponse.json(
+      { error: "Invalid slug or id parameter" },
+      { status: 400 }
+    );
+  }
   // Convert short form to full type
   type = typeMapping[type as keyof typeof typeMapping] || type;
 
@@ -120,14 +125,14 @@ export async function PUT(request: Request) {
 }
 
 export async function DELETE(request: Request) {
-  let { type, slug } = await request.json();
+  let { type, id } = await request.json();
 
   // Convert short form to full type
   type = typeMapping[type as keyof typeof typeMapping] || type;
 
-  if (!type || (type !== "project" && type !== "builder")) {
+  if (!type || !id || (type !== "project" && type !== "builder")) {
     return NextResponse.json(
-      { error: "Invalid type parameter" },
+      { error: "Invalid type or missing id parameter" },
       { status: 400 }
     );
   }
@@ -141,16 +146,21 @@ export async function DELETE(request: Request) {
   const fileContent = fs.readFileSync(filePath, "utf-8");
   const data = JSON.parse(fileContent);
 
-  if (!data.hasOwnProperty(slug)) {
+  // Find the slug by searching for the id
+  const slug = Object.keys(data).find((key) => data[key] === id);
+
+  if (!slug) {
     return NextResponse.json(
-      { error: `${type} does not exist` },
+      { error: `${type} with id '${id}' does not exist` },
       { status: 404 }
     );
   }
 
+  // Delete the entry based on the slug
   delete data[slug];
   fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
   revalidatePath(slug);
+
   return NextResponse.json(
     { message: `${type} deleted successfully` },
     { status: 200 }
