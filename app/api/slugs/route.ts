@@ -130,7 +130,7 @@ export async function DELETE(request: Request) {
 
   delete data[slug];
   fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
-
+  revalidatePath(slug);
   return NextResponse.json(
     { message: `${type} deleted successfully` },
     { status: 200 }
