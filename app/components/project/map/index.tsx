@@ -217,8 +217,9 @@ const LeafMap: React.FC<{
         ) : (
           <div>
             <h2 className="text-h2 sm:text-[22px] xl:text-[32px]  font-[600] text-[#001F35] mb-[12px] capitalize break-words sm:text-nowrap ">
+            <span>Map Preview Of  {" "}</span>
               <span className="text-[#148B16]  ">{projName} </span>
-              <span>Map Preview</span>
+             
             </h2>
             {/*  <SubHeading
                     text="Explore nearby convenient amenities, entertainment, and essential services"

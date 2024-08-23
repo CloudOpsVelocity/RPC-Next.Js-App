@@ -18,6 +18,8 @@ import {
   Text,
   ScrollArea,
   FocusTrap,
+  Checkbox,
+  Anchor,
 } from "@mantine/core";
 import StepCss from "@/app/styles/Stepper.module.css";
 
@@ -28,7 +30,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { styles } from "@/app/styles/Stepper";
 import { DropZone } from "./dropzone";
 import AuthPopup from "../authPopup";
-import { useDisclosure } from "@mantine/hooks";
+import { randomId, useDisclosure } from "@mantine/hooks";
 import useAuth from "@/app/hooks/useAuth";
 import Success from "../success";
 import { useQuery } from "react-query";
@@ -66,6 +68,7 @@ import handleTrimAndReplace, {
 import clsx from "clsx";
 import { getQueryParamClient } from "@/app/hooks/custom/useRedirect";
 import LoginSignupTabs from "@/app/(auth)/Components/LoginSignup";
+import AddmoreInput from "@/app/(auth)/Components/addmore";
 
 function Builder() {
   const [status, setStatus] = useState<
@@ -93,16 +96,17 @@ function Builder() {
       pincode: null,
       companyStartDate: null,
       branch: [],
-      ceoName: "",
-      foundedBy: "",
+      ceoName: [{ name: '', active: false, key: randomId() }],
+    /*   foundedBy: "", */
       mission: "",
       vission: "",
       officeContact: null,
-      managingDirectorName: "",
+      managingDirectorName:  [{ name: '', active: false, key: randomId() }],
       companyLogo: undefined,
       otp: false,
       prevMobile: 0,
       prevEmail: "",
+      foundedBy: [{ name: '', active: false, key: randomId() }],
     },
     validateInputOnBlur: true,
     name: "builder" + active,
@@ -183,6 +187,7 @@ function Builder() {
 
       return;
     }
+  
 
     // Handle API call based on the current step
     let values = form.values;
@@ -192,8 +197,8 @@ function Builder() {
         case 0:
           if (
             form.values.otp &&
-            form.values.mobile === form.values.prevMobile &&
-            form.values.email === form.values.prevEmail
+            form.values.mobile === form.values.prevMobile/*  &&
+            form.values.email === form.values.prevEmail */
           ) {
             // If OTP is already verified and mobile number is the same, move to the next step
             setActive(1);
@@ -312,12 +317,14 @@ function Builder() {
   const queryParam = getQueryParamClient();
   const ref = useRef<HTMLInputElement>(null);
   return (
+
     <div
       className={clsx(
         "w-full max-w-[423px] flex justify-center items-center flex-col mt-[2%]",
         active === 4 && "max-w-full"
       )}
     >
+        
       {active !== 4 && (
         <div className=" sm:max-w-[459px] md:max-w-[597px] flex justify-center items-center gap-[15%] mb-[5%] ">
           <LoginSignupTabs
@@ -698,7 +705,7 @@ function Builder() {
                   calendarHeader: StepCss.calendComStDt,
                 }}
               />
-              <TextInput
+              {/* <TextInput
                 id="foundedBy"
                 required
                 size="lg"
@@ -716,8 +723,11 @@ function Builder() {
                   handleTrimAndReplace(e, "foundedBy", form);
                   e.target.value !== "" && scrollToBottom();
                 }}
-              />
-              <TextInput
+              /> */}
+              <AddmoreInput form={form}   id={"foundedBy"} label={"Founded By"} placeholder={"Enter Founder name"} />
+              <AddmoreInput form={form} id={"ceoName"} label={"CEO Name"} placeholder={"Enter CEO Name"} />
+               <AddmoreInput form={form} id={"managingDirectorName"} label={"Managing Director"} placeholder={"Enter Managing Director Name"} />
+              {/* <TextInput
                 id="ceoName"
                 required
                 size="lg"
@@ -734,8 +744,8 @@ function Builder() {
                 onBlurCapture={(e) => {
                   handleTrimAndReplace(e, "ceoName", form);
                 }}
-              />
-              <TextInput
+              /> */}
+             {/*  <TextInput
                 id="managingDirectorName"
                 required
                 size="lg"
@@ -752,7 +762,7 @@ function Builder() {
                 onBlurCapture={(e) => {
                   handleTrimAndReplace(e, "managingDirectorName", form);
                 }}
-              />
+              /> */}
               <TextInput
                 id="officeContact"
                 required
@@ -832,11 +842,23 @@ function Builder() {
               {...form.getInputProps("mission")}
               maxLength={5001}
             />{" "}
-            <Text size="sm" mt="xs" ta={"right"} mb={"lg"}>
+            
+            {/* <Text size="sm" mt="xs" ta={"right"} mb={"lg"}>
               Maximum 5000 Characters
             </Text>
+            <Checkbox
+            label={
+            <>
+            I accept{' '}
+          <Anchor href="https://Rpclan.com" target="_blank" inherit>
+            terms and conditions
+          </Anchor>
+        </>
+         }
+       /> */}
+          
           </Stepper.Step>
-
+              
           <Stepper.Completed>
             {/* Completed! Form values: */}
             <Success />

@@ -123,11 +123,12 @@ function Dropdown() {
           <div className=" text-[12px] flex justify-center items-center gap-1.5 rounded border shadow-[0px_4px_30px_0px_rgba(194,194,194,0.40)] text-[#0073C6] text-lg not-italic font-semibold leading-[normal] px-2.5 py-1.5 border-solid border-[#0073C6] bg-white">
             <button className="inline-flex justify-center items-center gap-1 ">
               {config.getIcon(session.user.userType)}{" "}
-              {session.user.name.split(" ")[0].length >= 3
+              {/* session.user.name.split(" ")[0].length >= 3
                 ? session.user.name.split(" ")[0]
                 : session.user.name.split(" ")[1] != undefined
                 ? session.user.name.split(" ")[1]
-                : session.user.name.split(" ")[0]}
+                : session.user.name.split(" ")[0] */ 
+                session.user.name.slice(0, 10)}{`${session.user.name.length > 8? "...":""}`}
             </button>
             {config.blueChevron}
           </div>

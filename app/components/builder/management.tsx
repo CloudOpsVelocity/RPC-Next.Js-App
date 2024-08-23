@@ -4,6 +4,7 @@ import { callIconSvg } from "@/app/images/commonSvgs";
 import { Data } from "@/app/validations/types/builder";
 import About from "./about";
 import { HEADING_ICON } from "@/app/config/builder";
+import data from "@/app/data/auth";
 
 export default function ManagementBlock({
   companyName,
@@ -12,6 +13,7 @@ export default function ManagementBlock({
   vision,
   officecontact,
   projectAvailableCities,
+  mdname
 }: Data) {
   const keys = Object.keys(projectAvailableCities);
   return (
@@ -39,6 +41,14 @@ export default function ManagementBlock({
           </p>
           <p className="text-[12px] sm:text-lg xl:text-[20px] font-[700] text-[#00487C] italic">
             Founder, {companyName}
+          </p>
+        </div>
+        <div className="bg-[#FFF] rounded-[10px] shadow-lg border-[#92B2C8] border-[1px] border-solid p-2 sm:p-[16px] mb-[2%] ">
+          <p className=" text-[16px] sm:text-lg xl:text-[24px] font-[600] text-[#202020] ">
+            {mdname}
+          </p>
+          <p className="text-[12px] sm:text-lg xl:text-[20px] font-[700] text-[#00487C] italic">
+          Managing Director, {companyName}
           </p>
         </div>
       </div>

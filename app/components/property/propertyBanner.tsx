@@ -36,7 +36,7 @@ export default function PropertyBanner({
     />
   ) : (
     <div
-      className="w-[90%] m-auto mt-[50px] shrink-0  bg-[#fcfcfc] mb-20 relative  border shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] border-solid border-[#CAE9FF] sm:px-[22px] sm:py-[18px]  xl:px-[52px] xl:py-[35px] scroll-mt-[250px]"
+      className="w-[90%] m-auto mt-[50px] shrink-0  bg-[#fcfcfc] mb-15 relative  border shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] border-solid border-[#CAE9FF] sm:px-[22px] sm:py-[18px]  xl:px-[52px] xl:py-[35px] scroll-mt-[250px]"
       id="projectDetails"
     >
       <Image

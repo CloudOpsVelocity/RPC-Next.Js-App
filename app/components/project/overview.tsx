@@ -99,7 +99,7 @@ export default function Overview({
           <ProjBasicDetails
             key="totalUnits"
             icon={<TotalLandArea />} // Adjust icon
-            title="Units in Projects"
+            title="Units in Project"
             value={`${formatNumberWithSuffix(totalUnit)} Units`}
             className="mr-[5%] sm:mr-[3%] xl:mr-[5%] pt-[2%] mb-[3%] sm:mb-[1.5%] xl:mb-[3%]  "
           />

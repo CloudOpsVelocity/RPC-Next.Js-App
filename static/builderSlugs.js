@@ -7,5 +7,5 @@ export const builderSlugs = {
   "/Testerofdata": 14,
   "/Ds-Max-Properties-Private-Limited": 1,
   "/Sivaprasad": 4,
-  "/Radiance-Realty-Developers-India-Limited": 8
+  "/Radiance-Realty-Developers-India-Limited": 8,
 };
