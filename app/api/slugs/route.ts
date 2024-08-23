@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
+import { revalidatePath } from "next/cache";
 
 export async function GET() {
   return new Response("", {
@@ -88,9 +89,9 @@ export async function PUT(request: Request) {
       { status: 404 }
     );
   }
-
   data[slug] = id;
   fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+  revalidatePath(slug);
 
   return NextResponse.json(
     { message: `${type} updated successfully` },
