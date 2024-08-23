@@ -41,7 +41,10 @@ import { cookies, headers } from "next/headers";
 import db from "../config/level";
 import { builderSlugs } from "@/static/builderSlugs";
 import { builderSlugsMap } from "@/static/builderSlugsMap";
-import { getBuilderDetails } from "../utils/api/builder";
+import {
+  getBuilderDetails,
+  getBuilderDetailsPageData,
+} from "../utils/api/builder";
 import BuilderPage from "../builder/[slug]/Page/BuilderPage";
 type Props = {
   params: { state: string };
@@ -56,14 +59,13 @@ async function getBuilderSlug(pathname: string) {
   // Return the ID for the given pathname
   return builderJsonData[pathname] || null;
 }
-export default async function page({ params: { state } }: Props) {
+export default async function Page({ params: { state } }: Props) {
   const pathname = `/${state}`;
   const id = await getBuilderSlug(pathname);
   if (!id) {
     notFound();
   }
-  const token = cookies().get("token")?.value;
-  const data = await getBuilderDetails(id, "Y", "proj", token);
+  const data = await getBuilderDetailsPageData(id);
   return <BuilderPage data={data} />;
 }
 //  builder0 = state / project0 project in locality
@@ -96,6 +98,6 @@ export async function generateStaticParams() {
   const slugs = builderRess.map((data) => ({
     state: data.replace(/\//g, ""),
   }));
-
+  console.log(slugs);
   return slugs;
 }

@@ -32,3 +32,18 @@ export const getBuilderDetails = async (
     return error as Main;
   }
 };
+
+export const getBuilderDetailsPageData = async (
+  slug: string | number
+): Promise<Main> => {
+  const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/builder-details?builderId=${slug}&isBuilderPage=Y`;
+  try {
+    const response = await fetch(url, {
+      next: { tags: [`${slug}`], revalidate: 60 * 5 },
+    });
+    const data: Main = await response.json();
+    return data as Main;
+  } catch (error) {
+    return error as Main;
+  }
+};
