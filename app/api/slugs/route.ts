@@ -59,7 +59,7 @@ export async function POST(request: Request) {
 
   // Write the updated data back to the file
   fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
-  revalidatePath(slug);
+  revalidatePath(slug, "page");
   return NextResponse.json(
     { message: `${type} created successfully` },
     { status: 201 }
