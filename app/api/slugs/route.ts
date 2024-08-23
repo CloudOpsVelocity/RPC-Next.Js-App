@@ -7,11 +7,20 @@ export async function GET() {
     status: 405,
   });
 }
+
+const typeMapping = {
+  P: "project",
+  B: "builder",
+};
+
 const getFilePath = (type: string) =>
   path.join(process.cwd(), "static", `${type}Slugs.json`);
 
 export async function POST(request: Request) {
-  const { type, slug, id } = await request.json();
+  let { type, slug, id } = await request.json();
+
+  // Convert short form to full type
+  type = typeMapping[type as keyof typeof typeMapping] || type;
 
   if (!type || (type !== "project" && type !== "builder")) {
     return NextResponse.json(
@@ -52,7 +61,10 @@ export async function POST(request: Request) {
 }
 
 export async function PUT(request: Request) {
-  const { type, slug, id } = await request.json();
+  let { type, slug, id } = await request.json();
+
+  // Convert short form to full type
+  type = typeMapping[type as keyof typeof typeMapping] || type;
 
   if (!type || (type !== "project" && type !== "builder")) {
     return NextResponse.json(
@@ -87,7 +99,10 @@ export async function PUT(request: Request) {
 }
 
 export async function DELETE(request: Request) {
-  const { type, slug } = await request.json();
+  let { type, slug } = await request.json();
+
+  // Convert short form to full type
+  type = typeMapping[type as keyof typeof typeMapping] || type;
 
   if (!type || (type !== "project" && type !== "builder")) {
     return NextResponse.json(
