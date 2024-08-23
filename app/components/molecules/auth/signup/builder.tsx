@@ -317,13 +317,14 @@ function Builder() {
   const queryParam = getQueryParamClient();
   const ref = useRef<HTMLInputElement>(null);
   return (
-
+   
     <div
       className={clsx(
         "w-full max-w-[423px] flex justify-center items-center flex-col mt-[2%]",
         active === 4 && "max-w-full"
       )}
     >
+       {JSON.stringify(form.errors)}
         
       {active !== 4 && (
         <div className=" sm:max-w-[459px] md:max-w-[597px] flex justify-center items-center gap-[15%] mb-[5%] ">
@@ -843,10 +844,10 @@ function Builder() {
               maxLength={5001}
             />{" "}
             
-            {/* <Text size="sm" mt="xs" ta={"right"} mb={"lg"}>
+            <Text size="sm" mt="xs" ta={"right"} mb={"lg"}>
               Maximum 5000 Characters
             </Text>
-            <Checkbox
+                 {/*  <Checkbox
             label={
             <>
             I accept{' '}

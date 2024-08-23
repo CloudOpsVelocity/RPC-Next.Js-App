@@ -150,7 +150,7 @@ const builderSchema = yup.object().shape({
 
   ceoName:yup.array().of(itemSchema).test(
     'first-item-name-validation',
-    'Founded by name is required',
+    'CEO by name is required',
     function (value) {
       const { path, createError } = this;
   
@@ -216,7 +216,7 @@ const builderSchema = yup.object().shape({
   
   managingDirectorName: yup.array().of(itemSchema).test(
     'first-item-name-validation',
-    'Founded by name is required',
+    'Managing Director by name is required',
     function (value) {
       const { path, createError } = this;
   

@@ -112,8 +112,8 @@ function Agent() {
     if (active === 0) {
       if (
         form.values.otp &&
-        form.values.mobile === form.values.prevMobile &&
-        form.values.email === form.values.prevEmail
+        form.values.mobile === form.values.prevMobile /* &&
+        form.values.email === form.values.prevEmail */
       ) {
         // If OTP is already verified and mobile number is the same, move to the next step
         setActive(1);
