@@ -43,17 +43,25 @@ import { builderSlugs } from "@/static/builderSlugs";
 import { builderSlugsMap } from "@/static/builderSlugsMap";
 import { getBuilderDetails } from "../utils/api/builder";
 import BuilderPage from "../builder/[slug]/Page/BuilderPage";
-import builderJsonData from "@/static/builderSlugs.json";
 type Props = {
   params: { slug: string };
 };
+async function getBuilderSlug(pathname: string) {
+  const staticDir = path.join(process.cwd(), "static");
+  const filePath = path.join(staticDir, "builderSlugs.json");
 
+  // Read the JSON file
+  const jsonData = fs.readFileSync(filePath, "utf8");
+  const builderJsonData = JSON.parse(jsonData);
+
+  // Return the ID for the given pathname
+  return builderJsonData[pathname] || null;
+}
 export default async function page({ params: { slug } }: Props) {
   const nextHeaders = headers();
   const pathname = `${nextHeaders.get("x-current-path")}`;
   const token = cookies().get("token")?.value;
-  const id =
-    builderJsonData[pathname as unknown as keyof typeof builderJsonData];
+  const id = await getBuilderSlug(pathname);
   if (!id) {
     notFound();
   }
