@@ -53,18 +53,24 @@ async function getBuilderSlug(pathname: string) {
   const staticDir = path.join(process.cwd(), "static");
   const filePath = path.join(staticDir, "builderSlugs.json");
 
-  // Read the JSON file
-  const jsonData = fs.readFileSync(filePath, "utf8");
-  const builderJsonData = JSON.parse(jsonData);
-  // Return the ID for the given pathname
-  return builderJsonData[pathname] || null;
+  try {
+    // Read the JSON file asynchronously
+    const jsonData = await fs.readFileSync(filePath, "utf-8");
+    const builderJsonData = JSON.parse(jsonData);
+    console.log(pathname, builderJsonData, "check 1");
+    // Return the ID for the given pathname
+    return builderJsonData[pathname];
+  } catch (error) {
+    console.error("Error reading or parsing file:", error);
+    return null;
+  }
 }
 export default async function Page({ params: { state } }: Props) {
   const pathname = `/${state}`;
   const id = await getBuilderSlug(pathname);
-  // if (!id) {
-  //   notFound();
-  // }
+  if (!id) {
+    notFound();
+  }
   const data = await getBuilderDetailsPageData(id);
   return <BuilderPage data={data} />;
 }
