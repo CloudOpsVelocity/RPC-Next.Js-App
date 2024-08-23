@@ -4,12 +4,9 @@ import fs from "fs";
 // import { headers } from "next/headers";
 // import { getAmenties, getProjectDetails } from "@/app/utils/api/project";
 // import { notFound } from "next/navigation";
-import { projectSlugs } from "@/static/projectSlugs";
-import { headers } from "next/headers";
 import { getAmenties, getProjectDetails } from "@/app/utils/api/project";
 import React from "react";
 import Feature from "@/app/components/project/feature";
-import Reviews from "@/app/components/project/reviews";
 import Amenties from "@/app/components/project/amenties";
 import Loans from "@/app/components/project/loans";
 import FirstBlock from "@/app/components/project/firstBlock";
@@ -48,13 +45,21 @@ type Props = {
     name: string;
   };
 };
+async function getProjectSlug(pathname: string) {
+  const staticDir = path.join(process.cwd(), "static");
+  const filePath = path.join(staticDir, "projectSlugs.json");
 
+  // Read the JSON file
+  const jsonData = fs.readFileSync(filePath, "utf8");
+  const builderJsonData = JSON.parse(jsonData);
+
+  // Return the ID for the given pathname
+  return builderJsonData[pathname] || null;
+}
 export default async function Page({ params }: Props) {
   const { state, city, name } = params;
   const pathname = `/${state}/${city}/${name}`;
-  const slug = projectJsonSlugs[
-    pathname as unknown as keyof typeof projectJsonSlugs
-  ] as string;
+  const slug = await getProjectSlug(pathname);
   if (!slug) {
     notFound();
   }

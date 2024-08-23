@@ -67,9 +67,10 @@ export async function PUT(request: Request) {
   // Convert short form to full type
   type = typeMapping[type as keyof typeof typeMapping] || type;
 
-  if (!type || (type !== "project" && type !== "builder")) {
+  // Ensure that 'type' and 'id' are provided
+  if (!type || !id || (type !== "project" && type !== "builder")) {
     return NextResponse.json(
-      { error: "Invalid type parameter" },
+      { error: "Invalid type or missing id parameter" },
       { status: 400 }
     );
   }
@@ -83,15 +84,34 @@ export async function PUT(request: Request) {
   const fileContent = fs.readFileSync(filePath, "utf-8");
   const data = JSON.parse(fileContent);
 
-  if (!data.hasOwnProperty(slug)) {
+  // Find the current slug by searching for the id
+  let currentSlug = Object.keys(data).find((key) => data[key] === id);
+
+  if (!currentSlug) {
     return NextResponse.json(
-      { error: `${type} does not exist` },
+      { error: `${type} with id '${id}' does not exist` },
       { status: 404 }
     );
   }
-  data[slug] = id;
+
+  // If the new slug is different and provided, update the slug
+  if (slug && slug !== currentSlug) {
+    // Ensure the new slug doesn't already exist
+    if (data.hasOwnProperty(slug)) {
+      return NextResponse.json(
+        { error: `Slug '${slug}' already exists` },
+        { status: 400 }
+      );
+    }
+
+    // Update the slug
+    data[slug] = id;
+    delete data[currentSlug];
+  }
+
+  // Write the updated data back to the file
   fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
-  revalidatePath(slug);
+  revalidatePath(slug || currentSlug);
 
   return NextResponse.json(
     { message: `${type} updated successfully` },
