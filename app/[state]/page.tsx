@@ -62,9 +62,9 @@ async function getBuilderSlug(pathname: string) {
 export default async function Page({ params: { state } }: Props) {
   const pathname = `/${state}`;
   const id = await getBuilderSlug(pathname);
-  if (!id) {
-    notFound();
-  }
+  // if (!id) {
+  //   notFound();
+  // }
   const data = await getBuilderDetailsPageData(id);
   return <BuilderPage data={data} />;
 }
