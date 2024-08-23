@@ -44,7 +44,7 @@ import { builderSlugsMap } from "@/static/builderSlugsMap";
 import { getBuilderDetails } from "../utils/api/builder";
 import BuilderPage from "../builder/[slug]/Page/BuilderPage";
 type Props = {
-  params: { slug: string };
+  params: { state: string };
 };
 async function getBuilderSlug(pathname: string) {
   const staticDir = path.join(process.cwd(), "static");
@@ -53,18 +53,16 @@ async function getBuilderSlug(pathname: string) {
   // Read the JSON file
   const jsonData = fs.readFileSync(filePath, "utf8");
   const builderJsonData = JSON.parse(jsonData);
-
   // Return the ID for the given pathname
   return builderJsonData[pathname] || null;
 }
-export default async function page({ params: { slug } }: Props) {
-  const nextHeaders = headers();
-  const pathname = `${nextHeaders.get("x-current-path")}`;
-  const token = cookies().get("token")?.value;
+export default async function page({ params: { state } }: Props) {
+  const pathname = `/${state}`;
   const id = await getBuilderSlug(pathname);
   if (!id) {
     notFound();
   }
+  const token = cookies().get("token")?.value;
   const data = await getBuilderDetails(id, "Y", "proj", token);
   return <BuilderPage data={data} />;
 }
