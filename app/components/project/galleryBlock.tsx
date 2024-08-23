@@ -25,14 +25,9 @@ export default function GalleryBlock({
   const [selectedMedia, setSelectedMedia] = useState<string | null>(images[0]);
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  /*   const videos = [walkThrowVideoUrl, projectVideoIUrl, media.videoUrl].filter(
+  const videos = [walkThrowVideoUrl, projectVideoIUrl, media.videoUrl].filter(
     (video) => video !== "" && video !== undefined
-  ); */
-  const videos = [
-    "https://d2l0lb5gc1bw3t.cloudfront.net/images/varify/soc/2/walk-Through-video/video.mp4?v=1724310128539",
-    "https://d2l0lb5gc1bw3t.cloudfront.net/images/varify/soc/2/video/video.mp4?v=1724310128539",
-    "https://www.youtube.com/watch?v=FWCBi-V77hA",
-  ];
+  );
 
   function getYouTubeThumbnailUrl(watchUrl: any) {
     const match = watchUrl.match(/youtube\.com\/watch\?v=([^&]+)/);

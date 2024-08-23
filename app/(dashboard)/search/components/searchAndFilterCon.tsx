@@ -22,9 +22,7 @@ import { SEARCH_FILTER_DATA } from "@/app/data/search";
 import { toFormattedString } from "./buget/budget";
 
 const SearchAndFilterCon = () => {
-  const [opened, { open, close }] = useDisclosure(false);
-  const isMobile = useMediaQuery("(max-width: 601px)");
-  const { debounced } = useQsearch();
+  const [, { open, close }] = useDisclosure(false);
   const [showAllLocalities, setShowAllLocalities] = useState(false);
   return (
     <>
@@ -34,25 +32,6 @@ const SearchAndFilterCon = () => {
         close={close}
         showAllLocalities={showAllLocalities}
       />
-      {/* <Drawer
-        opened={opened}
-        onClose={close}
-        position="top"
-        classNames={{
-          overlay: S.overlay,
-          content: S.content,
-          header: S.header,
-          body: classes.body,
-        }}
-        size={isMobile ? "100%" : debounced ? "70%" : "25%"}
-      >
-        <SearchDrawerHeader
-          showAllLocalities={showAllLocalities}
-          setShowAllLocalities={setShowAllLocalities}
-          open={open}
-          close={close}
-        />
-      </Drawer> */}
     </>
   );
 };

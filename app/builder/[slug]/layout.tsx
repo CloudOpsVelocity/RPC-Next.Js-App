@@ -1,11 +1,14 @@
+import Footer from "@/app/components/layouts/primary/footer";
+import Header from "@/app/components/layouts/primary/header";
+import "@mantine/carousel/styles.css";
 import React from "react";
-import { Toaster } from "react-hot-toast";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <Toaster position="top-right" reverseOrder={false} />
+      <Header />
       {children}
+      <Footer />
     </>
   );
 }

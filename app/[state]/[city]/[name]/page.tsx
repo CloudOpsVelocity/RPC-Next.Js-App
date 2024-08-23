@@ -257,31 +257,31 @@ export default async function Page({ params }: Props) {
   );
 }
 export const dynamic = "force-dynamic";
-export async function generateStaticParams() {
-  // Get the data (mocked here, replace with your actual data fetching logic)
-  const res = await getPagesSlugs("project-list");
+// export async function generateStaticParams() {
+//   // Get the data (mocked here, replace with your actual data fetching logic)
+//   const res = await getPagesSlugs("project-list");
 
-  const staticDir = path.join(process.cwd(), "static");
-  const filePath = path.join(staticDir, "projectSlugs.json");
+//   const staticDir = path.join(process.cwd(), "static");
+//   const filePath = path.join(staticDir, "projectSlugs.json");
 
-  // Ensure the 'static' directory exists
-  if (!fs.existsSync(staticDir)) {
-    fs.mkdirSync(staticDir);
-  }
+//   // Ensure the 'static' directory exists
+//   if (!fs.existsSync(staticDir)) {
+//     fs.mkdirSync(staticDir);
+//   }
 
-  // Convert the data object into JSON
-  const jsonContent = JSON.stringify(res, null, 2);
+//   // Convert the data object into JSON
+//   const jsonContent = JSON.stringify(res, null, 2);
 
-  // Write the JSON data to the file
-  fs.writeFileSync(filePath, jsonContent);
+//   // Write the JSON data to the file
+//   fs.writeFileSync(filePath, jsonContent);
 
-  // Extract project names from the keys
-  const builderRess = Object.keys(res);
-  const slugs = builderRess.map((data) => ({
-    name: data.substring(data.lastIndexOf("/") + 1),
-  }));
+//   // Extract project names from the keys
+//   const builderRess = Object.keys(res);
+//   const slugs = builderRess.map((data) => ({
+//     name: data.substring(data.lastIndexOf("/") + 1),
+//   }));
 
-  console.log(slugs);
+//   console.log(slugs);
 
-  return slugs;
-}
+//   return slugs;
+// }
