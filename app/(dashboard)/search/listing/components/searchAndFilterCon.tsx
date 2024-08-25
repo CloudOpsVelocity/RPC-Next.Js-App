@@ -29,9 +29,12 @@ import { SearchIcon } from "@/app/images/HomePageIcons";
 import { toFormattedString } from "../../components/buget/budget";
 import { propertyDetailsTypes } from "@/app/data/projectDetails";
 import { SEARCH_FILTER_DATA } from "@/app/data/search";
+import { initialState, searachFilterAtom } from "@/app/store/search";
+import { useHydrateAtoms } from "jotai/utils";
 /* import { getCommonData } from "@/app/utils/api/property"; */
 
-const SearchAndFilterCon = () => {
+const SearchAndFilterCon = ({ serverData }: any) => {
+  useHydrateAtoms([[searachFilterAtom, { ...initialState }]]);
   const [, { open, close }] = useDisclosure(false);
   const [showAllLocalities, setShowAllLocalities] = useState(false);
 

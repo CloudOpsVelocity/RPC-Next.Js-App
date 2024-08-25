@@ -16,7 +16,7 @@ export default function ListingSearchPage({ serverData }: Props) {
   return (
     <div>
       <Header />
-      <SearchAndFilterCon />
+      <SearchAndFilterCon serverData={serverData} />
       <div className="  xl:m-0 flex justify-center flex-wrap-reverse sm:flex-nowrap">
         <LeftSideBlock serverData={serverData} />
       </div>

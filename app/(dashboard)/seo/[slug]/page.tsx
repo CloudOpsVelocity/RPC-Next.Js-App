@@ -4,6 +4,9 @@ import fs from "fs";
 import path from "path";
 import { notFound } from "next/navigation";
 import ListingSearchPage from "../../search/listing/Page/ListingSearchPage";
+import { useHydrate } from "react-query";
+import { searachFilterAtom } from "@/app/store/search";
+import { useHydrateAtoms } from "jotai/utils";
 type Props = {
   params: { slug: string };
 };
@@ -33,6 +36,7 @@ export default async function Page({ params }: Props) {
   }
   const filters = seoSlug.split("_");
   const serverData = await getSearchData(filters);
+
   return <ListingSearchPage serverData={serverData} />;
 }
 // export const dynamic = "force-dynamic";
