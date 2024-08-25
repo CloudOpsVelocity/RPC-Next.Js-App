@@ -70,6 +70,7 @@ export default async function Page({ params }: Props) {
   const data = await getBuilderDetailsPageData(id);
   return <BuilderPage data={data} />;
 }
+
 //  builder0 = state / project0 project in locality
 
 export async function generateStaticParams() {

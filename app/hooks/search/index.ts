@@ -49,7 +49,8 @@ interface ExtentSearchFilters extends SearchFilter {
   furnish: number;
 }
 export default function useSearchFilters(
-  input?: "project" | "owner" | "agent"
+  input?: "project" | "owner" | "agent",
+  initialData?: any
 ) {
   const path = usePathname();
   const [filters, setFilters] = useAtom(searachFilterAtom);
@@ -210,6 +211,7 @@ export default function useSearchFilters(
       [key]: newValue,
     }));
   };
+
   const handleReset = (
     type:
       | "unitType"
@@ -287,7 +289,16 @@ export default function useSearchFilters(
     : input === undefined
     ? "project"
     : input;
-
+  const countAppliedFiltersFromQuery = () => {
+    let count = 0;
+    Object.keys(params).map((key: any) => {
+      if (params[key as keyof typeof params] !== null) {
+        count++;
+      }
+    });
+    return count;
+  };
+  console.log(countAppliedFiltersFromQuery());
   const {
     fetchNextPage,
     hasNextPage,
@@ -302,18 +313,22 @@ export default function useSearchFilters(
     queryFn: ({ pageParam = 0 }) =>
       getFilteredData(convertToQueryParams(params as any), pageParam, value),
 
-    getNextPageParam: (lastPage, allPages) => {
+    getNextPageParam: (lastPage: any, allPages: any) => {
       const nextPage = allPages.length;
       if (lastPage.length < 20) {
-        return undefined;
+        return;
       }
       return nextPage;
     },
     enabled:
-      ["/search", "/search/listing"].includes(path) && input !== undefined,
+      (["/search", "/search/listing"].includes(path) ||
+        (path.includes("/seo") && countAppliedFiltersFromQuery() > 0)) &&
+      input !== undefined,
     cacheTime: 300000,
     staleTime: 30000,
   });
+  //  if any value is null then don't increase otherwise increase count
+
   const updateItem = async () => {
     console.log("api done");
   };
@@ -378,6 +393,7 @@ export default function useSearchFilters(
     params,
     searchProps: {
       data: data?.pages.flat() || [],
+      fullData: data,
       isLoading,
       error,
       hasPreviousPage,
@@ -391,6 +407,7 @@ export default function useSearchFilters(
     setSingleType,
     handleCityReset,
     isFilterApplied,
+    countAppliedFiltersFromQuery,
   };
 }
 

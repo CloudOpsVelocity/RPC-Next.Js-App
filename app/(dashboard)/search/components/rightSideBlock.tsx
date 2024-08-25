@@ -13,9 +13,8 @@ const RightSideBlock = ({ categoryType }: any) => {
       }),
     []
   );
-  const {
-    searchProps: { data, isLoading },
-  } = useSearchFilters(categoryType);
+  const { searchProps } = useSearchFilters(categoryType);
+  const { data } = searchProps as any;
   return (
     <div
       id="mobileMap"
@@ -23,8 +22,8 @@ const RightSideBlock = ({ categoryType }: any) => {
     >
       <Map
         projName={"Searched Location"}
-        lat={(data && data[0]?.lat) ?? 47.46489}
-        lang={(data && data[0]?.lang) ?? 15.34043}
+        lat={(data && (data[0]?.lat as any)) ?? 47.46489}
+        lang={(data && (data[0]?.lang as any)) ?? 15.34043}
         data={data}
       />
     </div>

@@ -91,7 +91,7 @@ const MapContent = ({ data }: any) => {
       {data &&
         data.length > 0 &&
         data?.map((item: any, index: number) => {
-          const isProp = !!item.propIdEnc;
+          const isProp = !!item?.propIdEnc;
           const title = selected?.type;
           const itemId = item[title === "proj" ? "projIdEnc" : "propIdEnc"];
           const selectedId = selected?.reqId;

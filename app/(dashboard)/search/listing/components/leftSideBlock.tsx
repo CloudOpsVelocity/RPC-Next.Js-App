@@ -12,21 +12,25 @@ import {
   strikeIconIcon,
 } from "@/app/images/commonSvgs";
 import useSearchFilters from "@/app/hooks/search";
-import RequestCallBackModal from "@/app/components/molecules/popups/req";
-import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
-import LoginPopup from "@/app/components/project/modals/LoginPop";
 import NewTabCon from "../../components/leftsection/newtabCon";
 import { SEARCH_FILTER_DATA } from "@/app/data/search";
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
+  serverData?: any;
 };
-const LeftSideBlock = ({ mutate }: Props) => {
-  const [opned, { close, source }] = useReqCallPopup();
-  const { filters, setSingleType, handleReset, handleAppliedFilters, params } =
-    useSearchFilters();
+const LeftSideBlock = ({ mutate, serverData }: Props) => {
   const {
+    filters,
+    setSingleType,
+    handleReset,
+    handleAppliedFilters,
+    params,
+    countAppliedFilters,
+    countAppliedFiltersFromQuery,
     searchProps: { isLoading, data, hasNextPage, fetchMoreData, refetch },
-  } = useSearchFilters("owner");
+  } = useSearchFilters("owner", serverData);
+  const appliedFiltersCount = countAppliedFiltersFromQuery();
+  const serverClientData = appliedFiltersCount <= 0 ? serverData : data;
   const containerRef = useRef<HTMLDivElement>(null);
 
   const { ref, entry } = useIntersection({
@@ -62,10 +66,10 @@ const LeftSideBlock = ({ mutate }: Props) => {
         >
           {isLoading ? (
             <Loading />
-          ) : data != undefined &&
-            data.length != undefined &&
-            data.length > 0 ? (
-            data.map((eachOne, index) => {
+          ) : serverClientData != undefined &&
+            serverClientData.length != undefined &&
+            serverClientData.length > 0 ? (
+            serverClientData.map((eachOne: any, index: number) => {
               return (
                 <ProjectCard
                   key={index}
@@ -92,7 +96,7 @@ const LeftSideBlock = ({ mutate }: Props) => {
       </div>
 
       {/* </div> */}
-      <RightSideBlock categoryType={"listing"} />
+      <RightSideBlock categoryType={"owner"} />
     </>
   );
 };

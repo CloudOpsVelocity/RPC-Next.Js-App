@@ -13,9 +13,8 @@ const RightSideBlock = () => {
       }),
     []
   );
-  const {
-    searchProps: { data, isLoading },
-  } = useSearchFilters();
+  const { searchProps } = useSearchFilters();
+  const { data } = searchProps as any;
   return (
     <div className="w-[100%] sm:w-full  flex justify-start items-start z-[1] md:w-[50%] ">
       <Map

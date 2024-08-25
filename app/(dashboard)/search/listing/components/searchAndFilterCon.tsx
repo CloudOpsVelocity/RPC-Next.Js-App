@@ -32,9 +32,7 @@ import { SEARCH_FILTER_DATA } from "@/app/data/search";
 /* import { getCommonData } from "@/app/utils/api/property"; */
 
 const SearchAndFilterCon = () => {
-  const [opened, { open, close }] = useDisclosure(false);
-  const isMobile = useMediaQuery("(max-width: 768px)");
-  const { debounced } = useQsearch();
+  const [, { open, close }] = useDisclosure(false);
   const [showAllLocalities, setShowAllLocalities] = useState(false);
 
   return (
@@ -51,29 +49,13 @@ const SearchAndFilterCon = () => {
 
 export { SearchAndFilterCon };
 
-const DropDownIcon = () => {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="14"
-      height="8"
-      viewBox="0 0 14 8"
-      fill="none"
-    >
-      <path d="M0 0.5L7 7.5L14 0.5L0 0.5Z" fill="white" />
-    </svg>
-  );
-};
-
 const SearchHeader = ({ open, setShowAllLocalities }: any) => {
   const {
-    countAppliedFilters,
     filters,
     remnoveSearchOptions,
     setFilters,
     handleAppliedFilters,
     params,
-    searchProps,
   } = useSearchFilters();
   const isMobile = useMediaQuery("(max-width: 601px)");
   const [projName, clearProjName] = useQueryState("projName");
@@ -109,7 +91,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
   );
   const allFiltersMap = [...filters.locality, ...filters.builderIds];
   console.log(filters);
-/*   console.log(getCommonData(filters.locality)) */
+  /*   console.log(getCommonData(filters.locality)) */
   return (
     <div className="mb-4 w-full  mt-[60px] sm:mt-[80px] pl-[1%]   ">
       <p className="text-[12px]  text-[#737579] font-[500] mt-2 mb-2 sm:mb-0  w-full md:w-auto">
@@ -131,7 +113,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
           className={` border-[#A0D7FF] max-w-full flex-wrap rounded-[20px] sm:rounded-[40px] p-2 gap-2 xl:gap-[8px] pl-2 xl:pl-[8px] border-[1px] border-solid flex items-center justify-center sm:min-w-[300px]  `}
         >
           <BuyRent />
-          
+
           <div className="my-2">
             {filters.projIdEnc && (
               <Pill
@@ -279,7 +261,9 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
                   {allFiltersMap?.length > 0 ? (
                     <p onClick={open}>Add more</p>
                   ) : (
-                    <p onClick={open}>Search By Locality, Projects or Listings</p>
+                    <p onClick={open}>
+                      Search By Locality, Projects or Listings
+                    </p>
                   )}
                   <SearchIcon />
                 </div>

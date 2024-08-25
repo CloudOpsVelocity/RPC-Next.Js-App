@@ -35,7 +35,7 @@ export default function TabPanelSection({ mutate }: Props) {
       {isLoading ? (
         <Loader />
       ) : data != undefined && data.length != undefined && data.length > 0 ? (
-        data?.map((eachOne, index: number) => {
+        data?.map((eachOne: any, index: number) => {
           return (
             <ProjectCard
               key={index}
