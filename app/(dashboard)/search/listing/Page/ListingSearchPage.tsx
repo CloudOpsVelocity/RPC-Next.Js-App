@@ -10,13 +10,20 @@ import { LeftSideBlock } from "../components/leftSideBlock";
 import SharePopup from "../../components/SharePopup";
 type Props = {
   serverData: any;
+  frontendFilters: any;
 };
 
-export default function ListingSearchPage({ serverData }: Props) {
+export default function ListingSearchPage({
+  serverData,
+  frontendFilters,
+}: Props) {
   return (
     <div>
       <Header />
-      <SearchAndFilterCon serverData={serverData} />
+      <SearchAndFilterCon
+        serverData={serverData}
+        frontendFilters={frontendFilters}
+      />
       <div className="  xl:m-0 flex justify-center flex-wrap-reverse sm:flex-nowrap">
         <LeftSideBlock serverData={serverData} />
       </div>

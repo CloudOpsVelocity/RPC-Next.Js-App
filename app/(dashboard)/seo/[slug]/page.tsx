@@ -36,22 +36,64 @@ export default async function Page({ params }: Props) {
   }
   const filters = seoSlug.split("_");
   const serverData = await getSearchData(filters);
-
-  return <ListingSearchPage serverData={serverData} />;
+  const frontendFilters = mapFiltersToFrontEnd(filters);
+  console.log(frontendFilters);
+  return (
+    <ListingSearchPage
+      serverData={serverData}
+      frontendFilters={frontendFilters}
+    />
+  );
 }
 // export const dynamic = "force-dynamic";
 const builderSlugsMap = new Map<string, string>([
-  ["B", "bhk"],
+  ["B", "bhk"], //unitTypes
+  ["L", "localities"], //localities
+  ["CG", "cg"], //cg
+  ["C", "city"], //NOT INCLUDE
+  ["P", "propType"], //propTypes
+]);
+
+const FrontEndFilters = new Map<string, string>([
+  ["B", "unitTypes"],
   ["L", "localities"],
   ["CG", "cg"],
-  ["C", "city"],
-  ["P", "propType"],
+  ["P", "propTypes"],
 ]);
 
 type QueryParams = {
   [key: string]: string | undefined;
 };
+function mapFiltersToFrontEnd(filters: string[]) {
+  const queryParams: { [key: string]: any } = {};
 
+  filters.forEach((filter) => {
+    const match = filter.match(/(\d+)?%?(\w+)/); // Regex to capture numbers and letters
+    if (match) {
+      const [, value, key] = match;
+      const mappedKey = FrontEndFilters.get(key);
+
+      if (mappedKey) {
+        if (mappedKey === "unitTypes" || mappedKey === "localities") {
+          // Initialize as array if not already
+          if (!queryParams[mappedKey]) {
+            queryParams[mappedKey] = [];
+          }
+          // Push the value into the array
+          queryParams[mappedKey].push(
+            mappedKey === "localities" ? `value` : Number(value)
+          );
+        } else {
+          // Assign the value directly for single value keys
+          queryParams[mappedKey] =
+            mappedKey === "propTypes" ? Number(value) : value;
+        }
+      }
+    }
+  });
+
+  return queryParams;
+}
 // Function to parse filters into query parameters
 const parseFilters = (filters: string[]): QueryParams => {
   const queryParams: QueryParams = {};

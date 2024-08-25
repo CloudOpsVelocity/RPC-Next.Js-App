@@ -33,8 +33,10 @@ import { initialState, searachFilterAtom } from "@/app/store/search";
 import { useHydrateAtoms } from "jotai/utils";
 /* import { getCommonData } from "@/app/utils/api/property"; */
 
-const SearchAndFilterCon = ({ serverData }: any) => {
-  useHydrateAtoms([[searachFilterAtom, { ...initialState }]]);
+const SearchAndFilterCon = ({ frontendFilters }: any) => {
+  useHydrateAtoms([
+    [searachFilterAtom, { ...initialState, ...frontendFilters }],
+  ]);
   const [, { open, close }] = useDisclosure(false);
   const [showAllLocalities, setShowAllLocalities] = useState(false);
 

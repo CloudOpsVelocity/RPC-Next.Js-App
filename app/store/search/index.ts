@@ -68,8 +68,13 @@ export const diffToProjFromListing = {
 
 export const searachFilterAtom = atom<SearchFilter>(initialState);
 searachFilterAtom.onMount = (setAtom) => {
-  setAtom(getAppliedFilters());
+  const path = window.location.pathname;
+  const searchParams = new URLSearchParams(window.location.search);
+  if (path.includes("search") || searchParams.size > 0) {
+    setAtom(getAppliedFilters());
+  }
 };
+
 export const appliedFiltersParams = atom(null, (get, set, t: any) => {
   const appliedFilters = get(searachFilterAtom);
   const parsedData = filterParser(appliedFilters);
