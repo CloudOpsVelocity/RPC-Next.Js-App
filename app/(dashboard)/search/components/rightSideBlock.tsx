@@ -4,8 +4,7 @@ import React, { useMemo } from "react";
 import MapSkeleton from "@/app/components/maps/Skeleton";
 import useSearchFilters from "@/app/hooks/search";
 
-const RightSideBlock = ({ categoryType, serverClientData }: any) => {
-  console.log(serverClientData);
+const RightSideBlock = () => {
   const Map = useMemo(
     () =>
       dynamic(() => import("@/app/components/maps/search"), {
@@ -14,21 +13,15 @@ const RightSideBlock = ({ categoryType, serverClientData }: any) => {
       }),
     []
   );
-
+  const { searchProps } = useSearchFilters();
+  const { data } = searchProps as any;
   return (
-    <div
-      id="mobileMap"
-      className="w-[98%] sm:w-full scroll-mt-[200px]  flex justify-start items-start z-[1] md:w-[50%] "
-    >
+    <div className="w-[100%] sm:w-full  flex justify-start items-start z-[1] md:w-[50%] ">
       <Map
         projName={"Searched Location"}
-        lat={
-          (serverClientData && (serverClientData[0]?.lat as any)) ?? 47.46489
-        }
-        lang={
-          (serverClientData && (serverClientData[0]?.lang as any)) ?? 15.34043
-        }
-        data={serverClientData}
+        lat={(data && data[0]?.lat) ?? 47.46489}
+        lang={(data && data[0]?.lang) ?? 15.34043}
+        data={data}
       />
     </div>
   );

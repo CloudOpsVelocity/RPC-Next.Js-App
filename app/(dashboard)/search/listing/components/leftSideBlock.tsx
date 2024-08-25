@@ -5,7 +5,6 @@ import { ScrollArea, Tabs } from "@mantine/core";
 import ProjectDetailsCard from "./projectCard";
 import S from "@/app/styles/seach/Listing.module.css";
 import ProjectCard from "../../components/Card";
-import { RightSideBlock } from "../../components/rightSideBlock";
 import {
   DropDownIcon,
   emptyFilesIcon,
@@ -117,6 +116,7 @@ import { useIntersection } from "@mantine/hooks";
 import SearchSkeleton from "@/app/components/atoms/skeleton/search";
 import SharePopup from "../../components/SharePopup";
 import path from "path";
+import { RightSideBlock } from "./rightSideBlock";
 
 const TabData = [
   {

@@ -13,7 +13,7 @@ const SearchingPage = ({ searchParams }: Props) => {
       <SearchAndFilterCon />
       <div className=" w-[100%] mx-2  xl:m-0 flex justify-center flex-wrap-reverse sm:flex-nowrap">
         <LeftSideBlock />
-        <RightSideBlock categoryType={"project"} />
+        <RightSideBlock />
       </div>
       <Footer />
       <Toaster />
