@@ -27,10 +27,14 @@ const LeftSideBlock = ({ mutate, serverData }: Props) => {
     params,
     countAppliedFilters,
     countAppliedFiltersFromQuery,
+
     searchProps: { isLoading, data, hasNextPage, fetchMoreData, refetch },
-  } = useSearchFilters("owner", serverData);
+    path,
+  } = useSearchFilters("owner");
   const appliedFiltersCount = countAppliedFiltersFromQuery();
-  const serverClientData = appliedFiltersCount <= 0 ? serverData : data;
+  const serverClientData =
+    appliedFiltersCount > 0 ? data : path.includes("/seo") ? serverData : data;
+
   const containerRef = useRef<HTMLDivElement>(null);
 
   const { ref, entry } = useIntersection({
@@ -96,7 +100,10 @@ const LeftSideBlock = ({ mutate, serverData }: Props) => {
       </div>
 
       {/* </div> */}
-      <RightSideBlock categoryType={"owner"} />
+      <RightSideBlock
+        categoryType={"owner"}
+        serverClientData={serverClientData}
+      />
     </>
   );
 };
@@ -109,6 +116,7 @@ import { Vast_Shadow } from "next/font/google";
 import { useIntersection } from "@mantine/hooks";
 import SearchSkeleton from "@/app/components/atoms/skeleton/search";
 import SharePopup from "../../components/SharePopup";
+import path from "path";
 
 const TabData = [
   {

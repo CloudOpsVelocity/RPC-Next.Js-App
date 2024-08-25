@@ -49,8 +49,7 @@ interface ExtentSearchFilters extends SearchFilter {
   furnish: number;
 }
 export default function useSearchFilters(
-  input?: "project" | "owner" | "agent",
-  initialData?: any
+  input?: "project" | "owner" | "agent"
 ) {
   const path = usePathname();
   const [filters, setFilters] = useAtom(searachFilterAtom);
@@ -298,7 +297,6 @@ export default function useSearchFilters(
     });
     return count;
   };
-  console.log(countAppliedFiltersFromQuery());
   const {
     fetchNextPage,
     hasNextPage,
@@ -408,6 +406,7 @@ export default function useSearchFilters(
     handleCityReset,
     isFilterApplied,
     countAppliedFiltersFromQuery,
+    path,
   };
 }
 

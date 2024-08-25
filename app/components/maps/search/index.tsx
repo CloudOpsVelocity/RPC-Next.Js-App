@@ -28,15 +28,7 @@ interface Cluster {
 }
 const Map = ({ data, lat, lang }: any) => {
   const position: LatLngTuple = [lat, lang];
-  const [selected, setSelectedValue] = useAtom(selectedSearchAtom);
-  const createClusterCustomIcon = function (cluster: Cluster) {
-    return L.divIcon({
-      html: `<span class="cluster-icon">${cluster.getChildCount()}</span>`,
-      className: "custom-marker-cluster",
-      iconSize: point(33, 33, true),
-    });
-  };
-
+  console.log(data);
   return (
     <>
       <MapContainer

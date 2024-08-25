@@ -33,7 +33,6 @@ export default async function Page({ params }: Props) {
   }
   const filters = seoSlug.split("_");
   const serverData = await getSearchData(filters);
-  console.log(serverData);
   return <ListingSearchPage serverData={serverData} />;
 }
 // export const dynamic = "force-dynamic";
