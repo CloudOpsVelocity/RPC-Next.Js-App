@@ -4,6 +4,7 @@ import fs from "fs";
 import path from "path";
 import { notFound } from "next/navigation";
 import ProjectSearchPage from "../../search/Page/ProjectSearchPage";
+import ListingSearchPage from "../../search/listing/Page/ListingSearchPage";
 type Props = {
   params: { slug: string };
 };
@@ -27,19 +28,74 @@ async function getSeoSlugs(pathname: string) {
   }
 }
 export default async function Page({ params }: Props) {
-  const seoSlugs = await getSeoSlugs(params.slug);
-  if (!seoSlugs) {
+  const seoSlug = await getSeoSlugs(params.slug);
+  if (!seoSlug) {
     notFound();
   }
-  return (
-    // <div>
-    //   <ProjectSearchPage />
-    // </div>
-    <Suspense fallback={<div>Loading...</div>}>
-      <ProjectSearchPage />
-    </Suspense>
-  );
+  const filters = seoSlug.split("_");
+  const serverData = await getSearchData(filters);
+  return <ListingSearchPage />;
 }
+const builderSlugsMap = new Map<string, string>([
+  ["B", "bhk"],
+  ["L", "localities"],
+  ["CG", "cg"],
+  ["C", "city"],
+  ["P", "propType"],
+]);
+
+// Define the type for the query parameters
+type QueryParams = {
+  [key: string]: string | undefined;
+};
+
+// Function to parse filters into query parameters
+const parseFilters = (filters: string[]): QueryParams => {
+  const queryParams: QueryParams = {};
+
+  filters.forEach((filter) => {
+    const match = filter.match(/(\d+)?%?(\w+)/); // Regex to capture numbers and letters
+    if (match) {
+      const [, percentage, key] = match;
+      const mappedKey = builderSlugsMap.get(key);
+
+      if (mappedKey) {
+        queryParams[mappedKey] = percentage || key; // Use the percentage if available, otherwise use the key
+      }
+    }
+  });
+
+  return queryParams;
+};
+
+// Function to get search data from the API
+const getSearchData = async (filters: string[]): Promise<any> => {
+  try {
+    const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/prop-search?page=0`;
+    const queryParams = parseFilters(filters);
+    const queryString = new URLSearchParams({
+      city: "9", // default city param
+      ...queryParams,
+    }).toString();
+    const url = `${baseUrl}&${queryString}`;
+
+    const res = await fetch(url, {
+      next: {
+        revalidate: 60,
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error(`Error fetching data: ${res.statusText}`);
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
 
 // export async function generateStaticParams() {
 //   const resObject = await getPagesSlugs("case-seo");
