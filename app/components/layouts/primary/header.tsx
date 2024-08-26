@@ -22,8 +22,7 @@ export default function Header({}: Props) {
   return (
     <div className="flex h-[70px] items-center justify-between shrink-0 p-1 pl-2 sm:pl-5 w-full py-3  shadow-[0px_4px_20px_0px_rgba(194,194,194,0.20)] bg-gradient-to-r from-[#f1f1f1] via-[#f1f1f1]  to-[#bde3ff] fixed top-0 z-[100]">
       <Link href={"/"}>
-       <GrpLogoSvg className="h-[40px] w-[160px]  sm:h-[50px] sm:w-auto"
-       />
+        <GrpLogoSvg className="h-[40px] w-[160px]  sm:h-[50px] sm:w-auto" />
       </Link>
       {isMobile ? (
         <div className="flex  sm:hidden mr-4 gap-4">
@@ -47,7 +46,7 @@ const ForBuilders = () => {
   const { data: session } = useSession();
   return (
     !session && (
-      <Menu>
+      <Menu trigger="click-hover">
         <Menu.Target>
           <button className="text-[#242424] text-xl not-italic font-medium inline-flex gap-2 justify-center items-center">
             For Builders {config.chevron}
@@ -117,18 +116,21 @@ function Dropdown() {
   const { redirectQueryParam } = usePathToOrigin();
   const { data: session } = useSession();
   return (
-    <Menu width={200} shadow="md">
+    <Menu width={200} shadow="md" trigger="click-hover">
       <Menu.Target>
         {session ? (
           <div className=" text-[12px] flex justify-center items-center gap-1.5 rounded border shadow-[0px_4px_30px_0px_rgba(194,194,194,0.40)] text-[#0073C6] text-lg not-italic font-semibold leading-[normal] px-2.5 py-1.5 border-solid border-[#0073C6] bg-white">
             <button className="inline-flex justify-center items-center gap-1 ">
               {config.getIcon(session.user.userType)}{" "}
-              {/* session.user.name.split(" ")[0].length >= 3
+              {
+                /* session.user.name.split(" ")[0].length >= 3
                 ? session.user.name.split(" ")[0]
                 : session.user.name.split(" ")[1] != undefined
                 ? session.user.name.split(" ")[1]
-                : session.user.name.split(" ")[0] */ 
-                session.user.name.slice(0, 10)}{`${session.user.name.length > 8? "...":""}`}
+                : session.user.name.split(" ")[0] */
+                session.user.name.slice(0, 10)
+              }
+              {`${session.user.name.length > 8 ? "..." : ""}`}
             </button>
             {config.blueChevron}
           </div>
