@@ -29,16 +29,12 @@ export default function GalleryBlock({
   );
 
   function getYouTubeThumbnailUrl(watchUrl: any) {
-    console.log(watchUrl);
-
     // Match both /watch?v= and /embed/ formats
     const match = watchUrl.match(
       /(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([^&?/]+)/
     );
 
-    console.log(match);
     const videoId = match ? match[1] : null;
-    console.log(videoId);
 
     return videoId
       ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
