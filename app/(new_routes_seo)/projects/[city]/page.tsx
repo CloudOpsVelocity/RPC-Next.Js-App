@@ -30,3 +30,5 @@ const getSearchData = async (): Promise<any> => {
     return null;
   }
 };
+
+export const dynamic = "force-dynamic";
