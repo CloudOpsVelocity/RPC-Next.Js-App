@@ -37,6 +37,19 @@ const realEstateProject: WithContext<Project> = {
     price: "750000",
     additionalType: "https://schema.org/RealEstateProject",
   },
+  location: {
+    "@type": "Place",
+    name: "Suburbia",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "456 Elm Street",
+      addressLocality: "Suburbia",
+      addressRegion: "CA",
+      postalCode: "90210",
+      addressCountry: "US",
+    },
+    image: "https://example.com/image.jpg",
+  },
 };
 
 export default function RealEstateProject() {
