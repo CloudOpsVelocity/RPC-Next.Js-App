@@ -4,6 +4,7 @@ import React from "react";
 type Props = {};
 
 export default function Page({}: Props) {
+  console.log("from locality page in project details");
   return <div>Page</div>;
 }
 

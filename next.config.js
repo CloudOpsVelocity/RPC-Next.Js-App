@@ -39,6 +39,7 @@ const nextConfig = {
     APP_ENV: process.env.APP_ENV || process.env.NODE_ENV || "development",
   },
   staticPageGenerationTimeout: 180,
+  compress: true,
 };
 
 module.exports = nextConfig;

@@ -24,14 +24,21 @@ export default function GalleryBlock({
   const images = getImageUrls(media);
   const [selectedMedia, setSelectedMedia] = useState<string | null>(images[0]);
   const [currentSlide, setCurrentSlide] = useState(0);
-
   const videos = [walkThrowVideoUrl, projectVideoIUrl, media.videoUrl].filter(
     (video) => video !== "" && video !== undefined
   );
 
   function getYouTubeThumbnailUrl(watchUrl: any) {
-    const match = watchUrl.match(/youtube\.com\/watch\?v=([^&]+)/);
+    console.log(watchUrl);
+
+    // Match both /watch?v= and /embed/ formats
+    const match = watchUrl.match(
+      /(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([^&?/]+)/
+    );
+
+    console.log(match);
     const videoId = match ? match[1] : null;
+    console.log(videoId);
 
     return videoId
       ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
@@ -45,11 +52,9 @@ export default function GalleryBlock({
       const isVideo = videos.includes(media);
       open(isVideo ? "video" : "image", media);
     }
-
     setSelectedMedia(media);
     setCurrentSlide(index);
   };
-
   return (
     <div
       className="w-[95%] md:w-[90%] sm:pt-[50px]   scroll-mt-[165px] mt-[50px] sm:mt-0 mb-[3%] sm:mb-0"
@@ -73,7 +78,6 @@ export default function GalleryBlock({
           />
         </>
       )}
-
       <div className=" flex justify-center flex-col md:flex-row items-center-full sm:mt-[1%] ">
         {/* IMage display con */}
         <div className="w-[100%] md:w-[50%] bg-white  h-[220px] overflow-hidden sm:h-[394px] lg:h-auto  md:mb-[0%] mr-[3%] rounded-[14px]   flex justify-center items-center p-1">
