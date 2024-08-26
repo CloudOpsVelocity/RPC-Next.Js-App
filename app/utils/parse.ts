@@ -87,7 +87,7 @@ const items=getValues({foundedBy, managingDirectorName, ceoName})
   
 
   if (companyLogo) {
-    return {  ...parsedData,  isLogoChange: "Y", companyLogo };
+    return {  ...parsedData, ...items,  isLogoChange: "Y", companyLogo };
   } else {
     return {...parsedData, ...items};
   }
