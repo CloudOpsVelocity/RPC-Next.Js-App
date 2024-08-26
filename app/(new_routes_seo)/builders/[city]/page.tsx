@@ -38,3 +38,5 @@ export async function generateStaticParams() {
   });
   return slugs;
 }
+
+export const dynamic = "force-dynamic";

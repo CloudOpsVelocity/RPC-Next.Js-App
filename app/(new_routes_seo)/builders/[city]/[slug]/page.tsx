@@ -14,25 +14,25 @@ type Props = {
 async function getBuilderSlug(pathname: string) {
   const staticDir = path.join(process.cwd(), "static");
   const filePath = path.join(staticDir, "builderSlugs.json");
-
+  console.time("getBuilderSlugs");
   try {
     // Read the JSON file asynchronously
     const jsonData = fs.readFileSync(filePath, "utf-8");
     const builderJsonData = JSON.parse(jsonData);
-    return builderJsonData[pathname];
+    const decodeUrl = decodeURIComponent(pathname);
+    return builderJsonData[decodeUrl];
   } catch (error) {
     console.error("Error reading or parsing file:", error);
     return null;
+  } finally {
+    console.timeEnd("getBuilderSlugs");
   }
 }
 export default async function Page({ params: { city, slug } }: Props) {
   const pathname = `/builders/${city}/${slug}`;
   const id = await getBuilderSlug(pathname);
   console.log(id);
-  if (!id) {
-    notFound();
-  }
-  const data = await getBuilderDetailsPageData(id);
+  const data = await getBuilderDetailsPageData(id.split("_")[1]);
   return <BuilderPage data={data} />;
 }
 
@@ -48,3 +48,5 @@ export async function generateStaticParams() {
   });
   return slugs;
 }
+
+export const dynamicParams = false;
