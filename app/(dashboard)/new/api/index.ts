@@ -1,5 +1,4 @@
 import { options } from "@/app/options";
-import axios from "axios";
 import { getServerSession } from "next-auth";
 
 export const getData = async () => {

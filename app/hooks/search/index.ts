@@ -319,9 +319,11 @@ export default function useSearchFilters(
       return nextPage;
     },
     enabled:
-      (["/search", "/search/listing"].includes(path) ||
-        (path.includes("/seo") && countAppliedFiltersFromQuery() > 0)) &&
-      input !== undefined,
+      ["/search", "/search/listing"].includes(path) ||
+      (path.includes("/seo") && countAppliedFiltersFromQuery() > 0) ||
+      (path.includes("/projects") &&
+        countAppliedFiltersFromQuery() > 0 &&
+        input !== undefined),
     cacheTime: 300000,
     staleTime: 30000,
   });

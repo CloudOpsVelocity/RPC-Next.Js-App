@@ -20,8 +20,13 @@ import { SearchIcon } from "@/app/images/HomePageIcons";
 import { propertyDetailsTypes } from "@/app/data/projectDetails";
 import { SEARCH_FILTER_DATA } from "@/app/data/search";
 import { toFormattedString } from "./buget/budget";
+import { useHydrateAtoms } from "jotai/utils";
+import { initialState, searachFilterAtom } from "@/app/store/search";
 
-const SearchAndFilterCon = () => {
+const SearchAndFilterCon = ({ frontendFilters }: any) => {
+  useHydrateAtoms([
+    [searachFilterAtom, { ...initialState, ...frontendFilters }],
+  ]);
   const [, { open, close }] = useDisclosure(false);
   const [showAllLocalities, setShowAllLocalities] = useState(false);
   return (

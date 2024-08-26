@@ -8,7 +8,7 @@ import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
 import NewTabCon from "./newtabCon";
 import { SEARCH_FILTER_DATA } from "@/app/data/search";
-const LeftSideBlock = () => {
+const LeftSideBlock = ({ serverData }: any) => {
   const {
     searchProps: { mutate },
     handleAppliedFilters,
@@ -48,7 +48,7 @@ const LeftSideBlock = () => {
         Activities={params.cg}
         categoryType={SEARCH_FILTER_DATA.categoryDataProject}
       />
-      <TabPanelSection mutate={mutate} />
+      <TabPanelSection mutate={mutate} serverData={serverData} />
 
       <RequestCallBackModal />
       <SharePopup />

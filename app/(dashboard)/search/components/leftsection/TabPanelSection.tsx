@@ -8,14 +8,24 @@ import ProjectCard from "../Card";
 
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
+  serverData?: any;
 };
 
-export default function TabPanelSection({ mutate }: Props) {
+export default function TabPanelSection({ mutate, serverData }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const {
     searchProps: { isLoading, data, hasNextPage, fetchMoreData, refetch },
     filters,
+    countAppliedFiltersFromQuery,
+    path,
   } = useSearchFilters("project");
+  const appliedFiltersCount = countAppliedFiltersFromQuery();
+  const serverClientData =
+    appliedFiltersCount > 0
+      ? data
+      : path.includes("/projects")
+      ? serverData
+      : data;
   const { ref, entry } = useIntersection({
     root: containerRef.current,
     threshold: 0.1,
@@ -34,8 +44,10 @@ export default function TabPanelSection({ mutate }: Props) {
     >
       {isLoading ? (
         <Loader />
-      ) : data != undefined && data.length != undefined && data.length > 0 ? (
-        data?.map((eachOne: any, index: number) => {
+      ) : serverClientData != undefined &&
+        serverClientData.length != undefined &&
+        serverClientData.length > 0 ? (
+        serverClientData?.map((eachOne: any, index: number) => {
           return (
             <ProjectCard
               key={index}

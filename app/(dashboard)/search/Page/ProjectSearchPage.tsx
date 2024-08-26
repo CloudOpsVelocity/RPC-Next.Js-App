@@ -6,16 +6,22 @@ import { Toaster } from "react-hot-toast";
 import { RightSideBlock } from "../components/rightSideBlock";
 import { LeftSideBlock } from "../components/leftsection/leftSideBlock";
 
-type Props = {};
+type Props = {
+  serverData: any;
+  frontendFilters?: any;
+};
 
-export default function ProjectSearchPage({}: Props) {
+export default function ProjectSearchPage({
+  frontendFilters,
+  serverData,
+}: Props) {
   return (
     <div className="w-full flex justify-center items-center flex-col ">
       <Header />
-      <SearchAndFilterCon />
+      <SearchAndFilterCon frontendFilters={frontendFilters} />
       <div className=" w-[100%] mx-2  xl:m-0 flex justify-center flex-wrap-reverse sm:flex-nowrap">
-        <LeftSideBlock />
-        <RightSideBlock />
+        <LeftSideBlock serverData={serverData} />
+        <RightSideBlock serverData={serverData} />
       </div>
       <Footer />
       <Toaster />
