@@ -96,17 +96,17 @@ function Builder() {
       pincode: null,
       companyStartDate: null,
       branch: [],
-      ceoName: [{ name: '', active: false, key: randomId() }],
-    /*   foundedBy: "", */
+      ceoName: [{ name: "", active: false, key: randomId() }],
+      /*   foundedBy: "", */
       mission: "",
       vission: "",
       officeContact: null,
-      managingDirectorName:  [{ name: '', active: false, key: randomId() }],
+      managingDirectorName: [{ name: "", active: false, key: randomId() }],
       companyLogo: undefined,
       otp: false,
       prevMobile: 0,
       prevEmail: "",
-      foundedBy: [{ name: '', active: false, key: randomId() }],
+      foundedBy: [{ name: "", active: false, key: randomId() }],
     },
     validateInputOnBlur: true,
     name: "builder" + active,
@@ -187,7 +187,6 @@ function Builder() {
 
       return;
     }
-  
 
     // Handle API call based on the current step
     let values = form.values;
@@ -197,7 +196,7 @@ function Builder() {
         case 0:
           if (
             form.values.otp &&
-            form.values.mobile === form.values.prevMobile/*  &&
+            form.values.mobile === form.values.prevMobile /*  &&
             form.values.email === form.values.prevEmail */
           ) {
             // If OTP is already verified and mobile number is the same, move to the next step
@@ -317,15 +316,12 @@ function Builder() {
   const queryParam = getQueryParamClient();
   const ref = useRef<HTMLInputElement>(null);
   return (
-   
     <div
       className={clsx(
         "w-full max-w-[423px] flex justify-center items-center flex-col mt-[2%]",
         active === 4 && "max-w-full"
       )}
     >
-       {JSON.stringify(form.errors)}
-        
       {active !== 4 && (
         <div className=" sm:max-w-[459px] md:max-w-[597px] flex justify-center items-center gap-[15%] mb-[5%] ">
           <LoginSignupTabs
@@ -725,9 +721,24 @@ function Builder() {
                   e.target.value !== "" && scrollToBottom();
                 }}
               /> */}
-              <AddmoreInput form={form}   id={"foundedBy"} label={"Founded By"} placeholder={"Enter Founder name"} />
-              <AddmoreInput form={form} id={"ceoName"} label={"CEO Name"} placeholder={"Enter CEO Name"} />
-               <AddmoreInput form={form} id={"managingDirectorName"} label={"Managing Director"} placeholder={"Enter Managing Director Name"} />
+              <AddmoreInput
+                form={form}
+                id={"foundedBy"}
+                label={"Founded By"}
+                placeholder={"Enter Founder name"}
+              />
+              <AddmoreInput
+                form={form}
+                id={"ceoName"}
+                label={"CEO Name"}
+                placeholder={"Enter CEO Name"}
+              />
+              <AddmoreInput
+                form={form}
+                id={"managingDirectorName"}
+                label={"Managing Director"}
+                placeholder={"Enter Managing Director Name"}
+              />
               {/* <TextInput
                 id="ceoName"
                 required
@@ -746,7 +757,7 @@ function Builder() {
                   handleTrimAndReplace(e, "ceoName", form);
                 }}
               /> */}
-             {/*  <TextInput
+              {/*  <TextInput
                 id="managingDirectorName"
                 required
                 size="lg"
@@ -843,11 +854,10 @@ function Builder() {
               {...form.getInputProps("mission")}
               maxLength={5001}
             />{" "}
-            
             <Text size="sm" mt="xs" ta={"right"} mb={"lg"}>
               Maximum 5000 Characters
             </Text>
-                 {/*  <Checkbox
+            {/*  <Checkbox
             label={
             <>
             I accept{' '}
@@ -857,9 +867,8 @@ function Builder() {
         </>
          }
        /> */}
-          
           </Stepper.Step>
-              
+
           <Stepper.Completed>
             {/* Completed! Form values: */}
             <Success />

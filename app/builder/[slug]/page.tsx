@@ -73,34 +73,34 @@ export default async function Page({ params }: Props) {
 
 //  builder0 = state / project0 project in locality
 
-export async function generateStaticParams() {
-  // Get the data (mocked here, replace with your actual data fetching logic)
-  const res = await getPagesSlugs("builder-list");
+// export async function generateStaticParams() {
+//   // Get the data (mocked here, replace with your actual data fetching logic)
+//   const res = await getPagesSlugs("builder-list");
 
-  // Convert the `res` object into a regular object (not a Map)
-  const resObject = { ...res };
+//   // Convert the `res` object into a regular object (not a Map)
+//   const resObject = { ...res };
 
-  const staticDir = path.join(process.cwd(), "static");
-  const filePath = path.join(staticDir, "builderSlugs.json");
+//   const staticDir = path.join(process.cwd(), "static");
+//   const filePath = path.join(staticDir, "builderSlugs.json");
 
-  // Ensure the 'static' directory exists
-  if (!fs.existsSync(staticDir)) {
-    fs.mkdirSync(staticDir);
-  }
+//   // Ensure the 'static' directory exists
+//   if (!fs.existsSync(staticDir)) {
+//     fs.mkdirSync(staticDir);
+//   }
 
-  // Convert the object to a JSON string
-  const jsonContent = JSON.stringify(resObject, null, 2);
+//   // Convert the object to a JSON string
+//   const jsonContent = JSON.stringify(resObject, null, 2);
 
-  // Write the JSON content to the file
-  fs.writeFileSync(filePath, jsonContent);
+//   // Write the JSON content to the file
+//   fs.writeFileSync(filePath, jsonContent);
 
-  console.log(`JSON data has been saved to ${filePath}`);
+//   console.log(`JSON data has been saved to ${filePath}`);
 
-  // Prepare the slugs for static generation
-  const builderRess = Object.keys(resObject);
-  const slugs = builderRess.map((data) => ({
-    slug: data.replace(/\//g, ""),
-  }));
-  console.log(slugs);
-  return slugs;
-}
+//   // Prepare the slugs for static generation
+//   const builderRess = Object.keys(resObject);
+//   const slugs = builderRess.map((data) => ({
+//     slug: data.replace(/\//g, ""),
+//   }));
+//   console.log(slugs);
+//   return slugs;
+// }

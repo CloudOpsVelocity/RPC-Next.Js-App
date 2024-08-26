@@ -1,9 +1,3 @@
-import { getPagesSlugs } from "@/app/seo/api";
-import path from "path";
-import fs from "fs";
-// import { headers } from "next/headers";
-// import { getAmenties, getProjectDetails } from "@/app/utils/api/project";
-// import { notFound } from "next/navigation";
 import { getAmenties, getProjectDetails } from "@/app/utils/api/project";
 import React from "react";
 import Feature from "@/app/components/project/feature";
@@ -36,37 +30,17 @@ import QAJsonLdScript from "@/app/seo/Qnajson";
 import PropertyJsonLdScript from "@/app/seo/Productjson";
 import ArticleJsonLdScript from "@/app/seo/ArticleJson";
 import { notFound } from "next/navigation";
-import { projectSlugsMap } from "@/static/projectSlugsMap";
-import projectJsonSlugs from "@/static/projectSlugs.json";
 type Props = {
-  params: {
-    state: string;
-    city: string;
-    name: string;
-  };
+  projResponse: any;
+  amenitiesFromDB: any;
+  slug: string;
 };
-async function getProjectSlug(pathname: string) {
-  const staticDir = path.join(process.cwd(), "static");
-  const filePath = path.join(staticDir, "projectSlugs.json");
 
-  // Read the JSON file
-  const jsonData = fs.readFileSync(filePath, "utf8");
-  const builderJsonData = JSON.parse(jsonData);
-
-  // Return the ID for the given pathname
-  return builderJsonData[pathname] || null;
-}
-export default async function Page({ params }: Props) {
-  const { state, city, name } = params;
-  const pathname = `/${state}/${city}/${name}`;
-  const slug = await getProjectSlug(pathname);
-  if (!slug) {
-    notFound();
-  }
-  const [projResponse, amenitiesFromDB] = await Promise.all([
-    getProjectDetails(slug as string),
-    getAmenties(),
-  ]);
+export default async function ProjectsDetailsPage({
+  projResponse,
+  amenitiesFromDB,
+  slug,
+}: Props) {
   const { basicData: data, nearByLocations, phaseOverview } = projResponse;
 
   return (
@@ -255,33 +229,4 @@ export default async function Page({ params }: Props) {
       </div>
     </section>
   );
-}
-export const dynamic = "force-dynamic";
-export async function generateStaticParams() {
-  // Get the data (mocked here, replace with your actual data fetching logic)
-  const res = await getPagesSlugs("project-list");
-
-  const staticDir = path.join(process.cwd(), "static");
-  const filePath = path.join(staticDir, "projectSlugs.json");
-
-  // Ensure the 'static' directory exists
-  if (!fs.existsSync(staticDir)) {
-    fs.mkdirSync(staticDir);
-  }
-
-  // Convert the data object into JSON
-  const jsonContent = JSON.stringify(res, null, 2);
-
-  // Write the JSON data to the file
-  fs.writeFileSync(filePath, jsonContent);
-
-  // Extract project names from the keys
-  const builderRess = Object.keys(res);
-  const slugs = builderRess.map((data) => ({
-    name: data.substring(data.lastIndexOf("/") + 1),
-  }));
-
-  console.log(slugs);
-
-  return slugs;
 }

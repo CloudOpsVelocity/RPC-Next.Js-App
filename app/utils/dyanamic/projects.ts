@@ -134,3 +134,14 @@ export const get_posted_by = (str?: string) => {
 export const isReraverified = (str: string) => {
   return str === "Applied" || str === "Recieved";
 };
+
+export function getStringPartByIndex(
+  input: string,
+  index: number
+): string | null {
+  const parts = input?.split("_");
+  if (index >= 0 && index < parts?.length) {
+    return parts[index];
+  }
+  return null; // Return null if the index is out of bounds
+}
