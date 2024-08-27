@@ -44,8 +44,7 @@ export default function Results() {
     }
   };
 
-  /*   console.log(data)
-   */ const handlePush = async (type: string, data: any) => {
+  const handlePush = async (type: string, data: any) => {
     switch (type) {
       case "project":
         window.open(`/abc/delhi/palika/${data}`);
@@ -60,10 +59,11 @@ export default function Results() {
             if (ids.length > 3) {
               const [ut, cg, id, lt] = ids;
               /*  url = `propTypes=${ut}&cg=${cg}&localities=${data.name.trim()}%2B${lt}`; */
-              url = `propTypes=${ut}&cg=${cg}&projIdEnc=${id}&localities=${lt}`;
+              url = `propTypes=${ut}&cg=${cg}&localities=` + encodeURIComponent(data.name.trim()) + "%2B" + encodeURIComponent(lt);
             } else {
               const [ut, cg, lt] = ids;
-              url = `propTypes=${ut}&cg=${cg}&localities=${lt}`;
+              // url = `propTypes=${ut}&cg=${cg}&localities=${lt}`;
+              url = `propTypes=${ut}&cg=${cg}&localities=` + encodeURIComponent(data.name.trim()) + "%2B" + encodeURIComponent(lt);
             }
 
             window.open("/search/listing?" + url);
@@ -96,13 +96,16 @@ export default function Results() {
       case "projectListing":
         let listedByType = data.type === "OL" ? "I" : data.type.split("")[0];
         {
-          const url = `projIdEnc=${data.id}&listedBy=${listedByType}`;
+          let projectName = data.name.split("(")[0].trim();
+          console.log(projectName);
+          const url = `projIdEnc=${data.id}&listedBy=${listedByType}&projName=${projectName}`;
           window.open("/search/listing?" + url);
         }
         break;
       case "builder":
-        const url = encodeURI(`${data.name}+${data.id}`);
-        window.open(`/search?builderIds=${url}`);
+        // const url = encodeURI(`${data.name}+${data.id}`);
+        const url = encodeURIComponent(data.name) + '%2B' + encodeURIComponent(data.id);
+        window.open(`/search?builderIds=${url}`); 
         break;
       default:
         break;
@@ -183,10 +186,7 @@ export default function Results() {
               {projectListing?.map((projectListing: any) => (
                 <li
                   onClick={() =>
-                    handlePush("projectListing", {
-                      id: projectListing.id,
-                      type: projectListing.type,
-                    })
+                    handlePush("projectListing", projectListing)
                   }
                   className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1 sm:gap-3.5 xl:text-nowrap cursor-pointer"
                   key={projectListing.id}
@@ -202,7 +202,7 @@ export default function Results() {
                   onClick={() =>
                     handlePush("listing", {
                       id: listing.id,
-                      name: listing.name.split("in")[1],
+                      name: listing.name.split(" in ")[1],
                     })
                   }
                   className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1 sm:gap-3.5 xl:text-nowrap cursor-pointer"
