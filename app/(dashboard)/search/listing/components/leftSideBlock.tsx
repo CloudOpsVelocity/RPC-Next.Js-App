@@ -32,7 +32,11 @@ const LeftSideBlock = ({ mutate, serverData }: Props) => {
   } = useSearchFilters("owner");
   const appliedFiltersCount = countAppliedFiltersFromQuery();
   const serverClientData =
-    appliedFiltersCount > 0 ? data : path.includes("/seo") ? serverData : data;
+    appliedFiltersCount > 0
+      ? data
+      : path.includes("/seo") || path.includes("/in")
+      ? serverData
+      : data;
 
   const containerRef = useRef<HTMLDivElement>(null);
 

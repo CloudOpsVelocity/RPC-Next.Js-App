@@ -321,7 +321,8 @@ export default function useSearchFilters(
     enabled:
       ["/search", "/search/listing"].includes(path) ||
       (path.includes("/seo") && countAppliedFiltersFromQuery() > 0) ||
-      (path.includes("/projects") &&
+      (path.includes("/projects") && countAppliedFiltersFromQuery() > 0) ||
+      (path.includes("/in") &&
         countAppliedFiltersFromQuery() > 0 &&
         input !== undefined),
     cacheTime: 300000,

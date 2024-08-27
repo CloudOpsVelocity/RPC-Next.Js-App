@@ -1,5 +1,5 @@
 const getPagesSlugs = async (
-  pageType: "builder-list" | "project-list" | "case-seo"
+  pageType: "builder-list" | "project-list" | "case-seo" | "listing-search-seo"
 ) => {
   try {
     let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/common/${pageType}`;
