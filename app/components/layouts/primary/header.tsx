@@ -99,11 +99,11 @@ function Dropdown() {
       if (process.env.NODE_ENV === "development") {
         await signOut();
         await axios.get(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/logOut`
+          `${process.env.NEXT_PUBLIC_URL}/user/v1/logOut`
         );
       } else {
         await axios
-          .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/logOut`)
+          .get(`${process.env.NEXT_PUBLIC_URL}/user/v1/logOut`)
           .then(() => {
             signOut();
           });
