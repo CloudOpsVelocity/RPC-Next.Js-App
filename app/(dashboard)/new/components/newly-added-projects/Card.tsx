@@ -17,11 +17,13 @@ export default function Card({ item }: Props) {
   const onredirectProj = () => {
     window.open(url, "_blank");
   };
-  let urlBuilder=`${process.env.NEXT_PUBLIC_BACKEND_URL}/builder/${item.builderId}`;
+  // let urlBuilder=`${process.env.NEXT_PUBLIC_BACKEND_URL}/builder/${item.builderId}`;
+  let builderName = item.builderName.toLowerCase().split(" ").join("%2D");
+  let urlBuilder=`${process.env.NEXT_PUBLIC_BACKEND_URL}/builders/bengaluru/${builderName}`;
+  
   const builderiRedirect=(e:any)=>{
     e.stopPropagation();
-    window.open(urlBuilder, "_blank");
-
+    window.open(urlBuilder, "_blank"); 
   }
 
   console.log(item)
