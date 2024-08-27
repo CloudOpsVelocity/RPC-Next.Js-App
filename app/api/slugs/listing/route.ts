@@ -3,26 +3,20 @@ import fs from "fs";
 import path from "path";
 import { revalidatePath } from "next/cache";
 
-const typeMapping = {
-  P: "project",
-  B: "builder",
-};
-
-const getFilePath = (type: string) =>
-  path.join(process.cwd(), "static", `${type}Slugs.json`);
+const getFilePath = () =>
+  path.join(process.cwd(), "static", "listingSlugs.json");
 
 export async function POST(request: Request) {
-  let { type, slug, id, action } = await request.json();
+  let { slug, id, action } = await request.json();
   // Validate required parameters
-  if (!type || !action || (type !== "P" && type !== "B")) {
+  if (!action) {
     return NextResponse.json(
-      { error: "Invalid type or missing action parameter" },
+      { error: "Missing action parameter" },
       { status: 400 }
     );
   }
 
-  type = typeMapping[type as keyof typeof typeMapping] || type;
-  const filePath = getFilePath(type);
+  const filePath = getFilePath();
 
   // Ensure the file exists
   if (!fs.existsSync(filePath)) {
@@ -42,17 +36,15 @@ export async function POST(request: Request) {
       }
       if (data.hasOwnProperty(slug)) {
         return NextResponse.json(
-          { error: `${type} already exists` },
+          { error: `Listing already exists` },
           { status: 400 }
         );
       }
       data[slug] = id;
       fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
-      console.log(slug);
       revalidatePath(slug, "page");
-      revalidatePath(slug, "layout");
       return NextResponse.json(
-        { message: `${type} created successfully` },
+        { message: `Listing created successfully` },
         { status: 201 }
       );
       break;
@@ -66,7 +58,7 @@ export async function POST(request: Request) {
       const currentSlug = Object.keys(data).find((key) => data[key] === id);
       if (!currentSlug) {
         return NextResponse.json(
-          { error: `${type} with id '${id}' does not exist` },
+          { error: `Listing with id '${id}' does not exist` },
           { status: 404 }
         );
       }
@@ -83,7 +75,7 @@ export async function POST(request: Request) {
       fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
       revalidatePath(slug || currentSlug);
       return NextResponse.json(
-        { message: `${type} updated successfully` },
+        { message: `Listing updated successfully` },
         { status: 200 }
       );
       break;
@@ -94,18 +86,36 @@ export async function POST(request: Request) {
           { status: 400 }
         );
       }
-      const slugToDelete = Object.keys(data).find((key) => data[key] === id);
-      if (!slugToDelete) {
+
+      let slugsToDelete: string[];
+
+      if (id.includes("_")) {
+        // Delete based on the exact value containing an underscore
+        slugsToDelete = Object.keys(data).filter((key) => data[key] === id);
+      } else {
+        // Delete all entries where the id ends with the provided id
+        const regex = new RegExp(`${id}$`);
+        slugsToDelete = Object.keys(data).filter((key) =>
+          regex.test(data[key])
+        );
+      }
+
+      if (slugsToDelete.length === 0) {
         return NextResponse.json(
-          { error: `${type} with id '${id}' does not exist` },
+          { error: `Listing with id '${id}' does not exist` },
           { status: 404 }
         );
       }
-      delete data[slugToDelete];
+
+      slugsToDelete.forEach((slugToDelete) => {
+        delete data[slugToDelete];
+        revalidatePath(slugToDelete);
+      });
+
       fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
-      revalidatePath(slugToDelete);
+
       return NextResponse.json(
-        { message: `${type} deleted successfully` },
+        { message: `Listing(s) deleted successfully` },
         { status: 200 }
       );
       break;
