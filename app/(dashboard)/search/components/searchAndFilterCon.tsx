@@ -313,8 +313,8 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
                   <span className="bg-[#148B16] rounded-full text-white text-sm block w-5 h-5">
                     ₹
                   </span>
-                  {shouldShowBudget
-                    ? `${toFormattedString(filters.bugdetValue[0])}  ${
+                  {(shouldShowBudget && ((filters.bugdetValue[0] !== undefined && filters.bugdetValue[0] !== 0 && filters.bugdetValue[0].toString() !== "") || (filters.bugdetValue[1] !== undefined && filters.bugdetValue[1] !== 0 && filters.bugdetValue[1].toString() !== ""))) ?
+                    `${toFormattedString(filters.bugdetValue[0])}  ${
                         "- " + toFormattedString(filters.bugdetValue[1])
                       }`
                     : " Add Budget"}

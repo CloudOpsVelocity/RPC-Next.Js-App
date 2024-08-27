@@ -90,3 +90,12 @@ function getTypeText(type: string) {
 
   return text;
 }
+ 
+export const projectprops = {
+  villa: 31,
+  plot: 32,
+  rowHouse: 33,
+  villament: 34,
+  apartment: 35,
+  independent: 36
+};

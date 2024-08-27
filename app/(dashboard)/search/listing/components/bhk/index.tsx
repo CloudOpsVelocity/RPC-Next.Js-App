@@ -3,6 +3,7 @@ import { Checkbox } from "@mantine/core";
 import React from "react";
 import ClearAll from "../ClearAll";
 import useSearchFilters from "@/app/hooks/search";
+import { projectprops } from "@/app/data/projectDetails";
 
 export default function BhkFilter() {
   const { filters, handleCheckboxClick, params } = useSearchFilters();

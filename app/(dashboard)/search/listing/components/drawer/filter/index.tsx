@@ -420,7 +420,7 @@ const ListingMobileFilter = ({ close }: any) => {
                     color="green"
                     label={constDesc}
                     value={cid}
-                    name="ListedBy"
+                    name="furnish"
                     style={{ whiteSpace: "nowrap", marginBottom: "10px" }}
                     onClick={() => setSingleType("furnish", cid)}
                     checked={filters.furnish === cid}

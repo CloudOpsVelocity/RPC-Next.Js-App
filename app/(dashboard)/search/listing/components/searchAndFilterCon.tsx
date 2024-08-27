@@ -27,7 +27,7 @@ import { DynamicText } from "../../utils/text";
 import useQsearch from "@/app/hooks/search/useQsearch";
 import { SearchIcon } from "@/app/images/HomePageIcons";
 import { toFormattedString } from "../../components/buget/budget";
-import { propertyDetailsTypes } from "@/app/data/projectDetails";
+import { projectprops, propertyDetailsTypes } from "@/app/data/projectDetails";
 import { SEARCH_FILTER_DATA } from "@/app/data/search";
 import { initialState, searachFilterAtom } from "@/app/store/search";
 import { useHydrateAtoms } from "jotai/utils";
@@ -89,12 +89,11 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
     open();
   };
   const shouldShowBudget = !(
-    (filters.bugdetValue[0] === 500000 &&
-      filters.bugdetValue[1] === 600000000) ||
+    (filters.bugdetValue[0] === 500000 && filters.bugdetValue[1] === 600000000) ||
     (filters.bugdetValue[0] === 0 && filters.bugdetValue[1] === 100000)
   );
+
   const allFiltersMap = [...filters.locality, ...filters.builderIds];
-  /*   console.log(getCommonData(filters.locality)) */
   return (
     <div className="mb-4 w-full  mt-[60px] sm:mt-[80px] pl-[1%]   ">
       <p className="text-[12px]  text-[#737579] font-[500] mt-2 mb-2 sm:mb-0  w-full md:w-auto">
@@ -308,10 +307,11 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
             </button>
           </Popover.Target>
           <Popover.Dropdown className="!z-50" p={0}>
-            <PropTypeFilter />
+            <PropTypeFilter/>
           </Popover.Dropdown>
         </Popover>
 
+        {(filters.propTypes === undefined || filters.propTypes !== projectprops.plot) && 
         <Popover
           width={"auto"}
           trapFocus
@@ -339,6 +339,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
             <BhkFilter />
           </Popover.Dropdown>
         </Popover>
+        }
 
         <Popover
           width={"auto"}
@@ -357,11 +358,10 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
               <span className="bg-[#148B16] rounded-full text-white text-sm block w-5 h-5">
                 ₹
               </span>
-              {shouldShowBudget
-                ? `${toFormattedString(filters.bugdetValue[0])}  ${
-                    "- " + toFormattedString(filters.bugdetValue[1])
-                  }`
-                : " Add Budget"}
+              {(shouldShowBudget && ((filters.bugdetValue[0] !== undefined && filters.bugdetValue[0] !== 0 && filters.bugdetValue[0].toString() !== "") || (filters.bugdetValue[1] !== undefined && filters.bugdetValue[1] !== 0 && filters.bugdetValue[1].toString() !== ""))) ?
+                `${toFormattedString(filters.bugdetValue[0])}  ${"- " + toFormattedString(filters.bugdetValue[1])}`
+                : " Add Budget"
+              } 
             </button>
           </Popover.Target>
           <Popover.Dropdown className="!z-50" p={0}>
