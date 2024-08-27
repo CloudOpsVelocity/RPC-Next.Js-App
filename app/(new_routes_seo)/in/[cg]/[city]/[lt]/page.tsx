@@ -14,13 +14,14 @@ type Props = {
 export default async function Page({ params: { cg, city, lt } }: Props) {
   const pathname = `/in/${cg}/${city}/${lt}`;
   const values = await getNestedSlug(pathname, -2);
-  const [, , locality] = values.split("_");
+  const [buyorent, , locality] = values.split("_");
   const severData = await getSearchData(`localities=${locality}`);
   return (
     <ListingSearchPage
       serverData={severData}
       frontendFilters={{
         locality: [`${lt}+${locality}`],
+        cg: buyorent,
       }}
     />
   );

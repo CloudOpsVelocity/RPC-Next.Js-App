@@ -51,7 +51,7 @@ export default function BuyRent() {
         defaultValue={"S"}
         rightSection={<DropDownIcon />}
         size="xs"
-        value={params.cg == "R" ? "R" : "S"}
+        value={filters.cg == "R" ? "R" : "S"}
         onChange={(e) => handleChnage(e ?? "S")}
       />
     </div>

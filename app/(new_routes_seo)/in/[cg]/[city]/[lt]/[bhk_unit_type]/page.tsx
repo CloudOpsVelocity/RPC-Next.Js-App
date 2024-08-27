@@ -16,10 +16,9 @@ export default async function Page({
 }: Props) {
   const pathname = `/in/${cg}/${city}/${lt}/${bhk_unit_type}`;
   const values = await getNestedSlug(pathname, -1);
-  const [, , locality, bhk, propType] = values.split("_");
-  console.log(locality, bhk, propType);
+  const [buyorent, , locality, bhk, propType] = values.split("_");
   const severData = await getSearchData(
-    `bhk=${bhk}&propType=${propType}&localities=${locality}`
+    `bhk=${bhk}&propType=${propType}&localities=${locality}&cg=${buyorent}`
   );
   return (
     <ListingSearchPage
@@ -28,6 +27,7 @@ export default async function Page({
         locality: [`${lt}+${locality}`],
         unitTypes: [parseInt(bhk)],
         propTypes: parseInt(propType),
+        cg: buyorent,
       }}
     />
   );
@@ -38,7 +38,7 @@ export async function generateStaticParams() {
   // const res = await getPagesSlugs("listing-search-seo");
   const res = {
     "/in/for-sale/bangalore/varthur/2bhk-apartment/listing-1":
-      "S_9_28_43_35_75d462b9587bde2103fcd01a6e87a424",
+      "R_9_28_43_35_75d462b9587bde2103fcd01a6e87a424",
     "/in/for/sale/bangalore/varthur/sobha-dream-acres/2bhk-apartment/listing-2":
       "S_9_28_989b51e0bc9ef35ade73826a63c1576a_43_35_75d462b9587bde2103fcd01a6e87a424",
   };

@@ -11,8 +11,8 @@ type Props = {
   };
 };
 
-export default async function Page({ params: { cg, city, lt } }: Props) {
-  const severData = await getSearchData(``);
+export default async function Page({ params: { cg, city } }: Props) {
+  const severData = await getSearchData(`cg=buyorrent`);
   return <ListingSearchPage serverData={severData} frontendFilters={{}} />;
 }
 export async function generateStaticParams() {
