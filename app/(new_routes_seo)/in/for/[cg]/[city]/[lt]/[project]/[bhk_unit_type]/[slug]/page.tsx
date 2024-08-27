@@ -88,8 +88,17 @@ export async function generateStaticParams() {
   const projectRes = Object.keys(res);
   const slugs = projectRes.map((data) => {
     if (data.includes("/in/for/")) {
-      const [emtypath, country, cg, city, lt, project, bhk_unit_type, slug] =
-        data.split("/");
+      const [
+        emtypath,
+        country,
+        staticPath,
+        cg,
+        city,
+        lt,
+        project,
+        bhk_unit_type,
+        slug,
+      ] = data.split("/");
       return { cg, city, lt, project, bhk_unit_type, slug };
     }
   });
