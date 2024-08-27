@@ -68,13 +68,7 @@ export const dynamicParams = true;
 
 export async function generateStaticParams() {
   // Get the data (mocked here, replace with your actual data fetching logic)
-  // const res = await getPagesSlugs("listing-search-seo");
-  const res = {
-    "/in/for-sale/bangalore/varthur/2bhk-apartment/listing-1":
-      "S_9_28_43_35_75d462b9587bde2103fcd01a6e87a424",
-    "/in/for/sale/bangalore/varthur/sobha-dream-acres/2bhk-apartment/listing-2":
-      "S_9_28_989b51e0bc9ef35ade73826a63c1576a_43_35_75d462b9587bde2103fcd01a6e87a424",
-  };
+  const res = await getPagesSlugs("listing-search-seo");
 
   // const staticDir = path.join(process.cwd(), "static");
   // const filePath = path.join(staticDir, "listingSlugs.json");

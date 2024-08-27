@@ -31,6 +31,7 @@ export default async function Page({ params }: Props) {
   const pathname = `/projects/${city}/${lt}/${name}`;
   const value = await getProjectSlug(pathname);
   const slug = getStringPartByIndex(value, 2);
+  console.log(pathname);
   if (!slug) {
     notFound();
   }
@@ -73,4 +74,4 @@ export async function generateStaticParams() {
   });
   return slugs;
 }
-export const dynamicParams = false;
+export const dynamicParams = true;

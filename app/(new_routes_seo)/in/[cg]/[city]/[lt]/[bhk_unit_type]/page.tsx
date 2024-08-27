@@ -1,6 +1,7 @@
 import ListingSearchPage from "@/app/(dashboard)/search/listing/Page/ListingSearchPage";
 import { getSearchData } from "@/app/(new_routes_seo)/in/utils/api";
 import { getNestedSlug } from "@/app/(new_routes_seo)/in/utils/getSlugs";
+import { getPagesSlugs } from "@/app/seo/api";
 import React from "react";
 type Props = {
   params: {
@@ -35,13 +36,7 @@ export default async function Page({
 
 export async function generateStaticParams() {
   // Get the data (mocked here, replace with your actual data fetching logic)
-  // const res = await getPagesSlugs("listing-search-seo");
-  const res = {
-    "/in/for-sale/bangalore/varthur/2bhk-apartment/listing-1":
-      "R_9_28_43_35_75d462b9587bde2103fcd01a6e87a424",
-    "/in/for/sale/bangalore/varthur/sobha-dream-acres/2bhk-apartment/listing-2":
-      "S_9_28_989b51e0bc9ef35ade73826a63c1576a_43_35_75d462b9587bde2103fcd01a6e87a424",
-  };
+  const res = await getPagesSlugs("listing-search-seo");
 
   // Extract project names from the keys
   const projectRes = Object.keys(res);
@@ -54,3 +49,5 @@ export async function generateStaticParams() {
   });
   return slugs;
 }
+export const dynamic = "force-dynamic";
+export const dynamicParams = true;

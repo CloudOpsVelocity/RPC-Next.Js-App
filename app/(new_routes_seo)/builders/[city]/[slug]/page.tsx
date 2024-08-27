@@ -32,7 +32,10 @@ export default async function Page({ params: { city, slug } }: Props) {
   // new cahnge
   const pathname = `/builders/${city}/${slug}`;
   const id = await getBuilderSlug(pathname);
-  console.log(id);
+  if (!id) {
+    notFound();
+  }
+  console.log(pathname);
   const data = await getBuilderDetailsPageData(id.split("_")[1]);
   return <BuilderPage data={data} />;
 }
@@ -50,4 +53,4 @@ export async function generateStaticParams() {
   return slugs;
 }
 
-export const dynamicParams = false;
+export const dynamicParams = true;
