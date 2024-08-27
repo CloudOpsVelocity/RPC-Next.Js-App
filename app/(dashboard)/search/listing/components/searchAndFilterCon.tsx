@@ -95,7 +95,6 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
     (filters.bugdetValue[0] === 0 && filters.bugdetValue[1] === 100000)
   );
   const allFiltersMap = [...filters.locality, ...filters.builderIds];
-  console.log(filters);
   /*   console.log(getCommonData(filters.locality)) */
   return (
     <div className="mb-4 w-full  mt-[60px] sm:mt-[80px] pl-[1%]   ">
@@ -219,7 +218,8 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
                         },
                       }}
                     >
-                      {projName}
+                      {/* @ts-ignore */}
+                      {filters.projName ?? projName}
                     </Pill>
                   )}
                   {allFiltersMap?.map(

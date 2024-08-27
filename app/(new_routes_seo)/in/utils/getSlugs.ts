@@ -7,7 +7,7 @@ async function getListingSLugs(pathname: string) {
   try {
     const jsonData = fs.readFileSync(filePath, "utf8");
     const builderJsonData = JSON.parse(jsonData);
-
+    console.log(builderJsonData, pathname);
     // Return the ID for the given pathname
     return builderJsonData[pathname] || null;
   } catch (error) {

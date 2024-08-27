@@ -1,7 +1,6 @@
 import React from "react";
 import ListingSearchPage from "@/app/(dashboard)/search/listing/Page/ListingSearchPage";
-import { getNestedSlug } from "@/app/(new_routes_seo)/in/utils/getSlugs";
-import { getSearchData } from "@/app/(new_routes_seo)/in/utils/api";
+import { getSearchData } from "../../../utils/api";
 
 type Props = {
   params: {
@@ -11,20 +10,9 @@ type Props = {
   };
 };
 
-export default async function Page({ params: { cg, city, lt } }: Props) {
-  const pathname = `/in/for/${cg}/${city}/${lt}`;
-  const values = await getNestedSlug(pathname, -3);
-  const [buyorent, , locality] = values.split("_");
-  const severData = await getSearchData(`localities=${locality}`);
-  return (
-    <ListingSearchPage
-      serverData={severData}
-      frontendFilters={{
-        locality: [`${lt}+${locality}`],
-        cg: buyorent,
-      }}
-    />
-  );
+export default async function Page({ params: { cg, city } }: Props) {
+  const severData = await getSearchData(``);
+  return <ListingSearchPage serverData={severData} frontendFilters={{}} />;
 }
 export async function generateStaticParams() {
   // Get the data (mocked here, replace with your actual data fetching logic)
@@ -41,7 +29,7 @@ export async function generateStaticParams() {
   const slugs = projectRes.map((data) => {
     if (data.includes("/in/for/")) {
       const [emtypath, country, cg, city, lt, slug] = data.split("/");
-      return { cg, city, lt };
+      return { cg, city };
     }
   });
   return slugs;
