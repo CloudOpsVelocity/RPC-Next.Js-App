@@ -87,8 +87,7 @@ export default function ReportModal() {
                   Report Issues for Project
                 </p>
                 <p className="text-[#148B16] font-[Montserrat] text-xs sm:text-[18px] not-italic font-medium leading-[normal]">
-                  Let us know your feedback this will allow us to serve you
-                  better!
+                  Let us know your feedback this will allow us to serve you better!
                 </p>
               </header>
               <form onSubmit={formSubmit} className=" gap-1 sm:gap-4 ">
@@ -103,8 +102,8 @@ export default function ReportModal() {
                     h={"100%"}
                     id="review"
                     className={clsx(
-                      " rounded-[10px] !text-[12px]  placeholder:!text-[#4D6677]  placeholder:!text-xl xl:placeholder:!text-2xl italic font-medium leading-[23.784px] ",
-                      status === "error" && "border-solid border-red-500 border"
+                      " rounded-[10px] !text-[12px]  placeholder:!text-[#4D6677]  placeholder:!text-xl xl:placeholder:!text-2xl italic font-medium leading-[23.784px] border-solid border",
+                      status === "error" ? "border-[#F00]" : "border-green"
                     )}
                     placeholder="Start typing here"
                     radius={"10px"}

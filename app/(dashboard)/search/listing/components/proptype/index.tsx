@@ -2,7 +2,7 @@ import { SEARCH_FILTER_DATA } from "@/app/data/search";
 import { Checkbox, Radio } from "@mantine/core";
 import React from "react";
 import ClearAll from "../ClearAll";
-import { propertyDetailsTypes } from "@/app/data/projectDetails";
+import { projectprops, propertyDetailsTypes } from "@/app/data/projectDetails";
 import useSearchFilters from "@/app/hooks/search";
 
 export default function PropTypeFilter() {
@@ -17,23 +17,25 @@ export default function PropTypeFilter() {
         </h3>
         <div className="flex  mb-[3%] t gap-[4%]  flex-wrap justify-start items-center ">
           {keys.map((keyName, index) => {
-            return (
-              <Radio
-                key={index}
-                iconColor="dark.8"
-                color="green"
-                label={propertyDetailsTypes?.get(keyName)?.name}
-                value={propertyDetailsTypes?.get(keyName)?.id}
-                name="propertyType"
-                style={{ whiteSpace: "nowrap", marginBottom: "10px" }}
-                onClick={() =>
-                  setPropTypes(propertyDetailsTypes?.get(keyName)?.id as number)
-                }
-                checked={
-                  filters.propTypes === propertyDetailsTypes?.get(keyName)?.id
-                }
-              />
-            );
+            if((filters.unitTypes.length === 0 || filters.unitTypes === undefined ) || (filters.unitTypes.length > 0 && keyName != projectprops.plot) ){
+              return (
+                <Radio
+                  key={index}
+                  iconColor="dark.8"
+                  color="green"
+                  label={propertyDetailsTypes?.get(keyName)?.name}
+                  value={propertyDetailsTypes?.get(keyName)?.id}
+                  name="propertyType"
+                  style={{ whiteSpace: "nowrap", marginBottom: "10px" }}
+                  onClick={() =>
+                    setPropTypes(propertyDetailsTypes?.get(keyName)?.id as number)
+                  }
+                  checked={
+                    filters.propTypes === propertyDetailsTypes?.get(keyName)?.id
+                  }
+                />
+              );
+            }
           })}
         </div>
       </div>
