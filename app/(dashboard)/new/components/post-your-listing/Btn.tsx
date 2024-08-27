@@ -10,7 +10,7 @@ type Props = {
 export default function Btn({ text }: Props) {
   const { data: session } = useSession();
   const url = session
-    ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/property/v1/post`
+    ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/post-listing/v1/post`
     : `/login?pp=post`;
 
   return (

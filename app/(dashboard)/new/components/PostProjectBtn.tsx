@@ -8,7 +8,7 @@ type Props = {};
 export default function PostProjectBtn({}: Props) {
   const { data: session } = useSession();
   const url = session
-    ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/project/postProject`
+    ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/post-project/postProject`
     : `/login`;
 
   return (

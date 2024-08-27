@@ -12,11 +12,11 @@ const data = [
   },
   {
     label: "Post Project",
-    url: `${baseUrl}/post-project`,
+    url: `${baseUrl}/post-project/postProject`,
   },
   {
     label: "Post Listing",
-    url: `${baseUrl}/post-listing`,
+    url: `${baseUrl}/post-listing/v1/post`,
   },
   {
     label: "About Us",
