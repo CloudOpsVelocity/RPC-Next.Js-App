@@ -251,12 +251,14 @@ function Builder() {
               branch: values.branch.map((item) => parseInt(item)),
               companyStartDate: formattedDate,
             })
-          ).then(async (res) => await saveStep(5));
-
-          await login({
-            password: form.values.password,
-            username: form.values.mobile as unknown as string,
+          ).then(async (res) => {
+            await saveStep(5);
+            await login({
+              password: form.values.password,
+              username: form.values.mobile as unknown as string,
+            });
           });
+
           setStatus("success");
           // Proceed to the next step after the API call
           setActive((current) => (current < 4 ? current + 1 : current));
