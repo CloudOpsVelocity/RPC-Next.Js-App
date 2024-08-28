@@ -31,12 +31,15 @@ type CardProps = {
   type: string;
   projName?: string;
   cardData?: any;
+  refetch?: () => Promise<any>;
 };
 
-export function ProjectCard({ type, cardData }: CardProps) {
+export function ProjectCard({ type, cardData, refetch }: CardProps) {
+  console.log(cardData.shortListed);
   const [, { open }] = useReqCallPopup();
   const { data: session } = useSession();
   const [isShorlited, setShorlited] = React.useState(cardData.shortListed);
+  console.log(isShorlited);
   const { toggleShortlist } = useShortlistAndCompare();
   const [, { open: openShort }] = usePopShortList();
   const isItemInShortlist = isShorlited === "Y";
@@ -52,7 +55,9 @@ export function ProjectCard({ type, cardData }: CardProps) {
         setShorlited(status);
       }
     } else {
-      openShort();
+      openShort(
+        () => refetch && refetch().then(() => setShorlited(!isShorlited))
+      );
     }
   };
   const handleReqCallbackOpen = (e: any) => {
@@ -220,7 +225,7 @@ const BuilderCarousel = ({
     const data = await axios.post(url);
     return data.data.projectBuilder;
   };
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryFn: getBuilderProjects,
     queryKey: ["getBuilderProjects" + id],
   });
@@ -258,7 +263,7 @@ const BuilderCarousel = ({
           data?.map((project: any, index: number) => {
             return (
               <CarouselSlide key={index} className="!h-[520px] sm:!h-[500px]">
-                <ProjectCard type={type} cardData={project} />
+                <ProjectCard type={type} cardData={project} refetch={refetch} />
               </CarouselSlide>
             );
           })}
