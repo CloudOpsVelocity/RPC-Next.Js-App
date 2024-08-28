@@ -10,8 +10,7 @@ import React, { useState } from "react";
 import Close from "./button/close";
 import { useDrag } from "@use-gesture/react";
 function ProjectDrawer({ projName }: { projName: string }) {
-  const [
-    { expanded, content, type, title, showProjName, builderName },
+  const [ { expanded, content, type, title, showProjName, builderName },
     setReadMore,
   ] = useAtom(readMoreAtom);
   const handleReadMoreClick = () => {
@@ -29,7 +28,7 @@ function ProjectDrawer({ projName }: { projName: string }) {
         handleReadMoreClick();
         cancel();
       }
-      return memo;
+      return memo; 
     },
     { axis: "x", pointer: { touch: true } }
   );

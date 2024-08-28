@@ -46,7 +46,7 @@ const RightSideBlock = ({ serverClientData }: any) => {
   return (
     <div
       id="mobileMap"
-      className="w-[98%] sm:w-full scroll-mt-[200px]  flex justify-start items-start z-[1] md:w-[50%] "
+      className="w-[98%] sm:w-full scroll-mt-[200px] flex justify-start items-start z-[1] md:w-[50%] "
     >
       <Map
         projName={"Searched Location"}

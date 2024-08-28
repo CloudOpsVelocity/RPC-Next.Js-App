@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useCallback, useRef, useMemo } from "react";
+import React, { useState, useCallback, useRef, useMemo, Fragment } from "react";
 import { LuTrain, LuSearch } from "react-icons/lu";
 import {
   Text,
@@ -96,8 +96,8 @@ const LeafMap: React.FC<{
       <div className="flex justify-between w-[95%] sm:w-[90%] mx-auto">
         {type === "prop" ? (
           <PropertyHeading
-            title="Near By Locations Of Project "
-            desc=" Explore near by convenient amenities, entertainment, and essential
+          title={<Fragment>Near By Locations Of Project <span className="text-[#148B16]">{projName}</span></Fragment>}
+          desc=" Explore near by convenient amenities, entertainment, and essential
             services"
             className="sm:mb-[8px]"
           />

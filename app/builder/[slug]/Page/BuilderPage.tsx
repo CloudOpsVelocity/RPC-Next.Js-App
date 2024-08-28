@@ -17,7 +17,12 @@ const LoginPopup = dynamic(
 );
 type Props = { data: any };
 
+
+
+
 export default function BuilderPage({ data }: Props) {
+  console.log(data);
+
   return (
     <div className="flex flex-col justify-start items-center w-full mt-[70px]  ">
       {data && (

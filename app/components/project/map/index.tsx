@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useCallback, useRef, useMemo } from "react";
+import React, { useState, useCallback, useRef, useMemo, Fragment } from "react";
 import { Tabs, ScrollArea } from "@mantine/core";
 import { clsx } from "clsx";
 import { Coordinates } from "@/app/utils/maps";
@@ -87,10 +87,9 @@ const LeafMap: React.FC<{
       <div className="flex justify-between w-[95%] sm:w-[90%] mx-auto">
         {type === "prop" ? (
           <PropertyHeading
-            title="Near By Locations Of Project "
+            title={<Fragment>Near By Locations Of Project <span className="text-[#148B16]">{projName}</span></Fragment>}
             desc="Explore nearby convenient amenities, entertainment, and essential services"
             className="sm:mb-[18px]"
-            projName={projName}
           />
         ) : (
           <div>
@@ -204,7 +203,7 @@ const LeafMap: React.FC<{
   ) : (
     <div
       id="nearBy"
-      className="w-[95%] md:w-[90%] scroll-mt-[180px]  sm:mt-6 xl:mt-2 justify-center"
+      className="w-[95%] md:w-[90%] scroll-mt-[180px]  sm:mt-[20px] xl:mt-[50px] justify-center"
     >
       <div className="flex justify-between w-[90%] ">
         {type === "prop" ? (
