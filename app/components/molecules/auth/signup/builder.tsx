@@ -894,7 +894,7 @@ function Builder() {
               </Button>
 
               <Button
-                loading={status === "pending"}
+                // loading={status === "pending"}
                 mt="sm"
                 className="!rounded-[6px] !w-[52%] md:!w-[100%]  md:!max-w-[225px] !bg-[#0c7aca]"
                 // onClick={nextStep}
