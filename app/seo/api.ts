@@ -8,8 +8,13 @@ const getPagesSlugs = async (
       cache: "no-store",
     });
     const data = await res.json();
+
     if (pageType === "listing-search-seo") {
-      return data.urlMap;
+      if (data.status) {
+        return data.urlMap;
+      } else {
+        return {};
+      }
     }
     return data;
   } catch (error) {
