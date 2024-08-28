@@ -68,7 +68,8 @@ export default async function Page({ params }: Props) {
     notFound();
   }
   const data = await getBuilderDetailsPageData(id);
-  return <BuilderPage data={data} />;
+  // return <BuilderPage data={data} />;
+  return <div></div>;
 }
 
 //  builder0 = state / project0 project in locality
