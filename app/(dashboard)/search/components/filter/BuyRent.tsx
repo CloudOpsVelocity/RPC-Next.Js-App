@@ -31,6 +31,8 @@ export default function BuyRent() {
     }
   };
 
+  console.log(filters.cg);
+
   const isMobile = useMediaQuery("(max-width: 601px)");
   return (
     <div onClick={(e) => e.stopPropagation()}>

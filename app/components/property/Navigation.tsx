@@ -159,6 +159,8 @@ export default function Navigation({
     { condtion: similarAvl, key: "similar" },
   ];
 
+  console.log(relateProjData?.banks)
+
   return (
     <div
       className={clsx(

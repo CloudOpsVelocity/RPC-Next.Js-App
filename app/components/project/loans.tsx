@@ -2,7 +2,7 @@
 import { BankDetailsList } from "@/app/images/commonImages";
 import { Bank } from "@/app/validations/types/project";
 import Image from "next/image";
-import React from "react";
+import React, { Fragment } from "react";
 import PropertyHeading from "../property/heading";
 import SubHeading from "./headings/SubHeading";
 import { Carousel } from "@mantine/carousel";
@@ -22,7 +22,7 @@ export default function ProjectLoans({
     <div className="bg-white pt-2 pb-4 sm:pt-screen-spacing w-[95%] md:w-[90%] mx-auto  h-auto  ">
       {type === "prop" ? (
         <PropertyHeading
-          title="Bank Approvals Of"
+          title= {<Fragment>Bank Approvals Of <span className="text-[#148B16]">{name}</span></Fragment>}
           desc="Unlock Your Dream Home with Hassle-Free Bank Approval Loans"
           className="mb-[10px] xl:mb-[10px]"
         />

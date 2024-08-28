@@ -76,7 +76,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
       return (
         <React.Fragment key={itemId}>
           {i < maxDisplay ? selectedItem.title : ""}
-          {i < maxDisplay - 1 && i > 1 ? ", " : ""}
+          {filters.unitTypes.length > 1 && i !== filters.unitTypes.length - 1 ? ", " : ""}
           {i === maxDisplay - 1 && filters.unitTypes.length > maxDisplay ? " ..." : ""}
         </React.Fragment>
       );

@@ -55,7 +55,7 @@ export default function NearByCarouselProperty({
       />
       <ProjectCarousel
         type="prop"
-        title={`Nearby Similar ${listingType} Listings`}
+        title={<Fragment>Nearby Similar {listingType} Listings of <span className="text-[#148B16] ">{projName}</span></Fragment>}
         content={`Check some similar nearby ${listingType.toLowerCase()} listings available`}
         data={
           data != undefined && data.otherListing != undefined
