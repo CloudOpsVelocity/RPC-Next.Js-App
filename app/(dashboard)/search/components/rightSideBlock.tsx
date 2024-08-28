@@ -20,7 +20,7 @@ const RightSideBlock = ({ serverData }: any) => {
   const serverClientData =
     appliedFiltersCount > 0
       ? data
-      : path.includes("/projects")
+      : path.includes("/projects") || path.includes("/in")
       ? serverData
       : data;
   return (

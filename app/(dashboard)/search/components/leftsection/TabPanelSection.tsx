@@ -23,7 +23,7 @@ export default function TabPanelSection({ mutate, serverData }: Props) {
   const serverClientData =
     appliedFiltersCount > 0
       ? data
-      : path.includes("/projects")
+      : path.includes("/projects") || path.includes("/in")
       ? serverData
       : data;
   const { ref, entry } = useIntersection({

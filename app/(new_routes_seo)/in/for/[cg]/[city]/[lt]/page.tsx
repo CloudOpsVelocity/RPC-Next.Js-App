@@ -1,8 +1,12 @@
 import React from "react";
 import ListingSearchPage from "@/app/(dashboard)/search/listing/Page/ListingSearchPage";
 import { getNestedSlug } from "@/app/(new_routes_seo)/in/utils/getSlugs";
-import { getSearchData } from "@/app/(new_routes_seo)/in/utils/api";
+import {
+  getProjSearchData,
+  getSearchData,
+} from "@/app/(new_routes_seo)/in/utils/api";
 import { getPagesSlugs } from "@/app/seo/api";
+import ProjectSearchPage from "@/app/(dashboard)/search/Page/ProjectSearchPage";
 
 type Props = {
   params: {
@@ -16,9 +20,9 @@ export default async function Page({ params: { cg, city, lt } }: Props) {
   const pathname = `/in/for/${cg}/${city}/${lt}`;
   const values = await getNestedSlug(pathname, -3);
   const [buyorent, , locality] = values.split("_");
-  const severData = await getSearchData(`localities=${locality}`);
+  const severData = await getProjSearchData(`localities=${locality}`);
   return (
-    <ListingSearchPage
+    <ProjectSearchPage
       serverData={severData}
       frontendFilters={{
         locality: [`${lt}+${locality}`],

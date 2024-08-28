@@ -90,3 +90,26 @@ export const getSearchData = async (filters: string): Promise<any> => {
     return null;
   }
 };
+export const getProjSearchData = async (filters: string): Promise<any> => {
+  try {
+    const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=0&city=9`;
+
+    const url = `${baseUrl}${filters ? `&${filters}` : ""}`;
+
+    const res = await fetch(url, {
+      next: {
+        revalidate: 60,
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error(`Error fetching data: ${res.statusText}`);
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};

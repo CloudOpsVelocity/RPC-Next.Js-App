@@ -1,7 +1,8 @@
 import React from "react";
 import ListingSearchPage from "@/app/(dashboard)/search/listing/Page/ListingSearchPage";
-import { getSearchData } from "../../../utils/api";
+import { getProjSearchData, getSearchData } from "../../../utils/api";
 import { getPagesSlugs } from "@/app/seo/api";
+import ProjectSearchPage from "@/app/(dashboard)/search/Page/ProjectSearchPage";
 
 type Props = {
   params: {
@@ -12,8 +13,8 @@ type Props = {
 };
 
 export default async function Page({ params: { cg, city } }: Props) {
-  const severData = await getSearchData(``);
-  return <ListingSearchPage serverData={severData} frontendFilters={{}} />;
+  const severData = await getProjSearchData(``);
+  return <ProjectSearchPage serverData={severData} frontendFilters={{}} />;
 }
 export async function generateStaticParams() {
   // Get the data (mocked here, replace with your actual data fetching logic)
