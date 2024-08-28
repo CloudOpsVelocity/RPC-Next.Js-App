@@ -11,7 +11,7 @@ const typeMapping = {
 const getFilePath = (type: string) =>
   path.join(process.cwd(), "static", `${type}Slugs.json`);
 
-export async function POST(request: Request) {
+export async function POST(request: Request, response: Response) {
   let { type, slug, id, action } = await request.json();
   // Validate required parameters
   if (!type || !action || (type !== "P" && type !== "B")) {
@@ -103,7 +103,8 @@ export async function POST(request: Request) {
       }
       delete data[slugToDelete];
       fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
-      revalidatePath(slugToDelete);
+      revalidatePath(slugToDelete, "page");
+      revalidatePath(slugToDelete, "layout");
       return NextResponse.json(
         { message: `${type} deleted successfully` },
         { status: 200 }

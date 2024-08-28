@@ -10,19 +10,15 @@ import PropTypeFilter from "./proptype";
 import BugdetFilter from "./buget";
 import useSearchFilters from "@/app/hooks/search";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
-import S from "@/app/styles/seach/Drawer.module.css";
-import SearchDrawerHeader from "./filter";
 import SearchDrawer from "./drawer";
 import BuyRent from "./filter/BuyRent";
 import { DynamicText } from "../utils/text";
-import useQsearch from "@/app/hooks/search/useQsearch";
 import { SearchIcon } from "@/app/images/HomePageIcons";
 import { propertyDetailsTypes } from "@/app/data/projectDetails";
 import { SEARCH_FILTER_DATA } from "@/app/data/search";
 import { toFormattedString } from "./buget/budget";
 import { useHydrateAtoms } from "jotai/utils";
 import { initialState, searachFilterAtom } from "@/app/store/search";
-
 const SearchAndFilterCon = ({ frontendFilters }: any) => {
   useHydrateAtoms([
     [searachFilterAtom, { ...initialState, ...frontendFilters }],
@@ -40,7 +36,6 @@ const SearchAndFilterCon = ({ frontendFilters }: any) => {
     </>
   );
 };
-
 export { SearchAndFilterCon };
 
 const SearchHeader = ({ open, setShowAllLocalities }: any) => {
@@ -114,11 +109,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
               filters.cg == null ? "sm:min-w-[300px]" : ""
             }`}
           >
-            {filters.listedBy != "proj" && filters.listedBy != null ? (
-              <BuyRent />
-            ) : (
-              ""
-            )}
+            <BuyRent />
 
             {allFiltersMap?.map(
               (each, index) =>
@@ -183,11 +174,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
                     filters.cg == null ? "sm:min-w-[300px]" : ""
                   }`}
                 >
-                  {filters.listedBy != "proj" && filters.listedBy != null ? (
-                    <BuyRent />
-                  ) : (
-                    ""
-                  )}
+                  <BuyRent />
 
                   {allFiltersMap?.map(
                     (each, index) =>
@@ -313,8 +300,14 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
                   <span className="bg-[#148B16] rounded-full text-white text-sm block w-5 h-5">
                     ₹
                   </span>
-                  {(shouldShowBudget && ((filters.bugdetValue[0] !== undefined && filters.bugdetValue[0] !== 0 && filters.bugdetValue[0].toString() !== "") || (filters.bugdetValue[1] !== undefined && filters.bugdetValue[1] !== 0 && filters.bugdetValue[1].toString() !== ""))) ?
-                    `${toFormattedString(filters.bugdetValue[0])}  ${
+                  {shouldShowBudget &&
+                  ((filters.bugdetValue[0] !== undefined &&
+                    filters.bugdetValue[0] !== 0 &&
+                    filters.bugdetValue[0].toString() !== "") ||
+                    (filters.bugdetValue[1] !== undefined &&
+                      filters.bugdetValue[1] !== 0 &&
+                      filters.bugdetValue[1].toString() !== ""))
+                    ? `${toFormattedString(filters.bugdetValue[0])}  ${
                         "- " + toFormattedString(filters.bugdetValue[1])
                       }`
                     : " Add Budget"}
