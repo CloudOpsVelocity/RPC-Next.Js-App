@@ -13,7 +13,7 @@ export const SEARCH_FILTER_DATA = {
     {
       cid: 108,
       constDesc: "New Launch",
-      Label: "New Launch",
+      Label: "New Launch / Upcoming",
     },
   ],
   listingStatus: [
