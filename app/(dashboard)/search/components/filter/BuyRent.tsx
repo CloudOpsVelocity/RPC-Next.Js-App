@@ -32,6 +32,8 @@ export default function BuyRent() {
   };
 
   const isMobile = useMediaQuery("(max-width: 601px)");
+  const isRentDisabled = filters.current == 108;
+  console.log(filters);
   return (
     <div onClick={(e) => e.stopPropagation()}>
       <Select
@@ -40,7 +42,11 @@ export default function BuyRent() {
         placeholder="Select"
         data={[
           { label: "Buy", value: "S" },
-          { label: "Rent", value: "R" },
+          {
+            label: "Rent",
+            value: "R",
+            disabled: isRentDisabled,
+          },
         ]}
         classNames={{
           input: classes.wrapperSelect,

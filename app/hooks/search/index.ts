@@ -426,7 +426,7 @@ const getFilteredData = async (
     type === "project"
       ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=${page}${
           query && `&${query}`
-        } ${cgValue}`
+        }${cgValue}`
       : `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/prop-search?page=${page}${
           query && `&${query}`
         }${!hasCityParam && "&city=9"}${cgValue}`;

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 const typeMapping = {
   P: "project",
@@ -48,9 +48,10 @@ export async function POST(request: Request, response: Response) {
       }
       data[slug] = id;
       fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
-      console.log(slug);
-      revalidatePath(slug, "page");
-      revalidatePath(slug, "layout");
+      console.log(slug, "from create");
+      // revalidatePath(slug, "page");
+      // revalidatePath(slug, "layout");
+      revalidateTag(slug);
       return NextResponse.json(
         { message: `${type} created successfully` },
         { status: 201 }
@@ -103,8 +104,8 @@ export async function POST(request: Request, response: Response) {
       }
       delete data[slugToDelete];
       fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
-      revalidatePath(slugToDelete, "page");
-      revalidatePath(slugToDelete, "layout");
+      // revalidatePath(slugToDelete, "page");
+      revalidateTag(slugToDelete);
       return NextResponse.json(
         { message: `${type} deleted successfully` },
         { status: 200 }

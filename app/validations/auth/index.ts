@@ -41,7 +41,10 @@ const schema = yup.object().shape({
 const agentSchema = yup.object().shape({
   userName: yup
     .string()
-
+    .max(80, "Name should not exceed 80 characters")
+    .required("Full name is required"),
+  companyName: yup
+    .string()
     .max(80, "Name should not exceed 80 characters")
     .required("Full name is required"),
   email: yup

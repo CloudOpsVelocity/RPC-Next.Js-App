@@ -80,7 +80,9 @@ const convertToOriginalState = (data: any): SearchFilter => {
       parseInt(data.maxPrice),
     ];
   }
-
+  if (data.cg !== undefined) {
+    convertedData.cg = data.cg;
+  }
   if (data.projStatus !== undefined) {
     convertedData.current = parseInt(data.projStatus);
   }

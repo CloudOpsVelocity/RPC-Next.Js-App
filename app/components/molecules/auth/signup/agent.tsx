@@ -80,10 +80,10 @@ function Agent() {
             values.address.trim().length < 1
               ? "Office Address is required"
               : null,
-          companyName:
-            values.companyName.trim().length < 1
-              ? "Company name is required"
-              : null,
+          // companyName:
+          //   values.companyName.trim().length < 1
+          //     ? "Company name is required"
+          //     : null,
         };
       }
 
@@ -144,10 +144,10 @@ function Agent() {
           registerOtherParser({ ...values })
         ).then((res) => {
           saveStep(3);
-        });
-        await login({
-          password: form.values.password,
-          username: form.values.mobile as unknown as string,
+          login({
+            password: form.values.password,
+            username: form.values.mobile as unknown as string,
+          });
         });
         setActive((current) => (current < 3 ? current + 1 : current));
       }
@@ -243,6 +243,23 @@ function Agent() {
                 error: StepCss.errorMsg,
                 label: StepCss.mlabelCss,
               }}
+            />
+            <TextInput
+              required
+              size="lg"
+              mt={"xs"}
+              label="Company Name"
+              placeholder="Enter your company name here"
+              {...form.getInputProps("companyName")}
+              classNames={{
+                root: StepCss.inputRoot,
+                input: StepCss.textInput,
+                error: StepCss.errorMsg,
+                label: StepCss.mlabelCss,
+              }}
+              onBlurCapture={(e) =>
+                handleTrimAndReplace(e, "companyName", form)
+              }
             />
             <TextInput
               required
@@ -372,23 +389,7 @@ function Agent() {
               onBlurCapture={(e) => handleTrimAndReplace(e, "address", form)}
               data-autofocus
             />
-            <TextInput
-              required
-              size="lg"
-              mt={"xs"}
-              label="Company Name"
-              placeholder="Enter your company name here"
-              {...form.getInputProps("companyName")}
-              classNames={{
-                root: StepCss.inputRoot,
-                input: StepCss.textInput,
-                error: StepCss.errorMsg,
-                label: StepCss.mlabelCss,
-              }}
-              onBlurCapture={(e) =>
-                handleTrimAndReplace(e, "companyName", form)
-              }
-            />
+
             <DropZone
               onLogoSelect={handleLogoSelect}
               logo={form.values.companyLogo}
