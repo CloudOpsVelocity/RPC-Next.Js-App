@@ -53,7 +53,7 @@ function AppDrawer({ close, opened }: Props) {
                     Search
                   </span>
                   <span className="text-[#242424] text-xs italic font-medium">
-                    “ Whitefield, Bangalore”
+                    “ Whitefield, Bengaluru
                   </span>
                 </button> */}
                   {config.searchIcon}

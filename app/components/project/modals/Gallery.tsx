@@ -24,7 +24,7 @@ type GalleryProps = {
   images: any[];
   videos: any[];
   isImage: boolean;
-  currentSlide: number;
+  currentSlide: number; 
   setCurrentSlide: any;
 };
 
@@ -40,7 +40,6 @@ const Gallery: React.FC<GalleryProps> = ({
   const [previewImage, setPreviewImage] = useState<string | null>(
     videos[currentSlide]
   );
-  console.log(isImage);
   const handleImageClick = (image: string) => {
     setPreviewImage(image);
     open(isImage ? "image" : "video", image);
@@ -60,6 +59,20 @@ const Gallery: React.FC<GalleryProps> = ({
   if (!content) {
     return null;
   }
+
+  function getYouTubeThumbnailUrl(watchUrl: any) {
+    // Match both /watch?v= and /embed/ formats
+    const match = watchUrl.match(
+      /(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([^&?/]+)/
+    );
+
+    const videoId = match ? match[1] : null;
+
+    return videoId
+      ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
+      : null;
+  }
+
   return (
     <>
       <Modal
@@ -117,7 +130,7 @@ const Gallery: React.FC<GalleryProps> = ({
             <div className="flex justify-center items-center sm:w-[800px] xl:min-w-[1000px] min-w-[300px] bg-black rounded-[10px] md:rounded-[20px] ">
               <ReactPlayer
                 url={videos[currentSlide] as string}
-                width="auto"
+                width="100%"
                 controls
                 height={isMobile ? "50vh" : "60vh"}
                 playing={true}
@@ -187,6 +200,7 @@ const Gallery: React.FC<GalleryProps> = ({
                       <div
                         className={`relative flex items-center w-full justify-center border-1 border-solid border-white `}
                       >
+                        {!video.includes("youtube") ? (
                         <video
                           key={index}
                           width={150}
@@ -198,7 +212,19 @@ const Gallery: React.FC<GalleryProps> = ({
                               ? "border-[4px] border-white"
                               : ""
                           }`}
-                        />
+                        />)
+                        :
+                        (<img
+                          src={getYouTubeThumbnailUrl(video as string) ?? ""}
+                          className={`cursor-pointer border-1 border-solid border-white sm:h-full w-full min-w-[150px] rounded-[5px] !h-auto max-h-[100px] min-h-[100px] object-cover  ${
+                            currentSlide === index
+                              ? "border-[4px] border-white"
+                              : ""
+                          }`}
+                          alt="thumbnail"
+                        />)
+                        }
+
                         <span className="absolute h-[18px] w-[18px] md:h-[26px] md:w-[26px] z-[1000] pointer-events-none ">
                           {videoPlayIcon}
                         </span>

@@ -36,9 +36,9 @@ export default function BuilderPage({ data }: Props) {
             {data?.data?.builderProjects && (
               <BuilderCarousel
                 type="proj"
-                title={`Newly launched Projects `}
+                title={`Projects `}
                 projName={`  ${data?.data?.userName}`}
-                content={`See other newly launched projects by ${data?.data?.userName}`}
+                content={`See other Projects by ${data?.data?.userName}`}
                 data={data?.data?.builderProjects}
                 location={
                   Object.keys(data?.data?.projectAvailableCities).length <= 1

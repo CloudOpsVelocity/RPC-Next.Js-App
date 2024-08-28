@@ -24,11 +24,11 @@ export default function BuildersBlock({
         <h2 className="text-black text-[32px] not-italic font-bold leading-[normal] uppercase">
           Builder’s in{" "}
           <span className="text-[#148B16] text-[32px] not-italic font-bold leading-[normal] uppercase">
-            Bangalore
+          Bengaluru
           </span>
         </h2>
         <p className=" mt-2 text-[#4D6677] text-2xl italic font-medium leading-[normal] tracking-[0.96px]">
-          Check out some other builders in Bangalore
+          Check out some other builders in Bengaluru
         </p>
         <div className="mt-8 relative  ">
           <Carousel

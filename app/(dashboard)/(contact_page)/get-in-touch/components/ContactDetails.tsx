@@ -49,7 +49,7 @@ const Config = {
     },
     {
       label:
-        "Sigma Soft Tech Park, Office No - 15, Gamma Block, Whitefield, Bangalore- 560066, Karnataka",
+        "Sigma Soft Tech Park, Office No - 15, Gamma Block, Whitefield, Bengaluru- 560066, Karnataka",
       type: "address",
       link: "#",
       Icon: ContactLocation,

@@ -141,8 +141,8 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
         </span>
       </h2>
       <h2 className="text-[16px] sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[10px] xl:mb-[24px] capitalize ">
-        Ask your question related to
-        <span className="!text-green-600"> {projName} Project!</span>
+        Ask your question related to Project
+        <span className="!text-green-600"> {projName}!</span>
       </h2>
 
       <div className=" gap-4">

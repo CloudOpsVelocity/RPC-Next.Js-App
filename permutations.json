@@ -92,7 +92,7 @@
   {
     "id": "id-1721973177966-ezvdgsn268e",
     "type": "Villament",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "Best in 2024",
@@ -101,7 +101,7 @@
   {
     "id": "id-1721973172351-b9hikljczfk",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -173,7 +173,7 @@
   {
     "id": "id-1721973177702-96fmq8ytgiu",
     "type": "Villament",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "In Demand",
@@ -245,7 +245,7 @@
   {
     "id": "id-1721973176968-dzxw9opzg2u",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -254,7 +254,7 @@
   {
     "id": "id-1721973173994-kj8p7gas21",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -317,7 +317,7 @@
   {
     "id": "id-1721973175701-6lja9mmdrt3",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -470,7 +470,7 @@
   {
     "id": "id-1721973175482-89ijwpbdyi",
     "type": "Villament",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "New Launch",
@@ -506,7 +506,7 @@
   {
     "id": "id-1721973178243-t6d3sevlrrk",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -560,7 +560,7 @@
   {
     "id": "id-1721973174415-f5iafm5coq9",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -668,7 +668,7 @@
   {
     "id": "id-1721973175845-3f9cd1s3j7k",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "Best in 2024",
@@ -776,7 +776,7 @@
   {
     "id": "id-1721973173550-3lgr8ovrmmp",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -1172,7 +1172,7 @@
   {
     "id": "id-1721973176308-ccmqph1hadw",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -1298,7 +1298,7 @@
   {
     "id": "id-1721973173630-ijig74aw7jf",
     "type": "Villament",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -1433,7 +1433,7 @@
   {
     "id": "id-1721973173314-ono0qy8rlsq",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -1568,7 +1568,7 @@
   {
     "id": "id-1721973175718-rnuh5hw1md",
     "type": "Villament",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -1802,7 +1802,7 @@
   {
     "id": "id-1721973177390-378dy7mb2sx",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -1811,7 +1811,7 @@
   {
     "id": "id-1721973174085-n4xns548je",
     "type": "Villament",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -1847,7 +1847,7 @@
   {
     "id": "id-1721973175666-ydxj5ptld1q",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -1901,7 +1901,7 @@
   {
     "id": "id-1721973178122-g1ypzikd65f",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -2063,7 +2063,7 @@
   {
     "id": "id-1721973172387-z9ipfqk9cq",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -2099,7 +2099,7 @@
   {
     "id": "id-1721973176794-0kygtmnvpb8",
     "type": "Villament",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -2135,7 +2135,7 @@
   {
     "id": "id-1721973172132-ip9yen5ly5",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -2144,7 +2144,7 @@
   {
     "id": "id-1721973176801-x6pb3j5j5sl",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -2171,7 +2171,7 @@
   {
     "id": "id-1721973173412-crvfkkwxdz9",
     "type": "Independent House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -2648,7 +2648,7 @@
   {
     "id": "id-1721973172430-t6988g69x7",
     "type": "Independent House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -2693,7 +2693,7 @@
   {
     "id": "id-1721973177685-3k41wgyaeed",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -2747,7 +2747,7 @@
   {
     "id": "id-1721973173479-snnyv8vxlf",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -2783,7 +2783,7 @@
   {
     "id": "id-1721973174395-nd7fu404jjf",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -2900,7 +2900,7 @@
   {
     "id": "id-1721973176087-4bwhgwt9cmm",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -2999,7 +2999,7 @@
   {
     "id": "id-1721973174763-zkceuzqjjg",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -3008,7 +3008,7 @@
   {
     "id": "id-1721973177379-1vqzealnw1m",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -3098,7 +3098,7 @@
   {
     "id": "id-1721973175146-r3jmwy0zer",
     "type": "Independent House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -3260,7 +3260,7 @@
   {
     "id": "id-1721973175427-8qfyrwxlpzu",
     "type": "Independent House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -3269,7 +3269,7 @@
   {
     "id": "id-1721973177023-qx5lssfzcn",
     "type": "Independent House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -3332,7 +3332,7 @@
   {
     "id": "id-1721973173399-l0u0texf90n",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -3341,7 +3341,7 @@
   {
     "id": "id-1721973177356-q6ak7ecf31",
     "type": "Independent House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -3350,7 +3350,7 @@
   {
     "id": "id-1721973176386-iuy3zp9ezo",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "Luxury",
@@ -3431,7 +3431,7 @@
   {
     "id": "id-1721973175841-0wzvdg8rnkbc",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -3440,7 +3440,7 @@
   {
     "id": "id-1721973172589-bw3g2yl0gbq",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -3476,7 +3476,7 @@
   {
     "id": "id-1721973172566-sm6jx1a5e8",
     "type": "Villament",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -3575,7 +3575,7 @@
   {
     "id": "id-1721973175316-j5wcb5b6bi",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -3674,7 +3674,7 @@
   {
     "id": "id-1721973173004-12dr469dhq1n",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -3737,7 +3737,7 @@
   {
     "id": "id-1721973177937-1jv070cmopk",
     "type": "Independent House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -3854,7 +3854,7 @@
   {
     "id": "id-1721973172359-2mpf2p861mz",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -3908,7 +3908,7 @@
   {
     "id": "id-1721973176044-5x0m8i5e66g",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -3953,7 +3953,7 @@
   {
     "id": "id-1721973171519-husgh65m8il",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "Best Selling",
@@ -4088,7 +4088,7 @@
   {
     "id": "id-1721973172207-qe709cvsy1g",
     "type": "Villament",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "Best Selling",
@@ -4097,7 +4097,7 @@
   {
     "id": "id-1721973172314-dkqys2f06ie",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -4106,7 +4106,7 @@
   {
     "id": "id-1721973172497-6msejvn3r5q",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -4115,7 +4115,7 @@
   {
     "id": "id-1721973175002-mw4ppankd5h",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -4313,7 +4313,7 @@
   {
     "id": "id-1721973177526-veevqmkxoy",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "Best Selling",
@@ -4385,7 +4385,7 @@
   {
     "id": "id-1721973175524-lah2f5bxzhj",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -4439,7 +4439,7 @@
   {
     "id": "id-1721973173253-3exqfgwc5no",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -4466,7 +4466,7 @@
   {
     "id": "id-1721973177074-o32aok2v95q",
     "type": "Villament",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -4538,7 +4538,7 @@
   {
     "id": "id-1721973176988-s0irc5qjcc",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "New Launch",
@@ -4817,7 +4817,7 @@
   {
     "id": "id-1721973171834-0iuee0lpux3",
     "type": "Independent House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -4835,7 +4835,7 @@
   {
     "id": "id-1721973172898-vnrenahisas",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "In Demand",
@@ -4853,7 +4853,7 @@
   {
     "id": "id-1721973177637-xnvv85875ho",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "New Launch",
@@ -4934,7 +4934,7 @@
   {
     "id": "id-1721973174019-56pyhsarhj",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -4943,7 +4943,7 @@
   {
     "id": "id-1721973178232-qr81anqoyl",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -4952,7 +4952,7 @@
   {
     "id": "id-1721973178292-qojw6739k6",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "Best Selling",
@@ -5123,7 +5123,7 @@
   {
     "id": "id-1721973174317-nsa0k9gwqro",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -5267,7 +5267,7 @@
   {
     "id": "id-1721973176832-d2dsz1t6zam",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "Hot Deal",
@@ -5555,7 +5555,7 @@
   {
     "id": "id-1721973174536-ih8ai91t4oh",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "New Launch",
@@ -5591,7 +5591,7 @@
   {
     "id": "id-1721973173369-n4fo0tfxew9",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -5672,7 +5672,7 @@
   {
     "id": "id-1721973175779-g8mljkzw38p",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -5879,7 +5879,7 @@
   {
     "id": "id-1721973173243-6iv7uzwrghk",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -5906,7 +5906,7 @@
   {
     "id": "id-1721973176647-d71k0apyzls",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -6239,7 +6239,7 @@
   {
     "id": "id-1721973173198-z231f9nui5",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -6275,7 +6275,7 @@
   {
     "id": "id-1721973178129-0522bmxa52sb",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -6293,7 +6293,7 @@
   {
     "id": "id-1721973177004-c08ww8q9ufr",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -6644,7 +6644,7 @@
   {
     "id": "id-1721973177369-hl1z3j3u2rh",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -6824,7 +6824,7 @@
   {
     "id": "id-1721973173243-zxcoh9epjcl",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -6878,7 +6878,7 @@
   {
     "id": "id-1721973175898-iasqfenjw6",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -7004,7 +7004,7 @@
   {
     "id": "id-1721973173209-tzjxneq8bdd",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "In Demand",
@@ -7031,7 +7031,7 @@
   {
     "id": "id-1721973177866-q8pwyyazdbe",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -7139,7 +7139,7 @@
   {
     "id": "id-1721973176585-znza82bodj",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -7175,7 +7175,7 @@
   {
     "id": "id-1721973173406-0yw5n1rfuka",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -7256,7 +7256,7 @@
   {
     "id": "id-1721973171493-ok9gq31qsyj",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "Affordable",
@@ -7355,7 +7355,7 @@
   {
     "id": "id-1721973177720-cugod01kfe4",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -7436,7 +7436,7 @@
   {
     "id": "id-1721973176574-y3ib1ss83v",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -7571,7 +7571,7 @@
   {
     "id": "id-1721973174181-or26kh3m69",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -7643,7 +7643,7 @@
   {
     "id": "id-1721973172864-yl86ow9raza",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -7670,7 +7670,7 @@
   {
     "id": "id-1721973176802-4uhgzobaie2",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "Exclusive",
@@ -7832,7 +7832,7 @@
   {
     "id": "id-1721973174246-c36hvd7s0i",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -7940,7 +7940,7 @@
   {
     "id": "id-1721973176905-9khz6fe0w4n",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -7958,7 +7958,7 @@
   {
     "id": "id-1721973171677-46lcwfy6dbb",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -7994,7 +7994,7 @@
   {
     "id": "id-1721973176364-dn2x5xwf9m7",
     "type": "Independent House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -8030,7 +8030,7 @@
   {
     "id": "id-1721973175231-ne01sjw3u6j",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -8084,7 +8084,7 @@
   {
     "id": "id-1721973176932-v82simbyrp",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -8291,7 +8291,7 @@
   {
     "id": "id-1721973172696-9ksq0haumbh",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -8786,7 +8786,7 @@
   {
     "id": "id-1721973175578-axcoirm2hvn",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -8912,7 +8912,7 @@
   {
     "id": "id-1721973177005-li9t5tyg1t",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "Luxury",
@@ -9047,7 +9047,7 @@
   {
     "id": "id-1721973174409-ew80vuormml",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "New Launch",
@@ -9074,7 +9074,7 @@
   {
     "id": "id-1721973176800-ola20sqi0p",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -9092,7 +9092,7 @@
   {
     "id": "id-1721973171635-7vt100bn4sf",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -9128,7 +9128,7 @@
   {
     "id": "id-1721973172576-zmx619fac9",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -9182,7 +9182,7 @@
   {
     "id": "id-1721973177729-7q2i15wm28w",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -9254,7 +9254,7 @@
   {
     "id": "id-1721973177146-jlojjw0gwl",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -9470,7 +9470,7 @@
   {
     "id": "id-1721973174964-65a0hzllfi",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -9488,7 +9488,7 @@
   {
     "id": "id-1721973176516-uk8kyke764",
     "type": "Villament",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -9497,7 +9497,7 @@
   {
     "id": "id-1721973174710-9ie5z46qjfn",
     "type": "Villament",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -9515,7 +9515,7 @@
   {
     "id": "id-1721973177353-1g6ypshnuk5",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "New Launch",
@@ -9578,7 +9578,7 @@
   {
     "id": "id-1721973173512-bp271qtb64m",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "Exclusive",
@@ -9587,7 +9587,7 @@
   {
     "id": "id-1721973172708-nil7e5qsgc",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -9650,7 +9650,7 @@
   {
     "id": "id-1721973173111-50xh99qw72u",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -9722,7 +9722,7 @@
   {
     "id": "id-1721973176356-6y0fohlcjxi",
     "type": "Independent House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "Best Selling",
@@ -9812,7 +9812,7 @@
   {
     "id": "id-1721973175846-htlzxfnh1ld",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -10028,7 +10028,7 @@
   {
     "id": "id-1721973171613-2jwuv9uwm67",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -10505,7 +10505,7 @@
   {
     "id": "id-1721973177222-w79ssbm0nk",
     "type": "Independent House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "In Demand",
@@ -10658,7 +10658,7 @@
   {
     "id": "id-1721973177517-yo7b037omec",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "Affordable",
@@ -10712,7 +10712,7 @@
   {
     "id": "id-1721973177632-u7kh91jovvo",
     "type": "Villament",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -11135,7 +11135,7 @@
   {
     "id": "id-1721973175046-0zzov4r5y36n",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -11342,7 +11342,7 @@
   {
     "id": "id-1721973176783-o3qawbvd2dl",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -11459,7 +11459,7 @@
   {
     "id": "id-1721973171489-hsakuzopa85",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -11549,7 +11549,7 @@
   {
     "id": "id-1721973172185-chww9lqra4c",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -11648,7 +11648,7 @@
   {
     "id": "id-1721973178146-7e1frek5m46",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -11657,7 +11657,7 @@
   {
     "id": "id-1721973177475-a4aq4gcojkw",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -11675,7 +11675,7 @@
   {
     "id": "id-1721973173472-vehl1tfwh6r",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -11729,7 +11729,7 @@
   {
     "id": "id-1721973177519-j9i7vhvl369",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -11792,7 +11792,7 @@
   {
     "id": "id-1721973177548-tj5m1qt4pk",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -11819,7 +11819,7 @@
   {
     "id": "id-1721973172243-fk3bjcel2e",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -11972,7 +11972,7 @@
   {
     "id": "id-1721973174341-m73ij6i2tml",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "In Demand",
@@ -12044,7 +12044,7 @@
   {
     "id": "id-1721973176331-9dcper8iyy",
     "type": "Independent House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -12089,7 +12089,7 @@
   {
     "id": "id-1721973178154-40r7ypezyx3",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "Best in 2024",
@@ -12098,7 +12098,7 @@
   {
     "id": "id-1721973175332-pu8jptcbec9",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -12656,7 +12656,7 @@
   {
     "id": "id-1721973173697-94e7ckmuaos",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -12755,7 +12755,7 @@
   {
     "id": "id-1721973176081-fxyguo95y5w",
     "type": "Villament",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -12782,7 +12782,7 @@
   {
     "id": "id-1721973176387-j4umyanot2b",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -12917,7 +12917,7 @@
   {
     "id": "id-1721973177836-vhrinad1ed",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -12980,7 +12980,7 @@
   {
     "id": "id-1721973173552-yszghpj2leg",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -13043,7 +13043,7 @@
   {
     "id": "id-1721973177065-0real3i7f1q",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "Exclusive",
@@ -13178,7 +13178,7 @@
   {
     "id": "id-1721973176915-1ywknv4umg5",
     "type": "Independent House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "Hot Deal",
@@ -13277,7 +13277,7 @@
   {
     "id": "id-1721973177405-kd82srdgw8n",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "Affordable",
@@ -13430,7 +13430,7 @@
   {
     "id": "id-1721973174962-odivl5en11",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -13466,7 +13466,7 @@
   {
     "id": "id-1721973173236-gwh0b3tbl6p",
     "type": "Villament",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -13511,7 +13511,7 @@
   {
     "id": "id-1721973175695-e801ozpvtiw",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -13520,7 +13520,7 @@
   {
     "id": "id-1721973176896-5m03e6h2jn2",
     "type": "Independent House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -13574,7 +13574,7 @@
   {
     "id": "id-1721973173318-beqirpp2fap",
     "type": "Independent House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -13682,7 +13682,7 @@
   {
     "id": "id-1721973177453-7u0vjsd1cgn",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -13943,7 +13943,7 @@
   {
     "id": "id-1721973177363-9x2pfd6td3i",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -13961,7 +13961,7 @@
   {
     "id": "id-1721973178268-omeg4dk4nz",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "Exclusive",
@@ -14213,7 +14213,7 @@
   {
     "id": "id-1721973175395-niamuzgsd2",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -14510,7 +14510,7 @@
   {
     "id": "id-1721973176846-swzbmopzmrf",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -14555,7 +14555,7 @@
   {
     "id": "id-1721973172124-cd67yjurl74",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "Hot Deal",
@@ -14771,7 +14771,7 @@
   {
     "id": "id-1721973177383-wiuwyen8wdp",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -15104,7 +15104,7 @@
   {
     "id": "id-1721973176099-um4ykc0zkrf",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -15419,7 +15419,7 @@
   {
     "id": "id-1721973172310-owofwk4wmj",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -15671,7 +15671,7 @@
   {
     "id": "id-1721973176746-23z9biyluef",
     "type": "Independent House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -16022,7 +16022,7 @@
   {
     "id": "id-1721973176898-m62lgzn0c7",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -16166,7 +16166,7 @@
   {
     "id": "id-1721973177249-oh11fubfb2q",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -16238,7 +16238,7 @@
   {
     "id": "id-1721973177183-1dw3ppcep73",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -16373,7 +16373,7 @@
   {
     "id": "id-1721973177866-nl5quksjj4a",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -16409,7 +16409,7 @@
   {
     "id": "id-1721973175284-piyxe3qwuvi",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -16427,7 +16427,7 @@
   {
     "id": "id-1721973175441-hwmu0478ikl",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -16454,7 +16454,7 @@
   {
     "id": "id-1721973178018-d6jkixshm2r",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -17048,7 +17048,7 @@
   {
     "id": "id-1721973174118-2tzwutecg4p",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "Best in 2024",
@@ -17147,7 +17147,7 @@
   {
     "id": "id-1721973176479-yoob8nwjcs",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "Affordable",
@@ -17165,7 +17165,7 @@
   {
     "id": "id-1721973171741-yy9idjl32qa",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -17300,7 +17300,7 @@
   {
     "id": "id-1721973172833-gm8vgqysqs5",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -17318,7 +17318,7 @@
   {
     "id": "id-1721973173345-1fa6d4tw93q",
     "type": "Villament",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -17480,7 +17480,7 @@
   {
     "id": "id-1721973176977-uy41lpk55ob",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -17741,7 +17741,7 @@
   {
     "id": "id-1721973175473-ri31oe3aj7h",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -17903,7 +17903,7 @@
   {
     "id": "id-1721973175667-1deh721j6zz",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -17921,7 +17921,7 @@
   {
     "id": "id-1721973175382-g7zpehrckzt",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "Premium",
@@ -17930,7 +17930,7 @@
   {
     "id": "id-1721973177929-05t8wr1bzc8p",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -18056,7 +18056,7 @@
   {
     "id": "id-1721973176486-8obm8eped64",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -18083,7 +18083,7 @@
   {
     "id": "id-1721973172847-i3y6kef0vc",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -18110,7 +18110,7 @@
   {
     "id": "id-1721973176986-8ewqgc7l3wo",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -18137,7 +18137,7 @@
   {
     "id": "id-1721973175443-8viharm9mdr",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -18146,7 +18146,7 @@
   {
     "id": "id-1721973176919-39wje6supoo",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "Hot Deal",
@@ -18209,7 +18209,7 @@
   {
     "id": "id-1721973173539-ay2ygn59rca",
     "type": "Villament",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -18371,7 +18371,7 @@
   {
     "id": "id-1721973171698-tj4nb2ut9p",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -18425,7 +18425,7 @@
   {
     "id": "id-1721973177372-wscoifqv69s",
     "type": "Independent House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -18443,7 +18443,7 @@
   {
     "id": "id-1721973172513-daza5dzk3jb",
     "type": "Independent House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "Hot Deal",
@@ -18452,7 +18452,7 @@
   {
     "id": "id-1721973176829-7pbf7slt6cq",
     "type": "Independent House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "Luxury",
@@ -18677,7 +18677,7 @@
   {
     "id": "id-1721973171664-zres1knqcj",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -18848,7 +18848,7 @@
   {
     "id": "id-1721973174001-geoenc6f8br",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -19244,7 +19244,7 @@
   {
     "id": "id-1721973176249-xi4hxsz7oa",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -19415,7 +19415,7 @@
   {
     "id": "id-1721973177328-qrjaty6pskn",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -19460,7 +19460,7 @@
   {
     "id": "id-1721973171772-ez981eq3r7q",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -19523,7 +19523,7 @@
   {
     "id": "id-1721973175215-rhlj6334xm7",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -19532,7 +19532,7 @@
   {
     "id": "id-1721973175047-wysy71yyrjb",
     "type": "Villament",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -19550,7 +19550,7 @@
   {
     "id": "id-1721973177602-womk1fikygg",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -19622,7 +19622,7 @@
   {
     "id": "id-1721973177338-4el096iqpva",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -19802,7 +19802,7 @@
   {
     "id": "id-1721973177487-m0pimv7vzmi",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -19811,7 +19811,7 @@
   {
     "id": "id-1721973177888-31gumogc63j",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -19964,7 +19964,7 @@
   {
     "id": "id-1721973175163-zoswkqv0jn",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -20063,7 +20063,7 @@
   {
     "id": "id-1721973175350-qyx7tw2d60c",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -20216,7 +20216,7 @@
   {
     "id": "id-1721973172419-a9c8bthrlzw",
     "type": "Independent House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -20261,7 +20261,7 @@
   {
     "id": "id-1721973174740-uw73pqkgfg",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -20396,7 +20396,7 @@
   {
     "id": "id-1721973176784-ttgaijcetc8",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -20513,7 +20513,7 @@
   {
     "id": "id-1721973176270-r30dsqiplu",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -20549,7 +20549,7 @@
   {
     "id": "id-1721973175384-7tlfposuvkp",
     "type": "Independent House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -20594,7 +20594,7 @@
   {
     "id": "id-1721973178215-gsleus7szvj",
     "type": "Villament",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -20810,7 +20810,7 @@
   {
     "id": "id-1721973173808-3mmlnyhvah4",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -20837,7 +20837,7 @@
   {
     "id": "id-1721973176812-zpu24pw3mk8",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -20882,7 +20882,7 @@
   {
     "id": "id-1721973174439-epxp7z32zlv",
     "type": "Independent House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "Premium",
@@ -20909,7 +20909,7 @@
   {
     "id": "id-1721973173414-ptlrhm6qbto",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -21080,7 +21080,7 @@
   {
     "id": "id-1721973176715-fqqijmivb68",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -21116,7 +21116,7 @@
   {
     "id": "id-1721973176816-hh9qnwx3ad6",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -21143,7 +21143,7 @@
   {
     "id": "id-1721973172664-6gv7jsabnes",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -21161,7 +21161,7 @@
   {
     "id": "id-1721973172776-qsmdm89up2",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -21476,7 +21476,7 @@
   {
     "id": "id-1721973177824-qg2khvj3fk",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -21530,7 +21530,7 @@
   {
     "id": "id-1721973174935-voknsmw2g",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -21539,7 +21539,7 @@
   {
     "id": "id-1721973174399-63yaf3th7vh",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -21602,7 +21602,7 @@
   {
     "id": "id-1721973175119-gtb2gz7spkv",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -21620,7 +21620,7 @@
   {
     "id": "id-1721973174886-k5m4f3kl25i",
     "type": "Independent House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -21701,7 +21701,7 @@
   {
     "id": "id-1721973176601-qnk77ks7f5p",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -21737,7 +21737,7 @@
   {
     "id": "id-1721973178072-79w856278x7",
     "type": "Villament",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -21827,7 +21827,7 @@
   {
     "id": "id-1721973175025-yo35t7qsz4",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "In Demand",
@@ -21836,7 +21836,7 @@
   {
     "id": "id-1721973174973-f96hq2yw72f",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -21872,7 +21872,7 @@
   {
     "id": "id-1721973177969-ri3c915yvci",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "In Demand",
@@ -22133,7 +22133,7 @@
   {
     "id": "id-1721973177331-l0r64l6l78",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -22277,7 +22277,7 @@
   {
     "id": "id-1721973175490-xmhb6ocn0qk",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "Best Selling",
@@ -22304,7 +22304,7 @@
   {
     "id": "id-1721973172211-yskkl8wn9na",
     "type": "Independent House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -22322,7 +22322,7 @@
   {
     "id": "id-1721973172832-kvsd65z3ala",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -22403,7 +22403,7 @@
   {
     "id": "id-1721973174660-7ahkriytojb",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -22682,7 +22682,7 @@
   {
     "id": "id-1721973177533-uvlbp48yw4f",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "Premium",
@@ -22781,7 +22781,7 @@
   {
     "id": "id-1721973173148-lyw8in6an7h",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -22826,7 +22826,7 @@
   {
     "id": "id-1721973175355-crci7edjyl",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -23051,7 +23051,7 @@
   {
     "id": "id-1721973172821-sqdfh2nnsne",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -23069,7 +23069,7 @@
   {
     "id": "id-1721973173616-jgs0qn446u",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "Luxury",
@@ -23384,7 +23384,7 @@
   {
     "id": "id-1721973175175-gq3gro1n83b",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -23393,7 +23393,7 @@
   {
     "id": "id-1721973172443-jdk8yyfjv7",
     "type": "Independent House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -23528,7 +23528,7 @@
   {
     "id": "id-1721973174183-87mvdggjrkj",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -23546,7 +23546,7 @@
   {
     "id": "id-1721973177874-xxowznbbqrf",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -23744,7 +23744,7 @@
   {
     "id": "id-1721973174723-ieuex7jlt6k",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -23843,7 +23843,7 @@
   {
     "id": "id-1721973175516-ywggj0gtmhh",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -23978,7 +23978,7 @@
   {
     "id": "id-1721973175679-jjnsyolol0b",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -24068,7 +24068,7 @@
   {
     "id": "id-1721973171572-3cxsza2qgob",
     "type": "Villament",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -24167,7 +24167,7 @@
   {
     "id": "id-1721973171804-kp4dxfa9up",
     "type": "Independent House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -24212,7 +24212,7 @@
   {
     "id": "id-1721973172058-nnv4twk9gy",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -24266,7 +24266,7 @@
   {
     "id": "id-1721973173451-jojmfg151o",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "Best Selling",
@@ -24824,7 +24824,7 @@
   {
     "id": "id-1721973175926-qgwu9h8xic",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -25148,7 +25148,7 @@
   {
     "id": "id-1721973175911-5oymzcr0sz7",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "Premium",
@@ -25175,7 +25175,7 @@
   {
     "id": "id-1721973172776-oww3w255m9r",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -25229,7 +25229,7 @@
   {
     "id": "id-1721973171506-jtcef6zggom",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -25328,7 +25328,7 @@
   {
     "id": "id-1721973171548-w5i84jlc5o",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "Best Selling",
@@ -25535,7 +25535,7 @@
   {
     "id": "id-1721973177837-xkbdupbliy",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -26021,7 +26021,7 @@
   {
     "id": "id-1721973174569-ixqaxdj8se",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "Premium",
@@ -26075,7 +26075,7 @@
   {
     "id": "id-1721973174058-ntqxqns27qs",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -26084,7 +26084,7 @@
   {
     "id": "id-1721973172161-9pplx3sn2kw",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -26129,7 +26129,7 @@
   {
     "id": "id-1721973176766-61yh8bkh1te",
     "type": "Villament",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -26255,7 +26255,7 @@
   {
     "id": "id-1721973177098-smllk39rig",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -26291,7 +26291,7 @@
   {
     "id": "id-1721973177020-7uxqk3mzn7a",
     "type": "Independent House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "In Demand",
@@ -26336,7 +26336,7 @@
   {
     "id": "id-1721973177935-lrfrlsgsm2e",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -26453,7 +26453,7 @@
   {
     "id": "id-1721973171760-ptmxmo7pci",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "Luxury",
@@ -26471,7 +26471,7 @@
   {
     "id": "id-1721973177223-2o7uo0bgqg3",
     "type": "Villament",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -26570,7 +26570,7 @@
   {
     "id": "id-1721973172830-hcu1jgn9ef",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -26615,7 +26615,7 @@
   {
     "id": "id-1721973173678-fxk57u1ri8p",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -26741,7 +26741,7 @@
   {
     "id": "id-1721973174402-nrualnyr86",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -26777,7 +26777,7 @@
   {
     "id": "id-1721973176706-ait3ili4vrn",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -26813,7 +26813,7 @@
   {
     "id": "id-1721973172139-hv22enaqy5v",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -27083,7 +27083,7 @@
   {
     "id": "id-1721973175747-zvzd42c27o",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -27245,7 +27245,7 @@
   {
     "id": "id-1721973176882-lsxr7dzdo3",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -27290,7 +27290,7 @@
   {
     "id": "id-1721973176917-7uk9h4qgwzc",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -27614,7 +27614,7 @@
   {
     "id": "id-1721973172752-lshbd0818nn",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "In Demand",
@@ -27623,7 +27623,7 @@
   {
     "id": "id-1721973174615-dt7e09hs60n",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -27884,7 +27884,7 @@
   {
     "id": "id-1721973177606-2q3etayjh6k",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -28028,7 +28028,7 @@
   {
     "id": "id-1721973177591-ddkj7r06jli",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -28127,7 +28127,7 @@
   {
     "id": "id-1721973176061-xj51v9i5c8",
     "type": "Villament",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "New Launch",
@@ -28280,7 +28280,7 @@
   {
     "id": "id-1721973171625-ynui750qdei",
     "type": "Independent House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -28289,7 +28289,7 @@
   {
     "id": "id-1721973173394-fhbvopk0jj7",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -28379,7 +28379,7 @@
   {
     "id": "id-1721973177169-662twcv80i2",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -28442,7 +28442,7 @@
   {
     "id": "id-1721973176227-8eq5nelxhld",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -28514,7 +28514,7 @@
   {
     "id": "id-1721973174000-frmz396pzov",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "Exclusive",
@@ -28568,7 +28568,7 @@
   {
     "id": "id-1721973171878-empq9tv2uih",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -28667,7 +28667,7 @@
   {
     "id": "id-1721973171825-3m4hs13boo",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -28712,7 +28712,7 @@
   {
     "id": "id-1721973173076-5e1azxtsjhy",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -28766,7 +28766,7 @@
   {
     "id": "id-1721973177485-590k9qbwm3u",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -28946,7 +28946,7 @@
   {
     "id": "id-1721973176765-h1cr8sgmxj",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -28955,7 +28955,7 @@
   {
     "id": "id-1721973176404-wppjy821o",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -29162,7 +29162,7 @@
   {
     "id": "id-1721973174091-g0aaudmeqps",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -29198,7 +29198,7 @@
   {
     "id": "id-1721973177774-fk2lcj8himn",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -29216,7 +29216,7 @@
   {
     "id": "id-1721973176135-v4uz7ta86s",
     "type": "Independent House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -29270,7 +29270,7 @@
   {
     "id": "id-1721973173614-czt3qzczluu",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -29351,7 +29351,7 @@
   {
     "id": "id-1721973172563-wu7bsil3vka",
     "type": "Villament",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -29360,7 +29360,7 @@
   {
     "id": "id-1721973173469-d863k8j019w",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -29603,7 +29603,7 @@
   {
     "id": "id-1721973172596-327gxj92ugf",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -29675,7 +29675,7 @@
   {
     "id": "id-1721973177044-m6lcssrmuz",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -29711,7 +29711,7 @@
   {
     "id": "id-1721973172036-hrcxz98xfup",
     "type": "Independent House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -29738,7 +29738,7 @@
   {
     "id": "id-1721973173549-pq0ur2wvt6c",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -29819,7 +29819,7 @@
   {
     "id": "id-1721973177282-z3muhpvfleq",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -30062,7 +30062,7 @@
   {
     "id": "id-1721973178336-stkp1xq2qj",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -30512,7 +30512,7 @@
   {
     "id": "id-1721973172120-erhwhkoyzmp",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -30557,7 +30557,7 @@
   {
     "id": "id-1721973175934-k3brg6canms",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -30575,7 +30575,7 @@
   {
     "id": "id-1721973175004-5pyc2cak3x4",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -30701,7 +30701,7 @@
   {
     "id": "id-1721973173313-wcrkyibljg",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "New Launch",
@@ -30791,7 +30791,7 @@
   {
     "id": "id-1721973173519-gytcdcbwbu",
     "type": "Independent House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "In Demand",
@@ -30872,7 +30872,7 @@
   {
     "id": "id-1721973177979-ewkd56ul1w6",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -30881,7 +30881,7 @@
   {
     "id": "id-1721973173664-p2nzjtzy38j",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -30980,7 +30980,7 @@
   {
     "id": "id-1721973174691-6jh4krl33tr",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "In Demand",
@@ -31007,7 +31007,7 @@
   {
     "id": "id-1721973172250-ezr58qxpim",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -31052,7 +31052,7 @@
   {
     "id": "id-1721973175482-77c57p5rov7",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "Affordable",
@@ -31079,7 +31079,7 @@
   {
     "id": "id-1721973175416-8u0zbj3ajgu",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -31241,7 +31241,7 @@
   {
     "id": "id-1721973172269-yqpofmaxqak",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -31412,7 +31412,7 @@
   {
     "id": "id-1721973174844-6rsiqwrzoq3",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -31448,7 +31448,7 @@
   {
     "id": "id-1721973171542-ga3hbtoeq4d",
     "type": "Independent House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -31565,7 +31565,7 @@
   {
     "id": "id-1721973174330-jeo6a32ptf9",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "Exclusive",
@@ -31610,7 +31610,7 @@
   {
     "id": "id-1721973174587-a4va1tvuv8b",
     "type": "Villament",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "In Demand",
@@ -31628,7 +31628,7 @@
   {
     "id": "id-1721973175194-4jz7rkz0azd",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -31664,7 +31664,7 @@
   {
     "id": "id-1721973175532-g3pb0cp6x8t",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -31709,7 +31709,7 @@
   {
     "id": "id-1721973177613-6ys7du7i789",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -31790,7 +31790,7 @@
   {
     "id": "id-1721973174804-xsb9ljcjwla",
     "type": "Villament",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -31817,7 +31817,7 @@
   {
     "id": "id-1721973175726-pvjj1pnbi3",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -31916,7 +31916,7 @@
   {
     "id": "id-1721973176788-u35rn8mujia",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -31934,7 +31934,7 @@
   {
     "id": "id-1721973173183-sndhhyibcjd",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -31997,7 +31997,7 @@
   {
     "id": "id-1721973175943-bigyxkj4iyu",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -32159,7 +32159,7 @@
   {
     "id": "id-1721973175665-oni6joi0dp",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "Best in 2024",
@@ -32168,7 +32168,7 @@
   {
     "id": "id-1721973172921-dy9o7ina5il",
     "type": "Villament",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "Luxury",
@@ -32222,7 +32222,7 @@
   {
     "id": "id-1721973174434-it01zr23e8m",
     "type": "Independent House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -32240,7 +32240,7 @@
   {
     "id": "id-1721973176329-8pygf2tj4da",
     "type": "Independent House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -32429,7 +32429,7 @@
   {
     "id": "id-1721973176612-m9gg0zrduro",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "Best Selling",
@@ -32492,7 +32492,7 @@
   {
     "id": "id-1721973171626-pwbpv9yjp0j",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -32591,7 +32591,7 @@
   {
     "id": "id-1721973172167-obgxr471hoq",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -32627,7 +32627,7 @@
   {
     "id": "id-1721973175207-q6zbhn9r8v",
     "type": "Villament",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -32987,7 +32987,7 @@
   {
     "id": "id-1721973174787-1qfcs7yti1u",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "Exclusive",
@@ -33302,7 +33302,7 @@
   {
     "id": "id-1721973177983-g709ygab79i",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -33527,7 +33527,7 @@
   {
     "id": "id-1721973177998-fcnx688391",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -33563,7 +33563,7 @@
   {
     "id": "id-1721973177165-x055o3v7zsj",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -33887,7 +33887,7 @@
   {
     "id": "id-1721973172112-vcay4c71em",
     "type": "Independent House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -33986,7 +33986,7 @@
   {
     "id": "id-1721973176234-x8jiv7mteo",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -34157,7 +34157,7 @@
   {
     "id": "id-1721973172394-j20lq1zqhkm",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "Luxury",
@@ -34202,7 +34202,7 @@
   {
     "id": "id-1721973171544-p99ynwcm5gs",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -34211,7 +34211,7 @@
   {
     "id": "id-1721973172427-ltrl3jhyxod",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -34238,7 +34238,7 @@
   {
     "id": "id-1721973173226-k1cn11e9w7p",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -34445,7 +34445,7 @@
   {
     "id": "id-1721973178073-fybvkrmkx85",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -34463,7 +34463,7 @@
   {
     "id": "id-1721973175795-j1qjx1vnm09",
     "type": "Villament",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -34490,7 +34490,7 @@
   {
     "id": "id-1721973178324-7u2hshxkvzr",
     "type": "Villament",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -34526,7 +34526,7 @@
   {
     "id": "id-1721973173528-l0bmvvq80nh",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -34697,7 +34697,7 @@
   {
     "id": "id-1721973174184-q82k26qqw7",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "Best in 2024",
@@ -34715,7 +34715,7 @@
   {
     "id": "id-1721973173060-82yybh42lkj",
     "type": "Villament",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -34769,7 +34769,7 @@
   {
     "id": "id-1721973172993-ro6gdwbzqbi",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -34859,7 +34859,7 @@
   {
     "id": "id-1721973175694-0gllu5slyzsr",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -34868,7 +34868,7 @@
   {
     "id": "id-1721973177099-t078hehmdmr",
     "type": "Villament",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -34895,7 +34895,7 @@
   {
     "id": "id-1721973172177-ecstohamrg",
     "type": "Villament",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -34940,7 +34940,7 @@
   {
     "id": "id-1721973176127-472akvz1mwc",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -35039,7 +35039,7 @@
   {
     "id": "id-1721973174001-w5pmjvc71pb",
     "type": "Villament",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -35264,7 +35264,7 @@
   {
     "id": "id-1721973176785-fyoojsjc0gt",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -35282,7 +35282,7 @@
   {
     "id": "id-1721973175335-9ym91a2pdke",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -35552,7 +35552,7 @@
   {
     "id": "id-1721973173178-2nr7f3iifoq",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -35579,7 +35579,7 @@
   {
     "id": "id-1721973177237-7xmnez366h7",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -35687,7 +35687,7 @@
   {
     "id": "id-1721973175503-qntruyeiy9j",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -35957,7 +35957,7 @@
   {
     "id": "id-1721973176805-nrjetjc407a",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -36038,7 +36038,7 @@
   {
     "id": "id-1721973176345-ysldbsv5xhe",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -36128,7 +36128,7 @@
   {
     "id": "id-1721973174397-srpe75nx3ib",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -36164,7 +36164,7 @@
   {
     "id": "id-1721973175447-xa5oouiltze",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -36182,7 +36182,7 @@
   {
     "id": "id-1721973177217-bqiig91y245",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -36236,7 +36236,7 @@
   {
     "id": "id-1721973174501-r7l4qjr1ci8",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "Best in 2024",
@@ -36254,7 +36254,7 @@
   {
     "id": "id-1721973175598-1cbweqx3zyc",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -36263,7 +36263,7 @@
   {
     "id": "id-1721973175241-icsjuooala",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -36506,7 +36506,7 @@
   {
     "id": "id-1721973175139-syuemugvmhk",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "Exclusive",
@@ -36551,7 +36551,7 @@
   {
     "id": "id-1721973176115-0u7obv86aune",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "In Demand",
@@ -36686,7 +36686,7 @@
   {
     "id": "id-1721973176118-8n2athxs49r",
     "type": "Villament",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "Premium",
@@ -36758,7 +36758,7 @@
   {
     "id": "id-1721973174472-cq00y5xc6g",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -36767,7 +36767,7 @@
   {
     "id": "id-1721973172146-93aaxtbcok",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -36776,7 +36776,7 @@
   {
     "id": "id-1721973174117-9fht9bkgtm9",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -36911,7 +36911,7 @@
   {
     "id": "id-1721973175312-cfiuu6n2vti",
     "type": "Villament",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -37037,7 +37037,7 @@
   {
     "id": "id-1721973172138-x1igjn78ij",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -37118,7 +37118,7 @@
   {
     "id": "id-1721973173310-ax002usxm2r",
     "type": "Villament",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "Luxury",
@@ -37127,7 +37127,7 @@
   {
     "id": "id-1721973174700-a8pqb6fhyae",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -37208,7 +37208,7 @@
   {
     "id": "id-1721973172852-4vaqdz2xd6v",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -37262,7 +37262,7 @@
   {
     "id": "id-1721973175731-6d9bao7qoi6",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -37271,7 +37271,7 @@
   {
     "id": "id-1721973176771-enlkomrlix",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -37325,7 +37325,7 @@
   {
     "id": "id-1721973177273-ypb4k3o434",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -37568,7 +37568,7 @@
   {
     "id": "id-1721973174980-00zxfc2roay1j",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "Best in 2024",
@@ -37622,7 +37622,7 @@
   {
     "id": "id-1721973172316-vinh4ow5hnd",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -37811,7 +37811,7 @@
   {
     "id": "id-1721973174811-6413jrpp7uj",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -37883,7 +37883,7 @@
   {
     "id": "id-1721973175952-fkfiqrra08",
     "type": "Independent House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "Premium",
@@ -37910,7 +37910,7 @@
   {
     "id": "id-1721973178078-cbsb4euvio",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -37937,7 +37937,7 @@
   {
     "id": "id-1721973172765-krg1m7gc3ep",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "In Demand",
@@ -38063,7 +38063,7 @@
   {
     "id": "id-1721973177194-y6vn6nd0cjt",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -38081,7 +38081,7 @@
   {
     "id": "id-1721973172629-nheewbwg9mr",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "Luxury",
@@ -38333,7 +38333,7 @@
   {
     "id": "id-1721973175531-q0eaeqkkkyf",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -38414,7 +38414,7 @@
   {
     "id": "id-1721973172190-fy260kbahlt",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -38459,7 +38459,7 @@
   {
     "id": "id-1721973175612-sogxie0obfp",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -38648,7 +38648,7 @@
   {
     "id": "id-1721973171815-7xwaedesmhp",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -38756,7 +38756,7 @@
   {
     "id": "id-1721973174649-5ovbqgye7a5",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -38837,7 +38837,7 @@
   {
     "id": "id-1721973177173-mj9sjwb9r8e",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -38855,7 +38855,7 @@
   {
     "id": "id-1721973177949-tzlqnay7zsq",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "Best Selling",
@@ -38945,7 +38945,7 @@
   {
     "id": "id-1721973175550-sfopv1qhaum",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "Hot Deal",
@@ -39395,7 +39395,7 @@
   {
     "id": "id-1721973175946-7zi3yld6k1j",
     "type": "Independent House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -39638,7 +39638,7 @@
   {
     "id": "id-1721973176407-xui5gvxly3d",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "Luxury",
@@ -39737,7 +39737,7 @@
   {
     "id": "id-1721973175621-lw9b173252",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -39773,7 +39773,7 @@
   {
     "id": "id-1721973178037-pk3lx0r36mc",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -39782,7 +39782,7 @@
   {
     "id": "id-1721973174998-7xlx0eo63h2",
     "type": "Villament",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "Exclusive",
@@ -40061,7 +40061,7 @@
   {
     "id": "id-1721973172398-lcnzsbzr1v",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "Affordable",
@@ -40124,7 +40124,7 @@
   {
     "id": "id-1721973174173-0scidggh6yod",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -40214,7 +40214,7 @@
   {
     "id": "id-1721973172203-rdv3l0gk02f",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "Affordable",
@@ -40223,7 +40223,7 @@
   {
     "id": "id-1721973171632-xcxu0bo298",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "Hot Deal",
@@ -40259,7 +40259,7 @@
   {
     "id": "id-1721973174727-wpnr1uea1r",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -40412,7 +40412,7 @@
   {
     "id": "id-1721973175925-x8hkv6pk4ni",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -40430,7 +40430,7 @@
   {
     "id": "id-1721973172175-6iyqbputin3",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -40466,7 +40466,7 @@
   {
     "id": "id-1721973177694-rnppre8mly8",
     "type": "Independent House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -40484,7 +40484,7 @@
   {
     "id": "id-1721973176437-w86pebumyxa",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -40502,7 +40502,7 @@
   {
     "id": "id-1721973177800-wmc0cysuflq",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -40511,7 +40511,7 @@
   {
     "id": "id-1721973176056-3zrct6n9vvq",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -40646,7 +40646,7 @@
   {
     "id": "id-1721973175579-n884vi77ust",
     "type": "Independent House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -40664,7 +40664,7 @@
   {
     "id": "id-1721973178134-si962mvod1h",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "Best Selling",
@@ -40853,7 +40853,7 @@
   {
     "id": "id-1721973175023-rv0g1rj1tzd",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -40916,7 +40916,7 @@
   {
     "id": "id-1721973176967-7aegu5rnynp",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -40961,7 +40961,7 @@
   {
     "id": "id-1721973172182-d8nndtvaq57",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -40988,7 +40988,7 @@
   {
     "id": "id-1721973172215-g5ac92ko26b",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "Exclusive",
@@ -41042,7 +41042,7 @@
   {
     "id": "id-1721973178074-ya9aswt9qpc",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -41132,7 +41132,7 @@
   {
     "id": "id-1721973176650-92yusvbz5il",
     "type": "Villament",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "Best Selling",
@@ -41249,7 +41249,7 @@
   {
     "id": "id-1721973178006-itn07zvomua",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "Best in 2024",
@@ -41366,7 +41366,7 @@
   {
     "id": "id-1721973176398-m9u7t6ovje",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -41501,7 +41501,7 @@
   {
     "id": "id-1721973176920-dsl6oxuguit",
     "type": "Villament",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -41636,7 +41636,7 @@
   {
     "id": "id-1721973177638-8xgzkckt5yi",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "Luxury",
@@ -41672,7 +41672,7 @@
   {
     "id": "id-1721973174667-mzx5xtr7co",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -41726,7 +41726,7 @@
   {
     "id": "id-1721973172248-5v4bbqcu1fq",
     "type": "Independent House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -41753,7 +41753,7 @@
   {
     "id": "id-1721973178286-zn9rceuh5n",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -41897,7 +41897,7 @@
   {
     "id": "id-1721973175666-vktjglrie0n",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -41960,7 +41960,7 @@
   {
     "id": "id-1721973172365-gjdxgdhs3mw",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "Exclusive",
@@ -42059,7 +42059,7 @@
   {
     "id": "id-1721973174851-1kxyr70zudy",
     "type": "Villament",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -42140,7 +42140,7 @@
   {
     "id": "id-1721973176248-apy0ug4xhwh",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -42275,7 +42275,7 @@
   {
     "id": "id-1721973173100-tv1kr2dfc0s",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -42302,7 +42302,7 @@
   {
     "id": "id-1721973177536-6lejbm5wcx",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -42338,7 +42338,7 @@
   {
     "id": "id-1721973171734-pu0q7myier",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -42743,7 +42743,7 @@
   {
     "id": "id-1721973175767-bh27u3hlqa",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -42842,7 +42842,7 @@
   {
     "id": "id-1721973176341-mnzdrcfc1h",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -42986,7 +42986,7 @@
   {
     "id": "id-1721973173850-q71uuqz5mnc",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "Hot Deal",
@@ -43085,7 +43085,7 @@
   {
     "id": "id-1721973175297-j0v8mqtpmwo",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "Best Selling",
@@ -43346,7 +43346,7 @@
   {
     "id": "id-1721973172564-ye1pr4a9o28",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "Premium",
@@ -43445,7 +43445,7 @@
   {
     "id": "id-1721973174682-mlxm6xgdb18",
     "type": "Villament",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -43661,7 +43661,7 @@
   {
     "id": "id-1721973177905-m4tu950wce",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "2 BHK",
     "descriptor": "None",
@@ -43688,7 +43688,7 @@
   {
     "id": "id-1721973174536-p06hehjfi6",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -43760,7 +43760,7 @@
   {
     "id": "id-1721973173177-7vvzm0a11m5",
     "type": "Independent House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -44066,7 +44066,7 @@
   {
     "id": "id-1721973176346-lllxe4iwr",
     "type": "Row House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -44147,7 +44147,7 @@
   {
     "id": "id-1721973172683-fivpzvp0h9a",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -44183,7 +44183,7 @@
   {
     "id": "id-1721973178167-npnzbigu2t",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "1 BHK",
     "descriptor": "In Demand",
@@ -44255,7 +44255,7 @@
   {
     "id": "id-1721973175855-9ug2l0opxo",
     "type": "New Launched",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -44282,7 +44282,7 @@
   {
     "id": "id-1721973172700-vmdehzlhvw",
     "type": "Flat",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -44381,7 +44381,7 @@
   {
     "id": "id-1721973173137-awm12xktpuj",
     "type": "Apartment",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -44408,7 +44408,7 @@
   {
     "id": "id-1721973174134-bmug8u5lgte",
     "type": "Plot",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "4+ BHK",
     "descriptor": "None",
@@ -44480,7 +44480,7 @@
   {
     "id": "id-1721973175751-y0fliieqhv",
     "type": "Independent House",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "buy",
     "bhk": "3 BHK",
     "descriptor": "None",
@@ -44552,7 +44552,7 @@
   {
     "id": "id-1721973173458-d4a6yakavmg",
     "type": "Villament",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "1 BHK",
     "descriptor": "None",
@@ -44615,7 +44615,7 @@
   {
     "id": "id-1721973172383-ikne3ck0dhb",
     "type": "Villa",
-    "locality": "Bangalore",
+    "locality": "Bengaluru",
     "transaction": "sell",
     "bhk": "4+ BHK",
     "descriptor": "New Launch",

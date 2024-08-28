@@ -24,8 +24,8 @@ export const pathConfig = {
     pageTitle: "Property Details Page",
   },
   builder: {
-    pathPrefix: "/builder/",
-    redirectingPath: "/builder/",
+    pathPrefix: "/builders/bengaluru/",
+    redirectingPath: "/builders/bengaluru/",
     paramName: "builderId",
     pageType: PathType.Builder,
     pageTitle: "Builder Details Page",
@@ -46,7 +46,7 @@ export const pathConfig = {
   },
   postProperty: {
     pathPrefix: "/search/property",
-    redirectingPath: "/property/v1/",
+    redirectingPath: "/post-listing/v1/",
     paramName: "pp",
     pageType: PathType.PostProperty,
     pageTitle: "Post Property Page",

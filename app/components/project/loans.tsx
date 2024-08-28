@@ -19,7 +19,7 @@ export default function ProjectLoans({
 }) {
   const isMobile = useMediaQuery(`(max-width: 601px)`);
   return (
-    <div className="bg-white pt-2 pb-4 sm:pt-screen-spacing w-[95%] md:w-[90%] md:mb-[3%] sm:mb-[4%] mx-auto  h-auto  ">
+    <div className="bg-white pt-2 pb-4 sm:pt-screen-spacing w-[95%] md:w-[90%] mx-auto  h-auto  ">
       {type === "prop" ? (
         <PropertyHeading
           title="Bank Approvals Of"
@@ -28,7 +28,7 @@ export default function ProjectLoans({
         />
       ) : (
         <>
-          <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[10px] xl:mb-[24px] capitalize">
+          <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[10px] xl:mb-[12px] capitalize">
             Bank Approvals For{" "}
             <span className="text-[#148B16] font-[700] ">{name}</span>
           </h2>

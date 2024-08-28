@@ -52,7 +52,11 @@ const FirstBlock: React.FC<Props> = ({
     }
     setC("floorPlans");
     setTimeout(() => setIsScrolling(false), 3000);
-  }
+  };
+
+  let builderName = companyName ? companyName.toLowerCase().split(" ").join("%2D") : "";
+  let urlBuilder = `/builders/bengaluru/${builderName}`;
+
   return (
     <div
       className={`relative rounded-[10px] w-full m-auto bg-gray-50 sm:h-[545px]  xl:h-[750px] bg-cover flex justify-between items-start flex-col shadow-md break-words`}
@@ -129,7 +133,7 @@ const FirstBlock: React.FC<Props> = ({
                 <p className="text-[#242424] sm:text-[16px] xl:text-2xl not-italic font-semibold leading-[normal] mt-[14px]">
                   Posted By:{" "}
                   <a
-                    href={`/builder/${builderId}`}
+                    href={urlBuilder}
                     target="_blank"
                     className="text-btnPrimary sm:text-[16px] xl:text-2xl  font-bold leading-[normal] underline"
                   >

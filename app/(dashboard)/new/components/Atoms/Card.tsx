@@ -41,7 +41,7 @@ export default function MainCard({}: Props) {
               Prestige Green City
             </p>
             <p className="text-[#242424] text-sm not-italic font-semibold leading-[normal] capitalize">
-              Whitefield, Bangalore
+              Whitefield, Bengaluru
             </p>
           </div>
           <div className="flex gap-2">

@@ -10,13 +10,17 @@ import { convertDateToMonthYear } from "@/app/utils/date";
 import { capitalizeWords } from "@/app/utils/letters";
 
 type Props = {
-  id: number;
+  id: number; 
   type?: "prop" | "proj";
 };
 
 export default function AboutBuilder({ id, type = "proj" }: Props) {
   const { data } = useBuilder({ id, y: "N", type });
   const nzData = normalizeData(data, type);
+
+  let builderName = nzData.userName ? nzData.userName.toLowerCase().split(" ").join("%2D") : "";
+  let urlBuilder=`/builders/bengaluru/${builderName}`;
+
   return (
     <div
       className="w-[95%] md:w-[90%] scroll-mt-[150px] mb-[5%] !mt-[50px] sm:mb-[0%] rounded shadow-[0px_4px_17.6px_0px_rgba(146,178,200,0.40)] border-[0.5px] border-solid border-[#92B2C8] builderBg pt-4 pb-4 md:pb-6 sm:mt-0 sm:py-8 sm:pl-5 px-2 sm:px-0 "
@@ -95,8 +99,8 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
         </p>
         <a
           className=" bg-[#0073C6] rounded-[4px] text-[#FFF] text-[12px] sm:text-[18px] xl:text-[20px] font-[700] p-[10px]  "
-          href={`/builder/${id}`}
-          target="_blank"
+          href={urlBuilder}
+          target="_blank" 
         >
           View Builder Details
         </a>

@@ -17,21 +17,21 @@ export default function page({}: Props) {
     {
       profile: "Profile1",
       name: "Manish Kumar",
-      place: "Bangalore",
+      place: "Bengaluru",
       comment:
         "Get Right Property made finding my new home effortless! The platform is user-friendly, with up-to-date listings and easy navigation.!",
     },
     {
       profile: "Profile2",
       name: "Aayushi Dwivedi",
-      place: "Bangalore",
+      place: "Bengaluru",
       comment:
         "Get Right Property simplified my home search with its easy-to-use interface and up-to-date listings!",
     },
     {
       profile: "Profile3",
       name: "Ramya Krishnan",
-      place: "Bangalore",
+      place: "Bengaluru",
       comment:
         "Get Right Property made inquiring about projects easy, with quick and helpful responses every time!",
     },
