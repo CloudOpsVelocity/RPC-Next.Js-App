@@ -26,7 +26,7 @@ import StepCss from "@/app/styles/Stepper.module.css";
 import { useForm, yupResolver } from "@mantine/form";
 import { DateInput } from "@mantine/dates";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { styles } from "@/app/styles/Stepper";
 import { DropZone } from "./dropzone";
 import AuthPopup from "../authPopup";

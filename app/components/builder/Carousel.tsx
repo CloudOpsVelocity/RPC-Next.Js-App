@@ -14,6 +14,7 @@ import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import { useSetAtom } from "jotai";
 import { NearByDataAtom } from "@/app/store/nearby";
 import clsx from "clsx";
+import axios from "axios";
 
 type Props = {
   type: string;
@@ -212,6 +213,11 @@ const BuilderCarousel = ({
   data,
   location,
 }: Props) => {
+  const getBuilderProjects = () => {
+    const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/builder-details-project?builderId=103`;
+    const data = axios.get(url);
+    return data;
+  };
   return (
     <div className="w-full mb-[4%]">
       <h2 className="ml-2 text-[16px] sm:text-[20px] xl:text-[32px] font-semibold  cursor-pointer px-4 sm:px-0">
