@@ -28,12 +28,11 @@ interface Cluster {
 }
 const Map = ({ data, lat, lang }: any) => {
   const position: LatLngTuple = [lat, lang];
-  console.log(data);
   return (
     <>
       <MapContainer
         center={position}
-        className="md:max-h-[740px] max-h-[250px] w-full h-full -z-[1]"
+        className="sm:max-h-[740px] h-[250px] sm:h-full max-h-[250px] w-full sm:max-w-[700px] xl:w-full  -z-[1]"
         scrollWheelZoom={true}
         zoom={12}
       >
