@@ -38,12 +38,12 @@ export default function NearByCarouselProperty({
     >
       <ProjectCarousel
         type="prop"
-        title={`Other ${listingType} listings in this Project`}
+        title={`Other ${listingType} listings in ${projName}`}
         projName={""}
         content={
           propTypeName === "Independent House/Building"
             ? `Check some similar nearby ${listingType.toLowerCase()} listings available`
-            : `See some more ${listingType.toLowerCase()} listings available in this project`
+            : `See some more ${listingType.toLowerCase()} listings available in  ${projName}` 
         }
         data={
           data != undefined && data.projListing != undefined
