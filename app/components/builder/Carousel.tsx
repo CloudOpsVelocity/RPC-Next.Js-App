@@ -15,6 +15,7 @@ import { useSetAtom } from "jotai";
 import { NearByDataAtom } from "@/app/store/nearby";
 import clsx from "clsx";
 import axios from "axios";
+import { useQuery } from "react-query";
 
 type Props = {
   type: string;
@@ -23,6 +24,7 @@ type Props = {
   content: string;
   data?: any;
   location?: string;
+  id?: string;
 };
 
 type CardProps = {
@@ -210,14 +212,25 @@ const BuilderCarousel = ({
   content,
   title,
   projName,
-  data,
   location,
+  id,
 }: Props) => {
-  const getBuilderProjects = () => {
-    const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/builder-details-project?builderId=103`;
-    const data = axios.get(url);
-    return data;
+  const getBuilderProjects = async () => {
+    const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/builder-details-project?builderId=${id}`;
+    const data = await axios.post(url);
+    return data.data.projectBuilder;
   };
+  const { data, isLoading } = useQuery({
+    queryFn: getBuilderProjects,
+    queryKey: ["getBuilderProjects" + id],
+  });
+  if (isLoading) {
+    return <div>loading...</div>;
+  }
+  if (!data || data?.length == 0) {
+    return;
+  }
+
   return (
     <div className="w-full mb-[4%]">
       <h2 className="ml-2 text-[16px] sm:text-[20px] xl:text-[32px] font-semibold  cursor-pointer px-4 sm:px-0">

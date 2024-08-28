@@ -15,14 +15,9 @@ const LoginPopup = dynamic(
     ssr: false,
   }
 );
-type Props = { data: any };
+type Props = { data: any; id: string };
 
-
-
-
-export default function BuilderPage({ data }: Props) {
-  console.log(data);
-
+export default function BuilderPage({ data, id }: Props) {
   return (
     <div className="flex flex-col justify-start items-center w-full mt-[70px]  ">
       {data && (
@@ -38,20 +33,19 @@ export default function BuilderPage({ data }: Props) {
             /> */}
           </div>
           <div className="w-full m-auto sm:w-[95%]">
-            {data?.data?.builderProjects && (
-              <BuilderCarousel
-                type="proj"
-                title={`Projects `}
-                projName={`  ${data?.data?.userName}`}
-                content={`See other Projects by ${data?.data?.userName}`}
-                data={data?.data?.builderProjects}
-                location={
-                  Object.keys(data?.data?.projectAvailableCities).length <= 1
-                    ? data.data.cityName
-                    : ""
-                }
-              />
-            )}
+            <BuilderCarousel
+              type="proj"
+              id={id}
+              title={`Projects `}
+              projName={`  ${data?.data?.userName}`}
+              content={`See other Projects by ${data?.data?.userName}`}
+              data={data?.data?.builderProjects}
+              location={
+                Object.keys(data?.data?.projectAvailableCities).length <= 1
+                  ? data.data.cityName
+                  : ""
+              }
+            />
           </div>
           <Reqcallback builderName={data.data.userName} />
           <ProjectDrawer projName={data?.data?.userName} />
