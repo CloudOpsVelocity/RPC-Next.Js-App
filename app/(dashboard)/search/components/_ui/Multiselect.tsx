@@ -63,13 +63,17 @@ export function MainSearchMultiSelect({ type }: { type: string }) {
       case "Listings":
         {
           const [ut, pt, cg, lt] = data.id.split("_");
-          const url = `propTypes=${pt}&unitTypes=${ut}&cgs=${cg}&localities=${data.name}%2B${lt}`;
+          const url = `propTypes=${pt}&unitTypes=${ut}&cgs=${cg}&localities=${data.name}` + "%2B" + encodeURIComponent(lt);
           window.open("/search/listing?" + url);
         }
         break;
       case "Project Listings":
         {
-          const url = `projIdEnc=${data.id}&listedBy=${data.type.split("")[0]}`;
+          let projectName = data.name.split("(")[0].trim();
+          let projName = projectName.split(" in ")[1].toLowerCase();
+          let replaceSpaces = projName.replace(" ", "-");
+
+          const url = `projIdEnc=${data.id}&listedBy=${data.type.split("")[0]}&projName=${replaceSpaces}`  
           window.open("/search/listing?" + url);
         }
         break;
@@ -105,22 +109,27 @@ export function MainSearchMultiSelect({ type }: { type: string }) {
     {
       group: "Locality",
       items: localities || [],
+      name: "Locality"
     },
     {
       group: "Projects",
       items: projects || [],
+      name: "Project"
     },
     {
       group: "Listings",
       items: listings || [],
+      name: "Listings"
     },
     {
       group: "Project Listings",
       items: projectListing || [],
+      name: "Project Listings"
     },
     {
       group: "Builders",
       items: builders || [],
+      name: "Builder"
     },
   ];
 
@@ -147,7 +156,7 @@ export function MainSearchMultiSelect({ type }: { type: string }) {
                 <CheckIcon size={12} />
               ) : null}
               <span>
-                {item.name} <small>({group.group})</small>
+                {item.name} <small>({group.name})</small>
               </span>
             </Group>
           </Combobox.Option>
@@ -161,7 +170,7 @@ export function MainSearchMultiSelect({ type }: { type: string }) {
   }, [search, onSearchChange]);
 
   return (
-    <Combobox store={combobox} withinPortal={false}>
+    <Combobox store={combobox} withinPortal={false} keepMounted>
       <Combobox.DropdownTarget>
         <PillsInput onClick={() => combobox.openDropdown()} mb="3%" maw="60%">
           <Pill.Group>
