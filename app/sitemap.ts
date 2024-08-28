@@ -67,7 +67,7 @@ export default async function sitemap() {
       priority: 0.5,
     },
     {
-      url: `${BASE_PATH}/property/v1/post`,
+      url: `${BASE_PATH}/post-listing/v1/post`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.5,

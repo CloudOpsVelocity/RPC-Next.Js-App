@@ -69,7 +69,7 @@ export default function GalleryBlock({
           </h2>
 
           <SubHeading
-            text="Gallery highlights : A glimpse into good project"
+            text="Gallery highlights : A glimpse into good project" 
             className="mb-4 sm:mb-2"
           />
         </>
@@ -118,7 +118,7 @@ export default function GalleryBlock({
                 selectedMedia={selectedMedia}
                 images={images}
                 videos={videos}
-                isImage={selectedMedia.includes(".mp4") ? false : true}
+                isImage={selectedMedia.includes(".mp4") || selectedMedia.includes("youtube") ? false : true}
                 currentSlide={currentSlide}
                 setCurrentSlide={setCurrentSlide}
               />

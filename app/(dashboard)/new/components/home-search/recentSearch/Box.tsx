@@ -5,7 +5,7 @@ type Props = {};
 export default function Box({}: Props) {
   return (
     <div className="inline-flex justify-center items-center gap-1 rounded px-1.5 py-1 border-[0.8px] border-solid border-[#C3C3C3] bg-[#fcfcfcfc] text-[#5B84C0] text-[12px] mb-[10px] sm:text-sm not-italic font-medium cursor-pointer text-nowrap">
-      Whitefield, Bangalore {config.icon}
+      Whitefield, Bengaluru {config.icon}
     </div>
   );
 }

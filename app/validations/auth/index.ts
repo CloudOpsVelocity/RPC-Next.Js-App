@@ -146,7 +146,7 @@ const builderSchema = yup.object().shape({
     .of(itemSchema)
     .test(
       "first-item-name-validation",
-      "CEO by name is required",
+      "CEO name is required",
       function (value) {
         const { path, createError } = this;
 
@@ -159,7 +159,7 @@ const builderSchema = yup.object().shape({
           const nameValidation = yup
             .string()
             .trim()
-            .required("CEO by name is required")
+            .required("CEO name is required")
             .matches(nameRegex, "Only letters and spaces are allowed")
             .max(40, "Name should not exceed 40 characters");
 
@@ -220,7 +220,7 @@ const builderSchema = yup.object().shape({
     .of(itemSchema)
     .test(
       "first-item-name-validation",
-      "Managing Director by name is required",
+      "Managing Director name is required",
       function (value) {
         const { path, createError } = this;
 

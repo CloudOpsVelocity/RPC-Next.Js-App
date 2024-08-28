@@ -41,7 +41,7 @@ const LeftSideBlock = ({ serverData }: any) => {
   };
 
   return (
-    <div className="md:w-[50%] sm:w-[100%]  md:bg-white w-[100%]  xl:min-w-[400px] md:min-w-[500px]">
+    <div className="md:w-[50%] sm:w-[100%]  md:bg-white w-[100%]  xl:min-w-[400px]  md:min-w-[500px] ">
       <NewTabCon
         onTabChange={onTabChange}
         selectedProtype={params.listedBy ?? "proj"}

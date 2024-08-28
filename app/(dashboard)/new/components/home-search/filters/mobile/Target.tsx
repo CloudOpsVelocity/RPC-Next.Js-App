@@ -16,7 +16,7 @@ export default function Target({}: Props) {
             Search
           </span>
           <span className="text-[#242424] text-xs italic font-medium">
-            “ Whitefield, Bangalore”
+            “ Whitefield, Bengaluru”
           </span>
         </button>
       </div>

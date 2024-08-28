@@ -103,7 +103,7 @@ export default function ReportModal() {
                     id="review"
                     className={clsx(
                       " rounded-[10px] !text-[12px]  placeholder:!text-[#4D6677]  placeholder:!text-xl xl:placeholder:!text-2xl italic font-medium leading-[23.784px] border-solid border",
-                      status === "error" ? "border-[#F00]" : "border-green"
+                      status == "error" ? "border-[#F00]" : "border-green"
                     )}
                     placeholder="Start typing here"
                     radius={"10px"}
@@ -112,7 +112,7 @@ export default function ReportModal() {
                     classNames={{
                       input: S.ratingInput,
                     }}
-                    onChange={(e) => setText(e.target.value)}
+                    onChange={(e) => {setText(e.target.value), setStatus("idle")}}
                     value={text}
                   />
                 </div>

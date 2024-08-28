@@ -28,7 +28,7 @@ const NewTabCon = ({
         ))}
       </div>
 
-      <div className="flex flex-row items-center gap-1 md:gap-2 self-end justify-center ml-auto">
+      <div className="flex flex-row items-center gap-1 self-end justify-center ml-auto flex-wrap ">
         <h1 className="text-[12px] text-right sm:text-[14px] xl:text-base text-gray-400 font-semibold">
           Sort By:
         </h1>

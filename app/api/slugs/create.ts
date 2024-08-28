@@ -13,7 +13,7 @@ type PropertyType =
 type Locality =
   | "Mumbai"
   | "Delhi"
-  | "Bangalore"
+  | "Bengaluru"
   | "Hyderabad"
   | "Chennai"
   | "Kolkata"
@@ -51,7 +51,7 @@ const propertyTypes: PropertyType[] = [
 const localities: Locality[] = [
   "Mumbai",
   "Delhi",
-  "Bangalore",
+  "Bengaluru",
   "Hyderabad",
   "Chennai",
   "Kolkata",

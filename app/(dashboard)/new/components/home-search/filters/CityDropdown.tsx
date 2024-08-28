@@ -8,7 +8,7 @@ import {
   propertyDetailsTypes,
 } from "@/app/data/projectDetails";
 
-const keys = ["Bangalore"];
+const keys = ["Bengaluru"];
 
 export function CityDropdown() {
   const { filters: f, setFilters } = useSearchFilters();
@@ -74,7 +74,7 @@ export function CityDropdown() {
         >
           {(propertyDetailsTypes?.get(value ?? 0)?.name ?? "") || (
             <Input.Placeholder className="!text-black">
-              Bangalore
+              Bengaluru
             </Input.Placeholder>
           )}
         </InputBase>
