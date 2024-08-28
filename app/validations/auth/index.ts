@@ -1,7 +1,11 @@
 import * as yup from "yup";
 const nameRegex = /^[a-zA-Z\s.]*$/;
 const itemSchema = yup.object().shape({
-  name: yup.string().trim().max(40, "Name should not exceed 40 characters"),
+  name: yup
+    .string()
+    .trim()
+    .max(40, "Name should not exceed 40 characters")
+    .matches(nameRegex, "Only letters and spaces are allowed"),
 });
 
 const schema = yup.object().shape({
@@ -147,7 +151,7 @@ const builderSchema = yup.object().shape({
   ceoName: yup
     .array()
     .of(itemSchema)
-    .test("first-item-name-validation", function (value) {
+    .test("first-item-name-validation1", function (value) {
       const { path, createError } = this;
 
       if (value && value.length > 0) {
@@ -196,76 +200,100 @@ const builderSchema = yup.object().shape({
   foundedBy: yup
     .array()
     .of(itemSchema)
-    .test(
-      "first-item-name-validation",
-      "Founded by name is required",
-      function (value) {
-        const { path, createError } = this;
+    .test("first-item-name-validation2", function (value) {
+      const { path, createError } = this;
 
-        // Ensure there is at least one item in the array
-        if (value && value.length > 0) {
-          const firstItem = value[0];
-          const firstItemName = firstItem.name;
-
-          // Define the name validation schema
-          const nameValidation = yup
-            .string()
-            .trim()
-            .required("Founded by name is required")
-            .matches(nameRegex, "Only letters and spaces are allowed")
-            .max(40, "Name should not exceed 40 characters");
-
-          // If the name field of the first item does not pass validation, create an error
-          if (!nameValidation.isValidSync(firstItemName)) {
-            return createError({
-              path: `${path}[0].name`, // Path to the specific field
-              // @ts-ignore
-              message: nameValidation.describe().tests[0]?.message, // Error message
-            });
-          }
+      if (value && value.length > 0) {
+        // Validate the first item (required)
+        const firstItemName = value[0].name;
+        if (!firstItemName) {
+          return createError({
+            path: `${path}[0].name`,
+            message: "Founded by name is required",
+          });
         }
 
-        // If the array is empty or the first item is valid, validation is considered successful
-        return true;
+        // Validation function for regex and length
+        const validateName = (name: string, index: number) => {
+          if (!nameRegex.test(name)) {
+            return createError({
+              path: `${path}[${index}].name`,
+              message: "Only letters and spaces are allowed",
+            });
+          }
+          if (name.length > 40) {
+            return createError({
+              path: `${path}[${index}].name`,
+              message: "Name should not exceed 40 characters",
+            });
+          }
+        };
+
+        // Validate the first item
+        const firstItemError = validateName(firstItemName, 0);
+        if (firstItemError) return firstItemError;
+
+        // Validate the rest of the items (if 'name' is present)
+        for (let i = 1; i < value.length; i++) {
+          const currentItemName = value[i].name;
+          if (currentItemName) {
+            const error = validateName(currentItemName, i);
+            if (error) return error;
+          }
+        }
       }
-    ),
+
+      return true; // If the array is empty or all validations pass
+    }),
 
   managingDirectorName: yup
     .array()
     .of(itemSchema)
-    .test(
-      "first-item-name-validation",
-      "Managing Director name is required",
-      function (value) {
-        const { path, createError } = this;
+    .test("first-item-name-validation3", function (value) {
+      const { path, createError } = this;
 
-        // Ensure there is at least one item in the array
-        if (value && value.length > 0) {
-          const firstItem = value[0];
-          const firstItemName = firstItem.name;
-
-          // Define the name validation schema
-          const nameValidation = yup
-            .string()
-            .trim()
-            .required("Managing Director name is required")
-            .matches(nameRegex, "Only letters and spaces are allowed")
-            .max(40, "Name should not exceed 40 characters");
-
-          // If the name field of the first item does not pass validation, create an error
-          if (!nameValidation.isValidSync(firstItemName)) {
-            return createError({
-              path: `${path}[0].name`, // Path to the specific field
-              // @ts-ignore
-              message: nameValidation.describe().tests[0]?.message, // Error message
-            });
-          }
+      if (value && value.length > 0) {
+        // Validate the first item (required)
+        const firstItemName = value[0].name;
+        if (!firstItemName) {
+          return createError({
+            path: `${path}[0].name`,
+            message: "Managing Director name is required",
+          });
         }
 
-        // If the array is empty or the first item is valid, validation is considered successful
-        return true;
+        // Validation function for regex and length
+        const validateName = (name: string, index: number) => {
+          if (!nameRegex.test(name)) {
+            return createError({
+              path: `${path}[${index}].name`,
+              message: "Only letters and spaces are allowed",
+            });
+          }
+          if (name.length > 40) {
+            return createError({
+              path: `${path}[${index}].name`,
+              message: "Name should not exceed 40 characters",
+            });
+          }
+        };
+
+        // Validate the first item
+        const firstItemError = validateName(firstItemName, 0);
+        if (firstItemError) return firstItemError;
+
+        // Validate the rest of the items (if 'name' is present)
+        for (let i = 1; i < value.length; i++) {
+          const currentItemName = value[i].name;
+          if (currentItemName) {
+            const error = validateName(currentItemName, i);
+            if (error) return error;
+          }
+        }
       }
-    ),
+
+      return true; // If the array is empty or all validations pass
+    }),
   officeContact: yup
     .string()
     .matches(/^[\d()+-]+$/, "Invalid office contact number")
