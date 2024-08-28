@@ -49,8 +49,8 @@ function getFoundedByName(arr: FoundedByItem[]): string {
   if (arr?.length > 1) {
     // Extract and join names if array length is greater than 1
     const names = arr
-      .map((item) => item.name)
-      .filter((name) => name.trim() !== "");
+      .map((item) => item.name.trim())
+      .filter((name) => name !== "");
     return names.join(", ");
   } else if (arr.length === 1) {
     // Return the name of the single item if array length is 1
@@ -93,7 +93,6 @@ function registerOtherParser(data: any) {
     foundedBy && managingDirectorName && ceoName
       ? getValues({ foundedBy, managingDirectorName, ceoName })
       : {};
-
   if (companyLogo) {
     return { ...parsedData, ...items, isLogoChange: "Y", companyLogo };
   } else {
