@@ -72,10 +72,10 @@ export default function Results() {
 
             if (ids.length > 4) {
               const [ut, pt, cg, id, lt] = ids;
-              url = `propTypes=${pt}&unitTypes=${ut}&cg=${cg}&projIdEnc=${id}&localities=${data.name.trim()}%2B${lt}`;
+              url = `propTypes=${pt}&unitTypes=${ut}&cg=${cg}&projIdEnc=${id}&localities=${data.name.trim()}` + "%2B" + encodeURIComponent(lt);
             } else {
               const [ut, pt, cg, lt] = ids;
-              url = `propTypes=${pt}&unitTypes=${ut}&cg=${cg}&localities=${data.name.trim()}%2B${lt}`;
+              url = `propTypes=${pt}&unitTypes=${ut}&cg=${cg}&localities=${data.name.trim()}` + "%2B" + encodeURIComponent(lt);
             }
             window.open("/search/listing?" + url);
           }

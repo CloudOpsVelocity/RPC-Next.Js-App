@@ -118,7 +118,7 @@ const FilterPopup = () => {
             id="Search"
           >
             Search By Locality, Projects or Listings
-          </h3>
+          </h3> 
           <MainSearchMultiSelect  type="listing" />
           {filters?.propTypes != projectprops.plot && (
             <>
