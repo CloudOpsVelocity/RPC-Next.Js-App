@@ -18,7 +18,7 @@ import { redirect } from "next/dist/server/api-utils";
 
 type Props = {
   type: string;
-  title: string;
+  title: any;
   projName?: string;
   content: string;
   data?: any;
