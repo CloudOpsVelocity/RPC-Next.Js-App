@@ -19,7 +19,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
   const nzData = normalizeData(data, type);
   return (
     <div
-      className="w-[95%] md:w-[90%] scroll-mt-[150px] mb-[5%]  sm:mb-[0%] rounded shadow-[0px_4px_17.6px_0px_rgba(146,178,200,0.40)] border-[0.5px] border-solid border-[#92B2C8] builderBg pt-4 pb-4 md:pb-6 mt-2 sm:mt-0 sm:py-8 sm:pl-5 px-2 sm:px-0 "
+      className="w-[95%] md:w-[90%] scroll-mt-[150px] mb-[5%] !mt-[50px] sm:mb-[0%] rounded shadow-[0px_4px_17.6px_0px_rgba(146,178,200,0.40)] border-[0.5px] border-solid border-[#92B2C8] builderBg pt-4 pb-4 md:pb-6 sm:mt-0 sm:py-8 sm:pl-5 px-2 sm:px-0 "
       id="aboutBuilder"
     >
       <div>

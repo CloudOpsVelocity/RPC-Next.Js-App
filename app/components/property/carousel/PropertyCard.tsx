@@ -19,7 +19,7 @@ import { redirect } from "next/dist/server/api-utils";
 import { get_posted_by } from "@/app/utils/dyanamic/projects";
 type Props = {
   type: string;
-  title: string;
+  title: any;
   projName?: string;
   content: string;
   data?: any;

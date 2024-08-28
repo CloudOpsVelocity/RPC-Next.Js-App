@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { Fragment } from "react";
 import ProjectCarousel from "../../property/carousel/PropertyCard";
 import useNearby from "@/app/hooks/property/useNearBy";
 import { listingProps } from "@/app/data/projectDetails";
@@ -38,12 +38,12 @@ export default function NearByCarouselProperty({
     >
       <ProjectCarousel
         type="prop"
-        title={`Other ${listingType} listings in ${projName}`}
+        title={<Fragment>Other {listingType} listings in <span className="text-[#148B16]">{projName}</span></Fragment>}
         projName={""}
         content={
           propTypeName === "Independent House/Building"
             ? `Check some similar nearby ${listingType.toLowerCase()} listings available`
-            : `See some more ${listingType.toLowerCase()} listings available in  ${projName}` 
+            : `See some more ${listingType.toLowerCase()} listings available in ${projName}`
         }
         data={
           data != undefined && data.projListing != undefined
