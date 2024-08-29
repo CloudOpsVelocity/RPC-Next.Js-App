@@ -49,7 +49,7 @@ export async function POST(request: Request, response: Response) {
       data[slug] = id;
       fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
       console.log(slug, "from create");
-      // revalidatePath(slug, "page");
+      revalidatePath(slug, "page");
       // revalidatePath(slug, "layout");
       revalidateTag(slug);
       return NextResponse.json(
@@ -104,7 +104,7 @@ export async function POST(request: Request, response: Response) {
       }
       delete data[slugToDelete];
       fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
-      // revalidatePath(slugToDelete, "page");
+      revalidatePath(slugToDelete, "page");
       revalidateTag(slugToDelete);
       return NextResponse.json(
         { message: `${type} deleted successfully` },
