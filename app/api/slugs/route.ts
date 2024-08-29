@@ -12,7 +12,7 @@ const getFilePath = (type: string) =>
   path.join(process.cwd(), "static", `${type}Slugs.json`);
 
 export async function POST(request: Request, response: Response) {
-  let { type, slug, id, action, newid } = await request.json();
+  let { type, slug, id, action, previd } = await request.json();
   // Validate required parameters
   if (!type || !action || (type !== "P" && type !== "B")) {
     return NextResponse.json(
@@ -58,16 +58,16 @@ export async function POST(request: Request, response: Response) {
       );
       break;
     case "update":
-      if (!id || !newid) {
+      if (!id || !previd) {
         return NextResponse.json(
           { error: "Missing id parameter" },
           { status: 400 }
         );
       }
-      const currentSlug = Object.keys(data).find((key) => data[key] === id);
+      const currentSlug = Object.keys(data).find((key) => data[key] === previd);
       if (!currentSlug) {
         return NextResponse.json(
-          { error: `${type} with id '${id}' does not exist` },
+          { error: `${type} with id '${previd}' does not exist` },
           { status: 404 }
         );
       }
@@ -78,7 +78,7 @@ export async function POST(request: Request, response: Response) {
             { status: 400 }
           );
         }
-        data[slug] = newid;
+        data[slug] = id;
         delete data[currentSlug];
       }
       fs.writeFileSync(filePath, JSON.stringify(data, null, 2));

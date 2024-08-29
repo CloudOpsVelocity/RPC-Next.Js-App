@@ -151,7 +151,10 @@ export default function Navigation({
       key: "amenities",
     },
     { condtion: true, key: "nearBy" },
-    { condtion: relateProjData?.banks?.length > 0, key: "loans" },
+    {
+      condtion: relateProjData && relateProjData?.banks?.length > 0,
+      key: "loans",
+    },
     { condtion: projData, key: "projectDetails" },
     { condtion: projData, key: "aboutBuilder" },
     { condtion: projData && relateProjData.faqs.length > 0, key: "faq" },
@@ -159,7 +162,7 @@ export default function Navigation({
     { condtion: similarAvl, key: "similar" },
   ];
 
-  console.log(relateProjData?.banks)
+  console.log(relateProjData?.banks);
 
   return (
     <div
