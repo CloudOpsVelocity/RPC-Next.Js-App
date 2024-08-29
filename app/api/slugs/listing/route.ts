@@ -29,54 +29,97 @@ export async function POST(request: Request) {
 
   switch (action) {
     case "create":
-      if (!slug || !id || !input) {
+      if (!input) {
         return NextResponse.json(
-          { error: "Invalid slug or id parameter" },
+          { error: "data is required" },
           { status: 400 }
         );
       }
-      //  looping this input object check if alraedy exist or not and if not create
 
-      if (data.hasOwnProperty(slug)) {
-        return NextResponse.json(
-          { error: `Listing already exists` },
-          { status: 400 }
-        );
+      // Loop through the input object to check if it already exists or not
+      for (const key in input) {
+        if (Object.prototype.hasOwnProperty.call(input, key)) {
+          const element = input[key];
+
+          // Check if the key (slug) already exists in JSON data
+          if (data.hasOwnProperty(key)) {
+            return NextResponse.json(
+              { error: `Listing for slug '${key}' already exists` },
+              { status: 400 }
+            );
+          }
+
+          // If the slug does not exist, create it with the provided id
+          data[key] = element;
+        }
       }
-      data[slug] = id;
+
+      // Write the updated data back to the file
       fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
-      revalidatePath(slug, "page");
+
+      // Revalidate paths for all created slugs
+      for (const key in input) {
+        if (Object.prototype.hasOwnProperty.call(input, key)) {
+          revalidatePath(key);
+        }
+      }
+
       return NextResponse.json(
-        { message: `Listing created successfully` },
+        { message: `Listing(s) created successfully`, input },
         { status: 201 }
       );
       break;
     case "update":
-      if (!id) {
+      if (!id || !input) {
         return NextResponse.json(
-          { error: "Missing id parameter" },
+          { error: "Missing id or data parameter" },
           { status: 400 }
         );
       }
+
+      // Find the slug corresponding to the given id
       const currentSlug = Object.keys(data).find((key) => data[key] === id);
+
       if (!currentSlug) {
         return NextResponse.json(
           { error: `Listing with id '${id}' does not exist` },
           { status: 404 }
         );
       }
-      if (slug && slug !== currentSlug) {
-        if (data.hasOwnProperty(slug)) {
-          return NextResponse.json(
-            { error: `Slug '${slug}' already exists` },
-            { status: 400 }
-          );
+      for (const key in data) {
+        if (data[key] === id) {
+          delete data[key];
         }
-        data[slug] = id;
-        delete data[currentSlug];
       }
+      // // Remove the old entry
+      // delete data[currentSlug];
+
+      // Check if a new slug is provided and ensure it doesn't already exist
+      if (slug && data.hasOwnProperty(slug)) {
+        return NextResponse.json(
+          { error: `Slug '${slug}' already exists` },
+          { status: 400 }
+        );
+      }
+
+      // Create the new entry
+      const newSlug = slug || currentSlug; // Use the new slug if provided, otherwise reuse the old one
+
+      // Initialize an empty object for the new data entry
+
+      // Map each property from the input object to the new data entry
+      for (const key in input) {
+        if (Object.prototype.hasOwnProperty.call(input, key)) {
+          data[key] = input[key]; // Map each property to the new entry
+          revalidatePath(data[key]);
+        }
+      }
+
+      // Write the updated data back to the file
       fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
-      revalidatePath(slug || currentSlug);
+
+      // Revalidate the updated path
+
       return NextResponse.json(
         { message: `Listing updated successfully` },
         { status: 200 }
