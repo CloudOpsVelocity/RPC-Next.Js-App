@@ -7,7 +7,8 @@ const getFilePath = () =>
   path.join(process.cwd(), "static", "listingSlugs.json");
 
 export async function POST(request: Request) {
-  let { slug, id, action } = await request.json();
+  let { slug, id, action, data: input } = await request.json();
+  // samplem input = inoput:{key:value,key:value}
   // Validate required parameters
   if (!action) {
     return NextResponse.json(
@@ -28,12 +29,14 @@ export async function POST(request: Request) {
 
   switch (action) {
     case "create":
-      if (!slug || !id) {
+      if (!slug || !id || !input) {
         return NextResponse.json(
           { error: "Invalid slug or id parameter" },
           { status: 400 }
         );
       }
+      //  looping this input object check if alraedy exist or not and if not create
+
       if (data.hasOwnProperty(slug)) {
         return NextResponse.json(
           { error: `Listing already exists` },
