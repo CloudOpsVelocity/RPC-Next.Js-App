@@ -106,7 +106,6 @@ export async function POST(request: Request, response: Response) {
       delete data[slugToDelete];
       fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
       revalidatePath(slugToDelete);
-      revalidateTag(slugToDelete);
       return NextResponse.json(
         { message: `${type} deleted successfully` },
         { status: 200 }
