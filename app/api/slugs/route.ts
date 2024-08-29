@@ -58,16 +58,18 @@ export async function POST(request: Request, response: Response) {
       );
       break;
     case "update":
-      if (!id || !previd) {
+      if (!id) {
         return NextResponse.json(
           { error: "Missing id parameter" },
           { status: 400 }
         );
       }
-      const currentSlug = Object.keys(data).find((key) => data[key] === previd);
+      const currentSlug = Object.keys(data).find(
+        (key) => data[key].split("_").pop() === id.split("_").pop()
+      );
       if (!currentSlug) {
         return NextResponse.json(
-          { error: `${type} with id '${previd}' does not exist` },
+          { error: `${type} with id '${id.split("_").pop()}' does not exist` },
           { status: 404 }
         );
       }
@@ -96,7 +98,9 @@ export async function POST(request: Request, response: Response) {
           { status: 400 }
         );
       }
-      const slugToDelete = Object.keys(data).find((key) => data[key] === id);
+      const slugToDelete = Object.keys(data).find(
+        (key) => data[key].split("_").pop() === id
+      );
       if (!slugToDelete) {
         return NextResponse.json(
           { error: `${type} with id '${id}' does not exist` },
