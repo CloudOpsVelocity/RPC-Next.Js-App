@@ -40,7 +40,7 @@ export const getBuilderDetailsPageData = async (
   const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/builder-details?builderId=${slug}&isBuilderPage=Y`;
   try {
     const response = await fetch(url, {
-      next: { tags: [`${pathname ?? slug}`], revalidate: 60 * 5 },
+      next: { tags: [`${pathname ?? slug}`] },
     });
     const data: Main = await response.json();
     return data as Main;
