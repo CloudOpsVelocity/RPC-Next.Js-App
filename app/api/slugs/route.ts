@@ -83,6 +83,7 @@ export async function POST(request: Request, response: Response) {
       }
       fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
       revalidatePath(slug || currentSlug);
+      // revalidateTag(slug || currentSlug);
       return NextResponse.json(
         { message: `${type} updated successfully` },
         { status: 200 }
