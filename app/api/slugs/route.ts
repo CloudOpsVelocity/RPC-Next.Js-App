@@ -12,7 +12,7 @@ const getFilePath = (type: string) =>
   path.join(process.cwd(), "static", `${type}Slugs.json`);
 
 export async function POST(request: Request, response: Response) {
-  let { type, slug, id, action } = await request.json();
+  let { type, slug, id, action, newId } = await request.json();
   // Validate required parameters
   if (!type || !action || (type !== "P" && type !== "B")) {
     return NextResponse.json(
@@ -58,7 +58,7 @@ export async function POST(request: Request, response: Response) {
       );
       break;
     case "update":
-      if (!id) {
+      if (!id || !newId) {
         return NextResponse.json(
           { error: "Missing id parameter" },
           { status: 400 }
@@ -78,7 +78,7 @@ export async function POST(request: Request, response: Response) {
             { status: 400 }
           );
         }
-        data[slug] = id;
+        data[slug] = newId;
         delete data[currentSlug];
       }
       fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
