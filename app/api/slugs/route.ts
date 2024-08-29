@@ -58,9 +58,9 @@ export async function POST(request: Request, response: Response) {
       );
       break;
     case "update":
-      if (!id) {
+      if (!id || !slug) {
         return NextResponse.json(
-          { error: "Missing id parameter" },
+          { error: "Missing parameter" },
           { status: 400 }
         );
       }
