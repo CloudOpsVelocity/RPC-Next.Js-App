@@ -47,7 +47,7 @@ export default function ListingDetailsPage({
   nearByLocations,
   TITLE_OF_PROP,
 }: Props) {
-  console.log(data.cg, data.postedById, data.builderId);
+  console.log(data.cg, data.postedById, projData.builderId);
   // console.log(
   //   data.cg === "S" &&
   //     data.postedById === projData.builderId &&

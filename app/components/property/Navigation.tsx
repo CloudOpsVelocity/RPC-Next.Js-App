@@ -152,17 +152,26 @@ export default function Navigation({
     },
     { condtion: true, key: "nearBy" },
     {
-      condtion: relateProjData && relateProjData?.banks?.length > 0,
+      condtion:
+        detailsData.cg === "S" &&
+        detailsData.postedById === relateProjData.builderId &&
+        relateProjData?.banks?.length > 0,
       key: "loans",
     },
     { condtion: projData, key: "projectDetails" },
     { condtion: projData, key: "aboutBuilder" },
-    { condtion: projData && relateProjData.faqs.length > 0, key: "faq" },
+    {
+      condtion:
+        projData &&
+        detailsData.postedById === relateProjData.builderId &&
+        relateProjData.faqs.length > 0,
+      key: "faq",
+    },
     { condtion: SimilatListingAvl, key: "similarListing" },
     { condtion: similarAvl, key: "similar" },
   ];
 
-  console.log(relateProjData?.banks);
+  console.log(relateProjData?.faqs);
 
   return (
     <div
