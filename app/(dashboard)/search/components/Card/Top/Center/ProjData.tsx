@@ -23,6 +23,7 @@ export default function ProjData({
   cityName,
   postedBy
 }: Props) {
+  
   console.log( minPrice,
     maxPrice,
     projName,

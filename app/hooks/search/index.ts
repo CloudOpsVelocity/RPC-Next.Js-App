@@ -71,7 +71,7 @@ export default function useSearchFilters(
     value: string | number,
     callback?: () => void
   ) => {
-    setFilters({ ...filters, [key]: value });
+    setFilters(prev => ({ ...prev, [key]: value }));
     callback && callback();
   };
   type SearchFilter = {

@@ -67,6 +67,8 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
   const isTab = useMediaQuery("(max-width: 1600px)");
   const maxDisplay = 3;
 
+  const [closePopup, setClosePopup] = useState(false);
+
   const values = filters.unitTypes.map((itemId, i) => {
     const selectedItem = SEARCH_FILTER_DATA.bhkDetails.find(
       (item) => item.value === itemId
@@ -92,6 +94,9 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
     (filters.bugdetValue[0] === 500000 && filters.bugdetValue[1] === 600000000) ||
     (filters.bugdetValue[0] === 0 && filters.bugdetValue[1] === 100000)
   );
+  const handleToggle = () => {
+    setClosePopup((prev) => !prev);
+  };
 
   const allFiltersMap = [...filters.locality, ...filters.builderIds];
   return (
@@ -194,10 +199,13 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
             shadow="lg"
             radius={10}
             offset={{ mainAxis: 10, crossAxis: -200 }}
+            opened={closePopup} 
+            onClose={() => setClosePopup(false)}
           >
             <Popover.Target>
               <div
                 className={` border-[#A0D7FF] max-w-full flex-wrap rounded-[20px] sm:rounded-[40px] p-2 gap-2 xl:gap-[8px] pl-2 xl:pl-[8px] border-[1px] border-solid flex items-center justify-center sm:min-w-[300px]  `}
+                onClick={handleToggle}
               >
                 <BuyRent />
                 <div className="my-2">
@@ -273,7 +281,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
               </div>
             </Popover.Target>
             <Popover.Dropdown className="!z-50" p={0}>
-              <FilterPopup />
+              <FilterPopup close={handleToggle}  />
             </Popover.Dropdown>
           </Popover>
         )}

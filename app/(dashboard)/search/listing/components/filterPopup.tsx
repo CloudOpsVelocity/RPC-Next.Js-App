@@ -27,11 +27,11 @@ import { getData } from "@/app/utils/api/search";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import { toFormattedString } from "../../components/buget/budget";
-import { MainSearchMultiSelect } from "../../components/_ui/Multiselect";
+import { MainSearchMultiSelect } from "../../components/_ui/MultiselectListings";
 import { formatBudgetValue } from "../../components/buget";
 import FurnishOptions from "./filterSection/Furnish";
 
-const FilterPopup = () => {
+const FilterPopup = ({close}:{close: ()=>void}) => {
   const path = usePathname();
   const [current, setCurrent] = useState("Bhk");
   const propKeys = [35, 33, 31, 34, 32, 36];
@@ -105,7 +105,7 @@ const FilterPopup = () => {
         </div>
       </div>
       <div className="w-full">
-        <ClearAll type="prjectsearchlisting" />
+        <ClearAll type="prjectsearchlisting" close={close} />
         {/* Right Side Fields Con */}
         <ScrollArea
           h={400}

@@ -13,6 +13,9 @@ import toast from "react-hot-toast";
 import { usePathname } from "next/navigation";
 import fakeData from "@/app/data/listing";
 import { Console } from "console";
+import { projectprops } from "@/app/data/projectDetails";
+
+// For Listings
 
 export function MainSearchMultiSelect({ type }: { type: string }) {
   const {
@@ -54,31 +57,51 @@ export function MainSearchMultiSelect({ type }: { type: string }) {
     }
   };
 
+  let selectedPropId = `${filters.propTypes != projectprops.plot ? `${filters.unitTypes[0]}_` : ""}${filters.propTypes}_${filters.cg}_${filters.locality}_p*${filters.projIdEnc}`;
+
+  console.log(selectedPropId);
+
   const handlePush = async (type: string, data: any) => {
+    console.log(data);
     switch (type) {
       case "Locality":
         handleAddSearch(`${data.name}+${data.id}`);
+        
         break;
       case "Projects":
         window.open(`/abc/delhi/palika/${data.id}`);
         break;
       case "Listings":
-        const [ut, pt, cg, lt] = data.id.split("_");
+        let [ut, pt, cg, lt] = data.id.split("_");
+
+        if(ut != projectprops.plot){
+          // Not Equal to Plot
+          [ut, pt, cg, lt] = data.id.split("_");
+        }else{
+          // Equal to Plot
+          [pt, cg, lt] = data.id.split("_");
+        }
 
         if(data.id.includes("_P")){
-          const url = `propTypes=${pt}&unitTypes=${ut}&cgs=${cg}&localities=${data.name}` + "%2B" + encodeURIComponent(lt);
-          window.open("/search/listing?" + url);
+          let projId = data.id.split("*")[1];
+
+          let splitProjName = data.name.split(" in ")[1].toLowerCase();
+          let projName = splitProjName.split("-")[0].replace(" ", "-");
+          let localityName = splitProjName.split("-")[1].replace(" ", "-");
+
+          setFilters((prevFilters) => ({
+            ...prevFilters,
+            projIdEnc: projId,
+            projName: projName,
+            cg: cg,
+            unitTypes:[parseInt(ut)],
+            locality:[localityName],
+            propTypes: parseInt(pt)
+          }));
+        
         }else{
-          console.log("update Listings Array state");
-
-          let prevIds = [...filters?.unitTypes];
-
-          if(!prevIds.includes(parseInt(ut))){
-            setFilters((prevFilters) => ({
-              ...prevFilters,
-              unitTypes: [...prevFilters.unitTypes, parseInt(ut)],
-            }));
-          }
+          const url = `propTypes=${pt}&unitTypes=${ut}&cgs=${cg}&localities=${data.name}` + "%2B" + encodeURIComponent(lt);
+          window.open("/search?" + url);
         }
         break;
       case "Project Listings":
@@ -87,16 +110,26 @@ export function MainSearchMultiSelect({ type }: { type: string }) {
           let projName = projectName.split(" in ")[1].toLowerCase();
           let replaceSpaces = projName.replace(" ", "-");
 
-          const url = `projIdEnc=${data.id}&listedBy=${data.type.split("")[0]}&projName=${replaceSpaces}`  
-          window.open("/search/listing?" + url);
+          setFilters((prevFilters) => ({
+            ...prevFilters,
+            projIdEnc: data.id,
+            projName: replaceSpaces,
+            listedBy: data.type.split("")[0]
+          }));
+
+          // const url = `projIdEnc=${data.id}&listedBy=${data.type.split("")[0]}&projName=${replaceSpaces}`  
+          // window.open("/search/listing?" + url);
         }
         break;
       case "Builders":
-        setFilters((prevFilters) => ({
-          ...prevFilters,
-          builderIds: [...prevFilters.builderIds, `${data.name}+${data.id}`],
-          
-        }));
+        let builderName = data.name.toLowerCase().split(" ").join("%2D");
+        let urlBuilder=`${process.env.NEXT_PUBLIC_BACKEND_URL}/builders/bengaluru/${builderName}`;
+        window.open(urlBuilder);
+
+        // setFilters((prevFilters) => ({
+        //   ...prevFilters,
+        //   builderIds: [...prevFilters.builderIds, `${data.name}+${data.id}`],
+        // }));
         handleResetQuery();
         break;
       default:
@@ -134,7 +167,6 @@ export function MainSearchMultiSelect({ type }: { type: string }) {
     {
       group: "Listings",
       items: listings || [],
-      // items: listingFakeData,
       name: "Listings"
     },
     {
@@ -150,17 +182,13 @@ export function MainSearchMultiSelect({ type }: { type: string }) {
   ];
 
   const filteredOptions = data.flatMap((group) => {
+      const filteredItems = group.items.filter((item: any) =>
+        item.name.toLowerCase().includes(search.trim().toLowerCase())
+      );
 
-    const filteredItems = group.items.filter((item: any) =>
-      item.name.toLowerCase().includes(search.trim().toLowerCase())
-    );
-
-    if (filteredItems.length === 0) {
-      return [];
-    };
-
-    console.log(filteredItems);
-
+      if (filteredItems.length === 0) {
+        return [];
+      };
     
       return [
         <Combobox.Group key={group.group} label={group.group}>
@@ -177,7 +205,7 @@ export function MainSearchMultiSelect({ type }: { type: string }) {
                     {value.includes(`${item.name}+${item.id}`) ? (
                       <CheckIcon size={12} />
                     ) : null}
-                    <span>
+                    <span className={selectedPropId == item.id ? "text-blue" : "text-black" } >
                       {item.name} <small>({group.name})</small>
                     </span>
                   </Group>
@@ -186,13 +214,13 @@ export function MainSearchMultiSelect({ type }: { type: string }) {
           })}
         </Combobox.Group>,
       ];
-    
-
   });
 
   useEffect(() => {
     onSearchChange(search);
   }, [search, onSearchChange]);
+
+  
 
   return (
     <Combobox store={combobox} withinPortal={false} keepMounted>

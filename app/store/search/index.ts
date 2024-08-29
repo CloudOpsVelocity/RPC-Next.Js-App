@@ -26,6 +26,7 @@ export interface SearchFilter {
   projIdEnc: string | null;
   lat: number | null;
   lng: number | null;
+  projName?: string | null;
 }
 
 export const initialState: SearchFilter = {
@@ -52,6 +53,7 @@ export const initialState: SearchFilter = {
   projIdEnc: null,
   lat: null,
   lng: null,
+  projName: null,
 };
 export const diffToProjFromListing = {
   proj: [
