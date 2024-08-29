@@ -49,6 +49,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
   } = useSearchFilters();
   const isMobile = useMediaQuery("(max-width: 601px)");
   const isTab = useMediaQuery("(max-width: 1600px)");
+  const [closePopup, setClosePopup] = useState(false);
   const [opened, { open: openMobileSearchDrawer, close }] =
     useDisclosure(false);
   const showpopUp = () => {
@@ -56,6 +57,10 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
     open();
   };
   const maxDisplay = 3;
+
+  const handleToggle = () => {
+    setClosePopup((prev) => !prev);
+  };
 
   const values = filters.unitTypes.map((itemId, i) => {
     const selectedItem = SEARCH_FILTER_DATA.bhkDetails.find(
@@ -167,12 +172,15 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
               shadow="lg"
               radius={10}
               offset={{ mainAxis: 10, crossAxis: -200 }}
+              opened={closePopup} 
+              onClose={() => setClosePopup(false)}
             >
               <Popover.Target>
                 <div
                   className={`border-[#A0D7FF] max-w-full flex flex-wrap rounded-[20px] sm:rounded-[40px] p-2 gap-2 xl:gap-[8px] pl-2 xl:pl-[8px] border-[1px] border-solid items-center justify-center px-6 ${
                     filters.cg == null ? "sm:min-w-[300px]" : ""
                   }`}
+                  onClick={handleToggle}
                 >
                   <BuyRent />
 
@@ -222,7 +230,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
                 </div>
               </Popover.Target>
               <Popover.Dropdown className="!z-50" p={0}>
-                {params.listedBy ? <ListingPopup /> : <FilterPopup />}
+                {params.listedBy ? <ListingPopup /> : <FilterPopup close={handleToggle} />}
               </Popover.Dropdown>
             </Popover>
 
