@@ -18,6 +18,12 @@ export default function Results() {
     listing: listings,
     projectListing,
   } = data;
+
+
+  console.log(data);
+
+
+
   const { filters, setFilters } = useSearchFilters();
 
   if (isLoading) {
@@ -120,9 +126,12 @@ export default function Results() {
               ))}
             </ul>
             {listings?.length > 0 && <SubHeading text="Listings" />}
+            {console.log(listings)};
             <ul>
-              {listings?.map((listing: any) => (
-                <li
+              {listings?.map((listing: any) => {
+
+                return(
+                  <li
                   onClick={() =>
                     handlePush("listing", {
                       id: listing.id,
@@ -134,7 +143,8 @@ export default function Results() {
                 >
                   {listing.name}
                 </li>
-              ))}
+                )
+                })}
             </ul>
             {projectListing?.length > 0 && (
               <SubHeading text="Project Listings" />

@@ -22,7 +22,7 @@ export default function useQsearch() {
     ...data,
     localities: data?.loc ?? [],
   };
-  console.log(nData);
+  // console.log(nData);
   const onSearchChange = (value: string) => {
     !value ? setName(null) : setName(value);
   };
