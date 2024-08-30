@@ -97,7 +97,7 @@ export default function Results() {
         let listedByType = data.type === "OL" ? "I" : data.type.split("")[0];
         {
           let projectName = data.name.split("(")[0].trim();
-          console.log(projectName);
+          // console.log(projectName);
           const url = `projIdEnc=${data.id}&listedBy=${listedByType}&projName=${projectName}`;
           window.open("/search/listing?" + url);
         }

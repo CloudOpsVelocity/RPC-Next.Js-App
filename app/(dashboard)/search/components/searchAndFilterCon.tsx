@@ -230,7 +230,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
                 </div>
               </Popover.Target>
               <Popover.Dropdown className="!z-50" p={0}>
-                {params.listedBy ? <ListingPopup /> : <FilterPopup close={handleToggle} />}
+                {params.listedBy ? <ListingPopup close={close} /> : <FilterPopup close={handleToggle} />}
               </Popover.Dropdown>
             </Popover>
 

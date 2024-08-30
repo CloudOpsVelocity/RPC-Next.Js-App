@@ -11,7 +11,7 @@ export default function Tabs({}: Props) {
   const [filters, dispatch] = useAtom(homeSearchFiltersAtom);
   const activeTab = filters.cg ?? "S";
   const setActiveTab = (tab: string) => {
-    console.log(tab);
+    // console.log(tab);
     if (tab == "R") {
       dispatch({ type: "SET_BUGDET_VALUE", payload: [0, 100000] });
     } else {

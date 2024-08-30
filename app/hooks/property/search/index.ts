@@ -44,7 +44,7 @@ export default function useSearchFilters() {
     setFilters({ ...filters, propTypes: propertyType });
   };
   const setSingleType = (key: keyof SearchFilter, value: string) => {
-    setFilters({ ...filters, [key]: value });
+    setFilters(prev => ({ ...prev, [key]: value }));
   };
   type SearchFilter = {
     unitTypes: string;

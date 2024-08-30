@@ -26,7 +26,7 @@ export default function Card({ item }: Props) {
     window.open(urlBuilder, "_blank"); 
   }
 
-  console.log(item)
+  // console.log(item)
   return (
     <div
       onClick={() => onredirectProj()}

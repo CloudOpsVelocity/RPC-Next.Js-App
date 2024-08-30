@@ -21,7 +21,7 @@ export default function ListingCard({ item, sl }: Props) {
   const onRedirectOnProp = () => {
     window.open(url, "_blank");
   };
-  console.log(item.postedById)
+  // console.log(item.postedById)
   const title = `${
     item.propTypeName === "Plot" ? `${item.pa} sq.ft` : item.bhkName
   } ${item.propTypeName} for ${item.category} in ${item.localityName}`;

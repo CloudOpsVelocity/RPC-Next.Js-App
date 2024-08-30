@@ -31,11 +31,11 @@ export default function BuyRent() {
     }
   };
 
-  console.log(filters.cg);
+  // console.log(filters.cg);
 
   const isMobile = useMediaQuery("(max-width: 601px)");
   const isRentDisabled = filters.current == 108;
-  console.log(filters);
+  // console.log(filters);
   return (
     <div onClick={(e) => e.stopPropagation()}>
       <Select

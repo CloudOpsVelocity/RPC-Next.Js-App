@@ -159,6 +159,7 @@ const ListingMobileFilter = ({ close }: any) => {
             {SEARCH_FILTER_DATA.projectstatus.map((eachStatus, index) => {
               return (
                 <Radio
+                  key={index}
                   checked={eachStatus.cid == filters.current}
                   value={eachStatus.cid}
                   iconColor="dark.8"
@@ -214,15 +215,15 @@ const ListingMobileFilter = ({ close }: any) => {
               .filter(({ value }) => !(value === "B" && path === "/search"))
               .map(({ value, constDesc }, i) => (
                 <Radio
-                  key={i}
+                  key={`listedBy_${i}`}
                   iconColor="dark.8"
                   color="green"
                   label={constDesc}
                   value={value}
-                  name="ListedBy"
+                  name="listedBy"
                   style={{ whiteSpace: "nowrap", marginBottom: "10px" }}
                   onClick={() => setSingleType("listedBy", value)}
-                  checked={filters.listedBy === value}
+                  checked={filters.listedBy == value}
                 />
               ))}
           </div>
@@ -285,7 +286,7 @@ const ListingMobileFilter = ({ close }: any) => {
                 {SEARCH_FILTER_DATA.facing.map((x, i) => {
                   return (
                     <Checkbox
-                      key={i}
+                      key={`facings_${i}`}
                       label={x.constDesc}
                       color="green"
                       onClick={() => handleCheckboxClick("facings", x.cid + 1)}
@@ -385,7 +386,7 @@ const ListingMobileFilter = ({ close }: any) => {
             {SEARCH_FILTER_DATA.photoAvail.map(({ id, label }, i) => {
               return (
                 <Radio
-                  key={i}
+                  key={`propertyType_${i}`}
                   iconColor="dark.8"
                   color="green"
                   label={label}
@@ -415,7 +416,7 @@ const ListingMobileFilter = ({ close }: any) => {
               {SEARCH_FILTER_DATA.furnish.map(({ constDesc, cid }, i) => {
                 return (
                   <Radio
-                    key={i}
+                    key={`furnish_${i}`}
                     iconColor="dark.8"
                     color="green"
                     label={constDesc}
