@@ -154,7 +154,7 @@ export default function Navigation({
     {
       condtion:
         detailsData.cg === "S" &&
-        detailsData.postedById === relateProjData.builderId &&
+        detailsData?.postedById === relateProjData?.builderId &&
         relateProjData?.banks?.length > 0,
       key: "loans",
     },

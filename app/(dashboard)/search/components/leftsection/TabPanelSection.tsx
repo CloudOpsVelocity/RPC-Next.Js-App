@@ -4,7 +4,8 @@ import { Loader, Tabs } from "@mantine/core";
 import { useIntersection } from "@mantine/hooks";
 import React, { useEffect, useRef } from "react";
 import useSearchFilters from "@/app/hooks/search";
-import ProjectCard from "../Card";
+import ProjectCard from "@/app/test/newui/components/Card";
+// import ProjectCard from "../Card";
 
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;

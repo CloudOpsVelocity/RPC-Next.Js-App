@@ -155,14 +155,23 @@ export default function TopRightSection({
           </div>
 
           <div className="flex  items-end flex-col gap-2">
-            <Button
+            <button className="bg-btnPrimary text-white  rounded-lg  text-[12px] inline-flex max-w-fit px-2 py-1 font-bold justify-center items-center ml-auto mt-[8px]">
+              <DownLoadIcon className="w-[20px] h-[20px]" /> Brochure
+            </button>
+            {/* <button
+              className="bg-btnPrimary rounded-[10px]  bottom-2 left-1 text-white text-[12px] px-1"
+              onClick={() => onAddingCompare()}
+            >
+              {Com ? "Remove  Compare" : "Add to Compare"}
+            </button> */}
+            {/* <Button
               onChange={() => onAddingCompare()}
               title={Com ? "Remove  Compare" : "Add to Compare"}
               buttonClass="inline-flex justify-center items-center gap-2.5 rounded p-0.5 border-[0.5px] border-solid border-[#00A8CD] text-[#00A8CD] text-xs not-italic font-semibold ml-auto"
-            />{" "}
-            <p className="text-[#242424] xl:text-nowrap text-wrap text-sm not-italic font-normal">
+            />{" "} */}
+            {/* <p className="text-[#242424] xl:text-nowrap text-wrap text-sm not-italic font-normal">
               Posted: <span className="font-bold">{timeAgo(postedDate)}</span>
-            </p>
+            </p> */}
           </div>
         </>
       )}

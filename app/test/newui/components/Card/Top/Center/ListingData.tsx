@@ -22,14 +22,14 @@ export default function ListingData({
   return (
     <>
       {" "}
-      <div className="text-[12px] pr-2">
+      <div className="text-[12px] sm:text-[14px] pr-2">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione
         expedita, deserunt...
       </div>
-      <div className="flex mb-2 sm:max-w-[380px] sm:max-w-full xl:w-[450px] gap-1 flex-col items-start  pl-[11px]  py-[2px] rounded border-[0.5px] border-solid border-[#616D75] bg-[#F5F5F5]">
+      <div className="flex mb-2 sm:max-w-[380px] sm:max-w-full xl:w-[450px] gap-1 flex-col items-start  pl-[0px]  py-[2px] rounded  border-solid border-[#616D75] bg-white">
         {type === "proj" && (
           <div className="mt-[2px] hidden md:block">
-            <h5 className="text-[#001F35] text-sm font-medium">
+            <h5 className="text-[#001F35] text-sm font-medium underline">
               Property Available:
             </h5>
             <p className="text-[#242424]  text-base not-italic font-semibold">
@@ -40,10 +40,10 @@ export default function ListingData({
 
         {/* down section start here */}
         {type === "proj" ? (
-          <div className="flex items-center gap-2 xl:gap-4 self-stretch">
+          <div className="flex flex-wrap xl:flex items-center gap-2 xl:gap-4 self-stretch">
             {type === "proj" && (
               <div className="mt-[2px] block md:hidden">
-                <h5 className="text-[#001F35] text-wrap text-[12px] xl:text-sm font-medium">
+                <h5 className="text-[#001F35] text-wrap text-[12px] xl:text-sm font-medium underline">
                   Property Type
                 </h5>
                 <p className="text-[#242424]  text-wrap text-[12px] xl:text-base not-italic font-semibold">
@@ -53,18 +53,19 @@ export default function ListingData({
                 </p>
               </div>
             )}
-            <Divider
+            {/* <Divider
               orientation="vertical"
               color="#7BA0BB"
               className="flex md:hidden"
-            />
+            /> */}
             <DownSectionCard
               label="Super Builtup Area"
               value={"1211-1111 sqft"}
             />
-            <Divider orientation="vertical" color="#7BA0BB" />
+            {/* <Divider orientation="vertical" color="#7BA0BB" /> */}
+            {/* <br /> */}
             <DownSectionCard label="Carpet Area" value={"1211-1111 sqft"} />
-            <Divider orientation="vertical" color="#7BA0BB" />
+            {/* <Divider orientation="vertical" color="#7BA0BB" /> */}
             <DownSectionCard
               label={type == "proj" ? "Land Area" : "Property Age"}
               value={
@@ -134,7 +135,7 @@ const DownSectionCard = ({
 }) => {
   return (
     <div className="flex flex-col justify-center items-start ">
-      <p className="text-[#001F35] text-[12px] sm:text-[14px] xl:text-sm not-italic font-medium text-wrap">
+      <p className="text-[#001F35] text-[12px] sm:text-[14px] xl:text-sm not-italic font-medium text-wrap underline">
         {label}:
       </p>
       <p className="text-[#242424] text-[12px] sm:text-[14px] xl:text-sm not-italic font-semibold">

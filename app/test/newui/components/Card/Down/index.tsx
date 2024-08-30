@@ -59,7 +59,7 @@ export default function CardDownSection({
   };
 
   return (
-    <div className="bg-[#DDF0FD] flex items-start gap-1 xl:gap-auto xl:px-[17px] xl:py-[9px] w-full p-2 justify-between flex-wrap sm:flex-nowrap">
+    <div className="bg-white flex items-start gap-1 xl:gap-auto xl:px-[17px] xl:py-[9px] w-full p-2 justify-between flex-wrap sm:flex-nowrap">
       <div className="flex gap-[9px]">
         {type === "proj" && (
           <>
@@ -86,13 +86,28 @@ export default function CardDownSection({
       </div>
 
       {/* right section */}
-      {/* <div className=" right-1">
-        <Button
-          onChange={handleOpen}
-          title={`${type === "proj" ? (isMobile ? "Contact" : "Request Callback") : "Request Callback"}`}
-          buttonClass="flex justify-end right-1  self-end text-[#FFF] ml-1 p-[3px] md:p-[5px] bg-[#0073C6] rounded-[5px] shadow-md text-[12px] xl:text-[12px] md:text-[12px] font-[700] text-nowrap"
-        />
-      </div> */}
+      {!isMobile && (
+        <div className=" right-1 inline-flex">
+          <button
+            className="bg-btnPrimary rounded-[4px]  bottom-2 left-1 text-white text-[12px] px-1 font-bold"
+            // onClick={() => onAddingCompare()}
+          >
+            Add to Compare
+            {/* {Com ? "Remove  Compare" : "Add to Compare"} */}
+          </button>
+          <Button
+            onChange={handleOpen}
+            title={`${
+              type === "proj"
+                ? isMobile
+                  ? "Contact"
+                  : "Request Callback"
+                : "Request Callback"
+            }`}
+            buttonClass="flex justify-end right-1  self-end text-[#FFF] ml-1 p-[3px] md:p-[5px] bg-[#0073C6] rounded-[5px] shadow-md text-[12px] xl:text-[12px] md:text-[12px] font-[700] text-nowrap"
+          />
+        </div>
+      )}
     </div>
   );
 }

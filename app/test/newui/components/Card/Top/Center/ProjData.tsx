@@ -51,8 +51,8 @@ export default function ProjData({
       <p className="text-[#242424] text-[12px] sm:text-[14px] xl:text-[14px] font-bold">
         <span>1Rk,2bhk,3bhk,4bhk</span> For Sale in {`${locality}, ${city}`}
       </p>
-      <p className="text-[#242424] text-[12px] sm:text-[16px] xl:text-[18px] capitalize font-medium line-clamp-1">
-        Codename Sector 2, Faridabad-Gurgaon Highway, Gurgaon, India
+      <p className="text-[#242424] text-[12px] sm:text-[16px] xl:text-[14px] capitalize font-medium line-clamp-1">
+        Address: Codename Sector 2, Faridabad-Gurgaon Highway, Gurgaon, India
       </p>
       <p className="text-[#242424] text-[12px] sm:text-[14px] xl:text-[14px] font-normal">
         Posted By: <span className="font-bold">{builderName}</span>
