@@ -171,8 +171,6 @@ export default function Navigation({
     { condtion: similarAvl, key: "similar" },
   ];
 
-  console.log(relateProjData?.faqs);
-
   return (
     <div
       className={clsx(

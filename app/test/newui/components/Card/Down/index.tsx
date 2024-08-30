@@ -33,6 +33,9 @@ export default function CardDownSection({
   postedBy,
   localityName,
   projIdEnc,
+  onAddingCompare,
+  isCompared,
+  handleOpen,
 }: any) {
   const isMobile = useMediaQuery("(max-width: 601px)");
   const name =
@@ -40,23 +43,23 @@ export default function CardDownSection({
       ? projName
       : `${bhkName ?? ""} ${propTypeName} for
     ${cg === "R" ? "Rent" : "Sell"} in ${ltName}`;
-  const [, { open }] = useReqCallPopup();
-  const setPopReqData = useSetAtom(NearByDataAtom);
-  const handleOpen = () => {
-    open({
-      modal_type:
-        type === "proj" ? "PROJECT_REQ_CALLBACK" : "PROPERTY_REQ_CALLBACK",
-      postedByName: type === "proj" ? builderName : postedBy,
-      postedId: builderId,
-      reqId: reqId,
-      source: type === "proj" ? "projCard" : "propCard",
-      title:
-        type === "proj"
-          ? projName
-          : `${bhkName ?? ""} ${propTypeName} for
-      ${cg === "R" ? "Rent" : "Sell"} in ${localityName}`,
-    });
-  };
+  // const [, { open }] = useReqCallPopup();
+  // const setPopReqData = useSetAtom(NearByDataAtom);
+  // const handleOpen = () => {
+  //   open({
+  //     modal_type:
+  //       type === "proj" ? "PROJECT_REQ_CALLBACK" : "PROPERTY_REQ_CALLBACK",
+  //     postedByName: type === "proj" ? builderName : postedBy,
+  //     postedId: builderId,
+  //     reqId: reqId,
+  //     source: type === "proj" ? "projCard" : "propCard",
+  //     title:
+  //       type === "proj"
+  //         ? projName
+  //         : `${bhkName ?? ""} ${propTypeName} for
+  //     ${cg === "R" ? "Rent" : "Sell"} in ${localityName}`,
+  //   });
+  // };
 
   return (
     <div className="bg-white flex items-start gap-1 xl:gap-auto xl:px-[17px] xl:py-[9px] w-full p-2 justify-between flex-wrap sm:flex-nowrap">
@@ -90,10 +93,9 @@ export default function CardDownSection({
         <div className=" right-1 inline-flex">
           <button
             className="bg-btnPrimary rounded-[4px]  bottom-2 left-1 text-white text-[12px] px-1 font-bold"
-            // onClick={() => onAddingCompare()}
+            onClick={() => onAddingCompare()}
           >
-            Add to Compare
-            {/* {Com ? "Remove  Compare" : "Add to Compare"} */}
+            {isCompared ? "Remove  Compare" : "Add to Compare"}
           </button>
           <Button
             onChange={handleOpen}

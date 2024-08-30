@@ -1,5 +1,9 @@
 import Button from "@/app/elements/button";
-import { GradientLocation, SearchMapIcon } from "@/app/images/commonSvgs";
+import {
+  GradientLocation,
+  SearchMapIcon,
+  SuperBuildupAreaIcon,
+} from "@/app/images/commonSvgs";
 import selectedSearchAtom from "@/app/store/search/map";
 import { useAtom, useSetAtom } from "jotai";
 import React from "react";
@@ -8,7 +12,8 @@ import { useMediaQuery } from "@mantine/hooks";
 import ProjData from "../Center/ProjData";
 import { ShareIcon } from "@/app/images/HomePageIcons";
 import { searchShareAtom } from "@/app/(dashboard)/search/components/SharePopup";
-import { DownLoadIcon } from "@/app/images/commongsSvgs2";
+import { AgeIcon, DownLoadIcon, NewMapIcon } from "@/app/images/commongsSvgs2";
+import clsx from "clsx";
 
 type Props = any;
 
@@ -48,14 +53,23 @@ export default function TopRightSection({
   return (
     <div
       onClick={(e) => e.stopPropagation()}
-      className="m-[2px]  md:mr-3 md:my-2 flex md:gap-[0.5px] mx-2 max-h-full justify-between items-start flex-row xl:flex-col xl:items-end"
+      className={clsx(
+        "m-[2px]  md:mr-3 md:my-2 flex md:gap-[0.5px] mx-2 max-h-full justify-between items-start flex-row xl:flex-col xl:items-end  ",
+        type !== "proj" && "sm:absolute top-0 right-0"
+      )}
     >
+      {type === "proj" && (
+        <div className="text-xs hidden sm:flex sm:text-base font-semibold text-black text-nowrap absolute top-3 right-24  sm:top-2 sm:right-[74px]">
+          Avg Price: ₹ 1,234
+        </div>
+      )}
+
       {isMobile && (
         <>
           <ProjData type={type} {...data} />
           <div className="flex flex-col justify-between">
-            <div className="flex flex-row md:flex-col gap-3 sm:gap-1 xl:gap-3  items-end">
-              <div className="gap-2 xl:gap-1 flex flex-row items-center align-middle ">
+            <div className="flex flex-row md:flex-col gap-3 sm:gap-1 xl:gap-3  justify-end">
+              <div className="gap-2 xl:gap-1 inline-flex ">
                 <HeartButton
                   shortListed={Sh}
                   onAddingShortList={onAddingShortList}
@@ -74,27 +88,29 @@ export default function TopRightSection({
                   <ShareIcon />
                 </button>
               </div>
-              <button
-                className="max-w-fit px-[1px] py-[1px]  rounded  text-[#242424] text-sm not-italic font-semibold my-1  md:mb-1  gradient"
-                onClick={() => {
-                  handleClick();
-                  setSelected({
-                    agentListing,
-                    ownerListing,
-                    projOrPropName,
-                    lat,
-                    lang,
-                    type,
-                    reqId: type === "proj" ? projIdEnc : propIdEnc,
-                  });
-                }}
-              >
-                <div className="px-[1px] py-[1px] inline-flex justify-center items-center bg-[#F0F9FF] gap-0.5 rounded">
-                  {" "}
-                  <span className="hidden md:flex">View on Map</span>{" "}
-                  <SearchMapIcon className="w-4 h-4" />
-                </div>
-              </button>
+              {!isMobile && (
+                <button
+                  className="hidden sm:flex max-w-fit sm:px-[1px] sm:py-[1px]  rounded  text-[#242424] text-sm not-italic font-semibold sm:my-1  md:mb-1  xl:gradient"
+                  onClick={() => {
+                    handleClick();
+                    setSelected({
+                      agentListing,
+                      ownerListing,
+                      projOrPropName,
+                      lat,
+                      lang,
+                      type,
+                      reqId: type === "proj" ? projIdEnc : propIdEnc,
+                    });
+                  }}
+                >
+                  <div className="xm:px-[1px] sm:py-[1px] inline-flex justify-center items-center xl:bg-[#F0F9FF] gap-0.5 rounded">
+                    {" "}
+                    <span className="hidden md:flex">View on Map</span>{" "}
+                    <NewMapIcon className="w-6 h-6" />
+                  </div>
+                </button>
+              )}
             </div>
 
             {/* <div className="flex items-end flex-col justify-between md:gap-2 mt-[2px]">
@@ -104,14 +120,21 @@ export default function TopRightSection({
                 buttonClass="inline-flex justify-center items-center gap-1 xl:gap-2.5 rounded p-0.5 border-[0.5px] border-solid border-[#00A8CD] text-[#00A8CD] text-[12px]       sm:text-[12px] xl:text-xs not-italic font-semibold ml-auto rounded-full"
               />{" "}
             </div> */}
-            <button className="bg-btnPrimary text-white  rounded-full text-[12px] inline-flex max-w-fit px-1 font-bold justify-center items-center ml-auto mt-[8px]">
-              <DownLoadIcon className="w-[20px] h-[20px]" /> Brochure
-            </button>
+            {type === "proj" && (
+              <button className="bg-btnPrimary text-white  rounded-full text-[12px] inline-flex max-w-fit px-1 font-bold justify-center items-center ml-auto mt-[8px]">
+                <DownLoadIcon className="w-[20px] h-[20px]" /> Brochure
+              </button>
+            )}
+
+            <div className="text-xs sm:hidden  sm:text-base font-semibold text-black  top-2.5 right-24  sm:top-0.5 sm:right-16 mt-1">
+              <p className="text-right text-[14px]">Avg Price</p>
+              <p className="text-left ml-[30px] text-[16px] mt-0.5">₹ 1,234</p>
+            </div>
           </div>
         </>
       )}
       {!isMobile && (
-        <>
+        <div>
           <div className="flex  flex-col justify-center  h-auto items-end">
             <div className="space-x-2 flex flex-row justify-center">
               <HeartButton
@@ -133,7 +156,7 @@ export default function TopRightSection({
               </button>
             </div>
             <button
-              className="max-w-fit px-[1px] py-[1px] rounded text-[#242424] text-sm not-italic font-semibold my-2 md:mb-1 gradient"
+              className="max-w-fit px-[1px] py-[1px] rounded text-[#242424] text-xs not-italic font-semibold my-2 md:mb-1 gradient"
               onClick={() =>
                 setSelected({
                   agentListing,
@@ -147,37 +170,48 @@ export default function TopRightSection({
               }
             >
               {" "}
-              <div className="px-[1px] py-[1px] inline-flex justify-center items-center bg-[#F0F9FF] gap-0.5 rounded">
+              <div className="py-[1px] px-[2px] inline-flex justify-center items-center bg-[#F0F9FF]  rounded">
                 {" "}
-                View on Map <SearchMapIcon className="w-4 h-4" />
+                View on Map
               </div>
             </button>
+            {type !== "proj" && (
+              <>
+                <ListingDownSectionCard label={"Facing"} value={"East"} />
+                <ListingDownSectionCard label={"Property Age"} value={"2"} />
+              </>
+            )}
           </div>
-
-          <div className="flex  items-end flex-col gap-2">
-            <button className="bg-btnPrimary text-white  rounded-lg  text-[12px] inline-flex max-w-fit px-2 py-1 font-bold justify-center items-center ml-auto mt-[8px]">
-              <DownLoadIcon className="w-[20px] h-[20px]" /> Brochure
-            </button>
-            {/* <button
-              className="bg-btnPrimary rounded-[10px]  bottom-2 left-1 text-white text-[12px] px-1"
-              onClick={() => onAddingCompare()}
-            >
-              {Com ? "Remove  Compare" : "Add to Compare"}
-            </button> */}
-            {/* <Button
-              onChange={() => onAddingCompare()}
-              title={Com ? "Remove  Compare" : "Add to Compare"}
-              buttonClass="inline-flex justify-center items-center gap-2.5 rounded p-0.5 border-[0.5px] border-solid border-[#00A8CD] text-[#00A8CD] text-xs not-italic font-semibold ml-auto"
-            />{" "} */}
-            {/* <p className="text-[#242424] xl:text-nowrap text-wrap text-sm not-italic font-normal">
-              Posted: <span className="font-bold">{timeAgo(postedDate)}</span>
-            </p> */}
-          </div>
-        </>
+          {type === "proj" && (
+            <div className="flex  items-end flex-col gap-2">
+              <button className="bg-btnPrimary text-white  rounded-lg  text-[12px] inline-flex max-w-fit px-2 py-1 font-bold justify-center items-center ml-auto mt-[8px]">
+                <DownLoadIcon className="w-[20px] h-[20px]" /> Brochure
+              </button>
+            </div>
+          )}
+        </div>
       )}
     </div>
   );
 }
+const ListingDownSectionCard = ({
+  label,
+  value,
+  Icon,
+}: {
+  label: string;
+  value: string;
+  Icon?: React.JSX.Element;
+}) => {
+  return (
+    <div className="flex  justify-center items-center text-right ">
+      <p className="text-[#001F35] text-[12px]  xl:text-sm not-italic font-medium text-wrap  inline-flex">
+        {Icon} {label}:
+      </p>
+      <p className="text-[#242424] text-[14px]  not-italic mt-[1px]">{value}</p>
+    </div>
+  );
+};
 
 const config = {
   shareIcon: (

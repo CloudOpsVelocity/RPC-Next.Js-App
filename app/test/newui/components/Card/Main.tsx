@@ -57,7 +57,6 @@ const MainBox = ({ data, refetch, index, mutate }: Props) => {
     compareAdded,
     shortListed,
   } = data;
-  console.log(data);
   const [state, setState] = useState({
     compareAdded: compareAdded === "Y" ? true : false,
     shortListed: shortListed === "Y" ? true : false,
@@ -105,18 +104,40 @@ const MainBox = ({ data, refetch, index, mutate }: Props) => {
       window.open(`/listing/banglore/${projEncId}`, "_blank");
     }
   };
-
+  const [, { open }] = useReqCallPopup();
+  const handleOpen = () => {
+    open({
+      modal_type:
+        type === "proj" ? "PROJECT_REQ_CALLBACK" : "PROPERTY_REQ_CALLBACK",
+      postedByName: type === "proj" ? data.builderName : data.postedBy,
+      postedId: data.builderId,
+      reqId: reqId,
+      source: type === "proj" ? "projCard" : "propCard",
+      title:
+        type === "proj"
+          ? projName
+          : `${bhkName ?? ""} ${propTypeName} for
+      ${data.cg === "R" ? "Rent" : "Sell"} in ${localityName}`,
+    });
+  };
   const isMobile = useMediaQuery("(max-width: 1600px)");
 
   return (
     <div className="h-auto max-w-full xl:w-full m-2 self-stretch rounded border-2 shadow-[0px_4px_30px_0px_rgba(74,82,113,0.20)]  border-solid border-[#A4B8D4]">
       <div
         onClick={() => onClickRedirect(reqId)}
-        className="flex flex-col xl:flex-row justify-between w-full  xl:max-w-full"
+        className="flex flex-col xl:flex-row justify-between w-full  xl:max-w-full relative"
       >
-        <LeftSection src={coverUrl ?? coverImage} rera={rerastatus} />
+        <LeftSection
+          src={coverUrl ?? coverImage}
+          rera={rerastatus}
+          onAddingCompare={onAddingCompare}
+          isCompared={state.compareAdded}
+          openReqCallback={handleOpen}
+          type={type}
+        />
         {isMobile && (
-          <div className="flex   flex-col  justify-between">
+          <div className="flex   flex-col  justify-between relative">
             <TopRightSection
               data={newData}
               type={type}
@@ -147,6 +168,9 @@ const MainBox = ({ data, refetch, index, mutate }: Props) => {
         type={type}
         reqId={reqId}
         {...data}
+        onAddingCompare={onAddingCompare}
+        isCompared={state.compareAdded}
+        handleOpen={handleOpen}
       />
     </div>
   );
