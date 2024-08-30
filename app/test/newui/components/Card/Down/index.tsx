@@ -37,7 +37,7 @@ export default function CardDownSection({
   isCompared,
   handleOpen,
 }: any) {
-  const isMobile = useMediaQuery("(max-width: 601px)");
+  const isMobile = useMediaQuery("(max-width: 1600px)");
   const name =
     type === "proj"
       ? projName

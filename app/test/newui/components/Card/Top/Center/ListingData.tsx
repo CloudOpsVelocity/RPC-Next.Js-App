@@ -85,18 +85,18 @@ export default function ListingData({
           <div className="flex items-center gap-2 xl:gap-x-4 xl:gap-y-0 self-stretch flex-wrap">
             {propTypeName != "Plot" ? (
               <>
-                <ListingDownSectionCard
+                <DownSectionCard
                   label="Super Builtup Area"
                   value={`${formatNumberWithSuffix(sba)} sq.ft`}
                 />
-                <ListingDownSectionCard
+                <DownSectionCard
                   label="Carpet Area"
                   value={`${formatNumberWithSuffix(ca)} sq.ft`}
                 />
               </>
             ) : (
               <>
-                <ListingDownSectionCard
+                <DownSectionCard
                   label="Total Area"
                   value={`${formatNumberWithSuffix(pa)} sq.ft`}
                 />
@@ -104,11 +104,11 @@ export default function ListingData({
             )}
 
             {/* {propStatus == "Under Construction" ? null : (
-              // <ListingDownSectionCard
+              // <DownSectionCard
               //   label="Possession Date"
               //   value={formatDate(possassionDate, true)}
               // />
-              <ListingDownSectionCard
+              <DownSectionCard
                 label="Property Age"
                 value={
                   type == "proj"
@@ -117,21 +117,17 @@ export default function ListingData({
                 }
               />
             )} */}
-            {/* <ListingDownSectionCard
+            {/* <DownSectionCard
               label="Furnishing"
               value={"Fully Furnished"}
             /> */}
+            <DownSectionCard label={"Converd Parkings"} value={"Converd 2"} />
 
-            <ListingDownSectionCard label={"Bathrooms"} value={"2"} />
-            <ListingDownSectionCard label={"Balcony"} value={"6"} />
-            <div className="flex flex-nowrap">
-              <ListingDownSectionCard label={"Parkings"} value={"2"} />
-              <ListingDownSectionCard
-                label={"Converd Parkings"}
-                value={"Converd 2"}
-              />
-
-              <ListingDownSectionCard label={"OwnerShip"} value={"FreeHold"} />
+            <DownSectionCard label={"OwnerShip"} value={"FreeHold"} />
+            <div className="flex flex-nowrap gap-2 xl:gap-x-4">
+              <DownSectionCard label={"Bathrooms"} value={"2 No's"} />
+              <DownSectionCard label={"Balcony"} value={"6 No's"} />
+              <DownSectionCard label={"Parkings"} value={"2 No's"} />
             </div>
           </div>
         )}
@@ -166,7 +162,7 @@ const DownSectionCard = ({
 const ListingDownSectionCard = ({
   label,
   value,
-  Icon = <SuperBuildupAreaIcon className="w-4 h-4" />,
+  Icon,
 }: {
   label: string;
   value: string;

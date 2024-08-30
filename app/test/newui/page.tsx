@@ -11,6 +11,19 @@ export default function Page({}: Props) {
   };
   const refetch = () => {};
   const mutate = () => {};
+  const arr = ["2bhk", "2bhk", "3bhk", "3Bhk", "4bhk"];
+  // remove duplicates in this array
+  const removeDuplicated = (input: string[]) => {
+    let r: string[] = [];
+    for (let i = 0; i < input.length; i++) {
+      if (!r.includes(input[i])) {
+        r.push(input[i]);
+      }
+    }
+    return r;
+  };
+  const output = removeDuplicated(arr);
+  console.log(output);
   return (
     <div className="flex justify-center items-center flex-wrap w-[100%] sm:max-w-[50%]">
       {fakeData.map((eachOne, index: number) => {

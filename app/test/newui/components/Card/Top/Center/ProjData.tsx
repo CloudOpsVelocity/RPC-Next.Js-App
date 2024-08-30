@@ -25,25 +25,10 @@ export default function ProjData({
   cityName,
   postedBy,
 }: Props) {
-  console.log(
-    minPrice,
-    maxPrice,
-    projName,
-    city,
-    state,
-    locality,
-    builderName,
-    shortListed,
-    type,
-    price,
-    propName,
-    localityName,
-    propTypeName
-  );
   return type === "proj" ? (
     <div className="flex flex-col">
       <p className="text-[#001F35] text-[14px] sm:text-[16px] xl:text-[18px] font-bold break-words whitespace-normal min-w-0 inline-flex gap-1">
-        {projName} <NewMapIcon className="w-5 h-5 block sm:hidden" />
+        {projName} <NewMapIcon className="w-4 h-4 block sm:hidden mt-0.5" />
       </p>
 
       <p className="text-[#148B16] text-[14px] sm:text-[18px] xl:text-xl not-italic font-bold relative">

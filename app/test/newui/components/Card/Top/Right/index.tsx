@@ -54,12 +54,12 @@ export default function TopRightSection({
     <div
       onClick={(e) => e.stopPropagation()}
       className={clsx(
-        "m-[2px]  md:mr-3 md:my-2 flex md:gap-[0.5px] mx-2 max-h-full justify-between items-start flex-row xl:flex-col xl:items-end  ",
-        type !== "proj" && "sm:absolute top-0 right-0"
+        "m-[2px]  xl:mr-3 xl:my-2 flex xl:gap-[0.5px] mx-2 max-h-full justify-between items-start flex-row xl:flex-col xl:items-end  ",
+        type !== "proj" && "xl:absolute top-0 right-0"
       )}
     >
       {type === "proj" && (
-        <div className="text-xs hidden sm:flex sm:text-base font-semibold text-black text-nowrap absolute top-3 right-24  sm:top-2 sm:right-[74px]">
+        <div className="text-xs hidden xl:flex sm:text-base font-semibold text-black text-nowrap absolute top-3 right-24  sm:top-2 sm:right-[74px]">
           Avg Price: ₹ 1,234
         </div>
       )}
@@ -69,7 +69,7 @@ export default function TopRightSection({
           <ProjData type={type} {...data} />
           <div className="flex flex-col justify-between">
             <div className="flex flex-row md:flex-col gap-3 sm:gap-1 xl:gap-3  justify-end">
-              <div className="gap-2 xl:gap-1 inline-flex ">
+              <div className="gap-2 xl:gap-1 inline-flex justify-end">
                 <HeartButton
                   shortListed={Sh}
                   onAddingShortList={onAddingShortList}
