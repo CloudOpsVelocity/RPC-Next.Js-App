@@ -35,7 +35,9 @@ export default async function Page({ params: { city, slug } }: Props) {
   if (!id) {
     notFound();
   }
+
   const data = await getBuilderDetailsPageData(id.split("_")[1], pathname);
+
   return <BuilderPage data={data} id={id.split("_")[1]} />;
 }
 
