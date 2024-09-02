@@ -96,15 +96,20 @@ const LeafMap: React.FC<{
       <div className="flex justify-between w-[95%] sm:w-[90%] mx-auto">
         {type === "prop" ? (
           <PropertyHeading
-          title={<Fragment>Near By Locations Of Project <span className="text-[#148B16]">{projName}</span></Fragment>}
-          desc=" Explore near by convenient amenities, entertainment, and essential
+            title={
+              <Fragment>
+                Near By Locations{" "}
+                <span className="text-[#148B16]">{projName}</span>
+              </Fragment>
+            }
+            desc=" Explore near by convenient amenities, entertainment, and essential
             services"
             className="sm:mb-[8px]"
           />
         ) : (
           <div>
             <h2 className="text-h2 lg:text-[32px] font-semibold mb-[12px] capitalize break-words max-w-[78%]">
-              <span>Near By Locations Of Project </span>
+              <span>Near By Locations </span>
               <span className="text-[#148B16] font-bold">{projName} </span>
             </h2>
             <SubHeading
@@ -226,9 +231,8 @@ const LeafMap: React.FC<{
         ) : (
           <div>
             <h2 className="text-h2 lg:text-[32px] font-semibold mb-[12px] capitalize break-words max-w-[78%]">
-            <span>Map Preview Of  {" "}</span>
-            <span className="text-[#148B16] font-bold">{projName} </span>
-              
+              <span>Map Preview Of </span>
+              <span className="text-[#148B16] font-bold">{projName} </span>
             </h2>
             {/*  <SubHeading
                     text="Explore nearby convenient amenities, entertainment, and essential services"

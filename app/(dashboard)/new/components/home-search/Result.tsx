@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import toast from "react-hot-toast";
 import { mainSearchNoResult } from "@/app/images/commonSvgs";
+import { GrayMapIcon } from "@/app/images/commongsSvgs2";
 
 export default function Results() {
   const { data, isLoading, handleResetQuery } = useQsearch();
@@ -59,11 +60,19 @@ export default function Results() {
             if (ids.length > 3) {
               const [ut, cg, id, lt] = ids;
               /*  url = `propTypes=${ut}&cg=${cg}&localities=${data.name.trim()}%2B${lt}`; */
-              url = `propTypes=${ut}&cg=${cg}&localities=` + encodeURIComponent(data.name.trim()) + "%2B" + encodeURIComponent(lt);
+              url =
+                `propTypes=${ut}&cg=${cg}&localities=` +
+                encodeURIComponent(data.name.trim()) +
+                "%2B" +
+                encodeURIComponent(lt);
             } else {
               const [ut, cg, lt] = ids;
               // url = `propTypes=${ut}&cg=${cg}&localities=${lt}`;
-              url = `propTypes=${ut}&cg=${cg}&localities=` + encodeURIComponent(data.name.trim()) + "%2B" + encodeURIComponent(lt);
+              url =
+                `propTypes=${ut}&cg=${cg}&localities=` +
+                encodeURIComponent(data.name.trim()) +
+                "%2B" +
+                encodeURIComponent(lt);
             }
 
             window.open("/search/listing?" + url);
@@ -72,10 +81,16 @@ export default function Results() {
 
             if (ids.length > 4) {
               const [ut, pt, cg, id, lt] = ids;
-              url = `propTypes=${pt}&unitTypes=${ut}&cg=${cg}&projIdEnc=${id}&localities=${data.name.trim()}` + "%2B" + encodeURIComponent(lt);
+              url =
+                `propTypes=${pt}&unitTypes=${ut}&cg=${cg}&projIdEnc=${id}&localities=${data.name.trim()}` +
+                "%2B" +
+                encodeURIComponent(lt);
             } else {
               const [ut, pt, cg, lt] = ids;
-              url = `propTypes=${pt}&unitTypes=${ut}&cg=${cg}&localities=${data.name.trim()}` + "%2B" + encodeURIComponent(lt);
+              url =
+                `propTypes=${pt}&unitTypes=${ut}&cg=${cg}&localities=${data.name.trim()}` +
+                "%2B" +
+                encodeURIComponent(lt);
             }
             window.open("/search/listing?" + url);
           }
@@ -104,8 +119,9 @@ export default function Results() {
         break;
       case "builder":
         // const url = encodeURI(`${data.name}+${data.id}`);
-        const url = encodeURIComponent(data.name) + '%2B' + encodeURIComponent(data.id);
-        window.open(`/search?builderIds=${url}`); 
+        const url =
+          encodeURIComponent(data.name) + "%2B" + encodeURIComponent(data.id);
+        window.open(`/search?builderIds=${url}`);
         break;
       default:
         break;
@@ -150,10 +166,10 @@ export default function Results() {
                   onClick={() =>
                     handleAddSearch(`${locality.name}+${locality.id}`)
                   }
-                  className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1 sm:gap-3.5 xl:text-nowrap cursor-pointer"
+                  className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1 sm:gap-1 xl:text-nowrap cursor-pointer"
                   key={locality.id}
                 >
-                  {locality.name}
+                  <GrayMapIcon className="w-3 h-3" /> {locality.name}
                 </li>
               ))}
             </ul>
@@ -171,10 +187,10 @@ export default function Results() {
               {projects?.map((project: any) => (
                 <li
                   onClick={() => handlePush("project", project.id)}
-                  className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1 sm:gap-3.5 xl:text-nowrap cursor-pointer"
+                  className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1  xl:text-nowrap cursor-pointer"
                   key={project.id}
                 >
-                  {project.name}
+                  <GrayMapIcon className="w-3 h-3" /> {project.name}
                 </li>
               ))}
             </ul>
@@ -185,13 +201,11 @@ export default function Results() {
             <ul>
               {projectListing?.map((projectListing: any) => (
                 <li
-                  onClick={() =>
-                    handlePush("projectListing", projectListing)
-                  }
-                  className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1 sm:gap-3.5 xl:text-nowrap cursor-pointer"
+                  onClick={() => handlePush("projectListing", projectListing)}
+                  className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1  xl:text-nowrap cursor-pointer"
                   key={projectListing.id}
                 >
-                  {projectListing.name}
+                  <GrayMapIcon className="w-3 h-3" /> {projectListing.name}
                 </li>
               ))}
             </ul>
@@ -205,10 +219,10 @@ export default function Results() {
                       name: listing.name.split(" in ")[1],
                     })
                   }
-                  className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1 sm:gap-3.5 xl:text-nowrap cursor-pointer"
+                  className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1  xl:text-nowrap cursor-pointer"
                   key={listing.id}
                 >
-                  {listing.name}
+                  <GrayMapIcon className="w-3 h-3" /> {listing.name}
                 </li>
               ))}
             </ul>
@@ -222,10 +236,10 @@ export default function Results() {
                       id: builder.id,
                     })
                   }
-                  className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic leading-[normal] flex items-center gap-1 sm:gap-3.5 xl:text-nowrap cursor-pointer"
+                  className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic leading-[normal] flex items-center gap-1  xl:text-nowrap cursor-pointer"
                   key={builder.id}
                 >
-                  {builder.name}
+                  <GrayMapIcon className="w-3 h-3" /> {builder.name}
                 </li>
               ))}
             </ul>
@@ -239,7 +253,7 @@ export default function Results() {
 const SubHeading = ({ text }: { text: string }) => {
   return (
     <div className="flex items-center gap-1.5 mt-[14px] mb-1">
-      <div className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic font-semibold leading-[normal] flex items-center gap-1 sm:gap-3.5 xl:text-nowrap">
+      <div className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic font-semibold leading-[normal] flex items-center gap-1  xl:text-nowrap">
         {text}
       </div>
       <hr className="w-full h-px border-0 bg-[#98A5B8]" />

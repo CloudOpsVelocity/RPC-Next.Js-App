@@ -25,6 +25,7 @@ export default function Navigation({
   cg,
   propTypeName,
   bhkId,
+  nearByLocations,
 }: {
   detailsData: any;
   projData: boolean;
@@ -36,6 +37,7 @@ export default function Navigation({
   cg: string;
   propTypeName: string;
   bhkId: number;
+  nearByLocations?: Object;
 }) {
   const isTab = useMediaQuery("(max-width: 1600px)");
   const { data } = useRatings();
@@ -215,9 +217,19 @@ export default function Navigation({
                 {topic.id === "ratings" && data?.status && (
                   <span>Customer Reviews</span>
                 )}
+                {topic.id === "nearBy" && (
+                  <span>
+                    {" "}
+                    {Object.keys(nearByLocations ? nearByLocations : {})
+                      .length == 0
+                      ? "Map Preview"
+                      : "Near By"}{" "}
+                  </span>
+                )}
                 {topic.id === "brochure" && <span>{topic.label}</span>}
                 {topic.id !== "ratings" &&
                   topic.id !== "brochure" &&
+                  topic.id !== "nearBy" &&
                   topic.label}
               </div>
             )

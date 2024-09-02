@@ -175,6 +175,8 @@ const RightSection = ({ propCgId }: any) => {
                 propCgId == projectprops.rowHouse ||
                 propCgId == projectprops.villa
                   ? "At Elevation"
+                  : propCgId === projectprops.independent
+                  ? "Total No."
                   : "At Floor"
               }:`}
               <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
@@ -258,7 +260,8 @@ const RightSection = ({ propCgId }: any) => {
           )}
         {(propCgId == projectprops.villa ||
           propCgId == projectprops.rowHouse ||
-          propCgId == projectprops.villament) &&
+          propCgId == projectprops.villament ||
+          propCgId == projectprops.independent) &&
           data?.terraceArea &&
           data.terraceArea !== "null" && (
             <div className="flex items-center space-x-3">

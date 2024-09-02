@@ -24,8 +24,10 @@ export default function RoomBasicDetails({
         </p>
       </div>
 
-      <p className=" mt-1 xl:mt-2 
-      text-[#202020]  text-[13.5px] sm:text-[18px] xl:text-2xl not-italic font-semibold  ">
+      <p
+        className=" mt-1 xl:mt-2 
+      text-[#202020]  text-[13.5px] sm:text-[18px] xl:text-2xl not-italic font-semibold  capitalize"
+      >
         {formattedValue}
       </p>
     </div>

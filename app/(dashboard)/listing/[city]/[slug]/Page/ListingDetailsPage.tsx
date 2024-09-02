@@ -47,7 +47,6 @@ export default function ListingDetailsPage({
   nearByLocations,
   TITLE_OF_PROP,
 }: Props) {
-  console.log(data.cg, data.postedById, projData.builderId);
   // console.log(
   //   data.cg === "S" &&
   //     data.postedById === projData.builderId &&
@@ -59,7 +58,7 @@ export default function ListingDetailsPage({
       <div className="mt-[70px] sm:mt-[90px] w-full sm:pb-[2%] flex xl:text-ellipsis items-center justify-center flex-col">
         <div className="p-[1%] sm:p-[1%] sm:py-0 xl:p-[1%] w-full sm:w-[94%]">
           <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%] mt-1 ">
-            <span>Home</span> {" > "}
+            <Link href={"/"}>Home</Link> {" > "}
             <Link href={"/project/banglore"} className="text-nowrap">
               <span>Property In {data.ctName}</span>
             </Link>{" "}
@@ -88,6 +87,7 @@ export default function ListingDetailsPage({
             cg={data.cg}
             propTypeName={data.propTypeName}
             bhkId={data.bhkId ?? 41}
+            nearByLocations={nearByLocations}
           />
         </MobileHidden>
         {/* Overview */}

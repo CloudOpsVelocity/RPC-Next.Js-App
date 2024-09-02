@@ -407,4 +407,15 @@ export const SEARCH_FILTER_DATA = {
       label: "Video Available",
     },
   ],
+
+  used: [
+    {
+      id: 1241,
+      label: "Used",
+    },
+    {
+      id: 2122,
+      label: "Un-Used",
+    },
+  ],
 };

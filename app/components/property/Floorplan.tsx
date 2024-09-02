@@ -15,6 +15,7 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
   const [opened, setOpened] = useState(false);
   const setValue = useSetAtom(selectedFloorAtom);
   const type = listingProps[data.propTypeName as keyof typeof listingProps];
+  console.log(data);
   const handleOpen = () => {
     setValue({
       projIdEnc: "4f313de2f95cd9d761098b8f6c09417c",
@@ -31,7 +32,7 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
       facingName: data.facingName,
       caretarea: data.ca,
       superBuildUparea: data.sba,
-      terraceArea: data.ta,
+      ta: data.ta,
       totalNumberofBathroom: data.nobt,
       totalNumberOfBalcony: data.nobl,
       noOfCarParking: data.noocp,

@@ -75,11 +75,17 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
     );
 
     if (selectedItem) {
+      // Check if the item is within the first `maxDisplay` items or if it's the last item when more than `maxDisplay` items are present
+      const isLastItemToDisplay =
+        i === maxDisplay - 1 && filters.unitTypes.length > maxDisplay;
+      const shouldAddComma =
+        i < maxDisplay - 1 && i < filters.unitTypes.length - 1;
+
       return (
         <React.Fragment key={itemId}>
           {i < maxDisplay ? selectedItem.title : ""}
-          {filters.unitTypes.length > 1 && i !== filters.unitTypes.length - 1 ? ", " : ""}
-          {i === maxDisplay - 1 && filters.unitTypes.length > maxDisplay ? " ..." : ""}
+          {shouldAddComma ? ", " : ""}
+          {isLastItemToDisplay ? " ..." : ""}
         </React.Fragment>
       );
     }
@@ -91,7 +97,8 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
     open();
   };
   const shouldShowBudget = !(
-    (filters.bugdetValue[0] === 500000 && filters.bugdetValue[1] === 600000000) ||
+    (filters.bugdetValue[0] === 500000 &&
+      filters.bugdetValue[1] === 600000000) ||
     (filters.bugdetValue[0] === 0 && filters.bugdetValue[1] === 100000)
   );
   const handleToggle = () => {
@@ -199,7 +206,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
             shadow="lg"
             radius={10}
             offset={{ mainAxis: 10, crossAxis: -200 }}
-            opened={closePopup} 
+            opened={closePopup}
             onClose={() => setClosePopup(false)}
           >
             <Popover.Target>
@@ -281,7 +288,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
               </div>
             </Popover.Target>
             <Popover.Dropdown className="!z-50" p={0}>
-              <FilterPopup close={handleToggle}  />
+              <FilterPopup close={handleToggle} />
             </Popover.Dropdown>
           </Popover>
         )}
@@ -315,39 +322,40 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
             </button>
           </Popover.Target>
           <Popover.Dropdown className="!z-50" p={0}>
-            <PropTypeFilter/>
+            <PropTypeFilter />
           </Popover.Dropdown>
         </Popover>
 
-        {(filters.propTypes === undefined || filters.propTypes !== projectprops.plot) && 
-        <Popover
-          width={"auto"}
-          trapFocus
-          position="bottom"
-          withArrow
-          shadow="lg"
-          radius={10}
-          offset={{ mainAxis: 10, crossAxis: 0 }}
-        >
-          <Popover.Target>
-            <button className=" text-[#0073C6] text-[18px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] hidden justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md md:flex ">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="10"
-                height="10"
-                viewBox="0 0 10 10"
-                fill="none"
-              >
-                <circle cx="5" cy="5" r="5" fill="#148B16" />
-              </svg>
-              {filters.unitTypes.length > 0 ? values : "Select BHK Type"}
-            </button>
-          </Popover.Target>
-          <Popover.Dropdown className="!z-50" p={0}>
-            <BhkFilter />
-          </Popover.Dropdown>
-        </Popover>
-        }
+        {(filters.propTypes === undefined ||
+          filters.propTypes !== projectprops.plot) && (
+          <Popover
+            width={"auto"}
+            trapFocus
+            position="bottom"
+            withArrow
+            shadow="lg"
+            radius={10}
+            offset={{ mainAxis: 10, crossAxis: 0 }}
+          >
+            <Popover.Target>
+              <button className=" text-[#0073C6] text-[18px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] hidden justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md md:flex ">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="10"
+                  height="10"
+                  viewBox="0 0 10 10"
+                  fill="none"
+                >
+                  <circle cx="5" cy="5" r="5" fill="#148B16" />
+                </svg>
+                {filters.unitTypes.length > 0 ? values : "Select BHK Type"}
+              </button>
+            </Popover.Target>
+            <Popover.Dropdown className="!z-50" p={0}>
+              <BhkFilter />
+            </Popover.Dropdown>
+          </Popover>
+        )}
 
         <Popover
           width={"auto"}
@@ -366,10 +374,17 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
               <span className="bg-[#148B16] rounded-full text-white text-sm block w-5 h-5">
                 ₹
               </span>
-              {(shouldShowBudget && ((filters.bugdetValue[0] !== undefined && filters.bugdetValue[0] !== 0 && filters.bugdetValue[0].toString() !== "") || (filters.bugdetValue[1] !== undefined && filters.bugdetValue[1] !== 0 && filters.bugdetValue[1].toString() !== ""))) ?
-                `${toFormattedString(filters.bugdetValue[0])}  ${"- " + toFormattedString(filters.bugdetValue[1])}`
-                : " Add Budget"
-              } 
+              {shouldShowBudget &&
+              ((filters.bugdetValue[0] !== undefined &&
+                filters.bugdetValue[0] !== 0 &&
+                filters.bugdetValue[0].toString() !== "") ||
+                (filters.bugdetValue[1] !== undefined &&
+                  filters.bugdetValue[1] !== 0 &&
+                  filters.bugdetValue[1].toString() !== ""))
+                ? `${toFormattedString(filters.bugdetValue[0])}  ${
+                    "- " + toFormattedString(filters.bugdetValue[1])
+                  }`
+                : " Add Budget"}
             </button>
           </Popover.Target>
           <Popover.Dropdown className="!z-50" p={0}>

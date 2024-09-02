@@ -15,7 +15,7 @@ export default function ListItem({ label, value, className }: Props) {
         className
       )}
     >
-      <div className=" flex items-center   text-[#202020] text-[14px] xl:text-xl not-italic font-medium leading-[normal] relative pl-5">
+      <div className=" flex items-center   text-[#202020] text-[14px] xl:text-xl not-italic font-medium leading-[normal] relative pl-5 capitalize">
         <span className="text-center  absolute left-0 -top-[30px] xl:-top-[25px] font-medium text-5xl">
           .
         </span>
@@ -35,10 +35,10 @@ const config = {
 
 function formatCurrency(input: number | string): string {
   // Convert input to a number if it is a string
-  const value = typeof input === 'string' ? parseFloat(input) : input;
+  const value = typeof input === "string" ? parseFloat(input) : input;
 
   // Check for invalid numbers
-  if (isNaN(value)) return "Invalid Number"; 
+  if (isNaN(value)) return "Invalid Number";
 
   // Helper function to format numbers with commas
   const formatNumberWithCommas = (num: number): string => {

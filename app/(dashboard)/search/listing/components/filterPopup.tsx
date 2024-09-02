@@ -31,7 +31,7 @@ import { MainSearchMultiSelect } from "../../components/_ui/MultiselectListings"
 import { formatBudgetValue } from "../../components/buget";
 import FurnishOptions from "./filterSection/Furnish";
 
-const FilterPopup = ({close}:{close: ()=>void}) => {
+const FilterPopup = ({ close }: { close: () => void }) => {
   const path = usePathname();
   const [current, setCurrent] = useState("Bhk");
   const propKeys = [35, 33, 31, 34, 32, 36];
@@ -118,8 +118,8 @@ const FilterPopup = ({close}:{close: ()=>void}) => {
             id="Search"
           >
             Search By Locality, Projects or Listings
-          </h3> 
-          <MainSearchMultiSelect  type="listing" />
+          </h3>
+          <MainSearchMultiSelect type="listing" />
           {filters?.propTypes != projectprops.plot && (
             <>
               <h3
@@ -443,6 +443,29 @@ const FilterPopup = ({close}:{close: ()=>void}) => {
               </div>
             </React.Fragment>
           )}
+
+          <h3
+            className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
+            id="Used or Not Used"
+          >
+            Used or Not Used
+          </h3>
+          <div className="flex  mb-[3%] justify-start items-start flex-wrap gap-[4%]">
+            {SEARCH_FILTER_DATA.used.map(({ id, label }) => {
+              return (
+                <Radio
+                  key={id}
+                  iconColor="dark.8"
+                  color="green"
+                  label={label}
+                  value={id}
+                  name="photo"
+                  style={{ whiteSpace: "nowrap", marginBottom: "10px" }}
+                  onClick={() => setSingleType("pnb", id)}
+                />
+              );
+            })}
+          </div>
         </ScrollArea>
       </div>
     </div>

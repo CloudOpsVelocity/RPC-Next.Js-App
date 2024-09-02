@@ -55,7 +55,17 @@ const PropertyFirstBlock: React.FC<Props> = ({
     setC("floorPlans");
     setTimeout(() => setIsScrolling(false), 3000);
   }
-
+  let bhks = ["1Bhk", "2bhk", "2bhk", "3bhk", "3Bhk"];
+  const removeDuplicates = (input: string[]) => {
+    let result: string[] = [];
+    for (let i = 0; i < input.length; i++) {
+      if (!result.includes(input[i])) {
+        result.push(input[i]);
+      }
+    }
+    return result;
+  };
+  console.log(removeDuplicates(bhks));
   return (
     <div
       className={`relative rounded-[10px] w-full m-auto bg-gray-50 sm:h-[549px]  xl:h-[750px] bg-cover flex justify-between items-start flex-col shadow-md break-words`}
@@ -140,7 +150,11 @@ const PropertyFirstBlock: React.FC<Props> = ({
                   {projectDetails.cg === "S" ? " Sell" : " Rent"} In{" "}
                   {projectDetails.ltName}
                 </h3> */}
-                <p className="text-[#001F35] sm:text-[18px] xl:text-2xl not-italic font-semibold mt-1 capitalize">
+                <p
+                  className={`text-[#001F35]  sm:text-[18px] xl:text-2xl not-italic font-semibold mt-1 capitalize ${
+                    projectDetails.projIdEnc ? "underline text-blue-600" : ""
+                  } `}
+                >
                   {projName}
                 </p>
                 <p className="text-[#242424]  text-sm sm:text-[18px]  xl:text-[22px] not-italic font-[600] leading-[normal] w-[100%] tracking-[0.32px] capitalize sm:mt-[8px] xl:mt-[14px] ">
