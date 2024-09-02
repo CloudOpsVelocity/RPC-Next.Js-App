@@ -16,29 +16,41 @@ export default function ListBox({}: Props) {
 const config = {
   data: [
     {
-      name: "nagawara",
-      id: 12,
-      type: "L",
-    },
-    {
       name: "marathalli",
       id: 11,
       type: "L",
+      url: "/marathalli.jpg"
     },
     {
-      name: "hsr Layout",
+      name: "koramangala", 
+      id: 12,
+      type: "L",
+      url: "/koramangala.webp"
+    },
+    {
+      name: "jp nagar",
       id: 13,
       type: "L",
+      url: "/jpnagar.jpg"
     },
-    /* {
-      name: "Kurnool",
-      id: 22,
-      type: "L",
-    }, */
     {
       name: "whitefield",
-      id: 10,
+      id: 14,
       type: "L",
+      url: "/whitefiled.jpg"
     },
+    {
+      name: "mg road",
+      id: 15,
+      type: "L",
+      url: "/mgroad.jpg"
+    },
+    {
+      name: "indira nagar",
+      id: 16,
+      type: "L",
+      url: "/Indiranagar.jpg"
+    },
+    
   ],
 };

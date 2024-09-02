@@ -238,7 +238,7 @@ const BuilderCarousel = ({
 
   return (
     <div className="w-full mb-[4%]">
-      <h2 className="ml-2 text-[16px] sm:text-[20px] xl:text-[32px] font-semibold  cursor-pointer px-4 sm:px-0">
+      <h2 className="ml-2 text-[16px] sm:text-[20px] xl:text-[32px] font-semibold px-4 sm:px-0">
         {/* <span className="!text-green-600">SARANG BY SUMADHARA </span> */}
         {title}
         {location && (

@@ -31,6 +31,9 @@ export default function ProjectDetails({
   localityName,
   citiesName,
 }: Data) {
+
+  console.log("testind data: ", userName, companyName);
+
   return (
     <React.Fragment>
       <div className="sm:rounded-[20px] mt-[3%] flex justify-between items-center bg-[#FFF] shadow-md w-[100%] mb-[3%]   sm:w-[65%] xl:w-[50%] p-[1%] border border-gray-300">
@@ -76,6 +79,7 @@ export default function ProjectDetails({
       <About
         id="whyBuy"
         heading="About Builder"
+        projName={userName}
         content={mission}
         className="!mb-[14px] sm:!mb-[40px] !mt-[0px] !ml-0"
       />

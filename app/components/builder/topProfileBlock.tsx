@@ -18,7 +18,7 @@ export default function TopProfileBlock({
     <div className="w-full flex justify-between items-center bg=[] relative">
       <div className="flex flex-col h-[100%]  lg:min-h-[250px]  justify-between items-start ml-[2%] ">
         <p className="text-[12px] md:text-[20px] text-[#565D70] font-[500] mt-2 sm:mt-0 sm:mb-[1%] ">
-          <span>Home</span>
+        <a className="hover:underline cursor-pointer" href={"/"}>Home</a> 
           {" > "}
           <span>Builder</span>
           {" > "}
