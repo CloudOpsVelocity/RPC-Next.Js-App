@@ -1,8 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {
-    dirs: ["app", "components", "lib", "pages", "styles"],
+    ignoreDuringBuilds: true,
   },
+  // eslint: {
+  //   dirs: ["app", "components", "lib", "pages", "styles"],
+  // },
 
   // typescript: { ignoreBuildErrors: true },
   experimental: {

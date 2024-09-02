@@ -99,6 +99,7 @@ export default function page({}: Props) {
             <Image
               width={387}
               height={300}
+              alt="hero image"
               className="hidden sm:block  w-[36%] h-[299.576px]"
               src={
                 "https://d2l0lb5gc1bw3t.cloudfront.net/staticmedia-images-icons/About%20us%20/best%20service.png"
