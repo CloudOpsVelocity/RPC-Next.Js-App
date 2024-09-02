@@ -213,7 +213,6 @@ const FilterPopup = ({ close }: { close: () => void }) => {
               .filter(({ value }) => !(value === "B" && path === "/search"))
               .map(({ value, constDesc }) => (
                 <Radio
-                  id={value}
                   key={constDesc}
                   iconColor="dark.8"
                   color="green"

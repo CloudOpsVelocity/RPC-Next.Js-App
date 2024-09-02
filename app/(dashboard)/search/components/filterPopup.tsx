@@ -30,7 +30,7 @@ import { toFormattedString } from "./buget/budget";
 import useQsearch from "@/app/hooks/search/useQsearch";
 import { MainSearchMultiSelect } from "./_ui/Multiselect";
 
-const FilterPopup = ({close}: {close?:() => void}) => {
+const FilterPopup = ({ close }: { close?: () => void }) => {
   const [current, setCurrent] = useState("Project Status");
   const {
     data: searchData,
@@ -122,7 +122,7 @@ const FilterPopup = ({close}: {close?:() => void}) => {
         </div>
       </div>
       <div className="w-full">
-        <ClearAll type="all" close={close} /> 
+        <ClearAll type="all" close={close} />
         {/* Right Side Fields Con */}
         <ScrollArea
           h={350}
@@ -147,6 +147,7 @@ const FilterPopup = ({close}: {close?:() => void}) => {
             {SEARCH_FILTER_DATA.projectstatus.map((eachStatus, index) => {
               return (
                 <Radio
+                  key={index}
                   checked={eachStatus.cid == filters.current}
                   value={eachStatus.cid}
                   iconColor="dark.8"

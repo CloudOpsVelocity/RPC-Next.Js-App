@@ -176,7 +176,10 @@ export default function page({}: Props) {
             <br /> Get Right Property
           </h1>
           <div className="flex flex-col sm:flex-row  justify-center  items-center sm:items-start gap-[5%] mt-7">
-            <img
+            <Image
+              width={387}
+              height={300}
+              alt="hero image"
               className="sm:w-[36%] w-[80%] h-[188px] sm:h-[318px]"
               src={
                 "https://d2l0lb5gc1bw3t.cloudfront.net/staticmedia-images-icons/About%20us%20/founder.png"
@@ -298,7 +301,10 @@ export default function page({}: Props) {
           <div className="flex flex-row gap-[2%] mt-[8px] max-w-[98%] sm:max-w-[80%] my-8 mx-auto overflow-x-scroll sm:scrollbar-hide">
             {profiles.map((each, index) => {
               return (
-                <div className=" z-[10] w-[256px] h-[198px] sm:h-auto  sm:w-[30%] flex-shrink-0 sm:max-w-[30%] flex flex-col sm:p-6 xl:p-12 rounded-[20px] justify-center border-[1px] border-[solid] border-[rgba(194,194,194,0.60)] bg-[#FFF]           [box-shadow:0px_10px_25px_0px_rgba(194,_194,_194,_0.44)]">
+                <div
+                  className=" z-[10] w-[256px] h-[198px] sm:h-auto  sm:w-[30%] flex-shrink-0 sm:max-w-[30%] flex flex-col sm:p-6 xl:p-12 rounded-[20px] justify-center border-[1px] border-[solid] border-[rgba(194,194,194,0.60)] bg-[#FFF]           [box-shadow:0px_10px_25px_0px_rgba(194,_194,_194,_0.44)]"
+                  key={index}
+                >
                   <div className="flex flex-row gap-2 justify-between   ">
                     <div className="flex felx-row items-center p-1 gap-2">
                       <Image

@@ -37,6 +37,7 @@ export function BasicSelect() {
     .map((item) =>
       item === "Plot" && f.bhk.length > 0 ? null : (
         <Combobox.Option
+          key={item}
           value={item}
           classNames={{
             option: styles.option,

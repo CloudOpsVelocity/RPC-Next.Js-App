@@ -14,17 +14,17 @@ import HandPickedProjects from "./(dashboard)/new/components/hand-picked-project
 import ListbySection from "./(dashboard)/new/components/ListedBy";
 import PostYourListing from "./(dashboard)/new/components/post-your-listing";
 import BlogsSection from "./(dashboard)/new/components/blogs";
-import Footer from "./(dashboard)/new/components/Footer";
 import Req from "./(dashboard)/new/components/Req";
 import SharePopup from "./(dashboard)/search/components/SharePopup";
 import Header from "./components/layouts/primary/header";
+import Footer from "./components/layouts/primary/footer";
 export default async function Page() {
   const [data, listingData, shortIds] = await Promise.all([
     getData(),
     getHomeListingData(),
     getShortIds(),
   ]);
- 
+
   return (
     <div className="h-[100%] w-[100%] flex  flex-col overflow-hidden bg-[#F5F7F8]">
       <Header />

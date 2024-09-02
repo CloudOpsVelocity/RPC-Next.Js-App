@@ -48,7 +48,7 @@ const LeftSideBlock = ({ mutate, serverData }: Props) => {
     if (entry?.isIntersecting && hasNextPage) {
       fetchMoreData();
     }
-  }, [entry?.isIntersecting, hasNextPage]);
+  }, [entry?.isIntersecting, hasNextPage, fetchMoreData]);
   const onTabChange = (value: string) => {
     if (value === "All") {
       handleReset("listedBy");

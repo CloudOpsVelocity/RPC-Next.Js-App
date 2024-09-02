@@ -144,18 +144,20 @@ export default function Footer({}: Props) {
         <p className=" top-[443px] left-[104px] [font-family:'Montserrat-Medium',Helvetica] font-medium text-[#242424] text-[14px] sm:text-[16px] xl:text-[18px] tracking-[0] leading-[27px] whitespace-nowrap">
           Copyright @getrightproperty <br />
           <span>
-            All Rights Reserved <br />A PRODUCT BY "
+            All Rights Reserved <br />A PRODUCT BY &quot;
             <a href="https://rpclan.com/" target="_blank">
               {" "}
               RPCLAN SERVICES PVT.LTD
             </a>
-            "
+            &quot;
           </span>
         </p>
 
         <div className="flex items-start gap-[31px] flex-wrap">
           <div className="inline-flex items-center justify-center gap-[6px] xl:gap-[12px] relative flex-[0_0_auto]">
-            <img
+            <Image
+              width={25}
+              height={25}
               className="relative sm:w-[20px] sm:h-[20px] xl:w-[25px] xl:h-[25px] w-[16px] h-[16px]  "
               alt="Footerlocation"
               src="/location.svg"
@@ -165,7 +167,9 @@ export default function Footer({}: Props) {
             </p>
           </div>
           <div className="inline-flex items-center justify-center gap-[6px] xl:gap-[12px] relative flex-[0_0_auto]">
-            <img
+            <Image
+              width={25}
+              height={25}
               className="relative sm:w-[20px] sm:h-[20px] xl:w-[25px] xl:h-[25px] w-[16px] h-[16px]"
               alt="Contact"
               src="/footer/phone.svg"

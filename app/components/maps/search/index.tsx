@@ -32,8 +32,8 @@ const Map = ({ data, lat, lang }: any) => {
     <>
       <MapContainer
         center={position}
-        className="h-[250px] sm:h-full max-h-[250px] w-full sm:max-w-[700px] sm:max-h-[600px] xl:max-h-[740px] xl:max-w-full  -z-[1]" 
-        scrollWheelZoom={true} 
+        className="h-[250px] sm:h-full max-h-[250px] w-full sm:max-w-[700px] sm:max-h-[600px] xl:max-h-[740px] xl:max-w-full  -z-[1]"
+        scrollWheelZoom={true}
         zoom={12}
       >
         <TileLayer
@@ -74,7 +74,7 @@ const MapContent = ({ data }: any) => {
     if (data && data[0]) {
       map.setView([parseFloat(data[0]?.lat), parseFloat(data[0]?.lang)], 14);
     }
-  }, [data]);
+  }, [data, map]);
   // 1. FIND IS IT PROPERTY OR PRJECT
   // 2. CREATE TOOLTIPS FOR EACH SECTION
   return (

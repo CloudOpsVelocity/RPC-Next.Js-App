@@ -108,7 +108,7 @@ const Preview = ({ main, logo, setError }: any) => {
     <>
       <div className="flex items-center p-4 bg-white border border-gray-300 rounded-lg">
         <div className="flex items-center justify-center w-16 h-16 bg-gray-100 rounded-lg">
-          <img
+          <Image
             src={imageUrl} // You may want to use the actual image source from `logo`
             alt="bon ton logo"
             className="w-12 h-12 cursor-pointer"

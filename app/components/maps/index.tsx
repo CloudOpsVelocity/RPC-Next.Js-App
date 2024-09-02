@@ -94,12 +94,11 @@ const Content: React.FC<any> = ({
         parseFloat(selectedLocation.lng),
       ]);
     }
-  }, [selectedLocation, selected]);
+  }, [selectedLocation, selected, position, map]);
 
   useEffect(() => {
     map.setView(position, 11);
-  }, [selected]);
-  console.log(selectedLocation);
+  }, [selected, map, position]);
   const isMobile = useMediaQuery("(max-width: 601px)");
   return (
     <>
@@ -111,6 +110,7 @@ const Content: React.FC<any> = ({
         data.length > 0 &&
         data?.map((item: any) => (
           <Marker
+            key={item?.lat}
             position={[parseFloat(item?.lat), parseFloat(item?.lang)]}
             title={item.name}
             {...(isMobile && { icon: BlueMobileMapIcon })}
@@ -179,7 +179,9 @@ const Content: React.FC<any> = ({
           <p className="font-bold text-black text-lg sm:text-lg">{projName}</p>
         </Tooltip> */}
         <Popup className="min-w-fit" offset={[30, -4]}>
-          <p className="font-bold text-black text-[14px] sm:text-lg">{projName}</p>
+          <p className="font-bold text-black text-[14px] sm:text-lg">
+            {projName}
+          </p>
         </Popup>
       </Marker>
       <polyline />

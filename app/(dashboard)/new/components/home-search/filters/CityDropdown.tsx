@@ -25,6 +25,7 @@ export function CityDropdown() {
       classNames={{
         option: styles.option,
       }}
+      key={item}
     >
       <Radio
         checked={
@@ -66,7 +67,7 @@ export function CityDropdown() {
           pointer
           rightSection={<DropIcon />}
           // onClick={() => combobox.toggleDropdown()}
-          onClick={() =>("")}
+          onClick={() => ""}
           rightSectionPointerEvents="none"
           classNames={{
             input: styles.input,
