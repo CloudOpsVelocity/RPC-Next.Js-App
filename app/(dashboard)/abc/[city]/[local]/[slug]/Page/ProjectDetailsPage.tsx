@@ -115,7 +115,7 @@ export default async function ProjectsDetailsPage({
             detailsData={data}
           />
         </MobileHidden>
-        <Overview {...data} PhaseOverview={phaseOverview} />
+        <Overview {...data} slug={slug} PhaseOverview={phaseOverview} />
         <ListingRentAvail
           projName={data.projectName}
           r={data.rentListing}
