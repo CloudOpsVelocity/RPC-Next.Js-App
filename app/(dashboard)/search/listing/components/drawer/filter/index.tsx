@@ -159,6 +159,7 @@ const ListingMobileFilter = ({ close }: any) => {
             {SEARCH_FILTER_DATA.projectstatus.map((eachStatus, index) => {
               return (
                 <Radio
+                id={`propertyStatus_${index}`}
                   key={index}
                   checked={eachStatus.cid == filters.current}
                   value={eachStatus.cid}
@@ -185,6 +186,7 @@ const ListingMobileFilter = ({ close }: any) => {
               }
               return (
                 <Radio
+                id={`propTypeRadio_${i}`}
                   key={i}
                   iconColor="dark.8"
                   color="green"
@@ -210,11 +212,12 @@ const ListingMobileFilter = ({ close }: any) => {
           >
             Listed By
           </h3>
-          <div className="flex  mb-[3%] justify-start items-start flex-wrap gap-[4%]">
+          <div className="flex mb-[3%] justify-start items-start flex-wrap gap-[4%]">
             {SEARCH_FILTER_DATA.listedBy
               .filter(({ value }) => !(value === "B" && path === "/search"))
               .map(({ value, constDesc }, i) => (
                 <Radio
+                id={`listedByRadio_${value}`}
                   key={`listedBy_${i}`}
                   iconColor="dark.8"
                   color="green"
@@ -386,6 +389,7 @@ const ListingMobileFilter = ({ close }: any) => {
             {SEARCH_FILTER_DATA.photoAvail.map(({ id, label }, i) => {
               return (
                 <Radio
+                id={`mediaRadio_${id}`}
                   key={`propertyType_${i}`}
                   iconColor="dark.8"
                   color="green"
@@ -416,6 +420,7 @@ const ListingMobileFilter = ({ close }: any) => {
               {SEARCH_FILTER_DATA.furnish.map(({ constDesc, cid }, i) => {
                 return (
                   <Radio
+                  id={`furnishRadio_${cid}`}
                     key={`furnish_${i}`}
                     iconColor="dark.8"
                     color="green"

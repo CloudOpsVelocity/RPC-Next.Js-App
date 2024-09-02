@@ -46,7 +46,9 @@ import dynamic from "next/dynamic";
 import { Divider } from "@mantine/core";
 import RTK_CONFIG from "@/app/config/rtk";
 import SubHeading from "./headings/SubHeading";
-import { formatNumberWithSuffix } from "@/app/utils/numbers";
+import { formatNumberWithSuffix } from "@/app/utils/numbers"; 
+import UnitsImagesBlock from "./unitblock/UnitsImagesBlock";
+import { useMediaQuery } from "@mantine/hooks";
 
 type Props = {
   data: PhaseList[];
@@ -205,6 +207,9 @@ export default function FloorplansBlock({
   };
   const [bhk, setBhk] = useState("0");
   const parentRef = React.useRef(null);
+
+  const isMobile = useMediaQuery("(max-width: 601px)");
+
 
   // const rowVirtualizer = useVirtualizer({
   //   count: projectUnitsData?.length,
@@ -616,7 +621,11 @@ export default function FloorplansBlock({
                           formatNumberWithSuffix(selectedFloor?.plotArea) +
                           " sq.ft"}
                     </p>
-                    <div className="flex justify-center items-end max-h-[240px] sm:max-h-[450px] lg:h-[450px] w-full relative ">
+                    <div className={`flex justify-center items-end w-full relative 
+                          ${floorPlanType == "unit" ? "max-h-[140px]" : "max-h-[240px]" }
+                          ${floorPlanType == "unit" ? "sm:max-h-[350px]" : "sm:max-h-[450px]" }  
+                          ${floorPlanType == "unit" ? "lg:h-[350px]" : "lg:h-[450px]" }`}
+                    >
                       {selectedFloor?.floorPlanUrl ? (
                         <img
                           onClick={(e) => {
@@ -639,7 +648,10 @@ export default function FloorplansBlock({
                               handleOpen();
                             }}
                             src={ImgNotAvail}
-                            className="w-[100%] sm:w-[80%]  max-h-[240px] sm:max-h-[450px] lg:h-[450px]  cursor-pointer "
+                            className={`w-[100%] sm:w-[80%] cursor-pointer 
+                              ${floorPlanType == "unit" ? "max-h-[140px]" : "max-h-[240px]" }
+                              ${floorPlanType == "unit" ? "sm:max-h-[350px]" : "sm:max-h-[450px]" }  
+                              ${floorPlanType == "unit" ? "lg:h-[350px]" : "lg:h-[450px]" }`}
                             alt="image"
                           />
                         </div>
@@ -665,6 +677,16 @@ export default function FloorplansBlock({
                         propCgId={propCgId}
                       />
                     )} */}
+
+                    {floorPlanType == "unit" && !isMobile && (
+                        <UnitsImagesBlock 
+                            // floorsArray={projectUnitsData && projectUnitsData.length > 0 ? projectUnitsData : [] } 
+                            form={byUnitForm}
+                            propCgId={propCgId}
+                        />
+                    )}
+
+
                   </>
                 )
               ) : (

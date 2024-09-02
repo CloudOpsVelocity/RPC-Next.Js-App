@@ -2097,11 +2097,12 @@ export const ReraIcon = ({ className, iconId }: any) => {
   );
 };
 
-export const ImagesScrollIcon = ({ className, iconId }: any) => {
+export const ImagesScrollIcon = ({ className, iconId, onClick }: any) => {
   return (
     <svg
       id={iconId}
       className={className}
+      onClick={onClick}
       xmlns="http://www.w3.org/2000/svg"
       width="51"
       height="51"
