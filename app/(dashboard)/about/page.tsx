@@ -9,6 +9,7 @@ import {
 import { BuildingIconABout } from "@/app/images/commonSvgs";
 import { Input } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
+import Image from "next/image";
 type Props = {};
 
 export default function page({}: Props) {
@@ -59,7 +60,7 @@ export default function page({}: Props) {
             <p className="text-[#003] font-[Montserrat] leading-[18px] text-[14px] text-center sm:text-left  sm:text-[15px] xl:text-[20px] not-italic font-normal sm:leading-[26px] pt-[12px] sm:pt-[10px] xl:pt-[20px] break-words">
               Connect with buyers, sellers, and agents seamlessly, and stay
               updated with the latest real estate news and trends. Whether
-              you're looking to advertise, find your dream home, or simply
+              you&apos;re looking to advertise, find your dream home, or simply
               explore the market, Get Right Property offers a comprehensive
               platform for all your real estate needs. Experience a smarter way
               to navigate property transactions and make informed decisions with
@@ -73,13 +74,19 @@ export default function page({}: Props) {
               Explore Now
             </a>
           </div>
-          <img
+          <Image
+            width={387}
+            height={300}
+            alt="about"
             className="w-[90%] hidden sm:block sm:w-[30%] h-[299.576px]"
             src={
               "https://d2l0lb5gc1bw3t.cloudfront.net/staticmedia-images-icons/About%20us%20/About%20getrightproperty.png"
             }
           />
-          <img
+          <Image
+            width={387}
+            height={300}
+            alt="hero image"
             className="w-[90%] block sm:hidden sm:w-[30%] h-[299.576px]"
             src={
               "https://daxv8eiot4y5y.cloudfront.net/About%20us/hero-image.png"
@@ -89,7 +96,9 @@ export default function page({}: Props) {
         {/* best services */}
         <div className=" min-w-[100%] sm:mt-[60px] xl:mt-[80px]  bg-[#F3FFF2]">
           <div className="flex flex-row items-center justify-start w-full gap-[4%] max-w-[90%] sm:max-w-[80%] mx-auto">
-            <img
+            <Image
+              width={387}
+              height={300}
               className="hidden sm:block  w-[36%] h-[299.576px]"
               src={
                 "https://d2l0lb5gc1bw3t.cloudfront.net/staticmedia-images-icons/About%20us%20/best%20service.png"
@@ -180,17 +189,18 @@ export default function page({}: Props) {
                 Founder, Get Right Property
               </h3>
               <p className="text-[#003] font-[Montserrat] leading-[21px] text-center sm:text-left text-[14px] sm:text-[15px] xl:text-[20px] not-italic font-normal sm:leading-[26px] mt-4">
-                At Get Right Property, we're dedicated to reshaping real estate
-                through cutting-edge professionalism training and collaborative
-                environments. Our commitment to comprehensive market analysis
-                and innovative solutions drives us. With a focus on results and
-                maximizing sales potential, we're rewriting industry norms and
-                surpassing client needs.
+                At Get Right Property, we&apos;re dedicated to reshaping real
+                estate through cutting-edge professionalism training and
+                collaborative environments. Our commitment to comprehensive
+                market analysis and innovative solutions drives us. With a focus
+                on results and maximizing sales potential, we&apos;re rewriting
+                industry norms and surpassing client needs.
               </p>
               <p className="text-[#003] font-[Montserrat]  text-center sm:text-left leading-[21px] text-[14px] sm:text-[15px]  xl:text-[20px] not-italic font-normal sm:leading-[26px] pt-3">
                 Join us in this journey to redefine excellence in real estate.
-                Together, let's create a future where every transaction is
-                exceptional and every client's dream finds its perfect home.
+                Together, let&apos;s create a future where every transaction is
+                exceptional and every client&apos;s dream finds its perfect
+                home.
               </p>
             </div>
           </div>
@@ -290,7 +300,10 @@ export default function page({}: Props) {
                 <div className=" z-[10] w-[256px] h-[198px] sm:h-auto  sm:w-[30%] flex-shrink-0 sm:max-w-[30%] flex flex-col sm:p-6 xl:p-12 rounded-[20px] justify-center border-[1px] border-[solid] border-[rgba(194,194,194,0.60)] bg-[#FFF]           [box-shadow:0px_10px_25px_0px_rgba(194,_194,_194,_0.44)]">
                   <div className="flex flex-row gap-2 justify-between   ">
                     <div className="flex felx-row items-center p-1 gap-2">
-                      <img
+                      <Image
+                        width={56}
+                        height={56}
+                        alt="profile"
                         className="w-[56px] h-[56px] rounded-full "
                         src={"/youtube.png"}
                       />

@@ -4,6 +4,7 @@ import data from "../data/auth";
 import "./root.css";
 import { TbBuilding } from "react-icons/tb";
 import Link from "next/link";
+import Image from "next/image";
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <main className="w-full flex  sm:h-screen">
@@ -32,7 +33,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             ))}
           </ul>
         </div>
-        <img
+        <Image
+          width={500}
+          height={500}
           src="/auth/login.svg"
           alt=""
           className="sm:mt-10  h-[100vh] sm:max-h-[340px] sm:w-[70%] xl:max-w-[490px]  xl:w-auto xl:mt-20"
