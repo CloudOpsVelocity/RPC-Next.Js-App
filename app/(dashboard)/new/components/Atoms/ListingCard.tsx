@@ -14,8 +14,8 @@ type Props = {
   sl: string;
 };
 
-
 export default function ListingCard({ item, sl }: Props) {
+  console.log(item);
   const images = getImageUrls(item.media);
   let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/listing/banglore/${item.propIdEnc}`;
   const onRedirectOnProp = () => {
@@ -124,10 +124,7 @@ export default function ListingCard({ item, sl }: Props) {
                   value={formatDate(item.availableFrom, true)}
                 />
                 <Divider orientation="vertical" color="#7BA0BB" />
-                <DownSectionCard
-                  label={"Plot Facing"}
-                  value={item.facing}
-                />
+                <DownSectionCard label={"Plot Facing"} value={item.facing} />
               </>
             ) : item.propStatus === "Under Cunstruction" ? (
               <>
@@ -193,7 +190,7 @@ export default function ListingCard({ item, sl }: Props) {
             </p>
             <ListingReqBtn
               builderId={item.postedById}
-              builderName={item.builderName}
+              builderName={item.postedBy}
               projName={title}
               reqId={item.propIdEnc}
             />
