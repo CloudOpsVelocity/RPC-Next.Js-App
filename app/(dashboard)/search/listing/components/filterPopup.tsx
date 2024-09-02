@@ -218,7 +218,7 @@ const FilterPopup = ({ close }: { close: () => void }) => {
                   color="green"
                   label={constDesc}
                   value={value}
-                  name="ListedBy"
+                  name="listedBy"
                   style={{ whiteSpace: "nowrap", marginBottom: "10px" }}
                   onClick={() => setSingleType("listedBy", value)}
                   checked={filters.listedBy === value}
