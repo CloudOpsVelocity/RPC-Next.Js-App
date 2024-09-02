@@ -44,7 +44,7 @@ export default function AddmoreInput({ id, form, placeholder, label }: Props) {
         rightSection={
           index != 0 && (
             <ActionIcon
-              className="!p-1"
+              className="!p-1 hover:!bg-gray-300"
               color="white"
               onClick={() => form.removeListItem(id, index)}
             >
