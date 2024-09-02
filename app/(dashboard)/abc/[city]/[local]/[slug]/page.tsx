@@ -172,7 +172,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             detailsData={data}
           />
         </MobileHidden>
-        <Overview {...data} PhaseOverview={phaseOverview} />
+        <Overview {...data} slug={slug} PhaseOverview={phaseOverview} />
         <ListingRentAvail
           projName={data.projectName}
           r={data.rentListing}
