@@ -1,14 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {
-    ignoreDuringBuilds: true,
+    dirs: ["app", "components", "lib", "pages", "styles"],
   },
+
   // typescript: { ignoreBuildErrors: true },
   experimental: {
     optimizePackageImports: ["@mantine/core", "@mantine/hooks"],
   },
   images: {
-    minimumCacheTTL: 60 * 100,
+    // minimumCacheTTL: 60 * 100,
     remotePatterns: [
       { hostname: "d1l03fubsuphsh.cloudfront.net" },
       { hostname: "d2l0lb5gc1bw3t.cloudfront.net" },

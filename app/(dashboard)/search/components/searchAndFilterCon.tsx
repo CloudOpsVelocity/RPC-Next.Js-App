@@ -36,7 +36,7 @@ const SearchAndFilterCon = ({ frontendFilters }: any) => {
     </>
   );
 };
-export { SearchAndFilterCon };
+export default SearchAndFilterCon;
 
 const SearchHeader = ({ open, setShowAllLocalities }: any) => {
   const {
@@ -96,7 +96,10 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
       <p className="text-[12px]  text-[#737579] font-[500] mt-2 mb-2 sm:mb-0 sm:mt-4  w-full md:w-auto">
         <span className="text-[#737579] font-[500] mt-3">
           {" "}
-          <a className="hover:underline" href={"/"}>Home</a> {" > "}
+          <a className="hover:underline" href={"/"}>
+            Home
+          </a>{" "}
+          {" > "}
         </span>
         <span>
           <span className="  text-[#4D6677] font-[600] ">
@@ -172,7 +175,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
               shadow="lg"
               radius={10}
               offset={{ mainAxis: 10, crossAxis: -200 }}
-              opened={closePopup} 
+              opened={closePopup}
               onClose={() => setClosePopup(false)}
             >
               <Popover.Target>
@@ -230,7 +233,11 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
                 </div>
               </Popover.Target>
               <Popover.Dropdown className="!z-50" p={0}>
-                {params.listedBy ? <ListingPopup close={close} /> : <FilterPopup close={handleToggle} />}
+                {params.listedBy ? (
+                  <ListingPopup close={close} />
+                ) : (
+                  <FilterPopup close={handleToggle} />
+                )}
               </Popover.Dropdown>
             </Popover>
 

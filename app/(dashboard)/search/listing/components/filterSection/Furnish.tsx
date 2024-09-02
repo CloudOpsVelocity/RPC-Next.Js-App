@@ -16,12 +16,15 @@ export default function FurnishOptions({}: Props) {
       >
         Furnishing
       </h3>
-      <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
+      <div
+        className="flex  mb-[3%] justify-start items-start gap-[4%]"
+        key={"furnised32434"}
+      >
         {SEARCH_FILTER_DATA.furnish.map(({ constDesc, cid }, i) => {
-          const selected = filters.furnish === cid;
           return (
             <div>
               <Radio
+                id={constDesc}
                 iconColor="dark.8"
                 color="green"
                 label={constDesc}
