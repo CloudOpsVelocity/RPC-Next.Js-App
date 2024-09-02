@@ -13,9 +13,9 @@ export default function ManagementBlock({
   vision,
   officecontact,
   projectAvailableCities,
-  mdname
+  mdname,
 }: Data) {
-  const keys = Object.keys(projectAvailableCities);
+  const keys = projectAvailableCities && Object.keys(projectAvailableCities);
   return (
     <div
       className=" w-full  mb-[3%]   flex  flex-col justify-center items-start  border border-[color:var(--blue-stroke,#4D6677)] shadow-[0px_4px_31.5px_0px_rgba(91,143,182,0.19)] p-4 sm:p-8 rounded-[7px] border-solid bg-[#FCFCFC] 
@@ -48,7 +48,7 @@ export default function ManagementBlock({
             {mdname}
           </p>
           <p className="text-[12px] sm:text-lg xl:text-[20px] font-[700] text-[#00487C] italic">
-          Managing Director, {companyName}
+            Managing Director, {companyName}
           </p>
         </div>
       </div>
@@ -83,7 +83,7 @@ export default function ManagementBlock({
         </a>
       </div>
 
-      {keys.length > 1 && (
+      {keys?.length > 1 && (
         <>
           <h1 className="text-[#242424] mt-3 sm:mt-0 text-[16px] sm:text-[28px] not-italic font-semibold  inline-flex items-center space-x-2">
             <p>{HEADING_ICON}</p> <p>Projects in different branches</p>

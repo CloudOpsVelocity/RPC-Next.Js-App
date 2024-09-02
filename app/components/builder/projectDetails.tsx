@@ -128,7 +128,7 @@ export default function ProjectDetails({
         <Card
           Icon={lacationIconSvg}
           title="Operating Cities"
-          content={citiesName.join(", ")}
+          content={citiesName && citiesName.join(", ")}
           type="text"
           textClassName="capitalize"
         />

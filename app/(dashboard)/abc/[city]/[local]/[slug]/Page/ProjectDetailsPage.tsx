@@ -30,6 +30,7 @@ import QAJsonLdScript from "@/app/seo/Qnajson";
 import PropertyJsonLdScript from "@/app/seo/Productjson";
 import ArticleJsonLdScript from "@/app/seo/ArticleJson";
 import { notFound } from "next/navigation";
+import Reviews from "@/app/components/project/reviews";
 type Props = {
   projResponse: any;
   amenitiesFromDB: any;
@@ -205,7 +206,7 @@ export default async function ProjectsDetailsPage({
             content={data.wbtp}
           />
         )}
-        {/* <Reviews projName={data.projectName} /> */}
+        <Reviews projName={data.projectName} projIdEnc={slug} />
         {/* <DownloadBroucher
   url={`${data?.media?.projBroucherUrl}?${Math.random()}`}
 /> */}

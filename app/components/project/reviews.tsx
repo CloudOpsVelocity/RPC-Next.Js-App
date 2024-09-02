@@ -13,21 +13,27 @@ import { useMediaQuery } from "@mantine/hooks";
 import { usePopUpRatings } from "@/app/hooks/popups/usePopUpRatings";
 import S from "@/app/styles/Rating.module.css";
 import useDynamicProj from "@/app/hooks/project/useDynamic";
-export default function Reviews({ projName }: { projName: string }) {
+export default function Reviews({
+  projName,
+  projIdEnc,
+}: {
+  projName: string;
+  projIdEnc: string;
+}) {
   const [, { open }] = usePopUpRatings();
-  const { data } = useRatings();
+  const { data } = useRatings(projIdEnc);
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
   const { data: rData } = useDynamicProj();
   return (
     data?.status &&
     data?.reviewDataList?.filter((item: any) => item.userReview).length !==
       0 && (
-      <div id="ratings" className="bg-[#FFF] scroll-mt-[180px] py-12 w-full ">
+      <div id="ratings" className="bg-[#FFF] scroll-mt-[180px] pt-12 w-full ">
         <div className="">
-          <div className="w-[90%] mx-auto px-6">
-            <h2 className="text-[#001F35] text-[20px] md:text-[32px] not-italic font-semibold leading-[normal] uppercase">
-              CUSTOMER REVIEWS FOR{" "}
-              <span className="text-[#148B16]  not-italic font-bold leading-[normal] uppercase">
+          <div className="w-[90%] mx-auto ">
+            <h2 className="text-[#001F35] text-[20px] md:text-[32px] not-italic font-semibold leading-[normal] ">
+              Customer Reviews For{" "}
+              <span className="text-[#148B16]  not-italic font-bold leading-[normal] capitalize">
                 {projName}
               </span>
             </h2>
@@ -51,11 +57,11 @@ export default function Reviews({ projName }: { projName: string }) {
               previousControlIcon={<PrevCarouselButton />}
               slideGap={"md"}
               align="start"
-              slideSize={{ base: "100%", sm: "50%", md: "33.333333%" }}
+              slideSize={{ base: "95%", sm: "50%", md: "33.333333%" }}
               withIndicators
-              height={407}
+              height={isMobile ? 300 : 250}
               slidesToScroll={1}
-              px={isMobile ? 0 : 70}
+              px={isMobile ? 0 : 30}
               classNames={{
                 controls: S.controls,
                 root: S.Ccontrols,
@@ -70,7 +76,7 @@ export default function Reviews({ projName }: { projName: string }) {
               {data?.reviewDataList
                 ?.filter((item: any) => item.userReview)
                 .map((eachData: any, i: number) => (
-                  <Carousel.Slide key={i} miw={isMobile ? 300 : 487}>
+                  <Carousel.Slide key={i} miw={isMobile ? "95%" : 487}>
                     <Review {...eachData} />
                   </Carousel.Slide>
                 ))}

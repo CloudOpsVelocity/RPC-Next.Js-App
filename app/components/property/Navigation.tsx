@@ -40,7 +40,7 @@ export default function Navigation({
   nearByLocations?: Object;
 }) {
   const isTab = useMediaQuery("(max-width: 1600px)");
-  const { data } = useRatings();
+  const { data } = useRatings("dc766148701f46debedb4f9cf3a18809");
   const [currentBlock, setCurrentBlock] = useAtom(currentBlockAtom);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [isSticky, setIsSticky] = useAtom(stickyAtom);

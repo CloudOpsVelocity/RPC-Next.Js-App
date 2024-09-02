@@ -41,13 +41,14 @@ export default function BuilderPage({ data, id }: Props) {
               content={`See other Projects by ${data?.data?.userName}`}
               data={data?.data?.builderProjects}
               location={
+                data?.data?.projectAvailableCities &&
                 Object.keys(data?.data?.projectAvailableCities).length <= 1
                   ? data.data.cityName
                   : ""
               }
             />
           </div>
-          <Reqcallback builderName={data.data.userName} />
+          <Reqcallback builderName={data.data?.userName} />
           <ProjectDrawer projName={data?.data?.userName} />
           <LoginPopup />
         </>
