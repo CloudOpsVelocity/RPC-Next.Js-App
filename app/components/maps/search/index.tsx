@@ -32,8 +32,8 @@ const Map = ({ data, lat, lang }: any) => {
     <>
       <MapContainer
         center={position}
-        className="sm:max-h-[740px] h-[250px] sm:h-full max-h-[250px] w-full sm:max-w-[700px] xl:max-w-full  -z-[1]"
-        scrollWheelZoom={true}
+        className="h-[250px] sm:h-full max-h-[250px] w-full sm:max-w-[700px] sm:max-h-[600px] xl:max-h-[740px] xl:max-w-full  -z-[1]" 
+        scrollWheelZoom={true} 
         zoom={12}
       >
         <TileLayer

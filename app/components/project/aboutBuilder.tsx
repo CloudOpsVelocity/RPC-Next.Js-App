@@ -21,6 +21,8 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
   let builderName = nzData.userName ? nzData.userName.toLowerCase().split(" ").join("%2D") : "";
   let urlBuilder=`/builders/bengaluru/${builderName}`;
 
+  console.log("testind data pp: ", data);
+
   return (
     <div
       className="w-[95%] md:w-[90%] scroll-mt-[150px] mb-[5%] !mt-[50px] sm:mb-[0%] rounded shadow-[0px_4px_17.6px_0px_rgba(146,178,200,0.40)] border-[0.5px] border-solid border-[#92B2C8] builderBg pt-4 pb-4 md:pb-6 sm:mt-0 sm:py-8 sm:pl-5 px-2 sm:px-0 "
@@ -85,7 +87,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
           id="builder_vision"
           heading={""}
           projName={""}
-          builderName={nzData.companyName}
+          builderName={nzData.userName}
           content={nzData.vission}
           className="!mb-[8px] sm:!mb-[20px] xl:!mb-[24px] text-[#202020] sm:text-[18px] xl:text-2xl not-italic font-medium leading-[normal] w-full mt-4 sm:!mt-0 !ml-0"
         />

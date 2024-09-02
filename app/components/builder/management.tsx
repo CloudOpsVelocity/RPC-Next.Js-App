@@ -13,7 +13,7 @@ export default function ManagementBlock({
   vision,
   officecontact,
   projectAvailableCities,
-  mdname
+  mdname,
 }: Data) {
   const keys = Object.keys(projectAvailableCities);
   return (
@@ -58,16 +58,16 @@ export default function ManagementBlock({
       </h1>
       <About
         id="builder_vision"
-        heading=""
+        heading="" 
         projName={""}
         content={vision}
-        className="!text-[14px] "
+        className="!text-[14px]"
       />
 
       <div className="flex  justify-start items-center w-full gap-[8px] mt-[0%]  ">
         <div
           onClick={() => window.open(`tel:${officecontact}`)}
-          className="max-w-fit flex justify-center items-center gap-0.5 p-1 rounded-md bg-gradient-to-tr from-[#EFF5FF] to-[#F2FAFF] mb-1"
+          className="max-w-fit cursor-pointer flex justify-center items-center gap-0.5 p-1 rounded-md bg-gradient-to-tr from-[#EFF5FF] to-[#F2FAFF] mb-1"
         >
           {callIconSvg}
           <p className="text-[#00487C]  text-[14px] sm:text-xl xl:text-[28px] not-italic font-semibold ">
