@@ -42,7 +42,7 @@ export async function POST(request: Request) {
           const element = input[key];
 
           // Check if the key (slug) already exists in JSON data
-          if (data.hasOwnProperty(key)) {
+          if (Object.prototype.hasOwnProperty.call(data, key)) {
             return NextResponse.json(
               { error: `Listing for slug '${key}' already exists` },
               { status: 400 }
@@ -68,8 +68,7 @@ export async function POST(request: Request) {
         { message: `Listing(s) created successfully`, input },
         { status: 201 }
       );
-      break;
-    case "update":
+    case "update": {
       if (!id || !input) {
         return NextResponse.json(
           { error: "Missing id or data parameter" },
@@ -95,7 +94,7 @@ export async function POST(request: Request) {
       // delete data[currentSlug];
 
       // Check if a new slug is provided and ensure it doesn't already exist
-      if (slug && data.hasOwnProperty(slug)) {
+      if (slug && Object.prototype.hasOwnProperty.call(data, slug)) {
         return NextResponse.json(
           { error: `Slug '${slug}' already exists` },
           { status: 400 }
@@ -103,7 +102,6 @@ export async function POST(request: Request) {
       }
 
       // Create the new entry
-      const newSlug = slug || currentSlug; // Use the new slug if provided, otherwise reuse the old one
 
       // Initialize an empty object for the new data entry
 
@@ -124,8 +122,8 @@ export async function POST(request: Request) {
         { message: `Listing updated successfully` },
         { status: 200 }
       );
-      break;
-    case "delete":
+    }
+    case "delete": {
       if (!id) {
         return NextResponse.json(
           { error: "Missing id parameter" },
@@ -164,7 +162,7 @@ export async function POST(request: Request) {
         { message: `Listing(s) deleted successfully` },
         { status: 200 }
       );
-      break;
+    }
     default:
       return NextResponse.json(
         { error: "Invalid action parameter" },

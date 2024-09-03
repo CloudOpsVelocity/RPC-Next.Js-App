@@ -40,6 +40,7 @@ export default function CompareList() {
     }
     handleCompare();
     if (session) {
+      return;
     } else {
       open(loginHandleComapare);
     }

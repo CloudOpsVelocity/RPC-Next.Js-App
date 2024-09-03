@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from "react";
 import { FlooringIcon, FloorsIcon, TowerIcon } from "../../images/commonSvgs";
 import { projectprops, propertyDetailsTypes } from "../../data/projectDetails";
@@ -40,19 +41,19 @@ const getPropId = (key: string) => {
   switch (key) {
     case "apt":
       return projectprops.apartment;
-      break;
+
     case "plot":
       return projectprops.plot;
-      break;
+
     case "rowHouse":
       return projectprops.rowHouse;
-      break;
+
     case "villa":
       return projectprops.villa;
-      break;
+
     case "vlmt":
       return projectprops.villament;
-      break;
+
     default:
       return 35;
   }
@@ -112,35 +113,34 @@ export default function PropertyTypeDetailsCrad({
         } else {
           return apartmentCardImg;
         }
-        break;
+
       case "plot":
         if (type == "name") {
           return "Plot";
         } else {
           return plotCardImg;
         }
-        break;
+
       case "rowHouse":
         if (type == "name") {
           return "Rowhouse";
         } else {
           return rowhouseCardImg;
         }
-        break;
+
       case "villa":
         if (type == "name") {
           return "Villa";
         } else {
           return villaCardImg;
         }
-        break;
+
       case "vlmt":
         if (type == "name") {
           return "Villament";
         } else {
           return villamentCardImg;
         }
-        break;
     }
   };
   const plotCounts =

@@ -119,7 +119,7 @@ function FloorPlanModal({
     form.setFieldValue(key, null);
     handleSearch(key);
   };
-  const [o, {}] = useSubFloorPlanPopup();
+  const [o, { open }] = useSubFloorPlanPopup();
   const showClearAll = Object.values(form.values).some(
     (value) => value !== null && value !== "" && value !== 0
   );
@@ -191,7 +191,7 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
 
     data?.forEach((item: any) => {
       if (
-        item.hasOwnProperty(property) &&
+        Object.prototype.hasOwnProperty.call(item, property) &&
         item[property] !== "null" &&
         item[property] !== "undefined" &&
         item[property] !== "None"

@@ -189,10 +189,19 @@ export default function GalleryBlock({
                       <video
                         key={img}
                         src={img as string}
-                        className={`!w-full rounded-[5px] cursor-pointer  h-[64px] md:h-[90px] object-cover }`}
+                        className={`!w-full rounded-[5px] cursor-pointer h-[64px] md:h-[90px] object-cover`}
                         content=""
                         onClick={() => handleMediaClick(img as string, ind)}
-                      />
+                        controls
+                      >
+                        <track
+                          src="path_to_your_captions_file.vtt" // Replace with the actual path to your captions file
+                          kind="captions"
+                          srcLang="en"
+                          label="English"
+                          default
+                        />
+                      </video>
                     )}
                     {/*   <video
                       key={img}

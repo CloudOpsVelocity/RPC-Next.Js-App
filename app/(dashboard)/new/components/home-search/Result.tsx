@@ -1,7 +1,10 @@
 "use client";
 import Loading from "@/app/components/atoms/Loader";
 import useQsearch from "@/app/hooks/search/useQsearch";
-import { SearchLocationIcon } from "@/app/images/commonSvgs";
+import {
+  SearchLocationIcon,
+  mainSearchNoResult,
+} from "@/app/images/commonSvgs";
 import { homeSearchFiltersAtom } from "@/app/store/home";
 import { encodeProID } from "@/app/utils/api/encode";
 import { ScrollArea } from "@mantine/core";
@@ -9,7 +12,6 @@ import { useAtom } from "jotai";
 import { useRouter } from "next/navigation";
 import React from "react";
 import toast from "react-hot-toast";
-import { mainSearchNoResult } from "@/app/images/commonSvgs";
 import { GrayMapIcon } from "@/app/images/commongsSvgs2";
 
 export default function Results() {
@@ -109,8 +111,8 @@ export default function Results() {
         }
         break;
       case "projectListing":
-        let listedByType = data.type === "OL" ? "I" : data.type.split("")[0];
         {
+          let listedByType = data.type === "OL" ? "I" : data.type.split("")[0];
           let projectName = data.name.split("(")[0].trim();
           // console.log(projectName);
           const url = `projIdEnc=${data.id}&listedBy=${listedByType}&projName=${projectName}`;
@@ -118,10 +120,13 @@ export default function Results() {
         }
         break;
       case "builder":
+        {
+          const url =
+            encodeURIComponent(data.name) + "%2B" + encodeURIComponent(data.id);
+          window.open(`/search?builderIds=${url}`);
+        }
         // const url = encodeURI(`${data.name}+${data.id}`);
-        const url =
-          encodeURIComponent(data.name) + "%2B" + encodeURIComponent(data.id);
-        window.open(`/search?builderIds=${url}`);
+
         break;
       default:
         break;

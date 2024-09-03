@@ -40,7 +40,7 @@ export default function UndoRedo({
         <button
           onClick={handleBack}
           className="inline-flex ml-2"
-          autoFocus
+
           // onKeyDown={getHotkeyHandler([["mod+Z", handleBack]])}
         >
           {" "}

@@ -7,9 +7,7 @@ import {
 import React from "react";
 import Card from "./ContactDetailCard";
 
-type Props = {};
-
-export default function ContactDetails({}: Props) {
+export default function ContactDetails() {
   return (
     <div>
       <div className="flex justify-start items-center -ml-[3.5%] sm:-ml-3 xl:-ml-5 mb-2">

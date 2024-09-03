@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 "use client";
 import React, { useState, useCallback, useRef, useMemo, Fragment } from "react";
 import { LuTrain, LuSearch } from "react-icons/lu";

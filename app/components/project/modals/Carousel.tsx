@@ -1,8 +1,7 @@
 import { Dispatch, SetStateAction, useState } from "react";
-import { Button, Modal, rem } from "@mantine/core";
+import { Button, Modal, rem, Image } from "@mantine/core";
 import { Carousel } from "@mantine/carousel";
 import {
-  PopupOpenSvg,
   ZoomInIcon,
   ZoomOutIcon,
   emptyFilesIcon,
@@ -11,7 +10,6 @@ import { RightSection } from "./FloorPlan";
 import S from "@/app/styles/ModalCarousel.module.css";
 import { useAtom, useAtomValue } from "jotai";
 import { floorPlansArray, selectedFloorAtom } from "@/app/store/floor";
-import { Image } from "@mantine/core";
 import { useSubFloorPlanPopup } from "@/app/hooks/useSubFloorplanPopup";
 import { projectprops } from "@/app/data/projectDetails";
 import SharePopup from "../../atoms/SharePopup";
@@ -27,7 +25,7 @@ import { useSession } from "next-auth/react";
 import ZoomInOut from "../actions/ZoomInOut";
 import Close from "../button/close";
 import { useMediaQuery } from "@mantine/hooks";
-import { downLoadIcon } from "@/app/images/commonSvgs";
+
 import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
 
 function CarouselModal({

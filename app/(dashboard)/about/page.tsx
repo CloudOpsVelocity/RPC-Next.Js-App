@@ -5,8 +5,8 @@ import {
   BlogCOnatainerSVg,
   greenTick,
   Illustrationcircles,
+  BuildingIconABout,
 } from "@/app/images/commonSvgs";
-import { BuildingIconABout } from "@/app/images/commonSvgs";
 import { Input } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import Image from "next/image";

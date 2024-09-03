@@ -63,21 +63,26 @@ export function MainSearchMultiSelect({ type }: { type: string }) {
         window.open(`/abc/delhi/palika/${data.id}`);
         break;
       case "Listings":
-        const [ut, pt, cg, lt] = data.id.split("_");
+        {
+          const [ut, pt, cg, lt] = data.id.split("_");
 
-        if(data.id.includes("_P")){
-          const url = `propTypes=${pt}&unitTypes=${ut}&cgs=${cg}&localities=${data.name}` + "%2B" + encodeURIComponent(lt);
-          window.open("/search/listing?" + url);
-        }else{
-          console.log("update Listings Array state");
+          if (data.id.includes("_P")) {
+            const url =
+              `propTypes=${pt}&unitTypes=${ut}&cgs=${cg}&localities=${data.name}` +
+              "%2B" +
+              encodeURIComponent(lt);
+            window.open("/search/listing?" + url);
+          } else {
+            console.log("update Listings Array state");
 
-          let prevIds = [...filters?.unitTypes];
+            let prevIds = [...(filters?.unitTypes ?? "")];
 
-          if(!prevIds.includes(parseInt(ut))){
-            setFilters((prevFilters) => ({
-              ...prevFilters,
-              unitTypes: [...prevFilters.unitTypes, parseInt(ut)],
-            }));
+            if (!prevIds.includes(parseInt(ut))) {
+              setFilters((prevFilters) => ({
+                ...prevFilters,
+                unitTypes: [...prevFilters.unitTypes, parseInt(ut)],
+              }));
+            }
           }
         }
         break;
@@ -87,7 +92,9 @@ export function MainSearchMultiSelect({ type }: { type: string }) {
           let projName = projectName.split(" in ")[1].toLowerCase();
           let replaceSpaces = projName.replace(" ", "-");
 
-          const url = `projIdEnc=${data.id}&listedBy=${data.type.split("")[0]}&projName=${replaceSpaces}`  
+          const url = `projIdEnc=${data.id}&listedBy=${
+            data.type.split("")[0]
+          }&projName=${replaceSpaces}`;
           window.open("/search/listing?" + url);
         }
         break;
@@ -95,7 +102,6 @@ export function MainSearchMultiSelect({ type }: { type: string }) {
         setFilters((prevFilters) => ({
           ...prevFilters,
           builderIds: [...prevFilters.builderIds, `${data.name}+${data.id}`],
-          
         }));
         handleResetQuery();
         break;
@@ -124,70 +130,67 @@ export function MainSearchMultiSelect({ type }: { type: string }) {
     {
       group: "Locality",
       items: localities || [],
-      name: "Locality"
+      name: "Locality",
     },
     {
       group: "Projects",
       items: projects || [],
-      name: "Project"
+      name: "Project",
     },
     {
       group: "Listings",
       items: listings || [],
       // items: listingFakeData,
-      name: "Listings"
+      name: "Listings",
     },
     {
       group: "Project Listings",
       items: projectListing || [],
-      name: "Project Listings"
+      name: "Project Listings",
     },
     {
       group: "Builders",
       items: builders || [],
-      name: "Builder"
+      name: "Builder",
     },
   ];
 
   const filteredOptions = data.flatMap((group) => {
-
     const filteredItems = group.items.filter((item: any) =>
       item.name.toLowerCase().includes(search.trim().toLowerCase())
     );
 
     if (filteredItems.length === 0) {
       return [];
-    };
+    }
 
     console.log(filteredItems);
 
-    
-      return [
-        <Combobox.Group key={group.group} label={group.group}>
-          {filteredItems.map((item: any, index: number) => {
-            if(item.type != "L" || (index < 3 && item.type == "L")){
-              return(
-                <Combobox.Option
-                  value={`${item.name}+${item.id}`}
-                  key={item.id}
-                  active={value.includes(`${item.name}+${item.id}`)}
-                  onClick={() => handlePush(group.group, item)}
-                >
-                  <Group gap="sm">
-                    {value.includes(`${item.name}+${item.id}`) ? (
-                      <CheckIcon size={12} />
-                    ) : null}
-                    <span>
-                      {item.name} <small>({group.name})</small>
-                    </span>
-                  </Group>
-                </Combobox.Option>
-              )}
-          })}
-        </Combobox.Group>,
-      ];
-    
-
+    return [
+      <Combobox.Group key={group.group} label={group.group}>
+        {filteredItems.map((item: any, index: number) => {
+          if (item.type != "L" || (index < 3 && item.type == "L")) {
+            return (
+              <Combobox.Option
+                value={`${item.name}+${item.id}`}
+                key={item.id}
+                active={value.includes(`${item.name}+${item.id}`)}
+                onClick={() => handlePush(group.group, item)}
+              >
+                <Group gap="sm">
+                  {value.includes(`${item.name}+${item.id}`) ? (
+                    <CheckIcon size={12} />
+                  ) : null}
+                  <span>
+                    {item.name} <small>({group.name})</small>
+                  </span>
+                </Group>
+              </Combobox.Option>
+            );
+          }
+        })}
+      </Combobox.Group>,
+    ];
   });
 
   useEffect(() => {

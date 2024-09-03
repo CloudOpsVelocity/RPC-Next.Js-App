@@ -207,13 +207,21 @@ const Gallery: React.FC<GalleryProps> = ({
                             width={150}
                             height={100}
                             src={video as string}
-                            //alt={`Image ${index + 1}`}
                             className={`cursor-pointer border-1 border-solid border-white sm:h-full w-full min-w-[150px] rounded-[5px] !h-auto max-h-[100px] min-h-[100px] object-cover  ${
                               currentSlide === index
                                 ? "border-[4px] border-white"
                                 : ""
                             }`}
-                          />
+                            controls
+                          >
+                            <track
+                              src="path_to_your_captions_file.vtt" // Replace with the actual path to your captions file
+                              kind="captions"
+                              srcLang="en"
+                              label="English"
+                              default
+                            />
+                          </video>
                         ) : (
                           <Image
                             width={150}

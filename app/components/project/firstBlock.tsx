@@ -52,9 +52,11 @@ const FirstBlock: React.FC<Props> = ({
     }
     setC("floorPlans");
     setTimeout(() => setIsScrolling(false), 3000);
-  };
+  }
 
-  let builderName = companyName ? companyName.toLowerCase().split(" ").join("%2D") : "";
+  let builderName = companyName
+    ? companyName.toLowerCase().split(" ").join("%2D")
+    : "";
   let urlBuilder = `/builders/bengaluru/${builderName}`;
 
   return (
@@ -150,18 +152,17 @@ const FirstBlock: React.FC<Props> = ({
                 {formatCurrency(projectDetails.maxPrice)}
               </h2>
               <p className=" md:text-right sm:text-[14px] xl:text-[24px] sm:font-[600] mb-[10px] md:mb-[20px] text-[#001F35] ">
-              <span className="text-[#001F35]  sm:text-[14px] xl:text-[24px] sm:font-[600] text-wrap not-italic font-medium leading-[normal]">
-
-              ₹{" "}
-                {
-                  <NumberFormatter
-                    thousandSeparator
-                    value={projectDetails.basePrice}
-                    thousandsGroupStyle="lakh"
-                  />
-                }{" "}
-                Base Price/sq.ft onwards
-              </span>
+                <span className="text-[#001F35]  sm:text-[14px] xl:text-[24px] sm:font-[600] text-wrap not-italic font-medium leading-[normal]">
+                  ₹{" "}
+                  {
+                    <NumberFormatter
+                      thousandSeparator
+                      value={projectDetails.basePrice}
+                      thousandsGroupStyle="lakh"
+                    />
+                  }{" "}
+                  Base Price/sq.ft onwards
+                </span>
               </p>
 
               <p
@@ -175,7 +176,8 @@ const FirstBlock: React.FC<Props> = ({
                   alt="no of floors"
                   className=" xl:h-[24px] xl:w-[24px] w-[16px] h-[16px]  sm:h-[16px] sm:w-[16px] "
                 />
-                {formatNumberWithSuffix(projectDetails?.floorPlanCount) || 0} Floor Plans
+                {formatNumberWithSuffix(projectDetails?.floorPlanCount) || 0}{" "}
+                Floor Plans
               </p>
             </div>
           </div>

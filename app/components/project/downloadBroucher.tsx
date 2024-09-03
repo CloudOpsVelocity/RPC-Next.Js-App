@@ -1,6 +1,5 @@
 "use client";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
-import { downLoadIcon, pdfFileIcon } from "@/app/images/commonSvgs";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import React from "react";

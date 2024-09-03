@@ -19,7 +19,6 @@ import PropertyBanner from "@/app/components/property/propertyBanner";
 import PropertyFirstBlock from "@/app/components/property/fistblock";
 import LeafMap from "@/app/components/project/map";
 import PropertyMap from "@/app/components/property/map";
-import { getListingDetails } from "@/app/utils/api/property";
 import NearByCarouselProperty from "@/app/components/property/carousel";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
 import MobileHidden from "@/app/components/molecules/MobileHidden";
@@ -52,7 +51,10 @@ export default function ListingDetailsPage({
       <div className="mt-[70px] sm:mt-[90px] w-full sm:pb-[2%] flex xl:text-ellipsis items-center justify-center flex-col">
         <div className="p-[1%] sm:p-[1%] sm:py-0 xl:p-[1%] w-full sm:w-[94%]">
           <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%] mt-1 ">
-            <Link href={"/"}><span className="hover:underline cursor-pointer ">Home</span></Link> {" > "}
+            <Link href={"/"}>
+              <span className="hover:underline cursor-pointer ">Home</span>
+            </Link>{" "}
+            {" > "}
             <Link href={"/project/banglore"} className="text-nowrap">
               <span>Property In {data.ctName}</span>
             </Link>{" "}

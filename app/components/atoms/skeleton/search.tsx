@@ -18,7 +18,7 @@ const Card = () => {
         <span className="size-12 block bg-gray-200 h-full min-w-[200px] rounded-md dark:bg-gray-700" />
       </div>
       <div className="ms-4 mt-2 w-full">
-        <h3
+        <div
           className="h-4 bg-gray-200 rounded-full dark:bg-gray-700"
           style={{ width: "40%" }}
         />

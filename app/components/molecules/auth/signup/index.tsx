@@ -18,35 +18,35 @@ const AgentBuilderForm: React.FC = () => {
     setSelectedAgent(e.target.value);
   };
 
-  const renderFormFields = () => {
-    // Map your form fields based on the selected agent
-    switch (selectedAgent) {
-      case "individual":
-        return (
-          <div>
-            <label>Field 1:</label>
-            <input type="text" name="field1" />
-            {/* Add more fields specific to option1 */}
-          </div>
-        );
-      case "option2":
-        return (
-          <div>
-            <label>Field 2:</label>
-            <textarea name="field2"></textarea>
-            {/* Add more fields specific to option2 */}
-          </div>
-        );
-      // Add more cases for additional options
+  // const renderFormFields = () => {
+  //   // Map your form fields based on the selected agent
+  //   switch (selectedAgent) {
+  //     case "individual":
+  //       return (
+  //         <div>
+  //           <label>Field 1:</label>
+  //           <input type="text" name="field1" />
+  //           {/* Add more fields specific to option1 */}
+  //         </div>
+  //       );
+  //     case "option2":
+  //       return (
+  //         <div>
+  //           <label>Field 2:</label>
+  //           <textarea name="field2"></textarea>
+  //           {/* Add more fields specific to option2 */}
+  //         </div>
+  //       );
+  //     // Add more cases for additional options
 
-      default:
-        return null;
-    }
-  };
+  //     default:
+  //       return null;
+  //   }
+  // };
 
   return (
     <div>
-      <label>Select Agent:</label>
+      {/* <label>Select Agent:</label>
       <select onChange={handleAgentChange}>
         <option value="" disabled selected>
           Select an Agent
@@ -59,13 +59,13 @@ const AgentBuilderForm: React.FC = () => {
       </select>
 
       {/* Render form fields based on the selected agent */}
-      {selectedAgent && renderFormFields()}
+      {/* {selectedAgent && renderFormFields()} */}
 
       {/* Additional common form fields can be added here */}
-      <div>
+      {/* <div>
         <label>Common Field:</label>
         <input type="text" name="commonField" />
-      </div>
+      </div>  */}
     </div>
   );
 };

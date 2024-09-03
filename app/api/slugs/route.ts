@@ -33,14 +33,14 @@ export async function POST(request: Request, response: Response) {
   const data = JSON.parse(fileContent);
 
   switch (action) {
-    case "create":
+    case "create": {
       if (!slug || !id) {
         return NextResponse.json(
           { error: "Invalid slug or id parameter" },
           { status: 400 }
         );
       }
-      if (data.hasOwnProperty(slug)) {
+      if (Object.prototype.hasOwnProperty.call(data, slug)) {
         return NextResponse.json(
           { error: `${type} already exists` },
           { status: 400 }
@@ -56,8 +56,8 @@ export async function POST(request: Request, response: Response) {
         { message: `${type} created successfully` },
         { status: 201 }
       );
-      break;
-    case "update":
+    }
+    case "update": {
       if (!id || !slug) {
         return NextResponse.json(
           { error: "Missing parameter" },
@@ -74,7 +74,7 @@ export async function POST(request: Request, response: Response) {
         );
       }
       if (slug && slug !== currentSlug) {
-        if (data.hasOwnProperty(slug)) {
+        if (Object.prototype.hasOwnProperty.call(data, slug)) {
           return NextResponse.json(
             { error: `Slug '${slug}' already exists` },
             { status: 400 }
@@ -90,8 +90,8 @@ export async function POST(request: Request, response: Response) {
         { message: `${type} updated successfully` },
         { status: 200 }
       );
-      break;
-    case "delete":
+    }
+    case "delete": {
       if (!id) {
         return NextResponse.json(
           { error: "Missing id parameter" },
@@ -114,7 +114,7 @@ export async function POST(request: Request, response: Response) {
         { message: `${type} deleted successfully` },
         { status: 200 }
       );
-      break;
+    }
     default:
       return NextResponse.json(
         { error: "Invalid action parameter" },

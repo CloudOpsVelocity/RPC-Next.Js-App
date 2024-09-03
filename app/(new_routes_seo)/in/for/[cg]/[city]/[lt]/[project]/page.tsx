@@ -18,7 +18,11 @@ export default async function Page({
 }: Props) {
   const pathname = `/in/for/${cg}/${city}/${lt}/${project}`;
   const values = await getNestedSlug(pathname, -2);
-  const [buyorent, , locality, projectId] = values?.split("_");
+  const [buyorent, , locality, projectId] = values?.split("_") ?? [
+    "1",
+    "2",
+    "3",
+  ];
   const severData = await getSearchData(
     `localities=${locality}&cg=${buyorent}&projIdEnc=${projectId}`
   );

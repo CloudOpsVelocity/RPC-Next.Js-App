@@ -233,35 +233,37 @@ function Builder() {
           saveStep(4);
           break;
         case 3:
-          setStatus("pending");
-          if (!values.companyStartDate) return;
-          const date = new Date(values.companyStartDate);
+          {
+            setStatus("pending");
+            if (!values.companyStartDate) return;
+            const date = new Date(values.companyStartDate);
 
-          const day = date.getDate();
-          const month = date.getMonth() + 1; // Months are zero-indexed, so add 1
-          const year = date.getFullYear();
+            const day = date.getDate();
+            const month = date.getMonth() + 1; // Months are zero-indexed, so add 1
+            const year = date.getFullYear();
 
-          const formattedDate = `${day}/${month}/${year}`;
+            const formattedDate = `${day}/${month}/${year}`;
 
-          // API call for the third step
-          const otherDetailsData = await registerOtherDetails(
-            // @ts-ignore
-            registerOtherParser({
-              ...values,
-              branch: values.branch.map((item) => parseInt(item)),
-              companyStartDate: formattedDate,
-            })
-          ).then(async (res) => {
-            await saveStep(5);
-            await login({
-              password: form.values.password,
-              username: form.values.mobile as unknown as string,
+            // API call for the third step
+            const otherDetailsData = await registerOtherDetails(
+              // @ts-ignore
+              registerOtherParser({
+                ...values,
+                branch: values.branch.map((item) => parseInt(item)),
+                companyStartDate: formattedDate,
+              })
+            ).then(async (res) => {
+              await saveStep(5);
+              await login({
+                password: form.values.password,
+                username: form.values.mobile as unknown as string,
+              });
             });
-          });
 
-          setStatus("success");
-          // Proceed to the next step after the API call
-          setActive((current) => (current < 4 ? current + 1 : current));
+            setStatus("success");
+            // Proceed to the next step after the API call
+            setActive((current) => (current < 4 ? current + 1 : current));
+          }
           break;
 
         // Add more cases if needed for other steps

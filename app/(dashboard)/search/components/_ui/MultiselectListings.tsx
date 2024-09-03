@@ -57,7 +57,11 @@ export function MainSearchMultiSelect({ type }: { type: string }) {
     }
   };
 
-  let selectedPropId = `${filters.propTypes != projectprops.plot ? `${filters.unitTypes[0]}_` : ""}${filters.propTypes}_${filters.cg}_${filters.locality}_p*${filters.projIdEnc}`;
+  let selectedPropId = `${
+    filters.propTypes != projectprops.plot ? `${filters.unitTypes[0]}_` : ""
+  }${filters.propTypes}_${filters.cg}_${filters.locality}_p*${
+    filters.projIdEnc
+  }`;
 
   console.log(selectedPropId);
 
@@ -66,42 +70,46 @@ export function MainSearchMultiSelect({ type }: { type: string }) {
     switch (type) {
       case "Locality":
         handleAddSearch(`${data.name}+${data.id}`);
-        
+
         break;
       case "Projects":
         window.open(`/abc/delhi/palika/${data.id}`);
         break;
       case "Listings":
-        let [ut, pt, cg, lt] = data.id.split("_");
+        {
+          let [ut, pt, cg, lt] = data.id.split("_");
 
-        if(ut != projectprops.plot){
-          // Not Equal to Plot
-          [ut, pt, cg, lt] = data.id.split("_");
-        }else{
-          // Equal to Plot
-          [pt, cg, lt] = data.id.split("_");
-        }
+          if (ut != projectprops.plot) {
+            // Not Equal to Plot
+            [ut, pt, cg, lt] = data.id.split("_");
+          } else {
+            // Equal to Plot
+            [pt, cg, lt] = data.id.split("_");
+          }
 
-        if(data.id.includes("_P")){
-          let projId = data.id.split("*")[1];
+          if (data.id.includes("_P")) {
+            let projId = data.id.split("*")[1];
 
-          let splitProjName = data.name.split(" in ")[1].toLowerCase();
-          let projName = splitProjName.split("-")[0].replace(" ", "-");
-          let localityName = splitProjName.split("-")[1].replace(" ", "-");
+            let splitProjName = data.name.split(" in ")[1].toLowerCase();
+            let projName = splitProjName.split("-")[0].replace(" ", "-");
+            let localityName = splitProjName.split("-")[1].replace(" ", "-");
 
-          setFilters((prevFilters) => ({
-            ...prevFilters,
-            projIdEnc: projId,
-            projName: projName,
-            cg: cg,
-            unitTypes:[parseInt(ut)],
-            locality:[localityName],
-            propTypes: parseInt(pt)
-          }));
-        
-        }else{
-          const url = `propTypes=${pt}&unitTypes=${ut}&cgs=${cg}&localities=${data.name}` + "%2B" + encodeURIComponent(lt);
-          window.open("/search?" + url);
+            setFilters((prevFilters) => ({
+              ...prevFilters,
+              projIdEnc: projId,
+              projName: projName,
+              cg: cg,
+              unitTypes: [parseInt(ut)],
+              locality: [localityName],
+              propTypes: parseInt(pt),
+            }));
+          } else {
+            const url =
+              `propTypes=${pt}&unitTypes=${ut}&cgs=${cg}&localities=${data.name}` +
+              "%2B" +
+              encodeURIComponent(lt);
+            window.open("/search?" + url);
+          }
         }
         break;
       case "Project Listings":
@@ -114,23 +122,25 @@ export function MainSearchMultiSelect({ type }: { type: string }) {
             ...prevFilters,
             projIdEnc: data.id,
             projName: replaceSpaces,
-            listedBy: data.type.split("")[0]
+            listedBy: data.type.split("")[0],
           }));
 
-          // const url = `projIdEnc=${data.id}&listedBy=${data.type.split("")[0]}&projName=${replaceSpaces}`  
+          // const url = `projIdEnc=${data.id}&listedBy=${data.type.split("")[0]}&projName=${replaceSpaces}`
           // window.open("/search/listing?" + url);
         }
         break;
       case "Builders":
-        let builderName = data.name.toLowerCase().split(" ").join("%2D");
-        let urlBuilder=`${process.env.NEXT_PUBLIC_BACKEND_URL}/builders/bengaluru/${builderName}`;
-        window.open(urlBuilder);
+        {
+          let builderName = data.name.toLowerCase().split(" ").join("%2D");
+          let urlBuilder = `${process.env.NEXT_PUBLIC_BACKEND_URL}/builders/bengaluru/${builderName}`;
+          window.open(urlBuilder);
 
-        // setFilters((prevFilters) => ({
-        //   ...prevFilters,
-        //   builderIds: [...prevFilters.builderIds, `${data.name}+${data.id}`],
-        // }));
-        handleResetQuery();
+          // setFilters((prevFilters) => ({
+          //   ...prevFilters,
+          //   builderIds: [...prevFilters.builderIds, `${data.name}+${data.id}`],
+          // }));
+          handleResetQuery();
+        }
         break;
       default:
         break;
@@ -157,70 +167,73 @@ export function MainSearchMultiSelect({ type }: { type: string }) {
     {
       group: "Locality",
       items: localities || [],
-      name: "Locality"
+      name: "Locality",
     },
     {
       group: "Projects",
       items: projects || [],
-      name: "Project"
+      name: "Project",
     },
     {
       group: "Listings",
       items: listings || [],
-      name: "Listings"
+      name: "Listings",
     },
     {
       group: "Project Listings",
       items: projectListing || [],
-      name: "Project Listings"
+      name: "Project Listings",
     },
     {
       group: "Builders",
       items: builders || [],
-      name: "Builder"
+      name: "Builder",
     },
   ];
 
   const filteredOptions = data.flatMap((group) => {
-      const filteredItems = group.items.filter((item: any) =>
-        item.name.toLowerCase().includes(search.trim().toLowerCase())
-      );
+    const filteredItems = group.items.filter((item: any) =>
+      item.name.toLowerCase().includes(search.trim().toLowerCase())
+    );
 
-      if (filteredItems.length === 0) {
-        return [];
-      };
-    
-      return [
-        <Combobox.Group key={group.group} label={group.group}>
-          {filteredItems.map((item: any, index: number) => {
-            if(item.type != "L" || (index < 3 && item.type == "L")){
-              return(
-                <Combobox.Option
-                  value={`${item.name}+${item.id}`}
-                  key={item.id}
-                  active={value.includes(`${item.name}+${item.id}`)}
-                  onClick={() => handlePush(group.group, item)}
-                >
-                  <Group gap="sm">
-                    {value.includes(`${item.name}+${item.id}`) ? (
-                      <CheckIcon size={12} />
-                    ) : null}
-                    <span className={selectedPropId == item.id ? "text-blue" : "text-black" } >
-                      {item.name} <small>({group.name})</small>
-                    </span>
-                  </Group>
-                </Combobox.Option>
-              )}
-          })}
-        </Combobox.Group>,
-      ];
+    if (filteredItems.length === 0) {
+      return [];
+    }
+
+    return [
+      <Combobox.Group key={group.group} label={group.group}>
+        {filteredItems.map((item: any, index: number) => {
+          if (item.type != "L" || (index < 3 && item.type == "L")) {
+            return (
+              <Combobox.Option
+                value={`${item.name}+${item.id}`}
+                key={item.id}
+                active={value.includes(`${item.name}+${item.id}`)}
+                onClick={() => handlePush(group.group, item)}
+              >
+                <Group gap="sm">
+                  {value.includes(`${item.name}+${item.id}`) ? (
+                    <CheckIcon size={12} />
+                  ) : null}
+                  <span
+                    className={
+                      selectedPropId == item.id ? "text-blue" : "text-black"
+                    }
+                  >
+                    {item.name} <small>({group.name})</small>
+                  </span>
+                </Group>
+              </Combobox.Option>
+            );
+          }
+        })}
+      </Combobox.Group>,
+    ];
   });
 
   useEffect(() => {
     onSearchChange(search);
   }, [search, onSearchChange]);
-
-  
 
   return (
     <Combobox store={combobox} withinPortal={false} keepMounted>

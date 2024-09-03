@@ -111,35 +111,34 @@ export default function FloorplanDrawer() {
         } else {
           return apartmentCardImg;
         }
-        break;
+
       case "plot":
         if (type == "name") {
           return "Plot";
         } else {
           return plotCardImg;
         }
-        break;
+
       case "rowHouse":
         if (type == "name") {
           return "Rowhouse";
         } else {
           return rowhouseCardImg;
         }
-        break;
+
       case "villa":
         if (type == "name") {
           return "Villa";
         } else {
           return villaCardImg;
         }
-        break;
+
       case "vlmt":
         if (type == "name") {
           return "Villament";
         } else {
           return villamentCardImg;
         }
-        break;
     }
   };
   const handleClose = () => {

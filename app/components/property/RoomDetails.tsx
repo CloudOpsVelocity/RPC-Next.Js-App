@@ -186,23 +186,6 @@ const OtherDetails = ({
   cunstructionType,
   boundryWallEnclose,
 }: Main) => {
-  const data = [
-    ownershipName,
-    possassionDate,
-    ageofBuilding,
-    availableFrom,
-    flooringType,
-    availablityStatus,
-    agrementduration,
-    cg,
-    noticemonth,
-    propTypeName,
-    approvedByName,
-    ispetFriendly,
-    availavleFor,
-    agreementType,
-    ,
-  ];
   return (
     <div
       className=" shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] p-4 xl:pl-[53px] md:pt-[24px] "
