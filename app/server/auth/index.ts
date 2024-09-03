@@ -1,5 +1,5 @@
-"use server";
+// "use server";
 
-const decrptPass = (pass: string) => {
-  return pass;
-};
+// const decrptPass = (pass: string) => {
+//   return pass;
+// };

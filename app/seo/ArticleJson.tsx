@@ -1,5 +1,4 @@
 import { Article, WithContext } from "schema-dts";
-import Head from "next/head";
 
 const generateArticleJsonLd = (data: any) => {
   const jsonLd: WithContext<Article> = {
@@ -17,7 +16,7 @@ const generateArticleJsonLd = (data: any) => {
     // dateModified: data.dateModified,
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": ``,
+      "@id": `${data.url ?? ""}`,
     },
 
     // articleBody: data.articleBody,

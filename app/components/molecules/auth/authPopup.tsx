@@ -12,7 +12,7 @@ type props = {
   mobile: number | null;
 };
 
-function AuthPopup({ opened, open, close, userName, callback, mobile }: props) {
+function AuthPopup({ opened, close, userName, callback, mobile }: props) {
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
   return (
     <>

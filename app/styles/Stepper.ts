@@ -1,5 +1,4 @@
 import { rem } from "@mantine/core";
-import { root } from "postcss";
 
 export const step = {
   padding: 0,

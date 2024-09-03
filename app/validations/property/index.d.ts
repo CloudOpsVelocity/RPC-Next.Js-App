@@ -65,7 +65,7 @@ export interface Main {
   noOfOpenSide: number;
 }
 export interface LIstingResponse {
-  listing: ListingDetails;
+  listing: Main;
   nearByLocations: any;
   totalPrice: any;
 }

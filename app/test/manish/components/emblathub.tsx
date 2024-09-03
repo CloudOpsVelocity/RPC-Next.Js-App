@@ -9,7 +9,7 @@ type PropType = {
 };
 
 export const Thumb: React.FC<PropType> = (props) => {
-  const { selected, index, onClick, img } = props;
+  const { selected, onClick, img } = props;
 
   return (
     <div

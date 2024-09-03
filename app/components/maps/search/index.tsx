@@ -5,27 +5,20 @@ import {
   MapContainer,
   TileLayer,
   Marker,
-  Popup,
   Tooltip,
   useMap,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css"; // Import Leaflet CSS
-import { LatLngTuple, divIcon, point } from "leaflet";
-import "leaflet/dist/leaflet.css";
+import L, { LatLngTuple } from "leaflet";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css"; // Re-uses images from ~leaflet package
 import "leaflet-defaulticon-compatibility";
-import L from "leaflet";
 import { useMediaQuery } from "@mantine/hooks";
 import { em } from "@mantine/core";
-import { useAtom, useAtomValue } from "jotai";
+import { useAtom } from "jotai";
 import selectedSearchAtom from "@/app/store/search/map";
-import MarkerClusterGroup from "react-leaflet-cluster";
 import TooltipProj from "./Tooltip";
 import TooltipProp from "./ToolltipProp";
 
-interface Cluster {
-  getChildCount: () => number;
-}
 const Map = ({ data, lat, lang }: any) => {
   const position: LatLngTuple = [lat, lang];
   return (

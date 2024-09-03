@@ -74,6 +74,7 @@ export default function useAuth({
     try {
       const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/user-signup-step?page=${step}`;
       const res = await axios.post(url);
+      return res;
     } catch (error) {
       console.log("somethign went wrong");
     }

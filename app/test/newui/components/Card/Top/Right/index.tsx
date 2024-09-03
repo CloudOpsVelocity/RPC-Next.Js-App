@@ -1,9 +1,4 @@
-import Button from "@/app/elements/button";
-import {
-  GradientLocation,
-  SearchMapIcon,
-  SuperBuildupAreaIcon,
-} from "@/app/images/commonSvgs";
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import selectedSearchAtom from "@/app/store/search/map";
 import { useAtom, useSetAtom } from "jotai";
 import React from "react";
@@ -12,7 +7,7 @@ import { useMediaQuery } from "@mantine/hooks";
 import ProjData from "../Center/ProjData";
 import { ShareIcon } from "@/app/images/HomePageIcons";
 import { searchShareAtom } from "@/app/(dashboard)/search/components/SharePopup";
-import { AgeIcon, DownLoadIcon, NewMapIcon } from "@/app/images/commongsSvgs2";
+import { DownLoadIcon, NewMapIcon } from "@/app/images/commongsSvgs2";
 import clsx from "clsx";
 
 type Props = any;
@@ -23,15 +18,13 @@ export default function TopRightSection({
   projName,
   lat,
   lang,
-  onAddingCompare,
-  Com,
+
   Sh,
   onAddingShortList,
   projIdEnc,
   type,
   data,
   propIdEnc,
-  postedDate,
   propName,
 }: Props) {
   const setSelected = useSetAtom(selectedSearchAtom);
@@ -249,70 +242,3 @@ const config = {
     </svg>
   ),
 };
-function parseDateString(dateString: string): Date {
-  const months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
-  const [_, monthStr, day, time, , year] = dateString.split(" ");
-  const [hours, minutes, seconds] = time.split(":").map(Number);
-  const month = months.indexOf(monthStr);
-  return new Date(Number(year), month, Number(day), hours, minutes, seconds);
-}
-
-function timeAgo(dateString: string): string {
-  const date = parseDateString(dateString);
-  const seconds = Math.floor((new Date().getTime() - date.getTime()) / 1000);
-
-  const interval = Math.floor(seconds / 31536000);
-  if (interval > 1) {
-    return interval + " years ago";
-  }
-  if (interval === 1) {
-    return interval + " year ago";
-  }
-
-  const months = Math.floor(seconds / 2628000);
-  if (months > 1) {
-    return months + " months ago";
-  }
-  if (months === 1) {
-    return months + " month ago";
-  }
-
-  const days = Math.floor(seconds / 86400);
-  if (days > 1) {
-    return days + " days ago";
-  }
-  if (days === 1) {
-    return days + " day ago";
-  }
-
-  const hours = Math.floor(seconds / 3600);
-  if (hours > 1) {
-    return hours + " hours ago";
-  }
-  if (hours === 1) {
-    return hours + " hour ago";
-  }
-
-  const minutes = Math.floor(seconds / 60);
-  if (minutes > 1) {
-    return minutes + " minutes ago";
-  }
-  if (minutes === 1) {
-    return minutes + " minute ago";
-  }
-
-  return "just now";
-}

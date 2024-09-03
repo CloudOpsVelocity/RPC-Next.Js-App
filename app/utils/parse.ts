@@ -61,9 +61,6 @@ function getFoundedByName(arr: FoundedByItem[]): string {
 }
 
 // Function to convert an array of names to a comma-separated string
-function arrayToCommaSeparatedString(names: string[]): string {
-  return names.filter((name) => name.trim() !== "").join(", ");
-}
 
 // Function to get the values for foundedBy, managingDirectorNames, and ceoNames
 function getValues({
@@ -80,8 +77,6 @@ function getValues({
 
 function registerOtherParser(data: any) {
   const {
-    otp,
-    prevMobile,
     companyLogo,
     foundedBy,
     managingDirectorName,

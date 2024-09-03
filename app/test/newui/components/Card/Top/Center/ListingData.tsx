@@ -1,7 +1,4 @@
-import { SuperBuildupAreaIcon } from "@/app/images/commonSvgs";
-import { formatDate, formatDateDDMMYYYY } from "@/app/utils/date";
 import { formatNumberWithSuffix } from "@/app/utils/numbers";
-import { Divider } from "@mantine/core";
 import clsx from "clsx";
 import React from "react";
 
@@ -9,15 +6,11 @@ type Props = any;
 
 export default function ListingData({
   propTypes,
-  possassionDate,
-  launchDate,
   landArea,
   type,
-  availableFrom,
   ca,
   sba,
   propertyAge,
-  propStatus,
   propTypeName,
   pa,
 }: Props) {
@@ -159,21 +152,21 @@ const DownSectionCard = ({
     </div>
   );
 };
-const ListingDownSectionCard = ({
-  label,
-  value,
-  Icon,
-}: {
-  label: string;
-  value: string;
-  Icon?: React.JSX.Element;
-}) => {
-  return (
-    <div className="flex flex-col justify-center items-start ">
-      <p className="text-[#001F35] text-[12px] sm:text-[14px] xl:text-sm not-italic font-medium text-wrap  inline-flex">
-        {Icon} {value}:
-      </p>
-      <p className="text-[#242424] text-[12px]  not-italic ">{label}</p>
-    </div>
-  );
-};
+// const ListingDownSectionCard = ({
+//   label,
+//   value,
+//   Icon,
+// }: {
+//   label: string;
+//   value: string;
+//   Icon?: React.JSX.Element;
+// }) => {
+//   return (
+//     <div className="flex flex-col justify-center items-start ">
+//       <p className="text-[#001F35] text-[12px] sm:text-[14px] xl:text-sm not-italic font-medium text-wrap  inline-flex">
+//         {Icon} {value}:
+//       </p>
+//       <p className="text-[#242424] text-[12px]  not-italic ">{label}</p>
+//     </div>
+//   );
+// };

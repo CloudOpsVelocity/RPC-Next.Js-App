@@ -2,7 +2,7 @@ import { Suspense } from "react";
 
 const fetchData = async () => {
   const res = await fetch("https://api.chucknorris.io/jokes/random");
-  const p = await new Promise((resolve) => setTimeout(resolve, 10000));
+  await new Promise((resolve) => setTimeout(resolve, 10000));
   return res.json();
 };
 

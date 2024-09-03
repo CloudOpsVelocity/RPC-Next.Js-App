@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 import { getBuilderDetails } from "../utils/api/builder";
-import { useParams, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 type Props = {
   id: number | string;
   y: string;

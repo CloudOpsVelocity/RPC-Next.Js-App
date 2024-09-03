@@ -1,48 +1,25 @@
 import Button from "@/app/elements/button";
-import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
-import { NearByDataAtom } from "@/app/store/nearby";
 import { useMediaQuery } from "@mantine/hooks";
 import clsx from "clsx";
-import { useSetAtom } from "jotai";
-import { useSearchParams } from "next/navigation";
 import React from "react";
-
-type Props = {
-  a: number;
-  o: number;
-  B: number;
-  type: "proj" | "prop";
-  reqId: string;
-};
 
 export default function CardDownSection({
   a,
   o,
   B,
   type,
-  reqId,
   projName,
-  builderName,
-  bhkName,
-  propTypeName,
-  ltName,
-  cg,
-  builderId,
-  postedById,
-  postedByName,
-  postedBy,
-  localityName,
   projIdEnc,
   onAddingCompare,
   isCompared,
   handleOpen,
 }: any) {
   const isMobile = useMediaQuery("(max-width: 1600px)");
-  const name =
-    type === "proj"
-      ? projName
-      : `${bhkName ?? ""} ${propTypeName} for
-    ${cg === "R" ? "Rent" : "Sell"} in ${ltName}`;
+  // const name =
+  //   type === "proj"
+  //     ? projName
+  //     : `${bhkName ?? ""} ${propTypeName} for
+  //   ${cg === "R" ? "Rent" : "Sell"} in ${ltName}`;
   // const [, { open }] = useReqCallPopup();
   // const setPopReqData = useSetAtom(NearByDataAtom);
   // const handleOpen = () => {

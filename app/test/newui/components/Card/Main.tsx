@@ -1,17 +1,10 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState } from "react";
-import Button from "@/app/elements/button";
-import { GradientLocation, Phone, ReraIcon } from "@/app/images/commonSvgs";
 import { Search } from "@/app/validations/types/search";
-import { formatDateDDMMYYYY } from "@/app/utils/date";
-import Image from "next/image";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import { useShortlistAndCompare } from "@/app/hooks/storage";
 import { useSession } from "next-auth/react";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
-import { formatCurrency } from "@/app/utils/numbers";
-import { useSetAtom } from "jotai";
-import selectedSearchAtom from "@/app/store/search/map";
-import { calculatePerSqPrice } from "@/app/utils/price";
 import LeftSection from "./Top/LeftSection";
 import CenterTop from "./Top/Center";
 import CardDownSection from "./Down";
@@ -23,36 +16,17 @@ type Props = {
 } & Search &
   any;
 
-const MainBox = ({ data, refetch, index, mutate }: Props) => {
+const MainBox = ({ data, refetch }: Props) => {
   const {
     type,
     projName,
-    minPrice,
-    maxPrice,
-    launchDate,
-    possassionDate,
-    agentListing,
-    ownerListing,
     coverUrl,
-    postedDate,
     projIdEnc,
-    propTypes,
-    lat = 22.176912,
-    lang = 75.66009,
-    availableFrom,
     coverImage,
-    ca,
-    sba,
-    propName,
     bhkName,
     propTypeName,
-    category,
     localityName,
-    price,
-    propStatus,
     propIdEnc,
-    pa,
-    projstatus,
     rerastatus,
     compareAdded,
     shortListed,
@@ -63,8 +37,7 @@ const MainBox = ({ data, refetch, index, mutate }: Props) => {
   });
   const { data: session } = useSession();
   const [, { open: openLogin }] = usePopShortList();
-  const { toggleShortlist, shortlistedItems, compareItems, toggleCompare } =
-    useShortlistAndCompare();
+  const { toggleShortlist, toggleCompare } = useShortlistAndCompare();
   const reqId = type === "proj" ? projIdEnc : propIdEnc;
 
   const onAddingShortList = () => {

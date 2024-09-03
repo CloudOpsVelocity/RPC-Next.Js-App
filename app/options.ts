@@ -51,16 +51,13 @@ export const options: NextAuthOptions = {
             switch (res.data.identifer) {
               case "NF":
                 throw new Error("We can’t find user. Please Sign Up!");
-                break;
               case "IU":
                 throw new Error(
                   "User is under review. Please wait for Approval"
                 );
-                break;
 
               default:
                 throw new Error("Please enter correct password");
-                break;
             }
           }
         } catch (error: any) {

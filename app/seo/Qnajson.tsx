@@ -1,5 +1,4 @@
 import { FAQPage, WithContext } from "schema-dts";
-import Head from "next/head";
 
 const generateQAJsonLd = (data: any) => {
   const jsonLd: WithContext<FAQPage> = {

@@ -1,16 +1,6 @@
-'use Client'
-import React from 'react'
-import AddmoreInput from '../../(auth)/Components/addmore'
+"use Client";
+import React from "react";
 
-
-
-
-type Props = {}
-
-export default function page({}: Props) {
-  return (
-    <div>
-      {/* <AddmoreInput /> */}asdasdas
-    </div>
-  )
-} 
+export default function page() {
+  return <div>{/* <AddmoreInput /> */}asdasdas</div>;
+}

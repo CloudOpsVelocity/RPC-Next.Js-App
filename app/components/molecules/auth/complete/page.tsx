@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 "use client";
 import { getQueryParamClient } from "@/app/hooks/custom/useRedirect";
 import { ForgotPass } from "@/app/images/commonSvgs";
@@ -21,7 +22,7 @@ export default function ForgotSucess() {
   );
 }
 
-const Countdown = ({ initialCount = 5, redirectPath = "/" }) => {
+const Countdown = () => {
   const queryParam = getQueryParamClient();
   const router = useRouter();
   const [timeRemaining, setTimeRemaining] = useState({

@@ -6402,6 +6402,7 @@ export const MapIcon = ({ className }: { className?: string }) => {
       height="72"
       viewBox="0 0 50 72"
       fill="none"
+      className={className}
     >
       <g filter="url(#filter0_d_446_13079)">
         <path
@@ -12619,7 +12620,7 @@ export const propertyDetailsSvgs = {
   ),
 };
 
-export const ReraSvg = ({}) => {
+export const ReraSvg = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -14043,7 +14044,7 @@ export const ZoomOutIcon = () => {
   );
 };
 
-export const FloorPlanModalIcon = ({ className }: { className?: string }) => {
+export const FloorPlanModalIcon = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

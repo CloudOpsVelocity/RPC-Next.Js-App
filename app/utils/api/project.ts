@@ -1,6 +1,5 @@
 import { unstable_cache } from "next/cache";
 import { Main, MERGERPROJECT } from "../../validations/types/project";
-import { GlobalPageType } from "@/app/validations/global";
 import { capitalizeWords } from "../letters";
 import axios from "axios";
 
@@ -95,10 +94,7 @@ const getCachedUser = unstable_cache(
   }
 );
 
-const getNearByLocations = async (
-  slug: string,
-  type?: GlobalPageType["types"]
-): Promise<any> => {
+const getNearByLocations = async (slug: string): Promise<any> => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/get-nearby?projIdEnc=${slug}`
   );

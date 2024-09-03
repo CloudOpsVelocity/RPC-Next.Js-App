@@ -11,15 +11,9 @@ import {
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { LatLngTuple } from "leaflet";
-import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css";
 import "leaflet-defaulticon-compatibility";
-import {
-  BlueIcon,
-  BlueMobileMapIcon,
-  MapIcon,
-  MobileMapIcon,
-} from "@/app/data/map";
+import { BlueMobileMapIcon, MapIcon, MobileMapIcon } from "@/app/data/map";
 import { RecenterIcon } from "@/app/images/commonSvgs";
 import { useMediaQuery } from "@mantine/hooks";
 import clsx from "clsx";
@@ -82,7 +76,6 @@ const Content: React.FC<any> = ({
   projName,
   lat,
   lang,
-  type,
   selected,
   setSelectedLocation,
 }) => {

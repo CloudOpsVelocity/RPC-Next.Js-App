@@ -1,5 +1,4 @@
 import { Review, WithContext } from "schema-dts";
-import Head from "next/head";
 
 const generateReviewJsonLd = (data: any) => {
   const jsonLd: WithContext<Review> = {

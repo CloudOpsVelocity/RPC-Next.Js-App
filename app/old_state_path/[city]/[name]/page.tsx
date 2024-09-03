@@ -1,4 +1,3 @@
-import { getPagesSlugs } from "@/app/seo/api";
 import path from "path";
 import fs from "fs";
 // import { headers } from "next/headers";
@@ -36,8 +35,6 @@ import QAJsonLdScript from "@/app/seo/Qnajson";
 import PropertyJsonLdScript from "@/app/seo/Productjson";
 import ArticleJsonLdScript from "@/app/seo/ArticleJson";
 import { notFound } from "next/navigation";
-import { projectSlugsMap } from "@/static/projectSlugsMap";
-import projectJsonSlugs from "@/static/projectSlugs.json";
 type Props = {
   params: {
     state: string;

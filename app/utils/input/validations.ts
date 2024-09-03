@@ -1,5 +1,5 @@
+/* eslint-disable no-undef */
 import { ChangeEvent } from "react";
-import { useForm } from "@mantine/form";
 
 // Utility function to trim and replace multiple spaces with a single space
 const handleTrimAndReplace = (

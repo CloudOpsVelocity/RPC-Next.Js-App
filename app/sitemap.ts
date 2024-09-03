@@ -1,4 +1,3 @@
-import { getUrlSlugs } from "./seo/sitemap/const";
 const fs = require("fs");
 
 export default async function sitemap() {

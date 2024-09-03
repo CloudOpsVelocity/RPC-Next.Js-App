@@ -1,23 +1,7 @@
 "use client";
-import { useCallback, useEffect, useRef } from "react";
-import { useIntersection } from "@mantine/hooks";
-import { Text, Paper, Box, Button } from "@mantine/core";
+import { Paper, RangeSlider, Slider } from "@mantine/core";
 
 function Demo() {
-  const heavyCalcFn = (num: number) => {
-    alert(num * 100000);
-  };
-  const cacheHeavyFn = useCallback(heavyCalcFn, []);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { ref, entry } = useIntersection({
-    root: containerRef.current,
-    threshold: 1,
-  });
-  let obj = {
-    name: "John",
-    age: 30,
-  };
-
   return (
     <Paper>
       <Demo1 />
@@ -26,24 +10,6 @@ function Demo() {
 }
 
 export default Demo;
-
-import { RangeSlider, Slider } from "@mantine/core";
-
-function valueLabelFormat(value: number) {
-  const units = ["KB", "MB", "GB", "TB"];
-
-  let unitIndex = 0;
-  let scaledValue = value;
-
-  while (scaledValue >= 1024 && unitIndex < units.length - 1) {
-    unitIndex += 1;
-    scaledValue /= 1024;
-  }
-
-  return `${scaledValue} ${units[unitIndex]}`;
-}
-
-const getScale = (v: number) => 2 ** v;
 
 const marks = [
   { value: 0.05, label: "₹ 5L" },

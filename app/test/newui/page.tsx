@@ -1,11 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import Card from "./components/Card";
 import ProjectCard from "./components/Card/index";
 
-type Props = {};
-
-export default function Page({}: Props) {
+export default function Page() {
   const filters = {
     listedBy: "proj",
   };

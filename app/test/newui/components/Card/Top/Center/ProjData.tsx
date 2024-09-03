@@ -1,7 +1,5 @@
 import { formatCurrency } from "@/app/utils/numbers";
 import React from "react";
-import HeartButton from "./HeartButton";
-import Button from "@/app/elements/button";
 import { NewMapIcon } from "@/app/images/commongsSvgs2";
 
 type Props = any;
@@ -11,10 +9,8 @@ export default function ProjData({
   maxPrice,
   projName,
   city,
-  state,
   locality,
   builderName,
-  shortListed,
   type,
   price,
   propName,
@@ -70,21 +66,6 @@ export default function ProjData({
       </p>
     </div>
   );
-}
-function getTypeText(type: string) {
-  let text;
-
-  if (type === "proj") {
-    text = "Builder";
-  } else if (type === "I") {
-    text = "Owner";
-  } else if (type === "A") {
-    text = "Agent";
-  } else {
-    text = "Unknown";
-  }
-
-  return text;
 }
 
 export const projectprops = {

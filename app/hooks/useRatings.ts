@@ -1,4 +1,3 @@
-import { useParams } from "next/navigation";
 import { useQuery } from "react-query";
 import RTK_CONFIG from "../config/rtk";
 

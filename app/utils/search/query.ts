@@ -35,7 +35,7 @@ const convertToQueryParams = (params: Params): string => {
 
   for (const key in params) {
     if (
-      params.hasOwnProperty(key) &&
+      Object.prototype.hasOwnProperty.call(params, key) &&
       params[key] !== null &&
       params[key] !== undefined
     ) {
@@ -78,7 +78,7 @@ const createRequestParams = (params: Params): Params => {
 
   for (const key in params) {
     if (
-      params.hasOwnProperty(key) &&
+      Object.prototype.hasOwnProperty.call(params, key) &&
       params[key] !== null &&
       params[key] !== undefined
     ) {

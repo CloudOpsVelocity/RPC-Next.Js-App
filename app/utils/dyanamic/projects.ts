@@ -48,7 +48,6 @@ export function setPropertyValues(data: any, propCgId: number): any {
           totalBalconySize: data?.totalBalconySize?.toString(),
         }),
       };
-      break;
 
     case projectprops.rowHouse:
       return {
@@ -73,7 +72,6 @@ export function setPropertyValues(data: any, propCgId: number): any {
         ...(data?.parkingArea != "None" &&
           data?.parkingArea && { parkingArea: data?.parkingArea }),
       };
-      break;
     case projectprops.villa:
       return {
         ...(data.facingName !== "Don't Know" && {
@@ -98,7 +96,6 @@ export function setPropertyValues(data: any, propCgId: number): any {
           data?.terraceArea !== "null" && { terraceArea: data?.terraceArea }),
         plotArea: data?.plotArea.toString(),
       };
-      break;
     case projectprops.plot:
       return {
         unitNumber: data?.unitNumber,
@@ -107,7 +104,6 @@ export function setPropertyValues(data: any, propCgId: number): any {
         width: data.width.toString(),
         length: data.length.toString(),
       };
-      break;
 
     default:
       break;
@@ -120,14 +116,11 @@ export const get_posted_by = (str?: string) => {
   switch (str) {
     case "I":
       return "Owner";
-      break;
     case "A":
       return "Agent";
-      break;
 
     default:
       return "Builder";
-      break;
   }
 };
 

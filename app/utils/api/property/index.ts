@@ -1,4 +1,4 @@
-import { LIstingResponse, Main } from "@/app/validations/property";
+import { LIstingResponse } from "@/app/validations/property";
 import { Main as M } from "@/app/validations/types/project";
 import axios from "axios";
 
