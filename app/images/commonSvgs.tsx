@@ -7458,6 +7458,7 @@ export const amenitiesGroupList = new Map([
       height="26"
       viewBox="0 0 26 26"
       fill="none"
+      key="201"
     >
       <path
         d="M17.5484 7.71585L19.3009 5.15234L24.9963 12.9054V25.0195H14.2383V17.0394"
@@ -7522,6 +7523,7 @@ export const amenitiesGroupList = new Map([
       height="26"
       viewBox="0 0 26 26"
       fill="none"
+      key="202"
     >
       <path
         d="M7.05089 11.0585C9.09609 13.3871 8.48796 16.9978 8.48796 16.9978C8.48796 16.9978 4.56357 16.8324 2.51786 14.5038C0.47216 12.1751 1.0808 8.56445 1.0808 8.56445C1.0808 8.56445 5.0057 8.73174 7.05089 11.0585Z"
@@ -7607,6 +7609,7 @@ export const amenitiesGroupList = new Map([
       height="26"
       viewBox="0 0 25 26"
       fill="none"
+      key="203"
     >
       <path
         d="M13.9688 9.99023C15.1054 13.394 15.9717 18.3328 15.3458 25.021"
