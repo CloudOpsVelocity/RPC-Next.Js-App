@@ -455,6 +455,7 @@ const FilterPopup = ({ close }: { close: () => void }) => {
             {SEARCH_FILTER_DATA.used.map(({ id, label }) => {
               return (
                 <Radio
+                  id={`used_${id}`}
                   key={id}
                   iconColor="dark.8"
                   color="green"
@@ -463,6 +464,7 @@ const FilterPopup = ({ close }: { close: () => void }) => {
                   name="photo"
                   style={{ whiteSpace: "nowrap", marginBottom: "10px" }}
                   onClick={() => setSingleType("pnb", id)}
+                  checked={filters.pnb === id}
                 />
               );
             })}

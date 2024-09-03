@@ -95,7 +95,7 @@ export default async function ProjectsDetailsPage({
             </Link>{" "}
             {" > "}
             <Link href={"/project/banglore/whitefield"}>
-              <span>Projects In {`${data.localityName} `}</span>
+              <span className="hover:underline cursor-pointer">Projects In {`${data.localityName} `}</span>
             </Link>{" "}
             {" > "}
             <span>{data.projectName}</span>

@@ -20,7 +20,7 @@ export default function TopProfileBlock({
         <p className="text-[12px] md:text-[20px] text-[#565D70] font-[500] mt-2 sm:mt-0 sm:mb-[1%] ">
         <a className="hover:underline cursor-pointer" href={"/"}>Home</a> 
           {" > "}
-          <span>Builder</span>
+          <span className="hover:underline cursor-pointer">Builder</span>
           {" > "}
           <span>{capitalizeWords(userName)}</span>
         </p>

@@ -65,15 +65,17 @@ export default function ManagementBlock({
       />
 
       <div className="flex  justify-start items-center w-full gap-[8px] mt-[0%]  ">
-        <div
-          onClick={() => window.open(`tel:${officecontact}`)}
-          className="max-w-fit cursor-pointer flex justify-center items-center gap-0.5 p-1 rounded-md bg-gradient-to-tr from-[#EFF5FF] to-[#F2FAFF] mb-1"
-        >
-          {callIconSvg}
-          <p className="text-[#00487C]  text-[14px] sm:text-xl xl:text-[28px] not-italic font-semibold ">
-            Office Contact
-          </p>
-        </div>
+        <a href={`tel:${officecontact}`}>
+          <div
+            // onClick={() => window.open(`tel:${officecontact}`)}
+            className="max-w-fit cursor-pointer flex justify-center items-center gap-0.5 p-1 rounded-md bg-gradient-to-tr from-[#EFF5FF] to-[#F2FAFF] mb-1"
+          >
+            {callIconSvg}
+            <p className="text-[#00487C]  text-[14px] sm:text-xl xl:text-[28px] not-italic font-semibold ">
+              Office Contact
+            </p>
+          </div>
+        </a>
 
         <a
           href={`tel:${officecontact}`}
