@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -35,7 +35,8 @@ const Map = ({
   selected,
   className,
 }: any) => {
-  const position: LatLngTuple = [lat, lang];
+  const position: LatLngTuple = useMemo(() => [lat, lang], [lat, lang]);
+
   return (
     <MapContainer
       center={position}
@@ -85,7 +86,8 @@ const Content: React.FC<any> = ({
   selected,
   setSelectedLocation,
 }) => {
-  const position: LatLngTuple = [lat, lang];
+  const position: LatLngTuple = useMemo(() => [lat, lang], [lat, lang]);
+
   const map = useMap();
   useEffect(() => {
     if (selectedLocation && selectedLocation.name) {

@@ -258,7 +258,7 @@ const ProjectCarousel = ({
           {data &&
             data?.map((project: any, index: number) => {
               return (
-                <CarouselSlide className="!h-[450px] sm:!h-[500px]">
+                <CarouselSlide className="!h-[450px] sm:!h-[500px]" key={index}>
                   <PropertyCard
                     key={index}
                     type={type}

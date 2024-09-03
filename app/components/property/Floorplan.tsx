@@ -10,6 +10,7 @@ import { selectedFloorAtom } from "@/app/store/floor";
 import { PopupOpenSvg } from "@/app/images/commonSvgs";
 import { createPropertyString } from "@/app/utils/dyanamic/property";
 import { ImgNotAvail } from "@/app/data/project";
+import Image from "next/image";
 
 export default function RoomFloorplansBlock({ data }: { data: Main }) {
   const [opened, setOpened] = useState(false);
@@ -79,7 +80,7 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
               className="flex justify-center items-center h-[300px] lg:h-[450px] cursor-pointer self-center m-auto"
               onClick={handleOpen}
             >
-              <img
+              <Image
                 src={data?.projMedia?.floorPlanUrl ?? ImgNotAvail}
                 alt=""
                 className="h-full w-full m-auto "

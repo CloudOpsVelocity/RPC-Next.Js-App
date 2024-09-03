@@ -156,6 +156,7 @@ const FilterPopup = ({ close }: { close: () => void }) => {
             {SEARCH_FILTER_DATA.listingStatus.map((eachStatus, index) => {
               return (
                 <Radio
+                  key={"listingStatus" + index}
                   checked={eachStatus.cid == filters.propStatus}
                   value={eachStatus.cid}
                   iconColor="dark.8"

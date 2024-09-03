@@ -69,7 +69,7 @@ export default function GalleryBlock({
           </h2>
 
           <SubHeading
-            text="Gallery highlights : A glimpse into good project" 
+            text="Gallery highlights : A glimpse into good project"
             className="mb-4 sm:mb-2"
           />
         </>
@@ -118,7 +118,12 @@ export default function GalleryBlock({
                 selectedMedia={selectedMedia}
                 images={images}
                 videos={videos}
-                isImage={selectedMedia.includes(".mp4") || selectedMedia.includes("youtube") ? false : true}
+                isImage={
+                  selectedMedia.includes(".mp4") ||
+                  selectedMedia.includes("youtube")
+                    ? false
+                    : true
+                }
                 currentSlide={currentSlide}
                 setCurrentSlide={setCurrentSlide}
               />
@@ -156,6 +161,7 @@ export default function GalleryBlock({
               <div className="flex justify-start items-start w-full gap-[4%] flex-wrap ">
                 {videos?.map((img, ind) => (
                   <div
+                    key={ind}
                     className={`relative w-[110px] lg:w-[152px] flex justify-center items-center h-[68px] md:h-[94px]  bg-white rounded-[5px]  mb-[4%] cursor-pointer
                       ${
                         selectedMedia === img
@@ -171,7 +177,9 @@ export default function GalleryBlock({
                       )}`}
                     />
                     {img.includes("youtube") ? (
-                      <img
+                      <Image
+                        width={150}
+                        height={90}
                         src={getYouTubeThumbnailUrl(img) ?? ""}
                         className="!w-full rounded-[5px] cursor-pointer h-[64px] md:h-[90px] object-cover "
                         alt="thumbnail"

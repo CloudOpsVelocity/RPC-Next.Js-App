@@ -71,7 +71,7 @@ const LeafMap: React.FC<{
         name: location.name,
       });
     },
-    [selectedLocation, selected]
+    []
   );
 
   const isMobile = useMediaQuery(`(max-width: 750px)`);
@@ -87,14 +87,19 @@ const LeafMap: React.FC<{
       <div className="flex justify-between w-[95%] sm:w-[90%] mx-auto">
         {type === "prop" ? (
           <PropertyHeading
-            title={<Fragment>Near By Locations Of Project <span className="text-[#148B16]">{projName}</span></Fragment>}
+            title={
+              <Fragment>
+                Near By Locations Of Project{" "}
+                <span className="text-[#148B16]">{projName}</span>
+              </Fragment>
+            }
             desc="Explore nearby convenient amenities, entertainment, and essential services"
             className="sm:mb-[18px]"
           />
         ) : (
           <div>
             <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-semibold mb-[12px] capitalize break-words ">
-              <span>Near By Locations Of  Project </span>
+              <span>Near By Locations Of Project </span>
               <span className="text-[#148B16] font-bold">{projName} </span>
             </h2>
             <SubHeading
@@ -216,9 +221,8 @@ const LeafMap: React.FC<{
         ) : (
           <div>
             <h2 className="text-h2 sm:text-[22px] xl:text-[32px]  font-[600] text-[#001F35] mb-[12px] capitalize break-words sm:text-nowrap ">
-            <span>Map Preview Of  {" "}</span>
+              <span>Map Preview Of </span>
               <span className="text-[#148B16]  ">{projName} </span>
-             
             </h2>
             {/*  <SubHeading
                     text="Explore nearby convenient amenities, entertainment, and essential services"

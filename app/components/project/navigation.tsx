@@ -68,7 +68,7 @@ export default function Navigation({
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [topics, isScrolling, lastScrollY]);
+  }, [isScrolling, lastScrollY, isTab, setCurrentBlock, setIsSticky]);
   function handleArrowClick(side: "R" | "L", value?: number): void {
     const scrollAmount = side === "R" ? value ?? 400 : value ?? -400;
     if (scrollContainerRef.current) {

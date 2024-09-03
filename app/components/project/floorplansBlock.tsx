@@ -46,9 +46,10 @@ import dynamic from "next/dynamic";
 import { Divider } from "@mantine/core";
 import RTK_CONFIG from "@/app/config/rtk";
 import SubHeading from "./headings/SubHeading";
-import { formatNumberWithSuffix } from "@/app/utils/numbers"; 
+import { formatNumberWithSuffix } from "@/app/utils/numbers";
 import UnitsImagesBlock from "./unitblock/UnitsImagesBlock";
 import { useMediaQuery } from "@mantine/hooks";
+import Image from "next/image";
 
 type Props = {
   data: PhaseList[];
@@ -90,8 +91,6 @@ export default function FloorplansBlock({
     enabled: !!propCgId,
     ...RTK_CONFIG,
   });
-
-  
 
   const types =
     selectedPhase?.propTypeOverview &&
@@ -210,7 +209,6 @@ export default function FloorplansBlock({
 
   const isMobile = useMediaQuery("(max-width: 601px)");
 
-
   // const rowVirtualizer = useVirtualizer({
   //   count: projectUnitsData?.length,
   //   getScrollElement: () => parentRef.current,
@@ -225,14 +223,13 @@ export default function FloorplansBlock({
       // type !== "overview" &&
       // floorPlanType !== "unit"
     ) {
-      console.log(projectUnitsData);
       setSelectedFloor(projectUnitsData[0]);
     }
-  }, [projectUnitsData, propCgId]);
+  }, [projectUnitsData, setSelectedFloor]);
   useEffect(() => {
     // @ts-ignore
     types?.length > 0 && setPropCgId(BACKEND_PROP_TYPES[`${types[0]}`]);
-  }, [currentPhase]);
+  }, [currentPhase, setPropCgId, types]);
   if (isLoading) return <Loading />;
   return (
     <div
@@ -538,7 +535,9 @@ export default function FloorplansBlock({
                     </p>
                     <div className="flex justify-center items-end max-h-[240px] sm:max-h-[450px] lg:h-[450px] w-full relative ">
                       {selectedFloor?.floorPlanUrl ? (
-                        <img
+                        <Image
+                          width={500}
+                          height={500}
                           onClick={(e) => {
                             e.stopPropagation();
                             handleOpen();
@@ -549,7 +548,9 @@ export default function FloorplansBlock({
                         />
                       ) : (
                         <div className="flex justify-center items-center flex-col min-w-fit ">
-                          <img
+                          <Image
+                            width={500}
+                            height={500}
                             onClick={(e) => {
                               e.stopPropagation();
                               handleOpen();
@@ -621,13 +622,28 @@ export default function FloorplansBlock({
                           formatNumberWithSuffix(selectedFloor?.plotArea) +
                           " sq.ft"}
                     </p>
-                    <div className={`flex justify-center items-end w-full relative 
-                          ${floorPlanType == "unit" ? "max-h-[140px]" : "max-h-[240px]" }
-                          ${floorPlanType == "unit" ? "sm:max-h-[350px]" : "sm:max-h-[450px]" }  
-                          ${floorPlanType == "unit" ? "lg:h-[350px]" : "lg:h-[450px]" }`}
+                    <div
+                      className={`flex justify-center items-end w-full relative 
+                          ${
+                            floorPlanType == "unit"
+                              ? "max-h-[140px]"
+                              : "max-h-[240px]"
+                          }
+                          ${
+                            floorPlanType == "unit"
+                              ? "sm:max-h-[350px]"
+                              : "sm:max-h-[450px]"
+                          }  
+                          ${
+                            floorPlanType == "unit"
+                              ? "lg:h-[350px]"
+                              : "lg:h-[450px]"
+                          }`}
                     >
                       {selectedFloor?.floorPlanUrl ? (
-                        <img
+                        <Image
+                          width={500}
+                          height={500}
                           onClick={(e) => {
                             e.stopPropagation();
                             handleOpen();
@@ -642,16 +658,30 @@ export default function FloorplansBlock({
                         />
                       ) : (
                         <div className="flex justify-center items-center flex-col min-w-fit ">
-                          <img
+                          <Image
+                            width={500}
+                            height={500}
                             onClick={(e) => {
                               e.stopPropagation();
                               handleOpen();
                             }}
                             src={ImgNotAvail}
                             className={`w-[100%] sm:w-[80%] cursor-pointer 
-                              ${floorPlanType == "unit" ? "max-h-[140px]" : "max-h-[240px]" }
-                              ${floorPlanType == "unit" ? "sm:max-h-[350px]" : "sm:max-h-[450px]" }  
-                              ${floorPlanType == "unit" ? "lg:h-[350px]" : "lg:h-[450px]" }`}
+                              ${
+                                floorPlanType == "unit"
+                                  ? "max-h-[140px]"
+                                  : "max-h-[240px]"
+                              }
+                              ${
+                                floorPlanType == "unit"
+                                  ? "sm:max-h-[350px]"
+                                  : "sm:max-h-[450px]"
+                              }  
+                              ${
+                                floorPlanType == "unit"
+                                  ? "lg:h-[350px]"
+                                  : "lg:h-[450px]"
+                              }`}
                             alt="image"
                           />
                         </div>
@@ -670,7 +700,6 @@ export default function FloorplansBlock({
                       Click on image to open floor plan details
                     </p>
 
-
                     {/* {floorPlanType == "unit" && (
                       <CarouselSuggestion
                         form={byUnitForm}
@@ -679,14 +708,12 @@ export default function FloorplansBlock({
                     )} */}
 
                     {floorPlanType == "unit" && !isMobile && (
-                        <UnitsImagesBlock 
-                            // floorsArray={projectUnitsData && projectUnitsData.length > 0 ? projectUnitsData : [] } 
-                            form={byUnitForm}
-                            propCgId={propCgId}
-                        />
+                      <UnitsImagesBlock
+                        // floorsArray={projectUnitsData && projectUnitsData.length > 0 ? projectUnitsData : [] }
+                        form={byUnitForm}
+                        propCgId={propCgId}
+                      />
                     )}
-
-
                   </>
                 )
               ) : (

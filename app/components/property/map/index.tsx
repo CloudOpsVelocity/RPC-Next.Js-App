@@ -83,7 +83,7 @@ const LeafMap: React.FC<{
         name: location.name,
       });
     },
-    [selectedLocation, selected]
+    []
   );
 
   const isMobile = useMediaQuery(`(max-width: 750px)`);

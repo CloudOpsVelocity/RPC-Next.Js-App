@@ -15,6 +15,7 @@ import { useMediaQuery } from "@mantine/hooks";
 import Close from "../../project/button/close";
 import { ImgNotAvail } from "@/app/data/project";
 import { formatNumberWithSuffix } from "@/app/utils/numbers";
+import Image from "next/image";
 
 function PFloorPlanModal({
   data,
@@ -90,7 +91,7 @@ const MiddleSection = () => {
     >
       <div className="relative">
         <TransformComponent>
-          <img
+          <Image
             src={data.floorPlanUrl ?? ImgNotAvail}
             alt="Floor Plan"
             className="max-h-[500px] sm:max-h-[400px] xl:max-h-[500px]   object-contain"

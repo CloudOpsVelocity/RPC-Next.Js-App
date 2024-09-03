@@ -54,7 +54,9 @@ export default function RoomDetails({ data }: { data: Main }) {
       <PropertyHeading
         title="Listing details"
         desc={`Check the details For ${
-          data.propTypeName === "Plot" ? formatNumberWithSuffix(data.plotArea) + " sq.ft" : ""
+          data.propTypeName === "Plot"
+            ? formatNumberWithSuffix(data.plotArea) + " sq.ft"
+            : ""
         } ${data.bhkName ?? ""} ${data.propTypeName} For
         ${data.cg === "S" ? " Sell" : " Rent"}`}
         className="mb-[10px] xl:mb-[8px]"
@@ -310,7 +312,11 @@ const OtherDetails = ({
           <RoomBasicDetails
             icon={<Marble />}
             title="Approved Authority"
-            value={approvedByName.length > 1 ? approvedByName?.join(", ") : approvedByName[0] }
+            value={
+              approvedByName.length > 1
+                ? approvedByName?.join(", ")
+                : approvedByName[0]
+            }
             className={style.card}
           />
         )}
@@ -373,6 +379,7 @@ const UnitBlock = ({ data }: { data: Main }) => {
         <div className="flex justify-start items-start flex-wrap   ">
           {dto.map(({ value, Icon, title }) => (
             <RoomBasicDetails
+              key={title}
               icon={<Icon />}
               title={title}
               value={value}

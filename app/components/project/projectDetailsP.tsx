@@ -14,11 +14,12 @@ import { PhaseList } from "@/app/validations/types/project";
 import { formatDateDDMMYYYY } from "@/app/utils/date";
 import { isSingleLetterOrNumber } from "@/app/utils/letters";
 import { sqftToAcres } from "@/app/utils/landarea";
-import NoProperties from "./notfound";
-import SubHeading from "./headings/SubHeading";
 import { currentPhaseAtom } from "@/app/store/vewfloor";
 import { useHydrateAtoms } from "jotai/utils";
 import { useAtom } from "jotai";
+
+import NoProperties from "./notfound";
+import SubHeading from "./headings/SubHeading";
 type Props = {
   data: PhaseList[];
   slug: string;

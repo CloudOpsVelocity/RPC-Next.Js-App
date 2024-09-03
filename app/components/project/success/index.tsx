@@ -13,7 +13,7 @@ export const RatingMessage = ({ close }: { close: () => void }) => {
     }, 5000);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [close]);
   return (
     <VersaMessage
       bgColor="bg-gradient-to-r from-[#FFD600] via-[#FFE03C] via-[#FFED8E] via-[#FFE03C] to-[#FFD600]"
@@ -72,7 +72,7 @@ export const ReportSuccesssMessage = ({ close }: { close: () => void }) => {
     }, 5000);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [close]);
 
   return (
     <VersaMessage
@@ -106,7 +106,7 @@ export const ReqcallbackMessage = ({ close }: { close: () => void }) => {
     }, 5000);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [close]);
 
   return (
     <VersaMessage

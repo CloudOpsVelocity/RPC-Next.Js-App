@@ -214,8 +214,6 @@ export default function FloorplanDrawer() {
             )}
             <p className="text-[14px] lg:text-[20px] bg-[#EEE] text-[#001F35] font-[500] flex justify-start items-center  ">
               <FlooringIcon className="md:h-[32px] md:w-[32px] h-[24px] w-[24px]" />
-            
-
               <span className="mr-[6px] ml-[6px]">{cg?.unitCount} </span> Units
             </p>
             {cg?.propertyType === "rowHouse" || cg.propertyType === "villa" ? (
@@ -249,7 +247,10 @@ const Table = ({ data, propertyType, cg }: any) => {
           <ul className="list-disc pl-8">
             {data &&
               sortUnits(data)?.map((item: any) => (
-                <li className="text-[#242424] text-[16px] xl:text-[21px] not-italic font-semibold leading-[normal] capitalize">
+                <li
+                  key={item}
+                  className="text-[#242424] text-[16px] xl:text-[21px] not-italic font-semibold leading-[normal] capitalize"
+                >
                   {propertyType === "plot" ? item.split("_").join(" x ") : item}
                 </li>
               ))}
@@ -300,6 +301,7 @@ const PlotTable: React.FC<PlotTableProps> = ({
   cg,
   type,
 }) => {
+  const isMobile = useMediaQuery("max:width:601px");
   const key = type === "standard" ? "standardPlots" : "oddPlots";
   const keyCount = type === "standard" ? "standardPlotCount" : "oddPlotCount";
   const title = type === "standard" ? "Standard Unit" : "Odd Unit";
@@ -315,7 +317,7 @@ const PlotTable: React.FC<PlotTableProps> = ({
   const sortedUnits = Object.entries(unitCountMap).sort(([unitA], [unitB]) =>
     unitA.localeCompare(unitB)
   );
-  const isMobile = useMediaQuery("max:width:601px");
+
   return (
     <div>
       <div className="flex items-center gap-1.5 p-1 xl:p-2 rounded-md bg-[#EEE] text-[#001F35] text-[14px] xl:text-lg not-italic font-semibold capitalize mb-3">

@@ -116,7 +116,7 @@ export default function Navigation({
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [topics, isScrolling, lastScrollY]);
+  }, [isScrolling, lastScrollY, isTab, setCurrentBlock, setIsSticky]);
 
   function scrollToTopic(id: string): void {
     setIsScrolling(true);

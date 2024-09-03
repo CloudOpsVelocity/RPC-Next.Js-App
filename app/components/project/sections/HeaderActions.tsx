@@ -62,7 +62,11 @@ export default function HeaderActions({
   };
   const [currentPhase, setCurrentPhase] = useAtom(currentPhaseAtom);
   const setSelected = useSetAtom(parital_unit_atom);
-  const propTypes = Object?.keys(partialUnitData && partialUnitData[currentPhase] ? partialUnitData[currentPhase] : {}).sort();
+  const propTypes = Object?.keys(
+    partialUnitData && partialUnitData[currentPhase]
+      ? partialUnitData[currentPhase]
+      : {}
+  ).sort();
   console.log(propTypes);
   const [propCgId, setPropCgId] = useAtom(propCgIdAtom);
   useEffect(() => {
@@ -73,7 +77,7 @@ export default function HeaderActions({
           propTypes[0] as keyof typeof parseDataProjectProps
         ]
       );
-  }, [currentPhase]);
+  }, [currentPhase, propTypes, setPropCgId]);
 
   return (
     <div>

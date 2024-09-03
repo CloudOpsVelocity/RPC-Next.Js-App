@@ -24,7 +24,7 @@ type GalleryProps = {
   images: any[];
   videos: any[];
   isImage: boolean;
-  currentSlide: number; 
+  currentSlide: number;
   setCurrentSlide: any;
 };
 
@@ -183,6 +183,7 @@ const Gallery: React.FC<GalleryProps> = ({
                           currentSlide === index &&
                             "!border-[4px] !border-white"
                         )}
+                        alt="image"
                       />
                     </Carousel.Slide>
                   );
@@ -201,29 +202,31 @@ const Gallery: React.FC<GalleryProps> = ({
                         className={`relative flex items-center w-full justify-center border-1 border-solid border-white `}
                       >
                         {!video.includes("youtube") ? (
-                        <video
-                          key={index}
-                          width={150}
-                          height={100}
-                          src={video as string}
-                          //alt={`Image ${index + 1}`}
-                          className={`cursor-pointer border-1 border-solid border-white sm:h-full w-full min-w-[150px] rounded-[5px] !h-auto max-h-[100px] min-h-[100px] object-cover  ${
-                            currentSlide === index
-                              ? "border-[4px] border-white"
-                              : ""
-                          }`}
-                        />)
-                        :
-                        (<img
-                          src={getYouTubeThumbnailUrl(video as string) ?? ""}
-                          className={`cursor-pointer border-1 border-solid border-white sm:h-full w-full min-w-[150px] rounded-[5px] !h-auto max-h-[100px] min-h-[100px] object-cover  ${
-                            currentSlide === index
-                              ? "border-[4px] border-white"
-                              : ""
-                          }`}
-                          alt="thumbnail"
-                        />)
-                        }
+                          <video
+                            key={index}
+                            width={150}
+                            height={100}
+                            src={video as string}
+                            //alt={`Image ${index + 1}`}
+                            className={`cursor-pointer border-1 border-solid border-white sm:h-full w-full min-w-[150px] rounded-[5px] !h-auto max-h-[100px] min-h-[100px] object-cover  ${
+                              currentSlide === index
+                                ? "border-[4px] border-white"
+                                : ""
+                            }`}
+                          />
+                        ) : (
+                          <Image
+                            width={150}
+                            height={100}
+                            src={getYouTubeThumbnailUrl(video as string) ?? ""}
+                            className={`cursor-pointer border-1 border-solid border-white sm:h-full w-full min-w-[150px] rounded-[5px] !h-auto max-h-[100px] min-h-[100px] object-cover  ${
+                              currentSlide === index
+                                ? "border-[4px] border-white"
+                                : ""
+                            }`}
+                            alt="thumbnail"
+                          />
+                        )}
 
                         <span className="absolute h-[18px] w-[18px] md:h-[26px] md:w-[26px] z-[1000] pointer-events-none ">
                           {videoPlayIcon}
@@ -257,6 +260,7 @@ const Content = ({ url }: { url: string }) => {
           // src={previewImage ?? content?.url}
           src={url}
           className="cursor-pointer max-h-[200px]  sm:border-[5px] sm:bg-white sm:border-white w-[100%] xl:!h-[350px]  sm:min-w-[800px] sm:min-h-[300px]  xl:min-w-[1400px] xl:min-h-[600px]"
+          alt="gallery_images"
         />
       </TransformComponent>
       <ZoomInOut className="right-2 bottom-4 xl:right-28 " />

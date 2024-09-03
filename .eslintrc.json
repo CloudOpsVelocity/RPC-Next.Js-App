@@ -1,69 +1,29 @@
 {
-  "extends": "next/core-web-vitals"
-}
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings"
+  ],
+  "plugins": ["react", "react-hooks", "jsx-a11y", "import"],
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
+    "import/no-unresolved": "error",
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "jsx-a11y/anchor-is-valid": [
+      "error",
+      {
+        "components": ["Link"],
+        "specialLink": ["hrefLeft", "hrefRight"],
+        "aspects": ["invalidHref", "preferButton"]
+      }
+    ],
 
-// {
-//   "extends": [
-//     "eslint:recommended",
-//     "plugin:@typescript-eslint/recommended",
-//     "plugin:react/recommended",
-//     "plugin:react-hooks/recommended",
-//     "plugin:jsx-a11y/recommended",
-//     "plugin:import/errors",
-//     "plugin:import/warnings",
-//     "plugin:import/typescript",
-//     "plugin:prettier/recommended"
-//   ],
-//   "plugins": [
-//     "@typescript-eslint",
-//     "react",
-//     "react-hooks",
-//     "jsx-a11y",
-//     "import",
-//     "prettier"
-//   ],
-//   "rules": {
-//     "no-console": "warn",
-//     "no-debugger": "error",
-//     "eqeqeq": ["error", "always"],
-//     "no-var": "error",
-//     "prefer-const": "error",
-//     "no-unused-vars": "warn",
-//     "no-unreachable": "error",
-//     "no-empty-function": "warn",
-//     "consistent-return": "error",
-//     "curly": "error",
-//     "max-depth": ["warn", 4],
-//     "max-lines": ["warn", { "max": 500, "skipBlankLines": true, "skipComments": true }],
-//     "max-lines-per-function": ["warn", { "max": 100, "skipBlankLines": true, "skipComments": true }],
-//     "complexity": ["warn", { "max": 10 }],
-//     "import/order": ["error", { "groups": [["builtin", "external", "internal"]] }],
-//     "import/newline-after-import": "error",
-//     "import/no-unresolved": "error",
-//     "@typescript-eslint/no-explicit-any": "error",
-//     "@typescript-eslint/explicit-function-return-type": ["warn", { "allowExpressions": true }],
-//     "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
-//     "react/prop-types": "off",
-//     "react/jsx-boolean-value": ["error", "never"],
-//     "react/jsx-curly-brace-presence": ["error", { "props": "never", "children": "never" }],
-//     "react/self-closing-comp": "error",
-//     "jsx-a11y/anchor-is-valid": "error",
-//     "jsx-a11y/alt-text": "warn",
-//     "jsx-a11y/no-redundant-roles": "warn",
-//     "prettier/prettier": "error"
-//   },
-//   "env": {
-//     "browser": true,
-//     "node": true,
-//     "es6": true,
-//     "jest": true
-//   },
-//   "settings": {
-//     "react": {
-//       "version": "detect"
-//     },
-//     "import/resolver": {
-//       "typescript": {}
-//     }
-//   }
-// }
+    // React hooks rules
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
+  }
+}

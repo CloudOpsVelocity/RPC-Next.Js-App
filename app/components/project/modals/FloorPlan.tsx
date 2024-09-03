@@ -752,7 +752,8 @@ const RightSection = ({ propCgId, className }: any) => {
                 propCgId == projectprops.villa
                   ? "Elevation"
                   : "At Floor"
-              }`}:
+              }`}
+              :
               <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                 {" "}
                 {data?.floor === 0
@@ -1090,9 +1091,8 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
             >
               {floorsArray?.map((eachObj: any, ind: number) => {
                 return (
-                  <Carousel.Slide h={60}>
+                  <Carousel.Slide h={60} key={ind}>
                     <div
-                      key={ind}
                       className={clsx(
                         " sm:h-[50px] ml-1.5 sm:ml-10 w-[100px] sm:max-w-[250px] flex justify-center items-center shadow-md  scrollbar-hide rounded-[5px] border-[0.5px] border-solid border-[#92B2C8]",
                         selectedFloor?.floorPlanUrl == eachObj?.floorPlanUrl &&

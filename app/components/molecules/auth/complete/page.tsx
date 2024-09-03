@@ -54,7 +54,7 @@ const Countdown = ({ initialCount = 5, redirectPath = "/" }) => {
     return () => {
       clearInterval(interval);
     };
-  }, [timerRunning]);
+  }, [timerRunning, queryParam, router]);
 
   return (
     <p className="text-[color:var(--Grey-2,#767270)] text-nowrap text-[16px] xl:text-[26px] not-italic font-medium leading-[normal] mt-4">

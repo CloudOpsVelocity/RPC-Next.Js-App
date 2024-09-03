@@ -193,6 +193,7 @@ const ImagePreivewModal = ({ logo, opened, open, close }: any) => {
       src={imageUrl}
       onLoad={() => URL.revokeObjectURL(imageUrl)}
       className="h2 !min-w-16"
+      alt="logo"
     />
   );
 

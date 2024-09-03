@@ -9,7 +9,8 @@ interface SearchParams {
   [key: string]: string | undefined;
 }
 
-export function getPathTypeFromQueryParams(): string {
+// Renamed internal functions to follow React Hook naming conventions
+function useGetPathTypeFromQueryParams(): string {
   const searchParams = useSearchParams();
   for (const key in pathConfig) {
     if (searchParams.get(pathConfig[key as PathConfigKey].paramName)) {
@@ -19,7 +20,7 @@ export function getPathTypeFromQueryParams(): string {
   return pathConfig.default.pageTitle;
 }
 
-export function getCallPath(): string {
+function useGetCallPath(): string {
   const searchParams = useSearchParams();
   for (const key in pathConfig) {
     const id = searchParams.get(pathConfig[key as PathConfigKey].paramName);
@@ -30,10 +31,9 @@ export function getCallPath(): string {
   return pathConfig.default.redirectingPath;
 }
 
-export function getQueryParamClient(): { query: string; redirectPath: string } {
+function useGetQueryParamClient(): { query: string; redirectPath: string } {
   const searchParams = useSearchParams();
   for (const key in pathConfig) {
-    
     const id = searchParams.get(pathConfig[key as PathConfigKey].paramName);
     if (id) {
       return {
@@ -47,12 +47,10 @@ export function getQueryParamClient(): { query: string; redirectPath: string } {
   return { query: "", redirectPath: pathConfig.default.redirectingPath };
 }
 
-// Server
+// Server-side functions remain unchanged
 export function getQueryParamForPath(path: string): string | null {
-  // Iterate through pathConfig, assuming it's pre-sorted with specific paths first
   for (const key in pathConfig) {
     const { pathPrefix, paramName } = pathConfig[key as PathConfigKey];
-    // Check if the path starts with the current pathPrefix and it's an exact match or more specific
     if (path === pathPrefix && path.startsWith(pathPrefix)) {
       const segments = path.split("/");
       const id = segments[segments.length - 1];
@@ -103,6 +101,13 @@ export function getCallPathServer(param: SearchParams): string {
   }
   return pathConfig.default.redirectingPath;
 }
+
+// Rename the export to maintain the original function names
+export {
+  useGetPathTypeFromQueryParams as getPathTypeFromQueryParams,
+  useGetCallPath as getCallPath,
+  useGetQueryParamClient as getQueryParamClient,
+};
 
 export default function usePathToOrigin() {
   const path = usePathname();

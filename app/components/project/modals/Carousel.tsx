@@ -201,6 +201,7 @@ const ImageContainer = ({ url }: any) => {
           radius="md"
           h={isMobile ? 300 : isTab ? 400 : 600}
           fit="contain"
+          alt="projectCard"
         />
       </TransformComponent>
       <ZoomInOut className="!right-[20px] !bottom-12 xl:!right-[0px] xl:!bottom-[0px] " />

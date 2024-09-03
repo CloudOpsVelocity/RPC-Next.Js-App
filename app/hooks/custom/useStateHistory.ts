@@ -60,7 +60,10 @@ export function useStateHistory<T>(): [
   );
   const clear = useCallback(() => setState({ history: [], current: 0 }), []); // Added clear function
 
-  const handlers = useMemo(() => ({ set, forward, back, clear }), []);
+  const handlers = useMemo(
+    () => ({ set, forward, back, clear }),
+    [set, forward, back, clear]
+  );
 
   return [state.history[state.current], handlers, state];
 }

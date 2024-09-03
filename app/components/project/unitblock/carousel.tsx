@@ -55,7 +55,11 @@ export default function CarouselSuggestion({
         >
           {floorsArray?.map((eachObj: any, ind: number) => {
             return (
-              <Carousel.Slide w={70} mr={floorsArray.length > 4 ? 6 : 24}>
+              <Carousel.Slide
+                w={70}
+                mr={floorsArray.length > 4 ? 6 : 24}
+                key={ind}
+              >
                 <div
                   key={ind}
                   className={clsx(

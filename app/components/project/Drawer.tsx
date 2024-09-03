@@ -10,7 +10,8 @@ import React, { useState } from "react";
 import Close from "./button/close";
 import { useDrag } from "@use-gesture/react";
 function ProjectDrawer({ projName }: { projName: string }) {
-  const [ { expanded, content, type, title, showProjName, builderName },
+  const [
+    { expanded, content, type, title, showProjName, builderName },
     setReadMore,
   ] = useAtom(readMoreAtom);
   const handleReadMoreClick = () => {
@@ -28,7 +29,7 @@ function ProjectDrawer({ projName }: { projName: string }) {
         handleReadMoreClick();
         cancel();
       }
-      return memo; 
+      return memo;
     },
     { axis: "x", pointer: { touch: true } }
   );
@@ -71,12 +72,12 @@ function ProjectDrawer({ projName }: { projName: string }) {
                 if (amenitiesGroupList.get(eachItem.id) != null) {
                   const amenitiesFromDB = content.amenitiesFromDB;
                   return (
-                    <React.Fragment>
+                    <React.Fragment key={index}>
                       {amenitiesFromDB != undefined &&
                         amenitiesFromDB != null &&
                         Object.keys(amenitiesFromDB).map((group, ind) => {
                           return (
-                            <React.Fragment>
+                            <React.Fragment key={ind}>
                               {amenitiesFromDB != undefined &&
                                 amenitiesFromDB != null &&
                                 amenitiesFromDB[`${group}`] != undefined &&
