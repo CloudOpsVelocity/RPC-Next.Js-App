@@ -4,7 +4,6 @@ import Reqcallback from "@/app/components/builder/Reqcallback";
 import ProjectDrawer from "@/app/components/project/Drawer";
 import dynamic from "next/dynamic";
 import SectionSkeleton from "@/app/components/atoms/skeleton/section";
-import Header from "@/app/components/layouts/primary/header";
 import TopProfileBlock from "@/app/components/builder/topProfileBlock";
 import ProjectDetails from "@/app/components/builder/projectDetails";
 import ManagementBlock from "@/app/components/builder/management";

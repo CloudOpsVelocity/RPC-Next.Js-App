@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { Toaster } from "react-hot-toast";
 import Logo from "../components/atoms/Logo";
 import data from "../data/auth";

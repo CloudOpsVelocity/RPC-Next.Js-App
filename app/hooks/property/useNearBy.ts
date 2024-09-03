@@ -1,5 +1,4 @@
 import axios from "axios";
-import React from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useParams } from "next/navigation";
 import { BACKEND_BASE_URL } from "@/app/env";

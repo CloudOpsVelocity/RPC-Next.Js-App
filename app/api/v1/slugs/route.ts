@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
-
 export async function GET() {
   return new Response("", {
     status: 405,
@@ -33,7 +32,7 @@ export async function POST(request: Request) {
   const data = JSON.parse(fileContent);
 
   // Perform CRUD operations
-  if (data.hasOwnProperty(slug)) {
+  if (Object.prototype.hasOwnProperty.call(data, slug)) {
     return NextResponse.json(
       { error: `${type} already exists` },
       { status: 400 }
@@ -71,7 +70,7 @@ export async function PUT(request: Request) {
   const fileContent = fs.readFileSync(filePath, "utf-8");
   const data = JSON.parse(fileContent);
 
-  if (!data.hasOwnProperty(slug)) {
+  if (!Object.prototype.hasOwnProperty.call(data, slug)) {
     return NextResponse.json(
       { error: `${type} does not exist` },
       { status: 404 }
@@ -106,7 +105,7 @@ export async function DELETE(request: Request) {
   const fileContent = fs.readFileSync(filePath, "utf-8");
   const data = JSON.parse(fileContent);
 
-  if (!data.hasOwnProperty(slug)) {
+  if (!Object.prototype.hasOwnProperty.call(data, slug)) {
     return NextResponse.json(
       { error: `${type} does not exist` },
       { status: 404 }

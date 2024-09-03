@@ -63,6 +63,7 @@ export interface Main {
   agreementType: string;
   isBasement: "Y" | "N";
   noOfOpenSide: number;
+  bhkId: number;
 }
 export interface LIstingResponse {
   listing: Main;

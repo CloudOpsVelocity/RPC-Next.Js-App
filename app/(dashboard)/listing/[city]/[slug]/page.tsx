@@ -10,6 +10,7 @@ import Link from "next/link";
 import {
   getProjectDetails,
   getReportConstData,
+  getListingDetails,
 } from "@/app/utils/api/property";
 import ProjectDrawer from "@/app/components/project/Drawer";
 import RoomDetails from "@/app/components/property/RoomDetails";
@@ -19,7 +20,6 @@ import PropertyBanner from "@/app/components/property/propertyBanner";
 import PropertyFirstBlock from "@/app/components/property/fistblock";
 import LeafMap from "@/app/components/project/map";
 import PropertyMap from "@/app/components/property/map";
-import { getListingDetails } from "@/app/utils/api/property";
 import NearByCarouselProperty from "@/app/components/property/carousel";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
 import MobileHidden from "@/app/components/molecules/MobileHidden";

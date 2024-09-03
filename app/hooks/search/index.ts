@@ -71,7 +71,7 @@ export default function useSearchFilters(
     value: string | number,
     callback?: () => void
   ) => {
-    setFilters(prev => ({ ...prev, [key]: value }));
+    setFilters((prev) => ({ ...prev, [key]: value }));
     callback && callback();
   };
   type SearchFilter = {
@@ -258,8 +258,8 @@ export default function useSearchFilters(
         }));
         setParams({ propTypes: null });
         break;
-      case "searchProj":
-        const updatedFilters = { ...filters };
+      case "searchProj": {
+        let updatedFilters = { ...filters };
         for (const key in updatedFilters) {
           if (keys && keys.includes(key)) {
             // @ts-ignore
@@ -269,6 +269,8 @@ export default function useSearchFilters(
         setFilters(updatedFilters);
         handleAppliedFilters();
         break;
+      }
+
       case "prjectsearchlisting":
         setFilters({ ...initialState, listedBy: filters.listedBy });
         handleAppliedFilters();

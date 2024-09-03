@@ -1,50 +1,10 @@
 import React from "react";
-import Feature from "@/app/components/project/feature";
-import Reviews from "@/app/components/project/reviews";
-import Amenties from "@/app/components/project/amenties";
-import Loans from "@/app/components/project/loans";
-import FirstBlock from "@/app/components/project/firstBlock";
-import Overview from "@/app/components/project/overview";
-import About from "@/app/components/project/about";
-import Navigation from "@/app/components/project/navigation";
-import Link from "next/link";
-import { getAmenties, getProjectDetails } from "@/app/utils/api/project";
-import ProjectDetailsP from "@/app/components/project/projectDetailsP";
-import ProjectDrawer from "@/app/components/project/Drawer";
-import LeafMap from "@/app/components/project/map";
-import ListingRentAvail from "@/app/components/project/listingRentAvail";
-import ErrorContainer from "@/app/components/project/error/container";
-import MobileHidden from "@/app/components/molecules/MobileHidden";
 import { notFound } from "next/navigation";
-import FloorplanDrawer from "@/app/components/project/drawers/floorplan";
-import MasterPlan from "@/app/components/project/masterplan";
-import FloorplansBlock from "@/app/components/project/floorplansBlock";
-import GalleryBlock from "@/app/components/project/galleryBlock";
-import Specifications from "@/app/components/project/specification";
-import Banner from "@/app/components/project/banner";
-import AboutBuilder from "@/app/components/project/aboutBuilder";
-import FaqWithBg from "@/app/components/project/faq";
-import NearByCarousel from "@/app/components/project/NearByCarousel";
-import LoginPopup from "@/app/components/project/modals/LoginPop";
-import axios from "axios";
-import PartialUnitData from "@/app/components/project/sections";
-import { Metadata } from "next";
-import type { ResolvingMetadata } from "next";
-import FAQJsonLdScript from "@/app/seo/Faqjson";
-import QAJsonLdScript from "@/app/seo/Qnajson";
-import PropertyJsonLdScript from "@/app/seo/Productjson";
-import ArticleJsonLdScript from "@/app/seo/ArticleJson";
+
 import fs from "fs";
 import path from "path";
-import { cookies, headers } from "next/headers";
-import { builderSlugs } from "@/static/builderSlugs";
-import { builderSlugsMap } from "@/static/builderSlugsMap";
-import BuilderPage from "./Page/BuilderPage";
-import { getBuilderDetailsPageData } from "@/app/utils/api/builder";
-import { getPagesSlugs } from "@/app/seo/api";
-type Props = {
-  params: { slug: string };
-};
+import { headers } from "next/headers";
+// import { getBuilderDetailsPageData } from "@/app/utils/api/builder";
 async function getBuilderSlug(pathname: string) {
   const staticDir = path.join(process.cwd(), "static");
   const filePath = path.join(staticDir, "builderSlugs.json");
@@ -59,7 +19,7 @@ async function getBuilderSlug(pathname: string) {
     return null;
   }
 }
-export default async function Page({ params }: Props) {
+export default async function Page() {
   const nextHeader = headers();
   const pathname = `${nextHeader.get("x-current-path")}`;
   const id = await getBuilderSlug(pathname);
@@ -67,7 +27,7 @@ export default async function Page({ params }: Props) {
   if (!id) {
     notFound();
   }
-  const data = await getBuilderDetailsPageData(id);
+  // const data = await getBuilderDetailsPageData(id);
   // return <BuilderPage data={data} />;
   return <div></div>;
 }

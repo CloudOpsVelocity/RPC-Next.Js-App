@@ -15,9 +15,7 @@ import MenuBtn from "./home-search/header/Menu";
 import { useMediaQuery } from "@mantine/hooks";
 import { GrpLogoSvg } from "@/app/images/commonSvgs";
 
-type Props = {};
-
-export default function Header({}: Props) {
+export default function Header() {
   const isMobile = useMediaQuery("(max-width: 601px)");
   return (
     <div className="flex h-[70px] items-center justify-between shrink-0 pl-5 w-full py-3  shadow-[0px_4px_20px_0px_rgba(194,194,194,0.20)] bg-gradient-to-r from-[#f1f1f1] via-[#f1f1f1]  to-[#bde3ff] fixed top-0 z-[50]">
@@ -118,9 +116,12 @@ function Dropdown() {
         {session ? (
           <div className=" text-[12px] flex justify-center items-center gap-1.5 rounded border shadow-[0px_4px_30px_0px_rgba(194,194,194,0.40)] text-[#0073C6] text-lg not-italic font-semibold leading-[normal] px-2.5 py-1.5 border-solid border-[#0073C6] bg-white">
             <button className="inline-flex justify-center items-center gap-1">
-              {config.getIcon(session.user.userType)} {session.user.name.split(" ")[0].length >= 3 ? 
-                                                        session.user.name.split(" ")[0] : session.user.name.split(" ")[1] != undefined ? 
-                                                        session.user.name.split(" ")[1] : session.user.name.split(" ")[0]}
+              {config.getIcon(session.user.userType)}{" "}
+              {session.user.name.split(" ")[0].length >= 3
+                ? session.user.name.split(" ")[0]
+                : session.user.name.split(" ")[1] != undefined
+                ? session.user.name.split(" ")[1]
+                : session.user.name.split(" ")[0]}
             </button>
             {config.blueChevron}
           </div>

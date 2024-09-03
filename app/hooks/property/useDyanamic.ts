@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useSession } from "next-auth/react";
-import { Old_Standard_TT } from "next/font/google";
 import { useParams } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 

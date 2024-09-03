@@ -23,7 +23,7 @@ interface HookReturnValue {
 }
 
 export const useShortlistAndCompare = (): HookReturnValue => {
-  const [globalData, setGlobalData] = useLocalStorage<GlobalData>({
+  const [globalData] = useLocalStorage<GlobalData>({
     key: "shortlistAndCompare",
     defaultValue: {
       shortlistedItems: [],
