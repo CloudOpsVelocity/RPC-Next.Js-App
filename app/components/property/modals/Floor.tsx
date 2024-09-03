@@ -176,7 +176,7 @@ const RightSection = ({ propCgId }: any) => {
                 propCgId == projectprops.villa
                   ? "At Elevation"
                   : propCgId === projectprops.independent
-                  ? "Total No."
+                  ? "Total No.Of Floors"
                   : "At Floor"
               }:`}
               <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
@@ -243,6 +243,8 @@ const RightSection = ({ propCgId }: any) => {
           </div>
         )}
 
+        {console.log(data)}
+
         {(propCgId == projectprops.villa ||
           propCgId == projectprops.rowHouse ||
           propCgId == projectprops.villament) &&
@@ -258,12 +260,26 @@ const RightSection = ({ propCgId }: any) => {
               </p>
             </div>
           )}
+
+        {propCgId != projectprops.plot && data.ta && (
+          <div className="flex items-center space-x-3">
+            {propertyDetailsSvgs.caretarea}
+            <p className="text-[#4D6677] text-[14px] font-[500]">
+              Terrace Area:
+              <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
+                {" "}
+                {data.ta} sq.ft
+              </span>
+            </p>
+          </div>
+        )}
+
         {(propCgId == projectprops.villa ||
           propCgId == projectprops.rowHouse ||
           propCgId == projectprops.villament ||
           propCgId == projectprops.independent) &&
           data?.terraceArea &&
-          data.terraceArea !== "null" && (
+          data.terraceArea != "null" && (
             <div className="flex items-center space-x-3">
               {propertyDetailsSvgs.caretarea}
               <p className="text-[#4D6677] text-[14px] font-[500]">

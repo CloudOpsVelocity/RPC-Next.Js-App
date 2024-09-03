@@ -109,7 +109,7 @@ const MainBox = ({ data, refetch, index, mutate }: Props) => {
   const isMobile = useMediaQuery("(max-width: 1600px)");
 
   return (
-    <div className="h-auto max-w-full xl:w-full m-2 self-stretch rounded border shadow-[0px_4px_30px_0px_rgba(74,82,113,0.20)] border-solid border-[#A4B8D4]">
+    <div className="h-auto max-w-full xl:w-full m-2 ml-0 mr-0 self-stretch rounded border shadow-[0px_4px_30px_0px_rgba(74,82,113,0.20)] border-solid border-[#A4B8D4]">
       <div
         onClick={() => onClickRedirect(reqId)}
         className="flex flex-col xl:flex-row justify-between w-full  xl:max-w-full"

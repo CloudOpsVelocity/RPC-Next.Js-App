@@ -27,6 +27,7 @@ export const ListingSearchDetails = [
   "Furnishing",
   "Amenities",
   "No.of.Parking",
+  "Used or Not Used"
 ];
 export const convertIntoId = (title: string) => {
   return title.replace(/\s+/g, "-").toLowerCase();

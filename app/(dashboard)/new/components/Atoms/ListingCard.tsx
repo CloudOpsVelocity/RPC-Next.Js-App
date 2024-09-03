@@ -23,7 +23,7 @@ export default function ListingCard({ item, sl }: Props) {
   };
   // console.log(item.postedById)
   const title = `${
-    item.propTypeName === "Plot" ? `${item.pa} sq.ft` : item.bhkName
+    item.propTypeName === "Plot" ? `${formatNumberWithSuffix(item.pa)} sq.ft` : item.bhkName 
   } ${item.propTypeName} for ${item.category} in ${item.localityName}`;
   return (
     <div

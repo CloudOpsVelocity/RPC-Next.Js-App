@@ -46,8 +46,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           href={"/"}
           className=" sm:hidden top-0 left-0 p-2 bg-[#ffffff7a]  absolute"
         >
-          <div className="flex  justify-center items-center gap-1 rounded   text-[#0C7ACA] text-[14px] not-italic font-bold flex-nowrap">
-            {config.homeIcon} <p className="h-[17px]">Home</p>
+          <div className="flex  justify-center items-center gap-1 rounded underline  text-[#0C7ACA] text-[14px] not-italic font-bold flex-nowrap">
+            {config.homeIcon} <p className="h-[17px] hover:underline cursor-pointer ">Home</p>
           </div>
           <hr className="bg-[#0C7ACA] h-[2px]" />
         </Link>
