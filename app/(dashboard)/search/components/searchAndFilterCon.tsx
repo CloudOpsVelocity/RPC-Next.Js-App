@@ -23,14 +23,11 @@ const SearchAndFilterCon = ({ frontendFilters }: any) => {
   useHydrateAtoms([
     [searachFilterAtom, { ...initialState, ...frontendFilters }],
   ]);
-  const [, { open, close }] = useDisclosure(false);
   const [showAllLocalities, setShowAllLocalities] = useState(false);
   return (
     <>
       <SearchHeader
         setShowAllLocalities={setShowAllLocalities}
-        open={open}
-        close={close}
         showAllLocalities={showAllLocalities}
       />
     </>
@@ -38,29 +35,50 @@ const SearchAndFilterCon = ({ frontendFilters }: any) => {
 };
 export default SearchAndFilterCon;
 
-const SearchHeader = ({ open, setShowAllLocalities }: any) => {
+const SearchHeader = ({ setShowAllLocalities }: any) => {
   const {
     countAppliedFilters,
     filters,
     remnoveSearchOptions,
     setFilters,
-    handleAppliedFilters,
+    handleAppliedFilters, 
     params,
   } = useSearchFilters();
   const isMobile = useMediaQuery("(max-width: 601px)");
   const isTab = useMediaQuery("(max-width: 1600px)");
-  const [closePopup, setClosePopup] = useState(false);
-  const [opened, { open: openMobileSearchDrawer, close }] =
-    useDisclosure(false);
+
+  type FilterObjState = {
+    all: boolean;
+    type: boolean;
+    bhk: boolean;
+    budget: boolean;
+  };
+  
+  const initialFilterObjState: FilterObjState = {
+    all: false,
+    type: false,
+    bhk: false,
+    budget: false
+  };
+
+  const [allFilterPopup, setAllFilterPopup] = useState(initialFilterObjState);
+
+  const [opened, { open: openMobileSearchDrawer, close }] = useDisclosure(false);
   const showpopUp = () => {
     setShowAllLocalities(true);
     open();
   };
+  
   const maxDisplay = 3;
 
-  const handleToggle = () => {
-    setClosePopup((prev) => !prev);
+  const handleOpenFilterToggle = (key?:any, state?:boolean) => {
+    setAllFilterPopup(prev=> ({ ...prev, [key] : state }));
   };
+
+  const handleCloseFiltersToggle = () => {
+    setAllFilterPopup(initialFilterObjState);
+  };
+
 
   const values = filters.unitTypes.map((itemId, i) => {
     const selectedItem = SEARCH_FILTER_DATA.bhkDetails.find(
@@ -155,9 +173,9 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
               </Pill>
             )}
             {allFiltersMap?.length > 0 ? (
-              <p onClick={isMobile ? openMobileSearchDrawer : open}>Add more</p>
+              <p onClick={()=>isMobile ? openMobileSearchDrawer : ("")}>Add more</p>
             ) : (
-              <p onClick={isMobile ? openMobileSearchDrawer : open}>
+              <p onClick={()=>isMobile ? openMobileSearchDrawer : ("")}>
                 Search By Locality, Projects or Listings
               </p>
             )}
@@ -175,15 +193,15 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
               shadow="lg"
               radius={10}
               offset={{ mainAxis: 10, crossAxis: -200 }}
-              opened={closePopup}
-              onClose={() => setClosePopup(false)}
+              opened={allFilterPopup.all}
+              onClose={()=>handleOpenFilterToggle("all", false)}
             >
               <Popover.Target>
                 <div
                   className={`border-[#A0D7FF] max-w-full flex flex-wrap rounded-[20px] sm:rounded-[40px] p-2 gap-2 xl:gap-[8px] pl-2 xl:pl-[8px] border-[1px] border-solid items-center justify-center px-6 ${
                     filters.cg == null ? "sm:min-w-[300px]" : ""
                   }`}
-                  onClick={handleToggle}
+                  onClick={()=>handleOpenFilterToggle("all", true)}
                 >
                   <BuyRent />
 
@@ -236,7 +254,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
                 {params.listedBy ? (
                   <ListingPopup close={close} />
                 ) : (
-                  <FilterPopup close={handleToggle} />
+                  <FilterPopup close={handleCloseFiltersToggle} />
                 )}
               </Popover.Dropdown>
             </Popover>
@@ -249,9 +267,14 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
               shadow="lg"
               radius={10}
               offset={{ mainAxis: 10, crossAxis: 0 }}
+              opened={allFilterPopup.type}
+              onClose={()=>handleOpenFilterToggle("type", false)}
             >
               <Popover.Target>
-                <button className=" text-[#0073C6] hidden text-[14px] xl:text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] lg:flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md ">
+                <button 
+                  className=" text-[#0073C6] hidden text-[14px] xl:text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] lg:flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md "
+                  onClick={()=>handleOpenFilterToggle("type", true)}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="10"
@@ -267,9 +290,10 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
                 </button>
               </Popover.Target>
               <Popover.Dropdown className="!z-50" p={0}>
-                <PropTypeFilter />
+                <PropTypeFilter close={handleCloseFiltersToggle} />
               </Popover.Dropdown>
             </Popover>
+
             {filters.propTypes !== 32 && (
               <Popover
                 width={"auto"}
@@ -279,9 +303,14 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
                 shadow="lg"
                 radius={10}
                 offset={{ mainAxis: 10, crossAxis: 0 }}
+                opened={allFilterPopup.bhk}
+                onClose={()=>handleOpenFilterToggle("bhk", false)}
               >
                 <Popover.Target>
-                  <button className=" text-[#0073C6] sm:text-[14px] xl:text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] hidden justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md md:flex ">
+                  <button 
+                    className=" text-[#0073C6] sm:text-[14px] xl:text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] hidden justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md md:flex "
+                    onClick={()=>handleOpenFilterToggle("bhk", true)}
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="10"
@@ -295,7 +324,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
                   </button>
                 </Popover.Target>
                 <Popover.Dropdown className="!z-50" p={0}>
-                  <BhkFilter />
+                  <BhkFilter close={handleCloseFiltersToggle} />
                 </Popover.Dropdown>
               </Popover>
             )}
@@ -308,9 +337,14 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
               shadow="lg"
               radius={10}
               offset={{ mainAxis: 10, crossAxis: 0 }}
+              opened={allFilterPopup.budget}
+              onClose={()=>handleOpenFilterToggle("budget", false)}
             >
               <Popover.Target>
-                <button className=" text-[#0073C6] text-[14px] xl:text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] hidden lg:flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md ">
+                <button 
+                  className=" text-[#0073C6] text-[14px] xl:text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] hidden lg:flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md "
+                  onClick={()=>handleOpenFilterToggle("budget", true)}
+                >
                   {" "}
                   <span className="bg-[#148B16] rounded-full text-white text-sm block w-5 h-5">
                     ₹
@@ -329,7 +363,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
                 </button>
               </Popover.Target>
               <Popover.Dropdown className="!z-50" p={0}>
-                <BugdetFilter />
+                <BugdetFilter close={handleCloseFiltersToggle} />
               </Popover.Dropdown>
             </Popover>
           </>

@@ -13,7 +13,7 @@ export default function ClearAll({
   const { handleReset, handleAppliedFilters } = useSearchFilters();
   const handleApply = () => {
     handleAppliedFilters();
-    if (close) close();
+    if (close) close(); // --- listing type
   };
   return (
     <div className="flex w-full justify-end items-center pl-auto pr-[13px] py-[5px] bg-[#F4F4F4] ">
