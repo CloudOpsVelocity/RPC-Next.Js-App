@@ -12,10 +12,9 @@ import {
 import S from "@/app/styles/Share.module.css";
 import "leaflet/dist/leaflet.css"; // Import Leaflet CSS
 import { LatLngTuple } from "leaflet";
-import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css"; // Re-uses images from ~leaflet package
 import "leaflet-defaulticon-compatibility";
-import L from "leaflet";
+import * as L from "leaflet";
 import { useMediaQuery } from "@mantine/hooks";
 import { em } from "@mantine/core";
 import { useAtom, useAtomValue } from "jotai";
@@ -43,7 +42,7 @@ const Map = () => {
       <MapContainer
         center={position}
         className="md:h-[740px] h-[400px] w-full "
-        scrollWheelZoom={true}
+        scrollWheelZoom
         zoom={100}
       >
         <TileLayer
@@ -69,7 +68,7 @@ const Map = () => {
               </p>
 
               <p>
-                <span></span>
+                <span/>
               </p>
             </div>
           </Tooltip>

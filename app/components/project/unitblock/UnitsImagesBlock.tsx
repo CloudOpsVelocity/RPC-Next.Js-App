@@ -48,11 +48,9 @@ const UnitsImagesBlock = ({
   };
 
   const maxValue = !isTab ? 3 : 6;
-
+  if(filteredUrlsArray?.length > 0){
   return (
-    <>
-      {filteredUrlsArray?.length > 0 && (
-        <div className="flex justify-between items-center w-full mt-[10px] mb-[10px] gap-[16px] ">
+      <div className="flex justify-between items-center w-full mt-[10px] mb-[10px] gap-[16px] ">
           {filteredUrlsArray?.length > maxValue && (
             <ImagesScrollIcon
               className=" rotate-180 h-[30px] select-none w-[30px] rounded-[50%] bg-[gray] cursor-pointer "
@@ -70,7 +68,7 @@ const UnitsImagesBlock = ({
                 return (
                   <Image
                     className="cursor-pointer border max-h-[64px] border-indigo-600 border-1 border-solid rounded-[4px] "
-                    key={index}
+                    key={`unitsImgUrl_${imgUrl[index]}`}
                     src={imgUrl}
                     width={100}
                     height={100}
@@ -88,10 +86,8 @@ const UnitsImagesBlock = ({
               onClick={() => onScrollingLeftAndRight("R")}
             />
           )}
-        </div>
-      )}
-    </>
-  );
+      </div>
+  )}
 };
 
 export default UnitsImagesBlock;

@@ -94,7 +94,7 @@ export default function ManagementBlock({
             {keys?.map((item, index) => (
               <a
                 className="text-[#00487C] text-[13px] sm:text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px] underline "
-                key={index}
+                key={`managment_${projectAvailableCities[item]}`}
                 href={`/search?city=${projectAvailableCities[item]}%2B${item}`}
                 target="_blank"
               >

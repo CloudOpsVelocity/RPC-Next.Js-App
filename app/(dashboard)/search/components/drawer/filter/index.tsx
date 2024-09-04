@@ -96,16 +96,16 @@ const MobileFilter = ({ close }: any) => {
         )
       : searchDetails;
   return (
-    <div className=" flex justify-start items-start w-[70vw]  w-full sm:left-[70%]">
-      <div className="w-[100%] flex hidden sm:flex shadow-md justify-start items-center flex-col ">
+    <div className=" flex justify-start items-start w-full sm:left-[70%]">
+      <div className="w-[100%] hidden sm:flex shadow-md justify-start items-center flex-col ">
         <p className=" text-[#000] text-nowrap text-[14px] bg-[#F4F4F4] flex justify-start px-6  items-center font-[500] py-[3.5%] w-full ">
           Quick Filters
         </p>
         <div className="w-full ">
-          {filteredSearchDetails.map((eachItem, index) => {
+          {filteredSearchDetails.map((eachItem) => {
             return (
               <Button
-                key={index}
+                key={eachItem}
                 title={eachItem}
                 onChange={() => scrollWhereIsSelected(eachItem)}
                 buttonClass={` whitespace-nowrap w-full text-[12px] flex flex-row-reverse  justify-end pl-[10%] items-center border-solid border-b-[0.5px] items-start  px-4 py-4 h-[31px] gap-[8px] ${
@@ -196,10 +196,10 @@ const MobileFilter = ({ close }: any) => {
             Property Status
           </h3>
           <div className="flex  mb-[3%] justify-start items-start gap-[4%] flex-wrap ">
-            {SEARCH_FILTER_DATA.projectstatus.map((eachStatus, index) => {
+            {SEARCH_FILTER_DATA.projectstatus.map((eachStatus) => {
               return (
                 <Radio
-                  key={index}
+                  key={eachStatus.cid}
                   checked={eachStatus.cid == filters.current}
                   value={eachStatus.cid}
                   iconColor="dark.8"
@@ -225,7 +225,7 @@ const MobileFilter = ({ close }: any) => {
               {filters.locality.map((eachLocality, index) => {
                 return (
                   <div
-                    key={index}
+                    key={eachLocality}
                     className="capitalize flex justify-center items-center text-[12px] sm:text-[16px] sm:p-[1%]  shadow-[0px_4px_10px_0px_rgba(202,233,255,0.30)]   border rounded-[5px] border-solid border-[#92B2C8]"
                   >
                     {eachLocality.split("+")[0]}
@@ -273,7 +273,7 @@ const MobileFilter = ({ close }: any) => {
               }
               return (
                 <Radio
-                  key={i}
+                  key={keyName}
                   iconColor="dark.8"
                   color="green"
                   label={propertyDetailsTypes?.get(keyName)?.name}
@@ -307,7 +307,7 @@ const MobileFilter = ({ close }: any) => {
                     <Checkbox
                       label={eachStatus.title}
                       color="green"
-                      key={index}
+                      key={filters.unitTypes[index]}
                       onClick={() =>
                         handleCheckboxClick("unitTypes", eachStatus.value)
                       }
@@ -387,7 +387,7 @@ const MobileFilter = ({ close }: any) => {
                 {[...Array(6)].map((x, i) => {
                   return (
                     <Checkbox
-                      key={i}
+                      key={filters.bathRooms[i]}
                       label={`${i == 5 ? "5+" : i + 1} Bath`}
                       color="green"
                       onClick={() => handleCheckboxClick("bathRooms", i + 1)}
@@ -433,7 +433,7 @@ const MobileFilter = ({ close }: any) => {
                 {[...Array(7)].map((x, i) => {
                   return (
                     <Checkbox
-                      key={i}
+                      key={filters.parkings[i]}
                       label={`${i == 6 ? "+6" : i + 1}`}
                       color="green"
                       onClick={() => handleCheckboxClick("parkings", i + 1)}
@@ -487,7 +487,7 @@ const MobileFilter = ({ close }: any) => {
               {filters.builderIds.map((eachLocality, index) => {
                 return (
                   <div
-                    key={index}
+                    key={eachLocality}
                     className="flex justify-center items-center text-[12px] sm:text-[16px]  p-[1%] rounded-[10px] border-[#92B2C8] border-solid border-[1px]  "
                   >
                     {eachLocality.split("+")[0]}

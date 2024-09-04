@@ -104,7 +104,7 @@ export default function HeaderActions({
               {phaseList?.map((each: any, index: any) => {
                 return (
                   <Button
-                    key={index}
+                    key={`phase_${each.phaseName}`}
                     title={
                       isSingleLetterOrNumber(each.phaseName)
                         ? `Phase: ${each.phaseName}`
@@ -142,7 +142,7 @@ export default function HeaderActions({
               : null;
           return (
             <Button
-              key={index}
+              key={keyName}
               buttonClass={`flex justify-start mb-2 sm:mb-[3%] w-full rounded-[20px] gap-[8px]  items-center mr-[24px] md:ml-[0px] text-[12px] sm:text-[18px] border ${
                 propCgId == keyName
                   ? "text-[#001F35] text-[14px] sm:text-base font-[600] shadow-md bg-[#c8f5ca] sm:bg-[#D5EDFF]"

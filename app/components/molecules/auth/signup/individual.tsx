@@ -78,7 +78,6 @@ function Individual() {
       {status === "success" ? (
         <Success />
       ) : (
-        <>
           <Box className="w-full max-w-[423px] m-1 mt-[3%] " mx="auto">
             <div className=" sm:max-w-[459px] md:max-w-[597px] flex justify-center items-center gap-[15%] mb-[5%] ">
               <LoginSignupTabs
@@ -283,7 +282,6 @@ function Individual() {
               </Link>
             </form>
           </Box>
-        </>
       )}
 
       <AuthPopup

@@ -2,9 +2,8 @@ import React from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css"; // Import Leaflet CSS
 import { LatLngTuple } from "leaflet";
-import L from "leaflet";
+import * as L from "leaflet";
 import Image from "next/image";
-
 interface CustomMarkerProps {
   location: LatLngTuple;
   iconType: "Hotel" | "Default";

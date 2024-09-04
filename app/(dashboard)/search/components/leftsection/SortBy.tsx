@@ -138,7 +138,7 @@ export default function SortBy({typeProp,  ActivitiesType}: Props) {
                   eachItem.label === seletedValue && "!bg-[#1C7ED6] !text-white"
                 ),
               }}
-              key={index}
+              key={eachItem.label}
               value={seletedValue}
               onClick={() => handleSetFilter(eachItem.type, eachItem.value)}
             >

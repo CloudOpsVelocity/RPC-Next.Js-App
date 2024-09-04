@@ -22,8 +22,8 @@ const Form = () => {
               className="!my-12"
             />
             <ul className="flex flex-col justify-center items-center space-y-1 text-neutral-600 text-base font-semibold">
-              {data.map((item, index) => (
-                <li key={index} className="w-full max-w-[16rem]">
+              {data.map((item) => (
+                <li key={item.text} className="w-full max-w-[16rem]">
                   {/* <img
                     src={item.icon}
                     alt="building"

@@ -72,7 +72,7 @@ export default function Amenties({
                 amenitiesFromDB != null &&
                 Object.keys(amenitiesFromDB).map((group, ind) => {
                   return (
-                    <div key={ind}>
+                    <div key={`aminity_Con_${eachItem.id}`}>
                       {amenitiesFromDB != undefined &&
                         amenitiesFromDB != null &&
                         amenitiesFromDB[`${group}`] != undefined &&
@@ -83,7 +83,7 @@ export default function Amenties({
                             if (eachOne.cid == eachItem.id) {
                               return (
                                 <div
-                                  key={index}
+                                  key={`aminity_Box_${eachItem.id}`}
                                   className="flex items-center  gap-[8px]  mb-[8px] mr-[8px]  xl:mr-[24px] xl:mb-[24px]  px-2.5 py-0.5 w-fit text-[#001F35] font-[500] text-[13px] xl:text-[20px] focus:ring-offset-2 border rounded-[10px] border-solid border-[#b2e0ff] bg-[#FFF] "
                                 >
                                   {amenitiesGroupList.get(eachItem.id)}

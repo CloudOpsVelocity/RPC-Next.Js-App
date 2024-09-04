@@ -12,7 +12,7 @@ export default function SideTabs({ active, setActive }: Props) {
     <div>
       {config.data.map((item, index) => (
         <Card
-          key={index}
+          key={item.lablel}
           label={item.lablel}
           active={active == index}
           onClick={() => setActive(index)}

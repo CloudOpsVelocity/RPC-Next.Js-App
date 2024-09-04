@@ -21,9 +21,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </Link>
         <div className="  flex flex-col justify-start items-start ">
           <ul className=" text-neutral-600 w-full text-base font-semibold">
-            {data.map((item, index) => (
+            {data.map((item) => (
               <li
-                key={index}
+                key={item.text}
                 className="w-full mb-[3%] flex items-center justify-start"
               >
                 <TbBuilding />{" "}

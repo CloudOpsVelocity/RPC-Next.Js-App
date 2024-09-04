@@ -26,7 +26,7 @@ const Map = ({ data, lat, lang }: any) => {
       <MapContainer
         center={position}
         className="h-[250px] sm:h-full max-h-[250px] w-full sm:max-w-[700px] sm:max-h-[600px] xl:max-h-[740px] xl:max-w-full  -z-[1]"
-        scrollWheelZoom={true}
+        scrollWheelZoom
         zoom={12}
       >
         <TileLayer
@@ -70,66 +70,63 @@ const MapContent = ({ data }: any) => {
   }, [data, map]);
   // 1. FIND IS IT PROPERTY OR PRJECT
   // 2. CREATE TOOLTIPS FOR EACH SECTION
-  return (
-    <>
-      {data &&
-        data.length > 0 &&
-        data?.map((item: any, index: number) => {
-          const isProp = !!item?.propIdEnc;
-          const title = selected?.type;
-          const itemId = item[title === "proj" ? "projIdEnc" : "propIdEnc"];
-          const selectedId = selected?.reqId;
-          return (
-            <Marker
-              key={index}
-              position={[
-                parseFloat(item?.lat || 0),
-                parseFloat(item?.lang || 0),
-              ]}
-              eventHandlers={{
-                click: () => {
-                  setSelectedValue({
-                    projOrPropName: isProp ? item.propName : item.projName,
-                    lat: item.lat,
-                    lang: item.lang,
-                    type: isProp ? "prop" : "proj",
-                    reqId: itemId,
-                  });
-                },
-              }}
-              icon={isMobile ? MobileIcon : MapIcon}
-            >
-              {selected && selectedId === itemId && (
-                <Tooltip
-                  opacity={1}
-                  permanent
-                  direction="top"
-                  offset={[10, -35]}
-                  className="min-w-fit"
-                >
-                  {!isProp ? (
-                    <TooltipProj data={item} />
-                  ) : (
-                    <TooltipProp data={item} />
-                  )}
-                </Tooltip>
-              )}
 
-              <Tooltip
-                opacity={1}
-                direction="top"
-                offset={[10, -35]}
-                className="min-w-fit"
-              >
-                {!isProp ? (
-                  <TooltipProj data={item} />
-                ) : (
-                  <TooltipProp data={item} />
-                )}
-              </Tooltip>
-            </Marker>
-          );
-        })}
-    </>
-  );
+  {data && data.length > 0 &&
+  data?.map((item: any, index: number) => {
+  const isProp = !!item?.propIdEnc;
+  const title = selected?.type;
+  const itemId = item[title === "proj" ? "projIdEnc" : "propIdEnc"];
+  const selectedId = selected?.reqId;
+  return (
+      <Marker
+          key={Math.random()}
+          position={[
+            parseFloat(item?.lat || 0),
+            parseFloat(item?.lang || 0),
+          ]}
+          eventHandlers={{
+            click: () => {
+              setSelectedValue({
+                projOrPropName: isProp ? item.propName : item.projName,
+                lat: item.lat,
+                lang: item.lang,
+                type: isProp ? "prop" : "proj",
+                reqId: itemId,
+              });
+            },
+          }}
+          icon={isMobile ? MobileIcon : MapIcon}
+        >
+          {selected && selectedId === itemId && (
+            <Tooltip
+              opacity={1}
+              permanent
+              direction="top"
+              offset={[10, -35]}
+              className="min-w-fit"
+            >
+              {!isProp ? (
+                <TooltipProj data={item} />
+              ) : (
+                <TooltipProp data={item} />
+              )}
+            </Tooltip>
+          )}
+
+          <Tooltip
+            opacity={1}
+            direction="top"
+            offset={[10, -35]}
+            className="min-w-fit"
+          >
+            {!isProp ? (
+              <TooltipProj data={item} />
+            ) : (
+              <TooltipProp data={item} />
+            )}
+          </Tooltip>
+      </Marker>
+      );
+  })}
+  
 };

@@ -99,7 +99,7 @@ export default function Testimonials({ projName }: { projName: string }) {
             >
               {/* single card */}
               {videos.map((each, ind) => {
-                return <Card key={ind} />;
+                return <Card key={`videosSingleCard_${each}`} />;
               })}
             </div>
           </div>

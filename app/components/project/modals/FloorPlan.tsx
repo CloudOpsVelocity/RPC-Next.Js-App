@@ -127,7 +127,6 @@ function FloorPlanModal({
     return null;
   }
   return (
-    <>
       <Modal
         opened={opened}
         classNames={{
@@ -143,7 +142,6 @@ function FloorPlanModal({
         title="Floor Plan"
         size={"100%"}
       >
-        <>
           <div className="bg-white w-full h-auto px-1 xl:pl-5">
             <p
               className={`text-[#001F35] text-[13px] xl:text-xl not-italic font-semibold mt-2   ${
@@ -175,9 +173,7 @@ function FloorPlanModal({
               )}
             </div>
           </div>
-        </>
       </Modal>
-    </>
   );
 }
 
@@ -1091,7 +1087,7 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
             >
               {floorsArray?.map((eachObj: any, ind: number) => {
                 return (
-                  <Carousel.Slide h={60} key={ind}>
+                  <Carousel.Slide h={60} key={`floorPlanUrl_${eachObj?.floorPlanUrl[ind]}`}>
                     <div
                       className={clsx(
                         " sm:h-[50px] ml-1.5 sm:ml-10 w-[100px] sm:max-w-[250px] flex justify-center items-center shadow-md  scrollbar-hide rounded-[5px] border-[0.5px] border-solid border-[#92B2C8]",

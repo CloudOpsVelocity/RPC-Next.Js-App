@@ -38,7 +38,7 @@ export default function loading() {
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth={24}
-          ></line>
+          />
           <line
             x1="195.9"
             y1="195.9"
@@ -56,7 +56,7 @@ export default function loading() {
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth={24}
-          ></line>
+          />
           <line
             x1="60.1"
             y1="195.9"
@@ -83,7 +83,7 @@ export default function loading() {
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth={24}
-          ></line>
+          />
         </svg>
         <span className="text-4xl font-medium text-gray-500">Loading...</span>
       </div>

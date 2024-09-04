@@ -75,7 +75,6 @@ export function ProjectCard({ type, cardData, refetch }: CardProps) {
     window.open(`/abc/karnataka/banglore/${cardData.projIdEnc}`, "_blank");
   };
   return (
-    <>
       <div
         key={cardData.projIdEnc}
         onClick={handleCardClick}
@@ -208,7 +207,6 @@ export function ProjectCard({ type, cardData, refetch }: CardProps) {
           </div>
         </div>
       </div>
-    </>
   );
 }
 
@@ -262,7 +260,7 @@ const BuilderCarousel = ({
         {data &&
           data?.map((project: any, index: number) => {
             return (
-              <CarouselSlide key={index} className="!h-[520px] sm:!h-[500px]">
+              <CarouselSlide key={Math.random()} className="!h-[520px] sm:!h-[500px]">
                 <ProjectCard type={type} cardData={project} refetch={refetch} />
               </CarouselSlide>
             );

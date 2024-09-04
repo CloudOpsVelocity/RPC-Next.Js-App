@@ -33,7 +33,6 @@ function PFloorPlanModal({
   const { handleDownload } = useDownload("floorPlan");
   const isMobile = useMediaQuery("(max-width: 601)");
   return (
-    <>
       <Modal
         centered
         opened={opened}
@@ -77,7 +76,6 @@ function PFloorPlanModal({
           <RightSection propCgId={type} />
         </div>
       </Modal>
-    </>
   );
 }
 

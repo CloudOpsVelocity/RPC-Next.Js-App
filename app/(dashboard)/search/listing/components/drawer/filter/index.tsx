@@ -87,8 +87,8 @@ const ListingMobileFilter = ({ close }: any) => {
         )
       : ListingSearchDetails;
   return (
-    <div className=" flex justify-start items-start w-[70vw] top-[160px] w-full sm:left-[70%]">
-      <div className="w-[100%] flex hidden sm:flex shadow-md justify-start items-center flex-col ">
+    <div className=" flex justify-start items-start top-[160px] w-full sm:left-[70%]">
+      <div className="w-[100%] hidden sm:flex shadow-md justify-start items-center flex-col ">
         <p className=" text-[#000] text-nowrap xl:text-[14px] bg-[#F4F4F4] flex justify-start px-6  items-center font-[500] py-[3.5%] w-full ">
           Quick Filters
         </p>
@@ -96,7 +96,7 @@ const ListingMobileFilter = ({ close }: any) => {
           {filteredSearchDetails.map((eachItem, index) => {
             return (
               <Button
-                key={index}
+                key={eachItem}
                 title={eachItem}
                 onChange={() => scrollWhereIsSelected(eachItem)}
                 buttonClass={` whitespace-nowrap w-full text-[12px] flex flex-row-reverse  justify-end pl-[10%] items-center border-solid border-b-[0.5px] items-start  px-4 py-4 h-[31px] gap-[8px] ${
@@ -138,7 +138,7 @@ const ListingMobileFilter = ({ close }: any) => {
                     <Checkbox
                       label={eachStatus.title}
                       color="green"
-                      key={index}
+                      key={eachStatus.title}
                       onClick={() =>
                         handleCheckboxClick("unitTypes", eachStatus.value)
                       }
@@ -160,7 +160,7 @@ const ListingMobileFilter = ({ close }: any) => {
               return (
                 <Radio
                 id={`propertyStatus_${index}`}
-                  key={index}
+                  key={eachStatus.cid}
                   checked={eachStatus.cid == filters.current}
                   value={eachStatus.cid}
                   iconColor="dark.8"
@@ -187,7 +187,7 @@ const ListingMobileFilter = ({ close }: any) => {
               return (
                 <Radio
                 id={`propTypeRadio_${i}`}
-                  key={i}
+                  key={"dark.8" + keyName}
                   iconColor="dark.8"
                   color="green"
                   label={propertyDetailsTypes?.get(keyName)?.name}
@@ -218,7 +218,7 @@ const ListingMobileFilter = ({ close }: any) => {
               .map(({ value, constDesc }, i) => (
                 <Radio
                 id={`listedByRadio_${value}`}
-                  key={`listedBy_${i}`}
+                  key={`listedBy_${constDesc}`}
                   iconColor="dark.8"
                   color="green"
                   label={constDesc}
@@ -242,7 +242,7 @@ const ListingMobileFilter = ({ close }: any) => {
               {filters.locality.map((eachLocality, index) => {
                 return (
                   <div
-                    key={index}
+                    key={eachLocality}
                     className="capitalize flex justify-center items-center text-[12px] sm:text-[16px] sm:p-[1%]   shadow-[0px_4px_10px_0px_rgba(202,233,255,0.30)]   border rounded-[5px] border-solid border-[#92B2C8]"
                   >
                     {eachLocality.split("+")[0]}
@@ -286,10 +286,10 @@ const ListingMobileFilter = ({ close }: any) => {
                 Facing
               </h3>
               <div className="flex  mb-[3%] justify-start items-start gap-[4%] flex-wrap">
-                {SEARCH_FILTER_DATA.facing.map((x, i) => {
+                {SEARCH_FILTER_DATA.facing.map((x) => {
                   return (
                     <Checkbox
-                      key={`facings_${i}`}
+                      key={`facings_${x.constDesc}`}
                       label={x.constDesc}
                       color="green"
                       onClick={() => handleCheckboxClick("facings", x.cid + 1)}
@@ -313,7 +313,7 @@ const ListingMobileFilter = ({ close }: any) => {
                 {[...Array(6)].map((x, i) => {
                   return (
                     <Checkbox
-                      key={i}
+                      key={x}
                       label={`${i == 5 ? "5+" : i + 1} Bath`}
                       color="green"
                       onClick={() => handleCheckboxClick("bathRooms", i + 1)}
@@ -390,7 +390,7 @@ const ListingMobileFilter = ({ close }: any) => {
               return (
                 <Radio
                 id={`mediaRadio_${id}`}
-                  key={`propertyType_${i}`}
+                  key={label}
                   iconColor="dark.8"
                   color="green"
                   label={label}
@@ -421,7 +421,7 @@ const ListingMobileFilter = ({ close }: any) => {
                 return (
                   <Radio
                   id={`furnishRadio_${cid}`}
-                    key={`furnish_${i}`}
+                    key={`furnish_${cid}`}
                     iconColor="dark.8"
                     color="green"
                     label={constDesc}
@@ -468,7 +468,7 @@ const ListingMobileFilter = ({ close }: any) => {
                 {[...Array(7)].map((x, i) => {
                   return (
                     <Checkbox
-                      key={i}
+                      key={"parkings_" + filters.parkings[i]}
                       label={`${i == 6 ? "+6" : i + 1}`}
                       color="green"
                       onClick={() => handleCheckboxClick("parkings", i + 1)}
@@ -498,7 +498,7 @@ const ListingMobileFilter = ({ close }: any) => {
               {filters.builderIds.map((eachLocality, index) => {
                 return (
                   <div
-                    key={index}
+                    key={eachLocality}
                     className="flex justify-center items-center p-[1%] rounded-[10px] border-[#92B2C8] border-solid border-[1px]  "
                   >
                     {eachLocality.split("+")[0]}

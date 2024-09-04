@@ -75,7 +75,7 @@ const SearchDrawerHeader = ({
                 (showAllLocalities || index < (isTab ? 1 : 2)) && (
                   <Pill
                     onRemove={() => remnoveSearchOptions(each, "locality")}
-                    key={index}
+                    key={each.split("+")[0]}
                     withRemoveButton
                     classNames={{ root: classes.MultiSelectionPill }}
                     removeButtonProps={{

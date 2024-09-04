@@ -39,7 +39,7 @@ const Map = ({
         " h-[291px] sm:h-[456px] xl:h-[600px] w-full z-[1] relative",
         className
       )}
-      scrollWheelZoom={true}
+      scrollWheelZoom
     >
       <button
         className="z-[1000] inline-flex sm:w-fit w-[40px] h-[40px] justify-center items-center gap-1 p-2.5 shadow-[0px_4px_12px_0px_rgba(0,0,0,0.40)] rounded-[21px] bg-[#0073c6] ml-3 sm:ml-0 absolute bottom-[10px] sm:right-[20px] sm:top-[20px]  text-white text-xl not-italic font-bold leading-[normal]"

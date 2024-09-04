@@ -47,7 +47,7 @@ export default function Page({ searchParams }: any) {
                   pathname: each.href,
                   search: getQueryParam(searchParams),
                 }}
-                key={ind}
+                key={each.src}
                 className={`group cursor-pointer mb-6 flex justify-center items-center flex-col rounded-[8px] border-[0.4px] !border-[#009c59] bg-[#FAFAFA] w-[30%] h-[100px] xl:h-[174px]  shadow-lg  hover:shadow-green-300/30 sm:h-[129.468px] sm:!shadow-sm`}
               >
                 <Image

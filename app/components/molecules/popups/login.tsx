@@ -69,7 +69,7 @@ export default function LoginPopup({
             <LoginPopupForm closePopup={close && close} />
           </div>
         </div>
-        <div className="relative"></div>
+        <div className="relative"/>
       </div>
     </div>
   );

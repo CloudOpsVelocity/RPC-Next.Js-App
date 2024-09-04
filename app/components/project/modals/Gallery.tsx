@@ -74,7 +74,6 @@ const Gallery: React.FC<GalleryProps> = ({
   }
 
   return (
-    <>
       <Modal
         centered={isMobile ? (isImage ? true : false) : false}
         opened={content ? true : false}
@@ -133,7 +132,7 @@ const Gallery: React.FC<GalleryProps> = ({
                 width="100%"
                 controls
                 height={isMobile ? "50vh" : "60vh"}
-                playing={true}
+                playing
               />
             </div>
           )}
@@ -165,7 +164,7 @@ const Gallery: React.FC<GalleryProps> = ({
                 images.map((image, index) => {
                   return (
                     <Carousel.Slide
-                      key={index}
+                      key={`galleryImage_${image}`}
                       onClick={() => {
                         handleImageClick(image);
                         setCurrentSlide(index);
@@ -192,7 +191,7 @@ const Gallery: React.FC<GalleryProps> = ({
                 <div className="flex items-center w-full justify-center">
                   {videos.map((video, index) => (
                     <Carousel.Slide
-                      key={index}
+                      key={`galleryYoutubeVideo_${video}`}
                       onClick={() => {
                         handleImageClick(video);
                         setCurrentSlide(index);
@@ -203,7 +202,7 @@ const Gallery: React.FC<GalleryProps> = ({
                       >
                         {!video.includes("youtube") ? (
                           <video
-                            key={index}
+                            key={`youtube_${video}`}
                             width={150}
                             height={100}
                             src={video as string}
@@ -248,7 +247,6 @@ const Gallery: React.FC<GalleryProps> = ({
           </div>
         </div>
       </Modal>
-    </>
   );
 };
 

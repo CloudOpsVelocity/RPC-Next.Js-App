@@ -50,39 +50,35 @@ export default function ProjectLoans({
           classNames={Css}
         >
           {banks?.map((bank, index) => {
+            if(bank.bankid){
             return (
-              <>
-                {bank.bankid && (
-                  <Carousel.Slide key={index}>
-                    <div className="flex flex-col justify-center items-center gap-1.5 p-1.5 mt-4 sm:max-w-[150px] md:max-w-[170px] text-center border rounded-[7px] border-solid border-[#CCCED1] min-h-[120px] sm:min-h-[160px]">
-                      <Image
-                        src={
-                          BankDetailsList?.get(bank.bankid)?.url ??
-                          `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/Bank-projectproperty.png`
-                        }
-                        alt={bank.bankName}
-                        width={140}
-                        height={70}
-                        className="max-w-[60px] sm:min-h-[70px] sm:w-[140px] aspect-video "
-                      />
-                      <p className="mt-3  text-[#242424] text-center text-[14px] sm:text-xl not-italic font-semibold leading-[normal] capitalize">
-                        {bank.bankName}
-                      </p>
-                    </div>
-                  </Carousel.Slide>
-                )}
-              </>
-            );
+              <Carousel.Slide key={`banks_${bank.bankid}`}>
+                <div className="flex flex-col justify-center items-center gap-1.5 p-1.5 mt-4 sm:max-w-[150px] md:max-w-[170px] text-center border rounded-[7px] border-solid border-[#CCCED1] min-h-[120px] sm:min-h-[160px]">
+                  <Image
+                    src={
+                      BankDetailsList?.get(bank.bankid)?.url ??
+                      `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/Bank-projectproperty.png`
+                    }
+                    alt={bank.bankName}
+                    width={140}
+                    height={70}
+                    className="max-w-[60px] sm:min-h-[70px] sm:w-[140px] aspect-video "
+                  />
+                  <p className="mt-3  text-[#242424] text-center text-[14px] sm:text-xl not-italic font-semibold leading-[normal] capitalize">
+                    {bank.bankName}
+                  </p>
+                </div>
+              </Carousel.Slide>
+            )}
           })}
         </Carousel>
       ) : (
         <div className="mt-16 md:mt-1  grid grid-cols-1 sm:grid-cols-2 md:flex justify-start items-center flex-wrap w-full gap-x-[3%] gap-y-[50px] md:gap-y-[20px]  ">
           {banks?.map((bank, index) => {
+            if(bank.bankid){
             return (
-              <>
-                {bank.bankid && (
-                  <div
-                    key={index}
+              <div
+                    key={`loans_${bank.bankid}`}
                     className="flex flex-col justify-center items-center gap-1.5 p-[6px] mt-4 sm:max-w-[142px] md:max-w-[170px] text-center border rounded-[7px] border-solid border-[#CCCED1] min-h-[160px] "
                   >
                     <Image
@@ -98,10 +94,8 @@ export default function ProjectLoans({
                     <p className="mt-3  text-[#242424] text-[13px] text-center  not-italic font-semibold leading-[normal] capitalize ">
                       {bank.bankName}
                     </p>
-                  </div>
-                )}
-              </>
-            );
+              </div>
+            )}
           })}
         </div>
       )}

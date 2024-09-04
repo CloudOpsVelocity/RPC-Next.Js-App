@@ -19,7 +19,7 @@ export default function FurnishOptions({}: Props) {
       <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
         {SEARCH_FILTER_DATA.furnish.map(({ constDesc, cid }, i) => {
           return (
-            <div key={"furnith" + i}>
+            <div key={constDesc + cid}>
               <Radio
                 iconColor="dark.8"
                 color="green"

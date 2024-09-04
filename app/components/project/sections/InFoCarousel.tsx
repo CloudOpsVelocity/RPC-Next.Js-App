@@ -70,7 +70,7 @@ export default function InFoCarousel({ partialUnitData }: Props) {
               const units = data[item].unitDataDtoList;
               return (
                 <tr
-                  key={index}
+                  key={item}
                   className="flex flex-row justify-start items-start !z-[1] "
                 >
                   <td

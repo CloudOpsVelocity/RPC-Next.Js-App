@@ -107,9 +107,9 @@ export default function ByBhkBlock({
                 } `}
               />
               }
-              {availBhks.map((bhkOption, ind) => (
+              {availBhks.map((bhkOption) => (
                 <Button
-                  key={ind}
+                  key={`byUnit_${bhkOption}`}
                   title={bhkOption}
                   onChange={(e) => {
                     handleBhkChange(e, bhkOption);
@@ -154,7 +154,7 @@ export default function ByBhkBlock({
           ))} */}
         {filteredData.map((item: any, index: number) => (
           <FloorplanDetailsCard
-            key={index}
+            key={Math.random()}
             data={item}
             propCgId={propCgId}
             projData={data}

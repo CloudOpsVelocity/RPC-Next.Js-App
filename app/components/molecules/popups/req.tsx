@@ -22,7 +22,6 @@ import { ReqcallbackMessage } from "../../project/success";
 import Styles from "@/app/styles/Qna.module.css";
 import clsx from "clsx";
 import { NearByDataAtom } from "@/app/store/nearby";
-import reqStyles from "@/app/styles/Req.module.css";
 import { get_posted_by } from "@/app/utils/dyanamic/projects";
 import Close from "../../project/button/close";
 import Button from "../../atoms/buttons/variansts";
@@ -41,7 +40,6 @@ const RequestCallBackModal = () => {
   };
 
   return (
-    <>
       <Modal
         opened={opened}
         onClose={handleClose}
@@ -133,7 +131,6 @@ const RequestCallBackModal = () => {
           </div>
         }
       </Modal>
-    </>
   );
 };
 export default RequestCallBackModal;
@@ -368,20 +365,20 @@ const ReqForm = ({
           {...form.getInputProps("name")}
           placeholder="Enter Your Name Here"
           classNames={{
-            input: reqStyles.input,
+            input: S.input,
             label: N.label,
-            error: reqStyles.error,
-            wrapper: reqStyles.wrapper,
+            error: S.error,
+            wrapper: S.wrapper,
           }}
           onBlur={(e) => handleTrimAndReplace(e, "name", form)}
         />
         <NumberInput
           mt={isTab ? "xs" : "lg"}
           classNames={{
-            input: reqStyles.numInput,
+            input: S.numInput,
             label: N.label,
-            error: reqStyles.error,
-            wrapper: reqStyles.wrapper,
+            error: S.error,
+            wrapper: S.wrapper,
           }}
           hideControls
           size={isTab ? "md" : "lg"}
@@ -416,10 +413,10 @@ const ReqForm = ({
           type="email"
           style={{ marginTop: isTab ? "-22px" : "-10px" }}
           classNames={{
-            input: reqStyles.input,
+            input: S.input,
             label: N.label,
-            error: reqStyles.error,
-            wrapper: reqStyles.wrapper,
+            error: S.error,
+            wrapper: S.wrapper,
           }}
           onBlur={(e) => handleTrimAndReplace(e, "email", form)}
         />

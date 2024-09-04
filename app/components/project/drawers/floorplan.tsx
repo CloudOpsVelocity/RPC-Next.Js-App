@@ -157,7 +157,6 @@ export default function FloorplanDrawer() {
     { axis: "x", pointer: { touch: true } }
   );
   return (
-    <>
       <Drawer
         opened={Object.keys(cg).length > 0 ? true : false}
         onClose={handleClose}
@@ -231,7 +230,6 @@ export default function FloorplanDrawer() {
         <Table data={cg?.unitTypes} cg={cg} propertyType={cg?.propertyType} />
         {/* Drawer content */}
       </Drawer>
-    </>
   );
 }
 

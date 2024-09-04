@@ -24,7 +24,7 @@ export default function ContactDetails() {
       </div>
       <div className="space-y-[12px]">
         {Config.contactData.map((item, index) => (
-          <Card key={index} {...item} />
+          <Card key={item.label} {...item} />
         ))}
       </div>
     </div>

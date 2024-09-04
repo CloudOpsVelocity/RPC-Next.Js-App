@@ -156,7 +156,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
                       );
                       handleAppliedFilters();
                     }}
-                    key={index}
+                    key={filters.builderIds[index]}
                     withRemoveButton
                     classNames={{
                       root: classes.MultiSelectionPill,
@@ -231,8 +231,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
                       {filters.projName ?? projName}
                     </Pill>
                   )}
-                  {allFiltersMap?.map(
-                    (each, index) =>
+                  {allFiltersMap?.map((each, index) =>
                       index < (isTab ? 1 : 2) && (
                         <Pill
                           onRemove={() => {
@@ -244,7 +243,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
                             );
                             handleAppliedFilters();
                           }}
-                          key={index}
+                          key={filters.builderIds[index]}
                           withRemoveButton
                           classNames={{
                             root: classes.MultiSelectionPill,

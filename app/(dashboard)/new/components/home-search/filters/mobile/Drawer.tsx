@@ -45,8 +45,7 @@ function AppDrawer({ close, opened }: Props) {
               <div className="text-nowrap">All Residential</div>
             </div>
 
-            <Fragment>
-              <div className="flex justify-between items-center w-full">
+            <div className="flex justify-between items-center w-full">
                 <div className="flex sm:hidden items-center ">
                   {/* <button className="ml-2">
                   <span className="text-[#242424] text-xs not-italic font-normal">
@@ -70,8 +69,9 @@ function AppDrawer({ close, opened }: Props) {
                     {config.searchBtnIcon}
                   </a>
                 </div>
-              </div>
-              {(f.city || f.locality.length > 0) && (
+            </div>
+
+            {(f.city || f.locality.length > 0) && (
                 <div className="border-gray-400 border-t-[0.5px] pt-1">
                   {" "}
                   <Pill.Group>
@@ -96,7 +96,7 @@ function AppDrawer({ close, opened }: Props) {
                       <Pill
                         className="capitalize"
                         onRemove={() => remnoveSearchOptions(each, "locality")}
-                        key={index}
+                        key={each}
                         withRemoveButton
                         classNames={{
                           root: classes.MultiSelectionPill,
@@ -109,8 +109,7 @@ function AppDrawer({ close, opened }: Props) {
                     ))}
                   </Pill.Group>
                 </div>
-              )}
-            </Fragment>
+            )}
           </div>
 
           {/* for mobile */}

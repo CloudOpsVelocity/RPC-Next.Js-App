@@ -81,7 +81,6 @@ const Searchbar = () => {
     return query.replace("+", "%2B");
   };
   return (
-    <>
       <div
         ref={wrapperRef}
         className="border border-[#CBE9FF] rounded-3xl bg-white max-w-[320px]  md:max-w-[800px] overflow-hidden relative px-3"
@@ -126,7 +125,7 @@ const Searchbar = () => {
                       <Pill
                         className="capitalize"
                         onRemove={() => remnoveSearchOptions(each, "locality")}
-                        key={index}
+                        key={each}
                         withRemoveButton
                         classNames={{ root: classes.MultiSelectionPill }}
                       >
@@ -195,7 +194,7 @@ const Searchbar = () => {
                     selected={
                       f.propTypes === propertyDetailsTypes?.get(keyName)?.id
                     }
-                  ></Button>
+                  />
                 ))}
               </div>
 
@@ -210,7 +209,7 @@ const Searchbar = () => {
                         handleCheckboxClick("unitTypes", bhk.value)
                       }
                       selected={f.unitTypes.includes(bhk.value)}
-                    ></Button>
+                    />
                   ))}
                 </div>
               </div>
@@ -253,7 +252,6 @@ const Searchbar = () => {
             <Results />
           ))}
       </div>
-    </>
   );
 };
 

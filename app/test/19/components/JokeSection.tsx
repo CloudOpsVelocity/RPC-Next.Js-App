@@ -16,19 +16,17 @@ const JokeItem = () => {
 
 const Joke = () => {
   return (
-    <>
-      <Suspense
+    <Suspense
         fallback={
           <h2 className="text-2xl text-center font-bold mt-5">Loading...</h2>
         }
-      >
-        <title>Chuck Norris Jokes</title>
-        <meta name="description" content="Chuck Norris jokes" />
-        <meta name="keywords" content="chuck norris, jokes" />
+    >
+      <title>Chuck Norris Jokes</title>
+      <meta name="description" content="Chuck Norris jokes" />
+      <meta name="keywords" content="chuck norris, jokes" />
 
-        <JokeItem />
-      </Suspense>
-    </>
+      <JokeItem />
+    </Suspense>
   );
 };
 export { Joke as UseExample1 };

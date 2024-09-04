@@ -30,7 +30,7 @@ export default function HomeFeatures({}: Props) {
         </div>
         <div className="space-y-1 gap-[10px] sm:space-y-0 ">
           {config.data.map((item, index) => (
-            <Line text={item} key={index} />
+            <Line text={item} key={item} />
           ))}
         </div>
       </div>

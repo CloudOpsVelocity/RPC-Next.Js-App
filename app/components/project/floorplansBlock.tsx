@@ -258,7 +258,7 @@ export default function FloorplansBlock({
               {phaseList?.map((each: any, index: any) => {
                 return (
                   <Button
-                    key={index}
+                    key={each.phaseId}
                     title={
                       isSingleLetterOrNumber(each.phaseName)
                         ? `Phase: ${each.phaseName}`
@@ -435,7 +435,7 @@ export default function FloorplansBlock({
                     //   ))
                     projectUnitsData.map((virtualRow: any, index: number) => (
                       <FloorplanDetailsCard
-                        key={index}
+                        key={Math.random()}
                         propCgId={propCgId}
                         data={virtualRow}
                         projData={projectUnitsData}

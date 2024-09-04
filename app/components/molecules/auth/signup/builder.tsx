@@ -475,7 +475,7 @@ function Builder() {
               }}
               allowNegative={false}
               maxLength={10}
-              // withErrorStyles={true}
+              withErrorStyles
               allowDecimal={false}
               onPaste={(event) => {
                 if (status === "error") {

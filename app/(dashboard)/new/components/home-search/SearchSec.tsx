@@ -63,7 +63,7 @@ export default function SearchSec({}: Props) {
                     onRemove={() =>
                       dispatch({ type: "REMOVE_LOCALITY", payload: each })
                     }
-                    key={index}
+                    key={each}
                     withRemoveButton
                     classNames={{ root: classes.MultiSelectionPill }}
                   >

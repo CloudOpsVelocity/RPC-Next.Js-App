@@ -10,7 +10,6 @@ export default function Feature({
   projName: string;
 }) {
   return (
-    <>
       <div
         className="w-[90%] mt-[35px] scroll-mt-[180px] mb-[5%] sm:mb-0 sm:mt-0 sm:pt-screen-spacing"
         id="highlights"
@@ -28,7 +27,7 @@ export default function Feature({
           {data?.map((each, ind) => {
             return (
               <li
-                key={ind}
+                key={Math.random()}
                 className="  inline-flex gap-[1%] xl:gap-[0.5%] mb-[1%] "
               >
                 <Image
@@ -46,6 +45,5 @@ export default function Feature({
           })}
         </ul>
       </div>
-    </>
   );
 }

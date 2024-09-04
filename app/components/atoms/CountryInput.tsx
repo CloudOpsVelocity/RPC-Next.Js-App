@@ -25,7 +25,7 @@ export default function CountryInput({ onSelect, className }: props) {
       {isdDetailsList.map((eachOne, ind) => {
         return (
           <option
-            key={ind}
+            key={`country_${eachOne.id}`}
             className="dropdown-item widthContactDropDown"
             value={eachOne.id}
           >{`${eachOne.id} ${eachOne.name}`}</option>
