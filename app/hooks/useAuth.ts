@@ -156,7 +156,7 @@ export default function useAuth({
     data: RegistrationOthersData
   ): Promise<AuthResult> => {
     try {
-      // delete data.otp;
+      delete data.otp;
       const formData = new FormData();
       formData.append("data", JSON.stringify(data));
       formData.append("logo", data.companyLogo as any);
