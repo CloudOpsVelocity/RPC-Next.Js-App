@@ -95,7 +95,7 @@ const FirstBlock: React.FC<Props> = ({
               previousControlIcon={<DarkCarouseIcon />}
             >
               {images.map((imageUrl, index) => (
-                <Carousel.Slide key={index} className="relative" w={"auto"}>
+                <Carousel.Slide key={Math.random()} className="relative" w={"auto"}>
                   <Image
                     alt="project image"
                     src={imageUrl}

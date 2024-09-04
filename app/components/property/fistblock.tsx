@@ -105,7 +105,7 @@ const PropertyFirstBlock: React.FC<Props> = ({
             >
               {images.map((imageUrl, index) => (
                 <Carousel.Slide
-                  key={index}
+                  key={`Carousel_${imageUrl[index]}`}
                   className="relative"
                   /*  h={750} */
                   w={"full"}

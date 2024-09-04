@@ -58,10 +58,10 @@ export default function CarouselSuggestion({
               <Carousel.Slide
                 w={70}
                 mr={floorsArray.length > 4 ? 6 : 24}
-                key={ind}
+                key={`floorPlanCarouselUrl_${eachObj?.floorPlanUrl[ind]}`}
               >
                 <div
-                  key={ind}
+                  key={`floorPlanUrl_${eachObj?.floorPlanUrl[ind]}`}
                   className={clsx(
                     " h-[50px] w-[70px] flex justify-center items-center shadow-md  scrollbar-hide rounded-[5px] border-[0.5px] border-solid border-[#92B2C8]",
                     selectedFloor?.floorPlanUrl == eachObj?.floorPlanUrl &&

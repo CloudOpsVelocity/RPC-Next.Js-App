@@ -225,7 +225,7 @@ export default function PropertyTypeDetailsCrad({
             >
               {parseUnits(cg?.unitTypes, propertyType).map(
                 (unitType, index, array) => (
-                  <React.Fragment key={index}>
+                  <React.Fragment key={`unitType_${unitType}`}>
                     {unitType}
                     {index < array.length - 1 && ", "}
                     {index === 1 && <br />}

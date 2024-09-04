@@ -33,7 +33,7 @@ export default function Card({ Icon, title, type, data, otherPrice }: Props) {
             {data.map((key: any, i: number) => {
               return (
                 <ListItem
-                  key={i}
+                  key={key}
                   value={
                     key === "clubHouseCharge" &&
                     otherPrice.clubHouseCharge === "A"
@@ -62,7 +62,7 @@ export default function Card({ Icon, title, type, data, otherPrice }: Props) {
           const [chargeName, chargeValue] = charge.split("|");
           return (
             <ListItem
-              key={index}
+              key={`card_${charge[index]}`}
               label={chargeName.trim()}
               value={formatCurrency(chargeValue.trim())}
             />

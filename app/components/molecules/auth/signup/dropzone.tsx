@@ -105,7 +105,6 @@ const Preview = ({ main, logo, setError }: any) => {
   };
   const [opened, { open, close }] = useDisclosure(false);
   return (
-    <>
       <div className="flex items-center p-4 bg-white border border-gray-300 rounded-lg">
         <div className="flex items-center justify-center w-16 h-16 bg-gray-100 rounded-lg">
           <Image
@@ -183,7 +182,6 @@ const Preview = ({ main, logo, setError }: any) => {
           ref={fileInputRef}
         />
       </div>
-    </>
   );
 };
 const ImagePreivewModal = ({ logo, opened, open, close }: any) => {

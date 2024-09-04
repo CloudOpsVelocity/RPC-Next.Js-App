@@ -79,7 +79,7 @@ const LeftSideBlock = ({ mutate, serverData }: Props) => {
             serverClientData.map((eachOne: any, index: number) => {
               return (
                 <ProjectCard
-                  key={index}
+                  key={eachOne.projIdEnc}
                   refetch={refetch}
                   data={{ ...eachOne, type: filters.listedBy ?? "All" }}
                   index={index}
@@ -112,7 +112,7 @@ const LeftSideBlock = ({ mutate, serverData }: Props) => {
 };
 
 export { LeftSideBlock };
-import { Menu } from "@mantine/core";
+
 import MapModal from "./modals";
 import Loading from "@/app/components/atoms/Loader";
 import { Vast_Shadow } from "next/font/google";

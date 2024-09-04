@@ -129,7 +129,7 @@ const FloorplanDetailsCard: React.FC<Props> = ({
             <FlooringIcon className="md:h-[32px] md:w-[32px] h-[24px] w-[24px]" />
             Unit Number: {mergedData.unitNumber}
           </p>
-          {propCgId === projectprops.plot && <p className="mb-[45px]"></p>}
+          {propCgId === projectprops.plot && <p className="mb-[45px]"/>}
 
           {/* {(propCgId == projectprops.plot || !propCgId) && (
           <p className="gap-[4px] flex justify-end items-end text-[#303A4] font-[500] text-[14px] lg:text-[16px] mb-[20px] ">

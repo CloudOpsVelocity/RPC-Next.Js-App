@@ -15,7 +15,6 @@ type props = {
 function AuthPopup({ opened, close, userName, callback, mobile }: props) {
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
   return (
-    <>
       <Modal
         opened={opened}
         onClose={close}
@@ -33,7 +32,6 @@ function AuthPopup({ opened, close, userName, callback, mobile }: props) {
           mobile={mobile}
         />
       </Modal>
-    </>
   );
 }
 

@@ -25,12 +25,10 @@ const SearchAndFilterCon = ({ frontendFilters }: any) => {
   ]);
   const [showAllLocalities, setShowAllLocalities] = useState(false);
   return (
-    <>
       <SearchHeader
         setShowAllLocalities={setShowAllLocalities}
         showAllLocalities={showAllLocalities}
       />
-    </>
   );
 };
 export default SearchAndFilterCon;
@@ -145,7 +143,7 @@ const SearchHeader = ({ setShowAllLocalities }: any) => {
                       remnoveSearchOptions(each, "locality");
                       handleAppliedFilters();
                     }}
-                    key={index}
+                    key={each + "locality"}
                     withRemoveButton
                     classNames={{
                       root: classes.MultiSelectionPill,
@@ -218,7 +216,7 @@ const SearchHeader = ({ setShowAllLocalities }: any) => {
                             );
                             handleAppliedFilters();
                           }}
-                          key={index}
+                          key={each}
                           withRemoveButton
                           classNames={{
                             root: classes.MultiSelectionPill,

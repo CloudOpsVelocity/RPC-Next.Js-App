@@ -42,8 +42,8 @@ const HomeCarousel = () => {
       px={10}
     >
       {data?.project?.map((post, index) => (
-        <Carousel.Slide key={index} className="">
-          <ProjectCard type="proj" key={index} cardData={post} />
+        <Carousel.Slide key={Math.random()} className="">
+          <ProjectCard type="proj" key={Math.random()} cardData={post} />
         </Carousel.Slide>
       ))}
     </Carousel>
@@ -86,7 +86,6 @@ export function ProjectCard({ type, cardData }: CardProps) {
 
 
   return (
-    <>
       <a
        href={link}
 
@@ -189,6 +188,5 @@ export function ProjectCard({ type, cardData }: CardProps) {
           </div>
         </div>
       </a>
-    </>
   );
 }

@@ -11,7 +11,7 @@ export default function TabList({}: Props) {
       {SEARCH_FILTER_DATA.categoryDataProject.map((eachItem, index) => {
         return (
           <Tabs.Tab
-            key={index}
+            key={eachItem.label}
             value={eachItem.value}
             classNames={{
               tab: S.tab,

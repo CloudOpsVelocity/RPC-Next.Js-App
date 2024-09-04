@@ -103,7 +103,7 @@ export default function RootLayout({
         <link rel="manifest" href="/favicons/manifest.json" />
         <meta name="msapplication-TileColor" content="#ffffff" />
         <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
-        <meta name="theme-color" content="#ffffff"></meta>
+        <meta name="theme-color" content="#ffffff"/>
         {/* <script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-17JGNNST9D"

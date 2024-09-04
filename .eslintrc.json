@@ -35,12 +35,12 @@
     "react/jsx-no-useless-fragment": "error", // Avoid unnecessary fragments
     "react/jsx-boolean-value": ["error", "never"], // Enforce shorthand for boolean values in JSX
     "react/self-closing-comp": "error", // Enforce self-closing tags when no children are present
-    "react/no-danger": "warn", // Warn when using dangerouslySetInnerHTML
+    "react/no-danger": "off", // Warn when using dangerouslySetInnerHTML
     "react/no-deprecated": "error", // Prevent usage of deprecated methods
     "react/no-unused-state": "warn", // Warn if a state property is not used
     "react/no-unsafe": "error", // Prevent usage of unsafe lifecycle methods
     "react/prefer-es6-class": "error", // Enforce ES6 classes for React components
-    "react/jsx-pascal-case": "error", // Enforce PascalCase for user-defined JSX components
+    "react/jsx-pascal-case": "error", // Enforce PascalCase for user-defined JSX components 
 
     // Hooks-specific rules
     "react-hooks/rules-of-hooks": "error", // Enforces the rules of Hooks

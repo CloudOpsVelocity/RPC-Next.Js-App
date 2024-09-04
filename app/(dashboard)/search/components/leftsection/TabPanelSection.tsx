@@ -51,7 +51,7 @@ export default function TabPanelSection({ mutate, serverData }: Props) {
         serverClientData?.map((eachOne: any, index: number) => {
           return (
             <ProjectCard
-              key={index}
+              key={eachOne.builderId}
               refetch={refetch}
               data={{ ...eachOne, type: filters.listedBy ?? "proj" }}
               index={index}

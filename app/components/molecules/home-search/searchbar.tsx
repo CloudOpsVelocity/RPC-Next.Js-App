@@ -1,12 +1,9 @@
 import config from "./config";
 import Button from "./button";
 import { useState } from "react";
-import { Checkbox, Pill, PillsInput, Transition } from "@mantine/core";
-import { RangeSlider } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
-import { FaLocationDot } from "react-icons/fa6";
-import { useClickOutside } from "@mantine/hooks";
-import { FaLocationCrosshairs } from "react-icons/fa6";
+import { Checkbox, Pill, PillsInput, Transition, RangeSlider } from "@mantine/core";
+import { useDisclosure, useClickOutside } from "@mantine/hooks";
+import { FaLocationDot, FaLocationCrosshairs  } from "react-icons/fa6";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import { Transform } from "stream";
 import useSearchFilters from "@/app/hooks/search";
@@ -86,7 +83,6 @@ const Searchbar = () => {
     return query.replace("+", "%2B");
   };
   return (
-    <>
       <div
         ref={wrapperRef}
         className="border border-[#CBE9FF] rounded-3xl bg-white max-w-[320px]  md:max-w-[800px] overflow-hidden relative px-3"
@@ -130,7 +126,7 @@ const Searchbar = () => {
                     <Pill
                       className="capitalize"
                       onRemove={() => remnoveSearchOptions(each, "locality")}
-                      key={index}
+                      key={each.split("+")[0]}
                       withRemoveButton
                       classNames={{ root: classes.MultiSelectionPill }}
                     >
@@ -191,7 +187,7 @@ const Searchbar = () => {
                     selected={
                       f.propTypes === propertyDetailsTypes?.get(keyName)?.id
                     }
-                  ></Button>
+                  />
                 ))}
               </div>
 
@@ -206,7 +202,7 @@ const Searchbar = () => {
                         handleCheckboxClick("unitTypes", bhk.value)
                       }
                       selected={f.unitTypes.includes(bhk.value)}
-                    ></Button>
+                    />
                   ))}
                 </div>
               </div>
@@ -246,7 +242,6 @@ const Searchbar = () => {
             <Results />
           ))}
       </div>
-    </>
   );
 };
 

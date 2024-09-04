@@ -85,7 +85,7 @@ const FilterPopup = ({ close }: { close: () => void }) => {
           {filteredSearchDetails.map((eachItem, index) => {
             return (
               <Button
-                key={index}
+                key={eachItem}
                 title={eachItem}
                 onChange={() => scrollWhereIsSelected(eachItem)}
                 buttonClass={clsx(
@@ -135,7 +135,7 @@ const FilterPopup = ({ close }: { close: () => void }) => {
                       className="my-2"
                       label={eachStatus.title}
                       color="green"
-                      key={index}
+                      key={eachStatus.title}
                       onClick={() =>
                         handleCheckboxClick("unitTypes", eachStatus.value)
                       }
@@ -156,7 +156,7 @@ const FilterPopup = ({ close }: { close: () => void }) => {
             {SEARCH_FILTER_DATA.listingStatus.map((eachStatus, index) => {
               return (
                 <Radio
-                  key={"listingStatus" + index}
+                  key={eachStatus.cid}
                   checked={eachStatus.cid == filters.propStatus}
                   value={eachStatus.cid}
                   iconColor="dark.8"
@@ -181,7 +181,7 @@ const FilterPopup = ({ close }: { close: () => void }) => {
               }
               return (
                 <Radio
-                  key={i}
+                  key={keyName}
                   iconColor="dark.8"
                   color="green"
                   label={propertyDetailsTypes?.get(keyName)?.name}
@@ -239,7 +239,7 @@ const FilterPopup = ({ close }: { close: () => void }) => {
               {filters.locality.map((eachLocality, index) => {
                 return (
                   <div
-                    key={index}
+                    key={eachLocality}
                     className="capitalize flex justify-center items-center text-[12px] sm:text-[16px] sm:p-[1%]  shadow-[0px_4px_10px_0px_rgba(202,233,255,0.30)]   border rounded-[5px] border-solid border-[#92B2C8]"
                   >
                     {eachLocality.split("+")[0]}
@@ -287,7 +287,7 @@ const FilterPopup = ({ close }: { close: () => void }) => {
                   return (
                     <Checkbox
                       className="my-1"
-                      key={i}
+                      key={x.constDesc}
                       label={x.constDesc}
                       color="green"
                       onClick={() => handleCheckboxClick("facings", x.cid)}
@@ -311,7 +311,7 @@ const FilterPopup = ({ close }: { close: () => void }) => {
                 {[...Array(6)].map((x, i) => {
                   return (
                     <Checkbox
-                      key={i}
+                      key={filters.bathRooms[i]}
                       label={`${i == 5 ? "5+" : i + 1} Bath`}
                       color="green"
                       onClick={() => handleCheckboxClick("bathRooms", i + 1)}
@@ -433,7 +433,7 @@ const FilterPopup = ({ close }: { close: () => void }) => {
                 {[...Array(7)].map((x, i) => {
                   return (
                     <Checkbox
-                      key={i}
+                      key={filters.parkings[i]}
                       label={`${i == 6 ? "+6" : i + 1}`}
                       color="green"
                       onClick={() => handleCheckboxClick("parkings", i + 1)}

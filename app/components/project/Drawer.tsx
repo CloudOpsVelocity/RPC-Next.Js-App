@@ -35,7 +35,6 @@ function ProjectDrawer({ projName }: { projName: string }) {
   );
 
   return (
-    <>
       <Drawer
         classNames={{
           header: S.header,
@@ -72,12 +71,12 @@ function ProjectDrawer({ projName }: { projName: string }) {
                 if (amenitiesGroupList.get(eachItem.id) != null) {
                   const amenitiesFromDB = content.amenitiesFromDB;
                   return (
-                    <React.Fragment key={index}>
+                    <React.Fragment key={`aminityCon_${eachItem.id}`}>
                       {amenitiesFromDB != undefined &&
                         amenitiesFromDB != null &&
                         Object.keys(amenitiesFromDB).map((group, ind) => {
                           return (
-                            <React.Fragment key={ind}>
+                            <React.Fragment key={`aminityGroupCon_${eachItem.id}`}>
                               {amenitiesFromDB != undefined &&
                                 amenitiesFromDB != null &&
                                 amenitiesFromDB[`${group}`] != undefined &&
@@ -88,7 +87,7 @@ function ProjectDrawer({ projName }: { projName: string }) {
                                     if (eachOne.cid == eachItem.id) {
                                       return (
                                         <div
-                                          key={ind}
+                                          key={`aminityBox_${eachItem.id}`}
                                           className="flex items-center gap-[4px] mr-[12px] mb-[12px]  xl:gap-[8px]    sm:mr-[24px] sm:mb-[24px]  px-2.5 py-0.5 w-fit text-[#001F35] font-[500] text-[12px] lg:text-[20px] focus:ring-offset-2 border rounded-[10px] border-solid border-[#b2e0ff] bg-[#FFF] "
                                         >
                                           {amenitiesGroupList.get(eachItem.id)}
@@ -109,7 +108,6 @@ function ProjectDrawer({ projName }: { projName: string }) {
           )}
         </div>
       </Drawer>
-    </>
   );
 }
 

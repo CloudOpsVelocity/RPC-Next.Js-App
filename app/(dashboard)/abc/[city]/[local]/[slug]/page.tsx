@@ -138,7 +138,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         name="twitter:description"
         content={`${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`}
       />
-      <meta name="twitter:image" content={data.media?.coverImageUrl}></meta>
+      <meta name="twitter:image" content={data.media?.coverImageUrl}/>
       <FAQJsonLdScript data={data} />
       <QAJsonLdScript data={data} />
       <PropertyJsonLdScript data={data} />

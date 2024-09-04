@@ -93,7 +93,7 @@ export default function GalleryBlock({
                   width="100%"
                   height="462px"
                   controls
-                  playing={true}
+                  playing
                 />
               ) : (
                 <Image
@@ -138,7 +138,7 @@ export default function GalleryBlock({
           <div className="flex justify-start items-start w-full gap-[4%] flex-wrap ">
             {images?.map((img, ind) => (
               <Image
-                key={ind}
+                key={Math.random()}
                 width={150}
                 fit="fill"
                 height={100}
@@ -161,7 +161,7 @@ export default function GalleryBlock({
               <div className="flex justify-start items-start w-full gap-[4%] flex-wrap ">
                 {videos?.map((img, ind) => (
                   <div
-                    key={ind}
+                    key={Math.random()}
                     className={`relative w-[110px] lg:w-[152px] flex justify-center items-center h-[68px] md:h-[94px]  bg-white rounded-[5px]  mb-[4%] cursor-pointer
                       ${
                         selectedMedia === img

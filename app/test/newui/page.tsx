@@ -26,7 +26,7 @@ export default function Page() {
       {fakeData.map((eachOne, index: number) => {
         return (
           <ProjectCard
-            key={index}
+            key={`projCard_${eachOne?.projIdEnc}`}
             refetch={refetch}
             data={{ ...eachOne, type: filters.listedBy ?? "proj" }}
             index={index}

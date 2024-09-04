@@ -42,14 +42,12 @@ const SearchAndFilterCon = ({ frontendFilters }: any) => {
   const [showAllLocalities, setShowAllLocalities] = useState(false);
 
   return (
-    <>
       <SearchHeader
         showAllLocalities={showAllLocalities}
         setShowAllLocalities={setShowAllLocalities}
         open={open}
         close={close}
       />
-    </>
   );
 };
 

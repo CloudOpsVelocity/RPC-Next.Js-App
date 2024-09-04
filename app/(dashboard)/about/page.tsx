@@ -222,7 +222,7 @@ export default function page({}: Props) {
             effortless.
           </p>
           <div className="flex flex-row gap-[2%] w-full pb-[20px] sm:pb-0 overflow-x-scroll sm:overscroll-x-none mt-8 sm:mx-auto  sm:max-w-[80%]  sm:scrollbar-hide">
-            <div className="w-[235px] h-[293px] sm:h-auto flex-shrink-0 sm:w-[30%]  sm:max-w-[30%] p-3 sm:p-6 xl:p-12 rounded-[20px] justify-center border-[1px] border-[solid] border-[rgba(194,194,194,0.60)] bg-[#FFF]           [box-shadow:0px_10px_25px_0px_rgba(194,_194,_194,_0.44)]">
+            <div className="w-[235px] h-[293px] sm:h-auto flex-shrink-0 sm:w-[30%]  sm:max-w-[30%] p-3 sm:p-6 xl:p-12 rounded-[20px] justify-center border-[1px] border-solid border-[rgba(194,194,194,0.60)] bg-[#FFF] [box-shadow:0px_10px_25px_0px_rgba(194,_194,_194,_0.44)]">
               <div className=" w-[65.105px] h-[53px] rounded-[4px] flex justify-center items-center bg-[rgba(2,_152,_55,_0.10)] p-auto">
                 <BuildingIconABout />{" "}
               </div>
@@ -242,7 +242,7 @@ export default function page({}: Props) {
                 Explore Now
               </a>
             </div>
-            <div className=" w-[235px] h-[293px]  sm:h-auto flex-shrink-0  sm:w-[30%] sm:h-[autopx] max-w-[60%] sm:max-w-[30%]  p-3  sm:p-6 xl:p-12 rounded-[20px] justify-center border-[1px] border-[solid] border-[rgba(194,194,194,0.60)] bg-[#FFF]           [box-shadow:0px_10px_25px_0px_rgba(194,_194,_194,_0.44)]">
+            <div className=" w-[235px] h-[293px] flex-shrink-0  sm:w-[30%] sm:h-auto max-w-[60%] sm:max-w-[30%]  p-3  sm:p-6 xl:p-12 rounded-[20px] justify-center border-[1px] border-solid border-[rgba(194,194,194,0.60)] bg-[#FFF]           [box-shadow:0px_10px_25px_0px_rgba(194,_194,_194,_0.44)]">
               <div className=" w-[65.105px] h-[53px] rounded-[4px]  flex justify-center items-center bg-[rgba(2,_152,_55,_0.10)] p-auto">
                 <BuildingIconABout />{" "}
               </div>
@@ -262,7 +262,7 @@ export default function page({}: Props) {
                 Explore Now
               </a>
             </div>
-            <div className=" w-[235px] h-[293px]  sm:h-auto flex-shrink-0 sm:w-[30%] sm:h-[autopx] max-w-[60%] sm:max-w-[30%] p-3  sm:p-6 xl:p-12 rounded-[20px] justify-center border-[1px] border-[solid] border-[rgba(194,194,194,0.60)] bg-[#FFF]           [box-shadow:0px_10px_25px_0px_rgba(194,_194,_194,_0.44)]">
+            <div className=" w-[235px] h-[293px] flex-shrink-0 sm:w-[30%] sm:h-auto max-w-[60%] sm:max-w-[30%] p-3  sm:p-6 xl:p-12 rounded-[20px] justify-center border-[1px] border-solid border-[rgba(194,194,194,0.60)] bg-[#FFF]           [box-shadow:0px_10px_25px_0px_rgba(194,_194,_194,_0.44)]">
               <div className=" w-[65.105px] h-[53px] rounded-[4px] text-[14px] flex justify-center items-center bg-[rgba(2,_152,_55,_0.10)] p-auto">
                 <BuildingIconABout />{" "}
               </div>
@@ -302,8 +302,8 @@ export default function page({}: Props) {
             {profiles.map((each, index) => {
               return (
                 <div
-                  className=" z-[10] w-[256px] h-[198px] sm:h-auto  sm:w-[30%] flex-shrink-0 sm:max-w-[30%] flex flex-col sm:p-6 xl:p-12 rounded-[20px] justify-center border-[1px] border-[solid] border-[rgba(194,194,194,0.60)] bg-[#FFF]           [box-shadow:0px_10px_25px_0px_rgba(194,_194,_194,_0.44)]"
-                  key={index}
+                  className=" z-[10] w-[256px] h-[198px] sm:h-auto  sm:w-[30%] flex-shrink-0 sm:max-w-[30%] flex flex-col sm:p-6 xl:p-12 rounded-[20px] justify-center border-[1px] border-solid border-[rgba(194,194,194,0.60)] bg-[#FFF]           [box-shadow:0px_10px_25px_0px_rgba(194,_194,_194,_0.44)]"
+                  key={each.name}
                 >
                   <div className="flex flex-row gap-2 justify-between   ">
                     <div className="flex felx-row items-center p-1 gap-2">
@@ -358,7 +358,7 @@ export default function page({}: Props) {
             </div>
           </div>
           <BlogCOnatainerSVg className=" h-auto" />
-          <div className="block sm:hidden mt-[20px] mb-[20px] mx-auto   bg-[#fff] flex flex-col justify-center items-center gap-2  max-w-[98%] rounded-[18px] p-2 border-[6px] border-[solid] border-[var(--White-1,#F5F5F5)] bg-[#FFF]">
+          <div className="sm:hidden mt-[20px] mb-[20px] mx-auto flex flex-col justify-center items-center gap-2  max-w-[98%] rounded-[18px] p-2 border-[6px] border-solid border-[var(--White-1,#F5F5F5)] bg-[#FFF]">
             <h1 className="font-[Montserrat] text-[16px] not-italic font-bold leading-[normal]">
               Subscribe To Our Newsletter
             </h1>

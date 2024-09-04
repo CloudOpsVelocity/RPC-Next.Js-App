@@ -62,7 +62,6 @@ export default function PropertyOverviewBanner({
   );
   const isMobile = useMediaQuery("(max-width: 601px)");
   return (
-    <>
       <div className="flex justify-start items-center w-full flex-col md:flex-row bg-[#f0f9ff] scroll-mt-40">
         <PriceBag className="w-[100px] h-[120px]  sm:w-[151px] xl:w-[237px]  sm:h-[169px] xl:h-[263px] mt-2 sm:mt-0" />
 
@@ -158,7 +157,6 @@ export default function PropertyOverviewBanner({
 
         <RequestCallBackModal />
       </div>
-    </>
   );
 }
 

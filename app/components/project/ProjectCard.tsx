@@ -83,7 +83,6 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
   };
 
   return (
-    <>
       <div
         onClick={() => redirect()}
         key={reqId}
@@ -243,7 +242,6 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
           </div>
         </div>
       </div>
-    </>
   );
 }
 
@@ -275,9 +273,9 @@ const ProjectCarousel = ({
           {data &&
             data?.map((project: any, index: number) => {
               return (
-                <CarouselSlide className="!h-auto sm:!h-[500px] " key={index}>
+                <CarouselSlide className="!h-auto sm:!h-[500px] " key={`projCarouselSlide_${project?.projIdEnc}`}>
                   <ProjectCard
-                    key={index}
+                    key={`proj_${project?.projIdEnc}`}
                     type={type}
                     cardData={project}
                     mutate={mutate}

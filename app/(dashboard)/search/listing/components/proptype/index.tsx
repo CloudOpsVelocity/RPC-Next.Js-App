@@ -20,7 +20,7 @@ export default function PropTypeFilter({close}:{close:()=>void}) {
             if((filters.unitTypes.length === 0 || filters.unitTypes === undefined ) || (filters.unitTypes.length > 0 && keyName != projectprops.plot) ){
               return (
                 <Radio
-                  key={index}
+                  key={"PropertyType_"+keyName}
                   iconColor="dark.8"
                   color="green"
                   label={propertyDetailsTypes?.get(keyName)?.name}

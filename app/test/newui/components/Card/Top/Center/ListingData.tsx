@@ -88,12 +88,10 @@ export default function ListingData({
                 />
               </>
             ) : (
-              <>
                 <DownSectionCard
                   label="Total Area"
                   value={`${formatNumberWithSuffix(pa)} sq.ft`}
                 />
-              </>
             )}
 
             {/* {propStatus == "Under Construction" ? null : (

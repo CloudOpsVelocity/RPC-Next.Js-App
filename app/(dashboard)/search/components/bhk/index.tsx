@@ -16,7 +16,7 @@ export default function BhkFilter({ close }: { close?: () => void }) {
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-y-2 gap-x-10">
           {SEARCH_FILTER_DATA.bhkDetails.map((eachItem, index) => (
             <Checkbox
-              key={index}
+              key={eachItem.value}
               color="green"
               checked={filters.unitTypes.includes(eachItem.value)}
               label={eachItem.title}

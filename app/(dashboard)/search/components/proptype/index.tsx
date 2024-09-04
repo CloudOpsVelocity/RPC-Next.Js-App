@@ -23,7 +23,7 @@ export default function PropTypeFilter({ close }: { close?: () => void }) {
             }
             return (
               <Radio
-                key={index}
+                key={"PropertyType_"+keyName}
                 iconColor="dark.8"
                 color="green"
                 label={propertyDetailsTypes?.get(keyName)?.name}

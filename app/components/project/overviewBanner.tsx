@@ -34,7 +34,6 @@ export default function OverviewBanner({
   const { slug } = useParams<{ slug: string }>();
 
   return (
-    <>
       <div
         className="flex justify-start items-center w-full flex-col md:flex-row bg-[#f0f9ff] sm:scroll-mt-[125px] scroll-mt-40 "
         id="brochure"
@@ -93,6 +92,5 @@ export default function OverviewBanner({
 
         <RequestCallBackModal />
       </div>
-    </>
   );
 }

@@ -26,7 +26,7 @@ export default function ListingCarousel({ data, shortIds }: Props) {
       classNames={Css}
     >
       {data?.map((item: any, index: number) => (
-        <Carousel.Slide key={index}>
+        <Carousel.Slide key={item.propIdEnc}>
           <ListingCard
             item={item}
             sl={

@@ -19,7 +19,7 @@ export default function BhkFilter({close}:{close:()=>void}) {
           {SEARCH_FILTER_DATA.bhkDetails.map((eachItem, index) => (
             
             <Checkbox
-              key={index}
+              key={"bhk_" + eachItem.value}
               color="green"
               checked={filters.unitTypes.includes(eachItem.value)}
               label={eachItem.title}

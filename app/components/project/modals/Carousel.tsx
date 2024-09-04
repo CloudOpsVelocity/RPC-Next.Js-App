@@ -68,7 +68,6 @@ function CarouselModal({
   const isMobile = useMediaQuery("(max-width: 601px)");
 
   return (
-    <>
       <Modal
         // centered={isMobile ? false : true}
         opened={opened}
@@ -109,7 +108,6 @@ function CarouselModal({
           <RightSection propCgId={propCgId} />
         </div>
       </Modal>
-    </>
   );
 }
 
@@ -127,8 +125,7 @@ const MiddleSection = ({
   return (
     <div className="w-[100%] sm:max-w-[500px]  xl:max-w-[1400px]">
       <p className="text-[#242424] w-full mt-[18%] sm:mt-[0%] mb-[1%] sm:mb-0  text-[14px] text-center cl:text-left xl:text-[16px] font-[500] ">
-        {/* Sarang by sumadhura/2bhk/tower 1/ 05%4/north/1124 sq.ft - 3 */}
-        <>
+          {/* Sarang by sumadhura/2bhk/tower 1/ 05%4/north/1124 sq.ft - 3 */}
           {projName}
           {propCgId != projectprops.plot &&
             selectedFloor?.bhkName &&
@@ -162,7 +159,6 @@ const MiddleSection = ({
           {propCgId == projectprops.plot &&
             selectedFloor?.plotArea &&
             " | Area. " + selectedFloor?.plotArea + " sq.ft"}
-        </>
       </p>
       {selectedFloor?.floorPlanUrl ? (
         <div className="w-full flex justify-center  items-center sm:items-start">

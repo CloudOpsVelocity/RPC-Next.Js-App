@@ -29,7 +29,7 @@ export default async function Page() {
   }
   // const data = await getBuilderDetailsPageData(id);
   // return <BuilderPage data={data} />;
-  return <div></div>;
+  return <div/>;
 }
 
 //  builder0 = state / project0 project in locality

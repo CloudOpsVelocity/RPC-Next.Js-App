@@ -49,7 +49,6 @@ export default function SharePopup({
   const onClose = () =>
     setShareAtomData({ ...shareAtomData, opened: false, title: "" });
   return (
-    <>
       <Modal
         opened={shareAtomData.opened}
         onClose={onClose}
@@ -103,7 +102,6 @@ export default function SharePopup({
           </div>
         </div>
       </Modal>
-    </>
   );
 }
 

@@ -104,7 +104,7 @@ export const GrayMapIcon = ({ className }: { className?: string }) => {
       xmlSpace="preserve"
       className={className}
     >
-      <defs></defs>
+      <defs/>
       <g
         style={{
           stroke: "none",

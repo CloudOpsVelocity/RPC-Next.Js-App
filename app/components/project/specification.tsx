@@ -60,7 +60,7 @@ export default function Specifications({
 
               return (
                 <button
-                  key={index}
+                  key={spec.specName}
                   className={clsx(
                     `px-2 py-1 sm:px-5 sm:py-2 text-[12px] sm:text-[15px] xl:text-[20px] flex gap-2 bg-[#fafafa] items-center cursor-pointer rounded-[10px] border-[0.5px] border-solid border-[#76AEFF] shadow-none text-[#233] font-[500]`,
                     isSelected &&
@@ -96,7 +96,7 @@ export default function Specifications({
             >
               {data?.map((spec, index) => (
                 <div
-                  key={index}
+                  key={spec.specName}
                   // @ts-ignore
                   id={spec.specName.toLowerCase()}
                   className="px-[2%] mt-5 sm:mt-10 w-full items-start justify-start flex-col"
@@ -113,12 +113,11 @@ export default function Specifications({
                   </span>
                   <div>
                     <ul className="list-disc ml-8 grid gap-2 my-2 text-[#233333] text-[12px] sm:text-[16px] xl:text-[20px] font-[500] ">
-                      {spec.values.map(
-                        (value, valueIndex) =>
+                      {spec.values.map((value, valueIndex) =>
                           value && (
                             <li
                               className="break-words max-w-full"
-                              key={valueIndex}
+                              key={value}
                             >
                               {value}
                             </li>

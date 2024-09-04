@@ -170,7 +170,7 @@ const SearchDrawerHeader = ({
                       remnoveSearchOptions(each, "locality");
                       handleAppliedFilters();
                     }}
-                    key={index}
+                    key={each}
                     withRemoveButton
                     classNames={{
                       root: classes.MultiSelectionPill,

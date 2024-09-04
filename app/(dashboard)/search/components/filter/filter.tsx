@@ -27,7 +27,7 @@ const FilterSection = ({ open, close }: any) => {
               selected={
                 filters.propTypes === propertyDetailsTypes?.get(keyName)?.id
               }
-            ></Button>
+            />
           ))}
         </div>
       </div>
@@ -43,7 +43,7 @@ const FilterSection = ({ open, close }: any) => {
               value={bhk.title}
               onClick={() => handleCheckboxClick("unitTypes", bhk.value)}
               selected={filters.unitTypes.includes(bhk.value)}
-            ></Button>
+            />
           ))}
         </div>
       </div>

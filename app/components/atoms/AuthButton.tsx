@@ -100,7 +100,6 @@ function Dropdown() {
         )}
       </Menu.Target>
       {session ? (
-        <>
           <Menu.Dropdown
             className="!z-[1000]"
             classNames={{
@@ -112,7 +111,7 @@ function Dropdown() {
                 session.user?.userType !== "B" &&
                 item.label === "Post Project" ? null : (
                   <Menu.Item
-                    key={index}
+                    key={item.label}
                     classNames={{
                       itemLabel: S.itemLabel,
                     }}
@@ -139,7 +138,6 @@ function Dropdown() {
               Log Out
             </Menu.Item>
           </Menu.Dropdown>
-        </>
       ) : (
         <Menu.Dropdown
           className="!z-[1000]"
@@ -149,7 +147,7 @@ function Dropdown() {
         >
           {unAuthorizedData.map((item, index) => (
             <Menu.Item
-              key={index}
+              key={"unAuthorizedData_" + item.label}
               classNames={{
                 itemLabel: S.itemLabel,
               }}
