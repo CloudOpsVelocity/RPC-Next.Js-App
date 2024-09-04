@@ -99,7 +99,9 @@ const MainBox = ({ data, refetch }: Props) => {
     <div className="h-auto max-w-full xl:w-[98%] m-[1%] self-stretch rounded border-2 shadow-[0px_4px_30px_0px_rgba(74,82,113,0.20)]  border-solid border-[#A4B8D4]">
       <div
         onClick={() => onClickRedirect(reqId)}
-        className="flex flex-col xl:flex-row justify-between w-full  xl:max-w-full relative"
+        className={
+          "flex flex-col xl:flex-row justify-start w-full  xl:max-w-full relative"
+        }
       >
         <LeftSection
           src={coverUrl ?? coverImage}
@@ -110,6 +112,7 @@ const MainBox = ({ data, refetch }: Props) => {
           openReqCallback={handleOpen}
           type={type}
           possassionDate={data.possassionDate}
+          furnish={data.furnish}
         />
         {isMobile && (
           <div className="flex   flex-col  justify-between relative">

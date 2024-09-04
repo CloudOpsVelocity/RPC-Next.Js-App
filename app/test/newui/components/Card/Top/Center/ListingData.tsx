@@ -1,4 +1,5 @@
 import { formatNumberWithSuffix } from "@/app/utils/numbers";
+import { useMediaQuery } from "@mantine/hooks";
 import clsx from "clsx";
 import React from "react";
 
@@ -19,7 +20,14 @@ export default function ListingData({
   minCa,
   maxCa,
   noOfUnits,
+  noOfTowers,
+  parking,
+  balcony,
+  bathroom,
+  ownership,
+  coverParking,
 }: Props) {
+  const isMobile = useMediaQuery("(max-width: 1600px)");
   return (
     <>
       {" "}
@@ -44,18 +52,7 @@ export default function ListingData({
                 </p>
               </div>
             )} */}
-            {type === "proj" && (
-              <div className="mt-[2px] block md:hidden max-w-fit">
-                <h5 className="text-[#001F35] text-wrap text-[12px] xl:text-sm font-medium underline">
-                  Property Type
-                </h5>
-                <p className="text-[#242424]  text-wrap text-[12px] xl:text-base not-italic font-semibold">
-                  {propTypes && propTypes?.length > 0
-                    ? propTypes?.join(", ")
-                    : ""}
-                </p>
-              </div>
-            )}
+
             {/* <Divider
               orientation="vertical"
               color="#7BA0BB"
@@ -88,7 +85,9 @@ export default function ListingData({
               label={"No. of Units"}
               value={formatNumberWithSuffix(noOfUnits)}
             />
-            <DownSectionCard label={"Elevation"} value={"G+20"} />
+            {!isMobile && (
+              <DownSectionCard label={"Elevation"} value={`G+${noOfTowers}`} />
+            )}
           </div>
         ) : (
           <div className="flex items-center gap-2 xl:gap-x-4 xl:gap-y-0 self-stretch flex-wrap">
@@ -128,13 +127,15 @@ export default function ListingData({
               label="Furnishing"
               value={"Fully Furnished"}
             /> */}
-            <DownSectionCard label={"Converd Parkings"} value={"Converd 2"} />
 
-            <DownSectionCard label={"OwnerShip"} value={"FreeHold"} />
+            <DownSectionCard label={"OwnerShip"} value={ownership} />
             <div className="flex flex-nowrap gap-2 xl:gap-x-4">
-              <DownSectionCard label={"Bathrooms"} value={"2 No's"} />
-              <DownSectionCard label={"Balcony"} value={"6 No's"} />
-              <DownSectionCard label={"Parkings"} value={"2 No's"} />
+              <DownSectionCard label={"Bathrooms"} value={`${bathroom} No's`} />
+              <DownSectionCard label={"Balcony"} value={`${balcony} No's`} />
+              <DownSectionCard
+                label={"Parkings"}
+                value={`${parking} No's (${coverParking})`}
+              />
             </div>
           </div>
         )}

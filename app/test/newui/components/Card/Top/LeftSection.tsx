@@ -15,6 +15,7 @@ type Props = {
   type: string;
   projstatus: string;
   possassionDate: string;
+  furnish: string;
 };
 
 export default function LeftSection({
@@ -26,18 +27,19 @@ export default function LeftSection({
   type,
   projstatus,
   possassionDate,
+  furnish,
 }: Props) {
   const verified = isReraverified(rera);
   const isMobile = useMediaQuery("(max-width: 1600px)");
   return (
-    <div className="relative xl:min-w-[257px]">
+    <div className="relative xl:min-w-[257px] max-h-[250px]">
       {type !== "proj" && (
         <>
           <p className="absolute text-base bg-yellow-400 rounded-full px-1 text-black top-0 left-[0.8px] font-semibold">
             Unused
           </p>
           <p className="bg-gray-700 rounded-full absolute top-1 xl:top-1 right-1 text-white text-[12px] xl:text-sm  px-1 xl:bg-gray-900">
-            Furnished
+            {furnish}
           </p>
         </>
       )}
@@ -47,7 +49,7 @@ export default function LeftSection({
         width={304}
         height={214}
         alt="projectCard"
-        className="h-[162px] w-full  xl:h-full xl:w-[304px] object-cover"
+        className="h-[162px] w-full  xl:h-full xl:max-w-[257px] object-cover"
         quality={100}
       />
       {/* <div>

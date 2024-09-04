@@ -38,13 +38,13 @@ export default function ProjData({
 
       <p className="text-black text-[12px] sm:text-[14px] xl:text-[14px] font-bold">
         <span>
-          {sortedBhks.length > 5
+          {sortedBhks && sortedBhks?.length > 5
             ? sortedBhks
                 .filter(
                   (_, index) => !(_.includes(".5") || _.includes("Servant"))
                 )
                 .join(", ")
-            : sortedBhks.join(", ")}
+            : sortedBhks && sortedBhks.join(", ")}
         </span>{" "}
         {propType} For Sale in {`${locality}, ${city}`}
       </p>
@@ -68,7 +68,7 @@ export default function ProjData({
         {propName}{" "}
       </p>
       <p className="text-[#242424] text-[12px] sm:text-[16px] xl:text-[18px] capitalize  not-italic font-medium">
-        {`${localityName}, ${cityName}`}
+        {address}
       </p>
       <p className="text-[#242424]  text-[12px] sm:text-[12px]  xl:text-[14px] not-italic font-normal">
         Posted By:{" "}
