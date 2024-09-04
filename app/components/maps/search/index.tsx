@@ -19,6 +19,7 @@ import selectedSearchAtom from "@/app/store/search/map";
 import TooltipProj from "./Tooltip";
 import TooltipProp from "./ToolltipProp";
 
+
 const Map = ({ data, lat, lang }: any) => {
   const position: LatLngTuple = [lat, lang];
   return (
@@ -42,7 +43,7 @@ const Map = ({ data, lat, lang }: any) => {
 
 export default Map;
 
-const MapContent = ({ data }: any) => {
+const MapContent = ({ data }: any): JSX.Element | null => {
   const MapIcon = L.icon({
     iconUrl: "/searchmarker.png",
     iconSize: [60, 60],
@@ -130,3 +131,4 @@ const MapContent = ({ data }: any) => {
   })}
   
 };
+
