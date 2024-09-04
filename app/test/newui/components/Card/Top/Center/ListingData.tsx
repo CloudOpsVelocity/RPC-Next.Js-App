@@ -13,6 +13,12 @@ export default function ListingData({
   propertyAge,
   propTypeName,
   pa,
+  projectAbout,
+  maxSba,
+  minSba,
+  minCa,
+  maxCa,
+  noOfUnits,
 }: Props) {
   return (
     <>
@@ -57,11 +63,18 @@ export default function ListingData({
             /> */}
             <DownSectionCard
               label="Super Builtup Area"
-              value={"1211-1111 sqft"}
+              value={`${formatNumberWithSuffix(
+                minSba
+              )}-${formatNumberWithSuffix(maxSba)} sqft`}
             />
             {/* <Divider orientation="vertical" color="#7BA0BB" /> */}
             {/* <br /> */}
-            <DownSectionCard label="Carpet Area" value={"1211-1111 sqft"} />
+            <DownSectionCard
+              label="Carpet Area"
+              value={`${formatNumberWithSuffix(minCa)}-${formatNumberWithSuffix(
+                maxCa
+              )} sqft`}
+            />
             {/* <Divider orientation="vertical" color="#7BA0BB" /> */}
             <DownSectionCard
               label={type == "proj" ? "Land Area" : "Property Age"}
@@ -71,7 +84,10 @@ export default function ListingData({
                   : `${propertyAge ?? 0} Years`
               }
             />
-            <DownSectionCard label={"No. of Units"} value={"2,000"} />
+            <DownSectionCard
+              label={"No. of Units"}
+              value={formatNumberWithSuffix(noOfUnits)}
+            />
             <DownSectionCard label={"Elevation"} value={"G+20"} />
           </div>
         ) : (
@@ -88,10 +104,10 @@ export default function ListingData({
                 />
               </>
             ) : (
-                <DownSectionCard
-                  label="Total Area"
-                  value={`${formatNumberWithSuffix(pa)} sq.ft`}
-                />
+              <DownSectionCard
+                label="Total Area"
+                value={`${formatNumberWithSuffix(pa)} sq.ft`}
+              />
             )}
 
             {/* {propStatus == "Under Construction" ? null : (
@@ -123,9 +139,8 @@ export default function ListingData({
           </div>
         )}
       </div>
-      <div className="text-[12px] sm:text-[14px] pr-2">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione
-        expedita, deserunt...
+      <div className="text-[12px] sm:text-[14px] pr-2 line-clamp-2">
+        {projectAbout}
       </div>
     </>
   );

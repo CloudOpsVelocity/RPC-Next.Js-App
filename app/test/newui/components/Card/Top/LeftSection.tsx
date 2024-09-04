@@ -30,7 +30,7 @@ export default function LeftSection({
   const verified = isReraverified(rera);
   const isMobile = useMediaQuery("(max-width: 1600px)");
   return (
-    <div className="relative">
+    <div className="relative xl:min-w-[257px]">
       {type !== "proj" && (
         <>
           <p className="absolute text-base bg-yellow-400 rounded-full px-1 text-black top-0 left-[0.8px] font-semibold">
