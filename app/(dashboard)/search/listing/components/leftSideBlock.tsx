@@ -34,7 +34,9 @@ const LeftSideBlock = ({ mutate, serverData }: Props) => {
   const serverClientData =
     appliedFiltersCount > 0
       ? data
-      : path.includes("/seo") || path.includes("/in")
+      : path.includes("/seo") ||
+        path.includes("/in") ||
+        path.includes("/projects")
       ? serverData
       : data;
 

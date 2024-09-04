@@ -66,7 +66,7 @@ const parseFilters = (filters: string[]): QueryParams => {
 };
 
 // Function to get search data from the API
-export const getSearchData = async (filters: string): Promise<any> => {
+export const getSearchData = async (filters?: string): Promise<any> => {
   try {
     const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/prop-search?page=0&city=9`;
 

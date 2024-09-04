@@ -12,7 +12,6 @@
     "test:unit": "set NODE_OPTIONS=--no-deprecation && jest --detectOpenHandles",
     "test:watch": "set NODE_OPTIONS=--no-deprecation && jest --watch",
     "push": "npm run build && git add . && read -p 'Enter commit message: ' msg && git commit -m \"$msg\" && git push",
-    "pull-manish": "git pull origin manishdev",
     "debug": "cross-env NODE_OPTIONS='--inspect' next dev"
   },
   "dependencies": {
