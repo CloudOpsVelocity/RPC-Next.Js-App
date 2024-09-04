@@ -31,7 +31,6 @@ export default function TabPanelSection({ mutate, serverData }: Props) {
     root: containerRef.current,
     threshold: 0.1,
   });
-
   useEffect(() => {
     if (entry?.isIntersecting && hasNextPage) {
       fetchMoreData();

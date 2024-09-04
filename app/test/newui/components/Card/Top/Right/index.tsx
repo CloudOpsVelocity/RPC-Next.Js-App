@@ -9,6 +9,7 @@ import { ShareIcon } from "@/app/images/HomePageIcons";
 import { searchShareAtom } from "@/app/(dashboard)/search/components/SharePopup";
 import { DownLoadIcon, NewMapIcon } from "@/app/images/commongsSvgs2";
 import clsx from "clsx";
+import { formatNumberWithSuffix } from "@/app/utils/numbers";
 
 type Props = any;
 
@@ -26,6 +27,7 @@ export default function TopRightSection({
   data,
   propIdEnc,
   propName,
+  basePrice,
 }: Props) {
   const setSelected = useSetAtom(selectedSearchAtom);
   const [sharePopupData, setSharePopup] = useAtom(searchShareAtom);
@@ -53,7 +55,7 @@ export default function TopRightSection({
     >
       {type === "proj" && (
         <div className="text-xs hidden xl:flex sm:text-base font-semibold text-black text-nowrap absolute top-3 right-24  sm:top-2 sm:right-[74px]">
-          Avg Price: ₹ 1,234
+          Avg Price: ₹ {formatNumberWithSuffix(basePrice)}
         </div>
       )}
 

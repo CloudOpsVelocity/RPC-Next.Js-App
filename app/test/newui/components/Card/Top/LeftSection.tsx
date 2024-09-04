@@ -1,5 +1,6 @@
 import Button from "@/app/elements/button";
 import { CallIcon } from "@/app/images/commongsSvgs2";
+import { formatDateDDMMYYYY } from "@/app/utils/date";
 import { isReraverified } from "@/app/utils/dyanamic/projects";
 import { useMediaQuery } from "@mantine/hooks";
 import Image from "next/image";
@@ -12,6 +13,8 @@ type Props = {
   isCompared: boolean;
   openReqCallback: () => void;
   type: string;
+  projstatus: string;
+  possassionDate: string;
 };
 
 export default function LeftSection({
@@ -21,6 +24,8 @@ export default function LeftSection({
   isCompared,
   openReqCallback,
   type,
+  projstatus,
+  possassionDate,
 }: Props) {
   const verified = isReraverified(rera);
   const isMobile = useMediaQuery("(max-width: 1600px)");
@@ -49,10 +54,11 @@ export default function LeftSection({
         
       </div> */}
       <p className="bg-gray-700 rounded-full absolute top-1 xl:top-auto xl:bottom-7 right-1 text-white text-[12px] xl:text-sm  px-1 xl:bg-gray-900">
-        Ready To Move
+        {projstatus}
       </p>
       <p className="bg-gray-700 rounded-full absolute top-7 xl:top-auto xl:bottom-1 right-1 text-white text-[12px]  xl:text-sm px-1 xl:bg-gray-900">
-        {type !== "proj" ? "Available From: " : "Posesstion Date: "} 12/4/2024
+        {type !== "proj" ? "Available From: " : "Posesstion Date: "}{" "}
+        {formatDateDDMMYYYY(possassionDate)}
       </p>
 
       {verified && <Rera />}

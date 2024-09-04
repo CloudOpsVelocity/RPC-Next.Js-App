@@ -21,7 +21,7 @@ export default function ProjectSearchPage({
       <SearchAndFilterCon frontendFilters={frontendFilters} />
       <div className=" w-[100%] mx-2  xl:m-0 flex justify-center flex-wrap-reverse sm:flex-nowrap">
         <LeftSideBlock serverData={serverData} />
-        {/* <RightSideBlock serverData={serverData} /> */}
+        <RightSideBlock serverData={serverData} />
       </div>
       <Footer />
       <Toaster />

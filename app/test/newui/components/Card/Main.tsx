@@ -104,10 +104,12 @@ const MainBox = ({ data, refetch }: Props) => {
         <LeftSection
           src={coverUrl ?? coverImage}
           rera={rerastatus}
+          projstatus={data.projstatus}
           onAddingCompare={onAddingCompare}
           isCompared={state.compareAdded}
           openReqCallback={handleOpen}
           type={type}
+          possassionDate={data.possassionDate}
         />
         {isMobile && (
           <div className="flex   flex-col  justify-between relative">

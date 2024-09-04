@@ -55,6 +55,7 @@ interface RegistrationOthersData {
   officeContact?: number | null;
   managingDirectorName?: string;
   companyLogo?: File;
+  otp?: boolean;
 }
 
 /**
@@ -92,7 +93,6 @@ export default function useAuth({
       ...requestData,
       redirect: false,
     });
-    console.log(res);
     if (res?.ok) {
       type === "register"
         ? setTimeout(() => {
@@ -156,11 +156,10 @@ export default function useAuth({
     data: RegistrationOthersData
   ): Promise<AuthResult> => {
     try {
+      // delete data.otp;
       const formData = new FormData();
-      console.log(data.companyLogo);
       formData.append("data", JSON.stringify(data));
       formData.append("logo", data.companyLogo as any);
-
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/registerUser-other`,
         formData
