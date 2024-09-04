@@ -23,7 +23,7 @@ export default function Page() {
   console.log(output);
   return (
     <div className="flex justify-center items-center flex-wrap w-[100%] sm:max-w-[50%]">
-      {fakeData.map((eachOne, index: number) => {
+      {/* {fakeData.map((eachOne, index: number) => {
         return (
           <ProjectCard
             key={`projCard_${eachOne?.projIdEnc}`}
@@ -34,7 +34,7 @@ export default function Page() {
           />
         );
       })}
-      <ReadMoreCard />
+      <ReadMoreCard /> */}
     </div>
   );
 }
