@@ -10,11 +10,11 @@ export default function AuthButton() {
   const { data: session } = useSession();
 
   const postProjectLink = session
-    ? `${process.env.NEXT_PUBLIC_PROJECT_URL}/post-project/postProject`
+    ? `${process.env.NEXT_PUBLIC_PROJECT_URL}/post-project`
     : "/login";
 
   const postListingLink = session
-    ? `${process.env.NEXT_PUBLIC_PROJECT_URL}/post-listing/v1/post`
+    ? `${process.env.NEXT_PUBLIC_PROJECT_URL}/post-listing/v1`
     : "/register";
 
   return (
