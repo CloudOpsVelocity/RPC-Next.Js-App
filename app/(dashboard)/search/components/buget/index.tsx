@@ -13,10 +13,10 @@ export function formatBudgetValue(value: number) {
     return `${croreValue}Cr`;
   }
 }
-export default function BugdetFilter() {
+export default function BugdetFilter({ close }: { close?: () => void }) {
   return (
     <div className="w-[330px] ">
-      <ClearAll type="price" />
+      <ClearAll type="price" close={close} />
       <div className="p-3 w-full">
         {" "}
         <div className=" mb-[3%] px-5 gap-[4%]   ">

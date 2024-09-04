@@ -64,7 +64,7 @@ const MapContent = ({ data }: any) => {
     }
   }, [selected, map]);
   useEffect(() => {
-    if (data && data[0]) {
+    if (data && data[0] && data[0]?.lat && data[0]?.lang) {
       map.setView([parseFloat(data[0]?.lat), parseFloat(data[0]?.lang)], 14);
     }
   }, [data, map]);

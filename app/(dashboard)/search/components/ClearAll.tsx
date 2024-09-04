@@ -5,7 +5,7 @@ import React from "react";
 
 export default function ClearAll({
   type,
-  close,
+  close
 }: {
   type: "unitType" | "price" | "all" | "propType";
   close?: () => void;

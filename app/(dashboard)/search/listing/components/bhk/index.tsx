@@ -5,11 +5,11 @@ import ClearAll from "../ClearAll";
 import useSearchFilters from "@/app/hooks/search";
 import { projectprops } from "@/app/data/projectDetails";
 
-export default function BhkFilter() {
+export default function BhkFilter({close}:{close:()=>void}) {
   const { filters, handleCheckboxClick, params } = useSearchFilters();
   return (
     <div className="max-w-[860px] ">
-      <ClearAll type="unitType" />
+      <ClearAll type="unitType" close={close} />
       <div className="p-3">
         <h3 className="text-[#202020] mb-[2%] text-[14px] font-[600] ">
           BHK Type
