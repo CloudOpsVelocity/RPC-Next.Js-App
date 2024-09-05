@@ -49,7 +49,7 @@ export default function ProjData({
   };
   return type === "proj" ? (
     <div className="flex flex-col">
-      <p className="text-[#001F35] text-[14px] sm:text-[16px] xl:text-[18px] font-bold break-words whitespace-normal min-w-0 inline-flex gap-1 items-center">
+      <p className="text-[#001F35] text-[16px] sm:text-[16px] xl:text-[18px] font-bold break-words whitespace-normal min-w-0 inline-flex gap-1 items-center flex-wrap">
         {projName}{" "}
         <span className="text-[12px] sm:text-[14px] ">({phaseName})</span>{" "}
         <NewMapIcon

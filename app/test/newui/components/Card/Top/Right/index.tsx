@@ -127,11 +127,11 @@ export default function TopRightSection({
               />{" "}
             </div> */}
             {type === "proj" && brochureUrl && (
-              <div className="flex flex-col space-y-1">
+              <div className="flex flex-col space-y-1 justify-end items-end">
                 {" "}
                 <DownloadBrocher brochureUrl={brochureUrl} />
                 <button
-                  className="bg-orange-500 text-white sm:py-1 sm:px-2 font-bold  rounded hover:bg-orange-600 focus:outline-none text-xs "
+                  className="bg-orange-500 text-white text-right max-w-fit  px-1 sm:py-1 sm:px-2 font-bold  rounded hover:bg-orange-600 focus:outline-none text-xs "
                   onClick={() =>
                     dispatch({
                       type: "OPEN",
@@ -309,7 +309,7 @@ export default function TopRightSection({
                   <span className="hidden sm:block">14+</span> Amenities
                 </button>
                 <button
-                  className="bg-teal-500 text-white font-bold sm:py-1 sm:px-2 text-xs rounded shadow-lg hover:bg-teal-600 transition duration-300 ease-in-out"
+                  className="bg-teal-500 text-white text-right max-w-fit px-1 font-bold sm:py-1 sm:px-2 text-xs rounded shadow-lg hover:bg-teal-600 transition duration-300 ease-in-out"
                   onClick={() =>
                     dispatch({
                       type: "OPEN",

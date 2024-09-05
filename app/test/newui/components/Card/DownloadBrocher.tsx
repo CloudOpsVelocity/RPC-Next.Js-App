@@ -27,7 +27,7 @@ export default function DownloadBrocher({ brochureUrl: url }: Props) {
   return (
     <button
       onClick={handleDownload}
-      className="bg-btnPrimary text-white rounded text-[12px] inline-flex max-w-fit sm:px-1 sm:py-0.5 font-bold justify-center items-center ml-auto mt-[4px]"
+      className="bg-btnPrimary text-white rounded text-[12px] inline-flex max-w-fit px-0.5 sm:px-1 sm:py-0.5 font-bold justify-center items-center ml-auto mt-[4px]"
     >
       <DownLoadIcon className="w-[20px] h-[20px]" /> Brochure
     </button>
