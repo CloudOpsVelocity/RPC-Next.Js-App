@@ -63,7 +63,7 @@ export default function TopRightSection({
     >
       {type === "proj" && (
         <div className="text-xs hidden xl:flex sm:text-base font-medium text-[#4f4f4f] text-nowrap absolute top-3 right-24  sm:top-0 sm:right-[65px]">
-          Avg Price:{" "}
+          Avg Price:₹{" "}
           <span className="font-bold">
             ₹ {formatNumberWithSuffix(basePrice)}
           </span>
@@ -131,7 +131,7 @@ export default function TopRightSection({
                 {" "}
                 <DownloadBrocher brochureUrl={brochureUrl} />
                 <button
-                  className="bg-orange-500 text-white text-right max-w-fit  px-1 sm:py-1 sm:px-2 font-bold  rounded hover:bg-orange-600 focus:outline-none text-xs "
+                  className="bg-orange-500 text-white text-right max-w-fit  px-1 sm:py-1 sm:px-2 font-bold  rounded hover:bg-orange-600 focus:outline-none text-xs text-nowrap  inline-flex"
                   onClick={() =>
                     dispatch({
                       type: "OPEN",
@@ -341,8 +341,8 @@ export default function TopRightSection({
             )}
             {type === "proj" && (
               <div className="text-xs sm:hidden  sm:text-base font-semibold text-[#4f4f4f]  top-2.5 right-24  sm:top-0.5 sm:right-16 mt-1">
-                <p className="text-right text-[12px] text-nowrap">
-                  Avg Price: {formatNumberWithSuffix(basePrice)}
+                <p className="text-right text-[12px] text-nowrap text-[#148B16]">
+                  Avg Price:₹ {formatNumberWithSuffix(basePrice)}
                 </p>
                 <p className="text-right text-[12px] text-nowrap">
                   Elevation: G+30
