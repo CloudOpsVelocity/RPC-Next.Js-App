@@ -210,7 +210,7 @@ export default function TopRightSection({
             <div className="flex  items-end flex-col gap-2">
               <DownloadBrocher brochureUrl={brochureUrl} />
               <button
-                className="bg-orange-500 text-white py-1 px-2  rounded hover:bg-orange-600 focus:outline-none text-xs "
+                className="bg-orange-500 text-white py-1 px-2 font-bold  rounded hover:bg-orange-600 focus:outline-none text-xs "
                 onClick={() =>
                   dispatch({
                     type: "OPEN",
@@ -237,6 +237,35 @@ export default function TopRightSection({
                 }
               >
                 14+ Amenities
+              </button>
+              <button
+                className="bg-teal-500 text-white font-bold py-1 px-2 text-xs rounded shadow-lg hover:bg-teal-600 transition duration-300 ease-in-out"
+                onClick={() =>
+                  dispatch({
+                    type: "OPEN",
+                    content: [
+                      "Orion Mall",
+                      "Apollo Hospital",
+                      "Greenwood High International School",
+                      "MG Road Metro Station",
+                      "Major Bus Stop",
+                      "City Park",
+                      "Central Library",
+                      "Fitness Center",
+                      "Local Market",
+                      "Coffee Shop",
+                      "Bank",
+                      "Post Office",
+                      "Restaurant",
+                      "Pharmacy",
+                      "Veterinary Clinic",
+                    ],
+                    id: `${projIdEnc}+${propTypeId}`,
+                    title: `NearBy Locations of ${projName}`,
+                  })
+                }
+              >
+                Nearby
               </button>
             </div>
           )}
