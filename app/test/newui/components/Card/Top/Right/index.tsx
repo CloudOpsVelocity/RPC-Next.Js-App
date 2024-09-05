@@ -128,15 +128,26 @@ export default function TopRightSection({
                 <DownLoadIcon className="w-[20px] h-[20px]" /> Brochure
               </button>
             )}
+            {type === "proj" && (
+              <div className="text-xs sm:hidden  sm:text-base font-semibold text-black  top-2.5 right-24  sm:top-0.5 sm:right-16 mt-1">
+                <p className="text-right text-[12px] text-nowrap">
+                  Avg Price: {formatNumberWithSuffix(basePrice)}
+                </p>
+                <p className="text-right text-[12px] text-nowrap">
+                  Elevation: G+30
+                </p>
+              </div>
+            )}
 
-            <div className="text-xs sm:hidden  sm:text-base font-semibold text-black  top-2.5 right-24  sm:top-0.5 sm:right-16 mt-1">
-              <p className="text-right text-[12px] text-nowrap">
-                Avg Price: {formatNumberWithSuffix(basePrice)}
-              </p>
-              <p className="text-right text-[12px] text-nowrap">
-                Elevation: G+30
-              </p>
-            </div>
+            {type !== "proj" && (
+              <>
+                <ListingDownSectionCard label={"Facing"} value={facing} />
+                <ListingDownSectionCard
+                  label={"Property Age"}
+                  value={propertyAge}
+                />
+              </>
+            )}
           </div>
         </>
       )}
@@ -214,7 +225,7 @@ const ListingDownSectionCard = ({
   return (
     value && (
       <div className="flex  justify-center items-center text-right ">
-        <p className="text-[#001F35] text-[12px]  xl:text-sm not-italic font-medium text-wrap  inline-flex">
+        <p className="text-[#001F35] text-[12px]   xl:text-sm not-italic font-medium text-wrap  inline-flex">
           {Icon} {label}:
         </p>
         <p className="text-[#242424] text-[14px]  not-italic mt-[1px]">

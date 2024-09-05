@@ -39,7 +39,7 @@
     "react/no-unsafe": "error", // Prevent usage of unsafe lifecycle methods
     "react/prefer-es6-class": "error", // Enforce ES6 classes for React components
     "react/jsx-pascal-case": "error", // Enforce PascalCase for user-defined JSX components
-
+    "jsx-a11y/click-events-have-key-events": "off",
     // Hooks-specific rules
     "react-hooks/rules-of-hooks": "error", // Enforces the rules of Hooks
     "react-hooks/exhaustive-deps": "warn",
