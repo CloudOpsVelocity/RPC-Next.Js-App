@@ -10,6 +10,9 @@ import CenterTop from "./Top/Center";
 import CardDownSection from "./Down";
 import TopRightSection from "./Top/Right";
 import { useMediaQuery } from "@mantine/hooks";
+import { useAtom, useAtomValue } from "jotai";
+import { overlayAtom } from "../../store/overlay";
+import Overlay from "../modals/Overlay";
 
 type Props = {
   type: any;
@@ -30,6 +33,7 @@ const MainBox = ({ data, refetch }: Props) => {
     rerastatus,
     compareAdded,
     shortListed,
+    propTypeId,
   } = data;
   const [state, setState] = useState({
     compareAdded: compareAdded === "Y" ? true : false,
@@ -78,6 +82,7 @@ const MainBox = ({ data, refetch }: Props) => {
     }
   };
   const [, { open }] = useReqCallPopup();
+  const overlayData = useAtomValue(overlayAtom);
   const handleOpen = () => {
     open({
       modal_type:
@@ -94,7 +99,6 @@ const MainBox = ({ data, refetch }: Props) => {
     });
   };
   const isMobile = useMediaQuery("(max-width: 1600px)");
-
   return (
     <div className="h-auto max-w-full xl:w-[98%] m-[1%] self-stretch rounded border-2 shadow-[0px_4px_30px_0px_rgba(74,82,113,0.20)]  border-solid border-[#A4B8D4]">
       <div
@@ -114,30 +118,35 @@ const MainBox = ({ data, refetch }: Props) => {
           possassionDate={data.possassionDate}
           furnish={data.furnish}
         />
-        {isMobile && (
-          <div className="flex   flex-col  justify-between relative">
-            <TopRightSection
-              data={newData}
-              type={type}
-              {...newData}
-              onAddingCompare={onAddingCompare}
-              onAddingShortList={onAddingShortList}
-            />
-            <CenterTop data={newData} type={type} />
-          </div>
-        )}
-        {!isMobile && (
-          <>
-            <CenterTop data={newData} type={type} />
-            <TopRightSection
-              data={newData}
-              type={type}
-              {...newData}
-              onAddingCompare={onAddingCompare}
-              onAddingShortList={onAddingShortList}
-            />
-          </>
-        )}
+        <div className="relative">
+          {overlayData.id && `${projIdEnc}+${propTypeId}` === overlayData.id ? (
+            <Overlay />
+          ) : null}
+          {isMobile && (
+            <div className="flex   flex-col  justify-between relative">
+              <TopRightSection
+                data={newData}
+                type={type}
+                {...newData}
+                onAddingCompare={onAddingCompare}
+                onAddingShortList={onAddingShortList}
+              />
+              <CenterTop data={newData} type={type} />
+            </div>
+          )}
+          {!isMobile && (
+            <>
+              <CenterTop data={newData} type={type} />
+              <TopRightSection
+                data={newData}
+                type={type}
+                {...newData}
+                onAddingCompare={onAddingCompare}
+                onAddingShortList={onAddingShortList}
+              />
+            </>
+          )}
+        </div>
       </div>
       <CardDownSection
         a={data.agentListing}

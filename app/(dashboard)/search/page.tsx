@@ -5,6 +5,7 @@ import { LeftSideBlock } from "./components/leftsection/leftSideBlock";
 import { RightSideBlock } from "./components/rightSideBlock";
 import Footer from "@/app/components/layouts/primary/footer";
 import { Toaster } from "react-hot-toast";
+import Dialog from "@/app/test/newui/components/modals/Proj_PropModal";
 type Props = { searchParams: {} };
 const SearchingPage = ({ searchParams }: Props) => {
   return (

@@ -12,6 +12,7 @@ import clsx from "clsx";
 import { formatNumberWithSuffix } from "@/app/utils/numbers";
 import downloadPDF from "@/app/(dashboard)/search/Page/utils";
 import DownloadBrocher from "../../DownloadBrocher";
+import { overlayAtom } from "@/app/test/newui/store/overlay";
 
 type Props = any;
 
@@ -33,9 +34,11 @@ export default function TopRightSection({
   brochureUrl,
   propertyAge,
   facing,
+  propTypeId,
 }: Props) {
   const setSelected = useSetAtom(selectedSearchAtom);
   const [sharePopupData, setSharePopup] = useAtom(searchShareAtom);
+  const dispatch = useSetAtom(overlayAtom);
   const url =
     type === "proj"
       ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/abc/banglore/whitefield/${projIdEnc}`
@@ -54,12 +57,12 @@ export default function TopRightSection({
     <div
       onClick={(e) => e.stopPropagation()}
       className={clsx(
-        "m-[2px]  xl:mr-3 xl:my-2 flex xl:gap-[0.5px] mx-2 max-h-full justify-between items-start flex-row xl:flex-col xl:items-end  ",
-        type !== "proj" && "xl:absolute top-0 right-0"
+        "m-[2px]  xl:mr-3 xl:my-2 flex xl:gap-[0.5px] mx-2 max-h-full justify-between items-start flex-row xl:flex-col xl:items-end  xl:absolute top-0 right-0",
+        type !== "proj" && ""
       )}
     >
       {type === "proj" && (
-        <div className="text-xs hidden xl:flex sm:text-base font-semibold text-black text-nowrap absolute top-3 right-24  sm:top-2 sm:right-[74px]">
+        <div className="text-xs hidden xl:flex sm:text-base font-semibold text-black text-nowrap absolute top-3 right-24  sm:top-0 sm:right-[65px]">
           Avg Price: ₹ {formatNumberWithSuffix(basePrice)}
         </div>
       )}
@@ -206,6 +209,35 @@ export default function TopRightSection({
           {type === "proj" && brochureUrl && (
             <div className="flex  items-end flex-col gap-2">
               <DownloadBrocher brochureUrl={brochureUrl} />
+              <button
+                className="bg-orange-500 text-white py-1 px-2  rounded hover:bg-orange-600 focus:outline-none text-xs "
+                onClick={() =>
+                  dispatch({
+                    type: "OPEN",
+                    content: [
+                      "Swimming Pool",
+                      "Gymnasium",
+                      "Children's Play Area",
+                      "Clubhouse",
+                      "24/7 Security",
+                      "Landscaped Gardens",
+                      "Jogging Track",
+                      "Indoor Games Room",
+                      "Power Backup",
+                      "CCTV Surveillance",
+                      "Yoga Deck",
+                      "Tennis Court",
+                      "Multipurpose Hall",
+                      "Badminton Court",
+                      "Basketball Court",
+                    ],
+                    id: `${projIdEnc}+${propTypeId}`,
+                    title: "Amenities",
+                  })
+                }
+              >
+                14+ Amenities
+              </button>
             </div>
           )}
         </div>
