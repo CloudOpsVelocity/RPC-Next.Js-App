@@ -63,7 +63,7 @@ export const AgeIcon = ({ className }: { className?: string }) => {
   );
 };
 
-export const NewMapIcon = ({ className }: { className?: string }) => {
+export const NewMapIcon = ({ className, ...props }: any) => {
   return (
     <svg
       version="1.1"
@@ -74,6 +74,7 @@ export const NewMapIcon = ({ className }: { className?: string }) => {
       viewBox="0 0 128 128"
       xmlSpace="preserve"
       className={className}
+      {...props}
     >
       <style
         dangerouslySetInnerHTML={{
@@ -104,7 +105,7 @@ export const GrayMapIcon = ({ className }: { className?: string }) => {
       xmlSpace="preserve"
       className={className}
     >
-      <defs/>
+      <defs />
       <g
         style={{
           stroke: "none",

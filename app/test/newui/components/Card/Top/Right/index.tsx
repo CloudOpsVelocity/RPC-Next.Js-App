@@ -62,8 +62,11 @@ export default function TopRightSection({
       )}
     >
       {type === "proj" && (
-        <div className="text-xs hidden xl:flex sm:text-base font-semibold text-black text-nowrap absolute top-3 right-24  sm:top-0 sm:right-[65px]">
-          Avg Price: ₹ {formatNumberWithSuffix(basePrice)}
+        <div className="text-xs hidden xl:flex sm:text-base font-medium text-[#4f4f4f] text-nowrap absolute top-3 right-24  sm:top-0 sm:right-[65px]">
+          Avg Price:{" "}
+          <span className="font-bold">
+            ₹ {formatNumberWithSuffix(basePrice)}
+          </span>
         </div>
       )}
 
@@ -132,7 +135,7 @@ export default function TopRightSection({
               </button>
             )}
             {type === "proj" && (
-              <div className="text-xs sm:hidden  sm:text-base font-semibold text-black  top-2.5 right-24  sm:top-0.5 sm:right-16 mt-1">
+              <div className="text-xs sm:hidden  sm:text-base font-semibold text-[#4f4f4f]  top-2.5 right-24  sm:top-0.5 sm:right-16 mt-1">
                 <p className="text-right text-[12px] text-nowrap">
                   Avg Price: {formatNumberWithSuffix(basePrice)}
                 </p>

@@ -4,6 +4,7 @@ import { NewMapIcon } from "@/app/images/commongsSvgs2";
 import { sortUnits } from "@/app/utils/unitparser";
 import { useSetAtom } from "jotai";
 import { overlayAtom } from "@/app/test/newui/store/overlay";
+import selectedSearchAtom from "@/app/store/search/map";
 
 type Props = any;
 
@@ -29,15 +30,43 @@ export default function ProjData({
   phaseName,
   projIdEnc,
   propTypeId,
+  agentListing,
+  ownerListing,
+  projOrPropName,
+  lat,
+  lang,
+  propIdEnc,
 }: Props) {
   const sortedBhks = sortUnits(bhkNames);
   const dispatch = useSetAtom(overlayAtom);
+  const setSelected = useSetAtom(selectedSearchAtom);
+  const handleClick = () => {
+    // Get the div by ID and scroll to it
+    const element = document.getElementById("mobileMap");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
   return type === "proj" ? (
     <div className="flex flex-col">
       <p className="text-[#001F35] text-[14px] sm:text-[16px] xl:text-[18px] font-bold break-words whitespace-normal min-w-0 inline-flex gap-1 items-center">
         {projName}{" "}
         <span className="text-[12px] sm:text-[14px] ">({phaseName})</span>{" "}
-        <NewMapIcon className="w-4 h-4 block xl:hidden " />
+        <NewMapIcon
+          className="w-4 h-4 block xl:hidden "
+          onClick={() => {
+            handleClick();
+            setSelected({
+              agentListing,
+              ownerListing,
+              projOrPropName,
+              lat,
+              lang,
+              type,
+              reqId: type === "proj" ? projIdEnc : propIdEnc,
+            });
+          }}
+        />
       </p>
 
       <p className="text-[#148B16] text-[14px] sm:text-[18px] xl:text-xl not-italic font-bold relative">
