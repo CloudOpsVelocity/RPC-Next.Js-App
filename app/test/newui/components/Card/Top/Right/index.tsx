@@ -10,6 +10,8 @@ import { searchShareAtom } from "@/app/(dashboard)/search/components/SharePopup"
 import { DownLoadIcon, NewMapIcon } from "@/app/images/commongsSvgs2";
 import clsx from "clsx";
 import { formatNumberWithSuffix } from "@/app/utils/numbers";
+import downloadPDF from "@/app/(dashboard)/search/Page/utils";
+import DownloadBrocher from "../../DownloadBrocher";
 
 type Props = any;
 
@@ -28,6 +30,9 @@ export default function TopRightSection({
   propIdEnc,
   propName,
   basePrice,
+  brochureUrl,
+  propertyAge,
+  facing,
 }: Props) {
   const setSelected = useSetAtom(selectedSearchAtom);
   const [sharePopupData, setSharePopup] = useAtom(searchShareAtom);
@@ -115,16 +120,34 @@ export default function TopRightSection({
                 buttonClass="inline-flex justify-center items-center gap-1 xl:gap-2.5 rounded p-0.5 border-[0.5px] border-solid border-[#00A8CD] text-[#00A8CD] text-[12px]       sm:text-[12px] xl:text-xs not-italic font-semibold ml-auto rounded-full"
               />{" "}
             </div> */}
-            {type === "proj" && (
-              <button className="bg-btnPrimary text-white  rounded-full text-[12px] inline-flex max-w-fit px-1 font-bold justify-center items-center ml-auto mt-[8px]">
+            {type === "proj" && brochureUrl && (
+              <button
+                className="bg-btnPrimary text-white  rounded-full text-[12px] inline-flex max-w-fit px-1 font-bold justify-center items-center ml-auto mt-[8px]"
+                onClick={() => downloadPDF(brochureUrl)}
+              >
                 <DownLoadIcon className="w-[20px] h-[20px]" /> Brochure
               </button>
             )}
+            {type === "proj" && (
+              <div className="text-xs sm:hidden  sm:text-base font-semibold text-black  top-2.5 right-24  sm:top-0.5 sm:right-16 mt-1">
+                <p className="text-right text-[12px] text-nowrap">
+                  Avg Price: {formatNumberWithSuffix(basePrice)}
+                </p>
+                <p className="text-right text-[12px] text-nowrap">
+                  Elevation: G+30
+                </p>
+              </div>
+            )}
 
-            <div className="text-xs sm:hidden  sm:text-base font-semibold text-black  top-2.5 right-24  sm:top-0.5 sm:right-16 mt-1">
-              <p className="text-right text-[14px]">Avg Price</p>
-              <p className="text-left ml-[30px] text-[16px] mt-0.5">₹ 1,234</p>
-            </div>
+            {type !== "proj" && (
+              <>
+                <ListingDownSectionCard label={"Facing"} value={facing} />
+                <ListingDownSectionCard
+                  label={"Property Age"}
+                  value={propertyAge}
+                />
+              </>
+            )}
           </div>
         </>
       )}
@@ -172,16 +195,17 @@ export default function TopRightSection({
             </button>
             {type !== "proj" && (
               <>
-                <ListingDownSectionCard label={"Facing"} value={"East"} />
-                <ListingDownSectionCard label={"Property Age"} value={"2"} />
+                <ListingDownSectionCard label={"Facing"} value={facing} />
+                <ListingDownSectionCard
+                  label={"Property Age"}
+                  value={propertyAge}
+                />
               </>
             )}
           </div>
-          {type === "proj" && (
+          {type === "proj" && brochureUrl && (
             <div className="flex  items-end flex-col gap-2">
-              <button className="bg-btnPrimary text-white  rounded-lg  text-[12px] inline-flex max-w-fit px-2 py-1 font-bold justify-center items-center ml-auto mt-[8px]">
-                <DownLoadIcon className="w-[20px] h-[20px]" /> Brochure
-              </button>
+              <DownloadBrocher brochureUrl={brochureUrl} />
             </div>
           )}
         </div>
@@ -199,12 +223,16 @@ const ListingDownSectionCard = ({
   Icon?: React.JSX.Element;
 }) => {
   return (
-    <div className="flex  justify-center items-center text-right ">
-      <p className="text-[#001F35] text-[12px]  xl:text-sm not-italic font-medium text-wrap  inline-flex">
-        {Icon} {label}:
-      </p>
-      <p className="text-[#242424] text-[14px]  not-italic mt-[1px]">{value}</p>
-    </div>
+    value && (
+      <div className="flex  justify-center items-center text-right ">
+        <p className="text-[#001F35] text-[12px]   xl:text-sm not-italic font-medium text-wrap  inline-flex">
+          {Icon} {label}:
+        </p>
+        <p className="text-[#242424] text-[14px]  not-italic mt-[1px]">
+          {value}
+        </p>
+      </div>
+    )
   );
 };
 

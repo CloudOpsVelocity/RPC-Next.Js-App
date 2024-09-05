@@ -1,6 +1,7 @@
 import { formatCurrency } from "@/app/utils/numbers";
 import React from "react";
 import { NewMapIcon } from "@/app/images/commongsSvgs2";
+import { sortUnits } from "@/app/utils/unitparser";
 
 type Props = any;
 
@@ -20,11 +21,18 @@ export default function ProjData({
   category,
   cityName,
   postedBy,
+  propType,
+  bhkNames,
+  address,
+  phaseName,
 }: Props) {
+  const sortedBhks = sortUnits(bhkNames);
   return type === "proj" ? (
     <div className="flex flex-col">
-      <p className="text-[#001F35] text-[14px] sm:text-[16px] xl:text-[18px] font-bold break-words whitespace-normal min-w-0 inline-flex gap-1">
-        {projName} <NewMapIcon className="w-4 h-4 block sm:hidden mt-0.5" />
+      <p className="text-[#001F35] text-[14px] sm:text-[16px] xl:text-[18px] font-bold break-words whitespace-normal min-w-0 inline-flex gap-1 items-center">
+        {projName}{" "}
+        <span className="text-[12px] sm:text-[14px] ">({phaseName})</span>{" "}
+        <NewMapIcon className="w-4 h-4 block sm:hidden " />
       </p>
 
       <p className="text-[#148B16] text-[14px] sm:text-[18px] xl:text-xl not-italic font-bold relative">
@@ -32,11 +40,19 @@ export default function ProjData({
       </p>
 
       <p className="text-black text-[12px] sm:text-[14px] xl:text-[14px] font-bold">
-        <span>1Rk,2bhk,3bhk,4bhk</span> Apartment For Sale in{" "}
-        {`${locality}, ${city}`}
+        <span>
+          {sortedBhks && sortedBhks?.length > 5
+            ? sortedBhks
+                .filter(
+                  (_, index) => !(_.includes(".5") || _.includes("Servant"))
+                )
+                .join(", ")
+            : sortedBhks && sortedBhks.join(", ")}
+        </span>{" "}
+        {propType} For Sale in {`${locality}, ${city}`}
       </p>
       <p className="text-black text-[12px] sm:text-[16px] xl:text-[14px] capitalize font-medium line-clamp-1">
-        Address: Codename Sector 2, Faridabad-Gurgaon Highway, Gurgaon, India
+        Address: {address}
       </p>
       <p className="text-black text-[12px] sm:text-[14px] xl:text-[14px] font-normal">
         Posted By: <span className="font-bold">{builderName}</span>
@@ -55,7 +71,7 @@ export default function ProjData({
         {propName}{" "}
       </p>
       <p className="text-[#242424] text-[12px] sm:text-[16px] xl:text-[18px] capitalize  not-italic font-medium">
-        {`${localityName}, ${cityName}`}
+        {address}
       </p>
       <p className="text-[#242424]  text-[12px] sm:text-[12px]  xl:text-[14px] not-italic font-normal">
         Posted By:{" "}

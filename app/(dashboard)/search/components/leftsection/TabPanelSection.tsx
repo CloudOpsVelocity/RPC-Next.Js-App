@@ -73,5 +73,3 @@ export default function TabPanelSection({ mutate, serverData }: Props) {
     </div>
   );
 }
-
-const TabSectionData = ["proj", "I", "A"];

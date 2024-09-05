@@ -21,7 +21,7 @@ const bhkMap = new Map([
   ["5+ BHK", 17],
 ]);
 const sortUnits = (units: string[]): string[] => {
-  return units.sort((a, b) => (bhkMap.get(a) ?? 0) - (bhkMap.get(b) ?? 0));
+  return units?.sort((a, b) => (bhkMap.get(a) ?? 0) - (bhkMap.get(b) ?? 0));
 };
 
 const parseUnitStrings = (

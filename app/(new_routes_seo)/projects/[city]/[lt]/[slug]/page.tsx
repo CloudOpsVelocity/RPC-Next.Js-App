@@ -49,7 +49,7 @@ export default async function Page({ params }: Props) {
     />
   );
 }
-export const dynamic = "force-static";
+
 export async function generateStaticParams() {
   // Get the data (mocked here, replace with your actual data fetching logic)
   // const res = await getPagesSlugs("project-list");
@@ -85,3 +85,4 @@ export async function generateStaticParams() {
   return slugs;
 }
 export const dynamicParams = true;
+export const dynamic = "force-dynamic";
