@@ -29,7 +29,6 @@ import FAQJsonLdScript from "@/app/seo/Faqjson";
 import QAJsonLdScript from "@/app/seo/Qnajson";
 import PropertyJsonLdScript from "@/app/seo/Productjson";
 import ArticleJsonLdScript from "@/app/seo/ArticleJson";
-import { notFound } from "next/navigation";
 import Reviews from "@/app/components/project/reviews";
 type Props = {
   projResponse: any;
@@ -81,21 +80,26 @@ export default async function ProjectsDetailsPage({
         name="twitter:description"
         content={`${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`}
       />
-      <meta name="twitter:image" content={data.media?.coverImageUrl}/>
+      <meta name="twitter:image" content={data.media?.coverImageUrl} />
       <FAQJsonLdScript data={data} />
       <QAJsonLdScript data={data} />
       <PropertyJsonLdScript data={data} />
       <ArticleJsonLdScript data={data} />
       <div className="mt-[70px] sm:mt-[90px] w-full sm:pb-[2%] flex xl:text-ellipsis items-center justify-center flex-col ">
         <div className="p-[1%] sm:p-[1%] sm:py-0 xl:p-[1%] w-full sm:w-[94%]">
-          <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%]"> 
-            <a className="hover:underline cursor-pointer" href={"/"}>Home</a> {" > "}
+          <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%]">
+            <a className="hover:underline cursor-pointer" href={"/"}>
+              Home
+            </a>{" "}
+            {" > "}
             <Link href={"/project/banglore"}>
               <span>Projects In {data.cityName}</span>
             </Link>{" "}
             {" > "}
             <Link href={"/project/banglore/whitefield"}>
-              <span className="hover:underline cursor-pointer">Projects In {`${data.localityName} `}</span>
+              <span className="hover:underline cursor-pointer">
+                Projects In {`${data.localityName} `}
+              </span>
             </Link>{" "}
             {" > "}
             <span>{data.projectName}</span>

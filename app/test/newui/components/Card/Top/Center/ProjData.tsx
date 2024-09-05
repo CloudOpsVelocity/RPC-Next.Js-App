@@ -24,12 +24,15 @@ export default function ProjData({
   propType,
   bhkNames,
   address,
+  phaseName,
 }: Props) {
   const sortedBhks = sortUnits(bhkNames);
   return type === "proj" ? (
     <div className="flex flex-col">
-      <p className="text-[#001F35] text-[14px] sm:text-[16px] xl:text-[18px] font-bold break-words whitespace-normal min-w-0 inline-flex gap-1">
-        {projName} <NewMapIcon className="w-4 h-4 block sm:hidden mt-0.5" />
+      <p className="text-[#001F35] text-[14px] sm:text-[16px] xl:text-[18px] font-bold break-words whitespace-normal min-w-0 inline-flex gap-1 items-center">
+        {projName}{" "}
+        <span className="text-[12px] sm:text-[14px] ">({phaseName})</span>{" "}
+        <NewMapIcon className="w-4 h-4 block sm:hidden " />
       </p>
 
       <p className="text-[#148B16] text-[14px] sm:text-[18px] xl:text-xl not-italic font-bold relative">

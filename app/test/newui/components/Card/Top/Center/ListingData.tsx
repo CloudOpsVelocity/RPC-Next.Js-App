@@ -26,8 +26,12 @@ export default function ListingData({
   bathroom,
   ownership,
   coverParking,
+  propTypeId,
+  minPa,
+  maxPa,
 }: Props) {
   const isMobile = useMediaQuery("(max-width: 1600px)");
+  const isPlot = propTypeId == 32;
   return (
     <>
       {" "}
@@ -59,25 +63,28 @@ export default function ListingData({
               className="flex md:hidden"
             /> */}
             <DownSectionCard
-              label="Super Builtup Area"
+              label={isPlot ? "Plot Area" : "Super Builtup Area"}
               value={`${formatNumberWithSuffix(
-                minSba
-              )}-${formatNumberWithSuffix(maxSba)} sqft`}
+                isPlot ? minPa : minSba
+              )}-${formatNumberWithSuffix(isPlot ? maxPa : maxSba)} sqft`}
             />
             {/* <Divider orientation="vertical" color="#7BA0BB" /> */}
             {/* <br /> */}
-            <DownSectionCard
-              label="Carpet Area"
-              value={`${formatNumberWithSuffix(minCa)}-${formatNumberWithSuffix(
-                maxCa
-              )} sqft`}
-            />
+            {!isPlot && (
+              <DownSectionCard
+                label="Carpet Area"
+                value={`${formatNumberWithSuffix(
+                  minCa
+                )}-${formatNumberWithSuffix(maxCa)} sqft`}
+              />
+            )}
+
             {/* <Divider orientation="vertical" color="#7BA0BB" /> */}
             <DownSectionCard
               label={type == "proj" ? "Land Area" : "Property Age"}
               value={
                 type == "proj"
-                  ? `${landArea ?? 0} Acres`
+                  ? `${landArea ?? 0} Sqft`
                   : `${propertyAge ?? 0} Years`
               }
             />
@@ -85,7 +92,7 @@ export default function ListingData({
               label={"No. of Units"}
               value={formatNumberWithSuffix(noOfUnits)}
             />
-            {!isMobile && (
+            {!isMobile && !isPlot && (
               <DownSectionCard label={"Elevation"} value={`G+${noOfTowers}`} />
             )}
           </div>
