@@ -2,10 +2,17 @@ import React, { useEffect, useRef } from "react";
 import { useAtom } from "jotai";
 import { overlayAtom } from "../../store/overlay";
 import { IoIosCloseCircle } from "react-icons/io";
+import { useQuery } from "react-query";
+import { getAmenties } from "@/app/utils/api/project";
 
 const Overlay: React.FC = () => {
   const [overlayState, dispatch] = useAtom(overlayAtom);
-  const { isOpen, content, title } = overlayState;
+  const { isOpen, content, title, id } = overlayState;
+  const { data: amenitiesFromDB, isLoading } = useQuery({
+    queryKey: [id],
+    queryFn: getAmenties,
+    enabled: isOpen && title === "Amenities",
+  });
   const overlayRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -47,7 +54,45 @@ const Overlay: React.FC = () => {
         </div>
         <div className="p-1 border-t">
           <div className="px-2 text-xs sm:text-base">
-            {Array.isArray(content) ? (
+            {title === "Amenities" ? (
+              <div className="flex flex-wrap gap-2">
+                {isLoading ? (
+                  <div>Loading...</div>
+                ) : amenitiesFromDB && Array.isArray(content) ? (
+                  content?.map((eachItem: any) => {
+                    return (
+                      amenitiesFromDB != undefined &&
+                      amenitiesFromDB != null &&
+                      Object.keys(amenitiesFromDB).map((group, ind) => {
+                        return (
+                          amenitiesFromDB != undefined &&
+                          amenitiesFromDB != null &&
+                          amenitiesFromDB[`${group}`] != undefined &&
+                          amenitiesFromDB[`${group}`] != null &&
+                          amenitiesFromDB[`${group}`].length != 0 &&
+                          amenitiesFromDB[group].map((eachOne: any) => {
+                            if (eachOne.cid == eachItem.id) {
+                              return (
+                                <span
+                                  key={`aminity_Box_${eachItem.id}`}
+                                  className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs sm:text-sm font-medium"
+                                >
+                                  {eachOne.constDesc}
+                                </span>
+                              );
+                            } else {
+                              return null;
+                            }
+                          })
+                        );
+                      })
+                    );
+                  })
+                ) : (
+                  <div>No amenities available</div>
+                )}
+              </div>
+            ) : Array.isArray(content) ? (
               <div className="flex flex-wrap gap-2">
                 {content.map((item, index) => (
                   <span

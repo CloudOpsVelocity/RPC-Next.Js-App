@@ -127,12 +127,217 @@ export default function TopRightSection({
               />{" "}
             </div> */}
             {type === "proj" && brochureUrl && (
-              <button
-                className="bg-btnPrimary text-white  rounded-full text-[12px] inline-flex max-w-fit px-1 font-bold justify-center items-center ml-auto mt-[8px]"
-                onClick={() => downloadPDF(brochureUrl)}
-              >
-                <DownLoadIcon className="w-[20px] h-[20px]" /> Brochure
-              </button>
+              <div className="flex flex-col space-y-1">
+                {" "}
+                <DownloadBrocher brochureUrl={brochureUrl} />
+                <button
+                  className="bg-orange-500 text-white sm:py-1 sm:px-2 font-bold  rounded hover:bg-orange-600 focus:outline-none text-xs "
+                  onClick={() =>
+                    dispatch({
+                      type: "OPEN",
+                      content: [
+                        {
+                          name: "",
+                          id: 323,
+                        },
+                        {
+                          name: "",
+                          id: 324,
+                        },
+                        {
+                          name: "",
+                          id: 261,
+                        },
+                        {
+                          name: "",
+                          id: 325,
+                        },
+                        {
+                          name: "",
+                          id: 262,
+                        },
+                        {
+                          name: "",
+                          id: 326,
+                        },
+                        {
+                          name: "",
+                          id: 263,
+                        },
+                        {
+                          name: "",
+                          id: 327,
+                        },
+                        {
+                          name: "",
+                          id: 264,
+                        },
+                        {
+                          name: "",
+                          id: 328,
+                        },
+                        {
+                          name: "",
+                          id: 329,
+                        },
+                        {
+                          name: "",
+                          id: 202,
+                        },
+                        {
+                          name: "",
+                          id: 203,
+                        },
+                        {
+                          name: "",
+                          id: 205,
+                        },
+                        {
+                          name: "",
+                          id: 206,
+                        },
+                        {
+                          name: "",
+                          id: 340,
+                        },
+                        {
+                          name: "",
+                          id: 341,
+                        },
+                        {
+                          name: "",
+                          id: 342,
+                        },
+                        {
+                          name: "",
+                          id: 343,
+                        },
+                        {
+                          name: "",
+                          id: 344,
+                        },
+                        {
+                          name: "",
+                          id: 221,
+                        },
+                        {
+                          name: "",
+                          id: 222,
+                        },
+                        {
+                          name: "",
+                          id: 224,
+                        },
+                        {
+                          name: "",
+                          id: 289,
+                        },
+                        {
+                          name: "",
+                          id: 290,
+                        },
+                        {
+                          name: "",
+                          id: 291,
+                        },
+                        {
+                          name: "",
+                          id: 229,
+                        },
+                        {
+                          name: "",
+                          id: 230,
+                        },
+                        {
+                          name: "",
+                          id: 231,
+                        },
+                        {
+                          name: "",
+                          id: 235,
+                        },
+                        {
+                          name: "",
+                          id: 236,
+                        },
+                        {
+                          name: "",
+                          id: 238,
+                        },
+                        {
+                          name: "",
+                          id: 305,
+                        },
+                        {
+                          name: "",
+                          id: 306,
+                        },
+                        {
+                          name: "",
+                          id: 307,
+                        },
+                        {
+                          name: "",
+                          id: 308,
+                        },
+                        {
+                          name: "",
+                          id: 309,
+                        },
+                        {
+                          name: "",
+                          id: 310,
+                        },
+                        {
+                          name: "",
+                          id: 311,
+                        },
+                        {
+                          name: "",
+                          id: 312,
+                        },
+                        {
+                          name: "",
+                          id: 313,
+                        },
+                      ],
+                      id: `${projIdEnc}+${propTypeId}`,
+                      title: "Amenities",
+                    })
+                  }
+                >
+                  <span className="hidden sm:block">14+</span> Amenities
+                </button>
+                <button
+                  className="bg-teal-500 text-white font-bold sm:py-1 sm:px-2 text-xs rounded shadow-lg hover:bg-teal-600 transition duration-300 ease-in-out"
+                  onClick={() =>
+                    dispatch({
+                      type: "OPEN",
+                      content: [
+                        "Orion Mall",
+                        "Apollo Hospital",
+                        "Greenwood High International School",
+                        "MG Road Metro Station",
+                        "Major Bus Stop",
+                        "City Park",
+                        "Central Library",
+                        "Fitness Center",
+                        "Local Market",
+                        "Coffee Shop",
+                        "Bank",
+                        "Post Office",
+                        "Restaurant",
+                        "Pharmacy",
+                        "Veterinary Clinic",
+                      ],
+                      id: `${projIdEnc}+${propTypeId}`,
+                      title: `NearBy Locations of ${projName}`,
+                    })
+                  }
+                >
+                  Nearby
+                </button>
+              </div>
             )}
             {type === "proj" && (
               <div className="text-xs sm:hidden  sm:text-base font-semibold text-[#4f4f4f]  top-2.5 right-24  sm:top-0.5 sm:right-16 mt-1">
@@ -218,21 +423,170 @@ export default function TopRightSection({
                   dispatch({
                     type: "OPEN",
                     content: [
-                      "Swimming Pool",
-                      "Gymnasium",
-                      "Children's Play Area",
-                      "Clubhouse",
-                      "24/7 Security",
-                      "Landscaped Gardens",
-                      "Jogging Track",
-                      "Indoor Games Room",
-                      "Power Backup",
-                      "CCTV Surveillance",
-                      "Yoga Deck",
-                      "Tennis Court",
-                      "Multipurpose Hall",
-                      "Badminton Court",
-                      "Basketball Court",
+                      {
+                        name: "",
+                        id: 323,
+                      },
+                      {
+                        name: "",
+                        id: 324,
+                      },
+                      {
+                        name: "",
+                        id: 261,
+                      },
+                      {
+                        name: "",
+                        id: 325,
+                      },
+                      {
+                        name: "",
+                        id: 262,
+                      },
+                      {
+                        name: "",
+                        id: 326,
+                      },
+                      {
+                        name: "",
+                        id: 263,
+                      },
+                      {
+                        name: "",
+                        id: 327,
+                      },
+                      {
+                        name: "",
+                        id: 264,
+                      },
+                      {
+                        name: "",
+                        id: 328,
+                      },
+                      {
+                        name: "",
+                        id: 329,
+                      },
+                      {
+                        name: "",
+                        id: 202,
+                      },
+                      {
+                        name: "",
+                        id: 203,
+                      },
+                      {
+                        name: "",
+                        id: 205,
+                      },
+                      {
+                        name: "",
+                        id: 206,
+                      },
+                      {
+                        name: "",
+                        id: 340,
+                      },
+                      {
+                        name: "",
+                        id: 341,
+                      },
+                      {
+                        name: "",
+                        id: 342,
+                      },
+                      {
+                        name: "",
+                        id: 343,
+                      },
+                      {
+                        name: "",
+                        id: 344,
+                      },
+                      {
+                        name: "",
+                        id: 221,
+                      },
+                      {
+                        name: "",
+                        id: 222,
+                      },
+                      {
+                        name: "",
+                        id: 224,
+                      },
+                      {
+                        name: "",
+                        id: 289,
+                      },
+                      {
+                        name: "",
+                        id: 290,
+                      },
+                      {
+                        name: "",
+                        id: 291,
+                      },
+                      {
+                        name: "",
+                        id: 229,
+                      },
+                      {
+                        name: "",
+                        id: 230,
+                      },
+                      {
+                        name: "",
+                        id: 231,
+                      },
+                      {
+                        name: "",
+                        id: 235,
+                      },
+                      {
+                        name: "",
+                        id: 236,
+                      },
+                      {
+                        name: "",
+                        id: 238,
+                      },
+                      {
+                        name: "",
+                        id: 305,
+                      },
+                      {
+                        name: "",
+                        id: 306,
+                      },
+                      {
+                        name: "",
+                        id: 307,
+                      },
+                      {
+                        name: "",
+                        id: 308,
+                      },
+                      {
+                        name: "",
+                        id: 309,
+                      },
+                      {
+                        name: "",
+                        id: 310,
+                      },
+                      {
+                        name: "",
+                        id: 311,
+                      },
+                      {
+                        name: "",
+                        id: 312,
+                      },
+                      {
+                        name: "",
+                        id: 313,
+                      },
                     ],
                     id: `${projIdEnc}+${propTypeId}`,
                     title: "Amenities",

@@ -3,7 +3,7 @@ import React from "react";
 
 // Define action types
 type OverlayAction =
-  | { type: "OPEN"; content: React.ReactNode; id: string; title: string }
+  | { type: "OPEN"; content: any; id: string; title: string }
   | { type: "CLOSE" };
 
 // Define the state type
