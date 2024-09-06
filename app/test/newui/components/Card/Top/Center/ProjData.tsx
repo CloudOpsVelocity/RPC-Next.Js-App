@@ -50,7 +50,7 @@ export default function ProjData({
 
   return type === "proj" ? (
     <div className="flex flex-col">
-      <p className="text-[#001F35] text-[16px] sm:text-[16px] xl:text-[18px] font-bold break-words whitespace-normal min-w-0 inline-flex gap-1 items-center flex-wrap">
+      <p className="text-[#001F35] text-[15px] sm:text-[16px] xl:text-[18px] font-bold break-words whitespace-normal min-w-0 inline-flex gap-1 items-center flex-wrap">
         {projName}{" "}
         <span className="text-[12px] sm:text-[14px] ">({phaseName})</span>
         <button
@@ -68,7 +68,7 @@ export default function ProjData({
             });
           }}
         >
-          <NewMapIcon className="w-6 h-6" />
+          <NewMapIcon className="w-5 h-5" />
         </button>
       </p>
 
