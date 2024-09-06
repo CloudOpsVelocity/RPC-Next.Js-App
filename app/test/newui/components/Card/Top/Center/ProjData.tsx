@@ -4,7 +4,9 @@ import { NewMapIcon } from "@/app/images/commongsSvgs2";
 import { sortUnits } from "@/app/utils/unitparser";
 import { useSetAtom } from "jotai";
 import { overlayAtom } from "@/app/test/newui/store/overlay";
-import selectedSearchAtom from "@/app/store/search/map";
+import selectedSearchAtom, {
+  mobileSearchPageMapModalReducerAtom,
+} from "@/app/store/search/map";
 
 type Props = any;
 
@@ -40,6 +42,7 @@ export default function ProjData({
   const sortedBhks = sortUnits(bhkNames);
   const dispatch = useSetAtom(overlayAtom);
   const setSelected = useSetAtom(selectedSearchAtom);
+  const mobileMapDispatch = useSetAtom(mobileSearchPageMapModalReducerAtom);
   const handleClick = () => {
     // Get the div by ID and scroll to it
     const element = document.getElementById("mobileMap");
@@ -57,15 +60,23 @@ export default function ProjData({
         <NewMapIcon
           className="w-5 h-5 sm:hidden"
           onClick={() => {
-            handleClick();
-            setSelected({
-              agentListing,
-              ownerListing,
-              projOrPropName: type === "proj" ? projName : propName,
-              lat,
-              lang,
-              type,
-              reqId: type === "proj" ? projIdEnc : propIdEnc,
+            // handleClick();
+            // setSelected({
+            //   agentListing,
+            //   ownerListing,
+            //   projOrPropName: type === "proj" ? projName : propName,
+            //   lat,
+            //   lang,
+            //   type,
+            //   reqId: type === "proj" ? projIdEnc : propIdEnc,
+            // });
+            mobileMapDispatch({
+              type: "open",
+              payload: {
+                lat: 13.00402,
+                lang: 77.68777899999999,
+                title: "Sobha Dream Acres",
+              },
             });
           }}
         />

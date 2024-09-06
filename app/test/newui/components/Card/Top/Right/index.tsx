@@ -53,7 +53,6 @@ export default function TopRightSection({
       element.scrollIntoView({ behavior: "smooth" });
     }
   };
-  console.log(basePrice);
   return (
     <div
       onClick={(e) => e.stopPropagation()}
@@ -126,10 +125,10 @@ export default function TopRightSection({
                 buttonClass="inline-flex justify-center items-center gap-1 xl:gap-2.5 rounded p-0.5 border-[0.5px] border-solid border-[#00A8CD] text-[#00A8CD] text-[12px]       sm:text-[12px] xl:text-xs not-italic font-semibold ml-auto rounded-full"
               />{" "}
             </div> */}
-            {type === "proj" && brochureUrl && (
+            {type === "proj" && (
               <div className="flex flex-col space-y-1 justify-end items-end">
                 {" "}
-                <DownloadBrocher brochureUrl={brochureUrl} />
+                {brochureUrl && <DownloadBrocher brochureUrl={brochureUrl} />}
                 <button
                   className="bg-orange-500 text-white text-right max-w-fit  px-1 sm:py-1 sm:px-2 font-bold  rounded hover:bg-orange-600 focus:outline-none text-xs text-nowrap  inline-flex"
                   onClick={() =>

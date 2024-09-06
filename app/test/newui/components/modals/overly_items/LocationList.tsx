@@ -23,11 +23,9 @@ const LocationCard: React.FC<LocationCardProps> = ({ data }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>(
     Object.keys(data)[0]
   );
-
   const handleTabClick = (category: string) => {
     setSelectedCategory(category);
   };
-
   return (
     <div className="relative bg-white rounded-lg shadow-md overflow-hidden  w-full">
       {/* Tabs */}
@@ -50,7 +48,7 @@ const LocationCard: React.FC<LocationCardProps> = ({ data }) => {
       </div>
       {/* Content */}
       <div className=" overflow-y-auto ">
-        {data[selectedCategory].length > 0 ? (
+        {data && data[selectedCategory] && data[selectedCategory].length > 0 ? (
           <ul className="space-y-2 grid grid-cols-2 ">
             {data[selectedCategory].map((item) => (
               <li
