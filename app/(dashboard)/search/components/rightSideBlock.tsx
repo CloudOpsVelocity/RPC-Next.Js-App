@@ -24,7 +24,10 @@ const RightSideBlock = ({ serverData }: any) => {
       ? serverData
       : data;
   return (
-    <div className="w-[100%] sm:w-[50%]  flex justify-start items-start z-[1] md:w-[50%] ">
+    <div
+      className="w-[100%] sm:w-[50%]  flex justify-start items-start z-[1] md:w-[50%] scroll-mt-[150px]"
+      id="mobileMap"
+    >
       <Map
         projName={"Searched Location"}
         lat={(serverClientData && serverClientData[0]?.lat) ?? 47.46489}

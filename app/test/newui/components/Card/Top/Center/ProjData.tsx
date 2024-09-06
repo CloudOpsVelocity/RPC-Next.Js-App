@@ -47,6 +47,15 @@ export default function ProjData({
       element.scrollIntoView({ behavior: "smooth" });
     }
   };
+  console.log({
+    agentListing,
+    ownerListing,
+    projOrPropName,
+    lat,
+    lang,
+    type,
+    reqId: type === "proj" ? projIdEnc : propIdEnc,
+  });
   return type === "proj" ? (
     <div className="flex flex-col">
       <p className="text-[#001F35] text-[16px] sm:text-[16px] xl:text-[18px] font-bold break-words whitespace-normal min-w-0 inline-flex gap-1 items-center flex-wrap">
@@ -59,7 +68,7 @@ export default function ProjData({
             setSelected({
               agentListing,
               ownerListing,
-              projOrPropName,
+              projOrPropName: type === "proj" ? projName : propName,
               lat,
               lang,
               type,
