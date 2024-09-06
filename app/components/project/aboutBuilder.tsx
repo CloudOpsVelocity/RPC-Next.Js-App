@@ -25,7 +25,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
 
   return (
     <div
-      className="w-[95%] md:w-[90%] scroll-mt-[150px] mb-[5%] !mt-[50px] sm:mb-[0%] rounded shadow-[0px_4px_17.6px_0px_rgba(146,178,200,0.40)] border-[0.5px] border-solid border-[#92B2C8] builderBg pt-4 pb-4 md:pb-6 sm:mt-0 sm:py-8 sm:pl-5 px-2 sm:px-0 "
+      className="w-[95%] md:w-[90%] scroll-mt-[150px] mb-[5%] !mt-[50px] sm:mb-[0%] rounded shadow-[0px_4px_17.6px_0px_rgba(146,178,200,0.40)] border-[0.5px] border-solid border-[#92B2C8]  pt-4 pb-4 md:pb-6 sm:mt-0 sm:py-8 sm:pl-5 px-2 sm:px-0 "
       id="aboutBuilder"
     >
       <div>
@@ -34,7 +34,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
             About Builder
           </h2>
 
-          <div className="inline-flex justify-end items-end ">
+          <div className="inline-flex justify-center items-center ">
             <Image
               src={
                 nzData.logo
@@ -44,7 +44,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
               width={130}
               height={130}
               alt="logo"
-              className="shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] border-2 border-solid border-[#96C5E4] w-[90px] h-[90px] sm:h-[130px] sm:w-[130px]"
+              className="object-contain h-[93px] w-[93px] sm:h-[100px] sm:w-[133px] xl:h-[150px] xl:w-[158px]"
             />
             <p className=" text-[#148B16]  text-h2 sm:text-[20px] xl:text-[26px] font-[700] ml-3">
               {nzData.userName}
@@ -54,7 +54,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
             </p>
           </div>
         </div>
-        <div className="sm:rounded-[20px] mt-[1%] flex justify-between items-center bg-[#FFF] shadow-md w-[100%] mb-[2%] sm:w-[75%] xl:w-[50%] p-[1%] ">
+        <div className="sm:rounded-[20px] mt-[1%] flex justify-between items-center builderBg shadow-md w-[100%] mb-[2%] sm:w-[75%] xl:w-[50%] p-[1%] ">
           <div className="w-[30%] border-solid border-[#92B2C8] border-r-[1px]">
             <p className=" text-[#202020]  text-[14px] sm:text-[20px] xl:text-[24px] font-[700]">
               {nzData.newProject}
