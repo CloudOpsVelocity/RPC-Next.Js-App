@@ -53,8 +53,9 @@ export default function ProjData({
       <p className="text-[#001F35] text-[15px] sm:text-[16px] xl:text-[18px] font-bold break-words whitespace-normal min-w-0 inline-flex gap-1 items-center flex-wrap">
         {projName}{" "}
         <span className="text-[12px] sm:text-[14px] ">({phaseName})</span>
-        <button
-          className="w-6 h-6 p-1.5 flex items-center justify-center rounded-full bg-blue-500 text-white hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 xl:hidden"
+        {/* <button className="w-6 h-6 p-1.5 flex items-center justify-center rounded-full bg-blue-500 text-white hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 xl:hidden"> */}
+        <NewMapIcon
+          className="w-5 h-5 sm:hidden"
           onClick={() => {
             handleClick();
             setSelected({
@@ -67,9 +68,8 @@ export default function ProjData({
               reqId: type === "proj" ? projIdEnc : propIdEnc,
             });
           }}
-        >
-          <NewMapIcon className="w-5 h-5" />
-        </button>
+        />
+        {/* </button> */}
       </p>
 
       <p className="text-[#148B16] text-[14px] sm:text-[18px] xl:text-xl not-italic font-bold relative">
