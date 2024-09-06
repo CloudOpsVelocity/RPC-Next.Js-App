@@ -152,6 +152,7 @@ export default function ListingData({
                     id: `${projIdEnc}+${propTypeId}`,
                     title: "About Project",
                     type: "OPEN",
+                    conType: "readmore",
                   });
                 }}
               >

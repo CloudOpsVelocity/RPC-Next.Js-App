@@ -97,6 +97,7 @@ export default function ProjData({
                 content: sortedBhks,
                 title: "Unit Types",
                 id: `${projIdEnc}+${propTypeId}`,
+                conType: "bhk",
               });
               // Add your logic here to show all BHK types (e.g., open a modal)
             }}
@@ -111,7 +112,10 @@ export default function ProjData({
         Address: {address}
       </p>
       <p className="text-black text-[12px] sm:text-[14px] xl:text-[14px] font-normal">
-        Posted By: <span className="font-bold">{builderName}</span>
+        Posted By:{" "}
+        <span className="font-bold underline cursor-pointer">
+          {builderName}
+        </span>
       </p>
     </div>
   ) : (

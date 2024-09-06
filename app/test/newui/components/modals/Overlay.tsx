@@ -2,16 +2,17 @@ import React, { useEffect, useRef } from "react";
 import { useAtom } from "jotai";
 import { overlayAtom } from "../../store/overlay";
 import { IoIosCloseCircle } from "react-icons/io";
-import { useQuery } from "react-query";
-import { getAmenties } from "@/app/utils/api/project";
+import useProjectCardData from "../../useProjectCardData";
+import LocationList from "./overly_items/LocationList";
+import LocationCard from "./overly_items/LocationList";
 
 const Overlay: React.FC = () => {
   const [overlayState, dispatch] = useAtom(overlayAtom);
-  const { isOpen, content, title, id } = overlayState;
-  const { data: amenitiesFromDB, isLoading } = useQuery({
-    queryKey: [id],
-    queryFn: getAmenties,
-    enabled: isOpen && title === "Amenities",
+  const { isOpen, content, title, id, conType } = overlayState;
+  const { data: amenitiesFromDB, isLoading } = useProjectCardData({
+    id: id ?? "",
+    isOpen,
+    conType,
   });
   const overlayRef = useRef<HTMLDivElement>(null);
 
@@ -34,12 +35,67 @@ const Overlay: React.FC = () => {
     };
   }, [isOpen, dispatch]);
 
+  const renderAmenities = () => {
+    if (isLoading) return <div>Loading...</div>;
+    if (!amenitiesFromDB || !Array.isArray(content))
+      return <div>No amenities available</div>;
+
+    return content.map((eachItem: any) =>
+      Object.keys(amenitiesFromDB).map((group) =>
+        amenitiesFromDB[group]?.map((eachOne: any) =>
+          eachOne.cid === eachItem.id ? (
+            <span
+              key={`amenity_${eachItem.id}`}
+              className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs sm:text-sm font-medium"
+            >
+              {eachOne.constDesc}
+            </span>
+          ) : null
+        )
+      )
+    );
+  };
+  const renderContent = () => {
+    switch (conType) {
+      case "amenities":
+        return <div className="flex flex-wrap gap-2">{renderAmenities()}</div>;
+      case "nearby":
+        return (
+          <p>
+            {isLoading ? "Loading..." : <LocationCard data={amenitiesFromDB} />}
+          </p>
+        );
+      case "readmore":
+        return <p>{content}</p>;
+      case "bhk":
+        return (
+          <div className="flex flex-wrap gap-2">
+            {Array.isArray(content) ? (
+              content.map((item) => (
+                <span
+                  key={`bhk_${item}`}
+                  className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs sm:text-sm font-medium"
+                >
+                  {item}
+                </span>
+              ))
+            ) : (
+              <div>No BHK data available</div>
+            )}
+          </div>
+        );
+      case "none":
+      default:
+        return <div>{content}</div>;
+    }
+  };
+
   if (!isOpen) return null;
 
   return (
-    <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 ">
+    <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       <div
-        className="bg-white rounded-lg shadow-lg max-w-[90%] w-full max-h-[200px] overflow-y-auto "
+        className="bg-white rounded-lg shadow-lg max-w-[90%] w-full max-h-[200px] overflow-y-auto"
         ref={overlayRef}
         onClick={(e) => e.stopPropagation()}
       >
@@ -53,60 +109,7 @@ const Overlay: React.FC = () => {
           />
         </div>
         <div className="p-1 border-t">
-          <div className="px-2 text-xs sm:text-base">
-            {title === "Amenities" ? (
-              <div className="flex flex-wrap gap-2">
-                {isLoading ? (
-                  <div>Loading...</div>
-                ) : amenitiesFromDB && Array.isArray(content) ? (
-                  content?.map((eachItem: any) => {
-                    return (
-                      amenitiesFromDB != undefined &&
-                      amenitiesFromDB != null &&
-                      Object.keys(amenitiesFromDB).map((group, ind) => {
-                        return (
-                          amenitiesFromDB != undefined &&
-                          amenitiesFromDB != null &&
-                          amenitiesFromDB[`${group}`] != undefined &&
-                          amenitiesFromDB[`${group}`] != null &&
-                          amenitiesFromDB[`${group}`].length != 0 &&
-                          amenitiesFromDB[group].map((eachOne: any) => {
-                            if (eachOne.cid == eachItem.id) {
-                              return (
-                                <span
-                                  key={`aminity_Box_${eachItem.id}`}
-                                  className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs sm:text-sm font-medium"
-                                >
-                                  {eachOne.constDesc}
-                                </span>
-                              );
-                            } else {
-                              return null;
-                            }
-                          })
-                        );
-                      })
-                    );
-                  })
-                ) : (
-                  <div>No amenities available</div>
-                )}
-              </div>
-            ) : Array.isArray(content) ? (
-              <div className="flex flex-wrap gap-2">
-                {content.map((item, index) => (
-                  <span
-                    key={index}
-                    className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs sm:text-sm font-medium"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
-            ) : (
-              <div>{content}</div>
-            )}
-          </div>
+          <div className="px-2 text-xs sm:text-base">{renderContent()}</div>
           <div className="flex justify-end p-2">
             <button
               className="bg-blue-500 text-white py-1 px-2 sm:px-4 sm:py-2 rounded hover:bg-blue-600 focus:outline-none text-xs sm:text-base"

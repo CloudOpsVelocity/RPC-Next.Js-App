@@ -304,6 +304,7 @@ export default function TopRightSection({
                       ],
                       id: `${projIdEnc}+${propTypeId}`,
                       title: "Amenities",
+                      conType: "amenities",
                     })
                   }
                 >
@@ -333,6 +334,7 @@ export default function TopRightSection({
                       ],
                       id: `${projIdEnc}+${propTypeId}`,
                       title: `NearBy Locations of ${projName}`,
+                      conType: "nearby",
                     })
                   }
                 >
@@ -591,6 +593,7 @@ export default function TopRightSection({
                     ],
                     id: `${projIdEnc}+${propTypeId}`,
                     title: "Amenities",
+                    conType: "amenities",
                   })
                 }
               >
@@ -620,6 +623,7 @@ export default function TopRightSection({
                     ],
                     id: `${projIdEnc}+${propTypeId}`,
                     title: `NearBy Locations of ${projName}`,
+                    conType: "nearby",
                   })
                 }
               >
