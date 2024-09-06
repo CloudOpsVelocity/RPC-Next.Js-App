@@ -79,14 +79,14 @@ export const NewMapIcon = ({ className, ...props }: any) => {
       <style
         dangerouslySetInnerHTML={{
           __html:
-            ".st0,.st1{display:none;fill:#03adfc}.st1,.st4{fill-rule:evenodd;clip-rule:evenodd}.st4,.st5{display:inline;fill:#03adfc}",
+            ".st0,.st1{display:none;fill:#ffffff}.st1,.st4{fill-rule:evenodd;clip-rule:evenodd}.st4,.st5{display:inline;fill:#ffffff}",
         }}
       />
       <g id="row1">
         <path
           id="nav:4"
           d="M64 1C38.8 1 18.3 21.2 18.3 46S64 127 64 127s45.7-56.2 45.7-81S89.2 1 64 1zm0 73.9c-16.6 0-30-13.2-30-29.5C34 29 47.4 15.8 64 15.8S94 29 94 45.3 80.6 74.9 64 74.9z"
-          style={{ fillRule: "evenodd", clipRule: "evenodd", fill: "#03adfc" }}
+          style={{ fillRule: "evenodd", clipRule: "evenodd", fill: "#ffffff" }}
         />
       </g>
     </svg>

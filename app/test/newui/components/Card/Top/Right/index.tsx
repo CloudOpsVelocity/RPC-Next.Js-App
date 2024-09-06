@@ -63,7 +63,7 @@ export default function TopRightSection({
     >
       {type === "proj" && (
         <div className="text-xs hidden xl:flex sm:text-base font-medium text-[#4f4f4f] text-nowrap absolute top-3 right-24  sm:top-0 sm:right-[65px]">
-          Avg Price:₹{" "}
+          Avg Price:
           <span className="font-bold">
             ₹ {formatNumberWithSuffix(basePrice)}
           </span>

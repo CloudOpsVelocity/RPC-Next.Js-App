@@ -47,22 +47,14 @@ export default function ProjData({
       element.scrollIntoView({ behavior: "smooth" });
     }
   };
-  console.log({
-    agentListing,
-    ownerListing,
-    projOrPropName,
-    lat,
-    lang,
-    type,
-    reqId: type === "proj" ? projIdEnc : propIdEnc,
-  });
+
   return type === "proj" ? (
     <div className="flex flex-col">
       <p className="text-[#001F35] text-[16px] sm:text-[16px] xl:text-[18px] font-bold break-words whitespace-normal min-w-0 inline-flex gap-1 items-center flex-wrap">
         {projName}{" "}
-        <span className="text-[12px] sm:text-[14px] ">({phaseName})</span>{" "}
-        <NewMapIcon
-          className="w-4 h-4 block xl:hidden "
+        <span className="text-[12px] sm:text-[14px] ">({phaseName})</span>
+        <button
+          className="w-6 h-6 p-1.5 flex items-center justify-center rounded-full bg-blue-500 text-white hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 xl:hidden"
           onClick={() => {
             handleClick();
             setSelected({
@@ -75,7 +67,9 @@ export default function ProjData({
               reqId: type === "proj" ? projIdEnc : propIdEnc,
             });
           }}
-        />
+        >
+          <NewMapIcon className="w-6 h-6" />
+        </button>
       </p>
 
       <p className="text-[#148B16] text-[14px] sm:text-[18px] xl:text-xl not-italic font-bold relative">
