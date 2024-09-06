@@ -108,7 +108,7 @@ export default function ProjData({
         {` ${propType} For Sale in ${locality}, ${city}`}
       </p>
 
-      <p className="text-black text-[12px] sm:text-[16px] xl:text-[14px] capitalize font-medium line-clamp-1">
+      <p className="text-black text-[12px] sm:text-[16px] xl:text-[14px] capitalize font-medium line-clamp-1 max-w-[510px]">
         Address: {address}
       </p>
       <p className="text-black text-[12px] sm:text-[14px] xl:text-[14px] font-normal">
@@ -124,14 +124,17 @@ export default function ProjData({
         {bhkName} {propTypeName} for {category} in {localityName}
       </p>
       <p className="text-[#148B16] text-[14px] sm:text-[18px] xl:text-xl not-italic font-bold relative">
-        {formatCurrency(Number(price))}
+        {formatCurrency(Number(price))}{" "}
+        <span className="  text-btnPrimary cursor-pointer text-sm">
+          View Other Charges
+        </span>
       </p>
 
-      <p className="text-[#001F35] text-[12px] sm:text-[16px]  xl:text-[18px] not-italic font-semibold">
+      <p className="text-[#001F35] text-[12px] sm:text-[16px]   not-italic font-bold">
         {propName}{" "}
       </p>
-      <p className="text-[#242424] text-[12px] sm:text-[16px] xl:text-[18px] capitalize  not-italic font-medium">
-        {address}
+      <p className="text-black text-[12px] sm:text-[16px] xl:text-[14px] capitalize font-medium line-clamp-1 max-w-[510px]">
+        Address: {address}
       </p>
       <p className="text-[#242424]  text-[12px] sm:text-[12px]  xl:text-[14px] not-italic font-normal">
         Posted By:{" "}

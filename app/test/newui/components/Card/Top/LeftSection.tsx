@@ -16,6 +16,7 @@ type Props = {
   projstatus: string;
   possassionDate: string;
   furnish: string;
+  propStatus: string;
 };
 
 export default function LeftSection({
@@ -28,6 +29,7 @@ export default function LeftSection({
   projstatus,
   possassionDate,
   furnish,
+  propStatus,
 }: Props) {
   const verified = isReraverified(rera);
   const isMobile = useMediaQuery("(max-width: 1600px)");
@@ -56,7 +58,7 @@ export default function LeftSection({
         
       </div> */}
       <p className="bg-gray-700 rounded-full absolute top-1 xl:top-auto xl:bottom-7 right-1 text-white text-[12px] xl:text-sm  px-1 xl:bg-gray-900">
-        {projstatus}
+        {projstatus ?? propStatus}
       </p>
       <p className="bg-gray-700 rounded-full absolute top-7 xl:top-auto xl:bottom-1 right-1 text-white text-[12px]  xl:text-sm px-1 xl:bg-gray-900">
         {type !== "proj" ? "Available From: " : "Possession Date: "}{" "}

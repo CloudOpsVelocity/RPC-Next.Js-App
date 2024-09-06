@@ -35,6 +35,7 @@ export default function TopRightSection({
   propertyAge,
   facing,
   propTypeId,
+  price,
 }: Props) {
   const setSelected = useSetAtom(selectedSearchAtom);
   const [sharePopupData, setSharePopup] = useAtom(searchShareAtom);
@@ -52,7 +53,7 @@ export default function TopRightSection({
       element.scrollIntoView({ behavior: "smooth" });
     }
   };
-
+  console.log(basePrice);
   return (
     <div
       onClick={(e) => e.stopPropagation()}
@@ -61,15 +62,13 @@ export default function TopRightSection({
         type !== "proj" && ""
       )}
     >
-      {type === "proj" && (
-        <div className="text-xs hidden xl:flex sm:text-base font-medium text-[#4f4f4f] text-nowrap absolute top-3 right-24  sm:top-0 sm:right-[65px]">
-          Avg Price:{" "}
-          <span className="font-bold ml-1">
-            {" "}
-            ₹{formatNumberWithSuffix(basePrice)}
-          </span>
-        </div>
-      )}
+      <div className="text-xs hidden xl:flex sm:text-base font-medium text-[#4f4f4f] text-nowrap absolute top-3 right-24  sm:top-0 sm:right-[65px]">
+        Avg Price:{" "}
+        <span className="font-bold ml-1">
+          {" "}
+          ₹{formatNumberWithSuffix(type === "proj" ? basePrice : price)}
+        </span>
+      </div>
 
       {isMobile && (
         <>
@@ -355,11 +354,13 @@ export default function TopRightSection({
 
             {type !== "proj" && (
               <>
+                <ListingDownSectionCard label={"Tower"} value={"Tower 1"} />
                 <ListingDownSectionCard label={"Facing"} value={facing} />
-                <ListingDownSectionCard
+                {/* <ListingDownSectionCard
                   label={"Property Age"}
                   value={propertyAge}
-                />
+                /> */}
+                <ListingDownSectionCard label={"At Floor"} value={"2"} />
               </>
             )}
           </div>
@@ -409,17 +410,23 @@ export default function TopRightSection({
             </button>
             {type !== "proj" && (
               <>
+                <ListingDownSectionCard label={"Tower"} value={"Tower 1"} />
                 <ListingDownSectionCard label={"Facing"} value={facing} />
-                <ListingDownSectionCard
+                {/* <ListingDownSectionCard
                   label={"Property Age"}
                   value={propertyAge}
-                />
+                /> */}
+                <ListingDownSectionCard label={"At Floor"} value={"2"} />
+                <button className="text-[14px]  text-btnPrimary  font-bold mt-2">
+                  View Floor Plan
+                </button>
               </>
             )}
           </div>
-          {type === "proj" && brochureUrl && (
+          {type === "proj" && (
             <div className="flex  items-end flex-col gap-2">
-              <DownloadBrocher brochureUrl={brochureUrl} />
+              {brochureUrl && <DownloadBrocher brochureUrl={brochureUrl} />}
+
               <button
                 className="bg-orange-500 text-white py-1 px-2 font-bold  rounded hover:bg-orange-600 focus:outline-none text-xs "
                 onClick={() =>
@@ -647,14 +654,17 @@ const ListingDownSectionCard = ({
 }) => {
   return (
     value && (
-      <div className="flex  justify-center items-center text-right ">
-        <p className="text-[#001F35] text-[12px]   xl:text-sm not-italic font-medium text-wrap  inline-flex">
-          {Icon} {label}:
-        </p>
-        <p className="text-[#242424] text-[14px]  not-italic mt-[1px]">
+      <p className="text-[#001F35] text-[12px]   xl:text-sm not-italic font-medium text-wrap  inline-flex max-w-fit ml-auto">
+        {Icon} {label}:{" "}
+        <span className="text-[#242424] text-[12px] xl:text-[14px]  not-italic  font-bold text-nowrap ml-1 ">
+          {" "}
           {value}
-        </p>
-      </div>
+        </span>
+      </p>
+      // <p className="text-[#242424] text-[12px] xl:text-[14px]  not-italic mt-[1px] font-bold text-nowrap ml-1 mt-0.5">
+      //   {" "}
+
+      // </p>
     )
   );
 };

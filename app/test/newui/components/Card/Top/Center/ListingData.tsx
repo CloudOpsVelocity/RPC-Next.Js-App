@@ -17,7 +17,7 @@ export default function ListingData({
   propertyAge,
   propTypeName,
   pa,
-  projectAbout,
+  projectAbout = "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Exercitationem nisi mollitia quia voluptatum iure, suscipit sequi! Optio nam tenetur, architecto facere esse aliquam quidem alias consequatur voluptatem ipsum, perspiciatis dicta.",
   maxSba,
   minSba,
   minCa,
@@ -96,6 +96,8 @@ export default function ListingData({
               label={"No. of Units"}
               value={formatNumberWithSuffix(noOfUnits)}
             />
+            {isPlot && <DownSectionCard label={"Approved By"} value={`BDA`} />}
+
             {!isMobile && !isPlot && (
               <DownSectionCard label={"Elevation"} value={`G+${noOfTowers}`} />
             )}
@@ -120,7 +122,14 @@ export default function ListingData({
               />
             )}
 
-            <DownSectionCard label={"OwnerShip"} value={ownership} />
+            <DownSectionCard
+              label={type == "proj" ? "OwnerShip" : "Available For"}
+              value={type == "proj" ? ownership : "Family"}
+            />
+            <DownSectionCard
+              label={"Property age"}
+              value={propertyAge ?? "N/A"}
+            />
             <div className="flex flex-nowrap gap-2 xl:gap-x-4">
               <DownSectionCard label={"Bathrooms"} value={`${bathroom} No's`} />
               <DownSectionCard label={"Balcony"} value={`${balcony} No's`} />
@@ -128,6 +137,7 @@ export default function ListingData({
                 label={"Parkings"}
                 value={`${parking} No's (${coverParking})`}
               />
+              <DownSectionCard label={"Security Deposit"} value={`4,333`} />
             </div>
           </div>
         )}

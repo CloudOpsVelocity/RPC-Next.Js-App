@@ -41,7 +41,7 @@ export default function CardDownSection({
   return (
     <div className="bg-white flex items-start gap-1 xl:gap-auto xl:px-[17px] xl:py-[9px] w-full p-2 justify-between flex-wrap sm:flex-nowrap">
       <div className="flex gap-[9px]">
-        {type === "proj" && (
+        {type === "proj" ? (
           <>
             <CountListing
               type="Agent"
@@ -62,6 +62,10 @@ export default function CardDownSection({
               projName={projName}
             />
           </>
+        ) : (
+          <button className="bg-cyan-500 text-white text-[12px] sm:text-sm py-0 font-bold px-1 sm:py-1 xl:px-2  rounded shadow-md hover:bg-cyan-600 transition duration-300 ease-in-out">
+            Highlights
+          </button>
         )}
       </div>
 
