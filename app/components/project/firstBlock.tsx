@@ -95,7 +95,11 @@ const FirstBlock: React.FC<Props> = ({
               previousControlIcon={<DarkCarouseIcon />}
             >
               {images.map((imageUrl, index) => (
-                <Carousel.Slide key={Math.random()} className="relative" w={"auto"}>
+                <Carousel.Slide
+                  key={Math.random()}
+                  className="relative"
+                  w={"auto"}
+                >
                   <Image
                     alt="project image"
                     src={imageUrl}
@@ -120,6 +124,7 @@ const FirstBlock: React.FC<Props> = ({
                 </div>
 
                 <p className="text-[#242424]  text-sm sm:text-[18px]  xl:text-[22px] not-italic font-[600] leading-[normal] w-[100%] tracking-[0.32px] capitalize sm:mt-[8px] xl:mt-[14px] ">
+                  address:{" "}
                   {`${projectDetails.address}, ${projectDetails.localityName}, ${projectDetails.cityName}, ${projectDetails.state}, ${projectDetails.pinCode}`}
                 </p>
 

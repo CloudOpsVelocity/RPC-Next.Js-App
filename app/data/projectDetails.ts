@@ -8,6 +8,7 @@ export const topics = [
   { label: "Floor Plans", id: "floorPlans" },
   { label: "Gallery", id: "galleria" },
   { label: "Amenities", id: "amenities" },
+  { label: "Location Map", id: "nearBy" },
   { label: "Near By", id: "nearBy" },
   { label: "Specifications", id: "specifications" },
   { label: "Highlights", id: "highlights" },
