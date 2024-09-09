@@ -3,7 +3,7 @@ import {
   listingSearchAtom,
   mobileSearchPageMapModalReducerAtom,
 } from "@/app/store/search/map";
-import { Modal, em } from "@mantine/core";
+import { Modal } from "@mantine/core";
 import { useAtom } from "jotai";
 import S from "@/app/styles/Drawer.module.css";
 import MapSkeleton from "@/app/components/maps/Skeleton";
@@ -14,7 +14,6 @@ import { useMediaQuery } from "@mantine/hooks";
 
 function MapModal() {
   const [selected, dispath] = useAtom(mobileSearchPageMapModalReducerAtom);
-  console.log(selected);
   const Map = useMemo(
     () =>
       dynamic(() => import("../map"), {

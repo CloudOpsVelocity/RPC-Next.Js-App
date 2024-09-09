@@ -51,7 +51,8 @@ const LeftSideBlock = ({ serverData }: any) => {
       <RequestCallBackModal />
       <SharePopup />
       <LoginPopup />
-      <MapModal />
+      <Dialog />
+      {/* <MapModal /> */}
     </div>
   );
 };
@@ -61,3 +62,4 @@ import { diffToProjFromListing, initialState } from "@/app/store/search";
 import TabPanelSection from "./TabPanelSection";
 import SharePopup from "../SharePopup";
 import MapModal from "../../listing/components/modals";
+import Dialog from "@/app/test/newui/components/modals/Proj_PropModal";

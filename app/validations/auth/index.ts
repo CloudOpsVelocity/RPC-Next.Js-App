@@ -7,7 +7,6 @@ const itemSchema = yup.object().shape({
     .max(40, "Name should not exceed 40 characters")
     .matches(nameRegex, "Only letters and spaces are allowed"),
 });
-
 const schema = yup.object().shape({
   name: yup
     .string()

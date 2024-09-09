@@ -73,9 +73,10 @@ export default function ProjData({
             mobileMapDispatch({
               type: "open",
               payload: {
-                lat: 13.00402,
-                lang: 77.68777899999999,
-                title: "Sobha Dream Acres",
+                lat: lat,
+                lang: lang,
+                title: type === "proj" ? projName : propName,
+                id: type === "proj" ? `${projIdEnc}+${propTypeId}` : propIdEnc,
               },
             });
           }}

@@ -7,11 +7,13 @@ type Initialvalue = {
   lat: number | null;
   lang: number | null;
   title: string;
+  id: string | null;
 };
 const inititalValue = {
   lat: null,
   lang: null,
   title: "",
+  id: null,
 };
 const selectedSearchAtom = atom<null | Atom>(null);
 export const listingSearchAtom = atom<null | Atom>(null);
@@ -22,6 +24,7 @@ type ActionData =
         lat: number;
         lang: number;
         title: string;
+        id: string;
       };
     }
   | {
@@ -34,6 +37,7 @@ const mapReducer = (state: Initialvalue, action: ActionData): Initialvalue => {
         lat: action.payload.lat,
         lang: action.payload.lang,
         title: action.payload.title,
+        id: action.payload.id,
       };
     case "close":
       return inititalValue;

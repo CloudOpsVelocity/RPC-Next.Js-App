@@ -3,7 +3,6 @@ import { useAtom } from "jotai";
 import { overlayAtom } from "../../store/overlay";
 import { IoIosCloseCircle } from "react-icons/io";
 import useProjectCardData from "../../useProjectCardData";
-import LocationList from "./overly_items/LocationList";
 import LocationCard from "./overly_items/LocationList";
 
 const Overlay: React.FC = () => {
