@@ -27,7 +27,7 @@ function MapModal() {
 
   return (
     <Modal
-      opened={selected.lat !== null}
+      opened={selected.content.lat !== null}
       onClose={onClose}
       centered
       size={isMobile ? "100%" : "90%"}
