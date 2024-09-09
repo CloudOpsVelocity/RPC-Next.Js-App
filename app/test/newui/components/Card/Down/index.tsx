@@ -2,6 +2,8 @@ import Button from "@/app/elements/button";
 import { useMediaQuery } from "@mantine/hooks";
 import clsx from "clsx";
 import React from "react";
+import { overlayAtom } from "../../../store/overlay";
+import { useSetAtom } from "jotai";
 
 export default function CardDownSection({
   a,
@@ -13,6 +15,7 @@ export default function CardDownSection({
   onAddingCompare,
   isCompared,
   handleOpen,
+  propTypeId,
 }: any) {
   const isMobile = useMediaQuery("(max-width: 1600px)");
   // const name =
@@ -37,7 +40,7 @@ export default function CardDownSection({
   //     ${cg === "R" ? "Rent" : "Sell"} in ${localityName}`,
   //   });
   // };
-
+  const dispatch = useSetAtom(overlayAtom);
   return (
     <div className="bg-white flex items-start gap-1 xl:gap-auto xl:px-[17px] xl:py-[9px] w-full p-2 justify-between flex-wrap sm:flex-nowrap">
       <div className="flex gap-[9px]">
@@ -63,7 +66,25 @@ export default function CardDownSection({
             />
           </>
         ) : (
-          <button className="bg-cyan-500 text-white text-[12px] sm:text-sm py-0 font-bold px-1 sm:py-1 xl:px-2  rounded shadow-md hover:bg-cyan-600 transition duration-300 ease-in-out">
+          <button
+            className="bg-cyan-500 text-white text-[12px] sm:text-sm py-0 font-bold px-1 sm:py-1 xl:px-2  rounded shadow-md hover:bg-cyan-600 transition duration-300 ease-in-out"
+            onClick={() =>
+              dispatch({
+                content: [
+                  "Spacious Living Room with floor-to-ceiling windows providing ample natural light.",
+                  "Modern Kitchen equipped with the latest appliances and an island countertop.",
+                  "Master Bedroom Suite with a large walk-in closet and en-suite bathroom.",
+                  "Rooftop Terrace offering panoramic views and a great space for entertaining.",
+                  "Energy Efficient design with solar panels and high-efficiency HVAC systems.",
+                  "Prime Location with easy access to public transportation and local amenities.",
+                ],
+                conType: "hightlights",
+                title: "Highlights",
+                id: `${projIdEnc}+${propTypeId}`,
+                type: "OPEN",
+              })
+            }
+          >
             Highlights
           </button>
         )}

@@ -25,12 +25,15 @@ export default function ProjectContent({ data }: Props) {
 
   return (
     <>
-      <Tabs
-        data={data[selectedCategory]}
-        onTabClick={onTabClick}
-        selectedCategory={selectedCategory}
-        categories={categories}
-      />
+      {categories.length > 0 && (
+        <Tabs
+          data={data[selectedCategory]}
+          onTabClick={onTabClick}
+          selectedCategory={selectedCategory}
+          categories={categories}
+        />
+      )}
+
       <Map data={data[selectedCategory]} />
     </>
   );

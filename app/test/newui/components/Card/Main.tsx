@@ -34,6 +34,7 @@ const MainBox = ({ data, refetch }: Props) => {
     compareAdded,
     shortListed,
     propTypeId,
+    isUsed,
   } = data;
   const [state, setState] = useState({
     compareAdded: compareAdded === "Y" ? true : false,
@@ -118,6 +119,7 @@ const MainBox = ({ data, refetch }: Props) => {
           possassionDate={data.possassionDate}
           furnish={data.furnish}
           propStatus={data.propStatus}
+          isUsed={isUsed}
         />
         <div className="relative">
           {overlayData.id && `${projIdEnc}+${propTypeId}` === overlayData.id ? (

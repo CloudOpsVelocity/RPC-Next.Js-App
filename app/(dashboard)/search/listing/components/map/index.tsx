@@ -25,7 +25,10 @@ import { BlueMobileMapIcon } from "@/app/data/map";
 
 const Map = ({ data }: any) => {
   const value = useAtomValue(mobileSearchPageMapModalReducerAtom);
-  const position: LatLngTuple = [value?.lat || 0, value?.lang || 0];
+  const position: LatLngTuple = [
+    value?.content.lat || 0,
+    value?.content.lang || 0,
+  ];
   const MapIcon = L.icon({
     iconUrl: "/searchmarker.png",
     iconSize: [60, 60],
@@ -55,7 +58,7 @@ const Map = ({ data }: any) => {
         />
 
         <Marker
-          position={[value.lat ?? 0, value?.lang ?? 0]}
+          position={[value.content.lat ?? 0, value?.content.lang ?? 0]}
           icon={isMobile ? MobileIcon : MapIcon}
         >
           <Tooltip

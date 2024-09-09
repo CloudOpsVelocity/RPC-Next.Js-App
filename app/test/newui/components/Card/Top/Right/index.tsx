@@ -416,7 +416,15 @@ export default function TopRightSection({
                   value={propertyAge}
                 /> */}
                 <ListingDownSectionCard label={"At Floor"} value={"2"} />
-                <button className="text-[14px]  text-btnPrimary  font-bold mt-2">
+                <button
+                  className="text-[14px]  text-btnPrimary  font-bold mt-2"
+                  onClick={() =>
+                    window.open(
+                      `/image?path=/images/varify/soc/31/masterplan/masterplan.webp?v=1725631227304&type=F`,
+                      "_blank"
+                    )
+                  }
+                >
                   View Floor Plan
                 </button>
               </>
@@ -431,179 +439,14 @@ export default function TopRightSection({
                 onClick={() =>
                   dispatch({
                     type: "OPEN",
-                    content: [
-                      {
-                        name: "",
-                        id: 323,
-                      },
-                      {
-                        name: "",
-                        id: 324,
-                      },
-                      {
-                        name: "",
-                        id: 261,
-                      },
-                      {
-                        name: "",
-                        id: 325,
-                      },
-                      {
-                        name: "",
-                        id: 262,
-                      },
-                      {
-                        name: "",
-                        id: 326,
-                      },
-                      {
-                        name: "",
-                        id: 263,
-                      },
-                      {
-                        name: "",
-                        id: 327,
-                      },
-                      {
-                        name: "",
-                        id: 264,
-                      },
-                      {
-                        name: "",
-                        id: 328,
-                      },
-                      {
-                        name: "",
-                        id: 329,
-                      },
-                      {
-                        name: "",
-                        id: 202,
-                      },
-                      {
-                        name: "",
-                        id: 203,
-                      },
-                      {
-                        name: "",
-                        id: 205,
-                      },
-                      {
-                        name: "",
-                        id: 206,
-                      },
-                      {
-                        name: "",
-                        id: 340,
-                      },
-                      {
-                        name: "",
-                        id: 341,
-                      },
-                      {
-                        name: "",
-                        id: 342,
-                      },
-                      {
-                        name: "",
-                        id: 343,
-                      },
-                      {
-                        name: "",
-                        id: 344,
-                      },
-                      {
-                        name: "",
-                        id: 221,
-                      },
-                      {
-                        name: "",
-                        id: 222,
-                      },
-                      {
-                        name: "",
-                        id: 224,
-                      },
-                      {
-                        name: "",
-                        id: 289,
-                      },
-                      {
-                        name: "",
-                        id: 290,
-                      },
-                      {
-                        name: "",
-                        id: 291,
-                      },
-                      {
-                        name: "",
-                        id: 229,
-                      },
-                      {
-                        name: "",
-                        id: 230,
-                      },
-                      {
-                        name: "",
-                        id: 231,
-                      },
-                      {
-                        name: "",
-                        id: 235,
-                      },
-                      {
-                        name: "",
-                        id: 236,
-                      },
-                      {
-                        name: "",
-                        id: 238,
-                      },
-                      {
-                        name: "",
-                        id: 305,
-                      },
-                      {
-                        name: "",
-                        id: 306,
-                      },
-                      {
-                        name: "",
-                        id: 307,
-                      },
-                      {
-                        name: "",
-                        id: 308,
-                      },
-                      {
-                        name: "",
-                        id: 309,
-                      },
-                      {
-                        name: "",
-                        id: 310,
-                      },
-                      {
-                        name: "",
-                        id: 311,
-                      },
-                      {
-                        name: "",
-                        id: 312,
-                      },
-                      {
-                        name: "",
-                        id: 313,
-                      },
-                    ],
+                    content: [],
                     id: `${projIdEnc}+${propTypeId}`,
                     title: "Amenities",
                     conType: "amenities",
                   })
                 }
               >
-                14+ Amenities
+                Amenities
               </button>
               <button
                 className="bg-teal-500 text-white font-bold py-1 px-2 text-xs rounded shadow-lg hover:bg-teal-600 transition duration-300 ease-in-out"

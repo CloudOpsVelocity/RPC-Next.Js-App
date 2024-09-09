@@ -65,15 +65,18 @@ const Tabs: React.FC<TabsProps> = ({
 
   return (
     <div className="relative border-b flex items-center bg-gray-100">
-      <button
-        onClick={() => scrollTabs("left")}
-        className={`p-1 text-gray-500 hover:text-gray-700 ${
-          !canScrollLeft && "opacity-50 cursor-not-allowed"
-        }`}
-        disabled={!canScrollLeft}
-      >
-        <FaChevronLeft />
-      </button>
+      {categories.length > 3 && (
+        <button
+          onClick={() => scrollTabs("left")}
+          className={`p-1 text-gray-500 hover:text-gray-700 ${
+            !canScrollLeft && "opacity-50 cursor-not-allowed"
+          }`}
+          disabled={!canScrollLeft}
+        >
+          <FaChevronLeft />
+        </button>
+      )}
+
       <div
         ref={tabContainerRef}
         className="overflow-x-auto flex space-x-1 scrollbar-hide"
@@ -94,15 +97,17 @@ const Tabs: React.FC<TabsProps> = ({
           ))}
         </ul>
       </div>
-      <button
-        onClick={() => scrollTabs("right")}
-        className={`p-1 text-gray-500 hover:text-gray-700 ${
-          !canScrollRight && "opacity-50 cursor-not-allowed"
-        }`}
-        disabled={!canScrollRight}
-      >
-        <FaChevronRight />
-      </button>
+      {categories.length > 3 && (
+        <button
+          onClick={() => scrollTabs("right")}
+          className={`p-1 text-gray-500 hover:text-gray-700 ${
+            !canScrollRight && "opacity-50 cursor-not-allowed"
+          }`}
+          disabled={!canScrollRight}
+        >
+          <FaChevronRight />
+        </button>
+      )}
     </div>
   );
 };

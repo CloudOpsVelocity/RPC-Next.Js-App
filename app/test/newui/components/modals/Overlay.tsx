@@ -4,6 +4,8 @@ import { overlayAtom } from "../../store/overlay";
 import { IoIosCloseCircle } from "react-icons/io";
 import useProjectCardData from "../../useProjectCardData";
 import LocationCard from "./overly_items/LocationList";
+import OtherChargesList from "./overly_items/OtherChargesListOverlay";
+import PropertyHighlights from "./overly_items/PropertyHightilights";
 
 const Overlay: React.FC = () => {
   const [overlayState, dispatch] = useAtom(overlayAtom);
@@ -35,24 +37,21 @@ const Overlay: React.FC = () => {
   }, [isOpen, dispatch]);
 
   const renderAmenities = () => {
+    console.log(amenitiesFromDB);
     if (isLoading) return <div>Loading...</div>;
-    if (!amenitiesFromDB || !Array.isArray(content))
-      return <div>No amenities available</div>;
+    if (!amenitiesFromDB) return <div>No amenities available</div>;
 
-    return content.map((eachItem: any) =>
-      Object.keys(amenitiesFromDB).map((group) =>
-        amenitiesFromDB[group]?.map((eachOne: any) =>
-          eachOne.cid === eachItem.id ? (
-            <span
-              key={`amenity_${eachItem.id}`}
-              className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs sm:text-sm font-medium"
-            >
-              {eachOne.constDesc}
-            </span>
-          ) : null
-        )
-      )
-    );
+    return amenitiesFromDB
+      .toString()
+      .split(",")
+      .map((item: string) => (
+        <span
+          key={`amenity_${item}`}
+          className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs sm:text-sm font-medium"
+        >
+          {item}
+        </span>
+      ));
   };
   const renderContent = () => {
     switch (conType) {
@@ -83,6 +82,10 @@ const Overlay: React.FC = () => {
             )}
           </div>
         );
+      case "otherCharges":
+        return <OtherChargesList />;
+      case "hightlights":
+        return <PropertyHighlights />;
       case "none":
       default:
         return <div>{content}</div>;

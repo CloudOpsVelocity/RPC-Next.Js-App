@@ -17,7 +17,8 @@ export default function ListingData({
   propertyAge,
   propTypeName,
   pa,
-  projectAbout = "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Exercitationem nisi mollitia quia voluptatum iure, suscipit sequi! Optio nam tenetur, architecto facere esse aliquam quidem alias consequatur voluptatem ipsum, perspiciatis dicta.",
+  usp,
+  projectAbout = usp,
   maxSba,
   minSba,
   minCa,
@@ -33,9 +34,11 @@ export default function ListingData({
   minPa,
   maxPa,
   projIdEnc,
+  propStatus,
 }: Props) {
   const isMobile = useMediaQuery("(max-width: 1600px)");
   const isPlot = propTypeId == 32;
+  const isRent = type === "Rent";
   const readMoreThreshold = 200;
   const isReadMoreNeeded = projectAbout?.length > readMoreThreshold;
   const dispatch = useSetAtom(overlayAtom);
@@ -84,14 +87,17 @@ export default function ListingData({
             )}
 
             {/* <Divider orientation="vertical" color="#7BA0BB" /> */}
-            <DownSectionCard
-              label={type == "proj" ? "Land Area" : "Property Age"}
-              value={
-                type == "proj"
-                  ? `${landArea ?? 0} sqft`
-                  : `${propertyAge ?? 0} Years`
-              }
-            />
+            {
+              <DownSectionCard
+                label={type == "proj" ? "Land Area" : "Property Age"}
+                value={
+                  type == "proj"
+                    ? `${landArea ?? 0} sqft`
+                    : `${propertyAge ?? 0} Years`
+                }
+              />
+            }
+
             <DownSectionCard
               label={"No. of Units"}
               value={formatNumberWithSuffix(noOfUnits)}
@@ -121,23 +127,35 @@ export default function ListingData({
                 value={`${formatNumberWithSuffix(pa)} sq.ft`}
               />
             )}
+            {isRent && (
+              <DownSectionCard
+                label={type == "proj" ? "OwnerShip" : "Available For"}
+                value={type == "proj" ? ownership : "Family"}
+              />
+            )}
+            {propStatus !== "Under Construction" && (
+              <DownSectionCard
+                label={"Property age"}
+                value={propertyAge ?? "N/A"}
+              />
+            )}
 
-            <DownSectionCard
-              label={type == "proj" ? "OwnerShip" : "Available For"}
-              value={type == "proj" ? ownership : "Family"}
-            />
-            <DownSectionCard
-              label={"Property age"}
-              value={propertyAge ?? "N/A"}
-            />
             <div className="flex flex-nowrap gap-2 xl:gap-x-4">
-              <DownSectionCard label={"Bathrooms"} value={`${bathroom} No's`} />
-              <DownSectionCard label={"Balcony"} value={`${balcony} No's`} />
+              <DownSectionCard
+                label={"Bathrooms"}
+                value={bathroom && `${bathroom} No's`}
+              />
+              <DownSectionCard
+                label={"Balcony"}
+                value={balcony && `${balcony} No's`}
+              />
               <DownSectionCard
                 label={"Parkings"}
-                value={`${parking} No's (${coverParking})`}
+                value={parking && `${parking} No's (${coverParking})`}
               />
-              <DownSectionCard label={"Security Deposit"} value={`4,333`} />
+              {isRent && (
+                <DownSectionCard label={"Security Deposit"} value={`4,333`} />
+              )}
             </div>
           </div>
         )}
@@ -184,7 +202,7 @@ const DownSectionCard = ({
   value: string;
   Icon?: React.JSX.Element;
 }) => {
-  return (
+  return value ? (
     <div className="flex flex-col justify-center items-start ">
       <p className="text-[#001F35] text-[12px] sm:text-[14px] xl:text-sm not-italic font-medium text-wrap underline inline-flex">
         {Icon} {label}:
@@ -193,5 +211,5 @@ const DownSectionCard = ({
         {value}
       </p>
     </div>
-  );
+  ) : null;
 };

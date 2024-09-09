@@ -38,19 +38,11 @@ export default function ProjData({
   lat,
   lang,
   propIdEnc,
+  otherCharges,
 }: Props) {
   const sortedBhks = sortUnits(bhkNames);
   const dispatch = useSetAtom(overlayAtom);
-  const setSelected = useSetAtom(selectedSearchAtom);
   const mobileMapDispatch = useSetAtom(mobileSearchPageMapModalReducerAtom);
-  const handleClick = () => {
-    // Get the div by ID and scroll to it
-    const element = document.getElementById("mobileMap");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   return type === "proj" ? (
     <div className="flex flex-col">
       <p className="text-[#001F35] text-[15px] sm:text-[16px] xl:text-[18px] font-bold break-words whitespace-normal min-w-0 inline-flex gap-1 items-center flex-wrap">
@@ -73,10 +65,14 @@ export default function ProjData({
             mobileMapDispatch({
               type: "open",
               payload: {
-                lat: lat,
-                lang: lang,
                 title: type === "proj" ? projName : propName,
-                id: type === "proj" ? `${projIdEnc}+${propTypeId}` : propIdEnc,
+                id: type === "proj" ? `${projIdEnc}` : propIdEnc,
+                opened: true,
+                type: "nearby",
+                content: {
+                  lat: lat,
+                  lang: lang,
+                },
               },
             });
           }}
@@ -137,7 +133,21 @@ export default function ProjData({
       </p>
       <p className="text-[#148B16] text-[14px] sm:text-[18px] xl:text-xl not-italic font-bold relative">
         {formatCurrency(Number(price))}{" "}
-        <span className="  text-btnPrimary cursor-pointer text-[12px] xl:text-sm">
+        <span
+          className="  text-btnPrimary cursor-pointer text-[12px] xl:text-sm"
+          onClick={(e) => {
+            e.stopPropagation();
+            dispatch({
+              conType: "otherCharges",
+              content: {
+                charges: otherCharges,
+              },
+              id: `${projIdEnc}+${propTypeId}`,
+              title: "Other Charges",
+              type: "OPEN",
+            });
+          }}
+        >
           View Other Charges
         </span>
       </p>

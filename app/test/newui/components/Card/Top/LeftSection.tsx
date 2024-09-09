@@ -17,6 +17,7 @@ type Props = {
   possassionDate: string;
   furnish: string;
   propStatus: string;
+  isUsed: string;
 };
 
 export default function LeftSection({
@@ -30,6 +31,7 @@ export default function LeftSection({
   possassionDate,
   furnish,
   propStatus,
+  isUsed,
 }: Props) {
   const verified = isReraverified(rera);
   const isMobile = useMediaQuery("(max-width: 1600px)");
@@ -37,9 +39,12 @@ export default function LeftSection({
     <div className="relative xl:min-w-[257px] max-h-[250px]">
       {type !== "proj" && (
         <>
-          <p className="absolute text-base bg-yellow-400 rounded-full px-1 text-black top-0 left-[0.8px] font-semibold">
-            Unused
-          </p>
+          {isUsed === "N" && (
+            <p className="absolute text-base bg-yellow-400 rounded-full px-1 text-black top-0 left-[0.8px] font-semibold">
+              Unused
+            </p>
+          )}
+
           <p className="bg-gray-700 rounded-full absolute top-1 xl:top-1 right-1 text-white text-[12px] xl:text-sm  px-1 xl:bg-gray-900">
             {furnish}
           </p>

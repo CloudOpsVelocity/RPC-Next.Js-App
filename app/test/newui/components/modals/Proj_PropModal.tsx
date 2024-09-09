@@ -14,12 +14,12 @@ import ProjectContent from "./ProjectContent";
 
 const Dialog: React.FC = () => {
   const [modalState, dispatch] = useAtom(mobileSearchPageMapModalReducerAtom);
-  const { lang, lat, title, id } = modalState;
-  const isOpen = !!(lat && lang);
+  const { title, id, opened, type } = modalState;
+  const isOpen = opened;
   const { data: nearbyData, isLoading } = useProjectCardData({
     id: id ?? "",
-    isOpen,
-    conType: "nearby",
+    isOpen: isOpen,
+    conType: type ?? "",
   });
 
   const dialogRef = useRef<HTMLDivElement>(null);

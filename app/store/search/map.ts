@@ -4,16 +4,18 @@ type Atom = {
   [key: string]: any;
 };
 type Initialvalue = {
-  lat: number | null;
-  lang: number | null;
   title: string;
   id: string | null;
+  opened: boolean;
+  type: null | "nearby" | "floorplan";
+  content: null | any;
 };
 const inititalValue = {
-  lat: null,
-  lang: null,
   title: "",
   id: null,
+  opened: false,
+  type: null,
+  content: null,
 };
 const selectedSearchAtom = atom<null | Atom>(null);
 export const listingSearchAtom = atom<null | Atom>(null);
@@ -21,10 +23,11 @@ type ActionData =
   | {
       type: "open";
       payload: {
-        lat: number;
-        lang: number;
         title: string;
         id: string;
+        opened: boolean;
+        type: "nearby" | "floorplan";
+        content?: any;
       };
     }
   | {
@@ -34,10 +37,11 @@ const mapReducer = (state: Initialvalue, action: ActionData): Initialvalue => {
   switch (action.type) {
     case "open":
       return {
-        lat: action.payload.lat,
-        lang: action.payload.lang,
         title: action.payload.title,
         id: action.payload.id,
+        opened: action.payload.opened,
+        type: action.payload.type,
+        ...(action.payload.content && { content: action.payload.content }),
       };
     case "close":
       return inititalValue;
