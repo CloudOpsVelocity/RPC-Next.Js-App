@@ -20,7 +20,6 @@ import { propertyDetailsTypes } from "@/app/data/projectDetails";
 import { sortUnits } from "@/app/utils/unitparser";
 import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
 export default function InFoCarousel({ partialUnitData }: Props) {
-  const [selected, setSelected] = useAtom(parital_unit_atom);
   const currentPhase = useAtomValue(currentPhaseAtom);
   const propCgId = useAtomValue(propCgIdAtom);
   const data =

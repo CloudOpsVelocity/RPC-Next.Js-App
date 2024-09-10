@@ -1,6 +1,7 @@
 "use client";
 import { topics } from "@/app/data/projectDetails";
 import useRatings from "@/app/hooks/useRatings";
+import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import { Main } from "@/app/validations/types/project";
 import { useMediaQuery } from "@mantine/hooks";
 import clsx from "clsx";
@@ -13,9 +14,11 @@ export const currentBlockAtom = atom("overview");
 export default function Navigation({
   isBrochure,
   detailsData,
+  slug,
 }: {
   isBrochure: boolean;
   detailsData: Main;
+  slug: string;
 }) {
   const isTab = useMediaQuery("(max-width: 1600px)");
   const { data } = useRatings("dc766148701f46debedb4f9cf3a18809");
@@ -25,6 +28,7 @@ export default function Navigation({
   const [isScrolling, setIsScrolling] = useAtom(isScrollingAtom);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [leftScroll, setLeftScroll] = useState(0);
+  const [opened, { open }] = useReqCallPopup();
   useEffect(() => {
     function handleScroll() {
       const currentScrollY = window.scrollY;
@@ -112,6 +116,7 @@ export default function Navigation({
     { condtion: true, key: "floorPlans" },
     { condtion: true, key: "galleria" },
     { condtion: detailsData?.amenityList?.length > 0, key: "amenities" },
+    { condtion: true, key: "locationMap" },
     { condtion: true, key: "nearBy" },
     {
       condtion: detailsData?.specificationList?.length > 0,
@@ -126,6 +131,7 @@ export default function Navigation({
     { condtion: true, key: "brochure" },
     { condtion: true, key: "faq" },
     { condtion: true, key: "similar" },
+    { condtion: true, key: "contact" },
   ];
 
   return (
@@ -170,6 +176,17 @@ export default function Navigation({
                     : ""
                 )}
                 onClick={() => {
+                  if (topic.id === "contact") {
+                    open({
+                      modal_type: "PROJECT_REQ_CALLBACK",
+                      postedByName: detailsData.postedByName,
+                      reqId: slug,
+                      source: "projBanner",
+                      title: detailsData.projectName,
+                      postedId: detailsData.builderId,
+                    });
+                    return;
+                  }
                   scrollToTopic(topic.id);
                   setCurrentBlock(topic.id);
                 }}

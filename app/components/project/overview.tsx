@@ -59,6 +59,7 @@ export default function Overview({
           </div>
 
           <p className="text-[#242424]  text-sm sm:text-[20px] xl:text-[22px] not-italic font-[600] leading-[normal] w-[100%] tracking-[0.32px] sm:mt-[10px]  xl:mt-[14px] capitalize  sm:max-w-[1400px]">
+            address:{" "}
             {`${address}, ${localityName}, ${cityName}, ${state}, ${pinCode}`}
           </p>
         </div>
@@ -125,6 +126,14 @@ export default function Overview({
             value={formatDateDDMMYYYY(endDate)}
             className="mr-[5%] sm:mr-[3%] xl:mr-[5%] pt-[2%] mb-[3%] sm:mb-[1.5%] xl:mb-[3%]  "
           />
+          <ProjBasicDetails
+            key="ProjectApprovedBy"
+            icon={<EndDate />}
+            title="Approved By"
+            value={"BDA, CDA, AD"}
+            className="mr-[5%] sm:mr-[3%] xl:mr-[5%] pt-[2%] mb-[3%] sm:mb-[1.5%] xl:mb-[3%]  "
+          />
+          {/* time leke kr rha hu me 10 min ka kaam ko sir betha hai saath mai */}
           {phaseList?.length == 1 && (
             <ProjBasicDetails
               key="rerastatus"

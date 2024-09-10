@@ -2,6 +2,7 @@ import { unstable_cache } from "next/cache";
 import { Main, MERGERPROJECT } from "../../validations/types/project";
 import { capitalizeWords } from "../letters";
 import axios from "axios";
+import { paritalUnitParser } from "@/app/(new_routes_seo)/projects/utils/partialUnitParser";
 
 const getProjectDetails = async (slug: string): Promise<MERGERPROJECT> => {
   const response = await fetch(
@@ -110,6 +111,13 @@ const getAmenties = async () => {
   );
   return data.data;
 };
+const getOverViewData = async (slug: string) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/overviewData?projIdEnc=${slug}`
+  );
+  const data = await response.json();
+  return paritalUnitParser(data);
+};
 export {
   getProjectDetails,
   getCachedUser,
@@ -117,4 +125,5 @@ export {
   getProjectUnits,
   getNearByLocations,
   getAmenties,
+  getOverViewData,
 };

@@ -67,7 +67,6 @@ export default function HeaderActions({
       ? partialUnitData[currentPhase]
       : {}
   ).sort();
-  console.log(propTypes);
   const [propCgId, setPropCgId] = useAtom(propCgIdAtom);
   useEffect(() => {
     // @ts-ignore

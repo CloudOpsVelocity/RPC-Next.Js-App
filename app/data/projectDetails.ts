@@ -8,7 +8,7 @@ export const topics = [
   { label: "Floor Plans", id: "floorPlans" },
   { label: "Gallery", id: "galleria" },
   { label: "Amenities", id: "amenities" },
-  { label: "Location Map", id: "nearBy" },
+  { label: "Location Map", id: "locationMap" },
   { label: "Near By", id: "nearBy" },
   { label: "Specifications", id: "specifications" },
   { label: "Highlights", id: "highlights" },
@@ -17,11 +17,10 @@ export const topics = [
   { label: "About Builder", id: "aboutBuilder" },
   { label: "Why Buy This Project?", id: "whyBuy" },
   { label: "Customer Reviews", id: "ratings" },
-
   { label: "FAQ?", id: "faq" },
   { label: "Similar Projects", id: "similar" },
+  { label: "Contact", id: "contact" },
 ];
-
 export const Propertytopics = [
   { label: "Overview", id: "overview" },
   { label: "About", id: "about" },

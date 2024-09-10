@@ -45,7 +45,6 @@ export default async function ProjectsDetailsPage({
 
   return (
     <section className="w-full relative break-words">
-      {/* <!-- Facebook Meta Tags --> */}
       <meta
         property="og:url"
         content={`${process.env.NEXT_PUBLIC_URL}/abc/${data.cityName}/${data.localityName}/${slug}`}
@@ -117,6 +116,7 @@ export default async function ProjectsDetailsPage({
           <Navigation
             isBrochure={!!data?.media?.projBroucherUrl}
             detailsData={data}
+            slug={slug}
           />
         </MobileHidden>
         <Overview {...data} slug={slug} PhaseOverview={phaseOverview} />
