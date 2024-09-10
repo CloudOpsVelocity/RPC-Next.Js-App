@@ -72,10 +72,10 @@ export function paritalUnitParser(input: any[]): TransformedData {
           result[phaseId][propKey][unitType].minPrice = priceItem.minPrice;
           result[phaseId][propKey][unitType].maxPrice = priceItem.maxPrice;
           // These values would be calculated or extracted based on your data
-          result[phaseId][propKey][unitType].minSba = "N/A"; // Placeholder value
-          result[phaseId][propKey][unitType].maxSba = "N/A"; // Placeholder value
-          result[phaseId][propKey][unitType].minCa = "N/A"; // Placeholder value
-          result[phaseId][propKey][unitType].maxCa = "N/A"; // Placeholder value
+          result[phaseId][propKey][unitType].minSba = priceItem.minSba; // Placeholder value
+          result[phaseId][propKey][unitType].maxSba = priceItem.maxSba; // Placeholder value
+          result[phaseId][propKey][unitType].minCa = priceItem.minCa; // Placeholder value
+          result[phaseId][propKey][unitType].maxCa = priceItem.maxCa; // Placeholder value
 
           const unitDataDto: UnitDataDto = {
             projUnitIdEnc: "placeholder_id", // Replace with actual ID

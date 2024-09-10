@@ -19,9 +19,9 @@ export default function PartialUnitData({
   projName,
   phaseList,
   data,
+  type,
 }: Props) {
   const currentPhase = useAtomValue(currentPhaseAtom);
-
   const isPropTypesAvailable = Object.keys(partialUnitData[currentPhase] || {});
   return (
     <div
@@ -34,9 +34,13 @@ export default function PartialUnitData({
         partialUnitData={partialUnitData}
         projName={projName}
         phaseList={phaseList}
+        type={type}
       />
       {isPropTypesAvailable.length > 0 ? (
-        <MainSection partialUnitData={partialUnitData} data={data} />
+        <MainSection
+          partialUnitData={partialUnitData}
+          data={{ ...data, type }}
+        />
       ) : (
         <NoProperties phase="test" />
       )}

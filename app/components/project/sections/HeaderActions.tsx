@@ -29,6 +29,7 @@ type Props = {
   partialUnitData: any;
   projName: string;
   phaseList: any;
+  type?: "overview" | "partial";
 };
 const iconStyles: string =
   " flex items-center justify-center w-[34px] sm:w-[40px] h-[34px] sm:h-[40px] bg-[#FAFDFF] rounded-[50%] ";
@@ -36,6 +37,7 @@ export default function HeaderActions({
   partialUnitData,
   projName,
   phaseList,
+  type,
 }: Props) {
   const getIcon = (id: number) => {
     let iconComponent;
@@ -85,7 +87,7 @@ export default function HeaderActions({
         className="text-h2 lg:text-[32px] mt-[3%] xl:mt-[100px] font-[600] text-[#001F35] mb-[12px] scroll-mt-[280px]"
         id="floorPlansdiv"
       >
-        Floor Plans For{" "}
+        {type == "overview" ? "Price " : "Floor Plans "} For{" "}
         <span className="text-[#148B16] font-[700] ">{projName}</span>{" "}
       </h1>
       <SubHeading text="See floor plans as per your selected property type" />
@@ -100,7 +102,7 @@ export default function HeaderActions({
               Select one of the phase to see project details
             </p>
             <div className=" flex justify-start items-start gap-[10px] flex-wrap ">
-              {phaseList?.map((each: any, index: any) => {
+              {phaseList?.map((each: any) => {
                 return (
                   <Button
                     key={`phase_${each.phaseName}`}

@@ -223,6 +223,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             projName={data.projectName}
             phaseList={data.phases}
             data={data}
+            type="overview"
           />
         )}
 
@@ -240,6 +241,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             projName={data.projectName}
             phaseList={data.phases}
             data={data}
+            type="partial"
           />
         )}
 

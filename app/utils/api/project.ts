@@ -127,3 +127,22 @@ export {
   getAmenties,
   getOverViewData,
 };
+
+// const paritalUnitParser = (input: any[]) => {
+//   let result: any = {};
+//   for (const key in input) {
+//     if (Object.prototype.hasOwnProperty.call(input, key)) {
+//       const element = input[key];
+//       if (!result[element.phaseId.toString()]) {
+//         result[element.phaseId.toString()] = {
+//           apartment: {},
+//           villa: {},
+//           plot: {},
+//           rowhouse: {},
+//           villament: {},
+//         };
+//       }
+//     }
+//   }
+//   console.log(result);
+// };

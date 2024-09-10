@@ -19,15 +19,40 @@ import { currentPhaseAtom, propCgIdAtom } from "@/app/store/vewfloor";
 import { propertyDetailsTypes } from "@/app/data/projectDetails";
 import { sortUnits } from "@/app/utils/unitparser";
 import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
+import RTK_CONFIG from "@/app/config/rtk";
+import { getPropId } from "../propertyTypeDetailsCrad";
+import { useQuery } from "react-query";
+import { floorPlansArray, selectedFloorAtom } from "@/app/store/floor";
+import { useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
+import { useForm } from "@/app/context/floorplanContext";
+import { setPropertyValues } from "@/app/utils/dyanamic/projects";
 export default function InFoCarousel({ partialUnitData }: Props) {
   const currentPhase = useAtomValue(currentPhaseAtom);
+  const form = useForm();
   const propCgId = useAtomValue(propCgIdAtom);
+  const setFloorsArray = useSetAtom(floorPlansArray);
+  const [selectedFloor, setSelectedFloor] = useAtom(selectedFloorAtom);
+  const [, { open, type }] = useFloorPlanPopup();
+  const { data: projectUnitsData, isLoading } = useQuery({
+    queryKey: [`/${propCgId}/${currentPhase}/${partialUnitData.id}`],
+    ...RTK_CONFIG,
+  });
+
   const data =
     partialUnitData[currentPhase][
       propertyDetailsTypes.get(propCgId)?.apiProp ?? ""
     ];
   const setData = useSetAtom(selectedPartialUnitAtom);
+  const handleContainerClick = () => {
+    setSelectedFloor(null);
+    setFloorsArray(projectUnitsData as any);
+    open("container");
+  };
   const handleCardClick = (units: any, item: any) => {
+    if (partialUnitData.type === "overview") {
+      handleContainerClick();
+      return;
+    }
     setData({
       main: 0,
       others: units,

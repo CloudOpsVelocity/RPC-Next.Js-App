@@ -127,53 +127,51 @@ function FloorPlanModal({
     return null;
   }
   return (
-      <Modal
-        opened={opened}
-        classNames={{
-          root: S.mainComntainerFloorPlan,
-          title: S.title,
-          close: S.close,
-          content: S.content,
-          overlay: S.overlay,
-          inner: o ? S.hidden : undefined,
-        }}
-        centered
-        onClose={handleClose}
-        title="Floor Plan"
-        size={"100%"}
-      >
-          <div className="bg-white w-full h-auto px-1 xl:pl-5">
-            <p
-              className={`text-[#001F35] text-[13px] xl:text-xl not-italic font-semibold mt-2   ${
-                showClearAll ? "mb-2 sm:mb-7" : "mb-0"
-              }`}
-            >
-              See floor plan according to your selections
-            </p>
+    <Modal
+      opened={opened}
+      classNames={{
+        root: S.mainComntainerFloorPlan,
+        title: S.title,
+        close: S.close,
+        content: S.content,
+        overlay: S.overlay,
+        inner: o ? S.hidden : undefined,
+      }}
+      centered
+      onClose={handleClose}
+      title="Floor Plan"
+      size={"100%"}
+    >
+      <div className="bg-white w-full h-auto px-1 xl:pl-5">
+        <p
+          className={`text-[#001F35] text-[13px] xl:text-xl not-italic font-semibold mt-2   ${
+            showClearAll ? "mb-2 sm:mb-7" : "mb-0"
+          }`}
+        >
+          See floor plan according to your selections
+        </p>
 
-            <SelectedFilters
-              form={form}
-              propCgId={propCgId}
-              projectprops={projectprops}
-              showClearAll={showClearAll}
-              handleRemoveFilter={handleRemoveFilter}
-              filterKeysDetails={filterKeysDetails}
-            />
+        <SelectedFilters
+          form={form}
+          propCgId={propCgId}
+          projectprops={projectprops}
+          showClearAll={showClearAll}
+          handleRemoveFilter={handleRemoveFilter}
+          filterKeysDetails={filterKeysDetails}
+        />
 
-            <div className="flex justify-start items-start gap-5 xl:gap-[45px] flex-col  md:flex-row w-full xl:pb-[3%] ">
-              <LeftSection
-                propCgId={propCgId}
-                data={data}
-                handleReset={handleReset}
-                showClearAll={showClearAll}
-              />
-              <MiddleSection projName={projName} propCgId={propCgId} />
-              {selectedFloor && (
-                <RightSection propCgId={propCgId} data={data} />
-              )}
-            </div>
-          </div>
-      </Modal>
+        <div className="flex justify-start items-start gap-5 xl:gap-[45px] flex-col  md:flex-row w-full xl:pb-[3%] ">
+          <LeftSection
+            propCgId={propCgId}
+            data={data}
+            handleReset={handleReset}
+            showClearAll={showClearAll}
+          />
+          <MiddleSection projName={projName} propCgId={propCgId} />
+          {selectedFloor && <RightSection propCgId={propCgId} data={data} />}
+        </div>
+      </div>
+    </Modal>
   );
 }
 
@@ -1087,7 +1085,12 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
             >
               {floorsArray?.map((eachObj: any, ind: number) => {
                 return (
-                  <Carousel.Slide h={60} key={`floorPlanUrl_${eachObj?.floorPlanUrl[ind]}`}>
+                  <Carousel.Slide
+                    h={60}
+                    key={`floorPlanUrl_${
+                      eachObj?.floorPlanUrl ? eachObj?.floorPlanUrl[ind] : ""
+                    }`}
+                  >
                     <div
                       className={clsx(
                         " sm:h-[50px] ml-1.5 sm:ml-10 w-[100px] sm:max-w-[250px] flex justify-center items-center shadow-md  scrollbar-hide rounded-[5px] border-[0.5px] border-solid border-[#92B2C8]",
