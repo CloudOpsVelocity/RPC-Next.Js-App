@@ -61,9 +61,11 @@ const overlayReducer = (
           { label: "Price", value: `₹${formatNumber(content.price)}` },
           {
             label: "Club house Subscription",
-            value: `₹${formatNumber(content.clubHouseCharge)} for ${
-              content.clubHouseTill
-            } year(s)`,
+            value:
+              content.clubHouseCharge &&
+              `₹${formatNumber(content.clubHouseCharge)} for ${
+                content.clubHouseTill
+              } year(s)`,
           },
           {
             label: "Maintenance & Corpus Fund",
@@ -98,7 +100,7 @@ const overlayReducer = (
           isOpen: true,
           content: {
             data: formattedContent,
-            total: total,
+            total: formatNumber(total),
           },
           id: action.id,
           title: action.title,

@@ -36,6 +36,10 @@ export default function TopRightSection({
   facing,
   propTypeId,
   price,
+  towerName,
+  atFloor,
+  sqftPrice,
+  floorPlan,
 }: Props) {
   const setSelected = useSetAtom(selectedSearchAtom);
   const [sharePopupData, setSharePopup] = useAtom(searchShareAtom);
@@ -65,7 +69,7 @@ export default function TopRightSection({
         Avg Price:{" "}
         <span className="font-bold ml-1">
           {" "}
-          ₹{formatNumberWithSuffix(type === "proj" ? basePrice : price)}
+          ₹{formatNumberWithSuffix(type === "proj" ? basePrice : sqftPrice)}
         </span>
       </div>
 
@@ -353,13 +357,13 @@ export default function TopRightSection({
 
             {type !== "proj" && (
               <>
-                <ListingDownSectionCard label={"Tower"} value={"Tower 1"} />
+                <ListingDownSectionCard label={"Tower"} value={towerName} />
                 <ListingDownSectionCard label={"Facing"} value={facing} />
                 {/* <ListingDownSectionCard
                   label={"Property Age"}
                   value={propertyAge}
                 /> */}
-                <ListingDownSectionCard label={"At Floor"} value={"2"} />
+                <ListingDownSectionCard label={"At Floor"} value={atFloor} />
               </>
             )}
           </div>
@@ -420,7 +424,7 @@ export default function TopRightSection({
                   className="text-[14px]  text-btnPrimary  font-bold mt-2"
                   onClick={() =>
                     window.open(
-                      `/image?path=/images/varify/soc/31/masterplan/masterplan.webp?v=1725631227304&type=F`,
+                      `/image?path=${floorPlan.split(".net")[1]}`,
                       "_blank"
                     )
                   }

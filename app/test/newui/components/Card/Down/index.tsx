@@ -16,6 +16,8 @@ export default function CardDownSection({
   isCompared,
   handleOpen,
   propTypeId,
+  isPetFriendly,
+  amenCount,
 }: any) {
   const isMobile = useMediaQuery("(max-width: 1600px)");
   // const name =
@@ -66,27 +68,66 @@ export default function CardDownSection({
             />
           </>
         ) : (
-          <button
-            className="bg-cyan-500 text-white text-[12px] sm:text-sm py-0 font-bold px-1 sm:py-1 xl:px-2  rounded shadow-md hover:bg-cyan-600 transition duration-300 ease-in-out"
-            onClick={() =>
-              dispatch({
-                content: [
-                  "Spacious Living Room with floor-to-ceiling windows providing ample natural light.",
-                  "Modern Kitchen equipped with the latest appliances and an island countertop.",
-                  "Master Bedroom Suite with a large walk-in closet and en-suite bathroom.",
-                  "Rooftop Terrace offering panoramic views and a great space for entertaining.",
-                  "Energy Efficient design with solar panels and high-efficiency HVAC systems.",
-                  "Prime Location with easy access to public transportation and local amenities.",
-                ],
-                conType: "hightlights",
-                title: "Highlights",
-                id: `${projIdEnc}+${propTypeId}`,
-                type: "OPEN",
-              })
-            }
-          >
-            Highlights
-          </button>
+          <>
+            {isPetFriendly ? (
+              <div className="flex items-center space-x-1 bg-green-500 text-white font-bold py-1 px-3 text-xs rounded-full shadow-md">
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+                <span>Pet Friendly</span>
+              </div>
+            ) : null}
+
+            {/* <button
+              className="bg-cyan-500 text-white text-[12px] sm:text-sm py-0 font-bold px-1 sm:py-1 xl:px-2  rounded shadow-md hover:bg-cyan-600 transition duration-300 ease-in-out"
+              onClick={() =>
+                dispatch({
+                  content: [
+                    "Spacious Living Room with floor-to-ceiling windows providing ample natural light.",
+                    "Modern Kitchen equipped with the latest appliances and an island countertop.",
+                    "Master Bedroom Suite with a large walk-in closet and en-suite bathroom.",
+                    "Rooftop Terrace offering panoramic views and a great space for entertaining.",
+                    "Energy Efficient design with solar panels and high-efficiency HVAC systems.",
+                    "Prime Location with easy access to public transportation and local amenities.",
+                  ],
+                  conType: "hightlights",
+                  title: "Highlights",
+                  id: `${projIdEnc}+${propTypeId}`,
+                  type: "OPEN",
+                })
+              }
+            >
+              Highlights
+            </button> */}
+            <button
+              className="bg-orange-600 text-white text-[12px] sm:text-sm py-0 font-bold px-1 sm:py-1 xl:px-2  rounded shadow-md hover:bg-orange-800  transition duration-300 ease-in-out"
+              onClick={() =>
+                dispatch({
+                  content: [],
+                  conType: "amenities",
+                  title: "Amenities",
+                  id: `${projIdEnc}+${propTypeId}`,
+                  type: "OPEN",
+                })
+              }
+            >
+              <span className="bg-white rounded-full text-black px-2">
+                {amenCount}
+              </span>{" "}
+              Amneties
+            </button>
+          </>
         )}
       </div>
 

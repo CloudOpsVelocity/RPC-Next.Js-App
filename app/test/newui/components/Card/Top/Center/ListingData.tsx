@@ -127,12 +127,8 @@ export default function ListingData({
                 value={`${formatNumberWithSuffix(pa)} sq.ft`}
               />
             )}
-            {isRent && (
-              <DownSectionCard
-                label={type == "proj" ? "OwnerShip" : "Available For"}
-                value={type == "proj" ? ownership : "Family"}
-              />
-            )}
+            <DownSectionCard label={"OwnerShip"} value={ownership} />
+            <DownSectionCard label={"Available For"} value={"Family"} />
             {propStatus !== "Under Construction" && (
               <DownSectionCard
                 label={"Property age"}
