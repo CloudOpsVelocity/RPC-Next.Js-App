@@ -39,6 +39,7 @@ export default function TopRightSection({
   atFloor,
   sqftPrice,
   floorPlan,
+  propTypeName,
 }: Props) {
   const setSelected = useSetAtom(selectedSearchAtom);
   const [sharePopupData, setSharePopup] = useAtom(searchShareAtom);
@@ -56,6 +57,7 @@ export default function TopRightSection({
       element.scrollIntoView({ behavior: "smooth" });
     }
   };
+  console.log(propTypeName);
   return (
     <div
       onClick={(e) => e.stopPropagation()}
@@ -362,7 +364,14 @@ export default function TopRightSection({
                   label={"Property Age"}
                   value={propertyAge}
                 /> */}
-                <ListingDownSectionCard label={"At Floor"} value={atFloor} />
+                <ListingDownSectionCard
+                  label={
+                    propTypeName === "Row House" || propTypeName === "Villa"
+                      ? "Elevation"
+                      : "At Floor"
+                  }
+                  value={atFloor}
+                />
               </>
             )}
           </div>
@@ -418,7 +427,20 @@ export default function TopRightSection({
                   label={"Property Age"}
                   value={propertyAge}
                 /> */}
-                <ListingDownSectionCard label={"At Floor"} value={atFloor} />
+                <ListingDownSectionCard
+                  label={
+                    propTypeName === "Row House" || propTypeName === "Villa"
+                      ? "Elevation"
+                      : "At Floor"
+                  }
+                  value={
+                    propTypeName === "Row House" || propTypeName === "Villa"
+                      ? `G+${atFloor}`
+                      : atFloor === 0
+                      ? "G"
+                      : atFloor
+                  }
+                />
                 {floorPlan && (
                   <button
                     className="text-[14px]  text-btnPrimary  font-bold mt-2"

@@ -35,6 +35,8 @@ export default function ListingData({
   maxPa,
   projIdEnc,
   propStatus,
+  towerData,
+  availableFor,
 }: Props) {
   const isMobile = useMediaQuery("(max-width: 1600px)");
   const isPlot = propTypeId == 32;
@@ -105,7 +107,7 @@ export default function ListingData({
             <DownSectionCard label={"Approved By"} value={`BDA`} />
 
             {!isMobile && !isPlot && (
-              <DownSectionCard label={"Elevation"} value={`G+${noOfTowers}`} />
+              <DownSectionCard label={"Elevation"} value={`${towerData}`} />
             )}
           </div>
         ) : (
@@ -128,7 +130,10 @@ export default function ListingData({
               />
             )}
             <DownSectionCard label={"OwnerShip"} value={ownership} />
-            <DownSectionCard label={"Available For"} value={"Family"} />
+            {isRent && (
+              <DownSectionCard label={"Available For"} value={availableFor} />
+            )}
+
             {propStatus !== "Under Construction" && (
               <DownSectionCard
                 label={"Property age"}
