@@ -38,6 +38,8 @@ import FAQJsonLdScript from "@/app/seo/Faqjson";
 import QAJsonLdScript from "@/app/seo/Qnajson";
 import PropertyJsonLdScript from "@/app/seo/Productjson";
 import ArticleJsonLdScript from "@/app/seo/ArticleJson";
+import PricingSection from "@/app/components/project/_ui/PricingDetailsSection";
+import PropertyDataDisplay from "@/app/components/project/_ui/PricingDetailsSection";
 // const FloorplansBlock = dynamic(
 //   () => import("@/app/components/project/floorplansBlock"),
 //   {
@@ -216,6 +218,11 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         <MasterPlan
           projName={data.projectName}
           media={data?.media?.projectPlanUrl}
+        />
+        <PropertyDataDisplay
+          unitData={data.partialUnitData}
+          projName={data.projectName}
+          phaseList={data.phases}
         />
         {!data.partialUnitData && overview && (
           <PartialUnitData

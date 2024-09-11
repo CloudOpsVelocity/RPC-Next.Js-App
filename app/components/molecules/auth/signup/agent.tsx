@@ -308,8 +308,8 @@ function Agent() {
                 "w-[100%] mb-[3%] ",
                 status === "error" && "!mb-[2px]"
               )}
-              label="Contact Number"
-              placeholder="Enter your contact number"
+              label="Mobile Number"
+              placeholder="Enter your mobile number"
               {...form.getInputProps("mobile")}
               error={form.errors.mobile || status === "error"}
               onChange={(e) => {

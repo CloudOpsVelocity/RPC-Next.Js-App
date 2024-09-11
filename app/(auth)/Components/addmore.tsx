@@ -19,6 +19,7 @@ type Props = {
   placeholder: string;
   label: string;
   form: UseFormReturnType<any>;
+  scrollToBottom: () => void;
 };
 type Item = {
   name: string;
@@ -26,7 +27,13 @@ type Item = {
   key: string;
 };
 
-export default function AddmoreInput({ id, form, placeholder, label }: Props) {
+export default function AddmoreInput({
+  id,
+  form,
+  placeholder,
+  label,
+  scrollToBottom,
+}: Props) {
   /*   const form = useForm({
         mode: 'uncontrolled',
         initialValues: {
@@ -66,9 +73,10 @@ export default function AddmoreInput({ id, form, placeholder, label }: Props) {
           error: StepCss.errorMsg,
           label: StepCss.mlabelCss,
         }}
-        onBlurCapture={(e) =>
-          handleTrimAndReplace(e, `${id}.${index}.name`, form)
-        }
+        onBlurCapture={(e) => {
+          handleTrimAndReplace(e, `${id}.${index}.name`, form);
+          e.target.value !== "" && scrollToBottom();
+        }}
         // onBlur={()=>form.validateField(`${id}.${index}.name`)}
       />
 

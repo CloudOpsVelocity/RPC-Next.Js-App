@@ -27,7 +27,7 @@ const reqSchema = yup.object().shape({
     .number()
     .positive("Contact number must be positive")
     .integer("Contact number must be an integer")
-    .typeError("Enter Your Contact Number")
+    .typeError("Enter Your Mobile Number")
     .test("mvalid", "Invalid mobile number", (val) => {
       const strVal = val?.toString();
       return /^[6-9]\d{9}$/.test(strVal ?? "");
@@ -37,7 +37,7 @@ const reqSchema = yup.object().shape({
       "Contact number must be exactly 10 digits",
       (val) => val?.toString().length === 10
     )
-    .required("Enter Your Contact Number"),
+    .required("Enter Your Mobile Number"),
 });
 const qnaSchema = yup.object().shape({
   question: yup

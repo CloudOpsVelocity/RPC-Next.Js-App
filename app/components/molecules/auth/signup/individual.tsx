@@ -78,15 +78,15 @@ function Individual() {
       {status === "success" ? (
         <Success />
       ) : (
-          <Box className="w-full max-w-[423px] m-1 mt-[3%] " mx="auto">
-            <div className=" sm:max-w-[459px] md:max-w-[597px] flex justify-center items-center gap-[15%] mb-[5%] ">
-              <LoginSignupTabs
-                searchParams={queryParam.query}
-                state="signup"
-                singupText="Individual Sign Up"
-                className="!px-[14px]"
-              />
-              {/* <Link
+        <Box className="w-full max-w-[423px] m-1 mt-[3%] " mx="auto">
+          <div className=" sm:max-w-[459px] md:max-w-[597px] flex justify-center items-center gap-[15%] mb-[5%] ">
+            <LoginSignupTabs
+              searchParams={queryParam.query}
+              state="signup"
+              singupText="Individual Sign Up"
+              className="!px-[14px]"
+            />
+            {/* <Link
                 href={{
                   pathname: "/login",
                   search: queryParam.query,
@@ -105,124 +105,124 @@ function Individual() {
               >
                 Individual Sign Up
               </Link> */}
-            </div>
-            <form
-              onSubmit={form.onSubmit(onSubmit)}
-              className="w-[100%] flex flex-col"
-            >
-              <TextInput
-                required
-                mt={"xs"}
-                size="lg"
-                className="w-[100%] mb-[3%] "
-                label="Your Name"
-                placeholder="Enter your name here"
-                {...form.getInputProps("name")}
-                onBlurCapture={(e) => handleTrimAndReplace(e, "name", form)}
-                classNames={{
-                  root: StepCss.inputRoot,
-                  input: StepCss.textInput,
-                  error: StepCss.errorMsg,
-                  label: StepCss.mlabelCss,
-                }}
-              />
-              <TextInput
-                type="email"
-                required
-                size="lg"
-                mt="xs"
-                label="Email"
-                placeholder="Enter your email here"
-                {...form.getInputProps("email")}
-                onBlurCapture={(e) => handleTrimAndReplace(e, "email", form)}
-                classNames={{
-                  root: StepCss.inputRoot,
-                  input: StepCss.textInput,
-                  error: StepCss.errorMsg,
-                  label: StepCss.mlabelCss,
-                }}
-                mb={"3%"}
-              />
-              <PasswordInput
-                mt={"xs"}
-                classNames={{
-                  visibilityToggle: P.visibilityToggle,
-                  root: StepCss.inputRoot,
-                  input: StepCss.textInput,
-                  innerInput: StepCss.textInput,
-                  error: StepCss.errorMsg,
-                  label: StepCss.mlabelCss,
-                }}
-                required
-                size="lg"
-                className="w-[100%] mb-[3%] "
-                label="Password"
-                placeholder="Create Your password"
-                visibilityToggleIcon={({ reveal }) =>
-                  reveal ? <EyeOpen /> : <EyeClosed />
-                }
-                {...form.getInputProps("password")}
-                onBlurCapture={(e) => handleTrimAndReplace(e, "password", form)}
-              />
-              <NumberInput
-                leftSection={
-                  <span className="text-[#212c33] font-medium text-[16px]">
-                    +91
-                  </span>
-                }
-                mt={"xs"}
-                required
-                classNames={{
-                  root: StepCss.inputRoot,
-                  input: S.classForContact,
-                  error: StepCss.errorMsg,
-                  label: StepCss.mlabelCss,
-                }}
-                hideControls
-                size="lg"
-                className={clsx(
-                  "w-[100%] mb-[3%] ",
-                  status === "error" && "!mb-[2px]"
-                )}
-                label="Contact Number"
-                placeholder="Enter Your Contact Number"
-                {...form.getInputProps("mobile")}
-                error={form.errors.mobile || status === "error"}
-                onChange={(e) => {
-                  form.setFieldValue("mobile", e as any);
-                  if (status === "error") {
-                    setStatus("idle");
-                  }
-                }}
-                allowDecimal={false}
-                maxLength={10}
-                onPaste={(event) => {
-                  if (status === "error") {
-                    setStatus("idle");
-                  }
-                  const pastedText = event.clipboardData.getData("text/plain");
-                  const trimmedText = pastedText.replace(/\s/g, "");
-                  const first10Digits = trimmedText
-                    .replace(/\D/g, "")
-                    .slice(0, 10);
-                  form.setFieldValue("mobile", first10Digits as any);
-                }}
-                allowNegative={false}
-              />
-              {status === "error" && (
-                <p className=" text-right text-[color:var(--Mandatory,#F00)] text-[12px] xl:text-[15px] italic font-medium leading-[normal]">
-                  Account already exists. Kindly use{" "}
-                  <Link
-                    href={{ pathname: "/login", search: queryParam.query }}
-                    className="text-[#0073C6] text-[15px] italic font-bold leading-[normal] underline"
-                  >
-                    Login
-                  </Link>{" "}
-                  below
-                </p>
+          </div>
+          <form
+            onSubmit={form.onSubmit(onSubmit)}
+            className="w-[100%] flex flex-col"
+          >
+            <TextInput
+              required
+              mt={"xs"}
+              size="lg"
+              className="w-[100%] mb-[3%] "
+              label="Your Name"
+              placeholder="Enter your name here"
+              {...form.getInputProps("name")}
+              onBlurCapture={(e) => handleTrimAndReplace(e, "name", form)}
+              classNames={{
+                root: StepCss.inputRoot,
+                input: StepCss.textInput,
+                error: StepCss.errorMsg,
+                label: StepCss.mlabelCss,
+              }}
+            />
+            <TextInput
+              type="email"
+              required
+              size="lg"
+              mt="xs"
+              label="Email"
+              placeholder="Enter your email here"
+              {...form.getInputProps("email")}
+              onBlurCapture={(e) => handleTrimAndReplace(e, "email", form)}
+              classNames={{
+                root: StepCss.inputRoot,
+                input: StepCss.textInput,
+                error: StepCss.errorMsg,
+                label: StepCss.mlabelCss,
+              }}
+              mb={"3%"}
+            />
+            <PasswordInput
+              mt={"xs"}
+              classNames={{
+                visibilityToggle: P.visibilityToggle,
+                root: StepCss.inputRoot,
+                input: StepCss.textInput,
+                innerInput: StepCss.textInput,
+                error: StepCss.errorMsg,
+                label: StepCss.mlabelCss,
+              }}
+              required
+              size="lg"
+              className="w-[100%] mb-[3%] "
+              label="Password"
+              placeholder="Create Your password"
+              visibilityToggleIcon={({ reveal }) =>
+                reveal ? <EyeOpen /> : <EyeClosed />
+              }
+              {...form.getInputProps("password")}
+              onBlurCapture={(e) => handleTrimAndReplace(e, "password", form)}
+            />
+            <NumberInput
+              leftSection={
+                <span className="text-[#212c33] font-medium text-[16px]">
+                  +91
+                </span>
+              }
+              mt={"xs"}
+              required
+              classNames={{
+                root: StepCss.inputRoot,
+                input: S.classForContact,
+                error: StepCss.errorMsg,
+                label: StepCss.mlabelCss,
+              }}
+              hideControls
+              size="lg"
+              className={clsx(
+                "w-[100%] mb-[3%] ",
+                status === "error" && "!mb-[2px]"
               )}
+              label="Mobile Number"
+              placeholder="Enter Your Mobile Number"
+              {...form.getInputProps("mobile")}
+              error={form.errors.mobile || status === "error"}
+              onChange={(e) => {
+                form.setFieldValue("mobile", e as any);
+                if (status === "error") {
+                  setStatus("idle");
+                }
+              }}
+              allowDecimal={false}
+              maxLength={10}
+              onPaste={(event) => {
+                if (status === "error") {
+                  setStatus("idle");
+                }
+                const pastedText = event.clipboardData.getData("text/plain");
+                const trimmedText = pastedText.replace(/\s/g, "");
+                const first10Digits = trimmedText
+                  .replace(/\D/g, "")
+                  .slice(0, 10);
+                form.setFieldValue("mobile", first10Digits as any);
+              }}
+              allowNegative={false}
+            />
+            {status === "error" && (
+              <p className=" text-right text-[color:var(--Mandatory,#F00)] text-[12px] xl:text-[15px] italic font-medium leading-[normal]">
+                Account already exists. Kindly use{" "}
+                <Link
+                  href={{ pathname: "/login", search: queryParam.query }}
+                  className="text-[#0073C6] text-[15px] italic font-bold leading-[normal] underline"
+                >
+                  Login
+                </Link>{" "}
+                below
+              </p>
+            )}
 
-              {/* <div className="min-w-[30px] !max-w-[75px] flex justify-center items-center ">
+            {/* <div className="min-w-[30px] !max-w-[75px] flex justify-center items-center ">
                 <CountryInput
                   onSelect={displayCountryCode}
                   className={`focus:outline-none min-w-[30px] !max-w-[75px] relative ${
@@ -235,53 +235,53 @@ function Individual() {
                 />
               </div> */}
 
-              <div className="w-full flex justify-between items-center flex-wrap-reverse">
-                <Button
-                  mt="sm"
-                  onClick={() => router.back()}
-                  className="!rounded-[6px] !border-solid  !w-[49%] !border-1 !border-blue-600 !bg-[#FFF] !text-[#0073C6] lg:!w-[100%] md:!max-w-[178px]  "
-                >
-                  <BackSvg /> Back
-                </Button>
-                <Button
-                  loading={status === "pending"}
-                  type="submit"
-                  mt="sm"
-                  className="!rounded-[6px] !w-[49%] md:!w-[100%]  md:!max-w-[225px] !bg-[#0c7aca]"
-                >
-                  SAVE & VERIFY
-                </Button>
-              </div>
-
-              <Link
-                href={{ pathname: "/login", search: queryParam.query }}
-                className="text-[#002749] font-semibold  sm:text-[14px] flex gap-1 justify-center items-center  rounded border p-2 border-solid border-[#B2B2B2] mb-3 mt-[5%] text-nowrap max-w-fit m-auto"
+            <div className="w-full flex justify-between items-center flex-wrap-reverse">
+              <Button
+                mt="sm"
+                onClick={() => router.back()}
+                className="!rounded-[6px] !border-solid  !w-[49%] !border-1 !border-blue-600 !bg-[#FFF] !text-[#0073C6] lg:!w-[100%] md:!max-w-[178px]  "
               >
-                Already have an Account?
-                <span className="sm:text-[14px]  text-[#0C7ACA]  not-italic font-semibold text-nowrap">
-                  LogIn
-                </span>
-              </Link>
-              {status === "error" && (
-                <p className="text-center text-[#556477] text-[16px] font-[600] xl:text-xl not-italic xl:font-medium leading-[normal] xl:mt-3 mb-[15px]">
-                  Forgot Password?{" "}
-                  <Link
-                    href={{ pathname: "/forgot", search: queryParam.query }}
-                    className="text-[color:var(--Brand-green-primary,#148B16)] text-[16px] xl:text-xl not-italic font-[600] xl:font-medium leading-[normal] underline"
-                  >
-                    Reset
-                  </Link>
-                </p>
-              )}
-
-              <Link
-                href={{ pathname: queryParam.redirectPath }}
-                className=" not-italic text-[#148B16] text-[14px]  font-semibold   leading-[normal]  sm:font-[400] border rounded-sm p-2 border-solid border-[#148B16] text-center max-w-fit m-auto"
+                <BackSvg /> Back
+              </Button>
+              <Button
+                loading={status === "pending"}
+                type="submit"
+                mt="sm"
+                className="!rounded-[6px] !w-[49%] md:!w-[100%]  md:!max-w-[225px] !bg-[#0c7aca]"
               >
-                Continue without Register
-              </Link>
-            </form>
-          </Box>
+                SAVE & VERIFY
+              </Button>
+            </div>
+
+            <Link
+              href={{ pathname: "/login", search: queryParam.query }}
+              className="text-[#002749] font-semibold  sm:text-[14px] flex gap-1 justify-center items-center  rounded border p-2 border-solid border-[#B2B2B2] mb-3 mt-[5%] text-nowrap max-w-fit m-auto"
+            >
+              Already have an Account?
+              <span className="sm:text-[14px]  text-[#0C7ACA]  not-italic font-semibold text-nowrap">
+                LogIn
+              </span>
+            </Link>
+            {status === "error" && (
+              <p className="text-center text-[#556477] text-[16px] font-[600] xl:text-xl not-italic xl:font-medium leading-[normal] xl:mt-3 mb-[15px]">
+                Forgot Password?{" "}
+                <Link
+                  href={{ pathname: "/forgot", search: queryParam.query }}
+                  className="text-[color:var(--Brand-green-primary,#148B16)] text-[16px] xl:text-xl not-italic font-[600] xl:font-medium leading-[normal] underline"
+                >
+                  Reset
+                </Link>
+              </p>
+            )}
+
+            <Link
+              href={{ pathname: queryParam.redirectPath }}
+              className=" not-italic text-[#148B16] text-[14px]  font-semibold   leading-[normal]  sm:font-[400] border rounded-sm p-2 border-solid border-[#148B16] text-center max-w-fit m-auto"
+            >
+              Continue without Register
+            </Link>
+          </form>
+        </Box>
       )}
 
       <AuthPopup

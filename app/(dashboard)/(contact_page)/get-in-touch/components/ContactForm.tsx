@@ -14,10 +14,11 @@ export default function ContactForm({}: Props) {
     },
 
     validate: {
-      name: (value) => (value.trim().length > 0 ? null : "Full Name is Required"),
+      name: (value) =>
+        value.trim().length > 0 ? null : "Full Name is Required",
       email: (value) => (/^\S+@\S+$/.test(value) ? null : "Email is Required"),
       tel: (value) =>
-        /^[0-9]{10}$/.test(value) ? null : "Contact Number is Required",
+        /^[0-9]{10}$/.test(value) ? null : "Mobile Number is Required",
       questions: (value) =>
         value.trim().length > 0 ? null : "Please Enter Your Query",
     },
@@ -64,11 +65,11 @@ export default function ContactForm({}: Props) {
 
       <label htmlFor="tel" className="w-full">
         <p className="text-[#333] text-[12px] sm:text-base not-italic font-semibold text-left">
-          Contact Number
+          Mobile Number
         </p>
         <input
           id="tel"
-          placeholder="Enter your Contact Number Here"
+          placeholder="Enter your Mobile Number Here"
           type="tel"
           className="rounded-[5px] border-[0.5px] border-solid border-[#666] bg-white text-[12px] sm:text-[16px] placeholder:text-[#767270] px-2 py-1 w-full"
           {...form.getInputProps("tel")}

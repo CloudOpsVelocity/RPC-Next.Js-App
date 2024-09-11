@@ -14,7 +14,6 @@ import {
   SimpleGrid,
   Textarea,
   MultiSelect,
-  ComboboxItem,
   Text,
   ScrollArea,
   FocusTrap,
@@ -463,8 +462,8 @@ function Builder() {
                 "w-[100%] mb-[3%] ",
                 status === "error" && "!mb-[2px]"
               )}
-              label="Contact Number"
-              placeholder="Enter Your Contact Number"
+              label="Mobile Number"
+              placeholder="Enter Your Mobile Number"
               {...form.getInputProps("mobile")}
               error={form.errors.mobile || status === "error"}
               onChange={(e) => {
@@ -730,18 +729,21 @@ function Builder() {
                 id={"foundedBy"}
                 label={"Founded By"}
                 placeholder={"Enter Founder name"}
+                scrollToBottom={scrollToBottom}
               />
               <AddmoreInput
                 form={form}
                 id={"ceoName"}
                 label={"CEO Name"}
                 placeholder={"Enter CEO Name"}
+                scrollToBottom={scrollToBottom}
               />
               <AddmoreInput
                 form={form}
                 id={"managingDirectorName"}
                 label={"Managing Director"}
                 placeholder={"Enter Managing Director Name"}
+                scrollToBottom={scrollToBottom}
               />
               {/* <TextInput
                 id="ceoName"

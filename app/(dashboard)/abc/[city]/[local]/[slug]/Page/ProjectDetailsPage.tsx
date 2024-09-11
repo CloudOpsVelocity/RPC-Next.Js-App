@@ -30,6 +30,7 @@ import QAJsonLdScript from "@/app/seo/Qnajson";
 import PropertyJsonLdScript from "@/app/seo/Productjson";
 import ArticleJsonLdScript from "@/app/seo/ArticleJson";
 import Reviews from "@/app/components/project/reviews";
+import PricingSection from "@/app/components/project/_ui/PricingDetailsSection";
 type Props = {
   projResponse: any;
   amenitiesFromDB: any;
@@ -144,6 +145,7 @@ export default async function ProjectsDetailsPage({
           projName={data.projectName}
           media={data?.media?.projectPlanUrl}
         />
+
         {!data.partialUnitData ? (
           <FloorplansBlock
             projName={data.projectName}
