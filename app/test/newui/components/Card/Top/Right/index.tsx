@@ -22,7 +22,6 @@ export default function TopRightSection({
   projName,
   lat,
   lang,
-
   Sh,
   onAddingShortList,
   projIdEnc,
@@ -413,24 +412,26 @@ export default function TopRightSection({
             </button>
             {type !== "proj" && (
               <>
-                <ListingDownSectionCard label={"Tower"} value={"Tower 1"} />
+                <ListingDownSectionCard label={"Tower"} value={towerName} />
                 <ListingDownSectionCard label={"Facing"} value={facing} />
                 {/* <ListingDownSectionCard
                   label={"Property Age"}
                   value={propertyAge}
                 /> */}
-                <ListingDownSectionCard label={"At Floor"} value={"2"} />
-                <button
-                  className="text-[14px]  text-btnPrimary  font-bold mt-2"
-                  onClick={() =>
-                    window.open(
-                      `/image?path=${floorPlan.split(".net")[1]}`,
-                      "_blank"
-                    )
-                  }
-                >
-                  View Floor Plan
-                </button>
+                <ListingDownSectionCard label={"At Floor"} value={atFloor} />
+                {floorPlan && (
+                  <button
+                    className="text-[14px]  text-btnPrimary  font-bold mt-2"
+                    onClick={() =>
+                      window.open(
+                        `/image?path=${floorPlan.split(".net")[1]}`,
+                        "_blank"
+                      )
+                    }
+                  >
+                    View Floor Plan
+                  </button>
+                )}
               </>
             )}
           </div>

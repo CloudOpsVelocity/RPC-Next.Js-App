@@ -120,6 +120,8 @@ const MainBox = ({ data, refetch }: Props) => {
           furnish={data.furnish}
           propStatus={data.propStatus}
           isUsed={isUsed}
+          availableFrom={data.availableFrom}
+          data={data}
         />
         <div className="relative">
           {overlayData.id && `${projIdEnc}+${propTypeId}` === overlayData.id ? (

@@ -102,7 +102,7 @@ export default function ListingData({
               label={"No. of Units"}
               value={formatNumberWithSuffix(noOfUnits)}
             />
-            {isPlot && <DownSectionCard label={"Approved By"} value={`BDA`} />}
+            <DownSectionCard label={"Approved By"} value={`BDA`} />
 
             {!isMobile && !isPlot && (
               <DownSectionCard label={"Elevation"} value={`G+${noOfTowers}`} />
@@ -135,7 +135,7 @@ export default function ListingData({
                 value={propertyAge ?? "N/A"}
               />
             )}
-
+            <DownSectionCard label={"Approved By"} value={`BDA`} />
             <div className="flex flex-nowrap gap-2 xl:gap-x-4">
               <DownSectionCard
                 label={"Bathrooms"}

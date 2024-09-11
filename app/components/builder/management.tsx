@@ -58,7 +58,7 @@ export default function ManagementBlock({
       </h1>
       <About
         id="builder_vision"
-        heading="" 
+        heading=""
         projName={""}
         content={vision}
         className="!text-[14px]"
@@ -68,7 +68,7 @@ export default function ManagementBlock({
         <a href={`tel:${officecontact}`}>
           <div
             // onClick={() => window.open(`tel:${officecontact}`)}
-            className="max-w-fit cursor-pointer flex justify-center items-center gap-0.5 p-1 rounded-md bg-gradient-to-tr from-[#EFF5FF] to-[#F2FAFF] mb-1"
+            className="max-w-fit cursor-pointer flex justify-center items-center gap-0.5 p-1 rounded-md bg-gradient-to-tr from-[#EFF5FF] to-[#F2FAFF] "
           >
             {callIconSvg}
             <p className="text-[#00487C]  text-[14px] sm:text-xl xl:text-[28px] not-italic font-semibold ">
@@ -79,7 +79,7 @@ export default function ManagementBlock({
 
         <a
           href={`tel:${officecontact}`}
-          className="text-[#242424]  text-[14px] sm:text-lg xl:text-2xl not-italic font-semibold xl:mt-2 underline ml-1.5"
+          className="text-[#242424]  text-[14px] sm:text-xl xl:text-[28px] not-italic font-semibold  underline ml-1.5"
         >
           {officecontact}
         </a>

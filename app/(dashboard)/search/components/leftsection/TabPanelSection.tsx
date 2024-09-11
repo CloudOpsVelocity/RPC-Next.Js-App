@@ -1,4 +1,3 @@
-import SearchSkeleton from "@/app/components/atoms/skeleton/search";
 import { emptyFilesIcon, strikeIconIcon } from "@/app/images/commonSvgs";
 import { Loader, Tabs } from "@mantine/core";
 import { useIntersection } from "@mantine/hooks";

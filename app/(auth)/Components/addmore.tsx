@@ -10,6 +10,7 @@ import {
   Text,
   Button,
 } from "@mantine/core";
+import { FaPlus, FaTimes } from "react-icons/fa";
 import { randomId } from "@mantine/hooks";
 import StepCss from "@/app/styles/Stepper.module.css";
 import handleTrimAndReplace from "@/app/utils/input/validations";
@@ -101,7 +102,6 @@ export default function AddmoreInput({
           No one here...
         </Text>
       )}
-
       {fields}
 
       {fields.length < 3 && (
@@ -113,10 +113,10 @@ export default function AddmoreInput({
               key: randomId(),
             })
           }
-          className=" ml-auto flex justify-end mt-1 bg-blue-500 hover:bg-blue-700 text-white font-normal text-[12px] py-[1px] px-[2px] rounded focus:outline-none focus:shadow-outline"
+          className=" ml-auto flex justify-end mt-1 bg-blue-500 hover:bg-blue-700 text-white  text-[12px] py-[1px]  rounded focus:outline-none focus:shadow-outline items-center font-semibold px-1"
           type="button"
         >
-          Add More
+          <FaPlus className="mr-1" /> Add More
         </button>
       )}
     </Box>
