@@ -147,7 +147,7 @@ export default function useAuth({
         return registrationResponse.data;
       }
     } catch (error: any) {
-      toast.error("User Already Exists");
+      toast.error("Something went wrong");
       // throw new Error("Something went wrong during registration.");
     }
   };
