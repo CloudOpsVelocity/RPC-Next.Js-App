@@ -22,7 +22,10 @@ const PricingSection = ({ unitData, projName, phaseList }: any) => {
     unitData[currentPhase]?.[propertyDetailsTypes.get(propCgId)?.apiProp ?? ""];
 
   return (
-    <section className="sm:p-6 bg-white rounded-lg shadow-lg w-[90%] mx-auto mt-2 sm:mt-[100px]">
+    <section
+      className="sm:p-6 bg-white rounded-lg shadow-lg w-[90%] mx-auto mt-2 sm:mt-[100px]"
+      id="pricing"
+    >
       <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-semibold text-gray-800 mb-4">
         Pricing Details of{" "}
         <span className="text-greenPrimary font-extrabold">{projName}</span>

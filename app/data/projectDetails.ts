@@ -5,6 +5,7 @@ export const topics = [
   { label: "About", id: "about" },
   { label: "Property Details", id: "propertyDetails" },
   { label: "Master Plan", id: "masterPlan" },
+  { label: "Pricing Details", id: "pricing" },
   { label: "Floor Plans", id: "floorPlans" },
   { label: "Gallery", id: "galleria" },
   { label: "Amenities", id: "amenities" },

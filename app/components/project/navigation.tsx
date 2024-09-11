@@ -113,6 +113,7 @@ export default function Navigation({
     { condtion: true, key: "about" },
     { condtion: true, key: "propertyDetails" },
     { condtion: true, key: "masterPlan" },
+    { condtion: true, key: "pricing" },
     { condtion: true, key: "floorPlans" },
     { condtion: true, key: "galleria" },
     { condtion: detailsData?.amenityList?.length > 0, key: "amenities" },
