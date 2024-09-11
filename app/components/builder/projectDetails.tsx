@@ -31,7 +31,6 @@ export default function ProjectDetails({
   localityName,
   citiesName,
 }: Data) {
-
   console.log("testind data: ", userName, companyName);
 
   return (
@@ -98,7 +97,7 @@ export default function ProjectDetails({
           <Card
             Icon={callIconSvg}
             title="Contact"
-            content={`${mobile}`}
+            content={`${officecontact}`}
             type="mobile"
           />
 

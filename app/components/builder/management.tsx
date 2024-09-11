@@ -64,7 +64,7 @@ export default function ManagementBlock({
         className="!text-[14px]"
       />
 
-      <div className="flex  justify-start items-center w-full gap-[8px] mt-[0%]  ">
+      {/* <div className="flex  justify-start items-center w-full gap-[8px] mt-[0%]  ">
         <a href={`tel:${officecontact}`}>
           <div
             // onClick={() => window.open(`tel:${officecontact}`)}
@@ -83,7 +83,7 @@ export default function ManagementBlock({
         >
           {officecontact}
         </a>
-      </div>
+      </div> */}
 
       {keys?.length > 1 && (
         <>
