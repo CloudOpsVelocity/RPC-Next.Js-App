@@ -28,29 +28,21 @@ import { useForm } from "@/app/context/floorplanContext";
 import { setPropertyValues } from "@/app/utils/dyanamic/projects";
 export default function InFoCarousel({ partialUnitData }: Props) {
   const currentPhase = useAtomValue(currentPhaseAtom);
-  const form = useForm();
+
   const propCgId = useAtomValue(propCgIdAtom);
-  const setFloorsArray = useSetAtom(floorPlansArray);
-  const [selectedFloor, setSelectedFloor] = useAtom(selectedFloorAtom);
-  const [, { open, type }] = useFloorPlanPopup();
-  const { data: projectUnitsData, isLoading } = useQuery({
-    queryKey: [`/${propCgId}/${currentPhase}/${partialUnitData.id}`],
-    ...RTK_CONFIG,
-  });
 
   const data =
     partialUnitData[currentPhase][
       propertyDetailsTypes.get(propCgId)?.apiProp ?? ""
     ];
   const setData = useSetAtom(selectedPartialUnitAtom);
-  const handleContainerClick = () => {
-    setSelectedFloor(null);
-    setFloorsArray(projectUnitsData as any);
-    open("container");
-  };
+
   const handleCardClick = (units: any, item: any) => {
     if (partialUnitData.type === "overview") {
-      handleContainerClick();
+      partialUnitData.handlePricingFloorPlanClick &&
+        partialUnitData.handlePricingFloorPlanClick({
+          bhkName: item,
+        });
       return;
     }
     setData({

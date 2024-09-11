@@ -65,7 +65,7 @@ const PricingSection = ({ unitData, projName, phaseList }: any) => {
           return (
             <Button
               key={keyName}
-              buttonClass={`flex items-center gap-2 mb-2 rounded-full sm:py-1 px-2 sm:px-4 text-xs sm:text-sm border ${
+              buttonClass={`flex items-center gap-2 mb-2 rounded-full sm:py-1 px-2 sm:px-4 text-xs sm:text-sm border font-semibold ${
                 propCgId === keyName
                   ? "text-blue-700 bg-blue-100 border-blue-700 font-semibold"
                   : "text-gray-700 bg-gray-200 border-gray-300"

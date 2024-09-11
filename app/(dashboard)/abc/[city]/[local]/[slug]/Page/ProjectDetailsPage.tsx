@@ -146,7 +146,7 @@ export default async function ProjectsDetailsPage({
           media={data?.media?.projectPlanUrl}
         />
 
-        {!data.partialUnitData ? (
+        {/* {!data.partialUnitData ? (
           <FloorplansBlock
             projName={data.projectName}
             data={data.phases}
@@ -161,7 +161,7 @@ export default async function ProjectsDetailsPage({
             phaseList={data.phases}
             data={data}
           />
-        )}
+        )} */}
 
         <GalleryBlock
           {...data.media}

@@ -50,6 +50,7 @@ import { formatNumberWithSuffix } from "@/app/utils/numbers";
 import UnitsImagesBlock from "./unitblock/UnitsImagesBlock";
 import { useMediaQuery } from "@mantine/hooks";
 import Image from "next/image";
+import PartialUnitData from "./sections";
 
 type Props = {
   data: PhaseList[];
@@ -57,6 +58,8 @@ type Props = {
   projName: string;
   PhaseOverview: any;
   phaseList: any;
+  partialUnitData: any;
+  overview: any;
 };
 
 export default function FloorplansBlock({
@@ -64,6 +67,8 @@ export default function FloorplansBlock({
   slug,
   PhaseOverview,
   phaseList,
+  partialUnitData,
+  overview,
 }: Props) {
   const allKeys = [35, 33, 31, 34, 32];
   const [propCgId, setPropCgId] = useAtom(propCgIdAtom);
@@ -182,12 +187,9 @@ export default function FloorplansBlock({
     handleSearch();
     open("floor");
   };
-  const handleUnitClick = () => {
-    form.setValues(setPropertyValues(selectedFloor, propCgId));
-    const filteredFloors = projectUnitsData.filter(
-      (floor: any) => floor.unitNumber === selectedFloor.unitNumber
-    );
-    setFloorsArray(filteredFloors);
+  const handlePricingFloorPlanClick = (selectedBhk: any) => {
+    form.setValues(setPropertyValues(selectedBhk, propCgId));
+    handleSearch();
     open("floor");
   };
   const handleContainerClick = () => {
@@ -232,6 +234,16 @@ export default function FloorplansBlock({
   if (isLoading) return <Loading />;
   return (
     <>
+      {!partialUnitData && overview && (
+        <PartialUnitData
+          partialUnitData={overview}
+          projName={projName}
+          phaseList={phaseList}
+          data={projectUnitsData}
+          type="overview"
+          handlePricingFloorPlanClick={handlePricingFloorPlanClick}
+        />
+      )}{" "}
       <div
         className="w-[95%] md:w-[90%] mt-[50px] scroll-mt-[150px] mb-[2%] sm:mb-[0%]"
         id="floorPlans"

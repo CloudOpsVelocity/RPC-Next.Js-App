@@ -219,23 +219,18 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           projName={data.projectName}
           media={data?.media?.projectPlanUrl}
         />
-        <PropertyDataDisplay
-          unitData={data.partialUnitData}
-          projName={data.projectName}
-          phaseList={data.phases}
-        />
-        {!data.partialUnitData && overview && (
-          <PartialUnitData
-            partialUnitData={overview}
+        {data.partialUnitData && (
+          <PropertyDataDisplay
+            unitData={data.partialUnitData}
             projName={data.projectName}
             phaseList={data.phases}
-            data={data}
-            type="overview"
           />
         )}
 
         {!data.partialUnitData ? (
           <FloorplansBlock
+            partialUnitData={data.partialUnitData}
+            overview={overview}
             projName={data.projectName}
             data={data.phases}
             slug={slug}

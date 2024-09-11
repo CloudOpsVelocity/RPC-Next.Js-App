@@ -195,7 +195,7 @@ export default function GalleryBlock({
                         controls
                       >
                         <track
-                          src="path_to_your_captions_file.vtt" // Replace with the actual path to your captions file
+                          src="/audio.vtt" // Replace with the actual path to your captions file
                           kind="captions"
                           srcLang="en"
                           label="English"

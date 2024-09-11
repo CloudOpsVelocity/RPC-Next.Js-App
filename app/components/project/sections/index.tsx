@@ -12,6 +12,7 @@ type Props = {
   phaseList: any;
   data: any;
   type?: "overview" | "partial";
+  handlePricingFloorPlanClick?: (selectedBhk: any) => void;
 };
 
 export default function PartialUnitData({
@@ -20,6 +21,7 @@ export default function PartialUnitData({
   phaseList,
   data,
   type,
+  handlePricingFloorPlanClick,
 }: Props) {
   const currentPhase = useAtomValue(currentPhaseAtom);
   const isPropTypesAvailable = Object.keys(partialUnitData[currentPhase] || {});
@@ -38,7 +40,7 @@ export default function PartialUnitData({
       />
       {isPropTypesAvailable.length > 0 ? (
         <MainSection
-          partialUnitData={partialUnitData}
+          partialUnitData={{ ...partialUnitData, handlePricingFloorPlanClick }}
           data={{ ...data, type }}
         />
       ) : (

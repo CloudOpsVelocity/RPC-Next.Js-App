@@ -8,7 +8,7 @@ type props = {
 
 const Logo = ({ styles }: props) => {
   return (
-    <Link href={"/"} className={styles}>
+    <button className={styles}>
       {/* <Image
         src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/grp-logo/Logo-without-background.png`}
         alt="logo"
@@ -17,8 +17,8 @@ const Logo = ({ styles }: props) => {
         height={80}
       /> */}
       <GrpLogoSvg className="w-[150px] md:w-[220px]" />
-    </Link>
+    </button>
   );
 };
 
-export default Logo; 
+export default Logo;
