@@ -89,10 +89,12 @@ export default function useAuth({
       username: data.username,
       password: encryptedPassword,
     };
+
     const res = await signIn("credentials", {
       ...requestData,
       redirect: false,
     });
+    console.log(res);
     if (res?.ok) {
       type === "register"
         ? setTimeout(() => {
@@ -100,6 +102,14 @@ export default function useAuth({
           }, 5000)
         : router.push(redirectPath);
     } else {
+      if (res?.error === "A") {
+        router.push("/register/builder");
+        toast.success("Redirecting to registration", {
+          duration: 5000,
+          icon: "⌛",
+        });
+        return null;
+      }
       toast.error(res?.error || "Something went wrong. Please try again.", {
         duration: 1000,
       });

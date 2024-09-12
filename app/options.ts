@@ -34,8 +34,21 @@ export const options: NextAuthOptions = {
               password: decryptedPassword,
             }
           );
-          console.log(res.data);
           if (res.data.status) {
+            if (res.data.flag === "a") {
+              const encryptedValue = CryptoJS.AES.encrypt(
+                [credentials?.username, credentials?.password, "1"].join(":"),
+                process.env.NEXT_PUBLIC_SECRET!!
+              ).toString();
+              cookies().set("resume_signup_token", encryptedValue, {
+                maxAge: 10 * 60, // 10 minutes, or adjust as needed
+                secure: true,
+                httpOnly: true,
+                sameSite: "strict",
+                path: "/",
+              });
+              throw new Error("A");
+            }
             cookies().set("token", res.data.token, {
               maxAge: 365 * 24 * 60 * 60,
               secure: true,

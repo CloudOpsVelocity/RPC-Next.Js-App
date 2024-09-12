@@ -69,11 +69,11 @@ import { getQueryParamClient } from "@/app/hooks/custom/useRedirect";
 import LoginSignupTabs from "@/app/(auth)/Components/LoginSignup";
 import AddmoreInput from "@/app/(auth)/Components/addmore";
 
-function Builder() {
+function Builder({ encriptedData }: any) {
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error" | "otp"
   >("idle");
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(encriptedData ? 1 : 0);
   const router = useRouter();
 
   const [opened, { open, close }] = useDisclosure(false);
