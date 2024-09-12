@@ -4,6 +4,15 @@ export function middleware(request: NextRequest) {
   const headers = new Headers(request.headers);
   headers.set("x-current-path", request.nextUrl.pathname);
   const token = cookies().get("token")?.value;
+  const signUpToken = cookies().get("resume_signup_token")?.value;
+  const excludedPath = "/register/builder";
+  console.log(request.nextUrl.pathname);
+  if (signUpToken && request.nextUrl.pathname !== excludedPath) {
+    // Clear only the signup token cookie
+    const response = NextResponse.next();
+    response.cookies.delete("resume_signup_token");
+    return response;
+  }
   if (!token) {
     // Clear all authentication related cookies
     const response = NextResponse.next();
@@ -30,7 +39,7 @@ export function middleware(request: NextRequest) {
 }
 export const config = {
   matcher: [
-    // "/:path*",
-    "/((?!api|_next/static|_next/image|favicon.ico).*)",
+    // Exclude specific paths from middleware
+    "/((?!api|_next/static|_next/image|favicon.ico|favicons/manifest.json|auth/login.svg|favicons/favicon-32x32.png|android-icon-144x144.png|android-icon-36x36.png|android-icon-48x48.png|android-icon-72x72.png|android-icon-96x96.png|android-icon-192x192.png).*)",
   ],
 };

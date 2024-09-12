@@ -77,7 +77,6 @@ function Builder({ encriptedData }: any) {
   >("idle");
   const [active, setActive] = useState(encriptedData ? 1 : 0);
   const router = useRouter();
-  const pathname = usePathname();
 
   const [opened, { open, close }] = useDisclosure(false);
 
