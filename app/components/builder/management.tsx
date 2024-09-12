@@ -58,7 +58,7 @@ export default function ManagementBlock({
       </h1>
       <About
         id="builder_vision"
-        heading=""
+        heading="Company Vision Of"
         projName={""}
         content={vision}
         className="!text-[14px]"
