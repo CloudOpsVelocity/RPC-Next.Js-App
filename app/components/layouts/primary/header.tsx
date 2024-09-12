@@ -21,16 +21,15 @@ type Props = {};
 export default function Header({}: Props) {
   const isMobile = useMediaQuery("(max-width: 601px)");
   const path = usePathname();
-  console.log(path)
   return (
     <div className="flex h-[70px] items-center justify-between shrink-0 p-1 pl-2 sm:pl-5 w-full py-3  shadow-[0px_4px_20px_0px_rgba(194,194,194,0.20)] bg-gradient-to-r from-[#f1f1f1] via-[#f1f1f1]  to-[#bde3ff] fixed top-0 z-[100]">
-      {path !== "/" ?
-      <Link href={"/"}> 
+      {path !== "/" ? (
+        <Link href={"/"}>
+          <GrpLogoSvg className="h-[40px] w-[160px]  sm:h-[50px] sm:w-auto" />
+        </Link>
+      ) : (
         <GrpLogoSvg className="h-[40px] w-[160px]  sm:h-[50px] sm:w-auto" />
-      </Link>
-      :
-      <GrpLogoSvg className="h-[40px] w-[160px]  sm:h-[50px] sm:w-auto" />
-      }
+      )}
       {isMobile ? (
         <div className="flex  sm:hidden mr-4 gap-4">
           <Btn />
@@ -105,9 +104,7 @@ function Dropdown() {
     try {
       if (process.env.NODE_ENV === "development") {
         await signOut();
-        await axios.get(
-          `${process.env.NEXT_PUBLIC_URL}/user/v1/logOut`
-        );
+        await axios.get(`${process.env.NEXT_PUBLIC_URL}/user/v1/logOut`);
       } else {
         await axios
           .get(`${process.env.NEXT_PUBLIC_URL}/user/v1/logOut`)
@@ -160,44 +157,44 @@ function Dropdown() {
         )}
       </Menu.Target>
       {session ? (
-          <Menu.Dropdown
-            className="!z-[1000]"
-            classNames={{
-              dropdown: S.dropdown,
-            }}
-          >
-            <>
-              {data.map((item, index) =>
-                session.user?.userType !== "B" &&
-                item.label === "Post Project" ? null : (
-                  <Menu.Item
-                    key={`dataCrad_${item.label[index]}`}
-                    classNames={{
-                      itemLabel: S.itemLabel,
-                    }}
-                    component="a"
-                    className="block text-gray-700 hover:text-green-500 transition-colors"
-                    href={item.url}
-                    target="_blank"
-                  >
-                    {item.label}
-                  </Menu.Item>
-                )
-              )}
-              <hr className=" bg-[#768AA9] h-0.5 max-w-[90%] m-auto" />
-            </>
+        <Menu.Dropdown
+          className="!z-[1000]"
+          classNames={{
+            dropdown: S.dropdown,
+          }}
+        >
+          <>
+            {data.map((item, index) =>
+              session.user?.userType !== "B" &&
+              item.label === "Post Project" ? null : (
+                <Menu.Item
+                  key={`dataCrad_${item.label[index]}`}
+                  classNames={{
+                    itemLabel: S.itemLabel,
+                  }}
+                  component="a"
+                  className="block text-gray-700 hover:text-green-500 transition-colors"
+                  href={item.url}
+                  target="_blank"
+                >
+                  {item.label}
+                </Menu.Item>
+              )
+            )}
+            <hr className=" bg-[#768AA9] h-0.5 max-w-[90%] m-auto" />
+          </>
 
-            <Menu.Item
-              classNames={{
-                itemLabel: S.itemLabel,
-              }}
-              component="button"
-              className="block text-gray-700 hover:text-green-500 transition-colors"
-              onClick={handleLogout}
-            >
-              Log Out
-            </Menu.Item>
-          </Menu.Dropdown>
+          <Menu.Item
+            classNames={{
+              itemLabel: S.itemLabel,
+            }}
+            component="button"
+            className="block text-gray-700 hover:text-green-500 transition-colors"
+            onClick={handleLogout}
+          >
+            Log Out
+          </Menu.Item>
+        </Menu.Dropdown>
       ) : (
         <Menu.Dropdown
           className="!z-[1000]"
@@ -322,68 +319,67 @@ function MobileDropDown() {
         )}
       </Menu.Target>
       {session ? (
-          <Menu.Dropdown
-            className="!z-[1000]"
-            classNames={{
-              dropdown: S.dropdown,
-            }}
-          >
-            <>
-              {data.map((item, index) =>
-                session.user?.userType !== "B" &&
-                item.label === "Post Project" ? null : index == 0 &&
-                  isMobile ? (
-                  <button
-                    onClick={() =>
-                      window.open(
-                        `${process.env.NEXT_PUBLIC_PROJECT_URL}/my-profile`,
-                        "_blank"
-                      )
-                    }
-                    className={`rounded w-full text-wrap flex items-center gap-4 text-[20px] text-gray-700 hover:text-green-500 transition-colors p-1 capitalize ${
-                      session.user.userType == "A"
-                        ? "bg-[#FFFCE7]"
-                        : session.user.userType == "B"
-                        ? "bg-[#dff8f8]"
-                        : "bg-[#D9F1CD]"
-                    }`}
-                  >
-                    {config.getIcon(session.user.userType)}{" "}
-                    {session.user.name.split(" ")[0].length >= 3
-                      ? session.user.name.split(" ")[0]
-                      : session.user.name.split(" ")[1] != undefined
-                      ? session.user.name.split(" ")[1]
-                      : session.user.name.split(" ")[0]}
-                  </button>
-                ) : (
-                  <Menu.Item
-                    key={Math.random()}
-                    classNames={{
-                      itemLabel: S.itemLabel,
-                    }}
-                    component="a"
-                    className="block text-gray-700 hover:text-green-500 transition-colors"
-                    href={item.url}
-                    target="_blank"
-                  >
-                    {item.label}
-                  </Menu.Item>
-                )
-              )}
-              <hr className=" bg-[#768AA9] h-0.5 max-w-[90%] m-auto" />
-            </>
+        <Menu.Dropdown
+          className="!z-[1000]"
+          classNames={{
+            dropdown: S.dropdown,
+          }}
+        >
+          <>
+            {data.map((item, index) =>
+              session.user?.userType !== "B" &&
+              item.label === "Post Project" ? null : index == 0 && isMobile ? (
+                <button
+                  onClick={() =>
+                    window.open(
+                      `${process.env.NEXT_PUBLIC_PROJECT_URL}/my-profile`,
+                      "_blank"
+                    )
+                  }
+                  className={`rounded w-full text-wrap flex items-center gap-4 text-[20px] text-gray-700 hover:text-green-500 transition-colors p-1 capitalize ${
+                    session.user.userType == "A"
+                      ? "bg-[#FFFCE7]"
+                      : session.user.userType == "B"
+                      ? "bg-[#dff8f8]"
+                      : "bg-[#D9F1CD]"
+                  }`}
+                >
+                  {config.getIcon(session.user.userType)}{" "}
+                  {session.user.name.split(" ")[0].length >= 3
+                    ? session.user.name.split(" ")[0]
+                    : session.user.name.split(" ")[1] != undefined
+                    ? session.user.name.split(" ")[1]
+                    : session.user.name.split(" ")[0]}
+                </button>
+              ) : (
+                <Menu.Item
+                  key={Math.random()}
+                  classNames={{
+                    itemLabel: S.itemLabel,
+                  }}
+                  component="a"
+                  className="block text-gray-700 hover:text-green-500 transition-colors"
+                  href={item.url}
+                  target="_blank"
+                >
+                  {item.label}
+                </Menu.Item>
+              )
+            )}
+            <hr className=" bg-[#768AA9] h-0.5 max-w-[90%] m-auto" />
+          </>
 
-            <Menu.Item
-              classNames={{
-                itemLabel: S.itemLabel,
-              }}
-              component="button"
-              className="block text-gray-700 hover:text-green-500 transition-colors"
-              onClick={handleLogout}
-            >
-              Log Out
-            </Menu.Item>
-          </Menu.Dropdown>
+          <Menu.Item
+            classNames={{
+              itemLabel: S.itemLabel,
+            }}
+            component="button"
+            className="block text-gray-700 hover:text-green-500 transition-colors"
+            onClick={handleLogout}
+          >
+            Log Out
+          </Menu.Item>
+        </Menu.Dropdown>
       ) : (
         <Menu.Dropdown
           className="!z-[1000]"
