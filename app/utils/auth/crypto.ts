@@ -1,8 +1,9 @@
 import CryptoJS from "crypto-js";
 import { getCookie } from "cookies-next";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 
 export async function decryptResumeSignupToken() {
+  console.log(headers().get("cookie"));
   // Get the encrypted token from cookies
   const encryptedToken = await cookies().get("resume_signup_token")?.value;
   if (!encryptedToken) {

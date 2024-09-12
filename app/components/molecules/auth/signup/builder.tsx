@@ -25,11 +25,11 @@ import StepCss from "@/app/styles/Stepper.module.css";
 import { useForm, yupResolver } from "@mantine/form";
 import { DateInput } from "@mantine/dates";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { styles } from "@/app/styles/Stepper";
 import { DropZone } from "./dropzone";
 import AuthPopup from "../authPopup";
-import { randomId, useDisclosure } from "@mantine/hooks";
+import { randomId, useDisclosure, usePageLeave } from "@mantine/hooks";
 import useAuth from "@/app/hooks/useAuth";
 import Success from "../success";
 import { useQuery } from "react-query";
@@ -38,6 +38,7 @@ import {
   getCitiesDetails,
   getStatesDetails,
 } from "@/app/utils/stats_cities";
+import { deleteCookie } from "cookies-next";
 import {
   cityParser,
   registerOtherParser,
@@ -52,6 +53,7 @@ import {
 } from "@/app/validations/auth";
 import CountryInput from "@/app/components/atoms/CountryInput";
 import N from "@/app/styles/Numinput.module.css";
+import OldRouter from "next/router";
 import {
   BackSvg,
   DateIcons,
@@ -75,6 +77,7 @@ function Builder({ encriptedData }: any) {
   >("idle");
   const [active, setActive] = useState(encriptedData ? 1 : 0);
   const router = useRouter();
+  const pathname = usePathname();
 
   const [opened, { open, close }] = useDisclosure(false);
 
@@ -133,6 +136,16 @@ function Builder({ encriptedData }: any) {
       return {};
     },
   });
+  useEffect(() => {
+    // This effect runs whenever the pathname changes
+    const handleRouteChange = () => {
+      // Delete the cookie when changing routes or refreshing the page
+      deleteCookie("resume_signup_token");
+      console.log("Cookie deleted on route change or refresh");
+    };
+
+    handleRouteChange();
+  }, [pathname]);
   const { data: statesData, isLoading: isLoadingStates } = useQuery(
     ["states"],
     getStatesDetails,
@@ -480,12 +493,18 @@ function Builder({ encriptedData }: any) {
                 if (status === "error") {
                   setStatus("idle");
                 }
+
                 const pastedText = event.clipboardData.getData("text/plain");
-                const trimmedText = pastedText.replace(/\s/g, "");
-                const first10Digits = trimmedText
+
+                // Remove all spaces and non-digit characters, then remove leading zeros
+                const trimmedText = pastedText
                   .replace(/\D/g, "")
-                  .slice(0, 10);
-                form.setFieldValue("mobile", Number(first10Digits) as any);
+                  .replace(/^0+/, "");
+                console.log(trimmedText);
+                // Keep only the first 10 digits after processing
+                const first10Digits = trimmedText.slice(0, 10);
+
+                form.setFieldValue("mobile", first10Digits as any);
               }}
             />
             {status === "error" && (

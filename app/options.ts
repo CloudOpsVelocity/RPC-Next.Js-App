@@ -41,9 +41,7 @@ export const options: NextAuthOptions = {
                 process.env.NEXT_PUBLIC_SECRET!!
               ).toString();
               cookies().set("resume_signup_token", encryptedValue, {
-                maxAge: 10 * 60, // 10 minutes, or adjust as needed
-                secure: true,
-                httpOnly: true,
+                maxAge: 5 * 60, // 10 minutes, or adjust as needed
                 sameSite: "strict",
                 path: "/",
               });

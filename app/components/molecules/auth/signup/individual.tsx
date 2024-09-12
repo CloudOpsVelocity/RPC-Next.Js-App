@@ -200,11 +200,17 @@ function Individual() {
                 if (status === "error") {
                   setStatus("idle");
                 }
+
                 const pastedText = event.clipboardData.getData("text/plain");
-                const trimmedText = pastedText.replace(/\s/g, "");
-                const first10Digits = trimmedText
+
+                // Remove all spaces and non-digit characters, then remove leading zeros
+                const trimmedText = pastedText
                   .replace(/\D/g, "")
-                  .slice(0, 10);
+                  .replace(/^0+/, "");
+                console.log(trimmedText);
+                // Keep only the first 10 digits after processing
+                const first10Digits = trimmedText.slice(0, 10);
+
                 form.setFieldValue("mobile", first10Digits as any);
               }}
               allowNegative={false}

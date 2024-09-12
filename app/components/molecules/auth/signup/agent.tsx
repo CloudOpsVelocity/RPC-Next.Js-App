@@ -332,11 +332,13 @@ function Agent() {
                   setStatus("idle");
                 }
                 const pastedText = event.clipboardData.getData("text/plain");
-                const trimmedText = pastedText.replace(/\s/g, "");
-                const first10Digits = trimmedText
+                const trimmedText = pastedText
                   .replace(/\D/g, "")
-                  .slice(0, 10);
-                form.setFieldValue("mobile", Number(first10Digits) as any);
+                  .replace(/^0+/, "");
+                console.log(trimmedText);
+                const first10Digits = trimmedText.slice(0, 10);
+
+                form.setFieldValue("mobile", first10Digits as any);
               }}
             />
             {status === "error" && (
