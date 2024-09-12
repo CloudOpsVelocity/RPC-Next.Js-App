@@ -86,8 +86,8 @@ function Builder({ encriptedData }: any) {
     initialValues: {
       userName: "",
       email: "",
-      password: "",
-      mobile: null,
+      password: encriptedData?.password || "",
+      mobile: encriptedData?.username || null,
       address: "",
       companyName: "",
       state: "",
@@ -891,7 +891,11 @@ function Builder({ encriptedData }: any) {
               <Button
                 mt="sm"
                 onClick={() => {
-                  active !== 0 ? prevStep() : router.back();
+                  if (encriptedData) {
+                    active === 1 ? router.back() : prevStep();
+                  } else {
+                    active !== 0 ? prevStep() : router.back();
+                  }
                 }}
                 className="!rounded-[6px] !border-solid  !w-[46%] !border-1 !border-blue-600 !bg-[#FFF] !text-[#0073C6] md:!w-[100%] md:!max-w-[178px]"
               >

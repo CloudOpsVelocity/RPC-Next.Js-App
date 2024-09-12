@@ -47,6 +47,12 @@ export const options: NextAuthOptions = {
                 sameSite: "strict",
                 path: "/",
               });
+              cookies().set("token", res.data.token, {
+                maxAge: 365 * 24 * 60 * 60,
+                secure: true,
+                httpOnly: true,
+                path: "/",
+              });
               throw new Error("A");
             }
             cookies().set("token", res.data.token, {
