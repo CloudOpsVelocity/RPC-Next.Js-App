@@ -20,7 +20,7 @@ type Props = {
   placeholder: string;
   label: string;
   form: UseFormReturnType<any>;
-  scrollToBottom: () => void;
+  scrollToBottom: (customValue?: number) => void;
 };
 type Item = {
   name: string;
@@ -47,7 +47,7 @@ export default function AddmoreInput({
        */
 
   const fields = form.getValues()[id].map((item: Item, index: number) => (
-    <Group key={item.key} mt="xs">
+    <Group key={item.key}>
       <TextInput
         rightSection={
           index != 0 && (
@@ -63,7 +63,9 @@ export default function AddmoreInput({
         id={id}
         required={index == 0 ? true : false}
         size="lg"
-        mt="md"
+        {...(index == 0 ? { mt: 0 } : { mt: "md" })}
+        {...(index == 2 && { mb: "xs" })}
+        // mt={"md"}
         label={index != 0 ? `${label} ${index + 1}` : label}
         placeholder={placeholder}
         key={form.key(`${label}.${index}.name`)}
@@ -76,7 +78,10 @@ export default function AddmoreInput({
         }}
         onBlurCapture={(e) => {
           handleTrimAndReplace(e, `${id}.${index}.name`, form);
-          e.target.value !== "" && scrollToBottom();
+          e.target.value !== "" &&
+            setTimeout(() => {
+              scrollToBottom();
+            }, 100);
         }}
         // onBlur={()=>form.validateField(`${id}.${index}.name`)}
       />
@@ -92,7 +97,7 @@ export default function AddmoreInput({
     <Box maw={500} mx="auto">
       {}
       {fields.length > 0 ? (
-        <Group mb="xs">
+        <Group>
           {/*  <Text fw={500} size="sm" pr={90}>
       Status
     </Text> */}
@@ -106,13 +111,15 @@ export default function AddmoreInput({
 
       {fields.length < 3 && (
         <button
-          onClick={() =>
+          onClick={(e) => {
+            e.stopPropagation();
+            e.preventDefault();
             form.insertListItem(id, {
               name: "",
               active: false,
               key: randomId(),
-            })
-          }
+            });
+          }}
           className=" ml-auto flex justify-end mt-1 bg-blue-500 hover:bg-blue-700 text-white  text-[12px] py-[1px]  rounded focus:outline-none focus:shadow-outline items-center font-semibold px-1"
           type="button"
         >

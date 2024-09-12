@@ -292,9 +292,9 @@ function Builder() {
     form.setFieldValue("city", null);
   };
   const viewport = useRef<HTMLDivElement>(null);
-  const scrollToBottom = () =>
+  const scrollToBottom = (customValue?: number) =>
     viewport.current!.scrollTo({
-      top: viewport.current!.scrollHeight,
+      top: customValue ?? viewport.current!.scrollHeight,
       behavior: "smooth",
     });
   const scrollWhereIsSelected = (item: string) => {
@@ -704,6 +704,7 @@ function Builder() {
                   label: StepCss.mlabelCss,
                   calendarHeader: StepCss.calendComStDt,
                 }}
+                mb={"md"}
               />
               {/* <TextInput
                 id="foundedBy"
@@ -785,7 +786,7 @@ function Builder() {
                 id="officeContact"
                 required
                 size="lg"
-                mt="md"
+                // mt="md"
                 label="Office Contact Number"
                 placeholder="Enter Office Contact Number"
                 {...form.getInputProps("officeContact")}
