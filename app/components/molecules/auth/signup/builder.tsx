@@ -38,7 +38,7 @@ import {
   getCitiesDetails,
   getStatesDetails,
 } from "@/app/utils/stats_cities";
-import { deleteCookie } from "cookies-next";
+import { deleteCookie, getCookie } from "cookies-next";
 import {
   cityParser,
   registerOtherParser,
@@ -75,7 +75,8 @@ function Builder({ encriptedData }: any) {
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error" | "otp"
   >("idle");
-  const [active, setActive] = useState(encriptedData ? 1 : 0);
+  const singupCookie = getCookie("resume_signup_token")?.toString();
+  const [active, setActive] = useState(encriptedData || singupCookie ? 1 : 0);
   const router = useRouter();
 
   const [opened, { open, close }] = useDisclosure(false);
@@ -135,16 +136,7 @@ function Builder({ encriptedData }: any) {
       return {};
     },
   });
-  // useEffect(() => {
-  //   // This effect runs whenever the pathname changes
-  //   const handleRouteChange = () => {
-  //     // Delete the cookie when changing routes or refreshing the page
-  //     deleteCookie("resume_signup_token");
-  //     console.log("Cookie deleted on route change or refresh");
-  //   };
-
-  //   handleRouteChange();
-  // }, [pathname]);
+  console.log(form.values);
   const { data: statesData, isLoading: isLoadingStates } = useQuery(
     ["states"],
     getStatesDetails,
@@ -612,6 +604,10 @@ function Builder({ encriptedData }: any) {
                 label="Pincode"
                 placeholder="Enter pincode"
                 {...form.getInputProps("pincode")}
+                onBlurCapture={(e) =>
+                  form.values.pincode === "" &&
+                  form.setValues({ pincode: null })
+                }
                 classNames={{
                   root: StepCss.inputRoot,
                   input: StepCss.textInput,
@@ -862,7 +858,7 @@ function Builder({ encriptedData }: any) {
               size="lg"
               required
               mt={"md"}
-              placeholder="Enter your bulder's description that you are going to provide buyers."
+              placeholder="Enter your builder's description that you are going to provide buyers."
               label="Builder's Descriptions"
               autosize
               minRows={5}
