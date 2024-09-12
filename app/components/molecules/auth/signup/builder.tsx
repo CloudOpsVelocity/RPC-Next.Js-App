@@ -136,16 +136,16 @@ function Builder({ encriptedData }: any) {
       return {};
     },
   });
-  useEffect(() => {
-    // This effect runs whenever the pathname changes
-    const handleRouteChange = () => {
-      // Delete the cookie when changing routes or refreshing the page
-      deleteCookie("resume_signup_token");
-      console.log("Cookie deleted on route change or refresh");
-    };
+  // useEffect(() => {
+  //   // This effect runs whenever the pathname changes
+  //   const handleRouteChange = () => {
+  //     // Delete the cookie when changing routes or refreshing the page
+  //     deleteCookie("resume_signup_token");
+  //     console.log("Cookie deleted on route change or refresh");
+  //   };
 
-    handleRouteChange();
-  }, [pathname]);
+  //   handleRouteChange();
+  // }, [pathname]);
   const { data: statesData, isLoading: isLoadingStates } = useQuery(
     ["states"],
     getStatesDetails,
