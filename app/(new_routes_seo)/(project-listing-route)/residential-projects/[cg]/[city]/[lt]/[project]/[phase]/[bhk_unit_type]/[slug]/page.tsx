@@ -12,7 +12,9 @@ import { notFound } from "next/navigation";
 import path from "path";
 import React from "react";
 import fs from "fs";
-import getListingSLugs from "@/app/(new_routes_seo)/in/utils/getSlugs";
+import getListingSLugs, {
+  findPathForProjectListing,
+} from "@/app/(new_routes_seo)/in/utils/getSlugs";
 import { BASE_PATH_PROJECT_LISTING } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing.route";
 type Props = {
   params: {
@@ -26,7 +28,7 @@ type Props = {
 };
 export default async function Page({ params }: Props) {
   const pathname = `${BASE_PATH_PROJECT_LISTING}/${params.cg}/${params.city}/${params.lt}/${params.project}/${params.bhk_unit_type}/${params.slug}`;
-  const value = await getListingSLugs(pathname);
+  const value = await findPathForProjectListing(pathname);
   const slug = getStringPartByIndex(value, 6);
   if (!slug) {
     notFound();

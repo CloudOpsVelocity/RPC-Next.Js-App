@@ -47,3 +47,16 @@ export async function getNestedSlug(pathname: string, level?: number) {
     console.timeEnd("getProjectSlugs");
   }
 }
+
+export async function findPathForProjectListing(inputUrl: string) {
+  const staticDir = path.join(process.cwd(), "static");
+  const filePath = path.join(staticDir, "listingSlugs.json");
+  const jsonData = fs.readFileSync(filePath, "utf8");
+  const builderJsonData = JSON.parse(jsonData);
+  for (const path in builderJsonData) {
+    if (path.startsWith(inputUrl)) {
+      return builderJsonData[path];
+    }
+  }
+  return null;
+}

@@ -60,10 +60,13 @@ export async function generateSlugs(
 }
 
 export const extractListingParamsValues = (input: string) => {
-  const result: { [key: string]: string } = {};
+  const result: { [key: string]: string | number } = {};
 
   // Split the input into segments based on the underscore "_"
   const segments = input.split("_");
+
+  // Initialize count
+  let propertyCount = 0;
 
   // Process each segment
   for (const segment of segments) {
@@ -76,18 +79,33 @@ export const extractListingParamsValues = (input: string) => {
         const pairs = segment.split("+");
         for (const pair of pairs) {
           const [value, key] = pair.split("*");
-          if (key) result[key] = value;
+          if (key) {
+            if (!result[key]) {
+              propertyCount++;
+            }
+            result[key] = value;
+          }
         }
       } else {
         // Process single key-value pair
         const value = segment.substring(0, starIndex);
         const key = segment.substring(starIndex + 1);
-        if (key) result[key] = value;
+        if (key) {
+          if (!result[key]) {
+            propertyCount++;
+          }
+          result[key] = value;
+        }
       }
     } else {
+      propertyCount++;
       // Assign the segment as the ID if no "*" is found
       result["id"] = segment;
     }
   }
+
+  // Add the count of properties to the result
+  result["count"] = propertyCount;
+
   return result;
 };

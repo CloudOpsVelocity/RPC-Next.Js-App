@@ -21,17 +21,21 @@ type Props = {
 export default async function Page({
   params: { bhk_unit_type, cg, city, lt, project },
 }: Props) {
-  const pathname = `${BASE_PATH_PROJECT_LISTING}/${cg}/${city}/${lt}/${project}`;
+  const pathname = `${BASE_PATH_PROJECT_LISTING}/${cg}/${city}/${lt}/${project}/${bhk_unit_type}`;
   const values = await findPathForProjectListing(pathname);
+
   const filtersValues = extractListingParamsValues(values);
+  console.log(filtersValues);
   const severData = await getSearchData(
-    `localities=${filtersValues.LT}&cg=${filtersValues.CG}&projIdEnc=${filtersValues.PJ}`
+    `bhk=${filtersValues.BH}&propType=${filtersValues.PT}&localities=${filtersValues.LT}&cg=${filtersValues.CG}&projIdEnc=${filtersValues.PJ}`
   );
   return (
     <ListingSearchPage
       serverData={severData}
       frontendFilters={{
         locality: [`${lt}+${filtersValues.LT}`],
+        unitTypes: [parseInt(filtersValues.BH)],
+        propTypes: parseInt(filtersValues.PT),
         cg: filtersValues.CG,
         projName: project,
         projIdEnc: filtersValues.PJ,
@@ -59,7 +63,7 @@ export default async function Page({
 //         bhk_unit_type,
 //         slug,
 //       ] = data.split("/");
-//       return { cg, city, lt, project };
+//       return { cg, city, lt, project, bhk_unit_type };
 //     }
 //   });
 //   return slugs;

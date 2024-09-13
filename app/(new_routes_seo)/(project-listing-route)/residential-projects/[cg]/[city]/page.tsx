@@ -20,7 +20,6 @@ type Props = {
     lt: string;
   };
 };
-
 export default async function Page({ params: { cg, city } }: Props) {
   const pathname = `${BASE_PATH_PROJECT_LISTING}/${cg}/${city}`;
   const values = await getNestedSlug(pathname, -4);
