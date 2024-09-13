@@ -11,7 +11,10 @@ const getPagesSlugs = async (
 
     if (pageType === "listing-search-seo") {
       if (data.status) {
-        return data.urlMap;
+        return {
+          "/residential/listings/rental/bengaluru/whitefield/1-bhk-apartment/listing-121":
+            "R%CG_9%C_563%L_41%BT+35%PT_f4391e51bae17b20c420c32c3512d530%P",
+        };
       } else {
         return {};
       }
