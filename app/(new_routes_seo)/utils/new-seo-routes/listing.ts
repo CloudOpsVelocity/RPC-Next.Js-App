@@ -58,3 +58,36 @@ export async function generateSlugs(
 
   return slugs;
 }
+
+export const extractListingParamsValues = (input: string) => {
+  const result: { [key: string]: string } = {};
+
+  // Split the input into segments based on the underscore "_"
+  const segments = input.split("_");
+
+  // Process each segment
+  for (const segment of segments) {
+    // Check if the segment contains "*"
+    const starIndex = segment.indexOf("*");
+    if (starIndex !== -1) {
+      // If it also contains "+", split by "+"
+      const plusIndex = segment.indexOf("+");
+      if (plusIndex !== -1) {
+        const pairs = segment.split("+");
+        for (const pair of pairs) {
+          const [value, key] = pair.split("*");
+          if (key) result[key] = value;
+        }
+      } else {
+        // Process single key-value pair
+        const value = segment.substring(0, starIndex);
+        const key = segment.substring(starIndex + 1);
+        if (key) result[key] = value;
+      }
+    } else {
+      // Assign the segment as the ID if no "*" is found
+      result["id"] = segment;
+    }
+  }
+  return result;
+};

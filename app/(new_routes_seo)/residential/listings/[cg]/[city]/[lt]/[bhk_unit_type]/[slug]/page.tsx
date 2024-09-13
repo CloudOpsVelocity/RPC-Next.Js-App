@@ -12,8 +12,14 @@ import { notFound } from "next/navigation";
 import path from "path";
 import React from "react";
 import fs from "fs";
-import getListingSLugs from "@/app/(new_routes_seo)/in/utils/getSlugs";
-import { generateSlugs } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing";
+import getListingSLugs, {
+  getNestedSlug,
+} from "@/app/(new_routes_seo)/in/utils/getSlugs";
+import {
+  extractListingParamsValues,
+  generateSlugs,
+} from "@/app/(new_routes_seo)/utils/new-seo-routes/listing";
+import { BASE_PATH_LISTING } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing.route";
 type Props = {
   params: {
     cg: string;
@@ -25,18 +31,19 @@ type Props = {
 };
 
 export default async function Page({ params }: Props) {
-  const pathname = `/in/${params.cg}/${params.city}/${params.lt}/${params.bhk_unit_type}/${params.slug}`;
-  const value = await getListingSLugs(pathname);
-  const slug = getStringPartByIndex(value, 5);
+  const pathname = `${BASE_PATH_LISTING}/${params.cg}/${params.city}/${params.lt}/${params.bhk_unit_type}/${params.slug}`;
+  const value = await getNestedSlug(pathname);
+  console.log(value);
+  const { id } = extractListingParamsValues(value);
   console.log("hello form listing details page during builder");
-  if (!slug) {
+  if (!id) {
     notFound();
   }
   const {
     listing: data,
     nearByLocations,
     totalPrice,
-  } = await getListingDetails(slug);
+  } = await getListingDetails(id);
   const [projData, issueData, amenities] = await Promise.all([
     getProjectDetails(data.projIdEnc),
     getReportConstData(),

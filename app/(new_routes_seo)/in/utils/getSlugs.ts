@@ -20,7 +20,7 @@ async function getListingSLugs(pathname: string) {
 
 export default getListingSLugs;
 
-export async function getNestedSlug(pathname: string, level: number) {
+export async function getNestedSlug(pathname: string, level?: number) {
   const staticDir = path.join(process.cwd(), "static");
   const filePath = path.join(staticDir, "listingSlugs.json");
   console.time("getProjectSlugs");
@@ -29,11 +29,13 @@ export async function getNestedSlug(pathname: string, level: number) {
     // Read the JSON file
     const jsonData = fs.readFileSync(filePath, "utf8");
     const builderJsonData = JSON.parse(jsonData);
-
+    console.log(pathname);
     // Find the exact matching path based on the truncated path
     const matchingPath = Object.keys(builderJsonData).find((key) => {
       // Compare the key up to the last segment
-      return key.split("/").slice(0, level).join("/") === pathname;
+      return level
+        ? key.split("/").slice(0, level).join("/") === pathname
+        : key === pathname;
     });
 
     // Return the ID for the exact match found

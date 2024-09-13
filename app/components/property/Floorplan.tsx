@@ -82,6 +82,8 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
             >
               <Image
                 src={data?.projMedia?.floorPlanUrl ?? ImgNotAvail}
+                width={300}
+                height={300}
                 alt=""
                 className="h-full w-full m-auto "
               />

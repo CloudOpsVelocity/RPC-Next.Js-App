@@ -5,7 +5,10 @@ import {
   extractListingParamsValues,
   generateSlugs,
 } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing";
-import { BASE_PATH_LISTING } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing.route";
+import {
+  BASE_PATH_LISTING,
+  BASE_PATH_PROJECT_LISTING,
+} from "@/app/(new_routes_seo)/utils/new-seo-routes/listing.route";
 import React from "react";
 
 type Props = {
@@ -13,8 +16,9 @@ type Props = {
 };
 
 export default async function Page({ params: { cg } }: Props) {
-  const pathname = `${BASE_PATH_LISTING}/${cg}`;
-  const values = await getNestedSlug(pathname, -4);
+  const pathname = `${BASE_PATH_PROJECT_LISTING}/${cg}`;
+  const values = await getNestedSlug(pathname, -5);
+
   const slugValues = extractListingParamsValues(values);
   const severData = await getProjSearchData(`cg=${slugValues.CG}`);
   return (
@@ -28,7 +32,6 @@ export default async function Page({ params: { cg } }: Props) {
 }
 export async function generateStaticParams() {
   const slugs = await generateSlugs("listing-search-seo");
-  console.log(slugs, "it is from cg route.tsx");
   return slugs;
 }
 export const dynamic = "force-dynamic";
