@@ -11,13 +11,20 @@ const getPagesSlugs = async (
 
     if (pageType === "listing-search-seo") {
       if (data.status) {
-        return {
-          "/residential/listings/rental/bengaluru/whitefield/1-bhk-apartment/listing-121":
-            "R%CG_9%C_563%L_41%BT+35%PT_f4391e51bae17b20c420c32c3512d530%P",
-        };
+        return data.urlMap;
       } else {
         return {};
       }
+    }
+    if (pageType === "project-list") {
+      return {
+        "/projects/bengaluru/whitefield/jackson-wonderland/phase-1/apartment/1bhk":
+          "9_368_6eaa57024ae79366e56318b18ea9743d_232_35_45",
+        "/projects/bengaluru/whitefield/jackson-wonderland-1/phase-2/apartment/2bhk":
+          "9_368_6eaa57024ae79366e56318b18ea9743d_232_35_45",
+        "/projects/bengaluru/whitefield/jackson-wonderland-2/phase-3/apartment/3bhk":
+          "9_368_6eaa57024ae79366e56318b18ea9743d_232_35_45",
+      };
     }
     return data;
   } catch (error) {

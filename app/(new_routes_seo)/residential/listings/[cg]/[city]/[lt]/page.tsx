@@ -5,7 +5,7 @@ import ProjectSearchPage from "@/app/(dashboard)/search/Page/ProjectSearchPage";
 import { getNestedSlug } from "@/app/(new_routes_seo)/in/utils/getSlugs";
 import { getProjSearchData } from "@/app/(new_routes_seo)/in/utils/api";
 import { generateSlugs } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing";
-
+import { BASE_PATH_LISTING } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing.route";
 type Props = {
   params: {
     cg: string;
@@ -15,9 +15,12 @@ type Props = {
 };
 
 export default async function Page({ params: { cg, city, lt } }: Props) {
-  const pathname = `/in/${cg}/${city}/${lt}`;
+  const pathname = `${BASE_PATH_LISTING}/${cg}/${city}/${lt}`;
+  console.log(pathname);
   const values = await getNestedSlug(pathname, -2);
+  console.log(values);
   const [buyorent, , locality] = values.split("_");
+  console.log(locality);
   const severData = await getProjSearchData(`localities=${locality}`);
   return (
     <ProjectSearchPage
