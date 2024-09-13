@@ -39,29 +39,29 @@ export default async function Page({
   );
 }
 
-export async function generateStaticParams() {
-  // Get the data (mocked here, replace with your actual data fetching logic)
-  const res = await getPagesSlugs("listing-search-seo");
+// export async function generateStaticParams() {
+//   // Get the data (mocked here, replace with your actual data fetching logic)
+//   const res = await getPagesSlugs("listing-search-seo");
 
-  // Extract project names from the keys
-  const projectRes = Object.keys(res);
-  const slugs = projectRes.map((data) => {
-    if (data.includes("/in/for/")) {
-      const [
-        emtypath,
-        country,
-        staticPath,
-        cg,
-        city,
-        lt,
-        project,
-        bhk_unit_type,
-        slug,
-      ] = data.split("/");
-      return { cg, city, lt, project };
-    }
-  });
-  return slugs;
-}
+//   // Extract project names from the keys
+//   const projectRes = Object.keys(res);
+//   const slugs = projectRes.map((data) => {
+//     if (data.includes("/in/for/")) {
+//       const [
+//         emtypath,
+//         country,
+//         staticPath,
+//         cg,
+//         city,
+//         lt,
+//         project,
+//         bhk_unit_type,
+//         slug,
+//       ] = data.split("/");
+//       return { cg, city, lt, project };
+//     }
+//   });
+//   return slugs;
+// }
 export const dynamic = "force-dynamic";
 export const dynamicParams = true;
