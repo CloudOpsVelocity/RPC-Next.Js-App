@@ -34,8 +34,8 @@ export default async function Page({
       serverData={severData}
       frontendFilters={{
         locality: [`${lt}+${filtersValues.LT}`],
-        unitTypes: [parseInt(filtersValues.BH)],
-        propTypes: parseInt(filtersValues.PT),
+        unitTypes: [parseInt(filtersValues.BH as string)],
+        propTypes: parseInt(filtersValues.PT as string),
         cg: filtersValues.CG,
         projName: project,
         projIdEnc: filtersValues.PJ,

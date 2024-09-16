@@ -6,7 +6,6 @@ export function middleware(request: NextRequest) {
   const token = cookies().get("token")?.value;
   const signUpToken = cookies().get("resume_signup_token")?.value;
   const excludedPath = "/register/builder";
-  console.log(request.nextUrl.pathname);
   if (signUpToken && request.nextUrl.pathname !== excludedPath) {
     // Clear only the signup token cookie
     const response = NextResponse.next();

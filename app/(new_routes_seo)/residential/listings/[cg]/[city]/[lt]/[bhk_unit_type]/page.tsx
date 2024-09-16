@@ -35,8 +35,8 @@ export default async function Page({
       serverData={severData}
       frontendFilters={{
         locality: [`${lt}+${LT}`],
-        unitTypes: [parseInt(BH)],
-        propTypes: parseInt(PT),
+        unitTypes: [parseInt(BH as string)],
+        propTypes: parseInt(PT as string),
         cg: CG,
       }}
     />

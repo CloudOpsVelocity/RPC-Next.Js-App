@@ -43,7 +43,7 @@ export default async function Page({ params }: Props) {
     listing: data,
     nearByLocations,
     totalPrice,
-  } = await getListingDetails(id);
+  } = await getListingDetails(id as string);
   const [projData, issueData, amenities] = await Promise.all([
     getProjectDetails(data.projIdEnc),
     getReportConstData(),
