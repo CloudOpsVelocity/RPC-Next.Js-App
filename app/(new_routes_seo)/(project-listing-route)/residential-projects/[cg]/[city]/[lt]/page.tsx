@@ -41,7 +41,7 @@ export default async function Page({ params: { cg, city, lt } }: Props) {
   );
 }
 export async function generateStaticParams() {
-  const slugs = generateSlugs("listing-search-seo");
+  const slugs = generateSlugs("listing-search-seo", "project-listing");
   return slugs;
   // // Get the data (mocked here, replace with your actual data fetching logic)
   // const res = await getPagesSlugs("listing-search-seo");

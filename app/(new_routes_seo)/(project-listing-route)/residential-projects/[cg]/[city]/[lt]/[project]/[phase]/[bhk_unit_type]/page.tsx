@@ -1,3 +1,4 @@
+import ListingDetailsPage from "@/app/(dashboard)/listing/[city]/[slug]/Page/ListingDetailsPage";
 import ListingSearchPage from "@/app/(dashboard)/search/listing/Page/ListingSearchPage";
 import { getSearchData } from "@/app/(new_routes_seo)/in/utils/api";
 import {
@@ -7,6 +8,12 @@ import {
 import { extractListingParamsValues } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing";
 import { BASE_PATH_PROJECT_LISTING } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing.route";
 import { getPagesSlugs } from "@/app/seo/api";
+import { getAmenties } from "@/app/utils/api/project";
+import {
+  getListingDetails,
+  getProjectDetails,
+  getReportConstData,
+} from "@/app/utils/api/property";
 import React from "react";
 type Props = {
   params: {
@@ -15,23 +22,52 @@ type Props = {
     lt: string;
     bhk_unit_type: string;
     project: string;
+    phase: string;
   };
 };
 
 export default async function Page({
-  params: { bhk_unit_type, cg, city, lt, project },
+  params: { bhk_unit_type, cg, city, lt, project, phase },
 }: Props) {
-  const pathname = `${BASE_PATH_PROJECT_LISTING}/${cg}/${city}/${lt}/${project}/${bhk_unit_type}`;
+  const pathname = `${BASE_PATH_PROJECT_LISTING}/${cg}/${city}/${lt}/${project}${
+    phase ? `/${phase}` : ""
+  }/${bhk_unit_type}`;
+  let serverData = null;
   const values = await findPathForProjectListing(pathname);
-
   const filtersValues = extractListingParamsValues(values);
-  console.log(filtersValues);
-  const severData = await getSearchData(
-    `bhk=${filtersValues.BH}&propType=${filtersValues.PT}&localities=${filtersValues.LT}&cg=${filtersValues.CG}&projIdEnc=${filtersValues.PJ}`
-  );
-  return (
+  if (filtersValues.count === 8) {
+    serverData = await getSearchData(
+      `bhk=${filtersValues.BH}&propType=${filtersValues.PT}&localities=${filtersValues.LT}&cg=${filtersValues.CG}&projIdEnc=${filtersValues.PJ}`
+    );
+  } else {
+    const {
+      listing: data,
+      nearByLocations,
+      totalPrice,
+    } = await getListingDetails((filtersValues.id as string) ?? "");
+    const [projData, issueData, amenities] = await Promise.all([
+      getProjectDetails(data.projIdEnc),
+      getReportConstData(),
+      getAmenties(),
+    ]);
+    const TITLE_OF_PROP = data.projIdEnc
+      ? data.propName
+      : `${data.bhkName ?? ""} ${data.propTypeName} For
+    ${data.cg === "S" ? " Sell" : " Rent"} In ${data.ltName}`;
+    serverData = {
+      TITLE_OF_PROP,
+      data,
+      projData,
+      issueData,
+      amenitiesFromDB: amenities,
+      nearByLocations,
+      totalPrice,
+    };
+  }
+
+  return filtersValues.count === 8 ? (
     <ListingSearchPage
-      serverData={severData}
+      serverData={serverData}
       frontendFilters={{
         locality: [`${lt}+${filtersValues.LT}`],
         unitTypes: [parseInt(filtersValues.BH as string)],
@@ -41,6 +77,8 @@ export default async function Page({
         projIdEnc: filtersValues.PJ,
       }}
     />
+  ) : (
+    <ListingDetailsPage {...serverData} />
   );
 }
 

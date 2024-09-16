@@ -9,6 +9,8 @@ type SlugParams = {
   country?: string;
   cg?: string;
   city?: string;
+  project?: string;
+  phase?: string;
   lt?: string;
   bhk_unit_type?: string;
   slug?: string;
@@ -19,9 +21,8 @@ const cache = new Map<string, string[]>();
 
 export async function generateSlugs(
   slugType: "builder-list" | "project-list" | "case-seo" | "listing-search-seo",
-  start: number = 0,
-  end?: number
-): Promise<Partial<SlugParams>[]> {
+  type: "project-listing" | "solo-listing"
+): Promise<any> {
   // Check if keys are cached
   let keys = cache.get(slugType);
 
@@ -42,18 +43,45 @@ export async function generateSlugs(
     cache.set(slugType, keys);
   }
   // Map through the sliced keys and return the parameters
-  const slugs: Partial<SlugParams>[] = keys.map((data) => {
-    const [emptyPath, country, , cg, city, lt, bhk_unit_type, slug] =
-      data.split("/");
-    const result: Partial<SlugParams> = {
-      cg,
-      city,
-      lt,
-      bhk_unit_type,
-      slug,
-    };
+  const slugs = keys.map((data) => {
+    if (data.includes("/residential/listings") && type === "solo-listing") {
+      const [emptyPath, country, , cg, city, lt, bhk_unit_type, slug] =
+        data.split("/");
+      const result: Partial<SlugParams> = {
+        cg,
+        city,
+        lt,
+        bhk_unit_type,
+        slug,
+      };
 
-    return result;
+      return result;
+    } else if (
+      data.includes("/residential/listings") &&
+      type === "project-listing"
+    ) {
+      const [
+        emptyPath,
+        country,
+        ,
+        cg,
+        city,
+        lt,
+        project,
+        phase,
+        bhk_unit_type,
+        slug,
+      ] = data.split("/");
+      const result: Partial<SlugParams> = {
+        cg,
+        city,
+        lt,
+        project,
+        phase,
+        bhk_unit_type,
+        slug,
+      };
+    }
   });
 
   return slugs;

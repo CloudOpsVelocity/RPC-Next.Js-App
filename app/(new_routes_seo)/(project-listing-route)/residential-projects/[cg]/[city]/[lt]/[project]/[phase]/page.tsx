@@ -25,7 +25,6 @@ export default async function Page({ params }: Props) {
   const severData = await getSearchData(
     `localities=${filtersValues.LT}&cg=${filtersValues.CG}&projIdEnc=${filtersValues.PJ}`
   );
-
   return (
     <ListingSearchPage
       serverData={severData}
@@ -34,6 +33,12 @@ export default async function Page({ params }: Props) {
         cg: filtersValues.CG,
         projName: project,
         projIdEnc: filtersValues.PJ,
+        ...(filtersValues.count === 7
+          ? {
+              unitTypes: [parseInt(filtersValues.BH as string)],
+              propTypes: parseInt(filtersValues.PT as string),
+            }
+          : {}),
       }}
     />
   );

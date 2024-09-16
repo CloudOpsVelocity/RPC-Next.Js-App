@@ -24,10 +24,11 @@ type Props = {
     project: string;
     bhk_unit_type: string;
     slug: string;
+    phase: string;
   };
 };
 export default async function Page({ params }: Props) {
-  const pathname = `${BASE_PATH_PROJECT_LISTING}/${params.cg}/${params.city}/${params.lt}/${params.project}/${params.bhk_unit_type}/${params.slug}`;
+  const pathname = `${BASE_PATH_PROJECT_LISTING}/${params.cg}/${params.city}/${params.lt}/${params.project}/${params.phase}/${params.bhk_unit_type}/${params.slug}`;
   const value = await findPathForProjectListing(pathname);
   const slug = getStringPartByIndex(value, 6);
   if (!slug) {

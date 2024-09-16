@@ -27,7 +27,7 @@ export default async function Page({ params: { cg } }: Props) {
   );
 }
 export async function generateStaticParams() {
-  const slugs = await generateSlugs("listing-search-seo");
+  const slugs = await generateSlugs("listing-search-seo", "solo-listing");
   console.log(slugs, "it is from cg route.tsx");
   return slugs;
 }
