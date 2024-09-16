@@ -1,19 +1,9 @@
 "use client";
 import { useState } from "react";
-import {
-  Stepper,
-  Button,
-  Group,
-  TextInput,
-  PasswordInput,
-  Code,
-  NumberInput,
-  rem,
-  FocusTrap,
-} from "@mantine/core";
+import { Stepper, Button, Group, Code, rem, FocusTrap } from "@mantine/core";
+import { TextInput, PasswordInput, NumberInput } from "react-hook-form-mantine";
 import N from "@/app/styles/Numinput.module.css";
 import S from "@/app/styles/Pass.module.css";
-import { Form, useForm, yupResolver } from "@mantine/form";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { styles } from "@/app/styles/Stepper";
@@ -21,26 +11,25 @@ import { DropZone } from "./dropzone";
 import { useDisclosure } from "@mantine/hooks";
 import AuthPopup from "../authPopup";
 import useAuth from "@/app/hooks/useAuth";
-import { actionAsyncStorage } from "next/dist/client/components/action-async-storage.external";
 import Success from "../success";
-import { agentSchema } from "@/app/validations/auth";
-import CountryInput from "@/app/components/atoms/CountryInput";
 import {
   BackSvg,
   EyeClosed,
   EyeOpen,
   StepperDotGray,
   StepperDotGreen,
-  StepperIcon,
 } from "@/app/images/commonSvgs";
 import StepCss from "@/app/styles/Stepper.module.css";
 import { registerOtherParser } from "@/app/utils/parse";
-import handleTrimAndReplace from "@/app/utils/input/validations";
+import handleTrimAndReplace, {
+  handleTrimAndReplaceReactHookForm,
+} from "@/app/utils/input/validations";
 import clsx from "clsx";
 import { getQueryParamClient } from "@/app/hooks/custom/useRedirect";
 import LoginSignupTabs from "@/app/(auth)/Components/LoginSignup";
-import { CompletedIcon } from "@/app/images/HomePageIcons";
-
+import { useForm } from "react-hook-form";
+import { addressSchema, agentSchema } from "@/app/validations/auth";
+import { yupResolver } from "@hookform/resolvers/yup";
 function Agent() {
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error" | "otp"
@@ -52,67 +41,71 @@ function Agent() {
   });
 
   const [opened, { open, close }] = useDisclosure(false);
-
-  const form = useForm({
-    initialValues: {
+  const form = useForm<any>({
+    defaultValues: {
       userName: "",
       email: "",
       password: "",
-      mobile: null,
-      address: "",
+      mobile: undefined,
       companyName: "",
       companyLogo: undefined,
+      address: "",
       otp: false,
       prevMobile: 0,
       prevEmail: "",
     },
-
+    shouldFocusError: true,
+    mode: "onTouched",
+    criteriaMode: "firstError",
     // @ts-ignore
-    validate: (values) => {
-      if (active === 0) {
-        const data = yupResolver(agentSchema)(values);
-        return data;
-      }
+    resolver: yupResolver(active === 0 ? agentSchema : addressSchema),
+    // resolver: (values) => {
+    //   if (active === 0) {
+    //     const data = yupResolver(agentSchema);
+    //     const errros = data(values);
+    //     console.log(errros);
+    //     return errros;
+    //   }
+    //   if (active === 1) {
+    //     return {
+    //       address:
+    //         values.address.trim().length < 1
+    //           ? "Office Address is required"
+    //           : null,
+    //     };
+    //   }
 
-      if (active === 1) {
-        return {
-          address:
-            values.address.trim().length < 1
-              ? "Office Address is required"
-              : null,
-          // companyName:
-          //   values.companyName.trim().length < 1
-          //     ? "Company name is required"
-          //     : null,
-        };
-      }
-
-      return {};
-    },
-    validateInputOnBlur: true,
+    //   return {};
+    // },
   });
+  const formValues = form.getValues();
+
   const OtpCallback = () => {
     close();
-    form.setValues({
-      otp: true,
-      prevMobile: form.values.mobile as unknown as number,
-      prevEmail: form.values.email as unknown as string,
-    });
+    form.setValue("otp", true);
+    form.setValue("prevMobile", formValues.mobile as unknown as number);
+    form.setValue("prevEmail", formValues.email as unknown as string);
+    // form.setValues({
+    //   otp: true,
+    //   prevMobile: form.values.mobile as unknown as number,
+    //   prevEmail: form.values.email as unknown as string,
+    // });
     setActive(1);
     saveStep(2);
   };
-  const nextStep = async () => {
-    // Validate the form
-    if (form.validate().hasErrors) {
-      return;
-    }
+  const nextStep = async (submittedData: any) => {
+    // console.log(rest);
 
+    // // Validate the form
+    // if (!form.formState.isValid) {
+    //   return;
+    // }
     // Handle API call based on the current step
-    let values = form.values;
+    let values = submittedData;
     if (active === 0) {
       if (
-        form.values.otp &&
-        form.values.mobile === form.values.prevMobile /* &&
+        values.otp &&
+        values.mobile === values.prevMobile /* &&
         form.values.email === form.values.prevEmail */
       ) {
         // If OTP is already verified and mobile number is the same, move to the next step
@@ -130,7 +123,9 @@ function Agent() {
           if (data.flag === "m") {
             setStatus("error");
           } else if (data.flag === "e") {
-            form.setFieldError("email", "Email already registered with us.");
+            form.setError("email", {
+              message: "Email already registered with us.",
+            });
             setStatus("idle");
           } else {
             setStatus("idle");
@@ -139,18 +134,18 @@ function Agent() {
       }
     }
     if (active === 1) {
-      if (!form.validate().hasErrors) {
-        const data = await registerOtherDetails(
-          registerOtherParser({ ...values })
-        ).then((res) => {
-          saveStep(3);
-          login({
-            password: form.values.password,
-            username: form.values.mobile as unknown as string,
-          });
+      // if (form.formState.isValid) {
+      const data = await registerOtherDetails(
+        registerOtherParser({ ...values })
+      ).then((res) => {
+        saveStep(3);
+        login({
+          password: values.password,
+          username: values.mobile as unknown as string,
         });
-        setActive((current) => (current < 3 ? current + 1 : current));
-      }
+      });
+      setActive((current) => (current < 3 ? current + 1 : current));
+      // }
       // API call for the second step
       // Customize this based on your requirements
     } else if (active === 2) {
@@ -162,13 +157,14 @@ function Agent() {
 
   const handleLogoSelect = (logo: LogoFile): void => {
     // @ts-ignore
-    form.setFieldValue("companyLogo", logo);
+    form.setValue("companyLogo", logo);
   };
   const prevStep = () =>
     setActive((current) => (current > 0 ? current - 1 : current));
   const displayCountryCode = (value: any) => {
     console.log(value);
   };
+  const logo = form.watch("companyLogo");
   const queryParam = getQueryParamClient();
   return (
     <div
@@ -189,14 +185,14 @@ function Agent() {
       )}
 
       <AuthPopup
-        mobile={form.values.mobile}
+        mobile={formValues.mobile}
         callback={OtpCallback}
         opened={opened}
         open={open}
         close={close}
-        userName={form.values.email}
+        userName={formValues.email}
       />
-      <form onSubmit={form.onSubmit(nextStep)} className="w-full ">
+      <form onSubmit={form.handleSubmit(nextStep)} className="w-full ">
         <Stepper
           color="green"
           iconSize={24}
@@ -231,12 +227,16 @@ function Agent() {
             }}
           >
             <TextInput
+              control={form.control}
+              name="userName"
               required
               size="lg"
               label="Your Name"
               placeholder="Enter your name here"
-              {...form.getInputProps("userName")}
-              onBlurCapture={(e) => handleTrimAndReplace(e, "userName", form)}
+              // {...form.getInputProps("userName")}
+              onBlurCapture={(e) =>
+                handleTrimAndReplaceReactHookForm(e, "userName", form.setValue)
+              }
               classNames={{
                 root: StepCss.inputRoot,
                 input: StepCss.textInput,
@@ -245,12 +245,13 @@ function Agent() {
               }}
             />
             <TextInput
+              control={form.control}
+              name="companyName"
               required
               size="lg"
               mt={"xs"}
               label="Company Name"
               placeholder="Enter your company name here"
-              {...form.getInputProps("companyName")}
               classNames={{
                 root: StepCss.inputRoot,
                 input: StepCss.textInput,
@@ -258,17 +259,24 @@ function Agent() {
                 label: StepCss.mlabelCss,
               }}
               onBlurCapture={(e) =>
-                handleTrimAndReplace(e, "companyName", form)
+                handleTrimAndReplaceReactHookForm(
+                  e,
+                  "companyName",
+                  form.setValue
+                )
               }
             />
             <TextInput
+              name="email"
+              control={form.control}
               required
               size="lg"
               mt="sm"
               label="Email"
               placeholder="Enter your email here"
-              {...form.getInputProps("email")}
-              onBlurCapture={(e) => handleTrimAndReplace(e, "email", form)}
+              onBlurCapture={(e) =>
+                handleTrimAndReplaceReactHookForm(e, "email", form.setValue)
+              }
               classNames={{
                 root: StepCss.inputRoot,
                 input: StepCss.textInput,
@@ -277,6 +285,8 @@ function Agent() {
               }}
             />
             <PasswordInput
+              control={form.control}
+              name="password"
               required
               classNames={{
                 visibilityToggle: S.visibilityToggle,
@@ -290,13 +300,17 @@ function Agent() {
               mt={"xs"}
               label="Password"
               placeholder="Create Your Password"
-              {...form.getInputProps("password")}
+              // {...form.getInputProps("password")}
               visibilityToggleIcon={({ reveal }) =>
                 reveal ? <EyeOpen /> : <EyeClosed />
               }
-              onBlurCapture={(e) => handleTrimAndReplace(e, "password", form)}
+              onBlurCapture={(e) =>
+                handleTrimAndReplaceReactHookForm(e, "password", form.setValue)
+              }
             />
             <NumberInput
+              control={form.control}
+              name="mobile"
               leftSection={
                 <span className="text-[#212c33] font-medium">+91</span>
               }
@@ -310,14 +324,14 @@ function Agent() {
               )}
               label="Mobile Number"
               placeholder="Enter your mobile number"
-              {...form.getInputProps("mobile")}
-              error={form.errors.mobile || status === "error"}
-              onChange={(e) => {
-                form.setFieldValue("mobile", e as any);
-                if (status === "error") {
-                  setStatus("idle");
-                }
-              }}
+              // {...form.getInputProps("mobile")}
+              // error={form.errors.mobile || status === "error"}
+              // onChange={(e) => {
+              //   form.setFieldValue("mobile", e as any);
+              //   if (status === "error") {
+              //     setStatus("idle");
+              //   }
+              // }}
               allowNegative={false}
               classNames={{
                 root: StepCss.inputRoot,
@@ -327,21 +341,22 @@ function Agent() {
               }}
               maxLength={10}
               allowDecimal={false}
-              onPaste={(event) => {
-                if (status === "error") {
-                  setStatus("idle");
-                }
-                const pastedText = event.clipboardData.getData("text/plain");
-                const trimmedText = pastedText
-                  .replace(/\D/g, "")
-                  .replace(/^0+/, "");
-                console.log(trimmedText);
-                const first10Digits = trimmedText.slice(0, 10);
+              // onPaste={(event) => {
+              //   if (status === "error") {
+              //     setStatus("idle");
+              //   }
+              //   const pastedText = event.clipboardData.getData("text/plain");
+              //   const trimmedText = pastedText
+              //     .replace(/\D/g, "")
+              //     .replace(/^0+/, "");
+              //   console.log(trimmedText);
+              //   const first10Digits = trimmedText.slice(0, 10);
 
-                form.setFieldValue("mobile", first10Digits as any);
-              }}
+              //   form.setFieldValue("mobile", first10Digits as any);
+              // }}
               onBlurCapture={(e) =>
-                form.values.mobile === "" && form.setValues({ mobile: null })
+                formValues.mobile == "" &&
+                form.setValue("mobile", undefined as any)
               }
             />
             {status === "error" && (
@@ -380,25 +395,25 @@ function Agent() {
             }}
           >
             <TextInput
+              key={"address"}
+              name="address"
+              control={form.control}
               required
               size="lg"
               label="Office Address"
               placeholder="Enter your office address here"
-              {...form.getInputProps("address")}
               classNames={{
                 root: StepCss.inputRoot,
                 input: StepCss.textInput,
                 error: StepCss.errorMsg,
                 label: StepCss.mlabelCss,
               }}
-              onBlurCapture={(e) => handleTrimAndReplace(e, "address", form)}
-              data-autofocus
+              onBlurCapture={(e) =>
+                handleTrimAndReplaceReactHookForm(e, "address", form.setValue)
+              }
             />
 
-            <DropZone
-              onLogoSelect={handleLogoSelect}
-              logo={form.values.companyLogo}
-            />
+            <DropZone onLogoSelect={handleLogoSelect} logo={logo ?? ""} />
           </Stepper.Step>
 
           <Stepper.Completed>
@@ -432,9 +447,9 @@ function Agent() {
                 // onClick={nextStep}
                 type="submit"
               >
-                {form.values.otp &&
-                form.values.mobile === form.values.prevMobile &&
-                form.values.email === form.values.prevEmail
+                {formValues.otp &&
+                formValues.mobile === formValues.prevMobile &&
+                formValues.email === formValues.prevEmail
                   ? "Save & Continue"
                   : "Save & Verify"}
 

@@ -1,14 +1,9 @@
 "use client";
 import S from "@/app/styles/Numinput.module.css";
 import P from "@/app/styles/Pass.module.css";
-import { useForm, yupResolver } from "@mantine/form";
-import {
-  NumberInput,
-  TextInput,
-  Button,
-  Box,
-  PasswordInput,
-} from "@mantine/core";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Button, Box } from "@mantine/core";
+import { NumberInput, TextInput, PasswordInput } from "react-hook-form-mantine";
 import useAuth from "@/app/hooks/useAuth";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
@@ -18,7 +13,9 @@ import { individualSchema } from "@/app/validations/auth";
 import { useState } from "react";
 import Success from "../success";
 import { BackSvg, EyeClosed, EyeOpen } from "@/app/images/commonSvgs";
-import handleTrimAndReplace from "@/app/utils/input/validations";
+import handleTrimAndReplace, {
+  handleTrimAndReplaceReactHookForm,
+} from "@/app/utils/input/validations";
 import StepCss from "@/app/styles/Stepper.module.css";
 import clsx from "clsx";
 import {
@@ -26,6 +23,7 @@ import {
   getQueryParamClient,
 } from "@/app/hooks/custom/useRedirect";
 import LoginSignupTabs from "@/app/(auth)/Components/LoginSignup";
+import { useForm } from "react-hook-form";
 
 function Individual() {
   const [status, setStatus] = useState<
@@ -36,11 +34,14 @@ function Individual() {
   const [opened, { open, close }] = useDisclosure(false);
 
   const form = useForm({
-    initialValues: { name: "", email: "", password: "", mobile: null },
-    validate: yupResolver(individualSchema),
-    validateInputOnBlur: true,
+    defaultValues: { name: "", email: "", password: "", mobile: undefined },
+    shouldFocusError: true,
+    mode: "onTouched",
+    criteriaMode: "firstError",
+    resolver: yupResolver(individualSchema),
   });
-  const onSubmit = async (values: typeof form.values) => {
+  const values = form.getValues();
+  const onSubmit = async (values: any) => {
     setStatus("pending");
     const data = await register({ ...values, usertype: "I" });
     if (data?.status) {
@@ -50,7 +51,9 @@ function Individual() {
       if (data.flag === "m") {
         setStatus("error");
       } else if (data.flag === "e") {
-        form.setFieldError("email", "Email already registered with us.");
+        form.setError("email", {
+          message: "Email already registered with us.",
+        });
         setStatus("idle");
       } else {
         setStatus("idle");
@@ -62,10 +65,11 @@ function Individual() {
     setStatus("idle");
     close();
   };
+  console.log(values);
   const OtpCallback = async () => {
     const data = await login({
-      password: form.values.password,
-      username: form.values.mobile as unknown as string,
+      password: values.password,
+      username: values.mobile as unknown as string,
     });
     form.reset();
     setStatus("success");
@@ -107,18 +111,22 @@ function Individual() {
               </Link> */}
           </div>
           <form
-            onSubmit={form.onSubmit(onSubmit)}
+            onSubmit={form.handleSubmit(onSubmit)}
             className="w-[100%] flex flex-col"
           >
             <TextInput
+              control={form.control}
+              name="name"
               required
               mt={"xs"}
               size="lg"
               className="w-[100%] mb-[3%] "
               label="Your Name"
               placeholder="Enter your name here"
-              {...form.getInputProps("name")}
-              onBlurCapture={(e) => handleTrimAndReplace(e, "name", form)}
+              // {...form.getInputProps("name")}
+              onBlurCapture={(e) =>
+                handleTrimAndReplaceReactHookForm(e, "name", form.setValue)
+              }
               classNames={{
                 root: StepCss.inputRoot,
                 input: StepCss.textInput,
@@ -127,14 +135,17 @@ function Individual() {
               }}
             />
             <TextInput
+              name="email"
+              control={form.control}
               type="email"
               required
               size="lg"
               mt="xs"
               label="Email"
               placeholder="Enter your email here"
-              {...form.getInputProps("email")}
-              onBlurCapture={(e) => handleTrimAndReplace(e, "email", form)}
+              onBlurCapture={(e) =>
+                handleTrimAndReplaceReactHookForm(e, "email", form.setValue)
+              }
               classNames={{
                 root: StepCss.inputRoot,
                 input: StepCss.textInput,
@@ -144,6 +155,8 @@ function Individual() {
               mb={"3%"}
             />
             <PasswordInput
+              name="password"
+              control={form.control}
               mt={"xs"}
               classNames={{
                 visibilityToggle: P.visibilityToggle,
@@ -161,10 +174,13 @@ function Individual() {
               visibilityToggleIcon={({ reveal }) =>
                 reveal ? <EyeOpen /> : <EyeClosed />
               }
-              {...form.getInputProps("password")}
-              onBlurCapture={(e) => handleTrimAndReplace(e, "password", form)}
+              onBlurCapture={(e) =>
+                handleTrimAndReplaceReactHookForm(e, "password", form.setValue)
+              }
             />
             <NumberInput
+              name="mobile"
+              control={form.control}
               leftSection={
                 <span className="text-[#212c33] font-medium text-[16px]">
                   +91
@@ -186,10 +202,12 @@ function Individual() {
               )}
               label="Mobile Number"
               placeholder="Enter Your Mobile Number"
-              {...form.getInputProps("mobile")}
-              error={form.errors.mobile || status === "error"}
+              // {...form.getInputProps("mobile")}
+              error={
+                form.formState.errors.mobile?.message || status === "error"
+              }
               onChange={(e) => {
-                form.setFieldValue("mobile", e as any);
+                form.setValue("mobile", e as any);
                 if (status === "error") {
                   setStatus("idle");
                 }
@@ -211,11 +229,12 @@ function Individual() {
                 // Keep only the first 10 digits after processing
                 const first10Digits = trimmedText.slice(0, 10);
 
-                form.setFieldValue("mobile", first10Digits as any);
+                form.setValue("mobile", Number(first10Digits) as any);
               }}
               allowNegative={false}
               onBlurCapture={(e) =>
-                form.values.mobile === "" && form.setValues({ mobile: null })
+                (values.mobile as any) === "" &&
+                form.setValue("mobile", undefined as any)
               }
             />
             {status === "error" && (
@@ -298,8 +317,8 @@ function Individual() {
         opened={opened}
         open={open}
         close={onClose}
-        userName={form.values.email}
-        mobile={form.values.mobile && form.values.mobile}
+        userName={values.email}
+        mobile={values.mobile && values.mobile}
       />
     </>
   );

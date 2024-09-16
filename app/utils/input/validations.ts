@@ -22,4 +22,13 @@ export const handleAllTrimAndReplace = (
   const trimmedValue = value.replace(/\s+/g, "");
   form.setFieldValue(fieldName, trimmedValue);
 };
+export const handleTrimAndReplaceReactHookForm = (
+  e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  fieldName: string,
+  form: any,
+  type?: "dis" | "full"
+) => {
+  const value = e.target.value.trim().replace(/\s+/g, " ");
+  type === "dis" ? form(fieldName, value) : form(fieldName, value);
+};
 export default handleTrimAndReplace;

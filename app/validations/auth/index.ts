@@ -79,6 +79,13 @@ const agentSchema = yup.object().shape({
     )
     .required("Mobile number is required"),
 });
+export const addressSchema = yup.object().shape({
+  address: yup
+    .string()
+    .trim()
+    .min(2, "Address must be at least 2 characters")
+    .required("Address is required"),
+});
 export const builderFirstStepSchema = yup.object().shape({
   userName: yup
     .string()

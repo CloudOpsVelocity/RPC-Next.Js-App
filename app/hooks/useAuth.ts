@@ -94,7 +94,6 @@ export default function useAuth({
       ...requestData,
       redirect: false,
     });
-    console.log(res);
     if (res?.ok) {
       type === "register"
         ? setTimeout(() => {
