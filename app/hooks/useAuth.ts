@@ -104,8 +104,8 @@ export default function useAuth({
     } else {
       if (res?.error === "A") {
         router.push("/register/builder");
-        toast.success("Redirecting to registration", {
-          duration: 5000,
+        toast.success("Redirecting to SignUp", {
+          duration: 2000,
           icon: "⌛",
         });
         return null;

@@ -340,6 +340,9 @@ function Agent() {
 
                 form.setFieldValue("mobile", first10Digits as any);
               }}
+              onBlurCapture={(e) =>
+                form.values.mobile === "" && form.setValues({ mobile: null })
+              }
             />
             {status === "error" && (
               <p className=" text-right text-[color:var(--Mandatory,#F00)] text-[12px] xl:text-[15px] italic font-medium leading-[normal]">
