@@ -57,7 +57,7 @@ export async function generateSlugs(
 
       return result;
     } else if (
-      data.includes("/residential/listings") &&
+      data.includes("/residential-projects") &&
       type === "project-listing"
     ) {
       const [
@@ -79,8 +79,9 @@ export async function generateSlugs(
         project,
         phase,
         bhk_unit_type,
-        slug,
+        ...(slug && { slug }),
       };
+      return result;
     }
   });
 
