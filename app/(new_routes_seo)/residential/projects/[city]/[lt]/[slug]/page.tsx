@@ -5,6 +5,12 @@ import { getAmenties, getProjectDetails } from "@/app/utils/api/project";
 import { notFound } from "next/navigation";
 import ProjectsDetailsPage from "@/app/(dashboard)/abc/[city]/[local]/[slug]/Page/ProjectDetailsPage";
 import { getStringPartByIndex } from "@/app/utils/dyanamic/projects";
+import { getPagesSlugs } from "@/app/seo/api";
+import {
+  extractProjectParamsValues,
+  findPathForProjectDetails,
+} from "@/app/(new_routes_seo)/utils/new-seo-routes/project";
+import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
 type Props = {
   params: { city: string; lt: string; slug: string };
 };
@@ -28,12 +34,11 @@ async function getProjectSlug(pathname: string) {
 }
 export default async function Page({ params }: Props) {
   const { city, lt, slug: name } = params;
-  const pathname = `/projects/${city}/${lt}/${name}`;
-  const value = await getProjectSlug(pathname);
-  console.log(value);
-  console.log(value);
-  const slug = getStringPartByIndex(value, 2);
-  console.log(slug);
+  const pathname = `${BASE_PATH_PROJECT_DETAILS}/${city}/${lt}/${name}`;
+  const value = await findPathForProjectDetails(pathname);
+
+  const { PJ: slug } = await extractProjectParamsValues(value);
+
   if (!slug) {
     notFound();
   }
@@ -45,22 +50,14 @@ export default async function Page({ params }: Props) {
     <ProjectsDetailsPage
       projResponse={projResponse}
       amenitiesFromDB={amenitiesFromDB}
-      slug={slug}
+      slug={slug as string}
     />
   );
 }
 
 export async function generateStaticParams() {
   // Get the data (mocked here, replace with your actual data fetching logic)
-  // const res = await getPagesSlugs("project-list");
-  const res = {
-    "/projects/bengaluru/whitefield/jackson-wonderland/phase-1/apartment/1bhk":
-      "9_368_6eaa57024ae79366e56318b18ea9743d_232_35_45",
-    "/projects/bengaluru/whitefield/jackson-wonderland-1/phase-2/apartment/2bhk":
-      "9_368_6eaa57024ae79366e56318b18ea9743d_232_35_45",
-    "/projects/bengaluru/whitefield/jackson-wonderland-2/phase-3/apartment/3bhk":
-      "9_368_6eaa57024ae79366e56318b18ea9743d_232_35_45",
-  };
+  const res = await getPagesSlugs("project-list");
 
   const staticDir = path.join(process.cwd(), "static");
   const filePath = path.join(staticDir, "projectSlugs.json");

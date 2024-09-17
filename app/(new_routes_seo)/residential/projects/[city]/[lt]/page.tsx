@@ -3,6 +3,11 @@ import React from "react";
 import fs from "fs";
 import path from "path";
 import ProjectSearchPage from "@/app/(dashboard)/search/Page/ProjectSearchPage";
+import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
+import {
+  extractProjectParamsValues,
+  findPathForProjectDetails,
+} from "@/app/(new_routes_seo)/utils/new-seo-routes/project";
 type Props = {
   params: { city: string; lt: string; slug: string };
 };
@@ -10,7 +15,6 @@ async function getProjectSlug(pathname: string) {
   const staticDir = path.join(process.cwd(), "static");
   const filePath = path.join(staticDir, "projectSlugs.json");
   console.time("getProjectSlugs");
-
   try {
     const jsonData = fs.readFileSync(filePath, "utf8");
     const builderJsonData = JSON.parse(jsonData);
@@ -29,29 +33,28 @@ async function getProjectSlug(pathname: string) {
   }
 }
 export default async function Page({ params: { city, lt } }: Props) {
-  const pathname = `/projects/${city}/${lt}`;
-  const value = await getProjectSlug(pathname);
-
-  const serverData = await getSearchData(value.split("_")[1]);
-  console.log(value.split("_"));
+  const pathname = `${BASE_PATH_PROJECT_DETAILS}/${city}/${lt}`;
+  const value = await findPathForProjectDetails(pathname);
+  const filterValues = extractProjectParamsValues(value);
+  const serverData = await getSearchData(filterValues.LT as string);
   return (
     <ProjectSearchPage
       serverData={serverData}
       frontendFilters={{
-        locality: [`${lt}+${value.split("_")[1]}`],
+        locality: [`${lt}+${filterValues.LT}`],
       }}
     />
   );
 }
-// export async function generateStaticParams() {
-//   const res = await getPagesSlugs("project-list");
-//   const keys = Object.keys(res);
-//   const slugs = keys.map((data) => {
-//     const [staticPath, staticPath2, city, lt, slug] = data.split("/");
-//     return { city, lt, slug };
-//   });
-//   return slugs;
-// }
+export async function generateStaticParams() {
+  const res = await getPagesSlugs("project-list");
+  const keys = Object.keys(res);
+  const slugs = keys.map((data) => {
+    const [staticPath, staticPath2, city, lt, slug] = data.split("/");
+    return { city, lt };
+  });
+  return slugs;
+}
 
 export const dynamic = "force-dynamic";
 const getSearchData = async (locality: string): Promise<any> => {

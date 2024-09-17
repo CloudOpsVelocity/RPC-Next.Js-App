@@ -11,6 +11,16 @@ export default async function Page({ params: { city, lt } }: Props) {
   const serverData = await getSearchData();
   return <ProjectSearchPage serverData={serverData} />;
 }
+
+export async function generateStaticParams() {
+  const res = await getPagesSlugs("project-list");
+  const keys = Object.keys(res);
+  const slugs = keys.map((data) => {
+    const [staticPath, staticPath2, city] = data.split("/");
+    return { city };
+  });
+  return slugs;
+}
 const getSearchData = async (): Promise<any> => {
   try {
     const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=0&city=9`;

@@ -17,14 +17,7 @@ const getPagesSlugs = async (
       }
     }
     if (pageType === "project-list") {
-      return {
-        "/projects/bengaluru/whitefield/jackson-wonderland/phase-1/apartment/1bhk":
-          "9_368_6eaa57024ae79366e56318b18ea9743d_232_35_45",
-        "/projects/bengaluru/whitefield/jackson-wonderland-1/phase-2/apartment/2bhk":
-          "9_368_6eaa57024ae79366e56318b18ea9743d_232_35_45",
-        "/projects/bengaluru/whitefield/jackson-wonderland-2/phase-3/apartment/3bhk":
-          "9_368_6eaa57024ae79366e56318b18ea9743d_232_35_45",
-      };
+      return data;
     }
     return data;
   } catch (error) {

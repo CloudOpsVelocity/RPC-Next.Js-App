@@ -50,39 +50,39 @@ export default async function Page({ params }: Props) {
   );
 }
 
-export async function generateStaticParams() {
-  // Get the data (mocked here, replace with your actual data fetching logic)
-  // const res = await getPagesSlugs("project-list");
-  const res = {
-    "/projects/bengaluru/whitefield/jackson-wonderland/phase-1/apartment/1bhk":
-      "9_368_6eaa57024ae79366e56318b18ea9743d_232_35_45",
-    "/projects/bengaluru/whitefield/jackson-wonderland-1/phase-2/apartment/2bhk":
-      "9_368_6eaa57024ae79366e56318b18ea9743d_232_35_45",
-    "/projects/bengaluru/whitefield/jackson-wonderland-2/phase-3/apartment/3bhk":
-      "9_368_6eaa57024ae79366e56318b18ea9743d_232_35_45",
-  };
+// export async function generateStaticParams() {
+//   // Get the data (mocked here, replace with your actual data fetching logic)
+//   // const res = await getPagesSlugs("project-list");
+//   const res = {
+//     "/projects/bengaluru/whitefield/jackson-wonderland/phase-1/apartment/1bhk":
+//       "9_368_6eaa57024ae79366e56318b18ea9743d_232_35_45",
+//     "/projects/bengaluru/whitefield/jackson-wonderland-1/phase-2/apartment/2bhk":
+//       "9_368_6eaa57024ae79366e56318b18ea9743d_232_35_45",
+//     "/projects/bengaluru/whitefield/jackson-wonderland-2/phase-3/apartment/3bhk":
+//       "9_368_6eaa57024ae79366e56318b18ea9743d_232_35_45",
+//   };
 
-  const staticDir = path.join(process.cwd(), "static");
-  const filePath = path.join(staticDir, "projectSlugs.json");
+//   const staticDir = path.join(process.cwd(), "static");
+//   const filePath = path.join(staticDir, "projectSlugs.json");
 
-  // Ensure the 'static' directory exists
-  if (!fs.existsSync(staticDir)) {
-    fs.mkdirSync(staticDir);
-  }
+//   // Ensure the 'static' directory exists
+//   if (!fs.existsSync(staticDir)) {
+//     fs.mkdirSync(staticDir);
+//   }
 
-  // Convert the data object into JSON
-  const jsonContent = JSON.stringify(res, null, 2);
+//   // Convert the data object into JSON
+//   const jsonContent = JSON.stringify(res, null, 2);
 
-  // Write the JSON data to the file
-  fs.writeFileSync(filePath, jsonContent);
-  console.log("projectSlugs.json file created successfully");
-  // Extract project names from the keys
-  const projectRes = Object.keys(res);
-  const slugs = projectRes.map((data) => {
-    const [staticPath, staticPath2, city, lt, slug] = data.split("/");
-    return { city, lt, slug };
-  });
-  return slugs;
-}
+//   // Write the JSON data to the file
+//   fs.writeFileSync(filePath, jsonContent);
+//   console.log("projectSlugs.json file created successfully");
+//   // Extract project names from the keys
+//   const projectRes = Object.keys(res);
+//   const slugs = projectRes.map((data) => {
+//     const [staticPath, staticPath2, city, lt, slug] = data.split("/");
+//     return { city, lt, slug };
+//   });
+//   return slugs;
+// }
 export const dynamicParams = true;
 export const dynamic = "force-dynamic";

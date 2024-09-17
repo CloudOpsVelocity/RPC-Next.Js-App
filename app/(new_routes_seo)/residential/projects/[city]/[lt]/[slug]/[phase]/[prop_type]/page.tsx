@@ -5,6 +5,11 @@ import path from "path";
 import ProjectSearchPage from "@/app/(dashboard)/search/Page/ProjectSearchPage";
 import { getSearchData } from "@/app/(new_routes_seo)/in/utils/api";
 import ListingSearchPage from "@/app/(dashboard)/search/listing/Page/ListingSearchPage";
+import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
+import {
+  extractProjectParamsValues,
+  findPathForProjectDetails,
+} from "@/app/(new_routes_seo)/utils/new-seo-routes/project";
 type Props = {
   params: {
     city: string;
@@ -40,20 +45,18 @@ async function getProjectSlug(pathname: string) {
 export default async function Page({
   params: { city, lt, slug, phase, prop_type },
 }: Props) {
-  const pathname = `/projects/${city}/${lt}/${slug}/${phase}/${prop_type}`;
-  const value = await getProjectSlug(pathname);
-  const [, ltValue, projId, phaseId, proptype_value, ,] = value.split("_");
-  const serverData = await getSearchData(
-    `projIdEnc=${projId}&propType=${proptype_value}`
-  );
+  const pathname = `${BASE_PATH_PROJECT_DETAILS}/${city}/${lt}/${slug}/${phase}/${prop_type}`;
+  const value = await findPathForProjectDetails(pathname);
+  const { PJ, LT, PT } = extractProjectParamsValues(value);
+  const serverData = await getSearchData(`projIdEnc=${PJ}&propType=${PT}`);
   return (
     <ListingSearchPage
       serverData={serverData}
       frontendFilters={{
-        locality: [`${lt}+${ltValue}`],
+        locality: [`${lt}+${LT}`],
         projName: slug,
-        projIdEnc: projId,
-        propTypes: parseInt(proptype_value),
+        projIdEnc: PJ,
+        propTypes: parseInt(PT as string),
       }}
     />
   );

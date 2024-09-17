@@ -49,14 +49,14 @@ export default async function Page({
     />
   );
 }
-export async function generateStaticParams() {
-  const res = await getPagesSlugs("project-list");
-  const keys = Object.keys(res);
-  const slugs = keys.map((data) => {
-    const [staticPath, staticPath2, city, lt, slug, phase] = data.split("/");
-    return { city, lt, slug, phase };
-  });
-  return slugs;
-}
+// export async function generateStaticParams() {
+//   const res = await getPagesSlugs("project-list");
+//   const keys = Object.keys(res);
+//   const slugs = keys.map((data) => {
+//     const [staticPath, staticPath2, city, lt, slug, phase] = data.split("/");
+//     return { city, lt, slug, phase };
+//   });
+//   return slugs;
+// }
 
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
