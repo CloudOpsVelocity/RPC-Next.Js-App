@@ -4,13 +4,17 @@ import {
   getProjSearchData,
   getSearchData,
 } from "@/app/(new_routes_seo)/in/utils/api";
-import { getNestedSlug } from "@/app/(new_routes_seo)/in/utils/getSlugs";
+import {
+  findPathForProjectListing,
+  getNestedSlug,
+} from "@/app/(new_routes_seo)/in/utils/getSlugs";
 import {
   extractListingParamsValues,
   generateSlugs,
 } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing";
 import { BASE_PATH_LISTING } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing.route";
 import { getPagesSlugs } from "@/app/seo/api";
+import { notFound } from "next/navigation";
 import React from "react";
 type Props = {
   params: {
@@ -25,7 +29,8 @@ export default async function Page({
   params: { bhk_unit_type, cg, city, lt },
 }: Props) {
   const pathname = `${BASE_PATH_LISTING}/${cg}/${city}/${lt}/${bhk_unit_type}`;
-  const values = await getNestedSlug(pathname, -1);
+  const values = await findPathForProjectListing(pathname);
+  if (!values) return notFound();
   const { CG, BH, PT, LT } = extractListingParamsValues(values);
   const severData = await getProjSearchData(
     `bhk=${BH}&propType=${PT}&localities=${LT}&cg=${CG}`

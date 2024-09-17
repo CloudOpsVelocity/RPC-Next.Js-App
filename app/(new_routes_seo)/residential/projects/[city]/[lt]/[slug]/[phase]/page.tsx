@@ -67,7 +67,8 @@ export async function generateStaticParams() {
   const res = await getPagesSlugs("project-list");
   const keys = Object.keys(res);
   const slugs = keys.map((data) => {
-    const [staticPath, staticPath2, city, lt, slug, phase] = data.split("/");
+    const [staticPath, staticPath2, sta3, city, lt, slug, phase] =
+      data.split("/");
     return { city, lt, slug, phase };
   });
   return slugs;

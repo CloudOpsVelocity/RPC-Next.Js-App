@@ -13,6 +13,7 @@ import path from "path";
 import React from "react";
 import fs from "fs";
 import getListingSLugs, {
+  findPathForProjectListing,
   getNestedSlug,
 } from "@/app/(new_routes_seo)/in/utils/getSlugs";
 import {
@@ -32,8 +33,8 @@ type Props = {
 
 export default async function Page({ params }: Props) {
   const pathname = `${BASE_PATH_LISTING}/${params.cg}/${params.city}/${params.lt}/${params.bhk_unit_type}/${params.slug}`;
-  const value = await getNestedSlug(pathname);
-  console.log(value);
+  const value = await findPathForProjectListing(pathname);
+  if (!value) return notFound();
   const { id } = extractListingParamsValues(value);
   console.log("hello form listing details page during builder");
   if (!id) {

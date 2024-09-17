@@ -35,6 +35,7 @@ async function getProjectSlug(pathname: string) {
 export default async function Page({ params }: Props) {
   const { city, lt, slug: name } = params;
   const pathname = `${BASE_PATH_PROJECT_DETAILS}/${city}/${lt}/${name}`;
+
   const value = await findPathForProjectDetails(pathname);
   if (!value) {
     notFound();
@@ -75,10 +76,11 @@ export async function generateStaticParams() {
   // Extract project names from the keys
   const projectRes = Object.keys(res);
   const slugs = projectRes.map((data) => {
-    const [staticPath, staticPath2, city, lt, slug] = data.split("/");
+    const [staticPath, staticPath2, sta3, city, lt, slug] = data.split("/");
+
     return { city, lt, slug };
   });
   return slugs;
 }
 export const dynamicParams = true;
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";

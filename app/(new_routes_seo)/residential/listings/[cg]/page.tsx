@@ -1,11 +1,15 @@
 import ProjectSearchPage from "@/app/(dashboard)/search/Page/ProjectSearchPage";
 import { getProjSearchData } from "@/app/(new_routes_seo)/in/utils/api";
-import { getNestedSlug } from "@/app/(new_routes_seo)/in/utils/getSlugs";
+import {
+  findPathForProjectListing,
+  getNestedSlug,
+} from "@/app/(new_routes_seo)/in/utils/getSlugs";
 import {
   extractListingParamsValues,
   generateSlugs,
 } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing";
 import { BASE_PATH_LISTING } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing.route";
+import { notFound } from "next/navigation";
 import React from "react";
 
 type Props = {
@@ -14,7 +18,8 @@ type Props = {
 
 export default async function Page({ params: { cg } }: Props) {
   const pathname = `${BASE_PATH_LISTING}/${cg}`;
-  const values = await getNestedSlug(pathname, -4);
+  const values = await findPathForProjectListing(pathname);
+  if (!values) return notFound();
   const slugValues = extractListingParamsValues(values);
   const severData = await getProjSearchData(`cg=${slugValues.CG}`);
   return (

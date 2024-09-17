@@ -70,6 +70,7 @@ export async function generateStaticParams() {
     const [
       staticPath,
       staticPath2,
+      sta3,
       city,
       lt,
       slug,
@@ -77,7 +78,14 @@ export async function generateStaticParams() {
       prop_type,
       unit_type,
     ] = data.split("/");
-    return { city, lt, slug, phase, prop_type, unit_type };
+    return {
+      city,
+      lt,
+      slug,
+      phase,
+      prop_type,
+      ...(unit_type && { unit_type }),
+    };
   });
   return slugs;
 }

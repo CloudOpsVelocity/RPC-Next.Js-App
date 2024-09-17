@@ -6,10 +6,7 @@ import { paritalUnitParser } from "@/app/(new_routes_seo)/residential/projects/u
 
 const getProjectDetails = async (slug: string): Promise<MERGERPROJECT> => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/basicDetails?projIdEnc=${slug}`,
-    {
-      cache: "no-cache",
-    }
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/basicDetails?projIdEnc=${slug}`
   );
   const data = await response.json();
 
