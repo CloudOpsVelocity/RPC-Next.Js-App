@@ -31,7 +31,7 @@ export default async function Page({ params: { cg } }: Props) {
   );
 }
 export async function generateStaticParams() {
-  const slugs = await generateSlugs("listing-search-seo");
+  const slugs = await generateSlugs("listing-search-seo", "project-listing");
   return slugs;
 }
 export const dynamic = "force-dynamic";
