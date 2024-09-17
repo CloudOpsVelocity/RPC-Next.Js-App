@@ -10,6 +10,7 @@ import {
   extractProjectParamsValues,
   findPathForProjectDetails,
 } from "@/app/(new_routes_seo)/utils/new-seo-routes/project";
+import { notFound } from "next/navigation";
 type Props = {
   params: { city: string; lt: string; slug: string; phase: string };
 };
@@ -41,8 +42,13 @@ export default async function Page({
 }: Props) {
   const pathname = `${BASE_PATH_PROJECT_DETAILS}/${city}/${lt}/${slug}/${phase}`;
   const value = await findPathForProjectDetails(pathname);
+  if (!value) notFound();
   const filterValues = extractProjectParamsValues(value);
-  const serverData = await getSearchData(`projIdEnc=${filterValues.PJ}`);
+  const serverData = await getSearchData(
+    `projIdEnc=${filterValues.PJ}${
+      filterValues.count == 5 ? `&propType=${filterValues.PT}` : ""
+    }`
+  );
   return (
     <ListingSearchPage
       serverData={serverData}
@@ -50,6 +56,9 @@ export default async function Page({
         locality: [`${lt}+${filterValues.LT}`],
         projName: slug,
         projIdEnc: filterValues.PJ,
+        ...(filterValues.count == 5 && {
+          propTypes: parseInt(filterValues.PT as string),
+        }),
       }}
     />
   );

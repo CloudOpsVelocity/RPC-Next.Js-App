@@ -1,5 +1,6 @@
 "use client";
-import getIcon from "@/app/(new_routes_seo)/projects/utils/icons";
+
+import getIcon from "@/app/(new_routes_seo)/residential/projects/utils/icons";
 import {
   parseDataProjectProps,
   propertyDetailsTypes,

@@ -10,6 +10,9 @@ import {
   extractProjectParamsValues,
   findPathForProjectDetails,
 } from "@/app/(new_routes_seo)/utils/new-seo-routes/project";
+import { getAmenties, getProjectDetails } from "@/app/utils/api/project";
+import ProjectsDetailsPage from "@/app/(dashboard)/abc/[city]/[local]/[slug]/Page/ProjectDetailsPage";
+import { notFound } from "next/navigation";
 type Props = {
   params: {
     city: string;
@@ -47,9 +50,28 @@ export default async function Page({
 }: Props) {
   const pathname = `${BASE_PATH_PROJECT_DETAILS}/${city}/${lt}/${slug}/${phase}/${prop_type}`;
   const value = await findPathForProjectDetails(pathname);
-  const { PJ, LT, PT } = extractProjectParamsValues(value);
-  const serverData = await getSearchData(`projIdEnc=${PJ}&propType=${PT}`);
-  return (
+  if (!value) {
+    notFound();
+  }
+  let serverData = null;
+  const { PJ, LT, PT, ID, count } = extractProjectParamsValues(value);
+  if (count == 6) {
+    serverData = await getSearchData(`projIdEnc=${PJ}&propType=${PT}`);
+  } else {
+    const [projResponse, amenitiesFromDB] = await Promise.all([
+      getProjectDetails(PJ as string),
+      getAmenties(),
+    ]);
+    serverData = { projResponse, amenitiesFromDB };
+  }
+
+  return count == 5 ? (
+    <ProjectsDetailsPage
+      projResponse={serverData.projResponse}
+      amenitiesFromDB={serverData.amenitiesFromDB}
+      slug={PJ as string}
+    />
+  ) : (
     <ListingSearchPage
       serverData={serverData}
       frontendFilters={{

@@ -36,12 +36,11 @@ export default async function Page({ params }: Props) {
   const { city, lt, slug: name } = params;
   const pathname = `${BASE_PATH_PROJECT_DETAILS}/${city}/${lt}/${name}`;
   const value = await findPathForProjectDetails(pathname);
-
-  const { PJ: slug } = await extractProjectParamsValues(value);
-
-  if (!slug) {
+  if (!value) {
     notFound();
   }
+  const { PJ: slug } = await extractProjectParamsValues(value);
+
   const [projResponse, amenitiesFromDB] = await Promise.all([
     getProjectDetails(slug as string),
     getAmenties(),

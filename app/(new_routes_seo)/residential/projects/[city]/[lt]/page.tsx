@@ -8,6 +8,7 @@ import {
   extractProjectParamsValues,
   findPathForProjectDetails,
 } from "@/app/(new_routes_seo)/utils/new-seo-routes/project";
+import { notFound } from "next/navigation";
 type Props = {
   params: { city: string; lt: string; slug: string };
 };
@@ -35,6 +36,7 @@ async function getProjectSlug(pathname: string) {
 export default async function Page({ params: { city, lt } }: Props) {
   const pathname = `${BASE_PATH_PROJECT_DETAILS}/${city}/${lt}`;
   const value = await findPathForProjectDetails(pathname);
+  if (!value) notFound();
   const filterValues = extractProjectParamsValues(value);
   const serverData = await getSearchData(filterValues.LT as string);
   return (

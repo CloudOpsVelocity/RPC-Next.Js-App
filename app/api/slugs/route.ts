@@ -98,23 +98,33 @@ export async function POST(request: Request, response: Response) {
           { status: 400 }
         );
       }
-      const slugToDelete = Object.keys(data).find(
-        (key) => data[key].split("_").pop() === id
-      );
-      if (!slugToDelete) {
+
+      let deleted = false; // Track whether a deletion occurs
+      // Loop over keys and delete the ones that contain the id
+      Object.keys(data).forEach((key) => {
+        if (data[key].includes(id)) {
+          delete data[key];
+          revalidatePath(key); // Revalidate path after deletion
+          deleted = true; // Mark as deleted
+        }
+      });
+      // If no deletions occurred, return an error
+      if (!deleted) {
         return NextResponse.json(
           { error: `${type} with id '${id}' does not exist` },
           { status: 404 }
         );
       }
-      delete data[slugToDelete];
+
+      // Write updated data back to the file
       fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
-      revalidatePath(slugToDelete);
+
       return NextResponse.json(
         { message: `${type} deleted successfully` },
         { status: 200 }
       );
     }
+
     default:
       return NextResponse.json(
         { error: "Invalid action parameter" },

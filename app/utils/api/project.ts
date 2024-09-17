@@ -2,7 +2,7 @@ import { unstable_cache } from "next/cache";
 import { Main, MERGERPROJECT } from "../../validations/types/project";
 import { capitalizeWords } from "../letters";
 import axios from "axios";
-import { paritalUnitParser } from "@/app/(new_routes_seo)/projects/utils/partialUnitParser";
+import { paritalUnitParser } from "@/app/(new_routes_seo)/residential/projects/utils/partialUnitParser";
 
 const getProjectDetails = async (slug: string): Promise<MERGERPROJECT> => {
   const response = await fetch(
