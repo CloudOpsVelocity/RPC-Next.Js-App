@@ -14,6 +14,7 @@ import {
   getProjectDetails,
   getReportConstData,
 } from "@/app/utils/api/property";
+import { notFound } from "next/navigation";
 import React from "react";
 type Props = {
   params: {
@@ -34,6 +35,7 @@ export default async function Page({
   }/${bhk_unit_type}`;
   let serverData = null;
   const values = await findPathForProjectListing(pathname);
+  if (!values) return notFound();
   const filtersValues = extractListingParamsValues(values);
   if (filtersValues.count === 8) {
     serverData = await getSearchData(

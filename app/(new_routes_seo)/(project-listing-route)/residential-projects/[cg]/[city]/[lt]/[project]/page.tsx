@@ -7,6 +7,7 @@ import {
 import { extractListingParamsValues } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing";
 import { BASE_PATH_PROJECT_LISTING } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing.route";
 import { getPagesSlugs } from "@/app/seo/api";
+import { notFound } from "next/navigation";
 import React from "react";
 type Props = {
   params: {
@@ -23,6 +24,7 @@ export default async function Page({
 }: Props) {
   const pathname = `${BASE_PATH_PROJECT_LISTING}/${cg}/${city}/${lt}/${project}`;
   const values = await findPathForProjectListing(pathname);
+  if (!values) return notFound();
   const filtersValues = extractListingParamsValues(values);
   const severData = await getSearchData(
     `localities=${filtersValues.LT}&cg=${filtersValues.CG}&projIdEnc=${filtersValues.PJ}`

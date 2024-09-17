@@ -30,6 +30,9 @@ type Props = {
 export default async function Page({ params }: Props) {
   const pathname = `${BASE_PATH_PROJECT_LISTING}/${params.cg}/${params.city}/${params.lt}/${params.project}/${params.phase}/${params.bhk_unit_type}/${params.slug}`;
   const value = await findPathForProjectListing(pathname);
+  if (!value) {
+    notFound();
+  }
   const slug = getStringPartByIndex(value, 6);
   if (!slug) {
     notFound();

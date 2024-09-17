@@ -69,50 +69,40 @@ export async function POST(request: Request) {
           { status: 400 }
         );
       }
-      // Find the slug corresponding to the given id
-      const currentSlug = Object.keys(data).find((key) => data[key] === id);
-
-      if (!currentSlug) {
-        return NextResponse.json(
-          { error: `Listing with id '${id}' does not exist` },
-          { status: 404 }
-        );
-      }
-      for (const key in data) {
-        if (data[key] === id) {
+      // Find and delete existing slugs with the same id
+      Object.keys(data).forEach((key) => {
+        if (data[key].includes(id)) {
           delete data[key];
+          revalidatePath(key);
         }
-      }
-      // // Remove the old entry
-      // delete data[currentSlug];
-
-      // Check if a new slug is provided and ensure it doesn't already exist
-      if (slug && Object.prototype.hasOwnProperty.call(data, slug)) {
-        return NextResponse.json(
-          { error: `Slug '${slug}' already exists` },
-          { status: 400 }
-        );
-      }
-
-      // Create the new entry
-
-      // Initialize an empty object for the new data entry
-
-      // Map each property from the slugs object to the new data entry
-      for (const key in slugs) {
-        if (Object.prototype.hasOwnProperty.call(slugs, key)) {
-          data[key] = slugs[key]; // Map each property to the new entry
-          revalidatePath(data[key]);
+      });
+      // Add new slugs to the data
+      Object.keys(slugs).forEach((slug) => {
+        const newId = slugs[slug];
+        if (!newId || typeof newId !== "string") {
+          return NextResponse.json(
+            { error: `Invalid ID for slug: ${slug}` },
+            { status: 400 }
+          );
         }
-      }
-
-      // Write the updated data back to the file
+        // Check if the new slug already exists
+        if (Object.prototype.hasOwnProperty.call(data, slug)) {
+          return NextResponse.json(
+            { error: `Slug '${slug}' already exists` },
+            { status: 400 }
+          );
+        }
+        // Add the new slug and its corresponding ID
+        data[slug] = newId;
+      });
+      // Write updated data to the file
       fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
-
-      // Revalidate the updated path
-
+      // Revalidate all paths for the new slugs
+      Object.keys(slugs).forEach((slug) => {
+        revalidatePath(slug);
+      });
       return NextResponse.json(
-        { message: `Listing updated successfully` },
+        { message: "Slugs updated successfully" },
         { status: 200 }
       );
     }
