@@ -48,8 +48,8 @@ function Agent({ encriptedData }: any) {
     defaultValues: {
       userName: "",
       email: "",
-      password: encriptedData.password || "",
-      mobile: encriptedData.username || undefined,
+      password: encriptedData?.password || "",
+      mobile: encriptedData?.username || undefined,
       companyName: "",
       companyLogo: undefined,
       address: "",
