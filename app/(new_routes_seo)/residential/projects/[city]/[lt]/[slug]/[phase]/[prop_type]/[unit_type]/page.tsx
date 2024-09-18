@@ -49,6 +49,7 @@ export default async function Page({
       projResponse={serverData.projResponse}
       amenitiesFromDB={serverData.amenitiesFromDB}
       slug={filterValues.PJ as string}
+      scrollId="floorPlansdiv"
     />
   ) : (
     <ListingSearchPage

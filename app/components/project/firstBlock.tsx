@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Carousel } from "@mantine/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import {
@@ -24,6 +24,7 @@ type Props = {
   companyName: string;
   builderId: number;
   hasReraStatus: boolean;
+  scrollId?: string;
 };
 
 const FirstBlock: React.FC<Props> = ({
@@ -31,13 +32,13 @@ const FirstBlock: React.FC<Props> = ({
   companyName,
   builderId,
   hasReraStatus,
+  scrollId,
 }) => {
   const images = getImageUrls(projectDetails?.media as any);
   const autoplay = useRef(Autoplay({ delay: 10000 }));
   const setIsScrolling = useSetAtom(isScrollingAtom);
   const setSticky = useSetAtom(stickyAtom);
   const setC = useSetAtom(currentBlockAtom);
-
   function scrollToTopic(id: string): void {
     setIsScrolling(true);
     const element = document.getElementById(id);
@@ -47,7 +48,6 @@ const FirstBlock: React.FC<Props> = ({
         block: "start",
         inline: "center",
       });
-
       setSticky(true);
     }
     setC("floorPlans");

@@ -38,7 +38,6 @@ import FAQJsonLdScript from "@/app/seo/Faqjson";
 import QAJsonLdScript from "@/app/seo/Qnajson";
 import PropertyJsonLdScript from "@/app/seo/Productjson";
 import ArticleJsonLdScript from "@/app/seo/ArticleJson";
-import PricingSection from "@/app/components/project/_ui/PricingDetailsSection";
 import PropertyDataDisplay from "@/app/components/project/_ui/PricingDetailsSection";
 // const FloorplansBlock = dynamic(
 //   () => import("@/app/components/project/floorplansBlock"),

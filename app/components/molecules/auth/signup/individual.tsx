@@ -13,9 +13,7 @@ import { individualSchema } from "@/app/validations/auth";
 import { useState } from "react";
 import Success from "../success";
 import { BackSvg, EyeClosed, EyeOpen } from "@/app/images/commonSvgs";
-import handleTrimAndReplace, {
-  handleTrimAndReplaceReactHookForm,
-} from "@/app/utils/input/validations";
+import { handleTrimAndReplaceReactHookForm } from "@/app/utils/input/validations";
 import StepCss from "@/app/styles/Stepper.module.css";
 import clsx from "clsx";
 import {

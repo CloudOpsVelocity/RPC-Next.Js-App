@@ -108,6 +108,12 @@ const getAmenties = async () => {
   );
   return data.data;
 };
+const getProjectUntis = async (slug: string) => {
+  const res = await fetch(
+    "test.getrightproperty.com/api/project/projectUnit?projIdEnc=" + slug
+  );
+  return await res.json();
+};
 const getOverViewData = async (slug: string) => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/overviewData?projIdEnc=${slug}`
@@ -123,6 +129,7 @@ export {
   getNearByLocations,
   getAmenties,
   getOverViewData,
+  getProjectUntis,
 };
 
 // const paritalUnitParser = (input: any[]) => {

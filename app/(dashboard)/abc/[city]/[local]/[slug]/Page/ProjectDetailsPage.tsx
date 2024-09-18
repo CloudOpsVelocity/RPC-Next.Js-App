@@ -1,4 +1,3 @@
-import { getAmenties, getProjectDetails } from "@/app/utils/api/project";
 import React from "react";
 import Feature from "@/app/components/project/feature";
 import Amenties from "@/app/components/project/amenties";
@@ -35,17 +34,18 @@ type Props = {
   projResponse: any;
   amenitiesFromDB: any;
   slug: string;
+  scrollId?: string;
 };
 
 export default async function ProjectsDetailsPage({
   projResponse,
   amenitiesFromDB,
   slug,
+  scrollId,
 }: Props) {
   const { basicData: data, nearByLocations, phaseOverview } = projResponse;
-
   return (
-    <section className="w-full relative break-words">
+    <section className="w-full relative break-words ">
       <meta
         property="og:url"
         content={`${process.env.NEXT_PUBLIC_URL}/abc/${data.cityName}/${data.localityName}/${slug}`}
@@ -110,6 +110,7 @@ export default async function ProjectsDetailsPage({
             companyName={data.postedByName}
             builderId={data.builderId}
             hasReraStatus={data.reraStatus}
+            scrollId={scrollId}
           />
         </div>
         {/* Navigations Container */}
