@@ -6,24 +6,23 @@ import {
   Stepper,
   Button,
   Group,
+  Code,
+  Text,
+  SimpleGrid,
+  ScrollArea,
+} from "@mantine/core";
+import {
   TextInput,
   PasswordInput,
-  Code,
-  NumberInput,
-  Select,
-  SimpleGrid,
   Textarea,
   MultiSelect,
-  Text,
-  ScrollArea,
-  FocusTrap,
-  Checkbox,
-  Anchor,
-} from "@mantine/core";
+  Select,
+  NumberInput,
+  DateInput,
+} from "react-hook-form-mantine";
 import StepCss from "@/app/styles/Stepper.module.css";
 
-import { useForm, yupResolver } from "@mantine/form";
-import { DateInput } from "@mantine/dates";
+// import { DateInput } from "@mantine/dates";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { styles } from "@/app/styles/Stepper";
@@ -63,14 +62,17 @@ import {
   StepperDotGray,
   StepperDotGreen,
 } from "@/app/images/commonSvgs";
-import handleTrimAndReplace, {
+import {
   handleAllTrimAndReplace,
+  handleTrimAndReplaceReactHookForm,
 } from "@/app/utils/input/validations";
 import clsx from "clsx";
 import { getQueryParamClient } from "@/app/hooks/custom/useRedirect";
 import LoginSignupTabs from "@/app/(auth)/Components/LoginSignup";
 import AddmoreInput from "@/app/(auth)/Components/addmore";
 import Alert from "./Alert";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 function Builder({ encriptedData }: any) {
   const [status, setStatus] = useState<
@@ -79,15 +81,14 @@ function Builder({ encriptedData }: any) {
   const singupCookie = getCookie("resume_signup_tokenb")?.toString();
   const [active, setActive] = useState(encriptedData || singupCookie ? 1 : 0);
   const router = useRouter();
-
   const [opened, { open, close }] = useDisclosure(false);
-
   const { registerOtherDetails, register, login, saveStep } = useAuth({
     type: "register",
   });
-
-  const form = useForm({
-    initialValues: {
+  const newForm = useForm<any>({
+    reValidateMode: "onBlur",
+    shouldUseNativeValidation: false,
+    defaultValues: {
       userName: "",
       email: "",
       password: encriptedData?.password || "",
@@ -111,33 +112,27 @@ function Builder({ encriptedData }: any) {
       prevEmail: "",
       foundedBy: [{ name: "", active: false, key: randomId() }],
     },
-    validateInputOnBlur: true,
-    name: "builder" + active,
-    validate: (values) => {
-      if (active === 0) {
-        const data = yupResolver(builderFirstStepSchema)(values);
-        return data;
-      }
-
-      if (active === 1) {
-        const data = yupResolver(builderSchemaIndex1)(values);
-        return data;
-      }
-
-      if (active === 2) {
-        const data = yupResolver(builderSchema)(values);
-        return data;
-      }
-
-      if (active === 3) {
-        const data = yupResolver(textAreaScema)(values);
-        return data;
-      }
-
-      return {};
-    },
+    shouldFocusError: true,
+    mode: "all",
+    criteriaMode: "firstError",
+    progressive: true,
+    resolver: yupResolver(
+      // @ts-ignore
+      active === 0
+        ? builderFirstStepSchema
+        : active === 1
+        ? builderSchemaIndex1
+        : active === 2
+        ? builderSchema
+        : active === 3
+        ? textAreaScema
+        : builderSchemaIndex1
+    ),
   });
-  console.log(form.values);
+  const form = {
+    values: newForm.getValues(),
+  };
+
   const { data: statesData, isLoading: isLoadingStates } = useQuery(
     ["states"],
     getStatesDetails,
@@ -158,11 +153,12 @@ function Builder({ encriptedData }: any) {
       refetchIntervalInBackground: false,
     }
   );
+  const liveState = newForm.watch("state");
   const { data: citiesData, isLoading: isLoadingCities } = useQuery(
-    ["cities" + form.values.state],
-    () => getCitiesDetails(parseInt(form.values.state)),
+    ["cities" + liveState],
+    () => getCitiesDetails(parseInt(liveState)),
     {
-      enabled: !!form.values.state,
+      enabled: !!liveState,
       staleTime: 30000,
       refetchOnWindowFocus: false,
       cacheTime: 30000,
@@ -172,29 +168,29 @@ function Builder({ encriptedData }: any) {
 
   const OtpCallback = () => {
     close();
-    form.setValues({
-      otp: true,
-      prevMobile: form.values.mobile as unknown as number,
-      prevEmail: form.values.email as unknown as string,
-    });
+    // newForm.setValue({
+    //   otp: true,
+    //   prevMobile: form.values.mobile as unknown as number,
+    //   prevEmail: form.values.email as unknown as string,
+    // });
+    newForm.setValue("otp", true);
+    newForm.setValue("prevMobile", form.values.mobile as unknown as number);
+    newForm.setValue("prevEmail", form.values.email as unknown as string);
     saveStep(2);
     setActive(1);
   };
-  const nextStep = async () => {
+  const nextStep = async (values: any) => {
     // Validate the form
-    if (form.validate().hasErrors) {
-      const errorsKeys = Object.keys(form.errors);
-      if (active === 2 && errorsKeys[0]) {
-        scrollWhereIsSelected(errorsKeys[0]);
-        return;
-      }
-
-      return;
-    }
-
+    // if (form.validate().hasErrors) {
+    //   const errorsKeys = Object.keys(form.errors);
+    //   if (active === 2 && errorsKeys[0]) {
+    //     scrollWhereIsSelected(errorsKeys[0]);
+    //     return;
+    //   }
+    //   return;
+    // }
     // Handle API call based on the current step
-    let values = form.values;
-
+    // let values = form.values;
     try {
       switch (active) {
         case 0:
@@ -217,10 +213,9 @@ function Builder({ encriptedData }: any) {
               if (data.flag === "m") {
                 setStatus("error");
               } else if (data.flag === "e") {
-                form.setFieldError(
-                  "email",
-                  "Email already registered with us."
-                );
+                newForm.setError("email", {
+                  message: "Email already registered with us.",
+                });
                 setStatus("idle");
               } else {
                 setStatus("idle");
@@ -241,19 +236,16 @@ function Builder({ encriptedData }: any) {
             setStatus("pending");
             if (!values.companyStartDate) return;
             const date = new Date(values.companyStartDate);
-
             const day = date.getDate();
             const month = date.getMonth() + 1; // Months are zero-indexed, so add 1
             const year = date.getFullYear();
-
             const formattedDate = `${day}/${month}/${year}`;
-
             // API call for the third step
             const otherDetailsData = await registerOtherDetails(
               // @ts-ignore
               registerOtherParser({
                 ...values,
-                branch: values.branch.map((item) => parseInt(item)),
+                branch: values.branch.map((item: any) => parseInt(item)),
                 companyStartDate: formattedDate,
               })
             ).then(async (res) => {
@@ -263,15 +255,12 @@ function Builder({ encriptedData }: any) {
                 username: form.values.mobile as unknown as string,
               });
             });
-
             setStatus("success");
             // Proceed to the next step after the API call
             setActive((current) => (current < 4 ? current + 1 : current));
           }
           break;
-
         // Add more cases if needed for other steps
-
         default:
           break;
       }
@@ -283,18 +272,18 @@ function Builder({ encriptedData }: any) {
   type LogoFile = File | null;
   const handleLogoSelect = (logo: LogoFile): void => {
     // @ts-ignore
-    form.setFieldValue("companyLogo", logo);
+    newForm.setValue("companyLogo", logo);
   };
-
+  const logo = newForm.watch("companyLogo");
   const prevStep = () =>
     setActive((current) => (current > 0 ? current - 1 : current));
   const displayCountryCode = (value: any) => {
     console.log(value);
   };
   const handleStateChange = (state: string) => {
-    form.setFieldValue("state", state);
+    newForm.setValue("state", state);
     // Clear the city field when the state changes
-    form.setFieldValue("city", null);
+    newForm.setValue("city", null);
   };
   const viewport = useRef<HTMLDivElement>(null);
   const scrollToBottom = (customValue?: number) =>
@@ -372,9 +361,9 @@ function Builder({ encriptedData }: any) {
           userName={form.values.email}
         />
         {(encriptedData || singupCookie) && (
-          <Alert type="builder" isTouched={form.isDirty()} />
+          <Alert type="builder" isTouched={newForm.formState.isDirty} />
         )}
-        <form onSubmit={form.onSubmit(nextStep)} className="w-full">
+        <form onSubmit={newForm.handleSubmit(nextStep)} className="w-full">
           <Stepper
             //@ts-ignore
             styles={styles}
@@ -393,6 +382,7 @@ function Builder({ encriptedData }: any) {
               content: StepCss.content,
               stepCompletedIcon: StepCss.icon,
             }}
+            key={active}
             // completedIcon
           >
             <Stepper.Step
@@ -410,12 +400,19 @@ function Builder({ encriptedData }: any) {
               }}
             >
               <TextInput
+                name="userName"
+                control={newForm.control}
                 required
                 size="lg"
                 label="Builder Name"
                 placeholder="Enter builder name here"
-                {...form.getInputProps("userName")}
-                onBlurCapture={(e) => handleTrimAndReplace(e, "userName", form)}
+                onBlurCapture={(e) =>
+                  handleTrimAndReplaceReactHookForm(
+                    e,
+                    "userName",
+                    newForm.setValue
+                  )
+                }
                 classNames={{
                   root: StepCss.inputRoot,
                   input: StepCss.textInput,
@@ -425,13 +422,21 @@ function Builder({ encriptedData }: any) {
                 mt={"md"}
               />
               <TextInput
+                name="email"
+                control={newForm.control}
                 required
                 size="lg"
                 mt="sm"
                 label="Email"
                 placeholder="Enter your email here"
-                {...form.getInputProps("email")}
-                onBlurCapture={(e) => handleTrimAndReplace(e, "email", form)}
+                // {...form.getInputProps("email")}
+                onBlurCapture={(e) =>
+                  handleTrimAndReplaceReactHookForm(
+                    e,
+                    "email",
+                    newForm.setValue
+                  )
+                }
                 classNames={{
                   root: StepCss.inputRoot,
                   input: StepCss.textInput,
@@ -440,6 +445,8 @@ function Builder({ encriptedData }: any) {
                 }}
               />
               <PasswordInput
+                name="password"
+                control={newForm.control}
                 required
                 size="lg"
                 mt="sm"
@@ -451,13 +458,21 @@ function Builder({ encriptedData }: any) {
                 }}
                 label="Password"
                 placeholder="Create Your Password"
-                {...form.getInputProps("password")}
+                // {...form.getInputProps("password")}
                 visibilityToggleIcon={({ reveal }) =>
                   reveal ? <EyeOpen /> : <EyeClosed />
                 }
-                onBlurCapture={(e) => handleTrimAndReplace(e, "password", form)}
+                onBlurCapture={(e) =>
+                  handleTrimAndReplaceReactHookForm(
+                    e,
+                    "password",
+                    newForm.setValue
+                  )
+                }
               />
               <NumberInput
+                name="mobile"
+                control={newForm.control}
                 leftSection={
                   <span className="text-[#212c33] font-medium">+91</span>
                 }
@@ -476,10 +491,10 @@ function Builder({ encriptedData }: any) {
                 )}
                 label="Mobile Number"
                 placeholder="Enter Your Mobile Number"
-                {...form.getInputProps("mobile")}
-                error={form.errors.mobile || status === "error"}
+                // {...form.getInputProps("mobile")}
+                // error={form.errors.mobile || status === "error"}
                 onChange={(e) => {
-                  form.setFieldValue("mobile", e as any);
+                  newForm.setValue("mobile", e as any);
                   if (status === "error") {
                     setStatus("idle");
                   }
@@ -503,10 +518,11 @@ function Builder({ encriptedData }: any) {
                   // Keep only the first 10 digits after processing
                   const first10Digits = trimmedText.slice(0, 10);
 
-                  form.setFieldValue("mobile", first10Digits as any);
+                  newForm.setValue("mobile", first10Digits as any);
                 }}
                 onBlurCapture={(e) =>
-                  form.values.mobile === "" && form.setValues({ mobile: null })
+                  form.values.mobile === "" &&
+                  newForm.setValue("mobile", undefined as any)
                 }
               />
               {status === "error" && (
@@ -549,21 +565,33 @@ function Builder({ encriptedData }: any) {
               }}
             >
               <TextInput
+                key={"address"}
+                name="address"
+                control={newForm.control}
                 required
                 size="lg"
                 label="Office Address"
                 placeholder="Enter your office address"
-                {...form.getInputProps("address")}
+                // {...form.getInputProps("address")}
                 classNames={{
                   root: StepCss.inputRoot,
                   input: StepCss.textInput,
                   error: StepCss.errorMsg,
                   label: StepCss.mlabelCss,
                 }}
-                onBlurCapture={(e) => handleTrimAndReplace(e, "address", form)}
+                onBlurCapture={(e) => {
+                  handleTrimAndReplaceReactHookForm(
+                    e,
+                    "address",
+                    newForm.setValue
+                  );
+                }}
               />
 
               <Select
+                key={"state"}
+                name="state"
+                control={newForm.control}
                 rightSection={<DropdownArrowIcon />}
                 required
                 size="lg"
@@ -572,7 +600,6 @@ function Builder({ encriptedData }: any) {
                 placeholder="Select state"
                 data={isLoadingStates ? [] : stateParser(statesData) || []}
                 searchable
-                {...form.getInputProps("state")}
                 maxDropdownHeight={200}
                 onChange={(e) => handleStateChange(e as string)}
                 classNames={{
@@ -587,6 +614,9 @@ function Builder({ encriptedData }: any) {
               />
               <SimpleGrid cols={2}>
                 <Select
+                  key={"city"}
+                  name="city"
+                  control={newForm.control}
                   rightSection={<DropdownArrowIcon />}
                   required
                   size="lg"
@@ -595,7 +625,7 @@ function Builder({ encriptedData }: any) {
                   placeholder="Select city"
                   data={isLoadingCities ? [] : cityParser(citiesData) || []}
                   searchable
-                  {...form.getInputProps("city")}
+                  // {...form.getInputProps("city")}
                   maxDropdownHeight={200}
                   classNames={{
                     root: StepCss.inputRoot,
@@ -608,16 +638,18 @@ function Builder({ encriptedData }: any) {
                   withScrollArea={false}
                 />
                 <NumberInput
+                  key={"pincode"}
+                  name="pincode"
+                  control={newForm.control}
                   required
                   size="lg"
                   mt="md"
                   hideControls
                   label="Pincode"
                   placeholder="Enter pincode"
-                  {...form.getInputProps("pincode")}
                   onBlurCapture={(e) =>
                     form.values.pincode === "" &&
-                    form.setValues({ pincode: null })
+                    newForm.setValue("pincode", undefined as any)
                   }
                   classNames={{
                     root: StepCss.inputRoot,
@@ -633,14 +665,11 @@ function Builder({ encriptedData }: any) {
                     const first10Digits = trimmedText
                       .replace(/\D/g, "")
                       .slice(0, 6);
-                    form.setFieldValue("pincode", first10Digits as any);
+                    newForm.setValue("pincode", first10Digits as any);
                   }}
                 />
               </SimpleGrid>
-              <DropZone
-                onLogoSelect={handleLogoSelect}
-                logo={form.values.companyLogo}
-              />
+              <DropZone onLogoSelect={handleLogoSelect} logo={logo} />
             </Stepper.Step>
 
             <Stepper.Step
@@ -658,13 +687,14 @@ function Builder({ encriptedData }: any) {
             >
               <ScrollArea h={420} viewportRef={viewport} offsetScrollbars>
                 <TextInput
+                  name="companyName"
+                  control={newForm.control}
                   id="companyName"
                   required
                   size="lg"
                   mt="md"
                   label="Builder Company Name"
                   placeholder="Enter Legal Name"
-                  {...form.getInputProps("companyName")}
                   classNames={{
                     root: StepCss.inputRoot,
                     input: StepCss.textInput,
@@ -672,7 +702,11 @@ function Builder({ encriptedData }: any) {
                     label: StepCss.mlabelCss,
                   }}
                   onBlurCapture={(e) =>
-                    handleTrimAndReplace(e, "companyName", form)
+                    handleTrimAndReplaceReactHookForm(
+                      e,
+                      "companyName",
+                      newForm.setValue
+                    )
                   }
                   onKeyDown={(e) => {
                     if (e.key === "Enter") {
@@ -682,7 +716,9 @@ function Builder({ encriptedData }: any) {
                   }}
                 />
                 <MultiSelect
-                  ref={ref}
+                  name="branch"
+                  control={newForm.control}
+                  // ref={ref}
                   id="branch"
                   rightSection={<DropdownArrowIcon />}
                   required
@@ -703,7 +739,7 @@ function Builder({ encriptedData }: any) {
                     option: StepCss.optionCss,
                   }}
                   data={isLoadingBrach ? [] : cityParser(brachData) || []}
-                  {...form.getInputProps("branch")}
+                  // {...form.getInputProps("branch")}
                   onKeyDown={(e) => {
                     if (e.key === "Enter") {
                       form.values.branch.length === 0 && e.preventDefault();
@@ -714,6 +750,8 @@ function Builder({ encriptedData }: any) {
                 />
                 <DateInput
                   id="companyStartDate"
+                  name="companyStartDate"
+                  control={newForm.control}
                   required
                   size="lg"
                   mt="md"
@@ -721,7 +759,6 @@ function Builder({ encriptedData }: any) {
                   rightSection={<DateIcons />}
                   rightSectionPointerEvents="none"
                   placeholder="DD/MM/YYYY"
-                  {...form.getInputProps("companyStartDate")}
                   maxDate={dayjs(new Date()).toDate()}
                   classNames={{
                     root: StepCss.inputRoot,
@@ -747,26 +784,26 @@ function Builder({ encriptedData }: any) {
                   label: StepCss.mlabelCss,
                 }}
                 onBlurCapture={(e) => {
-                  handleTrimAndReplace(e, "foundedBy", form);
+                  handleTrimAndReplaceReactHookForm(e, "foundedBy", form);
                   e.target.value !== "" && scrollToBottom();
                 }}
               /> */}
                 <AddmoreInput
-                  form={form}
+                  form={newForm}
                   id={"foundedBy"}
                   label={"Founded By"}
                   placeholder={"Enter Founder name"}
                   scrollToBottom={scrollToBottom}
                 />
                 <AddmoreInput
-                  form={form}
+                  form={newForm}
                   id={"ceoName"}
                   label={"CEO Name"}
                   placeholder={"Enter CEO Name"}
                   scrollToBottom={scrollToBottom}
                 />
                 <AddmoreInput
-                  form={form}
+                  form={newForm}
                   id={"managingDirectorName"}
                   label={"Managing Director"}
                   placeholder={"Enter Managing Director Name"}
@@ -787,7 +824,7 @@ function Builder({ encriptedData }: any) {
                   label: StepCss.mlabelCss,
                 }}
                 onBlurCapture={(e) => {
-                  handleTrimAndReplace(e, "ceoName", form);
+                  handleTrimAndReplaceReactHookForm(e, "ceoName", form);
                 }}
               /> */}
                 {/*  <TextInput
@@ -805,17 +842,19 @@ function Builder({ encriptedData }: any) {
                   label: StepCss.mlabelCss,
                 }}
                 onBlurCapture={(e) => {
-                  handleTrimAndReplace(e, "managingDirectorName", form);
+                  handleTrimAndReplaceReactHookForm(e, "managingDirectorName", form);
                 }}
               /> */}
                 <TextInput
+                  control={newForm.control}
+                  name="officeContact"
                   id="officeContact"
                   required
                   size="lg"
                   // mt="md"
                   label="Office Contact Number"
                   placeholder="Enter Office Contact Number"
-                  {...form.getInputProps("officeContact")}
+                  // {...form.getInputProps("officeContact")}
                   classNames={{
                     root: StepCss.inputRoot,
                     input: StepCss.textInput,
@@ -823,7 +862,11 @@ function Builder({ encriptedData }: any) {
                     label: StepCss.mlabelCss,
                   }}
                   onBlurCapture={(e) => {
-                    handleAllTrimAndReplace(e, "officeContact", form);
+                    handleTrimAndReplaceReactHookForm(
+                      e,
+                      "officeContact",
+                      newForm.setValue
+                    );
                   }}
                 />
               </ScrollArea>
@@ -843,6 +886,8 @@ function Builder({ encriptedData }: any) {
               }}
             >
               <Textarea
+                control={newForm.control}
+                name="vission"
                 size="lg"
                 required
                 placeholder="Enter your company vision that you are going to provide buyers."
@@ -851,7 +896,7 @@ function Builder({ encriptedData }: any) {
                 mt="md"
                 minRows={5}
                 maxRows={5}
-                {...form.getInputProps("vission")}
+                // {...form.getInputProps("vission")}
                 classNames={{
                   root: StepCss.inputRoot,
                   input: StepCss.textInput,
@@ -859,7 +904,11 @@ function Builder({ encriptedData }: any) {
                   label: StepCss.mlabelCss,
                 }}
                 onBlurCapture={(e) => {
-                  handleTrimAndReplace(e, "vission", form);
+                  handleTrimAndReplaceReactHookForm(
+                    e,
+                    "vission",
+                    newForm.setValue
+                  );
                 }}
                 maxLength={5001}
               />
@@ -867,6 +916,8 @@ function Builder({ encriptedData }: any) {
                 Maximum 5000 Characters
               </Text>
               <Textarea
+                control={newForm.control}
+                name="mission"
                 size="lg"
                 required
                 mt={"md"}
@@ -882,9 +933,13 @@ function Builder({ encriptedData }: any) {
                   label: StepCss.mlabelCss,
                 }}
                 onBlurCapture={(e) => {
-                  handleTrimAndReplace(e, "mission", form);
+                  handleTrimAndReplaceReactHookForm(
+                    e,
+                    "mission",
+                    newForm.setValue
+                  );
                 }}
-                {...form.getInputProps("mission")}
+                // {...form.getInputProps("mission")}
                 maxLength={5001}
               />{" "}
               <Text size="sm" mt="xs" ta={"right"} mb={"lg"}>

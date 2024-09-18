@@ -45,6 +45,8 @@ function Agent({ encriptedData }: any) {
 
   const [opened, { open, close }] = useDisclosure(false);
   const form = useForm<any>({
+    reValidateMode: "onBlur",
+    shouldUseNativeValidation: false,
     defaultValues: {
       userName: "",
       email: "",
@@ -58,28 +60,11 @@ function Agent({ encriptedData }: any) {
       prevEmail: "",
     },
     shouldFocusError: true,
-    mode: "onTouched",
+    mode: "all",
     criteriaMode: "firstError",
+    progressive: true,
     // @ts-ignore
     resolver: yupResolver(active === 0 ? agentSchema : addressSchema),
-    // resolver: (values) => {
-    //   if (active === 0) {
-    //     const data = yupResolver(agentSchema);
-    //     const errros = data(values);
-    //     console.log(errros);
-    //     return errros;
-    //   }
-    //   if (active === 1) {
-    //     return {
-    //       address:
-    //         values.address.trim().length < 1
-    //           ? "Office Address is required"
-    //           : null,
-    //     };
-    //   }
-
-    //   return {};
-    // },
   });
   const formValues = form.getValues();
 

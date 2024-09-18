@@ -1,25 +1,18 @@
 "use client";
 import React from "react";
-import { useForm, UseFormReturnType } from "@mantine/form";
-import {
-  TextInput,
-  Switch,
-  Group,
-  ActionIcon,
-  Box,
-  Text,
-  Button,
-} from "@mantine/core";
+import { Switch, Group, ActionIcon, Box, Text, Button } from "@mantine/core";
+import { TextInput } from "react-hook-form-mantine";
 import { FaPlus, FaTimes } from "react-icons/fa";
 import { randomId } from "@mantine/hooks";
 import StepCss from "@/app/styles/Stepper.module.css";
 import handleTrimAndReplace from "@/app/utils/input/validations";
 import { CrossIcon } from "@/app/images/commonSvgs";
+import { useFieldArray } from "react-hook-form";
 type Props = {
   id: any;
   placeholder: string;
   label: string;
-  form: UseFormReturnType<any>;
+  form: any;
   scrollToBottom: (customValue?: number) => void;
 };
 type Item = {
@@ -35,26 +28,27 @@ export default function AddmoreInput({
   label,
   scrollToBottom,
 }: Props) {
-  /*   const form = useForm({
-        mode: 'uncontrolled',
-        initialValues: {
-          employees: [{ name: '', active: false, key: randomId() }],
-        },
-      });
-      const manish=(e:any)=>{
-        console.log(e.target.value);
-      }
-       */
+  const {
+    fields: values,
+    append,
+    remove,
+    insert,
+  } = useFieldArray<any>({
+    control: form.control,
+    name: id,
+  });
 
-  const fields = form.getValues()[id].map((item: Item, index: number) => (
+  const fields = values.map((item: any, index: number) => (
     <Group key={item.key}>
       <TextInput
+        control={form.control}
+        name={`${id}.${index}.name`}
         rightSection={
           index != 0 && (
             <ActionIcon
               className="!p-1 hover:!bg-gray-300"
               color="white"
-              onClick={() => form.removeListItem(id, index)}
+              onClick={() => remove(index)}
             >
               <CrossIcon />
             </ActionIcon>
@@ -68,21 +62,21 @@ export default function AddmoreInput({
         // mt={"md"}
         label={index != 0 ? `${label} ${index + 1}` : label}
         placeholder={placeholder}
-        key={form.key(`${label}.${index}.name`)}
-        {...form.getInputProps(`${id}.${index}.name`)}
+        key={`${id}.${index}.name`}
+        // {...form.getInputProps(`${id}.${index}.name`)}
         classNames={{
           root: StepCss.inputRoot,
           input: StepCss.textInput,
           error: StepCss.errorMsg,
           label: StepCss.mlabelCss,
         }}
-        onBlurCapture={(e) => {
-          handleTrimAndReplace(e, `${id}.${index}.name`, form);
-          e.target.value !== "" &&
-            setTimeout(() => {
-              scrollToBottom();
-            }, 100);
-        }}
+        // onBlurCapture={(e) => {
+        //   handleTrimAndReplace(e, `${id}.${index}.name`, form);
+        //   e.target.value !== "" &&
+        //     setTimeout(() => {
+        //       scrollToBottom();
+        //     }, 100);
+        // }}
         // onBlur={()=>form.validateField(`${id}.${index}.name`)}
       />
 
@@ -114,11 +108,12 @@ export default function AddmoreInput({
           onClick={(e) => {
             e.stopPropagation();
             e.preventDefault();
-            form.insertListItem(id, {
-              name: "",
-              active: false,
-              key: randomId(),
-            });
+            insert(fields.length, { name: "", active: false, key: randomId() });
+            // form.insertListItem(id, {
+            //   name: "",
+            //   active: false,
+            //   key: randomId(),
+            // });
           }}
           className=" ml-auto flex justify-end mt-1 bg-blue-500 hover:bg-blue-700 text-white  text-[12px] py-[1px]  rounded focus:outline-none focus:shadow-outline items-center font-semibold px-1"
           type="button"
