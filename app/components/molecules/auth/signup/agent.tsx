@@ -30,11 +30,14 @@ import LoginSignupTabs from "@/app/(auth)/Components/LoginSignup";
 import { useForm } from "react-hook-form";
 import { addressSchema, agentSchema } from "@/app/validations/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
-function Agent() {
+import { getCookie } from "cookies-next";
+import Alert from "./Alert";
+function Agent({ encriptedData }: any) {
+  const singupCookie = getCookie("resume_signup_tokena")?.toString();
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error" | "otp"
   >("idle");
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(encriptedData || singupCookie ? 1 : 0);
   const router = useRouter();
   const { registerOtherDetails, register, login, saveStep } = useAuth({
     type: "register",
@@ -192,6 +195,9 @@ function Agent() {
         close={close}
         userName={formValues.email}
       />
+      {(encriptedData || singupCookie) && (
+        <Alert isTouched={form.formState.isDirty} type="agent" />
+      )}
       <form onSubmit={form.handleSubmit(nextStep)} className="w-full ">
         <Stepper
           color="green"
@@ -430,11 +436,12 @@ function Agent() {
           {active !== 2 && (
             <div className="w-[100%] flex justify-between items-center flex-wrap">
               <Button
+                disabled={(encriptedData || singupCookie) && active === 1}
                 mt="sm"
                 onClick={() => {
                   active !== 0 ? prevStep() : router.back();
                 }}
-                className="!rounded-[6px] !border-solid  !w-[46%] !border-1 !border-blue-600 !bg-[#FFF] !text-[#0073C6] md:!w-[100%] md:!max-w-[178px] "
+                className="!rounded-[6px] !border-solid  !w-[46%] !border-1 !border-blue-600 !bg-[#FFF] !text-[#0073C6] md:!w-[100%] md:!max-w-[178px] disabled:opacity-50"
               >
                 <BackSvg />
                 Back

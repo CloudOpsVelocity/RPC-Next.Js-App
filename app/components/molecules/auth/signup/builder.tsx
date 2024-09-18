@@ -76,7 +76,7 @@ function Builder({ encriptedData }: any) {
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error" | "otp"
   >("idle");
-  const singupCookie = getCookie("resume_signup_token")?.toString();
+  const singupCookie = getCookie("resume_signup_tokenb")?.toString();
   const [active, setActive] = useState(encriptedData || singupCookie ? 1 : 0);
   const router = useRouter();
 
@@ -372,7 +372,7 @@ function Builder({ encriptedData }: any) {
           userName={form.values.email}
         />
         {(encriptedData || singupCookie) && (
-          <Alert isTouched={form.isDirty()} />
+          <Alert type="builder" isTouched={form.isDirty()} />
         )}
         <form onSubmit={form.onSubmit(nextStep)} className="w-full">
           <Stepper

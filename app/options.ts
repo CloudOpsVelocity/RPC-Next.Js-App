@@ -40,18 +40,23 @@ export const options: NextAuthOptions = {
                 [credentials?.username, credentials?.password, "1"].join(":"),
                 process.env.NEXT_PUBLIC_SECRET!!
               ).toString();
-              cookies().set("resume_signup_token", encryptedValue, {
-                maxAge: 5 * 60, // 10 minutes, or adjust as needed
-                sameSite: "strict",
-                path: "/",
-              });
+              // resume_signup_token
+              cookies().set(
+                `resume_signup_token${res.data.userType.toLowerCase()}`,
+                encryptedValue,
+                {
+                  maxAge: 5 * 60, // 10 minutes, or adjust as needed
+                  sameSite: "strict",
+                  path: "/",
+                }
+              );
               cookies().set("token", res.data.token, {
                 maxAge: 365 * 24 * 60 * 60,
                 secure: true,
                 httpOnly: true,
                 path: "/",
               });
-              throw new Error("A");
+              throw new Error(res.data.userType);
             }
             cookies().set("token", res.data.token, {
               maxAge: 365 * 24 * 60 * 60,

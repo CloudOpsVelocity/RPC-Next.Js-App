@@ -20,10 +20,10 @@ type PageType = {
 const Page: React.FC<{ params: { slug: keyof PageType } }> = async ({
   params: { slug },
 }) => {
-  const encriptedData = await decryptResumeSignupToken();
+  const encriptedData = await decryptResumeSignupToken(slug);
   const components: PageType = {
     individual: <Individual />,
-    agent: <Agent />,
+    agent: <Agent encriptedData={encriptedData} />,
     builder: <Builder encriptedData={encriptedData} />,
   };
   const ComponentToRender = components[slug] || notFound();

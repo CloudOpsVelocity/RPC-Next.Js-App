@@ -101,10 +101,10 @@ export default function useAuth({
           }, 5000)
         : router.push(redirectPath);
     } else {
-      if (res?.error === "A") {
-        router.push("/register/builder");
+      if (res?.error === "A" || res?.error === "B") {
+        router.push(`/register/${res?.error === "A" ? "agent" : "builder"}`);
         toast.success("Redirecting to SignUp", {
-          duration: 2000,
+          duration: 1500,
           icon: "⌛",
         });
         return null;

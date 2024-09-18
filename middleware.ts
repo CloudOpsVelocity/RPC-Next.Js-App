@@ -4,36 +4,26 @@ export function middleware(request: NextRequest) {
   const headers = new Headers(request.headers);
   headers.set("x-current-path", request.nextUrl.pathname);
   const token = cookies().get("token")?.value;
-  const signUpToken = cookies().get("resume_signup_token")?.value;
-  const excludedPath = "/register/builder";
-  if (signUpToken && request.nextUrl.pathname !== excludedPath) {
-    // Clear only the signup token cookie
-    const response = NextResponse.next();
-    response.cookies.delete("resume_signup_token");
+  const response = NextResponse.next();
+  const signUpTokenA = cookies().get("resume_signup_tokena")?.value;
+  const signUpTokenB = cookies().get("resume_signup_tokenb")?.value;
+
+  const excludedPathAgent = "/register/agent";
+  const excludedPathBuilder = "/register/builder";
+  if (signUpTokenA && request.nextUrl.pathname !== excludedPathAgent) {
+    response.cookies.delete("resume_signup_tokena");
+    return response;
+  }
+  if (signUpTokenB && request.nextUrl.pathname !== excludedPathBuilder) {
+    response.cookies.delete("resume_signup_tokenb");
     return response;
   }
   if (!token) {
-    // Clear all authentication related cookies
-    const response = NextResponse.next();
     response.cookies.delete("next-auth.session-token");
     response.cookies.delete("next-auth.csrf-token");
     response.cookies.delete("next-auth.callback-url");
     return response;
   }
-
-  // if (!token) {
-  //   const response = NextResponse.next();
-  //   deleteCookie("next-auth.session-token");
-  //   // response.headers.set(
-  //   //   "Set-Cookie",
-  //   //   `next-auth.session-token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT`
-  //   // );
-  //   // response.headers.append(
-  //   //   "Set-Cookie",
-  //   //   `next-auth.callback-url=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT`
-  //   // );
-  //   return response;
-  // }
   return NextResponse.next({ headers });
 }
 export const config = {

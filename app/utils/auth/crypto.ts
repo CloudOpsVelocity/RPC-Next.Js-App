@@ -2,10 +2,12 @@ import CryptoJS from "crypto-js";
 import { getCookie } from "cookies-next";
 import { cookies, headers } from "next/headers";
 
-export async function decryptResumeSignupToken() {
-  console.log(headers().get("cookie"));
+export async function decryptResumeSignupToken(slug: string) {
+  const type = getType(slug);
+  if (!type) return null;
   // Get the encrypted token from cookies
-  const encryptedToken = await cookies().get("resume_signup_token")?.value;
+  const encryptedToken = await cookies().get("resume_signup_token" + type)
+    ?.value;
   if (!encryptedToken) {
     return;
   }
@@ -39,3 +41,14 @@ export async function decryptResumeSignupToken() {
     // throw new Error("Failed to decrypt signup token.");
   }
 }
+
+const getType = (slug: string) => {
+  switch (slug) {
+    case "agent":
+      return "a";
+    case "builder":
+      return "b";
+    default:
+      break;
+  }
+};
