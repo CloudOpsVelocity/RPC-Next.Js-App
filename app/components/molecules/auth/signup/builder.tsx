@@ -126,7 +126,7 @@ function Builder({ encriptedData }: any) {
         ? builderSchema
         : active === 3
         ? textAreaScema
-        : builderSchemaIndex1
+        : {}
     ),
   });
   const form = {
@@ -179,18 +179,15 @@ function Builder({ encriptedData }: any) {
     saveStep(2);
     setActive(1);
   };
+  const onError = (errors: any) => {
+    const errorsKeys = Object.keys(errors);
+    if (active === 2 && errorsKeys[0]) {
+      scrollWhereIsSelected(errorsKeys[0]);
+      return;
+    }
+    return;
+  };
   const nextStep = async (values: any) => {
-    // Validate the form
-    // if (form.validate().hasErrors) {
-    //   const errorsKeys = Object.keys(form.errors);
-    //   if (active === 2 && errorsKeys[0]) {
-    //     scrollWhereIsSelected(errorsKeys[0]);
-    //     return;
-    //   }
-    //   return;
-    // }
-    // Handle API call based on the current step
-    // let values = form.values;
     try {
       switch (active) {
         case 0:
@@ -363,7 +360,10 @@ function Builder({ encriptedData }: any) {
         {(encriptedData || singupCookie) && (
           <Alert type="builder" isTouched={newForm.formState.isDirty} />
         )}
-        <form onSubmit={newForm.handleSubmit(nextStep)} className="w-full">
+        <form
+          onSubmit={newForm.handleSubmit(nextStep, onError)}
+          className="w-full"
+        >
           <Stepper
             //@ts-ignore
             styles={styles}

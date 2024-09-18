@@ -90,25 +90,6 @@ function Individual() {
               singupText="Individual Sign Up"
               className="!px-[14px]"
             />
-            {/* <Link
-                href={{
-                  pathname: "/login",
-                  search: queryParam.query,
-                }}
-                className="whitespace-nowrap  text-xl md:text-[26px] font-[500] text-[#666]"
-              >
-                Log In
-              </Link>
-
-              <Link
-                href={{
-                  pathname: "/register",
-                  search: queryParam.query,
-                }}
-                className="whitespace-nowrap text-xl md:text-[26px] text-[#148B16] font-bold border-solid border-b-2 border-green-600"
-              >
-                Individual Sign Up
-              </Link> */}
           </div>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
