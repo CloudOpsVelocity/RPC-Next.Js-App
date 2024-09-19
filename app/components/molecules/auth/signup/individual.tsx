@@ -194,6 +194,7 @@ function Individual() {
               allowDecimal={false}
               maxLength={10}
               onPaste={(event) => {
+                form.clearErrors();
                 if (status === "error") {
                   setStatus("idle");
                 }

@@ -84,7 +84,7 @@ const LeafMap: React.FC<{
       className="w-full scroll-mt-[170px] mx-auto mb-[3%] sm:mb-0 sm:pt-less-screen-spacing"
       id="near-by-projects"
     >
-      <div className="flex justify-between w-[95%] sm:w-[90%] mx-auto">
+      <div className="flex justify-between w-[95%] sm:w-[90%] mx-auto scroll-mt-[200px]">
         {type === "prop" ? (
           <PropertyHeading
             title={

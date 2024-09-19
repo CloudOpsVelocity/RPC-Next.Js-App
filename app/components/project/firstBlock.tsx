@@ -140,9 +140,6 @@ const FirstBlock: React.FC<Props> = ({
                   </h1>
                   <SharePopup className="text-sm p-[2px] mr-2 mt-[2px] sm:hidden " />
                 </div>
-                <button onClick={() => scrollToTopic("end-date")}>
-                  end Endpage
-                </button>
                 <p className="text-[#242424]  text-sm sm:text-[18px]  xl:text-[22px] not-italic font-[600] leading-[normal] w-[100%] tracking-[0.32px] capitalize sm:mt-[8px] xl:mt-[14px] ">
                   address:{" "}
                   {`${projectDetails.address}, ${projectDetails.localityName}, ${projectDetails.cityName}, ${projectDetails.state}, ${projectDetails.pinCode}`}

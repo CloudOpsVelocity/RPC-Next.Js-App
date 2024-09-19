@@ -32,8 +32,8 @@ const schema = yup.object().shape({
     .typeError("Mobile number is required"),
   password: yup
     .string()
-    .min(6, "Password must be at least 6 characters")
-    .required("Password is required"),
+    .required("Password is required")
+    .min(6, "Password must be at least 6 characters"),
 });
 
 function Login({ params }: any) {

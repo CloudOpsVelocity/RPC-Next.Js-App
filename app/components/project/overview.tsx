@@ -87,6 +87,7 @@ export default function Overview({
             className="mr-[5%] sm:mr-[3%] xl:mr-[5%] pt-[2%] mb-[3%] sm:mb-[1.5%] xl:mb-[3%]  "
           />
           <ProjBasicDetails
+            Id={TOPIC_IDS.PROJECT_STATUS}
             key="projectStatus"
             icon={<ProjectStatus />}
             title="Project Status"
@@ -102,6 +103,7 @@ export default function Overview({
             className="mr-[5%] sm:mr-[3%] xl:mr-[5%] pt-[2%] mb-[3%] sm:mb-[1.5%] xl:mb-[3%]  "
           />
           <ProjBasicDetails
+            Id={TOPIC_IDS.UNITS_IN_PROJECT}
             key="totalUnits"
             icon={<TotalLandArea />} // Adjust icon
             title="Units in Project"
@@ -109,6 +111,7 @@ export default function Overview({
             className="mr-[5%] sm:mr-[3%] xl:mr-[5%] pt-[2%] mb-[3%] sm:mb-[1.5%] xl:mb-[3%]  "
           />
           <ProjBasicDetails
+            Id={TOPIC_IDS.LOCALITY}
             key="locality"
             icon={<Locality />}
             title="Locality"
@@ -129,9 +132,10 @@ export default function Overview({
             icon={<EndDate />}
             title="End Date"
             value={formatDateDDMMYYYY(endDate)}
-            className="mr-[5%] sm:mr-[3%] xl:mr-[5%] pt-[2%] mb-[3%] sm:mb-[1.5%] xl:mb-[3%]"
+            className="mr-[5%] sm:mr-[3%] xl:mr-[5%] pt-[2%] mb-[3%] sm:mb-[1.5%] xl:mb-[3%] "
           />
           <ProjBasicDetails
+            Id={TOPIC_IDS.APPROVED_BY}
             key="ProjectApprovedBy"
             icon={<EndDate />}
             title="Approved By"
