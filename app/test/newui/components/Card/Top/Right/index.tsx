@@ -12,6 +12,7 @@ import clsx from "clsx";
 import { formatNumberWithSuffix } from "@/app/utils/numbers";
 import downloadPDF from "@/app/(dashboard)/search/Page/utils";
 import DownloadBrocher from "../../DownloadBrocher";
+import { overlayAtom } from "@/app/test/newui/store/overlay";
 
 type Props = any;
 
@@ -21,7 +22,6 @@ export default function TopRightSection({
   projName,
   lat,
   lang,
-
   Sh,
   onAddingShortList,
   projIdEnc,
@@ -33,9 +33,17 @@ export default function TopRightSection({
   brochureUrl,
   propertyAge,
   facing,
+  propTypeId,
+  price,
+  towerName,
+  atFloor,
+  sqftPrice,
+  floorPlan,
+  propTypeName,
 }: Props) {
   const setSelected = useSetAtom(selectedSearchAtom);
   const [sharePopupData, setSharePopup] = useAtom(searchShareAtom);
+  const dispatch = useSetAtom(overlayAtom);
   const url =
     type === "proj"
       ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/abc/banglore/whitefield/${projIdEnc}`
@@ -49,20 +57,22 @@ export default function TopRightSection({
       element.scrollIntoView({ behavior: "smooth" });
     }
   };
-
+  console.log(propTypeName);
   return (
     <div
       onClick={(e) => e.stopPropagation()}
       className={clsx(
-        "m-[2px]  xl:mr-3 xl:my-2 flex xl:gap-[0.5px] mx-2 max-h-full justify-between items-start flex-row xl:flex-col xl:items-end  ",
-        type !== "proj" && "xl:absolute top-0 right-0"
+        "m-[2px]  xl:mr-3 xl:my-2 flex xl:gap-[0.5px] mx-2 max-h-full justify-between items-start flex-row xl:flex-col xl:items-end  xl:absolute top-0 right-0",
+        type !== "proj" && ""
       )}
     >
-      {type === "proj" && (
-        <div className="text-xs hidden xl:flex sm:text-base font-semibold text-black text-nowrap absolute top-3 right-24  sm:top-2 sm:right-[74px]">
-          Avg Price: ₹ {formatNumberWithSuffix(basePrice)}
-        </div>
-      )}
+      <div className="text-xs hidden xl:flex sm:text-base font-medium text-[#4f4f4f] text-nowrap absolute top-3 right-24  sm:top-0 sm:right-[65px]">
+        Avg Price:{" "}
+        <span className="font-bold ml-1">
+          {" "}
+          ₹{formatNumberWithSuffix(type === "proj" ? basePrice : sqftPrice)}
+        </span>
+      </div>
 
       {isMobile && (
         <>
@@ -120,18 +130,225 @@ export default function TopRightSection({
                 buttonClass="inline-flex justify-center items-center gap-1 xl:gap-2.5 rounded p-0.5 border-[0.5px] border-solid border-[#00A8CD] text-[#00A8CD] text-[12px]       sm:text-[12px] xl:text-xs not-italic font-semibold ml-auto rounded-full"
               />{" "}
             </div> */}
-            {type === "proj" && brochureUrl && (
-              <button
-                className="bg-btnPrimary text-white  rounded-full text-[12px] inline-flex max-w-fit px-1 font-bold justify-center items-center ml-auto mt-[8px]"
-                onClick={() => downloadPDF(brochureUrl)}
-              >
-                <DownLoadIcon className="w-[20px] h-[20px]" /> Brochure
-              </button>
+            {type === "proj" && (
+              <div className="flex flex-col space-y-1 justify-end items-end">
+                {" "}
+                {brochureUrl && <DownloadBrocher brochureUrl={brochureUrl} />}
+                <button
+                  className="bg-orange-500 text-white text-right max-w-fit  px-1 sm:py-1 sm:px-2 font-bold  rounded hover:bg-orange-600 focus:outline-none text-xs text-nowrap  inline-flex"
+                  onClick={() =>
+                    dispatch({
+                      type: "OPEN",
+                      content: [
+                        {
+                          name: "",
+                          id: 323,
+                        },
+                        {
+                          name: "",
+                          id: 324,
+                        },
+                        {
+                          name: "",
+                          id: 261,
+                        },
+                        {
+                          name: "",
+                          id: 325,
+                        },
+                        {
+                          name: "",
+                          id: 262,
+                        },
+                        {
+                          name: "",
+                          id: 326,
+                        },
+                        {
+                          name: "",
+                          id: 263,
+                        },
+                        {
+                          name: "",
+                          id: 327,
+                        },
+                        {
+                          name: "",
+                          id: 264,
+                        },
+                        {
+                          name: "",
+                          id: 328,
+                        },
+                        {
+                          name: "",
+                          id: 329,
+                        },
+                        {
+                          name: "",
+                          id: 202,
+                        },
+                        {
+                          name: "",
+                          id: 203,
+                        },
+                        {
+                          name: "",
+                          id: 205,
+                        },
+                        {
+                          name: "",
+                          id: 206,
+                        },
+                        {
+                          name: "",
+                          id: 340,
+                        },
+                        {
+                          name: "",
+                          id: 341,
+                        },
+                        {
+                          name: "",
+                          id: 342,
+                        },
+                        {
+                          name: "",
+                          id: 343,
+                        },
+                        {
+                          name: "",
+                          id: 344,
+                        },
+                        {
+                          name: "",
+                          id: 221,
+                        },
+                        {
+                          name: "",
+                          id: 222,
+                        },
+                        {
+                          name: "",
+                          id: 224,
+                        },
+                        {
+                          name: "",
+                          id: 289,
+                        },
+                        {
+                          name: "",
+                          id: 290,
+                        },
+                        {
+                          name: "",
+                          id: 291,
+                        },
+                        {
+                          name: "",
+                          id: 229,
+                        },
+                        {
+                          name: "",
+                          id: 230,
+                        },
+                        {
+                          name: "",
+                          id: 231,
+                        },
+                        {
+                          name: "",
+                          id: 235,
+                        },
+                        {
+                          name: "",
+                          id: 236,
+                        },
+                        {
+                          name: "",
+                          id: 238,
+                        },
+                        {
+                          name: "",
+                          id: 305,
+                        },
+                        {
+                          name: "",
+                          id: 306,
+                        },
+                        {
+                          name: "",
+                          id: 307,
+                        },
+                        {
+                          name: "",
+                          id: 308,
+                        },
+                        {
+                          name: "",
+                          id: 309,
+                        },
+                        {
+                          name: "",
+                          id: 310,
+                        },
+                        {
+                          name: "",
+                          id: 311,
+                        },
+                        {
+                          name: "",
+                          id: 312,
+                        },
+                        {
+                          name: "",
+                          id: 313,
+                        },
+                      ],
+                      id: `${projIdEnc}+${propTypeId}`,
+                      title: "Amenities",
+                      conType: "amenities",
+                    })
+                  }
+                >
+                  <span className="hidden sm:block">14+</span> Amenities
+                </button>
+                <button
+                  className="bg-teal-500 text-white text-right max-w-fit px-1 font-bold sm:py-1 sm:px-2 text-xs rounded shadow-lg hover:bg-teal-600 transition duration-300 ease-in-out"
+                  onClick={() =>
+                    dispatch({
+                      type: "OPEN",
+                      content: [
+                        "Orion Mall",
+                        "Apollo Hospital",
+                        "Greenwood High International School",
+                        "MG Road Metro Station",
+                        "Major Bus Stop",
+                        "City Park",
+                        "Central Library",
+                        "Fitness Center",
+                        "Local Market",
+                        "Coffee Shop",
+                        "Bank",
+                        "Post Office",
+                        "Restaurant",
+                        "Pharmacy",
+                        "Veterinary Clinic",
+                      ],
+                      id: `${projIdEnc}+${propTypeId}`,
+                      title: `NearBy Locations of ${projName}`,
+                      conType: "nearby",
+                    })
+                  }
+                >
+                  Nearby
+                </button>
+              </div>
             )}
             {type === "proj" && (
-              <div className="text-xs sm:hidden  sm:text-base font-semibold text-black  top-2.5 right-24  sm:top-0.5 sm:right-16 mt-1">
-                <p className="text-right text-[12px] text-nowrap">
-                  Avg Price: {formatNumberWithSuffix(basePrice)}
+              <div className="text-xs sm:hidden  sm:text-base font-semibold text-[#4f4f4f]  top-2.5 right-24  sm:top-0.5 sm:right-16 mt-1">
+                <p className="text-right text-[12px] text-nowrap text-[#148B16]">
+                  Avg Price:₹ {formatNumberWithSuffix(basePrice)}
                 </p>
                 <p className="text-right text-[12px] text-nowrap">
                   Elevation: G+30
@@ -141,10 +358,19 @@ export default function TopRightSection({
 
             {type !== "proj" && (
               <>
+                <ListingDownSectionCard label={"Tower"} value={towerName} />
                 <ListingDownSectionCard label={"Facing"} value={facing} />
-                <ListingDownSectionCard
+                {/* <ListingDownSectionCard
                   label={"Property Age"}
                   value={propertyAge}
+                /> */}
+                <ListingDownSectionCard
+                  label={
+                    propTypeName === "Row House" || propTypeName === "Villa"
+                      ? "Elevation"
+                      : "At Floor"
+                  }
+                  value={atFloor}
                 />
               </>
             )}
@@ -195,17 +421,90 @@ export default function TopRightSection({
             </button>
             {type !== "proj" && (
               <>
+                <ListingDownSectionCard label={"Tower"} value={towerName} />
                 <ListingDownSectionCard label={"Facing"} value={facing} />
-                <ListingDownSectionCard
+                {/* <ListingDownSectionCard
                   label={"Property Age"}
                   value={propertyAge}
+                /> */}
+                <ListingDownSectionCard
+                  label={
+                    propTypeName === "Row House" || propTypeName === "Villa"
+                      ? "Elevation"
+                      : "At Floor"
+                  }
+                  value={
+                    propTypeName === "Row House" || propTypeName === "Villa"
+                      ? `G+${atFloor}`
+                      : atFloor === 0
+                      ? "G"
+                      : atFloor
+                  }
                 />
+                {floorPlan && (
+                  <button
+                    className="text-[14px]  text-btnPrimary  font-bold mt-2"
+                    onClick={() =>
+                      window.open(
+                        `/image?path=${floorPlan.split(".net")[1]}`,
+                        "_blank"
+                      )
+                    }
+                  >
+                    View Floor Plan
+                  </button>
+                )}
               </>
             )}
           </div>
-          {type === "proj" && brochureUrl && (
+          {type === "proj" && (
             <div className="flex  items-end flex-col gap-2">
-              <DownloadBrocher brochureUrl={brochureUrl} />
+              {brochureUrl && <DownloadBrocher brochureUrl={brochureUrl} />}
+
+              <button
+                className="bg-orange-500 text-white py-1 px-2 font-bold  rounded hover:bg-orange-600 focus:outline-none text-xs "
+                onClick={() =>
+                  dispatch({
+                    type: "OPEN",
+                    content: [],
+                    id: `${projIdEnc}+${propTypeId}`,
+                    title: "Amenities",
+                    conType: "amenities",
+                  })
+                }
+              >
+                Amenities
+              </button>
+              <button
+                className="bg-teal-500 text-white font-bold py-1 px-2 text-xs rounded shadow-lg hover:bg-teal-600 transition duration-300 ease-in-out"
+                onClick={() =>
+                  dispatch({
+                    type: "OPEN",
+                    content: [
+                      "Orion Mall",
+                      "Apollo Hospital",
+                      "Greenwood High International School",
+                      "MG Road Metro Station",
+                      "Major Bus Stop",
+                      "City Park",
+                      "Central Library",
+                      "Fitness Center",
+                      "Local Market",
+                      "Coffee Shop",
+                      "Bank",
+                      "Post Office",
+                      "Restaurant",
+                      "Pharmacy",
+                      "Veterinary Clinic",
+                    ],
+                    id: `${projIdEnc}+${propTypeId}`,
+                    title: `NearBy Locations of ${projName}`,
+                    conType: "nearby",
+                  })
+                }
+              >
+                Nearby
+              </button>
             </div>
           )}
         </div>
@@ -224,14 +523,17 @@ const ListingDownSectionCard = ({
 }) => {
   return (
     value && (
-      <div className="flex  justify-center items-center text-right ">
-        <p className="text-[#001F35] text-[12px]   xl:text-sm not-italic font-medium text-wrap  inline-flex">
-          {Icon} {label}:
-        </p>
-        <p className="text-[#242424] text-[14px]  not-italic mt-[1px]">
+      <p className="text-[#001F35] text-[12px]   xl:text-sm not-italic font-medium text-wrap  inline-flex max-w-fit ml-auto">
+        {Icon} {label}:{" "}
+        <span className="text-[#242424] text-[12px] xl:text-[14px]  not-italic  font-bold text-nowrap ml-1 ">
+          {" "}
           {value}
-        </p>
-      </div>
+        </span>
+      </p>
+      // <p className="text-[#242424] text-[12px] xl:text-[14px]  not-italic mt-[1px] font-bold text-nowrap ml-1 mt-0.5">
+      //   {" "}
+
+      // </p>
     )
   );
 };

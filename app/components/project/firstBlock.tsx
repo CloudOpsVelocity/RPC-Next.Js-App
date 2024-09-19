@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Carousel } from "@mantine/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import {
@@ -24,6 +24,7 @@ type Props = {
   companyName: string;
   builderId: number;
   hasReraStatus: boolean;
+  scrollId?: string;
 };
 
 const FirstBlock: React.FC<Props> = ({
@@ -31,13 +32,13 @@ const FirstBlock: React.FC<Props> = ({
   companyName,
   builderId,
   hasReraStatus,
+  scrollId,
 }) => {
   const images = getImageUrls(projectDetails?.media as any);
   const autoplay = useRef(Autoplay({ delay: 10000 }));
   const setIsScrolling = useSetAtom(isScrollingAtom);
   const setSticky = useSetAtom(stickyAtom);
   const setC = useSetAtom(currentBlockAtom);
-
   function scrollToTopic(id: string): void {
     setIsScrolling(true);
     const element = document.getElementById(id);
@@ -47,7 +48,6 @@ const FirstBlock: React.FC<Props> = ({
         block: "start",
         inline: "center",
       });
-
       setSticky(true);
     }
     setC("floorPlans");
@@ -58,6 +58,11 @@ const FirstBlock: React.FC<Props> = ({
     ? companyName.toLowerCase().split(" ").join("%2D")
     : "";
   let urlBuilder = `/builders/bengaluru/${builderName}`;
+  useEffect(() => {
+    if (scrollId) {
+      console.log(scrollId);
+    }
+  }, [scrollId]);
 
   return (
     <div
@@ -95,7 +100,11 @@ const FirstBlock: React.FC<Props> = ({
               previousControlIcon={<DarkCarouseIcon />}
             >
               {images.map((imageUrl, index) => (
-                <Carousel.Slide key={Math.random()} className="relative" w={"auto"}>
+                <Carousel.Slide
+                  key={Math.random()}
+                  className="relative"
+                  w={"auto"}
+                >
                   <Image
                     alt="project image"
                     src={imageUrl}
@@ -120,6 +129,7 @@ const FirstBlock: React.FC<Props> = ({
                 </div>
 
                 <p className="text-[#242424]  text-sm sm:text-[18px]  xl:text-[22px] not-italic font-[600] leading-[normal] w-[100%] tracking-[0.32px] capitalize sm:mt-[8px] xl:mt-[14px] ">
+                  address:{" "}
                   {`${projectDetails.address}, ${projectDetails.localityName}, ${projectDetails.cityName}, ${projectDetails.state}, ${projectDetails.pinCode}`}
                 </p>
 

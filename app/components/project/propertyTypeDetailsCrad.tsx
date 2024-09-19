@@ -37,7 +37,7 @@ type Props = {
   phase: number;
   isPartialData: boolean;
 };
-const getPropId = (key: string) => {
+export const getPropId = (key: string) => {
   switch (key) {
     case "apt":
       return projectprops.apartment;

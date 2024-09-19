@@ -1,4 +1,3 @@
-import SearchSkeleton from "@/app/components/atoms/skeleton/search";
 import { emptyFilesIcon, strikeIconIcon } from "@/app/images/commonSvgs";
 import { Loader, Tabs } from "@mantine/core";
 import { useIntersection } from "@mantine/hooks";
@@ -24,13 +23,16 @@ export default function TabPanelSection({ mutate, serverData }: Props) {
   const serverClientData =
     appliedFiltersCount > 0
       ? data
-      : path.includes("/projects") || path.includes("/in")
+      : path.includes("/projects") ||
+        path.includes("/listings") ||
+        path.includes("/residential")
       ? serverData
       : data;
   const { ref, entry } = useIntersection({
     root: containerRef.current,
     threshold: 0.1,
   });
+
   useEffect(() => {
     if (entry?.isIntersecting && hasNextPage) {
       fetchMoreData();

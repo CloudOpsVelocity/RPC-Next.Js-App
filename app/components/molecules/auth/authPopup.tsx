@@ -9,29 +9,29 @@ type props = {
   close: any;
   userName: string;
   callback: () => void;
-  mobile: number | null;
+  mobile?: number | null;
 };
 
 function AuthPopup({ opened, close, userName, callback, mobile }: props) {
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
   return (
-      <Modal
-        opened={opened}
-        onClose={close}
-        transitionProps={{ transition: "fade", duration: 200 }}
-        zIndex={1000}
-        maw={"max-content"}
-        centered
-        size={isMobile ? "90%" : "40%"}
-        className=" w-[90%] md:w-[70%] lg:w-[40%] h-auto "
-      >
-        <OtpBox
-          callback={callback}
-          userName={userName}
-          close={close}
-          mobile={mobile}
-        />
-      </Modal>
+    <Modal
+      opened={opened}
+      onClose={close}
+      transitionProps={{ transition: "fade", duration: 200 }}
+      zIndex={1000}
+      maw={"max-content"}
+      centered
+      size={isMobile ? "90%" : "40%"}
+      className=" w-[90%] md:w-[70%] lg:w-[40%] h-auto "
+    >
+      <OtpBox
+        callback={callback}
+        userName={userName}
+        close={close}
+        mobile={mobile}
+      />
+    </Modal>
   );
 }
 

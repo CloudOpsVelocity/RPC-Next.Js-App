@@ -11,36 +11,31 @@ function Demo() {
 
 export default Demo;
 
-const marks = [
-  { value: 0.05, label: "₹ 5L" },
-  { value: 0.3, label: "₹ 30L" },
-  { value: 0.55, label: "₹ 55L" },
-  { value: 0.85, label: "₹ 85L" },
-  { value: 10.5, label: "₹ 10.5Cr" },
-  { value: 35.5, label: "₹ 35.5Cr" },
-  { value: 60, label: "₹ 60Cr" },
-];
+function mapPropTypeToKey(propType: string): string {
+  switch (propType) {
+    case "apt":
+      return "apartment";
+    case "rowHouse":
+      return "rowhouse";
+    case "villa":
+      return "villa";
+    case "vlmt":
+      return "villament";
+    case "plot":
+      return "plot";
+    default:
+      return "unknown";
+  }
+}
 
 function Demo1() {
-  return (
-    <>
-      <Slider
-        step={0.05}
-        min={0.05}
-        max={60}
-        marks={marks}
-        labelAlwaysOn
-        defaultValue={0.85}
-      />
-      <RangeSlider
-        mt={50}
-        step={0.05}
-        min={0.05}
-        max={60}
-        marks={marks}
-        labelAlwaysOn
-        defaultValue={[0.85, 10.5]}
-      />
-    </>
-  );
+  const gifts = ["tren", "oso", "pelota"];
+  const materials = "tronesa";
+  function manufacture(gifts: string[], materials: string) {
+    // Code here
+    return [];
+  }
+
+  manufacture(gifts, materials);
+  return <>df</>;
 }

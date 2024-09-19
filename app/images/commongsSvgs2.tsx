@@ -63,29 +63,51 @@ export const AgeIcon = ({ className }: { className?: string }) => {
   );
 };
 
-export const NewMapIcon = ({ className }: { className?: string }) => {
+export const NewMapIcon = ({ className, ...props }: any) => {
   return (
     <svg
-      version="1.1"
-      id="icons"
       xmlns="http://www.w3.org/2000/svg"
-      x={0}
-      y={0}
-      viewBox="0 0 128 128"
       xmlSpace="preserve"
+      width="655.359"
+      height="655.359"
+      style={{
+        shapeRendering: "geometricPrecision",
+        textRendering: "geometricPrecision",
+
+        fillRule: "evenodd",
+        clipRule: "evenodd",
+      }}
       className={className}
+      {...props}
+      viewBox="0 0 6.827 6.827"
     >
-      <style
-        dangerouslySetInnerHTML={{
-          __html:
-            ".st0,.st1{display:none;fill:#03adfc}.st1,.st4{fill-rule:evenodd;clip-rule:evenodd}.st4,.st5{display:inline;fill:#03adfc}",
-        }}
-      />
-      <g id="row1">
+      <defs>
+        <style dangerouslySetInnerHTML={{ __html: ".fil2{fill:none}" }} />
+      </defs>
+      <g id="Layer_x0020_1">
         <path
-          id="nav:4"
-          d="M64 1C38.8 1 18.3 21.2 18.3 46S64 127 64 127s45.7-56.2 45.7-81S89.2 1 64 1zm0 73.9c-16.6 0-30-13.2-30-29.5C34 29 47.4 15.8 64 15.8S94 29 94 45.3 80.6 74.9 64 74.9z"
-          style={{ fillRule: "evenodd", clipRule: "evenodd", fill: "#03adfc" }}
+          style={{ fill: "#00897b", fillRule: "nonzero" }}
+          d="M3.413 3.764H5.07l.024.084.581 1.976.044.15H3.414z"
+        />
+        <path
+          style={{ fill: "#26a69a", fillRule: "nonzero" }}
+          d="M1.844 3.764h1.569v2.21H1.107l.626-2.126.024-.084z"
+        />
+        <g id="_490154376">
+          <path id="_490154424" className="fil2" d="M0 0h6.827v6.827H0z" />
+          <path
+            id="_490154760"
+            className="fil2"
+            d="M.853.853h5.12v5.12H.853z"
+          />
+        </g>
+        <path
+          d="M4.808 2.357c0 .612-.587 1.418-1.027 2.021-.102.14-.196.27-.272.381l-.096.142-.096-.142c-.075-.112-.168-.24-.27-.381-.438-.607-1.029-1.424-1.029-2.03 0-.411.156-.781.405-1.05.254-.273.606-.44.99-.44.385 0 .736.169.99.443.25.27.405.643.405 1.056z"
+          style={{ fill: "#ffcc80" }}
+        />
+        <path
+          d="M3.413 2.872a.666.666 0 0 1-.665-.658.666.666 0 0 1 1.33 0 .666.666 0 0 1-.665.658z"
+          style={{ fill: "#ffa726" }}
         />
       </g>
     </svg>
@@ -104,7 +126,7 @@ export const GrayMapIcon = ({ className }: { className?: string }) => {
       xmlSpace="preserve"
       className={className}
     >
-      <defs/>
+      <defs />
       <g
         style={{
           stroke: "none",

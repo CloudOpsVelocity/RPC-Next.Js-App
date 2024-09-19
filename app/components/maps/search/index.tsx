@@ -22,6 +22,7 @@ import TooltipProp from "./ToolltipProp";
 
 const Map = ({ data, lat, lang }: any) => {
   const position: LatLngTuple = [lat, lang];
+  console.log(data);
   return (
     <>
       <MapContainer
@@ -73,49 +74,35 @@ const MapContent = ({ data }: any): JSX.Element | null => {
   // 1. FIND IS IT PROPERTY OR PRJECT
   // 2. CREATE TOOLTIPS FOR EACH SECTION
 
-  {
+  return (
     data &&
-      data.length > 0 &&
-      data?.map((item: any, index: number) => {
-        const isProp = !!item?.propIdEnc;
-        const title = selected?.type;
-        const itemId = item[title === "proj" ? "projIdEnc" : "propIdEnc"];
-        const selectedId = selected?.reqId;
-        return (
-          <Marker
-            key={Math.random()}
-            position={[parseFloat(item?.lat || 0), parseFloat(item?.lang || 0)]}
-            eventHandlers={{
-              click: () => {
-                setSelectedValue({
-                  projOrPropName: isProp ? item.propName : item.projName,
-                  lat: item.lat,
-                  lang: item.lang,
-                  type: isProp ? "prop" : "proj",
-                  reqId: itemId,
-                });
-              },
-            }}
-            icon={isMobile ? MobileIcon : MapIcon}
-          >
-            {selected && selectedId === itemId && (
-              <Tooltip
-                opacity={1}
-                permanent
-                direction="top"
-                offset={[10, -35]}
-                className="min-w-fit"
-              >
-                {!isProp ? (
-                  <TooltipProj data={item} />
-                ) : (
-                  <TooltipProp data={item} />
-                )}
-              </Tooltip>
-            )}
-
+    data.length > 0 &&
+    data?.map((item: any, index: number) => {
+      const isProp = !!item?.propIdEnc;
+      const title = selected?.type;
+      const itemId = item[title === "proj" ? "projIdEnc" : "propIdEnc"];
+      const selectedId = selected?.reqId;
+      return (
+        <Marker
+          key={Math.random()}
+          position={[parseFloat(item?.lat || 0), parseFloat(item?.lang || 0)]}
+          eventHandlers={{
+            click: () => {
+              setSelectedValue({
+                projOrPropName: isProp ? item.propName : item.projName,
+                lat: item.lat,
+                lang: item.lang,
+                type: isProp ? "prop" : "proj",
+                reqId: itemId,
+              });
+            },
+          }}
+          icon={isMobile ? MobileIcon : MapIcon}
+        >
+          {selected && selectedId === itemId && (
             <Tooltip
               opacity={1}
+              permanent
               direction="top"
               offset={[10, -35]}
               className="min-w-fit"
@@ -126,9 +113,23 @@ const MapContent = ({ data }: any): JSX.Element | null => {
                 <TooltipProp data={item} />
               )}
             </Tooltip>
-          </Marker>
-        );
-      });
-  }
+          )}
+
+          <Tooltip
+            opacity={1}
+            direction="top"
+            offset={[10, -35]}
+            className="min-w-fit"
+          >
+            {!isProp ? (
+              <TooltipProj data={item} />
+            ) : (
+              <TooltipProp data={item} />
+            )}
+          </Tooltip>
+        </Marker>
+      );
+    })
+  );
 };
 

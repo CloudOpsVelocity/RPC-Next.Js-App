@@ -20,7 +20,7 @@ export default function ListingData({
   pa,
 }: Props) {
   return (
-    <div className="flex mb-2 sm:max-w-[380px] sm:max-w-full xl:w-[450px] gap-1 flex-col items-start  pl-[11px]  py-[2px] rounded border-[0.5px] border-solid border-[#616D75] bg-[#F5F5F5]">
+    <div className="flex mb-2  sm:max-w-full xl:w-[450px] gap-1 flex-col items-start  pl-[11px]  py-[2px] rounded border-[0.5px] border-solid border-[#616D75] bg-[#F5F5F5]">
       {type === "proj" && (
         <div className="mt-[2px] hidden md:block">
           <h5 className="text-[#001F35] text-sm font-medium">

@@ -16,6 +16,10 @@ type Props = {
   projstatus: string;
   possassionDate: string;
   furnish: string;
+  propStatus: string;
+  isUsed: string;
+  availableFrom: string;
+  data: any;
 };
 
 export default function LeftSection({
@@ -28,6 +32,10 @@ export default function LeftSection({
   projstatus,
   possassionDate,
   furnish,
+  propStatus,
+  isUsed,
+  availableFrom,
+  data,
 }: Props) {
   const verified = isReraverified(rera);
   const isMobile = useMediaQuery("(max-width: 1600px)");
@@ -35,9 +43,12 @@ export default function LeftSection({
     <div className="relative xl:min-w-[257px] max-h-[250px]">
       {type !== "proj" && (
         <>
-          <p className="absolute text-base bg-yellow-400 rounded-full px-1 text-black top-0 left-[0.8px] font-semibold">
-            Unused
-          </p>
+          {isUsed === "N" && (
+            <p className="absolute text-base bg-yellow-400 rounded-full px-1 text-black top-0 left-[0.8px] font-semibold">
+              Unused
+            </p>
+          )}
+
           <p className="bg-gray-700 rounded-full absolute top-1 xl:top-1 right-1 text-white text-[12px] xl:text-sm  px-1 xl:bg-gray-900">
             {furnish}
           </p>
@@ -56,11 +67,11 @@ export default function LeftSection({
         
       </div> */}
       <p className="bg-gray-700 rounded-full absolute top-1 xl:top-auto xl:bottom-7 right-1 text-white text-[12px] xl:text-sm  px-1 xl:bg-gray-900">
-        {projstatus}
+        {projstatus ?? propStatus}
       </p>
       <p className="bg-gray-700 rounded-full absolute top-7 xl:top-auto xl:bottom-1 right-1 text-white text-[12px]  xl:text-sm px-1 xl:bg-gray-900">
         {type !== "proj" ? "Available From: " : "Possession Date: "}{" "}
-        {formatDateDDMMYYYY(possassionDate)}
+        {formatDateDDMMYYYY(type !== "proj" ? availableFrom : possassionDate)}
       </p>
 
       {verified && <Rera />}

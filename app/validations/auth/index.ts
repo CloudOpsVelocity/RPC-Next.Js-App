@@ -7,7 +7,6 @@ const itemSchema = yup.object().shape({
     .max(40, "Name should not exceed 40 characters")
     .matches(nameRegex, "Only letters and spaces are allowed"),
 });
-
 const schema = yup.object().shape({
   name: yup
     .string()
@@ -28,19 +27,19 @@ const schema = yup.object().shape({
     .required("Password is required"),
   mobile: yup
     .number()
-    .positive("Contact number must be positive")
-    .integer("Contact number must be an integer")
-    .typeError("Contact number is required")
-    .test("mvalid", "Enter Valid Contact Number", (val) => {
+    .positive("Mobile number must be positive")
+    .integer("Mobile number must be an integer")
+    .typeError("Mobile number is required")
+    .test("mvalid", "Enter Valid Mobile Number", (val) => {
       const strVal = val?.toString();
       return /^[6-9]\d{9}$/.test(strVal ?? "");
     })
     .test(
       "len",
-      "Contact number must be exactly 10 digits",
+      "Mobile number must be exactly 10 digits",
       (val) => val?.toString().length === 10
     )
-    .required("Contact number is required"),
+    .required("Mobile number is required"),
 });
 const agentSchema = yup.object().shape({
   userName: yup
@@ -66,19 +65,26 @@ const agentSchema = yup.object().shape({
     .required("Password is required"),
   mobile: yup
     .number()
-    .positive("Contact number must be positive")
-    .integer("Contact number must be an integer")
-    .typeError("Contact number is required")
-    .test("mvalid", "Enter Valid Contact Number", (val) => {
+    .positive("Mobile number must be positive")
+    .integer("Mobile number must be an integer")
+    .typeError("Mobile number is required")
+    .test("mvalid", "Enter Valid Mobile Number", (val) => {
       const strVal = val?.toString();
       return /^[6-9]\d{9}$/.test(strVal ?? "");
     })
     .test(
       "len",
-      "Contact number must be exactly 10 digits",
+      "Mobile number must be exactly 10 digits",
       (val) => val?.toString().length === 10
     )
-    .required("Contact number is required"),
+    .required("Mobile number is required"),
+});
+export const addressSchema = yup.object().shape({
+  address: yup
+    .string()
+    .trim()
+    .min(2, "Address must be at least 2 characters")
+    .required("Address is required"),
 });
 export const builderFirstStepSchema = yup.object().shape({
   userName: yup
@@ -100,19 +106,19 @@ export const builderFirstStepSchema = yup.object().shape({
     .required("Password is required"),
   mobile: yup
     .number()
-    .positive("Contact number must be positive")
-    .integer("Contact number must be an integer")
-    .typeError("Contact number is required")
-    .test("mvalid", "Enter Valid Contact Number", (val) => {
+    .positive("Mobile number must be positive")
+    .integer("Mobile number must be an integer")
+    .typeError("Mobile number is required")
+    .test("mvalid", "Enter Valid Mobile Number", (val) => {
       const strVal = val?.toString();
       return /^[6-9]\d{9}$/.test(strVal ?? "");
     })
     .test(
       "len",
-      "Contact number must be exactly 10 digits",
+      "Mobile number must be exactly 10 digits",
       (val) => val?.toString().length === 10
     )
-    .required("Contact number is required"),
+    .required("Mobile number is required"),
 });
 export const agentSchema1 = yup.object().shape({
   address: yup
@@ -307,9 +313,14 @@ export const builderSchemaIndex1 = yup.object().shape({
   state: yup.string().trim().required("State is required"),
   city: yup.string().trim().required("City is required"),
   pincode: yup
-    .string()
+    .number()
+    .typeError("PIN code must be a number") // Ensures that the value is a number
     .required("PIN code is required")
-    .matches(/^[1-9][0-9]{5}$/, "Valid 6-digit PIN code is required"),
+    .integer("PIN code must be an integer")
+    .test("len", "Valid 6-digit PIN code is required", (val) => {
+      // Check if the number is exactly 6 digits
+      return val !== undefined && val >= 100000 && val <= 999999;
+    }),
 });
 
 const textAreaScema = yup.object().shape({

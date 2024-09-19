@@ -5,6 +5,8 @@ import Footer from "@/app/components/layouts/primary/footer";
 import { Toaster } from "react-hot-toast";
 import { RightSideBlock } from "../components/rightSideBlock";
 import { LeftSideBlock } from "../components/leftsection/leftSideBlock";
+import PropProjModal from "@/app/test/newui/components/modals/Proj_PropModal";
+import MapModal from "../listing/components/modals";
 
 type Props = {
   serverData: any;
@@ -23,6 +25,7 @@ export default function ProjectSearchPage({
         <LeftSideBlock serverData={serverData} />
         <RightSideBlock serverData={serverData} />
       </div>
+
       <Footer />
       <Toaster />
     </div>

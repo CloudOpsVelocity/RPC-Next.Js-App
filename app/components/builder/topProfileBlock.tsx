@@ -18,7 +18,9 @@ export default function TopProfileBlock({
     <div className="w-full flex justify-between items-center bg=[] relative">
       <div className="flex flex-col h-[100%]  lg:min-h-[250px]  justify-between items-start ml-[2%] ">
         <p className="text-[12px] md:text-[20px] text-[#565D70] font-[500] mt-2 sm:mt-0 sm:mb-[1%] ">
-        <a className="hover:underline cursor-pointer" href={"/"}>Home</a> 
+          <a className="hover:underline cursor-pointer" href={"/"}>
+            Home
+          </a>
           {" > "}
           <span className="hover:underline cursor-pointer">Builder</span>
           {" > "}
@@ -40,10 +42,10 @@ export default function TopProfileBlock({
             />
           </div>
           <div>
-            <p className=" text-[#E3AC00] text-[16px] font-bold sm:text-[24px] xl:text-[32px] not-italic sm:font-semibold ">
+            <p className=" text-[#E3AC00] text-[16px] font-bold sm:text-[24px] xl:text-[32px] not-italic sm:font-semibold  uppercase">
               {userName}
             </p>
-            <div className="text-[#202020] text-[12px] sm:text-lg xl:text-xl font-bold not-italic z-40">
+            <div className="text-[#202020] text-[12px] sm:text-lg xl:text-xl font-bold not-italic z-40 uppercase">
               (By: {companyName})
             </div>
             <p className=" text-[#303A42] text-[12px] sm:text-base xl:text-lg not-italic font-medium  mt-1 sm:mt-1 xl:mt-2">

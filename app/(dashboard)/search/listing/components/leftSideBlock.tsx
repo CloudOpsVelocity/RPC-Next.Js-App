@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { ScrollArea, Tabs } from "@mantine/core";
 import ProjectDetailsCard from "./projectCard";
 import S from "@/app/styles/seach/Listing.module.css";
-import ProjectCard from "../../components/Card";
+// import ProjectCard from "../../components/Card";
 import {
   DropDownIcon,
   emptyFilesIcon,
@@ -123,6 +123,7 @@ import SearchSkeleton from "@/app/components/atoms/skeleton/search";
 import SharePopup from "../../components/SharePopup";
 import path from "path";
 import { RightSideBlock } from "./rightSideBlock";
+import ProjectCard from "@/app/test/newui/components/Card";
 
 const TabData = [
   {

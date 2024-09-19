@@ -1,4 +1,3 @@
-import { getAmenties, getProjectDetails } from "@/app/utils/api/project";
 import React from "react";
 import Feature from "@/app/components/project/feature";
 import Amenties from "@/app/components/project/amenties";
@@ -30,22 +29,23 @@ import QAJsonLdScript from "@/app/seo/Qnajson";
 import PropertyJsonLdScript from "@/app/seo/Productjson";
 import ArticleJsonLdScript from "@/app/seo/ArticleJson";
 import Reviews from "@/app/components/project/reviews";
+import PricingSection from "@/app/components/project/_ui/PricingDetailsSection";
 type Props = {
   projResponse: any;
   amenitiesFromDB: any;
   slug: string;
+  scrollId?: string;
 };
 
 export default async function ProjectsDetailsPage({
   projResponse,
   amenitiesFromDB,
   slug,
+  scrollId,
 }: Props) {
   const { basicData: data, nearByLocations, phaseOverview } = projResponse;
-
   return (
-    <section className="w-full relative break-words">
-      {/* <!-- Facebook Meta Tags --> */}
+    <section className="w-full relative break-words ">
       <meta
         property="og:url"
         content={`${process.env.NEXT_PUBLIC_URL}/abc/${data.cityName}/${data.localityName}/${slug}`}
@@ -110,6 +110,7 @@ export default async function ProjectsDetailsPage({
             companyName={data.postedByName}
             builderId={data.builderId}
             hasReraStatus={data.reraStatus}
+            scrollId={scrollId}
           />
         </div>
         {/* Navigations Container */}
@@ -117,6 +118,7 @@ export default async function ProjectsDetailsPage({
           <Navigation
             isBrochure={!!data?.media?.projBroucherUrl}
             detailsData={data}
+            slug={slug}
           />
         </MobileHidden>
         <Overview {...data} slug={slug} PhaseOverview={phaseOverview} />
@@ -144,7 +146,8 @@ export default async function ProjectsDetailsPage({
           projName={data.projectName}
           media={data?.media?.projectPlanUrl}
         />
-        {!data.partialUnitData ? (
+
+        {/* {!data.partialUnitData ? (
           <FloorplansBlock
             projName={data.projectName}
             data={data.phases}
@@ -159,7 +162,7 @@ export default async function ProjectsDetailsPage({
             phaseList={data.phases}
             data={data}
           />
-        )}
+        )} */}
 
         <GalleryBlock
           {...data.media}
@@ -195,7 +198,7 @@ export default async function ProjectsDetailsPage({
         <Banner projName={data.projectName} projIdEnc={data.projIdEnc} />
 
         <ErrorContainer data={data.banks}>
-          <div id="loans" className="w-full h-auto scroll-mt-[150px]">
+          <div id="bank-approvals" className="w-full h-auto scroll-mt-[150px]">
             <Loans type="proj" banks={data.banks} name={data.projectName} />
           </div>
         </ErrorContainer>
@@ -204,7 +207,7 @@ export default async function ProjectsDetailsPage({
         {/* Why Buy This  */}
         {data.wbtp && (
           <About
-            id="whyBuy"
+            id="why-buy-this-project"
             heading="Why Buy"
             projName={`${data.projectName} ?`}
             content={data.wbtp}

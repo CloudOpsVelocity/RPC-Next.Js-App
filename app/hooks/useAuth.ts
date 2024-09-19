@@ -89,6 +89,7 @@ export default function useAuth({
       username: data.username,
       password: encryptedPassword,
     };
+
     const res = await signIn("credentials", {
       ...requestData,
       redirect: false,
@@ -100,6 +101,14 @@ export default function useAuth({
           }, 5000)
         : router.push(redirectPath);
     } else {
+      if (res?.error === "A" || res?.error === "B") {
+        router.push(`/register/${res?.error === "A" ? "agent" : "builder"}`);
+        toast.success("Redirecting to SignUp", {
+          duration: 1500,
+          icon: "⌛",
+        });
+        return null;
+      }
       toast.error(res?.error || "Something went wrong. Please try again.", {
         duration: 1000,
       });
@@ -147,7 +156,7 @@ export default function useAuth({
         return registrationResponse.data;
       }
     } catch (error: any) {
-      toast.error("User Already Exists");
+      toast.error("Something went wrong");
       // throw new Error("Something went wrong during registration.");
     }
   };

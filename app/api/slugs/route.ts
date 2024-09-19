@@ -12,7 +12,7 @@ const getFilePath = (type: string) =>
   path.join(process.cwd(), "static", `${type}Slugs.json`);
 
 export async function POST(request: Request, response: Response) {
-  let { type, slug, id, action, previd } = await request.json();
+  let { type, slug, id, action, slugs } = await request.json();
   // Validate required parameters
   if (!type || !action || (type !== "P" && type !== "B")) {
     return NextResponse.json(
@@ -34,60 +34,91 @@ export async function POST(request: Request, response: Response) {
 
   switch (action) {
     case "create": {
-      if (!slug || !id) {
+      if (!slugs || typeof slugs !== "object" || Array.isArray(slugs)) {
         return NextResponse.json(
-          { error: "Invalid slug or id parameter" },
+          { error: "Invalid slugs parameter. Expected an object." },
           { status: 400 }
         );
       }
-      if (Object.prototype.hasOwnProperty.call(data, slug)) {
-        return NextResponse.json(
-          { error: `${type} already exists` },
-          { status: 400 }
-        );
-      }
-      data[slug] = id;
+      const errors: string[] = [];
+
+      // Iterate over each key-value pair in the slugs object
+      Object.keys(slugs).forEach((slug) => {
+        const id = slugs[slug];
+
+        if (!id || typeof id !== "string") {
+          errors.push(`Invalid ID for slug: ${slug}`);
+          return;
+        }
+
+        // Check if the slug already exists in data
+        if (Object.prototype.hasOwnProperty.call(data, slug)) {
+          errors.push(`Slug "${slug}" already exists`);
+        } else {
+          data[slug] = id;
+          revalidatePath(slug);
+          revalidateTag(slug);
+        }
+      });
+
+      // Write updated data to the file
       fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
-      console.log(slug, "from create");
-      revalidatePath(slug);
-      // revalidatePath(slug, "layout");
-      revalidateTag(slug);
+
+      // Handle errors if any slugs were invalid or already existed
+      if (errors.length > 0) {
+        return NextResponse.json({ error: errors.join(", ") }, { status: 400 });
+      }
+
+      // Success response if all slugs were processed correctly
       return NextResponse.json(
-        { message: `${type} created successfully` },
+        { message: "Slugs created successfully" },
         { status: 201 }
       );
     }
     case "update": {
-      if (!id || !slug) {
+      if (!id || !slugs || typeof slugs !== "object" || Array.isArray(slugs)) {
         return NextResponse.json(
-          { error: "Missing parameter" },
+          { error: "Missing or invalid parameters" },
           { status: 400 }
         );
       }
-      const currentSlug = Object.keys(data).find(
-        (key) => data[key].split("_").pop() === id.split("_").pop()
-      );
-      if (!currentSlug) {
-        return NextResponse.json(
-          { error: `${type} with id '${id.split("_").pop()}' does not exist` },
-          { status: 404 }
-        );
-      }
-      if (slug && slug !== currentSlug) {
+      // Find and delete existing slugs with the same id
+      Object.keys(data).forEach((key) => {
+        if (data[key].includes(id)) {
+          delete data[key];
+          if (type === "P") {
+            revalidatePath(key.split("/").slice(0, 6).join("/"));
+          }
+          revalidatePath(key);
+        }
+      });
+      // Add new slugs to the data
+      Object.keys(slugs).forEach((slug) => {
+        const newId = slugs[slug];
+        if (!newId || typeof newId !== "string") {
+          return NextResponse.json(
+            { error: `Invalid ID for slug: ${slug}` },
+            { status: 400 }
+          );
+        }
+        // Check if the new slug already exists
         if (Object.prototype.hasOwnProperty.call(data, slug)) {
           return NextResponse.json(
             { error: `Slug '${slug}' already exists` },
             { status: 400 }
           );
         }
-        data[slug] = id;
-        delete data[currentSlug];
-      }
+        // Add the new slug and its corresponding ID
+        data[slug] = newId;
+      });
+      // Write updated data to the file
       fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
-      revalidatePath(slug || currentSlug);
-      // revalidateTag(slug || currentSlug);
+      // Revalidate all paths for the new slugs
+      Object.keys(slugs).forEach((slug) => {
+        revalidatePath(slug);
+      });
       return NextResponse.json(
-        { message: `${type} updated successfully` },
+        { message: "Slugs updated successfully" },
         { status: 200 }
       );
     }
@@ -98,23 +129,35 @@ export async function POST(request: Request, response: Response) {
           { status: 400 }
         );
       }
-      const slugToDelete = Object.keys(data).find(
-        (key) => data[key].split("_").pop() === id
-      );
-      if (!slugToDelete) {
+      let deleted = false; // Track whether a deletion occurs
+      // Loop over keys and delete the ones that contain the id
+      Object.keys(data).forEach((key) => {
+        if (data[key].includes(id)) {
+          delete data[key];
+          if (type === "P") {
+            revalidatePath(key.split("/").slice(0, 6).join("/"));
+          }
+          revalidatePath(key); // Revalidate path after deletion
+          deleted = true; // Mark as deleted
+        }
+      });
+      // If no deletions occurred, return an error
+      if (!deleted) {
         return NextResponse.json(
           { error: `${type} with id '${id}' does not exist` },
           { status: 404 }
         );
       }
-      delete data[slugToDelete];
+
+      // Write updated data back to the file
       fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
-      revalidatePath(slugToDelete);
+
       return NextResponse.json(
         { message: `${type} deleted successfully` },
         { status: 200 }
       );
     }
+
     default:
       return NextResponse.json(
         { error: "Invalid action parameter" },

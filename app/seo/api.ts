@@ -16,6 +16,9 @@ const getPagesSlugs = async (
         return {};
       }
     }
+    if (pageType === "project-list") {
+      return data;
+    }
     return data;
   } catch (error) {
     console.log(error);

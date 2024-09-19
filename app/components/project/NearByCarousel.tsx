@@ -34,7 +34,7 @@ export default function NearByCarousel({
   return (
     <div
       className="flex flex-col justify-start items-start w-full  mt-[4%] sm:mt-0 xl:pt-less-screen-spacing scroll-mt-[180px]"
-      id="similar"
+      id="similar-projects"
     >
       <ProjectCarousel
         type="proj"

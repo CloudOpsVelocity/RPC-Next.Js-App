@@ -34,8 +34,30 @@ export const options: NextAuthOptions = {
               password: decryptedPassword,
             }
           );
-          // console.log(res.data);
           if (res.data.status) {
+            if (res.data.flag === "a") {
+              const encryptedValue = CryptoJS.AES.encrypt(
+                [credentials?.username, credentials?.password, "1"].join(":"),
+                process.env.NEXT_PUBLIC_SECRET!!
+              ).toString();
+              // resume_signup_token
+              cookies().set(
+                `resume_signup_token${res.data.userType.toLowerCase()}`,
+                encryptedValue,
+                {
+                  maxAge: 5 * 60, // 10 minutes, or adjust as needed
+                  sameSite: "strict",
+                  path: "/",
+                }
+              );
+              cookies().set("token", res.data.token, {
+                maxAge: 365 * 24 * 60 * 60,
+                secure: true,
+                httpOnly: true,
+                path: "/",
+              });
+              throw new Error(res.data.userType);
+            }
             cookies().set("token", res.data.token, {
               maxAge: 365 * 24 * 60 * 60,
               secure: true,

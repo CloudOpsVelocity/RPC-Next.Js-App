@@ -103,7 +103,7 @@ export default async function Page({ params }: Props) {
         name="twitter:description"
         content={`${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`}
       />
-      <meta name="twitter:image" content={data.media?.coverImageUrl}/>
+      <meta name="twitter:image" content={data.media?.coverImageUrl} />
       <FAQJsonLdScript data={data} />
       <QAJsonLdScript data={data} />
       <PropertyJsonLdScript data={data} />
@@ -111,13 +111,18 @@ export default async function Page({ params }: Props) {
       <div className="mt-[70px] sm:mt-[90px] w-full sm:pb-[2%] flex xl:text-ellipsis items-center justify-center flex-col ">
         <div className="p-[1%] sm:p-[1%] sm:py-0 xl:p-[1%] w-full sm:w-[94%]">
           <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%]">
-            <span className="hover:underline cursor-pointer ">Home</span> {" > "}
+            <span className="hover:underline cursor-pointer ">Home</span>{" "}
+            {" > "}
             <Link href={"/project/banglore"}>
-              <span className="hover:underline cursor-pointer">Projects In {data.cityName}</span>
+              <span className="hover:underline cursor-pointer">
+                Projects In {data.cityName}
+              </span>
             </Link>{" "}
             {" > "}
             <Link href={"/project/banglore/whitefield"}>
-              <span className="hover:underline cursor-pointer">Projects In {`${data.localityName} `}</span>
+              <span className="hover:underline cursor-pointer">
+                Projects In {`${data.localityName} `}
+              </span>
             </Link>{" "}
             {" > "}
             <span>{data.projectName}</span>
@@ -135,6 +140,7 @@ export default async function Page({ params }: Props) {
           <Navigation
             isBrochure={!!data?.media?.projBroucherUrl}
             detailsData={data}
+            slug={slug}
           />
         </MobileHidden>
         <Overview {...data} PhaseOverview={phaseOverview} />
@@ -162,7 +168,7 @@ export default async function Page({ params }: Props) {
           projName={data.projectName}
           media={data?.media?.projectPlanUrl}
         />
-        {!data.partialUnitData ? (
+        {/* {!data.partialUnitData ? (
           <FloorplansBlock
             projName={data.projectName}
             data={data.phases}
@@ -177,7 +183,7 @@ export default async function Page({ params }: Props) {
             phaseList={data.phases}
             data={data}
           />
-        )}
+        )} */}
 
         <GalleryBlock
           {...data.media}

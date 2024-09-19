@@ -1,9 +1,7 @@
 "use client";
-import useAmenities from "@/app/hooks/useAmenities";
 import { amenitiesGroupList } from "@/app/images/commonSvgs";
 import { readMoreAtom } from "@/app/store/drawer";
 import { AmenityList } from "@/app/validations/types/project";
-import { Console } from "console";
 import { useAtom } from "jotai";
 import React from "react";
 import PropertyHeading from "../property/heading";

@@ -29,7 +29,7 @@ const schema = yup.object().shape({
     .number()
     .positive("Mobile number must be positive")
     .integer("Mobile number must be an integer")
-    .typeError("Valid 10-digit contact number is required")
+    .typeError("Valid 10-digit mobile number is required")
     .test(
       "len",
       "Mobile number must be exactly 10 digits",

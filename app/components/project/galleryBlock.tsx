@@ -54,17 +54,17 @@ export default function GalleryBlock({
   return (
     <div
       className="w-[95%] md:w-[90%] sm:pt-[50px]   scroll-mt-[165px] mt-[50px] sm:mt-0 mb-[3%] sm:mb-0"
-      id="galleria"
+      id="gallery"
     >
       {type === "prop" ? (
         <PropertyHeading
-          title="Galleria"
+          title="Gallery"
           desc="Gallery Highlights : A Glimpse into good property"
         />
       ) : (
         <>
           <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[12px] capitalize break-words text-wrap w-[78%]">
-            Galleria of{" "}
+            Gallery of{" "}
             <span className="text-[#148B16] font-[700] ">{projName}</span>{" "}
           </h2>
 
@@ -195,7 +195,7 @@ export default function GalleryBlock({
                         controls
                       >
                         <track
-                          src="path_to_your_captions_file.vtt" // Replace with the actual path to your captions file
+                          src="/audio.vtt" // Replace with the actual path to your captions file
                           kind="captions"
                           srcLang="en"
                           label="English"

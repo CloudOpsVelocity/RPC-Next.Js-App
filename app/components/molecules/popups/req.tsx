@@ -40,97 +40,97 @@ const RequestCallBackModal = () => {
   };
 
   return (
-      <Modal
-        opened={opened}
-        onClose={handleClose}
-        centered
-        size={
-          isMobile
-            ? "100%"
-            : status !== "success"
-            ? "65%"
-            : isTab
-            ? "40%"
-            : "auto"
-        }
-        className="rounded-lg w-[90%]  md:w-[70%] lg:w-[65%] !p-0"
-        classNames={
-          status === "success"
-            ? {
-                title: Styles.title,
-                root: Styles.root,
-                close: Styles.close,
-                content: Styles.content,
-                overlay: Styles.overlay,
-                header: Styles.disabled,
-                body: Styles.body,
-              }
-            : {
-                close: S.close,
-                content: S.content,
-                body: S.body,
-                overlay: S.overlay,
-              }
-        }
-        withCloseButton={false}
-      >
-        {
-          <div
-            className={clsx(
-              "bg-white relative rounded-lg  w-full overflow-hidden flex ",
-              status !== "success" && "min-h-[]"
-            )}
-          >
-            <Close
-              close={handleClose}
-              className="absolute h-[28px] w-[28px] right-0 z-10 m-[2%] cursor-pointer "
-            />
+    <Modal
+      opened={opened}
+      onClose={handleClose}
+      centered
+      size={
+        isMobile
+          ? "100%"
+          : status !== "success"
+          ? "65%"
+          : isTab
+          ? "40%"
+          : "auto"
+      }
+      className="rounded-lg w-[90%]  md:w-[70%] lg:w-[65%] !p-0"
+      classNames={
+        status === "success"
+          ? {
+              title: Styles.title,
+              root: Styles.root,
+              close: Styles.close,
+              content: Styles.content,
+              overlay: Styles.overlay,
+              header: Styles.disabled,
+              body: Styles.body,
+            }
+          : {
+              close: S.close,
+              content: S.content,
+              body: S.body,
+              overlay: S.overlay,
+            }
+      }
+      withCloseButton={false}
+    >
+      {
+        <div
+          className={clsx(
+            "bg-white relative rounded-lg  w-full overflow-hidden flex ",
+            status !== "success" && "min-h-[]"
+          )}
+        >
+          <Close
+            close={handleClose}
+            className="absolute h-[28px] w-[28px] right-0 z-10 m-[2%] cursor-pointer "
+          />
 
-            {status === "success" ? (
-              <ReqcallbackMessage close={handleClose} />
-            ) : (
-              <>
-                <div
-                  className={`w-[100%] md:w-[50%] px-[3%] py-[3%] sm:py-[1%] xl:py-[3%]`}
-                >
-                  {status === "idle" && (
-                    <h2 className="text-[18px]  sm:text-[20px] xl:text-[24px] font-[600] text-[#202020]  ">
-                      {MODAL_TYPE === "REQ_QUOTE"
-                        ? "Request Quotation"
-                        : "Request Callback"}
-                    </h2>
-                  )}
+          {status === "success" ? (
+            <ReqcallbackMessage close={handleClose} />
+          ) : (
+            <>
+              <div
+                className={`w-[100%] md:w-[50%] px-[3%] py-[3%] sm:py-[1%] xl:py-[3%]`}
+              >
+                {status === "idle" && (
+                  <h2 className="text-[18px]  sm:text-[20px] xl:text-[24px] font-[600] text-[#202020]  ">
+                    {MODAL_TYPE === "REQ_QUOTE"
+                      ? "Request Quotation"
+                      : "Request Callback"}
+                  </h2>
+                )}
 
-                  <Content
-                    close={close}
-                    status={status}
-                    setStatus={setStatus}
-                    source={source}
+                <Content
+                  close={close}
+                  status={status}
+                  setStatus={setStatus}
+                  source={source}
+                />
+              </div>
+              {
+                <div className="hidden md:block w-[50%] relative">
+                  <Image
+                    className={clsx(
+                      "absolute inset-0 h-full w-[100%] object-cover",
+                      MODAL_TYPE == "REQ_QUOTE" && "!object-contain"
+                    )}
+                    src={
+                      MODAL_TYPE === "REQ_QUOTE"
+                        ? "/quate.svg"
+                        : "/requestcallback.png"
+                    }
+                    alt="Customer Support"
+                    width={600}
+                    height={534}
                   />
                 </div>
-                {
-                  <div className="hidden md:block w-[50%] relative">
-                    <Image
-                      className={clsx(
-                        "absolute inset-0 h-full w-[100%] object-cover",
-                        MODAL_TYPE == "REQ_QUOTE" && "!object-contain"
-                      )}
-                      src={
-                        MODAL_TYPE === "REQ_QUOTE"
-                          ? "/quate.svg"
-                          : "/requestcallback.png"
-                      }
-                      alt="Customer Support"
-                      width={600}
-                      height={534}
-                    />
-                  </div>
-                }
-              </>
-            )}
-          </div>
-        }
-      </Modal>
+              }
+            </>
+          )}
+        </div>
+      }
+    </Modal>
   );
 };
 export default RequestCallBackModal;
@@ -384,7 +384,7 @@ const ReqForm = ({
           size={isTab ? "md" : "lg"}
           className="w-[100%]  "
           label="Contact Number"
-          placeholder="Enter Your Contact Number"
+          placeholder="Enter Your Mobile Number"
           {...form.getInputProps("mobile")}
           maxLength={10}
           onPaste={(event) => {

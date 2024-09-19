@@ -20,11 +20,16 @@ const RightSideBlock = ({ serverData }: any) => {
   const serverClientData =
     appliedFiltersCount > 0
       ? data
-      : path.includes("/projects") || path.includes("/in")
+      : path.includes("/projects") ||
+        path.includes("/listings") ||
+        path.includes("/residential")
       ? serverData
       : data;
   return (
-    <div className="w-[100%] sm:w-[50%]  flex justify-start items-start z-[1] md:w-[50%] ">
+    <div
+      className="w-[100%] sm:w-[50%]  flex justify-start items-start z-[1] md:w-[50%] scroll-mt-[150px]"
+      id="mobileMap"
+    >
       <Map
         projName={"Searched Location"}
         lat={(serverClientData && serverClientData[0]?.lat) ?? 47.46489}

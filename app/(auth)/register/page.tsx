@@ -1,6 +1,4 @@
-import Login from "@/app/components/molecules/auth/login";
 import { data } from "@/app/data/userTypeDetails";
-import Button from "@/app/elements/button";
 import Link from "next/link";
 import Image from "next/image";
 import { getQueryParam } from "@/app/hooks/custom/useRedirect";
