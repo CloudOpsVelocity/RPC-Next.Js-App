@@ -1,3 +1,4 @@
+"use client";
 import { emptyFilesIcon, strikeIconIcon } from "@/app/images/commonSvgs";
 import { Loader, Tabs } from "@mantine/core";
 import { useIntersection } from "@mantine/hooks";
@@ -28,6 +29,7 @@ export default function TabPanelSection({ mutate, serverData }: Props) {
         path.includes("/residential")
       ? serverData
       : data;
+
   const { ref, entry } = useIntersection({
     root: containerRef.current,
     threshold: 0.1,
