@@ -116,7 +116,7 @@ function Individual() {
             <TextInput
               name="email"
               control={form.control}
-              type="email"
+              // type="email"
               required
               size="lg"
               mt="xs"
