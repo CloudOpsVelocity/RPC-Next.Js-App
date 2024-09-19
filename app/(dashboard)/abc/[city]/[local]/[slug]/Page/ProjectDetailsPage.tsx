@@ -198,7 +198,7 @@ export default async function ProjectsDetailsPage({
         <Banner projName={data.projectName} projIdEnc={data.projIdEnc} />
 
         <ErrorContainer data={data.banks}>
-          <div id="loans" className="w-full h-auto scroll-mt-[150px]">
+          <div id="bank-approvals" className="w-full h-auto scroll-mt-[150px]">
             <Loans type="proj" banks={data.banks} name={data.projectName} />
           </div>
         </ErrorContainer>
@@ -207,7 +207,7 @@ export default async function ProjectsDetailsPage({
         {/* Why Buy This  */}
         {data.wbtp && (
           <About
-            id="whyBuy"
+            id="why-buy-this-project"
             heading="Why Buy"
             projName={`${data.projectName} ?`}
             content={data.wbtp}

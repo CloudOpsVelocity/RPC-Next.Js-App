@@ -56,6 +56,7 @@ export default async function Page({ params }: Props) {
       projResponse={projResponse}
       amenitiesFromDB={amenitiesFromDB}
       slug={slug as string}
+      
     />
   );
 }

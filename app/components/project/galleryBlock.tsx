@@ -54,7 +54,7 @@ export default function GalleryBlock({
   return (
     <div
       className="w-[95%] md:w-[90%] sm:pt-[50px]   scroll-mt-[165px] mt-[50px] sm:mt-0 mb-[3%] sm:mb-0"
-      id="galleria"
+      id="gallery"
     >
       {type === "prop" ? (
         <PropertyHeading

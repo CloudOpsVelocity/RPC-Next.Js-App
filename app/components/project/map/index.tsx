@@ -82,7 +82,7 @@ const LeafMap: React.FC<{
   return Object.keys(mapData).length > 0 ? (
     <div
       className="w-full scroll-mt-[170px] mx-auto mb-[3%] sm:mb-0 sm:pt-less-screen-spacing"
-      id="nearBy"
+      id="near-by-projects"
     >
       <div className="flex justify-between w-[95%] sm:w-[90%] mx-auto">
         {type === "prop" ? (
@@ -207,7 +207,7 @@ const LeafMap: React.FC<{
     </div>
   ) : (
     <div
-      id="nearBy"
+      id="near-by-projects"
       className="w-[95%] md:w-[90%] scroll-mt-[180px]  sm:mt-[20px] xl:mt-[50px] justify-center"
     >
       <div className="flex justify-between w-[90%] ">
@@ -268,7 +268,7 @@ const MapCard = ({
       },
       name,
     });
-    scrollToTopic("nearBy");
+    scrollToTopic("near-by-projects");
   };
 
   const scrollToTopic = (id: string): void => {
@@ -361,7 +361,7 @@ const LocationList: React.FC<{
       name,
     });
     if (isMobile) {
-      scrollToTopic("nearBy");
+      scrollToTopic("near-by-projects");
     }
   };
 

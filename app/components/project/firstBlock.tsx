@@ -58,6 +58,11 @@ const FirstBlock: React.FC<Props> = ({
     ? companyName.toLowerCase().split(" ").join("%2D")
     : "";
   let urlBuilder = `/builders/bengaluru/${builderName}`;
+  useEffect(() => {
+    if (scrollId) {
+      console.log(scrollId);
+    }
+  }, [scrollId]);
 
   return (
     <div

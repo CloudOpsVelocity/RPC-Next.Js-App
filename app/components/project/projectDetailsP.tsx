@@ -56,7 +56,7 @@ export default function ProjectDetailsP({
   return (
     <div
       className="w-[95%] sm:w-[90%] mb-[3%] sm:mb-[0%] scroll-mt-[150px] sm:mt-[50px]"
-      id="propertyDetails"
+      id="property-details"
     >
       <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[12px] break-words">
         Property Details Of{" "}

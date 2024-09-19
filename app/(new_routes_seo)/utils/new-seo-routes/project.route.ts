@@ -1,5 +1,5 @@
 export const BASE_PATH_PROJECT_DETAILS = "/residential/projects";
-const PROJECT_HEADING_MAP = new Map([
+export const PROJECT_HEADING_MAP = new Map([
   ["overview", 1],
   ["brochure", 2],
   ["address", 3],
