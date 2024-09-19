@@ -14,7 +14,7 @@ import {
   parseAsInteger,
   parseAsFloat,
 } from "nuqs";
-import { useInfiniteQuery, useMutation, useQueryClient } from "react-query";
+import { Query, useInfiniteQuery, useMutation, useQueryClient } from "react-query";
 const paramsInit = {
   projStatus: parseAsString,
   localities: parseAsString,
@@ -284,7 +284,7 @@ export default function useSearchFilters(
     setAppliedFilters({ runner: setParams });
     callback && callback();
   };
-  const listByCondition = filters.listedBy === "I" || filters.listedBy === "A";
+  const listByCondition = filters.listedBy === "I" || filters.listedBy === "A" || filters.listedBy === "B" || filters.listedBy === "ALL";
   const value = listByCondition
     ? "owner"
     : input === undefined
@@ -421,17 +421,16 @@ const getFilteredData = async (
   page: number,
   type: "project" | "owner" | "agent"
 ): Promise<Search[]> => {
-  const hasCityParam = /(?:^|&)city=/.test(query);
+  const hasCityParam = /(?:^|&)city=/.test(query); 
   const hasCg = /(?:^|&)cg=/.test(query);
   const cgValue = !hasCg ? "&cg=S" : "";
-
   const url =
     type === "project"
       ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=${page}${
-          query && `&${query}`
+          query && query !== "listedBy=ALL" ? `&${query}` : ""
         }${cgValue}`
       : `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/prop-search?page=${page}${
-          query && `&${query}`
+          query && query !== "listedBy=ALL" ? `&${query}` : ""
         }${!hasCityParam && "&city=9"}${cgValue}`;
   try {
     const response = await fetch(url);

@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import { throttle } from "lodash";
+import { Underdog } from "next/font/google";
 
 // types.ts
 export interface LocationItem {
@@ -70,12 +71,15 @@ const LocationCard: React.FC<LocationCardProps> = React.memo(({ data }) => {
     tabContainerRef.current?.addEventListener("scroll", updateScrollButtons);
 
     return () => {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       tabContainerRef.current?.removeEventListener(
         "scroll",
         updateScrollButtons
       );
     };
   }, [updateScrollButtons]);
+
+  console.log(data[selectedCategory]);
 
   return (
     <div className="relative bg-white rounded-lg shadow-md overflow-hidden w-full">
@@ -123,9 +127,9 @@ const LocationCard: React.FC<LocationCardProps> = React.memo(({ data }) => {
 
       {/* Content */}
       <div className="overflow-y-auto bg-gray-50 p-1">
-        {data && data[selectedCategory] && data[selectedCategory].length > 0 ? (
+        {data && selectedCategory !== undefined && data[selectedCategory] !== undefined && data[selectedCategory].length !== undefined && data[selectedCategory].length  > 0 ? (
           <ul className="grid grid-cols-2 gap-1">
-            {data[selectedCategory].map((item) => (
+            {data[selectedCategory]?.map((item) => (
               <li
                 key={item.placeId}
                 className="border p-2 rounded-lg shadow-sm bg-white hover:bg-blue-50 transition-colors duration-200"

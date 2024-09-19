@@ -1,3 +1,4 @@
+
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import selectedSearchAtom from "@/app/store/search/map";
 import { useAtom, useSetAtom } from "jotai";
@@ -7,10 +8,9 @@ import { useMediaQuery } from "@mantine/hooks";
 import ProjData from "../Center/ProjData";
 import { ShareIcon } from "@/app/images/HomePageIcons";
 import { searchShareAtom } from "@/app/(dashboard)/search/components/SharePopup";
-import { DownLoadIcon, NewMapIcon } from "@/app/images/commongsSvgs2";
+import { NewMapIcon } from "@/app/images/commongsSvgs2";
 import clsx from "clsx";
 import { formatNumberWithSuffix } from "@/app/utils/numbers";
-import downloadPDF from "@/app/(dashboard)/search/Page/utils";
 import DownloadBrocher from "../../DownloadBrocher";
 import { overlayAtom } from "@/app/test/newui/store/overlay";
 
@@ -40,10 +40,11 @@ export default function TopRightSection({
   sqftPrice,
   floorPlan,
   propTypeName,
+  propType
 }: Props) {
   const setSelected = useSetAtom(selectedSearchAtom);
   const [sharePopupData, setSharePopup] = useAtom(searchShareAtom);
-  const dispatch = useSetAtom(overlayAtom);
+  const dispatch = useSetAtom(overlayAtom); 
   const url =
     type === "proj"
       ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/abc/banglore/whitefield/${projIdEnc}`
@@ -57,7 +58,6 @@ export default function TopRightSection({
       element.scrollIntoView({ behavior: "smooth" });
     }
   };
-  console.log(propTypeName);
   return (
     <div
       onClick={(e) => e.stopPropagation()}
@@ -97,10 +97,9 @@ export default function TopRightSection({
                 >
                   <ShareIcon />
                 </button>
-              </div>
-              {!isMobile && (
+
                 <button
-                  className="hidden sm:flex max-w-fit sm:px-[1px] sm:py-[1px]  rounded  text-[#242424] text-sm not-italic font-semibold sm:my-1  md:mb-1  xl:gradient"
+                  className="hidden sm:flex max-w-fit sm:px-[1px] sm:py-[1px] rounded text-[#242424] text-sm not-italic font-semibold sm:my-1 md:mb-1 xl:gradient"
                   onClick={() => {
                     handleClick();
                     setSelected({
@@ -111,16 +110,20 @@ export default function TopRightSection({
                       lang,
                       type,
                       reqId: type === "proj" ? projIdEnc : propIdEnc,
+                      propType:type === "proj" ? propType : propTypeName
                     });
                   }}
                 >
                   <div className="xm:px-[1px] sm:py-[1px] inline-flex justify-center items-center xl:bg-[#F0F9FF] gap-0.5 rounded">
                     {" "}
-                    <span className="hidden md:flex">View on Map</span>{" "}
+                    {/* <span className="hidden sm:flex">View on Map</span>{" "} */}
                     <NewMapIcon className="w-6 h-6" />
                   </div>
                 </button>
-              )}
+              </div>
+              
+                
+              
             </div>
 
             {/* <div className="flex items-end flex-col justify-between md:gap-2 mt-[2px]">
@@ -308,6 +311,7 @@ export default function TopRightSection({
                       id: `${projIdEnc}+${propTypeId}`,
                       title: "Amenities",
                       conType: "amenities",
+                      pType: type
                     })
                   }
                 >
@@ -338,6 +342,7 @@ export default function TopRightSection({
                       id: `${projIdEnc}+${propTypeId}`,
                       title: `NearBy Locations of ${projName}`,
                       conType: "nearby",
+                      pType: type
                     })
                   }
                 >
@@ -410,13 +415,14 @@ export default function TopRightSection({
                   lang,
                   type,
                   reqId: type === "proj" ? projIdEnc : propIdEnc,
+                  propType:type === "proj" ? propType : propTypeName
                 })
               }
             >
               {" "}
               <div className="py-[1px] px-[2px] inline-flex justify-center items-center bg-[#F0F9FF]  rounded">
                 {" "}
-                View on Map
+                View on Map 
               </div>
             </button>
             {type !== "proj" && (
@@ -470,6 +476,7 @@ export default function TopRightSection({
                     id: `${projIdEnc}+${propTypeId}`,
                     title: "Amenities",
                     conType: "amenities",
+                    pType: type
                   })
                 }
               >
@@ -500,6 +507,7 @@ export default function TopRightSection({
                     id: `${projIdEnc}+${propTypeId}`,
                     title: `NearBy Locations of ${projName}`,
                     conType: "nearby",
+                    pType: type
                   })
                 }
               >

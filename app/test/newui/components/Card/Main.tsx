@@ -123,7 +123,7 @@ const MainBox = ({ data, refetch }: Props) => {
           availableFrom={data.availableFrom}
           data={data}
         />
-        <div className="relative">
+        <div className="relative w-full">
           {overlayData.id && `${projIdEnc}+${propTypeId}` === overlayData.id ? (
             <Overlay />
           ) : null}

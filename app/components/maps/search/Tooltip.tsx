@@ -15,11 +15,16 @@ export default function TooltipProj({ data }: Props) {
     locality,
     builderName,
     propTypes,
+    propType,
+    phaseName,
+    phaseCount
   } = data;
+  console.log("project map tooltip: ",data);
+
   return (
     <div className="p-[2px] xl:p-1 !rounded-2xl">
       <p className="text-[#001F35] text-[12px] xl:text-base not-italic font-semibold capitalize">
-        {projName}
+        {projName} - {propType} {phaseCount > 1 ? `(${phaseName})` : ""} 
       </p>
       <p className="text-[#148B16]  text-[16px] xl:text-lg not-italic font-bold">
         {formatCurrency(Number(minPrice))} - {formatCurrency(Number(maxPrice))}

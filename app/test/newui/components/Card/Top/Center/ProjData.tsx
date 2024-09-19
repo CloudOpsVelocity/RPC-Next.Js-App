@@ -39,6 +39,7 @@ export default function ProjData({
   lang,
   propIdEnc,
   otherCharges,
+  phaseCount
 }: Props) {
   const sortedBhks = sortUnits(bhkNames);
   const dispatch = useSetAtom(overlayAtom);
@@ -47,13 +48,13 @@ export default function ProjData({
     <div className="flex flex-col">
       <p className="text-[#001F35] text-[15px] sm:text-[16px] xl:text-[18px] font-bold break-words whitespace-normal min-w-0 inline-flex gap-1 items-center flex-wrap">
         {projName}{" "}
-        <span className="text-[12px] sm:text-[14px] ">({phaseName})</span>
+        {phaseName && phaseCount !== undefined && phaseCount > 1 && <span className="text-[12px] sm:text-[14px] ">({phaseName})</span>}
         {/* <button className="w-6 h-6 p-1.5 flex items-center justify-center rounded-full bg-blue-500 text-white hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 xl:hidden"> */}
         <NewMapIcon
           className="w-5 h-5 sm:hidden"
           onClick={() => {
             // handleClick();
-            // setSelected({
+            // setSelected({max-w-fit px-[1px] py-[1px] rounded text-[#242424] text-xs not-italic font-semibold my-2 md:mb-1 gradient
             //   agentListing,
             //   ownerListing,
             //   projOrPropName: type === "proj" ? projName : propName,
@@ -106,6 +107,7 @@ export default function ProjData({
                 title: "Unit Types",
                 id: `${projIdEnc}+${propTypeId}`,
                 conType: "bhk",
+                pType: type
               });
               // Add your logic here to show all BHK types (e.g., open a modal)
             }}
@@ -128,7 +130,7 @@ export default function ProjData({
     </div>
   ) : (
     <div>
-      <p className="text-[#242424] text-[14px] sm:text-[16px] xl:text-[18px] capitalize  not-italic font-medium">
+      <p className="text-[#242424] text-[14px] sm:text-[16px] xl:text-[18px] capitalize not-italic font-bold">
         {bhkName} {propTypeName} for {category} in {localityName}
       </p>
       <p className="text-[#148B16] text-[14px] sm:text-[18px] xl:text-xl not-italic font-bold relative">
@@ -145,6 +147,7 @@ export default function ProjData({
               id: `${projIdEnc}+${propTypeId}`,
               title: "Other Charges",
               type: "OPEN",
+              pType: type
             });
           }}
         >

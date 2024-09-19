@@ -83,7 +83,7 @@ export default function CardDownSection({
                     stroke-linejoin="round"
                     stroke-width="2"
                     d="M5 13l4 4L19 7"
-                  ></path>
+                  />
                 </svg>
                 <span>Pet Friendly</span>
               </div>
@@ -119,6 +119,7 @@ export default function CardDownSection({
                   title: "Amenities",
                   id: `${projIdEnc}+${propTypeId}`,
                   type: "OPEN",
+                  pType: type
                 })
               }
             >

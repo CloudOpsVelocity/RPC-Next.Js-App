@@ -268,6 +268,14 @@ export const SEARCH_FILTER_DATA = {
       label: "Agent Listings",
       value: "A",
     },
+    {
+      label: "Builder Listings",
+      value: "B",
+    },
+    {
+      label: "All",
+      value: "ALL",
+    },
   ],
   categoryDataListing: [
     {

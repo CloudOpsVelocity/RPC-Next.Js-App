@@ -15,7 +15,7 @@ const LeftSideBlock = ({ serverData }: any) => {
     setFilters,
   } = useSearchFilters("project");
 
-  const onTabChange = (listedBy: "A" | "I" | "proj"): void => {
+  const onTabChange = (listedBy: "A" | "I" | "proj" | "B"| "ALL"): void => {
     if (!listedBy) {
       console.error(`Invalid value passed to onTabChange: ${listedBy}`);
       return;
@@ -46,7 +46,7 @@ const LeftSideBlock = ({ serverData }: any) => {
         Activities={params.cg}
         categoryType={SEARCH_FILTER_DATA.categoryDataProject}
       />
-      <TabPanelSection mutate={mutate} serverData={serverData} />
+      <TabPanelSection key={params.listedBy ?? "proj"} mutate={mutate} serverData={serverData} />
 
       <RequestCallBackModal />
       <SharePopup />

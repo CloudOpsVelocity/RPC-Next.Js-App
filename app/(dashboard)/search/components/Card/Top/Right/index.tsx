@@ -85,6 +85,7 @@ export default function TopRightSection({
                     lang,
                     type,
                     reqId: type === "proj" ? projIdEnc : propIdEnc,
+                    propType: data?.propTypeName
                   });
                 }}
               >
