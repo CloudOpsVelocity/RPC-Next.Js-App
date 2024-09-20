@@ -46,15 +46,15 @@ export default function Page() {
                       var subContentList = eachContant?.subContent ? eachContant?.subContent : [];
                       return (
                         <div
-                          className="text-[#464646] text-[14px] not-italic"
+                          className="text-gray-500 text-[14px] not-italic"
                           key={`contentEachParaPoint_${eachContant.para[contantIndex]}`}
                         >
-                          <p className=" font-[sans-serif] leading-6">{eachContant.para ? eachContant.para: "" }</p>
+                          <p className=" font-[sans-serif] font-normal leading-6">{eachContant.para ? eachContant.para: "" }</p>
 
                           <ul className="ml-[20px] ">
                             {subContentList.length > 0 && subContentList.map((eachPoint: any, sunPointindex: number)=>{
                               return(
-                                <li className=" font-[sans-serif] leading-6" key={`subContentpoints_${eachPoint?.para[sunPointindex]}`}>
+                                <li className=" font-[sans-serif] leading-6 font-normal" key={`subContentpoints_${eachPoint?.para[sunPointindex]}`}>
                                   {eachPoint?.para}
                                 </li>
                               )
@@ -71,10 +71,10 @@ export default function Page() {
                         var value = eachDetail?.value ? eachDetail?.value: ""
                         return (
                           <li
-                            className="text-[#464646] text-[14px] not-italic"
+                            className="text-gray-500 text-[14px] not-italic"
                             key={`otherDetailParaPoint_${lable}`}
                           >
-                            <p className=" font-[sans-serif] leading-5 font-semibold ">
+                            <p className=" font-[sans-serif] font-semibold leading-5 ">
                               {lable}
                               <span className=" font-[500] ">{value}</span>
                             </p>
