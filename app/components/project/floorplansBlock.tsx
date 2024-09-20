@@ -59,7 +59,7 @@ type Props = {
   PhaseOverview: any;
   phaseList: any;
   partialUnitData: any;
-  overview: any;
+  overview?: any;
 };
 
 export default function FloorplansBlock({
@@ -234,7 +234,7 @@ export default function FloorplansBlock({
   if (isLoading) return <Loading />;
   return (
     <>
-      {!partialUnitData && overview && (
+      {/* {!partialUnitData && (
         <PartialUnitData
           partialUnitData={overview}
           projName={projName}
@@ -243,7 +243,7 @@ export default function FloorplansBlock({
           type="overview"
           handlePricingFloorPlanClick={handlePricingFloorPlanClick}
         />
-      )}{" "}
+      )}{" "} */}
       <div
         className="w-[95%] md:w-[90%] mt-[50px] scroll-mt-[150px] mb-[2%] sm:mb-[0%]"
         id="floor-plans"
