@@ -45,7 +45,7 @@ export const options: NextAuthOptions = {
                 `resume_signup_token${res.data.userType.toLowerCase()}`,
                 encryptedValue,
                 {
-                  maxAge: 5 * 60, // 10 minutes, or adjust as needed
+                  maxAge: 5 * 60,
                   sameSite: "strict",
                   path: "/",
                 }

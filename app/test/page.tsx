@@ -8,17 +8,17 @@ export default async function Page({}: Props) {
   return (
     <div>
       {/* {todos.map((todo) => (
-        <li>{todo.title}</li>
+        <li>{todo.name}</li>
       ))} */}
-      <Suspense fallback={<div>Loading...</div>}>
+      {/* <Suspense fallback={<div>Loading...</div>}>
         <ServerCompo />
-      </Suspense>
+      </Suspense> */}
     </div>
   );
 }
 
 const getTodos = async () => {
-  const res = await fetch("https://jsonplaceholder.typicode.com/todos");
+  const res = await fetch("https://jsonplaceholder.typicode.com/users");
   const data = await res.json();
   return data;
 };

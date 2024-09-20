@@ -15,11 +15,11 @@ const schema = yup.object().shape({
     .required("Full name is required"),
   email: yup
     .string()
+    .required("Email is required")
     .matches(
       /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
       "Please enter a valid Email address"
     )
-    .required("Email is required")
     .email("Please enter a valid Email address"),
   password: yup
     .string()
@@ -94,18 +94,19 @@ export const builderFirstStepSchema = yup.object().shape({
   email: yup
     .string()
     .trim()
+    .required("Email is required")
     .matches(
       /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
       "Please enter a valid Email address"
     )
-    .required("Email is required")
     .email("Please enter a valid Email address"),
   password: yup
     .string()
-    .min(6, "Password must be at-least 6 digits")
-    .required("Password is required"),
+    .required("Password is required")
+    .min(6, "Password must be at-least 6 digits"),
   mobile: yup
     .number()
+    .required("Mobile number is required")
     .positive("Mobile number must be positive")
     .integer("Mobile number must be an integer")
     .typeError("Mobile number is required")
@@ -117,8 +118,7 @@ export const builderFirstStepSchema = yup.object().shape({
       "len",
       "Mobile number must be exactly 10 digits",
       (val) => val?.toString().length === 10
-    )
-    .required("Mobile number is required"),
+    ),
 });
 export const agentSchema1 = yup.object().shape({
   address: yup
@@ -146,9 +146,8 @@ const builderSchema = yup.object().shape({
   companyName: yup
     .string()
     .trim()
-    .min(2, "Builder company came by must be at least 2 characters")
-    .required("Builder company name is required"),
-
+    .required("Builder company name is required")
+    .min(2, "Builder company came by must be at least 2 characters"),
   branch: yup
     .array()
     .min(1, "At least one branch must be selected")
@@ -302,8 +301,8 @@ const builderSchema = yup.object().shape({
     }),
   officeContact: yup
     .string()
-    .matches(/^[\d()+-]+$/, "Invalid office contact number")
     .required("Office contact number is required")
+    .matches(/^[\d()+-\s]+$/, "Invalid office contact number")
     .max(17, "Mobile number should not exceed 17 digits"),
 
   companyStartDate: yup.date().required("Company start date is required"),
@@ -314,8 +313,8 @@ export const builderSchemaIndex1 = yup.object().shape({
   city: yup.string().trim().required("City is required"),
   pincode: yup
     .number()
-    .typeError("PIN code must be a number") // Ensures that the value is a number
     .required("PIN code is required")
+    .typeError("PIN code must be a number") // Ensures that the value is a number
     .integer("PIN code must be an integer")
     .test("len", "Valid 6-digit PIN code is required", (val) => {
       // Check if the number is exactly 6 digits

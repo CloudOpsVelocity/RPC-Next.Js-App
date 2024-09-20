@@ -79,7 +79,7 @@ function Builder({ encriptedData }: any) {
     "idle" | "pending" | "success" | "error" | "otp"
   >("idle");
   const singupCookie = getCookie("resume_signup_tokenb")?.toString();
-  const [active, setActive] = useState(encriptedData || singupCookie ? 1 : 0);
+  const [active, setActive] = useState(encriptedData || singupCookie ? 1 : 2);
   const router = useRouter();
   const [opened, { open, close }] = useDisclosure(false);
   const { registerOtherDetails, register, login, saveStep } = useAuth({
@@ -224,10 +224,22 @@ function Builder({ encriptedData }: any) {
           setActive((current) => (current < 3 ? current + 1 : current));
           saveStep(3);
           break;
-        case 2:
+        case 2: {
+          const fieldsToClean = [
+            "foundedBy",
+            "ceoName",
+            "managingDirectorName",
+          ];
+          fieldsToClean.forEach((field) => {
+            const filteredArray = values[field].filter(
+              (item: any) => item.name.trim() !== ""
+            );
+            newForm.setValue(field, filteredArray);
+          });
           setActive((current) => (current < 3 ? current + 1 : current));
           saveStep(4);
           break;
+        }
         case 3:
           {
             setStatus("pending");
@@ -298,7 +310,9 @@ function Builder({ encriptedData }: any) {
       "officeContact",
       "companyStartDate",
     ];
-    const errorPosition = data.findIndex((element) => element === item) * 60;
+    const TOP_MULTIPLIER = item === "officeContact" ? 80 : 60;
+    const errorPosition =
+      data.findIndex((element) => element === item) * TOP_MULTIPLIER;
     const selectedElement = document.getElementById(item);
     if (selectedElement && viewport.current) {
       viewport.current.scrollTo({
@@ -357,7 +371,7 @@ function Builder({ encriptedData }: any) {
           close={close}
           userName={form.values.email}
         />
-        {(encriptedData || singupCookie) && (
+        {(encriptedData || singupCookie) && active !== 4 && (
           <Alert type="builder" isTouched={newForm.formState.isDirty} />
         )}
         <form
@@ -661,6 +675,7 @@ function Builder({ encriptedData }: any) {
                   }}
                   maxLength={6}
                   onPaste={(event) => {
+                    newForm.clearErrors();
                     const pastedText =
                       event.clipboardData.getData("text/plain");
                     const trimmedText = pastedText.replace(/\s/g, "");
@@ -851,7 +866,8 @@ function Builder({ encriptedData }: any) {
                   control={newForm.control}
                   name="officeContact"
                   id="officeContact"
-                  required
+                  withAsterisk
+                  // required
                   size="lg"
                   // mt="md"
                   label="Office Contact Number"

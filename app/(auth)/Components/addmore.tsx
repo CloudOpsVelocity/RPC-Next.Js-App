@@ -5,7 +5,9 @@ import { TextInput } from "react-hook-form-mantine";
 import { FaPlus, FaTimes } from "react-icons/fa";
 import { randomId } from "@mantine/hooks";
 import StepCss from "@/app/styles/Stepper.module.css";
-import handleTrimAndReplace from "@/app/utils/input/validations";
+import handleTrimAndReplace, {
+  handleTrimAndReplaceReactHookForm,
+} from "@/app/utils/input/validations";
 import { CrossIcon } from "@/app/images/commonSvgs";
 import { useFieldArray } from "react-hook-form";
 type Props = {
@@ -30,7 +32,6 @@ export default function AddmoreInput({
 }: Props) {
   const {
     fields: values,
-    append,
     remove,
     insert,
   } = useFieldArray<any>({
@@ -70,13 +71,17 @@ export default function AddmoreInput({
           error: StepCss.errorMsg,
           label: StepCss.mlabelCss,
         }}
-        // onBlurCapture={(e) => {
-        //   handleTrimAndReplace(e, `${id}.${index}.name`, form);
-        //   e.target.value !== "" &&
-        //     setTimeout(() => {
-        //       scrollToBottom();
-        //     }, 100);
-        // }}
+        onBlurCapture={(e) => {
+          handleTrimAndReplaceReactHookForm(
+            e,
+            `${id}.${index}.name`,
+            form.setValue
+          );
+          e.target.value !== "" &&
+            setTimeout(() => {
+              scrollToBottom();
+            }, 100);
+        }}
         // onBlur={()=>form.validateField(`${id}.${index}.name`)}
       />
 
