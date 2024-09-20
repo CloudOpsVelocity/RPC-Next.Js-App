@@ -116,7 +116,7 @@ function Individual() {
             <TextInput
               name="email"
               control={form.control}
-              type="email"
+              // type="email"
               required
               size="lg"
               mt="xs"
@@ -194,6 +194,7 @@ function Individual() {
               allowDecimal={false}
               maxLength={10}
               onPaste={(event) => {
+                form.clearErrors();
                 if (status === "error") {
                   setStatus("idle");
                 }

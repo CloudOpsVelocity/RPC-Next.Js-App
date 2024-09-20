@@ -492,7 +492,10 @@ function Builder({ encriptedData }: any) {
                 label="Mobile Number"
                 placeholder="Enter Your Mobile Number"
                 // {...form.getInputProps("mobile")}
-                // error={form.errors.mobile || status === "error"}
+                error={
+                  (newForm.formState.errors.mobile?.message as string) ||
+                  status === "error"
+                }
                 onChange={(e) => {
                   newForm.setValue("mobile", e as any);
                   if (status === "error") {
@@ -504,12 +507,11 @@ function Builder({ encriptedData }: any) {
                 withErrorStyles
                 allowDecimal={false}
                 onPaste={(event) => {
+                  newForm.clearErrors("mobile");
                   if (status === "error") {
                     setStatus("idle");
                   }
-
                   const pastedText = event.clipboardData.getData("text/plain");
-
                   // Remove all spaces and non-digit characters, then remove leading zeros
                   const trimmedText = pastedText
                     .replace(/\D/g, "")
@@ -518,7 +520,7 @@ function Builder({ encriptedData }: any) {
                   // Keep only the first 10 digits after processing
                   const first10Digits = trimmedText.slice(0, 10);
 
-                  newForm.setValue("mobile", first10Digits as any);
+                  newForm.setValue("mobile", Number(first10Digits) as any);
                 }}
                 onBlurCapture={(e) =>
                   form.values.mobile === "" &&

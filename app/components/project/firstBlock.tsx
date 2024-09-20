@@ -60,9 +60,21 @@ const FirstBlock: React.FC<Props> = ({
   let urlBuilder = `/builders/bengaluru/${builderName}`;
   useEffect(() => {
     if (scrollId) {
-      console.log(scrollId);
+      console.log("scrolling", scrollId);
+      setIsScrolling(true);
+      const element = document.getElementById(scrollId);
+      if (element) {
+        element.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+          inline: "center",
+        });
+        setSticky(true);
+      }
+      setC(scrollId);
+      setTimeout(() => setIsScrolling(false), 3000);
     }
-  }, [scrollId]);
+  }, []);
 
   return (
     <div
@@ -86,6 +98,7 @@ const FirstBlock: React.FC<Props> = ({
             </p>
             <SharePopup className="text-sm p-[4px]  sm:text-xl hidden sm:flex" />
           </div>
+
           <div className="relative w-full sm:!rounded-[10px]">
             <Carousel
               classNames={styles}
@@ -127,7 +140,6 @@ const FirstBlock: React.FC<Props> = ({
                   </h1>
                   <SharePopup className="text-sm p-[2px] mr-2 mt-[2px] sm:hidden " />
                 </div>
-
                 <p className="text-[#242424]  text-sm sm:text-[18px]  xl:text-[22px] not-italic font-[600] leading-[normal] w-[100%] tracking-[0.32px] capitalize sm:mt-[8px] xl:mt-[14px] ">
                   address:{" "}
                   {`${projectDetails.address}, ${projectDetails.localityName}, ${projectDetails.cityName}, ${projectDetails.state}, ${projectDetails.pinCode}`}

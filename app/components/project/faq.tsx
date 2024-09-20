@@ -33,11 +33,12 @@ export default function FaqWithBg({ data, projName }: FaqWithBgProps) {
   return (
     <div
       className={data?.length > 0 ? classes.wrapper : "!w-[95%] !md:w-[90%]   "}
+      id="frequently-asked-questions"
     >
       <div className="flex justify-center items-center text-center !w-[100%] !md:w-[90%] relative">
         {data?.length > 0 && (
           <>
-            <div className="hidden sm:block absolute   left-[2%] sm:left-[16%]  sm:mr-[-70px] bottom-[20px] w-[168px] h-[74px] rounded-[50%] blur-[29.5px] bg-[#0093ff4d] "/>
+            <div className="hidden sm:block absolute   left-[2%] sm:left-[16%]  sm:mr-[-70px] bottom-[20px] w-[168px] h-[74px] rounded-[50%] blur-[29.5px] bg-[#0093ff4d] " />
             <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[28px] xl:mb-[24px] capitalize ">
               Frequently Asked Questions of{" "}
               <span className="text-[#148B16] font-[700]  ">{projName}</span>{" "}
@@ -121,6 +122,7 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
     <form
       className="max-w-[100%] mx-auto mt-6 sm:mt-[50px] sm:pt-[12px] rounded-lg space-y-2"
       onSubmit={onSubmit(formSubmit)}
+      id="have-any-question"
     >
       <h2 className="inline-flex items-center gap-3 p-2 rounded-2xl bg-[#ecf7ff] sm:mb-7">
         <svg
@@ -273,7 +275,6 @@ const Success = ({ text, opened, onClose, projName }: any) => {
       centered
       title="Add Rating"
       size={isMobile ? "100%" : isTab ? "35%" : "auto"}
-      
     >
       <Close close={onClose} className="absolute top-2 right-2 z-50" />
 

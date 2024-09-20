@@ -316,13 +316,16 @@ function Agent({ encriptedData }: any) {
               label="Mobile Number"
               placeholder="Enter your mobile number"
               // {...form.getInputProps("mobile")}
-              // error={form.errors.mobile || status === "error"}
-              // onChange={(e) => {
-              //   form.setFieldValue("mobile", e as any);
-              //   if (status === "error") {
-              //     setStatus("idle");
-              //   }
-              // }}
+              error={
+                (form?.formState?.errors?.mobile?.message as string) ||
+                status === "error"
+              }
+              onChange={(e) => {
+                form.setValue("mobile", e as any);
+                if (status === "error") {
+                  setStatus("idle");
+                }
+              }}
               allowNegative={false}
               classNames={{
                 root: StepCss.inputRoot,
@@ -332,19 +335,18 @@ function Agent({ encriptedData }: any) {
               }}
               maxLength={10}
               allowDecimal={false}
-              // onPaste={(event) => {
-              //   if (status === "error") {
-              //     setStatus("idle");
-              //   }
-              //   const pastedText = event.clipboardData.getData("text/plain");
-              //   const trimmedText = pastedText
-              //     .replace(/\D/g, "")
-              //     .replace(/^0+/, "");
-              //   console.log(trimmedText);
-              //   const first10Digits = trimmedText.slice(0, 10);
-
-              //   form.setFieldValue("mobile", first10Digits as any);
-              // }}
+              onPaste={(event) => {
+                form.clearErrors("mobile");
+                if (status === "error") {
+                  setStatus("idle");
+                }
+                const pastedText = event.clipboardData.getData("text/plain");
+                const trimmedText = pastedText
+                  .replace(/\D/g, "")
+                  .replace(/^0+/, "");
+                const first10Digits = trimmedText.slice(0, 10);
+                form.setValue("mobile", Number(first10Digits) as any);
+              }}
               onBlurCapture={(e) =>
                 formValues.mobile == "" &&
                 form.setValue("mobile", undefined as any)

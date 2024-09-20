@@ -12,6 +12,7 @@ import Image from "next/image";
 import React from "react";
 import SubHeading from "./headings/SubHeading";
 import { useMediaQuery } from "@mantine/hooks";
+import { TOPIC_IDS } from "@/app/data/projectDetails";
 // space fixed
 export default function ListingRentAvail({
   projName,
@@ -36,8 +37,22 @@ export default function ListingRentAvail({
 
       <SubHeading text="Unlock the door to your dream home: explore our array of available properties today!" />
       <div className="sm:flex  space-y-4 items-center gap-[28px] sm:gap-[25px] xl:gap-[58px] mt-[18px] sm:mt-[25px] xl:mt-[35px] flex-wrap sm:space-y-0">
-        <Card type="sell" s={s} r={r} projName={projName} block={s === "0"} />
-        <Card type="rent" s={s} r={r} projName={projName} block={r === "0"} />
+        <Card
+          type="sell"
+          s={s}
+          r={r}
+          projName={projName}
+          block={s === "0"}
+          id={TOPIC_IDS.LISTINGS_AVAILABLE}
+        />
+        <Card
+          type="rent"
+          s={s}
+          r={r}
+          projName={projName}
+          block={r === "0"}
+          id={TOPIC_IDS.RENT_LISTINGS_AVAILABLE}
+        />
       </div>
     </div>
   );
@@ -49,12 +64,14 @@ const Card = ({
   s,
   projName,
   block,
+  id,
 }: {
   type: "sell" | "rent";
   r: string;
   s: string;
   projName: string;
   block: boolean;
+  id: string;
 }) => {
   const [, { open: openSuccesPopup }] = useMessagePopup(
     type === "rent" ? "Rlisting" : "Slisting"
@@ -65,6 +82,7 @@ const Card = ({
   const isMobile = useMediaQuery("(max-width: 601px)");
   return (
     <div
+      id={id}
       className={clsx(
         " sm:h-[85px] shadow-[0px_4px_30px_0px_rgba(0,0,0,0.15)] rounded-[10px] relative cursor-pointer p-2 sm:p-0",
         type === "sell"

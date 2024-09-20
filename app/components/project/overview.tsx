@@ -20,6 +20,7 @@ import { formatDateDDMMYYYY } from "@/app/utils/date";
 import Message from "./actions/Message";
 import ReportSection from "./actions/Report";
 import { formatNumberWithSuffix } from "@/app/utils/numbers";
+import { TOPIC_IDS } from "@/app/data/projectDetails";
 
 export default function Overview({
   maxPrice,
@@ -78,6 +79,7 @@ export default function Overview({
       <div className="pl-[2%] pr-[2%] flex justify-start md:justify-between items-start md:items-end w-full mb-[3%] sm:mb-[1%] xl:mb-[1.5%] mt-[3%] sm:mt-[1%] xl:mt-[1.5%] flex-col md:flex-row ">
         <div className="flex justify-start items-start flex-wrap w-[100%] md:w-[80%] ">
           <ProjBasicDetails
+            Id={TOPIC_IDS.PROPERTY_AVAILABLE}
             key="propertyAvailable"
             icon={<PropertyAvailable />}
             title="Property Available"
@@ -85,6 +87,7 @@ export default function Overview({
             className="mr-[5%] sm:mr-[3%] xl:mr-[5%] pt-[2%] mb-[3%] sm:mb-[1.5%] xl:mb-[3%]  "
           />
           <ProjBasicDetails
+            Id={TOPIC_IDS.PROJECT_STATUS}
             key="projectStatus"
             icon={<ProjectStatus />}
             title="Project Status"
@@ -92,6 +95,7 @@ export default function Overview({
             className="mr-[5%] sm:mr-[3%] xl:mr-[5%] pt-[2%] mb-[3%] sm:mb-[1.5%] xl:mb-[3%]  "
           />
           <ProjBasicDetails
+            Id={TOPIC_IDS.LAND_AREA}
             key="totalLandArea"
             icon={<TotalLandArea />}
             title="Project Land Area"
@@ -99,6 +103,7 @@ export default function Overview({
             className="mr-[5%] sm:mr-[3%] xl:mr-[5%] pt-[2%] mb-[3%] sm:mb-[1.5%] xl:mb-[3%]  "
           />
           <ProjBasicDetails
+            Id={TOPIC_IDS.UNITS_IN_PROJECT}
             key="totalUnits"
             icon={<TotalLandArea />} // Adjust icon
             title="Units in Project"
@@ -106,6 +111,7 @@ export default function Overview({
             className="mr-[5%] sm:mr-[3%] xl:mr-[5%] pt-[2%] mb-[3%] sm:mb-[1.5%] xl:mb-[3%]  "
           />
           <ProjBasicDetails
+            Id={TOPIC_IDS.LOCALITY}
             key="locality"
             icon={<Locality />}
             title="Locality"
@@ -113,6 +119,7 @@ export default function Overview({
             className="mr-[5%] sm:mr-[3%] xl:mr-[5%] pt-[2%] mb-[3%] sm:mb-[1.5%] xl:mb-[3%]  "
           />
           <ProjBasicDetails
+            Id={TOPIC_IDS.START_DATE}
             key="startDate"
             icon={<StartDate />}
             title="Start Date"
@@ -120,13 +127,15 @@ export default function Overview({
             className="mr-[5%] pt-[2%] mb-[3%] "
           />
           <ProjBasicDetails
+            Id={TOPIC_IDS.END_DATE}
             key="endDate"
             icon={<EndDate />}
             title="End Date"
             value={formatDateDDMMYYYY(endDate)}
-            className="mr-[5%] sm:mr-[3%] xl:mr-[5%] pt-[2%] mb-[3%] sm:mb-[1.5%] xl:mb-[3%]  "
+            className="mr-[5%] sm:mr-[3%] xl:mr-[5%] pt-[2%] mb-[3%] sm:mb-[1.5%] xl:mb-[3%] "
           />
           <ProjBasicDetails
+            Id={TOPIC_IDS.APPROVED_BY}
             key="ProjectApprovedBy"
             icon={<EndDate />}
             title="Approved By"
@@ -136,6 +145,7 @@ export default function Overview({
           {/* time leke kr rha hu me 10 min ka kaam ko sir betha hai saath mai */}
           {phaseList?.length == 1 && (
             <ProjBasicDetails
+              Id={TOPIC_IDS.RERA_STATUS}
               key="rerastatus"
               icon={<ReraStatusProj />}
               title="RERA Status"
@@ -147,6 +157,7 @@ export default function Overview({
           {phaseList?.length == 1 &&
             PhaseOverview[0]?.rerastatus !== "Not Applied" && (
               <ProjBasicDetails
+                Id={TOPIC_IDS.RERA_ID}
                 key="reraId"
                 icon={<EndDate />}
                 title={

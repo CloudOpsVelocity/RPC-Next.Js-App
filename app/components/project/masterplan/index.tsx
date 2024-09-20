@@ -45,7 +45,10 @@ export default function MasterPlan({
       className="w-[95%] sm:max-h-[678px] xl:max-h-[689px] sm:w-[90%] md:mb-[3%] sm:mb-[5%] scroll-mt-[150px] sm:pt-[30px] "
       id="master-plan"
     >
-      <div className="flex justify-between w-full items-cente mb-[32px] flex-wrap">
+      <div
+        className="flex justify-between w-full items-cente mb-[32px] flex-wrap  scroll-mt-[170px]"
+        id="view-master-plan"
+      >
         <div>
           <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[12px] capitalize break-words text-wrap w-[78%]">
             Master Plan Of{" "}
@@ -54,7 +57,10 @@ export default function MasterPlan({
 
           <SubHeading text="Crafting tomorrow's landscapes, today's masterpiece: your vision, our expertise." />
         </div>
-        <div className="h-full flex justify-center items-center ">
+        <div
+          className="h-full flex justify-center items-center scroll-mt-[160px]"
+          id="download-master-plan"
+        >
           <Button
             icon={
               <svg

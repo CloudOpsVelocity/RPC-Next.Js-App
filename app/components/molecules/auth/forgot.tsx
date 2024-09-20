@@ -188,8 +188,8 @@ const validationSchema = yup.object().shape({
 
   confirmPassword: yup
     .string()
-    .oneOf([yup.ref("password")], "Password not matched")
-    .required("Re- enter New password is required"),
+    .required("Re- enter New password is required")
+    .oneOf([yup.ref("password")], "Password not matched"),
 });
 const Form = ({ status, setStatus }: any) => {
   const form = useForm({

@@ -23,8 +23,8 @@ const schema = yup.object().shape({
     .email("Please enter a valid Email address"),
   password: yup
     .string()
-    .min(6, "Password must be at least 6 Characters long")
-    .required("Password is required"),
+    .required("Password is required")
+    .min(6, "Password must be at least 6 Characters long"),
   mobile: yup
     .number()
     .positive("Mobile number must be positive")
@@ -49,20 +49,20 @@ const agentSchema = yup.object().shape({
   companyName: yup
     .string()
     .max(80, "Name should not exceed 80 characters")
-    .required("Full name is required"),
+    .required("Company name is required"),
   email: yup
     .string()
     .trim()
+    .required("Email is required")
     .matches(
       /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
       "Please enter a valid Email address"
     )
-    .required("Email is required")
     .email("Please enter a valid Email address"),
   password: yup
     .string()
-    .min(6, "Password must be at-least 6 digits")
-    .required("Password is required"),
+    .required("Password is required")
+    .min(6, "Password must be at-least 6 digits"),
   mobile: yup
     .number()
     .positive("Mobile number must be positive")
@@ -83,8 +83,8 @@ export const addressSchema = yup.object().shape({
   address: yup
     .string()
     .trim()
-    .min(2, "Address must be at least 2 characters")
-    .required("Address is required"),
+    .required("Address is required")
+    .min(2, "Address must be at least 2 characters"),
 });
 export const builderFirstStepSchema = yup.object().shape({
   userName: yup

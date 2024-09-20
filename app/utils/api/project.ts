@@ -3,6 +3,7 @@ import { Main, MERGERPROJECT } from "../../validations/types/project";
 import { capitalizeWords } from "../letters";
 import axios from "axios";
 import { paritalUnitParser } from "@/app/(new_routes_seo)/residential/projects/utils/partialUnitParser";
+import { groupUnitsById } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.client";
 
 const getProjectDetails = async (slug: string): Promise<MERGERPROJECT> => {
   const response = await fetch(
@@ -108,11 +109,15 @@ const getAmenties = async () => {
   );
   return data.data;
 };
-const getProjectUntis = async (slug: string) => {
+const getProjectAllUntis = async (slug: string) => {
   const res = await fetch(
-    "test.getrightproperty.com/api/project/projectUnit?projIdEnc=" + slug
+    `https://test.getrightproperty.com/api/project/projectUnit?projIdEnc=${slug}`,
+    {
+      cache: "no-cache",
+    }
   );
-  return await res.json();
+  const data = await res.json();
+  return groupUnitsById(data);
 };
 const getOverViewData = async (slug: string) => {
   const response = await fetch(
@@ -120,6 +125,14 @@ const getOverViewData = async (slug: string) => {
   );
   const data = await response.json();
   return paritalUnitParser(data);
+};
+// create decorator fn to cache api
+const withCache = (fn: any, tags: any, options: any) => {
+  return async (...args: any) => {
+    const key = args[0];
+    const cache = await unstable_cache(fn, tags, options);
+    return cache(key);
+  };
 };
 export {
   getProjectDetails,
@@ -129,24 +142,6 @@ export {
   getNearByLocations,
   getAmenties,
   getOverViewData,
-  getProjectUntis,
+  getProjectAllUntis,
+  withCache,
 };
-
-// const paritalUnitParser = (input: any[]) => {
-//   let result: any = {};
-//   for (const key in input) {
-//     if (Object.prototype.hasOwnProperty.call(input, key)) {
-//       const element = input[key];
-//       if (!result[element.phaseId.toString()]) {
-//         result[element.phaseId.toString()] = {
-//           apartment: {},
-//           villa: {},
-//           plot: {},
-//           rowhouse: {},
-//           villament: {},
-//         };
-//       }
-//     }
-//   }
-//   console.log(result);
-// };

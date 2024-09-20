@@ -43,6 +43,7 @@ export default async function ProjectsDetailsPage({
   slug,
   scrollId,
 }: Props) {
+  console.log(scrollId);
   const { basicData: data, nearByLocations, phaseOverview } = projResponse;
   return (
     <section className="w-full relative break-words ">
@@ -121,7 +122,7 @@ export default async function ProjectsDetailsPage({
             slug={slug}
           />
         </MobileHidden>
-        <Overview {...data} slug={slug} PhaseOverview={phaseOverview} />
+        <Overview {...data} slug={slug} Ph aseOverview={phaseOverview} />
         <ListingRentAvail
           projName={data.projectName}
           r={data.rentListing}
@@ -176,7 +177,7 @@ export default async function ProjectsDetailsPage({
             amenitiesFromDB={amenitiesFromDB}
           />
         </ErrorContainer>
-
+        <div id="near-by" className="scroll-mt-[180px]" />
         {data.lat && data.lang && (
           <LeafMap
             lat={data.lat}

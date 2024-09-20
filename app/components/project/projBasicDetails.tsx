@@ -5,6 +5,7 @@ type props = {
   title: string;
   value?: string | number | null;
   className?: string;
+  Id?: string;
 };
 
 export default function ProjBasicDetails({
@@ -12,10 +13,11 @@ export default function ProjBasicDetails({
   title,
   value,
   className,
+  Id,
 }: props) {
   return (
     value && (
-      <div className={className}>
+      <div className={`${className} scroll-mt-[450px]`} {...(Id && { id: Id })}>
         {icon}
         <p className=" text-[#001F35] text-[13.5px] sm:text-[16px]  xl:text-2xl not-italic   whitespace-nowrap font-semibold">
           {title}

@@ -63,9 +63,17 @@ export default function GalleryBlock({
         />
       ) : (
         <>
-          <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[12px] capitalize break-words text-wrap w-[78%]">
+          <h2
+            className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[12px] capitalize break-words text-wrap w-[78%] scroll-mt-[260px]"
+            id="videos"
+          >
             Gallery of{" "}
-            <span className="text-[#148B16] font-[700] ">{projName}</span>{" "}
+            <span
+              className="text-[#148B16] font-[700]  scroll-mt-[260px]"
+              id="photos"
+            >
+              {projName}
+            </span>{" "}
           </h2>
 
           <SubHeading
@@ -155,7 +163,7 @@ export default function GalleryBlock({
           </div>
           {videos && videos.length > 0 && (
             <>
-              <h3 className="text-[#737579] font-[600] text-[20px] sm:pt-4 lg:text-[24px]   mb-1 sm:mb-[2%] ">
+              <h3 className="text-[#737579] font-[600] text-[20px] sm:pt-4 lg:text-[24px]   mb-1 sm:mb-[2%] scroll-mt-[400px]">
                 Videos
               </h3>
               <div className="flex justify-start items-start w-full gap-[4%] flex-wrap ">
