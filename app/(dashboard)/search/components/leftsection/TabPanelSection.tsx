@@ -4,6 +4,7 @@ import { useIntersection } from "@mantine/hooks";
 import React, { useEffect, useRef } from "react";
 import useSearchFilters from "@/app/hooks/search";
 import ProjectCard from "@/app/test/newui/components/Card";
+import { Console } from "console";
 // import ProjectCard from "../Card";
 
 type Props = {
@@ -39,6 +40,8 @@ export default function TabPanelSection({ mutate, serverData }: Props) {
     }
   }, [entry?.isIntersecting, hasNextPage, fetchMoreData]);
 
+  console.log(serverClientData);
+
   return (
     <div
       className="p-[0%] h-full sm:max-h-[560px] w-full xl:max-h-[700px] max-w-full overflow-y-auto"
@@ -52,7 +55,7 @@ export default function TabPanelSection({ mutate, serverData }: Props) {
         serverClientData?.map((eachOne: any, index: number) => {
           return (
             <ProjectCard
-              key={eachOne.builderId}
+              key={eachOne.projIdEnc + eachOne.propType}
               refetch={refetch}
               data={{ ...eachOne, type: filters.listedBy ?? "proj" }}
               index={index}

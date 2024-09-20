@@ -8,6 +8,7 @@ type OverlayAction =
       content: any;
       id: string;
       title: string;
+      pType:string;
       conType:
         | "nearby"
         | "amenities"
@@ -33,6 +34,7 @@ interface OverlayState {
     | "none"
     | "otherCharges"
     | "hightlights";
+  pType?: string;
 }
 
 // Define the initial state
@@ -42,6 +44,7 @@ const initialState: OverlayState = {
   id: null,
   title: "",
   conType: "none",
+  pType: ""
 };
 
 // Create the reducer function
@@ -105,6 +108,7 @@ const overlayReducer = (
           id: action.id,
           title: action.title,
           conType: action.conType,
+          pType: action.pType,
         };
       }
       return {
@@ -113,6 +117,7 @@ const overlayReducer = (
         id: action.id,
         title: action.title,
         conType: action.conType,
+        pType: action.pType,
       };
     case "CLOSE":
       return initialState;

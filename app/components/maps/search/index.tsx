@@ -19,6 +19,7 @@ import selectedSearchAtom from "@/app/store/search/map";
 import TooltipProj from "./Tooltip";
 import TooltipProp from "./ToolltipProp";
 
+
 const Map = ({ data, lat, lang }: any) => {
   const position: LatLngTuple = [lat, lang];
   console.log(data);
@@ -33,7 +34,7 @@ const Map = ({ data, lat, lang }: any) => {
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
+        /> 
         {/* @ts-ignore */}
         <MapContent data={data} />
       </MapContainer>
@@ -44,7 +45,7 @@ const Map = ({ data, lat, lang }: any) => {
 
 export default Map;
 
-const MapContent = ({ data }: any) => {
+const MapContent = ({ data }: any): JSX.Element | null => {
   const MapIcon = L.icon({
     iconUrl: "/searchmarker.png",
     iconSize: [60, 60],
@@ -54,7 +55,7 @@ const MapContent = ({ data }: any) => {
   const MobileIcon = L.icon({
     iconUrl: "/searchmarker.png",
     iconSize: [30, 30],
-    iconAnchor: [19, 38],
+    iconAnchor: [19, 38], 
     popupAnchor: [0, -38],
   });
   const [selected, setSelectedValue] = useAtom(selectedSearchAtom);
@@ -73,6 +74,8 @@ const MapContent = ({ data }: any) => {
   // 1. FIND IS IT PROPERTY OR PRJECT
   // 2. CREATE TOOLTIPS FOR EACH SECTION
 
+  console.log(selected)
+  // && item.propType
   return (
     data &&
     data.length > 0 &&
@@ -81,25 +84,32 @@ const MapContent = ({ data }: any) => {
       const title = selected?.type;
       const itemId = item[title === "proj" ? "projIdEnc" : "propIdEnc"];
       const selectedId = selected?.reqId;
+      const selectedPropType = selected?.propType;
+      const itemPropType = isProp ? item?.propTypeName : item?.propType;
+
+ 
+      console.log(item)
       return (
         <Marker
           key={Math.random()}
           position={[parseFloat(item?.lat || 0), parseFloat(item?.lang || 0)]}
           eventHandlers={{
             click: () => {
-              setSelectedValue({
-                projOrPropName: isProp ? item.propName : item.projName,
+              setSelectedValue({ 
+                projOrPropName: isProp ? item.propTypeName : item.projName,
                 lat: item.lat,
                 lang: item.lang,
                 type: isProp ? "prop" : "proj",
                 reqId: itemId,
+                propType: itemPropType
               });
             },
           }}
           icon={isMobile ? MobileIcon : MapIcon}
         >
-          {selected && selectedId === itemId && (
+          {selected && selectedId === itemId && itemPropType === selectedPropType && (
             <Tooltip
+              key={"tooltip_"+Math.random()}
               opacity={1}
               permanent
               direction="top"
@@ -107,27 +117,31 @@ const MapContent = ({ data }: any) => {
               className="min-w-fit"
             >
               {!isProp ? (
-                <TooltipProj data={item} />
+                <TooltipProj key={"tooltipProj_"+Math.random()} data={item} />
               ) : (
-                <TooltipProp data={item} />
+                <TooltipProp key={"tooltipProp_"+Math.random()} data={item} />
               )}
             </Tooltip>
           )}
 
+        {selected && selectedId === itemId && itemPropType === selectedPropType && (
           <Tooltip
+            key={"tooltip2_"+Math.random()}
             opacity={1}
             direction="top"
             offset={[10, -35]}
             className="min-w-fit"
           >
             {!isProp ? (
-              <TooltipProj data={item} />
+              <TooltipProj key={"tooltipProj2_"+Math.random()} data={item} />
             ) : (
-              <TooltipProp data={item} />
+              <TooltipProp key={"tooltipProp2_"+Math.random()} data={item} />
             )}
           </Tooltip>
+          )}
         </Marker>
       );
     })
   );
 };
+

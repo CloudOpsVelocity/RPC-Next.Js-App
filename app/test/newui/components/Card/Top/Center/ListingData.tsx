@@ -94,7 +94,7 @@ export default function ListingData({
                 label={type == "proj" ? "Land Area" : "Property Age"}
                 value={
                   type == "proj"
-                    ? `${landArea ?? 0} sqft`
+                    ? `${formatNumberWithSuffix(landArea) ?? 0} sqft`
                     : `${propertyAge ?? 0} Years`
                 }
               />
@@ -182,6 +182,7 @@ export default function ListingData({
                     title: "About Project",
                     type: "OPEN",
                     conType: "readmore",
+                    pType: type
                   });
                 }}
               >

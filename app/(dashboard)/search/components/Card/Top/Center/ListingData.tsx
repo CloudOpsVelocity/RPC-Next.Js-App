@@ -106,7 +106,7 @@ export default function ListingData({
               label="Property Age"
               value={
                 type == "proj"
-                  ? `${landArea ?? 0} Acres`
+                  ? `${formatNumberWithSuffix(landArea) ?? 0} Acres`
                   : `${propertyAge ?? `0 Years`} `
               }
             />

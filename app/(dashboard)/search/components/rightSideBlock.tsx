@@ -22,7 +22,7 @@ const RightSideBlock = ({ serverData }: any) => {
       ? data
       : path.includes("/projects") ||
         path.includes("/listings") ||
-        path.includes("/residential")
+        path.includes("/residential") 
       ? serverData
       : data;
   return (

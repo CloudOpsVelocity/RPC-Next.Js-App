@@ -49,7 +49,7 @@ export default function Results() {
         break;
       case "projectListing":
         {
-          const url = `projIdEnc=${data.id}&listedBy=${data.type.split("")[0]}`;
+          const url = `projIdEnc=${data.id}&listedBy=${data.type.split("")[0]}`; 
           window.open("/search/listing?" + url);
         }
         break;
