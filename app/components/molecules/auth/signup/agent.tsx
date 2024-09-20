@@ -22,6 +22,7 @@ import {
 import StepCss from "@/app/styles/Stepper.module.css";
 import { registerOtherParser } from "@/app/utils/parse";
 import handleTrimAndReplace, {
+  handleTrimAllSpaces,
   handleTrimAndReplaceReactHookForm,
 } from "@/app/utils/input/validations";
 import clsx from "clsx";
@@ -63,6 +64,7 @@ function Agent({ encriptedData }: any) {
     mode: "all",
     criteriaMode: "firstError",
     progressive: true,
+
     // @ts-ignore
     resolver: yupResolver(active === 0 ? agentSchema : addressSchema),
   });
@@ -153,6 +155,8 @@ function Agent({ encriptedData }: any) {
     console.log(value);
   };
   const logo = form.watch("companyLogo");
+  console.log(form.watch("mobile"));
+
   const queryParam = getQueryParamClient();
   return (
     <div
@@ -266,7 +270,7 @@ function Agent({ encriptedData }: any) {
               label="Email"
               placeholder="Enter your email here"
               onBlurCapture={(e) =>
-                handleTrimAndReplaceReactHookForm(e, "email", form.setValue)
+                handleTrimAllSpaces(e.target.value, "email", form.setValue)
               }
               classNames={{
                 root: StepCss.inputRoot,
@@ -300,6 +304,7 @@ function Agent({ encriptedData }: any) {
               }
             />
             <NumberInput
+              valueIsNumericString
               control={form.control}
               name="mobile"
               leftSection={
@@ -347,10 +352,10 @@ function Agent({ encriptedData }: any) {
                 const first10Digits = trimmedText.slice(0, 10);
                 form.setValue("mobile", Number(first10Digits) as any);
               }}
-              onBlurCapture={(e) =>
-                formValues.mobile == "" &&
-                form.setValue("mobile", undefined as any)
-              }
+              // onBlurCapture={(e) =>
+              //   formValues.mobile == "" &&
+              //   form.setValue("mobile", undefined as any)
+              // }
             />
             {status === "error" && (
               <p className=" text-right text-[color:var(--Mandatory,#F00)] text-[12px] xl:text-[15px] italic font-medium leading-[normal]">

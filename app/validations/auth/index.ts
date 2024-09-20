@@ -314,12 +314,11 @@ export const builderSchemaIndex1 = yup.object().shape({
   pincode: yup
     .number()
     .required("PIN code is required")
-    .typeError("PIN code must be a number") // Ensures that the value is a number
-    .integer("PIN code must be an integer")
     .test("len", "Valid 6-digit PIN code is required", (val) => {
-      // Check if the number is exactly 6 digits
       return val !== undefined && val >= 100000 && val <= 999999;
-    }),
+    })
+    .typeError("PIN code is required") // Ensures that the value is a number
+    .integer("PIN code must be an integer"),
 });
 
 const textAreaScema = yup.object().shape({

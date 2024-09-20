@@ -64,6 +64,7 @@ import {
 } from "@/app/images/commonSvgs";
 import {
   handleAllTrimAndReplace,
+  handleTrimAllSpaces,
   handleTrimAndReplaceReactHookForm,
 } from "@/app/utils/input/validations";
 import clsx from "clsx";
@@ -310,19 +311,32 @@ function Builder({ encriptedData }: any) {
       "officeContact",
       "companyStartDate",
     ];
-    const TOP_MULTIPLIER = item === "officeContact" ? 80 : 60;
-    const errorPosition =
-      data.findIndex((element) => element === item) * TOP_MULTIPLIER;
+    const TOP_MULTIPLIER = 60;
+
     const selectedElement = document.getElementById(item);
+
     if (selectedElement && viewport.current) {
-      viewport.current.scrollTo({
-        top: errorPosition,
-        behavior: "smooth",
-      });
+      if (item === "officeContact") {
+        // Scroll to the bottom for 'officeContact'
+        viewport.current.scrollTo({
+          top: selectedElement.scrollHeight, // Scroll to the bottom of the element
+          behavior: "smooth",
+        });
+      } else {
+        // Calculate the position based on TOP_MULTIPLIER for other elements
+        const errorPosition =
+          data.findIndex((element) => element === item) * TOP_MULTIPLIER;
+
+        viewport.current.scrollTo({
+          top: errorPosition,
+          behavior: "smooth",
+        });
+      }
     }
   };
   const queryParam = getQueryParamClient();
   const ref = useRef<HTMLInputElement>(null);
+
   return (
     <>
       {/* {(encriptedData || singupCookie) && <Alert isTouched={form.isDirty()} />} */}
@@ -445,11 +459,7 @@ function Builder({ encriptedData }: any) {
                 placeholder="Enter your email here"
                 // {...form.getInputProps("email")}
                 onBlurCapture={(e) =>
-                  handleTrimAndReplaceReactHookForm(
-                    e,
-                    "email",
-                    newForm.setValue
-                  )
+                  handleTrimAllSpaces(e.target.value, "email", newForm.setValue)
                 }
                 classNames={{
                   root: StepCss.inputRoot,
@@ -520,6 +530,10 @@ function Builder({ encriptedData }: any) {
                 maxLength={10}
                 withErrorStyles
                 allowDecimal={false}
+                // onCut={() => {
+                //   newForm.clearErrors("mobile");
+                //   newForm.setValue("mobile", undefined as any);
+                // }}
                 onPaste={(event) => {
                   newForm.clearErrors("mobile");
                   if (status === "error") {
@@ -530,16 +544,15 @@ function Builder({ encriptedData }: any) {
                   const trimmedText = pastedText
                     .replace(/\D/g, "")
                     .replace(/^0+/, "");
-                  console.log(trimmedText);
                   // Keep only the first 10 digits after processing
                   const first10Digits = trimmedText.slice(0, 10);
 
                   newForm.setValue("mobile", Number(first10Digits) as any);
                 }}
-                onBlurCapture={(e) =>
-                  form.values.mobile === "" &&
-                  newForm.setValue("mobile", undefined as any)
-                }
+                // onBlurCapture={(e) =>
+                //   form.values.mobile === "" &&
+                //   newForm.setValue("mobile", undefined as any)
+                // }
               />
               {status === "error" && (
                 <p className=" text-right text-[color:var(--Mandatory,#F00)] text-[12px] xl:text-[15px] italic font-medium leading-[normal]">
@@ -663,10 +676,10 @@ function Builder({ encriptedData }: any) {
                   hideControls
                   label="Pincode"
                   placeholder="Enter pincode"
-                  onBlurCapture={(e) =>
-                    form.values.pincode === "" &&
-                    newForm.setValue("pincode", undefined as any)
-                  }
+                  // onBlurCapture={(e) =>
+                  //   form.values.pincode === "" &&
+                  //   newForm.setValue("pincode", undefined as any)
+                  // }
                   classNames={{
                     root: StepCss.inputRoot,
                     input: StepCss.textInput,
@@ -1032,11 +1045,11 @@ function Builder({ encriptedData }: any) {
               </span>
             </Link>
             {status === "error" && (
-              <p className="text-center text-[#556477] text-[16px] font-[600]  xl:text-xl not-italic xl:font-medium leading-[normal] mt-2 xl:mt-3 mb-[15px]">
+              <p className="text-center text-[#556477] text-[16px] not-italic xl:font-medium leading-[normal] mt-2 xl:mt-1 mb-[15px]">
                 Forgot Password?{" "}
                 <Link
                   href={{ pathname: "/forgot", search: queryParam.query }}
-                  className="text-[color:var(--Brand-green-primary,#148B16)] text-[16px] font-[600]  xl:text-xl not-italic xl:font-medium leading-[normal] underline"
+                  className="text-[color:var(--Brand-green-primary,#148B16)] text-[16px] font-[600]   not-italic xl:font-medium leading-[normal] underline"
                 >
                   Reset
                 </Link>

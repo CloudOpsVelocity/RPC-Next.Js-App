@@ -31,4 +31,11 @@ export const handleTrimAndReplaceReactHookForm = (
   const value = e.target.value.trim().replace(/\s+/g, " ");
   type === "dis" ? form(fieldName, value) : form(fieldName, value);
 };
+export const handleTrimAllSpaces = (
+  value: string,
+  fieldName: string,
+  setter: any
+) => {
+  setter(fieldName, value.trim().replace(/\s+/g, ""));
+};
 export default handleTrimAndReplace;

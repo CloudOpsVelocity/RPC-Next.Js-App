@@ -13,7 +13,10 @@ import { individualSchema } from "@/app/validations/auth";
 import { useState } from "react";
 import Success from "../success";
 import { BackSvg, EyeClosed, EyeOpen } from "@/app/images/commonSvgs";
-import { handleTrimAndReplaceReactHookForm } from "@/app/utils/input/validations";
+import {
+  handleTrimAllSpaces,
+  handleTrimAndReplaceReactHookForm,
+} from "@/app/utils/input/validations";
 import StepCss from "@/app/styles/Stepper.module.css";
 import clsx from "clsx";
 import {
@@ -123,7 +126,7 @@ function Individual() {
               label="Email"
               placeholder="Enter your email here"
               onBlurCapture={(e) =>
-                handleTrimAndReplaceReactHookForm(e, "email", form.setValue)
+                handleTrimAllSpaces(e.target.value, "email", form.setValue)
               }
               classNames={{
                 root: StepCss.inputRoot,
