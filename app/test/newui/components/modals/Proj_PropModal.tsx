@@ -20,6 +20,7 @@ const Dialog: React.FC = () => {
     id: id ?? "",
     isOpen: isOpen,
     conType: type ?? "",
+    pType: "proj",
   });
 
   const dialogRef = useRef<HTMLDivElement>(null);

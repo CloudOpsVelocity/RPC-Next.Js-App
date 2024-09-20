@@ -7,7 +7,8 @@ export function middleware(request: NextRequest) {
   const response = NextResponse.next();
   const signUpTokenA = cookies().get("resume_signup_tokena")?.value;
   const signUpTokenB = cookies().get("resume_signup_tokenb")?.value;
-
+  const purpose = request.headers.get("purpose");
+  console.log(purpose);
   const excludedPathAgent = "/register/agent";
   const excludedPathBuilder = "/register/builder";
   console.log(excludedPathBuilder);
