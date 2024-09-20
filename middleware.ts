@@ -22,6 +22,7 @@ export function middleware(request: NextRequest) {
     signUpTokenB &&
     ![excludedPathBuilder, "/"].includes(request.nextUrl.pathname)
   ) {
+    console.log("token delte for path " + request.nextUrl.pathname);
     response.cookies.delete("resume_signup_tokenb");
     return response;
   }
