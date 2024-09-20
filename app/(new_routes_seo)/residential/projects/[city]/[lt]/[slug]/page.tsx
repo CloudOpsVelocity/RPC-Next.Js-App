@@ -3,8 +3,10 @@ import path from "path";
 import fs from "fs";
 import {
   getAmenties,
+  getProjectAllUntis,
   getProjectDetails,
   getProjectUnits,
+  withCache,
 } from "@/app/utils/api/project";
 import { notFound } from "next/navigation";
 import ProjectsDetailsPage from "@/app/(dashboard)/abc/[city]/[local]/[slug]/Page/ProjectDetailsPage";
@@ -45,18 +47,17 @@ export default async function Page({ params }: Props) {
     notFound();
   }
   const { PJ: slug } = await extractProjectParamsValues(value);
-
+  let overview = null;
   const [projResponse, amenitiesFromDB] = await Promise.all([
     getProjectDetails(slug as string),
     getAmenties(),
-    // getProjectUnits(slug as string),
   ]);
+
   return (
     <ProjectsDetailsPage
       projResponse={projResponse}
       amenitiesFromDB={amenitiesFromDB}
       slug={slug as string}
-      
     />
   );
 }

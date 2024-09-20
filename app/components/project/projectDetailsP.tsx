@@ -126,6 +126,7 @@ export default function ProjectDetailsP({
                 Id="possession-date"
               />
               <ProjBasicDetails
+                Id="all-unit-types"
                 key="landArea"
                 icon={<TotalLandArea />}
                 title="Land Area"
