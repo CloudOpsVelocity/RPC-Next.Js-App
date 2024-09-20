@@ -79,7 +79,7 @@ function Builder({ encriptedData }: any) {
     "idle" | "pending" | "success" | "error" | "otp"
   >("idle");
   const singupCookie = getCookie("resume_signup_tokenb")?.toString();
-  const [active, setActive] = useState(encriptedData || singupCookie ? 1 : 2);
+  const [active, setActive] = useState(encriptedData || singupCookie ? 1 : 0);
   const router = useRouter();
   const [opened, { open, close }] = useDisclosure(false);
   const { registerOtherDetails, register, login, saveStep } = useAuth({
