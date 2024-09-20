@@ -1,24 +1,11 @@
-import React, { Suspense } from "react";
-import ServerCompo from "./components/Section/ServerCompo";
+import EnhancedFooter from "./components/Section/Footer";
+import EnhancedIndianFooter from "./components/Section/Footer2";
 
-type Props = {};
-
-export default async function Page({}: Props) {
-  const todos = await getTodos();
+export default async function Page() {
   return (
     <div>
-      {/* {todos.map((todo) => (
-        <li>{todo.name}</li>
-      ))} */}
-      {/* <Suspense fallback={<div>Loading...</div>}>
-        <ServerCompo />
-      </Suspense> */}
+      <EnhancedFooter />
+      <EnhancedIndianFooter />
     </div>
   );
 }
-
-const getTodos = async () => {
-  const res = await fetch("https://jsonplaceholder.typicode.com/users");
-  const data = await res.json();
-  return data;
-};

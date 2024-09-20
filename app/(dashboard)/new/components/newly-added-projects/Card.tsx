@@ -18,13 +18,13 @@ export default function Card({ item }: Props) {
     window.open(url, "_blank");
   };
   // let urlBuilder=`${process.env.NEXT_PUBLIC_BACKEND_URL}/builder/${item.builderId}`;
-  let builderName = item.builderName.toLowerCase().split(" ").join("%2D");
-  let urlBuilder=`${process.env.NEXT_PUBLIC_BACKEND_URL}/builders/bengaluru/${builderName}`;
-  
-  const builderiRedirect=(e:any)=>{
+  let builderName = item?.builderName?.toLowerCase().split(" ").join("%2D");
+  let urlBuilder = `${process.env.NEXT_PUBLIC_BACKEND_URL}/builders/bengaluru/${builderName}`;
+
+  const builderiRedirect = (e: any) => {
     e.stopPropagation();
-    window.open(urlBuilder, "_blank"); 
-  }
+    window.open(urlBuilder, "_blank");
+  };
 
   // console.log(item)
   return (
@@ -33,16 +33,19 @@ export default function Card({ item }: Props) {
       className="w-[310px] sm:w-[508px] xl:w-[631px] h-[326px] sm:h-[294px] xl:h-[368px] shrink-0 relative"
     >
       <BackgroundImage src={item.coverUrl} radius="sm" h={"100%"}>
-       {/*  {item.builderLogo && (
+        {/*  {item.builderLogo && (
           <img
             src={item.builderLogo}
             alt=""
             className="w-[45px] h-[45px] sm:w-[54px] sm:h-[54px] xl:w-[67px] xl:h-[67px] object-cover top-[12px] left-[12px] relative"
           />
         )} */}
-        {item.reraStatus === "Recieved" || "Applied"  &&  <Image src={"/r.svg"} alt="rera" width={100} height={100} />}
-       
-       {/*  <p className="text-green-600">{item.rerastatus}</p> */}
+        {item.reraStatus === "Recieved" ||
+          ("Applied" && (
+            <Image src={"/r.svg"} alt="rera" width={100} height={100} />
+          ))}
+
+        {/*  <p className="text-green-600">{item.rerastatus}</p> */}
 
         <div className="absolute right-0 top-0 w-full sm:w-[560px] h-full p-[12px] shrink-0 bg-gradient-to-t sm:bg-gradient-to-l from-[#00121F] via-[rgba(59,70,98,0.86)] to-[#565d700a] text-right flex flex-col justify-end sm:justify-between">
           <div>
@@ -78,7 +81,13 @@ export default function Card({ item }: Props) {
                 201 units
               </p> */}
               <span className=" no-underline text-[#ffff]">Builder Name: </span>
-              <button onClick={(e)=>builderiRedirect(e)} className="text-[#E3AC00] text-[12px] sm:text-[14px] xl:text-[18px] not-italic font-bold leading-[normal] tracking-[0.44px] underline"> {item.builderName}</button>
+              <button
+                onClick={(e) => builderiRedirect(e)}
+                className="text-[#E3AC00] text-[12px] sm:text-[14px] xl:text-[18px] not-italic font-bold leading-[normal] tracking-[0.44px] underline"
+              >
+                {" "}
+                {item.builderName}
+              </button>
               <p className="text-white text-[12px] sm:text-[14px] not-italic font-bold leading-[normal] tracking-[0.44px]">
                 Project Land Area: {item.landArea} Acres
               </p>
