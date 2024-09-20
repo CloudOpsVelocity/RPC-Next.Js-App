@@ -7,22 +7,21 @@ export function middleware(request: NextRequest) {
   const response = NextResponse.next();
   const signUpTokenA = cookies().get("resume_signup_tokena")?.value;
   const signUpTokenB = cookies().get("resume_signup_tokenb")?.value;
-  const purpose = request.headers.get("purpose");
-  console.log(purpose);
+  const referer = request.headers.get("referer");
+  const url = request.url;
+  console.log(referer, url);
   const excludedPathAgent = "/register/agent";
   const excludedPathBuilder = "/register/builder";
   console.log(excludedPathBuilder);
-  if (
-    signUpTokenA &&
-    ![excludedPathAgent, "/"].includes(request.nextUrl.pathname)
-  ) {
+  if (signUpTokenA && ![excludedPathAgent].includes(request.nextUrl.pathname)) {
     response.cookies.delete("resume_signup_tokena");
     return response;
   }
   if (
     signUpTokenB &&
-    ![excludedPathBuilder, "/"].includes(request.nextUrl.pathname)
+    ![excludedPathBuilder].includes(request.nextUrl.pathname)
   ) {
+    console.log(request);
     console.log("token delte for path " + request.nextUrl.pathname);
     response.cookies.delete("resume_signup_tokenb");
     return response;
