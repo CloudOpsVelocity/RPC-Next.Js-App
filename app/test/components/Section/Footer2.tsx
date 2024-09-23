@@ -1,260 +1,214 @@
-"use client";
-import { useState } from "react";
+import React from "react";
+import { GrpDarkLogoSvg } from "@/app/images/getrightLogo";
+import {
+  FaAppStoreIos,
+  FaFacebook,
+  FaInstagram,
+  FaTwitter,
+  FaYoutube,
+  FaLinkedin,
+  FaPhoneAlt,
+} from "react-icons/fa";
+import { IoLogoGooglePlaystore } from "react-icons/io5";
+import { FaLocationDot } from "react-icons/fa6";
 
-export default function EnhancedIndianFooter() {
-  const [email, setEmail] = useState("");
+const socialIcons = [
+  { name: "facebook", icon: <FaFacebook size={24} /> },
+  { name: "instagram", icon: <FaInstagram size={24} /> },
+  { name: "twitter", icon: <FaTwitter size={24} /> },
+  { name: "youtube", icon: <FaYoutube size={24} /> },
+  { name: "linkedin", icon: <FaLinkedin size={24} /> },
+];
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Subscribed with email:", email);
-    setEmail("");
-  };
+const sections = [
+  {
+    title: "New Projects",
+    links: ["New Delhi", "Bangalore", "Chennai", "Mumbai", "Hyderabad"],
+  },
+  {
+    title: "Properties",
+    links: [
+      "For Sale",
+      "For Rent",
+      "New Developments",
+      "Commercial",
+      "Vacation Rentals",
+    ],
+  },
+  {
+    title: "Resources",
+    links: [
+      "Mortgage Calculator",
+      "Market Trends",
+      "Buying Guide",
+      "Selling Tips",
+      "Home Valuation",
+    ],
+  },
+  {
+    title: "Company",
+    links: ["About Us", "Our Team", "Careers", "Press", "Contact"],
+  },
+];
 
+const Subscribe = () => (
+  <form className="mt-4 sm:flex sm:max-w-md">
+    <label htmlFor="email-address" className="sr-only">
+      Email address
+    </label>
+    <input
+      type="email"
+      name="email-address"
+      id="email-address"
+      autoComplete="email"
+      required
+      className="w-full min-w-0 appearance-none rounded-md border-0 bg-white/5 px-3 py-1.5 text-base text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-500 sm:w-64 sm:text-sm sm:leading-6"
+      placeholder="Enter your email"
+    />
+    <div className="mt-4 sm:ml-4 sm:mt-0 sm:flex-shrink-0">
+      <button
+        type="submit"
+        className="flex w-full items-center justify-center rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
+      >
+        Subscribe
+      </button>
+    </div>
+  </form>
+);
+
+const EnhancedFooter2 = () => {
   return (
-    <footer className="bg-[#f1f1f1] text-gray-800">
-      {/* <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
-        <div className="xl:grid xl:grid-cols-4 xl:gap-8">
+    <footer className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-gray-300">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+        <div className="xl:grid xl:grid-cols-3 xl:gap-8">
           <div className="space-y-8 xl:col-span-1">
-            <img
-              className="h-10"
-              src="/placeholder.svg?height=40&width=150"
-              alt="Company name"
-            />
-            <p className="text-gray-600 text-base">
-              Your trusted partner in Indian real estate since 1990.
+            <GrpDarkLogoSvg className="w-40 h-auto" />
+            <p className="text-lg">
+              Exceptional service, lasting relationships. Your trusted property
+              partner.
             </p>
             <div className="flex space-x-6">
-              {["facebook", "twitter", "linkedin", "instagram", "youtube"].map(
-                (social) => (
-                  <a
-                    key={social}
-                    href="#"
-                    className="text-gray-400 hover:text-[#0073C6]"
-                  >
-                    <span className="sr-only">{social}</span>
-                    <svg
-                      className="h-6 w-6"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </a>
-                )
-              )}
+              {socialIcons.map(({ name, icon }) => (
+                <a
+                  key={name}
+                  href="/"
+                  className="text-gray-400 hover:text-blue-400 transition-colors duration-300"
+                >
+                  <span className="sr-only">{name}</span>
+                  {icon}
+                </a>
+              ))}
             </div>
           </div>
-          <div className="mt-12 grid grid-cols-2 gap-8 xl:mt-0 xl:col-span-3">
+          <div className="mt-12 grid grid-cols-2 gap-8 xl:mt-0 xl:col-span-2">
             <div className="md:grid md:grid-cols-2 md:gap-8">
-              <div>
-                <h3 className="text-sm font-semibold text-[#0073C6] tracking-wider uppercase">
-                  New Projects in India
-                </h3>
-                <ul className="mt-4 space-y-4">
-                  {[
-                    "New Delhi",
-                    "Mumbai",
-                    "Chennai",
-                    "Pune",
-                    "Noida",
-                    "Gurgaon",
-                    "Bangalore",
-                    "Ahmedabad",
-                  ].map((city) => (
-                    <li key={city}>
-                      <a
-                        href="#"
-                        className="text-base text-gray-600 hover:text-[#148B16]"
-                      >
-                        New Projects in {city}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="mt-12 md:mt-0">
-                <h3 className="text-sm font-semibold text-[#0073C6] tracking-wider uppercase">
-                  Properties in India
-                </h3>
-                <ul className="mt-4 space-y-4">
-                  {[
-                    "New Delhi",
-                    "Mumbai",
-                    "Chennai",
-                    "Pune",
-                    "Noida",
-                    "Gurgaon",
-                    "Bangalore",
-                    "Ahmedabad",
-                  ].map((city) => (
-                    <li key={city}>
-                      <a
-                        href="#"
-                        className="text-base text-gray-600 hover:text-[#148B16]"
-                      >
-                        Property in {city}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              {sections.slice(0, 2).map((section) => (
+                <div key={section.title}>
+                  <h3 className="text-sm font-semibold text-blue-400 tracking-wider uppercase">
+                    {section.title}
+                  </h3>
+                  <ul className="mt-4 space-y-4">
+                    {section.links.map((link) => (
+                      <li key={link}>
+                        <a
+                          href="/"
+                          className="hover:text-blue-300 transition-colors duration-300"
+                        >
+                          {link}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </div>
             <div className="md:grid md:grid-cols-2 md:gap-8">
-              <div>
-                <h3 className="text-sm font-semibold text-[#0073C6] tracking-wider uppercase">
-                  Resources
-                </h3>
-                <ul className="mt-4 space-y-4">
-                  {[
-                    "Buying Guide",
-                    "Selling Tips",
-                    "Home Loans",
-                    "Property Rates",
-                    "Legal Advice",
-                    "Vastu Shastra",
-                  ].map((item) => (
-                    <li key={item}>
-                      <a
-                        href="#"
-                        className="text-base text-gray-600 hover:text-[#148B16]"
-                      >
-                        {item}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="mt-12 md:mt-0">
-                <h3 className="text-sm font-semibold text-[#0073C6] tracking-wider uppercase">
-                  Company
-                </h3>
-                <ul className="mt-4 space-y-4">
-                  {[
-                    "About Us",
-                    "Our Team",
-                    "Careers",
-                    "Press",
-                    "Contact",
-                    "Testimonials",
-                  ].map((item) => (
-                    <li key={item}>
-                      <a
-                        href="#"
-                        className="text-base text-gray-600 hover:text-[#148B16]"
-                      >
-                        {item}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              {sections.slice(2).map((section) => (
+                <div key={section.title}>
+                  <h3 className="text-sm font-semibold text-blue-400 tracking-wider uppercase">
+                    {section.title}
+                  </h3>
+                  <ul className="mt-4 space-y-4">
+                    {section.links.map((link) => (
+                      <li key={link}>
+                        <a
+                          href="/"
+                          className="hover:text-blue-300 transition-colors duration-300"
+                        >
+                          {link}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </div>
           </div>
         </div>
-        <div className="mt-12 border-t border-gray-200 pt-8">
+        <div className="mt-12 border-t border-gray-700 pt-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
-              <h3 className="text-sm font-semibold text-[#0073C6] tracking-wider uppercase">
+              <h3 className="text-sm font-semibold text-blue-400 tracking-wider uppercase">
                 Subscribe to our newsletter
               </h3>
-              <p className="mt-4 text-base text-gray-600">
-                Stay updated with the latest property listings and real estate
-                news in India.
+              <p className="mt-4 text-base">
+                Stay updated with the latest property trends and listings.
               </p>
-              <form
-                className="mt-4 sm:flex sm:max-w-md"
-                onSubmit={handleSubmit}
-              >
-                <label htmlFor="email-address" className="sr-only">
-                  Email address
-                </label>
-                <input
-                  type="email"
-                  name="email-address"
-                  id="email-address"
-                  autoComplete="email"
-                  required
-                  className="appearance-none min-w-0 w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0073C6] focus:border-[#0073C6]"
-                  placeholder="Enter your email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <div className="mt-3 rounded-md sm:mt-0 sm:ml-3 sm:flex-shrink-0">
-                  <button
-                    type="submit"
-                    className="w-full bg-[#148B16] border border-transparent rounded-md py-2 px-4 flex items-center justify-center text-base font-medium text-white hover:bg-[#0f6b11] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#148B16]"
-                  >
-                    Subscribe
-                  </button>
-                </div>
-              </form>
+              <Subscribe />
             </div>
             <div>
-              <h3 className="text-sm font-semibold text-[#0073C6] tracking-wider uppercase">
+              <h3 className="text-sm font-semibold text-blue-400 tracking-wider uppercase">
                 Download our app
               </h3>
-              <p className="mt-4 text-base text-gray-600">
-                Get instant property alerts and explore Indian real estate on
-                the go.
+              <p className="mt-4 text-base">
+                Get instant property alerts on the go.
               </p>
               <div className="mt-4 flex space-x-4">
                 <a
-                  href="#"
-                  className="flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-[#0073C6] hover:bg-[#005a9e]"
+                  href="/"
+                  className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
                 >
-                  <svg
-                    className="h-6 w-6 mr-2"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12c0-5.523-4.477-10-10-10z" />
-                  </svg>
+                  <FaAppStoreIos className="mr-2" />
                   App Store
                 </a>
                 <a
-                  href="#"
-                  className="flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-[#0073C6] hover:bg-[#005a9e]"
+                  href="/"
+                  className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
                 >
-                  <svg
-                    className="h-6 w-6 mr-2"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12c0-5.523-4.477-10-10-10z" />
-                  </svg>
+                  <IoLogoGooglePlaystore className="mr-2" />
                   Google Play
                 </a>
               </div>
             </div>
           </div>
         </div>
-        <div className="mt-8 border-t border-gray-200 pt-8 md:flex md:items-center md:justify-between">
+        <div className="mt-8 border-t border-gray-700 pt-8 md:flex md:items-center md:justify-between">
           <div className="flex space-x-6 md:order-2">
-            <a href="#" className="text-gray-400 hover:text-[#0073C6]">
-              <span className="sr-only">Privacy Policy</span>
-              <span className="text-sm">Privacy Policy</span>
-            </a>
-            <a href="#" className="text-gray-400 hover:text-[#0073C6]">
-              <span className="sr-only">Terms of Service</span>
-              <span className="text-sm">Terms of Service</span>
-            </a>
-            <a href="#" className="text-gray-400 hover:text-[#0073C6]">
-              <span className="sr-only">Cookie Policy</span>
-              <span className="text-sm">Cookie Policy</span>
+            <button className="text-gray-400 hover:text-blue-400 inline-flex items-center">
+              <FaLocationDot className="mr-2" /> Whitefield, Bengaluru-560066
+            </button>
+            <a
+              href="tel:+918884440963"
+              className="text-gray-400 hover:text-blue-400 inline-flex items-center"
+            >
+              <FaPhoneAlt className="mr-2" /> +91-8884440963
             </a>
           </div>
-          <p className="mt-8 text-base text-gray-400 md:mt-0 md:order-1">
-            &copy; 2023 Indian Real Estate Company. All rights reserved.
+          <p className="mt-8 text-base md:mt-0 md:order-1">
+            &copy; 2024 GetRightProperty. All rights reserved. A product of{" "}
+            <a
+              href="https://rpclan.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-400 hover:text-blue-300"
+            >
+              RPCLAN SERVICES PVT.LTD
+            </a>
           </p>
         </div>
-      </div> */}
+      </div>
     </footer>
   );
-}
+};
+
+export default EnhancedFooter2;

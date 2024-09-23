@@ -149,6 +149,7 @@ function Individual() {
                 label: StepCss.mlabelCss,
               }}
               required
+              maxLength={61}
               size="lg"
               className="w-[100%] mb-[3%] "
               label="Password"

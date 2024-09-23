@@ -20,11 +20,13 @@ const schema = yup.object().shape({
       /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
       "Please enter a valid Email address"
     )
-    .email("Please enter a valid Email address"),
+    .email("Please enter a valid Email address")
+    .max(40, "Email should not exceed 40 characters"),
   password: yup
     .string()
     .required("Password is required")
-    .min(6, "Password must be at least 6 Characters long"),
+    .min(6, "Password must be at least 6 Characters long")
+    .max(60, "Passwrod should not exceed 40 characters"),
   mobile: yup
     .number()
     .positive("Mobile number must be positive")
