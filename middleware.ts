@@ -7,9 +7,6 @@ export function middleware(request: NextRequest) {
   const response = NextResponse.next();
   const signUpTokenA = cookies().get("resume_signup_tokena")?.value;
   const signUpTokenB = cookies().get("resume_signup_tokenb")?.value;
-  const referer = request.headers.get("referer");
-  const url = request.url;
-  console.log(referer, url);
   const excludedPathAgent = "/register/agent";
   const excludedPathBuilder = "/register/builder";
   if (signUpTokenA && ![excludedPathAgent].includes(request.nextUrl.pathname)) {
