@@ -12,7 +12,6 @@ export function middleware(request: NextRequest) {
   console.log(referer, url);
   const excludedPathAgent = "/register/agent";
   const excludedPathBuilder = "/register/builder";
-  console.log(excludedPathBuilder);
   if (signUpTokenA && ![excludedPathAgent].includes(request.nextUrl.pathname)) {
     response.cookies.delete("resume_signup_tokena");
     return response;
@@ -22,7 +21,6 @@ export function middleware(request: NextRequest) {
     ![excludedPathBuilder].includes(request.nextUrl.pathname)
   ) {
     console.log(request);
-    console.log("token delte for path " + request.nextUrl.pathname);
     response.cookies.delete("resume_signup_tokenb");
     return response;
   }
