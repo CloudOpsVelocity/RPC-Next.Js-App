@@ -9,7 +9,11 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import AuthPopup from "../authPopup";
 import { useDisclosure } from "@mantine/hooks";
-import { individualSchema } from "@/app/validations/auth";
+import {
+  individualSchema,
+  MAX_LENGTH_EMAIL,
+  MAX_LENTH_TEXT,
+} from "@/app/validations/auth";
 import { useState } from "react";
 import Success from "../success";
 import { BackSvg, EyeClosed, EyeOpen } from "@/app/images/commonSvgs";
@@ -66,7 +70,6 @@ function Individual() {
     setStatus("idle");
     close();
   };
-  console.log(values);
   const OtpCallback = async () => {
     const data = await login({
       password: values.password,
@@ -105,6 +108,7 @@ function Individual() {
               className="w-[100%] mb-[3%] "
               label="Your Name"
               placeholder="Enter your name here"
+              maxLength={MAX_LENTH_TEXT}
               // {...form.getInputProps("name")}
               onBlurCapture={(e) =>
                 handleTrimAndReplaceReactHookForm(e, "name", form.setValue)
@@ -128,6 +132,7 @@ function Individual() {
               onBlurCapture={(e) =>
                 handleTrimAllSpaces(e.target.value, "email", form.setValue)
               }
+              maxLength={MAX_LENGTH_EMAIL}
               classNames={{
                 root: StepCss.inputRoot,
                 input: StepCss.textInput,
@@ -149,7 +154,7 @@ function Individual() {
                 label: StepCss.mlabelCss,
               }}
               required
-              maxLength={61}
+              maxLength={MAX_LENTH_TEXT}
               size="lg"
               className="w-[100%] mb-[3%] "
               label="Password"

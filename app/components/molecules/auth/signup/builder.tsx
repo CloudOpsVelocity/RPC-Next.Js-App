@@ -48,6 +48,10 @@ import {
   builderFirstStepSchema,
   builderSchema,
   builderSchemaIndex1,
+  MAX_LENGTH_ADDRESS,
+  MAX_LENGTH_COMPANY_NAME,
+  MAX_LENGTH_EMAIL,
+  MAX_LENTH_TEXT,
   textAreaScema,
 } from "@/app/validations/auth";
 import CountryInput from "@/app/components/atoms/CountryInput";
@@ -448,6 +452,7 @@ function Builder({ encriptedData }: any) {
                   label: StepCss.mlabelCss,
                 }}
                 mt={"md"}
+                maxLength={MAX_LENGTH_COMPANY_NAME}
               />
               <TextInput
                 name="email"
@@ -467,6 +472,7 @@ function Builder({ encriptedData }: any) {
                   error: StepCss.errorMsg,
                   label: StepCss.mlabelCss,
                 }}
+                maxLength={MAX_LENGTH_EMAIL}
               />
               <PasswordInput
                 name="password"
@@ -493,6 +499,7 @@ function Builder({ encriptedData }: any) {
                     newForm.setValue
                   )
                 }
+                maxLength={MAX_LENTH_TEXT}
               />
               <NumberInput
                 name="mobile"
@@ -615,6 +622,7 @@ function Builder({ encriptedData }: any) {
                     newForm.setValue
                   );
                 }}
+                maxLength={MAX_LENGTH_ADDRESS}
               />
 
               <Select
@@ -744,6 +752,7 @@ function Builder({ encriptedData }: any) {
                       ref?.current?.focus();
                     }
                   }}
+                  maxLength={MAX_LENGTH_COMPANY_NAME}
                 />
                 <MultiSelect
                   name="branch"
@@ -776,6 +785,7 @@ function Builder({ encriptedData }: any) {
                     }
                   }}
                   hidePickedOptions
+                  maxValues={31}
                   withScrollArea={false}
                 />
                 <DateInput
@@ -899,6 +909,7 @@ function Builder({ encriptedData }: any) {
                       newForm.setValue
                     );
                   }}
+                  maxLength={18}
                 />
               </ScrollArea>
             </Stepper.Step>

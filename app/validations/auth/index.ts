@@ -21,12 +21,12 @@ const schema = yup.object().shape({
       "Please enter a valid Email address"
     )
     .email("Please enter a valid Email address")
-    .max(40, "Email should not exceed 40 characters"),
+    .max(50, "Email should not exceed 50 characters"),
   password: yup
     .string()
     .required("Password is required")
     .min(6, "Password must be at least 6 Characters long")
-    .max(60, "Passwrod should not exceed 40 characters"),
+    .max(40, "Password should not exceed 40 characters"),
   mobile: yup
     .number()
     .positive("Mobile number must be positive")
@@ -46,7 +46,7 @@ const schema = yup.object().shape({
 const agentSchema = yup.object().shape({
   userName: yup
     .string()
-    .max(80, "Name should not exceed 80 characters")
+    .max(40, "Name should not exceed 40 characters")
     .required("Full name is required"),
   companyName: yup
     .string()
@@ -60,11 +60,13 @@ const agentSchema = yup.object().shape({
       /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
       "Please enter a valid Email address"
     )
-    .email("Please enter a valid Email address"),
+    .email("Please enter a valid Email address")
+    .max(50, "Email should not exceed 50 characters"),
   password: yup
     .string()
     .required("Password is required")
-    .min(6, "Password must be at-least 6 digits"),
+    .min(6, "Password must be at-least 6 digits")
+    .max(40, "Password should not exceed 40 characters"),
   mobile: yup
     .number()
     .positive("Mobile number must be positive")
@@ -86,7 +88,8 @@ export const addressSchema = yup.object().shape({
     .string()
     .trim()
     .required("Address is required")
-    .min(2, "Address must be at least 2 characters"),
+    .min(2, "Address must be at least 2 characters")
+    .max(150, "Address should not exceed 150 characters"),
 });
 export const builderFirstStepSchema = yup.object().shape({
   userName: yup
@@ -101,11 +104,13 @@ export const builderFirstStepSchema = yup.object().shape({
       /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
       "Please enter a valid Email address"
     )
-    .email("Please enter a valid Email address"),
+    .email("Please enter a valid Email address")
+    .max(50, "Email should not exceed 50 characters"),
   password: yup
     .string()
     .required("Password is required")
-    .min(6, "Password must be at-least 6 digits"),
+    .min(6, "Password must be at-least 6 digits")
+    .max(40, "Password should not exceed 40 characters"),
   mobile: yup
     .number()
     .required("Mobile number is required")
@@ -127,7 +132,8 @@ export const agentSchema1 = yup.object().shape({
     .string()
     .trim()
     .min(2, "Address must be at least 2 characters")
-    .required("Address is required"),
+    .required("Address is required")
+    .max(150, "Address should not exceed 150 characters"),
   companyName: yup
     .string()
     .trim()
@@ -149,11 +155,13 @@ const builderSchema = yup.object().shape({
     .string()
     .trim()
     .required("Builder company name is required")
-    .min(2, "Builder company came by must be at least 2 characters"),
+    .min(2, "Builder company came by must be at least 2 characters")
+    .max(80, "Name should not exceed 80 characters"),
   branch: yup
     .array()
     .min(1, "At least one branch must be selected")
-    .required("At least one branch must be selected"),
+    .required("At least one branch must be selected")
+    .max(30, "Maximum 30 branches are allowed"),
 
   ceoName: yup
     .array()
@@ -310,7 +318,10 @@ const builderSchema = yup.object().shape({
   companyStartDate: yup.date().required("Company start date is required"),
 });
 export const builderSchemaIndex1 = yup.object().shape({
-  address: yup.string().min(1, "Office Address is required"),
+  address: yup
+    .string()
+    .min(1, "Office Address is required")
+    .max(150, "Address should not exceed 150 characters"),
   state: yup.string().trim().required("State is required"),
   city: yup.string().trim().required("City is required"),
   pincode: yup
@@ -333,6 +344,11 @@ const textAreaScema = yup.object().shape({
     .max(5000, "Description should not exceed 5000 characters")
     .required("Builder's Description is required"),
 });
+export const MAX_LENTH_TEXT = 41;
+export const MAX_LENTH_MOBILE = 10;
+export const MAX_LENGTH_EMAIL = 51;
+export const MAX_LENGTH_COMPANY_NAME = 81;
+export const MAX_LENGTH_ADDRESS = 151;
 export {
   schema as individualSchema,
   agentSchema,

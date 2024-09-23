@@ -18,6 +18,7 @@ import {
 } from "@/app/hooks/custom/useRedirect";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { MAX_LENTH_TEXT } from "@/app/validations/auth";
 const schema = yup.object().shape({
   username: yup
     .number()
@@ -34,7 +35,7 @@ const schema = yup.object().shape({
     .string()
     .required("Password is required")
     .min(6, "Password must be at least 6 characters")
-    .max(128, "Password must be under 128 characters"),
+    .max(40, "Password must be under 40 characters"),
 });
 
 function Login({ params }: any) {
@@ -116,6 +117,7 @@ function Login({ params }: any) {
           visibilityToggleIcon={({ reveal }) =>
             reveal ? <EyeOpen /> : <EyeClosed />
           }
+          maxLength={MAX_LENTH_TEXT}
           // {...form.getInputProps("password")}
           onBlurCapture={(e) =>
             handleTrimAndReplaceReactHookForm(e, "password", setValue)

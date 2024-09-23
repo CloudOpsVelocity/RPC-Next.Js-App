@@ -29,7 +29,14 @@ import clsx from "clsx";
 import { getQueryParamClient } from "@/app/hooks/custom/useRedirect";
 import LoginSignupTabs from "@/app/(auth)/Components/LoginSignup";
 import { useForm } from "react-hook-form";
-import { addressSchema, agentSchema } from "@/app/validations/auth";
+import {
+  addressSchema,
+  agentSchema,
+  MAX_LENGTH_ADDRESS,
+  MAX_LENGTH_COMPANY_NAME,
+  MAX_LENGTH_EMAIL,
+  MAX_LENTH_TEXT,
+} from "@/app/validations/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { getCookie } from "cookies-next";
 import Alert from "./Alert";
@@ -155,7 +162,6 @@ function Agent({ encriptedData }: any) {
     console.log(value);
   };
   const logo = form.watch("companyLogo");
-  console.log(form.watch("mobile"));
 
   const queryParam = getQueryParamClient();
   return (
@@ -238,6 +244,7 @@ function Agent({ encriptedData }: any) {
                 error: StepCss.errorMsg,
                 label: StepCss.mlabelCss,
               }}
+              maxLength={MAX_LENTH_TEXT}
             />
             <TextInput
               control={form.control}
@@ -260,6 +267,7 @@ function Agent({ encriptedData }: any) {
                   form.setValue
                 )
               }
+              maxLength={MAX_LENGTH_COMPANY_NAME}
             />
             <TextInput
               name="email"
@@ -278,6 +286,7 @@ function Agent({ encriptedData }: any) {
                 error: StepCss.errorMsg,
                 label: StepCss.mlabelCss,
               }}
+              maxLength={MAX_LENGTH_EMAIL}
             />
             <PasswordInput
               control={form.control}
@@ -302,6 +311,7 @@ function Agent({ encriptedData }: any) {
               onBlurCapture={(e) =>
                 handleTrimAndReplaceReactHookForm(e, "password", form.setValue)
               }
+              maxLength={MAX_LENTH_TEXT}
             />
             <NumberInput
               valueIsNumericString
@@ -409,6 +419,7 @@ function Agent({ encriptedData }: any) {
               onBlurCapture={(e) =>
                 handleTrimAndReplaceReactHookForm(e, "address", form.setValue)
               }
+              maxLength={MAX_LENGTH_ADDRESS}
             />
 
             <DropZone onLogoSelect={handleLogoSelect} logo={logo ?? ""} />

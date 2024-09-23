@@ -10,6 +10,7 @@ import handleTrimAndReplace, {
 } from "@/app/utils/input/validations";
 import { CrossIcon } from "@/app/images/commonSvgs";
 import { useFieldArray } from "react-hook-form";
+import { MAX_LENTH_TEXT } from "@/app/validations/auth";
 type Props = {
   id: any;
   placeholder: string;
@@ -82,6 +83,7 @@ export default function AddmoreInput({
               scrollToBottom();
             }, 100);
         }}
+        maxLength={MAX_LENTH_TEXT}
         // onBlur={()=>form.validateField(`${id}.${index}.name`)}
       />
 
