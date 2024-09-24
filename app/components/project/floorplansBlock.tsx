@@ -28,7 +28,7 @@ const FloorPlanModal = dynamic(() => import("./modals/FloorPlan"), {
 });
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { useQuery } from "react-query";
-import { getProjectUnits } from "@/app/utils/api/project";
+import { getOverViewData, getProjectUnits } from "@/app/utils/api/project";
 import { useAtom, useSetAtom } from "jotai";
 import { floorPlansArray, selectedFloorAtom } from "@/app/store/floor";
 import Loading from "../atoms/Loader";
@@ -68,8 +68,8 @@ export default function FloorplansBlock({
   PhaseOverview,
   phaseList,
   partialUnitData,
-  overview,
-}: Props) {
+}: // overview,
+Props) {
   const allKeys = [35, 33, 31, 34, 32];
   const [propCgId, setPropCgId] = useAtom(propCgIdAtom);
   const [currentPhase, setCurrentPhase] = useAtom(currentPhaseAtom);
@@ -96,6 +96,16 @@ export default function FloorplansBlock({
     enabled: !!propCgId,
     ...RTK_CONFIG,
   });
+  // const {
+  //   data: overview,
+  //   isLoading: overviewdataLoading,
+  //   status,
+  // } = useQuery({
+  //   queryKey: [`overview-data/${slug}`],
+  //   queryFn: () => getOverViewData(slug),
+  //   enabled: !partialUnitData,
+  //   ...RTK_CONFIG,
+  // });
 
   const types =
     selectedPhase?.propTypeOverview &&
@@ -210,12 +220,13 @@ export default function FloorplansBlock({
 
   const isMobile = useMediaQuery("(max-width: 601px)");
 
-  // const rowVirtualizer = useVirtualizer({
-  //   count: projectUnitsData?.length,
-  //   getScrollElement: () => parentRef.current,
-  //   estimateSize: () => 180,
-  //   overscan: 5,
-  // });
+  const rowVirtualizer = useVirtualizer({
+    count: 10000,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 180,
+    overscan: 5,
+  });
+  console.log(projectUnitsData?.length);
   useEffect(() => {
     if (
       projectUnitsData &&
@@ -230,20 +241,23 @@ export default function FloorplansBlock({
   useEffect(() => {
     // @ts-ignore
     types?.length > 0 && setPropCgId(BACKEND_PROP_TYPES[`${types[0]}`]);
-  }, [currentPhase, setPropCgId, types]);
+  }, [currentPhase]);
   if (isLoading) return <Loading />;
   return (
     <>
-      {/* {!partialUnitData && (
-        <PartialUnitData
-          partialUnitData={overview}
-          projName={projName}
-          phaseList={phaseList}
-          data={projectUnitsData}
-          type="overview"
-          handlePricingFloorPlanClick={handlePricingFloorPlanClick}
-        />
-      )}{" "} */}
+      {/* {!partialUnitData &&
+        (overviewdataLoading ? (
+          <div>Loading....</div>
+        ) : (
+          <PartialUnitData
+            partialUnitData={overview}
+            projName={projName}
+            phaseList={phaseList}
+            data={projectUnitsData}
+            type="overview"
+            handlePricingFloorPlanClick={handlePricingFloorPlanClick}
+          />
+        ))}{" "} */}
       <div
         className="w-[95%] md:w-[90%] mt-[50px] scroll-mt-[150px] mb-[2%] sm:mb-[0%]"
         id="floor-plans"
@@ -426,36 +440,36 @@ export default function FloorplansBlock({
                   ref={parentRef}
                 >
                   <div
-                  // className="w-full md:w-[50%] max-h-[456px] md:h-[540px]  md:max-h-[540px] border-solid overflow-auto "
-                  // style={{
-                  //   height: `${rowVirtualizer.getTotalSize()}px`,
-                  //   width: "100%",
-                  //   position: "relative",
-                  // }}
+                    className="w-full md:w-[50%] max-h-[456px] md:h-[540px]  md:max-h-[540px] border-solid overflow-auto "
+                    style={{
+                      height: `${rowVirtualizer.getTotalSize()}px`,
+                      width: "100%",
+                      position: "relative",
+                    }}
                   >
                     {projectUnitsData?.length !== 0 ? (
-                      // rowVirtualizer
-                      //   .getVirtualItems()
-                      //   .map((virtualRow) => (
-                      //     <FloorplanDetailsCard
-                      //       key={virtualRow.index}
-                      //       propCgId={propCgId}
-                      //       data={virtualRow}
-                      //       projData={projectUnitsData}
-                      //       setValues={form.setValues}
-                      //     />
-                      //   ))
-                      projectUnitsData.map((virtualRow: any, index: number) => (
-                        <FloorplanDetailsCard
-                          key={Math.random()}
-                          propCgId={propCgId}
-                          data={virtualRow}
-                          projData={projectUnitsData}
-                          setValues={form.setValues}
-                          lastIndex={projectUnitsData.length - 1 === index}
-                        />
-                      ))
+                      rowVirtualizer
+                        .getVirtualItems()
+                        .map((virtualRow) => (
+                          <FloorplanDetailsCard
+                            key={virtualRow.index}
+                            propCgId={propCgId}
+                            data={virtualRow}
+                            projData={projectUnitsData}
+                            setValues={form.setValues}
+                          />
+                        ))
                     ) : (
+                      // // projectUnitsData.map((virtualRow: any, index: number) => (
+                      // //   <FloorplanDetailsCard
+                      // //     key={Math.random()}
+                      // //     propCgId={propCgId}
+                      // //     data={virtualRow}
+                      // //     projData={projectUnitsData}
+                      // //     setValues={form.setValues}
+                      // //     lastIndex={projectUnitsData.length - 1 === index}
+                      // //   />
+                      // ))
                       <NoProperties
                         phase={
                           phaseList?.find(

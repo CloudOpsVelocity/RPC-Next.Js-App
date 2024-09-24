@@ -28,6 +28,8 @@ import QAJsonLdScript from "@/app/seo/Qnajson";
 import PropertyJsonLdScript from "@/app/seo/Productjson";
 import ArticleJsonLdScript from "@/app/seo/ArticleJson";
 import Reviews from "@/app/components/project/reviews";
+import PartialUnitData from "@/app/components/project/sections";
+import PropertyDataDisplay from "@/app/components/project/_ui/PricingDetailsSection";
 type Props = {
   projResponse: any;
   amenitiesFromDB: any;
@@ -41,7 +43,6 @@ export default async function ProjectsDetailsPage({
   slug,
   scrollId,
 }: Props) {
-  console.log(scrollId);
   const { basicData: data, nearByLocations, phaseOverview } = projResponse;
   return (
     <section className="w-full relative break-words ">
@@ -145,9 +146,17 @@ export default async function ProjectsDetailsPage({
           projName={data.projectName}
           media={data?.media?.projectPlanUrl}
         />
-
-        {/* {!data.partialUnitData ? (
+        {/* {data.partialUnitData && (
+          <PropertyDataDisplay
+            unitData={data.partialUnitData}
+            projName={data.projectName}
+            phaseList={data.phases}
+          />
+        )} */}
+        {!data.partialUnitData ? (
           <FloorplansBlock
+            partialUnitData={data.partialUnitData}
+            // overview={overview}
             projName={data.projectName}
             data={data.phases}
             slug={slug}
@@ -160,8 +169,9 @@ export default async function ProjectsDetailsPage({
             projName={data.projectName}
             phaseList={data.phases}
             data={data}
+            type="partial"
           />
-        )} */}
+        )}
 
         <GalleryBlock
           {...data.media}

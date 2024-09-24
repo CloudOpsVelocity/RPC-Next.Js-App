@@ -104,16 +104,16 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
     getAmenties(),
   ]);
 
-  // let overview = null;
+  let overview = null;
 
   const {
     basicData: data,
     nearByLocations,
     phaseOverview,
   } = projectDetailsData;
-  // if (!data.partialUnitData) {
-  //   overview = await getOverViewData(slug);
-  // }
+  if (!data.partialUnitData) {
+    overview = await getOverViewData(slug);
+  }
   return (
     <section className="w-full relative break-words">
       {/* <!-- Facebook Meta Tags --> */}
@@ -229,7 +229,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         {!data.partialUnitData ? (
           <FloorplansBlock
             partialUnitData={data.partialUnitData}
-            // overview={overview}
+            overview={overview}
             projName={data.projectName}
             data={data.phases}
             slug={slug}

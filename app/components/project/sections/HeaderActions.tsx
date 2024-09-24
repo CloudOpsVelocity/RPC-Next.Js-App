@@ -64,21 +64,24 @@ export default function HeaderActions({
   };
   const [currentPhase, setCurrentPhase] = useAtom(currentPhaseAtom);
   const setSelected = useSetAtom(parital_unit_atom);
-  const propTypes = Object?.keys(
-    partialUnitData && partialUnitData[currentPhase]
-      ? partialUnitData[currentPhase]
-      : {}
-  ).sort();
+  const sortOrder = ["apartment", "rowhouse", "villa", "villament", "plot"];
+
+  const sortedPropTypes = Object.keys(partialUnitData?.[currentPhase] || {})
+    .filter(
+      (key) => Object.keys(partialUnitData[currentPhase][key] || {}).length > 0
+    )
+    .sort((a, b) => sortOrder.indexOf(a) - sortOrder.indexOf(b));
+  console.log(sortedPropTypes);
   const [propCgId, setPropCgId] = useAtom(propCgIdAtom);
   useEffect(() => {
     // @ts-ignore
-    propTypes?.length > 0 &&
+    sortedPropTypes?.length > 0 &&
       setPropCgId(
         parseDataProjectProps[
-          propTypes[0] as keyof typeof parseDataProjectProps
+          sortedPropTypes[0] as keyof typeof parseDataProjectProps
         ]
       );
-  }, [currentPhase, propTypes, setPropCgId]);
+  }, [currentPhase]);
 
   return (
     <div>
@@ -132,7 +135,7 @@ export default function HeaderActions({
         )}
       </div>
       <div className=" flex justify-start items-start flex-wrap gap-[2%] ">
-        {propTypes?.map((each: string, index: any) => {
+        {sortedPropTypes?.map((each: string, index: any) => {
           const keyName =
             parseDataProjectProps[each as keyof typeof parseDataProjectProps];
           let name =
