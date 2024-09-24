@@ -71,7 +71,6 @@ export default function HeaderActions({
       (key) => Object.keys(partialUnitData[currentPhase][key] || {}).length > 0
     )
     .sort((a, b) => sortOrder.indexOf(a) - sortOrder.indexOf(b));
-  console.log(sortedPropTypes);
   const [propCgId, setPropCgId] = useAtom(propCgIdAtom);
   useEffect(() => {
     // @ts-ignore
@@ -137,7 +136,9 @@ export default function HeaderActions({
       <div className=" flex justify-start items-start flex-wrap gap-[2%] ">
         {sortedPropTypes?.map((each: string, index: any) => {
           const keyName =
-            parseDataProjectProps[each as keyof typeof parseDataProjectProps];
+            parseDataProjectProps[
+              each.toLocaleLowerCase() as keyof typeof parseDataProjectProps
+            ];
           let name =
             //@ts-ignore
             propertyDetailsTypes.get(keyName).name != undefined

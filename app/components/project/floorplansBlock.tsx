@@ -226,7 +226,6 @@ Props) {
     estimateSize: () => 180,
     overscan: 5,
   });
-  console.log(projectUnitsData?.length);
   useEffect(() => {
     if (
       projectUnitsData &&
@@ -435,10 +434,7 @@ Props) {
               onClick={handleContainerClick}
             >
               {floorPlanType === "type" && (
-                <div
-                  className="w-[100%] md:w-[50%] sm:border-solid overflow-auto shadow-md sm:shadow-none"
-                  ref={parentRef}
-                >
+                <div className="w-[100%] md:w-[50%] sm:border-solid overflow-auto shadow-md sm:shadow-none">
                   <div
                     className="w-full md:w-[50%] max-h-[456px] md:h-[540px]  md:max-h-[540px] border-solid overflow-auto "
                     style={{
@@ -446,6 +442,7 @@ Props) {
                       width: "100%",
                       position: "relative",
                     }}
+                    ref={parentRef}
                   >
                     {projectUnitsData?.length !== 0 ? (
                       rowVirtualizer

@@ -29,12 +29,12 @@ export default function ByBhkBlock({
     bhk === "0" ? data : data.filter((item: any) => item.bhkName === bhk);
   const parentRef = React.useRef(null);
 
-  // const rowVirtualizer = useVirtualizer({
-  //   count: filteredData?.length,
-  //   getScrollElement: () => parentRef.current,
-  //   estimateSize: () => 180,
-  //   overscan: 5,
-  // });
+  const rowVirtualizer = useVirtualizer({
+    count: filteredData?.length,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 180,
+    overscan: 5,
+  });
   const getOptions = (property: string): string[] => {
     return Array.from(new Set(data.map((item: any) => String(item[property]))));
   };
@@ -52,7 +52,7 @@ export default function ByBhkBlock({
 
   const scrollFiltersRef = useRef<HTMLDivElement>(null);
 
-  const handleArrowClick = (e: any,side: "R" | "L"): void => {
+  const handleArrowClick = (e: any, side: "R" | "L"): void => {
     e.stopPropagation();
     const scrollAmount = side === "R" ? 100 : -100;
     if (scrollFiltersRef.current) {
@@ -67,21 +67,22 @@ export default function ByBhkBlock({
           Select BHK to see floor plans
         </h3>
 
-
         <div className="flex justify-between items-center w-full overflow-x-auto overflow-y-hidden !no-scrollbar ">
-            {availBhks && availBhks.length > 4 &&
+          {availBhks && availBhks.length > 4 && (
             <button
-                  onClick={(e) => handleArrowClick(e,"L")}
-                  className="flex border border-solid border-gray-400 mr-4 min-h-[32px] min-w-[32px] rounded-[50%] items-center justify-center bg-[#FCFCFC] !cursor-pointer"
-                >
-                  <PrevCarouselIcon />
+              onClick={(e) => handleArrowClick(e, "L")}
+              className="flex border border-solid border-gray-400 mr-4 min-h-[32px] min-w-[32px] rounded-[50%] items-center justify-center bg-[#FCFCFC] !cursor-pointer"
+            >
+              <PrevCarouselIcon />
             </button>
-            }
-            
-            <div ref={scrollFiltersRef} className="flex scroll-smooth justify-start items-start w-full overflow-x-auto overflow-y-hidden !no-scrollbar ">
-                
-                <style>
-                  {`
+          )}
+
+          <div
+            ref={scrollFiltersRef}
+            className="flex scroll-smooth justify-start items-start w-full overflow-x-auto overflow-y-hidden !no-scrollbar "
+          >
+            <style>
+              {`
                     /* Hide scrollbar for Chrome, Safari, and Opera */
                     ::-webkit-scrollbar {
                       display: none;
@@ -91,9 +92,9 @@ export default function ByBhkBlock({
                     scrollbar-width: none;
                     -ms-overflow-style: none;
                   `}
-              </style>
+            </style>
 
-              {availBhks && availBhks.length > 1 &&    
+            {availBhks && availBhks.length > 1 && (
               <Button
                 key="all"
                 title="All"
@@ -106,53 +107,55 @@ export default function ByBhkBlock({
                     : " font-[500] text-[#737579]"
                 } `}
               />
-              }
-              {availBhks.map((bhkOption) => (
-                <Button
-                  key={`byUnit_${bhkOption}`}
-                  title={bhkOption}
-                  onChange={(e) => {
-                    handleBhkChange(e, bhkOption);
-                    setCurrentState(() => {
-                      const newFilteredData =
-                        bhkOption === "0"
-                          ? data
-                          : data.filter((item: any) => item.bhkName === bhkOption);
-                      return newFilteredData[0];
-                    });
-                  }}
-                  buttonClass={` text-[18px] lg:text-[18px] mr-[10px] lg:mr-[25px] whitespace-nowrap  ${
-                    bhk === bhkOption
-                      ? " font-[600] text-[#148B16] underline "
-                      : " font-[500] text-[#737579]"
-                  } `}
-                />
-              ))}
-            </div>
-            {availBhks && availBhks.length > 4 &&
+            )}
+            {availBhks.map((bhkOption) => (
+              <Button
+                key={`byUnit_${bhkOption}`}
+                title={bhkOption}
+                onChange={(e) => {
+                  handleBhkChange(e, bhkOption);
+                  setCurrentState(() => {
+                    const newFilteredData =
+                      bhkOption === "0"
+                        ? data
+                        : data.filter(
+                            (item: any) => item.bhkName === bhkOption
+                          );
+                    return newFilteredData[0];
+                  });
+                }}
+                buttonClass={` text-[18px] lg:text-[18px] mr-[10px] lg:mr-[25px] whitespace-nowrap  ${
+                  bhk === bhkOption
+                    ? " font-[600] text-[#148B16] underline "
+                    : " font-[500] text-[#737579]"
+                } `}
+              />
+            ))}
+          </div>
+          {availBhks && availBhks.length > 4 && (
             <button
-                onClick={(e) => handleArrowClick(e,"R")}
-                className="flex  border border-solid border-gray-400 min-h-[32px] ml-8 min-w-[32px] rounded-[50%] items-center justify-center bg-[#FCFCFC] !cursor-pointer"
-              >
-                <ImgCarouselIcon />
+              onClick={(e) => handleArrowClick(e, "R")}
+              className="flex  border border-solid border-gray-400 min-h-[32px] ml-8 min-w-[32px] rounded-[50%] items-center justify-center bg-[#FCFCFC] !cursor-pointer"
+            >
+              <ImgCarouselIcon />
             </button>
-            }
+          )}
         </div>
       </div>
       <div
         className="w-full h-[195px] sm:h-[440px] overflow-auto "
-        // ref={parentRef}
+        ref={parentRef}
       >
-        {/* {rowVirtualizer.getVirtualItems().map((virtualRow: any) => (
-            <FloorplanDetailsCard
-              key={virtualRow.index}
-              data={virtualRow}
-              propCgId={propCgId}
-              projData={data}
-              setValues={setValues}
-            />
-          ))} */}
-        {filteredData.map((item: any, index: number) => (
+        {rowVirtualizer.getVirtualItems().map((virtualRow: any) => (
+          <FloorplanDetailsCard
+            key={virtualRow.index}
+            data={virtualRow}
+            propCgId={propCgId}
+            projData={data}
+            setValues={setValues}
+          />
+        ))}
+        {/* {filteredData.map((item: any, index: number) => (
           <FloorplanDetailsCard
             key={Math.random()}
             data={item}
@@ -160,7 +163,7 @@ export default function ByBhkBlock({
             projData={data}
             setValues={setValues}
           />
-        ))}
+        ))} */}
       </div>
     </div>
   );
