@@ -23,13 +23,11 @@ import AboutBuilder from "@/app/components/project/aboutBuilder";
 import FaqWithBg from "@/app/components/project/faq";
 import NearByCarousel from "@/app/components/project/NearByCarousel";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
-import PartialUnitData from "@/app/components/project/sections";
 import FAQJsonLdScript from "@/app/seo/Faqjson";
 import QAJsonLdScript from "@/app/seo/Qnajson";
 import PropertyJsonLdScript from "@/app/seo/Productjson";
 import ArticleJsonLdScript from "@/app/seo/ArticleJson";
 import Reviews from "@/app/components/project/reviews";
-import PricingSection from "@/app/components/project/_ui/PricingDetailsSection";
 type Props = {
   projResponse: any;
   amenitiesFromDB: any;

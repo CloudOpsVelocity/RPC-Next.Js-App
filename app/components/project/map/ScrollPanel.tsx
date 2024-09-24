@@ -53,7 +53,7 @@ const CustomScrollArea: React.FC<{
         const name = areasMap.get(key).name;
         return (
           <Carousel.Slide key={key} className="max-w-fit">
-            <button
+            <h4
               key={key}
               onClick={() => setSelected(key ?? "")}
               className={clsx(
@@ -66,7 +66,7 @@ const CustomScrollArea: React.FC<{
                 className="w-[18px] h-[18px]"
               />
               {name}
-            </button>
+            </h4>
           </Carousel.Slide>
         );
       })}

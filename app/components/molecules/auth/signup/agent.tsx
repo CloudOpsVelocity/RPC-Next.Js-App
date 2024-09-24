@@ -246,29 +246,7 @@ function Agent({ encriptedData }: any) {
               }}
               maxLength={MAX_LENTH_TEXT}
             />
-            <TextInput
-              control={form.control}
-              name="companyName"
-              required
-              size="lg"
-              mt={"xs"}
-              label="Company Name"
-              placeholder="Enter your company name here"
-              classNames={{
-                root: StepCss.inputRoot,
-                input: StepCss.textInput,
-                error: StepCss.errorMsg,
-                label: StepCss.mlabelCss,
-              }}
-              onBlurCapture={(e) =>
-                handleTrimAndReplaceReactHookForm(
-                  e,
-                  "companyName",
-                  form.setValue
-                )
-              }
-              maxLength={MAX_LENGTH_COMPANY_NAME}
-            />
+
             <TextInput
               name="email"
               control={form.control}
@@ -402,6 +380,30 @@ function Agent({ encriptedData }: any) {
               stepIcon: active > 1 ? StepCss.stepIconActive : StepCss.stepIcon,
             }}
           >
+            {" "}
+            <TextInput
+              control={form.control}
+              name="companyName"
+              required
+              size="lg"
+              mt={"xs"}
+              label="Company Name"
+              placeholder="Enter your company name here"
+              classNames={{
+                root: StepCss.inputRoot,
+                input: StepCss.textInput,
+                error: StepCss.errorMsg,
+                label: StepCss.mlabelCss,
+              }}
+              onBlurCapture={(e) =>
+                handleTrimAndReplaceReactHookForm(
+                  e,
+                  "companyName",
+                  form.setValue
+                )
+              }
+              maxLength={MAX_LENGTH_COMPANY_NAME}
+            />
             <TextInput
               key={"address"}
               name="address"
@@ -421,7 +423,6 @@ function Agent({ encriptedData }: any) {
               }
               maxLength={MAX_LENGTH_ADDRESS}
             />
-
             <DropZone onLogoSelect={handleLogoSelect} logo={logo ?? ""} />
           </Stepper.Step>
 

@@ -48,10 +48,7 @@ const agentSchema = yup.object().shape({
     .string()
     .max(40, "Name should not exceed 40 characters")
     .required("Full name is required"),
-  companyName: yup
-    .string()
-    .max(80, "Name should not exceed 80 characters")
-    .required("Company name is required"),
+
   email: yup
     .string()
     .trim()
@@ -84,6 +81,10 @@ const agentSchema = yup.object().shape({
     .required("Mobile number is required"),
 });
 export const addressSchema = yup.object().shape({
+  companyName: yup
+    .string()
+    .max(80, "Name should not exceed 80 characters")
+    .required("Company name is required"),
   address: yup
     .string()
     .trim()

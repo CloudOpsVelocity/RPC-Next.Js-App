@@ -201,19 +201,19 @@ export default function PropertyTypeDetailsCrad({
         </div>
       </div>
       <div className="rightSection pt-3 flex flex-col w-full pr-2 sm:pr-0">
-        <p className="text-[#242424] text-[14px]   md:text-xl not-italic font-semibold leading-[normal] ml-[10px] text-right">
+        <h3 className="text-[#242424] text-[14px]   md:text-xl not-italic font-semibold leading-[normal] ml-[10px] text-right">
           {propName(propertyType, "name")}
-        </p>
-        <p className="text-[14px] text-right lg:text-[22px] text-[#148B16]  not-italic font-bold leading-[normal] mt-2">
+        </h3>
+        <h4 className="text-[14px] text-right lg:text-[22px] text-[#148B16]  not-italic font-bold leading-[normal] mt-2">
           {cg.minPrice && cg.maxPrice
             ? `${formatCurrency(cg?.minPrice)} - ${formatCurrency(
                 cg?.maxPrice
               )}`
             : "Coming Soon"}
-        </p>
-        <p className="text-[12px] sm:text-[16px] xl:text-lg text-wrap text-[#242424] text-right  italic font-medium leading-[normal]">
+        </h4>
+        <h5 className="text-[12px] sm:text-[16px] xl:text-lg text-wrap text-[#242424] text-right  italic font-medium leading-[normal]">
           {formatCurrency(cg?.basePrice)} Base Price/ sq.ft
-        </p>
+        </h5>
         <p className="text-[14px] sm:text-[18px] xl:text-[22px]  text-right text-[#4D6677]  not-italic font-semibold leading-[normal] capitalize mt-3 ">
           Unit types : <br />{" "}
           {propertyType !== "plot" ? (
