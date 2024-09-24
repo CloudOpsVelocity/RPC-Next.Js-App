@@ -143,7 +143,7 @@ export default function ByBhkBlock({
         </div>
       </div>
       <div
-        className="w-full h-[195px] sm:h-[440px] overflow-auto "
+        className="w-full h-[195px] sm:h-[440px] overflow-auto relative"
         ref={parentRef}
       >
         {rowVirtualizer.getVirtualItems().map((virtualRow: any) => (
