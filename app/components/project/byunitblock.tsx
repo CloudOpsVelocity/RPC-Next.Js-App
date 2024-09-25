@@ -12,6 +12,30 @@ import S from "@/app/styles/Floorplan.module.css";
 import { setPropertyValues } from "@/app/utils/dyanamic/projects";
 import Image from "next/image";
 import Button from "../atoms/buttons/variansts";
+import { SelectCreatable } from "./_ui/input/UnitINput";
+interface UnitData {
+  unitIdEnc: string;
+  projIdEnc: string;
+  phaseId: number;
+  propType: number;
+  bhk: number;
+  bhkName: string;
+  towerName: string;
+  towerId: number;
+  block: string;
+  floor: number;
+  unitNumber: string;
+  facingId: number;
+  facingName: string;
+  caretarea: string;
+  superBuildUparea: string;
+  terraceArea: string;
+  parkingType: string;
+  totalNumberofBathroom: number;
+  totalNumberOfBalcony: number;
+  noOfCarParking: number;
+  floorPlanUrl: string;
+}
 
 type Props = {
   propCgId: any;
@@ -26,6 +50,20 @@ const Byunitblock: React.FC<Props> = ({
 }: Props) => {
   const [floorsArray, setFloorsArray] = useAtom(unitFloorsAtom);
   const [, setFloor] = useAtom(selectedFloorAtom);
+  const workerRef = useRef<Worker | null>(null);
+  React.useEffect(() => {
+    workerRef.current = new Worker(
+      new URL(
+        "@/app/server-actions/workers/uniqueOptionsWorker.js",
+        import.meta.url
+      )
+    );
+    return () => {
+      if (workerRef.current) {
+        workerRef.current.terminate();
+      }
+    };
+  }, []);
   const getOptions = (property: string): string[] => {
     const filteredData = data?.filter((item: any) => {
       return Object.keys(values).every(
@@ -218,8 +256,7 @@ const Byunitblock: React.FC<Props> = ({
             }}
           />
         ) : null}
-
-        <Select
+        <SelectCreatable
           rightSection={<DropDownIcon />}
           size="md"
           label="Unit Number"
@@ -233,6 +270,20 @@ const Byunitblock: React.FC<Props> = ({
           onChange={(value) => handleOnChange("unitNumber", value as string)}
           classNames={{ input: S.input, label: S.labelByBhk, option: S.option }}
         />
+        {/* <Select
+          rightSection={<DropDownIcon />}
+          size="md"
+          label="Unit Number"
+          className="w-[100%] sm:!w-[46%]"
+          placeholder="-- select Unit Number--"
+          data={(getOptions("unitNumber") as string[]) || []}
+          searchable
+          clearable
+          maxDropdownHeight={200}
+          {...getInputProps("unitNumber")}
+          onChange={(value) => handleOnChange("unitNumber", value as string)}
+          classNames={{ input: S.input, label: S.labelByBhk, option: S.option }}
+        /> */}
         {propCgId !== projectprops.plot && (
           <Select
             rightSection={<DropDownIcon />}
