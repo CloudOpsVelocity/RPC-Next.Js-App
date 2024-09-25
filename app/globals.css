@@ -269,6 +269,22 @@
   min-width: 0;
   padding-left: var(--thumbs-slide-spacing);
 }
+
+.floorplan::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+  height: 8px; /* Height of the scrollbar (for horizontal scrolling) */
+}
+
+.floorplan::-webkit-scrollbar-track {
+  background: rgba(240, 240, 240, 0.8); /* Track color */
+  border-radius: 10px; /* Rounded track */
+}
+
+.floorplan::-webkit-scrollbar-thumb {
+  background: #0073c6; /* Scrollbar color */
+  border-radius: 10px; /* Rounded thumb */
+}
+
 @media (min-width: 576px) {
   .embla-thumbs__slide {
     flex: 0 0 15%;

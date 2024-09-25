@@ -744,7 +744,7 @@ Props) {
                 )}
               </div>
             </div>
-            {/* <FormProvider form={form}>
+            <FormProvider form={form}>
               <FloorPlanModal
                 projName={projName}
                 propCgId={propCgId}
@@ -752,7 +752,7 @@ Props) {
                 form={byUnitForm}
                 floorPlanType={floorPlanType}
               />
-            </FormProvider> */}
+            </FormProvider>
           </>
         )}
       </div>

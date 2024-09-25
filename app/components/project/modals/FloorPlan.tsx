@@ -28,6 +28,7 @@ import { unitFloorsAtom } from "../byunitblock";
 import Button from "../../atoms/buttons/variansts";
 import SelectedFilters from "./filters/SelectedFilters";
 import { formatNumberWithSuffix } from "@/app/utils/numbers";
+import ColumnVirtualizerFixed from "./VitualizedListCol";
 
 type Props = {
   propCgId: any;
@@ -245,7 +246,7 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
   return (
     <div className="col-span-1 w-full max-w-[392px] mr-[3%]  ">
       <div className="w-[100%] flex justify-between items-start flex-wrap gap-[5%] z-[100000]">
-        <Select
+        {/* <Select
           key={"unitNumber"}
           {...(propCgId === 32 && { mt: "md" })}
           w={"full"}
@@ -259,7 +260,7 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
           onChange={(value) => handleOnChange(value as string, "unitNumber")}
           classNames={{ input: S.input, label: S.label, option: S.option }}
           rightSection={<DropDownIcon />}
-        />
+        /> */}
 
         {(propCgId === projectprops.apartment ||
           propCgId === projectprops.villament) && (
@@ -1070,11 +1071,43 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
           )}
       </div>
       <CarouselModal projName={projName} propCgId={propCgId} />
+
       {floorsArray != undefined &&
         floorsArray != null &&
         floorsArray.length > 0 && (
           <div className="flex justify-center items-center mb-6 sm:mb-0  mt-4 w-full">
-            <Carousel
+            <ColumnVirtualizerFixed
+              items={floorsArray}
+              itemCount={floorsArray.length}
+              height={70}
+              itemSize={120}
+              overscan={5}
+              renderItem={(eachObj: any, index: number) => (
+                <div
+                  className={clsx(
+                    " sm:h-[50px]  w-[100px] sm:max-w-[250px] flex justify-center items-center shadow-md  scrollbar-hide rounded-[5px] border-[0.5px] border-solid border-[#92B2C8]",
+                    selectedFloor?.floorPlanUrl == eachObj?.floorPlanUrl &&
+                      "shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] border-2 border-solid border-[#59A1D6]"
+                  )}
+                >
+                  <Image
+                    // @ts-ignore
+                    src={
+                      eachObj?.floorPlanUrl
+                        ? `${eachObj?.floorPlanUrl}?v=${Math.random()}`
+                        : ImgNotAvail
+                    }
+                    alt="Floor Plan"
+                    width={57}
+                    height={37}
+                    className="w-full h-full cursor-pointer rounded-[5px]"
+                    style={{ aspectRatio: "100 / 50", objectFit: "cover" }}
+                    onClick={() => selectImg(index)}
+                  />
+                </div>
+              )}
+            />
+            {/* <Carousel
               align={"start"}
               classNames={styles}
               slideSize={{ base: "50%", sm: "50px", lg: "100px" }}
@@ -1116,7 +1149,7 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
                   </Carousel.Slide>
                 );
               })}
-            </Carousel>
+            </Carousel> */}
           </div>
         )}
     </div>
