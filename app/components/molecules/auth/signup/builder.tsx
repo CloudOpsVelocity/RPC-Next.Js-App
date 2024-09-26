@@ -762,7 +762,7 @@ function Builder({ encriptedData }: any) {
                   // ref={ref}
                   id="branch"
                   rightSection={<DropdownArrowIcon />}
-                  // required
+                  required
                   size="lg"
                   mt="md"
                   checkIconPosition="right"
@@ -789,12 +789,11 @@ function Builder({ encriptedData }: any) {
                   hidePickedOptions
                   maxValues={31}
                   withScrollArea={false}
-                  dropdownOpened={
-                    newForm.formState.errors.branch?.message &&
-                    form.values.branch.length > 30
-                      ? false
-                      : true
-                  }
+                  {...(((newForm.formState.errors.branch?.message &&
+                    form.values.branch.length > 30) ||
+                    form.values.branch.length === 29) && {
+                    dropdownOpened: false,
+                  })}
                 />
                 <DateInput
                   id="companyStartDate"

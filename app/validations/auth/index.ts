@@ -51,14 +51,13 @@ const agentSchema = yup.object().shape({
 
   email: yup
     .string()
-    .trim()
     .required("Email is required")
     .matches(
       /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
       "Please enter a valid Email address"
     )
-    .email("Please enter a valid Email address")
-    .max(50, "Email should not exceed 50 characters"),
+    .max(50, "Email should not exceed 50 characters")
+    .email("Please enter a valid Email address"),
   password: yup
     .string()
     .required("Password is required")

@@ -248,6 +248,7 @@ function Agent({ encriptedData }: any) {
             />
 
             <TextInput
+              key={"email"}
               name="email"
               control={form.control}
               required

@@ -41,8 +41,9 @@ function Individual() {
   const form = useForm({
     defaultValues: { name: "", email: "", password: "", mobile: undefined },
     shouldFocusError: true,
-    mode: "onTouched",
+    mode: "all",
     criteriaMode: "firstError",
+    progressive: true,
     resolver: yupResolver(individualSchema),
   });
   const values = form.getValues();
