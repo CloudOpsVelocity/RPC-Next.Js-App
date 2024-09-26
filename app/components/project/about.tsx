@@ -14,6 +14,7 @@ type Props = {
   className?: string;
   showProjName?: boolean;
   builderName?: string;
+  maxLines?: number;
 };
 
 export default function About({
@@ -25,6 +26,7 @@ export default function About({
   className,
   showProjName,
   builderName,
+  maxLines = 6,
 }: Props) {
   const isMobile = useMediaQuery(`(max-width: 750px)`);
   return (
@@ -54,7 +56,7 @@ export default function About({
 
       <ReadMore
         text={content}
-        maxLines={isMobile ? 1 : 6}
+        maxLines={isMobile ? 1 : maxLines}
         title={heading}
         showProjName={showProjName}
         builderName={builderName}

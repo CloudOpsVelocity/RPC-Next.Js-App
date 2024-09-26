@@ -79,6 +79,7 @@ export default function ProjectDetails({
         projName={userName}
         content={mission}
         className="!mb-[14px] sm:!mb-[40px] !mt-[0px] !ml-0"
+        maxLines={7}
       />
       <div
         className="flex w-full flex-col justify-center items-start gap-3.5 sm:gap-8 border border-[color:var(--blue-stroke,#4D6677)] shadow-[0px_4px_31.5px_0px_rgba(91,143,182,0.19)] p-4 sm:p-8 rounded-[7px] border-solid bg-[#FCFCFC] mb-5 sm:mb-[40px] xl:mb-[80px]

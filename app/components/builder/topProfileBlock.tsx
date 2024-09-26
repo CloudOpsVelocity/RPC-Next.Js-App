@@ -22,7 +22,9 @@ export default function TopProfileBlock({
             Home
           </a>
           {" > "}
-          <span className="hover:underline cursor-pointer">Builder</span>
+          <span className="hover:underline cursor-pointer">Builders</span>
+          {" > "}
+          <span className="hover:underline cursor-pointer">Bengaluru</span>
           {" > "}
           <span>{capitalizeWords(userName)}</span>
         </p>

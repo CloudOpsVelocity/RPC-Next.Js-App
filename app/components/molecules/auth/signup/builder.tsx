@@ -785,6 +785,10 @@ function Builder({ encriptedData }: any) {
                   }}
                   hidePickedOptions
                   maxValues={31}
+                  // onOptionSubmit={(e) => {
+                  //   console.log("alert ", e);
+                  //   newForm.setValue("branch", e);
+                  // }}
                   withScrollArea={false}
                   {...(((newForm.formState.errors.branch?.message &&
                     form.values.branch.length > 30) ||
