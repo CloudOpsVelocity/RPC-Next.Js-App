@@ -40,7 +40,7 @@ const ReadMore: React.FC<ReadMoreProps> = ({
   const shouldShowReadMore = text?.split(" ").length > 50;
 
   return (
-    <div className="w-full sm:w-[90%]">
+    <div className="w-full ">
       <p className="text-[14px] sm:text-[18px]  xl:text-[24px] font-[500]  text-[#233333] break-words">
         {getClampedText()}
         {!expanded && shouldShowReadMore && "... "}

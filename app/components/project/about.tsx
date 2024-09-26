@@ -56,7 +56,7 @@ export default function About({
 
       <ReadMore
         text={content}
-        maxLines={isMobile ? 1 : maxLines}
+        maxLines={isMobile ? 2 : maxLines}
         title={heading}
         showProjName={showProjName}
         builderName={builderName}

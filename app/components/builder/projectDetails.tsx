@@ -78,7 +78,7 @@ export default function ProjectDetails({
         heading="About Builder"
         projName={userName}
         content={mission}
-        className="!mb-[14px] sm:!mb-[40px] !mt-[0px] !ml-0"
+        className="!mb-[14px] sm:!mb-[40px] !mt-[0px] !ml-0 sm:w-full"
         maxLines={7}
       />
       <div
