@@ -13,6 +13,7 @@ export default function TopProfileBlock({
   companyStartDate,
   logoUrl,
   userName,
+  builderCity,
 }: Data) {
   return (
     <div className="w-full flex justify-between items-center bg=[] relative">
@@ -24,7 +25,9 @@ export default function TopProfileBlock({
           {" > "}
           <span className="hover:underline cursor-pointer">Builders</span>
           {" > "}
-          <span className="hover:underline cursor-pointer">Bengaluru</span>
+          <span className="hover:underline cursor-pointer capitalize">
+            {builderCity}
+          </span>
           {" > "}
           <span>{capitalizeWords(userName)}</span>
         </p>

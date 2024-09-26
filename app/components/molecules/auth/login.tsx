@@ -77,6 +77,7 @@ function Login({ params }: any) {
           name="username"
           mt={"xs"}
           required
+          allowNegative={false}
           classNames={{
             root: StepCss.inputRoot,
             input: StepCss.textInput,

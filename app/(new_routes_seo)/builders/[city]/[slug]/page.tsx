@@ -38,7 +38,18 @@ export default async function Page({ params: { city, slug } }: Props) {
 
   const data = await getBuilderDetailsPageData(id.split("_")[1], pathname);
 
-  return <BuilderPage data={data} id={id.split("_")[1]} />;
+  return (
+    <BuilderPage
+      data={{
+        ...data,
+        data: {
+          ...data.data,
+          builderCity: city,
+        },
+      }}
+      id={id.split("_")[1]}
+    />
+  );
 }
 
 export async function generateStaticParams() {
