@@ -705,6 +705,8 @@ function Builder({ encriptedData }: any) {
                       .slice(0, 6);
                     newForm.setValue("pincode", first10Digits as any);
                   }}
+                  allowDecimal={false}
+                  allowNegative={false}
                 />
               </SimpleGrid>
               <DropZone onLogoSelect={handleLogoSelect} logo={logo} />
@@ -760,7 +762,7 @@ function Builder({ encriptedData }: any) {
                   // ref={ref}
                   id="branch"
                   rightSection={<DropdownArrowIcon />}
-                  required
+                  // required
                   size="lg"
                   mt="md"
                   checkIconPosition="right"
@@ -787,6 +789,12 @@ function Builder({ encriptedData }: any) {
                   hidePickedOptions
                   maxValues={31}
                   withScrollArea={false}
+                  dropdownOpened={
+                    newForm.formState.errors.branch?.message &&
+                    form.values.branch.length > 30
+                      ? false
+                      : true
+                  }
                 />
                 <DateInput
                   id="companyStartDate"

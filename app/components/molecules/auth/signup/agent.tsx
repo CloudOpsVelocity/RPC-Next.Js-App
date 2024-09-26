@@ -382,11 +382,12 @@ function Agent({ encriptedData }: any) {
           >
             {" "}
             <TextInput
+              key={"companyName"}
               control={form.control}
               name="companyName"
               required
               size="lg"
-              mt={"xs"}
+              // mt={"xs"}
               label="Company Name"
               placeholder="Enter your company name here"
               classNames={{
@@ -405,6 +406,7 @@ function Agent({ encriptedData }: any) {
               maxLength={MAX_LENGTH_COMPANY_NAME}
             />
             <TextInput
+              mt={"xs"}
               key={"address"}
               name="address"
               control={form.control}
