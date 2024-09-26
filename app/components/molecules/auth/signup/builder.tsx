@@ -392,10 +392,7 @@ function Builder({ encriptedData }: any) {
         {(encriptedData || singupCookie) && active !== 4 && (
           <Alert type="builder" isTouched={newForm.formState.isDirty} />
         )}
-        <form
-          onSubmit={newForm.handleSubmit(nextStep, onError)}
-          className="w-full"
-        >
+        <form onSubmit={newForm.handleSubmit(nextStep)} className="w-full">
           <Stepper
             //@ts-ignore
             styles={styles}
