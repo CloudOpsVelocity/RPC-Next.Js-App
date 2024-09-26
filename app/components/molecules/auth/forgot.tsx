@@ -4,10 +4,13 @@ import {
   TextInput,
   Button,
   Box,
-  PasswordInput,
+  // PasswordInput,
   NumberInput,
   em,
 } from "@mantine/core";
+import { PasswordInput } from "react-hook-form-mantine";
+import { yupResolver as yupHook } from "@hookform/resolvers/yup";
+import { useForm as useFormHook } from "react-hook-form";
 import useAuth from "@/app/hooks/useAuth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -23,7 +26,9 @@ import Image from "next/image";
 import { forgetPasswordLockImg } from "@/app/images/commonImages";
 import { signIn } from "next-auth/react";
 import ForgotAuthPopup from "../../atoms/ForgotPopup";
-import handleTrimAndReplace from "@/app/utils/input/validations";
+import handleTrimAndReplace, {
+  handleTrimAndReplaceReactHookForm,
+} from "@/app/utils/input/validations";
 const schema = yup.object().shape({
   mobile: yup
     .number()
@@ -129,6 +134,7 @@ function ForgotForm() {
               const first10Digits = trimmedText.replace(/\D/g, "").slice(0, 10);
               form.setFieldValue("mobile", first10Digits as any);
             }}
+            allowNegative={false}
           />
           {/* <div className="min-w-[30px] self-start !max-w-[75px] flex justify-center items-center ">
             <CountryInput
@@ -183,29 +189,37 @@ import toast from "react-hot-toast";
 const validationSchema = yup.object().shape({
   password: yup
     .string()
+    .required("New password is required")
     .min(6, "Password must be at-least 6 digits")
-    .required("New password is required"),
+    .max(40, "Password should not exceed 40 characters"),
 
   confirmPassword: yup
     .string()
     .required("Re- enter New password is required")
-    .oneOf([yup.ref("password")], "Password not matched"),
+    .test("passwords-match", "Passwords must match", function (value) {
+      return value === this.parent.password;
+    })
+    .max(40, "Password should not exceed 40 characters"),
 });
 const Form = ({ status, setStatus }: any) => {
-  const form = useForm({
-    initialValues: {
+  const form = useFormHook({
+    defaultValues: {
       password: "",
       confirmPassword: "",
     },
-
-    validate: yupResolver(validationSchema),
-    validateInputOnBlur: true,
-    validateInputOnChange: true,
-    onValuesChange(values) {
-      if (values.password.length >= 6) {
-        form.setFieldError("confirmPassword", null);
-      }
-    },
+    shouldFocusError: true,
+    mode: "all",
+    criteriaMode: "firstError",
+    progressive: true,
+    resolver: yupHook(validationSchema),
+    // validate: yupResolver(validationSchema),
+    // validateInputOnBlur: true,
+    // validateInputOnChange: true,
+    // onValuesChange(values) {
+    //   if (values.password.length >= 6) {
+    //     form.setFieldError("confirmPassword", null);
+    //   }
+    // },
   });
   const onSubmit = async (values: any) => {
     try {
@@ -217,8 +231,8 @@ const Form = ({ status, setStatus }: any) => {
   };
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
   const isPasswordMatched = () => {
-    const password = form.values.password;
-    const confirmPassword = form.values.confirmPassword;
+    const password = form.getValues().password;
+    const confirmPassword = form.getValues().confirmPassword;
 
     // Check if password length is greater than or equal to 6 characters
     if (password.length >= 6) {
@@ -232,7 +246,7 @@ const Form = ({ status, setStatus }: any) => {
   return (
     <div className="w-full">
       <form
-        onSubmit={form.onSubmit(onSubmit)}
+        onSubmit={form.handleSubmit(onSubmit)}
         className="w-[100%] flex justify-center items-center flex-col "
       >
         <h2
@@ -241,6 +255,8 @@ const Form = ({ status, setStatus }: any) => {
           Reset Password
         </h2>
         <PasswordInput
+          control={form.control}
+          name="password"
           required
           size="lg"
           className="w-[100%] mb-[3%]"
@@ -250,16 +266,21 @@ const Form = ({ status, setStatus }: any) => {
           visibilityToggleIcon={({ reveal }) =>
             reveal ? <EyeOpen /> : <EyeClosed />
           }
-          {...form.getInputProps("password")}
-          onBlurCapture={(e) => handleTrimAndReplace(e, "password", form)}
+          // {...form.getInputProps("password")}
+          onBlurCapture={(e) =>
+            handleTrimAndReplaceReactHookForm(e, "password", form.setValue)
+          }
           type="text"
           classNames={{
             root: StepCss.inputRoot,
             error: StepCss.errorMsg,
             innerInput: StepCss.textInput,
           }}
+          max={41}
         />
         <PasswordInput
+          control={form.control}
+          name="confirmPassword"
           required
           size="lg"
           className="w-[100%] mb-[3%]"
@@ -269,9 +290,13 @@ const Form = ({ status, setStatus }: any) => {
           visibilityToggleIcon={({ reveal }) =>
             reveal ? <EyeOpen /> : <EyeClosed />
           }
-          {...form.getInputProps("confirmPassword")}
+          // {...form.getInputProps("confirmPassword")}
           onBlurCapture={(e) =>
-            handleTrimAndReplace(e, "confirmPassword", form)
+            handleTrimAndReplaceReactHookForm(
+              e,
+              "confirmPassword",
+              form.setValue
+            )
           }
           type="text"
           classNames={{
@@ -279,6 +304,7 @@ const Form = ({ status, setStatus }: any) => {
             error: StepCss.errorMsg,
             innerInput: StepCss.textInput,
           }}
+          max={41}
         />
         {isPasswordMatched() && (
           <p className="text-right ml-auto text-[color:var(--Brand-green-primary,#148B16)] text-sm italic font-semibold leading-[normal]">
