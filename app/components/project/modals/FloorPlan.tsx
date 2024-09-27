@@ -29,6 +29,7 @@ import Button from "../../atoms/buttons/variansts";
 import SelectedFilters from "./filters/SelectedFilters";
 import { formatNumberWithSuffix } from "@/app/utils/numbers";
 import ColumnVirtualizerFixed from "./VitualizedListCol";
+import { SelectCreatable } from "./filters/UnitINput";
 
 type Props = {
   propCgId: any;
@@ -242,25 +243,24 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
     setValues(prevObj);
     handleSearch(key);
   };
-  console.log(getOptions("block"));
   return (
     <div className="col-span-1 w-full max-w-[392px] mr-[3%]  ">
       <div className="w-[100%] flex justify-between items-start flex-wrap gap-[5%] z-[100000]">
-        {/* <Select
+        <SelectCreatable
           key={"unitNumber"}
-          {...(propCgId === 32 && { mt: "md" })}
-          w={"full"}
-          label="Select Unit Number"
-          className="!w-[46%]"
-          placeholder="-- select --"
           data={getOptions("unitNumber")}
-          searchable
-          maxDropdownHeight={200}
-          {...getInputProps("unitNumber")}
           onChange={(value) => handleOnChange(value as string, "unitNumber")}
-          classNames={{ input: S.input, label: S.label, option: S.option }}
-          rightSection={<DropDownIcon />}
-        /> */}
+          {...(propCgId === 32 && { mt: "md" })}
+          // w={"full"}
+          // label="Select Unit Number"
+          // className="!w-[46%]"
+          // placeholder="-- select --"
+          // data={getOptions("unitNumber")}
+          // searchable
+          // maxDropdownHeight={200}
+          // {...getInputProps("unitNumber")}
+          // onChange={(value) => handleOnChange(value as string, "unitNumber")}
+        />
 
         {(propCgId === projectprops.apartment ||
           propCgId === projectprops.villament) && (
@@ -274,7 +274,7 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
             data={getOptions("towerName")}
             searchable
             maxDropdownHeight={200}
-            {...getInputProps("towerName")}
+            // {...getInputProps("towerName")}
             onChange={(value) => handleOnChange(value as string, "towerName")}
             classNames={{ input: S.input, label: S.label, option: S.option }}
             rightSection={<DropDownIcon />}
@@ -1107,49 +1107,6 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
                 </div>
               )}
             />
-            {/* <Carousel
-              align={"start"}
-              classNames={styles}
-              slideSize={{ base: "50%", sm: "50px", lg: "100px" }}
-              slideGap={{ base: "16px", sm: "0px" }}
-              nextControlIcon={<ImgCarouselIcon />}
-              previousControlIcon={<PrevCarouselIcon />}
-              className="!max-w-[250px] sm:!max-w-[700px] px-10 h-[60px]"
-            >
-              {floorsArray?.map((eachObj: any, ind: number) => {
-                return (
-                  <Carousel.Slide
-                    h={60}
-                    key={`floorPlanUrl_${
-                      eachObj?.floorPlanUrl ? eachObj?.floorPlanUrl[ind] : ""
-                    }`}
-                  >
-                    <div
-                      className={clsx(
-                        " sm:h-[50px] ml-1.5 sm:ml-10 w-[100px] sm:max-w-[250px] flex justify-center items-center shadow-md  scrollbar-hide rounded-[5px] border-[0.5px] border-solid border-[#92B2C8]",
-                        selectedFloor?.floorPlanUrl == eachObj?.floorPlanUrl &&
-                          "shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] border-2 border-solid border-[#59A1D6]"
-                      )}
-                    >
-                      <Image
-                        // @ts-ignore
-                        src={
-                          eachObj?.floorPlanUrl
-                            ? `${eachObj?.floorPlanUrl}?v=${Math.random()}`
-                            : ImgNotAvail
-                        }
-                        alt="Floor Plan"
-                        width={57}
-                        height={37}
-                        className="w-full h-full cursor-pointer rounded-[5px]"
-                        style={{ aspectRatio: "100 / 50", objectFit: "cover" }}
-                        onClick={() => selectImg(ind)}
-                      />
-                    </div>
-                  </Carousel.Slide>
-                );
-              })}
-            </Carousel> */}
           </div>
         )}
     </div>

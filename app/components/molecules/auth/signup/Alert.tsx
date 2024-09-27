@@ -22,7 +22,7 @@ const Alert = ({
             {isTouched
               ? "It's just a few more details and it's done"
               : type === "agent"
-              ? "Kindly complete you sign up details for users to build in trust and decency in you."
+              ? "Kindly complete you's sign up details for users to build in trust and decency in you."
               : "We request you to please complete the sign up process for us to be in a better postion to quickly approve your account."}
           </p>
         </div>

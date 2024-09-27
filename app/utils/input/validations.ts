@@ -34,8 +34,30 @@ export const handleTrimAndReplaceReactHookForm = (
 export const handleTrimAllSpaces = (
   value: string,
   fieldName: string,
-  setter: any
+  setter: any,
+  type?: "email" | "phone" | "name"
 ) => {
-  setter(fieldName, value.trim().replace(/\s+/g, ""));
+  switch (type) {
+    case "email":
+      // Remove invalid parts of the email before the '@' symbol
+      {
+        const validEmail = value
+          .trim()
+          .replace(/\s+/g, "") // Remove all spaces
+          .toLowerCase() // Convert to lowercase
+          .replace(/\.{2,}/g, ".") // Replace consecutive dots with a single dot
+          .replace(/^\.|\.$/g, "") // Remove leading or trailing dots
+          .replace(/(\.+)@/, "@") // Remove dots directly before the '@'
+          // .replace(/^[^@]*[.]/, "") // Remove everything before the first dot if there is any dot before '@'
+          .replace(/@[^.]+$/, (match) => match.replace(/^\.+/, "")); // Remove leading dots in the domain part if any
+
+        setter(fieldName, validEmail);
+      }
+      break;
+
+    default:
+      setter(fieldName, value.trim().replace(/\s+/g, ""));
+      break;
+  }
 };
 export default handleTrimAndReplace;

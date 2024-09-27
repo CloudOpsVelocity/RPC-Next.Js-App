@@ -48,15 +48,18 @@ const ColumnVirtualizerFixed: React.FC<ColumnVirtualizerFixedProps> = ({
 
   return (
     <div className="relative">
-      <button
-        onClick={() => scrollTo(-itemSize)}
-        disabled={isAtStart()}
-        className={`absolute -left-10 top-1/2 transform -translate-y-1/2  rounded z-10 ${
-          isAtStart() ? "opacity-50 cursor-not-allowed" : ""
-        }`}
-      >
-        <PrevCarouselIcon />
-      </button>
+      {itemCount > 4 && (
+        <button
+          onClick={() => scrollTo(-itemSize)}
+          disabled={isAtStart()}
+          className={`absolute -left-10 top-1/2 transform -translate-y-1/2  rounded z-10 ${
+            isAtStart() ? "opacity-50 cursor-not-allowed" : ""
+          }`}
+        >
+          <PrevCarouselIcon />
+        </button>
+      )}
+
       {/* <div className="flex justify-between mb-2">
         <button
           onClick={() => scrollTo(-itemSize)}
@@ -78,7 +81,7 @@ const ColumnVirtualizerFixed: React.FC<ColumnVirtualizerFixedProps> = ({
 
       <div
         ref={parentRef}
-        className="mx-auto floorplan"
+        className="mx-auto floorplan flex justify-center items-center"
         style={{
           width: `${width}px`,
           height: `${height}px`,
@@ -115,15 +118,17 @@ const ColumnVirtualizerFixed: React.FC<ColumnVirtualizerFixedProps> = ({
           ))}
         </div>
       </div>
-      <button
-        onClick={() => scrollTo(itemSize)}
-        disabled={isAtEnd()}
-        className={`absolute -right-10 top-1/2 transform -translate-y-1/2  rounded z-10 ${
-          isAtEnd() ? "opacity-50 cursor-not-allowed" : ""
-        }`}
-      >
-        <ImgCarouselIcon />
-      </button>
+      {itemCount > 4 && (
+        <button
+          onClick={() => scrollTo(itemSize)}
+          disabled={isAtEnd()}
+          className={`absolute -right-10 top-1/2 transform -translate-y-1/2  rounded z-10 ${
+            isAtEnd() ? "opacity-50 cursor-not-allowed" : ""
+          }`}
+        >
+          <ImgCarouselIcon />
+        </button>
+      )}
     </div>
   );
 };

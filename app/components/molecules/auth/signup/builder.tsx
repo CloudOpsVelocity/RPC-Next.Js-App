@@ -461,7 +461,12 @@ function Builder({ encriptedData }: any) {
                 placeholder="Enter your email here"
                 // {...form.getInputProps("email")}
                 onBlurCapture={(e) =>
-                  handleTrimAllSpaces(e.target.value, "email", newForm.setValue)
+                  handleTrimAllSpaces(
+                    e.target.value,
+                    "email",
+                    newForm.setValue,
+                    "email"
+                  )
                 }
                 classNames={{
                   root: StepCss.inputRoot,
@@ -679,7 +684,7 @@ function Builder({ encriptedData }: any) {
                   size="lg"
                   mt="md"
                   hideControls
-                  label="Pincode"
+                  label="Pin Code"
                   placeholder="Enter pincode"
                   // onBlurCapture={(e) =>
                   //   form.values.pincode === "" &&

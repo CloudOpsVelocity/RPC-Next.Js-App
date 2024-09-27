@@ -95,7 +95,11 @@ export const builderFirstStepSchema = yup.object().shape({
   userName: yup
     .string()
     .max(80, "Name should not exceed 80 characters")
-    .required("Builder name is required"),
+    .required("Builder name is required")
+    .matches(
+      /^[^\\/:*?"<>|]+$/,
+      'Name cannot contain the following characters: \\ / : * ? " < > |'
+    ),
   email: yup
     .string()
     .trim()

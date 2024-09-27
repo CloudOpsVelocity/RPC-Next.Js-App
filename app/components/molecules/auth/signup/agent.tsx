@@ -257,7 +257,12 @@ function Agent({ encriptedData }: any) {
               label="Email"
               placeholder="Enter your email here"
               onBlurCapture={(e) =>
-                handleTrimAllSpaces(e.target.value, "email", form.setValue)
+                handleTrimAllSpaces(
+                  e.target.value,
+                  "email",
+                  form.setValue,
+                  "email"
+                )
               }
               classNames={{
                 root: StepCss.inputRoot,

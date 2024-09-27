@@ -114,7 +114,7 @@ export default function ProjectDetails({
 
           <Card
             Icon={<TotalLandArea className="!w-[18px] !h-[18px]" />}
-            title="Pincode"
+            title="Pin Code"
             content={pinCode}
             type="text"
           />

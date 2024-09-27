@@ -27,7 +27,7 @@ export default function ManagementBlock({
 
       <div className="flex justify-start items-start w-full flex-wrap gap-2 sm:gap-4  mt-[2%]  ">
         <div className="bg-[#FFF] rounded-[10px] shadow-lg border-[#92B2C8] border-[1px] border-solid p-2 sm:p-[16px]  ">
-          <p className="text-[16px] sm:text-lg xl:text-[24px] font-[600] text-[#202020] ">
+          <p className="text-[16px] sm:text-lg xl:text-[24px] font-[600] text-[#202020] capitalize">
             {ceoName}
           </p>
           <p className="text-[12px] sm:text-lg xl:text-[20px] font-[700] text-[#00487C] italic">
@@ -36,7 +36,7 @@ export default function ManagementBlock({
         </div>
 
         <div className="bg-[#FFF] rounded-[10px] shadow-lg border-[#92B2C8] border-[1px] border-solid p-2 sm:p-[16px] mb-[2%] ">
-          <p className=" text-[16px] sm:text-lg xl:text-[24px] font-[600] text-[#202020] ">
+          <p className=" text-[16px] sm:text-lg xl:text-[24px] font-[600] text-[#202020] capitalize">
             {founderName}
           </p>
           <p className="text-[12px] sm:text-lg xl:text-[20px] font-[700] text-[#00487C] italic">
@@ -44,7 +44,7 @@ export default function ManagementBlock({
           </p>
         </div>
         <div className="bg-[#FFF] rounded-[10px] shadow-lg border-[#92B2C8] border-[1px] border-solid p-2 sm:p-[16px] mb-[2%] ">
-          <p className=" text-[16px] sm:text-lg xl:text-[24px] font-[600] text-[#202020] ">
+          <p className=" text-[16px] sm:text-lg xl:text-[24px] font-[600] text-[#202020] capitalize">
             {mdname}
           </p>
           <p className="text-[12px] sm:text-lg xl:text-[20px] font-[700] text-[#00487C] italic">

@@ -131,7 +131,12 @@ function Individual() {
               label="Email"
               placeholder="Enter your email here"
               onBlurCapture={(e) =>
-                handleTrimAllSpaces(e.target.value, "email", form.setValue)
+                handleTrimAllSpaces(
+                  e.target.value,
+                  "email",
+                  form.setValue,
+                  "email"
+                )
               }
               maxLength={MAX_LENGTH_EMAIL}
               classNames={{
