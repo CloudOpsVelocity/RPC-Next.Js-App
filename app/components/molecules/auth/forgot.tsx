@@ -231,8 +231,8 @@ const Form = ({ status, setStatus }: any) => {
   };
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
   const isPasswordMatched = () => {
-    const password = form.getValues().password;
-    const confirmPassword = form.getValues().confirmPassword;
+    const password = form.watch("password");
+    const confirmPassword = form.watch("confirmPassword");
 
     // Check if password length is greater than or equal to 6 characters
     if (password.length >= 6) {
