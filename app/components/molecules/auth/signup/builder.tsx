@@ -685,7 +685,7 @@ function Builder({ encriptedData }: any) {
                   mt="md"
                   hideControls
                   label="Pin Code"
-                  placeholder="Enter pincode"
+                  placeholder="Enter Pin Code"
                   // onBlurCapture={(e) =>
                   //   form.values.pincode === "" &&
                   //   newForm.setValue("pincode", undefined as any)

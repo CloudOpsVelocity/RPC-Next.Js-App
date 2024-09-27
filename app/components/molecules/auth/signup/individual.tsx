@@ -108,7 +108,7 @@ function Individual() {
               size="lg"
               className="w-[100%] mb-[3%] "
               label="Your Name"
-              placeholder="Enter your name here"
+              placeholder="Enter Your Name Here"
               maxLength={MAX_LENTH_TEXT}
               // {...form.getInputProps("name")}
               onBlurCapture={(e) =>
@@ -129,7 +129,7 @@ function Individual() {
               size="lg"
               mt="xs"
               label="Email"
-              placeholder="Enter your email here"
+              placeholder="Enter Your Email Here"
               onBlurCapture={(e) =>
                 handleTrimAllSpaces(
                   e.target.value,

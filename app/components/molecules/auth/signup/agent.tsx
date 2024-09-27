@@ -233,7 +233,7 @@ function Agent({ encriptedData }: any) {
               required
               size="lg"
               label="Your Name"
-              placeholder="Enter your name here"
+              placeholder="Enter Your Name Here"
               // {...form.getInputProps("userName")}
               onBlurCapture={(e) =>
                 handleTrimAndReplaceReactHookForm(e, "userName", form.setValue)
@@ -255,7 +255,7 @@ function Agent({ encriptedData }: any) {
               size="lg"
               mt="sm"
               label="Email"
-              placeholder="Enter your email here"
+              placeholder="Enter Your Email Here"
               onBlurCapture={(e) =>
                 handleTrimAllSpaces(
                   e.target.value,
@@ -313,7 +313,7 @@ function Agent({ encriptedData }: any) {
                 status === "error" && "!mb-[2px]"
               )}
               label="Mobile Number"
-              placeholder="Enter your mobile number"
+              placeholder="Enter Your Mobile Number"
               // {...form.getInputProps("mobile")}
               error={
                 (form?.formState?.errors?.mobile?.message as string) ||
@@ -431,7 +431,7 @@ function Agent({ encriptedData }: any) {
               }
               maxLength={MAX_LENGTH_ADDRESS}
             />
-            <DropZone onLogoSelect={handleLogoSelect} logo={logo ?? ""} />
+            {/* <DropZone onLogoSelect={handleLogoSelect} logo={logo ?? ""} /> */}
           </Stepper.Step>
 
           <Stepper.Completed>
