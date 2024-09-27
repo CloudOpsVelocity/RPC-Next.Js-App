@@ -10,7 +10,8 @@ export function middleware(request: NextRequest) {
   const excludedPathAgent = "/register/agent";
   const excludedPathBuilder = "/register/builder";
   if (AUTH_ROUTES.includes(request.nextUrl.pathname)) {
-    if (token) {
+    const nextjsToken = cookies().get("next-auth.session-token")?.value;
+    if (nextjsToken) {
       // REDIRECT TO HOME PAGE
       return NextResponse.redirect(new URL("/", request.url));
     }

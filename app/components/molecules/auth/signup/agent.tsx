@@ -430,6 +430,7 @@ function Agent({ encriptedData }: any) {
                 handleTrimAndReplaceReactHookForm(e, "address", form.setValue)
               }
               maxLength={MAX_LENGTH_ADDRESS}
+              mb={40}
             />
             {/* <DropZone onLogoSelect={handleLogoSelect} logo={logo ?? ""} /> */}
           </Stepper.Step>

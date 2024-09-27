@@ -219,9 +219,17 @@ export async function POST(request: Request, response: Response) {
   }
 }
 
-export async function GET() {
-  console.log("GET request received, method not allowed");
-  return new Response("", {
-    status: 405,
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const type = searchParams.get("type");
+  if (!type || (type !== "P" && type !== "B")) {
+    return new Response("something went wrong", {
+      status: 400,
+    });
+  }
+  const filePath = getFilePath(typeMapping[type]);
+  const data = fs.readFileSync(filePath, "utf-8");
+  return new Response(data, {
+    status: 200,
   });
 }
