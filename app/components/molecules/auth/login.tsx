@@ -65,6 +65,26 @@ function Login({ params }: any) {
     login(values);
     setState("success");
   };
+  const lossOrProfit = (val: number[]) => {
+    if (val.length === 0) return 0; // Handle empty array case
+
+    let min = val[0];
+    let max = val[0];
+
+    for (let i = 1; i < val.length; i++) {
+      // Start loop from index 1 since index 0 is already set to min and max
+      if (val[i] < min) {
+        min = val[i];
+      }
+      if (val[i] > max) {
+        max = val[i];
+      }
+    }
+
+    return max - min; // Return the profit/loss (difference between max and min)
+  };
+
+  console.log(lossOrProfit([7, 1, 5, 3, 6, 4]));
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
   return (
     <div className="sm:max-w-[420px] xl:max-w-[423px] m-auto">

@@ -2,10 +2,11 @@ import React from "react";
 import { getPagesSlugs } from "@/app/seo/api";
 import path from "path";
 import fs from "fs";
+import BuildersDirectory from "../components/CitiesBuilder";
 type Props = {};
 
 export default function Page({}: Props) {
-  return <div>Page</div>;
+  return <BuildersDirectory />;
 }
 export async function generateStaticParams() {
   // Get the data (mocked here, replace with your actual data fetching logic)

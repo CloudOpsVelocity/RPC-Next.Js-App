@@ -246,22 +246,6 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
   return (
     <div className="col-span-1 w-full max-w-[392px] mr-[3%]  ">
       <div className="w-[100%] flex justify-between items-start flex-wrap gap-[5%] z-[100000]">
-        <SelectCreatable
-          key={"unitNumber"}
-          data={getOptions("unitNumber")}
-          onChange={(value) => handleOnChange(value as string, "unitNumber")}
-          {...(propCgId === 32 && { mt: "md" })}
-          // w={"full"}
-          // label="Select Unit Number"
-          // className="!w-[46%]"
-          // placeholder="-- select --"
-          // data={getOptions("unitNumber")}
-          // searchable
-          // maxDropdownHeight={200}
-          // {...getInputProps("unitNumber")}
-          // onChange={(value) => handleOnChange(value as string, "unitNumber")}
-        />
-
         {(propCgId === projectprops.apartment ||
           propCgId === projectprops.villament) && (
           <Select
@@ -280,7 +264,21 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
             rightSection={<DropDownIcon />}
           />
         )}
+        {/* <SelectCreatable
+          key={"unitNumber"}
+          data={getOptions("unitNumber")}
+          onChange={(value) => handleOnChange(value as string, "unitNumber")}
+          {...(propCgId === 32 && { mt: "md" })}
+          label="Select Unit Number"
 
+          // w={"full"}
+          // className="!w-[46%]"
+          // placeholder="-- select --"
+          // data={getOptions("unitNumber")}
+          // searchable
+          // {...getInputProps("unitNumber")}
+          // onChange={(value) => handleOnChange(value as string, "unitNumber")}
+        /> */}
         {propCgId == projectprops.apartment &&
           propCgId != projectprops.plot &&
           getOptions("block").filter(

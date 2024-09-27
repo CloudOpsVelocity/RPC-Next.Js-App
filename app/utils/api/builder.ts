@@ -41,6 +41,7 @@ export const getBuilderDetailsPageData = async (
   try {
     const response = await fetch(url, {
       next: { tags: [`${pathname ?? slug}`] },
+      cache: "no-cache",
     });
     const data: Main = await response.json();
     return data as Main;

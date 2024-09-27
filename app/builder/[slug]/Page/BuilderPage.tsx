@@ -7,6 +7,7 @@ import SectionSkeleton from "@/app/components/atoms/skeleton/section";
 import TopProfileBlock from "@/app/components/builder/topProfileBlock";
 import ProjectDetails from "@/app/components/builder/projectDetails";
 import ManagementBlock from "@/app/components/builder/management";
+import Disclamer from "@/app/components/builder/Disclamer";
 const LoginPopup = dynamic(
   () => import("@/app/components/project/modals/LoginPop"),
   {
@@ -17,6 +18,7 @@ const LoginPopup = dynamic(
 type Props = { data: any; id: string };
 
 export default function BuilderPage({ data, id }: Props) {
+  const refURls = data?.data?.sourceBuilderUrl?.split(",");
   return (
     <div className="flex flex-col justify-start items-center w-full mt-[70px]  ">
       {data && (
@@ -46,6 +48,8 @@ export default function BuilderPage({ data, id }: Props) {
                   : ""
               }
             />
+
+            <Disclamer refUrls={refURls} />
           </div>
           <Reqcallback builderName={data.data?.userName} />
           <ProjectDrawer projName={data?.data?.userName} />

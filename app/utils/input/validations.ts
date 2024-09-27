@@ -26,16 +26,39 @@ export const handleTrimAndReplaceReactHookForm = (
   e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   fieldName: string,
   form: any,
-  type?: "dis" | "full"
+  type?: "dis" | "full" | "builderName",
+  callback: (isRegex: boolean) => void = () => {}
 ) => {
   const value = e.target.value.trim().replace(/\s+/g, " ");
-  type === "dis" ? form(fieldName, value) : form(fieldName, value);
+  switch (type) {
+    case "builderName":
+      {
+        // Check if there are special characters
+        const hasSpecialChars = /[^\w\s]/g.test(value);
+
+        // Remove all special characters, keep only alphanumeric and spaces
+        const validBuilderName = value
+          .trim()
+          .replace(/[^\w\s]/g, "") // Remove special characters, keep alphanumeric and spaces
+          .replace(/\s+/g, " ");
+
+        form(fieldName, validBuilderName);
+
+        // Pass true if special characters were found, otherwise false
+        callback && callback(hasSpecialChars);
+      }
+      break;
+
+    default:
+      form(fieldName, value);
+      break;
+  }
 };
 export const handleTrimAllSpaces = (
   value: string,
   fieldName: string,
   setter: any,
-  type?: "email" | "phone" | "name"
+  type?: "email" | "phone" | "name" | "builderName"
 ) => {
   switch (type) {
     case "email":
@@ -54,7 +77,17 @@ export const handleTrimAllSpaces = (
         setter(fieldName, validEmail);
       }
       break;
+    case "builderName":
+      {
+        // Remove all special characters, keep only alphanumeric and spaces
+        const validBuilderName = value
+          .trim()
+          .replace(/[^\w\s]/g, "") // Remove special characters, keep alphanumeric and spaces
+          .replace(/\s+/g, " "); // Replace multiple spaces with a single space
 
+        setter(fieldName, validBuilderName);
+      }
+      break;
     default:
       setter(fieldName, value.trim().replace(/\s+/g, ""));
       break;

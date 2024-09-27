@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { Combobox, InputBase, useCombobox } from "@mantine/core";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import S from "@/app/styles/Floorplan.module.css";
+import { DropDownIcon } from "@/app/images/commonSvgs";
 
 interface SelectCreatableProps {
   data: string[]; // Array of options to display (strings or objects)
@@ -14,7 +15,6 @@ interface SelectCreatableProps {
 
 export function SelectCreatable({
   data,
-
   onChange,
   placeholder = "Search value",
   label,
@@ -55,7 +55,7 @@ export function SelectCreatable({
     >
       <Combobox.Target>
         <InputBase
-          size="md"
+          size="sm"
           label={label}
           rightSection={<Combobox.Chevron />}
           onChange={(event) => {
@@ -69,10 +69,12 @@ export function SelectCreatable({
             combobox.closeDropdown();
             // setSearch(value || "");
           }}
+          maw={180}
           placeholder={placeholder}
           rightSectionPointerEvents="none"
           value={search}
-          classNames={{ input: S.input, label: S.labelByBhk }}
+          classNames={{ input: S.input, label: S.label }}
+          rightSectionProps={<DropDownIcon />}
         />
       </Combobox.Target>
       <Combobox.Dropdown

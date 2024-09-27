@@ -338,6 +338,18 @@ function Builder({ encriptedData }: any) {
       }
     }
   };
+  const handleBuilderNameCallback = (isSpecialCharacters: boolean) => {
+    if (isSpecialCharacters) {
+      newForm.setError("builderName", {
+        type: "custom",
+        message: "Note: Special characters (e.g., ./@) are not allowed.",
+      });
+      setTimeout(() => {
+        newForm.clearErrors("builderName");
+      }, 4000);
+    }
+  };
+  console.log(newForm.formState.errors);
   const queryParam = getQueryParamClient();
   const ref = useRef<HTMLInputElement>(null);
 
@@ -431,6 +443,10 @@ function Builder({ encriptedData }: any) {
               <TextInput
                 name="userName"
                 control={newForm.control}
+                {...(newForm.formState.errors?.builderName && {
+                  description: newForm.formState.errors?.builderName
+                    .message as string,
+                })}
                 required
                 size="lg"
                 label="Builder Name"
@@ -439,7 +455,9 @@ function Builder({ encriptedData }: any) {
                   handleTrimAndReplaceReactHookForm(
                     e,
                     "userName",
-                    newForm.setValue
+                    newForm.setValue,
+                    "builderName",
+                    handleBuilderNameCallback
                   )
                 }
                 classNames={{
@@ -447,6 +465,7 @@ function Builder({ encriptedData }: any) {
                   input: StepCss.textInput,
                   error: StepCss.errorMsg,
                   label: StepCss.mlabelCss,
+                  description: "!text-[14px] font-semibold !text-[#0073C6]",
                 }}
                 mt={"md"}
                 maxLength={MAX_LENGTH_COMPANY_NAME}
