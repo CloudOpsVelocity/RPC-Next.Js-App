@@ -33,18 +33,18 @@ export const handleTrimAndReplaceReactHookForm = (
   switch (type) {
     case "builderName":
       {
-        // Check if there are special characters
-        const hasSpecialChars = /[^\w\s]/g.test(value);
+        // Check if there are special characters other than &
+        const hasSpecialChars = /[^\w\s&]/g.test(value);
 
-        // Remove all special characters, keep only alphanumeric and spaces
+        // Remove all special characters except &, keep alphanumeric, spaces, and &
         const validBuilderName = value
           .trim()
-          .replace(/[^\w\s]/g, "") // Remove special characters, keep alphanumeric and spaces
+          .replace(/[^\w\s&]/g, "") // Remove special characters except &, keep alphanumeric, spaces, and &
           .replace(/\s+/g, " ");
 
         form(fieldName, validBuilderName);
 
-        // Pass true if special characters were found, otherwise false
+        // Pass true if special characters (other than &) were found, otherwise false
         callback && callback(hasSpecialChars);
       }
       break;

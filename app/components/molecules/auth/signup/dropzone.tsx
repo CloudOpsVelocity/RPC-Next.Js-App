@@ -2,7 +2,7 @@
 import "@mantine/dropzone/styles.css";
 import { mediaCloudIcon } from "@/app/images/commonSvgs";
 import { Button, Group, Image, Modal, Text, rem } from "@mantine/core";
-import { Dropzone, DropzoneProps, IMAGE_MIME_TYPE } from "@mantine/dropzone";
+import { Dropzone, DropzoneProps,  } from "@mantine/dropzone";
 import toast from "react-hot-toast";
 import { useRef, useState } from "react";
 import Logo from "@/app/components/atoms/Logo";
@@ -13,7 +13,7 @@ interface DropZoneProps extends Partial<DropzoneProps> {
   onLogoSelect: (logo: File) => void;
   logo?: File;
 }
-
+const IMAGE_MIME_TYPE = ["image/png", "image/jpeg", "image/jpg", "image/webp"];
 export function DropZone(props: Partial<DropZoneProps>) {
   const [error, setError] = useState("");
   return (
@@ -50,15 +50,11 @@ export function DropZone(props: Partial<DropZoneProps>) {
           <div className="flex justify-center items-center h-full space-x-2">
             {mediaCloudIcon}
             <div className=" w-[50%] Xl:w-full sm:min-w-[260px]">
-              <p className="text-black text-sm not-italic font-medium leading-[normal] hidden md:block lg:block xl:block  sm:hidden ">
-                Select a file or drag and drop here
+              <p className="text-black text-[13px] not-italic font-medium leading-[normal] hidden md:block lg:block xl:block  sm:hidden ">
+              Select or drag and drop an image file here      Supported formats:   PNG, JPG, JPEG, WebP. Max file size: 10MB.
               </p>
-              <p className="text-black text-sm not-italic font-medium leading-[normal] block md:hidden lg:hidden xl:hidden">
-                Select a file
-              </p>
-              <p className="text-[#545353] text-[12px] not-italic font-normal leading-[normal]">
-                JPG, PNG or JPEG, file size no more than 10MB
-              </p>{" "}
+              
+
             </div>
             <Button className="selectFile" size="xs" variant="outline">
               Select

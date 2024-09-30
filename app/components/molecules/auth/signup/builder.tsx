@@ -90,6 +90,7 @@ function Builder({ encriptedData }: any) {
   const { registerOtherDetails, register, login, saveStep } = useAuth({
     type: "register",
   });
+  
   const newForm = useForm<any>({
     reValidateMode: "onBlur",
     shouldUseNativeValidation: false,
