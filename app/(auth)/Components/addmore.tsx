@@ -60,7 +60,7 @@ export default function AddmoreInput({
         required={index == 0 ? true : false}
         size="lg"
         {...(index == 0 ? { mt: 0 } : { mt: "md" })}
-        {...(index == 2 && { mb: "xs" })}
+        {...(index == 3 && { mb: "xs" })}
         // mt={"md"}
         label={index != 0 ? `${label} ${index + 1}` : label}
         placeholder={placeholder}
