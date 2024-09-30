@@ -1,5 +1,4 @@
 import { useAtom, atom } from "jotai";
-import { useState, useEffect } from "react";
 
 type GalleryContent = {
   type: "image" | "video";

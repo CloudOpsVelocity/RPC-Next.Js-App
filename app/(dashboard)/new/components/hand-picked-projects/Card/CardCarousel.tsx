@@ -4,29 +4,32 @@ import React from "react";
 import "@mantine/carousel/styles.css";
 import { CarouseSelArrowIcon } from "@/app/images/HomePageIcons";
 import useIds from "../../useIds";
-type Props = { data: any; active: number };
+type Props = { data: any; active: number; shortIds: any };
 import Css from "../../../Style.module.css";
 import Card from "../../newly-added-projects/Card";
-export default function CardCarousel({ data, active }: Props) {
-  const { data: ids } = useIds();
+export default function CardCarousel({ data, shortIds, active }: Props) {
   return (
     <Carousel
-      slideSize={{ base: "100%", sm: "50%", md: "33.333333%" }}
-      slideGap="md"
+      slideSize={{ base: "55%", sm: "36%", md: "28%" }}
+      slideGap={{ base: "10px", sm: "md", xl: "xl" }}
       align="start"
       slidesToScroll={1}
-      mt={20}
+      mt={0}
       nextControlIcon={<CarouseSelArrowIcon />}
       previousControlIcon={<CarouseSelArrowIcon className="rotate-180" />}
       controlsOffset={"-10px"}
       classNames={Css}
+      key={active}
     >
-      {data.map((item: any, index: number) => (
-        <Carousel.Slide key={index}>
+      {data?.map((item: any, index: number) => (
+        <Carousel.Slide key={item.projIdEnc}>
           <Card
             item={{
               ...item,
-              shortListed: ids?.includes(item.projIdEnc) ? "Y" : "N",
+              shortListed:
+                shortIds?.projIds && shortIds?.projIds?.includes(item.projIdEnc)
+                  ? "Y"
+                  : "N",
             }}
           />
         </Carousel.Slide>

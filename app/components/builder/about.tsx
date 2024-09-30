@@ -2,6 +2,7 @@ import React from "react";
 import clsx from "clsx";
 import PropertyHeading from "../property/heading";
 import ReadMore from "./readmore";
+import { useMediaQuery } from "@mantine/hooks";
 
 type Props = {
   heading: string;
@@ -25,15 +26,16 @@ export default function About({
   showProjName,
   builderName,
 }: Props) {
+  const isMobile = useMediaQuery(`(max-width: 600px)`);
   return (
-    <div className={clsx("w-full sm:w-[90%] mb-[2%]", className)} id={id ?? ""}>
-      <h1 className="text-[#242424] text-[28px] not-italic font-semibold mb-2 sm:mb-[24px] flex">
+    <div className={clsx("w-full  mb-[2%]", className)} id={id ?? ""}>
+      {/* <h1 className="text-[#242424] text-[28px] not-italic font-semibold mb-2 sm:mb-[24px] flex">
         {heading}
-      </h1>
+      </h1> */}
 
       <ReadMore
         text={content}
-        maxLines={4}
+        maxLines={isMobile ? 3 : 12}
         title={heading}
         showProjName={showProjName}
         builderName={builderName}

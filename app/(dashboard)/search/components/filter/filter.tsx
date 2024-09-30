@@ -4,6 +4,8 @@ import { SEARCH_FILTER_DATA } from "@/app/data/search";
 import useSearchFilters from "@/app/hooks/search";
 import { RangeSlider } from "@mantine/core";
 import S from "@/app/styles/search.module.css";
+import { formatBudgetValue } from "../buget";
+import { toFormattedString } from "../buget/budget";
 const FilterSection = ({ open, close }: any) => {
   const { filters, handleSliderChange, setPropTypes, handleCheckboxClick } =
     useSearchFilters();
@@ -25,7 +27,7 @@ const FilterSection = ({ open, close }: any) => {
               selected={
                 filters.propTypes === propertyDetailsTypes?.get(keyName)?.id
               }
-            ></Button>
+            />
           ))}
         </div>
       </div>
@@ -41,7 +43,7 @@ const FilterSection = ({ open, close }: any) => {
               value={bhk.title}
               onClick={() => handleCheckboxClick("unitTypes", bhk.value)}
               selected={filters.unitTypes.includes(bhk.value)}
-            ></Button>
+            />
           ))}
         </div>
       </div>
@@ -51,37 +53,25 @@ const FilterSection = ({ open, close }: any) => {
           Budget
         </h3>
         <p className="text-[#4D6677] text-[16px] font-[600] mb-[2%] ">
-          ₹ {filters.bugdetValue[0]} - ₹ {filters.bugdetValue[1]} Cr
+          ₹ {toFormattedString(filters.bugdetValue[0])} - ₹{" "}
+          {toFormattedString(filters.bugdetValue[1])} Cr
         </p>
         <RangeSlider
           color="green"
           key="budgetSlider"
-          marks={[
-            { value: 0, label: "₹ 0" },
-            { value: 0.5, label: "₹ 0.5 Cr" },
-            { value: 1, label: "₹ 1 Cr" },
-            { value: 1.5, label: "₹ 1.5 Cr" },
-            { value: 2, label: "₹ 2 Cr" },
-            { value: 2.5, label: "₹ 2.5 Cr" },
-            { value: 3, label: "₹ 3 Cr" },
-            { value: 3.5, label: "₹ 3.5 Cr" },
-            { value: 4, label: "₹ 4 Cr" },
-            { value: 4.5, label: "₹ 4.5 Cr" },
-            { value: 5, label: "₹ 5 Cr" },
-          ]}
           classNames={{
             markLabel: S.markLabel,
           }}
-          minRange={0.2}
-          min={0}
-          max={5}
-          step={0.05}
           onChange={(value) => handleSliderChange("bugdetValue", value)}
           style={{ width: "100%" }}
           defaultValue={[
-            filters?.bugdetValue[0] ?? 0,
-            filters?.bugdetValue[1] ?? 5,
+            filters?.bugdetValue[0] ?? 500000,
+            filters?.bugdetValue[1] ?? 600000000,
           ]}
+          min={0}
+          max={600000000}
+          step={100000}
+          label={(value) => toFormattedString(value)}
         />
       </div>
     </section>

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useCallback, useRef, useMemo } from "react";
+import React, { useState, useCallback, useRef, useMemo, Fragment } from "react";
 import { Tabs, ScrollArea } from "@mantine/core";
 import { clsx } from "clsx";
 import { Coordinates } from "@/app/utils/maps";
@@ -71,29 +71,36 @@ const LeafMap: React.FC<{
         name: location.name,
       });
     },
-    [selectedLocation, selected]
+    []
   );
 
   const isMobile = useMediaQuery(`(max-width: 750px)`);
   const downData =
     mapData && mapData[selected] && mapData[selected].length > 0
-      ? mapData[selected].slice(isMobile ? -5 : -8)
+      ? mapData[selected]
       : [];
   return Object.keys(mapData).length > 0 ? (
-    <div className="w-full scroll-mt-[170px] mx-auto mb-[3%]" id="nearBy">
-      <div className="flex justify-between w-[95%] sm:w-[90%] mx-auto">
+    <div
+      className="w-full scroll-mt-[170px] mx-auto mb-[3%] sm:mb-0 sm:pt-less-screen-spacing"
+      id="near-by-projects"
+    >
+      <div className="flex justify-between w-[95%] sm:w-[90%] mx-auto scroll-mt-[200px]">
         {type === "prop" ? (
           <PropertyHeading
-            title="Near BY LOCATIONS"
+            title={
+              <Fragment>
+                Location Map Of Project{" "}
+                <span className="text-[#148B16]">{projName}</span>
+              </Fragment>
+            }
             desc="Explore nearby convenient amenities, entertainment, and essential services"
-            className="mb-[40px]"
-            projName={projName}
+            className="sm:mb-[18px]"
           />
         ) : (
           <div>
             <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-semibold mb-[12px] capitalize break-words ">
+              <span>Location Map Of Project </span>
               <span className="text-[#148B16] font-bold">{projName} </span>
-              <span>Near By Locations</span>
             </h2>
             <SubHeading
               text="Explore nearby convenient amenities, entertainment, and essential services"
@@ -143,7 +150,7 @@ const LeafMap: React.FC<{
                       <LocationList
                         type="public"
                         {...location}
-                        key={index}
+                        key={Math.random()}
                         origin={{
                           lat: Number(lat),
                           lng: Number(lang),
@@ -178,13 +185,13 @@ const LeafMap: React.FC<{
 
       {mapData[selected] && mapData[selected].length > 0 && (
         <div className="mt-8 w-[90%] mx-auto hidden sm:block">
-          <h1 className="text-[#303030] text-[16px] md:text-xl not-italic font-medium leading-[normal] tracking-[0.8px] capitalize">
-            {selected.split("_").join(" ")} Nearby
+          <h1 className="text-h2 sm:text-[22px] xl:text-[32px] font-semibold mb-[12px] capitalize break-words">
+            Nearby <span className="text-[#148B16] ml-1">{projName} </span>
           </h1>
           <div className="flex gap-2 mt-3 flex-wrap sm:gap-x-[2.5] xl:gap-x-5">
             {downData.map((item: any, index: number) => (
               <MapCard
-                key={index}
+                key={Math.random()}
                 {...item}
                 origin={{
                   lat: Number(lat),
@@ -200,8 +207,8 @@ const LeafMap: React.FC<{
     </div>
   ) : (
     <div
-      id="nearBy"
-      className="w-[95%] md:w-[90%] scroll-mt-[180px]  mb-[5%] justify-center"
+      id="near-by-projects"
+      className="w-[95%] md:w-[90%] scroll-mt-[180px]  sm:mt-[20px] xl:mt-[50px] justify-center"
     >
       <div className="flex justify-between w-[90%] ">
         {type === "prop" ? (
@@ -214,8 +221,8 @@ const LeafMap: React.FC<{
         ) : (
           <div>
             <h2 className="text-h2 sm:text-[22px] xl:text-[32px]  font-[600] text-[#001F35] mb-[12px] capitalize break-words sm:text-nowrap ">
+              <span>Location Map Of Project </span>
               <span className="text-[#148B16]  ">{projName} </span>
-              <span>Near By Locations</span>
             </h2>
             {/*  <SubHeading
                     text="Explore nearby convenient amenities, entertainment, and essential services"
@@ -245,7 +252,6 @@ const MapCard = ({
   showLocationOnMap,
   lat,
   lang,
-  origin,
   distance,
   time,
   type,
@@ -253,6 +259,7 @@ const MapCard = ({
   const setIsScrolling = useSetAtom(
     type === "prop" ? propScrollingAtom : isScrollingAtom
   );
+
   const handleClick = () => {
     showLocationOnMap({
       position: {
@@ -261,11 +268,11 @@ const MapCard = ({
       },
       name,
     });
-    scrollToTopic("nearBy");
+    scrollToTopic("near-by-projects");
   };
+
   const scrollToTopic = (id: string): void => {
     setIsScrolling(true);
-
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({
@@ -276,27 +283,24 @@ const MapCard = ({
     }
     setTimeout(() => setIsScrolling(false), 3000);
   };
+
   return (
     <div
-      className="flex sm:flex-col items-start gap-3 px-2 py-2 sm:py-3.5 cursor-pointer shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] border-[0.5px] border-solid border-[#D9D9D9] bg-[#fcfcfc] w-full md:min-w-[385px] max-w-[385px] mb-1 xl:mb-5"
+      className="flex flex-col items-start gap-2 px-3 py-3 cursor-pointer shadow-sm rounded-lg border border-[#E5E7EB] bg-white w-full max-w-[300px] transition-all hover:shadow-md hover:border-[#D1D5DB] mb-2"
       onClick={handleClick}
     >
-      <div className="flex items-center justify-between sm:flex-wrap w-full">
-        <h6 className="text-black text-[12px] sm:text-[16px] xl:text-lg not-italic font-medium leading-[normal] max-w-[60%] capitalize  sm:min-w-[100%] w-full">
-          {name}
-        </h6>
-        <div className="flex gap-1 text-sm">
-          <span className="flex items-center">
-            {nearbyLocationIcon}
-            <span className="ml-[4px] text-[#005DA0] text-[12px] md:text-lg not-italic font-medium leading-[normal] text-nowrap">
-              {distance ?? "N/A"}
-            </span>
-            <span className="mx-2">|</span>
-            <span className="text-[#001F35] text-[12px] sm:text-[16px] xl:text-lg not-italic font-medium leading-[normal] text-nowrap">
-              {time ?? "N/A"}
-            </span>
+      <h6 className="text-black text-lg font-semibold leading-tight capitalize w-full truncate">
+        {name}
+      </h6>
+      <div className="flex items-center justify-start w-full text-base text-gray-700">
+        <div className="flex items-center gap-1">
+          {nearbyLocationIcon}
+          <span className="ml-1 text-[#005DA0] font-medium">
+            {distance ?? "N/A"}
           </span>
         </div>
+        <span className="mx-2">|</span>
+        <span className="font-medium">{time ?? "N/A"}</span>
       </div>
     </div>
   );
@@ -357,7 +361,7 @@ const LocationList: React.FC<{
       name,
     });
     if (isMobile) {
-      scrollToTopic("nearBy");
+      scrollToTopic("near-by-projects");
     }
   };
 

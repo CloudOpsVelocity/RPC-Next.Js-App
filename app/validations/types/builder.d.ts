@@ -27,8 +27,10 @@ export interface Data {
   stateName: string;
   cityName: string;
   pinCode: string;
+  mdname: string;
   userName: string;
   localityName: string;
+  builderCity: string;
   projectAvailableCities: {
     [key: string]: string;
   };

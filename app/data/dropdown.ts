@@ -4,7 +4,7 @@ const baseUrl = process.env.NEXT_PUBLIC_PROJECT_URL;
 const data = [
   {
     label: "My Profile",
-    url: `${baseUrl}/my-profile`,
+    url: `${baseUrl}/my-profile#step_B`,
   },
   {
     label: "Dashboard",
@@ -12,11 +12,11 @@ const data = [
   },
   {
     label: "Post Project",
-    url: `${baseUrl}/project/postProject`,
+    url: `${baseUrl}/post-project`,
   },
   {
     label: "Post Listing",
-    url: `${baseUrl}/property/v1/post`,
+    url: `${baseUrl}/post-listing/v1`,
   },
   {
     label: "About Us",

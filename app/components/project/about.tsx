@@ -14,6 +14,7 @@ type Props = {
   className?: string;
   showProjName?: boolean;
   builderName?: string;
+  maxLines?: number;
 };
 
 export default function About({
@@ -25,12 +26,13 @@ export default function About({
   className,
   showProjName,
   builderName,
+  maxLines = 6,
 }: Props) {
   const isMobile = useMediaQuery(`(max-width: 750px)`);
   return (
     <div
       className={clsx(
-        "w-[95%] md:w-[90%] sm:mt-[70px] sm:mb-[50px] scroll-mt-[150px]",
+        "w-[95%] sm:w-[90%] sm:mb-[0px] xl:mb-[0%] mt-4  sm:mt-[50px] m-auto mb-[20px] sm:scroll-mt-[140px] xl:scroll-mt-[150px]",
         className
       )}
       id={id ?? ""}
@@ -41,10 +43,10 @@ export default function About({
           desc={
             "About listing get summarized perspective for the incredible listing"
           }
-          className="mb-[14px] sm:mb-[30px]"
+          className="mb-[14px] sm:mb-[8px]"
         />
       ) : (
-        <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[10px] xl:mb-[24px] capitalize">
+        <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[10px] xl:mb-[10px] capitalize">
           {heading}{" "}
           <span className={clsx(" font-[700]  text-[#148B16]")}>
             {projName}
@@ -54,7 +56,7 @@ export default function About({
 
       <ReadMore
         text={content}
-        maxLines={isMobile ? 1 : 6}
+        maxLines={isMobile ? 2 : maxLines}
         title={heading}
         showProjName={showProjName}
         builderName={builderName}

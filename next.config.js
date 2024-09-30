@@ -3,12 +3,18 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  typescript: { ignoreBuildErrors: !!process.env.NODE_ENV === "production" },
+
+  // eslint: {
+  //   dirs: ["app", "components", "lib", "pages", "styles"],
+  // },
+
+  // typescript: { ignoreBuildErrors: true },
   experimental: {
     optimizePackageImports: ["@mantine/core", "@mantine/hooks"],
+    // ppr: true,
   },
   images: {
-    minimumCacheTTL: 60 * 100,
+    // minimumCacheTTL: 60 * 100,
     remotePatterns: [
       { hostname: "d1l03fubsuphsh.cloudfront.net" },
       { hostname: "d2l0lb5gc1bw3t.cloudfront.net" },
@@ -38,6 +44,7 @@ const nextConfig = {
   env: {
     APP_ENV: process.env.APP_ENV || process.env.NODE_ENV || "development",
   },
+  staticPageGenerationTimeout: 180,
 };
 
 module.exports = nextConfig;

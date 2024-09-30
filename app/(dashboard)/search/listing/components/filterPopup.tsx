@@ -26,11 +26,15 @@ import { useQuery } from "react-query";
 import { getData } from "@/app/utils/api/search";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
+import { toFormattedString } from "../../components/buget/budget";
+import { MainSearchMultiSelect } from "../../components/_ui/MultiselectListings";
+import { formatBudgetValue } from "../../components/buget";
+import FurnishOptions from "./filterSection/Furnish";
 
-const FilterPopup = () => {
+const FilterPopup = ({ close }: { close: () => void }) => {
   const path = usePathname();
   const [current, setCurrent] = useState("Bhk");
-  const propKeys = [35, 33, 31, 34, 32];
+  const propKeys = [35, 33, 31, 34, 32, 36];
   const [localitySearch, setSearchLocality] = useDebouncedState("", 500);
 
   const { data } = useQuery({
@@ -81,7 +85,7 @@ const FilterPopup = () => {
           {filteredSearchDetails.map((eachItem, index) => {
             return (
               <Button
-                key={index}
+                key={eachItem}
                 title={eachItem}
                 onChange={() => scrollWhereIsSelected(eachItem)}
                 buttonClass={clsx(
@@ -101,28 +105,37 @@ const FilterPopup = () => {
         </div>
       </div>
       <div className="w-full">
-        <ClearAll type="all" />
+        <ClearAll type="prjectsearchlisting" close={close} />
         {/* Right Side Fields Con */}
         <ScrollArea
           h={400}
-          className="w-full pt-[1%] pl-[2%]    "
+          miw={"full"}
+          className="w-full pt-[1%] sm:pl-[2%]    "
           viewportRef={viewport}
         >
+          <h3
+            className=" text-[#202020] mb-[1%] text-[14px] font-[600] "
+            id="Search"
+          >
+            Search By Locality, Projects or Listings
+          </h3>
+          <MainSearchMultiSelect type="listing" />
           {filters?.propTypes != projectprops.plot && (
-            <React.Fragment>
+            <>
               <h3
-                className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[1%] "
-                id="Bhk"
+                className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
+                id="BHK Type"
               >
-                BHK
+                BHK Type
               </h3>
-              <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
+              <div className="flex  mb-[3%] justify-start items-center  gap-[4%] flex-wrap ">
                 {SEARCH_FILTER_DATA.bhkDetails.map((eachStatus, index) => {
                   return (
                     <Checkbox
+                      className="my-2"
                       label={eachStatus.title}
                       color="green"
-                      key={index}
+                      key={eachStatus.title}
                       onClick={() =>
                         handleCheckboxClick("unitTypes", eachStatus.value)
                       }
@@ -131,11 +144,11 @@ const FilterPopup = () => {
                   );
                 })}
               </div>
-            </React.Fragment>
+            </>
           )}
           <h3
-            className=" text-[#202020] mb-[2%] text-[14px] font-[500] "
-            id="Project Status"
+            className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
+            id="Property Status"
           >
             Property Status
           </h3>
@@ -143,6 +156,7 @@ const FilterPopup = () => {
             {SEARCH_FILTER_DATA.listingStatus.map((eachStatus, index) => {
               return (
                 <Radio
+                  key={eachStatus.cid}
                   checked={eachStatus.cid == filters.propStatus}
                   value={eachStatus.cid}
                   iconColor="dark.8"
@@ -155,16 +169,19 @@ const FilterPopup = () => {
             })}
           </div>
           <h3
-            className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] flex items-center gap-[5px] "
+            className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
             id="Property Type"
           >
-            Property Type {notificationIcon}
+            Property Type {/* {notificationIcon} */}
           </h3>
-          <div className="flex  mb-[3%] justify-start items-start flex-wrap gap-[4%]">
+          <div className="flex  mb-[3%] justify-start items-center  gap-[4%] flex-wrap ">
             {propKeys.map((keyName, i) => {
+              if (keyName === 32 && filters.unitTypes.length > 0) {
+                return null;
+              }
               return (
                 <Radio
-                  key={i}
+                  key={keyName}
                   iconColor="dark.8"
                   color="green"
                   label={propertyDetailsTypes?.get(keyName)?.name}
@@ -184,22 +201,25 @@ const FilterPopup = () => {
             })}
           </div>
           <h3
-            className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] flex items-center gap-[5px] "
+            className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
             id="Posted By"
           >
-            Listed By
+            Posted By
           </h3>
-          <div className="flex  mb-[3%] justify-start items-start flex-wrap gap-[4%]">
+          <div
+            className="flex  mb-[3%] justify-start items-start flex-wrap gap-[4%]"
+            key={"listedBy"}
+          >
             {SEARCH_FILTER_DATA.listedBy
               .filter(({ value }) => !(value === "B" && path === "/search"))
-              .map(({ value, constDesc }, i) => (
+              .map(({ value, constDesc }) => (
                 <Radio
-                  key={i}
+                  key={constDesc}
                   iconColor="dark.8"
                   color="green"
                   label={constDesc}
                   value={value}
-                  name="ListedBy"
+                  name="listedBy"
                   style={{ whiteSpace: "nowrap", marginBottom: "10px" }}
                   onClick={() => setSingleType("listedBy", value)}
                   checked={filters.listedBy === value}
@@ -208,7 +228,7 @@ const FilterPopup = () => {
           </div>
 
           <h3
-            className=" text-[#202020] mb-[2%] text-[14px] font-[500] "
+            className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
             id="Locality"
           >
             Locality
@@ -219,8 +239,8 @@ const FilterPopup = () => {
               {filters.locality.map((eachLocality, index) => {
                 return (
                   <div
-                    key={index}
-                    className="capitalize flex justify-center items-center p-[1%] r shadow-[0px_4px_10px_0px_rgba(202,233,255,0.30)]   border rounded-[5px] border-solid border-[#92B2C8]"
+                    key={eachLocality}
+                    className="capitalize flex justify-center items-center text-[12px] sm:text-[16px] sm:p-[1%]  shadow-[0px_4px_10px_0px_rgba(202,233,255,0.30)]   border rounded-[5px] border-solid border-[#92B2C8]"
                   >
                     {eachLocality.split("+")[0]}
                     <span
@@ -242,7 +262,7 @@ const FilterPopup = () => {
             data={data}
             searchable
             nothingFoundMessage={
-              localitySearch !== "" ? "Nothing found..." : "Search somehitng..."
+              localitySearch !== "" ? "Nothing found..." : "Search something..."
             }
             value={filters.locality}
             comboboxProps={{ withinPortal: false }}
@@ -257,20 +277,21 @@ const FilterPopup = () => {
           {filters?.propTypes != projectprops.plot && (
             <React.Fragment>
               <h3
-                className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[5%] "
+                className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
                 id="Facing"
               >
                 Facing
               </h3>
-              <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
+              <div className="flex  mb-[3%] justify-start items-center  gap-[4%] flex-wrap ">
                 {SEARCH_FILTER_DATA.facing.map((x, i) => {
                   return (
                     <Checkbox
-                      key={i}
+                      className="my-1"
+                      key={x.constDesc}
                       label={x.constDesc}
                       color="green"
-                      onClick={() => handleCheckboxClick("facings", x.cid + 1)}
-                      checked={filters.facings.includes(x.cid + 1)}
+                      onClick={() => handleCheckboxClick("facings", x.cid)}
+                      checked={filters.facings.includes(x.cid)}
                     />
                   );
                 })}
@@ -281,17 +302,17 @@ const FilterPopup = () => {
           {filters?.propTypes != projectprops.plot && (
             <React.Fragment>
               <h3
-                className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[5%] "
-                id="Bath"
+                className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
+                id="No.of.Bathrooms"
               >
-                Bath
+                No.of.Bathrooms
               </h3>
               <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
                 {[...Array(6)].map((x, i) => {
                   return (
                     <Checkbox
-                      key={i}
-                      label={`${i == 5 ? "+5" : i + 1} Bath`}
+                      key={filters.bathRooms[i]}
+                      label={`${i == 5 ? "5+" : i + 1} Bath`}
                       color="green"
                       onClick={() => handleCheckboxClick("bathRooms", i + 1)}
                       checked={filters.bathRooms.includes(i + 1)}
@@ -302,44 +323,35 @@ const FilterPopup = () => {
             </React.Fragment>
           )}
           <h3
-            className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[5%] "
-            id="Budget"
+            className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
+            id="Budget (In Rupees)"
           >
-            Budget
+            Budget (In Rupees)
           </h3>
           <p className="text-[#4D6677] text-[16px] font-[600] mb-[2%] ">
-            ₹ {filters.bugdetValue[0]} - ₹ {filters.bugdetValue[1]} Cr
+            ₹ {toFormattedString(filters.bugdetValue[0])} - ₹{" "}
+            {toFormattedString(filters.bugdetValue[1])}
           </p>
           <RangeSlider
             color="green"
             key="budgetSlider"
-            marks={[
-              { value: 0, label: "₹ 0" },
-              { value: 0.5, label: "₹ 0.5 Cr" },
-              { value: 1, label: "₹ 1 Cr" },
-              { value: 1.5, label: "₹ 1.5 Cr" },
-              { value: 2, label: "₹ 2 Cr" },
-              { value: 2.5, label: "₹ 2.5 Cr" },
-              { value: 3, label: "₹ 3 Cr" },
-              { value: 3.5, label: "₹ 3.5 Cr" },
-              { value: 4, label: "₹ 4 Cr" },
-              { value: 4.5, label: "₹ 4.5 Cr" },
-              { value: 5, label: "₹ 5 Cr" },
-            ]}
-            minRange={0.2}
-            min={0}
-            max={5}
-            step={0.05}
             onChange={(value) => handleSliderChange("bugdetValue", value)}
             style={{ width: "80%" }}
-            defaultValue={[filters.bugdetValue[0], filters.bugdetValue[1]]}
-            mb={"5%"}
+            defaultValue={[
+              filters?.bugdetValue[0] ?? 500000,
+              filters?.bugdetValue[1] ?? 600000000,
+            ]}
+            value={filters.bugdetValue}
+            min={0}
+            max={filters.cg === "R" ? 100000 : 600000000}
+            step={filters.cg === "R" ? 1 : 100000}
+            label={(value) => toFormattedString(value)}
           />
           <h3
-            className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] "
-            id="Area"
+            className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
+            id="Area (in Sq.ft)"
           >
-            Area
+            Area (In Sq.ft)
           </h3>
           <p className="text-[#4D6677] text-[16px] font-[600] mb-[2%] ">
             {filters.areaValue[0]} sq.ft - {filters.areaValue[1]} sq.ft
@@ -363,21 +375,21 @@ const FilterPopup = () => {
           />
 
           <h3
-            className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] flex items-center gap-[5px] "
+            className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
             id="Photos & Videos"
           >
             Photos & Videos
           </h3>
           <div className="flex  mb-[3%] justify-start items-start flex-wrap gap-[4%]">
-            {SEARCH_FILTER_DATA.photoAvail.map(({ id, label }, i) => {
+            {SEARCH_FILTER_DATA.photoAvail.map(({ id, label }) => {
               return (
                 <Radio
-                  key={i}
+                  key={id}
                   iconColor="dark.8"
                   color="green"
                   label={label}
                   value={id}
-                  name="propertyType"
+                  name="photo"
                   style={{ whiteSpace: "nowrap", marginBottom: "10px" }}
                   onClick={() => setSingleType("pnb", id)}
                   checked={filters.pnb === id}
@@ -385,54 +397,43 @@ const FilterPopup = () => {
               );
             })}
           </div>
-          <React.Fragment>
-            <h3
-              className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[5%] "
-              id="Furnishing"
-            >
-              Furnishing
-            </h3>
-            <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
-              {SEARCH_FILTER_DATA.furnish.map(({ constDesc, cid }, i) => {
-                return (
-                  <Radio
-                    key={i}
-                    iconColor="dark.8"
-                    color="green"
-                    label={constDesc}
-                    value={cid}
-                    name="ListedBy"
-                    style={{ whiteSpace: "nowrap", marginBottom: "10px" }}
-                    onClick={() => setSingleType("furnish", cid)}
-                    checked={filters.furnish === cid}
-                  />
-                );
-              })}
-            </div>
-          </React.Fragment>
+          <FurnishOptions />
           <h3
-            className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] "
+            className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
             id="Amenities"
           >
             Amenities
           </h3>
-          <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
-            <Checkbox label="Lift" color="green" />
+          <div className="flex  mb-[3%] justify-start items-center gap-[4%] flex-wrap ">
+            {SEARCH_FILTER_DATA.amenities.map((i, ind) => {
+              return (
+                <Checkbox
+                  className="my-2"
+                  key={i.cid}
+                  label={i.constDesc}
+                  color="green"
+                  onClick={() => handleCheckboxClick("amenities", i.cid)}
+                  checked={filters.amenities.includes(i.cid)}
+                />
+              );
+            })}
           </div>
+          {/*      <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
+          </div> */}
 
           {filters?.propTypes != projectprops.plot && (
             <React.Fragment>
               <h3
-                className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[5%] "
-                id="Parking"
+                className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
+                id="No.of.Parkings"
               >
-                Parking
+                No.of.Parkings
               </h3>
               <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
                 {[...Array(7)].map((x, i) => {
                   return (
                     <Checkbox
-                      key={i}
+                      key={filters.parkings[i]}
                       label={`${i == 6 ? "+6" : i + 1}`}
                       color="green"
                       onClick={() => handleCheckboxClick("parkings", i + 1)}
@@ -443,6 +444,31 @@ const FilterPopup = () => {
               </div>
             </React.Fragment>
           )}
+
+          <h3
+            className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
+            id="Used or Not Used"
+          >
+            Used or Not Used
+          </h3>
+          <div className="flex  mb-[3%] justify-start items-start flex-wrap gap-[4%]">
+            {SEARCH_FILTER_DATA.used.map(({ id, label }) => {
+              return (
+                <Radio
+                  id={`used_${id}`}
+                  key={id}
+                  iconColor="dark.8"
+                  color="green"
+                  label={label}
+                  value={id}
+                  name="photo"
+                  style={{ whiteSpace: "nowrap", marginBottom: "10px" }}
+                  onClick={() => setSingleType("pnb", id)}
+                  checked={filters.pnb === id}
+                />
+              );
+            })}
+          </div>
         </ScrollArea>
       </div>
     </div>

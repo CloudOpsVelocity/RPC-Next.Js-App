@@ -1,7 +1,9 @@
 "use client";
-import { topics } from "@/app/data/projectDetails";
+import { TOPIC_IDS, topics } from "@/app/data/projectDetails";
 import useRatings from "@/app/hooks/useRatings";
+import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import { Main } from "@/app/validations/types/project";
+import { useMediaQuery } from "@mantine/hooks";
 import clsx from "clsx";
 import { atom, useAtom } from "jotai";
 import Image from "next/image";
@@ -12,17 +14,21 @@ export const currentBlockAtom = atom("overview");
 export default function Navigation({
   isBrochure,
   detailsData,
+  slug,
 }: {
   isBrochure: boolean;
   detailsData: Main;
+  slug: string;
 }) {
-  const { data } = useRatings();
+  const isTab = useMediaQuery("(max-width: 1600px)");
+  const { data } = useRatings("dc766148701f46debedb4f9cf3a18809");
   const [currentBlock, setCurrentBlock] = useAtom(currentBlockAtom);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [isSticky, setIsSticky] = useAtom(stickyAtom);
   const [isScrolling, setIsScrolling] = useAtom(isScrollingAtom);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [leftScroll, setLeftScroll] = useState(0);
+  const [opened, { open }] = useReqCallPopup();
   useEffect(() => {
     function handleScroll() {
       const currentScrollY = window.scrollY;
@@ -48,7 +54,7 @@ export default function Navigation({
         if (closestSectionIndex !== -1) {
           setCurrentBlock(sections[closestSectionIndex]?.id ?? "");
         }
-        if (currentScrollY > 800) {
+        if (currentScrollY > (isTab ? 600 : 800)) {
           setIsSticky(true);
         } else {
           setIsSticky(false);
@@ -66,7 +72,7 @@ export default function Navigation({
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [topics, isScrolling, lastScrollY]);
+  }, [isScrolling, lastScrollY, isTab, setCurrentBlock, setIsSticky]);
   function handleArrowClick(side: "R" | "L", value?: number): void {
     const scrollAmount = side === "R" ? value ?? 400 : value ?? -400;
     if (scrollContainerRef.current) {
@@ -84,48 +90,61 @@ export default function Navigation({
         inline: "center",
       });
       setCurrentBlock(id);
+
+      // Make the navigation bar sticky if the clicked topic is not "overview"
+      if (id !== "overview") {
+        setIsSticky(true);
+      }
     }
-    setTimeout(() => setIsScrolling(false), 4000);
+    setTimeout(() => setIsScrolling(false), 3000);
   }
   const conditionsArray = [
     {
-      key: "ratings",
+      key: TOPIC_IDS.PROJECT_RATINGS,
       condtion:
         data?.status &&
         data?.reviewDataList?.filter((item: any) => item.userReview).length > 0
           ? true
           : false,
     },
-    { key: "brochure", condtion: isBrochure },
-    { condtion: true, key: "overview" },
-    { condtion: true, key: "listings" },
-    { condtion: true, key: "about" },
-    { condtion: true, key: "propertyDetails" },
-    { condtion: true, key: "masterPlan" },
-    { condtion: true, key: "floorPlans" },
-    { condtion: true, key: "galleria" },
-    { condtion: detailsData?.amenityList?.length > 0, key: "amenities" },
-    { condtion: true, key: "nearBy" },
+    { key: TOPIC_IDS.BROCHURE, condtion: isBrochure },
+    { condtion: true, key: TOPIC_IDS.OVERVIEW },
+    { condtion: true, key: TOPIC_IDS.LISTINGS_AVAILABLE },
+    { condtion: true, key: TOPIC_IDS.ABOUT },
+    { condtion: true, key: TOPIC_IDS.PROPERTY_DETAILS },
+    { condtion: true, key: TOPIC_IDS.MASTER_PLAN },
+    { condtion: true, key: TOPIC_IDS.PRICE_DETAILS },
+    { condtion: true, key: TOPIC_IDS.FLOOR_PLANS },
+    { condtion: true, key: TOPIC_IDS.GALLERY },
+    {
+      condtion: detailsData?.amenityList?.length > 0,
+      key: TOPIC_IDS.AMENITIES,
+    },
+    { condtion: true, key: TOPIC_IDS.LOCATION_MAP },
+    { condtion: true, key: TOPIC_IDS.NEAR_BY },
     {
       condtion: detailsData?.specificationList?.length > 0,
-      key: "specifications",
+      key: TOPIC_IDS.SPECIFICATIONS,
     },
-    { condtion: detailsData?.highlights?.length > 0, key: "highlights" },
-    { condtion: true, key: "proj_rating" },
-    { condtion: detailsData?.banks?.length > 0, key: "loans" },
-    { condtion: true, key: "aboutBuilder" },
-    { condtion: true, key: "whyBuy" },
-    { condtion: true, key: "ratings" },
-    { condtion: true, key: "brochure" },
-    { condtion: true, key: "faq" },
-    { condtion: true, key: "similar" },
+    {
+      condtion: detailsData?.highlights?.length > 0,
+      key: TOPIC_IDS.HIGHLIGHTS,
+    },
+    { condtion: true, key: TOPIC_IDS.CUSTOMER_REVIEWS },
+    { condtion: detailsData?.banks?.length > 0, key: TOPIC_IDS.BANK_APPROVALS },
+    { condtion: true, key: TOPIC_IDS.ABOUT_BUILDER },
+    { condtion: true, key: TOPIC_IDS.WHY_BUY },
+    { condtion: true, key: TOPIC_IDS.BROCHURE },
+    { condtion: true, key: TOPIC_IDS.FAQ },
+    { condtion: true, key: TOPIC_IDS.SIMILAR_PROJECTS },
+    { condtion: true, key: TOPIC_IDS.CONTACT },
   ];
 
   return (
     <div
       className={clsx(
         "flex justify-center items-center shadow-lg w-full",
-        isSticky && "fixed top-[70px] bg-white shadow-md z-[100]"
+        isSticky && "fixed top-[70px] bg-white shadow-md z-[10]"
       )}
     >
       {leftScroll > 0 && (
@@ -163,6 +182,17 @@ export default function Navigation({
                     : ""
                 )}
                 onClick={() => {
+                  if (topic.id === "contact") {
+                    open({
+                      modal_type: "PROJECT_REQ_CALLBACK",
+                      postedByName: detailsData.postedByName,
+                      reqId: slug,
+                      source: "projBanner",
+                      title: detailsData.projectName,
+                      postedId: detailsData.builderId,
+                    });
+                    return;
+                  }
                   scrollToTopic(topic.id);
                   setCurrentBlock(topic.id);
                 }}

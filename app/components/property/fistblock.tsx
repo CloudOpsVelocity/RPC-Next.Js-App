@@ -15,7 +15,7 @@ import {
 import { Main } from "@/app/validations/property/index";
 import Image from "next/image";
 import SharePopup from "../atoms/SharePopup";
-import { formatCurrency } from "@/app/utils/numbers";
+import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
 import { formatDate } from "@/app/utils/date";
 import { getImageUrls } from "@/app/utils/image";
 import { calculatePerSqPrice } from "@/app/utils/price";
@@ -24,14 +24,17 @@ import { NumberFormatter } from "@mantine/core";
 import { useSetAtom } from "jotai";
 import { currentBlockAtom, isScrollingAtom, stickyAtom } from "./Navigation";
 import { get_posted_by } from "@/app/utils/dyanamic/projects";
-import { formatNumberIndian } from "./pricingbreakup/ListItem";
-const realData = [{ test: "hello" }, 2, 3, 4, 5, 6, 77];
 type Props = {
   projectDetails: Main | null;
   projName: string;
+  totalPrice: number;
 };
 
-const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
+const PropertyFirstBlock: React.FC<Props> = ({
+  projectDetails,
+  projName,
+  totalPrice,
+}) => {
   const images = getImageUrls(projectDetails?.projMedia as any);
   const autoplay = useRef(Autoplay({ delay: 10000 }));
   const setIsScrolling = useSetAtom(isScrollingAtom);
@@ -52,17 +55,27 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
     setC("floorPlans");
     setTimeout(() => setIsScrolling(false), 3000);
   }
-
+  let bhks = ["1Bhk", "2bhk", "2bhk", "3bhk", "3Bhk"];
+  const removeDuplicates = (input: string[]) => {
+    let result: string[] = [];
+    for (let i = 0; i < input.length; i++) {
+      if (!result.includes(input[i])) {
+        result.push(input[i]);
+      }
+    }
+    return result;
+  };
+  console.log(removeDuplicates(bhks));
   return (
     <div
-      className={`relative rounded-[10px] w-full m-auto bg-gray-50  lg:h-[750px] bg-cover flex justify-between items-start flex-col shadow-md`}
+      className={`relative rounded-[10px] w-full m-auto bg-gray-50 sm:h-[549px]  xl:h-[750px] bg-cover flex justify-between items-start flex-col shadow-md break-words`}
     >
       {projectDetails && (
         <>
           <div className="absolute m-[2%] z-10 right-2">
-            <p className="shadow-md rounded-[10px] bg-gradient-to-r p-[8px] from-[#EFF5FF] /0  to-[#F2FAFF]/100 text-[#000] text-[12px] sm:text-[16px] md:text-xl not-italic font-medium leading-[normal]">
+            <p className="shadow-md rounded-[10px] bg-gradient-to-r p-[8px] from-[#EFF5FF] /0  to-[#F2FAFF]/100 text-[#000] text-[12px] sm:text-[16px] xl:text-xl not-italic font-medium leading-[normal]">
               Listing Status:{" "}
-              <span className="text-[#148B16] text-[12px] sm:text-[16px]   md:text-xl not-italic font-bold leading-[normal]">
+              <span className="text-[#148B16] text-[12px] sm:text-[16px]   xl:text-xl not-italic font-bold leading-[normal]">
                 {" "}
                 {projectDetails.availablityStatus === "U"
                   ? "Under Construction"
@@ -70,7 +83,10 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
               </span>{" "}
             </p>
             <div className="mt-4">
-            <SharePopup title="Share Listing" className="text-sm   p-[4px]  sm:text-xl hidden sm:flex" />
+              <SharePopup
+                title="Share Listing"
+                className="text-sm   p-[4px]  sm:text-xl hidden sm:flex"
+              />
             </div>
           </div>
           <div className="relative w-full !rounded-[10px]">
@@ -83,22 +99,22 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
               dragFree
               plugins={[autoplay.current]}
               onMouseEnter={autoplay.current.stop}
-              onMouseLeave={autoplay.current.reset} 
+              onMouseLeave={autoplay.current.reset}
               nextControlIcon={<DarkNextCarouselButton />}
               previousControlIcon={<DarkCarouseIcon />}
             >
               {images.map((imageUrl, index) => (
                 <Carousel.Slide
-                  key={index}
+                  key={`Carousel_${imageUrl[index]}`}
                   className="relative"
-                 /*  h={750} */
+                  /*  h={750} */
                   w={"full"}
                 >
                   <Image
                     alt="project image"
                     src={imageUrl}
                     fill
-                    className={`!w-full sm:!rounded-[10px]  h-[330px] sm:max-h-[545px] !xl:h-[750px] xl:max-h-[750px] bg-gray-${
+                    className={`!w-full sm:!rounded-[10px]  h-[330px] sm:max-h-[549px] !xl:h-[750px] xl:max-h-[750px] bg-gray-${
                       index + 1
                     }`}
                     quality={100}
@@ -107,22 +123,24 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
               ))}
             </Carousel>
           </div>
-          <div className="sm:absolute bottom-0  sm:m-[2%] z-10 sm:w-[95%] self-center justify-between items-start flex-col md:flex-row border-solid border-white-500 sm:rounded-[10px] bg-gradient-to-r from-[#EFEFEF] /20 to-[#c3c3c3bd]/80 shadow-md  sm:flex ">
+          <div className="sm:absolute bottom-0 sm:m-[1%] sm:mb-[4%]   xl:mb-[2%] xl:m-[2%] z-10 sm:w-[95%] self-center justify-between items-start flex-col md:flex-row border-solid border-white-500 sm:rounded-[10px] bg-gradient-to-r from-[#EFEFEF] /20 to-[#c3c3c3bd]/80 shadow-md  sm:flex break-words sm:px-6 sm:py-2">
             <div className=" w-full md:w-[60%]">
-              <div className={`ml-[2%] mt-1 sm:mt-10 mb-[7px]`}>
-              <div className="flex justify-between items-start">
-                  <h3 className="text-[22px] sm:text-[24px] lg:text-[28px] font-[700] text-[#001F35] ">
-                  <span className="lowercase">
-                    {projectDetails.propTypeName === "Plot"
-                      ? projectDetails.plotArea + " sq.ft"
-                      : ""}
-                  </span>{" "}
-                  {projectDetails.bhkName} {projectDetails.propTypeName} For{" "}
-                  {projectDetails.cg === "S" ? " Sell" : " Rent"} In{" "}
-                  {projectDetails.ltName}                  </h3>
+              <div className={`ml-[2%] mt-1 sm:mt-[6px] xl:mt-[1%] mb-[7px]`}>
+                <div className="flex justify-between items-start">
+                  <h3 className="text-[18px] sm:text-[22px] xl:text-[28px] font-[700] text-[#001F35] break-words text-wrap w-full">
+                    <span className="lowercase">
+                      {projectDetails.propTypeName === "Plot"
+                        ? formatNumberWithSuffix(projectDetails.plotArea) +
+                          " sq.ft"
+                        : ""}
+                    </span>{" "}
+                    {projectDetails.bhkName} {projectDetails.propTypeName} For{" "}
+                    {projectDetails.cg === "S" ? " Sell" : " Rent"} In{" "}
+                    {projectDetails.ltName}{" "}
+                  </h3>
                   <SharePopup className="text-sm p-[2px] mr-2 mt-[2px] sm:hidden " />
                 </div>
-               {/*  <h3 className="text-[24px] lg:text-[32px] font-[700] text-[#00487C] capitalize ">
+                {/*  <h3 className="text-[24px] lg:text-[32px] font-[700] text-[#00487C] capitalize ">
                   <span className="lowercase">
                     {projectDetails.propTypeName === "Plot"
                       ? projectDetails.plotArea + " sq.ft"
@@ -132,14 +150,18 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
                   {projectDetails.cg === "S" ? " Sell" : " Rent"} In{" "}
                   {projectDetails.ltName}
                 </h3> */}
-                <p className="text-[#001F35] text-2xl not-italic font-semibold mt-1 capitalize">
+                <p
+                  className={`text-[#001F35]  sm:text-[18px] xl:text-2xl not-italic font-semibold mt-1 capitalize ${
+                    projectDetails.projIdEnc ? "underline text-blue-600" : ""
+                  } `}
+                >
                   {projName}
                 </p>
-                <p className="text-[#242424]  text-sm sm:text-[22px] not-italic font-[600] leading-[normal] w-[100%] tracking-[0.32px] capitalize mt-[14px] ">
+                <p className="text-[#242424]  text-sm sm:text-[18px]  xl:text-[22px] not-italic font-[600] leading-[normal] w-[100%] tracking-[0.32px] capitalize sm:mt-[8px] xl:mt-[14px] ">
                   {`${projectDetails.address}, ${projectDetails.ltName}, ${projectDetails.ctName}, ${projectDetails?.stateName}, ${projectDetails.pinCode}`}
                 </p>
 
-                <p className=" text-sm sm:text-[16px] mt-[8px] lg:text-[22px] font-[600] text-[#242424]">
+                <p className=" text-sm sm:text-[16px] mt-[10px] xl:mt-[14px] xl:text-[22px] font-[600] text-[#242424]">
                   Available From:
                   <span className="font-[600] text-[#202020]">
                     {" "}
@@ -148,35 +170,48 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
                 </p>
               </div>
             </div>
-            <div className="w-full md:w-[40%] flex justify-between md:items-end flex-col p-[2%]">
-              <h2 className="inline-flex md:text-[28px] lg:text-[32px] font-semibold sm:font-[700] text-[#001F35]">
-                {`${projectDetails.cg === "R"?  formatNumberIndian(projectDetails.price): formatCurrency(projectDetails.price) }${
-                  projectDetails.cg === "R" ? " / Month" : ""
-                }`}{" "}
+            <div className="w-full md:w-[40%] flex justify-between md:items-end flex-col p-[2%] sm:p-[0%]">
+              <h2 className="iinline-flex sm:text-[22px] xl:text-[32px] font-semibold sm:font-[700] text-[#001F35]">
+                {`${
+                  projectDetails.cg === "R"
+                    ? formatCurrency(projectDetails.price)
+                    : formatCurrency(projectDetails.price)
+                }${projectDetails.cg === "R" ? " / Month" : ""}`}{" "}
               </h2>
               {projectDetails.cg === "S" && (
-                <p className="text-[16px] md:text-right lg:text-[24px] font-[600]   text-[#00487C] ">
-                  ₹{" "}
-                  {calculatePerSqPrice(
-                    projectDetails.price,
-                    projectDetails.propTypeName === "Plot"
-                      ? projectDetails.plotArea
-                      : projectDetails.sba
-                  )}
-                  /- Price per sqft onwards
+                <p className="text-[16px] md:text-right sm:text-[14px] xl:text-[24px] font-[600]   text-[#00487C] ">
+                  <span className="text-[#001F35] sm:text-[14px] xl:text-[24px] sm:font-[600] text-wrap not-italic font-medium leading-[normal]">
+                    ₹{" "}
+                    <NumberFormatter
+                      thousandSeparator
+                      value={calculatePerSqPrice(
+                        projectDetails.price,
+                        projectDetails.propTypeName === "Plot"
+                          ? projectDetails.plotArea
+                          : projectDetails.sba
+                      )}
+                      thousandsGroupStyle="lakh"
+                    />{" "}
+                    Base Price/sq.ft onwards
+                  </span>
                 </p>
               )}
-                 <p className="md:mb-[13px] text-[12px]  text-[#001F35] font-semibold md:font-bold ">
-              Other Charges Applicable
+              {totalPrice ? (
+                <p className=" mb-1 xl:mb-[13px]  text-[12px]  text-[#001F35] font-semibold md:font-bold ">
+                  Other Charges Applicable
+                </p>
+              ) : (
+                ""
+              )}
+
+              <p className="text-[#001F35] sm:text-[18px] xl:text-2xl not-italic font-semibold  capitalize sm:mt-1 xl:mt-[8px]">
+                Posted By: <span className="underline text-blue-600 cursor-pointer">{projectDetails.postedByName}</span>
               </p>
-              <p className="text-[#242424] md:text-2xl not-italic font-semibold leading-[normal] mt-[8px]">
-                Posted By: {projectDetails.postedByName}
-              </p>
-              <p className="mb-[8px] md:mb-[13px] text-[12px] md:text-base  text-[#001F35] font-semibold md:font-bold ">
+              <p className="mb-[8px] sm:mb-[6px] xl:mb-[13px] text-[12px] md:text-base text-[#001F35] font-semibold md:font-bold ">
                 {get_posted_by(projectDetails.postedByType)}
               </p>
               <p
-                className="text-[16px] lg:text-[20px] font-[600] mr-auto md:mr-0 text-[#2A4C70] bg-[#FFF] rounded-[10px] shadow-md p-[8px] flex items-center gap-2 cursor-pointer"
+                className="sm:text-[16px] xl:text-[20px] font-[600] mr-auto md:mr-0 text-[#0073C6] bg-[#FFF] rounded-[10px] shadow-md p-[8px] flex items-center gap-2 cursor-pointer"
                 onClick={() => scrollToTopic("floorPlans")}
               >
                 <Image
@@ -184,7 +219,7 @@ const PropertyFirstBlock: React.FC<Props> = ({ projectDetails, projName }) => {
                   height={100}
                   src={"/abc/floorplan.png"}
                   alt="no of floors"
-                  className="h-[24px] w-[24px] "
+                  className="xl:h-[24px] xl:w-[24px] w-[16px] h-[16px]  sm:h-[16px] sm:w-[16px] "
                 />
                 Floor Plan
               </p>

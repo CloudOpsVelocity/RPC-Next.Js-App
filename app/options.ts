@@ -4,7 +4,6 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import axios from "axios";
 import { cookies } from "next/headers";
 import CryptoJS from "crypto-js";
-
 export const options: NextAuthOptions = {
   providers: [
     GitHubProvider({
@@ -35,33 +34,52 @@ export const options: NextAuthOptions = {
               password: decryptedPassword,
             }
           );
-          console.log(res.data);
           if (res.data.status) {
+            if (res.data.flag === "a") {
+              const encryptedValue = CryptoJS.AES.encrypt(
+                [credentials?.username, credentials?.password, "1"].join(":"),
+                process.env.NEXT_PUBLIC_SECRET!!
+              ).toString();
+              // resume_signup_token
+              cookies().set(
+                `resume_signup_token${res.data.userType.toLowerCase()}`,
+                encryptedValue,
+                {
+                  maxAge: 10 * 60,
+                  // sameSite: "strict",
+                  // path: "/",
+                }
+              );
+              cookies().set("token", res.data.token, {
+                maxAge: 365 * 24 * 60 * 60,
+                secure: true,
+                httpOnly: true,
+                path: "/",
+              });
+              throw new Error(res.data.userType);
+            }
             cookies().set("token", res.data.token, {
               maxAge: 365 * 24 * 60 * 60,
               secure: true,
               httpOnly: true,
               path: "/",
             });
-            console.log(res.data);
+            // console.log(res.data);
             return {
               ...res.data,
             };
           } else {
-            console.log(res.data.identifer);
+            // console.log(res.data.identifer);
             switch (res.data.identifer) {
               case "NF":
                 throw new Error("We can’t find user. Please Sign Up!");
-                break;
               case "IU":
                 throw new Error(
                   "User is under review. Please wait for Approval"
                 );
-                break;
 
               default:
                 throw new Error("Please enter correct password");
-                break;
             }
           }
         } catch (error: any) {
@@ -81,7 +99,7 @@ export const options: NextAuthOptions = {
     secret: process.env.NEXTAUTH_SECRET,
     maxAge: 365 * 24 * 60 * 60,
   },
-
+  useSecureCookies: false,
   callbacks: {
     async jwt({ token, user, trigger, session }) {
       if (trigger === "update") {

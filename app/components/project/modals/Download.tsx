@@ -37,7 +37,7 @@ export default function Download() {
         <div className="text-[#333] text-2xl not-italic font-semibold leading-[normal]">
           {opened.type === "image" ? "Gallery" : "Videos"}
         </div>
-        <div className="flex justify-center items-center gap-5">
+        <div className="flex justify-center items-center gap-5 mb-2">
           <SharePopup title="Share" />
           {opened.type === "image" && (
             <button

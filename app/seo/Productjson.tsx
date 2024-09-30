@@ -1,5 +1,4 @@
 import { Product, WithContext } from "schema-dts";
-import Head from "next/head";
 
 const generatePropertyJsonLd = (data: any) => {
   const jsonLd: WithContext<Product> = {

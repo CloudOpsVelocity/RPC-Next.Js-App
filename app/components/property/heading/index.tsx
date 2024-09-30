@@ -8,7 +8,7 @@ export default function PropertyHeading({
   projName,
 }: {
   className?: string;
-  title: string;
+  title: any;
   desc: string;
   projName?: string;
 }) {
@@ -22,10 +22,11 @@ export default function PropertyHeading({
       {Svg}{" "}
       <div>
         {" "}
-        <p className="text-[#001F35] text-[18px] sm:text-[32px] not-italic font-semibold leading-[normal] uppercase mb-1 sm:mb-[14px]">
-          <span className="text-[#148B16]">{projName} </span> {title}
+        <p className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[10px] xl:mb-[6px] capitalize">
+          {title}
+          {projName && projName !== "" && <span className="text-[#148B16]">{projName} </span> }
         </p>{" "}
-        <p className="text-[#4D6677] text-[12px] sm:text-2xl italic font-medium leading-[normal] capitalize">
+        <p className="text-[13px] sm:text-[16px] xl:text-2xl  text-[#344273]  italic font-semibold leading-[normal] mb-2">
           {desc}
         </p>
       </div>

@@ -1,6 +1,6 @@
 "use client";
 import useNearby from "@/app/hooks/useNearby";
-import React from "react";
+import React, { Fragment } from "react";
 import useBuilder from "@/app/hooks/useBuilder";
 import ProjectCarousel from "../../project/ProjectCard";
 
@@ -32,11 +32,18 @@ export default function NearByCarouselProjProperty({
   return (
     <div
       className="flex flex-col justify-start items-start w-full  scroll-mt-[150px]"
-      id="similar"
+      id="similar-projects"
     >
       <ProjectCarousel
         type="proj"
-        title={`Other Projects By ${builderData?.data?.userName}`}
+        title={
+          <Fragment>
+            Other Projects By{" "}
+            <span className="text-[#148B16]">
+              {builderData?.data?.userName}
+            </span>
+          </Fragment>
+        }
         content="See what builder has posted"
         projName={""}
         data={

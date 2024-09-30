@@ -1,14 +1,14 @@
+"use client";
 import useBuilder from "@/app/hooks/useBuilder";
 import { Phone } from "@/app/images/commonSvgs";
 import N from "@/app/styles/Numinput.module.css";
 import React, { useState } from "react";
 import { useMediaQuery } from "@mantine/hooks";
-import { Modal, NumberInput, TextInput, em } from "@mantine/core";
+import { Modal, NumberInput, TextInput, em, Button as B } from "@mantine/core";
 import { useSession } from "next-auth/react";
 import S from "@/app/styles/Req.module.css";
 import { useForm, yupResolver } from "@mantine/form";
 import { reqSchema } from "@/app/validations/project";
-import { Button as B } from "@mantine/core";
 import { addContact, sendContact } from "@/app/utils/api/actions/contact";
 import { useParams } from "next/navigation";
 import { popupStateAtom, useReqCallPopup } from "@/app/hooks/useReqCallPop";
@@ -22,12 +22,13 @@ import { ReqcallbackMessage } from "../../project/success";
 import Styles from "@/app/styles/Qna.module.css";
 import clsx from "clsx";
 import { NearByDataAtom } from "@/app/store/nearby";
-import reqStyles from "@/app/styles/Req.module.css";
 import { get_posted_by } from "@/app/utils/dyanamic/projects";
 import Close from "../../project/button/close";
+import Button from "../../atoms/buttons/variansts";
 const RequestCallBackModal = () => {
   const isMobile = useMediaQuery("(max-width: 750px)");
-  const [opened, { close, source, open, MODAL_TYPE }] = useReqCallPopup();
+  const isTab = useMediaQuery("(max-width: 1600px)");
+  const [opened, { close, source, MODAL_TYPE }] = useReqCallPopup();
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error" | "otp"
   >("idle");
@@ -37,90 +38,99 @@ const RequestCallBackModal = () => {
       setStatus("idle");
     }, 500);
   };
+
   return (
-    <>
-      <Modal
-        opened={opened}
-        onClose={handleClose}
-        centered
-        size={isMobile ? "100%" : status !== "success" ? "65%" : "auto"}
-        className="rounded-lg w-[90%]  md:w-[70%] lg:w-[65%] !p-0 "
-        classNames={
-          status === "success"
-            ? {
-                title: Styles.title,
-                root: Styles.root,
-                close: Styles.close,
-                content: Styles.content,
-                overlay: Styles.overlay,
-                header: Styles.disabled,
-                body: Styles.body,
-              }
-            : {
-                close: S.close,
-                content: S.content,
-                body: S.body,
-                overlay: S.overlay,
-              }
-        }
-        withCloseButton={false}
-      >
-        {
-          <div
-            className={clsx(
-              "bg-white relative rounded-lg  w-full overflow-hidden flex ",
-              status !== "success" && "min-h-[]"
-            )}
-          >
-            <Close
-              close={handleClose}
-              className="absolute h-[28px] w-[28px] right-0 z-10 m-[2%] cursor-pointer "
-            />
+    <Modal
+      opened={opened}
+      onClose={handleClose}
+      centered
+      size={
+        isMobile
+          ? "100%"
+          : status !== "success"
+          ? "65%"
+          : isTab
+          ? "40%"
+          : "auto"
+      }
+      className="rounded-lg w-[90%]  md:w-[70%] lg:w-[65%] !p-0"
+      classNames={
+        status === "success"
+          ? {
+              title: Styles.title,
+              root: Styles.root,
+              close: Styles.close,
+              content: Styles.content,
+              overlay: Styles.overlay,
+              header: Styles.disabled,
+              body: Styles.body,
+            }
+          : {
+              close: S.close,
+              content: S.content,
+              body: S.body,
+              overlay: S.overlay,
+            }
+      }
+      withCloseButton={false}
+    >
+      {
+        <div
+          className={clsx(
+            "bg-white relative rounded-lg  w-full overflow-hidden flex ",
+            status !== "success" && "min-h-[]"
+          )}
+        >
+          <Close
+            close={handleClose}
+            className="absolute h-[28px] w-[28px] right-0 z-10 m-[2%] cursor-pointer "
+          />
 
-            {status === "success" ? (
-              <ReqcallbackMessage close={handleClose} />
-            ) : (
-              <>
-                <div className={`w-[100%] md:w-[50%] px-[3%] py-[3%]`}>
-                  {status === "idle" && (
-                    <h2 className="text-[18px]  lg:text-[24px] font-[600] text-[#202020]  ">
-                      {MODAL_TYPE === "REQ_QUOTE"
-                        ? "Request Quotation"
-                        : "Request Callback"}
-                    </h2>
-                  )}
+          {status === "success" ? (
+            <ReqcallbackMessage close={handleClose} />
+          ) : (
+            <>
+              <div
+                className={`w-[100%] md:w-[50%] px-[3%] py-[3%] sm:py-[1%] xl:py-[3%]`}
+              >
+                {status === "idle" && (
+                  <h2 className="text-[18px]  sm:text-[20px] xl:text-[24px] font-[600] text-[#202020]  ">
+                    {MODAL_TYPE === "REQ_QUOTE"
+                      ? "Request Quotation"
+                      : "Request Callback"}
+                  </h2>
+                )}
 
-                  <Content
-                    close={close}
-                    status={status}
-                    setStatus={setStatus}
-                    source={source}
+                <Content
+                  close={close}
+                  status={status}
+                  setStatus={setStatus}
+                  source={source}
+                />
+              </div>
+              {
+                <div className="hidden md:block w-[50%] relative">
+                  <Image
+                    className={clsx(
+                      "absolute inset-0 h-full w-[100%] object-cover",
+                      MODAL_TYPE == "REQ_QUOTE" && "!object-contain"
+                    )}
+                    src={
+                      MODAL_TYPE === "REQ_QUOTE"
+                        ? "/quate.svg"
+                        : "/requestcallback.png"
+                    }
+                    alt="Customer Support"
+                    width={600}
+                    height={534}
                   />
                 </div>
-                {
-                  <div className="hidden md:block w-[50%] relative">
-                    <Image
-                      className={clsx(
-                        "absolute inset-0 h-full w-[100%] object-cover",
-                        MODAL_TYPE == "REQ_QUOTE" && "!object-contain"
-                      )}
-                      src={
-                        MODAL_TYPE === "REQ_QUOTE"
-                          ? "/quate.svg"
-                          : "/requestcallback.png"
-                      }
-                      alt="Customer Support"
-                      width={600}
-                      height={534}
-                    />
-                  </div>
-                }
-              </>
-            )}
-          </div>
-        }
-      </Modal>
-    </>
+              }
+            </>
+          )}
+        </div>
+      }
+    </Modal>
   );
 };
 export default RequestCallBackModal;
@@ -169,7 +179,8 @@ const LoggedInUserForm = ({ status, setStatus }: any) => {
     validate: yupResolver(reqSchema),
   });
 
-  let Posted_BY = get_posted_by(popupState.cg);
+  let Posted_BY =
+    popupState.MODAL_TYPE == "PROPERTY_REQ_CALLBACK" ? "Posted By" : "Builder";
   const onSubmit = async () => {
     setStatus("pending");
     const data = {
@@ -187,6 +198,8 @@ const LoggedInUserForm = ({ status, setStatus }: any) => {
   const onSuccess = async () => {
     setStatus("success");
   };
+
+  console.log(popupState);
 
   return status === "otp" ? (
     <ReqOtpForm
@@ -209,13 +222,13 @@ const LoggedInUserForm = ({ status, setStatus }: any) => {
           {popupState.MODAL_TYPE === "REQ_QUOTE" ? "Quotation for" : "Call For"}
           :
         </span>{" "}
-        <span className="text-[14px] xl:text-[24px]">{popupState.title}</span>
+        <span className="text-[14px] xl:text-[21px]">{popupState.title}</span>
       </p>
       <p className="text-[#148B16] mb-[6%] text-[14px] xl:text-xl lg:text-[20px] italic font-bold leading-[normal] tracking-[0.64px]">
         <span className="text-[#4D6677] text-[18px] xl:text-xl italic font-medium leading-[normal] tracking-[0.8px]">
           {Posted_BY}:
         </span>{" "}
-        <span className="text-[14px] xl:text-[24px]">
+        <span className="text-[14px] xl:text-[21px]">
           {popupState.postedByName}
         </span>
       </p>
@@ -239,17 +252,22 @@ const LoggedInUserForm = ({ status, setStatus }: any) => {
       <p className="text-[#202020] text-[14px] xl:text-base not-italic font-semibold leading-[normal] tracking-[0.64px] mb-2">
         Email: {session?.user.email}
       </p>
-      <B
+      <Button variant="blue" className="sm:!py-1.5" onClick={onSubmit}>
+        {popupState.MODAL_TYPE === "REQ_QUOTE"
+          ? "Request Quotation"
+          : "Request Callback"}
+      </Button>
+      {/* <B
         onClick={onSubmit}
         type="submit"
         mt={"md"}
-        className="!bg-[#0073C6]  text-xl p-2"
+        className="!bg-[#0073C6]  !text-[12px] !p-1 sm:text-xl sm:p-2"
         size="md"
       >
-        {popupState.MODAL_TYPE === "REQ_QUOTE"
-          ? "Request Quote"
+        {popupState.MODAL_TYPE === "REQ_Quotation"
+          ? "Request Quotation"
           : "Request Callback"}
-      </B>
+      </B> */}
     </div>
   );
 };
@@ -282,7 +300,8 @@ const ReqForm = ({
     popupState.MODAL_TYPE === "PROJECT_REQ_CALLBACK"
       ? "propIdEnc"
       : "projIdEnc";
-  let Posted_BY = get_posted_by(popupState.cg);
+  let Posted_BY =
+    popupState.MODAL_TYPE == "PROPERTY_REQ_CALLBACK" ? "Posted By" : "Builder";
   const isProjContact =
     popupState.MODAL_TYPE === "PROJECT_REQ_CALLBACK" ? "N" : "Y";
   const formSubmit = async (values: any) => {
@@ -298,6 +317,7 @@ const ReqForm = ({
   };
   const bn = popupState.postedByName;
   const title = popupState.title;
+  const isTab = useMediaQuery(`(max-width: 1600px)`);
   return status === "success" ? (
     <Success close={close} />
   ) : status === "otp" ? (
@@ -322,7 +342,7 @@ const ReqForm = ({
         </span>{" "}
         : {title}
       </p>
-      <p className="text-[#148B16] text-[13px] italic font-bold leading-[normal] tracking-[0.64px] mb-[2%] ">
+      <p className="text-[#148B16] text-[13px] xl:text-lg italic font-bold leading-[normal] tracking-[0.64px] mb-[2%] ">
         <span className="text-[#4D6677] text-sm  xl:text-lg italic font-medium leading-[normal] tracking-[0.36px]">
           {Posted_BY}
         </span>{" "}
@@ -332,39 +352,39 @@ const ReqForm = ({
         Looks like you are not registered with us.
       </p>
       <p className="text-[#4D6677] text-[14px] xl:text-sm not-italic font-semibold leading-[normal] tracking-[0.56px] mb-[2%] ">
-        No worries add your details to get callback from builder
+        No worries add your details to get callback from{" "}
+        {popupState.MODAL_TYPE === "PROJECT_REQ_CALLBACK" ? "builder" : bn}
       </p>
-
-      <h2 className="text-[#00487C] text-[18px] font-semibold xl:text-xl not-italic xl:font-bold mb-[1.5%]">
+      <h2 className="text-[#00487C] text-[14px] xl:text-[18px] font-semibold xl:text-xl not-italic xl:font-bold mb-[1.5%]">
         Your Details
       </h2>
       <div className="flex flex-col max-w-sm">
         <TextInput
-          size="lg"
+          size={isTab ? "md" : "lg"}
           label="Enter Your Name Here"
           {...form.getInputProps("name")}
           placeholder="Enter Your Name Here"
           classNames={{
-            input: reqStyles.input,
+            input: S.input,
             label: N.label,
-            error: reqStyles.error,
-            wrapper: reqStyles.wrapper,
+            error: S.error,
+            wrapper: S.wrapper,
           }}
           onBlur={(e) => handleTrimAndReplace(e, "name", form)}
         />
         <NumberInput
-          mt={"lg"}
+          mt={isTab ? "xs" : "lg"}
           classNames={{
-            input: reqStyles.numInput,
+            input: S.numInput,
             label: N.label,
-            error: reqStyles.error,
-            wrapper: reqStyles.wrapper,
+            error: S.error,
+            wrapper: S.wrapper,
           }}
           hideControls
-          size="lg"
+          size={isTab ? "md" : "lg"}
           className="w-[100%]  "
           label="Contact Number"
-          placeholder="Enter Your Contact Number"
+          placeholder="Enter Your Mobile Number"
           {...form.getInputProps("mobile")}
           maxLength={10}
           onPaste={(event) => {
@@ -379,24 +399,24 @@ const ReqForm = ({
             (form.errors.mobile != undefined && form.errors.mobile != null) ||
             status === "error"
               ? "bottom-[65px]"
-              : "bottom-[45px]"
+              : "bottom-[41px] sm:bottom-[40px] xl:bottom-[45px]"
           }  ml-[2px]`}
         >
           + 91
         </p>
 
         <TextInput
-          size="lg"
+          size={isTab ? "md" : "lg"}
           label="Enter Your Email Here"
           {...form.getInputProps("email")}
           placeholder="Enter Your Email Here"
           type="email"
-          style={{ marginTop: "-10px" }}
+          style={{ marginTop: isTab ? "-22px" : "-10px" }}
           classNames={{
-            input: reqStyles.input,
+            input: S.input,
             label: N.label,
-            error: reqStyles.error,
-            wrapper: reqStyles.wrapper,
+            error: S.error,
+            wrapper: S.wrapper,
           }}
           onBlur={(e) => handleTrimAndReplace(e, "email", form)}
         />

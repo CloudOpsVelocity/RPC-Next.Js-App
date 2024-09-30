@@ -36,24 +36,25 @@ export default function PropertyBanner({
     />
   ) : (
     <div
-      className="w-[90%] m-auto mt-[2%] shrink-0  bg-[#fcfcfc] mb-20 relative  border shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] border-solid border-[#CAE9FF]  px-[52px] py-[35px] scroll-mt-[250px]"
+      className="w-[90%] m-auto mt-[50px] shrink-0  bg-[#fcfcfc] mb-15 relative  border shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] border-solid border-[#CAE9FF] sm:px-[22px] sm:py-[18px]  xl:px-[52px] xl:py-[35px] scroll-mt-[250px]"
       id="projectDetails"
     >
       <Image
-        src="https://d2l0lb5gc1bw3t.cloudfront.net/staticmedia-images-icons/project-detail/approvedgreen.png"
+        src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/approvedgreen.png`}
+        /* src="https://d2l0lb5gc1bw3t.cloudfront.net/" */
         alt="Sobha Dream Acres"
-        className="w-[312px] h-auto absolute right-0 top-[0px] hidden md:block"
+        className="w-[220px] h-[150px]  xl:w-[312px] xl:h-auto absolute right-0 top-[0px] hidden sm:block"
         width={312}
         height={312}
       />
       <div className=" inline-flex justify-center items-center ">
         {Svg}
-        <h1 className="capitalize ml-6 text-[#001F35] text-[32px] not-italic font-semibold leading-[normal]  mb-[14px]">
+        <h1 className="capitalize ml-6   mb-[14px] text-[#242424] text-h2 sm:text-[24px] xl:text-[32px] not-italic font-bold leading-[normal] tracking-[1.28px] ">
           about{" "}
-          <span className="text-[#148B16] text-[32px] not-italic font-bold leading-[normal] capitalize">
+          <span className="text-[#148B16] text-h2 sm:text-[24px] xl:text-[32px] not-italic font-bold leading-[normal] capitalize">
             {projectName}
           </span>
-          <p className="text-[#4D6677] text-2xl italic font-medium leading-[normal] capitalize mt-2">
+          <p className=" text-[#4D6677] text-h2  sm:text-[16px] xl:text-[24px] break-words italic font-medium leading-[normal] capitalize mt-2">
             About project get summarized perspective for the incredible listing
           </p>
         </h1>
@@ -77,17 +78,17 @@ export default function PropertyBanner({
           </div>
 
           <div className="ml-5">
-            <h3 className="text-[#001F35] text-[32px] not-italic font-semibold leading-[normal]">
+            <h3 className="text-[#212C33] sm:text-[24px] xl:text-[34px] font-[600]  md:text-start text-center">
               {projectName}
             </h3>
-            <h4 className="text-[#148B16] text-[32px] not-italic font-bold">
+            <h4 className="text-[#148B16] sm:text-[24px]  xl:text-[36px] whitespace-nowrap font-[700] mt-1">
               {formatCurrency(minPrice)} - {formatCurrency(maxPrice)}
             </h4>
-            <p className="text-[#242424] text-2xl not-italic font-medium leading-[normal]">
+            <p className="text-[#242424] text-sm sm:text-[18px]  xl:text-[24px] not-italic font-medium leading-[normal] mb-2">
               Start- End Date: {formatDateDDMMYYYY(startDate)} -{" "}
               {formatDateDDMMYYYY(endDate)}
             </p>
-            <p className="text-[#00487C] text-[26px] not-italic font-medium">
+            <p className="text-[#00487C] text-base sm:text-[24px] xl:text-[28px] not-italic font-medium">
               {" "}
               {availableProperties?.join(", ")}
             </p>
@@ -99,7 +100,7 @@ export default function PropertyBanner({
         <Link
           href={`/abc/banlore/whitefield/${projIdEnc}`}
           variant="blue"
-          className="mt-5"
+          className="mt-5   text-[12px] sm:text-[18px] xl:text-[20px] font-[700] "
         >
           Explore Project
         </Link>
@@ -120,8 +121,8 @@ function PropertyBannerForMobile({
 }: any) {
   return (
     <div className="w-[95%] md:w-[90%] mx-auto mt-5 md:mt-[2%] mb-10 md:mb-20 relative bg-[#fcfcfc] border border-solid border-blue-200  shadow-md !m-[2%]">
-      <div className="max-w-[100%] xl:mx-auto p-1  xl:p-5 ">
-        <h2 className="text-[#212C33] text-lg xl:text-2xl md:text-[32px] not-italic font-semibold leading-[normal] tracking-[1.28px] ml-0 md:ml-8 mb-4 md:mb-0">
+      <div className="max-w-[100%] xl:mx-auto p-1  xl:p-5  ">
+        <h2 className="text-[#212C33] text-lg xl:text-2xl md:text-[32px] not-italic font-semibold leading-[normal] tracking-[1.28px] pt-2 ml-0 md:ml-8 mb-4 md:mb-0">
           About{" "}
           <span className="text-[#148B16] font-semibold">{projectName}</span>
         </h2>
@@ -150,7 +151,7 @@ function PropertyBannerForMobile({
             <div className="text-[#148B16] text-lg md:text-[28px] not-italic font-bold leading-[normal] mr-4">
               {formatCurrency(minPrice)} - {formatCurrency(maxPrice)}
             </div>
-            <div className="text-[#333] text-base md:text-xl not-italic font-medium leading-[normal]">
+            <div className=" text-sm sm:text-[16px] mt-[10px] xl:mt-[14px] xl:text-[22px] font-[600] text-[#242424]">
               Start- End Date:{" "}
               <span className="font-semibold">
                 {formatDate(startDate)} - {formatDate(endDate)}

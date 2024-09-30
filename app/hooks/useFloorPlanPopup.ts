@@ -1,4 +1,4 @@
-import { useAtom, atom, useSetAtom } from "jotai";
+import { useAtom, atom } from "jotai";
 
 const openedAtom = atom(false);
 export const typeAtom = atom("type");

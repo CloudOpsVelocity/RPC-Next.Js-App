@@ -29,6 +29,7 @@ type Props = {
   partialUnitData: any;
   projName: string;
   phaseList: any;
+  type?: "overview" | "partial";
 };
 const iconStyles: string =
   " flex items-center justify-center w-[34px] sm:w-[40px] h-[34px] sm:h-[40px] bg-[#FAFDFF] rounded-[50%] ";
@@ -36,6 +37,7 @@ export default function HeaderActions({
   partialUnitData,
   projName,
   phaseList,
+  type,
 }: Props) {
   const getIcon = (id: number) => {
     let iconComponent;
@@ -62,15 +64,20 @@ export default function HeaderActions({
   };
   const [currentPhase, setCurrentPhase] = useAtom(currentPhaseAtom);
   const setSelected = useSetAtom(parital_unit_atom);
-  const propTypes = Object?.keys(partialUnitData && partialUnitData[currentPhase] ? partialUnitData[currentPhase] : {}).sort();
-  console.log(propTypes);
+  const sortOrder = ["apartment", "rowhouse", "villa", "villament", "plot"];
+
+  const sortedPropTypes = Object.keys(partialUnitData?.[currentPhase] || {})
+    .filter(
+      (key) => Object.keys(partialUnitData[currentPhase][key] || {}).length > 0
+    )
+    .sort((a, b) => sortOrder.indexOf(a) - sortOrder.indexOf(b));
   const [propCgId, setPropCgId] = useAtom(propCgIdAtom);
   useEffect(() => {
     // @ts-ignore
-    propTypes?.length > 0 &&
+    sortedPropTypes?.length > 0 &&
       setPropCgId(
         parseDataProjectProps[
-          propTypes[0] as keyof typeof parseDataProjectProps
+          sortedPropTypes[0] as keyof typeof parseDataProjectProps
         ]
       );
   }, [currentPhase]);
@@ -82,7 +89,7 @@ export default function HeaderActions({
         className="text-h2 lg:text-[32px] mt-[3%] xl:mt-[100px] font-[600] text-[#001F35] mb-[12px] scroll-mt-[280px]"
         id="floorPlansdiv"
       >
-        Floor Plans For{" "}
+        {type == "overview" ? "Price " : "Floor Plans "} For{" "}
         <span className="text-[#148B16] font-[700] ">{projName}</span>{" "}
       </h1>
       <SubHeading text="See floor plans as per your selected property type" />
@@ -97,10 +104,10 @@ export default function HeaderActions({
               Select one of the phase to see project details
             </p>
             <div className=" flex justify-start items-start gap-[10px] flex-wrap ">
-              {phaseList?.map((each: any, index: any) => {
+              {phaseList?.map((each: any) => {
                 return (
                   <Button
-                    key={index}
+                    key={`phase_${each.phaseName}`}
                     title={
                       isSingleLetterOrNumber(each.phaseName)
                         ? `Phase: ${each.phaseName}`
@@ -127,9 +134,11 @@ export default function HeaderActions({
         )}
       </div>
       <div className=" flex justify-start items-start flex-wrap gap-[2%] ">
-        {propTypes?.map((each: string, index: any) => {
+        {sortedPropTypes?.map((each: string, index: any) => {
           const keyName =
-            parseDataProjectProps[each as keyof typeof parseDataProjectProps];
+            parseDataProjectProps[
+              each.toLocaleLowerCase() as keyof typeof parseDataProjectProps
+            ];
           let name =
             //@ts-ignore
             propertyDetailsTypes.get(keyName).name != undefined
@@ -138,7 +147,7 @@ export default function HeaderActions({
               : null;
           return (
             <Button
-              key={index}
+              key={keyName}
               buttonClass={`flex justify-start mb-2 sm:mb-[3%] w-full rounded-[20px] gap-[8px]  items-center mr-[24px] md:ml-[0px] text-[12px] sm:text-[18px] border ${
                 propCgId == keyName
                   ? "text-[#001F35] text-[14px] sm:text-base font-[600] shadow-md bg-[#c8f5ca] sm:bg-[#D5EDFF]"

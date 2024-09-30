@@ -8,7 +8,11 @@ import Overview from "@/app/components/project/overview";
 import About from "@/app/components/project/about";
 import Navigation from "@/app/components/project/navigation";
 import Link from "next/link";
-import { getAmenties, getProjectDetails } from "@/app/utils/api/project";
+import {
+  getAmenties,
+  getOverViewData,
+  getProjectDetails,
+} from "@/app/utils/api/project";
 import ProjectDetailsP from "@/app/components/project/projectDetailsP";
 import ProjectDrawer from "@/app/components/project/Drawer";
 import LeafMap from "@/app/components/project/map";
@@ -34,6 +38,7 @@ import FAQJsonLdScript from "@/app/seo/Faqjson";
 import QAJsonLdScript from "@/app/seo/Qnajson";
 import PropertyJsonLdScript from "@/app/seo/Productjson";
 import ArticleJsonLdScript from "@/app/seo/ArticleJson";
+import PropertyDataDisplay from "@/app/components/project/_ui/PricingDetailsSection";
 // const FloorplansBlock = dynamic(
 //   () => import("@/app/components/project/floorplansBlock"),
 //   {
@@ -94,13 +99,21 @@ import ArticleJsonLdScript from "@/app/seo/ArticleJson";
 
 type Props = { params: { slug: string } };
 export default async function ProjectDetails({ params: { slug } }: Props) {
+  const [projectDetailsData, amenitiesFromDB] = await Promise.all([
+    getProjectDetails(slug),
+    getAmenties(),
+  ]);
+
+  let overview = null;
+
   const {
     basicData: data,
     nearByLocations,
     phaseOverview,
-  } = await getProjectDetails(slug);
-  const amenitiesFromDB = await getAmenties();
-
+  } = projectDetailsData;
+  if (!data.partialUnitData) {
+    overview = await getOverViewData(slug);
+  }
   return (
     <section className="w-full relative break-words">
       {/* <!-- Facebook Meta Tags --> */}
@@ -111,7 +124,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
       <meta property="og:type" content="website" />
       <meta
         property="og:title"
-        content={`${data.projectName} ${data.availableProperties.join(
+        content={`${data.projectName} ${data.availableProperties?.join(
           " "
         )} for sale in ${data.localityName} ${data.cityName}`}
       />
@@ -119,7 +132,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         property="og:description"
         content={`${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`}
       />
-      <meta property="og:image" content={data.media.coverImageUrl} />
+      <meta property="og:image" content={data.media?.coverImageUrl} />
 
       {/* <!-- Twitter Meta Tags --> */}
       <meta name="twitter:card" content="summary_large_image" />
@@ -130,7 +143,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
       />
       <meta
         name="twitter:title"
-        content={`${data.projectName} ${data.availableProperties.join(
+        content={`${data.projectName} ${data.availableProperties?.join(
           " "
         )} for sale in ${data.localityName} ${data.cityName}`}
       />
@@ -138,21 +151,28 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         name="twitter:description"
         content={`${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`}
       />
-      <meta name="twitter:image" content={data.media.coverImageUrl}></meta>
+      <meta name="twitter:image" content={data.media?.coverImageUrl} />
       <FAQJsonLdScript data={data} />
       <QAJsonLdScript data={data} />
       <PropertyJsonLdScript data={data} />
       <ArticleJsonLdScript data={data} />
-      <div className="mt-[70px] sm:mt-[70px] w-full sm:pb-[2%] flex items-center justify-center flex-col ">
+      <div className="mt-[70px] sm:mt-[90px] w-full sm:pb-[2%] flex xl:text-ellipsis items-center justify-center flex-col ">
         <div className="p-[1%] sm:p-[1%] sm:py-0 xl:p-[1%] w-full sm:w-[94%]">
           <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%]">
-            <span>Home</span> {" > "}
+            <a className="hover:underline cursor-pointer" href={"/"}>
+              Home
+            </a>{" "}
+            {" > "}
             <Link href={"/project/banglore"}>
-              <span>Projects In {data.cityName}</span>
+              <span className="hover:underline cursor-pointer">
+                Projects In {data.cityName}
+              </span>
             </Link>{" "}
             {" > "}
             <Link href={"/project/banglore/whitefield"}>
-              <span>Projects In {`${data.localityName} `}</span>
+              <span className="hover:underline cursor-pointer">
+                Projects In {`${data.localityName} `}
+              </span>
             </Link>{" "}
             {" > "}
             <span>{data.projectName}</span>
@@ -170,9 +190,10 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           <Navigation
             isBrochure={!!data?.media?.projBroucherUrl}
             detailsData={data}
+            slug={slug}
           />
         </MobileHidden>
-        <Overview {...data} PhaseOverview={phaseOverview} />
+        <Overview {...data} slug={slug} PhaseOverview={phaseOverview} />
         <ListingRentAvail
           projName={data.projectName}
           r={data.rentListing}
@@ -197,8 +218,18 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           projName={data.projectName}
           media={data?.media?.projectPlanUrl}
         />
+        {data.partialUnitData && (
+          <PropertyDataDisplay
+            unitData={data.partialUnitData}
+            projName={data.projectName}
+            phaseList={data.phases}
+          />
+        )}
+
         {!data.partialUnitData ? (
           <FloorplansBlock
+            partialUnitData={data.partialUnitData}
+            overview={overview}
             projName={data.projectName}
             data={data.phases}
             slug={slug}
@@ -211,6 +242,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             projName={data.projectName}
             phaseList={data.phases}
             data={data}
+            type="partial"
           />
         )}
 
@@ -328,9 +360,9 @@ export async function generateMetadata(
   // City
 
   return {
-    title: `${data.projectName} ${data.availableProperties.join(
-      " "
-    )} for sale in ${data.localityName} ${data.cityName}`,
+    title: `${data?.projectName} ${
+      data.availableProperties && data?.availableProperties?.join(" ")
+    } for sale in ${data.localityName} ${data.cityName}`,
     description: `${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`,
   };
 }

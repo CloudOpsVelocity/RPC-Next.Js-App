@@ -1,5 +1,4 @@
 import { FAQPage, WithContext } from "schema-dts";
-import Head from "next/head";
 
 const generateQAJsonLd = (data: any) => {
   const jsonLd: WithContext<FAQPage> = {
@@ -18,7 +17,7 @@ const generateQAJsonLd = (data: any) => {
     author: {
       "@type": "Person",
       name: data.builderName,
-      url: `${process.env.NEXT_PUBLIC_PROJECT_URL}/builder/${data.builderId}`,
+      url: `${process.env.NEXT_PUBLIC_PROJECT_URL}/builders/bengaluru/${data.builderId}`,
     },
     image: data.image,
     // datePublished: data.datePublished,

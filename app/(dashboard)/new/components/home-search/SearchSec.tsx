@@ -1,16 +1,27 @@
 import useSearchFilters from "@/app/hooks/search";
 import useQsearch from "@/app/hooks/search/useQsearch";
-import { Combobox, PillsInput, useCombobox } from "@mantine/core";
-import React from "react";
+import { Combobox, Pill, PillsInput, useCombobox } from "@mantine/core";
+import React, { useState } from "react";
 import classes from "@/app/styles/search.module.css";
 import Results from "./Result";
+import { useAtom, useAtomValue } from "jotai";
+import { homeSearchFiltersAtom } from "@/app/store/home";
+import { useMediaQuery } from "@mantine/hooks";
 type Props = {};
 export default function SearchSec({}: Props) {
-  const { filters: f, remnoveSearchOptions, setFilters } = useSearchFilters();
-  const { onSearchChange, debounced, name } = useQsearch();
+  const [f, dispatch] = useAtom(homeSearchFiltersAtom);
+  const { onSearchChange, debounced, name, data } = useQsearch();
+  const isTab = useMediaQuery("(max-width: 1600px)");
+  const [showAllLocalities, setShowAllLocalities] = useState(false);
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
   });
+  const handleFieldClick = (e: any) => {
+    e.stopPropagation();
+    setShowAllLocalities(false);
+    !combobox.dropdownOpened && combobox.toggleDropdown();
+    dispatch({ type: "SHOW_FILTER", payload: true });
+  };
   return (
     <Combobox
       store={combobox}
@@ -19,25 +30,74 @@ export default function SearchSec({}: Props) {
         onSearchChange(val);
         combobox.closeDropdown();
       }}
+      keepMounted
     >
       <Combobox.Target>
-        <PillsInput classNames={{ input: classes.homePageSearch }} w={"100%"}>
+        <div
+          onClick={() => setShowAllLocalities(!showAllLocalities)}
+          className="w-[100%] sm:min-w-[49.9%]   p-2 gap-2 xl:gap-[8px] pl-2 xl:pl-[8px] max-w-full flex items-center justify-start  flex-wrap"
+        >
           {" "}
+          {f.city && (
+            <Pill
+              className="capitalize !text-[12px] !sm:text-[14px] "
+              withRemoveButton
+              classNames={{ root: classes.MultiSelectionPill }}
+              onRemove={() => dispatch({ type: "REMOVE_CITY" })}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                flexWrap: "nowrap",
+              }}
+              onClick={() => setShowAllLocalities(false)}
+            >
+              {f.city.split("+")[0]}
+            </Pill>
+          )}
+          <div className="flex flex-wrap gap-2 items-center h-auto">
+            {f.locality?.map(
+              (each, index) =>
+                (showAllLocalities || index < (isTab ? 1 : 2)) && (
+                  <Pill
+                    className="capitalize !text-[12px] !sm:text-[14px]"
+                    onRemove={() =>
+                      dispatch({ type: "REMOVE_LOCALITY", payload: each })
+                    }
+                    key={each}
+                    withRemoveButton
+                    classNames={{ root: classes.MultiSelectionPill }}
+                  >
+                    {each.split("+")[0]}
+                  </Pill>
+                )
+            )}
+            {f.locality?.length > (isTab ? 1 : 2) &&
+              !showAllLocalities &&
+              f.locality?.length > (isTab ? 1 : 2) && (
+                <Pill
+                  className="capitalize cursor-pointer"
+                  classNames={{ root: classes.MultiSelectionPill }}
+                  onClick={() => setShowAllLocalities(true)}
+                >
+                  {`+${f.locality?.length - (isTab ? 1 : 2)} More`}
+                </Pill>
+              )}
+          </div>
           <PillsInput.Field
             placeholder={
               f.locality.length > 0
                 ? "Add More"
-                : "Search “ Whitefield, Bangalore”"
+                : "Search By Locality, Project, Listing"
             }
-            onClick={() => combobox.toggleDropdown()}
+            onClick={handleFieldClick}
             value={name ?? ""}
             onChange={(e) => onSearchChange(e.target.value)}
+            className="!min-w-[100px] ml-[4px] text-[12px] sm:text-[14px] "
           />
-        </PillsInput>
+        </div>
       </Combobox.Target>
-
-      {debounced && (
-        <Combobox.Dropdown className="min-w-[80%] !left-[8%] sm:!min-w-[410px] sm:!left-[44.5%]">
+      {name && (
+        <Combobox.Dropdown className="min-w-[92%]  !left-[4%] sm:!min-w-[410px] sm:!left-[32.5%] xl:!left-[44.5%]">
           <Results />
         </Combobox.Dropdown>
       )}

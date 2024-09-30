@@ -2,9 +2,19 @@ export interface SearchParams {
   listedBy: string | null;
   cg: string;
 }
+
 export const DynamicText = (params: SearchParams) => {
-  const dynamicText = `Properties for ${
-    params.cg === "R" ? "Rent" : "Sell"
+  const { listedBy, cg } = params;
+  const propertyText =
+    listedBy === "I" || listedBy === "A" || listedBy === "B"
+      ? "Properties for"
+      : "Projects";
+  const rentOrSellText = cg === "R" ? "Rent" : "Sell";
+  const dynamicText = `${propertyText} ${
+    listedBy === "I" || listedBy === "A" || listedBy === "B"
+      ? rentOrSellText
+      : ""
   } in Bengaluru`;
+
   return dynamicText;
 };

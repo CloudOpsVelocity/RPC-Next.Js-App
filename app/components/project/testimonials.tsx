@@ -6,7 +6,7 @@ const videos = [1, 2, 3, 4, 5, 6, 7, 8];
 
 type Props = {};
 
-const Card = ({}: Props) => {
+const Card = () => {
   return (
     <div
       className="rounded-lg border bg-card text-card-foreground mb-[1%] shadow-sm w-[95%]"
@@ -49,7 +49,7 @@ const Card = ({}: Props) => {
   );
 };
 
-export default function Testimonials({projName}:{projName:string}) {
+export default function Testimonials({ projName }: { projName: string }) {
   return (
     <div className="bg-white p-0 w-[90%] mb-[3%] ">
       <div className="flex flex-col md:flex-row gap-[1%]">
@@ -99,7 +99,7 @@ export default function Testimonials({projName}:{projName:string}) {
             >
               {/* single card */}
               {videos.map((each, ind) => {
-                return <Card key={ind} />;
+                return <Card key={`videosSingleCard_${each}`} />;
               })}
             </div>
           </div>

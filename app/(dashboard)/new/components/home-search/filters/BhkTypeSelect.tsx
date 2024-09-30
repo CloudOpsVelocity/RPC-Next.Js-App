@@ -1,7 +1,6 @@
 import { useState } from "react";
 import {
   Checkbox,
-  CheckIcon,
   Combobox,
   Group,
   Input,
@@ -12,15 +11,23 @@ import {
 import styles from "./Style.module.css";
 import useSearchFilters from "@/app/hooks/search";
 import { SEARCH_FILTER_DATA } from "@/app/data/search";
+import { homeSearchFiltersAtom } from "@/app/store/home";
+import { useAtom } from "jotai";
+import { useMediaQuery } from "@mantine/hooks";
 
 export function BasicMultiSelect() {
-  const { filters: f, setFilters, handleCheckboxClick } = useSearchFilters();
+  const [f, dispatch] = useAtom(homeSearchFiltersAtom);
+  const isTab = useMediaQuery("(max-width: 1600px)");
+  const [expanded, setExpanded] = useState(false); // State to track if the list is expanded
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
     onDropdownOpen: () => combobox.updateSelectedOptionIndex("active"),
   });
+  if (f.propType === 32) return null;
 
-  const values = f.unitTypes.map((itemId) => {
+  const visibleValues = expanded ? f.bhk : f.bhk.slice(0, 3); // Show only the first 3 items if not expanded
+
+  const values = visibleValues.map((itemId) => {
     const selectedItem = SEARCH_FILTER_DATA.bhkDetails.find(
       (item) => item.value === itemId
     );
@@ -29,7 +36,7 @@ export function BasicMultiSelect() {
         <Pill
           key={itemId}
           withRemoveButton
-          onRemove={() => handleCheckboxClick("unitTypes", itemId)}
+          onRemove={() => dispatch({ type: "ADD_BHK", payload: itemId })}
           classNames={{
             root: styles.pill,
           }}
@@ -38,17 +45,17 @@ export function BasicMultiSelect() {
         </Pill>
       );
     }
-    return null; // Handle case where item is not found (optional)
+    return null;
   });
 
   const options = SEARCH_FILTER_DATA.bhkDetails.map((item: any) => (
     <Combobox.Option
       value={item.value}
       key={item.value}
-      active={f.unitTypes.includes(item.value)}
+      active={f.bhk.includes(item.value)}
     >
       <Group gap="sm">
-        <Checkbox checked={f.unitTypes.includes(item.value)} color="green" />
+        <Checkbox checked={f.bhk.includes(item.value)} color="green" />
         <span>{item.title}</span>
       </Group>
     </Combobox.Option>
@@ -58,7 +65,7 @@ export function BasicMultiSelect() {
     <Combobox
       store={combobox}
       onOptionSubmit={(val) => {
-        handleCheckboxClick("unitTypes", parseInt(val));
+        dispatch({ type: "ADD_BHK", payload: parseInt(val) });
       }}
       withinPortal={false}
       classNames={{
@@ -75,12 +82,35 @@ export function BasicMultiSelect() {
           onClick={() => combobox.toggleDropdown()}
           rightSection={<DropIcon />}
           rightSectionPointerEvents="none"
+          size={isTab ? "xs" : "sm"}
         >
           <Pill.Group>
             {values.length > 0 ? (
-              values
+              <>
+                {values}
+                {f.bhk.length > 3 && !expanded && (
+                  <Pill
+                    onClick={() => setExpanded(true)} // Expand list on click
+                    classNames={{
+                      root: styles.pill,
+                    }}
+                  >
+                    + {f.bhk.length - 3}
+                  </Pill>
+                )}
+                {expanded && f.bhk.length > 3 && (
+                  <Pill
+                    onClick={() => setExpanded(false)} // Collapse list on click
+                    classNames={{
+                      root: styles.pill,
+                    }}
+                  >
+                    Show Less
+                  </Pill>
+                )}
+              </>
             ) : (
-              <Input.Placeholder className="!text-black">
+              <Input.Placeholder className="!text-black leading-0 font-[600] ">
                 BHK Type
               </Input.Placeholder>
             )}
@@ -94,6 +124,7 @@ export function BasicMultiSelect() {
     </Combobox>
   );
 }
+
 const DropIcon = () => {
   return (
     <svg

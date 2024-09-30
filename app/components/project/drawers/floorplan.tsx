@@ -111,35 +111,34 @@ export default function FloorplanDrawer() {
         } else {
           return apartmentCardImg;
         }
-        break;
+
       case "plot":
         if (type == "name") {
           return "Plot";
         } else {
           return plotCardImg;
         }
-        break;
+
       case "rowHouse":
         if (type == "name") {
           return "Rowhouse";
         } else {
           return rowhouseCardImg;
         }
-        break;
+
       case "villa":
         if (type == "name") {
           return "Villa";
         } else {
           return villaCardImg;
         }
-        break;
+
       case "vlmt":
         if (type == "name") {
           return "Villament";
         } else {
           return villamentCardImg;
         }
-        break;
     }
   };
   const handleClose = () => {
@@ -158,7 +157,6 @@ export default function FloorplanDrawer() {
     { axis: "x", pointer: { touch: true } }
   );
   return (
-    <>
       <Drawer
         opened={Object.keys(cg).length > 0 ? true : false}
         onClose={handleClose}
@@ -214,8 +212,6 @@ export default function FloorplanDrawer() {
             )}
             <p className="text-[14px] lg:text-[20px] bg-[#EEE] text-[#001F35] font-[500] flex justify-start items-center  ">
               <FlooringIcon className="md:h-[32px] md:w-[32px] h-[24px] w-[24px]" />
-            
-
               <span className="mr-[6px] ml-[6px]">{cg?.unitCount} </span> Units
             </p>
             {cg?.propertyType === "rowHouse" || cg.propertyType === "villa" ? (
@@ -234,7 +230,6 @@ export default function FloorplanDrawer() {
         <Table data={cg?.unitTypes} cg={cg} propertyType={cg?.propertyType} />
         {/* Drawer content */}
       </Drawer>
-    </>
   );
 }
 
@@ -249,7 +244,10 @@ const Table = ({ data, propertyType, cg }: any) => {
           <ul className="list-disc pl-8">
             {data &&
               sortUnits(data)?.map((item: any) => (
-                <li className="text-[#242424] text-[16px] xl:text-[21px] not-italic font-semibold leading-[normal] capitalize">
+                <li
+                  key={item}
+                  className="text-[#242424] text-[16px] xl:text-[21px] not-italic font-semibold leading-[normal] capitalize"
+                >
                   {propertyType === "plot" ? item.split("_").join(" x ") : item}
                 </li>
               ))}
@@ -300,6 +298,7 @@ const PlotTable: React.FC<PlotTableProps> = ({
   cg,
   type,
 }) => {
+  const isMobile = useMediaQuery("max:width:601px");
   const key = type === "standard" ? "standardPlots" : "oddPlots";
   const keyCount = type === "standard" ? "standardPlotCount" : "oddPlotCount";
   const title = type === "standard" ? "Standard Unit" : "Odd Unit";
@@ -315,7 +314,7 @@ const PlotTable: React.FC<PlotTableProps> = ({
   const sortedUnits = Object.entries(unitCountMap).sort(([unitA], [unitB]) =>
     unitA.localeCompare(unitB)
   );
-  const isMobile = useMediaQuery("max:width:601px");
+
   return (
     <div>
       <div className="flex items-center gap-1.5 p-1 xl:p-2 rounded-md bg-[#EEE] text-[#001F35] text-[14px] xl:text-lg not-italic font-semibold capitalize mb-3">

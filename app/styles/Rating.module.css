@@ -44,9 +44,12 @@
   display: none;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1600px) {
   .star {
     margin-right: 16px;
+  }
+  .title {
+    font-size: 22px;
   }
 }
 @media (max-width: 640px) {

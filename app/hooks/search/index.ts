@@ -14,7 +14,7 @@ import {
   parseAsInteger,
   parseAsFloat,
 } from "nuqs";
-import { useInfiniteQuery, useMutation, useQueryClient } from "react-query";
+import { Query, useInfiniteQuery, useMutation, useQueryClient } from "react-query";
 const paramsInit = {
   projStatus: parseAsString,
   localities: parseAsString,
@@ -25,7 +25,7 @@ const paramsInit = {
   parkings: parseAsString,
   amenities: parseAsString,
   listedBy: parseAsString,
-  reraVerified: parseAsString,
+  reraIds: parseAsString,
   minArea: parseAsInteger,
   maxArea: parseAsInteger,
   minPrice: parseAsFloat,
@@ -71,7 +71,7 @@ export default function useSearchFilters(
     value: string | number,
     callback?: () => void
   ) => {
-    setFilters({ ...filters, [key]: value });
+    setFilters((prev) => ({ ...prev, [key]: value }));
     callback && callback();
   };
   type SearchFilter = {
@@ -82,6 +82,7 @@ export default function useSearchFilters(
     areaValue: [number, number];
     bugdetValue: [number, number];
     facings: number[];
+    reraVerified: number[];
   };
   const handleCheckboxClick = (
     filterType: keyof SearchFilter,
@@ -122,12 +123,12 @@ export default function useSearchFilters(
     } = filters;
     count += current ? 1 : 0;
     count += propTypes ? 1 : 0;
-    count += reraVerified ? 1 : 0;
+    count += reraVerified?.length || 0;
     count += listedBy ? 1 : 0;
     count += furnish ? 1 : 0;
     count += propStatus?.length || 0;
     count += areaValue[0] !== 0 || areaValue[1] !== 5000 ? 1 : 0;
-    count += bugdetValue[0] !== 0 || bugdetValue[1] !== 5 ? 1 : 0;
+    count += bugdetValue[0] !== 500000 || bugdetValue[1] !== 600000000 ? 1 : 0;
     count += amenities?.length || 0;
     count += bathRooms.length || 0;
     count += builderIds.length || 0;
@@ -170,7 +171,7 @@ export default function useSearchFilters(
       case "Area":
         return areaValue[0] !== 0 || areaValue[1] !== 5000;
       case "Budget":
-        return bugdetValue[0] !== 0 || bugdetValue[1] !== 5;
+        return bugdetValue[0] !== 500000 || bugdetValue[1] !== 600000000;
       case "Bath":
         return !!bathRooms.length;
       case "Amenities":
@@ -198,10 +199,10 @@ export default function useSearchFilters(
   };
 
   const handleBooleanCheck = () => {
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      reraVerified: !prevFilters.reraVerified,
-    }));
+    // setFilters((prevFilters) => ({
+    //   ...prevFilters,
+    //   reraVerified: !prevFilters.reraVerified,
+    // }));
   };
   const handleSliderChange = (key: keyof SearchFilter, newValue: number[]) => {
     setFilters((prevFilters) => ({
@@ -209,8 +210,16 @@ export default function useSearchFilters(
       [key]: newValue,
     }));
   };
+
   const handleReset = (
-    type: "unitType" | "price" | "all" | "propType" | "listedBy" | "searchProj",
+    type:
+      | "unitType"
+      | "price"
+      | "all"
+      | "propType"
+      | "listedBy"
+      | "searchProj"
+      | "prjectsearchlisting",
     keys?: string[]
   ) => {
     switch (type) {
@@ -231,7 +240,7 @@ export default function useSearchFilters(
       case "price":
         setFilters((prev) => ({
           ...prev,
-          bugdetValue: [0, 60],
+          bugdetValue: [500000, 600000000],
         }));
         setParams({ minPrice: null, maxPrice: null });
         break;
@@ -249,8 +258,8 @@ export default function useSearchFilters(
         }));
         setParams({ propTypes: null });
         break;
-      case "searchProj":
-        const updatedFilters = { ...filters };
+      case "searchProj": {
+        let updatedFilters = { ...filters };
         for (const key in updatedFilters) {
           if (keys && keys.includes(key)) {
             // @ts-ignore
@@ -258,6 +267,12 @@ export default function useSearchFilters(
           }
         }
         setFilters(updatedFilters);
+        handleAppliedFilters();
+        break;
+      }
+
+      case "prjectsearchlisting":
+        setFilters({ ...initialState, listedBy: filters.listedBy });
         handleAppliedFilters();
         break;
       default:
@@ -269,13 +284,21 @@ export default function useSearchFilters(
     setAppliedFilters({ runner: setParams });
     callback && callback();
   };
-  const listByCondition = filters.listedBy === "I" || filters.listedBy === "A";
+  const listByCondition = filters.listedBy === "I" || filters.listedBy === "A" || filters.listedBy === "B" || filters.listedBy === "ALL";
   const value = listByCondition
     ? "owner"
     : input === undefined
     ? "project"
     : input;
-
+  const countAppliedFiltersFromQuery = () => {
+    let count = 0;
+    Object.keys(params).map((key: any) => {
+      if (params[key as keyof typeof params] !== null) {
+        count++;
+      }
+    });
+    return count;
+  };
   const {
     fetchNextPage,
     hasNextPage,
@@ -290,18 +313,26 @@ export default function useSearchFilters(
     queryFn: ({ pageParam = 0 }) =>
       getFilteredData(convertToQueryParams(params as any), pageParam, value),
 
-    getNextPageParam: (lastPage, allPages) => {
+    getNextPageParam: (lastPage: any, allPages: any) => {
       const nextPage = allPages.length;
       if (lastPage.length < 20) {
-        return undefined;
+        return;
       }
       return nextPage;
     },
     enabled:
-      ["/search", "/search/listing"].includes(path) && input !== undefined,
+      ["/search", "/search/listing"].includes(path) ||
+      ((path.includes("/seo") ||
+        path.includes("/projects") ||
+        path.includes("/listings") ||
+        path.includes("/residential")) &&
+        countAppliedFiltersFromQuery() > 0 &&
+        input !== undefined),
     cacheTime: 300000,
     staleTime: 30000,
   });
+  //  if any value is null then don't increase otherwise increase count
+
   const updateItem = async () => {
     console.log("api done");
   };
@@ -366,6 +397,7 @@ export default function useSearchFilters(
     params,
     searchProps: {
       data: data?.pages.flat() || [],
+      fullData: data,
       isLoading,
       error,
       hasPreviousPage,
@@ -379,6 +411,8 @@ export default function useSearchFilters(
     setSingleType,
     handleCityReset,
     isFilterApplied,
+    countAppliedFiltersFromQuery,
+    path,
   };
 }
 
@@ -387,16 +421,17 @@ const getFilteredData = async (
   page: number,
   type: "project" | "owner" | "agent"
 ): Promise<Search[]> => {
-  const hasCityParam = /(?:^|&)city=/.test(query);
+  const hasCityParam = /(?:^|&)city=/.test(query); 
   const hasCg = /(?:^|&)cg=/.test(query);
+  const cgValue = !hasCg ? "&cg=S" : "";
   const url =
     type === "project"
       ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=${page}${
-          query && `&${query}`
-        } ${!hasCg ? "&cg=S" : ""}`
+          query && query !== "listedBy=ALL" ? `&${query}` : ""
+        }${cgValue}`
       : `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/prop-search?page=${page}${
-          query && `&${query}`
-        }${hasCityParam ? "" : "&city=9"}`;
+          query && query !== "listedBy=ALL" ? `&${query}` : ""
+        }${!hasCityParam && "&city=9"}${cgValue}`;
   try {
     const response = await fetch(url);
     const data = await response.json();

@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Carousel } from "@mantine/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import {
@@ -10,7 +10,7 @@ import {
 import { Main } from "@/app/validations/types/project";
 import Image from "next/image";
 import SharePopup from "../atoms/SharePopup";
-import { formatCurrency } from "@/app/utils/numbers";
+import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
 import { formatDate } from "@/app/utils/date";
 import { getImageUrls } from "@/app/utils/image";
 import usePhaseWiseOverview from "@/app/hooks/usePhaseWiseOverview";
@@ -18,11 +18,13 @@ import styles from "@/app/styles/Carousel.module.css";
 import { currentBlockAtom, isScrollingAtom, stickyAtom } from "./navigation";
 import { useSetAtom } from "jotai";
 import Link from "next/link";
+import { NumberFormatter } from "@mantine/core";
 type Props = {
   projectDetails: Main | null;
   companyName: string;
   builderId: number;
   hasReraStatus: boolean;
+  scrollId?: string;
 };
 
 const FirstBlock: React.FC<Props> = ({
@@ -30,13 +32,13 @@ const FirstBlock: React.FC<Props> = ({
   companyName,
   builderId,
   hasReraStatus,
+  scrollId,
 }) => {
   const images = getImageUrls(projectDetails?.media as any);
   const autoplay = useRef(Autoplay({ delay: 10000 }));
   const setIsScrolling = useSetAtom(isScrollingAtom);
   const setSticky = useSetAtom(stickyAtom);
   const setC = useSetAtom(currentBlockAtom);
-
   function scrollToTopic(id: string): void {
     setIsScrolling(true);
     const element = document.getElementById(id);
@@ -46,12 +48,34 @@ const FirstBlock: React.FC<Props> = ({
         block: "start",
         inline: "center",
       });
-
       setSticky(true);
     }
     setC("floorPlans");
     setTimeout(() => setIsScrolling(false), 3000);
   }
+
+  let builderName = companyName
+    ? companyName.toLowerCase().split(" ").join("%2D")
+    : "";
+  let urlBuilder = `/builders/bengaluru/${builderName}`;
+  useEffect(() => {
+    if (scrollId) {
+      console.log("scrolling", scrollId);
+      setIsScrolling(true);
+      const element = document.getElementById(scrollId);
+      if (element) {
+        element.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+          inline: "center",
+        });
+        setSticky(true);
+      }
+      setC(scrollId);
+      setTimeout(() => setIsScrolling(false), 3000);
+    }
+  }, []);
+
   return (
     <div
       className={`relative rounded-[10px] w-full m-auto bg-gray-50 sm:h-[545px]  xl:h-[750px] bg-cover flex justify-between items-start flex-col shadow-md break-words`}
@@ -74,6 +98,7 @@ const FirstBlock: React.FC<Props> = ({
             </p>
             <SharePopup className="text-sm p-[4px]  sm:text-xl hidden sm:flex" />
           </div>
+
           <div className="relative w-full sm:!rounded-[10px]">
             <Carousel
               classNames={styles}
@@ -81,7 +106,6 @@ const FirstBlock: React.FC<Props> = ({
               withIndicators
               slidesToScroll={1}
               align="start"
-              dragFree
               plugins={[autoplay.current]}
               onMouseEnter={autoplay.current.stop}
               onMouseLeave={autoplay.current.reset}
@@ -89,7 +113,11 @@ const FirstBlock: React.FC<Props> = ({
               previousControlIcon={<DarkCarouseIcon />}
             >
               {images.map((imageUrl, index) => (
-                <Carousel.Slide key={index} className="relative" w={"auto"}>
+                <Carousel.Slide
+                  key={Math.random()}
+                  className="relative"
+                  w={"auto"}
+                >
                   <Image
                     alt="project image"
                     src={imageUrl}
@@ -112,8 +140,8 @@ const FirstBlock: React.FC<Props> = ({
                   </h1>
                   <SharePopup className="text-sm p-[2px] mr-2 mt-[2px] sm:hidden " />
                 </div>
-
                 <p className="text-[#242424]  text-sm sm:text-[18px]  xl:text-[22px] not-italic font-[600] leading-[normal] w-[100%] tracking-[0.32px] capitalize sm:mt-[8px] xl:mt-[14px] ">
+                  address:{" "}
                   {`${projectDetails.address}, ${projectDetails.localityName}, ${projectDetails.cityName}, ${projectDetails.state}, ${projectDetails.pinCode}`}
                 </p>
 
@@ -129,7 +157,7 @@ const FirstBlock: React.FC<Props> = ({
                 <p className="text-[#242424] sm:text-[16px] xl:text-2xl not-italic font-semibold leading-[normal] mt-[14px]">
                   Posted By:{" "}
                   <a
-                    href={`/builder/${builderId}`}
+                    href={urlBuilder}
                     target="_blank"
                     className="text-btnPrimary sm:text-[16px] xl:text-2xl  font-bold leading-[normal] underline"
                   >
@@ -146,11 +174,21 @@ const FirstBlock: React.FC<Props> = ({
                 {formatCurrency(projectDetails.maxPrice)}
               </h2>
               <p className=" md:text-right sm:text-[14px] xl:text-[24px] sm:font-[600] mb-[10px] md:mb-[20px] text-[#001F35] ">
-                ₹ {projectDetails.basePrice}/- Price per sqft onwards
+                <span className="text-[#001F35]  sm:text-[14px] xl:text-[24px] sm:font-[600] text-wrap not-italic font-medium leading-[normal]">
+                  ₹{" "}
+                  {
+                    <NumberFormatter
+                      thousandSeparator
+                      value={projectDetails.basePrice}
+                      thousandsGroupStyle="lakh"
+                    />
+                  }{" "}
+                  Base Price/sq.ft onwards
+                </span>
               </p>
 
               <p
-                className=" sm:text-[16px] xl:text-[20px] font-[600] mr-auto md:mr-0 text-[#0073C6] bg-[#FFF] rounded-[10px] shadow-md p-[8px] flex items-center gap-2 cursor-pointer"
+                className=" sm:text-[16px] xl:text-[20px] font-[600] mr-auto md:mr-0 text-[#0073C6] bg-[#FFF] rounded-[10px] shadow-md p-[8px] flex items-center gap-2 cursor-pointer mt-0 sm:mt-[5%] xl:mt-[3%]"
                 onClick={() => scrollToTopic("floorPlansdiv")}
               >
                 <Image
@@ -160,7 +198,8 @@ const FirstBlock: React.FC<Props> = ({
                   alt="no of floors"
                   className=" xl:h-[24px] xl:w-[24px] w-[16px] h-[16px]  sm:h-[16px] sm:w-[16px] "
                 />
-                {projectDetails?.floorPlanCount || 0} Floor Plan
+                {formatNumberWithSuffix(projectDetails?.floorPlanCount) || 0}{" "}
+                Floor Plans
               </p>
             </div>
           </div>

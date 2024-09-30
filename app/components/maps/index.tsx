@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -11,15 +11,9 @@ import {
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { LatLngTuple } from "leaflet";
-import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css";
 import "leaflet-defaulticon-compatibility";
-import {
-  BlueIcon,
-  BlueMobileMapIcon,
-  MapIcon,
-  MobileMapIcon,
-} from "@/app/data/map";
+import { BlueMobileMapIcon, MapIcon, MobileMapIcon } from "@/app/data/map";
 import { RecenterIcon } from "@/app/images/commonSvgs";
 import { useMediaQuery } from "@mantine/hooks";
 import clsx from "clsx";
@@ -35,16 +29,17 @@ const Map = ({
   selected,
   className,
 }: any) => {
-  const position: LatLngTuple = [lat, lang];
+  const position: LatLngTuple = useMemo(() => [lat, lang], [lat, lang]);
+
   return (
     <MapContainer
       center={position}
       zoom={13}
       className={clsx(
-        " h-[291px] sm:h-[456px] xl:h-[700px] w-full z-[1] relative",
+        " h-[291px] sm:h-[456px] xl:h-[600px] w-full z-[1] relative",
         className
       )}
-      scrollWheelZoom={true}
+      scrollWheelZoom
     >
       <button
         className="z-[1000] inline-flex sm:w-fit w-[40px] h-[40px] justify-center items-center gap-1 p-2.5 shadow-[0px_4px_12px_0px_rgba(0,0,0,0.40)] rounded-[21px] bg-[#0073c6] ml-3 sm:ml-0 absolute bottom-[10px] sm:right-[20px] sm:top-[20px]  text-white text-xl not-italic font-bold leading-[normal]"
@@ -67,6 +62,7 @@ const Map = ({
         lang={lang}
         type={type}
         selected={selected}
+        setSelectedLocation={setSelectedLocation}
       />
     </MapContainer>
   );
@@ -80,10 +76,11 @@ const Content: React.FC<any> = ({
   projName,
   lat,
   lang,
-  type,
   selected,
+  setSelectedLocation,
 }) => {
-  const position: LatLngTuple = [lat, lang];
+  const position: LatLngTuple = useMemo(() => [lat, lang], [lat, lang]);
+
   const map = useMap();
   useEffect(() => {
     if (selectedLocation && selectedLocation.name) {
@@ -92,12 +89,11 @@ const Content: React.FC<any> = ({
         parseFloat(selectedLocation.lng),
       ]);
     }
-  }, [selectedLocation, selected]);
+  }, [selectedLocation, selected, position, map]);
 
   useEffect(() => {
     map.setView(position, 11);
-  }, [selected]);
-
+  }, [selected, map, position]);
   const isMobile = useMediaQuery("(max-width: 601px)");
   return (
     <>
@@ -109,9 +105,19 @@ const Content: React.FC<any> = ({
         data.length > 0 &&
         data?.map((item: any) => (
           <Marker
+            key={item?.lat}
             position={[parseFloat(item?.lat), parseFloat(item?.lang)]}
             title={item.name}
             {...(isMobile && { icon: BlueMobileMapIcon })}
+            zIndexOffset={100}
+            eventHandlers={{
+              click: () =>
+                setSelectedLocation({
+                  lat: item?.lat,
+                  lng: item?.lang,
+                  name: item?.name,
+                }),
+            }}
           >
             {/* {selectedLocation?.lat === item?.lat && ( */}
             {!isMobile && (
@@ -120,7 +126,8 @@ const Content: React.FC<any> = ({
                 opacity={1}
                 direction="top"
                 permanent={selectedLocation?.lat === item?.lat}
-                className="min-w-fit"
+                className="min-w-fit z-50"
+                offset={[-16, -16]}
               >
                 <div className=" ">
                   <p className="text-[#00487C] text-lg not-italic font-semibold leading-[normal]">
@@ -137,7 +144,7 @@ const Content: React.FC<any> = ({
                 direction="top"
                 permanent={selectedLocation?.lat === item?.lat}
                 key={item.lang}
-                {...(isMobile && { offset: [-7, -40] })}
+                offset={isMobile ? [-7, -40] : [-16, -16]}
                 className="min-w-fit"
               >
                 <div className=" ">
@@ -148,35 +155,29 @@ const Content: React.FC<any> = ({
               </Tooltip>
             )}
 
-            <Popup>
+            {/* <Popup className="min-w-fit">
               <p className="text-[#00487C] text-xs sm:text-[17px] italic font-medium leading-[normal]">
                 {item.name}
               </p>
-            </Popup>
+            </Popup> */}
           </Marker>
         ))}
 
-      <Marker
-        position={position}
-        icon={isMobile ? MobileMapIcon : MapIcon}
-        zIndexOffset={1000}
-      >
-        <Tooltip
+      <Marker position={position} icon={isMobile ? MobileMapIcon : MapIcon}>
+        {/* <Tooltip
           opacity={1}
-          permanent
           direction="top"
           offset={[30, -40]}
-          className="map"
+          className="max-w-fit -z-10"
+          permanent
         >
-          <div className="sm:p-2 pt-1">
-            <p className="text-white text-[12px] sm:text-base italic font-medium leading-[normal]">
-              {type === "prop" ? "Property" : "Project"} you are exploring
-            </p>
-            <p className="text-white sm:text-lg not-italic font-semibold leading-[normal] mt-2 break-words text-wrap min-w-[200px]">
-              {projName}
-            </p>
-          </div>
-        </Tooltip>
+          <p className="font-bold text-black text-lg sm:text-lg">{projName}</p>
+        </Tooltip> */}
+        <Popup className="min-w-fit" offset={[30, -4]}>
+          <p className="font-bold text-black text-[14px] sm:text-lg">
+            {projName}
+          </p>
+        </Popup>
       </Marker>
       <polyline />
     </>

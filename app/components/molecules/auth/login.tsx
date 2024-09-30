@@ -1,6 +1,6 @@
 "use client";
-import { useForm, yupResolver } from "@mantine/form";
-import { Button, Box, PasswordInput, em, NumberInput } from "@mantine/core";
+import { PasswordInput, NumberInput } from "react-hook-form-mantine";
+import { Button, Box, em } from "@mantine/core";
 import useAuth from "@/app/hooks/useAuth";
 import Link from "next/link";
 import { useState } from "react";
@@ -9,12 +9,16 @@ import { EyeClosed, EyeOpen } from "@/app/images/commonSvgs";
 import { useMediaQuery } from "@mantine/hooks";
 import handleTrimAndReplace, {
   handleAllTrimAndReplace,
+  handleTrimAndReplaceReactHookForm,
 } from "@/app/utils/input/validations";
 import StepCss from "@/app/styles/Stepper.module.css";
 import {
   getCallPathServer,
   getQueryParam,
 } from "@/app/hooks/custom/useRedirect";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { MAX_LENTH_TEXT } from "@/app/validations/auth";
 const schema = yup.object().shape({
   username: yup
     .number()
@@ -29,16 +33,30 @@ const schema = yup.object().shape({
     .typeError("Mobile number is required"),
   password: yup
     .string()
+    .required("Password is required")
     .min(6, "Password must be at least 6 characters")
-    .required("Password is required"),
+    .max(40, "Password must be under 40 characters"),
 });
-// TODHA REST KR KOI DIKAT HAIKUCH OR DEKH LE
+
 function Login({ params }: any) {
   const [state, setState] = useState<"idle" | "pending" | "success">("idle");
-  const form = useForm({
-    initialValues: { username: null, password: "" },
-    validate: yupResolver(schema),
-    validateInputOnBlur: true,
+  // const form = useForm({
+  //   initialValues: { username: null, password: "" },
+  //   validate: yupResolver(schema),
+  //   validateInputOnBlur: true,
+  // });
+  const {
+    control,
+    handleSubmit,
+    formState: { isLoading },
+    setValue,
+    watch,
+  } = useForm({
+    defaultValues: { username: undefined, password: "" },
+    shouldFocusError: true,
+    mode: "onTouched",
+    criteriaMode: "firstError",
+    resolver: yupResolver(schema),
   });
 
   const { login } = useAuth({ type: "login" });
@@ -47,16 +65,39 @@ function Login({ params }: any) {
     login(values);
     setState("success");
   };
+  const lossOrProfit = (val: number[]) => {
+    if (val.length === 0) return 0; // Handle empty array case
+
+    let min = val[0];
+    let max = val[0];
+
+    for (let i = 1; i < val.length; i++) {
+      // Start loop from index 1 since index 0 is already set to min and max
+      if (val[i] < min) {
+        min = val[i];
+      }
+      if (val[i] > max) {
+        max = val[i];
+      }
+    }
+
+    return max - min; // Return the profit/loss (difference between max and min)
+  };
+
+  console.log(lossOrProfit([7, 1, 5, 3, 6, 4]));
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
   return (
     <div className="sm:max-w-[420px] xl:max-w-[423px] m-auto">
       <form
-        onSubmit={form.onSubmit(onSubmit)}
+        onSubmit={handleSubmit(onSubmit)}
         className="w-[100%] flex justify-center items-center flex-col "
       >
         <NumberInput
+          control={control}
+          name="username"
           mt={"xs"}
           required
+          allowNegative={false}
           classNames={{
             root: StepCss.inputRoot,
             input: StepCss.textInput,
@@ -68,18 +109,20 @@ function Login({ params }: any) {
           className="w-[100%]  mb-[3%] "
           label="Mobile Number"
           placeholder="Enter Your Mobile Number"
-          {...form.getInputProps("username")}
+          // {...form.getInputProps("username")}
           maxLength={10}
           allowDecimal={false}
           onPaste={(event) => {
             const pastedText = event.clipboardData.getData("text/plain");
             const trimmedText = pastedText.replace(/\s/g, "");
             const first10Digits = trimmedText.replace(/\D/g, "").slice(0, 10);
-            form.setFieldValue("username", first10Digits as any);
+            setValue("username", Number(first10Digits) as any);
           }}
         />
 
         <PasswordInput
+          control={control}
+          name="password"
           classNames={{
             root: StepCss.inputRoot,
             error: StepCss.errorMsg,
@@ -95,8 +138,11 @@ function Login({ params }: any) {
           visibilityToggleIcon={({ reveal }) =>
             reveal ? <EyeOpen /> : <EyeClosed />
           }
-          {...form.getInputProps("password")}
-          onBlurCapture={(e) => handleTrimAndReplace(e, "password", form)}
+          maxLength={MAX_LENTH_TEXT}
+          // {...form.getInputProps("password")}
+          onBlurCapture={(e) =>
+            handleTrimAndReplaceReactHookForm(e, "password", setValue)
+          }
         />
 
         <Link
@@ -107,7 +153,7 @@ function Login({ params }: any) {
         </Link>
 
         <Button
-          loading={state === "pending"}
+          loading={isLoading}
           type="submit"
           size={isMobile ? "compact-xs" : "md"}
           className="!w-[100%] !h-[50px]  mt-[4%] !bg-[#0c7aca] rounded-[6px] !text-[20px] sm:h-[57px] !font-extrabold:"

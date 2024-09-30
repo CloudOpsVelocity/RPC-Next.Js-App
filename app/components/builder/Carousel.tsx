@@ -14,6 +14,8 @@ import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import { useSetAtom } from "jotai";
 import { NearByDataAtom } from "@/app/store/nearby";
 import clsx from "clsx";
+import axios from "axios";
+import { useQuery } from "react-query";
 
 type Props = {
   type: string;
@@ -22,22 +24,24 @@ type Props = {
   content: string;
   data?: any;
   location?: string;
+  id?: string;
 };
 
 type CardProps = {
   type: string;
   projName?: string;
   cardData?: any;
+  refetch?: () => Promise<any>;
 };
 
-export function ProjectCard({ type, cardData }: CardProps) {
+export function ProjectCard({ type, cardData, refetch }: CardProps) {
+  console.log(cardData.shortListed);
   const [, { open }] = useReqCallPopup();
   const { data: session } = useSession();
   const [isShorlited, setShorlited] = React.useState(cardData.shortListed);
+  console.log(isShorlited);
   const { toggleShortlist } = useShortlistAndCompare();
   const [, { open: openShort }] = usePopShortList();
-  console.log(cardData);
-  const setPopReqData = useSetAtom(NearByDataAtom);
   const isItemInShortlist = isShorlited === "Y";
 
   const onAddingShortList = async () => {
@@ -51,10 +55,13 @@ export function ProjectCard({ type, cardData }: CardProps) {
         setShorlited(status);
       }
     } else {
-      openShort();
+      openShort(
+        () => refetch && refetch().then(() => setShorlited(!isShorlited))
+      );
     }
   };
-  const handleReqCallbackOpen = () => {
+  const handleReqCallbackOpen = (e: any) => {
+    e.stopPropagation();
     open({
       modal_type: "PROJECT_REQ_CALLBACK",
       postedByName: cardData.postedByName,
@@ -64,21 +71,20 @@ export function ProjectCard({ type, cardData }: CardProps) {
       title: cardData.projectName,
     });
   };
+  const handleCardClick = () => {
+    window.open(`/abc/karnataka/banglore/${cardData.projIdEnc}`, "_blank");
+  };
   return (
-    <>
       <div
         key={cardData.projIdEnc}
-        className="border text-card-foreground min-w-[300px] sm:min-w-[350px] bg-[#FAFAFA]  min-h-[500px] overflow-hidden  shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[14px] "
+        onClick={handleCardClick}
+        className="border text-card-foreground min-w-[300px] xl:max-w-[494px] bg-[#FAFAFA]  min-h-[500px] overflow-hidden  shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[14px] "
       >
         {type == "proj" && (
           <div className="sm:flex sm:space-y-1.5 p-6  px-4 pt-2 pb-3 justify-between items-center">
-            <a
-              target="_blank"
-              className="tracking-tight sm:text-[18px] font-[600] text-[#565D70] cursor-pointer"
-              href={`/abc/karnataka/banglore/${cardData.projIdEnc}`}
-            >
+            <div className="tracking-tight sm:text-[18px] font-[600] text-[#565D70] cursor-pointer">
               {cardData.projectName}
-            </a>
+            </div>
             <div className="text-xs font-semibold sm:text-right ">
               <span className="text-[16px] font-[700] text-[#148B16]">
                 {formatCurrency(cardData.minPrice)}
@@ -122,7 +128,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
                     : "bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 text-[#0073C6]"
                 )}
                 onClick={(e) => {
-                  e.preventDefault();
+                  e.stopPropagation();
                   onAddingShortList();
                 }}
               >
@@ -144,9 +150,9 @@ export function ProjectCard({ type, cardData }: CardProps) {
             )}
 
             {type == "proj" && (
-              <p className="mb-[6px] text-[#565D70] text-[13px] sm:text-base not-italic font-semibold leading-[normal]">
+              <p className="mb-[6px] text-[#565D70] text-[13px] xl:text-base not-italic font-semibold leading-[normal]">
                 Start - End Date:
-                <span className="ml-[4px] text-[#001F35] text-[13px] sm:text-base not-italic font-semibold leading-[normal]">
+                <span className="ml-[4px] text-[#001F35] text-[13px] xl:text-base not-italic font-semibold leading-[normal]">
                   {formatDate(cardData.startDate)} -{" "}
                   {formatDate(cardData.endDate)}
                 </span>
@@ -171,7 +177,7 @@ export function ProjectCard({ type, cardData }: CardProps) {
               </p>
             )}
 
-            <p className="text-[#565D70] text-[12.5px] sm:text-[15px] not-italic font-semibold leading-[normal] tracking-[0.56px] sm:mb-2">
+            <p className="text-[#565D70] text-[12.5px] xl:text-[15px] not-italic font-semibold leading-[normal] tracking-[0.56px] sm:mb-2">
               {`${cardData.localityName}, 
               ${cardData.cityName} ,
               ${cardData.state ?? ""} ,
@@ -179,11 +185,11 @@ export function ProjectCard({ type, cardData }: CardProps) {
             </p>
 
             {type === "proj" && (
-              <div className="inline-flex items-start gap-2 p-1 sm:p-2 shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] cardBg mt-[8px] sm:mt-[16px] border border-sky-200">
-                <span className="text-black text-right text-[14px] sm:text-base not-italic font-medium leading-[normal]">
+              <div className="inline-flex items-start gap-2 p-1 sm:p-2 shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] cardBg mt-[8px] xl:mt-[16px] border border-sky-200">
+                <span className="text-black text-right text-[14px] xl:text-base not-italic font-medium leading-[normal]">
                   Project Status:{" "}
                 </span>
-                <span className="text-[#148B16] text-[14px] sm:text-base not-italic font-bold leading-[normal]">
+                <span className="text-[#148B16] text-[14px] xl:text-base not-italic font-bold leading-[normal]">
                   {cardData.projectStatus}
                 </span>
               </div>
@@ -195,13 +201,12 @@ export function ProjectCard({ type, cardData }: CardProps) {
             )}
             <Button
               title="Request  Callback"
-              buttonClass=" text-[#FFF] mt-[8px] text-[12px] sm:text-[18px] font-[600] bg-[#0073C6] rounded-[5px] shadow-md whitespace-nowrap flex items-center p-1.5 sm:p-[10px]  "
+              buttonClass=" text-[#FFF] mt-[8px] text-[12px] sm:text-[14px] xl:text-[18px] font-[600] bg-[#0073C6] rounded-[5px] shadow-md whitespace-nowrap flex items-center p-1.5 sm:p-[10px]  "
               onChange={handleReqCallbackOpen}
             />
           </div>
         </div>
       </div>
-    </>
   );
 }
 
@@ -210,35 +215,53 @@ const BuilderCarousel = ({
   content,
   title,
   projName,
-  data,
   location,
+  id,
 }: Props) => {
+  const getBuilderProjects = async () => {
+    const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/builder-details-project?builderId=${id}`;
+    const data = await axios.post(url);
+    return data.data.projectBuilder;
+  };
+  const { data, isLoading, refetch } = useQuery({
+    queryFn: getBuilderProjects,
+    queryKey: ["getBuilderProjects" + id],
+  });
+  if (isLoading) {
+    return <div>loading...</div>;
+  }
+  if (!data || data?.length == 0) {
+    return;
+  }
+
   return (
     <div className="w-full mb-[4%]">
-      <h2 className="ml-2 text-[16px] sm:text-[24px] lg:text-[32px] font-semibold uppercase cursor-pointer px-4 sm:px-0">
+      <h2 className="ml-2 text-[16px] sm:text-[20px] xl:text-[32px] font-semibold px-4 sm:px-0">
         {/* <span className="!text-green-600">SARANG BY SUMADHARA </span> */}
         {title}
         {location && (
           <>
-            In{" "}
-            <span className="text-[#148B16] font-[700] uppercase  ">
-              {location}
-            </span>{" "}
+            In <span className="text-[#148B16] font-[700]   ">{location}</span>{" "}
           </>
         )}
-        By{" "}
-        <span className="text-[#148B16] font-[700] uppercase ">{projName}</span>
+        By <span className="text-[#148B16] font-[700]  ">{projName}</span>
       </h2>
-      <p className="ml-2 mt-3 mb-0 sm:mb-[44px]  text-[#4D6677] text-[13px] sm:text-2xl italic font-medium leading-[normal] tracking-[0.96px] px-4 sm:px-0">
+      <p className="ml-2 mt-3 mb-0 sm:mb-[24px]  text-[#4D6677] text-[13px] sm:text-lg xl:text-2xl italic font-medium leading-[normal] tracking-[0.96px] px-4 sm:px-0">
         {content}
       </p>
 
-      <MainCarousel>
+      <MainCarousel
+        paddings={{
+          desktop: 10,
+          mobile: 10,
+          tab: 10,
+        }}
+      >
         {data &&
           data?.map((project: any, index: number) => {
             return (
-              <CarouselSlide key={index} className="!h-[520px] sm:!h-[500px]">
-                <ProjectCard type={type} cardData={project} />
+              <CarouselSlide key={Math.random()} className="!h-[520px] sm:!h-[500px]">
+                <ProjectCard type={type} cardData={project} refetch={refetch} />
               </CarouselSlide>
             );
           })}

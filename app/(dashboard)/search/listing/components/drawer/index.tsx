@@ -4,9 +4,13 @@ import useSearchFilters from "@/app/hooks/search";
 import S from "@/app/styles/seach/Drawer.module.css";
 import { FilterPopup } from "../filterPopup";
 import { ListingMobileFilter } from "./filter";
-function SearchDrawer() {
+type Props = {
+  open: () => void;
+  close: () => void;
+  opened: boolean;
+};
+function MobileFilterDrawer({ close, open, opened }: Props) {
   const { countAppliedFilters } = useSearchFilters();
-  const [opened, { open, close }] = useDisclosure(false);
 
   return (
     <>
@@ -36,4 +40,4 @@ function SearchDrawer() {
     </>
   );
 }
-export default SearchDrawer;
+export default MobileFilterDrawer;

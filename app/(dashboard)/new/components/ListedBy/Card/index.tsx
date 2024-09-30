@@ -3,11 +3,12 @@ import Box from "./Box";
 
 type Props = {};
 
+
 export default function CardSection({}: Props) {
   return (
-    <div className="flex justify-center items-center gap-1 sm:gap-[6%] self-stretch mt-[2%] sm:pl-[4%] flex-wrap">
+    <div className=" relative mt-[86px] sm:top-0 flex justify-start items-start gap-[14px]  sm:gap-[6%] self-stretch sm:mt-[2%] sm:pl-[4%] flex-wrap">
       {config.data.map((item, index) => (
-        <Box key={index} {...item} />
+        <Box key={item.title} {...item} />
       ))}
     </div>
   );
@@ -15,20 +16,20 @@ export default function CardSection({}: Props) {
 const config = {
   data: [
     {
-      title: "BUILDER",
+      title: "Builder",
       content: "Check all the listings posted by builder",
       link: `${process.env.NEXT_PUBLIC_PROJECT_URL}/search/listing?listedBy=B`,
       image: "/staticmedia-images-icons/homepage/Builder.png",
     },
     {
-      title: "AGENT",
+      title: "Agent",
       content: "Check all the listings posted by agent",
       link: `${process.env.NEXT_PUBLIC_PROJECT_URL}/search/listing?listedBy=A`,
       image: "/staticmedia-images-icons/homepage/Agent.png",
     },
     {
-      title: "INDIVIDUAL",
-      content: "Check all the listings posted by individual",
+      title: "Owner",
+      content: "Check all the listings posted by Owner",
       link: `${process.env.NEXT_PUBLIC_PROJECT_URL}/search/listing?listedBy=I`,
       image: "/staticmedia-images-icons/homepage/Individual.png",
     },

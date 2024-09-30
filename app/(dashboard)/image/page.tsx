@@ -28,7 +28,7 @@ export default function Page({ searchParams: { path, type } }: Props) {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_IMG_BASE}${path}`
       );
-      console.log(response);
+      // console.log(response);
       const blob = await response.blob();
       const url = URL.createObjectURL(blob);
       const downloadLink = document.createElement("a");

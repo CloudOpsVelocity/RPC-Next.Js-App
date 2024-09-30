@@ -7,13 +7,13 @@ export default function ClearAll({
   type,
   close,
 }: {
-  type: "unitType" | "price" | "all" | "propType";
+  type: "unitType" | "price" | "all" | "propType" | "prjectsearchlisting";
   close?: () => void;
 }) {
   const { handleReset, handleAppliedFilters } = useSearchFilters();
   const handleApply = () => {
     handleAppliedFilters();
-    if (close) close();
+    if (close) close(); // --- listing type
   };
   return (
     <div className="flex w-full justify-end items-center pl-auto pr-[13px] py-[5px] bg-[#F4F4F4] ">
@@ -21,13 +21,15 @@ export default function ClearAll({
         className="text-[12px] text-[#0073C6] md:text-lg not-italic font-semibold leading-[normal] underline mr-3 md:mr-5 cursor-pointer"
         onClick={() => handleReset(type)}
       >
-        Clear all
+        {type === "price" || type == "propType" ? "Clear Filter" : "Clear All"}{" "}
       </button>
       <button
-        className="flex justify-center text-[12px] items-center gap-1 px-1 md:px-2 py-1 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] rounded-[10px] bg-[#0073C6] text-white md:text-lg not-italic font-semibold leading-[normal]"
+        className="flex justify-center text-[12px] items-center gap-1 px-1 md:px-2 py-1 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] rounded-[10px] bg-[#0073C6] text-white sm:text-[18px] not-italic font-semibold leading-[normal]"
         onClick={handleApply}
       >
-        Apply Filters
+        {type === "price" || type == "propType"
+          ? "Apply Filter"
+          : "Apply Filters"}{" "}
       </button>
       <CloseModal onClose={() => close && close()} className="ml-3" />
     </div>

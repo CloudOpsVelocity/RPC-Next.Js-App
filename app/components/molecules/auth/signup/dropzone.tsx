@@ -2,7 +2,7 @@
 import "@mantine/dropzone/styles.css";
 import { mediaCloudIcon } from "@/app/images/commonSvgs";
 import { Button, Group, Image, Modal, Text, rem } from "@mantine/core";
-import { Dropzone, DropzoneProps, IMAGE_MIME_TYPE } from "@mantine/dropzone";
+import { Dropzone, DropzoneProps,  } from "@mantine/dropzone";
 import toast from "react-hot-toast";
 import { useRef, useState } from "react";
 import Logo from "@/app/components/atoms/Logo";
@@ -13,7 +13,7 @@ interface DropZoneProps extends Partial<DropzoneProps> {
   onLogoSelect: (logo: File) => void;
   logo?: File;
 }
-
+const IMAGE_MIME_TYPE = ["image/png", "image/jpeg", "image/jpg", "image/webp"];
 export function DropZone(props: Partial<DropZoneProps>) {
   const [error, setError] = useState("");
   return (
@@ -29,6 +29,7 @@ export function DropZone(props: Partial<DropZoneProps>) {
         />
       ) : (
         <Dropzone
+          multiple={false}
           title="Upload LOGO"
           onDrop={(files) => {
             const logoFile = files[0];
@@ -49,15 +50,11 @@ export function DropZone(props: Partial<DropZoneProps>) {
           <div className="flex justify-center items-center h-full space-x-2">
             {mediaCloudIcon}
             <div className=" w-[50%] Xl:w-full sm:min-w-[260px]">
-              <p className="text-black text-sm not-italic font-medium leading-[normal] hidden md:block lg:block xl:block  sm:hidden ">
-                Select a file or drag and drop here
+              <p className="text-black text-[13px] not-italic font-medium leading-[normal] hidden md:block lg:block xl:block  sm:hidden ">
+              Select or drag and drop an image file here      Supported formats:   PNG, JPG, JPEG, WebP. Max file size: 10MB.
               </p>
-              <p className="text-black text-sm not-italic font-medium leading-[normal] block md:hidden lg:hidden xl:hidden">
-                Select a file
-              </p>
-              <p className="text-[#545353] text-[10px] not-italic font-normal leading-[normal]">
-                JPG, PNG or JPEG, file size no more than 10MB
-              </p>{" "}
+              
+
             </div>
             <Button className="selectFile" size="xs" variant="outline">
               Select
@@ -105,85 +102,83 @@ const Preview = ({ main, logo, setError }: any) => {
   };
   const [opened, { open, close }] = useDisclosure(false);
   return (
-    <>
-      <div className="flex items-center p-4 bg-white border border-gray-300 rounded-lg">
-        <div className="flex items-center justify-center w-16 h-16 bg-gray-100 rounded-lg">
-          <img
-            src={imageUrl} // You may want to use the actual image source from `logo`
-            alt="bon ton logo"
-            className="w-12 h-12 cursor-pointer"
-            width={64}
-            height={64}
-            style={{ aspectRatio: "64 / 64", objectFit: "cover" }}
-            onClick={open}
-          />
-        </div>
-        <div className="flex flex-col flex-grow ml-4">
-          <span className="font-medium text-xs md:text-base text-wrap ">
-            {logo
-              ? logo.name.length > 15
-                ? `${logo.name.substring(0, 12)}...${logo.name.substring(
-                    logo.name.lastIndexOf(".") - 1
-                  )}`
-                : logo.name
-              : "No File"}
-          </span>
-          <span className="text-sm text-gray-500">
-            {logo ? formatBytes(logo.size) : ""}
-          </span>
-        </div>
-        <div className="flex space-x-2">
-          <ImagePreivewModal
-            logo={logo}
-            opened={opened}
-            open={open}
-            close={close}
-          />
-          {/* THis Under Edit Icon */}
-          <svg
-            onClick={() => handleEditClick()}
-            xmlns="http://www.w3.org/2000/svg"
-            width={24}
-            height={24}
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={2}
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="text-blue-500 cursor-pointer w-4"
-          >
-            <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
-            <path d="m15 5 4 4" />
-          </svg>
-          <svg
-            onClick={() => main(null)}
-            xmlns="http://www.w3.org/2000/svg"
-            width={24}
-            height={24}
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={2}
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="text-red-500 cursor-pointer w-4"
-          >
-            <path d="M3 6h18" />
-            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
-            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
-          </svg>
-        </div>
-        <input
-          type="file"
-          // @ts-ignore
-          accept={IMAGE_MIME_TYPE}
-          style={{ display: "none" }}
-          onChange={handleFileChange}
-          ref={fileInputRef}
+    <div className="flex items-center p-4 bg-white border border-gray-300 rounded-lg">
+      <div className="flex items-center justify-center w-16 h-16 bg-gray-100 rounded-lg">
+        <Image
+          src={imageUrl} // You may want to use the actual image source from `logo`
+          alt="bon ton logo"
+          className="w-12 h-12 cursor-pointer"
+          width={64}
+          height={64}
+          style={{ aspectRatio: "64 / 64", objectFit: "cover" }}
+          onClick={open}
         />
       </div>
-    </>
+      <div className="flex flex-col flex-grow ml-4">
+        <span className="font-medium text-xs md:text-base text-wrap ">
+          {logo
+            ? logo.name.length > 15
+              ? `${logo.name.substring(0, 12)}...${logo.name.substring(
+                  logo.name.lastIndexOf(".") - 1
+                )}`
+              : logo.name
+            : "No File"}
+        </span>
+        <span className="text-sm text-gray-500">
+          {logo ? formatBytes(logo.size) : ""}
+        </span>
+      </div>
+      <div className="flex space-x-2">
+        <ImagePreivewModal
+          logo={logo}
+          opened={opened}
+          open={open}
+          close={close}
+        />
+        {/* THis Under Edit Icon */}
+        <svg
+          onClick={() => handleEditClick()}
+          xmlns="http://www.w3.org/2000/svg"
+          width={24}
+          height={24}
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="text-blue-500 cursor-pointer w-4"
+        >
+          <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+          <path d="m15 5 4 4" />
+        </svg>
+        <svg
+          onClick={() => main(null)}
+          xmlns="http://www.w3.org/2000/svg"
+          width={24}
+          height={24}
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="text-red-500 cursor-pointer w-4"
+        >
+          <path d="M3 6h18" />
+          <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+          <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+        </svg>
+      </div>
+      <input
+        type="file"
+        // @ts-ignore
+        accept={IMAGE_MIME_TYPE}
+        style={{ display: "none" }}
+        onChange={handleFileChange}
+        ref={fileInputRef}
+      />
+    </div>
   );
 };
 const ImagePreivewModal = ({ logo, opened, open, close }: any) => {
@@ -193,6 +188,7 @@ const ImagePreivewModal = ({ logo, opened, open, close }: any) => {
       src={imageUrl}
       onLoad={() => URL.revokeObjectURL(imageUrl)}
       className="h2 !min-w-16"
+      alt="logo"
     />
   );
 

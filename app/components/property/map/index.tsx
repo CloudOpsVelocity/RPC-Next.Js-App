@@ -1,5 +1,6 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 "use client";
-import React, { useState, useCallback, useRef, useMemo } from "react";
+import React, { useState, useCallback, useRef, useMemo, Fragment } from "react";
 import { LuTrain, LuSearch } from "react-icons/lu";
 import {
   Text,
@@ -83,7 +84,7 @@ const LeafMap: React.FC<{
         name: location.name,
       });
     },
-    [selectedLocation, selected]
+    []
   );
 
   const isMobile = useMediaQuery(`(max-width: 750px)`);
@@ -96,16 +97,21 @@ const LeafMap: React.FC<{
       <div className="flex justify-between w-[95%] sm:w-[90%] mx-auto">
         {type === "prop" ? (
           <PropertyHeading
-            title="Near BY LOCATIONS"
+            title={
+              <Fragment>
+                Near By Locations{" "}
+                <span className="text-[#148B16]">{projName}</span>
+              </Fragment>
+            }
             desc=" Explore near by convenient amenities, entertainment, and essential
             services"
-            className="mb-[40px]"
+            className="sm:mb-[8px]"
           />
         ) : (
           <div>
             <h2 className="text-h2 lg:text-[32px] font-semibold mb-[12px] capitalize break-words max-w-[78%]">
+              <span>Near By Locations </span>
               <span className="text-[#148B16] font-bold">{projName} </span>
-              <span>Near By Locations</span>
             </h2>
             <SubHeading
               text="Explore nearby convenient amenities, entertainment, and essential services"
@@ -155,7 +161,7 @@ const LeafMap: React.FC<{
                       <LocationList
                         type="public"
                         {...location}
-                        key={index}
+                        key={location.name}
                         origin={{
                           lat: Number(lat),
                           lng: Number(lang),
@@ -196,7 +202,7 @@ const LeafMap: React.FC<{
           <div className="flex gap-2 mt-3 flex-wrap gap-x-5">
             {downData.map((item: any, index: number) => (
               <MapCard
-                key={index}
+                key={`Nearby_${item?.name}`}
                 {...item}
                 origin={{
                   lat: Number(lat),
@@ -220,14 +226,14 @@ const LeafMap: React.FC<{
           <PropertyHeading
             title={projName}
             desc=""
-            className="mb-[40px]"
+            className="sm:mb-[8px] mt-[50px]"
             projName={""}
           />
         ) : (
           <div>
             <h2 className="text-h2 lg:text-[32px] font-semibold mb-[12px] capitalize break-words max-w-[78%]">
+              <span>Map Preview Of </span>
               <span className="text-[#148B16] font-bold">{projName} </span>
-              <span>Near By Locations</span>
             </h2>
             {/*  <SubHeading
                     text="Explore nearby convenient amenities, entertainment, and essential services"

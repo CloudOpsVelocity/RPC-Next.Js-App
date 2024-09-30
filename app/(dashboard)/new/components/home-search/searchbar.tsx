@@ -1,19 +1,13 @@
 import config from "./config";
 import Button from "./button";
 import { useState } from "react";
-import { Checkbox, Pill, PillsInput, Transition } from "@mantine/core";
-import { RangeSlider } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
-import { FaLocationDot } from "react-icons/fa6";
-import { useClickOutside } from "@mantine/hooks";
-import { FaLocationCrosshairs } from "react-icons/fa6";
-import { FaCaretDown, FaCaretUp } from "react-icons/fa";
-import { Transform } from "stream";
+import { Pill, PillsInput, RangeSlider } from "@mantine/core";
+import { useDisclosure, useMediaQuery, useClickOutside } from "@mantine/hooks";
+import { FaLocationDot, FaCaretDown } from "react-icons/fa6";
 import useSearchFilters from "@/app/hooks/search";
 import { propertyDetailsTypes } from "@/app/data/projectDetails";
 import { SEARCH_FILTER_DATA } from "@/app/data/search";
 import useQsearch from "@/app/hooks/search/useQsearch";
-import FilterSection from "@/app/(dashboard)/search/components/filter/filter";
 import Results from "@/app/(dashboard)/search/components/filter/results";
 import classes from "@/app/styles/search.module.css";
 import { filterParser } from "@/app/utils/search";
@@ -72,6 +66,7 @@ const Searchbar = () => {
   // };
   const [opened, { close, toggle, open }] = useDisclosure(false);
   const wrapperRef = useClickOutside(() => close());
+  const isTab = useMediaQuery("(max-width: 1600px)");
 
   // styles
   const rangeSliderClasses = {
@@ -86,7 +81,6 @@ const Searchbar = () => {
     return query.replace("+", "%2B");
   };
   return (
-    <>
       <div
         ref={wrapperRef}
         className="border border-[#CBE9FF] rounded-3xl bg-white max-w-[320px]  md:max-w-[800px] overflow-hidden relative px-3"
@@ -113,42 +107,51 @@ const Searchbar = () => {
                 <FaLocationDot color="red" size={25} />
               </div>
               <PillsInput classNames={{ input: classes.homePageSearch }}>
-                <Pill.Group>
-                  {f.city && (
-                    <Pill
-                      className="capitalize"
-                      withRemoveButton
-                      classNames={{ root: classes.MultiSelectionPill }}
-                      onRemove={() =>
-                        setFilters((prev) => ({ ...prev, city: null }))
-                      }
-                    >
-                      {f.city.split("+")[0]}
-                    </Pill>
-                  )}
-                  {f.locality?.map((each, index) => (
-                    <Pill
-                      className="capitalize"
-                      onRemove={() => remnoveSearchOptions(each, "locality")}
-                      key={index}
-                      withRemoveButton
-                      classNames={{ root: classes.MultiSelectionPill }}
-                    >
-                      {each.split("+")[0]}
-                    </Pill>
-                  ))}
-
-                  <PillsInput.Field
-                    onFocus={open}
-                    placeholder={
-                      f.locality.length > 0
-                        ? "Add More"
-                        : "Enter City,Locality & Project"
+                {f.city && (
+                  <Pill
+                    className="capitalize"
+                    withRemoveButton
+                    classNames={{ root: classes.MultiSelectionPill }}
+                    onRemove={() =>
+                      setFilters((prev) => ({ ...prev, city: null }))
                     }
-                    value={name ?? ""}
-                    onChange={(e) => onSearchChange(e.target.value)}
-                  />
-                </Pill.Group>
+                  >
+                    {f.city.split("+")[0]}
+                  </Pill>
+                )}
+                {f.locality?.map(
+                  (each, index) =>
+                    index < (isTab ? 1 : 2) && (
+                      <Pill
+                        className="capitalize"
+                        onRemove={() => remnoveSearchOptions(each, "locality")}
+                        key={each}
+                        withRemoveButton
+                        classNames={{ root: classes.MultiSelectionPill }}
+                      >
+                        {each.split("+")[0]}
+                      </Pill>
+                    )
+                )}
+                {f.locality?.length > (isTab ? 1 : 2) && (
+                  <Pill
+                    className="capitalize"
+                    classNames={{ root: classes.MultiSelectionPill }}
+                  >
+                    {`+${f.locality?.length - (isTab ? 1 : 2)} More`}
+                  </Pill>
+                )}
+
+                <PillsInput.Field
+                  onFocus={open}
+                  placeholder={
+                    f.locality.length > 0
+                      ? "Add More"
+                      : "Enter City,Locality & Project"
+                  }
+                  value={name ?? ""}
+                  onChange={(e) => onSearchChange(e.target.value)}
+                />
               </PillsInput>
             </div>
 
@@ -191,7 +194,7 @@ const Searchbar = () => {
                     selected={
                       f.propTypes === propertyDetailsTypes?.get(keyName)?.id
                     }
-                  ></Button>
+                  />
                 ))}
               </div>
 
@@ -206,7 +209,7 @@ const Searchbar = () => {
                         handleCheckboxClick("unitTypes", bhk.value)
                       }
                       selected={f.unitTypes.includes(bhk.value)}
-                    ></Button>
+                    />
                   ))}
                 </div>
               </div>
@@ -249,7 +252,6 @@ const Searchbar = () => {
             <Results />
           ))}
       </div>
-    </>
   );
 };
 

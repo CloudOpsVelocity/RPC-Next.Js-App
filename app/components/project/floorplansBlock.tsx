@@ -28,7 +28,7 @@ const FloorPlanModal = dynamic(() => import("./modals/FloorPlan"), {
 });
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { useQuery } from "react-query";
-import { getProjectUnits } from "@/app/utils/api/project";
+import { getOverViewData, getProjectUnits } from "@/app/utils/api/project";
 import { useAtom, useSetAtom } from "jotai";
 import { floorPlansArray, selectedFloorAtom } from "@/app/store/floor";
 import Loading from "../atoms/Loader";
@@ -46,6 +46,11 @@ import dynamic from "next/dynamic";
 import { Divider } from "@mantine/core";
 import RTK_CONFIG from "@/app/config/rtk";
 import SubHeading from "./headings/SubHeading";
+import { formatNumberWithSuffix } from "@/app/utils/numbers";
+import UnitsImagesBlock from "./unitblock/UnitsImagesBlock";
+import { useMediaQuery } from "@mantine/hooks";
+import Image from "next/image";
+import PartialUnitData from "./sections";
 
 type Props = {
   data: PhaseList[];
@@ -53,6 +58,8 @@ type Props = {
   projName: string;
   PhaseOverview: any;
   phaseList: any;
+  partialUnitData: any;
+  overview?: any;
 };
 
 export default function FloorplansBlock({
@@ -60,7 +67,9 @@ export default function FloorplansBlock({
   slug,
   PhaseOverview,
   phaseList,
-}: Props) {
+  partialUnitData,
+}: // overview,
+Props) {
   const allKeys = [35, 33, 31, 34, 32];
   const [propCgId, setPropCgId] = useAtom(propCgIdAtom);
   const [currentPhase, setCurrentPhase] = useAtom(currentPhaseAtom);
@@ -87,9 +96,22 @@ export default function FloorplansBlock({
     enabled: !!propCgId,
     ...RTK_CONFIG,
   });
+  // const {
+  //   data: overview,
+  //   isLoading: overviewdataLoading,
+  //   status,
+  // } = useQuery({
+  //   queryKey: [`overview-data/${slug}`],
+  //   queryFn: () => getOverViewData(slug),
+  //   enabled: !partialUnitData,
+  //   ...RTK_CONFIG,
+  // });
+
   const types =
-    selectedPhase &&
-    Object?.keys(selectedPhase.propTypeOverview)
+    selectedPhase?.propTypeOverview &&
+    Object?.keys(
+      selectedPhase?.propTypeOverview && selectedPhase.propTypeOverview
+    )
       .map((v) => {
         if (selectedPhase?.propTypeOverview[v].unitTypes) {
           return v;
@@ -167,14 +189,6 @@ export default function FloorplansBlock({
   };
 
   const handleOpen = () => {
-    // setSelectedFloor({
-    //   ...projectUnitsData[0],
-    //   floorPlanUrl: projectUnitsData[0].floorPlanUrl ?? ImgNotAvail,
-    // });
-    // form.setValues(setPropertyValues(projectUnitsData[0], propCgId));
-    // handlers.set(setPropertyValues(projectUnitsData[0], propCgId));
-    // handleSearch();
-    // open("floor");
     setSelectedFloor({
       ...selectedFloor,
       floorPlanUrl: selectedFloor.floorPlanUrl ?? ImgNotAvail,
@@ -183,12 +197,9 @@ export default function FloorplansBlock({
     handleSearch();
     open("floor");
   };
-  const handleUnitClick = () => {
-    form.setValues(setPropertyValues(selectedFloor, propCgId));
-    const filteredFloors = projectUnitsData.filter(
-      (floor: any) => floor.unitNumber === selectedFloor.unitNumber
-    );
-    setFloorsArray(filteredFloors);
+  const handlePricingFloorPlanClick = (selectedBhk: any) => {
+    form.setValues(setPropertyValues(selectedBhk, propCgId));
+    handleSearch();
     open("floor");
   };
   const handleContainerClick = () => {
@@ -200,19 +211,21 @@ export default function FloorplansBlock({
   };
   const handleSearch = (): void => {
     const filteredFloors = projectUnitsData.filter(
-      (floor: any) => floor.unitNumber === projectUnitsData[0].unitNumber
+      (floor: any) => floor.unitNumber === selectedFloor.unitNumber
     );
     setFloorsArray(filteredFloors);
   };
   const [bhk, setBhk] = useState("0");
   const parentRef = React.useRef(null);
 
-  // const rowVirtualizer = useVirtualizer({
-  //   count: projectUnitsData?.length,
-  //   getScrollElement: () => parentRef.current,
-  //   estimateSize: () => 180,
-  //   overscan: 5,
-  // });
+  const isMobile = useMediaQuery("(max-width: 601px)");
+
+  const rowVirtualizer = useVirtualizer({
+    count: 10000,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 180,
+    overscan: 5,
+  });
   useEffect(() => {
     if (
       projectUnitsData &&
@@ -223,467 +236,526 @@ export default function FloorplansBlock({
     ) {
       setSelectedFloor(projectUnitsData[0]);
     }
-  }, [projectUnitsData, propCgId]);
+  }, [projectUnitsData, setSelectedFloor]);
   useEffect(() => {
     // @ts-ignore
     types?.length > 0 && setPropCgId(BACKEND_PROP_TYPES[`${types[0]}`]);
   }, [currentPhase]);
   if (isLoading) return <Loading />;
   return (
-    <div
-      className="w-[95%] md:w-[90%] mt-[50px] scroll-mt-[150px] mb-[2%] sm:mb-[5%]"
-      id="floorPlans"
-    >
-      <h2
-        className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[10px] xl:mb-[24px] capitalize"
-        id="floorPlansdiv"
-      >
-        Floor Plans For{" "}
-        <span className="text-[#148B16] font-[700] ">{projName}</span>{" "}
-      </h2>
-      <SubHeading text="See floor plans as per your selected property type" />
+    <>
+      {/* {!partialUnitData &&
+        (overviewdataLoading ? (
+          <div>Loading....</div>
+        ) : (
+          <PartialUnitData
+            partialUnitData={overview}
+            projName={projName}
+            phaseList={phaseList}
+            data={projectUnitsData}
+            type="overview"
+            handlePricingFloorPlanClick={handlePricingFloorPlanClick}
+          />
+        ))}{" "} */}
       <div
-        className={`flex justify-start items-start md:items-center  mb-[2%] flex-col md:flex-row  ${
-          phaseList?.length > 1 ? "mt-4" : "mt-[0%]"
-        }`}
+        className="w-[95%] md:w-[90%] mt-[50px] scroll-mt-[150px] mb-[2%] sm:mb-[0%]"
+        id="floor-plans"
       >
-        {phaseList?.length > 1 && (
-          <>
-            <p className="text-[14px] sm:text-[20px] lg:text-[24px] font-[500] mb-2 sm:mb-[44px] md:mb-0 text-[#333] sm:mr-[20px] ">
-              Select one of the phase to see Floor Plans
-            </p>
-            <div className=" flex justify-start items-start gap-[10px] flex-wrap ">
-              {phaseList?.map((each: any, index: any) => {
-                return (
-                  <Button
-                    key={index}
-                    title={
-                      isSingleLetterOrNumber(each.phaseName)
-                        ? `Phase: ${each.phaseName}`
-                        : each.phaseName
-                    }
-                    onChange={() => {
-                      if (currentPhase == each.phaseId) return;
-
-                      setCurrentPhase(each.phaseId);
-                      setBhk("0");
-                      if (floorPlanType === "unit") {
-                        setSelectedFloor({});
-                        handleUnitFormClear();
-                      }
-                    }}
-                    buttonClass={` mb-[5px] text-[14px] sm:text-[18px] lg:text-[20px] bg-[#ECF7FF] p-[8px] xl:px-[8px] capitalize  whitespace-nowrap text-[#000] rounded-[8px]  ${
-                      currentPhase == each.phaseId
-                        ? " font-[600] border-solid border-[1px] border-[#0073C6] "
-                        : " font-[400]"
-                    } `}
-                  />
-                );
-              })}
-            </div>
-          </>
-        )}
-      </div>
-      {projectUnitsData?.length == 0 ? (
-        <NoProperties
-          phase={
-            phaseList?.find((phase: any) => phase.phaseId == currentPhase)
-              ?.phaseName as any
-          }
-        />
-      ) : (
-        <>
-          <div className=" flex justify-start items-start flex-wrap mt-[3%] gap-[2%] ">
-            {propertyDetailsTypes != undefined &&
-              propertyDetailsTypes != null &&
-              allKeys.map((keyName) => {
-                let name =
-                  //@ts-ignore
-                  propertyDetailsTypes.get(keyName).name != undefined
-                    ? //@ts-ignore
-                      propertyDetailsTypes.get(keyName).name
-                    : null;
-
-                if (checkProperty(keyName)) {
+        <h2
+          className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[10px] xl:mb-[6px] capitalize"
+          id="floorPlansdiv"
+        >
+          Floor Plans For{" "}
+          <span className="text-[#148B16] font-[700] ">{projName}</span>{" "}
+        </h2>
+        <SubHeading text="See floor plans as per your selected property type" />
+        <div
+          className={`flex justify-start items-start md:items-center  mb-[2%] flex-col md:flex-row  ${
+            phaseList?.length > 1 ? "mt-4" : "mt-[0%]"
+          }`}
+        >
+          {phaseList?.length > 1 && (
+            <>
+              <p className="text-[14px] sm:text-[20px] lg:text-[24px] font-[500] mb-2 sm:mb-[44px] md:mb-0 text-[#333] sm:mr-[20px] ">
+                Select one of the phase to see Floor Plans
+              </p>
+              <div className=" flex justify-start items-start gap-[10px] flex-wrap ">
+                {phaseList?.map((each: any, index: any) => {
                   return (
                     <Button
-                      key={keyName}
-                      buttonClass={`flex justify-start mb-2 sm:mb-[3%] w-full rounded-[20px] gap-[8px]  items-center mr-[24px] md:ml-[0px] text-[12px] sm:text-[18px] border ${
-                        propCgId == keyName
-                          ? "text-[#001F35] text-[14px] sm:text-base font-[600] shadow-md bg-[#c8f5ca] sm:bg-[#D5EDFF]"
-                          : "text-[#303A42] font-[500] bg-[#E1FFE2] sm:bg-[#EEF7FE]"
-                      } `}
+                      key={each.phaseId}
+                      title={
+                        isSingleLetterOrNumber(each.phaseName)
+                          ? `Phase: ${each.phaseName}`
+                          : each.phaseName
+                      }
                       onChange={() => {
-                        if (propCgId !== keyName) {
-                          getPropertyType(propertyDetailsTypes.get(keyName));
-                          setBhk("0");
-                          if (floorPlanType == "unit") {
-                            setSelectedFloor({});
-                            handleUnitFormClear();
-                            return;
-                          }
+                        if (currentPhase == each.phaseId) return;
+
+                        setCurrentPhase(each.phaseId);
+                        setBhk("0");
+                        if (floorPlanType === "unit") {
+                          setSelectedFloor({});
+                          handleUnitFormClear();
                         }
                       }}
-                      title={name}
-                      icon={getIcon(keyName)}
+                      buttonClass={` mb-[5px] text-[14px] sm:text-[18px] lg:text-[20px] bg-[#ECF7FF] p-[8px] xl:px-[8px] capitalize  whitespace-nowrap text-[#000] rounded-[8px]  ${
+                        currentPhase == each.phaseId
+                          ? " font-[600] border-solid border-[1px] border-[#0073C6] "
+                          : " font-[400]"
+                      } `}
                     />
                   );
-                }
-              })}
-          </div>
+                })}
+              </div>
+            </>
+          )}
+        </div>
+        {projectUnitsData?.length == 0 ? (
+          <NoProperties
+            phase={
+              phaseList?.find((phase: any) => phase.phaseId == currentPhase)
+                ?.phaseName as any
+            }
+          />
+        ) : (
+          <>
+            <div className=" flex justify-start items-start flex-wrap mt-[3%] gap-[2%] ">
+              {propertyDetailsTypes != undefined &&
+                propertyDetailsTypes != null &&
+                allKeys.map((keyName) => {
+                  let name =
+                    //@ts-ignore
+                    propertyDetailsTypes.get(keyName).name != undefined
+                      ? //@ts-ignore
+                        propertyDetailsTypes.get(keyName).name
+                      : null;
 
-          <div className=" flex justify-start items-start mt-[3%] flex-wrap mb-[3%] md:mb-0 ">
-            <Button
-              title="By Type"
-              icon={
-                <ByTypeSvg className=" w-[24px] h-[24px] lg:w-[30px] lg:h-[30px] " />
-              }
-              onChange={() => {
-                if (floorPlanType !== "type") {
-                  setFloorPlanType("type");
-                  handleUnitFormClear();
-                  // if (!selectedFloor?.unitNumber) {
-                  setSelectedFloor(projectUnitsData[0]);
-                  // }
-                }
-              }}
-              buttonClass={`text-[14px] lg:text-[24px] mr-[20px] sm:mr-[40px] whitespace-nowrap flex justify-center items-center gap-[6px] ${
-                floorPlanType == "type"
-                  ? "font-[600] text-[#001F35]"
-                  : "font-[400] text-[#4D6677]"
-              } `}
-            />
-
-            <Button
-              title="By Unit"
-              icon={
-                <ByUnitSvg className=" w-[24px] h-[24px] lg:w-[30px] lg:h-[30px] " />
-              }
-              onChange={() => {
-                if (floorPlanType !== "unit") {
-                  setFloorPlanType("unit");
-                  handleUnitFormClear();
-                  if (floorPlanType !== "unit") {
-                    setSelectedFloor({});
+                  if (checkProperty(keyName)) {
+                    return (
+                      <Button
+                        key={keyName}
+                        buttonClass={`flex justify-start mb-2 sm:mb-[3%] w-full rounded-[20px] gap-[8px]  items-center mr-[24px] md:ml-[0px] text-[12px] sm:text-[18px] border ${
+                          propCgId == keyName
+                            ? "text-[#001F35] text-[14px] sm:text-base font-[600] shadow-md bg-[#c8f5ca] sm:bg-[#D5EDFF]"
+                            : "text-[#303A42] font-[500] bg-[#E1FFE2] sm:bg-[#EEF7FE]"
+                        } `}
+                        onChange={() => {
+                          if (propCgId !== keyName) {
+                            getPropertyType(propertyDetailsTypes.get(keyName));
+                            setBhk("0");
+                            if (floorPlanType == "unit") {
+                              setSelectedFloor({});
+                              handleUnitFormClear();
+                              return;
+                            }
+                          }
+                        }}
+                        title={name}
+                        icon={getIcon(keyName)}
+                      />
+                    );
                   }
-                }
-              }}
-              buttonClass={`hidden sm:flex text-[14px] lg:text-[24px] mr-[20px] sm:mr-[40px] whitespace-nowrap flex justify-center items-center gap-[6px] ${
-                floorPlanType == "unit"
-                  ? "font-[600] text-[#001F35]"
-                  : "font-[400] text-[#4D6677]"
-              } `}
-            />
-            {propCgId != projectprops.plot && (
+                })}
+            </div>
+
+            <div className=" flex justify-start items-start mt-[3%] flex-wrap mb-[3%] md:mb-0 ">
               <Button
-                title="By BHK"
+                title="By Type"
                 icon={
-                  <ByBhkSvg className=" w-[24px] h-[24px] lg:w-[30px] lg:h-[30px] " />
+                  <ByTypeSvg className=" w-[24px] h-[24px] sm:w-[22px] sm:h-[22px] xl:w-[30px] xl:h-[30px] " />
                 }
                 onChange={() => {
-                  if (floorPlanType !== "bhk") {
-                    setFloorPlanType("bhk");
+                  if (floorPlanType !== "type") {
+                    setFloorPlanType("type");
                     handleUnitFormClear();
                     // if (!selectedFloor?.unitNumber) {
                     setSelectedFloor(projectUnitsData[0]);
-                    setBhk("0");
                     // }
                   }
                 }}
-                buttonClass={`text-[14px] lg:text-[24px] mr-[20px] sm:mr-[40px] whitespace-nowrap flex justify-center items-center gap-[6px] ${
-                  floorPlanType == "bhk"
+                buttonClass={`text-[14px] sm:text-[18px] xl:text-[24px] mr-[20px] sm:mr-[40px] whitespace-nowrap flex justify-center items-center gap-[6px] ${
+                  floorPlanType == "type"
                     ? "font-[600] text-[#001F35]"
                     : "font-[400] text-[#4D6677]"
                 } `}
               />
-            )}
-          </div>
 
-          <div
-            className={clsx(
-              "h-[500px] sm:h-[600px] md:h-[547px] w-full rounded-[14px] mt-[2%] sm:border-solid sm:border-[1px] sm:border-[#92B2C8] bg-[#FFF]  flex flex-col-reverse md:flex-row justify-center  ",
-              floorPlanType === "bhk" && "h-[550px]"
-            )}
-            onClick={handleContainerClick}
-          >
-            {floorPlanType === "type" && (
-              <div
-                className="w-[100%] md:w-[50%] sm:border-solid overflow-auto shadow-md sm:shadow-none"
-                ref={parentRef}
-              >
-                <div
-                // className="w-full md:w-[50%] max-h-[456px] md:h-[540px]  md:max-h-[540px] border-solid overflow-auto "
-                // style={{
-                //   height: `${rowVirtualizer.getTotalSize()}px`,
-                //   width: "100%",
-                //   position: "relative",
-                // }}
-                >
-                  {projectUnitsData?.length !== 0 ? (
-                    // rowVirtualizer
-                    //   .getVirtualItems()
-                    //   .map((virtualRow) => (
-                    //     <FloorplanDetailsCard
-                    //       key={virtualRow.index}
-                    //       propCgId={propCgId}
-                    //       data={virtualRow}
-                    //       projData={projectUnitsData}
-                    //       setValues={form.setValues}
-                    //     />
-                    //   ))
-                    projectUnitsData.map((virtualRow: any, index: number) => (
-                      <FloorplanDetailsCard
-                        key={index}
-                        propCgId={propCgId}
-                        data={virtualRow}
-                        projData={projectUnitsData}
-                        setValues={form.setValues}
-                        lastIndex={projectUnitsData.length - 1 === index}
-                      />
-                    ))
-                  ) : (
-                    <NoProperties
-                      phase={
-                        phaseList?.find(
-                          (phase: any) => phase.phaseId == currentPhase
-                        )?.phaseName as any
-                      }
-                    />
-                  )}
-                </div>
-              </div>
-            )}
-
-            {floorPlanType == "unit" && (
-              <>
-                <div className="w-[100%] md:w-[50%] border-solid overflow-auto pt-6">
-                  <Byunitblock
-                    propCgId={propCgId}
-                    data={projectUnitsData}
-                    form={byUnitForm}
-                  />
-                </div>
-                <Divider size={15} orientation="vertical" color="#F3F3F3" />
-              </>
-            )}
-
-            {floorPlanType == "bhk" && propCgId != projectprops.plot && (
-              <div className="w-full md:w-[50%] max-h-[456px] md:h-[540px]  md:max-h-[540px]  border-solid overflow-auto">
-                <ByBhkBlock
-                  propCgId={propCgId}
-                  data={projectUnitsData}
-                  setValues={form.setValues}
-                  bhk={bhk}
-                  setBhk={setBhk}
+              <Button
+                title="By Unit"
+                icon={
+                  <ByUnitSvg className=" w-[24px] h-[24px] sm:w-[22px] sm:h-[22px] xl:w-[30px] xl:h-[30px] " />
+                }
+                onChange={() => {
+                  if (floorPlanType !== "unit") {
+                    setFloorPlanType("unit");
+                    handleUnitFormClear();
+                    if (floorPlanType !== "unit") {
+                      setSelectedFloor({});
+                    }
+                  }
+                }}
+                buttonClass={`hidden sm:flex text-[14px] sm:text-[18px] xl:text-[24px] mr-[20px] sm:mr-[40px] whitespace-nowrap flex justify-center items-center gap-[6px] ${
+                  floorPlanType == "unit"
+                    ? "font-[600] text-[#001F35]"
+                    : "font-[400] text-[#4D6677]"
+                } `}
+              />
+              {propCgId != projectprops.plot && (
+                <Button
+                  title="By BHK"
+                  icon={
+                    <ByBhkSvg className=" w-[24px] h-[24px] sm:w-[22px] sm:h-[22px] xl:w-[30px] xl:h-[30px] " />
+                  }
+                  onChange={() => {
+                    if (floorPlanType !== "bhk") {
+                      setFloorPlanType("bhk");
+                      handleUnitFormClear();
+                      // if (!selectedFloor?.unitNumber) {
+                      setSelectedFloor(projectUnitsData[0]);
+                      setBhk("0");
+                      // }
+                    }
+                  }}
+                  buttonClass={`text-[14px] sm:text-[18px] xl:text-[24px] mr-[20px] sm:mr-[40px] whitespace-nowrap flex justify-center items-center gap-[6px] ${
+                    floorPlanType == "bhk"
+                      ? "font-[600] text-[#001F35]"
+                      : "font-[400] text-[#4D6677]"
+                  } `}
                 />
-              </div>
-            )}
+              )}
+            </div>
 
             <div
               className={clsx(
-                " h-[250px]  w-full md:w-[50%] flex justify-center items-end flex-col sm:h-full p-[2%] shadow-md md:shadow-none relative",
-                !selectedFloor?.unitNumber && "items-center"
+                "h-[500px] sm:h-[600px] md:h-[547px] w-full rounded-[14px] mt-[2%] sm:border-solid sm:border-[1px] sm:border-[#92B2C8] bg-[#FFF]  flex flex-col-reverse md:flex-row justify-center  ",
+                floorPlanType === "bhk" && "h-[550px]"
               )}
+              onClick={handleContainerClick}
             >
-              {selectedFloor?.unitNumber ? (
-                floorPlanType !== "unit" ? (
-                  <>
-                    <p
-                      className="hidden sm:block text-[10px] sm:text-[14px] font-[500] text-[#005DA0] "
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleOpen();
-                      }}
-                    >
-                      {projName}
-                      {propCgId != projectprops.plot &&
-                        selectedFloor?.bhkName &&
-                        " | " + selectedFloor?.bhkName}
-                      {propCgId == projectprops.apartment &&
-                        selectedFloor?.towerName &&
-                        selectedFloor?.towerName != "NA" &&
-                        " | Tower " + selectedFloor?.towerName}
-                      {propCgId != projectprops.plot &&
-                        ` | ${
-                          propCgId == projectprops.rowHouse ||
-                          propCgId == projectprops.villa
-                            ? "Elevation"
-                            : "Floor"
-                        } ` +
-                          `${
-                            selectedFloor?.floor?.toString() === "0"
-                              ? "G"
-                              : selectedFloor?.floor
-                          }`}
-                      {selectedFloor?.unitNumber &&
-                        " | Unit No. " + selectedFloor?.unitNumber}
-                      {" | Facing " + selectedFloor?.facingName}
-                      {propCgId != projectprops.plot &&
-                        selectedFloor?.superBuildUparea &&
-                        " | Area. " +
-                          selectedFloor?.superBuildUparea +
-                          " sq.ft"}
-                      {propCgId == projectprops.plot &&
-                        selectedFloor?.plotArea &&
-                        " | Area. " + selectedFloor?.plotArea + " sq.ft"}
-                    </p>
-                    <div className="flex justify-center items-end max-h-[240px] sm:max-h-[450px] lg:h-[450px] w-full relative ">
-                      {selectedFloor?.floorPlanUrl ? (
-                        <img
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleOpen();
-                          }}
-                          src={
-                            (selectedFloor?.floorPlanUrl +
-                              "?v" +
-                              Math.random()) as string
-                          }
-                          className="w-full h-full cursor-pointer  object-contain"
-                          alt="image"
-                        />
-                      ) : (
-                        <div className="flex justify-center items-center flex-col min-w-fit ">
-                          <img
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleOpen();
-                            }}
-                            src="/abc/noimage.svg"
-                            className="w-[60%] sm:w-[80%] h-full cursor-pointer "
-                            alt="image"
+              {floorPlanType === "type" && (
+                <div className="w-[100%] md:w-[50%] sm:border-solid overflow-auto shadow-md sm:shadow-none">
+                  <div
+                    className="w-full md:w-[50%] max-h-[456px] md:h-[540px]  md:max-h-[540px] border-solid overflow-auto "
+                    style={{
+                      height: `${rowVirtualizer.getTotalSize()}px`,
+                      width: "100%",
+                      position: "relative",
+                    }}
+                    ref={parentRef}
+                  >
+                    {projectUnitsData?.length !== 0 ? (
+                      rowVirtualizer
+                        .getVirtualItems()
+                        .map((virtualRow) => (
+                          <FloorplanDetailsCard
+                            key={virtualRow.index}
+                            propCgId={propCgId}
+                            data={virtualRow}
+                            projData={projectUnitsData}
+                            setValues={form.setValues}
                           />
-                          <p className=" text-[#000] text-center text-[18px] md:text-[28px] lg:text-[32px] font-[600] ">
-                            Image is not available
-                          </p>
-                        </div>
-                      )}
-                      <PopupOpenSvg className=" sm:hidden absolute bottom-0 right-1 w-[24px] h-[24px] lg:w-[28px] lg:h-[28px]  " />
-                    </div>
-                    <div className="hidden sm:flex ">
-                      <div
-                        className="bg-[#F4FBFF] p-[10px] rounded-[29px] gap-[12px] flex justify-end items-center  cursor-pointer"
+                        ))
+                    ) : (
+                      // // projectUnitsData.map((virtualRow: any, index: number) => (
+                      // //   <FloorplanDetailsCard
+                      // //     key={Math.random()}
+                      // //     propCgId={propCgId}
+                      // //     data={virtualRow}
+                      // //     projData={projectUnitsData}
+                      // //     setValues={form.setValues}
+                      // //     lastIndex={projectUnitsData.length - 1 === index}
+                      // //   />
+                      // ))
+                      <NoProperties
+                        phase={
+                          phaseList?.find(
+                            (phase: any) => phase.phaseId == currentPhase
+                          )?.phaseName as any
+                        }
+                      />
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {floorPlanType == "unit" && (
+                <>
+                  <div className="w-[100%] md:w-[50%] border-solid overflow-auto pt-6">
+                    <Byunitblock
+                      propCgId={propCgId}
+                      data={projectUnitsData}
+                      form={byUnitForm}
+                    />
+                  </div>
+                  <Divider size={15} orientation="vertical" color="#F3F3F3" />
+                </>
+              )}
+
+              {floorPlanType == "bhk" && propCgId != projectprops.plot && (
+                <div className="w-full md:w-[50%] max-h-[456px] md:h-[540px]  md:max-h-[540px]  border-solid overflow-auto">
+                  <ByBhkBlock
+                    propCgId={propCgId}
+                    data={projectUnitsData}
+                    setValues={form.setValues}
+                    bhk={bhk}
+                    setBhk={setBhk}
+                  />
+                </div>
+              )}
+
+              <div
+                className={clsx(
+                  " h-[250px]  w-full md:w-[50%] flex justify-center items-end flex-col sm:h-full p-[2%] shadow-md md:shadow-none relative",
+                  !selectedFloor?.unitNumber && "items-center"
+                )}
+              >
+                {selectedFloor?.unitNumber ? (
+                  floorPlanType !== "unit" ? (
+                    <>
+                      <p
+                        className="hidden sm:block text-[12px] sm:text-[14px] font-[500] text-[#005DA0] "
                         onClick={(e) => {
                           e.stopPropagation();
                           handleOpen();
                         }}
                       >
-                        <p className="hidden sm:block text-[12px] lg:text-[14px] font-[600] text-[#0073C6] underline ">
-                          Click on image to open floor plan details
-                        </p>
-                      </div>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <p
-                      className="hidden sm:block text-[14px] font-[500] text-[#005DA0] text-center m-auto"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleOpen();
-                      }}
-                    >
-                      {projName}
-                      {propCgId != projectprops.plot &&
-                        selectedFloor?.bhkName &&
-                        " | " + selectedFloor?.bhkName}
-                      {propCgId == projectprops.apartment &&
-                        selectedFloor?.towerName &&
-                        selectedFloor?.towerName != "NA" &&
-                        " | Tower " + selectedFloor?.towerName}
-                      {propCgId != projectprops.plot &&
-                        ` | ${
-                          propCgId == projectprops.rowHouse ||
-                          propCgId == projectprops.villa
-                            ? "Elevation"
-                            : "Floor"
-                        } ` +
-                          `${
-                            selectedFloor?.floor?.toString() === "0"
-                              ? "G"
-                              : selectedFloor?.floor
-                          }`}
-                      {selectedFloor?.unitNumber &&
-                        " | Unit No. " + selectedFloor?.unitNumber}
-                      {" | Facing " + selectedFloor?.facingName}
-                      {propCgId != projectprops.plot &&
-                        selectedFloor?.superBuildUparea &&
-                        " | Area. " +
-                          selectedFloor?.superBuildUparea +
-                          " sq.ft"}
-                      {propCgId == projectprops.plot &&
-                        selectedFloor?.plotArea &&
-                        " | Area. " + selectedFloor?.plotArea + " sq.ft"}
-                    </p>
-                    <div className="flex justify-center items-end max-h-[240px] sm:max-h-[450px] lg:h-[450px] w-full relative ">
-                      {selectedFloor?.floorPlanUrl ? (
-                        <img
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleOpen();
-                          }}
-                          src={
-                            (selectedFloor?.floorPlanUrl +
-                              "?v" +
-                              Math.random()) as string
-                          }
-                          className="w-full h-full cursor-pointer  object-contain"
-                          alt="image"
-                        />
-                      ) : (
-                        <div className="flex justify-center items-center flex-col min-w-fit ">
-                          <img
+                        {projName}
+                        {propCgId != projectprops.plot &&
+                          selectedFloor?.bhkName &&
+                          " | " + selectedFloor?.bhkName}
+                        {propCgId == projectprops.apartment &&
+                          selectedFloor?.towerName &&
+                          selectedFloor?.towerName != "NA" &&
+                          " | Tower " + selectedFloor?.towerName}
+                        {propCgId != projectprops.plot &&
+                          ` | ${
+                            propCgId == projectprops.rowHouse ||
+                            propCgId == projectprops.villa
+                              ? "Elevation"
+                              : "Floor"
+                          } ` +
+                            `${
+                              selectedFloor?.floor?.toString() === "0"
+                                ? "G"
+                                : selectedFloor?.floor
+                            }`}
+                        {selectedFloor?.unitNumber &&
+                          " | Unit No. " + selectedFloor?.unitNumber}
+                        {" | Facing " + selectedFloor?.facingName}
+                        {propCgId != projectprops.plot &&
+                          selectedFloor?.superBuildUparea &&
+                          " | Area. " +
+                            formatNumberWithSuffix(
+                              selectedFloor?.superBuildUparea
+                            ) +
+                            " sq.ft"}
+                        {propCgId == projectprops.plot &&
+                          selectedFloor?.plotArea &&
+                          " | Area. " +
+                            formatNumberWithSuffix(selectedFloor?.plotArea) +
+                            " sq.ft"}
+                      </p>
+                      <div className="flex justify-center items-end max-h-[240px] sm:max-h-[450px] lg:h-[450px] w-full relative ">
+                        {selectedFloor?.floorPlanUrl ? (
+                          <Image
+                            width={500}
+                            height={500}
                             onClick={(e) => {
                               e.stopPropagation();
                               handleOpen();
                             }}
-                            src="/abc/noimage.svg"
-                            className="w-[60%] sm:w-[80%] h-full cursor-pointer "
+                            src={selectedFloor?.floorPlanUrl}
+                            className="w-full h-full cursor-pointer  object-contain"
                             alt="image"
                           />
-                          <p className=" text-[#000] text-center text-[18px] md:text-[28px] lg:text-[32px] font-[600] ">
-                            Image is not available
+                        ) : (
+                          <div className="flex justify-center items-center flex-col min-w-fit ">
+                            <Image
+                              width={500}
+                              height={500}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleOpen();
+                              }}
+                              src={ImgNotAvail}
+                              className="w-[60%] sm:w-[60%] h-full cursor-pointer "
+                              alt="image"
+                            />
+                          </div>
+                        )}
+                        <PopupOpenSvg className=" sm:hidden absolute bottom-0 right-1 w-[24px] h-[24px] lg:w-[28px] lg:h-[28px]  " />
+                      </div>
+                      <div className="hidden sm:flex ">
+                        <div
+                          className="bg-[#F4FBFF] p-[10px] rounded-[29px] gap-[12px] flex justify-end items-center  cursor-pointer"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleOpen();
+                          }}
+                        >
+                          <p className="hidden sm:block text-[12px] lg:text-[14px] font-[600] text-[#0073C6] underline ">
+                            Click on image to open floor plan details
                           </p>
                         </div>
-                      )}
-                      <PopupOpenSvg className=" sm:hidden absolute bottom-0 right-1 w-[24px] h-[24px] lg:w-[28px] lg:h-[28px]  " />
-                    </div>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <p
+                        className="hidden sm:block text-[14px] font-[500] text-[#005DA0] text-center m-auto"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleOpen();
+                        }}
+                      >
+                        {projName}
+                        {propCgId != projectprops.plot &&
+                          selectedFloor?.bhkName &&
+                          " | " + selectedFloor?.bhkName}
+                        {propCgId == projectprops.apartment &&
+                          selectedFloor?.towerName &&
+                          selectedFloor?.towerName != "NA" &&
+                          " | Tower " + selectedFloor?.towerName}
+                        {propCgId != projectprops.plot &&
+                          ` | ${
+                            propCgId == projectprops.rowHouse ||
+                            propCgId == projectprops.villa
+                              ? "Elevation"
+                              : "Floor"
+                          } ` +
+                            `${
+                              selectedFloor?.floor?.toString() === "0"
+                                ? "G"
+                                : selectedFloor?.floor
+                            }`}
+                        {selectedFloor?.unitNumber &&
+                          " | Unit No. " + selectedFloor?.unitNumber}
+                        {" | Facing " + selectedFloor?.facingName}
+                        {propCgId != projectprops.plot &&
+                          selectedFloor?.superBuildUparea &&
+                          " | Area. " +
+                            formatNumberWithSuffix(
+                              selectedFloor?.superBuildUparea
+                            ) +
+                            " sq.ft"}
+                        {propCgId == projectprops.plot &&
+                          selectedFloor?.plotArea &&
+                          " | Area. " +
+                            formatNumberWithSuffix(selectedFloor?.plotArea) +
+                            " sq.ft"}
+                      </p>
+                      <div
+                        className={`flex justify-center items-end w-full relative 
+                          ${
+                            floorPlanType == "unit"
+                              ? "max-h-[140px]"
+                              : "max-h-[240px]"
+                          }
+                          ${
+                            floorPlanType == "unit"
+                              ? "sm:max-h-[350px]"
+                              : "sm:max-h-[450px]"
+                          }  
+                          ${
+                            floorPlanType == "unit"
+                              ? "lg:h-[350px]"
+                              : "lg:h-[450px]"
+                          }`}
+                      >
+                        {selectedFloor?.floorPlanUrl ? (
+                          <Image
+                            width={500}
+                            height={500}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleOpen();
+                            }}
+                            src={
+                              (selectedFloor?.floorPlanUrl +
+                                "?v" +
+                                Math.random()) as string
+                            }
+                            className="w-full h-full cursor-pointer  object-contain"
+                            alt="image"
+                          />
+                        ) : (
+                          <div className="flex justify-center items-center flex-col min-w-fit ">
+                            <Image
+                              width={500}
+                              height={500}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleOpen();
+                              }}
+                              src={ImgNotAvail}
+                              className={`w-[100%] sm:w-[80%] cursor-pointer 
+                              ${
+                                floorPlanType == "unit"
+                                  ? "max-h-[140px]"
+                                  : "max-h-[240px]"
+                              }
+                              ${
+                                floorPlanType == "unit"
+                                  ? "sm:max-h-[350px]"
+                                  : "sm:max-h-[450px]"
+                              }  
+                              ${
+                                floorPlanType == "unit"
+                                  ? "lg:h-[350px]"
+                                  : "lg:h-[450px]"
+                              }`}
+                              alt="image"
+                            />
+                          </div>
+                        )}
+                        <PopupOpenSvg className=" sm:hidden absolute bottom-0 right-1 w-[24px] h-[24px] lg:w-[28px] lg:h-[28px]  " />
+                      </div>
 
-                    {/* add trext here */}
-                    <p
-                      className="hidden sm:block text-[12px] lg:text-[14px] font-[600] text-[#0073C6] underline cursor-pointer"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleOpen();
-                      }}
-                    >
-                      Click on image to open floor plan details
-                    </p>
+                      {/* add text here */}
+                      <p
+                        className="hidden sm:block text-[12px] lg:text-[14px] font-[600] text-[#0073C6] underline cursor-pointer"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleOpen();
+                        }}
+                      >
+                        Click on image to open floor plan details
+                      </p>
 
-                    {/* {floorPlanType == "unit" && (
+                      {/* {floorPlanType == "unit" && (
                       <CarouselSuggestion
                         form={byUnitForm}
                         propCgId={propCgId}
                       />
                     )} */}
-                  </>
-                )
-              ) : (
-                <Nofloor />
-              )}
+
+                      {floorPlanType == "unit" && !isMobile && (
+                        <UnitsImagesBlock
+                          // floorsArray={projectUnitsData && projectUnitsData.length > 0 ? projectUnitsData : [] }
+                          form={byUnitForm}
+                          propCgId={propCgId}
+                        />
+                      )}
+                    </>
+                  )
+                ) : (
+                  <Nofloor />
+                )}
+              </div>
             </div>
-          </div>
-          <FormProvider form={form}>
-            <FloorPlanModal
-              projName={projName}
-              propCgId={propCgId}
-              data={projectUnitsData}
-              form={byUnitForm}
-              floorPlanType={floorPlanType}
-            />
-          </FormProvider>
-        </>
-      )}
-    </div>
+            <FormProvider form={form}>
+              <FloorPlanModal
+                projName={projName}
+                propCgId={propCgId}
+                data={projectUnitsData}
+                form={byUnitForm}
+                floorPlanType={floorPlanType}
+              />
+            </FormProvider>
+          </>
+        )}
+      </div>
+    </>
   );
 }

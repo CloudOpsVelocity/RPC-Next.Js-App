@@ -27,6 +27,9 @@ import styles from "@/app/styles/Carousel.module.css";
 import { unitFloorsAtom } from "../byunitblock";
 import Button from "../../atoms/buttons/variansts";
 import SelectedFilters from "./filters/SelectedFilters";
+import { formatNumberWithSuffix } from "@/app/utils/numbers";
+import ColumnVirtualizerFixed from "./VitualizedListCol";
+import { SelectCreatable } from "./filters/UnitINput";
 
 type Props = {
   propCgId: any;
@@ -118,7 +121,7 @@ function FloorPlanModal({
     form.setFieldValue(key, null);
     handleSearch(key);
   };
-  const [o, {}] = useSubFloorPlanPopup();
+  const [o, { open }] = useSubFloorPlanPopup();
   const showClearAll = Object.values(form.values).some(
     (value) => value !== null && value !== "" && value !== 0
   );
@@ -126,57 +129,51 @@ function FloorPlanModal({
     return null;
   }
   return (
-    <>
-      <Modal
-        opened={opened}
-        classNames={{
-          root: S.mainComntainerFloorPlan,
-          title: S.title,
-          close: S.close,
-          content: S.content,
-          overlay: S.overlay,
-          inner: o ? S.hidden : undefined,
-        }}
-        centered
-        onClose={handleClose}
-        title="Floor Plan"
-        size={"100%"}
-      >
-        <>
-          <div className="bg-white w-full h-auto px-1 xl:pl-5">
-            <p
-              className={`text-[#001F35] text-[13px] xl:text-xl not-italic font-semibold mt-2   ${
-                showClearAll ? "mb-2 sm:mb-7" : "mb-0"
-              }`}
-            >
-              See floor plan according to your selections
-            </p>
+    <Modal
+      opened={opened}
+      classNames={{
+        root: S.mainComntainerFloorPlan,
+        title: S.title,
+        close: S.close,
+        content: S.content,
+        overlay: S.overlay,
+        inner: o ? S.hidden : undefined,
+      }}
+      centered
+      onClose={handleClose}
+      title="Floor Plan"
+      size={"100%"}
+    >
+      <div className="bg-white w-full h-auto px-1 xl:pl-5">
+        <p
+          className={`text-[#001F35] text-[13px] xl:text-xl not-italic font-semibold mt-2   ${
+            showClearAll ? "mb-2 sm:mb-7" : "mb-0"
+          }`}
+        >
+          See floor plan according to your selections
+        </p>
 
-            <SelectedFilters
-              form={form}
-              propCgId={propCgId}
-              projectprops={projectprops}
-              showClearAll={showClearAll}
-              handleRemoveFilter={handleRemoveFilter}
-              filterKeysDetails={filterKeysDetails}
-            />
+        <SelectedFilters
+          form={form}
+          propCgId={propCgId}
+          projectprops={projectprops}
+          showClearAll={showClearAll}
+          handleRemoveFilter={handleRemoveFilter}
+          filterKeysDetails={filterKeysDetails}
+        />
 
-            <div className="flex justify-start items-start gap-5 xl:gap-[45px] flex-col mt-[1.5%] md:flex-row w-full xl:pb-[3%] ">
-              <LeftSection
-                propCgId={propCgId}
-                data={data}
-                handleReset={handleReset}
-                showClearAll={showClearAll}
-              />
-              <MiddleSection projName={projName} propCgId={propCgId} />
-              {selectedFloor && (
-                <RightSection propCgId={propCgId} data={data} />
-              )}
-            </div>
-          </div>
-        </>
-      </Modal>
-    </>
+        <div className="flex justify-start items-start gap-5 xl:gap-[45px] flex-col  md:flex-row w-full xl:pb-[3%] ">
+          <LeftSection
+            propCgId={propCgId}
+            data={data}
+            handleReset={handleReset}
+            showClearAll={showClearAll}
+          />
+          <MiddleSection projName={projName} propCgId={propCgId} />
+          {selectedFloor && <RightSection propCgId={propCgId} data={data} />}
+        </div>
+      </div>
+    </Modal>
   );
 }
 
@@ -190,7 +187,7 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
 
     data?.forEach((item: any) => {
       if (
-        item.hasOwnProperty(property) &&
+        Object.prototype.hasOwnProperty.call(item, property) &&
         item[property] !== "null" &&
         item[property] !== "undefined" &&
         item[property] !== "None"
@@ -246,26 +243,9 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
     setValues(prevObj);
     handleSearch(key);
   };
-  console.log(getOptions("block"));
   return (
     <div className="col-span-1 w-full max-w-[392px] mr-[3%]  ">
       <div className="w-[100%] flex justify-between items-start flex-wrap gap-[5%] z-[100000]">
-        <Select
-          key={"unitNumber"}
-          {...(propCgId === 32 && { mt: "md" })}
-          w={"full"}
-          label="Select Unit Number"
-          className="!w-[46%]"
-          placeholder="-- select --"
-          data={getOptions("unitNumber")}
-          searchable
-          maxDropdownHeight={200}
-          {...getInputProps("unitNumber")}
-          onChange={(value) => handleOnChange(value as string, "unitNumber")}
-          classNames={{ input: S.input, label: S.label, option: S.option }}
-          rightSection={<DropDownIcon />}
-        />
-
         {(propCgId === projectprops.apartment ||
           propCgId === projectprops.villament) && (
           <Select
@@ -278,13 +258,28 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
             data={getOptions("towerName")}
             searchable
             maxDropdownHeight={200}
-            {...getInputProps("towerName")}
+            // {...getInputProps("towerName")}
             onChange={(value) => handleOnChange(value as string, "towerName")}
             classNames={{ input: S.input, label: S.label, option: S.option }}
             rightSection={<DropDownIcon />}
           />
         )}
+        <SelectCreatable
+          key={"unitNumber"}
+          value={values.unitNumber}
+          data={getOptions("unitNumber")}
+          onChange={(value) => handleOnChange(value as string, "unitNumber")}
+          {...(propCgId === 32 && { mt: "md" })}
+          label="Select Unit Number"
 
+          // w={"full"}
+          // className="!w-[46%]"
+          // placeholder="-- select --"
+          // data={getOptions("unitNumber")}
+          // searchable
+          // {...getInputProps("unitNumber")}
+          // onChange={(value) => handleOnChange(value as string, "unitNumber")}
+        />
         {propCgId == projectprops.apartment &&
           propCgId != projectprops.plot &&
           getOptions("block").filter(
@@ -690,16 +685,21 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
     </div>
   );
 };
-const RightSection = ({ propCgId }: any) => {
+const RightSection = ({ propCgId, className }: any) => {
   const data = useAtomValue(selectedFloorAtom);
   return (
-    <div className="bg-[#F4FBFF] xl:mt-10 p-6 rounded-lg w-[100%] xl:mb-[10%] xl:w-full max-w-[342px] shadow">
-      <div className="space-y-4">
+    <div
+      className={clsx(
+        "bg-[#F4FBFF]  p-6 rounded-lg w-[100%] xl:mb-[10%] xl:w-full max-w-[342px] sm:max-w-[300px] xl:max-w-[342px] shadow",
+        className
+      )}
+    >
+      <div className="space-y-4 sm:space-y-2 xl:space-y-4">
         {propCgId != projectprops.plot && (
           <div className="flex items-center space-x-3">
             {propertyDetailsSvgs.unitType}
             <p className="text-[#4D6677] text-[14px] font-[500]">
-              Unit Type{" "}
+              Unit Type:
               <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
                 {" "}
                 {data?.bhkName}
@@ -713,7 +713,7 @@ const RightSection = ({ propCgId }: any) => {
           <div className="flex items-center space-x-3">
             {propertyDetailsSvgs.towerName}
             <p className="text-[#4D6677] text-[14px] font-[500]">
-              Tower{" "}
+              Tower:
               <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
                 {" "}
                 {data.towerName}
@@ -728,7 +728,7 @@ const RightSection = ({ propCgId }: any) => {
             <div className="flex items-center space-x-3">
               {propertyDetailsSvgs.block}
               <p className="text-[#4D6677] text-[14px] font-[500]">
-                Block{" "}
+                Block:
                 <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] capitalize">
                   {" "}
                   {data.block}
@@ -746,7 +746,8 @@ const RightSection = ({ propCgId }: any) => {
                 propCgId == projectprops.villa
                   ? "Elevation"
                   : "At Floor"
-              }`}{" "}
+              }`}
+              :
               <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                 {" "}
                 {data?.floor === 0
@@ -763,7 +764,7 @@ const RightSection = ({ propCgId }: any) => {
         <div className="flex items-center space-x-3">
           {propertyDetailsSvgs.unitNumber}
           <p className="text-[#4D6677] text-[14px] font-[500]">
-            Unit Number{" "}
+            Unit Number:
             <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] capitalize">
               {" "}
               {data.unitNumber}
@@ -774,7 +775,7 @@ const RightSection = ({ propCgId }: any) => {
         <div className="flex items-center space-x-3">
           {propertyDetailsSvgs.facingName}
           <p className="text-[#4D6677] text-[14px] font-[500]">
-            {`${propCgId == projectprops.plot ? "Plot Facing" : "Facing"} `}{" "}
+            {`${propCgId == projectprops.plot ? "Plot Facing" : "Facing"} `}:
             <span className="text-[#303A42] text-[14px] font-[600] ml-[10px] ">
               {" "}
               {data.facingName}
@@ -786,10 +787,10 @@ const RightSection = ({ propCgId }: any) => {
           <div className="flex items-center space-x-3">
             {propertyDetailsSvgs.superBuildUparea}
             <p className="text-[#4D6677] text-[14px] font-[500]">
-              Super Builtup Area{" "}
+              Super Builtup Area:
               <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
                 {" "}
-                {data.superBuildUparea} sq.ft
+                {formatNumberWithSuffix(data.superBuildUparea)} sq.ft
               </span>
             </p>
           </div>
@@ -799,10 +800,10 @@ const RightSection = ({ propCgId }: any) => {
           <div className="flex items-center space-x-3">
             {propertyDetailsSvgs.caretarea}
             <p className="text-[#4D6677] text-[14px] font-[500]">
-              Carpet Area{" "}
+              Carpet Area:
               <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                 {" "}
-                {data.caretarea} sq.ft
+                {formatNumberWithSuffix(data.caretarea)} sq.ft
               </span>
             </p>
           </div>
@@ -815,7 +816,7 @@ const RightSection = ({ propCgId }: any) => {
             <div className="flex items-center space-x-3">
               {propertyDetailsSvgs.caretarea}
               <p className="text-[#4D6677] text-[14px] font-[500]">
-                Garden Area{" "}
+                Garden Area:
                 <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                   {" "}
                   {data.gardenArea} sq.ft
@@ -831,10 +832,10 @@ const RightSection = ({ propCgId }: any) => {
             <div className="flex items-center space-x-3">
               {propertyDetailsSvgs.caretarea}
               <p className="text-[#4D6677] text-[14px] font-[500]">
-                Terrace Area{" "}
+                Terrace Area:
                 <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                   {" "}
-                  {data.terraceArea} sq.ft
+                  {formatNumberWithSuffix(data.terraceArea)} sq.ft
                 </span>
               </p>
             </div>
@@ -847,10 +848,10 @@ const RightSection = ({ propCgId }: any) => {
             <div className="flex items-center space-x-3">
               {propertyDetailsSvgs.parkingArea}
               <p className="text-[#4D6677] text-[14px] font-[500]">
-                Parking Area{" "}
+                Parking Area:
                 <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                   {" "}
-                  {data.parkingArea} sq.ft
+                  {formatNumberWithSuffix(data.parkingArea)} sq.ft
                 </span>
               </p>
             </div>
@@ -859,10 +860,10 @@ const RightSection = ({ propCgId }: any) => {
           <div className="flex items-center space-x-3">
             {propertyDetailsSvgs.parkingArea}
             <p className="text-[#4D6677] text-[14px] font-[500]">
-              Balcony Size{" "}
+              Balcony Size:
               <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                 {" "}
-                {data.totalBalconySize} sq.ft
+                {formatNumberWithSuffix(data.totalBalconySize)} sq.ft
               </span>
             </p>
           </div>
@@ -873,10 +874,10 @@ const RightSection = ({ propCgId }: any) => {
           <div className="flex items-center space-x-3">
             {propertyDetailsSvgs.plotArea}
             <p className="text-[#4D6677] text-[14px] font-[500]">
-              Plot Area{" "}
+              Plot Area:
               <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
                 {" "}
-                {data.plotArea} sq.ft
+                {formatNumberWithSuffix(data.plotArea)} sq.ft
               </span>
             </p>
           </div>
@@ -885,7 +886,7 @@ const RightSection = ({ propCgId }: any) => {
           <div className="flex items-center space-x-3">
             {propertyDetailsSvgs.noOfCarParking}
             <p className="text-[#4D6677] text-[14px] font-[500]">
-              Car Parking{" "}
+              Car Parking:
               <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                 {" "}
                 {data.noOfCarParking ? data.noOfCarParking : "N/A"}
@@ -900,7 +901,7 @@ const RightSection = ({ propCgId }: any) => {
             <div className="flex items-center space-x-3">
               {propertyDetailsSvgs.parkingType}
               <p className="text-[#4D6677] text-[14px] font-[500]">
-                Open/Covered Parking{" "}
+                Open/Covered Parking:
                 <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
                   {data.parkingType} Parking
                 </span>
@@ -912,7 +913,7 @@ const RightSection = ({ propCgId }: any) => {
           <div className="flex items-center space-x-3">
             {propertyDetailsSvgs.totalNumberOfBalcony}
             <p className="text-[#4D6677] text-[14px] font-[500]">
-              Balconies{" "}
+              Balconies:
               <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
                 {" "}
                 {data.totalNumberOfBalcony}
@@ -925,7 +926,7 @@ const RightSection = ({ propCgId }: any) => {
           <div className="flex items-center space-x-3">
             {propertyDetailsSvgs.totalNumberofBathroom}
             <p className="text-[#4D6677] text-[14px] font-[500]">
-              Bathroom{" "}
+              Bathroom:
               <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
                 {" "}
                 {data.totalNumberofBathroom}
@@ -938,7 +939,7 @@ const RightSection = ({ propCgId }: any) => {
           <div className="flex items-center space-x-3">
             {propertyDetailsSvgs.length}
             <p className="text-[#4D6677] text-[14px] font-[500]">
-              Length of Plot{" "}
+              Length of Plot:
               <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
                 {" "}
                 {data.length} .ft
@@ -951,7 +952,7 @@ const RightSection = ({ propCgId }: any) => {
           <div className="flex items-center space-x-3">
             {propertyDetailsSvgs.width}
             <p className="text-[#4D6677] text-[14px] font-[500]">
-              Breadth of Plot{" "}
+              Breadth of Plot:
               <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
                 {" "}
                 {data.width} .ft
@@ -1019,10 +1020,14 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
             {" | Facing " + selectedFloor?.facingName}
             {propCgId != projectprops.plot &&
               selectedFloor?.superBuildUparea &&
-              " | Area. " + selectedFloor?.superBuildUparea + " sq.ft"}
+              " | Area. " +
+                formatNumberWithSuffix(selectedFloor?.superBuildUparea) +
+                " sq.ft"}
             {propCgId == projectprops.plot &&
               selectedFloor?.plotArea &&
-              " | Area. " + selectedFloor?.plotArea + " sq.ft"}
+              " | Area. " +
+                formatNumberWithSuffix(selectedFloor?.plotArea) +
+                " sq.ft"}
           </>
         )}
       </p>
@@ -1065,49 +1070,42 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
           )}
       </div>
       <CarouselModal projName={projName} propCgId={propCgId} />
+
       {floorsArray != undefined &&
         floorsArray != null &&
         floorsArray.length > 0 && (
           <div className="flex justify-center items-center mb-6 sm:mb-0  mt-4 w-full">
-            <Carousel
-              align={"start"}
-              classNames={styles}
-              slideSize={{ base: "50%", sm: "50px", lg: "100px" }}
-              slideGap={{ base: "16px", sm: "0px" }}
-              nextControlIcon={<ImgCarouselIcon />}
-              previousControlIcon={<PrevCarouselIcon />}
-              className="!max-w-[250px] sm:!max-w-[700px] px-10 h-[60px]"
-            >
-              {floorsArray?.map((eachObj: any, ind: number) => {
-                return (
-                  <Carousel.Slide h={60}>
-                    <div
-                      key={ind}
-                      className={clsx(
-                        " sm:h-[50px] ml-1.5 sm:ml-10 w-[100px] sm:max-w-[250px] flex justify-center items-center shadow-md  scrollbar-hide rounded-[5px] border-[0.5px] border-solid border-[#92B2C8]",
-                        selectedFloor?.floorPlanUrl == eachObj?.floorPlanUrl &&
-                          "shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] border-2 border-solid border-[#59A1D6]"
-                      )}
-                    >
-                      <Image
-                        // @ts-ignore
-                        src={
-                          eachObj?.floorPlanUrl
-                            ? `${eachObj?.floorPlanUrl}?v=${Math.random()}`
-                            : ImgNotAvail
-                        }
-                        alt="Floor Plan"
-                        width={57}
-                        height={37}
-                        className="w-full h-full cursor-pointer rounded-[5px]"
-                        style={{ aspectRatio: "100 / 50", objectFit: "cover" }}
-                        onClick={() => selectImg(ind)}
-                      />
-                    </div>
-                  </Carousel.Slide>
-                );
-              })}
-            </Carousel>
+            <ColumnVirtualizerFixed
+              items={floorsArray}
+              itemCount={floorsArray.length}
+              height={70}
+              itemSize={120}
+              overscan={5}
+              renderItem={(eachObj: any, index: number) => (
+                <div
+                  className={clsx(
+                    " sm:h-[50px]  w-[100px] sm:max-w-[250px] flex justify-center items-center shadow-md  scrollbar-hide rounded-[5px] border-[0.5px] border-solid border-[#92B2C8]",
+                    selectedFloor?.floorPlanUrl == eachObj?.floorPlanUrl &&
+                      "shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] border-2 border-solid border-[#59A1D6]"
+                  )}
+                >
+                  <Image
+                    // @ts-ignore
+                    src={
+                      eachObj?.floorPlanUrl
+                        ? `${eachObj?.floorPlanUrl}?v=${Math.random()}`
+                        : ImgNotAvail
+                    }
+                    alt="Floor Plan"
+                    width={57}
+                    height={37}
+                    className="w-full h-full cursor-pointer rounded-[5px]"
+                    style={{ aspectRatio: "100 / 50", objectFit: "cover" }}
+                    onClick={() => selectImg(index)}
+                  />
+                </div>
+              )}
+            />
           </div>
         )}
     </div>

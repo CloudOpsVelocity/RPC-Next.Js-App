@@ -2,34 +2,27 @@ import Loading from "@/app/components/atoms/Loader";
 import useSearchFilters from "@/app/hooks/search";
 import useQsearch from "@/app/hooks/search/useQsearch";
 import { SearchLocationIcon } from "@/app/images/commonSvgs";
-import { encodeProID } from "@/app/utils/api/encode";
 import { ScrollArea } from "@mantine/core";
 import { useRouter } from "next/navigation";
 import React from "react";
 import toast from "react-hot-toast";
 
 export default function Results() {
-  const { push } = useRouter();
   const { data, isLoading, handleResetQuery } = useQsearch();
-  const { filters, setFilters, setSingleType } = useSearchFilters();
+  const {
+    localities,
+    builders,
+    cities,
+    projects,
+    listing: listings,
+    projectListing,
+  } = data;
+  const { filters, setFilters } = useSearchFilters();
 
   if (isLoading) {
     return <Loading />;
   }
 
-  // Filter data into Locality and Projects
-  const localities = data?.loc?.map((item: any) => ({
-    name: item.name,
-    id: item.id,
-  }));
-  const cities = data?.cities?.map((item: any) => ({
-    name: item.name,
-    id: item.id,
-  }));
-  const projects = data?.projects?.map((item: any) => ({
-    name: item.name,
-    id: item.id,
-  }));
   const handleAddSearch = (newItem: string) => {
     if (!filters.locality.includes(newItem)) {
       setFilters((prevFilters) => ({
@@ -42,74 +35,145 @@ export default function Results() {
     }
   };
 
-  const handleAddcity = (newItem: string) => {
-    if (filters.city !== newItem) {
-      setFilters({
-        ...filters,
-        city: newItem,
-      });
-      handleResetQuery();
-    } else {
-      toast.error("The city already exists.");
+  const handlePush = async (type: string, data: any) => {
+    switch (type) {
+      case "project":
+        window.open(`/abc/delhi/palika/${data}`);
+        break;
+      case "listing":
+        {
+          const [ut, pt, cg, lt] = data.id.split("_");
+          const url = `propTypes=${pt}&unitTypes=${ut}&cgs=${cg}&localities=${data.name}%2B${lt}`;
+          window.open("/search/listing?" + url);
+        }
+        break;
+      case "projectListing":
+        {
+          const url = `projIdEnc=${data.id}&listedBy=${data.type.split("")[0]}`; 
+          window.open("/search/listing?" + url);
+        }
+        break;
+      case "builder":
+        setFilters((prevFilters) => ({
+          ...prevFilters,
+          builderIds: [...prevFilters.builderIds, `$${data.name}+${data.id}`],
+        }));
+        handleResetQuery();
+        break;
+      default:
+        break;
     }
   };
 
-  const handlePush = async (id: number) => {
-    const enc = await encodeProID(id);
-    push(`/abc/delhi/palika/${enc}`);
-  };
+  const noResults =
+    localities?.length === 0 &&
+    cities?.length === 0 &&
+    builders?.length === 0 &&
+    projects?.length === 0 &&
+    listings?.length === 0 &&
+    projectListing?.length === 0;
   return (
-    <ScrollArea h={330} className="px-5 py-2">
-      <div>
-        <h2 className="text-[#5F81B2] text-xl flex space-x-2 items-center">
-          <SearchLocationIcon /> <span> Location</span>
-        </h2>
-        {cities?.length > 0 && <SubHeading text="City" />}
+    <ScrollArea className="px-5 py-2 h-[310px]">
+      {noResults ? (
+        <p>No results found</p>
+      ) : (
+        <>
+          {" "}
+          <div>
+            {localities?.length > 0 && (
+              <h2 className="text-[#5F81B2] text-[14px] sm:text-xl flex space-x-2 items-center">
+                <SearchLocationIcon /> <span>Location</span>
+              </h2>
+            )}
 
-        <ul>
-          {cities?.map((locality: any) => (
-            <li
-              onClick={() => handleAddcity(`${locality.name}+${locality.id}`)}
-              className="text-[#737579] text-xl not-italic font-medium leading-[normal] cursor-pointer"
-              key={locality.id}
-            >
-              {locality.name}
-            </li>
-          ))}
-        </ul>
-        {localities.length > 0 && <SubHeading text="Locality" />}
-
-        <ul>
-          {localities?.map((locality: any) => (
-            <li
-              onClick={() => handleAddSearch(`${locality.name}+${locality.id}`)}
-              className="text-[#737579] text-xl not-italic font-medium leading-[normal] cursor-pointer"
-              key={locality.id}
-            >
-              {locality.name}
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div>
-        {projects?.length > 0 && (
-          <h2 className="text-[#5F81B2] text-xl flex space-x-2 items-center mt-[14px] mb-1">
-            {property} <span> Projects</span>
-          </h2>
-        )}
-
-        <ul>
-          {projects?.map((project: any) => (
-            <li
-              onClick={() => handlePush(project.id)}
-              className="text-[#737579] text-xl not-italic font-medium leading-[normal] cursor-pointer"
-              key={project.id}
-            >
-              {project.name}
-            </li>
-          ))}
-        </ul>
-      </div>
+            {localities?.length > 0 && <SubHeading text="Locality" />}
+            <ul>
+              {localities?.map((locality: any) => (
+                <li
+                  onClick={() =>
+                    handleAddSearch(`${locality.name}+${locality.id}`)
+                  }
+                  className="text-[14px] md:text-[16px] text-[#4D6677] font-[600] cursor-pointer"
+                  key={locality.id}
+                >
+                  {locality.name}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            {projects && projects.length > 0 && (
+              <h2 className="text-[#5F81B2] sm:text-xl flex space-x-2 items-center mt-[14px] mb-1">
+                {property} <span>Projects</span>
+              </h2>
+            )}
+            <ul>
+              {projects?.map((project: any) => (
+                <li
+                  onClick={() => handlePush("project", project.id)}
+                  className="text-[#737579] text-[14px] sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
+                  key={project.id}
+                >
+                  {project.name}
+                </li>
+              ))}
+            </ul>
+            {listings?.length > 0 && <SubHeading text="Listings" />}
+            <ul>
+              {listings?.map((listing: any) => (
+                <li
+                  onClick={() =>
+                    handlePush("listing", {
+                      id: listing.id,
+                      name: listing.name.split("in")[1],
+                    })
+                  }
+                  className="text-[#737579] text-[14px] sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
+                  key={listing.id}
+                >
+                  {listing.name}
+                </li>
+              ))}
+            </ul>
+            {projectListing?.length > 0 && (
+              <SubHeading text="Project Listings" />
+            )}
+            <ul>
+              {projectListing?.map((projectListing: any) => (
+                <li
+                  onClick={() =>
+                    handlePush("projectListing", {
+                      id: projectListing.id,
+                      type: projectListing.type,
+                    })
+                  }
+                  className="text-[#737579] text-[14px] sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
+                  key={projectListing.id}
+                >
+                  {projectListing.name}
+                </li>
+              ))}
+            </ul>
+            {builders?.length > 0 && <SubHeading text="Builders" />}
+            <ul>
+              {builders?.map((builder: any) => (
+                <li
+                  onClick={() =>
+                    handlePush("builder", {
+                      name: builder.name,
+                      id: builder.id,
+                    })
+                  }
+                  className="text-[14px] md:text-[16px] text-[#4D6677] font-[600] cursor-pointer"
+                  key={builder.id}
+                >
+                  {builder.name}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </>
+      )}
     </ScrollArea>
   );
 }

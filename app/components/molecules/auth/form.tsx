@@ -14,10 +14,16 @@ const Form = () => {
               <span className="font-bold text-emerald-600">trust</span>
             </h3>
 
-            <img src="/auth/sideCoverImage.svg" alt="" className="!my-12" />
+            <Image
+              width={500}
+              height={500}
+              src="/auth/sideCoverImage.svg"
+              alt=""
+              className="!my-12"
+            />
             <ul className="flex flex-col justify-center items-center space-y-1 text-neutral-600 text-base font-semibold">
-              {data.map((item, index) => (
-                <li key={index} className="w-full max-w-[16rem]">
+              {data.map((item) => (
+                <li key={item.text} className="w-full max-w-[16rem]">
                   {/* <img
                     src={item.icon}
                     alt="building"

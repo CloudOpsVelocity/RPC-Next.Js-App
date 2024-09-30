@@ -28,7 +28,7 @@ export default function CarouselModal({
       slideSize="20.333333%"
       w={"full"}
       slideGap="md"
-      withControls={true}
+      withControls
       align={isData.others.length > 5 ? "start" : "center"}
       slidesToScroll={3}
       nextControlIcon={<DarkNextCarouselButton />}
@@ -37,7 +37,7 @@ export default function CarouselModal({
     >
       {isData.others.map((item: any, index: number) => (
         <Carousel.Slide
-          key={index}
+          key={item.image}
           mih={70}
           mt={20}
           onClick={() => handleImageClick(index)}
@@ -49,7 +49,7 @@ export default function CarouselModal({
             width={300}
             height={300}
             className={clsx(
-              "max-h-[100px] object-cover shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]  ",
+              "max-h-[40px] min-h-[40px]  sm:max-h-[60px] xl:max-h-[100px]  object-cover shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]  ",
               active === index && "border-[3px] border-btnPrimary border-solid "
             )}
           />

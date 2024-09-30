@@ -1,5 +1,5 @@
 .wrapper {
-  padding-top: calc(var(--mantine-spacing-xl) * 2);
+  padding-top: 50px;
   min-height: rem(820px);
   /* background-image: radial-gradient(
     var(--mantine-color-blue-6) 0%,

@@ -14,11 +14,12 @@ import { PhaseList } from "@/app/validations/types/project";
 import { formatDateDDMMYYYY } from "@/app/utils/date";
 import { isSingleLetterOrNumber } from "@/app/utils/letters";
 import { sqftToAcres } from "@/app/utils/landarea";
-import NoProperties from "./notfound";
-import SubHeading from "./headings/SubHeading";
 import { currentPhaseAtom } from "@/app/store/vewfloor";
 import { useHydrateAtoms } from "jotai/utils";
 import { useAtom } from "jotai";
+
+import NoProperties from "./notfound";
+import SubHeading from "./headings/SubHeading";
 type Props = {
   data: PhaseList[];
   slug: string;
@@ -47,15 +48,17 @@ export default function ProjectDetailsP({
   const propertyTypeOrder = ["apt", "rowHouse", "villa", "vlmt", "plot"];
   const orderedPropertyTypes =
     selectedPhase &&
-    propertyTypeOrder.filter((propertyType) =>
-      Object.keys(selectedPhase.propTypeOverview).includes(propertyType)
+    propertyTypeOrder.filter(
+      (propertyType) =>
+        selectedPhase.propTypeOverview &&
+        Object.keys(selectedPhase.propTypeOverview).includes(propertyType)
     );
   return (
     <div
-      className="w-[95%] sm:w-[90%] mb-[3%] scroll-mt-[150px]"
-      id="propertyDetails"
+      className="w-[95%] sm:w-[90%] mb-[3%] sm:mb-[0%] scroll-mt-[150px] sm:mt-[50px]"
+      id="property-details"
     >
-      <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[12px] break-words">
+      <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[12px] break-words ">
         Property Details Of{" "}
         <span className="text-[#148B16] font-[700] ">{projName}</span>{" "}
       </h2>
@@ -107,6 +110,7 @@ export default function ProjectDetailsP({
           {selectedPhase && (
             <>
               <ProjBasicDetails
+                Id="launch-date"
                 key="launchDate"
                 icon={<EndDate />}
                 title="Launch Date"
@@ -119,8 +123,10 @@ export default function ProjectDetailsP({
                 title="Possession Date"
                 value={formatDateDDMMYYYY(selectedPhase.possassionDate)}
                 className={styles.box}
+                Id="possession-date"
               />
               <ProjBasicDetails
+                Id="all-unit-types"
                 key="landArea"
                 icon={<TotalLandArea />}
                 title="Land Area"
@@ -160,7 +166,7 @@ export default function ProjectDetailsP({
         </div>
       )}
 
-      <div className="flex justify-start items-start gap-[4%] flex-wrap mt-[3%]">
+      <div className="flex justify-start items-start sm:gap-[4%] flex-wrap mt-[3%] sm:mt-[1%]">
         {selectedPhase && (
           <>
             {orderedPropertyTypes.map((propertyTypeKey: any) => {

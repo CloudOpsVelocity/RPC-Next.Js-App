@@ -1,11 +1,10 @@
 import { useDebouncedValue } from "@mantine/hooks";
 import { useQueryState } from "nuqs";
-import React from "react";
 import { useQuery } from "react-query";
 
 export default function useQsearch() {
   const [name, setName] = useQueryState("q");
-  const [debounced] = useDebouncedValue(name, 500);
+  const [debounced] = useDebouncedValue(name, 700);
   const getData = async () => {
     let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/matcher?word=${debounced}`;
     const res = await fetch(url);
@@ -18,6 +17,12 @@ export default function useQsearch() {
     queryFn: () => getData(),
     enabled: !!debounced,
   });
+
+  const nData = {
+    ...data,
+    localities: data?.loc ?? [],
+  };
+  // console.log(nData);
   const onSearchChange = (value: string) => {
     !value ? setName(null) : setName(value);
   };
@@ -25,5 +30,12 @@ export default function useQsearch() {
     setName(null);
     onSearchChange("");
   };
-  return { data, isLoading, onSearchChange, debounced, name, handleResetQuery };
+  return {
+    data: nData,
+    isLoading,
+    onSearchChange,
+    debounced,
+    name,
+    handleResetQuery,
+  };
 }

@@ -1,26 +1,29 @@
+/* eslint-disable no-undef */
 import { Toaster } from "react-hot-toast";
 import Logo from "../components/atoms/Logo";
 import data from "../data/auth";
+import "./root.css";
 import { TbBuilding } from "react-icons/tb";
 import Link from "next/link";
+import Image from "next/image";
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <main className="w-full flex  sm:h-screen">
-      <div className="relative flex-col hidden md:flex items-start sm:pl-[5%] lg:pl-[7%]  justify-start sm:pt-[3%] xl:pt-[4%] bg-gradient-to-b from-[#E4F4FF] /0 via-[#FFF] /0 to-[#EFFFF3]/100 w-full ">
+      <div className="relative flex-col hidden md:flex items-start sm:pl-[5%] lg:pl-[7%] justify-start sm:pt-[3%] xl:pt-[6%] bg-gradient-to-b from-[#E4F4FF] /0 via-[#FFF] /0 to-[#EFFFF3]/100 w-full ">
         <Link
           href={"/"}
           className=" top-[7%] left-[25%] p-2 bg-[#ffffff7a] sm:mb-[50px] xl:mb-[72px]"
         >
-          <div className="flex  justify-center items-center gap-1 rounded   text-[#0C7ACA] text-xl xl:text-2xl not-italic font-bold flex-nowrap ">
+          <div className="flex justify-center items-center gap-1 rounded   text-[#0C7ACA] text-xl xl:text-2xl not-italic font-bold flex-nowrap ">
             {config.homeIcon} <p>Go to Home</p>
           </div>
           {config.line}
         </Link>
         <div className="  flex flex-col justify-start items-start ">
           <ul className=" text-neutral-600 w-full text-base font-semibold">
-            {data.map((item, index) => (
+            {data.map((item) => (
               <li
-                key={index}
+                key={item.text}
                 className="w-full mb-[3%] flex items-center justify-start"
               >
                 <TbBuilding />{" "}
@@ -31,19 +34,21 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             ))}
           </ul>
         </div>
-        <img
+        <Image
+          width={500}
+          height={500}
           src="/auth/login.svg"
           alt=""
           className="sm:mt-10  h-[100vh] sm:max-h-[340px] sm:w-[70%] xl:max-w-[490px]  xl:w-auto xl:mt-20"
         />
       </div>
-      <div className="flex justify-center items-start w-full pt-[10%] sm:pt-[3%] xl:pt-[5.5%] relative">
+      <div className="flex justify-center items-start w-full pt-[10%] sm:pt-[3%] xl:pt-[5.5%] relative max-h-[100vh] overflow-y-auto ">
         <Link
           href={"/"}
           className=" sm:hidden top-0 left-0 p-2 bg-[#ffffff7a]  absolute"
         >
-          <div className="flex  justify-center items-center gap-1 rounded   text-[#0C7ACA] text-[14px] not-italic font-bold flex-nowrap">
-            {config.homeIcon} <p className="h-[17px]">Home</p>
+          <div className="flex  justify-center items-center gap-1 rounded underline  text-[#0C7ACA] text-[14px] not-italic font-bold flex-nowrap">
+            {config.homeIcon} <p className="h-[17px] hover:underline cursor-pointer ">Home</p>
           </div>
           <hr className="bg-[#0C7ACA] h-[2px]" />
         </Link>

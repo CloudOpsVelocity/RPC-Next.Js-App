@@ -48,6 +48,7 @@ export default function ReportModal() {
     setText("");
   };
   const isMobile = useMediaQuery("(max-width: 601px)");
+  const isTab = useMediaQuery("(max-width: 1600px)");
 
   return (
     <>
@@ -64,17 +65,16 @@ export default function ReportModal() {
             padding: `${status == "success" ? "0px" : "10px"}`,
             borderRadius: "100px",
           },
-
           content: {
             borderRadius: "20px",
           },
         }}
-        size={isMobile ? "90%" : "30%"}
+        size={isMobile ? "100%" : isTab ? "45%" : "30%"}
       >
         <div className="relative">
           <Close
             close={close}
-            className="absolute md:top-3 top-1 md:right-5 right-1 z-10 w-[20px] h-[20px] md:w-[30px] md:h-[30px] "
+            className="absolute sm:right-1 sm:top-1 xl:top-3 top-1 xl:right-5 right-1 z-10 w-[16px] h-[16px] sm:w-[20px] sm:h-[20px]   xl:w-[30px] xl:h-[30px] "
           />
 
           {status === "success" ? (
@@ -84,17 +84,15 @@ export default function ReportModal() {
               {" "}
               <header className="flex  flex-col items-center gap-[8px] text-center pt-3 mb-2">
                 <p className="text-[#242424] text-center font-[Montserrat] text-[18px] sm:text-[22px] not-italic font-medium leading-[normal]">
-                  Report Issue for Project
+                  Report Issues for Project
                 </p>
                 <p className="text-[#148B16] font-[Montserrat] text-xs sm:text-[18px] not-italic font-medium leading-[normal]">
-                  Let us know your feedback this will allow us to serve you
-                  better!
+                  Let us know your feedback this will allow us to serve you better!
                 </p>
               </header>
-              <div className="h-[1px] w-full mb-3 bg-[#92B2C8;]"></div>
               <form onSubmit={formSubmit} className=" gap-1 sm:gap-4 ">
                 <div className="flex-1">
-                  <p className="text-[#001F35] font-semibold font-montserrat text-base ">
+                  <p className="text-[#001F35] font-semibold font-montserrat text-[14px] sm:text-base ">
                     Share Your Comment Below
                   </p>
                   <Textarea
@@ -104,8 +102,8 @@ export default function ReportModal() {
                     h={"100%"}
                     id="review"
                     className={clsx(
-                      " rounded-[10px] !text-[12px]  placeholder:!text-[#4D6677]  placeholder:!text-xl xl:placeholder:!text-2xl italic font-medium leading-[23.784px] ",
-                      status === "error" && "border-solid border-red-500 border"
+                      " rounded-[10px] !text-[12px]  placeholder:!text-[#4D6677]  placeholder:!text-xl xl:placeholder:!text-2xl italic font-medium leading-[23.784px] border-solid border",
+                      status == "error" ? "border-[#F00]" : "border-green"
                     )}
                     placeholder="Start typing here"
                     radius={"10px"}
@@ -114,14 +112,14 @@ export default function ReportModal() {
                     classNames={{
                       input: S.ratingInput,
                     }}
-                    onChange={(e) => setText(e.target.value)}
+                    onChange={(e) => {setText(e.target.value), setStatus("idle")}}
                     value={text}
                   />
                 </div>
                 <Button
                   //   loading={status === "pending"}
                   type="submit"
-                  className="inline-flex items-center justify-center rounded-md text-[14px]  xl:text-[20px] font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 !bg-[#0073C6] text-white mt-3 sm:mt-6"
+                  className="inline-flex items-center justify-center rounded-md !text-[12px]  sm:!text-[20px] font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 !px-2 !py-1 sm:px-4 sm:py-2 !bg-[#0073C6] text-white mt-3 sm:mt-6"
                 >
                   Submit
                 </Button>

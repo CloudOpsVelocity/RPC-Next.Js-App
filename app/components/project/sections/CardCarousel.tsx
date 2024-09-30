@@ -65,8 +65,8 @@ export default function CardCarousel({ partialUnitData }: Props) {
           dragFree
           mih={120}
         >
-          {data.map((item: any, index: number) => (
-            <Carousel.Slide key={index}>
+          {data?.map((item: any, index: number) => (
+            <Carousel.Slide key={"card+"+item.data.propType}>
               <Card
                 cardClick={() =>
                   setData({

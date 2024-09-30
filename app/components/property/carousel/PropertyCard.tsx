@@ -15,9 +15,11 @@ import { NearByDataAtom } from "@/app/store/nearby";
 import Button from "@/app/elements/button";
 import MainCarousel from "../../molecules/carousel/main";
 import { useMediaQuery } from "@mantine/hooks";
+import { redirect } from "next/dist/server/api-utils";
+import { get_posted_by } from "@/app/utils/dyanamic/projects";
 type Props = {
   type: string;
-  title: string;
+  title: any;
   projName?: string;
   content: string;
   data?: any;
@@ -48,9 +50,10 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
     type === "proj"
       ? cardData.projName
       : `${cardData.bhkName ?? ""} ${cardData.propTypeName} for
-      ${cardData.cg === "R" ? "Rent" : "Sale"} in ${cardData.ltName}`;
+      ${cardData.cg === "R" ? "Rent" : "Sell"} in ${cardData.ltName}`;
   const setPopReqData = useSetAtom(NearByDataAtom);
-  const onAddingShortList = (propId: string) => {
+  const onAddingShortList = (e: any, propId: string) => {
+    e.stopPropagation();
     if (session) {
       mutate && mutate({ id: propId, type: ct as Pick<CardProps, "ct">["ct"] });
       toggleShortlist({
@@ -62,10 +65,11 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
       openS();
     }
   };
-  const handleReqCall = () => {
+  const q = (e: any) => {
+    e.stopPropagation();
     open({
       modal_type: "PROPERTY_REQ_CALLBACK",
-      postedByName: cardData.postedByName,
+      postedByName: get_posted_by(cardData.postedByName),
       postedId: cardData.postedById,
       reqId: cardData.propIdEnc,
       source: "propCard",
@@ -73,10 +77,14 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
     });
   };
   const isMobile = useMediaQuery("(max-width: 601px)");
+  const redirect = (propId: string) => {
+    event?.preventDefault();
+    window.open(`/listing/banglore/${propId}`, "_blank");
+  };
 
   return (
-    <>
       <div
+        onClick={() => redirect(reqId)}
         key={reqId}
         className={clsx(
           "border text-card-foreground min-w-[350px]   min-h-[400px] overflow-hidden  shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[14px]",
@@ -112,7 +120,7 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
                 : "Under Construction"}
             </p>
           )}
-          <a href={url} target="_blank" className="relative  max-h-[212px]">
+          <div className="relative  max-h-[212px]">
             <Image
               src={
                 type === "proj"
@@ -141,8 +149,7 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
                     : "bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 text-[#0073C6]"
                 )}
                 onClick={(e) => {
-                  e.preventDefault();
-                  onAddingShortList(cardData.propIdEnc);
+                  onAddingShortList(e, cardData.propIdEnc);
                 }}
               >
                 <span className=" w-[24px] h-[24px] ">
@@ -151,13 +158,13 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
                 {cardData.shortListed === "Y" ? "Shortlisted" : "Shortlist"}
               </button>
             </div>
-          </a>
+          </div>
 
           <div className="text-sm">
             {type != "proj" && (
               <p className="mb-[6px] text-[#242424] text-[14px] sm:text-base not-italic font-semibold leading-[normal] tracking-[0.56px] ">
                 {cardData.bhkName} {cardData.propTypeName} for{" "}
-                {cardData.cg === "R" ? "Rent" : "Sale"} in {cardData.ltName}{" "}
+                {cardData.cg === "R" ? "Rent" : "Sell"} in {cardData.ltName}{" "}
                 <br />
                 <span className="text-[18px] font-[700] text-[#148B16] ">
                   {" "}
@@ -208,15 +215,14 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
               </p>
             )}
             <Button
-              icon={isMobile ? null : <Phone />}
+              icon={isMobile ? null : null}
               title="Request  Callback"
               buttonClass=" text-[#FFF] mt-[12px] text-[12px] xl:text-[16px] font-[600] bg-[#0073C6] rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[6px]  "
-              onChange={handleReqCall}
+              onChange={q}
             />
           </div>
         </div>
       </div>
-    </>
   );
 }
 
@@ -232,9 +238,9 @@ const ProjectCarousel = ({
 }: Props) => {
   return (
     data?.length > 0 && (
-      <div className="w-[100%] mb-[5%]">
+      <div className="w-[100%] mb-1 sm:mb-[0%]">
         <div className="w-[90%] mx-auto ">
-          <h2 className="text-[#001F35] text-[18px] sm:text-[32px] not-italic font-semibold leading-[normal] uppercase mb-1 sm:mb-[14px]">
+          <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[8px] xl:mb-[10px] capitalize">
             {/* <span className="!text-green-600">SARANG BY SUMADHARA </span> */}
             {title}
             <span className="text-[#148B16] font-[700] uppercase ml-4 ">
@@ -250,9 +256,9 @@ const ProjectCarousel = ({
           {data &&
             data?.map((project: any, index: number) => {
               return (
-                <CarouselSlide className="!h-[480px] sm:!h-[500px]">
+                <CarouselSlide className="!h-[450px] sm:!h-[500px]" key={`PropertyCarouselCon_${project?.projIdEnc}`}>
                   <PropertyCard
-                    key={index}
+                    key={`PropertyCard_${project?.projIdEnc}`}
                     type={type}
                     cardData={project}
                     mutate={mutate}

@@ -12,7 +12,8 @@ import Image from "next/image";
 import React from "react";
 import SubHeading from "./headings/SubHeading";
 import { useMediaQuery } from "@mantine/hooks";
-
+import { TOPIC_IDS } from "@/app/data/projectDetails";
+// space fixed
 export default function ListingRentAvail({
   projName,
   r,
@@ -24,8 +25,8 @@ export default function ListingRentAvail({
 }) {
   return (
     <div
-      className="w-[90%] mb-[3%] xl:mb-[3%]  xl:mt-[5%] m-auto sm:mb-[1.5%] sm:scroll-mt-[140px] xl:scroll-mt-[150px]"
-      id="listings"
+      className="w-[95%] sm:w-[90%] mb-[3%] xl:mb-[0%]  sm:pt-[50px] m-auto sm:mb-[0%] sm:scroll-mt-[140px] xl:scroll-mt-[150px]"
+      id="listings-available"
     >
       <h2 className="text-[20px] sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[12px] sm:mb-[6px] xl:mb-[12px]">
         Listings Available in{" "}
@@ -36,8 +37,22 @@ export default function ListingRentAvail({
 
       <SubHeading text="Unlock the door to your dream home: explore our array of available properties today!" />
       <div className="sm:flex  space-y-4 items-center gap-[28px] sm:gap-[25px] xl:gap-[58px] mt-[18px] sm:mt-[25px] xl:mt-[35px] flex-wrap sm:space-y-0">
-        <Card type="sell" s={s} r={r} projName={projName} block={s === "0"} />
-        <Card type="rent" s={s} r={r} projName={projName} block={r === "0"} />
+        <Card
+          type="sell"
+          s={s}
+          r={r}
+          projName={projName}
+          block={s === "0"}
+          id={TOPIC_IDS.LISTINGS_AVAILABLE}
+        />
+        <Card
+          type="rent"
+          s={s}
+          r={r}
+          projName={projName}
+          block={r === "0"}
+          id={TOPIC_IDS.RENT_LISTINGS_AVAILABLE}
+        />
       </div>
     </div>
   );
@@ -49,12 +64,14 @@ const Card = ({
   s,
   projName,
   block,
+  id,
 }: {
   type: "sell" | "rent";
   r: string;
   s: string;
   projName: string;
   block: boolean;
+  id: string;
 }) => {
   const [, { open: openSuccesPopup }] = useMessagePopup(
     type === "rent" ? "Rlisting" : "Slisting"
@@ -65,6 +82,7 @@ const Card = ({
   const isMobile = useMediaQuery("(max-width: 601px)");
   return (
     <div
+      id={id}
       className={clsx(
         " sm:h-[85px] shadow-[0px_4px_30px_0px_rgba(0,0,0,0.15)] rounded-[10px] relative cursor-pointer p-2 sm:p-0",
         type === "sell"
@@ -90,7 +108,7 @@ const Card = ({
         </div>
         <div
           className={clsx(
-            "flex justify-center items-center p-1.5 gap-[4px] sm:gap-[12px] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[10px] border-[3px] border-solid max-w-[60px] xl:max-w-[80px] sm:mt-[14px] sm:ml-5 sm:mb-5 sm:mr-5 text-[#303030] text-[14px] sm:text-2xl not-italic font-semibold",
+            "flex justify-center items-center p-1.5 gap-[4px] sm:gap-2 xl:gap-[12px] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[10px] border-[3px] border-solid max-w-[60px] xl:max-w-[80px] sm:mt-[14px] sm:ml-5 sm:mb-5 sm:mr-5 text-[#303030] text-[14px] sm:text-lg xl:text-2xl not-italic font-semibold",
             type === "sell"
               ? "border-[#FFD600] bg-[#ffef9b]"
               : "border-[#0073C6] bg-[#DBF0FF]"

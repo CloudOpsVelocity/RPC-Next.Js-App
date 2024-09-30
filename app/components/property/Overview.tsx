@@ -3,13 +3,13 @@ import React from "react";
 import ProjBasicDetails from "@/app/components/project/projBasicDetails";
 import { Main } from "@/app/validations/property/index";
 import { generatePropertyOverViewData } from "@/app/data/property/overview";
-import Ratings from "./Ratings";
 import PropertyOverviewBanner from "./OverViewBanner";
 import { footerPhoneIcon } from "@/app/images/commonSvgs";
 import CompareList from "./actions/compareList";
 import ShortList from "./actions/shortList";
 import Message from "./actions/Message";
 import ReportSectionProperty from "./actions/Report";
+import { formatNumberWithSuffix } from "@/app/utils/numbers";
 
 export default function PropertyOverView({
   data,
@@ -20,19 +20,19 @@ export default function PropertyOverView({
 }) {
   return (
     <div
-      className="pt-[2%] scroll-mt-[220px] w-[95%] md:w-[95%] rounded-[24px] shadow-md mb-[5%] mt-[2%] bg-gradient-to-r from-[#F6F6F6] /0 via-[#FFF] /45 to-[#FEFFFF]/100 "
+      className="pt-[2%] sm:scroll-mt-[150px] w-[95%] md:w-[95%] rounded-[24px] shadow-md   mt-[2%] bg-gradient-to-r from-[#F6F6F6] /0 via-[#FFF] /45 to-[#FEFFFF]/100 "
       id="overview"
     >
       <div className="pl-[2%] pr-[2%] flex justify-between items-center flex-wrap">
         <div className="md:w-[80%]">
-          <h2 className="text-[22px] sm:text-[24px] lg:text-[32px] text-[#001F35] font-[700] capitalize">
+          <h2 className="text-[18px] sm:text-[24px] xl:text-[32px] text-[#001F35] font-[700] capitalize">
             <span className="lowercase">
-              {data.propTypeName === "Plot" ? data.plotArea + " sq.ft" : ""}
+              {data.propTypeName === "Plot" ? formatNumberWithSuffix(data.plotArea) + " sq.ft" : ""}
             </span>{" "}
             {data.bhkName} {data.propTypeName} For{" "}
             {data.cg === "S" ? " Sell" : " Rent"} In {data.ltName}
           </h2>
-          <p className="text-[#242424]  text-sm sm:text-[22px] not-italic font-[600] leading-[normal] w-[100%] tracking-[0.32px]  mt-[14px] capitalize  sm:max-w-[1400px]">
+          <p className="text-[#242424]  text-sm sm:text-[20px] xl:text-[22px] not-italic font-[600] leading-[normal] w-[100%] tracking-[0.32px] sm:mt-[10px]  xl:mt-[14px] capitalize  sm:max-w-[1400px]">
             {`${data.address}, ${data.ltName}, ${data.ctName}, ${data?.stateName}, ${data.pinCode}`}
           </p>
         </div>
@@ -47,7 +47,7 @@ export default function PropertyOverView({
         </div>
       </div>
 
-      <div className="pl-[2%] pr-[2%] flex justify-start md:justify-between items-start md:items-end w-full mb-[3%] mt-[3%] flex-col md:flex-row ">
+      <div className="pl-[2%] pr-[2%] flex justify-start md:justify-between items-start md:items-end w-full mb-[3%] sm:mb-[1%] xl:mb-[1.5%] mt-[3%] sm:mt-[1%] xl:mt-[1.5%] flex-col md:flex-row ">
         <div className="flex justify-start items-start flex-wrap w-[100%] md:w-[80%] ">
           {generatePropertyOverViewData(
             data,

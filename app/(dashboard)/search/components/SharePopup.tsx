@@ -25,6 +25,7 @@ import { atom, useAtom } from "jotai";
 export const searchShareAtom = atom({
   opened: false,
   url: "",
+  title: "",
 });
 export default function SharePopup({
   title = "Share Project",
@@ -44,13 +45,13 @@ export default function SharePopup({
     ? shareAtomData.url
     : `${process.env.NEXT_PUBLIC_PROJECT_URL}/${pathname}`;
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
+  console.log(shareAtomData);
+  const onClose = () =>
+    setShareAtomData({ ...shareAtomData, opened: false, title: "" });
   return (
-    <>
       <Modal
         opened={shareAtomData.opened}
-        onClose={() =>
-          setShareAtomData({ ...shareAtomData, opened: false, url: "" })
-        }
+        onClose={onClose}
         centered
         size={isMobile ? "100%" : "40%"}
         classNames={{
@@ -64,14 +65,9 @@ export default function SharePopup({
         <div className="p-5 ">
           <div className="flex justify-between">
             <h3 className="text-[#202020] text-xl xl:text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px] ">
-              {titleText ?? title}
+              {(shareAtomData.title || titleText) ?? title}
             </h3>
-            <Close
-              className=""
-              close={() =>
-                setShareAtomData({ ...shareAtomData, opened: false, url: "" })
-              }
-            />
+            <Close className="" close={onClose} />
           </div>
 
           <p className="text-[#565D70]  text-[14px] xl:text-xl not-italic font-semibold leading-[normal] tracking-[0.8px] my-2 xl:my-5">
@@ -106,7 +102,6 @@ export default function SharePopup({
           </div>
         </div>
       </Modal>
-    </>
   );
 }
 

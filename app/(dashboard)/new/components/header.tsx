@@ -13,15 +13,15 @@ import PostProjectBtn from "./PostProjectBtn";
 import clsx from "clsx";
 import MenuBtn from "./home-search/header/Menu";
 import { useMediaQuery } from "@mantine/hooks";
+import { GrpLogoSvg } from "@/app/images/commonSvgs";
 
-type Props = {};
-
-export default function Header({}: Props) {
+export default function Header() {
   const isMobile = useMediaQuery("(max-width: 601px)");
   return (
     <div className="flex h-[70px] items-center justify-between shrink-0 pl-5 w-full py-3  shadow-[0px_4px_20px_0px_rgba(194,194,194,0.20)] bg-gradient-to-r from-[#f1f1f1] via-[#f1f1f1]  to-[#bde3ff] fixed top-0 z-[50]">
       <div>
-        <Image src={config.logo} width={180} height={180} alt="logo" />
+        {/* <Image src={config.logo} width={180} height={180} className="h-[40px] sm:h-auto w-[140px] sm:w-auto " alt="logo" /> */}
+        <GrpLogoSvg className="h-[40px] sm:h-auto w-[140px] sm:w-auto" />
       </div>
       {isMobile ? (
         <div className="flex  sm:hidden mr-4 gap-4">
@@ -61,13 +61,13 @@ const ForBuilders = () => {
               To Post Project Free!
             </div>
             <ul className="ml-5 mt-3">
-              <li className="list-disc text-[#242424] text-[11px] not-italic font-medium leading-4">
+              <li className="list-disc text-[#242424] text-[12px] not-italic font-medium leading-4">
                 Free Posting
               </li>
-              <li className="list-disc text-[#242424] text-[11px] not-italic font-medium leading-4">
+              <li className="list-disc text-[#242424] text-[12px] not-italic font-medium leading-4">
                 Multiple Images
               </li>
-              <li className="list-disc text-[#242424] text-[11px] not-italic font-medium leading-4">
+              <li className="list-disc text-[#242424] text-[12px] not-italic font-medium leading-4">
                 Easy to post
               </li>
             </ul>
@@ -116,9 +116,12 @@ function Dropdown() {
         {session ? (
           <div className=" text-[12px] flex justify-center items-center gap-1.5 rounded border shadow-[0px_4px_30px_0px_rgba(194,194,194,0.40)] text-[#0073C6] text-lg not-italic font-semibold leading-[normal] px-2.5 py-1.5 border-solid border-[#0073C6] bg-white">
             <button className="inline-flex justify-center items-center gap-1">
-              {config.getIcon(session.user.userType)} {session.user.name.split(" ")[0].length >= 3 ? 
-                                                        session.user.name.split(" ")[0] : session.user.name.split(" ")[1] != undefined ? 
-                                                        session.user.name.split(" ")[1] : session.user.name.split(" ")[0]}
+              {config.getIcon(session.user.userType)}{" "}
+              {session.user.name.split(" ")[0].length >= 3
+                ? session.user.name.split(" ")[0]
+                : session.user.name.split(" ")[1] != undefined
+                ? session.user.name.split(" ")[1]
+                : session.user.name.split(" ")[0]}
             </button>
             {config.blueChevron}
           </div>
@@ -141,7 +144,6 @@ function Dropdown() {
         )}
       </Menu.Target>
       {session ? (
-        <>
           <Menu.Dropdown
             className="!z-[1000]"
             classNames={{
@@ -153,7 +155,7 @@ function Dropdown() {
                 session.user?.userType !== "B" &&
                 item.label === "Post Project" ? null : (
                   <Menu.Item
-                    key={index}
+                    key={item.label}
                     classNames={{
                       itemLabel: S.itemLabel,
                     }}
@@ -180,7 +182,6 @@ function Dropdown() {
               Log Out
             </Menu.Item>
           </Menu.Dropdown>
-        </>
       ) : (
         <Menu.Dropdown
           className="!z-[1000]"
@@ -190,7 +191,7 @@ function Dropdown() {
         >
           {unAuthorizedData.map((item, index) => (
             <Menu.Item
-              key={index}
+              key={item.label}
               classNames={{
                 itemLabel: S.itemLabel,
               }}
@@ -303,7 +304,6 @@ function MobileDropDown() {
         )}
       </Menu.Target>
       {session ? (
-        <>
           <Menu.Dropdown
             className="!z-[1000]"
             classNames={{
@@ -315,7 +315,7 @@ function MobileDropDown() {
                 session.user?.userType !== "B" &&
                 item.label === "Post Project" ? null : (
                   <Menu.Item
-                    key={index}
+                    key={item.label}
                     classNames={{
                       itemLabel: S.itemLabel,
                     }}
@@ -342,7 +342,6 @@ function MobileDropDown() {
               Log Out
             </Menu.Item>
           </Menu.Dropdown>
-        </>
       ) : (
         <Menu.Dropdown
           className="!z-[1000]"
@@ -352,7 +351,7 @@ function MobileDropDown() {
         >
           {unAuthorizedData.map((item, index) => (
             <Menu.Item
-              key={index}
+              key={item.url}
               classNames={{
                 itemLabel: S.itemLabel,
               }}

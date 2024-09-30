@@ -1,8 +1,14 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 "use client";
-import { listingProps, Propertytopics as topics } from "@/app/data/projectDetails";
+import {
+  listingProps,
+  Propertytopics as topics,
+} from "@/app/data/projectDetails";
+import useNearbyProjects from "@/app/hooks/useNearby";
 import useNearby from "@/app/hooks/property/useNearBy";
 import useRatings from "@/app/hooks/useRatings";
 import { Main } from "@/app/validations/types/project";
+import { useMediaQuery } from "@mantine/hooks";
 import clsx from "clsx";
 import { atom, useAtom } from "jotai";
 import Image from "next/image";
@@ -20,6 +26,7 @@ export default function Navigation({
   cg,
   propTypeName,
   bhkId,
+  nearByLocations,
 }: {
   detailsData: any;
   projData: boolean;
@@ -30,9 +37,11 @@ export default function Navigation({
   projId?: string;
   cg: string;
   propTypeName: string;
-  bhkId: number
+  bhkId: number;
+  nearByLocations?: Object;
 }) {
-  const { data } = useRatings();
+  const isTab = useMediaQuery("(max-width: 1600px)");
+  const { data } = useRatings("dc766148701f46debedb4f9cf3a18809");
   const [currentBlock, setCurrentBlock] = useAtom(currentBlockAtom);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [isSticky, setIsSticky] = useAtom(stickyAtom);
@@ -47,7 +56,7 @@ export default function Navigation({
     }
   }
 
-  const { data:similarData, mutate } = useNearby({
+  const { data: similarData } = useNearby({
     lat,
     lng,
     projId,
@@ -55,7 +64,16 @@ export default function Navigation({
     bhkId,
     propType: listingProps[propTypeName.trim() as keyof typeof listingProps],
   });
-  let SimilatListingAvl=(similarData?.otherListing.length > 1 || similarData?.projListing.length > 1);
+  const { data: similarProjects, mutate } = useNearbyProjects({
+    lat,
+    lng,
+    projId,
+    builderId: relateProjData?.builderId,
+  });
+
+  let similarAvl = similarData?.otherListing.length > 1;
+  let SimilatListingAvl =
+    similarData?.otherListing.length > 1 || similarData?.projListing.length > 1;
   useEffect(() => {
     function handleScroll() {
       const currentScrollY = window.scrollY;
@@ -81,7 +99,7 @@ export default function Navigation({
         if (closestSectionIndex !== -1) {
           setCurrentBlock(sections[closestSectionIndex]?.id ?? "");
         }
-        if (currentScrollY > 800) {
+        if (currentScrollY > (isTab ? 600 : 800)) {
           setIsSticky(true);
         } else {
           setIsSticky(false);
@@ -99,7 +117,7 @@ export default function Navigation({
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [topics, isScrolling, lastScrollY]);
+  }, [isScrolling, lastScrollY, isTab, setCurrentBlock, setIsSticky]);
 
   function scrollToTopic(id: string): void {
     setIsScrolling(true);
@@ -111,6 +129,9 @@ export default function Navigation({
         inline: "center",
       });
       setCurrentBlock(id);
+      if (id !== "overview") {
+        setIsSticky(true);
+      }
     }
     setTimeout(() => setIsScrolling(false), 2000);
   }
@@ -133,16 +154,26 @@ export default function Navigation({
       key: "amenities",
     },
     { condtion: true, key: "nearBy" },
-    { condtion: relateProjData?.banks?.length > 0, key: "loans" },
+    {
+      condtion:
+        detailsData.cg === "S" &&
+        detailsData?.postedById === relateProjData?.builderId &&
+        relateProjData?.banks?.length > 0,
+      key: "loans",
+    },
     { condtion: projData, key: "projectDetails" },
     { condtion: projData, key: "aboutBuilder" },
-    { condtion: projData, key: "faq" },
+    {
+      condtion:
+        projData &&
+        detailsData.postedById === relateProjData.builderId &&
+        relateProjData.faqs.length > 0,
+      key: "faq",
+    },
     { condtion: SimilatListingAvl, key: "similarListing" },
-    { condtion: projData, key: "similar" },
+    { condtion: similarAvl, key: "similar" },
   ];
 
-
-  
   return (
     <div
       className={clsx(
@@ -187,9 +218,19 @@ export default function Navigation({
                 {topic.id === "ratings" && data?.status && (
                   <span>Customer Reviews</span>
                 )}
+                {topic.id === "nearBy" && (
+                  <span>
+                    {" "}
+                    {Object.keys(nearByLocations ? nearByLocations : {})
+                      .length == 0
+                      ? "Map Preview"
+                      : "Near By"}{" "}
+                  </span>
+                )}
                 {topic.id === "brochure" && <span>{topic.label}</span>}
                 {topic.id !== "ratings" &&
                   topic.id !== "brochure" &&
+                  topic.id !== "nearBy" &&
                   topic.label}
               </div>
             )

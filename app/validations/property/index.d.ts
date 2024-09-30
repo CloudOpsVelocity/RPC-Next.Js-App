@@ -63,10 +63,12 @@ export interface Main {
   agreementType: string;
   isBasement: "Y" | "N";
   noOfOpenSide: number;
+  bhkId: number;
 }
 export interface LIstingResponse {
-  listing:ListingDetails;
-  nearByLocations:any
+  listing: Main;
+  nearByLocations: any;
+  totalPrice: any;
 }
 
 export interface OtherPrice {

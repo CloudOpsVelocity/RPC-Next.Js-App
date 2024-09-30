@@ -19,12 +19,11 @@ export const getData = async (query: string | null, type: string) => {
       label: location.name,
       value: `${location.name}+${String(location.id)}`,
     }));
-  } else {
   }
 
   return transformedData;
 };
-export const getSearchBuilder = async (query: string, type: string) => {
+export const getSearchBuilder = async (query: string) => {
   if (query === "") {
     return [];
   }

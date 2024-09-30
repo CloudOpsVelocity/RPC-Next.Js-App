@@ -1,71 +1,39 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-import {
-  Drawer,
-  MultiSelect,
-  Pill,
-  PillsInput,
-  Popover,
-  Select,
-  em,
-} from "@mantine/core";
+import { Drawer, Pill, PillsInput, Popover } from "@mantine/core";
 import { FilterPopup } from "./filterPopup";
 import { FilterPopup as ListingPopup } from "../listing/components/filterPopup";
 import classes from "@/app/styles/search.module.css";
-import { useQueryState } from "nuqs";
 import BhkFilter from "./bhk";
 import PropTypeFilter from "./proptype";
 import BugdetFilter from "./buget";
 import useSearchFilters from "@/app/hooks/search";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
-import S from "@/app/styles/seach/Drawer.module.css";
-import SearchDrawerHeader from "./filter";
 import SearchDrawer from "./drawer";
 import BuyRent from "./filter/BuyRent";
 import { DynamicText } from "../utils/text";
-
-const SearchAndFilterCon = () => {
-  const [opened, { open, close }] = useDisclosure(false);
-  const isMobile = useMediaQuery("(max-width: 768px)");
+import { SearchIcon } from "@/app/images/HomePageIcons";
+import { propertyDetailsTypes } from "@/app/data/projectDetails";
+import { SEARCH_FILTER_DATA } from "@/app/data/search";
+import { toFormattedString } from "./buget/budget";
+import { useHydrateAtoms } from "jotai/utils";
+import { initialState, searachFilterAtom } from "@/app/store/search";
+const SearchAndFilterCon = ({ frontendFilters }: any) => {
+  useHydrateAtoms([
+    [searachFilterAtom, { ...initialState, ...frontendFilters }],
+  ]);
+  const [showAllLocalities, setShowAllLocalities] = useState(false);
   return (
-    <>
-      <SearchHeader open={open} close={close} />
-      <Drawer
-        opened={opened}
-        onClose={close}
-        position="top"
-        classNames={{
-          overlay: S.overlay,
-          content: S.content,
-          header: S.header,
-          body: classes.body,
-        }}
-        size={isMobile ? "100%" : "45%"}
-      >
-        <SearchDrawerHeader open={open} close={close} />
-      </Drawer>
-    </>
+    <SearchHeader
+      setShowAllLocalities={setShowAllLocalities}
+      showAllLocalities={showAllLocalities}
+    />
   );
 };
+export default SearchAndFilterCon;
 
-export { SearchAndFilterCon };
-
-const DropDownIcon = () => {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="14"
-      height="8"
-      viewBox="0 0 14 8"
-      fill="none"
-    >
-      <path d="M0 0.5L7 7.5L14 0.5L0 0.5Z" fill="white" />
-    </svg>
-  );
-};
-
-const SearchHeader = ({ open, close }: any) => {
+const SearchHeader = ({ setShowAllLocalities }: any) => {
   const {
     countAppliedFilters,
     filters,
@@ -74,188 +42,342 @@ const SearchHeader = ({ open, close }: any) => {
     handleAppliedFilters,
     params,
   } = useSearchFilters();
+  const isMobile = useMediaQuery("(max-width: 601px)");
+  const isTab = useMediaQuery("(max-width: 1600px)");
+
+  type FilterObjState = {
+    all: boolean;
+    type: boolean;
+    bhk: boolean;
+    budget: boolean;
+  };
+
+  const initialFilterObjState: FilterObjState = {
+    all: false,
+    type: false,
+    bhk: false,
+    budget: false,
+  };
+
+  const [allFilterPopup, setAllFilterPopup] = useState(initialFilterObjState);
+
+  const [opened, { open: openMobileSearchDrawer, close }] =
+    useDisclosure(false);
+  const showpopUp = () => {
+    setShowAllLocalities(true);
+    open();
+  };
+
+  const maxDisplay = 3;
+
+  const handleOpenFilterToggle = (key?: any, state?: boolean) => {
+    setAllFilterPopup((prev) => ({ ...prev, [key]: state }));
+  };
+
+  const handleCloseFiltersToggle = () => {
+    setAllFilterPopup(initialFilterObjState);
+  };
+
+  const values = filters.unitTypes.map((itemId, i) => {
+    const selectedItem = SEARCH_FILTER_DATA.bhkDetails.find(
+      (item) => item.value === itemId
+    );
+
+    if (selectedItem) {
+      // Check if the item is within the first `maxDisplay` items or if it's the last item when more than `maxDisplay` items are present
+      const isLastItemToDisplay =
+        i === maxDisplay - 1 && filters.unitTypes.length > maxDisplay;
+      const shouldAddComma =
+        i < maxDisplay - 1 && i < filters.unitTypes.length - 1;
+
+      return (
+        <React.Fragment key={itemId}>
+          {i < maxDisplay ? selectedItem.title : ""}
+          {shouldAddComma ? ", " : ""}
+          {isLastItemToDisplay ? " ..." : ""}
+        </React.Fragment>
+      );
+    }
+    return null;
+  });
+
+  const shouldShowBudget = !(
+    (filters.bugdetValue[0] === 500000 &&
+      filters.bugdetValue[1] === 600000000) ||
+    (filters.bugdetValue[0] === 0 && filters.bugdetValue[1] === 100000)
+  );
+  const allFiltersMap = [...filters.locality, ...filters.builderIds];
   return (
-    <div className="m-[2%] w-full flex mt-[100px] pl-[1%] xl:pl-[2%] gap-1 xl:gap-2 md:gap-[20px] flex-wrap md:flex-nowrap justify-between md:justify-start items-start md:items-center ">
-      <p className="text-[14px] md:text-[16px] text-[#737579] font-[500] w-full md:w-auto">
-        <span>Home</span> {" > "}
-        <Link href={"/project/banglore"}>
-          <span className="text-[14px] md:text-[16px] text-[#4D6677] font-[600]">
+    <div className="mb-4 w-full  mt-[60px] sm:mt-[80px] pl-[1%]   ">
+      <p className="text-[12px]  text-[#737579] font-[500] mt-2 mb-2 sm:mb-0 sm:mt-4  w-full md:w-auto">
+        <span className="text-[#737579] font-[500] mt-3">
+          {" "}
+          <a className="hover:underline" href={"/"}>
+            Home
+          </a>{" "}
+          {" > "}
+        </span>
+        <span>
+          <span className="  text-[#4D6677] font-[600] ">
             {DynamicText({
               cg: params.cg as string,
               listedBy: params.listedBy,
             })}
           </span>
-        </Link>{" "}
+        </span>{" "}
       </p>
+      <div className="mt-2 w-full flex  gap-1 xl:gap-2 sm:gap-[10px] flex-wrap sm:flex-wrap xl:flex-nowrap justify-start xl:justify-start items-center xl:items-center ">
+        {isMobile && (
+          <div
+            className={`border-[#A0D7FF] max-w-full flex flex-wrap rounded-[20px] sm:rounded-[40px] p-2 gap-2 xl:gap-[8px] pl-2 xl:pl-[8px] border-[1px] border-solid  items-center justify-center px-6 ${
+              filters.cg == null ? "sm:min-w-[300px]" : ""
+            }`}
+          >
+            <BuyRent />
 
-      <div className=" border-[#A0D7FF] rounded-[40px] gap-2 xl:gap-[8px] pl-2 xl:pl-[8px] border-[1px] border-solid flex items-center justify-center ">
-        <BuyRent />
-        <PillsInput
-          classNames={{ input: classes.wrapperMultiSelection }}
-          onClick={open}
-        >
-          <Pill.Group>
-            {filters.city && (
+            {allFiltersMap?.map(
+              (each, index) =>
+                index < (isTab ? 1 : 2) && (
+                  <Pill
+                    onRemove={() => {
+                      remnoveSearchOptions(each, "locality");
+                      handleAppliedFilters();
+                    }}
+                    key={each + "locality"}
+                    withRemoveButton
+                    classNames={{
+                      root: classes.MultiSelectionPill,
+                      remove: classes.removeButton,
+                    }}
+                    removeButtonProps={{
+                      style: {
+                        color: "#03153",
+                      },
+                    }}
+                  >
+                    {each.split("+")[0]}
+                  </Pill>
+                )
+            )}
+            {allFiltersMap?.length > (isTab ? 1 : 2) && (
               <Pill
-                withRemoveButton
+                className="capitalize"
                 classNames={{ root: classes.MultiSelectionPill }}
-                onRemove={() => {
-                  setFilters((prev) => ({ ...prev, city: null }));
-                  handleAppliedFilters();
-                }}
-                removeButtonProps={{
-                  style: {
-                    color: "red",
-                  },
-                }}
+                onClick={() =>
+                  isMobile ? openMobileSearchDrawer() : showpopUp()
+                }
               >
-                {filters.city.split("+")[0]}
+                {`+${allFiltersMap?.length - (isTab ? 1 : 2)} More`}
               </Pill>
             )}
-            {filters.locality?.map((each, index) => (
-              <Pill
-                onRemove={() => {
-                  remnoveSearchOptions(each, "locality");
-                  handleAppliedFilters();
-                }}
-                key={index}
-                withRemoveButton
-                classNames={{
-                  root: classes.MultiSelectionPill,
-                  remove: classes.removeButton,
-                }}
-                removeButtonProps={{
-                  style: {
-                    color: "red",
-                  },
-                }}
+            {allFiltersMap?.length > 0 ? (
+              <p onClick={() => (isMobile ? openMobileSearchDrawer : "")}>
+                Add more
+              </p>
+            ) : (
+              <p
+                className="text-[14px] sm:text-base"
+                onClick={() => (isMobile ? openMobileSearchDrawer : "")}
               >
-                {each.split("+")[0]}
-              </Pill>
-            ))}
+                Search By Locality, Projects or Listings
+              </p>
+            )}
+            <SearchIcon />
+          </div>
+        )}
 
-            <PillsInput.Field
-              miw={225}
-              placeholder={
-                filters.locality.length > 0
-                  ? "Add More"
-                  : "Enter City,Locality & Project"
-              }
-              readOnly
-            />
-          </Pill.Group>
-        </PillsInput>
+        {!isMobile && (
+          <>
+            <Popover
+              width={"auto"}
+              trapFocus
+              position="bottom"
+              withArrow
+              shadow="lg"
+              radius={10}
+              offset={{ mainAxis: 10, crossAxis: -200 }}
+              opened={allFilterPopup.all}
+              onClose={() => handleOpenFilterToggle("all", false)}
+            >
+              <Popover.Target>
+                <div
+                  className={`border-[#A0D7FF] max-w-full flex flex-wrap rounded-[20px] sm:rounded-[40px] p-2 gap-2 xl:gap-[8px] pl-2 xl:pl-[8px] border-[1px] border-solid items-center justify-center px-6 ${
+                    filters.cg == null ? "sm:min-w-[300px]" : ""
+                  }`}
+                  onClick={() => handleOpenFilterToggle("all", true)}
+                >
+                  <BuyRent />
+
+                  {allFiltersMap?.map(
+                    (each, index) =>
+                      index < (isTab ? 1 : 2) && (
+                        <Pill
+                          onRemove={() => {
+                            remnoveSearchOptions(
+                              each,
+                              filters.builderIds.includes(each)
+                                ? "builderIds"
+                                : "locality"
+                            );
+                            handleAppliedFilters();
+                          }}
+                          key={each}
+                          withRemoveButton
+                          classNames={{
+                            root: classes.MultiSelectionPill,
+                            remove: classes.removeButton,
+                          }}
+                          removeButtonProps={{
+                            style: {
+                              color: "#03153",
+                            },
+                          }}
+                        >
+                          {each.split("+")[0]}
+                        </Pill>
+                      )
+                  )}
+                  {allFiltersMap?.length > (isTab ? 1 : 2) && (
+                    <Pill
+                      className="capitalize"
+                      classNames={{ root: classes.MultiSelectionPill }}
+                    >
+                      {`+${allFiltersMap?.length - (isTab ? 1 : 2)} More`}
+                    </Pill>
+                  )}
+                  {allFiltersMap?.length > 0 ? (
+                    <p>Add more</p>
+                  ) : (
+                    <p>Search By Locality, Projects or Listings</p>
+                  )}
+                  <SearchIcon />
+                </div>
+              </Popover.Target>
+              <Popover.Dropdown className="!z-50" p={0}>
+                {params.listedBy ? (
+                  <ListingPopup close={close} />
+                ) : (
+                  <FilterPopup close={handleCloseFiltersToggle} />
+                )}
+              </Popover.Dropdown>
+            </Popover>
+
+            <Popover
+              width={"auto"}
+              trapFocus
+              position="bottom"
+              withArrow
+              shadow="lg"
+              radius={10}
+              offset={{ mainAxis: 10, crossAxis: 0 }}
+              opened={allFilterPopup.type}
+              onClose={() => handleOpenFilterToggle("type", false)}
+            >
+              <Popover.Target>
+                <button
+                  className=" text-[#0073C6] hidden text-[14px] xl:text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] lg:flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md "
+                  onClick={() => handleOpenFilterToggle("type", true)}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="10"
+                    height="10"
+                    viewBox="0 0 10 10"
+                    fill="none"
+                  >
+                    <circle cx="5" cy="5" r="5" fill="#148B16" />
+                  </svg>
+                  {filters.propTypes
+                    ? propertyDetailsTypes.get(filters.propTypes)?.name
+                    : "Select Property Type"}
+                </button>
+              </Popover.Target>
+              <Popover.Dropdown className="!z-50" p={0}>
+                <PropTypeFilter close={handleCloseFiltersToggle} />
+              </Popover.Dropdown>
+            </Popover>
+
+            {filters.propTypes !== 32 && (
+              <Popover
+                width={"auto"}
+                trapFocus
+                position="bottom"
+                withArrow
+                shadow="lg"
+                radius={10}
+                offset={{ mainAxis: 10, crossAxis: 0 }}
+                opened={allFilterPopup.bhk}
+                onClose={() => handleOpenFilterToggle("bhk", false)}
+              >
+                <Popover.Target>
+                  <button
+                    className=" text-[#0073C6] sm:text-[14px] xl:text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] hidden justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md md:flex "
+                    onClick={() => handleOpenFilterToggle("bhk", true)}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="10"
+                      height="10"
+                      viewBox="0 0 10 10"
+                      fill="none"
+                    >
+                      <circle cx="5" cy="5" r="5" fill="#148B16" />
+                    </svg>
+                    {filters.unitTypes.length > 0 ? values : "Select BHK Type"}
+                  </button>
+                </Popover.Target>
+                <Popover.Dropdown className="!z-50" p={0}>
+                  <BhkFilter close={handleCloseFiltersToggle} />
+                </Popover.Dropdown>
+              </Popover>
+            )}
+
+            <Popover
+              width={"auto"}
+              trapFocus
+              position="bottom"
+              withArrow
+              shadow="lg"
+              radius={10}
+              offset={{ mainAxis: 10, crossAxis: 0 }}
+              opened={allFilterPopup.budget}
+              onClose={() => handleOpenFilterToggle("budget", false)}
+            >
+              <Popover.Target>
+                <button
+                  className=" text-[#0073C6] text-[14px] xl:text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] hidden lg:flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md "
+                  onClick={() => handleOpenFilterToggle("budget", true)}
+                >
+                  {" "}
+                  <span className="bg-[#148B16] rounded-full text-white text-sm block w-5 h-5">
+                    ₹
+                  </span>
+                  {shouldShowBudget &&
+                  ((filters.bugdetValue[0] !== undefined &&
+                    filters.bugdetValue[0] !== 0 &&
+                    filters.bugdetValue[0].toString() !== "") ||
+                    (filters.bugdetValue[1] !== undefined &&
+                      filters.bugdetValue[1] !== 0 &&
+                      filters.bugdetValue[1].toString() !== ""))
+                    ? `${toFormattedString(filters.bugdetValue[0])}  ${
+                        "- " + toFormattedString(filters.bugdetValue[1])
+                      }`
+                    : " Add Budget"}
+                </button>
+              </Popover.Target>
+              <Popover.Dropdown className="!z-50" p={0}>
+                <BugdetFilter close={handleCloseFiltersToggle} />
+              </Popover.Dropdown>
+            </Popover>
+          </>
+        )}
+
+        <SearchDrawer
+          close={close}
+          open={openMobileSearchDrawer}
+          opened={opened}
+        />
       </div>
-      <Popover
-        width={"auto"}
-        trapFocus
-        position="bottom"
-        withArrow
-        shadow="lg"
-        radius={10}
-        offset={{ mainAxis: 10, crossAxis: 0 }}
-      >
-        <Popover.Target>
-          <button className=" text-[#0073C6] text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] hidden justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md md:flex ">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="10"
-              height="10"
-              viewBox="0 0 10 10"
-              fill="none"
-            >
-              <circle cx="5" cy="5" r="5" fill="#148B16" />
-            </svg>
-            BHK
-          </button>
-        </Popover.Target>
-        <Popover.Dropdown className="!z-50" p={0}>
-          <BhkFilter />
-        </Popover.Dropdown>
-      </Popover>
-      <Popover
-        width={"auto"}
-        trapFocus
-        position="bottom"
-        withArrow
-        shadow="lg"
-        radius={10}
-        offset={{ mainAxis: 10, crossAxis: 0 }}
-      >
-        <Popover.Target>
-          <button
-            // onClick={() => setOpened((o) => !o)}
-            className=" text-[#0073C6] hidden text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] lg:flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md "
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="10"
-              height="10"
-              viewBox="0 0 10 10"
-              fill="none"
-            >
-              <circle cx="5" cy="5" r="5" fill="#148B16" />
-            </svg>
-            Property Type
-          </button>
-        </Popover.Target>
-        <Popover.Dropdown className="!z-50" p={0}>
-          <PropTypeFilter />
-        </Popover.Dropdown>
-      </Popover>
-      <Popover
-        width={"auto"}
-        trapFocus
-        position="bottom"
-        withArrow
-        shadow="lg"
-        radius={10}
-        offset={{ mainAxis: 10, crossAxis: 0 }}
-      >
-        <Popover.Target>
-          <button
-            // onClick={() => setOpened((o) => !o)}
-            className=" text-[#0073C6] text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] hidden lg:flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md "
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="10"
-              height="10"
-              viewBox="0 0 10 10"
-              fill="none"
-            >
-              <circle cx="5" cy="5" r="5" fill="#148B16" />
-            </svg>
-            Budget
-          </button>
-        </Popover.Target>
-        <Popover.Dropdown className="!z-50" p={0}>
-          <BugdetFilter />
-        </Popover.Dropdown>
-      </Popover>
-
-      <Popover
-        width={"auto"}
-        trapFocus
-        position="bottom"
-        withArrow
-        shadow="lg"
-        radius={10}
-        offset={{ mainAxis: 10, crossAxis: -200 }}
-      >
-        <Popover.Target>
-          <button className=" text-[#0073C6] mr-[5%] md:m-0 text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] md:flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md hidden">
-            <div className="text-[#FFF] bg-[#148B16] rounded-[50%] text-[16px] font-[700] w-[24px] h-[24px] flex justify-center items-center">
-              {countAppliedFilters()}
-            </div>
-            Filters
-          </button>
-        </Popover.Target>
-        <Popover.Dropdown className="!z-50" p={0}>
-          {params.listedBy ? <ListingPopup /> : <FilterPopup />}
-        </Popover.Dropdown>
-      </Popover>
-      <SearchDrawer />
     </div>
   );
 };

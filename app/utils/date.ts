@@ -87,7 +87,9 @@ function convertDateToMonthYear(dateString: string | undefined): string {
   }
 
   const monthName: string = monthNames[month - 1];
-  return `${monthName}, ${year}`;
+  // return `${monthName}, ${year}`;
+
+  return `${year}`;
 }
 
 export { formatDate, formatDateDDMMYYYY, convertDateToMonthYear };

@@ -24,11 +24,11 @@ export default function BuildersBlock({
         <h2 className="text-black text-[32px] not-italic font-bold leading-[normal] uppercase">
           Builder’s in{" "}
           <span className="text-[#148B16] text-[32px] not-italic font-bold leading-[normal] uppercase">
-            Bangalore
+          Bengaluru
           </span>
         </h2>
         <p className=" mt-2 text-[#4D6677] text-2xl italic font-medium leading-[normal] tracking-[0.96px]">
-          Check out some other builders in Bangalore
+          Check out some other builders in Bengaluru
         </p>
         <div className="mt-8 relative  ">
           <Carousel
@@ -60,7 +60,7 @@ export default function BuildersBlock({
                     ? `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/builderpage/builder-noimage.png`
                     : builder.logo;
                 return (
-                  <Carousel.Slide key={index}>
+                  <Carousel.Slide key={`builderBlock_${builder.name}`}>
                     <div
                       className=" w-[107px] h-[105px] md:w-[140px] md:h-[136px] lg:w-[209px] lg:h-[203px]  bg-gray-300 shadow-[0px_4px_15px_0px_rgba(0,0,0,0.10)] rounded-[10px]"
                       style={{
@@ -68,7 +68,7 @@ export default function BuildersBlock({
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                       }}
-                    ></div>
+                    />
                     <p className="text-[#202020] text-xl not-italic font-semibold leading-[normal] text-center mt-4 w-[107px] md:w-[209px]">
                       {builder.name}
                     </p>

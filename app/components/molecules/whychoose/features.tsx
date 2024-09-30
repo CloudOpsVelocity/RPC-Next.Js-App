@@ -4,7 +4,7 @@ import React from "react";
 
 export default function Features() {
   return data.map((item, index) => (
-    <Card key={index} index={index} {...item} />
+    <Card key={"Features" + item.name} index={index} {...item} />
   ));
 }
 type Props = {

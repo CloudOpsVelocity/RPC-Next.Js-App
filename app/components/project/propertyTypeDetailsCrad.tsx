@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from "react";
 import { FlooringIcon, FloorsIcon, TowerIcon } from "../../images/commonSvgs";
 import { projectprops, propertyDetailsTypes } from "../../data/projectDetails";
@@ -11,7 +12,7 @@ import {
 import Image from "next/image";
 import { useAtom, useSetAtom } from "jotai";
 import { currentPhaseAtom, propCgIdAtom } from "@/app/store/vewfloor";
-import { formatCurrency } from "@/app/utils/numbers";
+import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
 import { useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
 import { floorPlansArray, selectedFloorAtom } from "@/app/store/floor";
 import { parseUnits } from "@/app/utils/unitparser";
@@ -36,23 +37,23 @@ type Props = {
   phase: number;
   isPartialData: boolean;
 };
-const getPropId = (key: string) => {
+export const getPropId = (key: string) => {
   switch (key) {
     case "apt":
       return projectprops.apartment;
-      break;
+
     case "plot":
       return projectprops.plot;
-      break;
+
     case "rowHouse":
       return projectprops.rowHouse;
-      break;
+
     case "villa":
       return projectprops.villa;
-      break;
+
     case "vlmt":
       return projectprops.villament;
-      break;
+
     default:
       return 35;
   }
@@ -112,42 +113,41 @@ export default function PropertyTypeDetailsCrad({
         } else {
           return apartmentCardImg;
         }
-        break;
+
       case "plot":
         if (type == "name") {
           return "Plot";
         } else {
           return plotCardImg;
         }
-        break;
+
       case "rowHouse":
         if (type == "name") {
           return "Rowhouse";
         } else {
           return rowhouseCardImg;
         }
-        break;
+
       case "villa":
         if (type == "name") {
           return "Villa";
         } else {
           return villaCardImg;
         }
-        break;
+
       case "vlmt":
         if (type == "name") {
           return "Villament";
         } else {
           return villamentCardImg;
         }
-        break;
     }
   };
   const plotCounts =
     propertyType === "plot" && projectUnitsData && countPlots(projectUnitsData);
   return (
     <div
-      className="flex  justify-between items-start h-[174px]  sm:h-[227px] w-[100%] max-w-[359px] lg:max-w-[510px] rounded-[24px] shadow-md pr-[1%] pl-[1%] mt-[70px] bg-gradient-to-l from-[#EFF5FF] /50 to-[#F2FAFF]/50 mb-[2%] cursor-pointer"
+      className="flex  justify-between items-start h-[174px]  sm:h-[227px] w-[100%] sm:max-w-[359px] lg:max-w-[510px] rounded-[24px] shadow-md pr-[1%] pl-[1%] mt-[70px] bg-gradient-to-l from-[#EFF5FF] /50 to-[#F2FAFF]/50 mb-[2%] cursor-pointer"
       onClick={() =>
         isPartialData
           ? scrollToTopic("floorPlans")
@@ -177,7 +177,10 @@ export default function PropertyTypeDetailsCrad({
             )}
             <p className="text-[12px] lg:text-[20px] text-[#2A4C70] font-[500] flex justify-start items-start  ">
               <FlooringIcon className="w-[16px] h-[16px] lg:w-[24px] lg:h-[24px]" />
-              <span className="mr-[6px] ml-[6px]">{cg?.unitCount} </span> Units
+              <span className="mr-[6px] ml-[6px]">
+                {cg ? formatNumberWithSuffix(cg.unitCount) : ""}{" "}
+              </span>{" "}
+              Units
             </p>
             {propertyType === "rowHouse" || propertyType === "villa" ? (
               <p className="text-[12px] lg:text-[20px] text-[#2A4C70] font-[500] flex justify-start items-start  ">
@@ -192,25 +195,25 @@ export default function PropertyTypeDetailsCrad({
             )}
           </div>
 
-          <button className="text-[11px] lg:text-[18px] inline-flex max-w-fit justify-center items-center gap-2.5 px-2 py-1 mb-[2%] cursor-pointer  rounded border-[0.8px] border-solid border-[#0073C6] bg-[#fff] text-[#0073C6]  not-italic font-semibold leading-[normal]">
+          <button className="text-[12px] lg:text-[18px] inline-flex max-w-fit justify-center items-center gap-2.5 px-2 py-1 mb-[2%] cursor-pointer  rounded border-[0.8px] border-solid border-[#0073C6] bg-[#fff] text-[#0073C6]  not-italic font-semibold leading-[normal]">
             View Floor Plans
           </button>
         </div>
       </div>
       <div className="rightSection pt-3 flex flex-col w-full pr-2 sm:pr-0">
-        <p className="text-[#242424] text-[14px]   md:text-xl not-italic font-semibold leading-[normal] ml-[10px] text-right">
+        <h3 className="text-[#242424] text-[14px]   md:text-xl not-italic font-semibold leading-[normal] ml-[10px] text-right">
           {propName(propertyType, "name")}
-        </p>
-        <p className="text-[14px] text-right lg:text-[22px] text-[#148B16]  not-italic font-bold leading-[normal] mt-2">
+        </h3>
+        <h4 className="text-[14px] text-right lg:text-[22px] text-[#148B16]  not-italic font-bold leading-[normal] mt-2">
           {cg.minPrice && cg.maxPrice
             ? `${formatCurrency(cg?.minPrice)} - ${formatCurrency(
                 cg?.maxPrice
               )}`
             : "Coming Soon"}
-        </p>
-        <p className="text-[12px] lg:text-lg text-wrap text-[#242424] text-right  italic font-medium leading-[normal]">
-          ₹ {cg?.basePrice} Base Price/ sq.ft
-        </p>
+        </h4>
+        <h5 className="text-[12px] sm:text-[16px] xl:text-lg text-wrap text-[#242424] text-right  italic font-medium leading-[normal]">
+          {formatCurrency(cg?.basePrice)} Base Price/ sq.ft
+        </h5>
         <p className="text-[14px] sm:text-[18px] xl:text-[22px]  text-right text-[#4D6677]  not-italic font-semibold leading-[normal] capitalize mt-3 ">
           Unit types : <br />{" "}
           {propertyType !== "plot" ? (
@@ -222,7 +225,7 @@ export default function PropertyTypeDetailsCrad({
             >
               {parseUnits(cg?.unitTypes, propertyType).map(
                 (unitType, index, array) => (
-                  <React.Fragment key={index}>
+                  <React.Fragment key={`unitType_${unitType}`}>
                     {unitType}
                     {index < array.length - 1 && ", "}
                     {index === 1 && <br />}

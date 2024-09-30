@@ -4,30 +4,50 @@ import MainHeading from "../heading";
 import SideTabs from "./Sidetabs";
 import CardCarousel from "./Card/CardCarousel";
 
-type Props = { data: any };
+type Props = { data: any; shortIds: any };
 
-export default function HandPickedProjects({ data }: Props) {
+export default function HandPickedProjects({ data, shortIds }: Props) {
   const [active, setActive] = React.useState(0);
+  const url =
+    active == 0
+      ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/search?projStatus=108`
+      : active == 1
+      ? ` ${process.env.NEXT_PUBLIC_BACKEND_URL}/search?projStatus=106 `
+      : `${process.env.NEXT_PUBLIC_BACKEND_URL}/search?projStatus=107`;
+
   return (
-    <div className="w-[90%] m-auto mt-[3%] h-[730px] sm:h-[782px] shrink-0 bg-gradient-to-r from-[#DAE6F1] via-[#DAE6F1] to-[#A7D0F5] pt-[3%] pl-[1.5%]">
-      <MainHeading title="Handpicked Projects" content="Loreum Ipsum" />
-      <div className="flex mt-2 sm:mt-10  sm:gap-6 flex-wrap">
-        <div>
-          <SideTabs active={active} setActive={setActive} />
-        </div>
-        <div className="max-w-[1400px]">
-          <CardCarousel
-            data={data[config[active as keyof typeof config]]}
-            active={active}
+    <div className="w-full mt-[40px] sm:mt-[80px] min-h-[530px] sm:min-h-[582px] flex justify-center items-center shrink-0 bg-gradient-to-r from-[#DAE6F1] via-[#DAE6F1] to-[#A7D0F5]">
+      <div className=" w-[95%]">
+        <div className="flex flex-row justify-between  items-center ">
+          <MainHeading
+            title="Handpicked Projects"
+            content="Discover Your Dream Home with Handpicked Projects – Where Quality Meets Elegance"
           />
+          <a
+            className="text-[#0073C6] text-nowrap font-[Montserrat] text-[14px] sm:text-[18px] xl:text-[20px] not-italic font-bold leading-[normal]"
+            href={url}
+            target="_blank"
+          >
+            View all
+          </a>
+        </div>
+
+        <div className=" w-full flex flex-col xl:flex-row justify-center items-start mt-2 xl:mt-10 flex-nowrap sm:gap-6 ">
+          <SideTabs active={active} setActive={setActive} />
+
+          <div className=" max-w-[600px] sm:max-w-[1466px] mt-[16px] sm:mt-0 ">
+            <CardCarousel
+              data={data?.featured?.filter(
+                (each: any) => each.projstatus == config[active]
+              )}
+              active={active}
+              shortIds={shortIds}
+            />
+          </div>
         </div>
       </div>
     </div>
   );
 }
 
-const config = {
-  0: "New Launch",
-  1: "On Going",
-  2: "Completed",
-};
+const config = ["New Launch", "On Going", "Completed"];

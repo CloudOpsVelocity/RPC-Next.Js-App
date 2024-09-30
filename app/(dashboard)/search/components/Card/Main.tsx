@@ -57,6 +57,7 @@ const MainBox = ({ data, refetch, index, mutate }: Props) => {
     compareAdded,
     shortListed,
   } = data;
+  console.log(data)
   const [state, setState] = useState({
     compareAdded: compareAdded === "Y" ? true : false,
     shortListed: shortListed === "Y" ? true : false,
@@ -98,19 +99,24 @@ const MainBox = ({ data, refetch, index, mutate }: Props) => {
     Sh: state.shortListed,
   };
   const onClickRedirect = (projEncId: string) => {
-    window.open(`/abc/karnataka/banglore/${projEncId}`, "_blank");
+    if(data.type == "proj"){
+      window.open(`/abc/karnataka/banglore/${projEncId}`, "_blank");
+    }else{
+      window.open(`/listing/banglore/${projEncId}`, "_blank");
+    }
   };
-  const isMobile = useMediaQuery("(max-width: 601px)");
+
+  const isMobile = useMediaQuery("(max-width: 1600px)");
 
   return (
-    <div className="h-auto w-full m-2 self-stretch rounded border shadow-[0px_4px_30px_0px_rgba(74,82,113,0.20)] border-solid border-[#A4B8D4]">
+    <div className="h-auto max-w-full xl:w-full m-2 ml-0 mr-0 self-stretch rounded border shadow-[0px_4px_30px_0px_rgba(74,82,113,0.20)] border-solid border-[#A4B8D4]">
       <div
         onClick={() => onClickRedirect(reqId)}
-        className="flex flex-col xl:flex-row justify-between w-full"
+        className="flex flex-col xl:flex-row justify-between w-full  xl:max-w-full"
       >
         <LeftSection src={coverUrl ?? coverImage} rera={rerastatus} />
         {isMobile && (
-          <div className="flex   flex-col justify-between">
+          <div className="flex   flex-col  justify-between">
             <TopRightSection
               data={newData}
               type={type}
@@ -137,6 +143,7 @@ const MainBox = ({ data, refetch, index, mutate }: Props) => {
       <CardDownSection
         a={data.agentListing}
         o={data.ownerListing}
+        B={data.builderListing}
         type={type}
         reqId={reqId}
         {...data}

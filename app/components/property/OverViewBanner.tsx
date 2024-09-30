@@ -15,8 +15,8 @@ import { calculatePerSqPrice } from "@/app/utils/price";
 import ListItem from "./pricingbreakup";
 import { usePricingPop } from "@/app/hooks/property/usePricingPop";
 import { useMediaQuery } from "@mantine/hooks";
-import { formatNumberIndian } from "./pricingbreakup/ListItem";
 import { parseOtherCharge } from "./pricingbreakup/PriceBreakup";
+import { get_posted_by } from "@/app/utils/dyanamic/projects";
 export default function PropertyOverviewBanner({
   price,
   propTypeName,
@@ -62,36 +62,34 @@ export default function PropertyOverviewBanner({
   );
   const isMobile = useMediaQuery("(max-width: 601px)");
   return (
-    <>
       <div className="flex justify-start items-center w-full flex-col md:flex-row bg-[#f0f9ff] scroll-mt-40">
-        <PriceBag className="w-[100px] h-[120px] md:w-[237px] md:h-[263px] mt-2 sm:mt-0" />
+        <PriceBag className="w-[100px] h-[120px]  sm:w-[151px] xl:w-[237px]  sm:h-[169px] xl:h-[263px] mt-2 sm:mt-0" />
 
         <div className="flex justify-center sm:justify-between items-center w-[100%] flex-row sm:ml-[3%] p-[2%] flex-wrap">
           <div className="grid place-items-center md:block">
-            <p className="text-[#212C33] sm:text-[24px] lg:text-[34px] font-[600]  md:text-start text-center">
+            <p className="text-[#212C33] sm:text-[24px] xl:text-[34px] font-[600]  md:text-start text-center">
               {" Total "}
-              {cg === "S" ? "Selling" : "Rent"} Price
+              {cg === "S" ? "Selling" : "Rent"} Price <span className="sm:text-[16px] xl:text-[24px]">(Including Other Charges)</span>
             </p>
-            <p className="text-[#001F35] sm:text-[24px] md:text-[32px] lg:text-[40px] whitespace-nowrap font-[700] mt-1">
-              <span className="text-[#001F35] sm:text-[24px] md:text-[32px] lg:text-[40px] whitespace-nowrap font-[700] mt-1">
+            <p className="text-[#001F35] sm:text-[24px]  xl:text-[36px] whitespace-nowrap font-[700] mt-1">
+              <span className="text-[#001F35] sm:text-[24px]  xl:text-[36px] whitespace-nowrap font-[700] mt-1">
                 {cg === "S"
                   ? formatCurrency(
                       price + parseOtherCharge(otherPrice?.otherCharge) + sum
                     )
-                  : formatNumberIndian(
+                  : formatCurrency(
                       price + parseOtherCharge(otherPrice?.otherCharge) + sum
                     )}
               </span>
             </p>
             <Button
               title="Request  Callback"
-              buttonClass="  text-[#FFF] text-[12px] sm:text-[28px] font-[600] bg-[#0073C6] hidden md:block  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px]  mt-3"
+              buttonClass="  text-[#FFF] text-[12px] sm:text-[22px] xl:text-[28px] font-[600] bg-[#0073C6] hidden md:block  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px]  mt-3"
               onChange={() =>
                 open({
-                  title: `${bhkName ?? ""} ${propTypeName} For
-          ${cg === "S" ? " Sell" : " Rent"} In ${ltName}`,
+                  title: `${bhkName ?? ""} ${propTypeName} For ${cg === "S" ? " Sell" : " Rent"} In ${ltName}`,
                   modal_type: "PROPERTY_REQ_CALLBACK",
-                  postedByName,
+                  postedByName: get_posted_by(postedByType),
                   postedId: postedById,
                   reqId: propIdEnc,
                   source: "propBanner",
@@ -104,7 +102,7 @@ export default function PropertyOverviewBanner({
               {otherPrice && (
                 <button
                   onClick={toggle}
-                  className="  text-[#FFF] text-[12px] sm:text-[28px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px] "
+                  className="  text-[#FFF] text-[12px] sm:text-[24px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px] "
                 >
                   {collapsed ? "Hide Price Break Up" : "Show Price Break Up"}{" "}
                   {/*   {config.priceIcon} */}
@@ -139,7 +137,7 @@ export default function PropertyOverviewBanner({
                 />
                 <button
                   onClick={toggle}
-                  className="  text-[#FFF] text-[12px] sm:text-[28px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px]  mt-3"
+                  className="  text-[#FFF] text-[12px] sm:text-[24px] font-[600] bg-[#0073C6]  rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[8px]  mt-3"
                 >
                   {collapsed ? "Hide Price Break Up" : "Show Price Break Up"}{" "}
                   {config.priceIcon}
@@ -159,7 +157,6 @@ export default function PropertyOverviewBanner({
 
         <RequestCallBackModal />
       </div>
-    </>
   );
 }
 

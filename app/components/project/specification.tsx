@@ -38,12 +38,12 @@ export default function Specifications({
 
   return (
     <div
-      className="w-[95%] sm:w-[90%] scroll-mt-[180px] mx-auto mb-[3%]"
+      className="w-[95%] sm:w-[90%] scroll-mt-[180px] mx-auto mb-[3%] sm:mb-0 pt-screen-spacing"
       id="specifications"
     >
       <div className="bg-white rounded-lg shadow-md overflow-hidden ">
         <div className="flex-1 bg-gradient-to-tr from-blue-100 p-4 sm:p-8">
-          <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[10px] xl:mb-[24px] capitalize">
+          <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[10px] xl:mb-[6px] capitalize">
             Specifications of
             <span className="!text-[#148B16] font-bold "> {projName}</span>
           </h2>
@@ -59,10 +59,10 @@ export default function Specifications({
               const specSvg = specificationsList?.get(spec?.specId)?.url;
 
               return (
-                <a
-                  key={index}
+                <button
+                  key={spec.specName}
                   className={clsx(
-                    `px-2 py-1 sm:px-5 sm:py-2 text-[12px] sm:text-[20px] flex gap-2 bg-[#fafafa] items-center cursor-pointer rounded-[10px] border-[0.5px] border-solid border-[#76AEFF] shadow-none text-[#233] font-[500]`,
+                    `px-2 py-1 sm:px-5 sm:py-2 text-[12px] sm:text-[15px] xl:text-[20px] flex gap-2 bg-[#fafafa] items-center cursor-pointer rounded-[10px] border-[0.5px] border-solid border-[#76AEFF] shadow-none text-[#233] font-[500]`,
                     isSelected &&
                       "shadow-md !bg-[#007CC2] !text-white font-[700]"
                   )}
@@ -73,7 +73,7 @@ export default function Specifications({
                       className: isSelected ? "svg-selected" : "svg-default",
                     })}
                   {spec.specName}
-                </a>
+                </button>
               );
             })}
           </div>
@@ -96,13 +96,13 @@ export default function Specifications({
             >
               {data?.map((spec, index) => (
                 <div
-                  key={index}
+                  key={spec.specName}
                   // @ts-ignore
                   id={spec.specName.toLowerCase()}
                   className="px-[2%] mt-5 sm:mt-10 w-full items-start justify-start flex-col"
                 >
                   <span
-                    className={` flex items-center gap-2 text-[#242424]  w-full sm:min-w-[10%] sm:max-w-[20%]  sm:text-[24px]  font-[600] py-2 px-2 rounded-xl  ${
+                    className={` flex items-center gap-2 text-[#242424]  w-full sm:min-w-[10%] sm:max-w-[20%]  sm:text-[18px] xl:text-[24px]  font-[600] py-2 px-2 rounded-xl  ${
                       selectedSpecIndex == index
                         ? "specification"
                         : "specificationRemove"
@@ -112,13 +112,12 @@ export default function Specifications({
                     <span className="">{spec.specName}</span>
                   </span>
                   <div>
-                    <ul className="list-disc ml-8 grid gap-2 my-2 text-[#233333] text-[12px] sm:text-[20px] font-[500] ">
-                      {spec.values.map(
-                        (value, valueIndex) =>
+                    <ul className="list-disc ml-8 grid gap-2 my-2 text-[#233333] text-[12px] sm:text-[16px] xl:text-[20px] font-[500] ">
+                      {spec.values.map((value, valueIndex) =>
                           value && (
                             <li
                               className="break-words max-w-full"
-                              key={valueIndex}
+                              key={value}
                             >
                               {value}
                             </li>

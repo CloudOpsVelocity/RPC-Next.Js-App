@@ -68,7 +68,7 @@ export default function Reviews({
               withControls={isMobile ? true : data?.data.length > 3}
             >
               {data?.data?.map((eachData: any, i: number) => (
-                <Carousel.Slide key={i} miw={isMobile ? "auto" : 487}>
+                <Carousel.Slide key={`review_${eachData.name[i]}`} miw={isMobile ? "auto" : 487}>
                   <Review {...eachData} />
                 </Carousel.Slide>
               ))}

@@ -33,11 +33,12 @@ export default function FaqWithBg({ data, projName }: FaqWithBgProps) {
   return (
     <div
       className={data?.length > 0 ? classes.wrapper : "!w-[95%] !md:w-[90%]   "}
+      id="frequently-asked-questions"
     >
       <div className="flex justify-center items-center text-center !w-[100%] !md:w-[90%] relative">
         {data?.length > 0 && (
           <>
-            <div className="hidden sm:block absolute   left-[2%] sm:left-[16%]  sm:mr-[-70px] bottom-[20px] w-[168px] h-[74px] rounded-[50%] blur-[29.5px] bg-[#0093ff4d] "></div>
+            <div className="hidden sm:block absolute   left-[2%] sm:left-[16%]  sm:mr-[-70px] bottom-[20px] w-[168px] h-[74px] rounded-[50%] blur-[29.5px] bg-[#0093ff4d] " />
             <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[28px] xl:mb-[24px] capitalize ">
               Frequently Asked Questions of{" "}
               <span className="text-[#148B16] font-[700]  ">{projName}</span>{" "}
@@ -45,7 +46,7 @@ export default function FaqWithBg({ data, projName }: FaqWithBgProps) {
           </>
         )}
       </div>
-      <div className="mb-4 ">
+      <div className={`${data?.length > 0 ? "mb-4" : ""}`}>
         {data?.map((faq, index) => {
           return (
             faq.faqAnswer &&
@@ -60,7 +61,7 @@ export default function FaqWithBg({ data, projName }: FaqWithBgProps) {
               <FaqCard
                 faqQuestion={faq.faqQuestion}
                 faqAnswer={faq.faqAnswer}
-                key={index}
+                key={Math.random()}
                 last={index === data.length - 1}
               />
             ))
@@ -119,8 +120,9 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
   const isMobile = useMediaQuery(`(max-width: 601px)`);
   return (
     <form
-      className="max-w-[100%] mx-auto sm:my-8 sm:mt-[5%] rounded-lg space-y-2"
+      className="max-w-[100%] mx-auto mt-6 sm:mt-[50px] sm:pt-[12px] rounded-lg space-y-2"
       onSubmit={onSubmit(formSubmit)}
+      id="have-any-question"
     >
       <h2 className="inline-flex items-center gap-3 p-2 rounded-2xl bg-[#ecf7ff] sm:mb-7">
         <svg
@@ -140,9 +142,9 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
           Have any Question? Ask Here 👇
         </span>
       </h2>
-      <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[10px] xl:mb-[24px] capitalize ">
-        Ask your question related to
-        <span className="!text-green-600"> {projName} Project!</span>
+      <h2 className="text-[16px] sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[10px] xl:mb-[24px] capitalize ">
+        Ask your question related to Project
+        <span className="!text-green-600"> {projName}!</span>
       </h2>
 
       <div className=" gap-4">
@@ -165,6 +167,7 @@ const AddQnaForm = ({ projName }: { projName: string }) => {
             }
             classNames={{
               input: StepCscs.textAreaInput,
+              error: "!text-[12px] !sm:text-[18px]",
             }}
           />
         </div>
@@ -198,13 +201,13 @@ const FaqCard = ({
 }) => {
   return (
     <div>
-      <h4 className=" text-[#242424] sm:text-[20px] xl:text-[24px] not-italic font-medium sm:font-bold leading-[normal] sm:mb-2 xl:mb-4 capitalize">
+      <h4 className=" text-[#242424] sm:text-[20px] xl:text-[24px] not-italic font-medium sm:font-bold leading-[normal] sm:mb-0 capitalize">
         {faqQuestion}
       </h4>
       <FaqReadMore text={faqAnswer} title={faqQuestion} />
-      {!last && (
-        <hr className="bg-[#00000080] my-4 sm:my-[25px] xl:my-[35px] h-[2px]" />
-      )}
+      {/*  {!last && ( */}
+      <hr className="bg-[#00000080] my-4 sm:my-[18px] h-[2px]" />
+      {/*   )} */}
     </div>
   );
 };
@@ -248,6 +251,7 @@ const Success = ({ text, opened, onClose, projName }: any) => {
   const ComponentTorender =
     renderComponent[opened.type as RenderComponentKeys] || null;
   const isMobile = useMediaQuery(`(max-width: 750px)`);
+  const isTab = useMediaQuery(`(max-width: 1600px)`);
   useEffect(() => {
     const timer = setTimeout(() => {
       onClose();
@@ -270,7 +274,7 @@ const Success = ({ text, opened, onClose, projName }: any) => {
       onClose={onClose}
       centered
       title="Add Rating"
-      size={isMobile ? "100%" : "auto"}
+      size={isMobile ? "100%" : isTab ? "35%" : "auto"}
     >
       <Close close={onClose} className="absolute top-2 right-2 z-50" />
 

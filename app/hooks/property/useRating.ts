@@ -1,4 +1,3 @@
-import { useParams } from "next/navigation";
 import { useQuery } from "react-query";
 
 export default function usePropRatings({ slug }: { slug: string }) {

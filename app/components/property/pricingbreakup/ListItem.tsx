@@ -15,7 +15,7 @@ export default function ListItem({ label, value, className }: Props) {
         className
       )}
     >
-      <div className=" flex items-center   text-[#202020] text-[14px] xl:text-xl not-italic font-medium leading-[normal] relative pl-5">
+      <div className=" flex items-center   text-[#202020] text-[14px] xl:text-xl not-italic font-medium leading-[normal] relative pl-5 capitalize">
         <span className="text-center  absolute left-0 -top-[30px] xl:-top-[25px] font-medium text-5xl">
           .
         </span>
@@ -23,7 +23,7 @@ export default function ListItem({ label, value, className }: Props) {
         {label}
       </div>{" "}
       <span className="text-[#242424] text-right text-[14px] xl:text-xl not-italic font-semibold">
-        {typeof value === "string" ? value : `₹ ${formatNumberIndian(value)}`}
+        {typeof value === "string" ? value : `₹ ${formatCurrency(value)}`}
       </span>
     </li>
   );
@@ -33,32 +33,37 @@ const config = {
   hidePriceItems: ["Lifetime", "As Per Actuals", "Already Included"],
 };
 
-export function formatNumberIndian(value: number | string): string {
-  if (typeof value === "string") {
-    const numberValue = parseFloat(value);
+function formatCurrency(input: number | string): string {
+  // Convert input to a number if it is a string
+  const value = typeof input === "string" ? parseFloat(input) : input;
 
-    if (isNaN(numberValue)) {
-      return value;
+  // Check for invalid numbers
+  if (isNaN(value)) return "Invalid Number";
+
+  // Helper function to format numbers with commas
+  const formatNumberWithCommas = (num: number): string => {
+    const numberString = num.toFixed(2); // Convert to string with 2 decimal places
+    const [integerPart, decimalPart] = numberString.split(".");
+
+    let formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+    if (decimalPart === "00") {
+      return formattedInteger;
     }
 
-    value = numberValue;
+    return `${formattedInteger}.${decimalPart}`;
+  };
+
+  // Handle large numbers with suffixes
+  if (value >= 10000000) {
+    const croreValue = (value / 10000000).toFixed(2);
+    const formattedValue = parseFloat(croreValue); // Convert to number to remove trailing zeros
+    return `₹ ${formatNumberWithCommas(formattedValue)} Cr`;
+  } else if (value >= 100000) {
+    const lakhValue = (value / 100000).toFixed(2);
+    const formattedValue = parseFloat(lakhValue); // Convert to number to remove trailing zeros
+    return `₹ ${formatNumberWithCommas(formattedValue)} Lac`;
+  } else {
+    return `₹ ${formatNumberWithCommas(value)}`;
   }
-
-  const numberValue: number = value as number;
-
-  if (isNaN(numberValue)) {
-    return "Invalid Number";
-  }
-
-  const numberString = numberValue.toString();
-  const [integerPart, decimalPart] = numberString.split(".");
-
-  const lastThree = integerPart.slice(-3);
-  const otherParts = integerPart.slice(0, -3);
-
-  const formattedInteger =
-    otherParts.replace(/\B(?=(\d{2})+(?!\d))/g, ",") +
-    (lastThree ? `,${lastThree}` : "");
-
-  return decimalPart ? `${formattedInteger}.${decimalPart}` : formattedInteger;
 }

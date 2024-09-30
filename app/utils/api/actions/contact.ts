@@ -1,12 +1,4 @@
 import axios from "axios";
-type Props = {
-  name: string;
-  email: string;
-  mobile: number;
-  isProjContact: "Y" | "N";
-  projIdEnc: string;
-  src: string;
-};
 
 export const addContact = async (data: any) => {
   console.log(data);
@@ -61,19 +53,7 @@ export const sendContact = async (data: any) => {
     console.error(error);
   }
 };
-function processConType(conType: string): string {
-  const conTypeMapping: { [key in string]: string } = {
-    PROJECT_REQ_CALLBACK: "callback",
-    PROPERTY_REQ_CALLBACK: "callback",
-    REQ_QUOTE: "priceQuote",
-  };
 
-  if (!conTypeMapping[conType]) {
-    throw new Error(`Invalid conType provided: ${conType}`);
-  }
-
-  return `${conType},${conTypeMapping[conType]}`;
-}
 const sourceMap = new Map([
   ["projBanner", "projDetails"],
 

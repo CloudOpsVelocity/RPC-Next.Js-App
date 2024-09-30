@@ -28,7 +28,6 @@ export default function useSearch({
         label: location.name,
         value: String(location.id),
       }));
-    } else {
     }
 
     return transformedData;

@@ -27,13 +27,30 @@ import { getData } from "@/app/utils/api/search";
 import ClearAll from "../../ClearAll";
 import Close from "@/app/components/project/button/close";
 import { formatBudgetValue } from "../../buget";
+import useQsearch from "@/app/hooks/search/useQsearch";
+import { toFormattedString } from "../../buget/budget";
 
 const MobileFilter = ({ close }: any) => {
   const [current, setCurrent] = useState("Project Status");
   const propKeys = [35, 33, 31, 34, 32];
   const [localitySearch, setSearchLocality] = useDebouncedState("w", 500);
   const [builderSearch, setBuilderSearch] = useDebouncedState("w", 500);
-
+  const {
+    data: searchData,
+    isLoading,
+    handleResetQuery,
+    onSearchChange,
+    debounced,
+    name,
+  } = useQsearch();
+  const {
+    localities,
+    builders,
+    cities,
+    projects,
+    listing: listings,
+    projectListing,
+  } = searchData;
   const { data } = useQuery({
     queryFn: () => getData(localitySearch, "loc"),
     queryKey: ["search" + "loc" + localitySearch],
@@ -79,16 +96,16 @@ const MobileFilter = ({ close }: any) => {
         )
       : searchDetails;
   return (
-    <div className=" flex justify-start items-start w-[70vw] top-[160px] left-[70%]">
-      <div className="w-[50%] flex shadow-md justify-start items-center flex-col ">
+    <div className=" flex justify-start items-start w-full sm:left-[70%]">
+      <div className="w-[100%] hidden sm:flex shadow-md justify-start items-center flex-col ">
         <p className=" text-[#000] text-nowrap text-[14px] bg-[#F4F4F4] flex justify-start px-6  items-center font-[500] py-[3.5%] w-full ">
           Quick Filters
         </p>
         <div className="w-full ">
-          {filteredSearchDetails.map((eachItem, index) => {
+          {filteredSearchDetails.map((eachItem) => {
             return (
               <Button
-                key={index}
+                key={eachItem}
                 title={eachItem}
                 onChange={() => scrollWhereIsSelected(eachItem)}
                 buttonClass={` whitespace-nowrap w-full text-[12px] flex flex-row-reverse  justify-end pl-[10%] items-center border-solid border-b-[0.5px] items-start  px-4 py-4 h-[31px] gap-[8px] ${
@@ -111,22 +128,78 @@ const MobileFilter = ({ close }: any) => {
         {/* Right Side Fields Con */}
         <ScrollArea
           h={"80vh"}
-          className="w-full pt-[1%] pl-[2%]    "
+          className="w-full pt-[1%] sm:pl-[2%]"
           viewportRef={viewport}
           miw={"full"}
           p={20}
         >
           <h3
-            className=" text-[#202020] mb-[4%] text-[14px] font-[500] "
+            className=" text-[#202020] mb-[4%] text-[14px] font-[600] "
+            id="Project Status"
+          >
+            Search By Locality, Projects or Listings
+          </h3>
+          <MultiSelect
+            searchable
+            placeholder="Search"
+            data={[
+              {
+                group: "Locality",
+                items:
+                  localities?.map((item: any, i: number) => {
+                    return { value: `${item.id}+${i}`, label: item.name };
+                  }) ?? [],
+              },
+              {
+                group: "Projects",
+                items:
+                  projects?.map((item: any, i: number) => {
+                    return { value: `${item.id}+${i}`, label: item.name };
+                  }) ?? [],
+              },
+              {
+                group: "Listings",
+                items:
+                  listings?.map((item: any, i: number) => {
+                    return { value: `${item.id}+${i}`, label: item.name };
+                  }) ?? [],
+              },
+              {
+                group: "Project Listings",
+                items:
+                  projectListing?.map((item: any, i: number) => {
+                    return {
+                      value: `${item.id}+${item.type}`,
+                      label: item.name,
+                    };
+                  }) ?? [],
+              },
+              {
+                group: "Builders",
+                items:
+                  builders?.map((item: any, i: number) => {
+                    return { value: `${item.id}+${i}`, label: item.name };
+                  }) ?? [],
+              },
+            ]}
+            onSearchChange={(e) => onSearchChange(e)}
+            onChange={(e) => alert("workign")}
+            searchValue={name ?? ""}
+            mb={"10px"}
+            withScrollArea={false}
+            styles={{ dropdown: { maxHeight: 200, overflowY: "auto" } }}
+          />
+          <h3
+            className=" text-[#202020] mb-[4%] text-[14px] font-[600] "
             id="Project Status"
           >
             Property Status
           </h3>
           <div className="flex  mb-[3%] justify-start items-start gap-[4%] flex-wrap ">
-            {SEARCH_FILTER_DATA.projectstatus.map((eachStatus, index) => {
+            {SEARCH_FILTER_DATA.projectstatus.map((eachStatus) => {
               return (
                 <Radio
-                  key={index}
+                  key={eachStatus.cid}
                   checked={eachStatus.cid == filters.current}
                   value={eachStatus.cid}
                   iconColor="dark.8"
@@ -141,7 +214,7 @@ const MobileFilter = ({ close }: any) => {
           </div>
 
           <h3
-            className=" text-[#202020] mb-[4%] text-[14px] font-[500] "
+            className=" text-[#202020] mb-[4%] text-[14px] font-[600] "
             id="Locality"
           >
             Locality
@@ -152,8 +225,8 @@ const MobileFilter = ({ close }: any) => {
               {filters.locality.map((eachLocality, index) => {
                 return (
                   <div
-                    key={index}
-                    className="capitalize flex justify-center items-center p-[1%] r shadow-[0px_4px_10px_0px_rgba(202,233,255,0.30)]   border rounded-[5px] border-solid border-[#92B2C8]"
+                    key={eachLocality}
+                    className="capitalize flex justify-center items-center text-[12px] sm:text-[16px] sm:p-[1%]  shadow-[0px_4px_10px_0px_rgba(202,233,255,0.30)]   border rounded-[5px] border-solid border-[#92B2C8]"
                   >
                     {eachLocality.split("+")[0]}
                     <span
@@ -188,16 +261,19 @@ const MobileFilter = ({ close }: any) => {
           />
 
           <h3
-            className=" text-[#202020] mb-[4%] text-[14px] font-[500] mt-[6%] flex items-center gap-[5px] "
+            className=" text-[#202020] mb-[4%] text-[14px] font-[600] mt-[6%] flex items-center gap-[5px] "
             id="Property Type"
           >
-            Property Type {notificationIcon}
+            Property Type {/* {notificationIcon} */}
           </h3>
           <div className="flex  mb-[3%] justify-start items-start flex-wrap gap-[4%]">
             {propKeys.map((keyName, i) => {
+              if (keyName === 32 && filters.unitTypes.length > 0) {
+                return null;
+              }
               return (
                 <Radio
-                  key={i}
+                  key={keyName}
                   iconColor="dark.8"
                   color="green"
                   label={propertyDetailsTypes?.get(keyName)?.name}
@@ -220,10 +296,10 @@ const MobileFilter = ({ close }: any) => {
           {filters?.propTypes != projectprops.plot && (
             <React.Fragment>
               <h3
-                className=" text-[#202020] mb-[4%] text-[14px] font-[500] mt-[3%] "
+                className=" text-[#202020] mb-[4%] text-[14px] font-[600] mt-[3%] "
                 id="Unit Type"
               >
-                Unit Type
+                BHK Type
               </h3>
               <div className="flex  mb-[3%] justify-start items-start gap-[4%] flex-wrap">
                 {SEARCH_FILTER_DATA.bhkDetails.map((eachStatus, index) => {
@@ -231,7 +307,7 @@ const MobileFilter = ({ close }: any) => {
                     <Checkbox
                       label={eachStatus.title}
                       color="green"
-                      key={index}
+                      key={filters.unitTypes[index]}
                       onClick={() =>
                         handleCheckboxClick("unitTypes", eachStatus.value)
                       }
@@ -245,7 +321,7 @@ const MobileFilter = ({ close }: any) => {
           )}
 
           <h3
-            className=" text-[#202020] mb-[4%] text-[14px] font-[500] mt-[3%] "
+            className=" text-[#202020] mb-[4%] text-[14px] font-[600] mt-[3%] "
             id="Area"
           >
             Area
@@ -267,21 +343,21 @@ const MobileFilter = ({ close }: any) => {
             max={5000}
             value={filters.areaValue}
             onChange={(value) => handleSliderChange("areaValue", value)}
-            style={{ width: "80%" }}
+            style={{ width: "100%" }}
             classNames={{
               markLabel: classes.markLabel,
             }}
           />
 
           <h3
-            className=" text-[#202020] mb-[4%] text-[14px] font-[500] mt-[5%] "
+            className=" text-[#202020] mb-[4%] text-[14px] font-[600] mt-[5%] "
             id="Budget"
           >
             Budget
           </h3>
           <p className="text-[#4D6677] text-[16px] font-[600] mb-[4%] ">
-            ₹ {formatBudgetValue(filters.bugdetValue[0])} - ₹{" "}
-            {formatBudgetValue(filters.bugdetValue[1])}
+          ₹ {toFormattedString(filters.bugdetValue[0])} - ₹{" "}
+          {toFormattedString(filters.bugdetValue[1])} Cr
           </p>
           <RangeSlider
             color="green"
@@ -302,7 +378,7 @@ const MobileFilter = ({ close }: any) => {
           {filters?.propTypes != projectprops.plot && (
             <React.Fragment>
               <h3
-                className=" text-[#202020] mb-[4%] text-[14px] font-[500] mt-[5%] "
+                className=" text-[#202020] mb-[4%] text-[14px] font-[600] mt-[5%] "
                 id="Bath"
               >
                 Bath
@@ -311,8 +387,8 @@ const MobileFilter = ({ close }: any) => {
                 {[...Array(6)].map((x, i) => {
                   return (
                     <Checkbox
-                      key={i}
-                      label={`${i == 5 ? "+5" : i + 1} Bath`}
+                      key={filters.bathRooms[i]}
+                      label={`${i == 5 ? "5+" : i + 1} Bath`}
                       color="green"
                       onClick={() => handleCheckboxClick("bathRooms", i + 1)}
                       checked={filters.bathRooms.includes(i + 1)}
@@ -325,19 +401,30 @@ const MobileFilter = ({ close }: any) => {
           )}
 
           <h3
-            className=" text-[#202020] mb-[4%] text-[14px] font-[500] mt-[3%] "
+            className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[2%] "
             id="Amenities"
           >
             Amenities
           </h3>
-          <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
-            <Checkbox label="Lift" color="green" />
+          <div className="flex  mb-[3%] justify-start items-center gap-[4%] flex-wrap ">
+            {SEARCH_FILTER_DATA.amenities.map((i, ind) => {
+              return (
+                <Checkbox
+                  className="my-2"
+                  key={i.cid}
+                  label={i.constDesc}
+                  color="green"
+                  onClick={() => handleCheckboxClick("amenities", i.cid)}
+                  checked={filters.amenities.includes(i.cid)}
+                />
+              );
+            })}
           </div>
 
           {filters?.propTypes != projectprops.plot && (
             <React.Fragment>
               <h3
-                className=" text-[#202020] mb-[4%] text-[14px] font-[500] mt-[5%] "
+                className=" text-[#202020] mb-[4%] text-[14px] font-[600] mt-[5%] "
                 id="Parking"
               >
                 Parking
@@ -346,7 +433,7 @@ const MobileFilter = ({ close }: any) => {
                 {[...Array(7)].map((x, i) => {
                   return (
                     <Checkbox
-                      key={i}
+                      key={filters.parkings[i]}
                       label={`${i == 6 ? "+6" : i + 1}`}
                       color="green"
                       onClick={() => handleCheckboxClick("parkings", i + 1)}
@@ -360,18 +447,25 @@ const MobileFilter = ({ close }: any) => {
           )}
 
           <h3
-            className=" text-[#202020] mb-[4%] text-[14px] font-[500] mt-[3%] "
+            className=" text-[#202020] mb-[4%] text-[14px] font-[600] mt-[3%] "
             id="RERA"
           >
             RERA
           </h3>
-          <Checkbox
-            label="RERA Verified"
-            color="green"
-            mb={"3%"}
-            onClick={() => handleBooleanCheck()}
-            checked={filters.reraVerified === true}
-          />
+          <div className="flex  mb-[3%] justify-start items-center gap-[4%] flex-wrap ">
+            {SEARCH_FILTER_DATA.rerastatus.map((i, ind) => {
+              return (
+                <Checkbox
+                  className="my-2"
+                  key={i.cid}
+                  label={i.constDesc}
+                  color="green"
+                  onClick={() => handleCheckboxClick("reraVerified", i.cid)}
+                  checked={filters.reraVerified?.includes(i.cid)}
+                />
+              );
+            })}
+          </div>
 
           {/* <h3 className=" text-[#202020] mb-[4%] text-[14px] font-[500] mt-[3%] ">
             Listed By
@@ -383,7 +477,7 @@ const MobileFilter = ({ close }: any) => {
           </div> */}
 
           <h3
-            className=" text-[#202020] mb-[4%] text-[14px] font-[500] mt-[6%]"
+            className=" text-[#202020] mb-[4%] text-[14px] font-[600] mt-[6%]"
             id="Builder"
           >
             Builder
@@ -393,8 +487,8 @@ const MobileFilter = ({ close }: any) => {
               {filters.builderIds.map((eachLocality, index) => {
                 return (
                   <div
-                    key={index}
-                    className="flex justify-center items-center p-[1%] rounded-[10px] border-[#92B2C8] border-solid border-[1px]  "
+                    key={eachLocality}
+                    className="flex justify-center items-center text-[12px] sm:text-[16px]  p-[1%] rounded-[10px] border-[#92B2C8] border-solid border-[1px]  "
                   >
                     {eachLocality.split("+")[0]}
                     <span
@@ -412,7 +506,7 @@ const MobileFilter = ({ close }: any) => {
           <MultiSelect
             classNames={{ pill: classes.pill }}
             label=""
-            placeholder="Search Locality"
+            placeholder="Search Builder"
             data={builderData || []}
             searchable
             nothingFoundMessage={

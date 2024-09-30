@@ -1,8 +1,6 @@
 "use client";
 import Button from "@/app/components/atoms/buttons/variansts";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
-import { NearByDataAtom } from "@/app/store/nearby";
-import { useSetAtom } from "jotai";
 import React from "react";
 
 type Props = {
@@ -19,7 +17,8 @@ export default function ReqBtn({
   builderId,
 }: Props) {
   const [, { open }] = useReqCallPopup();
-  const handleOpen = () => {
+  const handleOpen = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.stopPropagation();
     open({
       modal_type: "PROJECT_REQ_CALLBACK",
       postedByName: builderName,
@@ -30,7 +29,10 @@ export default function ReqBtn({
     });
   };
   return (
-    <Button className="!text-[12px] sm:!text-xl" onClick={handleOpen}>
+    <Button
+      className="!text-[12px] h-[24px] sm:h-auto xl:!text-[14px] !p-[4px] !sm:p-[6px] "
+      onClick={handleOpen}
+    >
       Request Callback
     </Button>
   );

@@ -38,7 +38,6 @@ export default function SharePopup({
   const CopiedUrl = url
     ? url
     : `${process.env.NEXT_PUBLIC_PROJECT_URL}/${pathname}`;
-
   const [opened, { open, close }] = useDisclosure(false);
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
   return (
@@ -105,8 +104,8 @@ export default function SharePopup({
           className
         )}
       >
-        <ShearIcon className="md:w-[26px] md:h-[26px]  h-[24px] w-[42px] " />
-        <span className="hidden  h-4 w-4 xl:h-auto xl:w-full xl:block">
+        <ShearIcon className=" sm:w-[20px] sm:h-[20px]  xl:w-[26px] xl:h-[26px]  h-[24px] w-[42px] " />
+        <span className="hidden  h-4 w-4  sm:h-auto sm:text-[14px] xl:text-[20px]  sm:w-full sm:block">
           {title}
         </span>
       </button>
@@ -170,8 +169,9 @@ const Share = ({ shareUrl }: { shareUrl: string }) => {
           subject={title}
           body="body"
           className="Demo__some-network__share-button"
-          windowHeight={600}
           windowWidth={1200}
+          windowHeight={600}
+          windowPosition="screenCenter"
         >
           {EmailIcon}
           <p className="  text-[12px]  xl:text-[16px] xl:mt-1   ">Mail</p>

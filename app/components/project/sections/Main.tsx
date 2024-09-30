@@ -11,8 +11,14 @@ type Props = {
 export default function MainSection({ partialUnitData, data }: Props) {
   return (
     <div className="mt-6">
-      <InFoCarousel partialUnitData={partialUnitData} />
-      <PartialUnitModal data={data} />
+      <InFoCarousel
+        partialUnitData={{
+          ...partialUnitData,
+          type: data.type,
+          id: data.projIdEnc,
+        }}
+      />
+      {data.type !== "overview" && <PartialUnitModal data={data} />}
     </div>
   );
 }

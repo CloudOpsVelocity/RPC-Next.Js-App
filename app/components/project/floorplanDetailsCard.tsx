@@ -13,6 +13,7 @@ import { useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
 import { setPropertyValues } from "@/app/utils/dyanamic/projects";
 import { ImgNotAvail } from "@/app/data/project";
 import clsx from "clsx";
+import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
 
 type Props = {
   propCgId?: any;
@@ -24,13 +25,13 @@ type Props = {
 
 const FloorplanDetailsCard: React.FC<Props> = ({
   propCgId,
-  // data: { size, start, index },
+  data: { size, start, index },
   projData,
   setValues,
-  data,
+  // data,
   lastIndex,
 }) => {
-  // const data = projData[index];
+  const data = projData[index];
   const [, setImage] = useAtom(selectedFloorAtom);
   const setFloorsArray = useSetAtom(floorPlansArray);
   const mergedData = {
@@ -70,13 +71,13 @@ const FloorplanDetailsCard: React.FC<Props> = ({
           "sm:flex    sm:h-[180px] justify-between py-[18px] px-[25px] pt-[24px] w-full border-[#92B2C8] border-solid border-b-[1px] border-r-[1px] cursor-pointer hidden "
         )}
         onClick={handleCardClick}
-        // style={{
-        //   position: "absolute",
-        //   top: 0,
-        //   left: 0,
-        //   width: "100%",
-        //   transform: `translateY(${start}px)`,
-        // }}
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          transform: `translateY(${start}px)`,
+        }}
       >
         {propCgId != projectprops.plot && (
           <div className="">
@@ -89,7 +90,8 @@ const FloorplanDetailsCard: React.FC<Props> = ({
             </p>
             <p className="gap-[4px] font-[500] text-[12px] sm:text-[14px] xl:text-[16px] text-[#303A42] mb-[20px] flex justify-start items-start">
               <SuperBuildupAreaIcon className="md:h-[32px] md:w-[32px] h-[24px] w-[24px]" />
-              Super Builtup Area: {mergedData.superBuildupArea} sq.ft
+              Super Builtup Area:{" "}
+              {formatNumberWithSuffix(mergedData.superBuildupArea)} sq.ft
             </p>
             <p className="gap-[4px] font-[500] text-[12px] sm:text-[14px] xl:text-[16px] text-[#001F35] mb-[20px] flex justify-start items-start">
               <FacingIcon className="w-[20px] h-[20px] lg:w-[24px] lg:h-[24px]" />
@@ -101,7 +103,7 @@ const FloorplanDetailsCard: React.FC<Props> = ({
         {propCgId == projectprops.plot && (
           <div>
             <p className="font-[500] text-[16px] lg:text-[24px] mb-[20px] text-[#001F35] flex justify-start items-center">
-              Plot Area: {mergedData.plotArea}sq.ft
+              Plot Area: {formatNumberWithSuffix(mergedData.plotArea)}sq.ft
             </p>
             <p className="gap-[4px] font-[500] text-[14px] lg:text-[16px] text-[#303A42] mb-[20px] flex justify-start items-start">
               <FlooringIcon className="md:h-[32px] md:w-[32px] h-[24px] w-[24px]" />
@@ -127,7 +129,7 @@ const FloorplanDetailsCard: React.FC<Props> = ({
             <FlooringIcon className="md:h-[32px] md:w-[32px] h-[24px] w-[24px]" />
             Unit Number: {mergedData.unitNumber}
           </p>
-          {propCgId === projectprops.plot && <p className="mb-[45px]"></p>}
+          {propCgId === projectprops.plot && <p className="mb-[45px]" />}
 
           {/* {(propCgId == projectprops.plot || !propCgId) && (
           <p className="gap-[4px] flex justify-end items-end text-[#303A4] font-[500] text-[14px] lg:text-[16px] mb-[20px] ">
@@ -156,7 +158,8 @@ const FloorplanDetailsCard: React.FC<Props> = ({
             </p>
             <p className="gap-[4px] font-[500] text-[12px] sm:text-[14px] lg:text-[16px] text-[#303A42] mb-[8px] flex justify-start items-start">
               <SuperBuildupAreaIcon className="md:h-[32px] md:w-[32px] h-[24px] w-[24px]" />
-              Super Builtup Area: {mergedData.superBuildupArea} sq.ft
+              Super Builtup Area:{" "}
+              {formatNumberWithSuffix(mergedData.superBuildupArea)} sq.ft
             </p>
             <p className="gap-[4px] font-[500] text-[12px] sm:text-[14px] lg:text-[16px] text-[#001F35] mb-[8px] flex justify-start items-start">
               <FacingIcon className="md:h-[32px] md:w-[32px] h-[24px] w-[24px]" />

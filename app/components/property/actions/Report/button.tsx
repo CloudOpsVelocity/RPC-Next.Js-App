@@ -10,10 +10,10 @@ export default function ReportButton({ open }: Props) {
   return (
     session && (
       <button
-        className="inline-flex p-1 justify-center items-center bg-gray-200 text-gray-900 text-xs sm:text-xl not-italic font-semibold rounded mb-3 shadow"
+        className="inline-flex p-1 gap-1 justify-center items-center bg-gray-200 text-gray-900 text-xs sm:text-xl not-italic font-semibold rounded mb-3 shadow"
         onClick={open}
       >
-        {config.icon} Report Issue
+        {config.icon} Report Issues
       </button>
     )
   );

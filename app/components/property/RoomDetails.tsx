@@ -37,26 +37,29 @@ import PropertyHeading from "./heading";
 import { Main } from "@/app/validations/property";
 import { formatDateDDMMYYYY } from "@/app/utils/date";
 import { generatePropertyDetails } from "@/app/data/property";
+import { formatNumberWithSuffix } from "@/app/utils/numbers";
 const style = {
   card: "mr-[4%] mb-[1%]  p-[2%] md:p-[1%] bg-white mt-2 md:mt-1 border shadow-[0px_4px_20px_0px_#F0F6FF] rounded-[10px] border-solid border-[#92B2C8] ",
   heading: {
-    h1: "text-[#001F35] text-[18px] sm:text-[32px] not-italic font-semibold leading-[normal] uppercase mb-1 sm:mb-[14px]",
-    p: "inline-flex  gap-2 sm:gap-[26px]  w-[90%] items-center mb-[20px] xl:mb-[15px] text-[14px] md:text-[20px] lg:text-[24px] font-[500] text-[#233333] break-words ",
+    h1: "text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[8px] xl:mb-[10px] capitalize",
+    p: "inline-flex  gap-2 sm:gap-[26px]  w-[90%] items-center sm:mb-[20px] xl:mb-[15px] text-[14px] sm:text-[20px] xl:text-[24px] font-[500] text-[#233333] break-words ",
   },
 };
 export default function RoomDetails({ data }: { data: Main }) {
   return (
     <div
       id="propertyDetails"
-      className="scroll-mt-[220px] m-auto w-[95%] md:w-[90%]  mb-5 sm:block"
+      className="scroll-mt-[220px] sm:mt-[50px] m-auto w-[95%] md:w-[90%]  sm:mb-5 sm:block"
     >
       <PropertyHeading
         title="Listing details"
         desc={`Check the details For ${
-          data.propTypeName === "Plot" ? data.plotArea + " sq.ft" : ""
+          data.propTypeName === "Plot"
+            ? formatNumberWithSuffix(data.plotArea) + " sq.ft"
+            : ""
         } ${data.bhkName ?? ""} ${data.propTypeName} For
         ${data.cg === "S" ? " Sell" : " Rent"}`}
-        className="mb-[10px] xl:mb-[40px]"
+        className="mb-[10px] xl:mb-[8px]"
       />
       <UnitBlock data={data} />
 
@@ -122,7 +125,7 @@ const Parking = ({ noocp, noobp, noccp, nocbp }: any) => {
         className=" mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] p-4 xl:px-[53px] xl:py-[39px]"
         id="propertyDetails "
       >
-        <h1 className={style.heading.h1}>Parking</h1>
+        <h1 className={style.heading.h1}>Parking Details</h1>
 
         <p className={style.heading.p}>
           Check out the parking details for the listings
@@ -183,26 +186,9 @@ const OtherDetails = ({
   cunstructionType,
   boundryWallEnclose,
 }: Main) => {
-  const data = [
-    ownershipName,
-    possassionDate,
-    ageofBuilding,
-    availableFrom,
-    flooringType,
-    availablityStatus,
-    agrementduration,
-    cg,
-    noticemonth,
-    propTypeName,
-    approvedByName,
-    ispetFriendly,
-    availavleFor,
-    agreementType,
-    ,
-  ];
   return (
     <div
-      className=" mb-[3%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] p-4 xl:pl-[53px] md:py-[24px]"
+      className=" shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[31px] border-2 border-solid border-[#EEF7FE] bg-[#F9FAFA] p-4 xl:pl-[53px] md:pt-[24px] "
       id="propertyDetails "
     >
       <h1 className={style.heading.h1}>Other Details</h1>
@@ -309,7 +295,11 @@ const OtherDetails = ({
           <RoomBasicDetails
             icon={<Marble />}
             title="Approved Authority"
-            value={approvedByName?.join(" ,")}
+            value={
+              approvedByName.length > 1
+                ? approvedByName?.join(", ")
+                : approvedByName[0]
+            }
             className={style.card}
           />
         )}
@@ -365,13 +355,14 @@ const UnitBlock = ({ data }: { data: Main }) => {
 
         <p className={style.heading.p}>
           {data.propTypeName !== "Plot"
-            ? "Unit details including bhk, phase, tower,...etc"
-            : "Unit details including Unit Number, Phase, ...etc"}
+            ? "Unit Details Including BHK, Phase, Tower,...etc"
+            : "Unit Details Including Unit Number, Phase, ...etc"}
         </p>
 
         <div className="flex justify-start items-start flex-wrap   ">
           {dto.map(({ value, Icon, title }) => (
             <RoomBasicDetails
+              key={title}
               icon={<Icon />}
               title={title}
               value={value}

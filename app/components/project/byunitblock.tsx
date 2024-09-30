@@ -1,6 +1,10 @@
 import React, { useRef } from "react";
 import { Select, Tooltip } from "@mantine/core";
-import { DropDownIcon, ImgCarouselIcon, PrevCarouselIcon } from "../../images/commonSvgs";
+import {
+  DropDownIcon,
+  ImgCarouselIcon,
+  PrevCarouselIcon,
+} from "../../images/commonSvgs";
 import { filterKeysDetails, projectprops } from "../../data/projectDetails";
 import { atom, useAtom } from "jotai";
 import { selectedFloorAtom } from "@/app/store/floor";
@@ -8,6 +12,31 @@ import S from "@/app/styles/Floorplan.module.css";
 import { setPropertyValues } from "@/app/utils/dyanamic/projects";
 import Image from "next/image";
 import Button from "../atoms/buttons/variansts";
+import { SelectCreatable } from "./_ui/input/UnitINput";
+import { Form } from "react-hook-form";
+interface UnitData {
+  unitIdEnc: string;
+  projIdEnc: string;
+  phaseId: number;
+  propType: number;
+  bhk: number;
+  bhkName: string;
+  towerName: string;
+  towerId: number;
+  block: string;
+  floor: number;
+  unitNumber: string;
+  facingId: number;
+  facingName: string;
+  caretarea: string;
+  superBuildUparea: string;
+  terraceArea: string;
+  parkingType: string;
+  totalNumberofBathroom: number;
+  totalNumberOfBalcony: number;
+  noOfCarParking: number;
+  floorPlanUrl: string;
+}
 
 type Props = {
   propCgId: any;
@@ -22,6 +51,20 @@ const Byunitblock: React.FC<Props> = ({
 }: Props) => {
   const [floorsArray, setFloorsArray] = useAtom(unitFloorsAtom);
   const [, setFloor] = useAtom(selectedFloorAtom);
+  const workerRef = useRef<Worker | null>(null);
+  React.useEffect(() => {
+    workerRef.current = new Worker(
+      new URL(
+        "@/app/server-actions/workers/uniqueOptionsWorker.js",
+        import.meta.url
+      )
+    );
+    return () => {
+      if (workerRef.current) {
+        workerRef.current.terminate();
+      }
+    };
+  }, []);
   const getOptions = (property: string): string[] => {
     const filteredData = data?.filter((item: any) => {
       return Object.keys(values).every(
@@ -45,7 +88,8 @@ const Byunitblock: React.FC<Props> = ({
     }
   };
 
-  const handleSearch = (key: string) => {
+  const handleSearch = (key: string, type: "add" | "delete") => {
+
     const keysWithNonNullValues = Object.keys(values).filter(
       (key) => values[key] !== null
     );
@@ -65,7 +109,8 @@ const Byunitblock: React.FC<Props> = ({
     if (
       key === "unitNumber" &&
       filteredData.length > 0 &&
-      values["unitNumber"]
+      values["unitNumber"] &&
+      type === "add"
     ) {
       const filteredItem = filteredData[0];
       const filteredValues: { [key: string]: string } = {};
@@ -87,7 +132,7 @@ const Byunitblock: React.FC<Props> = ({
     let prevObj = values;
     prevObj[key] = value;
     setValues(prevObj);
-    handleSearch(key);
+    handleSearch(key, "add");
   };
   const scrollFiltersRef = useRef<HTMLDivElement>(null);
   const handleArrowClick = (side: "R" | "L"): void => {
@@ -107,7 +152,7 @@ const Byunitblock: React.FC<Props> = ({
       return;
     }
     setFieldValue(key, null);
-    handleSearch(key);
+    handleSearch(key, "delete");
   };
   const isAppliedFilters =
     Object.values(values).filter((each) => each != null).length > 0;
@@ -198,7 +243,7 @@ const Byunitblock: React.FC<Props> = ({
             size="md"
             label="Tower"
             className="w-[100%] sm:!w-[46%]"
-            placeholder="-- select Tower --"
+            placeholder="-- select At Tower --"
             data={(getOptions("towerName") as string[]) || []}
             searchable
             rightSection={<DropDownIcon />}
@@ -212,8 +257,8 @@ const Byunitblock: React.FC<Props> = ({
             }}
           />
         ) : null}
-
-        <Select
+        <SelectCreatable
+        value={values.unitNumber}
           rightSection={<DropDownIcon />}
           size="md"
           label="Unit Number"
@@ -227,6 +272,20 @@ const Byunitblock: React.FC<Props> = ({
           onChange={(value) => handleOnChange("unitNumber", value as string)}
           classNames={{ input: S.input, label: S.labelByBhk, option: S.option }}
         />
+        {/* <Select
+          rightSection={<DropDownIcon />}
+          size="md"
+          label="Unit Number"
+          className="w-[100%] sm:!w-[46%]"
+          placeholder="-- select Unit Number--"
+          data={(getOptions("unitNumber") as string[]) || []}
+          searchable
+          clearable
+          maxDropdownHeight={200}
+          {...getInputProps("unitNumber")}
+          onChange={(value) => handleOnChange("unitNumber", value as string)}
+          classNames={{ input: S.input, label: S.labelByBhk, option: S.option }}
+        /> */}
         {propCgId !== projectprops.plot && (
           <Select
             rightSection={<DropDownIcon />}
@@ -280,12 +339,14 @@ const Byunitblock: React.FC<Props> = ({
                 ? "Elevation"
                 : "At Floor"
             }
-            placeholder="-- select Floor --"
-            data={getOptions("floor").map((item) =>
-              item === "0"
-                ? { value: "0", label: "G" }
-                : { value: item, label: item }
-            )}
+            placeholder="-- select At Floor --"
+            data={getOptions("floor")
+              .map((item) =>
+                item === "0"
+                  ? { value: "0", label: "G" }
+                  : { value: item, label: item }
+              )
+              .sort((a, b) => Number(a.value) - Number(b.value))}
             searchable
             maxDropdownHeight={200}
             {...getInputProps("floor")}

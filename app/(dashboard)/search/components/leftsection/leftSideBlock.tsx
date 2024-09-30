@@ -1,16 +1,12 @@
 "use client";
 
 import React from "react";
-import { Tabs } from "@mantine/core";
 import useSearchFilters from "@/app/hooks/search";
 import RequestCallBackModal from "@/app/components/molecules/popups/req";
-import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
 import NewTabCon from "./newtabCon";
 import { SEARCH_FILTER_DATA } from "@/app/data/search";
-
-const LeftSideBlock = () => {
-  const [opned, { close, source }] = useReqCallPopup();
+const LeftSideBlock = ({ serverData }: any) => {
   const {
     searchProps: { mutate },
     handleAppliedFilters,
@@ -19,7 +15,7 @@ const LeftSideBlock = () => {
     setFilters,
   } = useSearchFilters("project");
 
-  const onTabChange = (listedBy: "A" | "I" | "proj"): void => {
+  const onTabChange = (listedBy: "A" | "I" | "proj" | "B"| "ALL"): void => {
     if (!listedBy) {
       console.error(`Invalid value passed to onTabChange: ${listedBy}`);
       return;
@@ -43,33 +39,27 @@ const LeftSideBlock = () => {
   };
 
   return (
-    <div className="md:w-[50%] sm:w-[100%]  md:bg-white w-[100%]  xl:min-w-[400px] md:min-w-[500px]">
-      {/* <Tabs
-        value={params.listedBy ?? "proj"}
-        onChange={(value) => onTabChange((value as "proj") || "proj")}
-        defaultValue="proj"
-      >
-        
-        <TabList />
-     
-       
-      </Tabs> */}
+    <div className="w-[100%] md:w-[50%] sm:w-[100%] md:bg-white xl:min-w-[400px] sm:max-h-[600px] xl:max-h-[740px] ">
       <NewTabCon
         onTabChange={onTabChange}
         selectedProtype={params.listedBy ?? "proj"}
+        Activities={params.cg}
         categoryType={SEARCH_FILTER_DATA.categoryDataProject}
       />
-      <TabPanelSection mutate={mutate} />
+      <TabPanelSection key={params.listedBy ?? "proj"} mutate={mutate} serverData={serverData} />
 
       <RequestCallBackModal />
       <SharePopup />
       <LoginPopup />
+      <Dialog />
+      {/* <MapModal /> */}
     </div>
   );
 };
 
 export { LeftSideBlock };
 import { diffToProjFromListing, initialState } from "@/app/store/search";
-import TabList from "./TabList";
 import TabPanelSection from "./TabPanelSection";
 import SharePopup from "../SharePopup";
+import MapModal from "../../listing/components/modals";
+import Dialog from "@/app/test/newui/components/modals/Proj_PropModal";

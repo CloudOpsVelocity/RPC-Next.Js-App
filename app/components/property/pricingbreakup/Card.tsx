@@ -1,9 +1,9 @@
 import { List, NumberFormatter } from "@mantine/core";
 import React from "react";
 import { TbH4 } from "react-icons/tb";
-import ListItem, { formatNumberIndian } from "./ListItem";
 import { pluralizeOrSingularize } from "@/app/utils/plural";
-
+import { formatCurrency } from "@/app/utils/numbers";
+import ListItem from "./ListItem";
 type Props = {
   title: string;
   Icon: any;
@@ -33,13 +33,13 @@ export default function Card({ Icon, title, type, data, otherPrice }: Props) {
             {data.map((key: any, i: number) => {
               return (
                 <ListItem
-                  key={i}
+                  key={key}
                   value={
                     key === "clubHouseCharge" &&
                     otherPrice.clubHouseCharge === "A"
                       ? "Lifetime"
                       : key == "clubHouseCharge" && otherPrice.clubHouseTill
-                      ? `${formatNumberIndian(otherPrice.clubHouseCharge)}/ ${
+                      ? `${formatCurrency(otherPrice.clubHouseCharge)}/ ${
                           otherPrice.clubHouseTill
                         } ${pluralizeOrSingularize(
                           parseInt(otherPrice.clubHouseTill),
@@ -49,7 +49,7 @@ export default function Card({ Icon, title, type, data, otherPrice }: Props) {
                       ? "As Per Actuals"
                       : otherPrice[key] === "NA"
                       ? "Already Included"
-                      : (formatNumberIndian(otherPrice[key]) as string)
+                      : (formatCurrency(otherPrice[key]) as string)
                   }
                   label={displayNameMap[key]}
                 />
@@ -62,9 +62,9 @@ export default function Card({ Icon, title, type, data, otherPrice }: Props) {
           const [chargeName, chargeValue] = charge.split("|");
           return (
             <ListItem
-              key={index}
+              key={`card_${charge[index]}`}
               label={chargeName.trim()}
-              value={formatNumberIndian(chargeValue.trim())}
+              value={formatCurrency(chargeValue.trim())}
             />
           );
         });

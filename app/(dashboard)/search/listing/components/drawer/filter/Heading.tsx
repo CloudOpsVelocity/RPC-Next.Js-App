@@ -8,10 +8,11 @@ type Props = {
 };
 
 export default function Heading({ className, text, id }: Props) {
+  console.log(text)
   return (
     <h2
       className={clsx(
-        "text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] flex items-center gap-[5px]",
+        "text-[#202020] mb-[2%] text-[14px] font-[600] mt-[3%] flex items-center gap-[5px]",
         className
       )}
       id={id}

@@ -11,7 +11,7 @@ export interface SearchFilter {
   parkings: number[];
   amenities: number[];
   listedBy: null | string;
-  reraVerified: boolean | null;
+  reraVerified: number[];
   areaValue: [number, number];
   bugdetValue: [number, number];
   builderIds: string[];
@@ -26,6 +26,7 @@ export interface SearchFilter {
   projIdEnc: string | null;
   lat: number | null;
   lng: number | null;
+  projName?: string | null;
 }
 
 export const initialState: SearchFilter = {
@@ -37,9 +38,9 @@ export const initialState: SearchFilter = {
   parkings: [],
   amenities: [],
   listedBy: null,
-  reraVerified: null,
+  reraVerified: [],
   areaValue: [0, 5000],
-  bugdetValue: [0, 60],
+  bugdetValue: [500000, 600000000],
   builderIds: [],
   city: null,
   facings: [],
@@ -52,17 +53,39 @@ export const initialState: SearchFilter = {
   projIdEnc: null,
   lat: null,
   lng: null,
+  projName: null,
 };
 export const diffToProjFromListing = {
-  proj: ["facings", "furnish", "propStatus", "listedBy"],
-  A: ["current", "reraVerified", "builderIds"],
-  I: ["current", "reraVerified", "builderIds"],
+  proj: [
+    "facings",
+    "furnish",
+    "propStatus",
+    "listedBy",
+    "sortByfield",
+    "sortType",
+  ],
+  A: ["current", "reraVerified", "builderIds", "sortByfield", "sortType"],
+  I: ["current", "reraVerified", "builderIds", "sortByfield", "sortType"],
+  B: ["current", "reraVerified", "builderIds", "sortByfield", "sortType"],
+  ALL: [
+    "facings",
+    "furnish",
+    "propStatus",
+    "listedBy",
+    "sortByfield",
+    "sortType",
+  ],
 };
 
 export const searachFilterAtom = atom<SearchFilter>(initialState);
 searachFilterAtom.onMount = (setAtom) => {
-  setAtom(getAppliedFilters());
+  const path = window.location.pathname;
+  const searchParams = new URLSearchParams(window.location.search);
+  if (path.includes("search") || searchParams.size > 0) {
+    setAtom(getAppliedFilters());
+  }
 };
+
 export const appliedFiltersParams = atom(null, (get, set, t: any) => {
   const appliedFilters = get(searachFilterAtom);
   const parsedData = filterParser(appliedFilters);
@@ -76,5 +99,6 @@ function getAppliedFilters(): SearchFilter {
     queryData[key] = value;
   });
   const data: SearchFilter = convertToOriginalState(queryData);
+  console.log(data);
   return data;
 }

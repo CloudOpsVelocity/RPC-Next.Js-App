@@ -10,11 +10,11 @@ export default function AuthButton() {
   const { data: session } = useSession();
 
   const postProjectLink = session
-    ? `${process.env.NEXT_PUBLIC_PROJECT_URL}/project/postProject`
+    ? `${process.env.NEXT_PUBLIC_PROJECT_URL}/post-project`
     : "/login";
 
   const postListingLink = session
-    ? `${process.env.NEXT_PUBLIC_PROJECT_URL}/property/v1/post`
+    ? `${process.env.NEXT_PUBLIC_PROJECT_URL}/post-listing/v1`
     : "/register";
 
   return (
@@ -100,7 +100,6 @@ function Dropdown() {
         )}
       </Menu.Target>
       {session ? (
-        <>
           <Menu.Dropdown
             className="!z-[1000]"
             classNames={{
@@ -112,7 +111,7 @@ function Dropdown() {
                 session.user?.userType !== "B" &&
                 item.label === "Post Project" ? null : (
                   <Menu.Item
-                    key={index}
+                    key={item.label}
                     classNames={{
                       itemLabel: S.itemLabel,
                     }}
@@ -139,7 +138,6 @@ function Dropdown() {
               Log Out
             </Menu.Item>
           </Menu.Dropdown>
-        </>
       ) : (
         <Menu.Dropdown
           className="!z-[1000]"
@@ -149,7 +147,7 @@ function Dropdown() {
         >
           {unAuthorizedData.map((item, index) => (
             <Menu.Item
-              key={index}
+              key={"unAuthorizedData_" + item.label}
               classNames={{
                 itemLabel: S.itemLabel,
               }}

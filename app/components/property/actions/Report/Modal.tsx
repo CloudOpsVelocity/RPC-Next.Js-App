@@ -25,7 +25,7 @@ export default function ReportModal({ issueData }: any) {
     if (!(reportStatus.length > 0)) {
       seterrorMsg(true);
       return;
-    } else if (reportStatus.includes(607)) {
+    } else if (reportStatus.includes(670)) {
       if (!text) {
         setStatus("error");
         return;
@@ -84,7 +84,7 @@ export default function ReportModal({ issueData }: any) {
         onClose={onClose}
         centered
         size={isMobile ? "100%" : status === "success" ? "32%" : "50%"}
-        className="overflow-hidden flex flex-wrap w-auto !scrollbar-hide !m-4"
+        // className="overflow-hidden flex flex-wrap w-auto !scrollbar-hide !m-4"
         styles={{
           header: {
             display: "none",
@@ -134,8 +134,8 @@ export default function ReportModal({ issueData }: any) {
                     h={"100%"}
                     id="review"
                     className={clsx(
-                      " rounded-[10px] !text-[12px]  placeholder:!text-[#4D6677]  placeholder:!text-xl xl:placeholder:!text-2xl italic font-medium leading-[23.784px] ",
-                      status === "error" && "border-solid border-red-500 border"
+                      " rounded-[10px] !text-[12px]  placeholder:!text-[#4D6677]  placeholder:!text-xl xl:placeholder:!text-2xl italic font-medium leading-[23.784px] border-solid border",
+                      status === "error" ? "border-[#F00]" : "border-green"
                     )}
                     placeholder="Start typing here"
                     radius={"10px"}

@@ -1,5 +1,9 @@
-import { listingSearchAtom } from "@/app/store/search/map";
-import { Modal, em } from "@mantine/core";
+"use client";
+import {
+  listingSearchAtom,
+  mobileSearchPageMapModalReducerAtom,
+} from "@/app/store/search/map";
+import { Modal } from "@mantine/core";
 import { useAtom } from "jotai";
 import S from "@/app/styles/Drawer.module.css";
 import MapSkeleton from "@/app/components/maps/Skeleton";
@@ -9,7 +13,7 @@ import Header from "./header";
 import { useMediaQuery } from "@mantine/hooks";
 
 function MapModal() {
-  const [selected, setSelectedSearch] = useAtom(listingSearchAtom);
+  const [selected, dispath] = useAtom(mobileSearchPageMapModalReducerAtom);
   const Map = useMemo(
     () =>
       dynamic(() => import("../map"), {
@@ -18,16 +22,16 @@ function MapModal() {
       }),
     []
   );
-  const onClose = () => setSelectedSearch(null);
+  const onClose = () => dispath({ type: "close" });
   const isMobile = useMediaQuery("(max-width: 750px)");
 
   return (
     <Modal
-      opened={selected !== null}
+      opened={selected.content.lat !== null}
       onClose={onClose}
       centered
       size={isMobile ? "100%" : "90%"}
-      title={selected?.projName}
+      title={selected?.title}
       classNames={{
         content: S.content,
         overlay: S.overlay,

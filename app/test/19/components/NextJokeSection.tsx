@@ -2,7 +2,7 @@ import { Suspense } from "react";
 
 const fetchData = async () => {
   const res = await fetch("https://api.chucknorris.io/jokes/random");
-  const p = await new Promise((resolve) => setTimeout(resolve, 10000));
+  await new Promise((resolve) => setTimeout(resolve, 10000));
   return res.json();
 };
 
@@ -17,7 +17,6 @@ const JokeItem = async () => {
 
 const Joke = () => {
   return (
-    <>
       <Suspense
         fallback={
           <h2 className="text-2xl text-center font-bold mt-5">Loading...</h2>
@@ -29,7 +28,6 @@ const Joke = () => {
 
         <JokeItem />
       </Suspense>
-    </>
   );
 };
 export { Joke as NextJsExample1 };

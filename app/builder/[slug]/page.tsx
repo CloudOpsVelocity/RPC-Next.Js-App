@@ -1,66 +1,67 @@
 import React from "react";
-import Header from "../../components/layouts/primary/header";
-import Footer from "../../components/layouts/primary/footer";
-import TopProfileBlock from "../../components/builder/topProfileBlock";
-import ProjectDetails from "../../components/builder/projectDetails";
-import ManagementBlock from "../../components/builder/management";
-import { getBuilderDetails } from "@/app/utils/api/builder";
-import BuilderCarousel from "@/app/components/builder/Carousel";
-import Reqcallback from "@/app/components/builder/Reqcallback";
-import ProjectDrawer from "@/app/components/project/Drawer";
-import dynamic from "next/dynamic";
-import SectionSkeleton from "@/app/components/atoms/skeleton/section";
-import { cookies } from "next/headers";
+import { notFound } from "next/navigation";
 
-const LoginPopup = dynamic(
-  () => import("@/app/components/project/modals/LoginPop"),
-  {
-    loading: () => <SectionSkeleton />,
-    ssr: false,
+import fs from "fs";
+import path from "path";
+import { headers } from "next/headers";
+// import { getBuilderDetailsPageData } from "@/app/utils/api/builder";
+async function getBuilderSlug(pathname: string) {
+  const staticDir = path.join(process.cwd(), "static");
+  const filePath = path.join(staticDir, "builderSlugs.json");
+
+  try {
+    // Read the JSON file asynchronously
+    const jsonData = fs.readFileSync(filePath, "utf-8");
+    const builderJsonData = JSON.parse(jsonData);
+    return builderJsonData[pathname];
+  } catch (error) {
+    console.error("Error reading or parsing file:", error);
+    return null;
   }
-);
-type Props = { params: { slug: string } };
-
-export default async function Page({ params: { slug } }: Props) {
-  const token = cookies().get("token")?.value;
-  const data = await getBuilderDetails(slug, "Y", "proj", token);
-  return (
-    <div className="flex flex-col justify-start items-center w-full mt-[70px]  ">
-      {data && (
-        <>
-          <Header />
-          <TopProfileBlock {...data.data} />
-          <div className="flex flex-col justify-start items-start w-[95%] ">
-            <ProjectDetails {...data.data} />
-            <ManagementBlock {...data.data} />
-
-            {/* <BuildersBlock
-              data={data?.data?.otherBuilder}
-              name={data?.data?.companyName}
-            /> */}
-          </div>
-          <div className="w-full m-auto sm:w-[95%]">
-            {data?.data?.builderProjects && (
-              <BuilderCarousel
-                type="proj"
-                title={`Newly launched PROJECTS `}
-                projName={`  ${data?.data?.userName}`}
-                content={`See other newly launched projects by ${data?.data?.userName}`}
-                data={data?.data?.builderProjects}
-                location={
-                  Object.keys(data?.data?.projectAvailableCities).length <= 1
-                    ? data.data.cityName
-                    : ""
-                }
-              />
-            )}
-          </div>
-          <Reqcallback builderName={data.data.userName} />
-          <Footer />
-          <ProjectDrawer projName={data?.data?.userName} />
-          <LoginPopup />
-        </>
-      )}
-    </div>
-  );
 }
+export default async function Page() {
+  const nextHeader = headers();
+  const pathname = `${nextHeader.get("x-current-path")}`;
+  const id = await getBuilderSlug(pathname);
+  console.log(id);
+  if (!id) {
+    notFound();
+  }
+  // const data = await getBuilderDetailsPageData(id);
+  // return <BuilderPage data={data} />;
+  return <div/>;
+}
+
+//  builder0 = state / project0 project in locality
+
+// export async function generateStaticParams() {
+//   // Get the data (mocked here, replace with your actual data fetching logic)
+//   const res = await getPagesSlugs("builder-list");
+
+//   // Convert the `res` object into a regular object (not a Map)
+//   const resObject = { ...res };
+
+//   const staticDir = path.join(process.cwd(), "static");
+//   const filePath = path.join(staticDir, "builderSlugs.json");
+
+//   // Ensure the 'static' directory exists
+//   if (!fs.existsSync(staticDir)) {
+//     fs.mkdirSync(staticDir);
+//   }
+
+//   // Convert the object to a JSON string
+//   const jsonContent = JSON.stringify(resObject, null, 2);
+
+//   // Write the JSON content to the file
+//   fs.writeFileSync(filePath, jsonContent);
+
+//   console.log(`JSON data has been saved to ${filePath}`);
+
+//   // Prepare the slugs for static generation
+//   const builderRess = Object.keys(resObject);
+//   const slugs = builderRess.map((data) => ({
+//     slug: data.replace(/\//g, ""),
+//   }));
+//   console.log(slugs);
+//   return slugs;
+// }

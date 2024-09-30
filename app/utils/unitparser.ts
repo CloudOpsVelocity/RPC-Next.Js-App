@@ -21,21 +21,8 @@ const bhkMap = new Map([
   ["5+ BHK", 17],
 ]);
 const sortUnits = (units: string[]): string[] => {
-  return units.sort((a, b) => (bhkMap.get(a) ?? 0) - (bhkMap.get(b) ?? 0));
+  return units?.sort((a, b) => (bhkMap.get(a) ?? 0) - (bhkMap.get(b) ?? 0));
 };
-
-function getAreaFromUnit(unit: string): string {
-  const areaStr = unit.match(/\d+/)?.[0] || "0";
-  return areaStr;
-}
-
-function getUnitType(unit: string): "RK" | "BHK" {
-  return unit.includes("RK") ? "RK" : "BHK";
-}
-
-function compareTypes(a: "RK" | "BHK", b: "RK" | "BHK"): number {
-  return a === "RK" && b === "BHK" ? -1 : a === "BHK" && b === "RK" ? 1 : 0;
-}
 
 const parseUnitStrings = (
   unitStrings: string[],
@@ -56,7 +43,7 @@ const parseUnitStrings = (
 
   return propertyType && propertyType === "plot"
     ? sortedUnits.slice(0, 2)
-    : sortedUnits.slice(0, 3);
+    : sortedUnits.slice(0, 2);
 };
 
 export { parseUnitStrings as parseUnits, sortUnits };

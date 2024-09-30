@@ -19,9 +19,11 @@ export default function Card({ item }: Props) {
     <div className="w-[310px] sm:w-[881.143px] h-[450px] sm:h-[514px] shrink-0 relative">
       <BackgroundImage src={item.coverUrl} radius="sm" h={"100%"}>
         <div className="p-6">
-          <img
+          <Image
+            width={100}
+            height={100}
             src="https://im.proptiger.com/3/100683/13/sumadhura-infracon-23973255.jpeg?width=800&height=620"
-            alt=""
+            alt="logo icons"
             className="w-[100px] h-[100px] object-cover"
           />
         </div>

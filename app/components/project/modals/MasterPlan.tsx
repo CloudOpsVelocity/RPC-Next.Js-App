@@ -52,7 +52,7 @@ export default function MasterPlanPopup({
               Master Plan
             </div>
             <div className="flex justify-center items-center  gap-5">
-              <a
+              <button
                 className="flex justify-center items-center gap-1 p-1 xl:p-2 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] rounded-[10px] bg-[#F3F7FF] text-[#0073C6] text-base not-italic font-semibold leading-[normal] tracking-[0.32px] !cursor-pointer"
                 onClick={onDownload}
               >
@@ -71,7 +71,7 @@ export default function MasterPlanPopup({
                 <span className="hidden h-4 w-4 xl:w-full xl:h-auto  items-center  xl:block">
                   Download
                 </span>
-              </a>
+              </button>
               <SharePopup
                 titleText="Share Master Plan"
                 title="Share"
@@ -131,7 +131,7 @@ const Content = ({ url }: { url: string }) => {
           // w="100%"
           fit="contain"
           alt="master plan"
-          className="cursor-pointer h-[420px] xl:h-[770px] border-[5px] bg-white border-white md:min-w-[1400px] xl:max-h-[770px] object-contain"
+          className="cursor-pointer h-[420px] xl:h-[770px] border-[5px] bg-white border-white sm:min-w-[800px] xl:min-w-[1400px] xl:max-h-[770px] object-contain"
           component={NextImage}
           width={600}
           height={600}

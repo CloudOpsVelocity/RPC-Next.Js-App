@@ -13,7 +13,7 @@ type Props = {
   userName: string;
   close: () => void;
   callback: () => void;
-  mobile: number | null;
+  mobile?: number | null;
 };
 
 export default function OtpBox({ userName, close, callback, mobile }: Props) {

@@ -7,50 +7,67 @@ import {
   parseDataProjectProps,
   propertyDetailsTypes,
 } from "@/app/data/projectDetails";
+import { useAtom } from "jotai";
+import { homeSearchFiltersAtom } from "@/app/store/home";
+import { Console } from "console";
+import { useMediaQuery } from "@mantine/hooks";
 
-const keys = ["Apartment", "Villa", "RowHouse", "Plot"];
+const keys = [
+  "Apartment",
+  "Villa",
+  "Villament",
+  "RowHouse",
+  "Plot",
+  "independent",
+];
 
 export function BasicSelect() {
-  const { filters: f, setFilters } = useSearchFilters();
+  // const { filters: f, setFilters } = useSearchFilters();
+  const [f, dispatch] = useAtom(homeSearchFiltersAtom);
+  const isTab = useMediaQuery("(max-width: 1600px)");
 
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
   });
 
-  const value = f.propTypes;
+  const value = f.propType;
 
-  const options = keys.map((item) => (
-    <Combobox.Option
-      value={item}
-      classNames={{
-        option: styles.option,
-      }}
-    >
-      <Radio
-        checked={
-          value ===
-          parseDataProjectProps[
-            item.toLocaleLowerCase() as keyof typeof parseDataProjectProps
-          ]
-        }
-        color="green"
-        mr={6}
-      />{" "}
-      {item}
-    </Combobox.Option>
-  ));
+  const options = keys
+    .filter((item) => !(f.cg === "R" && item === "Plot"))
+    .map((item) =>
+      item === "Plot" && f.bhk.length > 0 ? null : (
+        <Combobox.Option
+          key={item}
+          value={item}
+          classNames={{
+            option: styles.option,
+          }}
+        >
+          <Radio
+            checked={
+              value ===
+              parseDataProjectProps[
+                item.toLocaleLowerCase() as keyof typeof parseDataProjectProps
+              ]
+            }
+            color="green"
+            mr={6}
+          />{" "}
+          <span className="capitalize">{item}</span>
+        </Combobox.Option>
+      )
+    );
 
   return (
     <Combobox
       store={combobox}
       withinPortal={false}
       onOptionSubmit={(val) => {
-        setFilters({
-          ...f,
-          propTypes:
-            parseDataProjectProps[
-              val.toLocaleLowerCase() as keyof typeof parseDataProjectProps
-            ],
+        dispatch({
+          type: "ADD_PROP_TYPE",
+          payload: parseDataProjectProps[
+            val.toLocaleLowerCase() as keyof typeof parseDataProjectProps
+          ] as number,
         });
         combobox.closeDropdown();
       }}
@@ -70,9 +87,10 @@ export function BasicSelect() {
           classNames={{
             input: styles.input,
           }}
+          size={isTab ? "xs" : "sm"}
         >
           {(propertyDetailsTypes?.get(value ?? 0)?.name ?? "") || (
-            <Input.Placeholder className="!text-black">
+            <Input.Placeholder className="!text-black font-[600]">
               Property Type
             </Input.Placeholder>
           )}

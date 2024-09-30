@@ -13,20 +13,27 @@ export default function TopProfileBlock({
   companyStartDate,
   logoUrl,
   userName,
+  builderCity,
 }: Data) {
   return (
-    <div className="w-full flex justify-between items-center bg-gradient-to-r  from-[#E0EBFF] /0 via-[#F0F6FF]/46  to-[#C9E8FF]/100 relative">
+    <div className="w-full flex justify-between items-center bg=[] relative">
       <div className="flex flex-col h-[100%]  lg:min-h-[250px]  justify-between items-start ml-[2%] ">
         <p className="text-[12px] md:text-[20px] text-[#565D70] font-[500] mt-2 sm:mt-0 sm:mb-[1%] ">
-          <span>Home</span>
+          <a className="hover:underline cursor-pointer" href={"/"}>
+            Home
+          </a>
           {" > "}
-          <span>Builder</span>
+          <span className="hover:underline cursor-pointer">Builders</span>
+          {" > "}
+          <span className="hover:underline cursor-pointer capitalize">
+            {builderCity}
+          </span>
           {" > "}
           <span>{capitalizeWords(userName)}</span>
         </p>
 
-        <div className="flex justify-start items-end w-[300px] py-5 sm:w-auto">
-          <div className="flex justify-center mr-[16px] items-center h-[93px] w-[93px] sm:h-[133px] sm:w-[133px] xl:h-[158px] xl:w-[158px] bg-[#FFF] shadow-md border-solid border-[2px] border-[#96C5E4] rounded-[10px]  ">
+        <div className="flex justify-start items-center w-[300px] py-5 sm:w-auto">
+          <div className="flex justify-center mr-[16px] items-center h-[93px] w-[93px] sm:h-[133px] sm:w-[133px] xl:h-[158px] xl:w-[158px] bg-[#FFF]   ">
             <Image
               alt="builder"
               src={
@@ -34,16 +41,16 @@ export default function TopProfileBlock({
                   ? `${logoUrl}?v=${Math.random()}`
                   : `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/builderpage/builder-noimage.png`
               }
-              className="object-contain w-[150px] h-[150px]"
+              className="object-contain h-[93px] w-[93px] sm:h-[100px] sm:w-[133px] xl:h-[150px] xl:w-[158px]"
               width={158}
               height={158}
             />
           </div>
           <div>
-            <p className=" text-[#148B16] text-[16px] font-bold sm:text-[24px] xl:text-[32px] not-italic sm:font-semibold ">
+            <p className=" text-[#E3AC00] text-[16px] font-bold sm:text-[24px] xl:text-[32px] not-italic sm:font-semibold  uppercase">
               {userName}
             </p>
-            <div className="text-[#202020] text-[12px] sm:text-lg xl:text-xl font-bold not-italic z-40">
+            <div className="text-[#202020] text-[12px] sm:text-lg xl:text-xl font-bold not-italic z-40 uppercase">
               (By: {companyName})
             </div>
             <p className=" text-[#303A42] text-[12px] sm:text-base xl:text-lg not-italic font-medium  mt-1 sm:mt-1 xl:mt-2">

@@ -4,30 +4,35 @@ import React from "react";
 import ClearAll from "../ClearAll";
 import useSearchFilters from "@/app/hooks/search";
 
-export default function BhkFilter() {
+export default function BhkFilter({ close }: { close?: () => void }) {
   const { filters, handleCheckboxClick, params } = useSearchFilters();
   return (
-    <div className="max-w-[300px] ">
-      <ClearAll type="unitType" />
+    <div className="max-w-[860px] ">
+      <ClearAll type="unitType" close={close} />
       <div className="p-3">
-        {" "}
-        <h3 className=" text-[#202020] mb-[2%] text-[14px] font-[500] mt-[3%] ">
-          Unit Type
+        <h3 className="text-[#202020] mb-[2%] text-[14px] font-[600] ">
+          BHK Type
         </h3>
-        <div className="flex  mb-[3%] t gap-[4%]  flex-wrap justify-start items-center ">
-          {SEARCH_FILTER_DATA.bhkDetails.map((eachItem, index) => {
-            return (
-              <Checkbox
-                w={80}
-                key={index}
-                color="green"
-                mt={10}
-                checked={filters.unitTypes.includes(eachItem.value)}
-                label={eachItem.title}
-                onClick={() => handleCheckboxClick("unitTypes", eachItem.value)}
-              />
-            );
-          })}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-y-2 gap-x-10">
+          {SEARCH_FILTER_DATA.bhkDetails.map((eachItem, index) => (
+            <Checkbox
+              key={eachItem.value}
+              color="green"
+              checked={filters.unitTypes.includes(eachItem.value)}
+              label={eachItem.title}
+              onClick={() => handleCheckboxClick("unitTypes", eachItem.value)}
+              styles={{
+                root: {
+                  minWidth: "fit-content",
+                },
+                label: {
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                },
+              }}
+            />
+          ))}
         </div>
       </div>
     </div>

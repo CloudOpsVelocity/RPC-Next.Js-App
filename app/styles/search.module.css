@@ -35,9 +35,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-left: 0rem;
+  /*   padding-left: 0rem; */
 }
-
+.buyrentoptions {
+  font-size: 14px;
+  font-weight: 600;
+}
+.buyrentoptions:hover {
+  color: green;
+}
 .body {
   overflow: hidden;
 }
@@ -72,6 +78,9 @@
 }
 
 @media screen and (max-width: 767px) {
+  .dropdown {
+    min-width: 100px;
+  }
   .markLabel {
     display: none;
   }
@@ -80,7 +89,8 @@
     font-size: 14px;
   }
   .wrapperMultiSelection {
-    min-height: 40px;
+    min-height: 46px;
+    max-width: 486px;
     border-radius: 57px;
     border-left: 0.3px solid #98a5b8;
     border-right: none;
@@ -88,7 +98,7 @@
     flex-wrap: nowrap !important;
     justify-content: center;
     align-items: center;
-    padding-left: 0rem;
+    /*  padding-left: 0rem; */
   }
   .MultiSelectionPillLabel {
     font-size: 10px;

@@ -48,9 +48,10 @@ export default function ShortList() {
   };
   return (
     <button
+      id="shortlist"
       onClick={() => onAddingShortList()}
       className={clsx(
-        "flex justify-center items-center gap-1 p-2 rounded-lg border-[0.8px] border-solid border-[#0073C6] bg-[#fafafa] text-[#0073C6] text-[12px] sm:text-[20px] xl:text-2xl not-italic font-semibold leading-[normal] sm:trackin-[0.4px] tracking-[0.96px]   xl:tracking-[0.96px]text-[12px] text-nowrap",
+        "flex justify-center items-center gap-1 p-2 rounded-lg border-[0.8px] border-solid border-[#0073C6] bg-[#fafafa] text-[#0073C6] text-[12px] sm:text-base xl:text-[20px] xl:text-2xl not-italic font-semibold leading-[normal] sm:trackin-[0.4px] tracking-[0.96px]   xl:tracking-[0.96px]text-[12px] text-nowrap scroll-mt-[400px]",
         data?.shortListed &&
           "bg-[rgb(231,245,255)] text-[#148B16] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px]"
       )}

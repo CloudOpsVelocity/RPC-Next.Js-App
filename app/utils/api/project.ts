@@ -1,8 +1,9 @@
 import { unstable_cache } from "next/cache";
 import { Main, MERGERPROJECT } from "../../validations/types/project";
-import { GlobalPageType } from "@/app/validations/global";
 import { capitalizeWords } from "../letters";
 import axios from "axios";
+import { paritalUnitParser } from "@/app/(new_routes_seo)/residential/projects/utils/partialUnitParser";
+import { groupUnitsById } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.client";
 
 const getProjectDetails = async (slug: string): Promise<MERGERPROJECT> => {
   const response = await fetch(
@@ -14,7 +15,7 @@ const getProjectDetails = async (slug: string): Promise<MERGERPROJECT> => {
   const data = await response.json();
 
   let isRera = false;
-  const phases = data.phaseOverview.map((el: any) => {
+  const phases = data?.phaseOverview?.map((el: any) => {
     if (el.rerastatus === "Recieved" || el.rerastatus === "Applied") {
       isRera = true;
     }
@@ -27,8 +28,8 @@ const getProjectDetails = async (slug: string): Promise<MERGERPROJECT> => {
     ...data,
     basicData: {
       ...data.basicData,
-      projectName: capitalizeWords(data.basicData.projectName),
-      postedByName: capitalizeWords(data.basicData.postedByName),
+      projectName: capitalizeWords(data.basicData?.projectName),
+      postedByName: capitalizeWords(data.basicData?.postedByName),
       ...metaData,
     },
   } as MERGERPROJECT;
@@ -98,10 +99,7 @@ const getCachedUser = unstable_cache(
   }
 );
 
-const getNearByLocations = async (
-  slug: string,
-  type?: GlobalPageType["types"]
-): Promise<any> => {
+const getNearByLocations = async (slug: string): Promise<any> => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/get-nearby?projIdEnc=${slug}`
   );
@@ -114,6 +112,31 @@ const getAmenties = async () => {
   );
   return data.data;
 };
+const getProjectAllUntis = async (slug: string) => {
+  const res = await fetch(
+    `https://test.getrightproperty.com/api/project/projectUnit?projIdEnc=${slug}`,
+    {
+      cache: "no-cache",
+    }
+  );
+  const data = await res.json();
+  return groupUnitsById(data);
+};
+const getOverViewData = async (slug: string) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/overviewData?projIdEnc=${slug}`
+  );
+  const data = await response.json();
+  return paritalUnitParser(data);
+};
+// create decorator fn to cache api
+const withCache = (fn: any, tags: any, options: any) => {
+  return async (...args: any) => {
+    const key = args[0];
+    const cache = await unstable_cache(fn, tags, options);
+    return cache(key);
+  };
+};
 export {
   getProjectDetails,
   getCachedUser,
@@ -121,4 +144,7 @@ export {
   getProjectUnits,
   getNearByLocations,
   getAmenties,
+  getOverViewData,
+  getProjectAllUntis,
+  withCache,
 };

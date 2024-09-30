@@ -5,6 +5,7 @@ import { Shorlisted } from "@/app/images/commonSvgs";
 import { HeartIcon } from "@/app/images/HomePageIcons";
 import { useSession } from "next-auth/react";
 import React, { useState } from "react";
+import useIds from "../useIds";
 type Props = {
   reqId: string;
   shortListed: string;
@@ -14,7 +15,10 @@ export default function Shortlist({ reqId, shortListed }: Props) {
   const { toggleShortlist } = useShortlistAndCompare();
   const { data: session } = useSession();
   const [, { open: openLogin }] = usePopShortList();
-  const onAddingShortList = () => {
+  const onAddingShortList = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.stopPropagation();
     if (session) {
       setState(!state);
       toggleShortlist({
@@ -23,12 +27,16 @@ export default function Shortlist({ reqId, shortListed }: Props) {
         source: "proj",
       });
     } else {
-      openLogin(() => console.log("grp"));
+      openLogin(() => window.location.reload());
     }
   };
   return (
-    <button onClick={onAddingShortList}>
-      {state ? config.trueIcon : <HeartIcon />}
+    <button onClick={(e) => onAddingShortList(e)}>
+      {state ? (
+        config.trueIcon
+      ) : (
+        <HeartIcon className="cursor-pointer w-[22px] h-[22px] sm:w-[20px] sm:h-[20px] xl:w-[26px] xl:h-[26px] " />
+      )}
     </button>
   );
 }
@@ -37,9 +45,10 @@ const config = {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="24"
-      height="28"
+      height="24"
       viewBox="0 0 24 28"
       fill="none"
+      className="cursor-pointer w-[22px] h-[22px] sm:w-[20px] sm:h-[20px] xl:w-[30px] xl:h-[30px] "
     >
       <circle
         cx="12"

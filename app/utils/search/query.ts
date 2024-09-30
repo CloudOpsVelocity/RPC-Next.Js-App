@@ -14,7 +14,7 @@ const convertToQueryParams = (params: Params): string => {
     parkings: "parking",
     amenities: "amenities",
     listedBy: "listedBy",
-    reraVerified: "reraVerified",
+    reraIds: "reraIds",
     minArea: "minArea",
     maxArea: "maxArea",
     minPrice: "minPrice",
@@ -35,7 +35,7 @@ const convertToQueryParams = (params: Params): string => {
 
   for (const key in params) {
     if (
-      params.hasOwnProperty(key) &&
+      Object.prototype.hasOwnProperty.call(params, key) &&
       params[key] !== null &&
       params[key] !== undefined
     ) {
@@ -48,7 +48,7 @@ const convertToQueryParams = (params: Params): string => {
         // Convert the value to crores or lakhs if necessary
         let value = params[key];
         if (key === "minPrice" || key === "maxPrice") {
-          value *= 10000000;
+          value;
         } else if (key === "city") {
           value = params[key].split("+")[1];
         } else if (key === "localities" || key === "builderIds") {
@@ -78,7 +78,7 @@ const createRequestParams = (params: Params): Params => {
 
   for (const key in params) {
     if (
-      params.hasOwnProperty(key) &&
+      Object.prototype.hasOwnProperty.call(params, key) &&
       params[key] !== null &&
       params[key] !== undefined
     ) {

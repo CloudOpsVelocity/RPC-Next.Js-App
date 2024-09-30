@@ -1,129 +1,271 @@
 "use client";
 import Loading from "@/app/components/atoms/Loader";
-import useSearchFilters from "@/app/hooks/search";
 import useQsearch from "@/app/hooks/search/useQsearch";
-import { SearchLocationIcon } from "@/app/images/commonSvgs";
+import {
+  SearchLocationIcon,
+  mainSearchNoResult,
+} from "@/app/images/commonSvgs";
+import { homeSearchFiltersAtom } from "@/app/store/home";
 import { encodeProID } from "@/app/utils/api/encode";
 import { ScrollArea } from "@mantine/core";
-import { useMediaQuery } from "@mantine/hooks";
+import { useAtom } from "jotai";
 import { useRouter } from "next/navigation";
 import React from "react";
 import toast from "react-hot-toast";
+import { GrayMapIcon } from "@/app/images/commongsSvgs2";
 
 export default function Results() {
-  const { push } = useRouter();
   const { data, isLoading, handleResetQuery } = useQsearch();
-  const { filters, setFilters, setSingleType } = useSearchFilters();
 
+  const [filters, dispatch] = useAtom(homeSearchFiltersAtom);
   if (isLoading) {
     return <Loading />;
   }
-
-  // Filter data into Locality and Projects
-  const localities = data?.loc?.map((item: any) => ({
-    name: item.name,
-    id: item.id,
-  }));
-  const cities = data?.cities?.map((item: any) => ({
-    name: item.name,
-    id: item.id,
-  }));
-  const projects = data?.projects?.map((item: any) => ({
-    name: item.name,
-    id: item.id,
-  }));
+  const {
+    localities,
+    builders,
+    cities,
+    projects,
+    listing: listings,
+    projectListing,
+  } = data;
   const handleAddSearch = (newItem: string) => {
     if (!filters.locality.includes(newItem)) {
-      setFilters((prevFilters) => ({
-        ...prevFilters,
-        locality: [...prevFilters.locality, newItem],
-      }));
+      dispatch({ type: "ADD_LOCALITY", payload: newItem });
       handleResetQuery();
     } else {
       toast.error("The locality already exists.");
     }
   };
 
-  const handleAddcity = (newItem: string) => {
+  const handleAddCity = (newItem: string) => {
     if (filters.city !== newItem) {
-      setFilters({
-        ...filters,
-        city: newItem,
-      });
+      dispatch({ type: "SET_CITY", payload: newItem });
       handleResetQuery();
     } else {
       toast.error("The city already exists.");
     }
   };
-  const handlePush = async (id: number) => {
-    const enc = await encodeProID(id);
-    push(`/abc/delhi/palika/${enc}`);
+
+  const handlePush = async (type: string, data: any) => {
+    switch (type) {
+      case "project":
+        window.open(`/abc/delhi/palika/${data}`);
+        break;
+      case "listing":
+        {
+          const ids = data.id.split("_");
+          if (ids[0] == "32") {
+            let url;
+            //plot with project condition
+
+            if (ids.length > 3) {
+              const [ut, cg, id, lt] = ids;
+              /*  url = `propTypes=${ut}&cg=${cg}&localities=${data.name.trim()}%2B${lt}`; */
+              url =
+                `propTypes=${ut}&cg=${cg}&localities=` +
+                encodeURIComponent(data.name.trim()) +
+                "%2B" +
+                encodeURIComponent(lt);
+            } else {
+              const [ut, cg, lt] = ids;
+              // url = `propTypes=${ut}&cg=${cg}&localities=${lt}`;
+              url =
+                `propTypes=${ut}&cg=${cg}&localities=` +
+                encodeURIComponent(data.name.trim()) +
+                "%2B" +
+                encodeURIComponent(lt);
+            }
+
+            window.open("/search/listing?" + url);
+          } else {
+            let url;
+
+            if (ids.length > 4) {
+              const [ut, pt, cg, id, lt] = ids;
+              url =
+                `propTypes=${pt}&unitTypes=${ut}&cg=${cg}&projIdEnc=${id}&localities=${data.name.trim()}` +
+                "%2B" +
+                encodeURIComponent(lt);
+            } else {
+              const [ut, pt, cg, lt] = ids;
+              url =
+                `propTypes=${pt}&unitTypes=${ut}&cg=${cg}&localities=${data.name.trim()}` +
+                "%2B" +
+                encodeURIComponent(lt);
+            }
+            window.open("/search/listing?" + url);
+          }
+          /*  const [ut, pt, cg, lt] = ids;
+
+         
+          if (ids.length === 3) {
+          
+            const [ut,  cg, lt] = ids;
+         
+           url = `propTypes=${ut}&cg=${cg}&localities=${lt}`;
+          } else {
+            url = `propTypes=${pt}&unitTypes=${ut}&cg=${cg}&localities=${data.name.trim()}%2B${lt}`;
+          }
+ */
+        }
+        break;
+      case "projectListing":
+        {
+          let listedByType = data.type === "OL" ? "I" : data.type.split("")[0];
+          let projectName = data.name.split("(")[0].trim();
+          // console.log(projectName);
+          const url = `projIdEnc=${data.id}&listedBy=${listedByType}&projName=${projectName}`;
+          window.open("/search/listing?" + url);
+        }
+        break;
+      case "builder":
+        {
+          const url =
+            encodeURIComponent(data.name) + "%2B" + encodeURIComponent(data.id);
+          window.open(`/search?builderIds=${url}`);
+        }
+        // const url = encodeURI(`${data.name}+${data.id}`);
+
+        break;
+      default:
+        break;
+    }
   };
+  const isEmptyOrNull = (arr: any[]) => !arr || arr.length === 0;
+
+  const noResults =
+    isEmptyOrNull(localities) &&
+    isEmptyOrNull(cities) &&
+    isEmptyOrNull(builders) &&
+    isEmptyOrNull(projects) &&
+    isEmptyOrNull(listings) &&
+    isEmptyOrNull(projectListing);
   return (
-    <ScrollArea className="px-5 py-2  h-[200px] sm:h-[330px]">
-      <div>
-        <h2 className="text-[#5F81B2] text-[14px] sm:text-xl flex space-x-2 items-center">
-          <SearchLocationIcon /> <span> Location</span>
-        </h2>
-        {cities?.length > 0 && <SubHeading text="City" />}
+    <ScrollArea
+      className={`px-5 py-2 h-[200px] ${
+        noResults || data == undefined ? "sm:h-[150px]" : " sm:h-[330px]"
+      } `}
+    >
+      {noResults || data == undefined ? (
+        <div className="px-1 py-2 flex flex-row items-center justify-center gap-1">
+          {mainSearchNoResult}
+          <p className=" font-[600] text-black text-base ">
+            Please Enter a Valid Location, Project, or Listing
+          </p>
+        </div>
+      ) : (
+        <>
+          {" "}
+          <div>
+            {localities?.length > 0 && (
+              <h2 className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] font-bold xl:text-[16px] not-italic leading-[normal] flex items-center gap-1 sm:gap-1 xl:text-nowrap cursor-pointer">
+                <SearchLocationIcon /> <span>Location</span>
+              </h2>
+            )}
 
-        <ul>
-          {cities?.map((locality: any) => (
-            <li
-              onClick={() => handleAddcity(`${locality.name}+${locality.id}`)}
-              className="text-[#737579] text-[12px] sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
-              key={locality.id}
-            >
-              {locality.name}
-            </li>
-          ))}
-        </ul>
-        {localities?.length > 0 && <SubHeading text="Locality" />}
+            {localities?.length > 0 && <SubHeading text="Locality" />}
+            <ul>
+              {localities?.map((locality: any) => (
+                <li
+                  onClick={() =>
+                    handleAddSearch(`${locality.name}+${locality.id}`)
+                  }
+                  className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1 sm:gap-1 xl:text-nowrap cursor-pointer"
+                  key={locality.id}
+                >
+                  <GrayMapIcon className="w-3 h-3" /> {locality.name}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            {projects && projects.length > 0 && (
+              <h2 className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic font-semibold leading-[normal] flex items-center gap-1 sm:gap-1 xl:text-nowrap cursor-pointer sm:text-xl  space-x-2   mb-1">
+                {property}{" "}
+                <span className="text-[12px] sm:text-[14px] xl:text-[16px]">
+                  Projects
+                </span>
+              </h2>
+            )}
+            <ul>
+              {projects?.map((project: any) => (
+                <li
+                  onClick={() => handlePush("project", project.id)}
+                  className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1  xl:text-nowrap cursor-pointer"
+                  key={project.id}
+                >
+                  <GrayMapIcon className="w-3 h-3" /> {project.name}
+                </li>
+              ))}
+            </ul>
 
-        <ul>
-          {localities?.map((locality: any) => (
-            <li
-              onClick={() => handleAddSearch(`${locality.name}+${locality.id}`)}
-              className="text-[#737579] text-[12px] sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
-              key={locality.id}
-            >
-              {locality.name}
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div>
-        {projects && projects.length > 0 && (
-          <h2 className="text-[#5F81B2]  sm:text-xl flex space-x-2 items-center mt-[14px] mb-1">
-            {property} <span> Projects</span>
-          </h2>
-        )}
-
-        <ul>
-          {projects?.map((project: any) => (
-            <li
-              onClick={() => handlePush(project.id)}
-              className="text-[#737579] text-[14px] sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
-              key={project.id}
-            >
-              {project.name}
-            </li>
-          ))}
-        </ul>
-      </div>
+            {projectListing?.length > 0 && (
+              <SubHeading text="Project Listings" />
+            )}
+            <ul>
+              {projectListing?.map((projectListing: any) => (
+                <li
+                  onClick={() => handlePush("projectListing", projectListing)}
+                  className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1  xl:text-nowrap cursor-pointer"
+                  key={projectListing.id}
+                >
+                  <GrayMapIcon className="w-3 h-3" /> {projectListing.name}
+                </li>
+              ))}
+            </ul>
+            {listings?.length > 0 && <SubHeading text="Listings" />}
+            <ul>
+              {listings?.map((listing: any) => (
+                <li
+                  onClick={() =>
+                    handlePush("listing", {
+                      id: listing.id,
+                      name: listing.name.split(" in ")[1],
+                    })
+                  }
+                  className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1  xl:text-nowrap cursor-pointer"
+                  key={listing.id}
+                >
+                  <GrayMapIcon className="w-3 h-3" /> {listing.name}
+                </li>
+              ))}
+            </ul>
+            {builders?.length > 0 && <SubHeading text="Builders" />}
+            <ul>
+              {builders?.map((builder: any) => (
+                <li
+                  onClick={() =>
+                    handlePush("builder", {
+                      name: builder.name,
+                      id: builder.id,
+                    })
+                  }
+                  className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic leading-[normal] flex items-center gap-1  xl:text-nowrap cursor-pointer"
+                  key={builder.id}
+                >
+                  <GrayMapIcon className="w-3 h-3" /> {builder.name}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </>
+      )}
     </ScrollArea>
   );
 }
+
 const SubHeading = ({ text }: { text: string }) => {
   return (
-    <div className="flex  items-center gap-1.5 mt-[14px] mb-1">
-      <div className="text-[#4D6677] text-[14px] sm:text-base  font-medium ">
+    <div className="flex items-center gap-1.5 mt-[14px] mb-1">
+      <div className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic font-semibold leading-[normal] flex items-center gap-1  xl:text-nowrap">
         {text}
-      </div>{" "}
-      <hr className="w-full h-px  border-0 bg-[#98A5B8]" />
+      </div>
+      <hr className="w-full h-px border-0 bg-[#98A5B8]" />
     </div>
   );
 };
+
 const property = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -132,10 +274,10 @@ const property = (
     viewBox="0 0 20 20"
     fill="none"
   >
-    <g clip-path="url(#clip0_2974_100402)">
+    <g clipPath="url(#clip0_2974_100402)">
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M10.8554 1.89162C11.0345 1.832 11.2248 1.81372 11.412 1.83815C11.5991 1.86259 11.7784 1.9291 11.9362 2.0327C12.094 2.1363 12.2263 2.2743 12.3231 2.43633C12.42 2.59837 12.4789 2.78024 12.4954 2.96829L12.5004 3.07829V7.64995L15.662 8.28329C15.9255 8.33579 16.1651 8.47179 16.3452 8.67112C16.5253 8.87046 16.6364 9.12252 16.662 9.38995L16.667 9.50829V15.8333H17.5004C17.7128 15.8335 17.9171 15.9149 18.0715 16.0607C18.226 16.2065 18.3189 16.4057 18.3314 16.6178C18.3438 16.8298 18.2748 17.0386 18.1385 17.2015C18.0022 17.3644 17.8088 17.469 17.5979 17.4941L17.5004 17.5H2.50038C2.28798 17.4997 2.08369 17.4184 1.92924 17.2726C1.77479 17.1268 1.68185 16.9275 1.6694 16.7155C1.65695 16.5034 1.72594 16.2946 1.86227 16.1318C1.99859 15.9689 2.19197 15.8642 2.40288 15.8391L2.50038 15.8333H3.33371V5.29995C3.33371 4.79995 3.63038 4.35329 4.08205 4.15495L4.18871 4.11412L10.8554 1.89162ZM10.8337 3.65662L5.00038 5.60079V15.8333H10.8337V3.65662ZM12.5004 9.35079V15.8333H15.0004V9.84995L12.5004 9.35079Z"
         fill="#5F81B2"
       />

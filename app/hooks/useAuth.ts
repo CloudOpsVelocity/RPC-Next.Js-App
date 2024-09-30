@@ -1,10 +1,9 @@
 "use client";
 import axios from "axios";
 import { signIn } from "next-auth/react";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import CryptoJS from "crypto-js";
-import { WarningIcon } from "../images/commonSvgs";
 import { getCallPath } from "./custom/useRedirect";
 
 interface Login {
@@ -56,6 +55,7 @@ interface RegistrationOthersData {
   officeContact?: number | null;
   managingDirectorName?: string;
   companyLogo?: File;
+  otp?: boolean;
 }
 
 /**
@@ -71,6 +71,15 @@ export default function useAuth({
   const router = useRouter();
 
   const redirectPath = getCallPath();
+  const saveStep = async (step: number = 1) => {
+    try {
+      const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/user-signup-step?page=${step}`;
+      const res = await axios.post(url);
+      return res;
+    } catch (error) {
+      console.log("somethign went wrong");
+    }
+  };
   const loginWithCredentials = async (data: Login): Promise<any> => {
     const encryptedPassword = CryptoJS.AES.encrypt(
       data.password,
@@ -80,11 +89,11 @@ export default function useAuth({
       username: data.username,
       password: encryptedPassword,
     };
+
     const res = await signIn("credentials", {
       ...requestData,
       redirect: false,
     });
-    console.log(res);
     if (res?.ok) {
       type === "register"
         ? setTimeout(() => {
@@ -92,6 +101,14 @@ export default function useAuth({
           }, 5000)
         : router.push(redirectPath);
     } else {
+      if (res?.error === "A" || res?.error === "B") {
+        router.push(`/register/${res?.error === "A" ? "agent" : "builder"}`);
+        toast.success("Redirecting to SignUp", {
+          duration: 1500,
+          icon: "⌛",
+        });
+        return null;
+      }
       toast.error(res?.error || "Something went wrong. Please try again.", {
         duration: 1000,
       });
@@ -139,7 +156,7 @@ export default function useAuth({
         return registrationResponse.data;
       }
     } catch (error: any) {
-      toast.error("User Already Exists");
+      toast.error("Something went wrong");
       // throw new Error("Something went wrong during registration.");
     }
   };
@@ -148,11 +165,10 @@ export default function useAuth({
     data: RegistrationOthersData
   ): Promise<AuthResult> => {
     try {
+      delete data.otp;
       const formData = new FormData();
-      console.log(data.companyLogo);
       formData.append("data", JSON.stringify(data));
       formData.append("logo", data.companyLogo as any);
-
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/registerUser-other`,
         formData
@@ -191,5 +207,5 @@ export default function useAuth({
     }
   };
 
-  return { login, register, verifyOtp, registerOtherDetails };
+  return { login, register, verifyOtp, registerOtherDetails, saveStep };
 }

@@ -1,10 +1,8 @@
-import React from "react";
 import { useQuery } from "react-query";
 import { getProjectUnits } from "../utils/api/project";
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { useAtomValue } from "jotai";
 import { currentPhaseAtom, propCgIdAtom } from "../store/vewfloor";
 import { useParams } from "next/navigation";
-import { floorPlansArray } from "../store/floor";
 
 export default function useUnitTypes() {
   // const setFloorPlans = useSetAtom(floorPlansArray);

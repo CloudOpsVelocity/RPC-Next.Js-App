@@ -4,9 +4,72 @@ import { Menu } from "@mantine/core";
 import clsx from "clsx";
 import React, { useState } from "react";
 
-type Props = {};
+type Props = {
+  typeProp:'proj' | 'listing'
+  ActivitiesType: null | string
+};
 
-export default function SortBy({}: Props) {
+export default function SortBy({typeProp,  ActivitiesType}: Props) {
+  const buyOrSell =ActivitiesType == "R"? "Rent" : "sell";
+
+  const commonConfig = [
+    {
+      label: "Price Low to High",
+      value: 2,
+      type: "minPrice",
+    },
+    {
+      label: "Price High to Low",
+      value: 1,
+      type: "maxPrice",
+    }
+  ];
+  const additionalConfig = buyOrSell != "Rent" ? [
+    {
+      label: "Price / sq.ft. : Low to High",
+      value: 2,
+      type: "basePrice",
+    },
+    {
+      label: "Price / sq.ft. : High to Low",
+      value: 1,
+      type: "basePrice",
+    }
+  ] : [];
+  
+  const commonConfigList = [
+    {
+      label: "Price Low to High",
+      value: 2,
+      type: "price",
+    },
+    {
+      label: "Price High to Low",
+      value: 1,
+      type: "price",
+    }
+  ];
+  const additionalConfigList = buyOrSell != "Rent" ? [
+    {
+      label: "Price / sq.ft. : Low to High",
+      value: 2,
+      type: "sqftPrice",
+    },
+    {
+      label: "Price / sq.ft. : High to Low",
+      value: 1,
+      type: "sqftPrice",
+    }
+  ] : [];
+    
+  
+  
+  const projConfig = [...commonConfig, ...additionalConfig];
+  const listConfig=[...commonConfigList, ...additionalConfigList]
+
+  const config=typeProp == "proj" ? projConfig :listConfig;
+
+
   const { filters, setFilters, handleAppliedFilters, params } =
     useSearchFilters();
 
@@ -43,12 +106,11 @@ export default function SortBy({}: Props) {
     (eachItem) =>
       eachItem.value === params.sortType && eachItem.type === params.sortByfield
   )?.label ?? "Newest First"
-  console.log(seletedValue)
   return (
     <Menu shadow="md" width={200}>
       <Menu.Target>
-        <button className="flex h-7 justify-center items-center gap-2.5 p-3.5 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.05)] border-[0.5px] border-solid border-[#CBD4E1] bg-white  xl:mr-4 xl:mt-1 xl:mb-2 ml-2 md:ml-auto xl:ml-auto ">
-          <span className="text-[#0073C6] text-xs md:text-base not-italic   font-semibold leading-[normal] ">
+        <button className="flex h-7 justify-center items-center gap-1 p-1 sm:gap-2.5 sm:p-3.5 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.05)] border-[0.5px] border-solid border-[#CBD4E1] bg-white  xl:mr-4 xl:mt-1 xl:mb-2 ml-1 md:ml-auto xl:ml-auto  mb-1">
+          <span className="text-[#0073C6] text-xs xl:text-base not-italic   font-semibold leading-[normal] ">
             {seletedValue || "Sort By"}
           </span>
           <DarkDropDownIcon />
@@ -76,7 +138,7 @@ export default function SortBy({}: Props) {
                   eachItem.label === seletedValue && "!bg-[#1C7ED6] !text-white"
                 ),
               }}
-              key={index}
+              key={eachItem.label}
               value={seletedValue}
               onClick={() => handleSetFilter(eachItem.type, eachItem.value)}
             >
@@ -89,13 +151,17 @@ export default function SortBy({}: Props) {
   );
 }
 
-const config = [
-/*   {
-    label:"Newest First",
-    value:null,
-    type:"price"
-  },
- */
+
+
+
+
+
+/* console.log(projConfig);
+
+
+
+const projConfig = [
+
   {
     label: "Price Low to High",
     value: 2,
@@ -109,11 +175,34 @@ const config = [
   {
     label: "Price / sq.ft. : Low to High",
     value: 2,
-    type: "projectBasePrice",
+    type: "basePrice",
   },
   {
     label: "Price / sq.ft. : High to Low",
     value: 1,
-    type: "projectBasePrice",
+    type: "basePrice",
   },
 ];
+const listConfig = [
+  
+    {
+      label: "Price Low to High",
+      value: 2,
+      type: "price",
+    },
+    {
+      label: "Price High to Low",
+      value: 1,
+      type: "price",
+    },
+    {
+      label: "Price / sq.ft. : Low to High",
+      value: 2,
+      type: "sqftPrice",
+    },
+    {
+      label: "Price / sq.ft. : High to Low",
+      value: 1,
+      type: "sqftPrice",
+    },
+  ]; */
