@@ -349,7 +349,6 @@ function Builder({ encriptedData }: any) {
       }, 4000);
     }
   };
-  console.log(newForm.formState.errors);
   const queryParam = getQueryParamClient();
   const ref = useRef<HTMLInputElement>(null);
 

@@ -28,7 +28,9 @@ export default function DisClamerReadMore({}: Props) {
       presents this content in an easy format for user research and user
       education and does not own any content. Users are advised to exercise
       caution and validate facts from the builder/promoter before purchase.
-      <button className="text-blue-600">ReadMore...</button>
+      <button className="text-blue-600 absolute top-0 right-0">
+        ReadMore...
+      </button>
     </p>
   );
 }
