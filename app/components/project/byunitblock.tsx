@@ -13,6 +13,7 @@ import { setPropertyValues } from "@/app/utils/dyanamic/projects";
 import Image from "next/image";
 import Button from "../atoms/buttons/variansts";
 import { SelectCreatable } from "./_ui/input/UnitINput";
+import { Form } from "react-hook-form";
 interface UnitData {
   unitIdEnc: string;
   projIdEnc: string;
@@ -88,7 +89,7 @@ const Byunitblock: React.FC<Props> = ({
   };
 
   const handleSearch = (key: string, type: "add" | "delete") => {
-    console.log(key);
+
     const keysWithNonNullValues = Object.keys(values).filter(
       (key) => values[key] !== null
     );
@@ -257,6 +258,7 @@ const Byunitblock: React.FC<Props> = ({
           />
         ) : null}
         <SelectCreatable
+        value={values.unitNumber}
           rightSection={<DropDownIcon />}
           size="md"
           label="Unit Number"

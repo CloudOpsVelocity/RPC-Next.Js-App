@@ -1,16 +1,14 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useMemo } from "react";
 import { Combobox, InputBase, useCombobox } from "@mantine/core";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import S from "@/app/styles/Floorplan.module.css";
-import { DropDownIcon } from "@/app/images/commonSvgs";
 
 interface SelectCreatableProps {
-  data: string[]; // Array of options to display (strings or objects)
-  //   value?: string | null; // Controlled value
-  onChange: (value: string | null) => void; // Change handler
-  placeholder?: string; // Placeholder text
-  label?: string; // Optional label for the input
-  // Add any other props you might need
+  data: string[];
+  value?: string | null;
+  onChange: (value: string | null) => void;
+  placeholder?: string;
+  label?: string;
 }
 
 export function SelectCreatable({
@@ -18,6 +16,7 @@ export function SelectCreatable({
   onChange,
   placeholder = "Search value",
   label,
+  value,
   ...props
 }: SelectCreatableProps) {
   const combobox = useCombobox({
@@ -26,20 +25,20 @@ export function SelectCreatable({
 
   const [search, setSearch] = useState("");
 
-  const exactOptionMatch = data.some((item) => item === search);
-  //   const data = exactOptionMatch
-  //     ? data
-  //     : data.filter((item) =>
-  //         item.toLowerCase().includes(search.toLowerCase().trim())
-  //       );
+  const filteredOptions = useMemo(() => {
+    return data.filter((item) =>
+      item.toLowerCase().includes(search.toLowerCase())
+    );
+  }, [data, search]);
 
-  // Virtualization setup
+  const exactOptionMatch = filteredOptions.some((item) => item === search);
+
   const parentRef = useRef<HTMLDivElement>(null);
   const rowVirtualizer = useVirtualizer({
-    count: data.length,
+    count: filteredOptions.length,
     getScrollElement: () => parentRef.current,
-    estimateSize: () => 35, // Adjust based on your item height
-    overscan: 5, // Number of items to render outside the viewport
+    estimateSize: () => 35,
+    overscan: 5,
   });
 
   return (
@@ -47,11 +46,11 @@ export function SelectCreatable({
       store={combobox}
       withinPortal={false}
       onOptionSubmit={(val) => {
-        onChange(val); // Update the value using the passed handler
+        onChange(val);
         setSearch(val);
         combobox.closeDropdown();
       }}
-      {...props} // Spread any additional props to the Combobox
+      {...props}
     >
       <Combobox.Target>
         <InputBase
@@ -59,27 +58,34 @@ export function SelectCreatable({
           label={label}
           rightSection={<Combobox.Chevron />}
           onChange={(event) => {
+            const newValue = event.currentTarget.value;
+            setSearch(newValue);
             combobox.openDropdown();
             combobox.updateSelectedOptionIndex();
-            setSearch(event.currentTarget.value);
           }}
+          className="!w-[46%]"
           onClick={() => combobox.openDropdown()}
           onFocus={() => combobox.openDropdown()}
-          onBlur={() => {
-            combobox.closeDropdown();
-            // setSearch(value || "");
+          onBlur={(event) => {
+            if (!event.currentTarget.contains(event.relatedTarget as Node)) {
+              combobox.closeDropdown();
+              setSearch(value || "");
+            }
           }}
-          maw={180}
           placeholder={placeholder}
           rightSectionPointerEvents="none"
           value={search}
           classNames={{ input: S.input, label: S.label }}
-          rightSectionProps={<DropDownIcon />}
         />
       </Combobox.Target>
       <Combobox.Dropdown
         ref={parentRef}
         style={{ height: "200px", overflow: "auto" }}
+        onMouseDown={(e) => {
+          if (e.target === parentRef.current) {
+            e.preventDefault();
+          }
+        }}
       >
         <Combobox.Options>
           <div
@@ -96,16 +102,16 @@ export function SelectCreatable({
                   top: 0,
                   left: 0,
                   right: 0,
-                  height: 35, // Match this with estimateSize
+                  height: 35,
                   transform: `translateY(${virtualRow.start}px)`,
                 }}
               >
                 {" "}
                 <Combobox.Option
-                  value={data[virtualRow.index]}
-                  key={data[virtualRow.index]}
+                  value={filteredOptions[virtualRow.index]}
+                  key={filteredOptions[virtualRow.index]}
                 >
-                  {data[virtualRow.index]}
+                  {filteredOptions[virtualRow.index]}
                 </Combobox.Option>
               </div>
             ))}

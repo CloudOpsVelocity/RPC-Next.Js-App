@@ -264,8 +264,9 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
             rightSection={<DropDownIcon />}
           />
         )}
-        {/* <SelectCreatable
+        <SelectCreatable
           key={"unitNumber"}
+          value={values.unitNumber}
           data={getOptions("unitNumber")}
           onChange={(value) => handleOnChange(value as string, "unitNumber")}
           {...(propCgId === 32 && { mt: "md" })}
@@ -278,7 +279,7 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
           // searchable
           // {...getInputProps("unitNumber")}
           // onChange={(value) => handleOnChange(value as string, "unitNumber")}
-        /> */}
+        />
         {propCgId == projectprops.apartment &&
           propCgId != projectprops.plot &&
           getOptions("block").filter(

@@ -5,7 +5,7 @@ import S from "@/app/styles/Floorplan.module.css";
 
 interface SelectCreatableProps {
   data: string[]; // Array of options to display (strings or objects)
-  //   value?: string | null; // Controlled value
+  value?: string | null; // Controlled value
   onChange: (value: string | null) => void; // Change handler
   placeholder?: string; // Placeholder text
   label?: string; // Optional label for the input
@@ -14,10 +14,10 @@ interface SelectCreatableProps {
 
 export function SelectCreatable({
   data,
-
   onChange,
   placeholder = "Search value",
   label,
+  value,
   ...props
 }: SelectCreatableProps) {
   const combobox = useCombobox({
@@ -27,11 +27,6 @@ export function SelectCreatable({
   const [search, setSearch] = useState("");
 
   const exactOptionMatch = data.some((item) => item === search);
-  //   const data = exactOptionMatch
-  //     ? data
-  //     : data.filter((item) =>
-  //         item.toLowerCase().includes(search.toLowerCase().trim())
-  //       );
 
   // Virtualization setup
   const parentRef = useRef<HTMLDivElement>(null);
@@ -67,11 +62,11 @@ export function SelectCreatable({
           onFocus={() => combobox.openDropdown()}
           onBlur={() => {
             combobox.closeDropdown();
-            // setSearch(value || "");
+            setSearch(value || "");
           }}
           placeholder={placeholder}
           rightSectionPointerEvents="none"
-          value={search}
+          value={value || ""}
           classNames={{ input: S.input, label: S.labelByBhk }}
         />
       </Combobox.Target>
