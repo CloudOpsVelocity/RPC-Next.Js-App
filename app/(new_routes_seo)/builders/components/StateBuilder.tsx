@@ -7,7 +7,7 @@ const builders = [
   {
     logo: "https://getrightproperty-test-bucket-new.s3.ap-south-1.amazonaws.com/images/varify/builder/398/logo.webp?v=0.21045573608338342",
     name: "Prestige Group",
-    operatingStates: ["Karnataka", "Maharashtra", "Tamil Nadu"],
+    operatingCities: ["Mumbai", "Bangalore", "Chennai"],
     operatingSince: 1986,
     description:
       "Leading real estate developer known for luxury residential and commercial projects across India.",
@@ -15,7 +15,7 @@ const builders = [
   {
     logo: "https://getrightproperty-test-bucket-new.s3.ap-south-1.amazonaws.com/images/varify/builder/398/logo.webp?v=0.21045573608338342",
     name: "Godrej Properties",
-    operatingStates: ["Maharashtra", "Karnataka", "Delhi"],
+    operatingCities: ["Bangalore", "Mysore", "Hyderabad"],
     operatingSince: 1990,
     description:
       "Renowned for innovative, sustainable, and high-quality real estate developments across India.",
@@ -36,7 +36,7 @@ export default function StateBuilder({ state }: Props) {
   const filteredAndSortedBuilders = builders
     .filter(
       (builder) =>
-        (filterState === "" || builder.operatingStates.includes(filterState)) &&
+        (filterState === "" || builder.operatingCities.includes(filterState)) &&
         builder.name.toLowerCase().includes(searchTerm.toLowerCase())
     )
     .sort((a, b) => {
@@ -47,9 +47,9 @@ export default function StateBuilder({ state }: Props) {
       }
     });
 
-  const allStates = Array.from(
-    new Set(builders.flatMap((builder) => builder.operatingStates))
-  ).sort();
+    const allCities = Array.from(
+        new Set(builders.flatMap((builder) => builder.operatingCities))
+      ).sort();
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white pt-20">
@@ -76,10 +76,10 @@ export default function StateBuilder({ state }: Props) {
                 value={filterState}
                 onChange={(e) => setFilterState(e.target.value)}
               >
-                <option value="">All States</option>
-                {allStates.map((state) => (
-                  <option key={state} value={state}>
-                    {state}
+                <option value="">All Citites</option>
+                {allCities.map((city) => (
+                  <option key={city} value={city}>
+                    {city}
                   </option>
                 ))}
               </select>
@@ -120,7 +120,7 @@ export default function StateBuilder({ state }: Props) {
                 </div>
                 <p className="text-sm md:text-base text-gray-600 mb-2 md:mb-3">
                   <span className="font-semibold text-blue-700">Operating in:</span>{" "}
-                  {builder.operatingStates.join(", ")}
+                  {builder.operatingCities.join(", ")}
                 </p>
                 <p className="text-sm md:text-base text-gray-600 mb-3 md:mb-4">
                   <span className="font-semibold text-blue-700">Operating since:</span>{" "}
