@@ -3,10 +3,17 @@ import { getPagesSlugs } from "@/app/seo/api";
 import path from "path";
 import fs from "fs";
 import BuildersDirectory from "../components/CitiesBuilder";
-type Props = {};
+type Props = {
+ params:{
+  city:string
+ }
+};
 
-export default function Page({}: Props) {
-  return <BuildersDirectory />;
+export default function Page({params:{
+  city
+}}: Props) {
+  console.log(city)
+  return <BuildersDirectory city={city} />;
 }
 export async function generateStaticParams() {
   // Get the data (mocked here, replace with your actual data fetching logic)

@@ -1,5 +1,6 @@
 import React from "react";
 import DisClamerReadMore from "./DisClamerReadMore";
+import { ref } from "yup";
 
 type Props = {
   refUrls: string[];
@@ -19,13 +20,13 @@ export default function Disclamer({ refUrls }: Props) {
       </h3>
       <DisClamerReadMore />
       <div className="flex  space-x-1 flex-wrap">
-        {refUrls.map((url: string) => {
+        {refUrls.map((url: string,index) => {
           return (
             <div
               key={url}
               className="text-sm  hover:text-blue-800 transition duration-200"
             >
-              {url} ,
+              {url} {refUrls.length - 1 !== index && ","} 
             </div>
           );
         })}
