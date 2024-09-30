@@ -48,8 +48,7 @@ export default function BuilderPage({ data, id }: Props) {
                   : ""
               }
             />
-
-            <Disclamer refUrls={refURls} />
+            {refURls && refURls.length > 0 && <Disclamer refUrls={refURls} />}
           </div>
           <Reqcallback builderName={data.data?.userName} />
           <ProjectDrawer projName={data?.data?.userName} />
