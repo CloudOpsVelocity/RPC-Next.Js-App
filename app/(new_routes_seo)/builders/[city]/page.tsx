@@ -12,7 +12,6 @@ type Props = {
 export default function Page({params:{
   city
 }}: Props) {
-  console.log(city)
   return <BuildersDirectory city={city} />;
 }
 export async function generateStaticParams() {

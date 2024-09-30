@@ -2,51 +2,30 @@ import EnhancedFooter from "./components/Section/Footer";
 
 export default async function Page() {
 // disable autocomplete for this file only
-class Stack<T> {
-  private queue: T[];
-  constructor() {
-    this.queue = []
+class CircularQueStack<T> {
+  private items:T[];
+  private size:number
+  constructor(k:number){
+    this.items = []
+    this.size = k
   }
-  enque(ele:T){
-    this.queue.push(ele)
+  isFull() {
+    return this.items.length === this.size
   }
-  deque() {
-    if(this.isEmpty()){
-      return 'UNDER FLOW'
+  enque(item:T){
+    if(this.isFull()){
+      return 'que is full now'
     }
-    this.queue.shift()
-  }
-  isEmpty(){
- return this.queue.length <= 0
-  }
-  front(){
-    if(this.isEmpty()){
-      return 'Que is Empty'
-    }
-    return this.queue[0]
-  }
-  size(){
-    return this.queue.length
-  }
-  printStack(){
-    if(this.isEmpty()){
-      console.log('emtpy queue')
-      return
-    }
-      console.log("My Queue Items: " + this.queue.join(", "))
+    this.items.push(item)
+    return item
   }
 }
- const queue = new Stack()
- queue.enque(8)
- queue.enque(2)
- queue.enque(1)
- queue.enque(5)
- queue.deque()
- queue.deque()
- queue.deque()
- queue.deque()
- 
-queue.printStack()
+
+const circularStack = new CircularQueStack(2)
+console.log(circularStack.enque(3))
+console.log(circularStack.enque(3))
+console.log(circularStack.enque(3))
+console.log(circularStack.isFull())
   return (
     <div>
       <EnhancedFooter />

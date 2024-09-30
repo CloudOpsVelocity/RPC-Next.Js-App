@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { FaChevronDown, FaSearch } from "react-icons/fa";
+import { FaChevronDown, FaSearch, FaFilter } from "react-icons/fa";
 
 const builders = [
   {
@@ -74,6 +74,7 @@ export default function BuildersDirectory({city}:{city:string}) {
   const [filterCity, setFilterCity] = useState("");
   const [sortOrder, setSortOrder] = useState("asc");
   const [searchTerm, setSearchTerm] = useState("");
+  const [showFilter, setShowFilter] = useState(false);
 
   const filteredAndSortedBuilders = builders
     .filter(
@@ -96,42 +97,44 @@ export default function BuildersDirectory({city}:{city:string}) {
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white pt-20">
       {/* Fixed Header */}
-      <div className="fixed top-20 left-0 right-0 bg-white shadow-md z-10">
+      <div className="fixed top-[68px] left-0 right-0 bg-white shadow-md z-10">
         <div className="container mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-start md:items-center">
           <h1 className="text-2xl md:text-3xl font-bold text-blue-900 capitalize mb-4 md:mb-0">
             Builders in {city}
           </h1>
           <div className="flex flex-col md:flex-row items-start md:items-center space-y-4 md:space-y-0 md:space-x-4 w-full md:w-auto">
-            <div className="relative w-full md:w-auto">
-              <input
-                type="text"
-                placeholder="Search builders..."
-                className="w-full md:w-auto pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-              <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            {/* Mobile Filter Button */}
+            <button
+              className="md:hidden w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg flex items-center justify-center"
+              onClick={() => setShowFilter(!showFilter)}
+            >
+              <FaFilter className="mr-2" />
+              {showFilter ? 'Hide Filters' : 'Show Filters'}
+            </button>
+            
+            {/* Filter Options */}
+            <div className={`md:flex ${showFilter ? 'flex' : 'hidden'} flex-col md:flex-row w-full md:w-auto space-y-4 md:space-y-0 md:space-x-4 mt-4 md:mt-0`}>
+              <select
+                className="w-full md:w-auto appearance-none bg-white border border-gray-300 text-gray-700 py-2 px-4 pr-8 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                value={filterCity}
+                onChange={(e) => setFilterCity(e.target.value)}
+              >
+                <option value="">All Cities</option>
+                {allCities.map((city) => (
+                  <option key={city} value={city}>
+                    {city}
+                  </option>
+                ))}
+              </select>
+              <select
+                className="w-full md:w-auto appearance-none bg-white border border-gray-300 text-gray-700 py-2 px-4 pr-8 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                value={sortOrder}
+                onChange={(e) => setSortOrder(e.target.value)}
+              >
+                <option value="asc">Sort A-Z</option>
+                <option value="desc">Sort Z-A</option>
+              </select>
             </div>
-            <select
-              className="w-full md:w-auto appearance-none bg-white border border-gray-300 text-gray-700 py-2 px-4 pr-8 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              value={filterCity}
-              onChange={(e) => setFilterCity(e.target.value)}
-            >
-              <option value="">All Cities</option>
-              {allCities.map((city) => (
-                <option key={city} value={city}>
-                  {city}
-                </option>
-              ))}
-            </select>
-            <select
-              className="w-full md:w-auto appearance-none bg-white border border-gray-300 text-gray-700 py-2 px-4 pr-8 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              value={sortOrder}
-              onChange={(e) => setSortOrder(e.target.value)}
-            >
-              <option value="asc">Sort A-Z</option>
-              <option value="desc">Sort Z-A</option>
-            </select>
           </div>
         </div>
       </div>
