@@ -933,6 +933,11 @@ function Builder({ encriptedData }: any) {
                     error: StepCss.errorMsg,
                     label: StepCss.mlabelCss,
                   }}
+                  onPaste={(e) => {
+                    e.preventDefault();
+                    const pastedText = e.clipboardData.getData('text').trim().replace(/\u202C/g, '');
+                    newForm.setValue('officeContact', pastedText);
+                  }}
                   onBlurCapture={(e) => {
                     handleTrimAndReplaceReactHookForm(
                       e,

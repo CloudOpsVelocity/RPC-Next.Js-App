@@ -5,7 +5,7 @@ import React, { useState } from "react";
 type Props = {};
 
 export default function DisClamerReadMore({}: Props) {
-  const [isReadMore, setReadmore] = useState(false);
+  const [isReadMore, setReadMore] = useState(false);
   return (
     <p
       className={clsx(
@@ -28,9 +28,31 @@ export default function DisClamerReadMore({}: Props) {
       presents this content in an easy format for user research and user
       education and does not own any content. Users are advised to exercise
       caution and validate facts from the builder/promoter before purchase.
-      <button className="text-blue-600 absolute top-0 right-0">
-        ReadMore...
-      </button>
+      {!isReadMore && (
+        <button
+          className="text-blue-600 absolute  top-0 right-0 bg-gray-100 pl-1"
+          onClick={() => setReadMore(true)}
+        >
+          Read More...
+        </button>
+      )}
+      {isReadMore && (
+        <>
+          {" "}
+          Get Right Property does not guarantee the accuracy, completeness, or
+          reliability of the information provided. The information on this
+          website is subject to change without notice. Get Right Property
+          assumes no responsibility for any errors or omissions in the content
+          provided. Users are encouraged to independently verify all information
+          before making any decisions based on the content presented here.
+          <button
+            className="text-blue-600 ml-2"
+            onClick={() => setReadMore(false)}
+          >
+            Read Less
+          </button>
+        </>
+      )}
     </p>
   );
 }

@@ -318,7 +318,6 @@ const builderSchema = yup.object().shape({
     .required("Office contact number is required")
     .matches(/^[\d()+-\s]+$/, "Invalid office contact number")
     .max(17, "Mobile number should not exceed 17 digits"),
-
   companyStartDate: yup.date().required("Company start date is required"),
 });
 export const builderSchemaIndex1 = yup.object().shape({
