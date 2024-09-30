@@ -31,8 +31,6 @@ export function SelectCreatable({
     );
   }, [data, search]);
 
-  const exactOptionMatch = filteredOptions.some((item) => item === search);
-
   const parentRef = useRef<HTMLDivElement>(null);
   const rowVirtualizer = useVirtualizer({
     count: filteredOptions.length,
@@ -47,7 +45,7 @@ export function SelectCreatable({
       withinPortal={false}
       onOptionSubmit={(val) => {
         onChange(val);
-        setSearch(val);
+        setSearch("");
         combobox.closeDropdown();
       }}
       {...props}
@@ -65,16 +63,14 @@ export function SelectCreatable({
           }}
           className="!w-[46%]"
           onClick={() => combobox.openDropdown()}
-          onFocus={() => combobox.openDropdown()}
-          onBlur={(event) => {
-            if (!event.currentTarget.contains(event.relatedTarget as Node)) {
-              combobox.closeDropdown();
-              setSearch(value || "");
-            }
+          onBlurCapture={() => {
+            combobox.closeDropdown();
+            setSearch("");
           }}
+          onFocus={() => combobox.openDropdown()}
           placeholder={placeholder}
           rightSectionPointerEvents="none"
-          value={search}
+          value={search || value || ""}
           classNames={{ input: S.input, label: S.label }}
         />
       </Combobox.Target>
@@ -106,7 +102,6 @@ export function SelectCreatable({
                   transform: `translateY(${virtualRow.start}px)`,
                 }}
               >
-                {" "}
                 <Combobox.Option
                   value={filteredOptions[virtualRow.index]}
                   key={filteredOptions[virtualRow.index]}
@@ -116,9 +111,6 @@ export function SelectCreatable({
               </div>
             ))}
           </div>
-          {!exactOptionMatch && search.trim().length > 0 && (
-            <Combobox.Option value="$create">+ Create {search}</Combobox.Option>
-          )}
         </Combobox.Options>
       </Combobox.Dropdown>
     </Combobox>
