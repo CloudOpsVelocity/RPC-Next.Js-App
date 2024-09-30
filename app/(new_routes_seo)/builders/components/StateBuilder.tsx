@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { FaChevronDown, FaSearch } from "react-icons/fa";
+import { FaChevronDown, FaSearch, FaFilter } from "react-icons/fa";
 
 const builders = [
   {
@@ -31,6 +31,7 @@ export default function StateBuilder({ state }: Props) {
   const [filterState, setFilterState] = useState("");
   const [sortOrder, setSortOrder] = useState("asc");
   const [searchTerm, setSearchTerm] = useState("");
+  const [showFilter, setShowFilter] = useState(false);
 
   const filteredAndSortedBuilders = builders
     .filter(
@@ -59,36 +60,38 @@ export default function StateBuilder({ state }: Props) {
             All Builders 
           </h1>
           <div className="flex flex-col md:flex-row items-start md:items-center space-y-4 md:space-y-0 md:space-x-4 w-full md:w-auto">
-            <div className="relative w-full md:w-64">
-              <input
-                type="text"
-                placeholder="Search builders..."
-                className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-              <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            {/* Mobile Filter Button */}
+            <button
+              className="md:hidden w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg flex items-center justify-center"
+              onClick={() => setShowFilter(!showFilter)}
+            >
+              <FaFilter className="mr-2" />
+              {showFilter ? 'Hide Filters' : 'Show Filters'}
+            </button>
+            
+            {/* Filter Options */}
+            <div className={`md:flex ${showFilter ? 'flex' : 'hidden'} flex-col md:flex-row w-full md:w-auto space-y-4 md:space-y-0 md:space-x-4 mt-4 md:mt-0`}>
+              <select
+                className="w-full md:w-auto appearance-none bg-white border border-gray-300 text-gray-700 py-2 px-4 pr-8 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                value={filterState}
+                onChange={(e) => setFilterState(e.target.value)}
+              >
+                <option value="">All States</option>
+                {allStates.map((state) => (
+                  <option key={state} value={state}>
+                    {state}
+                  </option>
+                ))}
+              </select>
+              <select
+                className="w-full md:w-auto appearance-none bg-white border border-gray-300 text-gray-700 py-2 px-4 pr-8 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                value={sortOrder}
+                onChange={(e) => setSortOrder(e.target.value)}
+              >
+                <option value="asc">Sort A-Z</option>
+                <option value="desc">Sort Z-A</option>
+              </select>
             </div>
-            <select
-              className="w-full md:w-auto appearance-none bg-white border border-gray-300 text-gray-700 py-2 px-4 pr-8 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              value={filterState}
-              onChange={(e) => setFilterState(e.target.value)}
-            >
-              <option value="">All States</option>
-              {allStates.map((state) => (
-                <option key={state} value={state}>
-                  {state}
-                </option>
-              ))}
-            </select>
-            <select
-              className="w-full md:w-auto appearance-none bg-white border border-gray-300 text-gray-700 py-2 px-4 pr-8 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              value={sortOrder}
-              onChange={(e) => setSortOrder(e.target.value)}
-            >
-              <option value="asc">Sort A-Z</option>
-              <option value="desc">Sort Z-A</option>
-            </select>
           </div>
         </div>
       </div>
