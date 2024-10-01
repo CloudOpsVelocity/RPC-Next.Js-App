@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Select, Tooltip } from "@mantine/core";
+import { Select,  } from "@mantine/core";
 import {
   DropDownIcon,
   ImgCarouselIcon,
@@ -14,6 +14,7 @@ import Image from "next/image";
 import Button from "../atoms/buttons/variansts";
 import { SelectCreatable } from "./_ui/input/UnitINput";
 import { Form } from "react-hook-form";
+import { useFloorPlanStore } from "@/app/store/project/project.floorplan";
 interface UnitData {
   unitIdEnc: string;
   projIdEnc: string;
@@ -248,6 +249,7 @@ const Byunitblock: React.FC<Props> = ({
             searchable
             rightSection={<DropDownIcon />}
             maxDropdownHeight={200}
+            maxLength={45} // Changed from 20 to 45
             {...getInputProps("towerName")}
             onChange={(value) => handleOnChange("towerName", value as string)}
             classNames={{
@@ -268,24 +270,12 @@ const Byunitblock: React.FC<Props> = ({
           searchable
           clearable
           maxDropdownHeight={200}
+          maxLength={45} // Changed from 20 to 45
           {...getInputProps("unitNumber")}
           onChange={(value) => handleOnChange("unitNumber", value as string)}
           classNames={{ input: S.input, label: S.labelByBhk, option: S.option }}
         />
-        {/* <Select
-          rightSection={<DropDownIcon />}
-          size="md"
-          label="Unit Number"
-          className="w-[100%] sm:!w-[46%]"
-          placeholder="-- select Unit Number--"
-          data={(getOptions("unitNumber") as string[]) || []}
-          searchable
-          clearable
-          maxDropdownHeight={200}
-          {...getInputProps("unitNumber")}
-          onChange={(value) => handleOnChange("unitNumber", value as string)}
-          classNames={{ input: S.input, label: S.labelByBhk, option: S.option }}
-        /> */}
+      
         {propCgId !== projectprops.plot && (
           <Select
             rightSection={<DropDownIcon />}
@@ -296,6 +286,7 @@ const Byunitblock: React.FC<Props> = ({
             data={getOptions("bhkName")}
             searchable
             maxDropdownHeight={200}
+            maxLength={45} // Changed from 20 to 45
             {...getInputProps("bhkName")}
             onChange={(value) => handleOnChange("bhkName", value as string)}
             classNames={{
@@ -318,6 +309,7 @@ const Byunitblock: React.FC<Props> = ({
               data={(getOptions("block") as string[]) || []}
               searchable
               maxDropdownHeight={200}
+              maxLength={45} // Changed from 20 to 45
               {...getInputProps("block")}
               onChange={(value) => handleOnChange("block", value as string)}
               classNames={{
@@ -349,6 +341,7 @@ const Byunitblock: React.FC<Props> = ({
               .sort((a, b) => Number(a.value) - Number(b.value))}
             searchable
             maxDropdownHeight={200}
+            maxLength={45} // Changed from 20 to 45
             {...getInputProps("floor")}
             onChange={(value) => handleOnChange("floor", value as string)}
             classNames={{
@@ -369,6 +362,7 @@ const Byunitblock: React.FC<Props> = ({
             data={(getOptions("plotArea") as string[]) || []}
             searchable
             maxDropdownHeight={200}
+            maxLength={45} // Changed from 20 to 45
             {...getInputProps("plotArea")}
             onChange={(value) => handleOnChange("plotArea", value as string)}
             classNames={{
@@ -391,6 +385,7 @@ const Byunitblock: React.FC<Props> = ({
           }
           searchable
           maxDropdownHeight={200}
+          maxLength={45} // Changed from 20 to 45
           {...getInputProps("facingName")}
           onChange={(value) => handleOnChange("facingName", value as string)}
           classNames={{ input: S.input, label: S.labelByBhk, option: S.option }}
@@ -406,6 +401,7 @@ const Byunitblock: React.FC<Props> = ({
             data={getOptions("width")}
             searchable
             maxDropdownHeight={200}
+            maxLength={45} // Changed from 20 to 45
             {...getInputProps("width")}
             onChange={(value) => handleOnChange("width", value as string)}
             classNames={{
@@ -426,6 +422,7 @@ const Byunitblock: React.FC<Props> = ({
             data={getOptions("length")}
             searchable
             maxDropdownHeight={200}
+            maxLength={45} // Changed from 20 to 45
             {...getInputProps("length")}
             onChange={(value) => handleOnChange("length", value as string)}
             classNames={{

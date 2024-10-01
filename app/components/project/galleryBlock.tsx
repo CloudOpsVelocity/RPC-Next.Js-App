@@ -146,7 +146,6 @@ export default function GalleryBlock({
           <div className="flex justify-start items-start w-full gap-[4%] flex-wrap ">
             {images?.map((img, ind) => (
               <Image
-                key={Math.random()}
                 width={150}
                 fit="fill"
                 height={100}

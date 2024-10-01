@@ -30,6 +30,7 @@ import ArticleJsonLdScript from "@/app/seo/ArticleJson";
 import Reviews from "@/app/components/project/reviews";
 import PartialUnitData from "@/app/components/project/sections";
 import PropertyDataDisplay from "@/app/components/project/_ui/PricingDetailsSection";
+import Disclamer from "@/app/components/builder/Disclamer";
 type Props = {
   projResponse: any;
   amenitiesFromDB: any;
@@ -44,6 +45,7 @@ export default async function ProjectsDetailsPage({
   scrollId,
 }: Props) {
   const { basicData: data, nearByLocations, phaseOverview } = projResponse;
+  const refURls = data?.sourceBuilderUrl?.split(",");
   return (
     <section className="w-full relative break-words ">
       <meta
@@ -117,7 +119,7 @@ export default async function ProjectsDetailsPage({
         <MobileHidden>
           <Navigation
             isBrochure={!!data?.media?.projBroucherUrl}
-            detailsData={data}
+            detailsData={{...data,nearByLocations}}
             slug={slug}
           />
         </MobileHidden>
@@ -239,6 +241,8 @@ export default async function ProjectsDetailsPage({
           builderId={data.builderId}
           company={data.companyName}
         />
+{refURls && refURls.length > 0 && <Disclamer refUrls={refURls} />}
+
         <ProjectDrawer projName={data.projectName} />
         <FloorplanDrawer />
         <LoginPopup />

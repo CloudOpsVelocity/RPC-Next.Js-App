@@ -72,6 +72,7 @@ export function SelectCreatable({
           rightSectionPointerEvents="none"
           value={search || value || ""}
           classNames={{ input: S.input, label: S.label }}
+          maxLength={45}
         />
       </Combobox.Target>
       <Combobox.Dropdown

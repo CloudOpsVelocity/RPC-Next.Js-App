@@ -30,7 +30,7 @@ export default function PartialUnitData({
       className={`w-[95%] md:w-[90%] scroll-mt-[50px] md:mb-[2%] sm:mb-[5%]  ${
         partialUnitData.length > 0 && "min-h-[300px]"
       }`}
-      id={type === "overview" ? "pricing" : "floorPlans"}
+      id={type === "overview" ? "price-details" : "floorPlans"}
     >
       <HeaderActions
         partialUnitData={partialUnitData}

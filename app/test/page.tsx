@@ -1,44 +1,33 @@
 import EnhancedFooter from "./components/Section/Footer";
 
 export default async function Page() {
-class NewArray<T> {
-  private length: number;
-  public data: { [key: number]: T };
-  constructor() {
-    this.length = 0;
-    this.data = {};
+ class Node<T> {
+  public head:T;
+  public next:Node<T>|null;
+  constructor(value:T){
+   this.head = value;
+   this.next = null;
   }
-  push(item: T) {
-    const indexOfItem = this.length
-    this.data[indexOfItem] = item;
-    this.length++;
-   return  indexOfItem
+ }
+ class LinkedList<T> {
+  public head:Node<T>;
+  private tail:Node<T>;
+  private length:number
+  constructor(value:T){
+    this.head = new Node(value);
+    this.tail = this.head;
+    this.length = 1
   }
-  get(index:number){
-    const item = this.data[index]
-    if(!item) return -1;
-    return item
+  push(value:T){
+    this.tail = new Node(value)
+    this.head.next = this.tail
+    this.length++
   }
-  pop(){
-    if(this.length === 0 ) return "empty data"
-    delete this.data[this.length - 1]
-    this.length --
-  }
-}
-const array = new NewArray<any>();
-console.log(array.push(1))
-console.log(array.push(2))
-console.log(array.push(2))
-console.log(array.push(2))
-console.log(array.pop())
-console.log(array.pop())
-console.log(array.pop())
-console.log(array.pop())
-
-
-
-
-console.log(array.data)
+ }
+ const list = new LinkedList(1)
+ list.push(2)
+ list.push(3)
+ console.log({list})
   return (
     <div>
       <EnhancedFooter />

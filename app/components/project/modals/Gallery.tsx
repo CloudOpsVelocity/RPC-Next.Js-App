@@ -141,7 +141,6 @@ const Gallery: React.FC<GalleryProps> = ({
             height={100}
             slideSize="15.333333%"
             slideGap="xs"
-            // loop
             mt={"lg"}
             maw={isMobile ? 300 : 1200}
             px={isMobile ? "50px" : "90px"}
@@ -161,7 +160,6 @@ const Gallery: React.FC<GalleryProps> = ({
               images.map((image, index) => {
                 return (
                   <Carousel.Slide
-                    key={`galleryImage_${image}`}
                     onClick={() => {
                       handleImageClick(image);
                       setCurrentSlide(index);
@@ -175,7 +173,6 @@ const Gallery: React.FC<GalleryProps> = ({
                       src={image}
                       className={clsx(
                         `cursor-pointer w-full min-w-[150px] max-w-[150px] !h-auto max-h-[100px] min-h-[100px] object-cover bg-white`,
-                        // (image.split("?")[0] === (previewImage?.split("?")[0] || content?.url?.split("?")[0]) || currentSlide === index) &&
                         currentSlide === index && "!border-[4px] !border-white"
                       )}
                       alt="image"

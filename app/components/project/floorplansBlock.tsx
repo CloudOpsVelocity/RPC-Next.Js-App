@@ -51,6 +51,7 @@ import UnitsImagesBlock from "./unitblock/UnitsImagesBlock";
 import { useMediaQuery } from "@mantine/hooks";
 import Image from "next/image";
 import PartialUnitData from "./sections";
+import { useFloorPlanStore } from "@/app/store/project/project.floorplan";
 
 type Props = {
   data: PhaseList[];
@@ -96,16 +97,16 @@ Props) {
     enabled: !!propCgId,
     ...RTK_CONFIG,
   });
-  // const {
-  //   data: overview,
-  //   isLoading: overviewdataLoading,
-  //   status,
-  // } = useQuery({
-  //   queryKey: [`overview-data/${slug}`],
-  //   queryFn: () => getOverViewData(slug),
-  //   enabled: !partialUnitData,
-  //   ...RTK_CONFIG,
-  // });
+  const {
+    data: overview,
+    isLoading: overviewdataLoading,
+    status,
+  } = useQuery({
+    queryKey: [`overview-data/${slug}`],
+    queryFn: () => getOverViewData(slug),
+    enabled: !partialUnitData,
+    ...RTK_CONFIG,
+  });
 
   const types =
     selectedPhase?.propTypeOverview &&
@@ -187,8 +188,9 @@ Props) {
       return true;
     }
   };
-
+  const {setFloorplans,} = useFloorPlanStore()
   const handleOpen = () => {
+    setFloorplans(projectUnitsData)
     setSelectedFloor({
       ...selectedFloor,
       floorPlanUrl: selectedFloor.floorPlanUrl ?? ImgNotAvail,
@@ -244,7 +246,7 @@ Props) {
   if (isLoading) return <Loading />;
   return (
     <>
-      {/* {!partialUnitData &&
+      {!partialUnitData &&
         (overviewdataLoading ? (
           <div>Loading....</div>
         ) : (
@@ -256,7 +258,7 @@ Props) {
             type="overview"
             handlePricingFloorPlanClick={handlePricingFloorPlanClick}
           />
-        ))}{" "} */}
+        ))}{" "}
       <div
         className="w-[95%] md:w-[90%] mt-[50px] scroll-mt-[150px] mb-[2%] sm:mb-[0%]"
         id="floor-plans"

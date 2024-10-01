@@ -20,8 +20,9 @@ export default function Navigation({
   detailsData: Main;
   slug: string;
 }) {
+  const isNearBy = Object.keys(detailsData.nearByLocations).length > 0;
   const isTab = useMediaQuery("(max-width: 1600px)");
-  const { data } = useRatings("dc766148701f46debedb4f9cf3a18809");
+  const { data } = useRatings(slug);
   const [currentBlock, setCurrentBlock] = useAtom(currentBlockAtom);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [isSticky, setIsSticky] = useAtom(stickyAtom);
@@ -121,7 +122,7 @@ export default function Navigation({
       key: TOPIC_IDS.AMENITIES,
     },
     { condtion: true, key: TOPIC_IDS.LOCATION_MAP },
-    { condtion: true, key: TOPIC_IDS.NEAR_BY },
+    { condtion: isNearBy, key: TOPIC_IDS.NEAR_BY },
     {
       condtion: detailsData?.specificationList?.length > 0,
       key: TOPIC_IDS.SPECIFICATIONS,

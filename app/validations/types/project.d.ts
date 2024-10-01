@@ -42,6 +42,7 @@ export interface Main {
   reraStatus: boolean;
   phases: any;
   partialUnitData: any;
+  nearByLocations: {[key:string]:any};
 }
 
 export interface AmenityList {
