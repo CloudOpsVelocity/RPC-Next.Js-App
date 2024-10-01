@@ -267,10 +267,10 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
         <SelectCreatable
           key={"unitNumber"}
           value={values.unitNumber}
+          label="Select Unit Number"
           data={getOptions("unitNumber")}
           onChange={(value) => handleOnChange(value as string, "unitNumber")}
           {...(propCgId === 32 && { mt: "md" })}
-          label="Select Unit Number"
 
           // w={"full"}
           // className="!w-[46%]"
