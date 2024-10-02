@@ -243,6 +243,7 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
     setValues(prevObj);
     handleSearch(key);
   };
+
   return (
     <div className="col-span-1 w-full max-w-[392px] mr-[3%]  ">
       <div className="w-[100%] flex justify-between items-start flex-wrap gap-[5%] z-[100000]">
@@ -258,7 +259,7 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
             data={getOptions("towerName")}
             searchable
             maxDropdownHeight={200}
-            // {...getInputProps("towerName")}
+            {...getInputProps("towerName")}
             onChange={(value) => handleOnChange(value as string, "towerName")}
             classNames={{ input: S.input, label: S.label, option: S.option }}
             rightSection={<DropDownIcon />}

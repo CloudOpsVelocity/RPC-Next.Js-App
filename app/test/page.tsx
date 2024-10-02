@@ -19,14 +19,19 @@ export default async function Page() {
     this.length = 1
   }
   push(value:T){
-    this.tail = new Node(value)
-    this.head.next = this.tail
+    let newNode = new Node(value)
+    this.tail.next = newNode
+    this.tail = newNode
     this.length++
   }
+  pop(){
+    if(this.length === 0) return 
+    
+  }
  }
- const list = new LinkedList(1)
- list.push(2)
- list.push(3)
+ const list = new LinkedList('APPLE')
+ list.push('ORANGE')
+ list.push('MANGO')
  console.log({list})
   return (
     <div>

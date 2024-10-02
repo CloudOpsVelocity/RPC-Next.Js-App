@@ -27,7 +27,7 @@ export default function Feature({
           {data?.map((each, ind) => {
             return (
               <li
-                key={Math.random()}
+                key={`${each}-${ind}`}
                 className="  inline-flex gap-[1%] xl:gap-[0.5%] mb-[1%] "
               >
                 <Image
