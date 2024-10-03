@@ -170,6 +170,7 @@ export default function BuildersDirectory({
                   e && setFilterCity(e);
                   setSearchInput("");
                   setSearchTerm("");
+                  setPage(0);
                   isMobile && setShowFilter(false);
                 }}
                 rightSection={<span />}

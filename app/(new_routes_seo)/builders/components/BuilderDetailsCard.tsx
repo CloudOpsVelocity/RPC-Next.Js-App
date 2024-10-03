@@ -72,7 +72,7 @@ export default function BuilderDetailsCard({
     >
       <div className="px-2 pb-4 sm:pb-4 sm:px-5  pt-0 sm:pt-4">
         {/* Logo and Name */}
-        <div className="flex flex-row md:flex-row items-center mb-0 ">
+        <div className="flex flex-row md:flex-row items-center mb-0">
           <div className="w-20 h-20 md:w-24 md:h-24 mb-0 md:mb-0 md:mr-4 flex items-center justify-center">
             <Image
               width={200}
