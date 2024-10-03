@@ -10,6 +10,5 @@ export default async function Page({}: Props) {
     page: 0,
     sort: 0,
   });
-  console.log(builderData);
   return <BuildersDirectory initialData={builderData} />;
 }

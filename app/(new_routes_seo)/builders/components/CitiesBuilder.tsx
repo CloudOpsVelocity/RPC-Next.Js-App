@@ -159,6 +159,7 @@ export default function BuildersDirectory({
                   </button>
                 </form>
               </div>
+
               <Select
                 data={resultArray}
                 searchable
