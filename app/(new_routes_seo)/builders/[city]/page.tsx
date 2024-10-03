@@ -3,27 +3,22 @@ import { getPagesSlugs } from "@/app/seo/api";
 import path from "path";
 import fs from "fs";
 import BuildersDirectory from "../components/CitiesBuilder";
-import { findPathForBuilderDetails,  } from "../../utils/new-seo-routes/builder";
+import { findPathForBuilderDetails } from "../../utils/new-seo-routes/builder";
 import { BASE_PATH_BUILDER_DETAILS } from "../../utils/new-seo-routes/builder.route";
 import { notFound } from "next/navigation";
 import { getCitiesBuilder } from "../../utils/new-seo-routes/builder.client";
 type Props = {
- params:{
-  city:string
- }
+  params: {
+    city: string;
+  };
 };
 
-
-
-export default async function Page({params:{
-  city
-}}: Props) {
-  const PATH = `${BASE_PATH_BUILDER_DETAILS}/${city}`
-  const builderSlug = await findPathForBuilderDetails(PATH)
-  if(!builderSlug) return notFound()
-  const id = builderSlug.split("_")[0]
-const builderData = await getCitiesBuilder({city:(id)})
-  console.log(builderData)
+export default async function Page({ params: { city } }: Props) {
+  const PATH = `${BASE_PATH_BUILDER_DETAILS}/${city}`;
+  const builderSlug = await findPathForBuilderDetails(PATH);
+  if (!builderSlug) return notFound();
+  const id = builderSlug.split("_")[0];
+  const builderData = await getCitiesBuilder({ city: id, page: 0, sort: 0 });
   return <BuildersDirectory city={city} id={id} initialData={builderData} />;
 }
 export async function generateStaticParams() {
