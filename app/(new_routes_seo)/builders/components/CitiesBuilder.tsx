@@ -1,7 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { FaSearch, FaFilter, FaRedoAlt } from "react-icons/fa";
+import {
+  FaSearch,
+  FaFilter,
+  FaRedoAlt,
+  FaClosedCaptioning,
+} from "react-icons/fa";
+import { IoCloseSharp } from "react-icons/io5";
+
 import { useQuery } from "react-query";
 import {
   getAllCititesForBuilders,
@@ -10,6 +17,7 @@ import {
 import { Pagination, Select } from "@mantine/core";
 import RTK_CONFIG from "@/app/config/rtk";
 import BuilderDetailsCard from "./BuilderDetailsCard";
+import { useMediaQuery } from "@mantine/hooks";
 
 export default function BuildersDirectory({
   city,
@@ -20,19 +28,22 @@ export default function BuildersDirectory({
   id?: string;
   initialData: any;
 }) {
-
   const [filterCity, setFilterCity] = useState(id ?? "");
   const [sortOrder, setSortOrder] = useState(0);
   const [page, setPage] = useState(0);
   const [searchInput, setSearchInput] = useState(""); // Separate state for input
   const [searchTerm, setSearchTerm] = useState("");
   const [showFilter, setShowFilter] = useState(false);
-  const [cachedBuilderCount, setCachedBuilderCount] = useState<number | null>(initialData.builderCount); // Cache for builder count
-  
-
-  const initialFilter = `${id ?? ""}/${0}/${0}/${0}`; 
-  const currentFilter = `${filterCity}/${sortOrder}/${page}/${searchTerm.trim() === "" ? 0 : 1}`;
-  const shouldFetch = currentFilter !== initialFilter 
+  const [cachedBuilderCount, setCachedBuilderCount] = useState<number | null>(
+    initialData.builderCount
+  ); // Cache for builder count
+  const isMobile = useMediaQuery("(max-width: 650px)");
+  const isTab = useMediaQuery("(max-width: 1600px)");
+  const initialFilter = `${id ?? ""}/${0}/${0}/${0}`;
+  const currentFilter = `${filterCity}/${sortOrder}/${page}/${
+    searchTerm.trim() === "" ? 0 : 1
+  }`;
+  const shouldFetch = currentFilter !== initialFilter;
   const { data, isLoading } = useQuery({
     queryFn: () =>
       getCitiesBuilder({
@@ -55,7 +66,7 @@ export default function BuildersDirectory({
         setCachedBuilderCount(data.builderCount); // Cache the builder count when on page 0
       }
     },
-    ...RTK_CONFIG
+    ...RTK_CONFIG,
   });
 
   const { data: cities } = useQuery({
@@ -86,11 +97,13 @@ export default function BuildersDirectory({
     e.preventDefault();
     setSearchTerm(searchInput); // Set searchTerm from searchInput on button click
     setPage(0); // Reset page on submit
+    isMobile && setShowFilter(false);
   };
 
   const handleSortOrderChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSortOrder(Number(e.target.value));
     setPage(0); // Reset page to 0 when sorting changes
+    isMobile && setShowFilter(false);
   };
 
   const resultArray = [];
@@ -103,32 +116,33 @@ export default function BuildersDirectory({
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white pt-20">
       {/* Fixed Header */}
       <div className="fixed top-[68px] left-0 right-0 bg-white shadow-md z-10">
-        <div className="container mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-start md:items-center">
-          <h1 className="text-2xl md:text-3xl font-bold text-blue-900 capitalize mb-4 md:mb-0">
-           {!filterCity  ? "All Builders" : `Builders in ${!city ?  cities[filterCity] : city}`} 
+        <div className="container mx-auto px-2 py-1 sm:px-4 sm:py-4 flex flex-row justify-between items-start md:items-center">
+          <h1 className="text-lg md:text-3xl font-bold text-blue-900 capitalize mb-1 md:mb-0 text-nowrap">
+            {!filterCity
+              ? "All Builders"
+              : `Builders in ${!city ? cities[filterCity] : city}`}
           </h1>
-          <div className="flex flex-col md:flex-row items-start md:items-center space-y-4 md:space-y-0 md:space-x-4 w-full md:w-auto">
+          <div className="flex  justify-end  items-start md:items-center space-y-4 md:space-y-0 md:space-x-4 w-full md:w-auto">
             {/* Mobile Filter Button */}
             <button
-              className="md:hidden w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg flex items-center justify-center"
+              className="md:hidden  bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg flex items-center justify-center"
               onClick={() => setShowFilter(!showFilter)}
             >
-              <FaFilter className="mr-2" />
-              {showFilter ? "Hide Filters" : "Show Filters"}
+              {!showFilter ? <FaSearch /> : <IoCloseSharp />}
             </button>
 
             {/* Filter Options */}
             <div
-              className={`md:flex ${
+              className={`absolute bg-white px-2 py-2 sm:py-0 sm:px-0 left-[0.5px] top-[26px] sm:static    md:flex ${
                 showFilter ? "flex" : "hidden"
-              } flex-col md:flex-row w-full md:w-auto space-y-4 md:space-y-0 md:space-x-4 mt-4 md:mt-0`}
+              } flex-col md:flex-row w-full md:w-auto space-y-1 sm:space-y-4 md:space-y-0 md:space-x-4 mt-4 md:mt-0`}
             >
               <div className="flex items-center space-x-4">
                 <form className="flex items-center justify-end space-x-1">
                   <input
                     type="text"
                     placeholder="Search Builder..."
-                    className="w-full md:w-auto bg-white border border-gray-300 text-gray-700 py-2 px-4 pr-8 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full md:w-auto bg-white border border-gray-300 text-gray-700 sm:py-2 px-4 pr-8 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     onChange={handleSearchInputChange} // Change only input
                     value={searchInput}
                     maxLength={80}
@@ -137,30 +151,32 @@ export default function BuildersDirectory({
                   />
                   <button
                     type="submit"
-                    className="bg-blue-600 inline-flex justify-center items-center text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300"
+                    className="bg-blue-600 inline-flex justify-center items-center text-white font-semibold py-1 sm:py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300"
                     onClick={handleSubmit} // Trigger search on click
                   >
-                    <FaSearch className="mr-2" />
-                    Search
+                    <FaSearch className="sm:mr-2" />
+                    <span className="hidden sm:flex">Search</span>
                   </button>
                 </form>
               </div>
               <Select
                 data={resultArray}
                 searchable
-                size="md"
+                size={isMobile ? "xs" : "md"}
                 value={filterCity}
                 placeholder="All Cities"
+                radius={"md"}
                 onChange={(e) => {
                   e && setFilterCity(e);
                   setSearchInput("");
                   setSearchTerm("");
+                  isMobile && setShowFilter(false);
                 }}
                 rightSection={<span />}
               />
 
               <select
-                className="w-full md:w-auto appearance-none bg-white border border-gray-300 text-gray-700 py-2 px-4 pr-8 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full text-base md:w-auto appearance-none bg-white border border-gray-300 text-gray-700 py-0 px-4 sm:py-2 pr-8 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 value={sortOrder}
                 onChange={handleSortOrderChange} // Set page to 0 when sorting changes
               >
@@ -173,80 +189,78 @@ export default function BuildersDirectory({
       </div>
 
       {/* Main Content */}
-      <div className="w-full mx-auto px-4 py-8 mt-32 md:mt-16">
+      <div className="w-full mx-auto px-2 sm:px-4 py-8 mt-1 md:mt-16">
         {/* Card Grid */}
-        <div >
-          {
-          
-          isLoading ? (
+        <div>
+          {isLoading ? (
             <div className="flex items-center justify-center h-screen">
-            <div className="flex flex-col items-center space-y-2">
-              <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-[#0073C6] border-t-transparent"></div>
-              <div className="text-lg font-semibold text-gray-700">
-                Loading Builder Information...
+              <div className="flex flex-col items-center space-y-2">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-[#0073C6] border-t-transparent" />
+                <div className="text-lg font-semibold text-gray-700">
+                  Loading Builder Information...
+                </div>
               </div>
             </div>
-          </div>
-          
-          ) : 
-          
-          
-          
-    data?.builderData?.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 md:gap-8">
-              {
-                       (!shouldFetch ? initialData.builderData :   data?.builderData)?.map(
-              (
-                builder: {
-                  userId: number;
-                  userName: string;
-                  companyName: string;
-                  cityName: string;
-                  builderLogo: string;
-                  builderDescription: string;
-                  newProject: number;
-                  onGoingProject: number;
-                  completedProject: number;
-                },
-                i: number
-              ) => (
-           
-              <BuilderDetailsCard {...builder} />
-              
-              )
-            )
-}
+          ) : data?.builderData?.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2  xl:grid-cols-3 gap-6 md:gap-8">
+              {(!shouldFetch
+                ? initialData.builderData
+                : data?.builderData
+              )?.map(
+                (
+                  builder: {
+                    userId: number;
+                    userName: string;
+                    companyName: string;
+                    cityName: string;
+                    builderLogo: string;
+                    builderDescription: string;
+                    newProject: number;
+                    onGoingProject: number;
+                    completedProject: number;
+                    istab: boolean;
+                    isMobile: boolean;
+                  },
+                  i: number
+                ) => (
+                  <BuilderDetailsCard
+                    key={builder.userId}
+                    {...builder}
+                    isTab={isTab ?? false}
+                    isMobile={isMobile ?? false}
+                  />
+                )
+              )}
             </div>
-
           ) : (
             <div className="flex mx-auto w-full flex-col items-center justify-center h-full space-y-4 py-12">
-            {/* <NoResultsSVG className="w-64 h-64" alt="No Results" /> */}
-            <h2 className="text-2xl font-semibold text-gray-800">
-              No Builders Found
-            </h2>
-            <p className="text-gray-600 text-sm text-center max-w-lg">
-              We couldn&apos;t find any builders matching your search in{" "}
-              {city}. Try adjusting your filters or check back later.
-            </p>
-            <button
-              className="mt-4 flex items-center space-x-2 bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300"
-              onClick={() => {
-                setFilterCity(""); // Reset filters
-                setSearchTerm(""); // Clear search term
-                setSearchInput('')
-                setPage(0); // Reset page
-              }}
-            >
-              <FaRedoAlt className="mr-2" />
-              Reset Filters
-            </button>
-          </div>
+              {/* <NoResultsSVG className="w-64 h-64" alt="No Results" /> */}
+              <h2 className="text-2xl font-semibold text-gray-800">
+                No Builders Found
+              </h2>
+              <p className="text-gray-600 text-sm text-center max-w-lg">
+                We couldn&apos;t find any builders matching your search in{" "}
+                {city}. Try adjusting your filters or check back later.
+              </p>
+              <button
+                className="mt-4 flex items-center space-x-2 bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300"
+                onClick={() => {
+                  setFilterCity(""); // Reset filters
+                  setSearchTerm(""); // Clear search term
+                  setSearchInput("");
+                  setPage(0); // Reset page
+                }}
+              >
+                <FaRedoAlt className="mr-2" />
+                Reset Filters
+              </button>
+            </div>
           )}
         </div>
 
         {/* Pagination */}
         <div className="flex justify-center mt-8">
-        <Pagination
+          <Pagination
             total={totalPages}
             onNextPage={onNextPage}
             onPreviousPage={onBackPage}

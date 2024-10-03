@@ -1,5 +1,6 @@
-import Image from 'next/image';
-import React, { useState, useRef, useEffect } from 'react';
+import { useMediaQuery } from "@mantine/hooks";
+import Image from "next/image";
+import React, { useState, useRef, useEffect } from "react";
 
 type Props = {
   userId: number;
@@ -11,6 +12,8 @@ type Props = {
   newProject: number;
   onGoingProject: number;
   completedProject: number;
+  isTab: boolean;
+  isMobile: boolean;
 };
 
 export default function BuilderDetailsCard({
@@ -22,8 +25,14 @@ export default function BuilderDetailsCard({
   newProject,
   onGoingProject,
   completedProject,
+  userName,
+  isTab,
+  isMobile,
 }: Props) {
-  const [isModalOpen, setIsModalOpen] = useState<{ type: 'description' | 'cities' | null; action: boolean }>({
+  const [isModalOpen, setIsModalOpen] = useState<{
+    type: "description" | "cities" | null;
+    action: boolean;
+  }>({
     type: null,
     action: false,
   });
@@ -31,7 +40,7 @@ export default function BuilderDetailsCard({
   const modalRef = useRef<HTMLDivElement | null>(null);
 
   // Toggles the modal visibility
-  const toggleModal = (type: 'description' | 'cities' | null) =>
+  const toggleModal = (type: "description" | "cities" | null) =>
     setIsModalOpen((prevState) => ({
       type,
       action: !prevState.action,
@@ -46,13 +55,13 @@ export default function BuilderDetailsCard({
 
   useEffect(() => {
     if (isModalOpen.action) {
-      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener("mousedown", handleClickOutside);
     } else {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isModalOpen.action]);
 
@@ -61,10 +70,10 @@ export default function BuilderDetailsCard({
       key={userId}
       className="bg-white rounded-xl shadow-lg overflow-hidden relative hover:shadow border border-blue-200 hover:border-blue-500"
     >
-      <div className="px-4 pb-4 md:pb-4 md:px-5 pt-4">
+      <div className="px-2 pb-4 sm:pb-4 sm:px-5  pt-0 sm:pt-4">
         {/* Logo and Name */}
-        <div className="flex flex-col md:flex-row items-center mb-4">
-          <div className="w-20 h-20 md:w-24 md:h-24 mb-4 md:mb-0 md:mr-4 flex items-center justify-center">
+        <div className="flex flex-row md:flex-row items-center mb-0 sm:mb-4">
+          <div className="w-20 h-20 md:w-24 md:h-24 mb-0 md:mb-0 md:mr-4 flex items-center justify-center">
             <Image
               width={200}
               height={200}
@@ -74,68 +83,82 @@ export default function BuilderDetailsCard({
               className="w-16 h-16 md:w-20 md:h-20 object-contain"
             />
           </div>
-          <h2 className="text-2xl font-extrabold text-blue-900 text-center md:text-left">
-            {companyName}
+          <h2 className="text-base ml-2 sm:ml-0 sm:text-2xl font-extrabold text-blue-900 text-left">
+            {userName}
           </h2>
         </div>
 
         {/* Information Section */}
-        <div className="space-y-2 md:space-y-3">
+        <div className="space-y-1 md:space-y-3">
           <p className="text-sm md:text-base text-black">
-            <span className="font-semibold text-[#0073C6]">Operating in:</span>{' '}
-            {cityName.substring(0, 80)}{cityName.length > 80 && <>...
-            <button
-              onClick={() => toggleModal('cities')}
-              className="text-[#0073C6] font-semibold ml-2"
-            >
-              Read more
-            </button></>}  
+            <span className="font-semibold text-[#0073C6]">Operating in:</span>{" "}
+            {cityName.substring(0, isMobile ? 53 : isTab ? 120 : 80)}
+            {cityName.length > 80 && (
+              <>
+                ...
+                <button
+                  onClick={() => toggleModal("cities")}
+                  className="text-[#0073C6] font-semibold ml-2"
+                >
+                  Read more
+                </button>
+              </>
+            )}
           </p>
           <p className="text-sm md:text-base text-black">
-            <span className="font-semibold text-[#0073C6]">Company Name:</span>{' '}
+            <span className="font-semibold text-[#0073C6]">Company Name:</span>{" "}
             {companyName}
           </p>
           <p className="text-sm md:text-base text-gray-700 leading-relaxed">
-            {builderDescription.substring(0, 150)}{builderDescription.length > 150 && <>
-            
-            ...
-            <button
-              onClick={() => toggleModal('description')}
-              className="text-[#0073C6] font-semibold ml-2"
-            >
-              Read more
-            </button>
-            </>   }
+            {builderDescription.substring(
+              0,
+              isMobile ? 110 : isTab ? 180 : 150
+            )}
+            {builderDescription.length > 150 && (
+              <>
+                ...
+                <button
+                  onClick={() => toggleModal("description")}
+                  className="text-[#0073C6] font-semibold ml-2"
+                >
+                  Read more
+                </button>
+              </>
+            )}
           </p>
         </div>
 
         {/* "Projects by Builder" Section */}
-        <div className="flex py-2 px-4 bg-blue-50 rounded-lg shadow-sm border border-gray-200 mt-2">
+        <div className="flex py-2 px-2 sm:px-4 bg-blue-50 rounded-lg shadow-sm border border-gray-200 mt-2 flex-wrap">
           {/* Projects Summary Title */}
-          <div className="mt-0 font-semibold text-blue-900 text-nowrap mr-2">
-            Projects Summary:{' '}
+          <div className="mt-0 text-sm sm:text-base font-semibold text-blue-900 text-nowrap mr-2">
+            Projects Summary:{" "}
           </div>
           {/* Project Information */}
-          <div className="flex justify-between items-center space-x-2">
-            <div className="text-center">
+          <div className="flex sm:justify-between items-center gap-x-2 flex-wrap">
+            <div className="text-center text-sm sm:text-base">
               <span className="font-semibold text-[#0073C6]"> New:</span>
-              <span className="text-gray-700 font-medium ml-1">{newProject},</span>
+              <span className="text-gray-700 font-medium ml-1">
+                {newProject},
+              </span>
             </div>
-            <div className="text-center">
+            <div className="text-center text-sm sm:text-base">
               <span className="font-semibold text-[#0073C6]"> Ongoing:</span>
               <span className="text-gray-700 font-medium ml-1">
                 {onGoingProject},
               </span>
             </div>
-            <div className="text-center">
+            <div className="text-center text-sm sm:text-base">
               <span className="font-semibold text-[#0073C6]"> Completed:</span>
-              <span className="text-gray-700 font-medium ml-1">{completedProject}</span>
+              <span className="text-gray-700 font-medium ml-1">
+                {completedProject}
+              </span>
             </div>
           </div>
         </div>
 
         {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 mt-4">
+        <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 mt-2 sm:mt-4">
           <button className="w-full sm:w-auto bg-gradient-to-r from-blue-500 to-blue-700 text-white font-semibold text-sm md:text-base px-4 py-1.5 rounded-lg hover:bg-blue-600 transition duration-300 shadow-md">
             See Projects
           </button>
@@ -161,12 +184,14 @@ export default function BuilderDetailsCard({
             </button>
 
             {/* Modal Content Based on Type */}
-            {isModalOpen.type === 'description' ? (
+            {isModalOpen.type === "description" ? (
               <>
                 <h3 className="text-xl font-semibold text-blue-900 mb-4">
                   {companyName} - Full Description
                 </h3>
-                <p className="text-gray-700 leading-relaxed">{builderDescription}</p>
+                <p className="text-gray-700 leading-relaxed">
+                  {builderDescription}
+                </p>
               </>
             ) : (
               <>
