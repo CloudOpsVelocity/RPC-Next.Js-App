@@ -200,7 +200,6 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           price={data.price}
           type={data.cg === "S" ? "Selling" : "Rent"}
         />
-
         <LoginPopup />
         <ProjectDrawer projName={TITLE_OF_PROP} />
         <CompareError />
@@ -208,6 +207,11 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
     </div>
   );
 }
+
+
+
+
+
 
 // export async function generateStaticParams() {
 //   // const slugs = ["96ed572a1630741b975b7950bf0c2f99"];

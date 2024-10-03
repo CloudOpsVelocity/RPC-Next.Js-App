@@ -1,10 +1,16 @@
 import React from 'react'
 import StateBuilder from './components/StateBuilder'
+import BuildersDirectory from './components/CitiesBuilder'
+import { getCitiesBuilder } from '../utils/new-seo-routes/builder.client'
 
 type Props = {}
 
-export default function Page({}: Props) {
+export default async function Page({}: Props) {
+  const builderData = await getCitiesBuilder({
+    page:0,
+    sort:0
+  })
   return (
-   <StateBuilder state='All' />
+   <BuildersDirectory initialData={builderData}   />
   )
 }

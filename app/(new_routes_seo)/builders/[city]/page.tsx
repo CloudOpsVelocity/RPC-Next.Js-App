@@ -3,16 +3,28 @@ import { getPagesSlugs } from "@/app/seo/api";
 import path from "path";
 import fs from "fs";
 import BuildersDirectory from "../components/CitiesBuilder";
+import { findPathForBuilderDetails,  } from "../../utils/new-seo-routes/builder";
+import { BASE_PATH_BUILDER_DETAILS } from "../../utils/new-seo-routes/builder.route";
+import { notFound } from "next/navigation";
+import { getCitiesBuilder } from "../../utils/new-seo-routes/builder.client";
 type Props = {
  params:{
   city:string
  }
 };
 
-export default function Page({params:{
+
+
+export default async function Page({params:{
   city
 }}: Props) {
-  return <BuildersDirectory city={city} />;
+  const PATH = `${BASE_PATH_BUILDER_DETAILS}/${city}`
+  const builderSlug = await findPathForBuilderDetails(PATH)
+  if(!builderSlug) return notFound()
+  const id = builderSlug.split("_")[0]
+const builderData = await getCitiesBuilder({city:(id)})
+  console.log(builderData)
+  return <BuildersDirectory city={city} id={id} initialData={builderData} />;
 }
 export async function generateStaticParams() {
   // Get the data (mocked here, replace with your actual data fetching logic)

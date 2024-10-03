@@ -25,6 +25,7 @@ import StepCss from "@/app/styles/Stepper.module.css";
 import { usePathname } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import axios from "axios";
+import { MAX_LENTH_TEXT } from "@/app/validations/auth";
 
 const schema = yup.object().shape({
   username: yup
@@ -40,8 +41,9 @@ const schema = yup.object().shape({
     .typeError("Mobile number is required"),
   password: yup
     .string()
+    .required("Password is required")
     .min(6, "Password must be at least 6 characters")
-    .required("Password is required"),
+    .max(40, "Password must be under 40 characters"),
 });
 type Action = {
   username: string;
@@ -146,6 +148,7 @@ function LoginPopupForm({ closePopup }: { closePopup?: () => void }) {
           }
           {...form.getInputProps("password")}
           onBlur={(e) => handleTrimAndReplace(e, "password", form)}
+          maxLength={MAX_LENTH_TEXT}
         />
 
         <Link
@@ -184,3 +187,5 @@ function LoginPopupForm({ closePopup }: { closePopup?: () => void }) {
 }
 
 export default LoginPopupForm;
+
+

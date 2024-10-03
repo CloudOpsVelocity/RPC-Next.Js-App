@@ -31,6 +31,8 @@ import {
   TowerIcon,
   WallIcons,
 } from "@/app/images/commonSvgs";
+import { BiFoodTag } from "react-icons/bi";
+
 import React from "react";
 import RoomBasicDetails from "./RoomBasicDetails";
 import PropertyHeading from "./heading";
@@ -287,6 +289,12 @@ const OtherDetails = ({
               icon={<PetFreindly />}
               title="Pet Friendly"
               value={`Pets Are ${ispetFriendly ? "" : "Not"} Allowed`}
+              className={style.card}
+            />
+            <RoomBasicDetails
+              icon={<BiFoodTag size={26} color="#00487C" />}
+              title="Food Preferences"
+              value={"Veg Only"}
               className={style.card}
             />
           </>

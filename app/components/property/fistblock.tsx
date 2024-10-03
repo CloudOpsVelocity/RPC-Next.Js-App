@@ -24,6 +24,7 @@ import { NumberFormatter } from "@mantine/core";
 import { useSetAtom } from "jotai";
 import { currentBlockAtom, isScrollingAtom, stickyAtom } from "./Navigation";
 import { get_posted_by } from "@/app/utils/dyanamic/projects";
+import BrokerContactTag from "./BrokersFreindly";
 type Props = {
   projectDetails: Main | null;
   projName: string;
@@ -55,23 +56,13 @@ const PropertyFirstBlock: React.FC<Props> = ({
     setC("floorPlans");
     setTimeout(() => setIsScrolling(false), 3000);
   }
-  let bhks = ["1Bhk", "2bhk", "2bhk", "3bhk", "3Bhk"];
-  const removeDuplicates = (input: string[]) => {
-    let result: string[] = [];
-    for (let i = 0; i < input.length; i++) {
-      if (!result.includes(input[i])) {
-        result.push(input[i]);
-      }
-    }
-    return result;
-  };
-  console.log(removeDuplicates(bhks));
   return (
     <div
       className={`relative rounded-[10px] w-full m-auto bg-gray-50 sm:h-[549px]  xl:h-[750px] bg-cover flex justify-between items-start flex-col shadow-md break-words`}
     >
       {projectDetails && (
         <>
+         <BrokerContactTag isBrokerAllowed className="absolute top-0 left-0 z-[100]" />
           <div className="absolute m-[2%] z-10 right-2">
             <p className="shadow-md rounded-[10px] bg-gradient-to-r p-[8px] from-[#EFF5FF] /0  to-[#F2FAFF]/100 text-[#000] text-[12px] sm:text-[16px] xl:text-xl not-italic font-medium leading-[normal]">
               Listing Status:{" "}

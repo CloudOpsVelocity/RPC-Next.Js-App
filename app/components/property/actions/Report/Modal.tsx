@@ -140,6 +140,7 @@ export default function ReportModal({ issueData }: any) {
                     placeholder="Start typing here"
                     radius={"10px"}
                     rows={2}
+                    error={text.length > 400 && "Comment must be under 400 characters"}
                     maxLength={401}
                     classNames={{
                       input: S.ratingInput,
