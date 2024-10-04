@@ -1,4 +1,4 @@
-import { useMediaQuery } from "@mantine/hooks";
+import BuilderLink from "@/app/utils/linkRouters/Builder";
 import Image from "next/image";
 import React, { useState, useRef, useEffect } from "react";
 
@@ -14,6 +14,8 @@ type Props = {
   completedProject: number;
   isTab: boolean;
   isMobile: boolean;
+  builderCity: string;
+  branchCities: string;
 };
 
 export default function BuilderDetailsCard({
@@ -28,6 +30,8 @@ export default function BuilderDetailsCard({
   userName,
   isTab,
   isMobile,
+  builderCity,
+  branchCities,
 }: Props) {
   const [isModalOpen, setIsModalOpen] = useState<{
     type: "description" | "cities" | null;
@@ -39,14 +43,12 @@ export default function BuilderDetailsCard({
 
   const modalRef = useRef<HTMLDivElement | null>(null);
 
-  // Toggles the modal visibility
   const toggleModal = (type: "description" | "cities" | null) =>
     setIsModalOpen((prevState) => ({
       type,
       action: !prevState.action,
     }));
 
-  // Close modal when clicking outside of it
   const handleClickOutside = (e: MouseEvent) => {
     if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
       setIsModalOpen({ type: null, action: false });
@@ -66,38 +68,41 @@ export default function BuilderDetailsCard({
   }, [isModalOpen.action]);
 
   return (
-    <div
-      key={userId}
-      className="bg-white rounded-xl shadow-lg overflow-hidden relative hover:shadow border border-blue-200 hover:border-blue-500"
-    >
-      <div className="px-2 pb-4 sm:pb-4 sm:px-5  pt-0 sm:pt-4">
-        {/* Logo and Name */}
-        <div className="flex flex-row md:flex-row items-center mb-0">
-          <div className="w-20 h-20 md:w-24 md:h-24 mb-0 md:mb-0 md:mr-4 flex items-center justify-center">
-            <Image
-              width={200}
-              height={200}
-              quality={100}
-              src={builderLogo}
-              alt={`${companyName} logo`}
-              className="w-16 h-16 md:w-20 md:h-20 object-contain"
-            />
+    <div className="bg-white rounded-xl shadow-lg overflow-hidden relative hover:shadow border border-blue-200 hover:border-blue-500">
+      <div className="px-2 pb-4 sm:pb-4 sm:px-5 pt-0 sm:pt-4">
+        {/* Logo and Name, wrapped in BuilderLink */}
+        <BuilderLink routeParams={{ city: cityName, slug: userName }}>
+          <div className="flex flex-row md:flex-row items-center mb-0 cursor-pointer">
+            <div className="w-20 h-20 md:w-24 md:h-24 mb-0 md:mb-0 md:mr-4 flex items-center justify-center">
+              <Image
+                width={200}
+                height={200}
+                quality={100}
+                src={builderLogo}
+                alt={`${companyName} logo`}
+                className="w-16 h-16 md:w-20 md:h-20 object-contain"
+              />
+            </div>
+            <h2 className="text-base ml-2 sm:ml-0 sm:text-2xl font-extrabold text-blue-900 text-left">
+              {userName}
+            </h2>
           </div>
-          <h2 className="text-base ml-2 sm:ml-0 sm:text-2xl font-extrabold text-blue-900 text-left">
-            {userName}
-          </h2>
-        </div>
+        </BuilderLink>
 
         {/* Information Section */}
         <div className="space-y-1 md:space-y-3">
           <p className="text-sm md:text-base text-black">
             <span className="font-semibold text-[#0073C6]">Operating in:</span>{" "}
-            {cityName.substring(0, isMobile ? 53 : isTab ? 120 : 80)}
-            {cityName.length > 80 && (
+            {branchCities.substring(0, isMobile ? 53 : isTab ? 120 : 80)}
+            {branchCities.length > 80 && (
               <>
                 ...
                 <button
-                  onClick={() => toggleModal("cities")}
+                  onClick={(e) => {
+                    e.preventDefault(); // Prevent default link navigation
+                    e.stopPropagation(); // Stop event bubbling to parent link
+                    toggleModal("cities");
+                  }}
                   className="text-[#0073C6] font-semibold ml-2"
                 >
                   Read more
@@ -118,7 +123,11 @@ export default function BuilderDetailsCard({
               <>
                 ...
                 <button
-                  onClick={() => toggleModal("description")}
+                  onClick={(e) => {
+                    e.preventDefault(); // Prevent default link navigation
+                    e.stopPropagation(); // Stop event bubbling to parent link
+                    toggleModal("description");
+                  }}
                   className="text-[#0073C6] font-semibold ml-2"
                 >
                   Read more
@@ -136,35 +145,72 @@ export default function BuilderDetailsCard({
           </div>
           {/* Project Information */}
           <div className="flex sm:justify-between items-center gap-x-2 flex-wrap">
-            <div className="text-center text-sm sm:text-base">
+            <BuilderLink
+              routeParams={{
+                type: "projStatus",
+                statusId: 108,
+                id: userId,
+                slug: userName,
+              }}
+              className="text-center text-sm sm:text-base underline cursor-pointer"
+            >
               <span className="font-semibold text-[#0073C6]"> New:</span>
               <span className="text-gray-700 font-medium ml-1">
                 {newProject},
               </span>
-            </div>
-            <div className="text-center text-sm sm:text-base">
+            </BuilderLink>
+            <BuilderLink
+              routeParams={{
+                type: "projStatus",
+                statusId: 106,
+                id: userId,
+                slug: userName,
+              }}
+              className="text-center text-sm sm:text-base underline cursor-pointer"
+            >
               <span className="font-semibold text-[#0073C6]"> Ongoing:</span>
               <span className="text-gray-700 font-medium ml-1">
                 {onGoingProject},
               </span>
-            </div>
-            <div className="text-center text-sm sm:text-base">
+            </BuilderLink>
+            <BuilderLink
+              routeParams={{
+                type: "projStatus",
+                statusId: 107,
+                id: userId,
+                slug: userName,
+              }}
+              className="text-center text-sm sm:text-base underline cursor-pointer"
+            >
               <span className="font-semibold text-[#0073C6]"> Completed:</span>
               <span className="text-gray-700 font-medium ml-1">
                 {completedProject}
               </span>
-            </div>
+            </BuilderLink>
           </div>
         </div>
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 mt-2 sm:mt-4">
-          <button className="w-full sm:w-auto bg-gradient-to-r from-[#0073C6] to-[#0073C6] text-white font-semibold text-sm md:text-base px-4 py-1.5 rounded-lg hover:bg-[#0073C6] transition duration-300 shadow-md">
+          <BuilderLink
+            routeParams={{
+              type: "project",
+              slug: userName,
+              id: userId,
+            }}
+            className="w-full sm:w-auto bg-gradient-to-r from-[#0073C6] to-[#0073C6] text-white font-semibold text-sm md:text-base px-4 py-1.5 rounded-lg hover:bg-[#0073C6] transition duration-300 shadow-md"
+          >
             See Projects
-          </button>
-          <button className="w-full sm:w-auto bg-white text-[#0073C6] font-semibold text-sm md:text-base px-4 py-1.5 rounded-lg hover:bg-blue-50 transition duration-300 border-2 border-[#0073C6] shadow-md">
+          </BuilderLink>
+          <BuilderLink
+            routeParams={{
+              city: cityName,
+              slug: userName,
+            }}
+            className="w-full sm:w-auto bg-white text-[#0073C6] font-semibold text-sm md:text-base px-4 py-1.5 rounded-lg hover:bg-blue-50 transition duration-300 border-2 border-[#0073C6] shadow-md"
+          >
             Explore Builder
-          </button>
+          </BuilderLink>
         </div>
       </div>
 
@@ -175,7 +221,6 @@ export default function BuilderDetailsCard({
             ref={modalRef}
             className="bg-white p-6 rounded-lg shadow-lg relative w-[90%] max-h-[90%] overflow-y-auto"
           >
-            {/* Close Button */}
             <button
               onClick={() => toggleModal(null)}
               className="absolute top-5 right-2 bg-red-500 text-white rounded-full w-[30px] h-[30px] hover:bg-red-600 transition"
@@ -183,7 +228,6 @@ export default function BuilderDetailsCard({
               ✕
             </button>
 
-            {/* Modal Content Based on Type */}
             {isModalOpen.type === "description" ? (
               <>
                 <h3 className="text-xl font-semibold text-blue-900 mb-4">
@@ -198,7 +242,7 @@ export default function BuilderDetailsCard({
                 <h3 className="text-xl font-semibold text-blue-900 mb-4">
                   Operating in Cities
                 </h3>
-                <p className="text-gray-700 leading-relaxed">{cityName}</p>
+                <p className="text-gray-700 leading-relaxed">{branchCities}</p>
               </>
             )}
           </div>

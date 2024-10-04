@@ -67,7 +67,7 @@ export default function BuildersDirectory({
       }
     },
     ...RTK_CONFIG,
-  }); 
+  });
   const { data: cities } = useQuery({
     queryFn: getAllCititesForBuilders,
     queryKey: ["builder-cities"],
@@ -93,14 +93,14 @@ export default function BuildersDirectory({
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLButtonElement>) => {
-    if(searchInput === "") return;
     e.preventDefault();
+    if (searchInput === "") return;
     const validBuilderName = searchInput
-    .trim()
-    .replace(/[^\w\s&]/g, "") 
-    .replace(/[\s_]+/g, " "); 
+      .trim()
+      .replace(/[^\w\s&]/g, "")
+      .replace(/[\s_]+/g, " ");
     setSearchTerm(validBuilderName); // Set searchTerm from searchInput on button click
-    setSearchInput(validBuilderName)
+    setSearchInput(validBuilderName);
     setPage(0); // Reset page on submit
     isMobile && setShowFilter(false);
   };
@@ -228,6 +228,8 @@ export default function BuildersDirectory({
                     completedProject: number;
                     istab: boolean;
                     isMobile: boolean;
+                    builderCity: string;
+                    branchCities: string;
                   },
                   i: number
                 ) => (
@@ -236,6 +238,7 @@ export default function BuildersDirectory({
                     {...builder}
                     isTab={isTab ?? false}
                     isMobile={isMobile ?? false}
+                    builderCity={city ?? ""}
                   />
                 )
               )}
