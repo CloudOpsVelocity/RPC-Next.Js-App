@@ -3,6 +3,7 @@ import { convertDateToMonthYear } from "@/app/utils/date";
 import { capitalizeWords } from "@/app/utils/letters";
 import { Data } from "@/app/validations/types/builder";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 type Props = {};
@@ -23,11 +24,16 @@ export default function TopProfileBlock({
             Home
           </a>
           {" > "}
-          <span className="hover:underline cursor-pointer">Builders</span>
+          <Link href={"/builders"} className="hover:underline cursor-pointer">
+            Builders
+          </Link>
           {" > "}
-          <span className="hover:underline cursor-pointer capitalize">
+          <Link
+            href={`/builders/${builderCity}`}
+            className="hover:underline cursor-pointer capitalize"
+          >
             {builderCity}
-          </span>
+          </Link>
           {" > "}
           <span>{capitalizeWords(userName)}</span>
         </p>
