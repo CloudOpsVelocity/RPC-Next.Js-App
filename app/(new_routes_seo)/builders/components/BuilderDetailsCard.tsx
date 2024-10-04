@@ -159,7 +159,7 @@ export default function BuilderDetailsCard({
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 mt-2 sm:mt-4">
-          <button className="w-full sm:w-auto bg-gradient-to-r from-blue-500 to-blue-700 text-white font-semibold text-sm md:text-base px-4 py-1.5 rounded-lg hover:bg-blue-600 transition duration-300 shadow-md">
+          <button className="w-full sm:w-auto bg-gradient-to-r from-[#0073C6] to-[#0073C6] text-white font-semibold text-sm md:text-base px-4 py-1.5 rounded-lg hover:bg-[#0073C6] transition duration-300 shadow-md">
             See Projects
           </button>
           <button className="w-full sm:w-auto bg-white text-[#0073C6] font-semibold text-sm md:text-base px-4 py-1.5 rounded-lg hover:bg-blue-50 transition duration-300 border-2 border-[#0073C6] shadow-md">

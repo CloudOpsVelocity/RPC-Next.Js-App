@@ -41,7 +41,7 @@ export default function BuildersDirectory({
   const isTab = useMediaQuery("(max-width: 1600px)");
   const initialFilter = `${id ?? ""}/${0}/${0}/${0}`;
   const currentFilter = `${filterCity}/${sortOrder}/${page}/${
-    searchTerm.trim() === "" ? 0 : 1
+    searchTerm.trim() === "" ? 0 : searchTerm
   }`;
   const shouldFetch = currentFilter !== initialFilter;
   const { data, isLoading } = useQuery({
@@ -62,13 +62,12 @@ export default function BuildersDirectory({
     initialData: currentFilter === initialFilter ? initialData : undefined, // Use initialData if filters match the initial state
     enabled: shouldFetch, // Enable query only if shouldFetch is true
     onSuccess: (data) => {
-      if (page === 0 && data.builderCount) {
+      if (page === 0 && data?.builderCount == 0 ? true : data.builderCount) {
         setCachedBuilderCount(data.builderCount); // Cache the builder count when on page 0
       }
     },
     ...RTK_CONFIG,
-  });
-
+  }); 
   const { data: cities } = useQuery({
     queryFn: getAllCititesForBuilders,
     queryKey: ["builder-cities"],
@@ -94,8 +93,14 @@ export default function BuildersDirectory({
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLButtonElement>) => {
+    if(searchInput === "") return;
     e.preventDefault();
-    setSearchTerm(searchInput); // Set searchTerm from searchInput on button click
+    const validBuilderName = searchInput
+    .trim()
+    .replace(/[^\w\s&]/g, "") 
+    .replace(/[\s_]+/g, " "); 
+    setSearchTerm(validBuilderName); // Set searchTerm from searchInput on button click
+    setSearchInput(validBuilderName)
     setPage(0); // Reset page on submit
     isMobile && setShowFilter(false);
   };
@@ -116,7 +121,7 @@ export default function BuildersDirectory({
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white pt-20">
       {/* Fixed Header */}
       <div className="fixed top-[68px] left-0 right-0 bg-white shadow-md z-10">
-        <div className="container mx-auto px-2 py-1 sm:px-4 sm:py-4 flex flex-row justify-between items-start md:items-center">
+        <div className="xl:container mx-auto px-2 py-1 sm:px-4 sm:py-4 flex flex-row justify-between items-start md:items-center">
           <h1 className="text-lg md:text-3xl font-bold text-blue-900 capitalize mb-1 md:mb-0 text-nowrap">
             {!filterCity
               ? "All Builders"
@@ -125,7 +130,7 @@ export default function BuildersDirectory({
           <div className="flex  justify-end  items-start md:items-center space-y-4 md:space-y-0 md:space-x-4 w-full md:w-auto">
             {/* Mobile Filter Button */}
             <button
-              className="md:hidden  bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg flex items-center justify-center"
+              className="md:hidden  bg-[#0073C6] text-white font-semibold py-2 px-4 rounded-lg flex items-center justify-center"
               onClick={() => setShowFilter(!showFilter)}
             >
               {!showFilter ? <FaSearch /> : <IoCloseSharp />}
@@ -151,7 +156,7 @@ export default function BuildersDirectory({
                   />
                   <button
                     type="submit"
-                    className="bg-blue-600 inline-flex justify-center items-center text-white font-semibold py-1 sm:py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300"
+                    className="bg-[#0073C6] inline-flex justify-center items-center text-white font-semibold py-1 sm:py-2 px-4 rounded-lg  transition duration-300"
                     onClick={handleSubmit} // Trigger search on click
                   >
                     <FaSearch className="sm:mr-2" />
@@ -174,6 +179,7 @@ export default function BuildersDirectory({
                   setPage(0);
                   isMobile && setShowFilter(false);
                 }}
+                maxLength={20}
                 rightSection={<span />}
               />
 

@@ -38,11 +38,29 @@ export default async function Page() {
       this.length--;
       return temp
     }
+    unshift(value:T){
+      const newNode = new Node(value);
+  newNode.next = this.head
+    this.head = newNode;
+    this.length ++
+return newNode
+    }
+    shift(){
+      if(this.head.next){
+        this.head = this.head.next
+        this.length --
+      }
+   else{
+    '0'
+   }
+    }
   }
   const list = new LinkedList("APPLE");
   list.push("ORANGE");
   list.push("MANGO");
-  list.pop()
+  // list.pop()
+  list.push("PAPAYA")
+  list.shift()
   
  
   console.log(list);
