@@ -9,14 +9,18 @@ import ViewAllButton from "./ViewButton";
 import ShareBtn from "./ShareBtn";
 import ReqBtn from "./ReqBtn";
 import Shortlist from "./Shortlist";
+import ProjectLink, {
+  createProjectLinkUrl,
+} from "@/app/utils/linkRouters/ProjectLink";
 
 type Props = { item: any };
 
 export default function Card({ item }: Props) {
-  let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/abc/banglore/whitefield/${item.projIdEnc}`;
-  const onredirectProj = () => {
-    window.open(url, "_blank");
-  };
+  let url = createProjectLinkUrl({
+    city: item.city,
+    locality: item.locality,
+    slug: item.projName,
+  });
   // let urlBuilder=`${process.env.NEXT_PUBLIC_BACKEND_URL}/builder/${item.builderId}`;
   let builderName = item?.builderName?.toLowerCase().split(" ").join("%2D");
   let urlBuilder = `${process.env.NEXT_PUBLIC_BACKEND_URL}/builders/bengaluru/${builderName}`;
@@ -26,51 +30,59 @@ export default function Card({ item }: Props) {
     window.open(urlBuilder, "_blank");
   };
 
-  // console.log(item)
   return (
     <div
-      onClick={() => onredirectProj()}
+      // onClick={() => onredirectProj()}
       className="w-[310px] sm:w-[508px] xl:w-[631px] h-[326px] sm:h-[294px] xl:h-[368px] shrink-0 relative"
     >
-      <BackgroundImage src={item.coverUrl} radius="sm" h={"100%"}>
-        {/*  {item.builderLogo && (
+      <ProjectLink
+        routeParams={{
+          city: item.city,
+          locality: item.locality,
+          slug: item.projName,
+        }}
+        target="_blank"
+      >
+        <BackgroundImage src={item.coverUrl} radius="sm" h={"100%"}>
+          {/*  {item.builderLogo && (
           <img
             src={item.builderLogo}
             alt=""
             className="w-[45px] h-[45px] sm:w-[54px] sm:h-[54px] xl:w-[67px] xl:h-[67px] object-cover top-[12px] left-[12px] relative"
           />
         )} */}
-        {item.reraStatus === "Recieved" ||
-          ("Applied" && (
+          {(item.reraStatus === "Recieved" ||
+            item.reraStatus === "Applied") && (
             <Image src={"/r.svg"} alt="rera" width={100} height={100} />
-          ))}
+          )}
 
-        {/*  <p className="text-green-600">{item.rerastatus}</p> */}
+          {/*  <p className="text-green-600">{item.rerastatus}</p> */}
 
-        <div className="absolute right-0 top-0 w-full sm:w-[560px] h-full p-[12px] shrink-0 bg-gradient-to-t sm:bg-gradient-to-l from-[#00121F] via-[rgba(59,70,98,0.86)] to-[#565d700a] text-right flex flex-col justify-end sm:justify-between">
-          <div>
-            <p className="text-white text-[16px] xl:text-[18px] not-italic font-extrabold leading-[normal] tracking-[0.64px] flex justify-end items-center">
-              <div className="absolute  sm:static top-[80px] sm:top-5 right-1  inline-flex  gap-3 mr-2 sm:mr-6">
-                <Shortlist
-                  reqId={item.projIdEnc}
-                  shortListed={item.shortListed}
-                />
-                <ShareBtn url={url} type="proj" />
-              </div>{" "}
-              {item.projName && item.projName.length > 20
-                ? `${item.projName.slice(0, 20)}...`
-                : item.projName}
-            </p>
-            <p className="text-white text-[16px] xl:text-[18px] not-italic font-bold leading-[normal] tracking-[0.52px] mt-[8px] text-nowrap">
-              {formatCurrency(item.minPrice)} - {formatCurrency(item.maxPrice)}
-            </p>
-            <p className="text-white text-[12px] xl:text-[18px] not-italic font-bold leading-[normal] tracking-[0.4px] mt-[8px] sm:mt-[8px]">
-              {item.propTypes?.join(", ")}
-            </p>
-          </div>
-          <div className="flex flex-col items-end gap-[9px] xl:gap-[19px]">
-            <div className="space-y-2">
-              {/*  <p className="flex justify-center items-center gap-2 rounded py-1 px-2 bg-[#000000b0] text-white text-[8px] sm:text-[12px] xl:text-base not-italic font-semibold leading-[normal] capitalize max-w-fit self-end ml-auto mt-1 sm:mt-[10px]">
+          <div className="absolute right-0 top-0 w-full sm:w-[560px] h-full p-[12px] shrink-0 bg-gradient-to-t sm:bg-gradient-to-l from-[#00121F] via-[rgba(59,70,98,0.86)] to-[#565d700a] text-right flex flex-col justify-end sm:justify-between">
+            <div>
+              <p className="text-white text-[16px] xl:text-[18px] not-italic font-extrabold leading-[normal] tracking-[0.64px] flex justify-end items-center">
+                <div className="absolute  sm:static top-[80px] sm:top-5 right-1  inline-flex  gap-3 mr-2 sm:mr-6">
+                  <Shortlist
+                    reqId={item.projIdEnc}
+                    shortListed={item.shortListed}
+                  />
+                  <ShareBtn url={url} type="proj" />
+                </div>{" "}
+                {item.projName && item.projName.length > 20
+                  ? `${item.projName.slice(0, 20)}...`
+                  : item.projName}
+              </p>
+              <p className="text-white text-[16px] xl:text-[18px] not-italic font-bold leading-[normal] tracking-[0.52px] mt-[8px] text-nowrap">
+                {formatCurrency(item.minPrice)} -{" "}
+                {formatCurrency(item.maxPrice)}
+              </p>
+              <p className="text-white text-[12px] xl:text-[18px] not-italic font-bold leading-[normal] tracking-[0.4px] mt-[8px] sm:mt-[8px]">
+                {item.propTypes?.join(", ")}
+              </p>
+            </div>
+            <div className="flex flex-col items-end gap-[9px] xl:gap-[19px]">
+              <div className="space-y-2">
+                {/*  <p className="flex justify-center items-center gap-2 rounded py-1 px-2 bg-[#000000b0] text-white text-[8px] sm:text-[12px] xl:text-base not-italic font-semibold leading-[normal] capitalize max-w-fit self-end ml-auto mt-1 sm:mt-[10px]">
                 <Image
                   src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/homepage/unit.png`}
                   alt=""
@@ -80,38 +92,41 @@ export default function Card({ item }: Props) {
                 />{" "}
                 201 units
               </p> */}
-              <span className=" no-underline text-[#ffff]">Builder Name: </span>
-              <button
-                onClick={(e) => builderiRedirect(e)}
-                className="text-[#E3AC00] text-[12px] sm:text-[14px] xl:text-[18px] not-italic font-bold leading-[normal] tracking-[0.44px] underline"
-              >
-                {" "}
-                {item.builderName}
-              </button>
-              <p className="text-white text-[12px] sm:text-[14px] not-italic font-bold leading-[normal] tracking-[0.44px]">
-                Project Land Area: {item.landArea} Acres
-              </p>
-            </div>
-            <div>
-              <p className="text-white text-[12px] sm:text-[14px] not-italic font-bold leading-[normal] tracking-[0.44px]">
-                Start Date: {formatDate(item.launchDate)}
-              </p>
-              <p className="text-white text-[12px] sm:text-[14px] not-italic font-bold leading-[normal] tracking-[0.44px] mt-1">
-                End Date: {formatDate(item.possassionDate)}
-              </p>
-            </div>
-            <div className="sm:flex flex-col items-end space-x-2 sm:space-x-0 gap-3">
-              <ViewAllButton url={url} />
-              <ReqBtn
-                builderName={item.builderName}
-                projName={item.projName}
-                reqId={item.projIdEnc}
-                builderId={item.builderId as number}
-              />
+                <span className=" no-underline text-[#ffff]">
+                  Builder Name:{" "}
+                </span>
+                <button
+                  onClick={(e) => builderiRedirect(e)}
+                  className="text-[#E3AC00] text-[12px] sm:text-[14px] xl:text-[18px] not-italic font-bold leading-[normal] tracking-[0.44px] underline"
+                >
+                  {" "}
+                  {item.builderName}
+                </button>
+                <p className="text-white text-[12px] sm:text-[14px] not-italic font-bold leading-[normal] tracking-[0.44px]">
+                  Project Land Area: {item.landArea} Acres
+                </p>
+              </div>
+              <div>
+                <p className="text-white text-[12px] sm:text-[14px] not-italic font-bold leading-[normal] tracking-[0.44px]">
+                  Start Date: {formatDate(item.launchDate)}
+                </p>
+                <p className="text-white text-[12px] sm:text-[14px] not-italic font-bold leading-[normal] tracking-[0.44px] mt-1">
+                  End Date: {formatDate(item.possassionDate)}
+                </p>
+              </div>
+              <div className="sm:flex flex-col items-end space-x-2 sm:space-x-0 gap-3">
+                <ViewAllButton url={url} />
+                <ReqBtn
+                  builderName={item.builderName}
+                  projName={item.projName}
+                  reqId={item.projIdEnc}
+                  builderId={item.builderId as number}
+                />
+              </div>
             </div>
           </div>
-        </div>
-      </BackgroundImage>
+        </BackgroundImage>
+      </ProjectLink>
     </div>
   );
 }

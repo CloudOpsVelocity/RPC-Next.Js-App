@@ -17,8 +17,10 @@ export default function ReqBtn({
   builderId,
 }: Props) {
   const [, { open }] = useReqCallPopup();
-  const handleOpen = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    e.stopPropagation();
+  const handleOpen = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    // e.stopPropagation();
+    e.preventDefault();
+
     open({
       modal_type: "PROJECT_REQ_CALLBACK",
       postedByName: builderName,

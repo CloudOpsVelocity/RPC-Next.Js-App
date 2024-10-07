@@ -9,13 +9,13 @@ import { formatDate } from "@/app/utils/date";
 import { getImageUrls } from "@/app/utils/image";
 import Shortlist from "./Shortlist";
 import ListingReqBtn from "./ListingReqCallbackBtn";
+import ListingLink from "@/app/utils/linkRouters/ListingLink";
 type Props = {
   item: any;
   sl: string;
 };
 
 export default function ListingCard({ item, sl }: Props) {
-  console.log(item);
   const images = getImageUrls(item.media);
   let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/listing/banglore/${item.propIdEnc}`;
   const onRedirectOnProp = () => {
@@ -23,11 +23,23 @@ export default function ListingCard({ item, sl }: Props) {
   };
   // console.log(item.postedById)
   const title = `${
-    item.propTypeName === "Plot" ? `${formatNumberWithSuffix(item.pa)} sq.ft` : item.bhkName 
+    item.propTypeName === "Plot"
+      ? `${formatNumberWithSuffix(item.pa)} sq.ft`
+      : item.bhkName
   } ${item.propTypeName} for ${item.category} in ${item.localityName}`;
   return (
-    <div
-      onClick={() => onRedirectOnProp()}
+    <ListingLink
+      routeParams={{
+        bhkUnitType: item.bhkName + "-" + item.propTypeName,
+        category: item.category === "Sale" ? "for-sale" : "for-rent",
+        city: item.cityName,
+        locality: item.localityName,
+        propIdEnc: item.propIdEnc,
+        phase: item.phaseName,
+        projName: item.projIdEnc && item.propName,
+      }}
+      target="_blank"
+      // onClick={() => onRedirectOnProp()}
       className="w-full sm:w-[370px] xl:w-[490px] cursor-pointer"
     >
       <div className="h-[137px] sm:h-[145px] xl:h-[228px]   mb-[6px] shrink-0 shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] relative">
@@ -197,7 +209,7 @@ export default function ListingCard({ item, sl }: Props) {
           </div>
         </div>
       </div>
-    </div>
+    </ListingLink>
   );
 }
 const DownSectionCard = ({
