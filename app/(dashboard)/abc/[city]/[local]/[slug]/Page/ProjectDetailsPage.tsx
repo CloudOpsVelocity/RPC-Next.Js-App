@@ -46,6 +46,7 @@ export default async function ProjectsDetailsPage({
 }: Props) {
   const { basicData: data, nearByLocations, phaseOverview } = projResponse;
   const refURls = data?.sourceBuilderUrl?.split(",");
+
   return (
     <section className="w-full relative break-words ">
       <meta
@@ -119,7 +120,7 @@ export default async function ProjectsDetailsPage({
         <MobileHidden>
           <Navigation
             isBrochure={!!data?.media?.projBroucherUrl}
-            detailsData={{...data,nearByLocations}}
+            detailsData={{ ...data, nearByLocations }}
             slug={slug}
           />
         </MobileHidden>
@@ -241,7 +242,7 @@ export default async function ProjectsDetailsPage({
           builderId={data.builderId}
           company={data.companyName}
         />
-{refURls && refURls.length > 0 && <Disclamer refUrls={refURls} />}
+        {refURls && refURls.length > 0 && <Disclamer refUrls={refURls} />}
 
         <ProjectDrawer projName={data.projectName} />
         <FloorplanDrawer />

@@ -51,6 +51,7 @@ function Login({ params }: any) {
     formState: { isLoading },
     setValue,
     watch,
+    clearErrors,
   } = useForm({
     defaultValues: { username: undefined, password: "" },
     shouldFocusError: true,
@@ -113,6 +114,7 @@ function Login({ params }: any) {
           maxLength={10}
           allowDecimal={false}
           onPaste={(event) => {
+            clearErrors("username");
             const pastedText = event.clipboardData.getData("text/plain");
             const trimmedText = pastedText.replace(/\s/g, "");
             const first10Digits = trimmedText.replace(/\D/g, "").slice(0, 10);

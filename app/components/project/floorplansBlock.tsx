@@ -188,9 +188,9 @@ Props) {
       return true;
     }
   };
-  const {setFloorplans,} = useFloorPlanStore()
+  const { setFloorplans } = useFloorPlanStore();
   const handleOpen = () => {
-    setFloorplans(projectUnitsData)
+    setFloorplans(projectUnitsData);
     setSelectedFloor({
       ...selectedFloor,
       floorPlanUrl: selectedFloor.floorPlanUrl ?? ImgNotAvail,
@@ -201,7 +201,14 @@ Props) {
   };
   const handlePricingFloorPlanClick = (selectedBhk: any) => {
     form.setValues(setPropertyValues(selectedBhk, propCgId));
-    handleSearch();
+    const filteredFloors = projectUnitsData.filter(
+      (floor: any) => floor.bhkName == selectedBhk.bhkName
+    );
+    setSelectedFloor({
+      ...filteredFloors[0],
+      floorPlanUrl: filteredFloors[0].floorPlanUrl ?? ImgNotAvail,
+    });
+    setFloorsArray(filteredFloors);
     open("floor");
   };
   const handleContainerClick = () => {
