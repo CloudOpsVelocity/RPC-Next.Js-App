@@ -90,7 +90,7 @@ function Builder({ encriptedData }: any) {
   const { registerOtherDetails, register, login, saveStep } = useAuth({
     type: "register",
   });
-  
+
   const newForm = useForm<any>({
     reValidateMode: "onBlur",
     shouldUseNativeValidation: false,
@@ -936,8 +936,12 @@ function Builder({ encriptedData }: any) {
                   }}
                   onPaste={(e) => {
                     e.preventDefault();
-                    const pastedText = e.clipboardData.getData('text').trim().replace(/\u202C/g, '');
-                    newForm.setValue('officeContact', pastedText);
+                    newForm.clearErrors("officeContact");
+                    const pastedText = e.clipboardData
+                      .getData("text")
+                      .trim()
+                      .replace(/\u202C/g, "");
+                    newForm.setValue("officeContact", pastedText);
                   }}
                   onBlurCapture={(e) => {
                     handleTrimAndReplaceReactHookForm(
