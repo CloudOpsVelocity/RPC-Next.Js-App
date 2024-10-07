@@ -18,7 +18,7 @@ export default function Shortlist({ reqId, shortListed }: Props) {
   const onAddingShortList = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
-    e.stopPropagation();
+    e.preventDefault();
     if (session) {
       setState(!state);
       toggleShortlist({

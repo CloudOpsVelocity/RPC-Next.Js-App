@@ -12,7 +12,7 @@ type Props = {
 export default function ShareBtn({ url, type }: Props) {
   const [shareAtomData, setShareAtomData] = useAtom(searchShareAtom);
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    e.stopPropagation();
+    e.preventDefault();
 
     setShareAtomData({
       ...shareAtomData,
