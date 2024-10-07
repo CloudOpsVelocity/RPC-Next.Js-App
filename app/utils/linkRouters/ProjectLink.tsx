@@ -35,11 +35,8 @@ export const createProjectLinkUrl = (
 export default function ProjectLink({
   routeParams,
   children,
-
   ...rest
 }: ProjectLinkProps) {
-  const { city, slug, locality } = routeParams || {};
-
   // Memoize the href to avoid recalculating it unnecessarily
   const href = useMemo(() => {
     // Redirect to project details page

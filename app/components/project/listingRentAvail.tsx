@@ -11,17 +11,18 @@ import clsx from "clsx";
 import Image from "next/image";
 import React from "react";
 import SubHeading from "./headings/SubHeading";
-import { useMediaQuery } from "@mantine/hooks";
 import { TOPIC_IDS } from "@/app/data/projectDetails";
 // space fixed
 export default function ListingRentAvail({
   projName,
   r,
   s,
+  slug,
 }: {
   projName: string;
   r: string;
   s: string;
+  slug: string;
 }) {
   return (
     <div
@@ -44,6 +45,7 @@ export default function ListingRentAvail({
           projName={projName}
           block={s === "0"}
           id={TOPIC_IDS.LISTINGS_AVAILABLE}
+          slug={slug}
         />
         <Card
           type="rent"
@@ -52,6 +54,7 @@ export default function ListingRentAvail({
           projName={projName}
           block={r === "0"}
           id={TOPIC_IDS.RENT_LISTINGS_AVAILABLE}
+          slug={slug}
         />
       </div>
     </div>
@@ -65,6 +68,7 @@ const Card = ({
   projName,
   block,
   id,
+  slug,
 }: {
   type: "sell" | "rent";
   r: string;
@@ -72,14 +76,17 @@ const Card = ({
   projName: string;
   block: boolean;
   id: string;
+  slug: string;
 }) => {
   const [, { open: openSuccesPopup }] = useMessagePopup(
     type === "rent" ? "Rlisting" : "Slisting"
   );
-  const handleBoxClick = (value: string) => {
-    value === "0" && openSuccesPopup();
+  const handleBoxClick = (value: string, cg: "S" | "R") => {
+    value === "0"
+      ? openSuccesPopup()
+      : window.open(`/search?projIdEnc=${slug}&cg=${cg}&projName=${projName}`);
   };
-  const isMobile = useMediaQuery("(max-width: 601px)");
+
   return (
     <div
       id={id}
@@ -89,7 +96,7 @@ const Card = ({
           ? "border border-solid border-[#FBE885]"
           : "border border-solid border-[#B1DEFF] "
       )}
-      onClick={() => handleBoxClick(block ? r : s)}
+      onClick={() => handleBoxClick(block ? r : s, type === "sell" ? "S" : "R")}
     >
       <AvailListSideSvg type={type} />
       <div className="flex justify-evenly sm:justify-center items-center gap-2 sm:gap-[22px] h-full ">
@@ -127,7 +134,6 @@ const Card = ({
     </div>
   );
 };
-
 let config = {
   sellIcon:
     "https://d2l0lb5gc1bw3t.cloudfront.net/staticmedia-images-icons/project-detail/yellowarrow.png",

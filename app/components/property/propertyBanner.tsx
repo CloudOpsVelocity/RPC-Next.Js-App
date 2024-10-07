@@ -9,6 +9,7 @@ import { Svg } from "./heading";
 import ReadMore from "../atoms/readmore";
 import Button from "../atoms/buttons/variansts";
 import Link from "../atoms/buttons/Link";
+import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 
 export default function PropertyBanner({
   projectName,
@@ -21,8 +22,15 @@ export default function PropertyBanner({
   about,
   reraStatus,
   projIdEnc,
+  cityName,
+  localityName,
 }: Main) {
   const isMobile = useMediaQuery(`(max-width: 750px)`);
+  const url = createProjectLinkUrl({
+    city: cityName,
+    locality: localityName,
+    slug: projectName,
+  });
   return isMobile ? (
     <PropertyBannerForMobile
       projectName={projectName}
@@ -33,6 +41,7 @@ export default function PropertyBanner({
       maxPrice={maxPrice}
       about={about}
       projIdEnc={projIdEnc}
+      url={url}
     />
   ) : (
     <div
@@ -98,7 +107,7 @@ export default function PropertyBanner({
           <ReadMore text={about} title={"About"} />
         </div>
         <Link
-          href={`/abc/banlore/whitefield/${projIdEnc}`}
+          href={url}
           variant="blue"
           className="mt-5   text-[12px] sm:text-[18px] xl:text-[20px] font-[700] "
         >
@@ -118,6 +127,7 @@ function PropertyBannerForMobile({
   maxPrice,
   about,
   projIdEnc,
+  url,
 }: any) {
   return (
     <div className="w-[95%] md:w-[90%] mx-auto mt-5 md:mt-[2%] mb-10 md:mb-20 relative bg-[#fcfcfc] border border-solid border-blue-200  shadow-md !m-[2%]">
@@ -162,11 +172,7 @@ function PropertyBannerForMobile({
         <div className="mt-6">
           <ReadMore maxLines={2} text={about} title={"About"} />
         </div>
-        <Link
-          href={`/abc/banlore/whitefield/${projIdEnc}`}
-          variant="blue"
-          className="mt-2"
-        >
+        <Link href={url} variant="blue" className="mt-2">
           Explore Project
         </Link>
       </div>

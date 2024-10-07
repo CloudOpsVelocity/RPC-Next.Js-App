@@ -40,7 +40,7 @@ const slugifyBHKUnitType = (bhkUnitType: string): string => {
 };
 
 // Function to create URL externally
-export const ListingLinkUrl = (
+export const generateListingLinkUrl = (
   routeParams: ListingLinkProps["routeParams"]
 ): string => {
   const { city, locality, projName, phase, bhkUnitType, propIdEnc, category } =
@@ -63,7 +63,7 @@ export default function ListingLink({
   console.log(routeParams);
   const href = useMemo(() => {
     // Redirect to project details page
-    return ListingLinkUrl(routeParams);
+    return generateListingLinkUrl(routeParams);
   }, [routeParams]);
 
   return (

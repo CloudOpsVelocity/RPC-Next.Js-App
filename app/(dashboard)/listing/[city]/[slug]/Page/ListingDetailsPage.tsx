@@ -46,6 +46,7 @@ export default function ListingDetailsPage({
   nearByLocations,
   TITLE_OF_PROP,
 }: Props) {
+  console.log(data);
   return (
     <div className="w-full">
       <div className="mt-[70px] sm:mt-[90px] w-full sm:pb-[2%] flex xl:text-ellipsis items-center justify-center flex-col">
@@ -139,7 +140,12 @@ export default function ListingDetailsPage({
             {/* {data.postedById === projData.builderId && ( */}
             <>
               {" "}
-              <PropertyBanner {...projData} projIdEnc={data.projIdEnc} />
+              <PropertyBanner
+                {...projData}
+                cityName={data.ctName}
+                localityName={data.ltName}
+                projIdEnc={data.projIdEnc}
+              />
               {/* <ErrorContainer data={projData.banks}> */}
               {data.cg === "S" &&
                 data.postedById === projData.builderId &&

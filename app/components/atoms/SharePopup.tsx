@@ -37,7 +37,7 @@ export default function SharePopup({
   const pathname = usePathname();
   const CopiedUrl = url
     ? url
-    : `${process.env.NEXT_PUBLIC_PROJECT_URL}/${pathname}`;
+    : `${process.env.NEXT_PUBLIC_PROJECT_URL}${pathname}`;
   const [opened, { open, close }] = useDisclosure(false);
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
   return (

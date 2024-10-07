@@ -129,6 +129,7 @@ export default async function ProjectsDetailsPage({
           projName={data.projectName}
           r={data.rentListing}
           s={data.saleListing}
+          slug={slug}
         />
         {/* About */}
         <About

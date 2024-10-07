@@ -12,9 +12,7 @@ import { useShortlistAndCompare } from "@/app/hooks/storage";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import clsx from "clsx";
 import { GlobalPageType } from "@/app/validations/global";
-import { useSetAtom } from "jotai";
-import { NearByDataAtom } from "@/app/store/nearby";
-import { redirect } from "next/dist/server/api-utils";
+import ProjectLink from "@/app/utils/linkRouters/ProjectLink";
 
 type Props = {
   type: string;
@@ -60,7 +58,7 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
     });
   };
   const onAddingShortList = (e: any, projId: string) => {
-    e.stopPropagation();
+    e.preventDefault();
     if (session) {
       handleShortlist(projId);
     } else {
@@ -69,7 +67,7 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
   };
 
   const handleReqCall = (e: any) => {
-    e.stopPropagation();
+    e.preventDefault();
     open({
       modal_type: "PROJECT_REQ_CALLBACK",
       postedByName: cardData.builderName,
@@ -79,170 +77,174 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
       title: cardData.projName,
     });
   };
-  const redirect = () => {
-    window.open(`/abc/karnataka/banglore/${reqId}`, "_blank");
-  };
-
   return (
-    <div
-      onClick={() => redirect()}
+    <ProjectLink
+      routeParams={{
+        city: cardData.city,
+        locality: cardData.locality,
+        slug: cardData.projName,
+      }}
+      target="_blank"
       key={reqId}
-      className={clsx(
-        "border border-width: 2px; text-card-foreground min-w-[310px] max-w-full  sm:min-w-[400px] xl:min-w-[310px]  min-h-[400px] xl:max-w-[494px]   mb-[1%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[14px]",
-        type == "proj" ? "bg-[#FAFAFA] " : "bg-[#FFFEFE] pt-4"
-      )}
     >
-      {type == "proj" && (
-        <div className=" space-y-1.5 p-6  px-4 pt-2 pb-3 justify-between items-center">
-          <a
-            target="_blank"
-            className="tracking-tight sm:text-[18px] font-[600] line-clamp-2 text-wrap min-w-0 text-[#242424] cursor-pointer"
-            href={`/abc/karnataka/banglore/${reqId}`}
-          >
-            {cardData.projName}
-          </a>
-          <div className="text-xs font-semibold  ">
-            <span className="text-[#242424] text-[15px] font-[600]">
-              Price Range:
-            </span>{" "}
-            {cardData?.minPrice != 0 &&
-            cardData?.minPrice != "" &&
-            cardData?.maxPrice != 0 &&
-            cardData?.maxPrice != "" ? (
-              <>
-                <span className="text-[16px] sm:font-[700] text-[#148B16]">
-                  {formatCurrency(cardData.minPrice)}
-                </span>{" "}
-                -{" "}
-                <span className="text-[16px] sm:font-[700] text-[#148B16]">
-                  {formatCurrency(cardData.maxPrice)}
-                </span>
-              </>
-            ) : (
-              <span className="text-[16px] sm:font-[700] text-[#148B16]">
-                Price Not Available
-              </span>
-            )}
-          </div>
-        </div>
-      )}
-
-      <div className="px-3 pb-3">
-        {type != "proj" && (
-          <p className="mb-[-30px] relative z-10 p-[2px] text-[#148B16] text-[14px] font-[700] w-[40%] flex pl-[4px] justify-center items-center bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 shadow-md rounded-[18px] border-[#92B2C8] border-[0.5px] border-solid ">
-            {cardData.availablityStatus == "R"
-              ? "Ready to move"
-              : "Under Construction"}
-          </p>
+      <div
+        className={clsx(
+          "border border-width: 2px; text-card-foreground min-w-[310px] max-w-full  sm:min-w-[400px] xl:min-w-[310px]  min-h-[400px] xl:max-w-[494px]   mb-[1%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[14px]",
+          type == "proj" ? "bg-[#FAFAFA] " : "bg-[#FFFEFE] pt-4"
         )}
-        <div className="relative  max-h-[212px]">
-          <Image
-            src={
-              type === "proj"
-                ? cardData.coverUrl
-                : cardData.projMedia.coverImageUrl
-            }
-            alt="Sobha Dream Acres"
-            className="w-full  mb-4 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] object-cover min-h-[212px] max-h-[212px]  "
-            width={300}
-            height={212}
-          />
-          {type == "proj" &&
-            (cardData.rerastatus === "Recieved" ||
-              cardData.rerastatus === "Applied") && (
-              <p className="absolute top-[1px] left-[0.8px]">
-                <Image src={"/r.svg"} alt="rera" width={100} height={100} />
+      >
+        {type == "proj" && (
+          <div className=" space-y-1.5 p-6  px-4 pt-2 pb-3 justify-between items-center">
+            <a
+              target="_blank"
+              className="tracking-tight sm:text-[18px] font-[600] line-clamp-2 text-wrap min-w-0 text-[#242424] cursor-pointer"
+              href={`/abc/karnataka/banglore/${reqId}`}
+            >
+              {cardData.projName}
+            </a>
+            <div className="text-xs font-semibold  ">
+              <span className="text-[#242424] text-[15px] font-[600]">
+                Price Range:
+              </span>{" "}
+              {cardData?.minPrice != 0 &&
+              cardData?.minPrice != "" &&
+              cardData?.maxPrice != 0 &&
+              cardData?.maxPrice != "" ? (
+                <>
+                  <span className="text-[16px] sm:font-[700] text-[#148B16]">
+                    {formatCurrency(cardData.minPrice)}
+                  </span>{" "}
+                  -{" "}
+                  <span className="text-[16px] sm:font-[700] text-[#148B16]">
+                    {formatCurrency(cardData.maxPrice)}
+                  </span>
+                </>
+              ) : (
+                <span className="text-[16px] sm:font-[700] text-[#148B16]">
+                  Price Not Available
+                </span>
+              )}
+            </div>
+          </div>
+        )}
+
+        <div className="px-3 pb-3">
+          {type != "proj" && (
+            <p className="mb-[-30px] relative z-10 p-[2px] text-[#148B16] text-[14px] font-[700] w-[40%] flex pl-[4px] justify-center items-center bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 shadow-md rounded-[18px] border-[#92B2C8] border-[0.5px] border-solid ">
+              {cardData.availablityStatus == "R"
+                ? "Ready to move"
+                : "Under Construction"}
+            </p>
+          )}
+          <div className="relative  max-h-[212px]">
+            <Image
+              src={
+                type === "proj"
+                  ? cardData.coverUrl
+                  : cardData.projMedia.coverImageUrl
+              }
+              alt="Sobha Dream Acres"
+              className="w-full  mb-4 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] object-cover min-h-[212px] max-h-[212px]  "
+              width={300}
+              height={212}
+            />
+            {type == "proj" &&
+              (cardData.rerastatus === "Recieved" ||
+                cardData.rerastatus === "Applied") && (
+                <p className="absolute top-[1px] left-[0.8px]">
+                  <Image src={"/r.svg"} alt="rera" width={100} height={100} />
+                </p>
+              )}
+
+            <div className=" right-2 absolute ">
+              <button
+                className={clsx(
+                  "mt-[-30px] rounded-[10px] relative bottom-[35px] z-10 p-[8px]  text-[12px] sm:text-[18px] font-[700] flex pl-[4px] justify-center items-center ",
+                  cardData.shortListed === "Y"
+                    ? "bg-[rgb(231,245,255)] text-[#148B16] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px]"
+                    : "bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 text-[#0073C6]"
+                )}
+                onClick={(e) => {
+                  onAddingShortList(e, cardData.projIdEnc);
+                }}
+              >
+                {cardData.shortListed === "Y" ? Shorlisted : shortlistIconSvg}
+                {cardData.shortListed === "Y" ? "Shortlisted" : "Shortlist"}
+              </button>
+            </div>
+          </div>
+
+          <div className="text-sm">
+            {type != "proj" && (
+              <p className="text-[18px] font-[600] text-[#303030] mb-[8px] ">
+                {cardData.bhkName} {cardData.propTypeName} for{" "}
+                {cardData.cg === "R" ? "Rent" : "Sell"} in {cardData.ltName},{" "}
+                <br />
+                <span className="text-[18px] font-[700] text-[#148B16] ">
+                  {" "}
+                  {formatCurrency(cardData.price)}
+                </span>{" "}
               </p>
             )}
 
-          <div className=" right-2 absolute ">
-            <button
-              className={clsx(
-                "mt-[-30px] rounded-[10px] relative bottom-[35px] z-10 p-[8px]  text-[12px] sm:text-[18px] font-[700] flex pl-[4px] justify-center items-center ",
-                cardData.shortListed === "Y"
-                  ? "bg-[rgb(231,245,255)] text-[#148B16] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px]"
-                  : "bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 text-[#0073C6]"
-              )}
-              onClick={(e) => {
-                onAddingShortList(e, cardData.projIdEnc);
-              }}
-            >
-              {cardData.shortListed === "Y" ? Shorlisted : shortlistIconSvg}
-              {cardData.shortListed === "Y" ? "Shortlisted" : "Shortlist"}
-            </button>
-          </div>
-        </div>
+            {type == "proj" && (
+              <p className="mb-[6px] text-[#565D70] text-[14px] sm:text-sm xl:text-base not-italic font-semibold leading-[normal]">
+                Start - End Date:
+                <span className="ml-[4px] text-[#001F35] text-[14px] sm:text-sm xl:text-base not-italic font-semibold leading-[normal]">
+                  {formatDate(cardData.launchDate)} -{" "}
+                  {formatDate(cardData.possassionDate)}
+                </span>
+              </p>
+            )}
 
-        <div className="text-sm">
-          {type != "proj" && (
-            <p className="text-[18px] font-[600] text-[#303030] mb-[8px] ">
-              {cardData.bhkName} {cardData.propTypeName} for{" "}
-              {cardData.cg === "R" ? "Rent" : "Sell"} in {cardData.ltName},{" "}
-              <br />
-              <span className="text-[18px] font-[700] text-[#148B16] ">
-                {" "}
-                {formatCurrency(cardData.price)}
-              </span>{" "}
-            </p>
-          )}
+            {cardData.propTypes ? (
+              <p className="mb-[6px] text-[#242424] text-[14px] sm:text-sm xl:text-base not-italic font-semibold leading-[normal] tracking-[0.56px]">
+                {cardData.propTypes.map((item: any) => item.trim()).join(", ")}
+              </p>
+            ) : (
+              "No Property added yet"
+            )}
 
-          {type == "proj" && (
-            <p className="mb-[6px] text-[#565D70] text-[14px] sm:text-sm xl:text-base not-italic font-semibold leading-[normal]">
-              Start - End Date:
-              <span className="ml-[4px] text-[#001F35] text-[14px] sm:text-sm xl:text-base not-italic font-semibold leading-[normal]">
-                {formatDate(cardData.launchDate)} -{" "}
-                {formatDate(cardData.possassionDate)}
-              </span>
-            </p>
-          )}
+            {type != "proj" && (
+              <p className="text-[16px] mb-[6px] font-[600] text-[#4D6677]">
+                Available From: {formatDate(cardData.availableFrom)}
+              </p>
+            )}
 
-          {cardData.propTypes ? (
-            <p className="mb-[6px] text-[#242424] text-[14px] sm:text-sm xl:text-base not-italic font-semibold leading-[normal] tracking-[0.56px]">
-              {cardData.propTypes.map((item: any) => item.trim()).join(", ")}
-            </p>
-          ) : (
-            "No Property added yet"
-          )}
+            <p className="text-[#565D70]  not-italic font-semibold leading-[normal] tracking-[0.56px] capitalize text-[14px] xl:text-[15px]">
+              {type === "proj" &&
+                `${cardData.locality}, ${cardData?.city}, ${cardData.state},  ${cardData.pincode} `}
 
-          {type != "proj" && (
-            <p className="text-[16px] mb-[6px] font-[600] text-[#4D6677]">
-              Available From: {formatDate(cardData.availableFrom)}
-            </p>
-          )}
-
-          <p className="text-[#565D70]  not-italic font-semibold leading-[normal] tracking-[0.56px] capitalize text-[14px] xl:text-[15px]">
-            {type === "proj" &&
-              `${cardData.locality}, ${cardData?.city}, ${cardData.state},  ${cardData.pincode} `}
-
-            {type === "prop " &&
-              `${cardData.ltName}   
+              {type === "prop " &&
+                `${cardData.ltName}   
                 ${cardData.ctName} 
                 ${cardData.stateName ?? ""} 
                 ${cardData.pinCode}`}
-          </p>
-          {type === "proj" && (
-            <div className="inline-flex items-start gap-2 p-2 shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] cardBg mt-[8px] xl:mt-[16px]">
-              <span className="text-black text-right text-[14px] xl:text-base not-italic font-medium leading-[normal]">
-                Project Status:{" "}
-              </span>
-              <span className="text-[#148B16] text-[14px] xl:text-base not-italic font-bold leading-[normal]">
-                {cardData.projstatus}
-              </span>
-            </div>
-          )}
-          {type != "proj" && (
-            <p className="text-[16px] font-[500] text-[#4D6677]">
-              Posted by {cardData.postedByType === "B" ? "Builder" : "Agent"}
             </p>
-          )}
-          <Button
-            title="Request  Callback"
-            buttonClass=" text-[#FFF] mt-[12px] text-[12px]  sm:text-[14px] xl:text-[18px] font-[600] bg-[#0073C6] rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[10px]  "
-            onChange={handleReqCall}
-          />
+            {type === "proj" && (
+              <div className="inline-flex items-start gap-2 p-2 shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] cardBg mt-[8px] xl:mt-[16px]">
+                <span className="text-black text-right text-[14px] xl:text-base not-italic font-medium leading-[normal]">
+                  Project Status:{" "}
+                </span>
+                <span className="text-[#148B16] text-[14px] xl:text-base not-italic font-bold leading-[normal]">
+                  {cardData.projstatus}
+                </span>
+              </div>
+            )}
+            {type != "proj" && (
+              <p className="text-[16px] font-[500] text-[#4D6677]">
+                Posted by {cardData.postedByType === "B" ? "Builder" : "Agent"}
+              </p>
+            )}
+            <Button
+              title="Request  Callback"
+              buttonClass=" text-[#FFF] mt-[12px] text-[12px]  sm:text-[14px] xl:text-[18px] font-[600] bg-[#0073C6] rounded-[5px] shadow-md whitespace-nowrap flex items-center p-[10px]  "
+              onChange={handleReqCall}
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </ProjectLink>
   );
 }
 

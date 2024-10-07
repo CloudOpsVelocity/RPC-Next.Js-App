@@ -194,11 +194,11 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           />
         </MobileHidden>
         <Overview {...data} slug={slug} PhaseOverview={phaseOverview} />
-        <ListingRentAvail
+        {/* <ListingRentAvail
           projName={data.projectName}
           r={data.rentListing}
           s={data.saleListing}
-        />
+        /> */}
         {/* About */}
         <About
           id="about"

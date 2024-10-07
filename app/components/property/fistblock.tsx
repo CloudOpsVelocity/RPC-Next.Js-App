@@ -25,6 +25,10 @@ import { useSetAtom } from "jotai";
 import { currentBlockAtom, isScrollingAtom, stickyAtom } from "./Navigation";
 import { get_posted_by } from "@/app/utils/dyanamic/projects";
 import BrokerContactTag from "./BrokersFreindly";
+import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
+import Link from "next/link";
+import { useQuery } from "react-query";
+import { generateBuilderUrl } from "@/app/utils/linkRouters/Builder";
 type Props = {
   projectDetails: Main | null;
   projName: string;
@@ -56,13 +60,33 @@ const PropertyFirstBlock: React.FC<Props> = ({
     setC("floorPlans");
     setTimeout(() => setIsScrolling(false), 3000);
   }
+  const { data } = useQuery<any>({
+    queryKey: [`builder/${projectDetails?.postedById}&isBuilderPage=Nproj`],
+    enabled: false,
+  });
+
+  const projectUrl = createProjectLinkUrl({
+    city: projectDetails?.ctName as string,
+    locality: projectDetails?.ltName as string,
+    slug: projName as string,
+  });
+  const builderUrl =
+    data &&
+    generateBuilderUrl({
+      slug: data?.data?.userName,
+      city: projectDetails?.ctName as string,
+    });
+  const isBuilder = get_posted_by(projectDetails?.postedByName) === "Builder";
   return (
     <div
       className={`relative rounded-[10px] w-full m-auto bg-gray-50 sm:h-[549px]  xl:h-[750px] bg-cover flex justify-between items-start flex-col shadow-md break-words`}
     >
       {projectDetails && (
         <>
-         <BrokerContactTag isBrokerAllowed className="absolute top-0 left-0 z-[100]" />
+          <BrokerContactTag
+            isBrokerAllowed
+            className="absolute top-0 left-0 z-[100]"
+          />
           <div className="absolute m-[2%] z-10 right-2">
             <p className="shadow-md rounded-[10px] bg-gradient-to-r p-[8px] from-[#EFF5FF] /0  to-[#F2FAFF]/100 text-[#000] text-[12px] sm:text-[16px] xl:text-xl not-italic font-medium leading-[normal]">
               Listing Status:{" "}
@@ -131,23 +155,15 @@ const PropertyFirstBlock: React.FC<Props> = ({
                   </h3>
                   <SharePopup className="text-sm p-[2px] mr-2 mt-[2px] sm:hidden " />
                 </div>
-                {/*  <h3 className="text-[24px] lg:text-[32px] font-[700] text-[#00487C] capitalize ">
-                  <span className="lowercase">
-                    {projectDetails.propTypeName === "Plot"
-                      ? projectDetails.plotArea + " sq.ft"
-                      : ""}
-                  </span>{" "}
-                  {projectDetails.bhkName} {projectDetails.propTypeName} For{" "}
-                  {projectDetails.cg === "S" ? " Sell" : " Rent"} In{" "}
-                  {projectDetails.ltName}
-                </h3> */}
-                <p
+                <Link
+                  href={projectUrl}
+                  target="_blank"
                   className={`text-[#001F35]  sm:text-[18px] xl:text-2xl not-italic font-semibold mt-1 capitalize ${
                     projectDetails.projIdEnc ? "underline text-blue-600" : ""
                   } `}
                 >
                   {projName}
-                </p>
+                </Link>
                 <p className="text-[#242424]  text-sm sm:text-[18px]  xl:text-[22px] not-italic font-[600] leading-[normal] w-[100%] tracking-[0.32px] capitalize sm:mt-[8px] xl:mt-[14px] ">
                   {`${projectDetails.address}, ${projectDetails.ltName}, ${projectDetails.ctName}, ${projectDetails?.stateName}, ${projectDetails.pinCode}`}
                 </p>
@@ -195,9 +211,23 @@ const PropertyFirstBlock: React.FC<Props> = ({
                 ""
               )}
 
-              <p className="text-[#001F35] sm:text-[18px] xl:text-2xl not-italic font-semibold  capitalize sm:mt-1 xl:mt-[8px]">
-                Posted By: <span className="underline text-blue-600 cursor-pointer">{projectDetails.postedByName}</span>
-              </p>
+              {isBuilder ? (
+                <a
+                  target="_blank"
+                  href={builderUrl}
+                  className="text-[#001F35] sm:text-[18px] xl:text-2xl not-italic font-semibold  capitalize sm:mt-1 xl:mt-[8px]"
+                >
+                  Posted By:{" "}
+                  <span className="underline text-blue-600 cursor-pointer">
+                    {projectDetails.postedByName}
+                  </span>
+                </a>
+              ) : (
+                <p className="text-[#001F35] sm:text-[18px] xl:text-2xl not-italic font-semibold  capitalize sm:mt-1 xl:mt-[8px]">
+                  Posted By:{" "}
+                  <span className="">{projectDetails.postedByName}</span>
+                </p>
+              )}
               <p className="mb-[8px] sm:mb-[6px] xl:mb-[13px] text-[12px] md:text-base text-[#001F35] font-semibold md:font-bold ">
                 {get_posted_by(projectDetails.postedByType)}
               </p>

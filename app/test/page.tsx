@@ -102,7 +102,6 @@ export default async function Page() {
   // test({ age: 18 });
 
   // console.log(list.getByIndex(100));
-
   return (
     <div>
       <EnhancedFooter />

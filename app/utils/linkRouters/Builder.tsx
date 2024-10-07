@@ -2,7 +2,7 @@ import { BASE_PATH_BUILDER_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-
 import Link, { LinkProps } from "next/link";
 import React, { ReactNode, useMemo } from "react";
 
-// Simple slugify function without memoization
+// Simple slugify function
 const slugify = (name: string): string => {
   return name
     .toLowerCase()
@@ -10,8 +10,44 @@ const slugify = (name: string): string => {
     .replace(/(^-|-$)+/g, "");
 };
 
+// Function to generate the URL based on routeParams
+export const generateBuilderUrl = (routeParams?: {
+  city?: string;
+  slug: string;
+  type?: string;
+  id?: number;
+  statusId?: number;
+}): string => {
+  const { city, slug, type, id, statusId } = routeParams || {};
+
+  if (type === "project") {
+    if (!id) {
+      return `/search`;
+    }
+    return (
+      "/search?builderIds=" +
+      encodeURIComponent(`${slug}+${id}`).replaceAll("%20", "+")
+    );
+  } else if (type === "projStatus") {
+    if (!id) {
+      return `/search`;
+    }
+    return `/search?projStatus=${statusId}&builderIds=${encodeURIComponent(
+      `${slug}+${id}`
+    ).replaceAll("%20", "+")}`;
+  } else if (city && slug) {
+    // Redirect to builder details page
+    return `${BASE_PATH_BUILDER_DETAILS}/${slugify(city)}/${slugify(slug)}`;
+  } else if (city) {
+    // Redirect to city-specific builder details
+    return `${BASE_PATH_BUILDER_DETAILS}/${slugify(city)}`;
+  } else {
+    // Default redirect to /search
+    return `/search`;
+  }
+};
+
 type BuilderLinkProps = {
-  // Keep all props from LinkProps
   routeParams?: {
     city?: string;
     slug: string;
@@ -28,38 +64,8 @@ export default function BuilderLink({
   children,
   ...rest
 }: BuilderLinkProps) {
-  const { city, slug, type, id, statusId } = routeParams || {};
-
   // Memoize the href to avoid recalculating it unnecessarily
-  const href = useMemo(() => {
-    if (type === "project") {
-      if (!id) {
-        return `/search`;
-      }
-      return (
-        "/search?builderIds=" +
-        encodeURIComponent(`${slug}+${id}`).replaceAll("%20", "+")
-      );
-    } else if (type === "projStatus") {
-      if (!id) {
-        return `/search`;
-      }
-      return `/search?projStatus=${statusId}&builderIds=${encodeURIComponent(
-        `${slug}+${id}`
-      ).replaceAll("%20", "+")}`;
-    } else if (city && slug) {
-      // Redirect to builder details page
-      return `${BASE_PATH_BUILDER_DETAILS}/${slugify(city)}/${slugify(
-        slug as string
-      )}`;
-    } else if (city) {
-      // Redirect to city-specific builder details
-      return `${BASE_PATH_BUILDER_DETAILS}/${slugify(city)}`;
-    } else {
-      // Default redirect to /search
-      return `/search`;
-    }
-  }, [city, slug, type, id, statusId]);
+  const href = useMemo(() => generateBuilderUrl(routeParams), [routeParams]);
 
   return (
     <Link {...rest} href={href}>
