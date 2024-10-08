@@ -117,11 +117,11 @@ export const parseDataProjectProps = {
   independent: 36,
 };
 export const listingProps = {
+  Apartment: 35,
   Villa: 31,
   Plot: 32,
   "Row House": 33,
   Villament: 34,
-  Apartment: 35,
   "Independent House/Building": 36,
 };
 export const BACKEND_PROP_TYPES = {

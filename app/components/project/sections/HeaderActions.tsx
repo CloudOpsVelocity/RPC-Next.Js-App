@@ -19,6 +19,7 @@ import {
 } from "@/app/images/commonSvgs";
 import {
   BACKEND_PROP_TYPES,
+  listingProps,
   parseDataProjectProps,
   projectprops,
   propertyDetailsTypes,
@@ -64,23 +65,15 @@ export default function HeaderActions({
   };
   const [currentPhase, setCurrentPhase] = useAtom(currentPhaseAtom);
   const setSelected = useSetAtom(parital_unit_atom);
-  const sortOrder = ["apartment", "rowhouse", "villa", "villament", "plot"];
+  const sortOrder = ["Apartment", "Row House", "Villa", "Villament", "Plot"];
 
   const sortedPropTypes = Object.keys(partialUnitData?.[currentPhase] || {})
     .filter(
       (key) => Object.keys(partialUnitData[currentPhase][key] || {}).length > 0
     )
     .sort((a, b) => sortOrder.indexOf(a) - sortOrder.indexOf(b));
+
   const [propCgId, setPropCgId] = useAtom(propCgIdAtom);
-  useEffect(() => {
-    // @ts-ignore
-    sortedPropTypes?.length > 0 &&
-      setPropCgId(
-        parseDataProjectProps[
-          sortedPropTypes[0] as keyof typeof parseDataProjectProps
-        ]
-      );
-  }, [currentPhase]);
 
   return (
     <div>
@@ -135,20 +128,21 @@ export default function HeaderActions({
       </div>
       <div className=" flex justify-start items-start flex-wrap gap-[2%] ">
         {sortedPropTypes?.map((each: string, index: any) => {
-          const keyName =
-            parseDataProjectProps[
-              each.toLocaleLowerCase() as keyof typeof parseDataProjectProps
-            ];
+          const whichPropToUse =
+            type == "overview" ? projectprops : listingProps;
+          const whichKeyname = type === "overview" ? "apiProp" : "name";
+          const keyName = whichPropToUse[each as keyof typeof whichPropToUse];
+          console.log(each, whichPropToUse);
           let name =
             //@ts-ignore
-            propertyDetailsTypes.get(keyName).name != undefined
+            propertyDetailsTypes.get(keyName)[whichKeyname] != undefined
               ? //@ts-ignore
-                propertyDetailsTypes.get(keyName).name
+                propertyDetailsTypes.get(keyName)[whichKeyname]
               : null;
           return (
             <Button
               key={keyName}
-              buttonClass={`flex justify-start mb-2 sm:mb-[3%] w-full rounded-[20px] gap-[8px]  items-center mr-[24px] md:ml-[0px] text-[12px] sm:text-[18px] border ${
+              buttonClass={`flex justify-start mb-2 sm:mb-[3%] w-full rounded-[20px] gap-[8px]  items-center mr-[24px] md:ml-[0px] text-[12px] sm:text-[18px] border capitalize ${
                 propCgId == keyName
                   ? "text-[#001F35] text-[14px] sm:text-base font-[600] shadow-md bg-[#c8f5ca] sm:bg-[#D5EDFF]"
                   : "text-[#303A42] font-[500] bg-[#E1FFE2] sm:bg-[#EEF7FE]"
@@ -167,11 +161,3 @@ export default function HeaderActions({
     </div>
   );
 }
-
-const propTypesIndexMap = new Map([
-  ["apartment", 0],
-  ["villa", 1],
-  ["rowHouse", 2],
-  ["villament", 3],
-  ["plot", 4],
-]);

@@ -45,6 +45,7 @@ export default async function ProjectsDetailsPage({
   scrollId,
 }: Props) {
   const { basicData: data, nearByLocations, phaseOverview } = projResponse;
+
   const refURls = data?.sourceBuilderUrl?.split(",");
 
   return (

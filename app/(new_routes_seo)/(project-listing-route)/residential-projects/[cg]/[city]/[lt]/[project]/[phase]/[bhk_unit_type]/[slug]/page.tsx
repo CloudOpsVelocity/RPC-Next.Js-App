@@ -16,6 +16,7 @@ import getListingSLugs, {
   findPathForProjectListing,
 } from "@/app/(new_routes_seo)/in/utils/getSlugs";
 import { BASE_PATH_PROJECT_LISTING } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing.route";
+import { extractListingParamsValues } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing";
 type Props = {
   params: {
     cg: string;
@@ -29,19 +30,23 @@ type Props = {
 };
 export default async function Page({ params }: Props) {
   const pathname = `${BASE_PATH_PROJECT_LISTING}/${params.cg}/${params.city}/${params.lt}/${params.project}/${params.phase}/${params.bhk_unit_type}/${params.slug}`;
+  console.log(pathname);
   const value = await findPathForProjectListing(pathname);
+  console.log(value);
   if (!value) {
     notFound();
   }
-  const slug = getStringPartByIndex(value, 6);
-  if (!slug) {
+  const pdata = extractListingParamsValues(value);
+  console.log(pdata);
+  if (!pdata) {
     notFound();
   }
+  console.log(pdata);
   const {
     listing: data,
     nearByLocations,
     totalPrice,
-  } = await getListingDetails(slug);
+  } = await getListingDetails(pdata.id as string);
   const [projData, issueData, amenities] = await Promise.all([
     getProjectDetails(data.projIdEnc),
     getReportConstData(),

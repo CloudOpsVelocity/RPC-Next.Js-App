@@ -13,6 +13,8 @@ import { useMediaQuery } from "@mantine/hooks";
 import { useAtom, useAtomValue } from "jotai";
 import { overlayAtom } from "../../store/overlay";
 import Overlay from "../modals/Overlay";
+import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
+import { generateListingLinkUrl } from "@/app/utils/linkRouters/ListingLink";
 
 type Props = {
   type: any;
@@ -76,12 +78,30 @@ const MainBox = ({ data, refetch }: Props) => {
     Sh: state.shortListed,
   };
   const onClickRedirect = (projEncId: string) => {
+    let url;
+    console.log(data);
     if (data.type == "proj") {
-      window.open(`/abc/karnataka/banglore/${projEncId}`, "_blank");
+      url = createProjectLinkUrl({
+        city: data.city,
+        locality: data.locality,
+        slug: data.projName,
+      });
+      window.open(url, "_blank");
     } else {
-      window.open(`/listing/banglore/${projEncId}`, "_blank");
+      url = generateListingLinkUrl({
+        city: data.cityName,
+        locality: data.localityName,
+        projName: data.propName,
+        category: data.category === "Sale" ? "for-sale" : "for-rent",
+        phase: data.phaseName,
+        propIdEnc: data.propIdEnc,
+        bhkUnitType: data.bhkName + " " + data.propTypeName,
+      });
+
+      window.open(url, "_blank");
     }
   };
+
   const [, { open }] = useReqCallPopup();
   const overlayData = useAtomValue(overlayAtom);
   const handleOpen = () => {

@@ -1,16 +1,9 @@
 import React from "react";
 import path from "path";
 import fs from "fs";
-import {
-  getAmenties,
-  getProjectAllUntis,
-  getProjectDetails,
-  getProjectUnits,
-  withCache,
-} from "@/app/utils/api/project";
+import { getAmenties, getProjectDetails } from "@/app/utils/api/project";
 import { notFound } from "next/navigation";
 import ProjectsDetailsPage from "@/app/(dashboard)/abc/[city]/[local]/[slug]/Page/ProjectDetailsPage";
-import { getStringPartByIndex } from "@/app/utils/dyanamic/projects";
 import { getPagesSlugs } from "@/app/seo/api";
 import {
   extractProjectParamsValues,
@@ -47,7 +40,6 @@ export default async function Page({ params }: Props) {
     notFound();
   }
   const { PJ: slug } = await extractProjectParamsValues(value);
-  let overview = null;
   const [projResponse, amenitiesFromDB] = await Promise.all([
     getProjectDetails(slug as string),
     getAmenties(),

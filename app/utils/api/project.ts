@@ -123,11 +123,17 @@ const getProjectAllUntis = async (slug: string) => {
   return groupUnitsById(data);
 };
 const getOverViewData = async (slug: string) => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/overviewData?projIdEnc=${slug}`
-  );
-  const data = await response.json();
-  return paritalUnitParser(data);
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/overviewData?projIdEnc=${slug}`
+    );
+    const data = await response.json();
+    console.log(data);
+    // return data;
+    return paritalUnitParser(data);
+  } catch (error) {
+    console.log(error);
+  }
 };
 // create decorator fn to cache api
 const withCache = (fn: any, tags: any, options: any) => {

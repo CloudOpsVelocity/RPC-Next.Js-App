@@ -36,6 +36,7 @@ type Props = {
   propertyType: string;
   phase: number;
   isPartialData: boolean;
+  slug: string;
 };
 export const getPropId = (key: string) => {
   switch (key) {
@@ -63,8 +64,8 @@ export default function PropertyTypeDetailsCrad({
   propertyType,
   phase,
   isPartialData,
+  slug,
 }: Props) {
-  const { slug } = useParams<{ slug: string }>();
   const [, { open }] = useFloorPlanPopup();
   const setcurrentPhase = useSetAtom(currentPhaseAtom);
   const setPrpCgId = useSetAtom(propCgIdAtom);
@@ -76,7 +77,7 @@ export default function PropertyTypeDetailsCrad({
   const { data: projectUnitsData, isLoading } = useQuery({
     queryKey: [`/${getPropId(propertyType)}/${phase}/${slug}`],
     queryFn: () => getProjectUnits(slug, phase, getPropId(propertyType)),
-    enabled: cg?.unitTypes?.length > 0 && !isPartialData,
+    // enabled: cg?.unitTypes?.length > 0,
     ...RTK_CONFIG,
   });
   const handleOpen = () => {

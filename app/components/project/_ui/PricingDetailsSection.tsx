@@ -2,6 +2,7 @@
 
 import getIcon from "@/app/(new_routes_seo)/residential/projects/utils/icons";
 import {
+  listingProps,
   parseDataProjectProps,
   propertyDetailsTypes,
 } from "@/app/data/projectDetails";
@@ -13,15 +14,14 @@ import React from "react";
 
 const PricingSection = ({ unitData, projName, phaseList }: any) => {
   const [currentPhase, setCurrentPhase] = useAtom(currentPhaseAtom);
-  const [propCgId, setPropCgId] = useAtom(propCgIdAtom);
+  const [propCgId, setPropCgId] = useAtom(propCgIdAtom ?? 35);
 
   const propTypes = Object.keys(
     unitData && unitData[currentPhase] ? unitData[currentPhase] : {}
   ).sort();
 
   const filteredData =
-    unitData[currentPhase]?.[propertyDetailsTypes.get(propCgId)?.apiProp ?? ""];
-
+    unitData[currentPhase]?.[propertyDetailsTypes.get(propCgId)?.name ?? ""];
   return (
     <section
       className="sm:p-6 bg-white rounded-lg shadow-lg w-[90%] mx-auto mt-2 sm:mt-[100px]"
@@ -61,11 +61,11 @@ const PricingSection = ({ unitData, projName, phaseList }: any) => {
       )}
       <div className="flex flex-wrap sm:gap-3 mb-2 sm:mb-4">
         {propTypes?.map((each: string) => {
-          const keyName =
-            parseDataProjectProps[each as keyof typeof parseDataProjectProps];
+          const keyName = listingProps[each as keyof typeof listingProps];
+          console.log(keyName);
           let name =
             //@ts-ignore
-            propertyDetailsTypes.get(keyName)?.name ?? null;
+            each;
           return (
             <Button
               key={keyName}
@@ -114,5 +114,6 @@ const PricingSection = ({ unitData, projName, phaseList }: any) => {
     </section>
   );
 };
+console.log("🚀 ~ PricingSection ~ 35:", 35);
 
 export default PricingSection;

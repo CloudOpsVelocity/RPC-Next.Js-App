@@ -27,7 +27,9 @@ type TransformedData = {
     villament: { [unitType: string]: UnitDetails };
   };
 };
+
 export function paritalUnitParser(input: any[]): TransformedData {
+  console.log(input);
   const result: any = {};
 
   input.forEach((phase: any) => {
@@ -71,19 +73,18 @@ export function paritalUnitParser(input: any[]): TransformedData {
 
           result[phaseId][propKey][unitType].minPrice = priceItem.minPrice;
           result[phaseId][propKey][unitType].maxPrice = priceItem.maxPrice;
-          // These values would be calculated or extracted based on your data
-          result[phaseId][propKey][unitType].minSba = priceItem.minSba; // Placeholder value
-          result[phaseId][propKey][unitType].maxSba = priceItem.maxSba; // Placeholder value
-          result[phaseId][propKey][unitType].minCa = priceItem.minCa; // Placeholder value
-          result[phaseId][propKey][unitType].maxCa = priceItem.maxCa; // Placeholder value
+          result[phaseId][propKey][unitType].minSba = priceItem.minSba;
+          result[phaseId][propKey][unitType].maxSba = priceItem.maxSba;
+          result[phaseId][propKey][unitType].minCa = priceItem.minCa;
+          result[phaseId][propKey][unitType].maxCa = priceItem.maxCa;
 
           const unitDataDto: UnitDataDto = {
             projUnitIdEnc: "placeholder_id", // Replace with actual ID
             unitType: unitType,
             phaseId: phase.phaseId,
-            propType: "35", // Placeholder value
-            sba: "N/A", // Placeholder value
-            ca: "N/A", // Placeholder value
+            propType: propType, // Property type
+            sba: priceItem.minSba, // SBA value
+            ca: priceItem.minCa, // CA value
             floorPlan:
               "https://d2l0lb5gc1bw3t.cloudfront.net/images/varify/soc/7/35/454/fp.webp?v=1725616219771", // Replace with actual floor plan URL
           };

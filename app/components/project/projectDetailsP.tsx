@@ -36,6 +36,7 @@ export default function ProjectDetailsP({
   PhaseOverview,
   data: phaseList,
   isPartialData,
+  slug,
 }: Props) {
   useHydrateAtoms([[currentPhaseAtom, PhaseOverview[0].phaseId]]);
   const [currentPhase, setFloorPhase] = useAtom(currentPhaseAtom);
@@ -182,6 +183,7 @@ export default function ProjectDetailsP({
                     cg={selectedPhase.propTypeOverview[propertyTypeKey]}
                     propertyType={propertyTypeKey}
                     isPartialData={isPartialData}
+                    slug={slug}
                   />
                 )
               );

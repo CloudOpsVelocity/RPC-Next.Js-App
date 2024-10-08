@@ -30,11 +30,12 @@ export default function InFoCarousel({ partialUnitData }: Props) {
   const currentPhase = useAtomValue(currentPhaseAtom);
 
   const propCgId = useAtomValue(propCgIdAtom);
-
+  const whichKeyname = partialUnitData.type === "overview" ? "apiProp" : "name";
   const data =
-    partialUnitData[currentPhase][
-      propertyDetailsTypes.get(propCgId)?.apiProp ?? ""
+    partialUnitData[currentPhase]?.[
+      propertyDetailsTypes.get(propCgId)?.[whichKeyname] ?? ""
     ];
+
   const setData = useSetAtom(selectedPartialUnitAtom);
 
   const handleCardClick = (units: any, item: any) => {
