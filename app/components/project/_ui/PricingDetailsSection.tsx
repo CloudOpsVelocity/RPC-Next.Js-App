@@ -15,11 +15,11 @@ import React from "react";
 const PricingSection = ({ unitData, projName, phaseList }: any) => {
   const [currentPhase, setCurrentPhase] = useAtom(currentPhaseAtom);
   const [propCgId, setPropCgId] = useAtom(propCgIdAtom ?? 35);
-
+  const sorted = ["Apartment", "Row House", "Villa", "Villament", "Plot"];
   const propTypes = Object.keys(
     unitData && unitData[currentPhase] ? unitData[currentPhase] : {}
-  ).sort();
-
+  ).sort((a, b) => sorted.indexOf(a) - sorted.indexOf(b));
+  console.log(propTypes);
   const filteredData =
     unitData[currentPhase]?.[propertyDetailsTypes.get(propCgId)?.name ?? ""];
   return (
@@ -33,10 +33,10 @@ const PricingSection = ({ unitData, projName, phaseList }: any) => {
       </h2>
       {phaseList?.length > 1 && (
         <>
-          <p className="text-base font-medium mb-4 text-gray-600">
-            Select one of the phases to see project details
+          <p className="text-base font-semibold mb-4 text-gray-700">
+            Select a phase to view project details
           </p>
-          <div className="flex flex-wrap gap-3 mb-4">
+          <div className="flex flex-wrap gap-4 mb-4">
             {phaseList?.map((each: any) => (
               <Button
                 key={`phase_${each.phaseName}`}
@@ -49,10 +49,10 @@ const PricingSection = ({ unitData, projName, phaseList }: any) => {
                   if (currentPhase === each.phaseId) return;
                   setCurrentPhase(each.phaseId);
                 }}
-                buttonClass={`text-xs sm:text-sm bg-teal-500 hover:bg-teal-600 p-2 rounded-lg transition-colors duration-200 ${
+                buttonClass={`text-sm sm:text-base bg-[#0073C6] hover:bg-blue-600 p-3 rounded-xl transition-colors duration-200 ${
                   currentPhase === each.phaseId
-                    ? "font-semibold border-2 border-teal-600 text-teal-600"
-                    : "font-medium text-gray-800"
+                    ? "font-bold border-2 border-blue-600 text-white shadow-md"
+                    : "font-medium text-white shadow"
                 }`}
               />
             ))}
@@ -62,7 +62,6 @@ const PricingSection = ({ unitData, projName, phaseList }: any) => {
       <div className="flex flex-wrap sm:gap-3 mb-2 sm:mb-4">
         {propTypes?.map((each: string) => {
           const keyName = listingProps[each as keyof typeof listingProps];
-          console.log(keyName);
           let name =
             //@ts-ignore
             each;
@@ -86,7 +85,7 @@ const PricingSection = ({ unitData, projName, phaseList }: any) => {
         })}
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-6 max-h-[400px] sm:max-h-[550px] overflow-y-auto">
-        {filteredData &&
+        {filteredData ? (
           Object.entries(filteredData).map(([bhkType, bhkData]: any) => (
             <div
               key={`${projName}-${bhkType}`}
@@ -109,11 +108,15 @@ const PricingSection = ({ unitData, projName, phaseList }: any) => {
                 {bhkData.minCa} - {bhkData.maxCa} sq ft
               </div>
             </div>
-          ))}
+          ))
+        ) : (
+          <div className="text-center text-gray-700 font-semibold bg-gray-100 p-4 rounded-lg shadow-md">
+            <p>No units available. Coming soon...</p>
+          </div>
+        )}
       </div>
     </section>
   );
 };
-console.log("🚀 ~ PricingSection ~ 35:", 35);
 
 export default PricingSection;

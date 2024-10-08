@@ -131,14 +131,13 @@ export default function HeaderActions({
           const whichPropToUse =
             type == "overview" ? projectprops : listingProps;
           const whichKeyname = type === "overview" ? "apiProp" : "name";
+          console.log(whichKeyname);
           const keyName = whichPropToUse[each as keyof typeof whichPropToUse];
-          console.log(each, whichPropToUse);
           let name =
-            //@ts-ignore
-            propertyDetailsTypes.get(keyName)[whichKeyname] != undefined
-              ? //@ts-ignore
-                propertyDetailsTypes.get(keyName)[whichKeyname]
-              : null;
+          propertyDetailsTypes.get(keyName)?.[whichKeyname] !== undefined
+        ? propertyDetailsTypes.get(keyName)?.[whichKeyname] // Use whichKeyname to access the property
+        : null;
+        
           return (
             <Button
               key={keyName}
