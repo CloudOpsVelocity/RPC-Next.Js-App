@@ -46,6 +46,7 @@ export default function InFoCarousel({ partialUnitData }: Props) {
         });
       return;
     }
+
     setData({
       main: 0,
       others: units,
@@ -58,6 +59,7 @@ export default function InFoCarousel({ partialUnitData }: Props) {
     <div
       className={` justify-start flex-col items-start mr-auto max-w-[1120px] overflow-x-auto max-h-[510px] sm:max-h-[656px] xl:max-h-[780px] overflow-auto `}
     >
+      
       <table className="min-w-full border-collapse  mr-auto ">
         <thead className=" sticky top-0 z-[1]">
           <tr className="flex flex-row justify-start items-center">
@@ -97,7 +99,7 @@ export default function InFoCarousel({ partialUnitData }: Props) {
                   </td>
                   <td className=" w-[180px] md:w-[220px] bg-[#FFF] text-gray-900 text-[16px] md:text-[18px] not-italic font-semibold h-[60px] flex  justify-center text-center items-center border-t-0 border-r-[0.5px] border-r-[#D9DFE3] border-b-[0.5px] border-b-[#D9DFE3] border-solid  ">
                     {propCgId === 32
-                      ? `${data[item].plotArea} sq.ft`
+                      ? `${formatNumberWithSuffix(data[item].plotArea)} sq.ft`
                       : data[item].minSba !== data[item].maxSba
                       ? `${formatNumberWithSuffix(
                           data[item].minSba

@@ -121,7 +121,7 @@ export default function PartialUnitModal({ data }: any) {
             Unit Type:{" "}
             <span className="text-[#303A42] text-nowrap  text-[12px] xl:text-[16px] font-[600] ">
               {selectedOne?.propType == "32"
-                ? `(${selectedOne.width} x ${selectedOne.length}) sq.ft`
+                ? `(${formatNumberWithSuffix(selectedOne.length)} x ${formatNumberWithSuffix(selectedOne.width)}) sq.ft`
                 : selectedOne?.unitType}
             </span>
           </p>

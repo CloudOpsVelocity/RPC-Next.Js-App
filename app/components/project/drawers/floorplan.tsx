@@ -194,7 +194,7 @@ export default function FloorplanDrawer() {
                 {formatCurrency(cg?.minPrice)} - {formatCurrency(cg?.maxPrice)}
               </p>
               <p className="text-[14px] lg:text-2xl text-[#242424]   italic font-medium leading-[normal]">
-                ₹ {cg?.basePrice} Base Price/ sq.ft
+                {formatCurrency(cg?.basePrice)} Base Price/ sq.ft
               </p>
             </div>
           </div>
