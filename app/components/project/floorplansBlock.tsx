@@ -200,13 +200,35 @@ Props) {
     open("floor");
   };
   const handlePricingFloorPlanClick = (selectedBhk: any) => {
-    form.setValues(setPropertyValues(selectedBhk, propCgId));
+    if (selectedBhk.bhkName.includes("_")) {
+      const [length, width] = selectedBhk.bhkName.split("_");
+
+      form.setValues({
+        ...setPropertyValues(
+          {
+            length,
+            width,
+          },
+          propCgId
+        ),
+      });
+      const filtertedFloor = projectUnitsData.filter(
+        (floor: any) => floor.width == width && floor.length == length
+      );
+      setSelectedFloor({
+        ...filtertedFloor[0],
+        floorPlanUrl: filtertedFloor[0]?.floorPlanUrl ?? ImgNotAvail,
+      });
+      setFloorplans(filtertedFloor);
+      open("floor");
+      return;
+    }
     const filteredFloors = projectUnitsData.filter(
       (floor: any) => floor.bhkName == selectedBhk.bhkName
     );
     setSelectedFloor({
       ...filteredFloors[0],
-      floorPlanUrl: filteredFloors[0].floorPlanUrl ?? ImgNotAvail,
+      floorPlanUrl: filteredFloors[0]?.floorPlanUrl ?? ImgNotAvail,
     });
     setFloorsArray(filteredFloors);
     open("floor");

@@ -27,6 +27,7 @@ import { useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
 import { useForm } from "@/app/context/floorplanContext";
 import { setPropertyValues } from "@/app/utils/dyanamic/projects";
 export default function InFoCarousel({ partialUnitData }: Props) {
+
   const currentPhase = useAtomValue(currentPhaseAtom);
 
   const propCgId = useAtomValue(propCgIdAtom);
@@ -35,7 +36,6 @@ export default function InFoCarousel({ partialUnitData }: Props) {
     partialUnitData[currentPhase]?.[
       propertyDetailsTypes.get(propCgId)?.[whichKeyname] ?? ""
     ];
-
   const setData = useSetAtom(selectedPartialUnitAtom);
 
   const handleCardClick = (units: any, item: any) => {
@@ -85,7 +85,7 @@ export default function InFoCarousel({ partialUnitData }: Props) {
         </thead>
         <tbody className="bg-white">
           {data &&
-            sortUnits(Object.keys(data)).map((item: any, index: number) => {
+            sortUnits(Object.keys(data)).map((item: string, index: number) => {
               const units = data[item].unitDataDtoList;
               return (
                 <tr
@@ -95,11 +95,13 @@ export default function InFoCarousel({ partialUnitData }: Props) {
                   <td
                     className={`bg-[#EEF7FF] shadow-gray-950 shadow-right mb:shadow-right-0 sticky left-0  w-[111px] md:w-[220px]  text-gray-900 text-[16px] md:text-[18px] not-italic font-semibold h-[60px] flex justify-center text-center items-center border-t-0 border-r-[0.5px] border-r-[#D9DFE3] border-b-[0.5px] border-b-[#D9DFE3] border-solid sm:shadow-lg md:shadow-none shadow-t-0 shadow-b-0 shadow-l-0 `}
                   >
-                    {item}
+                    {(partialUnitData.type == "overview" && propCgId === 32) ? item.replace("_"," x ") : item}
                   </td>
                   <td className=" w-[180px] md:w-[220px] bg-[#FFF] text-gray-900 text-[16px] md:text-[18px] not-italic font-semibold h-[60px] flex  justify-center text-center items-center border-t-0 border-r-[0.5px] border-r-[#D9DFE3] border-b-[0.5px] border-b-[#D9DFE3] border-solid  ">
                     {propCgId === 32
-                      ? `${formatNumberWithSuffix(data[item].plotArea)} sq.ft`
+                      ? data[item].minPa === data[item].maxPa
+                        ? `${formatNumberWithSuffix(data[item].minPa)} sq.ft`
+                        : `${formatNumberWithSuffix(data[item].minPa)} - ${formatNumberWithSuffix(data[item].maxPa)} sq.ft`
                       : data[item].minSba !== data[item].maxSba
                       ? `${formatNumberWithSuffix(
                           data[item].minSba

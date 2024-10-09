@@ -100,9 +100,9 @@ export function setPropertyValues(data: any, propCgId: number): any {
       return {
         unitNumber: data?.unitNumber,
         facingName: data.facingName,
-        plotArea: data.plotArea.toString(),
-        width: data.width.toString(),
-        length: data.length.toString(),
+        plotArea: data?.plotArea?.toString(),
+        width: data?.width?.toString(),
+        length: data?.length?.toString(),
       };
 
     default:

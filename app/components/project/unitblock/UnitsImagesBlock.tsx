@@ -6,6 +6,7 @@ import { setPropertyValues } from "@/app/utils/dyanamic/projects";
 import { useAtom } from "jotai";
 import { unitFloorsAtom } from "../byunitblock";
 import { useMediaQuery } from "@mantine/hooks";
+import { ImgNotAvail } from "@/app/data/project";
 
 const UnitsImagesBlock = ({
   propCgId,
@@ -16,9 +17,7 @@ const UnitsImagesBlock = ({
 }) => {
   const [floorsArray, setFloorArray] = useAtom(unitFloorsAtom);
   const containerRef = useRef<HTMLDivElement>(null);
-  const filteredUrlsArray = floorsArray.filter(
-    (eachObj: { floorPlanUrl: undefined }) => eachObj.floorPlanUrl !== undefined
-  );
+
 
   const isTab = useMediaQuery("(min-width: 1280px)");
 
@@ -48,10 +47,10 @@ const UnitsImagesBlock = ({
   };
 
   const maxValue = !isTab ? 3 : 6;
-  if(filteredUrlsArray?.length > 0){
+  if(floorsArray?.length > 0){
   return (
       <div className="flex justify-between items-center w-full mt-[10px] mb-[10px] gap-[16px] ">
-          {filteredUrlsArray?.length > maxValue && (
+          {floorsArray?.length > maxValue && (
             <ImagesScrollIcon
               className=" rotate-180 h-[30px] select-none w-[30px] rounded-[50%] bg-[gray] cursor-pointer "
               onClick={() => onScrollingLeftAndRight("L")}
@@ -64,23 +63,21 @@ const UnitsImagesBlock = ({
           >
             {floorsArray.map((eachOne: any, index: number) => {
               let imgUrl = eachOne.floorPlanUrl;
-              if (imgUrl !== undefined && imgUrl !== "") {
                 return (
                   <Image
                     className="cursor-pointer border max-h-[64px] border-indigo-600 border-1 border-solid rounded-[4px] "
-                    key={`unitsImgUrl_${imgUrl[index]}`}
-                    src={imgUrl}
+                    key={`unitsImgUrl_${imgUrl ? imgUrl[index] : index}`}
+                    src={imgUrl ?? ImgNotAvail}
                     width={100}
                     height={100}
                     alt="not found"
                     onClick={() => selectImg(index)}
                   />
                 );
-              }
             })}
           </div>
 
-          {filteredUrlsArray?.length > maxValue && (
+          {floorsArray?.length > maxValue && (
             <ImagesScrollIcon
               className=" h-[30px] w-[30px] select-none rounded-[50%] bg-[gray] cursor-pointer "
               onClick={() => onScrollingLeftAndRight("R")}

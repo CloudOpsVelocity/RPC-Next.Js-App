@@ -6,6 +6,8 @@ type UnitDataDto = {
   sba: string;
   ca: string;
   floorPlan?: string;
+  minPa?: string;
+  maxPa?: string;
 };
 
 type UnitDetails = {
@@ -29,7 +31,6 @@ type TransformedData = {
 };
 
 export function paritalUnitParser(input: any[]): TransformedData {
-  console.log(input);
   const result: any = {};
 
   input.forEach((phase: any) => {
@@ -54,7 +55,6 @@ export function paritalUnitParser(input: any[]): TransformedData {
       if (propertyOverview) {
         propertyOverview.priceList?.forEach((priceItem: any) => {
           const unitType = priceItem.bhkOrDimension;
-
           if (!result[phaseId]) {
             result[phaseId] = {
               apartment: {},
@@ -77,14 +77,19 @@ export function paritalUnitParser(input: any[]): TransformedData {
           result[phaseId][propKey][unitType].maxSba = priceItem.maxSba;
           result[phaseId][propKey][unitType].minCa = priceItem.minCa;
           result[phaseId][propKey][unitType].maxCa = priceItem.maxCa;
-
+          if (propType === "plot") {
+            result[phaseId][propKey][unitType].minPa = priceItem.minPa;
+            result[phaseId][propKey][unitType].maxPa = priceItem.maxPa;
+          }
           const unitDataDto: UnitDataDto = {
             projUnitIdEnc: "placeholder_id", // Replace with actual ID
             unitType: unitType,
             phaseId: phase.phaseId,
             propType: propType, // Property type
             sba: priceItem.minSba, // SBA value
-            ca: priceItem.minCa, // CA value
+            ca: priceItem.minCa, // CA value,
+            minPa: priceItem?.minPa,
+            maxPa: priceItem?.maxPa,
             floorPlan:
               "https://d2l0lb5gc1bw3t.cloudfront.net/images/varify/soc/7/35/454/fp.webp?v=1725616219771", // Replace with actual floor plan URL
           };
@@ -94,7 +99,6 @@ export function paritalUnitParser(input: any[]): TransformedData {
       }
     });
   });
-
   return result;
 }
 

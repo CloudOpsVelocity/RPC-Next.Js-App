@@ -65,13 +65,17 @@ export default function HeaderActions({
   };
   const [currentPhase, setCurrentPhase] = useAtom(currentPhaseAtom);
   const setSelected = useSetAtom(parital_unit_atom);
-  const sortOrder = ["Apartment", "Row House", "Villa", "Villament", "Plot"];
+  const sortOrder = ["apartment", "rowhouse", "villa", "villament", "plot"];
 
   const sortedPropTypes = Object.keys(partialUnitData?.[currentPhase] || {})
     .filter(
       (key) => Object.keys(partialUnitData[currentPhase][key] || {}).length > 0
     )
-    .sort((a, b) => sortOrder.indexOf(a) - sortOrder.indexOf(b));
+    .sort(
+      (a, b) =>
+        sortOrder.indexOf(a.toLocaleLowerCase().replace(" ", "")) -
+        sortOrder.indexOf(b.toLocaleLowerCase().replace(" ", ""))
+    );
 
   const [propCgId, setPropCgId] = useAtom(propCgIdAtom);
 
@@ -129,15 +133,15 @@ export default function HeaderActions({
       <div className=" flex justify-start items-start flex-wrap gap-[2%] ">
         {sortedPropTypes?.map((each: string, index: any) => {
           const whichPropToUse =
-            type == "overview" ? projectprops : listingProps;
+            type == "overview" ? parseDataProjectProps : listingProps;
           const whichKeyname = type === "overview" ? "apiProp" : "name";
-          console.log(whichKeyname);
+          console.log(each);
           const keyName = whichPropToUse[each as keyof typeof whichPropToUse];
           let name =
-          propertyDetailsTypes.get(keyName)?.[whichKeyname] !== undefined
-        ? propertyDetailsTypes.get(keyName)?.[whichKeyname] // Use whichKeyname to access the property
-        : null;
-        
+            propertyDetailsTypes.get(keyName)?.[whichKeyname] !== undefined
+              ? propertyDetailsTypes.get(keyName)?.[whichKeyname] // Use whichKeyname to access the property
+              : null;
+
           return (
             <Button
               key={keyName}

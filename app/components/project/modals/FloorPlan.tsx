@@ -125,6 +125,7 @@ function FloorPlanModal({
   const showClearAll = Object.values(form.values).some(
     (value) => value !== null && value !== "" && value !== 0
   );
+
   if (!opened) {
     return null;
   }
@@ -184,7 +185,6 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
   const { getInputProps, values, setFieldValue, setValues } = useFormContext();
   const getOptions = (property: string): string[] => {
     const optionsSet = new Set<string>();
-
     data?.forEach((item: any) => {
       if (
         Object.prototype.hasOwnProperty.call(item, property) &&
@@ -365,6 +365,27 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
             rightSection={<DropDownIcon />}
           />
         )}
+        {getOptions("aptTypeName").length > 0 &&
+          (propCgId == projectprops.apartment ||
+            propCgId == projectprops.villament) && (
+            <Select
+              key={"unit-type-name"}
+              w={"full"}
+              mt="md"
+              label="Select Apartment Type"
+              className="!w-[46%]"
+              placeholder="-- select --"
+              data={getOptions("aptTypeName")}
+              searchable
+              maxDropdownHeight={200}
+              {...getInputProps("aptTypeName")}
+              onChange={(value) =>
+                handleOnChange(value as string, "aptTypeName")
+              }
+              classNames={{ input: S.input, label: S.label, option: S.option }}
+              rightSection={<DropDownIcon />}
+            />
+          )}
 
         {getOptions("facingName").filter(
           (option: string) => option !== "Don't Know"

@@ -2,6 +2,7 @@
 
 import getIcon from "@/app/(new_routes_seo)/residential/projects/utils/icons";
 import {
+  BACKEND_PROP_TYPES,
   listingProps,
   parseDataProjectProps,
   propertyDetailsTypes,
@@ -10,7 +11,7 @@ import Button from "@/app/elements/button";
 import { currentPhaseAtom, propCgIdAtom } from "@/app/store/vewfloor";
 import { isSingleLetterOrNumber } from "@/app/utils/letters";
 import { useAtom } from "jotai";
-import React from "react";
+import React, { useEffect } from "react";
 
 const PricingSection = ({ unitData, projName, phaseList }: any) => {
   const [currentPhase, setCurrentPhase] = useAtom(currentPhaseAtom);
@@ -19,9 +20,13 @@ const PricingSection = ({ unitData, projName, phaseList }: any) => {
   const propTypes = Object.keys(
     unitData && unitData[currentPhase] ? unitData[currentPhase] : {}
   ).sort((a, b) => sorted.indexOf(a) - sorted.indexOf(b));
-  console.log(propTypes);
   const filteredData =
     unitData[currentPhase]?.[propertyDetailsTypes.get(propCgId)?.name ?? ""];
+    useEffect(() => {
+      // @ts-ignore
+      propTypes?.length > 0 && setPropCgId(listingProps[`${propTypes[0]}`]);
+    }, [currentPhase])
+    
   return (
     <section
       className="sm:p-6 bg-white rounded-lg shadow-lg w-[90%] mx-auto mt-2 sm:mt-[100px]"
