@@ -25,7 +25,7 @@ export const options: NextAuthOptions = {
           credentials?.password!!,
           process.env.NEXT_PUBLIC_SECRET!!
         ).toString(CryptoJS.enc.Utf8);
-
+ 
         try {
           const res = await axios.post(
             `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/doLoginWithMobile`,
@@ -34,7 +34,9 @@ export const options: NextAuthOptions = {
               password: decryptedPassword,
             }
           );
+          console.log(res.data)
           if (res.data.status) {
+          
             if (res.data.flag === "a") {
               const encryptedValue = CryptoJS.AES.encrypt(
                 [credentials?.username, credentials?.password, "1"].join(":"),
