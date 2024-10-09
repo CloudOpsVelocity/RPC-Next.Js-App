@@ -3,7 +3,7 @@ import Link, { LinkProps } from "next/link";
 import React, { ReactNode, useMemo } from "react";
 
 // Simple slugify function without memoization
-const slugify = (name: string): string => {
+export const slugify = (name: string): string => {
   return name
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")

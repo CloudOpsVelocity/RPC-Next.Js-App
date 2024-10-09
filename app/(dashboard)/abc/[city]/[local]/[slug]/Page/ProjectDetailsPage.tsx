@@ -31,6 +31,8 @@ import Reviews from "@/app/components/project/reviews";
 import PartialUnitData from "@/app/components/project/sections";
 import PropertyDataDisplay from "@/app/components/project/_ui/PricingDetailsSection";
 import Disclamer from "@/app/components/builder/Disclamer";
+import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
+import { slugify } from "@/app/utils/linkRouters/ProjectLink";
 type Props = {
   projResponse: any;
   amenitiesFromDB: any;
@@ -45,9 +47,7 @@ export default async function ProjectsDetailsPage({
   scrollId,
 }: Props) {
   const { basicData: data, nearByLocations, phaseOverview } = projResponse;
-
   const refURls = data?.sourceBuilderUrl?.split(",");
-
   return (
     <section className="w-full relative break-words ">
       <meta
@@ -96,11 +96,11 @@ export default async function ProjectsDetailsPage({
               Home
             </a>{" "}
             {" > "}
-            <Link href={"/project/banglore"}>
+            <Link href={`${BASE_PATH_PROJECT_DETAILS}/${slugify(data.cityName)}`} target="_blank" className="hover:underline cursor-pointer">
               <span>Projects In {data.cityName}</span>
             </Link>{" "}
             {" > "}
-            <Link href={"/project/banglore/whitefield"}>
+            <Link href={`${BASE_PATH_PROJECT_DETAILS}/${slugify(data.cityName)}/${slugify(data.localityName)}`} target="_blank">
               <span className="hover:underline cursor-pointer">
                 Projects In {`${data.localityName} `}
               </span>
