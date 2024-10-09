@@ -151,13 +151,13 @@ export default async function ProjectsDetailsPage({
           projName={data.projectName}
           media={data?.media?.projectPlanUrl}
         />
-        {/* {data.partialUnitData && (
+        {data.partialUnitData && (
           <PropertyDataDisplay
             unitData={data.partialUnitData}
             projName={data.projectName}
             phaseList={data.phases}
           />
-        )} */}
+        )}
         {!data.partialUnitData ? (
           <FloorplansBlock
             partialUnitData={data.partialUnitData}

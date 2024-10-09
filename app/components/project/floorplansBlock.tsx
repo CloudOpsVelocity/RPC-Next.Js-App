@@ -230,7 +230,7 @@ Props) {
   const isMobile = useMediaQuery("(max-width: 601px)");
 
   const rowVirtualizer = useVirtualizer({
-    count: 10000,
+    count: projectUnitsData?.length,
     getScrollElement: () => parentRef.current,
     estimateSize: () => 180,
     overscan: 5,
