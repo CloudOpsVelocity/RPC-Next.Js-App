@@ -138,6 +138,7 @@ export default async function ProjectsDetailsPage({
           heading="about"
           projName={data.projectName}
           content={data.about}
+          maxLines={12}
         />
         {/* Property Details */}
         <ProjectDetailsP
@@ -225,6 +226,7 @@ export default async function ProjectsDetailsPage({
             heading="Why Buy"
             projName={`${data.projectName} ?`}
             content={data.wbtp}
+            maxLines={12}
           />
         )}
         <Reviews projName={data.projectName} projIdEnc={slug} />

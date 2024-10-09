@@ -64,7 +64,7 @@ function ProjectDrawer({ projName }: { projName: string }) {
 
         <div className="w-[95%] text-[#233333] text-[16px] xl:text-xl mt-1 pl-[10px] xl:pl-[57px] xl:pb-20 capitalize">
           {type === "content" ? (
-            <p className="break-words">{content}</p>
+            <p className="break-words" dangerouslySetInnerHTML={{__html:content}}/>
           ) : (
             <div className="flex flex-wrap w-full">
               {content.data.map((eachItem: AmenityList, index: number) => {
