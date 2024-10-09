@@ -60,7 +60,6 @@ export default function ListingLink({
 
   ...rest
 }: ListingLinkProps) {
-  console.log(routeParams);
   const href = useMemo(() => {
     // Redirect to project details page
     return generateListingLinkUrl(routeParams);
