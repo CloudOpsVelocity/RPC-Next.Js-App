@@ -46,7 +46,6 @@ export default function ListingDetailsPage({
   nearByLocations,
   TITLE_OF_PROP,
 }: Props) {
-  console.log(data);
   return (
     <div className="w-full">
       <div className="mt-[70px] sm:mt-[90px] w-full sm:pb-[2%] flex xl:text-ellipsis items-center justify-center flex-col">

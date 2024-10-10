@@ -15,10 +15,12 @@ export default function Navigation({
   isBrochure,
   detailsData,
   slug,
+  scrollId,
 }: {
   isBrochure: boolean;
   detailsData: Main;
   slug: string;
+  scrollId?: string;
 }) {
   const isNearBy = Object.keys(detailsData.nearByLocations).length > 0;
   const isTab = useMediaQuery("(max-width: 1600px)");
@@ -136,10 +138,36 @@ export default function Navigation({
     { condtion: true, key: TOPIC_IDS.ABOUT_BUILDER },
     { condtion: true, key: TOPIC_IDS.WHY_BUY },
     { condtion: true, key: TOPIC_IDS.BROCHURE },
-    { condtion: true, key: TOPIC_IDS.FAQ },
+    {
+      condtion: detailsData.faqs && detailsData.faqs.length > 0,
+      key: TOPIC_IDS.FAQ,
+    },
     { condtion: true, key: TOPIC_IDS.SIMILAR_PROJECTS },
     { condtion: true, key: TOPIC_IDS.CONTACT },
   ];
+  useEffect(() => {
+    console.log(
+      scrollId &&
+        conditionsArray.find((condtion) => condtion.key === scrollId)?.condtion
+    );
+    if (
+      scrollId &&
+      conditionsArray.find((condtion) => condtion.key === scrollId)?.condtion
+    ) {
+      setIsScrolling(true);
+      const element = document.getElementById(scrollId);
+      if (element) {
+        element.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+          inline: "center",
+        });
+        setIsSticky(true);
+      }
+      setCurrentBlock(scrollId);
+      setTimeout(() => setIsScrolling(false), 3000);
+    }
+  }, []);
 
   return (
     <div

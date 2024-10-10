@@ -58,23 +58,6 @@ const FirstBlock: React.FC<Props> = ({
     ? companyName.toLowerCase().split(" ").join("%2D")
     : "";
   let urlBuilder = `/builders/bengaluru/${builderName}`;
-  useEffect(() => {
-    if (scrollId) {
-      console.log("scrolling", scrollId);
-      setIsScrolling(true);
-      const element = document.getElementById(scrollId);
-      if (element) {
-        element.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-          inline: "center",
-        });
-        setSticky(true);
-      }
-      setC(scrollId);
-      setTimeout(() => setIsScrolling(false), 3000);
-    }
-  }, []);
 
   return (
     <div

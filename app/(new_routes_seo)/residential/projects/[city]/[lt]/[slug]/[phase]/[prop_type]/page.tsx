@@ -46,8 +46,9 @@ async function getProjectSlug(pathname: string) {
   }
 }
 export default async function Page({
-  params: { city, lt, slug, phase, prop_type },
+  params,
 }: Props) {
+  const { city, lt, slug, phase, prop_type } = params
   const pathname = `${BASE_PATH_PROJECT_DETAILS}/${city}/${lt}/${slug}/${phase}/${prop_type}`;
   const value = await findPathForProjectDetails(pathname);
   if (!value) {
@@ -67,6 +68,7 @@ export default async function Page({
 
   return count == 5 ? (
     <ProjectsDetailsPage
+      params={params}
       projResponse={serverData.projResponse}
       amenitiesFromDB={serverData.amenitiesFromDB}
       slug={PJ as string}

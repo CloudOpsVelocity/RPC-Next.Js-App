@@ -33,11 +33,13 @@ import PropertyDataDisplay from "@/app/components/project/_ui/PricingDetailsSect
 import Disclamer from "@/app/components/builder/Disclamer";
 import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
 import { slugify } from "@/app/utils/linkRouters/ProjectLink";
+import BreadCrumbs from "@/app/components/project/breadcrum/BreadCrum";
 type Props = {
   projResponse: any;
   amenitiesFromDB: any;
   slug: string;
   scrollId?: string;
+  params: any;
 };
 
 export default async function ProjectsDetailsPage({
@@ -45,6 +47,7 @@ export default async function ProjectsDetailsPage({
   amenitiesFromDB,
   slug,
   scrollId,
+  params,
 }: Props) {
   const { basicData: data, nearByLocations, phaseOverview } = projResponse;
   const refURls = data?.sourceBuilderUrl?.split(",");
@@ -91,23 +94,7 @@ export default async function ProjectsDetailsPage({
       <ArticleJsonLdScript data={data} />
       <div className="mt-[70px] sm:mt-[90px] w-full sm:pb-[2%] flex xl:text-ellipsis items-center justify-center flex-col ">
         <div className="p-[1%] sm:p-[1%] sm:py-0 xl:p-[1%] w-full sm:w-[94%]">
-          <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%]">
-            <a className="hover:underline cursor-pointer" href={"/"}>
-              Home
-            </a>{" "}
-            {" > "}
-            <Link href={`${BASE_PATH_PROJECT_DETAILS}/${slugify(data.cityName)}`} target="_blank" className="hover:underline cursor-pointer">
-              <span>Projects In {data.cityName}</span>
-            </Link>{" "}
-            {" > "}
-            <Link href={`${BASE_PATH_PROJECT_DETAILS}/${slugify(data.cityName)}/${slugify(data.localityName)}`} target="_blank">
-              <span className="hover:underline cursor-pointer">
-                Projects In {`${data.localityName} `}
-              </span>
-            </Link>{" "}
-            {" > "}
-            <span>{data.projectName}</span>
-          </p>
+          <BreadCrumbs params={params} />
           {/* Top Cover Image Card */}
           <FirstBlock
             projectDetails={data}
@@ -123,6 +110,7 @@ export default async function ProjectsDetailsPage({
             isBrochure={!!data?.media?.projBroucherUrl}
             detailsData={{ ...data, nearByLocations }}
             slug={slug}
+            scrollId={scrollId}
           />
         </MobileHidden>
         <Overview {...data} slug={slug} Ph aseOverview={phaseOverview} />

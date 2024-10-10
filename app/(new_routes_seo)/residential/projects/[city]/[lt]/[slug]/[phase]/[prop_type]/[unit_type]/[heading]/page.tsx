@@ -33,12 +33,14 @@ export default async function Page({ params }: Props) {
     getProjectDetails(slug as string),
     getAmenties(),
   ]);
+
   return (
     <ProjectsDetailsPage
       projResponse={projResponse}
       amenitiesFromDB={amenitiesFromDB}
       slug={slug as string}
       scrollId={params.heading}
+      params={params}
     />
   );
 }

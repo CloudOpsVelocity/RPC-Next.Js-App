@@ -24,8 +24,9 @@ type Props = {
 };
 
 export default async function Page({
-  params: { city, lt, slug, phase, prop_type, unit_type },
+  params,
 }: Props) {
+  const { city, lt, slug, phase, prop_type, unit_type }= params
   const pathname = `${BASE_PATH_PROJECT_DETAILS}/${city}/${lt}/${slug}/${phase}/${prop_type}/${unit_type}`;
   const value = await findPathForProjectDetails(pathname);
   if (!value) {
@@ -50,6 +51,7 @@ export default async function Page({
       amenitiesFromDB={serverData.amenitiesFromDB}
       slug={filterValues.PJ as string}
       scrollId={filterValues.ID ? unit_type : undefined}
+      params={params}
     />
   ) : (
     <ListingSearchPage
