@@ -69,6 +69,7 @@ export default async function Page({ params }: Props) {
       issueData={issueData}
       nearByLocations={nearByLocations}
       totalPrice={totalPrice}
+      params={params}
     />
   );
 }

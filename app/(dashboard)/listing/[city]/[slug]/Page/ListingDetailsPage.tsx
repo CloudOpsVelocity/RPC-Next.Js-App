@@ -27,6 +27,7 @@ import { notFound } from "next/navigation";
 import CompareError from "@/app/components/property/actions/Error";
 import NearByCarouselProjProperty from "@/app/components/property/carousel/ProjectCarouse";
 import { getAmenties } from "@/app/utils/api/project";
+import ListingBreadCrumbs from "@/app/components/property/BreadCrumb/ListingBreadcrumb";
 type Props = {
   data: any;
   totalPrice: number;
@@ -35,6 +36,7 @@ type Props = {
   amenitiesFromDB: any;
   nearByLocations: any;
   TITLE_OF_PROP: string;
+  params: any;
 };
 
 export default function ListingDetailsPage({
@@ -45,24 +47,13 @@ export default function ListingDetailsPage({
   amenitiesFromDB,
   nearByLocations,
   TITLE_OF_PROP,
+  params,
 }: Props) {
   return (
     <div className="w-full">
       <div className="mt-[70px] sm:mt-[90px] w-full sm:pb-[2%] flex xl:text-ellipsis items-center justify-center flex-col">
         <div className="p-[1%] sm:p-[1%] sm:py-0 xl:p-[1%] w-full sm:w-[94%]">
-          <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%] mt-1 ">
-            <Link href={"/"}>
-              <span className="hover:underline cursor-pointer ">Home</span>
-            </Link>{" "}
-            {" > "}
-            <Link href={"/project/banglore"} className="text-nowrap">
-              <span>Property In {data.ctName}</span>
-            </Link>{" "}
-            {" > "}
-            <span className="text-nowrap">
-              {data.bhkName} {data.propTypeName} In {data.ltName}
-            </span>
-          </p>
+          <ListingBreadCrumbs params={params} isProject={!!data.projIdEnc} />
           {/* Top Cover Image Card */}
           <PropertyFirstBlock
             projectDetails={data}

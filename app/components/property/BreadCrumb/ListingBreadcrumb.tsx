@@ -1,0 +1,51 @@
+import { BASE_PATH_PROJECT_LISTING } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing.route";
+import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
+import { slugify } from "@/app/utils/linkRouters/ProjectLink";
+import Link from "next/link";
+import React from "react";
+
+export default function ListingBreadCrumbs({
+  params,
+  isProject,
+}: {
+  params: any;
+  isProject: boolean;
+}) {
+  const allParams = Object.keys(params);
+  const titleOfKeys = {
+    city: "Project In ",
+    lt: "Projects In ",
+  };
+  let currentPath = "";
+
+  return (
+    <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%]">
+      <Link
+        href={`/`}
+        target="_blank"
+        className="hover:underline cursor-pointer capitalize"
+      >
+        Home
+      </Link>
+      {" > "}
+      {allParams.map((key, index) => {
+        currentPath += `/${slugify(params[key])}`;
+        return (
+          <React.Fragment key={`${key[index]}`}>
+            <Link
+              href={`${BASE_PATH_PROJECT_LISTING}${currentPath}`}
+              target="_blank"
+              className="hover:underline cursor-pointer capitalize"
+            >
+              {titleOfKeys[key as keyof typeof titleOfKeys] && (
+                <span>{titleOfKeys[key as keyof typeof titleOfKeys]}</span>
+              )}
+              <span>{params[key].replace(/-/g, " ")}</span>
+            </Link>
+            {index < Object.keys(params).length - 1 && " > "}
+          </React.Fragment>
+        );
+      })}
+    </p>
+  );
+}
