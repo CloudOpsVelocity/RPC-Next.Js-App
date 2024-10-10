@@ -4,12 +4,10 @@ import ReportButton from "./button";
 import clsx from "clsx";
 import S from "@/app/styles/Rating.module.css";
 import { useState } from "react";
-import Styles from "@/app/styles/Qna.module.css";
 import { useParams } from "next/navigation";
 import Close from "@/app/components/project/button/close";
 import { ReportSuccesssMessage } from "@/app/components/project/success";
 import ReportOptions from "./reportOptions";
-import { number } from "yup";
 
 export default function ReportModal({ issueData }: any) {
   const { slug } = useParams<{ slug: string }>();
@@ -65,7 +63,6 @@ export default function ReportModal({ issueData }: any) {
       updatedReportStatus.push(cid);
     }
     setreportStatus(updatedReportStatus);
-    console.log(reportStatus);
   };
   const isMobile = useMediaQuery("(max-width: 601px)");
   const onClose = () => {
@@ -140,10 +137,20 @@ export default function ReportModal({ issueData }: any) {
                     placeholder="Start typing here"
                     radius={"10px"}
                     rows={2}
-                    error={text.length > 400 && "Comment must be under 400 characters"}
+                    error={
+                      text.length > 400 &&
+                      "Comment must be under 400 characters"
+                    }
                     maxLength={401}
                     classNames={{
                       input: S.ratingInput,
+                    }}
+                    onBlurCapture={() => {
+                      // let validation of
+                      //   setErrorMessage("Please enter your comment below");
+                      if (text === "" && reportStatus.includes(670))
+                        setStatus("error");
+                      else setStatus("idle");
                     }}
                     onChange={(e) => setText(e.target.value)}
                     value={text}
