@@ -31,7 +31,7 @@ export default function EnhancedFooter() {
       links: [
         "For Sale",
         "For Rent",
-        "New Developments",
+        "New Lauch",
         "Commercial",
         "Vacation Rentals",
         "Foreclosures",
@@ -85,11 +85,11 @@ export default function EnhancedFooter() {
 
   return (
     <footer className="bg-[#253F59] text-white">
-      <div className="max-w-[95%] mx-auto pt-12 pb-6 px-4 sm:px-6  lg:pt-16 lg:pb-8 lg:px-8">
+      <div className="max-w-[95%] mx-auto pt-2 sm:pt-12 pb-6 px-1 sm:px-6  lg:pt-16 lg:pb-8 lg:px-8">
         <div className="xl:grid xl:grid-cols-4 xl:gap-8">
-          <div className="space-y-6 xl:col-span-1">
-            <GrpDarkLogoSvg className="w-[180px] md:w-[180px] -ml-2" />
-            <p className="text-white text-base">
+          <div className=" sm:space-y-6 xl:col-span-1">
+            <GrpDarkLogoSvg className="w-[130px] sm:w-[180px] sm:-ml-2" />
+            <p className="text-white text-sm sm:text-base mb-4 sm:mb-0">
               We pride ourselves on delivering exceptional customer services
               &amp; building lasting relationships with our clients
             </p>
@@ -107,19 +107,19 @@ export default function EnhancedFooter() {
             </div>
           </div>
 
-          <div className="mt-12 grid grid-cols-2 gap-8 xl:mt-0 xl:col-span-3">
-            <div className="md:grid md:grid-cols-3 md:gap-8">
-              {sections.slice(0, 3).map(({ title, links }) => (
+          <div className="mt-2 sm:mt-12 grid grid-cols-3 gap-6 sm:gap-8 xl:mt-0 xl:col-span-3">
+            <div className="md:grid md:grid-cols-2 md:gap-8">
+              {sections.slice(0, 2).map(({ title, links }) => (
                 <div key={title}>
-                  <h3 className="text-sm font-semibold text-white tracking-wider uppercase">
+                  <h3 className="text-xs mt-2 sm:mt-0 sm:text-sm font-semibold text-white tracking-wider uppercase">
                     {title}
                   </h3>
-                  <ul className="mt-4 space-y-4">
+                  <ul className="sm:mt-4  md:space-y-4">
                     {links.map((link) => (
                       <li key={link}>
                         <a
                           href="/"
-                          className="text-base text-gray-300 hover:text-white"
+                          className="text-xs sm:text-base text-gray-300 hover:text-white"
                         >
                           {link}
                         </a>
@@ -130,18 +130,39 @@ export default function EnhancedFooter() {
               ))}
             </div>
 
-            <div className="md:grid md:grid-cols-4 md:gap-8">
-              {sections.slice(3).map(({ title, links }) => (
+            <div className="md:grid md:grid-cols-2 md:gap-8">
+              {sections.slice(2,4).map(({ title, links }) => (
                 <div key={title}>
-                  <h3 className="text-sm font-semibold text-white tracking-wider uppercase">
+                  <h3 className="text-xs mt-2 sm:mt-0 sm:text-sm font-semibold text-white tracking-wider uppercase">
                     {title}
                   </h3>
-                  <ul className="mt-4 space-y-4">
+                  <ul className="sm:mt-4  md:space-y-4">
                     {links.map((link) => (
                       <li key={link}>
                         <a
                           href="/"
-                          className="text-base text-gray-300 hover:text-white"
+                          className="text-xs sm:text-base text-gray-300 hover:text-white"
+                        >
+                          {link}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+            <div className="md:grid md:grid-cols-2 md:gap-8">
+              {sections.slice(4).map(({ title, links }) => (
+                <div key={title}>
+                  <h3 className="text-xs mt-2 sm:mt-0 sm:text-sm font-semibold text-white tracking-wider uppercase">
+                    {title}
+                  </h3>
+                  <ul className="sm:mt-4  md:space-y-4">
+                    {links.map((link) => (
+                      <li key={link}>
+                        <a
+                          href="/"
+                          className="text-xs sm:text-base text-gray-300 hover:text-white"
                         >
                           {link}
                         </a>
@@ -154,38 +175,38 @@ export default function EnhancedFooter() {
           </div>
         </div>
 
-        <div className="mt-12 border-t border-gray-700 pt-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="mt-4 sm:mt-12 border-t border-gray-700 sm:pt-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
             <div>
-              <h3 className="text-sm font-semibold text-white tracking-wider uppercase">
+              <h3 className="text-xs sm:text-sm font-semibold text-white tracking-wider uppercase">
                 Subscribe to our newsletter
               </h3>
-              <p className="mt-4 text-base text-gray-300">
+              <p className="mt-1 sm:mt-4 text-xs sm:text-base text-gray-300">
                 Get the latest news, market trends, and hot property listings
                 delivered to your inbox.
               </p>
               <Subscribe />
             </div>
             <div>
-              <h3 className="text-sm font-semibold text-white tracking-wider uppercase">
+              <h3 className="text-xs sm:text-sm font-semibold text-white tracking-wider uppercase">
                 Download our app
               </h3>
-              <p className="mt-4 text-base text-gray-300">
+              <p className="text-xs sm:mt-4 sm:text-base text-gray-300">
                 Get instant property alerts and manage your favorites on the go.
               </p>
-              <div className="mt-4 flex space-x-4">
+              <div className="sm:mt-4 my-2 flex space-x-4">
                 <a
                   href="/"
-                  className="flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-gray-800 hover:bg-gray-700"
+                  className="flex items-center justify-center px-1 py-1 sm:px-4 sm:py-2 border border-transparent rounded-md shadow-sm text-xs sm:text-base font-medium text-white bg-gray-800 hover:bg-gray-700"
                 >
-                  <FaAppStoreIos size={24} className="mr-1.5" />
+                  <FaAppStoreIos  className="mr-1.5 w-[14px] h-[14px] sm:w-[28px] sm:h-[28px]" />
                   App Store
                 </a>
                 <a
                   href="/"
-                  className="flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-gray-800 hover:bg-gray-700"
+                  className="flex items-center justify-center px-1 py-1 sm:px-4 sm:py-2 border border-transparent rounded-md shadow-sm text-xs sm:text-base font-medium text-white bg-gray-800 hover:bg-gray-700"
                 >
-                  <IoLogoGooglePlaystore size={24} className="mr-1" />
+                  <IoLogoGooglePlaystore  className="mr-1 w-[14px] h-[14px] sm:w-[28px] sm:h-[28px]" />
                   Google Play
                 </a>
               </div>
@@ -193,19 +214,19 @@ export default function EnhancedFooter() {
           </div>
         </div>
 
-        <div className="mt-8 border-t border-gray-700 pt-8 md:flex md:items-center md:justify-between">
+        <div className="sm:mt-8 border-t border-gray-700 sm:pt-8 md:flex md:items-center md:justify-between">
           <div className="flex space-x-6 md:order-2">
-            <button className="text-white hover:text-gray-300 inline-flex md:items-center md:justify-center flex-wrap text-left">
+            <button className="text-white text-xs sm:text-base hover:text-gray-300 inline-flex md:items-center md:justify-center flex-wrap text-left">
               <FaLocationDot className="mr-1" /> Whitefield, Bengaluru-560066
             </button>
             <a
               href={`tel:${8884440963}`}
-              className="text-white hover:text-gray-300 inline-flex md:items-center md:justify-center flex-wrap text-left"
+              className="text-white text-xs sm:text-base hover:text-gray-300 inline-flex md:items-center md:justify-center flex-wrap text-left"
             >
               <FaPhoneAlt className="mr-1" /> +91-8884440963
             </a>
           </div>
-          <p className="mt-8 text-base text-white md:mt-0 md:order-1">
+          <p className="mt-1 text-xs sm:text-base text-white md:mt-0 md:order-1">
             Copyright © 2024 GetRightProperty. All Rights Reserved.
             <span>
               <br />A Product By &quot;
