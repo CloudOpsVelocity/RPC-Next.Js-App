@@ -28,8 +28,9 @@ type Props = {
 };
 
 export default async function Page({
-  params: { bhk_unit_type, cg, city, lt, project, phase },
+  params,
 }: Props) {
+  const { bhk_unit_type, cg, city, lt, project, phase } = params
   const pathname = `${BASE_PATH_PROJECT_LISTING}/${cg}/${city}/${lt}/${project}${
     phase ? `/${phase}` : ""
   }/${bhk_unit_type}`;
@@ -80,7 +81,7 @@ export default async function Page({
       }}
     />
   ) : (
-    <ListingDetailsPage {...serverData} />
+    <ListingDetailsPage params={params} {...serverData} />
   );
 }
 

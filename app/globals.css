@@ -316,3 +316,7 @@
 .embla-thumbs__slide--selected .embla-thumbs__slide__number {
   color: var(--text-body);
 }
+
+.prose-no-break br {
+  display: none;
+}

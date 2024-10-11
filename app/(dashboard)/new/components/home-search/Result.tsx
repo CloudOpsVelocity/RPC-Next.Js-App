@@ -13,9 +13,11 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import toast from "react-hot-toast";
 import { GrayMapIcon } from "@/app/images/commongsSvgs2";
+import { useRecentSearched } from "@/app/hooks/custom/useRecentSearch";
 
 export default function Results() {
   const { data, isLoading, handleResetQuery } = useQsearch();
+  const { addToRecent, recentSearches } = useRecentSearched();
 
   const [filters, dispatch] = useAtom(homeSearchFiltersAtom);
   if (isLoading) {
@@ -47,13 +49,15 @@ export default function Results() {
     }
   };
 
-  const handlePush = async (type: string, data: any) => {
+  const handlePush = async (type: string, data: any, apiData: Object) => {
     switch (type) {
       case "project":
+        addToRecent(apiData);
         window.open(`/abc/delhi/palika/${data}`);
         break;
       case "listing":
         {
+          addToRecent(apiData);
           const ids = data.id.split("_");
           if (ids[0] == "32") {
             let url;
@@ -112,6 +116,7 @@ export default function Results() {
         break;
       case "projectListing":
         {
+          addToRecent(apiData);
           let listedByType = data.type === "OL" ? "I" : data.type.split("")[0];
           let projectName = data.name.split("(")[0].trim();
           // console.log(projectName);
@@ -121,6 +126,7 @@ export default function Results() {
         break;
       case "builder":
         {
+          addToRecent(apiData);
           const url =
             encodeURIComponent(data.name) + "%2B" + encodeURIComponent(data.id);
           window.open(`/search?builderIds=${url}`);
@@ -191,7 +197,7 @@ export default function Results() {
             <ul>
               {projects?.map((project: any) => (
                 <li
-                  onClick={() => handlePush("project", project.id)}
+                  onClick={() => handlePush("project", project.id, project)}
                   className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1  xl:text-nowrap cursor-pointer"
                   key={project.id}
                 >
@@ -206,7 +212,9 @@ export default function Results() {
             <ul>
               {projectListing?.map((projectListing: any) => (
                 <li
-                  onClick={() => handlePush("projectListing", projectListing)}
+                  onClick={() =>
+                    handlePush("projectListing", projectListing, projectListing)
+                  }
                   className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1  xl:text-nowrap cursor-pointer"
                   key={projectListing.id}
                 >
@@ -219,10 +227,14 @@ export default function Results() {
               {listings?.map((listing: any) => (
                 <li
                   onClick={() =>
-                    handlePush("listing", {
-                      id: listing.id,
-                      name: listing.name.split(" in ")[1],
-                    })
+                    handlePush(
+                      "listing",
+                      {
+                        id: listing.id,
+                        name: listing.name.split(" in ")[1],
+                      },
+                      listing
+                    )
                   }
                   className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1  xl:text-nowrap cursor-pointer"
                   key={listing.id}
@@ -236,10 +248,14 @@ export default function Results() {
               {builders?.map((builder: any) => (
                 <li
                   onClick={() =>
-                    handlePush("builder", {
-                      name: builder.name,
-                      id: builder.id,
-                    })
+                    handlePush(
+                      "builder",
+                      {
+                        name: builder.name,
+                        id: builder.id,
+                      },
+                      listings
+                    )
                   }
                   className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic leading-[normal] flex items-center gap-1  xl:text-nowrap cursor-pointer"
                   key={builder.id}

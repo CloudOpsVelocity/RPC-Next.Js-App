@@ -39,7 +39,7 @@ export default function ProjData({
   lang,
   propIdEnc,
   otherCharges,
-  phaseCount
+  phaseCount,
 }: Props) {
   const sortedBhks = sortUnits(bhkNames);
   const dispatch = useSetAtom(overlayAtom);
@@ -48,7 +48,9 @@ export default function ProjData({
     <div className="flex flex-col">
       <p className="text-[#001F35] text-[15px] sm:text-[16px] xl:text-[18px] font-bold break-words whitespace-normal min-w-0 inline-flex gap-1 items-center flex-wrap">
         {projName}{" "}
-        {phaseName && phaseCount !== undefined && phaseCount > 1 && <span className="text-[12px] sm:text-[14px] ">({phaseName})</span>}
+        {phaseName && phaseCount !== undefined && phaseCount > 1 && (
+          <span className="text-[12px] sm:text-[14px] ">({phaseName})</span>
+        )}
         {/* <button className="w-6 h-6 p-1.5 flex items-center justify-center rounded-full bg-blue-500 text-white hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 xl:hidden"> */}
         <NewMapIcon
           className="w-5 h-5 sm:hidden"
@@ -107,7 +109,7 @@ export default function ProjData({
                 title: "Unit Types",
                 id: `${projIdEnc}+${propTypeId}`,
                 conType: "bhk",
-                pType: type
+                pType: type,
               });
               // Add your logic here to show all BHK types (e.g., open a modal)
             }}
@@ -144,10 +146,10 @@ export default function ProjData({
               content: {
                 charges: otherCharges,
               },
-              id: `${projIdEnc}+${propTypeId}`,
+              id: `${type === "proj" ? projIdEnc : propIdEnc}+${propTypeId}`,
               title: "Other Charges",
               type: "OPEN",
-              pType: type
+              pType: type,
             });
           }}
         >

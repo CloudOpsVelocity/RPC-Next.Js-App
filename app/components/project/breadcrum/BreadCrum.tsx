@@ -25,16 +25,25 @@ export default function BreadCrumbs({ params }: { params: any }) {
         currentPath += `/${slugify(params[key])}`;
         return (
           <React.Fragment key={`${key[index]}`}>
-            <Link
-              href={`${BASE_PATH_PROJECT_DETAILS}${currentPath}`}
-              target="_blank"
-              className="hover:underline cursor-pointer capitalize"
-            >
-              {titleOfKeys[key as keyof typeof titleOfKeys] && (
-                <span>{titleOfKeys[key as keyof typeof titleOfKeys]}</span>
-              )}
-              <span>{params[key].replace(/-/g, " ")}</span>
-            </Link>
+            {index < Object.keys(params).length - 1 ? (
+              <Link
+                href={`${BASE_PATH_PROJECT_DETAILS}${currentPath}`}
+                target="_blank"
+                className="hover:underline cursor-pointer capitalize"
+              >
+                {titleOfKeys[key as keyof typeof titleOfKeys] && (
+                  <span>{titleOfKeys[key as keyof typeof titleOfKeys]}</span>
+                )}
+                <span>{params[key].replace(/-/g, " ")}</span>
+              </Link>
+            ) : (
+              <>
+                {titleOfKeys[key as keyof typeof titleOfKeys] && (
+                  <span>{titleOfKeys[key as keyof typeof titleOfKeys]}</span>
+                )}
+                <span className="capitalize">{params[key].replace(/-/g, " ")}</span>
+              </>
+            )}
             {index < Object.keys(params).length - 1 && " > "}
           </React.Fragment>
         );

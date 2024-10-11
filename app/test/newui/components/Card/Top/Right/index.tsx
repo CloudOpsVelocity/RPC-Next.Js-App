@@ -1,4 +1,3 @@
-
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import selectedSearchAtom from "@/app/store/search/map";
 import { useAtom, useSetAtom } from "jotai";
@@ -40,11 +39,12 @@ export default function TopRightSection({
   sqftPrice,
   floorPlan,
   propTypeName,
-  propType
+  propType,
+  amenCount,
 }: Props) {
   const setSelected = useSetAtom(selectedSearchAtom);
   const [sharePopupData, setSharePopup] = useAtom(searchShareAtom);
-  const dispatch = useSetAtom(overlayAtom); 
+  const dispatch = useSetAtom(overlayAtom);
   const url =
     type === "proj"
       ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/abc/banglore/whitefield/${projIdEnc}`
@@ -110,7 +110,7 @@ export default function TopRightSection({
                       lang,
                       type,
                       reqId: type === "proj" ? projIdEnc : propIdEnc,
-                      propType:type === "proj" ? propType : propTypeName
+                      propType: type === "proj" ? propType : propTypeName,
                     });
                   }}
                 >
@@ -121,9 +121,6 @@ export default function TopRightSection({
                   </div>
                 </button>
               </div>
-              
-                
-              
             </div>
 
             {/* <div className="flex items-end flex-col justify-between md:gap-2 mt-[2px]">
@@ -142,176 +139,11 @@ export default function TopRightSection({
                   onClick={() =>
                     dispatch({
                       type: "OPEN",
-                      content: [
-                        {
-                          name: "",
-                          id: 323,
-                        },
-                        {
-                          name: "",
-                          id: 324,
-                        },
-                        {
-                          name: "",
-                          id: 261,
-                        },
-                        {
-                          name: "",
-                          id: 325,
-                        },
-                        {
-                          name: "",
-                          id: 262,
-                        },
-                        {
-                          name: "",
-                          id: 326,
-                        },
-                        {
-                          name: "",
-                          id: 263,
-                        },
-                        {
-                          name: "",
-                          id: 327,
-                        },
-                        {
-                          name: "",
-                          id: 264,
-                        },
-                        {
-                          name: "",
-                          id: 328,
-                        },
-                        {
-                          name: "",
-                          id: 329,
-                        },
-                        {
-                          name: "",
-                          id: 202,
-                        },
-                        {
-                          name: "",
-                          id: 203,
-                        },
-                        {
-                          name: "",
-                          id: 205,
-                        },
-                        {
-                          name: "",
-                          id: 206,
-                        },
-                        {
-                          name: "",
-                          id: 340,
-                        },
-                        {
-                          name: "",
-                          id: 341,
-                        },
-                        {
-                          name: "",
-                          id: 342,
-                        },
-                        {
-                          name: "",
-                          id: 343,
-                        },
-                        {
-                          name: "",
-                          id: 344,
-                        },
-                        {
-                          name: "",
-                          id: 221,
-                        },
-                        {
-                          name: "",
-                          id: 222,
-                        },
-                        {
-                          name: "",
-                          id: 224,
-                        },
-                        {
-                          name: "",
-                          id: 289,
-                        },
-                        {
-                          name: "",
-                          id: 290,
-                        },
-                        {
-                          name: "",
-                          id: 291,
-                        },
-                        {
-                          name: "",
-                          id: 229,
-                        },
-                        {
-                          name: "",
-                          id: 230,
-                        },
-                        {
-                          name: "",
-                          id: 231,
-                        },
-                        {
-                          name: "",
-                          id: 235,
-                        },
-                        {
-                          name: "",
-                          id: 236,
-                        },
-                        {
-                          name: "",
-                          id: 238,
-                        },
-                        {
-                          name: "",
-                          id: 305,
-                        },
-                        {
-                          name: "",
-                          id: 306,
-                        },
-                        {
-                          name: "",
-                          id: 307,
-                        },
-                        {
-                          name: "",
-                          id: 308,
-                        },
-                        {
-                          name: "",
-                          id: 309,
-                        },
-                        {
-                          name: "",
-                          id: 310,
-                        },
-                        {
-                          name: "",
-                          id: 311,
-                        },
-                        {
-                          name: "",
-                          id: 312,
-                        },
-                        {
-                          name: "",
-                          id: 313,
-                        },
-                      ],
+                      content: [],
                       id: `${projIdEnc}+${propTypeId}`,
                       title: "Amenities",
                       conType: "amenities",
-                      pType: type
+                      pType: type,
                     })
                   }
                 >
@@ -322,27 +154,11 @@ export default function TopRightSection({
                   onClick={() =>
                     dispatch({
                       type: "OPEN",
-                      content: [
-                        "Orion Mall",
-                        "Apollo Hospital",
-                        "Greenwood High International School",
-                        "MG Road Metro Station",
-                        "Major Bus Stop",
-                        "City Park",
-                        "Central Library",
-                        "Fitness Center",
-                        "Local Market",
-                        "Coffee Shop",
-                        "Bank",
-                        "Post Office",
-                        "Restaurant",
-                        "Pharmacy",
-                        "Veterinary Clinic",
-                      ],
+                      content: [],
                       id: `${projIdEnc}+${propTypeId}`,
                       title: `NearBy Locations of ${projName}`,
                       conType: "nearby",
-                      pType: type
+                      pType: type,
                     })
                   }
                 >
@@ -375,7 +191,7 @@ export default function TopRightSection({
                       ? "Elevation"
                       : "At Floor"
                   }
-                  value={atFloor}
+                  value={atFloor == 0 ? "G" : atFloor}
                 />
               </>
             )}
@@ -415,14 +231,14 @@ export default function TopRightSection({
                   lang,
                   type,
                   reqId: type === "proj" ? projIdEnc : propIdEnc,
-                  propType:type === "proj" ? propType : propTypeName
+                  propType: type === "proj" ? propType : propTypeName,
                 })
               }
             >
               {" "}
               <div className="py-[1px] px-[2px] inline-flex justify-center items-center bg-[#F0F9FF]  rounded">
                 {" "}
-                View on Map 
+                View on Map
               </div>
             </button>
             {type !== "proj" && (
@@ -442,7 +258,7 @@ export default function TopRightSection({
                   value={
                     propTypeName === "Row House" || propTypeName === "Villa"
                       ? `G+${atFloor}`
-                      : atFloor === 0
+                      : atFloor == 0
                       ? "G"
                       : atFloor
                   }
@@ -452,7 +268,7 @@ export default function TopRightSection({
                     className="text-[14px]  text-btnPrimary  font-bold mt-2"
                     onClick={() =>
                       window.open(
-                        `/image?path=${floorPlan.split(".net")[1]}`,
+                        `/image?path=${floorPlan.split(".net")[1]}&type=F`,
                         "_blank"
                       )
                     }
@@ -466,22 +282,24 @@ export default function TopRightSection({
           {type === "proj" && (
             <div className="flex  items-end flex-col gap-2">
               {brochureUrl && <DownloadBrocher brochureUrl={brochureUrl} />}
+              {amenCount && (
+                <button
+                  className="bg-orange-500 text-white py-1 px-2 font-bold  rounded hover:bg-orange-600 focus:outline-none text-xs "
+                  onClick={() =>
+                    dispatch({
+                      type: "OPEN",
+                      content: [],
+                      id: `${projIdEnc}+${propTypeId}`,
+                      title: "Amenities",
+                      conType: "amenities",
+                      pType: type,
+                    })
+                  }
+                >
+                  {amenCount} {amenCount === 1 ? "Amenity" : "Amenities"}
+                </button>
+              )}
 
-              <button
-                className="bg-orange-500 text-white py-1 px-2 font-bold  rounded hover:bg-orange-600 focus:outline-none text-xs "
-                onClick={() =>
-                  dispatch({
-                    type: "OPEN",
-                    content: [],
-                    id: `${projIdEnc}+${propTypeId}`,
-                    title: "Amenities",
-                    conType: "amenities",
-                    pType: type
-                  })
-                }
-              >
-                Amenities
-              </button>
               <button
                 className="bg-teal-500 text-white font-bold py-1 px-2 text-xs rounded shadow-lg hover:bg-teal-600 transition duration-300 ease-in-out"
                 onClick={() =>
@@ -507,7 +325,7 @@ export default function TopRightSection({
                     id: `${projIdEnc}+${propTypeId}`,
                     title: `NearBy Locations of ${projName}`,
                     conType: "nearby",
-                    pType: type
+                    pType: type,
                   })
                 }
               >

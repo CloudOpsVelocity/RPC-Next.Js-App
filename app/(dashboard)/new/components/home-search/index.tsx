@@ -17,6 +17,7 @@ import { BasicSelect } from "./filters/Select";
 import { CityDropdown } from "./filters/CityDropdown";
 import { toQueryParams } from "../../utils/param";
 import { HeartIcon, SelectedHeartIcon } from "@/app/images/HomePageIcons";
+import RecentSearches from "./recentSearch/RecentSearches";
 const propertyTypes = ["Buy", "Rent"];
 
 const HomeSearch = ({ count }: { count: number }) => {
@@ -97,17 +98,7 @@ const HomeSearch = ({ count }: { count: number }) => {
           </div>
           {f.showFilter && <QuickFilters />}
         </div>
-        <div className="mt-4">
-          <p className="text-[#242424] text-[12px] sm:text-[16px] xl:text-xl not-italic font-medium leading-[normal] ">
-            Browse:
-          </p>
-          <div className="space-x-2 mt-1  flex gap-[10px] xl:block sm:flex flex-nowrap overflow-x-scroll max-w-[100%] scrollbar-hide">
-            <Box />
-            <Box />
-            <Box />
-            <Box />
-          </div>
-        </div>
+      <RecentSearches />
       </div>
     </div>
   );

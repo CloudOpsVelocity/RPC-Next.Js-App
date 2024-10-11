@@ -40,8 +40,6 @@ export default function TabPanelSection({ mutate, serverData }: Props) {
     }
   }, [entry?.isIntersecting, hasNextPage, fetchMoreData]);
 
-  console.log(serverClientData);
-
   return (
     <div
       className="p-[0%] h-full sm:max-h-[560px] w-full xl:max-h-[700px] max-w-full overflow-y-auto"

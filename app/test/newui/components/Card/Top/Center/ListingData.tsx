@@ -37,6 +37,7 @@ export default function ListingData({
   propStatus,
   towerData,
   availableFor,
+  propIdEnc,
 }: Props) {
   const isMobile = useMediaQuery("(max-width: 1600px)");
   const isPlot = propTypeId == 32;
@@ -178,11 +179,13 @@ export default function ListingData({
                   e.stopPropagation(); // Prevents the modal from opening if clicking elsewhere
                   dispatch({
                     content: projectAbout,
-                    id: `${projIdEnc}+${propTypeId}`,
-                    title: "About Project",
+                    id: `${
+                      type === "proj" ? projIdEnc : propIdEnc
+                    }+${propTypeId}`,
+                    title: type === "proj" ? "About Project" : "About Property",
                     type: "OPEN",
                     conType: "readmore",
-                    pType: type
+                    pType: type,
                   });
                 }}
               >

@@ -21,5 +21,8 @@ function capitalizeWords(str: string): string {
 
   return result;
 }
-
-export { capitalizeWords };
+const truncateText = (text: string, limit: number): string => {
+  if (text.length <= limit) return text;
+  return text.slice(0, limit) + "...";
+};
+export { capitalizeWords,truncateText };

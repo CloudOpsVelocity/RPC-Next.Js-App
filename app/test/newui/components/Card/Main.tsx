@@ -79,7 +79,6 @@ const MainBox = ({ data, refetch }: Props) => {
   };
   const onClickRedirect = (projEncId: string) => {
     let url;
-    console.log(data);
     if (data.type == "proj") {
       url = createProjectLinkUrl({
         city: data.city,
@@ -144,7 +143,9 @@ const MainBox = ({ data, refetch }: Props) => {
           data={data}
         />
         <div className="relative w-full">
-          {overlayData.id && `${projIdEnc}+${propTypeId}` === overlayData.id ? (
+          {overlayData.id &&
+          `${type === "proj" ? projIdEnc : propIdEnc}+${propTypeId}` ===
+            overlayData.id ? (
             <Overlay />
           ) : null}
           {isMobile && (

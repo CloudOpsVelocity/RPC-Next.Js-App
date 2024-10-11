@@ -1,5 +1,7 @@
-import { BASE_PATH_PROJECT_LISTING } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing.route";
-import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
+import {
+  BASE_PATH_LISTING,
+  BASE_PATH_PROJECT_LISTING,
+} from "@/app/(new_routes_seo)/utils/new-seo-routes/listing.route";
 import { slugify } from "@/app/utils/linkRouters/ProjectLink";
 import Link from "next/link";
 import React from "react";
@@ -7,11 +9,13 @@ import React from "react";
 export default function ListingBreadCrumbs({
   params,
   isProject,
+  title,
 }: {
   params: any;
   isProject: boolean;
+  title: string;
 }) {
-  const allParams = Object.keys(params);
+  const allParams = Object.keys(params || {});
   const titleOfKeys = {
     city: "Project In ",
     lt: "Projects In ",
@@ -30,19 +34,29 @@ export default function ListingBreadCrumbs({
       {" > "}
       {allParams.map((key, index) => {
         currentPath += `/${slugify(params[key])}`;
+        const isLast = index === allParams.length - 1;
+
         return (
           <React.Fragment key={`${key[index]}`}>
-            <Link
-              href={`${BASE_PATH_PROJECT_LISTING}${currentPath}`}
-              target="_blank"
-              className="hover:underline cursor-pointer capitalize"
-            >
-              {titleOfKeys[key as keyof typeof titleOfKeys] && (
-                <span>{titleOfKeys[key as keyof typeof titleOfKeys]}</span>
-              )}
-              <span>{params[key].replace(/-/g, " ")}</span>
-            </Link>
-            {index < Object.keys(params).length - 1 && " > "}
+            {!isLast ? (
+              <>
+                <Link
+                  href={`${
+                    isProject ? BASE_PATH_PROJECT_LISTING : BASE_PATH_LISTING
+                  }${currentPath}`}
+                  target="_blank"
+                  className="hover:underline cursor-pointer capitalize"
+                >
+                  {titleOfKeys[key as keyof typeof titleOfKeys] && (
+                    <span>{titleOfKeys[key as keyof typeof titleOfKeys]}</span>
+                  )}
+                  <span>{params[key].replace(/-/g, " ")}</span>
+                </Link>
+                {" > "}
+              </>
+            ) : (
+              <span className="capitalize">{title}</span> // Last breadcrumb is plain text
+            )}
           </React.Fragment>
         );
       })}

@@ -14,12 +14,12 @@ const OtherCharges: React.FC = () => {
     <div className="overflow-x-auto">
       <table className="min-w-full bg-white border border-gray-200 rounded-md shadow-md">
         <thead>
-          <tr className="bg-gray-50">
-            <th className="px-4 py-2 text-left text-gray-700 font-semibold">
-              Charge Type
+          <tr className="bg-green-700">
+            <th className="px-4 py-2 text-left text-white font-semibold">
+              Type of Charge
             </th>
-            <th className="px-4 py-2 text-right text-gray-700 font-semibold">
-              Amount (₹)
+            <th className="px-4 py-2 text-right text-white font-semibold">
+              Rupee Amount
             </th>
           </tr>
         </thead>
