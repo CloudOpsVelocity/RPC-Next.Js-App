@@ -1,3 +1,5 @@
+import { SearchLocationIcon } from "@/app/images/commonSvgs";
+import { Loader, Select } from "@mantine/core";
 import React from "react";
 import { useQuery } from "react-query";
 
@@ -13,5 +15,15 @@ export default function AutoCitySelectDropDown({}: Props) {
     queryKey: ["my-location"],
     queryFn: getCity,
   });
-  return <div>{isLoading ? "loading.." : DefaultCity.data.city}</div>;
+  return (
+    <Select
+      disabled={isLoading}
+      data={["Bengaluru", "Angular", "Vue", "Svelte"]}
+      placeholder="Pick value"
+      defaultValue={DefaultCity?.data?.city}
+      value={DefaultCity?.data?.city}
+      searchable
+      rightSection={isLoading ? <Loader size="xs" /> : <SearchLocationIcon />}
+    />
+  );
 }
