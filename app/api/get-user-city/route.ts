@@ -17,18 +17,34 @@ export async function POST(req: Request) {
   }
 }
 export async function GET(req: Request) {
-    if(process.env.NODE_ENV === "development"){
-        let testData ={city:9,state:11}
-        return NextResponse.json({cityStateId: testData, status: true ,msg:"comgin from development"});
-    }
+  if (process.env.NODE_ENV === "development") {
+    return NextResponse.json({
+      data: {
+        city: "Bengaluru",
+        state: "Karnataka",
+        cityId: 9,
+        stateId: 11,
+      },
+      msg: "comgin from development",
+    });
+  }
   const ip = req.headers.get("x-real-ip") || req.headers.get("x-forwarded-for");
   try {
     if (!ip) {
       return NextResponse.json({ ok: false, error: "IP not found" });
     }
     const data = await getCityStateFromIP(ip);
+
     const cityStateId = await getCityStateIdFromDb(data.region, data.city);
-    return NextResponse.json({ cityStateId, data, status: true });
+    // there city id state id city name state name
+    const resData = {
+      cityId: cityStateId.city,
+      stateId: cityStateId.state,
+      city: data.city,
+      state: data.region,
+      status: true,
+    };
+    return NextResponse.json({ data: resData, status: true });
   } catch (error) {
     console.error(error);
     return Response.json({ ok: false, error: "Error reading file" });
@@ -47,7 +63,7 @@ async function getCityStateFromIP(ip: string) {
   }
 }
 async function getCityStateIdFromDb(state: string, city: string) {
-    console.log(state,city)
+  console.log(state, city);
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/common/get-city-state/ip?city=Bengaluru&state=Karnataka`
   );
