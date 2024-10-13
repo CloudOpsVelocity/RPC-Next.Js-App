@@ -44,6 +44,7 @@ export default function ProjData({
   const sortedBhks = sortUnits(bhkNames);
   const dispatch = useSetAtom(overlayAtom);
   const mobileMapDispatch = useSetAtom(mobileSearchPageMapModalReducerAtom);
+
   return type === "proj" ? (
     <div className="flex flex-col">
       <p className="text-[#001F35] text-[15px] sm:text-[16px] xl:text-[18px] font-bold break-words whitespace-normal min-w-0 inline-flex gap-1 items-center flex-wrap">
@@ -132,30 +133,36 @@ export default function ProjData({
     </div>
   ) : (
     <div>
-      <p className="text-[#242424] text-[14px] sm:text-[16px] xl:text-[18px] capitalize not-italic font-bold">
+      <p
+        className={`text-[#242424] text-[14px] sm:text-[16px] xl:text-[18px] capitalize not-italic font-bold ${
+          category === "Sale" ? "max-w-[400px]" : "max-w-[550px]"
+        }`}
+      >
         {bhkName} {propTypeName} for {category} in {localityName}
       </p>
-      <p className="text-[#148B16] text-[14px] sm:text-[18px] xl:text-xl not-italic font-bold relative">
-        {formatCurrency(Number(price))}{" "}
-        <span
-          className="  text-btnPrimary cursor-pointer text-[12px] xl:text-sm"
-          onClick={(e) => {
-            e.stopPropagation();
-            dispatch({
-              conType: "otherCharges",
-              content: {
-                charges: otherCharges,
-              },
-              id: `${type === "proj" ? projIdEnc : propIdEnc}+${propTypeId}`,
-              title: "Other Charges",
-              type: "OPEN",
-              pType: type,
-            });
-          }}
-        >
-          View Other Charges
-        </span>
-      </p>
+      {(otherCharges.otherCharge || Object.keys(otherCharges).length > 2) && (
+        <p className="text-[#148B16] text-[14px] sm:text-[18px] xl:text-xl not-italic font-bold relative">
+          {formatCurrency(Number(price))}{" "}
+          <span
+            className="  text-btnPrimary cursor-pointer text-[12px] xl:text-sm"
+            onClick={(e) => {
+              e.stopPropagation();
+              dispatch({
+                conType: "otherCharges",
+                content: {
+                  charges: otherCharges,
+                },
+                id: `${type === "proj" ? projIdEnc : propIdEnc}+${propTypeId}`,
+                title: "Other Charges",
+                type: "OPEN",
+                pType: type,
+              });
+            }}
+          >
+            View Other Charges
+          </span>
+        </p>
+      )}
 
       <p className="text-[#001F35] text-[12px] sm:text-[16px]   not-italic font-bold">
         {propName}{" "}

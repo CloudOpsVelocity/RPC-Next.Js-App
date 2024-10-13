@@ -4,7 +4,7 @@ type Props = {
   question: string;
 };
 export const addQna = async (data: Props) => {
-  const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/project/addProjectQNA`;
+  const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/post-project/addProjectQNA`;
   try {
     const response = await axios.post(url, data);
     return response.data;

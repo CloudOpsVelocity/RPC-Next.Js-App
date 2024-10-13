@@ -93,7 +93,6 @@ const AddRating = ({
   projName: string;
   projIdEnc: string;
 }) => {
-  const params = useParams<{ slug: string }>();
   const { data: session } = useSession();
   const { data, updateRatings } = useDynamicProj();
 
@@ -131,12 +130,12 @@ const AddRating = ({
       }
 
       await addRating({
-        projIdEnc: params?.slug,
+        projIdEnc: projIdEnc,
         rating: form.values.rating,
         review: form.values?.review,
       });
     } else {
-      await addRating({ ...values, projIdEnc: params?.slug });
+      await addRating({ ...values, projIdEnc: projIdEnc });
     }
     const optimisticData = {
       rating: values.rating,

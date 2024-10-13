@@ -18,6 +18,7 @@ export default function CardDownSection({
   propTypeId,
   isPetFriendly,
   amenCount,
+  propIdEnc,
 }: any) {
   const isMobile = useMediaQuery("(max-width: 1600px)");
   // const name =
@@ -117,7 +118,9 @@ export default function CardDownSection({
                   content: [],
                   conType: "amenities",
                   title: "Amenities",
-                  id: `${projIdEnc}+${propTypeId}`,
+                  id: `${
+                    type === "proj" ? projIdEnc : propIdEnc
+                  }+${propTypeId}`,
                   type: "OPEN",
                   pType: type,
                 })

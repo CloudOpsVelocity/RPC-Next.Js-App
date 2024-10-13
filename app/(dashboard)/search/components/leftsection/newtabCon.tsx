@@ -8,8 +8,8 @@ const NewTabCon = ({
   Activities,
 }: any) => {
   return (
-    <div className="flex flex-row justify-between items-center  align-middle flex-wrap sm:flex-nowrap max-w-full gap-[3px] md:gap-3 max-w-full  bg-[#e7f5ff] shadow-md  px-4 sm:px-[1px] md:px-4 md:py-2.5;">
-      <div className="flex flex-row w-[80%] sm:w-auto  justify-start items-center  gap-2   md:gap-3 ">
+    <div className="flex flex-row justify-between items-center  align-middle flex-wrap sm:flex-nowrap max-w-full gap-[3px] md:gap-3   bg-[#e7f5ff] shadow-md  px-4 sm:px-[1px] md:px-4 md:py-2.5;">
+      <div className="flex flex-row w-[80%] sm:w-auto  justify-start items-center  gap-2 flex-wrap   md:gap-3 ">
         {categoryType.map((item: any) => (
           <>
             <button

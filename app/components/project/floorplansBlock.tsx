@@ -107,7 +107,6 @@ Props) {
     enabled: !partialUnitData,
     ...RTK_CONFIG,
   });
-
   const types =
     selectedPhase?.propTypeOverview &&
     Object?.keys(
@@ -322,7 +321,6 @@ Props) {
                       }
                       onChange={() => {
                         if (currentPhase == each.phaseId) return;
-
                         setCurrentPhase(each.phaseId);
                         setBhk("0");
                         if (floorPlanType === "unit") {

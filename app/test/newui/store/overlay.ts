@@ -59,19 +59,36 @@ const overlayReducer = (
     case "OPEN":
       if (action.conType === "otherCharges") {
         let content = action.content.charges;
+        console.log(content);
         const formattedContent = [
           { label: "Price", value: `₹${formatNumber(content.price)}` },
-          {
-            label: "Club house Subscription",
-            value:
-              content.clubHouseCharge === "A"
-                ? "Lifetime"
-                : content.clubHouseTill
-                ? `₹${formatNumber(content.clubHouseCharge)} for ${
-                    content.clubHouseTill
-                  } years`
-                : "Already Included",
-          },
+          ...(content.clubHouseCharge
+            ? [
+                {
+                  label: "Club house Subscription",
+                  value:
+                    content.clubHouseCharge === "A"
+                      ? "Lifetime"
+                      : content.clubHouseTill
+                      ? `₹${formatNumber(content.clubHouseCharge)} for ${
+                          content.clubHouseTill
+                        } years`
+                      : "Already Included",
+                },
+              ]
+            : []),
+          ...(content.securetyType
+            ? [
+                {
+                  label: "Security Deposit",
+                  value: `${
+                    content.securetyType === "F"
+                      ? formatNumber(content.security.toString())
+                      : formatNumber((content.securityMonth * content.price).toString())
+                  }`,
+                },
+              ]
+            : []),
           {
             label: "Maintenance & Corpus Fund",
             value:

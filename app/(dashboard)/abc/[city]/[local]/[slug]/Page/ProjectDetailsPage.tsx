@@ -198,7 +198,7 @@ export default async function ProjectsDetailsPage({
         <ErrorContainer data={data.highlights}>
           <Feature data={data.highlights} projName={data.projectName} />
         </ErrorContainer>
-        <Banner projName={data.projectName} projIdEnc={data.projIdEnc} />
+        <Banner projName={data.projectName} projIdEnc={slug} />
 
         <ErrorContainer data={data.banks}>
           <div id="bank-approvals" className="w-full h-auto scroll-mt-[150px]">
@@ -225,7 +225,7 @@ export default async function ProjectsDetailsPage({
           id="faq"
           className="scroll-mt-[70px] m-auto w-[95%] sm:w-[90%] flex justify-start items-start"
         >
-          <FaqWithBg data={data.faqs} projName={data.projectName} />
+          <FaqWithBg data={data.faqs} slug={slug} projName={data.projectName} />
         </div>
         <NearByCarousel
           projName={data.projectName}

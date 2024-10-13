@@ -19,6 +19,10 @@ import { currentBlockAtom, isScrollingAtom, stickyAtom } from "./navigation";
 import { useSetAtom } from "jotai";
 import Link from "next/link";
 import { NumberFormatter } from "@mantine/core";
+import { useQuery } from "react-query";
+import BuilderLink, {
+  generateBuilderUrl,
+} from "@/app/utils/linkRouters/Builder";
 type Props = {
   projectDetails: Main | null;
   companyName: string;
@@ -35,10 +39,23 @@ const FirstBlock: React.FC<Props> = ({
   scrollId,
 }) => {
   const images = getImageUrls(projectDetails?.media as any);
+  let urlBuilder ='/'
   const autoplay = useRef(Autoplay({ delay: 10000 }));
   const setIsScrolling = useSetAtom(isScrollingAtom);
   const setSticky = useSetAtom(stickyAtom);
   const setC = useSetAtom(currentBlockAtom);
+  const { data ,isLoading,status} = useQuery<any>({
+    queryKey: [`builder/${builderId}&isBuilderPage=Nproj`],
+    enabled: false,
+    onSuccess(data){
+    urlBuilder =  generateBuilderUrl({
+        slug: data.data?.userName,
+        city: data.data?.cityName,
+      })
+      console.log(urlBuilder)
+    }
+
+  });
   function scrollToTopic(id: string): void {
     setIsScrolling(true);
     const element = document.getElementById(id);
@@ -54,10 +71,7 @@ const FirstBlock: React.FC<Props> = ({
     setTimeout(() => setIsScrolling(false), 3000);
   }
 
-  let builderName = companyName
-    ? companyName.toLowerCase().split(" ").join("%2D")
-    : "";
-  let urlBuilder = `/builders/bengaluru/${builderName}`;
+
 
   return (
     <div
@@ -140,7 +154,10 @@ const FirstBlock: React.FC<Props> = ({
                 <p className="text-[#242424] sm:text-[16px] xl:text-2xl not-italic font-semibold leading-[normal] mt-[14px]">
                   Posted By:{" "}
                   <a
-                    href={urlBuilder}
+                    href={generateBuilderUrl({
+                      slug: data?.data?.userName,
+                      city: data?.data?.cityName,
+                    })}
                     target="_blank"
                     className="text-btnPrimary sm:text-[16px] xl:text-2xl  font-bold leading-[normal] underline"
                   >

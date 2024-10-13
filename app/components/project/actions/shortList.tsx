@@ -12,9 +12,9 @@ import clsx from "clsx";
 import useDynamicProj from "@/app/hooks/project/useDynamic";
 import { queryClient } from "@/app/utils/query";
 
-export default function ShortList() {
+export default function ShortList({slug}:{slug:string}) {
   const { data: session } = useSession();
-  const { slug } = useParams<{ slug: string }>();
+
   const { toggleShortlist } = useShortlistAndCompare();
   const [, { open }] = usePopShortList();
   const { data, mutate, getData } = useDynamicProj();

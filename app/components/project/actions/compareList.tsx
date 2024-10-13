@@ -10,9 +10,8 @@ import useDynamicProj from "@/app/hooks/project/useDynamic";
 import { useMessagePopup } from "@/app/hooks/project/useMessagePopup";
 import { queryClient } from "@/app/utils/query";
 
-export default function CompareList() {
+export default function CompareList({slug}:{slug:string}) {
   const { data: session } = useSession();
-  const { slug } = useParams<{ slug: string }>();
   const { toggleCompare, compareItems } = useShortlistAndCompare();
   const [, { open }] = usePopShortList();
   const { data, mutate, getData } = useDynamicProj();

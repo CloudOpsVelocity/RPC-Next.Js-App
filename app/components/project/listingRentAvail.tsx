@@ -84,9 +84,9 @@ const Card = ({
   const handleBoxClick = (value: string, cg: "S" | "R") => {
     value === "0"
       ? openSuccesPopup()
-      : window.open(`/search?projIdEnc=${slug}&cg=${cg}&projName=${projName}`);
+      : window.open(`/search/listing?projIdEnc=${slug}&cg=${cg}&projName=${projName}`);
   };
-
+  
   return (
     <div
       id={id}

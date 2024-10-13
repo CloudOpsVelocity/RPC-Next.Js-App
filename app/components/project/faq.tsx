@@ -26,9 +26,10 @@ import { useMessagePopup } from "@/app/hooks/project/useMessagePopup";
 type FaqWithBgProps = {
   data: FAQ[];
   projName: string;
+  slug:string
 };
 
-export default function FaqWithBg({ data, projName }: FaqWithBgProps) {
+export default function FaqWithBg({ data, projName,slug }: FaqWithBgProps) {
   const isMobile = useMediaQuery(`(max-width: 601px)`);
   return (
     <div
@@ -68,13 +69,12 @@ export default function FaqWithBg({ data, projName }: FaqWithBgProps) {
           );
         })}
       </div>
-      <AddQnaForm projName={projName} />
+      <AddQnaForm projName={projName} slug={slug} />
     </div>
   );
 }
 
-const AddQnaForm = ({ projName }: { projName: string }) => {
-  const { slug } = useParams<{ slug: string }>();
+const AddQnaForm = ({ projName, slug }: { projName: string,slug:string }) => {
   const [, { open }] = usePopShortList();
   const { data: session } = useSession();
   const [status, setStatus] = useState<

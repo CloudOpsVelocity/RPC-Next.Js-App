@@ -99,7 +99,7 @@ export default function Overview({
             key="totalLandArea"
             icon={<TotalLandArea />}
             title="Project Land Area"
-            value={`${totalLandArea} Acers`}
+            value={`${parseFloat(totalLandArea).toFixed(2)} Acers`}
             className="mr-[5%] sm:mr-[3%] xl:mr-[5%] pt-[2%] mb-[3%] sm:mb-[1.5%] xl:mb-[3%]  "
           />
           <ProjBasicDetails
@@ -171,9 +171,9 @@ export default function Overview({
             )}
         </div>
         <div className=" flex justify-start md:justify-end items-start md:items-end flex-col mt-[3%] md:mt-0 relative pb-2 sm:pb-4 xl:pb-10">
-          <ReportSection />
-          <ShortList />
-          <CompareList />
+          <ReportSection slug={slug} />
+          <ShortList slug={slug} />
+          <CompareList slug={slug} />
           <Message />
         </div>
       </div>
@@ -185,6 +185,7 @@ export default function Overview({
         builderId={builderId}
         basePrice={basePrice}
         brocherUrl={media?.projBroucherUrl}
+        slug={slug}
       />
     </div>
   );
