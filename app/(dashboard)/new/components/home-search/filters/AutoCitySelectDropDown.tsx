@@ -15,6 +15,7 @@ export default function AutoCitySelectDropDown({}: Props) {
     queryKey: ["my-location"],
     queryFn: getCity,
   });
+
   return (
     <Select
       disabled={isLoading}

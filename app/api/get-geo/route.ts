@@ -1,5 +1,12 @@
 import { NextResponse } from "next/server";
 export async function POST(req: Request) {
+  if (process.env.NODE_ENV === "development") {
+    return NextResponse.json({
+      data: { city: "Bengaluru", state: "Karnataka" },
+      msg: "comgin from development",
+    });
+  }
+
   const data = await req.json();
   console.log(data);
   const ip =
