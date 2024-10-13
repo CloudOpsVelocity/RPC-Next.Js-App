@@ -13,5 +13,5 @@ export default function AutoCitySelectDropDown({}: Props) {
     queryKey: ["my-location"],
     queryFn: getCity,
   });
-  return <div>{isLoading ? "loading.." : JSON.stringify(DefaultCity)}</div>;
+  return <div>{isLoading ? "loading.." : DefaultCity.data.city}</div>;
 }
