@@ -6,9 +6,12 @@ type Props = {};
 export default function AutoCitySelectDropDown({}: Props) {
   const getCity = async () => {
     const res = await fetch("/api/get-user-city");
+    const data = await res.json();
+    return data;
   };
-  const { data: DefaultCity } = useQuery({
+  const { data: DefaultCity, isLoading } = useQuery({
     queryKey: ["my-location"],
+    queryFn: getCity,
   });
-  return <div>AutoCitySelectDropDown</div>;
+  return <div>{isLoading ? "loading.." : JSON.stringify(DefaultCity)}</div>;
 }

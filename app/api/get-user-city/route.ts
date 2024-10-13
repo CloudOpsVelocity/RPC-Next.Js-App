@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 export async function POST(req: Request) {
   const data = await req.json();
-  console.log(data);
   const ip =
     data?.ip ||
     req.headers.get("x-real-ip") ||
@@ -29,7 +28,7 @@ export async function GET(req: Request) {
     }
     const data = await getCityStateFromIP(ip);
     const cityStateId = await getCityStateIdFromDb(data.region, data.city);
-    return NextResponse.json({ cityStateId, status: true });
+    return NextResponse.json({ cityStateId, data, status: true });
   } catch (error) {
     console.error(error);
     return Response.json({ ok: false, error: "Error reading file" });

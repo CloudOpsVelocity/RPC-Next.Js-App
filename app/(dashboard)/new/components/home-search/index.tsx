@@ -18,6 +18,7 @@ import { CityDropdown } from "./filters/CityDropdown";
 import { toQueryParams } from "../../utils/param";
 import { HeartIcon, SelectedHeartIcon } from "@/app/images/HomePageIcons";
 import RecentSearches from "./recentSearch/RecentSearches";
+import AutoCitySelectDropDown from "./filters/AutoCitySelectDropDown";
 const propertyTypes = ["Buy", "Rent"];
 
 const HomeSearch = ({ count }: { count: number }) => {
@@ -26,7 +27,6 @@ const HomeSearch = ({ count }: { count: number }) => {
     const whichPage = f.propType === 36 ? "/search/listing" : "/search";
     window.open(`${whichPage}?${toQueryParams(f)}`, "_blank");
   };
-  const isMobile = useMediaQuery("(max-width: 641px)");
   const isMobileStarting = useMediaQuery("(max-width: 760px)");
 
   return (
@@ -68,7 +68,7 @@ const HomeSearch = ({ count }: { count: number }) => {
           </p>
 
           <p className=" flex justify-center items-center gap-[4px] sm:hidden text-[#0073C6] text-[12px] not-italic font-[700] mb-[5px] leading-[normal]">
-          Bengaluru {/* {config.drpdownIcon} */}
+            Bengaluru {/* {config.drpdownIcon} */}
           </p>
 
           <div className="flex items-center gap-2.5 rounded shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] px-1.5 py-1 border-[0.5px] border-solid border-[#819CA9] bg-white w-full">
@@ -77,7 +77,7 @@ const HomeSearch = ({ count }: { count: number }) => {
               <div className="text-nowrap">All Residential</div>
             </div>
             <p className="text-[#242424] text-[12px] sm:text-[14px] not-italic font-[600] hidden sm:flex items-center gap-0.5 p-1 bg-[#ECF0F3] ">
-            Bengaluru
+              <AutoCitySelectDropDown />
             </p>
 
             <div className="flex justify-between items-center gap-[10px] w-full">
@@ -98,7 +98,7 @@ const HomeSearch = ({ count }: { count: number }) => {
           </div>
           {f.showFilter && <QuickFilters />}
         </div>
-      <RecentSearches />
+        <RecentSearches />
       </div>
     </div>
   );
