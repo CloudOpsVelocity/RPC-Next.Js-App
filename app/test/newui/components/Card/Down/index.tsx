@@ -119,14 +119,14 @@ export default function CardDownSection({
                   title: "Amenities",
                   id: `${projIdEnc}+${propTypeId}`,
                   type: "OPEN",
-                  pType: type
+                  pType: type,
                 })
               }
             >
               <span className="bg-white rounded-full text-black px-2">
                 {amenCount}
               </span>{" "}
-              Amneties
+              Amenities
             </button>
           </>
         )}

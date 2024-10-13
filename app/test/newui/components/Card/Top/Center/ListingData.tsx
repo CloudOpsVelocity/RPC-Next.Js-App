@@ -141,8 +141,9 @@ export default function ListingData({
                 value={propertyAge ?? "N/A"}
               />
             )}
-            <DownSectionCard label={"Approved By"} value={`BDA`} />
+
             <div className="flex flex-nowrap gap-2 xl:gap-x-4">
+              <DownSectionCard label={"Approved By"} value={`BDA`} />
               <DownSectionCard
                 label={"Bathrooms"}
                 value={bathroom && `${bathroom} No's`}

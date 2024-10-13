@@ -85,24 +85,5 @@ export default async function Page() {
 
   console.log(list.getByIndex(100));
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  return (
-    <div>
-
-    </div>
-  );
+  return <div>sdfd</div>;
 }

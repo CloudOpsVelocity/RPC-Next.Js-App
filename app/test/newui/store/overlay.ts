@@ -1,6 +1,5 @@
 import { atomWithReducer } from "jotai/utils";
 import React from "react";
-
 // Define action types
 type OverlayAction =
   | {
@@ -8,7 +7,7 @@ type OverlayAction =
       content: any;
       id: string;
       title: string;
-      pType:string;
+      pType: string;
       conType:
         | "nearby"
         | "amenities"
@@ -44,7 +43,7 @@ const initialState: OverlayState = {
   id: null,
   title: "",
   conType: "none",
-  pType: ""
+  pType: "",
 };
 
 // Create the reducer function
@@ -65,26 +64,41 @@ const overlayReducer = (
           {
             label: "Club house Subscription",
             value:
-              content.clubHouseCharge &&
-              `₹${formatNumber(content.clubHouseCharge)} for ${
-                content.clubHouseTill
-              } year(s)`,
+              content.clubHouseCharge === "A"
+                ? "Lifetime"
+                : content.clubHouseTill
+                ? `₹${formatNumber(content.clubHouseCharge)} for ${
+                    content.clubHouseTill
+                  } years`
+                : "Already Included",
           },
           {
             label: "Maintenance & Corpus Fund",
-            value: formatNumber(content.mncCharge),
+            value:
+              content.mncCharge === "NA"
+                ? "Already Included"
+                : formatNumber(content.mncCharge),
           },
           {
             label: "Tax & Government Charges",
-            value: formatNumber(content.taxGovtCharge),
+            value:
+              content.taxGovtCharge === "NA"
+                ? "Already Included"
+                : formatNumber(content.taxGovtCharge),
           },
           {
             label: "Ownership Transfer Fees",
-            value: formatNumber(content.ownershipCharge),
+            value:
+              content.ownershipCharge === "NA"
+                ? "Already Included"
+                : formatNumber(content.ownershipCharge),
           },
           {
             label: "Legal Charges",
-            value: formatNumber(content.legalCharge),
+            value:
+              content.legalCharge === "NA"
+                ? "Already Included"
+                : formatNumber(content.legalCharge),
           },
           ...(content.otherCharge
             ? content.otherCharge.split(",").map((charge: string) => {
