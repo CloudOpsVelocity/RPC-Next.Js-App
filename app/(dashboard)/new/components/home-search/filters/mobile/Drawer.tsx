@@ -46,8 +46,8 @@ function AppDrawer({ close, opened }: Props) {
             </div>
 
             <div className="flex justify-between items-center w-full">
-                <div className="flex sm:hidden items-center ">
-                  {/* <button className="ml-2">
+              <div className="flex sm:hidden items-center ">
+                {/* <button className="ml-2">
                   <span className="text-[#242424] text-xs not-italic font-normal">
                     Search
                   </span>
@@ -55,60 +55,60 @@ function AppDrawer({ close, opened }: Props) {
                     “ Whitefield, Bengaluru
                   </span>
                 </button> */}
-                  {config.searchIcon}
-                  <SearchSec />
-                </div>
+                {config.searchIcon}
+                <SearchSec />
+              </div>
 
-                <div className="hidden sm:flex gap-2">
-                  <Nearme />
-                  <a
-                    href={`/search`}
-                    target="_blank"
-                    className={`flex justify-center items-center gap-2.5 rounded p-1.5 md:p-2.5  text-white  text-[14px] 2xl:text-xl font-bold bg-[#0073c6]`}
-                  >
-                    {config.searchBtnIcon}
-                  </a>
-                </div>
+              <div className="hidden sm:flex gap-2">
+                <Nearme />
+                <a
+                  href={`/search`}
+                  target="_blank"
+                  className={`flex justify-center items-center gap-2.5 rounded p-1.5 md:p-2.5  text-white  text-[14px] 2xl:text-xl font-bold bg-[#0073c6]`}
+                >
+                  {config.searchBtnIcon}
+                </a>
+              </div>
             </div>
 
             {(f.city || f.locality.length > 0) && (
-                <div className="border-gray-400 border-t-[0.5px] pt-1">
-                  {" "}
-                  <Pill.Group>
-                    {f.city && (
-                      <Pill
-                        className="capitalize"
-                        withRemoveButton
-                        classNames={{
-                          root: classes.MultiSelectionPill,
-                          label: classes.MultiSelectionPillLabel,
-                          remove: classes.MultiSelectionPillRemove,
-                        }}
-                        onRemove={() =>
-                          setFilters((prev) => ({ ...prev, city: null }))
-                        }
-                      >
-                        manglore
-                        {f.city.split("+")[0]}
-                      </Pill>
-                    )}
-                    {f.locality?.map((each, index) => (
-                      <Pill
-                        className="capitalize"
-                        onRemove={() => remnoveSearchOptions(each, "locality")}
-                        key={each}
-                        withRemoveButton
-                        classNames={{
-                          root: classes.MultiSelectionPill,
-                          label: classes.MultiSelectionPillLabel,
-                          remove: classes.MultiSelectionPillRemove,
-                        }}
-                      >
-                        {each.split("+")[0]}
-                      </Pill>
-                    ))}
-                  </Pill.Group>
-                </div>
+              <div className="border-gray-400 border-t-[0.5px] pt-1">
+                {" "}
+                <Pill.Group>
+                  {f.city && (
+                    <Pill
+                      className="capitalize"
+                      withRemoveButton
+                      classNames={{
+                        root: classes.MultiSelectionPill,
+                        label: classes.MultiSelectionPillLabel,
+                        remove: classes.MultiSelectionPillRemove,
+                      }}
+                      onRemove={() =>
+                        setFilters((prev) => ({ ...prev, city: null }))
+                      }
+                    >
+                      manglore
+                      {f.city.split("+")[0]}
+                    </Pill>
+                  )}
+                  {f.locality?.map((each, index) => (
+                    <Pill
+                      className="capitalize"
+                      onRemove={() => remnoveSearchOptions(each, "locality")}
+                      key={each}
+                      withRemoveButton
+                      classNames={{
+                        root: classes.MultiSelectionPill,
+                        label: classes.MultiSelectionPillLabel,
+                        remove: classes.MultiSelectionPillRemove,
+                      }}
+                    >
+                      {each.split("+")[0]}
+                    </Pill>
+                  ))}
+                </Pill.Group>
+              </div>
             )}
           </div>
 
@@ -129,10 +129,10 @@ function AppDrawer({ close, opened }: Props) {
             Browse:
           </p>
           <div className="space-x-2 mt-1 flex sm:block overflow-x-scroll max-w-[100%] scrollbar-hide pb-2 border-b-[0.5px] border-solid border-[#819CA9]">
+            {/* <Box />
             <Box />
             <Box />
-            <Box />
-            <Box />
+            <Box /> */}
           </div>
         </div>
         <QuickFilters />
