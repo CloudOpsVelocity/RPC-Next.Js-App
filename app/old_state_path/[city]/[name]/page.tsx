@@ -242,7 +242,7 @@ export default async function Page({ params }: Props) {
           id="faq"
           className="scroll-mt-[70px] m-auto w-[95%] sm:w-[90%] flex justify-start items-start"
         >
-          <FaqWithBg data={data.faqs} projName={data.projectName} />
+          {/* <FaqWithBg data={data.faqs} projName={data.projectName} /> */}
         </div>
         <NearByCarousel
           projName={data.projectName}
