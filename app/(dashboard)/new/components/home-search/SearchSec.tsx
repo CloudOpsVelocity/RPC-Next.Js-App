@@ -37,23 +37,6 @@ export default function SearchSec({}: Props) {
           onClick={() => setShowAllLocalities(!showAllLocalities)}
           className="w-[100%] sm:min-w-[49.9%]   p-2 gap-2 xl:gap-[8px] pl-2 xl:pl-[8px] max-w-full flex items-center justify-start  flex-wrap"
         >
-          {" "}
-          {f.city && (
-            <Pill
-              className="capitalize !text-[12px] !sm:text-[14px] "
-              withRemoveButton
-              classNames={{ root: classes.MultiSelectionPill }}
-              onRemove={() => dispatch({ type: "REMOVE_CITY" })}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                flexWrap: "nowrap",
-              }}
-              onClick={() => setShowAllLocalities(false)}
-            >
-              {f.city.split("+")[0]}
-            </Pill>
-          )}
           <div className="flex flex-wrap gap-2 items-center h-auto">
             {f.locality?.map(
               (each, index) =>

@@ -18,12 +18,10 @@ function getImageUrls(
       if (mediaObject[propertyName]) {
         if (Array.isArray(mediaObject[propertyName])) {
           imageUrls.push(
-            ...(mediaObject[propertyName] as string[]).map(
-              (url) => `${url}?v=${Math.random()}`
-            )
+            ...(mediaObject[propertyName] as string[]).map((url) => `${url}`)
           );
         } else {
-          imageUrls.push(`${mediaObject[propertyName]}?v=${Math.random()}`);
+          imageUrls.push(`${mediaObject[propertyName]}`);
         }
       }
     });

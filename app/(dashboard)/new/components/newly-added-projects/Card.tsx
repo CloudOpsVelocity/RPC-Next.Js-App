@@ -82,16 +82,6 @@ export default function Card({ item }: Props) {
             </div>
             <div className="flex flex-col items-end gap-[9px] xl:gap-[19px]">
               <div className="space-y-2">
-                {/*  <p className="flex justify-center items-center gap-2 rounded py-1 px-2 bg-[#000000b0] text-white text-[8px] sm:text-[12px] xl:text-base not-italic font-semibold leading-[normal] capitalize max-w-fit self-end ml-auto mt-1 sm:mt-[10px]">
-                <Image
-                  src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/homepage/unit.png`}
-                  alt=""
-                  width={16}
-                  height={16}
-                  className="w-[10px] h-[10px] sm:w-[16px] sm:h-[16px] "
-                />{" "}
-                201 units
-              </p> */}
                 <span className=" no-underline text-[#ffff]">
                   Builder Name:{" "}
                 </span>

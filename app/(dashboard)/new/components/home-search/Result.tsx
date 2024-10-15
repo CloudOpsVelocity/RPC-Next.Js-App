@@ -17,7 +17,7 @@ import { useRecentSearched } from "@/app/hooks/custom/useRecentSearch";
 
 export default function Results() {
   const { data, isLoading, handleResetQuery } = useQsearch();
-  const { addToRecent, recentSearches } = useRecentSearched();
+  const { addToRecent } = useRecentSearched();
 
   const [filters, dispatch] = useAtom(homeSearchFiltersAtom);
   if (isLoading) {
@@ -49,11 +49,16 @@ export default function Results() {
     }
   };
 
-  const handlePush = async (type: string, data: any, apiData: Object) => {
+  const handlePush = async (type: string, data: any, apiData: any) => {
     switch (type) {
       case "project":
         addToRecent(apiData);
-        window.open(`/abc/delhi/palika/${data}`);
+        if (apiData.type === "Project") {
+          window.open(apiData.stringUrl);
+        } else {
+          window.open(`/abc/delhi/palika/${data}`);
+        }
+
         break;
       case "listing":
         {

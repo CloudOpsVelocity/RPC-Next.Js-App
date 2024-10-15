@@ -1,6 +1,9 @@
-'use client'
+"use client";
 
-export default  function Page() {
+import { indexOf } from "lodash";
+import { useEffect, useState } from "react";
+
+export default function Page() {
   class Node<T> {
     public head: T;
     public next: Node<T> | null;
@@ -18,24 +21,23 @@ export default  function Page() {
       this.last = null;
       this.length = 0;
       if (value) {
-        const newNode = new Node(value)
+        const newNode = new Node(value);
         this.first = newNode;
-        this.last = newNode
-        this.length = 1
+        this.last = newNode;
+        this.length = 1;
       }
     }
-  enque(value:T){
-    const newNode = new Node(value)
-    if( this.length == 0){
-      this.first = newNode,
-      this.last = newNode;
-      this.length =1
-    }else{
-      this.last = newNode;
-      this.last.next = newNode;
-      this.length ++
+    enque(value: T) {
+      const newNode = new Node(value);
+      if (this.length == 0) {
+        (this.first = newNode), (this.last = newNode);
+        this.length = 1;
+      } else {
+        this.last = newNode;
+        this.last.next = newNode;
+        this.length++;
+      }
     }
-  }
   }
   // class LinkedList<T> {
   //   public head: Node<T>;
@@ -103,7 +105,7 @@ export default  function Page() {
   //       currentIndex++;
   //       temp = temp.next;
   //     }
-     
+
   //   }
   //   reverse(){
   //   let prevHead = this.head;
@@ -118,10 +120,12 @@ export default  function Page() {
 
   // console.log(list.getByIndex(0));
 
-  
-  return <div></div>
+  return (
+    <div className="w-full h-screen flex justify-center items-center flex-col space-y-2">
+      sdfd
+    </div>
+  );
 }
-
 
 // const CommentSection = () => {
 //   const [comment, setComment] = useState('');
