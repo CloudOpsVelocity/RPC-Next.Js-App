@@ -119,7 +119,19 @@ export default function Page() {
   // }
 
   // console.log(list.getByIndex(0));
-
+  class Stack<T> {
+    items: T[];
+    constructor() {
+      this.items = [];
+    }
+  push(item:T){
+    this.items.push(item)
+  }
+  }
+  const stack = new Stack()
+  stack.push('a')
+  stack.push('b')
+  console.log(stack.items)
   return (
     <div className="w-full h-screen flex justify-center items-center flex-col space-y-2">
       sdfd
