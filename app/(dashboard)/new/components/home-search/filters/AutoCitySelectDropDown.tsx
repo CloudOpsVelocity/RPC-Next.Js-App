@@ -7,7 +7,7 @@ type Props = {};
 
 export default function AutoCitySelectDropDown({}: Props) {
   const getCity = async () => {
-    const res = await fetch("/api/get-geo", {
+    const res = await fetch("/api/get-user-city", {
       cache: "force-cache",
     });
     const data = await res.json();
