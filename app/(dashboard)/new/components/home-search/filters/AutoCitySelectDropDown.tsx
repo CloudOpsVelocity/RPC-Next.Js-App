@@ -25,8 +25,13 @@ interface DefaultCityResponse {
   status: boolean;
 }
 
-export default function AutoCitySelectDropdown() {
-  const [isOpen, setIsOpen] = useState(false);
+export default function AutoCitySelectDropdown({
+  isOpen,
+  setIsOpen,
+}: {
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCity, setSelectedCity] = useState<City | null>(null);
   const [focusedIndex, setFocusedIndex] = useState(-1);
@@ -168,7 +173,7 @@ export default function AutoCitySelectDropdown() {
         <span className="text-gray-700 font-medium truncate">
           {selectedCity?.name || DefaultCity?.data?.city || "Select City"}
         </span>
-        {selectedCity ? (
+        {selectedCity || DefaultCity?.data?.city ? (
           <FaLocationDot className="h-5 w-5 text-blue-500" aria-hidden="true" />
         ) : (
           <FaChevronDown
@@ -221,10 +226,7 @@ export default function AutoCitySelectDropdown() {
             </p>
           )}
 
-          <ul
-            className="max-h-60 overflow-auto scrollbar-thin scrollbar-thumb-blue-400 scrollbar-track-gray-100"
-            role="listbox"
-          >
+          <ul className="max-h-60 overflow-auto scrollUnique" role="listbox">
             {citiesLoading ? (
               <li className="p-4 text-center">
                 <FaSpinner

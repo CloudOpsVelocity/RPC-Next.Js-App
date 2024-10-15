@@ -6,7 +6,6 @@ export const useRecentSearched = <T>() => {
   const [recentSearches, setRecentSearches] = useLocalStorage<T[]>({
     key: "recent-searches",
     defaultValue: [],
-    
   });
 
   // Add a search to recent searches
@@ -18,7 +17,10 @@ export const useRecentSearched = <T>() => {
 
     setRecentSearches((currentSearches) => {
       // Check if search already exists, remove it to avoid duplication
-      const updatedSearches = currentSearches.filter((item) => item !== search);
+      const updatedSearches = currentSearches.filter(
+        // @ts-ignore
+        (item) => item.name !== search.name
+      );
 
       // Add the new search to the beginning of the array
       updatedSearches.unshift(search);

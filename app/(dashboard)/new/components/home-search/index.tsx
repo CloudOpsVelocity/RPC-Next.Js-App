@@ -23,10 +23,16 @@ const propertyTypes = ["Buy", "Rent"];
 
 const HomeSearch = ({ count }: { count: number }) => {
   const f = useAtomValue(homeSearchFiltersAtom);
+  const [isOpen, setIsOpen] = useState(false);
   const handleSearch = () => {
+    if (!f.city) {
+      setIsOpen(true);
+      return;
+    }
     const whichPage = f.propType === 36 ? "/search/listing" : "/search";
     window.open(`${whichPage}?${toQueryParams(f)}`, "_blank");
   };
+
   const isMobileStarting = useMediaQuery("(max-width: 760px)");
 
   return (
@@ -77,7 +83,7 @@ const HomeSearch = ({ count }: { count: number }) => {
               <div className="text-nowrap">All Residential</div>
             </div>
             <p className="text-[#242424] text-[12px] sm:text-[14px] not-italic font-[600] hidden sm:flex items-center gap-0.5 p-1 bg-[#ECF0F3] ">
-              <AutoCitySelectDropDown />
+              <AutoCitySelectDropDown isOpen={isOpen} setIsOpen={setIsOpen} />
             </p>
 
             <div className="flex justify-between items-center gap-[10px] w-full">

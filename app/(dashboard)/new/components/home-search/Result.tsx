@@ -54,7 +54,7 @@ export default function Results() {
     ]);
     switch (type) {
       case "project":
-        addToRecent(apiData);
+        addToRecent({ ...apiData, ct: "project" });
         if (apiData.type === "Project") {
           window.open(apiData.stringUrl);
         } else {
@@ -70,7 +70,7 @@ export default function Results() {
         break;
       case "listing":
         {
-          addToRecent(apiData);
+          addToRecent({ ...apiData, ct: "listing" });
           const data = extractApiValues(apiData.stringId);
           {
             alert(JSON.stringify(data));
@@ -92,7 +92,7 @@ export default function Results() {
         break;
       case "projectListing":
         {
-          addToRecent(apiData);
+          addToRecent({ ...apiData, ct: "projectListing" });
           let projectName = data.name.split(" in ")[1].trim();
           // console.log(projectName);
           const url = `projIdEnc=${
@@ -105,7 +105,7 @@ export default function Results() {
         break;
       case "builder":
         {
-          addToRecent(apiData);
+          addToRecent({ ...apiData, ct: "builder" });
           if (apiData.type === "BuilderDetail") {
             window.open(apiData.stringUrl);
           } else {

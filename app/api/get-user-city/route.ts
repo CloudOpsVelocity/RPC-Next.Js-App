@@ -19,15 +19,7 @@ export async function POST(req: Request) {
 export async function GET(req: Request) {
   if (process.env.NODE_ENV === "development") {
     return NextResponse.json(
-      {
-        status: true,
-        data: {
-          cityId: 9,
-          stateId: 11,
-          city: "Bengaluru",
-          state: "Karnataka",
-        },
-      },
+      { status: false, error: "City not found" },
       {
         status: 200,
       }
