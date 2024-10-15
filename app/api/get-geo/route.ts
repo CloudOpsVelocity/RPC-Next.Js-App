@@ -1,18 +1,12 @@
 import { NextResponse } from "next/server";
 export async function POST(req: Request) {
-  if (process.env.NODE_ENV === "development") {
-    return NextResponse.json({
-      data: { city: "Bengaluru", state: "Karnataka" },
-      msg: "comgin from development",
-    });
-  }
-
   const data = await req.json();
   console.log(data);
   const ip =
     data?.ip ||
     req.headers.get("x-real-ip") ||
     req.headers.get("x-forwarded-for");
+
   try {
     if (!ip) {
       return NextResponse.json({ ok: false, error: "IP not found" });
@@ -26,6 +20,18 @@ export async function POST(req: Request) {
 }
 export async function GET(req: Request) {
   const ip = req.headers.get("x-real-ip") || req.headers.get("x-forwarded-for");
+  // if ip localhost then send fake data ::1
+  if (ip === "::1") {
+    return NextResponse.json({
+      data: {
+        city: "Bengaluru",
+        state: "Karnataka",
+        cityId: 9,
+        stateId: 11,
+      },
+      msg: "comgin from development",
+    });
+  }
   try {
     if (!ip) {
       return NextResponse.json({ ok: false, error: "IP not found" });
