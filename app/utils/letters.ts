@@ -22,7 +22,7 @@ function capitalizeWords(str: string): string {
   return result;
 }
 const truncateText = (text: string, limit: number): string => {
-  if (text.length <= limit) return text;
-  return text.slice(0, limit) + "...";
+  if (text?.length <= limit) return text;
+  return text?.slice(0, limit) + "...";
 };
-export { capitalizeWords,truncateText };
+export { capitalizeWords, truncateText };

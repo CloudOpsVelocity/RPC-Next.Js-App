@@ -8,7 +8,7 @@ import {
 } from "react-icons/fa";
 import RTK_CONFIG from "@/app/config/rtk";
 import { getAllCitiesDetails } from "@/app/utils/stats_cities";
-import { FaLocationDot } from "react-icons/fa6";
+import { FaChevronDown, FaLocationDot, FaSpinner } from "react-icons/fa6";
 import { useSetAtom } from "jotai";
 import { homeSearchFiltersAtom } from "@/app/store/home";
 
@@ -22,6 +22,7 @@ interface DefaultCityResponse {
     city: string;
     cityId: string;
   };
+  status: boolean;
 }
 
 export default function AutoCitySelectDropdown() {
@@ -29,6 +30,7 @@ export default function AutoCitySelectDropdown() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCity, setSelectedCity] = useState<City | null>(null);
   const [focusedIndex, setFocusedIndex] = useState(-1);
+  const [cityError, setCityError] = useState<string | null>(null); // New state for city error
   const dropdownRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const optionsRef = useRef<(HTMLLIElement | null)[]>([]);
@@ -36,7 +38,7 @@ export default function AutoCitySelectDropdown() {
   const getCity = async (): Promise<DefaultCityResponse> => {
     try {
       const res = await fetch("/api/get-user-city", {
-        cache: "force-cache",
+        cache: "no-store",
       });
       if (!res.ok) throw new Error("Failed to fetch default city");
       return await res.json();
@@ -53,10 +55,17 @@ export default function AutoCitySelectDropdown() {
     queryKey: ["my-location"],
     queryFn: getCity,
     onSuccess: (data) => {
-      setCity({
-        type: "SET_CITY",
-        payload: `${data.data.city}+${data.data.cityId}`,
-      });
+      if (data.status) {
+        setCity({
+          type: "SET_CITY",
+          payload: `${data.data.city}+${data.data.cityId}`,
+        });
+        setCityError(null); // Clear error when city is set
+      }
+      if (!data.status) {
+        setIsOpen(true);
+        setCityError("City is required"); // Set error when city is not available
+      }
     },
     ...RTK_CONFIG,
   });
@@ -130,6 +139,7 @@ export default function AutoCitySelectDropdown() {
       type: "SET_CITY",
       payload: `${city.name}+${city.id}`,
     });
+    setCityError(null); // Clear error on city selection
     handleCloseDropdown();
   };
 
@@ -151,21 +161,20 @@ export default function AutoCitySelectDropdown() {
     <div className="relative w-64 max-w-fit" ref={dropdownRef}>
       <button
         onClick={handleToggleDropdown}
-        className="w-full p-2 text-left bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center justify-between space-x-1"
+        className="w-full p-3 text-left bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 ease-in-out flex items-center justify-between space-x-2"
         aria-haspopup="listbox"
         aria-expanded={isOpen}
       >
-        <span className="text-gray-700">
+        <span className="text-gray-700 font-medium truncate">
           {selectedCity?.name || DefaultCity?.data?.city || "Select City"}
         </span>
         {selectedCity ? (
-          <FaLocationDot
-            className="h-5 w-5 text-green-500"
-            aria-hidden="true"
-          />
+          <FaLocationDot className="h-5 w-5 text-blue-500" aria-hidden="true" />
         ) : (
-          <FaChevronCircleDown
-            className="h-5 w-5 text-gray-400"
+          <FaChevronDown
+            className={`h-5 w-5 text-gray-400 transition-transform duration-200 ${
+              isOpen ? "transform rotate-180" : ""
+            }`}
             aria-hidden="true"
           />
         )}
@@ -173,10 +182,16 @@ export default function AutoCitySelectDropdown() {
 
       {isOpen && (
         <div
-          className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg min-w-[180px]"
+          className="absolute z-10 w-full mt-2 bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden transition-all duration-200 ease-in-out"
+          style={{ minWidth: cityError ? "300px" : "220px" }}
           onKeyDown={handleKeyDown}
         >
-          <div className="p-2">
+          {cityError && (
+            <p className="px-4 py-2 bg-red-50 text-red-600 text-sm font-semibold border-b border-red-100">
+              {cityError}
+            </p>
+          )}
+          <div className="p-3 bg-gray-50">
             <div className="relative">
               <input
                 ref={inputRef}
@@ -184,31 +199,36 @@ export default function AutoCitySelectDropdown() {
                 placeholder="Search cities..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full p-2 border border-gray-300 rounded-md pr-8 text-gray-700"
+                className="w-full p-2 pl-10 pr-4 border border-gray-300 rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-200"
                 aria-label="Search cities"
               />
               <FaSearch
-                className="absolute right-2 top-2.5 h-5 w-5 text-gray-400"
+                className="absolute left-3 top-3 h-5 w-5 text-gray-400"
                 aria-hidden="true"
               />
             </div>
           </div>
 
           {defaultCityError && (
-            <p className="p-2 text-center text-red-500">
+            <p className="p-2 text-center text-red-600 bg-red-50 border-t border-red-100">
               Error loading default city
             </p>
           )}
 
           {citiesError && (
-            <p className="p-2 text-center text-red-500">Error loading cities</p>
+            <p className="p-2 text-center text-red-600 bg-red-50 border-t border-red-100">
+              Error loading cities
+            </p>
           )}
 
-          <ul className="max-h-60 overflow-auto scrollUnique" role="listbox">
+          <ul
+            className="max-h-60 overflow-auto scrollbar-thin scrollbar-thumb-blue-400 scrollbar-track-gray-100"
+            role="listbox"
+          >
             {citiesLoading ? (
-              <li className="p-2 text-center">
-                <FaTruckLoading
-                  className="animate-spin h-5 w-5 mx-auto text-blue-500"
+              <li className="p-4 text-center">
+                <FaSpinner
+                  className="animate-spin h-6 w-6 mx-auto text-blue-500"
                   aria-label="Loading cities"
                 />
               </li>
@@ -219,8 +239,8 @@ export default function AutoCitySelectDropdown() {
                   ref={(el) => {
                     if (el) optionsRef.current[index] = el;
                   }}
-                  className={`p-2 hover:bg-gray-100 cursor-pointer ${
-                    index === focusedIndex ? "bg-gray-200" : ""
+                  className={`p-3 hover:bg-blue-50 cursor-pointer transition-colors duration-150 ${
+                    index === focusedIndex ? "bg-blue-100" : ""
                   }`}
                   onClick={() => handleCitySelect(city)}
                   onMouseEnter={() => setFocusedIndex(index)}
@@ -228,11 +248,21 @@ export default function AutoCitySelectDropdown() {
                   aria-selected={index === focusedIndex}
                   tabIndex={0}
                 >
-                  {city.name}
+                  <div className="flex items-center justify-between">
+                    <span className="font-medium text-gray-800">
+                      {city.name}
+                    </span>
+                    {selectedCity?.id === city.id && (
+                      <FaCheck
+                        className="h-4 w-4 text-blue-500"
+                        aria-hidden="true"
+                      />
+                    )}
+                  </div>
                 </li>
               ))
             ) : (
-              <li className="p-2 text-center text-gray-500">No cities found</li>
+              <li className="p-3 text-center text-gray-500">No cities found</li>
             )}
           </ul>
         </div>

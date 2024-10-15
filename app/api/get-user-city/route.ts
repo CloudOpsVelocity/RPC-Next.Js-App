@@ -18,15 +18,20 @@ export async function POST(req: Request) {
 }
 export async function GET(req: Request) {
   if (process.env.NODE_ENV === "development") {
-    return NextResponse.json({
-      data: {
-        city: "Bengaluru",
-        state: "Karnataka",
-        cityId: 9,
-        stateId: 11,
+    return NextResponse.json(
+      {
+        status: true,
+        data: {
+          cityId: 9,
+          stateId: 11,
+          city: "Bengaluru",
+          state: "Karnataka",
+        },
       },
-      msg: "comgin from development",
-    });
+      {
+        status: 200,
+      }
+    );
   }
   const ip = req.headers.get("x-real-ip") || req.headers.get("x-forwarded-for");
   try {
@@ -36,13 +41,15 @@ export async function GET(req: Request) {
     const data = await getCityStateFromIP(ip);
 
     const cityStateId = await getCityStateIdFromDb(data.region, data.city);
+    if (!cityStateId.city) {
+      return NextResponse.json({ ok: false, error: "City not found" });
+    }
     // there city id state id city name state name
     const resData = {
       cityId: cityStateId.city,
       stateId: cityStateId.state,
       city: data.city,
       state: data.region,
-      status: true,
     };
     return NextResponse.json({ data: resData, status: true });
   } catch (error) {

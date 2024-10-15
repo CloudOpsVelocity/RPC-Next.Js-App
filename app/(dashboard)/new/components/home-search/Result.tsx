@@ -14,6 +14,9 @@ import React from "react";
 import toast from "react-hot-toast";
 import { GrayMapIcon } from "@/app/images/commongsSvgs2";
 import { useRecentSearched } from "@/app/hooks/custom/useRecentSearch";
+import { extractListingParamsValues } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing";
+import { extractApiValues } from "@/app/utils/dyanamic/projects";
+import { FaExclamationCircle, FaExclamationTriangle } from "react-icons/fa";
 
 export default function Results() {
   const { data, isLoading, handleResetQuery } = useQsearch();
@@ -40,101 +43,86 @@ export default function Results() {
     }
   };
 
-  const handleAddCity = (newItem: string) => {
-    if (filters.city !== newItem) {
-      dispatch({ type: "SET_CITY", payload: newItem });
-      handleResetQuery();
-    } else {
-      toast.error("The city already exists.");
-    }
-  };
-
   const handlePush = async (type: string, data: any, apiData: any) => {
+    const AgentOwnerBuilderMap = new Map([
+      ["BuilderAgentListing", "A"],
+      ["BuilderOwnerListing", "I"],
+      ["BuilderBuilderListing", "B"],
+      ["ProjectAgentListing", "A"],
+      ["ProjectOwnerListing", "I"],
+      ["ProjectBuilderListing", "B"],
+    ]);
     switch (type) {
       case "project":
         addToRecent(apiData);
         if (apiData.type === "Project") {
           window.open(apiData.stringUrl);
         } else {
-          window.open(`/abc/delhi/palika/${data}`);
+          window.open(
+            `/search/listing?projIdEnc=${
+              apiData.stringId.split("_")[0]
+            }&phaseId=${apiData.stringId.split("_")[1]}&projName=${
+              apiData.name
+            }`
+          );
         }
 
         break;
       case "listing":
         {
           addToRecent(apiData);
-          const ids = data.id.split("_");
-          if (ids[0] == "32") {
+          const data = extractApiValues(apiData.stringId);
+          {
+            alert(JSON.stringify(data));
             let url;
-            //plot with project condition
-
-            if (ids.length > 3) {
-              const [ut, cg, id, lt] = ids;
-              /*  url = `propTypes=${ut}&cg=${cg}&localities=${data.name.trim()}%2B${lt}`; */
-              url =
-                `propTypes=${ut}&cg=${cg}&localities=` +
-                encodeURIComponent(data.name.trim()) +
-                "%2B" +
-                encodeURIComponent(lt);
-            } else {
-              const [ut, cg, lt] = ids;
-              // url = `propTypes=${ut}&cg=${cg}&localities=${lt}`;
-              url =
-                `propTypes=${ut}&cg=${cg}&localities=` +
-                encodeURIComponent(data.name.trim()) +
-                "%2B" +
-                encodeURIComponent(lt);
-            }
+            let localityName = apiData.name
+              .split(" in ")[1]
+              .toLowerCase()
+              .trim();
+            url =
+              `propTypes=${data.PT}${
+                data.BH ? "&unitTypes=${data.BH}" : ""
+              }&cg=${data.CG}&localities=${localityName}` +
+              "%2B" +
+              encodeURIComponent(data.LT);
 
             window.open("/search/listing?" + url);
-          } else {
-            let url;
-
-            if (ids.length > 4) {
-              const [ut, pt, cg, id, lt] = ids;
-              url =
-                `propTypes=${pt}&unitTypes=${ut}&cg=${cg}&projIdEnc=${id}&localities=${data.name.trim()}` +
-                "%2B" +
-                encodeURIComponent(lt);
-            } else {
-              const [ut, pt, cg, lt] = ids;
-              url =
-                `propTypes=${pt}&unitTypes=${ut}&cg=${cg}&localities=${data.name.trim()}` +
-                "%2B" +
-                encodeURIComponent(lt);
-            }
-            window.open("/search/listing?" + url);
           }
-          /*  const [ut, pt, cg, lt] = ids;
-
-         
-          if (ids.length === 3) {
-          
-            const [ut,  cg, lt] = ids;
-         
-           url = `propTypes=${ut}&cg=${cg}&localities=${lt}`;
-          } else {
-            url = `propTypes=${pt}&unitTypes=${ut}&cg=${cg}&localities=${data.name.trim()}%2B${lt}`;
-          }
- */
         }
         break;
       case "projectListing":
         {
           addToRecent(apiData);
-          let listedByType = data.type === "OL" ? "I" : data.type.split("")[0];
-          let projectName = data.name.split("(")[0].trim();
+          let projectName = data.name.split(" in ")[1].trim();
           // console.log(projectName);
-          const url = `projIdEnc=${data.id}&listedBy=${listedByType}&projName=${projectName}`;
+          const url = `projIdEnc=${
+            data.stringId
+          }&listedBy=${AgentOwnerBuilderMap.get(
+            apiData.type
+          )}&projName=${projectName}`;
           window.open("/search/listing?" + url);
         }
         break;
       case "builder":
         {
           addToRecent(apiData);
-          const url =
-            encodeURIComponent(data.name) + "%2B" + encodeURIComponent(data.id);
-          window.open(`/search?builderIds=${url}`);
+          if (apiData.type === "BuilderDetail") {
+            window.open(apiData.stringUrl);
+          } else {
+            const url =
+              encodeURIComponent(data.name) +
+              "%2B" +
+              encodeURIComponent(apiData.stringId.split("_")[1]);
+            window.open(
+              `/search?builderIds=${url}&city=${
+                apiData.stringId.split("_")[0]
+              }${
+                apiData.type !== "BuilderProject"
+                  ? "&listedBy=${AgentOwnerBuilderMap.get(apiData.type)}"
+                  : ""
+              }`
+            );
+          }
         }
         // const url = encodeURI(`${data.name}+${data.id}`);
 
@@ -152,7 +140,25 @@ export default function Results() {
     isEmptyOrNull(projects) &&
     isEmptyOrNull(listings) &&
     isEmptyOrNull(projectListing);
-  return (
+  const showCityError = !filters.city;
+  return showCityError ? (
+    <div className="px-4 py-3 bg-gray-100 border-l-4 border-gray-400 rounded">
+      <div className="flex items-center">
+        <div className="flex-shrink-0">
+          <FaExclamationCircle
+            className="h-5 w-5 text-gray-500"
+            aria-hidden="true"
+          />
+        </div>
+        <div className="ml-3">
+          <p className="text-sm text-gray-700 font-medium">
+            Please select a city to start your search. Choose a city to see
+            relevant results.
+          </p>
+        </div>
+      </div>
+    </div>
+  ) : (
     <ScrollArea
       className={`px-5 py-2 h-[200px] ${
         noResults || data == undefined ? "sm:h-[150px]" : " sm:h-[330px]"
@@ -180,7 +186,7 @@ export default function Results() {
               {localities?.map((locality: any) => (
                 <li
                   onClick={() =>
-                    handleAddSearch(`${locality.name}+${locality.id}`)
+                    handleAddSearch(`${locality.name}+${locality.stringId}`)
                   }
                   className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1 sm:gap-1 xl:text-nowrap cursor-pointer"
                   key={locality.id}
@@ -259,7 +265,7 @@ export default function Results() {
                         name: builder.name,
                         id: builder.id,
                       },
-                      listings
+                      builder
                     )
                   }
                   className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic leading-[normal] flex items-center gap-1  xl:text-nowrap cursor-pointer"
