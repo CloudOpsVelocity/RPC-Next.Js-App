@@ -7,7 +7,9 @@ type Props = {};
 
 export default function AutoCitySelectDropDown({}: Props) {
   const getCity = async () => {
-    const res = await fetch("/api/get-geo");
+    const res = await fetch("/api/get-geo", {
+      cache: "force-cache",
+    });
     const data = await res.json();
     return data;
   };
@@ -17,14 +19,15 @@ export default function AutoCitySelectDropDown({}: Props) {
   });
 
   return (
-    <Select
-      disabled={isLoading}
-      data={["Bengaluru", "Angular", "Vue", "Svelte"]}
-      placeholder="Pick value"
-      defaultValue={DefaultCity?.data?.city}
-      value={DefaultCity?.data?.city}
-      searchable
-      rightSection={isLoading ? <Loader size="xs" /> : <SearchLocationIcon />}
-    />
+    <div>{DefaultCity?.data?.city ?? "City"}</div>
+    // <Select
+    //   disabled={isLoading}
+    //   data={["Bengaluru", "Angular", "Vue", "Svelte"]}
+    //   placeholder="Pick value"
+    //   defaultValue={DefaultCity?.data?.city}
+    //   value={DefaultCity?.data?.city}
+    //   searchable
+    //   rightSection={isLoading ? <Loader size="xs" /> : <SearchLocationIcon />}
+    // />
   );
 }
