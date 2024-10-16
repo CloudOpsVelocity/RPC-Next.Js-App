@@ -2,23 +2,23 @@ import { getAllCitiesDetails } from "@/app/utils/stats_cities";
 import { NextResponse } from "next/server";
 
 // Centralized function to map URLs based on city details and type
-function mapUrls(cities: Array<{ name: string, id: string | number }>, type: string): Array<{ url: string, id: string | number }> {
+function mapUrls(cities: Array<{ name: string, id: string | number }>, type: string): { [key: string]: string | number } {
   return cities.reduce((acc, item) => {
     const normalizedCityName = item.name.toLowerCase().replace(/\s+/g, "-"); // Normalize city name for URL
     const id = item.id; // Assuming id is a number or string that represents the city
     if (type === "project") {
-      acc.push({ url: `/projects/new-projects-in-${normalizedCityName}`, id });
-      acc.push({ url: `/projects/new-affordable-projects-in-${normalizedCityName}`, id });
-      acc.push({ url: `/projects/upcoming-residential-projects-in-${normalizedCityName}`, id });
+      acc[`/projects/new-projects-in-${normalizedCityName}`] = id;
+      acc[`/projects/new-affordable-projects-in-${normalizedCityName}`] = id;
+      acc[`/projects/upcoming-residential-projects-in-${normalizedCityName}`] = id;
     } else if (type === "property") {
-      acc.push({ url: `/properties/for-sale-in-${normalizedCityName}/properties-for-sale-residential-in-${normalizedCityName}`, id });
-      acc.push({ url: `/properties/for-rent-in-${normalizedCityName}/properties-for-rent-residential-in-${normalizedCityName}`, id });
+      acc[`/properties/for-sale-in-${normalizedCityName}/properties-for-sale-residential-in-${normalizedCityName}`] = id;
+      acc[`/properties/for-rent-in-${normalizedCityName}/properties-for-rent-residential-in-${normalizedCityName}`] = id;
     } else {
       console.error(`Invalid type: ${type}`); // Log an error for invalid type
     }
     return acc;
-  }, [] as  Array<{ url: string, id: string | number }>).filter(Boolean); // Flatten and filter out null values
-}
+  }, {} as  { [key: string]: string | number }); // Flatten and filter out null values
+}       
 
 export async function POST(req: Request) {
   const { type } = await req.json();

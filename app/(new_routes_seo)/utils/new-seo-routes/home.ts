@@ -10,7 +10,8 @@ const getPageSlugs = async (type: Type) => {
       body: JSON.stringify({ type }),
     }
   );
-  return await res.json();
+  const data = await res.json();
+  return data.data;
 };
 // Cache Map
 const cache = new Map<string, string[]>();
