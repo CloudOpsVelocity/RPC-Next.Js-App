@@ -1,6 +1,6 @@
 "use client";
 
-import { indexOf } from "lodash";
+import { indexOf, set } from "lodash";
 import { useEffect, useState } from "react";
 
 export default function Page() {
@@ -131,7 +131,28 @@ export default function Page() {
   const stack = new Stack()
   stack.push('a')
   stack.push('b')
-  console.log(stack.items)
+  
+  class HashTable<T> {
+    public hashTable:T[]
+    constructor(size= 6){
+      this.hashTable = new Array(size)
+    }
+    _hash(key:string){
+      let hash =0
+      for (let i = 0; i < key.length; i++) {  
+        hash = (hash + key.charCodeAt(i) * 31)  % this.hashTable.length     
+      }    
+      return hash             
+    }
+    set(key:string,value:T){
+      const hash = this._hash(key)
+      return hash
+    }
+  }
+const myHash = new HashTable()
+console.log(myHash.set('virendy3rafsdfds',{
+  age:14
+}))
   return (
     <div className="w-full h-screen flex justify-center items-center flex-col space-y-2">
       sdfd

@@ -60,25 +60,6 @@ const ColumnVirtualizerFixed: React.FC<ColumnVirtualizerFixedProps> = ({
         </button>
       )}
 
-      {/* <div className="flex justify-between mb-2">
-        <button
-          onClick={() => scrollTo(-itemSize)}
-          disabled={isAtStart()}
-          className={`p-2 ${
-            isAtStart() ? "opacity-50 cursor-not-allowed" : ""
-          }`}
-        >
-          <FaArrowLeft />
-        </button>
-        <button
-          onClick={() => scrollTo(itemSize)}
-          disabled={isAtEnd()}
-          className={`p-2 ${isAtEnd() ? "opacity-50 cursor-not-allowed" : ""}`}
-        >
-          <FaArrowRight />
-        </button>
-      </div> */}
-
       <div
         ref={parentRef}
         className="mx-auto floorplan flex justify-center items-center"

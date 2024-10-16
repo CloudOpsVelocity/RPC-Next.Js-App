@@ -320,3 +320,6 @@
 .prose-no-break br {
   display: none;
 }
+.scroll-container {
+  transition: scroll-left 0.3s ease; /* Adjust timing and easing as needed */
+}
