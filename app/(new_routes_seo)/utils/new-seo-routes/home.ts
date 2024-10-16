@@ -1,14 +1,15 @@
-// utils/new_routes_seo/generateSlugs.ts
-
 import path from "path";
 import fs from "fs";
 
 type Type = "property" | "project";
 const getPageSlugs = async (type: Type) => {
-  const res = await fetch("/api/home-slugs", {
-    method: "POST",
-    body: JSON.stringify({ type }),
-  });
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/home-slugs`,
+    {
+      method: "POST",
+      body: JSON.stringify({ type }),
+    }
+  );
   return await res.json();
 };
 // Cache Map
