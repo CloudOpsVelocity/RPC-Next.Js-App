@@ -25,6 +25,26 @@ export const getAllCitiesDetails = () => {
       throw err; // You may want to handle the error appropriately in your application
     });
 };
+export const getAllLocalitiesDetails = () => {
+  const url = `${baseURL}/common/getAllLocalities`;
+
+  return fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({}),
+    next:{
+      revalidate: 21600 // 6 hours in seconds
+    }
+  })
+    .then(response => response.json())
+    .then(data => data.localities)
+    .catch(err => {
+      console.error(err);
+      throw err; // You may want to handle the error appropriately in your application
+    });
+};
 
 export const getCitiesDetails = async (cId: number) => {
   const url = `${baseURL}/common/getCityList?statecid=${cId}`;

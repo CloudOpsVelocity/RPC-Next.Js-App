@@ -1,4 +1,0 @@
-export const projectSlugs = {
-  "/Bangalore/Abshot-Layout/Gojrej": "e41b7f784bfbe5ee0cdbce806d679208",
-  "/Bengaluru/Ramagondanahalli/Prestige-Somerville": "989b51e0bc9ef35ade73826a63c1576a"
-};

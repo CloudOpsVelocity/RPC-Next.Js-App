@@ -1,0 +1,89 @@
+import Header from '@/app/components/layouts/primary/header'
+import React from 'react'
+import HomeSearch from './home-search'
+import HomeFeatures from './features'
+import DynamicListing from './Listing'
+import NewAddedProjects from './newly-added-projects'
+import TopLocalities from './top-localities'
+import ListbySection from './ListedBy'
+import PostYourListing from './post-your-listing'
+import Footer from '@/app/components/layouts/primary/footer'
+import LoginPopup from '@/app/components/project/modals/LoginPop'
+import BlogsSection from './blogs'
+import SharePopup from '@/app/components/atoms/SharePopup'
+import Req from './Req'
+import HandPickedProjects from './hand-picked-projects'
+type Props = {
+    shortIds: any,
+    data:any,
+    listingData:any,
+    cityData:{
+      cityName:string,
+      cityId:string,
+    }
+    localityData?:{
+      localityName:string,
+      localityId:string,
+    }
+}
+export default function HomagePageIndex({data,listingData,shortIds,cityData}: Props) {
+  return (
+    <div className="h-[100%] w-[100%] flex  flex-col overflow-hidden bg-[#F5F7F8]">
+    <Header />
+    <HomeSearch count={shortIds?.total} />
+    <HomeFeatures />
+    <NewAddedProjects data={data.featured} shortIds={shortIds} />
+    <DynamicListing
+      title="Ready to Move Sell Listings"
+      content="Move In Today: Your Dream Home Awaits – Explore Our Ready-to-Move Listings Now!"
+      data={listingData["r_Sale"]}
+      shortIds={shortIds}
+    />
+    <TopLocalities />
+    <DynamicListing
+      title="Ready to Move Rent Listings"
+      content="Find Your Perfect Home, Ready to Move In - Rent Today!"
+      data={listingData["r_Rent"]}
+      shortIds={shortIds}
+    />
+    <DynamicListing
+      title="Featured Plot Listings"
+      content="Browse Top Listings and Find Your Perfect Plot Today!"
+      data={listingData["p"]}
+      shortIds={shortIds}
+    />
+    <DynamicListing
+      title="Under Construction Sell Listings"
+      content="Explore Our Under Construction Listings Today!"
+      data={listingData["u_Sale"]}
+      shortIds={shortIds}
+    />
+    <HandPickedProjects data={data} shortIds={shortIds} />
+    <DynamicListing
+      title="Under Construction Rent Listings"
+      content="Discover New Developments and Under Construction Rent Listings!"
+      data={listingData["u_Rent"]}
+      shortIds={shortIds}
+    />
+    <DynamicListing
+      title="Independent Sell Listings"
+      content="Your Gateway to Independent Living - Browse and Buy with Confidence"
+      data={listingData["i_Sale"]}
+      shortIds={shortIds}
+    />{" "}
+    <ListbySection />
+    <DynamicListing
+      title="Independent Rent Listings"
+      content="Discover Your Ideal Rental: Independent Listings, Endless Options."
+      data={listingData["i_Rent"]}
+      shortIds={shortIds}
+    />
+    <PostYourListing />
+    <BlogsSection />
+    <Footer />
+    <LoginPopup />
+    <SharePopup />
+    <Req />
+  </div>
+  )
+}

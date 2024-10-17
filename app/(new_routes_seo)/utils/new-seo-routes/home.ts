@@ -1,5 +1,6 @@
 import path from "path";
 import fs from "fs";
+import { cwd } from "process";
 
 type Type = "property" | "project";
 const getPageSlugs = async (type: Type) => {
@@ -8,6 +9,7 @@ const getPageSlugs = async (type: Type) => {
     {
       method: "POST",
       body: JSON.stringify({ type }),
+      // cache: "no-cache",
     }
   );
   const data = await res.json();
@@ -15,7 +17,6 @@ const getPageSlugs = async (type: Type) => {
 };
 // Cache Map
 const cache = new Map<string, string[]>();
-
 export async function generateHomePageSlugs(slugType: Type): Promise<any> {
   // Check if keys are cached
   let keys = cache.get(slugType);
@@ -24,7 +25,7 @@ export async function generateHomePageSlugs(slugType: Type): Promise<any> {
     const res = await getPageSlugs(slugType);
     // Fetch data and cache the keys
     const staticDir = path.join(process.cwd(), "static");
-    const filePath = path.join(staticDir, "home.json");
+    const filePath = path.join(staticDir, `${slugType}SlugsHome.json`);
     // Ensure the 'static' directory exists
     if (!fs.existsSync(staticDir)) {
       fs.mkdirSync(staticDir);
@@ -38,8 +39,50 @@ export async function generateHomePageSlugs(slugType: Type): Promise<any> {
   }
   // Map through the sliced keys and return the parameters
   const slugs = keys.map((data) => {
-    return data;
+    return extracHomePageApitLocation(data);
   });
 
   return slugs;
+}
+interface Location {
+  city: string;
+  locality?: string; // Locality is optional
+}
+
+export function extracHomePageApitLocation(path: string): Location | null {
+  // Split the path by '/'
+  const segments = path.split("/").filter(Boolean); // Remove empty segments
+
+  if (segments.length === 2) {
+    // If there's only one segment, it's a city
+    return { city: segments[1] };
+  } else if (segments.length > 2) {
+    // If there are multiple segments, it's a city and locality
+    const citySegment = segments[1]; // Get the city segment
+    const localitySegment = segments.slice(2).join("/"); // Join remaining segments as locality
+    
+    let res = {
+      city: citySegment,
+      ...(localitySegment && { locality: localitySegment.replace(/-/g, " ") }),
+    };
+    return res 
+  }
+  return null; // Return null if the path is invalid
+}
+
+export function getHomePageParamvalues(
+  slug: string,
+  type: "project" | "property"
+) {
+  console.log(slug)
+  const staticDir = path.join(process.cwd(), "static");
+  const filePath = path.join(staticDir, `${type}SlugsHome.json`);
+  const jsonData = fs.readFileSync(filePath, "utf8");
+  const builderJsonData = JSON.parse(jsonData);
+  for (const path in builderJsonData) {
+    if (path.startsWith(slug)) {
+      return builderJsonData[path];
+    }
+  }
+  return null;
 }
