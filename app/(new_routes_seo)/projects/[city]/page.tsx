@@ -15,23 +15,24 @@ type Props = {
 
 
 export default async function Page({params}: Props) {
-  const slug = `/projects/${params.city}${params.locality ? `/${params.locality}` : ""  }`
-  const jsonParamsData = getHomePageParamvalues(slug,"project")
-  if(!jsonParamsData) notFound()
-  const [data, listingData] = await Promise.all([
-    getData(jsonParamsData),
-    getHomeListingData(jsonParamsData),
-    // getShortIds(),
-  ]);
-  const cityName = extractCityName(params.city) || '';
-  return <HomagePageIndex data={data} listingData={listingData} shortIds={{}} cityData={{
-    cityName: cityName,
-    cityId: jsonParamsData,
-  }} />
+  // const slug = `/projects/${params.city}${params.locality ? `/${params.locality}` : ""  }`
+  // const jsonParamsData = getHomePageParamvalues(slug,"project")
+  // if(!jsonParamsData) notFound()
+  // const [data, listingData] = await Promise.all([
+  //   getData(jsonParamsData),
+  //   getHomeListingData(jsonParamsData),
+  //   // getShortIds(),
+  // ]);
+  // const cityName = extractCityName(params.city) || '';
+  // return <HomagePageIndex data={data} listingData={listingData} shortIds={{}} cityData={{
+  //   cityName: cityName,
+  //   cityId: jsonParamsData,
+  // }} />
+  <div></div>
 }
 
-// export async function generateStaticParams() {
-//   const slugs = await generateHomePageSlugs("project");
-//   return slugs;
-// }
-// export const dynamicParams = false;
+export async function generateStaticParams() {
+  const slugs = await generateHomePageSlugs("project");
+  return slugs;
+}
+export const dynamicParams = false;

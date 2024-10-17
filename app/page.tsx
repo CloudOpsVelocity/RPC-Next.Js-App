@@ -36,7 +36,7 @@ export default async function Page() {
         cityName: cityData?.data.city,
       }} />
       <HomeFeatures />
-      <NewAddedProjects data={data.featured} shortIds={shortIds} cityId={cityData.data.cityId} />
+      {/* <NewAddedProjects data={data.featured} shortIds={shortIds} cityId={cityData.data.cityId} /> */}
       <DynamicListing
         title="Ready to Move Sell Listings"
         content="Move In Today: Your Dream Home Awaits – Explore Our Ready-to-Move Listings Now!"
@@ -62,7 +62,7 @@ export default async function Page() {
         data={listingData["u_Sale"]}
         shortIds={shortIds}
       />
-      <HandPickedProjects data={data} shortIds={shortIds} cityId={cityData.data.cityId} />
+      {/* <HandPickedProjects data={data} shortIds={shortIds} cityId={cityData.data.cityId} /> */}
       <DynamicListing
         title="Under Construction Rent Listings"
         content="Discover New Developments and Under Construction Rent Listings!"
