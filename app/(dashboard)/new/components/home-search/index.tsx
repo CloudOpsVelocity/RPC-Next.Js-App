@@ -19,9 +19,10 @@ import { toQueryParams } from "../../utils/param";
 import { HeartIcon, SelectedHeartIcon } from "@/app/images/HomePageIcons";
 import RecentSearches from "./recentSearch/RecentSearches";
 import AutoCitySelectDropDown from "./filters/AutoCitySelectDropDown";
+import { CityData } from "../../search";
 const propertyTypes = ["Buy", "Rent"];
 
-const HomeSearch = ({ count }: { count: number }) => {
+const HomeSearch = ({ count ,cityData}: { count: number,cityData?:CityData }) => {
   const f = useAtomValue(homeSearchFiltersAtom);
   const [isOpen, setIsOpen] = useState(false);
   const handleSearch = () => {
@@ -83,7 +84,7 @@ const HomeSearch = ({ count }: { count: number }) => {
               <div className="text-nowrap">All Residential</div>
             </div>
             <p className="text-[#242424] text-[12px] sm:text-[14px] not-italic font-[600] hidden sm:flex items-center gap-0.5 p-1 bg-[#ECF0F3] ">
-              <AutoCitySelectDropDown isOpen={isOpen} setIsOpen={setIsOpen} />
+              <AutoCitySelectDropDown isOpen={isOpen} setIsOpen={setIsOpen} cityData={cityData} />
             </p>
 
             <div className="flex justify-between items-center gap-[10px] w-full">

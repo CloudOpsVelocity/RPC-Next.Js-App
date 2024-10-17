@@ -1,8 +1,14 @@
 import { options } from "@/app/options";
 import { getServerSession } from "next-auth";
 
-export const getData = async () => {
+export const getData = async (city?:number|string,coordinates?:{
+  lat:number,
+  lng:number
+}) => {
   let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/home/page/project`;
+  if(city){
+    url = `${url}?city=${city}`
+  }
   const res = await fetch(url, {
     next: {
       revalidate: 90,
@@ -12,8 +18,14 @@ export const getData = async () => {
   return data;
 };
 
-export const getHomeListingData = async () => {
+export const getHomeListingData = async (city?:number|string,coordinates?:{
+  lat:number,
+  lng:number
+}) => {
   let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/home/page/listing`;
+  if(city){
+    url = `${url}?city=${city}`
+  }
   const res = await fetch(url, {
     next: {
       revalidate: 90,

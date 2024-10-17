@@ -86,3 +86,6 @@ export function getHomePageParamvalues(
   }
   return null;
 }
+export const extractCityName = (name:string) => {
+  return name.split("-in-").pop()?.replace(/-/g, " ").replace(/\b\w/g, str => str.toUpperCase());
+}

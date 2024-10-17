@@ -9,8 +9,9 @@ import {
 import RTK_CONFIG from "@/app/config/rtk";
 import { getAllCitiesDetails } from "@/app/utils/stats_cities";
 import { FaChevronDown, FaLocationDot, FaSpinner } from "react-icons/fa6";
-import { useSetAtom } from "jotai";
+import { useAtom, useSetAtom } from "jotai";
 import { homeSearchFiltersAtom } from "@/app/store/home";
+import { CityData } from "../../../search";
 
 interface City {
   id: string;
@@ -23,14 +24,17 @@ interface DefaultCityResponse {
     cityId: string;
   };
   status: boolean;
+
 }
 
 export default function AutoCitySelectDropdown({
   isOpen,
   setIsOpen,
+cityData
 }: {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  cityData?:CityData
 }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCity, setSelectedCity] = useState<City | null>(null);
@@ -39,10 +43,19 @@ export default function AutoCitySelectDropdown({
   const dropdownRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const optionsRef = useRef<(HTMLLIElement | null)[]>([]);
-  const setCity = useSetAtom(homeSearchFiltersAtom);
-  const getCity = async (): Promise<DefaultCityResponse> => {
+  const [globalState,setCity] = useAtom(homeSearchFiltersAtom);
+  const getUserCity = async (cityData?:CityData): Promise<DefaultCityResponse> => {
+    if (cityData) {
+      return {
+        data: {
+          city: cityData.cityName,
+          cityId: cityData.cityId,
+        },
+        status: true,
+      };
+    }
     try {
-      const res = await fetch("/api/get-user-city", {
+      const res = await fetch(`/api/get-user-city`, {
         cache: "no-store",
       });
       if (!res.ok) throw new Error("Failed to fetch default city");
@@ -58,7 +71,7 @@ export default function AutoCitySelectDropdown({
     error: defaultCityError,
   } = useQuery<DefaultCityResponse, Error>({
     queryKey: ["my-location"],
-    queryFn: getCity,
+    queryFn: async()=> await getUserCity(cityData),
     onSuccess: (data) => {
       if (data.status) {
         setCity({
@@ -90,7 +103,7 @@ export default function AutoCitySelectDropdown({
     AllCities?.filter(
       (city) =>
         city.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-        city.id !== selectedCity?.id
+        city.id !== selectedCity?.id 
     ) || [];
 
   useEffect(() => {

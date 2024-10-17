@@ -29,8 +29,8 @@ type Props = {
 export default function HomagePageIndex({data,listingData,shortIds,cityData}: Props) {
   return (
     <div className="h-[100%] w-[100%] flex  flex-col overflow-hidden bg-[#F5F7F8]">
-    <Header />
-    <HomeSearch count={shortIds?.total} />
+ 
+    <HomeSearch count={shortIds?.total} cityData={cityData} />
     <HomeFeatures />
     <NewAddedProjects data={data.featured} shortIds={shortIds} />
     <DynamicListing
@@ -80,7 +80,6 @@ export default function HomagePageIndex({data,listingData,shortIds,cityData}: Pr
     />
     <PostYourListing />
     <BlogsSection />
-    <Footer />
     <LoginPopup />
     <SharePopup />
     <Req />

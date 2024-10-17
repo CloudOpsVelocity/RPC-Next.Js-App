@@ -3,10 +3,15 @@ import React from "react";
 import MainHeading from "../heading";
 import SideTabs from "./Sidetabs";
 import CardCarousel from "./Card/CardCarousel";
+import { useAtomValue } from "jotai";
+import { useQuery } from "react-query";
+import { homeSearchFiltersAtom } from "@/app/store/home";
+import { getHomePageProjectData } from "@/app/(new_routes_seo)/utils/new-seo-routes/home.api";
+import RTK_CONFIG from "@/app/config/rtk";
 
-type Props = { data: any; shortIds: any };
+type Props = { data: any; shortIds: any ,cityId?:string};
 
-export default function HandPickedProjects({ data, shortIds }: Props) {
+export default function HandPickedProjects({ data, shortIds,cityId }: Props) {
   const [active, setActive] = React.useState(0);
   const url =
     active == 0
@@ -15,6 +20,14 @@ export default function HandPickedProjects({ data, shortIds }: Props) {
       ? ` ${process.env.NEXT_PUBLIC_BACKEND_URL}/search?projStatus=106 `
       : `${process.env.NEXT_PUBLIC_BACKEND_URL}/search?projStatus=107`;
 
+      const globalState = useAtomValue(homeSearchFiltersAtom)
+      const isEnabled = !!globalState.city && globalState.city?.split('+')[1] != cityId
+      const {data: newlyAddedProjects,isLoading} = useQuery({
+        queryKey: ["home-page-projects-data" + globalState.city?.split('+')[1]],
+        queryFn: ()=> getHomePageProjectData(globalState.city?.split('+')[1] ?? ''),
+        enabled: isEnabled,
+        ...RTK_CONFIG
+      })
   return (
     <div className="w-full mt-[40px] sm:mt-[80px] min-h-[530px] sm:min-h-[582px] flex justify-center items-center shrink-0 bg-gradient-to-r from-[#DAE6F1] via-[#DAE6F1] to-[#A7D0F5]">
       <div className=" w-[95%]">

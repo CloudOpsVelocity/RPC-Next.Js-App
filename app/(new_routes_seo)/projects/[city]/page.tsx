@@ -1,9 +1,10 @@
 import React from "react";
-import { generateHomePageSlugs, getHomePageParamvalues } from "../../utils/new-seo-routes/home";
+import { extractCityName, generateHomePageSlugs, getHomePageParamvalues } from "../../utils/new-seo-routes/home";
 import { getShortIds } from "@/app/(dashboard)/new/api";
 import { getHomeListingData } from "@/app/(dashboard)/new/api";
 import { getData} from "@/app/(dashboard)/new/api";
 import HomagePageIndex from "@/app/(dashboard)/new/components/HomagePageIndex";
+import { notFound } from "next/navigation";
 
 type Props = {
   params:{
@@ -14,22 +15,23 @@ type Props = {
 
 
 export default async function Page({params}: Props) {
-  const [data, listingData, ] = await Promise.all([
-    getData(),
-    getHomeListingData(),
+  const slug = `/projects/${params.city}${params.locality ? `/${params.locality}` : ""  }`
+  const jsonParamsData = getHomePageParamvalues(slug,"project")
+  if(!jsonParamsData) notFound()
+  const [data, listingData] = await Promise.all([
+    getData(jsonParamsData),
+    getHomeListingData(jsonParamsData),
     // getShortIds(),
   ]);
-  const slug = `/project/${params.city}${params.locality ? `/${params.locality}` : ""  }`
-  const jsonParamsData = getHomePageParamvalues(slug,"project")
-  console.log(jsonParamsData)
+  const cityName = extractCityName(params.city) || '';
   return <HomagePageIndex data={data} listingData={listingData} shortIds={{}} cityData={{
-    cityName: params.city,
-    cityId: params.city,
+    cityName: cityName,
+    cityId: jsonParamsData,
   }} />
 }
 
-export async function generateStaticParams() {
-  const slugs = await generateHomePageSlugs("project");
-  return slugs;
-}
-export const dynamicParams = false;
+// export async function generateStaticParams() {
+//   const slugs = await generateHomePageSlugs("project");
+//   return slugs;
+// }
+// export const dynamicParams = false;
