@@ -12,7 +12,8 @@
     "test:unit": "set NODE_OPTIONS=--no-deprecation && jest --detectOpenHandles",
     "test:watch": "set NODE_OPTIONS=--no-deprecation && jest --watch",
     "push": "npm run build && git add . && read -p 'Enter commit message: ' msg && git commit -m \"$msg\" && git push",
-    "debug": "cross-env NODE_OPTIONS='--inspect' next dev"
+    "debug": "cross-env NODE_OPTIONS='--inspect' next dev",
+    "artifact":"node build.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
