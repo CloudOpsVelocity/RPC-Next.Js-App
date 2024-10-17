@@ -9,7 +9,7 @@ const getPageSlugs = async (type: Type) => {
     {
       method: "POST",
       body: JSON.stringify({ type }),
-      // cache: "no-cache",
+      cache: "no-cache",
     }
   );
   const data = await res.json();

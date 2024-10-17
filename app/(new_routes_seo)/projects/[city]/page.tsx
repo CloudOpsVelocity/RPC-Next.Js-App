@@ -31,8 +31,8 @@ export default async function Page({params}: Props) {
   <div></div>
 }
 
-export async function generateStaticParams() {
-  const slugs = await generateHomePageSlugs("project");
-  return slugs;
-}
-export const dynamicParams = false;
+// export async function generateStaticParams() {
+//   const slugs = await generateHomePageSlugs("project");
+//   return slugs;
+// }
+// export const dynamicParams = false;
