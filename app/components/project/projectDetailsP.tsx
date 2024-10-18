@@ -54,6 +54,7 @@ export default function ProjectDetailsP({
         selectedPhase.propTypeOverview &&
         Object.keys(selectedPhase.propTypeOverview).includes(propertyType)
     );
+    
   return (
     <div
       className="w-[95%] sm:w-[90%] mb-[3%] sm:mb-[0%] scroll-mt-[150px] sm:mt-[50px]"
@@ -111,17 +112,25 @@ export default function ProjectDetailsP({
           {selectedPhase && (
             <>
               <ProjBasicDetails
-                Id="launch-date"
-                key="launchDate"
+                Id="rera-start-date"
+                key="rera-start-date"
                 icon={<EndDate />}
-                title="Launch Date"
+                title="RERA Start Date"
+                value={formatDateDDMMYYYY(selectedPhase.launchDate)}
+                className={styles.box}
+              />
+              <ProjBasicDetails
+                Id="rera-end-date"
+                key="rera-end-date"
+                icon={<EndDate />}
+                title="RERA End Date"
                 value={formatDateDDMMYYYY(selectedPhase.launchDate)}
                 className={styles.box}
               />
               <ProjBasicDetails
                 key="possessionDate"
                 icon={<StartDate />}
-                title="Possession Date"
+                title="Expected Completion Date"
                 value={formatDateDDMMYYYY(selectedPhase.possassionDate)}
                 className={styles.box}
                 Id="possession-date"
@@ -149,6 +158,7 @@ export default function ProjectDetailsP({
                 }
                 className={styles.box}
               />
+             
               {selectedPhase.reraId && (
                 <ProjBasicDetails
                   key="reraId"
@@ -162,6 +172,16 @@ export default function ProjectDetailsP({
                   className={styles.box}
                 />
               )}
+                <ProjBasicDetails
+                Id="promoter-name"
+                key="promoter-name"
+                icon={<TotalLandArea />}
+                title="Promoter Name"
+                value={
+                  "Kesari Lal."
+                }
+                className={styles.box}
+              />
             </>
           )}
         </div>

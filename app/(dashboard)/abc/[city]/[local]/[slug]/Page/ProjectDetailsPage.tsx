@@ -51,6 +51,7 @@ export default async function ProjectsDetailsPage({
 }: Props) {
   const { basicData: data, nearByLocations, phaseOverview } = projResponse;
   const refURls = data?.sourceBuilderUrl?.split(",");
+
   return (
     <section className="w-full relative break-words ">
       <meta
