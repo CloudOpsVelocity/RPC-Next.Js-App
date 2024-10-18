@@ -11,6 +11,7 @@ import Button from "@/app/elements/button";
 import { currentPhaseAtom, propCgIdAtom } from "@/app/store/vewfloor";
 import { isSingleLetterOrNumber } from "@/app/utils/letters";
 import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
+import { sortUnits } from "@/app/utils/unitparser";
 import { useAtom } from "jotai";
 import React, { useEffect } from "react";
 
@@ -92,7 +93,7 @@ const PricingSection = ({ unitData, projName, phaseList }: any) => {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-6 max-h-[400px] sm:max-h-[550px] overflow-y-auto">
         {filteredData ? (
-          Object.entries(filteredData).map(([bhkType, bhkData]: any) => (
+         sortUnits(Object.keys(filteredData)).map((bhkType) => (
             <div
               key={`${projName}-${bhkType}`}
               className="p-4 rounded-lg shadow-md bg-gradient-to-br from-blue-50 to-white border border-blue-200 flex flex-col gap-3"
@@ -102,20 +103,20 @@ const PricingSection = ({ unitData, projName, phaseList }: any) => {
               </h3>
               <div className="text-sm sm:text-base text-gray-700 font-semibold">
                 <span className="font-medium text-gray-800">Starting Price:</span>{" "}
-                {formatCurrency(bhkData.minPrice)} -
-                {formatCurrency(bhkData.maxPrice)}
+                {formatCurrency(filteredData[bhkType].minPrice)} -
+                {formatCurrency(filteredData[bhkType].maxPrice)}
               </div>
               <div className="text-sm sm:text-base text-gray-700 font-semibold">
                 <span className="font-medium text-gray-800">
                   Super-Built Up Area:
                 </span>{" "}
-                {bhkData.minSba === bhkData.maxSba ? `${formatNumberWithSuffix(bhkData.minSba)} sq ft` : `${formatNumberWithSuffix(bhkData.minSba)} - ${formatNumberWithSuffix(bhkData.maxSba)} sq ft`}
+                {filteredData[bhkType].minSba === filteredData[bhkType].maxSba ? `${formatNumberWithSuffix(filteredData[bhkType].minSba)} sq ft` : `${formatNumberWithSuffix(filteredData[bhkType].minSba)} - ${formatNumberWithSuffix(filteredData[bhkType].maxSba)} sq ft`}
               </div>
               <div className="text-sm sm:text-base text-gray-700 font-semibold">
                 <span className="font-medium text-gray-800">
                   Carpet Area:
                 </span>{" "}
-                {bhkData.minCa === bhkData.maxCa ? `${formatNumberWithSuffix(bhkData.minCa)} sq ft` : `${formatNumberWithSuffix(bhkData.minCa)} - ${formatNumberWithSuffix(bhkData.maxCa)} sq ft`}
+                {filteredData[bhkType].minCa === filteredData[bhkType].maxCa ? `${formatNumberWithSuffix(filteredData[bhkType].minCa)} sq ft` : `${formatNumberWithSuffix(filteredData[bhkType].minCa)} - ${formatNumberWithSuffix(filteredData[bhkType].maxCa)} sq ft`}
               </div>
             </div>
           ))
