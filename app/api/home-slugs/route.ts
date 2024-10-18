@@ -34,14 +34,14 @@ function mapUrls(cities: City[], localities: Locality[], type: string): Record<s
           // acc[`/projects/upcoming-residential-projects-in-${normalizedCityName}-in-${normalizedLocalityName}`] = cityId;
         }
         else {
-     acc[`/projects/new-projects-in-${normalizedCityName}`] = cityId;
+     acc[`/projects/new-projects-in-${normalizedCityName}`] = `${cityId}`;
       // acc[`/projects/new-affordable-projects-in-${normalizedCityName}`] = cityId;
       // acc[`/projects/upcoming-residential-projects-in-${normalizedCityName}`] = cityId;
         }
       });
     } else if (type === "property") {
-      acc[`/properties/for-sale-in-${normalizedCityName}/properties-for-sale-residential-in-${normalizedCityName}`] = cityId;
-      acc[`/properties/for-rent-in-${normalizedCityName}/properties-for-rent-residential-in-${normalizedCityName}`] = cityId;
+      acc[`/properties/for-sale-in-${normalizedCityName}/properties-for-sale-residential-in-${normalizedCityName}`] = `${cityId}`;
+      acc[`/properties/for-rent-in-${normalizedCityName}/properties-for-rent-residential-in-${normalizedCityName}`] = `${cityId}`;
     } else {
       console.error(`Invalid type: ${type}`);
     }

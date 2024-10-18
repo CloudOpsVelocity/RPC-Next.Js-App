@@ -124,64 +124,64 @@ export default function Page() {
     constructor() {
       this.items = [];
     }
-  push(item:T){
-    this.items.push(item)
+    push(item: T) {
+      this.items.push(item);
+    }
   }
-  }
-  const stack = new Stack()
-  stack.push('a')
-  stack.push('b')
-  
-//   class HashTable<T extends [string,T]> {
-//     public hashTable: Array<T[]>;
-//     constructor(size = 6) {
-//       this.hashTable = new Array(size);
-//     }
-//     _hash(key: string) {
-//       let hash = 0;
-//       for (let i = 0; i < key.length; i++) {
-//         hash = (hash + key.charCodeAt(i) * 31) % this.hashTable.length;
-//       }
-//       return hash;
-//     }
-//     set(key: string, value: T['value']) {
-//       const index = this._hash(key);
-//       if (!this.hashTable[index]) {
-//         this.hashTable[index] = [];
-//       }
-//       this.hashTable[index].push([key,value]);
-//     }
-//     get(key: string) {
-//       const index = this._hash(key);
-//       if (this.hashTable[index]) {
-//         for(let i=0;i< this.hashTable[index].length;i++){
-//           if(this.hashTable[index][i][0] === key){
-//             return this.hashTable[index][i][1]
-//           }
-//         }
-//       }
-//       return 'not found ';
-//     }
-//   }
+  const stack = new Stack();
+  stack.push("a");
+  stack.push("b");
 
-// const myHash = new HashTable(2)
-// myHash.set('a',{
-//   age:14
-// })
-// myHash.set('b',{        
-//   age:14
-// })
-// myHash.set('c',{
-//   age:14
-// })
-// myHash.set('d',{
-//   age:14
-// })
-// myHash.set('e',{
-//   age:14
-// })
-// console.log(myHash.hashTable)
-// console.log(myHash.get('b'))
+  // class HashTable<T extends [string, T]> {
+  //   public hashTable: Array<T[]>;
+  //   constructor(size = 6) {
+  //     this.hashTable = new Array(size);
+  //   }
+  //   _hash(key: string) {
+  //     let hash = 0;
+  //     for (let i = 0; i < key.length; i++) {
+  //       hash = (hash + key.charCodeAt(i) * 31) % this.hashTable.length;
+  //     }
+  //     return hash;
+  //   }
+  //   set(key: string, value: T["value"]) {
+  //     const index = this._hash(key);
+  //     if (!this.hashTable[index]) {
+  //       this.hashTable[index] = [];
+  //     }
+  //     this.hashTable[index].push([key, value]);
+  //   }
+  //   get(key: string) {
+  //     const index = this._hash(key);
+  //     if (this.hashTable[index]) {
+  //       for (let i = 0; i < this.hashTable[index].length; i++) {
+  //         if (this.hashTable[index][i][0] === key) {
+  //           return this.hashTable[index][i][1];
+  //         }
+  //       }
+  //     }
+  //     return -1;
+  //   }
+  // }
+
+  // const myHash = new HashTable(2);
+  // myHash.set("a", {
+  //   age: 1,
+  // });
+  // myHash.set("b", {
+  //   age: 2,
+  // });
+  // myHash.set("c", {
+  //   age: 3,
+  // });
+  // myHash.set("d", {
+  //   age: 4,
+  // });
+  // myHash.set("e", {
+  //   age: 5,
+  // });
+  // console.log(myHash.hashTable);
+  // console.log(myHash.get("b"));
   return (
     <div className="w-full h-screen flex justify-center items-center flex-col space-y-2">
       sdfd

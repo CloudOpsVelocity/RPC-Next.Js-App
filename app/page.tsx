@@ -20,23 +20,35 @@ import Header from "./components/layouts/primary/header";
 import Footer from "./components/layouts/primary/footer";
 import { getUserCity } from "./(new_routes_seo)/utils/new-seo-routes/home.api";
 export default async function Page() {
-  const cityData = await getUserCity();
+  // const cityData = await getUserCity();
 
+  // const [data, listingData, shortIds] = await Promise.all([
+  //   getData(cityData.data.cityId),
+  //   getHomeListingData(cityData.data.cityId),
+  //   getShortIds(),
+  // ]);
   const [data, listingData, shortIds] = await Promise.all([
-    getData(cityData.data.cityId),
-    getHomeListingData(cityData.data.cityId),
+    getData(),
+    getHomeListingData(),
     getShortIds(),
   ]);
 
   return (
     <div className="h-[100%] w-[100%] flex  flex-col overflow-hidden bg-[#F5F7F8]">
       <Header />
-      <HomeSearch count={shortIds?.total} cityData={{
-        cityId: cityData?.data.cityId,
-        cityName: cityData?.data.city,
-      }} />
+      <HomeSearch
+        count={shortIds?.total}
+        // cityData={{
+        //   cityId: cityData?.data.cityId,
+        //   cityName: cityData?.data.city,
+        // }}
+      />
       <HomeFeatures />
-      <NewAddedProjects data={data.featured} shortIds={shortIds} cityId={cityData.data.cityId} />
+      <NewAddedProjects
+        data={data.featured}
+        shortIds={shortIds}
+        // cityId={cityData.data.cityId}
+      />
       <DynamicListing
         title="Ready to Move Sell Listings"
         content="Move In Today: Your Dream Home Awaits – Explore Our Ready-to-Move Listings Now!"
@@ -62,7 +74,11 @@ export default async function Page() {
         data={listingData["u_Sale"]}
         shortIds={shortIds}
       />
-      <HandPickedProjects data={data} shortIds={shortIds} cityId={cityData.data.city} />
+      <HandPickedProjects
+        data={data}
+        shortIds={shortIds}
+        // cityId={cityData.data.city}
+      />
       <DynamicListing
         title="Under Construction Rent Listings"
         content="Discover New Developments and Under Construction Rent Listings!"

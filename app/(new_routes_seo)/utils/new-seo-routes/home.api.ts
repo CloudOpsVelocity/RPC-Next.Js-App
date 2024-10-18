@@ -27,7 +27,7 @@ const getUserCity = async (cityData?:CityData): Promise<DefaultCityResponse> => 
     lat:number,
     lng:number
   }) => {
-    console.log(city)
+
     let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/home/page/project`;
     if(city){
       url = `${url}?city=${city}`
