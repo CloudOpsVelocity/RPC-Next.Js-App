@@ -19,6 +19,7 @@ const nextConfig = {
       { hostname: "d1l03fubsuphsh.cloudfront.net" },
       { hostname: "d2l0lb5gc1bw3t.cloudfront.net" },
       { hostname: "daxv8eiot4y5y.cloudfront.net" },
+      {hostname:"media.getrightproperty.com"},
       {
         hostname:
           "getrightproperty-test-bucket-new.s3.ap-south-1.amazonaws.com",
