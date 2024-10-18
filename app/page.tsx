@@ -18,7 +18,7 @@ import Req from "./(dashboard)/new/components/Req";
 import SharePopup from "./(dashboard)/search/components/SharePopup";
 import Header from "./components/layouts/primary/header";
 import Footer from "./components/layouts/primary/footer";
-import { getUserCity } from "./(new_routes_seo)/utils/new-seo-routes/home.api";
+// import { getUserCity } from "./(new_routes_seo)/utils/new-seo-routes/home.api";
 export default async function Page() {
   // const cityData = await getUserCity();
 

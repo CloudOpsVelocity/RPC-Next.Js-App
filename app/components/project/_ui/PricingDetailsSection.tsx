@@ -10,6 +10,7 @@ import {
 import Button from "@/app/elements/button";
 import { currentPhaseAtom, propCgIdAtom } from "@/app/store/vewfloor";
 import { isSingleLetterOrNumber } from "@/app/utils/letters";
+import { formatCurrency } from "@/app/utils/numbers";
 import { useAtom } from "jotai";
 import React, { useEffect } from "react";
 
@@ -22,11 +23,11 @@ const PricingSection = ({ unitData, projName, phaseList }: any) => {
   ).sort((a, b) => sorted.indexOf(a) - sorted.indexOf(b));
   const filteredData =
     unitData[currentPhase]?.[propertyDetailsTypes.get(propCgId)?.name ?? ""];
-    useEffect(() => {
-      // @ts-ignore
-      propTypes?.length > 0 && setPropCgId(listingProps[`${propTypes[0]}`]);
-    }, [currentPhase])
-    
+  useEffect(() => {
+    // @ts-ignore
+    propTypes?.length > 0 && setPropCgId(listingProps[`${propTypes[0]}`]);
+  }, [currentPhase]);
+
   return (
     <section
       className="sm:p-6 bg-white rounded-lg shadow-lg w-[90%] mx-auto mt-2 sm:mt-[100px]"
@@ -101,15 +102,19 @@ const PricingSection = ({ unitData, projName, phaseList }: any) => {
               </h3>
               <div className="text-sm sm:text-base text-gray-700 font-semibold">
                 <span className="font-medium text-gray-800">Price Range:</span>{" "}
-                ₹{parseInt(bhkData.minPrice).toLocaleString()} - ₹
-                {parseInt(bhkData.maxPrice).toLocaleString()}
+                {formatCurrency(bhkData.minPrice)} -
+                {formatCurrency(bhkData.maxPrice)}
               </div>
               <div className="text-sm sm:text-base text-gray-700 font-semibold">
-                <span className="font-medium text-gray-800">SBA Range:</span>{" "}
+                <span className="font-medium text-gray-800">
+                  Super-Built Up area Range:
+                </span>{" "}
                 {bhkData.minSba} - {bhkData.maxSba} sq ft
               </div>
               <div className="text-sm sm:text-base text-gray-700 font-semibold">
-                <span className="font-medium text-gray-800">CA Range:</span>{" "}
+                <span className="font-medium text-gray-800">
+                  Carpet Area Range:
+                </span>{" "}
                 {bhkData.minCa} - {bhkData.maxCa} sq ft
               </div>
             </div>
