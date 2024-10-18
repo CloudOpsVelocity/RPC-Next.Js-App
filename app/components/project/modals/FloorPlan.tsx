@@ -812,7 +812,7 @@ const RightSection = ({ propCgId, className }: any) => {
               Super Builtup Area:
               <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
                 {" "}
-                {formatNumberWithSuffix(data.superBuildUparea)} sq.ft
+                {formatNumberWithSuffix(data.superBuildUparea, false)} sq.ft
               </span>
             </p>
           </div>
@@ -825,7 +825,7 @@ const RightSection = ({ propCgId, className }: any) => {
               Carpet Area:
               <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                 {" "}
-                {formatNumberWithSuffix(data.caretarea)} sq.ft
+                {formatNumberWithSuffix(data.caretarea, false)} sq.ft
               </span>
             </p>
           </div>
@@ -857,7 +857,7 @@ const RightSection = ({ propCgId, className }: any) => {
                 Terrace Area:
                 <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                   {" "}
-                  {formatNumberWithSuffix(data.terraceArea)} sq.ft
+                  {formatNumberWithSuffix(data.terraceArea, false)} sq.ft
                 </span>
               </p>
             </div>
@@ -873,7 +873,7 @@ const RightSection = ({ propCgId, className }: any) => {
                 Parking Area:
                 <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                   {" "}
-                  {formatNumberWithSuffix(data.parkingArea)} sq.ft
+                  {formatNumberWithSuffix(data.parkingArea, false)} sq.ft
                 </span>
               </p>
             </div>
@@ -885,7 +885,7 @@ const RightSection = ({ propCgId, className }: any) => {
               Balcony Size:
               <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                 {" "}
-                {formatNumberWithSuffix(data.totalBalconySize)} sq.ft
+                {formatNumberWithSuffix(data.totalBalconySize, false)} sq.ft
               </span>
             </p>
           </div>
@@ -899,7 +899,7 @@ const RightSection = ({ propCgId, className }: any) => {
               Plot Area:
               <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
                 {" "}
-                {formatNumberWithSuffix(data.plotArea)} sq.ft
+                {formatNumberWithSuffix(data.plotArea, false)} sq.ft
               </span>
             </p>
           </div>

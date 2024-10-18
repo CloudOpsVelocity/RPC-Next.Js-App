@@ -1,80 +1,46 @@
+
+
 function formatCurrency(input: number | string): string {
+  const formatter = new Intl.NumberFormat("en-IN");
   // Convert input to a number if it is a string
-  const value = typeof input === 'string' ? parseFloat(input) : input;
+  const value = typeof input === "string" ? parseFloat(input) : input;
 
   // Check for invalid numbers
-  if (isNaN(value)) return "Invalid Number"; 
-
-  // Helper function to format numbers with commas
-  const formatNumberWithCommas = (num: number): string => {
-    const numberString = num.toFixed(2); // Convert to string with 2 decimal places
-    const [integerPart, decimalPart] = numberString.split(".");
-
-    let formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-    if (decimalPart === "00") {
-      return formattedInteger;
-    }
-
-    return `${formattedInteger}.${decimalPart}`;
-  };
+  if (isNaN(value)) return "Invalid Number";
 
   // Handle large numbers with suffixes
   if (value >= 10000000) {
-    const croreValue = (value / 10000000).toFixed(2);
-    const formattedValue = parseFloat(croreValue); // Convert to number to remove trailing zeros
-    return `₹ ${formatNumberWithCommas(formattedValue)} Cr*`;
+    const croreValue = value / 10000000;
+    return `₹ ${formatter.format(croreValue)} Cr*`;
   } else if (value >= 100000) {
-    const lakhValue = (value / 100000).toFixed(2);
-    const formattedValue = parseFloat(lakhValue); // Convert to number to remove trailing zeros
-    return `₹ ${formatNumberWithCommas(formattedValue)} Lac*`;
+    const lakhValue = value / 100000;
+    return `₹ ${formatter.format(lakhValue)} Lac*`;
   } else {
-    return `₹ ${formatNumberWithCommas(value)}*`;
+    return `₹ ${formatter.format(value)}*`;
   }
 }
-
-
-  
-
-
 
 export { formatCurrency };
 
 
 function formatNumberWithSuffix(input: number | string, isStar: boolean = true): string {
-  // Convert input to number, handling string input and invalid strings
-  const value = typeof input === 'string' ? parseFloat(input) : input;
+  const formatter = new Intl.NumberFormat("en-IN");
+  // Convert input to a number, handling string input and invalid strings
+  const value = typeof input === "string" ? parseFloat(input) : input;
 
   // Check for invalid numbers
-  if (isNaN(value)) return "Invalid Number"; 
-
-  // Helper function to format numbers with commas
-  const formatNumberWithCommas = (num: number): string => {
-    const numberString = num.toFixed(2); // Convert to string with 2 decimal places
-    const [integerPart, decimalPart] = numberString.split(".");
-
-    let formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-    if (decimalPart === "00") {
-      return formattedInteger;
-    }
-
-    return `${formattedInteger}.${decimalPart}`;
-  };
+  if (isNaN(value)) return "Invalid Number";
 
   // Handle large numbers with suffixes
   if (value >= 10000000) {
-    const croreValue = (value / 10000000).toFixed(2);
-    const formattedValue = parseFloat(croreValue); // Convert to number to remove trailing zeros
-    return `${formatNumberWithCommas(formattedValue)} Cr${isStar ? '*' : ''}`;
+    const croreValue = value / 10000000;
+    return `${formatter.format(croreValue)} Cr${isStar ? "*" : ""}`;
   } else if (value >= 100000) {
-    const lakhValue = (value / 100000).toFixed(2);
-    const formattedValue = parseFloat(lakhValue); // Convert to number to remove trailing zeros
-    return `${formatNumberWithCommas(formattedValue)} Lac${isStar ? '*' : ''}`;
+    const lakhValue = value / 100000;
+    return `${formatter.format(lakhValue)} Lac${isStar ? "*" : ""}`;
   } else {
-    return `${formatNumberWithCommas(value)}${isStar ? '*' : ''}`;
+    return `${formatter.format(value)}${isStar ? "*" : ""}`;
   }
 }
 
-
-export {formatNumberWithSuffix}
+export { formatNumberWithSuffix };

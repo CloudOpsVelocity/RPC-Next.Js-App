@@ -10,7 +10,6 @@ import {
   PrevDarkButton,
 } from "@/app/images/commonSvgs";
 import { useMediaQuery } from "@mantine/hooks";
-import { object } from "yup";
 
 const CustomScrollArea: React.FC<{
   areas: Area[];

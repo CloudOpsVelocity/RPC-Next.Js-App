@@ -179,7 +179,7 @@ export default function PropertyTypeDetailsCrad({
             <p className="text-[12px] lg:text-[20px] text-[#2A4C70] font-[500] flex justify-start items-start  ">
               <FlooringIcon className="w-[16px] h-[16px] lg:w-[24px] lg:h-[24px]" />
               <span className="mr-[6px] ml-[6px]">
-                {cg ? formatNumberWithSuffix(cg.unitCount) : ""}{" "}
+                {cg ? formatNumberWithSuffix(cg.unitCount,false) : ""}{" "}
               </span>{" "}
               Units
             </p>
