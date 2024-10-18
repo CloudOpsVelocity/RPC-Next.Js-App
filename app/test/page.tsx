@@ -2,7 +2,6 @@
 
 import { indexOf, set } from "lodash";
 import { useEffect, useState } from "react";
-
 export default function Page() {
   class Node<T> {
     public head: T;
@@ -134,8 +133,12 @@ export default function Page() {
 
   // class HashTable<T extends [string, T]> {
   //   public hashTable: Array<T[]>;
+  //   public size:number;
+  //   public count:number;
   //   constructor(size = 6) {
   //     this.hashTable = new Array(size);
+  //     this.size = size;
+  //     this.count = 0
   //   }
   //   _hash(key: string) {
   //     let hash = 0;
@@ -150,6 +153,7 @@ export default function Page() {
   //       this.hashTable[index] = [];
   //     }
   //     this.hashTable[index].push([key, value]);
+  //     this.count++
   //   }
   //   get(key: string) {
   //     const index = this._hash(key);
@@ -162,9 +166,24 @@ export default function Page() {
   //     }
   //     return -1;
   //   }
+  //   keys(){
+  //     let keys = []
+  //     for (let i = 0; i < this.hashTable.length; i++) {
+  //         let item = this.hashTable[i]
+  //         if(item){
+  //           for (let j = 0; j < this.hashTable[i].length; j++) {
+  //      keys.push(this.hashTable[i][j][0])     
+  //           }
+  //         }
+  //     }
+  //     return keys
+  //   }
+  //   _reSize(){
+
+  //   }
   // }
 
-  // const myHash = new HashTable(2);
+  // const myHash = new HashTable(10);
   // myHash.set("a", {
   //   age: 1,
   // });
@@ -180,8 +199,8 @@ export default function Page() {
   // myHash.set("e", {
   //   age: 5,
   // });
-  // console.log(myHash.hashTable);
-  // console.log(myHash.get("b"));
+  // console.log(myHash.count)
+
   return (
     <div className="w-full h-screen flex justify-center items-center flex-col space-y-2">
       sdfd

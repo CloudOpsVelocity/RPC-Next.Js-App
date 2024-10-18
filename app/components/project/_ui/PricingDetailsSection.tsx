@@ -10,7 +10,7 @@ import {
 import Button from "@/app/elements/button";
 import { currentPhaseAtom, propCgIdAtom } from "@/app/store/vewfloor";
 import { isSingleLetterOrNumber } from "@/app/utils/letters";
-import { formatCurrency } from "@/app/utils/numbers";
+import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
 import { useAtom } from "jotai";
 import React, { useEffect } from "react";
 
@@ -55,11 +55,11 @@ const PricingSection = ({ unitData, projName, phaseList }: any) => {
                   if (currentPhase === each.phaseId) return;
                   setCurrentPhase(each.phaseId);
                 }}
-                buttonClass={`text-sm sm:text-base bg-[#0073C6] hover:bg-blue-600 p-3 rounded-xl transition-colors duration-200 ${
+                buttonClass={`text-sm sm:text-base ${
                   currentPhase === each.phaseId
-                    ? "font-bold border-2 border-blue-600 text-white shadow-md"
-                    : "font-medium text-white shadow"
-                }`}
+                    ? "bg-[#0056B3] font-bold border-2 border-white text-white shadow-md"
+                    : "bg-[#0073C6] font-medium text-white shadow hover:shadow-lg"
+                } p-3 rounded-xl transition-colors duration-200`}
               />
             ))}
           </div>
@@ -107,15 +107,15 @@ const PricingSection = ({ unitData, projName, phaseList }: any) => {
               </div>
               <div className="text-sm sm:text-base text-gray-700 font-semibold">
                 <span className="font-medium text-gray-800">
-                  Super-Built Up area Range:
+                  Super-Built Up Area:
                 </span>{" "}
-                {bhkData.minSba} - {bhkData.maxSba} sq ft
+                {bhkData.minSba === bhkData.maxSba ? `${formatNumberWithSuffix(bhkData.minSba)} sq ft` : `${formatNumberWithSuffix(bhkData.minSba)} - ${formatNumberWithSuffix(bhkData.maxSba)} sq ft`}
               </div>
               <div className="text-sm sm:text-base text-gray-700 font-semibold">
                 <span className="font-medium text-gray-800">
-                  Carpet Area Range:
+                  Carpet Area:
                 </span>{" "}
-                {bhkData.minCa} - {bhkData.maxCa} sq ft
+                {bhkData.minCa === bhkData.maxCa ? `${formatNumberWithSuffix(bhkData.minCa)} sq ft` : `${formatNumberWithSuffix(bhkData.minCa)} - ${formatNumberWithSuffix(bhkData.maxCa)} sq ft`}
               </div>
             </div>
           ))
