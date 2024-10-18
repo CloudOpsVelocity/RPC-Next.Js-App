@@ -54,7 +54,7 @@ export default function ProjectDetailsP({
         selectedPhase.propTypeOverview &&
         Object.keys(selectedPhase.propTypeOverview).includes(propertyType)
     );
-    
+
   return (
     <div
       className="w-[95%] sm:w-[90%] mb-[3%] sm:mb-[0%] scroll-mt-[150px] sm:mt-[50px]"
