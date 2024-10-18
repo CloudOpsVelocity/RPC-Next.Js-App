@@ -45,7 +45,8 @@ export default function PartialUnitData({
           data={{ ...data, type }}
         />
       ) : (
-        <NoProperties phase="test" />
+        <NoProperties phase={phaseList?.find((phase: any) => phase.phaseId == currentPhase)
+          ?.phaseName as any} />
       )}
     </div>
   );

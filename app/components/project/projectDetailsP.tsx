@@ -142,7 +142,7 @@ export default function ProjectDetailsP({
                 title="Land Area"
                 value={
                   selectedPhase.landArea
-                    ? `${sqftToAcres(selectedPhase.landArea).toFixed(2)} Acers`
+                    ? `${(selectedPhase.landArea)} Acers`
                     : null
                 }
                 className={styles.box}
