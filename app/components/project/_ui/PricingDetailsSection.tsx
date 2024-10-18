@@ -106,18 +106,24 @@ const PricingSection = ({ unitData, projName, phaseList }: any) => {
                 {formatCurrency(filteredData[bhkType].minPrice)} -
                 {formatCurrency(filteredData[bhkType].maxPrice)}
               </div>
-              <div className="text-sm sm:text-base text-gray-700 font-semibold">
+       {propCgId !== 32 ? <>  <div className="text-sm sm:text-base text-gray-700 font-semibold">
                 <span className="font-medium text-gray-800">
                   Super-Built Up Area:
                 </span>{" "}
-                {filteredData[bhkType].minSba === filteredData[bhkType].maxSba ? `${formatNumberWithSuffix(filteredData[bhkType].minSba)} sq ft` : `${formatNumberWithSuffix(filteredData[bhkType].minSba)} - ${formatNumberWithSuffix(filteredData[bhkType].maxSba)} sq ft`}
+                {filteredData[bhkType].minSba === filteredData[bhkType].maxSba ? `${formatNumberWithSuffix(filteredData[bhkType].minSba, false)} sq ft` : `${formatNumberWithSuffix(filteredData[bhkType].minSba, false)} - ${formatNumberWithSuffix(filteredData[bhkType].maxSba, false)} sq ft`}
               </div>
               <div className="text-sm sm:text-base text-gray-700 font-semibold">
                 <span className="font-medium text-gray-800">
                   Carpet Area:
                 </span>{" "}
-                {filteredData[bhkType].minCa === filteredData[bhkType].maxCa ? `${formatNumberWithSuffix(filteredData[bhkType].minCa)} sq ft` : `${formatNumberWithSuffix(filteredData[bhkType].minCa)} - ${formatNumberWithSuffix(filteredData[bhkType].maxCa)} sq ft`}
-              </div>
+                {filteredData[bhkType].minCa === filteredData[bhkType].maxCa ? `${formatNumberWithSuffix(filteredData[bhkType].minCa, false)} sq ft` : `${formatNumberWithSuffix(filteredData[bhkType].minCa, false)} - ${formatNumberWithSuffix(filteredData[bhkType].maxCa, false)} sq ft`}
+              </div> </>: <div className="text-sm sm:text-base text-gray-700 font-semibold">
+                <span className="font-medium text-gray-800">
+                  Plot Area:
+                </span>{" "}
+                {filteredData[bhkType].minPa === filteredData[bhkType].maxPa ? `${formatNumberWithSuffix(filteredData[bhkType].minPa, false)} sq ft` : `${formatNumberWithSuffix(filteredData[bhkType].minPa, false)} - ${formatNumberWithSuffix(filteredData[bhkType].maxPa, false)} sq ft`}
+              </div>}
+             
             </div>
           ))
         ) : (

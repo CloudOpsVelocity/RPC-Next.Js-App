@@ -23,13 +23,13 @@ function formatCurrency(input: number | string): string {
   if (value >= 10000000) {
     const croreValue = (value / 10000000).toFixed(2);
     const formattedValue = parseFloat(croreValue); // Convert to number to remove trailing zeros
-    return `₹ ${formatNumberWithCommas(formattedValue)} Cr`;
+    return `₹ ${formatNumberWithCommas(formattedValue)} Cr*`;
   } else if (value >= 100000) {
     const lakhValue = (value / 100000).toFixed(2);
     const formattedValue = parseFloat(lakhValue); // Convert to number to remove trailing zeros
-    return `₹ ${formatNumberWithCommas(formattedValue)} Lac`;
+    return `₹ ${formatNumberWithCommas(formattedValue)} Lac*`;
   } else {
-    return `₹ ${formatNumberWithCommas(value)}`;
+    return `₹ ${formatNumberWithCommas(value)}*`;
   }
 }
 
@@ -41,7 +41,7 @@ function formatCurrency(input: number | string): string {
 export { formatCurrency };
 
 
-function formatNumberWithSuffix(input: number | string): string {
+function formatNumberWithSuffix(input: number | string, isStar: boolean = true): string {
   // Convert input to number, handling string input and invalid strings
   const value = typeof input === 'string' ? parseFloat(input) : input;
 
@@ -66,13 +66,13 @@ function formatNumberWithSuffix(input: number | string): string {
   if (value >= 10000000) {
     const croreValue = (value / 10000000).toFixed(2);
     const formattedValue = parseFloat(croreValue); // Convert to number to remove trailing zeros
-    return `${formatNumberWithCommas(formattedValue)} Cr`;
+    return `${formatNumberWithCommas(formattedValue)} Cr${isStar ? '*' : ''}`;
   } else if (value >= 100000) {
     const lakhValue = (value / 100000).toFixed(2);
     const formattedValue = parseFloat(lakhValue); // Convert to number to remove trailing zeros
-    return `${formatNumberWithCommas(formattedValue)} Lac`;
+    return `${formatNumberWithCommas(formattedValue)} Lac${isStar ? '*' : ''}`;
   } else {
-    return `${formatNumberWithCommas(value)}`;
+    return `${formatNumberWithCommas(value)}${isStar ? '*' : ''}`;
   }
 }
 

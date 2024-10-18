@@ -107,7 +107,7 @@ export default function Overview({
             key="totalUnits"
             icon={<TotalLandArea />} // Adjust icon
             title="Units in Project"
-            value={`${formatNumberWithSuffix(totalUnit)} Units`}
+            value={`${formatNumberWithSuffix(totalUnit,false)} Units`}
             className="mr-[5%] sm:mr-[3%] xl:mr-[5%] pt-[2%] mb-[3%] sm:mb-[1.5%] xl:mb-[3%]  "
           />
           <ProjBasicDetails

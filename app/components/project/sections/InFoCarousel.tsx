@@ -100,23 +100,23 @@ export default function InFoCarousel({ partialUnitData }: Props) {
                   <td className=" w-[180px] md:w-[220px] bg-[#FFF] text-gray-900 text-[16px] md:text-[18px] not-italic font-semibold h-[60px] flex  justify-center text-center items-center border-t-0 border-r-[0.5px] border-r-[#D9DFE3] border-b-[0.5px] border-b-[#D9DFE3] border-solid  ">
                     {propCgId === 32
                       ? data[item].minPa === data[item].maxPa
-                        ? `${formatNumberWithSuffix(data[item].minPa)} sq.ft`
-                        : `${formatNumberWithSuffix(data[item].minPa)} - ${formatNumberWithSuffix(data[item].maxPa)} sq.ft`
+                        ? `${formatNumberWithSuffix(data[item].minPa, false)} sq.ft`
+                        : `${formatNumberWithSuffix(data[item].minPa, false)} - ${formatNumberWithSuffix(data[item].maxPa, false)} sq.ft`
                       : data[item].minSba !== data[item].maxSba
                       ? `${formatNumberWithSuffix(
-                          data[item].minSba
-                        )} - ${formatNumberWithSuffix(data[item].maxSba)} sq.ft`
-                      : `${formatNumberWithSuffix(data[item].minSba)} sq.ft`}
+                          data[item].minSba, false
+                        )} - ${formatNumberWithSuffix(data[item].maxSba, false)} sq.ft`
+                      : `${formatNumberWithSuffix(data[item].minSba, false)} sq.ft`}
                   </td>
                   {propCgId !== 32 && (
                     <td className=" w-[180px] md:w-[220px] bg-[#EEF7FF] text-gray-900 text-[16px] md:text-[18px] not-italic font-semibold h-[60px] flex justify-center text-center items-center border-t-0 border-r-[0.5px] border-r-[#D9DFE3] border-b-[0.5px] border-b-[#D9DFE3] border-solid">
                       {data[item].minCa !== data[item].maxCa
                         ? `${formatNumberWithSuffix(
-                            data[item].minCa
+                            data[item].minCa, false
                           )} - ${formatNumberWithSuffix(
-                            data[item].maxCa
+                            data[item].maxCa, false
                           )} sq.ft`
-                        : `${formatNumberWithSuffix(data[item].minCa)} sq.ft`}
+                        : `${formatNumberWithSuffix(data[item].minCa, false)} sq.ft`}
                     </td>
                   )}
 

@@ -52,7 +52,6 @@ const FirstBlock: React.FC<Props> = ({
         slug: data.data?.userName,
         city: data.data?.cityName,
       })
-      console.log(urlBuilder)
     }
 
   });
@@ -177,11 +176,7 @@ const FirstBlock: React.FC<Props> = ({
                 <span className="text-[#001F35]  sm:text-[14px] xl:text-[24px] sm:font-[600] text-wrap not-italic font-medium leading-[normal]">
                   ₹{" "}
                   {
-                    <NumberFormatter
-                      thousandSeparator
-                      value={projectDetails.basePrice}
-                      thousandsGroupStyle="lakh"
-                    />
+                   formatNumberWithSuffix(projectDetails.basePrice,)
                   }{" "}
                   Base Price/sq.ft onwards
                 </span>
