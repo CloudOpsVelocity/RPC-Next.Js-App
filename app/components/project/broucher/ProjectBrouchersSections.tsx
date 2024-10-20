@@ -2,6 +2,7 @@
 import React, { useEffect, useState, useRef, useCallback, memo } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
 import { FaChevronLeft, FaChevronRight, FaDownload, FaSpinner } from 'react-icons/fa';
+import { PopupOpenSvg } from '@/app/images/commonSvgs';
 
 pdfjs.GlobalWorkerOptions.workerSrc = process.env.NODE_ENV === "development" 
   ? new URL('pdfjs-dist/build/pdf.worker.min.mjs', import.meta.url).toString() 
@@ -126,7 +127,7 @@ const ProjectBrouchersSection = ({ projName }: { projName: string }): JSX.Elemen
               }`}
               aria-pressed={state.activePhase.id === phase.id}
             >
-              {phase.name}
+            {projName} :   {phase.name}
             </button>
           ))}
         </div>
@@ -136,7 +137,15 @@ const ProjectBrouchersSection = ({ projName }: { projName: string }): JSX.Elemen
         className="bg-white rounded-lg shadow-lg p-4 max-w-full mx-auto h-[600px] flex flex-col justify-between items-center overflow-y-auto"
         ref={pdfContainerRef}
       >
-        <div className="flex-grow w-full overflow-hidden flex justify-center items-center">
+        <div className="flex-grow w-full overflow-hidden flex justify-center items-center relative">
+            <a href={state.activePhase.brochure}
+              target='_blank'
+              download
+              className='absolute top-0 right-0'
+              >
+      <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[36px] lg:h-[36px]  " />
+              </a>
+  
           {state.loading ? (
             <FaSpinner className="animate-spin text-[#0073C6] h-8 w-8" />
           ) : state.errorMessage ? (
@@ -170,11 +179,12 @@ const ProjectBrouchersSection = ({ projName }: { projName: string }): JSX.Elemen
             <FaChevronLeft className="h-6 w-6" />
           </button>
           <div className="flex items-center space-x-4 relative group">
-            <span className="text-gray-600">
+            <span className="text-gray-600 font-bold">
               Page {state.pageNumber} of {state.numPages || '--'}
             </span>
             <a
               href={state.activePhase.brochure}
+              target='_blank'
               download
               className={`bg-[#0073C6] text-white px-5 py-2 rounded-full flex items-center space-x-2 transition-all duration-300 ease-in-out transform group-hover:scale-105 hover:shadow-lg ${state.loading ? 'cursor-not-allowed' : ''}`}
               aria-label={`Download ${state.activePhase.name} brochure`}
