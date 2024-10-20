@@ -148,13 +148,14 @@ const ProjectBrouchersSection = ({ projName }: { projName: string }): JSX.Elemen
               file={state.blobCache[state.activePhase.id] || state.activePhase.brochure}
               onLoadSuccess={onDocumentLoadSuccess}
               loading={<FaSpinner className="animate-spin text-[#0073C6] h-8 w-8" />}
+              
             >
               <Page
                 pageNumber={state.pageNumber}
                 renderTextLayer={false}
                 renderAnnotationLayer={false}
                 scale={0.7}
-                className="shadow-md rounded"
+                className="shadow-md rounded overflow-y-auto"
               />
             </Document>
           )}
