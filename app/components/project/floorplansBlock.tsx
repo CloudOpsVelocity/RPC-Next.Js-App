@@ -52,6 +52,7 @@ import { useMediaQuery } from "@mantine/hooks";
 import Image from "next/image";
 import PartialUnitData from "./sections";
 import { useFloorPlanStore } from "@/app/store/project/project.floorplan";
+import useRecentUnits from "@/app/hooks/project/useRecentUnits";
 
 type Props = {
   data: PhaseList[];
@@ -187,9 +188,9 @@ Props) {
       return true;
     }
   };
-  const { setFloorplans } = useFloorPlanStore();
+  // const { setFloorplans } = useFloorPlanStore();
+  const {setFilteredUnits} = useRecentUnits()
   const handleOpen = () => {
-    setFloorplans(projectUnitsData);
     setSelectedFloor({
       ...selectedFloor,
       floorPlanUrl: selectedFloor.floorPlanUrl ?? ImgNotAvail,
@@ -201,7 +202,6 @@ Props) {
   const handlePricingFloorPlanClick = (selectedBhk: any) => {
     if (selectedBhk.bhkName.includes("_")) {
       const [length, width] = selectedBhk.bhkName.split("_");
-
       form.setValues({
         ...setPropertyValues(
           {
@@ -218,7 +218,6 @@ Props) {
         ...filtertedFloor[0],
         floorPlanUrl: filtertedFloor[0]?.floorPlanUrl ?? ImgNotAvail,
       });
-      setFloorplans(filtertedFloor);
       open("floor");
       return;
     }
@@ -243,6 +242,7 @@ Props) {
     const filteredFloors = projectUnitsData.filter(
       (floor: any) => floor.unitNumber === selectedFloor.unitNumber
     );
+    setFilteredUnits(filteredFloors);
     setFloorsArray(filteredFloors);
   };
   const [bhk, setBhk] = useState("0");

@@ -13,8 +13,6 @@ import { setPropertyValues } from "@/app/utils/dyanamic/projects";
 import Image from "next/image";
 import Button from "../atoms/buttons/variansts";
 import { SelectCreatable } from "./_ui/input/UnitINput";
-import { Form } from "react-hook-form";
-import { useFloorPlanStore } from "@/app/store/project/project.floorplan";
 interface UnitData {
   unitIdEnc: string;
   projIdEnc: string;
