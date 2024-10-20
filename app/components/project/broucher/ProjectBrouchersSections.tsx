@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState, useRef, useCallback, useMemo, memo } from 'react';
+import React, { useEffect, useState, useRef, useCallback, memo } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
 import { FaChevronLeft, FaChevronRight, FaDownload, FaSpinner } from 'react-icons/fa';
 
@@ -31,7 +31,7 @@ const projectPhases: ProjectPhase[] = [
   },
 ];
 
-const ColorfulProjectBrochures = (): JSX.Element => {
+const ProjectBrouchersSection = ({ projName }: { projName: string }): JSX.Element => {
   const [state, setState] = useState<{
     activePhase: ProjectPhase;
     numPages: number | null;
@@ -109,10 +109,13 @@ const ColorfulProjectBrochures = (): JSX.Element => {
     } focus:z-10 focus:ring-2 focus:ring-[#0073C6] focus:text-[#0073C6] hover:scale-105`;
 
   return (
-    <div className="container mx-auto px-4 py-8 bg-gray-100 min-h-screen">
-      <h2 className="text-4xl font-bold mb-8 text-center text-gray-800">Project Brochures</h2>
+    <div className="w-[90%] mx-auto my-8 bg-gray-50">
+      <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-semibold mb-[12px] capitalize break-words pl-3 pt-2">
+        <span>Explore the Comprehensive Brochures of </span>
+        <span className="text-[#148B16] font-bold">{projName}</span>
+      </h2>
       
-      <div className="mb-6 flex justify-center flex-wrap">
+      <div className="mb-1 flex-wrap pl-3">
         <div className="inline-flex rounded-md shadow-sm space-x-2" role="group">
           {projectPhases.map((phase) => (
             <button
@@ -130,7 +133,7 @@ const ColorfulProjectBrochures = (): JSX.Element => {
       </div>
 
       <div
-        className="bg-white rounded-lg shadow-lg p-4 md:p-6 max-w-full mx-auto h-[600px] flex flex-col justify-between items-center"
+        className="bg-white rounded-lg shadow-lg p-4 max-w-full mx-auto h-[600px] flex flex-col justify-between items-center overflow-y-auto"
         ref={pdfContainerRef}
       >
         <div className="flex-grow w-full overflow-hidden flex justify-center items-center">
@@ -140,6 +143,7 @@ const ColorfulProjectBrochures = (): JSX.Element => {
             <p className="text-red-500">{state.errorMessage}</p>
           ) : (
             <Document
+            className={"overscroll-y-scroll"}
               key={state.activePhase.id}
               file={state.blobCache[state.activePhase.id] || state.activePhase.brochure}
               onLoadSuccess={onDocumentLoadSuccess}
@@ -149,7 +153,7 @@ const ColorfulProjectBrochures = (): JSX.Element => {
                 pageNumber={state.pageNumber}
                 renderTextLayer={false}
                 renderAnnotationLayer={false}
-                scale={state.pageScale}
+                scale={0.7}
                 className="shadow-md rounded"
               />
             </Document>
@@ -191,4 +195,4 @@ const ColorfulProjectBrochures = (): JSX.Element => {
   );
 }
 
-export default memo(ColorfulProjectBrochures);
+export default memo(ProjectBrouchersSection);

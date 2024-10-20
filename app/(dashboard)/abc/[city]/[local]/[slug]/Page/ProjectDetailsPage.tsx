@@ -6,7 +6,6 @@ import FirstBlock from "@/app/components/project/firstBlock";
 import Overview from "@/app/components/project/overview";
 import About from "@/app/components/project/about";
 import Navigation from "@/app/components/project/navigation";
-import Link from "next/link";
 import ProjectDetailsP from "@/app/components/project/projectDetailsP";
 import ProjectDrawer from "@/app/components/project/Drawer";
 import LeafMap from "@/app/components/project/map";
@@ -31,9 +30,11 @@ import Reviews from "@/app/components/project/reviews";
 import PartialUnitData from "@/app/components/project/sections";
 import PropertyDataDisplay from "@/app/components/project/_ui/PricingDetailsSection";
 import Disclamer from "@/app/components/builder/Disclamer";
-import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
-import { slugify } from "@/app/utils/linkRouters/ProjectLink";
 import BreadCrumbs from "@/app/components/project/breadcrum/BreadCrum";
+import dynamic from "next/dynamic";
+const ProjectBrouchersSection = dynamic(() => import("@/app/components/project/broucher/ProjectBrouchersSections"), {
+  ssr: false,
+})
 type Props = {
   projResponse: any;
   amenitiesFromDB: any;
@@ -190,6 +191,7 @@ export default async function ProjectsDetailsPage({
             mapData={nearByLocations}
           />
         )}
+        <ProjectBrouchersSection  projName={data.projectName} />
         <ErrorContainer data={data.specificationList}>
           <Specifications
             data={data.specificationList}
