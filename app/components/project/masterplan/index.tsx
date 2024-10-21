@@ -50,7 +50,7 @@ export default function MasterPlan({
         id="view-master-plan"
       >
         <div>
-          <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[12px] capitalize break-words text-wrap w-[78%]">
+          <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[12px] capitalize break-words text-wrap sm:text-nowrap w-[85%]">
             Master Plan Of{" "}
             <span className="text-[#148B16] font-[700] ">{projName}</span>
           </h2>

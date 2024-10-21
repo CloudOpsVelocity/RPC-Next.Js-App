@@ -26,7 +26,6 @@ import { formatNumberWithSuffix } from "@/app/utils/numbers";
 import ColumnVirtualizerFixed from "./VitualizedListCol";
 import { SelectCreatable } from "./filters/UnitINput";
 import useRecentUnits from "@/app/hooks/project/useRecentUnits";
-import { truncateText } from "@/app/utils/letters";
 import RecentSearchedUnits from "../_ui/RecentSearchedUnits";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import { projectReqDataAtom } from "@/app/store/project/project.req";

@@ -62,7 +62,7 @@ export default function Banner({
           <Image
             src="/abc/rating.svg"
             alt="Project Rating Illustration"
-            className="h-[320px] w-[320px] absolute -top-[87px] right-0"
+            className=" sm:h-[240px] sm:w-[240px] xl:h-[320px] xl:w-[320px] absolute sm:-top-[24px] xl:-top-[87px] right-0"
             width={600}
             height={300}
           />
@@ -94,7 +94,7 @@ const AddRating = ({
   projIdEnc: string;
 }) => {
   const { data: session } = useSession();
-  const { data, updateRatings } = useDynamicProj();
+  const { data, updateRatings } = useDynamicProj(projIdEnc);
 
   const [status, setStatus] = useState<
     "pending" | "idle" | "success" | "error"

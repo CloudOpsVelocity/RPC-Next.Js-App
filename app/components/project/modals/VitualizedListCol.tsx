@@ -64,9 +64,9 @@ const ColumnVirtualizerFixed: React.FC<ColumnVirtualizerFixedProps> = ({
 
       <div
         ref={parentRef}
-        className={`mx-auto floorplan flex  items-center justify-${position}`}
+        className={`mx-auto floorplan flex  items-center justify-${position} w-full sm:w-[610px]`}
         style={{
-          width: `${width}px`,
+          // width: `${width}px`,
           height: `${height}px`,
           overflow: "auto",
         }}

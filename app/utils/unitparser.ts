@@ -39,11 +39,8 @@ const parseUnitStrings = (
       parsedUnits.push(unit);
     }
   });
-  const sortedUnits = sortUnits(parsedUnits);
-
-  return propertyType && propertyType === "plot"
-    ? sortedUnits.slice(0, 2)
-    : sortedUnits.slice(0, 2);
+  const sortedUnits = sortUnits(parsedUnits).slice(0,3)
+ return sortedUnits;
 };
 
 export { parseUnitStrings as parseUnits, sortUnits };

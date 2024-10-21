@@ -2,6 +2,7 @@ import { useState, useRef, useMemo } from "react";
 import { Combobox, InputBase, useCombobox } from "@mantine/core";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import S from "@/app/styles/Floorplan.module.css";
+import { DropDownIcon } from "@/app/images/commonSvgs";
 
 interface SelectCreatableProps {
   data: string[];
@@ -54,7 +55,7 @@ export function SelectCreatable({
         <InputBase
           size="sm"
           label={label}
-          rightSection={<Combobox.Chevron />}
+          rightSection={<DropDownIcon />}
           onChange={(event) => {
             const newValue = event.currentTarget.value;
             setSearch(newValue);
@@ -77,7 +78,7 @@ export function SelectCreatable({
       </Combobox.Target>
       <Combobox.Dropdown
         ref={parentRef}
-        style={{ height: "200px", overflow: "auto" }}
+        style={{  maxHeight:"200px", overflow: "auto" }}
         onMouseDown={(e) => {
           if (e.target === parentRef.current) {
             e.preventDefault();

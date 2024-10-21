@@ -82,7 +82,7 @@ const LeafMap: React.FC<{
   return Object.keys(mapData).length > 0 ? (
     <div
       className="w-full scroll-mt-[170px] mx-auto mb-[3%] sm:mb-0 sm:pt-less-screen-spacing"
-      id="near-by-projects"
+      id="location-map"
     >
       <div className="flex justify-between w-[95%] sm:w-[90%] mx-auto scroll-mt-[200px]">
         {type === "prop" ? (
@@ -185,7 +185,7 @@ const LeafMap: React.FC<{
 
       {mapData[selected] && mapData[selected].length > 0 && (
         <div className="mt-8 w-[90%] mx-auto hidden sm:block">
-          <h1 className="text-h2 sm:text-[22px] xl:text-[32px] font-semibold mb-[12px] capitalize break-words">
+          <h1 className="text-h2 sm:text-[22px] xl:text-[32px] font-semibold mb-[12px] capitalize break-words scroll-mt-[180px] " id="near-by-projects">
             Nearby <span className="text-[#148B16] ml-1">{projName} </span>
           </h1>
           <div className="flex gap-2 mt-3 flex-wrap sm:gap-x-[2.5] xl:gap-x-5">
@@ -207,7 +207,7 @@ const LeafMap: React.FC<{
     </div>
   ) : (
     <div
-      id="near-by-projects"
+      id="location-map"
       className="w-[95%] md:w-[90%] scroll-mt-[180px]  sm:mt-[20px] xl:mt-[50px] justify-center"
     >
       <div className="flex justify-between w-[90%] ">

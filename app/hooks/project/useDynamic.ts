@@ -5,9 +5,8 @@ import { Old_Standard_TT } from "next/font/google";
 import { useParams } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
-export default function useDynamicProj() {
+export default function useDynamicProj(slug:string) {
   const { data: Session } = useSession();
-  const { slug } = useParams<{ slug: string }>();
   const getData = async () => {
     const res = await axios.get(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/dynamic-data?projIdEnc=${slug}`

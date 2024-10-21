@@ -77,7 +77,6 @@ export default function PropertyTypeDetailsCrad({
   const { data: projectUnitsData, isLoading } = useQuery({
     queryKey: [`/${getPropId(propertyType)}/${phase}/${slug}`],
     queryFn: () => getProjectUnits(slug, phase, getPropId(propertyType)),
-    // enabled: cg?.unitTypes?.length > 0,
     ...RTK_CONFIG,
   });
   const handleOpen = () => {
@@ -218,22 +217,13 @@ export default function PropertyTypeDetailsCrad({
         <p className="text-[14px] sm:text-[18px] xl:text-[22px]  text-right text-[#4D6677]  not-italic font-semibold leading-[normal] capitalize mt-3 ">
           Unit types : <br />{" "}
           {propertyType !== "plot" ? (
-            <span
+            <p
               className={clsx(
-                "text-[#242424] text-right text-[12px] sm:text-[16px] xl:text-lg not-italic font-semibold leading-[22px] max-w-[135px] inline-block min-h-[44px] w-[80%]",
-                propertyType === "plot" && "!max-w-full"
+                "text-[#242424] text-right text-[12px] sm:text-[16px] xl:text-lg not-italic font-semibold leading-[22px] max-w-[240px] inline-block w-[100%] line-clamp-1",
               )}
             >
-              {parseUnits(cg?.unitTypes, propertyType).map(
-                (unitType, index, array) => (
-                  <React.Fragment key={`unitType_${unitType}`}>
-                    {unitType}
-                    {index < array.length - 1 && ", "}
-                    {index === 1 && <br />}
-                  </React.Fragment>
-                )
-              )}
-            </span>
+              {parseUnits(cg?.unitTypes, propertyType).join(", ")}
+            </p>
           ) : (
             <>
               <p className="text-[#242424] text-right text-[12px] sm:text-base not-italic font-semibold leading-[normal]">

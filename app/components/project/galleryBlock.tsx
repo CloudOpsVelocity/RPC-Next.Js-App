@@ -198,8 +198,8 @@ export default function GalleryBlock({
                         src={img as string}
                         className={`!w-full rounded-[5px] cursor-pointer h-[64px] md:h-[90px] object-cover`}
                         content=""
-                        onClick={() => handleMediaClick(img as string, ind)}
-                        controls
+                        onClick={(e) => {   e.preventDefault(); handleMediaClick(img as string, ind)}}
+                        // controls
                       >
                         <track
                           src="/audio.vtt" // Replace with the actual path to your captions file
@@ -210,14 +210,7 @@ export default function GalleryBlock({
                         />
                       </video>
                     )}
-                    {/*   <video
-                      key={img}
-                      src={img as string}
-                      className={`!w-full rounded-[5px] cursor-pointer  h-[64px] md:h-[90px] object-cover }`}
-                      content=""
-                      onClick={() => handleMediaClick(img as string, ind)}
-                    /> */}
-                    <span className="absolute pointer-events-none ">
+                    <span className="absolute pointer-events-none " onClick={(e) => {handleMediaClick(img as string, ind)}}>
                       {videoPlayIcon}
                     </span>
                   </div>

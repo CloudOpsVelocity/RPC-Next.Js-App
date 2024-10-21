@@ -13,24 +13,7 @@ import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-
 type Props = {
   params: { city: string; lt: string; slug: string };
 };
-async function getProjectSlug(pathname: string) {
-  const staticDir = path.join(process.cwd(), "static");
-  const filePath = path.join(staticDir, "projectSlugs.json");
-  console.time("getProjectSlugs");
-  try {
-    const jsonData = fs.readFileSync(filePath, "utf8");
-    const builderJsonData = JSON.parse(jsonData);
-    const matchingPath = Object.keys(builderJsonData).find((key) => {
-      return key.split("/").slice(0, -3).join("/") === pathname;
-    });
-    return matchingPath ? builderJsonData[matchingPath] : null;
-  } catch (error) {
-    console.log(error);
-  } finally {
-    console.timeEnd("getProjectSlugs");
-  }
-  // Read the JSON file
-}
+
 export default async function Page({ params }: Props) {
   const { city, lt, slug: name } = params;
   const pathname = `${BASE_PATH_PROJECT_DETAILS}/${city}/${lt}/${name}`;
