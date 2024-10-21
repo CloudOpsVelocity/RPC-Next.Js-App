@@ -260,7 +260,7 @@ const BuilderCarousel = ({
         {data &&
           data?.map((project: any, index: number) => {
             return (
-              <CarouselSlide key={Math.random()} className="!h-[520px] sm:!h-[500px]">
+              <CarouselSlide key={`builder${project.name}`} className="!h-[520px] sm:!h-[500px]">
                 <ProjectCard type={type} cardData={project} refetch={refetch} />
               </CarouselSlide>
             );

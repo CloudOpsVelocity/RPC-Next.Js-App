@@ -158,6 +158,7 @@ export default async function Page({ params }: Props) {
         />
         {/* Property Details */}
         <ProjectDetailsP
+        projData={data}
           projName={data.projectName}
           data={data.phases}
           slug={slug}
@@ -234,10 +235,6 @@ export default async function Page({ params }: Props) {
             content={data.wbtp}
           />
         )}
-        {/* <Reviews projName={data.projectName} /> */}
-        {/* <DownloadBroucher
-  url={`${data?.media?.projBroucherUrl}?${Math.random()}`}
-/> */}
         <div
           id="faq"
           className="scroll-mt-[70px] m-auto w-[95%] sm:w-[90%] flex justify-start items-start"

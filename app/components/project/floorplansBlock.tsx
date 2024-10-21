@@ -750,17 +750,8 @@ Props) {
                       >
                         Click on image to open floor plan details
                       </p>
-
-                      {/* {floorPlanType == "unit" && (
-                      <CarouselSuggestion
-                        form={byUnitForm}
-                        propCgId={propCgId}
-                      />
-                    )} */}
-
                       {floorPlanType == "unit" && !isMobile && (
                         <UnitsImagesBlock
-                          // floorsArray={projectUnitsData && projectUnitsData.length > 0 ? projectUnitsData : [] }
                           form={byUnitForm}
                           propCgId={propCgId}
                         />

@@ -42,8 +42,8 @@ const HomeCarousel = () => {
       px={10}
     >
       {data?.project?.map((post, index) => (
-        <Carousel.Slide key={Math.random()} className="">
-          <ProjectCard type="proj" key={Math.random()} cardData={post} />
+        <Carousel.Slide key={post.projName} >
+          <ProjectCard type="proj"  cardData={post} />
         </Carousel.Slide>
       ))}
     </Carousel>

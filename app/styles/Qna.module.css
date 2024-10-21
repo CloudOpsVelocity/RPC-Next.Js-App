@@ -22,12 +22,12 @@
 
 .content {
   border-radius: 20px;
-  margin-top: 70px;
+  /* margin-top: 70px; */
 }
 
-.overlay {
+/* .overlay {
   margin-top: 70px;
-}
+} */
 
 .disabled {
   display: none;

@@ -93,7 +93,7 @@ export default function MasterPlanPopup({
       </Modal>
       <Image
         radius="md"
-        src={`${url}?v=${Math.random()}`}
+        src={`${url}`}
         mah={600}
         w="100%"
         fit="contain"
@@ -125,7 +125,7 @@ const Content = ({ url }: { url: string }) => {
           radius="md"
           m={"auto"}
           // fit="fill"
-          src={`${url}?v=${Math.random()}`}
+          src={`${url}`}
           // component={NextImage}
           mah={700}
           // w="100%"

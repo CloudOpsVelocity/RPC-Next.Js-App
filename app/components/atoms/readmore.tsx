@@ -45,7 +45,6 @@ const ReadMore: React.FC<ReadMoreProps> = ({
           dangerouslySetInnerHTML={{ __html: getClampedText() }}
           className="prose-p:py-1 prose-no-break "
         />
-        {/* {getClampedText()} */}
         {!expanded && shouldShowReadMore && "... "}
         {shouldShowReadMore && (
           <span className="text-[#0073C6] text-[14px]  sm:text-[18px] xl:text-[22px] not-italic font-semibold cursor-pointer">

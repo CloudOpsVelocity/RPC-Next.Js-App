@@ -1,7 +1,7 @@
 "use client";
 
 import { indexOf, set } from "lodash";
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 // import ColorfulProjectBrochures from "./components/Section/ProjectBrochers";
 import dynamic from "next/dynamic"
 const ColorfulProjectBrochures = dynamic(() => import("./components/Section/ProjectBrochers"), { ssr: false });
@@ -234,8 +234,9 @@ export default function Page() {
 //   }
 //   return steps;
 // };
+
   return (
-    <div>sdfsdfe</div>
+    <div>THE TEST PAGE</div>
     // <VisualRepresentationOfArrayWhileLooping sortAlgorithm={bubbleSort} />
   );
 }

@@ -12,7 +12,7 @@ import {
   villamentCardImg,
 } from "@/app/images/commonImages";
 import { formatCurrency } from "@/app/utils/numbers";
-import { useAtom, useAtomValue } from "jotai";
+import { useAtom } from "jotai";
 import { overviewAtom } from "@/app/store/overview";
 import {
   ApartmentIcon,

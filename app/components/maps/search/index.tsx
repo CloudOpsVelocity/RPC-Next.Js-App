@@ -88,10 +88,9 @@ const MapContent = ({ data }: any): JSX.Element | null => {
       const itemPropType = isProp ? item?.propTypeName : item?.propType;
 
  
-      console.log(item)
       return (
         <Marker
-          key={Math.random()}
+          key={itemId}
           position={[parseFloat(item?.lat || 0), parseFloat(item?.lang || 0)]}
           eventHandlers={{
             click: () => {
@@ -109,7 +108,7 @@ const MapContent = ({ data }: any): JSX.Element | null => {
         >
           {selected && selectedId === itemId && itemPropType === selectedPropType && (
             <Tooltip
-              key={"tooltip_"+Math.random()}
+              key={"tooltip_"+itemId}
               opacity={1}
               permanent
               direction="top"
@@ -117,25 +116,25 @@ const MapContent = ({ data }: any): JSX.Element | null => {
               className="min-w-fit"
             >
               {!isProp ? (
-                <TooltipProj key={"tooltipProj_"+Math.random()} data={item} />
+                <TooltipProj  data={item} />
               ) : (
-                <TooltipProp key={"tooltipProp_"+Math.random()} data={item} />
+                <TooltipProp  data={item} />
               )}
             </Tooltip>
           )}
 
         {selected && selectedId === itemId && itemPropType === selectedPropType && (
           <Tooltip
-            key={"tooltip2_"+Math.random()}
+            key={"tooltip2_"+itemId}
             opacity={1}
             direction="top"
             offset={[10, -35]}
             className="min-w-fit"
           >
             {!isProp ? (
-              <TooltipProj key={"tooltipProj2_"+Math.random()} data={item} />
+              <TooltipProj  data={item} />
             ) : (
-              <TooltipProp key={"tooltipProp2_"+Math.random()} data={item} />
+              <TooltipProp  data={item} />
             )}
           </Tooltip>
           )}

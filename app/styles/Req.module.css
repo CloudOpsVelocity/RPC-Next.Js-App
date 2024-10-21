@@ -7,7 +7,7 @@
 
 .content {
   border-radius: 20px;
-  margin-top: 90px;
+  /* margin-top: 90px; */
 }
 
 .body {
@@ -15,9 +15,9 @@
   /* margin-top: 90px; */
   padding: 0;
 }
-.overlay {
+/* .overlay {
   margin-top: 70px;
-}
+} */
 
 .textInput {
   height: 40px !important;

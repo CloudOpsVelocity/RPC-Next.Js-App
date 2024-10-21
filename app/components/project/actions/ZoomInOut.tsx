@@ -35,7 +35,7 @@ export default function ZoomInOut({ className }: Props) {
     >
       {config.buttons.map((item, index) => (
         <button
-          key={Math.random()}
+          key={item.title}
           className={config.styles}
           onClick={() => handleButtonClick(item.onClick)}
         >

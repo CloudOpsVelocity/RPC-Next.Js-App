@@ -1,6 +1,6 @@
 "use client";
 import { Modal, Select, Tooltip } from "@mantine/core";
-import { useRef } from "react";
+import { use, useRef } from "react";
 import {
   DropDownIcon,
   FloorPlanModalIcon,
@@ -28,6 +28,8 @@ import { SelectCreatable } from "./filters/UnitINput";
 import useRecentUnits from "@/app/hooks/project/useRecentUnits";
 import { truncateText } from "@/app/utils/letters";
 import RecentSearchedUnits from "../_ui/RecentSearchedUnits";
+import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
+import { projectReqDataAtom } from "@/app/store/project/project.req";
 
 type Props = {
   propCgId: any;
@@ -114,7 +116,7 @@ function FloorPlanModal({
     form.setFieldValue(key, null);
     handleSearch(key);
   };
-  const [o, { open }] = useSubFloorPlanPopup();
+  const [o] = useSubFloorPlanPopup();
   const showClearAll = Object.values(form.values).some(
     (value) => value !== null && value !== "" && value !== 0
   );
@@ -707,6 +709,8 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
 };
 const RightSection = ({ propCgId, className }: any) => {
   const data = useAtomValue(selectedFloorAtom);
+  const [,{open}] = useReqCallPopup()
+  const projectReqData = useAtomValue(projectReqDataAtom);
   return (
     <div
       className={clsx(
@@ -980,6 +984,19 @@ const RightSection = ({ propCgId, className }: any) => {
             </p>
           </div>
         )}
+        <button className="bg-btnPrimary text-white w-full mt-3 py-2 rounded-md font-bold" onClick={()=>{
+          open({
+            modal_type:"REQ_QUOTE",
+            source:"projCard",
+            reqId:data?.projIdEnc,
+            postedByName:projectReqData.postedByName,
+            postedId:projectReqData.postedById,
+            title:data?.unitNumber,
+            projUnitIdEnc:data?.unitIdEnc,
+          })
+        }}>
+          Request a Quote
+        </button>
       </div>
     </div>
   );
@@ -1089,7 +1106,7 @@ const MiddleSection = ({ hide = false, projName, propCgId ,allUnits,handleReset}
         data?.floorPlanUrl ? (
           <Image
             // @ts-ignore
-            src={`${data?.floorPlanUrl}?v=${Math.random()}`}
+            src={`${data?.floorPlanUrl}`}
             alt="Floor Plan"
             height={350}
             width={800}
@@ -1145,7 +1162,7 @@ const MiddleSection = ({ hide = false, projName, propCgId ,allUnits,handleReset}
                     // @ts-ignore
                     src={
                       eachObj?.floorPlanUrl
-                        ? `${eachObj?.floorPlanUrl}?v=${Math.random()}`
+                        ? `${eachObj?.floorPlanUrl}`
                         : ImgNotAvail
                     }
                     alt="Floor Plan"

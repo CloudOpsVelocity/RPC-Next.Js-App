@@ -72,7 +72,7 @@ export default function CarouselSuggestion({
                     // @ts-ignore
                     src={
                       eachObj?.floorPlanUrl
-                        ? `${eachObj?.floorPlanUrl}?v=${Math.random()}`
+                        ? `${eachObj?.floorPlanUrl}`
                         : ImgNotAvail
                     }
                     alt="Floor Plan"

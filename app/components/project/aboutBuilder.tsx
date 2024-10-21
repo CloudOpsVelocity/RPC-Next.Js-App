@@ -37,7 +37,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
             <Image
               src={
                 nzData.logo
-                  ? `${nzData.logo}?v=${Math.random()}`
+                  ? `${nzData.logo}`
                   : `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/builderpage/builder-noimage.png`
               }
               width={130}

@@ -204,7 +204,7 @@ function Dropdown() {
         >
           {unAuthorizedData.map((item, index) => (
             <Menu.Item
-              key={Math.random()}
+              key={item.url}
               classNames={{
                 itemLabel: S.itemLabel,
               }}
@@ -353,7 +353,7 @@ function MobileDropDown() {
                 </button>
               ) : (
                 <Menu.Item
-                  key={Math.random()}
+                  key={item.url}
                   classNames={{
                     itemLabel: S.itemLabel,
                   }}
@@ -389,7 +389,7 @@ function MobileDropDown() {
         >
           {unAuthorizedData.map((item, index) => (
             <Menu.Item
-              key={Math.random()}
+              key={item.url}
               classNames={{
                 itemLabel: S.itemLabel,
               }}

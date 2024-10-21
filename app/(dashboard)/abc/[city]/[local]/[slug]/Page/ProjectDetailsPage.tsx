@@ -71,7 +71,6 @@ export default async function ProjectsDetailsPage({
         content={`${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`}
       />
       <meta property="og:image" content={data.media?.coverImageUrl} />
-
       {/* <!-- Twitter Meta Tags --> */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta property="twitter:domain" content="getrightproperty.com" />
@@ -135,6 +134,7 @@ export default async function ProjectsDetailsPage({
           projName={data.projectName}
           data={data.phases}
           slug={slug}
+          projData={data}
           PhaseOverview={phaseOverview}
           isPartialData={data.partialUnitData!!}
         />
@@ -210,7 +210,6 @@ export default async function ProjectsDetailsPage({
         </ErrorContainer>
 
         <AboutBuilder id={data.builderId} />
-        {/* Why Buy This  */}
         {data.wbtp && (
           <About
             id="why-buy-this-project"
@@ -221,9 +220,6 @@ export default async function ProjectsDetailsPage({
           />
         )}
         <Reviews projName={data.projectName} projIdEnc={slug} />
-        {/* <DownloadBroucher
-  url={`${data?.media?.projBroucherUrl}?${Math.random()}`}
-/> */}
         <div
           id="faq"
           className="scroll-mt-[70px] m-auto w-[95%] sm:w-[90%] flex justify-start items-start"
@@ -242,7 +238,7 @@ export default async function ProjectsDetailsPage({
         <ProjectDrawer projName={data.projectName} />
         <FloorplanDrawer />
         <LoginPopup />
-        {/* <BaseSucess /> */}
+
       </div>
     </section>
   );

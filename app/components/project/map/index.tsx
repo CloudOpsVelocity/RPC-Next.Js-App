@@ -150,7 +150,7 @@ const LeafMap: React.FC<{
                       <LocationList
                         type="public"
                         {...location}
-                        key={Math.random()}
+                        key={location.lat}
                         origin={{
                           lat: Number(lat),
                           lng: Number(lang),
@@ -191,7 +191,7 @@ const LeafMap: React.FC<{
           <div className="flex gap-2 mt-3 flex-wrap sm:gap-x-[2.5] xl:gap-x-5">
             {downData.map((item: any, index: number) => (
               <MapCard
-                key={Math.random()}
+                key={item.lat}
                 {...item}
                 origin={{
                   lat: Number(lat),

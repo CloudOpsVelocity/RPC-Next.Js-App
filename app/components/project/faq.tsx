@@ -62,7 +62,7 @@ export default function FaqWithBg({ data, projName,slug }: FaqWithBgProps) {
               <FaqCard
                 faqQuestion={faq.faqQuestion}
                 faqAnswer={faq.faqAnswer}
-                key={Math.random()}
+                key={faq.faqAnswer}
                 last={index === data.length - 1}
               />
             ))

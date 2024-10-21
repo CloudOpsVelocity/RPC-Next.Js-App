@@ -1,6 +1,4 @@
 "use client";
-import useBuilder from "@/app/hooks/useBuilder";
-import { Phone } from "@/app/images/commonSvgs";
 import N from "@/app/styles/Numinput.module.css";
 import React, { useState } from "react";
 import { useMediaQuery } from "@mantine/hooks";
@@ -10,19 +8,15 @@ import S from "@/app/styles/Req.module.css";
 import { useForm, yupResolver } from "@mantine/form";
 import { reqSchema } from "@/app/validations/project";
 import { addContact, sendContact } from "@/app/utils/api/actions/contact";
-import { useParams } from "next/navigation";
 import { popupStateAtom, useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import { useShortlistAndCompare } from "@/app/hooks/storage";
 import { useAtomValue } from "jotai";
 import Image from "next/image";
 import ReqOtpForm from "../../project/forms/otpform";
-import CountryInput from "../../atoms/CountryInput";
 import handleTrimAndReplace from "@/app/utils/input/validations";
 import { ReqcallbackMessage } from "../../project/success";
 import Styles from "@/app/styles/Qna.module.css";
 import clsx from "clsx";
-import { NearByDataAtom } from "@/app/store/nearby";
-import { get_posted_by } from "@/app/utils/dyanamic/projects";
 import Close from "../../project/button/close";
 import Button from "../../atoms/buttons/variansts";
 const RequestCallBackModal = () => {
@@ -72,6 +66,7 @@ const RequestCallBackModal = () => {
               overlay: S.overlay,
             }
       }
+      zIndex={10000}
       withCloseButton={false}
     >
       {
@@ -257,17 +252,6 @@ const LoggedInUserForm = ({ status, setStatus }: any) => {
           ? "Request Quotation"
           : "Request Callback"}
       </Button>
-      {/* <B
-        onClick={onSubmit}
-        type="submit"
-        mt={"md"}
-        className="!bg-[#0073C6]  !text-[12px] !p-1 sm:text-xl sm:p-2"
-        size="md"
-      >
-        {popupState.MODAL_TYPE === "REQ_Quotation"
-          ? "Request Quotation"
-          : "Request Callback"}
-      </B> */}
     </div>
   );
 };
@@ -275,9 +259,6 @@ const ReqForm = ({
   close,
   status,
   setStatus,
-  name,
-  source,
-  projName,
 }: {
   close: any;
   status: string;
@@ -296,14 +277,9 @@ const ReqForm = ({
     },
     validate: yupResolver(reqSchema),
   });
-  const propName =
-    popupState.MODAL_TYPE === "PROJECT_REQ_CALLBACK"
-      ? "propIdEnc"
-      : "projIdEnc";
+
   let Posted_BY =
     popupState.MODAL_TYPE == "PROPERTY_REQ_CALLBACK" ? "Posted By" : "Builder";
-  const isProjContact =
-    popupState.MODAL_TYPE === "PROJECT_REQ_CALLBACK" ? "N" : "Y";
   const formSubmit = async (values: any) => {
     setStatus("pending");
     const data = await addContact({

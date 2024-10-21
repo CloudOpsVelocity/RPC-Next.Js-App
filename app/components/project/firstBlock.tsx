@@ -23,6 +23,7 @@ import { useQuery } from "react-query";
 import BuilderLink, {
   generateBuilderUrl,
 } from "@/app/utils/linkRouters/Builder";
+import { useHydrateAtoms } from "jotai/utils";
 type Props = {
   projectDetails: Main | null;
   companyName: string;
@@ -110,7 +111,7 @@ const FirstBlock: React.FC<Props> = ({
             >
               {images.map((imageUrl, index) => (
                 <Carousel.Slide
-                  key={Math.random()}
+                  key={imageUrl[index] ?? imageUrl}
                   className="relative"
                   w={"auto"}
                 >
@@ -193,7 +194,7 @@ const FirstBlock: React.FC<Props> = ({
                   alt="no of floors"
                   className=" xl:h-[24px] xl:w-[24px] w-[16px] h-[16px]  sm:h-[16px] sm:w-[16px] "
                 />
-                {formatNumberWithSuffix(projectDetails?.floorPlanCount) || 0}{" "}
+                {formatNumberWithSuffix(projectDetails?.floorPlanCount,false) || 0}{" "}
                 Floor Plans
               </p>
             </div>

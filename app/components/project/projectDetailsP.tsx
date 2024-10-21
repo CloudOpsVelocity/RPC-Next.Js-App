@@ -20,12 +20,14 @@ import { useAtom } from "jotai";
 
 import NoProperties from "./notfound";
 import SubHeading from "./headings/SubHeading";
+import {projectReqDataAtom} from "@/app/store/project/project.req";
 type Props = {
   data: PhaseList[];
   slug: string;
   projName: string;
   PhaseOverview: any;
   isPartialData: boolean;
+  projData: any;
 };
 const styles = {
   box: "flex flex-col items-start sm:gap-[8px] xl:gap-[10px] p-4 sm:border sm:shadow-[0px_4px_10px_0px_rgba(202,233,255,0.30)] mb-3 rounded-[10px] border-solid border-[#92B2C8] bg-[#fff] xl:mr-[46px] sm:mr-[20px] ",
@@ -37,8 +39,12 @@ export default function ProjectDetailsP({
   data: phaseList,
   isPartialData,
   slug,
+  projData
 }: Props) {
-  useHydrateAtoms([[currentPhaseAtom, PhaseOverview[0].phaseId]]);
+  useHydrateAtoms([[currentPhaseAtom, PhaseOverview[0].phaseId],[projectReqDataAtom, {
+  postedById:projData?.builderId,
+  postedByName: projData?.postedByName
+  }]]);
   const [currentPhase, setFloorPhase] = useAtom(currentPhaseAtom);
   const handlePhaseChange = (phaseId: number) => {
     setFloorPhase(phaseId);

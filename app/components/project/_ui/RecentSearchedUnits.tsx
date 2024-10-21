@@ -49,9 +49,15 @@ export default function RecentSearchedUnits({propCgId,recentFiltersClick,classNa
                   key={index}
                   label={
                     <div className="text-sm">
-                      {/* Show all filters in the tooltip */}
-                      {entries.map(([key, value]: [string, any]) => (
-                     value &&   <div key={key} >
+                  {/* Click-to-apply message */}
+                  <div className="mb-1 text-white font-bold text-xs italic bg-btnPrimary p-1 rounded-md text-center">
+  Reverse To Previous Search 
+</div>
+
+                    {/* Show all filters in the tooltip */}
+                    {entries.map(([key, value]: [string, any]) => (
+                      value && (
+                        <div key={key}>
                           <strong className="capitalize">
                             {filterKeysDetails?.get(key)?.name !== undefined
                               ? filterKeysDetails?.get(key)?.name === "Floor" &&
@@ -61,9 +67,11 @@ export default function RecentSearchedUnits({propCgId,recentFiltersClick,classNa
                               : key}
                           </strong>: {value === 0 ? "G" : value}
                         </div>
-                      ))}
-                      <div className="mt-1 text-white font-bold text-xs italic bg-yellow-500 p-1 rounded-md text-center">Click to apply these filters</div> {/* Click-to-apply message */}
-                    </div>
+                      )
+                    ))}
+              
+                   
+                  </div>
                   }
                   withArrow
                 >

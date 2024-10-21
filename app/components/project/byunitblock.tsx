@@ -453,15 +453,8 @@ handleReset()
           />
         )}
       </div>
-      <div className="flex justify-between items-center w-full">
-      <Button
-        variant="blue"
-        className="sm:text-lg 2xl:text-lg sm:mt-4"
-        onClick={handleReset}
-        showButton={showClearAll}
-      >
-        Clear All Filters
-      </Button>
+      <div className="flex justify-between items-start w-full">
+      <button className="bg-btnPrimary  text-base font-semibold text-white px-1 py-2 rounded-md  text-nowrap mr-4 mt-4" onClick={handleReset}>   Clear All Filters</button>
       <RecentSearchedUnits propCgId={propCgId} recentFiltersClick={handlePreviousAppliedFilter} className="mt-4" />
       </div>
 
