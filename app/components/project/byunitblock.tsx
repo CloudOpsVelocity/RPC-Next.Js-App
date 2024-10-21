@@ -13,6 +13,9 @@ import { setPropertyValues } from "@/app/utils/dyanamic/projects";
 import Image from "next/image";
 import Button from "../atoms/buttons/variansts";
 import { SelectCreatable } from "./_ui/input/UnitINput";
+import RecentSearchedUnits from "./_ui/RecentSearchedUnits";
+import { useRecentSearched } from "@/app/hooks/custom/useRecentSearch";
+import useRecentUnits from "@/app/hooks/project/useRecentUnits";
 interface UnitData {
   unitIdEnc: string;
   projIdEnc: string;
@@ -46,10 +49,12 @@ export const unitFloorsAtom = atom([]);
 const Byunitblock: React.FC<Props> = ({
   propCgId,
   data,
-  form: { values, setValues, setFieldValue, getInputProps },
+  form: { values, setValues, setFieldValue, getInputProps,reset },
+
 }: Props) => {
   const [floorsArray, setFloorsArray] = useAtom(unitFloorsAtom);
   const [, setFloor] = useAtom(selectedFloorAtom);
+  const {setPreviousFilers} = useRecentUnits()
   const workerRef = useRef<Worker | null>(null);
   React.useEffect(() => {
     workerRef.current = new Worker(
@@ -128,8 +133,11 @@ const Byunitblock: React.FC<Props> = ({
   };
   const handleOnChange = (key: string, value: string) => {
     setFieldValue(key, value);
+
     let prevObj = values;
+    setPreviousFilers(prevObj);
     prevObj[key] = value;
+
     setValues(prevObj);
     handleSearch(key, "add");
   };
@@ -158,6 +166,20 @@ const Byunitblock: React.FC<Props> = ({
   const showClearAll = Object.values(values).some(
     (value) => value !== null && value !== "" && value !== 0
   );
+  const handlePreviousAppliedFilter = (filters:Object) =>{
+handleReset()
+    setValues(filters);
+    const filteredData = data.filter((item: any) => {
+      return Object.keys(values).every(
+        (key) =>
+          !values[key] ||
+          // @ts-ignore
+          String(item[key]).toLowerCase() === values[key].toLowerCase()
+      );
+    });
+    setFloor(filteredData[0]);
+    setFloorsArray(filteredData);
+  }
   return (
     <div className="px-[1%] sm:px-[5%] py-[2%] w-full flex justify-start flex-col items-start   ">
       <h3 className="text-[#001F35] sm:text-2xl not-italic font-medium sm:mb-4">
@@ -431,14 +453,18 @@ const Byunitblock: React.FC<Props> = ({
           />
         )}
       </div>
+      <div className="flex justify-between items-center w-full">
       <Button
         variant="blue"
-        className="sm:text-xl sm:mt-4"
+        className="sm:text-lg 2xl:text-lg sm:mt-4"
         onClick={handleReset}
         showButton={showClearAll}
       >
         Clear All Filters
       </Button>
+      <RecentSearchedUnits propCgId={propCgId} recentFiltersClick={handlePreviousAppliedFilter} className="mt-4" />
+      </div>
+
     </div>
   );
 };

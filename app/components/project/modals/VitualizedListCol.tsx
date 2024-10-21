@@ -12,6 +12,7 @@ interface ColumnVirtualizerFixedProps {
   width?: number; // Width of the container (default is 600px)
   height?: number; // Height of the container (default is 100px)
   renderItem?: (item: any, index: number) => ReactNode; // Function to render each item
+  position:"center" | "start" | "end"
 }
 
 const ColumnVirtualizerFixed: React.FC<ColumnVirtualizerFixedProps> = ({
@@ -22,6 +23,7 @@ const ColumnVirtualizerFixed: React.FC<ColumnVirtualizerFixedProps> = ({
   width = 610,
   height = 100,
   renderItem,
+  position
 }) => {
   const parentRef = React.useRef<HTMLDivElement | null>(null);
   const columnVirtualizer = useVirtualizer({
@@ -62,7 +64,7 @@ const ColumnVirtualizerFixed: React.FC<ColumnVirtualizerFixedProps> = ({
 
       <div
         ref={parentRef}
-        className="mx-auto floorplan flex justify-center items-center"
+        className={`mx-auto floorplan flex  items-center justify-${position}`}
         style={{
           width: `${width}px`,
           height: `${height}px`,

@@ -1,13 +1,10 @@
 "use client";
-import { Modal, Select } from "@mantine/core";
+import { Modal, Select, Tooltip } from "@mantine/core";
 import { useRef } from "react";
 import {
   DropDownIcon,
   FloorPlanModalIcon,
-  ImgCarouselIcon,
-  LenseIcon,
   PopupOpenSvg,
-  PrevCarouselIcon,
   propertyDetailsSvgs,
 } from "@/app/images/commonSvgs";
 import S from "@/app/styles/Floorplan.module.css";
@@ -22,14 +19,15 @@ import { useSubFloorPlanPopup } from "@/app/hooks/useSubFloorplanPopup";
 import clsx from "clsx";
 import { setPropertyValues } from "@/app/utils/dyanamic/projects";
 import { ImgNotAvail } from "@/app/data/project";
-import { Carousel } from "@mantine/carousel";
-import styles from "@/app/styles/Carousel.module.css";
 import { unitFloorsAtom } from "../byunitblock";
 import Button from "../../atoms/buttons/variansts";
 import SelectedFilters from "./filters/SelectedFilters";
 import { formatNumberWithSuffix } from "@/app/utils/numbers";
 import ColumnVirtualizerFixed from "./VitualizedListCol";
 import { SelectCreatable } from "./filters/UnitINput";
+import useRecentUnits from "@/app/hooks/project/useRecentUnits";
+import { truncateText } from "@/app/utils/letters";
+import RecentSearchedUnits from "../_ui/RecentSearchedUnits";
 
 type Props = {
   propCgId: any;
@@ -51,13 +49,8 @@ function FloorPlanModal({
   const setUnitsFloor = useSetAtom(unitFloorsAtom);
   const [opened, { close }] = useFloorPlanPopup();
   const form = useFormContext();
+  
   const scrollFiltersRef = useRef<HTMLDivElement>(null);
-  const handleArrowClick = (side: "R" | "L"): void => {
-    const scrollAmount = side === "R" ? 100 : -100;
-    if (scrollFiltersRef.current) {
-      scrollFiltersRef.current.scrollLeft += scrollAmount;
-    }
-  };
 
   const handleClose = () => {
     close();
@@ -170,7 +163,8 @@ function FloorPlanModal({
             handleReset={handleReset}
             showClearAll={showClearAll}
           />
-          <MiddleSection projName={projName} propCgId={propCgId} />
+          <MiddleSection projName={projName} propCgId={propCgId}
+            allUnits={data} handleReset={handleReset} />
           {selectedFloor && <RightSection propCgId={propCgId} data={data} />}
         </div>
       </div>
@@ -180,9 +174,10 @@ function FloorPlanModal({
 
 export default FloorPlanModal;
 const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
-  const [, setFloorsArray] = useAtom(floorPlansArray);
+  const [floornPlanArray, setFloorsArray] = useAtom(floorPlansArray);
   const [, setFloor] = useAtom(selectedFloorAtom);
   const { getInputProps, values, setFieldValue, setValues } = useFormContext();
+  const {setPreviousFilers} = useRecentUnits()
   const getOptions = (property: string): string[] => {
     const optionsSet = new Set<string>();
     data?.forEach((item: any) => {
@@ -215,6 +210,8 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
     if (keysWithNonNullValues.length === 0) {
       return;
     }
+
+  // setFilteredUnits(floornPlanArray)
     const filteredData = data.filter((item: any) => {
       return Object.keys(values).every(
         (key) =>
@@ -239,6 +236,7 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
   const handleOnChange = (value: string, key: string) => {
     setFieldValue(key, value);
     let prevObj = values;
+    setPreviousFilers(prevObj)
     prevObj[key] = value;
     setValues(prevObj);
     handleSearch(key);
@@ -987,13 +985,26 @@ const RightSection = ({ propCgId, className }: any) => {
   );
 };
 
-const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
+const MiddleSection = ({ hide = false, projName, propCgId ,allUnits,handleReset}: any) => {
   const data = useAtomValue(selectedFloorAtom);
   const { setValues } = useFormContext();
   const [floorsArray, setFloorsArray] = useAtom<any>(floorPlansArray);
   const [, { open }] = useSubFloorPlanPopup();
   const [selectedFloor, setFloor] = useAtom(selectedFloorAtom);
-  const selectImg = (index: number) => {
+  
+  const {recentUnits,setPreviousFilers} = useRecentUnits()
+  const selectImg = (index: number,recentActiveId?:string) => {
+    if(recentActiveId){
+      const selectedItem = allUnits.find((item:any) => item.unitIdEnc == recentActiveId);
+      setFloor({
+        ...selectedItem,
+        floorPlanUrl: selectedItem?.floorPlanUrl ?? ImgNotAvail,
+      })
+      // @ts-ignore
+      setFloorsArray([selectedItem])
+      setValues(setPropertyValues(selectedItem, propCgId));
+      return;
+    }
     // if (selectedFloor?.unitNumber !== floorsArray[index].unitNumber) {
     setFloor({
       ...floorsArray[index],
@@ -1007,9 +1018,27 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
     const filteredFloors = floorsArray?.filter(
       (floor: any) => floor.unitNumber === floorsArray[index].unitNumber
     );
+    // setFilteredUnits(floorsArray)
     // @ts-ignore
     setFloorsArray(filteredFloors);
   };
+  const recentFiltersClick = (activeFilters: any) => {
+    handleReset()
+    setValues(activeFilters);
+    const filteredData = allUnits.filter((item: any) => {
+      return Object.keys(activeFilters).every(
+        (key) =>
+          !activeFilters[key] ||
+          String(item[key]).toLowerCase() === activeFilters[key].toLowerCase()
+      );
+    });
+    setFloor({
+      ...filteredData[0],
+      floorPlanUrl: filteredData[0]?.floorPlanUrl ?? ImgNotAvail,
+    });
+    // @ts-ignore
+    setFloorsArray(filteredData);
+  }
   return (
     <div className="flex flex-col justify-center items-start shrink-0 w-full sm:max-w-[300px] md:max-w-[500px] xl:max-w-[686px]">
       <p className=" w-full  mb-[1%] text-[#001F35] text-[12px] text-center p-2 xl:text-right xl:text-sm not-italic font-medium leading-[normal] tracking-[0.56px] ">
@@ -1103,6 +1132,7 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
               height={70}
               itemSize={120}
               overscan={5}
+              position="center"
               renderItem={(eachObj: any, index: number) => (
                 <div
                   className={clsx(
@@ -1130,6 +1160,8 @@ const MiddleSection = ({ hide = false, projName, propCgId }: any) => {
             />
           </div>
         )}
+
+<RecentSearchedUnits recentFiltersClick={recentFiltersClick} propCgId={propCgId} />
     </div>
   );
 };

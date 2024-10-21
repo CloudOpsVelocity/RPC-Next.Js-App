@@ -203,9 +203,40 @@ export default function Page() {
   //   age: 5,
   // });
   // console.log(myHash.count)
-
+//  class BFS <T> {
+//  public queue: T[];
+//  public result: T[];
+//   constructor() {
+//     this.currentNode = null;
+//     this.queue = [];
+//     this.result = []
+//   }
+//  }
+//  let factorialOFF = (n: number) => {
+//     if(n === 0 || n === 1){
+// return 1
+//     }
+//     return n * factorialOFF(n-1)
+//  }
+//  console.log(factorialOFF(4))
+// const bubbleSort = (arr: number[]): number[][] => {
+//   const steps: number[][] = [];
+//   let sortedArray = [...arr];
+//   for (let i = 0; i < sortedArray.length; i++) {
+//     for (let j = 0; j < sortedArray.length - i - 1; j++) {
+//       if (sortedArray[j] > sortedArray[j + 1]) {
+//         // Swap elements
+//         [sortedArray[j], sortedArray[j + 1]] = [sortedArray[j + 1], sortedArray[j]];
+//       }
+//       // Capture the current state of the array
+//       steps.push([...sortedArray]);
+//     }
+//   }
+//   return steps;
+// };
   return (
-<ColorfulProjectBrochures />
+    <div>sdfsdfe</div>
+    // <VisualRepresentationOfArrayWhileLooping sortAlgorithm={bubbleSort} />
   );
 }
 
@@ -247,3 +278,106 @@ export default function Page() {
 //     </div>
 //   );
 // };
+
+const VisualRepresentationOfArrayWhileLooping = ({ sortAlgorithm }: { sortAlgorithm: (arr: number[]) => number[][] }) => {
+  // Box component representing each number in the array
+  const Box = ({ height, number }: { height: number; number: number }) => {
+    return (
+      <div
+        style={{
+          width: '40px',
+          height: `${height * 10}px`, // scale the height for better visual representation
+          backgroundColor: 'lightblue',
+          margin: '5px',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'flex-end',
+          fontSize: '18px', // Larger font size
+          fontWeight: 'bold', // Bold text
+          color: '#333',
+          border: '2px solid #333', // Thicker border for better visibility
+        }}
+      >
+        {number}
+      </div>
+    );
+  };
+
+  // Sorting animation logic
+  const MySortAlgo = ({ input }: { input: number[] }) => {
+    const [array, setArray] = useState(input);
+    const [animationRunning, setAnimationRunning] = useState(false);
+    const [animationSteps, setAnimationSteps] = useState<number[][]>([]); // Store the steps of the sorting algorithm
+    const [currentStep, setCurrentStep] = useState(0); // Step index for the animation
+    const [sorted, setSorted] = useState(false); // Flag to indicate if sorting is complete
+
+    // When animation starts, calculate the steps for the sorting algorithm
+    useEffect(() => {
+      if (animationRunning && animationSteps.length === 0) {
+        const steps = sortAlgorithm(array); // Generate steps using the passed sorting function
+        setAnimationSteps(steps);
+      }
+    }, [animationRunning, array, sortAlgorithm, animationSteps]);
+
+    // Control the animation steps
+    useEffect(() => {
+      if (!animationRunning || sorted || currentStep >= animationSteps.length) return;
+
+      const timeout = setTimeout(() => {
+        setArray(animationSteps[currentStep]);
+        setCurrentStep(currentStep + 1);
+
+        if (currentStep >= animationSteps.length - 1) {
+          setSorted(true); // Sorting is complete
+          setAnimationRunning(false);
+        }
+      }, 1000); // 1 second delay for each step
+
+      return () => clearTimeout(timeout);
+    }, [animationRunning, currentStep, sorted, animationSteps]);
+
+    const startSorting = () => {
+      setAnimationRunning(true);
+      setSorted(false);
+      setCurrentStep(0);
+      setAnimationSteps([]); // Reset the steps when starting a new animation
+    };
+
+    return (
+      <div>
+        {/* Display the array as visual boxes */}
+        <div style={{ display: 'flex', flexDirection: 'row' }}>
+          {array.map((number, index) => (
+            <Box key={index} height={number} number={number} />
+          ))}
+        </div>
+
+        {/* Button to start animation */}
+        <button 
+          onClick={startSorting} 
+          disabled={animationRunning || sorted}
+          style={{
+            marginTop: '20px',
+            padding: '10px 20px',
+            fontSize: '18px',
+            fontWeight: 'bold',
+            backgroundColor: '#4CAF50',
+            color: 'white',
+            border: 'none',
+            borderRadius: '5px',
+            cursor: animationRunning || sorted ? 'not-allowed' : 'pointer'
+          }}
+        >
+          {sorted ? 'Sorted!' : animationRunning ? 'Sorting...' : 'Start Animation'}
+        </button>
+      </div>
+    );
+  };
+
+  // Example input array to be sorted
+  return (
+    <div>
+      <MySortAlgo input={[5, 3, 8, 1, 6, 9, 2]} />
+    </div>
+  );
+};

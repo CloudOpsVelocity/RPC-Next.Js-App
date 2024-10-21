@@ -16,29 +16,6 @@ const SelectedFilters = ({
   const [showLeftButton, setShowLeftButton] = useState(true);
   const [showRightButton, setShowRightButton] = useState(true);
 
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     if (scrollFiltersRef.current) {
-  //       const { scrollLeft, scrollWidth, clientWidth } =
-  //         scrollFiltersRef.current;
-  //       setShowLeftButton(scrollLeft > 0);
-  //       setShowRightButton(scrollLeft + clientWidth < scrollWidth);
-  //     }
-  //   };
-
-  //   const currentRef = scrollFiltersRef.current;
-  //   if (currentRef) {
-  //     currentRef.addEventListener("scroll", handleScroll);
-  //     handleScroll(); // Initial check
-  //   }
-
-  //   return () => {
-  //     if (currentRef) {
-  //       currentRef.removeEventListener("scroll", handleScroll);
-  //     }
-  //   };
-  // }, []);
-  console.log(showClearAll);
   const handleArrowClick = (side: "R" | "L"): void => {
     const scrollAmount = side === "R" ? 100 : -100;
     if (scrollFiltersRef.current) {

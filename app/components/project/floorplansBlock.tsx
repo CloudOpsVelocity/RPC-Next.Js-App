@@ -189,7 +189,6 @@ Props) {
     }
   };
   // const { setFloorplans } = useFloorPlanStore();
-  const {setFilteredUnits} = useRecentUnits()
   const handleOpen = () => {
     setSelectedFloor({
       ...selectedFloor,
@@ -242,7 +241,6 @@ Props) {
     const filteredFloors = projectUnitsData.filter(
       (floor: any) => floor.unitNumber === selectedFloor.unitNumber
     );
-    setFilteredUnits(filteredFloors);
     setFloorsArray(filteredFloors);
   };
   const [bhk, setBhk] = useState("0");

@@ -1,7 +1,7 @@
 import { projectprops } from "@/app/data/projectDetails";
 
 export function setPropertyValues(data: any, propCgId: number): any {
-  console.log(data);
+  
   let updatedValues: any = {
     ...(data.facingName !== "Don't Know" && { facingName: data?.facingName }),
     bhkName: data?.bhkName,
