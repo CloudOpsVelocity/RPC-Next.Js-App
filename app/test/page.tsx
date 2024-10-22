@@ -234,8 +234,12 @@ export default function Page() {
 //   return steps;
 // };
 const bubbleSort = (array: number[]): number[] => {
+  let outerLoopCount = 0;
+  let innerLoopCount = 0;
   for (let i = array.length - 1; i > 0; i--) {
+    outerLoopCount++;
      for (let j = 0; j < i; j++) {
+       innerLoopCount++;
          if(array[j] > array[j+1]){
           let temp = array[j];
           array[j] = array[j+1];
@@ -244,9 +248,11 @@ const bubbleSort = (array: number[]): number[] => {
 
      }
   }
+  console.log(`Outer loop ran ${outerLoopCount} times`);
+  console.log(`Inner loop ran ${innerLoopCount} times`);
   return array
 }
-console.log(bubbleSort([3,1,2,6]))
+console.log(bubbleSort([3,1,2,6,3,3,3,423,43,32,23,543,543]))
 
   return (
     <div>THE TEST PAGE</div>

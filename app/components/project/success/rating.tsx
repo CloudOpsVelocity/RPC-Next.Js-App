@@ -74,7 +74,6 @@ export const RatingForm = ({
   const form = useFormContext();
   const data = useDynamicProj(projIdEnc);
   const isTab = useMediaQuery(`(max-width: 1600px)`);
-
   return (
     <form
       onSubmit={form.onSubmit(formSubmit)}
