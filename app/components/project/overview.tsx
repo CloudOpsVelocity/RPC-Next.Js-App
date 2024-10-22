@@ -174,7 +174,7 @@ export default function Overview({
           <ReportSection slug={slug} />
           <ShortList slug={slug} />
           <CompareList slug={slug} />
-          <Message />
+          <Message slug={slug} />
         </div>
       </div>
       <OverviewBanner

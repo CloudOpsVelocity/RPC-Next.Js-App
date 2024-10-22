@@ -23,7 +23,7 @@ export default function Reviews({
   const [, { open }] = usePopUpRatings();
   const { data } = useRatings(projIdEnc);
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
-  const { data: rData } = useDynamicProj();
+  const { data: rData } = useDynamicProj(projIdEnc);
   return (
     data?.status &&
     data?.reviewDataList?.filter((item: any) => item.userReview).length !==

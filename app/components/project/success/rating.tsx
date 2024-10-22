@@ -57,6 +57,7 @@ export const Success = ({ projIdEnc, projName, formSubmit }: any) => {
           isSubmitted={isSubmitted}
           projName={projName}
           formSubmit={formSubmit}
+          projIdEnc={projIdEnc}
         />
       )}
     </div>
@@ -68,9 +69,10 @@ export const RatingForm = ({
   formSubmit,
   isSubmitted,
   mutate,
+  projIdEnc
 }: any) => {
   const form = useFormContext();
-  const data = useDynamicProj();
+  const data = useDynamicProj(projIdEnc);
   const isTab = useMediaQuery(`(max-width: 1600px)`);
 
   return (

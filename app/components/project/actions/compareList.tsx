@@ -1,5 +1,5 @@
 "use client";
-import { ComparingListIcon, comparingIcon } from "@/app/images/commonSvgs";
+import { ComparingListIcon,  } from "@/app/images/commonSvgs";
 import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
 import React from "react";
@@ -14,7 +14,7 @@ export default function CompareList({slug}:{slug:string}) {
   const { data: session } = useSession();
   const { toggleCompare, compareItems } = useShortlistAndCompare();
   const [, { open }] = usePopShortList();
-  const { data, mutate, getData } = useDynamicProj();
+  const { data, mutate, getData } = useDynamicProj(slug);
   const [opened, { close, open: openSuccesPopup }] = useMessagePopup("compare");
   const handleCompare = () => {
     mutate(3);

@@ -17,7 +17,7 @@ export default function ShortList({slug}:{slug:string}) {
 
   const { toggleShortlist } = useShortlistAndCompare();
   const [, { open }] = usePopShortList();
-  const { data, mutate, getData } = useDynamicProj();
+  const { data, mutate, getData } = useDynamicProj(slug);
   const handleShortlist = () => {
     mutate(2);
     toggleShortlist({

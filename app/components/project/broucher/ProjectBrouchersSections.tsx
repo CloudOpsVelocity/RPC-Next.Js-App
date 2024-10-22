@@ -3,6 +3,7 @@ import React, { useEffect, useState, useRef, useCallback, memo } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
 import { FaChevronLeft, FaChevronRight, FaDownload, FaSpinner } from 'react-icons/fa';
 import { PopupOpenSvg } from '@/app/images/commonSvgs';
+import { useMediaQuery } from '@mantine/hooks';
 
 pdfjs.GlobalWorkerOptions.workerSrc = process.env.NODE_ENV === "development" 
   ? new URL('pdfjs-dist/build/pdf.worker.min.mjs', import.meta.url).toString() 
@@ -41,7 +42,7 @@ const ProjectBrouchersSection = ({ projName }: { projName: string }): JSX.Elemen
     blobCache: Record<number, string | null>;
     loading: boolean;
     errorMessage: string;
-  }>({
+  }>( {
     activePhase: projectPhases[0],
     numPages: null,
     pageNumber: 1,
@@ -108,9 +109,9 @@ const ProjectBrouchersSection = ({ projName }: { projName: string }): JSX.Elemen
       'bg-[#0073C6] !text-white shadow-lg' : 
       'bg-white text-[#0073C6] hover:bg-gray-50 border border-gray-300'
     } focus:z-10 focus:ring-2 focus:ring-[#0073C6] focus:text-[#0073C6] hover:scale-105`;
-
+  const isMobile = useMediaQuery('(max-width: 660px)');
   return (
-    <div className="w-[90%] mx-auto my-8 bg-gray-50">
+    <div className="w-[95%] sm:w-[90%] mx-auto my-4 sm:my-8 bg-gray-50">
       <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-semibold mb-[12px] capitalize break-words pl-3 pt-2">
         <span>Explore the Comprehensive Brochures of </span>
         <span className="text-[#148B16] font-bold">{projName}</span>
@@ -127,24 +128,24 @@ const ProjectBrouchersSection = ({ projName }: { projName: string }): JSX.Elemen
               }`}
               aria-pressed={state.activePhase.id === phase.id}
             >
-            {projName} :   {phase.name}
+              <span className='hidden sm:inline-flex'> {projName} : </span>  {phase.name}
             </button>
           ))}
         </div>
       </div>
 
       <div
-        className="bg-white rounded-lg shadow-lg p-4 max-w-full mx-auto h-[600px] flex flex-col justify-between items-center overflow-y-auto"
+        className="bg-white rounded-lg shadow-lg p-4 max-w-full mx-auto h-[350px] sm:h-[600px] flex flex-col justify-between items-center overflow-y-auto"
         ref={pdfContainerRef}
       >
         <div className="flex-grow w-full overflow-hidden flex justify-center items-center relative">
-            <a href={state.activePhase.brochure}
-              target='_blank'
-              download
-              className='absolute top-0 right-0'
-              >
-      <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[36px] lg:h-[36px]  " />
-              </a>
+          <a href={state.activePhase.brochure}
+            target='_blank'
+            download
+            className='absolute top-0 right-0'
+          >
+            <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[36px] lg:h-[36px]" />
+          </a>
   
           {state.loading ? (
             <FaSpinner className="animate-spin text-[#0073C6] h-8 w-8" />
@@ -152,18 +153,17 @@ const ProjectBrouchersSection = ({ projName }: { projName: string }): JSX.Elemen
             <p className="text-red-500">{state.errorMessage}</p>
           ) : (
             <Document
-            className={"overscroll-y-scroll"}
+              className={"overscroll-y-scroll"}
               key={state.activePhase.id}
               file={state.blobCache[state.activePhase.id] || state.activePhase.brochure}
               onLoadSuccess={onDocumentLoadSuccess}
               loading={<FaSpinner className="animate-spin text-[#0073C6] h-8 w-8" />}
-              
             >
               <Page
                 pageNumber={state.pageNumber}
                 renderTextLayer={false}
                 renderAnnotationLayer={false}
-                scale={0.7}
+                scale={isMobile ? 0.4 :0.7}
                 className="shadow-md rounded overflow-y-auto"
               />
             </Document>
@@ -174,9 +174,9 @@ const ProjectBrouchersSection = ({ projName }: { projName: string }): JSX.Elemen
           <button
             onClick={() => changePage(-1)}
             disabled={state.pageNumber <= 1 || state.loading}
-            className={`bg-[#0073C6] text-white p-2 rounded-full ${state.loading ? 'cursor-not-allowed' : ''}`}
+            className={`bg-[#0073C6] text-white p-1 flex justify-center items-center rounded-full ${state.loading ? 'cursor-not-allowed' : 'h-8 w-8'}`}
           >
-            <FaChevronLeft className="h-6 w-6" />
+            <FaChevronLeft className="h-4 w-4" />
           </button>
           <div className="flex items-center space-x-4 relative group">
             <span className="text-gray-600 font-bold">
@@ -186,24 +186,24 @@ const ProjectBrouchersSection = ({ projName }: { projName: string }): JSX.Elemen
               href={state.activePhase.brochure}
               target='_blank'
               download
-              className={`bg-[#0073C6] text-white px-5 py-2 rounded-full flex items-center space-x-2 transition-all duration-300 ease-in-out transform group-hover:scale-105 hover:shadow-lg ${state.loading ? 'cursor-not-allowed' : ''}`}
+              className={`bg-[#0073C6] text-white px-3 py-1 rounded-full flex items-center space-x-2 transition-all duration-300 ease-in-out transform group-hover:scale-105 hover:shadow-lg ${state.loading ? 'cursor-not-allowed' : ''}`}
               aria-label={`Download ${state.activePhase.name} brochure`}
             >
-              <FaDownload />
-              <span>Download Brochure</span>
+              <FaDownload className="h-4 w-4" />
+              <span className="hidden sm:inline">Download Brochure</span>
             </a>
           </div>
           <button
             onClick={() => changePage(1)}
-            disabled={state.pageNumber >= (state.numPages || 1) || state.loading}
-            className={`bg-[#0073C6] text-white p-2 rounded-full ${state.loading ? 'cursor-not-allowed' : ''}`}
+            disabled={state.pageNumber >= state.numPages! || state.loading}
+            className={`bg-[#0073C6] text-white p-1 flex justify-center items-center rounded-full ${state.loading ? 'cursor-not-allowed' : 'h-8 w-8'}`}
           >
-            <FaChevronRight className="h-6 w-6" />
+            <FaChevronRight className="h-4 w-4" />
           </button>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default memo(ProjectBrouchersSection);
