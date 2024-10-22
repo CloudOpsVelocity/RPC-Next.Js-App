@@ -5,6 +5,7 @@
 import dynamic from "next/dynamic"
 import { getAuthorityNames } from "../utils/api/project";
 import Tooltip from "../components/atoms/Tooltip";
+import { useState } from "react";
 const ColorfulProjectBrochures = dynamic(() => import("./components/Section/ProjectBrochers"), { ssr: false });
 export default async function Page() {
   class Node<T> {
@@ -236,22 +237,13 @@ export default async function Page() {
 //   return steps;
 // };
 const bubbleSort = (array: number[]): number[] => {
-  let outerLoopCount = 0;
-  let innerLoopCount = 0;
-  for (let i = array.length - 1; i > 0; i--) {
-    outerLoopCount++;
-     for (let j = 0; j < i; j++) {
-       innerLoopCount++;
-         if(array[j] > array[j+1]){
-          let temp = array[j];
-          array[j] = array[j+1];
-          array[j+1] = temp
-         }
-
-     }
-  }
-  console.log(`Outer loop ran ${outerLoopCount} times`);
-  console.log(`Inner loop ran ${innerLoopCount} times`);
+   for(let i= array.length - 1; i > 0 ; i--){
+          for(let j =0;j < i;j++){
+            if(array[i]> array[i+1]){
+              // array
+            }
+          }
+   }
   return array
 }
 console.log(bubbleSort([3,1,2,6,3,3,3,423,43,32,23,543,543]))
@@ -413,3 +405,6 @@ console.log(bubbleSort([3,1,2,6,3,3,3,423,43,32,23,543,543]))
 //     </div>
 //   );
 // };
+const sum = ()=>{
+  const [s,se] = useState()
+}

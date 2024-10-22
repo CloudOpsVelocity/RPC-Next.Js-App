@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {
   useCallback,
   useEffect,
@@ -28,7 +29,6 @@ const Tabs: React.FC<TabsProps> = ({
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const tabContainerRef = useRef<HTMLDivElement>(null);
-
   const updateScrollButtons = useCallback(
     throttle(() => {
       if (tabContainerRef.current) {
@@ -53,13 +53,12 @@ const Tabs: React.FC<TabsProps> = ({
 
   useEffect(() => {
     updateScrollButtons();
-    tabContainerRef.current?.addEventListener("scroll", updateScrollButtons);
+    const currentRef = tabContainerRef.current; // Store the current ref value
+
+    currentRef?.addEventListener("scroll", updateScrollButtons);
 
     return () => {
-      tabContainerRef.current?.removeEventListener(
-        "scroll",
-        updateScrollButtons
-      );
+      currentRef?.removeEventListener("scroll", updateScrollButtons); // Use the stored ref value
     };
   }, [updateScrollButtons]);
 

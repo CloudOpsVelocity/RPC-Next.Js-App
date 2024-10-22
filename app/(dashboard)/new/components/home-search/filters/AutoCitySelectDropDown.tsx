@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useQuery } from "react-query";
 import {
   FaChevronCircleDown,
@@ -105,7 +105,11 @@ cityData
         city.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
         city.id !== selectedCity?.id 
     ) || [];
-
+    const handleCloseDropdown = useCallback(() => {
+      setIsOpen(false);
+      setSearchTerm("");
+      setFocusedIndex(-1);
+    }, [setIsOpen]);
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (
@@ -115,9 +119,10 @@ cityData
         handleCloseDropdown();
       }
     }
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  }, [handleCloseDropdown]);
 
   useEffect(() => {
     if (isOpen && inputRef.current) {
@@ -161,11 +166,7 @@ cityData
     handleCloseDropdown();
   };
 
-  const handleCloseDropdown = () => {
-    setIsOpen(false);
-    setSearchTerm("");
-    setFocusedIndex(-1);
-  };
+
 
   const handleToggleDropdown = () => {
     setIsOpen(!isOpen);

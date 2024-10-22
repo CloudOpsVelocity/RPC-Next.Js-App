@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { atom, useAtom } from "jotai";
 import { atomWithReducer } from "jotai/utils";
 import { useCallback, useEffect, useMemo } from "react";
@@ -76,7 +77,7 @@ const floorPlanReducer = (
       return state;
   }
 };
-
+// hello
 export const floorPlanStoreAtom = atomWithReducer(
   initialState,
   floorPlanReducer
@@ -115,7 +116,7 @@ export const useFloorPlanStore = () => {
       });
     });
     dispatch({ type: "SET_FILTERED_FLOORPLANS", payload: filteredData });
-  }, [state.selectedFilters]);
+  }, [dispatch,state]);
 
   const getOptions = (property: string): string[] => {
     const { floorplans, selectedFilters } = state;
@@ -157,7 +158,7 @@ export const useFloorPlanStore = () => {
   };
   useEffect(() => {
     applyFilters();
-  }, [state.selectedFilters]);
+  }, []);
   return {
     state,
     setFloorplans,

@@ -9,7 +9,7 @@ const PropertyHighlights: React.FC = () => {
     <div className="bg-gray-700 text-white shadow-lg rounded-lg p-2  mx-auto border border-gray-700">
       <ul className="space-y-4">
         {highlights.map((highlight: string, index: number) => (
-          <li key={index} className="flex items-start space-x-1">
+          <li key={highlight} className="flex items-start space-x-1">
             <svg
               className="h-6 w-6 text-green-400 flex-shrink-0"
               xmlns="http://www.w3.org/2000/svg"

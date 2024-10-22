@@ -44,17 +44,14 @@ const LocationCard: React.FC<LocationCardProps> = React.memo(({ data }) => {
     setSelectedCategory(category);
   }, []);
 
-  const updateScrollButtons = useCallback(
-    throttle(() => {
-      if (tabContainerRef.current) {
-        const { scrollLeft, scrollWidth, clientWidth } =
-          tabContainerRef.current;
-        setCanScrollLeft(scrollLeft > 0);
-        setCanScrollRight(scrollLeft + clientWidth < scrollWidth);
-      }
-    }, 100),
-    []
-  );
+  const updateScrollButtons = throttle(() => {
+    if (tabContainerRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } =
+        tabContainerRef.current;
+      setCanScrollLeft(scrollLeft > 0);
+      setCanScrollRight(scrollLeft + clientWidth < scrollWidth);
+    }
+  }, 100);
 
   const scrollTabs = useCallback((direction: "left" | "right") => {
     if (tabContainerRef.current) {
