@@ -3,8 +3,10 @@
 // import { useEffect, useReducer, useState } from "react";
 // import ColorfulProjectBrochures from "./components/Section/ProjectBrochers";
 import dynamic from "next/dynamic"
+import { getAuthorityNames } from "../utils/api/project";
+import Tooltip from "../components/atoms/Tooltip";
 const ColorfulProjectBrochures = dynamic(() => import("./components/Section/ProjectBrochers"), { ssr: false });
-export default function Page() {
+export default async function Page() {
   class Node<T> {
     public head: T;
     public next: Node<T> | null;
@@ -254,8 +256,18 @@ const bubbleSort = (array: number[]): number[] => {
 }
 console.log(bubbleSort([3,1,2,6,3,3,3,423,43,32,23,543,543]))
 
+
+
+
+
+
+
+
+
+
+
   return (
-    <div>THE TEST PAGE</div>
+    <div className="mt-10 ml-10">THE TEST PAGE <Tooltip text="test tooltip"><div>test tooltip</div></Tooltip></div>
     // <VisualRepresentationOfArrayWhileLooping sortAlgorithm={bubbleSort} />
   );
 }

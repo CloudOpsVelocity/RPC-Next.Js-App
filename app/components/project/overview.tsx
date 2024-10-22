@@ -21,7 +21,11 @@ import Message from "./actions/Message";
 import ReportSection from "./actions/Report";
 import { formatNumberWithSuffix } from "@/app/utils/numbers";
 import { TOPIC_IDS } from "@/app/data/projectDetails";
-
+import { Main, MERGERPROJECT } from "@/app/validations/types/project";
+export interface Props extends Main { // Extend Main directly
+  slug: string;          // New property for the slug
+  PhaseOverview: PhaseOverview[]; // New property for the project status
+}
 export default function Overview({
   maxPrice,
   minPrice,
@@ -40,12 +44,12 @@ export default function Overview({
   state,
   basePrice,
   media,
-  companyName,
   postedByName,
   phaseList,
   PhaseOverview,
   slug,
-}: any) {
+  projAuthorityNames
+}: Props) {
   return (
     <div
       className=" sm:pt-[2%] xl:pt-[2%] sm:scroll-mt-[138px] xl:scroll-mt-[150px] w-[95%] sm:[95%] xl:w-[90%] rounded-[24px] shadow-md mb-[5%] sm:mb-[0%]  mt-[2%] bg-gradient-to-r from-[#F6F6F6] /0 via-[#FFF] /45 to-[#FEFFFF]/100 "
@@ -139,7 +143,8 @@ export default function Overview({
             key="ProjectApprovedBy"
             icon={<EndDate />}
             title="Approved By"
-            value={"BDA, CDA, AD"}
+            value={projAuthorityNames}
+            type="authorities"
             className="mr-[5%] sm:mr-[3%] xl:mr-[5%] pt-[2%] mb-[3%] sm:mb-[1.5%] xl:mb-[3%]  "
           />
           {/* time leke kr rha hu me 10 min ka kaam ko sir betha hai saath mai */}

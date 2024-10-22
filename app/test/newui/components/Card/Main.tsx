@@ -90,7 +90,7 @@ const MainBox = ({ data, refetch }: Props) => {
       url = generateListingLinkUrl({
         city: data.cityName,
         locality: data.localityName,
-        projName: data.propName,
+        projName:data.projIdEnc ? data.propName : null,
         category: data.category === "Sale" ? "for-sale" : "for-rent",
         phase: data.phaseName,
         propIdEnc: data.propIdEnc,

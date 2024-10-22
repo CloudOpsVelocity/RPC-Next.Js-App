@@ -51,8 +51,6 @@ import UnitsImagesBlock from "./unitblock/UnitsImagesBlock";
 import { useMediaQuery } from "@mantine/hooks";
 import Image from "next/image";
 import PartialUnitData from "./sections";
-import { useFloorPlanStore } from "@/app/store/project/project.floorplan";
-import useRecentUnits from "@/app/hooks/project/useRecentUnits";
 
 type Props = {
   data: PhaseList[];

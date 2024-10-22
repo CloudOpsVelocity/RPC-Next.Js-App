@@ -1,7 +1,7 @@
 import React from "react";
 import path from "path";
 import fs from "fs";
-import { getAmenties, getProjectDetails } from "@/app/utils/api/project";
+import { getAmenties, getAuthorityNames, getProjectDetails } from "@/app/utils/api/project";
 import { notFound } from "next/navigation";
 import ProjectsDetailsPage from "@/app/(dashboard)/abc/[city]/[local]/[slug]/Page/ProjectDetailsPage";
 import { getPagesSlugs } from "@/app/seo/api";
@@ -23,11 +23,20 @@ export default async function Page({ params }: Props) {
     notFound();
   }
   const { PJ: slug } = await extractProjectParamsValues(value);
-  const [projResponse, amenitiesFromDB] = await Promise.all([
+  let [projResponse, amenitiesFromDB] = await Promise.all([
     getProjectDetails(slug as string),
     getAmenties(),
   ]);
-
+if(projResponse.basicData.projAuthorityId){
+  const res = await getAuthorityNames(projResponse.basicData.projAuthorityId);
+  projResponse = {
+    ...projResponse,
+    basicData: {
+      ...projResponse.basicData,
+      projAuthorityNames: res,
+    },
+  }
+}
   return (
     <ProjectsDetailsPage
       projResponse={projResponse}

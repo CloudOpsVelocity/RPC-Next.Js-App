@@ -5,35 +5,26 @@ import { FaChevronLeft, FaChevronRight, FaDownload, FaSpinner } from 'react-icon
 import { PopupOpenSvg } from '@/app/images/commonSvgs';
 import { useMediaQuery } from '@mantine/hooks';
 
+// PDF worker setup
 pdfjs.GlobalWorkerOptions.workerSrc = process.env.NODE_ENV === "development" 
   ? new URL('pdfjs-dist/build/pdf.worker.min.mjs', import.meta.url).toString() 
   : `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
+// ProjectPhase interface
 interface ProjectPhase {
   id: number;
   name: string;
-  brochure: string;
+  brochure: string | null;
 }
 
-const projectPhases: ProjectPhase[] = [
-  {
-    id: 1,
-    name: 'Phase 1',
-    brochure: 'https://d2l0lb5gc1bw3t.cloudfront.net/residential/projects/bengaluru/147/project-for-image-testing-data-panathur-brochure.pdf?v=1728914977385',
-  },
-  {
-    id: 2,
-    name: 'Phase 2',
-    brochure: 'https://www.coca-colacompany.com/content/dam/company/us/en/reports/coca-cola-business-environmental-social-governance-report-2021.pdf',
-  },
-  {
-    id: 3,
-    name: 'Phase 3',
-    brochure: 'https://d2l0lb5gc1bw3t.cloudfront.net/residential/projects/bengaluru/147/project-for-image-testing-data-panathur-brochure.pdf?v=1728914977385',
-  },
-];
+// PhaseOverview interface
+interface PhaseOverview {
+  phaseId: number;
+  phaseName: string | null;
+  phaseBrochureUrl: string | null;
+}
 
-const ProjectBrouchersSection = ({ projName }: { projName: string }): JSX.Element => {
+const ProjectBrouchersSection = ({ projName, phaseOverviewData }: { projName: string, phaseOverviewData: PhaseOverview[] }): JSX.Element => {
   const [state, setState] = useState<{
     activePhase: ProjectPhase;
     numPages: number | null;
@@ -42,8 +33,12 @@ const ProjectBrouchersSection = ({ projName }: { projName: string }): JSX.Elemen
     blobCache: Record<number, string | null>;
     loading: boolean;
     errorMessage: string;
-  }>( {
-    activePhase: projectPhases[0],
+  }>({
+    activePhase: {
+      id: phaseOverviewData[0].phaseId,
+      name: phaseOverviewData[0].phaseName || 'Phase 1',
+      brochure: phaseOverviewData[0].phaseBrochureUrl,
+    },
     numPages: null,
     pageNumber: 1,
     pageScale: 1,
@@ -53,7 +48,7 @@ const ProjectBrouchersSection = ({ projName }: { projName: string }): JSX.Elemen
   });
 
   const pdfContainerRef = useRef<HTMLDivElement>(null);
-  
+
   const onDocumentLoadSuccess = useCallback(({ numPages }: { numPages: number }) => {
     setState(prev => ({ ...prev, numPages, pageNumber: 1 }));
     adjustPageScale();
@@ -85,6 +80,7 @@ const ProjectBrouchersSection = ({ projName }: { projName: string }): JSX.Elemen
 
     try {
       if (!state.blobCache[phase.id]) {
+        if (!phase.brochure) throw new Error('Brochure URL not available');
         const response = await fetch(phase.brochure);
         if (!response.ok) throw new Error('Failed to fetch PDF');
         const blob = await response.blob();
@@ -105,10 +101,9 @@ const ProjectBrouchersSection = ({ projName }: { projName: string }): JSX.Elemen
 
   const buttonClasses = (isActive: boolean) =>
     `px-4 py-2 text-lg font-semibold rounded-lg transition-all duration-300 ${
-      isActive ? 
-      'bg-[#0073C6] !text-white shadow-lg' : 
-      'bg-white text-[#0073C6] hover:bg-gray-50 border border-gray-300'
+      isActive ? 'bg-[#0073C6] !text-white shadow-lg' : 'bg-white text-[#0073C6] hover:bg-gray-50 border border-gray-300'
     } focus:z-10 focus:ring-2 focus:ring-[#0073C6] focus:text-[#0073C6] hover:scale-105`;
+
   const isMobile = useMediaQuery('(max-width: 660px)');
   return (
     <div className="w-[95%] sm:w-[90%] mx-auto my-4 sm:my-8 bg-gray-50">
@@ -119,16 +114,20 @@ const ProjectBrouchersSection = ({ projName }: { projName: string }): JSX.Elemen
       
       <div className="mb-1 flex-wrap pl-3">
         <div className="inline-flex rounded-md shadow-sm space-x-2" role="group">
-          {projectPhases.map((phase) => (
-            <button
-              key={phase.id}
-              onClick={() => loadPDF(phase)}
-              className={`${buttonClasses(state.activePhase.id === phase.id)} ${
-                phase.id === projectPhases.length ? 'rounded-r-lg' : ''
+          {phaseOverviewData.map((phase) => (
+         phase.phaseBrochureUrl &&  <button
+              key={phase.phaseId}
+              onClick={() => loadPDF({
+                id: phase.phaseId,
+                name: phase.phaseName || `Phase ${phase.phaseId}`,
+                brochure: phase.phaseBrochureUrl
+              })}
+              className={`${buttonClasses(state.activePhase.id === phase.phaseId)} ${
+                phase.phaseId === phaseOverviewData.length ? 'rounded-r-lg' : ''
               }`}
-              aria-pressed={state.activePhase.id === phase.id}
+              aria-pressed={state.activePhase.id === phase.phaseId}
             >
-              <span className='hidden sm:inline-flex'> {projName} : </span>  {phase.name}
+              <span className='hidden sm:inline-flex'> {projName} : </span>  {phase.phaseName || `Phase ${phase.phaseId}`}
             </button>
           ))}
         </div>
@@ -139,7 +138,7 @@ const ProjectBrouchersSection = ({ projName }: { projName: string }): JSX.Elemen
         ref={pdfContainerRef}
       >
         <div className="flex-grow w-full overflow-hidden flex justify-center items-center relative">
-          <a href={state.activePhase.brochure}
+          <a href={state.activePhase.brochure || '#'}
             target='_blank'
             download
             className='absolute top-0 right-0'
@@ -163,7 +162,7 @@ const ProjectBrouchersSection = ({ projName }: { projName: string }): JSX.Elemen
                 pageNumber={state.pageNumber}
                 renderTextLayer={false}
                 renderAnnotationLayer={false}
-                scale={isMobile ? 0.4 :0.7}
+                scale={isMobile ? 0.4 : 0.7}
                 className="shadow-md rounded overflow-y-auto"
               />
             </Document>
@@ -183,7 +182,7 @@ const ProjectBrouchersSection = ({ projName }: { projName: string }): JSX.Elemen
               Page {state.pageNumber} of {state.numPages || '--'}
             </span>
             <a
-              href={state.activePhase.brochure}
+              href={state.activePhase.brochure || '#'}
               target='_blank'
               download
               className={`bg-[#0073C6] text-white px-3 py-1 rounded-full flex items-center space-x-2 transition-all duration-300 ease-in-out transform group-hover:scale-105 hover:shadow-lg ${state.loading ? 'cursor-not-allowed' : ''}`}

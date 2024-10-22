@@ -13,7 +13,7 @@ import "leaflet/dist/leaflet.css";
 import { LatLngTuple } from "leaflet";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css";
 import "leaflet-defaulticon-compatibility";
-import { BlueMobileMapIcon, MapIcon, MobileMapIcon } from "@/app/data/map";
+import { BlueMobileMapIcon, createCustomIconReactLeafLet, MapIcon, MobileMapIcon } from "@/app/data/map";
 import { RecenterIcon } from "@/app/images/commonSvgs";
 import { useMediaQuery } from "@mantine/hooks";
 import clsx from "clsx";
@@ -34,7 +34,6 @@ const Map = ({
   return (
     <MapContainer
       center={position}
-      zoom={13}
       className={clsx(
         " h-[291px] sm:h-[456px] xl:h-[600px] w-full z-[1] relative",
         className
@@ -80,7 +79,7 @@ const Content: React.FC<any> = ({
   setSelectedLocation,
 }) => {
   const position: LatLngTuple = useMemo(() => [lat, lang], [lat, lang]);
-
+const Icon =  createCustomIconReactLeafLet(selected);
   const map = useMap();
   useEffect(() => {
     if (selectedLocation && selectedLocation.name) {
@@ -92,7 +91,7 @@ const Content: React.FC<any> = ({
   }, [selectedLocation, selected, position, map]);
 
   useEffect(() => {
-    map.setView(position, 11);
+    map.setView(position,13);
   }, [selected, map, position]);
   const isMobile = useMediaQuery("(max-width: 601px)");
   return (
@@ -108,6 +107,7 @@ const Content: React.FC<any> = ({
             key={item?.lat}
             position={[parseFloat(item?.lat), parseFloat(item?.lang)]}
             title={item.name}
+            icon={Icon}
             {...(isMobile && { icon: BlueMobileMapIcon })}
             zIndexOffset={100}
             eventHandlers={{

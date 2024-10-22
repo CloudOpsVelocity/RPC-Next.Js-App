@@ -11,6 +11,7 @@ const getProjectDetails = async (slug: string): Promise<MERGERPROJECT> => {
     {
       cache: "no-cache",
     }
+    
   );
   const data = await response.json();
 
@@ -87,9 +88,23 @@ const getProjectUnits = async (
     });
     return modifiedData;
   }
-  console.log(data);
   return data;
 };
+export const getAuthorityNames = async (stringIds: string) => {
+  const res = await axios.post(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/common/proj-authority`
+  );
+  // Single loop through res.data to find matching IDs
+  const authorityNames = [];
+  for (const item of res.data) {
+    if (stringIds.includes(item.cid.toString())) {
+      authorityNames.push(item.constDesc);
+    }
+  }
+
+  return authorityNames;
+};
+
 
 const getCachedUser = unstable_cache(
   async (id: string): Promise<Main> => getCachedUser(id),

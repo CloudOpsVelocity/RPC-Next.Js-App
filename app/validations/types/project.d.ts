@@ -43,6 +43,9 @@ export interface Main {
   phases: any;
   partialUnitData: any;
   nearByLocations: {[key:string]:any};
+  projAuthorityId?:string
+  projAuthorityNames?:string[]
+  sourceBuilderUrl?:string
 }
 
 export interface AmenityList {

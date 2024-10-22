@@ -32,11 +32,12 @@ import PropertyDataDisplay from "@/app/components/project/_ui/PricingDetailsSect
 import Disclamer from "@/app/components/builder/Disclamer";
 import BreadCrumbs from "@/app/components/project/breadcrum/BreadCrum";
 import dynamic from "next/dynamic";
+import { MERGERPROJECT } from "@/app/validations/types/project";
 const ProjectBrouchersSection = dynamic(() => import("@/app/components/project/broucher/ProjectBrouchersSections"), {
   ssr: false,
 })
 type Props = {
-  projResponse: any;
+  projResponse: MERGERPROJECT;
   amenitiesFromDB: any;
   slug: string;
   scrollId?: string;
@@ -114,7 +115,7 @@ export default async function ProjectsDetailsPage({
             scrollId={scrollId}
           />
         </MobileHidden>
-        <Overview {...data} slug={slug} Ph aseOverview={phaseOverview} />
+        <Overview {...data} slug={slug} PhaseOverview={phaseOverview} />
         <ListingRentAvail
           projName={data.projectName}
           r={data.rentListing}
@@ -191,7 +192,7 @@ export default async function ProjectsDetailsPage({
             mapData={nearByLocations}
           />
         )}
-        <ProjectBrouchersSection  projName={data.projectName} />
+        <ProjectBrouchersSection  projName={data.projectName} phaseOverviewData={phaseOverview} />
         <ErrorContainer data={data.specificationList}>
           <Specifications
             data={data.specificationList}

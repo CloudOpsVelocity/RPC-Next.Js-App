@@ -137,7 +137,7 @@ export default function ProjectDetailsP({
                 key="possessionDate"
                 icon={<StartDate />}
                 title="Expected Completion Date"
-                value={formatDateDDMMYYYY(selectedPhase.possassionDate)}
+                value={formatDateDDMMYYYY(selectedPhase.expectedCompletion)}
                 className={styles.box}
                 Id="possession-date"
               />
@@ -184,7 +184,7 @@ export default function ProjectDetailsP({
                 icon={<TotalLandArea />}
                 title="Promoter Name"
                 value={
-                  "Kesari Lal."
+                  selectedPhase.phasePromoter
                 }
                 className={styles.box}
               />
