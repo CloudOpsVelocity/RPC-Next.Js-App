@@ -1,33 +1,7 @@
+import { SearchFilter } from "@/app/types/search";
 import { filterParser } from "@/app/utils/search";
 import { convertToOriginalState } from "@/app/utils/search/transform";
 import { atom } from "jotai";
-
-export interface SearchFilter {
-  current: number | null;
-  locality: string[];
-  propTypes: number | null;
-  unitTypes: number[];
-  bathRooms: number[];
-  parkings: number[];
-  amenities: number[];
-  listedBy: null | string;
-  reraVerified: number[];
-  areaValue: [number, number];
-  bugdetValue: [number, number];
-  builderIds: string[];
-  city: string | null;
-  facings: number[];
-  furnish: number | null;
-  propStatus: string | null;
-  pnb: number | null;
-  sortByfield: string | null;
-  sortType: number | null;
-  cg: string | null;
-  projIdEnc: string | null;
-  lat: number | null;
-  lng: number | null;
-  projName?: string | null;
-}
 
 export const initialState: SearchFilter = {
   current: null,

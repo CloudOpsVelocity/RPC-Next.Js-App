@@ -146,6 +146,7 @@ export default function GalleryBlock({
           <div className="flex justify-start items-start w-full gap-[4%] flex-wrap ">
             {images?.map((img, ind) => (
               <Image
+                key={img[ind]}
                 width={150}
                 fit="fill"
                 height={100}
@@ -198,7 +199,10 @@ export default function GalleryBlock({
                         src={img as string}
                         className={`!w-full rounded-[5px] cursor-pointer h-[64px] md:h-[90px] object-cover`}
                         content=""
-                        onClick={(e) => {   e.preventDefault(); handleMediaClick(img as string, ind)}}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleMediaClick(img as string, ind);
+                        }}
                         // controls
                       >
                         <track
@@ -210,7 +214,12 @@ export default function GalleryBlock({
                         />
                       </video>
                     )}
-                    <span className="absolute pointer-events-none " onClick={(e) => {handleMediaClick(img as string, ind)}}>
+                    <span
+                      className="absolute pointer-events-none "
+                      onClick={(e) => {
+                        handleMediaClick(img as string, ind);
+                      }}
+                    >
                       {videoPlayIcon}
                     </span>
                   </div>

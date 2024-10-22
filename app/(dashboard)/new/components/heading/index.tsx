@@ -1,7 +1,6 @@
 import data from "@/app/data/auth";
 import clsx from "clsx";
 import React from "react";
-import HandPickedProjects from "../hand-picked-projects";
 
 type Props = {
   title: string;

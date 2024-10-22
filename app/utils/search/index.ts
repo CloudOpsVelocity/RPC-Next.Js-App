@@ -1,4 +1,4 @@
-import { SearchFilter } from "@/app/store/search";
+import { SearchFilter } from "@/app/types/search";
 
 export const filtersParserToQueryParams = (data: SearchFilter) => {
   const parsedData: any = {};

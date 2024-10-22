@@ -160,6 +160,7 @@ const Gallery: React.FC<GalleryProps> = ({
               images.map((image, index) => {
                 return (
                   <Carousel.Slide
+                    key={image}
                     onClick={() => {
                       handleImageClick(image);
                       setCurrentSlide(index);

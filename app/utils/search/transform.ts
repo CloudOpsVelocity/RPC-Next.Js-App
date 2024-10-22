@@ -1,4 +1,4 @@
-import { SearchFilter } from "@/app/store/search";
+import { SearchFilter } from "@/app/types/search";
 
 const convertToOriginalState = (data: any): SearchFilter => {
   const convertedData: SearchFilter = {

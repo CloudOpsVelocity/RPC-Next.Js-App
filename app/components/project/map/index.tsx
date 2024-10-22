@@ -29,6 +29,7 @@ import { isScrollingAtom } from "../navigation";
 import CustomScrollArea from "./ScrollPanel";
 import { isScrollingAtom as propScrollingAtom } from "../../property/Navigation";
 import SubHeading from "../headings/SubHeading";
+import { areas } from "./data";
 
 export interface Area {
   name: string;
@@ -185,7 +186,10 @@ const LeafMap: React.FC<{
 
       {mapData[selected] && mapData[selected].length > 0 && (
         <div className="mt-8 w-[90%] mx-auto hidden sm:block">
-          <h1 className="text-h2 sm:text-[22px] xl:text-[32px] font-semibold mb-[12px] capitalize break-words scroll-mt-[180px] " id="near-by-projects">
+          <h1
+            className="text-h2 sm:text-[22px] xl:text-[32px] font-semibold mb-[12px] capitalize break-words scroll-mt-[180px] "
+            id="near-by-projects"
+          >
             Nearby <span className="text-[#148B16] ml-1">{projName} </span>
           </h1>
           <div className="flex gap-2 mt-3 flex-wrap sm:gap-x-[2.5] xl:gap-x-5">
@@ -390,79 +394,3 @@ const LocationList: React.FC<{
     </div>
   );
 };
-
-export const areas: Area[] = [
-  {
-    name: "commute",
-    Icon: CommuteIcon,
-    key: "transit_station",
-  },
-  {
-    name: "Train",
-    Icon: TrainIcon,
-    key: "train_station",
-  },
-  {
-    name: "Bus",
-    Icon: BusIcon,
-    key: "bus_station",
-  },
-
-  {
-    name: "Hospital",
-    Icon: HospitalIcon,
-    key: "hospital",
-  },
-
-  {
-    name: "School",
-    Icon: SchoolIcon,
-    key: "school",
-  },
-
-  {
-    name: "Market",
-    Icon: MarketIcon,
-    key: "supermarket",
-  },
-
-  {
-    name: "Restaurant",
-    Icon: RestaurentIcon,
-    key: "food",
-  },
-
-  {
-    name: "Bank",
-    Icon: BankIcon,
-    key: "bank",
-  },
-
-  {
-    name: "Clinic",
-    Icon: ClinikIcon,
-    key: "clinic",
-  },
-
-  {
-    name: "ATM",
-    Icon: AtmIcon,
-    key: "atm",
-  },
-
-  {
-    name: "Post Office",
-    Icon: PostOfficeIcon,
-    key: "post_office",
-  },
-
-  {
-    name: "Mall",
-    Icon: MallIcon,
-    key: "shopping_mall",
-  },
-];
-export const areasMap = areas.reduce((map, area) => {
-  map.set(area.key, { name: area.name, Icon: area.Icon });
-  return map;
-}, new Map());

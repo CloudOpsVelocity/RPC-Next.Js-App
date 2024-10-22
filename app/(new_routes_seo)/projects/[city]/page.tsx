@@ -1,14 +1,4 @@
 import React from "react";
-import {
-  extractCityName,
-  generateHomePageSlugs,
-  getHomePageParamvalues,
-} from "../../utils/new-seo-routes/home";
-import { getShortIds } from "@/app/(dashboard)/new/api";
-import { getHomeListingData } from "@/app/(dashboard)/new/api";
-import { getData } from "@/app/(dashboard)/new/api";
-import HomagePageIndex from "@/app/(dashboard)/new/components/HomagePageIndex";
-import { notFound } from "next/navigation";
 
 type Props = {
   params: {

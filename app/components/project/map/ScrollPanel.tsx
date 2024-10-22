@@ -1,15 +1,10 @@
 import React from "react";
 import clsx from "clsx";
-import { Area, areasMap } from ".";
 import { Carousel } from "@mantine/carousel";
 import styles from "@/app/styles/Map.module.css";
-import {
-  ImgCarouselIcon,
-  NextDarkButton,
-  PrevCarouselIcon,
-  PrevDarkButton,
-} from "@/app/images/commonSvgs";
+import { NextDarkButton, PrevDarkButton } from "@/app/images/commonSvgs";
 import { useMediaQuery } from "@mantine/hooks";
+import { Area, areasMap } from "./data";
 
 const CustomScrollArea: React.FC<{
   areas: Area[];

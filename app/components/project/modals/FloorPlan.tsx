@@ -29,6 +29,7 @@ import useRecentUnits from "@/app/hooks/project/useRecentUnits";
 import RecentSearchedUnits from "../_ui/RecentSearchedUnits";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import { projectReqDataAtom } from "@/app/store/project/project.req";
+import { RightSection } from "./FloorplanModalRightSection";
 
 type Props = {
   propCgId: any;
@@ -50,7 +51,7 @@ function FloorPlanModal({
   const setUnitsFloor = useSetAtom(unitFloorsAtom);
   const [opened, { close }] = useFloorPlanPopup();
   const form = useFormContext();
-  
+
   const scrollFiltersRef = useRef<HTMLDivElement>(null);
 
   const handleClose = () => {
@@ -164,8 +165,12 @@ function FloorPlanModal({
             handleReset={handleReset}
             showClearAll={showClearAll}
           />
-          <MiddleSection projName={projName} propCgId={propCgId}
-            allUnits={data} handleReset={handleReset} />
+          <MiddleSection
+            projName={projName}
+            propCgId={propCgId}
+            allUnits={data}
+            handleReset={handleReset}
+          />
           {selectedFloor && <RightSection propCgId={propCgId} data={data} />}
         </div>
       </div>
@@ -178,7 +183,7 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
   const [floornPlanArray, setFloorsArray] = useAtom(floorPlansArray);
   const [, setFloor] = useAtom(selectedFloorAtom);
   const { getInputProps, values, setFieldValue, setValues } = useFormContext();
-  const {setPreviousFilers} = useRecentUnits()
+  const { setPreviousFilers } = useRecentUnits();
   const getOptions = (property: string): string[] => {
     const optionsSet = new Set<string>();
     data?.forEach((item: any) => {
@@ -212,7 +217,7 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
       return;
     }
 
-  // setFilteredUnits(floornPlanArray)
+    // setFilteredUnits(floornPlanArray)
     const filteredData = data.filter((item: any) => {
       return Object.keys(values).every(
         (key) =>
@@ -237,7 +242,7 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
   const handleOnChange = (value: string, key: string) => {
     setFieldValue(key, value);
     let prevObj = values;
-    setPreviousFilers(prevObj)
+    setPreviousFilers(prevObj);
     prevObj[key] = value;
     setValues(prevObj);
     handleSearch(key);
@@ -706,318 +711,32 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
     </div>
   );
 };
-const RightSection = ({ propCgId, className }: any) => {
-  const data = useAtomValue(selectedFloorAtom);
-  const [,{open}] = useReqCallPopup()
-  const projectReqData = useAtomValue(projectReqDataAtom);
-  return (
-    <div
-      className={clsx(
-        "bg-[#F4FBFF]  p-6 rounded-lg w-[100%] xl:mb-[10%] xl:w-full max-w-[342px] sm:max-w-[300px] xl:max-w-[342px] shadow",
-        className
-      )}
-    >
-      <div className="space-y-4 sm:space-y-2 xl:space-y-4">
-        {propCgId != projectprops.plot && (
-          <div className="flex items-center space-x-3">
-            {propertyDetailsSvgs.unitType}
-            <p className="text-[#4D6677] text-[14px] font-[500]">
-              Unit Type:
-              <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
-                {" "}
-                {data?.bhkName}
-              </span>
-            </p>
-          </div>
-        )}
 
-        {((data.towerName && propCgId === projectprops.apartment) ||
-          propCgId === projectprops.villament) && (
-          <div className="flex items-center space-x-3">
-            {propertyDetailsSvgs.towerName}
-            <p className="text-[#4D6677] text-[14px] font-[500]">
-              Tower:
-              <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
-                {" "}
-                {data.towerName}
-              </span>
-            </p>
-          </div>
-        )}
-
-        {data.block &&
-          propCgId == projectprops.apartment &&
-          propCgId != projectprops.plot && (
-            <div className="flex items-center space-x-3">
-              {propertyDetailsSvgs.block}
-              <p className="text-[#4D6677] text-[14px] font-[500]">
-                Block:
-                <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] capitalize">
-                  {" "}
-                  {data.block}
-                </span>
-              </p>
-            </div>
-          )}
-
-        {propCgId != projectprops.plot && (
-          <div className="flex items-center space-x-3">
-            {propertyDetailsSvgs.floor}
-            <p className="text-[#4D6677] text-[14px] font-[500]">
-              {`${
-                propCgId == projectprops.rowHouse ||
-                propCgId == projectprops.villa
-                  ? "Elevation"
-                  : "At Floor"
-              }`}
-              :
-              <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
-                {" "}
-                {data?.floor === 0
-                  ? "G"
-                  : propCgId === projectprops.rowHouse ||
-                    propCgId === projectprops.villa
-                  ? `${data?.floor}`
-                  : data?.floor}
-              </span>{" "}
-            </p>
-          </div>
-        )}
-
-        <div className="flex items-center space-x-3">
-          {propertyDetailsSvgs.unitNumber}
-          <p className="text-[#4D6677] text-[14px] font-[500]">
-            Unit Number:
-            <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] capitalize">
-              {" "}
-              {data.unitNumber}
-            </span>
-          </p>
-        </div>
-
-        <div className="flex items-center space-x-3">
-          {propertyDetailsSvgs.facingName}
-          <p className="text-[#4D6677] text-[14px] font-[500]">
-            {`${propCgId == projectprops.plot ? "Plot Facing" : "Facing"} `}:
-            <span className="text-[#303A42] text-[14px] font-[600] ml-[10px] ">
-              {" "}
-              {data.facingName}
-            </span>
-          </p>
-        </div>
-
-        {propCgId != projectprops.plot && (
-          <div className="flex items-center space-x-3">
-            {propertyDetailsSvgs.superBuildUparea}
-            <p className="text-[#4D6677] text-[14px] font-[500]">
-              Super Builtup Area:
-              <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
-                {" "}
-                {formatNumberWithSuffix(data.superBuildUparea, false)} sq.ft
-              </span>
-            </p>
-          </div>
-        )}
-
-        {propCgId != projectprops.plot && (
-          <div className="flex items-center space-x-3">
-            {propertyDetailsSvgs.caretarea}
-            <p className="text-[#4D6677] text-[14px] font-[500]">
-              Carpet Area:
-              <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
-                {" "}
-                {formatNumberWithSuffix(data.caretarea, false)} sq.ft
-              </span>
-            </p>
-          </div>
-        )}
-
-        {(propCgId == projectprops.villa ||
-          propCgId == projectprops.rowHouse ||
-          propCgId == projectprops.villament) &&
-          data.gardenArea && (
-            <div className="flex items-center space-x-3">
-              {propertyDetailsSvgs.caretarea}
-              <p className="text-[#4D6677] text-[14px] font-[500]">
-                Garden Area:
-                <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
-                  {" "}
-                  {data.gardenArea} sq.ft
-                </span>
-              </p>
-            </div>
-          )}
-        {(propCgId == projectprops.villa ||
-          propCgId == projectprops.rowHouse ||
-          propCgId == projectprops.villament) &&
-          data?.terraceArea &&
-          data.terraceArea !== "null" && (
-            <div className="flex items-center space-x-3">
-              {propertyDetailsSvgs.caretarea}
-              <p className="text-[#4D6677] text-[14px] font-[500]">
-                Terrace Area:
-                <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
-                  {" "}
-                  {formatNumberWithSuffix(data.terraceArea, false)} sq.ft
-                </span>
-              </p>
-            </div>
-          )}
-        {(propCgId == projectprops.villa ||
-          propCgId == projectprops.rowHouse ||
-          propCgId == projectprops.villament) &&
-          data.parkingArea !== "None" &&
-          data.parkingArea && (
-            <div className="flex items-center space-x-3">
-              {propertyDetailsSvgs.parkingArea}
-              <p className="text-[#4D6677] text-[14px] font-[500]">
-                Parking Area:
-                <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
-                  {" "}
-                  {formatNumberWithSuffix(data.parkingArea, false)} sq.ft
-                </span>
-              </p>
-            </div>
-          )}
-        {propCgId == projectprops.villament && data?.totalBalconySize && (
-          <div className="flex items-center space-x-3">
-            {propertyDetailsSvgs.parkingArea}
-            <p className="text-[#4D6677] text-[14px] font-[500]">
-              Balcony Size:
-              <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
-                {" "}
-                {formatNumberWithSuffix(data.totalBalconySize, false)} sq.ft
-              </span>
-            </p>
-          </div>
-        )}
-        {(propCgId == projectprops.plot ||
-          propCgId == projectprops.villa ||
-          propCgId == projectprops.rowHouse) && (
-          <div className="flex items-center space-x-3">
-            {propertyDetailsSvgs.plotArea}
-            <p className="text-[#4D6677] text-[14px] font-[500]">
-              Plot Area:
-              <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
-                {" "}
-                {formatNumberWithSuffix(data.plotArea, false)} sq.ft
-              </span>
-            </p>
-          </div>
-        )}
-        {propCgId != projectprops.plot && (
-          <div className="flex items-center space-x-3">
-            {propertyDetailsSvgs.noOfCarParking}
-            <p className="text-[#4D6677] text-[14px] font-[500]">
-              Car Parking:
-              <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
-                {" "}
-                {data.noOfCarParking ? data.noOfCarParking : "N/A"}
-              </span>
-            </p>
-          </div>
-        )}
-
-        {propCgId != projectprops.plot &&
-          data.parkingType &&
-          data.parkingType !== "None" && (
-            <div className="flex items-center space-x-3">
-              {propertyDetailsSvgs.parkingType}
-              <p className="text-[#4D6677] text-[14px] font-[500]">
-                Open/Covered Parking:
-                <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
-                  {data.parkingType} Parking
-                </span>
-              </p>
-            </div>
-          )}
-
-        {propCgId != projectprops.plot && data?.totalNumberOfBalcony > 0 && (
-          <div className="flex items-center space-x-3">
-            {propertyDetailsSvgs.totalNumberOfBalcony}
-            <p className="text-[#4D6677] text-[14px] font-[500]">
-              Balconies:
-              <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
-                {" "}
-                {data.totalNumberOfBalcony}
-              </span>
-            </p>
-          </div>
-        )}
-
-        {propCgId != projectprops.plot && (
-          <div className="flex items-center space-x-3">
-            {propertyDetailsSvgs.totalNumberofBathroom}
-            <p className="text-[#4D6677] text-[14px] font-[500]">
-              Bathroom:
-              <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
-                {" "}
-                {data.totalNumberofBathroom}
-              </span>
-            </p>
-          </div>
-        )}
-
-        {propCgId == projectprops.plot && (
-          <div className="flex items-center space-x-3">
-            {propertyDetailsSvgs.length}
-            <p className="text-[#4D6677] text-[14px] font-[500]">
-              Length of Plot:
-              <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
-                {" "}
-                {data.length} .ft
-              </span>
-            </p>
-          </div>
-        )}
-
-        {propCgId == projectprops.plot && (
-          <div className="flex items-center space-x-3">
-            {propertyDetailsSvgs.width}
-            <p className="text-[#4D6677] text-[14px] font-[500]">
-              Breadth of Plot:
-              <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
-                {" "}
-                {data.width} .ft
-              </span>
-            </p>
-          </div>
-        )}
-        <button className="bg-btnPrimary text-white w-full mt-3 py-2 rounded-md font-bold" onClick={()=>{
-          open({
-            modal_type:"REQ_QUOTE",
-            source:"projCard",
-            reqId:data?.projIdEnc,
-            postedByName:projectReqData.postedByName,
-            postedId:projectReqData.postedById,
-            title:data?.unitNumber,
-            projUnitIdEnc:data?.unitIdEnc,
-          })
-        }}>
-          Request a Quote
-        </button>
-      </div>
-    </div>
-  );
-};
-
-const MiddleSection = ({ hide = false, projName, propCgId ,allUnits,handleReset}: any) => {
+const MiddleSection = ({
+  hide = false,
+  projName,
+  propCgId,
+  allUnits,
+  handleReset,
+}: any) => {
   const data = useAtomValue(selectedFloorAtom);
   const { setValues } = useFormContext();
   const [floorsArray, setFloorsArray] = useAtom<any>(floorPlansArray);
   const [, { open }] = useSubFloorPlanPopup();
   const [selectedFloor, setFloor] = useAtom(selectedFloorAtom);
-  
-  const {recentUnits,setPreviousFilers} = useRecentUnits()
-  const selectImg = (index: number,recentActiveId?:string) => {
-    if(recentActiveId){
-      const selectedItem = allUnits.find((item:any) => item.unitIdEnc == recentActiveId);
+
+  const { recentUnits, setPreviousFilers } = useRecentUnits();
+  const selectImg = (index: number, recentActiveId?: string) => {
+    if (recentActiveId) {
+      const selectedItem = allUnits.find(
+        (item: any) => item.unitIdEnc == recentActiveId
+      );
       setFloor({
         ...selectedItem,
         floorPlanUrl: selectedItem?.floorPlanUrl ?? ImgNotAvail,
-      })
+      });
       // @ts-ignore
-      setFloorsArray([selectedItem])
+      setFloorsArray([selectedItem]);
       setValues(setPropertyValues(selectedItem, propCgId));
       return;
     }
@@ -1039,7 +758,7 @@ const MiddleSection = ({ hide = false, projName, propCgId ,allUnits,handleReset}
     setFloorsArray(filteredFloors);
   };
   const recentFiltersClick = (activeFilters: any) => {
-    handleReset()
+    handleReset();
     setValues(activeFilters);
     const filteredData = allUnits.filter((item: any) => {
       return Object.keys(activeFilters).every(
@@ -1054,7 +773,7 @@ const MiddleSection = ({ hide = false, projName, propCgId ,allUnits,handleReset}
     });
     // @ts-ignore
     setFloorsArray(filteredData);
-  }
+  };
   return (
     <div className="flex flex-col justify-center items-start shrink-0 w-full sm:max-w-[300px] md:max-w-[500px] xl:max-w-[686px]">
       <p className=" w-full  mb-[1%] text-[#001F35] text-[12px] text-center p-2 xl:text-right xl:text-sm not-italic font-medium leading-[normal] tracking-[0.56px] ">
@@ -1177,7 +896,10 @@ const MiddleSection = ({ hide = false, projName, propCgId ,allUnits,handleReset}
           </div>
         )}
 
-<RecentSearchedUnits recentFiltersClick={recentFiltersClick} propCgId={propCgId} />
+      <RecentSearchedUnits
+        recentFiltersClick={recentFiltersClick}
+        propCgId={propCgId}
+      />
     </div>
   );
 };

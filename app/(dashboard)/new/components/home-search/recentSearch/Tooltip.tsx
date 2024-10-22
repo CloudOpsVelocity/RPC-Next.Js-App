@@ -9,7 +9,7 @@ const CustomTooltip: React.FC<CustomTooltipProps> = ({ content, children }) => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
   return (
-    <div 
+    <div
       className="relative inline-block"
       onMouseEnter={() => setIsVisible(true)}
       onMouseLeave={() => setIsVisible(false)}
@@ -17,7 +17,7 @@ const CustomTooltip: React.FC<CustomTooltipProps> = ({ content, children }) => {
       {isVisible && (
         <div className="absolute -top-[45px] left-1/2 transform -translate-x-1/2 px-3 py-2 z-50 max-w-xs text-sm font-medium text-white bg-gray-900 rounded-md shadow-lg dark:bg-gray-700">
           {content}
-          <div className="absolute w-3 h-3 bg-gray-900 dark:bg-gray-700 rotate-45 -bottom-1 left-1/2 transform -translate-x-1/2"></div>
+          <div className="absolute w-3 h-3 bg-gray-900 dark:bg-gray-700 rotate-45 -bottom-1 left-1/2 transform -translate-x-1/2" />
         </div>
       )}
       {children}
@@ -36,16 +36,16 @@ export const Box: React.FC<BoxProps> = ({ item }) => {
   };
 
   return (
-    <CustomTooltip content={item?.name || ''}>
+    <CustomTooltip content={item?.name || ""}>
       <div className="inline-flex justify-center items-center gap-2 rounded-full px-3 py-2 border border-[#C3C3C3] bg-white text-[#5B84C0] text-sm font-medium cursor-pointer hover:bg-[#f0f4f8] transition-colors duration-200 shadow-sm">
         <span className="truncate max-w-[150px]">
-          {truncateText(item?.name || '', 40)}
+          {truncateText(item?.name || "", 40)}
         </span>
         {config.icon}
       </div>
     </CustomTooltip>
   );
-}
+};
 
 const config = {
   icon: (
