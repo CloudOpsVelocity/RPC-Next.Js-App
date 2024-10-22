@@ -61,11 +61,9 @@ export default function AddmoreInput({
         size="lg"
         {...(index == 0 ? { mt: 0 } : { mt: "md" })}
         {...(index == 3 && { mb: "xs" })}
-        // mt={"md"}
         label={index != 0 ? `${label} ${index + 1}` : label}
         placeholder={placeholder}
-        key={`${id}.${index}.name`}
-        // {...form.getInputProps(`${id}.${index}.name`)}
+        key={`${id[index]}`}
         classNames={{
           root: StepCss.inputRoot,
           input: StepCss.textInput,
