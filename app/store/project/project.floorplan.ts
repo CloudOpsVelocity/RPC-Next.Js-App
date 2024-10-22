@@ -2,7 +2,6 @@ import { atom, useAtom } from "jotai";
 import { atomWithReducer } from "jotai/utils";
 import { useCallback, useEffect, useMemo } from "react";
 
-
 interface FloorPlanState {
   floorplans: any[];
   filteredFloorplans: any[]; // New state for filtered data
@@ -34,24 +33,35 @@ type Action =
   | { type: "SET_ERROR"; payload: string | null }
   | { type: "SET_SELECTED_FLOOR"; payload: any }; // New action for setting selected floor
 
-const floorPlanReducer = (state: FloorPlanState, action: Action): FloorPlanState => {
+const floorPlanReducer = (
+  state: FloorPlanState,
+  action: Action
+): FloorPlanState => {
   switch (action.type) {
     case "SET_FLOORPLANS":
-      return { ...state, floorplans: action.payload, filteredFloorplans: action.payload };
+      return {
+        ...state,
+        floorplans: action.payload,
+        filteredFloorplans: action.payload,
+      };
     case "SET_FILTERED_FLOORPLANS":
       return { ...state, filteredFloorplans: action.payload };
     case "ADD_FILTER":
       return {
         ...state,
-        selectedFilters: { ...state.selectedFilters, [action.payload.key]: action.payload.value },
+        selectedFilters: {
+          ...state.selectedFilters,
+          [action.payload.key]: action.payload.value,
+        },
       };
-    case "REMOVE_FILTER":
+    case "REMOVE_FILTER": {
       const updatedFilters = { ...state.selectedFilters };
       delete updatedFilters[action.payload];
       return {
         ...state,
         selectedFilters: updatedFilters,
       };
+    }
     case "REMOVE_ALL_FILTERS":
       return { ...state, selectedFilters: {} };
     case "SET_FILTERS":
@@ -67,7 +77,10 @@ const floorPlanReducer = (state: FloorPlanState, action: Action): FloorPlanState
   }
 };
 
-export const floorPlanStoreAtom = atomWithReducer(initialState, floorPlanReducer);
+export const floorPlanStoreAtom = atomWithReducer(
+  initialState,
+  floorPlanReducer
+);
 export const useFloorPlanStore = () => {
   const [state, dispatch] = useAtom(floorPlanStoreAtom);
 
@@ -86,16 +99,19 @@ export const useFloorPlanStore = () => {
   const removeAllFilters = () => {
     dispatch({ type: "REMOVE_ALL_FILTERS" });
   };
- const setSelectedFloor = (floor: any) => {
-  dispatch({ type: "SET_SELECTED_FLOOR", payload: floor });
-};
+  const setSelectedFloor = (floor: any) => {
+    dispatch({ type: "SET_SELECTED_FLOOR", payload: floor });
+  };
   const applyFilters = useCallback(() => {
     const { floorplans, selectedFilters } = state;
-    console.log(selectedFilters)
+    console.log(selectedFilters);
     const filteredData = floorplans.filter((item: any) => {
       return Object.keys(selectedFilters).every((key) => {
         const filterValue = selectedFilters[key];
-        return !filterValue || String(item[key]).toLowerCase() === filterValue.toLowerCase();
+        return (
+          !filterValue ||
+          String(item[key]).toLowerCase() === filterValue.toLowerCase()
+        );
       });
     });
     dispatch({ type: "SET_FILTERED_FLOORPLANS", payload: filteredData });
@@ -107,7 +123,8 @@ export const useFloorPlanStore = () => {
       return Object.keys(selectedFilters).every(
         (key) =>
           !selectedFilters[key] ||
-          String(item[key]).toLowerCase() === selectedFilters[key]?.toLowerCase()
+          String(item[key]).toLowerCase() ===
+            selectedFilters[key]?.toLowerCase()
       );
     });
     const options = Array.from(
@@ -138,9 +155,9 @@ export const useFloorPlanStore = () => {
   const handleOnChange = (value: string, key: string) => {
     addFilter(key, value);
   };
-useEffect(() => {
-  applyFilters()
-}, [state.selectedFilters])
+  useEffect(() => {
+    applyFilters();
+  }, [state.selectedFilters]);
   return {
     state,
     setFloorplans,

@@ -1,20 +1,17 @@
 "use client";
 import "@mantine/dropzone/styles.css";
 import { mediaCloudIcon } from "@/app/images/commonSvgs";
-import { Button, Group, Image, Modal, Text, rem } from "@mantine/core";
-import { Dropzone, DropzoneProps } from "@mantine/dropzone";
-import toast from "react-hot-toast";
+import { Button, Image, Modal, Text } from "@mantine/core";
+import { Dropzone } from "@mantine/dropzone";
 import { useRef, useState } from "react";
-import Logo from "@/app/components/atoms/Logo";
-import ProjectDetailsP from "@/app/components/project/projectDetailsP";
 import { useDisclosure } from "@mantine/hooks";
 import S from "@/app/styles/Share.module.css";
-interface DropZoneProps extends Partial<DropzoneProps> {
+interface DropZoneProps extends Partial<any> {
   onLogoSelect: (logo: File) => void;
   logo?: File;
 }
 const IMAGE_MIME_TYPE = ["image/png", "image/jpeg", "image/jpg", "image/webp"];
-export function DropZone(props: Partial<DropZoneProps>) {
+export function DropZone(props: Partial<any>) {
   const [error, setError] = useState("");
   return (
     <div className="mb-10">

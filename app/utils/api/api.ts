@@ -1,9 +1,9 @@
 // api.ts
-import axios, { AxiosInstance } from "axios";
+import axios from "axios";
 
 export const baseURL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
-const api: AxiosInstance = axios.create({
+const api: any = axios.create({
   baseURL,
   headers: {
     "Content-Type": "application/json",
