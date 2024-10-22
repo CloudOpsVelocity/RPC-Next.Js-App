@@ -6,7 +6,6 @@ import dynamic from "next/dynamic"
 import { getAuthorityNames } from "../utils/api/project";
 import Tooltip from "../components/atoms/Tooltip";
 import { useState } from "react";
-const ColorfulProjectBrochures = dynamic(() => import("./components/Section/ProjectBrochers"), { ssr: false });
 export default async function Page() {
   class Node<T> {
     public head: T;
@@ -238,9 +237,9 @@ export default async function Page() {
 // };
 const bubbleSort = (array: number[]): number[] => {
    for(let i= array.length - 1; i > 0 ; i--){
-          for(let j =0;j < i;j++){
-            if(array[i]> array[i+1]){
-              // array
+          for(let j =0;j< i;j++){
+            if(array[j]> array[j+1]){
+         [array[j],array[j+1]] = [array[j+1],array[j]]
             }
           }
    }
@@ -405,6 +404,3 @@ console.log(bubbleSort([3,1,2,6,3,3,3,423,43,32,23,543,543]))
 //     </div>
 //   );
 // };
-const sum = ()=>{
-  const [s,se] = useState()
-}
