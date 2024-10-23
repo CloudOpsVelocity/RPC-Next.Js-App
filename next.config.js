@@ -16,30 +16,18 @@ const nextConfig = {
   images: {
     // minimumCacheTTL: 60 * 100,
     remotePatterns: [
-      { hostname: "d1l03fubsuphsh.cloudfront.net" },
       { hostname: "d2l0lb5gc1bw3t.cloudfront.net" },
       { hostname: "daxv8eiot4y5y.cloudfront.net" },
       {hostname:"media.getrightproperty.com"},
-      {
-        hostname:
-          "getrightproperty-test-bucket-new.s3.ap-south-1.amazonaws.com",
-      },
-      { hostname: "s3-media0.fl.yelpcdn.com" },
-      { hostname: "assets.thesparksite.com" },
-      { hostname: "res.cloudinary.com" },
-      { hostname: "imagesrpc.s3.ap-south-1.amazonaws.com" },
-      { hostname: "imagesrpc.s3.ap-south-1.amazonaws.com" },
+      {hostname:"img.youtube.com"},
       { hostname: "images.unsplash.com" },
-      {
-        hostname: "ak-d.tripcdn.com",
-      },
-      {
-        hostname:
-          "getrightproperty-test-bucket-new.s3.ap-south-1.amazonaws.com",
-      },
-      {
-        hostname: "getrightproperty-prod-bucket.s3.ap-south-1.amazonaws.com",
-      },
+      // {
+      //   hostname:
+      //     "getrightproperty-test-bucket-new.s3.ap-south-1.amazonaws.com",
+      // },
+      // {
+      //   hostname: "getrightproperty-prod-bucket.s3.ap-south-1.amazonaws.com",
+      // },
     ],
   },
   env: {
