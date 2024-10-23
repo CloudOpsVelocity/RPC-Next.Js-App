@@ -33,6 +33,7 @@ import Disclamer from "@/app/components/builder/Disclamer";
 import BreadCrumbs from "@/app/components/project/breadcrum/BreadCrum";
 import dynamic from "next/dynamic";
 import { MERGERPROJECT } from "@/app/validations/types/project";
+import ProjectGallery from "@/app/components/project/_ui/modals/GallerySectionModal";
 const ProjectBrouchersSection = dynamic(() => import("@/app/components/project/broucher/ProjectBrouchersSections"), {
   ssr: false,
 })
@@ -169,7 +170,33 @@ export default async function ProjectsDetailsPage({
             type="partial"
           />
         )}
-
+ <ProjectGallery  items={[{
+  src:"https://d2l0lb5gc1bw3t.cloudfront.net/residential-projects/bengaluru/188/virender-test-new-bugs-a-narayanapura-cover.webp?v=1729592515991",
+ alt:"sdfd",
+ type:"image"
+ },
+ 
+ {
+  src:"https://d2l0lb5gc1bw3t.cloudfront.net/residential-projects/bengaluru/188/virender-test-new-bugs-a-narayanapura-masterplan.webp?v=1729592516111",
+ alt:"sdfd",
+ type:"image"
+ },
+ {
+  src:"https://images.unsplash.com/photo-1593139875516-2cca6fcaf357?q=80&w=2073&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+ alt:"sdfd",
+ type:"image"
+ },
+ {
+  src:"https://d2l0lb5gc1bw3t.cloudfront.net/residential-projects/bengaluru/188/virender-test-new-bugs-a-narayanapura-cover.webp?v=1729592515991",
+ alt:"sdfd",
+ type:"image"
+ },
+ {
+  src:"https://getrightproperty-test-bucket-new.s3.ap-south-1.amazonaws.com/images/varify/proj/144/video/video.mp4?v=1728652296250",
+ alt:"sdfd",
+ type:"video"
+ }
+ ]} title="Project Gallery" />
         <GalleryBlock
           {...data.media}
           projName={data.projectName}

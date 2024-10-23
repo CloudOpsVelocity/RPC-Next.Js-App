@@ -15,7 +15,6 @@ import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
 import { sortUnits } from "@/app/utils/unitparser";
 import { useAtom } from "jotai";
 import React, { useEffect } from "react";
-
 const PricingSection = ({ unitData, projName, phaseList }: any) => {
   const [currentPhase, setCurrentPhase] = useAtom(currentPhaseAtom);
   const [propCgId, setPropCgId] = useAtom(propCgIdAtom ?? 35);

@@ -7,6 +7,7 @@ import { useSession } from "next-auth/react";
 import { downLoadIcon } from "@/app/images/commonSvgs";
 import SubHeading from "../headings/SubHeading";
 import Button from "@/app/elements/button";
+import FullScreenMasterPlanModal from "../_ui/modals/MasterPlanModal";
 
 export default function MasterPlan({
   projName,
@@ -46,7 +47,7 @@ export default function MasterPlan({
       id="master-plan"
     >
       <div
-        className="flex justify-between w-full items-cente mb-[32px] flex-wrap  scroll-mt-[170px]"
+        className="flex justify-between w-full items-cente mb-[8px] sm:mb-[32px] flex-wrap  scroll-mt-[170px]"
         id="view-master-plan"
       >
         <div>
@@ -102,11 +103,12 @@ export default function MasterPlan({
         </div>
       </div>
       <div className="relative">
-        <MasterPlanPopup
+        <FullScreenMasterPlanModal imageUrl={media} title={`Master Plan of ${projName}`} altText={`Master Plan of ${projName}`} />
+        {/* <MasterPlanPopup
           url={media}
           onDownload={handleDownload}
           projName={projName}
-        />
+        /> */}
       </div>
     </div>
   );

@@ -245,17 +245,38 @@ const bubbleSort = (array: number[]): number[] => {
    }
   return array
 }
-
-console.log(bubbleSort([3,1,2,6,3,3,3]))
-
-
+let input = [1,64, 25, 12, 22, 11];
+// console.log(bubbleSort([3,1,2,6,3,3,3]))
 
 
 
+const selectionSort = (array: number[]): number[] => {
+  for(let i = 0;i<array.length;i++){
+    let minIndex = i
+       for (let j = i; j < array.length; j++) {
+            if(array[j] < array[minIndex]){
+              minIndex = j
+            }           
+       }
+       if(minIndex !== i){
+        [array[minIndex],array[i]] = [array[i],array[minIndex]]
+       }
 
+  }
+  return array
+}
+// console.log(selectionSort(input))
+const insertionSort = (array: number[]): number[] => {
+     for (let i = 1; i < array.length; i++) {
+       let j = i - 1
+      //  while(j > 0 && array[j] > array[i]){
 
+      //  }    
+     }
+  return array
+}
 
-
+console.log(insertionSort(input))
 
 
   return (
