@@ -2,7 +2,10 @@
 
 import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
-import { FiX, FiShare2, FiDownload, FiChevronLeft, FiChevronRight, FiPlay, FiPause } from 'react-icons/fi'
+import { FiX, FiShare2, FiDownload, FiChevronLeft, FiChevronRight, FiPlay, FiPause, FiZoomIn, FiZoomOut } from 'react-icons/fi'
+import ReactPlayer from 'react-player'
+import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch'
+import { GrPowerReset } from 'react-icons/gr'
 
 interface GalleryItem {
   type: 'image' | 'video'
@@ -89,7 +92,7 @@ export default function MediaGalleryModal({ items = [], title = 'Media Gallery' 
       {isOpen && (
         <div className="fixed inset-0 z-[100] bg-black">
           {/* Header */}
-          <div className="absolute top-0 left-0 right-0 flex justify-between items-center p-4 bg-gradient-to-b from-black to-transparent text-white">
+          <div className="absolute top-0 left-0 z-[100] right-0 flex justify-between items-center p-4 bg-gradient-to-b from-black to-transparent text-white">
             <h2 className="text-xl font-bold">{title}</h2>
             <div className="flex items-center space-x-2">
               <button
@@ -119,27 +122,71 @@ export default function MediaGalleryModal({ items = [], title = 'Media Gallery' 
           {/* Main Media Preview */}
           <div className="absolute inset-0 flex items-center justify-center">
             {currentItem.type === 'image' ? (
-              <Image
+           <TransformWrapper
+           initialScale={1}
+           initialPositionX={0}
+           initialPositionY={0}
+         >
+           {({ zoomIn, zoomOut, resetTransform ,setTransform}) => (
+             <>
+               <div className="absolute top-16 left-4 md:top-16 md:left-6 z-10 flex space-x-2 md:space-x-4">
+                 <button
+                   onClick={() => zoomIn()}
+                   className="p-2 md:p-3 bg-[#0073C6] text-white rounded-full shadow-lg hover:bg-[#005bb5] transition-colors duration-300"
+                   aria-label="Zoom in"
+                 >
+                   <FiZoomIn className="w-5 h-5" />
+                 </button>
+                 <button
+                   onClick={() => zoomOut()}
+                   className="p-2 md:p-3 bg-[#0073C6] text-white rounded-full shadow-lg hover:bg-[#005bb5] transition-colors duration-300"
+                   aria-label="Zoom out"
+                 >
+                   <FiZoomOut className="w-5 h-5" />
+                 </button>
+                 <button
+                   onClick={() => resetTransform()}
+                   className="p-2 md:p-3 bg-[#0073C6] text-white rounded-full shadow-lg hover:bg-[#005bb5] transition-colors duration-300"
+                   aria-label="Reset zoom"
+                 >
+                   <GrPowerReset className="w-5 h-5" />
+                 </button>
+               </div>
+               <TransformComponent wrapperStyle={{
+                 width: '100%',
+                 height: '100%',
+                 position: 'relative',
+               }}
+               contentStyle={{
+                 width: '100%',
+                 height: '100%',
+                 position: 'relative',
+               }}
+               >
+                <Image
                 src={currentItem.src}
                 alt={currentItem.alt}
                 layout="fill"
                 objectFit="contain"
               />
+               </TransformComponent>
+             </>
+           )}
+         </TransformWrapper>
+          
             ) : (
               <div className="relative w-full h-full">
-                <video
-                  ref={videoRef}
-                  src={currentItem.src}
-                  className="w-full h-full object-contain"
-                  onClick={togglePlayPause}
+          <div className="w-full h-full max-h-[calc(100vh-100px)]">
+                <ReactPlayer
+                  url={currentItem.src}
+                  width="100%"
+                  height="100%"
+                  playing={isPlaying}
+                  onPlay={() => setIsPlaying(true)}
+                  onPause={() => setIsPlaying(false)}
+                  controls
                 />
-                <button
-                  onClick={togglePlayPause}
-                  className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 p-4 bg-black bg-opacity-50 text-white rounded-full hover:bg-opacity-75 transition-colors"
-                  aria-label={isPlaying ? "Pause" : "Play"}
-                >
-                  {isPlaying ? <FiPause className="w-8 h-8" /> : <FiPlay className="w-8 h-8" />}
-                </button>
+              </div>
               </div>
             )}
             <button
@@ -174,6 +221,7 @@ export default function MediaGalleryModal({ items = [], title = 'Media Gallery' 
                     }}
                   >
                     {item.type === 'image' ? (
+                        
                       <Image
                         src={item.src}
                         alt={item.alt}
