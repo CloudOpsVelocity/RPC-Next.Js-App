@@ -5,7 +5,8 @@ interface GalleryState {
   items: string[];
   title: string;
   opened: boolean;
-  mediaType: "image" | "video"
+  mediaType: "image" | "video",
+  activeIndex:number
 }
 
 interface GalleryAction {
@@ -13,11 +14,12 @@ interface GalleryAction {
   payload?: {
     items: string[];
     title: string;
-    mediaType: "image" | "video"
+    mediaType: "image" | "video",
+    activeIndex:number
   };
 }
 
-const INTITAL_VALUE: GalleryState = { items: [], title: "", opened: false,mediaType:"image" };
+const INTITAL_VALUE: GalleryState = { items: [], title: "", opened: false,mediaType:"image",activeIndex:0 };
 
 const galleryReducer = (state: GalleryState, action: GalleryAction): GalleryState => {
   switch (action.type) {

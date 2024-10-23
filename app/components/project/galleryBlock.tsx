@@ -54,7 +54,8 @@ export default function GalleryBlock({
         payload:{
           items:images,
           mediaType:isVideo ? "video" : "image",
-          title:"Project Gallery"
+          title:"Project Gallery",
+          activeIndex:index
         }
       })
       // open(isVideo ? "video" : "image", media);
@@ -127,7 +128,8 @@ export default function GalleryBlock({
                       payload:{
                         items:images,
                         mediaType:"image",
-                        title:"Project Gallery"
+                        title:"Project Gallery",
+                        activeIndex:  images.indexOf(selectedMedia)
                       }
                     })
                   }}
@@ -135,16 +137,18 @@ export default function GalleryBlock({
                 />
               )}
               <button
-                onClick={() =>     dispatch({
+                onClick={() => 
+                  {
+                    const isVideo = selectedMedia.includes(".mp4") || selectedMedia.includes("youtube");
+                    dispatch({
                   type:"OPEN",
                   payload:{
-                    items:selectedMedia.includes(".mp4") ||
-                    selectedMedia.includes("youtube") ? videos : images,
-                    mediaType:selectedMedia.includes(".mp4") ||
-                    selectedMedia.includes("youtube") ? "video" :  "image",
-                    title:"Project Gallery"
+                    items:isVideo ? videos : images,
+                    mediaType:isVideo ? "video" :  "image",
+                    title:"Project Gallery",
+                    activeIndex:isVideo ? videos.indexOf(selectedMedia) : images.indexOf(selectedMedia)
                   }
-                })}
+                })}}
                 className="absolute bottom-0.5 sm:bottom-3 right-1 xl:right-3 z-1 "
               >
                 <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] " />

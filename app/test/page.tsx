@@ -280,7 +280,10 @@ console.log(insertionSort(input))
 
 
   return (
-    <div className="mt-10 ml-10">THE TEST PAGE <Tooltip text="test tooltip"><div>test tooltip</div></Tooltip></div>
+    <div className="mt-10 ml-10">THE TEST PAGE <Tooltip text="test tooltip"><div>test tooltip</div> 
+    
+     <input type="text" placeholder="Search..." defaultValue="Search..." />
+    </Tooltip></div>
     // <VisualRepresentationOfArrayWhileLooping sortAlgorithm={bubbleSort} />
   );
 }
