@@ -12,6 +12,8 @@ import clsx from "clsx";
 import SubHeading from "./headings/SubHeading";
 import { useMediaQuery } from "@mantine/hooks";
 import VideoJsonLdScript from "@/app/seo/VideoJson";
+import { useAtom } from "jotai";
+import { galleryStateAtom } from "@/app/store/project/gallery";
 
 export default function GalleryBlock({
   walkThrowVideoUrl,
@@ -43,10 +45,19 @@ export default function GalleryBlock({
 
   const isMobile = useMediaQuery(`(max-width: 750px)`);
   const [, { open }] = useGallery();
+  const [galleryState,dispatch] = useAtom(galleryStateAtom)
   const handleMediaClick = (media: string, index: number) => {
     if (isMobile) {
       const isVideo = videos.includes(media);
-      open(isVideo ? "video" : "image", media);
+      dispatch({
+        type:"OPEN",
+        payload:{
+          items:images,
+          mediaType:isVideo ? "video" : "image",
+          title:"Project Gallery"
+        }
+      })
+      // open(isVideo ? "video" : "image", media);
     }
     setSelectedMedia(media);
     setCurrentSlide(index);
@@ -111,18 +122,34 @@ export default function GalleryBlock({
                   alt="Preview"
                   className="cursor-pointer object-contain sm:min-h-[220px] sm:max-h-[400px] xl:max-h-[450px]  "
                   onClick={() => {
-                    open("image", selectedMedia);
+                    dispatch({
+                      type:"OPEN",
+                      payload:{
+                        items:images,
+                        mediaType:"image",
+                        title:"Project Gallery"
+                      }
+                    })
                   }}
                   fit="contain"
                 />
               )}
               <button
-                onClick={() => open("image", selectedMedia)}
+                onClick={() =>     dispatch({
+                  type:"OPEN",
+                  payload:{
+                    items:selectedMedia.includes(".mp4") ||
+                    selectedMedia.includes("youtube") ? videos : images,
+                    mediaType:selectedMedia.includes(".mp4") ||
+                    selectedMedia.includes("youtube") ? "video" :  "image",
+                    title:"Project Gallery"
+                  }
+                })}
                 className="absolute bottom-0.5 sm:bottom-3 right-1 xl:right-3 z-1 "
               >
                 <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] " />
               </button>
-              <Gallery
+              {/* <Gallery
                 selectedMedia={selectedMedia}
                 images={images}
                 videos={videos}
@@ -134,7 +161,7 @@ export default function GalleryBlock({
                 }
                 currentSlide={currentSlide}
                 setCurrentSlide={setCurrentSlide}
-              />
+              /> */}
             </div>
           )}
         </div>

@@ -45,7 +45,6 @@ export default function SharePopup({
     ? shareAtomData.url
     : `${process.env.NEXT_PUBLIC_PROJECT_URL}/${pathname}`;
   const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
-  console.log(shareAtomData);
   const onClose = () =>
     setShareAtomData({ ...shareAtomData, opened: false, title: "" });
   return (

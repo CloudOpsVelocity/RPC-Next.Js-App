@@ -6,6 +6,10 @@ import { FiX, FiShare2, FiDownload, FiChevronLeft, FiChevronRight, FiPlay, FiPau
 import ReactPlayer from 'react-player'
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch'
 import { GrPowerReset } from 'react-icons/gr'
+import { useAtom, useSetAtom } from 'jotai'
+import { galleryStateAtom } from '@/app/store/project/gallery'
+import { searchShareAtom } from '@/app/(dashboard)/search/components/SharePopup'
+import { imageUrlParser } from '@/app/utils/image'
 
 interface GalleryItem {
   type: 'image' | 'video'
@@ -13,24 +17,19 @@ interface GalleryItem {
   alt: string
 }
 
-interface MediaGalleryModalProps {
-  items: GalleryItem[]
-  title: string
-}
-
-export default function MediaGalleryModal({ items = [], title = 'Media Gallery' }: MediaGalleryModalProps) {
-  const [isOpen, setIsOpen] = useState(false)
+export default function MediaGalleryModal() {
+//   const [isOpen, setIsOpen] = useState(false)
+const [state,dispatch] = useAtom(galleryStateAtom)
+const isOpen = state.opened
+const items = state.items;
+const title = state.title
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
-  const videoRef = useRef<HTMLVideoElement>(null)
-
-  const openModal = () => {
-    setIsOpen(true)
-    document.body.style.overflow = 'hidden'
-  }
-
+const openSharePopup = useSetAtom(searchShareAtom)
   const closeModal = () => {
-    setIsOpen(false)
+    dispatch({
+        type:'CLOSE'
+    })
     document.body.style.overflow = 'auto'
     setIsPlaying(false)
   }
@@ -45,26 +44,27 @@ export default function MediaGalleryModal({ items = [], title = 'Media Gallery' 
     setIsPlaying(false)
   }
 
-  const togglePlayPause = () => {
-    if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause()
-      } else {
-        videoRef.current.play()
-      }
-      setIsPlaying(!isPlaying)
-    }
-  }
-
+  const currentItem = items[currentIndex]
   const handleShare = () => {
-    // Implement share functionality
-    console.log('Share functionality to be implemented')
+    openSharePopup({
+        opened: true,
+        title: state.mediaType === 'image' ? 'Share Image' : 'Share Video',
+        url: imageUrlParser(currentItem),
+    })
+  }
+  function getYouTubeThumbnailUrl(watchUrl: any) {
+    // Match both /watch?v= and /embed/ formats
+    const match = watchUrl.match(
+      /(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([^&?/]+)/
+    );
+
+    const videoId = match ? match[1] : null;
+
+    return videoId
+      ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
+      : null;
   }
 
-  const handleDownload = () => {
-    // Implement download functionality
-    console.log('Download functionality to be implemented')
-  }
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -78,18 +78,10 @@ export default function MediaGalleryModal({ items = [], title = 'Media Gallery' 
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [isOpen])
 
-  const currentItem = items[currentIndex]
+
 
   return (
-    <div>
-      <button
-        onClick={openModal}
-        className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
-      >
-        Open Gallery
-      </button>
-
-      {isOpen && (
+  isOpen && (
         <div className="fixed inset-0 z-[100] bg-black">
           {/* Header */}
           <div className="absolute top-0 left-0 z-[100] right-0 flex justify-between items-center p-4 bg-gradient-to-b from-black to-transparent text-white">
@@ -102,13 +94,13 @@ export default function MediaGalleryModal({ items = [], title = 'Media Gallery' 
               >
                 <FiShare2 className="w-5 h-5" />
               </button>
-              <button
+              {/* <button
                 onClick={handleDownload}
                 className="p-2 hover:bg-gray-800 rounded-full transition-colors"
                 aria-label="Download"
               >
                 <FiDownload className="w-5 h-5" />
-              </button>
+              </button> */}
               <button
                 onClick={closeModal}
                 className="p-2 hover:bg-gray-800 rounded-full transition-colors"
@@ -121,35 +113,35 @@ export default function MediaGalleryModal({ items = [], title = 'Media Gallery' 
 
           {/* Main Media Preview */}
           <div className="absolute inset-0 flex items-center justify-center">
-            {currentItem.type === 'image' ? (
+            {state.mediaType === 'image' ? (
            <TransformWrapper
            initialScale={1}
            initialPositionX={0}
            initialPositionY={0}
          >
-           {({ zoomIn, zoomOut, resetTransform ,setTransform}) => (
+           {({ zoomIn, zoomOut, resetTransform }) => (
              <>
-               <div className="absolute top-16 left-4 md:top-16 md:left-6 z-10 flex space-x-2 md:space-x-4">
+               <div className="absolute top-16 left-4 md:top-16  z-10 flex space-x-2 md:space-x-4">
                  <button
                    onClick={() => zoomIn()}
-                   className="p-2 md:p-3 bg-[#0073C6] text-white rounded-full shadow-lg hover:bg-[#005bb5] transition-colors duration-300"
+                   className="p-2 md:p-3 hover:bg-gray-800 rounded-full transition-colors bg-black"
                    aria-label="Zoom in"
                  >
-                   <FiZoomIn className="w-5 h-5" />
+                   <FiZoomIn className="w-5 h-5" color='white' />
                  </button>
                  <button
                    onClick={() => zoomOut()}
-                   className="p-2 md:p-3 bg-[#0073C6] text-white rounded-full shadow-lg hover:bg-[#005bb5] transition-colors duration-300"
+                   className="p-2 md:p-3 hover:bg-gray-800 rounded-full transition-colors bg-black"
                    aria-label="Zoom out"
                  >
-                   <FiZoomOut className="w-5 h-5" />
+                   <FiZoomOut className="w-5 h-5" color='white' />
                  </button>
                  <button
                    onClick={() => resetTransform()}
-                   className="p-2 md:p-3 bg-[#0073C6] text-white rounded-full shadow-lg hover:bg-[#005bb5] transition-colors duration-300"
+                   className="p-2 md:p-3 hover:bg-gray-800 rounded-full transition-colors bg-black"
                    aria-label="Reset zoom"
                  >
-                   <GrPowerReset className="w-5 h-5" />
+                   <GrPowerReset className="w-5 h-5" color='white' />
                  </button>
                </div>
                <TransformComponent wrapperStyle={{
@@ -164,8 +156,8 @@ export default function MediaGalleryModal({ items = [], title = 'Media Gallery' 
                }}
                >
                 <Image
-                src={currentItem.src}
-                alt={currentItem.alt}
+                src={currentItem}
+                alt={'ALT TEXT'}
                 layout="fill"
                 objectFit="contain"
               />
@@ -178,7 +170,7 @@ export default function MediaGalleryModal({ items = [], title = 'Media Gallery' 
               <div className="relative w-full h-full">
           <div className="w-full h-full max-h-[calc(100vh-100px)]">
                 <ReactPlayer
-                  url={currentItem.src}
+                  url={currentItem}
                   width="100%"
                   height="100%"
                   playing={isPlaying}
@@ -211,7 +203,7 @@ export default function MediaGalleryModal({ items = [], title = 'Media Gallery' 
               <div className="flex overflow-x-auto space-x-2 py-2 max-w-full">
                 {items.map((item, index) => (
                   <div
-                    key={item.src}
+                    key={item}
                     className={`relative w-16 h-12 flex-shrink-0 cursor-pointer rounded-md overflow-hidden ${
                       index === currentIndex ? 'ring-2 ring-blue-500' : ''
                     }`}
@@ -220,15 +212,20 @@ export default function MediaGalleryModal({ items = [], title = 'Media Gallery' 
                       setIsPlaying(false)
                     }}
                   >
-                    {item.type === 'image' ? (
-                        
+                    {state.mediaType === 'image' ? (
                       <Image
-                        src={item.src}
-                        alt={item.alt}
+                        src={item}
+                        alt={item}
                         layout="fill"
                         objectFit="cover"
                       />
                     ) : (
+                        item.includes('youtube') ?    <Image
+                        src={getYouTubeThumbnailUrl(item ?? '') ?? ''}
+                        alt={item}
+                        layout="fill"
+                        objectFit="cover"
+                      /> :
                       <div className="w-full h-full bg-gray-800 flex items-center justify-center">
                         <FiPlay className="w-6 h-6 text-white" />
                       </div>
@@ -239,7 +236,6 @@ export default function MediaGalleryModal({ items = [], title = 'Media Gallery' 
             </div>
           </div>
         </div>
-      )}
-    </div>
+      )
   )
 }

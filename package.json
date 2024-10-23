@@ -15,7 +15,10 @@
     "debug": "cross-env NODE_OPTIONS='--inspect' next dev",
     "artifact": "node build.js",
     "pre-prod": "npm run build",
-    "pre-prod-start": "cross-env NODE_ENV=production next start -p 3000"
+    "pre-prod-start": "cross-env NODE_ENV=production next start -p 3000",
+    "test-build":"cross-env NODE_ENV=test next build",
+    "test-start":"cross-env NODE_ENV=test next start -p 3000"
+    
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
