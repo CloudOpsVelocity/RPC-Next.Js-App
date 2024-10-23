@@ -245,7 +245,8 @@ const bubbleSort = (array: number[]): number[] => {
    }
   return array
 }
-console.log(bubbleSort([3,1,2,6,3,3,3,423,43,32,23,543,543]))
+
+console.log(bubbleSort([3,1,2,6,3,3,3]))
 
 
 
