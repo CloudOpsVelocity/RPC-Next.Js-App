@@ -21,13 +21,13 @@ const nextConfig = {
       {hostname:"media.getrightproperty.com"},
       {hostname:"img.youtube.com"},
       { hostname: "images.unsplash.com" },
-      // {
-      //   hostname:
-      //     "getrightproperty-test-bucket-new.s3.ap-south-1.amazonaws.com",
-      // },
-      // {
-      //   hostname: "getrightproperty-prod-bucket.s3.ap-south-1.amazonaws.com",
-      // },
+      {
+        hostname:
+          "getrightproperty-test-bucket-new.s3.ap-south-1.amazonaws.com",
+      },
+      {
+        hostname: "getrightproperty-prod-bucket.s3.ap-south-1.amazonaws.com",
+      },
     ],
   },
   env: {
