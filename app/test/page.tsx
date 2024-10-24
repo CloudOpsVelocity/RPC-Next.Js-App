@@ -268,12 +268,19 @@ const selectionSort = (array: number[]): number[] => {
 // console.log(selectionSort(input))
 const insertionSort = (array: number[]): number[] => {
      for (let i = 1; i < array.length; i++) {
-       let j = i - 1
-      //  while(j > 0 && array[j] > array[i]){
-
-      //  }    
+       let currentElement = array[i];
+       let j = i - 1;
+while(j >=0 && array[j] < currentElement){
+  // 4,5,3
+  if(!array[j-1]) break
+     if(array[j-1] > array[j]){
+      [array[j-1],array[j]] = [array[j],array[j-1]]
      }
-  return array
+}
+
+}
+
+return array
 }
 
 console.log(insertionSort(input))

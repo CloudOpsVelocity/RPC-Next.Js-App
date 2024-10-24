@@ -24,24 +24,18 @@ function formatDate(inputDate: string | undefined, short?: boolean): string {
   return formattedDate;
 }
 function formatDateDDMMYYYY(inputDate: string | undefined): string {
-  if (inputDate == null) {
+  if (!inputDate) {
     return ""; // You can return an empty string or any default value
   }
-
   // Convert the input string to a Date object
-  const date = new Date(inputDate.replace(/IST/, "GMT+0530"));
-
+  const date = new Date(inputDate.replace('IST',"+530"));
   // Check if the date is valid
   if (isNaN(date.getTime())) {
     return "Invalid Date";
   }
-
   // Format the date string with the desired format
-  const day = String(date.getDate()).padStart(2, "0");
-  const month = String(date.getMonth() + 1).padStart(2, "0"); // Months are zero-based
-  const year = date.getFullYear();
-
-  const formattedDate = `${day}/ ${month}/ ${year}`;
+  const result = new Intl.DateTimeFormat("en-IN", { day: "2-digit", month: "short", year: "numeric", }).format(date)
+  const formattedDate = result.replaceAll(" ","-")
   return formattedDate;
 }
 
@@ -49,7 +43,6 @@ function convertDateToMonthYear(dateString: string | undefined): string {
   if (!dateString) {
     return "Invalid Date";
   }
-
   const parts: string[] = dateString.split("/");
   if (parts.length !== 3) {
     return "Invalid Date Format";
@@ -86,7 +79,7 @@ function convertDateToMonthYear(dateString: string | undefined): string {
     return "Invalid Date";
   }
 
-  const monthName: string = monthNames[month - 1];
+  // const monthName: string = monthNames[month - 1];
   // return `${monthName}, ${year}`;
 
   return `${year}`;

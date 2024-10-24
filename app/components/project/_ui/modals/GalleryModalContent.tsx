@@ -1,5 +1,4 @@
 
-
 import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import { FiX, FiShare2, FiDownload, FiChevronLeft, FiChevronRight, FiPlay, FiPause, FiZoomIn, FiZoomOut } from 'react-icons/fi'
@@ -15,10 +14,12 @@ type Props = {}
 
 export default function GalleryModalContent({}: Props) {
     const [state,dispatch] = useAtom(galleryStateAtom)
+    const isMobile  = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+    console.log(isMobile)
     const isOpen = state.opened
 const items = state.items;
 const title = state.title
-  const [currentIndex, setCurrentIndex] = useState(state.activeIndex)
+  const [, setCurrentIndex] = useState(state.activeIndex)
   const [isPlaying, setIsPlaying] = useState(false)
 const openSharePopup = useSetAtom(searchShareAtom)
   const closeModal = () => {
@@ -27,6 +28,9 @@ const openSharePopup = useSetAtom(searchShareAtom)
     })
     document.body.style.overflow = 'auto'
     setIsPlaying(false)
+    if (window.history.state === 'modal') {
+      window.history.back()
+  }
   }
 
   const nextItem = () => {
@@ -60,7 +64,22 @@ const openSharePopup = useSetAtom(searchShareAtom)
       : null;
   }
 
+  useEffect(() => {
+    if (isOpen) {
+        // Push a new state to the history stack when the modal is opened
+        window.history.pushState('modal', '');
 
+        const handlePopState = () => {
+            closeModal();
+        };
+
+        window.addEventListener('popstate', handlePopState);
+
+        return () => {
+            window.removeEventListener('popstate', handlePopState);
+        };
+    }
+}, [isOpen]);
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (!isOpen) return
@@ -85,13 +104,6 @@ const openSharePopup = useSetAtom(searchShareAtom)
         >
           <FiShare2 className="w-5 h-5" />
         </button>
-        {/* <button
-          onClick={handleDownload}
-          className="p-2 hover:bg-gray-800 rounded-full transition-colors"
-          aria-label="Download"
-        >
-          <FiDownload className="w-5 h-5" />
-        </button> */}
         <button
           onClick={closeModal}
           className="p-2 hover:bg-gray-800 rounded-full transition-colors"
