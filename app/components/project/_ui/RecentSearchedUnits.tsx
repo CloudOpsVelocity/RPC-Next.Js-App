@@ -1,7 +1,7 @@
 import { filterKeysDetails } from "@/app/data/projectDetails";
 import useRecentUnits from "@/app/hooks/project/useRecentUnits";
-import { Tooltip } from "@mantine/core";
 import React from "react";
+import Tooltip from "../../atoms/Tooltip";
 
 type Props = {
   propCgId: number;
@@ -66,7 +66,7 @@ export default function RecentSearchedUnits({
             return (
               <Tooltip
                 key={unit.id}
-                label={
+                text={
                   <div className="text-sm">
                     {/* Click-to-apply message */}
                     <div className="mb-1 text-white font-bold text-xs italic bg-btnPrimary p-1 rounded-md text-center">
@@ -93,7 +93,6 @@ export default function RecentSearchedUnits({
                     )}
                   </div>
                 }
-                withArrow
               >
                 <div className="inline-flex justify-center items-center gap-2 rounded-lg px-3 py-1.5 border border-gray-300 bg-white text-[#4B77C1] text-[13px] mb-[4px] sm:text-sm font-medium cursor-pointer text-nowrap shadow-sm hover:bg-gray-100 hover:shadow-md transition-all duration-200">
                   {label} {/* Show the first two filters */}

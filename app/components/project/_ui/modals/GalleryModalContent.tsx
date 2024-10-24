@@ -140,7 +140,6 @@ const openSharePopup = useSetAtom(searchShareAtom)
         </button>
       </div>
     </div>
-
     {/* Main Media Preview */}
     <div className="absolute inset-0 flex items-center justify-center">
       {state.mediaType === 'image' ? (
