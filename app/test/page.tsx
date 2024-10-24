@@ -1,12 +1,13 @@
 
+'use client'
 // import { indexOf, set } from "lodash";
 // import { useEffect, useReducer, useState } from "react";
 // import ColorfulProjectBrochures from "./components/Section/ProjectBrochers";
 import dynamic from "next/dynamic"
 import { getAuthorityNames } from "../utils/api/project";
 import Tooltip from "../components/atoms/Tooltip";
-import { useState } from "react";
-export default async function Page() {
+import { useRef, useState } from "react";
+export default  function Page() {
   class Node<T> {
     public head: T;
     public next: Node<T> | null;
@@ -291,9 +292,14 @@ console.log(insertionSort(input))
     
      <input type="text" placeholder="Search..." defaultValue="Search..." />
     </Tooltip></div>
+  
     // <VisualRepresentationOfArrayWhileLooping sortAlgorithm={bubbleSort} />
   );
 }
+
+
+
+
 
 // const CommentSection = () => {
 //   const [comment, setComment] = useState('');

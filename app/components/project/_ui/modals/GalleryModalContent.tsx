@@ -15,11 +15,11 @@ type Props = {}
 export default function GalleryModalContent({}: Props) {
     const [state,dispatch] = useAtom(galleryStateAtom)
     const isMobile  = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
-    console.log(isMobile)
     const isOpen = state.opened
 const items = state.items;
 const title = state.title
-  const [, setCurrentIndex] = useState(state.activeIndex)
+const modalRef = useRef<HTMLDivElement>(null)
+  const [currentIndex, setCurrentIndex] = useState(state.activeIndex)
   const [isPlaying, setIsPlaying] = useState(false)
 const openSharePopup = useSetAtom(searchShareAtom)
   const closeModal = () => {
@@ -28,7 +28,7 @@ const openSharePopup = useSetAtom(searchShareAtom)
     })
     document.body.style.overflow = 'auto'
     setIsPlaying(false)
-    if (window.history.state === 'modal') {
+    if (window.history.state === 'modal' && isMobile) {
       window.history.back()
   }
   }
@@ -43,7 +43,7 @@ const openSharePopup = useSetAtom(searchShareAtom)
     setIsPlaying(false)
   }
 
-  const currentItem = items[state.activeIndex]
+  const currentItem = items[currentIndex]
   const handleShare = () => {
     openSharePopup({
         opened: true,
@@ -65,7 +65,7 @@ const openSharePopup = useSetAtom(searchShareAtom)
   }
 
   useEffect(() => {
-    if (isOpen) {
+    if (isOpen && isMobile) {
         // Push a new state to the history stack when the modal is opened
         window.history.pushState('modal', '');
 
@@ -91,8 +91,35 @@ const openSharePopup = useSetAtom(searchShareAtom)
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [isOpen])
+  // Swipe to close (on mobile)
+  useEffect(() => {
+    if (!isMobile) return;
+    const handleTouchStart = (e: TouchEvent) => {
+      const touch = e.touches[0]
+      modalRef.current?.setAttribute('data-touch-start-x', touch.clientX.toString())
+    }
+
+    const handleTouchMove = (e: TouchEvent) => {
+      const touch = e.touches[0]
+      const startX = parseFloat(modalRef.current?.getAttribute('data-touch-start-x') || '0')
+      const currentX = touch.clientX
+      const diffX = currentX - startX
+
+      if (diffX > 100) { // Swipe right distance threshold to close modal
+        closeModal()
+      }
+    }
+
+    modalRef.current?.addEventListener('touchstart', handleTouchStart)
+    modalRef.current?.addEventListener('touchmove', handleTouchMove)
+
+    return () => {
+      modalRef.current?.removeEventListener('touchstart', handleTouchStart)
+      modalRef.current?.removeEventListener('touchmove', handleTouchMove)
+    }
+  }, [isMobile])
   return (
-    <div className="fixed inset-0 z-[100] bg-black">
+    <div className="fixed inset-0 z-[100] bg-black" ref={modalRef}>
     {/* Header */}
     <div className="absolute top-0 left-0 z-[100] right-0 flex justify-between items-center p-4 bg-gradient-to-b from-black to-transparent text-white">
       <h2 className="text-xl font-bold">{title}</h2>
@@ -208,7 +235,7 @@ const openSharePopup = useSetAtom(searchShareAtom)
             <div
               key={item}
               className={`relative w-16 h-12 flex-shrink-0 cursor-pointer rounded-md overflow-hidden ${
-                index === state.activeIndex ? 'ring-2 ring-blue-500' : ''
+                index === currentIndex ? 'ring-2 ring-blue-500' : ''
               }`}
               onClick={() => {
                 setCurrentIndex(index)
