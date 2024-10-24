@@ -68,7 +68,7 @@ export default function BuilderLink({
   const href = useMemo(() => generateBuilderUrl(routeParams), [routeParams]);
 
   return (
-    <Link {...rest} href={href}>
+    <Link  {...rest} href={href}>
       {children}
     </Link>
   );

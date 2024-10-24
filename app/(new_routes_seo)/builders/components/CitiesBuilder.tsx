@@ -59,7 +59,6 @@ export default function BuildersDirectory({
         `page=${page}` +
         searchTerm,
     ],
-    initialData: currentFilter === initialFilter ? initialData : undefined, // Use initialData if filters match the initial state
     enabled: shouldFetch, // Enable query only if shouldFetch is true
     onSuccess: (data) => {
       if (page === 0 && data?.builderCount == 0 ? true : data.builderCount) {
@@ -110,7 +109,14 @@ export default function BuildersDirectory({
     setPage(0); // Reset page to 0 when sorting changes
     isMobile && setShowFilter(false);
   };
-
+   const handleResetFilters = () => {
+    setSearchInput("");
+    setSearchTerm("");
+    setPage(0);
+    setFilterCity(id ?? "");
+    setSortOrder(0)
+    isMobile && setShowFilter(false);
+   }
   const resultArray = [];
   for (let key in cities) {
     if (Object.prototype.hasOwnProperty.call(cities, key)) {
@@ -209,7 +215,9 @@ export default function BuildersDirectory({
                 </div>
               </div>
             </div>
-          ) : data?.builderData?.length > 0 ? (
+          ) : (!shouldFetch
+          ? initialData.builderData?.length
+          : data?.builderData?.length) > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2  xl:grid-cols-3 gap-6 md:gap-8">
               {(!shouldFetch
                 ? initialData.builderData
@@ -255,12 +263,7 @@ export default function BuildersDirectory({
               </p>
               <button
                 className="mt-4 flex items-center space-x-2 bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300"
-                onClick={() => {
-                  setFilterCity(""); // Reset filters
-                  setSearchTerm(""); // Clear search term
-                  setSearchInput("");
-                  setPage(0); // Reset page
-                }}
+                onClick={handleResetFilters}
               >
                 <FaRedoAlt className="mr-2" />
                 Reset Filters

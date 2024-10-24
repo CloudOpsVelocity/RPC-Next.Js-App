@@ -145,48 +145,75 @@ export default function BuilderDetailsCard({
           </div>
           {/* Project Information */}
           <div className="flex sm:justify-between items-center gap-x-2 flex-wrap">
-            <BuilderLink
-              routeParams={{
-                type: "projStatus",
-                statusId: 108,
-                id: userId,
-                slug: userName,
-              }}
-              className="text-center text-sm sm:text-base underline cursor-pointer"
-            >
-              <span className="font-semibold text-[#0073C6]"> New:</span>
-              <span className="text-gray-700 font-medium ml-1">
-                {newProject},
+            {newProject > 0 ? (
+              <BuilderLink
+                routeParams={{
+                  type: "projStatus",
+                  statusId: 108,
+                  id: userId,
+                  slug: userName,
+                }}
+                className="text-center text-sm sm:text-base underline cursor-pointer"
+              >
+                <span className="font-semibold text-[#0073C6]"> New:</span>
+                <span className="text-gray-700 font-medium ml-1">
+                  {newProject},
+                </span>
+              </BuilderLink>
+            ) : (
+              <span className="text-center text-sm sm:text-base">
+                <span className="font-semibold text-[#0073C6]"> New:</span>
+                <span className="text-gray-700 font-medium ml-1">
+                  {newProject},
+                </span>
               </span>
-            </BuilderLink>
-            <BuilderLink
-              routeParams={{
-                type: "projStatus",
-                statusId: 106,
-                id: userId,
-                slug: userName,
-              }}
-              className="text-center text-sm sm:text-base underline cursor-pointer"
-            >
-              <span className="font-semibold text-[#0073C6]"> Ongoing:</span>
-              <span className="text-gray-700 font-medium ml-1">
-                {onGoingProject},
+            )}
+            {onGoingProject > 0 ? (
+              <BuilderLink
+                routeParams={{
+                  type: "projStatus",
+                  statusId: 106,
+                  id: userId,
+                  slug: userName,
+                }}
+                className="text-center text-sm sm:text-base underline cursor-pointer"
+              >
+                <span className="font-semibold text-[#0073C6]"> Ongoing:</span>
+                <span className="text-gray-700 font-medium ml-1">
+                  {onGoingProject},
+                </span>
+              </BuilderLink>
+            ) : (
+              <span className="text-center text-sm sm:text-base">
+                <span className="font-semibold text-[#0073C6]"> Ongoing:</span>
+                <span className="text-gray-700 font-medium ml-1">
+                  {onGoingProject},
+                </span>
               </span>
-            </BuilderLink>
-            <BuilderLink
-              routeParams={{
-                type: "projStatus",
-                statusId: 107,
-                id: userId,
+            )}
+            {completedProject > 0 ? (
+              <BuilderLink
+                routeParams={{
+                  type: "projStatus",
+                  statusId: 107,
+                  id: userId,
                 slug: userName,
-              }}
-              className="text-center text-sm sm:text-base underline cursor-pointer"
-            >
-              <span className="font-semibold text-[#0073C6]"> Completed:</span>
-              <span className="text-gray-700 font-medium ml-1">
-                {completedProject}
+                }}
+                className="text-center text-sm sm:text-base underline cursor-pointer"
+              >
+                <span className="font-semibold text-[#0073C6]"> Completed:</span>
+                <span className="text-gray-700 font-medium ml-1">
+                  {completedProject}
+                </span>
+              </BuilderLink>
+            ) : (
+              <span className="text-center text-sm sm:text-base">
+                <span className="font-semibold text-[#0073C6]"> Completed:</span>
+                <span className="text-gray-700 font-medium ml-1">
+                  {completedProject}
+                </span>
               </span>
-            </BuilderLink>
+            )}
           </div>
         </div>
 

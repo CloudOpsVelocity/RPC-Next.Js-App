@@ -127,7 +127,7 @@ const Icon =  createCustomIconReactLeafLet(selected);
                 direction="top"
                 permanent={selectedLocation?.lat === item?.lat}
                 className="min-w-fit z-50"
-                offset={[-16, -16]}
+                offset={[4, -36]}
               >
                 <div className=" ">
                   <p className="text-[#00487C] text-lg not-italic font-semibold leading-[normal]">
@@ -144,7 +144,7 @@ const Icon =  createCustomIconReactLeafLet(selected);
                 direction="top"
                 permanent={selectedLocation?.lat === item?.lat}
                 key={item.lang}
-                offset={isMobile ? [-7, -40] : [-16, -16]}
+                offset={isMobile ? [-7, -40] : [4, -36]}
                 className="min-w-fit"
               >
                 <div className=" ">

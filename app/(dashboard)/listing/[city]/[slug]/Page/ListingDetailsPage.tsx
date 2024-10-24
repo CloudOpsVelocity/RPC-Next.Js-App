@@ -6,11 +6,6 @@ import Loans from "@/app/components/project/loans";
 import FaqWithBg from "@/app/components/project/faq";
 import About from "@/app/components/project/about";
 import Navigation from "@/app/components/property/Navigation";
-import Link from "next/link";
-import {
-  getProjectDetails,
-  getReportConstData,
-} from "@/app/utils/api/property";
 import ProjectDrawer from "@/app/components/project/Drawer";
 import RoomDetails from "@/app/components/property/RoomDetails";
 import PropertyOverView from "@/app/components/property/Overview";
@@ -23,11 +18,10 @@ import NearByCarouselProperty from "@/app/components/property/carousel";
 import LoginPopup from "@/app/components/project/modals/LoginPop";
 import MobileHidden from "@/app/components/molecules/MobileHidden";
 import PriceBreakup from "@/app/components/property/pricingbreakup/PriceBreakup";
-import { notFound } from "next/navigation";
 import CompareError from "@/app/components/property/actions/Error";
 import NearByCarouselProjProperty from "@/app/components/property/carousel/ProjectCarouse";
-import { getAmenties } from "@/app/utils/api/project";
 import ListingBreadCrumbs from "@/app/components/property/BreadCrumb/ListingBreadcrumb";
+import ProjectGallery from "@/app/components/project/_ui/modals/GallerySectionModal";
 type Props = {
   data: any;
   totalPrice: number;
@@ -206,7 +200,7 @@ export default function ListingDetailsPage({
           price={data.price}
           type={data.cg === "S" ? "Selling" : "Rent"}
         />
-
+       <ProjectGallery/>
         <LoginPopup />
         <ProjectDrawer projName={TITLE_OF_PROP} />
         <CompareError />

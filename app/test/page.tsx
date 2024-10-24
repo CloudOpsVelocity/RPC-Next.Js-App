@@ -1,5 +1,4 @@
 
-'use client'
 // import { indexOf, set } from "lodash";
 // import { useEffect, useReducer, useState } from "react";
 // import ColorfulProjectBrochures from "./components/Section/ProjectBrochers";
@@ -236,56 +235,6 @@ export default  function Page() {
 //   }
 //   return steps;
 // };
-const bubbleSort = (array: number[]): number[] => {
-   for(let i= array.length - 1; i > 0 ; i--){
-          for(let j =0;j< i;j++){
-            if(array[j]> array[j+1]){
-         [array[j],array[j+1]] = [array[j+1],array[j]]
-            }
-          }
-   }
-  return array
-}
-let input = [1,64, 25, 12, 22, 11];
-// console.log(bubbleSort([3,1,2,6,3,3,3]))
-
-
-
-const selectionSort = (array: number[]): number[] => {
-  for(let i = 0;i<array.length;i++){
-    let minIndex = i
-       for (let j = i; j < array.length; j++) {
-            if(array[j] < array[minIndex]){
-              minIndex = j
-            }           
-       }
-       if(minIndex !== i){
-        [array[minIndex],array[i]] = [array[i],array[minIndex]]
-       }
-
-  }
-  return array
-}
-// console.log(selectionSort(input))
-const insertionSort = (array: number[]): number[] => {
-     for (let i = 1; i < array.length; i++) {
-       let currentElement = array[i];
-       let j = i - 1;
-while(j >=0 && array[j] < currentElement){
-  // 4,5,3
-  if(!array[j-1]) break
-     if(array[j-1] > array[j]){
-      [array[j-1],array[j]] = [array[j],array[j-1]]
-     }
-}
-
-}
-
-return array
-}
-
-console.log(insertionSort(input))
-
 
   return (
     <div className="mt-10 ml-10">THE TEST PAGE <Tooltip text="test tooltip"><div>test tooltip</div> 
