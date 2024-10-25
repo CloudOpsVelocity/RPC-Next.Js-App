@@ -79,9 +79,9 @@ const HomeSearch = ({ count ,cityData}: { count: number,cityData?:CityData }) =>
               {config.homeIcon}{" "}
               <div className="text-nowrap">All Residential</div>
             </div>
-            <p className="text-[#242424] text-[12px] sm:text-[14px] not-italic font-[600] hidden sm:flex items-center gap-0.5 p-1 bg-[#ECF0F3] ">
+            <div className="text-[#242424] text-[12px] sm:text-[14px] not-italic font-[600] hidden sm:flex items-center gap-0.5 p-1 bg-[#ECF0F3] ">
               <AutoCitySelectDropDown isOpen={isOpen} setIsOpen={setIsOpen} cityData={cityData} />
-            </p>
+            </div>
 
             <div className="flex justify-between items-center gap-[10px] w-full">
               <div className="flex items-center w-full ">
@@ -151,20 +151,20 @@ const config = {
       <path
         d="M19 11C19 13.1217 18.1571 15.1566 16.6569 16.6569C15.1566 18.1571 13.1217 19 11 19C8.87827 19 6.84344 18.1571 5.34315 16.6569C3.84285 15.1566 3 13.1217 3 11C3 8.87827 3.84285 6.84344 5.34315 5.34315C6.84344 3.84285 8.87827 3 11 3C13.1217 3 15.1566 3.84285 16.6569 5.34315C18.1571 6.84344 19 8.87827 19 11Z"
         stroke="#148B16"
-        stroke-width="1.5"
+        strokeWidth="1.5"
       />
       <path
         opacity="0.5"
         d="M14 11C14 11.7956 13.6839 12.5587 13.1213 13.1213C12.5587 13.6839 11.7956 14 11 14C10.2044 14 9.44129 13.6839 8.87868 13.1213C8.31607 12.5587 8 11.7956 8 11C8 10.2044 8.31607 9.44129 8.87868 8.87868C9.44129 8.31607 10.2044 8 11 8C11.7956 8 12.5587 8.31607 13.1213 8.87868C13.6839 9.44129 14 10.2044 14 11Z"
         stroke="#148B16"
-        stroke-width="1.5"
+        strokeWidth="1.5"
       />
       <path
         opacity="0.5"
         d="M1 11H3M19 11H21M11 3V1M11 21V19"
         stroke="#148B16"
-        stroke-width="1.5"
-        stroke-linecap="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
       />
     </svg>
   ),
@@ -193,7 +193,7 @@ const config = {
       fill="none"
     >
       <path
-        stroke-width="2"
+        strokeWidth="2"
         d="M11.6849 12.6267C11.9533 12.895 12.3674 12.4808 12.0991 12.2183L9.91161 10.025C10.6791 9.1761 11.1033 8.07196 11.1016 6.92751C11.1016 4.36668 9.01911 2.28418 6.45827 2.28418C3.89744 2.28418 1.81494 4.36668 1.81494 6.92751C1.81494 9.48835 3.89744 11.5708 6.45827 11.5708C7.61328 11.5708 8.68078 11.145 9.49744 10.4392L11.6849 12.6267ZM2.39769 6.92751C2.39769 4.68751 4.22352 2.86751 6.45769 2.86751C8.69769 2.86751 10.5177 4.68751 10.5177 6.92751C10.5177 9.16751 8.69769 10.9875 6.45769 10.9875C4.22352 10.9875 2.39769 9.16751 2.39769 6.92751Z"
         fill="#FFFFFF"
       />

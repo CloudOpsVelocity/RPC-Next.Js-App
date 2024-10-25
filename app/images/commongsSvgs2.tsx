@@ -50,7 +50,7 @@ export const AgeIcon = ({ className }: { className?: string }) => {
       <style
         type="text/css"
         dangerouslySetInnerHTML={{
-          __html: ".st0{fill-rule:evenodd;clip-rule:evenodd;}",
+          __html: ".st0{fillRule:evenodd;clipRule:evenodd;}",
         }}
       />
       <g>

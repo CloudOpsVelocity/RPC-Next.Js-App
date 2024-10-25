@@ -56,11 +56,12 @@ const HomePageVirtualCarousel: React.FC<ColumnVirtualizerFixedProps> = ({
       ? parentRef.current.scrollLeft + parentRef.current.clientWidth >= totalWidth - 1
       : false;
 
-  // Using useDrag for drag-to-scroll functionality
+  // Using useDrag for drag-to-scroll functionality with improved sensitivity
   useDrag(
-    ({ movement: [mx], memo = parentRef.current?.scrollLeft || 0 }) => {
+    ({ offset: [mx], memo = parentRef.current?.scrollLeft || 0 }) => {
       if (parentRef.current) {
-        parentRef.current.scrollLeft = memo - mx;
+        // Adjusting the multiplier to make dragging more responsive
+        parentRef.current.scrollLeft = memo - mx * 1.5;
       }
       return memo;
     },
@@ -68,6 +69,9 @@ const HomePageVirtualCarousel: React.FC<ColumnVirtualizerFixedProps> = ({
       target: parentRef,
       axis: "x",
       preventScroll: true,
+      from: () => [parentRef.current?.scrollLeft || 0, 0],
+      bounds: { left: 0, right: totalWidth },
+      rubberband: true, // Allow slight overscroll
     }
   );
 

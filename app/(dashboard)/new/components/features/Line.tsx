@@ -26,9 +26,9 @@ const config = {
       <path
         d="M4.375 24.2078L10.5 30.625L12.292 28.7473M28.875 11.375L18.2648 22.491M13.125 24.2078L19.25 30.625L37.625 11.375"
         stroke="#F5AC44"
-        stroke-width="3"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   ),

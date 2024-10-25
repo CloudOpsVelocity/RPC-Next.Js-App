@@ -12,8 +12,8 @@ export const config = new Map([
       <path
         d="M7.1875 4.375L12.8125 10L7.1875 15.625"
         stroke="#565D70"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>,
   ],

@@ -355,37 +355,37 @@ const config = {
       <path
         d="M16.25 2.5H3.75C3.05964 2.5 2.5 3.05964 2.5 3.75V16.25C2.5 16.9404 3.05964 17.5 3.75 17.5H16.25C16.9404 17.5 17.5 16.9404 17.5 16.25V3.75C17.5 3.05964 16.9404 2.5 16.25 2.5Z"
         stroke="#2A4C70"
-        stroke-linejoin="round"
+        strokeLinejoin="round"
       />
       <path
         d="M11.6667 2.5L2.5 11.6667"
         stroke="#2A4C70"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M17.4997 8.33356L8.33301 17.5002"
         stroke="#2A4C70"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M16.6663 3.33356L3.33301 16.6669"
         stroke="#2A4C70"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M5 9.16644L7.91667 12.0831"
         stroke="#2A4C70"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M12.083 7.91644L14.9997 10.8331"
         stroke="#2A4C70"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   ),

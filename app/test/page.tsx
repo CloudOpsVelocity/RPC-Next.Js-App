@@ -1,4 +1,5 @@
 
+'use client'
 // import { indexOf, set } from "lodash";
 // import { useEffect, useReducer, useState } from "react";
 // import ColorfulProjectBrochures from "./components/Section/ProjectBrochers";
@@ -6,6 +7,7 @@ import dynamic from "next/dynamic"
 import { getAuthorityNames } from "../utils/api/project";
 import Tooltip from "../components/atoms/Tooltip";
 import { useRef, useState } from "react";
+import Carousel from "../(dashboard)/new/components/Atoms/OptimizedCarousel";
 export default  function Page() {
 type INPUT_OUTPUT = number[]
 // function bhkSort<T extends number[]>(arr: T): T {
@@ -23,6 +25,7 @@ type INPUT_OUTPUT = number[]
 // console.log(bhkSort([3,5,3,1,3,2,7,5,4,2]))
   return (
     <div className="h-[100%] w-[100%] flex  flex-col overflow-hidden bg-[#F5F7F8]">
+      <CarouselExample/>
     {/* <Header />
     <HomeSearch
       count={shortIds?.total}
@@ -241,3 +244,39 @@ type INPUT_OUTPUT = number[]
 //     </div>
 //   );
 // };
+
+
+
+
+
+const items = Array.from({ length: 20 }, (_, i) => ({
+  id: i,
+  title: `Item ${i + 1}`,
+  color: `hsl(${(i * 360) / 20}, 70%, 60%)`,
+}))
+
+ function CarouselExample() {
+  return (
+    <div className="py-12 bg-gradient-to-r from-purple-50 to-pink-50">
+      <h1 className="text-3xl font-bold text-center mb-8">Test Home Page Carousel</h1>
+      <Carousel
+        items={items}
+        itemWidth={250}
+        gap={24}
+        visibleItems={3}
+        renderItem={(item) => (
+          <div className="w-full h-full overflow-hidden bg-white rounded-lg shadow-md">
+            <div className="p-0">
+              <div
+                className="w-full h-full flex items-center justify-center text-white font-bold text-2xl"
+                style={{ backgroundColor: item.color }}
+              >
+                {item.title}
+              </div>
+            </div>
+          </div>
+        )}
+      />
+    </div>
+  )
+}

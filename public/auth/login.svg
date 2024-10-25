@@ -88,12 +88,12 @@
   <path d="M547 170L552 166.5L552.91 165.135C552.957 165.065 553.055 165.055 553.115 165.115C553.361 165.361 553.5 165.696 553.5 166.045V166.268C553.5 166.422 553.475 166.574 553.427 166.721L553.198 167.408C553.066 167.801 552.977 168.208 552.931 168.621L552 177L549 174.5L547 170Z" fill="#E77A76"/>
   <defs>
     <linearGradient id="paint0_linear_443_13048" x1="356.834" y1="-7.40415" x2="354.787" y2="413.046" gradientUnits="userSpaceOnUse">
-      <stop stop-color="white"/>
-      <stop offset="1" stop-color="#BBDFF3"/>
+      <stop stopColor="white"/>
+      <stop offset="1" stopColor="#BBDFF3"/>
     </linearGradient>
     <linearGradient id="paint1_linear_443_13048" x1="381.175" y1="-15.0522" x2="375.469" y2="415.593" gradientUnits="userSpaceOnUse">
-      <stop stop-color="white"/>
-      <stop offset="1" stop-color="#BBDFF3"/>
+      <stop stopColor="white"/>
+      <stop offset="1" stopColor="#BBDFF3"/>
     </linearGradient>
   </defs>
 </svg>

@@ -63,11 +63,6 @@ export default function RootLayout({
         />
         <link
           rel="apple-touch-icon"
-          sizes="144x144"
-          href="/favicons/apple-icon-144x144.png"
-        />
-        <link
-          rel="apple-touch-icon"
           sizes="152x152"
           href="/favicons/apple-icon-152x152.png"
         />
@@ -102,7 +97,6 @@ export default function RootLayout({
         />
         <link rel="manifest" href="/favicons/manifest.json" />
         <meta name="msapplication-TileColor" content="#ffffff" />
-        <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
         <meta name="theme-color" content="#ffffff"/>
         {/* <script
           async

@@ -33,10 +33,6 @@ export default function DynamicListing({
     enabled: isEnabled,
     ...RTK_CONFIG,
   });
-  const getCityNameByid = ()=>{
-    const s = new Map()
-    let t = new Set()
-  }
   return (
       isLoading ? (
         <div>Loading...</div>

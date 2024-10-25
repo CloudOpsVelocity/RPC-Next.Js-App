@@ -47,8 +47,8 @@ const Svg = (
     <path
       d="M3 2.5L3 69.5"
       stroke="url(#paint0_linear_342_34781)"
-      stroke-width="5"
-      stroke-linecap="round"
+      strokeWidth="5"
+      strokeLinecap="round"
     />
     <defs>
       <linearGradient
@@ -59,8 +59,8 @@ const Svg = (
         y2="0.499999"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#B3DFFF" />
-        <stop offset="1" stop-color="#0094FF" />
+        <stop stopColor="#B3DFFF" />
+        <stop offset="1" stopColor="#0094FF" />
       </linearGradient>
     </defs>
   </svg>

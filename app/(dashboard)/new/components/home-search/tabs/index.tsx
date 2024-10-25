@@ -93,8 +93,8 @@ const config = {
           y2="-4.85565e-07"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#8CC53F" />
-          <stop offset="1" stop-color="#148B16" />
+          <stop stopColor="#8CC53F" />
+          <stop offset="1" stopColor="#148B16" />
         </linearGradient>
       </defs>
     </svg>
