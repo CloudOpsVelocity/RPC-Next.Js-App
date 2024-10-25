@@ -25,7 +25,6 @@ export default function NewAddedProjects({ data, shortIds, cityId }: Props) {
     enabled: isEnabled,
     ...RTK_CONFIG,
   });
-  console.log(newlyAddedProjects)
   return isLoading ? (
     <div> Loading...</div>
   ) : (

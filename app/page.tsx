@@ -54,6 +54,8 @@ export default async function Page() {
         content="Move In Today: Your Dream Home Awaits – Explore Our Ready-to-Move Listings Now!"
         data={listingData["r_Sale"]}
         shortIds={shortIds}
+        cityId={cityData.data.cityId}
+        dataKey="r_Sale"
       />
       <TopLocalities />
       <DynamicListing
@@ -61,35 +63,45 @@ export default async function Page() {
         content="Find Your Perfect Home, Ready to Move In - Rent Today!"
         data={listingData["r_Rent"]}
         shortIds={shortIds}
+        cityId={cityData.data.cityId}
+        dataKey="r_Rent"
       />
       <DynamicListing
         title="Featured Plot Listings"
         content="Browse Top Listings and Find Your Perfect Plot Today!"
         data={listingData["p"]}
         shortIds={shortIds}
+        cityId={cityData.data.cityId}
+        dataKey="p"
       />
       <DynamicListing
         title="Under Construction Sell Listings"
         content="Explore Our Under Construction Listings Today!"
         data={listingData["u_Sale"]}
         shortIds={shortIds}
+        cityId={cityData.data.cityId}
+        dataKey="u_Sale"
       />
       <HandPickedProjects
         data={data}
         shortIds={shortIds}
-        // cityId={cityData.data.city}
+        cityId={cityData.data.cityId}
       />
       <DynamicListing
         title="Under Construction Rent Listings"
         content="Discover New Developments and Under Construction Rent Listings!"
         data={listingData["u_Rent"]}
         shortIds={shortIds}
+        cityId={cityData.data.cityId}
+        dataKey="u_Rent"
       />
       <DynamicListing
         title="Independent Sell Listings"
         content="Your Gateway to Independent Living - Browse and Buy with Confidence"
         data={listingData["i_Sale"]}
         shortIds={shortIds}
+        cityId={cityData.data.cityId}
+        dataKey="i_Sale"
       />{" "}
       <ListbySection />
       <DynamicListing
@@ -97,6 +109,8 @@ export default async function Page() {
         content="Discover Your Ideal Rental: Independent Listings, Endless Options."
         data={listingData["i_Rent"]}
         shortIds={shortIds}
+        cityId={cityData.data.cityId}
+        dataKey="i_Rent"
       />
       <PostYourListing />
       <BlogsSection />

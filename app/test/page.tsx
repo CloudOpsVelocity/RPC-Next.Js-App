@@ -8,19 +8,19 @@ import Tooltip from "../components/atoms/Tooltip";
 import { useRef, useState } from "react";
 export default  function Page() {
 type INPUT_OUTPUT = number[]
-function bhkSort<T extends number[]>(arr: T): T {
-       for (let i = 0; i < arr.length; i++) {
-      let min = arr[i]
-   for (let j = i; j < arr.length; j++) {
-   if(arr[j + 1] < min){
-    [arr[i],arr[j+ 1]] = [arr[j+1],arr[i]]
-     min = arr[j+1]
-   }
-   }
-       }
-  return arr
-}
-console.log(bhkSort([3,5,3,1,3,2,7,5,4,2]))
+// function bhkSort<T extends number[]>(arr: T): T {
+//          for (let i = 1; i < arr.length; i++) {
+//           let curEle = arr[i]
+//             let j = i - 1
+//             while(j > 0 && arr[j] > curEle){
+//                  arr[j+ 1] = arr[j]
+//                  j--
+//             }
+//             arr[j+1] = curEle
+//          }
+//   return arr
+// }
+// console.log(bhkSort([3,5,3,1,3,2,7,5,4,2]))
   return (
     <div className="h-[100%] w-[100%] flex  flex-col overflow-hidden bg-[#F5F7F8]">
     {/* <Header />

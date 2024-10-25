@@ -70,8 +70,8 @@ const HomeSearch = ({ count ,cityData}: { count: number,cityData?:CityData }) =>
             {config.homeIcon} All Residential
           </p>
 
-          <p className=" flex justify-center items-center gap-[4px] sm:hidden text-[#0073C6] text-[12px] not-italic font-[700] mb-[5px] leading-[normal]">
-            Bengaluru {/* {config.drpdownIcon} */}
+          <p className=" flex justify-center items-center gap-[4px] sm:hidden text-[#0073C6] text-[12px] not-italic font-[700] mb-[5px] leading-[normal] capitalize">
+            {f.city?.split("+")[0]} {/* {config.drpdownIcon} */}
           </p>
 
           <div className="flex items-center gap-2.5 rounded shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] px-1.5 py-1 border-[0.5px] border-solid border-[#819CA9] bg-white w-full">

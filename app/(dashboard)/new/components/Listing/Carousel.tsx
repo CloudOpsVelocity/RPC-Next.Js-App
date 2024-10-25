@@ -13,7 +13,8 @@ type Props = {
 
 export default function ListingCarousel({ shortIds, data }: Props) {
   return (
-    data && (
+    <div className="mt-4">
+   {data && (
       <HomeVirtualizedCarousel
         items={data}
         height={480}
@@ -34,7 +35,8 @@ export default function ListingCarousel({ shortIds, data }: Props) {
           );
         }}
       />
-    )
+    )}
+    </div>
   );
 
   // <Carousel
