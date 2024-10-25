@@ -38,6 +38,8 @@ export default function HomagePageIndex({data,listingData,shortIds,cityData}: Pr
       content="Move In Today: Your Dream Home Awaits – Explore Our Ready-to-Move Listings Now!"
       data={listingData["r_Sale"]}
       shortIds={shortIds}
+      dataKey="r_Sale"
+      cityId={cityData.cityId}
     />
     <TopLocalities />
     <DynamicListing
@@ -45,18 +47,24 @@ export default function HomagePageIndex({data,listingData,shortIds,cityData}: Pr
       content="Find Your Perfect Home, Ready to Move In - Rent Today!"
       data={listingData["r_Rent"]}
       shortIds={shortIds}
+      dataKey="r_Rent"
+      cityId={cityData.cityId}
     />
     <DynamicListing
       title="Featured Plot Listings"
       content="Browse Top Listings and Find Your Perfect Plot Today!"
       data={listingData["p"]}
       shortIds={shortIds}
+      dataKey="p"
+      cityId={cityData.cityId}
     />
     <DynamicListing
       title="Under Construction Sell Listings"
       content="Explore Our Under Construction Listings Today!"
       data={listingData["u_Sale"]}
       shortIds={shortIds}
+      dataKey="u_Sale"
+      cityId={cityData.cityId}
     />
     <HandPickedProjects data={data} shortIds={shortIds} />
     <DynamicListing
@@ -64,12 +72,16 @@ export default function HomagePageIndex({data,listingData,shortIds,cityData}: Pr
       content="Discover New Developments and Under Construction Rent Listings!"
       data={listingData["u_Rent"]}
       shortIds={shortIds}
+      dataKey="u_Rent"
+      cityId={cityData.cityId}
     />
     <DynamicListing
       title="Independent Sell Listings"
       content="Your Gateway to Independent Living - Browse and Buy with Confidence"
       data={listingData["i_Sale"]}
       shortIds={shortIds}
+      dataKey="i_Sale"
+      cityId={cityData.cityId}
     />{" "}
     <ListbySection />
     <DynamicListing
@@ -77,6 +89,8 @@ export default function HomagePageIndex({data,listingData,shortIds,cityData}: Pr
       content="Discover Your Ideal Rental: Independent Listings, Endless Options."
       data={listingData["i_Rent"]}
       shortIds={shortIds}
+      dataKey="i_Rent"
+      cityId={cityData.cityId}
     />
     <PostYourListing />
     <BlogsSection />
