@@ -7,242 +7,92 @@ import { getAuthorityNames } from "../utils/api/project";
 import Tooltip from "../components/atoms/Tooltip";
 import { useRef, useState } from "react";
 export default  function Page() {
-  class Node<T> {
-    public head: T;
-    public next: Node<T> | null;
-    constructor(value: T) {
-      this.head = value;
-      this.next = null;
-    }
-  }
-  class Queue<T> {
-    public first: Node<T> | null;
-    public last: Node<T> | null;
-    public length: number;
-    constructor(value?: T) {
-      this.first = null;
-      this.last = null;
-      this.length = 0;
-      if (value) {
-        const newNode = new Node(value);
-        this.first = newNode;
-        this.last = newNode;
-        this.length = 1;
-      }
-    }
-    enque(value: T) {
-      const newNode = new Node(value);
-      if (this.length == 0) {
-        (this.first = newNode), (this.last = newNode);
-        this.length = 1;
-      } else {
-        this.last = newNode;
-        this.last.next = newNode;
-        this.length++;
-      }
-    }
-  }
-  // class LinkedList<T> {
-  //   public head: Node<T>;
-  //   private tail: Node<T>;
-  //   private length: number;
-  //   constructor(value: T) {
-  //     this.head = new Node(value);
-  //     this.tail = this.head;
-  //     this.length = 1;
-  //   }
-  //   push(value: T) {
-  //     let newNode = new Node(value);
-  //     this.tail.next = newNode;
-  //     this.tail = newNode;
-  //     this.length++;
-  //   }
-  //   pop() {
-  //     if (this.length === 0) return;
-  //     let temp = this.head;
-  //     let prev = this.head;
-  //     while (temp.next) {
-  //       prev = temp;
-  //       temp = temp.next;
-  //     }
-  //     this.tail = prev;
-  //     this.tail.next = null;
-  //     this.length--;
-  //     return temp;
-  //   }
-  //   unshift(value: T) {
-  //     const newNode = new Node(value);
-  //     newNode.next = this.head;
-  //     this.head = newNode;
-  //     this.length++;
-  //     return newNode;
-  //   }
-  //   shift() {
-  //     if (this.head.next) {
-  //       this.head = this.head.next;
-  //       this.length--;
-  //     } else {
-  //       ("0");
-  //     }
-  //   }
-  //   getFirst() {
-  //     return this.head;
-  //   }
-  //   getLast() {
-  //     let temp = this.head;
-  //     while (temp) {
-  //       if (!temp.next) {
-  //         return temp;
-  //       }
-  //       temp = temp.next;
-  //     }
-  //   }
-  //   getByIndex(index: number) {
-  //     let currentIndex = 0;
-  //     let temp = this.head;
-  //     if (!temp.next) return -1;
-  //     while (temp.next) {
-  //       if (currentIndex === index) {
-  //         return temp;
-  //       }
-  //       currentIndex++;
-  //       temp = temp.next;
-  //     }
-
-  //   }
-  //   reverse(){
-  //   let prevHead = this.head;
-  //   this.head === this.tail
-  //   this.tail === prevHead
-  //   return {
-  //     header:this.head,
-  //     end:this.tail
-  //   }
-  //   }
-  // }
-
-  // console.log(list.getByIndex(0));
-  class Stack<T> {
-    items: T[];
-    constructor() {
-      this.items = [];
-    }
-    push(item: T) {
-      this.items.push(item);
-    }
-  }
-  const stack = new Stack();
-  stack.push("a");
-  stack.push("b");
-
-  // class HashTable<T extends [string, T]> {
-  //   public hashTable: Array<T[]>;
-  //   public size:number;
-  //   public count:number;
-  //   constructor(size = 6) {
-  //     this.hashTable = new Array(size);
-  //     this.size = size;
-  //     this.count = 0
-  //   }
-  //   _hash(key: string) {
-  //     let hash = 0;
-  //     for (let i = 0; i < key.length; i++) {
-  //       hash = (hash + key.charCodeAt(i) * 31) % this.hashTable.length;
-  //     }
-  //     return hash;
-  //   }
-  //   set(key: string, value: T["value"]) {
-  //     const index = this._hash(key);
-  //     if (!this.hashTable[index]) {
-  //       this.hashTable[index] = [];
-  //     }
-  //     this.hashTable[index].push([key, value]);
-  //     this.count++
-  //   }
-  //   get(key: string) {
-  //     const index = this._hash(key);
-  //     if (this.hashTable[index]) {
-  //       for (let i = 0; i < this.hashTable[index].length; i++) {
-  //         if (this.hashTable[index][i][0] === key) {
-  //           return this.hashTable[index][i][1];
-  //         }
-  //       }
-  //     }
-  //     return -1;
-  //   }
-  //   keys(){
-  //     let keys = []
-  //     for (let i = 0; i < this.hashTable.length; i++) {
-  //         let item = this.hashTable[i]
-  //         if(item){
-  //           for (let j = 0; j < this.hashTable[i].length; j++) {
-  //      keys.push(this.hashTable[i][j][0])     
-  //           }
-  //         }
-  //     }
-  //     return keys
-  //   }
-  //   _reSize(){
-
-  //   }
-  // }
-
-  // const myHash = new HashTable(10);
-  // myHash.set("a", {
-  //   age: 1,
-  // });
-  // myHash.set("b", {
-  //   age: 2,
-  // });
-  // myHash.set("c", {
-  //   age: 3,
-  // });
-  // myHash.set("d", {
-  //   age: 4,
-  // });
-  // myHash.set("e", {
-  //   age: 5,
-  // });
-  // console.log(myHash.count)
-//  class BFS <T> {
-//  public queue: T[];
-//  public result: T[];
-//   constructor() {
-//     this.currentNode = null;
-//     this.queue = [];
-//     this.result = []
-//   }
-//  }
-//  let factorialOFF = (n: number) => {
-//     if(n === 0 || n === 1){
-// return 1
-//     }
-//     return n * factorialOFF(n-1)
-//  }
-//  console.log(factorialOFF(4))
-// const bubbleSort = (arr: number[]): number[][] => {
-//   const steps: number[][] = [];
-//   let sortedArray = [...arr];
-//   for (let i = 0; i < sortedArray.length; i++) {
-//     for (let j = 0; j < sortedArray.length - i - 1; j++) {
-//       if (sortedArray[j] > sortedArray[j + 1]) {
-//         // Swap elements
-//         [sortedArray[j], sortedArray[j + 1]] = [sortedArray[j + 1], sortedArray[j]];
-//       }
-//       // Capture the current state of the array
-//       steps.push([...sortedArray]);
-//     }
-//   }
-//   return steps;
-// };
-
+type INPUT_OUTPUT = number[]
+function bhkSort<T extends number[]>(arr: T): T {
+       for (let i = 0; i < arr.length; i++) {
+      let min = arr[i]
+   for (let j = i; j < arr.length; j++) {
+   if(arr[j + 1] < min){
+    [arr[i],arr[j+ 1]] = [arr[j+1],arr[i]]
+     min = arr[j+1]
+   }
+   }
+       }
+  return arr
+}
+console.log(bhkSort([3,5,3,1,3,2,7,5,4,2]))
   return (
-    <div className="mt-10 ml-10">THE TEST PAGE <Tooltip text="test tooltip"><div>test tooltip</div> 
-    
-     <input type="text" placeholder="Search..." defaultValue="Search..." />
-    </Tooltip></div>
-  
-    // <VisualRepresentationOfArrayWhileLooping sortAlgorithm={bubbleSort} />
+    <div className="h-[100%] w-[100%] flex  flex-col overflow-hidden bg-[#F5F7F8]">
+    {/* <Header />
+    <HomeSearch
+      count={shortIds?.total}
+      cityData={{
+        cityId: cityData?.data.cityId,
+        cityName: cityData?.data.city,
+      }}
+    />
+    <HomeFeatures />
+    <NewAddedProjects
+      data={data.featured}
+      shortIds={shortIds}
+      cityId={cityData.data.cityId}
+    />
+    <DynamicListing
+      title="Ready to Move Sell Listings"
+      content="Move In Today: Your Dream Home Awaits – Explore Our Ready-to-Move Listings Now!"
+      data={listingData["r_Sale"]}
+      shortIds={shortIds}
+    />
+    <TopLocalities />
+    <DynamicListing
+      title="Ready to Move Rent Listings"
+      content="Find Your Perfect Home, Ready to Move In - Rent Today!"
+      data={listingData["r_Rent"]}
+      shortIds={shortIds}
+    />
+    <DynamicListing
+      title="Featured Plot Listings"
+      content="Browse Top Listings and Find Your Perfect Plot Today!"
+      data={listingData["p"]}
+      shortIds={shortIds}
+    />
+    <DynamicListing
+      title="Under Construction Sell Listings"
+      content="Explore Our Under Construction Listings Today!"
+      data={listingData["u_Sale"]}
+      shortIds={shortIds}
+    />
+    <HandPickedProjects
+      data={data}
+      shortIds={shortIds}
+      // cityId={cityData.data.city}
+    />
+    <DynamicListing
+      title="Under Construction Rent Listings"
+      content="Discover New Developments and Under Construction Rent Listings!"
+      data={listingData["u_Rent"]}
+      shortIds={shortIds}
+    />
+    <DynamicListing
+      title="Independent Sell Listings"
+      content="Your Gateway to Independent Living - Browse and Buy with Confidence"
+      data={listingData["i_Sale"]}
+      shortIds={shortIds}
+    />{" "}
+    <ListbySection />
+    <DynamicListing
+      title="Independent Rent Listings"
+      content="Discover Your Ideal Rental: Independent Listings, Endless Options."
+      data={listingData["i_Rent"]}
+      shortIds={shortIds}
+    />
+    <PostYourListing />
+    <BlogsSection />
+    <Footer />
+    <LoginPopup />
+    <SharePopup />
+    <Req /> */}
+  </div>
   );
 }
 

@@ -10,17 +10,13 @@ import QuickFilters from "./filters/QuickFilters";
 import Nearme from "./Nearme";
 import SearchSec from "./SearchSec";
 import { useMediaQuery } from "@mantine/hooks";
-import Target from "./filters/mobile/Target";
 import { useAtomValue } from "jotai";
 import { homeSearchFiltersAtom } from "@/app/store/home";
-import { BasicSelect } from "./filters/Select";
-import { CityDropdown } from "./filters/CityDropdown";
 import { toQueryParams } from "../../utils/param";
-import { HeartIcon, SelectedHeartIcon } from "@/app/images/HomePageIcons";
+import { SelectedHeartIcon } from "@/app/images/HomePageIcons";
 import RecentSearches from "./recentSearch/RecentSearches";
 import AutoCitySelectDropDown from "./filters/AutoCitySelectDropDown";
 import { CityData } from "../../search";
-const propertyTypes = ["Buy", "Rent"];
 
 const HomeSearch = ({ count ,cityData}: { count: number,cityData?:CityData }) => {
   const f = useAtomValue(homeSearchFiltersAtom);

@@ -6,7 +6,6 @@ import MainHeading from "../heading";
 import { homeSearchFiltersAtom } from "@/app/store/home";
 import { useQuery } from "react-query";
 import RTK_CONFIG from "@/app/config/rtk";
-import { getData } from "../../api";
 import { getHomePageProjectData } from "@/app/(new_routes_seo)/utils/new-seo-routes/home.api";
 
 type Props = {
@@ -26,6 +25,7 @@ export default function NewAddedProjects({ data, shortIds, cityId }: Props) {
     enabled: isEnabled,
     ...RTK_CONFIG,
   });
+  console.log(newlyAddedProjects)
   return isLoading ? (
     <div> Loading...</div>
   ) : (

@@ -113,7 +113,7 @@ export default function BuildersDirectory({
     setSearchInput("");
     setSearchTerm("");
     setPage(0);
-    setFilterCity(id ?? "");
+    // setFilterCity(id ?? "");
     setSortOrder(0)
     isMobile && setShowFilter(false);
    }
