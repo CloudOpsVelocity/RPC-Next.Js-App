@@ -1,4 +1,4 @@
-import Header from '@/app/components/layouts/primary/header'
+
 import React from 'react'
 import HomeSearch from './home-search'
 import HomeFeatures from './features'

@@ -1,12 +1,6 @@
-import React, {
-  useState,
-  useRef,
-  useCallback,
-  useEffect,
-  useMemo,
-} from "react";
+import React, { useRef, useMemo } from "react";
 import { useVirtualizer } from "@tanstack/react-virtual";
-import { ImgCarouselIcon, PrevCarouselIcon } from "@/app/images/commonSvgs";
+import { useDrag } from "@use-gesture/react";
 import { CarouseSelArrowIcon } from "@/app/images/HomePageIcons";
 
 interface ColumnVirtualizerFixedProps {
@@ -29,14 +23,8 @@ const HomePageVirtualCarousel: React.FC<ColumnVirtualizerFixedProps> = ({
   renderItem,
 }) => {
   const parentRef = useRef<HTMLDivElement>(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeft, setScrollLeft] = useState(0);
 
-  const effectiveItemSize = useMemo(
-    () => itemSize + gapSize,
-    [itemSize, gapSize]
-  );
+  const effectiveItemSize = useMemo(() => itemSize + gapSize, [itemSize, gapSize]);
 
   const columnVirtualizer = useVirtualizer({
     count: itemCount,
@@ -51,69 +39,37 @@ const HomePageVirtualCarousel: React.FC<ColumnVirtualizerFixedProps> = ({
     [columnVirtualizer, gapSize]
   );
 
-  const scrollTo = useCallback((scrollOffset: number) => {
+  const scrollTo = (scrollOffset: number) => {
     if (parentRef.current) {
       parentRef.current.scrollTo({
         left: parentRef.current.scrollLeft + scrollOffset,
         behavior: "smooth",
       });
     }
-  }, []);
+  };
 
-  const isAtStart = useCallback(
-    () => (parentRef.current ? parentRef.current.scrollLeft <= 1 : false),
-    []
-  );
+  const isAtStart = () =>
+    parentRef.current ? parentRef.current.scrollLeft <= 1 : false;
 
-  const isAtEnd = useCallback(
-    () =>
-      parentRef.current
-        ? parentRef.current.scrollLeft + parentRef.current.clientWidth >=
-          totalWidth - 1
-        : false,
-    [totalWidth]
-  );
+  const isAtEnd = () =>
+    parentRef.current
+      ? parentRef.current.scrollLeft + parentRef.current.clientWidth >= totalWidth - 1
+      : false;
 
-  const handleDragStart = useCallback(
-    (e: React.MouseEvent | React.TouchEvent) => {
-      setIsDragging(true);
-      const pageX = "touches" in e ? e.touches[0].pageX : e.pageX;
-      setStartX(pageX);
-      setScrollLeft(parentRef.current?.scrollLeft || 0);
-    },
-    []
-  );
-
-  const handleDragEnd = useCallback(() => {
-    setIsDragging(false);
-  }, []);
-
-  const handleDrag = useCallback(
-    (e: React.MouseEvent | React.TouchEvent) => {
-      if (!isDragging) return;
-      e.preventDefault();
-      const pageX = "touches" in e ? e.touches[0].pageX : e.pageX;
-      const walk = (startX - pageX) * 1.5; // Adjust sensitivity if needed
+  // Using useDrag for drag-to-scroll functionality
+  useDrag(
+    ({ movement: [mx], memo = parentRef.current?.scrollLeft || 0 }) => {
       if (parentRef.current) {
-        parentRef.current.scrollLeft = scrollLeft + walk;
+        parentRef.current.scrollLeft = memo - mx;
       }
+      return memo;
     },
-    [isDragging, startX, scrollLeft]
+    {
+      target: parentRef,
+      axis: "x",
+      preventScroll: true,
+    }
   );
-
-  useEffect(() => {
-    const handleGlobalMouseUp = () => {
-      setIsDragging(false);
-    };
-
-    document.addEventListener("mouseup", handleGlobalMouseUp);
-    document.addEventListener("touchend", handleGlobalMouseUp);
-
-    return () => {
-      document.removeEventListener("mouseup", handleGlobalMouseUp);
-      document.removeEventListener("touchend", handleGlobalMouseUp);
-    };
-  }, []);
 
   return (
     <div className="relative">
@@ -126,7 +82,6 @@ const HomePageVirtualCarousel: React.FC<ColumnVirtualizerFixedProps> = ({
           }`}
         >
           <CarouseSelArrowIcon className="rotate-180" />
-
         </button>
       )}
 
@@ -137,16 +92,9 @@ const HomePageVirtualCarousel: React.FC<ColumnVirtualizerFixedProps> = ({
           width: "100%",
           height: `${height}px`,
           overflow: "auto",
-          cursor: isDragging ? "grabbing" : "grab",
+          cursor: "grab",
           userSelect: "none",
         }}
-        onMouseDown={handleDragStart}
-        onMouseMove={handleDrag}
-        onMouseUp={handleDragEnd}
-        onMouseLeave={handleDragEnd}
-        onTouchStart={handleDragStart}
-        onTouchMove={handleDrag}
-        onTouchEnd={handleDragEnd}
       >
         <div
           style={{
@@ -187,7 +135,7 @@ const HomePageVirtualCarousel: React.FC<ColumnVirtualizerFixedProps> = ({
             isAtEnd() ? "opacity-50 cursor-not-allowed" : ""
           }`}
         >
-            <CarouseSelArrowIcon />
+          <CarouseSelArrowIcon />
         </button>
       )}
     </div>
