@@ -1,32 +1,34 @@
-
-'use client'
+"use client";
 // import { indexOf, set } from "lodash";
 // import { useEffect, useReducer, useState } from "react";
 // import ColorfulProjectBrochures from "./components/Section/ProjectBrochers";
-import dynamic from "next/dynamic"
+import dynamic from "next/dynamic";
 import { getAuthorityNames } from "../utils/api/project";
 import Tooltip from "../components/atoms/Tooltip";
 import { useRef, useState } from "react";
 import Carousel from "../(dashboard)/new/components/Atoms/OptimizedCarousel";
-export default  function Page() {
-type INPUT_OUTPUT = number[]
-// function bhkSort<T extends number[]>(arr: T): T {
-//          for (let i = 1; i < arr.length; i++) {
-//           let curEle = arr[i]
-//             let j = i - 1
-//             while(j > 0 && arr[j] > curEle){
-//                  arr[j+ 1] = arr[j]
-//                  j--
-//             }
-//             arr[j+1] = curEle
-//          }
-//   return arr
-// }
-// console.log(bhkSort([3,5,3,1,3,2,7,5,4,2]))
+export default function Page() {
+  type INPUT_OUTPUT = number[];
+  // function bhkSort<T extends number[]>(arr: T): T {
+  //          for (let i = 1; i < arr.length; i++) {
+  //           let curEle = arr[i]
+  //             let j = i - 1
+  //             while(j > 0 && arr[j] > curEle){
+  //                  arr[j+ 1] = arr[j]
+  //                  j--
+  //             }
+  //             arr[j+1] = curEle
+  //          }
+  //   return arr
+  // }
+  // console.log(bhkSort([3,5,3,1,3,2,7,5,4,2]))
+
+  // Example
+
   return (
     <div className="h-[100%] w-[100%] flex  flex-col overflow-hidden bg-[#F5F7F8]">
-      <CarouselExample/>
-    {/* <Header />
+      <CarouselExample />
+      {/* <Header />
     <HomeSearch
       count={shortIds?.total}
       cityData={{
@@ -95,13 +97,9 @@ type INPUT_OUTPUT = number[]
     <LoginPopup />
     <SharePopup />
     <Req /> */}
-  </div>
+    </div>
   );
 }
-
-
-
-
 
 // const CommentSection = () => {
 //   const [comment, setComment] = useState('');
@@ -216,8 +214,8 @@ type INPUT_OUTPUT = number[]
 //         </div>
 
 //         {/* Button to start animation */}
-//         <button 
-//           onClick={startSorting} 
+//         <button
+//           onClick={startSorting}
 //           disabled={animationRunning || sorted}
 //           style={{
 //             marginTop: '20px',
@@ -245,20 +243,18 @@ type INPUT_OUTPUT = number[]
 //   );
 // };
 
-
-
-
-
 const items = Array.from({ length: 20 }, (_, i) => ({
   id: i,
   title: `Item ${i + 1}`,
   color: `hsl(${(i * 360) / 20}, 70%, 60%)`,
-}))
+}));
 
- function CarouselExample() {
+function CarouselExample() {
   return (
     <div className="py-12 bg-gradient-to-r from-purple-50 to-pink-50">
-      <h1 className="text-3xl font-bold text-center mb-8">Test Home Page Carousel</h1>
+      <h1 className="text-3xl font-bold text-center mb-8">
+        Test Home Page Carousel
+      </h1>
       <Carousel
         items={items}
         itemWidth={250}
@@ -278,5 +274,5 @@ const items = Array.from({ length: 20 }, (_, i) => ({
         )}
       />
     </div>
-  )
+  );
 }

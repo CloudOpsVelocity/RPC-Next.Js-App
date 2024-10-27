@@ -41,7 +41,7 @@ const ReadMore: React.FC<ReadMoreProps> = ({
   return (
     <div className="w-full" onClick={handleReadMoreClick}>
       <p className="text-[14px] sm:text-[18px]  xl:text-[24px] font-[500]  text-[#233333] break-words">
-        <p
+        <div
           dangerouslySetInnerHTML={{ __html: getClampedText() }}
           className="prose-p:py-1 prose-no-break "
         />

@@ -1,5 +1,4 @@
 import CryptoJS from "crypto-js";
-import { getCookie } from "cookies-next";
 import { cookies, headers } from "next/headers";
 
 export async function decryptResumeSignupToken(slug: string) {

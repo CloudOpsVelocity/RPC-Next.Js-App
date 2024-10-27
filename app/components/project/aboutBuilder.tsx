@@ -111,7 +111,6 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
 }
 
 function normalizeData(data: any, type: string) {
-  console.log(data);
   return {
     propertyName: data?.data?.propertyName,
     newProject: data?.data?.newProject,
@@ -128,23 +127,4 @@ function normalizeData(data: any, type: string) {
     pincode: data?.data?.pinCode,
     userName: capitalizeWords(data?.data?.userName),
   };
-
-  // else {
-  //   return {
-  //     propertyName: data?.propertyName,
-  //     newProject: data?.newProject,
-  //     onGoingProject: data?.onGoingProject,
-  //     completedProject: data?.completedProject,
-  //     builderAddress: data?.builderAddress,
-  //     ceoName: data?.ceoName,
-  //     logo: data?.logoUrl,
-  //     vission: data?.vision,
-  //     companyName: data?.companyName,
-  //     companyStartDate: data?.companyStartDate,
-  //     city: data?.cityName,
-  //     state: data?.stateName,
-  //     pincode: data?.pinCode,
-  //     userName: capitalizeWords(data?.userName),
-  //   };
-  // }
 }

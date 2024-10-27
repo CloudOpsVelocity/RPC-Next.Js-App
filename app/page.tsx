@@ -19,19 +19,17 @@ import SharePopup from "./(dashboard)/search/components/SharePopup";
 import Header from "./components/layouts/primary/header";
 import Footer from "./components/layouts/primary/footer";
 import { getUserCity } from "./(new_routes_seo)/utils/new-seo-routes/home.api";
+import { cookies } from "next/headers";
+import { decryptData } from "./utils/auth/nodeCrypto";
 export default async function Page() {
   const cityData = await getUserCity();
-
+  const encriptedLatLang = cookies().get('ui')?.value;
+  const latLang = encriptedLatLang ? decryptData(encriptedLatLang) : '';
   const [data, listingData, shortIds] = await Promise.all([
-    getData(cityData.data.cityId),
-    getHomeListingData(cityData.data.cityId),
+    getData(cityData.data.cityId,latLang),
+    getHomeListingData(cityData.data.cityId,latLang),
     getShortIds(),
   ]);
-  // const [data, listingData, shortIds] = await Promise.all([
-  //   getData(),
-  //   getHomeListingData(),
-  //   getShortIds(),
-  // ]);
 
   return (
     <div className="h-[100%] w-[100%] flex  flex-col overflow-hidden bg-[#F5F7F8]">
@@ -44,6 +42,7 @@ export default async function Page() {
         }}
       />
       <HomeFeatures />
+      {JSON.stringify(latLang)}
       <NewAddedProjects
         data={data.featured}
         shortIds={shortIds}

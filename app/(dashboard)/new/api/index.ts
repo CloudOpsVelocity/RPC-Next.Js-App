@@ -1,13 +1,12 @@
 import { options } from "@/app/options";
 import { getServerSession } from "next-auth";
 
-export const getData = async (city?:number|string,coordinates?:{
-  lat:number,
-  lng:number
-}) => {
+export const getData = async (city?:number|string,coordinates?:any) => {
   let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/home/page/project`;
-  if(city){
-    url = `${url}?city=${city}`
+  if (coordinates) {
+    url = `${url}?lt=${coordinates.lt}&la=${coordinates.la}`;
+  } else if (city) {
+    url = `${url}?city=${city}`;
   }
   const res = await fetch(url, {
     next: {
@@ -18,13 +17,12 @@ export const getData = async (city?:number|string,coordinates?:{
   return data;
 };
 
-export const getHomeListingData = async (city?:number|string,coordinates?:{
-  lat:number,
-  lng:number
-}) => {
+export const getHomeListingData = async (city?:number|string,coordinates?:any) => {
   let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/home/page/listing`;
-  if(city){
-    url = `${url}?city=${city}`
+  if (coordinates) {
+    url = `${url}?lat=${coordinates.lt}&lng=${coordinates.la}`;
+  } else if (city) {
+    url = `${url}?city=${city}`;
   }
   const res = await fetch(url, {
     next: {

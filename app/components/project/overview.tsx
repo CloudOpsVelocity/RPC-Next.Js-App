@@ -22,8 +22,9 @@ import ReportSection from "./actions/Report";
 import { formatNumberWithSuffix } from "@/app/utils/numbers";
 import { TOPIC_IDS } from "@/app/data/projectDetails";
 import { Main, MERGERPROJECT } from "@/app/validations/types/project";
-export interface Props extends Main { // Extend Main directly
-  slug: string;          // New property for the slug
+export interface Props extends Main {
+  // Extend Main directly
+  slug: string; // New property for the slug
   PhaseOverview: PhaseOverview[]; // New property for the project status
 }
 export default function Overview({
@@ -48,7 +49,7 @@ export default function Overview({
   phaseList,
   PhaseOverview,
   slug,
-  projAuthorityNames
+  projAuthorityNames,
 }: Props) {
   return (
     <div
@@ -111,7 +112,7 @@ export default function Overview({
             key="totalUnits"
             icon={<TotalLandArea />} // Adjust icon
             title="Units in Project"
-            value={`${formatNumberWithSuffix(totalUnit,false)} Units`}
+            value={`${formatNumberWithSuffix(totalUnit, false)} Units`}
             className="mr-[5%] sm:mr-[3%] xl:mr-[5%] pt-[2%] mb-[3%] sm:mb-[1.5%] xl:mb-[3%]  "
           />
           <ProjBasicDetails
