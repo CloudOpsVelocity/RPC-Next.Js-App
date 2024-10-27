@@ -55,7 +55,11 @@ export function BasicMultiSelect() {
       active={f.bhk.includes(item.value)}
     >
       <Group gap="sm">
-        <Checkbox checked={f.bhk.includes(item.value)} color="green" />
+        <Checkbox
+          checked={f.bhk.includes(item.value)}
+          onChange={() => dispatch({ type: "ADD_BHK", payload: item.value })}
+          color="green"
+        />
         <span>{item.title}</span>
       </Group>
     </Combobox.Option>

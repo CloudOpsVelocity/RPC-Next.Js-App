@@ -95,13 +95,11 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
       >
         {type == "proj" && (
           <div className=" space-y-1.5 p-6  px-4 pt-2 pb-3 justify-between items-center">
-            <a
-              target="_blank"
+            <div
               className="tracking-tight sm:text-[18px] font-[600] line-clamp-2 text-wrap min-w-0 text-[#242424] cursor-pointer"
-              href={`/abc/karnataka/banglore/${reqId}`}
             >
               {cardData.projName}
-            </a>
+            </div>
             <div className="text-xs font-semibold  ">
               <span className="text-[#242424] text-[15px] font-[600]">
                 Price Range:

@@ -146,10 +146,6 @@ export default function Navigation({
     { condtion: true, key: TOPIC_IDS.CONTACT },
   ];
   useEffect(() => {
-    console.log(
-      scrollId &&
-        conditionsArray.find((condtion) => condtion.key === scrollId)?.condtion
-    );
     if (
       scrollId &&
       conditionsArray.find((condtion) => condtion.key === scrollId)?.condtion

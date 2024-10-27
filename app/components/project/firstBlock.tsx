@@ -111,7 +111,7 @@ const FirstBlock: React.FC<Props> = ({
             >
               {images.map((imageUrl, index) => (
                 <Carousel.Slide
-                  key={imageUrl[index] ?? imageUrl}
+                  key={imageUrl ?? imageUrl}
                   className="relative"
                   w={"auto"}
                 >

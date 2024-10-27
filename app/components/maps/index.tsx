@@ -179,7 +179,7 @@ const Icon =  createCustomIconReactLeafLet(selected);
           </p>
         </Popup>
       </Marker>
-      <polyline />
+      {/* <polyline /> */}
     </>
   );
 };

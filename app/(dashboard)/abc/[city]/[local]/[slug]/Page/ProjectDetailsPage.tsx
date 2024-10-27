@@ -212,7 +212,7 @@ export default async function ProjectsDetailsPage({
           </div>
         </ErrorContainer>
 
-        <AboutBuilder id={data.builderId} />
+        {/* <AboutBuilder id={data.builderId} /> */}
         {data.wbtp && (
           <About
             id="why-buy-this-project"

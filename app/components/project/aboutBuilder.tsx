@@ -45,12 +45,12 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
               alt="logo"
               className="object-contain h-[93px] w-[93px] sm:h-[100px] sm:w-[133px] xl:h-[150px] xl:w-[158px]"
             />
-            <p className=" text-[#148B16]  text-h2 sm:text-[20px] xl:text-[26px] font-[700] ml-3">
+            <div className=" text-[#148B16]  text-h2 sm:text-[20px] xl:text-[26px] font-[700] ml-3">
               {nzData.userName}
               <p className=" text-[#303A42] text-[14px] italic sm:text-[16px] xl:text-[20px] font-[500] ">
                 since {convertDateToMonthYear(nzData.companyStartDate)}
               </p>
-            </p>
+            </div>
           </div>
         </div>
         <div className="sm:rounded-[20px] mt-[1%] flex justify-between items-center builderBg shadow-md w-[100%] mb-[2%] sm:w-[75%] xl:w-[50%] p-[1%] ">

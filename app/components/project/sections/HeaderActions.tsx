@@ -135,13 +135,11 @@ export default function HeaderActions({
           const whichPropToUse =
             type == "overview" ? parseDataProjectProps : listingProps;
           const whichKeyname = type === "overview" ? "apiProp" : "name";
-          console.log(each);
           const keyName = whichPropToUse[each as keyof typeof whichPropToUse];
           let name =
             propertyDetailsTypes.get(keyName)?.[whichKeyname] !== undefined
               ? propertyDetailsTypes.get(keyName)?.[whichKeyname] // Use whichKeyname to access the property
               : null;
-
           return (
             <Button
               key={keyName}

@@ -177,7 +177,7 @@ export default function GalleryBlock({
           <div className="flex justify-start items-start w-full gap-[4%] flex-wrap ">
             {images?.map((img, ind) => (
               <Image
-                key={img[ind]}
+                key={`gallery_block_${ind}`}
                 width={150}
                 fit="fill"
                 height={100}
@@ -200,7 +200,7 @@ export default function GalleryBlock({
               <div className="flex justify-start items-start w-full gap-[4%] flex-wrap ">
                 {videos?.map((img, ind) => (
                   <div
-                    key={img[0]}
+                  key={`gallery_block_vide_${ind}`}
                     className={`relative w-[110px] lg:w-[152px] flex justify-center items-center h-[68px] md:h-[94px]  bg-white rounded-[5px]  mb-[4%] cursor-pointer
                       ${
                         selectedMedia === img

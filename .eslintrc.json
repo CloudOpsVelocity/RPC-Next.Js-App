@@ -55,6 +55,18 @@
     "import/no-dynamic-require": "error",
     "import/no-self-import": "error",
     "import/no-cycle": "error"
+// "no-restricted-syntax": [
+//       "error",
+//       {
+//         "selector": "JSXAttribute[key.name='key'][value.expression.name='index']",
+//         "message": "Do not use the array index directly as a key. Use a string prefix, e.g., `gallery_block_${index}`."
+//       },
+//       {
+//         "selector":
+//           "JSXAttribute[key.name='key'][value.expression.type='TemplateLiteral'] > TemplateElement[value.raw='']",
+//         "message": "A string prefix is required before the index in keys (e.g., `gallery_block_${index}`)."
+//       }
+//     ]
   },
   "settings": {
     "react": {

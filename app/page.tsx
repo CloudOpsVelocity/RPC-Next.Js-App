@@ -42,7 +42,6 @@ export default async function Page() {
         }}
       />
       <HomeFeatures />
-      {JSON.stringify(latLang)}
       <NewAddedProjects
         data={data.featured}
         shortIds={shortIds}

@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 "use client";
 import Loading from "@/app/components/atoms/Loader";
 import useQsearch from "@/app/hooks/search/useQsearch";
@@ -6,17 +7,14 @@ import {
   mainSearchNoResult,
 } from "@/app/images/commonSvgs";
 import { homeSearchFiltersAtom } from "@/app/store/home";
-import { encodeProID } from "@/app/utils/api/encode";
 import { ScrollArea } from "@mantine/core";
 import { useAtom } from "jotai";
-import { useRouter } from "next/navigation";
 import React from "react";
 import toast from "react-hot-toast";
 import { GrayMapIcon } from "@/app/images/commongsSvgs2";
 import { useRecentSearched } from "@/app/hooks/custom/useRecentSearch";
-import { extractListingParamsValues } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing";
 import { extractApiValues } from "@/app/utils/dyanamic/projects";
-import { FaExclamationCircle, FaExclamationTriangle } from "react-icons/fa";
+import { FaExclamationCircle, } from "react-icons/fa";
 
 export default function Results() {
   const { data, isLoading, handleResetQuery } = useQsearch();
@@ -176,20 +174,23 @@ export default function Results() {
           {" "}
           <div>
             {localities?.length > 0 && (
-              <h2 className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] font-bold xl:text-[16px] not-italic leading-[normal] flex items-center gap-1 sm:gap-1 xl:text-nowrap cursor-pointer">
+              <h2
+                key="localities-heading"
+                className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] font-bold xl:text-[16px] not-italic leading-[normal] flex items-center gap-1 sm:gap-1 xl:text-nowrap cursor-pointer"
+              >
                 <SearchLocationIcon /> <span>Location</span>
               </h2>
             )}
 
-            {localities?.length > 0 && <SubHeading text="Locality" />}
-            <ul>
-              {localities?.map((locality: any) => (
+            {localities?.length > 0 && <SubHeading key="localities-subheading" text="Locality" />}
+            <ul key="localities-list">
+              {localities?.map((locality: any, index: number) => (
                 <li
                   onClick={() =>
                     handleAddSearch(`${locality.name}+${locality.stringId}`)
                   }
                   className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1 sm:gap-1 xl:text-nowrap cursor-pointer"
-                  key={locality.id}
+                  key={`locality-${index}`}
                 >
                   <GrayMapIcon className="w-3 h-3" /> {locality.name}
                 </li>
@@ -198,19 +199,22 @@ export default function Results() {
           </div>
           <div>
             {projects && projects.length > 0 && (
-              <h2 className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic font-semibold leading-[normal] flex items-center gap-1 sm:gap-1 xl:text-nowrap cursor-pointer sm:text-xl  space-x-2   mb-1">
+              <h2
+                key="projects-heading"
+                className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic font-semibold leading-[normal] flex items-center gap-1 sm:gap-1 xl:text-nowrap cursor-pointer sm:text-xl  space-x-2   mb-1"
+              >
                 {property}{" "}
                 <span className="text-[12px] sm:text-[14px] xl:text-[16px]">
                   Projects
                 </span>
               </h2>
             )}
-            <ul>
-              {projects?.map((project: any) => (
+            <ul key="projects-list">
+              {projects?.map((project: any, index: number) => (
                 <li
                   onClick={() => handlePush("project", project.id, project)}
                   className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1  xl:text-nowrap cursor-pointer"
-                  key={project.id}
+                  key={`project-${index}`}
                 >
                   <GrayMapIcon className="w-3 h-3" /> {project.name}
                 </li>
@@ -218,24 +222,24 @@ export default function Results() {
             </ul>
 
             {projectListing?.length > 0 && (
-              <SubHeading text="Project Listings" />
+              <SubHeading key="project-listings-subheading" text="Project Listings" />
             )}
-            <ul>
-              {projectListing?.map((projectListing: any) => (
+            <ul key="project-listings-list">
+              {projectListing?.map((projectListing: any, index: number) => (
                 <li
                   onClick={() =>
                     handlePush("projectListing", projectListing, projectListing)
                   }
                   className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1  xl:text-nowrap cursor-pointer"
-                  key={projectListing.id}
+                  key={`projectListing-${index}`}
                 >
                   <GrayMapIcon className="w-3 h-3" /> {projectListing.name}
                 </li>
               ))}
             </ul>
-            {listings?.length > 0 && <SubHeading text="Listings" />}
-            <ul>
-              {listings?.map((listing: any) => (
+            {listings?.length > 0 && <SubHeading key="listings-subheading" text="Listings" />}
+            <ul key="listings-list">
+              {listings?.map((listing: any, index: number) => (
                 <li
                   onClick={() =>
                     handlePush(
@@ -248,15 +252,15 @@ export default function Results() {
                     )
                   }
                   className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1  xl:text-nowrap cursor-pointer"
-                  key={listing.id}
+                  key={`listing-${index}`}
                 >
                   <GrayMapIcon className="w-3 h-3" /> {listing.name}
                 </li>
               ))}
             </ul>
-            {builders?.length > 0 && <SubHeading text="Builders" />}
-            <ul>
-              {builders?.map((builder: any) => (
+            {builders?.length > 0 && <SubHeading key="builders-subheading" text="Builders" />}
+            <ul key="builders-list">
+              {builders?.map((builder: any, index: number) => (
                 <li
                   onClick={() =>
                     handlePush(
@@ -269,7 +273,7 @@ export default function Results() {
                     )
                   }
                   className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic leading-[normal] flex items-center gap-1  xl:text-nowrap cursor-pointer"
-                  key={builder.id}
+                  key={`builder-${index}`}
                 >
                   <GrayMapIcon className="w-3 h-3" /> {builder.name}
                 </li>

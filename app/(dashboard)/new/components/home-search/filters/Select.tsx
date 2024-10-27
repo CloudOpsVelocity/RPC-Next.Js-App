@@ -52,6 +52,7 @@ export function BasicSelect() {
             }
             color="green"
             mr={6}
+            readOnly
           />{" "}
           <span className="capitalize">{item}</span>
         </Combobox.Option>

@@ -4841,9 +4841,9 @@ export const WhatsAppButton = ({ name, type }: Props) => {
             width="219.858"
             height="76"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               mode="normal"
               in="SourceGraphic"
@@ -4876,9 +4876,9 @@ export const WhatsAppButton = ({ name, type }: Props) => {
             width="112.282"
             height="111.762"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feColorMatrix
               in="SourceAlpha"
               type="matrix"
@@ -5963,9 +5963,9 @@ export const WhatsAppIcon = (
         width="70"
         height="69.8345"
         filterUnits="userSpaceOnUse"
-        color-interpolation-filters="sRGB"
+        colorInterpolationFilters="sRGB"
       >
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
         <feColorMatrix
           in="SourceAlpha"
           type="matrix"
@@ -6062,9 +6062,9 @@ export const FacbookIcon = (
         width="70"
         height="70"
         filterUnits="userSpaceOnUse"
-        color-interpolation-filters="sRGB"
+        colorInterpolationFilters="sRGB"
       >
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
         <feColorMatrix
           in="SourceAlpha"
           type="matrix"
@@ -6139,9 +6139,9 @@ export const Telegram = (
         width="70"
         height="70"
         filterUnits="userSpaceOnUse"
-        color-interpolation-filters="sRGB"
+        colorInterpolationFilters="sRGB"
       >
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
         <feColorMatrix
           in="SourceAlpha"
           type="matrix"
@@ -6439,9 +6439,9 @@ export const MapIcon = ({ className }: { className?: string }) => {
           width="50"
           height="72"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feColorMatrix
             in="SourceAlpha"
             type="matrix"
@@ -9582,7 +9582,7 @@ export const amenitiesGroupList = new Map([
           gradientTransform="translate(12 -7.97851) rotate(90) scale(30.5 33.7586)"
         >
           <stop stopColor="#148B16" />
-          <stop offset="0.826835" stop-opacity="0" />
+          <stop offset="0.826835" stopOpacity="0" />
           <stop offset="1" stopColor="#545353" />
         </radialGradient>
       </defs>
@@ -12664,7 +12664,7 @@ export const ReraSvg = () => {
           gradientUnits="userSpaceOnUse"
         >
           <stop stopColor="#006102" />
-          <stop offset="1" stopColor="#009957" stop-opacity="0" />
+          <stop offset="1" stopColor="#009957" stopOpacity="0" />
         </linearGradient>
       </defs>
     </svg>
@@ -13261,9 +13261,9 @@ export const SellSvg = () => {
           width="111.184"
           height="94"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feColorMatrix
             in="SourceAlpha"
             type="matrix"
@@ -13355,9 +13355,9 @@ export const RentSvg = () => {
           width="111.18"
           height="94"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feColorMatrix
             in="SourceAlpha"
             type="matrix"
@@ -13428,7 +13428,7 @@ export const AvailListSideSvg = ({ type }: { type: "rent" | "sell" }) => {
           gradientUnits="userSpaceOnUse"
         >
           <stop stopColor="#C0E6FF" />
-          <stop offset="0.745" stopColor="#CAE9FF" stop-opacity="0" />
+          <stop offset="0.745" stopColor="#CAE9FF" stopOpacity="0" />
         </linearGradient>
       </defs>
     </svg>
@@ -13455,7 +13455,7 @@ export const AvailListSideSvg = ({ type }: { type: "rent" | "sell" }) => {
           gradientUnits="userSpaceOnUse"
         >
           <stop stopColor="#FFF8D5" />
-          <stop offset="0.885" stopColor="#FFD600" stop-opacity="0" />
+          <stop offset="0.885" stopColor="#FFD600" stopOpacity="0" />
         </linearGradient>
       </defs>
     </svg>
@@ -13874,9 +13874,9 @@ export const ForgotPass = ({ className }: { className: string }) => {
           width="120"
           height="124"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend
             mode="normal"
             in="SourceGraphic"
