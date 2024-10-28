@@ -24,6 +24,7 @@ import { decryptData } from "./utils/auth/nodeCrypto";
 export default async function Page() {
   const ip = headers().get("x-real-ip") || headers().get("x-forwarded-for");
   const cityData = await getUserCity();
+  console.log(cityData)
   const encriptedLatLang = cookies().get('ui')?.value;
   const latLang = encriptedLatLang ? decryptData(encriptedLatLang) : '';
   const [data, listingData, shortIds] = await Promise.all([
@@ -48,31 +49,31 @@ export default async function Page() {
         shortIds={shortIds}
         cityId={cityData.data.cityId}
       />
-      {/* <DynamicListing
+      <DynamicListing
         title="Ready to Move Sell Listings"
         content="Move In Today: Your Dream Home Awaits – Explore Our Ready-to-Move Listings Now!"
         data={listingData["r_Sale"]}
         shortIds={shortIds}
         cityId={cityData.data.cityId}
         dataKey="r_Sale"
-      /> */}
+      />
       <TopLocalities />
-      {/* <DynamicListing
+      <DynamicListing
         title="Ready to Move Rent Listings"
         content="Find Your Perfect Home, Ready to Move In - Rent Today!"
         data={listingData["r_Rent"]}
         shortIds={shortIds}
         cityId={cityData.data.cityId}
         dataKey="r_Rent"
-      /> */}
-      {/* <DynamicListing
+      />
+      <DynamicListing
         title="Featured Plot Listings"
         content="Browse Top Listings and Find Your Perfect Plot Today!"
         data={listingData["p"]}
         shortIds={shortIds}
         cityId={cityData.data.cityId}
         dataKey="p"
-      /> */}
+      />
       <DynamicListing
         title="Under Construction Sell Listings"
         content="Explore Our Under Construction Listings Today!"
@@ -86,7 +87,7 @@ export default async function Page() {
         shortIds={shortIds}
         cityId={cityData.data.cityId}
       />
-      {/* <DynamicListing
+      <DynamicListing
         title="Under Construction Rent Listings"
         content="Discover New Developments and Under Construction Rent Listings!"
         data={listingData["u_Rent"]}
@@ -110,7 +111,7 @@ export default async function Page() {
         shortIds={shortIds}
         cityId={cityData.data.cityId}
         dataKey="i_Rent"
-      /> */}
+      />
       <PostYourListing />
       <BlogsSection />
       <Footer />
