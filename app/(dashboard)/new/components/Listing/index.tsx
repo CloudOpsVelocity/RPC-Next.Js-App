@@ -1,12 +1,16 @@
 'use client'
-import React from "react";
+import React, { Suspense } from "react";
 import MainHeading from "../heading";
-import ListingCarousel from "./Carousel";
+// import ListingCarousel from "./Carousel";
 import { useAtomValue } from "jotai";
 import { homeSearchFiltersAtom } from "@/app/store/home";
 import { useQuery } from "react-query";
 import RTK_CONFIG from "@/app/config/rtk";
 import { getHomeListingData } from "@/app/(new_routes_seo)/utils/new-seo-routes/llisting.api";
+import dynamic from "next/dynamic";
+const ListingCarousel = dynamic(() => import("./Carousel"), { ssr: false, 
+loading: () => <div>Loading...</div>
+});
 type Props = {
   title: string;
   content: string;

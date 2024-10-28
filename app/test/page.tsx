@@ -7,7 +7,6 @@ import { getAuthorityNames } from "../utils/api/project";
 import Tooltip from "../components/atoms/Tooltip";
 import { useRef, useState } from "react";
 import VirtualCarousel from "./components/Carousel";
-import Carousel1, { CarouselExample } from "./components/Carousel1";
 interface Item {
   id: number
   title: string
@@ -44,7 +43,7 @@ export default function Page() {
   return (
     <div className="w-full mx-auto px-4 py-8">
       <h2 className="text-3xl font-bold mb-6 text-center">Virtual Carousel (100,000 items)</h2>
-      <CarouselExample />
+      {/* <CarouselExample /> */}
       {/* <VirtualCarousel 
         items={items}
         renderItem={renderItem}

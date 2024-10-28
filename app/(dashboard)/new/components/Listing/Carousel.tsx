@@ -14,7 +14,7 @@ export default function ListingCarousel({ shortIds, data }: Props) {
   return (
 
 
-<OptmizedCarousel itemHeight={500} slideWidth={500} slides={data}  gap={1} overscan={5} slidesToShow={4} renderItem={(item:any)=>{
+<OptmizedCarousel itemHeight={500} slideWidth={500} slides={data}  gap={1} overscan={5} slidesToShow={3} renderItem={(item:any)=>{
 return <ListingCard
         item={item}
         sl={
