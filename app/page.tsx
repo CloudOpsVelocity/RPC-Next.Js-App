@@ -19,9 +19,10 @@ import SharePopup from "./(dashboard)/search/components/SharePopup";
 import Header from "./components/layouts/primary/header";
 import Footer from "./components/layouts/primary/footer";
 import { getUserCity } from "./(new_routes_seo)/utils/new-seo-routes/home.api";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { decryptData } from "./utils/auth/nodeCrypto";
 export default async function Page() {
+  const ip = headers().get("x-real-ip") || headers().get("x-forwarded-for");
   const cityData = await getUserCity();
   const encriptedLatLang = cookies().get('ui')?.value;
   const latLang = encriptedLatLang ? decryptData(encriptedLatLang) : '';

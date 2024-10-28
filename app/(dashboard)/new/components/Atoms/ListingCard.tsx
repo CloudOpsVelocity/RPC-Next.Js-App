@@ -28,6 +28,7 @@ export default function ListingCard({ item, sl }: Props) {
       : item.bhkName
   } ${item.propTypeName} for ${item.category} in ${item.localityName}`;
   return (
+    <div>
     <ListingLink
       routeParams={{
         bhkUnitType: item.bhkName + "-" + item.propTypeName,
@@ -208,6 +209,7 @@ export default function ListingCard({ item, sl }: Props) {
         </div>
       </div>
     </ListingLink>
+    </div>
   );
 }
 const DownSectionCard = ({
