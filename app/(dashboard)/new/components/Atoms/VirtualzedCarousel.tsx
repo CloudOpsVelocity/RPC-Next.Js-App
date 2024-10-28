@@ -34,44 +34,35 @@ const HomePageVirtualCarousel: React.FC<ColumnVirtualizerFixedProps> = ({
     overscan,
   });
 
-  const totalWidth = useMemo(
-    () => columnVirtualizer.getTotalSize() - gapSize,
-    [columnVirtualizer, gapSize]
-  );
+  const totalWidth = useMemo(() => columnVirtualizer.getTotalSize() - gapSize, [columnVirtualizer, gapSize]);
 
   const scrollTo = (scrollOffset: number) => {
     if (parentRef.current) {
-      parentRef.current.scrollTo({
-        left: parentRef.current.scrollLeft + scrollOffset,
+      parentRef.current.scrollBy({
+        left: scrollOffset,
         behavior: "smooth",
       });
     }
   };
 
-  const isAtStart = () =>
-    parentRef.current ? parentRef.current.scrollLeft <= 1 : false;
+  const isAtStart = () => parentRef.current ? parentRef.current.scrollLeft <= 1 : false;
+  const isAtEnd = () => parentRef.current
+    ? parentRef.current.scrollLeft + parentRef.current.clientWidth >= totalWidth - 1
+    : false;
 
-  const isAtEnd = () =>
-    parentRef.current
-      ? parentRef.current.scrollLeft + parentRef.current.clientWidth >= totalWidth - 1
-      : false;
-
-  // Using useDrag for drag-to-scroll functionality with improved sensitivity
-  useDrag(
-    ({ offset: [mx], memo = parentRef.current?.scrollLeft || 0 }) => {
+  // Smooth horizontal scrolling using useDrag
+  const bind = useDrag(
+    ({ movement: [mx], memo = parentRef.current?.scrollLeft ?? 0 }) => {
       if (parentRef.current) {
-        // Adjusting the multiplier to make dragging more responsive
-        parentRef.current.scrollLeft = memo - mx * 1.5;
+        parentRef.current.scrollLeft = memo - mx * 100;
       }
       return memo;
     },
     {
-      target: parentRef,
       axis: "x",
-      preventScroll: true,
-      from: () => [parentRef.current?.scrollLeft || 0, 0],
+      pointer: { touch: true },
       bounds: { left: 0, right: totalWidth },
-      rubberband: true, // Allow slight overscroll
+      rubberband: true,
     }
   );
 
@@ -81,8 +72,8 @@ const HomePageVirtualCarousel: React.FC<ColumnVirtualizerFixedProps> = ({
         <button
           onClick={() => scrollTo(-effectiveItemSize)}
           disabled={isAtStart()}
-          className={`absolute -left-10 top-1/2 transform -translate-y-1/2 rounded z-10 ${
-            isAtStart() ? "opacity-50 cursor-not-allowed" : ""
+          className={`absolute -left-10 top-1/2 transform -translate-y-1/2 rounded z-10 transition-opacity ${
+            isAtStart() ? "opacity-50 cursor-not-allowed" : "opacity-100"
           }`}
         >
           <CarouseSelArrowIcon className="rotate-180" />
@@ -91,29 +82,27 @@ const HomePageVirtualCarousel: React.FC<ColumnVirtualizerFixedProps> = ({
 
       <div
         ref={parentRef}
-        className="mx-auto floorplan flex justify-start items-center scrollbar-hide"
+        className="mx-auto floorplan flex items-center scrollbar-hide overflow-hidden"
         style={{
           width: "100%",
           height: `${height}px`,
-          overflow: "auto",
           cursor: "grab",
           userSelect: "none",
         }}
+        {...bind()}
       >
         <div
+          className="flex scroll-smooth"
           style={{
             width: `${totalWidth}px`,
             height: "100%",
             position: "relative",
           }}
-          className="scrollbar-hide"
         >
           {columnVirtualizer.getVirtualItems().map((virtualColumn) => (
             <div
               key={virtualColumn.key}
-              className={
-                virtualColumn.index % 2 ? "ListItemOdd" : "ListItemEven"
-              }
+              className="ListItem"
               style={{
                 position: "absolute",
                 top: 0,
@@ -121,6 +110,7 @@ const HomePageVirtualCarousel: React.FC<ColumnVirtualizerFixedProps> = ({
                 height: "100%",
                 width: `${itemSize}px`,
                 transform: `translateX(${virtualColumn.start}px)`,
+                transition: "transform 0.3s ease-in-out",
               }}
             >
               {renderItem
@@ -135,8 +125,8 @@ const HomePageVirtualCarousel: React.FC<ColumnVirtualizerFixedProps> = ({
         <button
           onClick={() => scrollTo(effectiveItemSize)}
           disabled={isAtEnd()}
-          className={`absolute -right-10 top-1/2 transform -translate-y-1/2 rounded z-10 ${
-            isAtEnd() ? "opacity-50 cursor-not-allowed" : ""
+          className={`absolute -right-10 top-1/2 transform -translate-y-1/2 rounded z-10 transition-opacity ${
+            isAtEnd() ? "opacity-50 cursor-not-allowed" : "opacity-100"
           }`}
         >
           <CarouseSelArrowIcon />
