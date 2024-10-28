@@ -24,7 +24,31 @@ export default function Page() {
   // console.log(bhkSort([3,5,3,1,3,2,7,5,4,2]))
 
   // Example
+  function lengthOfLongestSubstring(s: string): number {
+    let values:number[] = []
+    // sample input abcbbxyxs
+    // 0 => 3 
+    // 1 => 5
+    let curIndex = 0
+    for (let i = 0; i < s.length; i++) {
+        if(s[i] != s[i+1]){
+          if(!values[curIndex]){
+            values.push(1)
+          }
+          else{
+            values[curIndex] += 1
+          }
+        }
+        else{
+          i = i+1
+          curIndex++
+        }
 
+        
+    }
+return Math.max(...values)
+    }
+    console.log(lengthOfLongestSubstring('abceqtbbxyxshgfvf'))
   return (
     <div className="h-[100%] w-[100%] flex  flex-col overflow-hidden bg-[#F5F7F8]">
       <CarouselExample />
