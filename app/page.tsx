@@ -23,6 +23,7 @@ import { cookies, headers } from "next/headers";
 import { decryptData } from "./utils/auth/nodeCrypto";
 export default async function Page() {
   const ip = headers().get("x-real-ip") || headers().get("x-forwarded-for");
+  console.log(ip)
   const cityData = await getUserCity();
   console.log(cityData)
   const encriptedLatLang = cookies().get('ui')?.value;
