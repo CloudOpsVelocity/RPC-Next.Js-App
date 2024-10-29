@@ -22,15 +22,12 @@ import { getUserCity } from "./(new_routes_seo)/utils/new-seo-routes/home.api";
 import { cookies, headers } from "next/headers";
 import { decryptData } from "./utils/auth/nodeCrypto";
 export default async function Page() {
-  const ip = headers().get("x-real-ip") || headers().get("x-forwarded-for");
-  console.log(ip)
   const cityData = await getUserCity();
-  console.log(cityData)
-  const encriptedLatLang = cookies().get('ui')?.value;
-  const latLang = encriptedLatLang ? decryptData(encriptedLatLang) : '';
+  const encriptedLatLang = cookies().get("ui")?.value;
+  const latLang = encriptedLatLang ? decryptData(encriptedLatLang) : "";
   const [data, listingData, shortIds] = await Promise.all([
-    getData(cityData.data.cityId,latLang),
-    getHomeListingData(cityData.data.cityId,latLang),
+    getData(cityData?.data?.cityId, latLang),
+    getHomeListingData(cityData?.data?.cityId, latLang),
     getShortIds(),
   ]);
 
@@ -40,22 +37,22 @@ export default async function Page() {
       <HomeSearch
         count={shortIds?.total}
         cityData={{
-          cityId: cityData?.data.cityId,
-          cityName: cityData?.data.city,
+          cityId: cityData?.data?.cityId ?? "",
+          cityName: cityData?.data?.city ?? "",
         }}
       />
       <HomeFeatures />
       <NewAddedProjects
         data={data.featured}
         shortIds={shortIds}
-        cityId={cityData.data.cityId}
+        cityId={cityData?.data?.cityId}
       />
       <DynamicListing
         title="Ready to Move Sell Listings"
         content="Move In Today: Your Dream Home Awaits – Explore Our Ready-to-Move Listings Now!"
         data={listingData["r_Sale"]}
         shortIds={shortIds}
-        cityId={cityData.data.cityId}
+        cityId={cityData?.data?.cityId}
         dataKey="r_Sale"
       />
       <TopLocalities />
@@ -64,7 +61,7 @@ export default async function Page() {
         content="Find Your Perfect Home, Ready to Move In - Rent Today!"
         data={listingData["r_Rent"]}
         shortIds={shortIds}
-        cityId={cityData.data.cityId}
+        cityId={cityData?.data.cityId}
         dataKey="r_Rent"
       />
       <DynamicListing
@@ -72,7 +69,7 @@ export default async function Page() {
         content="Browse Top Listings and Find Your Perfect Plot Today!"
         data={listingData["p"]}
         shortIds={shortIds}
-        cityId={cityData.data.cityId}
+        cityId={cityData?.data.cityId}
         dataKey="p"
       />
       <DynamicListing
@@ -80,20 +77,20 @@ export default async function Page() {
         content="Explore Our Under Construction Listings Today!"
         data={listingData["u_Sale"]}
         shortIds={shortIds}
-        cityId={cityData.data.cityId}
+        cityId={cityData?.data.cityId}
         dataKey="u_Sale"
       />
       <HandPickedProjects
         data={data}
         shortIds={shortIds}
-        cityId={cityData.data.cityId}
+        cityId={cityData?.data.cityId}
       />
       <DynamicListing
         title="Under Construction Rent Listings"
         content="Discover New Developments and Under Construction Rent Listings!"
         data={listingData["u_Rent"]}
         shortIds={shortIds}
-        cityId={cityData.data.cityId}
+        cityId={cityData?.data.cityId}
         dataKey="u_Rent"
       />
       <DynamicListing
@@ -101,7 +98,7 @@ export default async function Page() {
         content="Your Gateway to Independent Living - Browse and Buy with Confidence"
         data={listingData["i_Sale"]}
         shortIds={shortIds}
-        cityId={cityData.data.cityId}
+        cityId={cityData?.data.cityId}
         dataKey="i_Sale"
       />{" "}
       <ListbySection />
@@ -110,7 +107,7 @@ export default async function Page() {
         content="Discover Your Ideal Rental: Independent Listings, Endless Options."
         data={listingData["i_Rent"]}
         shortIds={shortIds}
-        cityId={cityData.data.cityId}
+        cityId={cityData?.data.cityId}
         dataKey="i_Rent"
       />
       <PostYourListing />

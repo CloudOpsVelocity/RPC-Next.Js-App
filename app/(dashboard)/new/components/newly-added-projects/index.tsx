@@ -29,7 +29,7 @@ export default function NewAddedProjects({ data, shortIds, cityId }: Props) {
     <div> Loading...</div>
   ) : (
     (isEnabled
-      ? newlyAddedProjects.status && newlyAddedProjects["New Launch"]?.length
+      ? newlyAddedProjects?.status && newlyAddedProjects["New Launch"]?.length
       : data?.length) > 0 && (
       <div className="mt-[40px] sm:mt-[60px] w-[95%] m-auto">
         <MainHeading

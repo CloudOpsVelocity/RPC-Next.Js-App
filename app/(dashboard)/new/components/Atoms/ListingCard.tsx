@@ -41,7 +41,7 @@ export default function ListingCard({ item, sl }: Props) {
       }}
       target="_blank"
       // onClick={() => onRedirectOnProp()}
-      className="w-full sm:w-[370px] xl:w-[490px] cursor-pointer"
+      className="w-full sm:w-[370px] xl:w-[490px] xl:min-w-[490px] cursor-pointer"
     >
       <div className="h-[137px] sm:h-[145px] xl:h-[228px]   mb-[6px] shrink-0 shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] relative">
         <div className="flex  justify-start items-start gap-[8px] absolute top:0 right-0 p-[8px] ">

@@ -2,7 +2,8 @@ import { DefaultCityResponse, CityData } from "@/app/(dashboard)/new/search";
 
 const getUserCity = async (
   cityData?: CityData
-): Promise<DefaultCityResponse> => {
+): Promise<DefaultCityResponse | null> => {
+
   if (cityData) {
     return {
       data: {
@@ -23,7 +24,7 @@ const getUserCity = async (
     return await res.json();
   } catch (error) {
     console.error("Error fetching default city:", error);
-    throw error;
+    return null;
   }
 };
 export const getHomePageProjectData = async (

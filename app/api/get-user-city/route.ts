@@ -34,6 +34,7 @@ export async function GET(req: Request) {
     );
   }
   const ip = req.headers.get("x-real-ip") || req.headers.get("x-forwarded-for");
+  // const ip = new URL(req.url).searchParams.get("ip");
   try {
     if (!ip) {
       return NextResponse.json({ ok: false, error: "IP not found" });

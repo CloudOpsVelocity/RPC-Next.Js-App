@@ -2,6 +2,7 @@ import React, { useRef, useMemo } from "react";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { useDrag } from "@use-gesture/react";
 import { CarouseSelArrowIcon } from "@/app/images/HomePageIcons";
+import { useMediaQuery } from "@mantine/hooks";
 
 interface ColumnVirtualizerFixedProps {
   items: any[];
@@ -23,7 +24,7 @@ const HomePageVirtualCarousel: React.FC<ColumnVirtualizerFixedProps> = ({
   renderItem,
 }) => {
   const parentRef = useRef<HTMLDivElement>(null);
-
+ const isMobile = useMediaQuery('(max-width: 768px)') 
   const effectiveItemSize = useMemo(() => itemSize + gapSize, [itemSize, gapSize]);
 
   const columnVirtualizer = useVirtualizer({
@@ -63,6 +64,7 @@ const HomePageVirtualCarousel: React.FC<ColumnVirtualizerFixedProps> = ({
       pointer: { touch: true },
       bounds: { left: 0, right: totalWidth },
       rubberband: true,
+      enabled: !isMobile, // Disable drag on mobile devices
     }
   );
 
@@ -92,7 +94,7 @@ const HomePageVirtualCarousel: React.FC<ColumnVirtualizerFixedProps> = ({
         {...bind()}
       >
         <div
-          className="flex scroll-smooth"
+          className="flex scroll-smooth overflow-x-scroll scrollbar-hide"
           style={{
             width: `${totalWidth}px`,
             height: "100%",
