@@ -1,7 +1,8 @@
 import { DefaultCityResponse, CityData } from "@/app/(dashboard)/new/search";
 
 const getUserCity = async (
-  cityData?: CityData
+  cityData?: CityData,
+ 
 ): Promise<DefaultCityResponse | null> => {
 
   if (cityData) {
