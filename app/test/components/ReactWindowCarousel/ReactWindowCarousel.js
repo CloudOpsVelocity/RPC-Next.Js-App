@@ -14,7 +14,7 @@ const ReactWindowCarousel = ({
   const wrapperRef = useRef();
 
   const [activeSlide, setActiveSlide] = useState(initialSlide || 0);
-
+   console.log(activeSlide)
   const nextSlideHandler = () => {
     setActiveSlide(activeSlide + slideBy);
   };

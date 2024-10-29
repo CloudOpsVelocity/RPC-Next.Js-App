@@ -5,33 +5,20 @@ import ListingCard from "../Atoms/ListingCard";
 import CustomCarousel from "@/app/test/components/Carousel1";
 import HomePageVirtualCarousel from "../Atoms/VirtualzedCarousel";
 import ReactWindowCarousel from "@/app/test/components/ReactWindowCarousel";
+import { Carousel } from "@mantine/carousel";
+import { CarouseSelArrowIcon } from "@/app/images/HomePageIcons";
+import Css from "../../Style.module.css";
 type Props = {
   data: any;
   shortIds: any;
+  dataKey:string
 };
 
-export default function ListingCarousel({ shortIds, data }: Props) {
-  const slideWidth = 500;
-  const slideHeight = 480;
-
-  const initialSlide = 0;
-
-  const slidesList = data.map((item:any, index:number) => 
-          <ListingCard
-          key={index}
-          item={item}
-          sl={
-          shortIds?.propIds && shortIds?.propIds?.includes(item.propIdEnc)
-            ? "Y"
-            : "N"
-            }
-      />
-    
-    );
+export default function ListingCarousel({ shortIds, data ,dataKey}: Props) {
   return (
-    <ReactWindowCarousel
-    {...{ initialSlide, slidesList, slideWidth, slideHeight }}
-  />
+  //   <ReactWindowCarousel
+  //   {...{ initialSlide, slidesList, slideWidth, slideHeight }}
+  // />
   //   <HomePageVirtualCarousel
   //   items={data}
   //   itemCount={data.length}
@@ -61,37 +48,38 @@ export default function ListingCarousel({ shortIds, data }: Props) {
   //         }
   //       />
   //   )}
+  //   dataKey={dataKey}
   //   slidesToShow={3}
   //   gap={16}
-  //   itemWidth={500}
-  //   hideControlsOnMobile
+
+
   // />
-  //   <Carousel
-  //   // slideSize="33.333333%"
-  //   slideSize={{ base: "80%", sm: "50%", md: "29%" }}
-  //   slideGap={{ base: "sm", sm: "md", xl: "md" }}
-  //   // loop
-  //   align="start"
-  //   slidesToScroll={1}
-  //   mt={20}
-  //   nextControlIcon={<CarouseSelArrowIcon />}
-  //   previousControlIcon={<CarouseSelArrowIcon className="rotate-180" />}
-  //   controlsOffset={"-10px"}
-  //   classNames={Css}
-  // >
-  //   {data?.map((item: any, index: number) => (
-  //     <Carousel.Slide key={item.propIdEnc}>
-  //       <ListingCard
-  //         item={item}
-  //         sl={
-  //           shortIds?.propIds && shortIds?.propIds?.includes(item.propIdEnc)
-  //             ? "Y"
-  //             : "N"
-  //         }
-  //       />
-  //     </Carousel.Slide>
-  //   ))}
-  // </Carousel>
+    <Carousel
+    // slideSize="33.333333%"
+    slideSize={{ base: "80%", sm: "50%", md: "29%" }}
+    slideGap={{ base: "sm", sm: "md", xl: "md" }}
+    // loop
+    align="start"
+    slidesToScroll={1}
+    mt={20}
+    nextControlIcon={<CarouseSelArrowIcon />}
+    previousControlIcon={<CarouseSelArrowIcon className="rotate-180" />}
+    controlsOffset={"-10px"}
+    classNames={Css}
+  >
+    {data?.map((item: any, index: number) => (
+      <Carousel.Slide key={item.propIdEnc}>
+        <ListingCard
+          item={item}
+          sl={
+            shortIds?.propIds && shortIds?.propIds?.includes(item.propIdEnc)
+              ? "Y"
+              : "N"
+          }
+        />
+      </Carousel.Slide>
+    ))}
+  </Carousel>
   )
 }
 {/* <div className="mt-4">

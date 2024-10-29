@@ -1,10 +1,10 @@
+/* eslint-disable react/no-array-index-key */
 "use client";
 import { Carousel } from "@mantine/carousel";
 import React from "react";
 import Card from "./Card";
 import "@mantine/carousel/styles.css";
 import { CarouseSelArrowIcon } from "@/app/images/HomePageIcons";
-import useIds from "../useIds";
 import Css from "../../Style.module.css";
 type Props = {
   data: any;

@@ -47,6 +47,7 @@ export default function DynamicListing({
         <ListingCarousel
           data={isEnabled ? listingData[dataKey] : data}
           shortIds={shortIds}
+          dataKey={dataKey}
         />
       </div>
     )
