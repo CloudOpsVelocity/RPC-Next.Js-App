@@ -2,6 +2,7 @@ import { DefaultCityResponse, CityData } from "@/app/(dashboard)/new/search";
 
 const getUserCity = async (
   cityData?: CityData,
+  ip:string = ""
  
 ): Promise<DefaultCityResponse | null> => {
 
@@ -16,7 +17,7 @@ const getUserCity = async (
   }
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/get-user-city`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/get-user-city${ip ? `?ip=${ip}` : ""}`,
       {
         cache: "no-store",
       }
