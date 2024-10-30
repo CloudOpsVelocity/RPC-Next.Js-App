@@ -13,7 +13,7 @@ export default function useAmenities() {
 }
 export const getAmenties = async () => {
   const data = await axios.post(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/common/projAmenities`
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/common/all-proj-Amenities`
   );
   return data.data;
 };

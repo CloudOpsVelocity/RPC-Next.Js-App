@@ -58,7 +58,6 @@ export default async function ProjectsDetailsPage({
 }: Props) {
   const { basicData: data, nearByLocations, phaseOverview } = projResponse;
   const refURls = data?.sourceBuilderUrl?.split(",");
-
   return (
     <section className="w-full relative break-words ">
       <meta
@@ -211,7 +210,6 @@ export default async function ProjectsDetailsPage({
           <Feature data={data.highlights} projName={data.projectName} />
         </ErrorContainer>
         <Banner projName={data.projectName} projIdEnc={slug} />
-
         <ErrorContainer data={data.banks}>
           <div id="bank-approvals" className="w-full h-auto scroll-mt-[150px]">
             <Loans type="proj" banks={data.banks} name={data.projectName} />

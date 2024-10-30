@@ -180,18 +180,18 @@ cityData
     <div className="relative w-64 max-w-fit" ref={dropdownRef}>
       <button
         onClick={handleToggleDropdown}
-        className="w-full p-3 text-left bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 ease-in-out flex items-center justify-between space-x-2"
+        className="w-full p-2 sm:p-3 text-left bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 ease-in-out flex items-center justify-between space-x-1 sm:space-x-2"
         aria-haspopup="listbox"
         aria-expanded={isOpen}
       >
-        <span className="text-gray-700 font-medium truncate">
+        <span className="text-gray-700 font-medium truncate text-xs sm:text-base">
           {selectedCity?.name || DefaultCity?.data?.city || "Select City"}
         </span>
         {selectedCity || DefaultCity?.data?.city ? (
-          <FaLocationDot className="h-5 w-5 text-blue-500" aria-hidden="true" />
+          <FaLocationDot className="h-4 w-4 sm:h-5 sm:w-5 text-blue-500" aria-hidden="true" />
         ) : (
           <FaChevronDown
-            className={`h-5 w-5 text-gray-400 transition-transform duration-200 ${
+            className={`h-4 w-4 sm:h-5 sm:w-5 text-gray-400 transition-transform duration-200 ${
               isOpen ? "transform rotate-180" : ""
             }`}
             aria-hidden="true"
@@ -201,7 +201,7 @@ cityData
 
       {isOpen && (
         <div
-          className="absolute z-10 w-full mt-2 bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden transition-all duration-200 ease-in-out"
+          className="absolute right-[5%] z-10 w-full mt-2 bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden transition-all duration-200 ease-in-out"
           style={{ minWidth: cityError ? "300px" : "220px" }}
           onKeyDown={handleKeyDown}
         >

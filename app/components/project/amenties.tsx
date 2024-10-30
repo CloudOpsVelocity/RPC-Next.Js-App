@@ -7,6 +7,7 @@ import React from "react";
 import PropertyHeading from "../property/heading";
 import { useMediaQuery } from "@mantine/hooks";
 import SubHeading from "./headings/SubHeading";
+import AmenitiesDisplay from "./_ui/Amenities";
 
 export default function Amenties({
   data,
@@ -19,8 +20,6 @@ export default function Amenties({
   projName: string;
   amenitiesFromDB: any;
 }) {
-  // const { data: amenitiesFromDB, error, isLoading } = useAmenities();
-
   const [{ expanded }, setReadMore] = useAtom(readMoreAtom);
   const isMobile = useMediaQuery(`(max-width: 750px)`);
   const maxShow = isMobile ? 6 : 20;
@@ -62,46 +61,8 @@ export default function Amenties({
           </>
         )}
 
-        <div className="flex flex-wrap sm:mt-4" onClick={handleReadMoreClick}>
-          {data?.slice(0, maxShow).map((eachItem, ind) => {
-            if (amenitiesGroupList.get(eachItem.id) != null) {
-              return (
-                amenitiesFromDB != undefined &&
-                amenitiesFromDB != null &&
-                Object.keys(amenitiesFromDB).map((group, ind) => {
-                  return (
-                    <div key={`aminity_Con_${eachItem.id}`}>
-                      {amenitiesFromDB != undefined &&
-                        amenitiesFromDB != null &&
-                        amenitiesFromDB[`${group}`] != undefined &&
-                        amenitiesFromDB[`${group}`] != null &&
-                        amenitiesFromDB[`${group}`].length != 0 &&
-                        amenitiesFromDB[group].map(
-                          (eachOne: any, index: number) => {
-                            if (eachOne.cid == eachItem.id) {
-                              return (
-                                <div
-                                  key={`aminity_Box_${eachItem.id}`}
-                                  className="flex items-center  gap-[8px]  mb-[8px] mr-[8px]  xl:mr-[24px] xl:mb-[24px]  px-2.5 py-0.5 w-fit text-[#001F35] font-[500] text-[13px] xl:text-[20px] focus:ring-offset-2 border rounded-[10px] border-solid border-[#b2e0ff] bg-[#FFF] "
-                                >
-                                  {amenitiesGroupList.get(eachItem.id)}
-                                  {eachOne.constDesc}
-                                </div>
-                              );
-                            }
-                          }
-                        )}
-                    </div>
-                  );
-                })
-              );
-            }
-          })}
-          {shouldShowMore && (
-            <button className="inline-flex items-center justify-center text-[14px] lg:text-[20px] text-[#0073C6] font-[700] ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 sm:px-4 sm:py-2 ">
-              {expanded ? "" : `+ ${data?.length - maxShow} More`}
-            </button>
-          )}
+        <div className="flex flex-wrap sm:mt-4" >
+       <AmenitiesDisplay amenitiesData={amenitiesFromDB} />
         </div>
       </div>
     </div>

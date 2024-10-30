@@ -38,6 +38,7 @@ export default async function Page({
   const values = await findPathForProjectListing(pathname);
   if (!values) return notFound();
   const filtersValues = extractListingParamsValues(values);
+
   if (filtersValues.count === 8) {
     serverData = await getSearchData(
       `bhk=${filtersValues.BH}&propType=${filtersValues.PT}&localities=${filtersValues.LT}&cg=${filtersValues.CG}&projIdEnc=${filtersValues.PJ}`
@@ -48,6 +49,7 @@ export default async function Page({
       nearByLocations,
       totalPrice,
     } = await getListingDetails((filtersValues.id as string) ?? "");
+    console.log(data)
     const [projData, issueData, amenities] = await Promise.all([
       getProjectDetails(data.projIdEnc),
       getReportConstData(),

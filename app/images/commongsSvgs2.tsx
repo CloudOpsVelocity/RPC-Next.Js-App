@@ -178,3 +178,4 @@ export const GrayMapIcon = ({ className }: { className?: string }) => {
     </svg>
   );
 };
+

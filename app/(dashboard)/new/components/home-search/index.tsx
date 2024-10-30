@@ -18,7 +18,13 @@ import RecentSearches from "./recentSearch/RecentSearches";
 import AutoCitySelectDropDown from "./filters/AutoCitySelectDropDown";
 import { CityData } from "../../search";
 
-const HomeSearch = ({ count ,cityData}: { count: number,cityData?:CityData }) => {
+const HomeSearch = ({
+  count,
+  cityData,
+}: {
+  count: number;
+  cityData?: CityData;
+}) => {
   const f = useAtomValue(homeSearchFiltersAtom);
   const [isOpen, setIsOpen] = useState(false);
   const handleSearch = () => {
@@ -70,17 +76,21 @@ const HomeSearch = ({ count ,cityData}: { count: number,cityData?:CityData }) =>
             {config.homeIcon} All Residential
           </p>
 
-          <p className=" flex justify-center items-center gap-[4px] sm:hidden text-[#0073C6] text-[12px] not-italic font-[700] mb-[5px] leading-[normal] capitalize">
-            {f.city?.split("+")[0]} {/* {config.drpdownIcon} */}
-          </p>
+          {/* <p className=" flex justify-center items-center gap-[4px] sm:hidden text-[#0073C6] text-[12px] not-italic font-[700] mb-[5px] leading-[normal] capitalize">
+            {f.city?.split("+")[0]}
+          </p> */}
 
           <div className="flex items-center gap-2.5 rounded shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] px-1.5 py-1 border-[0.5px] border-solid border-[#819CA9] bg-white w-full">
             <div className="hidden sm:flex items-center gap-[5px] rounded p-2 border-r-[0.5px] border-r-gray-400 border-solid text-[#242424] xl:text-[14px] not-italic font-medium text-[12px]">
               {config.homeIcon}{" "}
               <div className="text-nowrap">All Residential</div>
             </div>
-            <div className="text-[#242424] text-[12px] sm:text-[14px] not-italic font-[600] hidden sm:flex items-center gap-0.5 p-1 bg-[#ECF0F3] ">
-              <AutoCitySelectDropDown isOpen={isOpen} setIsOpen={setIsOpen} cityData={cityData} />
+            <div className="text-[#242424] text-[12px] sm:text-[14px] not-italic font-[600] absolute  top-[25%] right-[5%] sm:static sm:flex items-center gap-0.5 p-1 bg-[#ECF0F3] ">
+              <AutoCitySelectDropDown
+                isOpen={isOpen}
+                setIsOpen={setIsOpen}
+                cityData={cityData}
+              />
             </div>
 
             <div className="flex justify-between items-center gap-[10px] w-full">
