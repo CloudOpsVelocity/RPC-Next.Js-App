@@ -65,7 +65,7 @@
 .scrollUnique {
   border-radius: 20px;
   background: transparent;
-  margin-left: 5px;
+  /* margin-left: 5px; */
   /* margin-top: 45px; */
   /* scrollbar-color: gray;
   scrollbar-width: thin;
