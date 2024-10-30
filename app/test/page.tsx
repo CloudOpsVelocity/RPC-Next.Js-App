@@ -2,22 +2,14 @@
 'use client'
 import React from 'react'
 import ReactWindowCarousel from './components/ReactWindowCarousel'
+import Carousel from './components/Carousel'
 type Props = {}
 
 export default function Page({}: Props) {
-  const slideWidth = 200;
-  const slideHeight = 250;
-
-  const initialSlide = 0;
-
-  const slidesList = new Array(5000)
-    .fill(0)
-    .map((i, index) => <Slide key={index} index={index} />);
+ 
   return (
     <div style={{ width: "95%", margin: "0 auto" }}>
-        <ReactWindowCarousel
-          {...{ initialSlide, slidesList, slideWidth, slideHeight }}
-        />
+       {/* <Carousel /> */}
       </div>
   )
 }

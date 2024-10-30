@@ -35,9 +35,12 @@ import dynamic from "next/dynamic";
 import { MERGERPROJECT } from "@/app/validations/types/project";
 import ProjectGallery from "@/app/components/project/_ui/modals/GallerySectionModal";
 import SharePopup from "@/app/(dashboard)/search/components/SharePopup";
-const ProjectBrouchersSection = dynamic(() => import("@/app/components/project/broucher/ProjectBrouchersSections"), {
-  ssr: false,
-})
+const ProjectBrouchersSection = dynamic(
+  () => import("@/app/components/project/broucher/ProjectBrouchersSections"),
+  {
+    ssr: false,
+  }
+);
 type Props = {
   projResponse: MERGERPROJECT;
   amenitiesFromDB: any;
@@ -194,7 +197,10 @@ export default async function ProjectsDetailsPage({
             mapData={nearByLocations}
           />
         )}
-        <ProjectBrouchersSection  projName={data.projectName} phaseOverviewData={phaseOverview} />
+        <ProjectBrouchersSection
+          projName={data.projectName}
+          phaseOverviewData={phaseOverview}
+        />
         <ErrorContainer data={data.specificationList}>
           <Specifications
             data={data.specificationList}
@@ -212,7 +218,7 @@ export default async function ProjectsDetailsPage({
           </div>
         </ErrorContainer>
 
-        {/* <AboutBuilder id={data.builderId} /> */}
+        <AboutBuilder id={data.builderId} />
         {data.wbtp && (
           <About
             id="why-buy-this-project"
@@ -241,7 +247,7 @@ export default async function ProjectsDetailsPage({
         <ProjectDrawer projName={data.projectName} />
         <FloorplanDrawer />
         <LoginPopup />
-        <ProjectGallery/>
+        <ProjectGallery />
         <SharePopup />
       </div>
     </section>

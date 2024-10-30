@@ -1,149 +1,88 @@
-import React, { useState, useRef, useEffect } from 'react'
-import { useVirtualizer } from '@tanstack/react-virtual'
+/* eslint-disable react/no-array-index-key */
+'use client'
 
-interface CarouselProps<T> {
-  items: T[]
-  renderItem: (item: T, index: number) => React.ReactNode
-  itemWidth?: number
-  itemHeight?: number
-  gap?: number
-  overscan?: number
+import { useState } from 'react'
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
+
+interface CarouselProps {
+  totalSlides: number;
+  slidesPerView: number;
 }
 
-export default function VirtualCarousel<T>({ 
-  items, 
-  renderItem,
-  itemWidth = 250, 
-  itemHeight = 250, 
-  gap = 16,
-  overscan = 5 
-}: CarouselProps<T>) {
-  const [isDragging, setIsDragging] = useState(false)
-  const [startX, setStartX] = useState(0)
-  const [scrollLeft, setScrollLeft] = useState(0)
-  const containerRef = useRef<HTMLDivElement>(null)
+const Carousel: React.FC<CarouselProps> = ({ totalSlides, slidesPerView }) => {
+  const totalGroups = Math.ceil(totalSlides / slidesPerView)
+  const [currentIndex, setCurrentIndex] = useState<number>(0)
 
-  const virtualizer = useVirtualizer({
-    count: items.length,
-    getScrollElement: () => containerRef.current,
-    estimateSize: () => itemWidth + gap,
-    horizontal: true,
-    overscan,
-  })
+  const slideGroups = Array.from({ length: totalGroups }, (_, index) => index * slidesPerView)
 
-  const totalSize = virtualizer.getTotalSize()
-  const visibleItems = virtualizer.getVirtualItems()
-
-  const handleNext = () => {
-    if (containerRef.current) {
-      containerRef.current.scrollBy({
-        left: itemWidth + gap,
-        behavior: 'smooth',
-      })
+  const handleNavClick = (newIndex: number) => {
+    setCurrentIndex(newIndex)
+    // Scroll to the new group
+    const carouselElement = document.getElementById(`group-${newIndex}`)
+    if (carouselElement) {
+      carouselElement.scrollIntoView({ behavior: 'smooth' })
     }
   }
-
-  const handlePrev = () => {
-    if (containerRef.current) {
-      containerRef.current.scrollBy({
-        left: -(itemWidth + gap),
-        behavior: 'smooth',
-      })
-    }
-  }
-
-  const handleDragStart = (e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
-    setIsDragging(true)
-    setStartX('touches' in e ? e.touches[0].pageX : e.pageX)
-    setScrollLeft(containerRef.current?.scrollLeft || 0)
-  }
-
-  const handleDragMove = (e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
-    if (!isDragging) return
-    e.preventDefault()
-    const currentX = 'touches' in e ? e.touches[0].pageX : e.pageX
-    const diff = startX - currentX
-    if (containerRef.current) {
-      containerRef.current.scrollLeft = scrollLeft + diff
-    }
-  }
-
-  const handleDragEnd = () => {
-    setIsDragging(false)
-  }
-
-
-
-  // Adding a `mousedown` event listener to reset `isDragging` when mouse is released
-  useEffect(() => {
-    const handleMouseUp = () => {
-      setIsDragging(false)
-    }
-   
-    window.addEventListener('mousedown', ()=> handleMouseUp)
-    return () => window.removeEventListener('mousedown', handleMouseUp)
-  }, [])
 
   return (
-    <div className="relative overflow-hidden">
-      <div
-        ref={containerRef}
-        className="flex overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing"
-        style={{
-          width: '100%',
-          height: `${itemHeight}px`,
-        }}
-        onMouseDown={handleDragStart}
-        onMouseMove={handleDragMove}
-        onMouseUp={handleDragEnd}
-        onMouseLeave={handleDragEnd}
-        onTouchStart={handleDragStart}
-        onTouchMove={handleDragMove}
-        onTouchEnd={handleDragEnd}
-      >
-        <div
-          style={{
-            width: `${totalSize}px`,
-            height: '100%',
-            position: 'relative',
-          }}
-        >
-          {visibleItems.map((virtualItem) => (
-            <div
-              key={virtualItem.key}
-              style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: `${itemWidth}px`,
-                height: `${itemHeight}px`,
-                transform: `translateX(${virtualItem.start}px)`,
-                marginRight: `${gap}px`,
-              }}
-            >
-              {renderItem(items[virtualItem.index], virtualItem.index)}
-            </div>
-          ))}
+    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative" aria-label="Image Carousel">
+        <div className="overflow-hidden">
+          <div className="flex snap-x snap-mandatory overflow-x-auto scrollbar-hide">
+            {Array.from({ length: totalSlides }).map((_, index) => (
+              <div
+                key={index}
+                id={`group-${Math.floor(index / slidesPerView)}`}
+                className="snap-start flex-shrink-0 w-1/3 p-2"
+              >
+                <img
+                  src={`/placeholder.svg?height=300&width=400&text=Slide ${index + 1}`}
+                  alt={`Slide ${index + 1}`}
+                  className="w-full h-full object-cover rounded-lg"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="absolute top-1/2 -translate-y-1/2 flex justify-between w-full">
+          <button
+            onClick={() => handleNavClick(Math.max(0, currentIndex - 1))}
+            className={`bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 ${
+              currentIndex === 0 ? 'opacity-50 cursor-not-allowed' : ''
+            }`}
+            aria-label="Previous slides"
+            disabled={currentIndex === 0}
+          >
+            <FaChevronLeft className="w-6 h-6" />
+          </button>
+          <button
+            onClick={() => handleNavClick(Math.min(totalGroups - 1, currentIndex + 1))}
+            className={`bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 ${
+              currentIndex >= totalGroups - 1 ? 'opacity-50 cursor-not-allowed' : ''
+            }`}
+            aria-label="Next slides"
+            disabled={currentIndex >= totalGroups - 1}
+          >
+            <FaChevronRight className="w-6 h-6" />
+          </button>
         </div>
       </div>
-      <button
-        className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white bg-opacity-50 rounded-full p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 z-10"
-        onClick={handlePrev}
-        aria-label="Previous slide"
-      >
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-        </svg>
-      </button>
-      <button
-        className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white bg-opacity-50 rounded-full p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 z-10"
-        onClick={handleNext}
-        aria-label="Next slide"
-      >
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
+      <div className="mt-4 flex justify-center gap-2">
+        {slideGroups.map((groupIndex, index) => (
+          <button
+            key={index}
+            onClick={() => handleNavClick(index)}
+            className={`w-3 h-3 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 ${
+              currentIndex === index
+                ? 'bg-gray-800'
+                : 'bg-gray-300 hover:bg-gray-400'
+            }`}
+            aria-label={`Go to slide group ${index + 1}`}
+          />
+        ))}
+      </div>
     </div>
   )
 }
+
+export default Carousel;
