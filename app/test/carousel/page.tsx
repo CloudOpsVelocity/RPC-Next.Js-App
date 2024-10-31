@@ -1,7 +1,7 @@
 
 'use client'
 import React from 'react'
-import   {CarouselExample} from '../components/Carousel1'
+// import   {CarouselExample} from '../components/Carousel1'
 
 
 type Props = {}
@@ -19,6 +19,7 @@ export default function Page({}: Props) {
   ];
 
   return (
- <CarouselExample  />
+    <div>sdf</div>
+//  <CarouselExample  />
   )
 }
