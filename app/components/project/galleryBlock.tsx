@@ -100,7 +100,7 @@ export default function GalleryBlock({
           {selectedMedia && (
             <div
               className={clsx(
-                "w-[100%]  sm:h-[100%] md:h-[100%] sm:max-h-[100%] flex justify-center items-center mb-[3%] md:mb-[0%] mr-[3%]   relative  rounded-[14px] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] ",
+                "w-[100%]   sm:h-[100%] md:h-[100%] sm:max-h-[100%] flex justify-center items-center sm:mb-[3%] md:mb-[0%] sm:mr-[3%]   relative  rounded-[14px] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] ",
                 (selectedMedia.includes(".mp4") ||
                   selectedMedia.includes("youtube")) &&
                   "flex justify-center items-center"
@@ -149,7 +149,7 @@ export default function GalleryBlock({
                     activeIndex:isVideo ? videos.indexOf(selectedMedia) : images.indexOf(selectedMedia)
                   }
                 })}}
-                className="absolute bottom-0.5 sm:bottom-3 right-1 xl:right-3 z-1 "
+                className="absolute bottom-7 sm:bottom-3 right-1 xl:right-3 z-[100] "
               >
                 <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] " />
               </button>
