@@ -104,7 +104,7 @@ export default function Overview({
             key="totalLandArea"
             icon={<TotalLandArea />}
             title="Project Land Area"
-            value={`${parseFloat(totalLandArea).toFixed(2)} Acres`}
+            value={`${Number(parseFloat(totalLandArea).toFixed(2))} Acres`}
             className="mr-[5%] sm:mr-[3%] xl:mr-[5%] pt-[2%] mb-[3%] sm:mb-[1.5%] xl:mb-[3%]  "
           />
           <ProjBasicDetails

@@ -32,7 +32,6 @@ const CustomCarousel = ({
     const maxIndex = Math.max(0, totalSlides - slidesToShow);
     const newIndex = Math.max(0, Math.min(index, maxIndex));
     setCurrentIndex(newIndex);
-
     const targetSlide = document.getElementById(`${dataKey}-slide-${newIndex}`);
     if (targetSlide) {
       targetSlide.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
@@ -90,29 +89,3 @@ const CustomCarousel = ({
 
 export default CustomCarousel;
 
-export function CarouselExample() {
-  const slides = [
-    { content: <div className="bg-red-200 flex items-center justify-center text-2xl h-[400px]">Slide 1</div> },
-    { content: <div className="bg-blue-200 flex items-center justify-center text-2xl h-[400px]">Slide 2</div> },
-    { content: <div className="bg-green-200 flex items-center justify-center text-2xl h-[400px]">Slide 3</div> },
-    { content: <div className="bg-yellow-200 flex items-center justify-center text-2xl h-[400px]">Slide 4</div> },
-    { content: <div className="bg-purple-200 flex items-center justify-center text-2xl h-[400px]">Slide 5</div> },
-  ];
-
-  return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Improved Custom Carousel Example</h1>
-      <CustomCarousel
-        slides={slides}
-        renderItem={(slide, index) => (
-          <div>
-            {slide.content}
-            <p className="text-center mt-2">Slide {index + 1}</p>
-          </div>
-        )}
-        slidesToShow={3}
-        gap={16}
-      />
-    </div>
-  );
-}

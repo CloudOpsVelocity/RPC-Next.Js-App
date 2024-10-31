@@ -68,7 +68,7 @@ const FloorplanDetailsCard: React.FC<Props> = ({
     <>
       <div
         className={clsx(
-          "sm:flex    sm:h-[180px] justify-between py-[18px] px-[25px] pt-[24px] w-full border-[#92B2C8] border-solid border-b-[1px] border-r-[1px] cursor-pointer hidden "
+          "sm:flex sm:h-[180px] justify-between py-[18px] px-[25px] pt-[24px] w-full border-[#92B2C8] border-solid border-b-[1px] border-r-[1px] cursor-pointer hidden hover:bg-gray-50 transition-colors duration-200"
         )}
         onClick={handleCardClick}
         style={{
@@ -146,7 +146,7 @@ const FloorplanDetailsCard: React.FC<Props> = ({
           )}
         </div>
       </div>
-      <div className="sm:hidden border-[#92B2C8] border-solid border-t-0 border-[1px] p-4">
+      <div className="sm:hidden border-[#92B2C8] border-solid border-t-0 border-[1px] p-4 hover:bg-gray-50 transition-colors duration-200">
         {propCgId != projectprops.plot && (
           <div className="">
             <p className="font-[600] text-[14px] sm:text-[16px] lg:text-[24px] mb-[8px] text-[#001F35] flex justify-start items-center">

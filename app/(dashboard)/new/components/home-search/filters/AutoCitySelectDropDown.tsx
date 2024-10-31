@@ -24,17 +24,16 @@ interface DefaultCityResponse {
     cityId: string;
   };
   status: boolean;
-
 }
 
 export default function AutoCitySelectDropdown({
   isOpen,
   setIsOpen,
-cityData
+  cityData,
 }: {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  cityData?:CityData
+  cityData?: CityData;
 }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCity, setSelectedCity] = useState<City | null>(null);
@@ -43,8 +42,10 @@ cityData
   const dropdownRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const optionsRef = useRef<(HTMLLIElement | null)[]>([]);
-  const [globalState,setCity] = useAtom(homeSearchFiltersAtom);
-  const getUserCity = async (cityData?:CityData): Promise<DefaultCityResponse> => {
+  const [globalState, setCity] = useAtom(homeSearchFiltersAtom);
+  const getUserCity = async (
+    cityData?: CityData
+  ): Promise<DefaultCityResponse> => {
     if (cityData) {
       return {
         data: {
@@ -71,7 +72,7 @@ cityData
     error: defaultCityError,
   } = useQuery<DefaultCityResponse, Error>({
     queryKey: ["my-location"],
-    queryFn: async()=> await getUserCity(cityData),
+    queryFn: async () => await getUserCity(cityData),
     onSuccess: (data) => {
       if (data.status) {
         setCity({
@@ -103,13 +104,13 @@ cityData
     AllCities?.filter(
       (city) =>
         city.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-        city.id !== selectedCity?.id 
+        city.id !== selectedCity?.id
     ) || [];
-    const handleCloseDropdown = useCallback(() => {
-      setIsOpen(false);
-      setSearchTerm("");
-      setFocusedIndex(-1);
-    }, [setIsOpen]);
+  const handleCloseDropdown = useCallback(() => {
+    setIsOpen(false);
+    setSearchTerm("");
+    setFocusedIndex(-1);
+  }, [setIsOpen]);
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (
@@ -166,8 +167,6 @@ cityData
     handleCloseDropdown();
   };
 
-
-
   const handleToggleDropdown = () => {
     setIsOpen(!isOpen);
     if (isOpen) {
@@ -188,7 +187,10 @@ cityData
           {selectedCity?.name || DefaultCity?.data?.city || "Select City"}
         </span>
         {selectedCity || DefaultCity?.data?.city ? (
-          <FaLocationDot className="h-4 w-4 sm:h-5 sm:w-5 text-blue-500" aria-hidden="true" />
+          <FaLocationDot
+            className="h-4 w-4 sm:h-5 sm:w-5 text-blue-500"
+            aria-hidden="true"
+          />
         ) : (
           <FaChevronDown
             className={`h-4 w-4 sm:h-5 sm:w-5 text-gray-400 transition-transform duration-200 ${

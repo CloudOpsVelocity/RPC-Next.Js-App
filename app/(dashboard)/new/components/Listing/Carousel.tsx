@@ -2,12 +2,8 @@
 "use client";
 import React from "react";
 import ListingCard from "../Atoms/ListingCard";
-import CustomCarousel from "@/app/test/components/Carousel1";
-import HomePageVirtualCarousel from "../Atoms/VirtualzedCarousel";
-import ReactWindowCarousel from "@/app/test/components/ReactWindowCarousel";
-import { Carousel } from "@mantine/carousel";
-import { CarouseSelArrowIcon } from "@/app/images/HomePageIcons";
-import Css from "../../Style.module.css";
+import NewCarousel from "@/app/test/components/NewCarousel";
+import { useMediaQuery } from "@mantine/hooks";
 type Props = {
   data: any;
   shortIds: any;
@@ -15,6 +11,7 @@ type Props = {
 };
 
 export default function ListingCarousel({ shortIds, data ,dataKey}: Props) {
+  const isMobile = useMediaQuery('(max-width: 768px)');
   return (
   //   <ReactWindowCarousel
   //   {...{ initialSlide, slidesList, slideWidth, slideHeight }}
@@ -54,32 +51,42 @@ export default function ListingCarousel({ shortIds, data ,dataKey}: Props) {
 
 
   // />
-    <Carousel
-    // slideSize="33.333333%"
-    slideSize={{ base: "80%", sm: "50%", md: "29%" }}
-    slideGap={{ base: "sm", sm: "md", xl: "md" }}
-    // loop
-    align="start"
-    slidesToScroll={1}
-    mt={20}
-    nextControlIcon={<CarouseSelArrowIcon />}
-    previousControlIcon={<CarouseSelArrowIcon className="rotate-180" />}
-    controlsOffset={"-10px"}
-    classNames={Css}
-  >
-    {data?.map((item: any, index: number) => (
-      <Carousel.Slide key={item.propIdEnc}>
-        <ListingCard
-          item={item}
-          sl={
-            shortIds?.propIds && shortIds?.propIds?.includes(item.propIdEnc)
-              ? "Y"
-              : "N"
-          }
-        />
-      </Carousel.Slide>
-    ))}
-  </Carousel>
+  <NewCarousel slidesToShow={isMobile ? 1 : 4} isMobile={isMobile}  data={data} renderItem={(item:any, index) => (
+    <ListingCard
+      item={item}
+      sl={
+        shortIds?.propIds && shortIds?.propIds?.includes(item.propIdEnc)
+          ? "Y"
+          : "N"
+      }
+    />
+  )} />
+  //   <Carousel
+  //   // slideSize="33.333333%"
+  //   slideSize={{ base: "80%", sm: "50%", md: "29%" }}
+  //   slideGap={{ base: "sm", sm: "md", xl: "md" }}
+  //   // loop
+  //   align="start"
+  //   slidesToScroll={1}
+  //   mt={20}
+  //   nextControlIcon={<CarouseSelArrowIcon />}
+  //   previousControlIcon={<CarouseSelArrowIcon className="rotate-180" />}
+  //   controlsOffset={"-10px"}
+  //   classNames={Css}
+  // >
+  //   {data?.map((item: any, index: number) => (
+  //     <Carousel.Slide key={item.propIdEnc}>
+  //       <ListingCard
+  //         item={item}
+  //         sl={
+  //           shortIds?.propIds && shortIds?.propIds?.includes(item.propIdEnc)
+  //             ? "Y"
+  //             : "N"
+  //         }
+  //       />
+  //     </Carousel.Slide>
+  //   ))}
+  // </Carousel>
   )
 }
 {/* <div className="mt-4">
