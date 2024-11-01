@@ -7,24 +7,18 @@ import Carousel from "./components/NewCarousel";
 type Props = {};
 
 export default function Page({}: Props) {
-  const slideData = [
-    { title: "Slide 1", description: "This is the first slide" },
-    { title: "Slide 2", description: "This is the second slide" },
-    { title: "Slide 3", description: "This is the third slide" },
-  ]
+const getData = (array:number[]) =>{
+      for (let i = 0; i < array.length; i++) {
+for (let j = 0; j < array.length; j++) {
+  const element = array[j];
+  
+}
+      }
+    return array
+}
+console.log(getData([3,5,1,58,765,4,343,23,65]))
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="mb-6 text-3xl font-bold">Optimized Carousel Example</h1>
-      <Carousel
-  data={slideData}
-  renderItem={(item, index) => (
-    <div className="text-center bg-gradient-to-r from-green-500 to-blue-500 h-full flex items-center justify-center">
-      {/* <h2 className="text-4xl font-bold text-white">{item.title}</h2>
-      <p className="text-lg text-white">{item.description}</p> */}
-    </div>
-  )}
-/>
-    </div>
+ <div>f</div>
   );
 }
 

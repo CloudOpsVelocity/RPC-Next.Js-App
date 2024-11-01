@@ -146,7 +146,7 @@ export async function POST(request: Request) {
 }
 
 export async function GET() {
-  return new Response("", {
-    status: 405,
-  });
+  const filePath =  path.join(process.cwd(), "static", `listingSlugs.json`);
+  const data = fs.readFileSync(filePath, "utf-8");
+  return NextResponse.json(JSON.parse(data), { status: 200 });
 }
