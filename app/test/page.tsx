@@ -19,8 +19,8 @@ export default function Page({}: Props) {
   data={slideData}
   renderItem={(item, index) => (
     <div className="text-center bg-gradient-to-r from-green-500 to-blue-500 h-full flex items-center justify-center">
-      <h2 className="text-4xl font-bold text-white">{item.title}</h2>
-      <p className="text-lg text-white">{item.description}</p>
+      {/* <h2 className="text-4xl font-bold text-white">{item.title}</h2>
+      <p className="text-lg text-white">{item.description}</p> */}
     </div>
   )}
 />
