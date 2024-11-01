@@ -27,11 +27,6 @@ export default function BuilderPage({ data, id }: Props) {
           <div className="flex flex-col justify-start items-start w-[95%] ">
             <ProjectDetails {...data.data} />
             <ManagementBlock {...data.data} />
-
-            {/* <BuildersBlock
-              data={data?.data?.otherBuilder}
-              name={data?.data?.companyName}
-            /> */}
           </div>
           <div className="w-full m-auto sm:w-[95%]">
             <BuilderCarousel

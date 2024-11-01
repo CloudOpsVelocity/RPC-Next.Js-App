@@ -1,4 +1,5 @@
 /* eslint-disable react/no-array-index-key */
+import { useMediaQuery } from '@mantine/hooks';
 import React, { useState, useRef, useEffect } from 'react';
 import { IoChevronBackOutline, IoChevronForwardOutline } from 'react-icons/io5';
 
@@ -8,15 +9,17 @@ interface CarouselProps<T> {
   slidesToShow?: number;
   gap?: number;
   isMobile?: boolean;
+  className?:string;
 }
 
-export default function Carousel<T>({
+export default function NewCarousel<T>({
   data,
   renderItem,
   slidesToShow = 3,
   gap = 24,
-  isMobile = false,
 }: CarouselProps<T>) {
+  const isMobile = useMediaQuery("(max-width: 768px)");
+   slidesToShow = isMobile ? 1 : slidesToShow;
   const [currentIndex, setCurrentIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const maxIndex = Math.max(0, data.length - Math.floor(slidesToShow));

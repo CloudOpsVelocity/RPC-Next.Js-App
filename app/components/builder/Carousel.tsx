@@ -16,6 +16,7 @@ import { NearByDataAtom } from "@/app/store/nearby";
 import clsx from "clsx";
 import axios from "axios";
 import { useQuery } from "react-query";
+import NewCarousel from "@/app/test/components/NewCarousel";
 
 type Props = {
   type: string;
@@ -35,11 +36,9 @@ type CardProps = {
 };
 
 export function ProjectCard({ type, cardData, refetch }: CardProps) {
-  console.log(cardData.shortListed);
   const [, { open }] = useReqCallPopup();
   const { data: session } = useSession();
   const [isShorlited, setShorlited] = React.useState(cardData.shortListed);
-  console.log(isShorlited);
   const { toggleShortlist } = useShortlistAndCompare();
   const [, { open: openShort }] = usePopShortList();
   const isItemInShortlist = isShorlited === "Y";
@@ -78,7 +77,7 @@ export function ProjectCard({ type, cardData, refetch }: CardProps) {
       <div
         key={cardData.projIdEnc}
         onClick={handleCardClick}
-        className="border text-card-foreground min-w-[300px] xl:max-w-[494px] bg-[#FAFAFA]  min-h-[500px] overflow-hidden  shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[14px] "
+        className="border w-[90%] text-card-foreground min-w-[300px] xl:max-w-[494px] bg-[#FAFAFA]  min-h-[500px] overflow-hidden  shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[14px] "
       >
         {type == "proj" && (
           <div className="sm:flex sm:space-y-1.5 p-6  px-4 pt-2 pb-3 justify-between items-center">
@@ -244,8 +243,10 @@ const BuilderCarousel = ({
       <p className="ml-2 mt-3 mb-0 sm:mb-[24px]  text-[#4D6677] text-[13px] sm:text-lg xl:text-2xl italic font-medium leading-[normal] tracking-[0.96px] px-4 sm:px-0">
         {content}
       </p>
-
-      <MainCarousel
+      <NewCarousel data={data} renderItem={(item:any, index) => (
+    <ProjectCard type={type} cardData={item} refetch={refetch} />
+  )} slidesToShow={3.5} gap={10} />
+      {/* <MainCarousel
         paddings={{
           desktop: 10,
           mobile: 10,
@@ -260,7 +261,7 @@ const BuilderCarousel = ({
               </CarouselSlide>
             );
           })}
-      </MainCarousel>
+      </MainCarousel> */}
     </div>
   );
 };
