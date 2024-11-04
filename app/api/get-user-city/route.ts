@@ -17,8 +17,8 @@ export async function POST(req: Request) {
   }
 }
 export async function GET(req: Request) {
-  console.log(process.env.NODE_ENV);
-  if (process.env.NODE_ENV === "development") {
+  const ip = new URL(req.url).searchParams.get("ip");
+  if (process.env.NODE_ENV === "development" || ip === "::1") {
     return NextResponse.json(
       {
         status: true,
@@ -33,10 +33,11 @@ export async function GET(req: Request) {
         status: 200,
       }
     );
+    
   }
   // const ip = req.headers.get("x-real-ip") || req.headers.get("x-forwarded-for");
   // console.log('ip log from get user city',ip)
-  const ip = new URL(req.url).searchParams.get("ip");
+
   try {
     if (!ip) {
       return NextResponse.json({ ok: false, error: "IP not found" });
