@@ -1,6 +1,7 @@
 export interface SearchParams {
   listedBy: string | null;
   cg: string;
+  city:string
 }
 
 export const DynamicText = (params: SearchParams) => {
@@ -14,7 +15,7 @@ export const DynamicText = (params: SearchParams) => {
     listedBy === "I" || listedBy === "A" || listedBy === "B"
       ? rentOrSellText
       : ""
-  } in Bengaluru`;
+  } in ${params.city.split("+")[0]}`;
 
   return dynamicText;
 };

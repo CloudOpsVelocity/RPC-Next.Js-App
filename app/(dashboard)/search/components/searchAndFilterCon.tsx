@@ -27,12 +27,13 @@ const SearchAndFilterCon = ({ frontendFilters }: any) => {
     <SearchHeader
       setShowAllLocalities={setShowAllLocalities}
       showAllLocalities={showAllLocalities}
+      city={frontendFilters.city}
     />
   );
 };
 export default SearchAndFilterCon;
 
-const SearchHeader = ({ setShowAllLocalities }: any) => {
+const SearchHeader = ({ setShowAllLocalities ,city}: any) => {
   const {
     countAppliedFilters,
     filters,
@@ -121,6 +122,7 @@ const SearchHeader = ({ setShowAllLocalities }: any) => {
             {DynamicText({
               cg: params.cg as string,
               listedBy: params.listedBy,
+              city,
             })}
           </span>
         </span>{" "}
