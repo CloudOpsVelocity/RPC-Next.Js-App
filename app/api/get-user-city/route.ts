@@ -17,6 +17,7 @@ export async function POST(req: Request) {
   }
 }
 export async function GET(req: Request) {
+  console.log(process.env.NODE_ENV);
   if (process.env.NODE_ENV === "development") {
     return NextResponse.json(
       {
@@ -41,8 +42,9 @@ export async function GET(req: Request) {
       return NextResponse.json({ ok: false, error: "IP not found" });
     }
     const data = await getCityStateFromIP(ip);
-
+    console.log(data);
     const cityStateId = await getCityStateIdFromDb(data.region, data.city);
+    console.log(cityStateId);
     if (!cityStateId.city) {
       return NextResponse.json({ ok: false, error: "City not found" });
     }

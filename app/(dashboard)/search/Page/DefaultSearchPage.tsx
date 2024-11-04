@@ -11,7 +11,9 @@ export default function DefaultSearchPage({ cityData }: Props) {
   return (
     <div className="w-full flex justify-center items-center flex-col ">
       <Header />
-      <SearchAndFilterCon cityData={cityData} />
+      <SearchAndFilterCon frontendFilters={{
+        // city: `${cityData?.city}+${cityData.cityId}`
+      }} />
       <div className=" w-[100%] mx-2  xl:m-0 flex justify-center flex-wrap-reverse sm:flex-nowrap">
         <LeftSideBlock />
         <RightSideBlock />

@@ -19,7 +19,8 @@ interface CarouselProps<T> {
   gap = 24,
 }: CarouselProps<T>) {
   const isMobile = useMediaQuery("(max-width: 768px)");
-   slidesToShow = isMobile ? 1 : slidesToShow;
+  const isTab = useMediaQuery("(max-width: 1600px)");
+   slidesToShow = isMobile ? 1 : isTab ? slidesToShow - 1 : slidesToShow;
   const [currentIndex, setCurrentIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const maxIndex = useMemo(() => Math.max(0, data.length - Math.floor(slidesToShow)), [data.length, slidesToShow]);

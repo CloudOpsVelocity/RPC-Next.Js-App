@@ -6,6 +6,7 @@ type Props = { searchParams: {} };
 const  SearchingPage = async ({ searchParams }: Props) => {
   const ip = headers().get("x-forwarded-for") || headers().get("cf-connecting-ip") || "";
   const data = await getUserCity(undefined,ip);
+   console.log(data)
   return <DefaultSearchPage cityData={data?.data} />; 
 };
 
