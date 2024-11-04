@@ -1,25 +1,12 @@
-import React from "react";
-import Header from "@/app/components/layouts/primary/header";
-import SearchAndFilterCon from "./components/searchAndFilterCon";
-import { LeftSideBlock } from "./components/leftsection/leftSideBlock";
-import { RightSideBlock } from "./components/rightSideBlock";
-import Footer from "@/app/components/layouts/primary/footer";
-import { Toaster } from "react-hot-toast";
-import Dialog from "@/app/test/newui/components/modals/Proj_PropModal";
+
+import { getUserCity } from "@/app/(new_routes_seo)/utils/new-seo-routes/home.api";
+import DefaultSearchPage from "./Page/DefaultSearchPage";
+import { headers } from "next/headers";
 type Props = { searchParams: {} };
-const SearchingPage = ({ searchParams }: Props) => {
-  return (
-    <div className="w-full flex justify-center items-center flex-col ">
-      <Header />
-      <SearchAndFilterCon />
-      <div className=" w-[100%] mx-2  xl:m-0 flex justify-center flex-wrap-reverse sm:flex-nowrap">
-        <LeftSideBlock />
-        <RightSideBlock />
-      </div>
-      <Footer />
-      <Toaster />
-    </div>
-  );
+const  SearchingPage = async ({ searchParams }: Props) => {
+  const ip = headers().get("x-forwarded-for") || headers().get("cf-connecting-ip") || "";
+  const data = await getUserCity(undefined,ip);
+  return <DefaultSearchPage cityData={data?.data} />; 
 };
 
 export default SearchingPage;

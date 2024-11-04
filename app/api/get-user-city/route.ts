@@ -72,9 +72,9 @@ async function getCityStateFromIP(ip: string) {
   }
 }
 async function getCityStateIdFromDb(state: string, city: string) {
-  console.log(state, city);
+  console.log(`[${new Date().toISOString()}] getCityStateIdFromDb - State: "${state}", City: "${city}"`);
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/common/get-city-state/ip?city=Bengaluru&state=Karnataka`
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/common/get-city-state/ip?city=${city}&state=${state}`
   );
   const data = await res.json();
   return data;
