@@ -19,6 +19,8 @@ const bhkMap = new Map([
   ["5.5 BHK", 15],
   ["5.5 BHK + Servant", 16],
   ["5+ BHK", 17],
+  ["6 BHK", 18],
+  ["6+ BHK", 19],
 ]);
 const sortUnits = (units: string[]): string[] => {
   return units?.sort((a, b) => (bhkMap.get(a) ?? 0) - (bhkMap.get(b) ?? 0));

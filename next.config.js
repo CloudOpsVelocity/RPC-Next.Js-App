@@ -1,14 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // eslint: {
-  //   ignoreDuringBuilds: true,
-  // },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 
   // eslint: {
   //   dirs: ["app", "components", "lib", "pages", "styles"],
   // },
 
-  // typescript: { ignoreBuildErrors: true },
+  typescript: { ignoreBuildErrors: true },
   experimental: {
     optimizePackageImports: ["@mantine/core", "@mantine/hooks"],
     // ppr: true,

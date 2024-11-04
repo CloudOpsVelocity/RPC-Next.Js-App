@@ -1,0 +1,211 @@
+"use client";
+
+import React, { useEffect } from "react";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Tooltip,
+  useMap,
+} from "react-leaflet";
+import "leaflet/dist/leaflet.css"; // Import Leaflet CSS
+import L, { LatLngTuple } from "leaflet";
+import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css"; // Re-uses images from ~leaflet package
+import "leaflet-defaulticon-compatibility";
+import { useMediaQuery } from "@mantine/hooks";
+import { em } from "@mantine/core";
+import { useAtom } from "jotai";
+import selectedSearchAtom from "@/app/store/search/map";
+import TooltipProj from "./Tooltip";
+import TooltipProp from "./ToolltipProp";
+
+
+const Map = ({ data, lat, lang ,type}: any) => {
+  const position: LatLngTuple = [lat, lang];
+  return (
+    <>
+      <MapContainer
+        center={position}
+        className="h-[250px] sm:h-full max-h-[250px] w-full sm:max-w-[700px] sm:max-h-[600px] xl:max-h-[740px] xl:max-w-full  -z-[1]"
+        scrollWheelZoom
+        zoom={12}
+      >
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        /> 
+        {/* @ts-ignore */}
+        <MapContent data={data} type={type} />
+      </MapContainer>
+      <polyline />
+    </>
+  );
+};
+
+export default Map;
+
+const MapContent = ({ data,type }: any): JSX.Element | null => {
+  const MapIcon = L.icon({
+    iconUrl: "/searchmarker.png",
+    iconSize: [60, 60],
+    iconAnchor: [19, 38],
+    popupAnchor: [0, -38],
+  });
+  const MobileIcon = L.icon({
+    iconUrl: "/searchmarker.png",
+    iconSize: [30, 30],
+    iconAnchor: [19, 38], 
+    popupAnchor: [0, -38],
+  });
+  const [selected, setSelectedValue] = useAtom(selectedSearchAtom);
+  const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
+  const map = useMap();
+  useEffect(() => {
+    if (selected && selected.projOrPropName) {
+      map.setView([parseFloat(selected.lat), parseFloat(selected.lang)], 19);
+    }
+  }, [selected, map]);
+  useEffect(() => {
+    if (data && data[0] && data[0]?.lat && data[0]?.lang) {
+      map.setView([parseFloat(data[0]?.lat), parseFloat(data[0]?.lang)], 14);
+    }
+  }, [data, map]);
+// 1. GROUP DATA BY PROPERTY AND PROJECT WHERE selected && selectedId === itemId && itemPropType === selectedPropType
+// 2. CREATE TOOLTIPS FOR EACH SECTION 
+// 3. RENDER MARKERS FOR EACH SECTION
+const groupedData = data.reduce((acc: any, item: any) => {
+  const itemId = item["projIdEnc"];
+  const phaseName = item.phaseName; // Assuming phaseName is a field in your data
+  if (!acc[itemId]) {
+    acc[itemId] = { ...item, phases: {} };
+  }
+  // Group by phase
+  if (!acc[itemId].phases[phaseName]) {
+    acc[itemId].phases[phaseName] = {
+      phaseName: phaseName,
+      propertyTypes: [],
+    };
+  }
+  acc[itemId].phases[phaseName].propertyTypes.push({
+    propType: item.propType,
+    minPrice: item.minPrice,
+    maxPrice: item.maxPrice,
+  });
+  return acc;
+}, {});
+// const GroupdataAndRenderInSingleLoop = () =>{
+   
+// }
+  return (
+    <>
+   {Object.values(groupedData).map((project: any) => (
+      <Marker
+        key={project.projIdEnc}
+        position={[parseFloat(project.lat), parseFloat(project.lang)]}
+        icon={isMobile ? MobileIcon : MapIcon}
+        eventHandlers={{
+          click: () => {
+            setSelectedValue({
+              projOrPropName: project.projName,
+              lat: project.lat,
+              lang: project.lang,
+              type: "proj",
+              reqId: project.projIdEnc,
+              propType: project.propType,
+            });
+          },
+        }}
+      >
+        <Tooltip
+          key={"tooltip_" + project.projIdEnc + selected?.reqId}
+          opacity={1}
+          permanent={selected?.reqId === project.projIdEnc}
+          // permanent
+          direction="top"
+          offset={[10, -35]}
+          className="min-w-[400px]"
+          sticky
+        >
+         <TooltipProj data={{
+              projName: project.projName,
+              city: project.city,
+              state: project.state,
+              locality: project.locality,
+              builderName: project.builderName,
+              phases: Object.values(project.phases),
+            }} />
+        </Tooltip>
+      </Marker>
+    ))}
+    </>
+   
+  );
+};
+
+
+
+
+
+ // data &&
+    // data.length > 0 &&
+    // data?.map((item: any, index: number) => {
+    //   const isProp = !!item?.propIdEnc;
+    //   const title = selected?.type;
+    //   const itemId = item[title === "proj" ? "projIdEnc" : "propIdEnc"];
+    //   const selectedId = selected?.reqId;
+    //   const selectedPropType = selected?.propType;
+    //   const itemPropType = isProp ? item?.propTypeName : item?.propType;
+ 
+    //   return (
+    //     <Marker
+    //       key={itemId}
+    //       position={[parseFloat(item?.lat || 0), parseFloat(item?.lang || 0)]}
+    //       eventHandlers={{
+    //         click: () => {
+    //           setSelectedValue({ 
+    //             projOrPropName: isProp ? item.propTypeName : item.projName,
+    //             lat: item.lat,
+    //             lang: item.lang,
+    //             type: isProp ? "prop" : "proj",
+    //             reqId: itemId,
+    //             propType: itemPropType
+    //           });
+    //         },
+    //       }}
+    //       icon={isMobile ? MobileIcon : MapIcon}
+    //     >
+    //       {selected && selectedId === itemId && itemPropType === selectedPropType && (
+    //         <Tooltip
+    //           key={"tooltip_"+itemId}
+    //           opacity={1}
+    //           permanent
+    //           direction="top"
+    //           offset={[10, -35]}
+    //           className="min-w-fit"
+    //         >
+    //           {!isProp ? (
+    //             <TooltipProj  data={item} />
+    //           ) : (
+    //             <TooltipProp  data={item} />
+    //           )}
+    //         </Tooltip>
+    //       )}
+
+    //     {/* {selected && selectedId === itemId && itemPropType === selectedPropType && ( */}
+    //       <Tooltip
+    //         key={"tooltip2_"+itemId}
+    //         opacity={1}
+    //         direction="top"
+    //         offset={[10, -35]}
+    //         className="min-w-fit"
+    //       >
+    //         {!isProp ? (
+    //           <TooltipProj  data={item} />
+    //         ) : (
+    //           <TooltipProp  data={item} />
+    //         )}
+    //       </Tooltip>
+    //       {/* )} */}
+    //     </Marker>
+    //   );
+    // })

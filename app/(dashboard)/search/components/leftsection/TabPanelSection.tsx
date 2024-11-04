@@ -69,8 +69,14 @@ export default function TabPanelSection({ mutate, serverData }: Props) {
         </div>
       )}
       {hasNextPage && (
-        <div ref={ref} onClick={() => fetchMoreData()}>
-          Loading More Data
+        <div 
+          ref={ref}
+          className="w-full py-4 flex justify-center items-center text-gray-600"
+        >
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+            <span>Loading more results...</span>
+          </div>
         </div>
       )}
     </div>

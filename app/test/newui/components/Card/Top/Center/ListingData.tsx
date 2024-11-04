@@ -62,14 +62,16 @@ export default function ListingData({
               value={
                 isPlot
                   ? minPa === maxPa
-                    ? `${formatNumberWithSuffix(minPa)} sqft`
+                    ? `${formatNumberWithSuffix(minPa, false)} sqft`
                     : `${formatNumberWithSuffix(
-                        minPa
-                      )}-${formatNumberWithSuffix(maxPa)} sqft`
+                        minPa,
+                        false
+                      )}-${formatNumberWithSuffix(maxPa, false)} sqft`
                   : minSba === maxSba
-                  ? `${formatNumberWithSuffix(minSba)} sqft`
-                  : `${formatNumberWithSuffix(minSba)}-${formatNumberWithSuffix(
-                      maxSba
+                  ? `${formatNumberWithSuffix(minSba, false)} sqft`
+                  : `${formatNumberWithSuffix(minSba, false)}-${formatNumberWithSuffix(
+                      maxSba,
+                      false
                     )} sqft`
               }
             />
@@ -81,10 +83,11 @@ export default function ListingData({
                 label="Carpet Area"
                 value={
                   minCa === maxCa
-                    ? `${formatNumberWithSuffix(minCa)} sqft`
+                    ? `${formatNumberWithSuffix(minCa, false)} sqft`
                     : `${formatNumberWithSuffix(
-                        minCa
-                      )}-${formatNumberWithSuffix(maxCa)} sqft`
+                        minCa,
+                        false
+                      )}-${formatNumberWithSuffix(maxCa, false)} sqft`
                 }
               />
             )}
@@ -95,7 +98,7 @@ export default function ListingData({
                 label={type == "proj" ? "Land Area" : "Property Age"}
                 value={
                   type == "proj"
-                    ? `${formatNumberWithSuffix(landArea) ?? 0} sqft`
+                    ? `${formatNumberWithSuffix(landArea, false) ?? 0} sqft`
                     : `${propertyAge ?? 0} Years`
                 }
               />
@@ -103,7 +106,7 @@ export default function ListingData({
 
             <DownSectionCard
               label={"No. of Units"}
-              value={formatNumberWithSuffix(noOfUnits)}
+              value={formatNumberWithSuffix(noOfUnits, false)}
             />
             <DownSectionCard label={"Approved By"} value={`BDA`} />
 
@@ -117,17 +120,17 @@ export default function ListingData({
               <>
                 <DownSectionCard
                   label="Super Builtup Area"
-                  value={`${formatNumberWithSuffix(sba)} sq.ft`}
+                  value={`${formatNumberWithSuffix(sba, false)} sq.ft`}
                 />
                 <DownSectionCard
                   label="Carpet Area"
-                  value={`${formatNumberWithSuffix(ca)} sq.ft`}
+                  value={`${formatNumberWithSuffix(ca, false)} sq.ft`}
                 />
               </>
             ) : (
               <DownSectionCard
                 label="Total Area"
-                value={`${formatNumberWithSuffix(pa)} sq.ft`}
+                value={`${formatNumberWithSuffix(pa, false)} sq.ft`}
               />
             )}
             <DownSectionCard label={"OwnerShip"} value={ownership} />
@@ -169,8 +172,8 @@ export default function ListingData({
           e.stopPropagation();
         }}
       >
-        <div className="line-clamp-2 relative">
-          {projectAbout}
+       {projectAbout && <div className="line-clamp-2 relative">
+          <span dangerouslySetInnerHTML={{ __html: projectAbout.slice(0, readMoreThreshold) }} />
           {isReadMoreNeeded && (
             <div className="absolute bottom-0 right-0 bg-white">
               <span className="text-black">...</span>{" "}
@@ -194,7 +197,7 @@ export default function ListingData({
               </button>
             </div>
           )}
-        </div>
+        </div>}
       </div>
     </>
   );

@@ -7,13 +7,13 @@ import useSearchFilters from "@/app/hooks/search";
 const RightSideBlock = ({ serverData }: any) => {
   const Map = useMemo(
     () =>
-      dynamic(() => import("@/app/components/maps/search"), {
+      dynamic(() => import("@/app/components/maps/search/ProjectSearchPageMap"), {
         loading: () => <MapSkeleton />,
         ssr: false,
       }),
     []
   );
-  const { searchProps, countAppliedFiltersFromQuery, path } =
+  const { searchProps, countAppliedFiltersFromQuery, path,filters } =
     useSearchFilters();
   const { data } = searchProps as any;
   const appliedFiltersCount = countAppliedFiltersFromQuery();
@@ -35,6 +35,7 @@ const RightSideBlock = ({ serverData }: any) => {
         lat={(serverClientData && serverClientData[0]?.lat) ?? 47.46489}
         lang={(serverClientData && serverClientData[0]?.lang) ?? 15.34043}
         data={serverClientData}
+        type={filters?.listedBy}
       />
     </div>
   );

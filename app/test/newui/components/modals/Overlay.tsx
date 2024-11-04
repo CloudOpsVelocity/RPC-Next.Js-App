@@ -64,7 +64,7 @@ const Overlay: React.FC = () => {
           </p>
         );
       case "readmore":
-        return <p>{content}</p>;
+        return <p className="prose-p:py-1 prose-no-break" dangerouslySetInnerHTML={{ __html: content }} />;
       case "bhk":
         return (
           <div className="flex flex-wrap gap-2">

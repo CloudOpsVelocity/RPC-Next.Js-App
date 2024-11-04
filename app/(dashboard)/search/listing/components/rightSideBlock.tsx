@@ -7,7 +7,7 @@ import useSearchFilters from "@/app/hooks/search";
 const RightSideBlock = ({ serverClientData }: any) => {
   const Map = useMemo(
     () =>
-      dynamic(() => import("@/app/components/maps/search"), {
+      dynamic(() => import("@/app/components/maps/search/ProjectSearchPageMap"), {
         loading: () => <MapSkeleton />,
         ssr: false,
       }), // "use client";
