@@ -273,10 +273,9 @@ const ProjectCarousel = ({
               return (
                 <CarouselSlide
                   className="!h-[450px] sm:!h-[500px]"
-                  key={`PropertyCarouselCon_${project?.projIdEnc}`}
+                  key={`PropertyCarouselCon_${project?.propIdEnc}`}
                 >
                   <PropertyCard
-                    key={`PropertyCard_${project?.projIdEnc}`}
                     type={type}
                     cardData={project}
                     mutate={mutate}

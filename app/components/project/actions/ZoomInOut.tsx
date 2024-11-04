@@ -12,7 +12,6 @@ type Props = { className?: string };
 
 export default function ZoomInOut({ className }: Props) {
   const { zoomIn, zoomOut, resetTransform, instance } = useControls();
-  console.log({ instance: instance.getContext() });
   const handleButtonClick = (type: string) => {
     switch (type) {
       case "zoomIn":

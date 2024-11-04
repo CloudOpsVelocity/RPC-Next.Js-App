@@ -2,7 +2,6 @@ import { Main } from "@/app/validations/property";
 import { formatNumberWithSuffix } from "../numbers";
 
 function createPropertyString(data: Main): string {
-  console.log(data);
   if (
     data.propTypeName === config.propTypeNames[1] ||
     data.propTypeName === config.propTypeNames[2]

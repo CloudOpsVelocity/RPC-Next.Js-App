@@ -4,12 +4,6 @@ import { Carousel } from "@mantine/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import {
   DarkCarouseIcon,
-  FlooringIcon,
-  FloorsIcon,
-  NextCarouselButton,
-  PrevCarouselButton,
-  ReraIcon,
-  ShearIcon,
   DarkNextCarouselButton,
 } from "@/app/images/commonSvgs";
 import { Main } from "@/app/validations/property/index";
@@ -51,10 +45,9 @@ const PropertyFirstBlock: React.FC<Props> = ({
     if (element) {
       element.scrollIntoView({
         behavior: "smooth",
-        block: "start", // Adjust this value to add more space from the top
+        block: "start", 
         inline: "center",
       });
-
       setSticky(true);
     }
     setC("floorPlans");
@@ -120,7 +113,7 @@ const PropertyFirstBlock: React.FC<Props> = ({
             >
               {images.map((imageUrl, index) => (
                 <Carousel.Slide
-                  key={`Carousel_${imageUrl[index]}`}
+                  key={`Listing_Carousel_${index}`}
                   className="relative"
                   /*  h={750} */
                   w={"full"}

@@ -104,6 +104,9 @@ export default function PropertyBanner({
           </div>
         </div>
         <div className="mt-6">
+          <div className="prose-p:py-1 prose-no-break text-[14px] sm:text-[18px] xl:text-[24px] font-[500] text-[#233333] break-words" dangerouslySetInnerHTML={{
+            __html  : about.slice(0,500)
+          }} />
           <ReadMore text={about} title={"About"} />
         </div>
         <Link

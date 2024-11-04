@@ -8,7 +8,6 @@ export default function useDownload(name: string) {
   const handleImg = async (imgUrl: string) => {
     try {
       const response = await fetch(imgUrl);
-      console.log(response);
       const blob = await response.blob();
       const url = URL.createObjectURL(blob);
       const downloadLink = document.createElement("a");

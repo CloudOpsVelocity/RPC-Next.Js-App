@@ -37,7 +37,7 @@ const ReadMore: React.FC<ReadMoreProps> = ({
     }
   };
 
-  const displayedText = expanded ? text : text?.slice(0, charLimit);
+
 
   return (
     <div className="w-full" onClick={handleReadMoreClick}>

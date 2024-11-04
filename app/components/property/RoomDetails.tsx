@@ -102,7 +102,7 @@ const RoomSection = ({ data }: { data: Main }) => {
           className={style.card}
         />
         <RoomBasicDetails
-          key="launchDate"
+          key="bathrooms"
           icon={<Bathrooms />}
           title="Bathroom"
           value={data.nobt}
@@ -135,7 +135,7 @@ const Parking = ({ noocp, noobp, noccp, nocbp }: any) => {
 
         <div className="flex justify-start items-start flex-wrap   ">
           <RoomBasicDetails
-            key="launchDate"
+            key="ocr"
             icon={<Car />}
             title="Open Car Parking"
             value={noocp}

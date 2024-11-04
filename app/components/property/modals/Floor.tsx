@@ -65,7 +65,6 @@ function PFloorPlanModal({
                 titleText="Share Floor Plan"
                 url={imageUrlParser(data.projMedia.floorPlanUrl, "F")}
               />
-
               <Close close={() => setOpened(false)} />
             </div>
           </div>
