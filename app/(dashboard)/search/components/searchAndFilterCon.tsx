@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import Link from "next/link";
-import { Drawer, Pill, PillsInput, Popover } from "@mantine/core";
+import { Pill,  Popover } from "@mantine/core";
 import { FilterPopup } from "./filterPopup";
 import { FilterPopup as ListingPopup } from "../listing/components/filterPopup";
 import classes from "@/app/styles/search.module.css";
@@ -177,7 +176,7 @@ const SearchHeader = ({ setShowAllLocalities }: any) => {
             ) : (
               <p
                 className="text-[14px] sm:text-base"
-                onClick={() => (isMobile ? openMobileSearchDrawer : "")}
+                onClick={() => (isMobile ? openMobileSearchDrawer() : "")}
               >
                 Search By Locality, Projects or Listings
               </p>
