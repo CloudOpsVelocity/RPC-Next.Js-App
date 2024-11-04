@@ -320,7 +320,7 @@ export default function useSearchFilters(
   } = useInfiniteQuery({
     queryKey: ["srptest" + convertToQueryParams(params as any) + value],
     queryFn: ({ pageParam = 0 }) =>
-      getFilteredData(convertToQueryParams(params as any), pageParam, value),
+      getFilteredData(convertToQueryParams(params as any), pageParam, value,filters.city),
 
     getNextPageParam: (lastPage: any, allPages: any) => {
       const nextPage = allPages.length;
@@ -428,19 +428,29 @@ export default function useSearchFilters(
 const getFilteredData = async (
   query: string,
   page: number,
-  type: "project" | "owner" | "agent"
+  type: "project" | "owner" | "agent",
+  city: string | null
 ): Promise<Search[]> => {
   const hasCityParam = /(?:^|&)city=/.test(query);
   const hasCg = /(?:^|&)cg=/.test(query);
   const cgValue = !hasCg ? "&cg=S" : "";
+  
+  let cityId = "9"; // Default city ID
+  if (city) {
+    const [_, cityIdFromParam] = city.split("+");
+    if (cityIdFromParam) {
+      cityId = cityIdFromParam;
+    }
+  }
+
   const url =
     type === "project"
       ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=${page}${
           query && query !== "listedBy=ALL" ? `&${query}` : ""
-        }${cgValue}`
+        }${cgValue} ${city && `&city=${cityId}`}`
       : `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/prop-search?page=${page}${
           query && query !== "listedBy=ALL" ? `&${query}` : ""
-        }${!hasCityParam && "&city=9"}${cgValue}`;
+        }${!hasCityParam && `&city=${cityId}`}${cgValue}`;
   try {
     const response = await fetch(url);
     const data = await response.json();

@@ -15,7 +15,7 @@ export async function POST(req: Request) {
     console.error(error);
     return Response.json({ ok: false, error: "Error reading file" });
   }
-}
+} 
 export async function GET(req: Request) {
   const ip = new URL(req.url).searchParams.get("ip");
   if (process.env.NODE_ENV === "development" || ip === "::1") {
