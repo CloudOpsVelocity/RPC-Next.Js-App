@@ -36,7 +36,11 @@ export default function TabPanelSection({ mutate, serverData }: Props) {
     estimateSize: () => 300,
     overscan: 1,
     enabled: true,
-    measureElement: (element) => element?.getBoundingClientRect().height || 300,
+    measureElement: (element) => {
+      console.log(element?.getBoundingClientRect().height)
+      return  element?.getBoundingClientRect().height || 300
+    },
+
   });
 
   const { ref, entry } = useIntersection({
