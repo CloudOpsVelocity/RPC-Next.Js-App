@@ -37,7 +37,6 @@ export default function TabPanelSection({ mutate, serverData }: Props) {
     overscan: 1,
     enabled: true,
     measureElement: (element) => {
-      console.log(element?.getBoundingClientRect().height)
       return  element?.getBoundingClientRect().height || 300
     },
 

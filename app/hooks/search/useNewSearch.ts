@@ -1,13 +1,14 @@
 import RTK_CONFIG from "@/app/config/rtk";
 import { homeSearchFiltersAtom } from "@/app/store/home";
+import { searachFilterAtom } from "@/app/store/search";
 import { useDebouncedValue } from "@mantine/hooks";
 import { atom, useAtom, useAtomValue } from "jotai";
 import { useQuery } from "react-query";
 const searchAtom = atom<string | null>(null);
-export default function useQsearch() {
+export default function useNewsearch() {
   const [name, setName] = useAtom(searchAtom);
   const [debounced] = useDebouncedValue(name, 700);
-  const { city } = useAtomValue(homeSearchFiltersAtom);
+  const { city } = useAtomValue(searachFilterAtom);
   /**
    * Fetches data from the matcher API given the debounced search query
    * and the currently selected cityId.

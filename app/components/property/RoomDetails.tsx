@@ -299,12 +299,12 @@ const OtherDetails = ({
             />
           </>
         )}
-        {propTypeName === "Plot" && (
+        {propTypeName === "Plot" && approvedByName && (
           <RoomBasicDetails
             icon={<Marble />}
             title="Approved Authority"
             value={
-              approvedByName.length > 1
+              approvedByName?.length > 1
                 ? approvedByName?.join(", ")
                 : approvedByName[0]
             }

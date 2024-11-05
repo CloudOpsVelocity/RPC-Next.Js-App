@@ -10,9 +10,8 @@ import {
 import useQsearch from "@/app/hooks/search/useQsearch";
 import useSearchFilters from "@/app/hooks/search";
 import toast from "react-hot-toast";
-import { usePathname } from "next/navigation";
-import fakeData from "@/app/data/listing";
-import { Console } from "console";
+import useNewsearch from "@/app/hooks/search/useNewSearch";
+
 
 export function MainSearchMultiSelect({ type }: { type: string }) {
   const {
@@ -20,13 +19,8 @@ export function MainSearchMultiSelect({ type }: { type: string }) {
     isLoading,
     handleResetQuery,
     onSearchChange,
-    debounced,
-    name,
-  } = useQsearch();
-  const path = usePathname();
+  } = useNewsearch();
   const { filters, setFilters, remnoveSearchOptions } = useSearchFilters();
-  //
-  // setFIlter({...filters,key:value})
   const value = [...filters.locality, ...filters.builderIds];
   const {
     localities,
@@ -35,7 +29,6 @@ export function MainSearchMultiSelect({ type }: { type: string }) {
     listing: listings,
     projectListing,
   } = searchData;
-
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
     onDropdownOpen: () => combobox.updateSelectedOptionIndex("active"),
