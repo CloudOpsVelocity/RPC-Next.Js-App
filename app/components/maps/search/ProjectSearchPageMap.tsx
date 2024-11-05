@@ -73,6 +73,7 @@ const MapContent = ({ data,type }: any): JSX.Element | null => {
 // 1. GROUP DATA BY PROPERTY AND PROJECT WHERE selected && selectedId === itemId && itemPropType === selectedPropType
 // 2. CREATE TOOLTIPS FOR EACH SECTION 
 // 3. RENDER MARKERS FOR EACH SECTION
+// 4. ADD EVENT HANDLER TO MARKERS
 const groupedData = data.reduce((acc: any, item: any) => {
   const itemId = item["projIdEnc"];
   const phaseName = item.phaseName; // Assuming phaseName is a field in your data
@@ -117,13 +118,13 @@ const groupedData = data.reduce((acc: any, item: any) => {
         }}
       >
         <Tooltip
-          key={"tooltip_" + project.projIdEnc + selected?.reqId}
+          key={"tooltip_" + project.projIdEnc + (selected?.reqId ?? '')}
           opacity={1}
           permanent={selected?.reqId === project.projIdEnc}
           // permanent
           direction="top"
           offset={[10, -35]}
-          className="min-w-[400px]"
+          className="min-w-[400px] !p-0"
           sticky
         >
          <TooltipProj data={{

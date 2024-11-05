@@ -1,5 +1,9 @@
 import React from 'react';
-import { BsBuilding, BsGeoAlt, BsPerson } from 'react-icons/bs';
+import { 
+  BiSolidBuildings, 
+  BiSolidMapPin, 
+  BiSolidUser 
+} from 'react-icons/bi';
 
 type PropertyType = {
   propType: string;
@@ -29,39 +33,42 @@ function formatCurrency(amount: number): string {
     minimumFractionDigits: 0
   }).format(amount);
 }
-
 export default function TooltipProj({ data }: { data: TooltipProjProps }) {
   const { projName, city, state, locality, builderName, phases } = data;
 
   return (
-    <div className="bg-white  shadow-lg  text-xs">
-      <div className="space-y-1">
+    <div className="bg-white shadow-md text-xs rounded-lg overflow-hidden border border-gray-200">
+      <div className="space-y-1 p-2">
         {/* Header */}
-        <div className="border-b pb-2">
-          <h3 className="font-bold text-gray-800 flex items-center gap-1 text-sm"> {/* Increased font size */}
-            <BsBuilding size={16} className="text-blue-600" /> {/* Increased icon size */}
+        <div className="border-b border-gray-200 pb-1">
+          <h3 className="font-semibold text-gray-900 flex items-center gap-1 text-sm">
+            <BiSolidBuildings size={16} className="text-blue-600" />
             {projName}
           </h3>
-          <div className="flex items-center gap-1 text-gray-700 mt-1"> {/* Darker color */}
-            <BsGeoAlt size={14} /> {/* Increased icon size */}
-            <p className="text-[11px]">{locality}, {city}, {state}</p> {/* Increased font size */}
+          <div className="flex items-center gap-1 text-gray-700 mt-0.5">
+            <BiSolidMapPin size={14} className="text-emerald-600" />
+            <p className="text-[12px] font-medium">
+              {locality}, {city}
+            </p>
           </div>
-          <div className="flex items-center gap-1 text-gray-700 mt-1"> {/* Darker color */}
-            <BsPerson size={14} /> {/* Increased icon size */}
-            <p className="text-[11px]">{builderName}</p> {/* Increased font size */}
+          <div className="flex items-center gap-1 text-gray-700 mt-0.5">
+            <BiSolidUser size={14} className="text-purple-600" />
+            <p className="text-[12px] font-medium">
+              {builderName} <span className="text-gray-500 ml-0.5">(Builder)</span>
+            </p>
           </div>
         </div>
 
         {/* Phases */}
-        <div className="space-y-1.5">
+        <div className="space-y-1 mt-1">
           {phases.map((phase) => (
-            <div key={phase.phaseName} className="bg-gray-50 rounded p-1.5">
-              <p className="font-semibold text-gray-800 mb-1 text-sm">{phase.phaseName}</p> {/* Darker and slightly larger */}
+            <div key={phase.phaseName} className="bg-gray-100 rounded px-1 py-0.5">
+              {phase.phaseName && <p className="font-semibold text-gray-800 text-xs mb-1">{`Phase ${phase.phaseName}`}</p>}
               <div className="grid gap-1">
                 {phase.propertyTypes.map((property, index) => (
-                  <div key={property.propType + index} className="flex justify-between items-center text-sm"> {/* Increased font size */}
-                    <span className="text-gray-700">{property.propType}</span> {/* Darker color */}
-                    <span className="text-emerald-600 font-medium">
+                  <div key={property.propType + index} className="flex justify-between items-center text-xs bg-white p-1 rounded border border-gray-200">
+                    <span className="text-gray-800 font-medium">{property.propType}</span>
+                    <span className="text-emerald-700 font-semibold">
                       {formatCurrency(Number(property.minPrice) || 0)} - {formatCurrency(Number(property.maxPrice) || 0)}
                     </span>
                   </div>

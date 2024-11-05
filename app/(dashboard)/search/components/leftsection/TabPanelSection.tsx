@@ -1,11 +1,10 @@
 import { emptyFilesIcon, strikeIconIcon } from "@/app/images/commonSvgs";
-import { Loader, Tabs } from "@mantine/core";
+import { Loader } from "@mantine/core";
 import { useIntersection } from "@mantine/hooks";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import useSearchFilters from "@/app/hooks/search";
 import ProjectCard from "@/app/test/newui/components/Card";
-import { Console } from "console";
-// import ProjectCard from "../Card";
+import { useVirtualizer } from '@tanstack/react-virtual';
 
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
@@ -20,6 +19,7 @@ export default function TabPanelSection({ mutate, serverData }: Props) {
     countAppliedFiltersFromQuery,
     path,
   } = useSearchFilters("project");
+
   const appliedFiltersCount = countAppliedFiltersFromQuery();
   const serverClientData =
     appliedFiltersCount > 0
@@ -29,6 +29,16 @@ export default function TabPanelSection({ mutate, serverData }: Props) {
         path.includes("/residential")
       ? serverData
       : data;
+
+  const rowVirtualizer = useVirtualizer({
+    count: serverClientData?.length || 0,
+    getScrollElement: () => containerRef.current,
+    estimateSize: () => 300,
+    overscan: 1,
+    enabled: true,
+    measureElement: (element) => element?.getBoundingClientRect().height || 300,
+  });
+
   const { ref, entry } = useIntersection({
     root: containerRef.current,
     threshold: 0.1,
@@ -50,17 +60,39 @@ export default function TabPanelSection({ mutate, serverData }: Props) {
       ) : serverClientData != undefined &&
         serverClientData.length != undefined &&
         serverClientData.length > 0 ? (
-        serverClientData?.map((eachOne: any, index: number) => {
-          return (
-            <ProjectCard
-              key={eachOne.projIdEnc + eachOne.propType}
-              refetch={refetch}
-              data={{ ...eachOne, type: filters.listedBy ?? "proj" }}
-              index={index}
-              mutate={mutate}
-            />
-          );
-        })
+        <div
+          style={{
+            height: `${rowVirtualizer.getTotalSize()}px`,
+            width: '100%',
+            position: 'relative',
+          }}
+        >
+          {rowVirtualizer.getVirtualItems().map((virtualRow, index) => {
+            const eachOne = serverClientData[virtualRow.index];
+            return (
+              <div
+                key={virtualRow.key}
+                data-index={virtualRow.index}
+                ref={rowVirtualizer.measureElement}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  transform: `translateY(${virtualRow.start ?? 0}px)`,
+                }}
+              >
+                <ProjectCard
+                  key={eachOne.projIdEnc + eachOne.propType}
+                  refetch={refetch}
+                  data={{ ...eachOne, type: filters.listedBy ?? "proj" }}
+                  index={virtualRow.index}
+                  mutate={mutate}
+                />
+              </div>
+            );
+          })}
+        </div>
       ) : (
         <div className="flex w-full h-full justify-center items-center flex-col">
           {emptyFilesIcon}
@@ -71,7 +103,7 @@ export default function TabPanelSection({ mutate, serverData }: Props) {
       {hasNextPage && (
         <div 
           ref={ref}
-          className="w-full py-8 min-h-[100px] flex justify-center items-center text-gray-600"
+          className="w-full py-8 flex justify-center items-center text-gray-600"
         >
           <div className="flex items-center gap-2">
             <div className="w-6 h-6 border-3 border-blue-500 border-t-transparent rounded-full animate-spin" />

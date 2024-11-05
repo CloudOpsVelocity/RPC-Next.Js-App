@@ -18,34 +18,40 @@ for (let j = 0; j < array.length; j++) {
 }
 console.log(getData([3,5,1,58,765,4,343,23,65]))
   return (
- <div>f</div>
+ <CoverImage />
   );
 }
 
-// import Carousel from "./carousel";
-// export default function CarouselExample() {
-//   const items = [
-//     <div key="1" className="h-64 rounded-lg bg-blue-500 p-4 text-white">
-//       Slide 1
-//     </div>,
-//     <div key="2" className="h-64 rounded-lg bg-green-500 p-4 text-white">
-//       Slide 2
-//     </div>,
-//     <div key="3" className="h-64 rounded-lg bg-red-500 p-4 text-white">
-//       Slide 3
-//     </div>,
-//     <div key="4" className="h-64 rounded-lg bg-yellow-500 p-4 text-white">
-//       Slide 4
-//     </div>,
-//     <div key="5" className="h-64 rounded-lg bg-purple-500 p-4 text-white">
-//       Slide 5
-//     </div>,
-//   ];
+import Image from 'next/image';
 
-//   return (
-//     <div className="container mx-auto px-4 py-8">
-//       <h1 className="mb-6 text-3xl font-bold">Optimized Carousel Example</h1>
-//       <Carousel items={items} desktopSlides={3} mobileSlides={1} />
-//     </div>
-//   );
-// }
+// Your coverImageUrl string
+const coverImageUrl = "https://d2l0lb5gc1bw3t.cloudfront.net/residential-projects/bengaluru/213/hfhdhfgf-a-narayanapura-cover.webp?v=1730784410064,https://d2l0lb5gc1bw3t.cloudfront.net/residential-projects/bengaluru/213/hfhdhfgf-a-narayanapura-cover-small.webp,https://d2l0lb5gc1bw3t.cloudfront.net/residential-projects/bengaluru/213/hfhdhfgf-a-narayanapura-cover-medium.webp,https://d2l0lb5gc1bw3t.cloudfront.net/residential-projects/bengaluru/213/hfhdhfgf-a-narayanapura-cover-large.webp";
+
+// Split the URLs into an array
+const [defaultImg, smallImg, mediumImg, largeImg] = coverImageUrl.split(',');
+
+export function CoverImage() {
+  return (
+    <picture>
+      <source
+        media="(max-width: 660px)"
+        srcSet={smallImg}
+      />
+      <source
+        media="(max-width: 1640px)"
+        srcSet={mediumImg}
+      />
+      <source
+        media="(min-width: 2000px)"
+        srcSet={largeImg}
+      />
+      <Image
+        src={defaultImg}
+        alt="Project cover image"
+        width={800}
+        height={600}
+        style={{ width: '100%', height: 'auto' }}
+      />
+    </picture>
+  );
+}
