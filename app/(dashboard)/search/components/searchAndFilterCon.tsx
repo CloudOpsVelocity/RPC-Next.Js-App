@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Pill,  Popover } from "@mantine/core";
+import { Pill, Popover } from "@mantine/core";
 import { FilterPopup } from "./filterPopup";
 import { FilterPopup as ListingPopup } from "../listing/components/filterPopup";
 import classes from "@/app/styles/search.module.css";
@@ -33,7 +33,7 @@ const SearchAndFilterCon = ({ frontendFilters }: any) => {
 };
 export default SearchAndFilterCon;
 
-const SearchHeader = ({ setShowAllLocalities ,city}: any) => {
+const SearchHeader = ({ setShowAllLocalities, city }: any) => {
   const {
     countAppliedFilters,
     filters,
@@ -186,7 +186,6 @@ const SearchHeader = ({ setShowAllLocalities ,city}: any) => {
             <SearchIcon />
           </div>
         )}
-
         {!isMobile && (
           <>
             <Popover
@@ -266,7 +265,7 @@ const SearchHeader = ({ setShowAllLocalities ,city}: any) => {
             <Popover
               width={"auto"}
               trapFocus
-              position="bottom" 
+              position="bottom"
               withArrow
               shadow="lg"
               radius={10}
@@ -285,20 +284,30 @@ const SearchHeader = ({ setShowAllLocalities ,city}: any) => {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   >
-                    <path d="M12 2 C7.58 2 4 5.58 4 10c0 4.42 3.58 8 8 8s8-3.58 8-8c0-4.42-3.58-8-8-8z"/>
-                    <path d="M12 6v8"/>
-                    <path d="M8 10h8"/>
+                    <path d="M12 2 C7.58 2 4 5.58 4 10c0 4.42 3.58 8 8 8s8-3.58 8-8c0-4.42-3.58-8-8-8z" />
+                    <path d="M12 6v8" />
+                    <path d="M8 10h8" />
                   </svg>
                   Select City
                 </button>
               </Popover.Target>
               <Popover.Dropdown className="!z-50 p-4 min-w-[200px]">
                 <div className="flex flex-col gap-2">
-                  <button className="text-left hover:bg-gray-100 p-2 rounded">Mumbai</button>
-                  <button className="text-left hover:bg-gray-100 p-2 rounded">Delhi</button>
-                  <button className="text-left hover:bg-gray-100 p-2 rounded">Bangalore</button>
-                  <button className="text-left hover:bg-gray-100 p-2 rounded">Chennai</button>
-                  <button className="text-left hover:bg-gray-100 p-2 rounded">Kolkata</button>
+                  <button className="text-left hover:bg-gray-100 p-2 rounded">
+                    Mumbai
+                  </button>
+                  <button className="text-left hover:bg-gray-100 p-2 rounded">
+                    Delhi
+                  </button>
+                  <button className="text-left hover:bg-gray-100 p-2 rounded">
+                    Bangalore
+                  </button>
+                  <button className="text-left hover:bg-gray-100 p-2 rounded">
+                    Chennai
+                  </button>
+                  <button className="text-left hover:bg-gray-100 p-2 rounded">
+                    Kolkata
+                  </button>
                 </div>
               </Popover.Dropdown>
             </Popover>

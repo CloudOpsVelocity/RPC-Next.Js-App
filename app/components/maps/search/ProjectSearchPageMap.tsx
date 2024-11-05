@@ -27,6 +27,7 @@ const Map = ({ data, lat, lang, type}: any) => {
         className="h-[250px] sm:h-full max-h-[250px] w-full sm:max-w-[700px] sm:max-h-[600px] xl:max-h-[740px] xl:max-w-full  -z-[1]"
         scrollWheelZoom
         zoom={12}
+        
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -66,13 +67,15 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
   }, [selected, map]);
 
   useEffect(() => {
-    if (data && data[0] && data[0]?.lat && data[0]?.lang) {
-      map.setView([parseFloat(data[0]?.lat), parseFloat(data[0]?.lang)], 14);
+    if (data && data.length > 0) {
+      const bounds = L.latLngBounds(
+        data.map((item: any) => [parseFloat(item.lat), parseFloat(item.lang)])
+      );
+      map.fitBounds(bounds);
     }
   }, [data, map]);
 
   return (
-
     data?.map((item: any) => {
       const isProp = !!item?.propIdEnc;
       const itemId = isProp ? item.propIdEnc : item.projIdEnc;
@@ -135,3 +138,4 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
     })
   );
 };
+
