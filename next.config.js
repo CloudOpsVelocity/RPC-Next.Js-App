@@ -8,13 +8,13 @@ const nextConfig = {
   //   dirs: ["app", "components", "lib", "pages", "styles"],
   // },
 
-  typescript: { ignoreBuildErrors: true },
+  // typescript: { ignoreBuildErrors: true },
   experimental: {
     optimizePackageImports: ["@mantine/core", "@mantine/hooks"],
     // ppr: true,
   },
   images: {
-unoptimized:true,
+  unoptimized:true,
     // imageSizes: [
     //   32,    // Small icons
     //   256,   // Medium images

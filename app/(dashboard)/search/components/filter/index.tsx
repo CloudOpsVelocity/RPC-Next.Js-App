@@ -12,7 +12,6 @@ import {
 import classes from "@/app/styles/search.module.css";
 import useSearchFilters from "@/app/hooks/search";
 import { DropDownIcon, SearchIcon } from "@/app/images/commonSvgs";
-import FilterSection from "./filter";
 import useQsearch from "@/app/hooks/search/useQsearch";
 import Results from "./results";
 import { useMediaQuery } from "@mantine/hooks";
@@ -47,6 +46,7 @@ const SearchDrawerHeader = ({
             {DynamicText({
               cg: filters.cg as string,
               listedBy: filters.listedBy,
+              city: filters.city as string,
             })}
           </span>
         </Link>{" "}

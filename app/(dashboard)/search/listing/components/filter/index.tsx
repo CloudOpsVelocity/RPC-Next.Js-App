@@ -47,6 +47,7 @@ const SearchDrawerHeader = ({
             {DynamicText({
               cg: params.cg as string,
               listedBy: params.listedBy,
+              city: params.city as string,
             })}
           </span>
         </Link>{" "}

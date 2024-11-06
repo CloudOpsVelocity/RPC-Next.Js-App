@@ -30,7 +30,7 @@ const coverImageUrl = "https://d2l0lb5gc1bw3t.cloudfront.net/residential-project
 // Split the URLs into an array
 const [defaultImg, smallImg, mediumImg, largeImg] = coverImageUrl.split(',');
 
-export function CoverImage() {
+ function CoverImage() {
   return (
     <>
     {/* // <picture>
@@ -54,7 +54,6 @@ export function CoverImage() {
 
         // sizes="(max-width: 320px) 100vw, (max-width: 768px) 100vw, (max-width: 1280px) 100vw, (max-width: 3840px) 100vw"
       />
-      <img src={defaultImg} alt="Project cover image" className="w-[800px] h-[600px]" />
     </>
   );
 }

@@ -114,6 +114,7 @@ const SearchHeader = ({ open, setShowAllLocalities }: any) => {
             {DynamicText({
               cg: params.cg as string,
               listedBy: "A",
+              city: params.city as string,
             })}
           </span>
         </span>{" "}
