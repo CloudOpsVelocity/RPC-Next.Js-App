@@ -51,6 +51,7 @@ export function CoverImage() {
         alt="Project cover image"
         width={800}
         height={600}
+
         // sizes="(max-width: 320px) 100vw, (max-width: 768px) 100vw, (max-width: 1280px) 100vw, (max-width: 3840px) 100vw"
       />
       <img src={defaultImg} alt="Project cover image" className="w-[800px] h-[600px]" />

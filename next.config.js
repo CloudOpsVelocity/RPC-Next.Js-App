@@ -14,19 +14,20 @@ const nextConfig = {
     // ppr: true,
   },
   images: {
+unoptimized:true,
     // imageSizes: [
     //   32,    // Small icons
     //   256,   // Medium images
     //   1024,  // Standard large images
     //   2048,  // Very high resolution for large displays
     // ],
-    deviceSizes: [
-      300,
-      450,   // Tablets
-      1280,  // Standard laptops
-      1600,
-      3840,  // 4K displays
-    ],
+    // deviceSizes: [
+    //   300,
+    //   450,   // Tablets
+    //   1280,  // Standard laptops
+    //   1600,
+    //   3840,  // 4K displays
+    // ],
     
     // minimumCacheTTL: 60 * 100,
     remotePatterns: [
