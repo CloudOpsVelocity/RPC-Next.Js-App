@@ -32,19 +32,19 @@ const [defaultImg, smallImg, mediumImg, largeImg] = coverImageUrl.split(',');
 
 export function CoverImage() {
   return (
-    <picture>
-      <source
-        media="(max-width: 660px)"
-        srcSet={smallImg}
-      />
-      <source
-        media="(max-width: 1640px)"
-        srcSet={mediumImg}
-      />
-      <source
-        media="(min-width: 2000px)"
-        srcSet={largeImg}
-      />
+    // <picture>
+    //   <source
+    //     media="(max-width: 660px)"
+    //     srcSet={smallImg}
+    //   />
+    //   <source
+    //     media="(max-width: 1640px)"
+    //     srcSet={mediumImg}
+    //   />
+    //   <source
+    //     media="(min-width: 2000px)"
+    //     srcSet={largeImg}
+    //   />
       <Image
         src={defaultImg}
         alt="Project cover image"
@@ -52,6 +52,6 @@ export function CoverImage() {
         height={600}
         style={{ width: '100%', height: 'auto' }}
       />
-    </picture>
+    // </picture>
   );
 }

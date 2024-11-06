@@ -14,6 +14,19 @@ const nextConfig = {
     // ppr: true,
   },
   images: {
+    imageSizes: [
+      32,    // Small icons
+      256,   // Medium images
+      1024,  // Standard large images
+      2048,  // Very high resolution for large displays
+    ],
+    deviceSizes: [
+      320,   // Small mobile devices
+      768,   // Tablets
+      1280,  // Standard laptops
+      3840,  // 4K displays
+    ],
+    
     // minimumCacheTTL: 60 * 100,
     remotePatterns: [
       { hostname: "d2l0lb5gc1bw3t.cloudfront.net" },

@@ -18,6 +18,7 @@ import { SEARCH_FILTER_DATA } from "@/app/data/search";
 import { toFormattedString } from "./buget/budget";
 import { useHydrateAtoms } from "jotai/utils";
 import { initialState, searachFilterAtom } from "@/app/store/search";
+import SearchCitySelectDropdown from "./_ui/CityDropDown/CityMultiselect";
 const SearchAndFilterCon = ({ frontendFilters }: any) => {
   useHydrateAtoms([
     [searachFilterAtom, { ...initialState, ...frontendFilters }],
@@ -128,6 +129,7 @@ const SearchHeader = ({ setShowAllLocalities, city }: any) => {
         </span>{" "}
       </p>
       <div className="mt-2 w-full flex  gap-1 xl:gap-2 sm:gap-[10px] flex-wrap sm:flex-wrap xl:flex-nowrap justify-start xl:justify-start items-center xl:items-center ">
+        <SearchCitySelectDropdown />
         {isMobile && (
           <div
             className={`border-[#A0D7FF] max-w-full flex flex-wrap rounded-[20px] sm:rounded-[40px] p-2 gap-2 xl:gap-[8px] pl-2 xl:pl-[8px] border-[1px] border-solid  items-center justify-center px-6 ${
@@ -259,56 +261,6 @@ const SearchHeader = ({ setShowAllLocalities, city }: any) => {
                 ) : (
                   <FilterPopup close={handleCloseFiltersToggle} />
                 )}
-              </Popover.Dropdown>
-            </Popover>
-
-            <Popover
-              width={"auto"}
-              trapFocus
-              position="bottom"
-              withArrow
-              shadow="lg"
-              radius={10}
-              offset={{ mainAxis: 10, crossAxis: 0 }}
-            >
-              <Popover.Target>
-                <button className="text-[#0073C6] hidden text-[14px] xl:text-[20px] font-[500] gap-[6px] p-[7px] pl-[12px] pr-[12px] lg:flex justify-center items-center rounded-[57px] border-[1px] border-[#A0D7FF] bg-[#FFF] shadow-md">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M12 2 C7.58 2 4 5.58 4 10c0 4.42 3.58 8 8 8s8-3.58 8-8c0-4.42-3.58-8-8-8z" />
-                    <path d="M12 6v8" />
-                    <path d="M8 10h8" />
-                  </svg>
-                  Select City
-                </button>
-              </Popover.Target>
-              <Popover.Dropdown className="!z-50 p-4 min-w-[200px]">
-                <div className="flex flex-col gap-2">
-                  <button className="text-left hover:bg-gray-100 p-2 rounded">
-                    Mumbai
-                  </button>
-                  <button className="text-left hover:bg-gray-100 p-2 rounded">
-                    Delhi
-                  </button>
-                  <button className="text-left hover:bg-gray-100 p-2 rounded">
-                    Bangalore
-                  </button>
-                  <button className="text-left hover:bg-gray-100 p-2 rounded">
-                    Chennai
-                  </button>
-                  <button className="text-left hover:bg-gray-100 p-2 rounded">
-                    Kolkata
-                  </button>
-                </div>
               </Popover.Dropdown>
             </Popover>
 
