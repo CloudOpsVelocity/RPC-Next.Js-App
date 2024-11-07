@@ -93,7 +93,7 @@ export default function ListingData({
             )}
 
             {/* <Divider orientation="vertical" color="#7BA0BB" /> */}
-            {
+            {!isPlot && (
               <DownSectionCard
                 label={type == "proj" ? "Land Area" : "Property Age"}
                 value={
@@ -102,7 +102,7 @@ export default function ListingData({
                     : `${propertyAge ?? 0} Years`
                 }
               />
-            }
+            )}
 
             <DownSectionCard
               label={"No. of Units"}
@@ -126,6 +126,13 @@ export default function ListingData({
                   label="Carpet Area"
                   value={`${formatNumberWithSuffix(ca, false)} sq.ft`}
                 />
+
+                {propStatus !== "Under Construction" && (
+                <DownSectionCard
+                  label={"Property age"}
+                  value={propertyAge ?? "N/A"}
+                />
+                )}
               </>
             ) : (
               <DownSectionCard
@@ -136,13 +143,6 @@ export default function ListingData({
             <DownSectionCard label={"OwnerShip"} value={ownership} />
             {isRent && (
               <DownSectionCard label={"Available For"} value={availableFor} />
-            )}
-
-            {propStatus !== "Under Construction" && (
-              <DownSectionCard
-                label={"Property age"}
-                value={propertyAge ?? "N/A"}
-              />
             )}
 
             <div className="flex flex-nowrap gap-2 xl:gap-x-4">

@@ -41,7 +41,7 @@ export default function BreadCrumbs({ params }: { params: any }) {
                 {titleOfKeys[key as keyof typeof titleOfKeys] && (
                   <span>{titleOfKeys[key as keyof typeof titleOfKeys]}</span>
                 )}
-                <span className="capitalize">{params[key].replace(/-/g, " ")}</span>
+                <span className="capitalize">{params[key].replace(/-/g, " ").replace("undefined ", "")}</span>
               </>
             )}
             {index < Object.keys(params).length - 1 && " > "}

@@ -22,6 +22,8 @@ export default function ListingBreadCrumbs({
   };
   let currentPath = "";
 
+  console.log(currentPath)
+
   return (
     <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%]">
       <Link
@@ -33,7 +35,7 @@ export default function ListingBreadCrumbs({
       </Link>
       {" > "}
       {allParams.map((key, index) => {
-        currentPath += `/${slugify(params[key])}`;
+        currentPath += `/${slugify(params[key])}`; 
         const isLast = index === allParams.length - 1;
 
         return (
@@ -55,7 +57,7 @@ export default function ListingBreadCrumbs({
                 {" > "}
               </>
             ) : (
-              <span className="capitalize">{title}</span> // Last breadcrumb is plain text
+              <span className="capitalize">{title.replace("undefined ", "")}</span> // Last breadcrumb is plain text
             )}
           </React.Fragment>
         );

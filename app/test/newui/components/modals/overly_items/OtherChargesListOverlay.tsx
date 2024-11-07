@@ -8,6 +8,7 @@ const OtherCharges: React.FC = () => {
   if (!content || content.length === 0) {
     return <div>No charges available</div>;
   }
+  console.log(content.data);
   return (
     <div className="overflow-x-auto">
       <table className="min-w-full bg-white border border-gray-200 rounded-md shadow-md">
@@ -32,7 +33,7 @@ const OtherCharges: React.FC = () => {
               <td className="px-4 py-2 text-gray-700">{charge.label}</td>
               <td className="px-4 py-2 text-right text-gray-900 font-medium flex items-center justify-end">
                 {/* <FaRupeeSign className="mr-1 text-green-600" /> */}
-                {charge.value}
+                {isNaN(charge.value.replace(",", '')) ? charge.value : `₹ ${charge.value}`}
               </td>
             </tr>
           ))}

@@ -3,12 +3,14 @@ import React from "react";
 import ReadMore from "../atoms/readmore";
 import clsx from "clsx";
 import PropertyHeading from "../property/heading";
+import { useMediaQuery } from "@mantine/hooks";
+
 
 
 type Props = {
   heading: string;
   projName?: string;
-  content: string;
+  content: string; 
   id?: string;
   type?: "prop" | "proj";
   className?: string;
@@ -24,11 +26,12 @@ export default function About({
   id,
   type,
   className,
-  showProjName,
+  showProjName, 
   builderName,
   maxLines = 6,
 }: Props) {
-  const isMobile  = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+  // const isMobile  = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+  const isMobile = false;
   if(isMobile){
     maxLines = 2
   }

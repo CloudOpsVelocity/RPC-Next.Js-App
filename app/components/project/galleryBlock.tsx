@@ -66,7 +66,7 @@ export default function GalleryBlock({
   return (
     <div
       className="w-[95%] md:w-[90%] sm:pt-[50px]   scroll-mt-[165px] mt-[50px] sm:mt-0 mb-[3%] sm:mb-0"
-      id="gallery"
+      id="galleria"
     >
       {type === "prop" ? (
         <PropertyHeading
@@ -151,7 +151,7 @@ export default function GalleryBlock({
                 })}}
                 className="absolute bottom-7 sm:bottom-3 right-1 xl:right-3 z-[100] "
               >
-                <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] " />
+                <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] " /> 
               </button>
               {/* <Gallery
                 selectedMedia={selectedMedia}

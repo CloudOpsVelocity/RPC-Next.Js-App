@@ -64,6 +64,7 @@ export interface Main {
   isBasement: "Y" | "N";
   noOfOpenSide: number;
   bhkId: number;
+  isUsed: string;
 }
 export interface LIstingResponse {
   listing: Main;

@@ -19,8 +19,9 @@ export default function CardDownSection({
   isPetFriendly,
   amenCount,
   propIdEnc,
+  propTypeName
 }: any) {
-  const isMobile = useMediaQuery("(max-width: 1600px)");
+  const isMobile = useMediaQuery("(max-width: 1600px)"); 
   // const name =
   //   type === "proj"
   //     ? projName
@@ -70,7 +71,7 @@ export default function CardDownSection({
           </>
         ) : (
           <>
-            {isPetFriendly ? (
+            {(isPetFriendly && propTypeName !== "Plot") ? (
               <div className="flex items-center space-x-1 bg-green-500 text-white font-bold py-1 px-3 text-xs rounded-full shadow-md">
                 <svg
                   className="w-4 h-4"

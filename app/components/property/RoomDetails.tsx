@@ -187,6 +187,7 @@ const OtherDetails = ({
   cunstructionStatus,
   cunstructionType,
   boundryWallEnclose,
+  isUsed
 }: Main) => {
   return (
     <div
@@ -258,6 +259,16 @@ const OtherDetails = ({
             className={style.card}
           />
         )}
+
+        {propTypeName !== "Plot" && isUsed === "Y" && (
+        <RoomBasicDetails
+            icon={<FlatIcon />}
+            title="New Building"
+            value="Yes"
+            className={style.card}
+        />
+        )}
+
 
         <RoomBasicDetails
           icon={<Marble />}
