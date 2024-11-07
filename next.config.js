@@ -3,7 +3,7 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-
+  output: "export",
   // eslint: {
   //   dirs: ["app", "components", "lib", "pages", "styles"],
   // },
@@ -14,7 +14,7 @@ const nextConfig = {
     // ppr: true,
   },
   images: {
-  unoptimized:true,
+    unoptimized: true,
     // imageSizes: [
     //   32,    // Small icons
     //   256,   // Medium images
@@ -28,13 +28,13 @@ const nextConfig = {
     //   1600,
     //   3840,  // 4K displays
     // ],
-    
+
     // minimumCacheTTL: 60 * 100,
     remotePatterns: [
       { hostname: "d2l0lb5gc1bw3t.cloudfront.net" },
       { hostname: "daxv8eiot4y5y.cloudfront.net" },
-      {hostname:"media.getrightproperty.com"},
-      {hostname:"img.youtube.com"},
+      { hostname: "media.getrightproperty.com" },
+      { hostname: "img.youtube.com" },
       { hostname: "images.unsplash.com" },
       {
         hostname:
@@ -54,10 +54,10 @@ const nextConfig = {
       fullUrl: true,
     },
   },
-   webpack: (config) => {
-       config.resolve.alias.canvas = false;
-       return config;
-     },
+  webpack: (config) => {
+    config.resolve.alias.canvas = false;
+    return config;
+  },
 };
 
 module.exports = nextConfig;
