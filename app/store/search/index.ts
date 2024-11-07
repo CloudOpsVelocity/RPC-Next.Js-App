@@ -60,6 +60,7 @@ searachFilterAtom.onMount = (setAtom) => {
   }
 };
 
+
 export const appliedFiltersParams = atom(null, (get, set, t: any) => {
   const appliedFilters = get(searachFilterAtom);
   const parsedData = filterParser(appliedFilters);
@@ -73,6 +74,5 @@ function getAppliedFilters(): SearchFilter {
     queryData[key] = value;
   });
   const data: SearchFilter = convertToOriginalState(queryData);
-  console.log(data);
   return data;
 }

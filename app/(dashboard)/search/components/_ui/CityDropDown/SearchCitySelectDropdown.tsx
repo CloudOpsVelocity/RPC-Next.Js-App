@@ -4,6 +4,7 @@ import { useQuery } from "react-query";
 import RTK_CONFIG from "@/app/config/rtk";
 import { getAllCitiesDetails } from "@/app/utils/stats_cities";
 import { useVirtualizer } from "@tanstack/react-virtual";
+import useSearchFilters from "@/app/hooks/search";
 
 interface City {
   id: number;
@@ -18,6 +19,7 @@ interface City {
 }
 
 export default function SearchCitySelectDropdown() {
+  const { filters, setFilters ,handleAppliedFilters} = useSearchFilters();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCity, setSelectedCity] = useState<City | null>(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -26,7 +28,6 @@ export default function SearchCitySelectDropdown() {
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const optionRefs = useRef<Array<HTMLDivElement | null>>([]);
-
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -103,6 +104,8 @@ export default function SearchCitySelectDropdown() {
     setSelectedCity(city);
     setSearchTerm("");
     setIsOpen(false);
+    setFilters((prev) => ({ ...prev, city: `${city.name}+${city.id}` }));
+    handleAppliedFilters()
   }, []);
 
   useEffect(() => {
@@ -120,12 +123,12 @@ export default function SearchCitySelectDropdown() {
         className="flex items-center text-gray-800 text-[14px] xl:text-[16px] font-semibold gap-x-2 p-2 rounded-full border border-blue-300 bg-white hover:bg-blue-50 transition-colors shadow-md"
       >
         <IoLocationSharp className="text-blue-600 text-lg" />
-        <span>{selectedCity ? selectedCity.name : "Select Location"}</span>
+        <span>{filters.city ? filters.city.split("+")[0] : selectedCity ? selectedCity.name : "Select Location"}</span>
       </button>
 
       {isOpen && (
         <div
-          className="absolute z-50 w-[240px] mt-2 bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden transition-all duration-200"
+          className="absolute z-50 w-[240px] mt-2 bg-white border border-gray-300  shadow-lg overflow-hidden transition-all duration-200"
           onKeyDown={handleKeyDown}
         >
           <div className="p-2 border-b border-gray-200">

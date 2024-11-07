@@ -18,7 +18,7 @@ import { SEARCH_FILTER_DATA } from "@/app/data/search";
 import { toFormattedString } from "./buget/budget";
 import { useHydrateAtoms } from "jotai/utils";
 import { initialState, searachFilterAtom } from "@/app/store/search";
-import SearchCitySelectDropdown from "./_ui/CityDropDown/CityMultiselect";
+import SearchCitySelectDropdown from "./_ui/CityDropDown/SearchCitySelectDropdown";
 const SearchAndFilterCon = ({ frontendFilters }: any) => {
   useHydrateAtoms([
     [searachFilterAtom, { ...initialState, ...frontendFilters }],
@@ -36,10 +36,8 @@ export default SearchAndFilterCon;
 
 const SearchHeader = ({ setShowAllLocalities, city }: any) => {
   const {
-    countAppliedFilters,
     filters,
     remnoveSearchOptions,
-    setFilters,
     handleAppliedFilters,
     params,
   } = useSearchFilters();
