@@ -7,13 +7,20 @@ import {
   PillsInput,
   useCombobox,
 } from "@mantine/core";
-import useQsearch from "@/app/hooks/search/useQsearch";
 import useSearchFilters from "@/app/hooks/search";
 import toast from "react-hot-toast";
 import useNewsearch from "@/app/hooks/search/useNewSearch";
 
 
 export function MainSearchMultiSelect({ type }: { type: string }) {
+  const AgentOwnerBuilderMap = new Map([
+    ["BuilderAgentListing", "A"],
+    ["BuilderOwnerListing", "I"],
+    ["BuilderBuilderListing", "B"],
+    ["ProjectAgentListing", "A"],
+    ["ProjectOwnerListing", "I"],
+    ["ProjectBuilderListing", "B"],
+  ]);
   const {
     data: searchData,
     isLoading,
@@ -53,7 +60,18 @@ export function MainSearchMultiSelect({ type }: { type: string }) {
         handleAddSearch(`${data.name}+${data.id}`);
         break;
       case "Projects":
-        window.open(`/abc/delhi/palika/${data.id}`);
+        if (data.type === "Project") {
+          window.open(data.stringUrl);
+        } else {
+          window.open(
+            `/search/listing?projIdEnc=${
+              data.stringId.split("_")[0]
+            }&phaseId=${data.stringId.split("_")[1]}&projName=${
+              data.name
+            }`
+          );
+        }
+
         break;
       case "Listings":
         {

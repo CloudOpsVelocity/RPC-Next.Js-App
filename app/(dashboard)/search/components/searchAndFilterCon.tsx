@@ -20,6 +20,7 @@ import { useHydrateAtoms } from "jotai/utils";
 import { initialState, searachFilterAtom } from "@/app/store/search";
 import SearchCitySelectDropdown from "./_ui/CityDropDown/SearchCitySelectDropdown";
 import { serverCityAtom } from "@/app/store/search/serverCity";
+import { useAtomValue } from "jotai";
 const SearchAndFilterCon = ({ frontendFilters ,cityData}: any) => {
   useHydrateAtoms([
     [searachFilterAtom, { ...initialState, ...frontendFilters }],
@@ -107,6 +108,7 @@ const SearchHeader = ({ setShowAllLocalities, city }: any) => {
       filters.bugdetValue[1] === 600000000) ||
     (filters.bugdetValue[0] === 0 && filters.bugdetValue[1] === 100000)
   );
+  const servercityData =  useAtomValue(serverCityAtom);
   const allFiltersMap = [...filters.locality, ...filters.builderIds];
   return (
     <div className="mb-4 w-full  mt-[60px] sm:mt-[80px] pl-[1%]   ">
@@ -123,7 +125,7 @@ const SearchHeader = ({ setShowAllLocalities, city }: any) => {
             {DynamicText({
               cg: params.cg as string,
               listedBy: params.listedBy,
-              city,
+              city: city ?? servercityData,
             })}
           </span>
         </span>{" "}
