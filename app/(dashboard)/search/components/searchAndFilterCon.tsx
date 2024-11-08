@@ -19,9 +19,11 @@ import { toFormattedString } from "./buget/budget";
 import { useHydrateAtoms } from "jotai/utils";
 import { initialState, searachFilterAtom } from "@/app/store/search";
 import SearchCitySelectDropdown from "./_ui/CityDropDown/SearchCitySelectDropdown";
-const SearchAndFilterCon = ({ frontendFilters }: any) => {
+import { serverCityAtom } from "@/app/store/search/serverCity";
+const SearchAndFilterCon = ({ frontendFilters ,cityData}: any) => {
   useHydrateAtoms([
     [searachFilterAtom, { ...initialState, ...frontendFilters }],
+    [serverCityAtom, cityData]
   ]);
   const [showAllLocalities, setShowAllLocalities] = useState(false);
   return (

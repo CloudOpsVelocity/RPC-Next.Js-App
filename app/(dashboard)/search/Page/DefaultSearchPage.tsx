@@ -13,7 +13,9 @@ export default function DefaultSearchPage({ cityData }: Props) {
       <Header />
       <SearchAndFilterCon frontendFilters={{
         ...(cityData.cityId && cityData.city && {city: `${cityData?.city}+${cityData.cityId}`})
-      }} />
+      }}  
+       {...(cityData.cityId && cityData.city && {cityData: `${cityData?.city}+${cityData.cityId}`})}
+       />
       <div className=" w-[100%] mx-2  xl:m-0 flex justify-center flex-wrap-reverse sm:flex-nowrap">
         <LeftSideBlock />
         <RightSideBlock />
