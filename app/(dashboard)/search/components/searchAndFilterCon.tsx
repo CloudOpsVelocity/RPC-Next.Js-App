@@ -209,7 +209,6 @@ const SearchHeader = ({ setShowAllLocalities, city }: any) => {
                   onClick={() => handleOpenFilterToggle("all", true)}
                 >
                   <BuyRent />
-
                   {allFiltersMap?.map(
                     (each, index) =>
                       index < (isTab ? 1 : 2) && (

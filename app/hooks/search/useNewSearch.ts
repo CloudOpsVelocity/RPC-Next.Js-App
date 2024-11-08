@@ -1,5 +1,6 @@
 import RTK_CONFIG from "@/app/config/rtk";
 import { searachFilterAtom } from "@/app/store/search";
+import { serverCityAtom } from "@/app/store/search/serverCity";
 import { useDebouncedValue } from "@mantine/hooks";
 import { atom, useAtom, useAtomValue } from "jotai";
 import { useQuery } from "react-query";
@@ -8,6 +9,7 @@ export default function useNewsearch() {
   const [name, setName] = useAtom(searchAtom);
   const [debounced] = useDebouncedValue(name, 700);
   const allFilters = useAtomValue(searachFilterAtom);
+  const servercityData = useAtomValue(serverCityAtom);
   /**
    * Fetches data from the matcher API given the debounced search query
    * and the currently selected cityId.
@@ -17,7 +19,7 @@ export default function useNewsearch() {
   const getData = async () => {
     let url = `${
       process.env.NEXT_PUBLIC_BACKEND_URL
-    }/matcher?word=${debounced}&cityId=${allFilters.city?.split("+")[1]}`;
+    }/matcher?word=${debounced}&cityId=${allFilters.city ? allFilters.city.split("+")[1] : servercityData?.split("+")[1]}`;
     const res = await fetch(url);
     const responseData = await res.json();
     return responseData;
@@ -26,7 +28,7 @@ export default function useNewsearch() {
   const { data, isLoading } = useQuery({
     queryKey: ["search" + debounced + allFilters.city],
     queryFn: () => getData(),
-    enabled: !!debounced && allFilters.city !== null,
+    enabled: !!debounced && (allFilters.city !== null || servercityData !== null),
     ...RTK_CONFIG,
   });
 

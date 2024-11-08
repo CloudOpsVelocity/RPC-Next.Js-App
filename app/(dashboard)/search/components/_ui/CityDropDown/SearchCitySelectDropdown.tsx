@@ -28,7 +28,6 @@ interface City {
 
 export default function SearchCitySelectDropdown() {
   const servercityData = useAtomValue(serverCityAtom);
-  console.log(())
   const { filters, setFilters, handleAppliedFilters } = useSearchFilters();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCity, setSelectedCity] = useState<City | null>(null);
@@ -149,8 +148,10 @@ export default function SearchCitySelectDropdown() {
         <span>
           {filters.city
             ? filters.city.split("+")[0]
+            : servercityData
+            ? servercityData.split("+")[0]
             : selectedCity
-            ? selectedCity.name
+            ? selectedCity.name 
             : "Select Location"}
         </span>
       </button>
