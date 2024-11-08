@@ -1,10 +1,18 @@
-import React, { useState, useRef, useEffect, useMemo, useCallback } from "react";
-import { IoLocationSharp } from "react-icons/io5"; 
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useMemo,
+  useCallback,
+} from "react";
+import { IoLocationSharp } from "react-icons/io5";
 import { useQuery } from "react-query";
 import RTK_CONFIG from "@/app/config/rtk";
 import { getAllCitiesDetails } from "@/app/utils/stats_cities";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import useSearchFilters from "@/app/hooks/search";
+import { useAtomValue } from "jotai";
+import { serverCityAtom } from "@/app/store/search/serverCity";
 
 interface City {
   id: number;
@@ -19,7 +27,9 @@ interface City {
 }
 
 export default function SearchCitySelectDropdown() {
-  const { filters, setFilters ,handleAppliedFilters} = useSearchFilters();
+  const servercityData = useAtomValue(serverCityAtom);
+  console.log(())
+  const { filters, setFilters, handleAppliedFilters } = useSearchFilters();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCity, setSelectedCity] = useState<City | null>(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -30,7 +40,10 @@ export default function SearchCitySelectDropdown() {
   const optionRefs = useRef<Array<HTMLDivElement | null>>([]);
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
         setSearchTerm("");
       }
@@ -42,18 +55,22 @@ export default function SearchCitySelectDropdown() {
     };
   }, []);
 
-  const { data: allCities = [], isLoading, error } = useQuery<City[]>({
+  const {
+    data: allCities = [],
+    isLoading,
+    error,
+  } = useQuery<City[]>({
     queryKey: ["all-cities"],
     queryFn: getAllCitiesDetails,
     ...RTK_CONFIG,
     staleTime: 5 * 60 * 1000, // Cache for 5 minutes
-    retry: 3 // Retry failed requests 3 times
+    retry: 3, // Retry failed requests 3 times
   });
 
   const filteredCities = useMemo(() => {
     if (!isOpen) return [];
     if (!searchTerm) return allCities;
-    return allCities.filter((city) => 
+    return allCities.filter((city) =>
       city.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
   }, [allCities, searchTerm, isOpen]);
@@ -71,33 +88,39 @@ export default function SearchCitySelectDropdown() {
     }
   }, [isOpen]);
 
-  const handleKeyDown = useCallback((event: React.KeyboardEvent) => {
-    if (!isOpen) return;
+  const handleKeyDown = useCallback(
+    (event: React.KeyboardEvent) => {
+      if (!isOpen) return;
 
-    switch (event.key) {
-      case "ArrowDown":
-        event.preventDefault();
-        setActiveIndex((prevIndex) => (prevIndex + 1) % filteredCities.length);
-        break;
-      case "ArrowUp":
-        event.preventDefault();
-        setActiveIndex((prevIndex) =>
-          (prevIndex - 1 + filteredCities.length) % filteredCities.length
-        );
-        break;
-      case "Enter":
-        if (filteredCities[activeIndex]) {
-          selectCity(filteredCities[activeIndex]);
-        }
-        break;
-      case "Escape":
-        setIsOpen(false);
-        setSearchTerm("");
-        break;
-      default:
-        break;
-    }
-  }, [isOpen, filteredCities, activeIndex]);
+      switch (event.key) {
+        case "ArrowDown":
+          event.preventDefault();
+          setActiveIndex(
+            (prevIndex) => (prevIndex + 1) % filteredCities.length
+          );
+          break;
+        case "ArrowUp":
+          event.preventDefault();
+          setActiveIndex(
+            (prevIndex) =>
+              (prevIndex - 1 + filteredCities.length) % filteredCities.length
+          );
+          break;
+        case "Enter":
+          if (filteredCities[activeIndex]) {
+            selectCity(filteredCities[activeIndex]);
+          }
+          break;
+        case "Escape":
+          setIsOpen(false);
+          setSearchTerm("");
+          break;
+        default:
+          break;
+      }
+    },
+    [isOpen, filteredCities, activeIndex]
+  );
 
   const selectCity = useCallback((city: City) => {
     if (!city) return;
@@ -105,7 +128,7 @@ export default function SearchCitySelectDropdown() {
     setSearchTerm("");
     setIsOpen(false);
     setFilters((prev) => ({ ...prev, city: `${city.name}+${city.id}` }));
-    handleAppliedFilters()
+    handleAppliedFilters();
   }, []);
 
   useEffect(() => {
@@ -123,7 +146,13 @@ export default function SearchCitySelectDropdown() {
         className="flex items-center text-gray-800 text-[14px] xl:text-[16px] font-semibold gap-x-2 p-2 rounded-full border border-blue-300 bg-white hover:bg-blue-50 transition-colors shadow-md"
       >
         <IoLocationSharp className="text-blue-600 text-lg" />
-        <span>{filters.city ? filters.city.split("+")[0] : selectedCity ? selectedCity.name : "Select Location"}</span>
+        <span>
+          {filters.city
+            ? filters.city.split("+")[0]
+            : selectedCity
+            ? selectedCity.name
+            : "Select Location"}
+        </span>
       </button>
 
       {isOpen && (
@@ -147,19 +176,24 @@ export default function SearchCitySelectDropdown() {
               />
             </div>
           </div>
-          <div ref={listRef} className="max-h-[260px] overflow-y-auto scrollUnique">
+          <div
+            ref={listRef}
+            className="max-h-[260px] overflow-y-auto scrollUnique"
+          >
             {isLoading ? (
               <div className="flex items-center justify-center p-4 text-gray-500">
                 <div className="animate-spin rounded-full h-6 w-6 border-2 border-blue-500 border-t-transparent" />
               </div>
             ) : error ? (
-              <p className="text-red-500 p-4 text-center">Unable to load locations. Please try again.</p>
+              <p className="text-red-500 p-4 text-center">
+                Unable to load locations. Please try again.
+              </p>
             ) : filteredCities.length > 0 ? (
               <div
                 style={{
                   height: `${rowVirtualizer.getTotalSize()}px`,
-                  width: '100%',
-                  position: 'relative',
+                  width: "100%",
+                  position: "relative",
                 }}
               >
                 {rowVirtualizer.getVirtualItems().map((virtualRow) => {
@@ -171,24 +205,30 @@ export default function SearchCitySelectDropdown() {
                         optionRefs.current[virtualRow.index] = el;
                       }}
                       style={{
-                        position: 'absolute',
+                        position: "absolute",
                         top: 0,
                         left: 0,
-                        width: '100%',
+                        width: "100%",
                         height: `${virtualRow.size}px`,
                         transform: `translateY(${virtualRow.start}px)`,
                       }}
                     >
                       <button
                         className={`flex items-center w-full h-full px-2  text-left transition-colors ${
-                          activeIndex === virtualRow.index 
+                          activeIndex === virtualRow.index
                             ? "bg-blue-500 text-white font-bold"
                             : "text-gray-800 hover:bg-blue-100 hover:text-blue-700 "
                         }`}
                         onClick={() => selectCity(city)}
                         onMouseEnter={() => setActiveIndex(virtualRow.index)}
                       >
-                        <IoLocationSharp className={`mr-2 ${activeIndex === virtualRow.index ? "text-white" : "text-gray-400"}`} />
+                        <IoLocationSharp
+                          className={`mr-2 ${
+                            activeIndex === virtualRow.index
+                              ? "text-white"
+                              : "text-gray-400"
+                          }`}
+                        />
                         {city.name}
                       </button>
                     </div>
@@ -196,7 +236,9 @@ export default function SearchCitySelectDropdown() {
                 })}
               </div>
             ) : (
-              <p className="text-gray-500 p-4 text-center">No locations found</p>
+              <p className="text-gray-500 p-4 text-center">
+                No locations found
+              </p>
             )}
           </div>
         </div>
