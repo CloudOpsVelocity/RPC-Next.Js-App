@@ -40,21 +40,20 @@ const FirstBlock: React.FC<Props> = ({
   scrollId,
 }) => {
   const images = getImageUrls(projectDetails?.media as any);
-  let urlBuilder ='/'
+  let urlBuilder = "/";
   const autoplay = useRef(Autoplay({ delay: 10000 }));
   const setIsScrolling = useSetAtom(isScrollingAtom);
   const setSticky = useSetAtom(stickyAtom);
   const setC = useSetAtom(currentBlockAtom);
-  const { data ,isLoading,status} = useQuery<any>({
+  const { data, isLoading, status } = useQuery<any>({
     queryKey: [`builder/${builderId}&isBuilderPage=Nproj`],
     enabled: false,
-    onSuccess(data){
-    urlBuilder =  generateBuilderUrl({
+    onSuccess(data) {
+      urlBuilder = generateBuilderUrl({
         slug: data.data?.userName,
         city: data.data?.cityName,
-      })
-    }
-
+      });
+    },
   });
   function scrollToTopic(id: string): void {
     setIsScrolling(true);
@@ -70,8 +69,6 @@ const FirstBlock: React.FC<Props> = ({
     setC("floorPlans");
     setTimeout(() => setIsScrolling(false), 3000);
   }
-
-
 
   return (
     <div
@@ -175,11 +172,8 @@ const FirstBlock: React.FC<Props> = ({
               </h2>
               <p className=" md:text-right sm:text-[14px] xl:text-[24px] sm:font-[600] mb-[10px] md:mb-[20px] text-[#001F35] ">
                 <span className="text-[#001F35]  sm:text-[14px] xl:text-[24px] sm:font-[600] text-wrap not-italic font-medium leading-[normal]">
-                  ₹{" "}
-                  {
-                   formatNumberWithSuffix(projectDetails.basePrice,)
-                  }{" "}
-                  Base Price/sq.ft onwards
+                  ₹ {formatNumberWithSuffix(projectDetails.basePrice)} Base
+                  Price/sq.ft onwards
                 </span>
               </p>
 
@@ -194,7 +188,10 @@ const FirstBlock: React.FC<Props> = ({
                   alt="no of floors"
                   className=" xl:h-[24px] xl:w-[24px] w-[16px] h-[16px]  sm:h-[16px] sm:w-[16px] "
                 />
-                {formatNumberWithSuffix(projectDetails?.floorPlanCount,false) || 0}{" "}
+                {formatNumberWithSuffix(
+                  projectDetails?.floorPlanCount,
+                  false
+                ) || 0}{" "}
                 Floor Plans
               </p>
             </div>

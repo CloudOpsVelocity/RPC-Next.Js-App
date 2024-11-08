@@ -22,18 +22,21 @@ const nextConfig = {
     //   1024,  // Standard large images
     //   2048,  // Very high resolution for large displays
     // ],
+    loader: "custom",
+    loaderFile: "./cdnimages.js",
+
     deviceSizes: [
       300,
-      450,   // Tablets
-      1280,  // Standard laptops
+      450, // Tablets
+      1280, // Standard laptops
       1600,
-      3840,  // 4K displays
+      3840, // 4K displays
     ],
 
     // minimumCacheTTL: 60 * 100,
 
     remotePatterns: [
-      { hostname: "d2l0lb5gc1bw3t.cloudfront.net", },
+      { hostname: "d2l0lb5gc1bw3t.cloudfront.net" },
       { hostname: "daxv8eiot4y5y.cloudfront.net" },
       { hostname: "media.getrightproperty.com" },
       { hostname: "img.youtube.com" },
