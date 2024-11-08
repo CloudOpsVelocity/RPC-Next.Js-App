@@ -24,7 +24,6 @@ export default function useNewsearch() {
     const responseData = await res.json();
     return responseData;
   };
-
   const { data, isLoading } = useQuery({
     queryKey: ["search" + debounced + allFilters.city],
     queryFn: () => getData(),
