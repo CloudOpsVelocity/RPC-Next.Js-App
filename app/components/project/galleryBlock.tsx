@@ -3,9 +3,7 @@ import { PopupOpenSvg, videoPlayIcon } from "@/app/images/commonSvgs";
 import { Media } from "@/app/validations/types/project";
 import React, { useState } from "react";
 import ReactPlayer from "react-player";
-import Gallery from "./modals/Gallery";
 import { getImageUrls } from "@/app/utils/image";
-import { AspectRatio, Image, Overlay } from "@mantine/core";
 import { useGallery } from "@/app/hooks/useGallery";
 import PropertyHeading from "../property/heading";
 import clsx from "clsx";
@@ -14,6 +12,7 @@ import { useMediaQuery } from "@mantine/hooks";
 import VideoJsonLdScript from "@/app/seo/VideoJson";
 import { useAtom } from "jotai";
 import { galleryStateAtom } from "@/app/store/project/gallery";
+import Image from "next/image";
 
 export default function GalleryBlock({
   walkThrowVideoUrl,
@@ -44,7 +43,7 @@ export default function GalleryBlock({
   }
 
   const isMobile = useMediaQuery(`(max-width: 750px)`);
-  const [, { open }] = useGallery();
+  // const [, { open }] = useGallery();
   const [galleryState,dispatch] = useAtom(galleryStateAtom)
   const handleMediaClick = (media: string, index: number) => {
     if (isMobile) {
@@ -116,25 +115,29 @@ export default function GalleryBlock({
                   playing
                 />
               ) : (
-                <Image
-                  radius="md"
-                  // mah={550}
-                  src={selectedMedia}
-                  alt="Preview"
-                  className="cursor-pointer object-contain sm:min-h-[220px] sm:max-h-[400px] xl:max-h-[450px]  "
-                  onClick={() => {
-                    dispatch({
-                      type:"OPEN",
-                      payload:{
-                        items:images,
-                        mediaType:"image",
-                        title:"Project Gallery",
-                        activeIndex:  images.indexOf(selectedMedia)
-                      }
-                    })
-                  }}
-                  fit="contain"
-                />
+                <picture>
+                  <source media="(max-width: 460px)" srcSet={selectedMedia.split(',')[1]} />
+                  <source media="(max-width: 768px)" srcSet={selectedMedia.split(',')[2]} />
+                  <source media="(min-width: 1200px)" srcSet={selectedMedia.split(',')[3]} />
+                  <Image
+                    src={selectedMedia.split(',')[3]}
+                    alt="Preview"
+                    className="cursor-pointer object-contain sm:min-h-[220px] sm:max-h-[400px] xl:max-h-[450px]"
+                    onClick={() => {
+                      dispatch({
+                        type:"OPEN",
+                        payload:{
+                          items:images,
+                          mediaType:"image", 
+                          title:"Project Gallery",
+                          activeIndex: images.indexOf(selectedMedia)
+                        }
+                      })
+                    }}
+                    fill
+                    unoptimized
+                  />
+                </picture>
               )}
               <button
                 onClick={() => 
@@ -174,22 +177,22 @@ export default function GalleryBlock({
           <h3 className="text-[#737579] font-[600] text-[20px] lg:text-[24px] mb-1 sm:mb-[2%] ">
             Photos
           </h3>
-          <div className="flex justify-start items-start w-full gap-[4%] flex-wrap ">
+          <div className="flex justify-start items-start w-full gap-[4%] flex-wrap relative">
             {images?.map((img, ind) => (
-              <Image
-                key={`gallery_block_${ind}`}
-                width={150}
-                fit="fill"
-                height={100}
-                src={img as string}
-                alt={`${projName} ${AltText(img)}`}
-                className={clsx(
-                  `w-[110px] min-w-[90px] sm:min-w-[120px] xl:w-[152px] h-[68px] lg:h-[94px]   !rounded-[5px] shadow-md mb-[4%] cursor-pointer  xl:min-w-[152px] object-cover border border-gray-300 `,
-                  selectedMedia?.split("?")[0] === img.split("?")[0] &&
-                    "!border-2 !border-btnPrimary !shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)]"
-                )}
-                onClick={() => handleMediaClick(img as string, ind)}
-              />
+              <div className="relative w-[110px] min-w-[90px] sm:min-w-[120px] xl:w-[152px] h-[68px] lg:h-[94px] mb-[4%]"      key={`gallery_block_${ind}`}>
+                <Image
+                  src={img.split(',')[1] as string}
+                  alt={`${projName} ${AltText(img)}`}
+                  className={clsx(
+                    `!rounded-[5px] shadow-md cursor-pointer object-cover border border-gray-300`,
+                    selectedMedia?.split("?")[0] === img.split("?")[0] &&
+                      "!border-2 !border-btnPrimary !shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)]"
+                  )}
+                  onClick={() => handleMediaClick(img as string, ind)}
+                  unoptimized
+                  fill
+                />
+              </div>
             ))}
           </div>
           {videos && videos.length > 0 && (
