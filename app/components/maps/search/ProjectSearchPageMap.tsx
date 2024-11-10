@@ -80,6 +80,8 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
       const isProp = !!item?.propIdEnc;
       const itemId = isProp ? item.propIdEnc : item.projIdEnc;
       const itemPropType = isProp ? item?.propTypeName : item?.propType;
+
+      // Group phases if it's a project
       const phases = !isProp ? {
         [item.phaseName]: {
           phaseName: item.phaseName,
@@ -90,14 +92,6 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
           }]
         }
       } : null;
-      const tooltipData = !isProp ? {
-        projName: item.projName,
-        city: item.city,
-        state: item.state,
-        locality: item.locality,
-        builderName: item.builderName,
-        phases: Object.values(phases || {})
-      } : item;
 
       return (
         <Marker
@@ -126,10 +120,22 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
             className={`${isProp ? "min-w-fit" : "min-w-[400px]"} !p-0`}
             sticky
           >
-            {!isProp ? <TooltipProj data={tooltipData} /> : <TooltipProp data={tooltipData} />}
+            {!isProp ? (
+              <TooltipProj data={{
+                projName: item.projName,
+                city: item.city,
+                state: item.state,
+                locality: item.locality,
+                builderName: item.builderName,
+                phases: Object.values(phases || {})
+              }} />
+            ) : (
+              <TooltipProp data={item} />
+            )}
           </Tooltip>
         </Marker>
       );
     })
   );
 };
+
