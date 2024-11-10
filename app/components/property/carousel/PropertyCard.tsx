@@ -140,8 +140,8 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
           <Image
             src={
               type === "proj"
-                ? cardData.coverUrl
-                : cardData.projMedia.coverImageUrl
+                ? cardData.coverUrl.split(',')[1]
+                : cardData.projMedia.coverImageUrl.split(',')[1]
             }
             alt="Sobha Dream Acres"
             className="w-full  mb-4 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] min-h-[212px] max-h-[212px]"
