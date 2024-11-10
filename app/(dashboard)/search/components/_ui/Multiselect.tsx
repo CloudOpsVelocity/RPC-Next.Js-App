@@ -10,6 +10,7 @@ import {
 import useSearchFilters from "@/app/hooks/search";
 import toast from "react-hot-toast";
 import useNewsearch from "@/app/hooks/search/useNewSearch";
+import { extractApiValues } from "@/app/utils/dyanamic/projects";
 
 
 export function MainSearchMultiSelect({ type }: { type: string }) {
@@ -75,46 +76,59 @@ export function MainSearchMultiSelect({ type }: { type: string }) {
         break;
       case "Listings":
         {
-          const [ut, pt, cg, lt] = data.id.split("_");
-
-          if (data.id.includes("_P")) {
-            const url =
-              `propTypes=${pt}&unitTypes=${ut}&cgs=${cg}&localities=${data.name}` +
+          const paramsObject = extractApiValues(data.stringId);
+          
+            let url;
+            let localityName = data.name
+              .split(" in ")[1]
+              .toLowerCase()
+              .trim();
+            url =
+              `propTypes=${paramsObject.PT}${
+                paramsObject.BH ? `&unitTypes=${paramsObject.BH}` : ""
+              }&cg=${paramsObject.CG}&localities=${localityName}` +
               "%2B" +
-              encodeURIComponent(lt);
+              encodeURIComponent(paramsObject.LT);
+
             window.open("/search/listing?" + url);
-          } else {
-            console.log("update Listings Array state");
-
-            let prevIds = [...(filters?.unitTypes ?? "")];
-
-            if (!prevIds.includes(parseInt(ut))) {
-              setFilters((prevFilters) => ({
-                ...prevFilters,
-                unitTypes: [...prevFilters.unitTypes, parseInt(ut)],
-              }));
-            }
-          }
+          
         }
         break;
       case "Project Listings":
         {
-          let projectName = data.name.split("(")[0].trim();
-          let projName = projectName.split(" in ")[1].toLowerCase();
-          let replaceSpaces = projName.replace(" ", "-");
-
-          const url = `projIdEnc=${data.id}&listedBy=${
-            data.type.split("")[0]
-          }&projName=${replaceSpaces}`;
+          let projectName = data.name.split(" in ")[1].trim();
+          // console.log(projectName);
+          const url = `projIdEnc=${
+            data.stringId
+          }&listedBy=${AgentOwnerBuilderMap.get(
+            data.type
+          )}&projName=${projectName}`;
           window.open("/search/listing?" + url);
         }
         break;
       case "Builders":
-        setFilters((prevFilters) => ({
-          ...prevFilters,
-          builderIds: [...prevFilters.builderIds, `${data.name}+${data.id}`],
-        }));
-        handleResetQuery();
+        if (data.type === "BuilderDetail") {
+          window.open(data.stringUrl);
+        } else {
+          const url =
+            encodeURIComponent(data.name) +
+            "%2B" +
+            encodeURIComponent(data.stringId.split("_")[1]);
+          window.open(
+            `/search?builderIds=${url}&city=${
+              data.stringId.split("_")[0]
+            }${
+              data.type !== "BuilderProject"
+                ? `&listedBy=${AgentOwnerBuilderMap.get(data.type)}`
+                : ""
+            }`
+          );
+        }
+        // setFilters((prevFilters) => ({
+        //   ...prevFilters,
+        //   builderIds: [...prevFilters.builderIds, `${data.name}+${data.id}`],
+        // }));
+        // handleResetQuery();
         break;
       default:
         break;

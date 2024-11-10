@@ -77,7 +77,7 @@ const overlayReducer = (
                 },
               ]
             : []),
-          ...(content.securetyType
+          ...(content.securetyType && content.securetyType !== "NA"
             ? [
                 {
                   label: "Security Deposit",
