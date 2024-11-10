@@ -94,7 +94,7 @@ export default function FullScreenMasterPlanModal({
         </button>
       </div>
       {isOpen && (
-        <div className="fixed inset-0 z-[1000] bg-black">
+        <div className="fixed inset-0 z-[100] bg-black">
           {/* Header */}
           <div className="absolute top-0 left-0 z-[100] right-0 flex justify-between items-center p-4 bg-gradient-to-b from-black to-transparent text-white">
             <h2 className="text-xl font-bold">{title}</h2>
