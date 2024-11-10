@@ -55,6 +55,7 @@ export default function PropertyBanner({
         className="w-[220px] h-[150px]  xl:w-[312px] xl:h-auto absolute right-0 top-[0px] hidden sm:block"
         width={312}
         height={312}
+        unoptimized
       />
       <div className=" inline-flex justify-center items-center ">
         {Svg}
@@ -77,13 +78,16 @@ export default function PropertyBanner({
                 <Image src={"/r.svg"} alt="rera" width={100} height={100} />
               </p>
             )}
+            <div className="w-[350px] h-[185px] relative">
             <Image
-              src={media?.coverImageUrl}
+              src={media?.coverImageUrl.split(',')[1]}
               alt="Sobha Dream Acres"
-              className="flex w-[350px] h-[185px] items-center shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[10px]"
-              width={350}
-              height={185}
+              className="flex  items-center shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[10px]"
+            unoptimized
+            fill
             />
+            </div>
+        
           </div>
 
           <div className="ml-5">

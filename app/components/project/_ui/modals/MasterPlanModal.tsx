@@ -178,8 +178,6 @@ export default function FullScreenMasterPlanModal({
               )}
             </TransformWrapper>
           </div>
-
-          {/* Carousel */}
         </div>
       )}
     </div>

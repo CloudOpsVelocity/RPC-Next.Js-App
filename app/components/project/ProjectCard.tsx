@@ -39,15 +39,6 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
   const { toggleShortlist } = useShortlistAndCompare();
   const [, { open: openS }] = usePopShortList();
   const reqId = type === "proj" ? cardData.projIdEnc : cardData.propIdEnc;
-  const url =
-    type === "proj"
-      ? `/abc/karnataka/banglore/${reqId}`
-      : `/listing/banglore/${reqId}`;
-  const name =
-    type === "proj"
-      ? cardData.projName
-      : `${cardData?.bhkName ?? ""} ${cardData.propTypeName} for
-      ${cardData.cg === "R" ? "Rent" : "Sell"} in ${cardData.ltName}`;
   const handleShortlist = (projId: string) => {
     mutate && mutate({ id: projId, type: ct as Pick<CardProps, "ct">["ct"] });
     toggleShortlist({
@@ -88,7 +79,7 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
     >
       <div
         className={clsx(
-          "border border-width: 2px; text-card-foreground min-w-[310px] max-w-full  sm:min-w-[400px] xl:min-w-[310px]  min-h-[400px] xl:max-w-[494px]   mb-[1%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[14px]",
+          "border border-width: 2px; text-card-foreground min-w-[310px] max-w-full  sm:min-w-[400px] xl:min-w-[310px]  min-h-[400px] xl:max-w-[400px]   mb-[1%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[14px]",
           type == "proj" ? "bg-[#FAFAFA] " : "bg-[#FFFEFE] pt-4"
         )}
       >
@@ -135,8 +126,8 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
             </p>
           )}
           
-          <div className="relative  max-h-[212px]">
-            <div className="mb-4 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] object-cover min-h-[212px] max-h-[212px] relative">
+          <div className="relative  max-h-[300px]">
+            <div className="mb-4 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] object-cover min-h-[212px] max-h-[300px] relative">
             <Image
               src={
                 type === "proj"
@@ -217,7 +208,7 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
 
             <p className="text-[#565D70]  not-italic font-semibold leading-[normal] tracking-[0.56px] capitalize text-[14px] xl:text-[15px]">
               {type === "proj" &&
-                `${cardData.locality}, ${cardData?.city}, ${cardData.state},  ${cardData.pincode} `}
+                `${cardData.locality}, ${cardData?.city}, ${cardData.pincode} `}
 
               {type === "prop " &&
                 `${cardData.ltName}   
@@ -290,7 +281,7 @@ const ProjectCarousel = ({
                     ct={ct ?? "builder"}
                   />
           )}
-          slidesToShow={3.5}
+          slidesToShow={4}
           gap={10}
         />
         {/* <MainCarousel>

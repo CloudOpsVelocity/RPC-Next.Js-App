@@ -18,6 +18,7 @@ import { useMediaQuery } from "@mantine/hooks";
 import { redirect } from "next/dist/server/api-utils";
 import { get_posted_by } from "@/app/utils/dyanamic/projects";
 import { generateListingLinkUrl } from "@/app/utils/linkRouters/ListingLink";
+import NewCarousel from "@/app/test/components/NewCarousel";
 type Props = {
   type: string;
   title: any;
@@ -253,8 +254,8 @@ const ProjectCarousel = ({
 }: Props) => {
   return (
     data?.length > 0 && (
-      <div className="w-[100%] mb-1 sm:mb-[0%]">
-        <div className="w-[90%] mx-auto ">
+      <div className="w-[90%] mx-auto mb-1 sm:mb-[3%]">
+        <div className=" ">
           <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[8px] xl:mb-[10px] capitalize">
             {/* <span className="!text-green-600">SARANG BY SUMADHARA </span> */}
             {title}
@@ -266,8 +267,20 @@ const ProjectCarousel = ({
             {content}
           </p>
         </div>
-
-        <MainCarousel>
+        <NewCarousel
+          data={data}
+          renderItem={(project: any, index) => (
+            <PropertyCard
+            type={type}
+            cardData={project}
+            mutate={mutate}
+            ct={ct ?? "other"}
+          />
+          )}
+          slidesToShow={4}
+          gap={10}
+        />
+        {/* <MainCarousel>
           {data &&
             data?.map((project: any, index: number) => {
               return (
@@ -284,7 +297,7 @@ const ProjectCarousel = ({
                 </CarouselSlide>
               );
             })}
-        </MainCarousel>
+        </MainCarousel> */}
       </div>
     )
   );

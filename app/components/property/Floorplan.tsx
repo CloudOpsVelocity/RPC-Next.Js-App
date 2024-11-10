@@ -79,13 +79,32 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
               className="flex justify-center items-center h-[300px] lg:h-[450px] cursor-pointer self-center m-auto"
               onClick={handleOpen}
             >
-              <Image
-                src={data?.projMedia?.floorPlanUrl ?? ImgNotAvail}
+              {
+                data?.projMedia?.floorPlanUrl ? (
+                  <div className="w-[300px] h-[300px] relative">
+             <picture>
+                <source media="(max-width: 460px)" srcSet={data?.projMedia?.floorPlanUrl.split(',')[1]} />
+                <source media="(max-width: 768px)" srcSet={data?.projMedia?.floorPlanUrl.split(',')[2]} />
+                <source media="(min-width: 1200px)" srcSet={data?.projMedia?.floorPlanUrl.split(',')[3]} />
+                <Image
+                  alt="floor plan"
+                  src={data?.projMedia?.floorPlanUrl}
+                  fill
+                  className="h-full w-full m-auto"
+                  unoptimized
+                />
+             </picture>
+                  </div>
+     
+              ) : (
+                <Image
+                src={ImgNotAvail}
                 width={300}
                 height={300}
                 alt=""
                 className="h-full w-full m-auto "
               />
+              )}
             </div>
             <button onClick={() => setOpened(true)}>
               <div className="bg-[#F4FBFF] p-[10px] rounded-[29px] mt-2  sm:mt-0 gap-[12px] flex justify-end items-center  cursor-pointer absolute bottom-5 right-4 z-50 shadow-[0px_4px_12px_0px_rgba(0,0,0,0.40)]">

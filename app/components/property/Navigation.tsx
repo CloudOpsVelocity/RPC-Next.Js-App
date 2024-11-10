@@ -64,12 +64,6 @@ export default function Navigation({
     bhkId,
     propType: listingProps[propTypeName.trim() as keyof typeof listingProps],
   });
-  const { data: similarProjects, mutate } = useNearbyProjects({
-    lat,
-    lng,
-    projId,
-    builderId: relateProjData?.builderId,
-  });
 
   let similarAvl = similarData?.otherListing.length > 1;
   let SimilatListingAvl =
@@ -178,7 +172,7 @@ export default function Navigation({
     <div
       className={clsx(
         "flex justify-center items-center shadow-lg w-full",
-        isSticky && "fixed top-[70px] bg-white shadow-md z-[1000]"
+        isSticky && "fixed top-[70px] bg-white shadow-md z-[10]"
       )}
     >
       {leftScroll > 0 && (

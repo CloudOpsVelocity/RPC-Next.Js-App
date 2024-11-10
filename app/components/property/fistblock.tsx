@@ -118,15 +118,21 @@ const PropertyFirstBlock: React.FC<Props> = ({
                   /*  h={750} */
                   w={"full"}
                 >
-                  <Image
-                    alt="project image"
-                    src={imageUrl}
-                    fill
-                    className={`!w-full sm:!rounded-[10px]  h-[330px] sm:max-h-[549px] !xl:h-[750px] xl:max-h-[750px] bg-gray-${
-                      index + 1
-                    }`}
-                    quality={100}
-                  />
+                  <picture>
+                    <source media="(max-width: 460px)" srcSet={imageUrl.split(',')[1]} />
+                    <source media="(max-width: 768px)" srcSet={imageUrl.split(',')[2]} />
+                    <source media="(min-width: 1200px)" srcSet={imageUrl.split(',')[3]} />
+                    <Image
+                      alt="project image"
+                      src={imageUrl.split(',')[3]}
+                      fill
+                      className={`!w-full sm:!rounded-[10px]  h-[330px] sm:max-h-[549px] !xl:h-[750px] xl:max-h-[750px] bg-gray-${
+                        index + 1
+                      }`}
+                      unoptimized
+                      
+                    />
+                  </picture>
                 </Carousel.Slide>
               ))}
             </Carousel>

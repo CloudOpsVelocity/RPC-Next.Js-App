@@ -117,12 +117,12 @@ export default function GalleryBlock({
               ) : (
                 <picture>
                   <source media="(max-width: 460px)" srcSet={selectedMedia.split(',')[1]} />
-                  <source media="(max-width: 768px)" srcSet={selectedMedia.split(',')[2]} />
-                  <source media="(min-width: 1200px)" srcSet={selectedMedia.split(',')[3]} />
+                  <source media="(max-width: 800px)" srcSet={selectedMedia.split(',')[2]} />
+                  {/* <source media="(min-width: 1200px)" srcSet={selectedMedia.split(',')[3]} /> */}
                   <Image
-                    src={selectedMedia.split(',')[3]}
+                    src={selectedMedia.split(',')[2]}
                     alt="Preview"
-                    className="cursor-pointer object-contain sm:min-h-[220px] sm:max-h-[400px] xl:max-h-[450px]"
+                    className="cursor-pointer object-contain max-w-[799px] sm:min-h-[220px] sm:max-h-[400px] xl:max-h-[450px]"
                     onClick={() => {
                       dispatch({
                         type:"OPEN",
