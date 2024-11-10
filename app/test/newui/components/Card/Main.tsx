@@ -37,6 +37,7 @@ const MainBox = ({ data, refetch }: Props) => {
     shortListed,
     propTypeId,
     isUsed,
+    phaseId
   } = data;
   const [state, setState] = useState({
     compareAdded: compareAdded === "Y" ? true : false,
@@ -144,7 +145,7 @@ const MainBox = ({ data, refetch }: Props) => {
         />
         <div className="relative w-full">
           {overlayData.id &&
-          `${type === "proj" ? projIdEnc : propIdEnc}+${propTypeId}` ===
+          `${type === "proj" ? projIdEnc : propIdEnc}+${propTypeId}${type === "proj" && phaseId ? '+' + phaseId : ''}` ===
             overlayData.id ? (
             <Overlay />
           ) : null}

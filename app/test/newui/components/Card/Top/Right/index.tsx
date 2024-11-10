@@ -42,6 +42,7 @@ export default function TopRightSection({
   propType,
   amenCount,
   category,
+  phaseId
 }: Props) {
   const setSelected = useSetAtom(selectedSearchAtom);
   const [sharePopupData, setSharePopup] = useAtom(searchShareAtom);
@@ -143,7 +144,7 @@ export default function TopRightSection({
                     dispatch({
                       type: "OPEN",
                       content: [],
-                      id: `${projIdEnc}+${propTypeId}`,
+                      id: `${projIdEnc}+${propTypeId}+${phaseId}`,
                       title: "Amenities",
                       conType: "amenities",
                       pType: type,
@@ -292,7 +293,7 @@ export default function TopRightSection({
                     dispatch({
                       type: "OPEN",
                       content: [],
-                      id: `${projIdEnc}+${propTypeId}`,
+                      id: `${projIdEnc}+${propTypeId}${phaseId ? `+${phaseId}` : ''}`,
                       title: "Amenities",
                       conType: "amenities",
                       pType: type,
@@ -325,7 +326,7 @@ export default function TopRightSection({
                       "Pharmacy",
                       "Veterinary Clinic",
                     ],
-                    id: `${projIdEnc}+${propTypeId}`,
+                    id: `${projIdEnc}+${propTypeId}${phaseId ? `+${phaseId}` : ''}`,
                     title: `NearBy Locations of ${projName}`,
                     conType: "nearby",
                     pType: type,

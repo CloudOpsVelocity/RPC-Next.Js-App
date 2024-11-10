@@ -20,16 +20,17 @@ export default function useProjectCardData({ id, isOpen, conType, pType }: Props
 }
 
 function getQueryConfig(conType: string, id: string, isOpen: boolean, type: string) {
+  const idToUse = id.includes('+') ?  id.split('+')[0] : id;
   if (conType === "amenities") {
     return {
-      queryKey: [conType + id],
-      queryFn: () => getAmenties(id, type),
+      queryKey: [conType + idToUse],
+      queryFn: () => getAmenties(idToUse, type),
       enabled: isOpen,
     };
   } else if (conType === "nearby") {
     return {
-      queryKey: [conType + id],
-      queryFn: () => getNearByLocations(id, type),
+      queryKey: [conType + idToUse],
+      queryFn: () => getNearByLocations(idToUse, type),
       enabled: isOpen,
     };
   }
@@ -57,7 +58,7 @@ async function getAmenties(id: string, type: string) {
     const res = await fetch(
       `${
         process.env.NEXT_PUBLIC_BACKEND_URL
-      }/api/project/get-amenities?projIdEnc=${id.split("+")[0]}&iden=${type == "proj" ? "P" : "L"}`
+      }/api/project/get-amenities?projIdEnc=${id}&iden=${type == "proj" ? "P" : "L"}`
     );
     return await res.text();
   } catch (error) {
