@@ -724,8 +724,6 @@ const MiddleSection = ({
   const [floorsArray, setFloorsArray] = useAtom<any>(floorPlansArray);
   const [, { open }] = useSubFloorPlanPopup();
   const [selectedFloor, setFloor] = useAtom(selectedFloorAtom);
-
-  const { recentUnits, setPreviousFilers } = useRecentUnits();
   const selectImg = (index: number, recentActiveId?: string) => {
     if (recentActiveId) {
       const selectedItem = allUnits.find(
@@ -822,16 +820,21 @@ const MiddleSection = ({
         floorsArray != null &&
         floorsArray.length > 0 &&
         data?.floorPlanUrl ? (
-          <Image
-            // @ts-ignore
-            src={`${data?.floorPlanUrl}`}
-            alt="Floor Plan"
-            height={350}
-            width={800}
-            className="border-none w-full cursor-pointer"
-            style={{ aspectRatio: "800 / 400", objectFit: "contain" }}
-            onClick={open}
-          />
+          <picture>
+            <source media="(max-width: 460px)" srcSet={data?.floorPlanUrl.split(',')[1]} />
+            <source media="(max-width: 768px)" srcSet={data?.floorPlanUrl.split(',')[2]} />
+            <source media="(min-width: 1200px)" srcSet={data?.floorPlanUrl.split(',')[3]} />
+            <Image
+              // @ts-ignore
+              src={`${data?.floorPlanUrl}`}
+              alt="Floor Plan"
+              height={350}
+              width={800}
+              className="border-none w-full cursor-pointer"
+              style={{ aspectRatio: "800 / 400", objectFit: "contain" }}
+              onClick={open}
+            />
+          </picture>
         ) : (
           <div className="flex justify-center items-center flex-col h-[391px] ">
             <FloorPlanModalIcon />
@@ -871,7 +874,7 @@ const MiddleSection = ({
               renderItem={(eachObj: any, index: number) => (
                 <div
                   className={clsx(
-                    " sm:h-[50px]  w-[100px] sm:max-w-[250px] flex justify-center items-center shadow-md  scrollbar-hide rounded-[5px] border-[0.5px] border-solid border-[#92B2C8]",
+                    " sm:h-[50px] relative  w-[100px] sm:max-w-[250px] flex justify-center items-center shadow-md  scrollbar-hide rounded-[5px] border-[0.5px] border-solid border-[#92B2C8]",
                     selectedFloor?.floorPlanUrl == eachObj?.floorPlanUrl &&
                       "shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] border-2 border-solid border-[#59A1D6]"
                   )}
@@ -879,16 +882,18 @@ const MiddleSection = ({
                   <Image
                     // @ts-ignore
                     src={
-                      eachObj?.floorPlanUrl
-                        ? `${eachObj?.floorPlanUrl}`
+                      eachObj?.floorPlanUrl.split(',')[1]
+                        ? `${eachObj?.floorPlanUrl.split(',')[1]}`
                         : ImgNotAvail
                     }
                     alt="Floor Plan"
-                    width={57}
-                    height={37}
+                    // width={57}
+                    // height={37}
+                    fill
                     className="w-full h-full cursor-pointer rounded-[5px]"
                     style={{ aspectRatio: "100 / 50", objectFit: "cover" }}
                     onClick={() => selectImg(index)}
+                    unoptimized
                   />
                 </div>
               )}

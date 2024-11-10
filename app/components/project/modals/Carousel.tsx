@@ -188,9 +188,9 @@ const ImageContainer = ({ url }: any) => {
           justifyContent: "center",
           alignItems: "center",
         }}
-      >
+      > 
         <Image
-          src={url}
+          src={url.split(",")[0]}
           radius="md"
           h={isMobile ? 300 : isTab ? 400 : 600}
           fit="contain"

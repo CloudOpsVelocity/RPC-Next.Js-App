@@ -30,7 +30,9 @@ export default function NearByCarousel({
     y: "N",
     type: "proj",
   });
-
+  const getImageSizes = (array:number[]) =>{
+     
+  }
   return (
     <div className="flex flex-col justify-start items-start w-full  mt-[4%] sm:mt-0 xl:pt-less-screen-spacing ">
       <ProjectCarousel

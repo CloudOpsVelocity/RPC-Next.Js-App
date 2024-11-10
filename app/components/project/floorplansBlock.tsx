@@ -582,19 +582,27 @@ Props) {
                             formatNumberWithSuffix(selectedFloor?.plotArea) +
                             " sq.ft"}
                       </p>
-                      <div className="flex justify-center items-end max-h-[240px] sm:max-h-[450px] lg:h-[450px] w-full relative ">
+                      <div className="flex justify-center items-end min-h-[240px] max-h-[240px] sm:max-h-[450px] lg:h-[450px] w-full relative ">
                         {selectedFloor?.floorPlanUrl ? (
-                          <Image
-                            width={500}
-                            height={500}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleOpen();
-                            }}
-                            src={selectedFloor?.floorPlanUrl}
-                            className="w-full h-full cursor-pointer  object-contain"
-                            alt="image"
-                          />
+                          <picture>
+                   <source media="(max-width: 560px)" srcSet={selectedFloor?.floorPlanUrl.split(',')[1]} />
+                    <source media="(max-width: 768px)" srcSet={selectedFloor?.floorPlanUrl.split(',')[2]} />
+                    <source media="(min-width: 1200px)" srcSet={selectedFloor?.floorPlanUrl.split(',')[3]} />
+                            <Image
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleOpen();
+                              }}
+                              src={selectedFloor?.floorPlanUrl}
+                              className="w-full h-full cursor-pointer object-contain"
+                              alt="image"
+                              fill
+                              unoptimized
+                            />
+                            {/* two ways to use it a global component and sencond USE GLOBAL VARIABLES I NEED 
+                             TO KNOW SPLIT IT BEFORE GLOBAL COMPONENT IT WILL BE VERY TO DIFF TO DIFF
+                            */}
+                          </picture>
                         ) : (
                           <div className="flex justify-center items-center flex-col min-w-fit ">
                             <Image

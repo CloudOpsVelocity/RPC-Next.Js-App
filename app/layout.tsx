@@ -112,7 +112,7 @@ export default function RootLayout({
           }}
         /> */}
       </head>
-      <GoogleTagManager gtmId="G-17JGNNST9D" />
+      <GoogleTagManager gtmId="G-17JGNNST9D"   />
 
       <body className={inter.className}>
         <MantineProvider theme={MantineTheme}>

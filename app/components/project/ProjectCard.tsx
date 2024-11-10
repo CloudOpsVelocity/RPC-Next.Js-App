@@ -125,6 +125,7 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
           </div>
         )}
 
+
         <div className="px-3 pb-3">
           {type != "proj" && (
             <p className="mb-[-30px] relative z-10 p-[2px] text-[#148B16] text-[14px] font-[700] w-[40%] flex pl-[4px] justify-center items-center bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 shadow-md rounded-[18px] border-[#92B2C8] border-[0.5px] border-solid ">
@@ -133,6 +134,7 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
                 : "Under Construction"}
             </p>
           )}
+          
           <div className="relative  max-h-[212px]">
             <div className="mb-4 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] object-cover min-h-[212px] max-h-[212px] relative">
             <Image
