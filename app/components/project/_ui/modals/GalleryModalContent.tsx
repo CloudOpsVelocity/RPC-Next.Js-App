@@ -243,10 +243,12 @@ const openSharePopup = useSetAtom(searchShareAtom)
             >
               {state.mediaType === 'image' ? (
                 <Image
-                  src={item}
+                  src={item.split(',')[1]}
                   alt={item}
                   layout="fill"
                   objectFit="cover"
+                  unoptimized
+                  
                 />
               ) : (
                   item.includes('youtube') ?    <Image

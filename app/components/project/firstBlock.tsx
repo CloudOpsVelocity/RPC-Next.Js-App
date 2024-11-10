@@ -93,7 +93,7 @@ const FirstBlock: React.FC<Props> = ({
             <SharePopup className="text-sm p-[4px]  sm:text-xl hidden sm:flex" />
           </div>
 
-          <div className="relative w-full sm:!rounded-[10px]">
+          <div className="relative w-full sm:!rounded-[10px]  h-[330px] sm:max-h-[545px] !xl:h-[750px] xl:max-h-[750px]">
             <Carousel
               classNames={styles}
               slideGap={{ base: 0, sm: "md" }}
@@ -120,7 +120,7 @@ const FirstBlock: React.FC<Props> = ({
                       alt="project image"
                       src={imageUrl.split(',')[3]}
                       fill
-                      className={`!w-full sm:!rounded-[10px] h-[330px] sm:max-h-[545px] !xl:h-[750px] xl:max-h-[750px] bg-gray-${
+                      className={` bg-gray-${
                         index + 1
                       }`}
                       unoptimized

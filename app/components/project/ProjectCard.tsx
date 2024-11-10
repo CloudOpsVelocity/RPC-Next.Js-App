@@ -1,7 +1,5 @@
 "use client";
 import React from "react";
-import MainCarousel from "../molecules/carousel/main";
-import { CarouselSlide } from "@mantine/carousel";
 import Image from "next/image";
 import Button from "../../elements/button";
 import { Phone, Shorlisted, shortlistIconSvg } from "@/app/images/commonSvgs";
@@ -136,17 +134,22 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
             </p>
           )}
           <div className="relative  max-h-[212px]">
+            <div className="mb-4 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] object-cover min-h-[212px] max-h-[212px] relative">
             <Image
               src={
                 type === "proj"
-                  ? cardData.coverUrl
-                  : cardData.projMedia.coverImageUrl
+                  ? cardData.coverUrl.split(',')[1]
+                  : cardData.projMedia.coverImageUrl.split(',')[1]
               }
               alt="Sobha Dream Acres"
-              className="w-full  mb-4 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] object-cover min-h-[212px] max-h-[212px]  "
-              width={300}
-              height={212}
+              className="w-full    "
+              // width={300}
+              // height={212}
+              unoptimized
+              fill
             />
+            </div>
+           
             {type == "proj" &&
               (cardData.rerastatus === "Recieved" ||
                 cardData.rerastatus === "Applied") && (
