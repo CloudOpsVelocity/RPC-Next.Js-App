@@ -108,7 +108,7 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
               )}
             </div>
             <button onClick={() => setOpened(true)}>
-              <div className="bg-[#F4FBFF] p-[10px] rounded-[29px] mt-2  sm:mt-0 gap-[12px] flex justify-end items-center  cursor-pointer absolute bottom-5 right-4 z-50 shadow-[0px_4px_12px_0px_rgba(0,0,0,0.40)]">
+              <div className="bg-[#F4FBFF] p-[10px] rounded-[29px] mt-2  sm:mt-0 gap-[12px] flex justify-end items-center  cursor-pointer absolute bottom-5 right-4 z-[1] shadow-[0px_4px_12px_0px_rgba(0,0,0,0.40)]">
                 <p className="text-[#0073C6] text-[12px] xl:text-xl not-italic font-semibold leading-[normal] underline capitalize">
                   Click on image to open floor plan
                 </p>

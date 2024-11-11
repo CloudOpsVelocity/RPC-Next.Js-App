@@ -22,6 +22,7 @@ import CompareError from "@/app/components/property/actions/Error";
 import NearByCarouselProjProperty from "@/app/components/property/carousel/ProjectCarouse";
 import ListingBreadCrumbs from "@/app/components/property/BreadCrumb/ListingBreadcrumb";
 import ProjectGallery from "@/app/components/project/_ui/modals/GallerySectionModal";
+import SharePopup from "@/app/(dashboard)/search/components/SharePopup";
 type Props = {
   data: any;
   totalPrice: number;
@@ -209,6 +210,7 @@ export default function ListingDetailsPage({
         <LoginPopup />
         <ProjectDrawer projName={TITLE_OF_PROP} />
         <CompareError />
+        <SharePopup />
       </div>
     </div>
   );

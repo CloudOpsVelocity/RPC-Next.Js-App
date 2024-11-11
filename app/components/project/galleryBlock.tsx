@@ -152,7 +152,7 @@ export default function GalleryBlock({
                     activeIndex:isVideo ? videos.indexOf(selectedMedia) : images.indexOf(selectedMedia)
                   }
                 })}}
-                className="absolute bottom-7 sm:bottom-3 right-1 xl:right-3 z-[100] "
+                className="absolute bottom-7 sm:bottom-3 right-1 xl:right-3 z-[1] "
               >
                 <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] " /> 
               </button>

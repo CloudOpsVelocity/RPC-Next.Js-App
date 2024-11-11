@@ -1,7 +1,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
-import { FiX, FiShare2, FiDownload, FiChevronLeft, FiChevronRight, FiPlay, FiPause, FiZoomIn, FiZoomOut } from 'react-icons/fi'
+import { FiX, FiShare2, FiDownload, FiChevronLeft, FiChevronRight, FiPlay, FiPause, FiZoomIn, FiZoomOut, FiRotateCcw } from 'react-icons/fi'
 import ReactPlayer from 'react-player'
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch'
 import { GrPowerReset } from 'react-icons/gr'
@@ -170,7 +170,7 @@ const openSharePopup = useSetAtom(searchShareAtom)
              className="p-2 md:p-3 hover:bg-gray-800 rounded-full transition-colors bg-black"
              aria-label="Reset zoom"
            >
-             <GrPowerReset className="w-5 h-5" color='white' />
+             <FiRotateCcw className="w-5 h-5" color='white' />
            </button>
          </div>
          <TransformComponent wrapperStyle={{
