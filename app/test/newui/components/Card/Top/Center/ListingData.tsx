@@ -38,6 +38,7 @@ export default function ListingData({
   towerData,
   availableFor,
   propIdEnc,
+  phaseId,
 }: Props) {
   const isMobile = useMediaQuery("(max-width: 1600px)");
   const isPlot = propTypeId == 32;
@@ -185,7 +186,7 @@ export default function ListingData({
                     content: projectAbout,
                     id: `${
                       type === "proj" ? projIdEnc : propIdEnc
-                    }+${propTypeId}`,
+                    }+${propTypeId}${type === "proj" && phaseId ? '+' + phaseId : ''}`,
                     title: type === "proj" ? "About Project" : "About Property",
                     type: "OPEN",
                     conType: "readmore",
