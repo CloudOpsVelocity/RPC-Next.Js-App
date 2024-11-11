@@ -29,7 +29,7 @@ export default function CompareList({ cg, propTypeName }: any) {
     if (session) {
       mutate(3);
       toggleCompare({
-        id: slug,
+        id: slug.split("-")[1],
         status: data?.compareAdded ? "N" : "Y",
         source: "prop",
       });

@@ -27,7 +27,7 @@ export default function ShortList({ cg, propTypeName }: any) {
     if (session) {
       mutate(2);
       toggleShortlist({
-        id: slug,
+        id: slug.split("-")[1],
         status: data?.shortListed ? "N" : "Y",
         source: "prop",
       });

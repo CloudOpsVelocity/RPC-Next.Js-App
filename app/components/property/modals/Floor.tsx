@@ -271,6 +271,18 @@ const RightSection = ({ propCgId }: any) => {
             </p>
           </div>
         )}
+        {propCgId != projectprops.plot && data.ba && (
+          <div className="flex items-center space-x-3">
+            {propertyDetailsSvgs.caretarea}
+            <p className="text-[#4D6677] text-[14px] font-[500]">
+              Balcony Area:
+              <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
+                {" "}
+                {data.ba} sq.ft
+              </span>
+            </p>
+          </div>
+        )}
 
         {(propCgId == projectprops.villa ||
           propCgId == projectprops.rowHouse ||
@@ -313,7 +325,7 @@ const RightSection = ({ propCgId }: any) => {
                 Plot Area:
                 <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
                   {" "}
-                  {formatNumberWithSuffix(data.plotArea)} sq.ft
+                  {formatNumberWithSuffix(data.plotArea,false)} sq.ft
                 </span>
               </p>
             </div>

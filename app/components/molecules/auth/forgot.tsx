@@ -56,7 +56,7 @@ function ForgotForm() {
   });
   const onSubmit = async (values: any) => {
     setStatus("pending");
-    const data = await resendOtp(values.mobile);
+    const data = await resendOtp(values.mobile,'pwd_change');
     if (data?.status) {
       setStatus("otp");
       open();

@@ -882,8 +882,8 @@ const MiddleSection = ({
                   <Image
                     // @ts-ignore
                     src={
-                      eachObj?.floorPlanUrl.split(',')[1]
-                        ? `${eachObj?.floorPlanUrl.split(',')[1]}`
+                      eachObj?.floorPlanUrl?.split(',')[1]
+                        ? `${eachObj?.floorPlanUrl?.split(',')[1]}`
                         : ImgNotAvail
                     }
                     alt="Floor Plan"

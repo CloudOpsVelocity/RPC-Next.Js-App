@@ -27,12 +27,14 @@ type Props = {
   projectDetails: Main | null;
   projName: string;
   totalPrice: number;
+  isOkWithBrokerContact: boolean;
 };
 
 const PropertyFirstBlock: React.FC<Props> = ({
   projectDetails,
   projName,
   totalPrice,
+  isOkWithBrokerContact,
 }) => {
   const images = getImageUrls(projectDetails?.projMedia as any);
   const autoplay = useRef(Autoplay({ delay: 10000 }));
@@ -45,7 +47,7 @@ const PropertyFirstBlock: React.FC<Props> = ({
     if (element) {
       element.scrollIntoView({
         behavior: "smooth",
-        block: "start", 
+        block: "start",
         inline: "center",
       });
       setSticky(true);
@@ -69,17 +71,19 @@ const PropertyFirstBlock: React.FC<Props> = ({
       slug: data?.data?.userName,
       city: projectDetails?.ctName as string,
     });
-  const isBuilder = get_posted_by(projectDetails?.postedByName) === "Builder";
+  const isBuilder = (projectDetails?.postedByType) === "B";
   return (
     <div
       className={`relative rounded-[10px] w-full m-auto bg-gray-50 sm:h-[549px]  xl:h-[750px] bg-cover flex justify-between items-start flex-col shadow-md break-words`}
     >
       {projectDetails && (
         <>
-          <BrokerContactTag
-            isBrokerAllowed
-            className="absolute top-0 left-0 z-[100]"
-          />
+          {isOkWithBrokerContact ? (
+            <BrokerContactTag
+              isBrokerAllowed
+              className="absolute right-0 bottom-0 sm:right-auto sm:bottom-auto sm:top-0 sm:left-0 z-[100]"
+            />
+          ) : null}
           <div className="absolute m-[2%] z-10 right-2">
             <p className="shadow-md rounded-[10px] bg-gradient-to-r p-[8px] from-[#EFF5FF] /0  to-[#F2FAFF]/100 text-[#000] text-[12px] sm:text-[16px] xl:text-xl not-italic font-medium leading-[normal]">
               Listing Status:{" "}
@@ -119,18 +123,26 @@ const PropertyFirstBlock: React.FC<Props> = ({
                   w={"full"}
                 >
                   <picture>
-                    <source media="(max-width: 460px)" srcSet={imageUrl.split(',')[1]} />
-                    <source media="(max-width: 768px)" srcSet={imageUrl.split(',')[2]} />
-                    <source media="(min-width: 1200px)" srcSet={imageUrl.split(',')[3]} />
+                    <source
+                      media="(max-width: 460px)"
+                      srcSet={imageUrl.split(",")[1]}
+                    />
+                    <source
+                      media="(max-width: 768px)"
+                      srcSet={imageUrl.split(",")[2]}
+                    />
+                    <source
+                      media="(min-width: 1200px)"
+                      srcSet={imageUrl.split(",")[3]}
+                    />
                     <Image
                       alt="project image"
-                      src={imageUrl.split(',')[3]}
+                      src={imageUrl.split(",")[3]}
                       fill
                       className={`!w-full sm:!rounded-[10px]  h-[330px] sm:max-h-[549px] !xl:h-[750px] xl:max-h-[750px] bg-gray-${
                         index + 1
                       }`}
                       unoptimized
-                      
                     />
                   </picture>
                 </Carousel.Slide>

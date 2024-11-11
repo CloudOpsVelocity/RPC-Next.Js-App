@@ -175,6 +175,11 @@ export function generatePropertyDetails(
           value: data.ba && `${formatNumberWithSuffix(data.ba, false)} sq.ft`,
           Icon: TotalLandArea,
         },
+        {
+          title: "Floor",
+          value: data.atFloor,
+          Icon: Marble,
+        },
       ];
 
       if (cg === "R") {
@@ -314,7 +319,12 @@ export function generatePropertyDetails(
         { title: "Property Type", value: data.propTypeName, Icon: Marble },
         { title: "Phase", value: data.phaseName, Icon: Marble },
         { title: "Tower", value: data.tower, Icon: TowerIcon },
-        { title: "Floor", value: data.atFloor, Icon: Marble },
+        { title: "At Floor", value: data.atFloor, Icon: Marble },
+        {
+          title: "Total Floors",
+          value: `${data.totalFloor}`,
+          Icon: Marble,
+        },
         { title: "Block", value: data.block, Icon: Block },
         { title: "House Number", value: data.unitNumber, Icon: Marble },
         { title: "Facing", value: data.facingName, Icon: Marble },

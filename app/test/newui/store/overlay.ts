@@ -59,7 +59,7 @@ const overlayReducer = (
     case "OPEN":
       if (action.conType === "otherCharges") {
         let content = action.content.charges;
-        console.log(content);
+
         const formattedContent = [
           { label: "Price", value: `₹${formatNumber(content.price)}` },
           ...(content.clubHouseCharge
@@ -116,6 +116,33 @@ const overlayReducer = (
               content.legalCharge === "NA"
                 ? "Already Included"
                 : formatNumber(content.legalCharge),
+          },
+          {
+            label: "Electricity Charges",
+            value:
+              content.elctCharge === "NA"
+                ? "Already Included"
+                : content.elctCharge === "A"
+                ? "Lifetime"
+                : formatNumber(content.elctCharge),
+          },
+          {
+            label: "Water Charges",
+            value:
+              content.waterCharge === "NA"
+                ? "Already Included"
+                : content.waterCharge === "A"
+                ? "Lifetime"
+                : formatNumber(content.waterCharge),
+          },
+          {
+            label: "Maintenance Charges",
+            value:
+              content.maintananceChargess === "NA"
+                ? "Already Included"
+                : content.maintananceChargess === "A"
+                ? "Lifetime"
+                : formatNumber(content.maintananceChargess),
           },
           ...(content.otherCharge
             ? content.otherCharge.split(",").map((charge: string) => {

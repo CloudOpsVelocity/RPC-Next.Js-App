@@ -137,7 +137,7 @@ const Resend = ({ userName }: any): JSX.Element => {
       setTimeRemaining({ minutes: 0, seconds: 30 });
       setTimerRunning(true);
     }
-    await resendOtp(userName);
+    await resendOtp(userName,"newregistration");
   };
 
   const { minutes, seconds } = timeRemaining;

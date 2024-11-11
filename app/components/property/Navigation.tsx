@@ -130,14 +130,6 @@ export default function Navigation({
     setTimeout(() => setIsScrolling(false), 2000);
   }
   const conditionsArray = [
-    {
-      key: "ratings",
-      condtion:
-        data?.status &&
-        data?.reviewDataList?.filter((item: any) => item.userReview).length > 0
-          ? true
-          : false,
-    },
     { condtion: true, key: "overview" },
     { condtion: data?.usp, key: "about" },
     { condtion: true, key: "propertyDetails" },

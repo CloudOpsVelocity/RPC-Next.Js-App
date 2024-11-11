@@ -66,6 +66,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             projectDetails={data}
             projName={data.propName}
             totalPrice={totalPrice}
+            isOkWithBrokerContact={!!data.isOkWithBrokerContact}
           />
         </div>
         {/* Navigations Container */}

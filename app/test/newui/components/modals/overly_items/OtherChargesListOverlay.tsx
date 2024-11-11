@@ -8,7 +8,6 @@ const OtherCharges: React.FC = () => {
   if (!content || content.length === 0) {
     return <div>No charges available</div>;
   }
-  console.log(content.data);
   return (
     <div className="overflow-x-auto">
       <table className="min-w-full bg-white border border-gray-200 rounded-md shadow-md">

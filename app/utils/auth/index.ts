@@ -2,13 +2,14 @@ import { BACKEND_BASE_URL } from "@/app/env";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-const resendOtp = async (mobile: number | null) => {
+const resendOtp = async (mobile: number, type:"newregistration" | 'pwd_change' | 'requestCallbackOtp' | 'priceQouteOtp') => {
   if (!mobile) return;
   try {
     const res = await axios.post(
       `${BACKEND_BASE_URL}/user/v1/sendMobileAndEmailOTP`,
       {
         username: mobile,
+        otpType: type,
       }
     );
     if (!res.data.status) {

@@ -34,7 +34,7 @@ export default function ReportModal({ issueData }: any) {
     try {
       const singleString = reportStatus.join(", ");
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/report?id=${slug}&iden=L`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/report?id=${slug.split("-")[1]}&iden=L`,
         {
           method: "POST",
           headers: {

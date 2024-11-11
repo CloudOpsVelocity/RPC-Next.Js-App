@@ -133,7 +133,7 @@ const Resend = ({ userName }: any): JSX.Element => {
       setTimeRemaining({ minutes: 0, seconds: 30 });
       setTimerRunning(true);
     }
-    await resendOtp(userName);
+    await resendOtp(userName,'pwd_change');
   };
 
   const { minutes, seconds } = timeRemaining;

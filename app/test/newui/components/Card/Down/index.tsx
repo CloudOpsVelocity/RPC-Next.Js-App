@@ -112,26 +112,31 @@ export default function CardDownSection({
             >
               Highlights
             </button> */}
-            <button
-              className="bg-orange-600 text-white text-[12px] sm:text-sm py-0 font-bold px-1 sm:py-1 xl:px-2  rounded shadow-md hover:bg-orange-800  transition duration-300 ease-in-out"
-              onClick={() =>
-                dispatch({
-                  content: [],
-                  conType: "amenities",
-                  title: "Amenities",
-                  id: `${
-                    type === "proj" ? projIdEnc : propIdEnc
-                  }+${propTypeId}`,
-                  type: "OPEN",
-                  pType: type,
-                })
-              }
-            >
-              <span className="bg-white rounded-full text-black px-2">
-                {amenCount}
-              </span>{" "}
-              Amenities
-            </button>
+            {
+              amenCount > 0 && (
+                <button
+                className="bg-orange-600 text-white text-[12px] sm:text-sm py-0 font-bold px-1 sm:py-1 xl:px-2  rounded shadow-md hover:bg-orange-800  transition duration-300 ease-in-out"
+                onClick={() =>
+                  dispatch({
+                    content: [],
+                    conType: "amenities",
+                    title: "Amenities",
+                    id: `${
+                      type === "proj" ? projIdEnc : propIdEnc
+                    }+${propTypeId}`,
+                    type: "OPEN",
+                    pType: type,
+                  })
+                }
+              >
+                <span className="bg-white rounded-full text-black px-2">
+                  {amenCount}
+                </span>{" "}
+                Amenities
+              </button>
+              )
+            }
+           
           </>
         )}
       </div>
