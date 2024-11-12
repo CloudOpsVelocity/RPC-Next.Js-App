@@ -188,7 +188,6 @@ const OtherDetails = ({
   cunstructionType,
   boundryWallEnclose,
   isUsed,
-  isPetFirendly
 }: Main) => {
   return (
     <div
@@ -300,7 +299,7 @@ const OtherDetails = ({
             <RoomBasicDetails
               icon={<PetFreindly />}
               title="Pet Friendly"
-              value={isPetFirendly === 1 ? `Pets Are Allowed` : `Pets Are Not Allowed`}
+              value={ispetFriendly === 1 ? `Pets Are Allowed` : `Pets Are Not Allowed`}
               className={style.card}
             />
             <RoomBasicDetails
