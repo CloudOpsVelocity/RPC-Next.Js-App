@@ -62,6 +62,7 @@ export default function ListingDetailsPage({
             projName={data.propName}
             totalPrice={totalPrice}
             isOkWithBrokerContact={data.isOkWithBrokerContact}
+            isUsed={data.isUsed}
           />
         </div>
         {/* Navigations Container */}

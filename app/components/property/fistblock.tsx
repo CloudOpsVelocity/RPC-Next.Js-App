@@ -28,6 +28,7 @@ type Props = {
   projName: string;
   totalPrice: number;
   isOkWithBrokerContact: boolean;
+  isUsed?: string;
 };
 
 const PropertyFirstBlock: React.FC<Props> = ({
@@ -35,6 +36,7 @@ const PropertyFirstBlock: React.FC<Props> = ({
   projName,
   totalPrice,
   isOkWithBrokerContact,
+  isUsed,
 }) => {
   const images = getImageUrls(projectDetails?.projMedia as any);
   const autoplay = useRef(Autoplay({ delay: 10000 }));
@@ -81,7 +83,8 @@ const PropertyFirstBlock: React.FC<Props> = ({
           {isOkWithBrokerContact ? (
             <BrokerContactTag
               isBrokerAllowed
-              className="absolute right-0 bottom-0 sm:right-auto sm:bottom-auto sm:top-0 sm:left-0 z-[100]"
+              className="absolute right-0 bottom-0 sm:right-auto sm:bottom-auto sm:top-0 sm:left-0 z-[1]"
+              isUsed={isUsed}
             />
           ) : null}
           <div className="absolute m-[2%] z-10 right-2">
