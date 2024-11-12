@@ -1,7 +1,6 @@
 import axios from "axios";
 
 export const addContact = async (data: any) => {
-  console.log(data);
   const reqKey =
     data.MODAL_TYPE == "PROJECT_REQ_CALLBACK" || data.MODAL_TYPE === "REQ_QUOTE"
       ? "projIdEnc"
@@ -17,7 +16,9 @@ export const addContact = async (data: any) => {
         : "N",
     [reqKey]: data.reqId,
     src: sourceMap.get(data.source),
+    otpType: data.MODAL_TYPE === "REQ_QUOTE" ? "priceQouteOtp" : "requestCallbackOtp",
   };
+
   const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/contact/v1/sendContactOtp`;
   try {
     const response = await axios.post(url, reqData);
@@ -28,7 +29,6 @@ export const addContact = async (data: any) => {
 };
 
 export const sendContact = async (data: any) => {
-  console.log(data);
   const reqKey =
     data.MODAL_TYPE == "PROJECT_REQ_CALLBACK" || data.MODAL_TYPE === "REQ_QUOTE"
       ? "projIdEnc"
