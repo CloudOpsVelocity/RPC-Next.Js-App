@@ -46,7 +46,9 @@ export const SEARCH_FILTER_DATA = {
     { title: "5 BHK + Servant", value: 684 },
     { title: "5.5 BHK", value: 685 },
     { title: "5.5 BHK + Servant", value: 686 },
-    { title: "5+ BHK", value: 687 },
+    { title: "5+ BHK", value: 688 },
+    { title: "6 BHK", value: 689 },
+    { title: "6+ BHK", value: 690 }
   ],
   rerastatus: [
     {

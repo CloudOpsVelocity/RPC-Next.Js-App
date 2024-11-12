@@ -9,7 +9,7 @@ export default function SecurityDeposit({ otherPrice }: { otherPrice: any }) {
       <h4 className={styles.textLite}>{type}</h4>
       <h4 className={styles.textBold}>₹   <NumberFormatter
             thousandSeparator
-            value={security}
+            value={security }
             thousandsGroupStyle="lakh"
           /></h4>
     </div>
@@ -50,7 +50,7 @@ let config = {
       type,
     } = otherPrice;
     let total =
-      securetyType === "M" ? securityMonth * parseInt(price) : security;
+      securetyType === "M" ? securityMonth  : security;
     let text = this.SampleText;
     return { security: total, type: text };
   },

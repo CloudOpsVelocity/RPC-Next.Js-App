@@ -36,7 +36,7 @@ const nextConfig = {
     // minimumCacheTTL: 60 * 100,
 
     remotePatterns: [
-      { hostname: "d2l0lb5gc1bw3t.cloudfront.net" },
+      { hostname: "d2sa15fzpcbn0k.cloudfront.net" },
       { hostname: "daxv8eiot4y5y.cloudfront.net" },
       { hostname: "media.getrightproperty.com" },
       { hostname: "img.youtube.com" },

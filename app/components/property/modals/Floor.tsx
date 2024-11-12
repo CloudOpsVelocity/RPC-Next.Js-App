@@ -173,7 +173,7 @@ const RightSection = ({ propCgId }: any) => {
                 propCgId == projectprops.rowHouse ||
                 propCgId == projectprops.villa
                   ? "At Elevation"
-                  : propCgId === projectprops.independent
+                  : propCgId === projectprops.independent && data.cg === "S"
                   ? "Total No.Of Floors"
                   : "At Floor"
               }:`}

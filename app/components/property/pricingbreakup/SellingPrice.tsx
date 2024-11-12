@@ -30,7 +30,7 @@ export default function SellingPrice({
           />
         </h2>
       </div>
-      {otherPrice.securetyType && (
+      {otherPrice.securetyType && (otherPrice.security || otherPrice.securityMonth) && (
         <SecurityDeposit otherPrice={{ ...otherPrice, price: propertyPrice }} />
       )}
 

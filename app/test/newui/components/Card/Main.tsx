@@ -95,7 +95,7 @@ const MainBox = ({ data, refetch }: Props) => {
         category: data.category === "Sale" ? "for-sale" : "for-rent",
         phase: data.phaseName,
         propIdEnc: data.propIdEnc,
-        bhkUnitType: data.bhkName ? data.bhkName : "" + " " + data.propTypeName,
+        bhkUnitType: data.bhkName ? `${data.bhkName + ' ' + data.propTypeName}` : "" + " " + data.propTypeName,
       });
 
       window.open(url, "_blank");

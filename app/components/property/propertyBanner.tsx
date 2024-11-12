@@ -80,7 +80,7 @@ export default function PropertyBanner({
             )}
             <div className="w-[350px] h-[185px] relative">
             <Image
-              src={media?.coverImageUrl.split(',')[1]}
+              src={media?.coverImageUrl?.split(',')[1]}
               alt="Sobha Dream Acres"
               className="flex  items-center shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[10px]"
             unoptimized
