@@ -80,7 +80,7 @@ export default function page({}: Props) {
             alt="about"
             className="w-[90%] hidden sm:block sm:w-[30%] h-[299.576px]"
             src={
-              "https://d2l0lb5gc1bw3t.cloudfront.net/staticmedia-images-icons/About%20us%20/About%20getrightproperty.png"
+              `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/About%20us%20/About%20getrightproperty.png`
             }
           />
           <Image
@@ -102,7 +102,7 @@ export default function page({}: Props) {
               alt="hero image"
               className="hidden sm:block  w-[36%] h-[299.576px]"
               src={
-                "https://d2l0lb5gc1bw3t.cloudfront.net/staticmedia-images-icons/About%20us%20/best%20service.png"
+                `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/About%20us%20/best%20service.png`
               }
             />
             <div className=" pt-[20px] pb-[20px] sm:pt-[60px] sm:pb-[60px]">
@@ -182,7 +182,7 @@ export default function page({}: Props) {
               alt="hero image"
               className="sm:w-[36%] w-[80%] h-[188px] sm:h-[318px]"
               src={
-                "https://d2l0lb5gc1bw3t.cloudfront.net/staticmedia-images-icons/About%20us%20/founder.png"
+                `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/About%20us%20/founder.png`
               }
             />
             <div className="flex flex-col justify-center items-center sm:items-start ">

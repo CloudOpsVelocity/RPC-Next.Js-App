@@ -82,7 +82,7 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
             >
               {
                 data?.projMedia?.floorPlanUrl ? (
-                  <div className="w-[300px] h-[300px] relative">
+                  <div className="relative">
              <picture>
                 <source media="(max-width: 460px)" srcSet={data?.projMedia?.floorPlanUrl.split(',')[1]} />
                 <source media="(max-width: 768px)" srcSet={data?.projMedia?.floorPlanUrl.split(',')[2]} />
@@ -90,8 +90,10 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
                 <Image
                   alt="floor plan"
                   src={data?.projMedia?.floorPlanUrl}
-                  fill
-                  className="h-full w-full m-auto"
+
+                  width={750}
+                  height={750}
+                  className=" m-auto"
                   unoptimized
                 />
              </picture>

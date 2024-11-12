@@ -57,7 +57,7 @@ export default function RoomDetails({ data }: { data: Main }) {
         title="Listing details"
         desc={`Check the details For ${
           data.propTypeName === "Plot"
-            ? formatNumberWithSuffix(data.plotArea) + " sq.ft"
+            ? formatNumberWithSuffix(data.plotArea,false) + " sq.ft"
             : ""
         } ${data.bhkName ?? ""} ${data.propTypeName} For
         ${data.cg === "S" ? " Sell" : " Rent"}`}

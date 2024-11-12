@@ -62,7 +62,11 @@ export default function Amenties({
         )}
 
         <div className="flex flex-wrap sm:mt-4" >
-       <AmenitiesDisplay data={data} amenitiesData={amenitiesFromDB} />
+          {
+            data && data?.length > 0 && (
+              <AmenitiesDisplay data={data} amenitiesData={amenitiesFromDB} />
+            )
+          }
         </div>
       </div>
     </div>

@@ -22,20 +22,22 @@ interface AmenitiesDisplayProps {
 }
 
 const AmenitiesDisplay = ({ amenitiesData, data }: AmenitiesDisplayProps) => {
-  const [selectedCategory, setSelectedCategory] = useState<string>(Object.keys(amenitiesData)[0]);
   const categories = Object.keys(amenitiesData);
+    // Function to filter subcategories based on available amenities
+    const getAvailableSubCategories = (category: string) => {
+      return Object.keys(amenitiesData[category]).filter((subCategory) => {
+        return amenitiesData[category][subCategory].some((amenity: Amenity) =>
+          data.some((item) => item.id === amenity.cid)
+        );
+      });
+    };
+  
+    const availableCategories = categories.filter((category) => getAvailableSubCategories(category).length > 0);
+  const [selectedCategory, setSelectedCategory] = useState<string>(availableCategories[0]);
 
-  // Function to filter subcategories based on available amenities
-  const getAvailableSubCategories = (category: string) => {
-    return Object.keys(amenitiesData[category]).filter((subCategory) => {
-      return amenitiesData[category][subCategory].some((amenity: Amenity) =>
-        data.some((item) => item.id === amenity.cid)
-      );
-    });
-  };
 
-  const availableCategories = categories.filter((category) => getAvailableSubCategories(category).length > 0);
-
+   
+              
   return (
     <div className="flex flex-col md:flex-row">
       {/* Sidebar Categories */}

@@ -13,7 +13,6 @@ const nextConfig = {
     optimizePackageImports: ["@mantine/core", "@mantine/hooks"],
     // ppr: true,
   },
-  // assetPrefix: "https://d2l0lb5gc1bw3t.cloudfront.net",
   images: {
     // unoptimized: true,
     // imageSizes: [

@@ -96,7 +96,12 @@ const MiddleSection = () => {
             height={500}
           />
         </TransformComponent>
-        <ZoomInOut className="!right-1 !bottom-1" />
+        {
+           data.floorPlanUrl && (
+            <ZoomInOut className="!right-1 !bottom-1" />
+           )
+        }
+        
       </div>
     </div>
   );

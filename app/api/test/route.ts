@@ -41,7 +41,7 @@ function generateUniqueData(count:number) {
     propertyAge: null,
     coverImage: null,
     media: {
-      coverImageUrl: "https://d2l0lb5gc1bw3t.cloudfront.net/images/varify/list/141/cover/cover.webp?v=1728802075505"
+      coverImageUrl: `${process.env.NEXT_PUBLIC_IMG_BASE}/images/varify/list/141/cover/cover.webp?v=1728802075505`
     },
     sqftPrice: 2,
     postedByName: null,

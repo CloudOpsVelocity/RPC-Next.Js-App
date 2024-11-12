@@ -11,10 +11,14 @@ export default function useDynamicProp({
   propId: number;
 }) {
   const { data: Session } = useSession();
-  const { slug } = useParams<{ slug: string }>();
+  const { slug, bhk_unit_type } = useParams<{
+    slug: string;
+    bhk_unit_type: string;
+  }>();
+
   const getData = async () => {
     const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/fetch/dynamic-data?propIdEnc=${slug}&category=${cg}&propType=${propId}`
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/fetch/dynamic-data?propIdEnc=${(slug || bhk_unit_type).split("-")}&category=${cg}&propType=${propId}`
     );
     return res.data;
     // return {
@@ -28,7 +32,7 @@ export default function useDynamicProp({
   };
   const { data, isLoading } = useQuery({
     queryFn: getData,
-    queryKey: ["dynamicproj", slug],
+    queryKey: ["dynamicproj", slug || bhk_unit_type],
     // staleTime: 30000,
     // refetchOnWindowFocus: false,
     // cacheTime: 30000,
@@ -45,11 +49,11 @@ export default function useDynamicProp({
     onMutate: async (data?: number) => {
       // Cancel any outgoing refetches
       // (so they don't overwrite our optimistic update)
-      await queryClient.cancelQueries({ queryKey: ["dynamicproj", slug] });
+      await queryClient.cancelQueries({ queryKey: ["dynamicproj", slug || bhk_unit_type] });
       // Snapshot the previous value
-      const previousTodos = queryClient.getQueryData(["dynamicproj", slug]);
+      const previousTodos = queryClient.getQueryData(["dynamicproj", slug || bhk_unit_type]);
       // Optimistically update to the new value
-      queryClient.setQueryData(["dynamicproj", slug], (old: any) => {
+      queryClient.setQueryData(["dynamicproj", slug || bhk_unit_type], (old: any) => {
         return {
           ...old,
           ...(data === 2
@@ -71,11 +75,11 @@ export default function useDynamicProp({
     onMutate: async (data?: { rating?: string; review?: string }) => {
       // Cancel any outgoing refetches
       // (so they don't overwrite our optimistic update)
-      await queryClient.cancelQueries({ queryKey: ["dynamicproj", slug] });
+      await queryClient.cancelQueries({ queryKey: ["dynamicproj", slug || bhk_unit_type] });
       // Snapshot the previous value
-      const previousTodos = queryClient.getQueryData(["dynamicproj", slug]);
+      const previousTodos = queryClient.getQueryData(["dynamicproj", slug || bhk_unit_type]);
       // Optimistically update to the new value
-      queryClient.setQueryData(["dynamicproj", slug], (old: any) => {
+      queryClient.setQueryData(["dynamicproj", slug || bhk_unit_type], (old: any) => {
         return {
           ...old,
           ...(data?.rating === "Y" ? { userRating: "Y" } : null),

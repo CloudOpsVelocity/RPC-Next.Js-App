@@ -14,7 +14,7 @@ function createPropertyString(data: Main): string {
   } else if (data.propTypeName === config.propTypeNames[3]) {
     return `${data.propName} | Unit No. ${data.unitNumber} | ${
       data.facingName
-    } | Area. ${formatNumberWithSuffix(data.plotArea)} sq.ft`;
+    } | Area. ${formatNumberWithSuffix(data.plotArea,false)} sq.ft`;
   } else if (data.propTypeName === config.propTypeNames[5]) {
     return  `${data.propName} | ${data.bhkName} | ${
       data.cg === "R" ? `At Floor ${data.atFloor}` : `Floor ${data.totalFloor}`
@@ -26,7 +26,7 @@ function createPropertyString(data: Main): string {
       data.tower ? "Tower " + data.tower : ""
     } |At Floor ${data.atFloor === 0 ? "G" : data.atFloor} | Unit No. ${
       data.unitNumber
-    } | ${data.facingName} | Area: ${formatNumberWithSuffix(data.sba)} sq.ft`;
+    } | ${data.facingName} | Area: ${formatNumberWithSuffix(data.sba,false)} sq.ft`;
   }
 }
 

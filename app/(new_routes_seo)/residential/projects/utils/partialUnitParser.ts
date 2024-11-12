@@ -91,7 +91,7 @@ export function paritalUnitParser(input: any[]): TransformedData {
             minPa: priceItem?.minPa,
             maxPa: priceItem?.maxPa,
             floorPlan:
-              "https://d2l0lb5gc1bw3t.cloudfront.net/images/varify/soc/7/35/454/fp.webp?v=1725616219771", // Replace with actual floor plan URL
+              `${process.env.NEXT_PUBLIC_IMG_BASE}/images/varify/soc/7/35/454/fp.webp?v=1725616219771`, // Replace with actual floor plan URL
           };
 
           result[phaseId][propKey][unitType].unitDataDtoList.push(unitDataDto);

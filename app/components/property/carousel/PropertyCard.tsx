@@ -3,7 +3,7 @@ import React from "react";
 import { CarouselSlide } from "@mantine/carousel";
 import Image from "next/image";
 import { Phone, Shorlisted, shortlistIconSvg } from "@/app/images/commonSvgs";
-import { formatCurrency } from "@/app/utils/numbers";
+import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
 import { useSession } from "next-auth/react";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
 import { useShortlistAndCompare } from "@/app/hooks/storage";
@@ -178,8 +178,8 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
 
         <div className="text-sm">
           {type != "proj" && (
-            <p className="mb-[6px] text-[#242424] text-[14px] sm:text-base not-italic font-semibold leading-[normal] tracking-[0.56px] ">
-              {cardData.bhkName} {cardData.propTypeName} for{" "}
+            <p className="mb-[4px] text-[#242424] text-[14px] sm:text-base not-italic font-semibold leading-[normal] tracking-[0.56px] ">
+           {cardData.propTypeName === "Plot" ? formatNumberWithSuffix(cardData.plotArea,false) + " sq.ft" : ""}    {cardData.bhkName} {cardData.propTypeName} for{" "}
               {cardData.cg === "R" ? "Rent" : "Sell"} in {cardData.ltName}{" "}
               <br />
               <span className="text-[18px] font-[700] text-[#148B16] ">
@@ -205,14 +205,14 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
               Available From: {formatDate(cardData.availableFrom)}
             </p>
           )}
-          <p className="text-[#565D70]  not-italic font-semibold leading-[normal] tracking-[0.56px]">
+          <p className="text-[#565D70]  not-italic font-semibold leading-[normal] tracking-[0.56px] mb-1">
             {type === "proj" &&
               `${cardData?.city}, ${cardData.locality}, ${cardData.address}`}
 
-            {type === "prop " &&
-              `${cardData.ltName}   
-                ${cardData.ctName} 
-                ${cardData.stateName ?? ""} 
+            {
+              `${cardData.ltName},   
+                ${cardData.ctName}, 
+                ${cardData.stateName ?? ""}, 
                 ${cardData.pinCode}`}
           </p>
           {type === "proj" && (

@@ -9,6 +9,7 @@ import { useAtom, useSetAtom } from 'jotai'
 import { galleryStateAtom } from '@/app/store/project/gallery'
 import { searchShareAtom } from '@/app/(dashboard)/search/components/SharePopup'
 import { imageUrlParser } from '@/app/utils/image'
+import { newIcons } from '@/app/images/commonSvgs'
 
 type Props = {}
 
@@ -170,7 +171,7 @@ const openSharePopup = useSetAtom(searchShareAtom)
              className="p-2 md:p-3 hover:bg-gray-800 rounded-full transition-colors bg-black"
              aria-label="Reset zoom"
            >
-             <FiRotateCcw className="w-5 h-5" color='white' />
+             {newIcons.get("resetIconWhite")}
            </button>
          </div>
          <TransformComponent wrapperStyle={{

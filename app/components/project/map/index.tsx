@@ -220,7 +220,7 @@ const LeafMap: React.FC<{
             title=""
             desc=""
             className="mb-[40px]"
-            projName={projName}
+            projName={`Location Map Of  ${projName}`}
           />
         ) : (
           <div>

@@ -10,7 +10,10 @@ import { ReportSuccesssMessage } from "@/app/components/project/success";
 import ReportOptions from "./reportOptions";
 
 export default function ReportModal({ issueData }: any) {
-  const { slug } = useParams<{ slug: string }>();
+  const { slug, bhk_unit_type } = useParams<{
+    slug: string;
+    bhk_unit_type: string;
+  }>();
   const [opened, { open, close }] = useDisclosure(false);
   const [errorMsg, seterrorMsg] = useState(false);
   const [status, setStatus] = useState<
@@ -34,7 +37,7 @@ export default function ReportModal({ issueData }: any) {
     try {
       const singleString = reportStatus.join(", ");
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/report?id=${slug.split("-")[1]}&iden=L`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/report?id=${(slug || bhk_unit_type).split("-")[1]}&iden=L`,
         {
           method: "POST",
           headers: {

@@ -50,7 +50,7 @@ let config = {
       type,
     } = otherPrice;
     let total =
-      securetyType === "M" ? securityMonth  : security;
+      securetyType === "M" ? securityMonth * price  : security;
     let text = this.SampleText;
     return { security: total, type: text };
   },

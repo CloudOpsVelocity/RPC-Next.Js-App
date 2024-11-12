@@ -46,19 +46,19 @@ export default function GalleryBlock({
   // const [, { open }] = useGallery();
   const [galleryState,dispatch] = useAtom(galleryStateAtom)
   const handleMediaClick = (media: string, index: number) => {
-    if (isMobile) {
-      const isVideo = videos.includes(media);
-      dispatch({
-        type:"OPEN",
-        payload:{
-          items:images,
-          mediaType:isVideo ? "video" : "image",
-          title:"Project Gallery",
-          activeIndex:index
-        }
-      })
-      // open(isVideo ? "video" : "image", media);
-    }
+    // if (isMobile) {
+    //   const isVideo = videos.includes(media);
+    //   dispatch({
+    //     type:"OPEN",
+    //     payload:{
+    //       items:images,
+    //       mediaType:isVideo ? "video" : "image",
+    //       title:"Project Gallery",
+    //       activeIndex:index
+    //     }
+    //   })
+    //   // open(isVideo ? "video" : "image", media);
+    // }
     setSelectedMedia(media);
     setCurrentSlide(index);
   };
@@ -115,6 +115,7 @@ export default function GalleryBlock({
                   playing
                 />
               ) : (
+                <div className="relative min-h-[220px]  sm:max-h-[400px] xl:max-h-[450px]">
                 <picture>
                   <source media="(max-width: 460px)" srcSet={selectedMedia.split(',')[1]} />
                   <source media="(max-width: 800px)" srcSet={selectedMedia.split(',')[2]} />
@@ -122,7 +123,7 @@ export default function GalleryBlock({
                   <Image
                     src={selectedMedia.split(',')[2]}
                     alt="Preview"
-                    className="cursor-pointer object-contain max-w-[799px] sm:min-h-[220px] sm:max-h-[400px] xl:max-h-[450px]"
+                    className="cursor-pointer object-contain max-w-[799px] "
                     onClick={() => {
                       dispatch({
                         type:"OPEN",
@@ -138,6 +139,7 @@ export default function GalleryBlock({
                     unoptimized
                   />
                 </picture>
+                </div>
               )}
               <button
                 onClick={() => 
@@ -148,13 +150,13 @@ export default function GalleryBlock({
                   payload:{
                     items:isVideo ? videos : images,
                     mediaType:isVideo ? "video" :  "image",
-                    title:"Project Gallery",
+                    title: isVideo ? "Project Video" : "Project Gallery",
                     activeIndex:isVideo ? videos.indexOf(selectedMedia) : images.indexOf(selectedMedia)
                   }
                 })}}
                 className="absolute bottom-7 sm:bottom-3 right-1 xl:right-3 z-[1] "
               >
-                <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] " /> 
+                <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] z-[5]" /> 
               </button>
               {/* <Gallery
                 selectedMedia={selectedMedia}

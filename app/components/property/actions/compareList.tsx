@@ -13,7 +13,10 @@ import { useErrorListing } from "@/app/hooks/property/useError";
 
 export default function CompareList({ cg, propTypeName }: any) {
   const { data: session } = useSession();
-  const { slug } = useParams<{ slug: string }>();
+  const { slug, bhk_unit_type } = useParams<{
+    slug: string;
+    bhk_unit_type: string;
+  }>();
   const { toggleCompare, compareItems } = useShortlistAndCompare();
   const [, { open }] = usePopShortList();
   const [opened, { close, open: openSuccesPopup }] = useErrorListing();
@@ -29,7 +32,7 @@ export default function CompareList({ cg, propTypeName }: any) {
     if (session) {
       mutate(3);
       toggleCompare({
-        id: slug.split("-")[1],
+        id: (slug || bhk_unit_type).split("-")[1],
         status: data?.compareAdded ? "N" : "Y",
         source: "prop",
       });

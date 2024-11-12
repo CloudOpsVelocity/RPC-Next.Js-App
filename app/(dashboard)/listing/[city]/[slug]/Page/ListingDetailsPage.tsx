@@ -91,6 +91,7 @@ export default function ListingDetailsPage({
             heading="about Listing"
             projName={"Listing"}
             content={data.usp}
+            showProjName={false}
           />
         )}
 
@@ -165,6 +166,7 @@ export default function ListingDetailsPage({
                 </div>
               )}{" "}
             </>
+
             {/* )} */}
           </>
         )}

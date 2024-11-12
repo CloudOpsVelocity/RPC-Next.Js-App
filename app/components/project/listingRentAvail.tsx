@@ -136,9 +136,9 @@ const Card = ({
 };
 let config = {
   sellIcon:
-    "https://d2l0lb5gc1bw3t.cloudfront.net/staticmedia-images-icons/project-detail/yellowarrow.png",
+    `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/yellowarrow.png`,
   rentIcon:
-    "https://d2l0lb5gc1bw3t.cloudfront.net/staticmedia-images-icons/project-detail/bluearrow.png",
+    `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/project-detail/bluearrow.png`,
   rentLogo: "/abc/rent.png",
   sellLogo: "/abc/sell.png",
   rentMobileLogo: "/abc/rent.svg",

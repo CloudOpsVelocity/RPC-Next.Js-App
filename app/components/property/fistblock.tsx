@@ -159,7 +159,7 @@ const PropertyFirstBlock: React.FC<Props> = ({
                   <h3 className="text-[18px] sm:text-[22px] xl:text-[28px] font-[700] text-[#001F35] break-words text-wrap w-full">
                     <span className="lowercase">
                       {projectDetails.propTypeName === "Plot"
-                        ? formatNumberWithSuffix(projectDetails.plotArea) +
+                        ? formatNumberWithSuffix(projectDetails.plotArea,false) +
                           " sq.ft"
                         : ""}
                     </span>{" "}
