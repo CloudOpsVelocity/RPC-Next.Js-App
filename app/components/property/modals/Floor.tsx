@@ -97,11 +97,9 @@ const MiddleSection = () => {
           />
         </TransformComponent>
         {
-           data.floorPlanUrl && (
-            <ZoomInOut className="!right-1 !bottom-1" />
-           )
+           data.floorPlanUrl &&
+        <ZoomInOut className="!right-1 !bottom-1" />
         }
-        
       </div>
     </div>
   );
@@ -169,32 +167,45 @@ const RightSection = ({ propCgId }: any) => {
           </p>
         </div>
         {propCgId != projectprops.plot && (
-          <div className="flex items-center space-x-3">
-            {propCgId == projectprops.rowHouse || propCgId == projectprops.villa
-              ? propertyDetailsSvgs.towerName
-              : propertyDetailsSvgs.floor}
-            <p className="text-[#4D6677] text-[14px] font-[500]">
-              {`${
-                propCgId == projectprops.rowHouse ||
-                propCgId == projectprops.villa
-                  ? "At Elevation"
-                  : propCgId === projectprops.independent && data.cg === "S"
-                  ? "Total No.Of Floors"
-                  : "At Floor"
-              }:`}
-              <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
-                {" "}
-                {`${data.isBasement == "Y" ? "B+" : ""}${
-                  data?.floor === 0
-                    ? "G"
-                    : propCgId === projectprops.rowHouse ||
-                      propCgId === projectprops.villa
-                    ? `G+${data?.floor}`
-                    : data?.floor ?? data.totalFloor
-                }`}
-              </span>{" "}
-            </p>
-          </div>
+          <>
+            <div className="flex items-center space-x-3">
+              {propCgId == projectprops.rowHouse || propCgId == projectprops.villa
+                ? propertyDetailsSvgs.towerName 
+                : propertyDetailsSvgs.floor}
+              <p className="text-[#4D6677] text-[14px] font-[500]">
+                {`${
+                  propCgId == projectprops.rowHouse ||
+                  propCgId == projectprops.villa
+                    ? "At Elevation"
+                    : "At Floor"
+                }:`}
+                <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
+                  {" "}
+                  {`${data.isBasement == "Y" ? "B+" : ""}${
+                    data?.floor === 0
+                      ? "G"
+                      : propCgId === projectprops.rowHouse ||
+                        propCgId === projectprops.villa
+                      ? `G+${data?.floor}`
+                      : data?.floor
+                  }`}
+                </span>{" "}
+              </p>
+            </div>
+
+            {propCgId !== projectprops.plot  && (
+              <div className="flex items-center space-x-3">
+                {propertyDetailsSvgs.floor}
+                <p className="text-[#4D6677] text-[14px] font-[500]">
+                  Total No.Of Floors:
+                  <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
+                    {" "}
+                    {data.totalFloor}
+                  </span>{" "}
+                </p>
+              </div>
+            )}
+          </>
         )}
 
         <div className="flex items-center space-x-3">

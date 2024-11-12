@@ -18,7 +18,7 @@ export default function useDynamicProp({
 
   const getData = async () => {
     const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/fetch/dynamic-data?propIdEnc=${(slug || bhk_unit_type).split("-")}&category=${cg}&propType=${propId}`
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/fetch/dynamic-data?propIdEnc=${(slug || bhk_unit_type).split("-")[1]}&category=${cg}&propType=${propId}`
     );
     return res.data;
     // return {

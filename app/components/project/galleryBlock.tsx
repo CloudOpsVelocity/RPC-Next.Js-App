@@ -135,7 +135,10 @@ export default function GalleryBlock({
                         }
                       })
                     }}
-                    fill
+                    width={799}
+                    height={400}
+                    sizes="(max-width: 460px) 460px, (max-width: 800px) 800px, 799px"
+                    // fill
                     unoptimized
                   />
                 </picture>

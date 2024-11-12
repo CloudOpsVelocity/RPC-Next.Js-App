@@ -124,6 +124,7 @@ export default function ListingDetailsPage({
 
         {data.projIdEnc && (
           <>
+ 
             <LeafMap
               lat={projData.lat}
               lang={projData.lang}
@@ -171,7 +172,9 @@ export default function ListingDetailsPage({
           </>
         )}
         {!data.projIdEnc && (
-          <PropertyMap
+          <>
+                   <div className="mt-10" />
+            <PropertyMap
             lat={data?.lat ?? 0}
             lang={data?.lang ?? 0}
             projName={TITLE_OF_PROP}
@@ -179,6 +182,8 @@ export default function ListingDetailsPage({
             type="prop"
             mapData={nearByLocations}
           />
+          </>
+         
         )}
 
         <NearByCarouselProperty

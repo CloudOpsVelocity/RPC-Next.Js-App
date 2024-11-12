@@ -187,7 +187,8 @@ const OtherDetails = ({
   cunstructionStatus,
   cunstructionType,
   boundryWallEnclose,
-  isUsed
+  isUsed,
+  isPetFirendly
 }: Main) => {
   return (
     <div
@@ -260,14 +261,14 @@ const OtherDetails = ({
           />
         )}
 
-        {propTypeName !== "Plot" && isUsed === "Y" && (
+        {/* {propTypeName !== "Plot" && isUsed === "Y" && (
         <RoomBasicDetails
             icon={<FlatIcon />}
             title="New Building"
             value="Yes"
             className={style.card}
         />
-        )}
+        )} */}
 
 
         <RoomBasicDetails
@@ -299,7 +300,7 @@ const OtherDetails = ({
             <RoomBasicDetails
               icon={<PetFreindly />}
               title="Pet Friendly"
-              value={`Pets Are ${ispetFriendly ? "" : "Not"} Allowed`}
+              value={isPetFirendly === 1 ? `Pets Are Allowed` : `Pets Are Not Allowed`}
               className={style.card}
             />
             <RoomBasicDetails

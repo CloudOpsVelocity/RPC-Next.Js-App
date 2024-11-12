@@ -33,9 +33,8 @@ function getImageUrls(
 const imageUrlParser = (originalUrl: string, type?: string) => {
   if (!originalUrl) return "";
   let isVideo = originalUrl.includes('mp4') || originalUrl.includes("youtube")
-  const imagePath = isVideo ? originalUrl : originalUrl.split(process.env.NEXT_PUBLIC_IMG_BASE!)[1]
-let modifiedUrl;
-
+  const imagePath =  originalUrl.split(process.env.NEXT_PUBLIC_IMG_BASE!)[1]
+  let modifiedUrl;
     if (isVideo) {
       modifiedUrl = `${process.env.NEXT_PUBLIC_URL}/video?path=${imagePath}`;
     } else {

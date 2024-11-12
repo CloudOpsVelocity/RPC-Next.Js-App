@@ -4,7 +4,7 @@ import ProjBasicDetails from "@/app/components/project/projBasicDetails";
 import { Main } from "@/app/validations/property/index";
 import { generatePropertyOverViewData } from "@/app/data/property/overview";
 import PropertyOverviewBanner from "./OverViewBanner";
-import { footerPhoneIcon } from "@/app/images/commonSvgs";
+import { EndDate, footerPhoneIcon } from "@/app/images/commonSvgs";
 import CompareList from "./actions/compareList";
 import ShortList from "./actions/shortList";
 import Message from "./actions/Message";
@@ -63,6 +63,15 @@ export default function PropertyOverView({
               className="mr-[5%] pt-[2%] mb-[3%]  "
             />
           ))}
+            <ProjBasicDetails
+            Id={'projectApprovedBy'}
+            key="ProjectApprovedBy"
+            icon={<EndDate />}
+            title="Approved By"
+            value={data.projAuthorityNames}
+            type="authorities"
+            className="mr-[5%] sm:mr-[3%] xl:mr-[5%] pt-[2%] mb-[3%] sm:mb-[1.5%] xl:mb-[3%]  "
+          />
         </div>
         <div className=" flex justify-start md:justify-end items-start md:items-end flex-col mt-[3%] md:mt-0 relative pb-10">
           <ReportSectionProperty issueData={issueData} />

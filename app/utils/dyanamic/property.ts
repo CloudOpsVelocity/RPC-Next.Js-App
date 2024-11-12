@@ -20,7 +20,7 @@ function createPropertyString(data: Main): string {
       data.cg === "R" ? `At Floor ${data.atFloor}` : `Floor ${data.totalFloor}`
     } | House No. ${data.unitNumber} | ${
       data.facingName
-    } | Area: ${formatNumberWithSuffix(data.sba)} sq.ft`;
+    } | Area: ${formatNumberWithSuffix(data.sba,false)} sq.ft`;
   } else {
     return `${data.propName} | ${data.bhkName} | ${
       data.tower ? "Tower " + data.tower : ""

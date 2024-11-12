@@ -6,7 +6,6 @@ import {
 } from "@/app/images/commonSvgs";
 import { formatNumberWithSuffix } from "@/app/utils/numbers";
 import { Main } from "@/app/validations/property";
-import { Console } from "console";
 
 import React from "react";
 type PropertyDetail = {
@@ -25,7 +24,7 @@ export function generatePropertyDetails(
     case "Apartment":
       propertyDetails = [
         { title: "Unit Type", value: data.bhkName, Icon: Marble },
-        { title: "Property Type", value: data.propTypeName, Icon: Marble },
+        { title: "Property Type", value: data.aptTypeName ??data.propTypeName, Icon: Marble },
         { title: "Phase", value: data.phaseName, Icon: Marble },
         { title: "Tower", value: data.tower, Icon: TowerIcon },
         {
@@ -70,7 +69,7 @@ export function generatePropertyDetails(
     case "Villa":
       propertyDetails = [
         { title: "Unit Type", value: data.bhkName, Icon: Marble },
-        { title: "Property Type", value: data.propTypeName, Icon: Marble },
+        { title: "Property Type", value: data.aptTypeName ??data.propTypeName, Icon: Marble },
         { title: "Phase", value: data.phaseName, Icon: Marble },
         {
           title: "Elevation",
@@ -138,7 +137,7 @@ export function generatePropertyDetails(
     case "Villament":
       propertyDetails = [
         { title: "Unit Type", value: data.bhkName, Icon: Marble },
-        { title: "Property Type", value: data.propTypeName, Icon: Marble },
+        { title: "Property Type", value: data.aptTypeName ??data.propTypeName, Icon: Marble },
         { title: "Phase", value: data.phaseName, Icon: Marble },
         { title: "Tower", value: data.tower, Icon: TowerIcon },
         {
@@ -177,7 +176,12 @@ export function generatePropertyDetails(
         },
         {
           title: "Floor",
-          value: data.atFloor,
+          value: data.atFloor === 0 ? "G" : data.atFloor,
+          Icon: Marble,
+        },
+        {
+          title: "Total Floors",
+          value: data.totalFloor,
           Icon: Marble,
         },
       ];
@@ -205,7 +209,7 @@ export function generatePropertyDetails(
       break;
     case "Plot":
       propertyDetails = [
-        { title: "Property Type", value: data.propTypeName, Icon: Marble },
+        { title: "Property Type", value: data.aptTypeName ??data.propTypeName, Icon: Marble },
         { title: "Phase", value: data.phaseName, Icon: Marble },
         { title: "Unit Number", value: data.unitNumber, Icon: Marble },
         { title: "Facing", value: data.facingName, Icon: Marble },
@@ -249,7 +253,7 @@ export function generatePropertyDetails(
     case "Row House":
       propertyDetails = [
         { title: "Unit Type", value: data.bhkName, Icon: Marble },
-        { title: "Property Type", value: data.propTypeName, Icon: Marble },
+        { title: "Property Type", value: data.aptTypeName ??data.propTypeName, Icon: Marble },
         { title: "Phase", value: data.phaseName, Icon: Marble },
         {
           title: "Elevation",
@@ -316,7 +320,7 @@ export function generatePropertyDetails(
     case "Independent House/Building":
       propertyDetails = [
         { title: "Unit Type", value: data.bhkName, Icon: Marble },
-        { title: "Property Type", value: data.propTypeName, Icon: Marble },
+        // { title: "Property Type", value: data.aptTypeName ??data.propTypeName, Icon: Marble },
         { title: "Phase", value: data.phaseName, Icon: Marble },
         { title: "Tower", value: data.tower, Icon: TowerIcon },
         { title: "At Floor", value: data.atFloor, Icon: Marble },

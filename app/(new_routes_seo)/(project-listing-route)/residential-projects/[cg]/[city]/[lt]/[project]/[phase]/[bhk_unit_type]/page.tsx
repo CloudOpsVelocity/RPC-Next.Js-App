@@ -8,7 +8,7 @@ import {
 import { extractListingParamsValues } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing";
 import { BASE_PATH_PROJECT_LISTING } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing.route";
 import { getPagesSlugs } from "@/app/seo/api";
-import { getAmenties } from "@/app/utils/api/project";
+import { getAmenties, getAuthorityNames } from "@/app/utils/api/project";
 import {
   getListingDetails,
   getProjectDetails,
@@ -49,12 +49,16 @@ export default async function Page({
       nearByLocations,
       totalPrice,
     } = await getListingDetails((filtersValues.id as string) ?? "");
-    console.log(data)
+
     const [projData, issueData, amenities] = await Promise.all([
       getProjectDetails(data.projIdEnc),
       getReportConstData(),
       getAmenties(),
     ]);
+    if(projData?.projAuthorityId){
+      const res = await getAuthorityNames(projData.projAuthorityId);
+      data.projAuthorityNames = res;
+    }
     const TITLE_OF_PROP = data.projIdEnc
       ? data.propName
       : `${data.bhkName ?? ""} ${data.propTypeName} For

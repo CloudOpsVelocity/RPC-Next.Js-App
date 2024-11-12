@@ -22,7 +22,7 @@ export default function ListingBreadCrumbs({
   };
   let currentPath = "";
 
-  console.log(currentPath)
+
 
   return (
     <p className="text-[12px] sm:text-[16px] text-[#565D70] font-[500] mb-[1%]">
@@ -37,7 +37,6 @@ export default function ListingBreadCrumbs({
       {allParams.map((key, index) => {
         currentPath += `/${slugify(params[key])}`; 
         const isLast = index === allParams.length - 1;
-
         return (
           <React.Fragment key={`${key[index]}`}>
             {!isLast ? (
@@ -52,7 +51,7 @@ export default function ListingBreadCrumbs({
                   {titleOfKeys[key as keyof typeof titleOfKeys] && (
                     <span>{titleOfKeys[key as keyof typeof titleOfKeys]}</span>
                   )}
-                  <span>{params[key].replace(/-/g, " ")}</span>
+                  <span>{index === allParams.length - 2 ? params[key].replace(/-/g, " ").replace(/bhk/i, "BHK") : params[key].replace(/-/g, " ")}</span>
                 </Link>
                 {" > "}
               </>

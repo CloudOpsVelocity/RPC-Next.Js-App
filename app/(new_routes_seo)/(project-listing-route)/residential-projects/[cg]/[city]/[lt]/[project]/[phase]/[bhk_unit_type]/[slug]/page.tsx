@@ -1,7 +1,7 @@
 import ListingDetailsPage from "@/app/(dashboard)/listing/[city]/[slug]/Page/ListingDetailsPage";
 
 import { getPagesSlugs } from "@/app/seo/api";
-import { getAmenties } from "@/app/utils/api/project";
+import { getAmenties, getAuthorityNames } from "@/app/utils/api/project";
 import {
   getListingDetails,
   getProjectDetails,
@@ -37,11 +37,10 @@ export default async function Page({ params }: Props) {
     notFound();
   }
   const pdata = extractListingParamsValues(value);
-  console.log(pdata);
+  
   if (!pdata) {
     notFound();
   }
-  console.log(pdata);
   const {
     listing: data,
     nearByLocations,
@@ -52,6 +51,10 @@ export default async function Page({ params }: Props) {
     getReportConstData(),
     getAmenties(),
   ]);
+  if(projData.projAuthorityId){
+    const res = await getAuthorityNames(projData.projAuthorityId);
+    data.projAuthorityNames = res;
+  }
   const TITLE_OF_PROP = data.projIdEnc
     ? data.propName
     : `${data.bhkName ?? ""} ${data.propTypeName} For

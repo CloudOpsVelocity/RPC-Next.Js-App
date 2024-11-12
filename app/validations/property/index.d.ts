@@ -65,6 +65,9 @@ export interface Main {
   noOfOpenSide: number;
   bhkId: number;
   isUsed: string;
+  aptTypeName:string;
+  projAuthorityNames: string[];
+  isPetFirendly: number;
 }
 export interface LIstingResponse {
   listing: Main;

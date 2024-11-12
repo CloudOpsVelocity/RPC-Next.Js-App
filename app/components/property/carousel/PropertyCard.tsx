@@ -74,28 +74,19 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
     });
   };
   const isMobile = useMediaQuery("(max-width: 601px)");
-
   const redirect = (propId: string) => {
-    // console.log({
-    //   locality: cardData.ltName,
-    //   city: cardData.city,
-    //   projName: cardData.propName,
-    //   category: "for-rent",
-    //   propIdEnc: propId,
-    //   bhkUnitType: cardData.bhkName + " " + cardData.propTypeName,
-    //   phase: cardData.phase,
-    // });
-    // const url = generateListingLinkUrl({
-    //   locality: cardData.ltName,
-    //   city: cardData.city,
-    //   projName: cardData.propName,
-    //   category: "for-rent",
-    //   propIdEnc: propId,
-    //   bhkUnitType: cardData.bhkName + " " + cardData.propTypeName,
-    //   phase: cardData.phase,
-    // });
-    // alert(url);
-    window.open(`/listing/banglore/${propId}`, "_blank");
+
+    const url = generateListingLinkUrl({
+      locality: cardData.ltName,
+      city: cardData.ctName,
+      projName: cardData.projIdEnc ? cardData.propName : null,
+      category: cardData.cg === "R" ? "for-rent" : "for-sale",
+      propIdEnc: propId,
+      bhkUnitType: cardData.bhkName ? cardData.bhkName + " " + cardData.propTypeName : cardData.propTypeName,
+      phase: cardData.phase,
+    });
+
+    window.open(url, "_blank");
   };
 
   return (
