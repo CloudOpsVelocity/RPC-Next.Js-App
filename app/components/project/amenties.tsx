@@ -23,17 +23,17 @@ export default function Amenties({
   // const [{ expanded }, setReadMore] = useAtom(readMoreAtom);
   const isMobile = useMediaQuery(`(max-width: 750px)`);
   const maxShow = isMobile ? 6 : 20;
-  const shouldShowMore = data && data?.length > maxShow;
-  // const handleReadMoreClick = () => {
-  //   shouldShowMore &&
-  //     setReadMore((prev) => ({
-  //       ...prev,
-  //       expanded: !prev.expanded,
-  //       content: { data: data, amenitiesFromDB: amenitiesFromDB },
-  //       type: "array",
-  //       title: "Amenities Of",
-  //     }));
-  // };
+  // const shouldShowMore = data && data?.length > maxShow;
+  // // const handleReadMoreClick = () => {
+  // //   shouldShowMore &&
+  // //     setReadMore((prev) => ({
+  // //       ...prev,
+  // //       expanded: !prev.expanded,
+  // //       content: { data: data, amenitiesFromDB: amenitiesFromDB },
+  // //       type: "array",
+  // //       title: "Amenities Of",
+  // //     }));
+  // // };
 
   return (
     <div
