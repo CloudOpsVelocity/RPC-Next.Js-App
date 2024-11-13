@@ -70,7 +70,7 @@ const LeftSideBlock = ({ mutate, serverData }: Props) => {
           categoryType={SEARCH_FILTER_DATA.categoryDataListing}
         />
         <div
-          className="p-[2%] max-h-[700px] max-w-full overflow-y-scroll h-screen"
+          className="p-[2%] max-h-[700px] max-w-full overflow-y-scroll min-h-screen"
           ref={containerRef}
         >
           {isLoading ? (

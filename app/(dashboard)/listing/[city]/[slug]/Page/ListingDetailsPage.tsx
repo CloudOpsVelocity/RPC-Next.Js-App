@@ -149,6 +149,7 @@ export default function ListingDetailsPage({
                 data.postedById === projData.builderId &&
                 projData.banks.length > 0 && (
                   <Loans
+                  
                     type="prop"
                     banks={projData.banks}
                     name={data.propName}
