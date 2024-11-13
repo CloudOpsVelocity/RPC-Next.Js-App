@@ -52,20 +52,7 @@ export default function FaqWithBg({ data, projName,slug }: FaqWithBgProps) {
           return (
             faq.faqAnswer &&
             faq.faqQuestion &&
-            (isMobile ? (
-              <MobileFaqCard
-                faqQuestion={faq.faqQuestion}
-                faqAnswer={faq.faqAnswer}
-                last={index === data.length - 1}
-              />
-            ) : (
-              <FaqCard
-                faqQuestion={faq.faqQuestion}
-                faqAnswer={faq.faqAnswer}
-                key={faq.faqAnswer}
-                last={index === data.length - 1}
-              />
-            ))
+            <MainCard faq={faq} index={index} data={data} />
           );
         })}
       </div>
@@ -73,7 +60,19 @@ export default function FaqWithBg({ data, projName,slug }: FaqWithBgProps) {
     </div>
   );
 }
-
+const MainCard = ({faq,index,data}:{faq:FAQ,index:number,data:FAQ[]})=>{
+const isMobile = useMediaQuery(`(max-width: 601px)`);
+return (
+  <div>
+    {isMobile ? <MobileFaqCard   faqQuestion={faq.faqQuestion}
+                faqAnswer={faq.faqAnswer}
+                last={index === data.length - 1} /> : <FaqCard    faqQuestion={faq.faqQuestion}
+                faqAnswer={faq.faqAnswer}
+                key={faq.faqAnswer}
+                last={index === data.length - 1} />}
+  </div>
+)
+}
 const AddQnaForm = ({ projName, slug }: { projName: string,slug:string }) => {
   const [, { open }] = usePopShortList();
   const { data: session } = useSession();
