@@ -168,7 +168,7 @@ const RightSection = ({ propCgId }: any) => {
         </div>
         {propCgId != projectprops.plot && (
           <>
-            <div className="flex items-center space-x-3">
+           {data.floor && <div className="flex items-center space-x-3">
               {propCgId == projectprops.rowHouse || propCgId == projectprops.villa
                 ? propertyDetailsSvgs.towerName 
                 : propertyDetailsSvgs.floor}
@@ -191,7 +191,7 @@ const RightSection = ({ propCgId }: any) => {
                   }`}
                 </span>{" "}
               </p>
-            </div>
+            </div>} 
 
             {propCgId !== projectprops.plot  && (
               <div className="flex items-center space-x-3">

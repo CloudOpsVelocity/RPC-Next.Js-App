@@ -218,6 +218,12 @@ const OtherDetails = ({
           value={ownershipName}
           className={style.card}
         />
+        <RoomBasicDetails
+              icon={<PetFreindly />}
+              title="Pet Friendly"
+              value={ispetFriendly === 1 ? `Pets Are Allowed` : `Pets Are Not Allowed`}
+              className={style.card}
+            />
         {propTypeName === "Plot" && (
           <RoomBasicDetails
             icon={<OpenSides />}
@@ -296,12 +302,7 @@ const OtherDetails = ({
               value={availavleFor}
               className={style.card}
             />
-            <RoomBasicDetails
-              icon={<PetFreindly />}
-              title="Pet Friendly"
-              value={ispetFriendly === 1 ? `Pets Are Allowed` : `Pets Are Not Allowed`}
-              className={style.card}
-            />
+        
             <RoomBasicDetails
               icon={<BiFoodTag size={26} color="#00487C" />}
               title="Food Preferences"

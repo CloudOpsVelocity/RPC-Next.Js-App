@@ -17,6 +17,7 @@ import { BlueMobileMapIcon, createCustomIconReactLeafLet, MapIcon, MobileMapIcon
 import { RecenterIcon } from "@/app/images/commonSvgs";
 import { useMediaQuery } from "@mantine/hooks";
 import clsx from "clsx";
+import L from "leaflet";
 
 const Map = ({
   data,
@@ -33,6 +34,7 @@ const Map = ({
 
   return (
     <MapContainer
+    zoom={13}
       center={position}
       className={clsx(
         " h-[291px] sm:h-[456px] xl:h-[600px] w-full z-[1] relative",
@@ -77,6 +79,7 @@ const Content: React.FC<any> = ({
   lang,
   selected,
   setSelectedLocation,
+  
 }) => {
   const position: LatLngTuple = useMemo(() => [lat, lang], [lat, lang]);
 const Icon =  createCustomIconReactLeafLet(selected);
@@ -87,11 +90,13 @@ const Icon =  createCustomIconReactLeafLet(selected);
         parseFloat(selectedLocation.lat),
         parseFloat(selectedLocation.lng),
       ]);
+ 
     }
   }, [selectedLocation, selected, position, map]);
 
   useEffect(() => {
-    map.setView(position,13);
+    const bounds = L.latLngBounds([...data.map((item: any) => [parseFloat(item?.lat), parseFloat(item?.lang)]), position]);
+    map.fitBounds(bounds);
   }, [selected, map, position]);
   const isMobile = useMediaQuery("(max-width: 601px)");
   return (

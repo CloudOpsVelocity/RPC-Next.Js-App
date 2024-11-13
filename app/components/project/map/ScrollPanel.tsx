@@ -1,8 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import clsx from "clsx";
-import { Carousel } from "@mantine/carousel";
 import styles from "@/app/styles/Map.module.css";
-import { NextDarkButton, PrevDarkButton } from "@/app/images/commonSvgs";
 import { useMediaQuery } from "@mantine/hooks";
 import { Area, areasMap } from "./data";
 
@@ -13,58 +11,65 @@ const CustomScrollArea: React.FC<{
   data: any;
 }> = ({ areas, selected, setSelected, data }) => {
   const isMobile = useMediaQuery("(max-width: 601px)");
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  // Calculate the number of visible items per line and total lines
+  const items = Object.keys(data).filter((key) => !!data[key as string]);
+  const maxVisibleLines = 3;
+  const itemsPerRow = isMobile ? 3 : 6;
+  const maxVisibleItems = maxVisibleLines * itemsPerRow;
+
+  const visibleItems = isExpanded ? items : items.slice(0, maxVisibleItems);
+  const hiddenCount = items.length - visibleItems.length;
+
   return (
-    <Carousel
-      align="start"
-      w={"100%"}
-      withControls={
-        !isMobile ? (Object.keys(data).length > 6 ? true : false) : true
-      }
-      draggable={
-        !isMobile ? (Object.keys(data).length > 6 ? true : false) : true
-      }
-      px={isMobile ? 0 : 40}
-      {...(!isMobile && { nextControlIcon: <NextDarkButton /> })}
-      {...(!isMobile && { previousControlIcon: <PrevDarkButton /> })}
-      classNames={styles}
-      nextControlProps={{
-        style: {
-          background: "#8c9096",
-          color: "white",
-        },
-      }}
-      previousControlProps={{
-        style: {
-          background: "#8c9096",
-          color: "white",
-        },
-      }}
-    >
-      {Object.keys(data).map((key, index) => {
-        const isAvail = !!data[key as string];
-        if (!isAvail) return null;
-        const Icon = areasMap.get(key).Icon;
-        const name = areasMap.get(key).name;
-        return (
-          <Carousel.Slide key={key} className="max-w-fit">
-            <h4
+    <div className="flex flex-col  px-2 relative w-full sm:w-[92%] m-auto">
+      <div
+        className={clsx(
+          "flex flex-wrap gap-2  overflow-hidden relative",
+          !isExpanded && "max-h-[calc(3*2.5rem)]" // Adjust height for 3 lines
+        )}
+        style={{ padding: isMobile ? "0" : "0 2rem" }}
+      >
+        {visibleItems.map((key) => {
+          const Icon = areasMap.get(key).Icon;
+          const name = areasMap.get(key).name;
+
+          return (
+            <div
               key={key}
               onClick={() => setSelected(key ?? "")}
               className={clsx(
-                "inline-flex justify-center items-center gap-1.5 px-2.5 py-1.5 text-[12px] text-[#0073C6] md:text-[20px] xl:text-[26px] not-italic font-medium leading-[normal] capitalize rounded border border-solid border-[#0073C6]  ml-3 sm:ml-8 min-w-fit ",
-                selected === key && "!text-white font-semibold bg-[#0073C6] "
+                "flex items-center gap-1.5 px-2 py-1 text-xs sm:text-lg xl:text-xl cursor-pointer",
+                "text-[#0073C6] font-medium rounded border border-solid border-[#0073C6]",
+                selected === key && "!text-white font-semibold bg-[#0073C6]"
               )}
             >
               <Icon
                 stroke={clsx(selected === key ? "#FFF" : "#0073C6")}
-                className="w-[18px] h-[18px]"
+                className={isMobile ? "w-4 h-4" : "w-5 h-5"}
               />
               {name}
-            </h4>
-          </Carousel.Slide>
-        );
-      })}
-    </Carousel>
+            </div>
+          );
+        })}
+
+        {/* Gradient overlay for fade effect */}
+        {!isExpanded && hiddenCount > 0 && (
+          <div className="absolute bottom-0 left-0 w-full h-8 bg-gradient-to-t from-white to-transparent pointer-events-none" />
+        )}
+      </div>
+
+      {/* Small "See More" Button */}
+      {hiddenCount > 0 && (
+        <button
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="mt-2 text-[#0073C6] font-medium text-xs"
+        >
+          {isExpanded ? "See Less" : `See More (${hiddenCount} more)`}
+        </button>
+      )}
+    </div>
   );
 };
 
