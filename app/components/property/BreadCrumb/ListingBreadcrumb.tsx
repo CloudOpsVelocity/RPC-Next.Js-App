@@ -2,9 +2,15 @@ import {
   BASE_PATH_LISTING,
   BASE_PATH_PROJECT_LISTING,
 } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing.route";
-import { slugify } from "@/app/utils/linkRouters/ProjectLink";
 import Link from "next/link";
 import React from "react";
+export const slugify = (name: string): string => {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9.]+/g, "-") // Allow dots by including . in the character set
+    .replace(/(^-|-$)+/g, ""); // Remove leading and trailing hyphens
+};
+
 
 export default function ListingBreadCrumbs({
   params,
@@ -16,9 +22,10 @@ export default function ListingBreadCrumbs({
   title: string;
 }) {
   const allParams = Object.keys(params || {});
+  const isIndependent = title.includes("Independent");
   const titleOfKeys = {
     city: "Project In ",
-    lt: "Projects In ",
+    lt: `${isIndependent ? "Independent Listings" : "Projects"} In `,
   };
   let currentPath = "";
 
@@ -56,7 +63,7 @@ export default function ListingBreadCrumbs({
                 {" > "}
               </>
             ) : (
-              <span className="capitalize">{title.replace("undefined ", "")}</span> // Last breadcrumb is plain text
+              <span className="capitalize">{title.replace("undefined ", "")}</span> 
             )}
           </React.Fragment>
         );

@@ -13,7 +13,6 @@ import {
   generateSlugs,
 } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing";
 import { BASE_PATH_LISTING } from "@/app/(new_routes_seo)/utils/new-seo-routes/listing.route";
-import { getPagesSlugs } from "@/app/seo/api";
 import { notFound } from "next/navigation";
 import React from "react";
 type Props = {
@@ -32,10 +31,28 @@ export default async function Page({
   const values = await findPathForProjectListing(pathname);
   if (!values) return notFound();
   const { CG, BH, PT, LT } = extractListingParamsValues(values);
-  const severData = await getProjSearchData(
-    `bhk=${BH}&propType=${PT}&localities=${LT}&cg=${CG}`
+  let severData;
+   if(PT === '36'){
+    severData = await getSearchData(
+      `bhk=${BH}&propType=${PT}&localities=${LT}&cg=${CG}`
   );
+   }
+   else{
+    severData = await getProjSearchData(
+      `bhk=${BH}&propType=${PT}&localities=${LT}&cg=${CG}`
+  );
+   }
+   
   return (
+    PT === '36' ?
+    <ListingSearchPage 
+    serverData={severData}
+    frontendFilters={{
+      locality: [`${lt}+${LT}`],
+      unitTypes: [parseInt(BH as string)],
+      propTypes: parseInt(PT as string),
+      cg: CG,
+    }} /> :
     <ProjectSearchPage
       serverData={severData}
       frontendFilters={{

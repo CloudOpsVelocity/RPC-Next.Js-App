@@ -7,7 +7,12 @@ import Footer from "@/app/components/layouts/primary/footer";
 import { Toaster } from "react-hot-toast";
 import RequestCallBackModal from "@/app/components/molecules/popups/req";
 import SharePopup from "../components/SharePopup";
-const SearchingPage = () => {
+import { getUserCity } from "@/app/(new_routes_seo)/utils/new-seo-routes/home.api";
+import { headers } from "next/headers";
+const SearchingPage = async () => {
+  const ip = headers().get("x-forwarded-for") || headers().get("cf-connecting-ip") || "";
+  const data = await getUserCity(undefined,ip);
+  console.log(data)
   return (
     <div>
       <Header />

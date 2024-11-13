@@ -20,6 +20,7 @@ const LeftSideBlock = ({ serverData }: any) => {
       console.error(`Invalid value passed to onTabChange: ${listedBy}`);
       return;
     }
+    
     const updatedFilters =
       listedBy === "proj"
         ? { ...filters, listedBy: null, sortByfield: null,sortType:null}

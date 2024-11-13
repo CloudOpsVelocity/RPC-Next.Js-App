@@ -36,7 +36,9 @@ const LeftSideBlock = ({ mutate, serverData }: Props) => {
       ? data
       : path.includes("/seo") ||
         path.includes("/in") ||
-        path.includes("/projects")
+        path.includes("/projects") ||
+        path.includes("/residential/listings") ||
+        path.includes("/residential-projects")
       ? serverData
       : data;
 

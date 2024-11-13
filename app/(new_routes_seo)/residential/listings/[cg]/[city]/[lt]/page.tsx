@@ -6,7 +6,7 @@ import {
   findPathForProjectListing,
   getNestedSlug,
 } from "@/app/(new_routes_seo)/in/utils/getSlugs";
-import { getProjSearchData } from "@/app/(new_routes_seo)/in/utils/api";
+import { getProjSearchData, getSearchData } from "@/app/(new_routes_seo)/in/utils/api";
 import {
   extractListingParamsValues,
   generateSlugs,
@@ -26,8 +26,21 @@ export default async function Page({ params: { cg, city, lt } }: Props) {
   const values = await findPathForProjectListing(pathname);
   if (!values) return notFound();
   const slugValues = extractListingParamsValues(values);
-  const severData = await getProjSearchData(`localities=${slugValues.LT}`);
+  let severData;
+  if(slugValues.PT === '36'){
+    severData = await getSearchData(`localities=${slugValues.LT}`);}
+    else{
+    severData = await getProjSearchData(`localities=${slugValues.LT}`);
+    }
+
   return (
+    slugValues.PT === '36' ?
+    <ListingSearchPage 
+    serverData={severData}
+    frontendFilters={{
+      locality: [`${lt}+${slugValues.LT}`],
+      cg: slugValues.CG,
+    }} /> :
     <ProjectSearchPage
       serverData={severData}
       frontendFilters={{
