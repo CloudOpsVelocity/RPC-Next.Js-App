@@ -31,7 +31,7 @@ const SearchAndFilterCon = ({ frontendFilters ,cityData}: any) => {
     <SearchHeader
       setShowAllLocalities={setShowAllLocalities}
       showAllLocalities={showAllLocalities}
-      city={frontendFilters.city}
+      city={frontendFilters?.city}
     />
   );
 };

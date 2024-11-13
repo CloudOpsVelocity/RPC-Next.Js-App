@@ -225,7 +225,7 @@ const PropertyFirstBlock: React.FC<Props> = ({
                 ""
               )}
 
-              {isBuilder ? (
+              {/* {isBuilder ? (
                 <a
                   target="_blank"
                   href={builderUrl}
@@ -236,12 +236,12 @@ const PropertyFirstBlock: React.FC<Props> = ({
                     {projectDetails.postedByName}
                   </span>
                 </a>
-              ) : (
+              ) : ( */}
                 <p className="text-[#001F35] sm:text-[18px] xl:text-2xl not-italic font-semibold  capitalize sm:mt-1 xl:mt-[8px]">
                   Posted By:{" "}
                   <span className="">{projectDetails.postedByName}</span>
                 </p>
-              )}
+              {/* )} */}
               <p className="mb-[8px] sm:mb-[6px] xl:mb-[13px] text-[12px] md:text-base text-[#001F35] font-semibold md:font-bold ">
                 {get_posted_by(projectDetails.postedByType)}
               </p>
