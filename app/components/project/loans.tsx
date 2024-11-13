@@ -61,8 +61,8 @@ export default function ProjectLoans({
                     }
                     alt={bank.bankName}
                     width={140}
-                    height={70}
-                    className="max-w-[60px] sm:min-h-[70px] sm:w-[140px] aspect-video "
+                    height={90}
+                    className="max-w-[90px] sm:min-h-[70px] sm:w-[140px] aspect-video "
                   />
                   <p className="mt-3  text-[#242424] text-center text-[14px] sm:text-xl not-italic font-semibold leading-[normal] capitalize">
                     {bank.bankName}

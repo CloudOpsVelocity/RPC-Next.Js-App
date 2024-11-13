@@ -1,9 +1,6 @@
 "use client";
 import { Carousel } from "@mantine/carousel";
 import React from "react";
-type Props = {
-  partialUnitData: any;
-};
 import Style from "./Carouse.module.css";
 import InfoCard from "./InfoCard";
 import {
@@ -26,10 +23,13 @@ import { floorPlansArray, selectedFloorAtom } from "@/app/store/floor";
 import { useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
 import { useForm } from "@/app/context/floorplanContext";
 import { setPropertyValues } from "@/app/utils/dyanamic/projects";
+
+type Props = {
+  partialUnitData: any;
+};
+
 export default function InFoCarousel({ partialUnitData }: Props) {
-
   const currentPhase = useAtomValue(currentPhaseAtom);
-
   const propCgId = useAtomValue(propCgIdAtom);
   const whichKeyname = partialUnitData.type === "overview" ? "apiProp" : "name";
   const data =
@@ -55,30 +55,44 @@ export default function InFoCarousel({ partialUnitData }: Props) {
       )}`,
     });
   };
+
   return (
     <div
-      className={` justify-start flex-col items-start mr-auto max-w-[1120px] overflow-x-auto min-h-[340px] max-h-[510px]  xl:max-h-[340px] overflow-auto `}
+      className="justify-start flex-col items-start mr-auto max-w-[1120px] overflow-x-auto sm:min-h-[340px] max-h-[340px] xl:max-h-[340px] overflow-auto"
     >
-      
-      <table className="min-w-full border-collapse  mr-auto ">
-        <thead className=" sticky top-0 z-[1]">
+      <table className="min-w-full border-collapse mr-auto">
+        <thead className="sticky top-0 z-[1]">
           <tr className="flex flex-row justify-start items-center">
-            <th className="  w-[111px] md:w-[220px] sticky left-0 top-0 flex bg-[#00487C] justify-center text-center items-start px-2.5 py-2 text-white text-[14px] md:text-[16px] not-italic font-bold leading-[normal] border-r ">
+            <th
+              className="w-[90px] sm:w-[220px] sticky left-0 top-0 flex bg-[#00487C] justify-center text-center items-start 
+              px-2 py-1 sm:px-2.5 sm:py-2 text-white text-[12px] sm:text-[16px] font-bold leading-normal border-r"
+            >
               Unit Type
             </th>
-            <th className=" w-[180px] md:w-[220px] flex bg-[#00487C] justify-center text-center items-start px-2.5 py-2 text-white text-[14px] md:text-[16px] not-italic font-bold leading-[normal] border-r">
-              {propCgId === 32 ? "Plot Area" : "Super Built- Up Area"}
+            <th
+              className="w-[150px] sm:w-[220px] flex bg-[#00487C] justify-center text-center items-start 
+              px-2 py-1 sm:px-2.5 sm:py-2 text-white text-[12px] sm:text-[16px] font-bold leading-normal border-r"
+            >
+              {propCgId === 32 ? "Plot Area" : "Super Built-Up Area"}
             </th>
             {propCgId !== 32 && (
-              <th className="w-[180px] md:w-[220px] flex bg-[#00487C] justify-center text-center items-start px-2.5 py-2 text-white text-[14px] md:text-[16px] not-italic font-bold leading-[normal] border-r">
+              <th
+                className="w-[150px] sm:w-[220px] flex bg-[#00487C] justify-center text-center items-start 
+                px-2 py-1 sm:px-2.5 sm:py-2 text-white text-[12px] sm:text-[16px] font-bold leading-normal border-r"
+              >
                 Carpet Area
               </th>
             )}
-
-            <th className=" w-[180px] md:w-[220px] flex bg-[#00487C] justify-center text-center items-start px-2.5 py-2 text-white text-[14px] md:text-[16px] not-italic font-bold leading-[normal] border-r">
+            <th
+              className="w-[150px] sm:w-[220px] flex bg-[#00487C] justify-center text-center items-start 
+              px-2 py-1 sm:px-2.5 sm:py-2 text-white text-[12px] sm:text-[16px] font-bold leading-normal border-r"
+            >
               Unit Price
             </th>
-            <th className=" w-[180px] md:w-[220px] flex bg-[#00487C] justify-center text-center items-start px-2.5 py-2 text-white text-[14px] md:text-[16px] not-italic font-bold leading-[normal] border-r">
+            <th
+              className="w-[150px] sm:w-[220px] flex bg-[#00487C] justify-center text-center items-start 
+              px-2 py-1 sm:px-2.5 sm:py-2 text-white text-[12px] sm:text-[16px] font-bold leading-normal border-r"
+            >
               Floor Plan
             </th>
           </tr>
@@ -90,44 +104,80 @@ export default function InFoCarousel({ partialUnitData }: Props) {
               return (
                 <tr
                   key={item}
-                  className="flex flex-row justify-start items-start !z-[1] "
+                  className="flex flex-row justify-start items-start !z-[1]"
                 >
                   <td
-                    className={`bg-[#EEF7FF] shadow-gray-950 shadow-right mb:shadow-right-0 sticky left-0  w-[111px] md:w-[220px]  text-gray-900 text-[16px] md:text-[18px] not-italic font-semibold h-[60px] flex justify-center text-center items-center border-t-0 border-r-[0.5px] border-r-[#D9DFE3] border-b-[0.5px] border-b-[#D9DFE3] border-solid sm:shadow-lg md:shadow-none shadow-t-0 shadow-b-0 shadow-l-0 `}
+                    className="bg-[#EEF7FF] shadow-gray-950 shadow-right mb:shadow-right-0 sticky left-0 
+                    w-[90px] sm:w-[220px] text-gray-900 text-[12px] sm:text-[16px] font-semibold 
+                    h-[50px] sm:h-[60px] flex justify-center text-center items-center 
+                    border-t-0 border-r-[0.5px] border-r-[#D9DFE3] border-b-[0.5px] border-b-[#D9DFE3] border-solid 
+                    sm:shadow-lg md:shadow-none"
                   >
-                    {(partialUnitData.type == "overview" && propCgId === 32) ? item.replace("_"," x ") : item}
+                    {partialUnitData.type === "overview" && propCgId === 32
+                      ? item.replace("_", " x ")
+                      : item}
                   </td>
-                  <td className=" w-[180px] md:w-[220px] bg-[#FFF] text-gray-900 text-[16px] md:text-[18px] not-italic font-semibold h-[60px] flex  justify-center text-center items-center border-t-0 border-r-[0.5px] border-r-[#D9DFE3] border-b-[0.5px] border-b-[#D9DFE3] border-solid  ">
+                  <td
+                    className="w-[150px] sm:w-[220px] bg-[#FFF] text-gray-900 text-[12px] sm:text-[16px] 
+                    font-semibold h-[50px] sm:h-[60px] flex justify-center text-center items-center 
+                    border-t-0 border-r-[0.5px] border-r-[#D9DFE3] border-b-[0.5px] border-b-[#D9DFE3] border-solid"
+                  >
                     {propCgId === 32
                       ? data[item].minPa === data[item].maxPa
                         ? `${formatNumberWithSuffix(data[item].minPa, false)} sq.ft`
-                        : `${formatNumberWithSuffix(data[item].minPa, false)} - ${formatNumberWithSuffix(data[item].maxPa, false)} sq.ft`
+                        : `${formatNumberWithSuffix(
+                            data[item].minPa,
+                            false
+                          )} - ${formatNumberWithSuffix(
+                            data[item].maxPa,
+                            false
+                          )} sq.ft`
                       : data[item].minSba !== data[item].maxSba
                       ? `${formatNumberWithSuffix(
-                          data[item].minSba, false
-                        )} - ${formatNumberWithSuffix(data[item].maxSba, false)} sq.ft`
-                      : `${formatNumberWithSuffix(data[item].minSba, false)} sq.ft`}
+                          data[item].minSba,
+                          false
+                        )} - ${formatNumberWithSuffix(
+                          data[item].maxSba,
+                          false
+                        )} sq.ft`
+                      : `${formatNumberWithSuffix(
+                          data[item].minSba,
+                          false
+                        )} sq.ft`}
                   </td>
                   {propCgId !== 32 && (
-                    <td className=" w-[180px] md:w-[220px] bg-[#EEF7FF] text-gray-900 text-[16px] md:text-[18px] not-italic font-semibold h-[60px] flex justify-center text-center items-center border-t-0 border-r-[0.5px] border-r-[#D9DFE3] border-b-[0.5px] border-b-[#D9DFE3] border-solid">
+                    <td
+                      className="w-[150px] sm:w-[220px] bg-[#EEF7FF] text-gray-900 text-[12px] sm:text-[16px] 
+                      font-semibold h-[50px] sm:h-[60px] flex justify-center text-center items-center 
+                      border-t-0 border-r-[0.5px] border-r-[#D9DFE3] border-b-[0.5px] border-b-[#D9DFE3] border-solid"
+                    >
                       {data[item].minCa !== data[item].maxCa
                         ? `${formatNumberWithSuffix(
-                            data[item].minCa, false
+                            data[item].minCa,
+                            false
                           )} - ${formatNumberWithSuffix(
-                            data[item].maxCa, false
+                            data[item].maxCa,
+                            false
                           )} sq.ft`
                         : `${formatNumberWithSuffix(data[item].minCa, false)} sq.ft`}
                     </td>
                   )}
-
-                  <td className="w-[180px] md:w-[220px] bg-[#FFF] text-gray-900 text-[16px] md:text-[18px] not-italic font-semibold h-[60px] flex justify-center text-center items-center border-t-0 border-r-[0.5px] border-r-[#D9DFE3] border-b-[0.5px] border-b-[#D9DFE3] border-solid">
+                  <td
+                    className="w-[150px] sm:w-[220px] bg-[#FFF] text-gray-900 text-[12px] sm:text-[16px] 
+                    font-semibold h-[50px] sm:h-[60px] flex justify-center text-center items-center 
+                    border-t-0 border-r-[0.5px] border-r-[#D9DFE3] border-b-[0.5px] border-b-[#D9DFE3] border-solid"
+                  >
                     {formatCurrency(data[item].minPrice)} -{" "}
                     {formatCurrency(data[item].maxPrice)}
                   </td>
-                  <td className="w-[180px] md:w-[220px] bg-[#EEF7FF] text-gray-900 text-[16px] md:text-[18px] not-italic font-semibold h-[60px] flex justify-center text-center items-center border-t-0 border-r-[0.5px] border-r-[#D9DFE3] border-b-[0.5px] border-b-[#D9DFE3] border-solid">
+                  <td
+                    className="w-[150px] sm:w-[220px] bg-[#EEF7FF] text-gray-900 text-[12px] sm:text-[16px] 
+                    font-semibold h-[50px] sm:h-[60px] flex justify-center text-center items-center 
+                    border-t-0 border-r-[0.5px] border-r-[#D9DFE3] border-b-[0.5px] border-b-[#D9DFE3] border-solid"
+                  >
                     <button
-                      className="text-[#0073C6] text-[16px] text-nowrap not-italic font-semibold leading-[normal];
-  font-family: Montserrat"
+                      className="text-[#0073C6] text-[12px] sm:text-[16px] font-semibold 
+                      leading-normal font-Montserrat"
                       onClick={() => handleCardClick(units, item)}
                     >
                       <div className="flex flex-row gap-2">
@@ -154,7 +204,8 @@ export default function InFoCarousel({ partialUnitData }: Props) {
       </table>
     </div>
 
-    /*     <Carousel
+    /* Uncomment the Carousel component if you intend to use it
+    <Carousel
       classNames={Style}
       slideSize="20.333333%"
       slideGap="md"
@@ -177,6 +228,7 @@ export default function InFoCarousel({ partialUnitData }: Props) {
             cardClick={() => handleCardClick(index)}
           />
         ))}
-    </Carousel> */
+    </Carousel>
+    */
   );
 }
