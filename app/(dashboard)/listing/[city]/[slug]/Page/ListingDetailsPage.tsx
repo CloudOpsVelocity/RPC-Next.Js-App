@@ -13,7 +13,8 @@ const PropertyOverView = dynamic(() => import("@/app/components/property/Overvie
 const RoomFloorplansBlock = dynamic(() => import("@/app/components/property/Floorplan"));
 const PropertyBanner = dynamic(() => import("@/app/components/property/propertyBanner"));
 const PropertyFirstBlock = dynamic(() => import("@/app/components/property/fistblock"));
-const LeafMap = dynamic(() => import("@/app/components/project/map"));
+// const LeafMap = dynamic(() => import("@/app/components/project/map"));
+import LeafMap from "@/app/components/project/map";
 const PropertyMap = dynamic(() => import("@/app/components/property/map"));
 const NearByCarouselProperty = dynamic(() => import("@/app/components/property/carousel"));
 const LoginPopup = dynamic(() => import("@/app/components/project/modals/LoginPop"));
