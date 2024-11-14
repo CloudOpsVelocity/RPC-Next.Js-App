@@ -131,6 +131,7 @@ export default function useAuth({
         usertype: data.usertype,
         password: data.password,
         mobile: data.mobile,
+        otpType: "newregistration", // i only added in this payload by manish
       };
       const registrationResponse = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/registerUser`,
