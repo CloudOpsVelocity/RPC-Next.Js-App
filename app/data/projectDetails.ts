@@ -79,7 +79,7 @@ export const Propertytopics = [
   { label: "About", id: "about" },
   { label: "Listing Details", id: "propertyDetails" },
   { label: "Floor Plan", id: "floorPlans" },
-  { label: "Galleria", id: "galleria" },
+  { label: "Galleria", id: "gallery" },
   { label: "Amenities", id: "amenities" },
   { label: "Near By", id: "location-map" },
   { label: "Project Details", id: "projectDetails" },

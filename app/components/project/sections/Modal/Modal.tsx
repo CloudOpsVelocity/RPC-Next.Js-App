@@ -51,7 +51,7 @@ export default function PartialUnitModal({ data }: any) {
             <>
               <button
                 className="flex justify-center items-center gap-1 p-1 xl:p-2 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] rounded-[10px] bg-[#F3F7FF] text-[#0073C6] text-base not-italic font-semibold leading-[normal] tracking-[0.32px] border-1 border-black border-solid"
-                onClick={() => handleDownload(selectedOne?.floorPlan)}
+                onClick={() => handleDownload(selectedOne?.floorPlan?.split(',')[3])}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -72,7 +72,7 @@ export default function PartialUnitModal({ data }: any) {
               <SharePopup
                 titleText="Share Floor Plan"
                 title="Share"
-                url={imageUrlParser(selectedOne?.floorPlan || "", "F")}
+                url={imageUrlParser(selectedOne?.floorPlan?.split(',')[3] || "", "F")}
                 className="text-[#0073C6] text-base not-italic font-semibold leading-[normal] tracking-[0.32px]"
               />
             </>

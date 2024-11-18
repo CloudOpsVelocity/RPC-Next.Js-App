@@ -31,7 +31,7 @@ export default function ListingCard({ item, sl }: Props) {
     <div>
     <ListingLink
       routeParams={{
-        bhkUnitType: item.bhkName + "-" + item.propTypeName,
+        bhkUnitType: item.bhkName ? item.bhkName + "-" + item.propTypeName : item.propTypeName,
         category: item.category === "Sale" ? "for-sale" : "for-rent",
         city: item.cityName,
         locality: item.localityName,

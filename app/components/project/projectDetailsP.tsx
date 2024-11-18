@@ -130,7 +130,7 @@ export default function ProjectDetailsP({
                 key="rera-end-date"
                 icon={<EndDate />}
                 title="RERA End Date"
-                value={formatDateDDMMYYYY(selectedPhase.launchDate)}
+                value={formatDateDDMMYYYY(selectedPhase.possassionDate)}
                 className={styles.box}
               />
               <ProjBasicDetails

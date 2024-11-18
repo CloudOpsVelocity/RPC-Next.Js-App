@@ -5,7 +5,7 @@ import Image from "next/image";
 import { GrPowerReset } from "react-icons/gr";
 import { FiX, FiShare2, FiDownload, FiZoomIn, FiZoomOut } from "react-icons/fi";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
-import { PopupOpenSvg } from "@/app/images/commonSvgs";
+import { newIcons, PopupOpenSvg } from "@/app/images/commonSvgs";
 import { useSetAtom } from "jotai";
 import { searchShareAtom } from "@/app/(dashboard)/search/components/SharePopup";
 import { imageUrlParser } from "@/app/utils/image";
@@ -47,7 +47,8 @@ export default function FullScreenMasterPlanModal({
     openSharePopup({
       opened: true,
       title: title,
-      url: imageUrlParser(imageUrl),
+      url: imageUrlParser(imageUrl,"M"),
+
     });
   };
 
@@ -58,7 +59,7 @@ export default function FullScreenMasterPlanModal({
       const url = URL.createObjectURL(blob);
       const downloadLink = document.createElement("a");
       downloadLink.href = url;
-      downloadLink.download = "masterplan.jpg";
+      downloadLink.download = "masterplan.webp";
       document.body.appendChild(downloadLink);
       downloadLink.click();
       document.body.removeChild(downloadLink);
@@ -152,7 +153,7 @@ export default function FullScreenMasterPlanModal({
                       className="p-2 md:p-3 hover:bg-gray-800 rounded-full transition-colors bg-black"
                       aria-label="Reset zoom"
                     >
-                      <GrPowerReset className="w-5 h-5" color="white" />
+                     {newIcons.get("resetIconWhite")} 
                     </button>
                   </div>
                   <TransformComponent
