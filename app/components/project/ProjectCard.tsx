@@ -222,7 +222,7 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
                   Project Status:{" "}
                 </span>
                 <span className="text-[#148B16] text-[14px] xl:text-base not-italic font-bold leading-[normal]">
-                  {cardData.projstatus}
+                  {cardData.projectStatusName}
                 </span>
               </div>
             )}

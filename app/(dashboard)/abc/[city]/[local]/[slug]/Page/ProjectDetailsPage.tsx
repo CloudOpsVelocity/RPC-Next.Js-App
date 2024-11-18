@@ -202,6 +202,7 @@ export default async function ProjectsDetailsPage({
         <ProjectBrouchersSection
           projName={data.projectName}
           phaseOverviewData={phaseOverview}
+          singleBroucher={data.media?.projBroucherUrl}
         />
         <ErrorContainer data={data.specificationList}>
           <Specifications

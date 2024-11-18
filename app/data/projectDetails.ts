@@ -207,4 +207,5 @@ export const filterKeysDetails = new Map([
   ["towerId", { name: "Tower ID" }],
   ["facingId", { name: "Facing ID" }],
   ["floorPlanUrl", { name: "FloorPlan URL" }],
+  ['totalBalconySize', {name: 'Balcony Size'}]
 ]);

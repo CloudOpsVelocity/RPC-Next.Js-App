@@ -67,7 +67,7 @@ const UnitsImagesBlock = ({
                   <Image
                     className="cursor-pointer border max-h-[64px] border-indigo-600 border-1 border-solid rounded-[4px] "
                     key={`unitsImgUrl_${imgUrl ? imgUrl[index] : index}`}
-                    src={imgUrl ?? ImgNotAvail}
+                    src={imgUrl.split(',')[0] ?? ImgNotAvail}
                     width={100}
                     height={100}
                     alt="not found"

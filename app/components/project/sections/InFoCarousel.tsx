@@ -40,6 +40,7 @@ export default function InFoCarousel({ partialUnitData }: Props) {
 
   const handleCardClick = (units: any, item: any) => {
     if (partialUnitData.type === "overview") {
+      console.log(partialUnitData.handlePricingFloorPlanClick)
       partialUnitData.handlePricingFloorPlanClick &&
         partialUnitData.handlePricingFloorPlanClick({
           bhkName: item,
@@ -101,7 +102,6 @@ export default function InFoCarousel({ partialUnitData }: Props) {
           {data &&
             sortUnits(Object.keys(data)).map((item: string, index: number) => {
               const units = data[item].unitDataDtoList;
-              console.log(data[item]);
               return (
                 <tr
                   key={item}

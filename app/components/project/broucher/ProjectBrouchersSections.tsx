@@ -10,14 +10,16 @@ interface PhaseOverview {
 const ProjectBrouchersSection = ({
   projName,
   phaseOverviewData,
+  singleBroucher,
 }: {
   projName: string;
   phaseOverviewData: PhaseOverview[];
+  singleBroucher: string;
 }): JSX.Element | null => {
-  const isBrocherAvail = phaseOverviewData.some((phase) => phase.phaseBrochureUrl);
+  const isBrocherAvail = singleBroucher || phaseOverviewData.some((phase) => phase.phaseBrochureUrl);
   if (!isBrocherAvail) return null;
   return (
-    <BrocherContent projName={projName} phaseOverviewData={phaseOverviewData} />
+    <BrocherContent projName={projName} phaseOverviewData={phaseOverviewData}  singleBrocher={singleBroucher} />
   );
 };
 

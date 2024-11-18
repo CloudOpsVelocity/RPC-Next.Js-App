@@ -17,8 +17,6 @@ export default function useRecentUnits<T>() {
       setRecentUnits((prev) => [...prev, unit]);
     }
   };
-
-  console.log(recentUnits);
   return {
     recentUnits,
     setPreviousFilers,

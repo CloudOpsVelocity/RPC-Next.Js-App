@@ -225,6 +225,14 @@ Props) {
       ...filteredFloors[0],
       floorPlanUrl: filteredFloors[0]?.floorPlanUrl ?? ImgNotAvail,
     });
+    form.setValues({
+      ...setPropertyValues(
+        {
+          bhkName: selectedBhk.bhkName
+        },
+        propCgId
+      ),
+    });
     setFloorsArray(filteredFloors);
     open("floor");
   };
@@ -249,8 +257,8 @@ Props) {
   const rowVirtualizer = useVirtualizer({
     count: projectUnitsData?.length,
     getScrollElement: () => parentRef.current,
-    estimateSize: () => 180,
-    overscan: 5,
+    estimateSize: () => isMobile ? 250 : 180,
+    overscan: isMobile ? 9 : 5,
   });
   useEffect(() => {
     if (
@@ -573,13 +581,13 @@ Props) {
                           selectedFloor?.superBuildUparea &&
                           " | Area. " +
                             formatNumberWithSuffix(
-                              selectedFloor?.superBuildUparea
+                              selectedFloor?.superBuildUparea,false
                             ) +
                             " sq.ft"}
                         {propCgId == projectprops.plot &&
                           selectedFloor?.plotArea &&
                           " | Area. " +
-                            formatNumberWithSuffix(selectedFloor?.plotArea) +
+                            formatNumberWithSuffix(selectedFloor?.plotArea,false) +
                             " sq.ft"}
                       </p>
                       <div className="flex justify-center items-end min-h-[240px] max-h-[240px] sm:max-h-[450px] lg:h-[450px] w-full relative ">
@@ -670,13 +678,13 @@ Props) {
                           selectedFloor?.superBuildUparea &&
                           " | Area. " +
                             formatNumberWithSuffix(
-                              selectedFloor?.superBuildUparea
+                              selectedFloor?.superBuildUparea,false
                             ) +
                             " sq.ft"}
                         {propCgId == projectprops.plot &&
                           selectedFloor?.plotArea &&
                           " | Area. " +
-                            formatNumberWithSuffix(selectedFloor?.plotArea) +
+                            formatNumberWithSuffix(selectedFloor?.plotArea,false) +
                             " sq.ft"}
                       </p>
                       <div
@@ -706,9 +714,7 @@ Props) {
                               handleOpen();
                             }}
                             src={
-                              (selectedFloor?.floorPlanUrl +
-                                "?v" +
-                                Math.random()) as string
+                              (selectedFloor?.floorPlanUrl.split(',')[3]) as string
                             }
                             className="w-full h-full cursor-pointer  object-contain"
                             alt="image"

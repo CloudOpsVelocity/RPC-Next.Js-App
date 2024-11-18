@@ -874,7 +874,7 @@ const MiddleSection = ({
               renderItem={(eachObj: any, index: number) => (
                 <div
                   className={clsx(
-                    " sm:h-[50px] relative  w-[100px] sm:max-w-[250px] flex justify-center items-center shadow-md  scrollbar-hide rounded-[5px] border-[0.5px] border-solid border-[#92B2C8]",
+                    " h-[50px] sm:h-[50px] relative  w-[100px] sm:max-w-[250px] flex justify-center items-center shadow-md  scrollbar-hide rounded-[5px] border-[0.5px] border-solid border-[#92B2C8]",
                     selectedFloor?.floorPlanUrl == eachObj?.floorPlanUrl &&
                       "shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] border-2 border-solid border-[#59A1D6]"
                   )}

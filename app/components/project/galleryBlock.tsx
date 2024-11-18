@@ -123,7 +123,7 @@ export default function GalleryBlock({
                   <Image
                     src={selectedMedia.split(',')[2]}
                     alt="Preview"
-                    className="cursor-pointer object-contain max-w-[799px] "
+                    className="cursor-pointer object-contain  "
                     onClick={() => {
                       dispatch({
                         type:"OPEN",
@@ -137,7 +137,7 @@ export default function GalleryBlock({
                     }}
                     width={799}
                     height={400}
-                    sizes="(max-width: 460px) 460px, (max-width: 800px) 800px, 799px"
+                    // sizes="(max-width: 460px) 460px, (max-width: 800px) 800px, 799px"
                     // fill
                     unoptimized
                   />

@@ -1,4 +1,5 @@
 import { ImgCarouselIcon, PrevCarouselIcon } from "@/app/images/commonSvgs";
+import { useMediaQuery } from "@mantine/hooks";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import React, { ReactNode } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa"; // Importing React Icons for arrows
@@ -47,7 +48,7 @@ const ColumnVirtualizerFixed: React.FC<ColumnVirtualizerFixedProps> = ({
           totalWidth
       : false;
   };
-
+  const isMobile = useMediaQuery("(max-width: 601px)");
   return (
     <div className="relative">
       {itemCount > 4 && (
@@ -72,8 +73,9 @@ const ColumnVirtualizerFixed: React.FC<ColumnVirtualizerFixedProps> = ({
         }}
       >
         <div
+        className={`w-[300px] sm:w-[${columnVirtualizer.getTotalSize()}px]`}
           style={{
-            width: `${columnVirtualizer.getTotalSize()}px`,
+            
             height: "100%",
             position: "relative",
           }}
