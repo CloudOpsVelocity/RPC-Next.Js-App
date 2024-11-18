@@ -176,7 +176,7 @@ export default function AutoCitySelectDropdown({
   };
 
   return (
-    <div className="relative w-64 max-w-fit" ref={dropdownRef}>
+    <div className="relative  max-w-fit" ref={dropdownRef}>
       <button
         onClick={handleToggleDropdown}
         className="w-full p-2 sm:p-3 text-left bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 ease-in-out flex items-center justify-between space-x-1 sm:space-x-2"

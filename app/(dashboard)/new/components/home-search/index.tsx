@@ -85,7 +85,7 @@ const HomeSearch = ({
               {config.homeIcon}{" "}
               <div className="text-nowrap">All Residential</div>
             </div>
-            <div className="text-[#242424] text-[12px] sm:text-[14px] not-italic font-[600] absolute  top-[25%] right-[5%] sm:static sm:flex items-center gap-0.5 p-1 bg-[#ECF0F3] ">
+            <div className="text-[#242424] text-[12px] sm:text-[14px] not-italic font-[600] absolute  top-[25%] right-[5%] sm:static max-w-fit sm:flex items-center gap-0.5 p-1 bg-[#ECF0F3] ">
               <AutoCitySelectDropDown
                 isOpen={isOpen}
                 setIsOpen={setIsOpen}
