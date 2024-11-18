@@ -187,7 +187,7 @@ export default function EnhancedFooter() {
               </p>
               <Subscribe />
             </div>
-            <div>
+            {/* <div>
               <h3 className="text-xs sm:text-sm font-semibold text-white tracking-wider uppercase">
                 Download our app
               </h3>
@@ -210,7 +210,7 @@ export default function EnhancedFooter() {
                   Google Play
                 </a>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
 

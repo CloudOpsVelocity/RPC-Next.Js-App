@@ -17,6 +17,7 @@ import clsx from "clsx";
 import axios from "axios";
 import { useQuery } from "react-query";
 import NewCarousel from "@/app/test/components/NewCarousel";
+import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 
 type Props = {
   type: string;
@@ -71,7 +72,14 @@ export function ProjectCard({ type, cardData, refetch }: CardProps) {
     });
   };
   const handleCardClick = () => {
-    window.open(`/abc/karnataka/banglore/${cardData.projIdEnc}`, "_blank");
+    console.log(cardData);
+  const url = createProjectLinkUrl({
+    city: cardData.cityName,
+    slug: cardData.projectName,
+    locality: cardData.localityName,
+    });
+    window.open(url, "_blank");
+    // window.open(`/abc/karnataka/banglore/${cardData.projIdEnc}`, "_blank");
   };
   return (
       <div
