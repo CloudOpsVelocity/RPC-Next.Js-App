@@ -87,13 +87,19 @@ export default function PartialUnitModal({ data }: any) {
       <div className="flex  items-center w-[90%] h-[300px] sm:max-h-[320px] xl:min-h-[434px]  justify-center rounded border    border-solid border-[#4D6677] m-auto relative">
         <TransformWrapper>
           <TransformComponent>
-            <Image
-              src={selectedOne?.floorPlan ?? FloorPlanNotAvail}
-              width={500}
-              height={500}
-              alt="image"
-              className="max-h-[294px] sm:max-h-[290px] xl:max-h-[430px] object-contain "
-            />
+            
+            <picture>
+              <source media="(max-width: 460px)" srcSet={selectedOne?.floorPlan?.split(',')[1] ?? FloorPlanNotAvail} />
+              <source media="(max-width: 768px)" srcSet={selectedOne?.floorPlan?.split(',')[2] ?? FloorPlanNotAvail} />
+              <source media="(min-width: 1200px)" srcSet={selectedOne?.floorPlan?.split(',')[3] ?? FloorPlanNotAvail} />
+              <Image
+                alt="floor plan image"
+                src={selectedOne?.floorPlan?.split(',')[3] ?? FloorPlanNotAvail}
+                width={500}
+                height={500}
+                className="max-h-[294px] sm:max-h-[290px] xl:max-h-[430px] object-contain"
+              />
+            </picture>
           </TransformComponent>
           <ZoomInOut className=" -bottom-1 -right-[0.5px] sm:bottom-0 sm:right-0 pb-2" />
         </TransformWrapper>

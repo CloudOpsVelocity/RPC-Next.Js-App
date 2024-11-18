@@ -121,7 +121,7 @@ const PricingSection = ({ unitData, projName, phaseList }: any) => {
                 <span className="font-medium text-gray-800">
                   Plot Area:
                 </span>{" "}
-                {filteredData[bhkType].minPa === filteredData[bhkType].maxPa ? `${formatNumberWithSuffix(filteredData[bhkType].minPa, false)} sq ft` : `${formatNumberWithSuffix(filteredData[bhkType].minPa, false)} - ${formatNumberWithSuffix(filteredData[bhkType].maxPa, false)} sq ft`}
+                {filteredData[bhkType].plotArea ? `${formatNumberWithSuffix(filteredData[bhkType].plotArea, false)} sq ft` : filteredData[bhkType].minPa === filteredData[bhkType].maxPa ? `${formatNumberWithSuffix(filteredData[bhkType].minPa, false)} sq ft` : `${formatNumberWithSuffix(filteredData[bhkType].minPa, false)} - ${formatNumberWithSuffix(filteredData[bhkType].maxPa, false)} sq ft`}
               </div>}
              
             </div>

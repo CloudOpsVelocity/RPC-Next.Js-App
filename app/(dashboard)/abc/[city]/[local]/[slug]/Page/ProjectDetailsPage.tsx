@@ -49,6 +49,7 @@ type Props = {
   slug: string;
   scrollId?: string;
   params: any;
+  
 };
 
 export default async function ProjectsDetailsPage({
@@ -241,6 +242,8 @@ export default async function ProjectsDetailsPage({
           lng={data.lang}
           builderId={data.builderId}
           company={data.companyName}
+          projId={slug}
+          slug={slug}
         />
         {refURls && refURls.length > 0 && <Disclamer refUrls={refURls} />}
 

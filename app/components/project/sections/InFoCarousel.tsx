@@ -101,6 +101,7 @@ export default function InFoCarousel({ partialUnitData }: Props) {
           {data &&
             sortUnits(Object.keys(data)).map((item: string, index: number) => {
               const units = data[item].unitDataDtoList;
+              console.log(data[item]);
               return (
                 <tr
                   key={item}
@@ -123,15 +124,17 @@ export default function InFoCarousel({ partialUnitData }: Props) {
                     border-t-0 border-r-[0.5px] border-r-[#D9DFE3] border-b-[0.5px] border-b-[#D9DFE3] border-solid"
                   >
                     {propCgId === 32
-                      ? data[item].minPa === data[item].maxPa
-                        ? `${formatNumberWithSuffix(data[item].minPa, false)} sq.ft`
-                        : `${formatNumberWithSuffix(
-                            data[item].minPa,
-                            false
-                          )} - ${formatNumberWithSuffix(
-                            data[item].maxPa,
-                            false
-                          )} sq.ft`
+                      ? data[item].plotArea 
+                        ? `${formatNumberWithSuffix(data[item].plotArea, false)} sq.ft`
+                        : data[item].minPa === data[item].maxPa
+                          ? `${formatNumberWithSuffix(data[item].minPa, false)} sq.ft`
+                          : `${formatNumberWithSuffix(
+                              data[item].minPa,
+                              false
+                            )} - ${formatNumberWithSuffix(
+                              data[item].maxPa,
+                              false
+                            )} sq.ft`
                       : data[item].minSba !== data[item].maxSba
                       ? `${formatNumberWithSuffix(
                           data[item].minSba,
