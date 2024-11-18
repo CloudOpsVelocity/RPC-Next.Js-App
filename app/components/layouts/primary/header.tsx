@@ -332,7 +332,7 @@ function MobileDropDown() {
                 <button
                   onClick={() =>
                     window.open(
-                      `${process.env.NEXT_PUBLIC_PROJECT_URL}/my-profile`,
+                      `${process.env.NEXT_PUBLIC_PROJECT_URL}/your-profile`,
                       "_blank"
                     )
                   }

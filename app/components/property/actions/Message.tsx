@@ -50,7 +50,7 @@ export default function Message({ cg, propTypeName }: any) {
         <span className="text-[#242424] text-[12px] sm:text-base xl:text-lg not-italic font-medium leading-[normal] sm:text-nowrap">
           Please check your{" "}
           <a
-            href={"/my-profile"}
+            href={"/your-profile"}
             target="_blank"
             className="!text-[#0073C6] text-[12px] sm:text-base xl:text-lg  italic font-semibold leading-[normal] !underline"
           >
