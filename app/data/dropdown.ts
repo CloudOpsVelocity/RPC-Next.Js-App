@@ -16,7 +16,7 @@ const data = [
   },
   {
     label: "Post Listing",
-    url: `${baseUrl}/post-listing/v1`,
+    url: `${baseUrl}/post-your-listing`,
   },
   {
     label: "About Us",

@@ -46,7 +46,7 @@ export const pathConfig = {
   },
   postProperty: {
     pathPrefix: "/search/property",
-    redirectingPath: "/post-listing/v1/",
+    redirectingPath: "/post-your-listing",
     paramName: "pp",
     pageType: PathType.PostProperty,
     pageTitle: "Post Property Page",

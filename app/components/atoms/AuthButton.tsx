@@ -14,7 +14,7 @@ export default function AuthButton() {
     : "/login";
 
   const postListingLink = session
-    ? `${process.env.NEXT_PUBLIC_PROJECT_URL}/post-listing/v1`
+    ? `${process.env.NEXT_PUBLIC_PROJECT_URL}/post-your-listing`
     : "/register";
 
   return (
