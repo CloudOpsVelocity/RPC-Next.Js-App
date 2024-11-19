@@ -25,8 +25,13 @@ export default function useRecentUnits<T extends Record<string, any>>() {
     }
   };
 
+  const resetFilters = () => {
+    setRecentUnits([]);
+  };
+
   return {
     recentUnits,
-    setPreviousFilers:setPreviousFilters,
+    setPreviousFilers: setPreviousFilters,
+    resetFilters
   };
 }

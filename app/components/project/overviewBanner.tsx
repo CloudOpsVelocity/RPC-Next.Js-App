@@ -36,7 +36,7 @@ export default function OverviewBanner({
   return (
     <div
       className="flex justify-start items-center w-full flex-col md:flex-row bg-[#f0f9ff] sm:scroll-mt-[125px] scroll-mt-40 "
-      id="brochure"
+      // id="brochure"
     >
       <PriceBag className="w-[100px] h-[120px]  sm:w-[151px] xl:w-[237px]  sm:h-[169px] xl:h-[263px] mt-2 sm:mt-0" />
 

@@ -44,7 +44,7 @@ export default function CarouselModal({
           className="cursor-pointer"
         >
           <Image
-            src={item.floorPlan ?? FloorPlanNotAvail}
+            src={item?.floorPlan?.split(",")[0] ?? FloorPlanNotAvail}
             alt={item.image}
             width={300}
             height={300}

@@ -25,17 +25,28 @@ export default function EnhancedFooter() {
     {
       title: "New Projects",
       links: ["New Delhi", "Bangalore", "Chennai", "Mumbai", "Hyderabad"],
+      hrefs: ["/new-delhi", "/bangalore", "/chennai", "/mumbai", "/hyderabad"],
+      target: "_blank"
     },
     {
       title: "Properties",
       links: [
         "For Sale",
-        "For Rent",
+        "For Rent", 
         "New Lauch",
         "Commercial",
         "Vacation Rentals",
         "Foreclosures",
       ],
+      hrefs: [
+        "/for-sale",
+        "/for-rent",
+        "/new-launch", 
+        "/commercial",
+        "/vacation-rentals",
+        "/foreclosures"
+      ],
+      target: "_blank"
     },
     {
       title: "Resources",
@@ -47,6 +58,15 @@ export default function EnhancedFooter() {
         "Home Valuation",
         "Real Estate News",
       ],
+      hrefs: [
+        "/mortgage-calculator",
+        "/market-trends", 
+        "/buying-guide",
+        "/selling-tips",
+        "/home-valuation",
+        "/news"
+      ],
+      target: "_blank"
     },
     {
       title: "Our Pages",
@@ -56,8 +76,19 @@ export default function EnhancedFooter() {
         "Properties",
         "Post Project",
         "Post Property",
+        "Builders",
         "Login/Signup",
       ],
+      hrefs: [
+        "/",
+        "/projects",
+        "/properties", 
+        "/post-your-project",
+        "/post-your-property",
+        "/builders",
+        "/login"
+      ],
+      target: "_blank"
     },
     {
       title: "Company",
@@ -69,17 +100,35 @@ export default function EnhancedFooter() {
         "Contact",
         "Partnerships",
       ],
+      hrefs: [
+        "/about",
+        "/team",
+        "/careers",
+        "/press",
+        "/contact",
+        "/partnerships"
+      ],
+      target: "_blank"
     },
     {
       title: "Legal",
       links: [
         "Privacy Policy",
-        "Terms of Service",
+        "Terms of Service", 
         "Cookie Policy",
         "Fair Housing",
         "Accessibility",
         "Sitemap",
       ],
+      hrefs: [
+        "/privacy",
+        "/terms",
+        "/cookies",
+        "/fair-housing",
+        "/accessibility",
+        "/sitemap"
+      ],
+      target: "_blank"
     },
   ];
 
@@ -98,6 +147,7 @@ export default function EnhancedFooter() {
                 <a
                   key={name}
                   href="/"
+                  target="_blank"
                   className="text-white hover:text-gray-300"
                 >
                   <span className="sr-only">{name}</span>
@@ -109,16 +159,17 @@ export default function EnhancedFooter() {
 
           <div className="mt-2 sm:mt-12 grid grid-cols-3 gap-6 sm:gap-8 xl:mt-0 xl:col-span-3">
             <div className="md:grid md:grid-cols-2 md:gap-8">
-              {sections.slice(0, 2).map(({ title, links }) => (
+              {sections.slice(0, 2).map(({ title, links, hrefs, target }) => (
                 <div key={title}>
                   <h3 className="text-xs mt-2 sm:mt-0 sm:text-sm font-semibold text-white tracking-wider uppercase">
                     {title}
                   </h3>
                   <ul className="sm:mt-4  md:space-y-4">
-                    {links.map((link) => (
+                    {links.map((link, index) => (
                       <li key={link}>
                         <a
-                          href="/"
+                          href={hrefs[index]}
+                          target={target}
                           className="text-xs sm:text-base text-gray-300 hover:text-white"
                         >
                           {link}
@@ -131,16 +182,17 @@ export default function EnhancedFooter() {
             </div>
 
             <div className="md:grid md:grid-cols-2 md:gap-8">
-              {sections.slice(2,4).map(({ title, links }) => (
+              {sections.slice(2,4).map(({ title, links, hrefs, target }) => (
                 <div key={title}>
                   <h3 className="text-xs mt-2 sm:mt-0 sm:text-sm font-semibold text-white tracking-wider uppercase">
                     {title}
                   </h3>
                   <ul className="sm:mt-4  md:space-y-4">
-                    {links.map((link) => (
+                    {links.map((link, index) => (
                       <li key={link}>
                         <a
-                          href="/"
+                          href={hrefs[index]}
+                          target={target}
                           className="text-xs sm:text-base text-gray-300 hover:text-white"
                         >
                           {link}
@@ -152,16 +204,17 @@ export default function EnhancedFooter() {
               ))}
             </div>
             <div className="md:grid md:grid-cols-2 md:gap-8">
-              {sections.slice(4).map(({ title, links }) => (
+              {sections.slice(4).map(({ title, links, hrefs, target }) => (
                 <div key={title}>
                   <h3 className="text-xs mt-2 sm:mt-0 sm:text-sm font-semibold text-white tracking-wider uppercase">
                     {title}
                   </h3>
                   <ul className="sm:mt-4  md:space-y-4">
-                    {links.map((link) => (
+                    {links.map((link, index) => (
                       <li key={link}>
                         <a
-                          href="/"
+                          href={hrefs[index]}
+                          target={target}
                           className="text-xs sm:text-base text-gray-300 hover:text-white"
                         >
                           {link}
@@ -197,6 +250,7 @@ export default function EnhancedFooter() {
               <div className="sm:mt-4 my-2 flex space-x-4">
                 <a
                   href="/"
+                  target="_blank"
                   className="flex items-center justify-center px-1 py-1 sm:px-4 sm:py-2 border border-transparent rounded-md shadow-sm text-xs sm:text-base font-medium text-white bg-gray-800 hover:bg-gray-700"
                 >
                   <FaAppStoreIos  className="mr-1.5 w-[14px] h-[14px] sm:w-[28px] sm:h-[28px]" />
@@ -204,6 +258,7 @@ export default function EnhancedFooter() {
                 </a>
                 <a
                   href="/"
+                  target="_blank"
                   className="flex items-center justify-center px-1 py-1 sm:px-4 sm:py-2 border border-transparent rounded-md shadow-sm text-xs sm:text-base font-medium text-white bg-gray-800 hover:bg-gray-700"
                 >
                   <IoLogoGooglePlaystore  className="mr-1 w-[14px] h-[14px] sm:w-[28px] sm:h-[28px]" />
@@ -221,6 +276,7 @@ export default function EnhancedFooter() {
             </button>
             <a
               href={`tel:${8884440963}`}
+              target="_blank"
               className="text-white text-xs sm:text-base hover:text-gray-300 inline-flex md:items-center md:justify-center flex-wrap text-left"
             >
               <FaPhoneAlt className="mr-1" /> +91-8884440963

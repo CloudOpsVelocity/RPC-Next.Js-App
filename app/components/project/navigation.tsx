@@ -110,7 +110,7 @@ export default function Navigation({
           ? true
           : false,
     },
-    { key: TOPIC_IDS.BROCHURE, condtion: isBrochure },
+ 
     { condtion: true, key: TOPIC_IDS.OVERVIEW },
     { condtion: true, key: TOPIC_IDS.LISTINGS_AVAILABLE },
     { condtion: true, key: TOPIC_IDS.ABOUT },
@@ -125,6 +125,7 @@ export default function Navigation({
     },
     { condtion: true, key: TOPIC_IDS.LOCATION_MAP },
     { condtion: isNearBy, key: TOPIC_IDS.NEAR_BY },
+    { key: TOPIC_IDS.BROCHURE, condtion: isBrochure },
     {
       condtion: detailsData?.specificationList?.length > 0,
       key: TOPIC_IDS.SPECIFICATIONS,

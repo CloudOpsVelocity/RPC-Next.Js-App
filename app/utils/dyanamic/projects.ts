@@ -3,7 +3,7 @@ import { projectprops } from "@/app/data/projectDetails";
 export function setPropertyValues(data: any, propCgId: number): any {
   
   let updatedValues: any = {
-    ...(data.facingName !== "Don't Know" && { facingName: data?.facingName }),
+    ...(data?.facingName !== "Don't Know" && { facingName: data?.facingName }),
     bhkName: data?.bhkName,
     towerName: data?.towerName,
     unitNumber: data?.unitNumber,
@@ -17,7 +17,7 @@ export function setPropertyValues(data: any, propCgId: number): any {
     }),
     totalNumberofBathroom: data?.totalNumberofBathroom?.toString(),
     ...(data?.block && { block: data?.block }),
-    ...(data.aptTypeName && { aptTypeName: data.aptTypeName }),
+    ...(data?.aptTypeName && { aptTypeName: data.aptTypeName }),
   };
 
   switch (propCgId) {

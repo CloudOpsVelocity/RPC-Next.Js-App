@@ -42,13 +42,13 @@ function CarouselModal({
   const { data: session } = useSession();
   let DownloadFile = async () => {
     try {
-      const response = await fetch(selectedFloor?.floorPlanUrl);
+      const response = await fetch(selectedFloor?.floorPlanUrl.split(",")[3]);
       console.log(response);
       const blob = await response.blob();
       const url = URL.createObjectURL(blob);
       const downloadLink = document.createElement("a");
       downloadLink.href = url;
-      downloadLink.download = "floorplan.jpg";
+      downloadLink.download = "floorplan.webp";
       document.body.appendChild(downloadLink);
       downloadLink.click();
       document.body.removeChild(downloadLink);
@@ -97,7 +97,7 @@ function CarouselModal({
           <SharePopup
             title="Share"
             titleText="Share Floor Plan"
-            url={imageUrlParser(selectedFloor?.floorPlanUrl, "F")}
+            url={imageUrlParser(selectedFloor?.floorPlanUrl.split(",")[3], "F")}
           />
 
           <Close close={close} />

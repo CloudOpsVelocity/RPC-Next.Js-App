@@ -242,8 +242,8 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
   const handleOnChange = (value: string, key: string) => {
     setFieldValue(key, value);
     let prevObj = values;
-    setPreviousFilers(prevObj);
     prevObj[key] = value;
+    setPreviousFilers(prevObj);
     setValues(prevObj);
     handleSearch(key);
   };
@@ -375,7 +375,7 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
               key={"unit-type-name"}
               w={"full"}
               mt="md"
-              label={`${propCgId == projectprops.villament ? "Select Villa Type" : "Select Apartment Type"}`}
+              label={`${propCgId == projectprops.villament ? "Select Villament Type" : "Select Apartment Type"}`}
               className="!w-[46%]"
               placeholder="-- select --"
               data={getOptions("aptTypeName")}
@@ -804,12 +804,12 @@ const MiddleSection = ({
             {propCgId != projectprops.plot &&
               selectedFloor?.superBuildUparea &&
               " | Area. " +
-                formatNumberWithSuffix(selectedFloor?.superBuildUparea) +
+                formatNumberWithSuffix(selectedFloor?.superBuildUparea,false) +
                 " sq.ft"}
             {propCgId == projectprops.plot &&
               selectedFloor?.plotArea &&
               " | Area. " +
-                formatNumberWithSuffix(selectedFloor?.plotArea) +
+                formatNumberWithSuffix(selectedFloor?.plotArea,false) +
                 " sq.ft"}
           </>
         )}

@@ -51,6 +51,7 @@ import UnitsImagesBlock from "./unitblock/UnitsImagesBlock";
 import { useMediaQuery } from "@mantine/hooks";
 import Image from "next/image";
 import PartialUnitData from "./sections";
+import useRecentUnits from "@/app/hooks/project/useRecentUnits";
 
 type Props = {
   data: PhaseList[];
@@ -196,6 +197,16 @@ Props) {
     handleSearch();
     open("floor");
   };
+  const handleByUnitClick = ( selectedUnit : any) => {
+    setSelectedFloor({
+      ...selectedUnit,
+      floorPlanUrl: selectedUnit?.floorPlanUrl?.split(",")[3] ?? ImgNotAvail,
+    });
+    form.setValues(setPropertyValues(selectedUnit, propCgId));
+    // @ts-ignore
+    setFloorsArray([selectedUnit]);
+    open("floor");
+  };
   const handlePricingFloorPlanClick = (selectedBhk: any) => {
     if (selectedBhk.bhkName.includes("_")) {
       const [length, width] = selectedBhk.bhkName.split("_");
@@ -251,6 +262,7 @@ Props) {
   };
   const [bhk, setBhk] = useState("0");
   const parentRef = React.useRef(null);
+  const {resetFilters} = useRecentUnits() 
 
   const isMobile = useMediaQuery("(max-width: 601px)");
 
@@ -328,6 +340,7 @@ Props) {
                         if (currentPhase == each.phaseId) return;
                         setCurrentPhase(each.phaseId);
                         setBhk("0");
+                        resetFilters()
                         if (floorPlanType === "unit") {
                           setSelectedFloor({});
                           handleUnitFormClear();
@@ -378,6 +391,7 @@ Props) {
                           if (propCgId !== keyName) {
                             getPropertyType(propertyDetailsTypes.get(keyName));
                             setBhk("0");
+                            resetFilters()
                             if (floorPlanType == "unit") {
                               setSelectedFloor({});
                               handleUnitFormClear();
@@ -766,6 +780,7 @@ Props) {
                         <UnitsImagesBlock
                           form={byUnitForm}
                           propCgId={propCgId}
+                          handleByUnitClick={handleByUnitClick}
                         />
                       )}
                     </>

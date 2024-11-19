@@ -42,7 +42,6 @@ const imageUrlParser = (originalUrl: string, type?: string) => {
         process.env.NEXT_PUBLIC_URL
       }/image?path=${imagePath}${type ? `&type=${type}` : ""}`;
     }
-console.log(modifiedUrl)
     return modifiedUrl;
 };
 export { getImageUrls, imageUrlParser };

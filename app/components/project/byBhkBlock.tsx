@@ -3,6 +3,7 @@ import Button from "../../elements/button";
 import FloorplanDetailsCard from "./floorplanDetailsCard";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import zlib from "zlib";
+import { useMediaQuery } from "@mantine/hooks";
 type Props = {
   propCgId: any;
   data: any;
@@ -64,13 +65,13 @@ export default function ByBhkBlock({
       }
     });
   };
-
+  const isMobile = useMediaQuery("(max-width: 768px)"); 
   const parentRef = React.useRef(null);
   const rowVirtualizer = useVirtualizer({
     count: filteredData?.length,
     getScrollElement: () => parentRef.current,
-    estimateSize: () => 180,
-    overscan: 5,
+    estimateSize: () => isMobile ? 250 : 180,
+    overscan: isMobile ? 9 : 5,
   });
 
   const getOptions = (property: string): string[] => {

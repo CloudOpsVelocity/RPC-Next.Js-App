@@ -47,7 +47,7 @@ export default function RecentSearchedUnits({
                       : key}
                     :
                   </strong>{" "}
-                  {value}
+                  {value === 0 ? "G" : value}
                   {firstTwoNonNullableEntries.length > 1 &&
                     firstTwoNonNullableEntries.indexOf(
                       firstTwoNonNullableEntries[

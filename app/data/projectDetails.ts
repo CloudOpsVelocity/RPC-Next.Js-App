@@ -1,6 +1,5 @@
 export const TOPIC_IDS = {
   OVERVIEW: "overview",
-  BROCHURE: "brochure",
   LISTINGS_AVAILABLE: "listings-available",
   ABOUT: "about",
   PROPERTY_DETAILS: "property-details",
@@ -11,6 +10,7 @@ export const TOPIC_IDS = {
   AMENITIES: "amenities",
   LOCATION_MAP: "location-map",
   NEAR_BY: "near-by-projects",
+  BROCHURE: "brochure",
   SPECIFICATIONS: "specifications",
   HIGHLIGHTS: "highlights",
   PROJECT_RATINGS: "proj_rating",
@@ -52,7 +52,7 @@ export const TOPIC_IDS = {
 
 export const topics = [
   { label: "Overview", id: TOPIC_IDS.OVERVIEW },
-  { label: "Brochure", id: TOPIC_IDS.BROCHURE },
+
   { label: "Listings Available", id: TOPIC_IDS.LISTINGS_AVAILABLE },
   { label: "About", id: TOPIC_IDS.ABOUT },
   { label: "Property Details", id: TOPIC_IDS.PROPERTY_DETAILS },
@@ -63,6 +63,7 @@ export const topics = [
   { label: "Amenities", id: TOPIC_IDS.AMENITIES },
   { label: "Location Map", id: TOPIC_IDS.LOCATION_MAP },
   { label: "Near By", id: TOPIC_IDS.NEAR_BY },
+  { label: "Brochure", id: TOPIC_IDS.BROCHURE },
   { label: "Specifications", id: TOPIC_IDS.SPECIFICATIONS },
   { label: "Highlights", id: TOPIC_IDS.HIGHLIGHTS },
   { label: "Project Ratings", id: TOPIC_IDS.PROJECT_RATINGS },

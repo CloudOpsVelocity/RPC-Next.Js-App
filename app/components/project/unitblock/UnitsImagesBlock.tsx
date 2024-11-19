@@ -11,19 +11,28 @@ import { ImgNotAvail } from "@/app/data/project";
 const UnitsImagesBlock = ({
   propCgId,
   form: { setValues },
+  handleByUnitClick
 }: {
   propCgId: number;
   form: any;
+  handleByUnitClick: (selectedUnit: any) => void;
 }) => {
   const [floorsArray, setFloorArray] = useAtom(unitFloorsAtom);
   const containerRef = useRef<HTMLDivElement>(null);
 
-
+  // const handleCardClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  //   e.stopPropagation();
+  //   const setted = setPropertyValues(data, propCgId);
+  //   setImage({ ...data, floorPlanUrl: data.floorPlanUrl ?? ImgNotAvail });
+  //   setValues(setted);
+  //   handleSearch();
+  //   open("floor");
+  // };
   const isTab = useMediaQuery("(min-width: 1280px)");
 
-  const selectImg = (index: number) => {
-    setValues(setPropertyValues(floorsArray[index], propCgId));
-    handleSearch(index);
+  const selectImg = (data:any) => {
+    // setValues(setPropertyValues(floorsArray[index], propCgId));
+    handleByUnitClick(data);
   };
   const handleSearch = (index: number): void => {
     const filteredFloors = floorsArray?.filter(
@@ -67,11 +76,11 @@ const UnitsImagesBlock = ({
                   <Image
                     className="cursor-pointer border max-h-[64px] border-indigo-600 border-1 border-solid rounded-[4px] "
                     key={`unitsImgUrl_${imgUrl ? imgUrl[index] : index}`}
-                    src={imgUrl.split(',')[0] ?? ImgNotAvail}
+                    src={imgUrl ? imgUrl.split(',')[3] : ImgNotAvail}
                     width={100}
                     height={100}
                     alt="not found"
-                    onClick={() => selectImg(index)}
+                    onClick={() => selectImg(eachOne)}
                   />
                 );
             })}

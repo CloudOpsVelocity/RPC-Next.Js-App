@@ -9,6 +9,8 @@ import {
 } from "react-icons/fa";
 import { PopupOpenSvg } from "@/app/images/commonSvgs";
 import { useMediaQuery } from "@mantine/hooks";
+import { useSession } from "next-auth/react";
+import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 
 // PDF worker setup
 pdfjs.GlobalWorkerOptions.workerSrc =
@@ -71,7 +73,8 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
         loading: false,
         errorMessage: "",
       });
-
+  const { data: session } = useSession();
+  const [, { open: LoginOpen }] = usePopShortList();
   const pdfContainerRef = useRef<HTMLDivElement>(null);
   const adjustPageScale = useCallback(() => {
     if (pdfContainerRef.current) {
@@ -98,6 +101,16 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
 
   const changePage = (offset: number) => {
     setState((prev) => ({ ...prev, pageNumber: prev.pageNumber + offset }));
+  };
+
+  const handleDownload = (url: string) => {
+    if (!session) {
+      LoginOpen(() => {
+        url && window.open(`/pdf/${encodeURIComponent(url.split(".net")[1])}`, "_blank");
+      });
+      return;
+    }
+    window.open(url, "_blank");
   };
 
   const loadPDF = async (phase: ProjectPhase) => {
@@ -145,25 +158,28 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
 
   if (singleBrocher) {
     return (
-      <div className="w-[95%] sm:w-[90%] mx-auto my-4 sm:my-8 bg-gray-50">
+      <div className="w-[95%] sm:w-[90%] mx-auto my-4 sm:my-8 bg-gray-50 scroll-mt-[125px]" id="brochure">
         <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-semibold mb-[12px] capitalize break-words pl-3 pt-2">
           <span>Explore the Comprehensive Brochure of </span>
           <span className="text-[#148B16] font-bold">{projName}</span>
         </h2>
 
         <div
-          className="bg-white rounded-lg shadow-lg p-4 max-w-full mx-auto h-[350px] sm:h-[600px] flex flex-col justify-between items-center overflow-y-auto"
+          className="bg-white relative rounded-lg shadow-lg p-4 max-w-full mx-auto h-[350px] sm:h-[600px] flex flex-col justify-between items-center overflow-y-auto"
           ref={pdfContainerRef}
         >
-          <div className="flex-grow w-full overflow-hidden flex justify-center items-center relative">
-            <a
-              href={singleBrocher || "#"}
-              target="_blank"
-              download
-              className="absolute top-0 right-0"
+              <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                if (singleBrocher) handleDownload(singleBrocher);
+              }}
+              className="absolute top-1 right-1 sm:top-2 sm:right-2 z-[10000]"
             >
               <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[36px] lg:h-[36px]" />
             </a>
+          <div className="flex-grow w-full overflow-hidden flex justify-center items-center relative">
+        
 
             {state.loading ? (
               <FaSpinner className="animate-spin text-[#0073C6] h-8 w-8" />
@@ -204,9 +220,11 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
                 Page {state.pageNumber} of {state.numPages || "--"}
               </span>
               <a
-                href={singleBrocher || "#"}
-                target="_blank"
-                download
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (singleBrocher) handleDownload(singleBrocher);
+                }}
                 className={`bg-[#0073C6] text-white px-3 py-1 rounded-full flex items-center space-x-2 transition-all duration-300 ease-in-out transform group-hover:scale-105 hover:shadow-lg ${
                   state.loading ? "cursor-not-allowed" : ""
                 }`}
@@ -232,7 +250,7 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
   }
 
   return (
-    <div className="w-[95%] sm:w-[90%] mx-auto my-4 sm:my-8 bg-gray-50">
+    <div className="w-[95%] sm:w-[90%] mx-auto my-4 sm:my-8 bg-gray-50 scroll-mt-[125px]" id="brochure">
       <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-semibold mb-[12px] capitalize break-words pl-3 pt-2">
         <span>Explore the Comprehensive Brochures of </span>
         <span className="text-[#148B16] font-bold">{projName}</span>
@@ -275,9 +293,11 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
       >
         <div className="flex-grow w-full overflow-hidden flex justify-center items-center relative">
           <a
-            href={state.activePhase.brochure || "#"}
-            target="_blank"
-            download
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              if (state.activePhase.brochure) handleDownload(state.activePhase.brochure);
+            }}
             className="absolute top-0 right-0 z-[10000]"
           >
             <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[36px] lg:h-[36px] " />
@@ -326,9 +346,11 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
               Page {state.pageNumber} of {state.numPages || "--"}
             </span>
             <a
-              href={state.activePhase.brochure || "#"}
-              target="_blank"
-              download
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                if (state.activePhase.brochure) handleDownload(state.activePhase.brochure);
+              }}
               className={`bg-[#0073C6] text-white px-3 py-1 rounded-full flex items-center space-x-2 transition-all duration-300 ease-in-out transform group-hover:scale-105 hover:shadow-lg ${
                 state.loading ? "cursor-not-allowed" : ""
               }`}
