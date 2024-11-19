@@ -103,7 +103,7 @@ export default function MasterPlan({
         </div>
       </div>
       <div className="relative">
-        <FullScreenMasterPlanModal imageUrl={media} title={`Master Plan of ${projName}`} altText={`Master Plan of ${projName}`} />
+        <FullScreenMasterPlanModal imageUrl={media} title={`${projName}`} altText={`Master Plan of ${projName}`} />
         {/* <MasterPlanPopup
           url={media}
           onDownload={handleDownload}

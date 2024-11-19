@@ -47,7 +47,7 @@ export default function RecentSearchedUnits({
                       : key}
                     :
                   </strong>{" "}
-                  {value === 0 ? "G" : value}
+                  {value == 0 ? "G" : value}
                   {firstTwoNonNullableEntries.length > 1 &&
                     firstTwoNonNullableEntries.indexOf(
                       firstTwoNonNullableEntries[
@@ -87,7 +87,7 @@ export default function RecentSearchedUnits({
                                   : filterKeysDetails?.get(key)?.name
                                 : key}
                             </strong>
-                            : {value === 0 ? "G" : value}
+                            : {value == 0 ? "G" : value}
                           </div>
                         )
                     )}
