@@ -5,10 +5,9 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: "*",
-        allow: "/",
-        disallow: ["/test/", "/dashboard/"],
+        allow: "/", // Allows all pages
       },
     ],
-    sitemap: `${process.env.NEXT_PUBLIC_PROJECT_URL}/sitemap.xml`,
+    sitemap: `${process.env.NEXT_PUBLIC_PROJECT_URL}/sitemap.xml`, // Dynamically generates the sitemap URL
   };
 }

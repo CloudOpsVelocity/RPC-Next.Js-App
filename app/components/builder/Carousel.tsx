@@ -197,7 +197,7 @@ export function ProjectCard({ type, cardData, refetch }: CardProps) {
                   Project Status:{" "}
                 </span>
                 <span className="text-[#148B16] text-[14px] xl:text-base not-italic font-bold leading-[normal]">
-                  {cardData.projectStatus}
+                  {cardData.projectStatusName}
                 </span>
               </div>
             )}
