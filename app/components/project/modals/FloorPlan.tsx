@@ -247,7 +247,6 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
     setValues(prevObj);
     handleSearch(key);
   };
-
   return (
     <div className="col-span-1 w-full max-w-[392px] mr-[3%]  ">
       <div className="w-[100%] flex justify-between items-start flex-wrap gap-[5%] z-[100000]">
@@ -376,7 +375,7 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
               key={"unit-type-name"}
               w={"full"}
               mt="md"
-              label="Select Apartment Type"
+              label={`${propCgId == projectprops.villament ? "Select Villa Type" : "Select Apartment Type"}`}
               className="!w-[46%]"
               placeholder="-- select --"
               data={getOptions("aptTypeName")}
@@ -863,14 +862,14 @@ const MiddleSection = ({
       {floorsArray != undefined &&
         floorsArray != null &&
         floorsArray.length > 0 && (
-          <div className="flex justify-center items-center mb-6 sm:mb-0  mt-4 w-full">
+          <div className="flex justify-center  items-center mb-6 sm:mb-0  mt-4 w-full">
             <ColumnVirtualizerFixed
               items={floorsArray}
               itemCount={floorsArray.length}
               height={70}
               itemSize={120}
               overscan={5}
-              position="center"
+              position="start"
               renderItem={(eachObj: any, index: number) => (
                 <div
                   className={clsx(

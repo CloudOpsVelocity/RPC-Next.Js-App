@@ -17,7 +17,7 @@ export default function ShareBtn({ url, type }: Props) {
     setShareAtomData({
       ...shareAtomData,
       opened: true,
-      url: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/${url}`,
+      url: `${process.env.NEXT_PUBLIC_BACKEND_URL}${url}`,
       ...(type !== "proj" && {
         title: "Share Listing",
       }),

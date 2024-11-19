@@ -4,21 +4,29 @@ import { atom, useAtom } from 'jotai';
 const recentUnitsAtom = atom<any[]>([]);
 
 // Custom hook to manage recent units with generics
-export default function useRecentUnits<T>() {
+export default function useRecentUnits<T extends Record<string, any>>() {
   const [recentUnits, setRecentUnits] = useAtom<T[]>(recentUnitsAtom);
 
-  const setPreviousFilers = (unit: T) => {
+  const setPreviousFilters = (unit: T) => {
+    // Check if the new unit already exists in the array by comparing each value, including null
+    const isExisting = recentUnits.some((existingUnit) =>
+      Object.keys(unit).every((key) => existingUnit[key] === unit[key])
+    );
+
+    if (isExisting) return; // Skip adding if the unit already exists
+
     // Check if the recentUnits array already has 5 units
     if (recentUnits.length >= 5) {
       // Remove the last unit and add the new unit at the front
-      setRecentUnits((prev) => [...prev.slice(1), unit]);
+      setRecentUnits((prev) => [unit, ...prev.slice(0, 4)]);
     } else {
       // Add the new unit without removing any units
-      setRecentUnits((prev) => [...prev, unit]);
+      setRecentUnits((prev) => [unit, ...prev]);
     }
   };
+
   return {
     recentUnits,
-    setPreviousFilers,
+    setPreviousFilers:setPreviousFilters,
   };
 }

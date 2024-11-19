@@ -278,9 +278,9 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
             href={state.activePhase.brochure || "#"}
             target="_blank"
             download
-            className="absolute top-0 right-0"
+            className="absolute top-0 right-0 z-[10000]"
           >
-            <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[36px] lg:h-[36px]" />
+            <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[36px] lg:h-[36px] " />
           </a>
 
           {state.loading ? (

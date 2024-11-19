@@ -60,6 +60,18 @@ export const RightSection = ({ propCgId, className }: any) => {
               </p>
             </div>
           )}
+        {(propCgId === projectprops.apartment || propCgId === projectprops.villament) && data.aptTypeName && (
+          <div className="flex items-center space-x-3">
+            {propertyDetailsSvgs.unitType}
+            <p className="text-[#4D6677] text-[14px] font-[500]">
+              Apartment Type:
+              <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] capitalize">
+                {" "}
+                {data.aptTypeName}
+              </span>
+            </p>
+          </div>
+        )}
 
         {propCgId != projectprops.plot && (
           <div className="flex items-center space-x-3">

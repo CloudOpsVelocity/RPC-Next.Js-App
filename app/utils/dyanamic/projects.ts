@@ -17,6 +17,7 @@ export function setPropertyValues(data: any, propCgId: number): any {
     }),
     totalNumberofBathroom: data?.totalNumberofBathroom?.toString(),
     ...(data?.block && { block: data?.block }),
+    ...(data.aptTypeName && { aptTypeName: data.aptTypeName }),
   };
 
   switch (propCgId) {
@@ -47,6 +48,7 @@ export function setPropertyValues(data: any, propCgId: number): any {
         ...(data?.totalBalconySize && {
           totalBalconySize: data?.totalBalconySize?.toString(),
         }),
+        ...(data.aptTypeName && { aptTypeName: data.aptTypeName }),
       };
 
     case projectprops.rowHouse:
