@@ -13,6 +13,7 @@ import {
   TrainIcon,
   nearbyLocationIcon,
 } from "@/app/images/commonSvgs";
+import { MdLocalAirport, MdTrain } from "react-icons/md";
 export interface Area {
   name: string;
   Icon?: any;
@@ -91,6 +92,16 @@ export const areas: Area[] = [
     name: "Mall",
     Icon: MallIcon,
     key: "shopping_mall",
+  },
+  {
+    name: "Airport",
+    Icon:   MdLocalAirport,
+    key: "airport",
+  },
+  {
+    name: "Metro",
+    Icon: MdTrain,
+    key: "subway_station",
   },
 ];
 export const areasMap = areas.reduce((map, area) => {

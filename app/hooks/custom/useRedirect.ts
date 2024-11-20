@@ -118,3 +118,59 @@ export default function usePathToOrigin() {
     redirectQueryParam,
   };
 }
+
+// import { useRouter } from 'next/router';
+
+// A simple encrypt function (you may use a more secure one)
+const encrypt = (text: string): string => {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(text);
+  return btoa(Array.from(new Uint8Array(data)).map(byte => String.fromCharCode(byte)).join(''));
+};
+
+// A simple decrypt function
+const decrypt = (encryptedText: string): string => {
+  const decoded = atob(encryptedText);
+  const data = new Uint8Array(decoded.split('').map((char) => char.charCodeAt(0)));
+  const decoder = new TextDecoder();
+  return decoder.decode(data);
+};
+
+// export function useGlobalRedirectLogic() {
+//   const router = useRouter();
+
+//   // Function to generate the hashed URL with encrypted query params
+//   const getHashedUrl = (destination: string, callbackUrl: string): string => {
+//     // Encrypt the callback URL
+//     const encryptedCallback = encrypt(callbackUrl);
+
+//     // Generate the new URL with encrypted callback as a query parameter
+//     const newUrl = `${destination}?cc=${encryptedCallback}`;
+
+//     // Return the hashed URL
+//     return newUrl;
+//   };
+
+//   // Function to handle decryption and redirection from the query parameter
+//   const handleDecryptionRedirect = (): void => {
+//     // Check if the URL contains a query parameter for the encrypted callback
+//     const urlParams = new URLSearchParams(window.location.search);
+//     const encryptedCallback = urlParams.get('cc');
+
+//     if (encryptedCallback) {
+//       // Decrypt the callback URL
+//       const decryptedCallback = decrypt(encryptedCallback);
+//       console.log('Redirecting to:', decryptedCallback);
+
+//       // Redirect user to the original destination
+//       router.push(decryptedCallback);
+//     } else {
+//       console.log('No encrypted callback URL found');
+//     }
+//   };
+
+//   return {
+//     getHashedUrl,
+//     handleDecryptionRedirect
+//   };
+// }

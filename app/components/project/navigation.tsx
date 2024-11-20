@@ -8,6 +8,7 @@ import clsx from "clsx";
 import { atom, useAtom } from "jotai";
 import Image from "next/image";
 import React, { useState, useRef, useEffect } from "react";
+import { useQuery } from "react-query";
 export const isScrollingAtom = atom(false);
 export const stickyAtom = atom(false);
 export const currentBlockAtom = atom("overview");
@@ -146,6 +147,11 @@ export default function Navigation({
     { condtion: true, key: TOPIC_IDS.SIMILAR_PROJECTS },
     { condtion: true, key: TOPIC_IDS.CONTACT },
   ];
+  const {data:userData} = useQuery({
+    queryKey:[`builder/${detailsData.builderId}&isBuilderPage=Nproj`],
+   enabled:false
+  })
+  console.log(userData)
   useEffect(() => {
     if (
       scrollId &&
@@ -211,7 +217,8 @@ export default function Navigation({
                   if (topic.id === "contact") {
                     open({
                       modal_type: "PROJECT_REQ_CALLBACK",
-                      postedByName: detailsData.postedByName,
+                      // @ts-ignore
+                      postedByName: userData?.data?.userName,
                       reqId: slug,
                       source: "projBanner",
                       title: detailsData.projectName,
