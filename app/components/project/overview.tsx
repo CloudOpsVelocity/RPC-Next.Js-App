@@ -22,6 +22,7 @@ import ReportSection from "./actions/Report";
 import { formatNumberWithSuffix } from "@/app/utils/numbers";
 import { TOPIC_IDS } from "@/app/data/projectDetails";
 import { Main, MERGERPROJECT } from "@/app/validations/types/project";
+import { useQuery } from "react-query";
 export interface Props extends Main {
   // Extend Main directly
   slug: string; // New property for the slug
@@ -51,6 +52,10 @@ export default function Overview({
   slug,
   projAuthorityNames,
 }: Props) {
+  const { data, isLoading, status } = useQuery<any>({
+    queryKey: [`builder/${builderId}&isBuilderPage=Nproj`],
+    enabled: false,
+  });
   return (
     <div
       className=" sm:pt-[2%] xl:pt-[2%] sm:scroll-mt-[138px] xl:scroll-mt-[150px] w-[95%] sm:[95%] xl:w-[90%] rounded-[24px] shadow-md mb-[5%] sm:mb-[0%]  mt-[2%] bg-gradient-to-r from-[#F6F6F6] /0 via-[#FFF] /45 to-[#FEFFFF]/100 "
@@ -187,7 +192,7 @@ export default function Overview({
         maxPrice={maxPrice}
         minPrice={minPrice}
         name={projectName}
-        buiderName={postedByName}
+        buiderName={data?.data?.userName}
         builderId={builderId}
         basePrice={basePrice}
         brocherUrl={media?.projBroucherUrl}

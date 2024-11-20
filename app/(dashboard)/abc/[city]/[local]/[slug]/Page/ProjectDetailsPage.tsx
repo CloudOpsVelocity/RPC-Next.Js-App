@@ -22,7 +22,8 @@ const FloorplansBlock = dynamic(() => import("@/app/components/project/floorplan
 const GalleryBlock = dynamic(() => import("@/app/components/project/galleryBlock"));
 const Specifications = dynamic(() => import("@/app/components/project/specification"));
 const Banner = dynamic(() => import("@/app/components/project/banner"));
-const AboutBuilder = dynamic(() => import("@/app/components/project/aboutBuilder"));
+// const AboutBuilder = dynamic(() => import("@/app/components/project/aboutBuilder"));
+import AboutBuilder from "@/app/components/project/aboutBuilder";
 const FaqWithBg = dynamic(() => import("@/app/components/project/faq"));
 const NearByCarousel = dynamic(() => import("@/app/components/project/NearByCarousel"));
 const LoginPopup = dynamic(() => import("@/app/components/project/modals/LoginPop"));

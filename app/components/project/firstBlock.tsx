@@ -50,7 +50,7 @@ const FirstBlock: React.FC<Props> = ({
     enabled: false,
     onSuccess(data) {
       urlBuilder = generateBuilderUrl({
-        slug: data.data?.userName,
+        slug: data?.data?.userName,
         city: data.data?.cityName,
       });
     },
@@ -163,7 +163,7 @@ const FirstBlock: React.FC<Props> = ({
                     target="_blank"
                     className="text-btnPrimary sm:text-[16px] xl:text-2xl  font-bold leading-[normal] underline"
                   >
-                    {companyName ?? "Builder"}
+                    {data?.data?.userName ?? "Builder"}
                   </a>
                 </p>
               </div>
