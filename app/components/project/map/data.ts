@@ -63,6 +63,11 @@ export const areas: Area[] = [
     Icon: RestaurentIcon,
     key: "restaurant",
   },
+  {
+    name: "Restaurant",
+    Icon: RestaurentIcon,
+    key: "food",
+  },
 
   {
     name: "Bank",
