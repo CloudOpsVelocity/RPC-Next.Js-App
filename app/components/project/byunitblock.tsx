@@ -133,11 +133,9 @@ const Byunitblock: React.FC<Props> = ({
   };
   const handleOnChange = (key: string, value: string) => {
     setFieldValue(key, value);
-
     let prevObj = values;
-    setPreviousFilers(prevObj);
     prevObj[key] = value;
-
+    setPreviousFilers(prevObj);
     setValues(prevObj);
     handleSearch(key, "add");
   };

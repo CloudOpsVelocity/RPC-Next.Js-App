@@ -61,7 +61,7 @@ export const areas: Area[] = [
   {
     name: "Restaurant",
     Icon: RestaurentIcon,
-    key: "food",
+    key: "restaurant",
   },
 
   {
