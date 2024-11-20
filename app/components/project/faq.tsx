@@ -26,11 +26,11 @@ import { useMessagePopup } from "@/app/hooks/project/useMessagePopup";
 type FaqWithBgProps = {
   data: FAQ[];
   projName: string;
-  slug:string
+  slug:string;
+  postedById:number;
 };
 
-export default function FaqWithBg({ data, projName,slug }: FaqWithBgProps) {
-  const isMobile = useMediaQuery(`(max-width: 601px)`);
+export default function FaqWithBg({ data, projName,slug,postedById }: FaqWithBgProps) {
   return (
     <div
       className={data?.length > 0 ? classes.wrapper : "!w-[95%] !md:w-[90%]   "}
@@ -56,7 +56,7 @@ export default function FaqWithBg({ data, projName,slug }: FaqWithBgProps) {
           );
         })}
       </div>
-      <AddQnaForm projName={projName} slug={slug} />
+      <AddQnaForm projName={projName} slug={slug} postedById={postedById} />
     </div>
   );
 }
@@ -73,7 +73,7 @@ return (
   </div>
 )
 }
-const AddQnaForm = ({ projName, slug }: { projName: string,slug:string }) => {
+const AddQnaForm = ({ projName, slug,postedById }: { projName: string,slug:string ,postedById:number}) => {
   const [, { open }] = usePopShortList();
   const { data: session } = useSession();
   const [status, setStatus] = useState<
@@ -96,7 +96,7 @@ const AddQnaForm = ({ projName, slug }: { projName: string,slug:string }) => {
   const [opened, { close, open: openSuccesPopup }] = useMessagePopup("qna");
   const handleQna = async () => {
     try {
-      await addQna({ question: values.question, projIdEnc: slug });
+      await addQna({ question: values.question, projIdEnc: slug,ansBy:postedById });
       openSuccesPopup();
       setStatus("success");
     } catch (error: any) {

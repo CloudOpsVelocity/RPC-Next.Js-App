@@ -236,7 +236,7 @@ export default async function ProjectsDetailsPage({
           id="faq"
           className="scroll-mt-[70px] m-auto w-[95%] sm:w-[90%] flex justify-start items-start"
         >
-          <FaqWithBg data={data.faqs} slug={slug} projName={data.projectName} />
+          <FaqWithBg data={data.faqs} slug={slug} projName={data.projectName} postedById={data.builderId} />
         </div>
         <NearByCarousel
           projName={data.projectName}
