@@ -44,7 +44,7 @@ export default function AmenitiesDisplay({ amenitiesData, data }: AmenitiesDispl
   }
 
   return (
-    <div className="flex flex-col md:flex-row bg-gray-50 p-4 rounded-lg shadow-md w-full">
+    <div className="flex flex-col md:flex-row bg-gray-50 p-4 rounded-lg shadow-md max-w-fit">
       {/* Sidebar Categories - Desktop */}
       <div className="hidden md:block w-full md:min-w-[250px] md:max-w-[250px] md:max-h-[500px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 mb-4 md:mb-0 md:mr-4">
         {availableCategories.map((category: string) => (
@@ -116,8 +116,8 @@ export default function AmenitiesDisplay({ amenitiesData, data }: AmenitiesDispl
       </div>
 
       {/* Main Display - Desktop */}
-      <div className="hidden md:block bg-white flex-grow rounded-lg border border-gray-200 shadow-sm overflow-hidden">
-        <div className="max-h-[500px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+      <div className="hidden md:block bg-white h-fit flex-grow rounded-lg border border-gray-200 shadow-sm overflow-hidden">
+        <div className="max-h-[500px] h-fit overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
           {getAvailableSubCategories(selectedCategory).map((subCategory: string, index: number) => {
             const amenitiesInSubCategory = amenitiesData[selectedCategory][subCategory].filter((amenity: Amenity) =>
               data.some((item) => item.id === amenity.cid)
@@ -129,19 +129,21 @@ export default function AmenitiesDisplay({ amenitiesData, data }: AmenitiesDispl
                 className={`p-6 ${index !== getAvailableSubCategories(selectedCategory).length - 1 ? 'border-b border-gray-200' : ''}`}
               >
                 <h2 className="text-gray-800 text-xl font-semibold mb-4">{subCategory}</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                  {amenitiesInSubCategory.map((amenity: Amenity) => (
-                    <div
-                      key={amenity.cid}
-                      className="p-3 border border-gray-200 rounded-md bg-gray-50 flex items-center space-x-3 text-base hover:bg-gray-100 transition duration-200"
-                    >
-                      <span className="w-8 h-8 flex-shrink-0">
-                        {amenitiesGroupList.get(amenity.cid) || amenitiesGroupList.get(0)}
-                      </span>
-                      <span className="text-gray-800 font-medium truncate">{amenity.constDesc}</span>
-                    </div>
-                  ))}
-                </div>
+                <div className="flex flex-wrap gap-3">
+  {amenitiesInSubCategory.map((amenity: Amenity) => (
+    <div
+      key={amenity.cid}
+      className="p-3 border border-gray-200 rounded-md bg-gray-50 flex items-center space-x-3 text-base hover:bg-gray-100 transition duration-200"
+    >
+      <span className="w-8 h-8 flex-shrink-0">
+        {amenitiesGroupList.get(amenity.cid) || amenitiesGroupList.get(0)}
+      </span>
+      <span className="text-gray-800 font-medium truncate">{amenity.constDesc}</span>
+    </div>
+  ))}
+</div>
+
+
               </div>
             )
           })}

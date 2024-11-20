@@ -116,7 +116,7 @@ export default async function ProjectsDetailsPage({
         {/* Navigations Container */}
         <MobileHidden>
           <Navigation
-            isBrochure={!!data?.media?.projBroucherUrl || phaseOverview.some((item: { phaseBrochureUrl: string | null }) => item.phaseBrochureUrl)}
+            isBrochure={!!data?.media?.projBroucherUrl || phaseOverview?.some((item: { phaseBrochureUrl: string | null }) => item.phaseBrochureUrl)}
             detailsData={{ ...data, nearByLocations }}
             slug={slug}
             scrollId={scrollId}

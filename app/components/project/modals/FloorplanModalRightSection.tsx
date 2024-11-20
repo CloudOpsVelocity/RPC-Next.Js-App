@@ -64,7 +64,7 @@ export const RightSection = ({ propCgId, className }: any) => {
           <div className="flex items-center space-x-3">
             {propertyDetailsSvgs.unitType}
             <p className="text-[#4D6677] text-[14px] font-[500]">
-              Apartment Type:
+              {propCgId == projectprops.villament ? "Villament Type" : "Apartment Type"} :
               <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] capitalize">
                 {" "}
                 {data.aptTypeName}

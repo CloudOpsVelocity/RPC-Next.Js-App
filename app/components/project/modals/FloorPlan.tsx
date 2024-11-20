@@ -793,8 +793,8 @@ const MiddleSection = ({
               } ` +
                 `${
                   selectedFloor?.floor?.toString() === "0" &&
-                  propCgId == projectprops.apartment &&
-                  propCgId != projectprops.villament
+                  (propCgId == projectprops.apartment ||
+                    propCgId == projectprops.villament)
                     ? "G"
                     : selectedFloor?.floor
                 }`}

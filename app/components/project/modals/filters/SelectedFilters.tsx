@@ -69,7 +69,13 @@ const SelectedFilters = ({
                     ? filterKeysDetails?.get(key)?.name === "Floor" &&
                       (propCgId === 31 || propCgId === 33)
                       ? "Elevation"
-                      : filterKeysDetails?.get(key)?.name
+                      : key === "aptTypeName"
+                        ? propCgId === 35
+                          ? "Apartment Type"
+                          : propCgId === 34
+                            ? "Villament Type" 
+                            : filterKeysDetails?.get(key)?.name
+                        : filterKeysDetails?.get(key)?.name
                     : key}
                 </span>
                 <button className="ml-2 !w-[14px] !h-[14px]">

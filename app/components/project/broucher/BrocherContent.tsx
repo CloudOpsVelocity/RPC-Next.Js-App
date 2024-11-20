@@ -250,7 +250,17 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
   }
 
   return (
-    <div className="w-[95%] sm:w-[90%] mx-auto my-4 sm:my-8 bg-gray-50 scroll-mt-[125px]" id="brochure">
+    <div className="w-[95%] sm:w-[90%] mx-auto my-4 sm:my-8 bg-gray-50 scroll-mt-[125px] relative" id="brochure">
+           <a
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              if (state.activePhase.brochure) handleDownload(state.activePhase.brochure);
+            }}
+            className="absolute  bottom-1 right-1 sm:bottom-2  sm:right-2 z-[100]"
+          >
+            <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[36px] lg:h-[36px] " />
+          </a>
       <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-semibold mb-[12px] capitalize break-words pl-3 pt-2">
         <span>Explore the Comprehensive Brochures of </span>
         <span className="text-[#148B16] font-bold">{projName}</span>
@@ -292,16 +302,7 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
         ref={pdfContainerRef}
       >
         <div className="flex-grow w-full overflow-hidden flex justify-center items-center relative">
-          <a
-            href="#"
-            onClick={(e) => {
-              e.preventDefault();
-              if (state.activePhase.brochure) handleDownload(state.activePhase.brochure);
-            }}
-            className="absolute top-0 right-0 z-[10000]"
-          >
-            <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[36px] lg:h-[36px] " />
-          </a>
+     
 
           {state.loading ? (
             <FaSpinner className="animate-spin text-[#0073C6] h-8 w-8" />
@@ -331,7 +332,9 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
           )}
         </div>
 
-        <div className="w-full flex items-center justify-between mt-4">
+        <div className="w-full flex items-center justify-center mt-4">
+        
+          <div className="flex items-center space-x-4 relative group">
           <button
             onClick={() => changePage(-1)}
             disabled={state.pageNumber <= 1 || state.loading}
@@ -341,7 +344,6 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
           >
             <FaChevronLeft className="h-4 w-4" />
           </button>
-          <div className="flex items-center space-x-4 relative group">
             <span className="text-gray-600 font-bold">
               Page {state.pageNumber} of {state.numPages || "--"}
             </span>
@@ -359,8 +361,7 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
               <FaDownload className="h-4 w-4" />
               <span className="hidden sm:inline">Download Brochure</span>
             </a>
-          </div>
-          <button
+            <button
             onClick={() => changePage(1)}
             disabled={state.pageNumber >= state.numPages! || state.loading}
             className={`bg-[#0073C6] text-white p-1 flex justify-center items-center rounded-full ${
@@ -369,6 +370,8 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
           >
             <FaChevronRight className="h-4 w-4" />
           </button>
+          </div>
+      
         </div>
       </div>
     </div>
