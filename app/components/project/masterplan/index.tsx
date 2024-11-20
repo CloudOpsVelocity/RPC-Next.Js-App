@@ -25,7 +25,7 @@ export default function MasterPlan({
       const url = URL.createObjectURL(blob);
       const downloadLink = document.createElement("a");
       downloadLink.href = url;
-      downloadLink.download = "masterplan.jpg";
+      downloadLink.download = "masterplan.webp";
       document.body.appendChild(downloadLink);
       downloadLink.click();
       document.body.removeChild(downloadLink);

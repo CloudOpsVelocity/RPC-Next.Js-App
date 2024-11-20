@@ -97,7 +97,7 @@ function CarouselModal({
           <SharePopup
             title="Share"
             titleText="Share Floor Plan"
-            url={imageUrlParser(selectedFloor?.floorPlanUrl.split(",")[3], "F")}
+            url={imageUrlParser(selectedFloor?.floorPlanUrl?.split(",")[3], "F")}
           />
 
           <Close close={close} />
@@ -153,7 +153,7 @@ const MiddleSection = ({
         {propCgId != projectprops.plot &&
           selectedFloor?.superBuildUparea &&
           " | Area. " +
-            formatNumberWithSuffix(selectedFloor?.superBuildUparea) +
+            formatNumberWithSuffix(selectedFloor?.superBuildUparea,false) +
             " sq.ft"}
         {propCgId == projectprops.plot &&
           selectedFloor?.plotArea &&
