@@ -155,7 +155,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
                   id="faq"
                   className="scroll-mt-[70px] m-auto w-[95%] sm:w-[90%] flex justify-start items-start"
                 >
-                  <FaqWithBg data={projData.faqs} projName={data.propName} slug={slug} />
+                  {/* <FaqWithBg data={projData.faqs} projName={data.propName} slug={slug} /> */}
                 </div>
               )}{" "}
             </>

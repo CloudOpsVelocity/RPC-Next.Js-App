@@ -166,6 +166,7 @@ export default function ListingDetailsPage({
                     data={projData.faqs}
                     projName={data.propName}
                     slug={data.projIdEnc}
+                    postedById={projData.builderId}
                   />
                 </div>
               )}{" "}
