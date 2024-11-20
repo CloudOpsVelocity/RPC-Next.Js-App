@@ -92,7 +92,7 @@ export default function Card({ item }: Props) {
                   {item.builderName}
                 </button>
                 <p className="text-white text-[12px] sm:text-[14px] not-italic font-bold leading-[normal] tracking-[0.44px]">
-                  Project Land Area: {item.landArea} Acres
+                  Project Land Area: {Number(parseFloat(item.landArea).toFixed(2))} Acres
                 </p>
               </div>
               <div>

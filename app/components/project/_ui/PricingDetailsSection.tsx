@@ -102,7 +102,7 @@ const PricingSection = ({ unitData, projName, phaseList }: any) => {
                 {bhkType}
               </h3>
               <div className="text-sm sm:text-base text-gray-700 font-semibold">
-                <span className="font-medium text-gray-800">Pricing Range:</span>{" "}
+                <span className="font-medium text-gray-800">Price Range:</span>{" "}
                 {formatCurrency(filteredData[bhkType].minPrice)} -
                 {formatCurrency(filteredData[bhkType].maxPrice)}
               </div>

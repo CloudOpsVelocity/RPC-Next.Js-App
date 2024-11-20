@@ -148,7 +148,7 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
   };
 
   const buttonClasses = (isActive: boolean) =>
-    `px-4 py-2 text-lg font-semibold rounded-lg transition-all duration-300 ${
+    `px-1 py-1 text-xs sm:px-4 sm:py-2 sm:text-lg font-semibold rounded-lg transition-all duration-300 ${
       isActive
         ? "bg-[#0073C6] !text-white shadow-lg"
         : "bg-white text-[#0073C6] hover:bg-gray-50 border border-gray-300"
@@ -257,7 +257,7 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
               e.preventDefault();
               if (state.activePhase.brochure) handleDownload(state.activePhase.brochure);
             }}
-            className="absolute  bottom-1 right-1 sm:bottom-2  sm:right-2 z-[100]"
+            className="absolute  bottom-1 right-1 sm:bottom-2  sm:right-2 z-[1]"
           >
             <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[36px] lg:h-[36px] " />
           </a>
@@ -280,7 +280,7 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
                       brochure: phase.phaseBrochureUrl,
                     })
                   }
-                  className={`${buttonClasses(
+                  className={` ${buttonClasses(
                     state.activePhase.id === phase.phaseId
                   )} ${
                     phase.phaseId === phaseOverviewData.length
@@ -338,8 +338,8 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
           <button
             onClick={() => changePage(-1)}
             disabled={state.pageNumber <= 1 || state.loading}
-            className={`bg-[#0073C6] text-white p-1 flex justify-center items-center rounded-full ${
-              state.loading ? "cursor-not-allowed" : "h-8 w-8"
+            className={`bg-[#0073C6] text-white p-1 flex justify-center items-center rounded-full h-8 w-8 ${
+              (state.pageNumber <= 1 || state.loading) && "opacity-50 cursor-not-allowed" 
             }`}
           >
             <FaChevronLeft className="h-4 w-4" />
@@ -362,14 +362,14 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
               <span className="hidden sm:inline">Download Brochure</span>
             </a>
             <button
-            onClick={() => changePage(1)}
-            disabled={state.pageNumber >= state.numPages! || state.loading}
-            className={`bg-[#0073C6] text-white p-1 flex justify-center items-center rounded-full ${
-              state.loading ? "cursor-not-allowed" : "h-8 w-8"
-            }`}
-          >
-            <FaChevronRight className="h-4 w-4" />
-          </button>
+              onClick={() => changePage(1)}
+              disabled={state.pageNumber >= state.numPages! || state.loading}
+              className={`bg-[#0073C6] text-white p-1 flex justify-center items-center rounded-full h-8 w-8 ${
+                (state.pageNumber >= state.numPages! || state.loading) && "opacity-50 cursor-not-allowed"
+              }`}
+            >
+              <FaChevronRight className="h-4 w-4" />
+            </button>
           </div>
       
         </div>

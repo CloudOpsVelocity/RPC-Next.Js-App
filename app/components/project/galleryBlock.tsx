@@ -110,12 +110,12 @@ export default function GalleryBlock({
                 <ReactPlayer
                   url={selectedMedia}
                   width="100%"
-                  height="462px"
+                  height={isMobile ? "250px" : "462px"}
                   controls
                   playing
                 />
               ) : (
-                <div className="relative min-h-[220px]  sm:max-h-[400px] xl:max-h-[450px]">
+                <div className=" min-h-[220px]  max-h-[250px] sm:max-h-[400px] xl:max-h-[450px]">
                 <picture>
                   <source media="(max-width: 460px)" srcSet={selectedMedia.split(',')[1]} />
                   <source media="(max-width: 800px)" srcSet={selectedMedia.split(',')[2]} />
@@ -157,9 +157,9 @@ export default function GalleryBlock({
                     activeIndex:isVideo ? videos.indexOf(selectedMedia) : images.indexOf(selectedMedia)
                   }
                 })}}
-                className="absolute bottom-7 sm:bottom-3 right-1 xl:right-3 z-[1] "
+                className="absolute bottom-7 sm:bottom-3 right-1 xl:right-3 z-[6] "
               >
-                <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] z-[5]" /> 
+                <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] " /> 
               </button>
               {/* <Gallery
                 selectedMedia={selectedMedia}
