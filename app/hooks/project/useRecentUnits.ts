@@ -6,7 +6,6 @@ const recentUnitsAtom = atom<any[]>([]);
 // Custom hook to manage recent units with generics
 export default function useRecentUnits<T extends Record<string, any>>() {
   const [recentUnits, setRecentUnits] = useAtom<T[]>(recentUnitsAtom);
-console.log(recentUnits)
   const setPreviousFilters = (unit: T) => {
     setRecentUnits((prev) => {
       // Check if the new unit already exists in the array

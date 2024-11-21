@@ -164,17 +164,45 @@ const Byunitblock: React.FC<Props> = ({
   const showClearAll = Object.values(values).some(
     (value) => value !== null && value !== "" && value !== 0
   );
-  const handlePreviousAppliedFilter = (filters:Object) =>{
-handleReset()
+  const handlePreviousAppliedFilter = (filters:Object) => {
+    handleReset();
     setValues(filters);
+    
+    // If unitNumber exists in filters, prefill all fields
+    if ('unitNumber' in filters && typeof filters.unitNumber === 'string') {
+      const filteredData = data.filter((item: any) => {
+        // Match exact unit number
+        return String(item.unitNumber).toLowerCase() === (filters.unitNumber as string).toLowerCase();
+      });
+
+      if (filteredData.length > 0) {
+        // Get first matching unit
+        const unit = filteredData[0];
+        
+        // Prefill all available fields from the unit
+        const prefillValues = {};
+        Object.keys(unit).forEach((key: string) => {
+          if (unit[key as keyof typeof unit] !== null && unit[key as keyof typeof unit] !== undefined) {
+            (prefillValues as Record<string, string>)[key] = String(unit[key as keyof typeof unit]);
+          }
+        });
+        
+        setValues(prefillValues as typeof values);
+        setFloor(unit);
+        setFloorsArray(filteredData);
+        return;
+      }
+    }
+
+    // Default filtering if no unit number or no match found
     const filteredData = data.filter((item: any) => {
       return Object.keys(values).every(
         (key) =>
           !values[key] ||
-          // @ts-ignore
           String(item[key]).toLowerCase() === values[key].toLowerCase()
       );
     });
+    
     setFloor(filteredData[0]);
     setFloorsArray(filteredData);
   }

@@ -767,6 +767,15 @@ const MiddleSection = ({
     });
     // @ts-ignore
     setFloorsArray(filteredData);
+
+    if (activeFilters.unitNumber && filteredData.length > 0) {
+      const filteredItem = filteredData[0];
+      const filteredValues: { [key: string]: string } = {};
+      Object.keys(filteredItem).forEach((prop) => {
+        filteredValues[prop] = String(filteredItem[prop]);
+      });
+      setValues(setPropertyValues(filteredValues, propCgId));
+    }
   };
   return (
     <div className="flex flex-col justify-center items-start shrink-0 w-full sm:max-w-[300px] md:max-w-[500px] xl:max-w-[686px]">
