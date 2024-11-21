@@ -33,6 +33,7 @@ export default function PartialUnitModal({ data }: any) {
   if (!(isData.main === 0 ? true : isData.main)) {
     return null;
   }
+  console.log(selectedOne?.floorPlan);
   return (
     <Modal
       opened={isData.main === 0 ? true : isData.main}
@@ -51,7 +52,7 @@ export default function PartialUnitModal({ data }: any) {
             <>
               <button
                 className="flex justify-center items-center gap-1 p-1 xl:p-2 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] rounded-[10px] bg-[#F3F7FF] text-[#0073C6] text-base not-italic font-semibold leading-[normal] tracking-[0.32px] border-1 border-black border-solid"
-                onClick={() => handleDownload(selectedOne?.floorPlan?.split(',')[3])}
+                onClick={() => handleDownload(selectedOne?.floorPlan?.split(',')[2])}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
