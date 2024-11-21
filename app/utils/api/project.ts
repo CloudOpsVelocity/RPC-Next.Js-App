@@ -73,13 +73,16 @@ const getProjectUnits = async (
   );
   const data = await response.json();
 
-  if (propType === 31 || propType === 33) {
+  if (propType === 31 || propType === 33 || propType === 35) {
     const modifiedData = data.map((item: any) => {
       if (item.isBasement === "Y") {
         return {
           ...item,
           floor: `B+G+${item.floor}`,
         };
+      }
+      if (!item.aptTypeName) {
+        item.aptTypeName = "Apartment";
       }
       return {
         ...item,

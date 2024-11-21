@@ -195,9 +195,9 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
             !values[key] ||
             String(item[key]).toLowerCase() == values[key].toLowerCase()
         );
-
         if (allValuesMatch) {
-          optionsSet.add(item[property].toString());
+
+            optionsSet.add(item[property].toString());
         }
       }
     });

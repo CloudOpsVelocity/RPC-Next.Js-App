@@ -33,7 +33,7 @@ export default function Page({ searchParams: { path, type } }: Props) {
       const url = URL.createObjectURL(blob);
       const downloadLink = document.createElement("a");
       downloadLink.href = url;
-      downloadLink.download = `${types._image[type] || "image"}.jpg`; // Set the filename with extension
+      downloadLink.download = `${types._image[type] || "image"}.webp`; // Set the filename with extension
       document.body.appendChild(downloadLink);
       downloadLink.click();
       document.body.removeChild(downloadLink);

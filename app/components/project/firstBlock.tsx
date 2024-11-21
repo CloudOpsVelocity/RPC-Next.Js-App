@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, {  useRef } from "react";
 import { Carousel } from "@mantine/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import {
@@ -13,17 +13,16 @@ import SharePopup from "../atoms/SharePopup";
 import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
 import { formatDate } from "@/app/utils/date";
 import { getImageUrls } from "@/app/utils/image";
-import usePhaseWiseOverview from "@/app/hooks/usePhaseWiseOverview";
 import styles from "@/app/styles/Carousel.module.css";
 import { currentBlockAtom, isScrollingAtom, stickyAtom } from "./navigation";
-import { useSetAtom } from "jotai";
-import Link from "next/link";
-import { NumberFormatter } from "@mantine/core";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
+
 import { useQuery } from "react-query";
 import BuilderLink, {
   generateBuilderUrl,
 } from "@/app/utils/linkRouters/Builder";
 import { useHydrateAtoms } from "jotai/utils";
+import { projectReqDataAtom } from "@/app/store/project/project.req";
 type Props = {
   projectDetails: Main | null;
   companyName: string;
@@ -45,10 +44,16 @@ const FirstBlock: React.FC<Props> = ({
   const setIsScrolling = useSetAtom(isScrollingAtom);
   const setSticky = useSetAtom(stickyAtom);
   const setC = useSetAtom(currentBlockAtom);
+  const [projectReqData, setProjectReqData] = useAtom(projectReqDataAtom);
+
   const { data, isLoading, status } = useQuery<any>({
     queryKey: [`builder/${builderId}&isBuilderPage=Nproj`],
     enabled: false,
     onSuccess(data) {
+      setProjectReqData({
+        postedById: builderId,
+        postedByName: data?.data?.userName,
+      });
       urlBuilder = generateBuilderUrl({
         slug: data?.data?.userName,
         city: data.data?.cityName,

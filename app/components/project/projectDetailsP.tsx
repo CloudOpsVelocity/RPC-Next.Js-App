@@ -41,10 +41,7 @@ export default function ProjectDetailsP({
   slug,
   projData
 }: Props) {
-  useHydrateAtoms([[currentPhaseAtom, PhaseOverview[0].phaseId],[projectReqDataAtom, {
-  postedById:projData?.builderId,
-  postedByName: projData?.postedByName
-  }]]);
+  useHydrateAtoms([[currentPhaseAtom, PhaseOverview[0].phaseId]]);
   const [currentPhase, setFloorPhase] = useAtom(currentPhaseAtom);
   const handlePhaseChange = (phaseId: number) => {
     setFloorPhase(phaseId);
