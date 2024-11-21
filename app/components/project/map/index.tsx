@@ -272,7 +272,7 @@ const MapCard = ({
       },
       name,
     });
-    scrollToTopic("near-by-projects");
+    scrollToTopic("location-map");
   };
 
   const scrollToTopic = (id: string): void => {

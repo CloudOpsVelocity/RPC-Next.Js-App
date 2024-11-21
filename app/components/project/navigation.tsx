@@ -2,6 +2,7 @@
 import { TOPIC_IDS, topics } from "@/app/data/projectDetails";
 import useRatings from "@/app/hooks/useRatings";
 import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
+import { projectReqDataAtom } from "@/app/store/project/project.req";
 import { Main } from "@/app/validations/types/project";
 import { useMediaQuery } from "@mantine/hooks";
 import clsx from "clsx";
@@ -26,6 +27,7 @@ export default function Navigation({
   const isNearBy = Object.keys(detailsData.nearByLocations).length > 0;
   const isTab = useMediaQuery("(max-width: 1600px)");
   const { data } = useRatings(slug);
+  const [projectReqData] = useAtom(projectReqDataAtom);
   const [currentBlock, setCurrentBlock] = useAtom(currentBlockAtom);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [isSticky, setIsSticky] = useAtom(stickyAtom);
@@ -144,7 +146,7 @@ export default function Navigation({
       condtion: detailsData.faqs && detailsData.faqs.length > 0,
       key: TOPIC_IDS.FAQ,
     },
-    { condtion: true, key: TOPIC_IDS.SIMILAR_PROJECTS },
+    { condtion: projectReqData?.isNearby, key: TOPIC_IDS.SIMILAR_PROJECTS },
     { condtion: true, key: TOPIC_IDS.CONTACT },
   ];
   const {data:userData} = useQuery({
