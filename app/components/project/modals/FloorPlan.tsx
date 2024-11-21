@@ -51,9 +51,6 @@ function FloorPlanModal({
   const setUnitsFloor = useSetAtom(unitFloorsAtom);
   const [opened, { close }] = useFloorPlanPopup();
   const form = useFormContext();
-
-  const scrollFiltersRef = useRef<HTMLDivElement>(null);
-
   const handleClose = () => {
     close();
     if (!selectedFloor) {

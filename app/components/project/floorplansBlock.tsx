@@ -288,7 +288,7 @@ Props) {
     types?.length > 0 && setPropCgId(BACKEND_PROP_TYPES[`${types[0]}`]);
   }, [currentPhase]);
   if (isLoading) return <Loading />;
-  
+   console.log(selectedFloor)
   return (
     <>
       {!partialUnitData &&
@@ -615,7 +615,7 @@ Props) {
                                 e.stopPropagation();
                                 handleOpen();
                               }}
-                              src={selectedFloor?.floorPlanUrl}
+                              src={selectedFloor?.floorPlanUrl.split(',')[0]}
                               className="w-full h-full cursor-pointer object-contain"
                               alt="image"
                               fill
@@ -732,6 +732,7 @@ Props) {
                             }
                             className="w-full h-full cursor-pointer  object-contain"
                             alt="image"
+                            unoptimized
                           />
                         ) : (
                           <div className="flex justify-center items-center flex-col min-w-fit ">

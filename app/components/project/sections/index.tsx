@@ -24,12 +24,11 @@ export default function PartialUnitData({
   handlePricingFloorPlanClick,
 }: Props) {
   const currentPhase = useAtomValue(currentPhaseAtom);
-  const isPropTypesAvailable =
-    Object.keys(partialUnitData[currentPhase] || {}) ?? 0;
+  const isPropTypesAvailable = (partialUnitData && partialUnitData[currentPhase] && Object.keys(partialUnitData[currentPhase] || {})) ?? 0;
   return (
     <div
       className={`w-[95%] md:w-[90%] scroll-mt-[50px] md:mb-[2%] sm:mb-[5%]  ${
-        partialUnitData.length > 0 && "min-h-[300px]"
+        partialUnitData?.length > 0 && "min-h-[300px]"
       }`}
       id={type === "overview" ? "price-details" : "floor-plans"}
     >
