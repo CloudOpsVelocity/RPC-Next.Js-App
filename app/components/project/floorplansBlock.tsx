@@ -728,7 +728,7 @@ Props) {
                               handleOpen();
                             }}
                             src={
-                              (selectedFloor?.floorPlanUrl.split(',')[3]) as string
+                              (selectedFloor?.floorPlanUrl.split(',')[3]) as string ?? ImgNotAvail
                             }
                             className="w-full h-full cursor-pointer  object-contain"
                             alt="image"

@@ -39,12 +39,10 @@ export default function useNearby({
     refetchIntervalInBackground: false,
     retry: false,
     onSuccess(data) {
-      const isNearby = data?.data?.nearbyProj?.length > 0 || data?.data?.builderProj?.length > 0;
-      if(isNearby) {
+      const isNearby = data?.nearbyProj?.length > 0 || data?.builderProj?.length > 0;
         setProjectReqData({
         isNearby,
       });
-    }
      }
   });
 
