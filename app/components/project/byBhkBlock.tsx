@@ -71,7 +71,7 @@ export default function ByBhkBlock({
     count: filteredData?.length,
     getScrollElement: () => parentRef.current,
     estimateSize: () => isMobile ? 250 : 180,
-    overscan: isMobile ? 9 : 5,
+    overscan: isMobile ? 15 : 5,
   });
 
   const getOptions = (property: string): string[] => {

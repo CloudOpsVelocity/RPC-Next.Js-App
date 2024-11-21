@@ -151,7 +151,7 @@ export default function Navigation({
     queryKey:[`builder/${detailsData.builderId}&isBuilderPage=Nproj`],
    enabled:false
   })
-  console.log(userData)
+
   useEffect(() => {
     if (
       scrollId &&

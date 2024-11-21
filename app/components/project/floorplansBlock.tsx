@@ -200,7 +200,7 @@ Props) {
   const handleByUnitClick = ( selectedUnit : any) => {
     setSelectedFloor({
       ...selectedUnit,
-      floorPlanUrl: selectedUnit?.floorPlanUrl?.split(",")[3] ?? ImgNotAvail,
+      floorPlanUrl: selectedUnit?.floorPlanUrl ?? ImgNotAvail,
     });
     form.setValues(setPropertyValues(selectedUnit, propCgId));
     // @ts-ignore

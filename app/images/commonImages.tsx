@@ -384,7 +384,9 @@ export const BankDetailsList = new Map([
   [630, { id: 630, name: "Vridhi-Finserv-Home-Finance", url: `${BASE_URL}/staticmedia-images-icons/Non-Bank-Financial-Companies/Vridhi-Home-Finance.png` }],
   [599, { id: 599, name: "West-End-Housing-Finance", url: `${BASE_URL}/staticmedia-images-icons/Non-Bank-Financial-Companies/West-End-Housing-Finance.jpg` }],
   [619, { id: 619, name: "Wonder-Home-Finance", url: `${BASE_URL}/staticmedia-images-icons/Non-Bank-Financial-Companies/Wonder-Home-Finance.png` }],
-   
+  [535, { id: 535, name: "Bank-Of-Maharashtra", url: `${BASE_URL}/staticmedia-images-icons/Bank-Home-Loan/Bank-of-Maharastra-Home-loan.svg` }],
+  [539, { id: 539, name: "Can-Fin-Homes-Limited", url: `${BASE_URL}/staticmedia-images-icons/Non-Bank-Financial-Companies/CanFin.jpg` }],
+  [542, { id: 542, name: "HDFC-Housing-Finance", url: `${BASE_URL}/staticmedia-images-icons/Bank-Home-Loan/Hdfc-Housing-Finance.png` }],
 ]);
 
 
