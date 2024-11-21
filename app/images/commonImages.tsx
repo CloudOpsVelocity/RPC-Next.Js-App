@@ -194,14 +194,14 @@ export const BankDetailsList = new Map([
       url: `${BASE_URL}/staticmedia-images-icons/Bank-Home-Loan/Federal-Bank-Home-Loan.png`,
     },
   ],
-  [
-    525,
-    {
-      id: 525,
-      name: "HDFC-Bank",
-      url: `${BASE_URL}/staticmedia-images-icons/Bank-Home-Loan/HDFC-Home-Loan.avif`,
-    },
-  ],
+  // [
+  //   525,
+  //   {
+  //     id: 525,
+  //     name: "HDFC-Bank",
+  //     url: `${BASE_URL}/staticmedia-images-icons/Bank-Home-Loan/HDFC-Home-Loan.png`,
+  //   },
+  // ],
   [
     521,
     {
@@ -320,7 +320,7 @@ export const BankDetailsList = new Map([
   [629, { id: 629, name: "Godrej-Housing-Finance", url: `${BASE_URL}/staticmedia-images-icons/Non-Bank-Financial-Companies/Godrej-Housing-Finance.png` }],
   [559, { id: 559, name: "Grihum-Housing-Finance", url: `${BASE_URL}/staticmedia-images-icons/Non-Bank-Financial-Companies/Grihum-Housing-Finance.png` }],
   [581, { id: 581, name: "Habitat-Micro-Build-India", url: `${BASE_URL}/staticmedia-images-icons/Non-Bank-Financial-Companies/Habitat-Micro-Build-India.png` }],
-  [525, { id: 525, name: "HDFC-Bank", url: `${BASE_URL}/staticmedia-images-icons/Non-Bank-Financial-Companies/HDFC-Bank.png` }],
+  [525, { id: 525, name: "HDFC Home Loan  ", url: `${BASE_URL}/staticmedia-images-icons/Non-Bank-Financial-Companies/HDFC-home-loan.png` }],
   [610, { id: 610, name: "Hero-Housing-Finance", url: `${BASE_URL}/staticmedia-images-icons/Non-Bank-Financial-Companies/Hero-Housing-Finance.png` }],
   [597, { id: 597, name: "Hinduja-Housing-Finance", url: `${BASE_URL}/staticmedia-images-icons/Non-Bank-Financial-Companies/Hinduja-Housing-Finance.png` }],
   [575, { id: 575, name: "Home-First-Finance", url: `${BASE_URL}/staticmedia-images-icons/Non-Bank-Financial-Companies/Home-First-Finance.png` }],
