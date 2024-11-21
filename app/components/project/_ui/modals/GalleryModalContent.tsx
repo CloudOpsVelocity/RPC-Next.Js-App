@@ -211,20 +211,24 @@ const openSharePopup = useSetAtom(searchShareAtom)
         </div>
         </div>
       )}
-      <button
-        onClick={prevItem}
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 p-2 bg-black bg-opacity-50 text-white rounded-full hover:bg-opacity-75 transition-colors"
-        aria-label="Previous item"
-      >
-        <FiChevronLeft className="w-6 h-6" />
-      </button>
-      <button
-        onClick={nextItem}
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 p-2 bg-black bg-opacity-50 text-white rounded-full hover:bg-opacity-75 transition-colors"
-        aria-label="Next item"
-      >
-        <FiChevronRight className="w-6 h-6" />
-      </button>
+      {currentIndex > 0 && (
+        <button
+          onClick={prevItem}
+          className="absolute left-4 top-1/2 transform -translate-y-1/2 p-2 bg-black bg-opacity-50 text-white rounded-full hover:bg-opacity-75 transition-colors"
+          aria-label="Previous item"
+        >
+          <FiChevronLeft className="w-6 h-6" />
+        </button>
+      )}
+      {currentIndex < items.length - 1 && (
+        <button
+          onClick={nextItem}
+          className="absolute right-4 top-1/2 transform -translate-y-1/2 p-2 bg-black bg-opacity-50 text-white rounded-full hover:bg-opacity-75 transition-colors"
+          aria-label="Next item"
+        >
+          <FiChevronRight className="w-6 h-6" />
+        </button>
+      )}
     </div>
 
     {/* Carousel */}

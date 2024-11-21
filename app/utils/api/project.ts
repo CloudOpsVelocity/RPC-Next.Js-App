@@ -81,7 +81,7 @@ const getProjectUnits = async (
           floor: `B+G+${item.floor}`,
         };
       }
-      if (!item.aptTypeName) {
+      if (!item.aptTypeName && propType === 35) {
         item.aptTypeName = "Apartment";
       }
       return {
