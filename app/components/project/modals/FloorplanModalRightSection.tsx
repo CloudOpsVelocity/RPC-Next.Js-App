@@ -303,8 +303,8 @@ export const RightSection = ({ propCgId, className }: any) => {
               modal_type: "REQ_QUOTE",
               source: "projCard",
               reqId: data?.projIdEnc,
-              postedByName: projectReqData.postedByName,
-              postedId: projectReqData.postedById,
+              postedByName: projectReqData?.postedByName ?? '',
+              postedId: projectReqData?.postedById ?? 0,
               title: data?.unitNumber,
               projUnitIdEnc: data?.unitIdEnc,
             });

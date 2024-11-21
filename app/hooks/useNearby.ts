@@ -2,6 +2,8 @@ import axios from "axios";
 import { BACKEND_BASE_URL } from "../env";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useParams } from "next/navigation";
+import { useAtom } from "jotai";
+import { projectReqDataAtom } from "../store/project/project.req";
 
 export default function useNearby({
   lat,
@@ -16,6 +18,7 @@ export default function useNearby({
   builderId?: number;
   company?: string;
 }) {
+  const [projectReqData, setProjectReqData] = useAtom(projectReqDataAtom);
   const { slug } = useParams<{ slug: string }>();
   const getData = async () => {
     const res = await axios.get(
@@ -35,6 +38,14 @@ export default function useNearby({
     cacheTime: 30000,
     refetchIntervalInBackground: false,
     retry: false,
+    onSuccess(data) {
+      const isNearby = data?.data?.nearbyProj?.length > 0 || data?.data?.builderProj?.length > 0;
+      if(isNearby) {
+        setProjectReqData({
+        isNearby,
+      });
+    }
+     }
   });
 
   const queryClient = useQueryClient();
