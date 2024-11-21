@@ -6,24 +6,37 @@ const recentUnitsAtom = atom<any[]>([]);
 // Custom hook to manage recent units with generics
 export default function useRecentUnits<T extends Record<string, any>>() {
   const [recentUnits, setRecentUnits] = useAtom<T[]>(recentUnitsAtom);
-
+console.log(recentUnits)
   const setPreviousFilters = (unit: T) => {
-    // Check if the new unit already exists in the array by comparing each value, including null
-    const isExisting = recentUnits.some((existingUnit) =>
-      Object.keys(unit).every((key) => existingUnit[key] === unit[key])
-    );
+    setRecentUnits((prev) => {
+      // Check if the new unit already exists in the array
+      const isExisting = prev.some((existingUnit) => {
+        // Get non-null keys from both units
+        const unitKeys = Object.keys(unit).filter(key => unit[key] !== null);
+        const existingUnitKeys = Object.keys(existingUnit).filter(key => existingUnit[key] !== null);
 
-    if (isExisting) return; // Skip adding if the unit already exists
+        // If they have different number of non-null keys, they're different
+        if (unitKeys.length !== existingUnitKeys.length) {
+          return false;
+        }
 
-    // Check if the recentUnits array already has 5 units
-    if (recentUnits.length >= 5) {
-      // Remove the last unit and add the new unit at the front
-      setRecentUnits((prev) => [unit, ...prev.slice(0, 4)]);
-    } else {
-      // Add the new unit without removing any units
-      setRecentUnits((prev) => [unit, ...prev]);
-    }
+        // Compare only non-null values
+        return unitKeys.every(key => 
+          existingUnit[key] !== null && 
+          unit[key] !== null && 
+          existingUnit[key] === unit[key]
+        );
+      });
+
+      if (isExisting) {
+        return prev; // Return the same array if the unit already exists
+      }
+
+      // Add the new unit to the front of the array, ensuring the length doesn't exceed 5 
+      return [unit, ...prev].slice(0, 5);
+    });
   };
+  
 
   const resetFilters = () => {
     setRecentUnits([]);
