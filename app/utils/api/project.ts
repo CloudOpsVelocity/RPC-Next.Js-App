@@ -75,7 +75,7 @@ const getProjectUnits = async (
 
   if (propType === 31 || propType === 33 || propType === 35) {
     const modifiedData = data.map((item: any) => {
-      if (item.isBasement === "Y") {
+      if (item.isBasement === "Y" && (propType === 31 || propType === 33)) {
         return {
           ...item,
           floor: `B+G+${item.floor}`,
@@ -86,8 +86,9 @@ const getProjectUnits = async (
       }
       return {
         ...item,
-        floor: `G+${item.floor}`,
+        floor: propType === 31 || propType === 33 ? `G+${item.floor}` : item.floor,
       };
+      
     });
     return modifiedData;
   }
