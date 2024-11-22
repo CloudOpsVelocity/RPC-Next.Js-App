@@ -4,6 +4,7 @@ import FloorplanDetailsCard from "./floorplanDetailsCard";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import zlib from "zlib";
 import { useMediaQuery } from "@mantine/hooks";
+
 type Props = {
   propCgId: any;
   data: any;
@@ -11,7 +12,9 @@ type Props = {
   bhk: string;
   setBhk: (value: string) => void;
 };
+
 const cacheMap = new Map();
+
 export default function ByBhkBlock({
   propCgId,
   data,
@@ -65,18 +68,23 @@ export default function ByBhkBlock({
       }
     });
   };
-  const isMobile = useMediaQuery("(max-width: 768px)"); 
-  const parentRef = React.useRef(null);
+
+  const isMobile = useMediaQuery("(max-width: 768px)");
+  const parentRef = useRef<HTMLDivElement>(null);
+
   const rowVirtualizer = useVirtualizer({
-    count: filteredData?.length,
+    count: filteredData?.length || 0,
     getScrollElement: () => parentRef.current,
     estimateSize: () => isMobile ? 250 : 180,
     overscan: isMobile ? 15 : 5,
+    paddingStart: 0,
+    paddingEnd: 0
   });
 
   const getOptions = (property: string): string[] => {
     return Array.from(new Set(data.map((item: any) => String(item[property]))));
   };
+
   const availBhks = getOptions("bhkName").sort((a, b) => a.localeCompare(b));
 
   const scrollFiltersRef = useRef<HTMLDivElement>(null);
@@ -153,15 +161,34 @@ export default function ByBhkBlock({
           className="w-full h-[195px] sm:h-[440px] overflow-auto relative"
           ref={parentRef}
         >
-          {rowVirtualizer.getVirtualItems().map((virtualRow: any) => (
-            <FloorplanDetailsCard
-              key={virtualRow.index}
-              data={virtualRow}
-              propCgId={propCgId}
-              projData={filteredData}
-              setValues={setValues}
-            />
-          ))}
+          <div
+            style={{
+              height: `${rowVirtualizer.getTotalSize()}px`,
+              width: '100%',
+              position: 'relative'
+            }}
+          >
+            {rowVirtualizer.getVirtualItems().map((virtualRow) => (
+              <div
+                key={virtualRow.key}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: `${virtualRow.size}px`,
+                  transform: `translateY(${virtualRow.start}px)`
+                }}
+              >
+                <FloorplanDetailsCard
+                  data={filteredData[virtualRow.index]}
+                  propCgId={propCgId}
+                  projData={filteredData}
+                  setValues={setValues}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>
