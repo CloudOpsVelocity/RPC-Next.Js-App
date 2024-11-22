@@ -22,7 +22,8 @@ const getUserCity = async (
         cache: "no-store",
       }
     );
-    if (!res.ok) throw new Error("Failed to fetch default city");
+    
+    if (!res.ok) console.log("Failed to fetch default city");
     return await res.json();
   } catch (error) {
     console.error("Error fetching default city:", error);
