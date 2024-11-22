@@ -22,13 +22,13 @@ function useGetPathTypeFromQueryParams(): string {
 
 function useGetCallPath(): string {
   const searchParams = useSearchParams();
-  for (const key in pathConfig) {
-    const id = searchParams.get(pathConfig[key as PathConfigKey].paramName);
-    if (id) {
-      return `${pathConfig[key as PathConfigKey].redirectingPath}${id}`;
-    }
-  }
-  return pathConfig.default.redirectingPath;
+  // for (const key in pathConfig) {
+  //   const id = searchParams.get(pathConfig[key as PathConfigKey].paramName);
+  //   if (id) {
+  //     return `${pathConfig[key as PathConfigKey].redirectingPath}${id}`;
+  //   }
+  // }
+  return decrypt(searchParams.get("cc") || "");
 }
 
 function useGetQueryParamClient(): { query: string; redirectPath: string } {
@@ -111,8 +111,8 @@ export {
 
 export default function usePathToOrigin() {
   const path = usePathname();
-  const redirectQueryParam = getQueryParamForPath(path);
-
+  // const redirectQueryParam = getQueryParamForPath(path);
+  const redirectQueryParam = "cc=" + encrypt(path);
   return {
     redirectPath: path,
     redirectQueryParam,
