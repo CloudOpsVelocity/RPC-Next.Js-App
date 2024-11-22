@@ -292,7 +292,6 @@ export const BankDetailsList = new Map([
   ],
   
   // Non-Banking Financial Companies (NBFCs)
-  [554, { id: 554, name: "Aavas-Financiers", url: `${BASE_URL}/staticmedia-images-icons/Non-Bank-Financial-Companies/Aavas-Financiers.png` }],
   [620, { id: 620, name: "Adani-Housing-Finance", url: `${BASE_URL}/staticmedia-images-icons/Non-Bank-Financial-Companies/Adani-Housing-Finance.svg` }],
   [586, { id: 586, name: "Aditya-Birla-Housing-Finance", url: `${BASE_URL}/staticmedia-images-icons/Non-Bank-Financial-Companies/Aditya-Birla-Finance.png` }],
   [627, { id: 627, name: "AGRIM-Housing-Finance", url: `${BASE_URL}/staticmedia-images-icons/Non-Bank-Financial-Companies/Agrim-Housing-Finance.jpg` }],
