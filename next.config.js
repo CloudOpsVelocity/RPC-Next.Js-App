@@ -3,7 +3,7 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  siteUrl: process.env.NEXT_PUBLIC_BACKEND_URL || 'https://example.com',
+
 
   // output: "export",
   // eslint: {

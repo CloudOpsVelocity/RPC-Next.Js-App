@@ -20,8 +20,7 @@
     "test-build": "cross-env NODE_ENV=test next build",
     "test-start": "cross-env NODE_ENV=test next start -p 3000",
     "prod-build": "npm run build",
-    "prod-start": "cross-env NODE_ENV=production next start -p 3000",
-    "postbuild": "next-sitemap"
+    "prod-start": "cross-env NODE_ENV=production next start -p 3000"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
