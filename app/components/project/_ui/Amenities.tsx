@@ -37,7 +37,7 @@ export default function AmenitiesDisplay({ amenitiesData, data }: AmenitiesDispl
 
   const availableCategories = categories.filter((category) => getAvailableSubCategories(category).length > 0)
   const [selectedCategory, setSelectedCategory] = useState<string>(availableCategories[0])
-  const [expandedCategory, setExpandedCategory] = useState<string | null>(null)
+  const [expandedCategory, setExpandedCategory] = useState<string | null>(availableCategories[0])
 
   const toggleCategory = (category: string) => {
     setExpandedCategory((prev) => (prev === category ? null : category))
