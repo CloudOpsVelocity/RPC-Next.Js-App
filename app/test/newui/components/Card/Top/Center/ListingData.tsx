@@ -39,6 +39,7 @@ export default function ListingData({
   availableFor,
   propIdEnc,
   phaseId,
+  projAuthority
 }: Props) {
   const isMobile = useMediaQuery("(max-width: 1600px)");
   const isPlot = propTypeId == 32;
@@ -109,7 +110,7 @@ export default function ListingData({
               label={"No. of Units"}
               value={formatNumberWithSuffix(noOfUnits, false)}
             />
-            <DownSectionCard label={"Approved By"} value={`BDA`} />
+            <DownSectionCard label={"Approved By"} value={projAuthority ? projAuthority.split(',').map((item:string)=>item.trim()).join(', ') : 'N/A'} />
 
             {!isMobile && !isPlot && (
               <DownSectionCard label={"Elevation"} value={`${towerData}`} />
