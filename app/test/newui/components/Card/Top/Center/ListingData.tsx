@@ -110,7 +110,7 @@ export default function ListingData({
               label={"No. of Units"}
               value={formatNumberWithSuffix(noOfUnits, false)}
             />
-            <DownSectionCard label={"Approved By"} value={projAuthority ? projAuthority.split(',').map((item:string)=>item.trim()).join(', ') : 'N/A'} />
+            <DownSectionCard label={"Approved By"} value={projAuthority ? projAuthority.split(",").map((item:string)=>item.split(' – ')[0]).join(', ') : null} />
 
             {!isMobile && !isPlot && (
               <DownSectionCard label={"Elevation"} value={`${towerData}`} />

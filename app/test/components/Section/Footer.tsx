@@ -105,7 +105,7 @@ export default function EnhancedFooter() {
         "/team",
         "/careers",
         "/press",
-        "/contact",
+        "/get-in-touch",
         "/partnerships"
       ],
       target: "_blank"
