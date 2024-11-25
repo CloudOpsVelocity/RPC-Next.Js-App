@@ -37,7 +37,7 @@ export default function AmenitiesDisplay({ amenitiesData, data }: AmenitiesDispl
 
   const availableCategories = categories.filter((category) => getAvailableSubCategories(category).length > 0)
   const [selectedCategory, setSelectedCategory] = useState<string>(availableCategories[0])
-  const [expandedCategory, setExpandedCategory] = useState<string | null>(null)
+  const [expandedCategory, setExpandedCategory] = useState<string | null>(availableCategories[0])
 
   const toggleCategory = (category: string) => {
     setExpandedCategory((prev) => (prev === category ? null : category))
@@ -49,7 +49,7 @@ export default function AmenitiesDisplay({ amenitiesData, data }: AmenitiesDispl
 
 
   return (
-    <div className="flex flex-col md:flex-row bg-gray-50 p-4 rounded-lg shadow-md sm:max-w-fit">
+    <div className="flex flex-col md:flex-row bg-gray-50 sm:p-4 rounded-lg min-w-full sm:min-w-fit shadow-md sm:max-w-fit">
       {/* Sidebar Categories - Desktop */}
       <div className="hidden md:block w-full md:min-w-[250px] md:max-w-[250px] md:h-[500px] overflow-y-auto mb-4 md:mb-0 md:mr-4 relative" ref={sidebarRef}>
         <div className="space-y-2">
@@ -100,13 +100,13 @@ export default function AmenitiesDisplay({ amenitiesData, data }: AmenitiesDispl
       <div className="md:hidden space-y-2 w-full">
         {availableCategories.map((category: string) => (
           <div key={category} className="bg-white rounded-lg shadow-sm overflow-hidden">
-             <div className='bg-gray-100 hover:bg-gray-200'>
+             <div className='bg-gray-100 hover:bg-gray-200'    onClick={() => toggleCategory(category)}>
              <button
-              onClick={() => toggleCategory(category)}
+           
               className="flex w-full items-center justify-between px-4 pt-3  transition duration-200"
             >
              
-              <span className="text-sm font-medium text-gray-800">{category}</span>
+              <span className="text-[16px] font-medium text-gray-800">{category}</span>
               {expandedCategory === category ? (
                 <IoChevronUpOutline className="h-5 w-5 text-gray-600" />
               ) : (
@@ -114,9 +114,9 @@ export default function AmenitiesDisplay({ amenitiesData, data }: AmenitiesDispl
               )}
             
             </button>
-            <ul className="ml-5 pb-1">
+            <ul className="ml-8 pb-1">
                   {getAvailableSubCategories(category).map((subCategory) => (
-                    <li key={subCategory} className="text-gray-600 text-sm list-disc hover:text-gray-800 transition">
+                    <li key={subCategory} className="text-gray-700 text-sm list-disc hover:text-gray-900 transition">
                       {subCategory}
                     </li>
                   ))}
@@ -124,7 +124,7 @@ export default function AmenitiesDisplay({ amenitiesData, data }: AmenitiesDispl
                 </div>
            
             {expandedCategory === category && (
-              <div className="p-4">
+              <div className="p-4 max-h-[420px] overflow-y-auto">
                
                 <div className="space-y-4">
                   {getAvailableSubCategories(category).map((subCategory: string) => {
