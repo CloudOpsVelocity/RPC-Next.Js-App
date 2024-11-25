@@ -168,7 +168,7 @@ const FirstBlock: React.FC<Props> = ({
                     target="_blank"
                     className="text-btnPrimary sm:text-[16px] xl:text-2xl  font-bold leading-[normal] underline"
                   >
-                    {data?.data?.userName ?? "Builder"}
+                    {isLoading ? "Builder" : data?.data?.userName}
                   </a>
                 </p>
               </div>

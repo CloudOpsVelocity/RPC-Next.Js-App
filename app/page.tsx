@@ -22,8 +22,19 @@ import { getUserCity } from "./(new_routes_seo)/utils/new-seo-routes/home.api";
 import { cookies, headers } from "next/headers";
 import { decryptData } from "./utils/auth/nodeCrypto";
 export default async function Page() {
-  const ip = headers().get("x-forwarded-for") || headers().get("cf-connecting-ip") || "";
-  const cityData = await getUserCity(undefined,ip);
+  // const ip = headers().get("x-forwarded-for") || headers().get("cf-connecting-ip") || "";
+
+  // const cityData = await getUserCity({
+  //   cityName: 'Bengaluru',
+  //   cityId: '9',
+  // },ip);
+  const cityData = {
+    data: {
+      city: 'Bengaluru',
+      cityId: '9',
+    },
+    status: true,
+  }
   const encriptedLatLang = cookies().get("ui")?.value;
   const latLang = encriptedLatLang ? decryptData(encriptedLatLang) : "";
   const [data, listingData, shortIds] = await Promise.all([
