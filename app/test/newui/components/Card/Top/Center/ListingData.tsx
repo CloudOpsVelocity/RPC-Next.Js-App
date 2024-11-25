@@ -70,10 +70,10 @@ export default function ListingData({
                       )}-${formatNumberWithSuffix(maxPa, false)} sqft`
                   : minSba === maxSba
                   ? `${formatNumberWithSuffix(minSba, false)} sqft`
-                  : `${formatNumberWithSuffix(minSba, false)}-${formatNumberWithSuffix(
-                      maxSba,
+                  : `${formatNumberWithSuffix(
+                      minSba,
                       false
-                    )} sqft`
+                    )}-${formatNumberWithSuffix(maxSba, false)} sqft`
               }
             />
 
@@ -129,10 +129,10 @@ export default function ListingData({
                 />
 
                 {propStatus !== "Under Construction" && (
-                <DownSectionCard
-                  label={"Property age"}
-                  value={propertyAge ?? "N/A"}
-                />
+                  <DownSectionCard
+                    label={"Property age"}
+                    value={propertyAge ?? "N/A"}
+                  />
                 )}
               </>
             ) : (
@@ -173,32 +173,41 @@ export default function ListingData({
           e.stopPropagation();
         }}
       >
-       {projectAbout && <div className="line-clamp-2 relative">
-          <span dangerouslySetInnerHTML={{ __html: projectAbout.slice(0, readMoreThreshold) }} />
-          {isReadMoreNeeded && (
-            <div className="absolute bottom-0 right-0 bg-white">
-              <span className="text-black">...</span>{" "}
-              <button
-                className="text-btnPrimary font-bold text-[12px] sm:text-[14px] underline  cursor-pointer   "
-                onClick={(e) => {
-                  e.stopPropagation(); // Prevents the modal from opening if clicking elsewhere
-                  dispatch({
-                    content: projectAbout,
-                    id: `${
-                      type === "proj" ? projIdEnc : propIdEnc
-                    }+${propTypeId}${type === "proj" && phaseId ? '+' + phaseId : ''}`,
-                    title: type === "proj" ? "About Project" : "About Property",
-                    type: "OPEN",
-                    conType: "readmore",
-                    pType: type,
-                  });
-                }}
-              >
-                Read More
-              </button>
-            </div>
-          )}
-        </div>}
+        {projectAbout && (
+          <div className="line-clamp-2 relative">
+            <span
+              dangerouslySetInnerHTML={{
+                __html: projectAbout.slice(0, readMoreThreshold),
+              }}
+            />
+            {isReadMoreNeeded && (
+              <div className="absolute bottom-0 right-0 bg-white">
+                <span className="text-black">...</span>{" "}
+                <button
+                  className="text-btnPrimary font-bold text-[12px] sm:text-[14px] underline  cursor-pointer   "
+                  onClick={(e) => {
+                    e.stopPropagation(); // Prevents the modal from opening if clicking elsewhere
+                    dispatch({
+                      content: projectAbout,
+                      id: `${
+                        type === "proj" ? projIdEnc : propIdEnc
+                      }+${propTypeId}${
+                        type === "proj" && phaseId ? "+" + phaseId : ""
+                      }`,
+                      title:
+                        type === "proj" ? "About Project" : "About Property",
+                      type: "OPEN",
+                      conType: "readmore",
+                      pType: type,
+                    });
+                  }}
+                >
+                  Read More
+                </button>
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </>
   );

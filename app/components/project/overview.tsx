@@ -51,6 +51,7 @@ export default function Overview({
   PhaseOverview,
   slug,
   projAuthorityNames,
+  phases,
 }: Props) {
   const { data, isLoading, status } = useQuery<any>({
     queryKey: [`builder/${builderId}&isBuilderPage=Nproj`],
@@ -153,8 +154,8 @@ export default function Overview({
             type="authorities"
             className="mr-[5%] sm:mr-[3%] xl:mr-[5%] pt-[2%] mb-[3%] sm:mb-[1.5%] xl:mb-[3%]  "
           />
-          {/* time leke kr rha hu me 10 min ka kaam ko sir betha hai saath mai */}
-          {phaseList?.length == 1 && (
+
+          {phases?.length == 1 && (
             <ProjBasicDetails
               Id={TOPIC_IDS.RERA_STATUS}
               key="rerastatus"
@@ -165,7 +166,7 @@ export default function Overview({
             />
           )}
 
-          {phaseList?.length == 1 &&
+          {phases?.length == 1 &&
             PhaseOverview[0]?.rerastatus !== "Not Applied" && (
               <ProjBasicDetails
                 Id={TOPIC_IDS.RERA_ID}

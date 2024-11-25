@@ -46,33 +46,35 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
     blobCache: Record<number, string | null>;
     loading: boolean;
     errorMessage: string;
-  }>(singleBrocher
-    ? {
-        activePhase: {
-          id: 0,
-          name: "Single Brochure",
-          brochure: singleBrocher,
-        },
-        numPages: null,
-        pageNumber: 1,
-        pageScale: 1,
-        blobCache: {},
-        loading: false,
-        errorMessage: "",
-      }
-    : {
-        activePhase: {
-          id: phaseOverviewData[0].phaseId,
-          name: phaseOverviewData[0].phaseName || "Phase 1",
-          brochure: phaseOverviewData[0].phaseBrochureUrl,
-        },
-        numPages: null,
-        pageNumber: 1,
-        pageScale: 1,
-        blobCache: {},
-        loading: false,
-        errorMessage: "",
-      });
+  }>(
+    singleBrocher
+      ? {
+          activePhase: {
+            id: 0,
+            name: "Single Brochure",
+            brochure: singleBrocher,
+          },
+          numPages: null,
+          pageNumber: 1,
+          pageScale: 1,
+          blobCache: {},
+          loading: false,
+          errorMessage: "",
+        }
+      : {
+          activePhase: {
+            id: phaseOverviewData[0].phaseId,
+            name: phaseOverviewData[0].phaseName || "Phase 1",
+            brochure: phaseOverviewData[0].phaseBrochureUrl,
+          },
+          numPages: null,
+          pageNumber: 1,
+          pageScale: 1,
+          blobCache: {},
+          loading: false,
+          errorMessage: "",
+        }
+  );
   const { data: session } = useSession();
   const [, { open: LoginOpen }] = usePopShortList();
   const pdfContainerRef = useRef<HTMLDivElement>(null);
@@ -106,7 +108,11 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
   const handleDownload = (url: string) => {
     if (!session) {
       LoginOpen(() => {
-        url && window.open(`/pdf/${encodeURIComponent(url.split(".net")[1])}`, "_blank");
+        url &&
+          window.open(
+            `/pdf/${encodeURIComponent(url.split(".net")[1])}`,
+            "_blank"
+          );
       });
       return;
     }
@@ -158,7 +164,10 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
 
   if (singleBrocher) {
     return (
-      <div className="w-[95%] sm:w-[90%] mx-auto my-4 sm:my-8 bg-gray-50 scroll-mt-[125px]" id="brochure">
+      <div
+        className="w-[95%] sm:w-[90%] mx-auto my-4 sm:my-8 bg-gray-50 scroll-mt-[125px]"
+        id="brochure"
+      >
         <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-semibold mb-[12px] capitalize break-words pl-3 pt-2">
           <span>Explore the Comprehensive Brochure of </span>
           <span className="text-[#148B16] font-bold">{projName}</span>
@@ -168,19 +177,16 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
           className="bg-white relative rounded-lg shadow-lg p-4 max-w-full mx-auto h-[350px] sm:h-[600px] flex flex-col justify-between items-center overflow-y-auto"
           ref={pdfContainerRef}
         >
-              <a
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                if (singleBrocher) handleDownload(singleBrocher);
-              }}
-              className="absolute top-1 right-1 sm:top-2 sm:right-2 z-[10000]"
-            >
-              <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[36px] lg:h-[36px]" />
-            </a>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              if (singleBrocher) handleDownload(singleBrocher);
+            }}
+            className="absolute bottom-1 right-1 sm:bottom-2 sm:right-2 z-[1]"
+          >
+            <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[36px] lg:h-[36px]" />
+          </button>
           <div className="flex-grow w-full overflow-hidden flex justify-center items-center relative">
-        
-
             {state.loading ? (
               <FaSpinner className="animate-spin text-[#0073C6] h-8 w-8" />
             ) : state.errorMessage ? (
@@ -205,11 +211,11 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
             )}
           </div>
 
-          <div className="w-full flex items-center justify-between mt-4">
+          <div className="w-full flex items-center justify-center space-x-4 mt-4">
             <button
               onClick={() => changePage(-1)}
-              disabled={state.pageNumber <= 1 || state.loading}
-              className={`bg-[#0073C6] text-white p-1 flex justify-center items-center rounded-full ${
+              disabled={state.pageNumber <= 1 || state.loading || state.pageNumber === 0}
+              className={`bg-[#0073C6] text-white p-1 flex justify-center items-center rounded-full disabled:opacity-50 disabled:cursor-not-allowed ${
                 state.loading ? "cursor-not-allowed" : "h-8 w-8"
               }`}
             >
@@ -219,8 +225,7 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
               <span className="text-gray-600 font-bold">
                 Page {state.pageNumber} of {state.numPages || "--"}
               </span>
-              <a
-                href="#"
+              <button
                 onClick={(e) => {
                   e.preventDefault();
                   if (singleBrocher) handleDownload(singleBrocher);
@@ -232,12 +237,12 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
               >
                 <FaDownload className="h-4 w-4" />
                 <span className="hidden sm:inline">Download Brochure</span>
-              </a>
+              </button>
             </div>
             <button
               onClick={() => changePage(1)}
               disabled={state.pageNumber >= state.numPages! || state.loading}
-              className={`bg-[#0073C6] text-white p-1 flex justify-center items-center rounded-full ${
+              className={`bg-[#0073C6] text-white p-1 flex justify-center items-center rounded-full disabled:opacity-50 disabled:cursor-not-allowed ${
                 state.loading ? "cursor-not-allowed" : "h-8 w-8"
               }`}
             >
@@ -250,24 +255,30 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
   }
 
   return (
-    <div className="w-[95%] sm:w-[90%] mx-auto my-4 sm:my-8 bg-gray-50 scroll-mt-[125px] relative" id="brochure">
-           <a
-            href="#"
-            onClick={(e) => {
-              e.preventDefault();
-              if (state.activePhase.brochure) handleDownload(state.activePhase.brochure);
-            }}
-            className="absolute  bottom-1 right-1 sm:bottom-2  sm:right-2 z-[1]"
-          >
-            <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[36px] lg:h-[36px] " />
-          </a>
+    <div
+      className="w-[95%] sm:w-[90%] mx-auto my-4 sm:my-8 bg-gray-50 scroll-mt-[125px] relative"
+      id="brochure"
+    >
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          if (state.activePhase.brochure)
+            handleDownload(state.activePhase.brochure);
+        }}
+        className="absolute  bottom-1 right-1 sm:bottom-2  sm:right-2 z-[1]"
+      >
+        <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[36px] lg:h-[36px] " />
+      </button>
       <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-semibold mb-[12px] capitalize break-words pl-3 pt-2">
         <span>Explore the Comprehensive Brochures of </span>
         <span className="text-[#148B16] font-bold">{projName}</span>
       </h2>
 
       <div className="mb-1 flex-wrap pl-3">
-        <div className="inline-flex rounded-md shadow-sm space-x-2" role="group">
+        <div
+          className="inline-flex rounded-md shadow-sm space-x-2"
+          role="group"
+        >
           {phaseOverviewData.map(
             (phase) =>
               phase.phaseBrochureUrl && (
@@ -302,8 +313,6 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
         ref={pdfContainerRef}
       >
         <div className="flex-grow w-full overflow-hidden flex justify-center items-center relative">
-     
-
           {state.loading ? (
             <FaSpinner className="animate-spin text-[#0073C6] h-8 w-8" />
           ) : state.errorMessage ? (
@@ -333,25 +342,25 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
         </div>
 
         <div className="w-full flex items-center justify-center mt-4">
-        
           <div className="flex items-center space-x-4 relative group">
-          <button
-            onClick={() => changePage(-1)}
-            disabled={state.pageNumber <= 1 || state.loading}
-            className={`bg-[#0073C6] text-white p-1 flex justify-center items-center rounded-full h-8 w-8 ${
-              (state.pageNumber <= 1 || state.loading) && "opacity-50 cursor-not-allowed" 
-            }`}
-          >
-            <FaChevronLeft className="h-4 w-4" />
-          </button>
+            <button
+              onClick={() => changePage(-1)}
+              disabled={state.pageNumber <= 1 || state.loading}
+              className={`bg-[#0073C6] text-white p-1 flex justify-center items-center rounded-full h-8 w-8 ${
+                (state.pageNumber <= 1 || state.loading) &&
+                "opacity-50 cursor-not-allowed"
+              }`}
+            >
+              <FaChevronLeft className="h-4 w-4" />
+            </button>
             <span className="text-gray-600 font-bold">
               Page {state.pageNumber} of {state.numPages || "--"}
             </span>
-            <a
-              href="#"
+            <button
               onClick={(e) => {
                 e.preventDefault();
-                if (state.activePhase.brochure) handleDownload(state.activePhase.brochure);
+                if (state.activePhase.brochure)
+                  handleDownload(state.activePhase.brochure);
               }}
               className={`bg-[#0073C6] text-white px-3 py-1 rounded-full flex items-center space-x-2 transition-all duration-300 ease-in-out transform group-hover:scale-105 hover:shadow-lg ${
                 state.loading ? "cursor-not-allowed" : ""
@@ -360,18 +369,18 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
             >
               <FaDownload className="h-4 w-4" />
               <span className="hidden sm:inline">Download Brochure</span>
-            </a>
+            </button>
             <button
               onClick={() => changePage(1)}
               disabled={state.pageNumber >= state.numPages! || state.loading}
               className={`bg-[#0073C6] text-white p-1 flex justify-center items-center rounded-full h-8 w-8 ${
-                (state.pageNumber >= state.numPages! || state.loading) && "opacity-50 cursor-not-allowed"
+                (state.pageNumber >= state.numPages! || state.loading) &&
+                "opacity-50 cursor-not-allowed"
               }`}
             >
               <FaChevronRight className="h-4 w-4" />
             </button>
           </div>
-      
         </div>
       </div>
     </div>
