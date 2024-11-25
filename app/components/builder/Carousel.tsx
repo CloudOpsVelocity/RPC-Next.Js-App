@@ -197,7 +197,7 @@ export function ProjectCard({ type, cardData, refetch }: CardProps) {
                   Project Status:{" "}
                 </span>
                 <span className="text-[#148B16] text-[14px] xl:text-base not-italic font-bold leading-[normal]">
-                  {cardData.projectStatusName}
+                  {cardData.projectStatus}
                 </span>
               </div>
             )}
@@ -240,7 +240,7 @@ const BuilderCarousel = ({
   if (!data || data?.length == 0) {
     return;
   }
-
+console.log(data);
   return (
     <div className="w-full mb-[4%]">
       <h2 className="ml-2 text-[16px] sm:text-[20px] xl:text-[32px] font-semibold px-4 sm:px-0">

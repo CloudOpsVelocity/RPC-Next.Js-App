@@ -75,18 +75,8 @@ export function getPathTypeFromQueryParamsWitParam(
 }
 
 export function getQueryParam(searchParams: SearchParams): string {
-  for (const key in pathConfig) {
-    if (
-      searchParams[
-        pathConfig[key as PathConfigKey].paramName as keyof SearchParams
-      ]
-    ) {
-      return `?${pathConfig[key as PathConfigKey].paramName}=${
-        searchParams[
-          pathConfig[key as PathConfigKey].paramName as keyof SearchParams
-        ]
-      }`;
-    }
+  if (searchParams.cc) {
+    return `?cc=${searchParams.cc}`;
   }
   return "";
 }
