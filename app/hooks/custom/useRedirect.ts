@@ -12,12 +12,48 @@ interface SearchParams {
 // Renamed internal functions to follow React Hook naming conventions
 function useGetPathTypeFromQueryParams(): string {
   const searchParams = useSearchParams();
-  for (const key in pathConfig) {
-    if (searchParams.get(pathConfig[key as PathConfigKey].paramName)) {
-      return pathConfig[key as PathConfigKey].pageTitle;
-    }
-  }
-  return pathConfig.default.pageTitle;
+  const path = decrypt(searchParams.get("cc") || "");
+
+  const config = [
+    {
+      path: '/search',
+      title: 'Project Search',
+      exact: true,
+    },
+    {
+      path: '/search/listing',
+      title: 'Listing Search',
+      exact: true,
+    },
+    {
+      path: '/builders',
+      title: 'Builder Details',
+      exact: false,
+    },
+    {
+      path: '/residential/projects',
+      title: 'Project Details',
+      exact: false,
+    },
+    {
+      path: '/residential/listings',
+      title: 'Listing Details',
+      exact: false,
+    },
+    {
+      path: '/residential-projects',
+      title: 'Listing Details',
+      exact: false,
+    },
+  ];
+
+  // Find the matching config based on the `path` and `exact` flag
+  const match = config.find((item) =>
+    item.exact ? item.path === path : path.startsWith(item.path)
+  );
+
+  // Return the title of the matching config, or a default value
+  return match ? match.title : pathConfig.default.pageTitle;
 }
 
 function useGetCallPath(): string {
