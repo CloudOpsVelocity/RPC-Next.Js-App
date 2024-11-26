@@ -40,6 +40,7 @@ export default function ProjData({
   propIdEnc,
   otherCharges,
   phaseCount,
+  phaseId
 }: Props) {
   const sortedBhks = sortUnits(bhkNames);
   const dispatch = useSetAtom(overlayAtom);
@@ -108,7 +109,7 @@ export default function ProjData({
                 type: "OPEN",
                 content: sortedBhks,
                 title: "Unit Types",
-                id: `${projIdEnc}+${propTypeId}`,
+                id: `${type === "proj" ? projIdEnc : propIdEnc}+${propTypeId}+${phaseId}`,
                 conType: "bhk",
                 pType: type,
               });
@@ -152,7 +153,7 @@ export default function ProjData({
                 content: {
                   charges: otherCharges,
                 },
-                id: `${type === "proj" ? projIdEnc : propIdEnc}+${propTypeId}`,
+                id: `${type === "proj" ? projIdEnc : propIdEnc}+${propTypeId}${phaseId ? '+' + phaseId : ''}`,
                 title: "Other Charges",
                 type: "OPEN",
                 pType: type,

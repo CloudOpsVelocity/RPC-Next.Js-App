@@ -4,9 +4,13 @@ import DefaultSearchPage from "./Page/DefaultSearchPage";
 import { headers } from "next/headers";
 type Props = { searchParams: {} };
 const  SearchingPage = async ({ searchParams }: Props) => {
-  const ip = headers().get("x-forwarded-for") || headers().get("cf-connecting-ip") || "";
-  const data = await getUserCity(undefined,ip);
-  return <DefaultSearchPage cityData={data?.data} />; 
+  // const ip = headers().get("x-forwarded-for") || headers().get("cf-connecting-ip") || "";
+  // const data = await getUserCity(undefined,ip);
+  const data = {
+    city: "Bengaluru",
+    cityId: "9",
+  };
+  return <DefaultSearchPage cityData={data} />; 
 };
 
 export default SearchingPage;
