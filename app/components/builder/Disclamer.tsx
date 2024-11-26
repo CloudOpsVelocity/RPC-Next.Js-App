@@ -26,14 +26,14 @@ export default function Disclamer({ refUrls }: Props) {
           return (
             <div
               key={url}
-              className="text-xs  sm:text-sm  hover:text-blue-800 transition duration-200"
+              className="text-xs   hover:text-blue-800 transition duration-200"
             >
               {url} {refUrls.length - 1 !== index && ","}
             </div>
           );
         })}
       </div>
-      <p className="text-sm text-black  mt-1">
+      <p className="text-[13px] text-black  mt-1">
         A Get Right Property website
         <br />
         Copyright © 2024 RPCLAN PROPERTY SERVICES PRIVATE LIMITED All rights

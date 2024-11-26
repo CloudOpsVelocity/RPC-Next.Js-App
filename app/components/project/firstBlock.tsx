@@ -44,16 +44,10 @@ const FirstBlock: React.FC<Props> = ({
   const setIsScrolling = useSetAtom(isScrollingAtom);
   const setSticky = useSetAtom(stickyAtom);
   const setC = useSetAtom(currentBlockAtom);
-  const [projectReqData, setProjectReqData] = useAtom(projectReqDataAtom);
-
   const { data, isLoading, status } = useQuery<any>({
     queryKey: [`builder/${builderId}&isBuilderPage=Nproj`],
     enabled: false,
     onSuccess(data) {
-      setProjectReqData({
-        postedById: builderId,
-        postedByName: data?.data?.userName,
-      });
       urlBuilder = generateBuilderUrl({
         slug: data?.data?.userName,
         city: data.data?.cityName,

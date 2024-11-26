@@ -2,6 +2,8 @@
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import React from "react";
+import { usePathname } from "next/navigation";
+import { encryptUrl } from "@/app/hooks/custom/useRedirect";
 
 type Props = {
   text?: string;
@@ -11,7 +13,7 @@ export default function Btn({ text }: Props) {
   const { data: session } = useSession();
   const url = session
     ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/post-your-listing`
-    : `/login?pp=post`;
+    : `/login?cc=${encryptUrl('/post-your-listing')}`;
 
   return (
     <a

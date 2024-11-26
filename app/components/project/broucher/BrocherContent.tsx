@@ -199,13 +199,17 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
                 loading={
                   <FaSpinner className="animate-spin text-[#0073C6] h-8 w-8" />
                 }
+                
               >
                 <Page
                   pageNumber={state.pageNumber}
                   renderTextLayer={false}
                   renderAnnotationLayer={false}
-                  scale={isMobile ? 0.4 : 0.7}
+                  // scale={isMobile ? 0.4 : 0.7}
                   className="shadow-md rounded overflow-y-auto"
+                  height={isMobile ? 300 : 520}
+                  loading={<FaSpinner className="animate-spin text-[#0073C6] h-8 w-8" />}
+
                 />
               </Document>
             )}
@@ -329,13 +333,19 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
               loading={
                 <FaSpinner className="animate-spin text-[#0073C6] h-8 w-8" />
               }
+
             >
               <Page
                 pageNumber={state.pageNumber}
                 renderTextLayer={false}
                 renderAnnotationLayer={false}
-                scale={isMobile ? 0.4 : 0.7}
-                className="shadow-md rounded overflow-y-auto"
+                // scale={isMobile ? 0.4 : 0.7}
+                className="shadow-md rounded "
+                loading={<FaSpinner className="animate-spin text-[#0073C6] h-8 w-8" />}
+                height={isMobile ? 270 : 520}
+                // width={isMobile ? 200 : 300}
+                // _className="max-h-[300px] sm:max-h-[500px] max-w-fit"
+
               />
             </Document>
           )}

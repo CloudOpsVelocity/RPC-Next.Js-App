@@ -6,7 +6,7 @@ import data, { unAuthorizedData } from "@/app/data/dropdown";
 import S from "@/app/styles/DropDown.module.css";
 import axios from "axios";
 import { signOut, useSession } from "next-auth/react";
-import usePathToOrigin from "@/app/hooks/custom/useRedirect";
+import usePathToOrigin, { encryptUrl } from "@/app/hooks/custom/useRedirect";
 import Link from "next/link";
 import clsx from "clsx";
 import { useMediaQuery } from "@mantine/hooks";
@@ -50,6 +50,7 @@ export default function Header({}: Props) {
 
 const ForBuilders = () => {
   const { data: session } = useSession();
+  const pathName = usePathname()
   return (
     !session && (
       <Menu trigger="click-hover">
@@ -60,7 +61,7 @@ const ForBuilders = () => {
         </Menu.Target>
         <Menu.Dropdown
           className="!p-0 cursor-pointer"
-          onClick={() => window.open("/login", "_blank")}
+          onClick={() => window.open(`/login?cc=${encryptUrl(pathName)}`, "_blank")}
         >
           <div className="w-[387px] h-[178px] shrink-0 rounded border shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] border-solid border-[#C5C2DD] bg-gradient-to-r from-[#f5f5f5] to-[#ffeacc] p-6">
             <div>

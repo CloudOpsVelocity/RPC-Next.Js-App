@@ -42,6 +42,7 @@ export default function BuilderPage({ data, id }: Props) {
                   ? data.data.cityName
                   : ""
               }
+              builderName={data?.data?.userName}
             />
             {refURls && refURls.length > 0 && <Disclamer refUrls={refURls} />}
           </div>

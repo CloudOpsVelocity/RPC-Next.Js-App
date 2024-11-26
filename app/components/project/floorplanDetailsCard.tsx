@@ -71,13 +71,13 @@ const FloorplanDetailsCard: React.FC<Props> = ({
           "sm:flex sm:h-[180px] justify-between py-[18px] px-[25px] pt-[24px] w-full border-[#92B2C8] border-solid border-b-[1px] border-r-[1px] cursor-pointer hidden hover:bg-gray-50 transition-colors duration-200"
         )}
         onClick={handleCardClick}
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          transform: `translateY(${start}px)`,
-        }}
+        // style={{
+        //   position: "absolute",
+        //   top: 0,
+        //   left: 0,
+        //   width: "100%",
+        //   // transform: `translateY(${start}px)`,
+        // }}
       >
         {propCgId != projectprops.plot && (
           <div className="">

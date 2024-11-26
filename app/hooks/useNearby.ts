@@ -40,9 +40,12 @@ export default function useNearby({
     retry: false,
     onSuccess(data) {
       const isNearby = data?.nearbyProj?.length > 0 || data?.builderProj?.length > 0;
-        setProjectReqData({
-        isNearby,
-      });
+        if(isNearby){
+        setProjectReqData((prev)=>({
+         ...prev,
+          isNearby,
+        }));
+      }
      }
   });
 

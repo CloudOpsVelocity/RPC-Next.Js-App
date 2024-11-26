@@ -27,6 +27,7 @@ type Props = {
   data?: any;
   location?: string;
   id?: string;
+  builderName:string
 };
 
 type CardProps = {
@@ -224,6 +225,7 @@ const BuilderCarousel = ({
   projName,
   location,
   id,
+  builderName
 }: Props) => {
   const getBuilderProjects = async () => {
     const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/builder-details-project?builderId=${id}`;
@@ -240,7 +242,6 @@ const BuilderCarousel = ({
   if (!data || data?.length == 0) {
     return;
   }
-console.log(data);
   return (
     <div className="w-full mb-[4%]">
       <h2 className="ml-2 text-[16px] sm:text-[20px] xl:text-[32px] font-semibold px-4 sm:px-0">
@@ -252,7 +253,7 @@ console.log(data);
         {content}
       </p>
       <NewCarousel data={data} renderItem={(item:any, index) => (
-    <ProjectCard type={type} cardData={item} refetch={refetch} />
+    <ProjectCard type={type} cardData={{...item,postedByName:builderName}} refetch={refetch} />
   )} slidesToShow={3.5} gap={10} />
       {/* <MainCarousel
         paddings={{

@@ -181,7 +181,7 @@ export default function ByBhkBlock({
                 }}
               >
                 <FloorplanDetailsCard
-                  data={filteredData[virtualRow.index]}
+                  data={virtualRow}
                   propCgId={propCgId}
                   projData={filteredData}
                   setValues={setValues}

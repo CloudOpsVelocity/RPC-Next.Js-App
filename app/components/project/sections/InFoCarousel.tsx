@@ -23,6 +23,7 @@ import { floorPlansArray, selectedFloorAtom } from "@/app/store/floor";
 import { useFloorPlanPopup } from "@/app/hooks/useFloorPlanPopup";
 import { useForm } from "@/app/context/floorplanContext";
 import { setPropertyValues } from "@/app/utils/dyanamic/projects";
+import { projectReqDataAtom } from "@/app/store/project/project.req";
 
 type Props = {
   partialUnitData: any;
@@ -30,6 +31,7 @@ type Props = {
 
 export default function InFoCarousel({ partialUnitData }: Props) {
   const currentPhase = useAtomValue(currentPhaseAtom);
+
   const propCgId = useAtomValue(propCgIdAtom);
   const whichKeyname = partialUnitData.type === "overview" ? "apiProp" : "name";
   const data =

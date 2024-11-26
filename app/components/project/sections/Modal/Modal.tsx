@@ -17,8 +17,11 @@ import { useState } from "react";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 import ZoomInOut from "../../actions/ZoomInOut";
 import { formatNumberWithSuffix } from "@/app/utils/numbers";
+import { projectReqDataAtom } from "@/app/store/project/project.req";
+import { useQuery } from "react-query";
 export default function PartialUnitModal({ data }: any) {
   const isData = useAtomValue(selectedPartialUnitAtom);
+  const projStaleData = useAtomValue(projectReqDataAtom)
   const [active, setActive] = useState(0);
   const reset = useResetAtom(selectedPartialUnitAtom);
   const handleReset = () => {
@@ -26,14 +29,16 @@ export default function PartialUnitModal({ data }: any) {
     reset();
   };
   const selectedOne = isData.others[active];
+  const { data:builderData, isLoading, status } = useQuery<any>({
+    queryKey: [`builder/${data.builderId}&isBuilderPage=Nproj`],
+    enabled: false,
+  });
   const isMobile = useMediaQuery("(max-width: 601px)");
   const { handleDownload } = useDownload("floorPlan");
   const [, { open, MODAL_TYPE }] = useReqCallPopup();
-
   if (!(isData.main === 0 ? true : isData.main)) {
     return null;
   }
-  console.log(selectedOne?.floorPlan);
   return (
     <Modal
       opened={isData.main === 0 ? true : isData.main}
@@ -109,7 +114,7 @@ export default function PartialUnitModal({ data }: any) {
           onClick={() =>
             open({
               modal_type: "REQ_QUOTE",
-              postedByName: data.postedByName,
+              postedByName: builderData?.data?.userName ?? '',
               projUnitIdEnc: selectedOne?.projUnitIdEnc,
               postedId: data.builderId,
               reqId: data.projIdEnc,

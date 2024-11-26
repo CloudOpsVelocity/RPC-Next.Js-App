@@ -69,18 +69,22 @@ function useGetCallPath(): string {
 
 function useGetQueryParamClient(): { query: string; redirectPath: string } {
   const searchParams = useSearchParams();
-  for (const key in pathConfig) {
-    const id = searchParams.get(pathConfig[key as PathConfigKey].paramName);
-    if (id) {
-      return {
-        query: `?${pathConfig[key as PathConfigKey].paramName}=${id}`,
-        redirectPath: `${
-          pathConfig[key as PathConfigKey].redirectingPath
-        }${id}`,
-      };
-    }
+  return {
+    query: `?cc=${(searchParams.get("cc") || "")}`,
+    redirectPath: decrypt(searchParams.get("cc") || ""),
   }
-  return { query: "", redirectPath: pathConfig.default.redirectingPath };
+  // for (const key in pathConfig) {
+  //   const id = searchParams.get(pathConfig[key as PathConfigKey].paramName);
+  //   if (id) {
+  //     return {
+  //       query: `?${pathConfig[key as PathConfigKey].paramName}=${id}`,
+  //       redirectPath: `${
+  //         pathConfig[key as PathConfigKey].redirectingPath
+  //       }${id}`,
+  //     };
+  //   }
+  // }
+  // return { query: "", redirectPath: pathConfig.default.redirectingPath };
 }
 
 // Server-side functions remain unchanged
@@ -133,6 +137,8 @@ export {
   useGetPathTypeFromQueryParams as getPathTypeFromQueryParams,
   useGetCallPath as getCallPath,
   useGetQueryParamClient as getQueryParamClient,
+  encrypt as encryptUrl,
+  decrypt as decryptUrl
 };
 
 export default function usePathToOrigin() {

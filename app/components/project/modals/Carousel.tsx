@@ -27,6 +27,7 @@ import { useMediaQuery } from "@mantine/hooks";
 
 import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
 import { RightSection } from "./FloorplanModalRightSection";
+import { ImgNotAvail } from "@/app/data/project";
 
 function CarouselModal({
   projName,
@@ -94,11 +95,13 @@ function CarouselModal({
           >
             {!isMobile ? "Download Floor Plan" : "Download"}
           </button>
-          <SharePopup
-            title="Share"
+          {selectedFloor?.floorPlanUrl !== ImgNotAvail && (
+            <SharePopup
+              title="Share"
             titleText="Share Floor Plan"
-            url={imageUrlParser(selectedFloor?.floorPlanUrl?.split(",")[3], "F")}
-          />
+              url={imageUrlParser(selectedFloor?.floorPlanUrl?.split(",")[3], "F")}
+              />
+          )}
 
           <Close close={close} />
         </div>

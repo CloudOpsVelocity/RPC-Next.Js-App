@@ -185,10 +185,7 @@ export default function ListingCard({ item, sl }: Props) {
                 )}
                 <Divider orientation="vertical" color="#7BA0BB" />
                 <DownSectionCard
-                  label={
-                    item.category === "Rent"
-                      ? "Available For"
-                      : "Available From"
+                  label={ "Available From"
                   }
                   value={formatDate(item.availableFrom, true)}
                 />

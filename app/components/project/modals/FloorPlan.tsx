@@ -27,8 +27,6 @@ import ColumnVirtualizerFixed from "./VitualizedListCol";
 import { SelectCreatable } from "./filters/UnitINput";
 import useRecentUnits from "@/app/hooks/project/useRecentUnits";
 import RecentSearchedUnits from "../_ui/RecentSearchedUnits";
-import { useReqCallPopup } from "@/app/hooks/useReqCallPop";
-import { projectReqDataAtom } from "@/app/store/project/project.req";
 import { RightSection } from "./FloorplanModalRightSection";
 
 type Props = {
