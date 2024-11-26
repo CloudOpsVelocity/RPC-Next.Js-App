@@ -200,6 +200,7 @@ const AddRating = ({
             ) : (
               <RatingForm
                 projName={projName}
+                projIdEnc={projIdEnc}
                 formSubmit={formSubmit}
                 isSubmitted={isDataSubmitted.isRatingSubmitted}
               />
