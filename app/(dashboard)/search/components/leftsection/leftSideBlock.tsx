@@ -13,7 +13,7 @@ const LeftSideBlock = ({ serverData }: any) => {
     filters,
     params,
     setFilters,
-  } = useSearchFilters("project");
+  } = useSearchFilters();
 
   const onTabChange = (listedBy: "A" | "I" | "proj" | "B" | "ALL"): void => {
     if (!listedBy) {

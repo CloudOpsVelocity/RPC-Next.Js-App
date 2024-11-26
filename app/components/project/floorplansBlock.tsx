@@ -7,6 +7,7 @@ import {
 } from "../../data/projectDetails";
 import Button from "../../elements/button";
 import React, { useEffect, useState } from "react";
+import { paritalUnitParser } from "@/app/(new_routes_seo)/residential/projects/utils/partialUnitParser";
 import {
   PlotIcon,
   VillamentIcon,
@@ -71,6 +72,7 @@ export default function FloorplansBlock({
   partialUnitData,
 }: // overview,
 Props) {
+  console.log(PhaseOverview)
   const allKeys = [35, 33, 31, 34, 32];
   const [propCgId, setPropCgId] = useAtom(propCgIdAtom);
   const [currentPhase, setCurrentPhase] = useAtom(currentPhaseAtom);
@@ -97,16 +99,17 @@ Props) {
     enabled: !!propCgId,
     ...RTK_CONFIG,
   });
-  const {
-    data: overview,
-    isLoading: overviewdataLoading,
-    status,
-  } = useQuery({
-    queryKey: [`overview-data/${slug}`],
-    queryFn: () => getOverViewData(slug),
-    enabled: !partialUnitData,
-    ...RTK_CONFIG,
-  });
+  // const {
+  //   data: overview,
+  //   isLoading: overviewdataLoading,
+  //   status,
+  // } = useQuery({
+  //   queryKey: [`overview-data/${slug}`],
+  //   queryFn: () => getOverViewData(slug),
+  //   enabled: !partialUnitData,
+  //   ...RTK_CONFIG,
+  // });
+  // console.log(overview)
   const types =
     selectedPhase?.propTypeOverview &&
     Object?.keys(
@@ -291,11 +294,11 @@ Props) {
   return (
     <>
       {!partialUnitData &&
-        (overviewdataLoading ? (
+        (!PhaseOverview ? (
           <div>Loading....</div>
         ) : (
           <PartialUnitData
-            partialUnitData={overview}
+            partialUnitData={paritalUnitParser(PhaseOverview)}
             projName={projName}
             phaseList={phaseList}
             data={projectUnitsData}

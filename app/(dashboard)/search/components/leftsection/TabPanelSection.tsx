@@ -5,6 +5,8 @@ import React, { useEffect, useRef, useState } from "react";
 import useSearchFilters from "@/app/hooks/search";
 import ProjectCard from "@/app/test/newui/components/Card";
 import { useVirtualizer } from '@tanstack/react-virtual';
+import { useAtom } from "jotai";
+import { searachFilterAtom } from "@/app/store/search";
 
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
@@ -13,12 +15,13 @@ type Props = {
 
 export default function TabPanelSection({ mutate, serverData }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [filters, setFilters] = useAtom(searachFilterAtom);
   const {
     searchProps: { isLoading, data, hasNextPage, fetchMoreData, refetch },
-    filters,
+    // filters,
     countAppliedFiltersFromQuery,
     path,
-  } = useSearchFilters("project");
+  } = useSearchFilters(filters.listedBy ? "owner" : "project");
 
   const appliedFiltersCount = countAppliedFiltersFromQuery();
   const serverClientData =

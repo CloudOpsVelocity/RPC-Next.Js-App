@@ -1,3 +1,4 @@
+import RTK_CONFIG from "@/app/config/rtk";
 import {
   initialState,
   searachFilterAtom,
@@ -336,9 +337,8 @@ export default function useSearchFilters(
         path.includes("/listings") ||
         path.includes("/residential")) &&
         countAppliedFiltersFromQuery() > 0 &&
-        input !== undefined),
-    cacheTime: 300000,
-    staleTime: 30000,
+        input !== undefined) ,
+    ...RTK_CONFIG
   });
   //  if any value is null then don't increase otherwise increase count
 
@@ -447,7 +447,7 @@ const getFilteredData = async (
     type === "project"
       ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=${page}${
           query && query !== "listedBy=ALL" ? `&${query}` : ""
-        }${cgValue} ${city && `&city=${cityId}`}`
+        }${cgValue} ${city ? `&city=${cityId}` : ""}`
       : `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/prop-search?page=${page}${
           query && query !== "listedBy=ALL" ? `&${query}` : ""
         }${!hasCityParam ? `&city=${cityId}` : ""}${cgValue}`;

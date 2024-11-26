@@ -58,7 +58,7 @@ export function MainSearchMultiSelect({ type }: { type: string }) {
   const handlePush = async (type: string, data: any) => {
     switch (type) {
       case "Locality":
-        handleAddSearch(`${data.name}+${data.id}`);
+        handleAddSearch(`${data.name}+${data.stringId}`);
         break;
       case "Projects":
         if (data.type === "Project") {
@@ -189,7 +189,6 @@ export function MainSearchMultiSelect({ type }: { type: string }) {
       return [];
     }
 
-    console.log(filteredItems);
 
     return [
       <Combobox.Group key={group.group} label={group.group}>
