@@ -72,7 +72,6 @@ export default function FloorplansBlock({
   partialUnitData,
 }: // overview,
 Props) {
-  console.log(PhaseOverview)
   const allKeys = [35, 33, 31, 34, 32];
   const [propCgId, setPropCgId] = useAtom(propCgIdAtom);
   const [currentPhase, setCurrentPhase] = useAtom(currentPhaseAtom);
