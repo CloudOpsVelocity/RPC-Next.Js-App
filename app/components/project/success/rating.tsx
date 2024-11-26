@@ -73,6 +73,7 @@ export const RatingForm = ({
 }: any) => {
   const form = useFormContext();
   const data = useDynamicProj(projIdEnc);
+  console.log(data)
   const isTab = useMediaQuery(`(max-width: 1600px)`);
   return (
     <form
@@ -114,7 +115,7 @@ export const RatingForm = ({
               className="w-[34px] h-[34px] mb-2   xl:w-[45px] xl:h-[45px]  md:w-[70px] md:h-[70px]"
             />{" "}
             <span className="text-[#242424] pl-2 text-[24px] xl:text-[39px] not-italic font-bold leading-[normal] inline-block mb-2 mr-1">
-              {data.data.rating}
+              {data?.data?.rating}
             </span>
             {"  "}
             <span className=" text-[16px] xl:text-xl">
