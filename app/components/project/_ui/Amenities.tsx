@@ -116,7 +116,7 @@ export default function AmenitiesDisplay({ amenitiesData, data }: AmenitiesDispl
             </button>
             <ul className="ml-8 pb-1">
                   {getAvailableSubCategories(category).map((subCategory) => (
-                    <li key={subCategory} className="text-gray-700 text-sm list-disc hover:text-gray-900 transition">
+                    <li key={subCategory} className="text-btnPrimary font-medium text-sm list-disc hover:text-gray-900 transition">
                       {subCategory}
                     </li>
                   ))}
