@@ -26,27 +26,27 @@ export default function EnhancedFooter() {
       title: "New Projects",
       links: ["New Delhi", "Bangalore", "Chennai", "Mumbai", "Hyderabad"],
       hrefs: ["/new-delhi", "/bangalore", "/chennai", "/mumbai", "/hyderabad"],
-      target: "_blank"
+      target: "_blank",
     },
     {
       title: "Properties",
       links: [
-        "For Sale",
-        "For Rent", 
-        "New Lauch",
-        "Commercial",
+        "For Sale Listings",
+        "For Rent Listings",
+        "New Launch Projects",
+        /*  "Commercial",
         "Vacation Rentals",
-        "Foreclosures",
+        "Foreclosures", */
       ],
       hrefs: [
-        "/for-sale",
-        "/for-rent",
-        "/new-launch", 
-        "/commercial",
+        "/residential/listings/for-sale",
+        "/residential/listings/for-rent",
+        "/new-launch",
+        /* "/commercial",
         "/vacation-rentals",
-        "/foreclosures"
+        "/foreclosures", */
       ],
-      target: "_blank"
+      target: "_blank",
     },
     {
       title: "Resources",
@@ -60,13 +60,13 @@ export default function EnhancedFooter() {
       ],
       hrefs: [
         "/mortgage-calculator",
-        "/market-trends", 
+        "/market-trends",
         "/buying-guide",
         "/selling-tips",
         "/home-valuation",
-        "/news"
+        "/news",
       ],
-      target: "_blank"
+      target: "_blank",
     },
     {
       title: "Our Pages",
@@ -82,13 +82,13 @@ export default function EnhancedFooter() {
       hrefs: [
         "/",
         "/projects",
-        "/properties", 
+        "/properties",
         "/post-your-project",
-        "/post-your-property",
+        "/post-your-listing",
         "/builders",
-        "/login"
+        "/login",
       ],
-      target: "_blank"
+      target: "_blank",
     },
     {
       title: "Company",
@@ -106,15 +106,15 @@ export default function EnhancedFooter() {
         "/careers",
         "/press",
         "/get-in-touch",
-        "/partnerships"
+        "/partnerships",
       ],
-      target: "_blank"
+      target: "_blank",
     },
     {
       title: "Legal",
       links: [
         "Privacy Policy",
-        "Terms of Service", 
+        "Terms of Service",
         "Cookie Policy",
         "Fair Housing",
         "Accessibility",
@@ -126,9 +126,9 @@ export default function EnhancedFooter() {
         "/cookies",
         "/fair-housing",
         "/accessibility",
-        "/sitemap"
+        "/sitemap",
       ],
-      target: "_blank"
+      target: "_blank",
     },
   ];
 
@@ -182,7 +182,7 @@ export default function EnhancedFooter() {
             </div>
 
             <div className="md:grid md:grid-cols-2 md:gap-8">
-              {sections.slice(2,4).map(({ title, links, hrefs, target }) => (
+              {sections.slice(2, 4).map(({ title, links, hrefs, target }) => (
                 <div key={title}>
                   <h3 className="text-xs mt-2 sm:mt-0 sm:text-sm font-semibold text-white tracking-wider uppercase">
                     {title}
