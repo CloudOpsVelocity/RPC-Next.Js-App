@@ -25,7 +25,13 @@ export default function EnhancedFooter() {
     {
       title: "New Projects",
       links: ["New Delhi", "Bangalore", "Chennai", "Mumbai", "Hyderabad"],
-      hrefs: ["/new-delhi", "/bangalore", "/chennai", "/mumbai", "/hyderabad"],
+      hrefs: [
+        "/search?city=New+Delhi%2B683",
+        "/search?city=Bengaluru%2B9",
+        "/search?city=Chennai%2B580",
+        "/search?city=Mumbai%2B577",
+        "/search?city=Hyderabad%2B582",
+      ],
       target: "_blank",
     },
     {
@@ -39,8 +45,8 @@ export default function EnhancedFooter() {
         "Foreclosures", */
       ],
       hrefs: [
-        "/residential/listings/for-sale",
-        "/residential/listings/for-rent",
+        "/residential-projects/listings/for-sale",
+        "/residential-projects/listings/for-rent",
         "/new-launch",
         /* "/commercial",
         "/vacation-rentals",
