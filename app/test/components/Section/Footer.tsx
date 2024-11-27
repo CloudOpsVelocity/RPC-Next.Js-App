@@ -126,7 +126,7 @@ export default function EnhancedFooter() {
         "/cookies",
         "/fair-housing",
         "/accessibility",
-        "/sitemap",
+        "/sitemap.xml",
       ],
       target: "_blank",
     },
