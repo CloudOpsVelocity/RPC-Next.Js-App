@@ -40,14 +40,18 @@ export default function EnhancedFooter() {
         "For Sale Listings",
         "For Rent Listings",
         "New Launch Projects",
+        "On-Going Projects",
+        "Completed Projects",
         /*  "Commercial",
         "Vacation Rentals",
         "Foreclosures", */
       ],
       hrefs: [
-        "/residential-projects/listings/for-sale",
-        "/residential-projects/listings/for-rent",
-        "/new-launch",
+        "/residential-projects/for-sale",
+        "/residential-projects/for-rent",
+        "/search?projStatus=108",
+        "/search?projStatus=106",
+        "/search?projStatus=107",
         /* "/commercial",
         "/vacation-rentals",
         "/foreclosures", */
