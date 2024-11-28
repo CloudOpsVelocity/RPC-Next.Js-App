@@ -132,7 +132,7 @@
 .textInput:focus::placeholder,
 .mangingDrCust:focus::placeholder {
   color: transparent !important;
-  font-size: 16px;
+  
 }
 .textInput::placeholder,
 .cityPincodeCust::placeholder,
@@ -315,6 +315,9 @@
 
   .textInput {
     font-size: 14px;
+  }
+  .textInput:focus{
+    font-size: 16px;
   }
   /* .content{
     margin-top: 28px !important;
