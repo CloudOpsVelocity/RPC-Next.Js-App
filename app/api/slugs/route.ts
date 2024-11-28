@@ -39,8 +39,6 @@ export async function POST(request: Request, response: Response) {
 
     const fileContent = fs.readFileSync(filePath, "utf-8");
     const data = JSON.parse(fileContent);
-    console.log("Current file content:", data);
-
     switch (action) {
       case "create": {
         console.log("Action: create");
