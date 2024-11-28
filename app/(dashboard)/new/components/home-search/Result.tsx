@@ -175,7 +175,7 @@ export default function Results() {
             {localities?.length > 0 && (
               <h2
                 key="localities-heading"
-                className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] font-bold xl:text-[16px] not-italic leading-[normal] flex items-center gap-1 sm:gap-1 xl:text-nowrap cursor-pointer"
+                className="text-[#242424] sm:text-wrap text-[14px] sm:!mb-[10px] sm:text-[14px] font-bold xl:text-[16px] not-italic leading-[normal] flex items-center gap-1 sm:gap-1 xl:text-nowrap cursor-pointer"
               >
                 <SearchLocationIcon /> <span>Location</span>
               </h2>
@@ -188,7 +188,7 @@ export default function Results() {
                   onClick={() =>
                     handleAddSearch(`${locality.name}+${locality.stringId}`)
                   }
-                  className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1 sm:gap-1 xl:text-nowrap cursor-pointer"
+                  className="text-[#242424] sm:text-wrap text-[14px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1 sm:gap-1 xl:text-nowrap cursor-pointer"
                   key={`locality-${index}`}
                 >
                   <GrayMapIcon className="w-3 h-3" /> {locality.name}
@@ -200,10 +200,10 @@ export default function Results() {
             {projects && projects.length > 0 && (
               <h2
                 key="projects-heading"
-                className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic font-semibold leading-[normal] flex items-center gap-1 sm:gap-1 xl:text-nowrap cursor-pointer sm:text-xl  space-x-2   mb-1"
+                className="text-[#242424] sm:text-wrap text-[14px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic font-semibold leading-[normal] flex items-center gap-1 sm:gap-1 xl:text-nowrap cursor-pointer sm:text-xl  space-x-2   mb-1"
               >
                 {property}{" "}
-                <span className="text-[12px] sm:text-[14px] xl:text-[16px]">
+                <span className="text-[14px] sm:text-[14px] xl:text-[16px]">
                   Projects
                 </span>
               </h2>
@@ -212,7 +212,7 @@ export default function Results() {
               {projects?.map((project: any, index: number) => (
                 <li
                   onClick={() => handlePush("project", project.id, project)}
-                  className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1  xl:text-nowrap cursor-pointer"
+                  className="text-[#242424] sm:text-wrap text-[14px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1  xl:text-nowrap cursor-pointer"
                   key={`project-${index}`}
                 >
                   <GrayMapIcon className="w-3 h-3" /> {project.name}
@@ -229,7 +229,7 @@ export default function Results() {
                   onClick={() =>
                     handlePush("projectListing", projectListing, projectListing)
                   }
-                  className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1  xl:text-nowrap cursor-pointer"
+                  className="text-[#242424] sm:text-wrap text-[14px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1  xl:text-nowrap cursor-pointer"
                   key={`projectListing-${index}`}
                 >
                   <GrayMapIcon className="w-3 h-3" /> {projectListing.name}
@@ -250,7 +250,7 @@ export default function Results() {
                       listing
                     )
                   }
-                  className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1  xl:text-nowrap cursor-pointer"
+                  className="text-[#242424] sm:text-wrap text-[14px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic  leading-[normal] flex items-center gap-1  xl:text-nowrap cursor-pointer"
                   key={`listing-${index}`}
                 >
                   <GrayMapIcon className="w-3 h-3" /> {listing.name}
@@ -271,7 +271,7 @@ export default function Results() {
                       builder
                     )
                   }
-                  className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic leading-[normal] flex items-center gap-1  xl:text-nowrap cursor-pointer"
+                  className="text-[#242424] sm:text-wrap text-[14px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic leading-[normal] flex items-center gap-1  xl:text-nowrap cursor-pointer"
                   key={`builder-${index}`}
                 >
                   <GrayMapIcon className="w-3 h-3" /> {builder.name}
@@ -288,7 +288,7 @@ export default function Results() {
 const SubHeading = ({ text }: { text: string }) => {
   return (
     <div className="flex items-center gap-1.5 mt-[14px] mb-1">
-      <div className="text-[#242424] sm:text-wrap text-[12px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic font-semibold leading-[normal] flex items-center gap-1  xl:text-nowrap">
+      <div className="text-[#242424] sm:text-wrap text-[14px] sm:!mb-[10px] sm:text-[14px] xl:text-[16px] not-italic font-semibold leading-[normal] flex items-center gap-1  xl:text-nowrap">
         {text}
       </div>
       <hr className="w-full h-px border-0 bg-[#98A5B8]" />
