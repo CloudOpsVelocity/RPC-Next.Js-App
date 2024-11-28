@@ -25,10 +25,10 @@ export default function Header({}: Props) {
     <div className="flex  h-[70px] items-center justify-between shrink-0 p-1 pl-2 sm:pl-5 w-full py-3  shadow-[0px_4px_20px_0px_rgba(194,194,194,0.20)] bg-gradient-to-r from-[#f1f1f1] via-[#f1f1f1]  to-[#bde3ff] fixed top-0 z-[50]">
       {path !== "/" ? (
         <Link href={"/"}>
-          <GrpLogoSvg className="h-[40px] w-[160px]  sm:h-[50px] sm:w-auto" />
+          <GrpLogoSvg className="h-[40px]   sm:h-[50px] w-auto" />
         </Link>
       ) : (
-        <GrpLogoSvg className="h-[40px] w-[160px]  sm:h-[50px] sm:w-auto" />
+        <GrpLogoSvg className="h-[40px]   sm:h-[50px] w-auto" />
       )}
       {isMobile ? (
         <div className="flex  sm:hidden mr-4 gap-4">

@@ -1,7 +1,5 @@
 import { GrpDarkLogoSvg } from "@/app/images/getrightLogo";
-import { useState } from "react";
-import { FaAppStoreIos, FaLocationDot } from "react-icons/fa6";
-import { IoLogoGooglePlaystore } from "react-icons/io5";
+import { FaLocationDot } from "react-icons/fa6";
 
 import {
   FaFacebook,
@@ -15,11 +13,11 @@ import Subscribe from "./Subscribe";
 
 export default function EnhancedFooter() {
   const socialIcons = [
-    { name: "facebook", icon: <FaFacebook size={24} /> },
-    { name: "instagram", icon: <FaInstagram size={24} /> },
-    { name: "twitter", icon: <FaTwitter size={24} /> },
-    { name: "youtube", icon: <FaYoutube size={24} /> },
-    { name: "linkedin", icon: <FaLinkedin size={24} /> },
+    { name: "facebook", icon: <FaFacebook size={24} />,link:'https://www.facebook.com/profile.php?id=100066833915037' },
+    { name: "instagram", icon: <FaInstagram size={24} />,link:'https://www.instagram.com/getrightproperty/' },
+    { name: "twitter", icon: <FaTwitter size={24} />,link:'https://x.com/getrightproperty' },
+    { name: "youtube", icon: <FaYoutube size={24} />,link:'https://www.youtube.com/@getrightproperty' },
+    { name: "linkedin", icon: <FaLinkedin size={24} />,link:'https://www.linkedin.com/company/get-right-property/' },
   ];
   const sections = [
     {
@@ -153,10 +151,10 @@ export default function EnhancedFooter() {
               &amp; building lasting relationships with our clients
             </p>
             <div className="flex space-x-6">
-              {socialIcons.map(({ name, icon }) => (
+              {socialIcons.map(({ name, icon,link}) => (
                 <a
                   key={name}
-                  href="/"
+                  href={link}
                   target="_blank"
                   className="text-white hover:text-gray-300"
                 >
@@ -279,7 +277,7 @@ export default function EnhancedFooter() {
           </div>
         </div>
 
-        <div className="sm:mt-8 border-t border-gray-700 sm:pt-8 md:flex md:items-center md:justify-between">
+        <div className="mt-2 sm:mt-8 border-t border-gray-700 sm:pt-8 md:flex md:items-center md:justify-between">
           <div className="flex space-x-6 md:order-2">
             <button className="text-white text-xs sm:text-base hover:text-gray-300 inline-flex md:items-center md:justify-center flex-wrap text-left">
               <FaLocationDot className="mr-1" /> Whitefield, Bengaluru-560066

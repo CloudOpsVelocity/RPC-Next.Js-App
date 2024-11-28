@@ -21,7 +21,7 @@ export default function Subscribe({}: Props) {
         id="email-address"
         autoComplete="email"
         required
-        className="appearance-none min-w-0 w-full bg-white border border-gray-300 rounded-md shadow-sm py-1.5 sm:py-2 px-3 text-xs sm:text-sm text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-white focus:border-white"
+        className="appearance-none min-w-0 w-full focus:text-[16px] bg-white border border-gray-300 rounded-md shadow-sm py-1.5 sm:py-2 px-3 text-xs sm:text-sm text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-white focus:border-white"
         placeholder="Enter your email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
