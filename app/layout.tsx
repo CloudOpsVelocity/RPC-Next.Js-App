@@ -30,7 +30,7 @@ export default function RootLayout({
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width, maximum-scale=1, user-scalable=no"
         /> */}
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+   <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1,user-scalable=0,maximum-scale=1"/>
         <link
           rel="apple-touch-icon"
           sizes="57x57"
