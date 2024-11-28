@@ -26,10 +26,9 @@ export default function RootLayout({
     <html data-mantine-color-scheme="light" lang="en">
       <head>
         <ColorSchemeScript />
-
         <meta
           name="viewport"
-          content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
+          content="minimum-scale=1, initial-scale=1, width=device-width, maximum-scale=1, user-scalable=no"
         />
         <link
           rel="apple-touch-icon"
