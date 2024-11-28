@@ -11,7 +11,7 @@ export default function CardCarousel({ data, shortIds, active }: Props) {
   return (
     <Carousel
       slideSize={{ base: "55%", sm: "36%", md: "28%" }}
-      slideGap={{ base: "10px", sm: "md", xl: "xl" }}
+      slideGap={{ base: "8px", sm: "md", xl: "xl" }}
       align="start"
       slidesToScroll={1}
       mt={0}

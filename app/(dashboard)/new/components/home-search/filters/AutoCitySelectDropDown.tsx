@@ -220,7 +220,7 @@ export default function AutoCitySelectDropdown({
                 placeholder="Search cities..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full p-2 pl-10 pr-4 border border-gray-300 rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-200"
+                className="w-full p-2 pl-10 pr-4 border focus:text-[16px] border-gray-300 rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-200"
                 aria-label="Search cities"
               />
               <FaSearch
