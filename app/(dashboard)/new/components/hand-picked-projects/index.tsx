@@ -59,7 +59,7 @@ return  isLoading ? (
             <div className=" w-full flex flex-col xl:flex-row justify-start items-start mt-2 xl:mt-10 flex-nowrap sm:gap-6 ">
               <SideTabs active={active} setActive={setActive} />
     
-              <div className=" max-w-[600px] sm:max-w-[1590px] mt-[16px] sm:mt-0 ">
+              <div className=" max-w-[600px] sm:max-w-full xl:max-w-[1590px] mt-[16px] sm:mt-0 ">
                 <CardCarousel
                   data={(isEnabled ? newlyAddedProjects["featured"] : data?.featured)?.filter(
                     (each: any) => each.projstatus == config[active]
