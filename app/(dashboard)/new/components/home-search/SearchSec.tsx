@@ -66,7 +66,7 @@ export default function SearchSec({}: Props) {
                 </Pill>
               )}
           </div>
-          <PillsInput.Field
+          <input
             placeholder={
               f.locality.length > 0
                 ? "Add More"
@@ -75,7 +75,7 @@ export default function SearchSec({}: Props) {
             onClick={handleFieldClick}
             value={name ?? ""}
             onChange={(e) => onSearchChange(e.target.value)}
-            className="!min-w-[100px] ml-[4px] text-[12px] sm:text-[14px] "
+            className="min-w-[255px]  text-[12px] sm:text-[14px] outline-none pr-2 py-1 placeholder:text-gray-600"
           />
         </div>
       </Combobox.Target>

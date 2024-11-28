@@ -10,9 +10,12 @@ import SharePopup from "../components/SharePopup";
 import { getUserCity } from "@/app/(new_routes_seo)/utils/new-seo-routes/home.api";
 import { headers } from "next/headers";
 const SearchingPage = async () => {
-  const ip = headers().get("x-forwarded-for") || headers().get("cf-connecting-ip") || "";
-  const data = await getUserCity(undefined,ip);
-  console.log(data)
+  // const ip = headers().get("x-forwarded-for") || headers().get("cf-connecting-ip") || "";
+  // const data = await getUserCity(undefined,ip);
+  const data = {
+    city: "Bengaluru",
+    cityId: "9",
+  };
   return (
     <div>
       <Header />
