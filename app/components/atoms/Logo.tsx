@@ -1,4 +1,5 @@
-import { GrpLogoSvg } from "@/app/images/commonSvgs";
+
+import { GrpLogoSvg } from "@/app/images/getrightLogo";
 import Image from "next/image";
 import Link from "next/link";
 
