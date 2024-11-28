@@ -32,7 +32,7 @@ export default function Card({ item }: Props) {
 
   return (
     <div
-      className="w-[310px] sm:w-[508px] xl:w-[631px] h-[326px] sm:h-[294px] xl:h-[368px] shrink-0 relative"
+      className="w-[316px] sm:w-[508px] xl:w-[631px] h-[326px] sm:h-[294px] xl:h-[368px] shrink-0 relative"
     >
       <ProjectLink
         routeParams={{

@@ -15,7 +15,7 @@ export default function CardCarousel({ data, shortIds }: Props) {
   return (
     <Carousel
       slideSize={{ base: "80%", sm: "50%", md: "33.333333%" }}
-      slideGap={{ base: "sm", sm: "md", xl: "xl" }}
+      slideGap={{ base: "0px", sm: "md", xl: "xl" }}
       align="start"
       slidesToScroll={1}
       mt={20}
