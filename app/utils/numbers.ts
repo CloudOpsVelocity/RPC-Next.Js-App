@@ -1,7 +1,10 @@
 
 
 function formatCurrency(input: number | string): string {
-  const formatter = new Intl.NumberFormat("en-IN");
+  const formatter = new Intl.NumberFormat("en-IN", {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 2
+  });
   // Convert input to a number if it is a string
   const value = typeof input === "string" ? parseFloat(input) : input;
 
@@ -11,12 +14,15 @@ function formatCurrency(input: number | string): string {
   // Handle large numbers with suffixes
   if (value >= 10000000) {
     const croreValue = value / 10000000;
-    return `₹ ${formatter.format(croreValue)} Cr*`;
+    const formatted = formatter.format(croreValue).replace(/\.00$/, '');
+    return `₹ ${formatted} Cr*`;
   } else if (value >= 100000) {
     const lakhValue = value / 100000;
-    return `₹ ${formatter.format(lakhValue)} Lac*`;
+    const formatted = formatter.format(lakhValue).replace(/\.00$/, '');
+    return `₹ ${formatted} Lac*`;
   } else {
-    return `₹ ${formatter.format(value)}*`;
+    const formatted = formatter.format(value).replace(/\.00$/, '');
+    return `₹ ${formatted}*`;
   }
 }
 
