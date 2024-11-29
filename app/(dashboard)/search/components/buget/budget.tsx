@@ -191,11 +191,11 @@ export function BasicBudgetSelect() {
       setValue((f) => ({ ...f, bugdetValue: [f.bugdetValue[0], "" as any] }));
     }
   };
-  const handleMinBlur = () => {
-    if (maxValue > minValue) {
-      setValue((f) => ({ ...f, bugdetValue: ["" as any, f.bugdetValue[1]] }));
-    }
-  };
+  // const handleMinBlur = () => {
+  //   if (maxValue > minValue) {
+  //     setValue((f) => ({ ...f, bugdetValue: ["" as any, f.bugdetValue[1]] }));
+  //   }
+  // };
   const shouldShowBudget = !(
     f.bugdetValue[0] === 0 && f.bugdetValue[1] === 60 * MULTIPLIER
   );

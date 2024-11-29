@@ -442,14 +442,14 @@ const getFilteredData = async (
       cityId = cityIdFromParam;
     }
   }
-
+console.log(query)
   const url =
     type === "project"
       ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=${page}${
           query && query !== "listedBy=ALL" ? `&${query}` : ""
         }${cgValue} ${city ? `&city=${cityId}` : ""}`
       : `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/prop-search?page=${page}${
-          query && query !== "listedBy=ALL" ? `&${query}` : ""
+          query && query.includes("listedBy=ALL") ? `&${query.replace("listedBy=ALL", "")}` : ""
         }${!hasCityParam ? `&city=${cityId}` : ""}${cgValue}`;
   try {
     const response = await fetch(url);

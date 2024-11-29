@@ -58,7 +58,7 @@ export default function TabPanelSection({ mutate, serverData }: Props) {
 
   return (
     <div
-      className="p-[0%]  sm:max-h-[560px] w-full xl:max-h-[700px] xl:min-h-[65%] max-w-full overflow-y-auto"
+      className="p-[0%]  sm:max-h-[500px] w-full  xl:max-h-[700px] xl:min-h-[65%] max-w-full overflow-y-auto"
       ref={containerRef}
     >
       {isLoading ? (

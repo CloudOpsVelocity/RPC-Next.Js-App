@@ -28,7 +28,6 @@ import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import { toFormattedString } from "../../components/buget/budget";
 import { MainSearchMultiSelect } from "../../components/_ui/MultiselectListings";
-import { formatBudgetValue } from "../../components/buget";
 import FurnishOptions from "./filterSection/Furnish";
 import { useAtomValue } from "jotai";
 import { serverCityAtom } from "@/app/store/search/serverCity";
