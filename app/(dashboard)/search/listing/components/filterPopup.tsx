@@ -30,15 +30,17 @@ import { toFormattedString } from "../../components/buget/budget";
 import { MainSearchMultiSelect } from "../../components/_ui/MultiselectListings";
 import { formatBudgetValue } from "../../components/buget";
 import FurnishOptions from "./filterSection/Furnish";
+import { useAtomValue } from "jotai";
+import { serverCityAtom } from "@/app/store/search/serverCity";
 
 const FilterPopup = ({ close }: { close: () => void }) => {
   const path = usePathname();
   const [current, setCurrent] = useState("Bhk");
   const propKeys = [35, 33, 31, 34, 32, 36];
   const [localitySearch, setSearchLocality] = useDebouncedState("", 500);
-
+  const serverCity = useAtomValue(serverCityAtom)
   const { data } = useQuery({
-    queryFn: () => getData(localitySearch, "loc"),
+    queryFn: () => getData(localitySearch, "loc", filters.city ?? serverCity ?? ""),
     queryKey: ["search" + "loc" + localitySearch],
     enabled: localitySearch !== "",
   });

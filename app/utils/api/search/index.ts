@@ -1,9 +1,9 @@
-export const getData = async (query: string | null, type: string) => {
+export const getData = async (query: string | null, type: string,city:string) => {
   if (query === "") {
     return [];
   }
 
-  let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/matcher?word=${query}`;
+  let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/matcher?word=${query}&cityId=${city?.split("+")[1]}`;
   if (type === "loc") {
     url += `&isLocality=Y`;
   } else if (type === "builders") {

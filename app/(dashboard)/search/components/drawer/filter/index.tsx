@@ -29,6 +29,8 @@ import Close from "@/app/components/project/button/close";
 import { formatBudgetValue } from "../../buget";
 import useQsearch from "@/app/hooks/search/useQsearch";
 import { toFormattedString } from "../../buget/budget";
+import { useAtomValue } from "jotai";
+import { serverCityAtom } from "@/app/store/search/serverCity";
 
 const MobileFilter = ({ close }: any) => {
   const [current, setCurrent] = useState("Project Status");
@@ -51,17 +53,6 @@ const MobileFilter = ({ close }: any) => {
     listing: listings,
     projectListing,
   } = searchData;
-  const { data } = useQuery({
-    queryFn: () => getData(localitySearch, "loc"),
-    queryKey: ["search" + "loc" + localitySearch],
-    enabled: localitySearch !== "",
-  });
-  const { isLoading: builderDataLoading, data: builderData } = useQuery({
-    queryFn: () => getData(builderSearch, "builders"),
-    queryKey: ["search" + "builders" + builderSearch],
-    enabled: builderSearch !== "",
-  });
-
   const {
     filters,
     handleCheckboxClick,
@@ -73,6 +64,19 @@ const MobileFilter = ({ close }: any) => {
     remnoveSearchOptions,
     isFilterApplied,
   } = useSearchFilters();
+  const serverCity = useAtomValue(serverCityAtom)
+  const { data } = useQuery({
+    queryFn: () => getData(localitySearch, "loc", filters.city ?? serverCity ?? ""),
+    queryKey: ["search" + "loc" + localitySearch],
+    enabled: localitySearch !== "",
+  });
+  const { isLoading: builderDataLoading, data: builderData } = useQuery({
+    queryFn: () => getData(builderSearch, "builders", filters.city ?? serverCity ?? ""),
+    queryKey: ["search" + "builders" + builderSearch],
+    enabled: builderSearch !== "",
+  });
+
+
   const viewport = useRef<HTMLDivElement>(null);
   const scrollWhereIsSelected = (item: string) => {
     setCurrent(item);

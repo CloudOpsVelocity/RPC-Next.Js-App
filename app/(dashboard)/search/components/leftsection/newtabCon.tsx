@@ -22,10 +22,10 @@ const NewTabCon = ({
       >
         {item.label}
       </button>
- <span>|</span>
+ {index !== categoryType.length - 1 && <span>|</span>}
     </React.Fragment>
   ))}
-    <button
+    {/* <button
         onClick={() => onTabChange("All")}
         className={`text-[14px] sm:text-[14px] font-[600] xl:text-base leading-0 font-montserrat cursor-pointer text-nowrap ${
    selectedProtype === "All"
@@ -34,7 +34,7 @@ const NewTabCon = ({
         }`}
       >
       All
-      </button>
+      </button> */}
       </div>
 
 

@@ -1,10 +1,5 @@
 "use client";
-
 import React, { useEffect, useRef, useState } from "react";
-import { ScrollArea, Tabs } from "@mantine/core";
-import ProjectDetailsCard from "./projectCard";
-import S from "@/app/styles/seach/Listing.module.css";
-// import ProjectCard from "../../components/Card";
 import {
   DropDownIcon,
   emptyFilesIcon,

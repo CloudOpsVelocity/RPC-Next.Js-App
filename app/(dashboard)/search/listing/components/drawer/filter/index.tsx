@@ -28,6 +28,8 @@ import Heading from "./Heading";
 import { usePathname } from "next/navigation";
 import { formatBudgetValue } from "@/app/(dashboard)/search/components/buget";
 import { toFormattedString } from "@/app/(dashboard)/search/components/buget/budget";
+import { useAtomValue } from "jotai";
+import { serverCityAtom } from "@/app/store/search/serverCity";
 
 const styles = {
   heading: "",
@@ -37,18 +39,6 @@ const ListingMobileFilter = ({ close }: any) => {
   const propKeys = [35, 33, 31, 34, 32];
   const [localitySearch, setSearchLocality] = useDebouncedState("w", 500);
   const [builderSearch, setBuilderSearch] = useDebouncedState("w", 500);
-
-  const { data } = useQuery({
-    queryFn: () => getData(localitySearch, "loc"),
-    queryKey: ["search" + "loc" + localitySearch],
-    enabled: localitySearch !== "",
-  });
-  const { isLoading: builderDataLoading, data: builderData } = useQuery({
-    queryFn: () => getData(builderSearch, "builders"),
-    queryKey: ["search" + "builders" + builderSearch],
-    enabled: builderSearch !== "",
-  });
-
   const {
     filters,
     handleCheckboxClick,
@@ -61,6 +51,19 @@ const ListingMobileFilter = ({ close }: any) => {
     setSingleType,
     isFilterApplied,
   } = useSearchFilters();
+  const serverCity = useAtomValue(serverCityAtom)
+  const { data } = useQuery({
+    queryFn: () => getData(localitySearch, "loc", filters.city ?? serverCity ?? ""),
+    queryKey: ["search" + "loc" + localitySearch],
+    enabled: localitySearch !== "",
+  });
+  const { isLoading: builderDataLoading, data: builderData } = useQuery({
+    queryFn: () => getData(builderSearch, "builders", filters.city ?? serverCity ?? ""),
+    queryKey: ["search" + "builders" + builderSearch],
+    enabled: builderSearch !== "",
+  });
+
+ 
   const path = usePathname();
   const viewport = useRef<HTMLDivElement>(null);
   const isMobile = useMediaQuery("(max-width: 601px)");

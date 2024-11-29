@@ -29,9 +29,11 @@ import { formatBudgetValue } from "./buget";
 import { toFormattedString } from "./buget/budget";
 import useQsearch from "@/app/hooks/search/useQsearch";
 import { MainSearchMultiSelect } from "./_ui/Multiselect";
+import { serverCityAtom } from "@/app/store/search/serverCity";
+import { useAtomValue } from "jotai";
 
 const FilterPopup = ({ close }: { close?: () => void }) => {
-  const [current, setCurrent] = useState("Project Status");
+  const [current, setCurrent] = useState("Search");
   const {
     data: searchData,
     isLoading,
@@ -51,14 +53,14 @@ const FilterPopup = ({ close }: { close?: () => void }) => {
   const propKeys = [35, 33, 31, 34, 32];
   const [localitySearch, setSearchLocality] = useDebouncedState("", 500);
   const [builderSearch, setBuilderSearch] = useDebouncedState("", 500);
-
+  const serverCity = useAtomValue(serverCityAtom);
   const { data } = useQuery({
-    queryFn: () => getData(localitySearch, "loc"),
+    queryFn: () => getData(localitySearch, "loc",filters.city ?? serverCity ?? ""),
     queryKey: ["search" + "loc" + localitySearch],
     enabled: localitySearch !== "",
   });
   const { isLoading: builderDataLoading, data: builderData } = useQuery({
-    queryFn: () => getData(builderSearch, "builders"),
+    queryFn: () => getData(builderSearch, "builders",filters.city ?? serverCity ?? ""),
     queryKey: ["search" + "builders" + builderSearch],
     enabled: builderSearch !== "",
   });

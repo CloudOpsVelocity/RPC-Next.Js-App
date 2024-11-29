@@ -292,6 +292,10 @@ export const SEARCH_FILTER_DATA = {
       label: "Agent Listings",
       value: "A",
     },
+    {
+      label: "All",
+      value: "All",
+    },
   ],
 
   facing: [

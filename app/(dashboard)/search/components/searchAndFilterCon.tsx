@@ -24,7 +24,6 @@ import { useAtomValue } from "jotai";
 const SearchAndFilterCon = ({ frontendFilters ,cityData}: any) => {
   useHydrateAtoms([
     [searachFilterAtom, { ...initialState, ...frontendFilters }],
-    [serverCityAtom, cityData]
   ]);
   const [showAllLocalities, setShowAllLocalities] = useState(false);
   return (

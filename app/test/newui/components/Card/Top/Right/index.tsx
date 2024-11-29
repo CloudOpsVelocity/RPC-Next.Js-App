@@ -101,7 +101,7 @@ export default function TopRightSection({
                 >
                   <ShareIcon />
                 </button>
-
+{/* 
                 <button
                   className="hidden sm:flex max-w-fit sm:px-[1px] sm:py-[1px] rounded text-[#242424] text-sm not-italic font-semibold sm:my-1 md:mb-1 xl:gradient"
                   onClick={() => {
@@ -119,12 +119,32 @@ export default function TopRightSection({
                   }}
                 >
                   <div className="xm:px-[1px] sm:py-[1px] inline-flex justify-center items-center xl:bg-[#F0F9FF] gap-0.5 rounded">
-                    {" "}
-                    {/* <span className="hidden sm:flex">View on Map</span>{" "} */}
+             
                     <NewMapIcon className="w-6 h-6" />
                   </div>
-                </button>
+                </button> */}
               </div>
+              <button
+              className="max-w-fit sm:block hidden xl:hidden ml-auto px-[1px] py-[1px] rounded text-[#242424] text-xs not-italic font-semibold  md:mb-1 gradient"
+              onClick={() =>
+                setSelected({
+                  agentListing,
+                  ownerListing,
+                  projOrPropName,
+                  lat,
+                  lang,
+                  type,
+                  reqId: type === "proj" ? projIdEnc : propIdEnc,
+                  propType: type === "proj" ? propType : propTypeName,
+                })
+              }
+            >
+              {" "}
+              <div className="py-[1px] px-[2px] inline-flex justify-center items-center bg-[#F0F9FF]  rounded">
+                {" "}
+                View on Map
+              </div>
+            </button>
             </div>
 
             {/* <div className="flex items-end flex-col justify-between md:gap-2 mt-[2px]">
@@ -159,7 +179,7 @@ export default function TopRightSection({
                     dispatch({
                       type: "OPEN",
                       content: [],
-                      id: `${projIdEnc}+${propTypeId}`,
+                      id: `${projIdEnc}+${propTypeId}${phaseId ? `+${phaseId}` : ''}`,
                       title: `NearBy Locations of ${projName}`,
                       conType: "nearby",
                       pType: type,
