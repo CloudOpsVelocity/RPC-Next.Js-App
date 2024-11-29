@@ -42,7 +42,7 @@ export default function TopRightSection({
   propType,
   amenCount,
   category,
-  phaseId
+  phaseId,
 }: Props) {
   const setSelected = useSetAtom(selectedSearchAtom);
   const [sharePopupData, setSharePopup] = useAtom(searchShareAtom);
@@ -183,6 +183,8 @@ export default function TopRightSection({
                       title: `NearBy Locations of ${projName}`,
                       conType: "nearby",
                       pType: type,
+                      lat,
+                      lang
                     })
                   }
                 >
@@ -326,7 +328,7 @@ export default function TopRightSection({
 
               <button
                 className="bg-teal-500 text-white font-bold py-1 px-2 text-xs rounded shadow-lg hover:bg-teal-600 transition duration-300 ease-in-out"
-                onClick={() =>
+                onClick={() =>{
                   dispatch({
                     type: "OPEN",
                     content: [
@@ -346,11 +348,15 @@ export default function TopRightSection({
                       "Pharmacy",
                       "Veterinary Clinic",
                     ],
-                    id: `${projIdEnc}+${propTypeId}${phaseId ? `+${phaseId}` : ''}`,
+                    id: `${projIdEnc}+${propTypeId ?? ''}${phaseId ? `+${phaseId}` : ''}`,
                     title: `NearBy Locations of ${projName}`,
                     conType: "nearby",
                     pType: type,
+                    lat,
+                    lang
                   })
+                }
+                  
                 }
               >
                 Nearby

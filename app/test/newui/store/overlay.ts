@@ -16,6 +16,8 @@ type OverlayAction =
         | "none"
         | "otherCharges"
         | "hightlights";
+      lat?: number;
+      lang?: number;
     }
   | { type: "CLOSE" };
 
@@ -34,6 +36,8 @@ interface OverlayState {
     | "otherCharges"
     | "hightlights";
   pType?: string;
+  lat?: number;
+  lang?: number;
 }
 
 // Define the initial state
@@ -167,6 +171,8 @@ const overlayReducer = (
           title: action.title,
           conType: action.conType,
           pType: action.pType,
+          lat: action.lat,
+          lang: action.lang
         };
       }
       return {
@@ -176,6 +182,8 @@ const overlayReducer = (
         title: action.title,
         conType: action.conType,
         pType: action.pType,
+        lat: action.lat,
+        lang: action.lang
       };
     case "CLOSE":
       return initialState;

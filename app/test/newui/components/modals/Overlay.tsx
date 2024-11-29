@@ -9,13 +9,15 @@ import PropertyHighlights from "./overly_items/PropertyHightilights";
 
 const Overlay: React.FC = () => {
   const [overlayState, dispatch] = useAtom(overlayAtom);
-  const { isOpen, content, title, id, conType, pType } = overlayState;
+  const { isOpen, content, title, id, conType, pType, lat, lang } = overlayState;
 
   const { data: amenitiesFromDB, isLoading } = useProjectCardData({
     id: id ?? "",
     isOpen,
     conType,
     pType: pType ?? "",
+    lat,
+    lang
   });
   const overlayRef = useRef<HTMLDivElement>(null);
 

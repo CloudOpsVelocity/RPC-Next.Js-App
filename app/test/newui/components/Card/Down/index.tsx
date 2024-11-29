@@ -20,7 +20,9 @@ export default function CardDownSection({
   amenCount,
   propIdEnc,
   propTypeName,
-  title
+  title,
+  lat,
+  lang
 }: any) {
   const isMobile = useMediaQuery("(max-width: 1600px)"); 
   // const name =
@@ -149,6 +151,8 @@ export default function CardDownSection({
                     title: `NearBy Locations of ${title}`,
                     conType: "nearby",
                     pType: 'prop',
+                    lat,
+                    lang
                   })
                 }
                
