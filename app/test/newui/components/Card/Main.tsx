@@ -145,7 +145,7 @@ const MainBox = ({ data, refetch }: Props) => {
         />
         <div className="relative w-full">
           {overlayData.id &&
-          `${type === "proj" ? projIdEnc : propIdEnc}+${propTypeId}${type === "proj" && phaseId ? '+' + phaseId : ''}` ===
+          `${type === "proj" ? projIdEnc : propIdEnc}+${propTypeId ?? ''}${type === "proj" && phaseId ? '+' + phaseId : ''}` ===
             overlayData.id ? (
             <Overlay />
           ) : null}
@@ -182,6 +182,8 @@ const MainBox = ({ data, refetch }: Props) => {
         type={type}
         reqId={reqId}
         {...data}
+        title={`${bhkName ?? ""} ${propTypeName} for
+      ${data.cg === "R" ? "Rent" : "Sell"} in ${localityName}`}
         onAddingCompare={onAddingCompare}
         isCompared={state.compareAdded}
         handleOpen={handleOpen}

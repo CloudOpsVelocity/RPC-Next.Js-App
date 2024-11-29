@@ -45,7 +45,7 @@ function getQueryConfig(conType: string, id: string, isOpen: boolean, type: stri
 async function getNearByLocations(id: string, type: string) {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/get-nearby?projIdEnc=${id}&iden=${type == "proj" ? "P" : "L"}`
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/get-nearby?${type == "proj" ? "projIdEnc" : "propIdEnc"}=${id}&iden=${type == "proj" ? "P" : "L"}`
     );
     return await res.json();
   } catch (error) {

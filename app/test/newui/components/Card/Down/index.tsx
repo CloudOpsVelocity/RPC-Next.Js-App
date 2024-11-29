@@ -19,7 +19,8 @@ export default function CardDownSection({
   isPetFriendly,
   amenCount,
   propIdEnc,
-  propTypeName
+  propTypeName,
+  title
 }: any) {
   const isMobile = useMediaQuery("(max-width: 1600px)"); 
   // const name =
@@ -123,7 +124,7 @@ export default function CardDownSection({
                     title: "Amenities",
                     id: `${
                       type === "proj" ? projIdEnc : propIdEnc
-                    }+${propTypeId}`,
+                    }+${propTypeId ?? ''}`,
                     type: "OPEN",
                     pType: type,
                   })
@@ -136,9 +137,28 @@ export default function CardDownSection({
               </button>
               )
             }
-           
+           <button
+                className="bg-teal-500 text-white text-right max-w-fit px-1 font-bold sm:py-1 sm:px-2 text-xs rounded shadow-lg hover:bg-teal-600 transition duration-300 ease-in-out"
+                onClick={() =>{
+                  dispatch({
+                    type: "OPEN",
+                    content: [
+
+                    ],
+                    id: `${propIdEnc ?? ''}+${propTypeId ?? ''}`,
+                    title: `NearBy Locations of ${title}`,
+                    conType: "nearby",
+                    pType: 'prop',
+                  })
+                }
+               
+                }
+              >
+                Nearby
+              </button>
           </>
         )}
+              
       </div>
 
       {/* right section */}
