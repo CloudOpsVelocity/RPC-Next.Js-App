@@ -192,7 +192,7 @@ export default function ListingData({
                       content: projectAbout,
                       id: `${
                         type === "proj" ? projIdEnc : propIdEnc
-                      }+${propTypeId}${
+                      }+${propTypeId ?? ''}${
                         type === "proj" && phaseId ? "+" + phaseId : ""
                       }`,
                       title:

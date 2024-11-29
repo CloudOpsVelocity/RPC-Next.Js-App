@@ -153,7 +153,7 @@ export default function ProjData({
                 content: {
                   charges: otherCharges,
                 },
-                id: `${type === "proj" ? projIdEnc : propIdEnc}+${propTypeId}${phaseId ? '+' + phaseId : ''}`,
+                id: `${type === "proj" ? projIdEnc : propIdEnc}+${propTypeId ?? ''}${phaseId ? '+' + phaseId : ''}`,
                 title: "Other Charges",
                 type: "OPEN",
                 pType: type,
