@@ -12,6 +12,7 @@ import Shortlist from "./Shortlist";
 import ProjectLink, {
   createProjectLinkUrl,
 } from "@/app/utils/linkRouters/ProjectLink";
+import { FaLocationDot } from "react-icons/fa6";
 
 type Props = { item: any };
 
@@ -31,9 +32,7 @@ export default function Card({ item }: Props) {
   };
 
   return (
-    <div
-      className="w-[316px] sm:w-[508px] xl:w-[631px] h-[326px] sm:h-[294px] xl:h-[368px] shrink-0 relative"
-    >
+    <div className="w-[316px] sm:w-[508px] xl:w-[631px] h-[326px] sm:h-[294px] xl:h-[368px] shrink-0 relative">
       <ProjectLink
         routeParams={{
           city: item.city,
@@ -78,8 +77,14 @@ export default function Card({ item }: Props) {
               <p className="text-white text-[12px] xl:text-[18px] not-italic font-bold leading-[normal] tracking-[0.4px] mt-[8px] sm:mt-[8px]">
                 {item.propTypes?.join(", ")}
               </p>
+
+              <p className="text-white space-x-2 justify-end items-center inline-flex text-[12px] xl:text-[15px] not-italic font-bold leading-[normal] tracking-[0.4px] mt-[8px] sm:mt-[8px]">
+                <FaLocationDot className="mr-1 " size={12} />
+                {item.city} - {item.locality}
+              </p>
             </div>
             <div className="flex flex-col items-end gap-[9px] xl:gap-[19px]">
+      
               <div className="space-y-2">
                 <span className=" no-underline text-[#ffff]">
                   Builder Name:{" "}
@@ -92,7 +97,8 @@ export default function Card({ item }: Props) {
                   {item.builderName}
                 </button>
                 <p className="text-white text-[12px] sm:text-[14px] not-italic font-bold leading-[normal] tracking-[0.44px]">
-                  Project Land Area: {Number(parseFloat(item.landArea).toFixed(2))} Acres
+                  Project Land Area:{" "}
+                  {Number(parseFloat(item.landArea).toFixed(2))} Acres
                 </p>
               </div>
               <div>

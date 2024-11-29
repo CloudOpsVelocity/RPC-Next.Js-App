@@ -30,11 +30,11 @@ export default async function Page() {
   // },ip);
   const cityData = {
     data: {
-      city: 'Bengaluru',
-      cityId: '9',
+      city: "Bengaluru",
+      cityId: "9",
     },
     status: true,
-  }
+  };
   const encriptedLatLang = cookies().get("ui")?.value;
   const latLang = encriptedLatLang ? decryptData(encriptedLatLang) : "";
   const [data, listingData, shortIds] = await Promise.all([
