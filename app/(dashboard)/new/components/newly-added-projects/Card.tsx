@@ -70,6 +70,7 @@ export default function Card({ item }: Props) {
                   ? `${item.projName.slice(0, 20)}...`
                   : item.projName}
               </div>
+
               <p className="text-white text-[16px] xl:text-[18px] not-italic font-bold leading-[normal] tracking-[0.52px] mt-[8px] text-nowrap">
                 {formatCurrency(item.minPrice)} -{" "}
                 {formatCurrency(item.maxPrice)}
@@ -84,7 +85,6 @@ export default function Card({ item }: Props) {
               </p>
             </div>
             <div className="flex flex-col items-end gap-[9px] xl:gap-[19px]">
-      
               <div className="space-y-2">
                 <span className=" no-underline text-[#ffff]">
                   Builder Name:{" "}

@@ -18,21 +18,20 @@ import selectedSearchAtom from "@/app/store/search/map";
 import TooltipProj from "./Tooltip";
 import TooltipProp from "./ToolltipProp";
 
-const Map = ({ data, lat, lang, type}: any) => {
+const Map = ({ data, lat, lang, type }: any) => {
   const position: LatLngTuple = [lat, lang];
   return (
     <>
       <MapContainer
         center={position}
-        className="h-[250px] sm:h-full max-h-[250px] w-full sm:max-w-[700px] sm:max-h-[600px] xl:max-h-[740px] xl:max-w-full min-h-[700px]  -z-[1]"
+        className="h-[250px] sm:h-full max-h-[250px] w-full sm:max-w-[700px] sm:max-h-[600px] xl:max-h-[740px] xl:max-w-full  sm:min-h-[700px]  -z-[1]"
         scrollWheelZoom
         zoom={12}
-        
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        /> 
+        />
         {/* @ts-ignore */}
         <MapContent data={data} type={type} />
       </MapContainer>
@@ -75,67 +74,70 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
     }
   }, [data, map]);
 
-  return (
-    data?.map((item: any) => {
-      const isProp = !!item?.propIdEnc;
-      const itemId = isProp ? item.propIdEnc : item.projIdEnc;
-      const itemPropType = isProp ? item?.propTypeName : item?.propType;
+  return data?.map((item: any) => {
+    const isProp = !!item?.propIdEnc;
+    const itemId = isProp ? item.propIdEnc : item.projIdEnc;
+    const itemPropType = isProp ? item?.propTypeName : item?.propType;
 
-      // Group phases if it's a project
-      const phases = !isProp ? {
-        [item.phaseName]: {
-          phaseName: item.phaseName,
-          propertyTypes: [{
-            propType: item.propType,
-            minPrice: item.minPrice,
-            maxPrice: item.maxPrice
-          }]
+    // Group phases if it's a project
+    const phases = !isProp
+      ? {
+          [item.phaseName]: {
+            phaseName: item.phaseName,
+            propertyTypes: [
+              {
+                propType: item.propType,
+                minPrice: item.minPrice,
+                maxPrice: item.maxPrice,
+              },
+            ],
+          },
         }
-      } : null;
+      : null;
 
-      return (
-        <Marker
-          key={itemId}
-          position={[parseFloat(item?.lat || 0), parseFloat(item?.lang || 0)]}
-          icon={isMobile ? MobileIcon : MapIcon}
-          eventHandlers={{
-            click: () => {
-              setSelectedValue({
-                projOrPropName: isProp ? item.propTypeName : item.projName,
-                lat: item.lat,
-                lang: item.lang,
-                type: isProp ? "prop" : "proj",
-                reqId: itemId,
-                propType: itemPropType
-              });
-            },
-          }}
+    return (
+      <Marker
+        key={itemId}
+        position={[parseFloat(item?.lat || 0), parseFloat(item?.lang || 0)]}
+        icon={isMobile ? MobileIcon : MapIcon}
+        eventHandlers={{
+          click: () => {
+            setSelectedValue({
+              projOrPropName: isProp ? item.propTypeName : item.projName,
+              lat: item.lat,
+              lang: item.lang,
+              type: isProp ? "prop" : "proj",
+              reqId: itemId,
+              propType: itemPropType,
+            });
+          },
+        }}
+      >
+        <Tooltip
+          key={"tooltip_" + itemId + (selected?.reqId ?? "")}
+          opacity={1}
+          permanent={selected?.reqId === itemId}
+          direction="top"
+          offset={[10, -35]}
+          className={`${isProp ? "min-w-fit" : "min-w-[400px]"} !p-0`}
+          sticky
         >
-          <Tooltip
-            key={"tooltip_" + itemId + (selected?.reqId ?? '')}
-            opacity={1}
-            permanent={selected?.reqId === itemId}
-            direction="top"
-            offset={[10, -35]}
-            className={`${isProp ? "min-w-fit" : "min-w-[400px]"} !p-0`}
-            sticky
-          >
-            {!isProp ? (
-              <TooltipProj data={{
+          {!isProp ? (
+            <TooltipProj
+              data={{
                 projName: item.projName,
                 city: item.city,
                 state: item.state,
                 locality: item.locality,
                 builderName: item.builderName,
-                phases: Object.values(phases || {})
-              }} />
-            ) : (
-              <TooltipProp data={item} />
-            )}
-          </Tooltip>
-        </Marker>
-      );
-    })
-  );
+                phases: Object.values(phases || {}),
+              }}
+            />
+          ) : (
+            <TooltipProp data={item} />
+          )}
+        </Tooltip>
+      </Marker>
+    );
+  });
 };
-
