@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 export function middleware(request: NextRequest) {
+  console.log(request.body)
   const headers = new Headers(request.headers);
   headers.set("x-current-path", request.nextUrl.pathname);
   const token = cookies().get("token")?.value;
