@@ -7,10 +7,11 @@ type Props = {
   pType: string;
   lat?: number;
   lang?: number;
+  propId?: string;
 };
 
-export default function useProjectCardData({ id, isOpen, conType, pType, lat, lang }: Props) {
-  const queryConfig = getQueryConfig(conType, id, isOpen, pType, lat, lang);
+export default function useProjectCardData({ id, isOpen, conType, pType, lat, lang,propId }: Props) {
+  const queryConfig = getQueryConfig(conType, id, isOpen, pType, lat, lang,propId);
 
   const { data, isLoading } = useQuery({
     queryKey: queryConfig.queryKey,
@@ -21,12 +22,12 @@ export default function useProjectCardData({ id, isOpen, conType, pType, lat, la
   return { data, isLoading };
 }
 
-function getQueryConfig(conType: string, id: string, isOpen: boolean, type: string, lat?: number, lang?: number) {
+function getQueryConfig(conType: string, id: string, isOpen: boolean, type: string, lat?: number, lang?: number,propId?: string) {
   const idToUse = id.includes('+') ?  id.split('+')[0] : id;
   if (conType === "amenities") {
     return {
       queryKey: [conType + idToUse],
-      queryFn: () => getAmenties(idToUse, type),
+      queryFn: () => getAmenties(idToUse, type,propId),
       enabled: isOpen,
     };
   } else if (conType === "nearby") {
@@ -46,9 +47,13 @@ function getQueryConfig(conType: string, id: string, isOpen: boolean, type: stri
 
 async function getNearByLocations(id: string, type: string, lat?: number, lang?: number) {
   try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/get-nearby?${type == "proj" ? "projIdEnc" : "propIdEnc"}=${id}&iden=${type == "proj" ? "P" : "L"}${lat ? `&lat=${lat}` : ''}${lang ? `&lng=${lang}` : ''}`
-    );
+    let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}`
+    if(type === 'proj'){
+      url += `/api/project/get-nearby?projIdEnc=${id}&iden=P&lat=${lat}&lng=${lang}`
+    }else{
+      url += `/api/v1/fetch/get-nearby?propIdEnc=${id}&iden=L&lat=${lat}&lng=${lang}`
+    }
+    const res = await fetch(url);
     return await res.json();
   } catch (error) {
     console.error("Failed to fetch nearby locations:", error);
@@ -56,12 +61,13 @@ async function getNearByLocations(id: string, type: string, lat?: number, lang?:
   }
 }
 
-async function getAmenties(id: string, type: string) {
+async function getAmenties(id: string, type: string,propId?: string) {
+
   try {
     const res = await fetch(
       `${
         process.env.NEXT_PUBLIC_BACKEND_URL
-      }/api/project/get-amenities?projIdEnc=${id}&iden=${type == "proj" ? "P" : "L"}`
+      }/api/project/get-amenities?projIdEnc=${propId ?? id}&iden=${type == "proj" ? "P" : "L"}`
     );
     return await res.text();
   } catch (error) {

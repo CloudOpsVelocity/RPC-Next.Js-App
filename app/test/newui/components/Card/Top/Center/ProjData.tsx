@@ -141,7 +141,7 @@ export default function ProjData({
       >
         {bhkName} {propTypeName} for {category} in {localityName}
       </p>
-      {(otherCharges.otherCharge || Object.keys(otherCharges).length > 2) && (
+      {(otherCharges?.otherCharge || Object.keys(otherCharges).length > 2) && (
         <p className="text-[#148B16] text-[14px] sm:text-[18px] xl:text-xl not-italic font-bold relative">
           {formatCurrency(Number(price))}{" "}
           <span

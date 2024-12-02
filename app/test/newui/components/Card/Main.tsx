@@ -145,7 +145,7 @@ const MainBox = ({ data, refetch }: Props) => {
         />
         <div className="relative w-full">
           {overlayData.id &&
-          `${type === "proj" ? projIdEnc : propIdEnc}+${propTypeId ?? ''}${type === "proj" && phaseId ? '+' + phaseId : ''}` ===
+          `${projIdEnc ?? ''}+${propIdEnc ?? ""}${propTypeId ?? propTypeName ?? ''}${type === "proj" && phaseId ? '+' + phaseId : ''}` ===
             overlayData.id ? (
             <Overlay />
           ) : null}

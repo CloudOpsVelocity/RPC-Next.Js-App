@@ -21,9 +21,9 @@ export default function CardDownSection({
   propIdEnc,
   propTypeName,
   title,
-  lat,
-  lang
+location
 }: any) {
+  const [lat,lang] = location?.split(',') ?? []
   const isMobile = useMediaQuery("(max-width: 1600px)"); 
   // const name =
   //   type === "proj"
@@ -120,15 +120,15 @@ export default function CardDownSection({
                 <button
                 className="bg-orange-600 text-white text-[12px] sm:text-sm py-0 font-bold px-1 sm:py-1 xl:px-2  rounded shadow-md hover:bg-orange-800  transition duration-300 ease-in-out"
                 onClick={() =>
+             
                   dispatch({
                     content: [],
                     conType: "amenities",
                     title: "Amenities",
-                    id: `${
-                      type === "proj" ? projIdEnc : propIdEnc
-                    }+${propTypeId ?? ''}`,
+                    id: `${projIdEnc ??   ''}+${propIdEnc ?? ''}${propTypeId ?? propTypeName ?? ''}`,
                     type: "OPEN",
                     pType: type,
+                    propId: propIdEnc
                   })
                 }
               >
@@ -147,12 +147,13 @@ export default function CardDownSection({
                     content: [
 
                     ],
-                    id: `${propIdEnc ?? ''}+${propTypeId ?? ''}`,
+                    id: `${projIdEnc??   ''}+${propIdEnc ?? ''}${propTypeId ?? propTypeName ?? ''}`,
                     title: `NearBy Locations of ${title}`,
                     conType: "nearby",
-                    pType: 'prop',
+                    pType: projIdEnc ? 'proj' : 'prop',
                     lat,
-                    lang
+                    lang,
+                    propId: propIdEnc
                   })
                 }
                
