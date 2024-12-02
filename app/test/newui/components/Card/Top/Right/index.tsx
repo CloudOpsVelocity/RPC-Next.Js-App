@@ -19,8 +19,8 @@ export default function TopRightSection({
   agentListing,
   ownerListing,
   projName,
-  lat,
-  lang,
+  // lat,
+  // lang,
   Sh,
   onAddingShortList,
   projIdEnc,
@@ -43,6 +43,7 @@ export default function TopRightSection({
   amenCount,
   category,
   phaseId,
+  location
 }: Props) {
   const setSelected = useSetAtom(selectedSearchAtom);
   const [sharePopupData, setSharePopup] = useAtom(searchShareAtom);
@@ -60,6 +61,7 @@ export default function TopRightSection({
       element.scrollIntoView({ behavior: "smooth" });
     }
   };
+  const [lat, lang] = location?.split(",") ?? [];
   return (
     <div
       onClick={(e) => e.stopPropagation()}

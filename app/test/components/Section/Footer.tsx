@@ -248,32 +248,7 @@ export default function EnhancedFooter() {
               </p>
               <Subscribe />
             </div>
-            {/* <div>
-              <h3 className="text-xs sm:text-sm font-semibold text-white tracking-wider uppercase">
-                Download our app
-              </h3>
-              <p className="text-xs sm:mt-4 sm:text-base text-gray-300">
-                Get instant property alerts and manage your favorites on the go.
-              </p>
-              <div className="sm:mt-4 my-2 flex space-x-4">
-                <a
-                  href="/"
-                  target="_blank"
-                  className="flex items-center justify-center px-1 py-1 sm:px-4 sm:py-2 border border-transparent rounded-md shadow-sm text-xs sm:text-base font-medium text-white bg-gray-800 hover:bg-gray-700"
-                >
-                  <FaAppStoreIos  className="mr-1.5 w-[14px] h-[14px] sm:w-[28px] sm:h-[28px]" />
-                  App Store
-                </a>
-                <a
-                  href="/"
-                  target="_blank"
-                  className="flex items-center justify-center px-1 py-1 sm:px-4 sm:py-2 border border-transparent rounded-md shadow-sm text-xs sm:text-base font-medium text-white bg-gray-800 hover:bg-gray-700"
-                >
-                  <IoLogoGooglePlaystore  className="mr-1 w-[14px] h-[14px] sm:w-[28px] sm:h-[28px]" />
-                  Google Play
-                </a>
-              </div>
-            </div> */}
+         
           </div>
         </div>
 

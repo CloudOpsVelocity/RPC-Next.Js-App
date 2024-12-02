@@ -56,12 +56,16 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <Logo styles="w-full flex justify-center items-center" />
 
           {children}
-          <div className="relative">
+          <div className="xl:relative">
             <Toaster
               reverseOrder={false}
               containerStyle={{
                 position: "absolute",
+               bottom: "3%",
+                zIndex: "1000",
+
               }}
+              position="bottom-center"
             />
           </div>
         </div>

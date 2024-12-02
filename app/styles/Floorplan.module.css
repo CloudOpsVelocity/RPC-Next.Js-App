@@ -40,6 +40,7 @@
   line-height: normal;
   text-transform: capitalize;
 }
+
 .input:focus::placeholder {
   color: transparent !important;
 }
@@ -114,6 +115,9 @@
   }
   .input::placeholder {
     font-size: 12px;
+  }
+  .input:focus {
+    font-size: 16px;
   }
   .option {
     font-size: 12px;
