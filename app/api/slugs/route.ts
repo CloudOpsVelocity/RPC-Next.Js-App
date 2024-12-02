@@ -64,7 +64,7 @@ export async function POST(request: Request, response: Response) {
 
           // Check if the slug already exists in data
           if (Object.prototype.hasOwnProperty.call(data, slug)) {
-            console.error(`Slug "${slug}" already exists`);
+            // console.error(`Slug "${slug}" already exists`);
             errors.push(`Slug "${slug}" already exists`);
           } else {
             data[slug] = id;
@@ -74,9 +74,7 @@ export async function POST(request: Request, response: Response) {
           }
         });
 
-        // Write updated data to the file
-        fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
-        console.log("File updated with new slugs:", data);
+
 
         // Handle errors if any slugs were invalid or already existed
         if (errors.length > 0) {
@@ -86,7 +84,9 @@ export async function POST(request: Request, response: Response) {
             { status: 400 }
           );
         }
-
+        // Write updated data to the file
+        fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+        console.log("File updated with new slugs");
         // Success response if all slugs were processed correctly
         console.log("Slugs created successfully");
         return NextResponse.json(
