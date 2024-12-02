@@ -141,6 +141,7 @@ const getProjectAllUntis = async (slug: string) => {
   const data = await res.json();
   return groupUnitsById(data);
 };
+
 const getOverViewData = async (slug: string) => {
   try {
     const response = await fetch(
