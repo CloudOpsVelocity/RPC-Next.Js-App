@@ -32,6 +32,7 @@ export default function Results() {
     listing: listings,
     projectListing,
   } = data;
+
   const handleAddSearch = (newItem: string) => {
     if (!filters.locality.includes(newItem)) {
       dispatch({ type: "ADD_LOCALITY", payload: newItem });
@@ -112,10 +113,10 @@ export default function Results() {
               encodeURIComponent(apiData.stringId.split("_")[1]);
             window.open(
               `/search?builderIds=${url}&city=${
-                apiData.stringId.split("_")[0]
+                encodeURIComponent(filters?.city ?? '')
               }${
                 apiData.type !== "BuilderProject"
-                  ? "&listedBy=${AgentOwnerBuilderMap.get(apiData.type)}"
+                  ? `&listedBy=${AgentOwnerBuilderMap.get(apiData.type)}`
                   : ""
               }`
             );
