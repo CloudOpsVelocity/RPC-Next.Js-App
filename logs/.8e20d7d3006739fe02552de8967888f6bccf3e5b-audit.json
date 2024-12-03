@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 30
+    },
+    "auditLog": "logs\\.8e20d7d3006739fe02552de8967888f6bccf3e5b-audit.json",
+    "files": [
+        {
+            "date": 1733212091986,
+            "name": "logs\\nextjs-app-logs-03-12-2024.txt",
+            "hash": "181f0c2300ac3ca1a50d70b64cac9641ddf542c9f004716c59b0ae6c0a44311e"
+        }
+    ],
+    "hashType": "sha256"
+}

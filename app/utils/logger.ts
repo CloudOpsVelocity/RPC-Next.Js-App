@@ -1,30 +1,30 @@
 import { createLogger, format, transports } from 'winston';
 import 'winston-daily-rotate-file';
-const { combine, timestamp, json } = format;
+const { combine, timestamp, json ,printf,align,prettyPrint,errors,label,logstash,cli,colorize,metadata,ms,padLevels,simple,splat} = format;
 // Create the logger instance
 const logger = createLogger({
   level: 'info',
   format: combine(
-    timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+    timestamp({ format: 'DD-MM-YYYY HH:mm:ss Z' }), // Indian Standard Time (IST) is +05:30
     json(),
-     // Save logs as JSON
-
+    prettyPrint(),
+    align(),
   ),
   transports: [
     new transports.Console({
       format: combine(
-        timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
-        format.printf(({ level, message, timestamp }) => {
-          return `${timestamp} [${level.toUpperCase()}]: ${message}`;
-        }) // Human-readable logs for console
+        timestamp({ format: 'DD-MM-YYYY HH:mm:ss Z' }), // Indian Standard Time (IST) is +05:30
+        json(),
+        prettyPrint(),
+        align(),
       ),
     }),
     new transports.DailyRotateFile({
       dirname: 'logs',
-      filename: 'application-%DATE%.txt', // Save as .txt
-      datePattern: 'YYYY-MM-DD',
+        filename: 'nextjs-app-logs-%DATE%.txt', // Save as .txt
+      // datePattern: 'YYYY-MM-DD',
+      datePattern: 'DD-MM-YYYY',
       maxFiles: '30d',
-      zippedArchive: true,
     }),
   ],
 });
