@@ -3,3 +3,23 @@
   level: 'info',
   timestamp: '03-12-2024 13:20:30 +05:30'
 }
+{
+  message: 'Invalid credentials provided for user ******3976. Request: POST /api/auth/[...nextauth]',
+  level: 'error',
+  timestamp: '03-12-2024 17:01:10 +05:30'
+}
+{
+  message: 'Error during authorization: Please enter correct password. Request: POST /api/auth/[...nextauth]',
+  level: 'error',
+  timestamp: '03-12-2024 17:01:10 +05:30'
+}
+{
+  message: 'User ******3976 logged in successfully. Request: POST /api/auth/[...nextauth]',
+  level: 'info',
+  timestamp: '03-12-2024 17:01:15 +05:30'
+}
+{
+  message: 'User ******3976 logged in successfully. Request: POST /api/auth/[...nextauth]',
+  level: 'info',
+  timestamp: '03-12-2024 17:01:26 +05:30'
+}

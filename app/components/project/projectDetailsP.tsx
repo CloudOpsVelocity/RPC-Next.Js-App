@@ -57,7 +57,11 @@ export default function ProjectDetailsP({
         selectedPhase.propTypeOverview &&
         Object.keys(selectedPhase.propTypeOverview).includes(propertyType)
     );
-  const formatter = new Intl.NumberFormat("en-in")
+  const formatter = new Intl.NumberFormat("en-in", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  })
+  
   return (
     <div
       className="w-[95%] sm:w-[90%] mb-[3%] sm:mb-[0%] scroll-mt-[150px] sm:mt-[50px]"
@@ -145,7 +149,7 @@ export default function ProjectDetailsP({
                 title="Land Area"
                 value={
                   selectedPhase.landArea
-                    ? `${(formatter.format(selectedPhase.landArea))} sq.ft`
+                    ? `${(formatter.format(sqftToAcres(selectedPhase.landArea)))} Acres`
                     : null
                 }
                 className={styles.box}

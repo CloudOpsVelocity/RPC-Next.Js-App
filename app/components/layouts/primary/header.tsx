@@ -15,6 +15,8 @@ import PostProjectBtn from "@/app/(dashboard)/new/components/PostProjectBtn";
 import MenuBtn from "@/app/(dashboard)/new/components/home-search/header/Menu";
 import { GrpLogoSvg } from "@/app/images/getrightLogo";
 import { usePathname } from "next/navigation";
+import { homePageSvgsMap } from "@/app/images/commongsSvgs2";
+
 
 type Props = {};
 
@@ -172,13 +174,16 @@ function Dropdown() {
                   key={`dataCrad_${item.label[index]}`}
                   classNames={{
                     itemLabel: S.itemLabel,
+                    item: S.item,
                   }}
                   component="a"
-                  className="block text-gray-700 hover:text-green-500 transition-colors"
+                  className=" text-gray-700 hover:text-green-500 transition-colors flex"
                   href={item.url}
                   target="_blank"
                 >
-                  {item.label}
+                  <div className="flex items-center gap-2">
+                    {homePageSvgsMap.get(item.svg ?? '')} <span>{item.label}</span>  
+                  </div>
                 </Menu.Item>
               )
             )}
@@ -193,7 +198,9 @@ function Dropdown() {
             className="block text-gray-700 hover:text-green-500 transition-colors"
             onClick={handleLogout}
           >
-            Log Out
+            <div className="flex items-center gap-2">
+              {homePageSvgsMap.get('logout')} <span>Log Out</span>
+            </div>
           </Menu.Item>
         </Menu.Dropdown>
       ) : (
@@ -337,7 +344,7 @@ function MobileDropDown() {
                       "_blank"
                     )
                   }
-                  className={`rounded w-full text-wrap flex items-center gap-4 text-[20px] text-gray-700 hover:text-green-500 transition-colors p-1 capitalize ${
+                  className={`rounded w-full pl-3 text-wrap flex items-center gap-2 text-[14px] text-gray-700 hover:text-green-500 transition-colors p-1 capitalize ${
                     session.user.userType == "A"
                       ? "bg-[#FFFCE7]"
                       : session.user.userType == "B"
@@ -354,17 +361,20 @@ function MobileDropDown() {
                 </button>
               ) : (
                 <Menu.Item
-                  key={item.url}
-                  classNames={{
-                    itemLabel: S.itemLabel,
-                  }}
-                  component="a"
-                  className="block text-gray-700 hover:text-green-500 transition-colors"
-                  href={item.url}
-                  target="_blank"
-                >
-                  {item.label}
-                </Menu.Item>
+                key={`dataCrad_${item.label[index]}`}
+                classNames={{
+                  itemLabel: S.itemLabel,
+                  item: S.item,
+                }}
+                component="a"
+                className=" text-gray-700 hover:text-green-500 transition-colors flex"
+                href={item.url}
+                target="_blank"
+              >
+                <div className="flex items-center gap-2">
+                  {homePageSvgsMap.get(item.svg ?? '')} <span>{item.label}</span>  
+                </div>
+              </Menu.Item>
               )
             )}
             <hr className=" bg-[#768AA9] h-0.5 max-w-[90%] m-auto" />

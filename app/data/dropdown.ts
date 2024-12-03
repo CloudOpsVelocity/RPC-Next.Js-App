@@ -5,22 +5,37 @@ const data = [
   {
     label: "My Profile",
     url: `${baseUrl}/your-profile#step_B`,
+    svg: 'user-profile',
   },
   {
     label: "Dashboard",
     url: `${baseUrl}/your-profile`,
+    svg: 'dashboard',
   },
   {
     label: "Post Project",
     url: `${baseUrl}/post-your-project`,
+    svg: 'post-project',
   },
   {
     label: "Post Listing",
     url: `${baseUrl}/post-your-listing`,
+    svg: 'post-listing',
   },
   {
-    label: "About Us",
-    url: `${baseUrl}/about-us`,
+    label:"Shortlist",
+    url: `${baseUrl}/shortlist`,
+    svg: 'shortlist',
+  },
+  {
+    label: "Compare", 
+    url: `${baseUrl}/compare`,
+    svg: 'compare',
+  },
+  {
+    label: "Q&A",
+    url: `${baseUrl}/qna`,
+    svg: 'qna',
   },
 ];
 export const unAuthorizedData = [
@@ -33,4 +48,5 @@ export const unAuthorizedData = [
     url: `${process.env.NEXT_PUBLIC_PROJECT_URL}/register`,
   },
 ];
+
 export default data;
