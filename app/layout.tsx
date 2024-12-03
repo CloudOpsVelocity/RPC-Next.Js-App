@@ -98,6 +98,9 @@ export default function RootLayout({
         <link rel="manifest" href="/favicons/manifest.json" />
         <meta name="msapplication-TileColor" content="#ffffff" />
         <meta name="theme-color" content="#ffffff"/>
+        {
+
+        }
         {/* <script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-17JGNNST9D"
@@ -112,7 +115,7 @@ export default function RootLayout({
           }}
         /> */}
       </head>
-      <GoogleTagManager gtmId="G-17JGNNST9D"   />
+      <GoogleTagManager gtmId="G-TTFNJY2CX9"   />
 
       <body className={inter.className}>
         <MantineProvider theme={MantineTheme}>

@@ -23,3 +23,8 @@
   level: 'info',
   timestamp: '03-12-2024 17:01:26 +05:30'
 }
+{
+  message: 'User ******3976 logged in successfully. Request: POST /api/auth/[...nextauth]',
+  level: 'info',
+  timestamp: '03-12-2024 19:43:39 +05:30'
+}
