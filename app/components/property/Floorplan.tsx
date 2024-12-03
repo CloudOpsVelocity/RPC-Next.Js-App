@@ -86,7 +86,7 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
              <picture>
                 <source media="(max-width: 460px)" srcSet={data?.projMedia?.floorPlanUrl.split(',')[1]} />
                 <source media="(max-width: 768px)" srcSet={data?.projMedia?.floorPlanUrl.split(',')[2]} />
-                <source media="(min-width: 1200px)" srcSet={'https://media.getrightproperty.com/residential-listing/bengaluru/15/3-bhk-east-facing-apartment-for-sale-agent-abhee-celestial-city-varthur-floor-plan-large.webp?v=1733151954228'} />
+                <source media="(min-width: 1200px)" srcSet={data?.projMedia?.floorPlanUrl.split(',')[3]} />
                 <Image
                   alt="floor plan"
                   src={data?.projMedia?.floorPlanUrl}
