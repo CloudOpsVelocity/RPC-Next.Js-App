@@ -24,17 +24,17 @@ const data = [
   },
   {
     label:"Shortlist",
-    url: `${baseUrl}/shortlist`,
+    url: `${baseUrl}/your-profile#step_E`,
     svg: 'shortlist',
   },
   {
     label: "Compare", 
-    url: `${baseUrl}/compare`,
+    url: `${baseUrl}/your-profile#step_F`,
     svg: 'compare',
   },
   {
     label: "Q&A",
-    url: `${baseUrl}/qna`,
+    url: `${baseUrl}/your-profile#step_G`,
     svg: 'qna',
   },
 ];
