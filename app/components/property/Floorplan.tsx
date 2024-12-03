@@ -77,23 +77,23 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
           </p>
           <div className="w-[100%] xl:w-[70%] flex justify-center items-center flex-col p-[2%] ">
             <div
-              className="flex justify-center items-center h-[300px] lg:h-[450px] cursor-pointer self-center m-auto"
+              className="flex relative justify-center items-center h-[300px] lg:h-[420px] cursor-pointer self-center m-auto"
               onClick={handleOpen}
             >
               {
                 data?.projMedia?.floorPlanUrl ? (
-                  <div className="relative">
+                  <div className="">
              <picture>
                 <source media="(max-width: 460px)" srcSet={data?.projMedia?.floorPlanUrl.split(',')[1]} />
                 <source media="(max-width: 768px)" srcSet={data?.projMedia?.floorPlanUrl.split(',')[2]} />
-                <source media="(min-width: 1200px)" srcSet={data?.projMedia?.floorPlanUrl.split(',')[3]} />
+                <source media="(min-width: 1200px)" srcSet={'https://media.getrightproperty.com/residential-listing/bengaluru/15/3-bhk-east-facing-apartment-for-sale-agent-abhee-celestial-city-varthur-floor-plan-large.webp?v=1733151954228'} />
                 <Image
                   alt="floor plan"
                   src={data?.projMedia?.floorPlanUrl}
-
                   width={750}
                   height={750}
-                  className=" m-auto"
+                  // fill
+                  className=" m-auto h-[300px] lg:h-[420px]"
                   unoptimized
                 />
              </picture>
