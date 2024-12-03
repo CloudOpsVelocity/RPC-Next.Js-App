@@ -388,7 +388,9 @@ function MobileDropDown() {
             className="block text-gray-700 hover:text-green-500 transition-colors"
             onClick={handleLogout}
           >
-            Log Out
+             <div className="flex items-center gap-2">
+              {homePageSvgsMap.get('logout')} <span>Log Out</span>
+            </div>
           </Menu.Item>
         </Menu.Dropdown>
       ) : (
