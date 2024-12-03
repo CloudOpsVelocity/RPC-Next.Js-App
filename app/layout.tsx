@@ -4,7 +4,7 @@ import { Montserrat } from "next/font/google";
 import "./globals.css";
 import MantineTheme from "@/mantine.config";
 import { MantineProvider, ColorSchemeScript } from "@mantine/core";
-import { GoogleTagManager } from "@next/third-parties/google";
+import { GoogleTagManager, } from "@next/third-parties/google";
 
 import SessionProvider from "./context/session";
 import ReactQueryProvider from "./context/rquery";
