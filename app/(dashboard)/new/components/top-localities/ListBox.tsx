@@ -17,37 +17,37 @@ const config = {
   data: [
     {
       name: "marathalli",
-      id: 11,
+      id: 397,
       type: "L",
       url: "/marathalli.jpg"
     },
     {
       name: "koramangala", 
-      id: 12,
+      id: 362,
       type: "L",
       url: "/koramangala.webp"
     },
     {
       name: "jp nagar",
-      id: 13,
+      id: 306,
       type: "L",
       url: "/jpnagar.jpg"
     },
     {
       name: "whitefield",
-      id: 14,
+      id: 563,
       type: "L",
       url: "/whitefiled.jpg"
     },
     {
-      name: "mg road",
-      id: 15,
+      name: "Rajajinagar",
+      id: 458,
       type: "L",
       url: "/mgroad.jpg"
     },
     {
       name: "indira nagar",
-      id: 16,
+      id: 262,
       type: "L",
       url: "/Indiranagar.jpg"
     },

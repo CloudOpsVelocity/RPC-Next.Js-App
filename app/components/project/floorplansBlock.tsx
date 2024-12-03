@@ -269,9 +269,9 @@ Props) {
   const isMobile = useMediaQuery("(max-width: 601px)");
 
   const rowVirtualizer = useVirtualizer({
-    count: projectUnitsData?.length,
+    count: projectUnitsData?.length || 0,
     getScrollElement: () => parentRef.current,
-    estimateSize: () => isMobile ? 250 : 180,
+    estimateSize: () => isMobile ? 200 : 180,
     overscan: isMobile ? 9 : 5,
   });
   useEffect(() => {
@@ -483,9 +483,9 @@ Props) {
               onClick={handleContainerClick}
             >
               {floorPlanType === "type" && (
-                <div className="w-[100%] md:w-[50%] sm:border-solid overflow-auto shadow-md sm:shadow-none">
+                <div className="w-[100%] md:w-[50%] sm:border-solid shadow-md sm:shadow-none">
                   <div
-                    className="w-full md:w-[50%] max-h-[456px] md:h-[540px]  md:max-h-[540px] border-solid overflow-auto "
+                    className="w-full md:w-[50%] max-h-[306px] md:h-[540px] md:max-h-[540px] border-solid overflow-y-auto"
                     style={{
                       height: `${rowVirtualizer.getTotalSize()}px`,
                       width: "100%",
@@ -494,28 +494,27 @@ Props) {
                     ref={parentRef}
                   >
                     {projectUnitsData?.length !== 0 ? (
-                      rowVirtualizer
-                        .getVirtualItems()
-                        .map((virtualRow) => (
+                      rowVirtualizer.getVirtualItems().map((virtualRow) => (
+                        <div
+                          key={virtualRow.index}
+                          style={{
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            width: '100%',
+                            height: `${virtualRow.size}px`,
+                            transform: `translateY(${virtualRow.start}px)`,
+                          }}
+                        >
                           <FloorplanDetailsCard
-                            key={virtualRow.index}
                             propCgId={propCgId}
                             data={virtualRow}
                             projData={projectUnitsData}
                             setValues={form.setValues}
                           />
-                        ))
+                        </div>
+                      ))
                     ) : (
-                      // // projectUnitsData.map((virtualRow: any, index: number) => (
-                      // //   <FloorplanDetailsCard
-                      // //     key={Math.random()}
-                      // //     propCgId={propCgId}
-                      // //     data={virtualRow}
-                      // //     projData={projectUnitsData}
-                      // //     setValues={form.setValues}
-                      // //     lastIndex={projectUnitsData.length - 1 === index}
-                      // //   />
-                      // ))
                       <NoProperties
                         phase={
                           phaseList?.find(
