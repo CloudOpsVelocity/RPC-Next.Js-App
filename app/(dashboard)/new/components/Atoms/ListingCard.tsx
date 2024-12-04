@@ -139,13 +139,13 @@ export default function ListingCard({ item, sl }: Props) {
               <>
                 <DownSectionCard
                   label="Super Builtup Area"
-                  value={`${formatNumberWithSuffix(item.sba)} sq.ft`}
+                  value={`${formatNumberWithSuffix(item.sba,false)} sq.ft`}
                 />
                 {}
                 <Divider orientation="vertical" color="#7BA0BB" />
                 <DownSectionCard
                   label="Carpet Area"
-                  value={`${formatNumberWithSuffix(item.ca)} sq.ft`}
+                  value={`${formatNumberWithSuffix(item.ca,false)} sq.ft`}
                 />
                 <Divider orientation="vertical" color="#7BA0BB" />
                 <DownSectionCard
@@ -162,12 +162,12 @@ export default function ListingCard({ item, sl }: Props) {
               <>
                 <DownSectionCard
                   label="Super Builtup Area"
-                  value={`${formatNumberWithSuffix(item.sba)} sq.ft`}
+                  value={`${formatNumberWithSuffix(item.sba,false)} sq.ft`}
                 />
                 <Divider orientation="vertical" color="#7BA0BB" />
                 <DownSectionCard
                   label="Carpet Area"
-                  value={`${formatNumberWithSuffix(item.ca)} sq.ft`}
+                  value={`${formatNumberWithSuffix(item.ca,false)} sq.ft`}
                 />
                 <Divider orientation="vertical" color="#7BA0BB" />
                 {item.propertyAge != null ? (
