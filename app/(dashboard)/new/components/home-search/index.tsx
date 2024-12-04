@@ -51,10 +51,10 @@ const HomeSearch = ({
         <a
           href="/your-profile"
           target="_blank"
-          className="inline-flex items-center gap-[5px] rounded shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] sm:p-1 xl:p-2 border-[0.5px] border-solid border-[#4D6677] bg-[#e5f4ff] fixed  bottom-10 right-5  sm:text-sm xl:text-xl z-[1000]"
+          className="inline-flex items-center gap-[5px] rounded shadow-[0px_4px_20px_0px_rgba(0,0,0,0.40)] sm:p-1 xl:p-2 border-[0.5px] border-solid border-[#2D4657] bg-[#1a2733] fixed bottom-10 right-5 sm:text-sm xl:text-xl z-[1000]"
         >
-          <span className="hidden sm:block">Shortlisted</span>{" "}
-          <div className="flex justify-center items-center  rounded-sm border-[0.5px] border-solid border-[#7BA0BB] bg-white px-1 gap-1 text-[#33535F]  sm:text-sm xl:text-xl not-italic font-normal">
+          <span className="hidden sm:block text-white font-bold">Shortlisted</span>{" "}
+          <div className="flex justify-center items-center rounded-sm border-[0.5px] border-solid border-[#4A7091] bg-[#2d4657] px-1 gap-1 text-white sm:text-sm xl:text-xl not-italic font-bold">
             <p>{count}</p>
             <SelectedHeartIcon />
           </div>
