@@ -43,7 +43,10 @@ export default function ShortList({slug}:{slug:string}) {
     if (session) {
       handleShortlist();
     } else {
-      open(loginHandleShortList);
+      open(loginHandleShortList,{
+        type:"shortlist",
+        link:slug
+      });
     }
   };
   return (

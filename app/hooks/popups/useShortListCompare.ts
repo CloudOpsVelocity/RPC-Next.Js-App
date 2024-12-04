@@ -1,16 +1,19 @@
 import { useAtom, atom } from "jotai";
 
-const openedAtom = atom(false);
+const openedAtom = atom({
+  isOpen: false,
+  data: null,
+});
 const callbackAtom = atom<any>(null);
 export const usePopShortList = () => {
   const [opened, setOpened] = useAtom(openedAtom);
   const [callback, setCallback] = useAtom(callbackAtom);
-  const open = () => setOpened(true);
-  const close = () => setOpened(false);
-  const handleOpen = (callbackfn?: () => void) => {
+  const open = (data: any) => setOpened({ isOpen: true, data });
+  const close = () => setOpened({ isOpen: false, data: null });
+  const handleOpen = (callbackfn?: () => void, data?: any) => {
     callbackfn && setCallback(() => callbackfn);
-    open();
+    open(data);
   };
 
-  return [opened, { open: handleOpen, close, callback: callback }] as const;
+  return [opened.isOpen, { open: handleOpen, close, callback: callback ,data:opened.data}] as const;
 };

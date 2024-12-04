@@ -113,6 +113,9 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
             `/pdf/${encodeURIComponent(url.split(".net")[1])}`,
             "_blank"
           );
+      },{
+        type:'brochure',
+        link:url
       });
       return;
     }

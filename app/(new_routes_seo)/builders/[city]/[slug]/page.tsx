@@ -50,16 +50,17 @@ export default async function Page({ params: { city, slug } }: Props) {
   );
 }
 
-// export async function generateStaticParams() {
-//   // Get the data (mocked here, replace with your actual data fetching logic)
-//   const res = await getPagesSlugs("builder-list");
-//   // Prepare the slugs for static generation
-//   const builderRess = Object.keys(res);
-//   const slugs = builderRess.map((data) => {
-//     const [staticPath, staticPath2, city, slug] = data.split("/");
-//     return { city, slug };
-//   });
-//   return slugs;
-// }
+export async function generateStaticParams() {
+  // Get the data (mocked here, replace with your actual data fetching logic)
+  const res = await getPagesSlugs("builder-list");
+  // Prepare the slugs for static generation
+  const builderRess = Object.keys(res);
+  const slugs = builderRess.map((data) => {
+    const [staticPath, staticPath2, city, slug] = data.split("/");
+    console.log(city, slug);
+    return { city, slug };
+  });
+  return slugs;
+}
 
 // export const dynamicParams = true;

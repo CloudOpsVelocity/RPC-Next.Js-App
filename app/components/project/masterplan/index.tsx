@@ -38,7 +38,10 @@ export default function MasterPlan({
     if (session) {
       downloadFn();
     } else {
-      LoginOpen(downloadFn);
+      LoginOpen(downloadFn,{
+        type:'master-plan',
+        link:media
+      });
     }
   };
   return (

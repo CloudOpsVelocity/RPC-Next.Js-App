@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import CryptoJS from "crypto-js";
 import { getCallPath } from "./custom/useRedirect";
+import handleCallBackAction from "../(auth)/utils/handleCallBackAction";
 
 interface Login {
   username: string | number;
@@ -95,11 +96,15 @@ export default function useAuth({
       redirect: false,
     });
     if (res?.ok) {
+      redirectPath.action && handleCallBackAction({
+        type:redirectPath.url.split("#")[1],
+        action:redirectPath.action
+      });
       type === "register"
         ? setTimeout(() => {
-            router.push(redirectPath);
+            router.push(redirectPath.url);
           }, 5000)
-        : router.push(redirectPath);
+        : router.push(redirectPath.url);
     } else {
       if (res?.error === "A" || res?.error === "B") {
         router.push(`/register/${res?.error === "A" ? "agent" : "builder"}`);

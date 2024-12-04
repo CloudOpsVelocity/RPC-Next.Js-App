@@ -109,7 +109,9 @@ const AddQnaForm = ({ projName, slug,postedById }: { projName: string,slug:strin
       setStatus("pending");
       handleQna();
     } else {
-      open(handleQna);
+      open(handleQna,{
+        type:"have-any-question",
+      });
     }
   };
   const onClose = () => {
@@ -123,6 +125,7 @@ const AddQnaForm = ({ projName, slug,postedById }: { projName: string,slug:strin
       onSubmit={onSubmit(formSubmit)}
       id="have-any-question"
     >
+    
       <h2 className="inline-flex items-center gap-3 p-2 rounded-2xl bg-[#ecf7ff] sm:mb-7">
         <svg
           xmlns="http://www.w3.org/2000/svg"

@@ -8,7 +8,7 @@ import S from "@/app/styles/Rating.module.css";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import Close from "../button/close";
 function LoginPopup() {
-  const [opened, { close }] = usePopShortList();
+  const [opened, { close ,data}] = usePopShortList();
   const isMobile = useMediaQuery(`(max-width: 601px)`);
   const isTab = useMediaQuery(`(max-width: 1600px)`);
   return (
@@ -32,7 +32,7 @@ function LoginPopup() {
         className="absolute  right-3 top-3 size-6 cursor-pointer "
         close={close}
       />
-      <LoginPop close={close} />
+      <LoginPop close={close} data={data} />
     </Modal>
   );
 }

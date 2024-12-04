@@ -1,5 +1,6 @@
 import { usePathname, useSearchParams } from "next/navigation";
 import { pathConfig, PathType } from "./config";
+import { encryptData } from "@/app/utils/auth/nodeCrypto";
 
 type PathConfigKey = keyof typeof pathConfig;
 interface SearchParams {
@@ -56,15 +57,10 @@ function useGetPathTypeFromQueryParams(): string {
   return match ? match.title : pathConfig.default.pageTitle;
 }
 
-function useGetCallPath(): string {
+function useGetCallPath(): {url:string,action:string} {
   const searchParams = useSearchParams();
-  // for (const key in pathConfig) {
-  //   const id = searchParams.get(pathConfig[key as PathConfigKey].paramName);
-  //   if (id) {
-  //     return `${pathConfig[key as PathConfigKey].redirectingPath}${id}`;
-  //   }
-  // }
-  return decrypt(searchParams.get("cc") || "");
+
+  return {url:decrypt(searchParams.get("cc") || ""),action:decrypt(searchParams.get("ca") || "")}
 }
 
 function useGetQueryParamClient(): { query: string; redirectPath: string } {
@@ -116,7 +112,11 @@ export function getPathTypeFromQueryParamsWitParam(
 
 export function getQueryParam(searchParams: SearchParams): string {
   if (searchParams.cc) {
-    return `?cc=${searchParams.cc}`;
+    let query = `?cc=${searchParams.cc}`;
+    if (searchParams.ca) {
+      query += `&ca=${searchParams.ca}`;
+    }
+    return query;
   }
   return "";
 }
@@ -141,10 +141,12 @@ export {
   decrypt as decryptUrl
 };
 
-export default function usePathToOrigin() {
+export default function usePathToOrigin(data?:{hash?:string,link?:string}) {
   const path = usePathname();
-  // const redirectQueryParam = getQueryParamForPath(path);
-  const redirectQueryParam = "cc=" + encrypt(path);
+  let redirectQueryParam = "cc=" + encrypt(path + (data?.hash || ""));
+  if(data?.link){
+    redirectQueryParam += `&ca=${encrypt(data?.link)}`
+  }
   return {
     redirectPath: path,
     redirectQueryParam,

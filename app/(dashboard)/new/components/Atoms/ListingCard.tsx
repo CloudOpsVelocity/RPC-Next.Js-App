@@ -47,7 +47,7 @@ export default function ListingCard({ item, sl }: Props) {
         <div className="flex  justify-start items-start gap-[8px] absolute top:0 right-0 p-[8px] ">
           <Shortlist reqId={item.propIdEnc} shortListed={sl} />
           <ShareBtn
-            url={`${process.env.NEXT_PUBLIC_BACKEND_URL}/listing/banglore/${item.propIdEnc}`}
+            url={`/listing/banglore/${item.propIdEnc}`}
             type="prop"
           />
         </div>
@@ -110,7 +110,7 @@ export default function ListingCard({ item, sl }: Props) {
             <Shortlist reqId={item.propIdEnc} shortListed={sl} />
             {/* <HeartIcon className="cursor-pointer w-[22px] h-[22px] sm:w-[20px] sm:h-[20px] xl:w-[26px] xl:h-[26px]" /> */}
             <ShareBtn
-              url={`${process.env.NEXT_PUBLIC_BACKEND_URL}/listing/banglore/${item.propIdEnc}`}
+              url={`/listing/banglore/${item.propIdEnc}`}
               type="prop"
             />
           </div>

@@ -7,11 +7,13 @@ import { CloseButton } from "@mantine/core";
 export default function LoginPopup({
   type = "C/S",
   close,
+  data,
 }: {
   type?: string;
   close?: () => void;
+  data?: any;
 }) {
-  const { redirectQueryParam } = usePathToOrigin();
+  const { redirectQueryParam } = usePathToOrigin({hash: type === "RATING" ? "#proj_rating" : `#${data?.type}`, link:data?.link});
   return (
     <div
       className={`flex justify-center m-1 items-start w-full pt-1 xl:pt-[10%] ${
@@ -32,6 +34,7 @@ export default function LoginPopup({
                   pathname: "/login",
                   search: redirectQueryParam,
                 }}
+                onClick={close && close}
               >
                 Login
               </Link>
@@ -43,6 +46,7 @@ export default function LoginPopup({
                 className={
                   "flex flex-col justify-center items-center gap-1 rounded py-1 px-6   xl:px-[52px] xl:py-1.5  bg-transparent text-[#242424]  xl:text-[24px] not-italic font-[500] leading-[normal]"
                 }
+                onClick={close && close}
               >
                 {"Sign Up"}
               </Link>
