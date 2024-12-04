@@ -8,9 +8,10 @@ type Props = {
   data: any;
   shortIds: any;
   dataKey:string
+  url:string
 };
 
-export default function ListingCarousel({ shortIds, data ,dataKey}: Props) {
+export default function ListingCarousel({ shortIds, data ,dataKey,url}: Props) {
   const isMobile = useMediaQuery('(max-width: 768px)');
   return (
   //   <ReactWindowCarousel
@@ -51,7 +52,7 @@ export default function ListingCarousel({ shortIds, data ,dataKey}: Props) {
 
 
   // />
-  <NewCarousel slidesToShow={isMobile ? 1 : 4}  data={data} renderItem={(item:any, index) => (
+  <NewCarousel slidesToShow={isMobile ? 1 : 4} url={url} data={data} renderItem={(item:any, index) => (
     <ListingCard
       item={item}
       sl={

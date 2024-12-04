@@ -9,6 +9,7 @@ interface CarouselProps<T> {
   slidesToShow?: number;
   gap?: number;
   className?: string;
+  url?:string
   renderViewMore?: () => React.ReactNode; // Function to render the "View More" card
 }
 
@@ -17,6 +18,7 @@ function NewCarousel<T>({
   renderItem,
   slidesToShow = 3,
   gap = 24,
+  url,
   renderViewMore,
 }: CarouselProps<T>) {
   const isMobile = useMediaQuery("(max-width: 768px)");
@@ -27,8 +29,8 @@ function NewCarousel<T>({
   const containerRef = useRef<HTMLDivElement>(null);
 
   const dataWithViewMore = useMemo(() => {
-    // Append a "View More" card if not provided
-    return [...data, null];
+    // Only append "View More" card if data length > 4
+    return data.length > 4 ? [...data, null] : data;
   }, [data]);
 
   const maxIndex = useMemo(
@@ -43,7 +45,7 @@ function NewCarousel<T>({
   const canGoPrev = useMemo(() => currentIndex > 0, [currentIndex]);
 
   const DefaultViewMore = () => (
-    <div className="relative h-full w-full rounded-xl bg-gradient-to-br from-blue-400 to-blue-600 p-1 hover:shadow-xl cursor-pointer transition-all duration-300 ">
+    <a href={url} target="_blank" className="relative h-full w-full rounded-xl bg-gradient-to-br from-blue-400 to-blue-600 p-1 hover:shadow-xl cursor-pointer transition-all duration-300 ">
       <div className="h-full w-full rounded-lg bg-white p-4 flex flex-col items-center justify-center space-y-4">
         <div className="rounded-full bg-gradient-to-br from-blue-400 to-blue-600 p-3 animate-pulse">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -62,7 +64,7 @@ function NewCarousel<T>({
         </div>
     
       </div>
-    </div>
+    </a>
   );
 
   return (
