@@ -5,7 +5,7 @@ import { Divider } from "@mantine/core";
 import Image from "next/image";
 import React from "react";
 import ShareBtn from "../newly-added-projects/ShareBtn";
-import { formatDate } from "@/app/utils/date";
+import { formatDate, formatDateDDMMYYYY } from "@/app/utils/date";
 import { getImageUrls } from "@/app/utils/image";
 import Shortlist from "./Shortlist";
 import ListingReqBtn from "./ListingReqCallbackBtn";
@@ -17,11 +17,6 @@ type Props = {
 
 export default function ListingCard({ item, sl }: Props) {
   const images = getImageUrls(item.media);
-  let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/listing/banglore/${item.propIdEnc}`;
-  const onRedirectOnProp = () => {
-    window.open(url, "_blank");
-  };
-  // console.log(item.postedById)
   const title = `${
     item.propTypeName === "Plot"
       ? `${formatNumberWithSuffix(item.pa)} sq.ft`
@@ -65,11 +60,14 @@ export default function ListingCard({ item, sl }: Props) {
           height={276}
           className="object-cover w-full h-full"
         />
-
+  <p className="absolute top-2 left-2 flex justify-center items-center gap-1 rounded p-1.5 bg-black/50 backdrop-blur-sm text-white text-[12px] not-italic font-semibold leading-[normal] capitalize border border-white/20">
+            Posted Date: {formatDateDDMMYYYY(item.postedDate)}
+          </p>
         <div className="absolute bottom-2 left-2 space-y-2">
           <p className="flex justify-center items-center gap-1 rounded p-1 bg-[#000000b0] text-white text-[12px] xl:text-base not-italic font-semibold leading-[normal] capitalize">
             {item.propStatus}
           </p>
+        
         </div>
       </div>
 

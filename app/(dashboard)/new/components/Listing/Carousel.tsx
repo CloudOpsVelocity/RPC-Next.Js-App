@@ -51,7 +51,7 @@ export default function ListingCarousel({ shortIds, data ,dataKey}: Props) {
 
 
   // />
-  <NewCarousel slidesToShow={isMobile ? 1 : 4} isMobile={isMobile}  data={data} renderItem={(item:any, index) => (
+  <NewCarousel slidesToShow={isMobile ? 1 : 4}  data={data} renderItem={(item:any, index) => (
     <ListingCard
       item={item}
       sl={

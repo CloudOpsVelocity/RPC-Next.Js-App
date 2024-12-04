@@ -1,6 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import { useMediaQuery } from '@mantine/hooks';
-import React, { useState, useRef, useEffect, memo, useCallback, useMemo } from 'react';
+import React, { useState, useRef, useMemo, memo, useCallback } from 'react';
 import { IoChevronBackOutline, IoChevronForwardOutline } from 'react-icons/io5';
 
 interface CarouselProps<T> {
@@ -8,22 +8,33 @@ interface CarouselProps<T> {
   renderItem: (item: T, index: number) => React.ReactNode;
   slidesToShow?: number;
   gap?: number;
-  isMobile?: boolean;
-  className?:string;
+  className?: string;
+  renderViewMore?: () => React.ReactNode; // Function to render the "View More" card
 }
 
- function  NewCarousel<T>({
+function NewCarousel<T>({
   data,
   renderItem,
   slidesToShow = 3,
   gap = 24,
+  renderViewMore,
 }: CarouselProps<T>) {
   const isMobile = useMediaQuery("(max-width: 768px)");
   const isTab = useMediaQuery("(max-width: 1600px)");
-   slidesToShow = isMobile ? 1 : isTab ? slidesToShow - 1 : slidesToShow;
+  slidesToShow = isMobile ? 1 : isTab ? slidesToShow - 1 : slidesToShow;
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
-  const maxIndex = useMemo(() => Math.max(0, data.length - Math.floor(slidesToShow)), [data.length, slidesToShow]);
+
+  const dataWithViewMore = useMemo(() => {
+    // Append a "View More" card if not provided
+    return [...data, null];
+  }, [data]);
+
+  const maxIndex = useMemo(
+    () => Math.max(0, dataWithViewMore.length - Math.floor(slidesToShow)),
+    [dataWithViewMore.length, slidesToShow]
+  );
 
   const next = useCallback(() => setCurrentIndex((curr) => Math.min(curr + 1, maxIndex)), [maxIndex]);
   const prev = useCallback(() => setCurrentIndex((curr) => Math.max(curr - 1, 0)), []);
@@ -31,12 +42,34 @@ interface CarouselProps<T> {
   const canGoNext = useMemo(() => currentIndex < maxIndex, [currentIndex, maxIndex]);
   const canGoPrev = useMemo(() => currentIndex > 0, [currentIndex]);
 
+  const DefaultViewMore = () => (
+    <div className="relative h-full w-full rounded-xl bg-gradient-to-br from-blue-400 to-blue-600 p-1 hover:shadow-xl cursor-pointer transition-all duration-300 ">
+      <div className="h-full w-full rounded-lg bg-white p-4 flex flex-col items-center justify-center space-y-4">
+        <div className="rounded-full bg-gradient-to-br from-blue-400 to-blue-600 p-3 animate-pulse">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </div>
+        <div className="text-center">
+          <h3 className="text-xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">View More</h3>
+          <p className="text-sm text-gray-500">Explore all listings</p>
+        </div>
+        <div className="flex items-center gap-2 text-gray-400">
+          <span className="text-xs">Browse complete catalog</span>
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </div>
+    
+      </div>
+    </div>
+  );
 
   return (
     <div className="relative group mt-2">
       <div
         ref={containerRef}
-        className={`relative overflow-x-auto  scrollbar-hide`}
+        className={`relative overflow-x-auto scrollbar-hide`}
         style={{ margin: isMobile ? 0 : `0 ${gap / 2}px` }}
       >
         <div
@@ -52,7 +85,7 @@ interface CarouselProps<T> {
                 }
           }
         >
-          {data.map((item, index) => (
+          {dataWithViewMore.map((item, index) => (
             <div
               key={index}
               className={`flex-none ${isMobile ? 'snap-center' : ''}`}
@@ -62,7 +95,7 @@ interface CarouselProps<T> {
                 }px)`,
               }}
             >
-              {renderItem(item, index)}
+              {item ? renderItem(item, index) : renderViewMore ? renderViewMore() : <DefaultViewMore />}
             </div>
           ))}
         </div>
@@ -104,4 +137,5 @@ interface CarouselProps<T> {
     </div>
   );
 }
+
 export default memo(NewCarousel);
