@@ -46,6 +46,7 @@ return  isLoading ? (
               <MainHeading
                 title="Handpicked Projects"
                 content="Discover Your Dream Home with Handpicked Projects – Where Quality Meets Elegance"
+                url={url}
               />
               <a
                 className="text-[#0073C6] text-nowrap font-[Montserrat] text-[14px] sm:text-[18px] xl:text-[20px] not-italic font-bold leading-[normal]"

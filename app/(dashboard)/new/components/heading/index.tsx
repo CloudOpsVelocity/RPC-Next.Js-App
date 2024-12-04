@@ -9,7 +9,7 @@ type Props = {
     title?: string;
     content?: string;
   };
-  url:string
+  url?:string
 };
 
 export default function MainHeading({ title, content, className,url }: Props) {

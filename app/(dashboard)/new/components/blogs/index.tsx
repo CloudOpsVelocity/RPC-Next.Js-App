@@ -11,6 +11,7 @@ export default function BlogsSection({}: Props) {
         title="Latest Blogs"
         content="From Market Updates to Home Tips: Your Source for Real Estate Knowledge"
         className={{ title: "text-center", content: "text-center" }}
+        url={`${process.env.NEXT_PUBLIC_BACKEND_URL}/blogs`}
       />
       <div>
         <CardSection />

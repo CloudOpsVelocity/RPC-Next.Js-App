@@ -103,7 +103,7 @@ const PricingSection = ({ unitData, projName, phaseList }: any) => {
               </h3>
               <div className="text-sm sm:text-base text-gray-700 font-semibold">
                 <span className="font-medium text-gray-800">Price Range:</span>{" "}
-                {formatCurrency(filteredData[bhkType].minPrice)} -
+                {formatCurrency(filteredData[bhkType].minPrice)} - {" "}
                 {formatCurrency(filteredData[bhkType].maxPrice)}
               </div>
        {propCgId !== 32 ? <>  <div className="text-sm sm:text-base text-gray-700 font-semibold">
