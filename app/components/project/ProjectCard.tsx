@@ -31,9 +31,10 @@ type CardProps = {
   cardData?: any;
   mutate?: ({ id }: { id: string; type: "builder" | "proj" }) => void;
   ct: "builder" | "proj";
+  id?: string;
 };
 
-export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
+export function ProjectCard({ type, cardData, mutate, ct,id }: CardProps) {
   const [, { open }] = useReqCallPopup();
   const { data: session } = useSession();
   const { toggleShortlist } = useShortlistAndCompare();
@@ -52,7 +53,10 @@ export function ProjectCard({ type, cardData, mutate, ct }: CardProps) {
     if (session) {
       handleShortlist(projId);
     } else {
-      openS(() => handleShortlist(projId));
+      openS(() => handleShortlist(projId),{
+        type:id,
+        action:projId
+      });
     }
   };
 
@@ -279,6 +283,7 @@ const ProjectCarousel = ({
                     cardData={project}
                     mutate={mutate}
                     ct={ct ?? "builder"}
+                    id={id}
                   />
           )}
           slidesToShow={4}

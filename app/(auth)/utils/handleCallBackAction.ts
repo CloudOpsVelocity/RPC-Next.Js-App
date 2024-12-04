@@ -17,12 +17,29 @@ export default function useCallBackAction(data:any){
       })
       break;
     case 'compare':
-      return addShortList({
+       addShortList({
+        isactive:"Y",
+        projIdEnc:data?.action,
+        source:"proj",
+        type:3
+      });
+      break;
+    case 'similar-projects':
+      addShortList({
+        isactive:"Y",
+        projIdEnc:data?.action,
+        source:"proj",
+        type:2
+      })
+      break;
+    case 'other-projects':
+      addShortList({
         isactive:"Y",
         projIdEnc:data?.action,
         source:"proj",
         type:3
       })
+
   }
 }
 
