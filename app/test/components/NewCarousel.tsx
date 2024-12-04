@@ -45,7 +45,7 @@ function NewCarousel<T>({
   const canGoPrev = useMemo(() => currentIndex > 0, [currentIndex]);
 
   const DefaultViewMore = () => (
-    <a href={url} target="_blank" className="relative h-full w-full rounded-xl bg-gradient-to-br from-blue-400 to-blue-600 p-1 hover:shadow-xl cursor-pointer transition-all duration-300 ">
+    <button onClick={()=>window.open(url,"_blank")} className="relative h-full w-full rounded-xl bg-gradient-to-br from-blue-400 to-blue-600 p-1 hover:shadow-xl cursor-pointer transition-all duration-300 ">
       <div className="h-full w-full rounded-lg bg-white p-4 flex flex-col items-center justify-center space-y-4">
         <div className="rounded-full bg-gradient-to-br from-blue-400 to-blue-600 p-3 animate-pulse">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -64,7 +64,7 @@ function NewCarousel<T>({
         </div>
     
       </div>
-    </a>
+    </button>
   );
 
   return (
