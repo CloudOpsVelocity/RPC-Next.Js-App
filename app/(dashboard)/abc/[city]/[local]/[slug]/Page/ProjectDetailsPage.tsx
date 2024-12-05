@@ -69,8 +69,6 @@ export default async function ProjectsDetailsPage({
     const desc = `${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`
   return (
     <section className="w-full relative break-words ">
-      <title>{title}</title>
-      <meta name="description" content={desc} />
       <meta
         property="og:url" 
         content={url}

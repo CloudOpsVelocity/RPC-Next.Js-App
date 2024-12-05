@@ -345,17 +345,8 @@ export async function generateMetadata(
   { params }: SeoProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  // read route params
   const slug = params.slug;
-
-  // fetch data
   const { basicData: data } = await getProjectDetails(slug);
-  // Name of the Project
-  // Property Type
-  // Text " For Sale In"
-  // Locality
-  // City
-
   return {
     title: `${data?.projectName} ${
       data.availableProperties && data?.availableProperties?.join(" ")

@@ -10,10 +10,11 @@ import {
   findPathForProjectDetails,
 } from "@/app/(new_routes_seo)/utils/new-seo-routes/project";
 import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
+import { Metadata, ResolvingMetadata } from "next";
 type Props = {
   params: { city: string; lt: string; slug: string };
 };
-
+let metadataCache: {title?: string, description?: string} = {};
 export default async function Page({ params }: Props) {
   const { city, lt, slug: name } = params;
   const pathname = `${BASE_PATH_PROJECT_DETAILS}/${city}/${lt}/${name}`;
@@ -27,16 +28,24 @@ export default async function Page({ params }: Props) {
     getProjectDetails(slug as string),
     getAmenties(),
   ]);
-if(projResponse.basicData.projAuthorityId){
-  const res = await getAuthorityNames(projResponse.basicData.projAuthorityId);
-  projResponse = {
-    ...projResponse,
-    basicData: {
-      ...projResponse.basicData,
-      projAuthorityNames: res,
-    },
+
+  // Cache just the metadata
+  const data = projResponse.basicData;
+  metadataCache = {
+    title: `${data?.projectName} ${data.availableProperties?.join(" ")} for sale in ${data.localityName} ${data.cityName}`,
+    description: `${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`
+  };
+
+  if(projResponse.basicData.projAuthorityId){
+    const res = await getAuthorityNames(projResponse.basicData.projAuthorityId);
+    projResponse = {
+      ...projResponse,
+      basicData: {
+        ...projResponse.basicData,
+        projAuthorityNames: res,
+      },
+    }
   }
-}
   return (
     <ProjectsDetailsPage
       projResponse={projResponse}
@@ -50,7 +59,6 @@ if(projResponse.basicData.projAuthorityId){
 export async function generateStaticParams() {
   // Get the data (mocked here, replace with your actual data fetching logic)
   const res = await getPagesSlugs("project-list");
-
   const staticDir = path.join(process.cwd(), "static");
   const filePath = path.join(staticDir, "projectSlugs.json");
 
@@ -69,10 +77,32 @@ export async function generateStaticParams() {
   const projectRes = Object.keys(res);
   const slugs = projectRes.map((data) => {
     const [staticPath, staticPath2, sta3, city, lt, slug] = data.split("/");
-
     return { city, lt, slug };
   });
   return slugs;
 }
+
+type SeoProps = {
+  params: { city: string; lt: string; slug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
+export async function generateMetadata(
+  { params }: SeoProps,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  // Use cached metadata if available
+  if (metadataCache.title && metadataCache.description) {
+    return {
+      title: metadataCache.title,
+      description: metadataCache.description
+    };
+  }
+  return {
+    title: metadataCache.title,
+    description: metadataCache.description
+  }
+}
+
 export const dynamicParams = true;
-// export const dynamic = "force-dynamic";
+export const dynamic = "force-static";
