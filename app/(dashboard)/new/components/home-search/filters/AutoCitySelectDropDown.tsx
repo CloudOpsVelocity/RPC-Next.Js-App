@@ -176,14 +176,14 @@ export default function AutoCitySelectDropdown({
   };
 
   return (
-    <div className="relative  max-w-fit" ref={dropdownRef}>
+    <div className="relative  " ref={dropdownRef}>
       <button
         onClick={handleToggleDropdown}
-        className="w-full p-2 sm:p-3 text-left bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 ease-in-out flex items-center justify-between space-x-1 sm:space-x-2"
+        className="w-full max-w-fit p-2 sm:p-3 text-left bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 ease-in-out flex items-center justify-between space-x-1 sm:space-x-2"
         aria-haspopup="listbox"
         aria-expanded={isOpen}
       >
-        <span className="text-gray-700 font-medium truncate text-xs sm:text-base">
+        <span className="text-gray-700 font-medium truncate text-xs sm:text-base text-nowrap">
           {selectedCity?.name || DefaultCity?.data?.city || "Select City"}
         </span>
         {selectedCity || DefaultCity?.data?.city ? (

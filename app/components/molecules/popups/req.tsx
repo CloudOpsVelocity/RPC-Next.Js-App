@@ -219,14 +219,14 @@ const LoggedInUserForm = ({ status, setStatus }: any) => {
         </span>{" "}
         <span className="text-[14px] xl:text-[21px]">{popupState.title}</span>
       </p>
-      <p className="text-[#148B16] mb-[6%] text-[14px] xl:text-xl lg:text-[20px] italic font-bold leading-[normal] tracking-[0.64px]">
+      {/* <p className="text-[#148B16] mb-[6%] text-[14px] xl:text-xl lg:text-[20px] italic font-bold leading-[normal] tracking-[0.64px]">
         <span className="text-[#4D6677] text-[18px] xl:text-xl italic font-medium leading-[normal] tracking-[0.8px]">
           {Posted_BY}:
         </span>{" "}
         <span className="text-[14px] xl:text-[21px]">
           {popupState.postedByName}
         </span>
-      </p>
+      </p> */}
       {/* Notifcation */}
       <div className=" flex justify-center items-center gap-2.5 border p-2.5 rounded-xl border-solid border-[#FFD600] bg-[#fff4bb] text-[#242424] text-[15px] xl:text-[17px] not-italic font-semibold leading-[normal] mb-6">
         {popupState.MODAL_TYPE === "REQ_QUOTE"
@@ -318,12 +318,12 @@ const ReqForm = ({
         </span>{" "}
         : {title}
       </p>
-      <p className="text-[#148B16] text-[13px] xl:text-lg italic font-bold leading-[normal] tracking-[0.64px] mb-[2%] ">
+      {/* <p className="text-[#148B16] text-[13px] xl:text-lg italic font-bold leading-[normal] tracking-[0.64px] mb-[2%] ">
         <span className="text-[#4D6677] text-sm  xl:text-lg italic font-medium leading-[normal] tracking-[0.36px]">
           {Posted_BY}
         </span>{" "}
         : {bn}
-      </p>
+      </p> */}
       <p className="text-[#EA7A00] text-[14px] xl:text-base not-italic font-semibold leading-[normal] tracking-[0.64px] mb-[1%] ">
         Looks like you are not registered with us.
       </p>

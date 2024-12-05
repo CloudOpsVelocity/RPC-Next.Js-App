@@ -67,12 +67,12 @@ export default function ReqOtpForm({
           </span>{" "}
           : {title}
         </p>
-        <p className="text-[#148B16]  text-[16px] xl:text-[20px] italic font-bold leading-[normal] tracking-[0.64px] mb-[2%] ">
+        {/* <p className="text-[#148B16]  text-[16px] xl:text-[20px] italic font-bold leading-[normal] tracking-[0.64px] mb-[2%] ">
           <span className="text-[#4D6677]  italic font-medium leading-[normal] tracking-[0.36px]">
             {Posted_BY}
           </span>{" "}
           : {builderName}
-        </p>
+        </p> */}
         <p className="text-[#EA7A00] text-[16px] xl:text-base not-italic font-semibold leading-[normal] tracking-[0.64px] py-1">
           You are one step away to get callback.
         </p>

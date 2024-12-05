@@ -9,7 +9,8 @@ import { formatDate, formatDateDDMMYYYY } from "@/app/utils/date";
 import { getImageUrls } from "@/app/utils/image";
 import Shortlist from "./Shortlist";
 import ListingReqBtn from "./ListingReqCallbackBtn";
-import ListingLink from "@/app/utils/linkRouters/ListingLink";
+import ListingLink, { generateListingLinkUrl } from "@/app/utils/linkRouters/ListingLink";
+import Link from "next/link";
 type Props = {
   item: any;
   sl: string;
@@ -22,18 +23,19 @@ export default function ListingCard({ item, sl }: Props) {
       ? `${formatNumberWithSuffix(item.pa)} sq.ft`
       : item.bhkName
   } ${item.propTypeName} for ${item.category} in ${item.localityName}`;
+ const listingLink = generateListingLinkUrl({
+  bhkUnitType: item.bhkName ? item.bhkName + "-" + item.propTypeName : item.propTypeName,
+  category: item.category === "Sale" ? "for-sale" : "for-rent",
+  city: item.cityName,
+  locality: item.localityName,
+  propIdEnc: item.propIdEnc,
+  phase: item.phaseName,
+  projName: item.projIdEnc && item.propName,
+})
   return (
     <div>
-    <ListingLink
-      routeParams={{
-        bhkUnitType: item.bhkName ? item.bhkName + "-" + item.propTypeName : item.propTypeName,
-        category: item.category === "Sale" ? "for-sale" : "for-rent",
-        city: item.cityName,
-        locality: item.localityName,
-        propIdEnc: item.propIdEnc,
-        phase: item.phaseName,
-        projName: item.projIdEnc && item.propName,
-      }}
+    <Link
+      href={listingLink}
       target="_blank"
       // onClick={() => onRedirectOnProp()}
       className="w-full max-w-full sm:w-[370px] xl:w-[490px] xl:min-w-[490px] sm:max-w-[490px] cursor-pointer"
@@ -42,7 +44,7 @@ export default function ListingCard({ item, sl }: Props) {
         <div className="flex  justify-start items-start gap-[8px] absolute top:0 right-0 p-[8px] ">
           <Shortlist reqId={item.propIdEnc} shortListed={sl} />
           <ShareBtn
-            url={`/listing/banglore/${item.propIdEnc}`}
+            url={listingLink}
             type="prop"
           />
         </div>
@@ -108,7 +110,7 @@ export default function ListingCard({ item, sl }: Props) {
             <Shortlist reqId={item.propIdEnc} shortListed={sl} />
             {/* <HeartIcon className="cursor-pointer w-[22px] h-[22px] sm:w-[20px] sm:h-[20px] xl:w-[26px] xl:h-[26px]" /> */}
             <ShareBtn
-              url={`/listing/banglore/${item.propIdEnc}`}
+              url={listingLink}
               type="prop"
             />
           </div>
@@ -120,7 +122,7 @@ export default function ListingCard({ item, sl }: Props) {
               <>
                 <DownSectionCard
                   label="Plot Area"
-                  value={`${formatNumberWithSuffix(item.pa)} sq.ft`}
+                  value={`${formatNumberWithSuffix(item.pa,false)} sq.ft`}
                 />
                 <Divider orientation="vertical" color="#7BA0BB" />
                 <DownSectionCard
@@ -191,9 +193,9 @@ export default function ListingCard({ item, sl }: Props) {
             )}
           </div>
           <div className="flex  mt-auto  justify-between   item-center w-[100%] my-1 sm:y-0">
-            <p className="text-[#242424] text-[14px] xl:text-sm not-italic font-semibold leading-[normal] capitalize mt-[12px] mb-[6px]">
+            {/* <p className="text-[#242424] text-[14px] xl:text-sm not-italic font-semibold leading-[normal] capitalize mt-[12px] mb-[6px]">
               Posted by: {item.postedBy}
-            </p>
+            </p> */}
             <ListingReqBtn
               builderId={item.postedById}
               builderName={item.postedBy}
@@ -203,7 +205,7 @@ export default function ListingCard({ item, sl }: Props) {
           </div>
         </div>
       </div>
-    </ListingLink>
+    </Link>
     </div>
   );
 }
