@@ -30,9 +30,7 @@ type Props = {
 };
 export default async function Page({ params }: Props) {
   const pathname = `${BASE_PATH_PROJECT_LISTING}/${params.cg}/${params.city}/${params.lt}/${params.project}/${params.phase}/${params.bhk_unit_type}/${params.slug}`;
-  console.log(pathname);
   const value = await findPathForProjectListing(pathname);
-  console.log(value);
   if (!value) {
     notFound();
   }
