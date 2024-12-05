@@ -428,7 +428,7 @@ export default function useSearchFilters(
 const getFilteredData = async (
   query: string,
   page: number,
-  type: "project" | "owner" | "agent",
+  type: "project" | "owner" | "agent", 
   city: string | null
 ): Promise<Search[]> => {
   const hasCityParam = /(?:^|&)city=/.test(query);
@@ -442,14 +442,19 @@ const getFilteredData = async (
       cityId = cityIdFromParam;
     }
   }
+
+  // Only add city param if it's not already in query
+  const cityParam = !hasCityParam && cityId ? `&city=${cityId}` : "";
+
   const url =
     type === "project"
       ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/searchproj?page=${page}${
           query && query !== "listedBy=ALL" ? `&${query}` : ""
-        }${cgValue} ${city ? `&city=${cityId}` : ""}`
+        }${cgValue}${cityParam}`
       : `${process.env.NEXT_PUBLIC_BACKEND_URL}/srp/prop-search?page=${page}${
           query && query.includes("listedBy=ALL") ? `&${query.replace("listedBy=ALL", "")}` : `&${query}`
-        }${!hasCityParam ? `&city=${cityId}` : ""}${cgValue}`;
+        }${cityParam}${cgValue}`;
+
   try {
     const response = await fetch(url);
     const data = await response.json();

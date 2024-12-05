@@ -188,6 +188,7 @@ const OtherDetails = ({
   cunstructionType,
   boundryWallEnclose,
   isUsed,
+  foodAllowedType
 }: Main) => {
   return (
     <div
@@ -306,7 +307,8 @@ const OtherDetails = ({
             <RoomBasicDetails
               icon={<BiFoodTag size={26} color="#00487C" />}
               title="Food Preferences"
-              value={"Veg Only"}
+              value={foodAllowedType === "Y" ? "Veg Only" :
+                "Anything"}
               className={style.card}
             />
           </>

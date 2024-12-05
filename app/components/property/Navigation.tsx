@@ -139,7 +139,7 @@ export default function Navigation({
       condtion: detailsData?.amenities?.length > 0,
       key: "amenities",
     },
-    { condtion: true, key: "nearBy" },
+    { condtion: true, key: "location-map" },
     {
       condtion:
         detailsData.cg === "S" &&
@@ -148,7 +148,7 @@ export default function Navigation({
       key: "loans",
     },
     { condtion: projData, key: "projectDetails" },
-    { condtion: projData, key: "aboutBuilder" },
+    { condtion: projData, key: "about-builder" },
     {
       condtion:
         projData &&

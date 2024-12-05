@@ -168,7 +168,7 @@ const RightSection = ({ propCgId }: any) => {
         </div>
         {propCgId != projectprops.plot && (
           <>
-           {data.floor && <div className="flex items-center space-x-3">
+           {data?.floor !== undefined && <div className="flex items-center space-x-3">
               {propCgId == projectprops.rowHouse || propCgId == projectprops.villa
                 ? propertyDetailsSvgs.towerName 
                 : propertyDetailsSvgs.floor}
@@ -182,7 +182,7 @@ const RightSection = ({ propCgId }: any) => {
                 <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                   {" "}
                   {`${data.isBasement == "Y" ? "B+" : ""}${
-                    data?.floor === 0
+                    data?.floor === 0 || data?.floor === "0"
                       ? "G"
                       : propCgId === projectprops.rowHouse ||
                         propCgId === projectprops.villa
@@ -191,9 +191,9 @@ const RightSection = ({ propCgId }: any) => {
                   }`}
                 </span>{" "}
               </p>
-            </div>} 
+            </div>}
 
-            {propCgId !== projectprops.plot  && (
+            {propCgId !== projectprops.plot && data?.totalFloor !== undefined && (
               <div className="flex items-center space-x-3">
                 {propertyDetailsSvgs.floor}
                 <p className="text-[#4D6677] text-[14px] font-[500]">

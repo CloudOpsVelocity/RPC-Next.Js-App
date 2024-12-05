@@ -68,6 +68,7 @@ export interface Main {
   aptTypeName:string;
   projAuthorityNames: string[];
   isPetFirendly: number;
+  foodAllowedType: "Y" | "N"
 }
 export interface LIstingResponse {
   listing: Main;

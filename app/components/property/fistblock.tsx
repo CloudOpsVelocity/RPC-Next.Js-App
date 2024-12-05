@@ -73,7 +73,6 @@ const PropertyFirstBlock: React.FC<Props> = ({
       slug: data?.data?.userName,
       city: projectDetails?.ctName as string,
     });
-  const isBuilder = (projectDetails?.postedByType) === "B";
   return (
     <div
       className={`relative rounded-[10px] w-full m-auto bg-gray-50 sm:h-[549px]  xl:h-[750px] bg-cover flex justify-between items-start flex-col shadow-md break-words`}
@@ -238,13 +237,9 @@ const PropertyFirstBlock: React.FC<Props> = ({
                 </a>
               ) : ( */}
                 <p className="text-[#001F35] sm:text-[18px] xl:text-2xl not-italic font-semibold  capitalize sm:mt-1 xl:mt-[8px]">
-                  Posted By:{" "}
+                {get_posted_by(projectDetails.postedByType)}:{" "}
                   <span className="">{projectDetails.postedByName}</span>
                 </p>
-              {/* )} */}
-              <p className="mb-[8px] sm:mb-[6px] xl:mb-[13px] text-[12px] md:text-base text-[#001F35] font-semibold md:font-bold ">
-                {get_posted_by(projectDetails.postedByType)}
-              </p>
               <p
                 className="sm:text-[16px] xl:text-[20px] font-[600] mr-auto md:mr-0 text-[#0073C6] bg-[#FFF] rounded-[10px] shadow-md p-[8px] flex items-center gap-2 cursor-pointer"
                 onClick={() => scrollToTopic("floorPlans")}

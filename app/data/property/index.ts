@@ -24,7 +24,7 @@ export function generatePropertyDetails(
     case "Apartment":
       propertyDetails = [
         { title: "Unit Type", value: data.bhkName, Icon: Marble },
-        { title: "Property Type", value: data.aptTypeName ??data.propTypeName, Icon: Marble },
+        { title: "Property Type", value: data.aptTypeName !==  data.propTypeName ? data.aptTypeName : "", Icon: Marble },
         { title: "Phase", value: data.phaseName, Icon: Marble },
         { title: "Tower", value: data.tower, Icon: TowerIcon },
         {

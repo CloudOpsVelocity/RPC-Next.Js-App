@@ -42,7 +42,6 @@ export default async function Page({
       `bhk=${BH}&propType=${PT}&localities=${LT}&cg=${CG}`
   );
    }
-   
   return (
     PT === '36' ?
     <ListingSearchPage 
