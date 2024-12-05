@@ -12,7 +12,8 @@ type Props = {
     city: string;
   };
 };
-
+export const dynamic = "force-dynamic";
+export const dynamicParams = true;
 export default async function Page({ params: { city } }: Props) {
   const PATH = `${BASE_PATH_BUILDER_DETAILS}/${city}`;
   const builderSlug = await findPathForBuilderDetails(PATH);
@@ -53,4 +54,3 @@ export async function generateStaticParams() {
   return slugs;
 }
 
-export const dynamic = "force-dynamic";

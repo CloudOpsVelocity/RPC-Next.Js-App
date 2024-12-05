@@ -11,6 +11,7 @@ type Props = {
     slug: string;
   };
 };
+export const dynamic = "force-static";
 async function getBuilderSlug(pathname: string) {
   const staticDir = path.join(process.cwd(), "static");
   const filePath = path.join(staticDir, "builderSlugs.json");
@@ -63,4 +64,4 @@ export async function generateStaticParams() {
   return slugs;
 }
 
-// export const dynamicParams = true;
+
