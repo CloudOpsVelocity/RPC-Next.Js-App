@@ -6,6 +6,7 @@ const keyConversionMap: { [oldKey: string]: string } = {
   bugdetValue: "min",
 };
 const DEFAULT_BUGDET_VALUE: [number, number] = [500000, 600000000];
+const DEFAULT_BUGDET_VALUE_RENT: [number, number] = [0, 100000];
 
 type QueryParams = { [key: string]: any };
 function formatArray(value: any[]): string {
@@ -27,8 +28,10 @@ function toQueryParams(params: QueryParams): string {
         Array.isArray(value) &&
         value.length === 2 &&
         !(
-          value[0] === DEFAULT_BUGDET_VALUE[0] &&
-          value[1] === DEFAULT_BUGDET_VALUE[1]
+          (value[0] === DEFAULT_BUGDET_VALUE[0] &&
+          value[1] === DEFAULT_BUGDET_VALUE[1]) ||
+          (value[0] === DEFAULT_BUGDET_VALUE_RENT[0] &&
+          value[1] === DEFAULT_BUGDET_VALUE_RENT[1])
         )
       ) {
         queryEntries.push(`minPrice=${encodeURIComponent(String(value[0]))}`);
