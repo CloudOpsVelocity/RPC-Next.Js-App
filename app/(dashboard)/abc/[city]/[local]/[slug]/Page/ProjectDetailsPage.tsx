@@ -23,6 +23,7 @@ const GalleryBlock = dynamic(() => import("@/app/components/project/galleryBlock
 const Specifications = dynamic(() => import("@/app/components/project/specification"));
 const Banner = dynamic(() => import("@/app/components/project/banner"));
 import AboutBuilder from "@/app/components/project/aboutBuilder";
+import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
 const FaqWithBg = dynamic(() => import("@/app/components/project/faq"));
 const NearByCarousel = dynamic(() => import("@/app/components/project/NearByCarousel"));
 const LoginPopup = dynamic(() => import("@/app/components/project/modals/LoginPop"));
@@ -61,22 +62,27 @@ export default async function ProjectsDetailsPage({
 }: Props) {
   const { basicData: data, nearByLocations, phaseOverview } = projResponse;
   const refURls = data?.sourceBuilderUrl?.split(",");
+  const url = `${BASE_PATH_PROJECT_DETAILS}/${data.cityName}/${data.localityName}/${params.slug}`
+  const title = `${data?.projectName} ${
+      data.availableProperties && data?.availableProperties?.join(" ")
+    } for sale in ${data.localityName} ${data.cityName}`
+    const desc = `${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`
   return (
     <section className="w-full relative break-words ">
+      <title>{title}</title>
+      <meta name="description" content={desc} />
       <meta
-        property="og:url"
-        content={`${process.env.NEXT_PUBLIC_URL}/abc/${data.cityName}/${data.localityName}/${slug}`}
+        property="og:url" 
+        content={url}
       />
       <meta property="og:type" content="website" />
       <meta
         property="og:title"
-        content={`${data.projectName} ${data.availableProperties?.join(
-          " "
-        )} for sale in ${data.localityName} ${data.cityName}`}
+        content={title}
       />
       <meta
         property="og:description"
-        content={`${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`}
+        content={desc}
       />
       <meta property="og:image" content={data.media?.coverImageUrl} />
       {/* <!-- Twitter Meta Tags --> */}
@@ -84,17 +90,15 @@ export default async function ProjectsDetailsPage({
       <meta property="twitter:domain" content="getrightproperty.com" />
       <meta
         property="twitter:url"
-        content={`${process.env.NEXT_PUBLIC_URL}/abc/${data.cityName}/${data.localityName}/${slug}`}
+        content={url}
       />
       <meta
         name="twitter:title"
-        content={`${data.projectName} ${data.availableProperties?.join(
-          " "
-        )} for sale in ${data.localityName} ${data.cityName}`}
+        content={title}
       />
       <meta
         name="twitter:description"
-        content={`${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`}
+        content={desc}
       />
       <meta name="twitter:image" content={data.media?.coverImageUrl} />
       <FAQJsonLdScript data={data} />
