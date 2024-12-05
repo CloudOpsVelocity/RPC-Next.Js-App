@@ -89,7 +89,7 @@ export const Propertytopics = [
   { label: "Customer Reviews", id: "ratings" },
   { label: "FAQ?", id: "faq" },
   { label: "Similar Listings", id: "similarListing" },
-  { label: "Similar Projects", id: "similar" },
+  { label: "Similar Projects", id: "similar-projects" },
 ];
 
 export const propertyDetailsTypes = new Map([

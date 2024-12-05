@@ -157,7 +157,7 @@ export default function Navigation({
       key: "faq",
     },
     { condtion: SimilatListingAvl, key: "similarListing" },
-    { condtion: similarAvl, key: "similar" },
+    { condtion: similarAvl, key: "similar-projects" },
   ];
 
   return (
