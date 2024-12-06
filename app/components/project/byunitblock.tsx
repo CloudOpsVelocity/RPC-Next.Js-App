@@ -481,7 +481,7 @@ const Byunitblock: React.FC<Props> = ({
       </div>
       <div className="flex justify-between items-start w-full">
       <button className="bg-btnPrimary  text-base font-semibold text-white px-1 py-2 rounded-md  text-nowrap mr-4 mt-4" onClick={handleReset}>   Clear All Filters</button>
-      <RecentSearchedUnits propCgId={propCgId} recentFiltersClick={handlePreviousAppliedFilter} className="mt-4" />
+      {/* <RecentSearchedUnits propCgId={propCgId} recentFiltersClick={handlePreviousAppliedFilter} className="mt-4" /> */}
       </div>
 
     </div>

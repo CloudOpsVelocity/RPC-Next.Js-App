@@ -2,13 +2,16 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 import { revalidatePath } from "next/cache";
+import logger from "@/app/utils/logger";
 
 const getFilePath = () =>
   path.join(process.cwd(), "static", "listingSlugs.json");
 
 export async function POST(request: Request) {
+  logger.info(`POST request received at ${request.url}`);
   let { slug, id, action, slugs } = await request.json();
   if (!action) {
+    logger.error(`POST ${request.url}: Missing action parameter in request`);
     return NextResponse.json(
       { error: "Missing action parameter" },
       { status: 400 }
@@ -19,6 +22,7 @@ export async function POST(request: Request) {
 
   // Ensure the file exists
   if (!fs.existsSync(filePath)) {
+    logger.info(`POST ${request.url}: Creating new listingSlugs.json file`);
     fs.writeFileSync(filePath, JSON.stringify({}));
   }
 
@@ -28,6 +32,7 @@ export async function POST(request: Request) {
   switch (action) {
     case "create": {
       if (!slugs) {
+        logger.error(`POST ${request.url}: Missing slugs data in create action`);
         return NextResponse.json(
           { error: "data is required" },
           { status: 400 }
@@ -37,6 +42,7 @@ export async function POST(request: Request) {
       // Loop through the slugs object to check if it already exists or not
       for (const key in slugs) {
         if (!id || typeof id !== "string") {
+          logger.error(`POST ${request.url}: Invalid ID for slug: ${slug}`);
           errors.push(`Invalid ID for slug: ${slug}`);
           return;
         }
@@ -44,6 +50,7 @@ export async function POST(request: Request) {
           const element = slugs[key];
           // Check if the key (slug) already exists in JSON data
           if (Object.prototype.hasOwnProperty.call(data, key)) {
+            logger.warn(`POST ${request.url}: Slug "${key}" already exists`);
             errors.push(`Slug "${key}" already exists`);
           } else {
             data[key] = element;
@@ -53,10 +60,12 @@ export async function POST(request: Request) {
       }
       // Handle errors if any slugs were invalid or already existed
       if (errors.length > 0) {
+        logger.error(`POST ${request.url}: Multiple errors occurred: ${errors.join(", ")}`);
         return NextResponse.json({ error: errors.join(", ") }, { status: 400 });
       }
       // Write the updated data back to the file
       fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+      logger.info(`POST ${request.url}: Successfully created new listing(s)`, { slugs });
       return NextResponse.json(
         { message: `Listing(s) created successfully`, slugs },
         { status: 201 }
@@ -64,6 +73,7 @@ export async function POST(request: Request) {
     }
     case "update": {
       if (!id || !slugs || typeof slugs !== "object" || Array.isArray(slugs)) {
+        logger.error(`POST ${request.url}: Missing or invalid parameters in update action`);
         return NextResponse.json(
           { error: "Missing or invalid parameters" },
           { status: 400 }
@@ -74,12 +84,14 @@ export async function POST(request: Request) {
         if (data[key].includes(id)) {
           delete data[key];
           revalidatePath(key);
+          logger.info(`POST ${request.url}: Deleted existing slug: ${key}`);
         }
       });
       // Add new slugs to the data
       Object.keys(slugs).forEach((slug) => {
         const newId = slugs[slug];
         if (!newId || typeof newId !== "string") {
+          logger.error(`POST ${request.url}: Invalid ID for slug: ${slug}`);
           return NextResponse.json(
             { error: `Invalid ID for slug: ${slug}` },
             { status: 400 }
@@ -87,6 +99,7 @@ export async function POST(request: Request) {
         }
         // Check if the new slug already exists
         if (Object.prototype.hasOwnProperty.call(data, slug)) {
+          logger.error(`POST ${request.url}: Slug '${slug}' already exists`);
           return NextResponse.json(
             { error: `Slug '${slug}' already exists` },
             { status: 400 }
@@ -94,6 +107,7 @@ export async function POST(request: Request) {
         }
         // Add the new slug and its corresponding ID
         data[slug] = newId;
+        logger.info(`POST ${request.url}: Added new slug: ${slug}`);
       });
       // Write updated data to the file
       fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
@@ -101,6 +115,7 @@ export async function POST(request: Request) {
       Object.keys(slugs).forEach((slug) => {
         revalidatePath(slug);
       });
+      logger.info(`POST ${request.url}: Successfully updated slugs`);
       return NextResponse.json(
         { message: "Slugs updated successfully" },
         { status: 200 }
@@ -108,6 +123,7 @@ export async function POST(request: Request) {
     }
     case "delete": {
       if (!id) {
+        logger.error(`POST ${request.url}: Missing id parameter in delete action`);
         return NextResponse.json(
           { error: "Missing id parameter" },
           { status: 400 }
@@ -119,6 +135,7 @@ export async function POST(request: Request) {
         if (data[key].includes(id)) {
           delete data[key];
           revalidatePath(key); // Revalidate path after deletion
+          logger.info(`POST ${request.url}: Deleted slug: ${key}`);
           if (!deleted) {
             deleted = true;
           }
@@ -126,18 +143,21 @@ export async function POST(request: Request) {
       });
       // If no deletions occurred, return an error
       if (!deleted) {
+        logger.error(`POST ${request.url}: id '${id}' does not exist`);
         return NextResponse.json(
           { error: `id '${id}' does not exist` },
           { status: 404 }
         );
       }
       fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+      logger.info(`POST ${request.url}: Successfully deleted listing slugs`);
       return NextResponse.json(
         { message: `Listing slugs deleted successfully` },
         { status: 200 }
       );
     }
     default:
+      logger.error(`POST ${request.url}: Invalid action parameter: ${action}`);
       return NextResponse.json(
         { error: "Invalid action parameter" },
         { status: 400 }
@@ -145,8 +165,10 @@ export async function POST(request: Request) {
   }
 }
 
-export async function GET() {
+export async function GET(request: Request) {
+  logger.info(`GET request received at ${request.url}`);
   const filePath =  path.join(process.cwd(), "static", `listingSlugs.json`);
+  logger.info(`GET ${request.url}: Reading listingSlugs.json file`);
   const data = fs.readFileSync(filePath, "utf-8");
   return NextResponse.json(JSON.parse(data), { status: 200 });
 }

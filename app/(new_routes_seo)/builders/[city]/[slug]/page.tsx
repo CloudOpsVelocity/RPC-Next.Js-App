@@ -5,6 +5,7 @@ import fs from "fs";
 import { getBuilderDetailsPageData } from "@/app/utils/api/builder";
 import { notFound } from "next/navigation";
 import BuilderPage from "@/app/builder/[slug]/Page/BuilderPage";
+import { Metadata, ResolvingMetadata } from "next";
 type Props = {
   params: {
     city: string;
@@ -64,4 +65,21 @@ export async function generateStaticParams() {
   return slugs;
 }
 
-
+interface SeoProps {
+  params:{
+    city:string;
+    slug:string
+  }
+}
+export async function generateMetadata(
+  { params }: SeoProps,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const pathname = `/builders/${params.city}/${params.slug}`;
+  const id = await getBuilderSlug(pathname);
+  const data = await getBuilderDetailsPageData(id.split("_")[1], pathname);
+  return {
+    title: `${data.data.userName} | Top Real Estate Developer in ${data.data.cityName} | Properties in ${data.data.localityName}`,
+    description: `Explore ${data.data.userName} - A leading real estate developer in ${data.data.cityName}. Browse through their residential and commercial projects in ${data.data.localityName} and discover your dream property.`,
+  }
+}

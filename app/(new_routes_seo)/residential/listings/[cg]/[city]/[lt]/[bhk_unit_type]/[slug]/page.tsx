@@ -78,26 +78,4 @@ export const dynamicParams = true;
 export async function generateStaticParams() {
   const slugs = generateSlugs("listing-search-seo", "solo-listing");
   return slugs;
-  // Get the data (mocked here, replace with your actual data fetching logic)
-  // const res = await getPagesSlugs("listing-search-seo");
-  // const staticDir = path.join(process.cwd(), "static");
-  // const filePath = path.join(staticDir, "listingSlugs.json");
-  // // Ensure the 'static' directory exists
-  // if (!fs.existsSync(staticDir)) {
-  //   fs.mkdirSync(staticDir);
-  // }
-  // // Convert the data object into JSON
-  // const jsonContent = JSON.stringify(res, null, 2);
-  // // Write the JSON data to the file
-  // fs.writeFileSync(filePath, jsonContent);
-  // // Extract project names from the keys
-  // const projectRes = Object.keys(res);
-  // const slugs = projectRes.map((data) => {
-  //   if (data.includes("/in/for-")) {
-  //     const [emtypath, country, cg, city, lt, bhk_unit_type, slug] =
-  //       data.split("/");
-  //     return { cg, city, lt, bhk_unit_type, slug };
-  //   }
-  // });
-  // return slugs;
 }

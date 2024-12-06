@@ -22,6 +22,7 @@ export default async function Page({ params: { city } }: Props) {
   const builderData = await getCitiesBuilder({ city: id, page: 0, sort: 0 });
   return <BuildersDirectory city={city} id={id} initialData={builderData} />;
 }
+
 export async function generateStaticParams() {
   // Get the data (mocked here, replace with your actual data fetching logic)
   const res = await getPagesSlugs("builder-list");
@@ -49,7 +50,7 @@ export async function generateStaticParams() {
   const builderRess = Object.keys(resObject);
   const slugs = builderRess.map((data) => {
     const [staticPath, staticPath2, city, slug] = data.split("/");
-    return { city, slug };
+    return {city};
   });
   return slugs;
 }

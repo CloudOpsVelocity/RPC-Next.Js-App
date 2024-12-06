@@ -1,5 +1,9 @@
 // utils/new_routes_seo/generateSlugs.ts
+import { 
+  
+  getServerSideSitemap
 
+ } from 'next-sitemap'
 import { getPagesSlugs } from "@/app/seo/api";
 import path from "path";
 import fs from "fs";

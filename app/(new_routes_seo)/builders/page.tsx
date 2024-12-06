@@ -1,5 +1,4 @@
 import React from "react";
-import StateBuilder from "./components/StateBuilder";
 import BuildersDirectory from "./components/CitiesBuilder";
 import { getCitiesBuilder } from "../utils/new-seo-routes/builder.client";
 

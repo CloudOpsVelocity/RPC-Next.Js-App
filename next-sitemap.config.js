@@ -1,16 +1,16 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-    siteUrl: process.env.NEXT_PUBLIC_BACKEND_URL || 'https://example.com',
+    siteUrl: 'http://localhost:3000' || 'https://example.com',
     exclude: ['/icon.svg', '/apple-icon.png', '/manifest.webmanifest', '/tags/*'],
-    generateRobotsTxt: true,
     generateIndexSitemap: false,
+    // generateRobotsTxt: true,
     
-    robotsTxtOptions: {
-        policies: [
-            {
-                userAgent: '*',
-                allow: '/',
-            }
-        ]
-    }
+    // robotsTxtOptions: {
+    //     policies: [
+    //         {
+    //             userAgent: '*',
+    //             allow: '/',
+    //         }
+    //     ]
+    // }
 }

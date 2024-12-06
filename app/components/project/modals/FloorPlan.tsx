@@ -904,10 +904,10 @@ const MiddleSection = ({
           </div>
         )}
 
-      <RecentSearchedUnits
+      {/* <RecentSearchedUnits
         recentFiltersClick={recentFiltersClick}
         propCgId={propCgId}
-      />
+      /> */}
     </div>
   );
 };
