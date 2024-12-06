@@ -10,7 +10,7 @@ export async function GET(request: Request) {
   const listingSlugs = JSON.parse(data);
  const slugs = Object.keys(listingSlugs)
 const generatedSitemap = slugs.map((slug) => ({
-  loc: `${process.env.NEXT_PUBLIC_NAME}${slug}`,
+  loc: `${process.env.NEXT_PUBLIC_URL}${slug}`,
   lastmod: new Date().toISOString(),
  }))
  logger.info(`Listing Details Sitemap: Generated Sitemap`);
