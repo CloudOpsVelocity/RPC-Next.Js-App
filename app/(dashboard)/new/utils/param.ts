@@ -62,6 +62,11 @@ function toQueryParams(params: QueryParams): string {
     queryEntries.push(`${encodeURIComponent(newKey)}=${paramValue}`);
   }
 
+  // Add listedBy=ALL if cg=R
+  if (params.cg === 'R') {
+    queryEntries.push('listedBy=ALL');
+  }
+
   return queryEntries.join("&");
 }
 export { toQueryParams };

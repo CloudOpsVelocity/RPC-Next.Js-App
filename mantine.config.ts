@@ -1,12 +1,7 @@
 "use client";
-
 import { createTheme } from "@mantine/core";
-import { Montserrat, Playball } from "next/font/google";
-const montserrat = Montserrat({
-  subsets: ['latin'], // Specify the subset you need
-  weight: ['200', '300', '400', '500', '600', '700', '800', '900'], // Include all weights for Montserrat
-  display: 'swap', // Same as the `display=swap` in Google Fonts
-});
+import montserrat from "./font";
+
 
 
 const Mantine = createTheme({

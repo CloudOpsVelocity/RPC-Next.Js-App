@@ -33,7 +33,7 @@ export default function ListingCard({ item, sl }: Props) {
   projName: item.projIdEnc && item.propName,
 })
   return (
-    <div>
+    <div >
     <Link
       href={listingLink}
       target="_blank"

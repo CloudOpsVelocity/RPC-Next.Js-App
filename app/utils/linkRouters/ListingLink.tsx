@@ -49,7 +49,7 @@ export const generateListingLinkUrl = (
     projName ? BASE_PATH_PROJECT_LISTING : BASE_PATH_LISTING
   }/${category}/${slugify(city)}/${slugify(locality)}`;
   if (projName) url += `/${slugify(projName)}`;
-  if (phase) url += `/${slugify(phase)}`;
+  if (phase && phase !== "null" && phase !== undefined) url += `/${slugify(phase)}`;
   url += `/${slugifyBHKUnitType(bhkUnitType)}/listing-${propIdEnc}`;
   return url;
 };
