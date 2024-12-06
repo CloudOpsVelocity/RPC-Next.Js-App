@@ -71,6 +71,7 @@ export default function Results() {
         {
           addToRecent({ ...apiData, ct: "listing" });
           const data = extractApiValues(apiData.stringId);
+     console.log(data)
           {
             let url;
             let localityName = apiData.name
@@ -84,7 +85,7 @@ export default function Results() {
               "%2B" +
               encodeURIComponent(data.LT);
 
-            window.open("/search/listing?" + url);
+            window.open(data.PJ && data.PJ !== "null" ? `/search/listing?${url}` : "/search?" + url);
           }
         }
         break;

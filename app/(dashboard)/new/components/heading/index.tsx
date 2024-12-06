@@ -40,7 +40,7 @@ export default function MainHeading({ title, content, className,url }: Props) {
         title != "Listings Posted By" &&
         title != "Latest Blogs" && (
           <a
-            className="text-[#0073C6] font-[Montserrat] text-[14px] sm:text-[18px] xl:text-[20px]  not-italic font-bold leading-[normal]"
+            className="text-[#0073C6]  text-[14px] sm:text-[18px] xl:text-[20px]  not-italic font-bold leading-[normal]"
             href={url}
             target="_blank"
           >
