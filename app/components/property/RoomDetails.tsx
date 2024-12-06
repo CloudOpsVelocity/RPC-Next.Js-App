@@ -219,12 +219,7 @@ const OtherDetails = ({
           value={ownershipName}
           className={style.card}
         />
-        <RoomBasicDetails
-              icon={<PetFreindly />}
-              title="Pet Friendly"
-              value={ispetFriendly === 1 ? `Pets Are Allowed` : `Pets Are Not Allowed`}
-              className={style.card}
-            />
+     
         {propTypeName === "Plot" && (
           <RoomBasicDetails
             icon={<OpenSides />}
@@ -234,7 +229,14 @@ const OtherDetails = ({
           />
         )}
         {propTypeName !== "Plot" && (
-          <RoomBasicDetails
+          <>
+             <RoomBasicDetails
+              icon={<PetFreindly />}
+              title="Pet Friendly"
+              value={ispetFriendly === 1 ? `Pets Are Allowed` : `Pets Are Not Allowed`}
+              className={style.card}
+            />
+                  <RoomBasicDetails
             icon={<Status className="md:h-5 md:w-5  !h-[28px] !w-[28px]" />}
             title="Availability Status"
             value={
@@ -242,6 +244,8 @@ const OtherDetails = ({
             }
             className={style.card}
           />
+          </>
+    
         )}
 
         <RoomBasicDetails

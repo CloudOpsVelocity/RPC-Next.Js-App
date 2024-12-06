@@ -53,18 +53,26 @@ function PFloorPlanModal({
             <div className="text-[#333] text-left text-[14px] sm:text-[20px]  xl:text-[22px] xl:text-2xl not-italic font-semibold leading-[normal]">
               Floor Plan
             </div>
+         
             <div className="flex justify-center items-center gap-5">
-              <button
-                onClick={() => handleDownload(data.projMedia.floorPlanUrl)}
-                className={`text-white flex justify-center text-[12px] xl:text-base items-center xl:gap-1 p-1 xl:p-2 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] rounded-[6px] font-semibold xl:rounded-[10px] bg-[#0073c6] `}
-              >
-                {isMobile ? "Download Floor Plan" : "Download"}
-              </button>
-              <SharePopup
-                title="Share"
-                titleText="Share Floor Plan"
-                url={imageUrlParser(data.projMedia.floorPlanUrl, "F")}
-              />
+               {
+              data.projMedia.floorPlanUrl && (
+                <>
+                <button
+                  onClick={() => handleDownload(data.projMedia.floorPlanUrl)}
+                  className={`text-white flex justify-center text-[12px] xl:text-base items-center xl:gap-1 p-1 xl:p-2 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] rounded-[6px] font-semibold xl:rounded-[10px] bg-[#0073c6] `}
+                >
+                  {isMobile ? "Download Floor Plan" : "Download"}
+                </button>
+                <SharePopup
+                  title="Share"
+                  titleText="Share Floor Plan"
+                  url={imageUrlParser(data.projMedia.floorPlanUrl, "F")}
+                />
+                </>
+              )
+            }
+             
               <Close close={() => setOpened(false)} />
             </div>
           </div>

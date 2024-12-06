@@ -8,8 +8,10 @@ const getFilePath = () =>
   path.join(process.cwd(), "static", "listingSlugs.json");
 
 export async function POST(request: Request) {
-  logger.info(`POST request received at ${request.url}`);
-  let { slug, id, action, slugs } = await request.json();
+
+  let  body = await request.json();
+  const { slug, id, action, slugs } = body
+  logger.info(`POST request received at ${request.url}`, body);
   if (!action) {
     logger.error(`POST ${request.url}: Missing action parameter in request`);
     return NextResponse.json(

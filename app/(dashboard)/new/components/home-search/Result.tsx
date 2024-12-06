@@ -71,7 +71,6 @@ export default function Results() {
         {
           addToRecent({ ...apiData, ct: "listing" });
           const data = extractApiValues(apiData.stringId);
-     console.log(data)
           {
             let url;
             let localityName = apiData.name
