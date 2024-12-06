@@ -13,6 +13,7 @@ import clsx from "clsx";
 import { atom, useAtom } from "jotai";
 import Image from "next/image";
 import React, { useState, useRef, useEffect } from "react";
+import { projectReqDataAtom } from "@/app/store/project/project.req";
 export const isScrollingAtom = atom(false);
 export const stickyAtom = atom(false);
 export const currentBlockAtom = atom("overview");
@@ -42,6 +43,7 @@ export default function Navigation({
 }) {
   const isTab = useMediaQuery("(max-width: 1600px)");
   const { data } = useRatings("dc766148701f46debedb4f9cf3a18809");
+  const [projectReqData, setProjectReqData] = useAtom(projectReqDataAtom);
   const [currentBlock, setCurrentBlock] = useAtom(currentBlockAtom);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [isSticky, setIsSticky] = useAtom(stickyAtom);
@@ -157,7 +159,7 @@ export default function Navigation({
       key: "faq",
     },
     { condtion: SimilatListingAvl, key: "similarListing" },
-    { condtion: similarAvl, key: "similar-projects" },
+    { condtion: projectReqData.isNearby, key: "similar-projects" },
   ];
 
   return (
