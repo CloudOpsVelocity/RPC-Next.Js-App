@@ -1,7 +1,15 @@
+// Cache map to store responses for each pageType
+const pageTypeCache = new Map<string, any>();
+
 const getPagesSlugs = async (
   pageType: "builder-list" | "project-list" | "case-seo" | "listing-search-seo"
 ) => {
   try {
+    // Check if response is cached for this pageType
+    if (pageTypeCache.has(pageType)) {
+      return pageTypeCache.get(pageType);
+    }
+
     let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/common/${pageType}`;
     const res = await fetch(url, {
       method: "POST",
@@ -9,17 +17,19 @@ const getPagesSlugs = async (
     });
     const data = await res.json();
 
+    let result;
     if (pageType === "listing-search-seo") {
-      if (data.status) {
-        return data.urlMap;
-      } else {
-        return {};
-      }
+      result = data.status ? data.urlMap : {};
+    } else if (pageType === "project-list") {
+      result = data;
+    } else {
+      result = data;
     }
-    if (pageType === "project-list") {
-      return data;
-    }
-    return data;
+
+    // Cache the result
+    pageTypeCache.set(pageType, result);
+    return result;
+
   } catch (error) {
     console.log(error);
   }

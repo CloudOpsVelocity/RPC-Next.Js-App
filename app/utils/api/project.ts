@@ -8,9 +8,9 @@ import { groupUnitsById } from "@/app/(new_routes_seo)/utils/new-seo-routes/proj
 const getProjectDetails = async (slug: string): Promise<MERGERPROJECT> => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/basicDetails?projIdEnc=${slug}`,
-    {
-      cache: "no-cache",
-    }
+    // {
+    //   cache: "no-cache",
+    // }
     
   );
   const data = await response.json();

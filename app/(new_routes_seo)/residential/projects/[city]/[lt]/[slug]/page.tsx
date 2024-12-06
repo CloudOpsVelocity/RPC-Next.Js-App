@@ -14,7 +14,7 @@ import { Metadata, ResolvingMetadata } from "next";
 type Props = {
   params: { city: string; lt: string; slug: string };
 };
-let metadataCache: {title?: string, description?: string} = {};
+// let metadataCache: {title?: string, description?: string} = {};
 export default async function Page({ params }: Props) {
   const { city, lt, slug: name } = params;
   const pathname = `${BASE_PATH_PROJECT_DETAILS}/${city}/${lt}/${name}`;
@@ -30,11 +30,11 @@ export default async function Page({ params }: Props) {
   ]);
 
   // Cache just the metadata
-  const data = projResponse.basicData;
-  metadataCache = {
-    title: `${data?.projectName} ${data.availableProperties?.join(" ")} for sale in ${data.localityName} ${data.cityName}`,
-    description: `${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`
-  };
+  // const data = projResponse.basicData;
+  // metadataCache = {
+  //   title: `${data?.projectName} ${data.availableProperties?.join(" ")} for sale in ${data.localityName} ${data.cityName}`,
+  //   description: `${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`
+  // };
 
   if(projResponse.basicData.projAuthorityId){
     const res = await getAuthorityNames(projResponse.basicData.projAuthorityId);
@@ -91,16 +91,13 @@ export async function generateMetadata(
   { params }: SeoProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  // Use cached metadata if available
-  if (metadataCache.title && metadataCache.description) {
-    return {
-      title: metadataCache.title,
-      description: metadataCache.description
-    };
-  }
+  const pathname = `${BASE_PATH_PROJECT_DETAILS}/${params.city}/${params.lt}/${params.slug}`;//`${BASE_PATH_PROJECT_DETAILS}/${city}/${lt}/${name}`;
+  const value = await findPathForProjectDetails(pathname);
+  const { PJ: slug } = await extractProjectParamsValues(value);
+  const { basicData: data } = await getProjectDetails(slug as string);
   return {
-    title: metadataCache.title,
-    description: metadataCache.description
+    title: `${data?.projectName} ${data.availableProperties?.join(" ")} for sale in ${data.localityName} ${data.cityName}`,
+    description: `${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`,
   }
 }
 

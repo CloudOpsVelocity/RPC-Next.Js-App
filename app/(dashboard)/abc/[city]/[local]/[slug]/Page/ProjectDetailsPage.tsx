@@ -24,6 +24,7 @@ const Specifications = dynamic(() => import("@/app/components/project/specificat
 const Banner = dynamic(() => import("@/app/components/project/banner"));
 import AboutBuilder from "@/app/components/project/aboutBuilder";
 import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
+import Head from "next/head";
 const FaqWithBg = dynamic(() => import("@/app/components/project/faq"));
 const NearByCarousel = dynamic(() => import("@/app/components/project/NearByCarousel"));
 const LoginPopup = dynamic(() => import("@/app/components/project/modals/LoginPop"));
@@ -69,36 +70,17 @@ export default async function ProjectsDetailsPage({
     const desc = `${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`
   return (
     <section className="w-full relative break-words ">
-      <meta
-        property="og:url" 
-        content={url}
-      />
-      <meta property="og:type" content="website" />
-      <meta
-        property="og:title"
-        content={title}
-      />
-      <meta
-        property="og:description"
-        content={desc}
-      />
-      <meta property="og:image" content={data.media?.coverImageUrl} />
-      {/* <!-- Twitter Meta Tags --> */}
+      <meta name="keywords" content={`${data.projectName}, ${data.localityName}, ${data.cityName}, real estate, property`} />
+      <meta name="robots" content="index, follow" />
+      <link rel="canonical" href={url} />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={desc} />
+      <meta property="og:image" content={data?.media?.coverImageUrl || ''} />
+      <meta property="og:url" content={url} />
       <meta name="twitter:card" content="summary_large_image" />
-      <meta property="twitter:domain" content="getrightproperty.com" />
-      <meta
-        property="twitter:url"
-        content={url}
-      />
-      <meta
-        name="twitter:title"
-        content={title}
-      />
-      <meta
-        name="twitter:description"
-        content={desc}
-      />
-      <meta name="twitter:image" content={data.media?.coverImageUrl} />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={desc} />
+      <meta name="twitter:image" content={data?.media?.coverImageUrl || ''} />
       <FAQJsonLdScript data={data} />
       <QAJsonLdScript data={data} />
       <PropertyJsonLdScript data={data} />
