@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
+import { Montserrat,Playball } from "next/font/google";
 import "./globals.css";
 import MantineTheme from "@/mantine.config";
 import { MantineProvider, ColorSchemeScript } from "@mantine/core";
@@ -11,7 +11,17 @@ import ReactQueryProvider from "./context/rquery";
 import Layout from "@/app/components/layouts/primary";
 import { Provider } from "jotai";
 
-const inter = Montserrat({ subsets: ["latin"] });
+const montserrat = Montserrat({
+  subsets: ['latin'], // Specify the subset you need
+  weight: ['200', '300', '400', '500', '600', '700', '800', '900'], // Include all weights for Montserrat
+  display: 'swap', // Same as the `display=swap` in Google Fonts
+});
+
+const playball = Playball({
+  subsets: ['latin'], // Specify the subset you need
+  weight: ['400'], // Required weight for Playball font
+  display: 'swap', // Same as the `display=swap` in Google Fonts
+});
 
 export const metadata: Metadata = {
   title: "Get Right Property",
@@ -30,7 +40,7 @@ export default function RootLayout({
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width, maximum-scale=1, user-scalable=no"
         /> */}
-   <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1,user-scalable=0,maximum-scale=1"/>
+   {/* <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1,user-scalable=0,maximum-scale=1"/> */}
         <link
           rel="apple-touch-icon"
           sizes="57x57"
@@ -98,28 +108,13 @@ export default function RootLayout({
         <link rel="manifest" href="/favicons/manifest.json" />
         <meta name="msapplication-TileColor" content="#ffffff" />
         <meta name="theme-color" content="#ffffff"/>
-        {
-
-        }
-        {/* <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-17JGNNST9D"
-        />
-        <script
-          type="text/javascript"
-          dangerouslySetInnerHTML={{
-            __html: ` window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-17JGNNST9D');`,
-          }}
-        /> */}
+       
       </head>
-      <GoogleTagManager gtmId="GTM-TGQ5TJV9"   />
+      <GoogleTagManager gtmId="GTM-TGQ5TJV9"    />
 
-      <body className={inter.className}>
+      <body className={`${montserrat.className}  `}>
         <MantineProvider theme={MantineTheme}>
-          <main>
+          <main >
             <SessionProvider>
               <ReactQueryProvider>
                 <Provider>
