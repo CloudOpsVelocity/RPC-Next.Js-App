@@ -20,7 +20,7 @@
 
   color: #303a42;
   font-feature-settings: "clig" off, "liga" off;
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-size: 28px;
   font-style: normal;
   font-weight: 700;
@@ -61,7 +61,7 @@
 .content {
   color: #303a42;
   font-feature-settings: "clig" off, "liga" off;
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-size: 28px;
   font-style: normal;
   font-weight: 400;

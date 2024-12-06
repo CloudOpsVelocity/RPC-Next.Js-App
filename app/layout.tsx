@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 import type { Metadata } from "next";
+
 import { Montserrat,Playball } from "next/font/google";
 import "./globals.css";
 import MantineTheme from "@/mantine.config";
@@ -10,18 +11,15 @@ import SessionProvider from "./context/session";
 import ReactQueryProvider from "./context/rquery";
 import Layout from "@/app/components/layouts/primary";
 import { Provider } from "jotai";
+import montserrat from "@/font";
 
-const montserrat = Montserrat({
-  subsets: ['latin'], // Specify the subset you need
-  weight: ['200', '300', '400', '500', '600', '700', '800', '900'], // Include all weights for Montserrat
-  display: 'swap', // Same as the `display=swap` in Google Fonts
-});
 
-const playball = Playball({
-  subsets: ['latin'], // Specify the subset you need
-  weight: ['400'], // Required weight for Playball font
-  display: 'swap', // Same as the `display=swap` in Google Fonts
-});
+
+// const playball = Playball({
+//   subsets: ['latin'], // Specify the subset you need
+//   weight: ['400'], // Required weight for Playball font
+//   display: 'swap', // Same as the `display=swap` in Google Fonts
+// });
 
 export const metadata: Metadata = {
   title: "Get Right Property",

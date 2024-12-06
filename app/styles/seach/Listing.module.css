@@ -3,7 +3,7 @@
   border-radius: 5px;
   border: 1px solid #0073c6;
   color: #0073c6;
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
@@ -24,7 +24,7 @@
   box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.1),
     0px 4px 10px 0px rgba(0, 0, 0, 0.05) inset;
   color: #00487c;
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-size: 20px;
   font-style: normal;
   font-weight: 600;

@@ -1,7 +1,7 @@
 .input {
   height: 40px !important;
   color: #212c33;
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -21,7 +21,7 @@
 .errorMsg {
   text-align: right;
   color: var(--Mandatory, #f00);
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-size: 14px;
   font-style: italic;
   font-weight: 500;
@@ -31,7 +31,7 @@
 .classForContact {
   height: 40px !important;
   color: #212c33;
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -47,7 +47,7 @@
 
 .classForContact::placeholder {
   color: #556477 !important;
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-size: 18px;
   font-weight: 500;
 }
@@ -55,7 +55,7 @@
 .classForContact::-ms-input-placeholder {
   /* Edge 12-18 */
   color: #556477 !important;
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
@@ -65,7 +65,7 @@
 .contectInput {
   height: 40px !important;
   color: #212c33;
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -91,7 +91,7 @@
 
 .label {
   color: #303a42;
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-size: 14px;
   font-style: normal;
   font-weight: 500;

@@ -8,7 +8,7 @@
 
 .option {
   color: #242424;
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -27,7 +27,7 @@
 .input {
   background-color: #f3f3f3;
   color: #242424;
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -36,7 +36,7 @@
 
 .input::placeholder {
   color: #242424 !important;
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -46,7 +46,7 @@
 .minMaxInput {
   background-color: #f3f3f3;
   color: #242424;
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -56,7 +56,7 @@
 
 .minMaxInput::placeholder {
   color: #242424 !important;
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-size: 14px;
   font-style: normal;
   font-weight: 500;

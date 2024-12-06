@@ -18,7 +18,7 @@
 
 .input {
   color: #242424;
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-size: 15px;
   font-style: normal;
   font-weight: 500;
@@ -33,7 +33,7 @@
 }
 .input::placeholder {
   color: #242424;
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -46,7 +46,7 @@
 }
 .label {
   color: #242424;
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-size: 15px;
   font-style: normal;
   font-weight: 600;
@@ -79,7 +79,7 @@
 
 .labelByBhk {
   color: #001f35;
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
@@ -102,7 +102,7 @@
 @media screen and (max-width: 601px) {
   .labelByBhk {
     color: #001f35;
-    font-family: Montserrat;
+    /* font-family: Montserrat; */
     font-size: 14px;
     font-style: normal;
     font-weight: 500;

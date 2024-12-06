@@ -39,7 +39,7 @@
 .errorMsg {
   text-align: right;
   color: var(--Mandatory, #f00);
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-size: 14px;
   font-style: italic;
   font-weight: 500;
@@ -85,7 +85,7 @@
 .steplabelCommonForAll {
   color: black;
   text-align: center;
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
@@ -98,7 +98,7 @@
 .stepLabelActive {
   color: var(--Brand-green-primary, #148b16) !important;
   text-align: center !important;
-  font-family: Montserrat !important;
+  /* font-family: Montserrat !important; */
   font-size: 12px !important;
   font-weight: bold !important;
 }
@@ -106,7 +106,7 @@
 .stepLabelDone {
   color: var(--Brand-green-primary, #148b16) !important;
   text-align: center !important;
-  font-family: Montserrat !important;
+  /* font-family: Montserrat !important; */
   font-size: 12px !important;
   font-weight: 500 !important;
 }
@@ -114,7 +114,7 @@
 .steplabel {
   color: var(--Black-2, #333);
   text-align: center;
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-size: 12px;
   font-style: normal;
   font-weight: 600;
@@ -124,7 +124,7 @@
 .textInput,
 .mangingDrCust {
   color: var(--Black-2, #333);
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-size: 16px;
   font-weight: 500;
   opacity: 1;
@@ -138,7 +138,7 @@
 .cityPincodeCust::placeholder,
 .mangingDrCust::placeholder {
   color: #556477 !important;
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-size: 18px;
   font-weight: 500;
   text-transform: capitalize;
@@ -148,7 +148,7 @@
 .mangingDrCust::-ms-input-placeholder {
   /* Edge 12-18 */
   color: #556477 !important;
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
@@ -171,7 +171,7 @@
 .textAreaInput,
 .mangingDrCust {
   color: var(--Black-2, #333);
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-size: 16px;
   font-weight: 500;
   opacity: 1;
@@ -181,7 +181,7 @@
 }
 .textAreaInput::placeholder {
   color: #556477 !important;
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-size: 18px;
   font-weight: 500;
 }
@@ -189,7 +189,7 @@
 .textAreaInput::-ms-input-placeholder {
   /* Edge 12-18 */
   color: #556477 !important;
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
@@ -197,7 +197,7 @@
 }
 .custlabelOfNum {
   color: #242424;
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
@@ -225,11 +225,13 @@
   }
   .textInput {
     height: 49px;
+    /* font-family: Montserrat; */
   }
   .textInput::placeholder,
   .cityPincodeCust::placeholder,
   .mangingDrCust::placeholder {
     font-size: 16px;
+    /* font-family: Montserrat; */
   }
   .custlabelOfNum {
     font-size: 16px;
@@ -252,7 +254,7 @@
   }
   .textAreaInput::placeholder {
     color: #556477 !important;
-    font-family: Montserrat;
+    /* font-family: Montserrat; */
     font-size: 14px;
     font-weight: 500;
   }
@@ -290,6 +292,7 @@
   .textInput::placeholder,
   .NumberInput::placeholder {
     font-size: 15px;
+    /* font-family: Montserrat; */
   }
 
   .mangingDrCust::placeholder {
@@ -315,9 +318,11 @@
 
   .textInput {
     font-size: 14px;
+    /* font-family: Montserrat; */
   }
   .textInput:focus{
     font-size: 16px;
+    /* font-family: Montserrat; */
   }
   /* .content{
     margin-top: 28px !important;

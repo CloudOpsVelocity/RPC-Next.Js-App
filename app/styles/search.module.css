@@ -6,7 +6,7 @@
   border-radius: 46px !important;
   background: #0073c6 !important;
   color: #fff;
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -19,7 +19,7 @@
   background: #cbe9ff;
   box-shadow: 0px 4px 20px 0px rgba(112, 144, 176, 0.08);
   color: #202020;
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
@@ -51,7 +51,7 @@
 .button {
   color: var(--Field-colour-stroke, #282828);
   font-feature-settings: "clig" off, "liga" off;
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-size: 14px;
   font-style: normal;
   font-weight: 500;

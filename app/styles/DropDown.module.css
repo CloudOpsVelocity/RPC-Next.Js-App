@@ -23,7 +23,7 @@
 .itemLabel {
   color: #505050;
   font-feature-settings: 'liga' off, 'clig' off;
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-size: 18px;
   font-style: normal;
   font-weight: 400;

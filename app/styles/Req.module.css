@@ -22,7 +22,7 @@
 .textInput {
   height: 40px !important;
   color: #212c33;
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -38,7 +38,7 @@
 }
 .textInput::placeholder {
   color: #212c33 !important;
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -49,7 +49,7 @@
 .textInput::-ms-input-placeholder {
   /* Edge 12-18 */
   color: #212c33;
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -59,7 +59,7 @@
 
 .error {
   color: #f00;
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-size: 12px;
   font-style: italic;
   font-weight: 500;
@@ -76,7 +76,7 @@
 
 .input::placeholder {
   color: #212c33 !important;
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -92,7 +92,7 @@
 
 .numInput::placeholder {
   color: #212c33 !important;
-  font-family: Montserrat;
+  /* font-family: Montserrat; */
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
