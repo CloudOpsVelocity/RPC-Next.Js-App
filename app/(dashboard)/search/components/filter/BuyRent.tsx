@@ -19,6 +19,7 @@ export default function BuyRent() {
         ...prev,
         bugdetValue: [0, 100000],
         cg: "R",
+        listedBy:"ALL"
       }));
       handleAppliedFilters();
     } else {
