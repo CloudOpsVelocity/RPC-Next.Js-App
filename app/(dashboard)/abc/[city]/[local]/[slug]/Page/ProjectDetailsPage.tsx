@@ -63,7 +63,7 @@ export default async function ProjectsDetailsPage({
 }: Props) {
   const { basicData: data, nearByLocations, phaseOverview } = projResponse;
   const refURls = data?.sourceBuilderUrl?.split(",");
-  const url = `${BASE_PATH_PROJECT_DETAILS}/${data.cityName}/${data.localityName}/${params.slug}`
+  const url = `${BASE_PATH_PROJECT_DETAILS}/${params.city}/${params.lt}/${params.slug}`
   const title = `${data?.projectName} ${
       data.availableProperties && data?.availableProperties?.join(" ")
     } for sale in ${data.localityName} ${data.cityName}`
