@@ -67,6 +67,7 @@ export default async function ProjectsDetailsPage({
   const title = `${data?.projectName} ${
       data.availableProperties && data?.availableProperties?.join(" ")
     } for sale in ${data.localityName} ${data.cityName}`
+    const imageUrl = data?.media?.coverImageUrl.split(",")[0]
     const desc = `${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`
   return (
     <section className="w-full relative break-words ">
@@ -75,12 +76,12 @@ export default async function ProjectsDetailsPage({
       <link rel="canonical" href={url} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={desc} />
-      <meta property="og:image" content={data?.media?.coverImageUrl || ''} />
+      <meta property="og:image" content={imageUrl || ''} />
       <meta property="og:url" content={url} />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={desc} />
-      <meta name="twitter:image" content={data?.media?.coverImageUrl || ''} />
+      <meta name="twitter:image" content={imageUrl || ''} />
       <FAQJsonLdScript data={data} />
       <QAJsonLdScript data={data} />
       <PropertyJsonLdScript data={data} />
