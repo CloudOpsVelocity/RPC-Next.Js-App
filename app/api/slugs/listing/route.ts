@@ -8,9 +8,8 @@ const getFilePath = () =>
   path.join(process.cwd(), "static", "listingSlugs.json");
 
 export async function POST(request: Request) {
-
-  let  body = await request.json();
-  const { slug, id, action, slugs } = body
+  let body = await request.json();
+  const { slug, id, action, slugs } = body;
   logger.info(`POST request received at ${request.url}`, body);
   if (!action) {
     logger.error(`POST ${request.url}: Missing action parameter in request`);
@@ -34,7 +33,9 @@ export async function POST(request: Request) {
   switch (action) {
     case "create": {
       if (!slugs) {
-        logger.error(`POST ${request.url}: Missing slugs data in create action`);
+        logger.error(
+          `POST ${request.url}: Missing slugs data in create action`
+        );
         return NextResponse.json(
           { error: "data is required" },
           { status: 400 }
@@ -62,12 +63,16 @@ export async function POST(request: Request) {
       }
       // Handle errors if any slugs were invalid or already existed
       if (errors.length > 0) {
-        logger.error(`POST ${request.url}: Multiple errors occurred: ${errors.join(", ")}`);
+        logger.error(
+          `POST ${request.url}: Multiple errors occurred: ${errors.join(", ")}`
+        );
         return NextResponse.json({ error: errors.join(", ") }, { status: 400 });
       }
       // Write the updated data back to the file
       fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
-      logger.info(`POST ${request.url}: Successfully created new listing(s)`, { slugs });
+      logger.info(`POST ${request.url}: Successfully created new listing(s)`, {
+        slugs,
+      });
       return NextResponse.json(
         { message: `Listing(s) created successfully`, slugs },
         { status: 201 }
@@ -75,7 +80,9 @@ export async function POST(request: Request) {
     }
     case "update": {
       if (!id || !slugs || typeof slugs !== "object" || Array.isArray(slugs)) {
-        logger.error(`POST ${request.url}: Missing or invalid parameters in update action`);
+        logger.error(
+          `POST ${request.url}: Missing or invalid parameters in update action`
+        );
         return NextResponse.json(
           { error: "Missing or invalid parameters" },
           { status: 400 }
@@ -125,7 +132,9 @@ export async function POST(request: Request) {
     }
     case "delete": {
       if (!id) {
-        logger.error(`POST ${request.url}: Missing id parameter in delete action`);
+        logger.error(
+          `POST ${request.url}: Missing id parameter in delete action`
+        );
         return NextResponse.json(
           { error: "Missing id parameter" },
           { status: 400 }
@@ -167,10 +176,41 @@ export async function POST(request: Request) {
   }
 }
 
-export async function GET(request: Request) {
-  logger.info(`GET request received at ${request.url}`);
-  const filePath =  path.join(process.cwd(), "static", `listingSlugs.json`);
-  logger.info(`GET ${request.url}: Reading listingSlugs.json file`);
-  const data = fs.readFileSync(filePath, "utf-8");
-  return NextResponse.json(JSON.parse(data), { status: 200 });
+export async function PUT(request: Request) {
+  let body = await request.json();
+  const { slugs } = body;
+  logger.info(`PUT request received at ${request.url}`, body);
+
+  if (!slugs || typeof slugs !== "object") {
+    logger.error(`PUT ${request.url}: Missing or invalid slugs data`);
+    return NextResponse.json(
+      { error: "Slugs data is required and must be an object" },
+      { status: 400 }
+    );
+  }
+
+  const filePath = getFilePath();
+
+  // Ensure the file exists
+  if (!fs.existsSync(filePath)) {
+    logger.info(`PUT ${request.url}: Creating new listingSlugs.json file`);
+    fs.writeFileSync(filePath, JSON.stringify({}));
+  }
+
+  const fileContent = fs.readFileSync(filePath, "utf-8");
+  const data = JSON.parse(fileContent);
+
+  // Update existing slugs
+  Object.keys(slugs).forEach((key) => {
+    data[key] = slugs[key];
+    revalidatePath(key);
+  });
+
+  fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+  logger.info(`PUT ${request.url}: Successfully updated listing slugs`);
+
+  return NextResponse.json(
+    { message: "Listing slugs updated successfully" },
+    { status: 200 }
+  );
 }

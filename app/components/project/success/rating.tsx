@@ -69,7 +69,7 @@ export const RatingForm = ({
   formSubmit,
   isSubmitted,
   mutate,
-  projIdEnc
+  projIdEnc,
 }: any) => {
   const form = useFormContext();
   const data = useDynamicProj(projIdEnc);
@@ -90,15 +90,16 @@ export const RatingForm = ({
               symbolBody: S.star,
             }}
             emptySymbol={
-              <IconSun className="w-[45px] h-[45px]  sm:w-[50px] sm:h-[50px]  xl:w-[70px] xl:h-[70px]" />
+              <IconSun  className="w-[45px] h-[45px]  sm:w-[50px] sm:h-[50px]  xl:w-[70px] xl:h-[70px]" />
             }
             fullSymbol={
-              <RatingStar
+              <IconSun
                 fill="#FFD600"
                 className="w-[45px] h-[45px] sm:w-[50px] sm:h-[50px]  xl:w-[70px] xl:h-[70px]"
               />
             }
-            {...form.getInputProps("rating")}
+            onChange={(value) => form.setFieldValue("rating", value)}
+            value={form.values.rating}
           />
 
           <p className="text-[#F00] text-[12px] xl:text-xl italic font-normal leading-[23.784px] mt-5">
