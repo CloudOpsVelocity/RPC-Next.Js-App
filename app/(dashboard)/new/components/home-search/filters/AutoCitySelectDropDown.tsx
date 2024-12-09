@@ -188,7 +188,7 @@ export default function AutoCitySelectDropdown({
         </span>
         {selectedCity || DefaultCity?.data?.city ? (
           <FaLocationDot
-            className="h-4 w-4 sm:h-5 sm:w-5 text-blue-500"
+            className=" min-w-5 h-4 w-4 sm:h-5 sm:w-5 text-blue-500"
             aria-hidden="true"
           />
         ) : (
