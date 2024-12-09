@@ -222,15 +222,19 @@ Props) {
         ),
       });
       const filtertedFloor = projectUnitsData.filter(
-        (floor: any) => floor.width == width && floor.length == length
+        (floor: any) => (floor.width == width && floor.length == length)
+  
       );
+      
       setSelectedFloor({
         ...filtertedFloor[0],
         floorPlanUrl: filtertedFloor[0]?.floorPlanUrl ?? ImgNotAvail,
       });
+      setFloorsArray(filtertedFloor)
       open("floor");
       return;
     }
+ 
     const filteredFloors = projectUnitsData.filter(
       (floor: any) => floor.bhkName == selectedBhk.bhkName
     );

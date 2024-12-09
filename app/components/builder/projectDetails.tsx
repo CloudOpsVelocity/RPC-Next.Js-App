@@ -37,7 +37,7 @@ export default function ProjectDetails({
         <div className="w-[30%] border-solid border-[#92B2C8] border-r-[1px]">
           <div className="flex justify-between items-center w-[90%] ">
             <span className=" text-[#202020]text-[16px]  sm:text-[20px] lg:text-[24px] font-[600]">
-              {newProject}
+              {newProject??0}
             </span>
             {newLaunchProjIconSvg}
           </div>
@@ -50,7 +50,7 @@ export default function ProjectDetails({
         <div className="w-[30%] border-solid border-[#92B2C8] border-r-[1px]">
           <div className="flex justify-between items-center w-[90%] ">
             <span className=" text-[#202020]text-[16px]  sm:text-[20px] lg:text-[24px] font-[600]">
-              {onGoingProject}
+              {onGoingProject??0}
             </span>
             {onGoingProjIconSvg}
           </div>
@@ -63,7 +63,7 @@ export default function ProjectDetails({
         <div className="w-[30%] ">
           <div className="flex justify-between items-center w-[90%] ">
             <span className=" text-[#202020]text-[16px]  sm:text-[20px] lg:text-[24px] font-[600]">
-              {completedProject}
+              {completedProject??0}
             </span>
             {completedProjIconSvg}
           </div>
