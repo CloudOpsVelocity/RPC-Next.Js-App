@@ -34,10 +34,9 @@ export default async function Page({ params: { city, slug } }: Props) {
   // new cahnge
   const pathname = `/builders/${city}/${slug}`;
   const id = await getBuilderSlug(pathname);
-  if (!id) {
-    notFound();
-  }
-  const data = await getBuilderDetailsPageData(id.split("_")[1], pathname);
+  console.log(id)
+  if (!id) return notFound();
+  const data = await getBuilderDetailsPageData(id?.split("_")[1], pathname);
   return (
     <BuilderPage
       data={{
@@ -47,7 +46,7 @@ export default async function Page({ params: { city, slug } }: Props) {
           builderCity: city,
         },
       }}
-      id={id.split("_")[1]}
+      id={id?.split("_")[1]}
     />
   );
 }
@@ -71,15 +70,15 @@ interface SeoProps {
     slug:string
   }
 }
-export async function generateMetadata(
-  { params }: SeoProps,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
-  const pathname = `/builders/${params.city}/${params.slug}`;
-  const id = await getBuilderSlug(pathname);
-  const data = await getBuilderDetailsPageData(id.split("_")[1], pathname);
-  return {
-    title: `${data.data.userName} | Top Real Estate Developer in ${data.data.cityName} | Properties in ${data.data.localityName}`,
-    description: `Explore ${data.data.userName} - A leading real estate developer in ${data.data.cityName}. Browse through their residential and commercial projects in ${data.data.localityName} and discover your dream property.`,
-  }
-}
+// export async function generateMetadata(
+//   { params }: SeoProps,
+//   parent: ResolvingMetadata
+// ): Promise<Metadata> {
+//   const pathname = `/builders/${params.city}/${params.slug}`;
+//   const id = await getBuilderSlug(pathname);
+//   const data = await getBuilderDetailsPageData(id?.split("_")[1], pathname);
+//   return {
+//     title: `${data.data.userName} | Top Real Estate Developer in ${data.data.cityName} | Properties in ${data.data.localityName}`,
+//     description: `Explore ${data.data.userName} - A leading real estate developer in ${data.data.cityName}. Browse through their residential and commercial projects in ${data.data.localityName} and discover your dream property.`,
+//   }
+// }
