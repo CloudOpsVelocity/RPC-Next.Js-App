@@ -156,7 +156,18 @@ export default function Overview({
           />
 
           {phases?.length == 1 && (
+            <>
             <ProjBasicDetails
+                Id="promoter-name"
+                key="promoter-name"
+                icon={<TotalLandArea />}
+                title="Promoter Name"
+                value={
+                  PhaseOverview[0]?.phasePromoter
+                }
+                  className="mr-[5%] sm:mr-[3%] xl:mr-[5%] pt-[2%] mb-[3%] sm:mb-[1.5%] xl:mb-[3%]  "
+              />
+              <ProjBasicDetails
               Id={TOPIC_IDS.RERA_STATUS}
               key="rerastatus"
               icon={<ReraStatusProj />}
@@ -164,6 +175,8 @@ export default function Overview({
               value={PhaseOverview[0]?.rerastatus}
               className="mr-[5%] sm:mr-[3%] xl:mr-[5%] pt-[2%] mb-[3%] sm:mb-[1.5%] xl:mb-[3%]  "
             />
+            </>
+           
           )}
 
           {phases?.length == 1 &&
