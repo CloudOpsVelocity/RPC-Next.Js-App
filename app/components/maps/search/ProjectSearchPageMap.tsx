@@ -24,7 +24,7 @@ const Map = ({ data, lat, lang, type }: any) => {
     <>
       <MapContainer
         center={position}
-        className="h-[250px] sm:h-full max-h-[250px] w-full sm:max-w-[700px] sm:max-h-[600px] xl:max-h-[740px] xl:max-w-full  sm:min-h-[700px]  -z-[1]"
+        className="h-[250px] sm:h-full max-h-[250px] w-full sm:max-w-[700px] sm:max-h-[560px] xl:max-h-[740px] xl:max-w-full  xl:min-h-[700px]  -z-[1]"
         scrollWheelZoom
         zoom={12}
       >

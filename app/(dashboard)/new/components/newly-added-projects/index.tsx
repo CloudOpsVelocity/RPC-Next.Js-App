@@ -35,6 +35,7 @@ export default function NewAddedProjects({ data, shortIds, cityId }: Props) {
         <MainHeading
           title="Featured Projects"
           content="Premier Real Estate Projects Awaiting You"
+          url="/search"
         />
 
         <CardCarousel

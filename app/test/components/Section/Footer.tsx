@@ -89,7 +89,7 @@ export default function EnhancedFooter() {
       ],
       hrefs: [
         "/",
-        "/projects",
+        "/residential/projects",
         "/properties",
         "/post-your-project",
         "/post-your-listing",

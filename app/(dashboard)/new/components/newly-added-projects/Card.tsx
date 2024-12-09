@@ -66,9 +66,7 @@ export default function Card({ item }: Props) {
                   />
                   <ShareBtn url={url} type="proj" />
                 </div>{" "}
-                {item.projName && item.projName.length > 20
-                  ? `${item.projName.slice(0, 20)}...`
-                  : item.projName}
+                {item.projName}
               </div>
 
               <p className="text-white text-[16px] xl:text-[18px] not-italic font-bold leading-[normal] tracking-[0.52px] mt-[8px] text-nowrap">

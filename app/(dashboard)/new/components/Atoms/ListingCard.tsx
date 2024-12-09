@@ -78,7 +78,7 @@ export default function ListingCard({ item, sl }: Props) {
           <div className="space-y-1  ">
             <p className="text-[#242424] min-h-[40px] sm:xl-min-h-[50px] xl:min-h-[56px] text-[12px] sm:text-[14px] xl:text-lg not-italic font-semibold leading-[normal] capitalize">
               {item.propTypeName === "Plot" &&
-                `${formatNumberWithSuffix(item.pa)} sq.ft`}{" "}
+                `${formatNumberWithSuffix(item.pa,false)} sq.ft`}{" "}
               {item.bhkName} {item.propTypeName} for {item.category} in{" "}
               {item.localityName}
             </p>
