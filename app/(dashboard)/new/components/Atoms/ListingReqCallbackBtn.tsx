@@ -30,7 +30,7 @@ export default function ListingReqBtn({
   };
   return (
     <Button
-      className="inline-flex justify-center mt-2 items-center gap-2.5 rounded border p-1 xl:p-2 border-solid border-[#0073C6] bg-[#0073c6] text-white text-[12px] xl:text-sm not-italic font-bold leading-[normal] capitalize  z-[1000]"
+      className="inline-flex justify-center mt-2 items-center gap-2.5 rounded border p-1 xl:p-2 border-solid border-[#0073C6] bg-[#0073c6] text-white text-[12px] xl:text-sm not-italic font-bold leading-[normal] capitalize  "/* z-[1000] */
       onClick={handleOpen}
     >
       Request Callback
