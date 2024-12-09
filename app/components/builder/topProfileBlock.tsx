@@ -24,11 +24,11 @@ export default function TopProfileBlock({
             Home
           </a>
           {" > "}
-          <Link href={"/builders"} className="hover:underline cursor-pointer">
+          <Link href={"/builders"} target="_blank" className="hover:underline cursor-pointer">
             Builders
           </Link>
           {" > "}
-          <Link
+          <Link target="_blank"
             href={`/builders/${builderCity}`}
             className="hover:underline cursor-pointer capitalize"
           >

@@ -53,11 +53,13 @@ export function BasicMultiSelect() {
       value={item.value}
       key={item.value}
       active={f.bhk.includes(item.value)}
+
     >
       <Group gap="sm">
         <Checkbox
           checked={f.bhk.includes(item.value)}
-          onChange={() => dispatch({ type: "ADD_BHK", payload: item.value })}
+          onSelect={() => dispatch({ type: "ADD_BHK", payload: item.value })}
+          // onChange={() => dispatch({ type: "ADD_BHK", payload: item.value })}
           color="green"
         />
         <span>{item.title}</span>
@@ -122,7 +124,7 @@ export function BasicMultiSelect() {
         </PillsInput>
       </Combobox.DropdownTarget>
 
-      <Combobox.Dropdown>
+      <Combobox.Dropdown >
         <Combobox.Options>{options}</Combobox.Options>
       </Combobox.Dropdown>
     </Combobox>

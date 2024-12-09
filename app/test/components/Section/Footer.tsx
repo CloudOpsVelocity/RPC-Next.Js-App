@@ -46,7 +46,7 @@ export default function EnhancedFooter() {
       ],
       hrefs: [
         "/residential-projects/for-sale",
-        "/residential-projects/for-rent",
+        "/residential-projects/for-rent?listedBy=ALL",
         "/search?projStatus=108",
         "/search?projStatus=106",
         "/search?projStatus=107",
@@ -89,8 +89,8 @@ export default function EnhancedFooter() {
       ],
       hrefs: [
         "/",
-        "/residential/projects",
-        "/properties",
+        "/search",
+        "/search/listing",
         "/post-your-project",
         "/post-your-listing",
         "/builders",

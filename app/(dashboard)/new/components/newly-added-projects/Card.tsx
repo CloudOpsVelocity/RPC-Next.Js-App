@@ -27,6 +27,7 @@ export default function Card({ item }: Props) {
   let urlBuilder = `${process.env.NEXT_PUBLIC_BACKEND_URL}/builders/bengaluru/${builderName}`;
 
   const builderiRedirect = (e: any) => {
+    e.preventDefault();
     e.stopPropagation();
     window.open(urlBuilder, "_blank");
   };
