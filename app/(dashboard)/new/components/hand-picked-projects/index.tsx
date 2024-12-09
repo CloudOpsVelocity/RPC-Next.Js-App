@@ -49,7 +49,7 @@ return  isLoading ? (
                 url={url}
               />
               <a
-                className="text-[#0073C6] text-nowrap  text-[14px] sm:text-[18px] xl:text-[20px] not-italic font-bold leading-[normal]"
+                className="hidden  xl:block text-[#0073C6] text-nowrap  text-[14px] sm:text-[18px] xl:text-[20px] not-italic font-bold leading-[normal]"
                 href={url}
                 target="_blank"
               >
@@ -58,7 +58,17 @@ return  isLoading ? (
             </div>
     
             <div className=" w-full flex flex-col xl:flex-row justify-start items-start mt-2 xl:mt-10 flex-nowrap sm:gap-6 ">
-              <SideTabs active={active} setActive={setActive} />
+              <div  className=" w-full flex flex-row justify-between  items-end  xl:hidden ">
+                <SideTabs className="" active={active} setActive={setActive} />
+                <a
+                  className="  text-[#0073C6] text-nowrap  text-[14px] sm:text-[18px] xl:text-[20px] not-italic font-bold leading-[normal]"
+                  href={url}
+                  target="_blank"
+                >
+                  View all
+                </a>
+              </div>
+              <SideTabs className={"hidden xl:block"} active={active} setActive={setActive} />
     
               <div className=" max-w-[600px] sm:max-w-full xl:max-w-[1590px] mt-[16px] sm:mt-0 ">
                 <CardCarousel

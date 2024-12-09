@@ -5,11 +5,12 @@ import Card from "./Card";
 type Props = {
   active: number;
   setActive: React.Dispatch<React.SetStateAction<number>>;
+  className:string
 };
 
-export default function SideTabs({ active, setActive }: Props) {
+export default function SideTabs({ active, setActive , className}: Props) {
   return (
-    <div>
+    <div className={className}>
       {config.data.map((item, index) => (
         <Card
           key={item.lablel}

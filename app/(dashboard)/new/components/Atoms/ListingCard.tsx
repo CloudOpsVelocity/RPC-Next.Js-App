@@ -50,7 +50,7 @@ export default function ListingCard({ item, sl }: Props) {
         </div>
 
         <button
-          className="inline-flex justify-center items-center gap-2.5 rounded border p-1 xl:p-2 border-solid border-[#0073C6] bg-[#0073c6] text-white text-[12px] xl:text-sm not-italic font-bold leading-[normal] capitalize absolute bottom-2 right-2 sm:bottom-3 sm:right-3 z-[1000]"
+          className="inline-flex justify-center items-center gap-2.5 rounded border p-1 xl:p-2 border-solid border-[#0073C6] bg-[#0073c6] text-white text-[12px] xl:text-sm not-italic font-bold leading-[normal] capitalize absolute bottom-2 right-2 sm:bottom-3 sm:right-3 " /* z-[1000] */
         >
           View Details
         </button>

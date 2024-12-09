@@ -30,10 +30,11 @@ export default function Card({ item }: Props) {
     e.preventDefault();
     e.stopPropagation();
     window.open(urlBuilder, "_blank");
+ 
   };
 
   return (
-    <div className="w-[316px] sm:w-[508px] xl:w-[631px] h-[326px] sm:h-[294px] xl:h-[368px] shrink-0 relative">
+    <div className="w-[316px] sm:w-[503px] xl:w-[631px] h-[326px] sm:h-[294px] xl:h-[368px] shrink-0 relative">
       <ProjectLink
         routeParams={{
           city: item.city,
@@ -57,7 +58,7 @@ export default function Card({ item }: Props) {
 
           {/*  <p className="text-green-600">{item.rerastatus}</p> */}
 
-          <div className="absolute right-0 top-0 w-full sm:w-[560px] h-full p-[12px] shrink-0 bg-gradient-to-t sm:bg-gradient-to-l from-[#00121F] via-[rgba(59,70,98,0.86)] to-[#565d700a] text-right flex flex-col justify-end sm:justify-between">
+          <div className="absolute right-0 top-0 w-full sm:w-[503xpx] h-full p-[12px] shrink-0 bg-gradient-to-t sm:bg-gradient-to-l from-[#00121F] via-[rgba(59,70,98,0.86)] to-[#565d700a] text-right flex flex-col justify-end sm:justify-between">
             <div>
               <div className="text-white text-[16px] xl:text-[18px] not-italic font-extrabold leading-[normal] tracking-[0.64px] flex justify-end items-center">
                 <div className="absolute  sm:static top-[10px] sm:top-5 right-1  inline-flex  gap-3 mr-2 sm:mr-6">
