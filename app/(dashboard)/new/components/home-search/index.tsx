@@ -17,6 +17,7 @@ import { SelectedHeartIcon } from "@/app/images/HomePageIcons";
 import RecentSearches from "./recentSearch/RecentSearches";
 import AutoCitySelectDropDown from "./filters/AutoCitySelectDropDown";
 import { CityData } from "../../search";
+import ShortListed from "./shortListed";
 
 const HomeSearch = ({
   count,
@@ -47,7 +48,8 @@ const HomeSearch = ({
     >
       <Alert />
       {/* shortlisted */}
-      {count ? (
+      <ShortListed/>
+     {/*  {count ? (
         <a
           href="/your-profile"
           target="_blank"
@@ -59,7 +61,7 @@ const HomeSearch = ({
             <SelectedHeartIcon />
           </div>
         </a>
-      ) : null}
+      ) : null} */}
       <div className=" items-center justify-center hidden xl:flex min-w-[200px] sm:max-w-[299px] xl:max-w-[499px] h-full">
         <Image
           src={"/home/home-search.svg"}

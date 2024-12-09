@@ -43,7 +43,7 @@ export default function Box({ item }: Props) {
               .trim();
             url =
               `propTypes=${data.PT}${
-                data.BH ? "&unitTypes=${data.BH}" : ""
+                data.BH ? `&unitTypes=${data.BH}` : ""
               }&cg=${data.CG}&localities=${localityName}` +
               "%2B" +
               encodeURIComponent(data.LT);
@@ -78,7 +78,7 @@ export default function Box({ item }: Props) {
                 apiData.stringId.split("_")[0]
               }${
                 apiData.type !== "BuilderProject"
-                  ? "&listedBy=${AgentOwnerBuilderMap.get(apiData.type)}"
+                  ? `&listedBy=${AgentOwnerBuilderMap.get(apiData.type)}`
                   : ""
               }`
             );

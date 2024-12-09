@@ -183,7 +183,7 @@ export default function AutoCitySelectDropdown({
         aria-haspopup="listbox"
         aria-expanded={isOpen}
       >
-        <span className="text-gray-700 font-medium truncate text-xs sm:text-base text-nowrap">
+        <span className="text-gray-700 font-medium  text-xs sm:text-base text-nowrap">
           {selectedCity?.name || DefaultCity?.data?.city || "Select City"}
         </span>
         {selectedCity || DefaultCity?.data?.city ? (
