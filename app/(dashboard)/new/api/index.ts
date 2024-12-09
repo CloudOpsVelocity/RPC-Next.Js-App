@@ -1,7 +1,7 @@
 import { options } from "@/app/options";
 import { getServerSession } from "next-auth";
 
-export const getData = async (city?:number|string,coordinates?:any) => {
+export const getData = async (city?: number | string, coordinates?: any) => {
   let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/home/page/project`;
   if (coordinates) {
     url = `${url}?lt=${coordinates.lt}&la=${coordinates.la}`;
@@ -17,7 +17,10 @@ export const getData = async (city?:number|string,coordinates?:any) => {
   return data;
 };
 
-export const getHomeListingData = async (city?:number|string,coordinates?:any) => {
+export const getHomeListingData = async (
+  city?: number | string,
+  coordinates?: any
+) => {
   let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/home/page/listing`;
   if (coordinates) {
     url = `${url}?lat=${coordinates.lt}&lng=${coordinates.la}`;

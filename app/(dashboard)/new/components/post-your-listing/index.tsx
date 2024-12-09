@@ -21,7 +21,7 @@ export default function PostYourListing({}: Props) {
         <p className="text-[12px] text-[#242424] sm:text-[16px] xl:text-[24px] not-italic mt-[18px] mb-[18px] font-medium sm:leading-[30px] tracking-[0.96px] sm:mb-[18px]">
           Your listings deserves the spotlight. Add it to our platform today!
         </p>
-        <Btn text="Property" />
+        <Btn text="" />
       </div>
       <div>
         <Image

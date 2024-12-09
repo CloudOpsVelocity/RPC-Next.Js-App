@@ -22,12 +22,6 @@ import { getUserCity } from "./(new_routes_seo)/utils/new-seo-routes/home.api";
 import { cookies, headers } from "next/headers";
 import { decryptData } from "./utils/auth/nodeCrypto";
 export default async function Page() {
-  // const ip = headers().get("x-forwarded-for") || headers().get("cf-connecting-ip") || "";
-
-  // const cityData = await getUserCity({
-  //   cityName: 'Bengaluru',
-  //   cityId: '9',
-  // },ip);
   const cityData = {
     data: {
       city: "Bengaluru",

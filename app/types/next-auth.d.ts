@@ -10,6 +10,7 @@ declare module "next-auth" {
       email: string;
       isActive: "Y" | "N";
       userType: "I" | "A" | "B";
+      token: string;
     };
   }
 }

@@ -1,10 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useState } from "react";
-import Searchbar from "./searchbar";
-import Button from "@/app/components/atoms/buttons/variansts";
 import Tabs from "./tabs";
-import Box from "./recentSearch/Box";
 import Alert from "./Alert";
 import QuickFilters from "./filters/QuickFilters";
 import Nearme from "./Nearme";
@@ -48,20 +45,22 @@ const HomeSearch = ({
     >
       <Alert />
       {/* shortlisted */}
-      <ShortListed/>
-     {/*  {count ? (
+      {/* <ShortListed /> */}
+      {count ? (
         <a
           href="/your-profile"
           target="_blank"
           className="inline-flex items-center gap-[5px] rounded shadow-[0px_4px_20px_0px_rgba(0,0,0,0.40)] sm:p-1 xl:p-2 border-[0.5px] border-solid border-[#2D4657] bg-[#1a2733] fixed bottom-10 right-5 sm:text-sm xl:text-xl z-[1000]"
         >
-          <span className="hidden sm:block text-white font-bold">Shortlisted</span>{" "}
+          <span className="hidden sm:block text-white font-bold">
+            Shortlisted
+          </span>{" "}
           <div className="flex justify-center items-center rounded-sm border-[0.5px] border-solid border-[#4A7091] bg-[#2d4657] px-1 gap-1 text-white sm:text-sm xl:text-xl not-italic font-bold">
             <p>{count}</p>
             <SelectedHeartIcon />
           </div>
         </a>
-      ) : null} */}
+      ) : null}
       <div className=" items-center justify-center hidden xl:flex min-w-[200px] sm:max-w-[299px] xl:max-w-[499px] h-full">
         <Image
           src={"/home/home-search.svg"}
@@ -77,11 +76,6 @@ const HomeSearch = ({
           <p className="inline-flex sm:hidden justify-center items-center text-[#242424] text-[14px] not-italic font-medium gap-1">
             {config.homeIcon} All Residential
           </p>
-
-          {/* <p className=" flex justify-center items-center gap-[4px] sm:hidden text-[#0073C6] text-[12px] not-italic font-[700] mb-[5px] leading-[normal] capitalize">
-            {f.city?.split("+")[0]}
-          </p> */}
-
           <div className="flex items-center gap-2.5 rounded shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] px-1.5 py-1 border-[0.5px] border-solid border-[#819CA9] bg-white w-full">
             <div className="hidden sm:flex items-center gap-[5px] rounded p-2 border-r-[0.5px] border-r-gray-400 border-solid text-[#242424] xl:text-[14px] not-italic font-medium text-[12px]">
               {config.homeIcon}{" "}
