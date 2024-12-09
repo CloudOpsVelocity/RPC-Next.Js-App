@@ -27,10 +27,8 @@ type Props = {
   };
 };
 
-export default async function Page({
-  params,
-}: Props) {
-  const { bhk_unit_type, cg, city, lt, project, phase } = params
+export default async function Page({ params }: Props) {
+  const { bhk_unit_type, cg, city, lt, project, phase } = params;
   const pathname = `${BASE_PATH_PROJECT_LISTING}/${cg}/${city}/${lt}/${project}${
     phase ? `/${phase}` : ""
   }/${bhk_unit_type}`;
@@ -38,9 +36,15 @@ export default async function Page({
   const values = await findPathForProjectListing(pathname);
   if (!values) return notFound();
   const filtersValues = extractListingParamsValues(values);
-  if (filtersValues.count === 8) {
+  const isProjectListing =
+    filtersValues.PT == "32" ? 7 : filtersValues.count === 8;
+  if (isProjectListing) {
     serverData = await getSearchData(
-      `bhk=${filtersValues.BH}&propType=${filtersValues.PT}&localities=${filtersValues.LT}&cg=${filtersValues.CG}&projIdEnc=${filtersValues.PJ}`
+      `${filtersValues.BH ? `bhk=${filtersValues.BH}&` : ""}propType=${
+        filtersValues.PT
+      }&localities=${filtersValues.LT}&cg=${filtersValues.CG}&projIdEnc=${
+        filtersValues.PJ
+      }`
     );
   } else {
     const {
@@ -54,7 +58,7 @@ export default async function Page({
       getReportConstData(),
       getAmenties(),
     ]);
-    if(projData?.projAuthorityId){
+    if (projData?.projAuthorityId) {
       const res = await getAuthorityNames(projData.projAuthorityId);
       data.projAuthorityNames = res;
     }
@@ -72,7 +76,7 @@ export default async function Page({
       totalPrice,
     };
   }
-const isProjectListing = filtersValues.PT == "32" ? 7 : filtersValues.count === 8 
+
   return filtersValues.count === isProjectListing ? (
     <ListingSearchPage
       serverData={serverData}

@@ -1,6 +1,8 @@
+import { homeSearchFiltersAtom } from "@/app/store/home";
 import { extractApiValues } from "@/app/utils/dyanamic/projects";
 import { truncateText } from "@/app/utils/letters";
 import { Tooltip } from "@mantine/core";
+import { useAtom } from "jotai";
 import React from "react";
 
 type Props = {
@@ -8,6 +10,7 @@ type Props = {
 };
 
 export default function Box({ item }: Props) {
+  const [filters, dispatch] = useAtom(homeSearchFiltersAtom);
   const handlePush = async (type: string, apiData: any) => {
     const AgentOwnerBuilderMap = new Map([
       ["BuilderAgentListing", "A"],
@@ -74,9 +77,9 @@ export default function Box({ item }: Props) {
               "%2B" +
               encodeURIComponent(apiData.stringId.split("_")[1]);
             window.open(
-              `/search?builderIds=${url}&city=${
-                apiData.stringId.split("_")[0]
-              }${
+              `/search?builderIds=${url}&city=${encodeURIComponent(
+                filters?.city ?? ""
+              )}${
                 apiData.type !== "BuilderProject"
                   ? `&listedBy=${AgentOwnerBuilderMap.get(apiData.type)}`
                   : ""

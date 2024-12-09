@@ -66,78 +66,80 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
   }, [selected, map]);
 
   useEffect(() => {
-    if (data && data.length > 0) {
+    if (data && data?.length > 0) {
       const bounds = L.latLngBounds(
         data.map((item: any) => [parseFloat(item.lat), parseFloat(item.lang)])
       );
       map.fitBounds(bounds);
     }
   }, [data, map]);
+  return (
+    data &&
+    data?.map((item: any) => {
+      const isProp = !!item?.propIdEnc;
+      const itemId = isProp ? item.propIdEnc : item.projIdEnc;
+      const itemPropType = isProp ? item?.propTypeName : item?.propType;
 
-  return data?.map((item: any) => {
-    const isProp = !!item?.propIdEnc;
-    const itemId = isProp ? item.propIdEnc : item.projIdEnc;
-    const itemPropType = isProp ? item?.propTypeName : item?.propType;
+      // Group phases if it's a project
+      const phases = !isProp
+        ? {
+            [item.phaseName]: {
+              phaseName: item.phaseName,
+              propertyTypes: [
+                {
+                  propType: item.propType,
+                  minPrice: item.minPrice,
+                  maxPrice: item.maxPrice,
+                },
+              ],
+            },
+          }
+        : null;
 
-    // Group phases if it's a project
-    const phases = !isProp
-      ? {
-          [item.phaseName]: {
-            phaseName: item.phaseName,
-            propertyTypes: [
-              {
-                propType: item.propType,
-                minPrice: item.minPrice,
-                maxPrice: item.maxPrice,
-              },
-            ],
-          },
-        }
-      : null;
-
-    return (
-      <Marker
-        key={itemId}
-        position={[parseFloat(item?.lat || 0), parseFloat(item?.lang || 0)]}
-        icon={isMobile ? MobileIcon : MapIcon}
-        eventHandlers={{
-          click: () => {
-            setSelectedValue({
-              projOrPropName: isProp ? item.propTypeName : item.projName,
-              lat: item.lat,
-              lang: item.lang,
-              type: isProp ? "prop" : "proj",
-              reqId: itemId,
-              propType: itemPropType,
-            });
-          },
-        }}
-      >
-        <Tooltip
-          key={"tooltip_" + itemId + (selected?.reqId ?? "")}
-          opacity={1}
-          permanent={selected?.reqId === itemId}
-          direction="top"
-          offset={[10, -35]}
-          className={`${isProp ? "min-w-fit" : "min-w-[400px]"} !p-0`}
-          sticky
+      return (
+        <Marker
+          key={itemId}
+          position={[parseFloat(item?.lat || 0), parseFloat(item?.lang || 0)]}
+          icon={isMobile ? MobileIcon : MapIcon}
+          eventHandlers={{
+            click: () => {
+              setSelectedValue({
+                projOrPropName: isProp ? item.propTypeName : item.projName,
+                lat: item.lat,
+                lang: item.lang,
+                type: isProp ? "prop" : "proj",
+                reqId: itemId,
+                propType: itemPropType,
+              });
+            },
+          }}
         >
-          {!isProp ? (
-            <TooltipProj
-              data={{
-                projName: item.projName,
-                city: item.city,
-                state: item.state,
-                locality: item.locality,
-                builderName: item.builderName,
-                phases: Object.values(phases || {}),
-              }}
-            />
-          ) : (
-            <TooltipProp data={item} />
-          )}
-        </Tooltip>
-      </Marker>
-    );
-  });
+          <Tooltip
+            key={"tooltip_" + itemId + (selected?.reqId ?? "")}
+            opacity={1}
+            permanent={selected?.reqId === itemId}
+            direction="top"
+            offset={[10, -35]}
+            className={`${isProp ? "min-w-fit" : "min-w-[400px]"} !p-0`}
+            sticky
+          >
+            {!isProp ? (
+              <TooltipProj
+                data={{
+                  projName: item.projName,
+                  city: item.city,
+                  state: item.state,
+                  locality: item.locality,
+                  builderName: item.builderName,
+                  phases: Object.values(phases || {}),
+                }}
+              />
+            ) : (
+              <TooltipProp data={item} />
+            )}
+          </Tooltip>
+        </Marker>
+      );
+    })
+  );
 };
