@@ -34,8 +34,8 @@ export default async function Page({ params }: Props) {
   if (!value) {
     notFound();
   }
+ 
   const pdata = extractListingParamsValues(value);
-  
   if (!pdata) {
     notFound();
   }
