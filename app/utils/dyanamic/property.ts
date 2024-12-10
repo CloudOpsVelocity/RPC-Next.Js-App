@@ -17,7 +17,7 @@ function createPropertyString(data: Main): string {
     } | Area. ${formatNumberWithSuffix(data.plotArea,false)} sq.ft`;
   } else if (data.propTypeName === config.propTypeNames[5]) {
     return  `${data.propName} | ${data.bhkName} | ${
-      data.cg === "R" ? `At Floor ${data.atFloor}` : `Floor ${data.totalFloor}`
+      data.cg === "R" ? `At Floor ${data.atFloor === 0 ? "G" : data.atFloor}` : `Floor ${data.totalFloor}`
     } | House No. ${data.unitNumber} | ${
       data.facingName
     } | Area: ${formatNumberWithSuffix(data.sba,false)} sq.ft`;

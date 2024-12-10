@@ -69,7 +69,7 @@ export default function PropertyOverviewBanner({
           <div className="grid place-items-center md:block">
             <p className="text-[#212C33] sm:text-[24px] xl:text-[34px] font-[600]  md:text-start text-center">
               {" Total "}
-              {cg === "S" ? "Selling" : "Rent"} Price <span className="sm:text-[16px] xl:text-[24px]">(Including Other Charges)</span>
+              {cg === "S" ? "Selling" : "Rent"} Price {otherPrice?.otherCharge&&<span className="sm:text-[16px] xl:text-[24px]">(Including Other Charges)</span>}
             </p>
             <p className="text-[#001F35] sm:text-[24px]  xl:text-[36px] whitespace-nowrap font-[700] mt-1">
               <span className="text-[#001F35] sm:text-[24px]  xl:text-[36px] whitespace-nowrap font-[700] mt-1">

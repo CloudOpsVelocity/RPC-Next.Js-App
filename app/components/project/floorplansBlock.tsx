@@ -275,7 +275,7 @@ Props) {
   const rowVirtualizer = useVirtualizer({
     count: projectUnitsData?.length || 0,
     getScrollElement: () => parentRef.current,
-    estimateSize: () => isMobile ? 200 : 180,
+    estimateSize: () => isMobile ? 290 : 180,
     overscan: isMobile ? 9 : 5,
   });
   useEffect(() => {
@@ -481,7 +481,7 @@ Props) {
 
             <div
               className={clsx(
-                "h-[500px] sm:h-[600px] md:h-[547px] w-full rounded-[14px] mt-[2%] sm:border-solid sm:border-[1px] sm:border-[#92B2C8] bg-[#FFF]  flex flex-col-reverse md:flex-row justify-center  ",
+                "h-[500px] sm:h-[600px] md:h-[547px] w-full rounded-[14px] mt-[2%] sm:border-solid sm:border-[1px] sm:border-[#92B2C8] bg-[#FFF]  flex flex-col-reverse md:flex-row justify-center h-[550px]  ",
                 floorPlanType === "bhk" && "h-[550px]"
               )}
               onClick={handleContainerClick}

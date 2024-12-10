@@ -133,10 +133,11 @@ export default function Navigation({
   }
   const conditionsArray = [
     { condtion: true, key: "overview" },
-    { condtion: true, key: "about" },
+    
     { condtion: true, key: "propertyDetails" },
     { condtion: true, key: "floorPlans" },
     { condtion: true, key: "gallery" },
+    { condtion: detailsData?.usp!="", key: "about" },
     {
       condtion: detailsData?.amenities?.length > 0,
       key: "amenities",
@@ -166,7 +167,7 @@ export default function Navigation({
     <div
       className={clsx(
         "flex justify-center items-center shadow-lg w-full",
-        isSticky && "fixed top-[70px] bg-white shadow-md z-[10]"
+        isSticky && "fixed top-[70px] bg-white shadow-md z-40"
       )}
     >
       {leftScroll > 0 && (
@@ -180,7 +181,7 @@ export default function Navigation({
         />
       )}
       <div
-        className="h-[64px] scroll-smooth w-[100%] bg-[#FCFCFC] shadow-sm flex justify-start items-center scrollbar-hide overflow-x-auto lg:px-14"
+        className="h-[64px] scroll-smooth w-[100%] bg-[#FCFCFC] shadow-sm flex justify-start items-center scrollbar-hide overflow-x-auto lg:px-14 z-30"
         ref={scrollContainerRef}
       >
         {topics.map((topic) => {

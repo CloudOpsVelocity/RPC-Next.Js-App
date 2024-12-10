@@ -82,10 +82,10 @@ export default function ReportModal({slug}:{slug:string}) {
             <>
               {" "}
               <header className="flex  flex-col items-center gap-[8px] text-center pt-3 mb-2">
-                <p className="text-[#242424] text-center font-[Montserrat] text-[18px] sm:text-[22px] not-italic font-medium leading-[normal]">
+                <p className="text-[#242424] text-center  text-[18px] sm:text-[22px] not-italic font-medium leading-[normal]">
                   Report Issues for Project
                 </p>
-                <p className="text-[#148B16] font-[Montserrat] text-xs sm:text-[18px] not-italic font-medium leading-[normal]">
+                <p className="text-[#148B16]  text-xs sm:text-[18px] not-italic font-medium leading-[normal]">
                   Let us know your feedback this will allow us to serve you better!
                 </p>
               </header>
