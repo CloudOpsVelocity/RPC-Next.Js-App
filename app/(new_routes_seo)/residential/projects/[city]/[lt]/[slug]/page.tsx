@@ -1,7 +1,11 @@
 import React from "react";
 import path from "path";
 import fs from "fs";
-import { getAmenties, getAuthorityNames, getProjectDetails } from "@/app/utils/api/project";
+import {
+  getAmenties,
+  getAuthorityNames,
+  getProjectDetails,
+} from "@/app/utils/api/project";
 import { notFound } from "next/navigation";
 import ProjectsDetailsPage from "@/app/(dashboard)/abc/[city]/[local]/[slug]/Page/ProjectDetailsPage";
 import { getPagesSlugs } from "@/app/seo/api";
@@ -36,7 +40,7 @@ export default async function Page({ params }: Props) {
   //   description: `${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`
   // };
 
-  if(projResponse.basicData.projAuthorityId){
+  if (projResponse.basicData.projAuthorityId) {
     const res = await getAuthorityNames(projResponse.basicData.projAuthorityId);
     projResponse = {
       ...projResponse,
@@ -44,7 +48,7 @@ export default async function Page({ params }: Props) {
         ...projResponse.basicData,
         projAuthorityNames: res,
       },
-    }
+    };
   }
   return (
     <ProjectsDetailsPage
@@ -91,15 +95,17 @@ export async function generateMetadata(
   { params }: SeoProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const pathname = `${BASE_PATH_PROJECT_DETAILS}/${params.city}/${params.lt}/${params.slug}`;//`${BASE_PATH_PROJECT_DETAILS}/${city}/${lt}/${name}`;
+  const pathname = `${BASE_PATH_PROJECT_DETAILS}/${params.city}/${params.lt}/${params.slug}`; //`${BASE_PATH_PROJECT_DETAILS}/${city}/${lt}/${name}`;
   const value = await findPathForProjectDetails(pathname);
   const { PJ: slug } = await extractProjectParamsValues(value);
   const { basicData: data } = await getProjectDetails(slug as string);
   return {
-    title: `${data?.projectName} ${data.availableProperties?.join(" ")} for sale in ${data.localityName} ${data.cityName}`,
+    title: `${data?.projectName} ${data.availableProperties?.join(
+      " "
+    )} for sale in ${data.localityName} ${data.cityName}`,
     description: `${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`,
-  }
+  };
 }
 
 export const dynamicParams = true;
-export const dynamic = "force-static";
+// export const dynamic = "force-static";

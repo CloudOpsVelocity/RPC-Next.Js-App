@@ -25,7 +25,7 @@ export default function GalleryBlock({
   const images = getImageUrls(media);
   const [selectedMedia, setSelectedMedia] = useState<string | null>(images[0]);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const videos = [walkThrowVideoUrl, projectVideoIUrl, media.videoUrl].filter(
+  const videos = [walkThrowVideoUrl, projectVideoIUrl, media?.videoUrl].filter(
     (video) => video !== "" && video !== undefined
   );
 
@@ -44,7 +44,7 @@ export default function GalleryBlock({
 
   const isMobile = useMediaQuery(`(max-width: 750px)`);
   // const [, { open }] = useGallery();
-  const [galleryState,dispatch] = useAtom(galleryStateAtom)
+  const [galleryState, dispatch] = useAtom(galleryStateAtom);
   const handleMediaClick = (media: string, index: number) => {
     // if (isMobile) {
     //   const isVideo = videos.includes(media);
@@ -116,50 +116,60 @@ export default function GalleryBlock({
                 />
               ) : (
                 <div className=" min-h-[220px]  max-h-[250px] sm:max-h-[400px] xl:max-h-[450px]">
-                <picture>
-                  <source media="(max-width: 460px)" srcSet={selectedMedia.split(',')[1]} />
-                  <source media="(max-width: 800px)" srcSet={selectedMedia.split(',')[2]} />
-                  {/* <source media="(min-width: 1200px)" srcSet={selectedMedia.split(',')[3]} /> */}
-                  <Image
-                    src={selectedMedia.split(',')[2]}
-                    alt="Preview"
-                    className="cursor-pointer object-contain  "
-                    onClick={() => {
-                      dispatch({
-                        type:"OPEN",
-                        payload:{
-                          items:images,
-                          mediaType:"image", 
-                          title:"Project Gallery",
-                          activeIndex: images.indexOf(selectedMedia)
-                        }
-                      })
-                    }}
-                    width={799}
-                    height={400}
-                    // sizes="(max-width: 460px) 460px, (max-width: 800px) 800px, 799px"
-                    // fill
-                    unoptimized
-                  />
-                </picture>
+                  <picture>
+                    <source
+                      media="(max-width: 460px)"
+                      srcSet={selectedMedia.split(",")[1]}
+                    />
+                    <source
+                      media="(max-width: 800px)"
+                      srcSet={selectedMedia.split(",")[2]}
+                    />
+                    {/* <source media="(min-width: 1200px)" srcSet={selectedMedia.split(',')[3]} /> */}
+                    <Image
+                      src={selectedMedia.split(",")[2]}
+                      alt="Preview"
+                      className="cursor-pointer object-contain  "
+                      onClick={() => {
+                        dispatch({
+                          type: "OPEN",
+                          payload: {
+                            items: images,
+                            mediaType: "image",
+                            title: "Project Gallery",
+                            activeIndex: images.indexOf(selectedMedia),
+                          },
+                        });
+                      }}
+                      width={799}
+                      height={400}
+                      // sizes="(max-width: 460px) 460px, (max-width: 800px) 800px, 799px"
+                      // fill
+                      unoptimized
+                    />
+                  </picture>
                 </div>
               )}
               <button
-                onClick={() => 
-                  {
-                    const isVideo = selectedMedia.includes(".mp4") || selectedMedia.includes("youtube");
-                    dispatch({
-                  type:"OPEN",
-                  payload:{
-                    items:isVideo ? videos : images,
-                    mediaType:isVideo ? "video" :  "image",
-                    title: isVideo ? "Project Video" : "Project Gallery",
-                    activeIndex:isVideo ? videos.indexOf(selectedMedia) : images.indexOf(selectedMedia)
-                  }
-                })}}
+                onClick={() => {
+                  const isVideo =
+                    selectedMedia.includes(".mp4") ||
+                    selectedMedia.includes("youtube");
+                  dispatch({
+                    type: "OPEN",
+                    payload: {
+                      items: isVideo ? videos : images,
+                      mediaType: isVideo ? "video" : "image",
+                      title: isVideo ? "Project Video" : "Project Gallery",
+                      activeIndex: isVideo
+                        ? videos.indexOf(selectedMedia)
+                        : images.indexOf(selectedMedia),
+                    },
+                  });
+                }}
                 className="absolute bottom-7 sm:bottom-3 right-1 xl:right-3 z-[6] "
               >
-                <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] " /> 
+                <PopupOpenSvg className="w-[24px] h-[24px] lg:w-[33px] lg:h-[33px] " />
               </button>
               {/* <Gallery
                 selectedMedia={selectedMedia}
@@ -184,9 +194,12 @@ export default function GalleryBlock({
           </h3>
           <div className="flex justify-start items-start w-full gap-[4%] flex-wrap relative">
             {images?.map((img, ind) => (
-              <div className="relative w-[110px] min-w-[90px] sm:min-w-[120px] xl:w-[152px] h-[68px] lg:h-[94px] mb-[4%]"      key={`gallery_block_${ind}`}>
+              <div
+                className="relative w-[110px] min-w-[90px] sm:min-w-[120px] xl:w-[152px] h-[68px] lg:h-[94px] mb-[4%]"
+                key={`gallery_block_${ind}`}
+              >
                 <Image
-                  src={img.split(',')[1] as string}
+                  src={img.split(",")[1] as string}
                   alt={`${projName} ${AltText(img)}`}
                   className={clsx(
                     `!rounded-[5px] shadow-md cursor-pointer object-cover border border-gray-300`,
@@ -208,7 +221,7 @@ export default function GalleryBlock({
               <div className="flex justify-start items-start w-full gap-[4%] flex-wrap ">
                 {videos?.map((img, ind) => (
                   <div
-                  key={`gallery_block_vide_${ind}`}
+                    key={`gallery_block_vide_${ind}`}
                     className={`relative w-[110px] lg:w-[152px] flex justify-center items-center h-[68px] md:h-[94px]  bg-white rounded-[5px]  mb-[4%] cursor-pointer
                       ${
                         selectedMedia === img

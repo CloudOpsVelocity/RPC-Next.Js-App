@@ -6,7 +6,7 @@ import ProjectSearchPage from "@/app/(dashboard)/search/Page/ProjectSearchPage";
 type Props = {
   params: { city: string; lt: string };
 };
-
+export const dynamic = "force-dynamic";
 export default async function Page({ params: { city, lt } }: Props) {
   const serverData = await getSearchData();
   return <ProjectSearchPage serverData={serverData} />;
@@ -16,7 +16,7 @@ export async function generateStaticParams() {
   const res = await getPagesSlugs("project-list");
   const keys = Object.keys(res);
   const slugs = keys.map((data) => {
-    const [staticPath, staticPath2, city] = data.split("/");
+    const [staticPath, staticPath2, sta3, city] = data.split("/");
     return { city };
   });
   return slugs;
@@ -40,5 +40,3 @@ const getSearchData = async (): Promise<any> => {
     return null;
   }
 };
-
-export const dynamic = "force-dynamic";

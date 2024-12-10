@@ -1,9 +1,5 @@
 // utils/new_routes_seo/generateSlugs.ts
-import { 
-  
-  getServerSideSitemap
-
- } from 'next-sitemap'
+import { getServerSideSitemap } from "next-sitemap";
 import { getPagesSlugs } from "@/app/seo/api";
 import path from "path";
 import fs from "fs";
@@ -96,7 +92,8 @@ export const extractListingParamsValues = (input: string) => {
   const result: { [key: string]: string | number } = {};
 
   // Split the input into segments based on the underscore "_"
-  const segments = input.split("_");
+
+  const segments = input?.split("_");
 
   // Initialize count
   let propertyCount = 0;

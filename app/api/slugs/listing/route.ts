@@ -90,7 +90,7 @@ export async function POST(request: Request) {
       }
       // Find and delete existing slugs with the same id
       Object.keys(data).forEach((key) => {
-        if (data[key].includes(id)) {
+        if (key.split("-").at(-1) === id) {
           delete data[key];
           revalidatePath(key);
           logger.info(`POST ${request.url}: Deleted existing slug: ${key}`);
@@ -143,7 +143,7 @@ export async function POST(request: Request) {
       let deleted = false; // Track whether a deletion occurs
       // Loop over keys and delete the ones that contain the id
       Object.keys(data).forEach((key) => {
-        if (data[key].includes(id)) {
+        if (key.split("-").at(-1) === id) {
           delete data[key];
           revalidatePath(key); // Revalidate path after deletion
           logger.info(`POST ${request.url}: Deleted slug: ${key}`);
@@ -213,4 +213,11 @@ export async function PUT(request: Request) {
     { message: "Listing slugs updated successfully" },
     { status: 200 }
   );
+}
+
+export async function GET(request: Request) {
+  const filePath = getFilePath();
+  const fileContent = fs.readFileSync(filePath, "utf-8");
+  const data = JSON.parse(fileContent);
+  return NextResponse.json(data, { status: 200 });
 }

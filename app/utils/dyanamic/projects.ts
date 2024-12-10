@@ -1,7 +1,6 @@
 import { projectprops } from "@/app/data/projectDetails";
 
 export function setPropertyValues(data: any, propCgId: number): any {
-  
   let updatedValues: any = {
     ...(data?.facingName !== "Don't Know" && { facingName: data?.facingName }),
     bhkName: data?.bhkName,
@@ -70,7 +69,7 @@ export function setPropertyValues(data: any, propCgId: number): any {
         parkingArea: data?.parkingArea,
         ...(data?.terraceArea &&
           data?.terraceArea !== "null" && { terraceArea: data?.terraceArea }),
-        plotArea: data?.plotArea.toString(),
+        ...(data?.plotArea && { plotArea: data?.plotArea.toString() }),
         ...(data?.parkingArea != "None" &&
           data?.parkingArea && { parkingArea: data?.parkingArea }),
       };
@@ -96,7 +95,7 @@ export function setPropertyValues(data: any, propCgId: number): any {
           }),
         ...(data?.terraceArea &&
           data?.terraceArea !== "null" && { terraceArea: data?.terraceArea }),
-        plotArea: data?.plotArea.toString(),
+        ...(data?.plotArea && { plotArea: data?.plotArea.toString() }),
       };
     case projectprops.plot:
       return {
@@ -145,7 +144,7 @@ export const extractApiValues = (input: string) => {
   const result: { [key: string]: string | number } = {};
 
   // Split the input into segments based on the underscore "_"
-  const segments = input.split("_");
+  const segments = input?.split("_");
 
   // Initialize count
   let propertyCount = 0;

@@ -34,7 +34,7 @@ type CardProps = {
   id?: string;
 };
 
-export function ProjectCard({ type, cardData, mutate, ct,id }: CardProps) {
+export function ProjectCard({ type, cardData, mutate, ct, id }: CardProps) {
   const [, { open }] = useReqCallPopup();
   const { data: session } = useSession();
   const { toggleShortlist } = useShortlistAndCompare();
@@ -49,18 +49,20 @@ export function ProjectCard({ type, cardData, mutate, ct,id }: CardProps) {
     });
   };
   const onAddingShortList = (e: any, projId: string) => {
+    e.stopPropagation();
     e.preventDefault();
     if (session) {
       handleShortlist(projId);
     } else {
-      openS(() => handleShortlist(projId),{
-        type:id,
-        action:projId
+      openS(() => handleShortlist(projId), {
+        type: id,
+        action: projId,
       });
     }
   };
 
   const handleReqCall = (e: any) => {
+    e.stopPropagation();
     e.preventDefault();
     open({
       modal_type: "PROJECT_REQ_CALLBACK",
@@ -89,9 +91,7 @@ export function ProjectCard({ type, cardData, mutate, ct,id }: CardProps) {
       >
         {type == "proj" && (
           <div className=" space-y-1.5 p-6  px-4 pt-2 pb-3 justify-between items-center">
-            <div
-              className="tracking-tight sm:text-[18px] font-[600] line-clamp-2 text-wrap min-w-0 text-[#242424] cursor-pointer"
-            >
+            <div className="tracking-tight sm:text-[18px] font-[600] line-clamp-2 text-wrap min-w-0 text-[#242424] cursor-pointer">
               {cardData.projName}
             </div>
             <div className="text-xs font-semibold  ">
@@ -120,7 +120,6 @@ export function ProjectCard({ type, cardData, mutate, ct,id }: CardProps) {
           </div>
         )}
 
-
         <div className="px-3 pb-3">
           {type != "proj" && (
             <p className="mb-[-30px] relative z-10 p-[2px] text-[#148B16] text-[14px] font-[700] w-[40%] flex pl-[4px] justify-center items-center bg-gradient-to-r from-[#EFF5FF] /0 to-[#F2FAFF]/100 shadow-md rounded-[18px] border-[#92B2C8] border-[0.5px] border-solid ">
@@ -129,24 +128,24 @@ export function ProjectCard({ type, cardData, mutate, ct,id }: CardProps) {
                 : "Under Construction"}
             </p>
           )}
-          
+
           <div className="relative  max-h-[300px]">
             <div className="mb-4 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] object-cover min-h-[212px] max-h-[300px] relative">
-            <Image
-              src={
-                type === "proj"
-                  ? cardData.coverUrl.split(',')[1]
-                  : cardData.projMedia.coverImageUrl.split(',')[1]
-              }
-              alt="Sobha Dream Acres"
-              className="w-full    "
-              // width={300}
-              // height={212}
-              unoptimized
-              fill
-            />
+              <Image
+                src={
+                  type === "proj"
+                    ? cardData.coverUrl.split(",")[1]
+                    : cardData.projMedia.coverImageUrl.split(",")[1]
+                }
+                alt="Sobha Dream Acres"
+                className="w-full    "
+                // width={300}
+                // height={212}
+                unoptimized
+                fill
+              />
             </div>
-           
+
             {type == "proj" &&
               (cardData.rerastatus === "Recieved" ||
                 cardData.rerastatus === "Applied") && (
@@ -278,13 +277,13 @@ const ProjectCarousel = ({
           data={data}
           renderItem={(project: any, index) => (
             <ProjectCard
-                    key={`proj_${project?.projIdEnc}`}
-                    type={type}
-                    cardData={project}
-                    mutate={mutate}
-                    ct={ct ?? "builder"}
-                    id={id}
-                  />
+              key={`proj_${project?.projIdEnc}`}
+              type={type}
+              cardData={project}
+              mutate={mutate}
+              ct={ct ?? "builder"}
+              id={id}
+            />
           )}
           slidesToShow={4}
           gap={10}

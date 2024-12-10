@@ -56,7 +56,7 @@ function PFloorPlanModal({
          
             <div className="flex justify-center items-center gap-5">
                {
-              data.projMedia.floorPlanUrl && (
+              data?.projMedia?.floorPlanUrl && (
                 <>
                 <button
                   onClick={() => handleDownload(data.projMedia.floorPlanUrl)}

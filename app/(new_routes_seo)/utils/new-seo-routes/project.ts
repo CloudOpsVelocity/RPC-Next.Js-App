@@ -4,7 +4,7 @@ export const extractProjectParamsValues = (input: string) => {
   const result: { [key: string]: string | number } = {};
 
   // Split the input into segments based on the underscore "_"
-  const segments = input.split("_");
+  const segments = input?.split("_");
 
   // Initialize count
   let propertyCount = 0;
