@@ -1,63 +1,158 @@
 import { getPagesSlugs } from "@/app/seo/api";
 import { NextResponse } from "next/server";
-export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const type = searchParams.get("type");
-  console.log(type);
-  let response: {
-    builderRoutes: string[];
-    listingRoutes: string[];
-    projectRoutes: string[];
-  } = {
-    builderRoutes: [],
-    listingRoutes: [],
-    projectRoutes: [],
+
+interface ErrorResponse {
+  notFoundRoutes: string[];
+  errorRoutes: string[];
+}
+
+const BATCH_SIZE = 25; // Increased batch size for better throughput
+const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "";
+
+// Function to process a batch of URLs with optimized error handling
+async function checkUrlBatch(urls: { url: string; path: string }[]) {
+  const results = await Promise.allSettled(
+    urls.map(({ url, path }) =>
+      fetch(url, { cache: "no-cache" })
+        .then((res) => {
+          if (res.status === 404) return { path, type: "notFound" };
+          if (res.status >= 500) return { path, type: "error" };
+          return null;
+        })
+        .catch(() => ({ path, type: "error" }))
+    )
+  );
+
+  return results.map((result) =>
+    result.status === "fulfilled" ? result.value : null
+  );
+}
+
+// Optimized function to remove unique ID from listing path
+function getBaseListingPath(path: string): string {
+  return path.split("/").pop() || "";
+}
+
+// Generator function to process paths in chunks
+async function* processPathsInChunks(paths: string[], batchSize: number) {
+  for (let i = 0; i < paths.length; i += batchSize) {
+    const batch = paths.slice(i, i + batchSize).map((path) => ({
+      url: `${BASE_URL}${path}`,
+      path,
+    }));
+    yield await checkUrlBatch(batch);
+  }
+}
+
+// Optimized function to process listing paths
+async function processListingPaths(paths: string[]) {
+  const response: ErrorResponse = { notFoundRoutes: [], errorRoutes: [] };
+  const basePathsSet = new Set(paths.map(getBaseListingPath));
+
+  for await (const results of processPathsInChunks(paths, BATCH_SIZE)) {
+    for (const result of results) {
+      if (!result) continue;
+      if (result.type === "notFound") {
+        response.notFoundRoutes.push(result.path);
+      } else {
+        response.errorRoutes.push(result.path);
+      }
+    }
+  }
+
+  return {
+    originalCount: paths.length,
+    uniqueCount: basePathsSet.size,
+    notFoundCount: response.notFoundRoutes.length,
+    errorCount: response.errorRoutes.length,
+    ...response,
   };
-  switch (type) {
-    case "B":
-      {
-        // Read all slug files
+}
+
+// Optimized function to process project paths
+async function processProjectPaths(paths: string[]) {
+  const response: ErrorResponse = { notFoundRoutes: [], errorRoutes: [] };
+  const uniquePathsSet = new Set(
+    paths.map((path) => path.split("/").slice(0, 6).join("/"))
+  );
+  const uniquePaths = Array.from(uniquePathsSet);
+
+  for await (const results of processPathsInChunks(uniquePaths, BATCH_SIZE)) {
+    for (const result of results) {
+      if (!result) continue;
+      if (result.type === "notFound") {
+        response.notFoundRoutes.push(result.path);
+      } else {
+        response.errorRoutes.push(result.path);
+      }
+    }
+  }
+
+  return {
+    originalCount: paths.length,
+    uniqueCount: uniquePaths.length,
+    notFoundCount: response.notFoundRoutes.length,
+    errorCount: response.errorRoutes.length,
+    ...response,
+  };
+}
+
+// Optimized function to process generic paths
+async function processPaths(paths: string[]) {
+  const response: ErrorResponse = { notFoundRoutes: [], errorRoutes: [] };
+
+  for await (const results of processPathsInChunks(paths, BATCH_SIZE)) {
+    for (const result of results) {
+      if (!result) continue;
+      if (result.type === "notFound") {
+        response.notFoundRoutes.push(result.path);
+      } else {
+        response.errorRoutes.push(result.path);
+      }
+    }
+  }
+
+  return {
+    originalCount: paths.length,
+    uniqueCount: paths.length,
+    notFoundCount: response.notFoundRoutes.length,
+    errorCount: response.errorRoutes.length,
+    ...response,
+  };
+}
+
+// API Handler with optimized error handling
+export async function GET(request: Request) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const type = searchParams.get("type");
+
+    switch (type) {
+      case "B": {
         const builderSlugs = await getPagesSlugs("builder-list");
         const builderPaths = Object.keys(builderSlugs);
-        for (const path of builderPaths) {
-          const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}${path}`;
-          const res = await fetch(url, {
-            cache: "no-cache",
-          });
-          if (res.status === 404) {
-            response.builderRoutes.push(path);
-          }
-        }
+        return NextResponse.json(await processPaths(builderPaths));
       }
-      return NextResponse.json(response);
 
-    case "L":
-      {
+      case "L": {
         const listingSlugs = await getPagesSlugs("listing-search-seo");
         const listingPaths = Object.keys(listingSlugs);
-        for (const path of listingPaths) {
-          const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}${path}`;
-          const res = await fetch(url);
-          if (res.status === 404) {
-            response.listingRoutes.push(path);
-          }
-        }
+        return NextResponse.json(await processListingPaths(listingPaths));
       }
-      return NextResponse.json(response);
-    case "P":
-      {
+
+      case "P": {
         const projectSlugs = await getPagesSlugs("project-list");
         const projectPaths = Object.keys(projectSlugs);
-        for (const path of projectPaths) {
-          const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}${path}`;
-          const res = await fetch(url);
-          if (res.status === 404) {
-            response.projectRoutes.push(path);
-          }
-        }
+        return NextResponse.json(await processProjectPaths(projectPaths));
       }
-      return;
-    default:
-      return NextResponse.json({ error: "Invalid type" }, { status: 400 });
+
+      default:
+        return NextResponse.json({ error: "Invalid type" }, { status: 400 });
+    }
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
   }
 }
