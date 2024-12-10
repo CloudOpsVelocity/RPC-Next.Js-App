@@ -1,8 +1,9 @@
 import { getPagesSlugs } from "@/app/seo/api";
 import { NextResponse } from "next/server";
 export async function GET(request: Request) {
-  const queryParams = new URLSearchParams(request.url);
-  const type = queryParams.get("type");
+  const { searchParams } = new URL(request.url);
+  const type = searchParams.get("type");
+  console.log(type);
   let response: {
     builderRoutes: string[];
     listingRoutes: string[];
@@ -13,7 +14,7 @@ export async function GET(request: Request) {
     projectRoutes: [],
   };
   switch (type) {
-    case "builder":
+    case "B":
       {
         // Read all slug files
         const builderSlugs = await getPagesSlugs("builder-list");
@@ -30,7 +31,7 @@ export async function GET(request: Request) {
       }
       return NextResponse.json(response);
 
-    case "listing":
+    case "L":
       {
         const listingSlugs = await getPagesSlugs("listing-search-seo");
         const listingPaths = Object.keys(listingSlugs);
@@ -43,7 +44,7 @@ export async function GET(request: Request) {
         }
       }
       return NextResponse.json(response);
-    case "project":
+    case "P":
       {
         const projectSlugs = await getPagesSlugs("project-list");
         const projectPaths = Object.keys(projectSlugs);
