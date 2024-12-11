@@ -206,18 +206,13 @@ export async function PUT(request: Request) {
       Object.keys(data).forEach((key) => {
         if (key.split("-").at(-1) === id) {
           delete data[key];
-          revalidatePath(key);
           logger.info(`PUT ${request.url}: Deleted existing slug: ${key}`);
         }
       });
     });
   }
 
-  // Then update with new slugs
-  Object.keys(slugs).forEach((key) => {
-    data[key] = slugs[key];
-    revalidatePath(key);
-  });
+  Object.assign(data, slugs); // Merge new slugs into existing data
 
   fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
   logger.info(`PUT ${request.url}: Successfully updated listing slugs`);
