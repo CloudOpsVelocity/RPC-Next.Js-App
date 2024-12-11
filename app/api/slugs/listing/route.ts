@@ -178,7 +178,7 @@ export async function POST(request: Request) {
 
 export async function PUT(request: Request) {
   let body = await request.json();
-  const { slugs } = body;
+  const { slugs, ids } = body;
   logger.info(`PUT request received at ${request.url}`, body);
 
   if (!slugs || typeof slugs !== "object") {
@@ -200,7 +200,20 @@ export async function PUT(request: Request) {
   const fileContent = fs.readFileSync(filePath, "utf-8");
   const data = JSON.parse(fileContent);
 
-  // Update existing slugs
+  // First delete existing slugs based on ids
+  if (ids && Array.isArray(ids)) {
+    ids.forEach((id) => {
+      Object.keys(data).forEach((key) => {
+        if (key.split("-").at(-1) === id) {
+          delete data[key];
+          revalidatePath(key);
+          logger.info(`PUT ${request.url}: Deleted existing slug: ${key}`);
+        }
+      });
+    });
+  }
+
+  // Then update with new slugs
   Object.keys(slugs).forEach((key) => {
     data[key] = slugs[key];
     revalidatePath(key);
