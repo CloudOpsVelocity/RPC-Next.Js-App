@@ -45,34 +45,34 @@ export default async function Page({ params }: Props) {
   );
 }
 
-export async function generateStaticParams() {
-  const res = await getPagesSlugs("project-list");
-  const keys = Object.keys(res);
-  const slugs = keys.map((data) => {
-    const [
-      staticPath,
-      staticPath2,
-      sta3,
-      city,
-      lt,
-      slug,
-      phase,
-      prop_type,
-      unit_type,
-      heading,
-    ] = data.split("/");
-    return {
-      city,
-      lt,
-      slug,
-      phase,
-      prop_type,
-      ...(unit_type && { unit_type }),
-      ...(heading && { heading }),
-    };
-  });
-  return slugs;
-}
+// export async function generateStaticParams() {
+//   const res = await getPagesSlugs("project-list");
+//   const keys = Object.keys(res);
+//   const slugs = keys.map((data) => {
+//     const [
+//       staticPath,
+//       staticPath2,
+//       sta3,
+//       city,
+//       lt,
+//       slug,
+//       phase,
+//       prop_type,
+//       unit_type,
+//       heading,
+//     ] = data.split("/");
+//     return {
+//       city,
+//       lt,
+//       slug,
+//       phase,
+//       prop_type,
+//       ...(unit_type && { unit_type }),
+//       ...(heading && { heading }),
+//     };
+//   });
+//   return slugs;
+// }
 
 export const dynamicParams = true;
 export const dynamic = "force-dynamic";

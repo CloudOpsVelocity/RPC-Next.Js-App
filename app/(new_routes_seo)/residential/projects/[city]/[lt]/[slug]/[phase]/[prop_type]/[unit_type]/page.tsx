@@ -23,10 +23,8 @@ type Props = {
   };
 };
 
-export default async function Page({
-  params,
-}: Props) {
-  const { city, lt, slug, phase, prop_type, unit_type }= params
+export default async function Page({ params }: Props) {
+  const { city, lt, slug, phase, prop_type, unit_type } = params;
   const pathname = `${BASE_PATH_PROJECT_DETAILS}/${city}/${lt}/${slug}/${phase}/${prop_type}/${unit_type}`;
   const value = await findPathForProjectDetails(pathname);
   if (!value) {
@@ -66,31 +64,31 @@ export default async function Page({
     />
   );
 }
-export async function generateStaticParams() {
-  const res = await getPagesSlugs("project-list");
-  const keys = Object.keys(res);
-  const slugs = keys.map((data) => {
-    const [
-      staticPath,
-      staticPath2,
-      sta3,
-      city,
-      lt,
-      slug,
-      phase,
-      prop_type,
-      unit_type,
-    ] = data.split("/");
-    return {
-      city,
-      lt,
-      slug,
-      phase,
-      prop_type,
-      ...(unit_type && { unit_type }),
-    };
-  });
-  return slugs;
-}
+// export async function generateStaticParams() {
+//   const res = await getPagesSlugs("project-list");
+//   const keys = Object.keys(res);
+//   const slugs = keys.map((data) => {
+//     const [
+//       staticPath,
+//       staticPath2,
+//       sta3,
+//       city,
+//       lt,
+//       slug,
+//       phase,
+//       prop_type,
+//       unit_type,
+//     ] = data.split("/");
+//     return {
+//       city,
+//       lt,
+//       slug,
+//       phase,
+//       prop_type,
+//       ...(unit_type && { unit_type }),
+//     };
+//   });
+//   return slugs;
+// }
 
 export const dynamic = "force-dynamic";
