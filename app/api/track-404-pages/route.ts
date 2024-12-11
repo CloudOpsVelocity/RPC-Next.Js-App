@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 interface ErrorResponse {
   notFoundRoutes: string[];
   errorRoutes: string[];
+  forbiddenRoutes: string[];
 }
 
 const BATCH_SIZE = 25; // Increased batch size for better throughput
@@ -16,6 +17,7 @@ async function checkUrlBatch(urls: { url: string; path: string }[]) {
       fetch(url, { cache: "no-cache" })
         .then((res) => {
           if (res.status === 404) return { path, type: "notFound" };
+          if (res.status === 403) return { path, type: "forbidden" };
           if (res.status >= 500) return { path, type: "error" };
           return null;
         })
@@ -46,7 +48,11 @@ async function* processPathsInChunks(paths: string[], batchSize: number) {
 
 // Optimized function to process listing paths
 async function processListingPaths(paths: string[]) {
-  const response: ErrorResponse = { notFoundRoutes: [], errorRoutes: [] };
+  const response: ErrorResponse = {
+    notFoundRoutes: [],
+    errorRoutes: [],
+    forbiddenRoutes: [],
+  };
   const basePathsSet = new Set(paths.map(getBaseListingPath));
 
   for await (const results of processPathsInChunks(paths, BATCH_SIZE)) {
@@ -54,6 +60,8 @@ async function processListingPaths(paths: string[]) {
       if (!result) continue;
       if (result.type === "notFound") {
         response.notFoundRoutes.push(result.path);
+      } else if (result.type === "forbidden") {
+        response.forbiddenRoutes.push(result.path);
       } else {
         response.errorRoutes.push(result.path);
       }
@@ -65,13 +73,18 @@ async function processListingPaths(paths: string[]) {
     uniqueCount: basePathsSet.size,
     notFoundCount: response.notFoundRoutes.length,
     errorCount: response.errorRoutes.length,
+    forbiddenCount: response.forbiddenRoutes.length,
     ...response,
   };
 }
 
 // Optimized function to process project paths
 async function processProjectPaths(paths: string[]) {
-  const response: ErrorResponse = { notFoundRoutes: [], errorRoutes: [] };
+  const response: ErrorResponse = {
+    notFoundRoutes: [],
+    errorRoutes: [],
+    forbiddenRoutes: [],
+  };
   const uniquePathsSet = new Set(
     paths.map((path) => path.split("/").slice(0, 6).join("/"))
   );
@@ -82,6 +95,8 @@ async function processProjectPaths(paths: string[]) {
       if (!result) continue;
       if (result.type === "notFound") {
         response.notFoundRoutes.push(result.path);
+      } else if (result.type === "forbidden") {
+        response.forbiddenRoutes.push(result.path);
       } else {
         response.errorRoutes.push(result.path);
       }
@@ -93,19 +108,26 @@ async function processProjectPaths(paths: string[]) {
     uniqueCount: uniquePaths.length,
     notFoundCount: response.notFoundRoutes.length,
     errorCount: response.errorRoutes.length,
+    forbiddenCount: response.forbiddenRoutes.length,
     ...response,
   };
 }
 
 // Optimized function to process generic paths
 async function processPaths(paths: string[]) {
-  const response: ErrorResponse = { notFoundRoutes: [], errorRoutes: [] };
+  const response: ErrorResponse = {
+    notFoundRoutes: [],
+    errorRoutes: [],
+    forbiddenRoutes: [],
+  };
 
   for await (const results of processPathsInChunks(paths, BATCH_SIZE)) {
     for (const result of results) {
       if (!result) continue;
       if (result.type === "notFound") {
         response.notFoundRoutes.push(result.path);
+      } else if (result.type === "forbidden") {
+        response.forbiddenRoutes.push(result.path);
       } else {
         response.errorRoutes.push(result.path);
       }
@@ -117,6 +139,7 @@ async function processPaths(paths: string[]) {
     uniqueCount: paths.length,
     notFoundCount: response.notFoundRoutes.length,
     errorCount: response.errorRoutes.length,
+    forbiddenCount: response.forbiddenRoutes.length,
     ...response,
   };
 }
