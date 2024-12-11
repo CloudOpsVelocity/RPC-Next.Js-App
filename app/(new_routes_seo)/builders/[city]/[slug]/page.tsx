@@ -62,8 +62,8 @@ export async function generateStaticParams() {
   });
   return slugs;
 }
-export const dynamic = "force-dyanmic";
-export const dyanmicParams = true;
+// export const dynamic = "force-dyanmic";
+// export const dyanmicParams = true;
 
 // export async function generateMetadata(
 //   { params }: SeoProps,
