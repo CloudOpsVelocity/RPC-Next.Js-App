@@ -51,14 +51,17 @@ export const extractProjectParamsValues = (input: string) => {
   return result;
 };
 export async function findPathForProjectDetails(inputUrl: string) {
+  console.time("findPathForProjectDetails");
   const staticDir = path.join(process.cwd(), "static");
   const filePath = path.join(staticDir, "projectSlugs.json");
   const jsonData = fs.readFileSync(filePath, "utf8");
   const builderJsonData = JSON.parse(jsonData);
   for (const path in builderJsonData) {
     if (path.startsWith(inputUrl)) {
+      console.timeEnd("findPathForProjectDetails");
       return builderJsonData[path];
     }
   }
+  console.timeEnd("findPathForProjectDetails");
   return null;
 }
