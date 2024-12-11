@@ -5,14 +5,13 @@ import fs from "fs";
 import { getBuilderDetailsPageData } from "@/app/utils/api/builder";
 import { notFound } from "next/navigation";
 import BuilderPage from "@/app/builder/[slug]/Page/BuilderPage";
-import { Metadata, ResolvingMetadata } from "next";
 type Props = {
   params: {
     city: string;
     slug: string;
   };
 };
-export const dynamic = "force-static";
+
 async function getBuilderSlug(pathname: string) {
   const staticDir = path.join(process.cwd(), "static");
   const filePath = path.join(staticDir, "builderSlugs.json");
@@ -34,7 +33,7 @@ export default async function Page({ params: { city, slug } }: Props) {
   // new cahnge
   const pathname = `/builders/${city}/${slug}`;
   const id = await getBuilderSlug(pathname);
-  console.log(id)
+  console.log(id);
   if (!id) return notFound();
   const data = await getBuilderDetailsPageData(id?.split("_")[1], pathname);
   return (
@@ -63,13 +62,9 @@ export async function generateStaticParams() {
   });
   return slugs;
 }
+export const dynamic = "force-dyanmic";
+export const dyanmicParams = true;
 
-interface SeoProps {
-  params:{
-    city:string;
-    slug:string
-  }
-}
 // export async function generateMetadata(
 //   { params }: SeoProps,
 //   parent: ResolvingMetadata

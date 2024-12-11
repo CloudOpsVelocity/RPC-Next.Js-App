@@ -109,7 +109,7 @@ const MainBox = ({ data, refetch }: Props) => {
       modal_type:
         type === "proj" ? "PROJECT_REQ_CALLBACK" : "PROPERTY_REQ_CALLBACK",
       postedByName: type === "proj" ? data.builderName : data.postedBy,
-      postedId: data.builderId,
+      postedId: type === "proj" ? data.builderId : data.postedById,
       reqId: reqId,
       source: type === "proj" ? "projCard" : "propCard",
       title:
