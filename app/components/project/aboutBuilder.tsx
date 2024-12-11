@@ -35,22 +35,24 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
 
           <div className="inline-flex justify-center items-center ">
             <div className="h-[93px] w-[93px] sm:h-[100px] sm:w-[133px] xl:h-[150px] xl:w-[158px] relative">
-            <Image
-              src={
-                nzData.logo
-                  ? `${nzData.logo}`
-                  : `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/builderpage/builder-noimage.png`
-              }
-              // width={130}
-              // height={130}
-              fill
-              alt="logo"
-              className="object-contain "
-              unoptimized
-            />
-              </div>
+              <Image
+                src={
+                  nzData.logo
+                    ? `${nzData.logo}`
+                    : `${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/builderpage/builder-noimage.png`
+                }
+                // width={130}
+                // height={130}
+                fill
+                alt="logo"
+                className="object-contain "
+                unoptimized
+              />
+            </div>
             <div className=" text-[#148B16]  text-h2 sm:text-[20px] xl:text-[26px] font-[700] ml-3">
-              {nzData.userName}
+              <a href={urlBuilder} target="_blank">
+                {nzData.userName}
+              </a>
               <p className=" text-[#303A42] text-[14px] italic sm:text-[16px] xl:text-[20px] font-[500] ">
                 since {convertDateToMonthYear(nzData.companyStartDate)}
               </p>
