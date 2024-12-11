@@ -9,9 +9,9 @@ const getProjectDetails = async (slug: string): Promise<MERGERPROJECT> => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/basicDetails?projIdEnc=${slug}`,
     {
-      cache: "no-cache",
+      cache: "force-cache",
+      next: { revalidate: 120 },
     }
-    
   );
   const data = await response.json();
 
@@ -86,9 +86,9 @@ const getProjectUnits = async (
       }
       return {
         ...item,
-        floor: propType === 31 || propType === 33 ? `G+${item.floor}` : item.floor,
+        floor:
+          propType === 31 || propType === 33 ? `G+${item.floor}` : item.floor,
       };
-      
     });
     return modifiedData;
   }
@@ -108,7 +108,6 @@ export const getAuthorityNames = async (stringIds: string) => {
 
   return authorityNames;
 };
-
 
 const getCachedUser = unstable_cache(
   async (id: string): Promise<Main> => getCachedUser(id),

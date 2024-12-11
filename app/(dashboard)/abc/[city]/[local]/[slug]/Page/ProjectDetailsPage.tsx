@@ -1,44 +1,45 @@
 import React from "react";
 import dynamic from "next/dynamic";
 import { MERGERPROJECT } from "@/app/validations/types/project";
-
-const Feature = dynamic(() => import("@/app/components/project/feature"));
-const Amenties = dynamic(() => import("@/app/components/project/amenties"));
-const Loans = dynamic(() => import("@/app/components/project/loans"));
-const FirstBlock = dynamic(() => import("@/app/components/project/firstBlock"));
-const Overview = dynamic(() => import("@/app/components/project/overview"));
-const About = dynamic(() => import("@/app/components/project/about"));
-const Navigation = dynamic(() => import("@/app/components/project/navigation"));
-const ProjectDetailsP = dynamic(() => import("@/app/components/project/projectDetailsP"));
-const ProjectDrawer = dynamic(() => import("@/app/components/project/Drawer"));
-// const LeafMap = dynamic(() => import("@/app/components/project/map"));
+import Feature from "@/app/components/project/feature";
+import Amenties from "@/app/components/project/amenties";
+import Loans from "@/app/components/project/loans";
+import FirstBlock from "@/app/components/project/firstBlock";
+import Overview from "@/app/components/project/overview";
+import About from "@/app/components/project/about";
+import Navigation from "@/app/components/project/navigation";
+import ProjectDetailsP from "@/app/components/project/projectDetailsP";
+import ProjectDrawer from "@/app/components/project/Drawer";
 import LeafMap from "@/app/components/project/map";
-const ListingRentAvail = dynamic(() => import("@/app/components/project/listingRentAvail"));
-const ErrorContainer = dynamic(() => import("@/app/components/project/error/container"));
-const MobileHidden = dynamic(() => import("@/app/components/molecules/MobileHidden"));
-const FloorplanDrawer = dynamic(() => import("@/app/components/project/drawers/floorplan"));
-const MasterPlan = dynamic(() => import("@/app/components/project/masterplan"));
-const FloorplansBlock = dynamic(() => import("@/app/components/project/floorplansBlock"));
-const GalleryBlock = dynamic(() => import("@/app/components/project/galleryBlock"));
-const Specifications = dynamic(() => import("@/app/components/project/specification"));
-const Banner = dynamic(() => import("@/app/components/project/banner"));
+import ListingRentAvail from "@/app/components/project/listingRentAvail";
+import ErrorContainer from "@/app/components/project/error/container";
+import MobileHidden from "@/app/components/molecules/MobileHidden";
+import FloorplanDrawer from "@/app/components/project/drawers/floorplan";
+import MasterPlan from "@/app/components/project/masterplan";
+import FloorplansBlock from "@/app/components/project/floorplansBlock";
+import GalleryBlock from "@/app/components/project/galleryBlock";
+import Specifications from "@/app/components/project/specification";
+import Banner from "@/app/components/project/banner";
 import AboutBuilder from "@/app/components/project/aboutBuilder";
 import { BASE_PATH_PROJECT_DETAILS } from "@/app/(new_routes_seo)/utils/new-seo-routes/project.route";
-import Head from "next/head";
-const FaqWithBg = dynamic(() => import("@/app/components/project/faq"));
-const NearByCarousel = dynamic(() => import("@/app/components/project/NearByCarousel"));
-const LoginPopup = dynamic(() => import("@/app/components/project/modals/LoginPop"));
-const FAQJsonLdScript = dynamic(() => import("@/app/seo/Faqjson"));
-const QAJsonLdScript = dynamic(() => import("@/app/seo/Qnajson"));
-const PropertyJsonLdScript = dynamic(() => import("@/app/seo/Productjson"));
-const ArticleJsonLdScript = dynamic(() => import("@/app/seo/ArticleJson"));
-const Reviews = dynamic(() => import("@/app/components/project/reviews"));
-const PartialUnitData = dynamic(() => import("@/app/components/project/sections"));
-const PropertyDataDisplay = dynamic(() => import("@/app/components/project/_ui/PricingDetailsSection"));
-const Disclamer = dynamic(() => import("@/app/components/builder/Disclamer"));
-const BreadCrumbs = dynamic(() => import("@/app/components/project/breadcrum/BreadCrum"));
-const ProjectGallery = dynamic(() => import("@/app/components/project/_ui/modals/GallerySectionModal"));
-const SharePopup = dynamic(() => import("@/app/(dashboard)/search/components/SharePopup"));
+import FaqWithBg from "@/app/components/project/faq";
+import NearByCarousel from "@/app/components/project/NearByCarousel";
+import LoginPopup from "@/app/components/project/modals/LoginPop";
+import FAQJsonLdScript from "@/app/seo/Faqjson";
+import QAJsonLdScript from "@/app/seo/Qnajson";
+import PropertyJsonLdScript from "@/app/seo/Productjson";
+import ArticleJsonLdScript from "@/app/seo/ArticleJson";
+import Reviews from "@/app/components/project/reviews";
+import PartialUnitData from "@/app/components/project/sections";
+import PropertyDataDisplay from "@/app/components/project/_ui/PricingDetailsSection";
+import Disclamer from "@/app/components/builder/Disclamer";
+import BreadCrumbs from "@/app/components/project/breadcrum/BreadCrum";
+const ProjectGallery = dynamic(
+  () => import("@/app/components/project/_ui/modals/GallerySectionModal")
+);
+const SharePopup = dynamic(
+  () => import("@/app/(dashboard)/search/components/SharePopup")
+);
 const ProjectBrouchersSection = dynamic(
   () => import("@/app/components/project/broucher/ProjectBrouchersSections"),
   {
@@ -51,7 +52,6 @@ type Props = {
   slug: string;
   scrollId?: string;
   params: any;
-  
 };
 
 export default async function ProjectsDetailsPage({
@@ -63,12 +63,12 @@ export default async function ProjectsDetailsPage({
 }: Props) {
   const { basicData: data, nearByLocations, phaseOverview } = projResponse;
   const refURls = data?.sourceBuilderUrl?.split(",");
-  const url = `${process.env.NEXT_PUBLIC_URL}${BASE_PATH_PROJECT_DETAILS}/${params.city}/${params.lt}/${params.slug}`
+  const url = `${process.env.NEXT_PUBLIC_URL}${BASE_PATH_PROJECT_DETAILS}/${params.city}/${params.lt}/${params.slug}`;
   const title = `${data?.projectName} ${
-      data.availableProperties && data?.availableProperties?.join(" ")
-    } for sale in ${data.localityName} ${data.cityName}`
-    const imageUrl = data?.media?.coverImageUrl.split(",")[1]
-    const desc = `${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`
+    data.availableProperties && data?.availableProperties?.join(" ")
+  } for sale in ${data.localityName} ${data.cityName}`;
+  const imageUrl = data?.media?.coverImageUrl.split(",")[1];
+  const desc = `${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`;
   return (
     <section className="w-full relative break-words ">
       {/* <meta name="keywords" content={`${data.projectName}, ${data.localityName}, ${data.cityName}, real estate, property`} /> */}
@@ -76,12 +76,12 @@ export default async function ProjectsDetailsPage({
       <link rel="canonical" href={url} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={desc} />
-      <meta property="og:image" content={imageUrl || ''} />
+      <meta property="og:image" content={imageUrl || ""} />
       <meta property="og:url" content={url} />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={desc} />
-      <meta name="twitter:image" content={imageUrl || ''} />
+      <meta name="twitter:image" content={imageUrl || ""} />
       <FAQJsonLdScript data={data} />
       <QAJsonLdScript data={data} />
       <PropertyJsonLdScript data={data} />
@@ -101,7 +101,13 @@ export default async function ProjectsDetailsPage({
         {/* Navigations Container */}
         <MobileHidden>
           <Navigation
-            isBrochure={!!data?.media?.projBroucherUrl || phaseOverview?.some((item: { phaseBrochureUrl: string | null }) => item.phaseBrochureUrl)}
+            isBrochure={
+              !!data?.media?.projBroucherUrl ||
+              phaseOverview?.some(
+                (item: { phaseBrochureUrl: string | null }) =>
+                  item.phaseBrochureUrl
+              )
+            }
             detailsData={{ ...data, nearByLocations }}
             slug={slug}
             scrollId={scrollId}
@@ -220,7 +226,12 @@ export default async function ProjectsDetailsPage({
           id="faq"
           className="scroll-mt-[70px] m-auto w-[95%] sm:w-[90%] flex justify-start items-start"
         >
-          <FaqWithBg data={data.faqs} slug={slug} projName={data.projectName} postedById={data.builderId} />
+          <FaqWithBg
+            data={data.faqs}
+            slug={slug}
+            projName={data.projectName}
+            postedById={data.builderId}
+          />
         </div>
         <NearByCarousel
           projName={data.projectName}
