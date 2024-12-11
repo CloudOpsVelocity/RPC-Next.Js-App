@@ -9,7 +9,7 @@ const getProjectDetails = async (slug: string): Promise<MERGERPROJECT> => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/basicDetails?projIdEnc=${slug}`,
     {
-      cache: "force-cache",
+      // cache: "force-cache",
       next: { revalidate: 120 },
     }
   );
