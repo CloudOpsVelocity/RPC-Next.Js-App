@@ -275,7 +275,7 @@ Props) {
     count: projectUnitsData?.length || 0,
     getScrollElement: () => parentRef.current,
     estimateSize: () => (isMobile ? 210 : 180),
-    overscan: isMobile ? 9 : 5,
+    overscan:  5,
   });
   useEffect(() => {
     if (
@@ -551,6 +551,7 @@ Props) {
                     setValues={form.setValues}
                     bhk={bhk}
                     setBhk={setBhk}
+                    selectedPhase={currentPhase}
                   />
                 </div>
               )}

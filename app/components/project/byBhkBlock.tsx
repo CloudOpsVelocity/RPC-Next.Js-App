@@ -2,7 +2,6 @@ import React, { useRef, useState, useTransition } from "react";
 import Button from "../../elements/button";
 import FloorplanDetailsCard from "./floorplanDetailsCard";
 import { useVirtualizer } from "@tanstack/react-virtual";
-import zlib from "zlib";
 import { useMediaQuery } from "@mantine/hooks";
 
 type Props = {
@@ -11,6 +10,7 @@ type Props = {
   setValues: any;
   bhk: string;
   setBhk: (value: string) => void;
+  selectedPhase: any;
 };
 
 const cacheMap = new Map();
@@ -21,6 +21,7 @@ export default function ByBhkBlock({
   setValues,
   bhk,
   setBhk,
+  selectedPhase,
 }: Props) {
   const [isLoading, startTransition] = useTransition();
   const [filteredData, setFilteredData] = useState(data);
@@ -44,14 +45,16 @@ export default function ByBhkBlock({
     value: string
   ): Promise<void> => {
     e.stopPropagation();
+    const cacheKey = `${value}-${selectedPhase}-${propCgId}`;
+
     if (value === "0") {
       setBhk(value);
       setFilteredData(data);
       return;
     }
-    if (cacheMap.has(value)) {
+    if (cacheMap.has(cacheKey)) {
       setBhk(value);
-      setFilteredData(cacheMap.get(value));
+      setFilteredData(cacheMap.get(cacheKey));
       return;
     }
     setBhk(value);
@@ -62,7 +65,7 @@ export default function ByBhkBlock({
 
         workerRef.current.onmessage = (event) => {
           const result = event.data;
-          cacheMap.set(value, result);
+          cacheMap.set(cacheKey, result);
           setFilteredData(result);
         };
       }
@@ -75,10 +78,10 @@ export default function ByBhkBlock({
   const rowVirtualizer = useVirtualizer({
     count: filteredData?.length || 0,
     getScrollElement: () => parentRef.current,
-    estimateSize: () => isMobile ? 250 : 180,
+    estimateSize: () => (isMobile ? 250 : 180),
     overscan: isMobile ? 15 : 5,
     paddingStart: 0,
-    paddingEnd: 0
+    paddingEnd: 0,
   });
 
   const getOptions = (property: string): string[] => {
@@ -102,7 +105,6 @@ export default function ByBhkBlock({
         <h3 className=" text-[#001F35] text-[20px] lg:text-[24px] font-[500] mb-2">
           Select BHK to see floor plans
         </h3>
-        {JSON.stringify(cacheMap.get("1"))}
         <div className="flex justify-between items-center w-full overflow-x-auto overflow-y-hidden !no-scrollbar">
           {availBhks && availBhks.length > 4 && (
             <button
@@ -164,20 +166,20 @@ export default function ByBhkBlock({
           <div
             style={{
               height: `${rowVirtualizer.getTotalSize()}px`,
-              width: '100%',
-              position: 'relative'
+              width: "100%",
+              position: "relative",
             }}
           >
             {rowVirtualizer.getVirtualItems().map((virtualRow) => (
               <div
                 key={virtualRow.key}
                 style={{
-                  position: 'absolute',
+                  position: "absolute",
                   top: 0,
                   left: 0,
-                  width: '100%',
+                  width: "100%",
                   height: `${virtualRow.size}px`,
-                  transform: `translateY(${virtualRow.start}px)`
+                  transform: `translateY(${virtualRow.start}px)`,
                 }}
               >
                 <FloorplanDetailsCard

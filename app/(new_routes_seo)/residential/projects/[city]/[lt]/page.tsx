@@ -27,15 +27,15 @@ export default async function Page({ params: { city, lt } }: Props) {
     />
   );
 }
-// export async function generateStaticParams() {
-//   const res = await getPagesSlugs("project-list");
-//   const keys = Object.keys(res);
-//   const slugs = keys.map((data) => {
-//     const [staticPath, staticPath2, sta3, city, lt, slug] = data.split("/");
-//     return { city, lt };
-//   });
-//   return slugs;
-// }
+export async function generateStaticParams() {
+  const res = await getPagesSlugs("project-list");
+  const keys = Object.keys(res);
+  const slugs = keys.map((data) => {
+    const [staticPath, staticPath2, sta3, city, lt, slug] = data.split("/");
+    return { city, lt };
+  });
+  return slugs;
+}
 
 export const dynamic = "force-dynamic";
 const getSearchData = async (locality: string): Promise<any> => {

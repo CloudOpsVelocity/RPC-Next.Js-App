@@ -70,7 +70,7 @@ const FloorplanDetailsCard: React.FC<Props> = ({
         className={clsx(
           "sm:flex sm:h-[180px] justify-between py-[18px] px-[25px] pt-[24px] w-full border-[#92B2C8] border-solid border-b-[1px] border-r-[1px] cursor-pointer hidden hover:bg-gray-50 transition-colors duration-200"
         )}
-        onClick={handleCardClick}
+        // onClick={handleCardClick}
         // style={{
         //   position: "absolute",
         //   top: 0,
@@ -91,7 +91,8 @@ const FloorplanDetailsCard: React.FC<Props> = ({
             <p className="gap-[4px] font-[500] text-[12px] sm:text-[14px] xl:text-[16px] text-[#303A42] mb-[20px] flex justify-start items-start">
               <SuperBuildupAreaIcon className="md:h-[32px] md:w-[32px] h-[24px] w-[24px]" />
               Super Builtup Area:{" "}
-              {formatNumberWithSuffix(mergedData?.superBuildupArea,false)} sq.ft
+              {formatNumberWithSuffix(mergedData?.superBuildupArea, false)}{" "}
+              sq.ft
             </p>
             <p className="gap-[4px] font-[500] text-[12px] sm:text-[14px] xl:text-[16px] text-[#001F35] mb-[20px] flex justify-start items-start">
               <FacingIcon className="w-[20px] h-[20px] lg:w-[24px] lg:h-[24px]" />
@@ -103,7 +104,8 @@ const FloorplanDetailsCard: React.FC<Props> = ({
         {propCgId == projectprops.plot && (
           <div>
             <p className="font-[500] text-[16px] lg:text-[24px] mb-[20px] text-[#001F35] flex justify-start items-center">
-              Plot Area: {formatNumberWithSuffix(mergedData?.plotArea,false)} sq.ft
+              Plot Area: {formatNumberWithSuffix(mergedData?.plotArea, false)}{" "}
+              sq.ft
             </p>
             <p className="gap-[4px] font-[500] text-[14px] lg:text-[16px] text-[#303A42] mb-[20px] flex justify-start items-start">
               <FlooringIcon className="md:h-[32px] md:w-[32px] h-[24px] w-[24px]" />
