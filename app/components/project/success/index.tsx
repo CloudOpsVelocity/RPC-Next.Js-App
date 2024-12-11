@@ -141,7 +141,7 @@ export const SellListingNotFoundMessage = () => (
     bgColor="bg-gradient-to-r from-[#89B2FF] via-[#C2D8FF] via-[#E0EBFF] via-[#C2D8FF] to-[#89B2FF]"
     border="border-[#8FB6FF]"
     title="Oops!"
-    content="Sell listings are currently unavailable. We'll notify you once they're back. Thank you for your understanding."
+    content="Sale listings are currently unavailable. We'll notify you once they're back. Thank you for your understanding."
     icon={
       <svg
         xmlns="http://www.w3.org/2000/svg"

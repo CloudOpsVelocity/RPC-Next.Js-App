@@ -116,7 +116,7 @@ const MainBox = ({ data, refetch }: Props) => {
         type === "proj"
           ? projName
           : `${bhkName ?? ""} ${propTypeName} for
-      ${data.cg === "R" ? "Rent" : "Sell"} in ${localityName}`,
+      ${data.cg === "R" ? "Rent" : "Sale"} in ${localityName}`,
     });
   };
   const isMobile = useMediaQuery("(max-width: 1600px)");
@@ -183,7 +183,7 @@ const MainBox = ({ data, refetch }: Props) => {
         reqId={reqId}
         {...data}
         title={`${bhkName ?? ""} ${propTypeName} for
-      ${data.cg === "R" ? "Rent" : "Sell"} in ${localityName}`}
+      ${data.cg === "R" ? "Rent" : "Sale"} in ${localityName}`}
         onAddingCompare={onAddingCompare}
         isCompared={state.compareAdded}
         handleOpen={handleOpen}

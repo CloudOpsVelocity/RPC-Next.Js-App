@@ -47,7 +47,7 @@ export default function ListingDetailsPage({
   params,
 }: Props) {
   const title = `${data.bhkName} ${data.propTypeName} For
-  ${data.cg === "S" ? " Sell" : " Rent"} In
+  ${data.cg === "S" ? " Sale" : " Rent"} In
   ${data.ltName}${data.projIdEnc ? `, ${data.propName}` : ""}`;
   return (
     <div className="w-full">

@@ -30,7 +30,7 @@ export default function PropertyOverView({
               {data.propTypeName === "Plot" ? formatNumberWithSuffix(data.plotArea,false) + " sq.ft" : ""}
             </span>{" "}
             {data.bhkName} {data.propTypeName} For{" "}
-            {data.cg === "S" ? " Sell" : " Rent"} In {data.ltName}
+            {data.cg === "S" ? " Sale" : " Rent"} In {data.ltName}
           </h2>
           <p className="text-[#242424]  text-sm sm:text-[20px] xl:text-[22px] not-italic font-[600] leading-[normal] w-[100%] tracking-[0.32px] sm:mt-[10px]  xl:mt-[14px] capitalize  sm:max-w-[1400px]">
             {`${data.address}, ${data.ltName}, ${data.ctName}, ${data?.stateName}, ${data.pinCode}`}

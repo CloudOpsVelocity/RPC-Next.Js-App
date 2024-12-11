@@ -188,11 +188,11 @@ export function generatePropertyDetails(
 
       if (cg === "R") {
         propertyDetails.splice(2, 1);
-        propertyDetails.splice(2, 0, {
+     /*    propertyDetails.splice(2, 0, {
           Icon: Marble,
           title: "Floor",
           value: data.atFloor,
-        });
+        }); */
         if (availablityStatus === "R") {
           propertyDetails.push();
         } else if (availablityStatus === "U") {

@@ -39,7 +39,7 @@ export default function CardDownSection({
     type === "proj"
       ? projName
       : `${bhkName ?? ""} ${propTypeName} for
-    ${cg === "R" ? "Rent" : "Sell"} in ${ltName}`;
+    ${cg === "R" ? "Rent" : "Sale"} in ${ltName}`;
   const [, { open }] = useReqCallPopup();
   const setPopReqData = useSetAtom(NearByDataAtom);
   const handleOpen = () => {
@@ -54,7 +54,7 @@ export default function CardDownSection({
         type === "proj"
           ? projName
           : `${bhkName ?? ""} ${propTypeName} for
-      ${cg === "R" ? "Rent" : "Sell"} in ${localityName}`,
+      ${cg === "R" ? "Rent" : "Sale"} in ${localityName}`,
     });
   };
 
