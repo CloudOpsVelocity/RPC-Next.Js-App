@@ -176,7 +176,7 @@ export function ProjectCard({ type, cardData, mutate, ct, id }: CardProps) {
             {type != "proj" && (
               <p className="text-[18px] font-[600] text-[#303030] mb-[8px] ">
                 {cardData.bhkName} {cardData.propTypeName} for{" "}
-                {cardData.cg === "R" ? "Rent" : "Sell"} in {cardData.ltName},{" "}
+                {cardData.cg === "R" ? "Rent" : "Sale"} in {cardData.ltName},{" "}
                 <br />
                 <span className="text-[18px] font-[700] text-[#148B16] ">
                   {" "}

@@ -32,7 +32,7 @@ const YourList = () => {
                 Post Your Residential Property
               </div>
               <div className="relative text-[#666] [font-family:'Montserrat-Medium',Helvetica] font-medium text-grey-1 sm:text-[16px] md:text-[26px] lg:text-[32px] tracking-[1.28px] leading-[41.6px]">
-                Sell | Rent
+                Sale | Rent
               </div>
             </div>
             {/* <Frame className="!absolute !left-0 !top-[265px]" property1="default" /> */}

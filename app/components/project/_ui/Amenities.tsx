@@ -82,7 +82,7 @@ export default function AmenitiesDisplay({ amenitiesData, data }: AmenitiesDispl
         <li
           key={subCategory}
           className={`text-gray-600 text-sm list-disc transition duration-200 cursor-pointer ${
-            selectedCategory === category ? 'font-medium text-green-800' : ''
+            selectedCategory === category ? ' text-green-800' : ''
           } hover:text-green-700`}
           onClick={() => setSelectedCategory(category)}
         >
@@ -106,7 +106,7 @@ export default function AmenitiesDisplay({ amenitiesData, data }: AmenitiesDispl
               className="flex w-full items-center justify-between px-4 pt-3  transition duration-200"
             >
              
-              <span className="text-[16px] font-medium text-gray-800">{category}</span>
+              <span className="text-start text-[16px] font-medium text-gray-800">{category}</span>
               {expandedCategory === category ? (
                 <IoChevronUpOutline className="h-5 w-5 text-gray-600" />
               ) : (

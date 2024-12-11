@@ -164,7 +164,7 @@ function PropertyBannerForMobile({
             </div>
           </div>
           <div className="flex flex-col md:flex-row justify-start items-start mt-2 xl:mt-4 md:mt-0">
-            <div className="text-[#148B16] text-lg md:text-[28px] not-italic font-bold leading-[normal] mr-4">
+            <div className="text-[#148B16] text-lg md:text-[28px] not-italic font-bold leading-[normal] mr-0 sm:mr-4">
               {formatCurrency(minPrice)} - {formatCurrency(maxPrice)}
             </div>
             <div className=" text-sm sm:text-[16px] mt-[10px] xl:mt-[14px] xl:text-[22px] font-[600] text-[#242424]">

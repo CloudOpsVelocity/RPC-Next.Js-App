@@ -10,7 +10,7 @@ type Props = {
 };
 
 export default function SortBy({typeProp,  ActivitiesType}: Props) {
-  const buyOrSell =ActivitiesType == "R"? "Rent" : "sell";
+  const buyOrSell =ActivitiesType == "R"? "Rent" : "Sale";
 
   const commonConfig = [
     {

@@ -166,7 +166,7 @@ const PropertyFirstBlock: React.FC<Props> = ({
                         : ""}
                     </span>{" "}
                     {projectDetails.bhkName} {projectDetails.propTypeName} For{" "}
-                    {projectDetails.cg === "S" ? " Sell" : " Rent"} In{" "}
+                    {projectDetails.cg === "S" ? " Sale" : " Rent"} In{" "}
                     {projectDetails.ltName}{" "}
                   </h3>
                   <SharePopup className="text-sm p-[2px] mr-2 mt-[2px] sm:hidden " />

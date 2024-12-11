@@ -121,7 +121,7 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
 
       <div className="px-3 pb-3 relative">
         {type != "proj" && (
-          <p className="absolute flex  h-[33px] justify-center items-center gap-2 shrink-0 shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] p-2 rounded-[18px] border-[0.5px] border-solid border-[#92B2C8] bg-gradient-to-br from-[#EFF5FF] to-[#F2FAFF] top-2 left-5 z-50 text-[#148B16] text-sm not-italic font-bold">
+          <p className="absolute flex  h-[33px] justify-center items-center gap-2 shrink-0 shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] p-2 rounded-[18px] border-[0.5px] border-solid border-[#92B2C8] bg-gradient-to-br from-[#EFF5FF] to-[#F2FAFF] top-2 left-5 z-10 text-[#148B16] text-sm not-italic font-bold">
             {cardData.availablityStatus == "R"
               ? "Ready to move"
               : "Under Construction"}

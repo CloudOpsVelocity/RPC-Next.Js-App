@@ -65,7 +65,7 @@ export default async function Page({ params }: Props) {
     const TITLE_OF_PROP = data.projIdEnc
       ? data.propName
       : `${data.bhkName ?? ""} ${data.propTypeName} For
-    ${data.cg === "S" ? " Sell" : " Rent"} In ${data.ltName}`;
+    ${data.cg === "S" ? " Sale" : " Rent"} In ${data.ltName}`;
     serverData = {
       TITLE_OF_PROP,
       data,
