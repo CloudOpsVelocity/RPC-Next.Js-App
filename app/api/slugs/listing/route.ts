@@ -181,10 +181,13 @@ export async function PUT(request: Request) {
   const { slugs, ids } = body;
   logger.info(`PUT request received at ${request.url}`, body);
 
-  if (!slugs || typeof slugs !== "object") {
-    logger.error(`PUT ${request.url}: Missing or invalid slugs data`);
+  if (!slugs || typeof slugs !== "object" || !ids || !ids.length) {
+    logger.error(`PUT ${request.url}: Missing or invalid slugs/ids data`);
     return NextResponse.json(
-      { error: "Slugs data is required and must be an object" },
+      {
+        error:
+          "Slugs data is required and must be an object, and ids array must not be empty",
+      },
       { status: 400 }
     );
   }
