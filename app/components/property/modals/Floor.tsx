@@ -290,7 +290,7 @@ const RightSection = ({ propCgId }: any) => {
               Terrace Area:
               <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                 {" "}
-                {data.ta} sq.ft
+                {formatNumberWithSuffix(data.ta, false)} sq.ft
               </span>
             </p>
           </div>

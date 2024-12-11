@@ -177,7 +177,7 @@ export default function ListingDetailsPage({
         )}
         {!data.projIdEnc && (
           <>
-                   <div className="mt-10" />
+                   <div  id="location-map" className="mt-10 scroll-mt-[180px]" />
             <PropertyMap
             lat={data?.lat ?? 0}
             lang={data?.lang ?? 0}

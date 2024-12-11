@@ -43,6 +43,9 @@ const PropertyFirstBlock: React.FC<Props> = ({
   const setIsScrolling = useSetAtom(isScrollingAtom);
   const setSticky = useSetAtom(stickyAtom);
   const setC = useSetAtom(currentBlockAtom);
+
+
+
   function scrollToTopic(id: string): void {
     setIsScrolling(true);
     const element = document.getElementById(id);
@@ -82,7 +85,7 @@ const PropertyFirstBlock: React.FC<Props> = ({
           {isOkWithBrokerContact ? (
             <BrokerContactTag
               isBrokerAllowed
-              className="absolute right-0 bottom-0 sm:right-auto sm:bottom-auto sm:top-0 sm:left-0 z-[1]"
+              className="absolute right-0 top-[35%]  sm:right-auto sm:bottom-auto sm:top-0 sm:left-0 z-[1]"
               isUsed={isUsed}
             />
           ) : null}

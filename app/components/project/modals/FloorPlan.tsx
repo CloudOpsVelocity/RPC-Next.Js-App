@@ -826,11 +826,13 @@ const MiddleSection = ({
           <picture>
             <source media="(max-width: 460px)" srcSet={data?.floorPlanUrl.split(',')[1]} />
             <source media="(max-width: 768px)" srcSet={data?.floorPlanUrl.split(',')[2]} />
+            <source media="(max-width: 1200px)" srcSet={data?.floorPlanUrl.split(',')[3]} />
             <source media="(min-width: 1200px)" srcSet={data?.floorPlanUrl.split(',')[3]} />
             <Image
               // @ts-ignore
               src={`${data?.floorPlanUrl}`}
               alt="Floor Plan"
+              unoptimized
               height={350}
               width={800}
               className="border-none w-full cursor-pointer"

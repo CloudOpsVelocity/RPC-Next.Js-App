@@ -371,6 +371,7 @@ const UnitBlock = ({ data }: { data: Main }) => {
     data.cg,
     data.availablityStatus
   );
+
   return (
     dto.length > 0 && (
       <div
