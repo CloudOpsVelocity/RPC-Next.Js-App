@@ -16,7 +16,7 @@ import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 pdfjs.GlobalWorkerOptions.workerSrc =
   process.env.NODE_ENV === "development"
     ? new URL("pdfjs-dist/build/pdf.worker.min.mjs", import.meta.url).toString()
-    : `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
+    : `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 interface ProjectPhase {
   id: number;
