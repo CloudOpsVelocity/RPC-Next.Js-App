@@ -208,7 +208,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
         />
         {/* Property Details */}
         <ProjectDetailsP
-           projData={data}
+          projData={data}
           projName={data.projectName}
           data={data.phases}
           slug={slug}
@@ -227,7 +227,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
           />
         )}
 
-        {!data.partialUnitData ? (
+        {/* {!data.partialUnitData ? (
           <FloorplansBlock
             partialUnitData={data.partialUnitData}
             overview={overview}
@@ -245,7 +245,7 @@ export default async function ProjectDetails({ params: { slug } }: Props) {
             data={data}
             type="partial"
           />
-        )}
+        )} */}
 
         <GalleryBlock
           {...data.media}
