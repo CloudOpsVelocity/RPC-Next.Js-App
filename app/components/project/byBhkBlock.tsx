@@ -83,7 +83,7 @@ export default function ByBhkBlock({
     paddingStart: 0,
     paddingEnd: 0,
   });
-
+  console.log(data);
   const getOptions = (property: string): string[] => {
     return Array.from(new Set(data.map((item: any) => String(item[property]))));
   };

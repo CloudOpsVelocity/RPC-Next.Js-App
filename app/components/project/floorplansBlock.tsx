@@ -275,7 +275,7 @@ Props) {
     count: projectUnitsData?.length || 0,
     getScrollElement: () => parentRef.current,
     estimateSize: () => (isMobile ? 210 : 180),
-    overscan:  5,
+    overscan: 5,
   });
   useEffect(() => {
     if (
@@ -508,6 +508,7 @@ Props) {
                             height: `${virtualRow.size}px`,
                             transform: `translateY(${virtualRow.start}px)`,
                           }}
+                          // onClick={handleOpen}
                         >
                           <FloorplanDetailsCard
                             propCgId={propCgId}

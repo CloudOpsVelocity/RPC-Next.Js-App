@@ -16,7 +16,13 @@ import ErrorContainer from "@/app/components/project/error/container";
 import MobileHidden from "@/app/components/molecules/MobileHidden";
 import FloorplanDrawer from "@/app/components/project/drawers/floorplan";
 import MasterPlan from "@/app/components/project/masterplan";
-import FloorplansBlock from "@/app/components/project/floorplansBlock";
+const FloorplansBlock = dynamic(
+  () => import("@/app/components/project/floorplansBlock"),
+  {
+    ssr: false,
+  }
+);
+// import FloorplansBlock from "@/app/components/project/floorplansBlock";
 import GalleryBlock from "@/app/components/project/galleryBlock";
 import Specifications from "@/app/components/project/specification";
 import Banner from "@/app/components/project/banner";
