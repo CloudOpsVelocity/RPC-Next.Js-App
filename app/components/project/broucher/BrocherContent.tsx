@@ -109,7 +109,7 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
       : 0;
 
   // If RAM is less than 4GB, render iframe instead
-  if (ram && ram < 6) {
+  if (ram && ram < 4) {
     return (
       <div className="w-[95%] sm:w-[90%] mx-auto my-4 sm:my-8 bg-gray-50">
         <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-semibold mb-[12px] capitalize break-words pl-3 pt-2">
