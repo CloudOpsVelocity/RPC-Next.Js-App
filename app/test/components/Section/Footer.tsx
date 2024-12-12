@@ -13,11 +13,31 @@ import Subscribe from "./Subscribe";
 
 export default function EnhancedFooter() {
   const socialIcons = [
-    { name: "facebook", icon: <FaFacebook size={24} />,link:'https://www.facebook.com/profile.php?id=100066833915037' },
-    { name: "instagram", icon: <FaInstagram size={24} />,link:'https://www.instagram.com/getrightproperty/' },
-    { name: "twitter", icon: <FaTwitter size={24} />,link:'https://x.com/getrightproperty' },
-    { name: "youtube", icon: <FaYoutube size={24} />,link:'https://www.youtube.com/@getrightproperty' },
-    { name: "linkedin", icon: <FaLinkedin size={24} />,link:'https://www.linkedin.com/company/get-right-property/' },
+    {
+      name: "facebook",
+      icon: <FaFacebook size={24} />,
+      link: "https://www.facebook.com/profile.php?id=100066833915037",
+    },
+    {
+      name: "instagram",
+      icon: <FaInstagram size={24} />,
+      link: "https://www.instagram.com/_getrightproperty_/?utm_source=qr#",
+    },
+    {
+      name: "twitter",
+      icon: <FaTwitter size={24} />,
+      link: "https://x.com/getrightproperty",
+    },
+    {
+      name: "youtube",
+      icon: <FaYoutube size={24} />,
+      link: "https://www.youtube.com/@getrightproperty",
+    },
+    {
+      name: "linkedin",
+      icon: <FaLinkedin size={24} />,
+      link: "https://www.linkedin.com/company/get-right-property/",
+    },
   ];
   const sections = [
     {
@@ -151,7 +171,7 @@ export default function EnhancedFooter() {
               &amp; building lasting relationships with our clients
             </p>
             <div className="flex space-x-6">
-              {socialIcons.map(({ name, icon,link}) => (
+              {socialIcons.map(({ name, icon, link }) => (
                 <a
                   key={name}
                   href={link}
@@ -248,7 +268,6 @@ export default function EnhancedFooter() {
               </p>
               <Subscribe />
             </div>
-         
           </div>
         </div>
 

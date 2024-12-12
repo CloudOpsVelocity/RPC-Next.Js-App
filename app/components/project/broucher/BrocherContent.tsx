@@ -16,9 +16,8 @@ import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 pdfjs.GlobalWorkerOptions.workerSrc =
   process.env.NODE_ENV === "development"
     ? new URL("pdfjs-dist/build/pdf.worker.min.mjs", import.meta.url).toString()
-    : `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
+    : `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
-// ProjectPhase interface
 interface ProjectPhase {
   id: number;
   name: string;
@@ -38,6 +37,11 @@ type Props = {
 };
 
 function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
+  const { data: session } = useSession();
+  const [, { open: LoginOpen }] = usePopShortList();
+  const pdfContainerRef = useRef<HTMLDivElement>(null);
+  const isMobile = useMediaQuery("(max-width: 660px)");
+
   const [state, setState] = useState<{
     activePhase: ProjectPhase;
     numPages: number | null;
@@ -75,9 +79,7 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
           errorMessage: "",
         }
   );
-  const { data: session } = useSession();
-  const [, { open: LoginOpen }] = usePopShortList();
-  const pdfContainerRef = useRef<HTMLDivElement>(null);
+
   const adjustPageScale = useCallback(() => {
     if (pdfContainerRef.current) {
       const containerHeight = pdfContainerRef.current.clientHeight;
@@ -101,22 +103,48 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
     return () => window.removeEventListener("resize", handleResize);
   }, [adjustPageScale]);
 
+  const ram =
+    typeof navigator !== "undefined"
+      ? ((navigator as any).deviceMemory as number)
+      : 0;
+
+  // If RAM is less than 4GB, render iframe instead
+  if (ram && ram < 4) {
+    return (
+      <div className="w-[95%] sm:w-[90%] mx-auto my-4 sm:my-8 bg-gray-50">
+        <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-semibold mb-[12px] capitalize break-words pl-3 pt-2">
+          <span>Explore the Comprehensive Brochure of </span>
+          <span className="text-[#148B16] font-bold">{projName}</span>
+        </h2>
+
+        <iframe
+          src={singleBrocher || phaseOverviewData[0]?.phaseBrochureUrl || ""}
+          className="w-full h-[400px] border-0"
+          title={`${projName} Brochure`}
+        />
+      </div>
+    );
+  }
+
   const changePage = (offset: number) => {
     setState((prev) => ({ ...prev, pageNumber: prev.pageNumber + offset }));
   };
 
   const handleDownload = (url: string) => {
     if (!session) {
-      LoginOpen(() => {
-        url &&
-          window.open(
-            `/pdf/${encodeURIComponent(url.split(".net")[1])}`,
-            "_blank"
-          );
-      },{
-        type:'brochure',
-        link:url
-      });
+      LoginOpen(
+        () => {
+          url &&
+            window.open(
+              `/pdf/${encodeURIComponent(url.split(".net")[1])}`,
+              "_blank"
+            );
+        },
+        {
+          type: "brochure",
+          link: url,
+        }
+      );
       return;
     }
     window.open(url, "_blank");
@@ -163,8 +191,6 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
         : "bg-white text-[#0073C6] hover:bg-gray-50 border border-gray-300"
     } focus:z-10 focus:ring-2 focus:ring-[#0073C6] focus:text-[#0073C6] hover:scale-105`;
 
-  const isMobile = useMediaQuery("(max-width: 660px)");
-
   if (singleBrocher) {
     return (
       <div
@@ -202,17 +228,16 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
                 loading={
                   <FaSpinner className="animate-spin text-[#0073C6] h-8 w-8" />
                 }
-                
               >
                 <Page
                   pageNumber={state.pageNumber}
                   renderTextLayer={false}
                   renderAnnotationLayer={false}
-                  // scale={isMobile ? 0.4 : 0.7}
                   className="shadow-md rounded overflow-y-auto"
                   height={isMobile ? 300 : 520}
-                  loading={<FaSpinner className="animate-spin text-[#0073C6] h-8 w-8" />}
-
+                  loading={
+                    <FaSpinner className="animate-spin text-[#0073C6] h-8 w-8" />
+                  }
                 />
               </Document>
             )}
@@ -221,7 +246,9 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
           <div className="w-full flex items-center justify-center space-x-4 mt-4">
             <button
               onClick={() => changePage(-1)}
-              disabled={state.pageNumber <= 1 || state.loading || state.pageNumber === 0}
+              disabled={
+                state.pageNumber <= 1 || state.loading || state.pageNumber === 0
+              }
               className={`bg-[#0073C6] text-white p-1 flex justify-center items-center rounded-full disabled:opacity-50 disabled:cursor-not-allowed ${
                 state.loading ? "cursor-not-allowed" : "h-8 w-8"
               }`}
@@ -336,19 +363,16 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
               loading={
                 <FaSpinner className="animate-spin text-[#0073C6] h-8 w-8" />
               }
-
             >
               <Page
                 pageNumber={state.pageNumber}
                 renderTextLayer={false}
                 renderAnnotationLayer={false}
-                // scale={isMobile ? 0.4 : 0.7}
                 className="shadow-md rounded "
-                loading={<FaSpinner className="animate-spin text-[#0073C6] h-8 w-8" />}
+                loading={
+                  <FaSpinner className="animate-spin text-[#0073C6] h-8 w-8" />
+                }
                 height={isMobile ? 270 : 520}
-                // width={isMobile ? 200 : 300}
-                // _className="max-h-[300px] sm:max-h-[500px] max-w-fit"
-
               />
             </Document>
           )}
