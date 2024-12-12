@@ -13,7 +13,7 @@ interface IntersectionReturn {
 
 const useIntersection = ({
   root = null,
-  rootMargin = "0px",
+  rootMargin = "0px", 
   threshold = 0.1,
 }: IntersectionOptions): IntersectionReturn => {
   const [entry, setEntry] = useState<IntersectionObserverEntry | null>(null);

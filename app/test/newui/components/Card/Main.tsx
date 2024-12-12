@@ -104,7 +104,9 @@ const MainBox = ({ data, refetch }: Props) => {
 
   const [, { open }] = useReqCallPopup();
   const overlayData = useAtomValue(overlayAtom);
+  
   const handleOpen = () => {
+    console.log(overlayData);
     open({
       modal_type:
         type === "proj" ? "PROJECT_REQ_CALLBACK" : "PROPERTY_REQ_CALLBACK",
@@ -143,7 +145,7 @@ const MainBox = ({ data, refetch }: Props) => {
           availableFrom={data.availableFrom}
           data={data}
         />
-        <div className="relative w-full">
+        <div className="relative w-full"> 
           {overlayData.id &&
           `${projIdEnc ?? ''}+${propIdEnc ?? ""}${propTypeId ?? propTypeName ?? ''}${type === "proj" && phaseId ? '+' + phaseId : ''}` ===
             overlayData.id ? (
@@ -182,8 +184,7 @@ const MainBox = ({ data, refetch }: Props) => {
         type={type}
         reqId={reqId}
         {...data}
-        title={`${bhkName ?? ""} ${propTypeName} for
-      ${data.cg === "R" ? "Rent" : "Sell"} in ${localityName}`}
+        title={`${bhkName ?? ""} ${propTypeName} for ${data.cg === "R" ? "Rent" : "Sell"} in ${localityName}`}
         onAddingCompare={onAddingCompare}
         isCompared={state.compareAdded}
         handleOpen={handleOpen}

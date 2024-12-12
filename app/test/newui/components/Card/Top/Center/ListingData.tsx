@@ -188,11 +188,17 @@ export default function ListingData({
                   className="text-btnPrimary font-bold text-[12px] sm:text-[14px] underline  cursor-pointer   "
                   onClick={(e) => {
                     e.stopPropagation(); // Prevents the modal from opening if clicking elsewhere
+                    console.log("read more testing")
                     dispatch({
-                      content: projectAbout,
+                      content: projectAbout, 
+                      // id: `${
+                      //   type === "proj" ? projIdEnc : propIdEnc 
+                      // }+${propTypeId ?? propTypeName ?? ''}${
+                      //   type === "proj" && phaseId ? "+" + phaseId : ""
+                      // }`,
                       id: `${
-                        type === "proj" ? projIdEnc : propIdEnc
-                      }+${propTypeId ?? ''}${
+                        projIdEnc ?? ''}+${propIdEnc ?? ""
+                      }${propTypeId ?? propTypeName ?? ''}${
                         type === "proj" && phaseId ? "+" + phaseId : ""
                       }`,
                       title:

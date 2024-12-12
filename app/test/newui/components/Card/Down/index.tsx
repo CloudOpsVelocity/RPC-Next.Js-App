@@ -4,6 +4,7 @@ import clsx from "clsx";
 import React from "react";
 import { overlayAtom } from "../../../store/overlay";
 import { useSetAtom } from "jotai";
+import { PetFreindly, WhitePetFreindly } from "@/app/images/commonSvgs";
 
 export default function CardDownSection({
   a,
@@ -76,20 +77,7 @@ location
           <>
             {(isPetFriendly && propTypeName !== "Plot") ? (
               <div className="flex items-center space-x-1 bg-green-500 text-white font-bold py-1 px-3 text-xs rounded-full shadow-md">
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M5 13l4 4L19 7"
-                  />
-                </svg>
+                <WhitePetFreindly className="w-[20px] h-[20px] " />
                 <span>Pet Friendly</span>
               </div>
             ) : null}
