@@ -163,6 +163,10 @@ export default async function ProjectsDetailsPage({
             slug={slug}
             PhaseOverview={phaseOverview}
             phaseList={data.phases}
+            postedData={{
+              postedById: data.builderId,
+              postedByName: data.companyName,
+            }}
           />
         ) : (
           <PartialUnitData

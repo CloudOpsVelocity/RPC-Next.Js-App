@@ -35,6 +35,7 @@ type Props = {
   projName?: string;
   form: any;
   floorPlanType: string;
+  postedData: any;
 };
 
 function FloorPlanModal({
@@ -43,6 +44,7 @@ function FloorPlanModal({
   projName,
   form: unitTypeForm,
   floorPlanType,
+  postedData,
 }: Props) {
   const [selectedFloor, setSelectedFloor] = useAtom(selectedFloorAtom);
   const [floorsArray, setFloorsArray] = useAtom(floorPlansArray);
@@ -166,7 +168,13 @@ function FloorPlanModal({
             allUnits={data}
             handleReset={handleReset}
           />
-          {selectedFloor && <RightSection propCgId={propCgId} data={data} />}
+          {selectedFloor && (
+            <RightSection
+              propCgId={propCgId}
+              data={data}
+              postedData={postedData}
+            />
+          )}
         </div>
       </div>
     </Modal>
@@ -194,8 +202,7 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
             String(item[key]).toLowerCase() == values[key].toLowerCase()
         );
         if (allValuesMatch) {
-
-            optionsSet.add(item[property].toString());
+          optionsSet.add(item[property].toString());
         }
       }
     });
@@ -370,7 +377,11 @@ const LeftSection = ({ propCgId, data, handleReset, showClearAll }: any) => {
               key={"unit-type-name"}
               w={"full"}
               mt="md"
-              label={`${propCgId == projectprops.villament ? "Select Villament Type" : "Select Apartment Type"}`}
+              label={`${
+                propCgId == projectprops.villament
+                  ? "Select Villament Type"
+                  : "Select Apartment Type"
+              }`}
               className="!w-[46%]"
               placeholder="-- select --"
               data={getOptions("aptTypeName")}
@@ -808,12 +819,12 @@ const MiddleSection = ({
             {propCgId != projectprops.plot &&
               selectedFloor?.superBuildUparea &&
               " | Area. " +
-                formatNumberWithSuffix(selectedFloor?.superBuildUparea,false) +
+                formatNumberWithSuffix(selectedFloor?.superBuildUparea, false) +
                 " sq.ft"}
             {propCgId == projectprops.plot &&
               selectedFloor?.plotArea &&
               " | Area. " +
-                formatNumberWithSuffix(selectedFloor?.plotArea,false) +
+                formatNumberWithSuffix(selectedFloor?.plotArea, false) +
                 " sq.ft"}
           </>
         )}
@@ -824,10 +835,22 @@ const MiddleSection = ({
         floorsArray.length > 0 &&
         data?.floorPlanUrl ? (
           <picture>
-            <source media="(max-width: 460px)" srcSet={data?.floorPlanUrl.split(',')[1]} />
-            <source media="(max-width: 768px)" srcSet={data?.floorPlanUrl.split(',')[2]} />
-            <source media="(max-width: 1200px)" srcSet={data?.floorPlanUrl.split(',')[3]} />
-            <source media="(min-width: 1200px)" srcSet={data?.floorPlanUrl.split(',')[3]} />
+            <source
+              media="(max-width: 460px)"
+              srcSet={data?.floorPlanUrl.split(",")[1]}
+            />
+            <source
+              media="(max-width: 768px)"
+              srcSet={data?.floorPlanUrl.split(",")[2]}
+            />
+            <source
+              media="(max-width: 1200px)"
+              srcSet={data?.floorPlanUrl.split(",")[3]}
+            />
+            <source
+              media="(min-width: 1200px)"
+              srcSet={data?.floorPlanUrl.split(",")[3]}
+            />
             <Image
               // @ts-ignore
               src={`${data?.floorPlanUrl}`}
@@ -887,8 +910,8 @@ const MiddleSection = ({
                   <Image
                     // @ts-ignore
                     src={
-                      eachObj?.floorPlanUrl?.split(',')[1]
-                        ? `${eachObj?.floorPlanUrl?.split(',')[1]}`
+                      eachObj?.floorPlanUrl?.split(",")[1]
+                        ? `${eachObj?.floorPlanUrl?.split(",")[1]}`
                         : ImgNotAvail
                     }
                     alt="Floor Plan"

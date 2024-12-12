@@ -6,11 +6,11 @@ import { projectReqDataAtom } from "@/app/store/project/project.req";
 import { formatNumberWithSuffix } from "@/app/utils/numbers";
 import clsx from "clsx";
 import { useAtomValue } from "jotai";
+import { useQuery } from "react-query";
 
-export const RightSection = ({ propCgId, className }: any) => {
+export const RightSection = ({ propCgId, className, postedData }: any) => {
   const data = useAtomValue(selectedFloorAtom);
   const [, { open }] = useReqCallPopup();
-  const projectReqData = useAtomValue(projectReqDataAtom);
   return (
     <div
       className={clsx(
@@ -308,8 +308,8 @@ export const RightSection = ({ propCgId, className }: any) => {
               modal_type: "REQ_QUOTE",
               source: "projCard",
               reqId: data?.projIdEnc,
-              postedByName: projectReqData?.postedByName ?? "",
-              postedId: projectReqData?.postedById ?? 0,
+              postedByName: postedData?.postedByName ?? "",
+              postedId: postedData?.postedById ?? 0,
               title: data?.unitNumber,
               projUnitIdEnc: data?.unitIdEnc,
             });

@@ -62,6 +62,7 @@ type Props = {
   phaseList: any;
   partialUnitData: any;
   overview?: any;
+  postedData: any;
 };
 
 export default function FloorplansBlock({
@@ -70,6 +71,7 @@ export default function FloorplansBlock({
   PhaseOverview,
   phaseList,
   partialUnitData,
+  postedData,
 }: // overview,
 Props) {
   const allKeys = [35, 33, 31, 34, 32];
@@ -822,6 +824,7 @@ Props) {
                 data={projectUnitsData}
                 form={byUnitForm}
                 floorPlanType={floorPlanType}
+                postedData={postedData}
               />
             </FormProvider>
           </>
