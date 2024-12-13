@@ -44,6 +44,7 @@ export default function NearByCarouselProjProperty({
             </span>
           </Fragment>
         }
+        builderLinkActive
         content="See what builder has posted"
         projName={""}
         data={
