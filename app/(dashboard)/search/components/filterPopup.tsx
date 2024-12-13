@@ -2,10 +2,11 @@
 import React, { useRef, useState } from "react";
 import { searchDetails } from "@/app/data/searchDetails";
 import Button from "@/app/elements/button";
+import S from "@/app/styles/seach/Listing.module.css";
 import {
   DropDownIcon,
   fourStarIcon,
-  lensSvg,
+  lensSvg, 
   miniItemsCrossIcon,
   notificationIcon,
 } from "@/app/images/commonSvgs";
@@ -21,7 +22,7 @@ import { projectprops, propertyDetailsTypes } from "@/app/data/projectDetails";
 import ClearAll from "./ClearAll";
 import { SEARCH_FILTER_DATA } from "@/app/data/search";
 import useSearchFilters from "@/app/hooks/search";
-import { useDebouncedState } from "@mantine/hooks";
+import { useDebouncedState, useMediaQuery } from "@mantine/hooks";
 import { useQuery } from "react-query";
 import { getData } from "@/app/utils/api/search";
 import clsx from "clsx";
@@ -29,7 +30,7 @@ import { formatBudgetValue } from "./buget";
 import { toFormattedString } from "./buget/budget";
 import useQsearch from "@/app/hooks/search/useQsearch";
 import { MainSearchMultiSelect } from "./_ui/Multiselect";
-import { serverCityAtom } from "@/app/store/search/serverCity";
+import { serverCityAtom } from "@/app/store/search/serverCity"; 
 import { useAtomValue } from "jotai";
 
 const FilterPopup = ({ close }: { close?: () => void }) => {
@@ -65,6 +66,8 @@ const FilterPopup = ({ close }: { close?: () => void }) => {
     enabled: builderSearch !== "",
   });
 
+  const isMobile = useMediaQuery("(max-width: 601px)");
+
   const {
     filters,
     handleCheckboxClick,
@@ -99,8 +102,8 @@ const FilterPopup = ({ close }: { close?: () => void }) => {
         )
       : searchDetails;
   return (
-    <div className=" flex justify-start items-start w-[70vw] top-[160px] left-[70%]">
-      <div className="w-[20%]  hidden sm:flex shadow-md justify-start items-center flex-col ">
+    <div className=" flex justify-start items-start w-full md:w-[70vw] top-[160px] left-[70%]">
+      <div className="w-[20%] hidden sm:flex shadow-md justify-start items-center flex-col ">
         <p className=" text-[#000] text-[16px] bg-[#F4F4F4] flex justify-start px-6  items-center font-[500] py-[3.5%] w-full ">
           Quick Filters
         </p>
@@ -123,12 +126,13 @@ const FilterPopup = ({ close }: { close?: () => void }) => {
           })}
         </div>
       </div>
+
       <div className="w-full">
         <ClearAll type="all" close={close} />
         {/* Right Side Fields Con */}
         <ScrollArea
           h={350}
-          className="w-full pt-[1%] sm:pl-[2%]    "
+          className="w-full  pt-[1%] pl-[1%] md:pl-[2%]"
           viewportRef={viewport}
         >
           {" "}
@@ -146,7 +150,7 @@ const FilterPopup = ({ close }: { close?: () => void }) => {
             Project Status
           </h3>
           <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
-            {SEARCH_FILTER_DATA.projectstatus.map((eachStatus, index) => {
+            {SEARCH_FILTER_DATA.projectstatus.map(eachStatus => {
               return (
                 <Radio
                   key={eachStatus.cid}
@@ -157,6 +161,7 @@ const FilterPopup = ({ close }: { close?: () => void }) => {
                   onChange={() => setStatus(eachStatus.cid)}
                   label={eachStatus.Label}
                   name="propertyStatus"
+                  size={isMobile ? "xs" : "md"}
                 />
               );
             })}
@@ -237,6 +242,7 @@ const FilterPopup = ({ close }: { close?: () => void }) => {
                   checked={
                     filters.propTypes === propertyDetailsTypes?.get(keyName)?.id
                   }
+                  size={isMobile ? "xs" : "md"}
                 />
               );
             })}
@@ -262,6 +268,7 @@ const FilterPopup = ({ close }: { close?: () => void }) => {
                           handleCheckboxClick("unitTypes", eachStatus.value)
                         }
                         checked={filters.unitTypes.includes(eachStatus.value)}
+                        size={isMobile ? "xs" : "md"}
                       />
                     );
                   })}
@@ -275,7 +282,7 @@ const FilterPopup = ({ close }: { close?: () => void }) => {
           >
             Area
           </h3>
-          <p className="text-[#4D6677] text-[16px] font-[600] mb-[2%] ">
+          <p className="text-[#4D6677] text-[14px] md:text-[16px] font-[600] mb-[2%] ml-[14px] md:ml-0 ">
             {filters.areaValue[0]} sq.ft - {filters.areaValue[1]} sq.ft
           </p>
           <RangeSlider
@@ -293,6 +300,9 @@ const FilterPopup = ({ close }: { close?: () => void }) => {
             value={filters.areaValue}
             onChange={(value) => handleSliderChange("areaValue", value)}
             style={{ width: "80%" }}
+            size={isMobile ? "xs" : "md"}
+            className="ml-[14px] md:ml-0 "
+            classNames={{markLabel: S.sliderMarkLable}}
           />
           <h3
             className=" text-[#202020] mb-[1%] text-[14px] font-[600] mt-[5%] "
@@ -300,7 +310,7 @@ const FilterPopup = ({ close }: { close?: () => void }) => {
           >
             Budget
           </h3>
-          <p className="text-[#4D6677] text-[16px] font-[600] mb-[2%] ">
+          <p className="text-[#4D6677] text-[14px] md:text-[16px] font-[600] mb-[2%] ml-[14px] md:ml-0  ">
             ₹ {toFormattedString(filters.bugdetValue[0])} - ₹{" "}
             {toFormattedString(filters.bugdetValue[1])}
           </p>
@@ -318,6 +328,9 @@ const FilterPopup = ({ close }: { close?: () => void }) => {
             max={filters.cg === "R" ? 100000 : 600000000}
             step={filters.cg === "R" ? 1 : 100000}
             label={(value) => toFormattedString(value)}
+            size={isMobile ? "xs" : "md"}
+            className="ml-[14px] md:ml-0 "
+            classNames={{markLabel: S.sliderMarkLable}}
           />
           {filters?.propTypes != projectprops.plot && (
             <React.Fragment>
@@ -327,7 +340,7 @@ const FilterPopup = ({ close }: { close?: () => void }) => {
               >
                 Number of Bathrooms
               </h3>
-              <div className="flex  mb-[3%] justify-start items-start gap-[4%]">
+              <div className="flex md:mb-[3%] justify-start items-start gap-[4%] flex-wrap ">
                 {[...Array(6)].map((x, i) => {
                   return (
                     <Checkbox
@@ -336,6 +349,8 @@ const FilterPopup = ({ close }: { close?: () => void }) => {
                       color="green"
                       onClick={() => handleCheckboxClick("bathRooms", i + 1)}
                       checked={filters.bathRooms.includes(i + 1)}
+                      size={isMobile ? "xs" : "md"}
+                      className="mb-[10px]"
                     />
                   );
                 })}
@@ -358,6 +373,7 @@ const FilterPopup = ({ close }: { close?: () => void }) => {
                   color="green"
                   onClick={() => handleCheckboxClick("amenities", i.cid)}
                   checked={filters.amenities.includes(i.cid)}
+                  size={isMobile ? "xs" : "md"}
                 />
               );
             })}
@@ -379,6 +395,7 @@ const FilterPopup = ({ close }: { close?: () => void }) => {
                       color="green"
                       onClick={() => handleCheckboxClick("parkings", i + 1)}
                       checked={filters.parkings.includes(i + 1)}
+                      size={isMobile ? "xs" : "md"}
                     />
                   );
                 })}
@@ -401,6 +418,7 @@ const FilterPopup = ({ close }: { close?: () => void }) => {
                   color="green"
                   onClick={() => handleCheckboxClick("reraVerified", i.cid)}
                   checked={filters.reraVerified?.includes(i.cid)}
+                  size={isMobile ? "xs" : "md"}
                 />
               );
             })}
@@ -463,6 +481,7 @@ const FilterPopup = ({ close }: { close?: () => void }) => {
             onSearchChange={(value) => setBuilderSearch(value)}
             pb={50}
             rightSection={<DropDownIcon />}
+            size={isMobile ? "xs" : "md"}
           />
         </ScrollArea>
       </div>

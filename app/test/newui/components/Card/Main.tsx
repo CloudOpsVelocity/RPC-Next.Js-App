@@ -90,7 +90,7 @@ const MainBox = ({ data, refetch }: Props) => {
     } else {
       url = generateListingLinkUrl({
         city: data.cityName,
-        locality: data.localityName,
+        locality: data.localityName, 
         projName: data.projIdEnc ? data.propName : null,
         category: data.category === "Sale" ? "for-sale" : "for-rent",
         phase: data.phaseName,
@@ -161,6 +161,7 @@ const MainBox = ({ data, refetch }: Props) => {
                 data={newData}
                 type={type}
                 {...newData}
+                bhkName={bhkName}
                 onAddingCompare={onAddingCompare}
                 onAddingShortList={onAddingShortList}
               />
@@ -174,6 +175,7 @@ const MainBox = ({ data, refetch }: Props) => {
                 data={newData}
                 type={type}
                 {...newData}
+                bhkName={bhkName}
                 onAddingCompare={onAddingCompare}
                 onAddingShortList={onAddingShortList}
               />

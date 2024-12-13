@@ -9,7 +9,7 @@ import React, { ReactNode, useMemo } from "react";
 // Simple slugify function without memoization
 const slugify = (name: string): string => {
   return name
-    .toLowerCase()
+    .toLowerCase() 
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)+/g, "");
 };
@@ -43,8 +43,8 @@ const slugifyBHKUnitType = (bhkUnitType: string): string => {
 export const generateListingLinkUrl = (
   routeParams: ListingLinkProps["routeParams"]
 ): string => {
-  const { city, locality, projName, phase, bhkUnitType, propIdEnc, category } =
-    routeParams;
+  const { city, locality, projName, phase, bhkUnitType, propIdEnc, category } = routeParams;
+
   let url = `${
     projName ? BASE_PATH_PROJECT_LISTING : BASE_PATH_LISTING
   }/${category}/${slugify(city)}/${slugify(locality)}`;

@@ -8,6 +8,8 @@ import { searchShareAtom } from "../../../SharePopup";
 import { useMediaQuery } from "@mantine/hooks";
 import ProjData from "../Center/ProjData";
 import { ShareIcon } from "@/app/images/HomePageIcons";
+import { generateListingLinkUrl } from "@/app/utils/linkRouters/ListingLink";
+import useSearchFilters from "@/app/hooks/search";
 
 type Props = any;
 
@@ -27,13 +29,19 @@ export default function TopRightSection({
   propIdEnc,
   postedDate,
   propName,
+  bhkName,
+  city,
+  locality,
+  phaseName,
 }: Props) {
   const setSelected = useSetAtom(selectedSearchAtom);
   const [sharePopupData, setSharePopup] = useAtom(searchShareAtom);
-  const url =
-    type === "proj"
-      ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/abc/banglore/whitefield/${projIdEnc}`
-      : `${process.env.NEXT_PUBLIC_BACKEND_URL}/listing/whitefield/${propIdEnc}`;
+  const { filters } = useSearchFilters();
+  
+  // const url =
+  //   type === "proj"
+  //     ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/abc/banglore/whitefield/${projIdEnc}`
+  //     : `${process.env.NEXT_PUBLIC_BACKEND_URL}/listing/whitefield/${propIdEnc}`;
   const isMobile = useMediaQuery("(max-width: 1600px)");
   const projOrPropName = type === "proj" ? projName : propName;
   const handleClick = () => {
@@ -44,6 +52,17 @@ export default function TopRightSection({
     }
   };
 
+   const url = generateListingLinkUrl({ 
+      bhkUnitType: bhkName ? bhkName : '',
+      city: city ? city : "",
+      propIdEnc: type == "proj" ? projIdEnc : propIdEnc,
+      category: filters.cg === "S" ? "for-sale" : "for-rent",
+      locality: locality ? locality : "",
+      phase: phaseName ? phaseName : "",
+      projName: projName ? projName : projName
+    })
+
+    console.log("card 2")
   return (
     <div
       onClick={(e) => e.stopPropagation()}
@@ -135,15 +154,20 @@ export default function TopRightSection({
             <button
               className="max-w-fit px-[1px] py-[1px] rounded text-[#242424] text-sm not-italic font-semibold my-2 md:mb-1 gradient"
               onClick={() =>
-                setSelected({
-                  agentListing,
-                  ownerListing,
-                  projOrPropName,
-                  lat,
-                  lang,
-                  type,
-                  reqId: type === "proj" ? projIdEnc : propIdEnc,
+                navigator.share({
+                  text:'shear',
+                  url: url
                 })
+              
+                // setSelected({
+                //   agentListing,
+                //   ownerListing,
+                //   projOrPropName,
+                //   lat,
+                //   lang,
+                //   type,
+                //   reqId: type === "proj" ? projIdEnc : propIdEnc,
+                // })
               }
             >
               {" "}

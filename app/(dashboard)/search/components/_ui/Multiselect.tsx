@@ -11,9 +11,12 @@ import useSearchFilters from "@/app/hooks/search";
 import toast from "react-hot-toast";
 import useNewsearch from "@/app/hooks/search/useNewSearch";
 import { extractApiValues } from "@/app/utils/dyanamic/projects";
+import { useMediaQuery } from "@mantine/hooks";
 
 
 export function MainSearchMultiSelect({ type }: { type: string }) {
+  const isMobile = useMediaQuery("(max-width: 601px)");
+  
   const AgentOwnerBuilderMap = new Map([
     ["BuilderAgentListing", "A"],
     ["BuilderOwnerListing", "I"],
@@ -56,7 +59,7 @@ export function MainSearchMultiSelect({ type }: { type: string }) {
   };
 
   const handlePush = async (type: string, data: any) => {
-    switch (type) {
+    switch (type) { 
       case "Locality":
         handleAddSearch(`${data.name}+${data.stringId}`);
         break;
@@ -224,7 +227,7 @@ export function MainSearchMultiSelect({ type }: { type: string }) {
   return (
     <Combobox store={combobox} withinPortal={false} keepMounted>
       <Combobox.DropdownTarget>
-        <PillsInput onClick={() => combobox.openDropdown()} mb="3%" maw="60%">
+        <PillsInput onClick={() => combobox.openDropdown()} mb="3%" maw={isMobile ? "96%" : "60%"}>
           <Pill.Group>
             {values}
 

@@ -10,7 +10,7 @@ type Props = {
 
 export default function CenterTop({ data, type }: Props) {
   const isMobile = useMediaQuery("(max-width: 1600px)");
-
+  console.log(data)
   return (
     <div className="flex  flex-col px-1 xl:px-4 xl:mt-[2px] w-full">
       {!isMobile && <ProjData type={type} {...data} />}

@@ -54,6 +54,10 @@
   .tab[data-active] {
     font-size: 14px;
   }
+
+  .sliderMarkLable{
+    font-size: 10px;
+  }
 }
 
 .hidden {

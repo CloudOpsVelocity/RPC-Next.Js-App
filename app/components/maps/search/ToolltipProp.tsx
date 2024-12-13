@@ -15,6 +15,7 @@ export default function TooltipProp({ data }: Props) {
     postedBy,
     cityName,
   } = data;
+  console.log(data)
   return (
     <div className="p-[2px] xl:p-1 !rounded-2xl">
       <p className="text-[#001F35] text-[12px] xl:text-base not-italic font-semibold capitalize">
@@ -27,10 +28,10 @@ export default function TooltipProp({ data }: Props) {
         {localityName}, {cityName}
       </p>{" "}
       <p className="text-[#202020]  text-[12px] xl:text-sm not-italic font-normal">
-        Posted By:
+        {postedBy}:
         <span className="text-[#202020]  text-[12px] xl:text-sm not-italic font-semibold">
           {" "}
-          {postedBy}
+          {/* {postedBy} */}
         </span>
       </p>
     </div>
