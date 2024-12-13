@@ -59,17 +59,6 @@ export default function ListingData({
   console.log(approvedData);
 
   const getApproveNames = (stringIds: string) => {
-    // ids.split(",").map((item:string)=>item.split(' – ')[0]).join(', ') 
-    
-    // let authorityName = [];
-    // approvedData.map(each=>{
-    //   if(ids.includes(each.cid)){
-    //     authorityName.push(each.constDesc);
-    //   }
-    // })
-
-    // return authorityName;
-
     const authorityNames = [];
     for (const item of approvedData) {
       if (stringIds.includes(item.cid.toString())) { 
