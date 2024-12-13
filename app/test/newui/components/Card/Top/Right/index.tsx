@@ -56,7 +56,7 @@ export default function TopRightSection({
   phaseName,
 
   bhk,
-  bhkName
+  bhkName,
 }: Props) {
   const setSelected = useSetAtom(selectedSearchAtom);
   const [sharePopupData, setSharePopup] = useAtom(searchShareAtom);
@@ -77,25 +77,25 @@ export default function TopRightSection({
       element.scrollIntoView({ behavior: "smooth" });
     }
   };
-  
-  const url = type === "proj" ? 
-  createProjectLinkUrl({
-    city: cityName ? cityName : city ? city : "",
-    locality: localityName ? localityName : locality ? locality : "",
-    slug: projName ? projName : projName
-  }) 
-  : 
-  generateListingLinkUrl({ 
-    bhkUnitType: bhkName ? bhkName : '',
-    city: cityName ? cityName : city ? city : "",
-    propIdEnc: type == "proj" ? projIdEnc : propIdEnc,
-    category: filters.cg === "S" ? "for-sale" : "for-rent",
-    locality: localityName ? localityName : locality ? locality : "",
-    phase: phaseName ? phaseName : "",
-    projName: propName ? propName : propName
-  })
+
+  const url =
+    type === "proj"
+      ? createProjectLinkUrl({
+          city: cityName ? cityName : city ? city : "",
+          locality: localityName ? localityName : locality ? locality : "",
+          slug: projName ? projName : projName,
+        })
+      : generateListingLinkUrl({
+          bhkUnitType: bhkName ? bhkName : "",
+          city: cityName ? cityName : city ? city : "",
+          propIdEnc: type == "proj" ? projIdEnc : propIdEnc,
+          category: filters.cg === "S" ? "for-sale" : "for-rent",
+          locality: localityName ? localityName : locality ? locality : "",
+          phase: phaseName ? phaseName : "",
+          projName: propName ? propName : propName,
+        });
   const [lat, lang] = location?.split(",") ?? [];
-  console.log("card 1: ", data)
+  console.log("card 1: ", data);
   return (
     <div
       onClick={(e) => e.stopPropagation()}
@@ -118,7 +118,7 @@ export default function TopRightSection({
         <>
           <ProjData type={type} {...data} />
           <div className="flex flex-col justify-between">
-            <div className="flex flex-row md:flex-col gap-3 sm:gap-1 xl:gap-3  justify-end"> 
+            <div className="flex flex-row md:flex-col gap-3 sm:gap-1 xl:gap-3  justify-end">
               <div className="gap-2 xl:gap-1 inline-flex justify-end">
                 <HeartButton
                   shortListed={Sh}
@@ -126,11 +126,15 @@ export default function TopRightSection({
                 />
                 <button
                   className="gap-2 xl:gap-1 flex flex-row items-center align-middle  "
-                    onClick={() =>{
+                  onClick={
+                    () => {
                       navigator.share({
-                        text:'shear',
-                        url: url
-                      })
+                        title: type === "proj" ? projName : propName,
+                        text: `Check out this ${
+                          type === "proj" ? "project" : "property"
+                        }: ${type === "proj" ? projName : propName}`,
+                        url: url,
+                      });
                     }
                     // setSharePopup({
                     //   ...sharePopupData,
@@ -142,7 +146,7 @@ export default function TopRightSection({
                 >
                   <ShareIcon />
                 </button>
-{/* 
+                {/* 
                 <button
                   className="hidden sm:flex max-w-fit sm:px-[1px] sm:py-[1px] rounded text-[#242424] text-sm not-italic font-semibold sm:my-1 md:mb-1 xl:gradient"
                   onClick={() => {
@@ -166,26 +170,26 @@ export default function TopRightSection({
                 </button> */}
               </div>
               <button
-              className="max-w-fit sm:block hidden xl:hidden ml-auto px-[1px] py-[1px] rounded text-[#242424] text-xs not-italic font-semibold  md:mb-1 gradient"
-              onClick={() =>
-                setSelected({
-                  agentListing,
-                  ownerListing,
-                  projOrPropName,
-                  lat,
-                  lang,
-                  type,
-                  reqId: type === "proj" ? projIdEnc : propIdEnc,
-                  propType: type === "proj" ? propType : propTypeName,
-                })
-              }
-            >
-              {" "}
-              <div className="py-[1px] px-[2px] inline-flex justify-center items-center bg-[#F0F9FF]  rounded">
+                className="max-w-fit sm:block hidden xl:hidden ml-auto px-[1px] py-[1px] rounded text-[#242424] text-xs not-italic font-semibold  md:mb-1 gradient"
+                onClick={() =>
+                  setSelected({
+                    agentListing,
+                    ownerListing,
+                    projOrPropName,
+                    lat,
+                    lang,
+                    type,
+                    reqId: type === "proj" ? projIdEnc : propIdEnc,
+                    propType: type === "proj" ? propType : propTypeName,
+                  })
+                }
+              >
                 {" "}
-                View on Map
-              </div>
-            </button>
+                <div className="py-[1px] px-[2px] inline-flex justify-center items-center bg-[#F0F9FF]  rounded">
+                  {" "}
+                  View on Map
+                </div>
+              </button>
             </div>
 
             {/* <div className="flex items-end flex-col justify-between md:gap-2 mt-[2px]">
@@ -220,12 +224,14 @@ export default function TopRightSection({
                     dispatch({
                       type: "OPEN",
                       content: [],
-                      id: `${projIdEnc}+${propTypeId}${phaseId ? `+${phaseId}` : ''}`,
+                      id: `${projIdEnc}+${propTypeId}${
+                        phaseId ? `+${phaseId}` : ""
+                      }`,
                       title: `NearBy Locations of ${projName}`,
                       conType: "nearby",
                       pType: type,
                       lat,
-                      lang
+                      lang,
                     })
                   }
                 >
@@ -275,12 +281,16 @@ export default function TopRightSection({
               />
               <button
                 className="space-x-2 flex flex-row justify-center"
-                onClick={() =>
-                  navigator.share({
-                    text:'shear',
-                    url: url
-                  })
-                
+                onClick={
+                  () =>
+                    navigator.share({
+                      title: type === "proj" ? projName : propName,
+                      text: `Check out this ${
+                        type === "proj" ? "project" : "property"
+                      }: ${type === "proj" ? projName : propName}`,
+                      url: url,
+                    })
+
                   // setSharePopup({
                   //   ...sharePopupData,
                   //   opened: true,
@@ -361,7 +371,9 @@ export default function TopRightSection({
                     dispatch({
                       type: "OPEN",
                       content: [],
-                      id: `${projIdEnc}+${propTypeId}${phaseId ? `+${phaseId}` : ''}`,
+                      id: `${projIdEnc}+${propTypeId}${
+                        phaseId ? `+${phaseId}` : ""
+                      }`,
                       title: "Amenities",
                       conType: "amenities",
                       pType: type,
@@ -374,7 +386,7 @@ export default function TopRightSection({
 
               <button
                 className="bg-teal-500 text-white font-bold py-1 px-2 text-xs rounded shadow-lg hover:bg-teal-600 transition duration-300 ease-in-out"
-                onClick={() =>{
+                onClick={() => {
                   dispatch({
                     type: "OPEN",
                     content: [
@@ -394,16 +406,16 @@ export default function TopRightSection({
                       "Pharmacy",
                       "Veterinary Clinic",
                     ],
-                    id: `${projIdEnc}+${propTypeId ?? ''}${phaseId ? `+${phaseId}` : ''}`,
+                    id: `${projIdEnc}+${propTypeId ?? ""}${
+                      phaseId ? `+${phaseId}` : ""
+                    }`,
                     title: `NearBy Locations of ${projName}`,
                     conType: "nearby",
                     pType: type,
                     lat,
-                    lang
-                  })
-                }
-                  
-                }
+                    lang,
+                  });
+                }}
               >
                 Nearby
               </button>

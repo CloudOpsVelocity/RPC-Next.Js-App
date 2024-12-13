@@ -42,7 +42,7 @@ export default function ListingData({
   propIdEnc,
   phaseId,
   projAuthority,
-  approvedById
+  approvedById,
 }: Props) {
   const isMobile = useMediaQuery("(max-width: 1600px)");
   const isPlot = propTypeId == 32;
@@ -51,16 +51,14 @@ export default function ListingData({
   const isReadMoreNeeded = projectAbout?.length > readMoreThreshold;
   const dispatch = useSetAtom(overlayAtom);
 
-  const {data:approvedData,isLoading} = useQuery({
-    queryKey:['projAuth'],
-    enabled:false
+  const { data: approvedData, isLoading } = useQuery({
+    queryKey: ["projAuth"],
+    enabled: false,
   });
 
-  console.log(approvedData);
-
   const getApproveNames = (stringIds: string) => {
-    // ids.split(",").map((item:string)=>item.split(' – ')[0]).join(', ') 
-    
+    // ids.split(",").map((item:string)=>item.split(' – ')[0]).join(', ')
+
     // let authorityName = [];
     // approvedData.map(each=>{
     //   if(ids.includes(each.cid)){
@@ -71,15 +69,15 @@ export default function ListingData({
     // return authorityName;
 
     const authorityNames = [];
-    for (const item of approvedData) {
-      if (stringIds.includes(item.cid.toString())) { 
-        authorityNames.push(item.constDesc.split(' – ')[0] );
+    for (const item of approvedData as any) {
+      if (stringIds.includes(item.cid.toString())) {
+        authorityNames.push(item.constDesc.split(" – ")[0]);
       }
     }
-  
-    return authorityNames.join(', ');
+
+    return authorityNames.join(", ");
   };
-   
+
   return (
     <>
       {" "}
@@ -143,15 +141,14 @@ export default function ListingData({
               label={"No. of Units"}
               value={formatNumberWithSuffix(noOfUnits, false)}
             />
-            <DownSectionCard 
-              label={"Approved By"} 
-              value={approvedById ? 
-                getApproveNames(approvedById.split(","))
-                : null} 
+            <DownSectionCard
+              label={"Approved By"}
+              value={
+                approvedById ? getApproveNames(approvedById.split(",")) : null
+              }
             />
-          
 
-            {!isMobile && !isPlot && ( 
+            {!isMobile && !isPlot && (
               <DownSectionCard label={"Elevation"} value={`${towerData}`} />
             )}
           </div>
@@ -188,14 +185,14 @@ export default function ListingData({
 
             <div className="flex flex-nowrap gap-2 xl:gap-x-4">
               {/* <DownSectionCard label={"Approved By"} value={approvedById ? approvedById.split(",").map((item:string)=>item.split(' – ')[0]).join(', ') : null} /> */}
-              
-              <DownSectionCard 
-              label={"Approved By"} 
-              value={approvedById ? 
-                getApproveNames(approvedById.split(","))
-                : null} 
-            />
-              
+
+              <DownSectionCard
+                label={"Approved By"}
+                value={
+                  approvedById ? getApproveNames(approvedById.split(",")) : null
+                }
+              />
+
               <DownSectionCard
                 label={"Bathrooms"}
                 value={bathroom && `${bathroom} No's`}
@@ -235,19 +232,17 @@ export default function ListingData({
                   className="text-btnPrimary font-bold text-[12px] sm:text-[14px] underline  cursor-pointer   "
                   onClick={(e) => {
                     e.stopPropagation(); // Prevents the modal from opening if clicking elsewhere
-                    console.log("read more testing")
+                    console.log("read more testing");
                     dispatch({
-                      content: projectAbout, 
+                      content: projectAbout,
                       // id: `${
-                      //   type === "proj" ? projIdEnc : propIdEnc 
+                      //   type === "proj" ? projIdEnc : propIdEnc
                       // }+${propTypeId ?? propTypeName ?? ''}${
                       //   type === "proj" && phaseId ? "+" + phaseId : ""
                       // }`,
-                      id: `${
-                        projIdEnc ?? ''}+${propIdEnc ?? ""
-                      }${propTypeId ?? propTypeName ?? ''}${
-                        type === "proj" && phaseId ? "+" + phaseId : ""
-                      }`,
+                      id: `${projIdEnc ?? ""}+${propIdEnc ?? ""}${
+                        propTypeId ?? propTypeName ?? ""
+                      }${type === "proj" && phaseId ? "+" + phaseId : ""}`,
                       title:
                         type === "proj" ? "About Project" : "About Property",
                       type: "OPEN",
