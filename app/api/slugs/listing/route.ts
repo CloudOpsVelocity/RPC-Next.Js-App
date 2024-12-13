@@ -3,6 +3,7 @@ import fs from "fs";
 import path from "path";
 import { revalidatePath, revalidateTag } from "next/cache";
 import logger from "@/app/utils/logger";
+import { getPagesSlugs } from "@/app/seo/api";
 
 const getFilePath = () =>
   path.join(process.cwd(), "static", "listingSlugs.json");
@@ -227,6 +228,24 @@ export async function PUT(request: Request) {
   );
 }
 
+export async function PATCH(request: Request) {
+  const res = await getPagesSlugs("listing-search-seo");
+  // Fetch data and cache the keys
+  const staticDir = path.join(process.cwd(), "static");
+  const filePath = path.join(staticDir, "listingSlugs.json");
+  // Ensure the 'static' directory exists
+  if (!fs.existsSync(staticDir)) {
+    fs.mkdirSync(staticDir);
+  }
+  // Convert the data object into JSON
+  const jsonContent = JSON.stringify(res, null, 2);
+  // Write the JSON data to the file
+  fs.writeFileSync(filePath, jsonContent);
+  return NextResponse.json(
+    { message: "Listing slugs updated successfully" },
+    { status: 200 }
+  );
+}
 export async function GET(request: Request) {
   const filePath = getFilePath();
   const fileContent = fs.readFileSync(filePath, "utf-8");
