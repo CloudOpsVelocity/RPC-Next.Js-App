@@ -23,7 +23,7 @@ function NewCarousel<T>({
 }: CarouselProps<T>) {
   const isMobile = useMediaQuery("(max-width: 768px)");
   const isTab = useMediaQuery("(max-width: 1600px)");
-  slidesToShow = isMobile ? 1 : isTab ? slidesToShow - 1 : slidesToShow;
+  slidesToShow = isMobile ? 1.10 : isTab ? slidesToShow - 1 : slidesToShow;
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
