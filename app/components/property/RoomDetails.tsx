@@ -231,13 +231,13 @@ const OtherDetails = ({
         {propTypeName !== "Plot" && (
           <>
              <RoomBasicDetails
-              icon={<PetFreindly />}
+              icon={<PetFreindly className="md:h-[32px] md:w-[32px] h-[24px] w-[24px]" />}
               title="Pet Friendly"
               value={ispetFriendly === 1 ? `Pets Are Allowed` : `Pets Are Not Allowed`}
               className={style.card}
             />
                   <RoomBasicDetails
-            icon={<Status className="md:h-5 md:w-5  !h-[28px] !w-[28px]" />}
+            icon={<Status className="md:h-[32px] md:w-[32px] h-[24px] w-[24px]" />}
             title="Availability Status"
             value={
               availablityStatus == "R" ? "Ready to Move" : "Under Construction"

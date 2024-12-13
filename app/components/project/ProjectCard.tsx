@@ -10,8 +10,10 @@ import { useShortlistAndCompare } from "@/app/hooks/storage";
 import { usePopShortList } from "@/app/hooks/popups/useShortListCompare";
 import clsx from "clsx";
 import { GlobalPageType } from "@/app/validations/global";
-import ProjectLink from "@/app/utils/linkRouters/ProjectLink";
+import ProjectLink, { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 import NewCarousel from "@/app/test/components/NewCarousel";
+import Link from "next/link";
+import BuilderLink, { generateBuilderUrl } from "@/app/utils/linkRouters/Builder";
 
 type Props = {
   type: string;
@@ -22,6 +24,7 @@ type Props = {
   mutate?: ({ id }: { id: string; type: "builder" | "proj" }) => void;
   ct?: "builder" | "proj";
   builderName?: string;
+  builderLinkActive:boolean,
   id?: string;
 };
 
@@ -30,11 +33,13 @@ type CardProps = {
   projName?: string;
   cardData?: any;
   mutate?: ({ id }: { id: string; type: "builder" | "proj" }) => void;
-  ct: "builder" | "proj";
+  ct: "builder" | "proj",
+  builderLinkActive:boolean,
   id?: string;
+  
 };
 
-export function ProjectCard({ type, cardData, mutate, ct, id }: CardProps) {
+export function ProjectCard({ type, cardData, mutate, ct, id , builderLinkActive}: CardProps) {
   const [, { open }] = useReqCallPopup();
   const { data: session } = useSession();
   const { toggleShortlist } = useShortlistAndCompare();
@@ -73,16 +78,26 @@ export function ProjectCard({ type, cardData, mutate, ct, id }: CardProps) {
       title: cardData.projName,
     });
   };
+
+const URLRedirectionProj=createProjectLinkUrl({
+  city: cardData.city,
+  locality: cardData.locality,
+  slug: cardData.projName,
+});
+const URLToBuilder=generateBuilderUrl({
+  city:cardData.city,
+  slug:cardData.builderName
+})
   return (
-    <ProjectLink
-      routeParams={{
+   /*  <ProjectLink
+        routeParams={{
         city: cardData.city,
         locality: cardData.locality,
         slug: cardData.projName,
       }}
       target="_blank"
       key={reqId}
-    >
+    > */
       <div
         className={clsx(
           "border border-width: 2px; text-card-foreground min-w-[310px] max-w-full  sm:min-w-[400px] xl:min-w-[310px]  min-h-[400px] xl:max-w-[400px]   mb-[1%] shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[14px]",
@@ -91,9 +106,9 @@ export function ProjectCard({ type, cardData, mutate, ct, id }: CardProps) {
       >
         {type == "proj" && (
           <div className=" space-y-1.5 p-6  px-4 pt-2 pb-3 justify-between items-center">
-            <div className="tracking-tight sm:text-[18px] font-[600] line-clamp-2 text-wrap min-w-0 text-[#242424] cursor-pointer">
+            <Link target="_blank" href={URLRedirectionProj} className="tracking-tight sm:text-[18px] font-[600]  line-clamp-2 text-wrap min-w-0 text-[#0073C6] cursor-pointer">
               {cardData.projName}
-            </div>
+            </Link>
             <div className="text-xs font-semibold  ">
               <span className="text-[#242424] text-[15px] font-[600]">
                 Price Range:
@@ -130,8 +145,13 @@ export function ProjectCard({ type, cardData, mutate, ct, id }: CardProps) {
           )}
 
           <div className="relative  max-h-[300px]">
-            <div className="mb-4 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] object-cover min-h-[212px] max-h-[300px] relative">
+          <div className="mb-4 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.10)] rounded-[5px] object-cover min-h-[212px] max-h-[300px] relative">
+            <Link
+            target="_blank"
+             href={URLRedirectionProj}
+            >
               <Image
+             
                 src={
                   type === "proj"
                     ? cardData.coverUrl.split(",")[1]
@@ -144,7 +164,8 @@ export function ProjectCard({ type, cardData, mutate, ct, id }: CardProps) {
                 unoptimized
                 fill
               />
-            </div>
+           </Link>
+           </div>
 
             {type == "proj" &&
               (cardData.rerastatus === "Recieved" ||
@@ -209,6 +230,9 @@ export function ProjectCard({ type, cardData, mutate, ct, id }: CardProps) {
               </p>
             )}
 
+           { builderLinkActive && 
+           <p className="text-[#242424]  text-[14px] xl:text-base not-italic font-semibold leading-[normal] mt-[4px] mb-[4px]">Builder: <a href={URLToBuilder}      target="_blank"                
+            className="text-btnPrimary  text-[14px] xl:text-base font-bold leading-[normal] underline">{cardData.builderName}</a></p>}
             <p className="text-[#565D70]  not-italic font-semibold leading-[normal] tracking-[0.56px] capitalize text-[14px] xl:text-[15px]">
               {type === "proj" &&
                 `${cardData.locality}, ${cardData?.city}, ${cardData.pincode} `}
@@ -242,7 +266,7 @@ export function ProjectCard({ type, cardData, mutate, ct, id }: CardProps) {
           </div>
         </div>
       </div>
-    </ProjectLink>
+   /*  </ProjectLink> */
   );
 }
 
@@ -255,6 +279,7 @@ const ProjectCarousel = ({
   mutate,
   ct,
   id,
+  builderLinkActive,
   builderName,
 }: Props) => {
   return (
@@ -283,6 +308,7 @@ const ProjectCarousel = ({
               mutate={mutate}
               ct={ct ?? "builder"}
               id={id}
+              builderLinkActive={builderLinkActive}
             />
           )}
           slidesToShow={4}
