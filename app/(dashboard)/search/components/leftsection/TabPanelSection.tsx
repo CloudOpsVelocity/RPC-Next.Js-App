@@ -7,6 +7,9 @@ import ProjectCard from "@/app/test/newui/components/Card";
 import { useVirtualizer } from '@tanstack/react-virtual';
 import { useAtom } from "jotai";
 import { searachFilterAtom } from "@/app/store/search";
+import { useQuery } from "react-query";
+import { getAllAuthorityNames } from "@/app/utils/api/project";
+import RTK_CONFIG from "@/app/config/rtk";
 
 type Props = {
   mutate?: ({ index, type }: { type: string; index: number }) => void;
@@ -32,7 +35,12 @@ export default function TabPanelSection({ mutate, serverData }: Props) {
         path.includes("/residential")
       ? serverData
       : data;
-
+ const {data:proj} = useQuery({
+  queryKey:['projAuth'],
+  queryFn:getAllAuthorityNames,
+  ...RTK_CONFIG
+ })
+ 
   const rowVirtualizer = useVirtualizer({
     count: serverClientData?.length || 0,
     getScrollElement: () => containerRef.current,

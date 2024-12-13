@@ -101,14 +101,20 @@ export const getAuthorityNames = async (stringIds: string) => {
   // Single loop through res.data to find matching IDs
   const authorityNames = [];
   for (const item of res.data) {
-    if (stringIds.includes(item.cid.toString())) {
+    if (stringIds.includes(item.cid.toString())) { 
       authorityNames.push(item.constDesc);
     }
   }
 
   return authorityNames;
 };
-
+export const getAllAuthorityNames = async () => {
+  const res = await axios.post(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/common/proj-authority`
+  );
+  // Single loop through res.data to find matching IDs
+return res.data
+};
 const getCachedUser = unstable_cache(
   async (id: string): Promise<Main> => getCachedUser(id),
   ["my-app-user"],
