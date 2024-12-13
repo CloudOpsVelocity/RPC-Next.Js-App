@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
-import { useMediaQuery } from '@mantine/hooks';
-import React, { useState, useRef, useMemo, memo, useCallback } from 'react';
-import { IoChevronBackOutline, IoChevronForwardOutline } from 'react-icons/io5';
+import { useMediaQuery } from "@mantine/hooks";
+import React, { useState, useRef, useMemo, memo, useCallback } from "react";
+import { IoChevronBackOutline, IoChevronForwardOutline } from "react-icons/io5";
 
 interface CarouselProps<T> {
   data: T[];
@@ -9,7 +9,7 @@ interface CarouselProps<T> {
   slidesToShow?: number;
   gap?: number;
   className?: string;
-  url?:string
+  url?: string;
   renderViewMore?: () => React.ReactNode; // Function to render the "View More" card
 }
 
@@ -38,31 +38,66 @@ function NewCarousel<T>({
     [dataWithViewMore.length, slidesToShow]
   );
 
-  const next = useCallback(() => setCurrentIndex((curr) => Math.min(curr + 1, maxIndex)), [maxIndex]);
-  const prev = useCallback(() => setCurrentIndex((curr) => Math.max(curr - 1, 0)), []);
+  const next = useCallback(
+    () => setCurrentIndex((curr) => Math.min(curr + 1, maxIndex)),
+    [maxIndex]
+  );
+  const prev = useCallback(
+    () => setCurrentIndex((curr) => Math.max(curr - 1, 0)),
+    []
+  );
 
-  const canGoNext = useMemo(() => currentIndex < maxIndex, [currentIndex, maxIndex]);
+  const canGoNext = useMemo(
+    () => currentIndex < maxIndex,
+    [currentIndex, maxIndex]
+  );
   const canGoPrev = useMemo(() => currentIndex > 0, [currentIndex]);
 
   const DefaultViewMore = () => (
-    <button onClick={()=>window.open(url,"_blank")} className="relative h-full w-full rounded-xl bg-gradient-to-br from-blue-400 to-blue-600 p-1 hover:shadow-xl cursor-pointer transition-all duration-300 ">
+    <button
+      onClick={() => window.open(url, "_blank")}
+      className="relative h-full w-full rounded-xl bg-gradient-to-br from-blue-400 to-blue-600 p-1 hover:shadow-xl cursor-pointer transition-all duration-300 "
+    >
       <div className="h-full w-full rounded-lg bg-white p-4 flex flex-col items-center justify-center space-y-4">
         <div className="rounded-full bg-gradient-to-br from-blue-400 to-blue-600 p-3 animate-pulse">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6 text-white"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M13 7l5 5m0 0l-5 5m5-5H6"
+            />
           </svg>
         </div>
         <div className="text-center">
-          <h3 className="text-xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">View More</h3>
+          <h3 className="text-xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
+            View More
+          </h3>
           <p className="text-sm text-gray-500">Explore all listings</p>
         </div>
         <div className="flex items-center gap-2 text-gray-400">
           <span className="text-xs">Browse complete catalog</span>
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-4 w-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M9 5l7 7-7 7"
+            />
           </svg>
         </div>
-    
       </div>
     </button>
   );
@@ -75,14 +110,16 @@ function NewCarousel<T>({
         style={{ margin: isMobile ? 0 : `0 ${gap / 2}px` }}
       >
         <div
-          className={`flex ${isMobile ? '' : 'transition-transform duration-500 ease-out'}`}
+          className={`flex ${
+            isMobile ? "" : "transition-transform duration-500 ease-out"
+          }`}
           style={
             isMobile
               ? { gap: `${gap}px` }
               : {
-                  transform: `translateX(calc(-${currentIndex * (100 / slidesToShow)}% - ${
-                    currentIndex * gap
-                  }px))`,
+                  transform: `translateX(calc(-${
+                    currentIndex * (100 / slidesToShow)
+                  }% - ${currentIndex * gap}px))`,
                   gap: `${gap}px`,
                 }
           }
@@ -90,14 +127,20 @@ function NewCarousel<T>({
           {dataWithViewMore.map((item, index) => (
             <div
               key={index}
-              className={`flex-none ${isMobile ? 'snap-center' : ''}`}
+              className={`flex-none ${isMobile ? "snap-center" : ""}`}
               style={{
                 width: `calc(${100 / slidesToShow}% - ${
                   (gap * (slidesToShow - 1)) / slidesToShow
                 }px)`,
               }}
             >
-              {item ? renderItem(item, index) : renderViewMore ? renderViewMore() : <DefaultViewMore />}
+              {item ? (
+                renderItem(item, index)
+              ) : renderViewMore ? (
+                renderViewMore()
+              ) : (
+                <DefaultViewMore />
+              )}
             </div>
           ))}
         </div>
@@ -129,7 +172,9 @@ function NewCarousel<T>({
                 key={index}
                 onClick={() => setCurrentIndex(index)}
                 className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  index === currentIndex ? 'bg-gray-800 w-6' : 'bg-gray-300 hover:bg-gray-400'
+                  index === currentIndex
+                    ? "bg-gray-800 w-6"
+                    : "bg-gray-300 hover:bg-gray-400"
                 }`}
               />
             ))}

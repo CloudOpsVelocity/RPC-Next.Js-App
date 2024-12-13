@@ -179,14 +179,19 @@ export async function POST(request: Request, response: Response) {
             request.method
           } ${request.url}`
         );
-        let projId: string | null = null;
+        let revalidateTagId: string | null = null;
         // Revalidate all paths for the new slugs
         Object.keys(slugs).forEach((slug) => {
           revalidatePath(slug);
-          if (!projId) {
-            let id = data[slug].split("_")[2].split("*")[0];
-            projId = id;
-            revalidateTag(id);
+          if (!revalidateTagId) {
+            if (type === "project") {
+              let id = data[slug].split("_")[2].split("*")[0];
+              revalidateTagId = id;
+              revalidateTag(id);
+            } else if (type === "builder") {
+              revalidateTagId = slug;
+              revalidateTag(slug);
+            }
           }
         });
 

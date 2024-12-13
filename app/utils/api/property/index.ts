@@ -21,7 +21,10 @@ const getProjectDetails = async (slug: string): Promise<M | any> => {
 
 const getListingDetails = async (slug: string): Promise<LIstingResponse> => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/fetch/listing/data?propIdEnc=${slug}`
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/fetch/listing/data?propIdEnc=${slug}`,
+    {
+      next: { tags: [slug] },
+    }
   );
   const data = await response.json();
   const filterOtherDetails =

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import logger from "@/app/utils/logger";
 
 const getFilePath = () =>
@@ -124,6 +124,7 @@ export async function POST(request: Request) {
       Object.keys(slugs).forEach((slug) => {
         revalidatePath(slug);
       });
+      revalidateTag(id);
       logger.info(`POST ${request.url}: Successfully updated slugs`);
       return NextResponse.json(
         { message: "Slugs updated successfully" },
