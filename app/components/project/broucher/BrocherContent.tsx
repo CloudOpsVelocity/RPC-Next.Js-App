@@ -136,7 +136,9 @@ function BrocherContent({ phaseOverviewData, projName, singleBrocher }: Props) {
         () => {
           url &&
             window.open(
-              `/pdf/${encodeURIComponent(url.split(".net")[1])}`,
+              `/pdf/${encodeURIComponent(
+                url.split(process.env.NEXT_PUBLIC_IMG_BASE!)[1] ?? ""
+              )}`,
               "_blank"
             );
         },
