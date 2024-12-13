@@ -426,7 +426,7 @@ export default function useSearchFilters(
 }
 
 const getFilteredData = async (
-  query: string,
+  query: string, 
   page: number,
   type: "project" | "owner" | "agent", 
   city: string | null

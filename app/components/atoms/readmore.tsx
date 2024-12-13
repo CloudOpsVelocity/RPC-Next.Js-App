@@ -18,7 +18,6 @@ const ReadMore: React.FC<ReadMoreProps> = ({
   showProjName = true,
   builderName,
 }) => {
- 
   const [{ expanded }, setReadMore] = useAtom(readMoreAtom);
   const charLimit = maxLines * 100;
   const shouldShowReadMore = text?.length > charLimit;
@@ -37,17 +36,15 @@ const ReadMore: React.FC<ReadMoreProps> = ({
     }
   };
 
-
-
   return (
-    <div className="w-full " onClick={handleReadMoreClick}>
-        {!expanded && shouldShowReadMore && "... "}
-        {shouldShowReadMore && (
-          <span className="text-[#0073C6] text-[14px] sm:text-[18px] xl:text-[22px] not-italic font-semibold cursor-pointer">
-            {expanded ? "" : "Read More"}
-          </span>
-        )}
-    </div>
+    <span onClick={handleReadMoreClick}>
+      {!expanded && shouldShowReadMore && "... "}
+      {shouldShowReadMore && (
+        <span className="text-[#0073C6] text-[14px] sm:text-[18px] xl:text-[22px] not-italic font-semibold cursor-pointer">
+          {expanded ? "" : "Read More"}
+        </span>
+      )}
+    </span>
   );
 };
 

@@ -37,7 +37,7 @@ const MainBox = ({ data, refetch }: Props) => {
     shortListed,
     propTypeId,
     isUsed,
-    phaseId
+    phaseId,
   } = data;
   const [state, setState] = useState({
     compareAdded: compareAdded === "Y" ? true : false,
@@ -91,11 +91,13 @@ const MainBox = ({ data, refetch }: Props) => {
       url = generateListingLinkUrl({
         city: data.cityName,
         locality: data.localityName,
-        projName:data.projIdEnc ? data.propName : null,
+        projName: data.projIdEnc ? data.propName : null,
         category: data.category === "Sale" ? "for-sale" : "for-rent",
         phase: data.phaseName,
         propIdEnc: data.propIdEnc,
-        bhkUnitType: data.bhkName ? `${data.bhkName + ' ' + data.propTypeName}` : "" + " " + data.propTypeName,
+        bhkUnitType: data.bhkName
+          ? `${data.bhkName + " " + data.propTypeName}`
+          : "" + " " + data.propTypeName,
       });
 
       window.open(url, "_blank");
@@ -104,7 +106,9 @@ const MainBox = ({ data, refetch }: Props) => {
 
   const [, { open }] = useReqCallPopup();
   const overlayData = useAtomValue(overlayAtom);
+
   const handleOpen = () => {
+    console.log(overlayData);
     open({
       modal_type:
         type === "proj" ? "PROJECT_REQ_CALLBACK" : "PROPERTY_REQ_CALLBACK",
@@ -145,7 +149,9 @@ const MainBox = ({ data, refetch }: Props) => {
         />
         <div className="relative w-full">
           {overlayData.id &&
-          `${projIdEnc ?? ''}+${propIdEnc ?? ""}${propTypeId ?? propTypeName ?? ''}${type === "proj" && phaseId ? '+' + phaseId : ''}` ===
+          `${projIdEnc ?? ""}+${propIdEnc ?? ""}${
+            propTypeId ?? propTypeName ?? ""
+          }${type === "proj" && phaseId ? "+" + phaseId : ""}` ===
             overlayData.id ? (
             <Overlay />
           ) : null}
@@ -182,8 +188,9 @@ const MainBox = ({ data, refetch }: Props) => {
         type={type}
         reqId={reqId}
         {...data}
-        title={`${bhkName ?? ""} ${propTypeName} for
-      ${data.cg === "R" ? "Rent" : "Sale"} in ${localityName}`}
+        title={`${bhkName ?? ""} ${propTypeName} for ${
+          data.cg === "R" ? "Rent" : "Sell"
+        } in ${localityName}`}
         onAddingCompare={onAddingCompare}
         isCompared={state.compareAdded}
         handleOpen={handleOpen}
