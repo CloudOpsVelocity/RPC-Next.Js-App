@@ -126,7 +126,7 @@ export default function ProjData({
         Address: {address}
       </p>
       <p className="text-black text-[12px] sm:text-[14px] xl:text-[14px] font-normal">
-        Posted By:{" "}
+        Builder Name:{" "}
         <span className="font-bold underline cursor-pointer">
           {builderName}
         </span>

@@ -13,8 +13,7 @@ const RightSideBlock = ({ serverData }: any) => {
       }),
     []
   );
-  const { searchProps, countAppliedFiltersFromQuery, path,filters } =
-    useSearchFilters();
+  const { searchProps, countAppliedFiltersFromQuery, path, filters } = useSearchFilters();
   const { data } = searchProps as any;
   const appliedFiltersCount = countAppliedFiltersFromQuery();
   const serverClientData =

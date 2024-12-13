@@ -107,7 +107,6 @@ const MainBox = ({ data, refetch, index, mutate }: Props) => {
   };
 
   const isMobile = useMediaQuery("(max-width: 1600px)");
-
   return (
     <div className="h-auto max-w-full xl:w-full m-2 ml-0 mr-0 self-stretch rounded border shadow-[0px_4px_30px_0px_rgba(74,82,113,0.20)] border-solid border-[#A4B8D4]">
       <div
@@ -121,6 +120,7 @@ const MainBox = ({ data, refetch, index, mutate }: Props) => {
               data={newData}
               type={type}
               {...newData}
+              bhkName={bhkName}
               onAddingCompare={onAddingCompare}
               onAddingShortList={onAddingShortList}
             />
@@ -134,6 +134,7 @@ const MainBox = ({ data, refetch, index, mutate }: Props) => {
               data={newData}
               type={type}
               {...newData}
+              bhkName={bhkName}
               onAddingCompare={onAddingCompare}
               onAddingShortList={onAddingShortList}
             />

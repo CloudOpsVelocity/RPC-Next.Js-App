@@ -62,8 +62,7 @@ const SearchHeader = ({ setShowAllLocalities, city }: any) => {
 
   const [allFilterPopup, setAllFilterPopup] = useState(initialFilterObjState);
 
-  const [opened, { open: openMobileSearchDrawer, close }] =
-    useDisclosure(false);
+  const [opened, { open: openMobileSearchDrawer, close }] = useDisclosure(false);
   const showpopUp = () => {
     setShowAllLocalities(true);
     open();
@@ -131,7 +130,7 @@ const SearchHeader = ({ setShowAllLocalities, city }: any) => {
       </p>
       <div className="mt-2 w-full flex  gap-1 xl:gap-2 sm:gap-[10px] flex-wrap sm:flex-wrap xl:flex-nowrap justify-start xl:justify-start items-center xl:items-center ">
         <SearchCitySelectDropdown />
-        {isMobile && (
+        {/* {isMobile && (
           <div
             className={`border-[#A0D7FF] max-w-full flex flex-wrap rounded-[20px] sm:rounded-[40px] p-2 gap-2 xl:gap-[8px] pl-2 xl:pl-[8px] border-[1px] border-solid  items-center justify-center px-6 ${
               filters.cg == null ? "sm:min-w-[300px]" : ""
@@ -188,9 +187,8 @@ const SearchHeader = ({ setShowAllLocalities, city }: any) => {
             )}
             <SearchIcon />
           </div>
-        )}
-        {!isMobile && (
-          <>
+        )} */}
+        {/* {!isMobile && ( */}
             <Popover
               width={"auto"}
               trapFocus
@@ -250,7 +248,7 @@ const SearchHeader = ({ setShowAllLocalities, city }: any) => {
                   {allFiltersMap?.length > 0 ? (
                     <p>Add more</p>
                   ) : (
-                    <p>Search By Locality, Projects or Listings</p>
+                    <p className="text-[14px] md:text-[16px]">Search By Locality, Projects or Listings</p>
                   )}
                   <SearchIcon />
                 </div>
@@ -371,14 +369,13 @@ const SearchHeader = ({ setShowAllLocalities, city }: any) => {
                 <BugdetFilter close={handleCloseFiltersToggle} />
               </Popover.Dropdown>
             </Popover>
-          </>
-        )}
+        {/* )} */}
 
-        <SearchDrawer
+        {/* <SearchDrawer
           close={close}
           open={openMobileSearchDrawer}
           opened={opened}
-        />
+        /> */}
       </div>
     </div>
   );

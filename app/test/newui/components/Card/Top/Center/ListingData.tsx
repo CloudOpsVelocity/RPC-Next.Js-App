@@ -39,7 +39,8 @@ export default function ListingData({
   availableFor,
   propIdEnc,
   phaseId,
-  projAuthority
+  projAuthority,
+  approvedById
 }: Props) {
   const isMobile = useMediaQuery("(max-width: 1600px)");
   const isPlot = propTypeId == 32;
@@ -47,6 +48,7 @@ export default function ListingData({
   const readMoreThreshold = 200;
   const isReadMoreNeeded = projectAbout?.length > readMoreThreshold;
   const dispatch = useSetAtom(overlayAtom);
+
   return (
     <>
       {" "}
@@ -110,9 +112,9 @@ export default function ListingData({
               label={"No. of Units"}
               value={formatNumberWithSuffix(noOfUnits, false)}
             />
-            <DownSectionCard label={"Approved By"} value={projAuthority ? projAuthority.split(",").map((item:string)=>item.split(' – ')[0]).join(', ') : null} />
+            <DownSectionCard label={"Approved By"} value={approvedById ? approvedById.split(",").map((item:string)=>item.split(' – ')[0]).join(', ') : null} />
 
-            {!isMobile && !isPlot && (
+            {!isMobile && !isPlot && ( 
               <DownSectionCard label={"Elevation"} value={`${towerData}`} />
             )}
           </div>
@@ -148,7 +150,7 @@ export default function ListingData({
             )}
 
             <div className="flex flex-nowrap gap-2 xl:gap-x-4">
-              <DownSectionCard label={"Approved By"} value={`BDA`} />
+              <DownSectionCard label={"Approved By"} value={approvedById ? approvedById.split(",").map((item:string)=>item.split(' – ')[0]).join(', ') : null} />
               <DownSectionCard
                 label={"Bathrooms"}
                 value={bathroom && `${bathroom} No's`}

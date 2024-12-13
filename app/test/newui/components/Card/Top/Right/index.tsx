@@ -12,6 +12,9 @@ import clsx from "clsx";
 import { formatNumberWithSuffix } from "@/app/utils/numbers";
 import DownloadBrocher from "../../DownloadBrocher";
 import { overlayAtom } from "@/app/test/newui/store/overlay";
+import { generateListingLinkUrl } from "@/app/utils/linkRouters/ListingLink";
+import useSearchFilters from "@/app/hooks/search";
+import { createProjectLinkUrl } from "@/app/utils/linkRouters/ProjectLink";
 
 type Props = any;
 
@@ -43,15 +46,28 @@ export default function TopRightSection({
   amenCount,
   category,
   phaseId,
-  location
+  location,
+
+  city,
+  cityName,
+
+  locality,
+  localityName,
+  phaseName,
+
+  bhk,
+  bhkName
 }: Props) {
   const setSelected = useSetAtom(selectedSearchAtom);
   const [sharePopupData, setSharePopup] = useAtom(searchShareAtom);
   const dispatch = useSetAtom(overlayAtom);
-  const url =
-    type === "proj"
-      ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/abc/banglore/whitefield/${projIdEnc}`
-      : `${process.env.NEXT_PUBLIC_BACKEND_URL}/listing/whitefield/${propIdEnc}`;
+  const { filters } = useSearchFilters();
+
+  // const url =
+  //   type === "proj"
+  //     ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/abc/banglore/whitefield/${projIdEnc}`
+  //     : `${process.env.NEXT_PUBLIC_BACKEND_URL}/listing/whitefield/${propIdEnc}`;
+
   const isMobile = useMediaQuery("(max-width: 1600px)");
   const projOrPropName = type === "proj" ? projName : propName;
   const handleClick = () => {
@@ -61,7 +77,25 @@ export default function TopRightSection({
       element.scrollIntoView({ behavior: "smooth" });
     }
   };
+  
+  const url = type === "proj" ? 
+  createProjectLinkUrl({
+    city: cityName ? cityName : city ? city : "",
+    locality: localityName ? localityName : locality ? locality : "",
+    slug: projName ? projName : projName
+  }) 
+  : 
+  generateListingLinkUrl({ 
+    bhkUnitType: bhkName ? bhkName : '',
+    city: cityName ? cityName : city ? city : "",
+    propIdEnc: type == "proj" ? projIdEnc : propIdEnc,
+    category: filters.cg === "S" ? "for-sale" : "for-rent",
+    locality: localityName ? localityName : locality ? locality : "",
+    phase: phaseName ? phaseName : "",
+    projName: propName ? propName : propName
+  })
   const [lat, lang] = location?.split(",") ?? [];
+  console.log("card 1: ", data)
   return (
     <div
       onClick={(e) => e.stopPropagation()}
@@ -84,7 +118,7 @@ export default function TopRightSection({
         <>
           <ProjData type={type} {...data} />
           <div className="flex flex-col justify-between">
-            <div className="flex flex-row md:flex-col gap-3 sm:gap-1 xl:gap-3  justify-end">
+            <div className="flex flex-row md:flex-col gap-3 sm:gap-1 xl:gap-3  justify-end"> 
               <div className="gap-2 xl:gap-1 inline-flex justify-end">
                 <HeartButton
                   shortListed={Sh}
@@ -92,13 +126,18 @@ export default function TopRightSection({
                 />
                 <button
                   className="gap-2 xl:gap-1 flex flex-row items-center align-middle  "
-                  onClick={() =>
-                    setSharePopup({
-                      ...sharePopupData,
-                      opened: true,
-                      url,
-                      ...(type !== "proj" && { title: "Share Listing" }),
-                    })
+                    onClick={() =>{
+                      navigator.share({
+                        text:'shear',
+                        url: url
+                      })
+                    }
+                    // setSharePopup({
+                    //   ...sharePopupData,
+                    //   opened: true,
+                    //   url,
+                    //   ...(type !== "proj" && { title: "Share Listing" }),
+                    // })
                   }
                 >
                   <ShareIcon />
@@ -237,12 +276,17 @@ export default function TopRightSection({
               <button
                 className="space-x-2 flex flex-row justify-center"
                 onClick={() =>
-                  setSharePopup({
-                    ...sharePopupData,
-                    opened: true,
-                    url,
-                    ...(type !== "proj" && { title: "Share Listing" }),
+                  navigator.share({
+                    text:'shear',
+                    url: url
                   })
+                
+                  // setSharePopup({
+                  //   ...sharePopupData,
+                  //   opened: true,
+                  //   url,
+                  //   ...(type !== "proj" && { title: "Share Listing" }),
+                  // })
                 }
               >
                 {config.shareIcon}
