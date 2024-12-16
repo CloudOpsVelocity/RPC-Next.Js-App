@@ -56,7 +56,7 @@ export default function TopRightSection({
   phaseName,
 
   bhk,
-  bhkName,
+  bhkName
 }: Props) {
   const setSelected = useSetAtom(selectedSearchAtom);
   const [sharePopupData, setSharePopup] = useAtom(searchShareAtom);
@@ -106,7 +106,7 @@ export default function TopRightSection({
     >
       {category === "Sale" ? (
         <div className="text-xs hidden xl:flex sm:text-base font-medium text-[#4f4f4f] text-nowrap absolute top-3 right-24  sm:top-0 sm:right-[65px]">
-          Avg Price:{" "}
+          Avg Price:{" "} 
           <span className="font-bold ml-1">
             {" "}
             ₹{formatNumberWithSuffix(type === "proj" ? basePrice : sqftPrice)}
@@ -220,19 +220,19 @@ export default function TopRightSection({
                 </button>
                 <button
                   className="bg-teal-500 text-white text-right max-w-fit px-1 font-bold sm:py-1 sm:px-2 text-xs rounded shadow-lg hover:bg-teal-600 transition duration-300 ease-in-out"
-                  onClick={() =>
+                  onClick={() =>{
+                    console.log("near by 1", data)
                     dispatch({
                       type: "OPEN",
                       content: [],
-                      id: `${projIdEnc}+${propTypeId}${
-                        phaseId ? `+${phaseId}` : ""
-                      }`,
+                      id: `${projIdEnc}+${propTypeId}${ phaseId ? `+${phaseId}` : "" }`,
                       title: `NearBy Locations of ${projName}`,
                       conType: "nearby",
                       pType: type,
                       lat,
-                      lang,
+                      lang, 
                     })
+                  }
                   }
                 >
                   Nearby
@@ -413,7 +413,7 @@ export default function TopRightSection({
                     conType: "nearby",
                     pType: type,
                     lat,
-                    lang
+                    lang 
                   })
                 }}
               >

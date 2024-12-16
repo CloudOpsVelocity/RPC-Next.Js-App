@@ -63,7 +63,7 @@ export default function TooltipProj({ data }: { data: TooltipProjProps }) {
         <div className="space-y-1 mt-1">
           {phases.map((phase) => (
             <div key={phase.phaseName} className="bg-gray-100 rounded px-1 py-0.5">
-              {phase.phaseName && <p className="font-semibold text-gray-800 text-xs mb-1">{`Phase ${phase.phaseName}`}</p>}
+              {phase.phaseName && <p className="font-semibold text-gray-800 text-xs mb-1">{`Phase: ${phase.phaseName}`}</p>}
               <div className="grid gap-1">
                 {phase.propertyTypes.map((property, index) => (
                   <div key={property.propType + index} className="flex justify-between items-center text-xs bg-white p-1 rounded border border-gray-200">

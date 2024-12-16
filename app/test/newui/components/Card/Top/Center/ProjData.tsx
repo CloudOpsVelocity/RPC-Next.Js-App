@@ -1,4 +1,4 @@
-import { formatCurrency } from "@/app/utils/numbers";
+import { formatCurrency, formatNumberWithSuffix } from "@/app/utils/numbers";
 import React from "react";
 import { NewMapIcon } from "@/app/images/commongsSvgs2";
 import { sortUnits } from "@/app/utils/unitparser";
@@ -7,6 +7,7 @@ import { overlayAtom } from "@/app/test/newui/store/overlay";
 import selectedSearchAtom, {
   mobileSearchPageMapModalReducerAtom,
 } from "@/app/store/search/map";
+import BuilderLink, { generateBuilderUrl } from "@/app/utils/linkRouters/Builder";
 
 type Props = any;
 
@@ -40,11 +41,20 @@ export default function ProjData({
   propIdEnc,
   otherCharges,
   phaseCount,
-  phaseId
+  phaseId,
+
+  sqftPrice,
+  basePrice
 }: Props) {
   const sortedBhks = sortUnits(bhkNames);
   const dispatch = useSetAtom(overlayAtom);
   const mobileMapDispatch = useSetAtom(mobileSearchPageMapModalReducerAtom);
+  let urlBuilder = generateBuilderUrl({
+    slug: builderName,
+    city: city,
+  });
+
+  console.log(category);
 
   return type === "proj" ? (
     <div className="flex flex-col">
@@ -84,6 +94,16 @@ export default function ProjData({
         />
         {/* </button> */}
       </p>
+
+      {category === "Sale" ? (
+        <div className="text-xs hidden xl:flex sm:text-base font-medium text-[#4f4f4f] text-nowrap absolute top-3 right-24  sm:top-0 sm:right-[65px]">
+          Avg Price:{" "} 
+          <span className="font-bold ml-1">
+            {" "}
+            ₹{formatNumberWithSuffix(type === "proj" ? basePrice : sqftPrice)}
+          </span>
+        </div>
+      ) : null}
 
       <p className="text-[#148B16] text-[14px] sm:text-[18px] xl:text-xl not-italic font-bold relative">
         {formatCurrency(Number(minPrice))} - {formatCurrency(Number(maxPrice))}
@@ -127,7 +147,13 @@ export default function ProjData({
       </p>
       <p className="text-black text-[12px] sm:text-[14px] xl:text-[14px] font-normal">
         Builder Name:{" "}
-        <span className="font-bold underline cursor-pointer">
+        <span 
+          className="font-bold underline cursor-pointer"
+          onClick={(e) => {
+            e.stopPropagation();
+            window.open(urlBuilder, "_blank");
+          }}
+        >
           {builderName}
         </span>
       </p>

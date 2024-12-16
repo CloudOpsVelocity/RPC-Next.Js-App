@@ -130,15 +130,14 @@ location
            <button
                 className="bg-teal-500 text-white text-right max-w-fit px-1 font-bold sm:py-1 sm:px-2 text-xs rounded shadow-lg hover:bg-teal-600 transition duration-300 ease-in-out"
                 onClick={() =>{
+                  console.log("near by 2")
                   dispatch({
                     type: "OPEN",
-                    content: [
-
-                    ],
+                    content: [],
                     id: `${projIdEnc??   ''}+${propIdEnc ?? ''}${propTypeId ?? propTypeName ?? ''}`,
                     title: `NearBy Locations of ${title}`,
                     conType: "nearby",
-                    pType: projIdEnc ? 'proj' : 'prop',
+                    pType: projIdEnc ? 'proj' : 'prop', 
                     lat,
                     lang,
                     propId: propIdEnc

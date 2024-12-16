@@ -40,7 +40,7 @@ export default function LeftSection({
 }: Props) {
   const verified = isReraverified(rera);
   const isMobile = useMediaQuery("(max-width: 1600px)");
-  console.log(data)
+  // console.log(data)
   return (
     <div className="relative xl:min-w-[257px] max-h-[250px]">
       {type !== "proj" && (
