@@ -144,6 +144,7 @@ export default async function ProjectsDetailsPage({
           PhaseOverview={phaseOverview}
           isPartialData={data.partialUnitData!!}
         />
+
         <MasterPlan
           projName={data.projectName}
           media={data?.media?.projectPlanUrl}
@@ -155,7 +156,13 @@ export default async function ProjectsDetailsPage({
             phaseList={data.phases}
           />
         )}
-        <FloorPlans />
+        {/* <FloorPlans
+          phases={data.phases}
+          projName={data.projectName}
+          partialUnitData={data.partialUnitData}
+          phaseOverview={phaseOverview}
+          slug={slug}
+        /> */}
         {!data.partialUnitData ? (
           <FloorplansBlock
             partialUnitData={data.partialUnitData}

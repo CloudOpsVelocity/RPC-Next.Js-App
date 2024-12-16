@@ -3,43 +3,97 @@
 import { useState } from "react";
 import { FaBuilding, FaHome, FaHotel, FaLandmark } from "react-icons/fa";
 import { TabItem } from "../types/floor-plan";
+import { projectprops, propertyDetailsTypes } from "@/app/data/projectDetails";
+import getIcon from "@/app/(new_routes_seo)/residential/projects/utils/icons";
+import { useAtom, useAtomValue } from "jotai";
+import { currentPhaseAtom, propCgIdAtom } from "@/app/store/vewfloor";
+import Button from "@/app/elements/button";
 
-const propertyTabs: TabItem[] = [
-  {
-    id: "apartment",
-    label: "Apartment",
-    icon: <FaBuilding className="w-4 h-4" />,
-  },
-  { id: "row-house", label: "Row House", icon: <FaHome className="w-4 h-4" /> },
-  { id: "villa", label: "Villa", icon: <FaHotel className="w-4 h-4" /> },
-  { id: "villament", label: "Villament", icon: <FaHome className="w-4 h-4" /> },
-  { id: "plot", label: "Plot", icon: <FaLandmark className="w-4 h-4" /> },
-];
-
-export function PropertyTabs({ onSelect }: { onSelect: (id: string) => void }) {
-  const [activeTab, setActiveTab] = useState("apartment");
-
-  const handleTabClick = (id: string) => {
-    setActiveTab(id);
-    onSelect(id);
+export function PropertyTabs({ phaseOverview }: { phaseOverview: any }) {
+  const [propCgId, setPropCgId] = useAtom(propCgIdAtom);
+  const currentPhase = useAtomValue(currentPhaseAtom);
+  const allKeys = [35, 33, 31, 34, 32];
+  const selectedPhase = phaseOverview?.find(
+    (phase: any) => phase.phaseId === currentPhase
+  );
+  const types =
+    selectedPhase?.propTypeOverview &&
+    Object?.keys(
+      selectedPhase?.propTypeOverview && selectedPhase.propTypeOverview
+    )
+      .map((v) => {
+        if (selectedPhase?.propTypeOverview[v].unitTypes) {
+          return v;
+        } else {
+          return null;
+        }
+      })
+      .sort()
+      .filter((v) => v !== null);
+  const checkProperty = (key: any) => {
+    if (
+      key == projectprops.apartment &&
+      types != undefined &&
+      types.includes("apt")
+    ) {
+      return true;
+    } else if (
+      key == projectprops.rowHouse &&
+      types != undefined &&
+      types.includes("rowHouse")
+    ) {
+      return true;
+    } else if (
+      key == projectprops.villa &&
+      types != undefined &&
+      types.includes("villa")
+    ) {
+      return true;
+    } else if (
+      key == projectprops.villament &&
+      types != undefined &&
+      types.includes("vlmt")
+    ) {
+      return true;
+    } else if (
+      key == projectprops.plot &&
+      types != undefined &&
+      types.includes("plot")
+    ) {
+      return true;
+    }
   };
 
   return (
-    <div className="flex flex-wrap gap-2">
-      {propertyTabs.map((tab) => (
-        <button
-          key={tab.id}
-          onClick={() => handleTabClick(tab.id)}
-          className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
-            activeTab === tab.id
-              ? "bg-[#0073C6] text-white"
-              : "bg-gray-100 hover:bg-gray-200 text-gray-700"
-          }`}
-        >
-          {tab.icon}
-          <span>{tab.label}</span>
-        </button>
-      ))}
+    <div className=" flex justify-start items-start flex-wrap mt-[3%] gap-[2%] ">
+      {propertyDetailsTypes != undefined &&
+        propertyDetailsTypes != null &&
+        allKeys.map((keyName) => {
+          let name =
+            //@ts-ignore
+            propertyDetailsTypes.get(keyName).name != undefined
+              ? //@ts-ignore
+                propertyDetailsTypes.get(keyName).name
+              : null;
+
+          if (checkProperty(keyName)) {
+            return (
+              <Button
+                key={keyName}
+                buttonClass={`flex justify-start mb-2 sm:mb-[3%] w-full rounded-[20px] gap-[8px]  items-center mr-[24px] md:ml-[0px] text-[12px] sm:text-[18px] border ${
+                  propCgId == keyName
+                    ? "text-[#001F35] text-[14px] sm:text-base font-[600] shadow-md bg-[#c8f5ca] sm:bg-[#D5EDFF]"
+                    : "text-[#303A42] font-[500] bg-[#E1FFE2] sm:bg-[#EEF7FE]"
+                } `}
+                onChange={() => {
+                  setPropCgId(keyName);
+                }}
+                title={name}
+                icon={getIcon(keyName)}
+              />
+            );
+          }
+        })}
     </div>
   );
 }

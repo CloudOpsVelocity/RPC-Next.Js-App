@@ -21,7 +21,7 @@ import { projectReqDataAtom } from "@/app/store/project/project.req";
 import { useQuery } from "react-query";
 export default function PartialUnitModal({ data }: any) {
   const isData = useAtomValue(selectedPartialUnitAtom);
-  const projStaleData = useAtomValue(projectReqDataAtom)
+  const projStaleData = useAtomValue(projectReqDataAtom);
   const [active, setActive] = useState(0);
   const reset = useResetAtom(selectedPartialUnitAtom);
   const handleReset = () => {
@@ -29,7 +29,11 @@ export default function PartialUnitModal({ data }: any) {
     reset();
   };
   const selectedOne = isData.others[active];
-  const { data:builderData, isLoading, status } = useQuery<any>({
+  const {
+    data: builderData,
+    isLoading,
+    status,
+  } = useQuery<any>({
     queryKey: [`builder/${data.builderId}&isBuilderPage=Nproj`],
     enabled: false,
   });
@@ -57,7 +61,9 @@ export default function PartialUnitModal({ data }: any) {
             <>
               <button
                 className="flex justify-center items-center gap-1 p-1 xl:p-2 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] rounded-[10px] bg-[#F3F7FF] text-[#0073C6] text-base not-italic font-semibold leading-[normal] tracking-[0.32px] border-1 border-black border-solid"
-                onClick={() => handleDownload(selectedOne?.floorPlan?.split(',')[2])}
+                onClick={() =>
+                  handleDownload(selectedOne?.floorPlan?.split(",")[2])
+                }
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -78,7 +84,10 @@ export default function PartialUnitModal({ data }: any) {
               <SharePopup
                 titleText="Share Floor Plan"
                 title="Share"
-                url={imageUrlParser(selectedOne?.floorPlan?.split(',')[3] || "", "F")}
+                url={imageUrlParser(
+                  selectedOne?.floorPlan?.split(",")[3] || "",
+                  "F"
+                )}
                 className="text-[#0073C6] text-base not-italic font-semibold leading-[normal] tracking-[0.32px]"
               />
             </>
@@ -93,14 +102,28 @@ export default function PartialUnitModal({ data }: any) {
       <div className="flex  items-center w-[90%] h-[300px] sm:max-h-[320px] xl:min-h-[434px]  justify-center rounded border    border-solid border-[#4D6677] m-auto relative">
         <TransformWrapper>
           <TransformComponent>
-            
             <picture>
-              <source media="(max-width: 460px)" srcSet={selectedOne?.floorPlan?.split(',')[1] ?? FloorPlanNotAvail} />
-              <source media="(max-width: 768px)" srcSet={selectedOne?.floorPlan?.split(',')[2] ?? FloorPlanNotAvail} />
-              <source media="(min-width: 1200px)" srcSet={selectedOne?.floorPlan?.split(',')[3] ?? FloorPlanNotAvail} />
+              <source
+                media="(max-width: 460px)"
+                srcSet={
+                  selectedOne?.floorPlan?.split(",")[1] ?? FloorPlanNotAvail
+                }
+              />
+              <source
+                media="(max-width: 768px)"
+                srcSet={
+                  selectedOne?.floorPlan?.split(",")[2] ?? FloorPlanNotAvail
+                }
+              />
+              <source
+                media="(min-width: 1200px)"
+                srcSet={
+                  selectedOne?.floorPlan?.split(",")[3] ?? FloorPlanNotAvail
+                }
+              />
               <Image
                 alt="floor plan image"
-                src={selectedOne?.floorPlan?.split(',')[3] ?? FloorPlanNotAvail}
+                src={selectedOne?.floorPlan?.split(",")[3] ?? FloorPlanNotAvail}
                 width={500}
                 height={500}
                 className="max-h-[294px] sm:max-h-[290px] xl:max-h-[430px] object-contain"
@@ -114,7 +137,7 @@ export default function PartialUnitModal({ data }: any) {
           onClick={() =>
             open({
               modal_type: "REQ_QUOTE",
-              postedByName: builderData?.data?.userName ?? '',
+              postedByName: builderData?.data?.userName ?? "",
               projUnitIdEnc: selectedOne?.projUnitIdEnc,
               postedId: data.builderId,
               reqId: data.projIdEnc,
@@ -133,7 +156,13 @@ export default function PartialUnitModal({ data }: any) {
             Unit Type:{" "}
             <span className="text-[#303A42] text-nowrap  text-[12px] xl:text-[16px] font-[600] ">
               {selectedOne?.propType == "32"
-                ? `(${formatNumberWithSuffix(selectedOne.length,false)} x ${formatNumberWithSuffix(selectedOne.width,false)}) sq.ft`
+                ? `(${formatNumberWithSuffix(
+                    selectedOne.length,
+                    false
+                  )} x ${formatNumberWithSuffix(
+                    selectedOne.width,
+                    false
+                  )}) sq.ft`
                 : selectedOne?.unitType}
             </span>
           </p>
@@ -145,12 +174,24 @@ export default function PartialUnitModal({ data }: any) {
             :{" "}
             <span className="text-[#303A42] text-nowrap  text-[12px] xl:text-[16px] font-[600] ">
               {formatNumberWithSuffix(
-                selectedOne?.plotArea || selectedOne?.sba ,false
+                selectedOne?.plotArea || selectedOne?.sba,
+                false
               )}{" "}
               sq.ft
             </span>
           </p>
         </div>
+        {selectedOne?.propType !== "32" && (
+          <div className="flex items-center space-x-3">
+            {propertyDetailsSvgs.superBuildUparea}
+            <p className="text-[#242424] text-nowrap text-[12px] xl:text-[16px] font-[500]">
+              Carpet Area:{" "}
+              <span className="text-[#303A42] text-nowrap text-[12px] xl:text-[16px] font-[600] ">
+                {formatNumberWithSuffix(selectedOne?.ca || 0, false)} sq.ft
+              </span>
+            </p>
+          </div>
+        )}
         <div className="flex items-center space-x-3">
           {propertyDetailsSvgs.superBuildUparea}
           <p className="text-[#242424] text-nowrap text-[12px] xl:text-[16px] font-[500]">

@@ -14,6 +14,24 @@ import {
 import type { PropertyUnit } from "./types/floor-plan";
 import { BHKTabs } from "./components/bhk-tabs";
 import { FullScreenImageModal } from "./components/full-screen-image-modal";
+import { useAtom, useAtomValue } from "jotai";
+import { currentPhaseAtom, propCgIdAtom } from "@/app/store/vewfloor";
+import {
+  ApartmentIcon,
+  PlotIcon,
+  VillamentIcon,
+  VillaIcon,
+  RowHouseIcon,
+} from "@/app/images/commonSvgs";
+import { projectprops } from "@/app/data/projectDetails";
+import SubHeading from "../headings/SubHeading";
+import { isSingleLetterOrNumber } from "@/app/utils/letters";
+import Button from "@/app/elements/button";
+import { useQuery } from "react-query";
+import { getProjectUnits } from "@/app/utils/api/project";
+import RTK_CONFIG from "@/app/config/rtk";
+const iconStyles: string =
+  " flex items-center justify-center w-[34px] sm:w-[40px] h-[34px] sm:h-[40px] bg-[#FAFDFF] rounded-[50%] ";
 const propertyUnits: PropertyUnit[] = [
   {
     id: "1",
@@ -69,7 +87,23 @@ const propertyUnits: PropertyUnit[] = [
   },
 ];
 
-export default function FloorPlans() {
+interface FloorPlansProps {
+  phases: any;
+  projName: string;
+  partialUnitData: any;
+  phaseOverview: any;
+  slug: string;
+}
+
+export default function FloorPlans({
+  phases,
+  projName,
+  partialUnitData,
+  phaseOverview,
+  slug,
+}: FloorPlansProps): JSX.Element {
+  const [selectedPhase, setSelectedPhase] = useAtom(currentPhaseAtom);
+  const propCgId = useAtomValue(propCgIdAtom);
   const [selectedPropertyType, setSelectedPropertyType] = useState("apartment");
   const [selectedView, setSelectedView] = useState("type");
   const [modalState, setModalState] = useState<{
@@ -116,35 +150,74 @@ export default function FloorPlans() {
       return false;
     return true;
   });
-
+  const { data: projectUnitsData, isLoading } = useQuery({
+    queryKey: [`/${propCgId}/${selectedPhase}/${slug}`],
+    queryFn: () => getProjectUnits(slug, selectedPhase, propCgId),
+    enabled: !!propCgId,
+    ...RTK_CONFIG,
+  });
   return (
     <div className="container mx-auto px-4 py-8">
+      <h2
+        className="text-h2 sm:text-[22px] xl:text-[32px] font-[600] text-[#001F35] mb-[4px] sm:mb-[10px] xl:mb-[6px] capitalize"
+        id="floorPlansdiv"
+      >
+        Floor Plans For{" "}
+        <span className="text-[#148B16] font-[700] ">{projName}</span>{" "}
+      </h2>
+      <SubHeading text="See floor plans as per your selected property type" />
       <div className="space-y-6">
-        <div>
-          <h1 className="text-3xl font-bold mb-2">
-            Floor Plans For{" "}
-            <span className="text-[#0073C6]">Unidus Breeze Apartment</span>
-          </h1>
-          <p className="text-gray-600">
-            See floor plans as per your selected property type
-          </p>
+        <div
+          className={`flex justify-start items-start md:items-center  mb-[2%] flex-col md:flex-row  ${
+            phases?.length > 1 ? "mt-4" : "mt-[0%]"
+          }`}
+        >
+          {phases?.length > 1 && (
+            <>
+              <p className="text-[14px] sm:text-[20px] lg:text-[24px] font-[500] mb-2 sm:mb-[44px] md:mb-0 text-[#333] sm:mr-[20px] ">
+                Select one of the phase to see Floor Plans
+              </p>
+              <div className=" flex justify-start items-start gap-[10px] flex-wrap ">
+                {phases?.map((each: any, index: any) => {
+                  return (
+                    <Button
+                      key={each.phaseId}
+                      title={
+                        isSingleLetterOrNumber(each.phaseName)
+                          ? `Phase: ${each.phaseName}`
+                          : each.phaseName
+                      }
+                      onChange={() => {
+                        if (selectedPhase == each.phaseId) return;
+                        setSelectedPhase(each.phaseId);
+                        // setBhk("0");
+                        // resetFilters();
+                        // if (floorPlanType === "unit") {
+                        //   setSelectedFloor({});
+                        //   handleUnitFormClear();
+                        // }
+                      }}
+                      buttonClass={` mb-[5px] text-[14px] sm:text-[18px] lg:text-[20px] bg-[#ECF7FF] p-[8px] xl:px-[8px] capitalize  whitespace-nowrap text-[#000] rounded-[8px]  ${
+                        selectedPhase == each.phaseId
+                          ? " font-[600] border-solid border-[1px] border-[#0073C6] "
+                          : " font-[400]"
+                      } `}
+                    />
+                  );
+                })}
+              </div>
+            </>
+          )}
         </div>
-
-        <div className="space-y-2">
-          <p className="text-gray-700">
-            Select one of the phases to see Floor Plans
-          </p>
-          <div className="flex gap-2">
-            <button className="px-4 py-2 bg-[#0073C6] text-white rounded-lg hover:bg-[#005a9e] transition-colors">
-              Phase 1
-            </button>
-            <button className="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors">
-              Beta Phase
-            </button>
-          </div>
-        </div>
-
-        <PropertyTabs onSelect={setSelectedPropertyType} />
+        {/* {projectUnitsData?.length == 0 ? (
+          <NoProperties
+            phase={
+              phaseList?.find((phase: any) => phase.phaseId == currentPhase)
+                ?.phaseName as any
+            }
+          />
+        ) : */}
+        <PropertyTabs phaseOverview={phaseOverview} />
         <ViewOptions onSelect={setSelectedView} />
 
         {selectedView === "type" && selectedPropertyType === "apartment" && (
@@ -210,46 +283,88 @@ export default function FloorPlans() {
         )}
 
         <div className="mt-6 grid md:grid-cols-2 gap-6">
-          <div className="space-y-4">
-            {filteredUnits.map((unit) => (
-              <button
-                key={unit.id}
-                onClick={() => setModalState({ isOpen: true, unit })}
-                className="w-full text-left p-6 rounded-lg transition-all bg-white border border-gray-200 hover:border-[#0073C6] hover:shadow-md"
-              >
-                <div className="flex justify-between items-start">
-                  <div>
-                    <h3 className="text-xl font-semibold text-[#0073C6]">
-                      {unit.bhk} | {unit.bedrooms} Bed - {unit.bathrooms} Bath
-                    </h3>
-                    <p className="text-gray-600 mt-1">
-                      {unit.tower} - Unit {unit.unitNumber}
-                    </p>
+          <div className="space-y-4 max-h-[600px] overflow-y-auto">
+            {projectUnitsData &&
+              projectUnitsData.map((unit: any) => (
+                <button
+                  key={unit.id}
+                  onClick={() => setModalState({ isOpen: true, unit })}
+                  className="w-full text-left p-6 rounded-lg transition-all bg-white border border-gray-200 hover:border-[#0073C6] hover:shadow-md"
+                >
+                  <div className="flex justify-between items-start">
+                    <div>
+                      {propCgId === projectprops.plot ? (
+                        <h3 className="text-xl font-semibold text-[#0073C6]">
+                          Plot Area: {unit.plotArea} sq ft
+                        </h3>
+                      ) : (
+                        <h3 className="text-xl font-semibold text-[#0073C6]">
+                          {unit.bhkName} | {unit.bhkName?.split(" ")[0][0]} Bed -{" "}
+                          {unit.totalNumberofBathroom} Bath
+                        </h3>
+                      )}
+                      <p className="text-gray-600 mt-1">
+                        {propCgId === projectprops.plot ? (
+                          `Plot Number ${unit.unitNumber}`
+                        ) : (propCgId === projectprops.apartment || propCgId === projectprops.villament) ? (
+                          `${unit.towerName} - Unit ${unit.unitNumber}`
+                        ) : (
+                          `Unit ${unit.unitNumber}`
+                        )}
+                      </p>
+                    </div>
+                    <FaArrowRight className="text-[#0073C6] text-xl" />
                   </div>
-                  <FaArrowRight className="text-[#0073C6] text-xl" />
-                </div>
-                <div className="mt-4 grid grid-cols-2 gap-4">
-                  <div>
-                    <p className="text-gray-600">Super Builtup Area</p>
-                    <p className="font-semibold">{unit.builtupArea} sq ft</p>
+                  <div className="mt-4 grid grid-cols-2 gap-4">
+                    {propCgId === projectprops.plot ? (
+                      <>
+                        <div>
+                          <p className="text-gray-600">Unit Type</p>
+                          <p className="font-semibold">
+                            {unit.length} ft x {unit.width} ft
+                          </p>
+                        </div>
+                        <div>
+                          <p className="text-gray-600">Facing</p>
+                          <p className="font-semibold">
+                            {unit.facingName === "Don't Know" ? "N/A" : unit.facingName}
+                          </p>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div>
+                          <p className="text-gray-600">Super Builtup Area</p>
+                          <p className="font-semibold">
+                            {unit.superBuildUparea} sq ft
+                          </p>
+                        </div>
+                        <div>
+                          <p className="text-gray-600">Facing</p>
+                          <p className="font-semibold">
+                            {unit.facingName === "Don't Know" ? "N/A" : unit.facingName}
+                          </p>
+                        </div>
+                        {propCgId !== projectprops.plot && (
+                          <div>
+                            <p className="text-gray-600">Car Parking</p>
+                            <p className="font-semibold">
+                              {unit.noOfCarParking === 0 ? "N/A" : unit.noOfCarParking}
+                            </p>
+                          </div>
+                        )}
+                      </>
+                    )}
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setFullScreenModalState({ isOpen: true, unit });
+                      }}
+                    >
+                      <FaExpandAlt className="text-[#0073C6] text-xl" />
+                    </button>
                   </div>
-                  <div>
-                    <p className="text-gray-600">Facing</p>
-                    <p className="font-semibold">{unit.facing}</p>
-                  </div>
-                  <div>
-                    <p className="text-gray-600">Car Parking</p>
-                    <p className="font-semibold">{unit.carParking}</p>
-                  </div>
-                  <button
-                    onClick={() =>
-                      setFullScreenModalState({ isOpen: true, unit })
-                    }
-                  >
-                    <FaExpandAlt className="text-[#0073C6] text-xl" />
-                  </button>
-                </div>
-              </button>
+                </button>
             ))}
           </div>
           <div className="hidden md:block">
