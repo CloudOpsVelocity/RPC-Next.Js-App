@@ -141,9 +141,10 @@ export default function ProjData({
       >
         {bhkName} {propTypeName} for {category} in {localityName}
       </p>
-      {(otherCharges?.otherCharge || Object.keys(otherCharges).length > 2) && (
+      
         <p className="text-[#148B16] text-[14px] sm:text-[18px] xl:text-xl not-italic font-bold relative">
           {formatCurrency(Number(price))}{" "}
+          {(otherCharges?.otherCharge || Object.keys(otherCharges).length > 2) && (
           <span
             className="  text-btnPrimary cursor-pointer text-[12px] xl:text-sm"
             onClick={(e) => {
@@ -163,8 +164,9 @@ export default function ProjData({
           >
             View Other Charges
           </span>
+           )}
         </p>
-      )}
+     
 
       <p className="text-[#001F35] text-[12px] sm:text-[16px]   not-italic font-bold">
         {propName}{" "}

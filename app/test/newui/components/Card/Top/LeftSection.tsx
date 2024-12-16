@@ -1,3 +1,4 @@
+import { projectprops } from "@/app/(dashboard)/search/components/Card/Top/Center/ProjData";
 import Button from "@/app/elements/button";
 import { CallIcon } from "@/app/images/commongsSvgs2";
 import { formatDateDDMMYYYY } from "@/app/utils/date";
@@ -39,6 +40,7 @@ export default function LeftSection({
 }: Props) {
   const verified = isReraverified(rera);
   const isMobile = useMediaQuery("(max-width: 1600px)");
+  console.log(data)
   return (
     <div className="relative xl:min-w-[257px] max-h-[250px]">
       {type !== "proj" && (
@@ -66,9 +68,12 @@ export default function LeftSection({
       {/* <div>
         
       </div> */}
+      {data.propTypeId && data.propTypeId !== projectprops.plot &&
       <p className="bg-gray-700 rounded-full absolute top-1 xl:top-auto xl:bottom-7 right-1 text-white text-[12px] xl:text-sm  px-1 xl:bg-gray-900">
         {projstatus ?? propStatus}
       </p>
+      }
+
       <p className="bg-gray-700 rounded-full absolute top-7 xl:top-auto xl:bottom-1 right-1 text-white text-[12px]  xl:text-sm px-1 xl:bg-gray-900">
         {type !== "proj" ? "Available From: " : "Possession Date: "}{" "}
         {formatDateDDMMYYYY(type !== "proj" ? availableFrom : possassionDate)}
