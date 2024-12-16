@@ -181,7 +181,7 @@ export default function AmenitiesDisplay({ amenitiesData, data }: AmenitiesDispl
                       <span className="w-8 h-8 flex-shrink-0">
                         {amenitiesGroupList.get(amenity.cid) || amenitiesGroupList.get(0)}
                       </span>
-                      <span className="text-gray-800 font-medium truncate">{amenity.constDesc}</span>
+                      <span className="text-gray-800 font-medium ">{amenity.constDesc}</span>
                     </div>
                   ))}
                 </div>
