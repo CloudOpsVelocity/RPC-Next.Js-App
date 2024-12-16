@@ -293,28 +293,28 @@ const MapCard = ({
     setTimeout(() => setIsScrolling(false), 3000);
   };
   return (
-    <div
-      className="flex flex-col items-start gap-3 px-2 py-3.5 cursor-pointer shadow-[0px_4px_20px_0px_rgba(91,143,182,0.19)] rounded-[10px] border-[0.5px] border-solid border-[#D9D9D9] bg-[#fcfcfc] min-w-[385px] max-w-[385px]"
-      onClick={handleClick}
-    >
-      <div className="">
-        <p className="text-black text-base not-italic font-medium leading-[normal] capitalize">
-          {name}
-        </p>
-        <div className="flex gap-1 text-sm mt-[14px]">
-          <span className="flex items-center min-w-[70px]">
-            {nearbyLocationIcon}
-            <span className="ml-[4px] text-[#005DA0] text-base not-italic font-medium leading-[normal] ]">
-              {distance ?? "N/A"}
-            </span>{" "}
-          </span>
-          <span className="mx-1">|</span>
-          <span className="text-[#001F35] text-lg not-italic font-medium leading-[normal]">
-            {time ?? "N/A"}
-          </span>
-        </div>
-      </div>
-    </div>
+   <div
+         className=" bg-gray-50 border rounded-lg cursor-pointer mt-[12px] md:max-w-[640px] py-2 xl:py-3 px-2"
+         onClick={handleClick}
+       >
+         <div className="flex items-center justify-between sm:flex-wrap">
+           <h6 className="text-black text-[12px] sm:text-[16px]  xl:text-lg not-italic font-medium leading-[normal] max-w-[60%] capitalize w-[70%]">
+             {name}
+           </h6>
+           <div className="flex gap-1 text-sm">
+             <span className="flex items-center">
+               {nearbyLocationIcon}
+               <span className="ml-[4px] text-[#005DA0] text-[12px] sm:text-[16px]  xl:text-lg not-italic font-medium leading-[normal] text-nowrap">
+                 {distance ?? "N/A"}
+               </span>
+               <span className="mx-2">|</span>
+               <span className="text-[#001F35] text-[12px] sm:text-[16px]  xl:text-lg not-italic font-medium leading-[normal] text-nowrap">
+                 {time ?? "N/A"}
+               </span>
+             </span>
+           </div>
+         </div>
+       </div>
   );
 };
 
@@ -349,27 +349,27 @@ const LocationList: React.FC<{
 
   return (
     <div
-      className="p-2 bg-gray-50 border rounded-lg cursor-pointer mt-[12px] max-w-[640px] py-3 px-2"
-      onClick={handleClick}
-    >
-      <div className="flex items-center justify-between">
-        <h6 className="text-black text-lg not-italic font-medium leading-[normal] capitalize w-[70%]">
-          {name}
-        </h6>
-        <div className="flex gap-1 text-sm">
-          <span className="flex items-center">
-            {nearbyLocationIcon}
-            <span className="ml-[4px] text-[#005DA0] text-lg not-italic font-medium leading-[normal] ">
-              {distance ?? "N/A"}
-            </span>
-            <span className="mx-2">|</span>
-            <span className="text-[#001F35] text-lg not-italic font-medium leading-[normal]">
-              {time ?? "N/A"}
-            </span>
-          </span>
+          className=" bg-gray-50 border rounded-lg cursor-pointer mt-[12px] md:max-w-[640px] py-2 xl:py-3 px-2"
+          onClick={handleClick}
+        >
+          <div className="flex items-center justify-between sm:flex-wrap">
+            <h6 className="text-black text-[12px] sm:text-[16px]  xl:text-lg not-italic font-medium leading-[normal] max-w-[60%] capitalize w-[70%]">
+              {name}
+            </h6>
+            <div className="flex gap-1 text-sm">
+              <span className="flex items-center">
+                {nearbyLocationIcon}
+                <span className="ml-[4px] text-[#005DA0] text-[12px] sm:text-[16px]  xl:text-lg not-italic font-medium leading-[normal] text-nowrap">
+                  {distance ?? "N/A"}
+                </span>
+                <span className="mx-2">|</span>
+                <span className="text-[#001F35] text-[12px] sm:text-[16px]  xl:text-lg not-italic font-medium leading-[normal] text-nowrap">
+                  {time ?? "N/A"}
+                </span>
+              </span>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
   );
 };
 

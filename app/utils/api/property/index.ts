@@ -68,7 +68,6 @@ const getNearByLocations = async (slug: string): Promise<any> => {
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/get-nearby?projIdEnc=${slug}`
   );
   const data = await response.json();
-  console.log(data);
   return data;
 };
 const getReportConstData = async () => {

@@ -30,6 +30,7 @@ import { pluralizeOrSingularize } from "@/app/utils/plural";
 import RTK_CONFIG from "@/app/config/rtk";
 import { NumberFormatter } from "@mantine/core";
 import { currentBlockAtom, isScrollingAtom, stickyAtom } from "./navigation";
+import Tooltip from "../atoms/Tooltip";
 
 type Props = {
   cg: any;
@@ -145,6 +146,56 @@ export default function PropertyTypeDetailsCrad({
   };
   const plotCounts =
     propertyType === "plot" && projectUnitsData && countPlots(projectUnitsData);
+  const getElevationString = (tower: any) => {
+    if (propertyType === "rowHouse" || propertyType === "villa") {
+      return cg.elevation;
+    }
+
+    const basement = tower.elevationBasement || 0;
+    const podium = tower.noOfPodium || 0;
+    const floors = tower.totalFloor || 0;
+
+    let str = "";
+    if (basement > 0) str += `${basement}B+`;
+    if (podium > 0) str += `${podium}P+`;
+    str += "G+";
+    str += floors;
+
+    return str;
+  };
+
+  const getElevationTooltip = (tower: any) => {
+    if (propertyType === "rowHouse" || propertyType === "villa") {
+      return `Ground + ${cg.elevation} Floors`;
+    }
+
+    const basement = tower.elevationBasement || 0;
+    const podium = tower.noOfPodium || 0;
+    const floors = tower.totalFloor || 0;
+
+    let str = "";
+    if (basement > 0) str += `${basement} Basement${basement > 1 ? "s" : ""}, `;
+    if (podium > 0) str += `${podium} Podium${podium > 1 ? "s" : ""}, `;
+    str += "Ground Floor, ";
+    str += `${floors} Floor${floors > 1 ? "s" : ""}`;
+
+    return str;
+  };
+
+  const maxElevation =
+    propertyType === "rowHouse" || propertyType === "villa"
+      ? `G+${cg.elevation}`
+      : cg.towerData &&
+        cg.towerData?.reduce((max: string, tower: any) => {
+          const elevStr = getElevationString(tower);
+          return elevStr.length > max.length ? elevStr : max;
+        }, "");
+
+  const elevationTooltip =
+    propertyType === "rowHouse" || propertyType === "villa"
+      ? getElevationTooltip({})
+      : cg.towerData && cg.towerData[0] && getElevationTooltip(cg.towerData[0]);
+
   return (
     <div
       className="flex  justify-between items-start h-[174px]  sm:h-[227px] w-[100%] sm:max-w-[359px] lg:max-w-[510px] rounded-[24px] shadow-md pr-[1%] pl-[1%] mt-[70px] bg-gradient-to-l from-[#EFF5FF] /50 to-[#F2FAFF]/50 mb-[2%] cursor-pointer"
@@ -178,18 +229,18 @@ export default function PropertyTypeDetailsCrad({
             <p className="text-[12px] lg:text-[20px] text-[#2A4C70] font-[500] flex justify-start items-start  ">
               <FlooringIcon className="w-[16px] h-[16px] lg:w-[24px] lg:h-[24px]" />
               <span className="mr-[6px] ml-[6px]">
-                {cg ? formatNumberWithSuffix(cg.unitCount,false) : ""}{" "}
+                {cg ? formatNumberWithSuffix(cg.unitCount, false) : ""}{" "}
               </span>{" "}
               Units
             </p>
-            {propertyType === "rowHouse" || propertyType === "villa" ? (
-              <p className="text-[12px] lg:text-[20px] text-[#2A4C70] font-[500] flex justify-start items-start  ">
-                <FloorsIcon className="w-[16px] h-[16px] lg:w-[24px] lg:h-[24px]" />
-                <span className="mr-[6px] ml-[6px]">
-                  {"G+" + cg?.elevation}
-                </span>{" "}
-                Elevation
-              </p>
+            {propertyType !== "plot" ? (
+              <Tooltip text={<p>{elevationTooltip}</p>}>
+                <p className="text-[12px] lg:text-[20px] text-[#2A4C70] font-[500] flex justify-start items-start  ">
+                  <FloorsIcon className="w-[16px] h-[16px] lg:w-[24px] lg:h-[24px]" />
+                  Elevation{" "}
+                  <span className="mr-[6px] ml-[6px]">{maxElevation}</span>{" "}
+                </p>
+              </Tooltip>
             ) : (
               ""
             )}
@@ -219,7 +270,7 @@ export default function PropertyTypeDetailsCrad({
           {propertyType !== "plot" ? (
             <p
               className={clsx(
-                "text-[#242424] text-right text-[12px] sm:text-[16px] xl:text-lg not-italic font-semibold leading-[22px] max-w-[240px] inline-block w-[100%] line-clamp-1",
+                "text-[#242424] text-right text-[12px] sm:text-[16px] xl:text-lg not-italic font-semibold leading-[22px] max-w-[240px] inline-block w-[100%] line-clamp-1"
               )}
             >
               {parseUnits(cg?.unitTypes, propertyType).join(", ")}

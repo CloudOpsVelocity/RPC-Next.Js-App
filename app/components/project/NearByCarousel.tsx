@@ -4,6 +4,7 @@ import React from "react";
 import ProjectCarousel from "./ProjectCard";
 import useBuilder from "@/app/hooks/useBuilder";
 import { capitalizeWords } from "@/app/utils/letters";
+import { boolean } from "yup";
 
 export default function NearByCarousel({
   projName,
@@ -21,6 +22,7 @@ export default function NearByCarousel({
   builderId?: number;
   company: string;
   slug?: string;
+
   nearBy?: {
     title: string;
   };
@@ -29,7 +31,8 @@ export default function NearByCarousel({
   const { data: builderData } = useBuilder({
     id: builderId ?? 1109,
     y: "N",
-    type: "proj",
+    type: "proj"
+    
   });
 
   return (
@@ -44,6 +47,7 @@ export default function NearByCarousel({
             ? data.builderProj
             : []
         }
+        builderLinkActive={false}
         mutate={mutate}
         builderName={builderData?.data?.userName ?? ""}
         ct="builder"
@@ -51,6 +55,7 @@ export default function NearByCarousel({
       />
       <ProjectCarousel
         type="proj"
+        builderLinkActive={true}
         title={nearBy?.title ?? "Near By Projects Of"}
         projName={projName}
         content="See what other customers also viewed"
