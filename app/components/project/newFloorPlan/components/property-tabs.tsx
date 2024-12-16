@@ -1,28 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import { BsBuildings, BsHouseDoor, BsHouse, BsBuilding } from "react-icons/bs";
-import { LuLandmark } from "react-icons/lu";
+import { FaBuilding, FaHome, FaHotel, FaLandmark } from "react-icons/fa";
 import { TabItem } from "../types/floor-plan";
 
 const propertyTabs: TabItem[] = [
   {
     id: "apartment",
     label: "Apartment",
-    icon: <BsBuildings className="w-4 h-4" />,
+    icon: <FaBuilding className="w-4 h-4" />,
   },
-  {
-    id: "row-house",
-    label: "Row House",
-    icon: <BsHouseDoor className="w-4 h-4" />,
-  },
-  { id: "villa", label: "Villa", icon: <BsBuilding className="w-4 h-4" /> },
-  {
-    id: "villament",
-    label: "Villament",
-    icon: <BsHouse className="w-4 h-4" />,
-  },
-  { id: "plot", label: "Plot", icon: <LuLandmark className="w-4 h-4" /> },
+  { id: "row-house", label: "Row House", icon: <FaHome className="w-4 h-4" /> },
+  { id: "villa", label: "Villa", icon: <FaHotel className="w-4 h-4" /> },
+  { id: "villament", label: "Villament", icon: <FaHome className="w-4 h-4" /> },
+  { id: "plot", label: "Plot", icon: <FaLandmark className="w-4 h-4" /> },
 ];
 
 export function PropertyTabs({ onSelect }: { onSelect: (id: string) => void }) {
@@ -41,8 +32,8 @@ export function PropertyTabs({ onSelect }: { onSelect: (id: string) => void }) {
           onClick={() => handleTabClick(tab.id)}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
             activeTab === tab.id
-              ? "bg-green-600 text-white"
-              : "bg-gray-100 hover:bg-gray-200"
+              ? "bg-[#0073C6] text-white"
+              : "bg-gray-100 hover:bg-gray-200 text-gray-700"
           }`}
         >
           {tab.icon}

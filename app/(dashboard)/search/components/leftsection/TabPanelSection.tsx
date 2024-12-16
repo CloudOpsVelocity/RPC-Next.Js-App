@@ -4,7 +4,7 @@ import { useIntersection } from "@mantine/hooks";
 import React, { useEffect, useRef, useState } from "react";
 import useSearchFilters from "@/app/hooks/search";
 import ProjectCard from "@/app/test/newui/components/Card";
-import { useVirtualizer } from '@tanstack/react-virtual';
+import { useVirtualizer } from "@tanstack/react-virtual";
 import { useAtom } from "jotai";
 import { searachFilterAtom } from "@/app/store/search";
 import { useQuery } from "react-query";
@@ -35,12 +35,12 @@ export default function TabPanelSection({ mutate, serverData }: Props) {
         path.includes("/residential")
       ? serverData
       : data;
- const {data:proj} = useQuery({
-  queryKey:['projAuth'],
-  queryFn:getAllAuthorityNames,
-  ...RTK_CONFIG
- })
- 
+  const res = useQuery({
+    queryKey: ["projAuth"],
+    queryFn: getAllAuthorityNames,
+    ...RTK_CONFIG,
+  });
+
   const rowVirtualizer = useVirtualizer({
     count: serverClientData?.length || 0,
     getScrollElement: () => containerRef.current,
@@ -48,9 +48,8 @@ export default function TabPanelSection({ mutate, serverData }: Props) {
     overscan: 1,
     enabled: true,
     measureElement: (element) => {
-      return  element?.getBoundingClientRect().height || 300
+      return element?.getBoundingClientRect().height || 300;
     },
-
   });
 
   const { ref, entry } = useIntersection({
@@ -77,8 +76,8 @@ export default function TabPanelSection({ mutate, serverData }: Props) {
         <div
           style={{
             height: `${rowVirtualizer.getTotalSize()}px`,
-            width: '100%',
-            position: 'relative',
+            width: "100%",
+            position: "relative",
           }}
         >
           {rowVirtualizer.getVirtualItems().map((virtualRow, index) => {
@@ -89,10 +88,10 @@ export default function TabPanelSection({ mutate, serverData }: Props) {
                 data-index={virtualRow.index}
                 ref={rowVirtualizer.measureElement}
                 style={{
-                  position: 'absolute',
+                  position: "absolute",
                   top: 0,
                   left: 0,
-                  width: '100%',
+                  width: "100%",
                   transform: `translateY(${virtualRow.start ?? 0}px)`,
                 }}
               >
@@ -115,7 +114,7 @@ export default function TabPanelSection({ mutate, serverData }: Props) {
         </div>
       )}
       {hasNextPage && (
-        <div 
+        <div
           ref={ref}
           className="w-full py-8 flex justify-center items-center text-gray-600"
         >

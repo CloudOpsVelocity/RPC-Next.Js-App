@@ -155,7 +155,7 @@ export default async function ProjectsDetailsPage({
             phaseList={data.phases}
           />
         )}
-        {/* <FloorPlans /> */}
+        <FloorPlans />
         {!data.partialUnitData ? (
           <FloorplansBlock
             partialUnitData={data.partialUnitData}

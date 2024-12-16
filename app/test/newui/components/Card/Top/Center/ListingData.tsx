@@ -57,6 +57,7 @@ export default function ListingData({
   });
 
   const getApproveNames = (stringIds: string) => {
+    if (!approvedData) return "N/A";
     const authorityNames = [];
     for (const item of approvedData as any) {
       if (stringIds.includes(item.cid.toString())) {
