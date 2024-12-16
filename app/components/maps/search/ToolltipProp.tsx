@@ -13,6 +13,7 @@ export default function TooltipProp({ data }: Props) {
     category,
     localityName,
     postedBy,
+    postedByName,
     cityName,
   } = data;
   console.log(data)
@@ -31,7 +32,7 @@ export default function TooltipProp({ data }: Props) {
         {postedBy}:
         <span className="text-[#202020]  text-[12px] xl:text-sm not-italic font-semibold">
           {" "}
-          {/* {postedBy} */}
+          {postedByName}
         </span>
       </p>
     </div>

@@ -17,7 +17,7 @@ const OtherCharges: React.FC = () => {
               Type of Charge
             </th>
             <th className="px-4 py-2 text-right text-white font-semibold">
-              Price Range(In Rupees)
+              Price Range (In Rupees)
             </th>
           </tr>
         </thead>

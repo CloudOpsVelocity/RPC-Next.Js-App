@@ -88,7 +88,7 @@ export default function Card({ item }: Props) {
             <div className="flex flex-col items-end gap-[9px] xl:gap-[19px]">
               <div className="space-y-2">
                 <span className=" no-underline text-[#ffff]">
-                  Builder Name:{" "}
+                  Builder:{" "}
                 </span>
                 <button
                   onClick={(e) => builderiRedirect(e)}
