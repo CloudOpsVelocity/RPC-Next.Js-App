@@ -36,8 +36,7 @@ export default async function Page({ params }: Props) {
   const values = await findPathForProjectListing(pathname);
   if (!values) return notFound();
   const filtersValues = extractListingParamsValues(values);
-  const isProjectListing =
-    filtersValues.PT == "32" ? 7 : filtersValues.count === 8;
+  const isProjectListing = filtersValues.count === 7;
   if (isProjectListing) {
     serverData = await getSearchData(
       `${filtersValues.BH ? `bhk=${filtersValues.BH}&` : ""}propType=${
@@ -77,7 +76,7 @@ export default async function Page({ params }: Props) {
     };
   }
 
-  return filtersValues.count === isProjectListing ? (
+  return isProjectListing ? (
     <ListingSearchPage
       serverData={serverData}
       frontendFilters={{

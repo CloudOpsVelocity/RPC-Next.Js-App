@@ -133,11 +133,11 @@ export default function Navigation({
   }
   const conditionsArray = [
     { condtion: true, key: "overview" },
-    
+
     { condtion: true, key: "propertyDetails" },
     { condtion: true, key: "floorPlans" },
     { condtion: true, key: "gallery" },
-    { condtion: detailsData?.usp!="", key: "about" },
+    { condtion: !!detailsData?.usp, key: "about" },
     {
       condtion: detailsData?.amenities?.length > 0,
       key: "amenities",

@@ -56,6 +56,28 @@ export default function NearByCarouselProjProperty({
         // builderName={builderData?.data?.userName}
         ct="builder"
       />
+      <ProjectCarousel
+        type="proj"
+        title={
+          <Fragment>
+            Nearby Projects{" "}
+            <span className="text-[#148B16]">
+              {builderData?.data?.userName}
+            </span>
+          </Fragment>
+        }
+        builderLinkActive
+        content="See what builder has posted"
+        projName={""}
+        data={
+          data != undefined && data.nearbyProj != undefined
+            ? data.nearbyProj
+            : []
+        }
+        mutate={mutate}
+        // builderName={builderData?.data?.userName}
+        ct="builder"
+      />
     </div>
   );
 }

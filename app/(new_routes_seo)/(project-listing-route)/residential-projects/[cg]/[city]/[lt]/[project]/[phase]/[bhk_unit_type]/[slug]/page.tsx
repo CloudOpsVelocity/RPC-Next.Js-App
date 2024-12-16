@@ -34,7 +34,6 @@ export default async function Page({ params }: Props) {
   if (!value) {
     notFound();
   }
- 
   const pdata = extractListingParamsValues(value);
   if (!pdata) {
     notFound();
@@ -49,7 +48,7 @@ export default async function Page({ params }: Props) {
     getReportConstData(),
     getAmenties(),
   ]);
-  if(projData.projAuthorityId){
+  if (projData.projAuthorityId) {
     const res = await getAuthorityNames(projData.projAuthorityId);
     data.projAuthorityNames = res;
   }
