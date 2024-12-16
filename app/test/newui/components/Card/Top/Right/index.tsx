@@ -401,9 +401,7 @@ export default function TopRightSection({
                     lat,
                     lang
                   })
-                }
-                  
-                }
+                }}
               >
                 Nearby
               </button>
