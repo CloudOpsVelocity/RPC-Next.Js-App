@@ -1,6 +1,7 @@
 import { formatCurrency } from "@/app/utils/numbers";
 import React from "react";
 import HeartButton from "./HeartButton";
+import { generateBuilderUrl } from "@/app/utils/linkRouters/Builder";
 
 type Props = any;
 
@@ -21,23 +22,29 @@ export default function ProjData({
   bhkName,
   category,
   cityName,
-  postedBy
+  postedByName
 }: Props) {
   
-  console.log( minPrice,
-    maxPrice,
-    projName,
-    city,
-    state,
-    locality,
-    builderName,
-    shortListed,
-    type,
-    price,
-    propName,
-    localityName,
-    propTypeName,
-  )
+  // console.log( minPrice,
+  //   maxPrice,
+  //   projName,
+  //   city,
+  //   state,
+  //   locality,
+  //   builderName,
+  //   shortListed,
+  //   type,
+  //   price,
+  //   propName,
+  //   localityName,
+  //   propTypeName,
+    
+  // )
+
+   let urlBuilder = generateBuilderUrl({
+      slug: postedByName,
+      city: city,
+    });
   return type === "proj" ? (
     <div className="flex flex-col">
       <p className="text-[#001F35] text-[12px] sm:text-[16px] xl:text-[18px] font-semibold break-words whitespace-normal min-w-0 ">
@@ -70,10 +77,17 @@ export default function ProjData({
       <p className="text-[#242424] text-[12px] sm:text-[16px] xl:text-[18px] capitalize  not-italic font-medium">
         {`${localityName}, ${cityName}`}
       </p>
-      <p className="text-[#242424]  text-[12px] sm:text-[12px]  xl:text-[14px] not-italic font-normal">
-        Posted By: <span className="font-bold">{/* {getTypeText(type)} */}{postedBy}</span>
+      <p className="text-[#242424] cursor-pointer text-[12px] sm:text-[12px]  xl:text-[14px] not-italic font-normal">
+        Builder: 
+        <span 
+          className="font-bold"
+          onClick={(e) => {
+            e.stopPropagation();
+            window.open(urlBuilder, "_blank");
+          }}
+        >{postedByName}</span> 
       </p>
-    </div>
+    </div> 
   );
 }
 function getTypeText(type: string) {

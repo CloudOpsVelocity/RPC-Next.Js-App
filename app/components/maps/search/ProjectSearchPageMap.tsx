@@ -130,7 +130,7 @@ const MapContent = ({ data, type }: any): JSX.Element | null => {
                   city: item.city,
                   state: item.state,
                   locality: item.locality,
-                  builderName: item.builderName,
+                  postedByName: item.postedByName,
                   phases: Object.values(phases || {}),
                 }}
               />

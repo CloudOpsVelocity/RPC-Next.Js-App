@@ -21,7 +21,7 @@ type TooltipProjProps = {
   city: string;
   state: string;
   locality: string;
-  builderName: string;
+  postedByName: string;
   phases: PhaseData[];
 };
 
@@ -34,7 +34,7 @@ function formatCurrency(amount: number): string {
   }).format(amount);
 }
 export default function TooltipProj({ data }: { data: TooltipProjProps }) {
-  const { projName, city, state, locality, builderName, phases } = data;
+  const { projName, city, state, locality, phases, postedByName } = data;
 
   return (
     <div className="bg-white shadow-md text-xs rounded-lg overflow-hidden border border-gray-200">
@@ -54,7 +54,7 @@ export default function TooltipProj({ data }: { data: TooltipProjProps }) {
           <div className="flex items-center gap-1 text-gray-700 mt-0.5">
             <BiSolidUser size={14} className="text-purple-600" />
             <p className="text-[12px] font-medium">
-              {builderName} <span className="text-gray-500 ml-0.5">(Builder)</span>
+              Builder: <span className="text-gray-500 ml-0.5">{postedByName}</span>
             </p>
           </div>
         </div>

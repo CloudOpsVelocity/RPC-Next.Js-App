@@ -8,6 +8,7 @@ import selectedSearchAtom, {
   mobileSearchPageMapModalReducerAtom,
 } from "@/app/store/search/map";
 import BuilderLink, { generateBuilderUrl } from "@/app/utils/linkRouters/Builder";
+import useSearchFilters from "@/app/hooks/search";
 
 type Props = any;
 
@@ -17,7 +18,7 @@ export default function ProjData({
   projName,
   city,
   locality,
-  builderName,
+  postedByName,
   type,
   price,
   propName,
@@ -26,13 +27,12 @@ export default function ProjData({
   bhkName,
   category,
   cityName,
-  postedBy,
   propType,
   bhkNames,
   address,
   phaseName,
   projIdEnc,
-  propTypeId,
+  propTypeId, 
   agentListing,
   ownerListing,
   projOrPropName,
@@ -49,12 +49,13 @@ export default function ProjData({
   const sortedBhks = sortUnits(bhkNames);
   const dispatch = useSetAtom(overlayAtom);
   const mobileMapDispatch = useSetAtom(mobileSearchPageMapModalReducerAtom);
+
   let urlBuilder = generateBuilderUrl({
-    slug: builderName,
-    city: city,
+    slug: postedByName,
+    city: city ? city : cityName,
   });
 
-  console.log(category);
+  const { filters } = useSearchFilters();
 
   return type === "proj" ? (
     <div className="flex flex-col">
@@ -95,7 +96,7 @@ export default function ProjData({
         {/* </button> */}
       </p>
 
-      {category === "Sale" ? (
+      {filters.cg == "S" ? (
         <div className="text-xs hidden xl:flex sm:text-base font-medium text-[#4f4f4f] text-nowrap absolute top-3 right-24  sm:top-0 sm:right-[65px]">
           Avg Price:{" "} 
           <span className="font-bold ml-1">
@@ -146,15 +147,16 @@ export default function ProjData({
         Address: {address}
       </p>
       <p className="text-black text-[12px] sm:text-[14px] xl:text-[14px] font-normal">
-        Builder Name:{" "}
+        Builder:{" "}
         <span 
           className="font-bold underline cursor-pointer"
           onClick={(e) => {
+            console.log(city, postedByName)
             e.stopPropagation();
             window.open(urlBuilder, "_blank");
           }}
         >
-          {builderName}
+          {postedByName}
         </span>
       </p>
     </div>
@@ -201,10 +203,17 @@ export default function ProjData({
         Address: {address}
       </p>
       <p className="text-[#242424]  text-[12px] sm:text-[12px]  xl:text-[14px] not-italic font-normal">
-        Posted By:{" "}
-        <span className="font-bold">
+        Builder:{" "}
+        <span 
+          className="font-bold underline cursor-pointer"
+          onClick={(e) => {
+            console.log(city, postedByName)
+            e.stopPropagation();
+            window.open(urlBuilder, "_blank");
+          }}
+        >
           {/* {getTypeText(type)} */}
-          {postedBy}
+          {postedByName} 
         </span>
       </p>
     </div>
