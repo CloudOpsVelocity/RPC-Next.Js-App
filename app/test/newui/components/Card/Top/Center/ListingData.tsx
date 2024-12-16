@@ -1,6 +1,7 @@
 import { modalAtom } from "@/app/test/newui/store/jotai";
 import { overlayAtom } from "@/app/test/newui/store/overlay";
 import { getAuthorityNames } from "@/app/utils/api/project";
+import { sqftToAcres } from "@/app/utils/landarea";
 import { formatNumberWithSuffix } from "@/app/utils/numbers";
 import { useMediaQuery } from "@mantine/hooks";
 import clsx from "clsx";
@@ -68,6 +69,11 @@ export default function ListingData({
     return authorityNames.join(", ");
   };
 
+  const formatter = new Intl.NumberFormat("en-in", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  })
+
   return (
     <>
       {" "}
@@ -121,7 +127,7 @@ export default function ListingData({
                 label={type == "proj" ? "Land Area" : "Property Age"}
                 value={
                   type == "proj"
-                    ? `${formatNumberWithSuffix(landArea, false) ?? 0} sqft`
+                    ? `${(formatter.format(sqftToAcres(landArea)))} Acres`
                     : `${propertyAge ?? 0} Years`
                 }
               />

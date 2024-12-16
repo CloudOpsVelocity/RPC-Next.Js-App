@@ -182,12 +182,14 @@ export default function PropertyTypeDetailsCrad({
     return str;
   };
 
+  console.log(cg)
+
   const maxElevation =
     propertyType === "rowHouse" || propertyType === "villa"
       ? `G+${cg.elevation}`
       : cg.towerData &&
         cg.towerData?.reduce((max: string, tower: any) => {
-          const elevStr = getElevationString(tower);
+          const elevStr = getElevationString(tower); 
           return elevStr.length > max.length ? elevStr : max;
         }, "");
 
