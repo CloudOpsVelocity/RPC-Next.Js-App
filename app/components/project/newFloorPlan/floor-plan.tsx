@@ -4,10 +4,16 @@ import { useState } from "react";
 import { PropertyTabs } from "./components/property-tabs";
 import { ViewOptions } from "./components/view-options";
 import { FloorPlanModal } from "./components/floor-plan-modal";
-import { FaCompass, FaCar, FaBuilding, FaArrowRight } from "react-icons/fa";
+import {
+  FaCompass,
+  FaCar,
+  FaBuilding,
+  FaArrowRight,
+  FaExpandAlt,
+} from "react-icons/fa";
 import type { PropertyUnit } from "./types/floor-plan";
 import { BHKTabs } from "./components/bhk-tabs";
-
+import { FullScreenImageModal } from "./components/full-screen-image-modal";
 const propertyUnits: PropertyUnit[] = [
   {
     id: "1",
@@ -67,6 +73,13 @@ export default function FloorPlans() {
   const [selectedPropertyType, setSelectedPropertyType] = useState("apartment");
   const [selectedView, setSelectedView] = useState("type");
   const [modalState, setModalState] = useState<{
+    isOpen: boolean;
+    unit: PropertyUnit | null;
+  }>({
+    isOpen: false,
+    unit: null,
+  });
+  const [fullScreenModalState, setFullScreenModalState] = useState<{
     isOpen: boolean;
     unit: PropertyUnit | null;
   }>({
@@ -228,6 +241,13 @@ export default function FloorPlans() {
                     <p className="text-gray-600">Car Parking</p>
                     <p className="font-semibold">{unit.carParking}</p>
                   </div>
+                  <button
+                    onClick={() =>
+                      setFullScreenModalState({ isOpen: true, unit })
+                    }
+                  >
+                    <FaExpandAlt className="text-[#0073C6] text-xl" />
+                  </button>
                 </div>
               </button>
             ))}
@@ -253,6 +273,13 @@ export default function FloorPlans() {
           onClose={() => setModalState({ isOpen: false, unit: null })}
           units={propertyUnits}
           initialUnit={modalState.unit!}
+        />
+      )}
+      {fullScreenModalState.isOpen && (
+        <FullScreenImageModal
+          isOpen={fullScreenModalState.isOpen}
+          onClose={() => setFullScreenModalState({ isOpen: false, unit: null })}
+          unit={fullScreenModalState.unit!}
         />
       )}
     </div>
