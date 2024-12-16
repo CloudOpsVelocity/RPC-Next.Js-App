@@ -46,11 +46,15 @@ const openSharePopup = useSetAtom(searchShareAtom)
 
   const currentItem = items[currentIndex]
   const handleShare = () => {
-    openSharePopup({
+    navigator.share({
+      title:state.mediaType === 'image' ? 'Share Image' : 'Share Video',
+      url: imageUrlParser(currentItem)
+    })
+    /* openSharePopup({
         opened: true,
         title: state.mediaType === 'image' ? 'Share Image' : 'Share Video',
         url: imageUrlParser(currentItem),
-    })
+    }) */
   }
   function getYouTubeThumbnailUrl(watchUrl: any) {
     // Match both /watch?v= and /embed/ formats
