@@ -66,7 +66,8 @@ export default function Card({ item }: Props) {
                     reqId={item.projIdEnc}
                     shortListed={item.shortListed}
                   />
-                  <ShareBtn url={url} type="proj" />
+                  
+                  <ShareBtn url={url} type="proj"   />
                 </div>{" "}
                 {item.projName}
               </div>

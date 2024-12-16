@@ -44,12 +44,14 @@ export default function FullScreenMasterPlanModal({
   }, []);
 
   const handleShare = () => {
-    openSharePopup({
+    navigator.share(  {title: title,
+      url: imageUrlParser(imageUrl,"M")})
+    /* openSharePopup({
       opened: true,
       title: title,
       url: imageUrlParser(imageUrl,"M"),
 
-    });
+    }); */
   };
 
   const handleDownload = async () => {
