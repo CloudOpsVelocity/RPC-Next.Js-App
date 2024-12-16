@@ -5,6 +5,7 @@ import NextImage from "next/image";
 import { useSearchParams } from "next/navigation";
 type Props = { searchParams: { path: string; type: "M" | "F" } };
 export default function Page({ searchParams: { path, type } }: Props) {
+  path = path.replace(" ", "+");
   const types = {
     M: "Master Plan",
     F: "Floor Plan",
@@ -67,7 +68,6 @@ export default function Page({ searchParams: { path, type } }: Props) {
         fit="contain"
         alt="post"
         component={NextImage}
-        unoptimized
       />
     </div>
   );

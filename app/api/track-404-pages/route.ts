@@ -170,14 +170,14 @@ export async function GET(request: Request) {
       }
       case "S": {
         const staticRoutes = [
-          "/login",
-          "/register",
-          "/register/builder",
-          "/register/agent",
-          "/",
-          "/register/individual",
-          "/search",
-          "/search/listing",
+          `${process.env.NEXT_PUBLIC_URL}/login`,
+          `${process.env.NEXT_PUBLIC_URL}/register`,
+          `${process.env.NEXT_PUBLIC_URL}/register/builder`,
+          `${process.env.NEXT_PUBLIC_URL}/register/agent`,
+          `${process.env.NEXT_PUBLIC_URL}/`,
+          `${process.env.NEXT_PUBLIC_URL}/register/individual`,
+          `${process.env.NEXT_PUBLIC_URL}/search`,
+          `${process.env.NEXT_PUBLIC_URL}/search/listing`,
         ];
         return NextResponse.json(await processPaths(staticRoutes));
       }

@@ -44,8 +44,7 @@ export default function FullScreenMasterPlanModal({
   }, []);
 
   const handleShare = () => {
-    navigator.share(  {title: title,
-      url: imageUrlParser(imageUrl,"M")})
+    navigator.share({ title: title, url: imageUrlParser(imageUrl, "M") });
     /* openSharePopup({
       opened: true,
       title: title,
@@ -75,12 +74,12 @@ export default function FullScreenMasterPlanModal({
     <div>
       <div className="relative max-h-[300px] min-h-[300px] sm:max-h-[600px]: sm:min-h-[600px]">
         <picture>
-          <source media="(max-width: 460px)" srcSet={imageUrl.split(',')[1]} />
-          <source media="(max-width: 768px)" srcSet={imageUrl.split(',')[2]} />
-          <source media="(min-width: 1200px)" srcSet={imageUrl.split(',')[3]} />
+          <source media="(max-width: 460px)" srcSet={imageUrl.split(",")[1]} />
+          <source media="(max-width: 768px)" srcSet={imageUrl.split(",")[2]} />
+          <source media="(min-width: 1200px)" srcSet={imageUrl.split(",")[3]} />
           <Image
             alt={`${title} Master Plan`}
-            src={imageUrl.split(',')[3]}
+            src={imageUrl.split(",")[3]}
             fill
             className="cursor-pointer max-h-[600px] object-contain shadow-[0px_4px_30px_0px_rgba(0,0,0,0.25)] rounded-[14px] border-[0.5px] border-solid border-[#D2CDCD] py-4"
             onClick={openModal}
@@ -100,7 +99,10 @@ export default function FullScreenMasterPlanModal({
         <div className="fixed inset-0 z-[100] bg-black">
           {/* Header */}
           <div className="absolute top-0 left-0 z-[100] right-0 flex justify-between items-center p-4 bg-gradient-to-b from-black to-transparent text-white">
-            <h2 className="text-xl font-bold">Master Plan <span className="hidden sm:inline-flex">of</span> <span className="hidden sm:inline-flex">{title}</span> </h2>
+            <h2 className="text-xl font-bold">
+              Master Plan <span className="hidden sm:inline-flex">of</span>{" "}
+              <span className="hidden sm:inline-flex">{title}</span>{" "}
+            </h2>
             <div className="flex items-center space-x-2">
               <button
                 onClick={handleShare}
@@ -155,7 +157,7 @@ export default function FullScreenMasterPlanModal({
                       className="p-2 md:p-3 hover:bg-gray-800 rounded-full transition-colors bg-black"
                       aria-label="Reset zoom"
                     >
-                     {newIcons.get("resetIconWhite")} 
+                      {newIcons.get("resetIconWhite")}
                     </button>
                   </div>
                   <TransformComponent

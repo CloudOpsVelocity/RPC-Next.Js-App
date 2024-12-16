@@ -32,16 +32,20 @@ function getImageUrls(
 
 const imageUrlParser = (originalUrl: string, type?: string) => {
   if (!originalUrl) return "";
-  let isVideo = originalUrl.includes('mp4') || originalUrl.includes("youtube")
-  const imagePath = originalUrl.includes('youtube') ? originalUrl : originalUrl.split(process.env.NEXT_PUBLIC_IMG_BASE!)[1]
+  let isVideo = originalUrl.includes("mp4") || originalUrl.includes("youtube");
+  const imagePath = originalUrl.includes("youtube")
+    ? originalUrl
+    : originalUrl.includes(process.env.NEXT_PUBLIC_IMG_BASE!)
+    ? originalUrl.split(process.env.NEXT_PUBLIC_IMG_BASE!)[1]
+    : originalUrl;
   let modifiedUrl;
-    if (isVideo) {
-      modifiedUrl = `${process.env.NEXT_PUBLIC_URL}/video?path=${imagePath}`;
-    } else {
-      modifiedUrl = `${
-        process.env.NEXT_PUBLIC_URL
-      }/image?path=${imagePath}${type ? `&type=${type}` : ""}`;
-    }
-    return encodeURIComponent(modifiedUrl);
+  if (isVideo) {
+    modifiedUrl = `${process.env.NEXT_PUBLIC_URL}/video?path=${imagePath}`;
+  } else {
+    modifiedUrl = `${process.env.NEXT_PUBLIC_URL}/image?path=${imagePath}${
+      type ? `&type=${type}` : ""
+    }`;
+  }
+  return modifiedUrl;
 };
 export { getImageUrls, imageUrlParser };

@@ -33,31 +33,30 @@ function PFloorPlanModal({
   const { handleDownload } = useDownload("floorPlan");
   const isMobile = useMediaQuery("(max-width: 601)");
   return (
-      <Modal
-        centered
-        opened={opened}
-        size={isMobile ? "100%" : "90%"}
-        padding={0}
-        transitionProps={{ duration: TRANSITION_DURATION }}
-        onClose={() => setOpened(false)}
-        classNames={{
-          content: S.body,
-          close: S.closeListing,
-          title: S.listingTitle,
-          header: S.header,
-        }}
-        title="Floor Plan"
-      >
-        <div className="flex mb-[8%]   xl:mb-6 justify-center items-start  xl:gap-[45px] shrink-0 flex-wrap md:flex-nowrap relative pt-0 md:pt-[80px] pb-0 md:pb-[30px]">
-          <div className="w-full h-[66px]  xl:h-[57px] flex items-center justify-between  z-[1000] px-3 xl:px-8 absolute top-2 right-0 pb-4 xl:pt-2">
-            <div className="text-[#333] text-left text-[14px] sm:text-[20px]  xl:text-[22px] xl:text-2xl not-italic font-semibold leading-[normal]">
-              Floor Plan
-            </div>
-         
-            <div className="flex justify-center items-center gap-5">
-               {
-              data?.projMedia?.floorPlanUrl && (
-                <>
+    <Modal
+      centered
+      opened={opened}
+      size={isMobile ? "100%" : "90%"}
+      padding={0}
+      transitionProps={{ duration: TRANSITION_DURATION }}
+      onClose={() => setOpened(false)}
+      classNames={{
+        content: S.body,
+        close: S.closeListing,
+        title: S.listingTitle,
+        header: S.header,
+      }}
+      title="Floor Plan"
+    >
+      <div className="flex mb-[8%]   xl:mb-6 justify-center items-start  xl:gap-[45px] shrink-0 flex-wrap md:flex-nowrap relative pt-0 md:pt-[80px] pb-0 md:pb-[30px]">
+        <div className="w-full h-[66px]  xl:h-[57px] flex items-center justify-between  z-[1000] px-3 xl:px-8 absolute top-2 right-0 pb-4 xl:pt-2">
+          <div className="text-[#333] text-left text-[14px] sm:text-[20px]  xl:text-[22px] xl:text-2xl not-italic font-semibold leading-[normal]">
+            Floor Plan
+          </div>
+
+          <div className="flex justify-center items-center gap-5">
+            {data?.projMedia?.floorPlanUrl && (
+              <>
                 <button
                   onClick={() => handleDownload(data.projMedia.floorPlanUrl)}
                   className={`text-white flex justify-center text-[12px] xl:text-base items-center xl:gap-1 p-1 xl:p-2 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] rounded-[6px] font-semibold xl:rounded-[10px] bg-[#0073c6] `}
@@ -67,22 +66,24 @@ function PFloorPlanModal({
                 <SharePopup
                   title="Share"
                   titleText="Share Floor Plan"
-                  url={imageUrlParser(data.projMedia.floorPlanUrl, "F")}
+                  url={imageUrlParser(
+                    data.projMedia.floorPlanUrl.split(",")[3],
+                    "F"
+                  )}
                 />
-                </>
-              )
-            }
-             
-              <Close close={() => setOpened(false)} />
-            </div>
-          </div>
+              </>
+            )}
 
-          <TransformWrapper>
-            <MiddleSection />
-          </TransformWrapper>
-          <RightSection propCgId={type} />
+            <Close close={() => setOpened(false)} />
+          </div>
         </div>
-      </Modal>
+
+        <TransformWrapper>
+          <MiddleSection />
+        </TransformWrapper>
+        <RightSection propCgId={type} />
+      </div>
+    </Modal>
   );
 }
 
@@ -104,10 +105,7 @@ const MiddleSection = () => {
             height={500}
           />
         </TransformComponent>
-        {
-           data.floorPlanUrl &&
-        <ZoomInOut className="!right-1 !bottom-1" />
-        }
+        {data.floorPlanUrl && <ZoomInOut className="!right-1 !bottom-1" />}
       </div>
     </div>
   );
@@ -176,43 +174,47 @@ const RightSection = ({ propCgId }: any) => {
         </div>
         {propCgId != projectprops.plot && (
           <>
-           {data?.floor !== undefined && <div className="flex items-center space-x-3">
-              {propCgId == projectprops.rowHouse || propCgId == projectprops.villa
-                ? propertyDetailsSvgs.towerName 
-                : propertyDetailsSvgs.floor}
-              <p className="text-[#4D6677] text-[14px] font-[500]">
-                {`${
-                  propCgId == projectprops.rowHouse ||
-                  propCgId == projectprops.villa
-                    ? "At Elevation"
-                    : "At Floor"
-                }:`}
-                <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
-                  {" "}
-                  {`${data.isBasement == "Y" ? "B+" : ""}${
-                    data?.floor === 0 || data?.floor === "0"
-                      ? "G"
-                      : propCgId === projectprops.rowHouse ||
-                        propCgId === projectprops.villa
-                      ? `G+${data?.floor}`
-                      : data?.floor
-                  }`}
-                </span>{" "}
-              </p>
-            </div>}
-
-            {propCgId !== projectprops.plot && data?.totalFloor !== undefined && (
+            {data?.floor !== undefined && (
               <div className="flex items-center space-x-3">
-                {propertyDetailsSvgs.floor}
+                {propCgId == projectprops.rowHouse ||
+                propCgId == projectprops.villa
+                  ? propertyDetailsSvgs.towerName
+                  : propertyDetailsSvgs.floor}
                 <p className="text-[#4D6677] text-[14px] font-[500]">
-                  Total No.Of Floors:
+                  {`${
+                    propCgId == projectprops.rowHouse ||
+                    propCgId == projectprops.villa
+                      ? "At Elevation"
+                      : "At Floor"
+                  }:`}
                   <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
                     {" "}
-                    {data.totalFloor}
+                    {`${data.isBasement == "Y" ? "B+" : ""}${
+                      data?.floor === 0 || data?.floor === "0"
+                        ? "G"
+                        : propCgId === projectprops.rowHouse ||
+                          propCgId === projectprops.villa
+                        ? `G+${data?.floor}`
+                        : data?.floor
+                    }`}
                   </span>{" "}
                 </p>
               </div>
             )}
+
+            {propCgId !== projectprops.plot &&
+              data?.totalFloor !== undefined && (
+                <div className="flex items-center space-x-3">
+                  {propertyDetailsSvgs.floor}
+                  <p className="text-[#4D6677] text-[14px] font-[500]">
+                    Total No.Of Floors:
+                    <span className="text-[#303A42] text-[14px] ml-[10px] font-[600] ">
+                      {" "}
+                      {data.totalFloor}
+                    </span>{" "}
+                  </p>
+                </div>
+              )}
           </>
         )}
 
@@ -264,8 +266,6 @@ const RightSection = ({ propCgId }: any) => {
             </p>
           </div>
         )}
-
-
 
         {(propCgId == projectprops.villa ||
           propCgId == projectprops.rowHouse ||
@@ -349,7 +349,7 @@ const RightSection = ({ propCgId }: any) => {
                 Plot Area:
                 <span className="text-[#303A42] ml-[10px] text-[14px] font-[600] ">
                   {" "}
-                  {formatNumberWithSuffix(data.plotArea,false)} sq.ft
+                  {formatNumberWithSuffix(data.plotArea, false)} sq.ft
                 </span>
               </p>
             </div>
