@@ -42,6 +42,6 @@ const imageUrlParser = (originalUrl: string, type?: string) => {
         process.env.NEXT_PUBLIC_URL
       }/image?path=${imagePath}${type ? `&type=${type}` : ""}`;
     }
-    return modifiedUrl;
+    return encodeURIComponent(modifiedUrl);
 };
 export { getImageUrls, imageUrlParser };

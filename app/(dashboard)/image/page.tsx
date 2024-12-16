@@ -27,7 +27,7 @@ export default function Page({ searchParams: { path, type } }: Props) {
     try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_IMG_BASE}${path}`
-      )
+      );
       // console.log(response);
       const blob = await response.blob();
       const url = URL.createObjectURL(blob);
@@ -67,6 +67,7 @@ export default function Page({ searchParams: { path, type } }: Props) {
         fit="contain"
         alt="post"
         component={NextImage}
+        unoptimized
       />
     </div>
   );

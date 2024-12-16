@@ -168,7 +168,19 @@ export async function GET(request: Request) {
         const projectPaths = Object.keys(projectSlugs);
         return NextResponse.json(await processProjectPaths(projectPaths));
       }
-
+      case "S": {
+        const staticRoutes = [
+          "/login",
+          "/register",
+          "/register/builder",
+          "/register/agent",
+          "/",
+          "/register/individual",
+          "/search",
+          "/search/listing",
+        ];
+        return NextResponse.json(await processPaths(staticRoutes));
+      }
       default:
         return NextResponse.json({ error: "Invalid type" }, { status: 400 });
     }

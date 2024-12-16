@@ -56,7 +56,7 @@ export default function TopRightSection({
   phaseName,
 
   bhk,
-  bhkName
+  bhkName,
 }: Props) {
   const setSelected = useSetAtom(selectedSearchAtom);
   const [sharePopupData, setSharePopup] = useAtom(searchShareAtom);
@@ -86,13 +86,15 @@ export default function TopRightSection({
           slug: projName ? projName : projName,
         })
       : generateListingLinkUrl({
-          bhkUnitType: bhkName ? bhkName : "",
-          city: cityName ? cityName : city ? city : "",
-          propIdEnc: type == "proj" ? projIdEnc : propIdEnc,
-          category: filters.cg === "S" ? "for-sale" : "for-rent",
-          locality: localityName ? localityName : locality ? locality : "",
-          phase: phaseName ? phaseName : "",
-          projName: propName ? propName : propName,
+          city: cityName,
+          locality: localityName,
+          projName: projIdEnc ? propName : null,
+          category: category === "Sale" ? "for-sale" : "for-rent",
+          phase: phaseName,
+          propIdEnc: propIdEnc,
+          bhkUnitType: bhkName
+            ? `${bhkName + " " + propTypeName}`
+            : "" + " " + propTypeName,
         });
   const [lat, lang] = location?.split(",") ?? [];
   console.log("card 1: ", data);
@@ -106,7 +108,7 @@ export default function TopRightSection({
     >
       {category === "Sale" ? (
         <div className="text-xs hidden xl:flex sm:text-base font-medium text-[#4f4f4f] text-nowrap absolute top-3 right-24  sm:top-0 sm:right-[65px]">
-          Avg Price:{" "} 
+          Avg Price:{" "}
           <span className="font-bold ml-1">
             {" "}
             ₹{formatNumberWithSuffix(type === "proj" ? basePrice : sqftPrice)}
@@ -220,20 +222,21 @@ export default function TopRightSection({
                 </button>
                 <button
                   className="bg-teal-500 text-white text-right max-w-fit px-1 font-bold sm:py-1 sm:px-2 text-xs rounded shadow-lg hover:bg-teal-600 transition duration-300 ease-in-out"
-                  onClick={() =>{
-                    console.log("near by 1", data)
+                  onClick={() => {
+                    console.log("near by 1", data);
                     dispatch({
                       type: "OPEN",
                       content: [],
-                      id: `${projIdEnc}+${propTypeId}${ phaseId ? `+${phaseId}` : "" }`,
+                      id: `${projIdEnc}+${propTypeId}${
+                        phaseId ? `+${phaseId}` : ""
+                      }`,
                       title: `NearBy Locations of ${projName}`,
                       conType: "nearby",
                       pType: type,
                       lat,
-                      lang, 
-                    })
-                  }
-                  }
+                      lang,
+                    });
+                  }}
                 >
                   Nearby
                 </button>
@@ -350,7 +353,9 @@ export default function TopRightSection({
                     className="text-[14px]  text-btnPrimary  font-bold mt-2"
                     onClick={() =>
                       window.open(
-                        `/image?path=${floorPlan.split(".net")[1]}&type=F`,
+                        `/image?path=${
+                          floorPlan.split(process.env.NEXT_PUBLIC_IMG_BASE)[1]
+                        }&type=F`,
                         "_blank"
                       )
                     }
@@ -413,8 +418,8 @@ export default function TopRightSection({
                     conType: "nearby",
                     pType: type,
                     lat,
-                    lang 
-                  })
+                    lang,
+                  });
                 }}
               >
                 Nearby
