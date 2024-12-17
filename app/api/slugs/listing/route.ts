@@ -180,11 +180,11 @@ export async function POST(request: Request) {
 
 export async function PUT(request: Request) {
   let body = await request.json();
-  const { slugs, ids } = body;
+  const { slugs, id } = body;
   logger.info(`PUT request received at ${request.url}`, body);
 
-  if (!slugs || typeof slugs !== "object" || !ids || !ids.length) {
-    logger.error(`PUT ${request.url}: Missing or invalid slugs/ids data`);
+  if (!slugs || typeof slugs !== "object" || !id) {
+    logger.error(`PUT ${request.url}: Missing or invalid slugs/id data`);
     return NextResponse.json(
       {
         error:
@@ -206,8 +206,9 @@ export async function PUT(request: Request) {
   const data = JSON.parse(fileContent);
 
   // First delete existing slugs based on ids
-  if (ids && Array.isArray(ids)) {
-    ids.forEach((id) => {
+  if (id) {
+    const ids = id.split(",");
+    ids.forEach((id: string) => {
       Object.keys(data).forEach((key) => {
         if (key.split("-").at(-1) === id) {
           delete data[key];
@@ -228,7 +229,7 @@ export async function PUT(request: Request) {
   );
 }
 
-export async function PATCH(request: Request) {
+export async function PATCH() {
   const res = await getPagesSlugs("listing-search-seo");
   // Fetch data and cache the keys
   const staticDir = path.join(process.cwd(), "static");
