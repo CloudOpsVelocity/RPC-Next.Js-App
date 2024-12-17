@@ -62,7 +62,7 @@ export default function BuilderProjectsCount({ id }: Props) {
     <div className="sm:rounded-[20px] flex justify-between items-center bg-[#FFF] shadow-md w-[100%] mb-[1%] sm:w-[65%] xl:w-[50%] p-[1%] border border-gray-300">
       <div className="w-[30%] border-solid border-[#92B2C8] border-r-[1px]">
         {data?.newLaunch > 0 ? (
-          <a href={`/search?projStatus=108`} className="block">
+          <a href={`/search?projStatus=108`} target="_blank" className="block">
             <div className="flex justify-between items-center w-[90%]">
               <span className="text-[#202020]text-[16px] sm:text-[20px] lg:text-[24px] font-[600]">
                 {data?.newLaunch}
@@ -89,7 +89,7 @@ export default function BuilderProjectsCount({ id }: Props) {
 
       <div className="w-[30%] border-solid border-[#92B2C8] border-r-[1px]">
         {data?.onGoing > 0 ? (
-          <a href={`/search?projStatus=106`} className="block">
+          <a href={`/search?projStatus=106`} target="_blank" className="block">
             <div className="flex justify-between items-center w-[90%]">
               <span className="text-[#202020]text-[16px] sm:text-[20px] lg:text-[24px] font-[600]">
                 {data?.onGoing}
@@ -117,7 +117,7 @@ export default function BuilderProjectsCount({ id }: Props) {
 
       <div className="w-[30%]">
         {data?.completed > 0 ? (
-          <a href={`/search?projStatus=107`} className="block">
+          <a href={`/search?projStatus=107`} target="_blank" className="block">
             <div className="flex justify-between items-center w-[90%]">
               <span className="text-[#202020]text-[16px] sm:text-[20px] lg:text-[24px] font-[600]">
                 {data?.completed}
