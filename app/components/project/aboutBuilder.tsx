@@ -9,6 +9,7 @@ import { TeleGramBlack } from "@/app/images/commonSvgs";
 import { convertDateToMonthYear } from "@/app/utils/date";
 import { capitalizeWords } from "@/app/utils/letters";
 import { generateBuilderUrl } from "@/app/utils/linkRouters/Builder";
+import BuilderProjectsCount from "../builder/BuilderProjectsCount";
 
 type Props = {
   id: number;
@@ -59,7 +60,8 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
             </div>
           </div>
         </div>
-        <div className="sm:rounded-[20px] mt-[1%] flex justify-between items-center builderBg shadow-md w-[100%] mb-[2%] sm:w-[75%] xl:w-[50%] p-[1%] ">
+        <BuilderProjectsCount id={id.toString()} />
+        {/* <div className="sm:rounded-[20px] mt-[1%] flex justify-between items-center builderBg shadow-md w-[100%] mb-[2%] sm:w-[75%] xl:w-[50%] p-[1%] ">
           <div className="w-[30%] border-solid border-[#92B2C8] border-r-[1px]">
             <p className=" text-[#202020]  text-[14px] sm:text-[20px] xl:text-[24px] font-[700]">
               {nzData.newProject}
@@ -87,7 +89,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
               Completed {`Project${nzData.completedProject > 1 ? "s" : ""}`}
             </p>
           </div>
-        </div>
+        </div> */}
         <About
           id="builder_vision"
           heading={""}

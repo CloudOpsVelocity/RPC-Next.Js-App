@@ -1,4 +1,5 @@
 "use client";
+import RTK_CONFIG from "@/app/config/rtk";
 import {
   completedProjIconSvg,
   newLaunchProjIconSvg,
@@ -36,6 +37,7 @@ export default function BuilderProjectsCount({ id }: Props) {
         completed: response.projectCount?.[107] || 0,
       };
     },
+    ...RTK_CONFIG,
   });
   if (isLoading) {
     return (
