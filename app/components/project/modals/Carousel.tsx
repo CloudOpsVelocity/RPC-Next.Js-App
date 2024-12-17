@@ -87,6 +87,8 @@ function CarouselModal({
           Floor Plan
         </div>
         <div className="flex justify-center items-center gap-5 mb-2">
+        {selectedFloor?.floorPlanUrl !== ImgNotAvail && (
+          <>
           <button
             onClick={handleDownload}
             className={`text-white flex justify-center items-center gap-1 p-2 shadow-[0px_4px_10px_0px_rgba(0,0,0,0.10)] rounded-[10px] bg-[#0073c6] ${
@@ -95,12 +97,13 @@ function CarouselModal({
           >
             {!isMobile ? "Download Floor Plan" : "Download"}
           </button>
-          {selectedFloor?.floorPlanUrl !== ImgNotAvail && (
+         
             <SharePopup
               title="Share"
             titleText="Share Floor Plan"
               url={imageUrlParser(selectedFloor?.floorPlanUrl?.split(",")[3], "F")}
               />
+              </>
           )}
 
           <Close close={close} />

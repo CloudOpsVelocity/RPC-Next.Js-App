@@ -32,7 +32,7 @@ export default function ListingReqBtn({
   return (
     <>
    <Button
-      className="flex justify-center min-w-[50%]  right-1  items-center text-[#FFF] ml-1 p-[3px] md:p-[5px] bg-[#0073C6] rounded-[5px] shadow-md text-[12px] xl:text-[12px] md:text-[12px] font-[700] text-nowrap sm:hidden max-h-[25px] mt-[12px] mb-[6px]"/* z-[1000] */
+      className="flex justify-center right-1  items-center text-[#FFF] ml-1 p-[3px] md:p-[5px] bg-[#0073C6] rounded-[5px] shadow-md text-[12px] xl:text-[12px] md:text-[12px] font-[700] text-nowrap sm:hidden max-h-[25px] mt-[12px] mb-[6px] pr-1"/* z-[1000] */
       onClick={handleOpen}
     >
       <CallIcon className="w-[16px] h-[16px]" />

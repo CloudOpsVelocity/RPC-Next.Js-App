@@ -20,7 +20,7 @@ export default function ListingCard({ item, sl }: Props) {
   const images = getImageUrls(item.media);
   const title = `${
     item.propTypeName === "Plot"
-      ? `${formatNumberWithSuffix(item.pa)} sq.ft`
+      ? `${formatNumberWithSuffix(item.pa, false)} sq.ft`
       : item.bhkName
   } ${item.propTypeName} for ${item.category} in ${item.localityName}`;
  const listingLink = generateListingLinkUrl({
@@ -66,9 +66,9 @@ export default function ListingCard({ item, sl }: Props) {
             Posted Date: {formatDateDDMMYYYY(item.postedDate)}
           </p>
         <div className="absolute bottom-2 left-2 space-y-2">
-          <p className="flex justify-center items-center gap-1 rounded p-1 bg-[#000000b0] text-white text-[12px] xl:text-base not-italic font-semibold leading-[normal] capitalize">
+       {/*   {item.propTypeName !== "Plot" &&  */}<p className="flex justify-center items-center gap-1 rounded p-1 bg-[#000000b0] text-white text-[12px] xl:text-base not-italic font-semibold leading-[normal] capitalize">
             {item.propStatus}
-          </p>
+          </p>{/* } */}
         
         </div>
       </div>
