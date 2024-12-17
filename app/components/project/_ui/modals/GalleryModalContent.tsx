@@ -47,6 +47,7 @@ const openSharePopup = useSetAtom(searchShareAtom)
   const currentItem = items[currentIndex]
   const handleShare = () => {
     navigator.share({
+      
       title:state.mediaType === 'image' ? 'Share Image' : 'Share Video',
       url: imageUrlParser(currentItem)
     })

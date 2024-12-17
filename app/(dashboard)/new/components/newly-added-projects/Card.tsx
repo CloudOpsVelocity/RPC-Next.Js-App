@@ -95,7 +95,7 @@ export default function Card({ item }: Props) {
                   className="text-[#E3AC00] text-[12px] sm:text-[14px] xl:text-[18px] not-italic font-bold leading-[normal] tracking-[0.44px] underline"
                 >
                   {" "}
-                  {item.builderName}
+                  {item.postedByName}
                 </button>
                 <p className="text-white text-[12px] sm:text-[14px] not-italic font-bold leading-[normal] tracking-[0.44px]">
                   Project Land Area:{" "}
@@ -113,7 +113,7 @@ export default function Card({ item }: Props) {
               <div className="sm:flex flex-col items-end space-x-2 sm:space-x-0 gap-3">
                 <ViewAllButton url={url} />
                 <ReqBtn
-                  builderName={item.builderName}
+                  builderName={item.postedByName}
                   projName={item.projName}
                   reqId={item.projIdEnc}
                   builderId={item.builderId as number}
