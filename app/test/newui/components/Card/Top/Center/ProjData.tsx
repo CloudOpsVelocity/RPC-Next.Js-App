@@ -7,7 +7,9 @@ import { overlayAtom } from "@/app/test/newui/store/overlay";
 import selectedSearchAtom, {
   mobileSearchPageMapModalReducerAtom,
 } from "@/app/store/search/map";
-import BuilderLink, { generateBuilderUrl } from "@/app/utils/linkRouters/Builder";
+import BuilderLink, {
+  generateBuilderUrl,
+} from "@/app/utils/linkRouters/Builder";
 import useSearchFilters from "@/app/hooks/search";
 
 type Props = any;
@@ -32,7 +34,7 @@ export default function ProjData({
   address,
   phaseName,
   projIdEnc,
-  propTypeId, 
+  propTypeId,
   agentListing,
   ownerListing,
   projOrPropName,
@@ -44,7 +46,7 @@ export default function ProjData({
   phaseId,
 
   sqftPrice,
-  basePrice
+  basePrice,
 }: Props) {
   const sortedBhks = sortUnits(bhkNames);
   const dispatch = useSetAtom(overlayAtom);
@@ -98,7 +100,7 @@ export default function ProjData({
 
       {filters.cg == "S" ? (
         <div className="text-xs hidden xl:flex sm:text-base font-medium text-[#4f4f4f] text-nowrap absolute top-3 right-24  sm:top-0 sm:right-[65px]">
-          Avg Price:{" "} 
+          Avg Price:{" "}
           <span className="font-bold ml-1">
             {" "}
             ₹{formatNumberWithSuffix(type === "proj" ? basePrice : sqftPrice)}
@@ -130,7 +132,9 @@ export default function ProjData({
                 type: "OPEN",
                 content: sortedBhks,
                 title: "Unit Types",
-                id: `${type === "proj" ? projIdEnc : propIdEnc}+${propTypeId}+${phaseId}`,
+                id: `${
+                  type === "proj" ? projIdEnc : propIdEnc
+                }+${propTypeId}+${phaseId}`,
                 conType: "bhk",
                 pType: type,
               });
@@ -148,10 +152,9 @@ export default function ProjData({
       </p>
       <p className="text-black text-[12px] sm:text-[14px] xl:text-[14px] font-normal">
         Builder:{" "}
-        <span 
+        <span
           className="font-bold underline cursor-pointer"
           onClick={(e) => {
-            console.log(city, postedByName)
             e.stopPropagation();
             window.open(urlBuilder, "_blank");
           }}
@@ -169,10 +172,11 @@ export default function ProjData({
       >
         {bhkName} {propTypeName} for {category} in {localityName}
       </p>
-      
-        <p className="text-[#148B16] text-[14px] sm:text-[18px] xl:text-xl not-italic font-bold relative">
-          {formatCurrency(Number(price))}{" "}
-          {(otherCharges?.otherCharge || Object.keys(otherCharges).length > 2) && (
+
+      <p className="text-[#148B16] text-[14px] sm:text-[18px] xl:text-xl not-italic font-bold relative">
+        {formatCurrency(Number(price))}{" "}
+        {(otherCharges?.otherCharge ||
+          Object.keys(otherCharges).length > 2) && (
           <span
             className="  text-btnPrimary cursor-pointer text-[12px] xl:text-sm"
             onClick={(e) => {
@@ -183,7 +187,9 @@ export default function ProjData({
                   charges: otherCharges,
                 },
                 // id: `${type === "proj" ? projIdEnc : propIdEnc}+${propTypeId ?? ''}${phaseId ? '+' + phaseId : ''}`,
-                id: `${projIdEnc ?? ''}+${propIdEnc ?? ""}${propTypeId ?? propTypeName ?? ''}${type === "proj" && phaseId ? "+" + phaseId : ""}`,
+                id: `${projIdEnc ?? ""}+${propIdEnc ?? ""}${
+                  propTypeId ?? propTypeName ?? ""
+                }${type === "proj" && phaseId ? "+" + phaseId : ""}`,
                 title: "Other Charges",
                 type: "OPEN",
                 pType: type,
@@ -192,9 +198,8 @@ export default function ProjData({
           >
             View Other Charges
           </span>
-           )}
-        </p>
-     
+        )}
+      </p>
 
       <p className="text-[#001F35] text-[12px] sm:text-[16px]   not-italic font-bold">
         {propName}{" "}
@@ -204,16 +209,15 @@ export default function ProjData({
       </p>
       <p className="text-[#242424]  text-[12px] sm:text-[12px]  xl:text-[14px] not-italic font-normal">
         Builder:{" "}
-        <span 
+        <span
           className="font-bold underline cursor-pointer"
           onClick={(e) => {
-            console.log(city, postedByName)
             e.stopPropagation();
             window.open(urlBuilder, "_blank");
           }}
         >
           {/* {getTypeText(type)} */}
-          {postedByName} 
+          {postedByName}
         </span>
       </p>
     </div>

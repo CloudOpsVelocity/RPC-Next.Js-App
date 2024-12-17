@@ -8,9 +8,10 @@ export default function Page({ searchParams: { path } }: Props) {
   const handleDownload = async () => {
     try {
       const response = await fetch(
-        path.includes('youtube') ? path : `${process.env.NEXT_PUBLIC_IMG_BASE}${path}`
+        path.includes("youtube")
+          ? path
+          : `${process.env.NEXT_PUBLIC_IMG_BASE}${path}`
       );
-      console.log(response);
       const blob = await response.blob();
       const url = URL.createObjectURL(blob);
       const downloadLink = document.createElement("a");
@@ -28,7 +29,7 @@ export default function Page({ searchParams: { path } }: Props) {
 
   return (
     <div className="flex justify-center items-center h-[100vh] ">
-      {!path.includes('youtube') && (
+      {!path.includes("youtube") && (
         <button
           className="inline-flex flex-col items-center justify-center gap-2.5 p-3 rounded-[10px] bg-[#0073C6] text-white text-lg not-italic font-bold leading-[normal] tracking-[0.96px] absolute top-[10%] right-[24.5%]"
           onClick={(e) => {

@@ -75,7 +75,6 @@ const LocationCard: React.FC<LocationCardProps> = React.memo(({ data }) => {
     };
   }, [updateScrollButtons]);
 
-  console.log(data[selectedCategory]);
 
   return (
     <div className="relative bg-white rounded-lg shadow-md overflow-hidden w-full">

@@ -60,7 +60,6 @@ export const getCachedProjectUnits = async (
     // }
   );
   const data = await fn();
-  console.log(data);
   return data;
 };
 const getProjectUnits = async (

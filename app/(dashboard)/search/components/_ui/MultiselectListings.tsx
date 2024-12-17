@@ -63,10 +63,10 @@ export function MainSearchMultiSelect({ type }: { type: string }) {
     filters.projIdEnc
   }`;
 
-  console.log(selectedPropId);
+
 
   const handlePush = async (type: string, data: any) => {
-    console.log(data);
+
     switch (type) {
       case "Locality":
         handleAddSearch(`${data.name}+${data.id}`);

@@ -19,11 +19,6 @@ export default function Results() {
     projectListing,
   } = data;
 
-
-  console.log(data);
-
-
-
   const { filters, setFilters } = useSearchFilters();
 
   if (isLoading) {
@@ -126,25 +121,24 @@ export default function Results() {
               ))}
             </ul>
             {listings?.length > 0 && <SubHeading text="Listings" />}
-            {console.log(listings)};
+
             <ul>
               {listings?.map((listing: any) => {
-
-                return(
+                return (
                   <li
-                  onClick={() =>
-                    handlePush("listing", {
-                      id: listing.id,
-                      name: listing.name.split("in")[1],
-                    })
-                  }
-                  className="text-[#737579] text-[14px] sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
-                  key={listing.id}
-                >
-                  {listing.name}
-                </li>
-                )
-                })}
+                    onClick={() =>
+                      handlePush("listing", {
+                        id: listing.id,
+                        name: listing.name.split("in")[1],
+                      })
+                    }
+                    className="text-[#737579] text-[14px] sm:text-xl not-italic font-medium leading-[normal] cursor-pointer"
+                    key={listing.id}
+                  >
+                    {listing.name}
+                  </li>
+                );
+              })}
             </ul>
             {projectListing?.length > 0 && (
               <SubHeading text="Project Listings" />
