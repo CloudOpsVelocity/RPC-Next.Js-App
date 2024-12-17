@@ -193,9 +193,15 @@ export default function ListingCard({ item, sl }: Props) {
             )}
           </div>
           <div className="flex  mt-auto  justify-between   item-center w-[100%] my-1 sm:y-0">
-            {/* <p className="text-[#242424] text-[14px] xl:text-sm not-italic font-semibold leading-[normal] capitalize mt-[12px] mb-[6px]">
-              Posted by: {item.postedBy}
-            </p> */}
+          <p className="text-[#242424] max-w-[48%]  text-[12px] xl:text-[14px] not-italic font-semibold leading-[normal] capitalize mt-[12px] mb-[6px]">
+            {
+              item.postedBy === "Builder" 
+                ? `Builder : ${item.postedByName}`
+                : item.postedBy === "Agent" 
+                ? `Agent : ${item.postedByName}`
+                : "Individual" // Fallback to "Agent" for other values
+            }
+          </p>
             <ListingReqBtn
               builderId={item.postedById}
               builderName={item.postedBy}

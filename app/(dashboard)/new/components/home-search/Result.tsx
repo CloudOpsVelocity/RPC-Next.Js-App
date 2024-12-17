@@ -74,7 +74,7 @@ export default function Results() {
           {
             let url;
             let localityName = apiData.name
-              .split(" in ")[1]
+              .split("-")[1]
               .toLowerCase()
               .trim();
             url =
@@ -83,7 +83,7 @@ export default function Results() {
               }&cg=${data.CG}&localities=${localityName}` +
               "%2B" +
               encodeURIComponent(data.LT);
-
+            alert("please wati")
             window.open(data.PJ && data.PJ !== "null" ? `/search/listing?${url}` : "/search?" + url);
           }
         }
