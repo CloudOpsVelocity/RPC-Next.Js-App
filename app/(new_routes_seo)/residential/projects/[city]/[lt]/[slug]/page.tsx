@@ -22,23 +22,12 @@ type Props = {
 export default async function Page({ params }: Props) {
   const { city, lt, slug: name } = params;
   const pathname = `${BASE_PATH_PROJECT_DETAILS}/${city}/${lt}/${name}`;
-
   const value = await findPathForProjectDetails(pathname);
-  if (!value) {
-    notFound();
-  }
   const { PJ: slug } = await extractProjectParamsValues(value);
   let [projResponse, amenitiesFromDB] = await Promise.all([
     getProjectDetails(slug as string),
     getAmenties(),
   ]);
-
-  // Cache just the metadata
-  // const data = projResponse.basicData;
-  // metadataCache = {
-  //   title: `${data?.projectName} ${data.availableProperties?.join(" ")} for sale in ${data.localityName} ${data.cityName}`,
-  //   description: `${data.projectName} for sale in ${data.localityName}, ${data.cityName}. View Project Details, Price, Check Brochure PDF, Floor Plan, Reviews, Master Plan, Amenities & Contact Details`
-  // };
 
   if (projResponse.basicData.projAuthorityId) {
     const res = await getAuthorityNames(projResponse.basicData.projAuthorityId);

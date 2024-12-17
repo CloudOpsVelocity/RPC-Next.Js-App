@@ -1,5 +1,6 @@
 import path from "path";
 import fs from "fs";
+import { notFound } from "next/navigation";
 export const extractProjectParamsValues = (input: string) => {
   const result: { [key: string]: string | number } = {};
 
@@ -63,5 +64,6 @@ export async function findPathForProjectDetails(inputUrl: string) {
     }
   }
   console.timeEnd("findPathForProjectDetails");
+  notFound()
   return null;
 }
