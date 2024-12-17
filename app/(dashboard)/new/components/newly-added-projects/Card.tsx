@@ -23,7 +23,7 @@ export default function Card({ item }: Props) {
     slug: item.projName,
   });
   // let urlBuilder=`${process.env.NEXT_PUBLIC_BACKEND_URL}/builder/${item.builderId}`;
-  let builderName = item?.builderName?.toLowerCase().split(" ").join("%2D");
+  let builderName = item?.postedByName?.toLowerCase().split(" ").join("%2D");
   let urlBuilder = `${process.env.NEXT_PUBLIC_BACKEND_URL}/builders/bengaluru/${builderName}`;
 
   const builderiRedirect = (e: any) => {
