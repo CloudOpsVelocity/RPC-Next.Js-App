@@ -54,6 +54,11 @@
             "date": 1734324254480,
             "name": "logs\\nextjs-app-logs-16-12-2024.txt",
             "hash": "ce63b94005838a62a151ef5a1bed9c7da7081c958762af3d4bf0e8362f9a8e44"
+        },
+        {
+            "date": 1734412539656,
+            "name": "logs\\nextjs-app-logs-17-12-2024.txt",
+            "hash": "96ec5740a159dbdd3de1dd1904cabf112ad2195db12295a2ee48177d932b8584"
         }
     ],
     "hashType": "sha256"
