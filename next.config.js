@@ -15,6 +15,7 @@ const nextConfig = {
   // typescript: { ignoreBuildErrors: true },
   experimental: {
     optimizePackageImports: ["@mantine/core", "@mantine/hooks"],
+
     // ppr: true,
   },
   images: {

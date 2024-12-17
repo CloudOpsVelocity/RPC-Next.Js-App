@@ -217,16 +217,24 @@ export async function POST(request: Request, response: Response) {
         let deleted = false; // Track whether a deletion occurs
         // Loop over keys and delete the ones that contain the id
         Object.keys(data).forEach((key) => {
-          if (data[key].includes(id)) {
+          if (type === "project" && data[key].includes(`LT_${id}*`)) {
             logger.info(
               `Deleting slug "${key}" for ID: ${id}. Request: ${request.method} ${request.url}`
             );
             delete data[key];
-            if (type === "P") {
+            if (!deleted) {
               revalidatePath(key.split("/").slice(0, 6).join("/"));
+              deleted = true;
             }
-            revalidatePath(key); // Revalidate path after deletion
-            deleted = true; // Mark as deleted
+          } else if (type === "builder" && id === data[key].split("_")[1]) {
+            logger.info(
+              `Deleting slug "${key}" for ID: ${id}. Request: ${request.method} ${request.url}`
+            );
+            delete data[key];
+            if (!deleted) {
+              revalidatePath(key);
+              deleted = true;
+            }
           }
         });
 
