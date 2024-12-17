@@ -34,6 +34,7 @@ export interface Data {
   projectAvailableCities: {
     [key: string]: string;
   };
+  id: string;
 }
 
 export interface BuilderProject {

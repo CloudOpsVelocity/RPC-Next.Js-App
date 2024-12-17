@@ -25,7 +25,7 @@ export default function BuilderPage({ data, id }: Props) {
         <>
           <TopProfileBlock {...data.data} />
           <div className="flex flex-col justify-start items-start w-[95%] ">
-            <ProjectDetails {...data.data} />
+            <ProjectDetails {...data.data} id={id} />
             <ManagementBlock {...data.data} />
           </div>
           <div className="w-full m-auto sm:w-[95%]">

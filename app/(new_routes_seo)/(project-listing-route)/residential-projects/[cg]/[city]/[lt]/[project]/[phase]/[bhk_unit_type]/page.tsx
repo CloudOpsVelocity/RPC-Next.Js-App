@@ -36,7 +36,10 @@ export default async function Page({ params }: Props) {
   const values = await findPathForProjectListing(pathname);
   if (!values) return notFound();
   const filtersValues = extractListingParamsValues(values);
-  const isProjectListing = filtersValues.count === 7;
+  const isProjectListing =
+    filtersValues.PT == "32"
+      ? filtersValues.count === 7
+      : filtersValues.count === 8;
   if (isProjectListing) {
     serverData = await getSearchData(
       `${filtersValues.BH ? `bhk=${filtersValues.BH}&` : ""}propType=${

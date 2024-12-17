@@ -49,3 +49,10 @@ export const getBuilderDetailsPageData = async (
     return error as Main;
   }
 };
+
+export const getBuilderProjectsCount = async (id: string) => {
+  const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project/builder-project-count?bid=${id}`;
+  const response = await fetch(url);
+  const data = await response.json();
+  return data;
+};

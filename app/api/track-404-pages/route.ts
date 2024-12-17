@@ -31,8 +31,8 @@ async function checkUrlBatch(urls: { url: string; path: string }[]) {
 }
 
 // Optimized function to remove unique ID from listing path
-function getBaseListingPath(path: string): string {
-  return path.split("/").pop() || "";
+function getBaseListingPath(path: string): { key: string; value: string } {
+  return { key: path.split("/").pop() || "", value: path };
 }
 
 // Generator function to process paths in chunks
@@ -53,20 +53,21 @@ async function processListingPaths(paths: string[]) {
     errorRoutes: [],
     forbiddenRoutes: [],
   };
-  const basePathsSet = new Set(paths.map(getBaseListingPath));
-
-  for await (const results of processPathsInChunks(paths, BATCH_SIZE)) {
-    for (const result of results) {
-      if (!result) continue;
-      if (result.type === "notFound") {
-        response.notFoundRoutes.push(result.path);
-      } else if (result.type === "forbidden") {
-        response.forbiddenRoutes.push(result.path);
-      } else {
-        response.errorRoutes.push(result.path);
-      }
-    }
-  }
+  const basePathsSet = new Set(
+    paths.map(getBaseListingPath).map(({ key, value }) => ({ key, value }))
+  );
+  // for await (const results of processPathsInChunks(paths, BATCH_SIZE)) {
+  //   for (const result of results) {
+  //     if (!result) continue;
+  //     if (result.type === "notFound") {
+  //       response.notFoundRoutes.push(result.path);
+  //     } else if (result.type === "forbidden") {
+  //       response.forbiddenRoutes.push(result.path);
+  //     } else {
+  //       response.errorRoutes.push(result.path);
+  //     }
+  //   }
+  // }
 
   return {
     originalCount: paths.length,
