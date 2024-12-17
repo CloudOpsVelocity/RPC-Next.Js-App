@@ -92,7 +92,7 @@ export default function Card({ item }: Props) {
                 </span>
                 <button
                   onClick={(e) => builderiRedirect(e)}
-                  className="text-[#E3AC00] text-[12px] sm:text-[14px] xl:text-[18px] not-italic font-bold leading-[normal] tracking-[0.44px] underline"
+                  className="text-[#E3AC00] text-[12px] sm:text-[14px] xl:text-[16px] not-italic font-bold leading-[normal] tracking-[0.44px] underline"
                 >
                   {" "}
                   {item.postedByName}

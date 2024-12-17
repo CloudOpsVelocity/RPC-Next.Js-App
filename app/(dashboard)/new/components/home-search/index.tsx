@@ -71,7 +71,7 @@ const HomeSearch = ({
         />
       </div>
       <div className="w-full sm:max-w-[1066px] sm:ml-[20px] xl:ml-0 xl:mr-[20px] ">
-        <div className="flex flex-col items-start sm:gap-3 self-stretch pl-[11px] pr-2.5 pt-0 pb-[13px] !h-auto rounded-lg border-[0.5px] border-solid border-[#A6BDDF] bg-[#f2f7ff] sm:h-[200px] w-full">
+        <div className="flex flex-col items-start sm:gap-3 self-stretch pl-[11px] pr-2.5 pt-0 pb-[13px] !h-auto rounded-lg border-[0.5px] border-solid border-[#A6BDDF] bg-[#f2f7ff] sm:h-[200px] w-full mb-2 sm:mb-0">
           <Tabs />
           <p className="inline-flex sm:hidden justify-center items-center text-[#242424] text-[14px] not-italic font-medium gap-1">
             {config.homeIcon} All Residential

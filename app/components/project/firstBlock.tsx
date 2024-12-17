@@ -76,7 +76,7 @@ const FirstBlock: React.FC<Props> = ({
       {projectDetails && (
         <>
           {hasReraStatus && (
-            <p className="hidden sm:flex items-center pl-[8px] rounded-tl-lg text-center text-[12px] sm:text-[16px]  xl:text-[24px] font-[600] text-[#FFF] bg-gradient-to-r w-[122px] from-[#148B16] /0 to-[#EFEFEF]/50  z-10 left-0 absolute">
+            <p className="flex items-center pl-[8px] rounded-tl-lg text-center text-[12px] sm:text-[16px]  xl:text-[24px] font-[600] text-[#FFF] bg-gradient-to-r w-[122px] from-[#148B16] /0 to-[#EFEFEF]/50  z-10 left-0 absolute">
               <ReraIcon className="h-[14px] w-[14px] sm:h-[16px] sm:w-[16px] xl:h-[24px] xl:w-[24px]" />
               RERA
             </p>
@@ -92,7 +92,7 @@ const FirstBlock: React.FC<Props> = ({
             <SharePopup className="text-sm p-[4px]  sm:text-xl hidden sm:flex" />
           </div>
 
-          <div className="relative w-full sm:!rounded-[10px]  h-[330px] sm:max-h-[545px] !xl:h-[750px] xl:max-h-[750px]">
+          <div className="relative w-full sm:!rounded-[10px]  h-[300px] sm:max-h-[545px] !xl:h-[750px] xl:max-h-[750px]">
             <Carousel
               classNames={styles}
               slideGap={{ base: 0, sm: "md" }}
