@@ -175,9 +175,7 @@ export async function POST(request: Request, response: Response) {
         // Write updated data to the file
         fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
         logger.info(
-          `File updated after slug update: ${JSON.stringify(data)}. Request: ${
-            request.method
-          } ${request.url}`
+          `Successfully updated slugs file with new data. Request: ${request.method} ${request.url}`
         );
         let revalidateTagId: string | null = null;
         // Revalidate all paths for the new slugs
