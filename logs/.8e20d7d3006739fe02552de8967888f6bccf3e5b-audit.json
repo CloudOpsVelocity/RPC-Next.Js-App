@@ -1,70 +1,70 @@
 {
-    "keep": {
-        "days": true,
-        "amount": 30
+  "keep": {
+    "days": true,
+    "amount": 30
+  },
+  "auditLog": "logs\\.8e20d7d3006739fe02552de8967888f6bccf3e5b-audit.json",
+  "files": [
+    {
+      "date": 1733212091986,
+      "name": "logs\\nextjs-app-logs-03-12-2024.txt",
+      "hash": "181f0c2300ac3ca1a50d70b64cac9641ddf542c9f004716c59b0ae6c0a44311e"
     },
-    "auditLog": "logs\\.8e20d7d3006739fe02552de8967888f6bccf3e5b-audit.json",
-    "files": [
-        {
-            "date": 1733212091986,
-            "name": "logs\\nextjs-app-logs-03-12-2024.txt",
-            "hash": "181f0c2300ac3ca1a50d70b64cac9641ddf542c9f004716c59b0ae6c0a44311e"
-        },
-        {
-            "date": 1733287587651,
-            "name": "logs\\nextjs-app-logs-04-12-2024.txt",
-            "hash": "4372630209c043f579550e025e1365ce3cd313071ec57a70961c083483326d49"
-        },
-        {
-            "date": 1733373279578,
-            "name": "logs\\nextjs-app-logs-05-12-2024.txt",
-            "hash": "48b478a0483e6b3775027b052a20045ec1bfcf53a6a9596c5cdcf8e5631cfe1d"
-        },
-        {
-            "date": 1733460039058,
-            "name": "logs\\nextjs-app-logs-06-12-2024.txt",
-            "hash": "7748647679aa70ef8f129bd7f1c3ae9889a2ff67823afbeabf0a4b3590ee55f0"
-        },
-        {
-            "date": 1733719189894,
-            "name": "logs\\nextjs-app-logs-09-12-2024.txt",
-            "hash": "4ede86942c9ed3c2d67b571f5afa8e81dabc75c5b6e92f5933ac396b5dc2783b"
-        },
-        {
-            "date": 1733806002293,
-            "name": "logs\\nextjs-app-logs-10-12-2024.txt",
-            "hash": "2fc01207a4559ee75528104d513d3e962e1884f35b8090306678b737d1e4eda5"
-        },
-        {
-            "date": 1733891999997,
-            "name": "logs\\nextjs-app-logs-11-12-2024.txt",
-            "hash": "7d6772bd3841b214651a5b3955876f59ab0bbf736c7170aadd4fedffddbd91a3"
-        },
-        {
-            "date": 1733978735453,
-            "name": "logs\\nextjs-app-logs-12-12-2024.txt",
-            "hash": "882f84207ac0f9eefd9ad0f4be995525eb6d12bec5b8b80a62dcb5269e327213"
-        },
-        {
-            "date": 1734065910101,
-            "name": "logs\\nextjs-app-logs-13-12-2024.txt",
-            "hash": "65875581bd8db0413df9351642a17227d9bc48b24c12caf91570956f7685e7c7"
-        },
-        {
-            "date": 1734324254480,
-            "name": "logs\\nextjs-app-logs-16-12-2024.txt",
-            "hash": "ce63b94005838a62a151ef5a1bed9c7da7081c958762af3d4bf0e8362f9a8e44"
-        },
-        {
-            "date": 1734410677482,
-            "name": "logs\\nextjs-app-logs-17-12-2024.txt",
-            "hash": "d2296d25d34ebb54b0e08ef66ffcd08a87e4cafe226f71c15e8501f981b5993d"
-        },
-        {
-            "date": 1734497366782,
-            "name": "logs\\nextjs-app-logs-18-12-2024.txt",
-            "hash": "9dd17d2e8bbc0f61e94f0f5cdec9fc25a5dac3d651f0efbb9fc333f014999b8e"
-        }
-    ],
-    "hashType": "sha256"
+    {
+      "date": 1733287587651,
+      "name": "logs\\nextjs-app-logs-04-12-2024.txt",
+      "hash": "4372630209c043f579550e025e1365ce3cd313071ec57a70961c083483326d49"
+    },
+    {
+      "date": 1733373279578,
+      "name": "logs\\nextjs-app-logs-05-12-2024.txt",
+      "hash": "48b478a0483e6b3775027b052a20045ec1bfcf53a6a9596c5cdcf8e5631cfe1d"
+    },
+    {
+      "date": 1733460039058,
+      "name": "logs\\nextjs-app-logs-06-12-2024.txt",
+      "hash": "7748647679aa70ef8f129bd7f1c3ae9889a2ff67823afbeabf0a4b3590ee55f0"
+    },
+    {
+      "date": 1733719189894,
+      "name": "logs\\nextjs-app-logs-09-12-2024.txt",
+      "hash": "4ede86942c9ed3c2d67b571f5afa8e81dabc75c5b6e92f5933ac396b5dc2783b"
+    },
+    {
+      "date": 1733806002293,
+      "name": "logs\\nextjs-app-logs-10-12-2024.txt",
+      "hash": "2fc01207a4559ee75528104d513d3e962e1884f35b8090306678b737d1e4eda5"
+    },
+    {
+      "date": 1733891999997,
+      "name": "logs\\nextjs-app-logs-11-12-2024.txt",
+      "hash": "7d6772bd3841b214651a5b3955876f59ab0bbf736c7170aadd4fedffddbd91a3"
+    },
+    {
+      "date": 1733978735453,
+      "name": "logs\\nextjs-app-logs-12-12-2024.txt",
+      "hash": "882f84207ac0f9eefd9ad0f4be995525eb6d12bec5b8b80a62dcb5269e327213"
+    },
+    {
+      "date": 1734065910101,
+      "name": "logs\\nextjs-app-logs-13-12-2024.txt",
+      "hash": "65875581bd8db0413df9351642a17227d9bc48b24c12caf91570956f7685e7c7"
+    },
+    {
+      "date": 1734324254480,
+      "name": "logs\\nextjs-app-logs-16-12-2024.txt",
+      "hash": "ce63b94005838a62a151ef5a1bed9c7da7081c958762af3d4bf0e8362f9a8e44"
+    },
+    {
+      "date": 1734412539656,
+      "name": "logs\\nextjs-app-logs-17-12-2024.txt",
+      "hash": "96ec5740a159dbdd3de1dd1904cabf112ad2195db12295a2ee48177d932b8584"
+    },
+    {
+      "date": 1734498548428,
+      "name": "logs\\nextjs-app-logs-18-12-2024.txt",
+      "hash": "3ab30137b4cdb5c0227333cc7ce9edd57b8eb469c8bc19ba1cb3b7ca489ac48a"
+    }
+  ],
+  "hashType": "sha256"
 }

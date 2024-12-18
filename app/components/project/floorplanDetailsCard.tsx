@@ -158,7 +158,7 @@ const FloorplanDetailsCard: React.FC<Props> = ({
                 {mergedData.bedCount} Bed - {mergedData.bathCount} Bath
               </span>
             </p>
-            <p className="gap-[4px] font-[500] text-[12px] sm:text-[14px] lg:text-[16px] text-[#303A42] mb-[8px] flex justify-start items-start">
+            <p className="gap-[4px] font-[500] text-[14px] lg:text-[16px] text-[#303A42] mb-[8px] flex justify-start items-start">
               <SuperBuildupAreaIcon className="md:h-[32px] md:w-[32px] h-[24px] w-[24px]" />
               Super Builtup Area:{" "}
               {formatNumberWithSuffix(mergedData.superBuildupArea)} sq.ft
@@ -206,8 +206,8 @@ const FloorplanDetailsCard: React.FC<Props> = ({
           </p>
         )} */}
         {(propCgId != projectprops.plot || !propCgId) && (
-          <p className="gap-[4px] flex sm:justify-end sm:items-end text-[#303A4] font-[500] text-[12px] sm:text-[14px] lg:text-[16px]  ">
-            <CarParkingIcon className="w-[20px] h-[20px] lg:w-[24px] lg:h-[24px]" />
+          <p className="gap-[4px] font-[500] text-[14px] lg:text-[16px] text-[#303A42] mb-[8px] flex justify-start items-start">
+            <CarParkingIcon className="md:h-[32px] md:w-[32px] h-[24px] w-[24px]" />
             Car Parking:{" "}
             {mergedData.carParking === 0 ? "N/A" : mergedData.carParking}
           </p>

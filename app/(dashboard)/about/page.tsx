@@ -79,14 +79,14 @@ export default function page({}: Props) {
             height={300}
             alt="about"
             className="w-[90%] hidden sm:block sm:w-[30%] h-[299.576px]"
-            src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/About%20us%20/About%20getrightproperty.png`}
+            src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/aboutus/about-getrightproperty.png`}
           />
           <Image
             width={387}
             height={300}
             alt="hero image"
             className="w-[90%] block sm:hidden sm:w-[30%] h-[299.576px]"
-            src={`${process.env.NEXT_PUBLIC_IMG_BASE}/About%20us/hero-image.png`}
+            src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/About%20us/hero-image.png`}
           />
         </div>
         {/* best services */}
@@ -97,7 +97,7 @@ export default function page({}: Props) {
               height={300}
               alt="hero image"
               className="hidden sm:block  w-[36%] h-[299.576px]"
-              src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/About%20us%20/best%20service.png`}
+              src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/aboutus/best-service.png`}
             />
             <div className=" pt-[20px] pb-[20px] sm:pt-[60px] sm:pb-[60px]">
               <h1 className="text-[#2AA327] font-[Montserrat] text-center sm:text-left sm:text-[20px] mb-[16px] xl:text-[26px] not-italic font-bold leading-[normal] capitalize">
@@ -173,9 +173,10 @@ export default function page({}: Props) {
             <Image
               width={387}
               height={300}
+              unoptimized
               alt="hero image"
               className="sm:w-[36%] w-[80%] h-[188px] sm:h-[318px]"
-              src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/About%20us%20/founder.png`}
+              src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/aboutus/founder.png`}
             />
             <div className="flex flex-col justify-center items-center sm:items-start ">
               <h1 className="text-[#000] font-[Montserrat] text-[16px] text-center sm:text-left sm:text-[20px] xl:text-[24px] not-italic font-semibold leading-[normal] mb-1">
