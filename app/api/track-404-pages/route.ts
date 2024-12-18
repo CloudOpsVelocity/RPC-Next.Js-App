@@ -7,7 +7,7 @@ interface ErrorResponse {
 }
 
 const BATCH_SIZE = 25; // Increased batch size for better throughput
-const BASE_URL = `https://test.getrightproperty.com` || "";
+const BASE_URL = `https://www.getrightproperty.com` || "";
 
 // Function to process a batch of URLs with optimized error handling
 async function checkUrlBatch(urls: { url: string; path: string }[]) {
@@ -84,26 +84,35 @@ async function processListingPaths(paths: string[]) {
 
     // Categorize results
     for (const result of results) {
+      console.log(`Result: ${result?.type}`);
       if (!result) continue;
       if (result.type === "notFound") {
         response.notFoundRoutes.push(result.path);
       } else if (result.type === "forbidden") {
         response.forbiddenRoutes.push(result.path);
-      } else {
+      } else if (result.type === "error") {
         response.errorRoutes.push(result.path);
       }
     }
+
+    console.log(`Processed path: ${path}`);
   };
 
   // Process each path
   for (const path of paths) {
     const pathsToCheck = generateParentPaths(path);
+    console.log(`Processing parent paths for: ${path}`);
+    console.log(`Generated paths to check:`, pathsToCheck);
 
     // Check each parent path in the generated list
     for (const parentPath of pathsToCheck) {
       await checkPath(parentPath); // Only check the path if it's not already checked
     }
+
+    console.log(`Completed processing all parent paths for: ${path}`);
   }
+
+  console.log(`Total paths processed: ${scannedRoutes.length}`);
 
   return {
     originalCount: paths.length,
@@ -157,7 +166,7 @@ async function processBuilderPaths(paths: string[]) {
         response.notFoundRoutes.push(result.path);
       } else if (result.type === "forbidden") {
         response.forbiddenRoutes.push(result.path);
-      } else {
+      } else if (result.type === "error") {
         response.errorRoutes.push(result.path);
       }
     }
@@ -190,30 +199,68 @@ async function processProjectPaths(paths: string[]) {
     errorRoutes: [],
     forbiddenRoutes: [],
   };
-  const uniquePathsSet = new Set(
-    paths.map((path) => path.split("/").slice(0, 6).join("/"))
-  );
-  const uniquePaths = Array.from(uniquePathsSet);
+  const checkedPaths = new Set<string>();
+  const scannedRoutes: string[] = [];
 
-  for await (const results of processPathsInChunks(uniquePaths, BATCH_SIZE)) {
+  // Function to generate parent paths
+  const generateParentPaths = (path: string) => {
+    const segments = path.split("/").filter(Boolean);
+    const pathsToCheck: string[] = [];
+    let currentPath = "";
+
+    for (const segment of segments) {
+      currentPath = currentPath ? `${currentPath}/${segment}` : `/${segment}`;
+      pathsToCheck.push(currentPath);
+    }
+
+    return pathsToCheck;
+  };
+
+  // Function to check paths avoiding duplicates
+  const checkPath = async (path: string) => {
+    if (checkedPaths.has(path)) {
+      return;
+    }
+
+    checkedPaths.add(path);
+    scannedRoutes.push(path);
+
+    console.log(`Scanning path: ${path}`);
+    console.log(
+      `Progress: ${scannedRoutes.length} scanned out of ${paths.length} total paths`
+    );
+
+    const batch = [{ url: `${BASE_URL}${path}`, path }];
+    const results = await checkUrlBatch(batch);
+
     for (const result of results) {
       if (!result) continue;
       if (result.type === "notFound") {
         response.notFoundRoutes.push(result.path);
       } else if (result.type === "forbidden") {
         response.forbiddenRoutes.push(result.path);
-      } else {
+      } else if (result.type === "error") {
         response.errorRoutes.push(result.path);
       }
     }
+  };
+
+  // Process each path and its parent paths
+  for (const path of paths) {
+    const pathsToCheck = generateParentPaths(path);
+    for (const parentPath of pathsToCheck) {
+      await checkPath(parentPath);
+    }
   }
+
+  console.log(`Scanning complete: ${scannedRoutes.length} paths scanned`);
 
   return {
     originalCount: paths.length,
-    uniqueCount: uniquePaths.length,
     notFoundCount: response.notFoundRoutes.length,
     errorCount: response.errorRoutes.length,
     forbiddenCount: response.forbiddenRoutes.length,
+    scannedRoutes,
     ...response,
   };
 }

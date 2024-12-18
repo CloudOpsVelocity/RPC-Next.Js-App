@@ -21,6 +21,10 @@ export default function BuilderPage({ data, id }: Props) {
   const refURls = data?.data?.sourceBuilderUrl?.split(",");
   return (
     <div className="flex flex-col justify-start items-center w-full mt-[70px]  ">
+      <link
+        rel="canonical"
+        href={`${process.env.NEXT_PUBLIC_URL}${data?.data?.pathname}`}
+      />
       {data && (
         <>
           <TopProfileBlock {...data.data} />
