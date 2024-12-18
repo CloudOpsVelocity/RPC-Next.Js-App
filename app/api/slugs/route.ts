@@ -131,20 +131,24 @@ export async function POST(request: Request, response: Response) {
 
         // Find and delete existing slugs with the same id
         Object.keys(data).forEach((key) => {
-          if (data[key].includes(id)) {
+          if (type === "project" && data[key].includes(`LT_${id}*`)) {
             logger.info(
               `Deleting existing slug "${key}" for ID: ${id}. Request: ${request.method} ${request.url}`
             );
             delete data[key];
-            if (type === "P") {
-              revalidatePath(key.split("/").slice(0, 6).join("/"));
-            }
+            revalidatePath(key.split("/").slice(0, 6).join("/"));
+            revalidatePath(key);
+          } else if (type === "builder" && id === data[key].split("_")[1]) {
+            logger.info(
+              `Deleting existing slug "${key}" for ID: ${id}. Request: ${request.method} ${request.url}`
+            );
+            delete data[key];
             revalidatePath(key);
           }
         });
 
         // Add new slugs to the data
-        Object.keys(slugs).forEach((slug) => {
+        for (const slug of Object.keys(slugs)) {
           const newId = slugs[slug];
           if (!newId || typeof newId !== "string") {
             logger.error(
@@ -170,7 +174,7 @@ export async function POST(request: Request, response: Response) {
             `Adding new slug "${slug}" with ID: ${newId}. Request: ${request.method} ${request.url}`
           );
           data[slug] = newId;
-        });
+        }
 
         // Write updated data to the file
         fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
