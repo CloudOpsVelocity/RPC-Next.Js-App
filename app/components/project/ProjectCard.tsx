@@ -26,6 +26,8 @@ type Props = {
   builderName?: string;
   builderLinkActive:boolean,
   id?: string;
+  lat: string;
+  lng: string;
 };
 
 type CardProps = {
@@ -281,8 +283,16 @@ const ProjectCarousel = ({
   id,
   builderLinkActive,
   builderName,
+  lat, 
+  lng
 }: Props) => {
-  // console.log(data);
+  console.log(data);
+  console.log(builderName);
+  let obj = data && data.length > 0 ? data[0] : null;
+  let redirectUrl = ct == "builder" ? 
+  `/search?builderIds=${builderName}${obj?.builderId}` 
+  : `/search?lat=${lat}&lng=${lng}&unitTypes=49&cg=R`;
+
   return (
     data?.length > 0 && (
       <div

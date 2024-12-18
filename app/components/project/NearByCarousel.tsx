@@ -34,7 +34,7 @@ export default function NearByCarousel({
     type: "proj"
     
   });
-
+  console.log(builderId);
   return (
     <div className="flex flex-col justify-start items-start w-full  mt-[4%] sm:mt-0 xl:pt-less-screen-spacing scroll-mt-28" id="similar-projects">
       <ProjectCarousel
@@ -44,7 +44,7 @@ export default function NearByCarousel({
         projName={capitalizeWords(builderData?.data?.userName ?? "")}
         data={
           data != undefined && data.builderProj != undefined
-            ? data.builderProj
+            ? data.builderProj 
             : []
         }
         builderLinkActive={false}
@@ -52,6 +52,8 @@ export default function NearByCarousel({
         builderName={builderData?.data?.userName ?? ""}
         ct="builder"
         id="similar-projects"
+        lat={lat} 
+        lng={lng}
       />
       <ProjectCarousel
         type="proj"
@@ -68,6 +70,8 @@ export default function NearByCarousel({
         builderName={builderData?.data?.companyName}
         ct="proj"
         id="other-projects"
+        lat={lat} 
+        lng={lng}
       />
     </div>
   );
