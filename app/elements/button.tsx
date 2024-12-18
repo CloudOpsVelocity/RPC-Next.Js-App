@@ -15,8 +15,11 @@ const Button = ({
   onChange,
 }: props) => {
   return (
-    <div className={buttonConClass}>
-      <button className={buttonClass} onClick={(e) => onChange && onChange(e)}>
+    <div className={buttonConClass || ""}>
+      <button
+        className={buttonClass || ""}
+        onClick={(e) => onChange && onChange(e)}
+      >
         {icon}
         {title}
       </button>
