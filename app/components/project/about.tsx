@@ -66,13 +66,13 @@ export default function About({
           dangerouslySetInnerHTML={{ __html:  content?.slice(0, charLimit) }} />
       </div>
     </div>
-      <ReadMore
+      {/* <ReadMore
         text={content}
         maxLines={maxLines}
         title={heading}
         showProjName={showProjName}
         builderName={builderName}
-      />
+      /> */}
     </div>
   );
 }
