@@ -44,26 +44,11 @@ export default function ListingCard({ item, sl }: Props) {
         // onClick={() => onRedirectOnProp()}
         className="w-full max-w-full sm:w-[370px] xl:w-[490px] xl:min-w-[490px] sm:max-w-[490px] cursor-pointer"
       >
-        <div className="h-[137px] sm:h-[145px] xl:h-[228px]   mb-[6px] shrink-0 shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] relative">
+        <div className="h-[200px] sm:h-[145px] xl:h-[228px]   mb-[6px] shrink-0 shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] relative">
           <div className="flex  justify-start items-start gap-[8px] absolute top:0 right-0 p-[8px] ">
             <Shortlist reqId={item.propIdEnc} shortListed={sl} />
             <ShareBtn url={listingLink} type="prop" />
           </div>
-    <div >
-    <Link
-      href={listingLink}
-      target="_blank"
-      // onClick={() => onRedirectOnProp()}
-      className="w-full max-w-full sm:w-[370px] xl:w-[490px] xl:min-w-[490px] sm:max-w-[490px] cursor-pointer"
-    >
-      <div className="h-[200px] sm:h-[145px] xl:h-[228px]   mb-[6px] shrink-0 shadow-[0px_4px_20px_0px_rgba(194,194,194,0.40)] relative">
-        <div className="flex  justify-start items-start gap-[8px] absolute top:0 right-0 p-[8px] ">
-          <Shortlist reqId={item.propIdEnc} shortListed={sl} />
-          <ShareBtn
-            url={listingLink}
-            type="prop"
-          />
-        </div>
 
           <button
             className="inline-flex justify-center items-center gap-2.5 rounded border p-1 xl:p-2 border-solid border-[#0073C6] bg-[#0073c6] text-white text-[12px] xl:text-sm not-italic font-bold leading-[normal] capitalize absolute bottom-2 right-2 sm:bottom-3 sm:right-3 " /* z-[1000] */
