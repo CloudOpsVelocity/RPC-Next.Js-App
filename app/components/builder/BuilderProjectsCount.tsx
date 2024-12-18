@@ -11,10 +11,10 @@ import { useQuery } from "react-query";
 
 type Props = {
   id: string;
-  builderName:string
+  builderName: string;
 };
 
-export default function BuilderProjectsCount({ id, builderName  }: Props) {
+export default function BuilderProjectsCount({ id, builderName }: Props) {
   const { data, isLoading, status } = useQuery({
     queryKey: [`BuilderProjectsCount`, id],
     queryFn: async () => {
@@ -40,7 +40,7 @@ export default function BuilderProjectsCount({ id, builderName  }: Props) {
     },
     ...RTK_CONFIG,
   });
-  const builderQueryNameAndId=encodeURIComponent(`${builderName}+${id}`)
+  const builderQueryNameAndId = encodeURIComponent(`${builderName}+${id}`);
   if (isLoading) {
     return (
       <div className="sm:rounded-[20px]  flex justify-between items-center bg-[#FFF] shadow-md w-[100%] mb-[3%] sm:w-[65%] xl:w-[50%] p-[1%] border border-gray-300">
@@ -64,7 +64,11 @@ export default function BuilderProjectsCount({ id, builderName  }: Props) {
     <div className="sm:rounded-[20px] flex justify-between items-center bg-[#FFF] shadow-md w-[100%] mb-[1%] sm:w-[65%] xl:w-[50%] p-[1%] border border-gray-300">
       <div className="w-[30%] border-solid border-[#92B2C8] border-r-[1px]">
         {data?.newLaunch > 0 ? (
-          <a href={`/search?projStatus=108&builderIds=${builderQueryNameAndId}`} target="_blank" className="block">
+          <a
+            href={`/search?projStatus=108&builderIds=${builderQueryNameAndId}`}
+            target="_blank"
+            className="block"
+          >
             <div className="flex justify-between items-center w-[90%]">
               <span className="text-[#202020]text-[16px] sm:text-[20px] lg:text-[24px] font-[600]">
                 {data?.newLaunch}
@@ -91,7 +95,11 @@ export default function BuilderProjectsCount({ id, builderName  }: Props) {
 
       <div className="w-[30%] border-solid border-[#92B2C8] border-r-[1px]">
         {data?.onGoing > 0 ? (
-          <a href={`/search?projStatus=106&builderIds=${builderQueryNameAndId}`} target="_blank" className="block">
+          <a
+            href={`/search?projStatus=106&builderIds=${builderQueryNameAndId}`}
+            target="_blank"
+            className="block"
+          >
             <div className="flex justify-between items-center w-[90%]">
               <span className="text-[#202020]text-[16px] sm:text-[20px] lg:text-[24px] font-[600]">
                 {data?.onGoing}
@@ -119,7 +127,11 @@ export default function BuilderProjectsCount({ id, builderName  }: Props) {
 
       <div className="w-[30%]">
         {data?.completed > 0 ? (
-          <a href={`/search?projStatus=107&builderIds=${builderQueryNameAndId}`} target="_blank" className="block">
+          <a
+            href={`/search?projStatus=107&builderIds=${builderQueryNameAndId}`}
+            target="_blank"
+            className="block"
+          >
             <div className="flex justify-between items-center w-[90%]">
               <span className="text-[#202020]text-[16px] sm:text-[20px] lg:text-[24px] font-[600]">
                 {data?.completed}
