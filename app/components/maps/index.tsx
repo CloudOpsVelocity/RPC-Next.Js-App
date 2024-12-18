@@ -113,8 +113,8 @@ const Icon =  createCustomIconReactLeafLet(selected);
             position={[parseFloat(item?.lat), parseFloat(item?.lang)]}
             title={item.name}
             icon={Icon}
-            {...(isMobile && { icon: BlueMobileMapIcon })}
-            zIndexOffset={100}
+/*             {...(isMobile && { icon: BlueMobileMapIcon })}
+ */            zIndexOffset={100}
             eventHandlers={{
               click: () =>
                 setSelectedLocation({
