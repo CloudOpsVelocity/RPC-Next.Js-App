@@ -276,7 +276,7 @@ Props) {
   const rowVirtualizer = useVirtualizer({
     count: projectUnitsData?.length || 0,
     getScrollElement: () => parentRef.current,
-    estimateSize: () => (isMobile ? 200 : 180),
+    estimateSize: () => (isMobile ? 250 : 180),
     overscan: 5,
   });
   useEffect(() => {

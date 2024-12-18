@@ -75,8 +75,8 @@ export default function SearchSec({}: Props) {
             onClick={handleFieldClick}
             value={name ?? ""}
             onChange={(e) => onSearchChange(e.target.value)}
-            /* min-w-[234px] we change input width for full text visible in search main  */
-            className=" min-w-[100%]   sm:min-w-[255px]  text-[12px] sm:text-[14px] outline-none pr-2 py-1 focus:text-[16px] sm:focus:text-[14px] placeholder:text-gray-600 ios-zoom-fix"
+            /* min-w-[234px]   sm:min-w-[255px] we change input width for full text visible in search main  */
+            className=" min-w-[100%]    text-[12px] sm:text-[14px] outline-none pr-2 py-1 focus:text-[16px] sm:focus:text-[14px] placeholder:text-gray-600 ios-zoom-fix"
           />
         </div>
       </Combobox.Target>
