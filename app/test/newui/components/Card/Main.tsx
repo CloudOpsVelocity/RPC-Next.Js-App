@@ -191,7 +191,7 @@ const MainBox = ({ data, refetch }: Props) => {
         reqId={reqId}
         {...data}
         title={`${bhkName ?? ""} ${propTypeName} for ${
-          data.cg === "R" ? "Rent" : "Sell"
+          data.cg === "R" ? "Rent" : "Sale"
         } in ${localityName}`}
         onAddingCompare={onAddingCompare}
         isCompared={state.compareAdded}

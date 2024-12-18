@@ -252,9 +252,15 @@ const BuilderCarousel = ({
       <p className="ml-2 mt-3 mb-0 sm:mb-[24px]  text-[#4D6677] text-[13px] sm:text-lg xl:text-2xl italic font-medium leading-[normal] tracking-[0.96px] px-4 sm:px-0">
         {content}
       </p>
-      <NewCarousel data={data} renderItem={(item:any, index) => (
-    <ProjectCard type={type} cardData={{...item,postedByName:builderName}} refetch={refetch} />
-  )} slidesToShow={3.5} gap={10} />
+      <NewCarousel 
+        data={data} 
+        renderItem={(item:any, index) => (
+          <ProjectCard type={type} cardData={{...item,postedByName:builderName}} refetch={refetch}/>
+        )} 
+        slidesToShow={3.5} 
+        gap={10} 
+        url="/search"
+      />
       {/* <MainCarousel
         paddings={{
           desktop: 10,

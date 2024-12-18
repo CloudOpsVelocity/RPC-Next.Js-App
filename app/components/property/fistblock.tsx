@@ -193,7 +193,7 @@ const PropertyFirstBlock: React.FC<Props> = ({
                 </p>
               </div>
             </div>
-            <div className="w-full md:w-[40%] flex justify-between md:items-end flex-col p-[2%] sm:p-[0%]">
+            <div className="w-full md:w-[40%] flex justify-between md:items-end flex-col p-[2%] sm:p-[0%] h-full">
               <h2 className="iinline-flex sm:text-[22px] xl:text-[32px] font-semibold sm:font-[700] text-[#001F35]">
                 {`${
                   projectDetails.cg === "R"
@@ -239,12 +239,12 @@ const PropertyFirstBlock: React.FC<Props> = ({
                   </span>
                 </a>
               ) : ( */}
-                <p className="text-[#001F35] sm:text-[18px] xl:text-2xl not-italic font-semibold  capitalize sm:mt-1 xl:mt-[8px]">
+              <p className="text-[#001F35] sm:text-[18px] xl:text-2xl not-italic font-semibold  capitalize sm:mt-1 xl:mt-[8px] mb-auto">
                 {get_posted_by(projectDetails.postedByType)}:{" "}
                   <span className="">{projectDetails.postedByName}</span>
-                </p>
+              </p>
               <p
-                className="sm:text-[16px] xl:text-[20px] font-[600] mr-auto md:mr-0 text-[#0073C6] bg-[#FFF] rounded-[10px] shadow-md p-[8px] flex items-center gap-2 cursor-pointer"
+                className="sm:text-[16px] xl:text-[20px] font-[600] mr-auto md:mr-0 text-[#0073C6] bg-[#FFF] rounded-[10px] shadow-md p-[8px] flex items-center gap-2 cursor-pointer mt-auto self-end"
                 onClick={() => scrollToTopic("floorPlans")}
               >
                 <Image

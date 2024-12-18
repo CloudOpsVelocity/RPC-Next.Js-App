@@ -52,7 +52,11 @@ export default function ListingCarousel({ shortIds, data ,dataKey,url}: Props) {
 
 
   // />
-  <NewCarousel slidesToShow={isMobile ? 1 : 4} url={url} data={data} renderItem={(item:any, index) => (
+  <NewCarousel 
+    slidesToShow={isMobile ? 1 : 4} 
+    url={url} 
+    data={data} 
+    renderItem={(item:any, index) => (
     <ListingCard
       item={item}
       sl={

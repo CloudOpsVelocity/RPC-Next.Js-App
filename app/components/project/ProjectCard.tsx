@@ -92,7 +92,7 @@ const URLToBuilder=generateBuilderUrl({
    /*  <ProjectLink
         routeParams={{
         city: cardData.city,
-        locality: cardData.locality,
+        locality: cardData.locality, 
         slug: cardData.projName,
       }}
       target="_blank"
@@ -282,6 +282,7 @@ const ProjectCarousel = ({
   builderLinkActive,
   builderName,
 }: Props) => {
+  // console.log(data);
   return (
     data?.length > 0 && (
       <div
@@ -313,7 +314,9 @@ const ProjectCarousel = ({
           )}
           slidesToShow={4}
           gap={10}
-          url="/search"
+          // url={`/search?builderIds=${"builderName"}${"builderId"}`}
+          url={`/search`}
+
         />
         {/* <MainCarousel>
           {data &&

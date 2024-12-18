@@ -67,7 +67,7 @@ export default function RoomFloorplansBlock({ data }: { data: Main }) {
         >
           <PropertyHeading
             title="Floor Plan"
-            desc="see floor plan Of your selected property"
+            desc="See floor plan of your selected property"
           />
         </div>
 

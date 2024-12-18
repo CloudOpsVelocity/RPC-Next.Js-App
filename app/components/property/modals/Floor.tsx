@@ -48,7 +48,7 @@ function PFloorPlanModal({
       }}
       title="Floor Plan"
     >
-      <div className="flex mb-[8%]   xl:mb-6 justify-center items-start  xl:gap-[45px] shrink-0 flex-wrap md:flex-nowrap relative pt-0 md:pt-[80px] pb-0 md:pb-[30px]">
+      <div className="flex xl:mb-6 justify-center items-start xl:gap-[45px] shrink-0 flex-wrap md:flex-nowrap relative pt-0 md:pt-[80px] pb-0 xl:pb-[30px]">
         <div className="w-full h-[66px]  xl:h-[57px] flex items-center justify-between  z-[1000] px-3 xl:px-8 absolute top-2 right-0 pb-4 xl:pt-2">
           <div className="text-[#333] text-left text-[14px] sm:text-[20px]  xl:text-[22px] xl:text-2xl not-italic font-semibold leading-[normal]">
             Floor Plan
@@ -93,7 +93,7 @@ const MiddleSection = () => {
   const data = useAtomValue(selectedFloorAtom);
   return (
     <div
-      className={`col-span-1 p-4 mt-[15%] sm:mt-2  md:h-[500px] w-full h-full   bg-gray-600 sm:bg-white`}
+      className={`col-span-1 p-4 mt-[15%] sm:mt-2  xl:h-[500px] w-full h-full   bg-gray-600 sm:bg-white`}
     >
       <div className="relative">
         <TransformComponent>

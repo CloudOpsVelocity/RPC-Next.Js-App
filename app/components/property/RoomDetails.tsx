@@ -60,7 +60,7 @@ export default function RoomDetails({ data }: { data: Main }) {
             ? formatNumberWithSuffix(data.plotArea,false) + " sq.ft"
             : ""
         } ${data.bhkName ?? ""} ${data.propTypeName} For
-        ${data.cg === "S" ? " Sell" : " Rent"}`}
+        ${data.cg === "S" ? " Sale" : " Rent"}`}
         className="mb-[10px] xl:mb-[8px]"
       />
       <UnitBlock data={data} />

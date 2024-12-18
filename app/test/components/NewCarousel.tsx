@@ -17,7 +17,7 @@ function NewCarousel<T>({
   data,
   renderItem,
   slidesToShow = 3,
-  gap = 24,
+  gap = 24, 
   url,
   renderViewMore,
 }: CarouselProps<T>) {
@@ -55,7 +55,7 @@ function NewCarousel<T>({
 
   const DefaultViewMore = () => (
     <button
-      onClick={() => window.open(url, "_blank")}
+      onClick={() => url ? window.open(url, "_blank") : ("")}
       className="relative h-full w-full rounded-xl bg-gradient-to-br from-blue-400 to-blue-600 p-1 hover:shadow-xl cursor-pointer transition-all duration-300 "
     >
       <div className="h-full w-full rounded-lg bg-white p-4 flex flex-col items-center justify-center space-y-4">
@@ -129,9 +129,7 @@ function NewCarousel<T>({
               key={index}
               className={`flex-none ${isMobile ? "snap-center" : ""}`}
               style={{
-                width: `calc(${100 / slidesToShow}% - ${
-                  (gap * (slidesToShow - 1)) / slidesToShow
-                }px)`,
+                width: `calc(${100 / slidesToShow}% - ${ (gap * (slidesToShow - 1)) / slidesToShow}px)`,
               }}
             >
               {item ? (

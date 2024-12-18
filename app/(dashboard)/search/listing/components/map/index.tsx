@@ -70,7 +70,7 @@ const Map = ({ data }: any) => {
           >
             <div className=" rounded-2xl">
               <p className="text-[#001F35]  text-[12px] md:text-[15px] not-italic font-bold !m-0">
-                3BHK Apartment for Sell <br />{" "}
+                3BHK Apartment for Sale <br />{" "}
                 <span className="text-[#148B16] text-[14px] md:text-base not-italic font-bold">
                   in Kadugodi, ₹ 2.36 Cr
                 </span>

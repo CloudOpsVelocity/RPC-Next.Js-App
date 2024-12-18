@@ -44,9 +44,9 @@ export default function ProjectLoans({
           slideSize="70%"
           className="!h-[160px] sm:!h-[200px]"
           slideGap="md"
-          align={"center"}
+          align="start"
           slidesToScroll={1}
-          mt={"md"}
+          mt={"md"} 
           classNames={Css}
         >
           {banks?.map((bank, index) => {

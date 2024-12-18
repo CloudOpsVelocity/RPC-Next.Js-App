@@ -132,7 +132,7 @@ export default function page({}: Props) {
                 <div className="flex flex-row items-center justify-start gap-1 ">
                   {greenTick}
                   <p className="text-[#242424]  text-[14px]   sm:text-[14px] xl:text-[18px] not-italic font-medium leading-[normal]">
-                    Showcase your property as Rental, or for Sell
+                    Showcase your property as Rental, or for Sale
                   </p>
                 </div>
                 <div className="flex flex-row items-center justify-start gap-1 ">
