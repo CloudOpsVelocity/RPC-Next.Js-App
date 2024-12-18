@@ -18,11 +18,17 @@ export default function Message({ cg, propTypeName }: any) {
     (data?.shortListed && "Shortlisted") ||
     "Message"
   }`;
+
+  const url = `${
+    (data?.shortListed && data?.compareAdded && "/your-profile#step_E") ||
+    (data?.compareAdded && "/your-profile#step_F") ||
+    (data?.shortListed && "/your-profile#step_E")
+  }`;
   return (
     (data?.compareAdded || data?.shortListed) && (
       <div
         className={clsx(
-          "inline-flex items-center mt-4  gap-2 p-1.5 rounded-lg bg-[#fff5c3]  sm:-bottom-5  sm:right-0 w-full md:min-w-fit sm:mt-2",
+          "flex items-center mt-4 gap-2 p-1.5 rounded-lg bg-[#fff5c3] sm:-bottom-5 sm:right-0 w-full md:min-w-fit sm:mt-2",
           data?.compareAdded && data?.shortListed && "md:min-w-fit"
         )}
       >
@@ -50,7 +56,7 @@ export default function Message({ cg, propTypeName }: any) {
         <span className="text-[#242424] text-[12px] sm:text-base xl:text-lg not-italic font-medium leading-[normal] sm:text-nowrap">
           Please check your{" "}
           <a
-            href={"/your-profile"}
+            href={url}
             target="_blank"
             className="!text-[#0073C6] text-[12px] sm:text-base xl:text-lg  italic font-semibold leading-[normal] !underline"
           >

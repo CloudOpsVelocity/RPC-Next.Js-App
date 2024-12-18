@@ -182,7 +182,7 @@ const FirstBlock: React.FC<Props> = ({
               </p>
 
               <p
-                className=" sm:text-[16px] xl:text-[20px] font-[600] mr-auto md:mr-0 text-[#0073C6] bg-[#FFF] rounded-[10px] shadow-md p-[8px] flex items-center gap-2 cursor-pointer mt-0 sm:mt-[5%] xl:mt-[3%]"
+                className=" sm:text-[16px] xl:text-[20px] font-[600] mr-auto md:mr-0 text-[#0073C6] bg-[#FFF] rounded-[10px] shadow-md p-[8px] flex items-center gap-2 cursor-pointer mt-0 sm:mt-[5%] xl:mt-[3%] mt-auto"
                 onClick={() => scrollToTopic("floorPlansdiv")}
               >
                 <Image

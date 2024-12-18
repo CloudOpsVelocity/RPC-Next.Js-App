@@ -106,12 +106,13 @@ export default function PropertyBanner({
             </p>
           </div>
         </div>
+        {about &&
         <div className="mt-6">
-          <div className="prose-p:py-1 prose-no-break text-[14px] sm:text-[18px] xl:text-[24px] font-[500] text-[#233333] break-words" dangerouslySetInnerHTML={{
-            __html  : about.slice(0,500)
-          }} />
+          <div className="prose-p:py-1 prose-no-break text-[14px] sm:text-[18px] xl:text-[24px] font-[500] text-[#233333] break-words" 
+            dangerouslySetInnerHTML={{ __html  : about.slice(0,500) }} 
+          />
           <ReadMore text={about} title={"About"} />
-        </div>
+        </div>}
         <Link
           href={url}
           variant="blue"
@@ -142,7 +143,7 @@ function PropertyBannerForMobile({
           About{" "}
           <span className="text-[#148B16] font-semibold">{projectName}</span>
         </h2>
-        <div className="flex flex-col md:flex-row justify-between items-center p-1 ">
+        <div className="flex flex-col md:flex-row justify-between md:items-center p-1 ">
           <div className="flex flex-col md:flex-row md:space-x-4 w-full md:w-auto">
             <Image
               src="/property.png"
@@ -172,10 +173,13 @@ function PropertyBannerForMobile({
               <span className="font-semibold">
                 {formatDate(startDate)} - {formatDate(endDate)}
               </span>
-            </div>
+            </div> 
           </div>
         </div>
-        <div className="mt-6">
+        <div className="mt-2 ml-[4px]">
+          <div className="prose-no-break text-[12px] font-[500] text-[#233333] break-words" 
+            dangerouslySetInnerHTML={{ __html  : about.slice(0,200) }}
+          />
           <ReadMore maxLines={2} text={about} title={"About"} />
         </div>
         <Link href={url} variant="blue" className="mt-2">

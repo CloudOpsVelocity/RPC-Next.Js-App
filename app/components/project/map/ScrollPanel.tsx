@@ -7,10 +7,11 @@ import { Area, areasMap } from "./data";
 const CustomScrollArea: React.FC<{
   areas: Area[];
   selected: string;
-  setSelected: (key: string) => void;
+  setSelected: (key: string) => void; 
   data: any;
 }> = ({ areas, selected, setSelected, data }) => {
   const isMobile = useMediaQuery("(max-width: 601px)");
+  const isTab = useMediaQuery("(max-width: 1600px)");
   const [isExpanded, setIsExpanded] = useState(false);
 
   // Calculate the number of visible items per line and total lines
@@ -23,13 +24,13 @@ const CustomScrollArea: React.FC<{
   const hiddenCount = items.length - visibleItems.length;
 
   return (
-    <div className="flex flex-col  px-2 relative w-full sm:w-[92%] m-auto">
+    <div className="flex flex-col px-2 relative w-full sm:w-[92%] m-auto">
       <div
         className={clsx(
           "flex flex-wrap gap-2  overflow-hidden relative",
           !isExpanded && "max-h-[calc(3*2.5rem)]" // Adjust height for 3 lines
         )}
-        style={{ padding: isMobile ? "0" : "0 2rem" }}
+        style={{ padding: isMobile ? "0" : "0 2rem", paddingLeft: isTab ? "0" : "0 2rem" }}
       >
         {visibleItems.map((key) => {
           const Icon = areasMap.get(key).Icon;

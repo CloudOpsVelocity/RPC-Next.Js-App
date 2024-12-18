@@ -63,8 +63,8 @@ export default function About({
    <div className="w-full" >
       <div className="text-[14px] sm:text-[18px] xl:text-[24px] font-[500] text-[#233333] break-words">
         <div className="prose-p:py-1 prose-no-break" 
-          dangerouslySetInnerHTML={{ __html:  content?.slice(0, charLimit) }} />
-      </div>
+          dangerouslySetInnerHTML={{ __html: content?.slice(0, charLimit) }} />
+        </div>
     </div>
       <ReadMore
         text={content}

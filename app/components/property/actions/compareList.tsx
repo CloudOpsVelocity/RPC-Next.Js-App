@@ -45,7 +45,7 @@ export default function CompareList({ cg, propTypeName }: any) {
     <button
       onClick={() => onAddingCompare()}
       className={clsx(
-        "flex justify-center items-center gap-1 p-2 rounded-lg border-[0.8px] mt-3 border-solid border-[#0073C6] bg-[#fafafa] text-[#0073C6] sm:text-[20px] xl:text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px] sm:tracking-[0.4px]  xl:tracking-[0.96px]   sm:mt-5 text-[12px] text-nowrap",
+        "flex justify-center items-center gap-1 p-2 rounded-lg border-[0.8px] md:mt-3 ml-[10px] md:ml-0 border-solid border-[#0073C6] bg-[#fafafa] text-[#0073C6] sm:text-[20px] xl:text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px] sm:tracking-[0.4px]  xl:tracking-[0.96px]   sm:mt-5 text-[12px] text-nowrap ",
         data?.compareAdded &&
           "bg-[rgb(231,245,255)] text-[#148B16] text-2xl not-italic font-semibold leading-[normal] tracking-[0.96px]"
       )}
@@ -54,4 +54,4 @@ export default function CompareList({ cg, propTypeName }: any) {
       {data?.compareAdded ? "Remove From" : "Add to"} Compare
     </button>
   );
-}
+} 

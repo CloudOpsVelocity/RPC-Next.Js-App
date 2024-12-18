@@ -34,7 +34,7 @@ export default function HomagePageIndex({data,listingData,shortIds,cityData}: Pr
     <HomeFeatures />
     <NewAddedProjects data={data.featured} shortIds={shortIds} />
     <DynamicListing
-      title="Ready to Move Sell Listings"
+      title="Ready to Move Sale Listings"
       content="Move In Today: Your Dream Home Awaits – Explore Our Ready-to-Move Listings Now!"
       data={listingData["r_Sale"]}
       shortIds={shortIds}
@@ -59,7 +59,7 @@ export default function HomagePageIndex({data,listingData,shortIds,cityData}: Pr
       cityId={cityData.cityId}
     />
     <DynamicListing
-      title="Under Construction Sell Listings"
+      title="Under Construction Sale Listings"
       content="Explore Our Under Construction Listings Today!"
       data={listingData["u_Sale"]}
       shortIds={shortIds}
@@ -76,7 +76,7 @@ export default function HomagePageIndex({data,listingData,shortIds,cityData}: Pr
       cityId={cityData.cityId}
     />
     <DynamicListing
-      title="Independent Sell Listings"
+      title="Independent Sale Listings"
       content="Your Gateway to Independent Living - Browse and Buy with Confidence"
       data={listingData["i_Sale"]}
       shortIds={shortIds}

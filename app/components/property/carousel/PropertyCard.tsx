@@ -89,7 +89,7 @@ export function PropertyCard({ type, cardData, mutate, ct }: CardProps) {
     window.open(url, "_blank");
   };
 
-  return (
+  return ( 
     <div
       onClick={() => redirect(reqId)}
       key={reqId}
@@ -243,6 +243,7 @@ const ProjectCarousel = ({
   ct,
   builderName,
 }: Props) => {
+  
   return (
     data?.length > 0 && (
       <div className="w-[90%] mx-auto mb-1 sm:mb-[3%]">
@@ -258,7 +259,7 @@ const ProjectCarousel = ({
             {content}
           </p>
         </div>
-        <NewCarousel
+        <NewCarousel 
           data={data}
           renderItem={(project: any, index) => (
             <PropertyCard
@@ -270,6 +271,7 @@ const ProjectCarousel = ({
           )}
           slidesToShow={4}
           gap={10}
+          url={`/search/listing?listedBy=ALL&cg=${data.cg === "R" ? "R" : "S" }`}
         />
         {/* <MainCarousel>
           {data &&

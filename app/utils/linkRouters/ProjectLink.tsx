@@ -27,9 +27,7 @@ export const createProjectLinkUrl = (
   routeParams: ProjectLinkProps["routeParams"]
 ): string => {
   const { city, slug, locality } = routeParams;
-  return `${BASE_PATH_PROJECT_DETAILS}/${slugify(city)}/${slugify(
-    locality
-  )}/${slugify(slug)}`;
+  return `${BASE_PATH_PROJECT_DETAILS}/${city ? slugify(city) : ""}/${locality ? slugify(locality) : ""}/${slug ? slugify(slug) : ""}`;
 };
 
 export default function ProjectLink({

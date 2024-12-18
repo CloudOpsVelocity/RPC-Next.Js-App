@@ -66,7 +66,7 @@ export default function PropertyOverviewBanner({
         <PriceBag className="w-[100px] h-[120px]  sm:w-[151px] xl:w-[237px]  sm:h-[169px] xl:h-[263px] mt-2 sm:mt-0" />
 
         <div className="flex justify-center sm:justify-between items-center w-[100%] flex-row sm:ml-[3%] p-[2%] flex-wrap">
-          <div className="grid place-items-center md:block">
+          <div className="flex  flex-col text-left">
             <p className="text-[#212C33] sm:text-[24px] xl:text-[34px] font-[600]  md:text-start text-center">
               {" Total "}
               {cg === "S" ? "Selling" : "Rent"} Price {otherPrice?.otherCharge&&<span className="sm:text-[16px] xl:text-[24px]">(Including Other Charges)</span>}

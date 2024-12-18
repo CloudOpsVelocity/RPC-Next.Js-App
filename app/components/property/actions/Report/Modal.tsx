@@ -72,7 +72,7 @@ export default function ReportModal({ issueData }: any) {
     close();
     setTimeout(() => {
       setText("");
-      setStatus("idle");
+      setStatus("idle"); 
       setreportStatus([]);
       seterrorMsg(false);
     }, 500);
@@ -157,7 +157,9 @@ export default function ReportModal({ issueData }: any) {
                     }}
                     onChange={(e) => setText(e.target.value)}
                     value={text}
-                  />
+                  /> 
+                  {status === "error" &&
+                  <p className="text-[12px] sm:text-[14px] text-[#F00]">Please add comment to submit issue</p>}
                 </div>
                 <div className="flex justify-center items-center ">
                   <Button

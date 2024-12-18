@@ -90,7 +90,7 @@ const LeafMap: React.FC<{
           <PropertyHeading
             title={
               <Fragment>
-                Location Map Of Project{" "}
+                Location Map Of {" "}
                 <span className="text-[#148B16]">{projName}</span>
               </Fragment>
             }
@@ -100,7 +100,7 @@ const LeafMap: React.FC<{
         ) : (
           <div>
             <h2 className="text-h2 sm:text-[22px] xl:text-[32px] font-semibold mb-[12px] capitalize break-words ">
-              <span>Location Map Of Project </span>
+              <span>Location Map Of </span>
               <span className="text-[#148B16] font-bold">{projName} </span>
             </h2>
             <SubHeading

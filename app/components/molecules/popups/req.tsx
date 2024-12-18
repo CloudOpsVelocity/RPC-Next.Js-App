@@ -107,7 +107,7 @@ const RequestCallBackModal = () => {
                 <div className="hidden md:block w-[50%] relative">
                   <Image
                     className={clsx(
-                      "absolute inset-0 h-full w-[100%] object-cover",
+                      "absolute inset-0 h-full w-[100%] object-fit",
                       MODAL_TYPE == "REQ_QUOTE" && "!object-contain"
                     )}
                     src={
