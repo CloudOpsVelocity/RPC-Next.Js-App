@@ -56,19 +56,21 @@ export default function About({
           </span>{" "}
         </h2>
       )}
-   <div className="w-full" >
-      <div className="text-[14px] sm:text-[18px] xl:text-[24px] font-[500] text-[#233333] break-words">
-        <div className="prose-p:py-1 prose-no-break" 
-          dangerouslySetInnerHTML={{ __html: content?.slice(0, charLimit) }} />
+      <div className="w-full">
+        <div className="text-[14px] sm:text-[18px] xl:text-[24px] font-[500] text-[#233333] break-words">
+          <div
+            className="prose-p:py-1 prose-no-break"
+            dangerouslySetInnerHTML={{ __html: content?.slice(0, charLimit) }}
+          />
         </div>
-    </div>
+      </div>
       <ReadMore
         text={content}
         maxLines={maxLines}
         title={heading}
         showProjName={showProjName}
         builderName={builderName}
-      /> */}
+      />
     </div>
   );
 }

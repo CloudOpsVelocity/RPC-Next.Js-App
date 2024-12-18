@@ -38,7 +38,7 @@ const ReadMore: React.FC<ReadMoreProps> = ({
 
   return (
     <button onClick={handleReadMoreClick}>
-      {!expanded && shouldShowReadMore && "... "}
+      {/* {!expanded && shouldShowReadMore && "... "} */}
       {shouldShowReadMore && (
         <span className="text-[#0073C6] text-[14px] sm:text-[18px] xl:text-[22px] not-italic font-semibold cursor-pointer underline">
           {expanded ? "" : "Read More"}
