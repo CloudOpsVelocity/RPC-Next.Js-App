@@ -1,7 +1,15 @@
 {
-    "keep": {
-        "days": true,
-        "amount": 30
+  "keep": {
+    "days": true,
+    "amount": 30
+  },
+
+  "auditLog": "logs\\.8e20d7d3006739fe02552de8967888f6bccf3e5b-audit.json",
+  "files": [
+    {
+      "date": 1733212091986,
+      "name": "logs\\nextjs-app-logs-03-12-2024.txt",
+      "hash": "181f0c2300ac3ca1a50d70b64cac9641ddf542c9f004716c59b0ae6c0a44311e"
     },
     {
       "date": 1733287587651,
@@ -59,9 +67,9 @@
       "hash": "3ab30137b4cdb5c0227333cc7ce9edd57b8eb469c8bc19ba1cb3b7ca489ac48a"
     },
     {
-      "date": 1734584649409,
+      "date": 1734584290195,
       "name": "logs\\nextjs-app-logs-19-12-2024.txt",
-      "hash": "d06725b4f3b4acd19d08eae700d2835c029706bb01cc44a79bd4d12218728b7c"
+      "hash": "4b9ab09497d10326e6f670abd834f3ee5627a841d73ab000a021202648adb231"
     }
   ],
   "hashType": "sha256"
