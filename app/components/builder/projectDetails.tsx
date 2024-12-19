@@ -36,7 +36,7 @@ export default function ProjectDetails({
 }: Data) {
   return (
     <React.Fragment>
-      <BuilderProjectsCount id={id} />
+      <BuilderProjectsCount  builderName={userName}  id={id} />
       <About
         id="whyBuy"
         heading="About Builder"

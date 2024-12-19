@@ -8,7 +8,7 @@ import FirstBlock from "@/app/components/project/firstBlock";
 import Overview from "@/app/components/project/overview";
 import About from "@/app/components/project/about";
 import Navigation from "@/app/components/project/navigation";
-import ProjectDetailsP from "@/app/components/project/projectDetailsP";
+// import ProjectDetailsP from "@/app/components/project/projectDetailsP";
 import ProjectDrawer from "@/app/components/project/Drawer";
 import LeafMap from "@/app/components/project/map";
 import ListingRentAvail from "@/app/components/project/listingRentAvail";
@@ -16,6 +16,9 @@ import ErrorContainer from "@/app/components/project/error/container";
 import MobileHidden from "@/app/components/molecules/MobileHidden";
 import FloorplanDrawer from "@/app/components/project/drawers/floorplan";
 import MasterPlan from "@/app/components/project/masterplan";
+const  ProjectDetailsP = dynamic(
+  () => import("@/app/components/project/projectDetailsP")
+);
 const FloorplansBlock = dynamic(
   () => import("@/app/components/project/floorplansBlock"),
   {
@@ -40,7 +43,7 @@ import PartialUnitData from "@/app/components/project/sections";
 import PropertyDataDisplay from "@/app/components/project/_ui/PricingDetailsSection";
 import Disclamer from "@/app/components/builder/Disclamer";
 import BreadCrumbs from "@/app/components/project/breadcrum/BreadCrum";
-import FloorPlans from "@/app/components/project/newFloorPlan/floor-plan";
+// import FloorPlans from "@/app/components/project/newFloorPlan/floor-plan";
 const ProjectGallery = dynamic(
   () => import("@/app/components/project/_ui/modals/GallerySectionModal")
 );

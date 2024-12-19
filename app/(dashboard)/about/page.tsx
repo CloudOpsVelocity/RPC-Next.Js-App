@@ -46,10 +46,10 @@ export default function page({}: Props) {
         {/*About */}
         <div className="flex sm:flex-row items-center justify-start w-full gap-[4%] mb-5 sm:mb-0 sm:max-w-[80%] mx-auto flex-col-reverse max-w-full">
           <div className="content flex flex-col justify-start items-center sm:items-start max-w-[97%] sm:max-w-[60%] ">
-            <h1 className="text-[#003] font-[Montserrat] text-[16px] text-center sm:text-[20px] xl:text-[26px] not-italic font-bold leading-[normal] sm:pt-[10px] xl:pt-[20px]">
+            <h1 className="text-[#003]  text-[16px] text-center sm:text-[20px] xl:text-[26px] not-italic font-bold leading-[normal] sm:pt-[10px] xl:pt-[20px]">
               <span className="text-[#2AA327] ">About</span> Get Right Property
             </h1>
-            <p className="text-[#003] font-[Montserrat]  leading-[18px] sm:mt-[8px] text-[14px] text-center sm:text-left  sm:text-[15px] xl:text-[20px] not-italic font-normal sm:leading-[26px] sm:pt-[10px] pt-[20px] break-words  ">
+            <p className="text-[#003]   leading-[18px] sm:mt-[8px] text-[14px] text-center sm:text-left  sm:text-[15px] xl:text-[20px] not-italic font-normal sm:leading-[26px] sm:pt-[10px] pt-[20px] break-words  ">
               Get Right Property is your ultimate real estate companion,
               designed to streamline buying, selling, and property exploration.
               Our app allows users to effortlessly post properties and inquire
@@ -57,7 +57,7 @@ export default function page({}: Props) {
               list your property, search for available listings, and browse a
               diverse range of options.
             </p>
-            <p className="text-[#003] font-[Montserrat] leading-[18px] text-[14px] text-center sm:text-left  sm:text-[15px] xl:text-[20px] not-italic font-normal sm:leading-[26px] pt-[12px] sm:pt-[10px] xl:pt-[20px] break-words">
+            <p className="text-[#003]  leading-[18px] text-[14px] text-center sm:text-left  sm:text-[15px] xl:text-[20px] not-italic font-normal sm:leading-[26px] pt-[12px] sm:pt-[10px] xl:pt-[20px] break-words">
               Connect with buyers, sellers, and agents seamlessly, and stay
               updated with the latest real estate news and trends. Whether
               you&apos;re looking to advertise, find your dream home, or simply
@@ -67,7 +67,7 @@ export default function page({}: Props) {
               ease.
             </p>
             <a
-              className="text-[#FFF] mt-[14px] px-[10px] py-[6px] text-[13px] sm:mt-[20px] xl:mt-[34px] font-[Montserrat] sm:text-[17px]  xl:text-[20px] not-italic font-bold leading-[normal] sm:px-[20.514px] sm:py-[13.676px] justify-center items-center gap-[7.598px] rounded-[4px] bg-[#0073C6]"
+              className="text-[#FFF] mt-[14px] px-[10px] py-[6px] text-[13px] sm:mt-[20px] xl:mt-[34px]  sm:text-[17px]  xl:text-[20px] not-italic font-bold leading-[normal] sm:px-[20.514px] sm:py-[13.676px] justify-center items-center gap-[7.598px] rounded-[4px] bg-[#0073C6]"
               href={url}
               target="_blank"
             >
@@ -79,14 +79,14 @@ export default function page({}: Props) {
             height={300}
             alt="about"
             className="w-[90%] hidden sm:block sm:w-[30%] h-[299.576px]"
-            src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/About%20us%20/About%20getrightproperty.png`}
+            src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/aboutus/about-getrightproperty.png`}
           />
           <Image
             width={387}
             height={300}
             alt="hero image"
             className="w-[90%] block sm:hidden sm:w-[30%] h-[299.576px]"
-            src={`${process.env.NEXT_PUBLIC_IMG_BASE}/About%20us/hero-image.png`}
+            src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/About%20us/hero-image.png`}
           />
         </div>
         {/* best services */}
@@ -97,13 +97,13 @@ export default function page({}: Props) {
               height={300}
               alt="hero image"
               className="hidden sm:block  w-[36%] h-[299.576px]"
-              src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/About%20us%20/best%20service.png`}
+              src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/aboutus/best-service.png`}
             />
             <div className=" pt-[20px] pb-[20px] sm:pt-[60px] sm:pb-[60px]">
-              <h1 className="text-[#2AA327] font-[Montserrat] text-center sm:text-left sm:text-[20px] mb-[16px] xl:text-[26px] not-italic font-bold leading-[normal] capitalize">
+              <h1 className="text-[#2AA327]  text-center sm:text-left sm:text-[20px] mb-[16px] xl:text-[26px] not-italic font-bold leading-[normal] capitalize">
                 <span className="text-[#003] ">We offer </span>the best services
               </h1>
-              <p className="mt-2 leading-[18px] text-[14px]  text-center sm:text-left  text-[rgba(0,_0,_51,_0.95)] font-[Montserrat]  sm:text-[15px] xl:text-[20px] not-italic font-normal sm:leading-[26px] ">
+              <p className="mt-2 leading-[18px] text-[14px]  text-center sm:text-left  text-[rgba(0,_0,_51,_0.95)]   sm:text-[15px] xl:text-[20px] not-italic font-normal sm:leading-[26px] ">
                 Get Right Property provides a streamlined platform to post and
                 browse property listings, connect with buyers and sellers, and
                 access the latest market trends. Experience effortless property
@@ -113,49 +113,49 @@ export default function page({}: Props) {
               <div className="flex flex-col gap-[12px] mt-4 sm:mt-8">
                 <div className="flex flex-row items-center justify-start gap-1 ">
                   {greenTick}
-                  <p className="text-[#242424] font-[Montserrat] text-[14px]  sm:text-[14px] xl:text-[18px] not-italic font-medium leading-[normal]">
+                  <p className="text-[#242424]  text-[14px]  sm:text-[14px] xl:text-[18px] not-italic font-medium leading-[normal]">
                     Post your Listing for Free
                   </p>
                 </div>
                 <div className="flex flex-row items-center justify-start gap-1 ">
                   {greenTick}
-                  <p className="text-[#242424] font-[Montserrat]  text-[14px]   sm:text-[14px] xl:text-[18px] not-italic font-medium leading-[normal]">
+                  <p className="text-[#242424]   text-[14px]   sm:text-[14px] xl:text-[18px] not-italic font-medium leading-[normal]">
                     Post your Listing for Free
                   </p>
                 </div>
                 <div className="flex flex-row items-center justify-start gap-1 ">
                   {greenTick}
-                  <p className="text-[#242424] font-[Montserrat]  text-[14px]  sm:text-[14px] xl:text-[18px] not-italic font-medium leading-[normal]">
+                  <p className="text-[#242424]   text-[14px]  sm:text-[14px] xl:text-[18px] not-italic font-medium leading-[normal]">
                     Set property alerts for your requirement
                   </p>
                 </div>
                 <div className="flex flex-row items-center justify-start gap-1 ">
                   {greenTick}
-                  <p className="text-[#242424] font-[Montserrat] text-[14px]   sm:text-[14px] xl:text-[18px] not-italic font-medium leading-[normal]">
+                  <p className="text-[#242424]  text-[14px]   sm:text-[14px] xl:text-[18px] not-italic font-medium leading-[normal]">
                     Showcase your property as Rental, or for Sale
                   </p>
                 </div>
                 <div className="flex flex-row items-center justify-start gap-1 ">
                   {greenTick}
-                  <p className="text-[#242424] font-[Montserrat]  sm:text-[14px] xl:text-[18px] not-italic font-medium leading-[normal]">
+                  <p className="text-[#242424]   sm:text-[14px] xl:text-[18px] not-italic font-medium leading-[normal]">
                     Get instant queries over Phone, Email and SMS
                   </p>
                 </div>
                 <div className="flex flex-row items-center justify-start gap-1 ">
                   {greenTick}
-                  <p className="text-[#242424] font-[Montserrat]  sm:text-[14px] xl:text-[18px] not-italic font-medium leading-[normal]">
+                  <p className="text-[#242424]   sm:text-[14px] xl:text-[18px] not-italic font-medium leading-[normal]">
                     Performance in search & Track responses & views online
                   </p>
                 </div>
                 <div className="flex flex-row items-center justify-start gap-1 ">
                   {greenTick}
-                  <p className="text-[#242424] font-[Montserrat]  sm:text-[14px] xl:text-[18px] not-italic font-medium leading-[normal]">
+                  <p className="text-[#242424]   sm:text-[14px] xl:text-[18px] not-italic font-medium leading-[normal]">
                     Add detailed listing information within 60 seconds
                   </p>
                 </div>
                 <div className="flex flex-row items-center justify-start gap-1 ">
                   {greenTick}
-                  <p className="text-[#242424] font-[Montserrat]  sm:text-[14px] xl:text-[18px] not-italic font-medium leading-[normal]">
+                  <p className="text-[#242424]   sm:text-[14px] xl:text-[18px] not-italic font-medium leading-[normal]">
                     Add multiple images per listings and projects
                   </p>
                 </div>
@@ -165,7 +165,7 @@ export default function page({}: Props) {
         </div>
         {/*founder */}
         <div className="flex flex-col justify-start items-center sm:items-start mb-[20px]  max-w-[98%] sm:max-w-[80%] mx-auto mt-[20px]  sm:mt-[50px] xl:mt-[60px]">
-          <h1 className="text-[#003] font-[Montserrat] text-center xl:text-left leading-[22px] sm:text-[20px] xl:text-[26px] not-italic font-bold sm:leading-[32px] ">
+          <h1 className="text-[#003]  text-center xl:text-left leading-[22px] sm:text-[20px] xl:text-[26px] not-italic font-bold sm:leading-[32px] ">
             What Our <span className="text-[#2AA327]">Founder</span> Says About
             <br /> Get Right Property
           </h1>
@@ -173,18 +173,19 @@ export default function page({}: Props) {
             <Image
               width={387}
               height={300}
+              unoptimized
               alt="hero image"
               className="sm:w-[36%] w-[80%] h-[188px] sm:h-[318px]"
-              src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/About%20us%20/founder.png`}
+              src={`${process.env.NEXT_PUBLIC_IMG_BASE}/staticmedia-images-icons/aboutus/founder.png`}
             />
             <div className="flex flex-col justify-center items-center sm:items-start ">
-              <h1 className="text-[#000] font-[Montserrat] text-[16px] text-center sm:text-left sm:text-[20px] xl:text-[24px] not-italic font-semibold leading-[normal] mb-1">
+              <h1 className="text-[#000]  text-[16px] text-center sm:text-left sm:text-[20px] xl:text-[24px] not-italic font-semibold leading-[normal] mb-1">
                 Rahul Vishwakarma
               </h1>
-              <h3 className="text-[#767270] font-[Montserrat] text-[16px] text-center sml:text-left sm:text-[16px] xl:text-[20px] italic font-semibold leading-[normal]">
+              <h3 className="text-[#767270]  text-[16px] text-center sml:text-left sm:text-[16px] xl:text-[20px] italic font-semibold leading-[normal]">
                 Founder, Get Right Property
               </h3>
-              <p className="text-[#003] font-[Montserrat] leading-[21px] text-center sm:text-left text-[14px] sm:text-[15px] xl:text-[20px] not-italic font-normal sm:leading-[26px] mt-4">
+              <p className="text-[#003]  leading-[21px] text-center sm:text-left text-[14px] sm:text-[15px] xl:text-[20px] not-italic font-normal sm:leading-[26px] mt-4">
                 At Get Right Property, we&apos;re dedicated to reshaping real
                 estate through cutting-edge professionalism training and
                 collaborative environments. Our commitment to comprehensive
@@ -192,7 +193,7 @@ export default function page({}: Props) {
                 on results and maximizing sales potential, we&apos;re rewriting
                 industry norms and surpassing client needs.
               </p>
-              <p className="text-[#003] font-[Montserrat]  text-center sm:text-left leading-[21px] text-[14px] sm:text-[15px]  xl:text-[20px] not-italic font-normal sm:leading-[26px] pt-3">
+              <p className="text-[#003]   text-center sm:text-left leading-[21px] text-[14px] sm:text-[15px]  xl:text-[20px] not-italic font-normal sm:leading-[26px] pt-3">
                 Join us in this journey to redefine excellence in real estate.
                 Together, let&apos;s create a future where every transaction is
                 exceptional and every client&apos;s dream finds its perfect
@@ -203,11 +204,11 @@ export default function page({}: Props) {
         </div>
         {/*prefect solution */}
         <div className="flex flex-col justify-center pt-[20px] sm:justify-start items-center sm:items-start  sm:pb-[60px] xl:pb-[80px]   max-w-full  mx-auto  sm:mt-[50px] xl:mt-[60px] bg-[#fff]">
-          <h1 className="text-[#003] font-[Montserrat] leading-[21px] flex flex-col sm:flex-row sm:justify-center gap-2 sm:items-center sm:max-w-[80%] text-[14px] sm:text-[20px] xl:text-[26px] mt-1 not-italic font-bold sm:leading-[normal] sm:mt-2 mx-auto capitalize">
+          <h1 className="text-[#003]  leading-[21px] flex flex-col sm:flex-row sm:justify-center gap-2 sm:items-center sm:max-w-[80%] text-[14px] sm:text-[20px] xl:text-[26px] mt-1 not-italic font-bold sm:leading-[normal] sm:mt-2 mx-auto capitalize">
             The Perfect Solution to{" "}
             <span className="text-[#2AA327] ">Best Project Finding</span>
           </h1>
-          <p className="text-[rgba(0,_0,_51,_0.95)] mx-auto font-[Montserrat] sm:mt-[8px]  sm:max-w-[80%] text-[14px] sm:text-[16px] xl:text-[20px] not-italic font-normal leading-[21px] text-center sm;text-left sm:leading-[26px]">
+          <p className="text-[rgba(0,_0,_51,_0.95)] mx-auto  sm:mt-[8px]  sm:max-w-[80%] text-[14px] sm:text-[16px] xl:text-[20px] not-italic font-normal leading-[21px] text-center sm;text-left sm:leading-[26px]">
             The perfect solution for finding the best projects. Our platform
             offers a seamless search experience, detailed listings, and
             real-time updates, making your project discovery quick and
@@ -218,10 +219,10 @@ export default function page({}: Props) {
               <div className=" w-[65.105px] h-[53px] rounded-[4px] flex justify-center items-center bg-[rgba(2,_152,_55,_0.10)] p-auto">
                 <BuildingIconABout />{" "}
               </div>
-              <h1 className="text-[#003] font-[Montserrat] text-[14px] sm:text-[15px] xl:text-[20px] not-italic font-bold leading-[30px] mt-4">
+              <h1 className="text-[#003]  text-[14px] sm:text-[15px] xl:text-[20px] not-italic font-bold leading-[30px] mt-4">
                 Newly Launched Projects
               </h1>
-              <p className="text-[rgba(0,_0,_51,_0.95)] font-[Montserrat] text-[12px] sm:text-[15px] not-italic font-medium leading-[21px] sm:leading-[26px] mt-3  mb-4    sm:mb-10">
+              <p className="text-[rgba(0,_0,_51,_0.95)]  text-[12px] sm:text-[15px] not-italic font-medium leading-[21px] sm:leading-[26px] mt-3  mb-4    sm:mb-10">
                 Discover the latest in real estate with our newly launched
                 projects. Explore innovative projects and find your perfect new
                 home today.{" "}
@@ -238,10 +239,10 @@ export default function page({}: Props) {
               <div className=" w-[65.105px] h-[53px] rounded-[4px]  flex justify-center items-center bg-[rgba(2,_152,_55,_0.10)] p-auto">
                 <BuildingIconABout />{" "}
               </div>
-              <h1 className="text-[#003] font-[Montserrat] text-[14px] sm:text-[15px] xl:text-[20px] not-italic font-bold leading-[30px] mt-4">
+              <h1 className="text-[#003]  text-[14px] sm:text-[15px] xl:text-[20px] not-italic font-bold leading-[30px] mt-4">
                 Completed Projects
               </h1>
-              <p className="text-[rgba(0,_0,_51,_0.95)] font-[Montserrat] text-[12px] sm:text-[15px] not-italic font-medium leading-[21px] sm:leading-[26px] mt-3  mb-4 sm:mb-10">
+              <p className="text-[rgba(0,_0,_51,_0.95)]  text-[12px] sm:text-[15px] not-italic font-medium leading-[21px] sm:leading-[26px] mt-3  mb-4 sm:mb-10">
                 Explore our completed projects and find beautifully finished
                 homes ready for you. Discover quality craftsmanship and
                 move-in-ready projects now.{" "}
@@ -258,10 +259,10 @@ export default function page({}: Props) {
               <div className=" w-[65.105px] h-[53px] rounded-[4px] text-[14px] flex justify-center items-center bg-[rgba(2,_152,_55,_0.10)] p-auto">
                 <BuildingIconABout />{" "}
               </div>
-              <h1 className="text-[#003] font-[Montserrat] text-[14px] sm:text-[15px] xl:text-[20px] not-italic font-bold leading-[30px] mt-4">
+              <h1 className="text-[#003]  text-[14px] sm:text-[15px] xl:text-[20px] not-italic font-bold leading-[30px] mt-4">
                 Ongoing Projects
               </h1>
-              <p className="text-[rgba(0,_0,_51,_0.95)] font-[Montserrat] text-[12px] sm:text-[15px] not-italic font-medium leading-[21px] sm:leading-[26px] mt-3  mb-4  sm:mb-16">
+              <p className="text-[rgba(0,_0,_51,_0.95)]  text-[12px] sm:text-[15px] not-italic font-medium leading-[21px] sm:leading-[26px] mt-3  mb-4  sm:mb-16">
                 Check out our ongoing projects for future-ready homes. Stay
                 updated on construction progress and secure your ideal projects
                 early.{" "}
@@ -280,7 +281,7 @@ export default function page({}: Props) {
         <div className="h-auto flex flex-col items-center relative min-w-[100%]  bg-[#F3FFF2]">
           <Illustrationcircles className="hidden sm:block z-[] absolute top-0 right-0 mb-8" />
 
-          <h1 className="text-[#003] font-[Montserrat] mt-5 sm:mb-8 sm:text-[20px] xl:text-[26px]  not-italic font-bold leading-[normal] mx-auto capitalize">
+          <h1 className="text-[#003]  mt-5 sm:mb-8 sm:text-[20px] xl:text-[26px]  not-italic font-bold leading-[normal] mx-auto capitalize">
             What our{" "}
             <span
               className="
@@ -306,11 +307,11 @@ export default function page({}: Props) {
                         className="w-[56px] h-[56px] rounded-full "
                         src={"/youtube.png"}
                       />
-                      <p className="text-[#003] font-[Montserrat] text-[16px] sm:text-[18px] not-italic font-bold  leading-[19.5px]">
+                      <p className="text-[#003]  text-[16px] sm:text-[18px] not-italic font-bold  leading-[19.5px]">
                         {" "}
                         {each.name}
                         <br />
-                        <span className="text-[#767676] font-[Montserrat] text-[16px] not-italic font-medium leading-[19.5px]">
+                        <span className="text-[#767676]  text-[16px] not-italic font-medium leading-[19.5px]">
                           {each.place}
                         </span>
                       </p>
@@ -319,7 +320,7 @@ export default function page({}: Props) {
                       “
                     </p>
                   </div>
-                  <p className="text-[rgba(0,_0,_51,_0.95)] font-[Montserrat] leading-[19px] text-[12px] sm:text-[16px] not-italic font-normal sm:leading-[22px] mt-2 pl-2">
+                  <p className="text-[rgba(0,_0,_51,_0.95)]  leading-[19px] text-[12px] sm:text-[16px] not-italic font-normal sm:leading-[22px] mt-2 pl-2">
                     {each.comment}
                   </p>
                 </div>
@@ -330,19 +331,19 @@ export default function page({}: Props) {
         </div>
         <div className="sm:max-w-[60%] bg-[#F5F7F8] nt-4 sm:mt-16 sm:pb-14 xl:pb-24 flex flex-row mx-auto max-w-[98%]    justify-between items-center gap-3">
           <div className="hidden sm:block max-full ">
-            <h1 className="font-[Montserrat] sm:mb-4 sm:text-[20px] xl:text-[24px] not-italic font-bold leading-[normal]">
+            <h1 className=" sm:mb-4 sm:text-[20px] xl:text-[24px] not-italic font-bold leading-[normal]">
               Subscribe To Our Newsletter
             </h1>
-            <p className="text-[#303030] font-[Montserrat] sm:text-[18px] xl:text-[20px] italic font-medium leading-[normal]">
+            <p className="text-[#303030]  sm:text-[18px] xl:text-[20px] italic font-medium leading-[normal]">
               Get updates to all about the Real Estate through our blogs
             </p>
             <div className="inline-flex l mt-10 p-[16px] max-w-[98%]   sm:w-[592px] justify-between items-center gap-[8px] rounded-[10px] border-[1px] border-[solid] border-[#BBC9DD] bg-[#FCFCFC]">
               <input
-                className="outline-none w-full text-[#666] font-[Montserrat] sm:text-[18px] xl:text-[20px] italic font-medium leading-[normal]"
+                className="outline-none w-full text-[#666]  sm:text-[18px] xl:text-[20px] italic font-medium leading-[normal]"
                 placeholder="Enter your mail for new blog  "
               />
               <button
-                className="text-[#FFF]   font-[Montserrat] text-[20px] not-italic font-semibold leading-[normal] flex p-[9px]  justify-center items-center gap-[8px] rounded-[10px] bg-[#227FBC] "
+                className="text-[#FFF]    text-[20px] not-italic font-semibold leading-[normal] flex p-[9px]  justify-center items-center gap-[8px] rounded-[10px] bg-[#227FBC] "
                 name="Subscribe button"
               >
                 Sumbit
@@ -351,18 +352,18 @@ export default function page({}: Props) {
           </div>
           <BlogCOnatainerSVg className=" h-auto" />
           <div className="sm:hidden mt-[20px] mb-[20px] mx-auto flex flex-col justify-center items-center gap-2  max-w-[98%] rounded-[18px] p-2 border-[6px] border-solid border-[var(--White-1,#F5F5F5)] bg-[#FFF]">
-            <h1 className="font-[Montserrat] text-[16px] not-italic font-bold leading-[normal]">
+            <h1 className=" text-[16px] not-italic font-bold leading-[normal]">
               Subscribe To Our Newsletter
             </h1>
-            <p className="text-[#303030] font-[Montserrat] text-[13px] italic font-medium leading-[normal]">
+            <p className="text-[#303030]  text-[13px] italic font-medium leading-[normal]">
               Get updates to all about the Real Estate through our blogs
             </p>
             <input
-              className="outline-none w-full text-[#666] font-[Montserrat] sm:text-[18px] xl:text-[20px] italic font-medium leading-[normal] rounded-[10px] text-center border-[1px] border-[solid] border-[#B3B3B3] p-3"
+              className="outline-none w-full text-[#666]  sm:text-[18px] xl:text-[20px] italic font-medium leading-[normal] rounded-[10px] text-center border-[1px] border-[solid] border-[#B3B3B3] p-3"
               placeholder="Enter your mail for new blog  "
             />
             <button
-              className="text-[#FFF]   font-[Montserrat] text-[16px] sm:text-[20px] not-italic font-semibold leading-[normal] flex p-[9px]  justify-center items-center gap-[8px] rounded-[10px] bg-[#227FBC] "
+              className="text-[#FFF]    text-[16px] sm:text-[20px] not-italic font-semibold leading-[normal] flex p-[9px]  justify-center items-center gap-[8px] rounded-[10px] bg-[#227FBC] "
               name="Subscribe button"
             >
               Sumbit

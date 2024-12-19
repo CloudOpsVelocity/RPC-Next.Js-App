@@ -14,7 +14,7 @@ import toast from "react-hot-toast";
 import { GrayMapIcon } from "@/app/images/commongsSvgs2";
 import { useRecentSearched } from "@/app/hooks/custom/useRecentSearch";
 import { extractApiValues } from "@/app/utils/dyanamic/projects";
-import { FaExclamationCircle, } from "react-icons/fa";
+import { FaExclamationCircle } from "react-icons/fa";
 
 export default function Results() {
   const { data, isLoading, handleResetQuery } = useQsearch();
@@ -73,18 +73,18 @@ export default function Results() {
           const data = extractApiValues(apiData.stringId);
           {
             let url;
-            let localityName = apiData.name
-              .split("-")[1]
-              .toLowerCase()
-              .trim();
+            let localityName = apiData.name.split("-")[1].toLowerCase().trim();
             url =
               `propTypes=${data.PT}${
                 data.BH ? `&unitTypes=${data.BH}` : ""
               }&cg=${data.CG}&localities=${localityName}` +
               "%2B" +
               encodeURIComponent(data.LT);
-            alert("please wati")
-            window.open(data.PJ && data.PJ !== "null" ? `/search/listing?${url}` : "/search?" + url);
+            window.open(
+              data.PJ && data.PJ !== "null"
+                ? `/search/listing?${url}`
+                : "/search?" + url
+            );
           }
         }
         break;
@@ -112,9 +112,9 @@ export default function Results() {
               "%2B" +
               encodeURIComponent(apiData.stringId.split("_")[1]);
             window.open(
-              `/search?builderIds=${url}&city=${
-                encodeURIComponent(filters?.city ?? '')
-              }${
+              `/search?builderIds=${url}&city=${encodeURIComponent(
+                filters?.city ?? ""
+              )}${
                 apiData.type !== "BuilderProject"
                   ? `&listedBy=${AgentOwnerBuilderMap.get(apiData.type)}`
                   : ""
@@ -182,7 +182,9 @@ export default function Results() {
               </h2>
             )}
 
-            {localities?.length > 0 && <SubHeading key="localities-subheading" text="Locality" />}
+            {localities?.length > 0 && (
+              <SubHeading key="localities-subheading" text="Locality" />
+            )}
             <ul key="localities-list">
               {localities?.map((locality: any, index: number) => (
                 <li
@@ -222,7 +224,10 @@ export default function Results() {
             </ul>
 
             {projectListing?.length > 0 && (
-              <SubHeading key="project-listings-subheading" text="Project Listings" />
+              <SubHeading
+                key="project-listings-subheading"
+                text="Project Listings"
+              />
             )}
             <ul key="project-listings-list">
               {projectListing?.map((projectListing: any, index: number) => (
@@ -237,7 +242,9 @@ export default function Results() {
                 </li>
               ))}
             </ul>
-            {listings?.length > 0 && <SubHeading key="listings-subheading" text="Listings" />}
+            {listings?.length > 0 && (
+              <SubHeading key="listings-subheading" text="Listings" />
+            )}
             <ul key="listings-list">
               {listings?.map((listing: any, index: number) => (
                 <li
@@ -258,7 +265,9 @@ export default function Results() {
                 </li>
               ))}
             </ul>
-            {builders?.length > 0 && <SubHeading key="builders-subheading" text="Builders" />}
+            {builders?.length > 0 && (
+              <SubHeading key="builders-subheading" text="Builders" />
+            )}
             <ul key="builders-list">
               {builders?.map((builder: any, index: number) => (
                 <li

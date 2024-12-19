@@ -60,7 +60,7 @@ export default function AboutBuilder({ id, type = "proj" }: Props) {
             </div>
           </div>
         </div>
-        <BuilderProjectsCount id={id.toString()} />
+        <BuilderProjectsCount id={id.toString()} builderName={nzData.userName} />
         {/* <div className="sm:rounded-[20px] mt-[1%] flex justify-between items-center builderBg shadow-md w-[100%] mb-[2%] sm:w-[75%] xl:w-[50%] p-[1%] ">
           <div className="w-[30%] border-solid border-[#92B2C8] border-r-[1px]">
             <p className=" text-[#202020]  text-[14px] sm:text-[20px] xl:text-[24px] font-[700]">

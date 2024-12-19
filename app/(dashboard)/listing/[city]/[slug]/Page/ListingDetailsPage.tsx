@@ -1,30 +1,64 @@
 import React from "react";
 import dynamic from "next/dynamic";
-const AboutBuilder = dynamic(() => import("@/app/components/project/aboutBuilder"));
-const GalleryBlock = dynamic(() => import("@/app/components/project/galleryBlock"));
+const AboutBuilder = dynamic(
+  () => import("@/app/components/project/aboutBuilder")
+);
+const GalleryBlock = dynamic(
+  () => import("@/app/components/project/galleryBlock")
+);
 const Amenties = dynamic(() => import("@/app/components/project/amenties"));
 const Loans = dynamic(() => import("@/app/components/project/loans"));
 const FaqWithBg = dynamic(() => import("@/app/components/project/faq"));
 const About = dynamic(() => import("@/app/components/project/about"));
-const Navigation = dynamic(() => import("@/app/components/property/Navigation"));
+const Navigation = dynamic(
+  () => import("@/app/components/property/Navigation")
+);
 const ProjectDrawer = dynamic(() => import("@/app/components/project/Drawer"));
-const RoomDetails = dynamic(() => import("@/app/components/property/RoomDetails"));
-const PropertyOverView = dynamic(() => import("@/app/components/property/Overview"));
-const RoomFloorplansBlock = dynamic(() => import("@/app/components/property/Floorplan"));
-const PropertyBanner = dynamic(() => import("@/app/components/property/propertyBanner"));
-const PropertyFirstBlock = dynamic(() => import("@/app/components/property/fistblock"));
+const RoomDetails = dynamic(
+  () => import("@/app/components/property/RoomDetails")
+);
+const PropertyOverView = dynamic(
+  () => import("@/app/components/property/Overview")
+);
+const RoomFloorplansBlock = dynamic(
+  () => import("@/app/components/property/Floorplan")
+);
+const PropertyBanner = dynamic(
+  () => import("@/app/components/property/propertyBanner")
+);
+const PropertyFirstBlock = dynamic(
+  () => import("@/app/components/property/fistblock")
+);
 // const LeafMap = dynamic(() => import("@/app/components/project/map"));
 import LeafMap from "@/app/components/project/map";
 const PropertyMap = dynamic(() => import("@/app/components/property/map"));
-const NearByCarouselProperty = dynamic(() => import("@/app/components/property/carousel"));
-const LoginPopup = dynamic(() => import("@/app/components/project/modals/LoginPop"));
-const MobileHidden = dynamic(() => import("@/app/components/molecules/MobileHidden"));
-const PriceBreakup = dynamic(() => import("@/app/components/property/pricingbreakup/PriceBreakup"));
-const CompareError = dynamic(() => import("@/app/components/property/actions/Error"));
-const NearByCarouselProjProperty = dynamic(() => import("@/app/components/property/carousel/ProjectCarouse"));
-const ListingBreadCrumbs = dynamic(() => import("@/app/components/property/BreadCrumb/ListingBreadcrumb"));
-const ProjectGallery = dynamic(() => import("@/app/components/project/_ui/modals/GallerySectionModal"));
-const SharePopup = dynamic(() => import("@/app/(dashboard)/search/components/SharePopup"));
+const NearByCarouselProperty = dynamic(
+  () => import("@/app/components/property/carousel")
+);
+const LoginPopup = dynamic(
+  () => import("@/app/components/project/modals/LoginPop")
+);
+const MobileHidden = dynamic(
+  () => import("@/app/components/molecules/MobileHidden")
+);
+const PriceBreakup = dynamic(
+  () => import("@/app/components/property/pricingbreakup/PriceBreakup")
+);
+const CompareError = dynamic(
+  () => import("@/app/components/property/actions/Error")
+);
+const NearByCarouselProjProperty = dynamic(
+  () => import("@/app/components/property/carousel/ProjectCarouse")
+);
+const ListingBreadCrumbs = dynamic(
+  () => import("@/app/components/property/BreadCrumb/ListingBreadcrumb")
+);
+const ProjectGallery = dynamic(
+  () => import("@/app/components/project/_ui/modals/GallerySectionModal")
+);
+const SharePopup = dynamic(
+  () => import("@/app/(dashboard)/search/components/SharePopup")
+);
 type Props = {
   data: any;
   totalPrice: number;
@@ -49,8 +83,13 @@ export default function ListingDetailsPage({
   const title = `${data?.bhkName} ${data?.propTypeName} For
   ${data?.cg === "S" ? " Sale" : " Rent"} In
   ${data?.ltName}${data?.projIdEnc ? `, ${data?.propName}` : ""}`;
+  console.log(params);
   return (
     <div className="w-full">
+      <link
+        rel="canonical"
+        href={`${process.env.NEXT_PUBLIC_URL}${data?.data?.pathname}`}
+      />
       <div className="mt-[70px] sm:mt-[90px] w-full sm:pb-[2%] flex xl:text-ellipsis items-center justify-center flex-col">
         <div className="p-[1%] sm:p-[1%] sm:py-0 xl:p-[1%] w-full sm:w-[94%]">
           <ListingBreadCrumbs
@@ -126,7 +165,6 @@ export default function ListingDetailsPage({
 
         {data.projIdEnc && (
           <>
- 
             <LeafMap
               lat={projData.lat}
               lang={projData.lang}
@@ -149,7 +187,6 @@ export default function ListingDetailsPage({
                 data.postedById === projData.builderId &&
                 projData.banks.length > 0 && (
                   <Loans
-                  
                     type="prop"
                     banks={projData.banks}
                     name={data.propName}
@@ -177,17 +214,16 @@ export default function ListingDetailsPage({
         )}
         {!data.projIdEnc && (
           <>
-                   <div  id="location-map" className="mt-10 scroll-mt-[180px]" />
+            <div id="location-map" className="mt-10 scroll-mt-[180px]" />
             <PropertyMap
-            lat={data?.lat ?? 0}
-            lang={data?.lang ?? 0}
-            projName={TITLE_OF_PROP}
-            projId={data.propIdEnc}
-            type="prop"
-            mapData={nearByLocations}
-          />
+              lat={data?.lat ?? 0}
+              lang={data?.lang ?? 0}
+              projName={TITLE_OF_PROP}
+              projId={data.propIdEnc}
+              type="prop"
+              mapData={nearByLocations}
+            />
           </>
-         
         )}
 
         <NearByCarouselProperty

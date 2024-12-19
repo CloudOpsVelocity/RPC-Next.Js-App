@@ -14,7 +14,7 @@ export default function RecentSearches({}: Props) {
     recentSearches.length > 0 && (
       <div className="mt-4">
         <p className="text-[#242424] text-[12px] sm:text-[16px] xl:text-xl not-italic font-medium leading-[normal] capitalize">
-          Your Recent Projects, builders, locality Searches: Find Homes You’ve Viewed
+          Your Recent Projects, builders, Listings Searches: Find Homes You’ve Viewed
         </p>
         <div className=" mt-1  flex gap-1  sm:flex  flex-nowrap xl:flex-wrap overflow-x-scroll max-w-[100%] scrollbar-hide">
           {recentSearches.map((item: any, index) => (

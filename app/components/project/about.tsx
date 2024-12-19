@@ -1,16 +1,12 @@
-
-import React from "react";
+import React, { Suspense } from "react";
 import ReadMore from "../atoms/readmore";
 import clsx from "clsx";
 import PropertyHeading from "../property/heading";
-import { useMediaQuery } from "@mantine/hooks";
-
-
 
 type Props = {
   heading: string;
   projName?: string;
-  content: string; 
+  content: string;
   id?: string;
   type?: "prop" | "proj";
   className?: string;
@@ -26,14 +22,14 @@ export default function About({
   id,
   type,
   className,
-  showProjName, 
+  showProjName,
   builderName,
   maxLines = 6,
 }: Props) {
   // const isMobile  = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
   const isMobile = false;
-  if(isMobile){
-    maxLines = 2
+  if (isMobile) {
+    maxLines = 2;
   }
   const charLimit = maxLines * 100;
   return (
@@ -60,12 +56,14 @@ export default function About({
           </span>{" "}
         </h2>
       )}
-   <div className="w-full" >
-      <div className="text-[14px] sm:text-[18px] xl:text-[24px] font-[500] text-[#233333] break-words">
-        <div className="prose-p:py-1 prose-no-break" 
-          dangerouslySetInnerHTML={{ __html: content?.slice(0, charLimit) }} />
+      <div className="w-full">
+        <div className="text-[14px] sm:text-[18px] xl:text-[24px] font-[500] text-[#233333] break-words">
+          <div
+            className="prose-p:py-1 prose-no-break"
+            dangerouslySetInnerHTML={{ __html: content?.slice(0, charLimit) }}
+          />
         </div>
-    </div>
+      </div>
       <ReadMore
         text={content}
         maxLines={maxLines}

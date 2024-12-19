@@ -42,6 +42,7 @@ export default async function Page({ params: { city, slug } }: Props) {
         data: {
           ...data.data,
           builderCity: city,
+          pathname: pathname,
         },
       }}
       id={id?.split("_")[1]}

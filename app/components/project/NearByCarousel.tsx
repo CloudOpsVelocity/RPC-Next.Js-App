@@ -57,7 +57,7 @@ export default function NearByCarousel({
       />
       <ProjectCarousel
         type="proj"
-        builderLinkActive={true}
+        builderLinkActive
         title={nearBy?.title ?? "Near By Projects Of"}
         projName={projName}
         content="See what other customers also viewed"

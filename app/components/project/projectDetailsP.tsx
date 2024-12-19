@@ -20,7 +20,7 @@ import { useAtom } from "jotai";
 
 import NoProperties from "./notfound";
 import SubHeading from "./headings/SubHeading";
-import {projectReqDataAtom} from "@/app/store/project/project.req";
+import { projectReqDataAtom } from "@/app/store/project/project.req";
 type Props = {
   data: PhaseList[];
   slug: string;
@@ -39,7 +39,7 @@ export default function ProjectDetailsP({
   data: phaseList,
   isPartialData,
   slug,
-  projData
+  projData,
 }: Props) {
   useHydrateAtoms([[currentPhaseAtom, PhaseOverview[0].phaseId]]);
   const [currentPhase, setFloorPhase] = useAtom(currentPhaseAtom);
@@ -59,9 +59,9 @@ export default function ProjectDetailsP({
     );
   const formatter = new Intl.NumberFormat("en-in", {
     minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  })
-  
+    maximumFractionDigits: 2,
+  });
+
   return (
     <div
       className="w-[95%] sm:w-[90%] mb-[3%] sm:mb-[0%] scroll-mt-[150px] sm:mt-[50px]"
@@ -149,7 +149,9 @@ export default function ProjectDetailsP({
                 title="Land Area"
                 value={
                   selectedPhase.landArea
-                    ? `${(formatter.format(sqftToAcres(selectedPhase.landArea)))} Acres`
+                    ? `${formatter.format(
+                        sqftToAcres(selectedPhase.landArea)
+                      )} Acres`
                     : null
                 }
                 className={styles.box}
@@ -165,7 +167,7 @@ export default function ProjectDetailsP({
                 }
                 className={styles.box}
               />
-             
+
               {selectedPhase.reraId && (
                 <ProjBasicDetails
                   key="reraId"
@@ -179,14 +181,12 @@ export default function ProjectDetailsP({
                   className={styles.box}
                 />
               )}
-                <ProjBasicDetails
+              <ProjBasicDetails
                 Id="promoter-name"
                 key="promoter-name"
                 icon={<TotalLandArea />}
                 title="Promoter Name"
-                value={
-                  selectedPhase.phasePromoter
-                }
+                value={selectedPhase.phasePromoter}
                 className={styles.box}
               />
             </>

@@ -28,7 +28,7 @@ const CustomScrollArea: React.FC<{
       <div
         className={clsx(
           "flex flex-wrap gap-2  overflow-hidden relative",
-          !isExpanded && "max-h-[calc(3*2.5rem)]" // Adjust height for 3 lines
+         // !isExpanded && "max-h-[calc(3*2.5rem)]"  Adjust height for 3 lines
         )}
         style={{ padding: isMobile ? "0" : "0 2rem", paddingLeft: isTab ? "0" : "0 2rem" }}
       >

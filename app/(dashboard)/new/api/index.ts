@@ -1,4 +1,5 @@
 import { options } from "@/app/options";
+import logger from "@/app/utils/logger";
 import { getServerSession } from "next-auth";
 
 export const getData = async (city?: number | string, coordinates?: any) => {
@@ -14,6 +15,7 @@ export const getData = async (city?: number | string, coordinates?: any) => {
     },
   });
   const data = await res.json();
+  console.log(data);
   return data;
 };
 
