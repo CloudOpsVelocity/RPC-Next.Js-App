@@ -3,6 +3,7 @@ import useNearby from "@/app/hooks/useNearby";
 import React, { Fragment } from "react";
 import useBuilder from "@/app/hooks/useBuilder";
 import ProjectCarousel from "../../project/ProjectCard";
+import { slugify } from "../BreadCrumb/ListingBreadcrumb";
 
 export default function NearByCarouselProjProperty({
   projName,
@@ -17,7 +18,7 @@ export default function NearByCarouselProjProperty({
   lat: string;
   lng: string;
   projId?: string;
-  builderId?: number;
+  builderId?: number; 
   company: string;
   nearBy?: {
     title: string;
@@ -29,6 +30,7 @@ export default function NearByCarouselProjProperty({
     y: "N",
     type: "proj",
   });
+
   return (
     <div
       className="flex flex-col justify-start items-start w-full  scroll-mt-[150px]"
@@ -55,6 +57,7 @@ export default function NearByCarouselProjProperty({
         mutate={mutate}
         // builderName={builderData?.data?.userName}
         ct="builder"
+        url={`/search?builderIds=${builderData?.data?.userName ?? ""}${builderId ?? ""}`}
       />
       <ProjectCarousel
         type="proj"
@@ -77,6 +80,7 @@ export default function NearByCarouselProjProperty({
         mutate={mutate}
         // builderName={builderData?.data?.userName}
         ct="builder"
+        url={`/search?lat=${lat}&lng=${lng}`}
       />
     </div>
   );

@@ -83,7 +83,7 @@ export default function ListingDetailsPage({
   const title = `${data?.bhkName} ${data?.propTypeName} For
   ${data?.cg === "S" ? " Sale" : " Rent"} In
   ${data?.ltName}${data?.projIdEnc ? `, ${data?.propName}` : ""}`;
-  console.log(params);
+  console.log(data?.postedByName);
   return (
     <div className="w-full">
       <link
@@ -234,6 +234,8 @@ export default function ListingDetailsPage({
           cg={data.cg}
           propTypeName={data.propTypeName}
           bhkId={data.bhkId ?? 41}
+          builderName={data?.postedByName}
+          builderId={projData?.builderId}
           // query={""}
         />
         {/* {data.projIdEnc && data.postedById === projData.builderId && ( */}

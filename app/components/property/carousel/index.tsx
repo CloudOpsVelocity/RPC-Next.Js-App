@@ -3,6 +3,7 @@ import React, { Fragment } from "react";
 import ProjectCarousel from "../../property/carousel/PropertyCard";
 import useNearby from "@/app/hooks/property/useNearBy";
 import { listingProps } from "@/app/data/projectDetails";
+import { slugify } from "../BreadCrumb/ListingBreadcrumb";
 
 export default function NearByCarouselProperty({
   projName,
@@ -12,6 +13,8 @@ export default function NearByCarouselProperty({
   cg,
   propTypeName,
   bhkId,
+  builderName,
+  builderId,
 }: {
   projName: string;
   lat: string;
@@ -20,10 +23,12 @@ export default function NearByCarouselProperty({
   cg: string;
   propTypeName: string;
   bhkId: number;
+  builderName: string;
+  builderId: number;
 }) {
   const { data, mutate } = useNearby({
     lat,
-    lng,
+    lng, 
     projId,
     cg,
     bhkId,
@@ -31,12 +36,14 @@ export default function NearByCarouselProperty({
   });
   const listingType = cg === "R" ? "Rent" : "Sale";
 
+  console.log(builderName, builderId);
+    
   return (
     <div
       className="flex flex-col justify-start items-start w-[100%] mt-[20px] sm:mt-[50px] scroll-mt-[220px]"
       id="similarListing"
     >
-      <ProjectCarousel
+      <ProjectCarousel 
         type="prop"
         title={<Fragment>Other {listingType} listings in <span className="text-[#148B16]">{projName}</span></Fragment>}
         projName={""}
@@ -52,6 +59,7 @@ export default function NearByCarouselProperty({
         }
         mutate={mutate}
         ct="proj"
+        url={`/search/listing?builderIds=${builderName ?? ""}${builderId ?? ""}`}
       />
       <ProjectCarousel
         type="prop"
@@ -64,6 +72,7 @@ export default function NearByCarouselProperty({
         }
         mutate={mutate}
         ct="other"
+        url={`/search/listing?lat=${lat}&lng=${lng}`}
       />
     </div>
   );

@@ -19,6 +19,7 @@ import { redirect } from "next/dist/server/api-utils";
 import { get_posted_by } from "@/app/utils/dyanamic/projects";
 import { generateListingLinkUrl } from "@/app/utils/linkRouters/ListingLink";
 import NewCarousel from "@/app/test/components/NewCarousel";
+import { slugify } from "../BreadCrumb/ListingBreadcrumb";
 type Props = {
   type: string;
   title: any;
@@ -27,7 +28,7 @@ type Props = {
   data?: any;
   mutate?: ({ id }: { id: string; type: "other" | "proj" }) => void;
   ct?: "other" | "proj";
-  builderName?: string;
+  url?:string;
 };
 
 type CardProps = {
@@ -241,9 +242,9 @@ const ProjectCarousel = ({
   data,
   mutate,
   ct,
-  builderName,
+  url
 }: Props) => {
-  
+   
   return (
     data?.length > 0 && (
       <div className="w-[90%] mx-auto mb-1 sm:mb-[3%]">
@@ -271,7 +272,8 @@ const ProjectCarousel = ({
           )}
           slidesToShow={4}
           gap={10}
-          url={`/search/listing?listedBy=ALL&cg=${data.cg === "R" ? "R" : "S" }`}
+          url={url}
+          // url={`/search/listing?listedBy=ALL&cg=${data.cg === "R" ? "R" : "S" }`}
         />
         {/* <MainCarousel>
           {data &&

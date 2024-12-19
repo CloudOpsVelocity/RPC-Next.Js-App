@@ -14,6 +14,7 @@ import ProjectLink, { createProjectLinkUrl } from "@/app/utils/linkRouters/Proje
 import NewCarousel from "@/app/test/components/NewCarousel";
 import Link from "next/link";
 import BuilderLink, { generateBuilderUrl } from "@/app/utils/linkRouters/Builder";
+import { slugify } from "../property/BreadCrumb/ListingBreadcrumb";
 
 type Props = {
   type: string;
@@ -24,10 +25,9 @@ type Props = {
   mutate?: ({ id }: { id: string; type: "builder" | "proj" }) => void;
   ct?: "builder" | "proj";
   builderName?: string;
-  builderLinkActive:boolean,
+  builderLinkActive:boolean;
   id?: string;
-  lat: string;
-  lng: string;
+  url?: string;
 };
 
 type CardProps = {
@@ -275,7 +275,7 @@ const URLToBuilder=generateBuilderUrl({
 const ProjectCarousel = ({
   type,
   content,
-  title,
+  title, 
   projName,
   data,
   mutate,
@@ -283,15 +283,14 @@ const ProjectCarousel = ({
   id,
   builderLinkActive,
   builderName,
-  lat, 
-  lng
+  url
 }: Props) => {
-  console.log(data);
+  // console.log(data);
   console.log(builderName);
-  let obj = data && data.length > 0 ? data[0] : null;
-  let redirectUrl = ct == "builder" ? 
-  `/search?builderIds=${builderName}${obj?.builderId}` 
-  : `/search?lat=${lat}&lng=${lng}&unitTypes=49&cg=R`;
+
+  // let redirectUrl = ct == "builder" ? 
+  // `/search?builderIds=${slugify(builderName ?? "")}${urlData?.builderId}` 
+  // : `/search?lat=${urlData?.lat}&lng=${urlData?.lng}`;
 
   return (
     data?.length > 0 && (
@@ -325,8 +324,7 @@ const ProjectCarousel = ({
           slidesToShow={4}
           gap={10}
           // url={`/search?builderIds=${"builderName"}${"builderId"}`}
-          url={`/search`}
-
+          url={url}
         />
         {/* <MainCarousel>
           {data &&
