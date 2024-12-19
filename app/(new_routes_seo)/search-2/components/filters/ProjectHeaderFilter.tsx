@@ -16,6 +16,8 @@ import {
 } from "react-icons/md";
 import { SEARCH_FILTER_DATA } from "@/app/data/search";
 import PropTypeFilter from "@/app/(dashboard)/search/components/proptype";
+import ClearAll from "@/app/(dashboard)/search/components/ClearAll";
+import BugdetFilter from "@/app/(dashboard)/search/components/buget";
 
 export default function HeaderFilters() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -85,13 +87,22 @@ export default function HeaderFilters() {
   };
 
   const propertyIcons = {
-    Apartment: <MdApartment className="w-5 h-5" />,
-    "Row House": <MdHouse className="w-5 h-5" />,
-    Villa: <MdVilla className="w-5 h-5" />,
-    Villament: <MdMapsHomeWork className="w-5 h-5" />,
-    Plot: <MdLandscape className="w-5 h-5" />,
+    Apartment: <MdApartment className="w-5 h-5 text-green-700" />,
+    "Row House": <MdHouse className="w-5 h-5 text-green-700" />,
+    Villa: <MdVilla className="w-5 h-5 text-green-700" />,
+    Villament: <MdMapsHomeWork className="w-5 h-5 text-green-700" />,
+    Plot: <MdLandscape className="w-5 h-5 text-green-700" />,
   };
-
+  const handleClear = (category: string,) => {
+    setSelectedFilters((prev) => {
+     
+      return {
+        ...prev,
+        [category]: [],
+      };
+    });
+   
+  }
   return (
     <>
       <div className="w-full max-w-[70%] bg-white border-b sticky top-0 z-40">
@@ -190,31 +201,45 @@ export default function HeaderFilters() {
                 </button>
                 {activeDropdown === "property" && (
                   <div className="absolute top-full right-0 mt-2 w-64 bg-white rounded-lg shadow-lg border p-2 z-50">
+                       <div className="flex items-center justify-between gap-4 pb-4 border-b">
+                          <button
+                          
+                            onClick={()=>handleClear("propertyType")}
+                            className="flex-1 text-gray-600 border-gray-300 hover:bg-gray-100"
+                          >
+                            Clear Filter
+                          </button>
+                          <button
+                            onClick={()=>alert("apply filete")}
+                            className="flex-1 bg-blue-500 text-white hover:bg-blue-600 disabled:bg-blue-300"
+                          >
+                            Apply Filter
+                          </button>
+                        </div>
                     <div className="space-y-2">
-                      {Object.entries(propertyIcons).map(([type, icon]) => (
-                        <label
-                          key={type}
-                          className="flex items-center gap-2 px-3 py-2 hover:bg-gray-50 rounded cursor-pointer"
-                        >
-                          <input
-                            type="Radio"
-                            className="rounded border-gray-300 text-[#0073C6] focus:ring-[#0073C6]"
-                            checked={selectedFilters["propertyType"]?.includes(
-                              type
-                            )}
-                            onChange={() => toggleFilter("propertyType", type)}
-                          />
-                          {icon}
-                          <span>{type}</span>
-                        </label>
-                      ))}
+                    {Object.entries(propertyIcons).map(([type, icon]) => (
+                    <label
+                      key={type}
+                      className="flex items-center gap-2 px-3 py-2 hover:bg-gray-50 rounded cursor-pointer"
+                    >
+                      <input
+                        type="radio"
+                        className="rounded-full border-gray-300 text-green-700   checked:bg-green-700 checked:border-green-700"
+                        checked={selectedFilters["propertyType"]?.includes(type) || false}
+                        onChange={() => toggleFilter("propertyType", type)}
+                      />
+                      {icon}
+                      <span>{type}</span>
+                    </label>
+                  ))}
                     </div>
                   </div>
                 )}
+                
                 {/*  {activeDropdown === "property" && (
                    <div className="absolute top-full right-0 mt-2 w-64 bg-white rounded-lg shadow-lg border p-2 z-50">
                     <div className="space-y-2">
-                  <PropTypeFilter  />
+                  
                   </div>
                   </div>
                  )} */}
@@ -229,10 +254,25 @@ export default function HeaderFilters() {
                   }
                 >
                   BHK Type
-                  <MdKeyboardArrowDown className="w-5 h-5 to-blue-500" />
+                  <MdKeyboardArrowDown className="w-5 h-5 " />
                 </button>
                 {activeDropdown === "bhk" && (
                   <div className="absolute top-full right-0 mt-2 w-64 bg-white rounded-lg shadow-lg border p-2 z-50">
+                    <div className="flex items-center justify-between gap-4 pb-4 border-b">
+                          <button
+                          
+                            onClick={()=>handleClear("bhk")}
+                            className="flex-1 text-gray-600 border-gray-300 hover:bg-gray-100"
+                          >
+                            Clear Filter
+                          </button>
+                          <button
+                            onClick={()=>alert("apply filete")}
+                            className="flex-1 bg-blue-500 text-white hover:bg-blue-600 disabled:bg-blue-300"
+                          >
+                            Apply Filter
+                          </button>
+                        </div>
                     <div className="grid grid-cols-2 gap-2">
                       {SEARCH_FILTER_DATA.bhkDetails.slice(0, 6).map((bhk) => (
                         <label
@@ -242,9 +282,7 @@ export default function HeaderFilters() {
                           <input
                             type="checkbox"
                             className="rounded border-gray-300 text-[#148B16] focus:ring-[#148B16]"
-                            checked={selectedFilters["bhk"]?.includes(
-                              bhk.title
-                            )}
+                             checked={selectedFilters["bhk"]?.includes(bhk.title) || false}
                             onChange={() => toggleFilter("bhk", bhk.title)}
                           />
                           <span>{bhk.title}</span>
@@ -269,23 +307,25 @@ export default function HeaderFilters() {
                   <MdKeyboardArrowDown className="w-5 h-5" />
                 </button>
                 {activeDropdown === "budget" && (
-                  <div className="absolute top-full right-0 mt-2 w-72 bg-white rounded-lg shadow-lg border p-4 z-50">
+                  <div className="absolute top-full right-0 mt-2 w-FULL bg-white rounded-lg shadow-lg border p-4 z-50">
                     <div className="space-y-4">
-                      <div className="grid grid-cols-2 gap-4">
-                        <input
-                          type="number"
-                          placeholder="Min"
-                          className="p-2 border rounded-md text-sm"
-                        />
-                        <input
-                          type="number"
-                          placeholder="Max"
-                          className="p-2 border rounded-md text-sm"
-                        />
-                      </div>
-                      <button className="w-full py-2 bg-[#0073C6] text-white rounded-md hover:bg-[#0073C6]/90">
-                        Apply
-                      </button>
+                    <div className="flex items-center justify-between gap-4 pb-4 border-b">
+                          <button
+                          
+                            onClick={()=>handleClear("bhk")}
+                            className="flex-1 text-gray-600 border-gray-300 hover:bg-gray-100"
+                          >
+                            Clear Filter
+                          </button>
+                          <button
+                            onClick={()=>alert("apply filete")}
+                            className="flex-1 bg-blue-500 text-white hover:bg-blue-600 disabled:bg-blue-300"
+                          >
+                            Apply Filter
+                          </button>
+                        </div>
+                    <BugdetFilter />
+                      
                     </div>
                   </div>
                 )}
@@ -416,18 +456,6 @@ export default function HeaderFilters() {
               <div>
                 <h3 className="font-semibold mb-3">Budget Range</h3>
                 <div className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
-                    <input
-                      type="number"
-                      placeholder="Min"
-                      className="p-2 border rounded-md text-sm"
-                    />
-                    <input
-                      type="number"
-                      placeholder="Max"
-                      className="p-2 border rounded-md text-sm"
-                    />
-                  </div>
                   <button className="w-full py-2 bg-[#0073C6] text-white rounded-md hover:bg-[#0073C6]/90">
                     Apply
                   </button>
